@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1CD9C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 747CCC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 17:13:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2897F8056A;
-	Thu,  6 Mar 2025 17:43:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D690280756;
+	Thu,  6 Mar 2025 18:13:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rWnUMP5Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tn9TYTRM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B05980756; Thu,  6 Mar 2025 17:43:31 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id E418F80E94; Thu,  6 Mar 2025 18:13:11 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4E7E80017
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:43:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4255680017
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 18:13:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-6f679788fd1so6820217b3.2
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:43:27 -0800 (PST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e46ebe19368so768589276.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 09:13:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741279406; x=1741884206; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741281187; x=1741885987; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=w8eaSxBoC4PR6kri2JkxqTwItL4hpKBZmSouiOY/BWA=;
- b=rWnUMP5ZyUl1P8X4am8p5QIM0MSpbkQGQhMwVM0L2tro+SVWhHcxdKnvUr6HZ06Oo8
- h2jgguedamXjPZDsG50sG9cYDhCYoVvRI6LDvVlrJKlZwEAlgWu5ya5R8IW5Trq3SocL
- rzkl8nCdfa/+PgMmkipGSH3CkUwCoFdDBFBPc=
+ bh=hNPwwYBDfsa9MQ267CZ6UppwBjVXKL76o8AgZDhQUTk=;
+ b=tn9TYTRMT55YrCItDhbJifmfpzb3CUfDjxutr8V7e3WuVnY0KY0ZuJl33VX7nz00fl
+ ilfCXN4hp7t4Jrav5mdvLAoDPvbyDgmv4rCyDAmGTxZ9uFIHj+Ge7PtF9Hk3pyiNHOpE
+ lJmeD7bHD06li+bKAmECe1FsDWZykwz5EnnSI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741279406; x=1741884206;
+ d=1e100.net; s=20230601; t=1741281187; x=1741885987;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w8eaSxBoC4PR6kri2JkxqTwItL4hpKBZmSouiOY/BWA=;
- b=uZ+rhbXnDWTGF5MtaHxli64tOeRThQMSvxXlpqjlt+N2RTwxd8gzXPzBGuLxLRIcuQ
- tgQUMCZwKwdPE5EZw+iUuRwthPOoyJgheA4xzC9yymE0Ps52jAR0fPr1+jR0knj4reeS
- 1q/VgsEXc8UyV+oqv+KPOPRouqME8HmiJQVVoDuF2eVtkIxyMwfFG0kK7qHtGxb3wp5c
- Jyl/NRfOm/rOIwftF7haum1+5sORkNmXuMft4ffGRdUoIRAgtkdDZ2oJse0QUTxd4u4J
- GsZQWwwpuJvMUrdYyknlK7w64OjWP+AHf13c5YjhDAW6bTw/HEcGlb7vMzR0SXInvDe/
- 4EwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUt72tvlSq4GqzT/t3h8U9STPlagDiODiBbnmTcW3K1Uj7fRKwGWqbiRuslt0ntXUIHqKAVGGE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzAccrDQ3vV23qmtiFAgOJtLNZwSemU8NVQooK33tPvDvKaIpcH
- /lR4MONEKBntBSq9dc52dRzx1sN1XUQbkqPZ6eSLrnDFotzwQCXwlHhoaASNN48=
-X-Gm-Gg: ASbGncshrqat1DQK3g5JpfOvHonkdhUaCJpuRLrqOsPd1L26DrLM5oDXHmLKmpNjVow
- sjrNr6H7g8HKImupFoootkbrMC4hlYbWQIsit96ZWRLlitcb8qNRHUGz+vaPfgVG29hFj5fcAoc
- GfIx7zhv4b+hi2UpQZLGu0FK6zSFoJmSflAC1doDl49U4m/TRCwbvcTfc157Ar7PWlDO2Al3Fec
- tSgCTyjpnTTj4x+OA/psd8ocM3eqtGrL831yQCe7FQYaKC/aw3nfrEYBBhh3b4/vHze15eox7WU
- 9N6WISGMxRnEq0or/TcI7v0QezCBf/qvC0iCWdlsaD2WWQ==
-X-Google-Smtp-Source: AGHT+IGsCQtw741PLYXtxrNHQfWZFNCms09Mpz340TlW00G7NyOCGi0/olEMJGQAAund9zW7B1kyaw==
-X-Received: by 2002:a05:690c:6111:b0:6fb:ae6b:a340 with SMTP id
- 00721157ae682-6fda311fb5fmr113163457b3.30.1741279406091; 
- Thu, 06 Mar 2025 08:43:26 -0800 (PST)
+ bh=hNPwwYBDfsa9MQ267CZ6UppwBjVXKL76o8AgZDhQUTk=;
+ b=OyCvaJgxmjq2nKrDvKYyYdJ9bhDN8brOnffH2klmOc3Rnb3gc1iM0CjN7DyP2xOObJ
+ cSOYdbhGVb3hx74/MWB+5ycHWMQsCWJ3Qs7WSQWvJLFEIDijKeZT+Vflzanl2yQtemgS
+ iTSUwsuNbBxpdOYAkwq18sC1fOI6S8Mb7XL/xX8WzNTUPdFE716a2qIo/KN/ftU7D6wp
+ id06UH97YMZ9okg5Qvnah60YG4lxIpHgUvI//mVQUY15kSsmFqBhbQ9+gPBks+o5hZ34
+ E0emVcIuogWZoQEP9PQztw1rbcuebvKShg5451B+qIhJOUNMVpv4TW5mUC0AP1e4lKGD
+ ggkg==
+X-Gm-Message-State: AOJu0YwTq2thGFoMU/pcaQDxAM2L2H/Q4yryZ/nQN65c0ZAGOQbD4fnc
+ wqguOJK08gJih/pusE71thgyNBLaCEogXWHS5kfTHMCBQ+NlVD74gRQ5oimWRGSoUQoU7XneGGS
+ j
+X-Gm-Gg: ASbGncsD2a5qRK0SYLZPzioynb/JK54+Cf/+ru4TKYShT398wGkv7mdbJKrOCE85usn
+ kBF1rSRCNsspZHa/zZIzBHDP16dlSDJi4w0bGCQmaq6XmRdQB3qQpQDRhJD0QAwGe532O1E8W6a
+ Epz9r/kK4lwkO+qucYrJKRD18KoYqibe6XHeBOzoSrvejmuA5yLZGaMxI3r8fGj+a35YcIFUJI2
+ XrvBvulumzME9Sgf05MmhGgRGuSwOL5EekkgRbQoq4fIUdboF0GJVBnxVzMsCWPxA5BXczRZ2pJ
+ EgK24Srq06Utt6Y7VFJEqcBL4ldubSXRzoeH5HkMqfM0xw==
+X-Google-Smtp-Source: AGHT+IGw+luUxCpGg2uB80o2qHgPfzs3bc4tabEubOhI8oOcQqtMfdqmKwB53c96fA81Z3QvoINN6g==
+X-Received: by 2002:a05:6902:2e05:b0:e5e:1389:cb2f with SMTP id
+ 3f1490d57ef6-e635c1f26b0mr55155276.45.1741281186297; 
+ Thu, 06 Mar 2025 09:13:06 -0800 (PST)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e634b855211sm376290276.27.2025.03.06.08.43.24
+ 3f1490d57ef6-e634b7357dcsm401462276.12.2025.03.06.09.13.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:43:25 -0800 (PST)
-Date: Thu, 6 Mar 2025 10:43:22 -0600
+ Thu, 06 Mar 2025 09:13:05 -0800 (PST)
+Date: Thu, 6 Mar 2025 11:13:02 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: hs@denx.de, U-Boot Mailing List <u-boot@lists.denx.de>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
-Message-ID: <20250306164322.GF2640854@bill-the-cat>
-References: <20250225135922.GL1233568@bill-the-cat>
- <CAFLszTh1N=vGGe73rNO+qTu-hLLc43v3goLdQXmffmE-nrMuzQ@mail.gmail.com>
- <20250226143541.GI2640854@bill-the-cat>
- <CAFLszTibwiJrbvrKacAGi-Z+5Hfx1-oUNxVGuUS-ETa+wT_JtQ@mail.gmail.com>
- <20250227172001.GH2640854@bill-the-cat>
- <CAFLszTgsT2GKOOYwBp2YjFRsYtvVhkvOST7PtzgtXi3r=3jumA@mail.gmail.com>
- <9bb480f6-95df-10ae-3470-b8ef1aa6a027@denx.de>
- <CAFLszTgRnXRQvm0+AoN=WOBczmy6d1Z7Pscy7Qd1KLA4=x+P5A@mail.gmail.com>
- <20250306143249.GB2640854@bill-the-cat>
- <CAFLszTivk-j2vZrHYveXAhfxgaXiGpmNf40BR33H80aKodyaFA@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+Message-ID: <20250306171302.GG2640854@bill-the-cat>
+References: <20250224231455.GI1233568@bill-the-cat>
+ <CAFLszTiP+wPijf0QbTL0i9Ywk_0tWFwYP-1S1Lp+mFeqN=8zKg@mail.gmail.com>
+ <20250227170352.GZ2640854@bill-the-cat>
+ <CAFLszTgDms-RC+Qg=FLxtW253jh22eUb1Y-5OyB2U42EygdZWw@mail.gmail.com>
+ <20250304161218.GA2640854@bill-the-cat>
+ <CAFLszTj1hc7esvd_R3oVEqOpSBNFcRga0wmR3hnTsFELXi+m1g@mail.gmail.com>
+ <20250305160631.GS2640854@bill-the-cat>
+ <CAFLszTix7phNcsECa5Nwve-1g0fD6G0HZ=eWXxaHTjZp0+K9Xw@mail.gmail.com>
+ <20250306143047.GA2640854@bill-the-cat>
+ <CAFLszTh47L11V7sbfbd2zaCs7rYpuPLTX4rBKnkUn8oQ9xUeXQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kPM3MiNy2tju5770"
+ protocol="application/pgp-signature"; boundary="rd1CLWnUG29Ic1YC"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTivk-j2vZrHYveXAhfxgaXiGpmNf40BR33H80aKodyaFA@mail.gmail.com>
+In-Reply-To: <CAFLszTh47L11V7sbfbd2zaCs7rYpuPLTX4rBKnkUn8oQ9xUeXQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,641 +105,756 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kPM3MiNy2tju5770
+--rd1CLWnUG29Ic1YC
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 06, 2025 at 09:11:28AM -0700, Simon Glass wrote:
+On Thu, Mar 06, 2025 at 09:13:52AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 6 Mar 2025 at 07:32, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 6 Mar 2025 at 07:37, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, Mar 06, 2025 at 07:16:08AM -0700, Simon Glass wrote:
-> > > Hi Heiko,
+> > On Thu, Mar 06, 2025 at 06:59:08AM -0700, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > On Thu, 27 Feb 2025 at 22:26, Heiko Schocher <hs@denx.de> wrote:
+> > > On Wed, 5 Mar 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > Hi Simon,
-> > > >
-> > > > On 27.02.25 20:26, Simon Glass wrote:
+> > > > On Wed, Mar 05, 2025 at 07:18:40AM -0700, Simon Glass wrote:
 > > > > > Hi Tom,
 > > > > >
-> > > > > On Thu, 27 Feb 2025 at 10:20, Tom Rini <trini@konsulko.com> wrote:
-> > > > >>
-> > > > >> On Thu, Feb 27, 2025 at 09:27:33AM -0700, Simon Glass wrote:
-> > > > >>> Hi Tom,
-> > > > >>>
-> > > > >>> On Wed, 26 Feb 2025 at 07:35, Tom Rini <trini@konsulko.com> wro=
-te:
-> > > > >>>>
-> > > > >>>> On Tue, Feb 25, 2025 at 07:56:03PM -0700, Simon Glass wrote:
-> > > > >>>>> Hi Tom,
-> > > > >>>>>
-> > > > >>>>> On Tue, 25 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> w=
+> > > > > On Tue, 4 Mar 2025 at 09:12, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Tue, Mar 04, 2025 at 08:35:56AM -0700, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Thu, 27 Feb 2025 at 10:03, Tom Rini <trini@konsulko.com> w=
 rote:
-> > > > >>>>>>
-> > > > >>>>>> On Mon, Feb 24, 2025 at 10:54:13AM -0700, Simon Glass wrote:
-> > > > >>>>>>> Hi Tom,
-> > > > >>>>>>>
-> > > > >>>>>>> On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com>=
- wrote:
-> > > > >>>>>>>>
-> > > > >>>>>>>> On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrot=
-e:
-> > > > >>>>>>>>> Hi Tom,
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.co=
+> > > > > > > >
+> > > > > > > > On Thu, Feb 27, 2025 at 09:26:10AM -0700, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Mon, 24 Feb 2025 at 16:14, Tom Rini <trini@konsulko.co=
 m> wrote:
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>> On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wr=
-ote:
-> > > > >>>>>>>>>>> Hi Tom,
-> > > > >>>>>>>>>>>
-> > > > >>>>>>>>>>> On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.=
-com> wrote:
-> > > > >>>>>>>>>>>>
-> > > > >>>>>>>>>>>> On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass =
-wrote:
-> > > > >>>>>>>>>>>>> Hi Tom,
-> > > > >>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>> On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulk=
+> > > > > > > > > >
+> > > > > > > > > > On Sat, Feb 22, 2025 at 05:24:05PM -0700, Simon Glass w=
+rote:
+> > > > > > > > > > > Hi Tom,
+> > > > > > > > > > >
+> > > > > > > > > > > On Sat, 22 Feb 2025 at 14:37, Tom Rini <trini@konsulk=
 o.com> wrote:
-> > > > >>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>> On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glas=
-s wrote:
-> > > > >>>>>>>>>>>>>>> Hi Tom,
-> > > > >>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>> On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsu=
-lko.com> wrote:
-> > > > >>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>> On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Gl=
-ass wrote:
-> > > > >>>>>>>>>>>>>>>>> Now that U-Boot can boot this quickly, using kvm,=
- add a test that the
-> > > > >>>>>>>>>>>>>>>>> installer starts up correctly.
-> > > > >>>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>>> Use the qemu-x86_64 board in the SJG lab.
-> > > > >>>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > >>>>>>>>>>>>>>>>> ---
-> > > > >>>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>>> Changes in v2:
-> > > > >>>>>>>>>>>>>>>>> - Add more patches to support booting with kvm
-> > > > >>>>>>>>>>>>>>>>> - Add new patch with a test for booting Ubuntu 24=
-=2E04
-> > > > >>>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>>>   .gitlab-ci.yml               |  5 ++++
-> > > > >>>>>>>>>>>>>>>>>   test/py/tests/test_distro.py | 53 +++++++++++++=
-+++++++++++++++++++++++
-> > > > >>>>>>>>>>>>>>>>>   2 files changed, 58 insertions(+)
-> > > > >>>>>>>>>>>>>>>>>   create mode 100644 test/py/tests/test_distro.py
-> > > > >>>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>>> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > > >>>>>>>>>>>>>>>>> index 8c49d5b0a79..ec799e97c10 100644
-> > > > >>>>>>>>>>>>>>>>> --- a/.gitlab-ci.yml
-> > > > >>>>>>>>>>>>>>>>> +++ b/.gitlab-ci.yml
-> > > > >>>>>>>>>>>>>>>>> @@ -745,3 +745,8 @@ zybo:
-> > > > >>>>>>>>>>>>>>>>>     variables:
-> > > > >>>>>>>>>>>>>>>>>       ROLE: zybo
-> > > > >>>>>>>>>>>>>>>>>     <<: *lab_dfn
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +qemu-x86_64:
-> > > > >>>>>>>>>>>>>>>>> +  variables:
-> > > > >>>>>>>>>>>>>>>>> +    ROLE: qemu-x86_64
-> > > > >>>>>>>>>>>>>>>>> +  <<: *lab_dfn
-> > > > >>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>> I'm not sure why this is in your lab stanza, rathe=
-r than the normal
-> > > > >>>>>>>>>>>>>>>> test.py QEMU stanza.
-> > > > >>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>> Are you wanting to add the Ubuntu image into CI? It=
- is quite large.
-> > > > >>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>> If we're going to be able to run it on N platforms, =
-yes, we need to
-> > > > >>>>>>>>>>>>>> think of a good way to cache the download. There's n=
-ot a particular
-> > > > >>>>>>>>>>>>>> reason we can't run the stock Ubuntu RISC-V image on=
- the two sifive
-> > > > >>>>>>>>>>>>>> targets and also qemu-riscv64, is there?
-> > > > >>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>> Yes, we can do that. It is pretty simple to set up in=
- Labgrid and it
-> > > > >>>>>>>>>>>>> doesn't require all the runners to download a much la=
-rger image, etc.
-> > > > >>>>>>>>>>>>
-> > > > >>>>>>>>>>>> I don't quite understand why it's under "labgrid". The=
-se are generic CI
-> > > > >>>>>>>>>>>> tests. Now maybe we need to, in both Gitlab and Azure,=
- add some logic so
-> > > > >>>>>>>>>>>> that certain longer or possibly destructive tests are =
-only run on tagged
-> > > > >>>>>>>>>>>> releases or as requested rather than every time, as it=
- will take longer.
-> > > > >>>>>>>>>>>> But pretty much every platform under the qemu target l=
-ist should be able
-> > > > >>>>>>>>>>>> to Just Boot an off the shelf OS distribution is my po=
-int.
-> > > > >>>>>>>>>>>
-> > > > >>>>>>>>>>> Sure, and I'm not suggesting we shouldn't do that as we=
-ll.
-> > > > >>>>>>>>>>>
-> > > > >>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>>> diff --git a/test/py/tests/test_distro.py b/test/=
-py/tests/test_distro.py
-> > > > >>>>>>>>>>>>>>>>> new file mode 100644
-> > > > >>>>>>>>>>>>>>>>> index 00000000000..51eec45cecc
-> > > > >>>>>>>>>>>>>>>>> --- /dev/null
-> > > > >>>>>>>>>>>>>>>>> +++ b/test/py/tests/test_distro.py
-> > > > >>>>>>>>>>>>>>>>> @@ -0,0 +1,53 @@
-> > > > >>>>>>>>>>>>>>>>> +# SPDX-License-Identifier: GPL-2.0+
-> > > > >>>>>>>>>>>>>>>>> +# Copyright 2025 Canonical Ltd.
-> > > > >>>>>>>>>>>>>>>>> +# Written by Simon Glass <simon.glass@canonical.=
-com>
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +import pytest
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +DOWN =3D '\x1b\x5b\x42\x0d'
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +# Enable early console so that the test can see =
-if something goes wrong
-> > > > >>>>>>>>>>>>>>>>> +CONSOLE =3D 'earlycon=3Duart8250,io,0x3f8 consol=
-e=3Duart8250,io,0x3f8'
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +@pytest.mark.boardspec('qemu-x86_64')
-> > > > >>>>>>>>>>>>>>>>> +@pytest.mark.role('qemu-x86_64')
-> > > > >>>>>>>>>>>>>>>>> +def test_distro(ubman):
-> > > > >>>>>>>>>>>>>>>>> +    """Test that of-platdata can be generated an=
-d used in sandbox"""
-> > > > >>>>>>>>>>>>>>>>> +    with ubman.log.section('boot'):
-> > > > >>>>>>>>>>>>>>>>> +        ubman.run_command('boot', wait_for_promp=
-t=3DFalse)
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +    with ubman.log.section('Grub'):
-> > > > >>>>>>>>>>>>>>>>> +        # Wait for grub to come up and offset a =
-menu
-> > > > >>>>>>>>>>>>>>>>> +        ubman.p.expect(['Try or Install Ubuntu'])
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Press 'e' to edit the command line
-> > > > >>>>>>>>>>>>>>>>> +        ubman.run_command('e', wait_for_prompt=
-=3DFalse, send_nl=3DFalse)
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Wait until we see the editor appear
-> > > > >>>>>>>>>>>>>>>>> +        ubman.p.expect(['/casper/initrd'])
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Go down to the 'linux' line
-> > > > >>>>>>>>>>>>>>>>> +        ubman.send(DOWN * 3)
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Go to end of line
-> > > > >>>>>>>>>>>>>>>>> +        ubman.ctrl('E')
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Backspace to remove 'quiet splash'
-> > > > >>>>>>>>>>>>>>>>> +        ubman.send('\b' * len('quiet splash'))
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Send our noisy console
-> > > > >>>>>>>>>>>>>>>>> +        ubman.send(CONSOLE)
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +        # Tell grub to boot
-> > > > >>>>>>>>>>>>>>>>> +        ubman.ctrl('X')
-> > > > >>>>>>>>>>>>>>>>> +        ubman.p.expect(['Booting a command list'=
-])
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +    with ubman.log.section('Linux'):
-> > > > >>>>>>>>>>>>>>>>> +        # Linux should start immediately
-> > > > >>>>>>>>>>>>>>>>> +        ubman.p.expect(['Linux version'])
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +    with ubman.log.section('Ubuntu'):
-> > > > >>>>>>>>>>>>>>>>> +        # Shortly later, we should see this bann=
-er
-> > > > >>>>>>>>>>>>>>>>> +        ubman.p.expect(['Welcome to .*Ubuntu 24.=
-04.1 LTS.*!'])
-> > > > >>>>>>>>>>>>>>>>> +
-> > > > >>>>>>>>>>>>>>>>> +    ubman.restart_uboot()
-> > > > >>>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>>> And this seems very inflexible. Please see
-> > > > >>>>>>>>>>>>>>>> test/py/tests/test_net_boot.py for an example of h=
-ow to have this be
-> > > > >>>>>>>>>>>>>>>> configurable and work on arbitrary platforms. What=
- I assume is tricky is
-> > > > >>>>>>>>>>>>>>>> that the "role" part here is where you have a spec=
-ial disk image being
-> > > > >>>>>>>>>>>>>>>> passed. That too could be dealt with in u-boot-tes=
-t-hooks in a few ways,
-> > > > >>>>>>>>>>>>>>>> and the images pre-fetched to the CI container. An=
-d if this was
-> > > > >>>>>>>>>>>>>>>> configurable similar to the example I noted above,=
- it could check real
-> > > > >>>>>>>>>>>>>>>> hardware too.
-> > > > >>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>> That wasn't the reaction I expected.
-> > > > >>>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>> Yes, it is inflexible, but it is a starting point. =
-Isn't it better
-> > > > >>>>>>>>>>>>>>> than what we have today?
-> > > > >>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>> Is your inflexible boot an OS test better than the f=
-lexible boot an OS
-> > > > >>>>>>>>>>>>>> test that we have today? No, it's not.
-> > > > >>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>> I didn't even know about it, or perhaps I forgot.
-> > > > >>>>>>>>>>>>
-> > > > >>>>>>>>>>>> I believe I mentioned it every time you've said we sho=
-uld have an OS
-> > > > >>>>>>>>>>>> test, so yes, I guess you forgot.
-> > > > >>>>>>>>>>>
-> > > > >>>>>>>>>>> Well it was only added in May last year and it relies o=
-n board config
-> > > > >>>>>>>>>>> which I don't have...although I see that you have now p=
-osted yours.
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>> Yes, it was added not quite a year ago, and is documente=
-d within the
-> > > > >>>>>>>>>> test, like most tests that rely on the real platform.
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>> And do we need better documentation for test? Yes.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> +1
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> I'll note that I did my bit!
-> > > > >>>>>>>>>
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>>>>> Perhaps this relates to getting the labgrid config pu=
-blished and
-> > > > >>>>>>>>>>>>> figuring out how to pass info from Labgrid to tests.
-> > > > >>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>>> I would like to generalise this test to work on at =
-least one real
-> > > > >>>>>>>>>>>>>>> board, preferably one that doesn't use grub.
-> > > > >>>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>>> OK. The test we have today does that, if you check f=
-or the "Welcome to
-> > > > >>>>>>>>>>>>>> ..." string instead of the kernel has booted string.=
- It also does
-> > > > >>>>>>>>>>>>>> netboot rather than run default bootcmd. But that's =
-an easy enough test
-> > > > >>>>>>>>>>>>>> to write up. The only thing stopping me from doing t=
-hat right now is I
-> > > > >>>>>>>>>>>>>> need to find a board in the lab where we installed a=
-n OS to eMMC and not
-> > > > >>>>>>>>>>>>>> SD card (some lab sd-mux issues).
-> > > > >>>>>>>>>>>>>
-> > > > >>>>>>>>>>>>> OK. Labgrid has a 'features' thing which you can atta=
-ch to targets, so
-> > > > >>>>>>>>>>>>> I should be able to use that to indicate that Ubuntu,=
- Debian, Armbian,
-> > > > >>>>>>>>>>>>> etc. are available.
-> > > > >>>>>>>>>>>>
-> > > > >>>>>>>>>>>> OK, but that sounds like the opposite direction. These=
- are generic tests
-> > > > >>>>>>>>>>>> that can run in any / all of the labs, not just your l=
-abgrid
-> > > > >>>>>>>>>>>> configuration. AMD has been contributing tests that ru=
-n on hardware for
-> > > > >>>>>>>>>>>> example.
-> > > > >>>>>>>>>>>
-> > > > >>>>>>>>>>> That's great, the more tests we have the better. But th=
-ose tests can't
-> > > > >>>>>>>>>>> and don't run in CI, whereas mine can and do.
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>> AFAICT they're running on AMD's CI. They run on my CI. T=
-hey don't run on
-> > > > >>>>>>>>>> *your* lab because you took things, intentionally, in a =
-direction to
-> > > > >>>>>>>>>> minimize using u-boot-test-hooks and our existing per-bo=
-ard
-> > > > >>>>>>>>>> configuration infrastructure.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> When I look at CI all I see is my lab. Which CI are you r=
-eferring to
-> > > > >>>>>>>>> and how can I access it?
-> > > > >>>>>>>>
-> > > > >>>>>>>> I'll point you at the notes for the first call we had rece=
-ntly:
-> > > > >>>>>>>> https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bi=
-ll-the-cat/
-> > > > >>>>>>>> and note that there are many labs doing testing on / with =
-U-Boot.
-> > > > >>>>>>>
-> > > > >>>>>>> That's all good, but it isn't as good as having the lab in =
-gitlab.
-> > > > >>>>>>
-> > > > >>>>>> Strongly disagree. Especially since having it in the mainlin=
-e gitlab
-> > > > >>>>>> isn't feasible.
-> > > > >>>>>>
-> > > > >>>>>>>>> Here I would like to make a case for moving to using Labg=
-rid across
-> > > > >>>>>>>>> the board, but unfortunately the project struggles to rev=
-iew PRs, so
-> > > > >>>>>>>>> it's probably not a good idea.
-> > > > >>>>>>>>
-> > > > >>>>>>>> It would also be counter to the feedback from the U-Boot c=
-ommunity about
-> > > > >>>>>>>> making it easier to contribute testing results from additi=
-onal labs.
-> > > > >>>>>>>
-> > > > >>>>>>> I really don't think the test hooks are a good setup, thoug=
-h. It is
-> > > > >>>>>>> OK-ish for small labs, but it is so fiddly to use that I wr=
-ote a tool
-> > > > >>>>>>> (Labman) to deal with all the confusion.
-> > > > >>>>>>
-> > > > >>>>>> Yes, I don't know how hard you evaluated all of the then-cur=
-rent lab
-> > > > >>>>>> management tooling and wrote your own.
-> > > > >>>>>>
-> > > > >>>>>>> Labgrid (which you suggested I use for my lab, if you recal=
-l),
-> > > > >>>>>>
-> > > > >>>>>> Yes, and I think you forgot the aim was to make it easy to s=
-how all of
-> > > > >>>>>> the existing Labgrid based labs that do Linux kernel testing=
- they could
-> > > > >>>>>> easily add U-Boot to the mix. I've been trying to get feedba=
-ck from
-> > > > >>>>>> other people with existing labgrid setups to look at what yo=
-u've done.
-> > > > >>>>>>
-> > > > >>>>>>> provides for two yaml configuration files so that everythin=
-g is in one
-> > > > >>>>>>> place. Apart from its primitive support for USB hubs, it is=
- much
-> > > > >>>>>>> easier to maintain that dozens of little files all over the=
- palce.
-> > > > >>>>>>
-> > > > >>>>>> I mean, I looked at what you posted and strongly disagree, b=
-ut I think
-> > > > >>>>>> both cases here are personal preference and not some sort of=
- objective
-> > > > >>>>>> and easily evaluated thing.
-> > > > >>>>>>
-> > > > >>>>>>>>>>> We need an 'all of the above' strategy here.
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>> Sure. But I still want to see things as reusable as poss=
-ible. What you
-> > > > >>>>>>>>>> have above is *extremely* board and OS specific and non-=
-configurable.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> Yes, agreed.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>>> I
-> > > > >>>>>>>>>> also don't quite see why it's not a test of autoboot wit=
-h the
-> > > > >>>>>>>>>> pre-requisite of an OS being installed.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> Ah OK, my test is just for the installer itself. Both are=
- useful, but
-> > > > >>>>>>>>> I hope eventually to have the installer run to completion=
- and then
-> > > > >>>>>>>>> reboot to check all is well.
-> > > > >>>>>>>>
-> > > > >>>>>>>> In the spirit of "yes, and.."'ing tests, sure. Ilias point=
-ed me at some
-> > > > >>>>>>>> testing Linaro has going now that automates I believe it w=
-as current
-> > > > >>>>>>>> Yocto and current U-Boot (+ the pmb patches that've been p=
-osted) doing a
-> > > > >>>>>>>> full install via network in CI. So yes, a Canonical lab mi=
-ght also find
-> > > > >>>>>>>> it useful to end to end test installing Ubuntu. My own per=
-sonal dream is
-> > > > >>>>>>>> that at least some of the existing kernelci labs see the u=
-tility in
-> > > > >>>>>>>> adding "current U-Boot" as one of the matrix variables the=
-y test and not
-> > > > >>>>>>>> just "U-Boot as delivered by vendor" as a static part of t=
-he testing.
-> > > > >>>>>>>
-> > > > >>>>>>> OK.
-> > > > >>>>>>>
-> > > > >>>>>>>>
-> > > > >>>>>>>>>>> BTW, having thought about how test/py works a bit, inst=
-ead of the
-> > > > >>>>>>>>>>> env__net_tftp_bootable_file stuff, we should have code =
-or data which
-> > > > >>>>>>>>>>> sets up the required test files (on a suitable server) =
-before running
-> > > > >>>>>>>>>>> the test. That way, all the test code is in one Python =
-file and we
-> > > > >>>>>>>>>>> don't have to spend ages trying to divine what each tes=
-t needs.
-> > > > >>>>>>>>>>
-> > > > >>>>>>>>>> That seems like a lot more work than documenting more wh=
-at we have
-> > > > >>>>>>>>>> today, and I'm not sure of the benefit. Given the conten=
-ts of the pxe
-> > > > >>>>>>>>>> test, yes, just having those files available to 'cp' in =
-place would be
-> > > > >>>>>>>>>> helpful. But that's not the case for booting a kernel (t=
-he FIT match
-> > > > >>>>>>>>>> stuff doesn't work on the TI platforms atm). And if you =
-look at the
-> > > > >>>>>>>>>> config I posted it also includes bootstage configuration=
-=2E It also won't
-> > > > >>>>>>>>>> work well for the SPI tests, which I'm talking with Love=
- about in
-> > > > >>>>>>>>>> another thread.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> Yes, perhaps, but having self-contained tests would be a =
-win.
-> > > > >>>>>>>>
-> > > > >>>>>>>> With it's own set of technical and legal challenges / obli=
-gations and
-> > > > >>>>>>>> difficulties depending on what you even mean by "self cont=
-ained". And
-> > > > >>>>>>>> how often what's run where, and all sorts of other challen=
-ges too.
-> > > > >>>>>>>>
-> > > > >>>>>>>> Given the extreme depth that testing can go to, this is wh=
-y I'm of the
-> > > > >>>>>>>> position that we need to document things more and worry le=
-ss about
-> > > > >>>>>>>> prepackaged things. For example, making the documentation =
-for the
-> > > > >>>>>>>> current net based OS boot means that for bringing up a new=
- board the
-> > > > >>>>>>>> developer can just drop something in. Whereas if the tests=
- expect a
-> > > > >>>>>>>> functional OS image that has to also be messed with and is=
- its own
-> > > > >>>>>>>> challenge.
-> > > > >>>>>>>
-> > > > >>>>>>> Yes
-> > > > >>>>>>>
-> > > > >>>>>>>>
-> > > > >>>>>>>>>> In other words, the majority of py/<host>/u_boot_boarden=
-v_ content is
-> > > > >>>>>>>>>> configuration details, specific to both the platform / S=
-oC first, some
-> > > > >>>>>>>>>> lab specific details second and drop-in existing 3rd par=
-ty files a
-> > > > >>>>>>>>>> distant third.
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> I think the u-boot-test-hooks was an amazing solution 9 y=
-ears ago, but
-> > > > >>>>>>>>> we have outgrown it. We want people to be able to connect=
- their lab to
-> > > > >>>>>>>>> CI (meaning gitlab), so testing is more automated.
-> > > > >>>>>>>>
-> > > > >>>>>>>> More and more public testing would be great. The notes I l=
-inked above
-> > > > >>>>>>>> explain one of the first problems there being that most co=
-mpanies will
-> > > > >>>>>>>> not or can not hook a lab to a public CI instance.
-> > > > >>>>>>>
-> > > > >>>>>>> Well corporate IT is what it is.
-> > > > >>>>>>>
-> > > > >>>>>>> That means that their boards will not be testing in CI, unl=
-ess they do
-> > > > >>>>>>> it themselves, right?
-> > > > >>>>>>
-> > > > >>>>>> I'm not sure what you mean here. It's a solved problem for t=
-hem (monitor
-> > > > >>>>>> tree at URL) and something that's been being done since the =
-beginning
-> > > > >>>>>> even for U-Boot (it's how the original nvidia lab worked).
-> > > > >>>>>>
-> > > > >>>>>>>> The next problem, as
-> > > > >>>>>>>> both of our personal labs show, is that just maintaining t=
-he physical
-> > > > >>>>>>>> lab takes time and resources. I've added Heiko here becaus=
-e I've been
-> > > > >>>>>>>> talking with him off-list about expanding tbot coverage an=
-d plumbing
-> > > > >>>>>>>> that in to gitlab.
-> > > > >>>>>>>
-> > > > >>>>>>> OK
-> > > > >>>>>>>
-> > > > >>>>>>>>
-> > > > >>>>>>>>> We should move away from relying on maintainers getting a=
-round to
-> > > > >>>>>>>>> testing patches months after they are sent, when they hav=
-e time, but
-> > > > >>>>>>>>> they don't. Things need to be more automated and I'd enco=
-urage you to
-> > > > >>>>>>>>> push this as well.
-> > > > >>>>>>>>
-> > > > >>>>>>>> I have been, and the results I've gotten are that companie=
-s are testing
-> > > > >>>>>>>> things internally but there's not any good way to publish =
-results, and
-> > > > >>>>>>>> that's the kind of framework we're entirely missing.
-> > > > >>>>>>>
-> > > > >>>>>>> If you like, but from my side, I like to see the results in=
- gitlab.
-> > > > >>>>>>
-> > > > >>>>>> Depends on what you mean by gitlab. I assume you mean "trigg=
-ered by a
-> > > > >>>>>> push and visible in the main pipeline". Which isn't possible=
-=2E It's not
-> > > > >>>>>> going to happen. External collection is how it's handled for=
- the linux
-> > > > >>>>>> kernel and that community has far more sway than we do. If w=
-e ride their
-> > > > >>>>>> coattails here so to speak, we can get results. If we push f=
-or something
-> > > > >>>>>> completely different we aren't likely to have success.
-> > > > >>>>>>
-> > > > >>>>>>>> Which is another part of why I keep pushing against having=
- U-Boot
-> > > > >>>>>>>> configuration stuff inside of Labgrid as it makes it harde=
-r for any lab
-> > > > >>>>>>>> that's not using labgrid to see how to configure things.
-> > > > >>>>>>>
-> > > > >>>>>>> Well, as you requested, I looked at Labgrid and now my lab =
-uses it. I
-> > > > >>>>>>> am happy to publish the config[1], but I still hold my view=
- that all
-> > > > >>>>>>> the shell scripts in u-boot-test-hooks are limiting and pai=
-nful to
-> > > > >>>>>>> work with.
-> > > > >>>>>>
-> > > > >>>>>> Yes, and as I've shown, you can also use labgrid without goi=
-ng down the
-> > > > >>>>>> same path you took, and we can also support other lab manage=
-ment methods
-> > > > >>>>>> too, which is important to get as much testing as possible w=
-ithout
-> > > > >>>>>> needing to centralize everything.
-> > > > >>>>>
-> > > > >>>>> In summary, I suppose we just have different visions and idea=
-s, which
-> > > > >>>>> should be a good thing.
-> > > > >>>>
-> > > > >>>> So long as the project can speak with one voice, yes. Which al=
-l circles
-> > > > >>>> back to why I do not think what you're doing with u-boot.org i=
-s at all
-> > > > >>>> helpful.
-> > > > >>>
-> > > > >>> I do need a relief valve for when my efforts are blocked.
-> > > > >>
-> > > > >> And I do not see how using the project domain is appropriate. St=
-op doing
-> > > > >> this. If you can't stop I'm going to reach my own limit here.
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Sat, Feb 22, 2025 at 10:23:59AM -0700, Simon Gla=
+ss wrote:
+> > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Fri, 21 Feb 2025 at 17:08, Tom Rini <trini@kon=
+sulko.com> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Fri, Feb 21, 2025 at 04:42:09PM -0700, Simon=
+ Glass wrote:
+> > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > On Mon, 17 Feb 2025 at 07:14, Tom Rini <trini=
+@konsulko.com> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > On Mon, Feb 17, 2025 at 06:14:06AM -0700, S=
+imon Glass wrote:
+> > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > On Sun, 16 Feb 2025 at 14:52, Tom Rini <t=
+rini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > On Sun, Feb 16, 2025 at 12:39:34PM -070=
+0, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > On Sun, 16 Feb 2025 at 09:07, Tom Rin=
+i <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > On Sun, Feb 16, 2025 at 07:10:12AM =
+-0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > On Sat, 15 Feb 2025 at 11:12, Tom=
+ Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > On Sat, Feb 15, 2025 at 10:21:1=
+6AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > On Sat, 15 Feb 2025 at 07:41,=
+ Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > On Sat, Feb 15, 2025 at 04:=
+59:40AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > > On Mon, 10 Feb 2025 at 09=
+:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > > > On Thu, Feb 06, 2025 at=
+ 03:38:55PM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > > > > This is a global defa=
+ult, so put it under 'default' like the tags.
+> > > > > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > > > > Signed-off-by: Simon =
+Glass <sjg@chromium.org>
+> > > > > > > > > > > > > > > > > > > > > > > > > > > Suggested-by: Tom Rin=
+i <trini@konsulko.com>
+> > > > > > > > > > > > > > > > > > > > > > > > > > > Reviewed-by: Tom Rini=
+ <trini@konsulko.com>
+> > > > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > > > Please make v4 include =
+the way you redid the second patch and be on top
+> > > > > > > > > > > > > > > > > > > > > > > > > > of mainline, thanks.
+> > > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > > That's enough versions fo=
+r me, so I'll let you do that, if you'd like.
+> > > > > > > > > > > > > > > > > > > > > > > > > It probably doesn't affec=
+t your tree as not as much is done in
+> > > > > > > > > > > > > > > > > > > > > > > > > parallel.
+> > > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > > I am disappointed.
+> > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > I'm sorry to disappoint you.
+> > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > The background is that I look=
+ed at the difference between our trees
+> > > > > > > > > > > > > > > > > > > > > > > and the gitlab files are quit=
+e different. My CI runs take about 35
+> > > > > > > > > > > > > > > > > > > > > > > mins and it seems that yours =
+is around 90 mins. I would like to reduce
+> > > > > > > > > > > > > > > > > > > > > > > / remove the delta (for time =
+and patch diff), but I'm not sure how.
+> > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > My goal is to get CI runs to =
+below 20 minutes, best case.
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > I'm sure CI could be quicker st=
+ill with a number of faster runners. But
+> > > > > > > > > > > > > > > > > > > > > > if you can't be bothered to mak=
+e changes against mainline, what is the
+> > > > > > > > > > > > > > > > > > > > > > point?
+> > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > If you recall, I was working with=
+ your tree and had various ideas to
+> > > > > > > > > > > > > > > > > > > > > speed things up, but you didn't l=
+ike it. So I've had to do it in my
+> > > > > > > > > > > > > > > > > > > > > tree. This is not about more runn=
+ers (although I might have another
+> > > > > > > > > > > > > > > > > > > > > one soon). It is about running jo=
+bs in parallel.
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > And I wasn't sure more runners in p=
+arallel would help (as it would slow
+> > > > > > > > > > > > > > > > > > > > down the fast runner which is what =
+keeps the long jobs from being even
+> > > > > > > > > > > > > > > > > > > > longer) as much as adding more regu=
+lar runners would (which we've done)
+> > > > > > > > > > > > > > > > > > > > and noted that in the end it's a co=
+nfiguration on the runner side so to
+> > > > > > > > > > > > > > > > > > > > go ahead. And I reviewed and ack'd =
+the patches here which exposed the
+> > > > > > > > > > > > > > > > > > > > issues your path revealed. I just c=
+an't apply them because they need to
+> > > > > > > > > > > > > > > > > > > > be rebased (and squashed).
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > You have already added tags for thing=
+s, but (IIUC) they are around the
+> > > > > > > > > > > > > > > > > > > other way from what I have added.
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > I have a tag called 'single' which me=
+ans that the machine is only
+> > > > > > > > > > > > > > > > > > > allowed to one of those jobs. The wor=
+ld-build jobs are marked with
+> > > > > > > > > > > > > > > > > > > 'single'.
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > For other jobs, I allow the runners t=
+o pick up some in parallel
+> > > > > > > > > > > > > > > > > > > depending on their performance (for m=
+oa and tui that is 10).
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > So at most, there is a 'world build' =
+and 10 test.py jobs running on
+> > > > > > > > > > > > > > > > > > > the same machine. It seems to work fi=
+ne in practice, although I would
+> > > > > > > > > > > > > > > > > > > rather be able to make these two type=
+s of jobs mutually exclusive, so
+> > > > > > > > > > > > > > > > > > > that a runner is either running 10 pa=
+rallel jobs or 1 'single' job,
+> > > > > > > > > > > > > > > > > > > but not both. I'm not sure how to do =
+that.
+> > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > So unless I'm missing something, in bot=
+h cases the bottleneck is that
+> > > > > > > > > > > > > > > > > > for world build jobs you don't want any=
+thing else going on with the
+> > > > > > > > > > > > > > > > > > underlying build host. You could regist=
+er 10 "all" runners and 1 "fast
+> > > > > > > > > > > > > > > > > > amd64" runner (and something similar bu=
+t smaller for alexandra). If you
+> > > > > > > > > > > > > > > > > > update the registrations on source.denx=
+=2Ede can you then shut down your
+> > > > > > > > > > > > > > > > > > gitlab instance?
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > I've put a tag of 'single' on things that=
+ should run on the single-job
+> > > > > > > > > > > > > > > > > runner. Everything else can run concurren=
+tly, e.g. up to 10 jobs. So I
+> > > > > > > > > > > > > > > > > have two runners on the same host. E.g. t=
+ui-single has 'limit =3D 1',
+> > > > > > > > > > > > > > > > > but 'tui' has no limit and is just govern=
+ed by the 'concurrent =3D 10'
+> > > > > > > > > > > > > > > > > at the top of the file.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Yes. And you could move those runners to th=
+e mainline gitlab. There is
+> > > > > > > > > > > > > > > > no "single" tag, that would be the "all" ta=
+g. And "tui-single" would be
+> > > > > > > > > > > > > > > > "fast amd64".
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > They are still attached to the Denx gitlab. N=
+othing has changed on my
+> > > > > > > > > > > > > > > side. I'm not sure that your new tags are wor=
+king though. I have a
+> > > > > > > > > > > > > > > feeling something broke along the way when yo=
+u made all your tag
+> > > > > > > > > > > > > > > changes. One of my servers makes a bit of noi=
+se and I haven't heard it
+> > > > > > > > > > > > > > > in quite a while.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > There's a few of your runners that are "stale" =
+and haven't contacted
+> > > > > > > > > > > > > > gitlab in a long time. I'll double check the ta=
+gs tho.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > If Denx would like to give me access to their=
+ gitlab instances, I'd be
+> > > > > > > > > > > > > > > happy to play around and figure out how to ge=
+t it going as fast as my
+> > > > > > > > > > > > > > > tree does, and send a patch.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I'm not sure what you mean by that? The instanc=
+e itself?
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Yes. I can fiddle with tags on my runners and try=
+ to figure it out.
+> > > > > > > > > > > >
+> > > > > > > > > > > > I'm not sure what you're getting at here. If you me=
+an "tags" in
+> > > > > > > > > > > > /etc/gitlab-runner/config.toml those aren't relevan=
+t here I believe.
+> > > > > > > > > > >
+> > > > > > > > > > > No, I mean the tags in CI. If I fiddle with them I ca=
+n probably come
+> > > > > > > > > > > up with a way to run your CI much faster. Mine is abo=
+ut 35mins.
+> > > > > > > > > >
+> > > > > > > > > > I'm not so sure about that. Yours runs faster because i=
+t tests less. Now
+> > > > > > > > > > that we've got some of your other fast runners showing =
+up again, this is
+> > > > > > > > > > more instructive of current times I think:
+> > > > > > > > > > https://source.denx.de/u-boot/u-boot/-/pipelines/24802
+> > > > > > > > >
+> > > > > > > > > But not this? :
+> > > > > > > >
+> > > > > > > > You forgot a link. But presumably to some run yesterday whi=
+ch took
+> > > > > > > > longer. And because Ilias was tweaking the currently donate=
+d arm64
+> > > > > > > > runners (that have other jobs to run) and also we had two o=
+r three
+> > > > > > > > custodians at a time preparing trees, things ran slower.
+> > > > > > >
+> > > > > > > Maybe, but I don't think so.
+> > > > > >
+> > > > > > No need to "think" about it. You can look at the pipeline histo=
+ry and
+> > > > > > see what was in queue for how long. And since I needed to be ke=
+eping an
+> > > > > > eye on two of the 3 arm64 runners, I could see when custodians =
+were
+> > > > > > firing off tests. Aside from the number of pull requests I had =
+waiting
+> > > > > > that morning.
 > > > > >
-> > > > > I'm happy to have source.u-boot.org or similar point to Denx, but=
- I do
-> > > > > need my own tree while my work is blocked from submission. I sugg=
-est
-> > > > > we discuss it on a call and try to figure out a compromise while =
-we
-> > > > > are in this state.
+> > > > > Your runs are reliably around an hour but mine are reliably just =
+over
+> > > > > 30 minutes. I only have three runners.
+> > > > >
+> > > > > https://source.denx.de/u-boot/u-boot/-/pipelines
+> > > > > https://sjg.u-boot.org/u-boot/u-boot/-/pipelines
+> > > > >
+> > > > > I know you have added a duplicate build on arm64, but I can still
+> > > > > speed it up significantly if you'll allow me.
 > > > >
-> > > > Isn;t it possible to add a repo at source.denx.de ? Like u-boot-sjg=
- ?
-> > > >
-> > > > or u-boot-ci ?
+> > > > I've never been stopping you.
 > > >
-> > > I don't have permission to do that. With my tree I am able to have CI
-> > > running in half the time, use my full lab (not just the subset Tom's
-> > > tree has), push patches and ideas that others have blocked, point
-> > > people to my work, etc. It is a much better environment for me to
-> > > continue (what I see as) necessary innovation.
-> > >
-> > > That said, if you wish to add a top-level project for me, then I would
-> > > push things to it, yes.
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241128160011.78055=
+0-1-sjg@chromium.org/
 > >
-> > To be clear, you can have
-> > https://source.denx.de/u-boot/contributors/sjg/ but you can't host your
-> > downstream fork on source.denx.de itself and I wish you wouldn't abuse
-> > the project domain for it either.
+> > Indeed. That gets back to what I keep telling you about how to test your
+> > CI changes on source.denx.de.
 >=20
-> By calling my efforts a 'downstream fork', it seems to me you are
-> strengthening the current situation. I wish you would change your
-> terminology here.
->=20
-> Also, I have explained why I feel I must have my own tree for now. If
-> you are looking at making any changes to accomodate my concerns in the
-> short term, then perhaps we should refrain from discussing this topic
-> so often? It may just be wasting space on the mailing list if there is
-> no room for movement.
+> I don't understand your response here.
 
-We probably should keep discussion of what you see as your role in
-U-Boot to another thread, yes. But I don't know what to call your
-personal not mainline tree if not a fork.
+Well, if we go to the next part..
+
+> > > > > > > > > > If you want to make mainline CI run faster you will nee=
+d to catch up
+> > > > > > > > > > with the missing coverage or argue that some things are=
+ redundant.
+> > > > > > > > >
+> > > > > > > > > Or perhaps I can actually just make it faster without dro=
+pping coverage?
+> > > > > > > >
+> > > > > > > > I mean, I don't know how that's physically possible, outsid=
+e of adding
+> > > > > > > > many more expensive build hosts. We have two-three fast arm=
+64 hosts and
+> > > > > > > > that world builds between 30-45 minutes. That's the biggest=
+ time
+> > > > > > > > bottleneck.
+> > > > > > >
+> > > > > > > Why did you join those builds up? It is better for throughput=
+ to have
+> > > > > > > a few runners working in parallel.
+> > > > > >
+> > > > > > Because I'm not optimizing for the single developer running CI =
+case (or
+> > > > > > the loads of fast runners case). If we had sufficient resources=
+, yes,
+> > > > > > the fastest possible way would be 4 "fast arm64" servers and 4 =
+"fast
+> > > > > > amd64" servers each running if not 25% of the world build, at l=
+east 4
+> > > > > > easy to make and maintain groupings.
+> > > > > >
+> > > > > > However, we don't have that many of either. And they also need =
+to be
+> > > > > > used for the biggest sandbox test suite jobs so that they run i=
+n about 5
+> > > > > > minutes, not about 10 minutes. So in order to not entirely bloc=
+k other
+> > > > > > custodians we do a single world build. Because make and buildma=
+n are
+> > > > > > very good about otherwise fully loading the server. Running any=
+thing
+> > > > > > else while that is going on will slow down the world build (and=
+, the
+> > > > > > other job too).
+> > > > >
+> > > > > They're OK (on a fast machine) so long as the 'other' load is not=
+ too much.
+> > > >
+> > > > Things are OK until they aren't, yes. But just make sure you try out
+> > > > some of the worst case (ie more than one pipeline at a time running=
+).
+> > >
+> > > We could collect stats on runs, I suppose. Perhaps it runs a lot when
+> > > I am asleep.
+> >
+> > That's not what your pipeline shows? Or do you mean the runners? Yes,
+> > the runners themselves are busy with jobs from source.denx.de.
+>=20
+> Mostly the runners seem fairly unloaded, so far as I can tell, but as
+> I say, I don't have monitoring to see what happens at night.
+>=20
+> >
+> > > > > > Aside, maintaining groupings is a pain. It was very bad with Tr=
+avis, and
+> > > > > > it's only moderately painful with Azure where at least the end =
+goal is
+> > > > > > 10 pipelines for maximum concurrency. And with Azure everyone *=
+can* get
+> > > > > > their own "project" or whatever the right term is, and utilize =
+10
+> > > > > > runners at once.
+> > > > >
+> > > > > Yes, but we can update buildman to handle grouping automatically,=
+ as I
+> > > > > suggested once.
+> > > >
+> > > > I'm not sure we want make buildman act like distcc as well here. If=
+ we
+> > > > wanted to split the world in two, making it easy to say "arm not ar=
+mv8"
+> > > > and "not (arm not armv8)" would be good enough.
+> > >
+> > > OK, yes that would be better as boards would be more sensibly grouped.
+> >
+> > I look forward to your results on testing that, then as I can't get that
+> > kind of list from buildman today (starting problem,
+> > "tools/buildman/buildman --dry-run -v all" is 10 boards).
+>=20
+> OK
+>=20
+> >
+> > > > > > > > The next biggest is that unless sandbox tests are run on a =
+fast host,
+> > > > > > > > they take upwards of 10 minutes, rather than 5.
+> > > > > > >
+> > > > > > > Yes, they are just getting slower and slower.
+> > > > > >
+> > > > > > Adding more tests takes more time. But the real question is whi=
+ch tests
+> > > > > > take wall clock noticeable time, and why, and if we can do anyt=
+hing
+> > > > > > about it. My gut feeling is that it's in the disk image related=
+ tests
+> > > > > > and the user space verification of them.
+> > > > > >
+> > > > > > > > But please, rebase your work to next and see what you can d=
+o. There is
+> > > > > > > > likely some speed-ups possible if we allow for failures to =
+take longer
+> > > > > > > > to happen (and don't gate world builds on all of test.py st=
+age
+> > > > > > > > completing, just say sandbox). And if you do the work on so=
+urce.denx.de
+> > > > > > > > (as there is *NOTHING* stopping you from registering more r=
+unners to
+> > > > > > > > your tree and using whatever tagging scheme you like) you m=
+ight even see
+> > > > > > > > more of the time variability due to load from other custodi=
+ans.
+> > > > > > >
+> > > > > > > I can't edit the tags on the runners, nor can I adjust them t=
+o run
+> > > > > > > untagged jobs, nor can I delete runners I don't want, so no, =
+I believe
+> > > > > > > I need access to do that.
+> > > > > >
+> > > > > > You can do all of that with runners specific to u-boot-dm, and =
+you can
+> > > > > > disable project / group runners yourself too. So yes, you can.
+> > > > >
+> > > > > Nope, sorry, I wasn't able to do any of this with the Denx tree a=
+s I
+> > > > > can't adjust tags and can't delete and recreate runners.
+> > > >
+> > > > You don't have
+> > > > https://source.denx.de/u-boot/custodians/u-boot-dm/-/settings/ci_cd=
+#js-runners-settings
+> > > > visible to you?
+> > >
+> > > Right. But also note that there are group runners on another page.
+> >
+> > And you disable them from the page I mentioned above. If you disable all
+> > of the existing project, group and shared runners (which are settings on
+> > that page) you will have zero runners available for your tree. You can
+> > then add project runners to only your project with whatever tagging
+> > scheme you like. You can then test your ideas about how tags would work.
+>=20
+> OK, that sounds like a lot of hassle and you've already rejected my
+> ideas here. Are you saying you are open to a change? I am asking
+> because your last response suggested that my CI was no faster than
+> yours, or that it was only faster because it has less testing.
+
+Once again I am trying to show you how to test your changes on the
+mainline Gitlab server. Because you said you need your own gitlab (or
+admin access to the u-boot space) to do this and that's not correct.
+
+I have rejected your idea because it doesn't seem like it would
+actually be a win.
+
+I have asked you to prove me wrong by implementing your idea on
+mainline, on the mainline gitlab server.
+
+You have declined thus far.
+
+And I am *always* open to being shown facts that show I was wrong. If
+you can rework the CI jobs such that mainline is faster, and is still
+faster or at least no worse with multiple running pipelines, great.
+
+And yes, your tree is testing less things. This is a statement of fact.
+You are neither running sandbox on arm64 (which exposed important bugs)
+nor world builds on arm64 (which exposed bugs within the Dockerfile and
+makes it clearer that buildman is very funky about using a "cross"
+toolchain for the host processor).
+
+> > > > > > > > > > > > > > > I also have another runner to add.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I'll contact you off-list with the token.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > From my side, I have found it helpful and=
+ refreshing to have a gitlab
+> > > > > > > > > > > > > > > > > instance which I can control, e.g. it run=
+s in half the time and if my
+> > > > > > > > > > > > > > > > > patches are completely blocked by Linaro,=
+ etc., I have an escape
+> > > > > > > > > > > > > > > > > valve.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Yes, and I have no idea what any of that ha=
+s to do with anything other
+> > > > > > > > > > > > > > > > than leading to confusion about what tree i=
+s or is not mainline. Since
+> > > > > > > > > > > > > > > > you own u-boot.org and ci.u-boot.org is you=
+r gitlab and
+> > > > > > > > > > > > > > > > https://ci.u-boot.org/u-boot/u-boot/ is you=
+r personal tree.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > For now I am working with my tree, so that I =
+am not blocked by Linaro,
+> > > > > > > > > > > > > > > etc. but as you have seen I can rebase series=
+ for your tree as needed.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > And you're not addressing my point about using =
+the project domain for
+> > > > > > > > > > > > > > your personal tree. That's my big huge "are you=
+ forking the project or
+> > > > > > > > > > > > > > what" problem.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I'm just making sure that my work is not blocked =
+or lost, as that has
+> > > > > > > > > > > > > happened too many times in the past few years.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Again, are you intending to fork the project? Putti=
+ng your personal tree
+> > > > > > > > > > > > in as "https://ci.u-boot.org/u-boot/u-boot.git" is =
+not OK. I keep asking
+> > > > > > > > > > > > you to stop it.
+> > > > > > > > > > >
+> > > > > > > > > > > No, I'm not intending to fork anything. But I need a =
+tree that I can
+> > > > > > > > > > > control and push things into.
+> > > > > > > > > >
+> > > > > > > > > > I don't know how you can call your personal tree being =
+at
+> > > > > > > > > > "https://ci.u-boot.org/u-boot/u-boot.git" and saying it=
+'s somewhere you
+> > > > > > > > > > control and can push to while not also saying it's a fo=
+rk. If you want
+> > > > > > > > > > to close down your gitlab and CNAME ci.u-boot.org to so=
+urce.denx.de, you
+> > > > > > > > > > can still push things to u-boot-dm. Or if that's too co=
+nstrained of a
+> > > > > > > > > > namespace you can also get a contributors/sjg/ namespac=
+e. But what
+> > > > > > > > > > you're doing today WILL lead to confusion.
+> > > > > > > > >
+> > > > > > > > > I believe I've answered this question before. It is simpl=
+y that I
+> > > > > > > > > cannot get certain patches (bloblist, EFI, devicetree) in=
+to your tree.
+> > > > > > > > > There really isn't any other reason.
+> > > > > > > >
+> > > > > > > > Yes, that's still not an answer to my question.
+> > > > > > > >
+> > > > > > > > Or is the answer to my question "Yes, I'm trying to confuse=
+ people to
+> > > > > > > > thinking my tree is mainline."
+> > > > > > >
+> > > > > > > No, it's simply that you are not taking some patches in your =
+tree and
+> > > > > > > complaining about the amount of patches.
+> > > > > >
+> > > > > > That's misleading at best. I'm not taking the patches that other
+> > > > > > custodians have repeatedly rejected and explained why they're r=
+ejecting
+> > > > > > them.
+> > > > >
+> > > > > Yes and this has affected my ability to move things forward so mu=
+ch
+> > > > > that I've had to set up my own tree. It has been working very wel=
+l, to
+> > > > > have a relief valve.
+> > > >
+> > > > It's been working pretty terrible for the rest of the project as you
+> > > > build on top of things that have been rejected and you're collectin=
+g in
+> > > > your own personal downstream fork. Igor's email last night would be=
+ the
+> > > > latest example of "I wanted to look at this but where is it?"
+> > >
+> > > You make it sound like it is some strange force from the void that is
+> > > creating these problems :-)
+> >
+> > No, I'm saying you're making these problems and I wish you would stop.
+> >
+> > > The EFI-app thing was killed in review, so I picked it up and applied
+> >
+> > It was not "killed in review". It was posted once, given feedback and
+> > you picked it up for your tree in what felt like a day later but I'm
+> > sure was slightly longer than that.
+>=20
+> Just over two weeks, when it seemed to me it was dead. I had emailed
+> Matthew several times asking if he could make time to post his work.
+> Telling him to refactor a load of the EFI_LOADER stuff just to get the
+> app running seems wrong to me. I believe I already explained this at
+> the time.
+
+Waiting for answers to questions, which then did come along with
+confusion about the state of the series given that you had applied it
+somewhere else by then.
+
+On the merits, I'm entirely unsure without digging it all up on if
+factoring out common code was or was not a reasonable request. I believe
+there was other feedback on the series as well and it was certainly not
+a "ready to merge as v1" post.
+
+> > > it and am now building on it (it now supports arm64). I mentioned
+> > > before that I found that whole review process embarrassing (if not
+> > > mortifying) and it made me realise that I shouldn't tolerate it
+> > > either. Matthew Garrett is the sort of engineer that people should
+> > > *welcome* to the project. Yes, Heinrich and Ilias had some useful
+> > > feedback which I will get to at some point, but it works. Perhaps I'll
+> > > get into it when Linaro gets the lwip network tests running with
+> > > sandbox :-)
+> >
+> > You know what, I'd really love feedback from Matthew about that.
+> >
+> > > The next step is to get it running in qemu with my lab...but you
+> > > rejected that too I think? So it won't be in your tree unless you
+> > > change your mind on that.
+> >
+> > Did I reject making labgrid a requirement for tests? Yes, I did. Did I
+> > explain why and offer alternatives? I also did. Does there seem to be
+> > any reason this next test of yours would require labgrid? No, there does
+> > not.
+>=20
+> We can't 'require' Labgrid. There are too many loose strawmans being
+> thrown around here. But I want to use it in my lab and I want a test
+> which boots Ubuntu etc. in my lab using Labgrid. I explained that I
+> want to be able to interactively run the target ('ub-int qemu-86') as
+> well as run pytests ('ub-pyt qemu-x86 pxe') and in gitlab CI. That all
+> works today and all you need to do is not reject the patch.
+
+And I found it both hugely disappointing that you wrote something so
+specific to your lab and non-replicable elsewhere and also "yes and" to
+the patch. Perhaps that got missed along the way.
+
+> > > Again, it isn't a strange and unexplained force. It is just a
+> > > consequence of your decisions here. If you were more flexible, I would
+> > > have been able to continue as we were.
+> >
+> > The only way I could be more flexible here is to apply everything you
+> > post without question.
+>=20
+> That's the part of your thinking which I really struggle with. There
+> is a large amount of space in between that (which as you know I've
+> never even suggested) and what I am looking for.
+
+And I keep struggling with how you don't see it. You want changes that
+have been rejected for various valid technical reasons to be applied
+over the objection of the custodian.
+
+> The ANSI patch is an example of gratuitous rejection for no useful reason.
+
+It wasn't tho? Heinrich explained in another part of the thread where
+there is a good spec required reason we're doing the sequences we're
+doing. You either missed it or forgot it, I don't know which. But it
+wasn't "gratuitous". It's a tricky part of the spec where we need to
+come up with some clever solution for the case Michal hits.
+
+> Given the number of emails I'm genuinely surprised at the lack of
+> progress we have made here.
+
+I'm not surprised because I keep having to repeat myself.
+
+> Again, your decisions and position have produced the situation we are
+> in now. Much is in your control. If you are interested in changing
+> anything, even a little, I'm sure it would help.
+
+OK. What's one request you have of me that should be clear and
+un-objectionable?
+
+> > > > > > > > > At the moment your CI seems to be flaky as well:
+> > > > > > > > >
+> > > > > > > > > https://source.denx.de/u-boot/custodians/u-boot-dm/-/jobs=
+/1038174
+> > > > > > > >
+> > > > > > > > [aside, I think you meant to link to the pipeline itself, w=
+hich also
+> > > > > > > > passed, but had some retries]
+> > > > > > > >
+> > > > > > > > Funny story. Ilias needed to tweak the fast arm64 hosts and=
+ also wanted
+> > > > > > > > to explore "What if we have concurrency higher?" and ran in=
+ to the
+> > > > > > > > problems you also ran in to with respect to git seeing an e=
+xisting clone
+> > > > > > > > in progress and bailing. Followed by the problem of multipl=
+e non-trivial
+> > > > > > > > jobs running concurrently.
+> > > > > > > >
+> > > > > > > > All of which is why I keep trying to tell you that while "s=
+ingle" and
+> > > > > > > > concurrent runners work fine for you on a single user insta=
+nce it will
+> > > > > > > > not scale.
+> > > > > > >
+> > > > > > > Yes, but I solved that with the patch I sent and it seems to =
+be 100%
+> > > > > > > reliable now.
+> > > > > >
+> > > > > > Yes, you eventually solved it with 3 patches, which I asked you=
+ to
+> > > > > > rebase and squash to two patches (because #3 just fixes that #2=
+ wasn't
+> > > > > > sufficient) and you declined.
+> > > > >
+> > > > > In general, why not just be more open to my ideas, even just try =
+it
+> > > > > for a year? Given the tools I'm confident I can speed up your CI =
+as
+> > > > > well.
+> > > >
+> > > > I've never not been open to applying patches to mainline that are
+> > > > against mainline. I am not going to rebase your work for you howeve=
+r.
+> > > > And I think it's terrible for the project as a whole when you post
+> > > > changes against your tree and people expect to be able to review th=
+em
+> > > > and then can't because it's against your downstream fork.
+> > >
+> > > I've started mentioning the base commit in patman and I think I'll
+> > > update it to show the source tree as well. I understand the rebasing
+> > > is a pain and I am certainly happy to shoulder some of that load. E.g.
+> > > I can send a PR for each series when you are ready to accept it. If
+> > > you like. Perhaps we can set a timeline for that (e.g. no comments for
+> > > a week?)
+> >
+> > You are subject to the same general timelines as everyone else. When
+> > your patches apply to mainline and aren't rejected. Which is "about two
+> > weeks" and has been for about 15 years now. Sometimes I will pull things
+> > in sooner when they're smaller / clearer, but that typically doesn't
+> > apply to your very large series with multiple changes in it.
+>=20
+> OK, well again I'm happy to send a PR for things that haven't been
+> rejected for your tree.
+
+OK. So looking at:
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D&submitter=3D&sta=
+te=3D&q=3D&archive=3D&delegate=3D3184
+Right now, there's patches for you lab that need to be rebased to next
+(and feedback addressed, or set aside the i.MX target for now / make a
+new thread about the general problem there). A patch from Heinrich. A
+series from Caleb. The last two certainly, and whatever of the lab stuff
+applies, could be in a PR for next whenever you're ready.
 
 --=20
 Tom
 
---kPM3MiNy2tju5770
+--rd1CLWnUG29Ic1YC
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfJ0KcACgkQFHw5/5Y0
-tyxVkQv/U0D7XiV5elIR/BiUhC3k9YOuiXzOa+Hd7Mju2yk597j+b8oMl8ubd02/
-zn4QK9Bhfj5eFZJ/6P99fkdqtnmksKa/vhWEeq2yBYf/Med54Tdx//0kXOESFwLT
-0gIASHmW6jJ88SUq7/1S5LPhAGAozfCTfGy66COJlEOm9RMUiIZIsSVzuYWZnJKp
-i6wVhAp86q9agaeS15VY5Qgp6I0e1EqpGVsWJHvxqgg1ZzA7Knx/dRNZKeib7Xy2
-N3Kndlo8i3ZlnWQf8BZIwC7CBOPe9XGDO2o/aKcrbBK9CawdPu/koCTc12AXURha
-O9NSG36v4rcYxg17b7zmAZIG1m1K1Cny7wvw9fOauMQ+QXDA54lUAMEI9A+SZvoo
-6eQdHOBO8+bVpLDjx/wm9axw3HCTdELKmq4gPEYkU9vBtMrLKSKPa4OmP4VEy+jp
-7ksbSsROgIl9M5DZm0LrjLLTXLuQn+LICLv3wiK03PgMvTDDiYacf+HMEqR1wN1p
-oDnoif3g
-=TukL
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfJ15sACgkQFHw5/5Y0
+tyx79Av/e0zOmFsGZ3ZxocXAYAzaq8DXo0FaB/XLTsJhbqbRkZrZwLnU2D/QwEL9
+A/NkjwNSDI0e3GreOnDitThXk3tCBkTz2W3+yRlQPQSEZ4HngN5ewpi3BFyDNqNB
+KdIOOK4YolbJ6OOEke/8svD4W1OY3Bjjl3Mt4jtTl8a9qi8cYVgMJnyziX6n4lKj
+85teoxw5xAIFBD8xi144EsikPLTp0+doCn3gB/rSp/SXimB98Gh9CoFEp1vLIDdF
++YdFwj5N+w823esVIaL+yAfTTlHe3z3fr7C0Oivb54y1L2Z3TW7eh72nC3LtRFfm
+3nMGoJK+9uJtMJYLtM/k7+Daup8tBUh1WKcq8I2A/vo6ui0lWoZUqhviDLtPYRon
+QdYhr6hGuWq56je51IFQUJow4eTI+sFdOkQe3Ul2/Ge9DBiV+j3OnlmGdhYa/kSV
+BE5j4OsVY+3Sn6dDIJCVWnyezlDryNjOJss89VhNId+h+n5bbuCzE9KvN61SX/WO
+Zzusl/xU
+=U3YM
 -----END PGP SIGNATURE-----
 
---kPM3MiNy2tju5770--
+--rd1CLWnUG29Ic1YC--
