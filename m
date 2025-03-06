@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABAAC282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6501C282DE
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB78181D65;
-	Thu,  6 Mar 2025 17:06:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 32D5A81D27;
+	Thu,  6 Mar 2025 17:06:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FNpb+QaX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d4S7jHYO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 371DF81D25; Thu,  6 Mar 2025 17:05:59 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 8AFC281DAB; Thu,  6 Mar 2025 17:06:01 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B42C181D6C
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4740881D0B
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-85ae65ba2f1so22170539f.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:56 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3cf82bd380bso6901765ab.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277155; x=1741881955; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277157; x=1741881957; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CnQvkjxejgtQsoJZCMItWFnO0NC3anMrsLYmvnDNxZ4=;
- b=FNpb+QaXpL2SBkh+bhhuVHKLNYF40cRs1JHMbP/mA77+Z9HG90cmxEjJuhfJUYcxkK
- M9BFZAqUHeRqjMmK7/gS+ty9oiDORnybH1tShdQ0zkUKzuU5Clbn/gx0Z7sRp4V0aGdF
- +9D1WMVmL1hYYpH2B9lY0uvz67RMOJMvtKdXU=
+ bh=Parypb5/X7+YEQG7uuJ6OkRta7AG17KTTx5oCeSaQHU=;
+ b=d4S7jHYOt4K+hkR17Jmwsjqg8MT2q5xihlQ7dKQ5PP175ypStVgBdzvOUhsR8WOxQs
+ +X54UTvQH+N5PlE5lMU1XsXo111x5VCNvu0YtQ0sbioBh32NGRDur2spq9LsFC6IRiDS
+ bAXfNqvcz/lCq3/KbggqaSx6qytScwDxfiwcY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277155; x=1741881955;
+ d=1e100.net; s=20230601; t=1741277157; x=1741881957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CnQvkjxejgtQsoJZCMItWFnO0NC3anMrsLYmvnDNxZ4=;
- b=oRb4NLUQURiSFiuxlBiBdFr7pW1vbHjveLmMfErTZwJ3j+VNkBYc1Q+7V3mDti2LI/
- IqniXjZqUFq7HFdPNT6UNAgT0t43tac6s+C6kqqwiRAgMAYinJ1eMXOfcDgKdzi7K7GQ
- kHO3UiHAwVUv/X80MHMPDK8doyNb2/gkJil2qR99IOiwXsYsEHujU9oiWaYplIAfiABX
- L8n+JxiDvHi+WXf5biyyuSy9Sj5Cjj8ksdvaBok9gRWgEa2q5lD0e+mRHqPGmOkljb53
- 2ueLl5pftMmphH2L1ozjJeTXajulHEHjzj9roVapvtzDLC+Dmm+lsw1MnTSxxHd5CnzM
- mZ1Q==
-X-Gm-Message-State: AOJu0YwEu+CARCLbDIOjfqvlNbyuRKp2wieVNPTl4WFygrBuMqany3aS
- oIv+1GF03v9NRXhQwn2xM0oeYucdvP0sbIrNx/mwKYUNpuGdsscN1kR1VhrBNfWPdopA1b1bnRA
+ bh=Parypb5/X7+YEQG7uuJ6OkRta7AG17KTTx5oCeSaQHU=;
+ b=Utl9WB8I16DH5OPODb/GjPpDbvc8EVh2jvJWQvq6vSfhLNo5W6C+c4ZuUxCJrIRBD7
+ +2+WEj8Qwdq0NvSVBWi9r6eyWwbFUGkpRN7U+rrn19qP4d1DZVCCSj0ZTQLxftbc1m2F
+ cLFCy/grbwePMvR9Yr0H4+XvDiityrX52tmNIVnoYlmGig6x7zuSaUufpYUWZOigzX7F
+ CCySxtLrhaVM6I5WPpRGQVwdVATDO2NJiO2+0wcEHqO2FocXckukZ5QKwFYEVxX9cOcH
+ XhSWdRupAHKEMHUE2aTzgNFwkWDmg4AoYdvOABwoP6bzWuPCCikYu24Rdyfz3f9tAtNn
+ xmBA==
+X-Gm-Message-State: AOJu0Yy2BpnivfVhsqG/SyZZWGkoYVEc4jleMxsDdVmNHOBOGBV2Ga72
+ dKhMjHvGAJtpThQwaRm0+7JHhBAP0Wx1cR1Y9ziGJI6jiIL2WV1MlplS0zl1RneWVh2Q7RZ7IH8
  =
-X-Gm-Gg: ASbGncvC/mVW3FiIonae6O8JiNqo3Um+wNl6kFyFWy+s/L418BjMSvQ5J/hWpvLUaam
- TcvGBsspdXgKkwOD4gEeJrkBK9RICf6FN5zUI310qGQhdSqS/NqZYOTN2s3/K1VzrvxFpA3azDs
- iWtpxUmg9bTKDZo83Iyxay537b4aowj9pl87zEyGnxHuqShG5fQaNKBvP9jFXYJg93ibqxt8W4E
- PWdsn8Ggd2/d6Ni3QlHekgulmzGQKlyxAhbTxTOV2Upq9OTQjtLqneKuQmawBiCPIfpZytct5tb
- ngq5CF6RkZJlSx6/6/qY6jYeUANQVvdZHVHZ47qqgvnQ3O/+HahpfL9tiwp9q/sxm3ZwHuzVURq
- iXWN8OA==
-X-Google-Smtp-Source: AGHT+IEMNAN7gjTOqr6uzNXuMi8A3LnMckAsvh9w6HMui+G5dBqknO0LKqRriPffc5nX64pHV+lN4w==
-X-Received: by 2002:a05:6602:3982:b0:855:690e:ed8f with SMTP id
- ca18e2360f4ac-85b1d031e24mr3793339f.12.1741277154912; 
- Thu, 06 Mar 2025 08:05:54 -0800 (PST)
+X-Gm-Gg: ASbGncsGmaxpu+g9cfzMXt7pjaWVw3YJ/I3AE1JAb7LNMr9i3wtC4OdPAalLqTuhjkJ
+ HyGuJGj1S4JLKj6CbY8OEqCyF1cfzDHZy95N1DYHCahml573mDGU2BUMKnK0RfWc0gE6sy5Lq+T
+ WSyxP02l6cR++WiEJfDUw7KKYYQ5836504xVd4IJmI6sJiNBYg6nKO1cpItMUkAkUbDA5nPLWjF
+ 4+uttoklwC3sUK1pvb/Zw5ERaQRyj/G8//GZhabak1UNVeW9aJi65/u5vUYRjGoOKcLEIDof/LF
+ UJWD6qtf0IfDzi8IZFgDCHZZmTzCodn5zFpMI2rJOrtlNl01DuH6emuMkgS3l5ru79SQuY1c4Kt
+ jy5kG2g==
+X-Google-Smtp-Source: AGHT+IHJ5DP3kVe7GzekRC870xL09gnDEhxeQsqSvijG1T45T2M0gsogLWlNveVheV+xgohiCspCCg==
+X-Received: by 2002:a05:6e02:2144:b0:3d3:e296:1c1c with SMTP id
+ e9e14a558f8ab-3d441960cbcmr319565ab.9.1741277157384; 
+ Thu, 06 Mar 2025 08:05:57 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.52
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:05:53 -0800 (PST)
+ Thu, 06 Mar 2025 08:05:56 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 32/47] x86: e820: Add a function to dump the e820 table
-Date: Thu,  6 Mar 2025 09:03:59 -0700
-Message-ID: <20250306160428.3041057-33-sjg@chromium.org>
+Subject: [PATCH v4 33/47] x86: Add a new API for e820
+Date: Thu,  6 Mar 2025 09:04:00 -0700
+Message-ID: <20250306160428.3041057-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,8 +95,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is already code for this in zimage. Move it to the e820 file so
-it can be used elsewhere.
+The existing mechanism is pretty painful as it requires manual
+calculations for anything but a trivial setup.
+
+Add a new API for adding e820 entries.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -104,112 +106,197 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v3)
 
 Changes in v3:
-- Add new patch with a function to dump the e820 table
+- Add new patch with an API for e820
 
- arch/x86/include/asm/e820.h |  8 ++++++++
- arch/x86/lib/e820.c         | 23 +++++++++++++++++++++++
- arch/x86/lib/zimage.c       | 22 ++--------------------
- 3 files changed, 33 insertions(+), 20 deletions(-)
+ arch/x86/include/asm/e820.h | 87 ++++++++++++++++++++++++++++++++++++-
+ arch/x86/lib/e820.c         | 47 ++++++++++++++++++++
+ 2 files changed, 133 insertions(+), 1 deletion(-)
 
 diff --git a/arch/x86/include/asm/e820.h b/arch/x86/include/asm/e820.h
-index 1ab709abfc8..cc3758b59fd 100644
+index cc3758b59fd..a535818b2d5 100644
 --- a/arch/x86/include/asm/e820.h
 +++ b/arch/x86/include/asm/e820.h
-@@ -39,6 +39,14 @@ unsigned int install_e820_map(unsigned int max_entries,
- unsigned int cb_install_e820_map(unsigned int max_entries,
- 				 struct e820_entry *entries);
+@@ -3,6 +3,8 @@
+ 
+ #define E820MAX		128	/* number of entries in E820MAP */
+ 
++#ifdef __ASSEMBLY__
++
+ #define E820_RAM	1
+ #define E820_RESERVED	2
+ #define E820_ACPI	3
+@@ -10,9 +12,21 @@
+ #define E820_UNUSABLE	5
+ #define E820_COUNT	6	/* Number of types */
+ 
+-#ifndef __ASSEMBLY__
++#else
++
+ #include <linux/types.h>
+ 
++/* Available e820 memory-region types */
++enum e820_type {
++	E820_RAM	= 1,
++	E820_RESERVED,
++	E820_ACPI,
++	E820_NVS,
++	E820_UNUSABLE,
++
++	E820_COUNT,
++};
++
+ struct e820_entry {
+ 	__u64 addr;	/* start of memory segment */
+ 	__u64 size;	/* size of memory segment */
+@@ -22,10 +36,81 @@ struct e820_entry {
+ #define ISA_START_ADDRESS	0xa0000
+ #define ISA_END_ADDRESS		0x100000
  
 +/**
-+ * e820_dump() - Dump an e820 table
++ * Context to use for e820_add()
 + *
-+ * @entries: Pointer to first entry
++ * @entries: Table being filled in
++ * @addr: Current address we are up to
++ * @count: Number of entries added to @entries so far
++ * @max_entries: Maximum number of entries allowed
++ */
++struct e820_ctx {
++	struct e820_entry *entries;
++	u64 addr;
++	int count;
++	int max_entries;
++};
++
++/**
++ * e820_init() - Start setting up an e820 table
++ *
++ * @ctx: Context to set up
++ * @entries: Place to put entries
++ * @max_entries: Maximum size of @entries
++ */
++void e820_init(struct e820_ctx *ctx, struct e820_entry *entries,
++	       int max_entries);
++
++/**
++ * e820_add() - Add an entry to the table
++ *
++ * @ctx: Context
++ * @type: Type of entry
++ * @addr: Start address of entry
++ * @size Size of entry
++ */
++void e820_add(struct e820_ctx *ctx, enum e820_type type, u64 addr, u64 size);
++
++/**
++ * e820_to_addr() - Add an entry that covers the space up to a given address
++ *
++ * @ctx: Context
++ * @type: Type of entry
++ * @end_addr: Address where the entry should finish
++ */
++void e820_to_addr(struct e820_ctx *ctx, enum e820_type type, u64 end_addr);
++
++/**
++ * e820_next() - Add an entry that carries on from the last one
++ *
++ * @ctx: Context
++ * @type: Type of entry
++ * @size Size of entry
++ */
++void e820_next(struct e820_ctx *ctx, enum e820_type type, u64 size);
++
++/**
++ * e820_finish() - Finish the table
++ *
++ * Checks the table is not too large, panics if so
++ *
++ * @ctx: Context
++ * Returns: Number of entries
++ */
++int e820_finish(struct e820_ctx *ctx);
++
+ /* Implementation-defined function to install an e820 map */
+ unsigned int install_e820_map(unsigned int max_entries,
+ 			      struct e820_entry *);
+ 
++/**
++ * e820_dump() - Dump the e820 table
++ *
++ * @entries: Pointer to start of table
 + * @count: Number of entries in the table
 + */
 +void e820_dump(struct e820_entry *entries, uint count);
 +
- #endif /* __ASSEMBLY__ */
- 
- #endif /* _ASM_X86_E820_H */
+ /**
+  * cb_install_e820_map() - Install e820 map provided by coreboot sysinfo
+  *
 diff --git a/arch/x86/lib/e820.c b/arch/x86/lib/e820.c
-index d478b7486e3..00ca94776d2 100644
+index 00ca94776d2..bcc5f6f3044 100644
 --- a/arch/x86/lib/e820.c
 +++ b/arch/x86/lib/e820.c
-@@ -10,6 +10,29 @@
+@@ -3,8 +3,11 @@
+  * Copyright (C) 2015, Bin Meng <bmeng.cn@gmail.com>
+  */
  
- DECLARE_GLOBAL_DATA_PTR;
++#define LOG_CATEGORY	LOGC_ARCH
++
+ #include <efi_loader.h>
+ #include <lmb.h>
++#include <log.h>
+ #include <asm/e820.h>
+ #include <asm/global_data.h>
  
-+static const char *const e820_type_name[E820_COUNT] = {
-+	[E820_RAM] = "RAM",
-+	[E820_RESERVED] = "Reserved",
-+	[E820_ACPI] = "ACPI",
-+	[E820_NVS] = "ACPI NVS",
-+	[E820_UNUSABLE] = "Unusable",
-+};
-+
-+void e820_dump(struct e820_entry *entries, uint count)
-+{
-+	int i;
-+
-+	printf("%12s  %10s  %s\n", "Addr", "Size", "Type");
-+	for (i = 0; i < count; i++) {
-+		struct e820_entry *entry = &entries[i];
-+
-+		printf("%12llx  %10llx  %s\n", entry->addr, entry->size,
-+		       entry->type < E820_COUNT ?
-+		       e820_type_name[entry->type] :
-+		       simple_itoa(entry->type));
-+	}
-+}
-+
- /*
-  * Install a default e820 table with 4 entries as follows:
-  *
-diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-index 26d623711bc..3ffc7593f87 100644
---- a/arch/x86/lib/zimage.c
-+++ b/arch/x86/lib/zimage.c
-@@ -475,14 +475,6 @@ static void print_num64(const char *name, u64 value)
- 	printf("%-20s: %llx\n", name, value);
+@@ -60,6 +63,50 @@ __weak unsigned int install_e820_map(unsigned int max_entries,
+ 	return 4;
  }
  
--static const char *const e820_type_name[E820_COUNT] = {
--	[E820_RAM] = "RAM",
--	[E820_RESERVED] = "Reserved",
--	[E820_ACPI] = "ACPI",
--	[E820_NVS] = "ACPI NVS",
--	[E820_UNUSABLE] = "Unusable",
--};
--
- static const char *const bootloader_id[] = {
- 	"LILO",
- 	"Loadlin",
-@@ -570,24 +562,14 @@ void zimage_dump(struct bootm_info *bmi, bool show_cmdline)
++void e820_init(struct e820_ctx *ctx, struct e820_entry *entries,
++	       int max_entries)
++{
++	memset(ctx, '\0', sizeof(*ctx));
++	ctx->entries = entries;
++	ctx->max_entries = max_entries;
++}
++
++void e820_add(struct e820_ctx *ctx, enum e820_type type, u64 addr, u64 size)
++{
++	struct e820_entry *entry = &ctx->entries[ctx->count++];
++
++	if (ctx->count <= ctx->max_entries) {
++		entry->addr = addr;
++		entry->size = size;
++		entry->type = type;
++	}
++	ctx->addr = addr + size;
++}
++
++void e820_next(struct e820_ctx *ctx, enum e820_type type, u64 size)
++{
++	e820_add(ctx, type, ctx->addr, size);
++}
++
++void e820_to_addr(struct e820_ctx *ctx, enum e820_type type, u64 addr)
++{
++	e820_next(ctx, type, addr - ctx->addr);
++}
++
++int e820_finish(struct e820_ctx *ctx)
++{
++	if (ctx->count > ctx->max_entries) {
++		printf("e820 has %d entries but room for only %d\n", ctx->count,
++		       ctx->max_entries);
++		panic("e820 table too large");
++	}
++	log_debug("e820 map installed, n=%d\n", ctx->count);
++	if (_DEBUG)
++		e820_dump(ctx->entries, ctx->count);
++
++	return ctx->count;
++}
++
+ #if CONFIG_IS_ENABLED(EFI_LOADER)
+ void efi_add_known_memory(void)
  {
- 	struct boot_params *base_ptr;
- 	struct setup_header *hdr;
--	int i;
- 
- 	base_ptr = bmi->base_ptr;
- 	printf("Setup located at %p:\n\n", base_ptr);
- 	print_num64("ACPI RSDP addr", base_ptr->acpi_rsdp_addr);
- 
- 	printf("E820: %d entries\n", base_ptr->e820_entries);
--	if (base_ptr->e820_entries) {
--		printf("%12s  %10s  %s\n", "Addr", "Size", "Type");
--		for (i = 0; i < base_ptr->e820_entries; i++) {
--			struct e820_entry *entry = &base_ptr->e820_map[i];
--
--			printf("%12llx  %10llx  %s\n", entry->addr, entry->size,
--			       entry->type < E820_COUNT ?
--			       e820_type_name[entry->type] :
--			       simple_itoa(entry->type));
--		}
--	}
-+	if (base_ptr->e820_entries)
-+		e820_dump(base_ptr->e820_map, base_ptr->e820_entries);
- 
- 	hdr = &base_ptr->hdr;
- 	print_num("Setup sectors", hdr->setup_sects);
 -- 
 2.43.0
 
