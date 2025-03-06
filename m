@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F29C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 15:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3334C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 15:44:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 206B08144F;
-	Thu,  6 Mar 2025 16:41:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4324780F4C;
+	Thu,  6 Mar 2025 16:44:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EtzKQXZV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UL24n6ww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECBFD8141E; Thu,  6 Mar 2025 16:41:20 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 1A55180F4C; Thu,  6 Mar 2025 16:44:31 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB4A180FE1
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 16:41:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F237808A2
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 16:44:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e573136107bso655445276.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 07:41:18 -0800 (PST)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-6fda22908d9so6074047b3.1
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 07:44:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741275677; x=1741880477; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=e8oe0JE2lVjxfBmoY1LNvAkdNgOYJL63uFryImG7rt8=;
- b=EtzKQXZVvEjFHnbzDfk2tGLgHe4YnQZOocqaCcV7blIfr1DxCvSObAxDEw+UJYd7Sk
- mqq9PMpevqVBWziAiWJmwUDvSOeGcIvRqWnpwLQ3LGfCFuaiOgOwrng+JjQxspzC60Ud
- RDgHJaNkN6Y0w2h0Q0q8xzKKjYAWwa7DuLuoY=
+ d=konsulko.com; s=google; t=1741275867; x=1741880667; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RP4l1naywvaHW66Nv1PrWMVvTCNzzFfHOJAQjUkDb2A=;
+ b=UL24n6wwlYqTYmONvkVXkMMK5Kk/MCU7zO90YNzxHzm9+JWdG46UKC4oLhtq3H5M2g
+ Ck03wKrBM5uPz1X/Yd7T44R2/2TNMCZd9VIe1GArA+1stDnGsyiIqkFJCpdt9bx8ZRCq
+ XIpIkGN6XWAn5Itp7VFCpJ9UxOvdDlIoQI+a8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741275677; x=1741880477;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e8oe0JE2lVjxfBmoY1LNvAkdNgOYJL63uFryImG7rt8=;
- b=ISSJQgqnPzRV6zUjnqKa6AQ0r/Pjx4c1BVlltgMJAvBdflBDuiupD7hZNLstIL/Pb4
- w9CI3aBMUHf/XgtJvjwb0I04Kd4MYjzwugWTcRgwA7wIWE9SmJGYaq5Frb6vVi36yIoL
- rXW1whFYN/swwOXInI+XjeiAarGu2anxUjr7TPwB49S5w5kvHSRyv6m6ZyY1uct166jK
- 3kL7bgfSxL3uZbtFmzIMJXf3ioaUZCHQ650P+aRAf6H86KD95aa9tmJoVPhqpL+aEOko
- OfVDgbvwONwFdq9BtpzeTPST3LoSQCCYTNrQe43rFWYBAbrvJdQ21ndjhPFaexcdqqvE
- zUMA==
-X-Gm-Message-State: AOJu0YyizC05ZN1T+MycRTXXHBn6L8M5bSN8Iq/b5sOirn02HWCvXZBJ
- 1eSRRjdJvl3TqD4V4NJx5hoI13hBH2HDtUa2iCcTuK4OQ3nj0N6PgX2gZhaTKI0=
-X-Gm-Gg: ASbGncvTtQjoCq7EGx5VvtEJnrwl38qJ9O2RgQgbkrIlLwjkeEhy4wxx3AxSvsSztFm
- HgHocrnYED+P4cX9SeAkmPKmfL8j190+VdObusmi8SEuIREVUKA6RfCp6lgNh693p6/8jkfHfbN
- 3JyP7rpwEiFPTVJHn4TsxUDrKSdDUXYTW3rgZ1bfhmdO3xyRJnte12HNTqp0bTBIqPCIW3gyUpk
- 4zFLAK5GEQSxI7u9v7UjrQYvQHYsd03jK8khovtFSvjoA1TT1vzUOkxr16zWHamcTYLcX7UhFMu
- fSDRsQIZLZ5Y5YTHFXW+DCEjLACUGoMIrDhGDMGu21cq
-X-Google-Smtp-Source: AGHT+IHd6t47ijiNKQQn7G7JYajJhGDAWlrXOcN1dX1Pioxkw6RDZNf8KsAB9xWVPk7DvL2O/YNuGw==
-X-Received: by 2002:a05:6902:2a4a:b0:e5d:ca68:5f50 with SMTP id
- 3f1490d57ef6-e611e300e35mr9815981276.32.1741275677656; 
- Thu, 06 Mar 2025 07:41:17 -0800 (PST)
-Received: from [127.0.1.1] ([187.192.142.234])
+ d=1e100.net; s=20230601; t=1741275867; x=1741880667;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RP4l1naywvaHW66Nv1PrWMVvTCNzzFfHOJAQjUkDb2A=;
+ b=DV6jnmpog4Svu4nzv4kqW1zB4m0tvKBLgRnVwueI6YZLGjDs0VjxzVmZph+PX3Z9eB
+ 9oR6Gc27Yggs70bYepZ02p0pMDaEFcA+Usg8Ia4Nvguf+GKXZ5Xi8qEaJywNtqBtBFEq
+ 7PIGNCy+nFuS1oJaycSo3DKs0Tc6zhQhp1IgUfvvnDfOorNnGwumFcqIbSB6+QsflIjL
+ GihxBSqGMMgSNUS+4ODfjh//ICQe2S7sStDuZPuDfXnCgYUtKbIZf0Wzf4szWwF/78fP
+ yQJ6rDKKMcBfYn1NKXzU9EHkMXUFhtAOO8dr1IjuObmEQ1K4GP5zusuOKQcrSHMh3f9E
+ gT3w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXG6/KKEtyddkqYFaTm7VbGYWA5SaWOld9QyVtwJ07FwJo7Y9J6m/KnUjBlMkXdf6uXi8mMYAM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGeSRqwbon7OzSLt5ERdne7EX1AFV9zW0onIjFx6qtHri2Ih+0
+ U/wAUOFXYuHKv+rGWYZmKtwZI4bjqdYgcbzTyu+ubWs33XSznAzwbiMsZVk7Rf8=
+X-Gm-Gg: ASbGncua6s7nmG/uySRRiLX2SOTGKyMHwnwVYfRtBCuCyemk5Dy328HLlAxfTFiEog2
+ 5iF6MN2vP6zasKZEyO3IGzpNoRBr2+gYVgu5CTyx62olAx2K5jGCI+H89THablYQ+r8VqeybGCT
+ ErZpsda0GLs/hUlYoHZz8EExkC+an99xNsViRQfk8VDjv14gWmtw9casEkPAARIEgrLqizCETKa
+ 7/IFQGQcmdxMhp8UeX33dCeoSKa59jerIJHtTZ+2/H6jef57kveU2Rp9M1T+GB6YpwPNLKML0wz
+ cv0oh3ne50URNl3Pirm4i02hEzoJBOFv6JUelw3otG+tzA==
+X-Google-Smtp-Source: AGHT+IEz1uIAqoBb90WAKHi5k3g4czOJVY3eaBf/UkpxrkiFH5IO+ma3ZmqowSsb8ihQsY0roLBuFg==
+X-Received: by 2002:a05:690c:3384:b0:6fd:a226:fb6c with SMTP id
+ 00721157ae682-6fda2f7af5cmr110837157b3.17.1741275867148; 
+ Thu, 06 Mar 2025 07:44:27 -0800 (PST)
+Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e634b842f58sm348755276.22.2025.03.06.07.41.16
+ 00721157ae682-6feb2a1c3d2sm3026357b3.10.2025.03.06.07.44.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 07:41:17 -0800 (PST)
+ Thu, 06 Mar 2025 07:44:26 -0800 (PST)
+Date: Thu, 6 Mar 2025 09:44:23 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250226153346.2736160-1-trini@konsulko.com>
-References: <20250226153346.2736160-1-trini@konsulko.com>
-Subject: Re: [PATCH] scripts/checkpatch.pl: Upgrade IS_ENABLED_CONFIG to
- error for U-Boot
-Message-Id: <174127567680.3636414.933631099401797585.b4-ty@konsulko.com>
-Date: Thu, 06 Mar 2025 09:41:16 -0600
+To: Aniket Limaye <a-limaye@ti.com>
+Cc: hs@denx.de, u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ virag.david003@gmail.com, marcel.ziswiler@toradex.com,
+ w.egorov@phytec.de, j-keerthy@ti.com, u-kumar1@ti.com
+Subject: Re: [PATCH RFC/RFT 0/3] omap24xx_i2c: Enable Repeated Start
+ functionality
+Message-ID: <20250306154423.GD2640854@bill-the-cat>
+References: <20250304220546.866602-1-a-limaye@ti.com>
+ <20250305155000.GR2640854@bill-the-cat>
+ <5100f007-28c2-ed02-620f-a013e9c6ed60@denx.de>
+ <24951463-008b-4864-b8e4-c426b0e36122@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Q4prdqoraPcHoptk"
+Content-Disposition: inline
+In-Reply-To: <24951463-008b-4864-b8e4-c426b0e36122@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,23 +103,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Feb 2025 09:33:45 -0600, Tom Rini wrote:
 
-> A problem we have today is that some instances of IS_ENABLED(FOO) have
-> crept in to the code. This is in turn because with checkpatch.pl this is
-> only a warning and not an error, so they were overlooked. And looking
-> deeper, in the Linux kernel this pattern is allowed because
-> IS_ENABLED(DEFINED_FLAG) is allowed if discouraged and a quick skim of
-> the instances I saw in the current kernel follow this pattern. In U-Boot
-> however, this is not allowed, so bump to an error.
-> 
-> [...]
+--Q4prdqoraPcHoptk
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Thu, Mar 06, 2025 at 06:28:54PM +0530, Aniket Limaye wrote:
+> Hello Tom, Heiko,
+>=20
+> On 06/03/25 11:15, Heiko Schocher wrote:
+> > Hello Tom, Aniket,
+> >=20
+> > On 05.03.25 16:50, Tom Rini wrote:
+> > > On Wed, Mar 05, 2025 at 03:34:08AM +0530, Aniket Limaye wrote:
+> > > > This series implements Repeated Start functionality for the DM_I2C =
+xfer
+> > > > API (omap_i2c_xfer())
+> > > >=20
+> > > > First, split out the actual implementation for each individual i2c =
+msg
+> > > > transfer into a new function __omap24_i2c_xfer_msg() and use this to
+> > > > implement omap_i2c_xfer().
+> > > >=20
+> > > > Then, add support for the Repeated Start condition in omap_i2c_xfer=
+()
+> > > > through the CONFIG_I2C_REPEATED_START option.
+> > > >=20
+> > > > Also add this config to Kconfig and enable it for ARCH_K3 platforms=
+ by
+> > > > default.
+> > > >=20
+> > > > Test logs (On AM68-SK with additional debug prints):
+> > > > https://gist.github.com/aniket-l/8c64c5bc81246751a02836a96510df14
+> > > >=20
+> > > > Requesting reviews/testing on specifically the CONFIG_I2C_REPEATED_=
+START
+> > > > addition:
+> > > > - Is the Kconfig needed or should we simply always default to not
+> > > > =A0=A0 sending Stop bit? Drivers can use i2c_msg.flags to request S=
+top bit
+> > > > =A0=A0 for each msg, same as in the Linux Kernel i2c-omap driver[0].
+> > >=20
+> > > Yes, a Kconfig is needed as this driver works (as implied by the name)
+> > > on so much old and differently buggy IP.
+> > >=20
+> > > > - If yes, Should we re-use CONFIG_I2C_REPEATED_START from the legacy
+> > > > =A0=A0 implementation of the driver or define a new config
+> > >=20
+> > > Lets pick a new option, under the SYS_I2C_OMAP24XX namespace (and rem=
+ove
+> > > the legacy and unused variant).
+> > >=20
+>=20
+> I will update the patch with the proper namespace for this config.
+>=20
+> The legacy one (CONFIG_I2C_REPEATED_START) was never added to Kconfig at
+> all... So will just leave it be ( unless you meant remove support for it
+> from the legacy driver code as well and use this new one instead? )
 
-[1/1] scripts/checkpatch.pl: Upgrade IS_ENABLED_CONFIG to error for U-Boot
-      commit: 0fd7ee0306a88bd99d3820167fa45a7ee6fbc1e1
--- 
+Yes, please remove the useless legacy code in an earlier patch to the
+series, thanks.
+
+--=20
 Tom
 
+--Q4prdqoraPcHoptk
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfJwtAACgkQFHw5/5Y0
+tyzr4Qv/RMcfVFD4u17VipodqdoEDoEvEaWA0HLwyH+Iqr06YQFZaV/k/8EjMX3c
+v5fIMBLGBnGhbuXfXg+JJnE7qvvfwHjGtnSLJK3nB/i/P/9iXfS4sztlpwORkkbl
+CSz1eYdGWSleXowcfLLXmbJCGcQIDIYOPLY1THpRed91RkCmJFYXL6QqE1+AS+3N
+YmySsnILem0Kp9HhFgTaYtHcpv7Mx2GAmPGFVYH9jC7lnGzwubrBgo7k5hCyXB3V
+FzXb+XeaWL/QtQnOMHH6aUAZwz0sozABc0JLW6xUefg2Oux+2yJdFlCba25w1TyI
+MF2JEq9luufY7W4XcNz2YABuK2+PKw+05xPd9fky6rgM7urbEMQykfrrm/7PVLLy
+Pu4S1oFCSx777t2Je0aHmhVGvs2URtihVqfbM6MEkmgnVoxrla7AlQI260pCwm9/
+rGCNAvzKtdt+m/KAVnPLs7d9Yy7qUFSS1b4aXU8nU+fqwjJQvQzt8o+6az5ekn1G
+QhNz7MuS
+=v4F1
+-----END PGP SIGNATURE-----
+
+--Q4prdqoraPcHoptk--
