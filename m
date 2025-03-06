@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0FCC19F32
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:30:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C8FC19F32
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:30:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EC8380E94;
-	Thu,  6 Mar 2025 01:27:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC4998198F;
+	Thu,  6 Mar 2025 01:28:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cHU0tz9p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BVWVUlmt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EB8080805; Thu,  6 Mar 2025 01:27:18 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id BED1F81273; Thu,  6 Mar 2025 01:28:10 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 318DB80E94
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:27:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7622C81668
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:28:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-85afcb0c18fso3489339f.1
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:27:15 -0800 (PST)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-85ada0cf40fso2615739f.2
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:28:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741220834; x=1741825634; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741220856; x=1741825656; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E7rPZTA14ouyqv0XIQoDk8itFV2LVK2EL3s3c6TfBjo=;
- b=cHU0tz9pbQUHv5xMaXij+pGxsZLfQ4wV1zOulmWwZ8yp8QwgCfP5SLF0GvVBULX/yg
- 77LlQ+YAfEpBLl97TABuq/elhX2SQ1rlFGdXlle3TWsvwSiLlU7ECcnEqIzdC5sjJaAa
- h4162H/CsjyWYpax932yyWfB4A2WpnsBafZ80=
+ bh=NZ6LyDt1I6RspVW9P4aXJPRHhkKQi6s5JwOukJCaHJU=;
+ b=BVWVUlmt+xSKXFXXc0U+mLznZ6E6XKtQM6aYC/qiEpwmohm6POmFvjLcLQ72G71/Gb
+ 9sOrRwHUWeyvO5CwAJ2feuN+XxCs1HTayhQnDOSnPMbJ02BWwRbm8oQbiyiA2EWk8tGL
+ OKl5i/RtzYhuZmvwxcHueCyTTBuk4n5v9Nti0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741220834; x=1741825634;
+ d=1e100.net; s=20230601; t=1741220856; x=1741825656;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E7rPZTA14ouyqv0XIQoDk8itFV2LVK2EL3s3c6TfBjo=;
- b=MrAyB2qC20AquKz9X2rbMR/BrM7WQ17crwQFmg09JCPhfWDqfOWI/xXabnev3l8aBH
- 2dPkyly6AqH2xQfYUh3Ks46rDv0z/Agx8pqXBM0SYb8n5v94Y6GkzZoQZSHfj5UYNqsS
- B13ryslJZio5j0LGrwLczgnzni0kHkU3RCXStRAWC09mgNvzrTUOFIdWU6gamabaKOW5
- JXaBVr4q5cW5FWaSZykpxcRZ3/9cBm00Q6ue4y9L8vqMQUG4nkIj4S7f4QjQrpzzpavx
- dsD1OOXxORcirYbwUhVgOjwsRpCqwbRURDO4YcAmDAUCO0b/WDTgVcH4hvky+l9j7ODF
- R/XQ==
-X-Gm-Message-State: AOJu0YzOo4bD14dUfFNFygLJsYhGHanBkxdrjyiRY2XFCehD+pElHe5y
- VmbFHXbJ6AF18Bxfw9Adpd1vnPigFOoSsQK5z2U6icHfDwD8OHf+mvQo1g8OoPV0ajxG3nUFxck
+ bh=NZ6LyDt1I6RspVW9P4aXJPRHhkKQi6s5JwOukJCaHJU=;
+ b=HZTq2OPMm3PZJQL/bb02t5h5fTpslg/YOYWMVXoiRcRdn6DKJXGQFR38LdlkM/xMHZ
+ fR2h0cesE2fbulbQxlo9591LAA/KuGpH7+uK8jmuS18jDQkRTf1UdNKVAKXUoPcYQt58
+ hSU7l+EnjN+k2+Z1sMLCSO6NTKt4jSupcTq5IShnGbQXwV7sGYEWlGX19X6FoUpdc2BE
+ j2ZBnveb9EkO8LymG0AqW7cbGLkEKUHXblVqQSYlShCs7wYHuzdzhm0HEOKVu4O2qRdW
+ 3Ok/gH6RYdvJzoRL2J/87/hbLPVl2Ow5jycK+z+oNdRodbQU6U59wLBq2uqHRo4P00I6
+ VrIg==
+X-Gm-Message-State: AOJu0YzyAk5XItWVlGB3MeZVrd97rIJz0Oby7f2ipaoY5cEy/tF4XwgR
+ L/RF1IxBt699WWVn5ROr6X9z52hKfisASqjx/SBhRuwRg+W4hMk4Z6qUpp78CFtxK6aUifLtaJs
  =
-X-Gm-Gg: ASbGncsg/xvdzR9JP/gXh2jCbxIzD9QTmL0DEgmeywBJLfzasbQHCDaEJvZmOX4Jqq4
- rBJ9hL3Xgr6/HU12gdc1hn3I3TholTNTt9sjzEBY5ckTC5X4Gn9dm8yCtDwT9/DMZSBZ8kwNOyX
- JPgNxCwn9ATuY76US1rlMTynulZ8Mf0z6Gn7U3+4NRjf1Na34Rl+VlyJj1LNQq14w1F+gucYj0F
- 0lOEn5EOekeCd9qYlZt30sBYUDh7jinEmt1lkdN+Ken2pFvBoXYAJi5Fm/Y3O43geZVo/xiwA9g
- 3CZz00wLEBg9k0UlMVS9U5+aqsDNqQFmOnPf++182ecmVC3BZYG2QbqpaSBtjy2Zny7WTDlEK83
- 4Ct14PA==
-X-Google-Smtp-Source: AGHT+IHpfpDvoCwlUK6hDVCgjp+LgCY4nuAMrQorZrHCwH0YR4s3yleZfbeXdglrT0lqciWgrJNDTQ==
-X-Received: by 2002:a05:6602:4a06:b0:855:7837:ab12 with SMTP id
- ca18e2360f4ac-85aff8986bcmr775406939f.3.1741220834035; 
- Wed, 05 Mar 2025 16:27:14 -0800 (PST)
+X-Gm-Gg: ASbGncsmMR7W+xIzRv3JqPhwZmLrq8dLx2BAW31d0wfPeu6J3a6d3GZnAWSU/tI8ZiA
+ vSeIsuqRbNwWUWRR1ZgxxWGNkOt0s7hg070j4+pZo7SK79a/5RceufrkNMlWCq7CXEWSueig8hK
+ aGfnISK+G7rMf5BlGEP9bTu1u+oGKGYDj0Fhy4eZ+AmbY4z9gD7PYE3KN5Vrda8WB4aDWlNAjwM
+ HzvE5U9jJKr4+szuAbKRoB+jTprXWCc26uMNdFhK5o64XFiASzXS0y2WH2wkMHiFjTwcCm2lUJU
+ qYan24nr60/2wrJFWX6dFq2gffBB58cwgHsyJre9BQE9cFXAmduD66FDQmBF9cF7Ddo/hlkJkjH
+ 2lBic7w==
+X-Google-Smtp-Source: AGHT+IGhwk3mVHaImSmzd4J36BoNsS1MeCEZPrOlIgftYVZiIbQbOXlc3iS0ntJjnP+6AixhcNN75w==
+X-Received: by 2002:a05:6602:b8a:b0:855:9c88:788f with SMTP id
+ ca18e2360f4ac-85affaebd8fmr627737539f.8.1741220856470; 
+ Wed, 05 Mar 2025 16:27:36 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.27.11
+ ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.27.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 16:27:12 -0800 (PST)
+ Wed, 05 Mar 2025 16:27:34 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v5 18/29] boot: pxe: Use bootm_...() functions where possible
-Date: Wed,  5 Mar 2025 17:25:12 -0700
-Message-ID: <20250306002533.2380866-19-sjg@chromium.org>
+ Adriano Cordova <adrianox@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v5 26/29] net: Return the size from parse_args()
+Date: Wed,  5 Mar 2025 17:25:20 -0700
+Message-ID: <20250306002533.2380866-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306002533.2380866-1-sjg@chromium.org>
 References: <20250306002533.2380866-1-sjg@chromium.org>
@@ -100,156 +98,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than building a command line for each operation, use the
-functions provided by the bootm API.
-
-Make sure that the bootm functions are available if pxe_utils is used.
-
-Since SYS_BOOTM_LEN is not present for the tools-only build, adjust the
-code to handle that.
+Rather than setting global variables, return the size, if provided. For
+tftput, use the addr argument to store the save address, to avoid adding
+yet another parameter.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
 (no changes since v1)
 
- boot/Makefile    |  2 +-
- boot/pxe_utils.c | 43 ++++++++++++++++++++-----------------------
- 2 files changed, 21 insertions(+), 24 deletions(-)
+ cmd/net.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
 
-diff --git a/boot/Makefile b/boot/Makefile
-index 34bac26c4e2..f1e4444aa0a 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -10,7 +10,7 @@ obj-$(CONFIG_CMD_BOOTM) += bootm.o bootm_os.o
- obj-$(CONFIG_CMD_BOOTZ) += bootm.o bootm_os.o
- obj-$(CONFIG_CMD_BOOTI) += bootm.o bootm_os.o
- 
--obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
-+obj-$(CONFIG_PXE_UTILS) += bootm.o pxe_utils.o
- 
- endif
- 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 2ada5c4aaac..bbb6ff203b6 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -7,6 +7,7 @@
- #define LOG_CATEGORY	LOGC_BOOT
- 
- #include <bootflow.h>
-+#include <bootm.h>
- #include <command.h>
- #include <dm.h>
- #include <env.h>
-@@ -461,7 +462,7 @@ skip_overlay:
-  * Scenario 4: fdt blob is not available.
+diff --git a/cmd/net.c b/cmd/net.c
+index cc968e9460f..572fa75a72f 100644
+--- a/cmd/net.c
++++ b/cmd/net.c
+@@ -323,12 +323,14 @@ static int parse_addr_size(char * const argv[], ulong *addrp, ulong *sizep)
+  *		parsed
+  * @argv:	command line arguments, with argv[0] being the command
+  * @fnamep:	set to the filename, if provided, else NULL
+- * @addrp:	returns the load address, if any is provided, else it is left
++ * @addrp:	returns the load/save address, if any is provided, else it is
++ *		left unchanged
++ * @sizep:	returns the save size, if any is provided, else it is left
+  *		unchanged
+  * Return:	0 on success
   */
- static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
--			     char *kernel_addr, char **fdt_argp)
-+			     char *kernel_addr, const char **fdt_argp)
+ static int parse_args(enum proto_t proto, int argc, char *const argv[],
+-		      const char **fnamep, ulong *addrp)
++		      const char **fnamep, ulong *addrp, ulong *sizep)
  {
- 	/* For FIT, the label can be identical to kernel one */
- 	if (label->fdt && !strcmp(label->kernel_label, label->fdt)) {
-@@ -584,72 +585,66 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
- 			  char *kernel_addr, char *initrd_addr_str,
- 			  char *initrd_filesize, char *initrd_str)
- {
--	char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
- 	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
-+	struct bootm_info bmi;
- 	ulong kernel_addr_r;
--	int bootm_argc = 2;
- 	int zboot_argc = 3;
- 	void *buf;
- 	int ret;
+ 	ulong addr;
+ 	char *end;
+@@ -358,8 +360,7 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
  
--	bootm_argv[3] = env_get("fdt_addr_r");
-+	bootm_init(&bmi);
- 
--	ret = label_process_fdt(ctx, label, kernel_addr, &bootm_argv[3]);
-+	bmi.conf_fdt = env_get("fdt_addr_r");
-+
-+	ret = label_process_fdt(ctx, label, kernel_addr, &bmi.conf_fdt);
- 	if (ret)
- 		return ret;
- 
--	bootm_argv[1] = kernel_addr;
-+	bmi.addr_img = kernel_addr;
- 	zboot_argv[1] = kernel_addr;
- 
- 	if (initrd_addr_str) {
--		bootm_argv[2] = initrd_str;
--		bootm_argc = 3;
-+		bmi.conf_ramdisk = initrd_str;
- 
- 		zboot_argv[3] = initrd_addr_str;
- 		zboot_argv[4] = initrd_filesize;
- 		zboot_argc = 5;
- 	}
- 
--	if (!bootm_argv[3]) {
-+	if (!bmi.conf_fdt) {
- 		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
- 			if (strcmp("-", label->fdt))
--				bootm_argv[3] = env_get("fdt_addr");
-+				bmi.conf_fdt = env_get("fdt_addr");
+ 	case 3:
+ 		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
+-			if (parse_addr_size(argv, &image_save_addr,
+-					    &image_save_size))
++			if (parse_addr_size(argv, addrp, sizep))
+ 				return 1;
  		} else {
--			bootm_argv[3] = env_get("fdt_addr");
-+			bmi.conf_fdt = env_get("fdt_addr");
+ 			*addrp = hextoul(argv[1], NULL);
+@@ -369,7 +370,7 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
+ 
+ #ifdef CONFIG_CMD_TFTPPUT
+ 	case 4:
+-		if (parse_addr_size(argv, &image_save_addr, &image_save_size))
++		if (parse_addr_size(argv, addrp, sizep))
+ 			return 1;
+ 		*fnamep = argv[3];
+ 		break;
+@@ -385,6 +386,7 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
+ 			  char *const argv[])
+ {
+ 	const char *fname;
++	ulong addr;
+ 	char *s;
+ 	int   rcode = 0;
+ 	int   size;
+@@ -392,10 +394,10 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
+ 	net_boot_file_name_explicit = false;
+ 	*net_boot_file_name = '\0';
+ 
+-	/* pre-set image_load_addr */
++	/* pre-set addr */
+ 	s = env_get("loadaddr");
+ 	if (s != NULL)
+-		image_load_addr = hextoul(s, NULL);
++		addr = hextoul(s, NULL);
+ 
+ 	if (IS_ENABLED(CONFIG_IPV6)) {
+ 		use_ip6 = false;
+@@ -408,10 +410,14 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
  		}
  	}
  
- 	kernel_addr_r = genimg_get_kernel_addr(kernel_addr);
- 	buf = map_sysmem(kernel_addr_r, 0);
- 
--	if (!bootm_argv[3] && genimg_get_format(buf) != IMAGE_FORMAT_FIT) {
-+	if (!bmi.conf_fdt && genimg_get_format(buf) != IMAGE_FORMAT_FIT) {
- 		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
- 			if (strcmp("-", label->fdt))
--				bootm_argv[3] = env_get("fdtcontroladdr");
-+				bmi.conf_fdt = env_get("fdtcontroladdr");
- 		} else {
--			bootm_argv[3] = env_get("fdtcontroladdr");
-+			bmi.conf_fdt = env_get("fdtcontroladdr");
- 		}
+-	if (parse_args(proto, argc, argv, &fname, &image_load_addr)) {
++	if (parse_args(proto, argc, argv, &fname, &addr, &image_save_size)) {
+ 		bootstage_error(BOOTSTAGE_ID_NET_START);
+ 		return CMD_RET_USAGE;
  	}
++	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
++		image_save_addr = addr;
++	else
++		image_load_addr = addr;
  
--	if (bootm_argv[3]) {
--		if (!bootm_argv[2])
--			bootm_argv[2] = "-";
--		bootm_argc = 4;
--	}
--
- 	/* Try bootm for legacy and FIT format image */
- 	if (genimg_get_format(buf) != IMAGE_FORMAT_INVALID &&
- 	    IS_ENABLED(CONFIG_CMD_BOOTM)) {
- 		log_debug("using bootm\n");
--		do_bootm(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+		ret = bootm_run(&bmi);
- 	/* Try booting an AArch64 Linux kernel image */
- 	} else if (IS_ENABLED(CONFIG_CMD_BOOTI)) {
- 		log_debug("using booti\n");
--		do_booti(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+		ret = booti_run(&bmi);
- 	/* Try booting a Image */
- 	} else if (IS_ENABLED(CONFIG_CMD_BOOTZ)) {
- 		log_debug("using bootz\n");
--		do_bootz(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+		ret = bootz_run(&bmi);
- 	/* Try booting an x86_64 Linux kernel image */
- 	} else if (IS_ENABLED(CONFIG_CMD_ZBOOT)) {
- 		log_debug("using zboot\n");
-@@ -657,6 +652,8 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
- 	}
- 
- 	unmap_sysmem(buf);
-+	if (ret)
-+		return ret;
- 
- 	return 0;
- }
+ 	if (fname) {
+ 		net_boot_file_name_explicit = true;
 -- 
 2.43.0
 
