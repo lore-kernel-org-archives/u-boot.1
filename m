@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896C4C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44077C282DE
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:09:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B670181B42;
-	Thu,  6 Mar 2025 17:05:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 133E781CDE;
+	Thu,  6 Mar 2025 17:05:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QUt7SXYO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OktQeJ96";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5837805D7; Thu,  6 Mar 2025 17:05:39 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id 4DAF981CA4; Thu,  6 Mar 2025 17:05:43 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFA4880E94
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15C64819FF
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3d439f01698so2656585ab.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:37 -0800 (PST)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-85add67e9c1so31783939f.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277136; x=1741881936; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277139; x=1741881939; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XwCi5fFcCIl+1HqI/RJOgU0oPJvgxI88vMsJeVwX3JQ=;
- b=QUt7SXYO0kaR9REPeUPHjAnzyQ7Tv70DlToADAoJo7KvoZV/IgU39CcokunPCQvKhE
- ULCPkRhbMJ9RvV0k3CBs6tjpC0HK/HOU/1aWujCLfspW6uRJKnZav3vaXE9Va5ROPcIW
- Rolbtxf+bk+oT2eTn2JSN4zNGZYIhBxC0/lqw=
+ bh=oyCyNfvr7ekEAM/HrefntssbTGBF9fursFujLpQtXfM=;
+ b=OktQeJ96XHZSoktwg9NJz6qEAGiT/uKg7407deTqF5GGCsyNe9QkOGdOnoVj+hOu9l
+ 2ChWZOrVbkGr7Spqi59k5aNM1jboddzUcx9G7iugBzJ1h2q0SBAXnLcvajIcZwla2m8y
+ RCd5PvQY+5dmtADGfi62Vh4igwZ84C+72Ol8I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277136; x=1741881936;
+ d=1e100.net; s=20230601; t=1741277139; x=1741881939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XwCi5fFcCIl+1HqI/RJOgU0oPJvgxI88vMsJeVwX3JQ=;
- b=r7oKGA0TwSR1IrHiR8GP2EeymQ27m7xYmZrIXYLBQzG10/a2+v2hIc7MfsO93/hY5m
- jjFy/RW1akOmY7t7Gdb7GY+Y44SMxatgTrj6hBHxBAi9UzxZh4fFgOTa0uKKKtaXqQe6
- TRHWBGn6DWpEw6gu/z4mbXd8xPljBBG6469+ZncR6R9cHpE9ha+M16GglhnJgDj0lffV
- ykETw7WeWmsyBpDFkN13qKNCf9HSmb/0R1QYsi8/+bvfOSXfMpCtoU7Qd32U/IE03kkO
- nZJhbq1mTyQ9lNHCAhwbOnuak2gbedC3dbe4AjKlHM32YJAbfxY8dzgXLe+bKTRua9Hl
- O5pg==
-X-Gm-Message-State: AOJu0Yy8HR/QjhgVzpGf3AnbKjZp/ADo+pzu3bp+i2P1wfM5U1Ed7/7/
- 9l1NIVV0SSELEPiCZZYbbFn7Br5PDYOfc52u2uGALCaSF+fGHYwSfD88Q6MnzFplbeAzob8lhn8
+ bh=oyCyNfvr7ekEAM/HrefntssbTGBF9fursFujLpQtXfM=;
+ b=QhPiVDMm5nNUn/ddhwWM46UIfZy4lMHjVfmXRmHgE6mnsVmQ/6QVkBzTxmH0hxDC/X
+ XId2JTw1CIunhz2MdUSk3S4SaeUssJdOjxTLU1o9DuxEdjKFmrUIksVzRVVI5fS4+1YE
+ oNfHA8fnpimEWgigJ9PRLovwHq2iBABiLlvsKyNA5JmQ9z+xNcBBzybVbux4xDHqepdn
+ taGEl1VFJKMjAKzUdUculYbtUBdCY+yp5N8ROlUIAdNrYxFAx7Wr8Eionc7whpjlVG9X
+ 1z7zi4dQAigHUiMgAeQliIJWaJWZtxFAdE0NJzrwcXZ3q3+JiryXxTzv2TuqGU6/mhDC
+ vVZA==
+X-Gm-Message-State: AOJu0Yxp49+iHkF9B8uz0GOMH8P5gPQxVMFuEqzAtHezxns3264ggKMb
+ wi7foE4J4BR+ur4/4srTRm7/XeZkp4SdSzBC0WpkQQM4h4DUVs8lO0HiFS2agS01HW+tNHxqpNQ
  =
-X-Gm-Gg: ASbGncshoKKPW6YAmDqabj+hWw9Y5aws1dgmar02ZckENiAAVMFMSUIgEB7BJWziDJf
- FTrBSwWCBD1WSodpu+FKWPtlb7bpMnkkDBMGnL4n+guzAFd0g8ygSjeWERGvu6Shn+ZDU5lRi4y
- 547KU1+wA5ZRStdFFoCoS7TjFaIWUoud1VAuHoEOPhSAWVnJ3K8y6jnhIGGNwTWD7P/k2S+Ab6z
- cL8t9CtwJCqtjjlighX2uEBsJs1CJBquePPxWxLRUey0ZREdpQUlfH0LKkbYHWuXVzN/VRv6b5x
- 8lgk5odJcb8yLFUX7Z57IXdL4yADZF9VteSPriVgI9+rp0r4QuWtY+C78zWeuNHd3+5BXP7e628
- doCcRcg==
-X-Google-Smtp-Source: AGHT+IFR/TQg1m/l0oDyoigqPvb5Cv8S1oc6tKRPOfr+VHjzMOQAGDvlXe+YvKVSGWIoTIoR5y+Qcg==
-X-Received: by 2002:a92:d945:0:b0:3d2:ed3c:67a8 with SMTP id
- e9e14a558f8ab-3d436aa213fmr36270575ab.4.1741277135861; 
- Thu, 06 Mar 2025 08:05:35 -0800 (PST)
+X-Gm-Gg: ASbGnctgIOLFSxA42gL0Nl6/daVc30SeBtoZrnPAQ0+uVaBg3qtVzz4HR4oYuHVoRfd
+ T6AkxknMGeVa6EglcJyKuxSRnirGbR8Wa+AqFWy0Hi9mgfHkVRAqn4w9HD+8jRr+XyAHpZiaYu9
+ ENsI71oweW+ucsyWUz3kXiW8FeVnzwPkq6gJEgJ/hJBXCM2Tk7gmg3mNc7OvbX2vrTu3hj5LTEy
+ L+9XexyXviNeQv6x0AOMLQQFLxBcd15zSRIPzXUw+pQwZlNWHPCxWqOD5GH7BPwcsQEE82MMs4x
+ iwxRBnW0L5BVgAGGybMC23jIAynuQkfjFXfqk/a9T1gdnnI4r2pAe8Rp2r3feEW9lZNJnUlRCN+
+ 5lAIKeA==
+X-Google-Smtp-Source: AGHT+IE35cwds38XLBsq4qVDFHy5CF96q/OEu8Gbv1e1955+1q1HXExnHNLikKYyJo7Ye/CU0KKxGA==
+X-Received: by 2002:a05:6602:6a98:b0:855:5eba:404f with SMTP id
+ ca18e2360f4ac-85b0eadad71mr421876339f.7.1741277138360; 
+ Thu, 06 Mar 2025 08:05:38 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.34
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:05:34 -0800 (PST)
+ Thu, 06 Mar 2025 08:05:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 23/47] x86: Update mtrr command to support 64-bit values
-Date: Thu,  6 Mar 2025 09:03:50 -0700
-Message-ID: <20250306160428.3041057-24-sjg@chromium.org>
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Philip Oberfichtner <pro@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 24/47] x86: Update cpuid_eax et al to work on amd64
+Date: Thu,  6 Mar 2025 09:03:51 -0700
+Message-ID: <20250306160428.3041057-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,8 +96,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The MTRR registers have 64-bit values. Update the command to use 64-bit
-values so that memory larger than 4GB can be handled.
+The existing functions work but the register clobbers are wrong, so
+strange bugs results.
+
+The original functions were taken from a very old version of Linux.
+Update them from Linux 6.13
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -104,35 +108,102 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v3)
 
 Changes in v3:
-- Add new patch to update mtrr command to support 64-bit values
+- Add new patch to update cpuid_eax et al to work on amd64
 
- cmd/x86/mtrr.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/x86/include/asm/cpu.h | 75 +++++++++++++-------------------------
+ 1 file changed, 25 insertions(+), 50 deletions(-)
 
-diff --git a/cmd/x86/mtrr.c b/cmd/x86/mtrr.c
-index 93be84f74b8..289865515ef 100644
---- a/cmd/x86/mtrr.c
-+++ b/cmd/x86/mtrr.c
-@@ -13,7 +13,7 @@
- static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
- {
- 	const char *typename = argv[0];
--	uint32_t start, size;
-+	u64 start, size;
- 	u64 base, mask;
- 	int type = -1;
- 	bool valid;
-@@ -26,8 +26,8 @@ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
- 		printf("Invalid type name %s\n", typename);
- 		return CMD_RET_USAGE;
- 	}
--	start = hextoul(argv[1], NULL);
--	size = hextoul(argv[2], NULL);
-+	start = hextoull(argv[1], NULL);
-+	size = hextoull(argv[2], NULL);
+diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
+index 1f1b545ea50..5d24c17f8a3 100644
+--- a/arch/x86/include/asm/cpu.h
++++ b/arch/x86/include/asm/cpu.h
+@@ -109,61 +109,36 @@ static inline struct cpuid_result cpuid_ext(int op, unsigned ecx)
+ 	return result;
+ }
  
- 	base = start | type;
- 	valid = native_read_msr(MTRR_PHYS_MASK_MSR(reg)) & MTRR_PHYS_MASK_VALID;
+-/*
+- * CPUID functions returning a single datum
+- */
+-static inline unsigned int cpuid_eax(unsigned int op)
++static inline void native_cpuid(unsigned int *eax, unsigned int *ebx,
++				unsigned int *ecx, unsigned int *edx)
+ {
+-	unsigned int eax;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax)
+-		: "0" (op)
+-		: "ecx", "edx", "edi");
+-	return eax;
++	/* ecx is often an input as well as an output. */
++	asm volatile("cpuid"
++	    : "=a" (*eax),
++	      "=b" (*ebx),
++	      "=c" (*ecx),
++	      "=d" (*edx)
++	    : "0" (*eax), "2" (*ecx)
++	    : "memory");
+ }
+ 
+-static inline unsigned int cpuid_ebx(unsigned int op)
+-{
+-	unsigned int eax, ebx;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%ebx, %%esi;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax), "=S" (ebx)
+-		: "0" (op)
+-		: "ecx", "edx", "edi");
+-	return ebx;
++#define native_cpuid_reg(reg)					\
++static inline unsigned int cpuid_##reg(unsigned int op)	\
++{								\
++	unsigned int eax = op, ebx, ecx = 0, edx;		\
++								\
++	native_cpuid(&eax, &ebx, &ecx, &edx);			\
++								\
++	return reg;						\
+ }
+ 
+-static inline unsigned int cpuid_ecx(unsigned int op)
+-{
+-	unsigned int eax, ecx;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax), "=c" (ecx)
+-		: "0" (op)
+-		: "edx", "edi");
+-	return ecx;
+-}
+-
+-static inline unsigned int cpuid_edx(unsigned int op)
+-{
+-	unsigned int eax, edx;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax), "=d" (edx)
+-		: "0" (op)
+-		: "ecx", "edi");
+-	return edx;
+-}
++/*
++ * Native CPUID functions returning a single datum.
++ */
++native_cpuid_reg(eax)
++native_cpuid_reg(ebx)
++native_cpuid_reg(ecx)
++native_cpuid_reg(edx)
+ 
+ #if CONFIG_IS_ENABLED(X86_64)
+ static inline int flag_is_changeable_p(u32 flag)
 -- 
 2.43.0
 
