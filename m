@@ -4,81 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F829C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:14:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E75A4C282DE
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:14:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB10981DFA;
-	Thu,  6 Mar 2025 17:06:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD88D81249;
+	Thu,  6 Mar 2025 17:08:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N49chzGT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B9W2ucdR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED6F181E72; Thu,  6 Mar 2025 17:06:32 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id EB90C811C1; Thu,  6 Mar 2025 17:08:09 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B2181DFA
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:06:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF5E48164E
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:08:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-85aec8c95c4so68406339f.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:06:30 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5b572e45cso1419284a12.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:08:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277189; x=1741881989; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=agAGdBNoas5c/RnTgHY5mNPdXr1Z092ltVStE0Kp5Kk=;
- b=N49chzGTHzJs4IhaqxqGu01j7tHGvKSPNucOH0kp5ezwCNWJR9Q+ZripSvVUtsXwC2
- C+rad5D4VVIjdPtrBW/Qj1jw7BbyXM5nayEztk1iTENEy0rhhJ6j9fs3tpYAaKv220/e
- qfsbne9rDwoLQXuuREHddUR/z6+iierVQ1R4Y=
+ d=chromium.org; s=google; t=1741277284; x=1741882084; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jR8r6aFGm6QfecuBj1JZFxhliA3jOI+OCIP57pD9U0s=;
+ b=B9W2ucdRClHc8e33M3R63avu7fO0eaEfoc1RpUzvfPBQk1WoBKNm80ng7jxPXCAhml
+ +B1MBJLXuMgDgTLYeN/MLyyuRQANhlMUSvtbBbPTzQv+dsP5X2xzofff6jn4p+Vr/5o1
+ Tr4RqBwo69qN9YxjGXqvnr4K5ZSMYxfjkv7Eg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277189; x=1741881989;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=agAGdBNoas5c/RnTgHY5mNPdXr1Z092ltVStE0Kp5Kk=;
- b=lhMHNQceZaeQ6HvMiEpAGydrjP8Vibu77Q6IqbOGDqcUwvRmVchTe4Ib8yIT4kKMt1
- UiAZLeARSnxnoeDzD9wseVV4+PsgtUrdm9WQ7TnmiNmXCPtCx3hiCDfRC2ICwI90zwuk
- RDiQIDtCf7jgbM8q4Dfbac1E3txgMAJ4Yr16BCb/2dz4/nfk6AFlehLbgwA/H34YhYEy
- EL4n4EtS5d/bJdddq5uf6hp/NAsAJjG7YVzireDDxzEnjL9NxPbfmoaMNcJr4MHRl8CV
- j6SeY/HMQNsuuFzzpdDvt+8FktSDOQytF7D8wcoleSl58VxQ0TUNNZQA0bAGlY/z4Lch
- nL7g==
-X-Gm-Message-State: AOJu0YzPHkC3/q1XptZBdqfacF2ezBRd1MsGp+5Zhk1fOx2jPjB+wOLs
- DIUNFrtWQ2jdhzAcsvFHlxefUjGvITxr0iB041w8NfqypaOWRdxfgTV2iIUVhoEiJkUvzutoaZA
- =
-X-Gm-Gg: ASbGncs+E8/BFrvOFH3/BjNQKiGhrpKp+Ohc+Ce4zLXaelGq60Ix+EUFoBfd5zGnkuE
- llqpLVJG6GxN5VsvqHUdEi7JfJR6YYOa4YD66f7gJKRnl5Hw5BnBlKnWSP3UZ0hMxpkhwGAKMKW
- kGNsUMCLAqHfUhoXRE364LOH9MvsZhuckqbO37me/F4RMbDaQRFXJC/4ZWbUXThQQRiwlqHGNG6
- EKDMCrthPwRtVlEALxPpWrPrhrrVa5x31eGCR2QEfUiH/K69otcvPwPCDtQkufCVIxaGv2gfjAU
- 2douqSDQHgxhNHprVkBu+gic9iLDZHCZWArrb6VqfvidG69zg8Q/wNAJ4gtDi2o98shF/LLHR7X
- d7uzGPQ==
-X-Google-Smtp-Source: AGHT+IE8l/4KstJGn2HA5TZezdgxZ77HYM0ZeCwIzba07D0EywnqN0GnQ5CxxVcEYIeH437s2gxClQ==
-X-Received: by 2002:a05:6e02:1d8d:b0:3d3:e287:3e7a with SMTP id
- e9e14a558f8ab-3d441962873mr415965ab.19.1741277188738; 
- Thu, 06 Mar 2025 08:06:28 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.06.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:06:27 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 47/47] test: Add a test for booting Ubuntu 24.04
-Date: Thu,  6 Mar 2025 09:04:14 -0700
-Message-ID: <20250306160428.3041057-48-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
-References: <20250306160428.3041057-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1741277284; x=1741882084;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jR8r6aFGm6QfecuBj1JZFxhliA3jOI+OCIP57pD9U0s=;
+ b=UZc2Yv9JD6NVlvlwN7XegE9xnivMY9jUSd/wUvif2fd2l0zOPdE64ihfsp6MSipV7D
+ CKAO4wOW/kD0Mih2pN/N46Wfj516l67/oj/XJq71MPCIqozKJTI7tGA+sRxETjIQUTIQ
+ BOZVrUz4P6no4AZWf1uHUK3+Ryod/79YaqmCJ24fWagPoe7nUWpCDos9kioS8FcB68hP
+ WKOPx2YoiUMsaaIpZVosiwbtg9OFqPO9+4uYfal7HYp/hg0mH8RX//+m1J6DTldFtyHs
+ PwJzJTDE1Fzxf5WiU2WKIqLtcGPOiFuCwvms7bKOblXlNXUtzitGcV77K8Joa3zJqRpR
+ xz4g==
+X-Gm-Message-State: AOJu0Yx4Byv8bfjDskT5qdUAk5ni4tfZ+bZfw/yrcOvpbQuOPnyqtSyZ
+ rP0fv5q6N3U/6pv4CMM4Xll3QDWv5iCBEYOs/+0w/+TBNx0XqGDBSeaxCcZNS9mnwQrJqrDpumn
+ P8VApAhY39YoTNjJ57PKyxWsEAJ+xjnUpo2g+
+X-Gm-Gg: ASbGncsLmiyGUC6vEiUxx3uDk49Xhebd1Sj/I3V17FkIvpO3iJpyXByPhyDlW1/x+1U
+ ENvzdIgM6BDtChuR5t0/A7uY3haTb/vCmc+ACBNMqOq8/Cv6nGEDoYgq55iqCBTqmC6cWDgCbRc
+ cHMn9OoR+dE3sRKhd7WGdVg3YXNPw=
+X-Google-Smtp-Source: AGHT+IFdpSAV5CdptD2GumgFd7nO32hUUICr3Qe9Ewffz4clG8QU3Ci1mg95++0biasFEbulgjgIubm2w0dXYu6dCGU=
+X-Received: by 2002:a17:906:3684:b0:abf:5d9b:8076 with SMTP id
+ a640c23a62f3a-ac20d92d606mr741455366b.33.1741277284106; Thu, 06 Mar 2025
+ 08:08:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241018030027.842749-1-sjg@chromium.org>
+ <87jze5ao26.fsf@prevas.dk>
+ <CAFLszThFNXxM2cWdMHWFP8NsH5x6-X9u7aWNpPokgLWRAA55=g@mail.gmail.com>
+ <CAFLszThznjs9Ama40sMtnrdMhThB0TfS4usVSH+yAZw-2Tj0tQ@mail.gmail.com>
+ <87pliw62xn.fsf@prevas.dk>
+ <CAFLszTjyJW05xpjg23B2KHMi9-tZVZhRd0Zpr3A7yfcQJc+4MQ@mail.gmail.com>
+ <87zfhy44v3.fsf@prevas.dk>
+In-Reply-To: <87zfhy44v3.fsf@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Mar 2025 09:07:52 -0700
+X-Gm-Features: AQ5f1JraJrLyD11zV8faXx35FuNRHVuaawmTjZoVVnOmckA-Frzg8jaNTjt6YcU
+Message-ID: <CAFLszTidXeiY_OtVg75vD18pXjTKykamsZgNpFqOuMm20mZ=Mw@mail.gmail.com>
+Subject: Re: [PATCH 0/8] membuff: Add tests and update to support a flag for
+ empty/full
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Ion Agorria <ion@agorria.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Marek Vasut <marex@denx.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,100 +108,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that U-Boot can boot this quickly, using kvm, add a test that the
-installer starts up correctly.
+Hi Rasmus,
 
-Use the qemu-x86_64 board in the SJG lab.
+On Thu, 6 Mar 2025 at 07:21, Rasmus Villemoes <ravi@prevas.dk> wrote:
+>
+> On Wed, Mar 05 2025, Simon Glass <sjg@chromium.org> wrote:
+>
+> > Hi Rasmus,
+> >
+> > On Tue, 4 Mar 2025 at 11:55, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> >>
+> >> On Tue, Mar 04 2025, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> > Hi Rasmus,
+> >> >
+> >> > On Fri, 18 Oct 2024 at 08:55, Simon Glass <sjg@chromium.org> wrote:
+> >> >>
+> >> >> Hi Rasmus,
+> >> >>
+> >> >> On Fri, 18 Oct 2024 at 01:05, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> >> >> >
+> >> >> >
+> >> >> > If you want to do the churn of renaming anyway, I suggest doing it by
+> >> >> > adding an implementation using the proper scheme under the new name,
+> >> >> > switch users over, and dropping the old. IMO, this series as-is brings
+> >> >> > no value (except for the tests, of course).
+> >> >>
+> >> >> OK. Do you think this series gets us closer to that, or further away?
+> >> >
+> >> > I didn't get a response to this (which is not a problem, I miss things
+> >> > all the time). Anyway I don't like the power-of-two restriction and
+> >> > you can see my other responses above. I've applied this to my tree as
+> >> > I want to have the tests in place.
+> >>
+> >> I stand by my earlier comments that this is the wrong way to implement a
+> >> circular buffer. I hope Tom doesn't pull this.
+> >
+> > OK. Are you saying that you think it should only support power-of-two
+> > sizes,
+>
+> Yes, because that's the natural way to implement such a simple data
+> structure on real hardware, and I don't agree that it limits its
+> usefulness in any way. See how the linux kernel implements unix pipes,
+> and their kfifo helper.
+>
+> > or something else? What specifically do you want?
+>
+> I don't "want" anything in particular. I'm merely voicing my opinion
+> that I consider this approach to implementing a circular buffer
+> inferior.
+>
+> > This series:
+> > - adds tests
+>
+> Yes, always a good thing.
+>
+> > - renames to membuf
+>
+> While we can agree that is better than with two f's, I don't see it as a
+> huge virtue.
+>
+> > - shows how we could switch to using an empty/full flag instead of
+> > leaving an empty slot, so we can see the code-size image
+>
+> As I've said previously, I believe that actually makes the whole thing
+> even worse. Not using the natural wrapping/masking is already
+> error-prone enough, but needing to have two parallel implementations
+> living in the same source files with #ifdeffery; please, no. Do one or
+> the other, unconditionally.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Sure, I can remove that, since it seems that the flag is not that
+useful. I'll send a patch.
 
-(no changes since v3)
+>
+> > - does all this without requiring the size to be a power of two (which
+> > limits its usefulness IMO)
+>
+> On that, we'll just have to agree to disagree.
 
-Changes in v3:
-- Significantly expanded to correct e820 and other issues
+An example of this is parsing a text file. At present you can just:
 
-Changes in v2:
-- Add more patches to support booting with kvm
-- Add new patch with a test for booting Ubuntu 24.04
+membuf_init(size...)
+membuf_readline()...
 
- .gitlab-ci.yml               |  5 ++++
- test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
- create mode 100644 test/py/tests/test_distro.py
+whereas presumably with power-of-two you would need to
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index c6461f33982..4c8af2890f4 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -747,3 +747,8 @@ zybo:
-   variables:
-     ROLE: zybo
-   <<: *lab_dfn
-+
-+qemu-x86_64:
-+  variables:
-+    ROLE: qemu-x86_64
-+  <<: *lab_dfn
-diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
-new file mode 100644
-index 00000000000..51eec45cecc
---- /dev/null
-+++ b/test/py/tests/test_distro.py
-@@ -0,0 +1,53 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2025 Canonical Ltd.
-+# Written by Simon Glass <simon.glass@canonical.com>
-+
-+import pytest
-+
-+DOWN = '\x1b\x5b\x42\x0d'
-+
-+# Enable early console so that the test can see if something goes wrong
-+CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
-+
-+@pytest.mark.boardspec('qemu-x86_64')
-+@pytest.mark.role('qemu-x86_64')
-+def test_distro(ubman):
-+    """Test that of-platdata can be generated and used in sandbox"""
-+    with ubman.log.section('boot'):
-+        ubman.run_command('boot', wait_for_prompt=False)
-+
-+    with ubman.log.section('Grub'):
-+        # Wait for grub to come up and offset a menu
-+        ubman.p.expect(['Try or Install Ubuntu'])
-+
-+        # Press 'e' to edit the command line
-+        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
-+
-+        # Wait until we see the editor appear
-+        ubman.p.expect(['/casper/initrd'])
-+
-+        # Go down to the 'linux' line
-+        ubman.send(DOWN * 3)
-+
-+        # Go to end of line
-+        ubman.ctrl('E')
-+
-+        # Backspace to remove 'quiet splash'
-+        ubman.send('\b' * len('quiet splash'))
-+
-+        # Send our noisy console
-+        ubman.send(CONSOLE)
-+
-+        # Tell grub to boot
-+        ubman.ctrl('X')
-+        ubman.p.expect(['Booting a command list'])
-+
-+    with ubman.log.section('Linux'):
-+        # Linux should start immediately
-+        ubman.p.expect(['Linux version'])
-+
-+    with ubman.log.section('Ubuntu'):
-+        # Shortly later, we should see this banner
-+        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
-+
-+    ubman.restart_uboot()
--- 
-2.43.0
+int newsize = ALIGN(size, next power of two....)
 
+void *newptr = malloc(newsize)
+memcpy(newptr, data, size)
+membuf_init(newsize...)
+membuf_setup([so that only 'size' bytes are present])
+membuf_readline()...
+
+>
+> Rasmus
+>
+> PS: Something like
+> https://gist.github.com/Villemoes/332ac7a5dfc983c58ad40773c7bc6385 is
+> what I consider a simple and readable implementation (it may be buggy,
+> of course).
+
+There are no tests, so who knows? But also, it doesn't allow 'raw'
+access which is considerably more efficient in many situations, e.g.
+you can find out the amount of space, read directly into that space
+without a separate buffer, then confirm how much you read.
+
+Certainly my code can be improved.
+
+>
+> Frankly, the triple-pointer use in membuff.c frightens me, and that the
+> implementation of something as simple as membuff_avail() involves a
+> struct copy and calling membuff_getraw() in a loop makes it really hard
+> to reason about and verify.
+
+We have tests for verification. But how about you send a patch against
+the API in my tree? If we can come up with something we both like,
+then perhaps Tom might apply it.
+
+Regards,
+Simon
