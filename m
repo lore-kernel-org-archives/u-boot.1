@@ -4,93 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D812C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 12:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF5EC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 12:40:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E660980F4C;
-	Thu,  6 Mar 2025 13:38:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DB71680F4C;
+	Thu,  6 Mar 2025 13:40:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F5ZTllPC";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="b6bVV1Af";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55F0980FE1; Thu,  6 Mar 2025 13:38:44 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F054F810DC; Thu,  6 Mar 2025 13:40:55 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C7B6808A2
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 13:38:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BCEA808A2
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 13:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-307bc125e2eso6400781fa.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 04:38:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741264721; x=1741869521; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6ITbBpIrgJwubn3JwKu3KxSc3TrtYlCxK/ZbB1PJ7hM=;
- b=F5ZTllPCCeeVYX5Z4gI7WtK+QWpp2akfj+rJ7fhXAtMxpqTjgbKFcaMDLQLZtLie0H
- oMy125kCDx74nH/sQr33bXjvQB1GYUn4WbBDh1KKDDrgrJA/9KRw8vh+542L86XNREfZ
- 1iR4hft3KkmetWY3rA4+7Uy6YvhlIhKh2QK8xDtCobcs33ndp9/adhf/YtzcSwGzvf2e
- vhxhwgtEAzBfjXjMzryl5PeY+932YDQQLxlv4haqzzAV6ZSDDRQx8myMEuHF2A36PqqE
- ff9niUsau52FV9GbXgLeRSsfpZBQ/C3VPf2jxqsDAtcJbtlQFCujbWTvZ0WOpt/8Bf9z
- L1vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741264721; x=1741869521;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6ITbBpIrgJwubn3JwKu3KxSc3TrtYlCxK/ZbB1PJ7hM=;
- b=N2albAvgmdVmmaXgjLcgnJUCCS79pimBQAW6u91AqVV1A+0mOhS0imHF2ieV9s9Qg5
- Txz2o1NEK53Upy5LHDY9XHJpU5Z8ma14I6JK/v9Ij/ZYdSIxIkO3DJLZ2QpawTfCpeQJ
- dsEqcPBDVRkQSPxdZWszuzD1j0d8H5OP/tjF2QGRQVVUSpGQ9UTHsLaFghWWJUVLHuqu
- T8HJgHPYorY1gAxt00qiyt7oB5d8su7Qn7XhorTlra0vujrPYRJD8KSNMGXJZDz9qI5d
- Z8/MgYilMkrMZpWDSW3v6Bbue5VRvAXVfGZLcaO8XcdYROERiB6xeSRQR6btC/jscxci
- pOpQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCNGMuMI9nRIBw88pUdml3xFmelB+acpRcpg7Rmg55DYZ5m6pzRk9TUWYXwxXNKO6HmcCmcno=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/l7JZHk4bZ+LMCnrkCYf81PkeASqiy8wV6YQ29IVlX09a2CSl
- 2tfZ3iU0g9Ke83bP/xKES2O7oGaWMPM8XiEP7ydx2fts/syEvcMkMHj6x0+GRXLsuXsEcKtdzG9
- uZPElUJnAeNG0I12hwPVeytgLU1k=
-X-Gm-Gg: ASbGncuwTZfiiXTDa36KnrGkoSSesTAOcLuan9rC0G87FUwz8m4FpzZ5FPamo7iEr03
- yHyliZvPhGm+9j388eMX/J2JEUiAEfTtLOSnYLSCl/Rm5lphfdqjCqcxATaEMne07RJ0SVDDYq5
- XFS1hOHKG/W+9U/FheG858BKAaJk0ONYfP1DSfRWZxQ4USYwPdSKlTu/Dg
-X-Google-Smtp-Source: AGHT+IHcnCSesxNRn91tS1Fh0U9PBHnkzpjV5R8w5IWnev8VRtBpmh4Ow2Z4ACipjgnlIWCbPDyDiNUD9CtJdFMSm/I=
-X-Received: by 2002:a2e:909a:0:b0:308:e8d3:7578 with SMTP id
- 38308e7fff4ca-30bd7afc8e5mr25573631fa.35.1741264721167; Thu, 06 Mar 2025
- 04:38:41 -0800 (PST)
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 4D06925C4E;
+ Thu,  6 Mar 2025 13:40:53 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SBSwVqsMzJoH; Thu,  6 Mar 2025 13:40:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1741264849; bh=k3Braey+FknIPM3SJ80fc898W1n1V9aX/u9nZrNYjwQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=b6bVV1Af8Urz9gFxInEaDRwDlB646HL8Vqazsq70gidgjUt+kuinWdddeyr/hLK+8
+ o+tT5+Ex88aSu22AP1TqeRq6gunrx6IxNQ+/aijl0wxMe4QxKaNuWEssO3DCS1QG59
+ skhwbBBTWhzT7ZetiFdb0Y0lw12jeW6lwxE7BFhRFaYmJHnQbmgx/3eDZe+tnTHPgX
+ +kHR4hbo5I7s85SZxw3TpEQM+gv/o3nhZv8ZMu37giA8+9YaoM6O1TLUsEM6OKEo+W
+ avM95JmJx4XM5cX8KL90+QDaw2H+ucET3ZGniF/bMq3zJPNvmqxoLnXj0bYE46eUuI
+ SCgYzjJtXTn/Q==
+Date: Thu, 6 Mar 2025 12:40:23 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Leo Liang <ycliang@andestech.com>
+Cc: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Paul Walmsley <paul.walmsley@sifive.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>, Anup Patel <anup@brainfault.org>,
+ Atish Patra <atishp@atishpatra.org>, Green Wan <green.wan@sifive.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Simon Glass <sjg@chromium.org>,
+ "Angelo Dureghello" <angelo@kernel-space.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 5/5] riscv: select OF_HAS_PRIOR_STAGE by default if SBI
+ is enabled
+Message-ID: <Z8mXpFvGu-EcYkOH@pie.lan>
+References: <20250227144734.61458-1-ziyao@disroot.org>
+ <20250227144734.61458-6-ziyao@disroot.org>
+ <Z8mCUtgAW2qujI13@swlinux02>
 MIME-Version: 1.0
-References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
- <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
- <20250303170640.GS2640854@bill-the-cat>
- <CAOMZO5BTCir859QDcR9XEDTnc4JnMHdCSLXTe94Z9z_FY5bwbg@mail.gmail.com>
- <20250305181703.GW2640854@bill-the-cat>
-In-Reply-To: <20250305181703.GW2640854@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 6 Mar 2025 09:38:29 -0300
-X-Gm-Features: AQ5f1JruN9m2UNKfKFO1vgji-I8R2GqTHPOzrtS9kO_X7UeBd2F4epSnaqP7k6w
-Message-ID: <CAOMZO5D_WeB+iv3YzVeBbfL3o1Wr250aM3+phGe7i9Luus9uzQ@mail.gmail.com>
-Subject: Re: [PATCH v4 00/12] Add imx8mp video support
-To: Tom Rini <trini@konsulko.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- Ian Ray <ian.ray@gehealthcare.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <Z8mCUtgAW2qujI13@swlinux02>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,11 +77,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 5, 2025 at 3:17=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+On Thu, Mar 06, 2025 at 07:09:06PM +0800, Leo Liang wrote:
+> On Thu, Feb 27, 2025 at 02:47:33PM +0000, Yao Zi wrote:
+> > Availability of RISC-V SBI service implies a prior stage exists. As SBI
+> > firmware usually passes a FDT to the loaded program, let's select
+> > OF_HAS_PRIOR_STAGE if SBI is enabled.
+> > 
+> > With previously added fallback version of board_fdt_blob_setup, S-Mode
+> > RISC-V ports use the SBI-provided FDT by default. This covers the most
+> > common usecase, where a SPL (probably the U-Boot one) selects proper
+> > devicetree, loads SBI and U-Boot then invokes SBI with the devicetree.
+> > 
+> > Signed-off-by: Yao Zi <ziyao@disroot.org>
+> > Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+> > ---
+> >  arch/riscv/Kconfig | 1 +
+> >  1 file changed, 1 insertion(+)
+> 
+> Hi Yao,
+> 
+> This patch would fail some of the CI tests.
+> I will take other patches from this patchset first,
+> and could you take a look at the CI tests issue ?
+> (https://source.denx.de/u-boot/custodians/u-boot-riscv/-/jobs/1049827)
 
-> The series is delayed until someone has a chance to look harder at
-> what's causing the handoff test to now fail.
+Sure, will have a check later.
 
-Ok, I marked this series as "Changes Requested" in patchwork.
+> Best regards,
+> Leo
 
-Miquel, please make sure the next version passes CI.
+Thanks,
+Yao Zi
