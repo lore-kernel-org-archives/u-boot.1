@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C91C282DE
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D325BC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:05:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 670478141D;
-	Thu,  6 Mar 2025 17:05:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 507E5817C4;
+	Thu,  6 Mar 2025 17:05:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G+OadNDD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mr2RqzJk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD52C805D7; Thu,  6 Mar 2025 17:04:59 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id E8F76805D7; Thu,  6 Mar 2025 17:05:00 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FAAD816AB
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:04:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 245FA81703
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:04:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-85ae9566c52so23724339f.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:04:56 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-851c4ee2a37so54180739f.3
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:04:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277094; x=1741881894; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277095; x=1741881895; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=scYAFHQt+yZLnJPuXsDZJw8jiztjZtxUpNqeXfeVN2s=;
- b=G+OadNDD0+5OoMEmvKho8JLk2gWuXRcAe3ZfDKAYYsTwgD9nKsRkRXHPHYYdKOuVFq
- lJdXnm8FPkpwS8U11yvu4ReF4Y2w/lIbEnq9NdwhqVjb51Bbu/tPs808MIHr3XwvIqcL
- hghgASyzii/6V9ORJElOnqbhmfvZAcBNRgst8=
+ bh=UBXnQzSJkDrutDwfAQ4rGuJkH23aeovCFlYOdDvXid8=;
+ b=mr2RqzJkdJaPaXPW2HS30ThwBCVU+RWhQiIT8FO28E+jdhhcwY/g9lSFkjcoZUzwIQ
+ +0xsx+0ZroCqHxhgQVk4/aU5nikbnyW3h+26GrHYLgPmKR3cqpHogR3TzFfqkYAgAsF7
+ 7hEMwQgEosb2K7LgXCYGoeS3aD9ozQagQcbAQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277094; x=1741881894;
+ d=1e100.net; s=20230601; t=1741277095; x=1741881895;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=scYAFHQt+yZLnJPuXsDZJw8jiztjZtxUpNqeXfeVN2s=;
- b=EfVvE1jQanJvWIFOYza6SkXLs6O9UcQZq6aOrZW++LCHZ0gFiLIYX+CDVuwjVuek7x
- FPV0GounXgNy5kOZ1zGPoAxFzX80DF9scCumRRAQVEPIFwuhf26Ur8O5igFTr4Zs9Vlo
- i38IDcOGKtMgoJBBJzg+5IVdK1ZOLmUaD8lY9jj3KYv//egtvgngplVzu+ufgKEVXmyN
- jVny8Pbl4M2u5WsQkHm6wLr61MAc+QDOLRnvbL+scmd5peIwp/9a1ZVQ8InucRg06rH+
- qI2h62gCOp0OLqRu/Hmrt0zP6zz67ZLoqsyBANDkJLBtUcubJBHMpUOArxU+SqxCWsT/
- OEmQ==
-X-Gm-Message-State: AOJu0Yx2SYrR5bkKmuDvnTuIGHN7VHjSddQlyakvaQCa3z/f7hM2EDcI
- NdJkWGi32nhK/v9iGe0NDW3QsWNHPLFNqYOs5sRCS0teDiLJrfN8pKoIKTJJCjeaw47L5wPjjK0
+ bh=UBXnQzSJkDrutDwfAQ4rGuJkH23aeovCFlYOdDvXid8=;
+ b=MirR8cvN9NuX/6OCj/+libzbbAlX9Te1kkxEAC74PWxnvleU+k46fyShzoLiv9L7jn
+ mibVQ/zlHpC7E14zncwoWq98okLL2kKJ2xXQouHy+x+wWwvilvWIYeTWIfuSAtr9r0R0
+ QDekzyH71+ZuAv13SqfzaJDVd4h1Nu257KR2LJwsHZHqpIv7EVH/ZzKKqXTM+qIO6ri4
+ bIOaZft/bTh4pmaSIeBADTsPFfYpefxYr51huhfCUmceS++wWuPnONJfg4yiRL1FQgyI
+ yKZmNdjl2Z8I/ZAXOoudy2/88mZ3I4TIxp57U4e4ojOyOL3bbJvk3cy3/YovYrf/sL04
+ Edtg==
+X-Gm-Message-State: AOJu0YwG4bdRsVIXdQdZ1JuXIUQvsUKV2Kbhvml2dVW1quuWoZw+TLGM
+ twnU7W29pc9mndyvDZObij5I2tK0LbdyhQbEXvdbcUCvcDnmkd6Jmd2dRR2UDVTskxDAh00wCgI
  =
-X-Gm-Gg: ASbGnctWIzylRpnqraSq7R2wqABsjwaLyO43REkXJJXoTo9SxxmubqIdkEDS5miQL11
- EyO/g5Sad0bP/5ZKLCT8zG04DQu3srn5gwtNnIowEJr9sL5kMJkHr1ZmNekEXpknsEbIvyi2AC7
- yfHivRv2CpxZBpGt4xh1rF9nRe6D97YkL2I/0Pf9olngMT7ZbOaoCsxDSFRm6w1xDYS7wyfDnIx
- EcorT6B+SURTxyu5ddAAgK37Vt9S9XGIJWjvXFozNq1oPMfXhE4H/yZhZOXP4gtfeXxlqqyqCYP
- 3lqL+i716c+Iwz8H3SeLopsZ31D/va7hrB8KAKuaYCUoRwSFC3ebeDaSvvAEtYtozrPZNywDNvY
- d/YfTCQ==
-X-Google-Smtp-Source: AGHT+IGrDhWIuTeARQoX0n52NIjXDCU4PV3dfKlAoDGi0UFWbweufFaR2W6GRjviMc5psIKMzaJb6w==
-X-Received: by 2002:a05:6602:474d:b0:855:b345:4893 with SMTP id
- ca18e2360f4ac-85affbb4dc7mr888719739f.13.1741277093043; 
- Thu, 06 Mar 2025 08:04:53 -0800 (PST)
+X-Gm-Gg: ASbGnct4A35LcNthTPnUkQz/d9Wiu7Hd+SbfST9EsWTcqOYDqTp3kO18hH3HddQpbBx
+ bDPR7zedOZJNmckOXxkQvOAibLRk4kolNX8Dzq5QrgnVhmVc5i9iLcCwnYf6RZk5xh9IXo/yupF
+ eBov/rfzS7zt1jR0W5/iyeu8Y1OwVwGxdnSLz9Um9jUJ0wZ9F19sJolSBrcwNRi+1ZeoiF7ldFr
+ ydAxxRtkoBn6nd6Wmx00Acd1NRtFNZeKljIcOvioUcwCWqJBthIZjo8HEo+o2RoP688mTEbie8a
+ jLARgPzei2zXg0toSV5c/AC1XNubIqpuC5OsDye2ir6fkYPZjvtdMGBymKG5mbf3SzAJvSaIvfG
+ /YvshvQ==
+X-Google-Smtp-Source: AGHT+IFptUsVDgwryU3pACMw9DrREQ9iwYAZSwjMMULniLe8f5QvU7XKJlpZw5jtr9diDtsIm1c6bg==
+X-Received: by 2002:a92:cdaf:0:b0:3d4:38a4:388e with SMTP id
+ e9e14a558f8ab-3d44187c0f4mr897545ab.1.1741277095097; 
+ Thu, 06 Mar 2025 08:04:55 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.04.51
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.04.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:04:51 -0800 (PST)
+ Thu, 06 Mar 2025 08:04:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, qemu-devel@nongnu.org
-Subject: [PATCH v4 04/47] x86: qemu: Switch to bochs display
-Date: Thu,  6 Mar 2025 09:03:31 -0700
-Message-ID: <20250306160428.3041057-5-sjg@chromium.org>
+Subject: [PATCH v4 05/47] x86: qemu: Enable dhrystone
+Date: Thu,  6 Mar 2025 09:03:32 -0700
+Message-ID: <20250306160428.3041057-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,57 +95,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The vesa display is widely used on hardware, but it is a bit of a pain
-with QEMU. It requires executing option ROMs, which either doesn't work
-with kvm, or is difficult to do in a kvm/QEMU-friendly way.
-
-THe bochs display is probably better anyway, so switch to that. It works
-fine with kvm as it doesn't need an option ROM.
+Provide the 'dhry' command, which helps to check that kvm is being used
+properly with QEMU.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/31
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Redo commit message
-
- configs/qemu-x86_64_defconfig | 5 ++---
- configs/qemu-x86_defconfig    | 5 ++---
- 2 files changed, 4 insertions(+), 6 deletions(-)
+ configs/qemu-x86_64_defconfig | 1 +
+ configs/qemu-x86_defconfig    | 1 +
+ 2 files changed, 2 insertions(+)
 
 diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index af275e8ce8f..ff2a192ee7d 100644
+index ff2a192ee7d..84b7dc8e99f 100644
 --- a/configs/qemu-x86_64_defconfig
 +++ b/configs/qemu-x86_64_defconfig
-@@ -83,9 +83,8 @@ CONFIG_SYS_NS16550_PORT_MAPPED=y
- CONFIG_SPI=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_CONSOLE_TRUETYPE=y
--CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
--CONFIG_FRAMEBUFFER_VESA_MODE_USER=y
--CONFIG_FRAMEBUFFER_VESA_MODE=0x144
-+CONFIG_VIDEO_BOCHS=y
-+# CONFIG_VIDEO_VESA is not set
- CONFIG_CONSOLE_SCROLL_LINES=5
+@@ -89,4 +89,5 @@ CONFIG_CONSOLE_SCROLL_LINES=5
  CONFIG_SPL_VIDEO=y
  # CONFIG_SPL_USE_TINY_PRINTF is not set
+ CONFIG_GENERATE_ACPI_TABLE=y
++CONFIG_CMD_DHRYSTONE=y
+ # CONFIG_GZIP is not set
 diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-index 0b0e10c795f..ee5b150e062 100644
+index ee5b150e062..d52afa42955 100644
 --- a/configs/qemu-x86_defconfig
 +++ b/configs/qemu-x86_defconfig
-@@ -62,9 +62,8 @@ CONFIG_SYS_NS16550_PORT_MAPPED=y
- CONFIG_SPI=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_CONSOLE_TRUETYPE=y
--CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
--CONFIG_FRAMEBUFFER_VESA_MODE_USER=y
--CONFIG_FRAMEBUFFER_VESA_MODE=0x144
-+CONFIG_VIDEO_BOCHS=y
-+# CONFIG_VIDEO_VESA is not set
+@@ -66,4 +66,5 @@ CONFIG_VIDEO_BOCHS=y
+ # CONFIG_VIDEO_VESA is not set
  CONFIG_CONSOLE_SCROLL_LINES=5
  CONFIG_GENERATE_ACPI_TABLE=y
++CONFIG_CMD_DHRYSTONE=y
  # CONFIG_GZIP is not set
 -- 
 2.43.0
