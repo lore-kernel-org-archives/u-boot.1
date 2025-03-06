@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FA7C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 12:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6957EC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 12:46:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DE828141A;
+	by phobos.denx.de (Postfix) with ESMTP id EDD7681426;
 	Thu,  6 Mar 2025 13:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="3QrMqkDf";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="cZ53B4PF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97033811C1; Thu,  6 Mar 2025 11:58:22 +0100 (CET)
+ id AD7F380F4C; Thu,  6 Mar 2025 11:58:22 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A17C580F4C
+ by phobos.denx.de (Postfix) with ESMTPS id B2F15810DC
  for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 11:58:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=51608305cc=cheick.traore@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 526AZphA027681;
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 526Aejig011586;
  Thu, 6 Mar 2025 11:58:16 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=cpmtPGdyS5o8tj1s0gctu/
- 7ZpKAfjHFMT7vIjt10oxs=; b=3QrMqkDf6TeBS25WEnMwMIUjSYQuQUX6F/hEU3
- cgjptlSSNGGes68Zg70Rg+cy3HG5TYYdHQb2vtScYgi8Gqn//vulzoWIjoDstQqt
- 2+9PcnJIKiFuVJSMaxPwoRguyKrKcTUjwByybJGToXrwV4wIf39d4oiFyg07AFoh
- sxYBNuLyaJxObQpjoYS93nKskrDCgf1/HLegHUeEOF3MBZU9vIT5X6/+03PwncQT
- 8XOCtPnxpygCrOEWWE9nhIEd3fuWokvE04AgYnV747HcNWU9LZA2vsuTQb80o5AD
- F6TI1UXPLMXsw0PsxeCI0zhg3axutZ/jm0WfxMEWn94KP3fw==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ i/snMCnJixAHXdzDlHEEMGgsJ6i6LzF7oq2DLQKFhRM=; b=cZ53B4PFTBsOg9bF
+ Lvn/nOeobKyqx6TFeMw66oN1EwgarT7ShqDA4hr8ECv2HVrfpWBUuQ4BegY02M97
+ Z+0RHrMqAKchaEGcRF65MzExFYM5PD/kqyWOkjfm7xyoS3A6emPltsiG2RS7+cpO
+ 8eBbMXcPh4olx0jPa6g9uC9a0Kp9jU/a4StMfX5G4MVWasX/ecURkexHb+PadCE8
+ swANwEGfx7zWGyeGl4AFiTY4cZDKBh7KNP/+qs6CWezc3WwbdiH8rlLxl3/Hv84W
+ IyjCCW7nkSgnW1gQKsTIovaHDmhkj7wFGyF/mDvdOc7hDq+0ZQLIAM3189zBEl6b
+ izxfLg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 454cp8ya7t-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 457a5pg4k2-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 06 Mar 2025 11:58:16 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 457EB40068;
- Thu,  6 Mar 2025 11:57:10 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3EB0940075;
+ Thu,  6 Mar 2025 11:57:25 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AFAD5515A4E;
- Thu,  6 Mar 2025 11:56:37 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D357A5027C1;
+ Thu,  6 Mar 2025 11:57:01 +0100 (CET)
 Received: from localhost (10.48.86.119) by SHFDAG1NODE2.st.com (10.75.129.70)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 11:56:37 +0100
+ 2025 11:57:01 +0100
 From: Cheick Traore <cheick.traore@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
- <cheick.traore@foss.st.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, Olivier Moysan
- <olivier.moysan@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH 0/5] Add support for STM32 TIMERS and STM32 PWM
-Date: Thu, 6 Mar 2025 11:56:15 +0100
-Message-ID: <20250306105620.624760-1-cheick.traore@foss.st.com>
+ <cheick.traore@foss.st.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, Tom
+ Rini <trini@konsulko.com>
+Subject: [PATCH 4/5] configs: stm32mp13: Enable MFD timer and PWM for
+ stm32mp13_defconfig
+Date: Thu, 6 Mar 2025 11:56:19 +0100
+Message-ID: <20250306115558.4.Ia1fceae36361c33b1ad9e8b92f55e74aafa4078b@changeid>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250306105620.624760-1-cheick.traore@foss.st.com>
+References: <20250306105620.624760-1-cheick.traore@foss.st.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -93,38 +94,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable the following configs:
 
-This serie adds:
-* drivers for MFD STM32 TIMERS and STM32 PWM, the driver split is
-  inspired by kernel model
-* enable these drivers on stm32mp13 for PWM backlight available on
-  stm32mp135f-dk
-* a check of duty_ns and period_ns parameters in PWM framework
+* CONFIG_MFD_STM32_TIMERS: enables support for the STM32 multifunction
+                           timer
+* CONFIG_DM_PWM: enables support for pulse-width modulation devices
+* CONFIG_CMD_PWM: enables 'pwm' command to control PWM channels
+* CONFIG_PWM_STM32: enables support for the STM32 PWM devices
 
+Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
+---
 
-Cheick Traore (5):
-  dm: pwm: Check if duty_ns is lower than period_ns
-  mach-stm32: add multifunction timer driver support
-  pwm: stm32: add driver to support pwm with timer
-  configs: stm32mp13: Enable MFD timer and PWM for stm32mp13_defconfig
-  ARM: dts: stm32: Add TIMERS inverted PWM channel 3 on STM32MP135F-DK
+ configs/stm32mp13_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- arch/arm/dts/stm32mp13-pinctrl.dtsi         |  15 ++
- arch/arm/dts/stm32mp135f-dk.dts             |  14 ++
- arch/arm/mach-stm32mp/Kconfig               |   6 +
- arch/arm/mach-stm32mp/Makefile              |   1 +
- arch/arm/mach-stm32mp/include/mach/timers.h |  55 ++++++
- arch/arm/mach-stm32mp/timers.c              |  82 ++++++++
- configs/stm32mp13_defconfig                 |   4 +
- drivers/pwm/Kconfig                         |   8 +
- drivers/pwm/Makefile                        |   1 +
- drivers/pwm/pwm-stm32.c                     | 202 ++++++++++++++++++++
- drivers/pwm/pwm-uclass.c                    |   3 +
- 11 files changed, 391 insertions(+)
- create mode 100644 arch/arm/mach-stm32mp/include/mach/timers.h
- create mode 100644 arch/arm/mach-stm32mp/timers.c
- create mode 100644 drivers/pwm/pwm-stm32.c
-
+diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+index 0acd1487c9a..4c6a7f82fe5 100644
+--- a/configs/stm32mp13_defconfig
++++ b/configs/stm32mp13_defconfig
+@@ -10,6 +10,7 @@ CONFIG_SYS_LOAD_ADDR=0xc2000000
+ CONFIG_STM32MP13X=y
+ CONFIG_DDR_CACHEABLE_SIZE=0x8000000
+ CONFIG_CMD_STM32KEY=y
++CONFIG_MFD_STM32_TIMERS=y
+ CONFIG_TARGET_ST_STM32MP13X=y
+ CONFIG_ENV_OFFSET_REDUND=0x940000
+ CONFIG_CMD_STM32PROG=y
+@@ -31,6 +32,7 @@ CONFIG_CMD_UNZIP=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
++CONFIG_CMD_PWM=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_LSBLK=y
+ CONFIG_CMD_MMC=y
+@@ -80,6 +82,8 @@ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_DM_REGULATOR_SCMI=y
++CONFIG_DM_PWM=y
++CONFIG_PWM_STM32=y
+ CONFIG_RESET_SCMI=y
+ CONFIG_DM_RNG=y
+ CONFIG_RNG_STM32=y
 -- 
 2.34.1
 
