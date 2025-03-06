@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4639C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 416D3C28B24
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:06:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5E198164E;
-	Thu,  6 Mar 2025 17:05:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EEAFE816AF;
+	Thu,  6 Mar 2025 17:05:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CnvUroX8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="naQJ/kIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8E918141E; Thu,  6 Mar 2025 17:05:08 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 445BC8141E; Thu,  6 Mar 2025 17:05:09 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB2D281760
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9F9781658
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3d2a8c2467eso2820325ab.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:04 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3d2b6ed8128so6770325ab.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277103; x=1741881903; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277105; x=1741881905; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cgYQ1DBcTz0GQCTNBv2O8yfAQ8mKNJyLlRGuzmVQMpo=;
- b=CnvUroX8kYXa6WBpBYWEyv7qMVDzz//Hl+zj57A+B3bMbCkcBCS7SlT6BjwbXLzNdf
- FGnuD/UgGsa3wK4mcih/gcv5fGxYXc4QSW3obiSe+czlFsy01+oXAYPnuNageWuVBrzv
- pnCgmFGxFmZW1bz+IMzwDALENxebB//MGVb44=
+ bh=cT6hyUgzi2KUjmtvWIUj4QWb88R5TOvOKY0GhuWn5KE=;
+ b=naQJ/kITCQrV0Mt4QF0F9/qYhxXExatnv/WqrTsdgJZyDGP4nKp4Pzi8Cf6JmUTMJq
+ J5DV/38mT5hPecixZ+sMqGMCan1xiUMx1bQm/sAaFdT++FUkLrPtNyWZcEFMCS9tihic
+ igWMr5SULVSV3Goa8nVx4XCNu2+EFX51Bb+sg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277103; x=1741881903;
+ d=1e100.net; s=20230601; t=1741277105; x=1741881905;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cgYQ1DBcTz0GQCTNBv2O8yfAQ8mKNJyLlRGuzmVQMpo=;
- b=kE9LlpDyGD7mLeNPH/HQgXBt2mC1UzYxSPeNq6VvtK7emQxKLdv42807T9RcwTVg+T
- uuiE7aN5EqAlKRirCwU7WzFn7/WcKDM9P02Wd5P+nT5MhJ/XpSNmY91zfO1ieB5nUv3X
- iWSh8yYMa35Hh3o6L5sTNRVGpZdgUmaMZOm3nStoE0rHnYvACBUdPpfiamXTjVrff9pv
- qOwY5lNqKg34BeCQtHiiQUuk53vB51/5dMFGXCiuatGwfUKX5ipe6tMjsnBuY706tP47
- k/wQS0GGg4CF0mZjKMEU3rM1/m8dYTyzsffmULWxqBdnIGPdJ3FCIAEIKqIHPMdgqN6H
- XMqQ==
-X-Gm-Message-State: AOJu0Yxi2KsECxM75J1eJY7v5f4u9J6aUPR01jsZouPoga4mn5/aGbgG
- Izln53RFW571VMw3U04r4tOARujgnmD/7yMxTRvD/5mywMlDlOiTB08UBAeQqo8vRex7Hfee6KY
+ bh=cT6hyUgzi2KUjmtvWIUj4QWb88R5TOvOKY0GhuWn5KE=;
+ b=uPsih72phwDatODMw1o2kOg4acshNnRp0otq9Bgjz1XGxpnT0PUWZ/v6hJ0bG0xUkm
+ NZqLmqRdwq5HqS7WeFNwuOabFK+hFcPmy37LvLuBfBRRPHaOOfNVxqFKLDfeTkWLFc8/
+ v2HgyayMWcbLHzKtsDyVGxh3l8wMX/rIOk2CZFcviydW0IJqNQRrwBWQ5oalCAnsr8h9
+ jTZy2o4FkpImNTRWop1J66YCYLYJDAIMb1Y2G+NMlKh/Dvh3aieidHxDmWxvHD1ojbEy
+ NEuu7YwH8jl1edwlJSKicqwkO9Rbmi+uAnMJDMx0/b7IlxdJfsUgUuFUaITb7Dxf491f
+ 8epQ==
+X-Gm-Message-State: AOJu0YwAsMSc+0hYAerTPO2oZGu3x0nUyc53OTslz/5VLuIc5FA6JS4S
+ OevP/8yKI7zY7e0sWKAPGtG4A/Fy0L5tbewS7OCUnPrpSFA2wkQlC0GHkzTpsUzfDCavfUcpUCY
  =
-X-Gm-Gg: ASbGncust7OrzdKh66XazOj/zZK7FoA0JEwXSAJtcytPsu3VjRKc244os8x5I124pkT
- NU7Bkp/CwSpULp3uTGz8Gj0s26vpbwDdLtvHID8oKVmEuIpLkNBLA3Fwkc2yiYVwSEKmmrgXEfJ
- mwJtSfaJtzm9R0iUym84JXSM8ahZV5/pq/00WzRWO49fjXMArnKVaJLh+wj1AWr1UFDX7pBXqJc
- tGqTE4N5LSz81BrWnijZ6SrZzSoWjNbF7Jf0YpqFsndK8Bvjyl7f42x+7mKDunExclZsveE5xxY
- MY+O8UOd9LRRAiY8NKhLmXjVBDd0FUUmEKcBb/GcXyumJGDG40/SkQ7mdtltfGRQJqDp4xkZlfM
- sdmasxQ==
-X-Google-Smtp-Source: AGHT+IGL8tkvDA0H3VVsLjboN3MaB5Gl/9AH2CiF5rYVGM545DIoqTpDJhKemrPw8ZkZlqpzHJEp9g==
-X-Received: by 2002:a05:6e02:1906:b0:3a7:820c:180a with SMTP id
- e9e14a558f8ab-3d42b9a3ba1mr92465705ab.19.1741277102826; 
- Thu, 06 Mar 2025 08:05:02 -0800 (PST)
+X-Gm-Gg: ASbGncuEZ5mxaXngsQ4jyCI1j1D2EyJKr4ZZtYA+NCCBKzaiNGJ29MIKItFBVtkMTea
+ LK8j2xdWEcBp9agEhMwKyYv0RqFMLO4b+pee4ZQfaKveH4ohV7eH6TS9/Ij+Z4vHj8aj90f3um6
+ nYBBpvhoI0nCcvfXbDU4VpfrgUBHxHh1GAPW6iH2y/Z06YDJlG+V4T0Yh4spbbdU66iIz49Bvvv
+ 6V+/SqSQGRAJKOSyO4b3UTMSpIg68EjzQ+QAXg0JtHHMd91n5kdbFsFwTCjqh0ElhDfThqk4vcQ
+ OAX04luQHmP5jFgNWbiDsGJPlyCl1sYbqVDUejCOTlGD9r3jepypjgmje4/H/5Z8QUbGFxvMgB6
+ 6iHXeFQ==
+X-Google-Smtp-Source: AGHT+IE+8Q95ogdwtMkqODr5QCiwFW6Jq2tmvBNzu5x0Qyip106rMyl0TwdRc3txJzz1jev1LqQq2A==
+X-Received: by 2002:a05:6e02:198f:b0:3d4:2306:fbb6 with SMTP id
+ e9e14a558f8ab-3d436b254cdmr50287315ab.10.1741277105098; 
+ Thu, 06 Mar 2025 08:05:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.01
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:05:01 -0800 (PST)
+ Thu, 06 Mar 2025 08:05:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 08/47] x86: Add some log categories
-Date: Thu,  6 Mar 2025 09:03:35 -0700
-Message-ID: <20250306160428.3041057-9-sjg@chromium.org>
+Subject: [PATCH v4 09/47] x86: Drop use of CONFIG_REALMODE_DEBUG
+Date: Thu,  6 Mar 2025 09:03:36 -0700
+Message-ID: <20250306160428.3041057-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,59 +95,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add categories for i8259 and bios files, so that log statements have the
-right category.
+This option is not actually defined in Kconfig anymore. Use a normal
+debug print instead, which has a similar effect.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/bios.c            | 3 +++
- arch/x86/lib/bios_interrupts.c | 2 ++
- arch/x86/lib/i8259.c           | 2 ++
- 3 files changed, 7 insertions(+)
+ arch/x86/lib/bios.c            | 18 ++++++++----------
+ arch/x86/lib/bios_interrupts.c |  6 ++----
+ 2 files changed, 10 insertions(+), 14 deletions(-)
 
 diff --git a/arch/x86/lib/bios.c b/arch/x86/lib/bios.c
-index 03f7360032c..acae635cf19 100644
+index acae635cf19..5dfe5a647eb 100644
 --- a/arch/x86/lib/bios.c
 +++ b/arch/x86/lib/bios.c
-@@ -5,6 +5,9 @@
-  * Copyright (C) 2007 Advanced Micro Devices, Inc.
-  * Copyright (C) 2009-2010 coresystems GmbH
-  */
-+
-+#define LOG_CATEGRORY	LOGC_ARCH
-+
- #include <compiler.h>
- #include <bios_emul.h>
- #include <irq_func.h>
+@@ -301,16 +301,14 @@ asmlinkage int interrupt_handler(u32 intnumber, u32 gsfs, u32 dses,
+ 	cs = cs_ip >> 16;
+ 	flags = stackflags;
+ 
+-#ifdef CONFIG_REALMODE_DEBUG
+-	debug("oprom: INT# 0x%x\n", intnumber);
+-	debug("oprom: eax: %08x ebx: %08x ecx: %08x edx: %08x\n",
+-	      eax, ebx, ecx, edx);
+-	debug("oprom: ebp: %08x esp: %08x edi: %08x esi: %08x\n",
+-	      ebp, esp, edi, esi);
+-	debug("oprom:  ip: %04x      cs: %04x   flags: %08x\n",
+-	      ip, cs, flags);
+-	debug("oprom: stackflags = %04x\n", stackflags);
+-#endif
++	log_debug("oprom: INT# 0x%x\n", intnumber);
++	log_debug("oprom: eax: %08x ebx: %08x ecx: %08x edx: %08x\n",
++		  eax, ebx, ecx, edx);
++	log_debug("oprom: ebp: %08x esp: %08x edi: %08x esi: %08x\n",
++		  ebp, esp, edi, esi);
++	log_debug("oprom:  ip: %04x      cs: %04x   flags: %08x\n",
++		  ip, cs, flags);
++	log_debug("oprom: stackflags = %04x\n", stackflags);
+ 
+ 	/*
+ 	 * Fetch arguments from the stack and put them to a place
 diff --git a/arch/x86/lib/bios_interrupts.c b/arch/x86/lib/bios_interrupts.c
-index b2cf1527b1c..3ae6c193ec7 100644
+index 3ae6c193ec7..e0c2284a901 100644
 --- a/arch/x86/lib/bios_interrupts.c
 +++ b/arch/x86/lib/bios_interrupts.c
-@@ -7,6 +7,8 @@
-  * Copyright (C) 2007-2009 coresystems GmbH
-  */
- 
-+#define LOG_CATEGRORY	LOGC_ARCH
-+
- #include <log.h>
- #include <asm/pci.h>
- #include "bios_emul.h"
-diff --git a/arch/x86/lib/i8259.c b/arch/x86/lib/i8259.c
-index 465ff70146f..088f78f4661 100644
---- a/arch/x86/lib/i8259.c
-+++ b/arch/x86/lib/i8259.c
-@@ -13,6 +13,8 @@
-  * Programmable Interrupt Controllers.
-  */
- 
-+#define LOG_CATEGORY	UCLASS_IRQ
-+
- #include <log.h>
- #include <asm/io.h>
- #include <asm/i8259.h>
+@@ -200,10 +200,8 @@ int int1a_handler(void)
+ 			dm_pci_write_config32(dev, reg, dword);
+ 			break;
+ 		}
+-#ifdef CONFIG_REALMODE_DEBUG
+-		debug("0x%x: bus %d devfn 0x%x reg 0x%x val 0x%x\n", func,
+-		      bus, devfn, reg, M.x86.R_ECX);
+-#endif
++		log_debug("0x%x: bus %d devfn 0x%x reg 0x%x val 0x%x\n", func,
++			  bus, devfn, reg, M.x86.R_ECX);
+ 		M.x86.R_EAX &= 0xffff00ff; /* Clear AH */
+ 		M.x86.R_EAX |= PCIBIOS_SUCCESSFUL;
+ 		retval = 1;
 -- 
 2.43.0
 
