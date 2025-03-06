@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0D04C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 13:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C57C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 13:57:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F11A808A2;
-	Thu,  6 Mar 2025 14:53:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B2F180756;
+	Thu,  6 Mar 2025 14:57:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Uk+srqhm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LFfxXgVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30139808A2; Thu,  6 Mar 2025 14:53:26 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C9652808A2; Thu,  6 Mar 2025 14:57:07 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A85380756
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 14:53:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C98468003E
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 14:57:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=51605bb86b=fabrice.gasnier@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 526DQ11q026794;
- Thu, 6 Mar 2025 14:53:18 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- uK1iz0ywTK1eH5a//QDdyBfg8TkfIAeURiU1d0+j4sk=; b=Uk+srqhmniV+oe1H
- 8BPhk+eQjJr0Bi1Rix6RL72hkqr3FLY7DoIbj0tx/83WJljSBfkBHCn7nGFlkUKM
- ZewydUakjC8TW92LgGkuo6S+G+hgMus3dgobSpx+Loxbi33JcQzxXO9nX3yDs2ZP
- 6X8hbzzoh6bs6CdWudchEAEVQRMs93ixy6lQe9QmKPpdKV6E4HsFPG2PY7xxkmxi
- ftL5mUonLoWEjcfs3cddpmRqZve1ZxuOMPH5NqxHdDjs9g9yvbaKmcq47eka/6Xw
- pgPd9MmHeDOgYc3jK3rR4LLmbpyrP3M80p/AxdqTL0A7yjtNARH2UukqY8OweK2x
- 8l/b7Q==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 453t83xyb9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Mar 2025 14:53:17 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7D28340044;
- Thu,  6 Mar 2025 14:51:41 +0100 (CET)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 385E5540881;
- Thu,  6 Mar 2025 14:49:16 +0100 (CET)
-Received: from SAFDAG1NODE1.st.com (10.75.90.17) by EQNDAG1NODE4.st.com
- (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 14:49:16 +0100
-Received: from [10.48.86.222] (10.48.86.222) by SAFDAG1NODE1.st.com
- (10.75.90.17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 14:49:15 +0100
-Message-ID: <bdb245a3-30ac-4467-84d1-fca76827775d@foss.st.com>
-Date: Thu, 6 Mar 2025 14:49:14 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5b6f3025dso875323a12.1
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 05:57:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1741269424; x=1741874224; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=j8OVKXW6TAsRHdFQfG4STPF51LzPRuHBIfPNIbSTLPc=;
+ b=LFfxXgVmOksmk+3WZCwOEVPMd/4Va1BapeBZlZleFNwvI+qEIrtqRB4fc6PouxKBxw
+ ba8fcUpO+RyY0M1xwYiYSQC9HtZcMOW7e5Y5jFHE/J3myJJVz10YNutbyNxs7fgOgFR0
+ qpUpiytR0UZatGhschFn5s/HAJxdT8KEJn3tg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741269424; x=1741874224;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=j8OVKXW6TAsRHdFQfG4STPF51LzPRuHBIfPNIbSTLPc=;
+ b=nV2b9/Iwp4RVNjt4yMslSAKQPrRypaC87/VnHT9E3Hrk7E9Nfg/r/MpZOefD/Q7Rol
+ 63nygOEK9etipB04uLEENwdDd7UIrajNR7UyZUmzGY7RrLZgL4Ha6MTWI7LOnxxiVgkn
+ dVcWm3wGCMOo+IGcUjtRzAOIzuaZI2dqzCIT+sCy5HF5f6I6TFWynQ5Yzuij0nZOpDX1
+ YdktxmWHDy1+OHdanXy9QcF4FL191j6D3xAZeTiks81Xa3NphrUl0yZN3Wnw0WP9g7ii
+ p0XZTn0+6/w8NgUnTj3f3vOws/aBzN9qxkvfaI9CzNkuMaEYRX42sLCJQ7oRhalvqM6h
+ 166w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVq3VDUOiqPdGffJxWARevtFyzs1v41SSyZ5J+iuHHHWv8pWt9fizVuR/9e9H6HEh+7t3zkejY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6UKbhuES3ePdaZPh1XL8Q2+WAHeNmxfK7D836/ysdfaU4GSRh
+ JiWhXbyyQaUTskS2SW+Ts8J2agLdjT9DfWzncRBp2IfeDKYKOxK/HzbN9IR3qrp4+oKNFruERGw
+ gwxco9bs1MVxwbzUNyIiTmuibwt0Oc8hoGpux
+X-Gm-Gg: ASbGncsqIS1B3wLIpepzCvAEx/+GJhqA1n/A7Jiu+/tvYo8eo2+aRIiAsBMQYWUT5+K
+ 1/5A+Ltzt3uP7nCZfQk8CeUNOFQxpYkKs6RMC/rOyutRVClRQEV42EscUxrdOaWXKP7VlOoiKlS
+ cPO/pUm6nCm72gYAQe+lDaIE+kmvY=
+X-Google-Smtp-Source: AGHT+IEUj/eZZRGWcKjzXrJGbALPWZXOzrpHpcIRNO9JvhTmuN6HAEmmJ5/QjSsXliFkkMmwdVY9OzwURxTx0K9spVs=
+X-Received: by 2002:a17:907:6d1c:b0:ac2:c06:ad9d with SMTP id
+ a640c23a62f3a-ac20d8bc1ecmr677967666b.14.1741269423779; Thu, 06 Mar 2025
+ 05:57:03 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] pwm: stm32: add driver to support pwm with timer
-To: Cheick Traore <cheick.traore@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Olivier Moysan
- <olivier.moysan@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>
-References: <20250306105620.624760-1-cheick.traore@foss.st.com>
- <20250306115558.3.I6cd0bcc67440b8e8c8be0493a25de9bea8a14bf1@changeid>
-Content-Language: en-US
-From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-In-Reply-To: <20250306115558.3.I6cd0bcc67440b8e8c8be0493a25de9bea8a14bf1@changeid>
+References: <SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR12MB6685.namprd12.prod.outlook.com>
+ <e1cfde30-ae7f-4ae8-9845-0c13eaeae87f@canonical.com>
+ <61343d7f-d372-495e-b5b3-0bbe14d05a4b@amd.com>
+ <51079568-f45b-4d79-b427-0b3d66ad8739@canonical.com>
+ <56ed3099-ac7d-4224-a2e6-a38d31f0b29f@amd.com>
+ <CAFLszTjxxYTxWhva9T8ER2_pNeLLoEpWCy467BvsB_eVQXnkoQ@mail.gmail.com>
+ <d4d04e4b-e87a-4c89-a68d-944b180fba12@amd.com>
+In-Reply-To: <d4d04e4b-e87a-4c89-a68d-944b180fba12@amd.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Mar 2025 06:56:52 -0700
+X-Gm-Features: AQ5f1Jo4BY0MHbnVQpu62I5vDTRrgCtqymW86Z9OeGl4V6NZR5LKoQ5EgmNZ3ZE
+Message-ID: <CAFLszTg804YAxrLmUukPGAiPWKrV5PM+ihGQvwFax49eFNEm6w@mail.gmail.com>
+Subject: Re: Halting auto-boot process in the U-Boot shell
+ https://lore.kernel.org/u-boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/
+To: Michal Simek <michal.simek@amd.com>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>, "Begari,
+ Padmarao" <Padmarao.Begari@amd.com>, 
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>, "Kummari,
+ Prasad" <Prasad.Kummari@amd.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.86.222]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SAFDAG1NODE1.st.com
- (10.75.90.17)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-06_05,2025-03-06_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,264 +101,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/6/25 11:56, Cheick Traore wrote:
-> Add driver to support pwm on STM32MP1X SoCs. The PWM signal is generated
-> using a multifuntion timer which provide a pwm feature. Clock rate and
-> addresses are retrieved from the multifunction timer driver.
-> 
-> Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
-> ---
-> 
->  drivers/pwm/Kconfig     |   8 ++
->  drivers/pwm/Makefile    |   1 +
->  drivers/pwm/pwm-stm32.c | 202 ++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 211 insertions(+)
->  create mode 100644 drivers/pwm/pwm-stm32.c
+Hi Michal,
 
-Hi Cheick,
+On Fri, 28 Feb 2025 at 07:42, Michal Simek <michal.simek@amd.com> wrote:
+>
+> Hi Simon,
+>
+> On 2/27/25 17:25, Simon Glass wrote:
+> > Hi Michal,
+> >
+> > On Wed, 26 Feb 2025 at 02:04, Michal Simek <michal.simek@amd.com> wrote:
+> >>
+> >>
+> >>
+> >> On 2/26/25 09:59, Heinrich Schuchardt wrote:
+> >>> On 2/26/25 09:28, Michal Simek wrote:
+> >>>>
+> >>>>
+> >>>> On 2/26/25 09:23, Heinrich Schuchardt wrote:
+> >>>>> On 2/26/25 07:48, Kummari, Prasad wrote:
+> >>>>>> [AMD Official Use Only - AMD Internal Distribution Only]
+> >>>>>>
+> >>>>>>
+> >>>>>> Hi Heinrich,
+> >>>>>>
+> >>>>>> Regarding below commit.
+> >>>>>>
+> >>>>>> commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85
+> >>>>>> Author:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >>>>>> AuthorDate: Tue Jun 14 08:02:03 2022 +0200
+> >>>>>> Commit:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >>>>>> CommitDate: Sun Jun 19 15:53:09 2022 +0200
+> >>>>>>
+> >>>>>>       efi_loader: initialize console size late
+> >>>>>>
+> >>>>>>       If CONFIG_VIDEO_DM=n we query the display size from the serial console.
+> >>>>>>       Especially when using a remote console the response can be so late that
+> >>>>>>       it interferes with autoboot.
+> >>>>>>
+> >>>>>> *    Only query the console size when running an EFI binary.*
+> >>>>>>
+> >>>>>> https://lore.kernel.org/u-boot/20220614060203.33600-1-
+> >>>>>> heinrich.schuchardt@canonical.com/ <https://lore.kernel.org/u-
+> >>>>>> boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/>
+> >>>>>>
+> >>>>>> Commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85 modifies the system to query
+> >>>>>> the console size only when running an EFI binary. However, when
+> >>>>>> CONFIG_EFI_CAPSULE_ON_DISK is enabled, the console is still being invoked,
+> >>>>>> which shouldn't happen. This results in issues on our terminal, which cannot
+> >>>>>> handle the resulting characters, leading to incorrect display and halting
+> >>>>>> the auto-boot process in the U-Boot shell.
+> >>>>>>
+> >>>>>> *Log Output:*
+> >>>>>>
+> >>>>>> Warning: ethernet@ff0c0000 (eth0) using random MAC address - ee:df:0a:38:a8:c4
+> >>>>>>
+> >>>>>> eth0: ethernet@ff0c0000, eth1: mrmac@a40f0000, eth2: mrmac@a40f1000, eth3:
+> >>>>>> mrmac@a40f2000, eth4: mrmac@a40f3000
+> >>>>>>
+> >>>>>> Cannot persist EFI variables without system partition
+> >>>>>>
+> >>>>>> Missing TPMv2 device for EFI_TCG_PROTOCOL
+> >>>>>>
+> >>>>>> Missing RNG device for EFI_RNG_PROTOCOL
+> >>>>>>
+> >>>>>> Hit any key to stop autoboot:  0
+> >>>>>>
+> >>>>>> *Versal> [42;173R*
+> >>>>>>
+> >>>>>> *Unknown command '[42' - try 'help'*
+> >>>>>
+> >>>>> Hello Prasad,
+> >>>>>
+> >>>>> The terminal emulation seems to be sending a valid reply indicating 42 rows
+> >>>>> and 173 columns.
+> >>>>>
+> >>>>> It could be that in your setup you are hitting the time out in term_get_char().
+> >>>>>
+> >>>>> Could you, please, check what happens if you apply
+> >>>>>
+> >>>>> --- a/lib/efi_loader/efi_console.c
+> >>>>> +++ b/lib/efi_loader/efi_console.c
+> >>>>> @@ -92,8 +92,7 @@ static int term_get_char(s32 *c)
+> >>>>>           timeout = timer_get_us() + 100000;
+> >>>>>
+> >>>>>           while (!tstc())
+> >>>>> -               if (timer_get_us() > timeout)
+> >>>>> -                       return 1;
+> >>>>> +               ;
+> >>>>>
+> >>>>>           *c = getchar();
+> >>>>>           return 0;
+> >>>>>
+> >>>>> If the failure disappears, next you would have to analyze why the timeout is
+> >>>>> occurring (e.g. timer_get_us() running too fast).
+> >>>>>
+> >>>>> If you still get failures, please, add debug output term_read_reply() to
+> >>>>> understand what is happening.
+> >>>>
+> >>>> But why is this send at this stage? Why capsule update needs to be aware about
+> >>>> size of terminal? I understand that you need to know it for efi application
+> >>>> but what's the reason to know it capsule update?
+> >>>>
+> >>>> Thanks,
+> >>>> Michal
+> >>>>
+> >>>>
+> >>>
+> >>> Hello Michal,
+> >>>
+> >>> There are two separate questions to answer:
+> >>>
+> >>> * Why does determining the console not work?
+> >>>
+> >>> The problem can only occur EFI enabled systems. If determining the console size
+> >>> fails here, we can expect it to fail when running EFI applications, too.
+> >>
+> >> yes but you don't know if users are going to boot over EFI or via legacy way.
+> >> You can still use capsule update part only and using bootm/booti for booting.
+> >>
+> >>>
+> >>> * Why is the EFI console initialized here?
+> >>>
+> >>> We have currently only one entry-point for initializing the whole of the EFI
+> >>> sub-system. We are using the console before running any EFI application, e.g. in
+> >>> the eficonfig command.
+> >>>
+> >>> This could be redesigned with some effort.
+> >>
+> >> And I think it should. Because there is no reason to do initialization of
+> >> anything what it is not going to be used. At the end of day it is just delaying
+> >> boot.
+> >
+> > Agreed. My attempt to resolve this for a similar situation just
+> > resulted in my case being a bad example[1]. But this is just bad
+> > design.
+>
+> Glad to see your patches.
+> Not sure if implementation is fitting our needs but it is showing exactly the
+> problem.
+> I pretty much think that nothing should be done unless you explicitly asks for
+> it. And I can't see any variable/Kconfig option which is enabled to start to
+> call these chars.
+>
+> I am considering this as bug which should be fixed in this release because it is
+> unintentionally breaking boot. I also expect that this is pretty much nice to
+> have feature to use bigger screen instead of basic 80x25.
 
-Reviewed-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+From my side I'm unable to get patches into EFI_LOADER and have tried
+repeatedly to adjust the ANSI logic[2]. So I'm going to leave it to
+others to figure out.
 
-Thanks,
-Best Regards,
-Fabrice
+Regards,
+Simon
 
-> 
-> diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-> index 6e79868d0ef..de312656746 100644
-> --- a/drivers/pwm/Kconfig
-> +++ b/drivers/pwm/Kconfig
-> @@ -105,6 +105,14 @@ config PWM_TEGRA
->  	  32KHz clock is supported by the driver but the duty cycle is
->  	  configurable.
->  
-> +config PWM_STM32
-> +	bool "Enable support for STM32 PWM"
-> +	depends on DM_PWM && MFD_STM32_TIMERS
-> +	help
-> +	  This enables PWM driver for STMicroelectronics STM32 pulse width
-> +	  modulation. It uses STM32 timer devices that can have up to 4 output
-> +	  channels, with complementary outputs and configurable polarity.
-> +
->  config PWM_SUNXI
->  	bool "Enable support for the Allwinner Sunxi PWM"
->  	depends on DM_PWM
-> diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-> index e4d10c8dc3e..76305b93bc9 100644
-> --- a/drivers/pwm/Makefile
-> +++ b/drivers/pwm/Makefile
-> @@ -22,5 +22,6 @@ obj-$(CONFIG_PWM_ROCKCHIP)	+= rk_pwm.o
->  obj-$(CONFIG_PWM_SANDBOX)	+= sandbox_pwm.o
->  obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
->  obj-$(CONFIG_PWM_TEGRA)		+= tegra_pwm.o
-> +obj-$(CONFIG_PWM_STM32)		+= pwm-stm32.o
->  obj-$(CONFIG_PWM_SUNXI)		+= sunxi_pwm.o
->  obj-$(CONFIG_PWM_TI_EHRPWM)	+= pwm-ti-ehrpwm.o
-> diff --git a/drivers/pwm/pwm-stm32.c b/drivers/pwm/pwm-stm32.c
-> new file mode 100644
-> index 00000000000..6c47df893be
-> --- /dev/null
-> +++ b/drivers/pwm/pwm-stm32.c
-> @@ -0,0 +1,202 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-> + * Author: Cheick Traore <cheick.traore@foss.st.com>
-> + *
-> + * Originally based on the Linux kernel v6.10 drivers/pwm/pwm-stm32.c.
-> + */
-> +
-> +#include <div64.h>
-> +#include <dm.h>
-> +#include <pwm.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/timers.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/time.h>
-> +
-> +#define CCMR_CHANNEL_SHIFT	8
-> +#define CCMR_CHANNEL_MASK	0xFF
-> +
-> +struct stm32_pwm_priv {
-> +	bool have_complementary_output;
-> +	bool invert_polarity;
-> +};
-> +
-> +static u32 active_channels(struct stm32_timers_plat *plat)
-> +{
-> +	return readl(plat->base + TIM_CCER) & TIM_CCER_CCXE;
-> +}
-> +
-> +static int stm32_pwm_set_config(struct udevice *dev, uint channel,
-> +				uint period_ns, uint duty_ns)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_timers_priv *priv = dev_get_priv(dev_get_parent(dev));
-> +	unsigned long long prd, div, dty;
-> +	unsigned int prescaler = 0;
-> +	u32 ccmr, mask, shift;
-> +
-> +	/*
-> +	 * Period and prescaler values depends on clock rate
-> +	 * First we need to find the minimal value for prescaler such that
-> +	 *
-> +	 *        period_ns * clkrate
-> +	 *   ------------------------------ < max_arr + 1
-> +	 *   NSEC_PER_SEC * (prescaler + 1)
-> +	 *
-> +	 * This equation is equivalent to
-> +	 *
-> +	 *        period_ns * clkrate
-> +	 *   ---------------------------- < prescaler + 1
-> +	 *   NSEC_PER_SEC * (max_arr + 1)
-> +	 *
-> +	 * Using integer division and knowing that the right hand side is
-> +	 * integer, this is further equivalent to
-> +	 *
-> +	 *   (period_ns * clkrate) // (NSEC_PER_SEC * (max_arr + 1)) ≤ prescaler
-> +	 */
-> +
-> +	div = (unsigned long long)priv->rate * period_ns;
-> +	do_div(div, NSEC_PER_SEC);
-> +	prd = div;
-> +
-> +	do_div(div, priv->max_arr + 1);
-> +	prescaler = div;
-> +	if (prescaler > MAX_TIM_PSC)
-> +		return -EINVAL;
-> +
-> +	do_div(prd, prescaler + 1);
-> +	if (!prd)
-> +		return -EINVAL;
-> +
-> +	/*
-> +	 * All channels share the same prescaler and counter so when two
-> +	 * channels are active at the same time we can't change them
-> +	 */
-> +	if (active_channels(plat) & ~(1 << channel * 4)) {
-> +		u32 psc, arr;
-> +
-> +		psc = readl(plat->base + TIM_PSC);
-> +		arr = readl(plat->base + TIM_ARR);
-> +		if (psc != prescaler || arr != prd - 1)
-> +			return -EBUSY;
-> +	}
-> +
-> +	writel(prescaler, plat->base + TIM_PSC);
-> +	writel(prd - 1, plat->base + TIM_ARR);
-> +	setbits_le32(plat->base + TIM_CR1, TIM_CR1_ARPE);
-> +
-> +	/* Calculate the duty cycles */
-> +	dty = prd * duty_ns;
-> +	do_div(dty, period_ns);
-> +
-> +	writel(dty, plat->base + TIM_CCRx(channel + 1));
-> +
-> +	/* Configure output mode */
-> +	shift = (channel & 0x1) * CCMR_CHANNEL_SHIFT;
-> +	ccmr = (TIM_CCMR_PE | TIM_CCMR_M1) << shift;
-> +	mask = CCMR_CHANNEL_MASK << shift;
-> +	if (channel < 2)
-> +		clrsetbits_le32(plat->base + TIM_CCMR1, mask, ccmr);
-> +	else
-> +		clrsetbits_le32(plat->base + TIM_CCMR2, mask, ccmr);
-> +
-> +	setbits_le32(plat->base + TIM_BDTR, TIM_BDTR_MOE);
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_pwm_set_enable(struct udevice *dev, uint channel,
-> +				bool enable)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
-> +	u32 mask;
-> +
-> +	/* Enable channel */
-> +	mask = TIM_CCER_CC1E << (channel * 4);
-> +	if (priv->have_complementary_output)
-> +		mask |= TIM_CCER_CC1NE << (channel * 4);
-> +
-> +	if (enable) {
-> +		setbits_le32(plat->base + TIM_CCER, mask);
-> +		/* Make sure that registers are updated */
-> +		setbits_le32(plat->base + TIM_EGR, TIM_EGR_UG);
-> +		/* Enable controller */
-> +		setbits_le32(plat->base + TIM_CR1, TIM_CR1_CEN);
-> +	} else {
-> +		clrbits_le32(plat->base + TIM_CCER, mask);
-> +		/* When all channels are disabled, we can disable the controller */
-> +		if (!active_channels(plat))
-> +			clrbits_le32(plat->base + TIM_CR1, TIM_CR1_CEN);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_pwm_set_invert(struct udevice *dev, uint channel,
-> +				bool polarity)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
-> +	u32 mask;
-> +
-> +	mask = TIM_CCER_CC1P << (channel * 4);
-> +	if (priv->have_complementary_output)
-> +		mask |= TIM_CCER_CC1NP << (channel * 4);
-> +
-> +	clrsetbits_le32(plat->base + TIM_CCER, mask, polarity ? mask : 0);
-> +
-> +	return 0;
-> +}
-> +
-> +static void stm32_pwm_detect_complementary(struct udevice *dev)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
-> +	u32 ccer;
-> +
-> +	/*
-> +	 * If complementary bit doesn't exist writing 1 will have no
-> +	 * effect so we can detect it.
-> +	 */
-> +	setbits_le32(plat->base + TIM_CCER, TIM_CCER_CC1NE);
-> +	ccer = readl(plat->base + TIM_CCER);
-> +	clrbits_le32(plat->base + TIM_CCER, TIM_CCER_CC1NE);
-> +
-> +	priv->have_complementary_output = (ccer != 0);
-> +}
-> +
-> +static int stm32_pwm_probe(struct udevice *dev)
-> +{
-> +	struct stm32_timers_priv *timer = dev_get_priv(dev_get_parent(dev));
-> +
-> +	if (timer->rate > 1000000000) {
-> +		dev_err(dev, "Clock freq too high (%lu)\n", timer->rate);
-> +		return -EINVAL;
-> +	}
-> +
-> +	stm32_pwm_detect_complementary(dev);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct pwm_ops stm32_pwm_ops = {
-> +	.set_config	= stm32_pwm_set_config,
-> +	.set_enable	= stm32_pwm_set_enable,
-> +	.set_invert	= stm32_pwm_set_invert,
-> +};
-> +
-> +static const struct udevice_id stm32_pwm_ids[] = {
-> +	{ .compatible = "st,stm32-pwm" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(stm32_pwm) = {
-> +	.name		= "stm32_pwm",
-> +	.id		= UCLASS_PWM,
-> +	.of_match	= stm32_pwm_ids,
-> +	.ops		= &stm32_pwm_ops,
-> +	.probe          = stm32_pwm_probe,
-> +	.priv_auto	= sizeof(struct stm32_pwm_priv),
-> +};
+>
+> Thanks,
+> Michal
+>
+>
+> >
+> > Regards,
+> > SImon
+> >
+> > [1] https://lore.kernel.org/u-boot/20240926215950.1265143-9-sjg@chromium.org/
+>
+
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20231121113557.800353-5-sjg@chromium.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20240811145209.4191404-37-sjg@chromium.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20240815202424.766778-11-sjg@chromium.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20240902011825.746421-11-sjg@chromium.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20240926215950.1265143-9-sjg@chromium.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20240926220226.1265965-9-sjg@chromium.org/
