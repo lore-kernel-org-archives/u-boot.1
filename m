@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67BB9C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 05:44:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AEBEC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 05:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B994C808A2;
-	Thu,  6 Mar 2025 06:44:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7FE88808A2;
+	Thu,  6 Mar 2025 06:51:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741239895;
-	bh=aVFVmPtjeFFeLQE93gvMYKr+qZmmixKN4+R3GxoYSpU=;
+	s=phobos-20191101; t=1741240266;
+	bh=9etZURY+1803Y9YlgSwyLMMDwupVfAOZNMhCTAall68=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=qG5FfPInWeEshgY0luz7cNARxOvs3MwYaAFNrXj/3mDSpGwtUrIW+umBO0xNCqkSV
-	 VKDtQ7YlCy8uvHNRvxtoFvjE06F4jNfNvSH+hHZjvSZeQGIF/PThDK5YEeZ0+0Bv+o
-	 ApuX7joBqKw2GM3dB6+edqAxYFEv850KKUPvMlGo33Qz9bvrTdkXmAr0fbNzL+lPha
-	 Sf7+ih/iYBFE1kxD1JkAGjQxNtI2piQLpJOt8JJgvUMLtSLOAb+rDgjJ6qlxSM2pfg
-	 jlkr9IbYAZo+Ml2brZ8cdZQYX1CNwsAHPtp5lcNQ4Ja40zow1V6dGQbTVweuh0hxkE
-	 T1yiBmWLwdIuA==
+	b=g1h3J6Nk7AcPNgonzPWt1HDoVoHGhlMFjUAi5OhIbp4p1/DQffPmwQq9/uRK60r97
+	 8xEOb5wHE/RJlar2DxqO/hahyfvPl9VdtfEd2ZeMDqOxOVdmT2C9bVMTp0HI3FRpW/
+	 8a8CGI8jCxuxMR2+fIrXFh/U1HN6T57q152aFfQmZewaeJfpibPjnsNUQjF/dLKYj6
+	 ZIo21+i6xOHiPxTQKn9kuQk9KDURAcjCXVIwUAFati+jUhPxgo9QcdgAPmA9abVrCF
+	 w8TOJHRbW/AZfLEat4T4yY6rNS/txHsvpjKcN1mcH9RMApOjaGhKJc5HyeBcggwwqI
+	 ZkF9xu8I9r5Pw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB858810ED; Thu,  6 Mar 2025 06:44:53 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id D8D628121A; Thu,  6 Mar 2025 06:51:04 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EAD880805
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 06:44:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C2E380805
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 06:51:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="HeI2Pry+"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Lt5iCsx+"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E428B10382C18; Thu,  6 Mar 2025 06:44:46 +0100 (CET)
+ with ESMTPSA id DEA4610382F1F; Thu,  6 Mar 2025 06:50:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741239890;
+ t=1741240260;
  h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=aVFVmPtjeFFeLQE93gvMYKr+qZmmixKN4+R3GxoYSpU=;
- b=HeI2Pry+Yw0ywY4oXbQBAiT6cUdUkcv8MbnnYDMkEyVXyvxrwtNRs72p0yAI+TH/FnugNn
- r6mzJ1/caZ2rfk7+Obt8GsqZvlho3TJuNgbdbJ5SJt+oRuFSopUquEpFlagjMIgrwB4FaG
- +83+5LHs/OIeZhez48xEjHJjE0bRtXdNMzwliX7w3uiuVFdShYSkOskU7zgE94odZjKR0O
- CzGQ/ysVhq0oPdg3dhALAEQeMl4V2DTdF9fp0c587YqOeRQXmCnR4tcLIrW0s2EiMduSnk
- xus8ngqV4M4VvDrQXmJY+GzRSMk2Ifxo7wB9BGy5MExtiWmzlhYq1TSImFjM2A==
-Message-ID: <5100f007-28c2-ed02-620f-a013e9c6ed60@denx.de>
-Date: Thu, 6 Mar 2025 06:45:18 +0100
+ bh=9etZURY+1803Y9YlgSwyLMMDwupVfAOZNMhCTAall68=;
+ b=Lt5iCsx+uL4RY2HPs+oXHYRSKMVLL3WcXAuuAvTWJcoNBd1O9iOjKKrlGCvhUDSWRXPezM
+ Bn6D5T+7AF7UbD6aVi47IT7lMEx62dMRuLg4c0SJ/NHci04G3YHEKR3sdSHcbQUtN2Xazi
+ G72MxOj4xUeYEWg8UyIICDWwsms9UQwAJVon70B3rIYmrRyEZNmy0uNqKINs728JZKqAb0
+ 2Lzook5+VVYv4YDTLs/uxoiJYTqFWmqGETQtkMPPb7GWwnNYf7cie8tDHGGudwqLMbwCWQ
+ jqfMhnzycFQjm74i+OhmPWc00LIaw3fajDt4yL8o6cPjDMknuFAwM09h5V/v2g==
+Message-ID: <46397665-b8c7-813b-be2f-f43a21c6bc3c@denx.de>
+Date: Thu, 6 Mar 2025 06:51:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH RFC/RFT 0/3] omap24xx_i2c: Enable Repeated Start
- functionality
+Subject: Re: [PATCH RFC/RFT 1/3] i2c: omap24xx_i2c: Use new function
+ __omap24_i2c_xfer_msg()
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Aniket Limaye <a-limaye@ti.com>
-Cc: u-boot@lists.denx.de, marek.vasut+renesas@mailbox.org,
+To: Aniket Limaye <a-limaye@ti.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
  neil.armstrong@linaro.org, caleb.connolly@linaro.org,
  virag.david003@gmail.com, marcel.ziswiler@toradex.com, w.egorov@phytec.de,
  j-keerthy@ti.com, u-kumar1@ti.com
 References: <20250304220546.866602-1-a-limaye@ti.com>
- <20250305155000.GR2640854@bill-the-cat>
+ <20250304220546.866602-2-a-limaye@ti.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250305155000.GR2640854@bill-the-cat>
+In-Reply-To: <20250304220546.866602-2-a-limaye@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -86,47 +85,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom, Aniket,
+Hello Aniket,
 
-On 05.03.25 16:50, Tom Rini wrote:
-> On Wed, Mar 05, 2025 at 03:34:08AM +0530, Aniket Limaye wrote:
->> This series implements Repeated Start functionality for the DM_I2C xfer
->> API (omap_i2c_xfer())
->>
->> First, split out the actual implementation for each individual i2c msg
->> transfer into a new function __omap24_i2c_xfer_msg() and use this to
->> implement omap_i2c_xfer().
->>
->> Then, add support for the Repeated Start condition in omap_i2c_xfer()
->> through the CONFIG_I2C_REPEATED_START option.
->>
->> Also add this config to Kconfig and enable it for ARCH_K3 platforms by
->> default.
->>
->> Test logs (On AM68-SK with additional debug prints):
->> https://gist.github.com/aniket-l/8c64c5bc81246751a02836a96510df14
->>
->> Requesting reviews/testing on specifically the CONFIG_I2C_REPEATED_START
->> addition:
->> - Is the Kconfig needed or should we simply always default to not
->>    sending Stop bit? Drivers can use i2c_msg.flags to request Stop bit
->>    for each msg, same as in the Linux Kernel i2c-omap driver[0].
+On 04.03.25 23:04, Aniket Limaye wrote:
+> Remove __omap24_i2c_read/write() usage from omap_i2c_xfer() in favour of
+> the more flexible __omap24_i2c_xfer_msg().
+> Consequently, these are also no longer needed when DM_I2C is enabled.
 > 
-> Yes, a Kconfig is needed as this driver works (as implied by the name)
-> on so much old and differently buggy IP.
+> New function __omap24_i2c_xfer_msg() will take care of individual read
+> OR write transfers with a target device. It goes through below sequence:
+> - Program the provided Target Chip address (OMAP_I2C_SA_REG)
+> - Program the provided Data len (OMAP_I2C_CNT_REG)
+> - Program the provided Control register flags (OMAP_I2C_CON_REG)
+> - Read from or Write to the provided Data buffer (OMAP_I2C_DATA_REG)
 > 
->> - If yes, Should we re-use CONFIG_I2C_REPEATED_START from the legacy
->>    implementation of the driver or define a new config
+> For a detailed programming guide, refer to the TRM[0] (12.1.3.4 I2C
+> Programming Guide).
 > 
-> Lets pick a new option, under the SYS_I2C_OMAP24XX namespace (and remove
-> the legacy and unused variant).
+> This patch by itself should be a transparent change. However this is
+> needed for implementing a proper Repeated Start (Sr) functionality for
+> i2c_msgs.
 > 
->> - Default enable it for K3 devices?
+> Previous implementation for omap_i2c_xfer called __omap24_i2c_read/write
+> functions, with hardcoded addr=0 and alen=0 for each i2c_msg. Each of
+> these calls would program the registers always with a Stop bit set, not
+> allowing for a repeated start between i2c_msgs in the same xfer().
 > 
-> I'm fine with that.
+> [0]: https://www.ti.com/lit/zip/spruj28 (TRM)
 > 
+> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> ---
+>   drivers/i2c/omap24xx_i2c.c | 139 ++++++++++++++++++++++++++++++++-----
+>   1 file changed, 121 insertions(+), 18 deletions(-)
+> 
+> diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
+> index ebe472e20cd..0d044121d27 100644
+> --- a/drivers/i2c/omap24xx_i2c.c
+> +++ b/drivers/i2c/omap24xx_i2c.c
+> @@ -535,6 +535,107 @@ pr_exit:
+>   	return res;
+>   }
+>   
+> +static int __omap24_i2c_xfer_msg(void __iomem *i2c_base, int ip_rev, int waitdelay,
+> +				 uchar chip, uchar *buffer, int len, u16 i2c_con_reg)
+> +{
+> +	int i;
+> +	u16 status;
+> +	int i2c_error = 0;
+> +	int timeout = I2C_TIMEOUT;
+> +
+> +	if (len < 0) {
+> +		puts("I2C xfer: data len < 0\n");
+> +		return 1;
+> +	}
+> +
+> +	if (!buffer) {
+> +		puts("I2C xfer: NULL pointer passed\n");
+> +		return 1;
+> +	}
+> +
+> +	if (!(i2c_con_reg & I2C_CON_EN)) {
+> +		puts("I2C xfer: I2C_CON_EN not set\n");
+> +		return 1;
+> +	}
 
-Yep, fully aggree, we need the Kconfig symbol for backward compatibility.
+Can we use here (and above) a negative error code? Later you only
+check in omap_i2c_xfer() if returncode is ! 0 and return "-EREMOTEIO"
+may, you can return here better codes and simply return than this
+error codes from omap_i2c_xfer() ?
+
+And may you change the strings from the puts call to a more driver specifc
+string ... so its clear from which i2c driver the error message comes...
+please fix this globally in your patchset.
+
+> +
+> +	/* Set slave address */
+> +	omap_i2c_write_reg(i2c_base, ip_rev, chip, OMAP_I2C_SA_REG);
+> +	/* Read/Write len bytes data */
+> +	omap_i2c_write_reg(i2c_base, ip_rev, len, OMAP_I2C_CNT_REG);
+> +	/* Configure the I2C_CON register */
+> +	omap_i2c_write_reg(i2c_base, ip_rev, i2c_con_reg, OMAP_I2C_CON_REG);
+> +
+> +	/* read/write data bytewise */
+> +	for (i = 0; i < len; i++) {
+> +		status = wait_for_event(i2c_base, ip_rev, waitdelay);
+> +		/* Ignore I2C_STAT_RRDY in transmitter mode */
+> +		if (i2c_con_reg & I2C_CON_TRX)
+> +			status &= ~I2C_STAT_RRDY;
+> +		else
+> +			status &= ~I2C_STAT_XRDY;
+> +
+> +		/* Try to identify bus that is not padconf'd for I2C */
+> +		if (status == I2C_STAT_XRDY) {
+> +			i2c_error = 2;
+> +			printf("I2C xfer: pads on bus probably not configured (status=0x%x)\n",
+> +			       status);
+> +			goto xfer_exit;
+> +		}
+> +		if (status == 0 || (status & I2C_STAT_NACK)) {
+> +			i2c_error = 1;
+> +			printf("I2C xfer: error waiting for ACK (status=0x%x)\n",
+> +			       status);
+> +			goto xfer_exit;
+> +		}
+> +		if (status & I2C_STAT_XRDY) {
+> +			/* Transmit data */
+> +			omap_i2c_write_reg(i2c_base, ip_rev,
+> +					   buffer[i], OMAP_I2C_DATA_REG);
+> +			omap_i2c_write_reg(i2c_base, ip_rev,
+> +					   I2C_STAT_XRDY, OMAP_I2C_STAT_REG);
+> +		}
+> +		if (status & I2C_STAT_RRDY) {
+> +			/* Receive data */
+> +			*buffer++ = omap_i2c_read_reg(i2c_base, ip_rev,
+> +							OMAP_I2C_DATA_REG);
+> +			omap_i2c_write_reg(i2c_base, ip_rev,
+> +					   I2C_STAT_RRDY, OMAP_I2C_STAT_REG);
+> +		}
+> +	}
+> +
+> +	/*
+> +	 * poll ARDY bit for making sure that last byte really has been
+> +	 * transferred on the bus.
+> +	 */
+> +	do {
+> +		status = wait_for_event(i2c_base, ip_rev, waitdelay);
+> +	} while (!(status & I2C_STAT_ARDY) && timeout--);
+> +	if (timeout <= 0) {
+> +		puts("I2C xfer: timed out on last byte!\n");
+> +		i2c_error = 1;
+> +		goto xfer_exit;
+> +	} else {
+> +		omap_i2c_write_reg(i2c_base, ip_rev, I2C_STAT_ARDY, OMAP_I2C_STAT_REG);
+> +	}
+> +
+> +	/* If Stop bit set, flush FIFO. */
+> +	if (i2c_con_reg & I2C_CON_STP)
+> +		goto xfer_exit;
+> +
+> +	return 0;
+> +
+> +xfer_exit:
+> +	flush_fifo(i2c_base, ip_rev);
+> +	omap_i2c_write_reg(i2c_base, ip_rev, 0xFFFF, OMAP_I2C_STAT_REG);
+> +	return i2c_error;
+> +}
+> +
+> +#if !CONFIG_IS_ENABLED(DM_I2C)
+> +/*
+> + * The legacy I2C functions. These need to get removed once
+> + * all users of this driver are converted to DM.
+> + */
+> +
+>   /*
+>    * i2c_read: Function now uses a single I2C read transaction with bulk transfer
+>    *           of the requested number of bytes (note that the 'i2c md' command
+> @@ -836,11 +937,6 @@ wr_exit:
+>   	return i2c_error;
+>   }
+>   
+> -#if !CONFIG_IS_ENABLED(DM_I2C)
+> -/*
+> - * The legacy I2C functions. These need to get removed once
+> - * all users of this driver are converted to DM.
+> - */
+>   static void __iomem *omap24_get_base(struct i2c_adapter *adap)
+>   {
+>   	switch (adap->hwadapnr) {
+> @@ -975,23 +1071,30 @@ static int omap_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
+>   {
+>   	struct omap_i2c *priv = dev_get_priv(bus);
+>   	int ret;
+> +	u16 i2c_con_reg = 0;
+>   
+>   	debug("i2c_xfer: %d messages\n", nmsgs);
+>   	for (; nmsgs > 0; nmsgs--, msg++) {
+> -		debug("i2c_xfer: chip=0x%x, len=0x%x\n", msg->addr, msg->len);
+> -		if (msg->flags & I2C_M_RD) {
+> -			ret = __omap24_i2c_read(priv->regs, priv->ip_rev,
+> -						priv->waitdelay,
+> -						msg->addr, 0, 0, msg->buf,
+> -						msg->len);
+> -		} else {
+> -			ret = __omap24_i2c_write(priv->regs, priv->ip_rev,
+> -						 priv->waitdelay,
+> -						 msg->addr, 0, 0, msg->buf,
+> -						 msg->len);
+> -		}
+> +		debug("i2c_xfer: chip=0x%x, len=0x%x, read=0x%x\n",
+> +		      msg->addr, msg->len, (msg->flags & I2C_M_RD));
+> +
+> +		/* Wait until bus not busy */
+> +		if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
+> +			return -EREMOTEIO;
+> +
+> +		/* Set Controller mode with Start and Stop bit */
+> +		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT | I2C_CON_STP;
+> +		/* Set Transmitter/Receiver mode if it is a write/read msg */
+> +		if (msg->flags & I2C_M_RD)
+> +			i2c_con_reg &= ~I2C_CON_TRX;
+> +		else
+> +			i2c_con_reg |= I2C_CON_TRX;
+> +
+> +		ret = __omap24_i2c_xfer_msg(priv->regs, priv->ip_rev, priv->waitdelay,
+> +					    msg->addr, msg->buf, msg->len,
+> +					    i2c_con_reg);
+>   		if (ret) {
+> -			debug("i2c_write: error sending\n");
+> +			debug("i2c_xfer: error sending\n");
+>   			return -EREMOTEIO;
+>   		}
+>   	}
+> 
 
 Thanks!
 
