@@ -4,69 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258CDC19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 16:22:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D85C19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 17:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C7AF81298;
-	Fri,  7 Mar 2025 17:22:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A9278144F;
+	Fri,  7 Mar 2025 18:11:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hreG4UmK";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="T8cybBlY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22A0D81420; Fri,  7 Mar 2025 17:22:02 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8F5080F4C
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 17:21:59 +0100 (CET)
+ id 62749814A4; Fri,  7 Mar 2025 18:11:10 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CB55080F6B
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 18:11:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 527GLwri4018057
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 7 Mar 2025 10:21:58 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741364518;
- bh=Zcv8YWpzHva86UJIhjxHQxg4g0ZIjLBgtoN8ygBN+wI=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=hreG4UmKWYAcv/84BPT7G6EaUFtry8Nzj3s2IuKGpKgQTC4qMClDSBB2XLdKWuWz3
- 6KKvavuLUoQi84sWqWreLEKOB+P4nHIhm98MZBpcP9KCuUXZXVt8Cs82tPbc+8MCSC
- hBeCAKDf+IhhjhqUMuY6/M9vv04PEou32PYirzE8=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 527GLwBj081506
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Mar 2025 10:21:58 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Mar 2025 10:21:57 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Mar 2025 10:21:58 -0600
-Received: from localhost (a0543016.dhcp.ti.com [172.24.227.225])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 527GLvFE069187;
- Fri, 7 Mar 2025 10:21:57 -0600
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 8F88525BAC;
+ Fri,  7 Mar 2025 18:11:06 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mm-26EuzrM_p; Fri,  7 Mar 2025 18:11:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1741367391; bh=0Cs/k6PulVqmfYsMOCh5/3qmbCOe7VzssMuVyOpaDX0=;
+ h=From:To:Cc:Subject:Date;
+ b=T8cybBlY2+y0cgS3+L8oxDR5KTmTj3kT6i81Lg9C6xP2GLOI0CRCLv1tlsAkn64Cm
+ vgqT4CtU25hTekxgXiOTZ7MWj6a7uqLIY6dLwlLlJ2/f6m5Dp0emeGgSILkdyeUGYS
+ FeIWMxWu0SXUpdifGjpfLN57VowtTJW0w3CP2jqBgeiM/7Gj6tNLsWCf13I6HG1bAG
+ ZHo7+i8HeETjMu7XpId9xOUm15kewdKm1QdGpLKI7k12n7LYwyVMYi6uohxf+1jb+9
+ sRxlTCfuimFY2Mz9EK4mALoLVC27ySFP0fjUjAoyH/nQ0BoHFHL1p8V+RBUWFh0WfJ
+ SVuhXVaCbVA1w==
+From: Yao Zi <ziyao@disroot.org>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Kongyang Liu <seashell11234455@gmail.com>
+Cc: u-boot@lists.denx.de,
+	Yao Zi <ziyao@disroot.org>
+Subject: [PATCH] riscv: dts: cv18xx: Drop unused dummy clocks
+Date: Fri,  7 Mar 2025 17:09:22 +0000
+Message-ID: <20250307170921.31551-2-ziyao@disroot.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 7 Mar 2025 21:51:56 +0530
-Message-ID: <D8A67B91C5MK.3KCZUQ1GM5700@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <afd@ti.com>,
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
-Subject: Re: [EXTERNAL] Re: [PATCH 09/10] config: add falcon boot config
- fragment for am62x
-X-Mailer: aerc 0.17.0
-References: <20250307075541.2571104-1-anshuld@ti.com>
- <20250307075541.2571104-10-anshuld@ti.com>
- <20250307155809.GR2640854@bill-the-cat>
-In-Reply-To: <20250307155809.GR2640854@bill-the-cat>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,57 +66,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri Mar 7, 2025 at 9:28 PM IST, Tom Rini wrote:
-> On Fri, Mar 07, 2025 at 01:25:37PM +0530, Anshul Dalal wrote:
-> > This fragment enables falcon boot for the am62x, 62a and 62p.
-> >=20
-> > To have enough stack and heap space for loading kernel image as FIT, th=
-e
-> > memory map was modified as shown below, the PRELOADED_BL33_BASE in ATF
-> > has to also be updated to 0x80200000 since the kernel requires to be
-> > loaded at 2MiB aligned address.
-> >=20
-> > Memory Map (changed addresses marked with *):
-> >=20
-> > 0x80000000 +-------------------------------+ Start of DDR
-> >   512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-> > 0x80080000 +-------------------------------+
-> >   1.5MiB   |            Unused             |
-> > 0x80200000 +-------------------------------+ PRELOADED_BL33_BASE* in AT=
-F
-> >            |                               | CONFIG_SYS_LOAD_ADDR* (loa=
-d
-> >    30MiB   |   Kernel + initramfs Image    | address for kernel)
-> >            |                               |
-> > 0x82000000 +-------------------------------+ K3_HW_CONFIG_BASE in ATF
-> >            |                               | CONFIG_SPL_PAYLOAD_ARGS_AD=
-DR*
-> >     1MiB   |          Kernel DTB           |
-> >            |                               |
-> > 0x82100000 +-------------------------------+ CONFIG_SPL_LOAD_FIT_ADDRES=
-S*
-> >            |                               |
-> >    55MiB   |Initial Download Region for FIT|
-> >            |                               |
-> > 0x85800000 +-------------------------------+
-> >            |                               |
-> >            |  R5 U-Boot SPL Stack + Heap   |
-> >    56MiB   |       (size defined by        |
-> >            | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-> >            |                               |
-> > 0x89000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR*
-> >   344MiB   |       Device Manager (DM)     |
-> > 0x9e800000 +-------------------------------+ BL32_BASE in ATF
-> >    24MiB   |             OPTEE             |
-> > 0xa0000000 +-------------------------------+ End of DDR (512MiB)
->
-> This information is good and belongs in a relevant rst file, not just
-> commit message.
+Introduced in commit 5a4e0625ac77 ("riscv: dts: sophgo: Add ethernet
+node"), eth_{csrclk,ptpclk} were used as placeholders for ethernet
+controller. As the real clock controller has been added, drop them to
+clean the devicetree up.
 
-I wanted to get some feedback first before updating the documentation in
-case there were any changes to the boot flow. Once we have finalized
-that, I will update the documentation in an upcoming revision of this
-patch set.
+Signed-off-by: Yao Zi <ziyao@disroot.org>
+---
+ arch/riscv/dts/cv18xx.dtsi | 14 --------------
+ 1 file changed, 14 deletions(-)
 
-Anshul
+diff --git a/arch/riscv/dts/cv18xx.dtsi b/arch/riscv/dts/cv18xx.dtsi
+index 8a7386b76e6..6fac247e7ac 100644
+--- a/arch/riscv/dts/cv18xx.dtsi
++++ b/arch/riscv/dts/cv18xx.dtsi
+@@ -46,20 +46,6 @@
+ 		#clock-cells = <0>;
+ 	};
+ 
+-	eth_csrclk: eth-csrclk {
+-		compatible = "fixed-clock";
+-		clock-frequency = <250000000>;
+-		clock-output-names = "eth_csrclk";
+-		#clock-cells = <0x0>;
+-	};
+-
+-	eth_ptpclk: eth-ptpclk {
+-		compatible = "fixed-clock";
+-		clock-frequency = <50000000>;
+-		clock-output-names = "eth_ptpclk";
+-		#clock-cells = <0x0>;
+-	};
+-
+ 	soc {
+ 		compatible = "simple-bus";
+ 		interrupt-parent = <&plic>;
+-- 
+2.48.1
 
