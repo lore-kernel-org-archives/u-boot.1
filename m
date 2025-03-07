@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976B6C282DE
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 13:09:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A62FC282DE
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 13:09:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 952F9812C8;
+	by phobos.denx.de (Postfix) with ESMTP id DC8AB8141D;
 	Fri,  7 Mar 2025 14:08:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T5LXiJGK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="idSRvs22";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD2DA810F5; Fri,  7 Mar 2025 11:35:10 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 4DCBE810F5; Fri,  7 Mar 2025 11:35:12 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7969480017
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 11:35:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6CA380F4C
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 11:35:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5e56b229d60so5229536a12.0
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 02:35:08 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac2400d1c01so264275866b.1
+ for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 02:35:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741343708; x=1741948508; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741343709; x=1741948509; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LGBWrVHmKECWXoRG3noF7+yGNrBMzN8ye+pDXZzDUCI=;
- b=T5LXiJGKOt7qpXgcS4LWMOgs5FtylvV3IW/vnUl0GEgSLlNvuUk8plVyPYg08KNfrd
- tedXHxJSrZ+VyDKZ6elWw14qAoxqXTgrLZvjVN8k1bQy6hqja2GsJvW/+pSkvHj9j0Ty
- 21kGwEkgWZ6zzH/Jf2mIEKIbu1f0AIFXcFeS59gH0c1WY/F6BrkasZ3VGuxhd4aSu8tJ
- quyIfF01iwENaClxaScUxYjoSJwLP1Iy2v/VBqLcD5gsW7FEjYKUjJp08oxjyp14yKrY
- Wj432Squ53g+NdWlhTr+YmVyROtpQFOlYY/CY1fj55BTMV6TXGQkVz4wQIk07s5cZU53
- HuxA==
+ bh=mG+ZY2y7JfQgS8a+bABUyure8g3TiW7MOAT/PSu4n8o=;
+ b=idSRvs22PVqGoV49oZfiY07iyNStf1/0kGZEE/cYInr8kPaco3gQxrMF/wAh9PP6Fi
+ ixisfCCL2onOe+B92D2NIqtVWFi1Wwyhk3WUO46szxP0/HjjCmr1pth3ZcIWyecRxLWe
+ mI720ql1eX6MEeXFOg6sHSy4Gd/0NCE+XCDqdIMl/e0AbmAKwUXRLEM+VCQKw16AAyHQ
+ Aw/KJPHdyEKJ2vJP5hQecvPcUPU+QClc0aJ46U9pwmbGavqEAw+/azPdf6dP+YnGRGoq
+ IkhmjGHLaxZ/pBm7ccSj7zror+qVnDxDMYsAJ2/daVWkVFnPW4XoFxkPck1/btD6qyHD
+ /BNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741343708; x=1741948508;
+ d=1e100.net; s=20230601; t=1741343709; x=1741948509;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LGBWrVHmKECWXoRG3noF7+yGNrBMzN8ye+pDXZzDUCI=;
- b=vtc2w52sDCZTNQXZYL2LdHANHrfgadW04sWVLmcTUrJV6YTIJzcYOP88xHmLrfkEU+
- TWnBat2CqdYbjTA+YJ6OpRtcIGx8tFlYlq54aq0Ir30i0SLVgPyh52Fs0C9ytD1uPfT8
- h4IovJKZxjMOX6tO+zBHtpK33qbojfJXbotB3Jr73WnzVZdtplHTk28vliJvXsyUfB1L
- PuQemTx8pWwJLD9t7h4M9yk56KQ5gdwAZ5g8dKAU4ZSDK6ageO3nytwM09OrCU3fWGyA
- WfbnfGEhYLde3lc8ijyu3f5b6sU0KiT4uAEhO7NdIWe6C+VXPqfXZkp5EwxtKWFJeUBk
- fLrw==
+ bh=mG+ZY2y7JfQgS8a+bABUyure8g3TiW7MOAT/PSu4n8o=;
+ b=I6o7LIHaYrF7TSE+rLLgEdWaeHBhkggwP1PHeUMP7EG7qhdjaKRTutpmiVZO2/EF4/
+ d1KVfIck/GIeVsvy+tcI2Nhu0WdQUTfpqiKhHr7BDZQFu0GC53OPbPCllzdAbeVeHFEB
+ ERLNO9dcN/2L4aejYr8A4OVMVMBS7vXkNH33y2oVW2FGCOOTpaB9W+epilqAyvuxmUHt
+ EB9FiPTAHTafuxFtGRkYVbyty7wM2wpnUl2WqMewaZWoph8VBnznrCd8pYeefyaJ7zjr
+ MhSSs869dUL3qIg655gwc1oKKSlGQxux50V9JoBz9P2cVYAhQBoPecIOqVObHj12EsLC
+ TWbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWv8stcjdrEZiamI/T1dj/TxgAxTnhYtKC0YYnEjI1r+MGbseavpmAWytoUIJor2s+Bk/L+NBY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxkTfcrHeyCkmPCgq+M3c0XQUiuIb8mJBgSmMV5x+ORQfo42Pn2
- LHGXNeDRemosK+eYVX5FUVK1sszML4WSbBt5tqA8FHq4uOXhr1cgX+QZ/2Cx
-X-Gm-Gg: ASbGnctrpkqfUIvJ2eKcyMYhDDPI3pWAJT+DthEB29TGRpgwrbGvjDHYvOSGbuBmfeh
- Dt28mdZrq/+JRpoa3b1qXgc7vJVBIJImk/s0a3oexsFudcEtr8O5jb4SyLAOZaCCiGiXv4lEw7Y
- uiHeinuVU/VL/mW/DQlcYSDPhk6srlkX2kYSQ9XLrGis+Dt7ZekFOW6A9R4I/0y0JvbUSIHc77h
- JK7TGoIgLc6w0n/HoOOqWMWJlPR2XfBmyAQgNyUCr09FL+RMXikW+6R6jRZj4VH79RaQN78F+1a
- DOyORxgqgBDE6mPFGMokH4OQUBbeU6lrK5+qXp5vXyXwhUuRuYRZiov2HyOzADoaK/9wlzwc2pJ
- Vly7gEotaglUyTrXorbPysWc=
-X-Google-Smtp-Source: AGHT+IGZTJ1Pe7hoBzisdk+30ZEbwFFFufs+3AM6PvCunRcgFlANArrgGV/qZDOijrX9LEClkmFLWw==
-X-Received: by 2002:a17:907:7d8e:b0:abf:6f25:9881 with SMTP id
- a640c23a62f3a-ac22cd71628mr703229866b.25.1741343707702; 
- Fri, 07 Mar 2025 02:35:07 -0800 (PST)
+ AJvYcCWPCx1cVCe3oAWe2Z7E3oFLGEyXKvikr3Kp+sHZAaH1d3V9pJx0x2wk03QNHz+npytB1fBz4V8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtniJSouGuvURMwcqtzy8KWgDBhOLkB9FJg7QG9KSX58mH8Ncf
+ HnmhKc/YEWV76q/UO7lFFHU2ku6T2G3p8z0yXTTkAyRSsrrKTyb/eOZHmHCD
+X-Gm-Gg: ASbGncvocS1au79LLR+9/SxiBkjAcVr9GyYOKKI8aR+SwUGC7bTW1A321C8qU/ZcYBB
+ A8UgOY0o7lj1XKBmbm/Y6ItW/O1VFTOit7Gkav5ChgcC9JJE5feKOeThGikznyGXokOWh2ndvjx
+ 7qSgSoQMoJ1uUhT1jQvnu0p6IWEVIu/5EyTWf94qqyO/jOjsw5OEFYBOA/e458LeBkLNVh79Znc
+ OiKDjszr4aRzN0H0b/7aQGxCfF2mlDTsvpeZnvTcY0gvLZtPAV7xaJomzzxhvP6NaQRvmL71+7M
+ O+9s2rroWCrG92XLuoWWpOi8PInbEqyCXqJ14tZIU9dPgoEF/d9sVQRxdCG81+rX+NbimEMCq12
+ ug5fqMqL5kEbvEdvI4ABfSNw=
+X-Google-Smtp-Source: AGHT+IE3yWw9ILaTxHX2GQGsZC0RRxeAtHehZnKwFDe/gWQ01rx2v4BIhBJhpYt0nuRWWgrJ4WItRQ==
+X-Received: by 2002:a17:907:72d1:b0:abf:4a3b:454d with SMTP id
+ a640c23a62f3a-ac24e92b166mr343652166b.7.1741343709015; 
+ Fri, 07 Mar 2025 02:35:09 -0800 (PST)
 Received: from ernest.corp.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac23988b403sm254867166b.129.2025.03.07.02.35.07
+ a640c23a62f3a-ac23988b403sm254867166b.129.2025.03.07.02.35.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 02:35:07 -0800 (PST)
+ Fri, 07 Mar 2025 02:35:08 -0800 (PST)
 From: ernestvanhoecke@gmail.com
 X-Google-Original-From: ernest.vanhoecke@toradex.com
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
@@ -81,10 +81,10 @@ Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
  u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>,
  Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 1/2] board: toradex: apalis/colibri imx6: Detect new v1.2
- SoM variant
-Date: Fri,  7 Mar 2025 11:34:13 +0100
-Message-ID: <20250307103454.32661-2-ernest.vanhoecke@toradex.com>
+Subject: [PATCH v2 2/2] toradex: apalis/colibri imx6: Select correct DTB for
+ SoM v1.2+
+Date: Fri,  7 Mar 2025 11:34:14 +0100
+Message-ID: <20250307103454.32661-3-ernest.vanhoecke@toradex.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250307103454.32661-1-ernest.vanhoecke@toradex.com>
 References: <20250307103454.32661-1-ernest.vanhoecke@toradex.com>
@@ -109,161 +109,50 @@ X-Virus-Status: Clean
 
 From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 
-Apalis/Colibri iMX6 V1.2 will replace the STMPE811 ADC/Touch controller
-which is EOL by the TLA2024 ADC and AD7879 touch controller.
+When "fdtfile" is not set, use the "variant" environment variable to
+select the correct DTB.
 
-To support this new version, we detect the presence of the TLA2024
-during boot and set a new environment variable named "variant". This
-will allow us and users to select the correct DT easily.
-
-By probing via I2C we have a robust detection method instead of relying
-on the existing "board_rev" environment variable which is set by the
-config block. Users can use "variant" in their DT selection and do not
-have to map the board revision to a device tree.
-
-"variant" environment variable behaviour:
-* Empty or absent for all versions below v1.2 (STMPE811)
-* "-v1.2" for all versions starting from v1.2 (TLA2024 + AD7879)
-
-Usage example:
-setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb
+Apalis/Colibri iMX6 V1.2 replaced the STMPE811 ADC/Touch controller
+which is EOL with the TLA2024 ADC and AD7879 touch controller. They thus
+require a different DTB, which we can easily select with the variant env
+variable.
 
 Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
 v2: Fixed the "From" field
-v1: https://lore.kernel.org/u-boot/20250228095317.621037-2-ernest.vanhoecke@toradex.com/
+v1: https://lore.kernel.org/u-boot/20250228095317.621037-3-ernest.vanhoecke@toradex.com/
 ---
- board/toradex/apalis_imx6/apalis_imx6.c   | 31 +++++++++++++++++++++++
- board/toradex/colibri_imx6/colibri_imx6.c | 31 +++++++++++++++++++++++
- 2 files changed, 62 insertions(+)
+ configs/apalis_imx6_defconfig  | 2 +-
+ configs/colibri_imx6_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/board/toradex/apalis_imx6/apalis_imx6.c b/board/toradex/apalis_imx6/apalis_imx6.c
-index ec0f223c4aa6..e0a7c661270e 100644
---- a/board/toradex/apalis_imx6/apalis_imx6.c
-+++ b/board/toradex/apalis_imx6/apalis_imx6.c
-@@ -36,6 +36,7 @@
- #include <dwc_ahsata.h>
- #include <env.h>
- #include <fsl_esdhc_imx.h>
-+#include <i2c.h>
- #include <imx_thermal.h>
- #include <micrel.h>
- #include <miiphy.h>
-@@ -77,6 +78,8 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- #define APALIS_IMX6_SATA_INIT_RETRIES	10
- 
-+#define I2C_PWR	1
-+
- int dram_init(void)
- {
- 	/* use the DDR controllers configured size */
-@@ -689,6 +692,32 @@ int board_init(void)
- 	return 0;
- }
- 
-+static bool is_som_variant_1_2(void)
-+{
-+	struct udevice *bus;
-+	struct udevice *i2c_dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_seq(UCLASS_I2C, I2C_PWR, &bus);
-+	if (ret) {
-+		printf("Failed to get I2C_PWR\n");
-+		return false;
-+	}
-+
-+	/* V1.2 uses the TLA2024 at 0x49 instead of the STMPE811 at 0x41 */
-+	ret = dm_i2c_probe(bus, 0x49, 0, &i2c_dev);
-+
-+	return (bool)!ret;
-+}
-+
-+static void select_dt_from_module_version(void)
-+{
-+	if (is_som_variant_1_2())
-+		env_set("variant", "-v1.2");
-+	else
-+		env_set("variant", "");
-+}
-+
- #ifdef CONFIG_BOARD_LATE_INIT
- int board_late_init(void)
- {
-@@ -696,6 +725,8 @@ int board_late_init(void)
- 	char env_str[256];
- 	u32 rev;
- 
-+	select_dt_from_module_version();
-+
- 	rev = get_board_revision();
- 	snprintf(env_str, ARRAY_SIZE(env_str), "%.4x", rev);
- 	env_set("board_rev", env_str);
-diff --git a/board/toradex/colibri_imx6/colibri_imx6.c b/board/toradex/colibri_imx6/colibri_imx6.c
-index 64cf99e9cfcb..69a3c5f3dfd6 100644
---- a/board/toradex/colibri_imx6/colibri_imx6.c
-+++ b/board/toradex/colibri_imx6/colibri_imx6.c
-@@ -33,6 +33,7 @@
- #include <cpu.h>
- #include <dm/platform_data/serial_mxc.h>
- #include <fsl_esdhc_imx.h>
-+#include <i2c.h>
- #include <imx_thermal.h>
- #include <miiphy.h>
- #include <netdev.h>
-@@ -71,6 +72,8 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- #define OUTPUT_RGB (PAD_CTL_SPEED_MED|PAD_CTL_DSE_60ohm|PAD_CTL_SRE_FAST)
- 
-+#define I2C_PWR	1
-+
- int dram_init(void)
- {
- 	/* use the DDR controllers configured size */
-@@ -609,6 +612,32 @@ int board_init(void)
- 	return 0;
- }
- 
-+static bool is_som_variant_1_2(void)
-+{
-+	struct udevice *bus;
-+	struct udevice *i2c_dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_seq(UCLASS_I2C, I2C_PWR, &bus);
-+	if (ret) {
-+		printf("Failed to get I2C_PWR\n");
-+		return false;
-+	}
-+
-+	/* V1.2 uses the TLA2024 at 0x49 instead of the STMPE811 at 0x41 */
-+	ret = dm_i2c_probe(bus, 0x49, 0, &i2c_dev);
-+
-+	return (bool)!ret;
-+}
-+
-+static void select_dt_from_module_version(void)
-+{
-+	if (is_som_variant_1_2())
-+		env_set("variant", "-v1.2");
-+	else
-+		env_set("variant", "");
-+}
-+
- #ifdef CONFIG_BOARD_LATE_INIT
- int board_late_init(void)
- {
-@@ -616,6 +645,8 @@ int board_late_init(void)
- 	char env_str[256];
- 	u32 rev;
- 
-+	select_dt_from_module_version();
-+
- 	rev = get_board_revision();
- 	snprintf(env_str, ARRAY_SIZE(env_str), "%.4x", rev);
- 	env_set("board_rev", env_str);
+diff --git a/configs/apalis_imx6_defconfig b/configs/apalis_imx6_defconfig
+index a3f65c5c0269..f51386d10a88 100644
+--- a/configs/apalis_imx6_defconfig
++++ b/configs/apalis_imx6_defconfig
+@@ -31,7 +31,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=1024
+ CONFIG_SYS_PBSIZE=1055
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+diff --git a/configs/colibri_imx6_defconfig b/configs/colibri_imx6_defconfig
+index 4c6ba80789b6..9fc844b32690 100644
+--- a/configs/colibri_imx6_defconfig
++++ b/configs/colibri_imx6_defconfig
+@@ -30,7 +30,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=1024
+ CONFIG_SYS_PBSIZE=1056
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
 -- 
 2.43.0
 
