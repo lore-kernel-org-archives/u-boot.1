@@ -4,67 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7060C282EC
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 00:19:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AE8FC282D1
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 00:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E443808A2;
-	Fri,  7 Mar 2025 01:19:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EC9C680F4C;
+	Fri,  7 Mar 2025 01:20:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OoDWKKvN";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741306809;
+	bh=XeF7t3vwyVHsQlYIwK7z03x+x0jDl1ACJA8YpRBM9DQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=UCYQt2seSsaIYYWkBt3Rey1SMifyhwDCUGRZa4m6chjZ0u8c1sLYxFj+zrHgaJfWB
+	 Dqd6dkohhvmRjDyCc/1GAYXna5PA0oAO4aaBbP25dgouapjE6W1CIVuONUb9inRcC+
+	 PIP1QrPqNoaRD6FXMlZkMG6AausbAjXx7kpySzLblS1vDSAUz242Zrp5RqmPu2MJ5n
+	 D7D5viOETarTXVSXfXeONJ9RnNbyg6l8nG/Ng/mnwuICh4vvLREzhuZyP9E8mEpgsV
+	 E6+G+4u0rEPKxM2NKttyMlNycbwddBtxDbLMItAQaxZK75+7WQwNtbkel/WGhk6FMR
+	 07zZIPGSb15lw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD7EE80EB1; Fri,  7 Mar 2025 01:19:47 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id B84E1805D7; Fri,  7 Mar 2025 01:20:07 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0532805D7
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 01:19:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B545B81417
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 01:19:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Z86Nt5XNPz9swK;
- Fri,  7 Mar 2025 01:19:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741306782;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1IfYKcEMOsa+FOj2b0lytVAcbO2fXyntxm1PgXwZiys=;
- b=OoDWKKvNpuPXBuA7Wz4Cy4Tnzx7ODn++l1m1OanLoWZU4fk1KlUWeBDIq57Ivr9aBQrRiV
- DFPK+BqlIHLWrpklR9RaBgUK5uCdqrZWdWj/lsYGosP0NmTXY48uXmcGWDCxPaoDXTnZZL
- dM4a4AB9CP4rQe3+Yks7k4mbCJJjYQFgkbAAZiCL9LV+Jj61cA7HJJD9fM2VeLWsWQctsu
- 9USRPsxOGhTo2vmPpTeSFJZBnWU55MWQyZ1cmJW8d5TAPv0K/7acR56HrBE+RJshvlbULU
- pnwRv8EFFXJePq1Vxc7en9j6gmr/TBRi5o6Tbuxr1oIynZrLbaHqLUrs2v/zcg==
-Message-ID: <aa8b33bd-501c-4e35-8027-d583791d2f9e@mailbox.org>
-Date: Fri, 7 Mar 2025 01:19:39 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="dmQhIeXR"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 660B41038191A; Fri,  7 Mar 2025 01:19:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741306797; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=XeF7t3vwyVHsQlYIwK7z03x+x0jDl1ACJA8YpRBM9DQ=;
+ b=dmQhIeXR8gjeJ3J5DiIzPDg8H7ppwUuFqmhTwbgNcz92nUr6bPWyWjitJfQmOSj6MxSYzZ
+ sBqRi05aOYamyMVpOAChKpT0S672nmehVsg5bCKvmie2jX5ES+4I8Vf2VqU/OXZRprdSAo
+ NsEP2qjGMghH5eNLHaznG1u3Il6MTUkNUTvkGJLtTfyH7y39SzCzrHhzlmzZ7LxRu5fA86
+ IkWJ1wXap8gDpBUFUTk+hCITGWi9puH3J+HExiBM6D4VRI4jzLNWIe3HbVVljoweozZzsd
+ 8d5ZFW+2b+yq3re72kPUpn+ohMrhS0Map8f4AhfQiDQPIlk1J8vvCk+AUXpCzQ==
+Message-ID: <a05cf63b-820d-4b27-8f66-37a6e6c7b372@denx.de>
+Date: Fri, 7 Mar 2025 01:04:08 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/11] net: miiphybb: Split off struct bb_miiphy_bus_ops
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de
-Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
- <e4c44d9e-cc95-4f87-be9c-746c21a7103e@bp.renesas.com>
- <81b02e3a-3fe1-4b52-a646-194ca003b82e@mailbox.org>
- <00d6eef6-7880-4ad7-b634-e89f88e7d8e4@bp.renesas.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Brian Ruley <brian.ruley@gehealthcare.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250105203714.158480-1-marex@denx.de>
+ <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
+ <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
+ <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
+ <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
+ <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
+ <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
+ <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
+ <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
+ <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
+ <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
+ <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
+ <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
+ <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <00d6eef6-7880-4ad7-b634-e89f88e7d8e4@bp.renesas.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 7266bbf51fc8ccdfabc
-X-MBO-RS-META: wyn66ou6hqnmwfc9ow58ognn3d6auitp
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,36 +94,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/4/25 11:32 AM, Paul Barker wrote:
-> On 03/03/2025 23:16, Marek Vasut wrote:
->> On 3/3/25 8:29 PM, Paul Barker wrote:
->>> On 02/03/2025 01:24, Marek Vasut wrote:
->>>> Move miiphybb operations into separate struct bb_miiphy_bus_ops
->>>> structure, add pointer to struct bb_miiphy_bus_ops into the base
->>>> struct bb_miiphy_bus and access the ops through this pointer in
->>>> miiphybb generic code. The variable reshuffling in miiphybb.c
->>>> cannot be easily avoided.
->>>>
->>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>
->>> Hi Marek,
->>>
->>> I'm a bit lost trying to review this series. Could you include a cover
->>> letter summarising the change to the bitbangmii API? We also need to
->>> update `doc/README.bitbangMII`.
->>
->> In short, this splits ops from the bbmiiphy structure, which is entirely
->> removed in the course of this series, and so are all the bbmiiphy
->> alloc/free functions again. That in turn fixes the missed mdio_free()
->> update, which no longer has to be fixed, as the drivers go back to
->> mdio_alloc() to allocate the MDIO bus.
-> 
-> Ok, I've given this another look and it all looks ok. I'll send tags
-> shortly.
-> 
-> I do think we should update the documentation to match the new API.
-Documentation update is now posted at:
+On 3/7/25 12:30 AM, Simon Glass wrote:
 
-[PATCH] net: miiphybb: Update documentation
+Hi,
 
-Thanks !
+>>> One of the main goals of binman is to reduce the work needed to create
+>>> a working image. If people have to go spelunking around the Internet,
+>>> build it themselves, etc. that is not good.
+>> What you are asking me for is not the tool itself, but key material,
+>> which is generated by these scripts.
+> 
+> It looks like someone has done this here:
+> 
+> https://patchwork.ozlabs.org/project/uboot/list/?series=446218
+> 
+> so I think we are OK now.
+> 
+> I've applied that series to my tree.
+OK, does anything need to be done about this patch ?
