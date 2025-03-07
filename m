@@ -4,66 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16926C282D0
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 08:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05959C282D0
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 09:30:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B834810EB;
-	Fri,  7 Mar 2025 09:01:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 45F458122F;
+	Fri,  7 Mar 2025 10:30:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G1KkhIPn";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="vRceQ+o6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F0CF810EB; Fri,  7 Mar 2025 09:01:47 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F270980F0B
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 09:01:44 +0100 (CET)
+ id C06AF81276; Fri,  7 Mar 2025 10:30:07 +0100 (CET)
+Received: from mout.web.de (mout.web.de [212.227.17.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 96D8E811C1
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 10:30:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52781hkq202625
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 7 Mar 2025 02:01:43 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741334503;
- bh=hKavpUTopJcQ3xhqFe1pu8I4gGzn2t/XPkrEl7k0S/E=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=G1KkhIPnoCSuSvWYiPp19J9DgCNocpDyhNrvg26fWjVownuepf82Z8lJgfrpXhJ5X
- zbv9KgJpfWkF1EbjFhcTd3zEgwibXOd+Dx/T6m6clT/hOkmVreXIN32DbIjYaORi97
- Xft9fMjrDnTdgS5Zf/Odmetq8MJFdrOrwiML2cBA=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52781h46027040
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Mar 2025 02:01:43 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Mar 2025 02:01:42 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Mar 2025 02:01:42 -0600
-Received: from localhost (a0543016.dhcp.ti.com [172.24.227.86])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52781gdJ096676;
- Fri, 7 Mar 2025 02:01:42 -0600
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
-Subject: [PATCH 10/10] mach-k3: common: add falcon support for 62[axp]
-Date: Fri, 7 Mar 2025 13:29:52 +0530
-Message-ID: <20250307075954.2575030-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250307075541.2571104-1-anshuld@ti.com>
-References: <20250307075541.2571104-1-anshuld@ti.com>
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1741339795; x=1741944595; i=smoch@web.de;
+ bh=5KG7VKdbuADHS8O5bdU4PyKbCCUsTEqbvyOdniQjoA4=;
+ h=X-UI-Sender-Class:Content-Type:Message-ID:Date:MIME-Version:
+ Subject:To:Cc:References:From:In-Reply-To:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=vRceQ+o6b12q8im+kts06lolsuWMvaC8KTfzCSz3VhGxTr5hDCVLZjlgqOTogFsn
+ YRvozBxdaqSfRbCegqyhy3zB5uFKmnuxtnoD/8P3axIiCTIk+LbzUA/GrgbMgqcxv
+ nWsONGNwcE7rxaltL2PxtvmTAJOcT4NhzhDzfAxLaGQqepiQsdh7RF0H6HHwfXyll
+ VYw7tockNkY8krq98qQWgjw8OxS7oHuR7e97qGqEkwTVZXCtBpFy/yyHZ/LRUyWN7
+ ml02L7XL9j8+FBImuTp75jC01h4j7Gs5QAcS6Y0/Px/LjPJ17NbWjKNsh9/RZVYgb
+ C0AEw1KJGVqI068PeQ==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [10.9.8.2] ([93.241.254.39]) by smtp.web.de (mrweb106
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1Mmymz-1tQjjQ1BEV-00dSv8; Fri, 07
+ Mar 2025 10:29:55 +0100
+Message-ID: <0ed21fc1-6982-4c11-a913-bc03dbb541a1@web.de>
+Date: Fri, 7 Mar 2025 10:29:47 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/4] USB-PD TCPM improvements
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Anand Moon <linux.amoon@gmail.com>, Peter Robinson
+ <pbrobinson@gmail.com>, Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Tim Harvey <tharvey@gateworks.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Maxim Kiselev <bigunclemax@gmail.com>
+References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
+ <CANAwSgSur2VawHniSEZBD3AO63YnvUGf9m1_8p-XMNxQF+yziQ@mail.gmail.com>
+ <CALeDE9Nq_xbOc3W8hefPQuVBi_Xc_2r18cw6+jeEHeGKyHEa-g@mail.gmail.com>
+ <CANAwSgTu3ixjQRLZRqx_+nHNinDJSdphHHELtiHLANs+LF9YCw@mail.gmail.com>
+ <fbzod24w4kjhntzcnt36znqtyfykoao7u6g37wvzejtxxyljm4@w44tbipyhfkr>
+ <CANAwSgTcDL8o_t90+aL0g0FnvoiJE-risKCJBFrYrp9DukmtVg@mail.gmail.com>
+ <oxb7v5iwqjgyhsk2tc76oybmnmfvvnen67g32vpht3fgnagvif@t4enpaooabmv>
+ <CANAwSgRL2fMzGWdywdzp2BrkYWE0bw3RHa6K-Xf7ByFgjY=a5g@mail.gmail.com>
+ <CANAwSgQYPHyiFe9q+=+vWa9+pdrnEqz01L2fG8yXTaRqepubxA@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Soeren Moch <smoch@web.de>
+In-Reply-To: <CANAwSgQYPHyiFe9q+=+vWa9+pdrnEqz01L2fG8yXTaRqepubxA@mail.gmail.com>
+X-Provags-ID: V03:K1:kXxRnIht3csACW29cVbkdtKX0Uptq0Cb19KI4mGmOjzEf5UykzO
+ ZWwBhvQ+y35m1lsbjgADGoENK9RiRdPQ7IE56mQMeK6L4esLdav9+pyPDRCfCwPKLfRbG5D
+ buYhk33zisPsKX7Psx54ltPQVdOoW73fhdxhwjUTvGIWSUaA4whGLfw4WBCeu+hZy2P5fiM
+ 0mDW84zpxfghrOGnR7N1w==
+UI-OutboundReport: notjunk:1;M01:P0:Oj6nPx/3iRw=;7F3XpNeccanSmdFVXuJm1ejg1WV
+ ZWM5g7bxlxTv0NEDwg3Wl/5VTrpHDDY+9uDW2uxgfjI6gpqwRSt+KAwjKGOYNNj6JHc/HF0Eh
+ dSPIlw51cvvk3tMBxbO384/E8us8zvoSDdP0cFylyjKwzDme6VVtGe1LRyOapQ8qASH7F91OT
+ jHBT/+JV+yyouOb2HSuqZcoyUdEoTwQI0C6HwWq2D+iB+HXZQW/H2sB+YGBO956K6FB95g3rz
+ xMC9zOK/WAzl2T8gg4wpTAW8YaQrn0LYZp+pU2aYZn53pqtJeRrFYT6WasodpnTvbp+U69rCn
+ Rz/5v41ic7462e7XOypL/pKn20oNpG7z8tPL/B9A/zZ12PyjML9ZgmjWagvQ5bUCVzcI0AxQs
+ ai7sLXYR+XfqKRRYYRlzdi14UOA28CeunjUhWnJDheuqcHopz04cGomR/fVTHU5Br6ST5f4vl
+ G6nUBbEPJF3N3+RCavm2YRz810hJGjuNilY9MTT/5cwciduHQEkDEZEX3ArPOflCY56GsDhmW
+ CsCti2rqFp4b3jDo22pqGEd3Ewy71aIA9/QhSYEFE5rqsO5Ig4KiV9hx0JqMnu0hiFBikTDk5
+ 34bMsWFp3svUUF79YHlBaLEs8B5CGhWHns4rt2mRCrOxgafJAbZFcvw9+9eRGRby18b36bB9r
+ ypWjgozi/mOJp0rBsE3doK6NPwB9W3uKPO97XA4j8beU3ujDKufnEREECal0E3BjHHv+Srmxq
+ DEf2PVsxjtrrLJnB77jER7EAHK8uaj92SgRGR5NSZMQUzfmnpGzf6MN4uWQuImmf4BxTCh5fu
+ j7qAWrsChFdJsZchY04KOmBzNe8YrJU4R0XZMMXbKGl0K3BOS44P551MdQ1GgwKSQ5b7cY54d
+ yOz187MpR7/ePw5sFBhZqGbdbBKg1cyQlWqSum4lHGkYQnww7V0uQDnDeOEHqZgBHqH0I9RQP
+ s8uhotdkYiZoHlN+SoMNCAim2oR90EBCVFshPzg6Tp7XnCH2RLPPwJ5ryVqc+4atZQRgUQBB2
+ jQXnwim6SWIh7VScQiyL+3lXlsWNDHM61xBQrTtl4AGr4uV4x7TnQOwWiPYLVhmJoLBKULIm7
+ rYwHPgO8N1i0X/4ltGYsYhP3SotAuDypzYszEtROfMT4PlDLJZJjrFi7toM1BLDwk1qFtl1wD
+ PGdkhW3yWbgVMWtoNoJ1ihBlf/tR1cAdpuP7kW9RYQ3quMzCWMsobQUD2WCNmvr7LyLQtKU5S
+ WFByLTL/p99FjAKyQ6S09IxyF9zG2iV+XA2zy6a5EGXTHCvfX4ZgeaZms51QO+GFxEh/KOUNY
+ pRV8VBojNvkqSTWeymqaL/v5FFCr9slKnENFHfkIqCRupde9oK3SZwqifrHZ5qaao1c8OyFFf
+ buOKkmy2yR7ffcORJNJ80clOwrPGQtiMC6wQopcYhHs7tuvkF34WKM55Tu
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,142 +108,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We use the spl_board_prepare_for_boot hook to call k3_falcon_prep which
-is ran after tispl is loaded but before jump_to_image.
 
-In here, we find the boot media and load the image just as std falcon
-flow (since spl_start_uboot returns 0 now). Once the kernel and args are
-loaded, we perform fdt fixups on the fdt accompanying the kernel (if
-loaded as FIT) or the loaded up args and return.
 
-Now when the flow goes to jump_to_image, we do the regular pre-jump
-procedure and jump to ATF which jumps to the kernel directly since we
-have already loaded the kernel and dtb at their respective addresses
-(PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE).
+On 06.03.25 20:00, Anand Moon wrote:
+> Apologies, I had not applied the whole series of patches
+>
+> Please add my
+> Reviewed-by: Anand Moon<linux.amoon@gmail.com>
+> Tested-by: Anand Moon<linux.amoon@gmail.com>
+>
+> After applying enabling debug I am convinced this works on my Rock Pi 5b=
+ Board.
+>
+> U-Boot 2025.04-rc3-00057-g671ac2d744b2 (Mar 06 2025 - 23:51:44 +0530)
+>
+> Model: Radxa ROCK 5B
+> SoC:   RK3588
+> DRAM:  8 GiB
+> fusb302 usb-typec@22: probing Type-C port manager...fusb302
+> usb-typec@22: fusb302 device ID: 0x91
+> fusb302 usb-typec@22: TCPM: set voltage limit =3D 0 mV
+> fusb302 usb-typec@22: TCPM: set current limit =3D 0 mA
+> fusb302 usb-typec@22: fusb302 start drp toggling
+> fusb302 usb-typec@22: TCPM: init finished
+> fusb302 usb-typec@22: TCPM: CC connected in CC2 as UFP
+> fusb302 usb-typec@22: TCPM: set voltage limit =3D 5000 mV
+> fusb302 usb-typec@22: TCPM: set current limit =3D 3000 mA
+> fusb302 usb-typec@22: CC activities detected, delay handling
+> fusb302 usb-typec@22: CC activities detected, delay handling
+> fusb302 usb-typec@22: Initiating hard-reset, which might result in
+> machine power-loss.
+> fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
+> fusb302 usb-typec@22: TCPM: set voltage limit =3D 5000 mV
+> fusb302 usb-typec@22: TCPM: set current limit =3D 3000 mA
+> fusb302 usb-typec@22: CC activities detected, delay handling
+> fusb302 usb-typec@22: CC activities detected, delay handling
+> fusb302 usb-typec@22: TCPM: PD chip enter low power mode
+> Core:  362 devices, 34 uclasses, devicetree: separate
+> MMC:   mmc@fe2c0000: 1, mmc@fe2d0000: 2, mmc@fe2e0000: 0
+>
+I also tested this series on top of v2025.04-rc3 with my working USB-PD
+power supply.
+Of course I cannot check the improvements for problematic power
+supplies, but I
+can confirm that there are no regressions from this series in my setup.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/mach-k3/common.c | 105 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
+For the series:
+Tested-by: Soeren Moch <smoch@web.de>
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index fa8cd93d664..6e41aa8318b 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -263,8 +263,113 @@ static __maybe_unused void k3_dma_remove(void)
- 		pr_warn("DMA Device not found (err=%d)\n", rc);
- }
- 
-+#if IS_ENABLED(CONFIG_SPL_OS_BOOT) && !IS_ENABLED(CONFIG_ARM64)
-+static bool tispl_loaded;
-+
-+int spl_start_uboot(void)
-+{
-+	if (!tispl_loaded)
-+		return 1;
-+	return 0;
-+}
-+
-+static int k3_falcon_fdt_fixup(void *fdt)
-+{
-+	struct disk_partition info;
-+	struct blk_desc *dev_desc;
-+	char bootmedia[32];
-+	char bootpart[32];
-+	char str[256];
-+	int ret;
-+
-+	strcpy(bootmedia, env_get("boot"));
-+	strcpy(bootpart, env_get("bootpart"));
-+	ret = blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, 0);
-+	if (ret < 0)
-+		printf("Failed to get part details for %s %s [%d]\n", bootmedia,
-+		       bootpart, ret);
-+	sprintf(str, "console=%s root=PARTUUID=%s rootwait", env_get("console"),
-+		info.uuid);
-+	ret = fdt_find_and_setprop(fdt, "/chosen", "bootargs", str,
-+				   strlen(str) + 1, 1);
-+	if (ret) {
-+		printf("Could not set bootargs: %s\n", fdt_strerror(ret));
-+		return ret;
-+	}
-+	debug("Set bootargs to: %s\n", str);
-+
-+#ifdef CONFIG_OF_BOARD_SETUP
-+	ret = ft_board_setup(fdt, gd->bd);
-+	if (ret) {
-+		printf("Failed in board fdt fixups: %s\n", fdt_strerror(ret));
-+		return ret;
-+	}
-+#endif
-+
-+#ifdef CONFIG_OF_SYSTEM_SETUP
-+	ret = ft_system_setup(fdt, gd->bd);
-+	if (ret) {
-+		printf("Failed in system fdt fixups: %s\n", fdt_strerror(ret));
-+		return ret;
-+	}
-+#endif
-+
-+	return 0;
-+}
-+
-+static int k3_falcon_prep(void)
-+{
-+	struct spl_image_loader *loader, *drv;
-+	struct spl_image_info kernel_image;
-+	struct spl_boot_device bootdev;
-+	int ret = -ENXIO, n_ents;
-+	void *fdt;
-+
-+	tispl_loaded = true;
-+	memset(&kernel_image, '\0', sizeof(kernel_image));
-+	drv = ll_entry_start(struct spl_image_loader, spl_image_loader);
-+	n_ents = ll_entry_count(struct spl_image_loader, spl_image_loader);
-+	bootdev.boot_device = spl_boot_device();
-+	if (bootdev.boot_device == BOOT_DEVICE_SPI) {
-+		if (strcmp(env_get("mmcdev"), "1") == 0)
-+			bootdev.boot_device = BOOT_DEVICE_MMC;
-+		else
-+			bootdev.boot_device = BOOT_DEVICE_EMMC;
-+	}
-+	bootdev.boot_device_name = NULL;
-+
-+	for (loader = drv; loader != drv + n_ents; loader++) {
-+		if (bootdev.boot_device != loader->boot_device)
-+			continue;
-+		if (loader) {
-+			printf("Loading falcon payload from %s\n",
-+			       spl_loader_name(loader));
-+			ret = loader->load_image(&kernel_image, &bootdev);
-+			if (ret)
-+				continue;
-+
-+			fdt = spl_image_fdt_addr(&kernel_image);
-+			if (!fdt)
-+				fdt = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
-+			ret = k3_falcon_fdt_fixup(fdt);
-+			if (ret) {
-+				printf("Failed performing fdt fixups in falcon flow: [%d]\n",
-+				       ret);
-+				return ret;
-+			}
-+			return 0;
-+		}
-+	}
-+
-+	return ret;
-+}
-+#endif
-+
- void spl_board_prepare_for_boot(void)
- {
-+#if IS_ENABLED(CONFIG_SPL_OS_BOOT) && !IS_ENABLED(CONFIG_ARM64)
-+	k3_falcon_prep();
-+#endif
- #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
- 	dcache_disable();
- #endif
--- 
-2.43.0
 
+U-Boot 2025.04-rc3-00004-g27c9bc97fafe (Mar 07 2025 - 09:39:42 +0100)
+
+Model: Radxa ROCK 5B
+SoC:=C2=A0=C2=A0 RK3588
+DRAM:=C2=A0 8 GiB
+Core:=C2=A0 362 devices, 34 uclasses, devicetree: separate
+MMC:=C2=A0=C2=A0 mmc@fe2c0000: 1, mmc@fe2d0000: 2, mmc@fe2e0000: 0
+Loading Environment from nowhere... OK
+In:=C2=A0=C2=A0=C2=A0 serial@feb50000
+Out:=C2=A0=C2=A0 serial@feb50000
+Err:=C2=A0=C2=A0 serial@feb50000
+Model: Radxa ROCK 5B
+SoC:=C2=A0=C2=A0 RK3588
+Net:=C2=A0=C2=A0 No ethernet found.
+Hit any key to stop autoboot:=C2=A0 0
+=3D> tcpm list
+| ID | Name=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 | Parent name=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 | Parent
+uclass @ seq
+|=C2=A0 0 | usb-typec@22=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | i2c@f=
+eac0000=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | i2c @ 4 |
+status: 0
+=3D> tcpm dev 0
+dev: 0 @ usb-typec@22
+=3D> tcpm info
+Orientation: reverse
+PD Revision: rev3
+Power Role:=C2=A0 sink
+Data Role:=C2=A0=C2=A0 device
+Voltage:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 5.000 V
+Current:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 3.000 A
+=3D>
+
+Thanks,
+Soeren
