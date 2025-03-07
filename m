@@ -4,93 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A62FC282DE
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 13:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6DEC19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 13:14:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC8AB8141D;
-	Fri,  7 Mar 2025 14:08:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D98A4808A2;
+	Fri,  7 Mar 2025 14:14:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="idSRvs22";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="Ppoaer5I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DCBE810F5; Fri,  7 Mar 2025 11:35:12 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DB065810F5; Fri,  7 Mar 2025 14:14:21 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6CA380F4C
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 11:35:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 897418056A
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 14:14:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ac2400d1c01so264275866b.1
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 02:35:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741343709; x=1741948509; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mG+ZY2y7JfQgS8a+bABUyure8g3TiW7MOAT/PSu4n8o=;
- b=idSRvs22PVqGoV49oZfiY07iyNStf1/0kGZEE/cYInr8kPaco3gQxrMF/wAh9PP6Fi
- ixisfCCL2onOe+B92D2NIqtVWFi1Wwyhk3WUO46szxP0/HjjCmr1pth3ZcIWyecRxLWe
- mI720ql1eX6MEeXFOg6sHSy4Gd/0NCE+XCDqdIMl/e0AbmAKwUXRLEM+VCQKw16AAyHQ
- Aw/KJPHdyEKJ2vJP5hQecvPcUPU+QClc0aJ46U9pwmbGavqEAw+/azPdf6dP+YnGRGoq
- IkhmjGHLaxZ/pBm7ccSj7zror+qVnDxDMYsAJ2/daVWkVFnPW4XoFxkPck1/btD6qyHD
- /BNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741343709; x=1741948509;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mG+ZY2y7JfQgS8a+bABUyure8g3TiW7MOAT/PSu4n8o=;
- b=I6o7LIHaYrF7TSE+rLLgEdWaeHBhkggwP1PHeUMP7EG7qhdjaKRTutpmiVZO2/EF4/
- d1KVfIck/GIeVsvy+tcI2Nhu0WdQUTfpqiKhHr7BDZQFu0GC53OPbPCllzdAbeVeHFEB
- ERLNO9dcN/2L4aejYr8A4OVMVMBS7vXkNH33y2oVW2FGCOOTpaB9W+epilqAyvuxmUHt
- EB9FiPTAHTafuxFtGRkYVbyty7wM2wpnUl2WqMewaZWoph8VBnznrCd8pYeefyaJ7zjr
- MhSSs869dUL3qIg655gwc1oKKSlGQxux50V9JoBz9P2cVYAhQBoPecIOqVObHj12EsLC
- TWbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWPCx1cVCe3oAWe2Z7E3oFLGEyXKvikr3Kp+sHZAaH1d3V9pJx0x2wk03QNHz+npytB1fBz4V8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtniJSouGuvURMwcqtzy8KWgDBhOLkB9FJg7QG9KSX58mH8Ncf
- HnmhKc/YEWV76q/UO7lFFHU2ku6T2G3p8z0yXTTkAyRSsrrKTyb/eOZHmHCD
-X-Gm-Gg: ASbGncvocS1au79LLR+9/SxiBkjAcVr9GyYOKKI8aR+SwUGC7bTW1A321C8qU/ZcYBB
- A8UgOY0o7lj1XKBmbm/Y6ItW/O1VFTOit7Gkav5ChgcC9JJE5feKOeThGikznyGXokOWh2ndvjx
- 7qSgSoQMoJ1uUhT1jQvnu0p6IWEVIu/5EyTWf94qqyO/jOjsw5OEFYBOA/e458LeBkLNVh79Znc
- OiKDjszr4aRzN0H0b/7aQGxCfF2mlDTsvpeZnvTcY0gvLZtPAV7xaJomzzxhvP6NaQRvmL71+7M
- O+9s2rroWCrG92XLuoWWpOi8PInbEqyCXqJ14tZIU9dPgoEF/d9sVQRxdCG81+rX+NbimEMCq12
- ug5fqMqL5kEbvEdvI4ABfSNw=
-X-Google-Smtp-Source: AGHT+IE3yWw9ILaTxHX2GQGsZC0RRxeAtHehZnKwFDe/gWQ01rx2v4BIhBJhpYt0nuRWWgrJ4WItRQ==
-X-Received: by 2002:a17:907:72d1:b0:abf:4a3b:454d with SMTP id
- a640c23a62f3a-ac24e92b166mr343652166b.7.1741343709015; 
- Fri, 07 Mar 2025 02:35:09 -0800 (PST)
-Received: from ernest.corp.toradex.com (31-10-206-125.static.upc.ch.
- [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac23988b403sm254867166b.129.2025.03.07.02.35.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 02:35:08 -0800 (PST)
-From: ernestvanhoecke@gmail.com
-X-Google-Original-From: ernest.vanhoecke@toradex.com
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
- Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 2/2] toradex: apalis/colibri imx6: Select correct DTB for
- SoM v1.2+
-Date: Fri,  7 Mar 2025 11:34:14 +0100
-Message-ID: <20250307103454.32661-3-ernest.vanhoecke@toradex.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250307103454.32661-1-ernest.vanhoecke@toradex.com>
-References: <20250307103454.32661-1-ernest.vanhoecke@toradex.com>
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 2F6E425C9F;
+ Fri,  7 Mar 2025 14:14:19 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GeozsZGB9n-M; Fri,  7 Mar 2025 14:14:18 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1741353258; bh=3jWOnYQJrR6Lf1KuonnKz6Oj0GBT0sno6wz4b0EcWBg=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=Ppoaer5IGKk5KCoSunQBrbTlDOFsn4QC2l/5EJt+ok+y0DM7quxPYunB2G9wj4SpM
+ IwtZaSo82sNEctduGO5KDLFpq5JfcY0qmsEWtTPhaQWATwhN+D3AZQXEkAMhppgG6B
+ aZQuuJ9nyLg1SnG2P3lS9DczsCpiM457XOecHerLVE6kb96M1DlpDQLNZ2a98MswDR
+ i1zMMJTu4nHmCtlrGB0HyiWn1X0tD0Z0iyOAYs96XWfYWDG9gw+2CGa/DnKy3sxies
+ RTHC0Zt+qBvj9XGjV2PpUZul2c6TuB0U2B/f30SAMZezs7iwx4kLeJRpVq1W+RtjxD
+ 6Gtne6/j+aaIQ==
+From: Yao Zi <ziyao@disroot.org>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Anup Patel <anup@brainfault.org>,
+ Atish Patra <atishp@atishpatra.org>, Green Wan <green.wan@sifive.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Simon Glass <sjg@chromium.org>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de,
+	Yao Zi <ziyao@disroot.org>
+Subject: [PATCH v2 1/4] riscv: lib: Add a default implementation of
+ board_fdt_blob_setup
+Date: Fri,  7 Mar 2025 13:13:41 +0000
+Message-ID: <20250307131344.43762-2-ziyao@disroot.org>
+In-Reply-To: <20250307131344.43762-1-ziyao@disroot.org>
+References: <20250307131344.43762-1-ziyao@disroot.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 07 Mar 2025 14:08:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,52 +76,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+It's common for S-Mode proper U-Boot to retrieve a FDT blob along with
+taking control from SBI firmware. Add a weak version of
+board_fdt_blob_setup to make use of it by default, avoiding copy-pasting
+similar functions among boards.
 
-When "fdtfile" is not set, use the "variant" environment variable to
-select the correct DTB.
-
-Apalis/Colibri iMX6 V1.2 replaced the STMPE811 ADC/Touch controller
-which is EOL with the TLA2024 ADC and AD7879 touch controller. They thus
-require a different DTB, which we can easily select with the variant env
-variable.
-
-Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
-Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Signed-off-by: Yao Zi <ziyao@disroot.org>
 ---
-v2: Fixed the "From" field
-v1: https://lore.kernel.org/u-boot/20250228095317.621037-3-ernest.vanhoecke@toradex.com/
----
- configs/apalis_imx6_defconfig  | 2 +-
- configs/colibri_imx6_defconfig | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/riscv/lib/Makefile |  1 +
+ arch/riscv/lib/board.c  | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 arch/riscv/lib/board.c
 
-diff --git a/configs/apalis_imx6_defconfig b/configs/apalis_imx6_defconfig
-index a3f65c5c0269..f51386d10a88 100644
---- a/configs/apalis_imx6_defconfig
-+++ b/configs/apalis_imx6_defconfig
-@@ -31,7 +31,7 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
- CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
- CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis-${fdt_board}.dtb"
-+CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb"
- CONFIG_SYS_CBSIZE=1024
- CONFIG_SYS_PBSIZE=1055
- CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
-diff --git a/configs/colibri_imx6_defconfig b/configs/colibri_imx6_defconfig
-index 4c6ba80789b6..9fc844b32690 100644
---- a/configs/colibri_imx6_defconfig
-+++ b/configs/colibri_imx6_defconfig
-@@ -30,7 +30,7 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
- CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
- CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri-${fdt_board}.dtb"
-+CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri${variant}-${fdt_board}.dtb"
- CONFIG_SYS_CBSIZE=1024
- CONFIG_SYS_PBSIZE=1056
- CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
+index 268116f3757..b33f9c646dd 100644
+--- a/arch/riscv/lib/Makefile
++++ b/arch/riscv/lib/Makefile
+@@ -27,6 +27,7 @@ obj-$(CONFIG_$(XPL_)SMP) += smp.o
+ obj-$(CONFIG_XPL_BUILD)	+= spl.o
+ obj-y   += fdt_fixup.o
+ obj-$(CONFIG_$(SPL)CMD_BDI) += bdinfo.o
++obj-$(CONFIG_OF_BOARD) += board.o
+ 
+ # For building EFI apps
+ CFLAGS_NON_EFI := -fstack-protector-strong
+diff --git a/arch/riscv/lib/board.c b/arch/riscv/lib/board.c
+new file mode 100644
+index 00000000000..1630355b2b1
+--- /dev/null
++++ b/arch/riscv/lib/board.c
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * RISC-V-specific handling of firmware FDT
++ */
++
++#include <asm/global_data.h>
++#include <linux/errno.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++__weak int board_fdt_blob_setup(void **fdtp)
++{
++	if (IS_ENABLED(CONFIG_XPL_BUILD) || !gd->arch.firmware_fdt_addr)
++		return -EEXIST;
++
++	*fdtp = (void *)gd->arch.firmware_fdt_addr;
++
++	return 0;
++}
 -- 
-2.43.0
+2.48.1
 
