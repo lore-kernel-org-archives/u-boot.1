@@ -4,82 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA48EC19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 05:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F858C19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 06:16:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1835780E94;
-	Fri,  7 Mar 2025 06:42:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 39DA480F4C;
+	Fri,  7 Mar 2025 07:16:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741326152;
-	bh=vRfA0n+w0K7eWR4O92WGfZO/RKjzNH9MnDg3blOOLBQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ysbTZfwl9dEm2bDP6z44RevjY0Hmlght2qyGJ5zD5dhu0DxELHRkVVmFIaNJDU31g
-	 em2Hmao9ND9mo3+Bn2EjtLEpKz/J0zV/i82eWZuK0a728bJE4nDQMoMEeNN3kb2vBU
-	 EoLXByRfU4fogIpXT8axo3KlDm6SEJfNHVFmQbRjMgD1h/K8VWe7SAqSb5jrK1vudt
-	 A2gp3E/aOLAATETJ+Vq5FUDkyTB/dugUBReve3xDGV9YLDyzOGKoZmk5lAj84+nqtu
-	 STpdQr7zlYzoOjYbL1voUQHa3y71Yo6AEUg5a40VqulPOYTe72ry7Ijg8d79zieIWj
-	 bsELWCb+KAhaQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eKtchZHz";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A8D480F4C; Fri,  7 Mar 2025 06:42:31 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 0FD6E810DC; Fri,  7 Mar 2025 07:16:49 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 965C8808A2
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 06:42:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E6D480E94
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 07:16:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="aukqKtXm"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E8DFB1038191D; Fri,  7 Mar 2025 06:42:25 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741326147; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=vRfA0n+w0K7eWR4O92WGfZO/RKjzNH9MnDg3blOOLBQ=;
- b=aukqKtXmE51vC4XkWAtHx2MiYbc7u6UOP5Vs2+V6Xo7aNZaz52lq053Twl+iXvZhjGRNfi
- mKvmTdOoksG12P+Cdtes0FOmeyI+XU6NLoMjkFFM5stH9W0kXOwt7SStsJCrPIHy/HP5Ei
- pBBuiRU+0ZCUzZ1h4G+e7UifuFgQddAGRy9+gLf82n06xLXehZW3PPX8dL/ZPalEmf3/gG
- 7+OQaiJ3IB2kd6MGT0m5u0IRspsEbRwSB7E+xcYjFAVrLelMRfPHKLoZb9ARkef7FVRNks
- qRuecQryUxwfAGyNsvCfbchylCJ7vm+hNcG+NesXeos+G5lHQhd9LbdV9OBbbg==
-Message-ID: <f1e4014e-658b-4a47-af8d-72ef76c1b134@denx.de>
-Date: Fri, 7 Mar 2025 06:42:24 +0100
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 66F8BA454EB;
+ Fri,  7 Mar 2025 06:11:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73485C4CED1;
+ Fri,  7 Mar 2025 06:16:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1741328201;
+ bh=jK73m508rlEeELzvmo+r72pTS0WlKlPvZDVvM3ebXUw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=eKtchZHz/1iuS2lORUhSZrMiuKJQwF0UHIL5zthiJB1A3tI1VYWZB+p6GUWGvJeOb
+ UMJZy0IpPFGeHNBIdTZM0qsqmcyoL+nS3cAm2N5Two5ee/8D+giE2eGhVysfHAqEEJ
+ H7Xt5lljov2OHHR/kZtn3fJwmQvTL1o56vrw0hkg3ntcJYZ8f+RcjNSWP1VWqWR/SA
+ xc2e1XhVQp0ypNGFZ7j2dNFdhAj3En1cyHZRRPNO0JoWQ85hfORwrLkwEouD6z2Yn2
+ pyxr7J49QyutZ7Pq2NwGlE340Oar8I14Cp3vk8MbpPsrYxDLkY9hOhfEOKlU9+rGds
+ SaRSOUbNuOqcQ==
+Date: Fri, 7 Mar 2025 11:46:31 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Manikandan.M@microchip.com
+Cc: eugen.hristev@linaro.org, lukma@denx.de, seanga2@gmail.com,
+ sumit.garg@linaro.org, kever.yang@rock-chips.com,
+ marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, festevam@denx.de,
+ Oliver.Gaskell@analog.com, aford173@gmail.com,
+ prasad.kummari@amd.com, caleb.connolly@linaro.org,
+ andre.przywara@arm.com, neil.armstrong@linaro.org,
+ mibodhi@gmail.com, Nicolas.Ferre@microchip.com,
+ Mihai.Sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 1/8] dt-bindings: clock: rename at91.h to
+ at91-pmc-status.h
+Message-ID: <Z8qPP6Z-DpMFdiKX@sumit-X1>
+References: <20250305060711.1127301-1-manikandan.m@microchip.com>
+ <20250305060711.1127301-2-manikandan.m@microchip.com>
+ <Z8lH93V9DUfdoiLd@sumit-X1>
+ <02132f8e-79b2-4b47-b4d4-60bb9c9a793f@microchip.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Brian Ruley <brian.ruley@gehealthcare.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-References: <20250105203714.158480-1-marex@denx.de>
- <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
- <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
- <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
- <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
- <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
- <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
- <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
- <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
- <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
- <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
- <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
- <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
- <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
- <a05cf63b-820d-4b27-8f66-37a6e6c7b372@denx.de>
- <CAFLszTgF+g2OXz=L=r7rOQcNkk19GfdCrwixG8ZAsR=1rh9Fqw@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTgF+g2OXz=L=r7rOQcNkk19GfdCrwixG8ZAsR=1rh9Fqw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <02132f8e-79b2-4b47-b4d4-60bb9c9a793f@microchip.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,30 +78,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/7/25 3:18 AM, Simon Glass wrote:
-
-Hi,
-
->>>>> One of the main goals of binman is to reduce the work needed to create
->>>>> a working image. If people have to go spelunking around the Internet,
->>>>> build it themselves, etc. that is not good.
->>>> What you are asking me for is not the tool itself, but key material,
->>>> which is generated by these scripts.
->>>
->>> It looks like someone has done this here:
->>>
->>> https://patchwork.ozlabs.org/project/uboot/list/?series=446218
->>>
->>> so I think we are OK now.
->>>
->>> I've applied that series to my tree.
->> OK, does anything need to be done about this patch ?
+On Thu, Mar 06, 2025 at 10:39:28AM +0000, Manikandan.M@microchip.com wrote:
+> Hi Sumit,
 > 
-> I'm not sure, but we should apply it anyway as it is a big step forward.
+> On 06/03/25 12:30 pm, Sumit Garg wrote:
+> > [Some people who received this message don't often get email from sumit.garg@kernel.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> > 
+> > EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> > 
+> > Hi Manikandan,
+> > 
+> > On Wed, Mar 05, 2025 at 11:37:04AM +0530, Manikandan Muralidharan wrote:
+> >> Rename the include at91.h to at91-pmc-status.h to avoid conflicts with
+> >> the upstream bindings that has the same file and update the
+> >> relevant legacy SoC Device Trees to reflect this change.
+> >> This is useful while compiling the DT and driver of the new SoC files with
+> >> OF_UPSTREAM enabled.
+> >>
+> >> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+> >> ---
+> >>   MAINTAINERS                                             | 2 +-
+> >>   arch/arm/dts/at91-sama7g5ek-u-boot.dtsi                 | 2 +-
+> >>   arch/arm/dts/at91sam9260.dtsi                           | 2 +-
+> >>   arch/arm/dts/at91sam9261.dtsi                           | 2 +-
+> >>   arch/arm/dts/at91sam9263.dtsi                           | 2 +-
+> >>   arch/arm/dts/at91sam9g45.dtsi                           | 2 +-
+> >>   arch/arm/dts/at91sam9n12.dtsi                           | 2 +-
+> >>   arch/arm/dts/at91sam9rl.dtsi                            | 2 +-
+> >>   arch/arm/dts/at91sam9x5.dtsi                            | 2 +-
+> >>   arch/arm/dts/sama5d3.dtsi                               | 2 +-
+> >>   arch/arm/dts/sama5d3_mci2.dtsi                          | 2 +-
+> >>   arch/arm/dts/sama5d3_tcb1.dtsi                          | 2 +-
+> >>   arch/arm/dts/sama5d3_uart.dtsi                          | 2 +-
+> >>   arch/arm/dts/sama5d4.dtsi                               | 2 +-
+> >>   include/dt-bindings/clock/{at91.h => at91-pmc-status.h} | 0
+> >>   15 files changed, 14 insertions(+), 14 deletions(-)
+> >>   rename include/dt-bindings/clock/{at91.h => at91-pmc-status.h} (100%)
+> >>
+> > 
+> > AFAICS, include/dt-bindings/clock/at91.h is just a subset of
+> > dts/upstream/include/dt-bindings/clock/at91.h. If that's true then we
+> > should just be able to drop local include/dt-bindings/clock/at91.h from
+> > U-Boot tree. Won't that just work fine?
 > 
-> I did send a series to turn on code-coverage checks:
 > 
-> https://patchwork.ozlabs.org/project/uboot/list/?series=446956
-So what should we do about this particular patch ?
+> Yes, you're right. It's a subset of the upstream at91.h. However, we 
+> must retain it due to dependencies with legacy SoC files that haven't 
+> yet been migrated to OF_UPSTREAM. I believe migrating those files now 
+> would introduce a significant number of changes w.r.t Device Tree files."
+>
 
-Should this be applied ? Rebased ? Updated somehow ?
+It's not required for SoCs to be migrated to OF_UPSTREAM to start using
+upstream bindings. The DT bindings headers are meant to be stable and
+reusable such that we don't have to maintain duplicated headers.
+
+-Sumit
