@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6DEC19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 13:14:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA17C282DE
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 13:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D98A4808A2;
-	Fri,  7 Mar 2025 14:14:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A99E8122F;
+	Fri,  7 Mar 2025 14:14:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="Ppoaer5I";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="kM4KgFde";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB065810F5; Fri,  7 Mar 2025 14:14:21 +0100 (CET)
+ id 9E9A08056A; Fri,  7 Mar 2025 14:14:22 +0100 (CET)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 897418056A
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 14:14:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 689CC80F0B
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 14:14:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 2F6E425C9F;
- Fri,  7 Mar 2025 14:14:19 +0100 (CET)
+ by disroot.org (Postfix) with ESMTP id 229B920275;
+ Fri,  7 Mar 2025 14:14:20 +0100 (CET)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GeozsZGB9n-M; Fri,  7 Mar 2025 14:14:18 +0100 (CET)
+ id LPs8zvXctFmV; Fri,  7 Mar 2025 14:14:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1741353258; bh=3jWOnYQJrR6Lf1KuonnKz6Oj0GBT0sno6wz4b0EcWBg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=Ppoaer5IGKk5KCoSunQBrbTlDOFsn4QC2l/5EJt+ok+y0DM7quxPYunB2G9wj4SpM
- IwtZaSo82sNEctduGO5KDLFpq5JfcY0qmsEWtTPhaQWATwhN+D3AZQXEkAMhppgG6B
- aZQuuJ9nyLg1SnG2P3lS9DczsCpiM457XOecHerLVE6kb96M1DlpDQLNZ2a98MswDR
- i1zMMJTu4nHmCtlrGB0HyiWn1X0tD0Z0iyOAYs96XWfYWDG9gw+2CGa/DnKy3sxies
- RTHC0Zt+qBvj9XGjV2PpUZul2c6TuB0U2B/f30SAMZezs7iwx4kLeJRpVq1W+RtjxD
- 6Gtne6/j+aaIQ==
+ t=1741353253; bh=mfYPONd67saktusVF0XaSwTn+JvsfC5mFUpTM/VsIgA=;
+ h=From:To:Cc:Subject:Date;
+ b=kM4KgFdeZQ/IPZc32/BQCUIY7imarCDrqEFNP3uJ+wCA3qY9+xfUBlcNxrNT2xOKO
+ BlPNVCc2GHmVmxGaM0BSm6JUqi/CDHWfvEyaeKQdxEo/hqFHQ+h6+OOsNIbdJxi1Dp
+ cGKo+sp6TKo/ywy5ndIGp7fFp/vJnRfkKIfn5FTg25wv2Tq9ZXmtXkrupxOjuGFokv
+ ZL2aC3wKAGSR/WBqMYsc1sw90P2bK7+cFLPtPInkkz0x9PThks1femKRSPFVTG4Bh1
+ OsvpZeK5J6IZFBqKb3mTbK4xXOyIDabR7luIyHTIEGD6uH78js3MpbjRrZwpyPfVbC
+ R0PsOC+jUvXGQ==
 From: Yao Zi <ziyao@disroot.org>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
@@ -52,12 +52,9 @@ To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de,
 	Yao Zi <ziyao@disroot.org>
-Subject: [PATCH v2 1/4] riscv: lib: Add a default implementation of
- board_fdt_blob_setup
-Date: Fri,  7 Mar 2025 13:13:41 +0000
-Message-ID: <20250307131344.43762-2-ziyao@disroot.org>
-In-Reply-To: <20250307131344.43762-1-ziyao@disroot.org>
-References: <20250307131344.43762-1-ziyao@disroot.org>
+Subject: [PATCH v2 0/4] Simplify retrieving FDT from SBI in S-Mode
+Date: Fri,  7 Mar 2025 13:13:40 +0000
+Message-ID: <20250307131344.43762-1-ziyao@disroot.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,55 +73,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It's common for S-Mode proper U-Boot to retrieve a FDT blob along with
-taking control from SBI firmware. Add a weak version of
-board_fdt_blob_setup to make use of it by default, avoiding copy-pasting
-similar functions among boards.
+A typical bootflow of S-Mode RISC-V U-Boot looks like,
 
-Signed-off-by: Yao Zi <ziyao@disroot.org>
----
- arch/riscv/lib/Makefile |  1 +
- arch/riscv/lib/board.c  | 19 +++++++++++++++++++
- 2 files changed, 20 insertions(+)
+  -------    -------    ----------
+  | SPL | -> | SBI | -> | U-Boot |
+  -------    -------    ----------
+                |
+     M-Mode     |       S-Mode
+                |
+
+Both the most popular SBI implementation, OpenSBI, and U-Boot require a
+FDT to function. The common solution is to pick an appropriate
+devicetree at SPL stage and pass it to OpenSBI, which is also capable of
+passing its (possibly modified) devicetree to the next stage (proper
+U-Boot here) program.
+
+The problem is although we retrieve the FDT passed by SBI in RISC-V's
+start.S, a custom board_fdt_blob_setup is still required to make use of
+it, resulting in duplicated similar functions in board-level code.
+
+This series provides a weak version of board_fdt_blob_setup to setup the
+SBI-passed FDT, serving as fallback on RISC-V platforms to eliminate the
+duplication.
+
+Tested on
+ - Milk-V Duo (milkv_duo_defconfig)
+ - Starfive VisionFive 2 (starfive_visionfive2_defconfig)
+ - QEMU VM (qemu-riscv64_smode_defconfig, sifive_unleashed_defconfig).
+
+Changed from v1
+- make the default implementation bail out in XPL stage
+- correct commit message of sifive platform chagnes
+- don't enable OF_HAS_PRIOR_STAGE by default on all SBI-capable RISC-V
+  platforms, as it may break the binman configuration
+- Link to v1: https://lore.kernel.org/u-boot/20250227144734.61458-1-ziyao@disroot.org/
+
+Yao Zi (4):
+  riscv: lib: Add a default implementation of board_fdt_blob_setup
+  board: qemu: riscv: Remove duplicated board_fdt_blob_setup
+  board: starfive: Remove duplicated board_fdt_blob_setup
+  board: sifive: Remove dead board_fdt_blob_setup
+
+ arch/riscv/lib/Makefile                       |  1 +
+ arch/riscv/lib/board.c                        | 19 +++++++++++++++++++
+ board/emulation/qemu-riscv/qemu-riscv.c       |  8 --------
+ board/sifive/unleashed/unleashed.c            | 11 -----------
+ board/sifive/unmatched/unmatched.c            | 10 ----------
+ .../visionfive2/starfive_visionfive2.c        | 10 ----------
+ 6 files changed, 20 insertions(+), 39 deletions(-)
  create mode 100644 arch/riscv/lib/board.c
 
-diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
-index 268116f3757..b33f9c646dd 100644
---- a/arch/riscv/lib/Makefile
-+++ b/arch/riscv/lib/Makefile
-@@ -27,6 +27,7 @@ obj-$(CONFIG_$(XPL_)SMP) += smp.o
- obj-$(CONFIG_XPL_BUILD)	+= spl.o
- obj-y   += fdt_fixup.o
- obj-$(CONFIG_$(SPL)CMD_BDI) += bdinfo.o
-+obj-$(CONFIG_OF_BOARD) += board.o
- 
- # For building EFI apps
- CFLAGS_NON_EFI := -fstack-protector-strong
-diff --git a/arch/riscv/lib/board.c b/arch/riscv/lib/board.c
-new file mode 100644
-index 00000000000..1630355b2b1
---- /dev/null
-+++ b/arch/riscv/lib/board.c
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * RISC-V-specific handling of firmware FDT
-+ */
-+
-+#include <asm/global_data.h>
-+#include <linux/errno.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+__weak int board_fdt_blob_setup(void **fdtp)
-+{
-+	if (IS_ENABLED(CONFIG_XPL_BUILD) || !gd->arch.firmware_fdt_addr)
-+		return -EEXIST;
-+
-+	*fdtp = (void *)gd->arch.firmware_fdt_addr;
-+
-+	return 0;
-+}
 -- 
 2.48.1
 
