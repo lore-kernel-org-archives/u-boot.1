@@ -4,63 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AEDC19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 11:15:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D0BC19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 11:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC16780E94;
-	Fri,  7 Mar 2025 12:15:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D73F980E94;
+	Fri,  7 Mar 2025 12:20:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="K16stKq9";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="hG795J36";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A892980F0B; Fri,  7 Mar 2025 12:15:55 +0100 (CET)
+ id 2C02480F4C; Fri,  7 Mar 2025 12:20:37 +0100 (CET)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF1AF8003E
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 12:15:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFDBC8003E
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 12:20:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 973BF20272;
- Fri,  7 Mar 2025 12:15:52 +0100 (CET)
+ by disroot.org (Postfix) with ESMTP id AFE2120559;
+ Fri,  7 Mar 2025 12:20:34 +0100 (CET)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rxEhn4RGEwCd; Fri,  7 Mar 2025 12:15:47 +0100 (CET)
+ id eC1kS63Fu75a; Fri,  7 Mar 2025 12:20:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1741346147; bh=d6Gr5mIMQ5Knvi79FcjHM61L1e0ZtGO+sLbGwBJEZWk=;
+ t=1741346430; bh=0y2unEbXFcFFHYwyRMupLhbOAMuK1ercvbw7EaLwdH4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=K16stKq9/UcLSrQ8YLvSAEaKIqR2r0L4quMU57JKDFapirkKzJ9je+xS4R31OSzul
- PGDDZmSAii3yOGQikoXU7ApTlJZ9p0u5tGzretABIOwWpkfF5aUJX6PhzVlh51A4XR
- jA1EHKgZ8F9X+SItXGEGT1LxlAWNXLK1K3FS5xOAvh95/orJfP9jNXfKdZq+Sc1XoR
- WLOuvGMZRx1FZBJ65E9xi0hoUjmOYswh8/051zqSAFSKjEjwxT+Y18FHQwmPRJLBy5
- aIFa9YUIBDxoyn8syy75GYv0tPHK2T07bOaUGxfoOCyRu8VAimUXwjFxhjFLF7s/N0
- nQUXd2xOEcZYw==
-Date: Fri, 7 Mar 2025 11:15:26 +0000
+ b=hG795J36MEtsKG6cc4xaqbiIGvdLtzVw58rqkJE6jBRdEK+e/+dekvVkHwAdTNjy4
+ VzF+h1s01tvEroZniHoqU8Qyzuxy/CeOzwnxpvwQ2FL4iXZdNJiBy+Szy5Zh1Of1tZ
+ 5zhnPhX6sIu4ViGeAXQgyVR/tUN3E7jMtKF8Tav8mvy6VzSWCl3JoJ8HwGmNP9Yxea
+ oGMME5lcRE+sNJQJmuQB6ub3iOlD9TS+bciXfNKLPyMjX+rHMp4ST7L7DYIscU/rGa
+ atoHutHyOeteb0IJ5k/Brlg00/jo+EREZLRmQ/Ax5BzP1l5GUxxXCSF3h9bpKdWA0i
+ AGBImftSG9Htg==
+Date: Fri, 7 Mar 2025 11:20:20 +0000
 From: Yao Zi <ziyao@disroot.org>
-To: Leo Liang <ycliang@andestech.com>
-Cc: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, Paul Walmsley <paul.walmsley@sifive.com>,
- "Palmer Dabbelt" <palmer@dabbelt.com>, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>, Green Wan <green.wan@sifive.com>,
- Minda Chen <minda.chen@starfivetech.com>, Simon Glass <sjg@chromium.org>,
- "Angelo Dureghello" <angelo@kernel-space.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 5/5] riscv: select OF_HAS_PRIOR_STAGE by default if SBI
- is enabled
-Message-ID: <Z8rVTvohydhmsHso@pie.lan>
-References: <20250227144734.61458-1-ziyao@disroot.org>
- <20250227144734.61458-6-ziyao@disroot.org>
- <Z8mCUtgAW2qujI13@swlinux02>
+To: Leo Liang <ycliang@andestech.com>, <trini@konsulko.com>
+Cc: <u-boot@lists.denx.de>, <rick@andestech.com>
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <Z8rWdGZgApM4INgH@pie.lan>
+References: <Z8mShWelhde38haW@swlinux02>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <Z8mCUtgAW2qujI13@swlinux02>
+In-Reply-To: <Z8mShWelhde38haW@swlinux02>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,50 +67,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 06, 2025 at 07:09:06PM +0800, Leo Liang wrote:
-> On Thu, Feb 27, 2025 at 02:47:33PM +0000, Yao Zi wrote:
-> > Availability of RISC-V SBI service implies a prior stage exists. As SBI
-> > firmware usually passes a FDT to the loaded program, let's select
-> > OF_HAS_PRIOR_STAGE if SBI is enabled.
-> > 
-> > With previously added fallback version of board_fdt_blob_setup, S-Mode
-> > RISC-V ports use the SBI-provided FDT by default. This covers the most
-> > common usecase, where a SPL (probably the U-Boot one) selects proper
-> > devicetree, loads SBI and U-Boot then invokes SBI with the devicetree.
-> > 
-> > Signed-off-by: Yao Zi <ziyao@disroot.org>
-> > Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
-> > ---
-> >  arch/riscv/Kconfig | 1 +
-> >  1 file changed, 1 insertion(+)
+On Thu, Mar 06, 2025 at 08:18:13PM +0800, Leo Liang wrote:
+> Hi Tom,
 > 
-> Hi Yao,
+> The following changes since commit 409d37e869e91453d94319792e17d1d882259b49:
 > 
-> This patch would fail some of the CI tests.
-> I will take other patches from this patchset first,
-> and could you take a look at the CI tests issue ?
-> (https://source.denx.de/u-boot/custodians/u-boot-riscv/-/jobs/1049827)
+>   led: Fix next Coverity scan error (2025-03-04 12:07:23 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+> 
+> for you to fetch changes up to 6e71966fa8a5e667f53170165b36ee59a1dfc465:
+> 
+>   board: sifive: Remove duplicated board_fdt_blob_setup (2025-03-06 14:09:39 +0800)
+> 
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/25004
+> ----------------------------------------------------------------
+> - starfive: simplify binman config
+> - riscv: remove duplicated board_fdt_blob_setup
+> - spacemit: update k1 uart compatible
+> - sifive: unmatched: add 'nvme scan' to preboot
+> ----------------------------------------------------------------
+> Heinrich Schuchardt (5):
+>       configs: SiFive Unmatched: add 'nvme scan' to preboot
+>       riscv: dts: add OF_LIST handling to binman.dtsi
+>       riscv: dts: no default configuration for MULTI_DTB_FIT
+>       board: starfive: spl: strip off 'starfive/' prefix
+>       riscv: dts: starfive: remove duplicate itb entries
+> 
+> Junhui Liu (1):
+>       riscv: dts: spacemit: Update UART compatible for k1
+> 
+> Yao Zi (4):
+>       riscv: lib: Add a default implementation of board_fdt_blob_setup
+>       board: qemu: riscv: Remove duplicated board_fdt_blob_setup
+>       board: starfive: Remove duplicated board_fdt_blob_setup
+>       board: sifive: Remove duplicated board_fdt_blob_setup
 
-After digging further with the failure, I found the series has two
-problems,
+These four patches may not be ready to be merged, see my reply here[1].
 
-- OF_HAS_PRIOR_STAGE is an option shared between XPL and proper U-Boot.
-  The generic board_fdt_blob_setup() doesn't work in a XPL build,
-  corresponding checks should be added.
-- The default binman configuration for RISC-V platforms doesn't pack the
-  FDTs into the fit image if OF_HAS_PRIOR_BOARD is enabled
-
-Although it doesn't break anything to merge the first four patches for
-now, I'd like to rework PATCH 1 and add a check against XPL build in the
-new revision. Then we could merge a patch that is technically right and
-avoid fixes tags.
-
-Additionally, I found OF_BOARD is actually disabled on Unmatched and
-Unleashed and the board_fdt_blob_setup() here is dead code in fact. Thus
-the commit message of PATCH 4 should be fixed as well.
-
-> Best regards,
-> Leo
+>  arch/riscv/dts/binman.dtsi                        | 10 ++-
+>  arch/riscv/dts/k1.dtsi                            | 22 +++----
+>  arch/riscv/dts/starfive-visionfive2-binman.dtsi   | 76 -----------------------
+>  arch/riscv/lib/Makefile                           |  1 +
+>  arch/riscv/lib/board.c                            | 19 ++++++
+>  board/emulation/qemu-riscv/qemu-riscv.c           |  8 ---
+>  board/sifive/unleashed/unleashed.c                | 11 ----
+>  board/sifive/unmatched/unmatched.c                | 10 ---
+>  board/starfive/visionfive2/spl.c                  |  4 ++
+>  board/starfive/visionfive2/starfive_visionfive2.c | 10 ---
+>  configs/sifive_unmatched_defconfig                |  2 +-
+>  11 files changed, 43 insertions(+), 130 deletions(-)
+>  create mode 100644 arch/riscv/lib/board.c
+> 
+>  Best regards,
+>  Leo
 
 Best regards,
 Yao Zi
+
+[1]: https://www.mail-archive.com/u-boot@lists.denx.de/msg538632.html
