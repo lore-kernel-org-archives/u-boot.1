@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0EA8C19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 14:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C83FC282DE
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 14:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C85B808A2;
-	Fri,  7 Mar 2025 15:15:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 58832808A2;
+	Fri,  7 Mar 2025 15:22:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OibrHRf2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Py2sPPEc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F20B680E94; Fri,  7 Mar 2025 15:15:49 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 4B1BF808A2; Fri,  7 Mar 2025 15:22:46 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50BC7803CC
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 15:15:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1404A803CC
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 15:22:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6fece18b3c8so346487b3.3
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 06:15:45 -0800 (PST)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e60cab0f287so1316314276.0
+ for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 06:22:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741356944; x=1741961744; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741357363; x=1741962163; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ePx33zBWy2YB6hNkElD57TecPyKyGzaVj38EzewzvoY=;
- b=OibrHRf2+jUw4JVYi/yiF1nCtnfxKyRKD0XTIdK0enzAS46F4Rz9A5AXe9VeLJ34w0
- FSGYCTNRs/8+ptgWNFWJpuTRSX3evMse3cLWLdLTIxI5NL0DjiY0yNEh7Yi7yqnuFbau
- nYH5gUQtFFJSGPkBaRaVTDGE7zX/oodgziorM=
+ bh=ztjOw129T7uHQ3Y+kcZEBbkBYpO/d6CVihhx0dQAfl8=;
+ b=Py2sPPEcPe7l8C1H7uMVfYkiGRjhBgSD2Ln6I40JrIgvkXTvQgRhp4XCQb8QlMZk/T
+ dNEy7/NjBdqmvJRmbeTP0J46WfIZwNg5B6BKVJy3x+MAOjySDryKpCpXU7lPUsagsoI4
+ kYXyrwzO1PNuHhybphXBXuE3UDqQVK161I7/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741356944; x=1741961744;
+ d=1e100.net; s=20230601; t=1741357363; x=1741962163;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ePx33zBWy2YB6hNkElD57TecPyKyGzaVj38EzewzvoY=;
- b=mJgF3VnIcXmr2bR7jK0Uoa396Xkt+W5Inqvm4es3ns7dDfVlRWHX+4rW4xJ9+BLRA3
- jWCKjx5MsusHfopyIDAka5kEoAYBwxDtn7EY6O+8trtwzbSPiJ+bVDxuJ44QSe3I0yIh
- Xdji9J1FUAEBFH3gL6AibIra8jN68adecL3qsM2G808TASy4S+Zn9lG1iGuX4Qt7E/gf
- hTBbZjfSefcAfwDKB9D41pqNqkHPRhQdaFTPJJT4nUWCkhQOdmHuBxOF/jR6p5ZaMu16
- aPMXFNQTcBDwM/wx4tvSIeH8Ai+1vaWG0S795Kq62mqUVmibzFXfCYAr4o2x0Hwdw/yM
- iAiQ==
-X-Gm-Message-State: AOJu0YwDtV3iD99t6HLt9wsmov+ybORPzBy2VYk6caYQv0O9LAqSA9K/
- OrWvkO7iuVSUwKRgBhxMA8+4mAUAWf6MTksZmKps6vOJahJg4Yy3RUXS4mm0yqU=
-X-Gm-Gg: ASbGncuVlDYSWhCzF+/gUGrkrO0TLyWxDGIhJxtD7CWQTcT1Nq1rNvt6G4B2CHjHD+l
- yfk2jDPet4Xs29dGpRGruKQkCalTpkDs1jpgev+PqaKx6pVV94iIA76sZBZsgSpjCxgcoup43Ba
- 2G5fslprtnvAhu9C5drRmIQx8dTauE+7D1ejiElFkqktg1HrkaoWOBw7R8n5ruO398QlLPF9k6L
- 3VDHElvdI9ydvWDP37k5WjqjkqHmF3HQakp0/vlbBCsSMgtMqnwqjEXqlgtMGwejBiNkV2SmVSc
- Kkc9ky3K9bnrg0DLqJY7YNCqRKeH5j9zYKH4bJxy5qvn8g==
-X-Google-Smtp-Source: AGHT+IG56MkOgByxMpbB40IKrESMz8bqrUJrrIXuD2LQgJNhJwE6n5L0U2q1oTQQxlfUtLLYcDu6JQ==
-X-Received: by 2002:a05:690c:46c9:b0:6fd:41d5:de11 with SMTP id
- 00721157ae682-6febf3836e2mr47386987b3.23.1741356944089; 
- Fri, 07 Mar 2025 06:15:44 -0800 (PST)
+ bh=ztjOw129T7uHQ3Y+kcZEBbkBYpO/d6CVihhx0dQAfl8=;
+ b=hLz7EKe37JlgEr3m0+1M8Pad9b9bDQGh8b8lR+shYs8sVLkI3N42OVOC1Xcft5BgJj
+ gL9RFqORsIu5TUdUNoCKM+/OYL94szABi56/ojJ0p1iSPkNm/jVqqa9Mb0HZ7uVEesth
+ ye9mja4H2ugRafsZePY937HgyWcjEtj2wufXV/GdiuygNESTNdeUlZ33F3w2SVrSivKl
+ tZQuP3AnFXPIImMY9+TOnCA2rl+c4LqzZwgpP+oM6btiRDUIYXpaGJhj4nWjxJYD88rT
+ hftM+3yOzWWYgkd6VC9NmyfErxrcqz3qwkOfgw5trmAFd2Na2wzwe/TyrhXyXUF5+p7L
+ dIQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVy7rWK8fkjWYrAm02oPilLr5nHNZRHltG1lXPC1tPkl05/Y8n+mHAjB1mIcK82fsM1M3I4KI0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4L57gGxEfbnmZ/zj1dSqhmHa6ZyZOUmH4WAopqb19S135TlEU
+ UCCuE+aOir3LL7VgU07O9fAXalWHsUZ8iQLPwy12u5bwU2fBDmYsVJjR3RPgAjg=
+X-Gm-Gg: ASbGncutixOkiUNEVMLHmF3H0W2UJN3QR8dUS/7Z9HYDB4PJJatjYxT536oVw8y+liW
+ oZol5x7mCJsilJTYuRIdsrB5zpV/cDmBdH4FbtaN9B2gJ1a5TC0s8yvTRBQU2cVoaG8SK0EOKvb
+ 2rsge5JCe93WAPUlxQSi9YJLAMwk0BMSDlnP4NHP09K3o3/fsKCXAbUMS+3Q5PVOa2xONSd+CSQ
+ 4FO3F21R8uAEEkiNJONCLU3uY1k0cPTYK6DBg7OYjXpOiqP05ihyXo6UgueiU9FRKVckHivoFmF
+ lzX8hF7/XSSj6RddXrBrWkqPTUtqWC7WLvhR6LLOwoDqZw==
+X-Google-Smtp-Source: AGHT+IFW1RCryPNv4F0PN7QSfU1bCefJ1InMv25SehtGIspgPXBzfVo0uoW2bcO1gzN4BU3yiUo9kw==
+X-Received: by 2002:a05:6902:2803:b0:e5d:bdbd:acc9 with SMTP id
+ 3f1490d57ef6-e635c0f927amr4798364276.6.1741357362907; 
+ Fri, 07 Mar 2025 06:22:42 -0800 (PST)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e634b73607dsm839613276.5.2025.03.07.06.15.42
+ 3f1490d57ef6-e6366b6bfcesm186396276.32.2025.03.07.06.22.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 06:15:43 -0800 (PST)
-Date: Fri, 7 Mar 2025 08:15:40 -0600
+ Fri, 07 Mar 2025 06:22:42 -0800 (PST)
+Date: Fri, 7 Mar 2025 08:22:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v4 29/47] test/py: Correct sizing of created disks
-Message-ID: <20250307141540.GI2640854@bill-the-cat>
-References: <20250306160428.3041057-1-sjg@chromium.org>
- <20250306160428.3041057-30-sjg@chromium.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH RFC] doc: Include pytests directly in documentation
+Message-ID: <20250307142239.GJ2640854@bill-the-cat>
+References: <20250225205003.2640910-1-trini@konsulko.com>
+ <a83e7acd-7345-4a51-9720-568226a2767b@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/tj6M0OW+x9EqrPm"
+ protocol="application/pgp-signature"; boundary="Fc1WiYu0FeiUWqPg"
 Content-Disposition: inline
-In-Reply-To: <20250306160428.3041057-30-sjg@chromium.org>
+In-Reply-To: <a83e7acd-7345-4a51-9720-568226a2767b@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,117 +98,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/tj6M0OW+x9EqrPm
+--Fc1WiYu0FeiUWqPg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 06, 2025 at 09:03:56AM -0700, Simon Glass wrote:
+On Thu, Mar 06, 2025 at 05:03:02PM +0100, Heinrich Schuchardt wrote:
+> On 25.02.25 21:50, Tom Rini wrote:
+> > As there is support within the Sphinx framework to take Python
+> > docstrings and generate documentation from it, we can make use of that
+> > to more clearly and consistently document our pytests and how to
+> > configure them. To do this we:
+> > - Add PYTHONPATH to DOC_TARGETS so that modules will be found, have CI
+> >    install pytest module as well.
+> > - Add the autodoc extension for Python and then redirects so we can move
+> >    py_testing.html (which is heavily referenced in archives, etc).
+> > - Create a doc/develop/pytest directory and move the existing py_testing
+> >    file there, update references.
+> > - Update the test_000_version.py test to have a docstring
+> > - Move the imports in test_net_boot.py so the docstring is in the
+> >    correct place.
+> > - Use code-block for all of the code blocks in test_net_boot.py so they
+> >    are rendered correctly in documentation.
+> >    - Adding these code-block lines makes the diff larger when read but a
+> >      "git show -w" for example makes it clearer that the textual changes
+> >      are removing '#' from lines so the output reads nicer.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+>=20
+> Some of the test functions seem to lack documentation:
+>=20
+> test_net_boot.setup_networking()
+> test_net_boot.setup_tftpboot_boot()
 
-> At present the disks end up being 1MB shorter than they should be,
-> since dd truncates by default.
->=20
-> Move the code into a function and update it to avoid truncation.
->=20
-> This resolves various warnings when running sandbox tests, of the form:
->=20
->    mmc_bread() MMC: block number 0x9801 exceeds max(0x9800)
->=20
-> caused by the FAT partition being scanning.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v3)
->=20
-> Changes in v3:
-> - Add new patch to correct sizing of created disks
->=20
->  test/py/tests/test_ut.py | 17 ++++++++++++++---
->  1 file changed, 14 insertions(+), 3 deletions(-)
->=20
-> diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-> index ea0c43cd4fc..b8adb597e11 100644
-> --- a/test/py/tests/test_ut.py
-> +++ b/test/py/tests/test_ut.py
-> @@ -57,6 +57,17 @@ def setup_image(ubman, devnum, part_type, img_size=3D2=
-0, second_part=3DFalse,
->                               stdin=3Dspec.encode('utf-8'))
->      return fname, mnt
-> =20
-> +def copy_partition(ubman, fsfile, outname):
-> +    """Copy a partition into a disk iamge
-> +
-> +    Args:
-> +        ubman (ConsoleBase): U-Boot fixture
-> +        fsfile (str): Name of partition file
-> +        outname (str): Name of full-disk file to update
-> +    """
-> +    utils.run_and_log(ubman,
-> +                      f'dd if=3D{fsfile} of=3D{outname} bs=3D1M seek=3D1=
- conv=3Dnotrunc')
+Yes. Most of the tests need more documentation and only have a minimal
+header comment.
 
-Ah, interesting.
+> Would you know what 000 in the following filename corresponds to?
+>=20
+> test/py/tests/test_000_version.py
+>=20
+> Maybe we should rename to test_version.py it before adding this patch.
 
-> +
->  def setup_bootmenu_image(ubman):
->      """Create a 20MB disk image with a single ext4 partition
-> =20
-> @@ -172,7 +183,7 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
->      fsfile =3D 'ext18M.img'
->      utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
->      utils.run_and_log(ubman, f'mkfs.ext4 {fsfile} -d {mnt}')
-> -    utils.run_and_log(ubman, f'dd if=3D{fsfile} of=3D{fname} bs=3D1M see=
-k=3D1')
-> +    copy_partition(ubman, fsfile, fname)
->      utils.run_and_log(ubman, f'rm -rf {mnt}')
->      utils.run_and_log(ubman, f'rm -f {fsfile}')
-> =20
-> @@ -224,7 +235,7 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc3=
-1.armv7hl)
->      utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
->      utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
->      utils.run_and_log(ubman, ['sh', '-c', f'mcopy -i {fsfile} {mnt}/* ::=
-/'])
-> -    utils.run_and_log(ubman, f'dd if=3D{fsfile} of=3D{fname} bs=3D1M see=
-k=3D1')
-> +    copy_partition(ubman, fsfile, fname)
->      utils.run_and_log(ubman, f'rm -rf {mnt}')
->      utils.run_and_log(ubman, f'rm -f {fsfile}')
-> =20
-> @@ -562,7 +573,7 @@ def setup_efi_image(ubman):
->      utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
->      utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
->      utils.run_and_log(ubman, ['sh', '-c', f'mcopy -vs -i {fsfile} {mnt}/=
-* ::/'])
-> -    utils.run_and_log(ubman, f'dd if=3D{fsfile} of=3D{fname} bs=3D1M see=
-k=3D1')
-> +    copy_partition(ubman, fsfile, fname)
->      utils.run_and_log(ubman, f'rm -rf {mnt}')
->      utils.run_and_log(ubman, f'rm -f {fsfile}')
+Yes, it's an ordering trick to ensure that we run this trivial test
+first (and so can also fail out quickly). It should be documented.
 
-It's on my TODO list to make all of these use the mk_fs helper instead,
-I noticed this yesterday or the day before.
+> Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+Thanks. I'll take that to mean you're conceptually fine with this so
+I'll start on a real series that split the changes up and includes a
+follow-up "now document this test better".
 
 --=20
 Tom
 
---/tj6M0OW+x9EqrPm
+--Fc1WiYu0FeiUWqPg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfK/4gACgkQFHw5/5Y0
-tyyrewv/SiOiUiJYgLoWZwroAZ7LitGdrboVCstAz38AS3tPEXLxoVYcP8IN+db5
-DgJGZR/8H+ahdn7OB2QD+B0SQ3PxkMS7xibUbf2z5sKwVIMwGOV4Bm3ud2/B5sO7
-4iUwkRy4nmNmIHdgUK505QM8VXfaFuMWpOBlB1UmRS+cw9dYGOi1kyuJlw3SFTp6
-jgbqn/FYIIIA3UWVfA4OwLX99Mt8iwdMVlOAzAc+tj7ZGBdnRUo1kvg+pKNZwTQL
-59nkVaGPVoVd7czH7FZRoCavhHzfvbGdJ62R1C/71WY3QZNeBNq5tsNWsqexw/+B
-1t3Sf6MmY/EMkRtOzK5SZ4AuyjN9b0v54EHjn7eQrLNwsV66M6/tnjFJAJGH+sXu
-ITchDBrk/PGOzipnaESqo3ek7EtYFzoMr5/OfCvBeRSlYm5jP3tbjHg0Oi7Bipb+
-PYNk3oD/8SljFJXUdtD36qgkBTdbnya1gP9YlZ6QG9KkzIFw0jN9HGUu7lZgJlA+
-z5gUyH7r
-=Ehgl
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfLAS8ACgkQFHw5/5Y0
+tywtVgv9F+cUL6tPVecyGuHv061eu9vNMQpnKbRTndNcSVt65m4Q9pVXqaWBqRx4
+PQgHf8muuORpSln9zdJ4sDBGxNNRZv010K3i0Q7QkvQq8yXQFA7V81YfvWo8tm3b
+4q80TcpbH6TR53R+MvaWf0mCThkUOPfejiJ05Jq+qCHqSuqHTth4TNooTicTXomR
++RFUIAUvK1myYRhlYUzK6J2bqj5PvX0ePPGcaQ/+/gbkDEt85Loi3xBDKFPfh2Bc
+J7JewfAbPVAqEJmG+tA7peCM+zoBSlXzdfVriTKAsDelAM0vKdP4ydHlsGtjx+yh
+abCXQNGXg+1/5OCsadnobhwB2ONYnqzgR//odlGzVqdwoECPSwPe3IxeSuijiipp
+E4BUh1LnmAfBVPIIXss+8p+rwEil6tnUvcz+3WsHMcza95CglrbnMJsqkNikNizZ
+1XHWUXRWtqfyLnhzatIaI/byC5DuBBe5PMKTNhbrYcengGdl8mnxnaSiUT2L/4v6
+39+ew/KI
+=LfSd
 -----END PGP SIGNATURE-----
 
---/tj6M0OW+x9EqrPm--
+--Fc1WiYu0FeiUWqPg--
