@@ -4,82 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5D90C282D0
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 10:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AE9C19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 10:29:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AC1C812D9;
-	Fri,  7 Mar 2025 11:16:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CB47803CC;
+	Fri,  7 Mar 2025 11:29:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X4CccYrE";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="FJlCzRgg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3FE3811C1; Fri,  7 Mar 2025 11:16:53 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9A4588056A; Fri,  7 Mar 2025 11:29:05 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A3088122F
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 11:16:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5B4880017
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 11:28:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-549901474c3so796813e87.2
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 02:16:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741342610; x=1741947410; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xknTFCjCKVLA+sCWvnOOr5Yrp4PNq0msUNu6z+fXdAk=;
- b=X4CccYrEQrPniKda7mPAFuJzrryvGMOHzmfCr0UxsV7pDK7FwBZytfzP7ksGpbKm+o
- 06/Bw6s3uAFqr2gm3IGuETHy+8deMH5i4QcIdZafImnW4vBJoIxRsQ87KuBCvG2LGHB2
- 6Iwz/+EIIFwWTkf3zVHecQqLapLKxw4y1K5R2j08wnVCRWBfFmTcgEzLYeig3ob87UaE
- +o2fWcYOIM17Kos9ZK+zQ1gJ/5oWo8+YxHMRV2m0FEuVdEcF8oWDqJ0dz618rV+Ryd2d
- +5D1jWTujhniJxr1qesmPhfSY/a+jMO5fW3Yg3nj+ejdX6smtdk6UDlimBBuvufMkZyv
- PwOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741342610; x=1741947410;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xknTFCjCKVLA+sCWvnOOr5Yrp4PNq0msUNu6z+fXdAk=;
- b=d1Ayi4lPXTtpxZI6wnOiOw5slemWZuxAz5OTkzPR0Ztk9rSJKiRosbNIK/Ht9Oh+9b
- MaghiCD4nTr+u5ba6DY9pxmIzxIwVNdhKTQwOK75ENfk+L16asKgqq2bQ5tKO+SYNmAc
- oHYT18XkI1K5xhykZA/D1zoyf6Iu/hVmRFWkMJsi1a3QrOGoikHAEb2iWPaguy3jFAs9
- XURUmomBf9XjkH4CRQ3MQdTNSQJV0v1n7Fo65pdLp81SSLBYkS6BLzqTBRZEevmHEJfv
- H+8gwJMnYVpaJyZTtEkguNGOTDz/3yaoOwh2qy/u7Oe/c0bmmDXseyr3v3AUxzJkseRh
- C2Xg==
-X-Gm-Message-State: AOJu0YyO8Ol4w6U0T/hlYUHENYK1rnt7uCcT40QAZ15xC+yCFdLPb11P
- h1CGjx6ih2qpxLHfCdZQv8qlh/Vz5ShsmT9l6sdvJrhREl9XMmHd
-X-Gm-Gg: ASbGncvpvDpjgFxQQYIcHCvg30p8rBSXuReYUVShuCsPFbTkMVS8DsBPNnovj1oE1BP
- oODAJCgIJlNMApvFMypASEBUjoK+Oa3IcfxW3J0WFBCzMMR6Ob4CWZkmU5pw2AkMCgF9yOS6Sf2
- j5QUuW/SOX5c6Jaqy1QBvMArzww+bUTVpjE5f0QxSgIWlbk8Vhcrq6bcnIY+hAhOmMbqXBQu56j
- oZSQu39tP9kfxz9IL7bQW9N4WQzkcKyxkv6ZRWkBLg/StrptB6waCllWDR3n1guIWryONCQrkTe
- PNRlIxtaQNhlbOCxBjrwY8y3Ku+Ssgc6h5Yo
-X-Google-Smtp-Source: AGHT+IFGgkw6Ie1RyRFstOXmbPFuv7TprJ8E3lULkLWaRgoHXsi5HQsQfM8cD0MI6Qy2+VD9+hJ9JA==
-X-Received: by 2002:a05:6512:1255:b0:545:f0a:bf50 with SMTP id
- 2adb3069b0e04-549910b5d89mr892298e87.35.1741342609454; 
- Fri, 07 Mar 2025 02:16:49 -0800 (PST)
-Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5498ae4610fsm438278e87.15.2025.03.07.02.16.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 02:16:48 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] sandbox: swap bloblist and fdt loading address sequence
-Date: Fri,  7 Mar 2025 12:16:29 +0200
-Message-ID: <20250307101629.51561-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250307101629.51561-1-clamor95@gmail.com>
-References: <20250307101629.51561-1-clamor95@gmail.com>
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=naresh.kumar.ravulapalli@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BdVBZTfMZW2Ux5YecfSEcVwNNTBKkg+kJ4Xg2LJYEyYdGYO6ypj1IqMjMPV1JrKz9E7C45gCpbJbJd/l/NbI1XKCQ2Z7XM3LPGAkTHjo0kZBZEC+1ORu2BzDypA0T22Ag+ZWoyG0rHlcq1D736ml2zvoS3A1t4wefcU4uo/Z1knz7zeAdOqhAo5kBsQurVGdWQHXp3hEXcQM7EewQk+axa3zGDm/q8IrY8+R1amFDOKbNwaawUQD7/umVbq/g6NAY1N5DTULDHoZjUMM340nx6dONslh7Ka7+YfeoWVb3VMWbTpnD7D2bDTi9IxIADEOce9WNCwxgApzXoxBWEDTqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=peqB5tKoai+kM0f8zzKmmIrspAZ6rysUkV68125GVdU=;
+ b=LTpIdVvtRs7ZIAIFUl/4QDsBq2JrhinXV263+QSlOBPAYPggM8cgVrxrIhja8cA+eLPOynO7uN/rb8nFMBc15L0s44FwBJkPUfxeOHL44tiIcCHTwGHN+QAq2i6ah16INEDqpLRN5aL0XpqCS02Y6Ow4hYkewW7g6YFV6Ss5rTlwoTIreDkRkvdgvnnXSkERp5R95vHqRC3/b0qxPFqoJKDYVDkU8CeSwmcnYPssDLE8W19UMVUx3ZsJDDoZk0JFVAnVmy/d856LxCkQaOxItQD3FI8VxrP8wxe6dKU71BPC/lJHC3YBZNx1KaAEowH3EtkidME2X3Peyhkg2/Cvig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=peqB5tKoai+kM0f8zzKmmIrspAZ6rysUkV68125GVdU=;
+ b=FJlCzRgg1623+3jJ26VwYpBlvC8BFaWlluivXjzdCBoSnVJgq/A6lSifi5oGhp02HrIMEXmUWFq58xKv9NfmSvTnjWUHQvxsn/hhVvZC3gDxBN1BNdCJX8A0z1C1jlM3SYBpgEYLagE+kaYtpFBIVpuV6NPutaGsVofodaCFLA+JWipk4A18ZMyWxAi4Ui55xytyV2HSJfM2XNDIvrj7VsK5rBzWhtJUWu/F3XLxcoXIacnmHwpcwpO/D+X1nqFSfWhUbEaoBJLX24Q9MN8lW9s92Pl08Z4DxqK8EWCdvigubH4jC2lSrf8ZJD6szGS8vSjw+kwO8fcIiQmb3uVyTQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from BYAPR03MB4646.namprd03.prod.outlook.com (2603:10b6:a03:133::26)
+ by SJ0PR03MB5487.namprd03.prod.outlook.com (2603:10b6:a03:284::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.19; Fri, 7 Mar
+ 2025 10:28:55 +0000
+Received: from BYAPR03MB4646.namprd03.prod.outlook.com
+ ([fe80::8919:e2df:10df:51ce]) by BYAPR03MB4646.namprd03.prod.outlook.com
+ ([fe80::8919:e2df:10df:51ce%3]) with mapi id 15.20.8511.017; Fri, 7 Mar 2025
+ 10:28:55 +0000
+From: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>, Tom Rini <trini@konsulko.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+Subject: [PATCH] drivers: ddr: altera: Fix integer overflow during size
+ calculation
+Date: Fri,  7 Mar 2025 02:28:51 -0800
+Message-Id: <20250307102851.12964-1-nareshkumar.ravulapalli@altera.com>
+X-Mailer: git-send-email 2.35.3
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0173.namprd03.prod.outlook.com
+ (2603:10b6:a03:338::28) To BYAPR03MB4646.namprd03.prod.outlook.com
+ (2603:10b6:a03:133::26)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BYAPR03MB4646:EE_|SJ0PR03MB5487:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9468b744-00ea-4f32-3213-08dd5d62dd10
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TQfISsehDkFuxnGHKulXvNxaChklclM2RdDwAMMT795pRhDyuJ3G9dbecj98?=
+ =?us-ascii?Q?NUt8GsASjWzMLurXHhgcjT2WTtTVFy+yiZQMMJYMq0UpIVNegOBV3rEeSElp?=
+ =?us-ascii?Q?H9MUlHvt1q5dgVzpnmd02EUN2ZTEIEwvjz2F3U9s+qPak2dTDBxD0hPLY06r?=
+ =?us-ascii?Q?6eg4OQJ/BHhdeA/2tWx3N69uEEz6XkW8T4+VfccD9jrOtCZMSJXSFXJY41QQ?=
+ =?us-ascii?Q?QxKnqB0XbUQa+t6oFTd95CUgUPGiSVOuTiDj6WuQNLFtDx5AIKCgfNXW72MS?=
+ =?us-ascii?Q?EJ28mYnzTy9GFwfVnKHvJrUwIMe8/va99ooOhyndrc+pw0CgQDNdfZ5lI4AY?=
+ =?us-ascii?Q?rIycguQPW0NlpFBFg9TUck7VS9H6Y+Qj9PTyYor2TBvX7JcfAIfV3QeQwGVY?=
+ =?us-ascii?Q?cqoxFZVQJ8ujfGs14C/rCflheYUJezf1gsJt9DG5YaVSHOzzZmyfjKfbCaK6?=
+ =?us-ascii?Q?8bX1MmzmYNVRrFTGwMtGv3DGQ9y7Hr15+t7TxwqhoXLTLVrgAoDATWyFluYv?=
+ =?us-ascii?Q?EKV8Fla6lD2nX73lzOIRw3ZlHKUeVq8HJj4JvmH9btAB7Fyhzhspw1al/Vi9?=
+ =?us-ascii?Q?L/2qVBC7vRqjRQGeFsV1l4uij+ykdZTpDh0D+QgxZIAKWn21FK5kI21Je5x8?=
+ =?us-ascii?Q?r+bKsO7+iZiV5VIAaRx9K4Wd1fGoJjctllREdPc00Ssd9/YI89UXxpdO98tl?=
+ =?us-ascii?Q?7HD08KV0Lm/f4ZoGUi9Ucb6FgCgJymto2ILcZNeMMU8tOfYCYrB13HWrRQui?=
+ =?us-ascii?Q?Z1jwN6oQvwblJfkLFIgcbDwp+bPwD1kSWAELkZV9mRHiWVeFre99iQst+0mZ?=
+ =?us-ascii?Q?pRzjjKLNG04grpvCRYusoiF+DenpEofHgz3jQJe1UcpA5TofoPlhJ8sjRvuX?=
+ =?us-ascii?Q?12rI1D1GpDGD0iCAx4rjhLkkBLYKxpL1i39E4SHsFdTj1Hy2E4lRR4XHgw9w?=
+ =?us-ascii?Q?WLHbB9uBQT5U8V/B+YwMzi33j35lk0rHp0JyRTLiq8wWhNyLG2Zele4+aapR?=
+ =?us-ascii?Q?ht+Sq/E44wMEc2FTratjILPB1MoMvWSOT5o74n1OrDqSmy+CFjX5Xpj6ckI8?=
+ =?us-ascii?Q?sT87lqAzshS4nFhr5Xq7EjC9P74nRuz5hd1gL8ue6BjteEvVCxEKllkRQPIu?=
+ =?us-ascii?Q?UlUVTWMImxWuDIRNYRRRpc/Q5WW5vHis+6ty6PVXdNTDnEelGrVvDUCup4C8?=
+ =?us-ascii?Q?k48KVpqtTj1xI8qkI+ipMfKqnEyQsfnpZa+yyUyT6/8Rb7q0N9H0CjURe+Cz?=
+ =?us-ascii?Q?TC369WGXtJk5ifBQQue+yQFAT5yyRdgdoXl+iWoQQAooKCabm0HopaM195DX?=
+ =?us-ascii?Q?UX177D5zXQrcDBc07+sC+jCRohF7jwLzaOgakQyTpTlfkJu9KTeZUqxDP2as?=
+ =?us-ascii?Q?jf/NTDLZqeDNiWvG4LgOklWQzSsR?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR03MB4646.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?XlIfY4NzJp0BwNAGXP0xkDqr/b+P6CTFzlLZ1VtXKR4aan7p9RZm1GknRCL7?=
+ =?us-ascii?Q?y5W2iEdO1OFoqhJabmcQ99Dkk8XzXxrqxqV8C13wPXna69NNpED1uFT17D3y?=
+ =?us-ascii?Q?UpMfaEWMk7RF9E4iaWHjF5Qxzrz1p3IqHAZDnIcQBHlsMcjL5aYXw8fADcxj?=
+ =?us-ascii?Q?40l16uwE1R5peZVaSUyq0tCVKVtpnf4l5V8j9WpfLR8YPpKXWwm/1hg8pu9D?=
+ =?us-ascii?Q?Xc1eH8N5ffPHjfMJZjoWBARCJNrhMLGoGE3DG7xUyv7ov8kAnYxWV8nfkaLY?=
+ =?us-ascii?Q?787s6OQSwK1Y6JYwEw8cS/zMwQU3vRDxJDnramsM7zPy8RtvtgND1m/TmPx+?=
+ =?us-ascii?Q?r41o7OjAMxrOUZ7f1CCWaaaFRXiSWL8gtQr2xlHAuHMQkwbF9sKagCZdHf+V?=
+ =?us-ascii?Q?zHnlYJ5IMa3RUxB7d+CfJxv2gDLRJ9TxY+PDrFwqZ9D7WXayKnOjeENFIGcP?=
+ =?us-ascii?Q?W3AQsaOs6lltgU5QKboLLlDiGmJ+75WXr/RKAGX4Eigx/NPcSR2uKG8wyvQy?=
+ =?us-ascii?Q?YBeaTjERq6IMHqFi3XndnJ6G50lEqKrf90PIc0aAyEpp2GfJaLu2uoWkFPYI?=
+ =?us-ascii?Q?kx8TXiwKxd2b8x5tCbSRl6yn8uJYAPIf6IZcEeMipoqpnNejDcH3/gY6yanm?=
+ =?us-ascii?Q?mDAcHOqUqdofZrI7Tq7HAt8QpYtW2+MZydNXD9Bj3IRfVn1pmfQMz1uFFbDJ?=
+ =?us-ascii?Q?RQa+XMwFpkq4pK3SDRmC0EjHqVEr000V8hcUZr31ruNABVx9jRUJgQizlq79?=
+ =?us-ascii?Q?yUJ+tGRlX+tlA5R8ajgRqJkxWXSdBqpxdCKGzYw2iWkySLM0bYJqfayDQDGL?=
+ =?us-ascii?Q?Dw5TYYwtJ1pzPsoqHTbIElOybh0BEkU8Naj5umU4SyCkEgx5f6jIDNZq7Dxt?=
+ =?us-ascii?Q?/e2PD7AHHIbyWsQEQAargW4Jo00u+CnIwQhhwoaEnntTVm7BHknegDxainm1?=
+ =?us-ascii?Q?fhOlDqWOuOlEo42VhZoiEyw5jrzOr1zkyoAQiB+uQ/7g0zhl4iyQB9eHIs7U?=
+ =?us-ascii?Q?JwsZFcFaK2RxEgc44ma1bK8zpaXPFWsOJ3VhH1C6qYgal0Lg0JASgGnXwgm7?=
+ =?us-ascii?Q?aVx6PtrIcZOh+7FFS+ouV5+eBfkNQ00mhC8gLwc088yUkOhOxVKoX1z6ocpF?=
+ =?us-ascii?Q?+XBnYbzw0RphFKNmurpOPj5yFeOrbUdzFC3L+A7SNzHh6ysTCKDlf1luUk8O?=
+ =?us-ascii?Q?hGcY2ZRZtinuD88HsxOESCH94PXFEf3f8vCAjo9/Jp02DvPkqB4sAPdSuWM+?=
+ =?us-ascii?Q?eslIYVW0W2cJKsCH1DDzDH4AtptYiaq35jsJ3znxF+KUN6MGDkYC9FKgWhV+?=
+ =?us-ascii?Q?aY8I6MqIQXHmjwub5qHxlGXNIMBEQE42xtzbtIh/Is1ZAgXo3Av63BpW54YO?=
+ =?us-ascii?Q?6z5MPHaxCDQ5+ymvUxyA5B3+pEX4y7YjxapYBGTvdg0W/RFaCwM2SC8vfxNL?=
+ =?us-ascii?Q?5bbL5l9O1kzvFJhduNrtNoi3MkTF+Su6r1nYy7pEhMrbUabG0HS2hW6u92vl?=
+ =?us-ascii?Q?BDN+G7fiPyYClbnYuNZMQsMEtBvAotfEQSf9ifcnpfYHtIOIy/1TfYmVweNE?=
+ =?us-ascii?Q?JszmGeGSCr8EDOb2kTsdZhI6HGrytDsCfedMTplA5elf1xHtKqe5wO4Zkhdx?=
+ =?us-ascii?Q?RNH9hESbyyxKld+jv5NW6zg=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9468b744-00ea-4f32-3213-08dd5d62dd10
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4646.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2025 10:28:55.5291 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VcFHqqva+uA0QqrT0/8+phOA9laTgPV0+PVTEkSThl0feeYiSL/2oeiLEOlrgrMLr3H8etQVm6FPsJ8dLYmt7g1WqJOg7EUOsOV9k7o8YJ96lacPzxRD8YqQpADNcHQ/
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5487
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,80 +160,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing memory layout places the bloblist at 0xb000 and the fdt at 0x100,
-resulting in a 0xaf00 size constraint for the fdt. This constraint has been
-reached. Lets modify the layout by moving the bloblist to 0x100. With a
-bloblist size limit of 0x400, this allows the fdt to be positioned at 0x500,
-thus expanding its permissible size.
+Data structure, dramaddrw, is defined as u32. Compiler performs
+32-bit arithmetic and logic operations on this data structure. Fix
+is provided to avoid integer overflow while performing shifting
+operations greater than 32-bit.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
 ---
- arch/sandbox/Kconfig         | 2 +-
- common/Kconfig               | 2 +-
- doc/arch/sandbox/sandbox.rst | 4 ++--
- test/lib/kconfig.c           | 8 ++++----
- 4 files changed, 8 insertions(+), 8 deletions(-)
+ drivers/ddr/altera/sdram_soc64.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
-index 4c169034d9a..da7a19264b9 100644
---- a/arch/sandbox/Kconfig
-+++ b/arch/sandbox/Kconfig
-@@ -77,7 +77,7 @@ config SANDBOX_BITS_PER_LONG
+diff --git a/drivers/ddr/altera/sdram_soc64.c b/drivers/ddr/altera/sdram_soc64.c
+index c8c9211adc..75c6de1e4e 100644
+--- a/drivers/ddr/altera/sdram_soc64.c
++++ b/drivers/ddr/altera/sdram_soc64.c
+@@ -249,7 +249,7 @@ phys_size_t sdram_calculate_size(struct altera_sdram_plat *plat)
+ 			 DRAMADDRW_CFG_ROW_ADDR_WIDTH(dramaddrw) +
+ 			 DRAMADDRW_CFG_COL_ADDR_WIDTH(dramaddrw));
  
- config SYS_FDT_LOAD_ADDR
- 	hex "Address at which to load devicetree"
--	default 0x100
-+	default 0x500
- 	help
- 	  With sandbox the devicetree is loaded into the emulated RAM. This sets
- 	  the address that is used. There must be enough space at this address
-diff --git a/common/Kconfig b/common/Kconfig
-index 7685914fa6f..cf4bee063ae 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1070,7 +1070,7 @@ endchoice
+-	size *= (2 << (hmc_ecc_readl(plat, DDRIOCTRL) &
++	size *= ((phys_size_t)2 << (hmc_ecc_readl(plat, DDRIOCTRL) &
+ 			DDR_HMC_DDRIOCTRL_IOSIZE_MSK));
  
- config BLOBLIST_ADDR
- 	hex "Address of bloblist"
--	default 0xb000 if SANDBOX
-+	default 0x100 if SANDBOX
- 	depends on BLOBLIST_FIXED
- 	help
- 	  Sets the address of the bloblist, set up by the first part of U-Boot
-diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
-index a8b0d7f0395..99459815c25 100644
---- a/doc/arch/sandbox/sandbox.rst
-+++ b/doc/arch/sandbox/sandbox.rst
-@@ -658,8 +658,8 @@ that are mapped into that memory:
- ========   ========================   ===============================
- Addr       Config                     Usage
- ========   ========================   ===============================
--     100   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
--    b000   CONFIG_BLOBLIST_ADDR       Blob list
-+     100   CONFIG_BLOBLIST_ADDR       Blob list
-+     500   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
-    10000   CFG_MALLOC_F_ADDR          Early memory allocation
-    f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
-   100000   TCG Event log              TCG Event Log
-diff --git a/test/lib/kconfig.c b/test/lib/kconfig.c
-index a3645abf946..2f47af9acf1 100644
---- a/test/lib/kconfig.c
-+++ b/test/lib/kconfig.c
-@@ -22,10 +22,10 @@ static int lib_test_is_enabled(struct unit_test_state *uts)
- 	ut_asserteq(0, CONFIG_IS_ENABLED(_UNDEFINED));
- 
- 	if (IS_ENABLED(CONFIG_BLOBLIST)) {
--		ut_asserteq(0xb000, IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
--						   CONFIG_BLOBLIST_ADDR));
--		ut_asserteq(0xb000, CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED,
--							  BLOBLIST_ADDR));
-+		ut_asserteq(0x100, IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-+						  CONFIG_BLOBLIST_ADDR));
-+		ut_asserteq(0x100, CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED,
-+							 BLOBLIST_ADDR));
- 	}
- 
- 	/*
+ 	return size;
 -- 
-2.43.0
+2.35.3
 
