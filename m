@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C83FC282DE
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 14:22:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A7DC19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 14:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58832808A2;
-	Fri,  7 Mar 2025 15:22:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A13A180F4C;
+	Fri,  7 Mar 2025 15:22:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Py2sPPEc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F9mcpAh4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B1BF808A2; Fri,  7 Mar 2025 15:22:46 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id F02C1803CC; Fri,  7 Mar 2025 15:22:56 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1404A803CC
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 15:22:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C67E1812C8
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 15:22:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e60cab0f287so1316314276.0
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 06:22:44 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6f768e9be1aso33483367b3.0
+ for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 06:22:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741357363; x=1741962163; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741357373; x=1741962173; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ztjOw129T7uHQ3Y+kcZEBbkBYpO/d6CVihhx0dQAfl8=;
- b=Py2sPPEcPe7l8C1H7uMVfYkiGRjhBgSD2Ln6I40JrIgvkXTvQgRhp4XCQb8QlMZk/T
- dNEy7/NjBdqmvJRmbeTP0J46WfIZwNg5B6BKVJy3x+MAOjySDryKpCpXU7lPUsagsoI4
- kYXyrwzO1PNuHhybphXBXuE3UDqQVK161I7/o=
+ bh=maR4v0ZwLC+w1Kkio4nrZIv14069jf0Vl83ie9k86tk=;
+ b=F9mcpAh4rZW8Yd4U0q8eyqXna2Ot91+yKDr+++25YFnFOMTcu94EzsHnm500IbNKed
+ gOUSIEKoVDf9kmi1o57CMvKpGATaQzSx4W0Cm6gNNtKo2OmC1TqZa5zTa7asFZ2Py0aP
+ VfKSNxH2AR7QahkjMRPw56LWKWmXa/Yoehz4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741357363; x=1741962163;
+ d=1e100.net; s=20230601; t=1741357373; x=1741962173;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ztjOw129T7uHQ3Y+kcZEBbkBYpO/d6CVihhx0dQAfl8=;
- b=hLz7EKe37JlgEr3m0+1M8Pad9b9bDQGh8b8lR+shYs8sVLkI3N42OVOC1Xcft5BgJj
- gL9RFqORsIu5TUdUNoCKM+/OYL94szABi56/ojJ0p1iSPkNm/jVqqa9Mb0HZ7uVEesth
- ye9mja4H2ugRafsZePY937HgyWcjEtj2wufXV/GdiuygNESTNdeUlZ33F3w2SVrSivKl
- tZQuP3AnFXPIImMY9+TOnCA2rl+c4LqzZwgpP+oM6btiRDUIYXpaGJhj4nWjxJYD88rT
- hftM+3yOzWWYgkd6VC9NmyfErxrcqz3qwkOfgw5trmAFd2Na2wzwe/TyrhXyXUF5+p7L
- dIQA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVy7rWK8fkjWYrAm02oPilLr5nHNZRHltG1lXPC1tPkl05/Y8n+mHAjB1mIcK82fsM1M3I4KI0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4L57gGxEfbnmZ/zj1dSqhmHa6ZyZOUmH4WAopqb19S135TlEU
- UCCuE+aOir3LL7VgU07O9fAXalWHsUZ8iQLPwy12u5bwU2fBDmYsVJjR3RPgAjg=
-X-Gm-Gg: ASbGncutixOkiUNEVMLHmF3H0W2UJN3QR8dUS/7Z9HYDB4PJJatjYxT536oVw8y+liW
- oZol5x7mCJsilJTYuRIdsrB5zpV/cDmBdH4FbtaN9B2gJ1a5TC0s8yvTRBQU2cVoaG8SK0EOKvb
- 2rsge5JCe93WAPUlxQSi9YJLAMwk0BMSDlnP4NHP09K3o3/fsKCXAbUMS+3Q5PVOa2xONSd+CSQ
- 4FO3F21R8uAEEkiNJONCLU3uY1k0cPTYK6DBg7OYjXpOiqP05ihyXo6UgueiU9FRKVckHivoFmF
- lzX8hF7/XSSj6RddXrBrWkqPTUtqWC7WLvhR6LLOwoDqZw==
-X-Google-Smtp-Source: AGHT+IFW1RCryPNv4F0PN7QSfU1bCefJ1InMv25SehtGIspgPXBzfVo0uoW2bcO1gzN4BU3yiUo9kw==
-X-Received: by 2002:a05:6902:2803:b0:e5d:bdbd:acc9 with SMTP id
- 3f1490d57ef6-e635c0f927amr4798364276.6.1741357362907; 
- Fri, 07 Mar 2025 06:22:42 -0800 (PST)
+ bh=maR4v0ZwLC+w1Kkio4nrZIv14069jf0Vl83ie9k86tk=;
+ b=MBQX9hi3DEbKZGscSZm0gGD2Sgq9inxxby8lsXBTusVKMBYBXSYJNEOls1hbll7ig2
+ xELacA19/bYQmQfcmFNnyr18aaiUx1n8yjk2Av0USUkUmYbcXAZ+Yln+F5TGCmzi5yNE
+ St/8+HYetsbRIurdWuAA+D2TNYfkr1B1zSeSRmEt6u5/CC6rZKqGO9ZIcrumeUupiqQw
+ p34S08cG5msQkKFAE6nP1BcrDoe06MWAju0pqY9J9yWZK3IEvBO6oEY30LD62d6UqPX/
+ VoGMVoon7ZUomPea3mQpeukLLLWYUkfmLh3Qy3Jmto82hfzZi0xh0pzzV0l+XFw+lBw7
+ +MPg==
+X-Gm-Message-State: AOJu0YxRY4OtWKGO03mRUvSYTveDOnNFzI1uqHdYdBAgkp4z/6YS6x69
+ Rj3cvZOkdy1vr1GXtvGaPIM49qGFvLCoIkJ4eOzoOha7qnm/uUJWeUw7qUXRHxoiWxrwhxYHug9
+ p
+X-Gm-Gg: ASbGncvOBV5P0N1olQOXPnkNaHT2iGoj7tN6AzgF2oOYdQu23yZV4scagMDfs9K9x6p
+ twdQN9GtqFbTVuQQyql2V+8yXJ+SqjZLmGlsMjO+GFw/iiyB7QOzsQYabbSiwofWXH3jCfLQ9JS
+ 5Yx3aFZJ7y/nlyPsOVar+JwBNWyiP9Da8PD76VR+v1SZgH3HGEorKVDbUjeapoS1T8TzzadmgsG
+ yx0Dkw10get0xcpnPmqxRu97BO3mKNXQVcmYzAcAKu6XL52SVOS7sz80wDULMwWADF4ys8gKp4N
+ z+0GEUCKiATwEE0QheusSKBStQehwL1YTQXK5OvevWjffQ==
+X-Google-Smtp-Source: AGHT+IHgLl3QYPa4wzPlrjHMBeBUElAnj3GqJIF0gv6c/5kJaKZCrXi4xjnd9MK1uWqdVGDQC1yFJA==
+X-Received: by 2002:a05:690c:8e09:b0:6fe:c2b4:f099 with SMTP id
+ 00721157ae682-6fec2b4ff57mr29676107b3.7.1741357372153; 
+ Fri, 07 Mar 2025 06:22:52 -0800 (PST)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e6366b6bfcesm186396276.32.2025.03.07.06.22.41
+ 00721157ae682-6feb2a68101sm7547427b3.45.2025.03.07.06.22.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 06:22:42 -0800 (PST)
-Date: Fri, 7 Mar 2025 08:22:39 -0600
+ Fri, 07 Mar 2025 06:22:51 -0800 (PST)
+Date: Fri, 7 Mar 2025 08:22:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC] doc: Include pytests directly in documentation
-Message-ID: <20250307142239.GJ2640854@bill-the-cat>
-References: <20250225205003.2640910-1-trini@konsulko.com>
- <a83e7acd-7345-4a51-9720-568226a2767b@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v4 01/47] boot: Correct ramdisk address
+Message-ID: <20250307142249.GK2640854@bill-the-cat>
+References: <20250306160428.3041057-1-sjg@chromium.org>
+ <20250306160428.3041057-2-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Fc1WiYu0FeiUWqPg"
+ protocol="application/pgp-signature"; boundary="1ocKeERv7tjl1f1Q"
 Content-Disposition: inline
-In-Reply-To: <a83e7acd-7345-4a51-9720-568226a2767b@gmx.de>
+In-Reply-To: <20250306160428.3041057-2-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,77 +100,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Fc1WiYu0FeiUWqPg
+--1ocKeERv7tjl1f1Q
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 06, 2025 at 05:03:02PM +0100, Heinrich Schuchardt wrote:
-> On 25.02.25 21:50, Tom Rini wrote:
-> > As there is support within the Sphinx framework to take Python
-> > docstrings and generate documentation from it, we can make use of that
-> > to more clearly and consistently document our pytests and how to
-> > configure them. To do this we:
-> > - Add PYTHONPATH to DOC_TARGETS so that modules will be found, have CI
-> >    install pytest module as well.
-> > - Add the autodoc extension for Python and then redirects so we can move
-> >    py_testing.html (which is heavily referenced in archives, etc).
-> > - Create a doc/develop/pytest directory and move the existing py_testing
-> >    file there, update references.
-> > - Update the test_000_version.py test to have a docstring
-> > - Move the imports in test_net_boot.py so the docstring is in the
-> >    correct place.
-> > - Use code-block for all of the code blocks in test_net_boot.py so they
-> >    are rendered correctly in documentation.
-> >    - Adding these code-block lines makes the diff larger when read but a
-> >      "git show -w" for example makes it clearer that the textual changes
-> >      are removing '#' from lines so the output reads nicer.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
+On Thu, Mar 06, 2025 at 09:03:28AM -0700, Simon Glass wrote:
+
+> We must use the ramdisk address for the initrd_addr field, not the kernel
+> address. Fix this.
 >=20
-> Some of the test functions seem to lack documentation:
->=20
-> test_net_boot.setup_networking()
-> test_net_boot.setup_tftpboot_boot()
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: e05cda3004f ("boot: pxe: Refactor label_run_boot() to avoid")
 
-Yes. Most of the tests need more documentation and only have a minimal
-header comment.
-
-> Would you know what 000 in the following filename corresponds to?
->=20
-> test/py/tests/test_000_version.py
->=20
-> Maybe we should rename to test_version.py it before adding this patch.
-
-Yes, it's an ordering trick to ensure that we run this trivial test
-first (and so can also fail out quickly). It should be documented.
-
-> Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-Thanks. I'll take that to mean you're conceptually fine with this so
-I'll start on a real series that split the changes up and includes a
-follow-up "now document this test better".
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---Fc1WiYu0FeiUWqPg
+--1ocKeERv7tjl1f1Q
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfLAS8ACgkQFHw5/5Y0
-tywtVgv9F+cUL6tPVecyGuHv061eu9vNMQpnKbRTndNcSVt65m4Q9pVXqaWBqRx4
-PQgHf8muuORpSln9zdJ4sDBGxNNRZv010K3i0Q7QkvQq8yXQFA7V81YfvWo8tm3b
-4q80TcpbH6TR53R+MvaWf0mCThkUOPfejiJ05Jq+qCHqSuqHTth4TNooTicTXomR
-+RFUIAUvK1myYRhlYUzK6J2bqj5PvX0ePPGcaQ/+/gbkDEt85Loi3xBDKFPfh2Bc
-J7JewfAbPVAqEJmG+tA7peCM+zoBSlXzdfVriTKAsDelAM0vKdP4ydHlsGtjx+yh
-abCXQNGXg+1/5OCsadnobhwB2ONYnqzgR//odlGzVqdwoECPSwPe3IxeSuijiipp
-E4BUh1LnmAfBVPIIXss+8p+rwEil6tnUvcz+3WsHMcza95CglrbnMJsqkNikNizZ
-1XHWUXRWtqfyLnhzatIaI/byC5DuBBe5PMKTNhbrYcengGdl8mnxnaSiUT2L/4v6
-39+ew/KI
-=LfSd
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfLATgACgkQFHw5/5Y0
+tyw73Qv9HcQuWN24+xVhWvE7MAG7RvmiIwozaPe95qAHcRpUm6UJhZzzJhmf9t+k
+/+RT5572pMr//Y0Y4bTJsgpTaeJtffmAV/V0QSuLWbk6Yy8Wo6E9cpOSWW62m3Mv
+Dslej8euS0T4auW0Wz+f1VI048sgmnUbeS7R+HNFYLJqTspucNNAQZI1o8iuPb+v
+FG43V47/FxLfOjPHBq/b5W+OCoQzbJ+fzfDzIFkf8GZWXnUiWRob5VkhChsRtIh5
+gLprVKHpDZGqvZw6/cZaOfeJTdOYmg9a+PVnR34hlNSZpPF05WBfqtW7X9hsYg8X
+46hWinAosWj5ebxZ7ocvExLohS7Q8oEhEKN74EiQXFmWrubVQ7nL2U9upvUYL4hx
+vcMHrPm5/jkZNW5VnhDVvpw60XosiDxvnRrnK4FEQXae+UL4TjzIcw1c+91XM9Ec
+qrYkWYxCQTiIhbb9B9BGh9fsR8HChMNyMYqa5W2YxrXIKilXE35P+cjSJDIeT5ed
+HcpHOzUw
+=I1xF
 -----END PGP SIGNATURE-----
 
---Fc1WiYu0FeiUWqPg--
+--1ocKeERv7tjl1f1Q--
