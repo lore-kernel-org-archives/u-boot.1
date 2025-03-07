@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529C8C19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 19:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADF6BC28B23
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 19:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 849C480E94;
-	Fri,  7 Mar 2025 20:05:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18ABF808A2;
+	Fri,  7 Mar 2025 20:09:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tikrCx9z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sgj9fgrl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0EB480F0B; Fri,  7 Mar 2025 20:05:52 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id B312980F6B; Fri,  7 Mar 2025 20:09:52 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17CCD808A2
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 20:05:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DFDB80E94
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 20:09:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e60b75f87aaso1722945276.2
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 11:05:48 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6f768e9be1aso36800647b3.0
+ for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 11:09:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741374347; x=1741979147; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741374589; x=1741979389; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eUASVH5vpVNgH94wOSQP5l8DGm0Hz2nfDfubNkBy/v8=;
- b=tikrCx9z9gRfoXuX4o6MRVm907hToDz02fxMdyZAgUBoky8q34ZUGw37bZFZQNwMvZ
- xHptX/EGYWrHiLmE3ODPABXfyPqDznlYMsoIqh2aiZIC3MX11TP3r16BbPlRgaN8Cdw0
- FYjbBV6mmROrtt+ahEOJ4s0qby0kZCMyAth1E=
+ bh=m1nuRv9ruOyDC1ZQnSz0gtsXSjxZ0B8YxoD+pp9PMOs=;
+ b=Sgj9fgrlfGB2KuHjuy0GqqGu59z+wYram+bS5EKSHJFDgrouqdEXz4IJlyNO8OizEv
+ hFcEF0/wtPfO6xNKOMlWRDhgOpn6QGaEQU6uecgtEA/DWH0zk4Au8Z9U0ep1Xz+yZnd1
+ kWwrF1fexUb5iNhQ383K9wdjs4na+8AwOFSeE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741374347; x=1741979147;
+ d=1e100.net; s=20230601; t=1741374589; x=1741979389;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eUASVH5vpVNgH94wOSQP5l8DGm0Hz2nfDfubNkBy/v8=;
- b=Fpg4pe7C9vDStiPXLOrb87BM3QIaC3BsddVZoAFsOnZntbTGkkG2AlGT2J8GS2KvwN
- 5EI+RZiuJtYox/kTosxacENJYM7t/Rq+aFuvuU5Bd1glIAbm26rpeOekfLoEdqq6kQyV
- eaVCkHwXx8G/TsSwXoLZAKROO2lEHgmqC47iUrO7d5WelyosrhDoy0qkeLN+mP99tYWY
- m8dZ7hOrZPyc12vg49Ev27Q5BBxqyZsYLD4DQs8X8VrqeAlFWPXQbMwr0VwhjiS0nQFc
- L0NTqSz5cxheUu4O5v8XAIbPU1hOgWf63CQZKmdCWRfsYc1hzhzbqqGCjA+XxN87bCzg
- yq8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVRk6RMS2drE7B43JhXdg9euo2HqZkhbRO7l9vtPB3r5/6Fcv5yXhKT6huPwHYkCbG45CNeB8Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqEvQicNGOm/ms1GD/C6Vw5HH/TFd+WeXkEULPB6tUxyjgPLI7
- rWMaMObJNYKYbLaFLpbAQpG9tjgByaZ3ZNoJl7rQjqIMvedkeJM6ts6497oN1Po=
-X-Gm-Gg: ASbGnculKGfuTYCp7Wa3tjRSiPyajhVSb1vEg7G6AM3NWKmBOgLMBso4xewe+3nkPSW
- k7jrOX3cwGQ9W+HAgwr305VV7DuEecOcUQJbqViJStcKlV7H0asj8FM+lQ1eT4uwFzjTXMjr0z7
- /LcHpjjNNOp50W7BgymUMsvQ7OlG+EC/Jwk7XLv1otuVRqC2lBmGdnCB5fXUMaO/s2YfHQROJGi
- OtJt/Vb0wpBGZ4MVKWrX5NtL5N64YovS/dPaDtunZgwVu89ziJ88lMl0R6o9OKFPjNQln9mIBjF
- nnYx/yag4ulXp2DJyrZE0H5qSlbEtiGZgXVtypDVDYNKaQ==
-X-Google-Smtp-Source: AGHT+IFspcyn4nR7wnqmNDvrtcBGjddRip9FwlL9wUYdc01tMXiH2XH/vTV+1NZ2Z5pFdD7/57UScQ==
-X-Received: by 2002:a05:6902:2c05:b0:e63:703a:89e9 with SMTP id
- 3f1490d57ef6-e63703a8a7amr507564276.49.1741374346819; 
- Fri, 07 Mar 2025 11:05:46 -0800 (PST)
+ bh=m1nuRv9ruOyDC1ZQnSz0gtsXSjxZ0B8YxoD+pp9PMOs=;
+ b=uCN9gE2Q2bgBP+ZLfltpbhOCudwrpi1wK4FHpI3b8mFpr/kE5IVFDA9KQbZyATTOjf
+ 2EN1UaEms0jZ++4Ibi5K1JPBt1YSJCSsg2IrgJDucmYiEidjs4+TQn2qt7ti2xO7/bjV
+ 3GgA4YAyxHcBt1vCdpZFP46oB1aAybZzEer4yhlDBLfvsDs3aKs0xrE5N091xwGE+cJi
+ 0eLCIJOvd6P82PfFzN3O+DvKheN3f49ElXCnZgR6LajlPthTLRRK8EBFHlLlaV4oVlPY
+ nt5jGkYTlMBSgOL++OxsMYmcEvdB3OML23tBHQn7Cws1d13efI9zsr4yruNa+w1mjFd4
+ n+Kg==
+X-Gm-Message-State: AOJu0YwbQ8bBOS+b206RKLbySuc/z+kgN7tjNaWdwWGP4AlVu3bPljkl
+ 3c0InbFHnvh4MUcg6b5meN18rd08Opu4mgMfeUp6PupGkLpfVbVx34M9l27Kvjg=
+X-Gm-Gg: ASbGncvkrCPkfSNSL5FsQmENvLtsZZF+DbHvwh+0LDDPDN1yzBonNnXzeFtIUy2nAYb
+ BpBCI3ggdlvvg3ufbFX7XYYE8Q5LTT8xM8pyL1lO7bpUU1yxc6jI7XqySCA7IaegJLPNalA4Rs1
+ IgNJ5cSvvaIW1ZtT4qJjAOwtGKcwrAY4U95TZcFGVQqyWb7qKPlRLPwvAIHhW1lTBiLfJXW4dDb
+ UY3RxLHc7uESQWooRO6k+cQavR0dncuJlqmD2vaeb+r6xuwFyIzkOoaKXy5vVvL8aGUcfzdEbJn
+ TNd3V4I3ypHWGFMVRRvJ7VAUmXpZ0vU5AuYGUrU1Nq49BQ==
+X-Google-Smtp-Source: AGHT+IFk4OXLLL6GKw7R/TFEUpZWDHA0s+Ssz2/grqIndtpfwJalBignXp0r7lbIdof/DyyfJkyAFQ==
+X-Received: by 2002:a05:690c:3702:b0:6fe:c4bd:e2ca with SMTP id
+ 00721157ae682-6fecf852a41mr10130667b3.14.1741374589360; 
+ Fri, 07 Mar 2025 11:09:49 -0800 (PST)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e634b8fde5asm909239276.48.2025.03.07.11.05.45
+ 00721157ae682-6fecf93ee62sm749297b3.9.2025.03.07.11.09.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 11:05:46 -0800 (PST)
-Date: Fri, 7 Mar 2025 13:05:43 -0600
+ Fri, 07 Mar 2025 11:09:48 -0800 (PST)
+Date: Fri, 7 Mar 2025 13:09:46 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] sandbox: swap bloblist and fdt loading address
- sequence
-Message-ID: <20250307190543.GT2640854@bill-the-cat>
-References: <20250307101629.51561-1-clamor95@gmail.com>
- <20250307101629.51561-2-clamor95@gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Love Kumar <love.kumar@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Subject: Re: [PATCH v4 30/47] test/py: Add a helper to send characters
+Message-ID: <20250307190946.GU2640854@bill-the-cat>
+References: <20250306160428.3041057-1-sjg@chromium.org>
+ <20250306160428.3041057-31-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hlFdxCGyv/9AI9PJ"
+ protocol="application/pgp-signature"; boundary="qLwJOYykj9Iq0Chk"
 Content-Disposition: inline
-In-Reply-To: <20250307101629.51561-2-clamor95@gmail.com>
+In-Reply-To: <20250306160428.3041057-31-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,70 +99,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hlFdxCGyv/9AI9PJ
+--qLwJOYykj9Iq0Chk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 07, 2025 at 12:16:29PM +0200, Svyatoslav Ryhel wrote:
+On Thu, Mar 06, 2025 at 09:03:57AM -0700, Simon Glass wrote:
 
-> The existing memory layout places the bloblist at 0xb000 and the fdt at 0=
-x100,
-> resulting in a 0xaf00 size constraint for the fdt. This constraint has be=
-en
-> reached. Lets modify the layout by moving the bloblist to 0x100. With a
-> bloblist size limit of 0x400, this allows the fdt to be positioned at 0x5=
-00,
-> thus expanding its permissible size.
+> The existing run_command() method is not great for sending things other
+> than U-Boot commands. Add a helper for sending arbitrary strings as well
+> as control characters.
 >=20
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-[snip]
-> diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
-> index a8b0d7f0395..99459815c25 100644
-> --- a/doc/arch/sandbox/sandbox.rst
-> +++ b/doc/arch/sandbox/sandbox.rst
-> @@ -658,8 +658,8 @@ that are mapped into that memory:
->  =3D=3D=3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->  Addr       Config                     Usage
->  =3D=3D=3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> -     100   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
-> -    b000   CONFIG_BLOBLIST_ADDR       Blob list
-> +     100   CONFIG_BLOBLIST_ADDR       Blob list
-> +     500   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
->     10000   CFG_MALLOC_F_ADDR          Early memory allocation
->     f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
->    100000   TCG Event log              TCG Event Log
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-My question is do we have room or not to set aside 512KiB (as the
-"should never be this large" value) instead of not quite 64KiB which we
-can possibly hit again in the not too distant future? I think I checked
-earlier and CFG_MALLOC_F_ADDR + CONFIG_SYS_MALLOC_F_LEN should still fit
-below CONFIG_PRE_CON_BUF_ADDR if we do that (and also give the bloblist
-some room to expand).
+This seems fine so:
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+And so that it doesn't get lost nor expand this series more, an issue to
+cleanup the existing users that would benefit from the "send" macro
+would be good.
 
 --=20
 Tom
 
---hlFdxCGyv/9AI9PJ
+--qLwJOYykj9Iq0Chk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfLQ4MACgkQFHw5/5Y0
-tyz6tgv9EYOmvPzzHW1IbzENM5Byro7x6B3b+HtVy+RW0+x3Tw3kmdLPBCZ0+wLA
-Ya1hOQ65bnd0NTrBIJiSZBjR8mFy7NozrFi+WFf1+Fs+SkQFlK+cmJ1KCilVyPXh
-YN/ezKRpAwk7U9gMmjcs5j8KNecshEXKsg8q+UwQk5ByKsL+iS5CtOIDEd4r/w1h
-jODSbHDE7v5/PrBEEOTatVY0IwyzU2DGB+nVynX+bBjVvcek6F30lEOcFr5H5Ky4
-zmq8mFFoqgLqXF8oJSla+UpCpQsO1asMUw+EHF0HZI1ePqjmfbS2no4S9UcAe9PE
-6huZx4Adk3WlDcsddBW5NnicHzyvutw+/aIqZyOazwERZuFZmbWMfR2JE0X8bCAx
-eGfe5T7Wyv9X4v+8hng5fK0JMk4dMGmQeWKcU7/wB3ecQF7bArS5x5Jp1jCajtn6
-wh3q6/ds1fj+RCjkErqSC7M+bi+H+BS84oNm69MUtAM2CQqWfWiin/r5aJdH9V9S
-fHRxsQEI
-=HcvG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfLRHoACgkQFHw5/5Y0
+tyz77wv/ZuuKOf+VWfHTL9/5edqus7VEK8BRr9GsCVNDSPTeLpgl3seWQeBcVtS4
+WTSdCFCG+oM7eMZq0bovL1h9aVq6AWDnFcPZOt7cMWMol/D399tKKX25e6dym+Ri
+brB4v7FKuKFMToqYXutPIlT4pEgZwuryySe5sXXxNEBPWPyQ/0OZN2Lnm8Iw+rMN
+DyVvwUQ+g28DHAMap1en0HVshOLhy09W2O+HpdHIXerOi7EPXDLL7UC/wgRZM1BK
+P1t4hgh6Xtui1jDFXyK7h8j4FtyQmgGu6aU/JIgdpGM8Zg6u1vk0PfcrAhpaLfD1
+RRiJod6L78V8PO/LfGJzcdhpzGPR0X/ZRRJ7JtdHfXvt0iY6F8rzS/FBzDWquBuX
+svogUJZ+uoN32+KfFVW87Ps6S7fsqVFZ3C1zGhZGKjBAGH80FqMGyKvXpldwJInb
+1HOfi6GO0OEPN9iUoz/FiFYZfGhOmZQs2sFpwY+XrYWJPDFENVh1xTGe67kKZBlj
+i5NiCbRa
+=TzQ/
 -----END PGP SIGNATURE-----
 
---hlFdxCGyv/9AI9PJ--
+--qLwJOYykj9Iq0Chk--
