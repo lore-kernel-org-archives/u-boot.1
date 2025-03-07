@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84D9C19F32
-	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 19:29:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A08C1C19F32
+	for <u-boot@archiver.kernel.org>; Fri,  7 Mar 2025 20:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5733380E94;
-	Fri,  7 Mar 2025 20:29:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA75E80F0B;
+	Fri,  7 Mar 2025 21:17:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hywj3cvg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MjqzloPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E57A80F0B; Fri,  7 Mar 2025 20:29:48 +0100 (CET)
+ id 2F14F80F4C; Fri,  7 Mar 2025 21:17:02 +0100 (CET)
 Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
  [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E671E808A2
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 20:29:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38787808A2
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 21:16:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
 Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-390f69f8083so1885230f8f.0
- for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 11:29:45 -0800 (PST)
+ ffacd0b85a97d-390effd3e85so2032769f8f.0
+ for <u-boot@lists.denx.de>; Fri, 07 Mar 2025 12:16:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741375785; x=1741980585; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741378618; x=1741983418; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ylQZphDn+NiwElXgKxQE6NhB5VapYbqwCszlSrMTCMY=;
- b=Hywj3cvg2KyoiCMNkMWGQtMoFpLy2v0p/EZfnncf02pVDTHh7H/pry4hi/wPbWXM5k
- Myup9UR2GHOl8XE0bh02fpRAUwjR4C/Pcr1juMAfv+RbyO0wwHdu+o9nyPr6N0i9WgsZ
- BbW+E5gvtNj8Mi/pHrbHE691inN0d40SRQvQsHtzq5pVlB8WnItZ/9DxlByk8a66Fc+k
- 6xS5dCv1Lq8Xd0HLqJPRYgSVrBM/Tslft1CbxCHy7ext/qdbAzIklIs5eKPoqPnHi1JY
- R6fXSwjPqee7DRf5ek3fexpH53Ulwt8kvWIM1y84cQKlXflJF25/ZWooZy4kwWUF31C4
- G3Dw==
+ bh=mCG4XzwCNBmRXb6tIsju17Xyh5EDbCI5ahl9cDEwImw=;
+ b=MjqzloPmWueOC4r2sxoLhXM5K7LhyjDnPnPDD4oJ0jIT3yIccdav+jVZYKqm7Hi2fu
+ kClHt2PcIOAJWZvh1n4UUV6k379SDOB6iDRBnIUnr4qG5+M7lSQSdfTctDnlLIkKGyxB
+ +LaP68Q9V/18TFB53O0iMQ8Tf5pSehn0gai5tEBUIRguh8Rus7JCkBWQIKbigXEVxzL2
+ PDgI7oYErVRHQ2GQWQRxbUgJUKhUeDsy9xPKzsk0Pzp2OcpTtBJjleiMdUCIqweelnLb
+ tzNGOFojXAKoGhqWdGt/XlDP3j9h6Dr6BxUDucoqmf2tcha0DGjGUdS0YYeCYifT4uiG
+ vsWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741375785; x=1741980585;
+ d=1e100.net; s=20230601; t=1741378618; x=1741983418;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ylQZphDn+NiwElXgKxQE6NhB5VapYbqwCszlSrMTCMY=;
- b=pWB1Brg5UZhQcj2Epr4ZDciTQ69oT9htDRYctlsDINxHZa51Ku6WC7fZiHX4rJQNne
- kfwK+74Hhd4BUc7tDBKwnlJfTm1BWgRMcN3E9PvT1oVwdRiRoifumtU4NJXBUhqJ7T9G
- HRMCN1ao8LGKvMwn1NVk6a4igT61ualZvMis+/FGN/uDkgMF+uWpYN/dp5Ei2hJuo4Fj
- ERTKorFSSrvhWQLH7Z7mww90vq3VDftkt2tArCwwi7GG3MlT4mlOK1nmL2jLLaehGdd6
- WUN2aUiJowvYKVopZ0PunVH3hKfHTNcib2CMwHhg+nnKsgG0/pIHn4hT2r/h3Q0qPQHV
- 7M0w==
-X-Gm-Message-State: AOJu0Yx3KlM7Yx3Pt6DNubjW/aK19rEvrEUsbhGUCXxqxRsKu/X/oPn+
- UZi6HkQ9yggak0mhGOIr0DK/VTL2jdJx1gi1VPNeTVGeDwL9FcCBxzCrK4Wf4gdt4vUBZZX4/yZ
- k11uwjYTO3ADvLQHGuRR4M9xKnys=
-X-Gm-Gg: ASbGnctEQvCmEG4XHcWhEEJH+vF6GtWpjiUa7QK3momx+f8nCcSgxgsjzegfQrXEmXD
- JO3IX15m8LLAcMdw2wQeoJVU6ylNjvYO0F1ujOCCCNltF+Yfp7wWQQVmOqt6uWSeOLIbHSnaiIu
- ayfSPcF9Ced929wbb/G6wT5g6bTy8=
-X-Google-Smtp-Source: AGHT+IE4ETqe7ejCz1Z0VdZI05th7LrZBiGiB7EREkCyv/N+qh4rwYzCjfG1rxFl0DhLOIS2sCbSnakmZGpnywI7LgI=
-X-Received: by 2002:a5d:64a4:0:b0:390:fbdd:994d with SMTP id
- ffacd0b85a97d-39132d45d52mr3028678f8f.27.1741375785129; Fri, 07 Mar 2025
- 11:29:45 -0800 (PST)
+ bh=mCG4XzwCNBmRXb6tIsju17Xyh5EDbCI5ahl9cDEwImw=;
+ b=GZHgLuKNMiYTBfpo4WKgATY1DOQK/GC8+m8fVYTxOcnqfAiRYoXDMnTLArmxdz8iYk
+ ussRKd8skV0D9gMDVqPFT+/zj2CjyeilF/Csyvg0KuwFQrD+6qhhLBIBYYefF/UxwTmo
+ QbGHcbrCsjU7QQarqbL+6vmuZMAlZ36urfBc5ZqDCbQpPRVujw9LqlUBkaydNx53bitA
+ TlcnGV1eKS7fwSRQV8SzgbQZgEZ97BjD8o+CkF/Lvb0LSFGQFTIhrVdSm53TgJoUL7l9
+ X6Z1tFfDeoUo8G95Ha99z2zVqs9cG6n22JuYNQIBtGl+Qwawk6k/ftT4env3GcirVqju
+ /eRQ==
+X-Gm-Message-State: AOJu0YzVigjLYovcuZSJiCVpRpIBYS6L5PPsVBeYQ0PQugK7GgZIJ4lu
+ NWgbzQ2uHut7qCnOINDnrRDRPRL05fnqsLBm+/dSJQohkjVbPIaks6TZHahVPBpbn54kIFDRd5F
+ ZmiMye7WqwiEXGqHZBCT5jRSOGBU5sQ==
+X-Gm-Gg: ASbGncscuAybAjtoZWjGmaIkQ99mLgM2M89knfJArj7jp/Z1ob/s3W9PjQgA4pgcNvj
+ Mk0KZ4nK/QlWZwvhGRhQihD6eoxKZMRlTXQlIBvQ2Qx0atcuJ8DsMD9HD5DbHFMGl36DyTAIfQJ
+ 7OwV8EJ3qJvgVzCxj9er4W0D7Hi/Q=
+X-Google-Smtp-Source: AGHT+IGNnVPkcQF8HDDMBN+zDBwrotHcGElHprp+IUeqq3nCzYiiykcVzaZXypZlnAfkPqwB7CNBeQwuQhx31RYEhHM=
+X-Received: by 2002:a5d:6d05:0:b0:391:2dfa:9829 with SMTP id
+ ffacd0b85a97d-39132dc517cmr3616356f8f.50.1741378618432; Fri, 07 Mar 2025
+ 12:16:58 -0800 (PST)
 MIME-Version: 1.0
 References: <20250307101629.51561-1-clamor95@gmail.com>
  <20250307101629.51561-2-clamor95@gmail.com>
  <20250307190543.GT2640854@bill-the-cat>
 In-Reply-To: <20250307190543.GT2640854@bill-the-cat>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Fri, 7 Mar 2025 21:29:33 +0200
-X-Gm-Features: AQ5f1Jp-U9L8z3NBGyfW1UndvaZQz8XKQ2zbc1WxmbyBPPSAanI1nVBeFHg7F-s
-Message-ID: <CAPVz0n0pAJTzE9v0OU2qY29yFjRg5D10eeju9ghOchqzVvJEaw@mail.gmail.com>
+Date: Fri, 7 Mar 2025 22:16:47 +0200
+X-Gm-Features: AQ5f1JpvVebYI14-vhu_CaBu1yMRM0_0iHBzH81-kqbpAXrh0lB26HPGn9oo5bg
+Message-ID: <CAPVz0n0pxESUWLScUyKBUXUrfYzqwnKuyfru10YdfHSTYwxo_w@mail.gmail.com>
 Subject: Re: [PATCH v1 1/1] sandbox: swap bloblist and fdt loading address
  sequence
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
@@ -139,9 +139,14 @@ t
 > some room to expand).
 >
 
-I will configure and test everything but I cannot do anything without
-Simon agreement as the sandbox custodian and since he better knows
-this setup.
+preliminary memory map:
+
+0x100         CONFIG_BLOBLIST_ADDR
+0x1000       CONFIG_SYS_FDT_LOAD_ADDR
+0xf0000      CONFIG_PRE_CON_BUF_ADDR
+0xf4000      CFG_MALLOC_F_ADDR
+0x100000   TCG Event log
+
 
 > --
 > Tom
