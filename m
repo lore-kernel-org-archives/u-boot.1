@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09AD0C282EC
-	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 15:52:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBE1C282EC
+	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 19:07:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F519809A5;
-	Sat,  8 Mar 2025 16:52:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8329A8043C;
+	Sat,  8 Mar 2025 20:07:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZrUpaaDT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PpoACD88";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A77808A2; Sat,  8 Mar 2025 16:52:33 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 271878058A; Sat,  8 Mar 2025 20:07:25 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 897DC808A2
- for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 16:52:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D592C803CC
+ for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 20:07:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5499c5d9691so327503e87.2
- for <u-boot@lists.denx.de>; Sat, 08 Mar 2025 07:52:31 -0800 (PST)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2fea47bcb51so6296669a91.2
+ for <u-boot@lists.denx.de>; Sat, 08 Mar 2025 11:07:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741449123; x=1742053923; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741460841; x=1742065641; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+hGc9zhpAuMfaBnS2DnF+p2FOneyblEoWm8nkFg5FsM=;
- b=ZrUpaaDT+XKs5N1Lt0/1d25wcwteY36dUAsS+KQnhm1zYgKAuKHmshqyVGnqLL2LcO
- BT8Lr7W/l3zWAO5NXcWl3IhsXHYLuGYLpmCxDEndJH9nMKQ+ICEEoVG6Vn9tSc4HhiAV
- tgU+lGmR4DKXvDkG42uV9hb6/2oEGVW07X89DrBUQukTGeo8tyuQkULYbmMPAhB6yocr
- 6aqCRQJJnaV+MI0GMKjb0624Of4d7Mm1xtNKGmLVmsed42mcOUwgIWby9zJv5ivtjzdc
- 2N66tGVr3e6xDDh6mvB2Xk5CAIuujHIu6is4Gc3iy0oYX7RWXyyWoOtHzGxD8gxvJ+go
- jEKA==
+ bh=sU/HAVoykUlXcy081nFSkOgPDhRmrNamxw1MwDi7q3c=;
+ b=PpoACD88OdTOAM0St1fAJ789V3NKVPFfUh1NFuXflwxRW/2tDydg3oZvCDPkJaSFV6
+ KNtxrYmouBmg/ZRfhCdVehKmBG2YSSnmwqP/6kD5plin8tzqdkz7BR7UggaVcNvr8vMg
+ fEDD/vVVc7dwY2A5QK0OHTwO2Wvqncy7XLNYsbub0t4wUgTwtzZSbXXlyNwXjpv60okO
+ IRu6JkosXc/YBkOyNEMhZOnFKfrbumvjIFAzWclGQ4KgfEmlgTXtQ1crKkEahAd+Oomx
+ 9RgeFkKzz9OMJka7TQ9a5z+mNZbcb6qX+pU262m7977CfSP219GH1X2JLTKP91q/jWno
+ TwQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741449123; x=1742053923;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1741460841; x=1742065641;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+hGc9zhpAuMfaBnS2DnF+p2FOneyblEoWm8nkFg5FsM=;
- b=CmAhk3Ka9Idc7RlfUKrvtx9BnRtWBmv3EkFJq8fZwHakj80kKjNEEgU5ClgkqfY/jx
- nAA3PXzJ9lh3oDfnUIxQ1l59vHb8R/MfOZL5LiJFX9FQOzMKCas3N+u6BqJISe+vp0L1
- bq4psAkmZ7iXC/LqTj2ACsbAXxrbPq2Ww8qC1o0CD0/lT3GU0JsgPKDPpi/ruUslQxVU
- 1xnfxVy+iYgoAwhiigiuWyrDwff0ZKfEuixAhq/CtZbpeVd0VkGGFrek6qzkZrXP0DQQ
- q6BZzeqqExGa2mrQ7DkvNrxQQpZtTYdYR9ZTmBS8uqpmCIuWTkqt7kWg0GjCYTDogiXL
- qo3Q==
-X-Gm-Message-State: AOJu0YyIRgrSwmrQcQ01nWL1TWdW27xjht/0TbL9k29jvNgq3ydgafsI
- vWcaCL2YIbmk1KF6UvebeOS7ZgXuEHsQOJPSHkd+OixA9hMmSMil1Vnz1A==
-X-Gm-Gg: ASbGncuN4qlmtv88tQFf8jgAtYGHoklk0/2mAMDFNJp0K8ozoRMGzvZsz3ACZXbDvxC
- OxoZ3XPT2YbNasuEjnyaJHjarrrBJZHrgjXPNEGzU3E5ZDNCoJ8isW4Xtj/AYBnu/LtaAZuQkQl
- 5c2IK9m+x1mhpUTDxhkZtwiVw5CBmd6F+nG1/47tkz5nsg1aLVyX2SjJ8hhA+VyaGC7POS8oJrI
- 83fDmPdpWIZXpDPDWJomWXmyGLmXirwb1OIgsW0qV1f6y+SSfVz1ETUMuTQwNvynu2jXJdn2f7d
- QQTy98OTLV+NebUGpyKru/xJHpJsc9tSVoxO
-X-Google-Smtp-Source: AGHT+IGqTBX3MLpieqnIPf/Wz2SV0S1eEFHIPUKLSctDuZIpySBuN0YuK7KmjsAJ9epUlMI8HO8g1Q==
-X-Received: by 2002:a05:6512:1112:b0:545:1ce0:6407 with SMTP id
- 2adb3069b0e04-54990e6767dmr2636245e87.27.1741449122770; 
- Sat, 08 Mar 2025 07:52:02 -0800 (PST)
-Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5498b1c3524sm846908e87.228.2025.03.08.07.52.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Mar 2025 07:52:02 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] sandbox: remap memory load addresses
-Date: Sat,  8 Mar 2025 17:51:27 +0200
-Message-ID: <20250308155127.27893-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250308155127.27893-1-clamor95@gmail.com>
-References: <20250308155127.27893-1-clamor95@gmail.com>
+ bh=sU/HAVoykUlXcy081nFSkOgPDhRmrNamxw1MwDi7q3c=;
+ b=Y3dh+JhZ9hLSCC7B7oV1UvLs1gQQOKvwRDKEbshU9CDH4ZboLUnfqPC+xkzgz2SEeX
+ YpG0GC+jUAJd/4S29XzAE92l01UXZkfi0JmTcDslLAkIL2vhwejGiEWs2AmzkzPw/iyL
+ WRQn9JgDJqNB9iAxB84oRUI48DVypliOR1c2xQeceAkOAcB5uo6bupTXG+7QQXVTO113
+ 349MfedA23N5kbHsX8GOjTR9OdxL7KNl0ZDFzlhLu8Zi3k7eMAwrlN9URk7dDZGk8lJB
+ /MIQYpGvSQA5becex2/LMlRAKJKMkByDi3PdhjqUY9mTImlpZDepbiwxX3W1spFYMBqi
+ Fc2g==
+X-Gm-Message-State: AOJu0YyigMkbGnZ1IscYXSUMpe2abcyd8QMq6kgwINqn/t6BZvrOmHpQ
+ L1qhv8mFYC/H/0ZtKl7E5Aw8Pguv++k+0kYFl3uwurlDlUjqLI4pKFUigEUYMa+vHya5VL2zRvN
+ cANwXad89jJZ9ox/eXkkAbKm9vRA=
+X-Gm-Gg: ASbGnctp+w67TLt6xGtpwpIEm4D3HVmhur/H9p84BbYXuCF/zNgEkxk8g9k0XwBze+r
+ amDVsBwqequwZYuKluANoVHCNYyy89KCJvyRcwCh0cxyEpd0CFZ/+KTZ6IwGo6tTqiuyKpWeDZ4
+ C0SOLq+cqYpR7URKoUHOEQi/HN1g==
+X-Google-Smtp-Source: AGHT+IFkT9q6Uq3Xs3BlwYZszwyj+8Qo2+Ql60iy12brikeCOABi6KiNHEQQONYZ7zW3tVI7yLbHkZsCUIcoAQMu4M4=
+X-Received: by 2002:a17:90b:3f04:b0:2ff:53ad:a0ec with SMTP id
+ 98e67ed59e1d1-2ff7ceaa31dmr11818362a91.21.1741460841137; Sat, 08 Mar 2025
+ 11:07:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250302165249.267992-1-aford173@gmail.com>
+ <20250302165249.267992-2-aford173@gmail.com>
+ <CAOMZO5Ay+Msrj7tMBm8noLKHe5iPAN4=nOgX9tu7wKbWjeSPNA@mail.gmail.com>
+In-Reply-To: <CAOMZO5Ay+Msrj7tMBm8noLKHe5iPAN4=nOgX9tu7wKbWjeSPNA@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Sat, 8 Mar 2025 13:07:10 -0600
+X-Gm-Features: AQ5f1JpTp0Die1UPj8PlYrVlotVkzS40qoZDM3Yqnf8IRuSuQlo88Pn6IeSg4iU
+Message-ID: <CAHCN7xLMMH_BN-nVzSh3iQV=h-OPHEBY-=4OuBpHOBcYktaiCg@mail.gmail.com>
+Subject: Re: [PATCH 01/10] clk: imx6q: Properly handle imx6qp ESPI clk_sels
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,98 +103,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing memory layout places the bloblist at 0xb000 and the fdt at
-0x100, resulting in a 0xaf00 size constraint for the fdt. This constraint
-has been reached. Lets modify the layout by moving the bloblist to 0x100,
-device tree to 0x1000 and placing early memory allocation after pre-console
-buffer at 0xf4000. This should guarantee sufficient memory allocation for
-future expansion.
+On Thu, Mar 6, 2025 at 9:57=E2=80=AFAM Fabio Estevam <festevam@gmail.com> w=
+rote:
+>
+> On Sun, Mar 2, 2025 at 1:53=E2=80=AFPM Adam Ford <aford173@gmail.com> wro=
+te:
+> >
+> > The ECSPI clock has the ability to select between pll3_60m and
+> > osc on the imx6qp, where it's fixed on other variants.  Fix this
+> > by adding using a helper function to determine SoC variant and
+> > register the clock accordingly.
+>
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- arch/sandbox/Kconfig         | 2 +-
- common/Kconfig               | 2 +-
- doc/arch/sandbox/sandbox.rst | 6 +++---
- include/configs/sandbox.h    | 2 +-
- test/lib/kconfig.c           | 8 ++++----
- 5 files changed, 10 insertions(+), 10 deletions(-)
+Fabio,
 
-diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
-index 4c169034d9a..d61a327f151 100644
---- a/arch/sandbox/Kconfig
-+++ b/arch/sandbox/Kconfig
-@@ -77,7 +77,7 @@ config SANDBOX_BITS_PER_LONG
- 
- config SYS_FDT_LOAD_ADDR
- 	hex "Address at which to load devicetree"
--	default 0x100
-+	default 0x1000
- 	help
- 	  With sandbox the devicetree is loaded into the emulated RAM. This sets
- 	  the address that is used. There must be enough space at this address
-diff --git a/common/Kconfig b/common/Kconfig
-index 7685914fa6f..cf4bee063ae 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1070,7 +1070,7 @@ endchoice
- 
- config BLOBLIST_ADDR
- 	hex "Address of bloblist"
--	default 0xb000 if SANDBOX
-+	default 0x100 if SANDBOX
- 	depends on BLOBLIST_FIXED
- 	help
- 	  Sets the address of the bloblist, set up by the first part of U-Boot
-diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
-index a8b0d7f0395..7e641306da2 100644
---- a/doc/arch/sandbox/sandbox.rst
-+++ b/doc/arch/sandbox/sandbox.rst
-@@ -658,10 +658,10 @@ that are mapped into that memory:
- ========   ========================   ===============================
- Addr       Config                     Usage
- ========   ========================   ===============================
--     100   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
--    b000   CONFIG_BLOBLIST_ADDR       Blob list
--   10000   CFG_MALLOC_F_ADDR          Early memory allocation
-+     100   CONFIG_BLOBLIST_ADDR       Blob list
-+    1000   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
-    f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
-+   f4000   CFG_MALLOC_F_ADDR          Early memory allocation
-   100000   TCG Event log              TCG Event Log
-   200000   CONFIG_TRACE_EARLY_ADDR    Early trace buffer (if enabled). Also used
-   400000   CONFIG_TEXT_BASE           Load buffer for U-Boot (sandbox_spl only)
-diff --git a/include/configs/sandbox.h b/include/configs/sandbox.h
-index 2372485c84e..db2ac7f83bb 100644
---- a/include/configs/sandbox.h
-+++ b/include/configs/sandbox.h
-@@ -6,7 +6,7 @@
- #ifndef __CONFIG_H
- #define __CONFIG_H
- 
--#define CFG_MALLOC_F_ADDR		0x0010000
-+#define CFG_MALLOC_F_ADDR		0x000f4000
- 
- /* Size of our emulated memory */
- #define SB_CONCAT(x, y) x ## y
-diff --git a/test/lib/kconfig.c b/test/lib/kconfig.c
-index a3645abf946..2f47af9acf1 100644
---- a/test/lib/kconfig.c
-+++ b/test/lib/kconfig.c
-@@ -22,10 +22,10 @@ static int lib_test_is_enabled(struct unit_test_state *uts)
- 	ut_asserteq(0, CONFIG_IS_ENABLED(_UNDEFINED));
- 
- 	if (IS_ENABLED(CONFIG_BLOBLIST)) {
--		ut_asserteq(0xb000, IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
--						   CONFIG_BLOBLIST_ADDR));
--		ut_asserteq(0xb000, CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED,
--							  BLOBLIST_ADDR));
-+		ut_asserteq(0x100, IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-+						  CONFIG_BLOBLIST_ADDR));
-+		ut_asserteq(0x100, CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED,
-+							 BLOBLIST_ADDR));
- 	}
- 
- 	/*
--- 
-2.43.0
+Thanks for the review.  I will make the updates to the two patches you
+requested.  Is there anything else you want changed before I submit
+V2?
 
+adam
+> s/ESPI/ECSPI in the Subject.
+>
+> > +       if (clk_on_imx6qp()) {
+> > +               clk_dm(IMX6QDL_CLK_ECSPI_SEL,
+> > +                      imx_clk_mux("ecspi_sel", base + 0x38, 18, 1, ecs=
+pi_sels,
+> > +                                  ARRAY_SIZE(ecspi_sels)));
+> > +       }
+>
+> No need for { }.
+>
+> > +
+> >         clk_dm(IMX6QDL_CLK_USDHC1_PODF,
+> >                imx_clk_divider("usdhc1_podf", "usdhc1_sel",
+> >                                base + 0x24, 11, 3));
+> > @@ -91,9 +103,13 @@ static int imx6q_clk_probe(struct udevice *dev)
+> >                imx_clk_divider("usdhc4_podf", "usdhc4_sel",
+> >                                base + 0x24, 22, 3));
+> >
+> > -       clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+> > -              imx_clk_divider("ecspi_root", "pll3_60m", base + 0x38, 1=
+9, 6));
+> > -
+> > +       if (clk_on_imx6qp()) {
+> > +               clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+> > +                      imx_clk_divider("ecspi_root", "ecspi_sel", base =
++ 0x38, 19, 6));
+> > +       } else {
+> > +               clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+> > +                      imx_clk_divider("ecspi_root", "pll3_60m", base +=
+ 0x38, 19, 6));
+> > +       }
+>
+> Same here.
