@@ -4,52 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D2C0C282EC
-	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 14:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75577C282EC
+	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 14:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4AE380F4C;
-	Sat,  8 Mar 2025 15:19:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 801128058A;
+	Sat,  8 Mar 2025 15:50:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="eZnxJqpe";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 345B1809A5; Sat,  8 Mar 2025 15:19:44 +0100 (CET)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEC3080050
- for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 15:19:41 +0100 (CET)
+ id 4CA77806FC; Sat,  8 Mar 2025 15:50:34 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 1EFBC80050
+ for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 15:50:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 8B36E25B88;
- Sat,  8 Mar 2025 15:19:41 +0100 (CET)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f1IDv3w2C4e6; Sat,  8 Mar 2025 15:19:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1741443581; bh=JpVohEXp4eneLP7WpxbZ/uD4x4xXMpJhTLN71h/eZlU=;
- h=Date:From:To:Subject:References:In-Reply-To;
- b=eZnxJqpe88uYDdRgfaegq/fVuyR1d8XiTtGvzpK1el+08dIJHkwPPiZsoDESXTbGb
- dVNtFRWQRDofZJFGd2YjZ2MzrZl9g+4vUDGZl+3YbII8FQ+9TfXklIL+pMCMqcAW3Q
- iN9bMiDMaGSHCh0+IfJcR+gEBG2GsDDArVBoLSTPpOwD/UIPzrw8CH6c52qdMtGtoz
- PgCoCuyiGRQRHPd5pKZvYSVE+J4igbysI/BuoYECiZ9nQK3vYKJKspj6s9PS8yXtgx
- A4ziVM9Di7GRu8gfZNHttrWJaNESkohZksBOHKw+nXT9MEgbs3KAakkPPFsZkV7Y7u
- a+4B/JnOBLhDg==
-Date: Sat, 8 Mar 2025 14:19:26 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Ali Tariq <alitariq4589@gmail.com>, u-boot@lists.denx.de
-Subject: Re: Building separate SPL with U-boot
-Message-ID: <Z8xR7q3o2rUakJAo@pie>
-References: <CALDOrMFBp0WVRPtXvT5mtjdw06QMZTQw9rEo38NB0o=LkT1prA@mail.gmail.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: Rpf+1ycITX2ZhbM2S4ImuQ==
+X-CSE-MsgGUID: AFPU1ZHgSnORlHrB/QFWdA==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 08 Mar 2025 23:50:22 +0900
+Received: from [10.24.0.79] (unknown [10.24.0.79])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 54A1E401BF03;
+ Sat,  8 Mar 2025 23:50:19 +0900 (JST)
+Message-ID: <20de7a62-8bda-467d-92eb-34e92f0aa2ab@bp.renesas.com>
+Date: Sat, 8 Mar 2025 14:50:18 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CALDOrMFBp0WVRPtXvT5mtjdw06QMZTQw9rEo38NB0o=LkT1prA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: miiphybb: Update documentation
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------7n4A4u0dbYaTeoIPUWjzRuTv"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,22 +62,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Mar 08, 2025 at 03:07:19PM +0500, Ali Tariq wrote:
-> Hello everyone,
-> 
-> I am trying to build a separate SPL for u-boot (which would produce a file
-> named FSBL.bin - first stage boot loader after the build) for testing
-> purposes. I am using bananapi-f3_defconfig as the config file.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------7n4A4u0dbYaTeoIPUWjzRuTv
+Content-Type: multipart/mixed; boundary="------------nKCOp2xFsCi1OVAYm4ETQFJ5";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Message-ID: <20de7a62-8bda-467d-92eb-34e92f0aa2ab@bp.renesas.com>
+Subject: Re: [PATCH] net: miiphybb: Update documentation
+References: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
 
-iirc U-Boot support for bananapi-f3 is really in an early stage and I
-don't think U-Boot SPL has been ported to the platform.
+--------------nKCOp2xFsCi1OVAYm4ETQFJ5
+Content-Type: multipart/mixed; boundary="------------R9T1GDwfvO8s4Tu0xzpbJyE3"
 
-> But I want to know how to produce a separate SPL for any SoC or board.
-> 
-> Is there a specific reason why the separate SPL is not built?
-> 
-> Regards,
-> Ali
+--------------R9T1GDwfvO8s4Tu0xzpbJyE3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Best regards,
-Yao Zi
+On 06/03/2025 22:12, Marek Vasut wrote:
+> Update the miiphybb documentation to match current implementation.
+> The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
+> The example is updated to match current Renesas RAVB driver, which
+> is one of the miiphybb users.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+I have a couple of minor improvements to the sentences below, you can
+fix these up while applying.
+
+> -The board code needs to fill the bb_miiphy_buses[] array with a record=
+ for
+> -each required bus and declare the bb_miiphy_buses_num variable with th=
+e
+> -number of mii buses. The record (struct bb_miiphy_bus) has the followi=
+ng
+> -fields/callbacks (see miiphy.h for details):
+> +The driver code needs to allocate regular MDIO device using mdio_alloc=
+()
+
+"... allocate a regular MDIO device ..."
+
+> +and assign .read and .write accessors which wrap bb_miiphy_read() and
+> +bb_miiphy_write() functions respectively. The bb_miiphy_read() and
+> +bb_miiphy_write() functions have to be passed a point to a callback
+
+"... functions take a pointer to a callback ..."
+
+> +structure, struct bb_miiphy_bus_ops. The struct bb_miiphy_bus_ops has
+> +the following fields/callbacks (see miiphy.h for details):
+
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+
+Thanks!
+
+--=20
+Paul Barker
+--------------R9T1GDwfvO8s4Tu0xzpbJyE3
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsFNBGS4BNsBEADEc28TO+aryCgRIuhxWAviuJl+f2TcZ1JeeaMzRLgSXKuXzkiI
+g6JIVfNvThjwJaBmb7+/5+D7kDLJuutu9MFfOzTS0QOQWppwIPgbfktvMvwwsq3m
+7e9Qb+S1LVeV0/ldZfuzgzAzHFDwmzryfIyt2JEbsBsGTq/QE+7hvLAe8R9xofIn
+z6/IndiiTYhNCNf06nFPR4Y5ZDZPGb9aw5Jisqh+OSxtc0BFHDSV8/35yWM/JLQ1
+Ja8AOHw1kP9KO+iE9rHMt0+7lH3mN1GBabxH26EdgFfPShsi14qmziLOuUlGLuwO
+ApIYqvdtCs+zlMA8PsiJIMuxizZ6qCLur3r2b+/YXoJjuFDcax9M+Pr0D7rZX0Hk
+6PW3dtvDQHfspwLY0FIlXbbtCfCqGLe47VaS7lvG0XeMlo3dUEsf707Q2h0+G1tm
+wyeuWSPEzZQq/KI7JIFlxr3N/3VCdGa9qVf/40QF0BXPfJdcwTEzmPlYetRgA11W
+bglw8DxWBv24a2gWeUkwBWFScR3QV4FAwVjmlCqrkw9dy/JtrFf4pwDoqSFUcofB
+95u6qlz/PC+ho9uvUo5uIwJyz3J5BIgfkMAPYcHNZZ5QrpI3mdwf66im1TOKKTuf
+3Sz/GKc14qAIQhxuUWrgAKTexBJYJmzDT0Mj4ISjlr9K6VXrQwTuj2zC4QARAQAB
+zStQYXVsIEJhcmtlciA8cGF1bC5iYXJrZXIuY3RAYnAucmVuZXNhcy5jb20+wsGU
+BBMBCgA+FiEE9KKf333+FIzPGaxOJ/SzRZ8AIlcFAmS4BNsCGwEFCQPCZwAFCwkI
+BwIGFQoJCAsCBBYCAwECHgECF4AACgkQJ/SzRZ8AIlfxaQ/8CM36qjfad7eBfwja
+cI1LlH1NwbSJ239rE0X7hU/5yra72egr3T5AUuYTt9ECNQ8Ld03BYhbC6hPki5rb
+OlFM2hEPUQYeohcJ4Na5iIFpTxoIuC49Hp2ce6ikvt9Hc4O2FAntabg+9hE8WA4f
+QWW+Qo5ve5OJ0sGylzu0mRZ2I3mTaDsxuDkXOICF5ggSdjT+rcd/pRVOugImjpZv
+/jzSgUfKV2wcZ8vVK0616K21tyPiRjYtDQjJAKff8gBY6ZvP5REPl+fYNvZm1y4l
+hsVupGHL3aV+BKooMsKRZIMTiKJCIy6YFKHOcgWFG62cuRrFDf4r54MJuUGzyeoF
+1XNFzbe1ySoRfU/HrEuBNqC+1CEBiduumh89BitfDNh6ecWVLw24fjsF1Ke6vYpU
+lK9/yGLV26lXYEN4uEJ9i6PjgJ+Q8fubizCVXVDPxmWSZIoJg8EspZ+Max03Lk3e
+flWQ0E3l6/VHmsFgkvqhjNlzFRrj/k86IKdOi0FOd0xtKh1p34rQ8S/4uUN9XCVj
+KtmyLfQgqPVEC6MKv7yFbextPoDUrFAzEgi4OBdqDJjPbdU9wUjONxuWJRrzRFcr
+nTIG7oC4dae0p1rs5uTlaSIKpB2yulaJLKjnNstAj9G9Evf4SE2PKH4l4Jlo/Hu1
+wOUqmCLRo3vFbn7xvfr1u0Z+oMTOOARkuAhwEgorBgEEAZdVAQUBAQdAcuNbK3VT
+WrRYypisnnzLAguqvKX3Vc1OpNE4f8pOcgMDAQgHwsF2BBgBCgAgFiEE9KKf333+
+FIzPGaxOJ/SzRZ8AIlcFAmS4CHACGwwACgkQJ/SzRZ8AIlc90BAAr0hmx8XU9KCj
+g4nJqfavlmKUZetoX5RB9g3hkpDlvjdQZX6lenw3yUzPj53eoiDKzsM03Tak/KFU
+FXGeq7UtPOfXMyIh5UZVdHQRxC4sIBMLKumBfC7LM6XeSegtaGEX8vSzjQICIbaI
+roF2qVUOTMGal2mvcYEvmObC08bUZuMd4nxLnHGiej2t85+9F3Y7GAKsA25EXbbm
+ziUg8IVXw3TojPNrNoQ3if2Z9NfKBhv0/s7x/3WhhIzOht+rAyZaaW+31btDrX4+
+Y1XLAzg9DAfuqkL6knHDMd9tEuK6m2xCOAeZazXaNeOTjQ/XqCHmZ+691VhmAHCI
+7Z7EBPh++TjEqn4ZH+4KPn6XD52+ruWXGbJP29zc+3bwQ+ZADfUaL3ADj69ySxzm
+bO24USHBAg+BhZAZMBkbkygbTen/umT6tBxG91krqbKlDdc8mhGonBN6i+nz8qv1
+6MdC5P1rDbo834rxNLvoFMSLCcpjoafiprl9qk0wQLq48WGphs9DX7V75ZAU5Lt6
+yA+je8i799EZJsVlB933Gpj688H4csaZqEMBjq7vMvI+a5MnLCGcjwRhsUfogpRb
+AWTx9ddVau4MJgEHzB7UU/VFyP2vku7XPj6mgSfSHyNVf2hqxwISQ8eZLoyxauOD
+Y61QMX6YFL170ylToSFjH627h6TzlUDOMwRkuAiAFgkrBgEEAdpHDwEBB0Bibkmu
+Sf7yECzrkBmjD6VGWNVxTdiqb2RuAfGFY9RjRsLB7QQYAQoAIBYhBPSin999/hSM
+zxmsTif0s0WfACJXBQJkuAiAAhsCAIEJECf0s0WfACJXdiAEGRYIAB0WIQSiu8gv
+1Xr0fIw/aoLbaV4Vf/JGvQUCZLgIgAAKCRDbaV4Vf/JGvZP9AQCwV06n3DZvuce3
+/BtzG5zqUuf6Kp2Esgr2FrD4fKVbogD/ZHpXfi9ELdH/JTSVyujaTqhuxQ5B7UzV
+CUIb1qbg1APIEA/+IaLJIBySehy8dHDZQXit/XQYeROQLTT9PvyM35rZVMGH6VG8
+Zb23BPCJ3N0ISOtVdG402lSP0ilP/zSyQAbJN6F0o2tiPd558lPerFd/KpbCIp8N
+kYaLlHWIDiN2AE3c6sfCiCPMtXOR7HCeQapGQBS/IMh1qYHffuzuEy7tbrMvjdra
+VN9Rqtp7PSuRTbO3jAhm0Oe4lDCAK4zyZfjwiZGxnj9s1dyEbxYB2GhTOgkiX/96
+Nw+m/ShaKqTM7o3pNUEs9J3oHeGZFCCaZBv97ctqrYhnNB4kzCxAaZ6K9HAAmcKe
+WT2q4JdYzwB6vEeHnvxl7M0Dj9pUTMujW77Qh5IkUQLYZ2XQYnKAV2WI90B0R1p9
+bXP+jqqkaNCrxKHV1tYOB6037CziGcZmiDneiTlM765MTLJLlHNqlXxDCzRwEazU
+y9dNzITjVT0qhc6th8/vqN9dqvQaAGa13u86Gbv4XPYdE+5MXPM/fTgkKaPBYcIV
+QMvLfoZxyaTk4nzNbBxwwEEHrvTcWDdWxGNtkWRZw0+U5JpXCOi9kBCtFrJ701UG
+UFs56zWndQUS/2xDyGk8GObGBSRLCwsXsKsF6hSX5aKXHyrAAxEUEscRaAmzd6O3
+ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------R9T1GDwfvO8s4Tu0xzpbJyE3--
+
+--------------nKCOp2xFsCi1OVAYm4ETQFJ5--
+
+--------------7n4A4u0dbYaTeoIPUWjzRuTv
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8xZKgUDAAAAAAAKCRDbaV4Vf/JGvf2v
+AP47RN57lnJBW0D2YKHMJcayysqjGMY4WMl0h4ziBgxzkgD9FWv9VLYLyPz2HBIYun+ItFbECNvR
+qCc0DMk0kJuuQA0=
+=EVo4
+-----END PGP SIGNATURE-----
+
+--------------7n4A4u0dbYaTeoIPUWjzRuTv--
