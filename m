@@ -4,49 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B868C282EC
-	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 14:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B966C282EC
+	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 15:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0440880050;
-	Sat,  8 Mar 2025 15:55:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 5EED98058A;
+	Sat,  8 Mar 2025 16:52:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 471848058A; Sat,  8 Mar 2025 15:55:06 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 8972C8004F
- for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 15:55:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: zO8+9RvBQqavi1cOH0j+rw==
-X-CSE-MsgGUID: pf+sMM0rTuGC/6bW584PeA==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 08 Mar 2025 23:54:58 +0900
-Received: from [10.24.0.79] (unknown [10.24.0.79])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 9BF30400B520;
- Sat,  8 Mar 2025 23:54:56 +0900 (JST)
-Message-ID: <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
-Date: Sat, 8 Mar 2025 14:54:55 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nq7EfrzR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A7E8180C93; Sat,  8 Mar 2025 16:52:32 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E329803CC
+ for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 16:52:30 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-543e4bbcd86so3395949e87.1
+ for <u-boot@lists.denx.de>; Sat, 08 Mar 2025 07:52:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741449122; x=1742053922; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TRj2OMXfPv4CpomwBDI0CjnlXYBzvXmfO3B7wrDKOZI=;
+ b=nq7EfrzRtAJjk4BMlHMxFKUzRIs8Rny2/h8IuBiyIRp1dfnp2YQEvoF69C7uSX73OV
+ DJwVqem+Icu9ezw59IEBO12+I9tdV4Eb1T5XZt2ytZqjVKCcjKWJZxcXvksrOLOujxgH
+ gnN18ftzhobfFon0CuQl0LBx80P27xJTaPqRiQBp9qBUsSXPGdeZg1CdD9EaZo3ddt6U
+ XKdxAyoUVbcbfLfLqjMgx0QPaqKjbc4Mrujv8GEnQtkMGIUPt9o+0rc371rbxeuh/1Ak
+ wl+BpUvSiwHcdxqZMVL0effD4zpxj/Ts1cbGoZMYmTw2XoTPs7ydtmwPka4hF1/D+D8P
+ xJIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741449122; x=1742053922;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TRj2OMXfPv4CpomwBDI0CjnlXYBzvXmfO3B7wrDKOZI=;
+ b=m7eUOi2mYUs956TkJK5TyzeH7N2bTDGCQUjeR5avuGemW5X13I2xVQdWTxJN3fl9r/
+ FQpP/knrLcUdFGcEksr5rUFxZ/L/b0cUbBHGxXPDj2ogtNEx3Ay04x0QX+8qwbgvCKoM
+ J88Nd4/XvC070IAdkhIZdpIq7Wh58h5SU9NWM/z7QNnXjGyJlj8/903z77dxYtcOpczH
+ nhcEtHv3m2+pVDz1EmnZIOyfzzxXHSoWqZfRgV1K0udfuslQO0luR5AcYN152rX2MLxn
+ XVhz57pYrvNHXKmZkMhwZX9lBJgGusm2eaACgMKRajBuuHe819d+IyM7q9pGc8PFMGv+
+ 3U8w==
+X-Gm-Message-State: AOJu0YziMzRCKDEQMew+CJA7UEcq3MPLyCkNVoW4PBJw8G+mpBIeZrSC
+ GEiJSwns0Hkx6qPQ/3ME0WGTe0L3Qa/yLk+vPmg07QDutxvY3xTg
+X-Gm-Gg: ASbGnct+vK6rZ1DfJdne3k7uDLXix7QR3ZKj2JbpAb+CK3udq+54f//Kg3Rt3NkNeKH
+ XjntJNmQty+E2/nenglCQUaEYNbGYXwGMypzcKYVFWGexq0aVSa5fuToiwR4wUFvCEkSeOfqBDG
+ RjkOkuSP5HC0PaZrV1YAtcLATV8XqYkKca6+RHfpomTHqmGEnRpcNTTmR8EYg09+cEj/NAZHefy
+ IfqUhSSzP7x+IvXmyU2EQb51Df0Q6N1nu7jcsBT6NFx4F7B7ZPD9jq/OPgJXfPfw8QPRjR0Mn/F
+ Q1blC6ss/0yxYC4bvOFWl8YJQVYU8FPD9NzW
+X-Google-Smtp-Source: AGHT+IEEju9sYwpL+7kCwSivvJz2zQAXArWQ84cBE87KruUZXP412qtMe+AGWPJFLtzW27cKyHoGFw==
+X-Received: by 2002:a05:6512:3ca0:b0:549:39b1:65c2 with SMTP id
+ 2adb3069b0e04-549910cbf59mr2721965e87.48.1741449121449; 
+ Sat, 08 Mar 2025 07:52:01 -0800 (PST)
+Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5498b1c3524sm846908e87.228.2025.03.08.07.52.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Mar 2025 07:52:00 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
- <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
- <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------B0Yi4BNF4kkuhA8I9N38j0c5"
+Subject: [PATCH v2 0/1] sandbox: swap bloblist and fdt loading address sequence
+Date: Sat,  8 Mar 2025 17:51:26 +0200
+Message-ID: <20250308155127.27893-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,256 +93,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------B0Yi4BNF4kkuhA8I9N38j0c5
-Content-Type: multipart/mixed; boundary="------------SZ9p4VTqxn3QBFRP0b2SYS0Q";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Message-ID: <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
-Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
-References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
- <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
- <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
-In-Reply-To: <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
+The existing memory layout places the bloblist at 0xb000 and the fdt at
+0x100, resulting in a 0xaf00 size constraint for the fdt. This constraint
+has been reached. Lets modify the layout by moving the bloblist to 0x100,
+device tree to 0x1000 and placing early memory allocation after pre-console
+buffer at 0xf4000. This should guarantee sufficient memory allocation for
+future expansion.
 
---------------SZ9p4VTqxn3QBFRP0b2SYS0Q
-Content-Type: multipart/mixed; boundary="------------LDEiRryBZDsl08E00Q09zzLh"
+Tests passed: https://source.denx.de/u-boot/custodians/u-boot-tegra/-/pipelines/25038
 
---------------LDEiRryBZDsl08E00Q09zzLh
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+---
+Changes in  v2:
+- memory map of sandbox remapped further as agreed
+---
 
-On 05/03/2025 20:05, Marek Vasut wrote:
-> On 3/4/25 5:37 PM, Paul Barker wrote:
->=20
-> [...]
->=20
->> +static int rzg2l_usbphy_ctrl_assert(struct reset_ctl *reset_ctl)
->> +{
->> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(reset_ctl->dev)=
-;
->> +	u32 val;
->> +
->> +	val =3D readl(priv->regs + RESET);
->> +	val |=3D reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1;
->=20
-> u32 val =3D reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1;
->=20
->> +	/* If both ports are in reset, we can also place the PLL into reset.=
- */
->> +	if ((val & PHY_RESET_MASK) =3D=3D PHY_RESET_MASK)
->> +		val |=3D RESET_PLLRESET;
->=20
-> setbits_le32(priv->regs + RESET, val);
->=20
->> +	writel(val, priv->regs + RESET);
->> +	return 0;
->> +}
->> +
->> +static int rzg2l_usbphy_ctrl_deassert(struct reset_ctl *reset_ctl)
->> +{
->> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(reset_ctl->dev)=
-;
->> +	u32 val;
->> +
->> +	val =3D readl(priv->regs + RESET);
->> +	val &=3D ~(reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1);
->> +
->> +	/* If either port is out of reset, the PLL must also be out of reset=
-=2E */
->> +	val |=3D RESET_SEL_PLLRESET;
->> +	val &=3D ~RESET_PLLRESET;
->> +
->> +	writel(val, priv->regs + RESET);
->=20
-> clrsetbits_le32() please
->=20
->> +	return 0;
->> +}
->> +
->> +static int rzg2l_usbphy_ctrl_of_xlate(struct reset_ctl *reset_ctl,
->> +				      struct ofnode_phandle_args *args)
->> +{
->> +	if (args->args[0] >=3D NUM_PORTS)
->> +		return -EINVAL;
->> +
->> +	reset_ctl->id =3D args->args[0];
->> +	return 0;
->> +}
->> +
->> +struct reset_ops rzg2l_usbphy_ctrl_ops =3D {
->> +	.rst_assert =3D rzg2l_usbphy_ctrl_assert,
->> +	.rst_deassert =3D rzg2l_usbphy_ctrl_deassert,
->> +	.of_xlate =3D rzg2l_usbphy_ctrl_of_xlate,
->> +};
->> +
->> +static int rzg2l_usbphy_ctrl_probe(struct udevice *dev)
->> +{
->> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(dev);
->> +	struct reset_ctl rst;
->> +	int ret;
->> +
->> +	priv->regs =3D dev_read_addr(dev);
->> +
->> +	ret =3D reset_get_by_index(dev, 0, &rst);
->> +	if (ret < 0) {
->> +		dev_err(dev, "failed to get reset line\n");
->=20
-> It generally helps to include 'ret' value in the error messages, so=20
-> users can immediately look up the error code and find out what is wrong=
-,=20
-> without recompiling U-Boot.
->=20
->> +		return ret;
->> +	}
->> +
->> +	ret =3D reset_deassert(&rst);
->> +	if (ret < 0) {
->> +		dev_err(dev, "failed to de-assert reset line\n");
->=20
-> DTTO
->=20
->> +		return ret;
->> +	}
->> +
->> +	/* put pll and phy into reset state */
->> +	setbits_le32(priv->regs + RESET,
->> +		     RESET_SEL_PLLRESET | RESET_PLLRESET | PHY_RESET_MASK);
->> +
->> +	return 0;
->> +}
->> +
->> +static const struct udevice_id rzg2l_usbphy_ctrl_ids[] =3D {
->> +	{ .compatible =3D "renesas,rzg2l-usbphy-ctrl", },
->> +	{ /* sentinel */ }
->> +};
->> +
->> +U_BOOT_DRIVER(rzg2l_usbphy_ctrl) =3D {
->> +	.name           =3D "rzg2l_usbphy_ctrl",
->> +	.id             =3D UCLASS_RESET,
->> +	.of_match       =3D rzg2l_usbphy_ctrl_ids,
->> +	.probe          =3D rzg2l_usbphy_ctrl_probe,
->> +	.ops            =3D &rzg2l_usbphy_ctrl_ops,
->> +	.priv_auto      =3D sizeof(struct rzg2l_usbphy_ctrl_priv),
->> +};
->> diff --git a/include/renesas/rzg2l-usbphy.h b/include/renesas/rzg2l-us=
-bphy.h
->> new file mode 100644
->> index 000000000000..1a46b585f170
->> --- /dev/null
->> +++ b/include/renesas/rzg2l-usbphy.h
->> @@ -0,0 +1,17 @@
->> +/* SPDX-License-Identifier: GPL-2.0 */
->> +/*
->> + * RZ/G2L USB PHY common definitions
->> + *
->> + * Copyright (C) 2021-2023 Renesas Electronics Corp.
->> + */
->> +
->> +#ifndef RENESAS_RZG2L_USBPHY_H
->> +#define RENESAS_RZG2L_USBPHY_H
->> +
->> +#include <fdtdec.h>
->> +
->> +struct rzg2l_usbphy_ctrl_priv {
->> +	fdt_addr_t regs;
->> +};
-> If this structure isn't shared with any other drivers, inline it into=20
-> drivers/reset/reset-rzg2l-usbphy-ctrl.c and drop the header file.
+Svyatoslav Ryhel (1):
+  sandbox: remap memory load addresses
 
-This structure is used by the VBUS regulator driver in patch 2 of this
-series.
+ arch/sandbox/Kconfig         | 2 +-
+ common/Kconfig               | 2 +-
+ doc/arch/sandbox/sandbox.rst | 6 +++---
+ include/configs/sandbox.h    | 2 +-
+ test/lib/kconfig.c           | 8 ++++----
+ 5 files changed, 10 insertions(+), 10 deletions(-)
 
-I'll fix the rest up in v2.
+-- 
+2.43.0
 
-Thanks,
-
---=20
-Paul Barker
---------------LDEiRryBZDsl08E00Q09zzLh
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------LDEiRryBZDsl08E00Q09zzLh--
-
---------------SZ9p4VTqxn3QBFRP0b2SYS0Q--
-
---------------B0Yi4BNF4kkuhA8I9N38j0c5
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8xaPwUDAAAAAAAKCRDbaV4Vf/JGvT04
-AP4zYN/d+1lYW5fPwS8ggu4VYqf0byV+co5kFEB3LH5+RwEA3YdfI9rxxD4K1BelFogLQt0p4flG
-MI+2aCNAvV5duwo=
-=8soy
------END PGP SIGNATURE-----
-
---------------B0Yi4BNF4kkuhA8I9N38j0c5--
