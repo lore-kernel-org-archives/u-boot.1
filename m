@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75577C282EC
-	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 14:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B868C282EC
+	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 14:55:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 801128058A;
-	Sat,  8 Mar 2025 15:50:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0440880050;
+	Sat,  8 Mar 2025 15:55:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CA77806FC; Sat,  8 Mar 2025 15:50:34 +0100 (CET)
+ id 471848058A; Sat,  8 Mar 2025 15:55:06 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 1EFBC80050
- for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 15:50:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 8972C8004F
+ for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 15:55:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: Rpf+1ycITX2ZhbM2S4ImuQ==
-X-CSE-MsgGUID: AFPU1ZHgSnORlHrB/QFWdA==
+X-CSE-ConnectionGUID: zO8+9RvBQqavi1cOH0j+rw==
+X-CSE-MsgGUID: pf+sMM0rTuGC/6bW584PeA==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 08 Mar 2025 23:50:22 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 08 Mar 2025 23:54:58 +0900
 Received: from [10.24.0.79] (unknown [10.24.0.79])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 54A1E401BF03;
- Sat,  8 Mar 2025 23:50:19 +0900 (JST)
-Message-ID: <20de7a62-8bda-467d-92eb-34e92f0aa2ab@bp.renesas.com>
-Date: Sat, 8 Mar 2025 14:50:18 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 9BF30400B520;
+ Sat,  8 Mar 2025 23:54:56 +0900 (JST)
+Message-ID: <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
+Date: Sat, 8 Mar 2025 14:54:55 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: miiphybb: Update documentation
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
 Content-Language: en-GB
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
+ <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------7n4A4u0dbYaTeoIPUWjzRuTv"
+ boundary="------------B0Yi4BNF4kkuhA8I9N38j0c5"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,67 +64,177 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------7n4A4u0dbYaTeoIPUWjzRuTv
-Content-Type: multipart/mixed; boundary="------------nKCOp2xFsCi1OVAYm4ETQFJ5";
+--------------B0Yi4BNF4kkuhA8I9N38j0c5
+Content-Type: multipart/mixed; boundary="------------SZ9p4VTqxn3QBFRP0b2SYS0Q";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Message-ID: <20de7a62-8bda-467d-92eb-34e92f0aa2ab@bp.renesas.com>
-Subject: Re: [PATCH] net: miiphybb: Update documentation
-References: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Message-ID: <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
+Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
+References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
+ <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
+In-Reply-To: <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
 
---------------nKCOp2xFsCi1OVAYm4ETQFJ5
-Content-Type: multipart/mixed; boundary="------------R9T1GDwfvO8s4Tu0xzpbJyE3"
+--------------SZ9p4VTqxn3QBFRP0b2SYS0Q
+Content-Type: multipart/mixed; boundary="------------LDEiRryBZDsl08E00Q09zzLh"
 
---------------R9T1GDwfvO8s4Tu0xzpbJyE3
+--------------LDEiRryBZDsl08E00Q09zzLh
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 06/03/2025 22:12, Marek Vasut wrote:
-> Update the miiphybb documentation to match current implementation.
-> The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
-> The example is updated to match current Renesas RAVB driver, which
-> is one of the miiphybb users.
+On 05/03/2025 20:05, Marek Vasut wrote:
+> On 3/4/25 5:37 PM, Paul Barker wrote:
 >=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> [...]
+>=20
+>> +static int rzg2l_usbphy_ctrl_assert(struct reset_ctl *reset_ctl)
+>> +{
+>> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(reset_ctl->dev)=
+;
+>> +	u32 val;
+>> +
+>> +	val =3D readl(priv->regs + RESET);
+>> +	val |=3D reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1;
+>=20
+> u32 val =3D reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1;
+>=20
+>> +	/* If both ports are in reset, we can also place the PLL into reset.=
+ */
+>> +	if ((val & PHY_RESET_MASK) =3D=3D PHY_RESET_MASK)
+>> +		val |=3D RESET_PLLRESET;
+>=20
+> setbits_le32(priv->regs + RESET, val);
+>=20
+>> +	writel(val, priv->regs + RESET);
+>> +	return 0;
+>> +}
+>> +
+>> +static int rzg2l_usbphy_ctrl_deassert(struct reset_ctl *reset_ctl)
+>> +{
+>> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(reset_ctl->dev)=
+;
+>> +	u32 val;
+>> +
+>> +	val =3D readl(priv->regs + RESET);
+>> +	val &=3D ~(reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1);
+>> +
+>> +	/* If either port is out of reset, the PLL must also be out of reset=
+=2E */
+>> +	val |=3D RESET_SEL_PLLRESET;
+>> +	val &=3D ~RESET_PLLRESET;
+>> +
+>> +	writel(val, priv->regs + RESET);
+>=20
+> clrsetbits_le32() please
+>=20
+>> +	return 0;
+>> +}
+>> +
+>> +static int rzg2l_usbphy_ctrl_of_xlate(struct reset_ctl *reset_ctl,
+>> +				      struct ofnode_phandle_args *args)
+>> +{
+>> +	if (args->args[0] >=3D NUM_PORTS)
+>> +		return -EINVAL;
+>> +
+>> +	reset_ctl->id =3D args->args[0];
+>> +	return 0;
+>> +}
+>> +
+>> +struct reset_ops rzg2l_usbphy_ctrl_ops =3D {
+>> +	.rst_assert =3D rzg2l_usbphy_ctrl_assert,
+>> +	.rst_deassert =3D rzg2l_usbphy_ctrl_deassert,
+>> +	.of_xlate =3D rzg2l_usbphy_ctrl_of_xlate,
+>> +};
+>> +
+>> +static int rzg2l_usbphy_ctrl_probe(struct udevice *dev)
+>> +{
+>> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(dev);
+>> +	struct reset_ctl rst;
+>> +	int ret;
+>> +
+>> +	priv->regs =3D dev_read_addr(dev);
+>> +
+>> +	ret =3D reset_get_by_index(dev, 0, &rst);
+>> +	if (ret < 0) {
+>> +		dev_err(dev, "failed to get reset line\n");
+>=20
+> It generally helps to include 'ret' value in the error messages, so=20
+> users can immediately look up the error code and find out what is wrong=
+,=20
+> without recompiling U-Boot.
+>=20
+>> +		return ret;
+>> +	}
+>> +
+>> +	ret =3D reset_deassert(&rst);
+>> +	if (ret < 0) {
+>> +		dev_err(dev, "failed to de-assert reset line\n");
+>=20
+> DTTO
+>=20
+>> +		return ret;
+>> +	}
+>> +
+>> +	/* put pll and phy into reset state */
+>> +	setbits_le32(priv->regs + RESET,
+>> +		     RESET_SEL_PLLRESET | RESET_PLLRESET | PHY_RESET_MASK);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const struct udevice_id rzg2l_usbphy_ctrl_ids[] =3D {
+>> +	{ .compatible =3D "renesas,rzg2l-usbphy-ctrl", },
+>> +	{ /* sentinel */ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(rzg2l_usbphy_ctrl) =3D {
+>> +	.name           =3D "rzg2l_usbphy_ctrl",
+>> +	.id             =3D UCLASS_RESET,
+>> +	.of_match       =3D rzg2l_usbphy_ctrl_ids,
+>> +	.probe          =3D rzg2l_usbphy_ctrl_probe,
+>> +	.ops            =3D &rzg2l_usbphy_ctrl_ops,
+>> +	.priv_auto      =3D sizeof(struct rzg2l_usbphy_ctrl_priv),
+>> +};
+>> diff --git a/include/renesas/rzg2l-usbphy.h b/include/renesas/rzg2l-us=
+bphy.h
+>> new file mode 100644
+>> index 000000000000..1a46b585f170
+>> --- /dev/null
+>> +++ b/include/renesas/rzg2l-usbphy.h
+>> @@ -0,0 +1,17 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * RZ/G2L USB PHY common definitions
+>> + *
+>> + * Copyright (C) 2021-2023 Renesas Electronics Corp.
+>> + */
+>> +
+>> +#ifndef RENESAS_RZG2L_USBPHY_H
+>> +#define RENESAS_RZG2L_USBPHY_H
+>> +
+>> +#include <fdtdec.h>
+>> +
+>> +struct rzg2l_usbphy_ctrl_priv {
+>> +	fdt_addr_t regs;
+>> +};
+> If this structure isn't shared with any other drivers, inline it into=20
+> drivers/reset/reset-rzg2l-usbphy-ctrl.c and drop the header file.
 
-I have a couple of minor improvements to the sentences below, you can
-fix these up while applying.
+This structure is used by the VBUS regulator driver in patch 2 of this
+series.
 
-> -The board code needs to fill the bb_miiphy_buses[] array with a record=
- for
-> -each required bus and declare the bb_miiphy_buses_num variable with th=
-e
-> -number of mii buses. The record (struct bb_miiphy_bus) has the followi=
-ng
-> -fields/callbacks (see miiphy.h for details):
-> +The driver code needs to allocate regular MDIO device using mdio_alloc=
-()
+I'll fix the rest up in v2.
 
-"... allocate a regular MDIO device ..."
-
-> +and assign .read and .write accessors which wrap bb_miiphy_read() and
-> +bb_miiphy_write() functions respectively. The bb_miiphy_read() and
-> +bb_miiphy_write() functions have to be passed a point to a callback
-
-"... functions take a pointer to a callback ..."
-
-> +structure, struct bb_miiphy_bus_ops. The struct bb_miiphy_bus_ops has
-> +the following fields/callbacks (see miiphy.h for details):
-
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-
-Thanks!
+Thanks,
 
 --=20
 Paul Barker
---------------R9T1GDwfvO8s4Tu0xzpbJyE3
+--------------LDEiRryBZDsl08E00Q09zzLh
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -187,21 +298,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------R9T1GDwfvO8s4Tu0xzpbJyE3--
+--------------LDEiRryBZDsl08E00Q09zzLh--
 
---------------nKCOp2xFsCi1OVAYm4ETQFJ5--
+--------------SZ9p4VTqxn3QBFRP0b2SYS0Q--
 
---------------7n4A4u0dbYaTeoIPUWjzRuTv
+--------------B0Yi4BNF4kkuhA8I9N38j0c5
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8xZKgUDAAAAAAAKCRDbaV4Vf/JGvf2v
-AP47RN57lnJBW0D2YKHMJcayysqjGMY4WMl0h4ziBgxzkgD9FWv9VLYLyPz2HBIYun+ItFbECNvR
-qCc0DMk0kJuuQA0=
-=EVo4
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8xaPwUDAAAAAAAKCRDbaV4Vf/JGvT04
+AP4zYN/d+1lYW5fPwS8ggu4VYqf0byV+co5kFEB3LH5+RwEA3YdfI9rxxD4K1BelFogLQt0p4flG
+MI+2aCNAvV5duwo=
+=8soy
 -----END PGP SIGNATURE-----
 
---------------7n4A4u0dbYaTeoIPUWjzRuTv--
+--------------B0Yi4BNF4kkuhA8I9N38j0c5--
