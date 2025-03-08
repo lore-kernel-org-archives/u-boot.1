@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D649C282EC
-	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 20:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D30BC282EC
+	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 20:36:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2B8E81545;
-	Sat,  8 Mar 2025 21:16:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5BC738043C;
+	Sat,  8 Mar 2025 21:36:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741464990;
-	bh=61ZffVW9bTJTIhgeK+GxpH9rQ00Dbd/JaTUAA5eGWTU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=veuB7I4X4WpkJaRUswaQAuuHqAlKk8+L9JEF7o7DOYe4QXkYE9SIZLfypPYdpa0RA
-	 jDvqOCas6CVUbE43PbPDCMrWAqgQ0qen13U3oQN5mZh41bAM8l+SWGszDNMlY8jbc+
-	 Gu1n8mA/fzyqWuQkR71ivpnLrTT1/+V6DQRneh69r75jdqp2sfA1fkzo2T+tCYLhud
-	 NirknBVitfURmwy1NMd+BwGDDEod+qaZlNHexXAPVe54j4S1A+2wyCM0wkD3/12XGu
-	 uJ1jgtPq5M6AOPgq/il5C3RLqOzLqLksZyf0hK3gY819fx5r4tnIvRREwMYv/aPN0u
-	 E0LqRwlON73qw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qBjf5/M/";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wYi/TS1u";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ABC981417; Sat,  8 Mar 2025 21:16:29 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 390C9808A2; Sat,  8 Mar 2025 21:36:46 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 039048164E
- for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 21:16:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A8F9803CC
+ for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 21:36:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="dCv3HelW"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5216C103D0937; Sat,  8 Mar 2025 21:16:25 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741464986; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=61ZffVW9bTJTIhgeK+GxpH9rQ00Dbd/JaTUAA5eGWTU=;
- b=dCv3HelWPG3Q2FrNYJIp44mTJhPZEGoC9qlodAT2LSB/sAgq+kIBiWSqjkUkhFDXxbFUrw
- v2PSnoSO+Xftq/ywWIRyOnmD/9R4rhGKlcfnkY81xEsXhzMmUzDcK9FHo8IqhooRX1gs7R
- R6/eO5fYiPrQ1WCvATnQ+QlrjAYiDdLbjgAKf8T/Zd6HMZH4kAn75TiKBPdjjp7m/+JKQX
- Q2Ixq+KoimphP0838b6la2m3M3jpdPB1y7fBGG9sgKb5bVMrSpxFn3BepjQBaZqb25X2aA
- T0PFsgKIxcfQh4k0zctp3rOT6Aww2jrYdlO6e9LCLECCLflRVZCQAkAWR/7HRA==
-From: Marek Vasut <marex@denx.de>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Z9FLf5vM1z9sRt;
+ Sat,  8 Mar 2025 21:36:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1741466202;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ZQNmW/fQ5fThQjQRuXcHMLcXYrTjD9p9xfZ7pJbw5u0=;
+ b=qBjf5/M/y0qfzIQAR0WqpC/IDwAS9KHDDmEXS1+mh4EAf3Q4954wX31zujf34tvtTdsJT2
+ 7wGWDCP/sK91GAsnwg5+sh+HHVjc7eFvkPHCMRdkZwV/Fm/uiBs/tnhln0IS/fREcG8kXe
+ yK3RSpIcGVxQOObMBmW6jhe8YXD4BaNZZsYbt+CUUqvXqZ5FN9nrTxfgkUTeaqotaaEPxh
+ WFAJgKMLCbSjmJ9btm8/juRDRcZyaOw1JwOFMrM9W/KYLBwfSJOaFAsXBicWdzNBSjF8vk
+ UrWBEbN236Qb1/2sf0Zu/JWkrpS8fA0cwCnKkzkje7CpJH691haBDXh+d683Sg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1741466200;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ZQNmW/fQ5fThQjQRuXcHMLcXYrTjD9p9xfZ7pJbw5u0=;
+ b=wYi/TS1u2aU5529jhGl1lYOgu0EPCeAHMdnUlBKhNcYXE0Gep4/Z1n8xMZ2pEgidn/BE2C
+ waE+2YtgaQeTnvWVjE8YeXH8H9KXqxXsWd52OeaJ7Q6tbyiAhGLvVY23IgjSvh8wZvgBw1
+ y7xHYj2OicYSxPEyxVMOk2EDjivk5q83l8eMepjtlMjB7bOKQBnBuKjTlfA/WTWoIwIIzW
+ T6sBQZgk43qdqAn+3JERSUB3WR966i6Zqib9MjH6ide3mtHCAQkyWGcFcqQNDz3gKpU1xP
+ YqMGM44LwINBn4Trj9kFyn4krXNhfGfBcz8rkylflr3LwfOlr4zBxaibxL4rrA==
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/12] test_fs: Add exfat tests
-Date: Sat,  8 Mar 2025 21:12:16 +0100
-Message-ID: <20250308201533.1315951-13-marex@denx.de>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250308201533.1315951-1-marex@denx.de>
-References: <20250308201533.1315951-1-marex@denx.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] net: miiphybb: Update documentation
+Date: Sat,  8 Mar 2025 21:36:02 +0100
+Message-ID: <20250308203625.1317615-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-META: zsf1cam4b7u75gkn7wkbam11k6guegyk
+X-MBO-RS-ID: 6d2f1677f8ec03ceb64
+X-Rspamd-Queue-Id: 4Z9FLf5vM1z9sRt
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,175 +89,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add tests for the exfat filesystem. These tests are largely an
-extension of the FS_GENERIC tests with the following notable
-exceptions.
+Update the miiphybb documentation to match current implementation.
+The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
+The example is updated to match current Renesas RAVB driver, which
+is one of the miiphybb users.
 
-The filesystem image for exfat tests is generated using combination
-of exfatutils mkfs.exfat and python fattools. The fattols are capable
-of generating exfat filesystem images too, but this is not used, the
-fattools are only used as a replacement for dosfstools 'mcopy' and
-'mdir', which are used to insert files and directories into existing
-fatfs images and list existing fatfs images respectively, without the
-need for superuser access to mount such images.
-
-The exfat filesystem has no filesystem specific command, there is only
-the generic filesystem command interface, therefore check_ubconfig()
-has to special case exfat and skip check for CONFIG_CMD_EXFAT and
-instead check for CONFIG_FS_EXFAT.
-
-Signed-off-by: Marek Vasut <marex@denx.de>
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Baruch Siach <baruch@tkos.co.il>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Hiago De Franco <hiago.franco@toradex.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Nam Cao <namcao@linutronix.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Jim Liu <jim.t90615@gmail.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Mario Six <mario.six@gdsys.cc>
+Cc: Michael Chang <zhang971090220@gmail.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Parvathi Bhogaraju <pbhogaraju@microsoft.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- test/py/requirements.txt          |  1 +
- test/py/tests/fs_helper.py        |  8 ++++++--
- test/py/tests/test_fs/conftest.py | 20 +++++++++++---------
- test/py/tests/test_fs/test_ext.py | 20 ++++++++++++++------
- 4 files changed, 32 insertions(+), 17 deletions(-)
+V2: - Fix language bugs
+    - Add RB from Paul
+---
+ doc/README.bitbangMII | 66 ++++++++++++++++++++++++++++++-------------
+ 1 file changed, 47 insertions(+), 19 deletions(-)
 
-diff --git a/test/py/requirements.txt b/test/py/requirements.txt
-index c726135b4df..dd9cf7640a5 100644
---- a/test/py/requirements.txt
-+++ b/test/py/requirements.txt
-@@ -3,3 +3,4 @@ pycryptodomex==3.21.0
- pytest==6.2.5
- pytest-xdist==2.5.0
- setuptools==75.8.0
-+FATtools==1.0.42
-diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 378d5ae0690..94a5b94f479 100644
---- a/test/py/tests/fs_helper.py
-+++ b/test/py/tests/fs_helper.py
-@@ -35,7 +35,9 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
-     else:
-         mkfs_opt = ''
+diff --git a/doc/README.bitbangMII b/doc/README.bitbangMII
+index 05ab20376f3..78b4ef880cb 100644
+--- a/doc/README.bitbangMII
++++ b/doc/README.bitbangMII
+@@ -1,39 +1,67 @@
+-This patch rewrites the miiphybb ( Bit-banged MII bus driver ) in order to
+-support an arbitrary number of mii buses. This feature is useful when your
+-board uses different mii buses for different phys and all (or a part) of these
+-buses are implemented via bit-banging mode.
++The miiphybb ( Bit-banged MII bus driver ) supports an arbitrary number of
++MII buses. This feature is useful when a driver uses different MII buses for
++different PHYs and all (or a part) of these buses are implemented via
++bit-banging mode.
  
--    if re.match('fat', fs_type) or fs_type == 'fs_generic':
-+    if fs_type == 'exfat':
-+        fs_lnxtype = 'exfat'
-+    elif re.match('fat', fs_type) or fs_type == 'fs_generic':
-         fs_lnxtype = 'vfat'
-     else:
-         fs_lnxtype = fs_type
-@@ -43,7 +45,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
-     if src_dir:
-         if fs_lnxtype == 'ext4':
-             mkfs_opt = mkfs_opt + ' -d ' + src_dir
--        elif fs_lnxtype != 'vfat':
-+        elif fs_lnxtype != 'vfat' and fs_lnxtype != 'exfat':
-             raise ValueError(f'src_dir not implemented for fs {fs_lnxtype}')
+ The driver requires that the following macros should be defined into the board
+ configuration file:
  
-     count = (size + size_gran - 1) // size_gran
-@@ -64,6 +66,8 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
-                 check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
-         elif fs_lnxtype == 'vfat' and src_dir:
-             check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/', shell=True)
-+        elif fs_lnxtype == 'exfat' and src_dir:
-+            check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
-         return fs_img
-     except CalledProcessError:
-         call(f'rm -f {fs_img}', shell=True)
-diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
-index 8d5654fdb67..9b05bd94008 100644
---- a/test/py/tests/test_fs/conftest.py
-+++ b/test/py/tests/test_fs/conftest.py
-@@ -12,11 +12,11 @@ import u_boot_utils as util
- # pylint: disable=E0611
- from tests import fs_helper
+ CONFIG_BITBANGMII	- Enable the miiphybb driver
  
--supported_fs_basic = ['fat16', 'fat32', 'ext4', 'fs_generic']
--supported_fs_ext = ['fat12', 'fat16', 'fat32', 'fs_generic']
-+supported_fs_basic = ['fat16', 'fat32', 'exfat', 'ext4', 'fs_generic']
-+supported_fs_ext = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
- supported_fs_fat = ['fat12', 'fat16']
--supported_fs_mkdir = ['fat12', 'fat16', 'fat32', 'fs_generic']
--supported_fs_unlink = ['fat12', 'fat16', 'fat32', 'fs_generic']
-+supported_fs_mkdir = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
-+supported_fs_unlink = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
- supported_fs_symlink = ['ext4']
+-The board code needs to fill the bb_miiphy_buses[] array with a record for
+-each required bus and declare the bb_miiphy_buses_num variable with the
+-number of mii buses. The record (struct bb_miiphy_bus) has the following
++The driver code needs to allocate a regular MDIO device using mdio_alloc()
++and assign .read and .write accessors which wrap bb_miiphy_read() and
++bb_miiphy_write() functions respectively. The bb_miiphy_read() and
++bb_miiphy_write() functions take a pointer to a callback structure,
++struct bb_miiphy_bus_ops. The struct bb_miiphy_bus_ops has the following
+ fields/callbacks (see miiphy.h for details):
  
- #
-@@ -112,7 +112,7 @@ def fstype_to_prefix(fs_type):
-     Return:
-         A corresponding command prefix for file system type.
-     """
--    if fs_type == 'fs_generic':
-+    if fs_type == 'fs_generic' or fs_type == 'exfat':
-         return ''
-     elif re.match('fat', fs_type):
-         return 'fat'
-@@ -150,9 +150,11 @@ def check_ubconfig(config, fs_type):
-     Return:
-         Nothing.
-     """
--    if not config.buildconfig.get('config_cmd_%s' % fs_type, None):
-+    if fs_type == 'exfat' and not config.buildconfig.get('config_fs_%s' % fs_type, None):
-+        pytest.skip('.config feature "FS_%s" not enabled' % fs_type.upper())
-+    if fs_type != 'exfat' and not config.buildconfig.get('config_cmd_%s' % fs_type, None):
-         pytest.skip('.config feature "CMD_%s" not enabled' % fs_type.upper())
--    if fs_type == 'fs_generic':
-+    if fs_type == 'fs_generic' or fs_type == 'exfat':
-         return
-     if not config.buildconfig.get('config_%s_write' % fs_type, None):
-         pytest.skip('.config feature "%s_WRITE" not enabled'
-@@ -192,7 +194,7 @@ def fs_obj_basic(request, u_boot_config):
-     """
-     fs_type = request.param
-     fs_cmd_prefix = fstype_to_prefix(fs_type)
--    fs_cmd_write = 'save' if fs_type == 'fs_generic' else 'write'
-+    fs_cmd_write = 'save' if fs_type == 'fs_generic' or fs_type == 'exfat' else 'write'
-     fs_img = ''
+-char name[]	       - The symbolic name that must be equal to the MII bus
+-			 registered name
+-int (*init)()	       - Initialization function called at startup time (just
+-			 before the Ethernet initialization)
+ int (*mdio_active)()   - Activate the MDIO pin as output
+ int (*mdio_tristate)() - Activate the MDIO pin as input/tristate pin
+ int (*set_mdio)()      - Write the MDIO pin
+ int (*get_mdio)()      - Read the MDIO pin
+ int (*set_mdc)()       - Write the MDC pin
+ int (*delay)()	       - Delay function
+-void *priv	       - Private data used by board specific code
  
-     fs_ubtype = fstype_to_ubname(fs_type)
-@@ -304,7 +306,7 @@ def fs_obj_ext(request, u_boot_config):
-     """
-     fs_type = request.param
-     fs_cmd_prefix = fstype_to_prefix(fs_type)
--    fs_cmd_write = 'save' if fs_type == 'fs_generic' else 'write'
-+    fs_cmd_write = 'save' if fs_type == 'fs_generic' or fs_type == 'exfat' else 'write'
-     fs_img = ''
+-The board code will look like:
++The driver code will look like:
  
-     fs_ubtype = fstype_to_ubname(fs_type)
-diff --git a/test/py/tests/test_fs/test_ext.py b/test/py/tests/test_fs/test_ext.py
-index 4e79135f824..47228be83c5 100644
---- a/test/py/tests/test_fs/test_ext.py
-+++ b/test/py/tests/test_fs/test_ext.py
-@@ -345,11 +345,19 @@ class TestFsExt(object):
-                 '%s%s host 0:0 %x /%s 0'
-                     % (fs_cmd_prefix, fs_cmd_write, ADDR, MANGLE_FILE)])
-             assert('0 bytes written' in ''.join(output))
--            # Test Case 12b - Read file system content
--            output = check_output('mdir -i %s' % fs_img, shell=True).decode()
--            # Test Case 12c - Check if short filename is not mangled
--            assert(str2fat(PLAIN_FILE) in ''.join(output))
--            # Test Case 12d - Check if long filename is mangled
--            assert(str2fat(MANGLE_FILE) in ''.join(output))
-+            if fs_type == 'exfat':
-+                # Test Case 12b - Read file system content
-+                output = check_output('fattools ls %s' % fs_img, shell=True).decode()
-+                # Test Case 12c - Check if short filename is not mangled
-+                assert(PLAIN_FILE in ''.join(output))
-+                # Test Case 12d - Check if long filename is mangled
-+                assert(MANGLE_FILE in ''.join(output))
-+            else:
-+                # Test Case 12b - Read file system content
-+                output = check_output('mdir -i %s' % fs_img, shell=True).decode()
-+                # Test Case 12c - Check if short filename is not mangled
-+                assert(str2fat(PLAIN_FILE) in ''.join(output))
-+                # Test Case 12d - Check if long filename is mangled
-+                assert(str2fat(MANGLE_FILE) in ''.join(output))
+-struct bb_miiphy_bus bb_miiphy_buses[] = {
+- { .name = "miibus#1", .init = b1_init, .mdio_active = b1_mdio_active, ... },
+- { .name = "miibus#2", .init = b2_init, .mdio_active = b2_mdio_active, ... },
+- ...
++static const struct bb_miiphy_bus_ops ravb_bb_miiphy_bus_ops = {
++	.mdio_active	= ravb_bb_mdio_active,
++	.mdio_tristate	= ravb_bb_mdio_tristate,
++	.set_mdio	= ravb_bb_set_mdio,
++	.get_mdio	= ravb_bb_get_mdio,
++	.set_mdc	= ravb_bb_set_mdc,
++	.delay		= ravb_bb_delay,
+ };
+-int bb_miiphy_buses_num = sizeof(bb_miiphy_buses) /
+-			  sizeof(bb_miiphy_buses[0]);
++
++static int ravb_bb_miiphy_read(struct mii_dev *miidev, int addr,
++			       int devad, int reg)
++{
++	return bb_miiphy_read(miidev, &ravb_bb_miiphy_bus_ops,
++			      addr, devad, reg);
++}
++
++static int ravb_bb_miiphy_write(struct mii_dev *miidev, int addr,
++				int devad, int reg, u16 value)
++{
++	return bb_miiphy_write(miidev, &ravb_bb_miiphy_bus_ops,
++			       addr, devad, reg, value);
++}
++
++static int ravb_probe(struct udevice *dev)
++{
++	struct mii_dev *mdiodev;
++...
++	mdiodev = mdio_alloc();
++	if (!mdiodev)
++		return -ENOMEM;
++
++	mdiodev->read = ravb_bb_miiphy_read;
++	mdiodev->write = ravb_bb_miiphy_write;
++	mdiodev->priv = eth;
++	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
++
++	ret = mdio_register(mdiodev);
++...
  
-             assert_fs_integrity(fs_type, fs_img)
+ 2009 Industrie Dial Face S.p.A.
+      Luigi 'Comio' Mantellini <luigi.mantellini@idf-hit.com>
 -- 
 2.47.2
 
