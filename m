@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FEACC282D1
-	for <u-boot@archiver.kernel.org>; Sun,  9 Mar 2025 06:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 533D4C28B28
+	for <u-boot@archiver.kernel.org>; Sun,  9 Mar 2025 08:42:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15DE88122F;
-	Sun,  9 Mar 2025 07:32:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 59C87801DE;
+	Sun,  9 Mar 2025 09:42:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2qMTQyB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yq7wTAnB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C184981335; Sun,  9 Mar 2025 07:32:00 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 0310A8043C; Sun,  9 Mar 2025 09:42:30 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9DDB81101
- for <u-boot@lists.denx.de>; Sun,  9 Mar 2025 07:31:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B690780107
+ for <u-boot@lists.denx.de>; Sun,  9 Mar 2025 09:42:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5e61375c108so1898013a12.1
- for <u-boot@lists.denx.de>; Sat, 08 Mar 2025 22:31:57 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-6fbaa0582a6so30386867b3.1
+ for <u-boot@lists.denx.de>; Sun, 09 Mar 2025 00:42:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741501917; x=1742106717; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BueZoKAlsBuHXJlqKxHoFkSZF/xH9r9pbfT5RpwgsrA=;
- b=Y2qMTQyBh+vG/OR1OenD+as/2DIC3f19lJPpwGtEHBAn6BYx6EODyjj6GFTcAlajpQ
- 4upIgQqQcUMCEj1cI6sJ4kWl2rWMJAr+eJNbono3TLFO7jbZRwcjgP4dxP7nWYLBv4Rq
- 80oesvndmJfbXzbW374cAXgo4KKaGFf5xowmi9fjecsLKuur7zI9sGU/akGgrXd0GiCS
- 19N/AmX1/6vj3VPkXJvq8Ccp8pq4CwGzL4uoti9Tm4kR+fzJE90OmnTD6WSxLq0H87eU
- K9SkV/6kKdfyU1fRoBahvkwjqgq0Z8UeTZUefLcNY62STxaan/OtXMRW4bz17PkfJpyW
- cXiA==
+ d=linaro.org; s=google; t=1741509746; x=1742114546; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AwKY2lwv7YU0Urg6HAJFnEETbT8OdhwZBtxsUjhSqYY=;
+ b=yq7wTAnB/XRhfDKIojzPInqQn/C0PSHqSaTJu978m/MqmMPCmVAcD656FrRiJzq2yR
+ myCJUytdZlBObH4kAtpIW4HPGb+jCmGMQ/9yD3QbZ7F2jNoYz2z+56lZeozU3JNsPiaP
+ FPqB3YPw6Y07A/JfL2Gsrz7W+EOcd0QU5zcpt9jQQDpfn9/8QhbYEgl8VPtI+Een5ziy
+ rQ7RpLubMj0MVDLmTcRVCqZ/c/3Zt+PZnsHNiN+oDYBF0gGq247Pl3jwgowD/anXYObk
+ WVc2+BfldfiO0F1yyt9WFz7lWUlBXSuVYaqHuKkd6VTC6fDVpKfgISfYj/b/fr7CyN7L
+ bvxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741501917; x=1742106717;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BueZoKAlsBuHXJlqKxHoFkSZF/xH9r9pbfT5RpwgsrA=;
- b=jNYtVSRNG2VK4Y2jYJeKEgC/LpLTvbr9VUn4jsaDPX17YFyI3hWa06Be0VOm3Bny/x
- /IeIK00+o5OaUPE7HanMgyQVyt3ePotL9JT7+e2tmz3yMMvMci86B+Kz0zIzWkIwjlF4
- HAgMBbkMn690z3MUg9iAiye0sZJ+5/7DcAcyaNvERe1yazd+ZYRf6zwPnJK19hEGYlD3
- q3WO1BK3RAIYgjJ90vjx3WGIov6oYPYaYjj6oK94Ok84IBfPsTSs4fR1qz3F/QFZ92bH
- rt6rRXuPZciKS15rhC6OL8CaVJnSFwnxNUgAXQPo4k6YSPvebMBFYu8XOx8vxahROoF5
- G4Dw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpp9bZFr9s29wK32TtKrO7mAHfvCo9asAliMJdZKExCiNf8Ov9d7BCMCQhdwrI/CLQxayzbxY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWvoAa853FXJ6aaBr2XlDPDMAL5qg3nrDHs/YCVJfN9jfUthgQ
- LbI7YYC4T2+yA3FIQLxm7cSwroz9DccFsEG1Q+IcfPkD2XnGpCK0
-X-Gm-Gg: ASbGncuH3lONBlzMXxWSlAezxdo+BBjKZHLF9P1lL+T76RtVL6f/tHXhSKtAbAS4gKX
- 9GT5PzzAGeKAaS7i9vTyykvsTVUL9VwkliWzvgL1pd0k23yAQW9tdWwV1JBzV4aFumO8Bnx+lyV
- BtSTSrluVUK9xe0K2V0tI3fzMpU9BAVhyaUwilyS3lO92d8FQanvf0isQz9uZ94+nlaBL9CiIS/
- pRr3NlxT35kaQX3dB7g51u2nBF90xyW4seIZFKT7NcEgxvoKt9Rp08KG+HMdjGY/VHFGwCvmSol
- 6coFRylu1ZBz0rSc6b22KpDpVHbIt2+xsfzGKZSMau00e8WtB5BvQfWqyHdxAfqx
-X-Google-Smtp-Source: AGHT+IEpauUzy1DzEkjD40U/W3Gc3OkGrGojbrbJFfXcnarULonDTm8fzj054kPoTgG+82MUqJS83g==
-X-Received: by 2002:a17:907:7213:b0:abf:3f82:1218 with SMTP id
- a640c23a62f3a-ac252fba0fdmr988506066b.46.1741501916999; 
- Sat, 08 Mar 2025 22:31:56 -0800 (PST)
-Received: from localhost.localdomain ([188.159.248.16])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac239438fd1sm552978766b.18.2025.03.08.22.31.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Mar 2025 22:31:56 -0800 (PST)
-From: Jernej Skrabec <jernej.skrabec@gmail.com>
-To: jagan@amarulasolutions.com,
-	andre.przywara@arm.com,
-	trini@konsulko.com
-Cc: macromorgan@hotmail.com, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Jernej Skrabec <jernej.skrabec@gmail.com>
-Subject: [PATCH 2/2] sunxi: H616: dram: Improve address wrapping detection
-Date: Sun,  9 Mar 2025 07:31:43 +0100
-Message-ID: <20250309063143.62859-3-jernej.skrabec@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250309063143.62859-1-jernej.skrabec@gmail.com>
-References: <20250309063143.62859-1-jernej.skrabec@gmail.com>
+ d=1e100.net; s=20230601; t=1741509746; x=1742114546;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AwKY2lwv7YU0Urg6HAJFnEETbT8OdhwZBtxsUjhSqYY=;
+ b=KVgtLAVAtmgfciI3kg1KzJfsJWLeqXDEwSTXEKZBhSMe3ZBjAfO+u+V6r/7lmDkSjF
+ xvRjT9hdAVN3ThdMXbKy9qmTu8f2Yns7TnLIHN4ZsW60H5ECZfZkgn/0VmtX/q4c5+5P
+ yqI51VZhdF9iEZwOHYevQGCQhK+lB4taceTID/3QQ8DD6qU7DjI94RsyMPHg+a/X/I7P
+ QAnIDRQGVOhBjnM45vSaMzETyarTXC048p5Ko3faRnJ5FqR3b+GNioh1HQw4CpCuiUPW
+ v15vw1W6WnJekELaq85Czoqihp1O578/JTnPIPuOGw+pmNGaquDV050/UOd/wtWaBb8p
+ GHDQ==
+X-Gm-Message-State: AOJu0Yz7da8syAO6qmCOJXi3btH5ozDSoGwRLzpVp2P8Fnj8Bgns+9jz
+ Rq2JtR35oB/Ysqh4zZB1/G3Uj6thI4+oLbYHRVus3M0T8My5RQvshJ5qBIc5OauegTLQCBFIAM2
+ 2/uPnjGp0b//PqZvbtwy2s5e1OCGOrhre0O600g==
+X-Gm-Gg: ASbGncv0St1ZrAVMvdsCCLXv01b4RY6NPukJnkeF7cNkdVjgdMZ41Lxkft7APC82yFU
+ eRsx8itugN4HI6akGg52icDUUfB+giS9o7MqA1cEnpLuwjycjEcEMfgG0pT6qMomStqXfMkocot
+ /5odVoE1Adg/3eSbqmBGqBkSNAB3Y=
+X-Google-Smtp-Source: AGHT+IGGhMWBn5cyf+vYZfUcYkqXLqPd+6oaJH2sD8in9h1tt15v0NUQfSkvwsmfRKeBZR8zQNt0Ql/ZurHm/yqqQk0=
+X-Received: by 2002:a05:6902:1b8d:b0:e5d:9246:ebdd with SMTP id
+ 3f1490d57ef6-e636f8059c1mr7195377276.21.1741509746553; Sun, 09 Mar 2025
+ 00:42:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250304152510.2832340-1-jerome.forissier@linaro.org>
+ <20250304152510.2832340-14-jerome.forissier@linaro.org>
+In-Reply-To: <20250304152510.2832340-14-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sun, 9 Mar 2025 10:41:50 +0200
+X-Gm-Features: AQ5f1JrvG36-WvD3tMtfJhS2eKoeojeNvxiKhEYPrlMEIVlJe_yNNx1sLRk2ypM
+Message-ID: <CAC_iWjLvQMbvqcEBPKqXLXTYcgV3GTEap3P3t6ArFknnTaUFMQ@mail.gmail.com>
+Subject: Re: [PATCH v3 13/14] test: cmd: add test for spawn and wait commands
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,119 +91,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It turns out that checking just one write is not enough. Due to
-unexplained reasons scan procedure detected double the size. By making
-16 dword writes and comparisons that never happens.
+On Tue, 4 Mar 2025 at 17:31, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Test the spawn and wait commands.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  test/cmd/Makefile |  1 +
+>  test/cmd/spawn.c  | 32 ++++++++++++++++++++++++++++++++
+>  2 files changed, 33 insertions(+)
+>  create mode 100644 test/cmd/spawn.c
+>
+> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+> index d8a5e77402d..cf47f04851c 100644
+> --- a/test/cmd/Makefile
+> +++ b/test/cmd/Makefile
+> @@ -39,3 +39,4 @@ obj-$(CONFIG_CMD_WGET) += wget.o
+>  endif
+>  obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
+>  endif
+> +obj-$(CONFIG_CMD_SPAWN) += spawn.o
+> diff --git a/test/cmd/spawn.c b/test/cmd/spawn.c
+> new file mode 100644
+> index 00000000000..8f48f5ee25c
+> --- /dev/null
+> +++ b/test/cmd/spawn.c
+> @@ -0,0 +1,32 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Tests for spawn and wait commands
+> + *
+> + * Copyright 2025, Linaro Ltd.
+> + */
+> +
+> +#include <command.h>
+> +#include <test/cmd.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +
+> +static int test_cmd_spawn(struct unit_test_state *uts)
+> +{
+> +       ut_assertok(run_command("wait; spawn sleep 2; setenv j ${job_id}; "
+> +                               "spawn setenv spawned true; "
+> +                               "setenv jj ${job_id}; wait; "
+> +                               "echo ${j} ${jj} ${spawned}", 0));
+> +       console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+> +       ut_asserteq_ptr(uts->actual_str,
+> +                       strstr(uts->actual_str, "1 2 true"));
+> +
+> +       ut_assertok(run_command("spawn true; wait; setenv t $?; spawn false; "
+> +                               "wait; setenv f $?; wait; echo $t $f $?", 0));
+> +       console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+> +       ut_asserteq_ptr(uts->actual_str,
+> +                       strstr(uts->actual_str, "0 1 0"));
+> +       ut_assert_console_end();
+> +
+> +       return 0;
+> +}
+> +CMD_TEST(test_cmd_spawn, UTF_CONSOLE);
+> --
+> 2.43.0
+>
 
-New procedure is also inverted. Instead of writing two different values
-to base address and some offset and then reading both and comparing
-values, simplify this by writing pattern at the base address and then
-search for this pattern at some offset.
-
-Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
----
- arch/arm/mach-sunxi/dram_sun50i_h616.c | 58 +++++++++++++++++++++++++-
- 1 file changed, 56 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 6f84e59e39cd..1e21f5dd451f 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -1360,38 +1360,92 @@ static void mctl_auto_detect_rank_width(const struct dram_para *para,
- 	panic("This DRAM setup is currently not supported.\n");
- }
- 
-+static void mctl_write_pattern(void)
-+{
-+	unsigned int i;
-+	u32 *ptr, val;
-+
-+	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-+	for (i = 0; i < 16; ptr++, i++) {
-+		if (i & 1)
-+			val = ~(ulong)ptr;
-+		else
-+			val = (ulong)ptr;
-+		writel(val, ptr);
-+	}
-+}
-+
-+static bool mctl_check_pattern(ulong offset)
-+{
-+	unsigned int i;
-+	u32 *ptr, val;
-+
-+	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
-+	for (i = 0; i < 16; ptr++, i++) {
-+		if (i & 1)
-+			val = ~(ulong)ptr;
-+		else
-+			val = (ulong)ptr;
-+		if (val != *(ptr + offset / 4))
-+			return false;
-+	}
-+
-+	return true;
-+}
-+
- static void mctl_auto_detect_dram_size(const struct dram_para *para,
- 				       struct dram_config *config)
- {
- 	unsigned int shift, cols, rows;
-+	u32 buffer[16];
- 
- 	/* max. config for columns, but not rows */
- 	config->cols = 11;
- 	config->rows = 13;
- 	mctl_core_init(para, config);
- 
-+	/*
-+	 * Store content so it can be restored later. This is important
-+	 * if controller was already initialized and holds any data
-+	 * which is important for restoring system.
-+	 */
-+	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-+
-+	mctl_write_pattern();
-+
- 	shift = config->bus_full_width + 1;
- 
- 	/* detect column address bits */
- 	for (cols = 8; cols < 11; cols++) {
--		if (mctl_mem_matches(1ULL << (cols + shift)))
-+		if (mctl_check_pattern(1ULL << (cols + shift)))
- 			break;
- 	}
- 	debug("detected %u columns\n", cols);
- 
-+	/* restore data */
-+	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-+
- 	/* reconfigure to make sure that all active rows are accessible */
- 	config->cols = 8;
- 	config->rows = 17;
- 	mctl_core_init(para, config);
- 
-+	/* store data again as it might be moved */
-+	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
-+
-+	mctl_write_pattern();
-+
- 	/* detect row address bits */
- 	shift = config->bus_full_width + 4 + config->cols;
- 	for (rows = 13; rows < 17; rows++) {
--		if (mctl_mem_matches(1ULL << (rows + shift)))
-+		if (mctl_check_pattern(1ULL << (rows + shift)))
- 			break;
- 	}
- 	debug("detected %u rows\n", rows);
- 
-+	/* restore data again */
-+	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
-+
- 	config->cols = cols;
- 	config->rows = rows;
- }
--- 
-2.48.1
-
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
