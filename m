@@ -4,81 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8835C282EC
-	for <u-boot@archiver.kernel.org>; Sat,  8 Mar 2025 22:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CBCC282EC
+	for <u-boot@archiver.kernel.org>; Sun,  9 Mar 2025 02:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ABF58058A;
-	Sat,  8 Mar 2025 23:29:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3DAFF80F0B;
+	Sun,  9 Mar 2025 03:06:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NAssbkpg";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="T0tOo/g5";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741486004;
+	bh=xni/w+Kq967GihZxUuDRlLaRnQF6yNCYBcsqPUN1oi0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=YHHtWrnluxt73AX5lsGLhCtEwsq9Bq72RMVlJ/7ldzCsbEerFNiSLFtjXYrjEQ1DM
+	 3byguCcA0S4KRsJUb5XLuKrw9+G+ugz+01Y2AB6+feOXHiccnPDrccYaALk1vfu9Ch
+	 JjLKTpa2RGyXYcUmRKZIRksPQo428U4b+ozM8BJWFEBClpOSh0P8/hNuRdl4kDOt5L
+	 fU5xUWctx8bA10sKv8EVHGBfyE+qaS7IHl4Y+pKRvylQi2xCSiqYz4JjT7vNySjsmz
+	 3DZpZeGHY4nLr0e5ED6zr7MDpMvxRm/Hi9Ww3x/kAXif20hm5+Gmk5G1T9IVH60zmJ
+	 uudKmX/kwSLAQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2722A808A2; Sat,  8 Mar 2025 23:29:57 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 86363810F5; Sun,  9 Mar 2025 03:06:42 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EFB980050
- for <u-boot@lists.denx.de>; Sat,  8 Mar 2025 23:29:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB5D18043C
+ for <u-boot@lists.denx.de>; Sun,  9 Mar 2025 03:06:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Z9HsG5zKCz9spH;
- Sat,  8 Mar 2025 23:29:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741472994;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UzBJAh30SRiUUSnQ/S8Mm9WG0xyd5L69j5gv1K0ktvg=;
- b=NAssbkpgvdl9re780Tqiw+EtSOnVh4OQl5ws+I01GhtCPwcKVg6Bf2lWwYEOJ8jOigrsw8
- 0XWVdpL3cq0CrnIhkbshgC+zLCIEEkHNQvXRfgyGgTGP6vGN8PMQ6nxwZ4u2KvzXUP3yxC
- dEkYcmAF/6zXK/IE5oNCXdUxJvpT0eQAjNw8M0NsPTlhUM1/Np1gD33aM8fahhwFviCBEo
- 5fLw0vBpU4GOesiQvDwE140xa2b5eYM3bCT1pa5jXwjXcwBmfJE9qq9ip48PtpqqtWrXAT
- XBTGrUhQ4BR0tr3kwUwj/BM8FvA5RRApx4xraGNhXJJr1RE4mhBk6vO9tmDFzQ==
-Message-ID: <7fc6c77b-dc8f-4983-9d9c-ee85dc8da028@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741472993;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UzBJAh30SRiUUSnQ/S8Mm9WG0xyd5L69j5gv1K0ktvg=;
- b=T0tOo/g5j95FQd6S85LsQRXGqzJrIOpSM6WIIOKjv6lPamqhc/B6KRdS80tGfAUWkLUyYc
- 3JAc2LleKzKFxynMBwJZjth90GyI7MftCNPmr+kzTMZ9/hNe5dPSO1eW67+akVXrHJV7GJ
- SQjwL8x79BQ5OMhRzHfJwwLHOc2IlJqdxP8SHnMx/Y1eLpnMsGvNv3nrSpH8HADe+HhOlj
- fjLtafX7sqtGO9aRIi6AEYXzB16Y92ZRURb1/BNnzzqREdaiwasxSdecvfLUxoLx/HU6ft
- sf9zIv9t5gyP1tabMBfZxJEIu/gPf0v3nMvwjqVq7wKgOTQTNxGn6RASgNR9EQ==
-Date: Sat, 8 Mar 2025 23:29:49 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="TEo8Ljei"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C477610382F00; Sun,  9 Mar 2025 03:06:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741485998; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=xni/w+Kq967GihZxUuDRlLaRnQF6yNCYBcsqPUN1oi0=;
+ b=TEo8LjeiMDoSZbMZ+ILRx1JmvnU+V1YDWr7y/JFyB1TNlJSbnvajqWJBjlXxGGMypnOnAH
+ iEpBvma1pVuYWhwvPDxpI0vqCt5+OFa3pv+uP1iHwd1RZiDR3nBi0BMHJMo3075E2KksiE
+ t3nwKFhFh4RzBfmI//m0Bx+vIbITatDsNKoNHz11h1V/HUMnV8LaZrJM4rATT+sG6sMb+k
+ MljRhWI5y35f59E5nP09UviJ1t1wHnmVJHkJRrH5XVlq4R6TxUa1XFryS21QEyvIOntLai
+ oaVU2quqyjmQpXyusmnrBUt+fI2LoF8yTLir0uSq+eOrPmLP4jm84p9AVjDg9g==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32mp: Fix dram_bank_mmu_setup() for ram_top=0
+Date: Sun,  9 Mar 2025 03:05:54 +0100
+Message-ID: <20250309020623.1605623-1-marex@denx.de>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-Subject: Re: [PATCH] net: miiphybb: Update documentation
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250306221304.136257-1-marek.vasut+renesas@mailbox.org>
- <20de7a62-8bda-467d-92eb-34e92f0aa2ab@bp.renesas.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20de7a62-8bda-467d-92eb-34e92f0aa2ab@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 59191f9cf49c1947f17
-X-MBO-RS-META: ih4sbz5z15um557xb3cwm8nf7b71n79o
-X-Rspamd-Queue-Id: 4Z9HsG5zKCz9spH
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,29 +77,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/8/25 3:50 PM, Paul Barker wrote:
-> On 06/03/2025 22:12, Marek Vasut wrote:
->> Update the miiphybb documentation to match current implementation.
->> The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
->> The example is updated to match current Renesas RAVB driver, which
->> is one of the miiphybb users.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> 
-> I have a couple of minor improvements to the sentences below, you can
-> fix these up while applying.
-> 
->> -The board code needs to fill the bb_miiphy_buses[] array with a record for
->> -each required bus and declare the bb_miiphy_buses_num variable with the
->> -number of mii buses. The record (struct bb_miiphy_bus) has the following
->> -fields/callbacks (see miiphy.h for details):
->> +The driver code needs to allocate regular MDIO device using mdio_alloc()
-> 
-> "... allocate a regular MDIO device ..."
-> 
->> +and assign .read and .write accessors which wrap bb_miiphy_read() and
->> +bb_miiphy_write() functions respectively. The bb_miiphy_read() and
->> +bb_miiphy_write() functions have to be passed a point to a callback
-> 
-> "... functions take a pointer to a callback ..."
-Both fixed in V2, thanks !
+On STM32MP15xx with 1 GiB of DRAM, the gd->ram_top becomes 0,
+because DRAM base 0xc0000000 + DRAM size 0x40000000 leads to
+gd->ram_top overflow which resets it to 0. Handle this special
+case simply by checking for gd->ram_top being zero, and if it
+is, assume there is no addr >= gd->ram_top .
+
+This fixes boot hang on STM32MP15xx with 1 GiB of DRAM.
+
+Fixes: 25fb58e88aba ("ARM: stm32mp: Fix dram_bank_mmu_setup() for LMB located above ram_top")
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+index cb1b84c9af9..d5eaf6711b6 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+@@ -82,7 +82,7 @@ void dram_bank_mmu_setup(int bank)
+ 		option = DCACHE_DEFAULT_OPTION;
+ 		if (use_lmb &&
+ 		    (lmb_is_reserved_flags(i << MMU_SECTION_SHIFT, LMB_NOMAP) ||
+-		    addr >= gd->ram_top)
++		     (gd->ram_top && addr >= gd->ram_top))
+ 		   )
+ 			option = 0; /* INVALID ENTRY in TLB */
+ 		set_section_dcache(i, option);
+-- 
+2.47.2
+
