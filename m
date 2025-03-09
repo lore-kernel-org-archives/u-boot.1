@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B2D9C28B2F
-	for <u-boot@archiver.kernel.org>; Sun,  9 Mar 2025 14:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01FBFC28B30
+	for <u-boot@archiver.kernel.org>; Sun,  9 Mar 2025 14:07:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCFAE812C8;
-	Sun,  9 Mar 2025 15:07:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 328048122F;
+	Sun,  9 Mar 2025 15:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e6eH4VuR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q1aQIY49";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EA3A81101; Sun,  9 Mar 2025 15:07:27 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 7C1468144F; Sun,  9 Mar 2025 15:07:29 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A868801DE
- for <u-boot@lists.denx.de>; Sun,  9 Mar 2025 15:07:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B6EB809A4
+ for <u-boot@lists.denx.de>; Sun,  9 Mar 2025 15:07:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-391342fc0b5so2566178f8f.3
- for <u-boot@lists.denx.de>; Sun, 09 Mar 2025 07:07:25 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43bcc85ba13so26714925e9.0
+ for <u-boot@lists.denx.de>; Sun, 09 Mar 2025 07:07:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741529245; x=1742134045; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741529247; x=1742134047; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GeLaq9v6L8I39PqvhO5lKb/ufurt4+YiBi41MSuRhhE=;
- b=e6eH4VuRSdNxFE9611iC5abxs86HnmbZTkLatZAHzVuqQwD36ADa0MEeSmk/5Y2qVU
- UoHOFwj2DmiR7kjzLuUWO5jioxeoYurF22sCo3Zcj63jIXT3GKQqDnH+NA0kTM/ApATM
- 088lncx5Z269d6kScyvgijby9ZiVYrHnvjaWt8ugshaPysFELz/D0f4w5UjP7ygr2JLd
- 0DAer8ONCcyKr+Bz460X4JmrmnrGDqs43QqybPu5ydqetGrUlYnqCfAvabWaXkhQ8O5i
- h2jlbJdaYHI3tkjqKYQphR3oYMxMjHsmNv6awGR7fiqgp0gTRAB5iBrjwZFeuTd7lBt9
- ZSIA==
+ :reply-to; bh=e4NmYMD4gQF/oDvTMwjneqL6Rn7XTSwZirWltQbiJlg=;
+ b=Q1aQIY49daDYiSEYf4Qebz7htRASqc7DeQSpYxB6aRTV6UNIuQwm1ML/ybrK/RCj0I
+ PbV0jRj890AL35npK4hE4K8I32y6HqC3TEaL2vGTKUyNyE8Wnq1qAQGsOgQPFahxBbtD
+ 7sjoaG+KVK9MKdBAnoNxLnGKzpiVbvKoFGC4QHNNqpZKaxxM6NzeRGv2M7YG89wxIzzK
+ qxB11rE+DMVY1+OLxAvjrhDhXhmYFpXtvgS7hGMWddUOdvrNjcDYDqtO7eulFWwsCyAY
+ +5r398wiFPhNHPNR3mFEp/gNfDeT741xQDDQaLgiTxDtrmC+24fz5o28rNLL1tWFhwMa
+ 9MeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741529245; x=1742134045;
+ d=1e100.net; s=20230601; t=1741529247; x=1742134047;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GeLaq9v6L8I39PqvhO5lKb/ufurt4+YiBi41MSuRhhE=;
- b=KsUqonmufcEbtUQ1vA2P/TzlyBJtjvqA4qvOGpM1BMGVK/EQhBOdTRKHiMGHlcCGa8
- ugMR2G9RO84FSbzSf8Sy/Z16UxRN7MZo/Dlupx3UnZscYU5KSBHU6BQy7jCxsJl7sVAe
- 5sXBykIrlVwyhj44mlRwbZ7OUxsQiiRpr1Fio3Ehcv5K4zq63juWlgCz6NGROtXiEHVO
- fPMflS3wBifYBpExjuLUC1zDcTcWy8Ct5srwNMwiFW/F89Z0IgZjUwneYgUTqoyeYaQr
- z1333uFjg3nmBrlq2ymibKyrOXkoDfD1LDapsNNcU0fH8qFDqYiPjHm6JEkyqH29+CYb
- vTeA==
+ bh=e4NmYMD4gQF/oDvTMwjneqL6Rn7XTSwZirWltQbiJlg=;
+ b=m3jJhmNRwA+sewDfN4z5hmCwQsTlr+M4PaiscsoC+1eeTijc4eum05KJDVTYrETjzL
+ fiVROkcNZPHi8z2MRWgYiIYSUnHw7sKCdEjQ3OZ/lLQa8ozQ3ICDXfB21/a1zBHgo/n3
+ kdYoiqmoMZ2KiqyODkB27iiSn7wK3nMEVADdKRZHSPm4q1Mb6RSk9mI+LhqqZo1FQ5wx
+ MXkfHCPMqTBxtUYnyPOKKP0Ynmck2/e2c6y2RFCHo60eIguIbR2NyamQqMK0GaI7pWYQ
+ 7mq1TOfwUNVSowtiLiJJd53T2fYIXbUituAEc9BILrlyCl/5eR7ODJW6l3ZqlI4qNEuW
+ bnog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBHGvI70y3xKzikaLs8WCXFv+btFHWGw96p26vIZdV6MpYSvHtS8x9XeMs0xxI6ay9EwlOg2w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwzxyXGGT2Y6EsTTK4w3/axvMdgY7wp0Q1NQxaeUCVMlqWIoK1u
- 5vHjsc38zkSQbvFtf0n3+Qs+wXEReH9jFgjkmXZKjq3r9jEslWef
-X-Gm-Gg: ASbGncvj1AZSMoRktM6NeTpm4JNAFRw4p8mCRih0KWwyIMX7gonFOMUyDool1TMTHTb
- VFI9zl7GkUCSUdbS8Wr7q+TAh+KqiCXL46AfsF48cesifur69mQXL4z7xQOCT5lpSujBMTM7E04
- 0kHSmdwPhSLzU28/XKeaJ7XCI7aiM/Et0LX6+NH6Frh0TQBOJkIQPQtYmcR7L/dwDUKHJk70Ot1
- Qd1SratsJvpjOUb5GcuP4zhc0MQ4LyLB3wrGu4YTZHYY9bmZ+/gsJj2MOk5WsuIWE60mQHAOSok
- B5Thb6To0ffZiQyVfp/UbiKGkd7viJuc2wlux6egaWM3pFr9Ejb9OTTWilq8b7VTWOLj1FV9vXS
- Xd3AzyWVRZx4XCw==
-X-Google-Smtp-Source: AGHT+IGSTiKpH32o1KfqrV2b1kmONKmpNij07kL6NcV4eyZdXp7huQCsJMN2rsdgIsR/LdGOJNx5dg==
-X-Received: by 2002:a5d:6d0c:0:b0:390:de33:b0ef with SMTP id
- ffacd0b85a97d-39132d7084emr8437804f8f.30.1741529244398; 
- Sun, 09 Mar 2025 07:07:24 -0700 (PDT)
+ AJvYcCWicp68pCIR3q7XjWIsFLtlZPhO5y6IB/nMm29+a8H1H3oZjAe/tL8rwAgzK3EfRTh49inVybU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwynBII3wh2h/GprluMD8+E2KCxyDT78OXB806qhhpFCtRRUHI4
+ SL7x8w/5CvsPllDU1s32YGrDi1HAfDqS7uU5galh8lOJHATzS1WSF+Nalw==
+X-Gm-Gg: ASbGncvaHXZLE1nJNrff+mths8w3aeslHYvKVkaWCrQFuMDHXQkQerPlJmzr+3X8xfp
+ xM6QkpC4kH3gF3auupUi8kotg4FKxk41oZ0NTL0gmGMF01Fk/ymkmq3HnrYTOHmvfZL+2Ppe13W
+ k5yp5+qmobYFWEAKKxmk9QNk3B7Ii9azl/6tGYBqqMBxFP5Z2QYwh6ccFYSgvUfzQ0P179lOqpE
+ LkXdJXB2M4qOMzH80xwRIrnnf7gwPrpAdD4TVu50v/gaMKlWuBgPHBz3/QgrLNQvTshX+ppgKbE
+ cbm4bWFlf73g1bnNvvMfbkNuqVHc1DVwOsw8ZyjgdQuDf0+5B9NzU5R3xzaIFrZW+nD5HI9qyvQ
+ CG4Lrf6SQ7WSfiw==
+X-Google-Smtp-Source: AGHT+IG5qeJhQ8f2Ed1Ue4OdcMe+ldEGJiEI161EgYxmyIEHiV8siG0SCXR3JWWF8PUoFH1nA5lt3w==
+X-Received: by 2002:a05:600c:3556:b0:43c:ec27:8de1 with SMTP id
+ 5b1f17b1804b1-43cec278ef4mr27012765e9.10.1741529246537; 
+ Sun, 09 Mar 2025 07:07:26 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-129.ip49.fastwebnet.it.
  [93.34.90.129]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-3912bee262esm11946816f8f.0.2025.03.09.07.07.23
+ ffacd0b85a97d-3912bee262esm11946816f8f.0.2025.03.09.07.07.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Mar 2025 07:07:24 -0700 (PDT)
+ Sun, 09 Mar 2025 07:07:25 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
@@ -78,9 +78,10 @@ To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Weijie Gao <weijie.gao@mediatek.com>, Sam Shih <sam.shih@mediatek.com>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH 2/4] clk: airoha: Add support for Airoha AN7581 SoC clock
-Date: Sun,  9 Mar 2025 15:06:44 +0100
-Message-ID: <20250309140652.23543-3-ansuelsmth@gmail.com>
+Subject: [PATCH 3/4] reset: airoha: Add driver for controlling reset line of
+ AN7581
+Date: Sun,  9 Mar 2025 15:06:45 +0100
+Message-ID: <20250309140652.23543-4-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250309140652.23543-1-ansuelsmth@gmail.com>
 References: <20250309140652.23543-1-ansuelsmth@gmail.com>
@@ -102,514 +103,338 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for Airoha AN7581 SoC clock driver. This mainly needed for
-eMMC support to correctly get the current clock applied.
-
-Based on the Linux clk-en7523.c but majorly reworked for U-Boot that
-doesn't require CCF subsystem.
-
-Major modification, support for set_rate, realtime get_rate and split
-for reset part to a different driver.
+Add driver for controlling the reset lines of AN7581. This is a detached
+version of the clock controller driver present in Linux only used to
+control reset lines. Driver gets loaded with the bind of the clock
+driver and doesn't require a compatible. This is needed as they share
+the same registers.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/clk/Makefile                   |   1 +
- drivers/clk/airoha/Makefile            |   3 +
- drivers/clk/airoha/clk-airoha.c        | 438 +++++++++++++++++++++++++
- include/dt-bindings/clock/en7523-clk.h |  17 +
- 4 files changed, 459 insertions(+)
- create mode 100644 drivers/clk/airoha/Makefile
- create mode 100644 drivers/clk/airoha/clk-airoha.c
- create mode 100644 include/dt-bindings/clock/en7523-clk.h
+ drivers/clk/airoha/clk-airoha.c               |  16 ++
+ drivers/reset/Kconfig                         |   7 +
+ drivers/reset/Makefile                        |   1 +
+ drivers/reset/reset-airoha.c                  | 173 ++++++++++++++++++
+ .../dt-bindings/reset/airoha,en7581-reset.h   |  66 +++++++
+ 5 files changed, 263 insertions(+)
+ create mode 100644 drivers/reset/reset-airoha.c
+ create mode 100644 include/dt-bindings/reset/airoha,en7581-reset.h
 
-diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index fe0e49f6112..8411205ee04 100644
---- a/drivers/clk/Makefile
-+++ b/drivers/clk/Makefile
-@@ -14,6 +14,7 @@ obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
- obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
- 
- obj-y += adi/
-+obj-y += airoha/
- obj-y += analogbits/
- obj-y += imx/
- obj-$(CONFIG_CLK_JH7110) += starfive/
-diff --git a/drivers/clk/airoha/Makefile b/drivers/clk/airoha/Makefile
-new file mode 100644
-index 00000000000..1744c5f7236
---- /dev/null
-+++ b/drivers/clk/airoha/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# Core
-+obj-$(CONFIG_ARCH_AIROHA) += clk-airoha.o
 diff --git a/drivers/clk/airoha/clk-airoha.c b/drivers/clk/airoha/clk-airoha.c
-new file mode 100644
-index 00000000000..96d120feba7
---- /dev/null
+index 96d120feba7..1b2c4c98de5 100644
+--- a/drivers/clk/airoha/clk-airoha.c
 +++ b/drivers/clk/airoha/clk-airoha.c
-@@ -0,0 +1,438 @@
+@@ -416,6 +416,21 @@ static int airoha_clk_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static int airoha_clk_bind(struct udevice *dev)
++{
++	struct udevice *rst_dev;
++	int ret = 0;
++
++	if (CONFIG_IS_ENABLED(RESET_AIROHA)) {
++		ret = device_bind_driver_to_node(dev, "airoha-reset", "reset",
++						 dev_ofnode(dev), &rst_dev);
++		if (ret)
++			debug("Warning: failed to bind reset controller\n");
++	}
++
++	return ret;
++}
++
+ static const struct airoha_clk_soc_data en7581_data = {
+ 	.num_clocks = ARRAY_SIZE(en7581_base_clks),
+ 	.descs = en7581_base_clks,
+@@ -433,6 +448,7 @@ U_BOOT_DRIVER(airoha_clk) = {
+ 	.id = UCLASS_CLK,
+ 	.of_match = airoha_clk_ids,
+ 	.probe = airoha_clk_probe,
++	.bind = airoha_clk_bind,
+ 	.priv_auto = sizeof(struct airoha_clk_priv),
+ 	.ops = &airoha_clk_ops,
+ };
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index fe5c1214f57..ee923c19f41 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -49,6 +49,13 @@ config TEGRA186_RESET
+ 	  Enable support for manipulating Tegra's on-SoC reset signals via IPC
+ 	  requests to the BPMP (Boot and Power Management Processor).
+ 
++config RESET_AIROHA
++	bool "Reset controller driver for Airoha SoCs"
++	depends on DM_RESET && ARCH_AIROHA
++	default y
++	help
++	  Support for reset controller on Airoha SoCs.
++
+ config RESET_TI_SCI
+ 	bool "TI System Control Interface (TI SCI) reset driver"
+ 	depends on DM_RESET && TI_SCI_PROTOCOL
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index d99a78c9828..524fc064417 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_STI_RESET) += sti-reset.o
+ obj-$(CONFIG_STM32_RESET) += stm32-reset.o
+ obj-$(CONFIG_TEGRA_CAR_RESET) += tegra-car-reset.o
+ obj-$(CONFIG_TEGRA186_RESET) += tegra186-reset.o
++obj-$(CONFIG_RESET_AIROHA) += reset-airoha.o
+ obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
+ obj-$(CONFIG_RESET_HSDK) += reset-hsdk.o
+ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
+diff --git a/drivers/reset/reset-airoha.c b/drivers/reset/reset-airoha.c
+new file mode 100644
+index 00000000000..e878af6167c
+--- /dev/null
++++ b/drivers/reset/reset-airoha.c
+@@ -0,0 +1,173 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Based on the Linux clk-en7523.c but majorly reworked
-+ * for U-Boot that doesn't require CCF subsystem.
-+ *
-+ * Major modification, support for set_rate, realtime
-+ * get_rate and split for reset part to a different driver.
++ * Based on Linux drivers/clk/clk-en7523.c reworked
++ * and detached to a dedicated driver
 + *
 + * Author: Lorenzo Bianconi <lorenzo@kernel.org> (original driver)
 + *	   Christian Marangi <ansuelsmth@gmail.com>
 + */
 +
-+#include <clk-uclass.h>
 +#include <dm.h>
-+#include <dm/devres.h>
-+#include <dm/device_compat.h>
-+#include <dm/lists.h>
-+#include <regmap.h>
-+#include <syscon.h>
++#include <linux/io.h>
++#include <reset-uclass.h>
 +
-+#include <dt-bindings/clock/en7523-clk.h>
++#include <dt-bindings/reset/airoha,en7581-reset.h>
 +
-+#define REG_GSW_CLK_DIV_SEL		0x1b4
-+#define REG_EMI_CLK_DIV_SEL		0x1b8
-+#define REG_BUS_CLK_DIV_SEL		0x1bc
-+#define REG_SPI_CLK_DIV_SEL		0x1c4
-+#define REG_SPI_CLK_FREQ_SEL		0x1c8
-+#define REG_NPU_CLK_DIV_SEL		0x1fc
++#define RST_NR_PER_BANK			32
 +
-+#define REG_NP_SCU_PCIC			0x88
-+#define REG_NP_SCU_SSTR			0x9c
-+#define REG_PCIE_XSI0_SEL_MASK		GENMASK(14, 13)
-+#define REG_PCIE_XSI1_SEL_MASK		GENMASK(12, 11)
-+#define REG_CRYPTO_CLKSRC2		0x20c
++#define REG_RESET_CONTROL2		0x830
++#define REG_RESET_CONTROL1		0x834
 +
-+#define EN7581_MAX_CLKS			9
-+
-+struct airoha_clk_desc {
-+	int id;
-+	const char *name;
-+	u32 base_reg;
-+	u8 base_bits;
-+	u8 base_shift;
-+	union {
-+		const unsigned int *base_values;
-+		unsigned int base_value;
-+	};
-+	size_t n_base_values;
-+
-+	u16 div_reg;
-+	u8 div_bits;
-+	u8 div_shift;
-+	u16 div_val0;
-+	u8 div_step;
-+	u8 div_offset;
++struct airoha_reset_priv {
++	const u16 *bank_ofs;
++	const u16 *idx_map;
++	void __iomem *base;
 +};
 +
-+struct airoha_clk_priv {
-+	struct regmap *chip_scu_map;
-+	struct airoha_clk_soc_data *data;
++static const u16 en7581_rst_ofs[] = {
++	REG_RESET_CONTROL2,
++	REG_RESET_CONTROL1,
 +};
 +
-+struct airoha_clk_soc_data {
-+	u32 num_clocks;
-+	const struct airoha_clk_desc *descs;
++static const u16 en7581_rst_map[] = {
++	/* RST_CTRL2 */
++	[EN7581_XPON_PHY_RST]		= 0,
++	[EN7581_CPU_TIMER2_RST]		= 2,
++	[EN7581_HSUART_RST]		= 3,
++	[EN7581_UART4_RST]		= 4,
++	[EN7581_UART5_RST]		= 5,
++	[EN7581_I2C2_RST]		= 6,
++	[EN7581_XSI_MAC_RST]		= 7,
++	[EN7581_XSI_PHY_RST]		= 8,
++	[EN7581_NPU_RST]		= 9,
++	[EN7581_I2S_RST]		= 10,
++	[EN7581_TRNG_RST]		= 11,
++	[EN7581_TRNG_MSTART_RST]	= 12,
++	[EN7581_DUAL_HSI0_RST]		= 13,
++	[EN7581_DUAL_HSI1_RST]		= 14,
++	[EN7581_HSI_RST]		= 15,
++	[EN7581_DUAL_HSI0_MAC_RST]	= 16,
++	[EN7581_DUAL_HSI1_MAC_RST]	= 17,
++	[EN7581_HSI_MAC_RST]		= 18,
++	[EN7581_WDMA_RST]		= 19,
++	[EN7581_WOE0_RST]		= 20,
++	[EN7581_WOE1_RST]		= 21,
++	[EN7581_HSDMA_RST]		= 22,
++	[EN7581_TDMA_RST]		= 24,
++	[EN7581_EMMC_RST]		= 25,
++	[EN7581_SOE_RST]		= 26,
++	[EN7581_PCIE2_RST]		= 27,
++	[EN7581_XFP_MAC_RST]		= 28,
++	[EN7581_USB_HOST_P1_RST]	= 29,
++	[EN7581_USB_HOST_P1_U3_PHY_RST]	= 30,
++	/* RST_CTRL1 */
++	[EN7581_PCM1_ZSI_ISI_RST]	= RST_NR_PER_BANK + 0,
++	[EN7581_FE_PDMA_RST]		= RST_NR_PER_BANK + 1,
++	[EN7581_FE_QDMA_RST]		= RST_NR_PER_BANK + 2,
++	[EN7581_PCM_SPIWP_RST]		= RST_NR_PER_BANK + 4,
++	[EN7581_CRYPTO_RST]		= RST_NR_PER_BANK + 6,
++	[EN7581_TIMER_RST]		= RST_NR_PER_BANK + 8,
++	[EN7581_PCM1_RST]		= RST_NR_PER_BANK + 11,
++	[EN7581_UART_RST]		= RST_NR_PER_BANK + 12,
++	[EN7581_GPIO_RST]		= RST_NR_PER_BANK + 13,
++	[EN7581_GDMA_RST]		= RST_NR_PER_BANK + 14,
++	[EN7581_I2C_MASTER_RST]		= RST_NR_PER_BANK + 16,
++	[EN7581_PCM2_ZSI_ISI_RST]	= RST_NR_PER_BANK + 17,
++	[EN7581_SFC_RST]		= RST_NR_PER_BANK + 18,
++	[EN7581_UART2_RST]		= RST_NR_PER_BANK + 19,
++	[EN7581_GDMP_RST]		= RST_NR_PER_BANK + 20,
++	[EN7581_FE_RST]			= RST_NR_PER_BANK + 21,
++	[EN7581_USB_HOST_P0_RST]	= RST_NR_PER_BANK + 22,
++	[EN7581_GSW_RST]		= RST_NR_PER_BANK + 23,
++	[EN7581_SFC2_PCM_RST]		= RST_NR_PER_BANK + 25,
++	[EN7581_PCIE0_RST]		= RST_NR_PER_BANK + 26,
++	[EN7581_PCIE1_RST]		= RST_NR_PER_BANK + 27,
++	[EN7581_CPU_TIMER_RST]		= RST_NR_PER_BANK + 28,
++	[EN7581_PCIE_HB_RST]		= RST_NR_PER_BANK + 29,
++	[EN7581_XPON_MAC_RST]		= RST_NR_PER_BANK + 31,
 +};
 +
-+static const u32 gsw_base[] = { 400000000, 500000000 };
-+static const u32 slic_base[] = { 100000000, 3125000 };
-+
-+static const u32 emi7581_base[] = { 540000000, 480000000, 400000000, 300000000 };
-+static const u32 bus7581_base[] = { 600000000, 540000000 };
-+static const u32 npu7581_base[] = { 800000000, 750000000, 720000000, 600000000 };
-+static const u32 crypto_base[] = { 540000000, 480000000 };
-+static const u32 emmc7581_base[] = { 200000000, 150000000 };
-+
-+static const struct airoha_clk_desc en7581_base_clks[EN7581_MAX_CLKS] = {
-+	[EN7523_CLK_GSW] = {
-+		.id = EN7523_CLK_GSW,
-+		.name = "gsw",
-+
-+		.base_reg = REG_GSW_CLK_DIV_SEL,
-+		.base_bits = 1,
-+		.base_shift = 8,
-+		.base_values = gsw_base,
-+		.n_base_values = ARRAY_SIZE(gsw_base),
-+
-+		.div_bits = 3,
-+		.div_shift = 0,
-+		.div_step = 1,
-+		.div_offset = 1,
-+	},
-+	[EN7523_CLK_EMI] = {
-+		.id = EN7523_CLK_EMI,
-+		.name = "emi",
-+
-+		.base_reg = REG_EMI_CLK_DIV_SEL,
-+		.base_bits = 2,
-+		.base_shift = 8,
-+		.base_values = emi7581_base,
-+		.n_base_values = ARRAY_SIZE(emi7581_base),
-+
-+		.div_bits = 3,
-+		.div_shift = 0,
-+		.div_step = 1,
-+		.div_offset = 1,
-+	},
-+	[EN7523_CLK_BUS] = {
-+		.id = EN7523_CLK_BUS,
-+		.name = "bus",
-+
-+		.base_reg = REG_BUS_CLK_DIV_SEL,
-+		.base_bits = 1,
-+		.base_shift = 8,
-+		.base_values = bus7581_base,
-+		.n_base_values = ARRAY_SIZE(bus7581_base),
-+
-+		.div_bits = 3,
-+		.div_shift = 0,
-+		.div_step = 1,
-+		.div_offset = 1,
-+	},
-+	[EN7523_CLK_SLIC] = {
-+		.id = EN7523_CLK_SLIC,
-+		.name = "slic",
-+
-+		.base_reg = REG_SPI_CLK_FREQ_SEL,
-+		.base_bits = 1,
-+		.base_shift = 0,
-+		.base_values = slic_base,
-+		.n_base_values = ARRAY_SIZE(slic_base),
-+
-+		.div_reg = REG_SPI_CLK_DIV_SEL,
-+		.div_bits = 5,
-+		.div_shift = 24,
-+		.div_val0 = 20,
-+		.div_step = 2,
-+	},
-+	[EN7523_CLK_SPI] = {
-+		.id = EN7523_CLK_SPI,
-+		.name = "spi",
-+
-+		.base_reg = REG_SPI_CLK_DIV_SEL,
-+
-+		.base_value = 400000000,
-+
-+		.div_bits = 5,
-+		.div_shift = 8,
-+		.div_val0 = 40,
-+		.div_step = 2,
-+	},
-+	[EN7523_CLK_NPU] = {
-+		.id = EN7523_CLK_NPU,
-+		.name = "npu",
-+
-+		.base_reg = REG_NPU_CLK_DIV_SEL,
-+		.base_bits = 2,
-+		.base_shift = 8,
-+		.base_values = npu7581_base,
-+		.n_base_values = ARRAY_SIZE(npu7581_base),
-+
-+		.div_bits = 3,
-+		.div_shift = 0,
-+		.div_step = 1,
-+		.div_offset = 1,
-+	},
-+	[EN7523_CLK_CRYPTO] = {
-+		.id = EN7523_CLK_CRYPTO,
-+		.name = "crypto",
-+
-+		.base_reg = REG_CRYPTO_CLKSRC2,
-+		.base_bits = 1,
-+		.base_shift = 0,
-+		.base_values = crypto_base,
-+		.n_base_values = ARRAY_SIZE(crypto_base),
-+	},
-+	[EN7581_CLK_EMMC] = {
-+		.id = EN7581_CLK_EMMC,
-+		.name = "emmc",
-+
-+		.base_reg = REG_CRYPTO_CLKSRC2,
-+		.base_bits = 1,
-+		.base_shift = 12,
-+		.base_values = emmc7581_base,
-+		.n_base_values = ARRAY_SIZE(emmc7581_base),
-+	}
-+};
-+
-+static u32 airoha_clk_get_base_rate(const struct airoha_clk_desc *desc, u32 val)
++static int airoha_reset_update(struct airoha_reset_priv *priv,
++			       unsigned long id, bool assert)
 +{
-+	if (!desc->base_bits)
-+		return desc->base_value;
++	void __iomem *addr = priv->base + priv->bank_ofs[id / RST_NR_PER_BANK];
++	u32 val;
 +
-+	val >>= desc->base_shift;
-+	val &= (1 << desc->base_bits) - 1;
++	val = readl(addr);
++	if (assert)
++		val |= BIT(id % RST_NR_PER_BANK);
++	else
++		val &= ~BIT(id % RST_NR_PER_BANK);
++	writel(val, addr);
 +
-+	if (val >= desc->n_base_values)
-+		return 0;
-+
-+	return desc->base_values[val];
++	return 0;
 +}
 +
-+static u32 airoha_clk_get_div(const struct airoha_clk_desc *desc, u32 val)
++static int airoha_reset_assert(struct reset_ctl *reset_ctl)
 +{
-+	if (!desc->div_bits)
-+		return 1;
++	struct airoha_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++	int id = reset_ctl->id;
 +
-+	val >>= desc->div_shift;
-+	val &= (1 << desc->div_bits) - 1;
-+
-+	if (!val && desc->div_val0)
-+		return desc->div_val0;
-+
-+	return (val + desc->div_offset) * desc->div_step;
++	return airoha_reset_update(priv, id, true);
 +}
 +
-+static int airoha_clk_enable(struct clk *clk)
++static int airoha_reset_deassert(struct reset_ctl *reset_ctl)
 +{
-+	struct airoha_clk_priv *priv = dev_get_priv(clk->dev);
-+	struct airoha_clk_soc_data *data = priv->data;
-+	int id = clk->id;
++	struct airoha_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++	int id = reset_ctl->id;
 +
-+	if (id > data->num_clocks)
++	return airoha_reset_update(priv, id, false);
++}
++
++static int airoha_reset_status(struct reset_ctl *reset_ctl)
++{
++	struct airoha_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++	int id = reset_ctl->id;
++	void __iomem *addr;
++
++	addr = priv->base + priv->bank_ofs[id / RST_NR_PER_BANK];
++
++	return !!(readl(addr) & BIT(id % RST_NR_PER_BANK));
++}
++
++static int airoha_reset_xlate(struct reset_ctl *reset_ctl,
++			      struct ofnode_phandle_args *args)
++{
++	struct airoha_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++
++	if (args->args[0] >= ARRAY_SIZE(en7581_rst_map))
 +		return -EINVAL;
 +
-+	return 0;
-+}
-+
-+static int airoha_clk_disable(struct clk *clk)
-+{
-+	return 0;
-+}
-+
-+static ulong airoha_clk_get_rate(struct clk *clk)
-+{
-+	struct airoha_clk_priv *priv = dev_get_priv(clk->dev);
-+	struct airoha_clk_soc_data *data = priv->data;
-+	const struct airoha_clk_desc *desc;
-+	struct regmap *map = priv->chip_scu_map;
-+	int id = clk->id;
-+	u32 reg, val;
-+	ulong rate;
-+	int ret;
-+
-+	if (id > data->num_clocks) {
-+		dev_err(clk->dev, "Invalid clk ID %d\n", id);
-+		return 0;
-+	}
-+
-+	desc = &data->descs[id];
-+
-+	ret = regmap_read(map, desc->base_reg, &val);
-+	if (ret) {
-+		dev_err(clk->dev, "Failed to read reg for clock %s\n",
-+			desc->name);
-+		return 0;
-+	}
-+
-+	rate = airoha_clk_get_base_rate(desc, val);
-+
-+	reg = desc->div_reg ? desc->div_reg : desc->base_reg;
-+	ret = regmap_read(map, reg, &val);
-+	if (ret) {
-+		dev_err(clk->dev, "Failed to read reg for clock %s\n",
-+			desc->name);
-+		return 0;
-+	}
-+
-+	rate /= airoha_clk_get_div(desc, val);
-+
-+	return rate;
-+}
-+
-+static int airoha_clk_search_rate(const struct airoha_clk_desc *desc, int div,
-+				  ulong rate)
-+{
-+	int i;
-+
-+	/* Single base rate */
-+	if (!desc->base_bits) {
-+		if (rate != desc->base_value / div)
-+			goto err;
-+
-+		return 0;
-+	}
-+
-+	/* Check every base rate with provided divisor */
-+	for (i = 0; i < desc->n_base_values; i++)
-+		if (rate == desc->base_values[i] / div)
-+			return i;
-+
-+err:
-+	return -EINVAL;
-+}
-+
-+static ulong airoha_clk_set_rate(struct clk *clk, ulong rate)
-+{
-+	struct airoha_clk_priv *priv = dev_get_priv(clk->dev);
-+	struct airoha_clk_soc_data *data = priv->data;
-+	const struct airoha_clk_desc *desc;
-+	struct regmap *map = priv->chip_scu_map;
-+	int div_val, base_val;
-+	u32 reg, val, mask;
-+	int id = clk->id;
-+	int div;
-+	int ret;
-+
-+	if (id > data->num_clocks) {
-+		dev_err(clk->dev, "Invalid clk ID %d\n", id);
-+		return 0;
-+	}
-+
-+	desc = &data->descs[id];
-+
-+	if (!desc->base_bits && !desc->div_bits) {
-+		dev_err(clk->dev, "Can't set rate for fixed clock %s\n",
-+			desc->name);
-+		return 0;
-+	}
-+
-+	if (!desc->div_bits) {
-+		/* Divisor not supported, just search in base rate */
-+		div_val = 0;
-+		base_val = airoha_clk_search_rate(desc, 1, rate);
-+		if (base_val < 0) {
-+			dev_err(clk->dev, "Invalid rate for clock %s\n",
-+				desc->name);
-+			return 0;
-+		}
-+	} else {
-+		div_val = 0;
-+
-+		/* Check if div0 satisfy the request */
-+		if (desc->div_val0) {
-+			base_val = airoha_clk_search_rate(desc, desc->div_val0,
-+							  rate);
-+			if (base_val >= 0) {
-+				div_val = 0;
-+				goto apply;
-+			}
-+
-+			/* Skip checking first divisor val */
-+			div_val = 1;
-+		}
-+
-+		/* Simulate rate with every divisor supported */
-+		for (div_val = div_val + desc->div_offset;
-+		     div_val < BIT(desc->div_bits) - 1; div_val++) {
-+			div = div_val * desc->div_step;
-+
-+			base_val = airoha_clk_search_rate(desc, div, rate);
-+			if (base_val >= 0)
-+				break;
-+		}
-+
-+		if (div_val == BIT(desc->div_bits) - 1) {
-+			dev_err(clk->dev, "Invalid rate for clock %s\n",
-+				desc->name);
-+			return 0;
-+		}
-+	}
-+
-+apply:
-+	if (desc->div_bits) {
-+		reg = desc->div_reg ? desc->div_reg : desc->base_reg;
-+
-+		mask = (BIT(desc->div_bits) - 1) << desc->div_shift;
-+		val = div_val << desc->div_shift;
-+
-+		ret = regmap_update_bits(map, reg, mask, val);
-+		if (ret) {
-+			dev_err(clk->dev, "Failed to update div reg for clock %s\n",
-+				desc->name);
-+			return 0;
-+		}
-+	}
-+
-+	if (desc->base_bits) {
-+		mask = (BIT(desc->base_bits) - 1) << desc->base_shift;
-+		val = base_val << desc->base_shift;
-+
-+		ret = regmap_update_bits(map, desc->base_reg, mask, val);
-+		if (ret) {
-+			dev_err(clk->dev, "Failed to update reg for clock %s\n",
-+				desc->name);
-+			return 0;
-+		}
-+	}
-+
-+	return rate;
-+}
-+
-+const struct clk_ops airoha_clk_ops = {
-+	.enable = airoha_clk_enable,
-+	.disable = airoha_clk_disable,
-+	.get_rate = airoha_clk_get_rate,
-+	.set_rate = airoha_clk_set_rate,
-+};
-+
-+static int airoha_clk_probe(struct udevice *dev)
-+{
-+	struct airoha_clk_priv *priv = dev_get_priv(dev);
-+	ofnode chip_scu_node;
-+
-+	chip_scu_node = ofnode_by_compatible(ofnode_null(),
-+					     "airoha,en7581-chip-scu");
-+	if (!ofnode_valid(chip_scu_node))
-+		return -EINVAL;
-+
-+	priv->chip_scu_map = syscon_node_to_regmap(chip_scu_node);
-+	if (IS_ERR(priv->chip_scu_map))
-+		return PTR_ERR(priv->chip_scu_map);
-+
-+	priv->data = (void *)dev_get_driver_data(dev);
++	reset_ctl->id = priv->idx_map[args->args[0]];
 +
 +	return 0;
 +}
 +
-+static const struct airoha_clk_soc_data en7581_data = {
-+	.num_clocks = ARRAY_SIZE(en7581_base_clks),
-+	.descs = en7581_base_clks,
++static struct reset_ops airoha_reset_ops = {
++	.of_xlate = airoha_reset_xlate,
++	.rst_assert = airoha_reset_assert,
++	.rst_deassert = airoha_reset_deassert,
++	.rst_status = airoha_reset_status,
 +};
 +
-+static const struct udevice_id airoha_clk_ids[] = {
-+	{ .compatible = "airoha,en7581-scu",
-+	  .data = (ulong)&en7581_data,
-+	},
-+	{ }
-+};
++static int airoha_reset_probe(struct udevice *dev)
++{
++	struct airoha_reset_priv *priv = dev_get_priv(dev);
 +
-+U_BOOT_DRIVER(airoha_clk) = {
-+	.name = "clk-airoha",
-+	.id = UCLASS_CLK,
-+	.of_match = airoha_clk_ids,
-+	.probe = airoha_clk_probe,
-+	.priv_auto = sizeof(struct airoha_clk_priv),
-+	.ops = &airoha_clk_ops,
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base)
++		return -ENOMEM;
++
++	priv->bank_ofs = en7581_rst_ofs;
++	priv->idx_map = en7581_rst_map;
++
++	return 0;
++}
++
++U_BOOT_DRIVER(airoha_reset) = {
++	.name = "airoha-reset",
++	.id = UCLASS_RESET,
++	.probe = airoha_reset_probe,
++	.ops = &airoha_reset_ops,
++	.priv_auto = sizeof(struct airoha_reset_priv),
 +};
-diff --git a/include/dt-bindings/clock/en7523-clk.h b/include/dt-bindings/clock/en7523-clk.h
+diff --git a/include/dt-bindings/reset/airoha,en7581-reset.h b/include/dt-bindings/reset/airoha,en7581-reset.h
 new file mode 100644
-index 00000000000..edfa64045f5
+index 00000000000..ac4a3fee4c3
 --- /dev/null
-+++ b/include/dt-bindings/clock/en7523-clk.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/include/dt-bindings/reset/airoha,en7581-reset.h
+@@ -0,0 +1,66 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) 2024 AIROHA Inc
++ * Author: Lorenzo Bianconi <lorenzo@kernel.org>
++ */
 +
-+#ifndef _DT_BINDINGS_CLOCK_AIROHA_EN7523_H_
-+#define _DT_BINDINGS_CLOCK_AIROHA_EN7523_H_
++#ifndef __DT_BINDINGS_RESET_CONTROLLER_AIROHA_EN7581_H_
++#define __DT_BINDINGS_RESET_CONTROLLER_AIROHA_EN7581_H_
 +
-+#define EN7523_CLK_GSW		0
-+#define EN7523_CLK_EMI		1
-+#define EN7523_CLK_BUS		2
-+#define EN7523_CLK_SLIC		3
-+#define EN7523_CLK_SPI		4
-+#define EN7523_CLK_NPU		5
-+#define EN7523_CLK_CRYPTO	6
-+#define EN7523_CLK_PCIE		7
++/* RST_CTRL2 */
++#define EN7581_XPON_PHY_RST		 0
++#define EN7581_CPU_TIMER2_RST		 1
++#define EN7581_HSUART_RST		 2
++#define EN7581_UART4_RST		 3
++#define EN7581_UART5_RST		 4
++#define EN7581_I2C2_RST			 5
++#define EN7581_XSI_MAC_RST		 6
++#define EN7581_XSI_PHY_RST		 7
++#define EN7581_NPU_RST			 8
++#define EN7581_I2S_RST			 9
++#define EN7581_TRNG_RST			10
++#define EN7581_TRNG_MSTART_RST		11
++#define EN7581_DUAL_HSI0_RST		12
++#define EN7581_DUAL_HSI1_RST		13
++#define EN7581_HSI_RST			14
++#define EN7581_DUAL_HSI0_MAC_RST	15
++#define EN7581_DUAL_HSI1_MAC_RST	16
++#define EN7581_HSI_MAC_RST		17
++#define EN7581_WDMA_RST			18
++#define EN7581_WOE0_RST			19
++#define EN7581_WOE1_RST			20
++#define EN7581_HSDMA_RST		21
++#define EN7581_TDMA_RST			22
++#define EN7581_EMMC_RST			23
++#define EN7581_SOE_RST			24
++#define EN7581_PCIE2_RST		25
++#define EN7581_XFP_MAC_RST		26
++#define EN7581_USB_HOST_P1_RST		27
++#define EN7581_USB_HOST_P1_U3_PHY_RST	28
++/* RST_CTRL1 */
++#define EN7581_PCM1_ZSI_ISI_RST		29
++#define EN7581_FE_PDMA_RST		30
++#define EN7581_FE_QDMA_RST		31
++#define EN7581_PCM_SPIWP_RST		32
++#define EN7581_CRYPTO_RST		33
++#define EN7581_TIMER_RST		34
++#define EN7581_PCM1_RST			35
++#define EN7581_UART_RST			36
++#define EN7581_GPIO_RST			37
++#define EN7581_GDMA_RST			38
++#define EN7581_I2C_MASTER_RST		39
++#define EN7581_PCM2_ZSI_ISI_RST		40
++#define EN7581_SFC_RST			41
++#define EN7581_UART2_RST		42
++#define EN7581_GDMP_RST			43
++#define EN7581_FE_RST			44
++#define EN7581_USB_HOST_P0_RST		45
++#define EN7581_GSW_RST			46
++#define EN7581_SFC2_PCM_RST		47
++#define EN7581_PCIE0_RST		48
++#define EN7581_PCIE1_RST		49
++#define EN7581_CPU_TIMER_RST		50
++#define EN7581_PCIE_HB_RST		51
++#define EN7581_XPON_MAC_RST		52
 +
-+#define EN7581_CLK_EMMC		8
-+
-+#endif /* _DT_BINDINGS_CLOCK_AIROHA_EN7523_H_ */
++#endif /* __DT_BINDINGS_RESET_CONTROLLER_AIROHA_EN7581_H_ */
 -- 
 2.48.1
 
