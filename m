@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B757EC28B28
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 03:08:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CF0C2BA1B
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 05:18:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 530BF81100;
-	Mon, 10 Mar 2025 04:07:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 66E0D8043C;
+	Mon, 10 Mar 2025 06:18:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741576065;
-	bh=3KjAhOY/M1uGCu2fKwZl38uuAvgkaDY7OvtFrrs7HEw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=UwuFeK+Nb1XQ5RU6yfb+1wlOOlGu+77jbI32LCE/rmLBk3PaGpMbfH/VjNjEgNR06
-	 qubzkzHI/oj4zgjZfjXNpQCAH+/lqLE6LoOJ4s0DrJ7ufa4ohtcZ0gc09UiZASB/+3
-	 pA1jpnVFchVtCYx3B9mWkjTXIlGQUd/YrHSxLqEaS3SxMM1b56pxPIkQJudu95rgzF
-	 DDbikvPB0VufuGZRsChwT2TfWLlekRxWY/wXVeLb4kopCeU70z4pQfs0J9PTBFnvYN
-	 edvqdFrzyDI7EuZ1O/20a9+t4heCy07Zsq3yv1bz+x1l+IuICLgDgZTsdzq0u8vDiB
-	 OsCc7FWg1FcCQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6797E81545; Mon, 10 Mar 2025 04:07:44 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8B180E93
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 04:07:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="acj/WitU"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2CF31102E6338; Mon, 10 Mar 2025 04:07:39 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741576060; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=3KjAhOY/M1uGCu2fKwZl38uuAvgkaDY7OvtFrrs7HEw=;
- b=acj/WitU6KPhJF+cjnfxdwTu5lxJsUOL9LtI1Jj1gz36ZPLndcbK0m0Fggd2oJzMG86Xdu
- baegxyyfUeKxrCp/BzZ9+ugxXYhDbtfVrfubmYJWB6tGnZp48oHCPdmiQXBYqWGGGhF/qL
- 5I7ZVSWRNnCxCoG3b2CfynH0ImXF5zDNv5ElC4Q4RdrhJMgH/o9anhCCHXXfQZCaRralQl
- IDYBRWS9TvBqGUryDO3F8pzL5X53Ng78jogUR2nVmIgJIiwcd6+252vnf3/L7/wYzR9fnw
- hSl1aOQ+0+sq5iuRORAM9dRIRB7v2K84NnVsfhn1iAgLrkJ3KCCkYCrjY8D2PQ==
-Message-ID: <aa93e408-ad8b-4ac9-b853-05cc8ca190a2@denx.de>
-Date: Mon, 10 Mar 2025 01:13:22 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QXyDGfLn";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 387D18070C; Mon, 10 Mar 2025 06:18:54 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4638D80107
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 06:18:51 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52A5In0P891097
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 10 Mar 2025 00:18:49 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741583929;
+ bh=VfFvU7RpcUuGuuWHihPeVr/F805J8ZQjvSvoFYc3e+A=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=QXyDGfLngXzjUfHb5DVNts2iTuGdWJf6eZ52C7a7+zKk6c3FqwIw1aI8uBYIGYRd2
+ UStVDczce7jd0oBgE5RxUemEvTooIcGmKQ4wMFAOOYqFxvIVLKjIaLUPAmaRstmacQ
+ W7cyztrqOEmhYYpu/rBjKMBVujDDXwZ7R3j4Xz34=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52A5InHk117284
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 10 Mar 2025 00:18:49 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
+ Mar 2025 00:18:48 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 10 Mar 2025 00:18:48 -0500
+Received: from localhost (a0543016.dhcp.ti.com [172.24.227.225])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52A5IlqV085905;
+ Mon, 10 Mar 2025 00:18:48 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mailbox: add i.MX Messaging Unit (MU) driver
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, trini@konsulko.com,
- sbabic@denx.de, festevam@gmail.com, uboot-imx@nxp.com, lukma@denx.de,
- seanga2@gmail.com, sjg@chromium.org, alpernebiyasak@gmail.com
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, viorel.suman@nxp.com, ye.li@nxp.com
-References: <20250304065740.2732356-1-alice.guo@oss.nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250304065740.2732356-1-alice.guo@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Mon, 10 Mar 2025 10:48:47 +0530
+Message-ID: <D8CBZ74BIHYX.1BJH0J37N5VZY@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <afd@ti.com>,
+ <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
+Subject: Re: [PATCH 02/10] cmd: Kconfig: enable CMD_BOOTI for ARCH_K3
+From: Anshul Dalal <anshuld@ti.com>
+To: Tom Rini <trini@konsulko.com>
+X-Mailer: aerc 0.17.0
+References: <20250307075541.2571104-1-anshuld@ti.com>
+ <20250307075541.2571104-3-anshuld@ti.com>
+ <20250307155055.GP2640854@bill-the-cat> <D8A60PFV4FQL.5AHV0A4WLX0T@ti.com>
+ <20250307162042.GS2640854@bill-the-cat>
+In-Reply-To: <20250307162042.GS2640854@bill-the-cat>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,22 +83,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/4/25 7:57 AM, Alice Guo (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
-> 
-> This patch provides a driver for i.MX Messaging Unit (MU) using the
-> commom mailbox framework.
-> 
-> This is ported from Linux (v6.12.8) driver
-> drivers/mailbox/imx-mailbox.c. Its commit SHA is:
-> 39d7d6177f0c ("mailbox: imx: use device name in interrupt name")
-> 
-> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Ye Li <ye.li@nxp.com>
-> ---
-> 
-> Changes for v2:
->   - remove support for i.MX8ULP
-Why ?
+On Fri Mar 7, 2025 at 9:50 PM IST, Tom Rini wrote:
+> On Fri, Mar 07, 2025 at 09:43:19PM +0530, Anshul Dalal wrote:
+> > On Fri Mar 7, 2025 at 9:20 PM IST, Tom Rini wrote:
+> > > On Fri, Mar 07, 2025 at 01:25:30PM +0530, Anshul Dalal wrote:
+> > >
+> > > > This allows us to load the kernel image to memory on 32-bit R5 SPL.
+> > > >=20
+> > > > Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> > > > ---
+> > > >  cmd/Kconfig | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >=20
+> > > > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > > > index a04fcaa0e08..66145a001b8 100644
+> > > > --- a/cmd/Kconfig
+> > > > +++ b/cmd/Kconfig
+> > > > @@ -357,7 +357,7 @@ config CMD_BOOTZ
+> > > > =20
+> > > >  config CMD_BOOTI
+> > > >  	bool "booti"
+> > > > -	depends on ARM64 || RISCV || SANDBOX
+> > > > +	depends on ARM64 || RISCV || SANDBOX || ARCH_K3
+> > >
+> > > How are you using "booti" on the R5 part of K3? This shouldn't be
+> > > useful...
+> >=20
+> > This is necessary to allow us to call booti_setup [the code path
+> > responsible for parsing uncompressed kernel image] from
+> > spl_parse_image_header at common/spl/spl.c:338 when loading the Image.
+>
+> OK, so please update arch/arm/lib/Makefile with something like:
+> ifdef CONFIG_ARCH_K3
+> obj-$(CONFIG_SPL_OS_BOOT) +=3D booti.o
+> endif
+
+We would still have to have CMD_BOOTI enabled even with this change
+because of the check at common/spl/spl.c:338. I suggest we proceed with
+my original set of changes instead.
+
+Anshul
