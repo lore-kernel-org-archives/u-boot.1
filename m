@@ -4,100 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2044BC28B2E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:11:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97713C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:13:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC674811DF;
-	Mon, 10 Mar 2025 13:11:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F503811DF;
+	Mon, 10 Mar 2025 13:13:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hV79oNbn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PJnQ7bdV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1824D8129F; Mon, 10 Mar 2025 13:11:26 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 3DF3E8141E; Mon, 10 Mar 2025 13:13:03 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5C3D811B2
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:11:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 181AA811B2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:13:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cf680d351so5252125e9.0
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:11:23 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4394a823036so34880175e9.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:13:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741608631; x=1742213431; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741608780; x=1742213580; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Em2R57KIj2mfAG9mNTdbtmhF3nW5V+bX/U6cCI+Mzm0=;
- b=hV79oNbnPIj7LE+mMIebfOUCl/ynJrc7u8NtPsLnViPxk+WMDcxb3Ypayl685N8Z/b
- Fbk52BMDQTW7QXJSs6d1F9VjaW93eTRWxJDo8gcj3UsVfxkoyHeHJ6vyT+d5m5bqICTq
- 45bmIhfGBt0fsFDbceK2e4OdpmpxMfJwdSc3j2i2Y3/Pv4k8wfJ3b1qDaQsWXQIGrHXj
- 4TyQeaoH4yBmmh+k9jBW5iX+dxrB60tOxt+nZN5vgUgCJnTohd5RFxBMUxhsVvIHG396
- mDXTrWMeJGgqHhNLT6We7b9ZqibGkkmrq+LEr2Je5DtdCjPt9YcD/EbQyCBDyw9Kt1jX
- kIHw==
+ bh=OdfmwekRcnm6+hVomvY2PqXKIheQFp464xM//1EbODA=;
+ b=PJnQ7bdVFUf6gkyJ2/jLumudUpIIbURaSPmdmSDyiZbOVTWYYcf+BfTtemnNBfDB1y
+ LVGyzfhXl0NJgy8gGiYIXVTZ0Ig14lWmr0AdrdJN5Pc95tMj+5ci2DLvFzh9+a/4evbt
+ lqScSOFHXf1SONc3NUB/QK+Mi5cVL5SlbmmIs3COEDM7jrQsAY1RVR1X641o3IbWmHV9
+ mWWMmCIFxl3ODOJvPdkVIsbs5l0Mn2dhOYzaLM+ysjWdcBlKNC2eJ2qeDbAktrdGJiPC
+ 35QrLLyCU2rTogTSYOOCKubr1tJRpEJ6YGJuubeCPqaByvm4H1P5Q6z/t+XETRUZxmhC
+ 9roQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741608631; x=1742213431;
+ d=1e100.net; s=20230601; t=1741608780; x=1742213580;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Em2R57KIj2mfAG9mNTdbtmhF3nW5V+bX/U6cCI+Mzm0=;
- b=dW2dyZFAa36sl6eJdPlscQXM9tYuhO+ZBheIFIl5WEkEXw1iVk63TOHbGgzRFYl1kW
- NrcXX+9MRvuw8vchDYwgOln616PNo1dvMDZ/2yFcM90tAZD2XxhU2jrYntplxREi5oYg
- E2dhP8hDsv521ZfurTy121rjKrlTc/YV8eu2EZmQXp2cYNNW6JF2gFu7ITIdgYRg3EoJ
- EbWwmoh3R9+mxAsYuJPFp8wk5ACFYR+CXHZeBs+v+7Vp2vlSw4dHpx9kGgIIJOOjKo8M
- c0txBAJYojj1gn+QwUda94uI3uIybUPGfOUlV7dSieHvVOt178gcljMSgjEJQsFjcHR2
- s2iw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUckl3niTVa+OjiBYf+OGqMwW6y9r6B8/Agw23tsRBpAyqpH9RmIoM4FoQveqHs9CHtdqVAA20=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfaDDQkmbY7V5dov/WC1FHaTkb9e9j8/Hn7w1QYszJMKiXLD5K
- gLrxVTKQzRNsX1hR4d5Kz3+KjHL00TsR/6JF9TTKuJdR/TvTKLMsP0mUAoGapnE=
-X-Gm-Gg: ASbGnct3Z7CO7lfprwsw2YmqPxpBZyA6gpNH5ROR4oyP7iSEK/BrYFl7FjzX56ftwW1
- nGMRImz6yqHdS5yUSV3rYm9Dte4hu2sn1A7my17h0zKdHn/J/Kp1CeU6RZgKuDPtIspfOjJpTaR
- b3uxiVtAYVNEaBFxOlUsT7/vAbHoKJpIRktdFUeUIQC6RieIWm/YrvbtesxcfGRPqSaKQL9r4RG
- IMZ9qrriFG/XZsOEIDwo+MhdrQuNrEqkzb1WGsZypABlYI2ng6cWWNQaLK9CWQj2BU1DX5qKEk2
- uL+FBLf7flWSaaN1fybgLeoQHg1SzNANePwXsv0gPMR41NHtCqzY5sY/FM0p6Cqq4+oOJ7M53sT
- ZkaVLxCQOH3qNuD2hv20eSKYQ
-X-Google-Smtp-Source: AGHT+IEaF+7gekp4JfsZj7RVHK5oyfmyGmmUy1YfJMhKlPTlV2zGfjf9yxZpoT2B9D5x3W6Sdh4FTQ==
-X-Received: by 2002:a05:6000:1f84:b0:38f:4ffd:c757 with SMTP id
- ffacd0b85a97d-3913aed7ef9mr5243792f8f.2.1741608631008; 
- Mon, 10 Mar 2025 05:10:31 -0700 (PDT)
+ bh=OdfmwekRcnm6+hVomvY2PqXKIheQFp464xM//1EbODA=;
+ b=UzKMAcJojSxuMjDvnhxrcC8rZjvJxweTeYGCvbwz2RViG4bcuEPJdOQjagEHkFq/fH
+ e1m5DesGHnMI0yCUO4YnFvXVzS+lgWxDvFUx4QU47PPTXZi+m9ptBLo0hYDFg+7Okn23
+ Itui9wS3a0bjH05xNNOirHkeHxEBS05XN2FwHu5dRYdjrm1lDsp6CoSoWbaOI73/3Pe5
+ QOpTzR8jJczN3ccds0CDfbt+wmZUnTZmWa25D/PaNCgMXsvjxXUsJYGX560DaU9K0W1J
+ zlnhlsz2NX+qWzuFU/FKVWinkIbWORYKQW9JDWEPPs7md8Q7QdNd+tZzL99Kr+4wEzi/
+ ovzw==
+X-Gm-Message-State: AOJu0YxRsG3dohXohXbqy3xHLojxO84Hr2wjueeqhZgncAYq7qgpff5O
+ u3gKXCDplFZLsL9DN4txf8Nfr3XZdUEWiMt9tR4couOQ9NHYQszWQc33iBWflpQ=
+X-Gm-Gg: ASbGncte6B5dL6kvu2OhxLzykm8MdCwkb+RzduzDNR4Evbn+JrLSi/8RkoA6KGxJM+J
+ Bs+y4eIYTD3CFv9+rcFLzNImHQrqU+K9btiW8m4cvOHLe4aOPq4yCNHBdsFSV6YyyCBUw80ifBZ
+ szCUtffcDqo/BDkbr5PRaI5/xr/MXgHKMYCCCogq8pfwqPzRKL/kqm0UoqG2/MuOIhU13pHmMP5
+ c87pMJS7CLXsgidDtVU6ebbkvj763PAJN0SqbjXTZ2rBtibCCwGAdGlYbc5fV2E8TNyH0ZJqsqs
+ ghRq1e4H/oaaJZ4vTkkzOzuXQGPmY1m+EKhdJk6WJLBWjz7VujmKOzPhk/MD+EdgLWzz76/Vl4z
+ K/mOh42yhRThjxFJuaAk4p+Ob
+X-Google-Smtp-Source: AGHT+IESi2IB0Gs6yv7PDOO5TrdLlaOFr7FUYeJvRgj39HG7KUyqTQcRnHfahsmVNbyEBdRkgSmaDQ==
+X-Received: by 2002:a05:600c:5115:b0:43c:f64c:44a4 with SMTP id
+ 5b1f17b1804b1-43cf64c4740mr22627815e9.8.1741608780486; 
+ Mon, 10 Mar 2025 05:13:00 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:72e5:c885:a214:4261?
  ([2a01:e0a:3cb:7bb0:72e5:c885:a214:4261])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912c01cb82sm15138594f8f.51.2025.03.10.05.10.30
+ 5b1f17b1804b1-43cf86b1d80sm33094085e9.9.2025.03.10.05.12.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Mar 2025 05:10:30 -0700 (PDT)
-Message-ID: <7a4ee558-d31a-4280-aff4-f48a948b5b75@linaro.org>
-Date: Mon, 10 Mar 2025 13:10:29 +0100
+ Mon, 10 Mar 2025 05:13:00 -0700 (PDT)
+Message-ID: <684ad95c-eff2-4ed4-a305-670977eff7ed@linaro.org>
+Date: Mon, 10 Mar 2025 13:12:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] net: lwip: extend wget to support CA (root)
+Subject: Re: [PATCH v2 4/6] net: lwip: add support for built-in root
  certificates
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- u-boot@lists.denx.de
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>
 References: <20250305142650.2966738-1-jerome.forissier@linaro.org>
- <20250305142650.2966738-2-jerome.forissier@linaro.org>
- <cb301142-b76a-45ff-ace4-39e58d9a8de7@gmx.de>
- <26ec5905-e96a-4ff2-bdea-652eb9031ee3@linaro.org>
- <CAC_iWjJ6p8+2vV38rNPq0vJcAwY9iED=U129sYJxH=DL20-8rQ@mail.gmail.com>
- <CAC_iWjJu+Skm-YQ_Ri56EVtywy=HRuMm2gmqm7DaKXtRmVje5A@mail.gmail.com>
- <176aa79c-fb7d-4fbc-9e1b-912617ea2538@linaro.org>
- <CAC_iWjKdpnqHibmM2J+u8Bt59GxiD83aCt2NjD4pAvEMmA_c+A@mail.gmail.com>
+ <20250305142650.2966738-5-jerome.forissier@linaro.org>
+ <CAC_iWj+kn1Ah98XthW_kGmNQHjKy=VEL9kd+PjVKV9phwJeVcQ@mail.gmail.com>
+ <4c723e83-5287-4c94-8859-e1c49d6af927@linaro.org>
+ <CAC_iWjLbpU-1NW5YzxuEauAizjLS1iB_tjMiCBWu2tbjuf189A@mail.gmail.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjKdpnqHibmM2J+u8Bt59GxiD83aCt2NjD4pAvEMmA_c+A@mail.gmail.com>
+In-Reply-To: <CAC_iWjLbpU-1NW5YzxuEauAizjLS1iB_tjMiCBWu2tbjuf189A@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -118,39 +113,90 @@ X-Virus-Status: Clean
 
 
 
-On 3/10/25 12:49, Ilias Apalodimas wrote:
+On 3/10/25 12:52, Ilias Apalodimas wrote:
+> Hi Jerome,
+> 
 > [...]
 > 
->>>>>
->>>>
->>>> FWIW I think this still makes sense for peopke that don't want or can
->>>> not add the cert in the u-boot binary, but can add a signed script to
->>>> download it on the fly
->>>>
->>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>>
->>> This still stands, but there are a few warning/errors on the entire
->>> patchset. Can you address them and send a v3?
->>
->> Which warnings/errors? Which config? I see none with qemu_arm64_lwip_defconfig.
 > 
-> Ah my bad, it's checkpatch that has all that
+>>>>
+>>>> +#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
+>>>> +       cacert_initialized = true;
+>>>> +#endif
+>>>>         return CMD_RET_SUCCESS;
+>>>>  }
+>>>> +
+>>>> +#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
+>>>> +static int set_cacert_builtin(void)
+>>>> +{
+>>>> +       return _set_cacert(builtin_cacert, builtin_cacert_size);
+>>>> +}
+>>>>  #endif
+>>>>
+>>>> +#if CONFIG_IS_ENABLED(WGET_CACERT)
+>>>> +static int set_cacert(char * const saddr, char * const ssz)
+>>>> +{
+>>>> +       ulong addr, sz;
+>>>> +
+>>>> +       addr = hextoul(saddr, NULL);
+>>>> +       sz = hextoul(ssz, NULL);
+>>>> +
+>>>> +       return _set_cacert((void *)addr, sz);
+>>>> +}
+>>>> +#endif
+>>>> +#endif  /* CONFIG_WGET_CACERT || CONFIG_WGET_BUILTIN_CACERT */
+>>>> +
+>>>>  static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>>>>  {
+>>>>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
+>>>> @@ -373,8 +401,15 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>>>>         memset(&conn, 0, sizeof(conn));
+>>>>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
+>>>>         if (is_https) {
+>>>> -               char *ca = cacert;
+>>>> -               size_t ca_sz = cacert_size;
+>>>> +               char *ca;
+>>>> +               size_t ca_sz;
+>>>> +
+>>>> +#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
+>>>> +               if (!cacert_initialized)
+>>>> +                       set_cacert_builtin();
+>>>> +#endif
+>>>
+>>> The code and the rest of the patch seems fine, but the builtin vs
+>>> downloaded cert is a bit confusing here.
+>>> Since the built-in cert always gets initialized in the wget loop it
+>>> would overwrite any certificates that are downloaded in memory?
+>>
+>> The built-in certs are enabled only when cacert_initialized is false.
+>> set_cacert_builtin() will set it to true (via _set_cacert()), so it will
+>> happen only once. Note also that any successful "wget cacert" command
+>> will also do the same. So effectively these two lines enable the
+>> built-in certificates by default, that's all they do.
+> 
+> Ok, so if you download a cert in memory and have u-boot with a builtin
+> certificate, then the memory one will be overwritten in the first run.
 
-Yes, I think they're all false positives, or rather things we want to ignore
-for consistency with existing code.
+No, because the downloaded cert must have be made active via "wget cacert
+<addr> <size>", which will set cacert_initialized to true, and thus the
+built-in certs won't overwrite them. Or did I miss something?
 
-Thanks,
+Cheers,
 -- 
 Jerome
 
+> This is not easy to solve, I was trying to think of ways to make the
+> functionality clearer to users.
 > 
 > Cheers
 > /Ilias
 >>
->> Thanks,
+>> Cheers,
 >> --
 >> Jerome
 >>
 >>>
->>> Thanks
+>>> [...]
+>>>
+>>> Cheers
 >>> /Ilias
