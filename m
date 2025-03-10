@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE16EC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1C0C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:06:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15ED381428;
+	by phobos.denx.de (Postfix) with ESMTP id 5D96281703;
 	Mon, 10 Mar 2025 13:06:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AKQg2UbX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fgOjfITr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AE3381430; Mon, 10 Mar 2025 13:06:10 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id D6798814A4; Mon, 10 Mar 2025 13:06:11 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF625811DF
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:06:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB3D181417
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:06:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2254e0b4b79so3505155ad.2
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:06:04 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-22423adf751so55556885ad.2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:06:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741608363; x=1742213163; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741608365; x=1742213165; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wgzRglZe+WEvx4snOm2o837bxMQJqq2MtbTBB7qn9BY=;
- b=AKQg2UbXvGjBuBHuXn+DVEmtSUbyW2lwF/nQDxX5URIoitdFtEZXqHEXmZVi8OuPJ5
- gmLsj1j/asumy2MF4oOROFyig48ghuXqaogEnSKCPW4YDj+40FHb/kFT3GDeEfdStJj8
- TFzUUdCgGhhqd/hWiaXpSNp4BUM7LZ48/L+XiJn1R9yH/j1DzwQwKq8ayNe6F9Ipi9zt
- 2A3yl3Y2dNJDrZ4t2RDR7VFutmssBvAQY/WBt/M8B49GIjwwI+9zT9UhVfQQ1N2uE9Pz
- 24VRqlK5aOEakxs0jeaGJQIejtAsdqSpFbSo+2BjFd6E2DMYnvP5K22meRPTgEj+8M/G
- 1uzQ==
+ bh=kE5AAvBpr42KcArcvaGjq0Lp5nYWyY2ew4PfgolOQ14=;
+ b=fgOjfITrgIBgkIyt168FtQD3A9JA8C99g78yXSCYjlsLtZZUZPqZe31gdISJXR91BP
+ sgKyiIh0ItdcjhOezwNtzd30qesv3SJQ6V7CUMr081ov2TZR4mDu2WVZ6jfYjuelCmn1
+ AbUgd3TK3YAX7hr39lZAbPLatN00ZEm3ckwiPcfydKc8/234H3+1owkgKk9MuzxZme9V
+ 4SECbnxtSpqSLalHMoVpaZfmKvLjcAP1oNcj9CguFyeGOzDOuL/HUAMBfM6x3JsMdfpD
+ 0SxEWczvvezo9fcq2UGhbQqaoDew5XsYo+OLm3J/fKPsB1cJb604984I+RmKOsJWmK1b
+ y/Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741608363; x=1742213163;
+ d=1e100.net; s=20230601; t=1741608365; x=1742213165;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wgzRglZe+WEvx4snOm2o837bxMQJqq2MtbTBB7qn9BY=;
- b=cvkPFHoRCWhsy5C6dlsBO57t0s9rM+xdZg3P0rdD9QZunEK++5AlW96Z8smjMaXLf2
- /Oq6GVecp5KRpwqbBrpySzpB4mVeGOUGoo7SKHn3/aBt/0vxmX43b1arsNHMUFw6oAWN
- ucvRHjHLddrSo9uOc6MNtkkfaFjOoE3mBy2FusXbMC0T0TGpuqozxguQBTTzRSb+VlSe
- vn1tr7WUW4vetqqJTpqBnK+hJxlOmeU/Jmagz2CcJt556sTojCM8/ueBiRwzpJzITdpo
- iHb49rc6Fom6bVDFJIbQbii2QAGjnNSBD3ZZjj7A3VWrDWjZzxmdxGUlX+K7lF45AdgT
- Hofg==
-X-Gm-Message-State: AOJu0YyEC05uc7jt/IUwAgYV8+vQ4S27goyTZOkncLyOPbazoZYt+8eR
- BaDrAZ3uvYMdK9ZlT5WAB68c6mF5GXCeL94zQajRnYQN7jqQAMU+Ol+GOlR/0P0=
-X-Gm-Gg: ASbGnctb0Bo1bxv3+x2i3oYxzZJ1F4q8gDwkarotRB0vjrXscEdpDDLWZm7lK7Q6na/
- DJ2PXR0oIORt3g6wwkfgXK6RYSQ4VNTHYal6dPWfO0hSOIGgcoW3m2JXba6qBT7lFYbrMhTMIIM
- PNRR7Y1sIW+946YNqyxCPpW+12WEFeP6Qs+TLWwVUucWS9AGn/vFhho8v/B78CgdSBcA+IMXsIo
- 9QXbnisUM/52Hmu60x7KMKWqwVOhzjFRGuR6slcrQWrV0tOKSTrNHqTOx5ISeNGevdlxylA2h8k
- 38UvUzwjBZ+z0bqTUfhqnuAQcxIk9yf6Va6wHq3iTZ2WAnMnoPB35RI=
-X-Google-Smtp-Source: AGHT+IHBZ+rXnBdClRdMgnG0NZ761Bz1I+HmeqQa6LtNha6EyIwOCaEYDwKTgux4/F5g8VVfFh/xHQ==
-X-Received: by 2002:a17:902:ce89:b0:21f:164d:93fe with SMTP id
- d9443c01a7336-22428c0d524mr209012235ad.53.1741608363236; 
- Mon, 10 Mar 2025 05:06:03 -0700 (PDT)
+ bh=kE5AAvBpr42KcArcvaGjq0Lp5nYWyY2ew4PfgolOQ14=;
+ b=CKZ9py7osbUz5CA+ESCvho5TiY8IOAwUkv527MxRHMGO/5OGtzVsI+fr7opHWon5XN
+ gwQABOGgqLWjwgWwSmx0M2upSbald+cvBCQdbOOJRkN/oi2Uix8o/fZcFPK9GmeQVd4H
+ /BxwkIS01hNNwzjLlc5BEiILTKVHpDXAmQ2Jcf3/TFrCtG7WcXNNyawuzd8cbSz6T2qb
+ DVWeJEcS/hiFIJlkt4rA2n7R+wCgo4AXKvgkNUAxWs4VHfAto7HnmIgCVyWSRIfiB54r
+ RShCVDi2HwnVMuzmK8aRupClU2x94G3dZtlAD0u6UY7cjMC0acS8m3enPidFQAcBjRsd
+ o9KQ==
+X-Gm-Message-State: AOJu0Yxy84kMg9wUV7n039cjNRtd65aRYBBbTLzJU+ycFZwnFIelu6ZL
+ +RQVSzW7Ld1CtCcRBNzv95igEKpP58B+CP/MrQcUNNDSnzlvelKTMuFSl2Aqeio=
+X-Gm-Gg: ASbGncv0MSUgbzO5R4MXe7qqA8BZiEFxGnzdDQV7HF0eRhXxfwYkHbgF0xgE9ioxugO
+ TOUpeLeZl9Las/2mC6rtXi+J/VPoJF4YtaBf8d8ina1lWq4qdZS9GUGMHdyUzpfwXQi5m3s3Mq2
+ IoCMNH0tufZ5BOXE8QfFlR6jGKqm5QNFEMBTP4d24rZe42TbVirx8hoLouibIjlRpCHwIhBte9t
+ D9ZcFstE7khpSy9LyIhsprmol3vQz4i9L2EK7oJYTu1ck6iTItNwEKxZkB7E3p5XsflQiG1dcTk
+ SuHo/bSGW3yJ8AAcjcOfIn0XwTKgPXuQpkmyrnQDjRf/x2IvVPYqfiw=
+X-Google-Smtp-Source: AGHT+IFDR7zP0ZAUlg1aAYMzpLnWYcQ+1ssb2gUCPuM5MEmAYK+tYSCg8QNI2ihfO/s4xX5eez93fw==
+X-Received: by 2002:a05:6a00:2351:b0:736:65c9:9187 with SMTP id
+ d2e1a72fcca58-736aa9db600mr17739730b3a.9.1741608365363; 
+ Mon, 10 Mar 2025 05:06:05 -0700 (PDT)
 Received: from adriano.. ([190.215.89.187]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736a8b61f76sm6968899b3a.103.2025.03.10.05.06.01
+ d2e1a72fcca58-736a8b61f76sm6968899b3a.103.2025.03.10.05.06.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 05:06:02 -0700 (PDT)
+ Mon, 10 Mar 2025 05:06:04 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v3 2/8] efi_loader: expose symbols to be used by the EFI
- network stack
-Date: Mon, 10 Mar 2025 09:06:01 -0300
-Message-ID: <20250310120607.186999-2-adriano.cordova@canonical.com>
+Subject: [PATCH v3 3/8] efi_loader: efi_setup: Add efi_start_obj_list() to
+ efi_setup.c
+Date: Mon, 10 Mar 2025 09:06:02 -0300
+Message-ID: <20250310120607.186999-3-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250310120607.186999-1-adriano.cordova@canonical.com>
 References: <20250310120607.186999-1-adriano.cordova@canonical.com>
@@ -99,194 +99,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following symbols are exposed:
-	- efi_reinstall_protocol_interface
-		This is done so that the device path protocol interface
-		of the network device can be changed internally by u-boot
-		when a new bootfile gets downloaded.
-	- eth_set_dev
-		To support multiple network udevices
-	- efi_close_event
-		This comes in preparation to support unregistering
-		an EFI network device from the EFI network stack when
-		the underlying U-boot device gets removed
-	- efi_[dis]connect_controller
-		The EFI network driver uses ConnectController to add a
-		NIC to the EFI network stack.
-	- efi_uninstall_protocol_interface
-		connect_controler for the efi network driver can install
-		protocols, which need to be uninstalled in disconnect_controller
-	- EFI_SIMPLE_NETWORK_PROTOCOL_GUID
+The coomand bootefi calls efi_init_obj_list to do the efi set up
+before launching an .efi payload, but efi_init_obj_list is called
+only once. There are some initializations which depend on the
+environment and should be done each time a payload gets launched and
+not only once. A motivation for this changes is the following order
+of events:
+
+1. Launch an EFI application (e.g. bootefi hello)
+2. Change the ip address
+3. Launch another application which uses the pxe protocol
+
+As the EFI pxe protocol was initialized when the handles
+for efi net were created in 1., the ip was hardcoded there.
+
+In this example, another possibility would be to make a callback for ip
+address changes to go all the way up to efi_net.
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
 
 (no changes since v1)
 
- include/efi_loader.h                | 17 +++++++++++++++++
- include/net-common.h                |  1 +
- lib/efi_loader/efi_boottime.c       | 21 ++++++++++-----------
- lib/efi_loader/efi_net.c            |  2 +-
- lib/efi_selftest/efi_selftest_snp.c |  1 -
- 5 files changed, 29 insertions(+), 13 deletions(-)
+ lib/efi_loader/efi_setup.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 1d75d97ebbc..6a17a41dbad 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -321,6 +321,8 @@ extern const efi_guid_t efi_guid_host_dev;
- #endif
- /* GUID of the EFI_BLOCK_IO_PROTOCOL */
- extern const efi_guid_t efi_block_io_guid;
-+/* GUID of the EFI_SIMPLE_NETWORK_PROTOCOL */
-+extern const efi_guid_t efi_net_guid;
- extern const efi_guid_t efi_global_variable_guid;
- extern const efi_guid_t efi_guid_console_control;
- extern const efi_guid_t efi_guid_device_path;
-@@ -733,6 +735,10 @@ efi_status_t efi_search_protocol(const efi_handle_t handle,
- efi_status_t efi_add_protocol(const efi_handle_t handle,
- 			      const efi_guid_t *protocol,
- 			      void *protocol_interface);
-+/* Uninstall new protocol on a handle */
-+efi_status_t efi_uninstall_protocol
-+		(efi_handle_t handle, const efi_guid_t *protocol,
-+		 void *protocol_interface, bool preserve);
- /* Reinstall a protocol on a handle */
- efi_status_t EFIAPI efi_reinstall_protocol_interface(
- 			efi_handle_t handle,
-@@ -748,6 +754,15 @@ efi_status_t EFIAPI
- efi_install_multiple_protocol_interfaces(efi_handle_t *handle, ...);
- efi_status_t EFIAPI
- efi_uninstall_multiple_protocol_interfaces(efi_handle_t handle, ...);
-+/* Connect and disconnect controller */
-+efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
-+					   efi_handle_t *driver_image_handle,
-+					   struct efi_device_path *remain_device_path,
-+					   bool recursive);
-+efi_status_t EFIAPI efi_disconnect_controller(
-+					efi_handle_t controller_handle,
-+					efi_handle_t driver_image_handle,
-+					efi_handle_t child_handle);
- /* Get handles that support a given protocol */
- efi_status_t EFIAPI efi_locate_handle_buffer(
- 			enum efi_locate_search_type search_type,
-@@ -768,6 +783,8 @@ efi_status_t efi_create_event(uint32_t type, efi_uintn_t notify_tpl,
- 					void *context),
- 			      void *notify_context, const efi_guid_t *group,
- 			      struct efi_event **event);
-+/* Call this to close an event */
-+efi_status_t EFIAPI efi_close_event(struct efi_event *event);
- /* Call this to set a timer */
- efi_status_t efi_set_timer(struct efi_event *event, enum efi_timer_delay type,
- 			   uint64_t trigger_time);
-diff --git a/include/net-common.h b/include/net-common.h
-index 29d31f37263..1d507b13b06 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -291,6 +291,7 @@ struct eth_ops {
- #define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index aa59bc7779d..164586742ae 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -12,6 +12,7 @@
+ #include <log.h>
+ #include <asm-generic/unaligned.h>
  
- struct udevice *eth_get_dev(void); /* get the current device */
-+void eth_set_dev(struct udevice *dev); /* set a device */
- unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
- int eth_rx(void);                      /* Check for received packets */
- void eth_halt(void);			/* stop SCC */
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 5164cb15986..02ad9f7141f 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -60,9 +60,9 @@ static efi_handle_t current_image;
- static volatile gd_t *efi_gd, *app_gd;
- #endif
++#define OBJ_LIST_INITIALIZED 0
+ #define OBJ_LIST_NOT_INITIALIZED 1
  
--static efi_status_t efi_uninstall_protocol
--			(efi_handle_t handle, const efi_guid_t *protocol,
--			 void *protocol_interface, bool preserve);
-+efi_status_t efi_uninstall_protocol
-+		(efi_handle_t handle, const efi_guid_t *protocol,
-+		 void *protocol_interface, bool preserve);
+ efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+@@ -208,6 +209,18 @@ out:
+ 	return -1;
+ }
  
- /* 1 if inside U-Boot code, 0 if inside EFI payload code */
- static int entry_count = 1;
-@@ -100,12 +100,11 @@ const efi_guid_t efi_guid_load_file2_protocol = EFI_LOAD_FILE2_PROTOCOL_GUID;
- /* GUID of the SMBIOS table */
- const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
- 
--static efi_status_t EFIAPI efi_disconnect_controller(
-+efi_status_t EFIAPI efi_disconnect_controller(
- 					efi_handle_t controller_handle,
- 					efi_handle_t driver_image_handle,
- 					efi_handle_t child_handle);
- 
--static
- efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
- 					   efi_handle_t *driver_image_handle,
- 					   struct efi_device_path *remain_device_path,
-@@ -1039,7 +1038,7 @@ static efi_status_t EFIAPI efi_signal_event_ext(struct efi_event *event)
++/**
++ * efi_start_obj_list() - Start EFI object list
++ *
++ * Return:	status code
++ */
++static efi_status_t efi_start_obj_list(void)
++{
++	efi_status_t ret = EFI_SUCCESS;
++
++	return ret;
++}
++
+ /**
+  * efi_init_obj_list() - Initialize and populate EFI object list
   *
-  * Return: status code
-  */
--static efi_status_t EFIAPI efi_close_event(struct efi_event *event)
-+efi_status_t EFIAPI efi_close_event(struct efi_event *event)
+@@ -217,7 +230,9 @@ efi_status_t efi_init_obj_list(void)
  {
- 	struct efi_register_notify_event *item, *next;
+ 	efi_status_t ret = EFI_SUCCESS;
  
-@@ -1380,9 +1379,9 @@ static efi_status_t efi_disconnect_all_drivers
-  *
-  * Return: status code
-  */
--static efi_status_t efi_uninstall_protocol
--			(efi_handle_t handle, const efi_guid_t *protocol,
--			 void *protocol_interface, bool preserve)
-+efi_status_t efi_uninstall_protocol
-+		(efi_handle_t handle, const efi_guid_t *protocol,
-+			void *protocol_interface, bool preserve)
- {
- 	struct efi_handler *handler;
- 	struct efi_open_protocol_info_item *item;
-@@ -3665,7 +3664,7 @@ static efi_status_t efi_connect_single_controller(
-  *
-  * Return: status code
-  */
--static efi_status_t EFIAPI efi_connect_controller(
-+efi_status_t EFIAPI efi_connect_controller(
- 			efi_handle_t controller_handle,
- 			efi_handle_t *driver_image_handle,
- 			struct efi_device_path *remain_device_path,
-@@ -3844,7 +3843,7 @@ static efi_status_t efi_get_child_controllers(
-  *
-  * Return: status code
-  */
--static efi_status_t EFIAPI efi_disconnect_controller(
-+efi_status_t EFIAPI efi_disconnect_controller(
- 				efi_handle_t controller_handle,
- 				efi_handle_t driver_image_handle,
- 				efi_handle_t child_handle)
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index ce9272fa240..a48402d49d4 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -24,7 +24,7 @@
- #include <vsprintf.h>
- #include <net.h>
+-	/* Initialize once only */
++	/* Initialize only once, but start every time if correctly initialized*/
++	if (efi_obj_list_initialized == OBJ_LIST_INITIALIZED)
++		return efi_start_obj_list();
+ 	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
+ 		return efi_obj_list_initialized;
  
--static const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
-+const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
- static const efi_guid_t efi_pxe_base_code_protocol_guid =
- 					EFI_PXE_BASE_CODE_PROTOCOL_GUID;
- static struct efi_pxe_packet *dhcp_ack;
-diff --git a/lib/efi_selftest/efi_selftest_snp.c b/lib/efi_selftest/efi_selftest_snp.c
-index 15af8d3e18c..b00c76c2f17 100644
---- a/lib/efi_selftest/efi_selftest_snp.c
-+++ b/lib/efi_selftest/efi_selftest_snp.c
-@@ -67,7 +67,6 @@ struct dhcp {
- static struct efi_boot_services *boottime;
- static struct efi_simple_network *net;
- static struct efi_event *timer;
--static const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
- /* IP packet ID */
- static unsigned int net_ip_id;
- 
+@@ -349,6 +364,10 @@ efi_status_t efi_init_obj_list(void)
+ 	if (IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK) &&
+ 	    !IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK_EARLY))
+ 		ret = efi_launch_capsules();
++	if (ret != EFI_SUCCESS)
++		goto out;
++
++	ret = efi_start_obj_list();
+ out:
+ 	efi_obj_list_initialized = ret;
+ 	return ret;
 -- 
 2.48.1
 
