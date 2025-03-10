@@ -4,88 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2F5C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 09:02:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ACD1C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 09:16:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E3338164D;
-	Mon, 10 Mar 2025 10:01:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id F0A8B812C8;
+	Mon, 10 Mar 2025 10:16:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=icenowy.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="bynihoYH";
+	dkim=pass (2048-bit key; unprotected) header.d=icenowy.me header.i=uwu@icenowy.me header.b="bMekBTLC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C48B80017; Mon, 10 Mar 2025 10:01:49 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CA666812D9; Mon, 10 Mar 2025 10:16:35 +0100 (CET)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17BDD81417
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 10:01:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id A6DEB8129F
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 10:16:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-abf3d64849dso474045666b.3
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 02:01:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1741597306; x=1742202106; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lptYdQWjxqaw9JeiF23UzRatCTLwtupvJCE94PjKlhc=;
- b=bynihoYHMdRz9ledEWM7WN9rBVx751+7fnUULoIRYauKeDxkkkHRFmNRM7FdWsK63i
- gEdQANevm77zdz6KbNbSrMpJWIlwkF60aL7VZ/WbXJxAUEpI1R5ONMj49W8U0HQwv2sj
- pUFdLd322QMNAeCoa4UCTxpIEbV2jdTy5ggQ+g4Azya6arjHYnrl2rfJAdyDtwkPeOUk
- /oRJYXDZuLn5kwOOeLkOkKuMHayfJOWZfLaJCWneRM0EHZzNSn/K+oLOwl9/NNTa/6DE
- NZP+6mWuNZtXJct27wFyo9R+gzvwrxZE+mpQs/OaXDBl65LakXO9/2wBkR+86l68Au3R
- W5kA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741597306; x=1742202106;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lptYdQWjxqaw9JeiF23UzRatCTLwtupvJCE94PjKlhc=;
- b=ZXXIipuqVFj7yrNYqpRx0b1OnIdcP8kAwNY9RjjVDApaZXuFywZyj8s8+SJMiw1LbZ
- vcKn0B66/CWJULLA6XUlJU5JGYiU1mqoFlFTNtFfN4g2WSRpC3QIbW60wcLMRtxaZbvS
- XZ2Ts4ACib51faJ+X6gUPv65hid064cG4uB0MEo1KmnvaiFwWbkqLzoRhvK0B3QIXo4B
- VvfCCYVno0uS9I16NmSvh3PpCuVwRcyoW0rvf1zpvk5OzOu1GiYXscBGG68kEXhdMtIt
- gpPL8Q7CE5doXvMNqHUkpGs/+xQy9L73jUB2tX7oD1rivD+mGYUCsKNMPNUC1qvN9+va
- k4sQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYUvW/XjobSiWPeD21PpsuvAvH/1KDZlq9eg+xHe8+NVE6pd6rBjQyB27ovazmrqsH9yfULso=@lists.denx.de
-X-Gm-Message-State: AOJu0YyUEBe8/Naen1+2HdjjmZJ3Oja3PHJComq1vnpwC32Pd16TzMtc
- e1o0zSV2jbrZXHhVWW7f7KWpfRCZS5Kt1IVHMXgkc6efUsTDkFXCGZ9ytUYkr7vKkBsRTxImcxU
- Gj24=
-X-Gm-Gg: ASbGncvVKRa9Jy/pSxSqieM++i2wvL5TZlzDVsLGYDBSo6R/Bw5kHM5e3SYK7w4Dft6
- oALP+H03WFr9V17Q/HyWfPp4axYnWKX4ECqDaIohp6I3dx4/BfOtfG1UzaEGmoCUiaEUlUfhuw4
- a1uSPwgI6wv5D+37VHhPPGtfH3piAiJfmO3E885u5hhcfxMZJWfWtiLj8ON/kJPvIRRW0+oF3KI
- 4N/0odBPS4FY6rdfG+5aB8ir023W4xI1NdArNBEXSR3qOnIc9PiCDvKk222YMOWLSIoE986pcVU
- QQcN+wJtH9Hsf3mXIEjbR8aj1BhD9/L5ObLFx7GitZYNph6/Y3FDR5RsGkzLyKdewlJGX4rJNWH
- jdAQj6wEnebuleNfiD6C8q9huYbmvWnlMTB2g/aIcS70=
-X-Google-Smtp-Source: AGHT+IEMYEvyfKWVSvaaKbc4GwKDHFAZ1fLKwQnC148C+e7EdcgYreEHNEgYDyUQEkYwxXdvwpo5tw==
-X-Received: by 2002:a05:6402:5201:b0:5df:6a:54ea with SMTP id
- 4fb4d7f45d1cf-5e5e22b92e8mr32831323a12.11.1741597306527; 
- Mon, 10 Mar 2025 02:01:46 -0700 (PDT)
-Received: from fedora.sec.9e.network
- (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c74a7184sm6578082a12.34.2025.03.10.02.01.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 02:01:45 -0700 (PDT)
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
-	u-boot@lists.denx.de
-Subject: [RESEND PATCH 3/3] emulation: qemu-sbsa: Enable PCI enumeration
-Date: Mon, 10 Mar 2025 10:01:34 +0100
-Message-ID: <20250310090137.1645083-3-patrick.rudolph@9elements.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250310090137.1645083-1-patrick.rudolph@9elements.com>
-References: <20250310090137.1645083-1-patrick.rudolph@9elements.com>
+ dmarc=pass (p=none dis=none) header.from=icenowy.me
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=uwu@icenowy.me
+ARC-Seal: i=1; a=rsa-sha256; t=1741598187; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=JnXIElBrhxld/OxIgMq5ru+g03VC6LPVlWou+AaAYMJf8/rSIQzcJUDNUGkEkWODW4K1Iv/hKETx9OlviRMyHiNmLSKtd/L4lgIhms/y9BPotoZ/YX74v6vja0jnwCG7fHKAvvbCogmdIsC+MwgGP/pjlhqZ9P6z8Y7eo2y06HU=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1741598187;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=LIsNC0d0+vMPzVLhQsuXvCpcApfcbeBCFsHnT4lffgI=; 
+ b=QRSaa79EVuEH5OX58kpMSaTuFEiaP8tQDyRInCG7xDoHj3WJA+lpqbR/RwsOQYFyUiIEGVsQQvRuJBNG0kwiHI3NrEWpyud7dYFoaDWXO6Md0p6tuBa92vCpi7CstGaXUYrdQgI38bsvURGTQquscZWZWI63CBlbqY8bPNZhzJg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=icenowy.me;
+ spf=pass  smtp.mailfrom=uwu@icenowy.me;
+ dmarc=pass header.from=<uwu@icenowy.me>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1741598187; 
+ s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
+ h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
+ bh=LIsNC0d0+vMPzVLhQsuXvCpcApfcbeBCFsHnT4lffgI=;
+ b=bMekBTLCC/pQTrrbhIyDC5qGaXkViK4Y9TRz2R+KOFtz0RVkJn4VZOUEzvADiwcG
+ SdwKHCM+6FhFspPWK3fgmNuYPtq7Gp85LsFAm5hbKthu7syOnCo12zU1zaMeznF4B9q
+ YdoT4xwPzTfCPHSCPJm25l946mChsUwJEg1vIXkTYasTV3CpymPcjo9KX8Kre/Slfbi
+ LpYuyTKJfw6FJvS2RLOInG7eB/KEidZ15DrFtT1WOXS+lguYmd03WlI2FgNNgvFRITd
+ 7ufjhiz2vXHqj89P/ien3wT6eyn4rHk6BdFF/tZn4D3R259eCFNEk41ukWvZ8Ck0X4/
+ JKxoEampEA==
+Received: by mx.zohomail.com with SMTPS id 1741598184307212.35897077943946;
+ Mon, 10 Mar 2025 02:16:24 -0700 (PDT)
+Message-ID: <271b604cc5d4e8f145651f7c327ddeb50e2945d8.camel@icenowy.me>
+Subject: Re: [PATCH 1/2] sunxi: h616: dram: Rework size detection
+From: Icenowy Zheng <uwu@icenowy.me>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>, jagan@amarulasolutions.com, 
+ andre.przywara@arm.com, trini@konsulko.com
+Cc: macromorgan@hotmail.com, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Date: Mon, 10 Mar 2025 17:16:16 +0800
+In-Reply-To: <20250309063143.62859-2-jernej.skrabec@gmail.com>
+References: <20250309063143.62859-1-jernej.skrabec@gmail.com>
+ <20250309063143.62859-2-jernej.skrabec@gmail.com>
+Organization: Anthon Open-Source Community
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+User-Agent: Evolution 3.44.4 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,30 +81,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable PCI enumeration by default to get the Bochs display driver up
-and running before the boot medium is scanned.
-This is just to enhance the user-experience while booting the machine.
-
-TEST: U-Boot logo, version, log output and the U-Boot shell is visible
-      on the display device.
-
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
----
- board/emulation/qemu-sbsa/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/board/emulation/qemu-sbsa/Kconfig b/board/emulation/qemu-sbsa/Kconfig
-index f4ad63e681c..728cecae6b3 100644
---- a/board/emulation/qemu-sbsa/Kconfig
-+++ b/board/emulation/qemu-sbsa/Kconfig
-@@ -49,6 +49,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
- 	imply CFI_FLASH
- 	imply SYS_MTDPARTS_RUNTIME
- 	imply SET_DFU_ALT_INFO
-+	imply PCI_INIT_R
- 
- if DEBUG_UART
- 
--- 
-2.48.1
+5ZyoIDIwMjUtMDMtMDnmmJ/mnJ/ml6XnmoQgMDc6MzEgKzAxMDDvvIxKZXJuZWogU2tyYWJlY+WG
+memBk++8mgo+IFNpbmNlIHRoZXJlIGlzIHF1aXRlIGEgZmV3IHBvc3NpYmxlIERSQU0gY29uZmln
+dXJhdGlvbnMgaW4gdGVybXMgb2YKPiBidXMKPiB3aWR0aCwgcmFuayBhbmQgcm93cyBhbmQgY29s
+dW1ucyBjb3VudCwgc2l6ZSBkZXRlY3Rpb24gYWxnb3JpdGhtIG11c3QKPiBiZQo+IHZlcnkgY2Fy
+ZWZ1bCBub3QgdG8gdGVzdCBjb21iaW5hdGlvbiB3aGljaCB3b3VsZCBiZSBiaWdnZXIgdGhhbiBI
+NjE2Cj4gaXMKPiBhY3R1YWxseSBjYXBhYmxlIG9mIGhhbmRsaW5nLgo+IAo+IElkZWFsbHksIHdl
+IHNob3VsZCBhbHdheXMgZGV0ZWN0IG1lbW9yeSBhbGlhc2luZywgZXZlbiBmb3IgNCBHQgo+IG1l
+bW9yeQo+IHNpemUsIHdoaWNoIGlzIHRoZSBtYXhpbXVtIGFtb3VudCBvZiBtZW1vcnkgdGhhdCBI
+NjE2IGlzIGNhcGFibGUgb2YKPiBoYW5kbGluZy4gRm9yIHRoaXMgcmVhc29uLCB3ZSBoYXZlIHRv
+IGNvbmZpZ3VyZSBtaW5pbXVtIGFtb3VudCBvZgo+IHN1cHBvcnRlZCByb3dzIHdoZW4gdGVzdGlu
+ZyBmb3IgY29sdW1ucyBhbmQgdmljZSB2ZXJzYS4gVGhpcyB3YXkgdGVzdAo+IGNvZGUgd2lsbCBu
+ZXZlciBzdGVwIG91dCBvZiA0IEdCIGJvdW5kYXJ5LgoKVGhpcyBpcyBhbHNvIHRoZSBiZWhhdmlv
+ciBvZiBwcmV2aW91cyBEUkFNIGRyaXZlcnMuCgo+IAo+IFdoaWxlIGF0IGl0LCBjaGVjayBmb3Ig
+MTcgcm93cyBtYXhpbXVtLiBUaGlzIGFsaWducyBjb2RlIHdpdGggQlNQCj4gRFJBTQo+IGRyaXZl
+ci4gVGhlcmUgaXMgcHJvYmFibHkgbm8gc3VjaCBjb25maWd1cmF0aW9uIHdoaWNoIHdvdWxkIG1h
+a2UKPiBzZW5zZQo+IHdpdGggNCBHQiBtZW1vcnkuCgpJIGNoZWNrZWQgdGhlIEpFREVDIEpFU0Q3
+OS00RCBkb2N1bWVudCwgYW5kIGZvdW5kIHRoYXQgMTggcm93cyBhcmUgb25seQphdmFpbGFibGUg
+Zm9yIHg0IGRpZXMsIHdoaWNoIGFyZSBub3QgY29tcGF0aWJsZSB3aXRoIHRoZXNlIEFsbHdpbm5l
+cgpTb0NzIGF0IGFsbCAobm90IGVub3VnaCBEUVMgcGlucykuCgpSZXZpZXdlZC1ieTogSWNlbm93
+eSBaaGVuZyA8dXd1QGljZW5vd3kubWU+Cgo+IAo+IFNpZ25lZC1vZmYtYnk6IEplcm5laiBTa3Jh
+YmVjIDxqZXJuZWouc2tyYWJlY0BnbWFpbC5jb20+Cj4gLS0tCj4gwqBhcmNoL2FybS9tYWNoLXN1
+bnhpL2RyYW1fc3VuNTBpX2g2MTYuYyB8IDIwICsrKysrKysrKysrKy0tLS0tLS0tCj4gwqAxIGZp
+bGUgY2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0t
+Z2l0IGEvYXJjaC9hcm0vbWFjaC1zdW54aS9kcmFtX3N1bjUwaV9oNjE2LmMgYi9hcmNoL2FybS9t
+YWNoLQo+IHN1bnhpL2RyYW1fc3VuNTBpX2g2MTYuYwo+IGluZGV4IGIzNTU0Y2M2NGJmNS4uNmY4
+NGU1OWUzOWNkIDEwMDY0NAo+IC0tLSBhL2FyY2gvYXJtL21hY2gtc3VueGkvZHJhbV9zdW41MGlf
+aDYxNi5jCj4gKysrIGIvYXJjaC9hcm0vbWFjaC1zdW54aS9kcmFtX3N1bjUwaV9oNjE2LmMKPiBA
+QCAtMTM2Myw3ICsxMzYzLDcgQEAgc3RhdGljIHZvaWQgbWN0bF9hdXRvX2RldGVjdF9yYW5rX3dp
+ZHRoKGNvbnN0Cj4gc3RydWN0IGRyYW1fcGFyYSAqcGFyYSwKPiDCoHN0YXRpYyB2b2lkIG1jdGxf
+YXV0b19kZXRlY3RfZHJhbV9zaXplKGNvbnN0IHN0cnVjdCBkcmFtX3BhcmEgKnBhcmEsCj4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZHJhbV9jb25maWcgKmNvbmZpZykKPiDCoHsKPiAtwqDC
+oMKgwqDCoMKgwqB1bnNpZ25lZCBpbnQgc2hpZnQ7Cj4gK8KgwqDCoMKgwqDCoMKgdW5zaWduZWQg
+aW50IHNoaWZ0LCBjb2xzLCByb3dzOwo+IMKgCj4gwqDCoMKgwqDCoMKgwqDCoC8qIG1heC4gY29u
+ZmlnIGZvciBjb2x1bW5zLCBidXQgbm90IHJvd3MgKi8KPiDCoMKgwqDCoMKgwqDCoMKgY29uZmln
+LT5jb2xzID0gMTE7Cj4gQEAgLTEzNzMsMjMgKzEzNzMsMjcgQEAgc3RhdGljIHZvaWQgbWN0bF9h
+dXRvX2RldGVjdF9kcmFtX3NpemUoY29uc3QKPiBzdHJ1Y3QgZHJhbV9wYXJhICpwYXJhLAo+IMKg
+wqDCoMKgwqDCoMKgwqBzaGlmdCA9IGNvbmZpZy0+YnVzX2Z1bGxfd2lkdGggKyAxOwo+IMKgCj4g
+wqDCoMKgwqDCoMKgwqDCoC8qIGRldGVjdCBjb2x1bW4gYWRkcmVzcyBiaXRzICovCj4gLcKgwqDC
+oMKgwqDCoMKgZm9yIChjb25maWctPmNvbHMgPSA4OyBjb25maWctPmNvbHMgPCAxMTsgY29uZmln
+LT5jb2xzKyspIHsKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKG1jdGxfbWVt
+X21hdGNoZXMoMVVMTCA8PCAoY29uZmlnLT5jb2xzICsgc2hpZnQpKSkKPiArwqDCoMKgwqDCoMKg
+wqBmb3IgKGNvbHMgPSA4OyBjb2xzIDwgMTE7IGNvbHMrKykgewo+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqBpZiAobWN0bF9tZW1fbWF0Y2hlcygxVUxMIDw8IChjb2xzICsgc2hpZnQp
+KSkKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBicmVh
+azsKPiDCoMKgwqDCoMKgwqDCoMKgfQo+IC3CoMKgwqDCoMKgwqDCoGRlYnVnKCJkZXRlY3RlZCAl
+dSBjb2x1bW5zXG4iLCBjb25maWctPmNvbHMpOwo+ICvCoMKgwqDCoMKgwqDCoGRlYnVnKCJkZXRl
+Y3RlZCAldSBjb2x1bW5zXG4iLCBjb2xzKTsKPiDCoAo+IMKgwqDCoMKgwqDCoMKgwqAvKiByZWNv
+bmZpZ3VyZSB0byBtYWtlIHN1cmUgdGhhdCBhbGwgYWN0aXZlIHJvd3MgYXJlCj4gYWNjZXNzaWJs
+ZSAqLwo+IC3CoMKgwqDCoMKgwqDCoGNvbmZpZy0+cm93cyA9IDE4Owo+ICvCoMKgwqDCoMKgwqDC
+oGNvbmZpZy0+Y29scyA9IDg7Cj4gK8KgwqDCoMKgwqDCoMKgY29uZmlnLT5yb3dzID0gMTc7Cj4g
+wqDCoMKgwqDCoMKgwqDCoG1jdGxfY29yZV9pbml0KHBhcmEsIGNvbmZpZyk7Cj4gwqAKPiDCoMKg
+wqDCoMKgwqDCoMKgLyogZGV0ZWN0IHJvdyBhZGRyZXNzIGJpdHMgKi8KPiDCoMKgwqDCoMKgwqDC
+oMKgc2hpZnQgPSBjb25maWctPmJ1c19mdWxsX3dpZHRoICsgNCArIGNvbmZpZy0+Y29sczsKPiAt
+wqDCoMKgwqDCoMKgwqBmb3IgKGNvbmZpZy0+cm93cyA9IDEzOyBjb25maWctPnJvd3MgPCAxODsg
+Y29uZmlnLT5yb3dzKyspIHsKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKG1j
+dGxfbWVtX21hdGNoZXMoMVVMTCA8PCAoY29uZmlnLT5yb3dzICsgc2hpZnQpKSkKPiArwqDCoMKg
+wqDCoMKgwqBmb3IgKHJvd3MgPSAxMzsgcm93cyA8IDE3OyByb3dzKyspIHsKPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKG1jdGxfbWVtX21hdGNoZXMoMVVMTCA8PCAocm93cyAr
+IHNoaWZ0KSkpCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgYnJlYWs7Cj4gwqDCoMKgwqDCoMKgwqDCoH0KPiAtwqDCoMKgwqDCoMKgwqBkZWJ1ZygiZGV0
+ZWN0ZWQgJXUgcm93c1xuIiwgY29uZmlnLT5yb3dzKTsKPiArwqDCoMKgwqDCoMKgwqBkZWJ1Zygi
+ZGV0ZWN0ZWQgJXUgcm93c1xuIiwgcm93cyk7Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoGNvbmZpZy0+
+Y29scyA9IGNvbHM7Cj4gK8KgwqDCoMKgwqDCoMKgY29uZmlnLT5yb3dzID0gcm93czsKPiDCoH0K
+PiDCoAo+IMKgc3RhdGljIHVuc2lnbmVkIGxvbmcgbWN0bF9jYWxjX3NpemUoY29uc3Qgc3RydWN0
+IGRyYW1fY29uZmlnCj4gKmNvbmZpZykKCg==
 
