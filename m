@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B8CC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 13:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C29C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 13:56:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9B0B8144F;
-	Mon, 10 Mar 2025 14:56:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5237B817A5;
+	Mon, 10 Mar 2025 14:56:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IV8dV+9i";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SqPt4Uh/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE25881703; Mon, 10 Mar 2025 14:56:04 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 4D5B181703; Mon, 10 Mar 2025 14:56:12 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B2888141D
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 14:56:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEAB88141D
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 14:56:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2240b4de12bso68198055ad.2
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 06:56:02 -0700 (PDT)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2239c066347so71328245ad.2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 06:56:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741614961; x=1742219761; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741614968; x=1742219768; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9rj1laawougBTViAuEEsATeo1cYVbI6lIsgSPR2Wo0s=;
- b=IV8dV+9iptuQ0oGtXQNeNDV+whZzu3xJuHZDu+z/KCA12c8yFR+GPVs9DNvNQLqpLU
- DvVtzNq2nwVF3vr6tObABd7f9JU0x39MFxFY7IbGmflzHoBkfESn6kFl3PFgU+zUANfW
- H3dq5R4LEG9ay2WFsR/QP4zywta8NwaMLqwEk=
+ bh=fR4wVsXBbZy67PyzcfdNjd8NEXrFo/+XoYrLmnoVLv0=;
+ b=SqPt4Uh/AusvDJyph9i1tbTzekJb+bPpar9pr1w1u7umZ9irjTKBQW+07xmlQLv+P3
+ bkF39u4g/Ra3HIogBrMPkq9QgGt321VlRftqdBn5U6K/SGLP5ZWgS7zMhg6Q6wxRCNtB
+ ZH0wfE7CqtyOzPD4YGjTN0UYg2iF14MBrC9sg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741614961; x=1742219761;
+ d=1e100.net; s=20230601; t=1741614968; x=1742219768;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9rj1laawougBTViAuEEsATeo1cYVbI6lIsgSPR2Wo0s=;
- b=HJr9/j9EzJewAOPuFOyA5v2Kr9my2Q9GGWPbPC8fxGNCrRstjEHhxGAKaQFOhdtlwg
- n+bdJ+pGPNP8wPOAKfqzzcLi0pJU/R24YDtau0y0bqcwnHVOA4qL7e9S2JU3oKIX14Kh
- h5QwiMUcLbgyYHohoEusb8TXEkgKAbJAZKgjSC4YxyaQHFy6I2N+y3VXN9eZBie/BIzv
- yehpZWXqF/N9qp/0OamhGjjRf436SYsb6+k85/u+Xd4Qab7Kf3Drw1+lkfQysF5Mfhu/
- FPXDfgfoqIYWyGJY3QRbg9Eq53S8Mt9A0Zz5a5n94fvS3yI6TSBsPBfv7MwhZ2wy1th9
- nkRQ==
-X-Gm-Message-State: AOJu0YwOjhOzqSJA3MN1/kBqxyf9u7gKV2PEZ99dl71OKf6S6NK1u72I
- uhiwAsI2jRqkl4+KrLeYYDueRVTVZy15Alb78FZkDzc073hRBSMCYqMThPw0CI1N+lbNOYa/5e4
- T
-X-Gm-Gg: ASbGncuZAiGn+EZe6GdIRJ8UAQZwrgymYW24/y4wOiA0AWghtIe64tGKZlA6oQDeuPC
- MKfTHL7iN67EEUFhwA07Jy29ISQjT3RUlz/M2jceuyWgOU9AsgCCG1VBhw2ggzYd4DlZuiWWdU6
- 8JdiyVSw/mhN5bL7un54nfmcN7K/rI64kdzrQp5aYsFWkao2AY8WxUzsKtWifMR0fMVqv0e4we+
- 0HHtjYebty8cOfL9zGcYqv9tVNmRllOpy6HkN3nZD7Pj3Kky2CeDo94HM7HblV9pkRfS3+MtpLQ
- pbU9YZ04UTOIczGhlfIkucpCJaiAGXj+E5gSYe9kkwDImQ==
-X-Google-Smtp-Source: AGHT+IG0xqIjMsKZyizowsWlZ6PPN0Nw+oZyz6QwmSraseHm1uIJN5zy7E7Y4l2h2UXiOehkSMjBiA==
-X-Received: by 2002:a17:902:fc48:b0:215:7421:262 with SMTP id
- d9443c01a7336-2242888a6a1mr248344265ad.12.1741614960998; 
- Mon, 10 Mar 2025 06:56:00 -0700 (PDT)
+ bh=fR4wVsXBbZy67PyzcfdNjd8NEXrFo/+XoYrLmnoVLv0=;
+ b=tAFqO7S/T8PL0A59qVv63c4Mn5fJ9LXfXG4IXjLu0gE+o6P/lXNhyUYIqoN6XJDvfs
+ CznPt7tFhjp4nXiIbsrYBbitX/nb4Zyh2MVXg5LfikT57xGKlJiLEewhdswWg2pIo1vh
+ tEJWOyolU0lifZ/fFftljc4pZc075IXr29nysNBfu9eSp2/EZq3rP1QTHXQ8q1M8+Iu+
+ zDn7oIGy8CXYndyzlBBfPWVuN1C/tVVOsR8F0qvZ4rTBfQS6YLPX4jpLA6A5jDVud3cx
+ wADcpaG1ZSZVUA7Re+H7rIe4l+Aupxjm/18c80kZ6W+J3M+N/4QEXDnQQNjeHXTXLbR1
+ nfnA==
+X-Gm-Message-State: AOJu0YxmwAKVko/5wjPMD5Q1jrtvfTXdQl99bCExfD7YOCNSAsUyfpZR
+ JkOkx/H+Fwsrd7v6Dq9J1CGsf4dRmJnMlyih/4fDZvRuSdH3alnAYEiZ/ng3UDQ=
+X-Gm-Gg: ASbGncsVBf52vfbcg6Tz2nSjYe48D7pvMWdbrm807T+aretBQIbZQsiz7jhFUtBCG+i
+ ODhxpbuPZ1p7oDbzOFwvVPTEhDlAMlaIkeD0/DTxZrWI5Uqa2BexR+deYMx3rQX3Nj/FLLfD/F6
+ SRjoU0Jifp2UiR+piXdz3bMDMdhbFSNxGe5Retpb84t5JbxkBU46HjMw3jwVw45gwzs3AJbY/EI
+ 2FVFsbqz/ugAZ2PEpl77nGh4ecrPJTfCnTbtjPw8+1czl9X90rsj8X5vZNnDQPi40K4nmyE3Cbg
+ 7SWLEDnat7hSwWlGBO1WeFAyB0r6g5KzkXScFPRDmdN58705IhRWn/+h
+X-Google-Smtp-Source: AGHT+IHvXtutvYt+RyYLVrGUv+nwEQp6Is3LaeFC8cbH/9WggRuLiMhBgluxtqr5mE/N0qtQItEHzA==
+X-Received: by 2002:a17:902:ce0a:b0:21f:4b01:b978 with SMTP id
+ d9443c01a7336-22428c055ecmr221269675ad.36.1741614968346; 
+ Mon, 10 Mar 2025 06:56:08 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22410a7f700sm78221455ad.144.2025.03.10.06.55.59
+ d9443c01a7336-224109ddbe7sm77457315ad.32.2025.03.10.06.56.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 06:56:00 -0700 (PDT)
-Date: Mon, 10 Mar 2025 07:55:57 -0600
+ Mon, 10 Mar 2025 06:56:07 -0700 (PDT)
+Date: Mon, 10 Mar 2025 07:56:05 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 11/12] pytest: requirements.txt: Include setuptools
-Message-ID: <20250310135557.GW2640854@bill-the-cat>
-References: <20250308201533.1315951-1-marex@denx.de>
- <20250308201533.1315951-12-marex@denx.de>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com
+Subject: Re: [PATCH] cmd: version: Get information about GCC and LD back
+Message-ID: <20250310135605.GX2640854@bill-the-cat>
+References: <59827eccb8a90957e3d4f09059e43cc7fe6c92dc.1741255948.git.michal.simek@amd.com>
+ <20250306140250.GX2640854@bill-the-cat>
+ <41f1ec1b-2c36-4ab1-9e99-77459deff366@amd.com>
+ <fb24a61e-0fb5-4430-b5e1-1c2b25ca8159@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZbyXdVAteI6bI9S0"
+ protocol="application/pgp-signature"; boundary="94P1odRfMaUbLAQg"
 Content-Disposition: inline
-In-Reply-To: <20250308201533.1315951-12-marex@denx.de>
+In-Reply-To: <fb24a61e-0fb5-4430-b5e1-1c2b25ca8159@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,57 +98,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZbyXdVAteI6bI9S0
+--94P1odRfMaUbLAQg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 08, 2025 at 09:12:15PM +0100, Marek Vasut wrote:
-
-> This seems to be needed for filesystem tests at least on
-> ubuntu 22.04 machines. Add setuptools into requirements.txt .
+On Mon, Mar 10, 2025 at 08:49:32AM +0100, Michal Simek wrote:
 >=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Baruch Siach <baruch@tkos.co.il>
-> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Hiago De Franco <hiago.franco@toradex.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Nam Cao <namcao@linutronix.de>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  test/py/requirements.txt | 1 +
->  1 file changed, 1 insertion(+)
+>=20
+> On 3/6/25 15:12, Michal Simek wrote:
+> >=20
+> >=20
+> > On 3/6/25 15:02, Tom Rini wrote:
+> > > On Thu, Mar 06, 2025 at 11:12:30AM +0100, Michal Simek wrote:
+> > > > U-Boot version command is no longer showing information about GCC a=
+nd LD.
+> > > > The reason is that version.h has been removed that's why CC_VERSION=
+_STRING
+> > > > and LD_VERSION_STRING are not pass.
+> > > > Values are generated to generated/version_autogenerated.h which is =
+sourced
+> > > > in version.h.
+> > > >=20
+> > > > Fixes: 54ecce2cbf90 ("version: Separate our version string from
+> > > > the version command")
+> > > > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > > > ---
+> > > >=20
+> > > > Tom: Not sure if this has been done on purpose or not but this issu=
+e has
+> > > > been reported by our regression team.
+> > >=20
+> > > It wasn't on purpose, no. Did you put this through CI / confirm
+> > > sandbox_nocmdline still builds?
+> >=20
+> > Nope I did not.
+>=20
+> CI is not reporting any issue.
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipelines/25=
+029
 
-This belongs in the requirements.txt for the tool that requires
-setuptools, not pytest. It's also listed as a required host tool /
-package in doc/builds/gcc.rst. Having just re-created the
-requirements.txt file, I don't want to add things that will get dropped
-again the next time.
+Thanks!
 
 --=20
 Tom
 
---ZbyXdVAteI6bI9S0
+--94P1odRfMaUbLAQg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfO720ACgkQFHw5/5Y0
-tyx2PQv/a+4LMvhVI9dkT7nU5/9Kf5He3Il2BjgmfWo5qGEKW9TSt9xJf0q7IlIy
-V8f154Z6VXoFtVuOcxe7YIzJsqxy3JVgFYlgn+seUmifxFRy0UPAPNuLYfEEBzF4
-4+LTBLBWLvQm7FPPH06rSldEELCE12USzGm/TFlTrS8J8tymyVTC4FTt4+5abpv5
-3eylxD4f70w9K8wmIc0nuVERZOYUzx8VGdWGfVboCHRkrvHlaBrKLQcTHwJAp2QF
-idq/3+toyn4GqPsimYIKqp92AncSi04tjb9+uWt+nJ5zifC1xkvIhVE9F8VYM3LM
-/fpoqu+IvuMfjqcxp85qfKxqmommCVbW0A8H3Jvf4Mla47ghbv8Q+VU/CpxZUhi5
-WpmZkpR0efQaVV1RdnAM7CYULviFUoeInIbFeK3rRfIW5p3cMAxiAL5RiHAn6pVd
-unhBf1U0wu0Q9dSiQGs5j3i6abwu8o5gISHuOX4wIOL/+kccrbqaGLgFdl2oR6WC
-bpjP1oPG
-=Miqr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfO73UACgkQFHw5/5Y0
+tyy0Twv/XiUzMwG57s1qPTRKh+BVzzAW6d49k2lXA2VmWX/YN2xEuNuPV5nUGQW+
+TY5as5Ib3A9Hp/jJ4w5PTAJpLiiTZnmaq/zujxgkz8jaAh9B+NwkYJRxj6H6ojTT
+idXBewgcPPXgV9VUeL0LWxbdUSLBwcQNaa5N+ALBgN++XFdCpozMlyH0StZNDTTq
+XlaUp+nl56PvAbwnkLdSrHotTL38sjheTQEGkb7BG/7aX2PTDWuQP1F27tQIeVJp
+ahwaUO8QO/WWWhgtHyGPDozpLCh2PUCC/IXv57j6FM9j+WGwk2ePTPqHA8wKDfHF
+bcl+gJ0hvq7B4PGomq+Q7cFTIIQHJ97A35ZTcSCiWL/2HAzvxxYkRggkgs0V5xbD
+23SFAXV07u+8qG5TWug7CcRsi3ZfZGwcS0mCQl/Ks5F38BIRzdgslsMKlyW4j3xB
+mysUUqn43i4a0QuAdQQ4gp2ia2xlBIHA6ua6r7glWSXmzLCs9XYIYQ8MC0BMrCHX
+rl7DXPU9
+=hvaU
 -----END PGP SIGNATURE-----
 
---ZbyXdVAteI6bI9S0--
+--94P1odRfMaUbLAQg--
