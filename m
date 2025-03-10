@@ -4,67 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ACD1C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 09:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A55C5C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:03:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A8B812C8;
-	Mon, 10 Mar 2025 10:16:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=icenowy.me
+	by phobos.denx.de (Postfix) with ESMTP id 0F65E8129F;
+	Mon, 10 Mar 2025 11:03:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=icenowy.me header.i=uwu@icenowy.me header.b="bMekBTLC";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xxdxCAO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA666812D9; Mon, 10 Mar 2025 10:16:35 +0100 (CET)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5D968812C8; Mon, 10 Mar 2025 11:03:23 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6DEB8129F
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 10:16:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 02888811C1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:03:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=icenowy.me
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=uwu@icenowy.me
-ARC-Seal: i=1; a=rsa-sha256; t=1741598187; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=JnXIElBrhxld/OxIgMq5ru+g03VC6LPVlWou+AaAYMJf8/rSIQzcJUDNUGkEkWODW4K1Iv/hKETx9OlviRMyHiNmLSKtd/L4lgIhms/y9BPotoZ/YX74v6vja0jnwCG7fHKAvvbCogmdIsC+MwgGP/pjlhqZ9P6z8Y7eo2y06HU=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1741598187;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=LIsNC0d0+vMPzVLhQsuXvCpcApfcbeBCFsHnT4lffgI=; 
- b=QRSaa79EVuEH5OX58kpMSaTuFEiaP8tQDyRInCG7xDoHj3WJA+lpqbR/RwsOQYFyUiIEGVsQQvRuJBNG0kwiHI3NrEWpyud7dYFoaDWXO6Md0p6tuBa92vCpi7CstGaXUYrdQgI38bsvURGTQquscZWZWI63CBlbqY8bPNZhzJg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=icenowy.me;
- spf=pass  smtp.mailfrom=uwu@icenowy.me;
- dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1741598187; 
- s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
- h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
- bh=LIsNC0d0+vMPzVLhQsuXvCpcApfcbeBCFsHnT4lffgI=;
- b=bMekBTLCC/pQTrrbhIyDC5qGaXkViK4Y9TRz2R+KOFtz0RVkJn4VZOUEzvADiwcG
- SdwKHCM+6FhFspPWK3fgmNuYPtq7Gp85LsFAm5hbKthu7syOnCo12zU1zaMeznF4B9q
- YdoT4xwPzTfCPHSCPJm25l946mChsUwJEg1vIXkTYasTV3CpymPcjo9KX8Kre/Slfbi
- LpYuyTKJfw6FJvS2RLOInG7eB/KEidZ15DrFtT1WOXS+lguYmd03WlI2FgNNgvFRITd
- 7ufjhiz2vXHqj89P/ien3wT6eyn4rHk6BdFF/tZn4D3R259eCFNEk41ukWvZ8Ck0X4/
- JKxoEampEA==
-Received: by mx.zohomail.com with SMTPS id 1741598184307212.35897077943946;
- Mon, 10 Mar 2025 02:16:24 -0700 (PDT)
-Message-ID: <271b604cc5d4e8f145651f7c327ddeb50e2945d8.camel@icenowy.me>
-Subject: Re: [PATCH 1/2] sunxi: h616: dram: Rework size detection
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Jernej Skrabec <jernej.skrabec@gmail.com>, jagan@amarulasolutions.com, 
- andre.przywara@arm.com, trini@konsulko.com
-Cc: macromorgan@hotmail.com, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Date: Mon, 10 Mar 2025 17:16:16 +0800
-In-Reply-To: <20250309063143.62859-2-jernej.skrabec@gmail.com>
-References: <20250309063143.62859-1-jernej.skrabec@gmail.com>
- <20250309063143.62859-2-jernej.skrabec@gmail.com>
-Organization: Anthon Open-Source Community
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-User-Agent: Evolution 3.44.4 
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=5164540d7d=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52A95fqK016989;
+ Mon, 10 Mar 2025 11:03:20 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ C6jqUlAfTiP94VazXV88XQkadVm9pU9jQShYIL6G7tE=; b=xxdxCAO6Yzn2NQF9
+ KByrivtDXkPb0yXxozO4FpBzNAc1jtzvTN0NPJs7CJyrYwJkLi3wDYOinViBk9y6
+ gs7DvSVPhcILcEtUpS1WjMQkEniuLD49dvUx2/XwuiWzyQYi7TqmmFVEqYyXiCr4
+ fuTPbb+ADOLXnioPFCVXy4HQGAAeBiq2MFTQgIWVwFsMGc6Duf5tEAk5Nstf8/vU
+ HhVQd6zDFsuLrGCmmPgEbsY6bEpeRUBKqLqGXuzGcV4UMQ45ie6OUdvM2ownbLW7
+ oZe3Yl3iBuPdM2u6OW0FV0r87If8hZWaixoQEu0q2IH9cY1NbmuNiQyKWzkpvTep
+ NNJBag==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4590b8uqr9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 10 Mar 2025 11:03:19 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3492F4004D;
+ Mon, 10 Mar 2025 11:02:03 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 815CD587EA2;
+ Mon, 10 Mar 2025 11:00:28 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Mar
+ 2025 11:00:28 +0100
+Message-ID: <411fc2b7-6974-4455-83d2-1af33118f0de@foss.st.com>
+Date: Mon, 10 Mar 2025 11:00:27 +0100
 MIME-Version: 1.0
-X-ZohoMailClient: External
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] pwm: stm32: add driver to support pwm with timer
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+To: Cheick Traore <cheick.traore@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Fabrice Gasnier
+ <fabrice.gasnier@foss.st.com>, Olivier Moysan <olivier.moysan@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>
+References: <20250306105620.624760-1-cheick.traore@foss.st.com>
+ <20250306115558.3.I6cd0bcc67440b8e8c8be0493a25de9bea8a14bf1@changeid>
+ <7808dfff-5102-4cfd-aa49-3f8107d0bff4@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <7808dfff-5102-4cfd-aa49-3f8107d0bff4@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-10_04,2025-03-07_03,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,70 +93,270 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-5ZyoIDIwMjUtMDMtMDnmmJ/mnJ/ml6XnmoQgMDc6MzEgKzAxMDDvvIxKZXJuZWogU2tyYWJlY+WG
-memBk++8mgo+IFNpbmNlIHRoZXJlIGlzIHF1aXRlIGEgZmV3IHBvc3NpYmxlIERSQU0gY29uZmln
-dXJhdGlvbnMgaW4gdGVybXMgb2YKPiBidXMKPiB3aWR0aCwgcmFuayBhbmQgcm93cyBhbmQgY29s
-dW1ucyBjb3VudCwgc2l6ZSBkZXRlY3Rpb24gYWxnb3JpdGhtIG11c3QKPiBiZQo+IHZlcnkgY2Fy
-ZWZ1bCBub3QgdG8gdGVzdCBjb21iaW5hdGlvbiB3aGljaCB3b3VsZCBiZSBiaWdnZXIgdGhhbiBI
-NjE2Cj4gaXMKPiBhY3R1YWxseSBjYXBhYmxlIG9mIGhhbmRsaW5nLgo+IAo+IElkZWFsbHksIHdl
-IHNob3VsZCBhbHdheXMgZGV0ZWN0IG1lbW9yeSBhbGlhc2luZywgZXZlbiBmb3IgNCBHQgo+IG1l
-bW9yeQo+IHNpemUsIHdoaWNoIGlzIHRoZSBtYXhpbXVtIGFtb3VudCBvZiBtZW1vcnkgdGhhdCBI
-NjE2IGlzIGNhcGFibGUgb2YKPiBoYW5kbGluZy4gRm9yIHRoaXMgcmVhc29uLCB3ZSBoYXZlIHRv
-IGNvbmZpZ3VyZSBtaW5pbXVtIGFtb3VudCBvZgo+IHN1cHBvcnRlZCByb3dzIHdoZW4gdGVzdGlu
-ZyBmb3IgY29sdW1ucyBhbmQgdmljZSB2ZXJzYS4gVGhpcyB3YXkgdGVzdAo+IGNvZGUgd2lsbCBu
-ZXZlciBzdGVwIG91dCBvZiA0IEdCIGJvdW5kYXJ5LgoKVGhpcyBpcyBhbHNvIHRoZSBiZWhhdmlv
-ciBvZiBwcmV2aW91cyBEUkFNIGRyaXZlcnMuCgo+IAo+IFdoaWxlIGF0IGl0LCBjaGVjayBmb3Ig
-MTcgcm93cyBtYXhpbXVtLiBUaGlzIGFsaWducyBjb2RlIHdpdGggQlNQCj4gRFJBTQo+IGRyaXZl
-ci4gVGhlcmUgaXMgcHJvYmFibHkgbm8gc3VjaCBjb25maWd1cmF0aW9uIHdoaWNoIHdvdWxkIG1h
-a2UKPiBzZW5zZQo+IHdpdGggNCBHQiBtZW1vcnkuCgpJIGNoZWNrZWQgdGhlIEpFREVDIEpFU0Q3
-OS00RCBkb2N1bWVudCwgYW5kIGZvdW5kIHRoYXQgMTggcm93cyBhcmUgb25seQphdmFpbGFibGUg
-Zm9yIHg0IGRpZXMsIHdoaWNoIGFyZSBub3QgY29tcGF0aWJsZSB3aXRoIHRoZXNlIEFsbHdpbm5l
-cgpTb0NzIGF0IGFsbCAobm90IGVub3VnaCBEUVMgcGlucykuCgpSZXZpZXdlZC1ieTogSWNlbm93
-eSBaaGVuZyA8dXd1QGljZW5vd3kubWU+Cgo+IAo+IFNpZ25lZC1vZmYtYnk6IEplcm5laiBTa3Jh
-YmVjIDxqZXJuZWouc2tyYWJlY0BnbWFpbC5jb20+Cj4gLS0tCj4gwqBhcmNoL2FybS9tYWNoLXN1
-bnhpL2RyYW1fc3VuNTBpX2g2MTYuYyB8IDIwICsrKysrKysrKysrKy0tLS0tLS0tCj4gwqAxIGZp
-bGUgY2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0t
-Z2l0IGEvYXJjaC9hcm0vbWFjaC1zdW54aS9kcmFtX3N1bjUwaV9oNjE2LmMgYi9hcmNoL2FybS9t
-YWNoLQo+IHN1bnhpL2RyYW1fc3VuNTBpX2g2MTYuYwo+IGluZGV4IGIzNTU0Y2M2NGJmNS4uNmY4
-NGU1OWUzOWNkIDEwMDY0NAo+IC0tLSBhL2FyY2gvYXJtL21hY2gtc3VueGkvZHJhbV9zdW41MGlf
-aDYxNi5jCj4gKysrIGIvYXJjaC9hcm0vbWFjaC1zdW54aS9kcmFtX3N1bjUwaV9oNjE2LmMKPiBA
-QCAtMTM2Myw3ICsxMzYzLDcgQEAgc3RhdGljIHZvaWQgbWN0bF9hdXRvX2RldGVjdF9yYW5rX3dp
-ZHRoKGNvbnN0Cj4gc3RydWN0IGRyYW1fcGFyYSAqcGFyYSwKPiDCoHN0YXRpYyB2b2lkIG1jdGxf
-YXV0b19kZXRlY3RfZHJhbV9zaXplKGNvbnN0IHN0cnVjdCBkcmFtX3BhcmEgKnBhcmEsCj4gwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZHJhbV9jb25maWcgKmNvbmZpZykKPiDCoHsKPiAtwqDC
-oMKgwqDCoMKgwqB1bnNpZ25lZCBpbnQgc2hpZnQ7Cj4gK8KgwqDCoMKgwqDCoMKgdW5zaWduZWQg
-aW50IHNoaWZ0LCBjb2xzLCByb3dzOwo+IMKgCj4gwqDCoMKgwqDCoMKgwqDCoC8qIG1heC4gY29u
-ZmlnIGZvciBjb2x1bW5zLCBidXQgbm90IHJvd3MgKi8KPiDCoMKgwqDCoMKgwqDCoMKgY29uZmln
-LT5jb2xzID0gMTE7Cj4gQEAgLTEzNzMsMjMgKzEzNzMsMjcgQEAgc3RhdGljIHZvaWQgbWN0bF9h
-dXRvX2RldGVjdF9kcmFtX3NpemUoY29uc3QKPiBzdHJ1Y3QgZHJhbV9wYXJhICpwYXJhLAo+IMKg
-wqDCoMKgwqDCoMKgwqBzaGlmdCA9IGNvbmZpZy0+YnVzX2Z1bGxfd2lkdGggKyAxOwo+IMKgCj4g
-wqDCoMKgwqDCoMKgwqDCoC8qIGRldGVjdCBjb2x1bW4gYWRkcmVzcyBiaXRzICovCj4gLcKgwqDC
-oMKgwqDCoMKgZm9yIChjb25maWctPmNvbHMgPSA4OyBjb25maWctPmNvbHMgPCAxMTsgY29uZmln
-LT5jb2xzKyspIHsKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKG1jdGxfbWVt
-X21hdGNoZXMoMVVMTCA8PCAoY29uZmlnLT5jb2xzICsgc2hpZnQpKSkKPiArwqDCoMKgwqDCoMKg
-wqBmb3IgKGNvbHMgPSA4OyBjb2xzIDwgMTE7IGNvbHMrKykgewo+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBpZiAobWN0bF9tZW1fbWF0Y2hlcygxVUxMIDw8IChjb2xzICsgc2hpZnQp
-KSkKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBicmVh
-azsKPiDCoMKgwqDCoMKgwqDCoMKgfQo+IC3CoMKgwqDCoMKgwqDCoGRlYnVnKCJkZXRlY3RlZCAl
-dSBjb2x1bW5zXG4iLCBjb25maWctPmNvbHMpOwo+ICvCoMKgwqDCoMKgwqDCoGRlYnVnKCJkZXRl
-Y3RlZCAldSBjb2x1bW5zXG4iLCBjb2xzKTsKPiDCoAo+IMKgwqDCoMKgwqDCoMKgwqAvKiByZWNv
-bmZpZ3VyZSB0byBtYWtlIHN1cmUgdGhhdCBhbGwgYWN0aXZlIHJvd3MgYXJlCj4gYWNjZXNzaWJs
-ZSAqLwo+IC3CoMKgwqDCoMKgwqDCoGNvbmZpZy0+cm93cyA9IDE4Owo+ICvCoMKgwqDCoMKgwqDC
-oGNvbmZpZy0+Y29scyA9IDg7Cj4gK8KgwqDCoMKgwqDCoMKgY29uZmlnLT5yb3dzID0gMTc7Cj4g
-wqDCoMKgwqDCoMKgwqDCoG1jdGxfY29yZV9pbml0KHBhcmEsIGNvbmZpZyk7Cj4gwqAKPiDCoMKg
-wqDCoMKgwqDCoMKgLyogZGV0ZWN0IHJvdyBhZGRyZXNzIGJpdHMgKi8KPiDCoMKgwqDCoMKgwqDC
-oMKgc2hpZnQgPSBjb25maWctPmJ1c19mdWxsX3dpZHRoICsgNCArIGNvbmZpZy0+Y29sczsKPiAt
-wqDCoMKgwqDCoMKgwqBmb3IgKGNvbmZpZy0+cm93cyA9IDEzOyBjb25maWctPnJvd3MgPCAxODsg
-Y29uZmlnLT5yb3dzKyspIHsKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKG1j
-dGxfbWVtX21hdGNoZXMoMVVMTCA8PCAoY29uZmlnLT5yb3dzICsgc2hpZnQpKSkKPiArwqDCoMKg
-wqDCoMKgwqBmb3IgKHJvd3MgPSAxMzsgcm93cyA8IDE3OyByb3dzKyspIHsKPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKG1jdGxfbWVtX21hdGNoZXMoMVVMTCA8PCAocm93cyAr
-IHNoaWZ0KSkpCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgYnJlYWs7Cj4gwqDCoMKgwqDCoMKgwqDCoH0KPiAtwqDCoMKgwqDCoMKgwqBkZWJ1ZygiZGV0
-ZWN0ZWQgJXUgcm93c1xuIiwgY29uZmlnLT5yb3dzKTsKPiArwqDCoMKgwqDCoMKgwqBkZWJ1Zygi
-ZGV0ZWN0ZWQgJXUgcm93c1xuIiwgcm93cyk7Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoGNvbmZpZy0+
-Y29scyA9IGNvbHM7Cj4gK8KgwqDCoMKgwqDCoMKgY29uZmlnLT5yb3dzID0gcm93czsKPiDCoH0K
-PiDCoAo+IMKgc3RhdGljIHVuc2lnbmVkIGxvbmcgbWN0bF9jYWxjX3NpemUoY29uc3Qgc3RydWN0
-IGRyYW1fY29uZmlnCj4gKmNvbmZpZykKCg==
 
+
+On 3/6/25 15:19, Patrice CHOTARD wrote:
+> 
+> 
+> On 3/6/25 11:56, Cheick Traore wrote:
+>> Add driver to support pwm on STM32MP1X SoCs. The PWM signal is generated
+>> using a multifuntion timer which provide a pwm feature. Clock rate and
+>> addresses are retrieved from the multifunction timer driver.
+>>
+>> Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
+>> ---
+>>
+>>  drivers/pwm/Kconfig     |   8 ++
+>>  drivers/pwm/Makefile    |   1 +
+>>  drivers/pwm/pwm-stm32.c | 202 ++++++++++++++++++++++++++++++++++++++++
+>>  3 files changed, 211 insertions(+)
+>>  create mode 100644 drivers/pwm/pwm-stm32.c
+>>
+>> diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
+>> index 6e79868d0ef..de312656746 100644
+>> --- a/drivers/pwm/Kconfig
+>> +++ b/drivers/pwm/Kconfig
+>> @@ -105,6 +105,14 @@ config PWM_TEGRA
+>>  	  32KHz clock is supported by the driver but the duty cycle is
+>>  	  configurable.
+>>  
+>> +config PWM_STM32
+>> +	bool "Enable support for STM32 PWM"
+>> +	depends on DM_PWM && MFD_STM32_TIMERS
+>> +	help
+>> +	  This enables PWM driver for STMicroelectronics STM32 pulse width
+>> +	  modulation. It uses STM32 timer devices that can have up to 4 output
+>> +	  channels, with complementary outputs and configurable polarity.
+>> +
+>>  config PWM_SUNXI
+>>  	bool "Enable support for the Allwinner Sunxi PWM"
+>>  	depends on DM_PWM
+>> diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
+>> index e4d10c8dc3e..76305b93bc9 100644
+>> --- a/drivers/pwm/Makefile
+>> +++ b/drivers/pwm/Makefile
+>> @@ -22,5 +22,6 @@ obj-$(CONFIG_PWM_ROCKCHIP)	+= rk_pwm.o
+>>  obj-$(CONFIG_PWM_SANDBOX)	+= sandbox_pwm.o
+>>  obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
+>>  obj-$(CONFIG_PWM_TEGRA)		+= tegra_pwm.o
+>> +obj-$(CONFIG_PWM_STM32)		+= pwm-stm32.o
+>>  obj-$(CONFIG_PWM_SUNXI)		+= sunxi_pwm.o
+>>  obj-$(CONFIG_PWM_TI_EHRPWM)	+= pwm-ti-ehrpwm.o
+>> diff --git a/drivers/pwm/pwm-stm32.c b/drivers/pwm/pwm-stm32.c
+>> new file mode 100644
+>> index 00000000000..6c47df893be
+>> --- /dev/null
+>> +++ b/drivers/pwm/pwm-stm32.c
+>> @@ -0,0 +1,202 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +/*
+>> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
+>> + * Author: Cheick Traore <cheick.traore@foss.st.com>
+>> + *
+>> + * Originally based on the Linux kernel v6.10 drivers/pwm/pwm-stm32.c.
+>> + */
+>> +
+>> +#include <div64.h>
+>> +#include <dm.h>
+>> +#include <pwm.h>
+>> +#include <asm/io.h>
+>> +#include <asm/arch/timers.h>
+>> +#include <dm/device_compat.h>
+>> +#include <linux/time.h>
+>> +
+>> +#define CCMR_CHANNEL_SHIFT	8
+>> +#define CCMR_CHANNEL_MASK	0xFF
+>> +
+>> +struct stm32_pwm_priv {
+>> +	bool have_complementary_output;
+>> +	bool invert_polarity;
+>> +};
+>> +
+>> +static u32 active_channels(struct stm32_timers_plat *plat)
+>> +{
+>> +	return readl(plat->base + TIM_CCER) & TIM_CCER_CCXE;
+>> +}
+>> +
+>> +static int stm32_pwm_set_config(struct udevice *dev, uint channel,
+>> +				uint period_ns, uint duty_ns)
+>> +{
+>> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
+>> +	struct stm32_timers_priv *priv = dev_get_priv(dev_get_parent(dev));
+>> +	unsigned long long prd, div, dty;
+>> +	unsigned int prescaler = 0;
+>> +	u32 ccmr, mask, shift;
+>> +
+>> +	/*
+>> +	 * Period and prescaler values depends on clock rate
+>> +	 * First we need to find the minimal value for prescaler such that
+>> +	 *
+>> +	 *        period_ns * clkrate
+>> +	 *   ------------------------------ < max_arr + 1
+>> +	 *   NSEC_PER_SEC * (prescaler + 1)
+>> +	 *
+>> +	 * This equation is equivalent to
+>> +	 *
+>> +	 *        period_ns * clkrate
+>> +	 *   ---------------------------- < prescaler + 1
+>> +	 *   NSEC_PER_SEC * (max_arr + 1)
+>> +	 *
+>> +	 * Using integer division and knowing that the right hand side is
+>> +	 * integer, this is further equivalent to
+>> +	 *
+>> +	 *   (period_ns * clkrate) // (NSEC_PER_SEC * (max_arr + 1)) ≤ prescaler
+>> +	 */
+>> +
+>> +	div = (unsigned long long)priv->rate * period_ns;
+>> +	do_div(div, NSEC_PER_SEC);
+>> +	prd = div;
+>> +
+>> +	do_div(div, priv->max_arr + 1);
+>> +	prescaler = div;
+>> +	if (prescaler > MAX_TIM_PSC)
+>> +		return -EINVAL;
+>> +
+>> +	do_div(prd, prescaler + 1);
+>> +	if (!prd)
+>> +		return -EINVAL;
+>> +
+>> +	/*
+>> +	 * All channels share the same prescaler and counter so when two
+>> +	 * channels are active at the same time we can't change them
+>> +	 */
+>> +	if (active_channels(plat) & ~(1 << channel * 4)) {
+>> +		u32 psc, arr;
+>> +
+>> +		psc = readl(plat->base + TIM_PSC);
+>> +		arr = readl(plat->base + TIM_ARR);
+>> +		if (psc != prescaler || arr != prd - 1)
+>> +			return -EBUSY;
+>> +	}
+>> +
+>> +	writel(prescaler, plat->base + TIM_PSC);
+>> +	writel(prd - 1, plat->base + TIM_ARR);
+>> +	setbits_le32(plat->base + TIM_CR1, TIM_CR1_ARPE);
+>> +
+>> +	/* Calculate the duty cycles */
+>> +	dty = prd * duty_ns;
+>> +	do_div(dty, period_ns);
+>> +
+>> +	writel(dty, plat->base + TIM_CCRx(channel + 1));
+>> +
+>> +	/* Configure output mode */
+>> +	shift = (channel & 0x1) * CCMR_CHANNEL_SHIFT;
+>> +	ccmr = (TIM_CCMR_PE | TIM_CCMR_M1) << shift;
+>> +	mask = CCMR_CHANNEL_MASK << shift;
+>> +	if (channel < 2)
+>> +		clrsetbits_le32(plat->base + TIM_CCMR1, mask, ccmr);
+>> +	else
+>> +		clrsetbits_le32(plat->base + TIM_CCMR2, mask, ccmr);
+>> +
+>> +	setbits_le32(plat->base + TIM_BDTR, TIM_BDTR_MOE);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int stm32_pwm_set_enable(struct udevice *dev, uint channel,
+>> +				bool enable)
+>> +{
+>> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
+>> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
+>> +	u32 mask;
+>> +
+>> +	/* Enable channel */
+>> +	mask = TIM_CCER_CC1E << (channel * 4);
+>> +	if (priv->have_complementary_output)
+>> +		mask |= TIM_CCER_CC1NE << (channel * 4);
+>> +
+>> +	if (enable) {
+>> +		setbits_le32(plat->base + TIM_CCER, mask);
+>> +		/* Make sure that registers are updated */
+>> +		setbits_le32(plat->base + TIM_EGR, TIM_EGR_UG);
+>> +		/* Enable controller */
+>> +		setbits_le32(plat->base + TIM_CR1, TIM_CR1_CEN);
+>> +	} else {
+>> +		clrbits_le32(plat->base + TIM_CCER, mask);
+>> +		/* When all channels are disabled, we can disable the controller */
+>> +		if (!active_channels(plat))
+>> +			clrbits_le32(plat->base + TIM_CR1, TIM_CR1_CEN);
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int stm32_pwm_set_invert(struct udevice *dev, uint channel,
+>> +				bool polarity)
+>> +{
+>> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
+>> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
+>> +	u32 mask;
+>> +
+>> +	mask = TIM_CCER_CC1P << (channel * 4);
+>> +	if (priv->have_complementary_output)
+>> +		mask |= TIM_CCER_CC1NP << (channel * 4);
+>> +
+>> +	clrsetbits_le32(plat->base + TIM_CCER, mask, polarity ? mask : 0);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static void stm32_pwm_detect_complementary(struct udevice *dev)
+>> +{
+>> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
+>> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
+>> +	u32 ccer;
+>> +
+>> +	/*
+>> +	 * If complementary bit doesn't exist writing 1 will have no
+>> +	 * effect so we can detect it.
+>> +	 */
+>> +	setbits_le32(plat->base + TIM_CCER, TIM_CCER_CC1NE);
+>> +	ccer = readl(plat->base + TIM_CCER);
+>> +	clrbits_le32(plat->base + TIM_CCER, TIM_CCER_CC1NE);
+>> +
+>> +	priv->have_complementary_output = (ccer != 0);
+>> +}
+>> +
+>> +static int stm32_pwm_probe(struct udevice *dev)
+>> +{
+>> +	struct stm32_timers_priv *timer = dev_get_priv(dev_get_parent(dev));
+>> +
+>> +	if (timer->rate > 1000000000) {
+>> +		dev_err(dev, "Clock freq too high (%lu)\n", timer->rate);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	stm32_pwm_detect_complementary(dev);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const struct pwm_ops stm32_pwm_ops = {
+>> +	.set_config	= stm32_pwm_set_config,
+>> +	.set_enable	= stm32_pwm_set_enable,
+>> +	.set_invert	= stm32_pwm_set_invert,
+>> +};
+>> +
+>> +static const struct udevice_id stm32_pwm_ids[] = {
+>> +	{ .compatible = "st,stm32-pwm" },
+>> +	{ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(stm32_pwm) = {
+>> +	.name		= "stm32_pwm",
+>> +	.id		= UCLASS_PWM,
+>> +	.of_match	= stm32_pwm_ids,
+>> +	.ops		= &stm32_pwm_ops,
+>> +	.probe          = stm32_pwm_probe,
+>> +	.priv_auto	= sizeof(struct stm32_pwm_priv),
+>> +};
+> 
+> 
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> Thanks
+> Patrice
+Applied to u-boot-stm32/next
+
+Thanks
+Patrice
