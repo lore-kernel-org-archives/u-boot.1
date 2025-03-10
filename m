@@ -4,42 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0789C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 11:59:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CFAFC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:06:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E84B081430;
-	Mon, 10 Mar 2025 12:58:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BFAF1811C1;
+	Mon, 10 Mar 2025 13:06:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MGpomeHG";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B73FA8169D; Mon, 10 Mar 2025 12:58:36 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6D56781430
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 12:58:34 +0100 (CET)
+ id 9F16581335; Mon, 10 Mar 2025 13:06:05 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 684B08003E
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:06:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 64A461516;
- Mon, 10 Mar 2025 04:58:45 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 12CA13F5A1;
- Mon, 10 Mar 2025 04:58:30 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-223959039f4so79085685ad.3
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:06:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741608361; x=1742213161; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xE5NDsvlphSZcXEqS3DsFpgmiuCFidpkcVpj4sRNCXE=;
+ b=MGpomeHGvnNR7+ajBNVj2fGO/V3WnKWb3sfPzEJmMDAWXfW0T2VOzjnNu6ydjdregI
+ ShnefH3rq6o/VUpNJaynaLYHG/xfx2BZNhGOIUwdjPZ4E2ovBHjScFcCl0Jwbq9CRm27
+ jlWfJMuO5Wh2azMSOVd11qF+avttfTESJ9PxJgKGqudInAds9IBKnrF/mqrvcb1tdCeH
+ iff2WapKrW9nwFTD/vd04SxjEOefXpd6YTtaeEexK7qSLcvPstDOn2hWLFl7bFBoILXm
+ E/xtCdYWG/q/yrQL8SbB4y9jtDoaBoZiTMreybDhnoAc4L83e27xn/urS3R1F/2/Qxlo
+ i64A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741608361; x=1742213161;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xE5NDsvlphSZcXEqS3DsFpgmiuCFidpkcVpj4sRNCXE=;
+ b=DR6yk2huAOMvRLfjw9IkMIK/oMnB1DFtiLB3SazrnV2D+nanZBuh0mw39qHq66RXw7
+ bX5HhjVbwtck84gjzf8OhBOYK0wX1VN7y3xpZymmAwMzjGTI1sKagrDsHpND7+pyv7zZ
+ cqMKnnb/7TTCAzRS61HXYji7ZMFNQWjKdQJ//PwqLkzLHE5PJIo+VqB6LU1xcuDdqpjA
+ 0bnXBABkFpLKwliw8w90TJPyOoVaK2FVye9wqJ7EwUsesIPEgIfB6j6HU0v1mN9kM3C6
+ xdEZ2XIkaNSXsgvwqA2sNcKXoBc11Ybc5U7A+fTUnFLA78o+Rxxc0boEQPr9K1LAHWrB
+ KHlg==
+X-Gm-Message-State: AOJu0YyDAq883uFe6tF+hBcrmTf40KpLyFYkcSptAlYyj2KbLhX5VMQP
+ 3yNaWyjEXtY2Qx8FNUfTm+ZjxKgKIbCboWFf+x/Ttyj4jZZIrCcdJ9/lXo7pl5k=
+X-Gm-Gg: ASbGnctOkNl2PL4LslEoaXhQHDv527s14EZnChrRvymdjSBL+k5e3ZjK2+A3fSzEV87
+ ybh7aexeOmZG7JHKbfMdFF+Prt8agRRdADPch7TaGaFVGVO9jYTEw36PrITL/5gECl2NThbf/28
+ MKiwORAJsMe9y0QgdDnum6/wzy7G3RZkdn9ALFBrkDPDYksh7VmMJFve5pwmB5Z7wYt6Uil5DET
+ /a9L20KOVhqKfzytMFhrBDnxINcgcCaBtGbSfbHlvB8uv0+UCor/LgB6s7uzs7mopKItToedHU5
+ 7aIJU8S424gz2ib+HUAqjKSIIZyTgAUcXIcC2+qNdN/uiIVtLfo3XB8=
+X-Google-Smtp-Source: AGHT+IFoukchhBahwdDpaaw+eiLM2xD6F/HHPXW3eLZlKm6XJ1y3z7CrS0HlDBOUCEJbe1sHNavPVQ==
+X-Received: by 2002:a05:6a00:3981:b0:736:a7e3:d4ab with SMTP id
+ d2e1a72fcca58-736aa9d32bemr17660251b3a.5.1741608360780; 
+ Mon, 10 Mar 2025 05:06:00 -0700 (PDT)
+Received: from adriano.. ([190.215.89.187]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-736a8b61f76sm6968899b3a.103.2025.03.10.05.05.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Mar 2025 05:05:59 -0700 (PDT)
+From: Adriano Cordova <adrianox@gmail.com>
+X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v7 8/8] blkmap: pass information on ISO image to the OS
-Date: Mon, 10 Mar 2025 17:27:50 +0530
-Message-Id: <20250310115750.1019051-9-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250310115750.1019051-1-sughosh.ganu@linaro.org>
-References: <20250310115750.1019051-1-sughosh.ganu@linaro.org>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: [PATCH v3 1/8] legacy-net: wget: fix wget_info handling after new tcp
+ legacy stack
+Date: Mon, 10 Mar 2025 09:06:00 -0300
+Message-ID: <20250310120607.186999-1-adriano.cordova@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -58,223 +96,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI HTTP boot puts the ISO installer image at some location in
-memory. Information about this image has to be passed on to the OS
-kernel, which is done by adding a persistent memory(pmem) node to the
-devicetree(DT) that is passed to the OS. The OS kernel then gets
-information about the presence of this ISO image and proceeds with the
-installation.
+Check wget_info->buffer_size for overflow and do not clean the wget_info struct
+on failure, let the owner of the struct handle the error. The latter is necesary
+, e.g., for when a request fails because the provided buffer was too small.
 
-In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-device slice, with the 'preserve' attribute. Add a helper function
-which iterates through all such slices, and invokes a callback. The
-callback adds the pmem node to the DT and removes the corresponding
-memory region from the EFI memory map. Invoke this helper function as
-part of the DT fixup which happens before booting the OS.
-
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
+Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
-Changes since V6: None
 
- boot/image-fdt.c            |  7 ++++++
- drivers/block/blkmap.c      | 45 +++++++++++++++++++++++++++++++++++++
- include/blkmap.h            | 17 ++++++++++++++
- include/efi.h               | 13 +++++++++++
- lib/efi_loader/efi_helper.c | 40 +++++++++++++++++++++++++++++++++
- 5 files changed, 122 insertions(+)
+(no changes since v1)
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 9d1598b1a93..8f718ad29f6 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <fdt_support.h>
- #include <fdtdec.h>
-+#include <efi.h>
- #include <env.h>
- #include <errno.h>
- #include <image.h>
-@@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	if (!ft_verify_fdt(blob))
- 		goto err;
+ net/wget.c | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/net/wget.c b/net/wget.c
+index 0b082c61947..c73836cbc9d 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -53,6 +53,9 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+ 	ulong store_addr = image_load_addr + offset;
+ 	uchar *ptr;
  
-+	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-+		fdt_ret = fdt_efi_pmem_setup(blob);
-+		if (fdt_ret)
-+			goto err;
-+	}
-+
- 	/* after here we are using a livetree */
- 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
- 		struct event_ft_fixup fixup;
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index eefed615998..1a633c71d43 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -498,6 +498,51 @@ err:
- 	return err;
- }
- 
-+static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-+{
-+	return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-+		(BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-+}
-+
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx)
-+{
-+	int ret;
-+	u32 size;
-+	ulong addr;
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	struct blkmap *bm;
-+	struct blkmap_mem *bmm;
-+	struct blkmap_slice *bms;
-+	struct blk_desc *bd;
-+
-+	if (!cb) {
-+		log_debug("%s: No callback passed to the function\n", __func__);
-+		return 0;
-+	}
-+
-+	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-+		bm = dev_get_plat(dev);
-+		bd = dev_get_uclass_plat(bm->blk);
-+
-+		list_for_each_entry(bms, &bm->slices, node) {
-+			if (!blkmap_mem_preserve_slice(bms))
-+				continue;
-+
-+			bmm = container_of(bms, struct blkmap_mem, slice);
-+			addr = (ulong)(uintptr_t)bmm->addr;
-+			size = (u32)bms->blkcnt << bd->log2blksz;
-+			ret = cb(ctx, addr, size);
-+			if (ret)
-+				return ret;
-+		}
-+	}
-+
-+	return 0;
-+
-+}
-+
- int blkmap_destroy(struct udevice *dev)
- {
- 	int err;
-diff --git a/include/blkmap.h b/include/blkmap.h
-index 754d8671b01..30ce80c0ad1 100644
---- a/include/blkmap.h
-+++ b/include/blkmap.h
-@@ -7,6 +7,7 @@
- #ifndef _BLKMAP_H
- #define _BLKMAP_H
- 
-+#include <blk.h>
- #include <dm/lists.h>
- 
- /**
-@@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
- int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
- 			  struct udevice **devp);
- 
-+/**
-+ * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-+ * @cb: Callback function to call for the blkmap slice
-+ * @ctx: Argument to be passed to the callback function
-+ *
-+ * The function is used to iterate through all the blkmap slices, looking
-+ * specifically for memory mapped blkmap mapping which has been
-+ * created with the preserve attribute. The function looks for such slices
-+ * with the relevant attributes and then calls the callback function which
-+ * then does additional configuration as needed.
-+ *
-+ * Return: 0 on success, negative error on failure
-+ */
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx);
-+
- #endif	/* _BLKMAP_H */
-diff --git a/include/efi.h b/include/efi.h
-index d005cb6181e..f9bbb175c3a 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
-  */
- int efi_get_pxe_arch(void);
- 
-+/**
-+ * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-+ * @fdt: Devicetree to add the pmem nodes to
-+ *
-+ * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-+ * and add pmem nodes corresponding to the blkmap slice to the
-+ * devicetree along with removing the corresponding region from the
-+ * EFI memory map.
-+ *
-+ * Returns: 0 on success, negative error on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt);
-+
- #endif /* _LINUX_EFI_H */
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index fe25eabeaac..9a8635f730e 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blkmap.h>
- #include <bootm.h>
- #include <env.h>
- #include <image.h>
-@@ -685,3 +686,42 @@ out:
- 
- 	return ret;
- }
-+
-+/**
-+ * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-+ * @fdt: The devicetree to which pmem node is added
-+ * @addr: start address of the pmem node
-+ * @size: size of the memory of the pmem node
-+ *
-+ * The function adds the pmem node to the device-tree along with removing
-+ * the corresponding region from the EFI memory map. Used primarily to
-+ * pass the information of a RAM based ISO image to the OS.
-+ *
-+ * Return: 0 on success, -ve value on error
-+ */
-+static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-+{
-+	int ret;
-+	efi_status_t status;
-+
-+	ret = fdt_fixup_pmem_region(fdt, addr, size);
-+	if (ret) {
-+		log_err("Failed to setup pmem node for addr %#lx, size %#x, err %d\n",
-+			addr, size, ret);
-+		return ret;
-+	}
-+
-+	status = efi_remove_memory_map(addr, size,
-+				       EFI_CONVENTIONAL_MEMORY);
-+	if (status != EFI_SUCCESS)
++	// Avoid overflow
++	if (wget_info->buffer_size && wget_info->buffer_size < offset + len)
 +		return -1;
+ 	if (CONFIG_IS_ENABLED(LMB) && wget_info->set_bootdev) {
+ 		if (store_addr < image_load_addr ||
+ 		    lmb_read_check(store_addr, len)) {
+@@ -98,12 +101,6 @@ static void tcp_stream_on_closed(struct tcp_stream *tcp)
+ 	net_set_state(wget_loop_state);
+ 	if (wget_loop_state != NETLOOP_SUCCESS) {
+ 		net_boot_file_size = 0;
+-		if (wget_info->status_code == HTTP_STATUS_OK) {
+-			wget_info->status_code = HTTP_STATUS_BAD;
+-			wget_info->hdr_cont_len = 0;
+-			if (wget_info->headers)
+-				wget_info->headers[0] = 0;
+-		}
+ 		printf("\nwget: Transfer Fail, TCP status - %d\n", tcp->status);
+ 		return;
+ 	}
+@@ -212,6 +209,11 @@ static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
+ 			   "wget: Connected Len %lu\n",
+ 			   content_length);
+ 		wget_info->hdr_cont_len = content_length;
++		if (wget_info->buffer_size && wget_info->buffer_size < wget_info->hdr_cont_len){
++			tcp_stream_reset(tcp);
++			goto end;
++		}
 +
-+	return 0;
-+}
-+
-+int fdt_efi_pmem_setup(void *fdt)
-+{
-+
-+	return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-+					       fdt);
-+}
+ 	}
+ 
+ 	net_boot_file_size = rx_bytes - http_hdr_size;
+@@ -227,7 +229,9 @@ static int tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, int len
+ 	if ((max_rx_pos == (u32)(-1)) || (max_rx_pos < rx_offs + len - 1))
+ 		max_rx_pos = rx_offs + len - 1;
+ 
+-	store_block(buf, rx_offs - http_hdr_size, len);
++	// Avoid overflow
++	if (store_block(buf, rx_offs - http_hdr_size, len) < 0)
++		return -1;
+ 
+ 	return len;
+ }
 -- 
-2.34.1
+2.48.1
 
