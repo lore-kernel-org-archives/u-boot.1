@@ -4,66 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A44C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2044BC28B2E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C75FD8141E;
-	Mon, 10 Mar 2025 13:09:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AC674811DF;
+	Mon, 10 Mar 2025 13:11:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZQrRGueC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hV79oNbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5A9D81428; Mon, 10 Mar 2025 13:09:10 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A083A811DF
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:09:07 +0100 (CET)
+ id 1824D8129F; Mon, 10 Mar 2025 13:11:26 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D5C3D811B2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:11:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52AC91TO473143
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 10 Mar 2025 07:09:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741608541;
- bh=4l7dOwWLXdmu2mxGqWQf3EMT71wh/QfHsU2MSGngcIc=;
- h=From:To:CC:Subject:Date;
- b=ZQrRGueCjkSspEwvHG9IudMpluDRdT//ojm8yPwUygn5hkapFtyB/TUeAWOMCTJVS
- 32HRJ65Ou/NP3xDYG2VLQyoiXh9r79T9K0YUK4m5nc1YtIG4B+kjcvP6/ki9tfxjjI
- Wpj+2T4IHc9zAarr6Q3RlPkaRApOFz88xdJNp/co=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52AC91Uu043383
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 10 Mar 2025 07:09:01 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
- Mar 2025 07:09:01 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 10 Mar 2025 07:09:00 -0500
-Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com [172.24.227.4])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52AC8u9l046607;
- Mon, 10 Mar 2025 07:08:57 -0500
-From: Hrushikesh Salunke <h-salunke@ti.com>
-To: <vigneshr@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>, <jm@ti.com>,
- <n-francis@ti.com>, <seanga2@gmail.com>, <afd@ti.com>,
- <sjg@chromium.org>, <rogerq@kernel.org>, <danishanwar@ti.com>
-CC: <h-salunke@ti.com>, <srk@ti.com>, <s-vadapalli@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] configs: am64x_evm_a53_defconfig: Enable support for UMS
-Date: Mon, 10 Mar 2025 17:38:56 +0530
-Message-ID: <20250310120856.603150-1-h-salunke@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43cf680d351so5252125e9.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:11:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1741608631; x=1742213431; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Em2R57KIj2mfAG9mNTdbtmhF3nW5V+bX/U6cCI+Mzm0=;
+ b=hV79oNbnPIj7LE+mMIebfOUCl/ynJrc7u8NtPsLnViPxk+WMDcxb3Ypayl685N8Z/b
+ Fbk52BMDQTW7QXJSs6d1F9VjaW93eTRWxJDo8gcj3UsVfxkoyHeHJ6vyT+d5m5bqICTq
+ 45bmIhfGBt0fsFDbceK2e4OdpmpxMfJwdSc3j2i2Y3/Pv4k8wfJ3b1qDaQsWXQIGrHXj
+ 4TyQeaoH4yBmmh+k9jBW5iX+dxrB60tOxt+nZN5vgUgCJnTohd5RFxBMUxhsVvIHG396
+ mDXTrWMeJGgqHhNLT6We7b9ZqibGkkmrq+LEr2Je5DtdCjPt9YcD/EbQyCBDyw9Kt1jX
+ kIHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741608631; x=1742213431;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Em2R57KIj2mfAG9mNTdbtmhF3nW5V+bX/U6cCI+Mzm0=;
+ b=dW2dyZFAa36sl6eJdPlscQXM9tYuhO+ZBheIFIl5WEkEXw1iVk63TOHbGgzRFYl1kW
+ NrcXX+9MRvuw8vchDYwgOln616PNo1dvMDZ/2yFcM90tAZD2XxhU2jrYntplxREi5oYg
+ E2dhP8hDsv521ZfurTy121rjKrlTc/YV8eu2EZmQXp2cYNNW6JF2gFu7ITIdgYRg3EoJ
+ EbWwmoh3R9+mxAsYuJPFp8wk5ACFYR+CXHZeBs+v+7Vp2vlSw4dHpx9kGgIIJOOjKo8M
+ c0txBAJYojj1gn+QwUda94uI3uIybUPGfOUlV7dSieHvVOt178gcljMSgjEJQsFjcHR2
+ s2iw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUckl3niTVa+OjiBYf+OGqMwW6y9r6B8/Agw23tsRBpAyqpH9RmIoM4FoQveqHs9CHtdqVAA20=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfaDDQkmbY7V5dov/WC1FHaTkb9e9j8/Hn7w1QYszJMKiXLD5K
+ gLrxVTKQzRNsX1hR4d5Kz3+KjHL00TsR/6JF9TTKuJdR/TvTKLMsP0mUAoGapnE=
+X-Gm-Gg: ASbGnct3Z7CO7lfprwsw2YmqPxpBZyA6gpNH5ROR4oyP7iSEK/BrYFl7FjzX56ftwW1
+ nGMRImz6yqHdS5yUSV3rYm9Dte4hu2sn1A7my17h0zKdHn/J/Kp1CeU6RZgKuDPtIspfOjJpTaR
+ b3uxiVtAYVNEaBFxOlUsT7/vAbHoKJpIRktdFUeUIQC6RieIWm/YrvbtesxcfGRPqSaKQL9r4RG
+ IMZ9qrriFG/XZsOEIDwo+MhdrQuNrEqkzb1WGsZypABlYI2ng6cWWNQaLK9CWQj2BU1DX5qKEk2
+ uL+FBLf7flWSaaN1fybgLeoQHg1SzNANePwXsv0gPMR41NHtCqzY5sY/FM0p6Cqq4+oOJ7M53sT
+ ZkaVLxCQOH3qNuD2hv20eSKYQ
+X-Google-Smtp-Source: AGHT+IEaF+7gekp4JfsZj7RVHK5oyfmyGmmUy1YfJMhKlPTlV2zGfjf9yxZpoT2B9D5x3W6Sdh4FTQ==
+X-Received: by 2002:a05:6000:1f84:b0:38f:4ffd:c757 with SMTP id
+ ffacd0b85a97d-3913aed7ef9mr5243792f8f.2.1741608631008; 
+ Mon, 10 Mar 2025 05:10:31 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:72e5:c885:a214:4261?
+ ([2a01:e0a:3cb:7bb0:72e5:c885:a214:4261])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3912c01cb82sm15138594f8f.51.2025.03.10.05.10.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Mar 2025 05:10:30 -0700 (PDT)
+Message-ID: <7a4ee558-d31a-4280-aff4-f48a948b5b75@linaro.org>
+Date: Mon, 10 Mar 2025 13:10:29 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/6] net: lwip: extend wget to support CA (root)
+ certificates
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ u-boot@lists.denx.de
+References: <20250305142650.2966738-1-jerome.forissier@linaro.org>
+ <20250305142650.2966738-2-jerome.forissier@linaro.org>
+ <cb301142-b76a-45ff-ace4-39e58d9a8de7@gmx.de>
+ <26ec5905-e96a-4ff2-bdea-652eb9031ee3@linaro.org>
+ <CAC_iWjJ6p8+2vV38rNPq0vJcAwY9iED=U129sYJxH=DL20-8rQ@mail.gmail.com>
+ <CAC_iWjJu+Skm-YQ_Ri56EVtywy=HRuMm2gmqm7DaKXtRmVje5A@mail.gmail.com>
+ <176aa79c-fb7d-4fbc-9e1b-912617ea2538@linaro.org>
+ <CAC_iWjKdpnqHibmM2J+u8Bt59GxiD83aCt2NjD4pAvEMmA_c+A@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAC_iWjKdpnqHibmM2J+u8Bt59GxiD83aCt2NjD4pAvEMmA_c+A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,37 +116,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable support for USB mass storage class (UMS) via USB0 instance of
-USB on AM64x SoC. UMS allows USB host to access U-Boot block device
-and enable file transfer.
 
-Example usage of UMS command :
-	=> mmc list
-	mmc@fa10000: 0 (eMMC)
-	mmc@fa00000: 1
-	=> ums 0 mmc 1
-	UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3b72400
 
-Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
----
-This patch is based on following commit on master branch
-0fd7ee0306a (origin/master, origin/HEAD) scripts/checkpatch.pl: Upgrade IS_ENABLED_CONFIG to error for U-Boot
+On 3/10/25 12:49, Ilias Apalodimas wrote:
+> [...]
+> 
+>>>>>
+>>>>
+>>>> FWIW I think this still makes sense for peopke that don't want or can
+>>>> not add the cert in the u-boot binary, but can add a signed script to
+>>>> download it on the fly
+>>>>
+>>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>>
+>>> This still stands, but there are a few warning/errors on the entire
+>>> patchset. Can you address them and send a v3?
+>>
+>> Which warnings/errors? Which config? I see none with qemu_arm64_lwip_defconfig.
+> 
+> Ah my bad, it's checkpatch that has all that
 
-configs/am64x_evm_a53_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Yes, I think they're all false positives, or rather things we want to ignore
+for consistency with existing code.
 
-diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-index a501f3f567e..19993e10601 100644
---- a/configs/am64x_evm_a53_defconfig
-+++ b/configs/am64x_evm_a53_defconfig
-@@ -71,6 +71,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_PMIC=y
+Thanks,
 -- 
-2.34.1
+Jerome
 
+> 
+> Cheers
+> /Ilias
+>>
+>> Thanks,
+>> --
+>> Jerome
+>>
+>>>
+>>> Thanks
+>>> /Ilias
