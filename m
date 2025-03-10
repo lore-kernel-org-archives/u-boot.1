@@ -4,100 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28A7C28B2E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 08:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D40FC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 08:23:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C477A8141E;
-	Mon, 10 Mar 2025 09:09:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C501D811DF;
+	Mon, 10 Mar 2025 09:23:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dw6SAoV1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QUZuNgrl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18D7281428; Mon, 10 Mar 2025 09:09:01 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id B98D08122F; Mon, 10 Mar 2025 09:23:42 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76B9B812D9
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 09:08:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44D55811C1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 09:23:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cfba466b2so3317465e9.3
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 01:08:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-38dcac27bcbso3181803f8f.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 01:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741594138; x=1742198938; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WwX2JplWJ+UZOVTHk6df5z28A43gCbpKsNOXfIm73Nw=;
- b=Dw6SAoV1hJ7Dk35IpnszQ1xqhwvI7/1Peurdt0Z9HYoqLftiwzCyPNFEUwaPzC5RJa
- IJXaYPFOrTKv1Kh6rVoD9y8R/uk8Wb7VP81fwstW97b2EdofNmccTx/Hc0SMCmvkSmmj
- 6Q1UeWVLOGoknrEsz1tbxj+z05JNG12xSY0pWbq+fIZP+PBfmnjcTMQ9MFD6/q5Bqs7J
- 6DaPmzbOoU6WgOOS6gui5se9yI5Zda/NmlRTalBkWTv6PMm9Z2EqvzGsEuGRK4JF2Vwv
- jIYCqOk636EWjTTfT0KJroEWSuHEUb944J2N0peiYQfGeIM1PtUjEsXhuxQEEnJLmxGS
- XI6Q==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741595020; x=1742199820;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5kCng6kHuU6YE7Wos7wm5IjId26fZFyc1olxRT49B4w=;
+ b=QUZuNgrl+uPhjHKcWVx3HNcwYQK599xaPBCQvGBiKQJIvxPKMtT2qek36dAPPQERAv
+ BxDAhjRnYKYkyXRETo7noAEk2fXdsaEDEISUBERTqNqjz09dmTVyxZj2WjIcS7cgocVB
+ yGqcGP09RRQAJSyjkIez8EBVkya7dBhjEEXiEizRuvNTgb3fFF2YLLJGLMm+2ua16inP
+ 9H0mAKdP0289I3vZiDdPWpqUJHQhmmNQT7NaBC6asP979HKqDZ78kG0BIspe84rIkSQ+
+ 9WXGWsAAK4eNdmPyGdKDtBy1eW8OdcoHoiafT58vOr0ttk2AV+sOkGEtTrLbC4b/Q/ii
+ nYhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741594138; x=1742198938;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WwX2JplWJ+UZOVTHk6df5z28A43gCbpKsNOXfIm73Nw=;
- b=na/2i1ImH8a3ex4B02tyMBmWaoK9ZplCqMAvg2272nGWU0Gkm2+vQsDEz1z4h3XocO
- y6xMBiQYy43Z/zQbIwpaOqRRNaUQ4/M/ecashaWYaUZpmRnZ+0Zf8kKVSAZtV5pt63cK
- HdxCDsWw3r0ysNB/5LUv4AZzV80HsizDiBtxwNhWr9TF0YgWyjed2jw3hgSs9MrX1f0k
- wg0nn+N5OrNSGWaBrBa1Pm1fVZwG4PPaFO1mRrKgUdtzDYgx16sC6qSXZhCNQ3PehgAb
- vNCmZX8le30DEsGjle0kOPj8elDPOgNHXWXiSa3D2IoUB8pDYfX9MQoW58GpZaVPfBwA
- wE0A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7hDIYBFqAQ3q2aJF1Ultw+AO+bOAcj1/PHsaIkIyx/EPvGWQdOE0sK54vZ4maMBOVIs26b+o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxmx+Us2gvAqLYBGtCDL1/ZXRQfND+XzlDtAG07FzG1jfzELec9
- uk04nPnJSdcyAhnJF2pq2TfLm/O4Pd2RA5rU7TnW+7ZzSQGMz3dl59HAF9SeM4w=
-X-Gm-Gg: ASbGncuPN+vkmX6xNcoa73fWajelDnKTZp5LOpUqITjLUSsTp05040fjqr0cO2nFYJI
- uszL+PLwANvV+EJIyVBVswWKLF9R8WkYb4Nl5tFOWXt1DpFPAQFADMhJzMD9Ot2kE3JoYz0I+x4
- Ysu5z4ICR6PWbg1LUqpm7FO+P9MMhn9XpbK5FP4n5VnlKBB3Rpsc4yL80wLPpZa/i1qoJ9wgB9y
- 0rgQ9VD8lPHg6aify+/g6zlECN4DAIBsmd0I4PZmpj8RllWwHXQDkxDH2CHuwQw6npStkx/YtWg
- YTh/BPLWPUb+n5LsWvk83KdnkU95xSaLqBJiPkgJuktMCOwAG7bizCVD94KXg/Iy9jG/o0SZgnQ
- naTSRqVnC5oq8lDwywfpNFHUBL9h/mbiJ0d8=
-X-Google-Smtp-Source: AGHT+IGIis6r+kmzVzovx84+uIuZw/vrOJ6HTnJzFhTTWdQEWcky7phz/duKDI05qD2KrsR72OvBVg==
-X-Received: by 2002:a05:600c:1e8c:b0:43c:fc0c:7f33 with SMTP id
- 5b1f17b1804b1-43cfc0c92bcmr7572335e9.2.1741594137855; 
- Mon, 10 Mar 2025 01:08:57 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:72e5:c885:a214:4261?
- ([2a01:e0a:3cb:7bb0:72e5:c885:a214:4261])
+ d=1e100.net; s=20230601; t=1741595020; x=1742199820;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5kCng6kHuU6YE7Wos7wm5IjId26fZFyc1olxRT49B4w=;
+ b=jHsQFcP0CSzIEbxduR6SN/303SuwmEggekI+xHXOW8Rm3PcC9u2PBzBZmjT6wps3vi
+ /Z+rhgZVwwi1Hn+YOyvmIkxHoTwbn0TWK/WGyq6TE08gze0RA3Ahpkj/Lu5mrY+Gb420
+ OGuDkIxyMWpI26E2jG63clZEmxVfKqZle005DW8NPXQ0+IQRHdwxm0+zQMGBnXiD7v8i
+ i6CtMjhppfbvmbwNUvZyQtBtzn/Qg23zDcZOFX5w82fowC/0Ggecwn0DB1WMxFG52AKF
+ 8p09EzkR9+tzFG3rpDEnBsevXTndgSjJVcPOQaZTupPsCIPZ+2WBvX0uZiPR2avI1/Mk
+ EzXQ==
+X-Gm-Message-State: AOJu0YwBhK4+mhQsYIpCvrvt74vnEr7zgSGfIqkeChI8phkIW+dKvFty
+ sB8GskSzDXnnQ40aAs4OOkWOp/IfMeEKKsKON8YQYxJXgUknEvnjf2qQ/tQJhis=
+X-Gm-Gg: ASbGncu2dAIZEreXIAdh61LxsAKGv/mppNNO4IJ+zvtzOW74yS45xNEnlykuBxH+0fq
+ eSKH8U7MMqLzb8fpHCZtYc7ta/l5YeNQlQpmmpo5mkt/Ly22kFBHzaM1k0OBdqWMF/K0jquSFvH
+ M+A3/+9cFoQMS298o33EkkBlragD8qZz8qNKmrbgbR4gExtS8d5ZdCOzUKQNacnxNPqvviHyGnC
+ yhil62WpZO+pR12uLSZlMu9r79kkPzCLjroIjaBfRSd93WIXkp/Wljys8Y2w7HWZyUzSu0ugQVC
+ FsnpRrJ/mAt7vzSpY6PRW8PDMKCBKyVqmlPeL+Wa2CatZZsmA0nuSqanBeI3
+X-Google-Smtp-Source: AGHT+IGi1BxR+dX6tGGhQgp5YK3g9L2PSHt9yEVb+9/5w7esfUQCBmWYeXS5bPcZNSbjvb2MdUKLhg==
+X-Received: by 2002:a05:6000:1842:b0:390:f116:d220 with SMTP id
+ ffacd0b85a97d-3913af09864mr4114772f8f.17.1741595019659; 
+ Mon, 10 Mar 2025 01:23:39 -0700 (PDT)
+Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bdd9471b7sm134751525e9.34.2025.03.10.01.08.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Mar 2025 01:08:57 -0700 (PDT)
-Message-ID: <176aa79c-fb7d-4fbc-9e1b-912617ea2538@linaro.org>
-Date: Mon, 10 Mar 2025 09:08:56 +0100
+ ffacd0b85a97d-3912c01952dsm13877372f8f.45.2025.03.10.01.23.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Mar 2025 01:23:39 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250227205101.4127604-1-trini@konsulko.com>
+References: <20250227205101.4127604-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/2] usb: gadget: Remove final remnants of
+ CONFIG_USB_DEVICE
+Message-Id: <174159501896.23928.2623190250135696495.b4-ty@baylibre.com>
+Date: Mon, 10 Mar 2025 09:23:38 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] net: lwip: extend wget to support CA (root)
- certificates
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- u-boot@lists.denx.de
-References: <20250305142650.2966738-1-jerome.forissier@linaro.org>
- <20250305142650.2966738-2-jerome.forissier@linaro.org>
- <cb301142-b76a-45ff-ace4-39e58d9a8de7@gmx.de>
- <26ec5905-e96a-4ff2-bdea-652eb9031ee3@linaro.org>
- <CAC_iWjJ6p8+2vV38rNPq0vJcAwY9iED=U129sYJxH=DL20-8rQ@mail.gmail.com>
- <CAC_iWjJu+Skm-YQ_Ri56EVtywy=HRuMm2gmqm7DaKXtRmVje5A@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjJu+Skm-YQ_Ri56EVtywy=HRuMm2gmqm7DaKXtRmVje5A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3-dev-86319
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,86 +99,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-
-On 3/9/25 12:00, Ilias Apalodimas wrote:
-> On Sun, 9 Mar 2025 at 12:58, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
->>
->> Hi Jerome, Heinrich
->>
->> On Wed, 5 Mar 2025 at 17:13, Jerome Forissier
->> <jerome.forissier@linaro.org> wrote:
->>>
->>> Hi Heinrich,
->>>
->>> On 3/5/25 16:07, Heinrich Schuchardt wrote:
->>>> On 05.03.25 15:26, Jerome Forissier wrote:
->>>>> Add the "cacert" (Certification Authority certificates) subcommand to
->>>>> wget to pass root certificates to the code handling the HTTPS protocol.
->>>>> The subcommand is enabled by the WGET_CACERT Kconfig symbol.
->>>>>
->>>>> Usage example:
->>>>>
->>>>>   => dhcp
->>>>>   # Download some root certificates (note: not authenticated!)
->>>>>   => wget https://cacerts.digicert.com/DigiCertTLSECCP384RootG5.crt
->>>>>   # Provide root certificates
->>>>>   => wget cacert $fileaddr $filesize
->>>>>   # Enforce verification (it is optional by default)
->>>>>   => wget cacert required
->>>>>   # Forget the root certificates
->>>>>   => wget cacert 0 0
->>>>>   # Disable verification
->>>>>   => wget cacert none
->>>>>
->>>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>>>> ---
->>>>>   cmd/Kconfig     |   8 ++++
->>>>>   cmd/net-lwip.c  |  17 ++++++--
->>>>>   net/lwip/wget.c | 102 ++++++++++++++++++++++++++++++++++++++++++++++--
->>>>>   3 files changed, 121 insertions(+), 6 deletions(-)
->>>>>
->>>>> diff --git a/cmd/Kconfig b/cmd/Kconfig
->>>>> index 8dd42571abc..d469217c0ea 100644
->>>>> --- a/cmd/Kconfig
->>>>> +++ b/cmd/Kconfig
->>>>> @@ -2177,6 +2177,14 @@ config WGET_HTTPS
->>>>>       help
->>>>>         Enable TLS over http for wget.
->>>>>
->>>>> +config WGET_CACERT
->>>>> +    bool "wget cacert"
->>>>> +    depends on CMD_WGET
->>>>> +    depends on WGET_HTTPS
->>>>> +    help
->>>>> +      Adds the "cacert" sub-command to wget to provide root certificates
->>>>> +      to the HTTPS engine. Must be in DER format.
->>>>> +
->>>>
->>>> Shouldn't we build CA certs into U-Boot?
->>>> Downloading certs from unsafe media is not a good replacement.
->>>
->>> That's the purpose of patch 4/6 [1]. Although downloading may still be a
->>> valid option when used with hash verification as I mentioned in a reply to
->>> Ilias in v1 [2].
->>>
->>
->> FWIW I think this still makes sense for peopke that don't want or can
->> not add the cert in the u-boot binary, but can add a signed script to
->> download it on the fly
->>
->> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Thu, 27 Feb 2025 14:51:00 -0600, Tom Rini wrote:
+> The lone user of the legacy USB device framework have been removed for
+> some time. Remove the final parts of the code that were missed.
 > 
-> This still stands, but there are a few warning/errors on the entire
-> patchset. Can you address them and send a v3?
-
-Which warnings/errors? Which config? I see none with qemu_arm64_lwip_defconfig.
-
-Thanks,
--- 
-Jerome
-
 > 
-> Thanks
-> /Ilias
+
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+
+[1/2] usb: gadget: Remove final remnants of CONFIG_USB_DEVICE
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/7f061aba9af99d2e911418939f0dbd5b79911a1e
+[2/2] usb: gadget: Remove the legacy usbtty driver
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/6689b0c955f1ec885ed1acafc7c5d7c1565dbe63
+
+--
+Mattijs
