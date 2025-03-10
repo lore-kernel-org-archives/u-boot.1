@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4861C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 09:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B86C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 09:01:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC2A58004F;
-	Mon, 10 Mar 2025 10:00:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B12CD8004F;
+	Mon, 10 Mar 2025 10:01:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="i/mKOidC";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="ePa2UU/U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36E2380017; Mon, 10 Mar 2025 10:00:17 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E650E812C8; Mon, 10 Mar 2025 10:01:45 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3BCA811C1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 10:00:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3946280017
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 10:01:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=5164540d7d=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52A8P6xg023789;
- Mon, 10 Mar 2025 10:00:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- 216KuYoTMtdPHVpXfA14RmFfMUwL9E8WJDCou5t5dl4=; b=i/mKOidCh6zuQq9X
- dQ7pX2DCqoOYZ7wCURZzUejKhWaVZGebip3r9bZ3f0fjgJRwfafzhZ/AhzK+pOg8
- BesDFpgNcWR9Cr5YYRxn84fbftyhj6FthVhvsSXWEpCUixxJVP4boI4/uh6/3q/Q
- CnUJzR4XR8ry//la5OAHXM4wLKGPlEDssB/+ZBEycW6DOUeDTRQRXh1+Z85Vrm3p
- gs//OqIIt72wuHIZc4mJ+opdIKw/+ggvxX5y5ZXq1xGebcJJHM4bkCFpyJuEMpgd
- 6pA7nj+CwogimIkBNsssLV38s0RmFHARFno5i7/ZtEuosYmqWtPIUwS4uXia5tb+
- ZzdvEQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 458exph1f7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Mar 2025 10:00:08 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 639D340052;
- Mon, 10 Mar 2025 09:59:05 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7413C57A341;
- Mon, 10 Mar 2025 09:58:25 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Mar
- 2025 09:58:24 +0100
-Message-ID: <c4b97740-ea40-44af-b92f-46cf6e62480b@foss.st.com>
-Date: Mon, 10 Mar 2025 09:58:24 +0100
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5b572e45cso6972598a12.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 02:01:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=9elements.com; s=google; t=1741597303; x=1742202103; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3pIylDnRTk7hp+d4N7WmTUoLurZfyu50rARhAzIBegE=;
+ b=ePa2UU/UWsCnsIscXVHup/7/mdWGs7hTZPTR+12Dt+9bXXqRmIF2LhEz9GrCP/JHks
+ b8Pb3lb52s8Fqb8nRcp+fZ4wUpq8Rm92QMGsoanrgdUVqXwPjBbOgSgemCZuqsHpxvHp
+ NnIJzc4CF9a4I+YmXKQa1Fu7BPtUcUx2opgv8R8t1SiM94aByMZU1TzYDFrzdU6sA0yS
+ A6l38UtHSPcEx3pyXa5OEjlG5yojejbbrYUY+D/SOnkgJ329JKWnO4rTpmUhyUwVcX0M
+ uqcsfwVKls2DR/mnGxP8HDaf9KHldVE7Of1pdFd1n4slVMEh9YFXlTGca14LiWAXZoto
+ ScpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741597303; x=1742202103;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3pIylDnRTk7hp+d4N7WmTUoLurZfyu50rARhAzIBegE=;
+ b=GVXf56YOjnFK6pqheVrOP11LZoNNPUI777c67cQTMla3wsdLWIqzWvOczdqeNeIttQ
+ OQ+00z8bBFC6FTN8tSxvj1K1wYI71BMhbiiIjIOLU7CHuDnGN4paxImYGL+HmcbG5c2J
+ buDWNwK5IDPkbwBm3yrfcwSaP8kXGBOv1+RX3v7FL0CPUNqyajp6c3j2XX9GoLf/5+Z/
+ OmWQNq1qa6BvNxyZLA2k+NXsWolDjlXeZqYZQLS9EyMxOExAJXFh82kw/22zZB9kLRZt
+ KAVfnLRiHErHSZsrecOECjCRCcbHv17U8/7r6CiJ4/ZeMap89HtYSdPI0uqaWQT4ojqy
+ sxBA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUIP7C8vmlcpl34b2mcJZRzMluArogjrecZzbWk796jMEZmHu5fPfcQM9oAUAVo8bBouGm/w3A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdWYHuQWI8PWopJQjsCztMBfj3LHT0HD0fR/dIXuXDwIUt9FDG
+ QeQH2iPfTZKmai50kl2IyWit/7+GJVt9fZqAHM4m0Pnj8EDK5yO9DIy2NtXGZCfZrhw3AGWl0C/
+ TAsQ=
+X-Gm-Gg: ASbGncuUNjM6vb/8Xj1R0CHdICQnTM3VhRjGZslgVBvR5YSozEX5vOXoqrLbZmnDi2I
+ i+O3aFTEuZ3YzFAM1XnrxrhSs9Bw8cdkGMinzuVuQX1ZhyndUQL/vgV9amuceYnVWErh0qBXsmI
+ +uHfV1+4gNag5D9KeUwoik9DegGCyjEanbz8RXrOvnxN94ccwukog2DCAA2iTAGJ0C8CE7ha9/R
+ 2OlpokQN3+otgVfUjwBCfStGq5NeNUY6wI/g2B4NGi9k/+dDp3f6Ba6AqMw+kajn8Y6WzxB8t53
+ Uef8OkaNhXbsKhDlYnM+a34nJGHjxRiybvM5n4YNTrUumLir3xaZpdzDFxtmeUGEeO0NIPkA0vd
+ 3NFuZ+Phdw2f9VGBW9W4NFOl121y+6U61TJWx01taKec=
+X-Google-Smtp-Source: AGHT+IEHZeACGva8ZY4LbMg9oFITEnhJ/1AJQKp5xkkjmaFEven1J7uH2WqtkZdvpf1iVSjL6wbzOg==
+X-Received: by 2002:a05:6402:3495:b0:5e6:20de:f79b with SMTP id
+ 4fb4d7f45d1cf-5e620df0103mr8364642a12.31.1741597302546; 
+ Mon, 10 Mar 2025 02:01:42 -0700 (PDT)
+Received: from fedora.sec.9e.network
+ (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e5c74a7184sm6578082a12.34.2025.03.10.02.01.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Mar 2025 02:01:41 -0700 (PDT)
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
+	u-boot@lists.denx.de
+Subject: [RESEND PATCH 1/3] pci_auto: Downgrade prefetch if necessary
+Date: Mon, 10 Mar 2025 10:01:32 +0100
+Message-ID: <20250310090137.1645083-1-patrick.rudolph@9elements.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32mp: Fix dram_bank_mmu_setup() for ram_top=0
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Lukasz Majewski
- <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250309020623.1605623-1-marex@denx.de>
- <e31a9e73-75b0-420d-acb5-a706bbddb1be@foss.st.com>
-Content-Language: en-US
-In-Reply-To: <e31a9e73-75b0-420d-acb5-a706bbddb1be@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-10_03,2025-03-07_03,2024-11-22_01
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,61 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Legacy PCI devices, like qemu's Bochs VGA device, are allowed to have
+prefetchable 32-bit BARs, while PCIe devices are not allowed to have
+32-bit prefetchable BARs. Typically prefetchable BARs are 64-bit and
+typically the prefetch MMIO window is also 64-bit and placed above
+4GiB, as it's the case on qemu sbsa-ref.
 
+Currently the U-Boot code assumes that prefetchable BARs are
+64-bit BARs and always tries to assign them into the prefetch
+MMIO window.
 
-On 3/10/25 09:24, Patrice CHOTARD wrote:
-> 
-> 
-> On 3/9/25 03:05, Marek Vasut wrote:
->> On STM32MP15xx with 1 GiB of DRAM, the gd->ram_top becomes 0,
->> because DRAM base 0xc0000000 + DRAM size 0x40000000 leads to
->> gd->ram_top overflow which resets it to 0. Handle this special
->> case simply by checking for gd->ram_top being zero, and if it
->> is, assume there is no addr >= gd->ram_top .
->>
->> This fixes boot hang on STM32MP15xx with 1 GiB of DRAM.
->>
->> Fixes: 25fb58e88aba ("ARM: stm32mp: Fix dram_bank_mmu_setup() for LMB located above ram_top")
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Lukasz Majewski <lukma@denx.de>
->> Cc: Marek Vasut <marex@denx.de>
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->> index cb1b84c9af9..d5eaf6711b6 100644
->> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->> @@ -82,7 +82,7 @@ void dram_bank_mmu_setup(int bank)
->>  		option = DCACHE_DEFAULT_OPTION;
->>  		if (use_lmb &&
->>  		    (lmb_is_reserved_flags(i << MMU_SECTION_SHIFT, LMB_NOMAP) ||
->> -		    addr >= gd->ram_top)
->> +		     (gd->ram_top && addr >= gd->ram_top))
->>  		   )
->>  			option = 0; /* INVALID ENTRY in TLB */
->>  		set_section_dcache(i, option);
-> 
-> 
-> Hi Marek
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> Patrice
-> 
+When a 32-bit BAR is marked as prefetch, but the prefetch area is
+not within the first 4GiB of the address space, then downgrade the
+BAR and place it in the non-prefetch MMIO window.
 
-Applied to u-boot-stm32/master
+For prefetch BARs there's no downside on being placed in non prefetch
+MMIO areas, besides the possible slower performance when a driver tries
+to map it Write-Combine.
 
-Thanks
-Patrice
+TEST: Fixes pci_auto on QEMU sbsa-ref fails to autoconfigure BAR0.
+
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+---
+ drivers/pci/pci_auto.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/pci/pci_auto.c b/drivers/pci/pci_auto.c
+index 90f81886445..e68e31a8227 100644
+--- a/drivers/pci/pci_auto.c
++++ b/drivers/pci/pci_auto.c
+@@ -107,7 +107,8 @@ static void dm_pciauto_setup_device(struct udevice *dev,
+ 			}
+ 
+ 			if (prefetch &&
+-			    (bar_response & PCI_BASE_ADDRESS_MEM_PREFETCH))
++			    (bar_response & PCI_BASE_ADDRESS_MEM_PREFETCH) &&
++			    (found_mem64 || prefetch->bus_lower < 0x100000000ULL))
+ 				bar_res = prefetch;
+ 			else
+ 				bar_res = mem;
+-- 
+2.48.1
+
