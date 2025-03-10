@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3208DC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 21:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC8D2C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 21:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AED680107;
-	Mon, 10 Mar 2025 22:38:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E453080107;
+	Mon, 10 Mar 2025 22:49:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BcP+BxT1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FMbytdT2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B2DC80FB9; Mon, 10 Mar 2025 22:38:05 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id ADF1D807D9; Mon, 10 Mar 2025 22:49:12 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E46F800C1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 22:38:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FB2E800C1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 22:49:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2ff80290e44so7280310a91.0
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 14:37:59 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so90265455ad.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 14:49:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741642678; x=1742247478; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741643349; x=1742248149; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ut2imbayUda6V3B9u8VBUf1EMk1kWUtNqWdHh6PjE/Y=;
- b=BcP+BxT1BXdNDIRHi7GhzmEkqAB3WJnRQ38ASzpbwVYI3Gyp64ba8ZcuqKswZc3tZY
- pp3v7dqwJxHGZFiv5oLOXxazN+IlyzWc+Fq7VgFYtdmmPcF2gigMay8eTc4Z/YECtQGX
- 0RmeaNKCthwxmAcXrWJccX8DNczRcgCgKod0M=
+ bh=+/65f+T8d3Sklf6M+oPeDN92op/k1WXT8CPmHqHGdxk=;
+ b=FMbytdT2Uw/Yr3RkT34yT4c45XOJOEigYcnjurki3qipNgcxH5qJ7YUPCsrHkSgPwq
+ kzE6ViwURN6uA+qOXu53G3+awXvgl7cv13cSGKdcdphxRrlwEwBh7vYqSS1LVKLp5+2k
+ xcgHoegRBD/LorSgBpgkaGfnTuaGSYI9qwXVE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741642678; x=1742247478;
+ d=1e100.net; s=20230601; t=1741643349; x=1742248149;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ut2imbayUda6V3B9u8VBUf1EMk1kWUtNqWdHh6PjE/Y=;
- b=otQVug835uG6XAqDmxpj01EX1Pzsj0nl8GiiGp+ygxNWeNObssz6UH8TyLe8wSp8Wn
- /C+FHjn79QZVOSAOuouHPxRPBnNPefY8GTsMANRhTp7YRmDifBm6P8CU6gjalhm31h78
- r7AJA8FmMoQGIdI9i4QhPTsf3h18rBYCbO+/pJ2RWn1mymlLr8be3K5xMVLZE2LPZ/Uk
- yrxfO5Hu96+KITUeLG6H4drwaSnY1BqvuxeO+chDVgCPKo+pleEuxZxibRmfZX/el6FS
- n9j/gp7O57Wkp5Y1nrnApTollbGqtB3n2zr/FOmW++iwzzV+K/sgv5IXNCHuN0nvRq9x
- SjgQ==
-X-Gm-Message-State: AOJu0YwfjqP/wHe3ybbIuXqdztJtplPVMygtRaFN8oMKlj9dvvEtjnnA
- tfeL9C4Sts02+2zQ+/4fIuLyUfLspQU7pJRBZ4eGU3wnHpMoLUzZqwi3JcfhS1M=
-X-Gm-Gg: ASbGncvzQjPptj8x0AXQ/tFdBtF+678PF7GgNW5CbsMl8wyZnoYCx1Vr1gg9eg8cUfa
- Y9YF4IJJersMwcWxBWYgW/y9ohDvo+ZB+VlDhY9KabTAdhICnhyviBpZ6/9yVx1TQ8Lf9BSxv3+
- w6SkuuBWnLdXJitnLvg5ERjU1yvNPwM9+6dnEmPvHbtsroYJMQ2rOBdW0z6V1KSyN4kRQuGfG4Z
- Ot30jWcCCX16vuXsSEO1H+lvCreDey9UUz124y1GFMv7qpOX3QDpw7HPZ6E4ewRKtiNiwt/jFYd
- GM4L5B43ry1rytPi15hNNy+Kx5DjcalKfUVKwju+p4sKnw==
-X-Google-Smtp-Source: AGHT+IFRm6B8PccFHn8NwiaIMDBnorq1GbK3UcTF6YfFspdxMtzO8OKJfrtQUIG2ND+vUv5mQx8+7w==
-X-Received: by 2002:a17:90b:5110:b0:2ee:5bc9:75c3 with SMTP id
- 98e67ed59e1d1-2ff7ce7b375mr22230198a91.5.1741642678512; 
- Mon, 10 Mar 2025 14:37:58 -0700 (PDT)
+ bh=+/65f+T8d3Sklf6M+oPeDN92op/k1WXT8CPmHqHGdxk=;
+ b=d+RY0Zp1KQFndGxx21DQQ4FJDTJccRlqw1e0VfkfZl01O6N1anTBGagkd0QVtQop8W
+ 3Y1qMoom2KBHtCb+dhVuJqoEEAiXyE/axYRLLpOF5ODrZjNR5DMmjBfhFDNTeP6mpx9R
+ UBxWv/wFQTdeXLGJp2V15NjDV23DWP1HH/XgDZcX1eNISqfJ8Lr2whRv6k/LkHGJBknQ
+ YX4OfwE37hy5UZy4P+0nXFuqWL6P07BEjgItgDwY9exHbnCXOpgvtX1xlDQ3SUURlKTF
+ rNDGOos02EeMqwqnkWdl2vKo8bLHmnyp/VJc86ta8LpWQeVQZFCNawo0wyRxtaWJ+iVR
+ J8+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVfpWPO2fVSXum89pzvHGGKeGAAeROrGHkAQttkzMIhMhuOL5Dh9U5AFuUBPRlrS674B4ot9xk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwAMEz0a/7MiuWFDUArcQJB0EA+u9APoi5/Rz0pJlNVhDr5S3C2
+ z3VuxRlMJw9amOV7CxIpAFiqzkfraebdlhXAejj1d4kItxhmVsQrdrgrvdcocVw=
+X-Gm-Gg: ASbGnctLJ4mEaf9o4yVcKrjdyj0BOiysLcF/QN8TrUYHSZBt50Vy+4MNCnhLc4XrJfa
+ 5MshW6tcCgtTd77Q/RATX7aDjntJwXr5TyuGwMXd8e2+p1jbtCjIC2vOonqeVi4p7LgcTZjUh/w
+ y4nJ4hUKvwzSjAB7BUdXrS/+4WLRowA29S3vTsbrmQtX1OjUBLN1Fz62ZLwhpSSm3QNto8PV0Q3
+ PFApXBYeqZEfeIfkLAzguN9/vhD3BfYmUlBzAqKNqpKpfdCDfsq2nME0dnqiAV0RimjIBDTscPd
+ iNnw0cDP/FDW4kVMHPmQay56E6b2iEYOE5/4IYX42d3Ee33/5cM5UnMY
+X-Google-Smtp-Source: AGHT+IHi+qCECkN/O8wkaiHC2ZoPdvey1LL16U92hDMgQ3zCDRfp9vuXpxI9T34iXk7Bf99XkgN+NQ==
+X-Received: by 2002:a17:902:d488:b0:223:3ef1:a30a with SMTP id
+ d9443c01a7336-225931ad489mr13602815ad.45.1741643348815; 
+ Mon, 10 Mar 2025 14:49:08 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22410a91be9sm83216905ad.179.2025.03.10.14.37.56
+ d9443c01a7336-22410a7f7fasm83589985ad.115.2025.03.10.14.49.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 14:37:57 -0700 (PDT)
-Date: Mon, 10 Mar 2025 15:37:54 -0600
+ Mon, 10 Mar 2025 14:49:08 -0700 (PDT)
+Date: Mon, 10 Mar 2025 15:49:04 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ Baruch Siach <baruch@tkos.co.il>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hiago De Franco <hiago.franco@toradex.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 12/12] test_fs: Add exfat tests
-Message-ID: <20250310213754.GN2640854@bill-the-cat>
+Subject: Re: [PATCH 08/12] fs: exfat: Fix conversion overflow errors
+Message-ID: <20250310214904.GO2640854@bill-the-cat>
 References: <20250308201533.1315951-1-marex@denx.de>
- <20250308201533.1315951-13-marex@denx.de>
- <20250310153055.GI2640854@bill-the-cat>
- <6d68d2f0-c969-43f1-86c6-1ccbf039291a@denx.de>
+ <20250308201533.1315951-9-marex@denx.de>
+ <393a7b06-402a-48b0-8ed4-5dcaa7ab9383@cherry.de>
+ <a7b192b6-48b8-4878-a6dd-563dbb9bdb06@denx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uWfO+eW6Cyfwbs3P"
+ protocol="application/pgp-signature"; boundary="wTCRC5hjqsW94fKY"
 Content-Disposition: inline
-In-Reply-To: <6d68d2f0-c969-43f1-86c6-1ccbf039291a@denx.de>
+In-Reply-To: <a7b192b6-48b8-4878-a6dd-563dbb9bdb06@denx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,101 +107,116 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uWfO+eW6Cyfwbs3P
-Content-Type: text/plain; charset=us-ascii
+--wTCRC5hjqsW94fKY
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 10, 2025 at 09:37:36PM +0100, Marek Vasut wrote:
-> On 3/10/25 4:30 PM, Tom Rini wrote:
-> > On Sat, Mar 08, 2025 at 09:12:16PM +0100, Marek Vasut wrote:
-> > > Add tests for the exfat filesystem. These tests are largely an
-> > > extension of the FS_GENERIC tests with the following notable
-> > > exceptions.
+On Mon, Mar 10, 2025 at 10:03:37PM +0100, Marek Vasut wrote:
+> On 3/10/25 12:17 PM, Quentin Schulz wrote:
+> > Hi Marek,
+>=20
+> Hi,
+>=20
+> > On 3/8/25 9:12 PM, Marek Vasut wrote:
+> > > Fix the following conversion overflow errors. The input field is alre=
+ady
+> > > limited to 3/2/1 bits using the bitwise and, move the parenthesis aro=
+und
+> > > to avoid the bogus warning:
 > > >=20
-> > > The filesystem image for exfat tests is generated using combination
-> > > of exfatutils mkfs.exfat and python fattools. The fattols are capable
+> > > "
+> > > fs/exfat/utf.c: In function =E2=80=98utf8_to_wchar=E2=80=99:
+> > > fs/exfat/utf.c:165:23: warning: overflow in conversion from =E2=80=98=
+int=E2=80=99 to
+> > > =E2=80=98wchar_t=E2=80=99 {aka =E2=80=98short unsigned int=E2=80=99} =
+changes value from =E2=80=98(int)(short
+> > > unsigned int)*input << 18 & 1835008=E2=80=99 to =E2=80=980=E2=80=99 [=
+-Woverflow]
+> > > =C2=A0=C2=A0 165 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *wc =3D ((wchar_t) input[0] &=
+ 0x07) << 18;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^
+> > > fs/exfat/utf.c:170:23: warning: overflow in conversion from =E2=80=98=
+int=E2=80=99 to
+> > > =E2=80=98wchar_t=E2=80=99 {aka =E2=80=98short unsigned int=E2=80=99} =
+changes value from =E2=80=98(int)(short
+> > > unsigned int)*input << 24 & 50331648=E2=80=99 to =E2=80=980=E2=80=99 =
+[-Woverflow]
+> > > =C2=A0=C2=A0 170 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *wc =3D ((wchar_t) input[0] &=
+ 0x03) << 24;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^
+> > > fs/exfat/utf.c:175:23: warning: overflow in conversion from =E2=80=98=
+int=E2=80=99 to
+> > > =E2=80=98wchar_t=E2=80=99 {aka =E2=80=98short unsigned int=E2=80=99} =
+changes value from =E2=80=98(int)(short
+> > > unsigned int)*input << 30 & 1073741824=E2=80=99 to =E2=80=980=E2=80=
+=99 [-Woverflow]
+> > > =C2=A0=C2=A0 175 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *wc =3D ((wchar_t) input[0] &=
+ 0x01) << 30;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^
+> > > "
+> > >=20
 > >=20
-> > Did you mean "exfatprogs" and not "exfatutils" ? But we need to update
-> > tools/docker/Dockerfile to list the tool there.
->=20
-> It seems the CI container already has the tools in it ?
-
-Implicitly and not explicitly then.
-
-> Where do I update the docker container, is that tools/docker/Dockerfile ?
-
-Yes, thanks.
-
-> > > of generating exfat filesystem images too, but this is not used, the
+> > Since this doesn't seem to be U-Boot-specific, any chance to open a Pull
+> > Request on the project so we may be able to not carry this patch when
+> > upgrading (yes, the last commit in the branch was two years ago, but it
+> > seems the maintainer is still active on issues).
 > >=20
-> > Presumably because "fattools mkfat" seems to have further external
-> > dependencies and so would be more of a pain to use.
+> > Considering that wchar_t is an unsigned short int and that USHRT_MAX is
+> > 0xffff (so 2B or 16b)...
+> In fact, this error does not even appear in upstream , because upstream d=
+oes
+> not use -fshort-wchar compiler flag . U-Boot does use this compiler flags
+> since 4a85663ec7ed ("kbuild: Enable -fshort-wchar") .
 >=20
-> I don't think it does, but I think we should stick to tools which will be=
- in
-> production systems as much as possible, and that is mkfs.exfat from
-> exfatprogs . The fattools is only used here because mkfs.exfat cannot cre=
-ate
-> an image from list of files.
+> So I wonder if this might be the right fix here instead:
+>=20
+> diff --git a/fs/exfat/Makefile b/fs/exfat/Makefile
+> index 550c0683d65..8ca112cf0e9 100644
+> --- a/fs/exfat/Makefile
+> +++ b/fs/exfat/Makefile
+> @@ -1,6 +1,9 @@
+>  # SPDX-License-Identifier: GPL-2.0+
+>  #
+>=20
+> +# The utf.o does really need 32bit wchar_t
+> +CFLAGS_REMOVE_utf.o :=3D -fshort-wchar
+> +
+>  obj-$(CONFIG_FS_EXFAT) +=3D \
+>  	cluster.o \
+>  	io.o \
 
-Well, I tried "fattools mkfs.exfat" and it wanted tkinter to be
-installed, so that's why I'd not bother with it.
-
-> [...]
->=20
-> > >   test/py/requirements.txt          |  1 +
-> > >   test/py/tests/fs_helper.py        |  8 ++++++--
-> > >   test/py/tests/test_fs/conftest.py | 20 +++++++++++---------
-> > >   test/py/tests/test_fs/test_ext.py | 20 ++++++++++++++------
-> > >   4 files changed, 32 insertions(+), 17 deletions(-)
-> >=20
-> > We also need to update test/py/tests/test_fs/fstest_helpers.py to know
-> > to call fsck.exfat.
->=20
-> Fixed in V2, thanks.
->=20
-> > [snip]
-> > > @@ -64,6 +66,8 @@ def mk_fs(config, fs_type, size, prefix, src_dir=3D=
-None, size_gran =3D 0x100000):
-> > >                   check_call(f'tune2fs -O ^metadata_csum {fs_img}', s=
-hell=3DTrue)
-> > >           elif fs_lnxtype =3D=3D 'vfat' and src_dir:
-> > >               check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/',=
- shell=3DTrue)
-> > > +        elif fs_lnxtype =3D=3D 'exfat' and src_dir:
-> > > +            check_call(f'fattools cp {src_dir}/* {fs_img}', shell=3D=
-True)
-> > >           return fs_img
-> > >       except CalledProcessError:
-> > >           call(f'rm -f {fs_img}', shell=3DTrue)
-> >=20
-> > A cleanup to use fattools in both cases would be nice, as a follow-up.
-> See above, I am not convinced we should go for fattools all across the
-> board. Do you think we should ?
-
-In that we can't drop dosfsutils entirely, it's not a big deal either
-way.
+Your initial approach is right I think, I'm not sure it's a good idea
+to mix and match that flag throughout the codebase.
 
 --=20
 Tom
 
---uWfO+eW6Cyfwbs3P
+--wTCRC5hjqsW94fKY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfPW7IACgkQFHw5/5Y0
-tyyIdwwAlwK54TAC/hLPEycwb0ivCvVeu4Q1Sib+UX2c7NvacsC6X79eR+5PL+5W
-NNuVjoU5Wum/EqHST1PxmN/QgQfvWmTTb3veLDuJU+WKOp125b7j5SLRu1/Aq/lm
-MTnUseVDikkUKZZ9pbwENEk1WXlOhILuWx2TylcAD+9kxR+5Dgiw3e33xRthEMcv
-aUJh/ktXFtjtKCzqr4RIGFgOprclq2LVc7t5tRtc+L/VNFjEypU+dvscT646qLCX
-eZJgHiBkxt44e3uBKLhyDR04iGnqe6u3u7qbIN8QqoTt4KSCWF8x5LuYrcL+b3GA
-2Vyql1mzb2/f7hf3DFMauzYLCY1tvBHjuLaPHiOYAXM1EQM+JyJC4QmfoZYE73aS
-aTbICftc37FtDGvUkOcsTQxtylfRiNJoeppLz5K1iBeVU8yQD8JNmj/qQcPsi9GE
-88ZxuiUjHXyTlsRZohR5f0ZfHj3R4WqQjgLFHzDcFj3YB2Vv8P6YbTx/DDE3edj6
-60jgr+N3
-=6DzM
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfPXkkACgkQFHw5/5Y0
+tyxfagv7BPO3xg3xRbbx2F0BPsQDIXi/VAxFncNIPTcZaZbJE+1v5UYQCh1OT4eL
+8ZeSAJeVwBLGXu+wbcUEzWeS+vTPNOb24njI+OInaxRL13Yu4XNrIcvAaziO8mJo
+0ew4dzRtGy0BOLQKev5bSGf8kwGDOmNsM6y6znDMGI/G9AuvxV9whouRlYaS2X1j
+Nzl1FURPKo4M236SRoT57WTwtWjFxxVxuGZ+y433xz1Cvu4v7XDWOz225YtjEDKh
+dOF3fhaBzatqvI0DiHyhcLOcpnyQjHUQGs0OnONt3RNwJb5OITzo3TbYAyaqcHe/
+UG2qL8GgmBNbcGyy5odJ94vdIjgAQMN5u83Mn0hmVVFGDDemCxJX7fOdUd9WEXNT
+sE6q+KNoT/XvTUSaI7VmIyBFBL0TXAK8mjXVrybshBL+gQqO4LzkEFO8TSWVJFrD
+qLfqBoN+l/Qqu6qsAEVjTsKxb2E3cs+8tbZJJ3Jrobr0HNqjLlXF7iHuKk5IWieg
+uKHHCqvy
+=pEUl
 -----END PGP SIGNATURE-----
 
---uWfO+eW6Cyfwbs3P--
+--wTCRC5hjqsW94fKY--
