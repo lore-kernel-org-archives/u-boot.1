@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25335C28B28
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 03:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BE5C28B28
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 03:07:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E74B8043C;
-	Mon, 10 Mar 2025 04:07:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D7EE2811DF;
+	Mon, 10 Mar 2025 04:07:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741576058;
-	bh=p9bvDtfk1sTDyEOBB5br+kKtWqI6qXk9wSikCfisEhY=;
+	s=phobos-20191101; t=1741576059;
+	bh=QqSYbDORskD6dxlW0QaxqlfCsQwiX4x/4dLVH/LRNlk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FfgmbeVc8GFCemwzqwoJkimEkQfGdN6nPrSIvag4j14hmWj3jUT6i4V/Ye4z5d3Qm
-	 bcPhdnIHWM15KYvglKIzm9LwPKxte6I/Aua7wnQnmjjCQFqlxPHAvcK6ibstW2ABn7
-	 1edxTm+SUG62hz2+VxjXk2hdC7rBbapVdaYwXYjArXbfQQY5DGHXIcCZVhaSME8atR
-	 G0XpcmIqxdvkKCk3rswWWR28FgEvhhgP4WlNMqYJPEtBh1vJESCVIbuY0UsBn3Gy2A
-	 9XYFn0xXCdp5aOPpkIjZQ27OkCdYqxgFq0CB34Epwi9cr4xAlh8r9g3ET4g07NHcPU
-	 B6fTmU1r1LGUg==
+	b=pUF+sNqRN0DZMXronibiLHDq2osaBMzJLVKUIbPBZ6g4yIZNH3+T2NDi9DtdB9O08
+	 RwehviM2VzTbu3XNijXnprlRMDY1LQw+nixOcw2ImlwwlOIvsyWp34V48viRCk4QuY
+	 XNj7lEOFWcQaLh9DeGXcWawsbYcd7t0eEg+Ib1qDjVPmakzB/o1aCbvv878UfGnfaO
+	 ZFr/j7vLBwvg/K2tvOnqXR9D6+d05oEXEXIO0+g4TnusVw//naZdCK5MG6wFu/WNXz
+	 vWBvSGS3xdgk98MtmQHJVZ67r4HBmWYI+05ljOckPre1UxYJoGFL8aNbpHzH8qJHOC
+	 zImfiQ4BI5Kyg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D2BF80107; Mon, 10 Mar 2025 04:07:38 +0100 (CET)
+ id 2D543811C1; Mon, 10 Mar 2025 04:07:39 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F9BB8043C
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 04:07:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2154809A4
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 04:07:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="B9C0gUeq"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="MsBr0VE6"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 42826102E633E; Mon, 10 Mar 2025 04:07:30 +0100 (CET)
+ with ESMTPSA id D8F8E102E6338; Mon, 10 Mar 2025 04:07:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741576052; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1741576055; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=p9bvDtfk1sTDyEOBB5br+kKtWqI6qXk9wSikCfisEhY=;
- b=B9C0gUeq8ITIidI51qN/NjKw/oHzS3lwmz99jRWdQ905wZJVh127HtbL4liR0pg8AX6tD8
- CZyvKUJR2lUodElTXoU7jQEY6YJJDTCn8N01h/tl7f7XS8qwPnCDCMT6ofQ+wPkq19DYOC
- 3P885KJI1uXl0gphzewrat5a2oTshQos6723a9hBLdo0JP5GEMrrbC6eTBAdCgdPQKynQH
- /Xz2T9GKjv9KJH7sTO19CXnvXe5Gt1fEseS7Rp8J9gerCKSROaYHW5CYfCydQMEzYTbyeZ
- f+IKAr2eqsQFK48IZrlJ1lNcVemLqgYtXVaYMDRkfETxsLq6u4iy5glNXSlv4g==
-Message-ID: <9f5d0245-70f5-47b5-91c1-9343ef9671e5@denx.de>
-Date: Mon, 10 Mar 2025 01:08:19 +0100
+ bh=QqSYbDORskD6dxlW0QaxqlfCsQwiX4x/4dLVH/LRNlk=;
+ b=MsBr0VE6eYVJ2dimkKEhdzbYUVbhavzZpInVGFAFfjqK+7eURNMbzP4uXMgu5aDR7N0C+I
+ kZ3+nYZ1xHqGWks22Kkz653ZCrZbdr6Trxucl0LS0W0CAQhWrDI531ySPQqdSjJIDqa+xI
+ sA3zMqhCKrgra+R3q/4qCwE0iuGK9ga6xnvKbsXAitdqwxs0f8KH5pvdlbxNlGQTCQKQWr
+ Yngc1aM8RkcXfPmx2l1AdNZHtBuHkMhhMFX2q2Ulwf4hJKS46hieLjSaxOoqyZet5eCo1w
+ 2RGt1O8JGlAuXmQ/rpbvoHOg97beguS/4CzAZR9+aAezpC4+Fs7eYTssZRXlJw==
+Message-ID: <fb46746a-1d50-4226-8f56-2dade4f52891@denx.de>
+Date: Mon, 10 Mar 2025 01:09:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiBbRVhUXSBSZTogW1BBVENIIHY0IDEw?=
- =?UTF-8?Q?/20=5D_scmi=5Fprotocols=3A_update_struct_scmi=5Fbase=5Fdiscover?=
- =?UTF-8?Q?=5Flist=5Fprotocols=5Fout?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiDlm57lpI06IOWbnuWkjTogW1BBVENI?=
+ =?UTF-8?Q?_v4_04/20=5D_firmware=3A_scmi=3A_add_pin_control_protocol_support?=
+ =?UTF-8?Q?_to_SCMI_agent?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  "tharvey@gateworks.com" <tharvey@gateworks.com>,
- Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>
+ Alice Guo <alice.guo@nxp.com>
 References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
- <20250115-imx95-v1-10-93b28a514dea@oss.nxp.com>
- <05ef8aa9-fc2c-44c4-905d-13cf81b35d9b@denx.de>
- <PAXPR04MB9644E421817CBBA159C9907BE2C92@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <d140bd3b-d0d5-4e1b-b4db-f029f102a5d7@denx.de>
- <PAXPR04MB96448B41A9DFD9898EEE1914E2C82@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <20250115-imx95-v1-4-93b28a514dea@oss.nxp.com>
+ <9859d7f3-95ed-40b4-9140-f86638b0e522@denx.de>
+ <PAXPR04MB96446C0606C01C6CC5B3622FE2FA2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <1eb93e8b-0355-4274-a680-f6481e398e5a@denx.de>
+ <PAXPR04MB9644F7D41AE5AB9EF61FC5DBE2C72@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <5bb207d9-0ad0-4409-9c3d-bdf676cc7698@denx.de>
+ <20250224022831.GA9876@nxa18884-linux>
+ <c1654174-8473-46a9-9b0b-925b65ab4413@denx.de>
+ <PAXPR04MB9644FE1F92AFF132649A7EA5E2C92@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <3b232bda-000e-4f6b-8661-eeb72fc78b67@denx.de>
+ <PAXPR04MB96443A9429499C5FF777EDEDE2CB2@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB96448B41A9DFD9898EEE1914E2C82@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB96443A9429499C5FF777EDEDE2CB2@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,66 +97,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/4/25 10:04 AM, Alice Guo (OSS) wrote:
->> -----邮件原件-----
->> 发件人: Marek Vasut <marex@denx.de>
->> 发送时间: 2025年3月4日 4:19
->> 收件人: Alice Guo (OSS) <alice.guo@oss.nxp.com>; Tom Rini
->> <trini@konsulko.com>; Stefano Babic <sbabic@denx.de>; Fabio Estevam
->> <festevam@gmail.com>; dl-uboot-imx <uboot-imx@nxp.com>; Lukasz
->> Majewski <lukma@denx.de>; Sean Anderson <seanga2@gmail.com>; Simon
->> Glass <sjg@chromium.org>; Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> 抄送: u-boot@lists.denx.de; tharvey@gateworks.com; Alice Guo
->> <alice.guo@nxp.com>; Ye Li <ye.li@nxp.com>
->> 主题: Re: 回复: [EXT] Re: [PATCH v4 10/20] scmi_protocols: update struct
->> scmi_base_discover_list_protocols_out
->>
->> On 3/3/25 11:37 AM, Alice Guo (OSS) wrote:
->>
->> Hi,
->>
->>>>> @protocols is an array of protocol identifiers that are implemented,
->>>>> excluding the Base protocol. The number of elements of @protocols is
->>>>> specified by callee-side. Currently, set it to 4 is enough for i.MX95.
->>>> Can you please try something like this instead ? That should be
->>>> future-proof:
->>>>
->>>> diff --git a/drivers/firmware/scmi/base.c
->>>> b/drivers/firmware/scmi/base.c index f4e3974ff5b..92d278edfaf 100644
->>>> --- a/drivers/firmware/scmi/base.c
->>>> +++ b/drivers/firmware/scmi/base.c
->>>> @@ -258,17 +258,16 @@ static int
->>>> scmi_base_discover_impl_version_int(struct udevice *dev,
->>>>     static int scmi_base_discover_list_protocols_int(struct udevice *dev,
->>>>                                                    u8
->> **protocols)
->>>>     {
->>>> -       struct scmi_base_discover_list_protocols_out out;
->>>> +       struct scmi_base_discover_list_protocols_out *out;
->>>>           int cur;
->>>>           struct scmi_msg msg = {
->>>>                   .protocol_id = SCMI_PROTOCOL_ID_BASE,
->>>>                   .message_id =
->> SCMI_BASE_DISCOVER_LIST_PROTOCOLS,
->>>>                   .in_msg = (u8 *)&cur,
->>>>                   .in_msg_sz = sizeof(cur),
->>>> -               .out_msg = (u8 *)&out,
->>>> -               .out_msg_sz = sizeof(out),
->>>
->>> The pointer and byte size of the buffer where the response message is stored
->> should be provided before sending a BASE_DISCOVER_LIST PROTOCOLS
->> message.
->>>
->>> There is a more reasonable way. Number of protocols that are implemented,
->> excluding the Base protocol, can be obtained by sending a
->> PROTOCOL_ATTRIBUTES message. But now this command is not supported in
->> U-Boot. In this patch, ec8727b7e1 ("firmware: scmi: implement SCMI base
->> protocol"), "u32 protocols[3];" is used. So, I think setting the array of packed
->> SCMI protocol ID's to a fixed size is acceptable.
->> NAK, let's not perpetuate this suboptimal implementation, please implement
->> PROTOCOL_ATTRIBUTES if that's the way to find out the amount of supported
->> protocols dynamically.
-> 
-> OK. Will do it according to your comment.
+On 3/5/25 2:36 PM, Alice Guo (OSS) wrote:
 
-Thank you !
+Hello Alice,
+
+>> - Basically duplicate the mechanism in 7940a93eb977 ("net: phy: Iterate over
+>> both registered PHYs and struct phy_driver linker list"), call it e.g.
+>> U_BOOT_SCMI_DRIVER()
+>> - Switch SCMI drivers to use U_BOOT_SCMI_DRIVER , have each one list a
+>> protocol ID (instead of the PHY IDs), and then use the scmi_agent-uclass.c to
+>> iterate over all the linker lists
+>>
+>> About the MX95 specifics and handling those, it is possible to have two drivers
+>> which support the same hardware compiled into U-Boot and have them decide
+>> at bind time which driver should bind and which not, look at
+>> drivers/mtd/renesas_rpc_hf.c rpc_hf_probe() and drivers/spi/renesas_rpc_spi.c
+>> rpc_spi_bind() for example of doing this.
+>>
+>> I hope this helps untangle the SCMI implementation.
+> 
+> Thank you for providing the example. Please review my patch set.
+> https://patchwork.ozlabs.org/project/uboot/patch/20250305-imx95-v1-2-286d15acbb8a@oss.nxp.com/
+> https://patchwork.ozlabs.org/project/uboot/patch/20250305-imx95-v1-3-286d15acbb8a@oss.nxp.com/
+
+I will try to review this this week, I apologize for the delayed replies.
