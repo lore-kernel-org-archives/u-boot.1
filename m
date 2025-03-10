@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C53FAC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 21:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D659C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 21:08:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A69CD81430;
-	Mon, 10 Mar 2025 22:08:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AABB18168B;
+	Mon, 10 Mar 2025 22:08:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741640912;
-	bh=fN5BJDzjkgdVnYhssQNP1qPc4TQA+lxsOCMYk1VWxL8=;
+	s=phobos-20191101; t=1741640915;
+	bh=brtsYQ6jIma9E0WRe1tUjnUW4dEJQZWTDHC39rqmV54=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=h62W9T6nrWsvL+9gsWFjwbFkejbKpu1JS2C/AfPOU+RFJVfjLLVlgxr/NlquMfQ5N
-	 kvyM8N3nj8rJbSk3I/0pYVedJeJa4dSiVYbblwOkiXoY5gzMU3DD0sF8o7x2+1H5uf
-	 QzlqRlhr/P0zZj+b/zmjGyvgvRzMTy94B/mB4ZvugfVCrHEvw2cm+gXvFoNaMusnm6
-	 7eIIL29p7hMST8m5ncf+LmHiLGlXaaVYt/YH8wiaeKAdNOjreyA3ol3/UC5cUljA+1
-	 uumaqkiPZGODUxJhgVGa55K8iAuwJZxdPRwBlRU6/fSejmBAENcRvpyv5pMYxHTsvK
-	 6OC2hGbpIqeug==
+	b=scdpk8qAn9iA485LJo3ccf8sz6XvKX6/3PShi9hDYEengIAtTIgf3KWTXbnbT5NMl
+	 +TqXliHxKEvx62UQEGd/JzfkZqiTxLQVzfZr/iWfmqVHDx6xHHfqgTp24pI4BBva66
+	 w2SHIatl5rYVnzql3TuYtI8c2pqlivyS6KR1zN1SnBUGrDKvwygZpQqy5ABlX6NEFz
+	 baYYKn1snm/6mLx54KDpw3bqkb2qpeCrH1/dBA6MLtXzORh8It4+Q3JkL52375l2Jw
+	 W8u5Xc5Zl/bIyL3Pv9+Asz0+zBigRwHHzv3mZFOQjBY+wyWoI1ERdh+c+tXUhsPYYB
+	 V2grJk7sxeXQA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1D91811C1; Mon, 10 Mar 2025 22:08:31 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 575BC800D7; Mon, 10 Mar 2025 22:08:33 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADBA6807D9
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 22:08:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4860D800D7
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 22:08:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="VPtGt9by"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Z6nRkz4T"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id EC951102A4CBD; Mon, 10 Mar 2025 22:08:27 +0100 (CET)
+ with ESMTPSA id 7EC311020CACC; Mon, 10 Mar 2025 22:08:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741640909; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1741640910; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=fN5BJDzjkgdVnYhssQNP1qPc4TQA+lxsOCMYk1VWxL8=;
- b=VPtGt9byUNXWWRFn3cG+t5r2zYf1ohrKEh0sOJjyWODYdKRG/PozCi8+ks7iv6Si54+adD
- YrtIIeapmH7xyeyhTEt/jPYGhIWroAOaM7IURzPptHo+7F60K5KmRimJS0ZRSPkh7K+85M
- 8kDsPo7821slkgtW+0uCtGegzxjUhTPZ1kByHwMxdtP7atlmOzco0YxHkcddXGr70iJKla
- p3+67hxy6jB992fOLAJL1ilZyYpW/IbjT/WH4/Z+lvjs3xXI+ZPqxZ+uzAwakC6HmpZQEp
- wdwcdPHACwhlNTod/mnjBhaDE6nkCIQRy8jW4kVt498vc9QM0hMVp4GNetAU2Q==
-Message-ID: <6d68d2f0-c969-43f1-86c6-1ccbf039291a@denx.de>
-Date: Mon, 10 Mar 2025 21:37:36 +0100
+ bh=brtsYQ6jIma9E0WRe1tUjnUW4dEJQZWTDHC39rqmV54=;
+ b=Z6nRkz4TeNq8GQpuRGgptH6QNiyQr1IS7laTikumKUM/UVLTACd7bZzPGEFUXmdqyV7Loz
+ GLcoaroDZa7gPZ4Z6MAex+gHcfTQ6aTCCVcxcY3PZyhqFPqv6GDS+mlZucdtJIvF9Zq8/p
+ 0/iER0aNeXzY1C//fNg4LJ6D+3TNqjllHemHZJuFgrWXXo3We4AbJhCRL40282+B+p6pAB
+ FyLzWB1fMOyTCLnL5E32fH4agiOirsoTV2M1ufXetQ+5XsX/1ptaN91Zdehg+Pv6opHXyY
+ t5Cmx9BIVCNsaxdu26chkHmNRGCr4J1if91DbtAKLWmxiOQBrZbBMvX5bqWl1A==
+Message-ID: <a7b192b6-48b8-4878-a6dd-563dbb9bdb06@denx.de>
+Date: Mon, 10 Mar 2025 22:03:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/12] test_fs: Add exfat tests
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
+Subject: Re: [PATCH 08/12] fs: exfat: Fix conversion overflow errors
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: Baruch Siach <baruch@tkos.co.il>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hiago De Franco <hiago.franco@toradex.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250308201533.1315951-1-marex@denx.de>
- <20250308201533.1315951-13-marex@denx.de>
- <20250310153055.GI2640854@bill-the-cat>
+ <20250308201533.1315951-9-marex@denx.de>
+ <393a7b06-402a-48b0-8ed4-5dcaa7ab9383@cherry.de>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250310153055.GI2640854@bill-the-cat>
+In-Reply-To: <393a7b06-402a-48b0-8ed4-5dcaa7ab9383@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,56 +86,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/10/25 4:30 PM, Tom Rini wrote:
-> On Sat, Mar 08, 2025 at 09:12:16PM +0100, Marek Vasut wrote:
->> Add tests for the exfat filesystem. These tests are largely an
->> extension of the FS_GENERIC tests with the following notable
->> exceptions.
+On 3/10/25 12:17 PM, Quentin Schulz wrote:
+> Hi Marek,
+
+Hi,
+
+> On 3/8/25 9:12 PM, Marek Vasut wrote:
+>> Fix the following conversion overflow errors. The input field is already
+>> limited to 3/2/1 bits using the bitwise and, move the parenthesis around
+>> to avoid the bogus warning:
 >>
->> The filesystem image for exfat tests is generated using combination
->> of exfatutils mkfs.exfat and python fattools. The fattols are capable
+>> "
+>> fs/exfat/utf.c: In function ‘utf8_to_wchar’:
+>> fs/exfat/utf.c:165:23: warning: overflow in conversion from ‘int’ to 
+>> ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short 
+>> unsigned int)*input << 18 & 1835008’ to ‘0’ [-Woverflow]
+>>    165 |                 *wc = ((wchar_t) input[0] & 0x07) << 18;
+>>        |                       ^
+>> fs/exfat/utf.c:170:23: warning: overflow in conversion from ‘int’ to 
+>> ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short 
+>> unsigned int)*input << 24 & 50331648’ to ‘0’ [-Woverflow]
+>>    170 |                 *wc = ((wchar_t) input[0] & 0x03) << 24;
+>>        |                       ^
+>> fs/exfat/utf.c:175:23: warning: overflow in conversion from ‘int’ to 
+>> ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short 
+>> unsigned int)*input << 30 & 1073741824’ to ‘0’ [-Woverflow]
+>>    175 |                 *wc = ((wchar_t) input[0] & 0x01) << 30;
+>>        |                       ^
+>> "
+>>
 > 
-> Did you mean "exfatprogs" and not "exfatutils" ? But we need to update
-> tools/docker/Dockerfile to list the tool there.
-
-It seems the CI container already has the tools in it ?
-
-Where do I update the docker container, is that tools/docker/Dockerfile ?
-
->> of generating exfat filesystem images too, but this is not used, the
+> Since this doesn't seem to be U-Boot-specific, any chance to open a Pull 
+> Request on the project so we may be able to not carry this patch when 
+> upgrading (yes, the last commit in the branch was two years ago, but it 
+> seems the maintainer is still active on issues).
 > 
-> Presumably because "fattools mkfat" seems to have further external
-> dependencies and so would be more of a pain to use.
+> Considering that wchar_t is an unsigned short int and that USHRT_MAX is 
+> 0xffff (so 2B or 16b)...
+In fact, this error does not even appear in upstream , because upstream 
+does not use -fshort-wchar compiler flag . U-Boot does use this compiler 
+flags since 4a85663ec7ed ("kbuild: Enable -fshort-wchar") .
 
-I don't think it does, but I think we should stick to tools which will 
-be in production systems as much as possible, and that is mkfs.exfat 
-from exfatprogs . The fattools is only used here because mkfs.exfat 
-cannot create an image from list of files.
+So I wonder if this might be the right fix here instead:
 
-[...]
+diff --git a/fs/exfat/Makefile b/fs/exfat/Makefile
+index 550c0683d65..8ca112cf0e9 100644
+--- a/fs/exfat/Makefile
++++ b/fs/exfat/Makefile
+@@ -1,6 +1,9 @@
+  # SPDX-License-Identifier: GPL-2.0+
+  #
 
->>   test/py/requirements.txt          |  1 +
->>   test/py/tests/fs_helper.py        |  8 ++++++--
->>   test/py/tests/test_fs/conftest.py | 20 +++++++++++---------
->>   test/py/tests/test_fs/test_ext.py | 20 ++++++++++++++------
->>   4 files changed, 32 insertions(+), 17 deletions(-)
-> 
-> We also need to update test/py/tests/test_fs/fstest_helpers.py to know
-> to call fsck.exfat.
-
-Fixed in V2, thanks.
-
-> [snip]
->> @@ -64,6 +66,8 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
->>                   check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
->>           elif fs_lnxtype == 'vfat' and src_dir:
->>               check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/', shell=True)
->> +        elif fs_lnxtype == 'exfat' and src_dir:
->> +            check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
->>           return fs_img
->>       except CalledProcessError:
->>           call(f'rm -f {fs_img}', shell=True)
-> 
-> A cleanup to use fattools in both cases would be nice, as a follow-up.
-See above, I am not convinced we should go for fattools all across the 
-board. Do you think we should ?
++# The utf.o does really need 32bit wchar_t
++CFLAGS_REMOVE_utf.o := -fshort-wchar
++
+  obj-$(CONFIG_FS_EXFAT) += \
+  	cluster.o \
+  	io.o \
