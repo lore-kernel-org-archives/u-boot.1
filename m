@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C96C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 16:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22A0C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 16:22:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 566C5816AB;
-	Mon, 10 Mar 2025 17:11:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1F19F8164E;
+	Mon, 10 Mar 2025 17:22:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="awsSK9Mf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PZkjJJlM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E16E8169D; Mon, 10 Mar 2025 17:11:24 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 571ED816AB; Mon, 10 Mar 2025 17:22:33 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCF6881703
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 17:11:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEBA081417
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 17:22:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-22401f4d35aso79052125ad.2
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 09:11:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=christopher.obbard@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cf05f0c3eso9805345e9.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 09:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741623080; x=1742227880; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qlPvWOmXyj3f4R1jQsQHgiImxj3aINKxR6PMDN6S9WE=;
- b=awsSK9MfV1Bo32QIP5NAzMjGFWaudFMJ3kINA5AC+zNbNf9rZzASywJp0llKPS2c+H
- 5KOqpwSsGzC88HRfLzMbisFSa8yI05qTy9vOipxxU2YLdv78R2a3xcyojY/f+9ZX51tN
- gYZ7xl8Up+Hf+yMuWZPotbPG93p0lzXkOSYhw=
+ d=linaro.org; s=google; t=1741623750; x=1742228550; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FDMh234e2/sUNP3GzjEwCSAYvcluNI9S+Q2FJp55Pcs=;
+ b=PZkjJJlMVf+BlWh6QhWRPe7FVk+QNoKk4jRUj/t8NaTzONlht1cO1fZPPMzni4mSLw
+ qvJs6ZMDKdpn3OxI4iz89pKL9MJ36lZkPpCLul9/EnL9ECrdehTvCp5XYaxvIjy+qs4y
+ sdCZkfUWgatry/hHxqPfUCBntDNEMCW7dITUxIF5BTk/Bk8eNReZE8tCGXtJ4EBHX4KD
+ 3yVVNFNoSSH5diDWWoKabUwGlqAhEXmyFvDvcx18M5ceZLk/Vg5tMF3er/eHv08uRD2E
+ 35XsnABAREnDRs0GS0a+qL4FnCLsWJOHa8iHYgzs2qGbtXH48KreiaHa2czRy/wd4IsS
+ MTsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741623080; x=1742227880;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qlPvWOmXyj3f4R1jQsQHgiImxj3aINKxR6PMDN6S9WE=;
- b=VZS/5YFcT4oHAN7a0SeBZBXl8adui4IWTF+O4fVfYKHFtsmOdLywnwZ6Cy2dWiiBdM
- D7wuTJ0bfeJXcvBSh3j/DplzS5nRQyyUb24/NKXMYaxrqSf952A5q+Zjoe5F7yDVLTKt
- 65w30YKEWuQluHX/HEbnCzUHGBVMDDYIrAjEJ9dqBubleXHpfP5O1BxSgpTtd1VYWtkl
- 4fIbX5vZUSZGQr0bUuWYmuh3YjNz/jgGte4Cg3IIGx36NHWd43anYCI8rdqPvQKcqnfx
- cAyIeKZsE2TS3iBwLxRQWDZ4v21tD7A3UXtKIwtgbSLNE7c+ivJC7wdzQVnNz/qSVw98
- He3Q==
-X-Gm-Message-State: AOJu0YwZofwHs6odQ/hgmEu0H6CZR5GnSR7OqBrOeRwFgU7VuQ8FevKF
- OVbDLwWr0FevFrl192bgPbPkqpxddLDW2Li3vuZU7pWMQ6gw0upUi89+aO8GyjQ=
-X-Gm-Gg: ASbGncvbAWdsiQDeulYpVX5loc6ta8v/lWKL9KgBUnjtb09yuBRHPJctj8R2m23r/pj
- q+LLikwqvIiHSvKINtNevWadFImbV/6orARDm8zyW8ahar+oFOR6UxQSmTnODfYiWsJDgJUwib7
- zGQH9OxA26Eg0N2l2KgrFIg4ZWeB1aAOVcxw3W44bdhzVB6aq9TRI5oEItZXIwgL/9TjDpfvKXm
- Wxrd87QB+e48q51by01lF6suhgCu7X56B3ZHISG7YMhcfsB4NoIZVuFTyDO/AKPsQk8pq5k5eo/
- UWZpaVgQF2hAVJjRkdIFGwJrl8akmebv3nMrxMuterjDPQ==
-X-Google-Smtp-Source: AGHT+IHpnJSg5m7BOMVdY2criy5I8ZYVDMHlEwVisYOIDQ3QMzoJVs3nwz3dcxsgATeS8R/3ixBgYA==
-X-Received: by 2002:a05:6a00:4b14:b0:736:34ff:be7 with SMTP id
- d2e1a72fcca58-736eb87c863mr564057b3a.15.1741623080266; 
- Mon, 10 Mar 2025 09:11:20 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736c46410e9sm4326766b3a.20.2025.03.10.09.11.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 09:11:19 -0700 (PDT)
-Date: Mon, 10 Mar 2025 10:11:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PULL] Pull request for u-boot master / v2025.04 =
- u-boot-stm32-20250310
-Message-ID: <20250310161117.GL2640854@bill-the-cat>
-References: <d526bd4d-efa6-423f-81b5-1da9a5c9af98@foss.st.com>
+ d=1e100.net; s=20230601; t=1741623750; x=1742228550;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FDMh234e2/sUNP3GzjEwCSAYvcluNI9S+Q2FJp55Pcs=;
+ b=VgyX9NPkZjU+FHpTvV3XWszFm3jUcLvxPza3xsQHKO/ncve0xxLVsr3C7WbrHy/AZY
+ yh2hGvDKOxEgouFGu7HhYDfiubwxQItgW7l7hFgEKawIyCRe5i+snpQEM7WBnL+11EEg
+ m9NtvH2cTKBkLMbCzkbplMLhf5DY1CjehmJh2ciQYtAEZgvKfjjnKv2RVg5kZ4OV0UHv
+ svt1So0T4m9R7vJfvrAJ0hVbhayFZL8x25f13ysto+51vrvip/3JTivVAkN8KuUzmq0a
+ cj8Tpyy2XBDd9ACMlOjE2/75hyyn6ZO4v8Cc5Y9KNyKtHUe0O22qquEnlUCQhQLwi2ud
+ kN/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWFfqNJPxxuHkSdc6fcu8Q6L6THNMT2b+oO00oGaqqWownOu+QUr7oSY3NKr0aiaNcRMMlnNRM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4lAEfiobqgqhNFXfEhfkB0AQuGUcU035WXMS6HFCoxQAYVF1U
+ cKf5Sqmwc621rAKlCfjBLVVX+HxHtkLfrSy+76XR6lBkH04MgVliE0hLFFZBc5T7Dp4cp1bl4cD
+ 619wBK7bmr23loA1gYAsVJCXPCscb+dHiHOZgHw==
+X-Gm-Gg: ASbGncuqAdmRVZSC3L/VmO2FMSAO5ZThKcPhoJiDOYnP9urvURYgfbGhjwMC/WtS0Mk
+ mNq0TS4AfV3+rhrmJBO4MUCZDkVniYj6+87s9SaKPS24giDnmoMee2Ed178W50pTG04vKh4Mb7X
+ U9BLYNL1NNwHO5a2yoyfOlaWGW5mF6/bf7pzGlNQ==
+X-Google-Smtp-Source: AGHT+IGy8p6Pm8j6Nb2HrWUu/JT2RV5xz2XykbfClGlNi8/dy1U4UeoZ90Zp44q1pdQI4TRFlMyH/cSkwYOuMcR/HrU=
+X-Received: by 2002:a5d:47c8:0:b0:391:2889:4ea4 with SMTP id
+ ffacd0b85a97d-39132d06142mr9999582f8f.9.1741623748739; Mon, 10 Mar 2025
+ 09:22:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K/bOwRu14aJVnPNh"
-Content-Disposition: inline
-In-Reply-To: <d526bd4d-efa6-423f-81b5-1da9a5c9af98@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250122-pinctrl-sc7280-v1-0-8bdba72e6366@linaro.org>
+ <20250122-pinctrl-sc7280-v1-1-8bdba72e6366@linaro.org>
+In-Reply-To: <20250122-pinctrl-sc7280-v1-1-8bdba72e6366@linaro.org>
+From: Christopher Obbard <christopher.obbard@linaro.org>
+Date: Mon, 10 Mar 2025 17:22:16 +0100
+X-Gm-Features: AQ5f1Jpwl4pRJS4IuNRYzta0I4U50CRYPzuGoH3AOYLPSom6OZU6jxEUSgmXVYw
+Message-ID: <CACr-zFBxm1+wJQX=g=7AKTPOGHUveuouq9t7K_2UEf=FieB8Yw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] pinctrl: qcom: add sc7280 pinctrl driver
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>,
+ Markus Bauer <Markus.Bauer2@tria-technologies.com>, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,63 +95,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Caleb,
 
---K/bOwRu14aJVnPNh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 22 Jan 2025 at 16:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Introduce a pinctrl driver for SC7280/QCM6490, this is used by the RB3
+> Gen 2, FairPhone 5 and other devices.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 
-On Mon, Mar 10, 2025 at 01:21:27PM +0100, Patrice CHOTARD wrote:
+I tested this series on an rb3gen2, seems to work fine.
 
-> Hi Tom
->=20
-> Please pull the STM32 related patches for u-boot/master, v2025.04 =3D u-b=
-oot-stm32-20250310
->=20
-> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipeline=
-s/25054
->=20
-> Thanks
-> Patrice
->=20
->=20
-> The following changes since commit dc0ee458f1afae4cb5c8a7b2c875bb24ffdf71=
-ca:
->=20
->   Prepare v2025.04-rc3 (2025-02-24 16:53:59 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-stm.git u-boot-stm32-20=
-250310
->=20
-> for you to fetch changes up to f5ee0f2bf7b008dc92315c10239e8d537877c0de:
->=20
->   ARM: stm32mp: Fix dram_bank_mmu_setup() for ram_top=3D0 (2025-03-10 09:=
-39:30 +0100)
->=20
+Tested-by: Christopher Obbard <christopher.obbard@linaro.org>
 
-Applied to u-boot/master, thanks!
+> ---
+>  drivers/pinctrl/qcom/Kconfig          |   7 +++
+>  drivers/pinctrl/qcom/Makefile         |   1 +
+>  drivers/pinctrl/qcom/pinctrl-sc7280.c | 106 ++++++++++++++++++++++++++++++++++
+>  3 files changed, 114 insertions(+)
+>
+> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+> index 4f93a34281d5..1d510908d834 100644
+> --- a/drivers/pinctrl/qcom/Kconfig
+> +++ b/drivers/pinctrl/qcom/Kconfig
+> @@ -40,8 +40,15 @@ config PINCTRL_QCOM_QCS404
+>         help
+>           Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
+>           as well as the associated GPIO driver.
+>
+> +config PINCTRL_QCOM_SC7280
+> +       bool "Qualcomm SC7280/QCM6490 GCC"
 
---=20
-Tom
+As per the other comments, should this be TLMM ?
 
---K/bOwRu14aJVnPNh
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfPDxoACgkQFHw5/5Y0
-tyzOzAv/X+m9j9UDc59nfnsPCW12nFvTQsOuuZ21GEjhyndaRBArC6bC6uABTp+m
-ayviSCH/tcquAGd6xTY6GZbFIzeMoycQFEocR2Va+QbKZocZwHRJTRZAe0UZhqhX
-VJn46chf+ugjL76t9E/Pix9n+EPRaI8Gl5n5aA0/ub6ss0Ybh6fWxz0/rBpksaCZ
-PQ2ujAT5XKqc4sE0IfW8o6HWmxso/5oH+XjrUgDxCNcprFYe9E6QPva3FS+InUv+
-7ME4IuIX53lvYTBRCtyR+IgGsaNkmhJn3JmMPPPmqziDFd6AwbFw+wJPmIpg0Pr6
-i0IXe8fBy0ATJcnrQIDCeaEKtJCLtvCJAUdCJVFVGaH3loPU9lmMqCdgJs63QNQt
-BMFFmOale3fFvlv5Ax8wUmgcfgqkah9pMzFE2Lu2pkRdoOTFAG/fwTVu6hJA9udH
-DWqrLvT81/Ex2ozvOi9zWRdV1cWvFCeSBIl+a9ZGoVQRlu5zxUDV6RWMRhA6/4EB
-fFPsiQul
-=ZTRh
------END PGP SIGNATURE-----
-
---K/bOwRu14aJVnPNh--
+> +       select PINCTRL_QCOM
+> +       help
+> +         Say Y here to enable support for pinctrl on the Snapdragon SC7280 SoC,
+> +         as well as the associated GPIO driver.
+> +
+>  config PINCTRL_QCOM_SDM845
+>         bool "Qualcomm SDM845 GCC"
+>         select PINCTRL_QCOM
+>         help
+> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+> index 43d0dd292225..8ed41b2e1d99 100644
+> --- a/drivers/pinctrl/qcom/Makefile
+> +++ b/drivers/pinctrl/qcom/Makefile
+> @@ -7,8 +7,9 @@ obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
+>  obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+>  obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+>  obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+>  obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+> +obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
+>  obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+>  obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+>  obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+>  obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
+> diff --git a/drivers/pinctrl/qcom/pinctrl-sc7280.c b/drivers/pinctrl/qcom/pinctrl-sc7280.c
+> new file mode 100644
+> index 000000000000..9aff9c81bc5f
+> --- /dev/null
+> +++ b/drivers/pinctrl/qcom/pinctrl-sc7280.c
+> @@ -0,0 +1,106 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Qualcomm sc7280 pinctrl
+> + *
+> + * (C) Copyright 2024 Linaro Ltd.
+> + *
+> + */
+> +
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+> +
+> +#define WEST 0x00000000
+> +#define SOUTH 0x00400000
+> +#define NORTH 0x00800000
+> +
+> +#define MAX_PIN_NAME_LEN 32
+> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> +
+> +static const struct pinctrl_function msm_pinctrl_functions[] = {
+> +       { "qup05", 1 },
+> +       { "gpio", 0 },
+> +       { "pcie1_clkreqn", 3},
+> +};
+> +#define SDC_PINGROUP(pg_name, ctl, pull, drv)          \
+> +       {                                               \
+> +               .name = pg_name,                        \
+> +               .ctl_reg = ctl,                         \
+> +               .io_reg = 0,                            \
+> +               .pull_bit = pull,                       \
+> +               .drv_bit = drv,                         \
+> +               .oe_bit = -1,                           \
+> +               .in_bit = -1,                           \
+> +               .out_bit = -1,                          \
+> +       }
+> +
+> +#define UFS_RESET(pg_name, offset)                     \
+> +       {                                               \
+> +               .name = pg_name,                        \
+> +               .ctl_reg = offset,                      \
+> +               .io_reg = offset + 0x4,                 \
+> +               .pull_bit = 3,                          \
+> +               .drv_bit = 0,                           \
+> +               .oe_bit = -1,                           \
+> +               .in_bit = -1,                           \
+> +               .out_bit = 0,                           \
+> +       }
+> +
+> +static const struct msm_special_pin_data sc7280_special_pins_data[] = {
+> +       [0] = UFS_RESET("ufs_reset", SOUTH + 0xbe000),
+> +       [1] = SDC_PINGROUP("sdc1_rclk", 0xb3004, 0, 6),
+> +       [2] = SDC_PINGROUP("sdc1_clk", 0xb3000, 13, 6),
+> +       [3] = SDC_PINGROUP("sdc1_cmd", 0xb3000, 11, 3),
+> +       [4] = SDC_PINGROUP("sdc1_data", 0xb3000, 9, 0),
+> +       [5] = SDC_PINGROUP("sdc2_clk", 0xb4000, 14, 6),
+> +       [6] = SDC_PINGROUP("sdc2_cmd", 0xb4000, 11, 3),
+> +       [7] = SDC_PINGROUP("sdc2_data", 0xb4000, 9, 0),
+> +};
+> +
+> +static const char *sc7280_get_function_name(struct udevice *dev, unsigned int selector)
+> +{
+> +       return msm_pinctrl_functions[selector].name;
+> +}
+> +
+> +static const char *sc7280_get_pin_name(struct udevice *dev, unsigned int selector)
+> +{
+> +       if (selector >= 175 && selector <= 182)
+> +               snprintf(pin_name, MAX_PIN_NAME_LEN,
+> +                        sc7280_special_pins_data[selector - 175].name);
+> +       else
+> +               snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+> +
+> +       return pin_name;
+> +}
+> +
+> +static unsigned int sc7280_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
+> +{
+> +       return msm_pinctrl_functions[selector].val;
+> +}
+> +
+> +static struct msm_pinctrl_data sc7280_data = {
+> +       .pin_data = {
+> +               .pin_count = 183,
+> +               .special_pins_start = 175,
+> +               .special_pins_data = sc7280_special_pins_data,
+> +       },
+> +       .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+> +       .get_function_name = sc7280_get_function_name,
+> +       .get_function_mux = sc7280_get_function_mux,
+> +       .get_pin_name = sc7280_get_pin_name,
+> +};
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +       {
+> +               .compatible = "qcom,sc7280-pinctrl",
+> +               .data = (ulong)&sc7280_data
+> +       },
+> +       { /* Sentinel */ } };
+> +
+> +U_BOOT_DRIVER(pinctrl_sc7280) = {
+> +       .name = "pinctrl_sc7280",
+> +       .id = UCLASS_NOP,
+> +       .of_match = msm_pinctrl_ids,
+> +       .ops = &msm_pinctrl_ops,
+> +       .bind = msm_pinctrl_bind,
+> +};
+>
+> --
+> 2.48.0
+>
