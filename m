@@ -4,80 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8041DC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 13:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D85F7C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 13:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF1A781428;
-	Mon, 10 Mar 2025 14:51:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id 21CC2814B6;
+	Mon, 10 Mar 2025 14:51:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="Ztx7XUZ+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 522B180E93; Mon, 10 Mar 2025 02:48:30 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C63F8043C
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 02:48:27 +0100 (CET)
+ id 456E18129F; Mon, 10 Mar 2025 13:36:30 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 0E500811C1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:36:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jimmy.ho@sifive.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-22113560c57so67549845ad.2
- for <u-boot@lists.denx.de>; Sun, 09 Mar 2025 18:48:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1741571305; x=1742176105; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=u21nEFwP7fZiwZxz7l5m9zGlkj1hbYvdHVrFyDiJxOA=;
- b=Ztx7XUZ+7sUrd4bs2SWXlejhDS+TS6LqsgGpzla9Q83c8Fb0eBYjhbB1rdarD8/TDu
- AroOFOwfmOKycm5/mdOf7qK/GQTBl6Tac7g6EOKE9AU73ZujLESw23VieKz2tHrng20F
- Y7MnMsVv/9lprwADbHQiDo6hxnNg1D6lq282uh8wDW3zJnPLgiUDbk1+C16FNK16Ywct
- WmvEEf8wIAxDb/ahcA7vlE8kRUbCq8SuLbPLKmxy7uOSFVgELIidjYqIweT8tRPl+lx2
- JZG3rCpp0NlNQ5g0pAuuwdCCpvVyQ0zCCG0xj0rS8Wmq00hwOSJnXpaurlKODAP3r5Wx
- 1uuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741571305; x=1742176105;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=u21nEFwP7fZiwZxz7l5m9zGlkj1hbYvdHVrFyDiJxOA=;
- b=tDo+kPL4L0jsSX5qK0cOxDw3UkTAOygE34Bgz/w5YzVP0xvPccWmnf9iPr/YJUkXXX
- 3ofJKz9qMVMjJL1Rtuac9vO99Wjq5qtMidRvfyJBQd+ab/icqys94S2ompO7pt//uwqG
- unKOPuwnyG6g9Rv8teagYURqJE0TfPdsSbvLoZ6Rf+UwUfZBgwKGBjs3eo+7KTaVmonS
- vCw0AFZFkjiTgtnBrQr2WFcDsZdervx3pc4s84g2ffDKB2nUb1YamfwSxcKsTG4uSrU+
- 4EPcLO0aOrAmD58TpTTY36YB7+cg/oT8Xf6zAVMGpLbqecfxTqpofgoFotI6XfIRurkG
- r25g==
-X-Gm-Message-State: AOJu0Yz1X9atQFoQX3Mx4C9CXECI0T4tc4BYWPbL+/t1LMXJK47nmho5
- EYzB9SrgEsR2pZ8nH8uFV90Rul4QkgxGOfpJQYNuCMwulUwS98QN/Sbcmf/WzfJCQP1WgB7WGwJ
- I/F1i7TsbWW7dY/AXlKUYmfuyfsNU/BUyrK8dtf+HZgcTZsEW8qONdb/sFjAC9qaw3vz/aoxR4b
- BE9QYWGzLcXaiT1IecjUrYehhxQUvUzVMAJQ==
-X-Gm-Gg: ASbGncs8nnebTkt5bnX7N3OIAlNjchPkXlp5N4nfH1KBoZLu+OSNOJJ6YwYBcHnkQ1/
- SGtMNujSG6Nczs5EN6nAgp0/FzEwr0uFgHGJJndKPpGfXoaeXDMRQsfsId2vtSz1NPlw6dy/I50
- BAO8FkxiO2h4AalDOXTBLxoOAcI7ZwJBFYMsUXEnDH8hlCYtoITrns0ExJwHzj1+tPKh87nvbGd
- c4VJ+mXttAon5BEO/5n+WXwhV+Yv2lQdZyD4Gs5+sMlCKAbrmfQavB6KdmDOpbVGOhcZ2o7DS4V
- b9taCbdNRRu+Wxtl1lRk13g3MptSisoJLVoDJ0PyADSe7fhDEYzGvByHAohmfsv6VBma
-X-Google-Smtp-Source: AGHT+IEsPoEbW4pPXP4hCx0DzX8UA81SfFcbqxE9VfNwvgIUF3Zpsr6IEFaYNG58Ln9oIw4B53l5TA==
-X-Received: by 2002:a17:902:e84f:b0:220:e896:54e1 with SMTP id
- d9443c01a7336-2242889f4e7mr165752995ad.26.1741571304890; 
- Sun, 09 Mar 2025 18:48:24 -0700 (PDT)
-Received: from hsinchu01.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22410a7f93esm65712125ad.142.2025.03.09.18.48.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Mar 2025 18:48:24 -0700 (PDT)
-From: Jimmy Ho <jimmy.ho@sifive.com>
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ADB13152B;
+ Mon, 10 Mar 2025 05:36:38 -0700 (PDT)
+Received: from localhost.localdomain (unknown [10.34.128.27])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id DD78E3F5A1;
+ Mon, 10 Mar 2025 05:36:25 -0700 (PDT)
+From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
-Cc: Jimmy Ho <jimmy.ho@sifive.com>
-Subject: [PATCH] RISCV: config: Remove CFG_SYS_SDRAM_BASE
-Date: Mon, 10 Mar 2025 09:47:48 +0800
-Message-ID: <20250310014748.6882-1-jimmy.ho@sifive.com>
-X-Mailer: git-send-email 2.48.1
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH] imx8m: soc: cope with existing optee node
+Date: Mon, 10 Mar 2025 13:36:21 +0100
+Message-ID: <20250310123621.389594-1-vincent.stehle@arm.com>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 10 Mar 2025 14:51:01 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -96,38 +56,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove CFG_SYS_SDRAM_BASE so that we can get DRAM base from dt instead of compile time config.
-Removing this config helps the u-boot more portable.
+On i.MX8M SoCs, the /firmware/optee Devicetree node is created just before
+booting the OS when OP-TEE is found running. If the node already exists,
+this results in an error, which prevents the OS to boot:
 
-Signed-off-by: Jimmy Ho <jimmy.ho@sifive.com>
+  Could not create optee node.
+  ERROR: system-specific fdt fixup failed: FDT_ERR_EXISTS
+   - must RESET the board to recover.
+
+  failed to process device tree
+
+On the i.MX8M systems where CONFIG_OF_SYSTEM_SETUP is defined, the
+ft_add_optee_node() function is called before booting the OS. It will
+create the OP-TEE Devicetree node and populate it with reserved memory
+informations gathered at runtime.
+
+On on most i.MX8M systems the Devicetree is built with an optee node if
+CONFIG_OPTEE is defined. This node is indeed necessary for commands and
+drivers communicating with OP-TEE, even before attempting OS boot.
+
+The aforementioned issue can happen on the Compulab IOT-GATE-iMX8, which is
+the only in-tree i.MX8M system where both CONFIG_OPTEE and
+CONFIG_OF_SYSTEM_SETUP are defined (see the imx8mm-cl-iot-gate*
+defconfigs).
+
+Deal with an existing optee node gracefully at runtime to fix this issue.
+
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Tim Harvey <tharvey@gateworks.com>
 ---
- include/configs/sifive-unleashed.h | 1 -
- include/configs/sifive-unmatched.h | 1 -
- 2 files changed, 2 deletions(-)
+ arch/arm/mach-imx/imx8m/soc.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/configs/sifive-unleashed.h b/include/configs/sifive-unleashed.h
-index 2996b37572..cd8d0438ba 100644
---- a/include/configs/sifive-unleashed.h
-+++ b/include/configs/sifive-unleashed.h
-@@ -11,7 +11,6 @@
+diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+index 85dc8b51a14..567e8e9e81a 100644
+--- a/arch/arm/mach-imx/imx8m/soc.c
++++ b/arch/arm/mach-imx/imx8m/soc.c
+@@ -1270,8 +1270,9 @@ static int ft_add_optee_node(void *fdt, struct bd_info *bd)
+ 		}
+ 	}
  
- #include <linux/sizes.h>
- 
--#define CFG_SYS_SDRAM_BASE		0x80000000
- 
- #define RISCV_MMODE_TIMERBASE		0x2000000
- #define RISCV_MMODE_TIMEROFF		0xbff8
-diff --git a/include/configs/sifive-unmatched.h b/include/configs/sifive-unmatched.h
-index 27e0912665..e0064edc5c 100644
---- a/include/configs/sifive-unmatched.h
-+++ b/include/configs/sifive-unmatched.h
-@@ -11,6 +11,5 @@
- 
- #include <linux/sizes.h>
- 
--#define CFG_SYS_SDRAM_BASE		0x80000000
- 
- #endif /* __SIFIVE_UNMATCHED_H */
++	/* Locate the optee node if it exists or create it. */
+ 	subpath = "optee";
+-	offs = fdt_add_subnode(fdt, offs, subpath);
++	offs = fdt_find_or_add_subnode(fdt, offs, subpath);
+ 	if (offs < 0) {
+ 		printf("Could not create %s node.\n", subpath);
+ 		return offs;
 -- 
-2.39.3
+2.47.2
 
