@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6578BC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 21:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C53FAC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 21:08:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ED3F80FB9;
+	by phobos.denx.de (Postfix) with ESMTP id A69CD81430;
 	Mon, 10 Mar 2025 22:08:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1741640912;
-	bh=SpOo52O98saHwjVpAJ2FoJMFCYuApNr3T1ZKopWLKrM=;
+	bh=fN5BJDzjkgdVnYhssQNP1qPc4TQA+lxsOCMYk1VWxL8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pM5K4O/9CFIcjm55iDt+UsDpQPJSNnrQ3JFn2EaTfzD5n+pzGRdKsOKP+PYHKa5NJ
-	 tm19r/RDmsQNRJgHspjHLQm6PhR1XvZ3fOg+5rDK+6xMMtQcCxNZ1ZIFHQPS+LWVY5
-	 QvpOFze3l7b39VVVy1/XS+AT4mryS0oayBRsf/G9TpkyaQzUQs8s+RQNBxziP1T2SF
-	 dCb4VX2+hXAJQJMrC8SdaAoFH5koxCXYzkPTlqzNTTYQH8KlBnzA7kpbD7hJx00P53
-	 b+98oXoXRo99Z45a1BK95jEJREhHWINT7WhO+V27NWRKHq7XeMak3EJIwQPxCpUCAc
-	 bBeqC5Gqqj/mg==
+	b=h62W9T6nrWsvL+9gsWFjwbFkejbKpu1JS2C/AfPOU+RFJVfjLLVlgxr/NlquMfQ5N
+	 kvyM8N3nj8rJbSk3I/0pYVedJeJa4dSiVYbblwOkiXoY5gzMU3DD0sF8o7x2+1H5uf
+	 QzlqRlhr/P0zZj+b/zmjGyvgvRzMTy94B/mB4ZvugfVCrHEvw2cm+gXvFoNaMusnm6
+	 7eIIL29p7hMST8m5ncf+LmHiLGlXaaVYt/YH8wiaeKAdNOjreyA3ol3/UC5cUljA+1
+	 uumaqkiPZGODUxJhgVGa55K8iAuwJZxdPRwBlRU6/fSejmBAENcRvpyv5pMYxHTsvK
+	 6OC2hGbpIqeug==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F54C811C1; Mon, 10 Mar 2025 22:08:30 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id B1D91811C1; Mon, 10 Mar 2025 22:08:31 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E98800D7
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 22:08:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADBA6807D9
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 22:08:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Q5Cwgqmu"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="VPtGt9by"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 150CC103BB5FA; Mon, 10 Mar 2025 22:08:24 +0100 (CET)
+ with ESMTPSA id EC951102A4CBD; Mon, 10 Mar 2025 22:08:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741640907; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1741640909; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=SpOo52O98saHwjVpAJ2FoJMFCYuApNr3T1ZKopWLKrM=;
- b=Q5Cwgqmu+0BULKqK3/rsvR4ezGTzcS1vDy40Vwx5d/CKJxEC09MoYEDwxhBg7p5sJr9Rv8
- Vu5GvnaaRpph0pd+h+Z8HVxIxJU+wGqC230vGN5VmlYqWl/u90FQKkXEckJ9QHagNRx1Er
- ba7FbeK6bK1D8RZi90LuLQTFhON470HF3ZgYZtys4gKauSMwdLn9CtB4Fb69G/L2aWpjkx
- wwZ07wx0ID5PLt2aFfdf5TIs50hI3f2LDshK+JfIChNQOZA/H0b5gqVJUQnAfBG4wns0z2
- 8ZiTp889m6EeCXPH4rcwxrIJ4wjPD29q9edK1cyM5+prFUIPp1A8okNIo2LB9w==
-Message-ID: <3edcc323-32d4-4b49-943a-858624544543@denx.de>
-Date: Mon, 10 Mar 2025 21:29:27 +0100
+ bh=fN5BJDzjkgdVnYhssQNP1qPc4TQA+lxsOCMYk1VWxL8=;
+ b=VPtGt9byUNXWWRFn3cG+t5r2zYf1ohrKEh0sOJjyWODYdKRG/PozCi8+ks7iv6Si54+adD
+ YrtIIeapmH7xyeyhTEt/jPYGhIWroAOaM7IURzPptHo+7F60K5KmRimJS0ZRSPkh7K+85M
+ 8kDsPo7821slkgtW+0uCtGegzxjUhTPZ1kByHwMxdtP7atlmOzco0YxHkcddXGr70iJKla
+ p3+67hxy6jB992fOLAJL1ilZyYpW/IbjT/WH4/Z+lvjs3xXI+ZPqxZ+uzAwakC6HmpZQEp
+ wdwcdPHACwhlNTod/mnjBhaDE6nkCIQRy8jW4kVt498vc9QM0hMVp4GNetAU2Q==
+Message-ID: <6d68d2f0-c969-43f1-86c6-1ccbf039291a@denx.de>
+Date: Mon, 10 Mar 2025 21:37:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/12] fs: exfat: Add U-Boot porting layer
+Subject: Re: [PATCH 12/12] test_fs: Add exfat tests
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
@@ -62,11 +61,11 @@ Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
 References: <20250308201533.1315951-1-marex@denx.de>
- <20250308201533.1315951-8-marex@denx.de>
- <20250310151858.GF2640854@bill-the-cat>
+ <20250308201533.1315951-13-marex@denx.de>
+ <20250310153055.GI2640854@bill-the-cat>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250310151858.GF2640854@bill-the-cat>
+In-Reply-To: <20250310153055.GI2640854@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -86,43 +85,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/10/25 4:18 PM, Tom Rini wrote:
-> On Sat, Mar 08, 2025 at 09:12:11PM +0100, Marek Vasut wrote:
+On 3/10/25 4:30 PM, Tom Rini wrote:
+> On Sat, Mar 08, 2025 at 09:12:16PM +0100, Marek Vasut wrote:
+>> Add tests for the exfat filesystem. These tests are largely an
+>> extension of the FS_GENERIC tests with the following notable
+>> exceptions.
+>>
+>> The filesystem image for exfat tests is generated using combination
+>> of exfatutils mkfs.exfat and python fattools. The fattols are capable
 > 
->> Add U-Boot adjustments to the libexfat code and integrate
->> the result into U-Boot filesystem layer. This provides full
->> read-write exfat support for U-Boot available via generic
->> filesystem interface.
+> Did you mean "exfatprogs" and not "exfatutils" ? But we need to update
+> tools/docker/Dockerfile to list the tool there.
+
+It seems the CI container already has the tools in it ?
+
+Where do I update the docker container, is that tools/docker/Dockerfile ?
+
+>> of generating exfat filesystem images too, but this is not used, the
+> 
+> Presumably because "fattools mkfat" seems to have further external
+> dependencies and so would be more of a pain to use.
+
+I don't think it does, but I think we should stick to tools which will 
+be in production systems as much as possible, and that is mkfs.exfat 
+from exfatprogs . The fattools is only used here because mkfs.exfat 
+cannot create an image from list of files.
+
+[...]
+
+>>   test/py/requirements.txt          |  1 +
+>>   test/py/tests/fs_helper.py        |  8 ++++++--
+>>   test/py/tests/test_fs/conftest.py | 20 +++++++++++---------
+>>   test/py/tests/test_fs/test_ext.py | 20 ++++++++++++++------
+>>   4 files changed, 32 insertions(+), 17 deletions(-)
+> 
+> We also need to update test/py/tests/test_fs/fstest_helpers.py to know
+> to call fsck.exfat.
+
+Fixed in V2, thanks.
+
 > [snip]
->> diff --git a/fs/exfat/Kconfig b/fs/exfat/Kconfig
->> new file mode 100644
->> index 00000000000..9f2703a01ee
->> --- /dev/null
->> +++ b/fs/exfat/Kconfig
->> @@ -0,0 +1,4 @@
->> +config FS_EXFAT
->> +	bool "Enable EXFAT filesystem support"
->> +	help
->> +	  This provides read/write support for EXFAT filesystem.
+>> @@ -64,6 +66,8 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
+>>                   check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
+>>           elif fs_lnxtype == 'vfat' and src_dir:
+>>               check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/', shell=True)
+>> +        elif fs_lnxtype == 'exfat' and src_dir:
+>> +            check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
+>>           return fs_img
+>>       except CalledProcessError:
+>>           call(f'rm -f {fs_img}', shell=True)
 > 
-> Since it looks like you're intentionally not adding exfat-prefixed
-> commands and only using the generic_fs commands, this needs to imply
-> CMD_FS_GENERIC if CMDLINE so that it can be used.
-> 
->> diff --git a/fs/exfat/Makefile b/fs/exfat/Makefile
->> new file mode 100644
->> index 00000000000..824237b6c26
->> --- /dev/null
->> +++ b/fs/exfat/Makefile
->> @@ -0,0 +1,13 @@
->> +# SPDX-License-Identifier: GPL-2.0+
->> +#
->> +
->> +obj-$(CONFIG_FS_EXFAT) = \
-> 
-> Filesystems are where we have all of the anti-patterns of "obj-... ="
-> rather than "+=". It's not a you-must change, but it'd be good to be
-> consistent with most of the tree.
-> 
-> The rest seems fine, thanks.
-Fixed in v2, thanks.
+> A cleanup to use fattools in both cases would be nice, as a follow-up.
+See above, I am not convinced we should go for fattools all across the 
+board. Do you think we should ?
