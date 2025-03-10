@@ -4,42 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D85F7C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 13:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8BD4C282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 13:55:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21CC2814B6;
-	Mon, 10 Mar 2025 14:51:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F0588144F;
+	Mon, 10 Mar 2025 14:55:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l5980ta8";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 456E18129F; Mon, 10 Mar 2025 13:36:30 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0E500811C1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:36:28 +0100 (CET)
+ id 1CE62814A4; Mon, 10 Mar 2025 14:55:33 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CA0F48141D
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 14:55:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ADB13152B;
- Mon, 10 Mar 2025 05:36:38 -0700 (PDT)
-Received: from localhost.localdomain (unknown [10.34.128.27])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id DD78E3F5A1;
- Mon, 10 Mar 2025 05:36:25 -0700 (PDT)
-From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: u-boot@lists.denx.de
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] imx8m: soc: cope with existing optee node
-Date: Mon, 10 Mar 2025 13:36:21 +0100
-Message-ID: <20250310123621.389594-1-vincent.stehle@arm.com>
-X-Mailer: git-send-email 2.47.2
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-30bf7d0c15eso33655901fa.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 06:55:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741614930; x=1742219730; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/alKQcFH+O9DIzKUARCxyxnvxW6vRJjsn0wR1NvsWcg=;
+ b=l5980ta8P7qKAnpKg0mk2saRcXB5mHPiJPSER4OwXx8ktVyPuY7/WTlDYhzK7v0V5M
+ xBPi45uuQUX+6E3T2k8OkKvB28lco+HHiief33l+dcOkY4UDCX60JgkQz4bHUbEjHDY7
+ hwvqz7U35iWiC3qYG6OxwlEnEI5Va3QQxkxqzUYz7NgBtxg13KNYvOVhk6tvQ7mtqmIw
+ BKKxh7+Ckr4lRA35f4Da/GvW501IDdnt4tdqZCUVrEhqctoWsUH0ucWEUUaA1FrZNo8O
+ 0ENpJziM+PFnarx3gy7sS7xsKtq+3efDNHP9erXx3dxUm2ngIdpCbp2YnPQAZ738TaKO
+ g2zA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741614930; x=1742219730;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/alKQcFH+O9DIzKUARCxyxnvxW6vRJjsn0wR1NvsWcg=;
+ b=D//YhxWGnpesHWjVKFMnfJd/BhUXwNhwvDXEZZF3JE9sVUEz0Gi1uJ0Ro+vGIbjdOT
+ +0PMf8VBSvMn6JJz+1LK/gq/4f0o7gCOQO7iUxaz8aUPKiiLQE1mEtzn0ocYxIa0z/WW
+ eNJnXuRZ5SiTnZS15jbWJcB4/gZOiXQkn/m61z8iumdLwips2wAm+ng5QdDWYErw/Pt6
+ PYc6foPkFq33euqVKokd80tORmN2kappvPmkWgLTnlDUL3ZNLqZLJ9Za61yeBCkd3AN/
+ Cx+8vSuW7w2uJP7hwDdn/1xRRhYenmME0sfJv5PeBzLDsnnAnCNFd1Kdh8vOq7L4Wcs1
+ 8gHA==
+X-Gm-Message-State: AOJu0Ywz+os2uI5j97AhsqzX/o0P7OZk5v+4NX6Q/iKab8bBb1P6Q7lk
+ TrYfDanJCx+9two9u8iYlXH3d7SjsyLjakqmUZpHH8BzqKyGT2TzPWHlVHVUVvF4dweFRFC+QrN
+ VAIp/aAXosuI7qanIqt3NXjWtLOK2Lg==
+X-Gm-Gg: ASbGncvmAv02crazM1YlHEhVuC6ud50GOPVY7NimhnmO7ijqSdfZioFeHD8Z0Y3F+eL
+ 3uuDDFCYptYay5p7Xpjcx61DVHUO79o4QzrOSWzd8qU3en/P3zJCUe/Id1DJgJGwoplE/Z+wKvn
+ r7MzsLsYFmvxE89K8US+5lxIQCcjlWgdXh6sJlTJaT2u2xh9Ce4PCzRKmJpQ==
+X-Google-Smtp-Source: AGHT+IGzyvPcMDlcks6bqOj57jv/pqyeCD7yYJ1qR3jyqNrMYgMgd0XL7wsKgadBvooD5crhRwnPmekjMooYEfQKJfY=
+X-Received: by 2002:ac2:4c46:0:b0:543:baa3:87ab with SMTP id
+ 2adb3069b0e04-549910b7f23mr4098523e87.47.1741614929890; Mon, 10 Mar 2025
+ 06:55:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 10 Mar 2025 14:51:01 +0100
+References: <20250310133647.2712374-1-anshuld@ti.com>
+In-Reply-To: <20250310133647.2712374-1-anshuld@ti.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 10 Mar 2025 10:55:17 -0300
+X-Gm-Features: AQ5f1JrZltrVpUC0H2UiyG6-WyMRJwyCfMZ-3vkSkKMjvGGQJISLDg9BSFgV_zg
+Message-ID: <CAOMZO5AmQ8TViLkx2cQe-FyrCCnOn9B=Cupgt-rj_5EvJyMsgA@mail.gmail.com>
+Subject: Re: [PATCH v1] config: falcon: move CFG_SYS_SPI_* to Kconfig
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,56 +91,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On i.MX8M SoCs, the /firmware/optee Devicetree node is created just before
-booting the OS when OP-TEE is found running. If the node already exists,
-this results in an error, which prevents the OS to boot:
+On Mon, Mar 10, 2025 at 10:37=E2=80=AFAM Anshul Dalal <anshuld@ti.com> wrot=
+e:
 
-  Could not create optee node.
-  ERROR: system-specific fdt fixup failed: FDT_ERR_EXISTS
-   - must RESET the board to recover.
+> diff --git a/include/configs/xea.h b/include/configs/xea.h
+> index 00d62748733..2b358a41e2b 100644
+> --- a/include/configs/xea.h
+> +++ b/include/configs/xea.h
+> @@ -14,12 +14,6 @@
+>
+>  #include <linux/sizes.h>
 
-  failed to process device tree
+This header file can also be removed.
 
-On the i.MX8M systems where CONFIG_OF_SYSTEM_SETUP is defined, the
-ft_add_optee_node() function is called before booting the OS. It will
-create the OP-TEE Devicetree node and populate it with reserved memory
-informations gathered at runtime.
-
-On on most i.MX8M systems the Devicetree is built with an optee node if
-CONFIG_OPTEE is defined. This node is indeed necessary for commands and
-drivers communicating with OP-TEE, even before attempting OS boot.
-
-The aforementioned issue can happen on the Compulab IOT-GATE-iMX8, which is
-the only in-tree i.MX8M system where both CONFIG_OPTEE and
-CONFIG_OF_SYSTEM_SETUP are defined (see the imx8mm-cl-iot-gate*
-defconfigs).
-
-Deal with an existing optee node gracefully at runtime to fix this issue.
-
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Tim Harvey <tharvey@gateworks.com>
----
- arch/arm/mach-imx/imx8m/soc.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-index 85dc8b51a14..567e8e9e81a 100644
---- a/arch/arm/mach-imx/imx8m/soc.c
-+++ b/arch/arm/mach-imx/imx8m/soc.c
-@@ -1270,8 +1270,9 @@ static int ft_add_optee_node(void *fdt, struct bd_info *bd)
- 		}
- 	}
- 
-+	/* Locate the optee node if it exists or create it. */
- 	subpath = "optee";
--	offs = fdt_add_subnode(fdt, offs, subpath);
-+	offs = fdt_find_or_add_subnode(fdt, offs, subpath);
- 	if (offs < 0) {
- 		printf("Could not create %s node.\n", subpath);
- 		return offs;
--- 
-2.47.2
-
+> -/* SPL */
+> -
+> -#define CFG_SYS_SPI_KERNEL_OFFS        SZ_1M
+> -#define CFG_SYS_SPI_ARGS_OFFS  SZ_512K
+> -#define CFG_SYS_SPI_ARGS_SIZE  SZ_32K
