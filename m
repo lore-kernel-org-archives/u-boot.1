@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5314FC28B30
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 23:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4708CC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 23:47:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34E9B814B6;
-	Tue, 11 Mar 2025 00:33:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B9B14806D8;
+	Tue, 11 Mar 2025 00:46:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741649633;
-	bh=CkV1QbGeY69/b5eP384WEhhFfkwtvWpurz2JfkQ/fL8=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=faVl+RSTFNE5dDXNzmGfwS/oMgw0bSPcGRzYkLEZhRRbJosKd+o2ivMf8hgjwXJ/d
-	 W6w0t/Ub/VD+HZipXBgKbWTQ3PYhDSWwkQLV16ld8ALcLgCxNao6nSJxJKzhdBqlHN
-	 sfeAUQbxI9r725P9dagYNmVccx2X+oh/dlxRn11eAtKJwcT0dy0B6TeR2TjqRJaEeW
-	 JYva3Cw4HJnzd2JxDcTVN+70DiblB0fiJY1R3IAleDuoFlIiMTldrdWuk4XAogps+7
-	 WEGAnlkAQUKJ7otqbq5TdcfbDKQtPGkAUFeScZSMgJfzujyCajw11BAZIXoc58S5KA
-	 Pqx0jP/0BUwQA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B9778083E; Tue, 11 Mar 2025 00:33:50 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A7C581335
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 00:33:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="NhMVCjn1"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 76D991020CAC9; Tue, 11 Mar 2025 00:33:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741649627; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=CkV1QbGeY69/b5eP384WEhhFfkwtvWpurz2JfkQ/fL8=;
- b=NhMVCjn1yx5oJjAPjck53JUQnMzIe+weaqv09+ND/nqKwgEgHYsfK9hWWGI5V8W1edI+TE
- 8e38Fq3S4dfVmcISBEoYJKbIS6PTvOVUcr0SD0BhQnHH9arYLcwissAWM8jh+6xwPRAjia
- Ixa5YlxYgOJHw2xYnL2wFaoeptKRO3oe7E9k6VsRGRh4Im7VVbfjmzC6UnKphpMw78zND2
- ojdCTwMT0Y2JS5bPkWLC3qxP1LV1/aOojIYn/iYFERPh/AsgZy0qCmHPi7yiclhk9bJgSk
- qdJiX43L6TfT8iKoPZkPECujnKorhdBu4rvUXXVTdeT2Yyc3pE94FJQD40jKXg==
-Message-ID: <e8cba3ce-d9a8-4bf0-8a98-dc1b8f8f49a3@denx.de>
-Date: Tue, 11 Mar 2025 00:33:35 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cdWMhCeu";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4279E807D9; Tue, 11 Mar 2025 00:46:58 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 12622801FB
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 00:46:56 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-22548a28d0cso25728525ad.3
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 16:46:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741650414; x=1742255214; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=p1xBRFwkiJsRPC4G1/KRb0fDlllPyJvcEb8FtmA98+4=;
+ b=cdWMhCeuzWVW4ZKt9Wxk+ZH0hc9Qf4HbOEPslaQxfZrw2WtnQgVaz9KSlwDZHronF4
+ z9z4T5dgZeQT5aiNXZn5JGZX99VBij6jjDeaJuiWdTeFySFlXd7ChAmnFaEmpg73aS8w
+ SAUp4CVZzBDXhJsW8fuORVOJivttW+wynuqzY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741650414; x=1742255214;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=p1xBRFwkiJsRPC4G1/KRb0fDlllPyJvcEb8FtmA98+4=;
+ b=uNh3LqTbQWrY0kxmCbLbI/BxPzi1qWXYIVEMQEj0xuhHPF8kqBd5YlApYWRX7vz6YH
+ 79M8N9xwQspmmdKNaGNMG+Evoxi3AH/tFAV3+FSWvaigp5UsWfOmvR1tS6ZJbaBltOkc
+ VURe3ydtnD51XF5DL7OiJuc7MjB1vEp3AWO26diP36j2ShqZJK0shWcQxC8ZlHSciKW2
+ 1o1AJQWoxS7Y09w4qGpQMK4jRadIz9uJr93L09W81OUAyMWV8E/GpplaeS+gIQu5pflu
+ 0wV/f0++/Ite2hbRowdkpj2SnSEcYLj1XWf8kVPW5RJntWO4TkH2cQMo8JaEl8GpLlTp
+ S/IQ==
+X-Gm-Message-State: AOJu0YzfHP5Lf3JrEFSSosP1d7PZ6qSW3KpjYkELTtkV42vIV7kkfZ+j
+ p8nBbqmhorF2cZJRC0mRsJxYbvaqrKmpjddFeSj0OqnymIR7/GAZJs6krgIkPLgH/N11c0+adwr
+ 0
+X-Gm-Gg: ASbGncswb3oci9nBjfri0QPY9r9+pSc5SH+hzKetRVKjmhDlFJM85I6np48pUGiv2UZ
+ ky0OQB098YryoypcSnIWOuYAYiwQO9tj7MGcCk1vx1kUSnYZjCx7TK9kVGUi1HLzOU1pMkDRUjL
+ r8Jbgu6LAwRM5eViIl2BJvHedShZDWYG2SSWhajnmV8J4mHGZv2+YUlR0pBPdzxE6N7Jr/uV3+W
+ INqBahmnSgZstq+DcHFF4+fq4no/KaSkRHs3YWTkiWuQKQS9UYkbjWVVIs0oTqz9hZUeSb+wMGi
+ Y3Hd++16iX3fArW5LC7V3GAcpu5LaO/Rd3j6S6IH8C4rqg==
+X-Google-Smtp-Source: AGHT+IE+aDvk8guyQmQsD05NX44v0Jg2BpkCq9MUVN8aLWj5NINXEvSvfEPnjPHY20CLJbUGbN+ZGQ==
+X-Received: by 2002:a17:903:32ce:b0:220:e655:d77 with SMTP id
+ d9443c01a7336-22428bded56mr249493225ad.36.1741650414480; 
+ Mon, 10 Mar 2025 16:46:54 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22410a925ddsm84802175ad.203.2025.03.10.16.46.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Mar 2025 16:46:53 -0700 (PDT)
+Date: Mon, 10 Mar 2025 17:46:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Merge of v2025.04-rc4 in to next
+Message-ID: <20250310234651.GQ2640854@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 08/12] fs: exfat: Fix conversion overflow errors
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Baruch Siach <baruch@tkos.co.il>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20250308201533.1315951-1-marex@denx.de>
- <20250308201533.1315951-9-marex@denx.de>
- <393a7b06-402a-48b0-8ed4-5dcaa7ab9383@cherry.de>
- <a7b192b6-48b8-4878-a6dd-563dbb9bdb06@denx.de>
- <20250310214904.GO2640854@bill-the-cat>
-Content-Language: en-US
-In-Reply-To: <20250310214904.GO2640854@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZW9gc+gBt22fIpSp"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,72 +92,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/10/25 10:49 PM, Tom Rini wrote:
-> On Mon, Mar 10, 2025 at 10:03:37PM +0100, Marek Vasut wrote:
->> On 3/10/25 12:17 PM, Quentin Schulz wrote:
->>> Hi Marek,
->>
->> Hi,
->>
->>> On 3/8/25 9:12 PM, Marek Vasut wrote:
->>>> Fix the following conversion overflow errors. The input field is already
->>>> limited to 3/2/1 bits using the bitwise and, move the parenthesis around
->>>> to avoid the bogus warning:
->>>>
->>>> "
->>>> fs/exfat/utf.c: In function ‘utf8_to_wchar’:
->>>> fs/exfat/utf.c:165:23: warning: overflow in conversion from ‘int’ to
->>>> ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short
->>>> unsigned int)*input << 18 & 1835008’ to ‘0’ [-Woverflow]
->>>>     165 |                 *wc = ((wchar_t) input[0] & 0x07) << 18;
->>>>         |                       ^
->>>> fs/exfat/utf.c:170:23: warning: overflow in conversion from ‘int’ to
->>>> ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short
->>>> unsigned int)*input << 24 & 50331648’ to ‘0’ [-Woverflow]
->>>>     170 |                 *wc = ((wchar_t) input[0] & 0x03) << 24;
->>>>         |                       ^
->>>> fs/exfat/utf.c:175:23: warning: overflow in conversion from ‘int’ to
->>>> ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short
->>>> unsigned int)*input << 30 & 1073741824’ to ‘0’ [-Woverflow]
->>>>     175 |                 *wc = ((wchar_t) input[0] & 0x01) << 30;
->>>>         |                       ^
->>>> "
->>>>
->>>
->>> Since this doesn't seem to be U-Boot-specific, any chance to open a Pull
->>> Request on the project so we may be able to not carry this patch when
->>> upgrading (yes, the last commit in the branch was two years ago, but it
->>> seems the maintainer is still active on issues).
->>>
->>> Considering that wchar_t is an unsigned short int and that USHRT_MAX is
->>> 0xffff (so 2B or 16b)...
->> In fact, this error does not even appear in upstream , because upstream does
->> not use -fshort-wchar compiler flag . U-Boot does use this compiler flags
->> since 4a85663ec7ed ("kbuild: Enable -fshort-wchar") .
->>
->> So I wonder if this might be the right fix here instead:
->>
->> diff --git a/fs/exfat/Makefile b/fs/exfat/Makefile
->> index 550c0683d65..8ca112cf0e9 100644
->> --- a/fs/exfat/Makefile
->> +++ b/fs/exfat/Makefile
->> @@ -1,6 +1,9 @@
->>   # SPDX-License-Identifier: GPL-2.0+
->>   #
->>
->> +# The utf.o does really need 32bit wchar_t
->> +CFLAGS_REMOVE_utf.o := -fshort-wchar
->> +
->>   obj-$(CONFIG_FS_EXFAT) += \
->>   	cluster.o \
->>   	io.o \
-> 
-> Your initial approach is right I think, I'm not sure it's a good idea
-> to mix and match that flag throughout the codebase.
 
-The -fshort-wchar is needed only because of EFI , so I wonder if we 
-should somehow isolate the EFI code which needs this stuff instead, and 
-drop the flag throughout the codebase instead ? Heinrich ?
+--ZW9gc+gBt22fIpSp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Or maybe EFI should switch to something else that is not wchar_t , so 
-other users can use wchar_t unrestricted ?
+Hey,
+
+Attempting to merge v2025.04-rc4 in to -next fails on two files. One of
+which is common/miiphyutil.c and is easily solved (miiphy_init() goes
+away) and then lib/efi_loader/efi_net.c. The latter I need help with,
+ideally one of you, as you understand the code in question, sends me the
+merged file off-list and I'll drop that in, or points me at a tree with
+the merge done and I'll work it out from there. Thanks!
+
+--=20
+Tom
+
+--ZW9gc+gBt22fIpSp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfPeeQACgkQFHw5/5Y0
+tywXbAv+Ie4zHWWbtYX8R6OiBICTbqBSxoANLfvKL8CR0hqapG/OGH2ETQtIL0vP
+NW3Ic3QN5GMI48Obbr8g2rc3rZkmFZDdd+Ec+LdCXeyQZ+niw8gSJCQytkhX+svH
+2Ce+YXkFpO21NMpC2IQ7qBvgFlfqov1odaMB1/vv76exOx6HyjAvP0H4YXgTE5b4
+jQf+crE7d0UKmvtPz37Iay+jzJx6G/yGaKM1GSf9ncuPACnQVHJ+W5t0wAEWK6Yc
+BTUxU7E/D0HSvYQvfahuPl2OQQt8vLatkXf4SLTpIILmQeh1EReE137JTIAqPNpK
+7l5gYKYG3n0Qj/jTw/fUOZH8/1FVFtEWW+DwU68MFnE3l5OnkiZwSo4aPpwC05ll
+HJ0mdFMEcI7BEALzc5kgaR/8RXWkLRkeew5OF06Utn+zU9nANp2BJFUuSPczEwZK
+S064zrD7bwDVOXrInsd9PiiSCMGl/Odziz6Wmvw5EA2CYyr0W0iGfP/kVHOih4Xm
+ssvgG8ue
+=c6sv
+-----END PGP SIGNATURE-----
+
+--ZW9gc+gBt22fIpSp--
