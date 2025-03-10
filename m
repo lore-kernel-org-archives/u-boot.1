@@ -4,99 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EC26C28B2E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E426C28B2E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:52:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D24080107;
-	Mon, 10 Mar 2025 13:48:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A2E7280107;
+	Mon, 10 Mar 2025 13:52:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pmKcEucc";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ZVmiGW13";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CCAF811C1; Mon, 10 Mar 2025 13:48:46 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 517E58122F; Mon, 10 Mar 2025 13:52:43 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19FA08003E
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:48:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C89E28003E
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:52:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43cfecdd8b2so2422295e9.2
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:48:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741610923; x=1742215723; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Mx3e016/rMGAOvBG3f0wwZ452Zvfwf6VnZ42wtjNEaU=;
- b=pmKcEucc7LaVWAeDuG8NPZ7AMMA3EjfOIuRvw77N+zVqngevTUo/6StMciG4FXCqR3
- Oaga7f6L1LMnMv8Fh2FjZt09dsLhOYqDDQ9JNqdozMteR6C1O+oPAjcJ3uWW9rDi97YH
- jGUz4CR2k57VA85E62xOhQWmBdFJziAqpNBZUUWhJs+rwshB5mLw+TWLvQ5K9XaC2qNj
- jAg6HHV07DSg71fJ28zazmoyqH/xdJfIDp0UlxRNN9xRO8DhT/Wjk07cXjf8fIQr4xA8
- 103Pd6ZAsOdi0WvFsKsQWKUqWOPC3Be+HYA2bXWTKJIiH0lngc2EaWzNF1EKlQfKsl0m
- 1p3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741610923; x=1742215723;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Mx3e016/rMGAOvBG3f0wwZ452Zvfwf6VnZ42wtjNEaU=;
- b=vGe833wzfDmDOYGJGnj7whWpQ4bcrFgf56h0MDvieVxot+9MFSa9RAriQul0plLFSX
- MdMTs/fNWt3DwAYwMwIQLvwMU5njBTJAgU1EWb6rE0fHLD+XT/xSRo+JrVVCQDHOKR6D
- 2UkQmcwwwLOC/H3MI+02W+8Rf9ykxsSiY1iwEbxfjQyxbNMG4qbZQdcr+6UjEgSRFEKL
- telu+XOiUTl4lOxvkDRgdfHv3cJ7FTXA3ggyCV5C3qn7DsVLc/eF/Y+cvwwUDseEAIrn
- YcRsZBV7EoG++eSNZObqq95DD4FLMpcfVddL0wrlW2Kyba133/aU7VKwrf47GvQoxXX2
- Q7eQ==
-X-Gm-Message-State: AOJu0Yz9yKj9mrFYKzXFOH9hnGx03gmJuR0Lfhm6I2CtIeWKaDAFTQPs
- WAjHYe/6ZBbcIqg6B8tvdc/ZnSbCof7uiYDB7qrKoTVGsGjjHj298A3uIBo7VTs=
-X-Gm-Gg: ASbGncuY7qKag40pd7VSFLkOVKEMUkVC8Pua9S3BAG4wAvNRn7XeRIJ0bzB5RPPJ0z5
- wilUIqeVhtn9vL9Qvfq1AqicZlO2kYAL+uFVUYEJc3/ROW6boA3LzysOJMr9twsHPlV8VBXynqo
- It0qLpiltl8i88TSC0d2Qv3y7vxrLs6f2nX5ZYYvewe0c+0bLP7adCVhr6sf/SqJeQznzRuy5CV
- R0S2Ik9eCg9DnqZ1y6MFJ/Klk7jCe0lp57Wbtf7VypFIbCdz+QRnooURaX0JDwfbcoZZTi/ZPXB
- T0jQBB/6GUs9zIyPyWCyZuOQ/NmOUw9v9fWFRQBAvK45JNHRqmXueT+AbFoGw0ttiU840n5i1Hf
- TtmZ5IxEhPQ3BP8s3gkMVqQPtYrZe5of3Mv4=
-X-Google-Smtp-Source: AGHT+IHIBhA7RPT4wUD1z4lrS6bzTwlqkjNMgP76KL1QP08e7bItYy0FBYd3+ZLcN8922+2nGnWuTQ==
-X-Received: by 2002:a05:6000:402a:b0:391:2dea:c9a5 with SMTP id
- ffacd0b85a97d-39132d6b61cmr8578104f8f.20.1741610923497; 
- Mon, 10 Mar 2025 05:48:43 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:72e5:c885:a214:4261?
- ([2a01:e0a:3cb:7bb0:72e5:c885:a214:4261])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912c01cdd7sm15094145f8f.56.2025.03.10.05.48.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Mar 2025 05:48:42 -0700 (PDT)
-Message-ID: <baf67248-1d3d-4489-b900-e15b48ca4c1e@linaro.org>
-Date: Mon, 10 Mar 2025 13:48:41 +0100
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1741611158; x=1742215958; i=xypron.glpk@gmx.de;
+ bh=XriNGHkPMQSynx4TJRpuWpsU3b49YQs0BbAxzp8QPVk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=ZVmiGW13FshwTsgO1ypIfPehJTNterIMx2mZIAarpsZvOF+X9QxAngUR5pWzC3zd
+ HM9O+fL1pqLhpTO4wfB6vFHwHnGN81BISyPg+PlTKvIQ+E0kgNo5ADXPMxKhzierM
+ cSnQEFmVWT9DzkDo1VxlaY3l5i171D+xUUO0P3JEkhOyCfY5CvogJERuXLnKm2xky
+ zgw15w4+1aDjtuDA2ZRuugUPu9ftS/RmWoH0XqYRdVesJoqg4qgS5fqzzFIImunDJ
+ pFDswSOh+Wqv19DmPUmbhrztng8XQa1k3lErXiqiMb8AsvkaCyRI8nkHh1iTasfA7
+ fp54lHm7tJoQEo3zbg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MuUnA-1t04Sl3pXG-00xcYf; Mon, 10
+ Mar 2025 13:52:37 +0100
+Message-ID: <3f38b374-df82-420a-a253-372cdb2db279@gmx.de>
+Date: Mon, 10 Mar 2025 13:52:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] net: lwip: add support for built-in root
- certificates
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>
-References: <20250305142650.2966738-1-jerome.forissier@linaro.org>
- <20250305142650.2966738-5-jerome.forissier@linaro.org>
- <CAC_iWj+kn1Ah98XthW_kGmNQHjKy=VEL9kd+PjVKV9phwJeVcQ@mail.gmail.com>
- <4c723e83-5287-4c94-8859-e1c49d6af927@linaro.org>
- <CAC_iWjLbpU-1NW5YzxuEauAizjLS1iB_tjMiCBWu2tbjuf189A@mail.gmail.com>
- <684ad95c-eff2-4ed4-a305-670977eff7ed@linaro.org>
- <CAC_iWjLwbtqLmr71rqEuM2c01LNe09W7xVdZvT9XCH+ivsjd-g@mail.gmail.com>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjLwbtqLmr71rqEuM2c01LNe09W7xVdZvT9XCH+ivsjd-g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>,
+ Yao Zi <ziyao@disroot.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-next-20250310
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:dRgzGL4c9/50yrj/TwlZAYf1rf7Lo1s20eHZl0w3z2ynLF+dKDf
+ +c7RielPAAJZzcXzdJVoo6w0NcR+Eh8KxwPA4yEvZlwy9sp8NdVIxHF2QVVTMv7N3f5hkBI
+ E/TymYjY951RBVGijG/9BzCYAPqbyTMOpofhPuuQQR9tBar5mCACJ8YSQ568DwfBEx+pab+
+ 5WceFy7RQEToazj8HcjAg==
+UI-OutboundReport: notjunk:1;M01:P0:gThYtb4sf/Y=;F4PwpWtBe56zpGGuJZw6Nc31L5m
+ 769Cv8z3I2pOkw9SvsiyMDEPcn8I7/Qidw1HnPAlmXkqkVxOeKt42AOfsDvvCkC3dEy8U6sbV
+ pgosgEaG7apYy/lHJfEJRj8S3rUGnXTJGuANPXpoi4mOXL95ukQbswM7FoKF3XbBLqxWhKNI6
+ xM8nae1wa+Dp4MRPfFQC3lkLdeBfLQGv4369RIOiXy7asEYRtaQoqmqKsOiEFFIrOwS08qZjs
+ gLphRJ400hMbk464+ZyPGTRHCgZhF4YlXVBZlaxh4E+Gfjy5Fa/rUm45Ew6fizAz0yuc/u9T6
+ 6xYnc1BbDezht9bGH/qggO70LR5xRB11PVW8RIC11YjDoBSPHku4k+aK3/WGyob6n5AdsG664
+ o5DxZa7UJhhqlsncA7MOqkdOmC44XT5r/ZfF3OtIbcgEZX1tJSgNoRRm4hf6W67gY8u965oYD
+ GYJ6SvZn2lbB/AWcCJToKBeH2TjagQFZPzQo1i2dGxeuEyUgvZ1MbOeaeEbiGyvrq+2GSY1fy
+ zI1Azvs4gKUufK34XumXc0A+Xdzzxo8f6XA0oCMA6mUJQIeuvt/iA/5PKLCh5Icx5Zuo8sNnS
+ /K7tktCm+cc5eNMkUF4Qs/go/yppa7bFnQzRjc+k5s54L16yC1Z0m4FhF7aESeQgSGNnbGkq1
+ RHy6FL1I1++8UOUnDTVXfdkBU1ERJvuA87SpRC7ny0davWNefL8aAGvQYeQ3+GBpy2yK/eVvx
+ 0CWZn4PxICdbW+lwMfjJGhBRGrBJtC1HTAIW/KPAM/ID0CwkWegThSKE+f3krpIxuB7K8PF8F
+ Ge6qGdJmauybQORTDEDF1FZ7wr4G+wwtiXToOYBzLFMxp+mBEl5FhJSrut7Lo07U6HaGIgd/v
+ ZojABLcBglLXW/3t3/lZ1IWyIBPJVndXECbKfEj37oJZ7QsJBvTHeqyzzqeaPMy8w3DRb9pF+
+ 9yNO7vLmcBvBpgayKs/mzTtY2l/5HsNPDPFkNKW/u7ElkvKuuaaZHUdjVb29qb1XFGvp5m02K
+ OYxhxzhgH6Ce+PiNdJKN5JbP3Tfh1qxyB29mu6V+GVHrc3oJB5fdQeB04sZfxyIOU/b/gvsqk
+ rXewP1+oVYhVxI+sQb0GbiKGp8mXz/2tbofLDXLdiyGDFVkyqEenrRfTKl7QaF4agGXTtO8AA
+ gGT/rZTneil1Ryj/+tlxy/EkURxZr9cvj0TE/fe22fIXW6eN3AAhdX4YNVtMu62LFpkAaIUdt
+ 3G8zg9OEM7g/bC/5NllsGPngmGHKb8cUB2WxfxnZP8uQBFjmcgsrZ6A0kpkTuf3AIvv+p2h46
+ goB6gs2CXxP5Px0kpAgqz6avoqj20UN9O02iVMhHdS4fKYz81SUiDgxxkcvcpnK1O/I7jLcGG
+ Sct/bPl5Db4UPJsNHdn21yOTtfuF6sfHx2Ls0unEuf/UBjjBDouIcT7omO7qLVd1gpv0lafBA
+ RatZg8g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,113 +98,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear Tom,
 
+The following changes since commit 743c15b9fdd2f639012a2c26734dc146dc56821=
+8:
 
-On 3/10/25 13:38, Ilias Apalodimas wrote:
-> On Mon, 10 Mar 2025 at 14:13, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->>
->>
->> On 3/10/25 12:52, Ilias Apalodimas wrote:
->>> Hi Jerome,
->>>
->>> [...]
->>>
->>>
->>>>>>
->>>>>> +#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
->>>>>> +       cacert_initialized = true;
->>>>>> +#endif
->>>>>>         return CMD_RET_SUCCESS;
->>>>>>  }
->>>>>> +
->>>>>> +#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
->>>>>> +static int set_cacert_builtin(void)
->>>>>> +{
->>>>>> +       return _set_cacert(builtin_cacert, builtin_cacert_size);
->>>>>> +}
->>>>>>  #endif
->>>>>>
->>>>>> +#if CONFIG_IS_ENABLED(WGET_CACERT)
->>>>>> +static int set_cacert(char * const saddr, char * const ssz)
->>>>>> +{
->>>>>> +       ulong addr, sz;
->>>>>> +
->>>>>> +       addr = hextoul(saddr, NULL);
->>>>>> +       sz = hextoul(ssz, NULL);
->>>>>> +
->>>>>> +       return _set_cacert((void *)addr, sz);
->>>>>> +}
->>>>>> +#endif
->>>>>> +#endif  /* CONFIG_WGET_CACERT || CONFIG_WGET_BUILTIN_CACERT */
->>>>>> +
->>>>>>  static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
->>>>>>  {
->>>>>>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
->>>>>> @@ -373,8 +401,15 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
->>>>>>         memset(&conn, 0, sizeof(conn));
->>>>>>  #if CONFIG_IS_ENABLED(WGET_HTTPS)
->>>>>>         if (is_https) {
->>>>>> -               char *ca = cacert;
->>>>>> -               size_t ca_sz = cacert_size;
->>>>>> +               char *ca;
->>>>>> +               size_t ca_sz;
->>>>>> +
->>>>>> +#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
->>>>>> +               if (!cacert_initialized)
->>>>>> +                       set_cacert_builtin();
->>>>>> +#endif
->>>>>
->>>>> The code and the rest of the patch seems fine, but the builtin vs
->>>>> downloaded cert is a bit confusing here.
->>>>> Since the built-in cert always gets initialized in the wget loop it
->>>>> would overwrite any certificates that are downloaded in memory?
->>>>
->>>> The built-in certs are enabled only when cacert_initialized is false.
->>>> set_cacert_builtin() will set it to true (via _set_cacert()), so it will
->>>> happen only once. Note also that any successful "wget cacert" command
->>>> will also do the same. So effectively these two lines enable the
->>>> built-in certificates by default, that's all they do.
->>>
->>> Ok, so if you download a cert in memory and have u-boot with a builtin
->>> certificate, then the memory one will be overwritten in the first run.
->>
->> No, because the downloaded cert must have be made active via "wget cacert
->> <addr> <size>", which will set cacert_initialized to true, and thus the
->> built-in certs won't overwrite them. Or did I miss something?
-> 
-> Nop I did, when reading the patch. But should the command that clears
-> the downloaded cert set cacert_initialized; to false now?
+   Merge patch series "This series adds support for file renaming to
+EFI_FILE_PROTOCOL.SetInfo()." (2025-03-07 12:06:21 -0600)
 
-It's probably easier if it does not, so that "wget cacert 0 0" really clears
-the certs. We have a command to restore the built-in ones ("wget cacert
-builtin").
+are available in the Git repository at:
 
-Thanks,
--- 
-Jerome
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-next-20250310
 
-> 
-> Thanks
-> /Ilias
->>
->> Cheers,
->> --
->> Jerome
->>
->>> This is not easy to solve, I was trying to think of ways to make the
->>> functionality clearer to users.
->>>
->>> Cheers
->>> /Ilias
->>>>
->>>> Cheers,
->>>> --
->>>> Jerome
->>>>
->>>>>
->>>>> [...]
->>>>>
->>>>> Cheers
->>>>> /Ilias
+for you to fetch changes up to cb21476496d6f48712b24045aa7cd3299ad65d99:
+
+   lib: correct description of CONFIG_SYS_FDT_PAD (2025-03-10 07:41:26
++0100)
+
+Gitlab CI reported no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/25043
+
+=2D---------------------------------------------------------------
+Pull request efi-next-20250310
+
+UEFI:
+
+* Clean up usage of structure jmp_buf_data
+* Refactor EFI network protocol implementation for future support
+   of multiple network interfaces.
+   - efi_net: let efi_net_set_dp properly update the device path
+   - expose symbols to be used by the EFI network stack
+   - efi_setup: Add efi_start_obj_list() to efi_setup.c
+   - efi_net: Add efi_net_do_start() to efi_net.c
+   - efi_device_path: Pass net udevice as argument
+   - efi_net: Add device path cache
+   - efi_net: Add dhcp cache
+   - efi_net: Add support for multiple efi_net_obj
+
+Others:
+
+* legacy-net: wget: fix wget_info handling after new tcp legacy stack
+* lib: correct description of CONFIG_SYS_FDT_PAD
+* Separate setjmp.h into architecture dependent and independent parts
+   - sandbox: remove linux/types.h dependency in setjmp.h
+   - arm: include asm-generic/int-ll64.h in setjmp.h
+   - common: clean up setjmp.h
+* arm: use type jmp_buf instead of struct jmp_buf_data
+
+=2D---------------------------------------------------------------
+Adriano Cordova (9):
+       efi_loader: efi_net: let efi_net_set_dp properly update the
+device path
+       legacy-net: wget: fix wget_info handling after new tcp legacy stack
+       efi_loader: expose symbols to be used by the EFI network stack
+       efi_loader: efi_setup: Add efi_start_obj_list() to efi_setup.c
+       efi_loader: efi_net: Add efi_net_do_start() to efi_net.c
+       efi_loader: efi_device_path: Pass net udevice as argument
+       efi_loader: efi_net: Add device path cache
+       efi_loader: efi_net: Add dhcp cache
+       efi_loader: efi_net: Add support for multiple efi_net_obj
+
+Heinrich Schuchardt (5):
+       sandbox: remove linux/types.h dependency in setjmp.h
+       arm: include asm-generic/int-ll64.h in setjmp.h
+       common: clean up setjmp.h
+       arm: use type jmp_buf instead of struct jmp_buf_data
+       lib: correct description of CONFIG_SYS_FDT_PAD
+
+Yao Zi (1):
+       efi_loader: Clean up usage of structure jmp_buf_data
+
+  arch/arm/cpu/armv7/exception_level.c |   8 +-
+  arch/arm/cpu/armv8/exception_level.c |   8 +-
+  arch/arm/include/asm/setjmp.h        |  17 +-
+  arch/arm/mach-rockchip/bootrom.c     |   2 +-
+  arch/riscv/include/asm/setjmp.h      |  15 +-
+  arch/sandbox/cpu/cpu.c               |   2 +-
+  arch/sandbox/include/asm/setjmp.h    |  18 +-
+  arch/x86/include/asm/setjmp.h        |  11 +-
+  include/efi_loader.h                 |  52 +++-
+  include/interrupt.h                  |   2 +-
+  include/net-common.h                 |   1 +
+  include/setjmp.h                     |  40 +++
+  lib/Kconfig                          |   8 +-
+  lib/efi_loader/efi_bootbin.c         |   3 +-
+  lib/efi_loader/efi_boottime.c        |  30 +-
+  lib/efi_loader/efi_device_path.c     |  26 +-
+  lib/efi_loader/efi_http.c            |   6 +-
+  lib/efi_loader/efi_ipconfig.c        |   4 +-
+  lib/efi_loader/efi_net.c             | 579
+++++++++++++++++++++++++++++-------
+  lib/efi_loader/efi_setup.c           |  27 +-
+  lib/efi_selftest/efi_selftest_snp.c  |   1 -
+  net/wget.c                           |  18 +-
+  test/lib/longjmp.c                   |   2 +-
+  23 files changed, 651 insertions(+), 229 deletions(-)
+  create mode 100644 include/setjmp.h
