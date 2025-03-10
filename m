@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B6AC28B2E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EBF8C28B30
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AED5812D9;
-	Mon, 10 Mar 2025 11:37:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 80F3B812C8;
+	Mon, 10 Mar 2025 11:37:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fMeVbMMr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U8G+jxb3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8632C811C1; Mon, 10 Mar 2025 11:37:24 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 36C078003E; Mon, 10 Mar 2025 11:37:30 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4DC58003E
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:37:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DF418142D
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:37:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52AAbA6j858018
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52AAbM1k953645
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 10 Mar 2025 05:37:10 -0500
+ Mon, 10 Mar 2025 05:37:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741603030;
- bh=57vDKUc9DftuB1l4uFdiDatj0tW7ooWkWHGluIWwf3g=;
- h=From:To:CC:Subject:Date;
- b=fMeVbMMrrXHfZ5tGFpHlA+Tcol0/oPIN1iB5I3kxUsRqaHKUkVK7a0mEnQxRyhnXz
- 1BUIeUIms5+S5ptk7r2szLUnpPuJ4h2LGZ/M0orheb1C0M+PEFCqq2KHzT+ef7J6XV
- HqNelBm4U1mXI6v+MN2QFMJE4FsJxqf3sb/oX7LI=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52AAbAgk125283
+ s=ti-com-17Q1; t=1741603042;
+ bh=+BfiNKWW7rEIsD7zUk17r6O7WZmFO92yV4Yg++tENkg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=U8G+jxb3OZWH3RTLAgiyzRdHxgLZ8d2EyiTqFedfSNyD3EsGCA3EX22GVMeCHMPFa
+ WdIBcu82zbt881iS4o8+FfA8fJZVci29NMMPBXzPFNFuT2bCPCDv66JeKQZjIE2Otr
+ U2EyCobX6a7suCKNF9K0GvSO0BbqOqfnCedQTgAc=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52AAbM0O044617
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 10 Mar 2025 05:37:10 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 10 Mar 2025 05:37:22 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
- Mar 2025 05:37:10 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 05:37:22 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 10 Mar 2025 05:37:10 -0500
+ Frontend Transport; Mon, 10 Mar 2025 05:37:22 -0500
 Received: from psdkl-workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [10.24.72.128])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52AAb6kI072804;
- Mon, 10 Mar 2025 05:37:07 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52AAb6kL072804;
+ Mon, 10 Mar 2025 05:37:18 -0500
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
@@ -58,10 +58,13 @@ CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
  <virag.david003@gmail.com>, <stefan.agner@toradex.com>,
  <w.egorov@phytec.de>, <j-keerthy@ti.com>, <u-kumar1@ti.com>,
  Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v2 0/4] omap24xx_i2c: Enable Repeated Start functionality
-Date: Mon, 10 Mar 2025 16:06:43 +0530
-Message-ID: <20250310103702.1464782-1-a-limaye@ti.com>
+Subject: [PATCH v2 3/4] i2c: omap24xx_i2c: support CONFIG for repeated start
+ in DM_I2C xfer
+Date: Mon, 10 Mar 2025 16:06:46 +0530
+Message-ID: <20250310103702.1464782-4-a-limaye@ti.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250310103702.1464782-1-a-limaye@ti.com>
+References: <20250310103702.1464782-1-a-limaye@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -82,43 +85,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series implements Repeated Start functionality for the DM_I2C xfer
-API (omap_i2c_xfer())
+Repeated Start Condition (Sr) can be used to transfer multiple i2c msgs
+without sending a Stop condition (P). So far, the driver default was to
+always send a Stop condition after every i2c msg.
 
-First, split out the actual implementation for each individual i2c msg
-transfer into a new function __omap24_i2c_xfer_msg() and use this to
-implement omap_i2c_xfer().
+Add support for a config option (CONFIG_SYS_I2C_OMAP24XX_REPEATED_START)
+to disable sending the Stop condition by default. If this config is
+enabled, Stop condition will be sent only if explicitly requested in the
+msg flags OR if it is the last msg in the transfer.
 
-Then, add support for the Repeated Start condition in omap_i2c_xfer()
-through the CONFIG_I2C_REPEATED_START option. 
+Consequently, handle the Repeated Start condition (Sr) in the next msg
+by not calling the wait_for_bb() check since it will simply timeout in
+the absence of a stop condition (BB will be 1 until Stop is programmed)
 
-Also add this config to Kconfig and enable it for ARCH_K3 platforms by
-default.
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
 
-Test logs (On AM68-SK with DEBUG enabled):
-https://gist.github.com/aniket-l/e6d78d52c172ebb475552929b71736a9
-
-Boot logs on k3:
-https://gist.github.com/aniket-l/110ee4f950ef05027a12bafa96431936
+v2:
+- fixup code formatting and comment blocks
+- CONFIG_I2C_REPEATED_START -> CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
+- Link to v1: https://lore.kernel.org/u-boot/20250304220546.866602-3-a-limaye@ti.com/
 
 ---
-v2:
-- Add another patch to remove unused CONFIG_I2C_REPEATED_START
-- use new CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
-- Return right error codes and update debug prints to be driver specific
-- patch formatting updates
-- Link to v1: https://lore.kernel.org/u-boot/20250304220546.866602-1-a-limaye@ti.com/
+ drivers/i2c/omap24xx_i2c.c | 22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
 
-Aniket Limaye (4):
-  i2c: omap24xx_i2c: Remove unused CONFIG_I2C_REPEATED_START
-  i2c: omap24xx_i2c: Use new function __omap24_i2c_xfer_msg()
-  i2c: omap24xx_i2c: support CONFIG for repeated start in DM_I2C xfer
-  drivers: i2c: Kconfig: Add CONFIG_SYS_I2C_OMAP24XX_REPEATED_START
-
- drivers/i2c/Kconfig        |   9 ++
- drivers/i2c/omap24xx_i2c.c | 165 ++++++++++++++++++++++++++++++-------
- 2 files changed, 144 insertions(+), 30 deletions(-)
-
+diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
+index 7c5d786e8e9..ad739b123e5 100644
+--- a/drivers/i2c/omap24xx_i2c.c
++++ b/drivers/i2c/omap24xx_i2c.c
+@@ -1066,18 +1066,28 @@ static int omap_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
+ 	u16 i2c_con_reg = 0;
+ 
+ 	debug("%s: %d messages\n", __func__, nmsgs);
+-	for (; nmsgs > 0; nmsgs--, msg++) {
+-		/* Wait until bus not busy */
+-		if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
+-			return -EREMOTEIO;
++	for (int i = 0; i < nmsgs; i++, msg++) {
++		/*
++		 * If previous msg sent a Stop or if this is the first msg
++		 * Wait until bus not busy
++		 */
++		if ((i2c_con_reg & I2C_CON_STP) || (i == 0))
++			if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
++				return -EREMOTEIO;
+ 
+-		/* Set Controller mode with Start and Stop bit */
+-		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT | I2C_CON_STP;
++		/* Set Controller mode with Start bit */
++		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT;
+ 		/* Set Transmitter/Receiver mode if it is a write/read msg */
+ 		if (msg->flags & I2C_M_RD)
+ 			i2c_con_reg &= ~I2C_CON_TRX;
+ 		else
+ 			i2c_con_reg |= I2C_CON_TRX;
++		/* Send Stop condition (P) by default */
++		if (!IS_ENABLED(CONFIG_SYS_I2C_OMAP24XX_REPEATED_START))
++			i2c_con_reg |= I2C_CON_STP;
++		/* Send Stop if explicitly requested or if this is the last msg */
++		if ((msg->flags & I2C_M_STOP) || (i == nmsgs - 1))
++			i2c_con_reg |= I2C_CON_STP;
+ 
+ 		debug("%s: chip=0x%x, len=0x%x, i2c_con_reg=0x%x\n",
+ 		      __func__, msg->addr, msg->len, i2c_con_reg);
 -- 
 2.48.1
 
