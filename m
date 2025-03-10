@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2DBC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:20:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B5BC28B2E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:21:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD8058142D;
-	Mon, 10 Mar 2025 11:20:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 539EE8142D;
+	Mon, 10 Mar 2025 11:21:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="5laL/cM5";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="rofxaZlj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF8E981430; Mon, 10 Mar 2025 11:20:35 +0100 (CET)
+ id 1C9DB816AF; Mon, 10 Mar 2025 11:21:04 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9546A811C1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:20:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 110C6811C1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:21:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=5164540d7d=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52AAIpYL032034;
- Mon, 10 Mar 2025 11:20:29 +0100
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52A9tjmg030002;
+ Mon, 10 Mar 2025 11:20:49 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- 5Zc1etY5wkNs7CqK+O4ymjbFDgDspLO8/eU3ztWFgrM=; b=5laL/cM5VXFlU9KW
- l/XaS/fEBIEQMolBbXtVY5Y2dRV40ol9RGTnDNGT95h+GdTwNn5unHVDt0hyURCd
- qeTOpyNFjObnqshZcf4MrQAZh3Ere8fhujg7dpLUjmA+FLWShiK1pzWQPj2egttv
- ftwEHg4ksTqFSS5x+/aF3glJj3jKWSa79Yrl/8vOcdAXkjdP6Pk5Ou9YTRlBIf78
- hKzeQIEkD/XECnjQ+I7eWCTxDw3Uz17q82rpjs5C+oQSEQ8LSONg8AKOKCoIt7uQ
- bQjyD9U4VR87h9bjUygdKMAuKJ7aneynploA4X/xig8Kez8Q4cJtiuZu8GqWayGx
- crdv8Q==
+ c3Zc/3KVM6atJ5vFavY4bzxRDIr2P2P0tEI2CPGo8vc=; b=rofxaZljdDah0Yuz
+ 49eLpr2JRjxuT7m7E0PduPEUu76dFDtipeJNXLV4d1TjZc/evmYPEGAeDBLqDpyb
+ 0nq9wYPHiRUx9VflFj2un7hiY+iJzjxxz9Hi4RZVEO0ohPcnSKlbhCTzF9m233o1
+ 8t344/Hexc38ZphJ6JTIVTPjwi0tF1qhYNw7czJqtQ/PjnNBz1DpjzRcNlwPnWhK
+ STELQdR0TTj1dyPgW9rT/dW3I2+AZvFJMsvNsh90YgK6N+jVmoYfmbmiP7C7/Nfx
+ pKtd7OZxzSxkta3ibsULo3QlmchshOyJ4m8pgOl/PdaBWfC0DIYHds8a8cm1ZYJS
+ d7S90Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 458f57243x-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 458ev628fj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Mar 2025 11:20:29 +0100 (CET)
+ Mon, 10 Mar 2025 11:20:49 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1518B40078;
- Mon, 10 Mar 2025 11:18:52 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B451040097;
+ Mon, 10 Mar 2025 11:19:11 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9F58D55FD12;
- Mon, 10 Mar 2025 11:15:23 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C87F85810F1;
+ Mon, 10 Mar 2025 11:16:28 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Mar
- 2025 11:15:23 +0100
-Message-ID: <3d0803b5-2404-40b5-93bc-e2fa2ffe4cc0@foss.st.com>
-Date: Mon, 10 Mar 2025 11:15:22 +0100
+ 2025 11:16:28 +0100
+Message-ID: <41996473-4b3c-4b44-add5-4c20bc550269@foss.st.com>
+Date: Mon, 10 Mar 2025 11:16:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: stm32f769-disco: Fix console cmdline
+Subject: Re: [PATCH] ARM: dts: stm32: Add support for environment in eMMC on
+ STM32MP13xx DHCOR SoM
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Linus Walleij <linus.walleij@linaro.org>, Vikas Manocha
- <vikas.manocha@st.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-References: <20250211-stm32f769-uart-fix-v1-1-8d0eaf0b193a@linaro.org>
- <98995b05-aacc-477f-b1f6-a9b2d307c0ea@foss.st.com>
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Igor Opaniuk <igor.opaniuk@gmail.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250210013322.350477-1-marex@denx.de>
+ <9fb72715-9f68-47a7-9b52-f6ff0e40ca6d@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <98995b05-aacc-477f-b1f6-a9b2d307c0ea@foss.st.com>
+In-Reply-To: <9fb72715-9f68-47a7-9b52-f6ff0e40ca6d@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -93,45 +95,67 @@ X-Virus-Status: Clean
 
 
 
-On 2/11/25 17:49, Patrice CHOTARD wrote:
+On 3/6/25 09:35, Patrice CHOTARD wrote:
 > 
 > 
-> On 2/11/25 10:12, Linus Walleij wrote:
->> The Linux cmdline encoded in the defconfig is wrong, the
->> STM32 USART driver registers as ttySTM0 not ttyS0.
+> On 2/10/25 02:32, Marek Vasut wrote:
+>> Enable support for environment in eMMC on STM32MP13xx DHCOR SoM,
+>> in addition to existing support for environment in SPI NOR. The
+>> environment size is the same, except in case the environment is
+>> placed in eMMC, it is stored at the end of eMMC BOOT partitions
+>> in the last 32 sectors of each eMMC HW BOOT partition.
 >>
->> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
 >> ---
->>  configs/stm32f769-disco_defconfig | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
->> index 5be221afd2facb0af4a3a3f8df0f24fb34eaf10d..9edda0e36b2e92c3dbe3298a3da04bd731dac452 100644
->> --- a/configs/stm32f769-disco_defconfig
->> +++ b/configs/stm32f769-disco_defconfig
->> @@ -18,7 +18,7 @@ CONFIG_AUTOBOOT_KEYED=y
->>  CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
->>  CONFIG_AUTOBOOT_STOP_STR=" "
->>  CONFIG_USE_BOOTARGS=y
->> -CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->> +CONFIG_BOOTARGS="console=ttySTM0,115200n8 earlyprintk consoleblank=0 ignore_loglevel"
->>  CONFIG_SYS_PBSIZE=1050
->>  # CONFIG_DISPLAY_CPUINFO is not set
->>  CONFIG_CYCLIC_MAX_CPU_TIME_US=8000
->>
+>> Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: u-boot@lists.denx.de
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
 >> ---
->> base-commit: cb3612dfe3fd9a702dc3657aae15b07974f9aa0b
->> change-id: 20250211-stm32f769-uart-fix-66650ddf9c80
+>>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 2 ++
+>>  configs/stm32mp13_dhcor_defconfig          | 4 ++++
+>>  2 files changed, 6 insertions(+)
 >>
->> Best regards,
-> 
-> 
-> Hi Linus
+>> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+>> index 9233f315ebc..3acf5138940 100644
+>> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+>> @@ -14,6 +14,8 @@
+>>  	config {
+>>  		dh,ddr3-coding-gpios = <&gpiod 5 0>, <&gpiod 9 0>;
+>>  		dh,som-coding-gpios = <&gpioa 13 0>, <&gpioi 1 0>;
+>> +		u-boot,mmc-env-offset = <0x3fc000>;
+>> +		u-boot,mmc-env-offset-redundant = <0x3fc000>;
+>>  	};
+>>  };
+>>  
+>> diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
+>> index ff948b904be..2da9287ea7b 100644
+>> --- a/configs/stm32mp13_dhcor_defconfig
+>> +++ b/configs/stm32mp13_dhcor_defconfig
+>> @@ -28,10 +28,14 @@ CONFIG_CMD_RNG=y
+>>  CONFIG_CMD_LOG=y
+>>  CONFIG_CMD_UBI=y
+>>  CONFIG_ENV_IS_NOWHERE=y
+>> +CONFIG_ENV_IS_IN_MMC=y
+>> +CONFIG_ENV_MMC_USE_DT=y
+>>  CONFIG_ENV_SPI_MAX_HZ=50000000
+>>  CONFIG_CLK_SCMI=y
+>>  CONFIG_SET_DFU_ALT_INFO=y
+>>  CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+>> +CONFIG_SYS_MMC_ENV_DEV=0
+>> +CONFIG_SYS_MMC_ENV_PART=1
+>>  CONFIG_PHY_REALTEK=y
+>>  CONFIG_DM_REGULATOR_SCMI=y
+>>  CONFIG_RESET_SCMI=y
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
 > Thanks
-> Patrice
+> PAtrice
 Applied to u-boot-stm32/next
 
 Thanks
