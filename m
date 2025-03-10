@@ -4,81 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240A7C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 16:23:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C8FCC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 18:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B468281761;
-	Mon, 10 Mar 2025 17:23:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A79580107;
+	Mon, 10 Mar 2025 19:33:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IQ/N5OmD";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YN3KLIJ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BBB781782; Mon, 10 Mar 2025 17:23:12 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 89BDF80F77; Mon, 10 Mar 2025 19:33:17 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15ABC8168B
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 17:23:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28D0D800D7
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 19:33:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christopher.obbard@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43bc48ff815so26257495e9.0
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 09:23:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741623789; x=1742228589; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xArxd0rWLMokW2mX59XZQs+ix4r1dLpkP8WiPN+JhGk=;
- b=IQ/N5OmDPMc8ynjIzoRSl+zIIrKvRT+YRKwtvuQEAXahFZV9eMDJFIpHCgZfNROvH1
- oTyBClZmlni9USM69SK2BRDm2D7Z/uMGaL1mFEz0a6divKHb8f+SVlKtOEWJAKYFkDVU
- nzroOXC9Fp/2J+QJbAArWPjKUfdfOC+z4XjIgAu8NKFCq3mNEz9YmKogxDYRKICE/Pyt
- TGxyYtnvXq2c3BgDoZEn9nBIGjxM/AKR5XrLhhX0KtQs/IYlj7AtDz3NPx7BtdXFmEwo
- 5zjUX0UTovT9JvJOSzsEwt5KY0H0SqJ7E2JpfP7tladqCruCce7NU6Rf/SbqRE5Oy0uF
- GPKg==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 08CEF3FCCB
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 18:32:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1741631557;
+ bh=aUqL9LLjmBAPdUdqknAdxfUbT+AMaZ4CP44GTCggekA=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=YN3KLIJ/rJHGxyuJnuw0zk8wcIABHqiYbuZ2N8sQcPy5QnRWIti/1/2POV/zPOIMl
+ zDOopwIZc146pfUGBxTbUQtT2vauGYjzsS8dZAlVAjw38o6qVfh55+Ks1YihF9cexh
+ 92PqpLWg9IHTjk9tL7PwFiFqVj1Rx0R1E5o9CilSf3WyBwDoud7ph1Czg7/0a7wefa
+ tuQ0zYEIbak2Nrrd1TQW2pHYa73MGdJS6T+B6FxY0XUpNvaGuSYThwk7FDNHBg0TOW
+ RqOax7m6ed5U4H9bpFH+EM3A4XcuGvG38j8y0JAU1Qf/Iei11BR4iawIZ1RGvAF2GX
+ q4nas6mkVdu2g==
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-ac254e4b515so384991266b.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:32:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741623789; x=1742228589;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xArxd0rWLMokW2mX59XZQs+ix4r1dLpkP8WiPN+JhGk=;
- b=C/wb+E6sKGoubQbjw4ozFHPBYP917+v7v4CsmO08qHMuw5DF2ZtCfm/JBZpoiJkFnW
- RbxOUoE0V3x98zzU3xtf5+vkqlhpKmWXNY5/n3nv67EkSpUmHRD8pMbNQpnGe2zfXea1
- TcliCI7K+fYlfupgulWfaXvEedq4usIlBKv5Cw6mteLLgNqN7hY7rh6Lyqag83PT8VGU
- FKQ+2uNPK9A2wmktlNt0a2jjgwl+6+5/l9bWTvRJG7YcVtFRdhVrM/pI90tNbT1OIyOG
- Z6kEll/1hCwcT8w5JVZOnM7HZonhBEii9NI784JhsFw12YLbqrEZXL4PBftAOL8y0Vc1
- OYdA==
+ d=1e100.net; s=20230601; t=1741631534; x=1742236334;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aUqL9LLjmBAPdUdqknAdxfUbT+AMaZ4CP44GTCggekA=;
+ b=dI8rrem+vFYEMD8h5b6Uh6B1VKj/Pibzfms9Ek5SaKAP7U4oHj9572yJ2DUZe0wfYF
+ eaaf7e+izHiCZT17kx8srinKjXiPkrp2gxZq7w04IR+T6+Zlvp61WMafvVZrpaSVxVKn
+ 1HvvIk07ebCRydKSsKim9vP5RTrZyLVMYIoEm4DkY7h6vMmrs2CDGG36wy8jbaqIByoT
+ eDYs2Dc/fM3u3yFgzWJ8hrs/RelVX8avp3fIG396/pPiYrXGGUsS1jiQyvbKSPJa+Bx9
+ eq6cUm8ICzPLTVceWZoXYw1Vg4mdYxZs+NirMr+8rDUOufm3RNAwJS6TAW7S3v6DMAbT
+ YRRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUk/uQ7w2mt2y6+57f5NG65Jhq2nca8chhTyRthSvulQFLaAARkKLbS87tm2ceyeQxjS0Bbbjw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzieoAndiMmNiHcFOucMXC2BXGrohw6zc7GcCa7A6GgtCvl03eE
- xbDyJYsRVXle2PQaYNkPv+SAZDb5bTl9vqY1DLTh4UDbnU3Gd8gZTjuVrj0vJeaeZf2cp6nAp8T
- ZOKSU7ynPujke3Q/ixwuDCCpljblmcnfZLYn5zg==
-X-Gm-Gg: ASbGncuS/a0tbsWjAoAkZtcCkd5XbSDBY/Feup1GjfkqylSuvak4RKjrqBVboHwjEZH
- I4cOXHAEf6/teAIJwpmVAGCWKzpebhtiUcuRMUHGA9OW7234DXB5bFiZzzvPal79TvMIM0waNkd
- KiDdqWusN4A+IwkWWDk0Br7gUlY/k=
-X-Google-Smtp-Source: AGHT+IESjsZe1M5Z6Ko5oeJgCG6DxXtGKPvbbCvysY1zGWSOZx3Eq3vPk7ymEcAjxzXoACmLABYdTOvnuudbuBrIAGk=
-X-Received: by 2002:a05:600c:2947:b0:434:9e17:190c with SMTP id
- 5b1f17b1804b1-43d01cc32fcmr1815475e9.0.1741623789478; Mon, 10 Mar 2025
- 09:23:09 -0700 (PDT)
+ AJvYcCVSDjE2jlGPxwxO/ZrUA289Q4kDz4cNbyOlvJFZZ2QZIDb7cz16qUaKBDC7o1xG+IKNjro+x2s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEvo3p0ltm7572Cdo3+WVKlwVB1aP+Fn8KPvONRe5v4yl6Qvdy
+ 1Y3VWvgzJUBESg4RJ+kQBSrR8ScYU4jBGUm8NZXcG41cMIUi8taUBDqAveAf/qS/shuUcXGHNDH
+ gFw+UGEAE0VFEvwPZVXcZePcZWCWj7n5A62UA/27o87u1rPJB3zpBoIERxeCPJOUeCjQ=
+X-Gm-Gg: ASbGncsFqBzy6kwn8LoPJAdLCDzwbGGkdh/ixlwLvPLVH9jC81/Qmz2Ra088EMgx7xd
+ OPl+L1wlEY9Uzw5yV7NjfE6lTN70aerBvnhcPAMp27gpkqV1UALodaj1Q0ACopOGNDBhL/PEFHW
+ hS0Q3XfYKl9FEPoXqMBdPsj5kAL1DtQj1HtOA8u2iYUgJR8y64v+YVEfmrzeUbH8/vA1SRzVl7T
+ JuQXAbPhsPgTcqczywSuTdBn4jxLj2+xEyOz8QN5NJVu9x/vo4qtll4ra9tOI34GF925Hh97xUt
+ xxqxbEmqEUeUSyBghMGpnl9fgyw5AV5TOJaDIGzqgR7DPRfRq7vvPvBOXIDCatj602hfAXwIWGP
+ yaEFbUJlH0p2a
+X-Received: by 2002:a17:907:1983:b0:abf:6a26:3d91 with SMTP id
+ a640c23a62f3a-ac2ba4a34c4mr61860066b.10.1741631534548; 
+ Mon, 10 Mar 2025 11:32:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEYxSMQkdaYDe3EPpAuk/LPjhOxmq908v2cy3zAPxc06EX/m+AG8fSFXekVudAlsc23ZmUF7w==
+X-Received: by 2002:a17:907:1983:b0:abf:6a26:3d91 with SMTP id
+ a640c23a62f3a-ac2ba4a34c4mr61855466b.10.1741631534023; 
+ Mon, 10 Mar 2025 11:32:14 -0700 (PDT)
+Received: from [192.168.103.102]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac287653c7esm353912066b.84.2025.03.10.11.32.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Mar 2025 11:32:13 -0700 (PDT)
+Message-ID: <a2fe2373-08a9-483a-bdd9-9158f739898a@canonical.com>
+Date: Mon, 10 Mar 2025 19:32:11 +0100
 MIME-Version: 1.0
-References: <20250122-pinctrl-sc7280-v1-0-8bdba72e6366@linaro.org>
- <20250122-pinctrl-sc7280-v1-2-8bdba72e6366@linaro.org>
-In-Reply-To: <20250122-pinctrl-sc7280-v1-2-8bdba72e6366@linaro.org>
-From: Christopher Obbard <christopher.obbard@linaro.org>
-Date: Mon, 10 Mar 2025 17:22:58 +0100
-X-Gm-Features: AQ5f1Jou0fhE1GnSRS7X06GoOe9x-YbRsUmmOxYqPGFEv1cCCY1t63tAW5M4ytA
-Message-ID: <CACr-zFBwf65iok21QYPk2oBf+15SYC2RWsP3BziPPefmGKnhfg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] qcom_defconfig: enable PINCTRL_QCOM_SC7280
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>,
- Markus Bauer <Markus.Bauer2@tria-technologies.com>, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: miiphybb: Update documentation
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250308203625.1317615-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250308203625.1317615-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,33 +118,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
-On Wed, 22 Jan 2025 at 16:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-Acked-by: Christopher Obbard <christopher.obbard@linaro.org>
-
+On 08.03.25 21:36, Marek Vasut wrote:
+> Update the miiphybb documentation to match current implementation.
+> The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
+> The example is updated to match current Renesas RAVB driver, which
+> is one of the miiphybb users.
+> 
+> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->  configs/qcom_defconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index cd94315f1765..7a60464120dc 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -92,8 +92,9 @@ CONFIG_PINCONF=y
->  CONFIG_PINCTRL_QCOM_APQ8016=y
->  CONFIG_PINCTRL_QCOM_APQ8096=y
->  CONFIG_PINCTRL_QCOM_QCM2290=y
->  CONFIG_PINCTRL_QCOM_QCS404=y
-> +CONFIG_PINCTRL_QCOM_SC7280=y
->  CONFIG_PINCTRL_QCOM_SDM845=y
->  CONFIG_PINCTRL_QCOM_SM6115=y
->  CONFIG_PINCTRL_QCOM_SM8150=y
->  CONFIG_PINCTRL_QCOM_SM8250=y
->
-> --
-> 2.48.0
->
+> Cc: Jim Liu <jim.t90615@gmail.com>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Mario Six <mario.six@gdsys.cc>
+> Cc: Michael Chang <zhang971090220@gmail.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Parvathi Bhogaraju <pbhogaraju@microsoft.com>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: - Fix language bugs
+>      - Add RB from Paul
+> ---
+>   doc/README.bitbangMII | 66 ++++++++++++++++++++++++++++++-------------
+
+It would be preferable to move this document into doc/devel/ as .rst file.
+
+>   1 file changed, 47 insertions(+), 19 deletions(-)
+> 
+> diff --git a/doc/README.bitbangMII b/doc/README.bitbangMII
+> index 05ab20376f3..78b4ef880cb 100644
+> --- a/doc/README.bitbangMII
+> +++ b/doc/README.bitbangMII
+> @@ -1,39 +1,67 @@
+> -This patch rewrites the miiphybb ( Bit-banged MII bus driver ) in order to
+> -support an arbitrary number of mii buses. This feature is useful when your
+> -board uses different mii buses for different phys and all (or a part) of these
+> -buses are implemented via bit-banging mode.
+> +The miiphybb ( Bit-banged MII bus driver ) supports an arbitrary number of
+> +MII buses. This feature is useful when a driver uses different MII buses for
+> +different PHYs and all (or a part) of these buses are implemented via
+> +bit-banging mode.
+>   
+>   The driver requires that the following macros should be defined into the board
+
+CONFIG_BITBANGMII=y enables the miiphybb driver.
+
+>   configuration file:
+>   
+>   CONFIG_BITBANGMII	- Enable the miiphybb driver
+>   
+> -The board code needs to fill the bb_miiphy_buses[] array with a record for
+> -each required bus and declare the bb_miiphy_buses_num variable with the
+> -number of mii buses. The record (struct bb_miiphy_bus) has the following
+> +The driver code needs to allocate a regular MDIO device using mdio_alloc()
+> +and assign .read and .write accessors which wrap bb_miiphy_read() and
+> +bb_miiphy_write() functions respectively. The bb_miiphy_read() and
+> +bb_miiphy_write() functions take a pointer to a callback structure,
+> +struct bb_miiphy_bus_ops. The struct bb_miiphy_bus_ops has the following
+>   fields/callbacks (see miiphy.h for details):
+
+Please, add the description of struct bb_miiphy_bus_op miiphy.h and add 
+the file to the API documentation. You could also put the example and 
+the programming guidance there.
+
+Best regards
+
+Heinrich
+
+>   
+> -char name[]	       - The symbolic name that must be equal to the MII bus
+> -			 registered name
+> -int (*init)()	       - Initialization function called at startup time (just
+> -			 before the Ethernet initialization)
+>   int (*mdio_active)()   - Activate the MDIO pin as output
+>   int (*mdio_tristate)() - Activate the MDIO pin as input/tristate pin
+>   int (*set_mdio)()      - Write the MDIO pin
+>   int (*get_mdio)()      - Read the MDIO pin
+>   int (*set_mdc)()       - Write the MDC pin
+>   int (*delay)()	       - Delay function
+> -void *priv	       - Private data used by board specific code
+>   
+> -The board code will look like:
+> +The driver code will look like:
+>   
+> -struct bb_miiphy_bus bb_miiphy_buses[] = {
+> - { .name = "miibus#1", .init = b1_init, .mdio_active = b1_mdio_active, ... },
+> - { .name = "miibus#2", .init = b2_init, .mdio_active = b2_mdio_active, ... },
+> - ...
+> +static const struct bb_miiphy_bus_ops ravb_bb_miiphy_bus_ops = {
+> +	.mdio_active	= ravb_bb_mdio_active,
+> +	.mdio_tristate	= ravb_bb_mdio_tristate,
+> +	.set_mdio	= ravb_bb_set_mdio,
+> +	.get_mdio	= ravb_bb_get_mdio,
+> +	.set_mdc	= ravb_bb_set_mdc,
+> +	.delay		= ravb_bb_delay,
+>   };
+> -int bb_miiphy_buses_num = sizeof(bb_miiphy_buses) /
+> -			  sizeof(bb_miiphy_buses[0]);
+> +
+> +static int ravb_bb_miiphy_read(struct mii_dev *miidev, int addr,
+> +			       int devad, int reg)
+> +{
+> +	return bb_miiphy_read(miidev, &ravb_bb_miiphy_bus_ops,
+> +			      addr, devad, reg);
+> +}
+> +
+> +static int ravb_bb_miiphy_write(struct mii_dev *miidev, int addr,
+> +				int devad, int reg, u16 value)
+> +{
+> +	return bb_miiphy_write(miidev, &ravb_bb_miiphy_bus_ops,
+> +			       addr, devad, reg, value);
+> +}
+> +
+> +static int ravb_probe(struct udevice *dev)
+> +{
+> +	struct mii_dev *mdiodev;
+> +...
+> +	mdiodev = mdio_alloc();
+> +	if (!mdiodev)
+> +		return -ENOMEM;
+> +
+> +	mdiodev->read = ravb_bb_miiphy_read;
+> +	mdiodev->write = ravb_bb_miiphy_write;
+> +	mdiodev->priv = eth;
+> +	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
+> +
+> +	ret = mdio_register(mdiodev);
+> +...
+>   
+>   2009 Industrie Dial Face S.p.A.
+>        Luigi 'Comio' Mantellini <luigi.mantellini@idf-hit.com>
+
