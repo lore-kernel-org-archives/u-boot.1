@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B5BC28B2E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D8DBC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539EE8142D;
-	Mon, 10 Mar 2025 11:21:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id E888C811C1;
+	Mon, 10 Mar 2025 11:37:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="rofxaZlj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VymoOTFO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C9DB816AF; Mon, 10 Mar 2025 11:21:04 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 110C6811C1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:21:02 +0100 (CET)
+ id 6EA90812C8; Mon, 10 Mar 2025 11:37:24 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1167B811C1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:37:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=5164540d7d=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52A9tjmg030002;
- Mon, 10 Mar 2025 11:20:49 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- c3Zc/3KVM6atJ5vFavY4bzxRDIr2P2P0tEI2CPGo8vc=; b=rofxaZljdDah0Yuz
- 49eLpr2JRjxuT7m7E0PduPEUu76dFDtipeJNXLV4d1TjZc/evmYPEGAeDBLqDpyb
- 0nq9wYPHiRUx9VflFj2un7hiY+iJzjxxz9Hi4RZVEO0ohPcnSKlbhCTzF9m233o1
- 8t344/Hexc38ZphJ6JTIVTPjwi0tF1qhYNw7czJqtQ/PjnNBz1DpjzRcNlwPnWhK
- STELQdR0TTj1dyPgW9rT/dW3I2+AZvFJMsvNsh90YgK6N+jVmoYfmbmiP7C7/Nfx
- pKtd7OZxzSxkta3ibsULo3QlmchshOyJ4m8pgOl/PdaBWfC0DIYHds8a8cm1ZYJS
- d7S90Q==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 458ev628fj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Mar 2025 11:20:49 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B451040097;
- Mon, 10 Mar 2025 11:19:11 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C87F85810F1;
- Mon, 10 Mar 2025 11:16:28 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Mar
- 2025 11:16:28 +0100
-Message-ID: <41996473-4b3c-4b44-add5-4c20bc550269@foss.st.com>
-Date: Mon, 10 Mar 2025 11:16:27 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52AAbF6b858029
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 10 Mar 2025 05:37:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741603035;
+ bh=3o2RRjiiecPh/QESOMFvardBoAtC+18phY7GvTH/bpc=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=VymoOTFOcST2YhC0s+817k2I0rQMXmq7BCLHvlJ+PXRyIh7WZEYAr6QU1vRhpHgZ4
+ AQYb0tcuRkAYRlh/1aVZNTJujXmysdyI4zKxK2Srt90zqdJyGPrLT7hVZuFncdtWHT
+ S1DxrjeAILeozz1nR/KRZ29727Lj2HkMTsQCMwOA=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52AAbE11125311
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 10 Mar 2025 05:37:15 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
+ Mar 2025 05:37:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 10 Mar 2025 05:37:14 -0500
+Received: from psdkl-workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
+ [10.24.72.128])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52AAb6kJ072804;
+ Mon, 10 Mar 2025 05:37:10 -0500
+From: Aniket Limaye <a-limaye@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
+ <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
+ <virag.david003@gmail.com>, <stefan.agner@toradex.com>,
+ <w.egorov@phytec.de>, <j-keerthy@ti.com>, <u-kumar1@ti.com>,
+ Aniket Limaye <a-limaye@ti.com>
+Subject: [PATCH v2 1/4] i2c: omap24xx_i2c: Remove unused
+ CONFIG_I2C_REPEATED_START
+Date: Mon, 10 Mar 2025 16:06:44 +0530
+Message-ID: <20250310103702.1464782-2-a-limaye@ti.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250310103702.1464782-1-a-limaye@ti.com>
+References: <20250310103702.1464782-1-a-limaye@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: dts: stm32: Add support for environment in eMMC on
- STM32MP13xx DHCOR SoM
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Igor Opaniuk <igor.opaniuk@gmail.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250210013322.350477-1-marex@denx.de>
- <9fb72715-9f68-47a7-9b52-f6ff0e40ca6d@foss.st.com>
-Content-Language: en-US
-In-Reply-To: <9fb72715-9f68-47a7-9b52-f6ff0e40ca6d@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-10_04,2025-03-07_03,2024-11-22_01
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,70 +85,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Remove unused piece of code under CONFIG_I2C_REPEATED_START which does
+not have any Kconfig entry at all.
 
+Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+---
+ drivers/i2c/omap24xx_i2c.c | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
 
-On 3/6/25 09:35, Patrice CHOTARD wrote:
-> 
-> 
-> On 2/10/25 02:32, Marek Vasut wrote:
->> Enable support for environment in eMMC on STM32MP13xx DHCOR SoM,
->> in addition to existing support for environment in SPI NOR. The
->> environment size is the same, except in case the environment is
->> placed in eMMC, it is stored at the end of eMMC BOOT partitions
->> in the last 32 sectors of each eMMC HW BOOT partition.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: u-boot@lists.denx.de
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 2 ++
->>  configs/stm32mp13_dhcor_defconfig          | 4 ++++
->>  2 files changed, 6 insertions(+)
->>
->> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
->> index 9233f315ebc..3acf5138940 100644
->> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
->> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
->> @@ -14,6 +14,8 @@
->>  	config {
->>  		dh,ddr3-coding-gpios = <&gpiod 5 0>, <&gpiod 9 0>;
->>  		dh,som-coding-gpios = <&gpioa 13 0>, <&gpioi 1 0>;
->> +		u-boot,mmc-env-offset = <0x3fc000>;
->> +		u-boot,mmc-env-offset-redundant = <0x3fc000>;
->>  	};
->>  };
->>  
->> diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
->> index ff948b904be..2da9287ea7b 100644
->> --- a/configs/stm32mp13_dhcor_defconfig
->> +++ b/configs/stm32mp13_dhcor_defconfig
->> @@ -28,10 +28,14 @@ CONFIG_CMD_RNG=y
->>  CONFIG_CMD_LOG=y
->>  CONFIG_CMD_UBI=y
->>  CONFIG_ENV_IS_NOWHERE=y
->> +CONFIG_ENV_IS_IN_MMC=y
->> +CONFIG_ENV_MMC_USE_DT=y
->>  CONFIG_ENV_SPI_MAX_HZ=50000000
->>  CONFIG_CLK_SCMI=y
->>  CONFIG_SET_DFU_ALT_INFO=y
->>  CONFIG_SYS_I2C_EEPROM_ADDR=0x50
->> +CONFIG_SYS_MMC_ENV_DEV=0
->> +CONFIG_SYS_MMC_ENV_PART=1
->>  CONFIG_PHY_REALTEK=y
->>  CONFIG_DM_REGULATOR_SCMI=y
->>  CONFIG_RESET_SCMI=y
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> PAtrice
-Applied to u-boot-stm32/next
+diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
+index ebe472e20cd..1fd5f5cc224 100644
+--- a/drivers/i2c/omap24xx_i2c.c
++++ b/drivers/i2c/omap24xx_i2c.c
+@@ -538,9 +538,7 @@ pr_exit:
+ /*
+  * i2c_read: Function now uses a single I2C read transaction with bulk transfer
+  *           of the requested number of bytes (note that the 'i2c md' command
+- *           limits this to 16 bytes anyway). If CONFIG_I2C_REPEATED_START is
+- *           defined in the board config header, this transaction shall be with
+- *           Repeated Start (Sr) between the address and data phases; otherwise
++ *           limits this to 16 bytes anyway).
+  *           Stop-Start (P-S) shall be used (some I2C chips do require a P-S).
+  *           The address (reg offset) may be 0, 1 or 2 bytes long.
+  *           Function now reads correctly from chips that return more than one
+@@ -608,16 +606,10 @@ static int __omap24_i2c_read(void __iomem *i2c_base, int ip_rev, int waitdelay,
+ 
+ 	if (alen) {
+ 		/* Must write reg offset first */
+-#ifdef CONFIG_I2C_REPEATED_START
+-		/* No stop bit, use Repeated Start (Sr) */
+-		omap_i2c_write_reg(i2c_base, ip_rev, I2C_CON_EN | I2C_CON_MST |
+-				   I2C_CON_STT | I2C_CON_TRX, OMAP_I2C_CON_REG);
+-#else
+ 		/* Stop - Start (P-S) */
+ 		omap_i2c_write_reg(i2c_base, ip_rev, I2C_CON_EN | I2C_CON_MST |
+ 				   I2C_CON_STT | I2C_CON_STP | I2C_CON_TRX,
+ 				   OMAP_I2C_CON_REG);
+-#endif
+ 		/* Send register offset */
+ 		while (1) {
+ 			status = wait_for_event(i2c_base, ip_rev, waitdelay);
+-- 
+2.48.1
 
-Thanks
-Patrice
