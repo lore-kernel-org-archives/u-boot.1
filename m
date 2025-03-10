@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD07C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 14:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C3CC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 14:24:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA2978164E;
-	Mon, 10 Mar 2025 15:07:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A56D381417;
+	Mon, 10 Mar 2025 15:24:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hqYZHsX7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gj5Kyo65";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 261358164E; Mon, 10 Mar 2025 15:07:52 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id C783A8141D; Mon, 10 Mar 2025 15:24:37 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA6C381417
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 15:07:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D9A6807B1
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 15:24:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2240b4de12bso68614585ad.2
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 07:07:49 -0700 (PDT)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2f9b9c0088fso7134437a91.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 07:24:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741615668; x=1742220468; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741616672; x=1742221472; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mK5cKr7Ok7RFu3py47mO0sbOL5tkJP3fw2KrQiVhPwU=;
- b=hqYZHsX7G3LcHXudrqErBUXhKaWWohoQLRSAGdnGsPRR89lnEzA/vHSw6ViDfYXl4y
- ucc/dQ+7RNKYcd/Xp08mlGq/cdTAdSpRnMAXSxGHca1jqt7VAI1qSNkXagsOCED9jRTp
- mqzxNo726m9Cy5jMaRt2A/gOSgUHqOLGzmJ80=
+ bh=4sx8Pn5vJpB1cCUljvwGZ+gsq/pM7BtmbKJPdOX+mMo=;
+ b=gj5Kyo65qpYroKyjRhALVa6CchKMmrzQ/pPlO5LvpWRvchDPNrR4RwA+TN2EWzi/Or
+ wpkEn0IKNY+rD47aEsmHPZaGZO/jZrTl64hggR8PLoIe+1fHu+jPXvHaa5y6OqpZLD5e
+ xP2MVQDxT2NYvNI1548HePJOM/gxe9ZXi63hs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741615668; x=1742220468;
+ d=1e100.net; s=20230601; t=1741616672; x=1742221472;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mK5cKr7Ok7RFu3py47mO0sbOL5tkJP3fw2KrQiVhPwU=;
- b=Zqcl4w5o4l4NOY8pOfTrx8w77jod1y73pnSWnwPDquu/97csc5xUP01jAZaxU9+TVw
- g/decF2nZpQHX2FR79z9Ma4WxYdDuNvQUr464OZCVOJC8HAZ/eW1lRugF/+8KPhWIv2a
- vJ9cukra1+x2apnjn9NDs6I131ufgYrvq7NVSdJUtAz/yUyG087XWOSG8e7qIeuDRbPF
- rW6T5zYtuUPEDs1QOQfs/ll8gQzXq3h2ms/M7odUkXLetiXjGRm3URRe/N3is1hHYMo5
- 2Y3Ac3dEl+4ThxaOnN4TREtfRuJSKhrhkFOJF3uNahVyUhn5qzgA+T8ZI/sUOkl5/Db8
- 7oMw==
+ bh=4sx8Pn5vJpB1cCUljvwGZ+gsq/pM7BtmbKJPdOX+mMo=;
+ b=nZMM0O6kP1q8VinTP7acsKb2bR6eps8f2rgFGxHlYDG3gwlhOY6/OmM/q/Y3z6yCdj
+ EH+yyhkItT0krjdRFPYue+7oBSn+ba1esHiNjjXOFSdMeuMOOS/YViALNyN2n9wdxqYH
+ 9Tu1nLYw4FC+wxwg+57Y+8tGvawlkUtAvqn89QSrb69TlCRLU7DwUwLSPUfi1+vjy+68
+ RgOp3j126UzY5VfUsBTmLp9JiGwQB9RUQ5hwybLTIaSQo/QOrea3zgXJvVG8Fcou4YGL
+ bNVZFELowha5Onuv3sXOcXAFvCDa0AM/gSTdMXgYwD+B4dANd9kSThKGMA1EvYqEJaLx
+ wYBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1mI5hiRSgV+Gxs4DupXzvU3j5VTtjQi1SF2oXyxzaoQUZNuaysxpwoXqApGxLtOwzjtCIw0Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOcoxVTrhZ70fWU7t+T15g/p2i5Pf7vku+3DFOHkCm3br3Xa/z
- 62rsX3+XWQb4iyOgSJllmiEBUbW24vmg1rqrS4wIqKGT2xsMdfFcmKgYuZMnbQw=
-X-Gm-Gg: ASbGncuPgTMBJK9YnqoV5DWUB7TWXZt5NZ5XnHoxsTZJqDaF46FP1F2a9PV0J2g9OYr
- GDG7/MwHeNPq5N/NsMMCPLoRK/j2SewUBmb8Mxgry5Xr4IO6YEbMx1f8XJGKQXqrnbSS0AugI7g
- /0eQKjqjkgTmYrsJS8ZPC1MlJTOEbEeco6QL4EVLb7IlC8eJghPhGGDZ1/QnhCnw1O7RrGoOq4y
- 2f0D6Bs8U4zy013et2zutPuFw26yS3oTWb5mCJTBIFBpOWo1xMydX3QQnoW2twfcA1Vey0t0kQ0
- VDcUlMSF1FCOPIuNzO3SjmO+9j+66WDT0+hgKW2+gSKV5A==
-X-Google-Smtp-Source: AGHT+IF5nkSYP1qz83z2wSRWEIj9K6mDJUelqZjyc4V+EHPszWel2a+II4/REM0o5YgtWy/fI5n33A==
-X-Received: by 2002:a05:6a00:3cd5:b0:735:d89c:4b8e with SMTP id
- d2e1a72fcca58-736aa9bc83bmr17930585b3a.5.1741615668204; 
- Mon, 10 Mar 2025 07:07:48 -0700 (PDT)
+ AJvYcCVzRjTaW9eKd2nUsFqZnEIb2hpJrKRJWanKh9ARvG+Ic9Mpb/lUSX8hlxSoA/mwSeQPnHgTt2k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbjsOjwfIT8jsVVwCjiWtJrjTJFxTzgyrjjHKgx3Hfubw706lT
+ NSEvhowf+8OktcAC1jZiRBwbY9Z/DhA7ittOK03hmM2pRk+2BIK8A8SZF5CGsNk=
+X-Gm-Gg: ASbGncuqT2jTOx4wZLL/ZscyMD8ieqr/7ATyK60C8Rj5A25JCKb3w6wP00mFVEa86dR
+ zycZrsKwivevImUeKCJUeUueYqbOC42upLXujFwTxff8a4gIgN+WUvxZqB0251TcbLQ1V6exccX
+ M5MqE5pqO3I60CmjcFRH70XCfcN0ISIroO7UYKZWYID8SIeGH7hn4bT2svwkK93OG2VW1rbsKPO
+ 8zj0BZWB1DbKUodKJSJsBtK6KJvMrJt9swhlam6qTozAl1XwMF6etFqRYjrGqX9BMbRF2lQYaPu
+ 4Xql1MOfVGcQqf74OEONhFeIFjkK3MyCPAxPrMCYV23DLg==
+X-Google-Smtp-Source: AGHT+IG2hY/tofUzj1B+0nbSVsjmKFnRYrmVnrrx6A0113jsRMCjabMWcnnciclhJULinpiz9g2iQw==
+X-Received: by 2002:a17:90b:5292:b0:2f1:2e10:8160 with SMTP id
+ 98e67ed59e1d1-2ffbc1c825emr15875317a91.11.1741616672442; 
+ Mon, 10 Mar 2025 07:24:32 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736b5cef0f1sm5788805b3a.25.2025.03.10.07.07.46
+ 98e67ed59e1d1-2ff693e75ccsm7988882a91.32.2025.03.10.07.24.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 07:07:47 -0700 (PDT)
-Date: Mon, 10 Mar 2025 08:07:44 -0600
+ Mon, 10 Mar 2025 07:24:31 -0700 (PDT)
+Date: Mon, 10 Mar 2025 08:24:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH 00/17] Various toolchain compatibility fixes/improvements
-Message-ID: <20250310140744.GY2640854@bill-the-cat>
-References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <CAH5Ym4isqLibOv97=9zgYFx-fok-sAa3QetfRgyrQmDQ4MHgmQ@mail.gmail.com>
- <20250306154717.GE2640854@bill-the-cat>
- <CAH5Ym4iVdMk9C3qyuOasM7spNU4XzohuYVZ7Z-+OmG3FGm2jzg@mail.gmail.com>
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Sam Shih <sam.shih@mediatek.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/4] airoha: Add initial support for Airoha AN7581 SoC
+Message-ID: <20250310142428.GZ2640854@bill-the-cat>
+References: <20250309140652.23543-1-ansuelsmth@gmail.com>
+ <20250309140652.23543-2-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R3DLQfMmRlxTOPop"
+ protocol="application/pgp-signature"; boundary="A7H5tIH5xmlDDvZ8"
 Content-Disposition: inline
-In-Reply-To: <CAH5Ym4iVdMk9C3qyuOasM7spNU4XzohuYVZ7Z-+OmG3FGm2jzg@mail.gmail.com>
+In-Reply-To: <20250309140652.23543-2-ansuelsmth@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,121 +102,142 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---R3DLQfMmRlxTOPop
-Content-Type: text/plain; charset=utf-8
+--A7H5tIH5xmlDDvZ8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 07, 2025 at 10:48:11PM -0800, Sam Edwards wrote:
-> On Thu, Mar 6, 2025 at 7:47=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > On Wed, Mar 05, 2025 at 07:46:56PM -0800, Sam Edwards wrote:
-> > > On Sun, Feb 23, 2025 at 9:55=E2=80=AFPM Sam Edwards <cfsworks@gmail.c=
-om> wrote:
-> > > >
-> > > > Long time no see, U-Boot folks!
-> > > >
-> > > > This patchset consists of various bug fixes and correctness improve=
-ments that
-> > > > I discovered while attempting to add first-class LLVM support to th=
-e build
-> > > > system. These patches are NOT related to LLVM support directly; rat=
-her, they
-> > > > address existing issues that should be resolved regardless of futur=
-e changes.
-> > > > For the most part, the patches are mutually independent and can be =
-reviewed and
-> > > > applied separately. If any patch is not suitable for merging now, f=
-eel free to
-> > > > skip it: I will incorporate feedback and revisit those changes as p=
-art of the
-> > > > upcoming LLVM support patchset. I'd like this patchset to be evalua=
-ted on its
-> > > > own merits, based on the current state of the code, without conside=
-ration for
-> > > > future LLVM support.
-> > > >
-> > > > Note that the issues addressed in this patchset do not occur when U=
--Boot is
-> > > > built using the GCC/GNU toolchain. These bugs seem to be specific t=
-o builds
-> > > > using other toolchains, like LLVM, and do not appear to affect user=
-s relying on
-> > > > GCC/GNU. Therefore, I see no need to rush these changes into the st=
-able branch.
-> > > >
-> > > > Again, these patches are mostly independent/reorderable...
-> > > > ...except that: "arm: Add aligned-memory aliases to eabi_compat"
-> > > > ...depends on: "arm: Add __aeabi_memclr in eabi_compat"
-> > > >
-> > > > Warm regards,
-> > > > Sam
-> > >
-> > > Hi Tom,
-> > >
-> > > I noticed that all patches in this series have been marked 'Changes
-> > > Requested' on Patchwork. While some patches do need changes, this
-> > > series was intended as a set of independent submissions: each patch
-> > > can be accepted, rejected, or reordered without affecting the others.
-> > > Would it be possible to reconsider the remaining patches for review
-> > > without resending the series?
-> > >
-> > > I'd like to withdraw the following patches:
-> > >
-> > > - [06/17] arm: Use -mstrict-align when the MMU is off (Incorrect appr=
-oach)
-> > > - [11/17] makefile: Fix symbol typo in binary_size_check (Will follow
-> > > Simon's suggestion for a more comprehensive fix across architectures
-> > > in a future submission)
-> > >
-> > > The feedback I've received so far was mostly requests for
-> > > clarification, which I believe I've addressed in my replies. Please
-> > > let me know if anything remains unclear or if further adjustments are
-> > > needed.
-> > >
-> > > Thank you so much for your time!
-> >
-> > It's *really* hard to track parts of a series in that way. If they
-> > aren't intended to be applied all in one go, please post them
-> > individually as v2s. The clarifications likely mean a bit more rewording
-> > of the commit messages are in order.
-> >
-> > If it's really hard on your end to resend things, I can go and poke
-> > through the series (once Ilias has had time to do the reviews I see he
-> > promised).
+On Sun, Mar 09, 2025 at 03:06:43PM +0100, Christian Marangi wrote:
+> Add initial support for Airoha AN7581 SoC. This adds the initial Kconfig
+> and Makefile entry for the SoC, an initial RFB DTS and initial config
+> for it. Also add the initial code for cpu and RAM initialization.
 >=20
-> Hi Tom,
->=20
-> Well... that's "hard" but not "really hard" for me, so I think what
-> I'll pitch is this: let's let Ilias (and others if so inclined) have a
-> week to pick through the series (thanks Ilias!) and offer feedback;
-> I'll resend any patches that get no/positive feedback as a v2 series
-> (where the "just skip any patch deemed objectionable" option will
-> still apply), and any patches that need reworking can be part of my
-> upcoming LLVM support series. Would that work?
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+[snip]
+> diff --git a/arch/arm/mach-airoha/Kconfig b/arch/arm/mach-airoha/Kconfig
+> new file mode 100644
+> index 00000000000..0470a01034f
+> --- /dev/null
+> +++ b/arch/arm/mach-airoha/Kconfig
+> @@ -0,0 +1,44 @@
+> +if ARCH_AIROHA
+> +
+> +config SYS_SOC
+> +	default "airoha"
+> +
+> +config SYS_VENDOR
+> +	default "airoha"
+> +
+> +choice
+> +	prompt "Airoha board select"
+> +
+> +config TARGET_AN7581
+> +	bool "Airoha AN7581 SoC"
+> +	select ARM64
+> +	help
+> +	  The Airoha EN7581 is a ARM-based SoC with a quad-core Cortex-A7
+> +	  including NEON and GPU, Mali-450 graphics, several DDR3 options,
+> +	  crypto engine, built-in Wi-Fi / Bluetooth combo chip, JPEG decoder,
+> +	  video interfaces supporting HDMI and MIPI, and video codec support.
+> +	  Peripherals include Gigabit Ethernet, switch, USB3.0 and OTG, PCIe,
+> +	  I2S, PCM, S/PDIF, UART, SPI, I2C, IR TX/RX, and PWM.
+> +
+> +endchoice
+> +
+> +config SYS_BOARD
+> +	string "Board name"
+> +	default "an7581" if TARGET_AN7581
+> +	default ""
+> +	help
+> +	  This option contains information about board name.
+> +	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+> +	  be used.
+> +
+> +config SYS_CONFIG_NAME
+> +	string "Board configuration name"
+> +	default "an7581" if TARGET_AN7581
+> +	default ""
+> +	help
+> +	  This option contains information about board configuration name.
+> +	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+> +	  will be used for board configuration.
 
-Yes, thanks!
+We shouldn't prompt for SYS_BOARD / SYS_CONFIG_NAME and instead just
+provide the values here.
+
+[snip]
+> diff --git a/board/airoha/an7581/MAINTAINERS b/board/airoha/an7581/MAINTA=
+INERS
+> new file mode 100644
+> index 00000000000..480b89a73aa
+> --- /dev/null
+> +++ b/board/airoha/an7581/MAINTAINERS
+> @@ -0,0 +1,6 @@
+> +AN7581
+> +M:	Christian Marangi <ansuelsmth@gmail.com>
+> +S:	Maintained
+> +F:	board/airoha/an7581
+> +F:	include/configs/an7581.h
+> +F:	configs/an7581_rfb_defconfig
+
+You should probably use the "N:" syntax here and say "N: an7581" to
+catch all the files later on too. Perhaps also "N: airoha" to catch the
+drivers you add later.
+
+> diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
+> new file mode 100644
+> index 00000000000..b37511c026e
+> --- /dev/null
+> +++ b/configs/an7581_evb_defconfig
+
+This doesn't appear to be the output of "make savedefconfig" so please
+re-sync it with that.
+
+> diff --git a/include/configs/an7581.h b/include/configs/an7581.h
+> new file mode 100644
+> index 00000000000..901d99b3456
+> --- /dev/null
+> +++ b/include/configs/an7581.h
+> @@ -0,0 +1,19 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Configuration for Airoha AN7581
+> + */
+> +
+> +#ifndef __AN7581_H
+> +#define __AN7581_H
+> +
+> +#include <linux/sizes.h>
+> +
+> +#define CONFIG_SYS_UBOOT_BASE		CONFIG_TEXT_BASE
+> +
+> +#define CFG_SYS_INIT_RAM_ADDR           CONFIG_TEXT_BASE
+> +#define CFG_SYS_INIT_RAM_SIZE           SZ_2M
+> +
+> +/* DRAM */
+> +#define CONFIG_SYS_SDRAM_BASE		0x80000000
+
+You cannot set CONFIG symbols in this file anymore.
 
 --=20
 Tom
 
---R3DLQfMmRlxTOPop
+--A7H5tIH5xmlDDvZ8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfO8igACgkQFHw5/5Y0
-tyy8fgv+Kw9GT/kTS+RQckDGvz5Ba2YyKVHNJU5JZreO3v48Oywys27dE/a2pONR
-xUV/f2Yl3RFh/gKyOl382i4CXT5VTjhrzTrVapW0JSomNlLe9eay2QGA4DSgxZNp
-VLYlr3K6SRQ2jiZPUINwrXi3ajcdPNJwbWXtrAoQIJ0PnOLSPjNyG8pLoyXfi59b
-QaA2plJnEJCfshJWUuJR6CjAEwcL4UHLwRFGKAoUATJTTPVFINF0hVxxA6z8YIgg
-JYhKtXNFzZBfTHTrM/7dcZUzwXtU602gHP2avfq3YiqGlkdq++5UONVK7uYLGKsj
-zPIOwg7UjYHz1kaC3X/07HnJSFLyGG5Xpdw8x9P8JU5r9/wmrqs2Q7PDkrL5PpVN
-34Jdl7m6igjV69+6RH2Q9b4VFbRTIcXqfixBjMOLLGI1rv2N+AvA7y+BKqvH9FN4
-u1HLQciJdhIJqqfnRgzDdbXcE6d2VYO++WgOt244y645lOp8mSRrSqbBk/N0YFYS
-a9E1cBVo
-=QBME
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfO9hUACgkQFHw5/5Y0
+tyyRbAv/fL6uMI+iZP/RXZVBCRRaqnXTjh6vKbCodut8tneoG4hQ8wX03UVO5u9u
++/918RDYpXCzD8z21l82kYvgDIzwAZtfhtzv8F2NZ9s80vzlyYWwd6eEF1a7Cl/s
+pwEfKaOV96YywUKBl0nyINJqC/iFj44cPAm8xXt6sApmOS+vpFMQFEKZU2p10+4k
+4rcUAU66f9Ck2Bz72sFHaumsJlLDgr5DgJdLoudHlX0zQH1nMPfOuelZritBj6Hn
+E0MakNC0CuP9F0S8iVHu0T+UEVBIncjW9OhG1u8qGkc4zqTO9vpXbn3TLv7Pg4yi
+C191BiZIWi5cKNPa7H6ck9WSkZcHm/feFWz0Fq8jShPwytbZxty3Qu9QcWcB48c4
+8C+kgOOOY7AU7ZSwaKaYlrZyX+EcxH29Mq470eyjMwIl6aMVSmpNtVj9UZi4way9
+0DN8KnLv6viZ+s3urOZHXtOaHgf7iKKMsB7AAJTGCpd9vdReIYD7yVtQMdfu1lq5
+woh08PXg
+=7Xka
 -----END PGP SIGNATURE-----
 
---R3DLQfMmRlxTOPop--
+--A7H5tIH5xmlDDvZ8--
