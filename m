@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0745C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 11:58:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF04FC28B2E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 11:59:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12FCF8164E;
-	Mon, 10 Mar 2025 12:58:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 55A2E81870;
+	Mon, 10 Mar 2025 12:58:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 983CC811DF; Mon, 10 Mar 2025 12:58:26 +0100 (CET)
+ id AC3B78169D; Mon, 10 Mar 2025 12:58:29 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4DA428186D
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 12:58:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id A2AB0811DF
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 12:58:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B232153B;
- Mon, 10 Mar 2025 04:58:35 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9A5251516;
+ Mon, 10 Mar 2025 04:58:38 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DD8633F5A1;
- Mon, 10 Mar 2025 04:58:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4874E3F5A1;
+ Mon, 10 Mar 2025 04:58:24 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -34,9 +34,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v7 5/8] efi_loader: preserve installer images in pmem
-Date: Mon, 10 Mar 2025 17:27:47 +0530
-Message-Id: <20250310115750.1019051-6-sughosh.ganu@linaro.org>
+Subject: [PATCH v7 6/8] blkmap: store type of blkmap slice in corresponding
+ structure
+Date: Mon, 10 Mar 2025 17:27:48 +0530
+Message-Id: <20250310115750.1019051-7-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250310115750.1019051-1-sughosh.ganu@linaro.org>
 References: <20250310115750.1019051-1-sughosh.ganu@linaro.org>
@@ -58,92 +59,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Add information about the type of blkmap slice as an attribute in the
+corresponding slice structure. Put information in the blkmap slice
+structure to identify if it is associated with a memory or linear
+mapped device. Which can then be used to take specific action based on
+the type of the blkmap slice.
 
-One of the problems OS installers face, when running in EFI, is that
-the mounted ISO after calling ExitBootServices goes away. For some
-distros this is a problem since they rely on finding some core packages
-before continuing the installation. Distros have works around this --
-e.g Fedora has a special kernel command line parameter called
-inst.stage2 [0].
-
-ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-don't have anything in place for DTs. Linux and device trees have support
-for persistent memory devices.
-
-It's worth noting that for linux to instantiate the /dev/pmemX device,
-the memory described in the pmem node has to be omitted from the EFI
-memory map we hand over to the OS if ZONE_DEVICES and SPARSEMEM is
-enabled. With those enabled the pmem driver ends up calling
-devm_memremap_pages() instead of devm_memremap(). The latter works
-whether the memory is omitted or marked as reserved, but mapping pages
-only works if the memory is omitted.
-
-On top of that, depending on how the kernel is configured, that memory
-area must be page aligned or 2MB aligned. PowerPC is an exception here
-and requires 16MB alignment, but since we don't have EFI support for
-it, limit the alignment to 2MB.
-
-Ensure that the ISO image is 2MB aligned and remove the region
-occupied by the image from the EFI memory map.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes since V6: None
 
- lib/efi_loader/efi_bootmgr.c | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
+ drivers/block/blkmap.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index c6124c590d9..081eff057f4 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -18,6 +18,8 @@
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <asm/unaligned.h>
-+#include <linux/kernel.h>
-+#include <linux/sizes.h>
+diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+index 34eed1380dc..453510cca62 100644
+--- a/drivers/block/blkmap.c
++++ b/drivers/block/blkmap.c
+@@ -16,6 +16,10 @@
  
- static const struct efi_boot_services *bs;
- static const struct efi_runtime_services *rs;
-@@ -362,13 +364,16 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 	}
+ struct blkmap;
  
- 	/*
--	 * TODO: expose the ramdisk to OS.
--	 * Need to pass the ramdisk information by the architecture-specific
--	 * methods such as 'pmem' device-tree node.
-+	 * Linux supports 'pmem' which allows OS installers to find, reclaim
-+	 * the mounted images and continue the installation since the contents
-+	 * of the pmem region are treated as local media.
-+	 *
-+	 * The memory regions used for it needs to be carved out of the EFI
-+	 * memory map.
- 	 */
--	ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
-+	ret = efi_remove_memory_map(addr, size, EFI_CONVENTIONAL_MEMORY);
- 	if (ret != EFI_SUCCESS) {
--		log_err("Memory reservation failed\n");
-+		log_err("Failed to reserve memory\n");
- 		goto err;
- 	}
++/* Attributes of blkmap slice */
++#define BLKMAP_SLICE_LINEAR	BIT(0)
++#define BLKMAP_SLICE_MEM	BIT(1)
++
+ /**
+  * struct blkmap_slice - Region mapped to a blkmap
+  *
+@@ -25,12 +29,14 @@ struct blkmap;
+  * @node: List node used to associate this slice with a blkmap
+  * @blknr: Start block number of the mapping
+  * @blkcnt: Number of blocks covered by this mapping
++ * @attr: Attributes of blkmap slice
+  */
+ struct blkmap_slice {
+ 	struct list_head node;
  
-@@ -490,6 +495,13 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 		ret = EFI_INVALID_PARAMETER;
- 		goto err;
- 	}
-+	/*
-+	 * Depending on the kernel configuration, pmem memory area must be page
-+	 * aligned or 2MB aligned. PowerPC is an exception here and requires
-+	 * 16MB alignment, but since we don't have EFI support for it, limit
-+	 * the alignment to 2MB.
-+	 */
-+	image_size = ALIGN(image_size, SZ_2M);
+ 	lbaint_t blknr;
+ 	lbaint_t blkcnt;
++	uint     attr;
  
- 	/*
- 	 * If the file extension is ".iso" or ".img", mount it and try to load
+ 	/**
+ 	 * @read: - Read from slice
+@@ -169,6 +175,7 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 		.slice = {
+ 			.blknr = blknr,
+ 			.blkcnt = blkcnt,
++			.attr = BLKMAP_SLICE_LINEAR,
+ 
+ 			.read = blkmap_linear_read,
+ 			.write = blkmap_linear_write,
+@@ -248,6 +255,7 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 		.slice = {
+ 			.blknr = blknr,
+ 			.blkcnt = blkcnt,
++			.attr = BLKMAP_SLICE_MEM,
+ 
+ 			.read = blkmap_mem_read,
+ 			.write = blkmap_mem_write,
 -- 
 2.34.1
 
