@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC2BFC282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37263C28B2E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 10:04:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EB5A814B6;
-	Mon, 10 Mar 2025 11:03:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C90628129F;
+	Mon, 10 Mar 2025 11:04:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xWTGkfOI";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="WFcIdpax";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E2538142D; Mon, 10 Mar 2025 11:03:44 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id F3A708142D; Mon, 10 Mar 2025 11:04:36 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CACA78169D
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:03:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 954F8811B2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 11:04:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=5164540d7d=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52A9xX41006776;
- Mon, 10 Mar 2025 11:03:38 +0100
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52A97XuM016929;
+ Mon, 10 Mar 2025 11:04:24 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- M9TUFBIUJ31yS4pZA00dpeMcWmbperRFqIFswm3qyE0=; b=xWTGkfOIx23A5BRh
- EwH8zurSBjUlYR2tCIsQU4XSMUyaqngYRXaKhFPnhuNxU+b5E17l+okZVM/jg0wC
- 6JLA8d0xtt5MkoEjVZ7gRwau5yPd8X0WolCvt8sxpvxTDOsiGAQyByP4WKqCMHFO
- QVWBT51JY1O04xk32ai1sa7ZXTkdloaSgCFc9PWlETgt18Hdeu466v0DR2+IRm5B
- txHuVn5Z5tYAYenD3F5aCqUVG//UNhN5b4rVqdBR17qiL/pgtE0f/f+hJhmHhM6E
- rfUmVjgDrBaEa8fKdK2bA43QAvXSvcOjswhMsoMcrGy94jqLSc8rQgBuIdM+UDcL
- kTbSLg==
+ F7NCjLz/VD3or6lUC//e/UgHXtuNLqvVu1FryuProzQ=; b=WFcIdpax7XoISDos
+ 1A5+lFCHfFNJ+FT3/3Hk5lqxAI7Qx70NNVDCrH/0f72WrFYpLhw5KyTJ+hO7+xtj
+ eyDMcXgr9H1xWShThif6kVB1ZxEUKJ0EcMpHMVgUhST2N9gLbfpNJSTqhrwJh7kA
+ 9b0040psCtP/5biwey1v43YPm1LLLEPX2gIrxDSj2aQuMZk68vqWP0Alt3bZ3yka
+ qS02WhulrXARRjyabEJl95OH0zrDcRspUCYVMxpMvbyxV5A+GXqrDC1mlugNQTbZ
+ qV2jivQXgrpdYqWyMD+4zbbqMESFkL5yZeru1ho+SVEdz+jOSbL/4JrQpA1F2iGn
+ aG6MeQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4591qru0xf-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4590b8ur3y-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Mar 2025 11:03:38 +0100 (CET)
+ Mon, 10 Mar 2025 11:04:24 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4EE1B40088;
- Mon, 10 Mar 2025 11:02:10 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CCADA4007E;
+ Mon, 10 Mar 2025 11:03:17 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4BB3A57C3A1;
- Mon, 10 Mar 2025 11:00:16 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B9A9C5883C1;
+ Mon, 10 Mar 2025 11:02:11 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Mar
- 2025 11:00:15 +0100
-Message-ID: <0770170e-6184-4e03-89b9-30c5a4b01736@foss.st.com>
-Date: Mon, 10 Mar 2025 11:00:15 +0100
+ 2025 11:02:11 +0100
+Message-ID: <2aef33cd-5bf0-4256-ae2c-413470e3668e@foss.st.com>
+Date: Mon, 10 Mar 2025 11:02:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] configs: stm32mp13: Enable MFD timer and PWM for
- stm32mp13_defconfig
+Subject: Re: [PATCH] ARM: dts: stm32: Add support for STM32MP13xx DHCOR SoM
+ and DHSBC rev.200 board
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Cheick Traore <cheick.traore@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Igor Opaniuk
- <igor.opaniuk@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250306105620.624760-1-cheick.traore@foss.st.com>
- <20250306115558.4.Ia1fceae36361c33b1ad9e8b92f55e74aafa4078b@changeid>
- <2f0d8af4-a91a-4676-bcf0-f59fcebf9f09@foss.st.com>
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250302154429.65581-1-marex@denx.de>
+ <8631f15e-2bba-4f0a-b4d4-eb5c540f7716@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <2f0d8af4-a91a-4676-bcf0-f59fcebf9f09@foss.st.com>
+In-Reply-To: <8631f15e-2bba-4f0a-b4d4-eb5c540f7716@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -96,53 +94,65 @@ X-Virus-Status: Clean
 
 
 
-On 3/6/25 15:14, Patrice CHOTARD wrote:
+On 3/3/25 09:35, Patrice CHOTARD wrote:
 > 
 > 
-> On 3/6/25 11:56, Cheick Traore wrote:
->> Enable the following configs:
+> On 3/2/25 16:43, Marek Vasut wrote:
+>> LDO2 is expansion connector supply on STM32MP13xx DHCOR DHSBC rev.200.
+>> LDO5 is carrier board supply on STM32MP13xx DHCOR DHSBC rev.200. Keep
+>> both regulators always enabled to make sure both the carrier board and
+>> the expansion connector is always powered on and supplied with correct
+>> voltage.
 >>
->> * CONFIG_MFD_STM32_TIMERS: enables support for the STM32 multifunction
->>                            timer
->> * CONFIG_DM_PWM: enables support for pulse-width modulation devices
->> * CONFIG_CMD_PWM: enables 'pwm' command to control PWM channels
->> * CONFIG_PWM_STM32: enables support for the STM32 PWM devices
+>> Describe ST33TPHF2XSPI TPM 2.0 chip reset lines.
 >>
->> Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
+>> This is a port of Linux kernel patch posted at:
+>> https://patchwork.kernel.org/project/linux-arm-kernel/patch/20250302152605.54792-1-marex@denx.de/
+>> This change shall be removed when the Linux kernel DT change lands
+>> and Linux kernel DTs get synchronized with U-Boot DTs.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
 >> ---
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: u-boot@lists.denx.de
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>  .../dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi   | 22 +++++++++++++++++++
+>>  1 file changed, 22 insertions(+)
 >>
->>  configs/stm32mp13_defconfig | 4 ++++
->>  1 file changed, 4 insertions(+)
->>
->> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
->> index 0acd1487c9a..4c6a7f82fe5 100644
->> --- a/configs/stm32mp13_defconfig
->> +++ b/configs/stm32mp13_defconfig
->> @@ -10,6 +10,7 @@ CONFIG_SYS_LOAD_ADDR=0xc2000000
->>  CONFIG_STM32MP13X=y
->>  CONFIG_DDR_CACHEABLE_SIZE=0x8000000
->>  CONFIG_CMD_STM32KEY=y
->> +CONFIG_MFD_STM32_TIMERS=y
->>  CONFIG_TARGET_ST_STM32MP13X=y
->>  CONFIG_ENV_OFFSET_REDUND=0x940000
->>  CONFIG_CMD_STM32PROG=y
->> @@ -31,6 +32,7 @@ CONFIG_CMD_UNZIP=y
->>  CONFIG_CMD_CLK=y
->>  CONFIG_CMD_FUSE=y
->>  CONFIG_CMD_GPIO=y
->> +CONFIG_CMD_PWM=y
->>  CONFIG_CMD_I2C=y
->>  CONFIG_CMD_LSBLK=y
->>  CONFIG_CMD_MMC=y
->> @@ -80,6 +82,8 @@ CONFIG_DM_REGULATOR=y
->>  CONFIG_DM_REGULATOR_FIXED=y
->>  CONFIG_DM_REGULATOR_GPIO=y
->>  CONFIG_DM_REGULATOR_SCMI=y
->> +CONFIG_DM_PWM=y
->> +CONFIG_PWM_STM32=y
->>  CONFIG_RESET_SCMI=y
->>  CONFIG_DM_RNG=y
->>  CONFIG_RNG_STM32=y
+>> diff --git a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
+>> index d718aae16ca..eace94f5fa4 100644
+>> --- a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
+>> @@ -23,3 +23,25 @@
+>>  &usbphyc {
+>>  	bootph-all;
+>>  };
+>> +
+>> +&st33htph {
+>> +	reset-gpios = <&gpioe 12 GPIO_ACTIVE_LOW>;
+>> +};
+>> +
+>> +/* LDO2 is expansion connector 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
+>> +&vdd_ldo2 {
+>> +	bootph-all;
+>> +	regulator-always-on;
+>> +	regulator-boot-on;
+>> +	regulator-min-microvolt = <3300000>;
+>> +	regulator-max-microvolt = <3300000>;
+>> +};
+>> +
+>> +/* LDO5 is carrier board 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
+>> +&vdd_sd {
+>> +	bootph-all;
+>> +	regulator-always-on;
+>> +	regulator-boot-on;
+>> +	regulator-min-microvolt = <3300000>;
+>> +	regulator-max-microvolt = <3300000>;
+>> +};
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
