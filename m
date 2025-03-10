@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14075C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:06:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C69C28B2E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 12:06:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED0F78193A;
-	Mon, 10 Mar 2025 13:06:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67BA081417;
+	Mon, 10 Mar 2025 13:06:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KQKWBbt7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XqljIroZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 047A481898; Mon, 10 Mar 2025 13:06:14 +0100 (CET)
+ id C9F4F812D9; Mon, 10 Mar 2025 13:06:18 +0100 (CET)
 Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
  [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68C19812D9
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:06:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9A3E817A5
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 13:06:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
 Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-224341bbc1dso41248185ad.3
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:06:11 -0700 (PDT)
+ d9443c01a7336-2254e0b4b79so3510675ad.2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 05:06:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741608370; x=1742213170; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741608374; x=1742213174; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0rUs6lLDFAVoOt4QhFop6JGh+8wtUlxjRkNIITvX33k=;
- b=KQKWBbt7DFQvHw7utmH+px8KkcK2Cir7gLS7uvPQGSJnoALzfeBlQBB9rJAOnSXVoe
- DEAOV+Tz/30IseYbY0OdDIoaRY/k78PoFqJZ5HwKQRTWefJY0mnGjLVY436y6Vw1Sq8U
- 4CeC1C593fdjbkH5oDYf1pzUm74Lhl+PuasXP7r2APgOCvMN7cERc2+K29VaCjVQATl+
- VVzKAqN0Z5V0nXXD2uVg2Cc56Bh55PR4BarQAxAaKWeNUb31pPVHyXJFlfUsScg/NR8+
- qZ4sQXxunRPhWHo2Fu0bqP/ntr9bE+nJWvCVfoBqpq3t1E9WQGRZydI5ab+rintIk6iP
- XIUA==
+ bh=NEnpYIfFBDUkqnKxrJ4eAyFQl9sG9dnaCB37gHOWOgo=;
+ b=XqljIroZCrrUdrHhfSg794XSLJMBSAT8wGxZB62bmn7VOBIo1cyIRkhqYZ/invYTKu
+ k0s0lNICBxVMvso3otQzlOgoCadcXPBXBR7lcVvBsLbBAQgcVbYH5bEOlP11AOKW1fUW
+ P43ufkeaOqSY2a68it6sQh0TDrxUBm+aqyelzxN/9Hph2AZdfMlVDwRvjaHDr7TQu08J
+ L0ihryaDSsH5uJk2/2AmNWWiDgewdxLkalXffJs8MysLGghKlnKXbU0QLD9kZSb/8+hj
+ NrZDdBPyyGrhIcYLB/+Fz5sM4TZ9kMvGt2GbLufL1fdm5kwytNDK6YKbSqIOVrtW2auh
+ R0Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741608370; x=1742213170;
+ d=1e100.net; s=20230601; t=1741608374; x=1742213174;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0rUs6lLDFAVoOt4QhFop6JGh+8wtUlxjRkNIITvX33k=;
- b=MJnjKafNGLzUolLm9uL9XNL9/3B7ZQe70WXvKaHJX5AlZc9tHI/vNibnIEbR4xNOOy
- TQ78ZB2UPsiEJGrpdp2faPXcWteyNr7m6PkgsMIBvTOG7BjXeepv82suFsF6VrBss1FO
- eNQL+W3IeRaTlVouR68AC5EGpNNf/s2fHG+4gzgNs3RHUzgjAnnmaG+VpCaYo+QFV3D7
- C36N4da9MRVzJOYkAUdVGeulp1LmDOVn8cxfnrdD2yQkyPV1WuCjR+jSdqScnsjsSWSc
- zUP+1aPreQFo6pN2bpuSiwW+QFoh6LXLtkeSeVXbSXKq8nxq3GjM0tBVC9AuMAiEopEt
- 44OA==
-X-Gm-Message-State: AOJu0YzfZX4JE83BKiHVGJP0H46MIYeicIZJoZ2K1DxfH8LW0JMmA5eq
- 297KfCjZyjZ5Jq1971ChQxqSE5lSHUGUL1TAJ521PjSBA1wNj/+hyDnwZdayAMY=
-X-Gm-Gg: ASbGncsdMsDbrfOEzP8+I1EMqvBO0VI1qPcqQP2/68KINvi3rHfKtgBwWZ33GwOzr0S
- RT1UNRXP3D1YHQR1X1jmehs4NtJIvIvdq3dNwoTe2Mfw5GlN45oc7IP897w3rau+iKbjWTZo1BU
- 32fBJhRME5d2TA2JXQcoYYU5YSNuOTR509iG/lra1jWh+Ub0b2bhuPWNkHG720qAT9VsRD3DwB+
- DERLvEhoSc3FNMYpFkiOq7iLU/N7NArQuHfTHNcll5gg+ieEkGv7sv/0pRB0AM/41+wmn+KdvFc
- wXRZXOwzwvLgFJE/0WG2n2iRag0BWKHtt+Nj9MJ3OLr9nLW5jadrDSQ=
-X-Google-Smtp-Source: AGHT+IF5EgjV6MjCmsZkags5Ok+bg1O6FNRtVkPFtIeIo8ysucdcOe24Ga8X6i6e2yK7EZUNE6yzVA==
-X-Received: by 2002:a05:6a21:7a44:b0:1f5:8678:1832 with SMTP id
- adf61e73a8af0-1f5867818dfmr2305316637.11.1741608369839; 
- Mon, 10 Mar 2025 05:06:09 -0700 (PDT)
+ bh=NEnpYIfFBDUkqnKxrJ4eAyFQl9sG9dnaCB37gHOWOgo=;
+ b=QaJP4uoDGs83EdzTwL7Jq0Z+16Xv1uCSfP1CaiivyPmr5RBlJyFPbFJl/ny8KPxR3o
+ 7ubPNzauHejbr7ZSSLAr9f26vjBrm/2Dl1S1Zd3uAlBXJy+5x6B6Tbnv3zMLE0WpKLps
+ 2v9wB4t71rqlIqfqB9IuFCxLaLQ81aykD8aeFywQa3qdVTxubodeD4lbJVMXXXTyLL7x
+ H4XhrndQFABIjel2V5ixaT5CASew7CF+t63jzwjmoBAltSbW4FshSoRUTcdw4SceCfw7
+ dCMajxOsy1YVohQXuNJZj3on3kXY69JzAlL8S+I1Ul3iD5g46txQEIItxg/kjCyb9XVx
+ bVWQ==
+X-Gm-Message-State: AOJu0YzT+hGMaIDvim5CLDioF/OiyB3E0hiB2m1I8pGrx38xuJ8GAQh7
+ vC0UygHRkIFkhRPfxY65nlpMyj+jUDqHWhjkabZtZ59GTYVNqMdxJoqMa6W6Ay8=
+X-Gm-Gg: ASbGnctpexFfTnQY+rVzOeZWy5GihSW1EnF0s6xG3pZ5QdsaTVu6dRJHsJz4tzP1kJj
+ MIqrRyrN+dnYPx9iXtZaCK3Afrddu2qlOxVYR0j8BmLpfZHLs16gg/fSGsjn1oIOf46Ivk+r+7d
+ EOdeMWJdsLgGRm7kl380Momtvmh+tyzF1S0jm+ucvLuoZjFzrqKg6m4TnsfW3maD4Efe3DoJNvZ
+ q/beDal2VhvTUfAw2yRFvlilh1cDxG8tN0FmtYBRY/4bXA5Hh3wW9aydt3V9Q8/qQvBUSuShY01
+ 0ddHNuYs5aEjCpGp/26ZaE1/bbY7mzBbcNu4inIorJILLP1j1N9qrnk=
+X-Google-Smtp-Source: AGHT+IHjXSZr15DisOGUquT+sd/pw3U/Jqga4QAn5NQvgtvG6OeKstPEPE5/t0dRtl1JSIzcocZZYw==
+X-Received: by 2002:a17:902:ec92:b0:220:e9ef:ec98 with SMTP id
+ d9443c01a7336-22428896a74mr222082725ad.19.1741608374507; 
+ Mon, 10 Mar 2025 05:06:14 -0700 (PDT)
 Received: from adriano.. ([190.215.89.187]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736a8b61f76sm6968899b3a.103.2025.03.10.05.06.07
+ d2e1a72fcca58-736a8b61f76sm6968899b3a.103.2025.03.10.05.06.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 05:06:09 -0700 (PDT)
+ Mon, 10 Mar 2025 05:06:14 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v3 5/8] efi_loader: efi_device_path: Pass net udevice as
- argument
-Date: Mon, 10 Mar 2025 09:06:04 -0300
-Message-ID: <20250310120607.186999-5-adriano.cordova@canonical.com>
+Subject: [PATCH v3 7/8] efi_loader: efi_net: Add dhcp cache
+Date: Mon, 10 Mar 2025 09:06:06 -0300
+Message-ID: <20250310120607.186999-7-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250310120607.186999-1-adriano.cordova@canonical.com>
 References: <20250310120607.186999-1-adriano.cordova@canonical.com>
@@ -99,139 +98,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation to support multiple EFI net objects, support
-constructing device paths using an ethernet device different
-than the default. Add a udevice argument to the device path
-generation, and keep the callsites with eth_get_dev() to
-preserve existing functionality.
+Add a dhcp cache to store the DHCP ACKs received by the U-Boot network
+stack.
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
 
 (no changes since v1)
 
- include/efi_loader.h             |  4 ++--
- lib/efi_loader/efi_device_path.c | 20 ++++++++++++--------
- lib/efi_loader/efi_net.c         |  5 +++--
- 3 files changed, 17 insertions(+), 12 deletions(-)
+ lib/efi_loader/efi_net.c | 55 +++++++++++++++++++++++++++++++---------
+ 1 file changed, 43 insertions(+), 12 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index c2fb3e66eb9..47c043460eb 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -925,8 +925,8 @@ struct efi_device_path *efi_dp_from_part(struct blk_desc *desc, int part);
- struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
- struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
- 					 const char *path);
--struct efi_device_path *efi_dp_from_eth(void);
--struct efi_device_path *efi_dp_from_http(const char *server);
-+struct efi_device_path *efi_dp_from_eth(struct udevice *dev);
-+struct efi_device_path *efi_dp_from_http(const char *server, struct udevice *dev);
- struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
- 					uint64_t start_address,
- 					size_t size);
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index c0633a736b6..64183d40340 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -954,20 +954,20 @@ struct efi_device_path *efi_dp_from_uart(void)
- 	return buf;
- }
- 
--struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
-+struct efi_device_path __maybe_unused *efi_dp_from_eth(struct udevice *dev)
- {
- 	void *buf, *start;
- 	unsigned dpsize = 0;
- 
--	assert(eth_get_dev());
-+	assert(dev);
- 
--	dpsize += dp_size(eth_get_dev());
-+	dpsize += dp_size(dev);
- 
- 	start = buf = efi_alloc(dpsize + sizeof(END));
- 	if (!buf)
- 		return NULL;
- 
--	buf = dp_fill(buf, eth_get_dev());
-+	buf = dp_fill(buf, dev);
- 
- 	*((struct efi_device_path *)buf) = END;
- 
-@@ -984,11 +984,13 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
-  * @ip:		IPv4 local address
-  * @mask:	network mask
-  * @srv:	IPv4 remote/server address
-+ * @dev:	net udevice
-  * Return:	pointer to device path, NULL on error
-  */
- static struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
- 					 struct efi_ipv4_address *mask,
--					 struct efi_ipv4_address *srv)
-+					 struct efi_ipv4_address *srv,
-+					 struct udevice *dev)
- {
- 	struct efi_device_path *dp1, *dp2, *pos;
- 	struct {
-@@ -1010,7 +1012,7 @@ static struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
- 	pos = &dp.end;
- 	memcpy(pos, &END, sizeof(END));
- 
--	dp1 = efi_dp_from_eth();
-+	dp1 = efi_dp_from_eth(dev);
- 	if (!dp1)
- 		return NULL;
- 
-@@ -1029,9 +1031,10 @@ static struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
-  * and an END node.
-  *
-  * @server:	URI of remote server
-+ * @dev:	net udevice
-  * Return:	pointer to HTTP device path, NULL on error
-  */
--struct efi_device_path *efi_dp_from_http(const char *server)
-+struct efi_device_path *efi_dp_from_http(const char *server, struct udevice *dev)
- {
- 	struct efi_device_path *dp1, *dp2;
- 	struct efi_device_path_uri *uridp;
-@@ -1047,10 +1050,11 @@ struct efi_device_path *efi_dp_from_http(const char *server)
- 
- 	efi_net_get_addr(&ip, &mask, NULL);
- 
--	dp1 = efi_dp_from_ipv4(&ip, &mask, NULL);
-+	dp1 = efi_dp_from_ipv4(&ip, &mask, NULL, dev);
- 	if (!dp1)
- 		return NULL;
- 
-+
- 	strcpy(tmp, "http://");
- 
- 	if (server) {
 diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index 68051852dd8..ebb7f4afd3c 100644
+index f65287ad6ab..2fac39ae513 100644
 --- a/lib/efi_loader/efi_net.c
 +++ b/lib/efi_loader/efi_net.c
-@@ -951,6 +951,7 @@ efi_status_t efi_net_register(void)
- 			     &netobj->net);
- 	if (r != EFI_SUCCESS)
- 		goto failure_to_add_protocol;
+@@ -24,12 +24,12 @@
+ #include <vsprintf.h>
+ #include <net.h>
+ 
++#define MAX_NUM_DHCP_ENTRIES 10
+ #define MAX_NUM_DP_ENTRIES 10
+ 
+ const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
+ static const efi_guid_t efi_pxe_base_code_protocol_guid =
+ 					EFI_PXE_BASE_CODE_PROTOCOL_GUID;
+-static struct efi_pxe_packet *dhcp_ack;
+ static void *new_tx_packet;
+ static void *transmit_buffer;
+ static uchar **receive_buffer;
+@@ -61,6 +61,15 @@ static struct wget_http_info efi_wget_info = {
+ };
+ #endif
+ 
++struct dhcp_entry {
++	struct efi_pxe_packet *dhcp_ack;
++	struct udevice *dev;
++	bool is_valid;
++};
 +
- 	if (!net_dp)
- 		efi_net_set_dp("Net", NULL);
- 	r = efi_add_protocol(&netobj->header, &efi_guid_device_path,
-@@ -1078,9 +1079,9 @@ efi_status_t efi_net_set_dp(const char *dev, const char *server)
++static struct dhcp_entry dhcp_cache[MAX_NUM_DHCP_ENTRIES];
++static int next_dhcp_entry;
++
+ /*
+  * The notification function of this event is called in every timer cycle
+  * to check if a new network packet has been received.
+@@ -317,6 +326,7 @@ static efi_status_t EFIAPI efi_net_shutdown(struct efi_simple_network *this)
+ 	eth_set_dev(netobj->dev);
+ 	env_set("ethact", eth_get_name());
+ 	eth_halt();
++
+ 	this->int_status = 0;
+ 	wait_for_packet->is_signaled = false;
+ 	this->mode->state = EFI_NETWORK_STARTED;
+@@ -718,18 +728,28 @@ out:
+  */
+ void efi_net_set_dhcp_ack(void *pkt, int len)
+ {
+-	int maxsize = sizeof(*dhcp_ack);
++	struct efi_pxe_packet **dhcp_ack;
++	struct udevice *dev;
++
++	dhcp_ack = &dhcp_cache[next_dhcp_entry].dhcp_ack;
++
++	/* For now this function gets called only by the current device */
++	dev = eth_get_dev();
  
- 	net_dp = NULL;
- 	if (!strcmp(dev, "Net"))
--		net_dp = efi_dp_from_eth();
-+		net_dp = efi_dp_from_eth(eth_get_dev());
- 	else if (!strcmp(dev, "Http"))
--		net_dp = efi_dp_from_http(server);
-+		net_dp = efi_dp_from_http(server, eth_get_dev());
+-	if (!dhcp_ack) {
+-		dhcp_ack = malloc(maxsize);
+-		if (!dhcp_ack)
++	int maxsize = sizeof(**dhcp_ack);
++
++	if (!*dhcp_ack) {
++		*dhcp_ack = malloc(maxsize);
++		if (!*dhcp_ack)
+ 			return;
+ 	}
+-	memset(dhcp_ack, 0, maxsize);
+-	memcpy(dhcp_ack, pkt, min(len, maxsize));
++	memset(*dhcp_ack, 0, maxsize);
++	memcpy(*dhcp_ack, pkt, min(len, maxsize));
  
- 	if (!net_dp)
- 		return EFI_OUT_OF_RESOURCES;
+-	if (netobj)
+-		netobj->pxe_mode.dhcp_ack = *dhcp_ack;
++	dhcp_cache[next_dhcp_entry].is_valid = true;
++	dhcp_cache[next_dhcp_entry].dev = dev;
++	next_dhcp_entry++;
++	next_dhcp_entry %= MAX_NUM_DHCP_ENTRIES;
+ }
+ 
+ /**
+@@ -1036,7 +1056,7 @@ set_addr:
+ efi_status_t efi_net_register(struct udevice *dev)
+ {
+ 	efi_status_t r;
+-	int i;
++	int i, j;
+ 
+ 	if (!dev) {
+ 		/* No network device active, don't expose any */
+@@ -1123,8 +1143,19 @@ efi_status_t efi_net_register(struct udevice *dev)
+ 	netobj->pxe.set_station_ip = efi_pxe_base_code_set_station_ip;
+ 	netobj->pxe.set_packets = efi_pxe_base_code_set_packets;
+ 	netobj->pxe.mode = &netobj->pxe_mode;
+-	if (dhcp_ack)
+-		netobj->pxe_mode.dhcp_ack = *dhcp_ack;
++
++	/*
++	 * Scan dhcp entries for one corresponding
++	 * to this udevice, from newest to oldest
++	 */
++	i = (next_dhcp_entry + MAX_NUM_DHCP_ENTRIES - 1) % MAX_NUM_DHCP_ENTRIES;
++	for (j = 0; dhcp_cache[i].is_valid && j < MAX_NUM_DHCP_ENTRIES;
++	     i = (i + MAX_NUM_DHCP_ENTRIES - 1) % MAX_NUM_DHCP_ENTRIES, j++) {
++		if (dev == dhcp_cache[i].dev) {
++			netobj->pxe_mode.dhcp_ack = *dhcp_cache[i].dhcp_ack;
++			break;
++		}
++	}
+ 
+ 	/*
+ 	 * Create WaitForPacket event.
 -- 
 2.48.1
 
