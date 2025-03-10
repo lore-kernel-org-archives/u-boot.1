@@ -4,66 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 155D5C282DE
-	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 22:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC1DC282DE
+	for <u-boot@archiver.kernel.org>; Mon, 10 Mar 2025 22:26:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7604680107;
-	Mon, 10 Mar 2025 23:03:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D387B80107;
+	Mon, 10 Mar 2025 23:26:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g8AaBOJP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gC/TUHfD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D629811C1; Mon, 10 Mar 2025 23:03:03 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B331800C1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 23:02:59 +0100 (CET)
+ id F187E80F92; Mon, 10 Mar 2025 23:26:52 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BD960800D7
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 23:26:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52AM2vSR527743
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 10 Mar 2025 17:02:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741644177;
- bh=C6z6LrkAW0gIJo+A6IdVqo7O2hh68lIE+7sN5rqCB0o=;
- h=From:To:CC:Subject:Date;
- b=g8AaBOJPrZ5GR3nejYWyts0Km3VXpvqQb32HILLuiPYXLcO1RsQIvCsX7l9MMI7Oi
- 16iRTecrnDsW6m/Z+g3Mmb9D+1iDMbGSuBEDAltu9Tz0XtO+nXJVZ0RLu70i1RfuxW
- wSPvSLsPyvOHMikvjXzc2ExRD/PCvABUYozvz+HM=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52AM2vS9056178;
- Mon, 10 Mar 2025 17:02:57 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
- Mar 2025 17:02:57 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 10 Mar 2025 17:02:57 -0500
-Received: from uda0271468c (uda0271468c.dhcp.ti.com [128.247.75.68])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52AM2vSt130202;
- Mon, 10 Mar 2025 17:02:57 -0500
-Received: from vishallocal by uda0271468c with local (Exim 4.90_1)
- (envelope-from <vishalm@ti.com>)
- id 1trlD7-0006c3-3U; Mon, 10 Mar 2025 17:02:57 -0500
-From: Vishal Mahaveer <vishalm@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <bb@ti.com>,
- <vigneshr@ti.com>
-CC: Sebin Francis <sebin.francis@ti.com>, Sparsh Kumar <sparsh-kumar@ti.com>
-Subject: [PATCH] board: ti: am62px: rm-cfg: Add support for HC BCDMA
-Date: Mon, 10 Mar 2025 17:02:56 -0500
-Message-ID: <20250310220257.25414-1-vishalm@ti.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2239c066347so83523805ad.2
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 15:26:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741645609; x=1742250409; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZE3WgFoa67VO73QF5xTecRLfibCNfU89OwIDzsUvN0c=;
+ b=gC/TUHfDP/QuoeluOU8tTAjpTMNftTfual+Fc4x94F+yb1smZlkhvJT4eymBsq8mVE
+ QMIF9vGZJPo7eHbzxJ4nTLYTMQu3BV7qR+ZCLJyJ2WeBl0cbSupcgLKDSDlDpiLIeAEZ
+ RJQBslnWZbR7csgiHdtw9eM3pYYE6dk3sGXug=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741645609; x=1742250409;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZE3WgFoa67VO73QF5xTecRLfibCNfU89OwIDzsUvN0c=;
+ b=LAJ/9hgq3IX//qMXpFSXxCv81YGVkvE6wu5BvmOHTGR1kSiIgvzg4EH2a+riTFussm
+ 7eb1vxJktU7Bn8FgEnu/H5OlLPM6wIvUnvViiBWGeuwn0DyaXUUOgQgVXmjlUG+atKsX
+ SjwYypIVBwMmGXLJ/lTDL1Quy3fBFsLcOWMOgYP4xS9lldYYcgX7hAbcz7hh5KgCo0ky
+ h8sEIVllXRr9wu1rcUcHvlKj3+7gXYB+I/urFcuFjo5Up3cyedQUWn+5q3FHSotJNOvd
+ NVS1z6zHjrZosOqIcQoBFLzb4K9dAk2DeDr6IOBNjvWwjQmjDJwavg2jEXTHvpYM/Mau
+ /o8A==
+X-Gm-Message-State: AOJu0YxjjdXr9pMhcpGSZiBybszJebZvL/CcWXRlwdrnLOvv6NEU8LbW
+ pPTlgHRsaP0cLQJ0lpGFcsKMMniGLJ6F9Wcv+a3aUr0TL4Xlh73XOu1d1DfhojQ=
+X-Gm-Gg: ASbGncuIo+T8lNcankqL/5vZ4nrVbT09QIwA613ZUKpArjDQ0g6NISKbotA7iyHWYJp
+ sxnpO8jHVKipa1iMXmNPODnXO4FKoVOcUEZCOrCgFGfLNyy7tEbAzIVvA1cGU79R7NuEoLMao1+
+ wmHAw2JB82p20MkFxn0qVIUA2FHu6uhOJVMX44KWjO6GMrUGoc11XRX+btpjAW59EKdAreF454S
+ QdzhFKewlpCU3LTF1PqSASTtlRZ6VthEKH2KNFdfdUNQVEpy0Z+g/25S0o0C7uk7/WEswmiVJsv
+ xObPBVcZK1nXtgA5yZ5b8wKCPmfLAdL/iaOfnlWw2IQH
+X-Google-Smtp-Source: AGHT+IFyHSGxzBF7849BAPMkSnCNmo1pDCy1NFFH9wlosJovXUH2ccFElpAVRED29gKBW8iYXNeT+g==
+X-Received: by 2002:a05:6a21:394b:b0:1f5:889c:3ccc with SMTP id
+ adf61e73a8af0-1f5889c6dd2mr4519689637.14.1741645609327; 
+ Mon, 10 Mar 2025 15:26:49 -0700 (PDT)
+Received: from [127.0.1.1] ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-736a336010dsm8394138b3a.59.2025.03.10.15.26.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Mar 2025 15:26:48 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Alex Shumsky <alexthreed@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dragan Simic <dsimic@manjaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Janne Grunau <j@jannau.net>, Joe Hershberger <joe.hershberger@ni.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
+ Ramon Fried <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+In-Reply-To: <20241113150938.1534931-8-sjg@chromium.org>
+References: <20241113150938.1534931-1-sjg@chromium.org>
+ <20241113150938.1534931-8-sjg@chromium.org>
+Subject: Re: [PATCH v5 7/8] env: Provide a work-around for unquoting
+ fdtfile
+Message-Id: <174164560690.390216.11166200633277191403.b4-ty@konsulko.com>
+Date: Mon, 10 Mar 2025 16:26:46 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,173 +104,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The first 4 block copy channels and rings on AM62P support
-High Capacity Block Copy. These channels have approximately
-3x improvement over the normal Block copy channels when doing
-DDR-to-DDR copy.
+On Wed, 13 Nov 2024 08:09:37 -0700, Simon Glass wrote:
 
-Currently, during allocation these channels do not have a
-separate interface and are allocated with normal BCDMA channels.
+> Some boards use a CONFIG option to specify the value of this variable.
+> This is normally handled by efi_get_distro_fdt_name() but in the case
+> of sunxi this does not work, since 'soc' is sunxi, but the files are
+> in the allwinner directory.
+> 
+> Provide a work-around for this particular case.
+> 
+> [...]
 
-Latest TIFS and DM firmware adds support for differentiating these
-High Capcity resources. This update is for allocating these new
-resource type to different hosts with below mentioned scheme.
+Applied to u-boot/next, thanks!
 
----------------------     ---------------   -------------  ----------------
-    Resource                   A53_2           MCU_R5          WKUP_R5
----------------------     ---------------   -------------  ----------------
-BCDMA HC CHAN [4]      =>   2 (Primary)     1 (Primary)      1 (Primary)
-BCDMA HC CHAN RING [4] =>   2 (Primary)     1 (Primary)      1 (Primary)
-BCDMA CHAN [4]         =>   18 (Primary)    2 (Primary)      6 (Primary)
-BCDMA CHAN RING[4]     =>   18 (Primary)    2 (Primary)      6 (Primary)
-
-Signed-off-by: Sparsh Kumar <sparsh-kumar@ti.com>
-Signed-off-by: Sebin Francis <sebin.francis@ti.com>
-Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
----
-
-This patch is based on commit 743c15b9fd (Merge patch series "This series
-adds support for file renaming to EFI_FILE_PROTOCOL.SetInfo().") of the next
-branch of U-Boot.
-
- board/ti/am62px/rm-cfg.yaml | 70 +++++++++++++++++++++++++++++++------
- 1 file changed, 59 insertions(+), 11 deletions(-)
-
-diff --git a/board/ti/am62px/rm-cfg.yaml b/board/ti/am62px/rm-cfg.yaml
-index dc445a4b72f..73da85eeade 100644
---- a/board/ti/am62px/rm-cfg.yaml
-+++ b/board/ti/am62px/rm-cfg.yaml
-@@ -244,7 +244,7 @@ rm-cfg:
-             subhdr:
-                 magic: 0x7B25
-                 size: 8
--            resasg_entries_size: 1048
-+            resasg_entries_size: 1112
-             reserved: 0
-     resasg_entries:
-         -
-@@ -303,31 +303,55 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 0
-+            num_resource: 2
-+            type: 1676
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 1
-+            type: 1676
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 1
-+            type: 1676
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 3
-+            num_resource: 1
-+            type: 1676
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 4
-             num_resource: 18
-             type: 1677
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 18
-+            start_resource: 22
-             num_resource: 6
-             type: 1677
-             host_id: 35
-             reserved: 0
-         -
--            start_resource: 18
-+            start_resource: 22
-             num_resource: 6
-             type: 1677
-             host_id: 36
-             reserved: 0
-         -
--            start_resource: 24
-+            start_resource: 28
-             num_resource: 2
-             type: 1677
-             host_id: 30
-             reserved: 0
-         -
--            start_resource: 26
--            num_resource: 6
-+            start_resource: 30
-+            num_resource: 2
-             type: 1677
-             host_id: 128
-             reserved: 0
-@@ -387,31 +411,55 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 0
-+            num_resource: 2
-+            type: 1695
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 1
-+            type: 1695
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 1
-+            type: 1695
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 3
-+            num_resource: 1
-+            type: 1695
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 4
-             num_resource: 18
-             type: 1696
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 18
-+            start_resource: 22
-             num_resource: 6
-             type: 1696
-             host_id: 35
-             reserved: 0
-         -
--            start_resource: 18
-+            start_resource: 22
-             num_resource: 6
-             type: 1696
-             host_id: 36
-             reserved: 0
-         -
--            start_resource: 24
-+            start_resource: 28
-             num_resource: 2
-             type: 1696
-             host_id: 30
-             reserved: 0
-         -
--            start_resource: 26
--            num_resource: 6
-+            start_resource: 30
-+            num_resource: 2
-             type: 1696
-             host_id: 128
-             reserved: 0
+[7/8] env: Provide a work-around for unquoting fdtfile
+      commit: d085e692c98d0d7b57cc577ed9befda159cd4a40
 -- 
-2.43.0
+Tom
+
 
