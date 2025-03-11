@@ -4,63 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71B7C28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 04:44:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E8EC28B2E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 05:18:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB536806D8;
-	Tue, 11 Mar 2025 05:44:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F8E3806D8;
+	Tue, 11 Mar 2025 06:18:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A3NFNMg8";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741670290;
+	bh=5csZkDuhUf6omgUyVCF1rU4n2ZhPig3eBif0vf/9XBw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=nxtbpXhOjsLSiOUTsMkvkNgIG6wE0UbW484adGfcjjT/KzeCvrTRMPPGjoNYphCsd
+	 q3pHan2Ey7bs4Br4XzR7N5Ybep6Ajrwh8ghe2JtsOJEYd0F5uSjZM1uCuUXXLDKKDH
+	 9qQd+DgiF9fNm0nwWmObZfKQCWHQnOsnlMvtGPhZcY6Mj3HRvObFb1L6Fe5I4DUcfA
+	 UbaKTLsJD3ZVrmhJ07+GcannaB0t/DU+OBX8yCDLy7ZIY/1AfqkDu8QvgBHspp25xJ
+	 cn/kAA8DN6wD7Ioy9EaIKtsHnuAGst/+KC0DuIgkgndhtzUa5wX0VWcV3wx3H12VHM
+	 hiszmZFNxELzg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18F80807D7; Tue, 11 Mar 2025 05:44:44 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08581801FB
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 05:44:40 +0100 (CET)
+ id 2C475807D7; Tue, 11 Mar 2025 06:18:10 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A20E8006D
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52B4ibR1605798
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 10 Mar 2025 23:44:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741668277;
- bh=Mec+4IkG77/5TpOVIse0PkqiaIwJsG3ekiPlqFsH/DA=;
- h=From:To:CC:Subject:Date;
- b=A3NFNMg802Kjg43q5d9wo1rNSV4UFRIoKjt+ItDzNUkUfQ/m55dm9IFsJIp7YSA8k
- iyzOuFikQ/4f7pY5Dgq7IqOVCP4nmDuWsdzaj58IGQU5zZfGt9Ce/M2Rlqd+e/gm1p
- yOFcpRFCvVnfOscaEJglMS16KSA6jGuq436+9Q54=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B4ib2X018550;
- Mon, 10 Mar 2025 23:44:37 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
- Mar 2025 23:44:36 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 10 Mar 2025 23:44:36 -0500
-Received: from localhost (a0543016.dhcp.ti.com [172.24.227.225])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B4iahj075551;
- Mon, 10 Mar 2025 23:44:36 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH v2] config: falcon: move CFG_SYS_SPI_* to Kconfig
-Date: Tue, 11 Mar 2025 10:14:12 +0530
-Message-ID: <20250311044414.3155688-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="JN8D3nC/"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 9698210210BC0; Tue, 11 Mar 2025 06:18:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741670286;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=5csZkDuhUf6omgUyVCF1rU4n2ZhPig3eBif0vf/9XBw=;
+ b=JN8D3nC/J3hIVamqVY3DVxn+VAa7wZcoyUaxWenIx3Bh8+ZNLkUFfxNRe30BauHQCoAsDn
+ 9b0f2SLPTNB6JYctvRydktWpnyZ1+91VOFHwYonfEP8M+Qc4/jy6M2y7JHRoEEgb3YlIA0
+ 16r1UOFuubVZc0z2B4F2NIR9LqM8qQAf25d31SDhwZ3lGu+2ukWdkZUmkPLfMf2aipfbR6
+ KfhShkWooYHfcisA8lVmjgnsL6B5wH3hPIoSwwFcm1eYi2Oq3bmS2nauHXCyjht9VrOTVP
+ /GQO9h5OkbTyf8f47cTLlWBnpUD6rAZjPOxHDBejN7wmRNxEudwArzJf5C+faQ==
+Message-ID: <6d8b084c-1a66-82dc-4142-76dd63ad606c@denx.de>
+Date: Tue, 11 Mar 2025 06:18:34 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 1/4] i2c: omap24xx_i2c: Remove unused
+ CONFIG_I2C_REPEATED_START
+Content-Language: en-US
+To: Aniket Limaye <a-limaye@ti.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ virag.david003@gmail.com, stefan.agner@toradex.com, w.egorov@phytec.de,
+ j-keerthy@ti.com, u-kumar1@ti.com
+References: <20250310103702.1464782-1-a-limaye@ti.com>
+ <20250310103702.1464782-2-a-limaye@ti.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250310103702.1464782-2-a-limaye@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,392 +80,31 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CFG_SYS_SPI_* are used in falcon boot to specify the offsets and size of
-the respective payloads. This patch moves them to Kconfig keeping the
-values consistent for each of the affected boards.
+Hello Aniket,
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
-Tested:
- * U-boot CI: https://github.com/u-boot/u-boot/pull/750
-Changes in v2:
- * Spell fixes in commit message and Kconfig help
- * Remove redundant header linux/sizes.h from xea.h
- * Add Reviewed-by tags form Tom Rini and Fabio Estevam
-v1: https://lore.kernel.org/u-boot/20250310133647.2712374-1-anshuld@ti.com/
----
- common/spl/Kconfig                   | 18 ++++++++++++++++++
- common/spl/spl_spi.c                 |  9 +++++----
- configs/am57xx_evm_defconfig         |  3 +++
- configs/am57xx_hs_evm_defconfig      |  3 +++
- configs/am57xx_hs_evm_usb_defconfig  |  3 +++
- configs/display5_defconfig           |  3 +++
- configs/display5_factory_defconfig   |  3 +++
- configs/dra7xx_evm_defconfig         |  3 +++
- configs/dra7xx_hs_evm_defconfig      |  3 +++
- configs/dra7xx_hs_evm_usb_defconfig  |  3 +++
- configs/imx28_xea_defconfig          |  3 +++
- configs/xilinx_zynq_virt_defconfig   |  3 +++
- configs/xilinx_zynqmp_kria_defconfig |  3 +++
- configs/xilinx_zynqmp_virt_defconfig |  3 +++
- include/configs/am57xx_evm.h         | 16 ----------------
- include/configs/display5.h           |  5 -----
- include/configs/dra7xx_evm.h         | 16 ----------------
- include/configs/xea.h                |  8 --------
- include/configs/xilinx_zynqmp.h      |  6 ------
- include/configs/zynq-common.h        |  8 --------
- 20 files changed, 59 insertions(+), 63 deletions(-)
+On 10.03.25 11:36, Aniket Limaye wrote:
+> Remove unused piece of code under CONFIG_I2C_REPEATED_START which does
+> not have any Kconfig entry at all.
+> 
+> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> ---
+>   drivers/i2c/omap24xx_i2c.c | 10 +---------
+>   1 file changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 94e118f8465..21a5cefee7a 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1431,6 +1431,24 @@ config SYS_SPI_U_BOOT_OFFS
- 	 Address within SPI-Flash from where the u-boot payload is fetched
- 	 from.
- 
-+config SYS_SPI_KERNEL_OFFS
-+	hex "Falcon mode: address of kernel payload in SPI flash"
-+	depends on SPL_SPI_FLASH_SUPPORT && SPL_OS_BOOT
-+	help
-+	 Address within SPI-Flash from where the kernel payload is fetched
-+	 in falcon boot.
-+
-+config SYS_SPI_ARGS_OFFS
-+	hex "Falcon mode: address of args payload in SPI flash"
-+	depends on SPL_SPI_FLASH_SUPPORT && SPL_OS_BOOT
-+	help
-+	 Address within SPI-Flash from where the args payload (usually the
-+	 dtb) is fetched in falcon boot.
-+
-+config SYS_SPI_ARGS_SIZE
-+	hex "Falcon mode: size of args payload in SPI flash"
-+	depends on SPL_SPI_FLASH_SUPPORT && SPL_OS_BOOT
-+
- config SPL_THERMAL
- 	bool "Driver support for thermal devices"
- 	help
-diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
-index 691a431a926..00dbd3011f0 100644
---- a/common/spl/spl_spi.c
-+++ b/common/spl/spl_spi.c
-@@ -82,13 +82,14 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- #if CONFIG_IS_ENABLED(OS_BOOT)
- 	if (spl_start_uboot()) {
- 		int err = spl_load(spl_image, bootdev, &load, 0,
--				   CFG_SYS_SPI_KERNEL_OFFS);
-+				   CONFIG_SYS_SPI_KERNEL_OFFS);
- 
- 		if (!err)
- 			/* Read device tree. */
--			return spi_flash_read(flash, CFG_SYS_SPI_ARGS_OFFS,
--					      CFG_SYS_SPI_ARGS_SIZE,
--					      (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
-+			return spi_flash_read(
-+				flash, CONFIG_SYS_SPI_ARGS_OFFS,
-+				CONFIG_SYS_SPI_ARGS_SIZE,
-+				(void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
- 	}
- #endif
- 
-diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
-index d10d2a5940f..0cfad501298 100644
---- a/configs/am57xx_evm_defconfig
-+++ b/configs/am57xx_evm_defconfig
-@@ -41,6 +41,9 @@ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
- CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x1E0000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_SPL_YMODEM_SUPPORT=y
- CONFIG_CMD_ADTIMG=y
- CONFIG_CMD_ABOOTIMG=y
-diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
-index 5cacd7f9cc5..14700d59bdb 100644
---- a/configs/am57xx_hs_evm_defconfig
-+++ b/configs/am57xx_hs_evm_defconfig
-@@ -39,6 +39,9 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x1E0000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_SPL_YMODEM_SUPPORT=y
- CONFIG_CMD_ADTIMG=y
- CONFIG_CMD_ABOOTIMG=y
-diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
-index d865b123b90..634294e4766 100644
---- a/configs/am57xx_hs_evm_usb_defconfig
-+++ b/configs/am57xx_hs_evm_usb_defconfig
-@@ -41,6 +41,9 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x1E0000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_SPL_YMODEM_SUPPORT=y
- CONFIG_CMD_ADTIMG=y
- CONFIG_CMD_ABOOTIMG=y
-diff --git a/configs/display5_defconfig b/configs/display5_defconfig
-index 765920bd5d1..b30b52f068c 100644
---- a/configs/display5_defconfig
-+++ b/configs/display5_defconfig
-@@ -53,6 +53,9 @@ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
- CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x10
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x150000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x10000
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="display5 > "
- CONFIG_SYS_MAXARGS=32
-diff --git a/configs/display5_factory_defconfig b/configs/display5_factory_defconfig
-index 4007c8900ce..9965e00a1d0 100644
---- a/configs/display5_factory_defconfig
-+++ b/configs/display5_factory_defconfig
-@@ -48,6 +48,9 @@ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
- CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x10
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x150000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x10000
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="display5 factory > "
- CONFIG_SYS_MAXARGS=32
-diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
-index 2448befb295..f9cb732357c 100644
---- a/configs/dra7xx_evm_defconfig
-+++ b/configs/dra7xx_evm_defconfig
-@@ -43,6 +43,9 @@ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
- CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x1E0000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_CMD_SPL=y
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
- CONFIG_CMD_NAND=y
-diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
-index f6f00454aaa..81da64be811 100644
---- a/configs/dra7xx_hs_evm_defconfig
-+++ b/configs/dra7xx_hs_evm_defconfig
-@@ -40,6 +40,9 @@ CONFIG_SPL_NAND_ECC=y
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x1E0000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
- CONFIG_CMD_NAND=y
- CONFIG_BOOTP_DNS2=y
-diff --git a/configs/dra7xx_hs_evm_usb_defconfig b/configs/dra7xx_hs_evm_usb_defconfig
-index 850ccd934b7..1d099a56ee8 100644
---- a/configs/dra7xx_hs_evm_usb_defconfig
-+++ b/configs/dra7xx_hs_evm_usb_defconfig
-@@ -39,6 +39,9 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x40000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x1E0000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x140000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_SPL_YMODEM_SUPPORT=y
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
- # CONFIG_CMD_SETEXPR is not set
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 38282e6ea92..348e2735350 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -62,6 +62,9 @@ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x400
- CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x40
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x10000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x100000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x80000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x8000
- CONFIG_SPL_YMODEM_SUPPORT=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=32
-diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
-index 9196a95e88a..7167b9f4bc1 100644
---- a/configs/xilinx_zynq_virt_defconfig
-+++ b/configs/xilinx_zynq_virt_defconfig
-@@ -50,6 +50,9 @@ CONFIG_SPL_OS_BOOT=y
- CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x10000000
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x280000
-+CONFIG_SYS_SPI_ARGS_OFFS=0x200000
-+CONFIG_SYS_SPI_ARGS_SIZE=0x80000
- CONFIG_SYS_MAXARGS=32
- # CONFIG_BOOTM_NETBSD is not set
- CONFIG_CMD_IMLS=y
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index 1a6bd67afb8..269cd4953d1 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -57,6 +57,9 @@ CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x8000000
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x80000
-+CONFIG_SYS_SPI_ARGS_OFFS=0xa0000
-+CONFIG_SYS_SPI_ARGS_SIZE=0xa0000
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_CMD_SMBIOS=y
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index e5e56babf4c..7bb017deec8 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -55,6 +55,9 @@ CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x8000000
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
-+CONFIG_SYS_SPI_KERNEL_OFFS=0x80000
-+CONFIG_SYS_SPI_ARGS_OFFS=0xa0000
-+CONFIG_SYS_SPI_ARGS_SIZE=0xa0000
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_CMD_SMBIOS=y
-diff --git a/include/configs/am57xx_evm.h b/include/configs/am57xx_evm.h
-index aa31f3b05a0..266b77fbf68 100644
---- a/include/configs/am57xx_evm.h
-+++ b/include/configs/am57xx_evm.h
-@@ -37,20 +37,4 @@
- 
- /* CPSW Ethernet */
- 
--/*
-- * Default to using SPI for environment, etc.
-- * 0x000000 - 0x040000 : QSPI.SPL (256KiB)
-- * 0x040000 - 0x140000 : QSPI.u-boot (1MiB)
-- * 0x140000 - 0x1C0000 : QSPI.u-boot-spl-os (512KiB)
-- * 0x1C0000 - 0x1D0000 : QSPI.u-boot-env (64KiB)
-- * 0x1D0000 - 0x1E0000 : QSPI.u-boot-env.backup1 (64KiB)
-- * 0x1E0000 - 0x9E0000 : QSPI.kernel (8MiB)
-- * 0x9E0000 - 0x2000000 : USERLAND
-- */
--#define CFG_SYS_SPI_KERNEL_OFFS      0x1E0000
--#define CFG_SYS_SPI_ARGS_OFFS        0x140000
--#define CFG_SYS_SPI_ARGS_SIZE        0x80000
--
--/* SPI SPL */
--
- #endif /* __CONFIG_AM57XX_EVM_H */
-diff --git a/include/configs/display5.h b/include/configs/display5.h
-index 51fa2b03a2e..1d5cde5ac75 100644
---- a/include/configs/display5.h
-+++ b/include/configs/display5.h
-@@ -29,11 +29,6 @@
-  * 0x1F00000 - 0x2000000 : SPI.factory  (1MiB)
-  */
- 
--/* Below values are "dummy" - only to avoid build break */
--#define CFG_SYS_SPI_KERNEL_OFFS      0x150000
--#define CFG_SYS_SPI_ARGS_OFFS        0x140000
--#define CFG_SYS_SPI_ARGS_SIZE        0x10000
--
- #define CFG_MXC_UART_BASE		UART5_BASE
- 
- /* MMC Configs */
-diff --git a/include/configs/dra7xx_evm.h b/include/configs/dra7xx_evm.h
-index 96dcd731cb6..3c960ca2ce2 100644
---- a/include/configs/dra7xx_evm.h
-+++ b/include/configs/dra7xx_evm.h
-@@ -47,22 +47,6 @@
- 
- #include <configs/ti_omap5_common.h>
- 
--/*
-- * Default to using SPI for environment, etc.
-- * 0x000000 - 0x040000 : QSPI.SPL (256KiB)
-- * 0x040000 - 0x140000 : QSPI.u-boot (1MiB)
-- * 0x140000 - 0x1C0000 : QSPI.u-boot-spl-os (512KiB)
-- * 0x1C0000 - 0x1D0000 : QSPI.u-boot-env (64KiB)
-- * 0x1D0000 - 0x1E0000 : QSPI.u-boot-env.backup1 (64KiB)
-- * 0x1E0000 - 0x9E0000 : QSPI.kernel (8MiB)
-- * 0x9E0000 - 0x2000000 : USERLAND
-- */
--#define CFG_SYS_SPI_KERNEL_OFFS	0x1E0000
--#define CFG_SYS_SPI_ARGS_OFFS	0x140000
--#define CFG_SYS_SPI_ARGS_SIZE	0x80000
--
--/* SPI SPL */
--
- /* NAND support */
- #ifdef CONFIG_MTD_RAW_NAND
- /* NAND: device related configs */
-diff --git a/include/configs/xea.h b/include/configs/xea.h
-index 00d62748733..21454d13d21 100644
---- a/include/configs/xea.h
-+++ b/include/configs/xea.h
-@@ -12,14 +12,6 @@
- #ifndef __CONFIGS_XEA_H__
- #define __CONFIGS_XEA_H__
- 
--#include <linux/sizes.h>
--
--/* SPL */
--
--#define CFG_SYS_SPI_KERNEL_OFFS	SZ_1M
--#define CFG_SYS_SPI_ARGS_OFFS	SZ_512K
--#define CFG_SYS_SPI_ARGS_SIZE	SZ_32K
--
- /* Memory configuration */
- #define PHYS_SDRAM_1			0x40000000	/* Base address */
- #define PHYS_SDRAM_1_SIZE		0x10000000	/* Max 256 MB RAM */
-diff --git a/include/configs/xilinx_zynqmp.h b/include/configs/xilinx_zynqmp.h
-index 13941ba3589..ec78f2ee8ed 100644
---- a/include/configs/xilinx_zynqmp.h
-+++ b/include/configs/xilinx_zynqmp.h
-@@ -194,12 +194,6 @@
- 	"dfu_bufsiz=0x1000\0"
- #endif
- 
--#if defined(CONFIG_SPL_SPI_FLASH_SUPPORT)
--# define CFG_SYS_SPI_KERNEL_OFFS	0x80000
--# define CFG_SYS_SPI_ARGS_OFFS	0xa0000
--# define CFG_SYS_SPI_ARGS_SIZE	0xa0000
--#endif
--
- #ifdef CONFIG_SPL_SYS_MALLOC_SIMPLE
- # error "Disable CONFIG_SPL_SYS_MALLOC_SIMPLE. Full malloc needs to be used"
- #endif
-diff --git a/include/configs/zynq-common.h b/include/configs/zynq-common.h
-index 37c77aa1611..93ae5891a07 100644
---- a/include/configs/zynq-common.h
-+++ b/include/configs/zynq-common.h
-@@ -191,14 +191,6 @@
- 
- /* Not using MMC raw mode - just for compilation purpose */
- 
--/* qspi mode is working fine */
--#ifdef CONFIG_ZYNQ_QSPI
--#define CFG_SYS_SPI_ARGS_OFFS	0x200000
--#define CFG_SYS_SPI_ARGS_SIZE	0x80000
--#define CFG_SYS_SPI_KERNEL_OFFS	(CFG_SYS_SPI_ARGS_OFFS + \
--					CFG_SYS_SPI_ARGS_SIZE)
--#endif
--
- /* SP location before relocation, must use scratch RAM */
- 
- /* 3 * 64kB blocks of OCM - one is on the top because of bootrom */
+Thanks!
+
+Reviewed-by: Heiko Schocher <hs@denx.de>
+
+bye,
+Heiko
 -- 
-2.43.0
-
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
