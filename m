@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDDFC28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 16:50:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B30C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 16:50:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4129581A04;
-	Tue, 11 Mar 2025 17:48:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8EE3B817D3;
+	Tue, 11 Mar 2025 17:48:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gILfyjYi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iI+RyvMk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54825807D7; Tue, 11 Mar 2025 17:48:24 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 90D0381761; Tue, 11 Mar 2025 17:48:26 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0570381B42
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 17:48:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A9C98198A
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 17:48:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2235189adaeso411315ad.0
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 09:48:21 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2240b4de12bso14949845ad.2
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 09:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741711700; x=1742316500; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741711703; x=1742316503; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OnYiv5ooMPKDg+0VINrmCQUX5jypwdmLmYwe0ws2uzw=;
- b=gILfyjYidbvvmK/VcwMrQbb8AdVu7PtrCyJHT4h1jajeuf1b2pk0nolT5aYzLHF4j5
- G1JiHX+7ibjLyj9wMHo1xERjgXYJq4MXlsKFVFTm/mBqxMRd5L57+lhYRGdsj0dIw0u8
- mvaiMsu/+6RsmvmTB/8wtcZiNGjzkw13GlrdzP0nUfyumOq22kEniciGbf2wz4Ycm0cf
- fnOSHMnvAzZ7fnniu+j0I/nA5xt3cgfdKt8qC6HVLN8UMySIqF1AcoQrm7DAjsp6SwfL
- DM6dK0iTtLrOAAiShmBz9FxNGmW2Fi6V8uYo8zuaoJJAcDJ54XEXnYq5Nxb90aof4QR2
- KhWQ==
+ bh=aG+HNgzuMmF0TqQ+6X7W3kmuCHH34omNFQg817X6hLs=;
+ b=iI+RyvMkzDD5JeRWVCM6O6TVFJICGiZ0d3gnCvhrEGoRQ5mgsGfE0bqOZ8XK2XXeBm
+ iaLnTJMGPBeeYZYnBZbsvy5LGzmdkVeBGIeIVRRn6rThyR07NYCvsEFz45gjsKeZ2Bkj
+ o4lugiLA8YrpApdDLVqLFCRiKBGZdA5GfEbTNBBfWD5RCeZpbsXRmfOGWLcKFaaYGuHd
+ eZJt204BfE0Oq2LttEoAG4mwcsf9o7t07UjvbR5CojT3NKm9PGwiumswpbX1+yVruZA5
+ s306fPIqVPEJ+a2ddkkDk4ACI1LsLY1ZVmIFe9Ccdqp9KBjJ7/MCO9tBT7mTjFCMOdgA
+ 6ruA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741711700; x=1742316500;
+ d=1e100.net; s=20230601; t=1741711703; x=1742316503;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OnYiv5ooMPKDg+0VINrmCQUX5jypwdmLmYwe0ws2uzw=;
- b=GgpE3+SKsrZd/KQ5h8VAjvXHnYqy2U0xkGE0bA699Sx31UmwKuv9GIu3gBdcplmxTo
- MKz/HCVYSyorQMyuiDnZ75UuwCwysWny8C/GrsJ6fxlC/tP/l9HqUhUB/BZK1eVauM1y
- KdpS3XyJogLCnt2uYXWfiH4yB5tB+XaGYFwAkkSxeg7PAaKAW2MeMDvCvcdoSpxUTayn
- ay0gbYjVX3jZ7sbhDkye68kEnP8fPU/Kbe4LWLglXVV6XrDNiJMvXKO+tV3UQJ+dkCL2
- RkoZpX9WeMcC++kdNebXxX3uReQq/qygZAF1/1so73MgvxiMxPfBalTs6IGLmbwggfK6
- E8Yg==
-X-Gm-Message-State: AOJu0YwKQ0PD6FxjhBCVaoDO54rjYGlevYPqmO0YjmXNBSgEdzN2PaId
- QwH7d3/oStJBj01CQUUBNqWDHrrnGyZ5zhlkbnz6EcjUGJs/Vh7ha4JvGRsKzFY=
-X-Gm-Gg: ASbGnctkvaRqnoKpxt+oDUsr3jGE2As8IgZzT7Ntw+X9Xe9kGk01csYfv51zVGMLvLn
- UuT45KMfSvvwwhMPi+m3PNP+WH3owcOrhzjGmZBu6ALjfrXOgbgzR5rljeFkBdcFsbshjGfw04e
- B0iI9vxQLiXRKNUes4RI2oFRz3Ifg47IHX45Cu7FpmOHXiFPXcG70Zpet+FJl9H3YhXq0SNCckA
- 7PILJjHzhbzNwhllIxAi/8tf4l7THlDC011c3gVSo/dRI0bmWpA6tuCaazcVeFDPTKhh+9cS7MF
- e6q3cVhjns/0jAkXEdT5z2Nnqqha+3OgEjrkWBbY+ciaZ6KFHy21MMZDNs+Zdkkikg==
-X-Google-Smtp-Source: AGHT+IEL1K5R0IcINHBr0zb2BRbQHVM2USFUh6d/IgJXLBOhnl9RINyxoOfmha3TON6/AsmxZrODgg==
-X-Received: by 2002:a17:902:dacd:b0:21f:98fc:8414 with SMTP id
- d9443c01a7336-22593df9927mr59205995ad.26.1741711700481; 
- Tue, 11 Mar 2025 09:48:20 -0700 (PDT)
+ bh=aG+HNgzuMmF0TqQ+6X7W3kmuCHH34omNFQg817X6hLs=;
+ b=tzNC2G+bdnefa7Oy0BdEVScfM/k+j3gXm/NYUsr9fKJvwOYm/tb1BAyb5eZoIEN8eT
+ NS0FCjfQzgFvQdqlGQdK7QCCruTTsQn3suQrIvqprRn294kh8BIx0M0LWi0Jf+9RsDp4
+ BD0eCNSpZA+9yGHzhZ819DpCJmrBxgo/DMW9Y7x/Lb2B3P7kumFLu835wMc4yIy82SfV
+ n3XXOwzh7GF4lT/+NpKWjCVKZ7SFRYigiIKAVejCR0hBDimfZ8UOpBey/XkI9wwiMZv4
+ 4ptkdydkp8lklB/LarqR6Tkqvt4rcfi/GSDaQDOUWRfjRxJMK10l4bu521+EiKG5AeOy
+ QPaA==
+X-Gm-Message-State: AOJu0Yz4fzLTEAOiVLtktMow7IeR+mP5488IQOT+xMQ2Sm1simsZ3Yun
+ Tpf6aEb9vEVpSdL+h3Rbbgymg8k2BBUP8fCzcG1JbkIlxwK3R6BMKTgdgyMJFCM=
+X-Gm-Gg: ASbGncsMmv845J/8emilFXPYrx+DhVqx9b/vnRnNfeg9uQAcqN85tjKSNFDSsGJI1H/
+ 5KahH2BgKp535jn1qelrs9s4KULWRQOv95KsfR9QgNrjCj0XO62NxY+ICNnlIe03j/mQoa503de
+ x+6r9dfX6ntCOa1IuW7KGMXDXSvvFelLF8fJAdnMw1tTSiYMdCoi9X/OigyVZRBm15DPASY3Vz2
+ OBkeJMxil4sevtD6XDFO9px6Td4ptOxyVi7CQYhjH22C/TXqd6fziFs2VX4tsDbFdW0ZbIjz/rY
+ sq+sVLVufJ2KSsHOHCFv0xmk+bymKGFFu9YMl5rAwxbIzC+fmpsscqc43FV+9SY5bA==
+X-Google-Smtp-Source: AGHT+IGIs1MPFRuH9RCF60w/AZsBVJVMzvr/4BtN5ksmk//vdVcyXcTa+pAPKKPEYXQ4M+I2fgXEwA==
+X-Received: by 2002:aa7:8583:0:b0:736:ab48:ea35 with SMTP id
+ d2e1a72fcca58-736ab48ec80mr18276654b3a.1.1741711702914; 
+ Tue, 11 Mar 2025 09:48:22 -0700 (PDT)
 Received: from adriano.. ([190.215.89.187]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736bf09ae2bsm6941749b3a.74.2025.03.11.09.48.18
+ d2e1a72fcca58-736bf09ae2bsm6941749b3a.74.2025.03.11.09.48.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 09:48:20 -0700 (PDT)
+ Tue, 11 Mar 2025 09:48:22 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, =trini@konsulko.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 13/16] efi_selftest: Add selftest for counting EFI netdevices
-Date: Tue, 11 Mar 2025 13:47:55 -0300
-Message-ID: <20250311164758.421900-14-adriano.cordova@canonical.com>
+Subject: [PATCH 14/16] py/tests: test_efi_selftest: Add test for counting EFI
+ netdevices
+Date: Tue, 11 Mar 2025 13:47:56 -0300
+Message-ID: <20250311164758.421900-15-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250311164758.421900-1-adriano.cordova@canonical.com>
 References: <20250311164758.421900-1-adriano.cordova@canonical.com>
@@ -100,95 +101,38 @@ X-Virus-Status: Clean
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- lib/efi_selftest/Makefile                  |  2 +-
- lib/efi_selftest/efi_selftest_net_device.c | 65 ++++++++++++++++++++++
- 2 files changed, 66 insertions(+), 1 deletion(-)
- create mode 100644 lib/efi_selftest/efi_selftest_net_device.c
+ test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index 17fbfad116f..f7e8f02cb20 100644
---- a/lib/efi_selftest/Makefile
-+++ b/lib/efi_selftest/Makefile
-@@ -51,7 +51,7 @@ efi_selftest_variables_runtime.o \
- efi_selftest_watchdog.o
- 
- obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
--obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
-+obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o efi_selftest_net_device.o
- obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
- obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
- 
-diff --git a/lib/efi_selftest/efi_selftest_net_device.c b/lib/efi_selftest/efi_selftest_net_device.c
-new file mode 100644
-index 00000000000..51963eb328c
---- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_net_device.c
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * efi_selftest_net_device
-+ *
-+ */
+diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
+index 310d8ed294a..af9992a6f7f 100644
+--- a/test/py/tests/test_efi_selftest.py
++++ b/test/py/tests/test_efi_selftest.py
+@@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
+     if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
+         raise Exception('Failures occurred during the EFI selftest')
+     u_boot_console.restart_uboot()
 +
-+#include <efi_selftest.h>
-+#include <net.h>
++@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
++@pytest.mark.buildconfigspec('cmd_dm')
++def test_efi_selftest_count_netdevices(u_boot_console):
++    """Test the EFI net device driver
 +
-+static struct efi_boot_services *boottime;
++    u_boot_console -- U-Boot console
 +
-+/*
-+ * Setup unit test.
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systable:	system table
-+ * Return:	EFI_ST_SUCCESS for success
-+ */
-+static int setup(const efi_handle_t handle,
-+		 const struct efi_system_table *systable)
-+{
-+	efi_uintn_t num_handles;
-+	efi_handle_t *handles;
++    This function counts the number of ETH_UCLASS probed udevices
++    calls the EFI net device selftest to check that the EFI driver
++    sees the same.
++    """
++    u_boot_console.restart_uboot()
++    response = u_boot_console.run_command('dm tree')
++    lines = response.splitlines()[2:]
++    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
 +
-+	boottime = systable->boottime;
-+
-+	num_handles = 0;
-+	boottime->locate_handle_buffer(BY_PROTOCOL, &efi_net_guid,
-+				       NULL, &num_handles, &handles);
-+	efi_st_printf("Detected %u active EFI net devices\n", (unsigned int)num_handles);
-+
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/*
-+ * Execute unit test.
-+ *
-+ *
-+ * Return:	EFI_ST_SUCCESS for success
-+ */
-+static int execute(void)
-+{
-+	return EFI_ST_SUCCESS;
-+}
-+
-+/*
-+ * Tear down unit test.
-+ *
-+ * Return:	EFI_ST_SUCCESS for success
-+ */
-+static int teardown(void)
-+{
-+	int exit_status = EFI_ST_SUCCESS;
-+
-+	return exit_status;
-+}
-+
-+EFI_UNIT_TEST(netdevices) = {
-+	.name = "netdevices",
-+	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
-+	.setup = setup,
-+	.execute = execute,
-+	.teardown = teardown,
-+	.on_request = true,
-+};
++    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
++    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
++    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
++        raise Exception('Failures occurred during the EFI selftest')
 -- 
 2.48.1
 
