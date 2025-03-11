@@ -4,82 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45FEC282DE
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 01:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDF44C282DE
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 01:34:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBB0D80F77;
-	Tue, 11 Mar 2025 02:21:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A43D806D8;
+	Tue, 11 Mar 2025 02:34:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JWl524g5";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741656889;
+	bh=AqENxwpEdjfceYtnTiIO5GsFC6m6wrkOOHxyAWioMrc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=iIS0a3Bx3qaGiwv01tnjcTosb7yn/cESX467IJJ9LvKewfTuFH8wbMSaGuZnQPm8M
+	 JfEPG/8oPbfBhAgDJZ7rF0jJ7ksO4joUX5qSXMK4BRQzIgeF5gN58izKM+dodJ9R47
+	 ozw4dEcKUyhgM+xMZPE51nVUgvni/f+kmPoIuORZEj2oIX4R2CRv2J3hp9xmkzCTjn
+	 uomTjJfuatMQBH4yuHvqJJqroyQAl2s1Z7J3N1QCcxTEpNH07vgF1QeZ7nAQEigYwi
+	 Ax3K7u2kZYNa8P6JyDpxJb2R88z2L1zm87tNl4uBgifasK8jp9H9lQGl/Tdxo50OvQ
+	 8+cMxhsZxZDkw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09C8E81335; Tue, 11 Mar 2025 02:21:42 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C696807D9; Tue, 11 Mar 2025 02:34:47 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7107A806D8
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:21:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82E51801FB
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:34:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2ff784dc055so6385339a91.1
- for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 18:21:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741656098; x=1742260898; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=q+oEaG0tqfqqkQBSrCp4UvP5RaySUFM9HIaOsqI5Qv4=;
- b=JWl524g5K+XdT+7vZonnqTZgXiSPdEU9CoVuzpJxleIB1K6Us+4hQlVAC+lYpbfg+m
- Y9jKGlcJj5X0SSrN51rG9jTlMfUTVjKFMY538NF1f0lJGE4brqYVasuCQTFqCMX6+kHx
- y5xfw85I3ictC5/qSXQznTmIHtafrmiQpm8QI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741656098; x=1742260898;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q+oEaG0tqfqqkQBSrCp4UvP5RaySUFM9HIaOsqI5Qv4=;
- b=QGaDH8grpUXGweV/NcDDnzLiK2xvsLp70Q7fGiV3jOpjYIVHgxNFDG0jobrWIUgp6T
- nDB0Rt59vPA1NH/gsqk0qqC58DcrqnQnHrjTEmjX7tFY92qrbwUPuxccApgu6Yh7QZga
- so1HAaglgsSC2vd3qQ0W4XiAZyJ9cKPKCV59Ujro3qUq98oOoa7f5Sa9IN65KvTltAwu
- nCByBCaGPvnPO+WPs6SllZzi5whV9W6Y8xa1WenPp3wOch7JuFtiApdI3NGwf68pO2ty
- Zp54oITjR6hNrm8adg9aXxDWyq6pnu3UHWbNN40XJ4w1tYV6HJWZNYZuuEBMejgtsc9+
- Cctw==
-X-Gm-Message-State: AOJu0YwNIdxOhETaWBK8fUksJszNLT+CnTouxb46Ds7ZBLUBHCTGvC/8
- k1NIH6RueMmdZCPmvzxk3EN2PW5/3A0TzI7T2K1fdTUmnO/C5LKQvOId12B8zxM=
-X-Gm-Gg: ASbGncur5Z+kGPqc7T7K4EnV7FtnrcMCOI1ItJQ5YPyGhwEVmqj5pAcnewAEerHFTlm
- SWUUoPkyxdU5f60/f4sjD+eLtSX4HA1zvqpmDol1sUWGMRXeq6RxLNbLruvEAP5HytezI3JfFdT
- M+aYa9xEUoSxQZsTp+pBBf3sftXjtqt957NB+hyTXy2EYbTCLoQ36HFWzqzcWt4Jq1RBC9S7CyW
- WbpXOKS2GYeHxKOvPeZy8oX4P8l5UeUd+4PU8qtewYS1stU3g2HEnbMZs7RFZCdPkks1RZjZaPx
- jIvmi5s0tAOsC8niRzJfpU1JbUVxGppLI7z19VFbeYJ6MA==
-X-Google-Smtp-Source: AGHT+IHHPsJSj39dh2cX0VSRMjYK/U3PeNj/VjtKbOVOSGai9j5Izh1BMO10miq9vDD5S4xEXAA1/g==
-X-Received: by 2002:a17:90b:264e:b0:2fe:8c08:88c6 with SMTP id
- 98e67ed59e1d1-300ff0a9d81mr2548924a91.7.1741656097966; 
- Mon, 10 Mar 2025 18:21:37 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ff693e7fb5sm9797965a91.37.2025.03.10.18.21.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 18:21:37 -0700 (PDT)
-Date: Mon, 10 Mar 2025 19:21:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
- u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2025.04-rc4 released
-Message-ID: <20250311012134.GR2640854@bill-the-cat>
-References: <20250310233215.GP2640854@bill-the-cat>
- <5b90d598-8b82-49d1-aba1-c6e70ba447c2@denx.de>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="FmalLjb5"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E4DD510210BC0; Tue, 11 Mar 2025 02:34:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741656884; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=AqENxwpEdjfceYtnTiIO5GsFC6m6wrkOOHxyAWioMrc=;
+ b=FmalLjb5ELFApmOOpbqX88qsnHC6aB1RIYM7aMT6n9VCch/eOLa/xXDKjEIlOi3NTsyb48
+ TYsfgaY/pzwGwrfCieYO5P7N84nV9qnoiyz9PRA4Nk2oAjtN8KUK6dbio1ZuyeHDSlhlCU
+ bgF5C1tW3iJahu9lpFhawV+T9tpvAD9TcOcY3WNoR1R7Ivdi7JHn3eUrj18wm+eZkVuVXt
+ wwvZaYqYixEsSP4AiiBLUYvxzD0eyut/Tu6P/UmvubF/w/q7YtdxCmbRKCUm4bFmjh8arG
+ CUUbDg1ID5hZsvCbLMGPJ8RzMgrG2HLivGYMECVH379+tq1zbBrn1iOqEhcTSQ==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH] ARM: dts: imx: Drop bogus regulator extras on DH i.MX6 DHCOM
+ DRC02
+Date: Tue, 11 Mar 2025 02:34:18 +0100
+Message-ID: <20250311013430.510151-1-marex@denx.de>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jXeXgiW2sNMIEhoo"
-Content-Disposition: inline
-In-Reply-To: <5b90d598-8b82-49d1-aba1-c6e70ba447c2@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,53 +77,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The regulator extras should be placed in the USB H1 regulator node,
+the /regulator-usb-h1-vbus. They are already present there in the
+upstream DT, so delete this bogus node entirely.
 
---jXeXgiW2sNMIEhoo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/dts/imx6qdl-dhcom-u-boot.dtsi | 5 -----
+ 1 file changed, 5 deletions(-)
 
-On Tue, Mar 11, 2025 at 01:44:03AM +0100, Marek Vasut wrote:
-> On 3/11/25 12:32 AM, Tom Rini wrote:
-> > Hey all,
->=20
-> Hi,
->=20
-> > So it's release day and I have tagged and pushed things out. This will
-> > be merged to -next shortly.
-> >=20
-> > Continuing on with what I started after the -rc1 release, we had a call
-> > today and the link was
-> > https://calendar.google.com/calendar/event
->=20
-> Maybe it would be good to inform people BEFORE the call rather than AFTER
-> the call ? I would've actually liked to join ...
+diff --git a/arch/arm/dts/imx6qdl-dhcom-u-boot.dtsi b/arch/arm/dts/imx6qdl-dhcom-u-boot.dtsi
+index 740a24d96ec..300e355c8ef 100644
+--- a/arch/arm/dts/imx6qdl-dhcom-u-boot.dtsi
++++ b/arch/arm/dts/imx6qdl-dhcom-u-boot.dtsi
+@@ -27,11 +27,6 @@
+ 	};
+ };
+ 
+-&reg_usb_otg_vbus {
+-	gpio = <&gpio3 31 GPIO_ACTIVE_HIGH>;
+-	enable-active-high;
+-};
+-
+ &wdog1 {
+ 	bootph-pre-ram;
+ };
+-- 
+2.47.2
 
-Sigh. Yes, I edit the emails. Last release I messed up and didn't send
-the rc notice the right day. This release I got the day correct, but
-missed this part. I did not miss the part where I updated the meeting
-time to note it's tomorrow. They also continue to be the day after the
-release, Tuesdays. Sorry for the confusion.
-
---=20
-Tom
-
---jXeXgiW2sNMIEhoo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfPkBcACgkQFHw5/5Y0
-tyzl3wv8CHeYoywwen0PZ+isHBW3hIjiwjuNMVis9fA1TAY5noe39SWB5WEtQaiA
-DUFI3uxdXjwqsPeqzGHBpSengT+WdlaHsWAeJuBQsz/Ea39vhjxS78R+cKm2pG4A
-2BfT5LAWlQ9nWalZwX+sGxp5/lIPTRM/0aizFWaFeYhBfmz2kc9xZdBG6Coq6baH
-wdalJMr9barHhPl/8Vqz/tji8qRLd0attB+XQZ7jXL0sqsfP2IDDQ9ZWQIx/eL/T
-oCPm7Jl2feiamx4XQJTAHKATn9q/Mszhc2TLqLWdSAu78ZDNj8GiX8nuMQNXBsH6
-aUj5dsDz2gj9DaKvA4wCq3KN2bhQ0tr99kYSZkL7sTlUsnl1k1Jim3Lf6CaG0zDH
-9hNmXjcoaNdbv41jIcfPpjIWv9OjFzHtdPMpLysqii9JKNOM53FoQqBXm0RZ05ja
-9EwIWwwAgMwhMr2uzBSArRLFI+LeWlg3h8QzVnYfm/P3MvIbb8O+oeb3976lLn9c
-LZOf8MxX
-=Ms6J
------END PGP SIGNATURE-----
-
---jXeXgiW2sNMIEhoo--
