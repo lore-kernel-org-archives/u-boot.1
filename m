@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BDEC282DE
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 01:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DD9C28B30
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 01:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1A9981335;
-	Tue, 11 Mar 2025 02:39:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39099817A5;
+	Tue, 11 Mar 2025 02:39:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="bCRosA1K";
+	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="jOmF51f+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEFEE80F77; Tue, 11 Mar 2025 02:39:03 +0100 (CET)
-Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
+ id 3EBED8144F; Tue, 11 Mar 2025 02:39:06 +0100 (CET)
+Received: from mail.per1cycle.org (unknown [IPv6:2a01:4f8:c013:8d4e::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0E39801FB
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 047BB801FB
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:39:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 72C6B40044; Tue, 11 Mar 2025 01:38:54 +0000 (UTC)
+ with ESMTPSA id AE99340281; Tue, 11 Mar 2025 01:39:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
- s=dkim; t=1741657139;
+ s=dkim; t=1741657143;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=brRkq0c+rb9smOca4eiu+BbIkk+puJtnya6YV87doaM=;
- b=bCRosA1Kbh4bvE0WQBtdgw/LQSmpzFV5WjM4U319XUy/0KphrTuTv2hbbPAgUamS1xmF4Z
- tXzsnWfMNmIuDdwE0Lcz5OKSf5kcAlwjb3PWNntnvFVNq0Kxjy5lupOtJVJN8McxOZTbq7
- BVxyVEKaop5EdIiXMdQkLMZnGJi1+L91/h94EwShpW3l89hDH1TxXCnK8qtVKYozINO430
- fU6qtd9BIZQ61PjYT03HTYHNKaOYQX15xe02KEXzBCI2yD066+zU3tiWC73nf13+PLOsZ5
- 0DZp04iCIbppnHG9g1NZmOWTvCndfUH2y5lr7/9Vm45qIytYYnrTpypQvIAkiw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bBd47xikpJ7U5B4/ab3Q6CxkrkEhMalGg06GP1xIsPQ=;
+ b=jOmF51f+ETQo79uJrunyqOBeGfJsz1C+zlL5xxJ8EwWWWGOjHGpwKM0yjjFtZMt0BrAuc/
+ GQR1LHWr5Tmjsql3yoSHRaTIzUt+bB0JG5bT5yX3bch6HJSZFdYPaKolJGDPG+UpQf8WAy
+ jtwwWKvvIV3SEVi5qf2mgkyx9X/v1SMjcIYQkOjmcR/n8AAIW+TExUTORSxL5QbkhciSaz
+ 00O+sxEs3TZSXcOrLwFTbyiyk4aTJRI1FA9Wb3NVL/+60K/cO91e2q+q2PoXSFap25c+Zl
+ +Jdh78mUbEWdq8cAuvh2GaWt38uQs3M2DTLmvY7LruRVWdw+Jm0thOqNAiTIzw==
 From: Huan Zhou <me@per1cycle.org>
-Subject: [PATCH v2 0/4] Add k1 reset driver for bananapi-bpif3 platform.
-Date: Tue, 11 Mar 2025 09:38:47 +0800
-Message-Id: <20250311-reset-k1-v2-0-8a838752c265@per1cycle.org>
+Date: Tue, 11 Mar 2025 09:38:48 +0800
+Subject: [PATCH v2 1/4] riscv: dt-binding: k1: Add reset driver binding
+ definition.
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACeUz2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
- vPSU3UzU4B8JSMDI1MDYwML3aLU4tQS3WxDXXNz4+QUS+M0U2NjcyWg8oKi1LTMCrBR0bG1tQC
- szta1WgAAAA==
-X-Change-ID: 20250308-reset-k1-773cd93f5337
+Message-Id: <20250311-reset-k1-v2-1-8a838752c265@per1cycle.org>
+References: <20250311-reset-k1-v2-0-8a838752c265@per1cycle.org>
+In-Reply-To: <20250311-reset-k1-v2-0-8a838752c265@per1cycle.org>
 To: u-boot <u-boot@lists.denx.de>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Tom Rini <trini@konsulko.com>, Yixun Lan <dlan@gentoo.org>, 
  Huan Zhou <me@per1cycle.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1741657131; l=1203;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1741657131; l=3789;
  i=me@per1cycle.org; s=20241231; h=from:subject:message-id;
- bh=lHbqfGBv74tYckkraHD//4Yt6tzH7oqp0a/gQdgdKs0=;
- b=EMcSN8dEv0xAGM3CcMUpJ5bwcKlo3fO8HQsEOT6fn98FWRc6Kq/Qy41oE3S7ptszycj0YCQQC
- LTNSln5NkVkCp9tlTs03gc9ajfACtVU9EQo53wwwMr1rg0+qhSwlCUS
+ bh=+weZXHAcepz3h/PMmiQkg+Lf/VDn53AF08/EpcIkkJ0=;
+ b=JjDzpKdMumqTzT1W4BPPNKxDBljKVoET2Cqnx/rqaC/28wIyGfsa0ljrJ4fDyVLrWpjxn1xyx
+ w477QFbTdS7AVDhXaQip5x75dGdRmJpylETV9m11Sgb1u3KQme5zc3o
 X-Developer-Key: i=me@per1cycle.org; a=ed25519;
  pk=LfN2kXe1uCRoaEzAJ8quXuPIH4MiEnZHOCRZwGytJwE=
 X-Last-TLS-Session-Version: TLSv1.3
@@ -77,35 +77,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add device tree bindings and basic reset controller driver for the
-BananaPi F3 board.This initial implementation supports the core reset 
-functionality.
-
-Changed in v2:
-- fixed checkpatch error/warning.
-- Links to v1: https://lore.kernel.org/u-boot/20250304-reset-k1-v1-0-dc9510ff1113@per1cycle.org/
+Add dt-binding for reset driver.
 
 Signed-off-by: Huan Zhou <me@per1cycle.org>
 ---
-Huan Zhou (4):
-      riscv: dt-binding: k1: Add reset driver binding definition.
-      riscv: reset: k1: Add reset driver
-      riscv: dts: k1: add reset controller node in device tree
-      Add reset config options for k1
+ include/dt-bindings/reset/spacemit-k1-reset.h | 118 ++++++++++++++++++++++++++
+ 1 file changed, 118 insertions(+)
 
- arch/riscv/cpu/k1/Kconfig                     |   1 +
- arch/riscv/dts/k1.dtsi                        |  15 +
- configs/bananapi-f3_defconfig                 |   1 +
- drivers/reset/Kconfig                         |   7 +
- drivers/reset/Makefile                        |   1 +
- drivers/reset/reset-spacemit-k1.c             | 548 ++++++++++++++++++++++++++
- include/dt-bindings/reset/spacemit-k1-reset.h | 118 ++++++
- 7 files changed, 691 insertions(+)
----
-base-commit: cf6354ab23bfc3337b1087d243e6be4af48abe84
-change-id: 20250308-reset-k1-773cd93f5337
+diff --git a/include/dt-bindings/reset/spacemit-k1-reset.h b/include/dt-bindings/reset/spacemit-k1-reset.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..74db58b27ef875aa2cfe99bd28ed959116b46536
+--- /dev/null
++++ b/include/dt-bindings/reset/spacemit-k1-reset.h
+@@ -0,0 +1,118 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2022 Spacemit Inc.
++ * Copyright (C) 2025 Huan Zhou <pericycle.cc@gmail.com>
++ */
++
++#ifndef __DT_BINDINGS_RESET_SAPCEMIT_K1_H__
++#define __DT_BINDINGS_RESET_SAPCEMIT_K1_H__
++/* APBC */
++#define	RESET_UART1   1
++#define	RESET_UART2   2
++#define	RESET_GPIO    3
++#define	RESET_PWM0    4
++#define	RESET_PWM1    5
++#define	RESET_PWM2    6
++#define	RESET_PWM3    7
++#define	RESET_PWM4    8
++#define	RESET_PWM5    9
++#define	RESET_PWM6    10
++#define	RESET_PWM7    11
++#define	RESET_PWM8    12
++#define	RESET_PWM9    13
++#define	RESET_PWM10   14
++#define	RESET_PWM11   15
++#define	RESET_PWM12   16
++#define	RESET_PWM13   17
++#define	RESET_PWM14   18
++#define	RESET_PWM15   19
++#define	RESET_PWM16   20
++#define	RESET_PWM17   21
++#define	RESET_PWM18   22
++#define	RESET_PWM19   23
++#define	RESET_SSP3    24
++#define	RESET_UART3   25
++#define	RESET_RTC     26
++#define	RESET_TWSI0   27
++#define	RESET_TIMERS1 28
++#define	RESET_AIB     29
++#define	RESET_TIMERS2 30
++#define	RESET_ONEWIRE 31
++#define	RESET_SSPA0   32
++#define	RESET_SSPA1   33
++#define	RESET_DRO     34
++#define	RESET_IR      35
++#define	RESET_TWSI1   36
++#define	RESET_TSEN    37
++#define	RESET_TWSI2   38
++#define	RESET_TWSI4   39
++#define	RESET_TWSI5   40
++#define	RESET_TWSI6   41
++#define	RESET_TWSI7   42
++#define	RESET_TWSI8   43
++#define	RESET_IPC_AP2AUD  44
++#define	RESET_UART4   45
++#define	RESET_UART5   46
++#define	RESET_UART6   47
++#define	RESET_UART7   48
++#define	RESET_UART8   49
++#define	RESET_UART9   50
++#define	RESET_CAN0    51
++
++/* MPMU */
++#define	RESET_WDT     52
++
++/* APMU */
++#define	RESET_JPG        53
++#define	RESET_CSI        54
++#define	RESET_CCIC2_PHY  55
++#define	RESET_CCIC3_PHY  56
++#define	RESET_ISP        57
++#define	RESET_ISP_AHB    58
++#define	RESET_ISP_CI     59
++#define	RESET_ISP_CPP    60
++#define	RESET_LCD        61
++#define	RESET_DSI_ESC    62
++#define	RESET_V2D        63
++#define	RESET_MIPI       64
++#define	RESET_LCD_SPI    65
++#define	RESET_LCD_SPI_BUS  66
++#define	RESET_LCD_SPI_HBUS 67
++#define	RESET_LCD_MCLK     68
++#define	RESET_CCIC_4X      69
++#define	RESET_CCIC1_PHY    70
++#define	RESET_SDH_AXI      71
++#define	RESET_SDH0         72
++#define	RESET_SDH1         73
++#define	RESET_USB_AXI      74
++#define	RESET_USBP1_AXI    75
++#define	RESET_USB3_0       76
++#define	RESET_QSPI         77
++#define	RESET_QSPI_BUS     78
++#define	RESET_DMA          79
++#define	RESET_AES          80
++#define	RESET_VPU          81
++#define	RESET_GPU          82
++#define	RESET_SDH2         83
++#define	RESET_MC           84
++#define	RESET_EM_AXI       85
++#define	RESET_EM           86
++#define	RESET_AUDIO_SYS    87
++#define	RESET_HDMI         88
++#define	RESET_PCIE0        89
++#define	RESET_PCIE1        90
++#define	RESET_PCIE2        91
++#define	RESET_EMAC0        92
++#define	RESET_EMAC1        93
++
++/* APBC2 */
++#define	RESET_SEC_UART1    94
++#define	RESET_SEC_SSP2     95
++#define	RESET_SEC_TWSI3    96
++#define	RESET_SEC_RTC      97
++#define	RESET_SEC_TIMERS0  98
++#define	RESET_SEC_KPC      99
++#define	RESET_SEC_GPIO     100
++#define	RESET_NUMBER       101
++
++#endif
 
-Best regards,
 -- 
-Huan Zhou <me@per1cycle.org>
+2.39.5
 
