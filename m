@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3029C28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:15:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 952F4C28B2E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44F20819AA;
+	by phobos.denx.de (Postfix) with ESMTP id 9412681A02;
 	Tue, 11 Mar 2025 14:13:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="kMb49aTD";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MHs/+t5Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D7B181870; Tue, 11 Mar 2025 11:33:16 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id E148F81875; Tue, 11 Mar 2025 11:33:16 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C32F180F92
+ by phobos.denx.de (Postfix) with ESMTPS id CD58581335
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5e5deb6482cso8473587a12.1
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5e56b229d60so11464608a12.0
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689182; x=1742293982;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689185; x=1742293985;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3lqtvDm4+O4sf9DSJGdtegrsVy+d4ValpI/hJRKJBwY=;
- b=kMb49aTDQMhp6TVEOA4tmtFOuyKMFtKHJQfxBxqJ7KLvsfBZGqMfEQYwPz8m1O09Ah
- TFcQJtidZwJo/OGi8rv43SbfCrHUBRUxmMLc2RiUhtgywhxqwtCYuUILENivYRT0GOH1
- DRW6dpNCXvn2gi1ul/WHwbb1Mxo32qnZjq5jgaVGMEONd/xLtiBXfk14U1psSRigmr1N
- G4LDNUKu2tYfqVRg+Yd7q4T9Kyfz1F0Wue9kMax6wak7LMU09fdMQuEj+e+Gk+r/mOQl
- 0NXtXuDGs6MpfgUwHFxm7+xvnfofrov9FBSUKZo3LsN2hah99Hx+6B3wqikD7U5/3ZhV
- omKA==
+ :reply-to; bh=YC/IBcNwbXUuXsQy3U6gg2aohdcL33lcUmQx2355Vjk=;
+ b=MHs/+t5ZlkDlo5+oZeMOWODV+Sxfx3b6q82EDudYEDRAaDOKHHXA1fU3ncaf1hGLfx
+ 2rgSDEAmhShoCoIW9f6FXlrDZIUDN3ZINONB9OWJa8NJDaGUGoCHpWbWzVlD8gDjLcgR
+ C2DE0nrhXDYSoC9eyYPGXpAw1OzXtnN2GwMWsfNcb2Wc7p2OyYJE/+ZiOOEbHtCi6okz
+ 0vMuhRjC+UA/sLlZ5/wIBPTKyQud4ZbunMI5NMBCCkdeXstRtabhUEHLFw5WYG806cNK
+ 0paDks8b7LlDvVWxTbQiv916ebW5liq25fj9LWKZIwgqOWOQivFuj0JIV41B+0KG+93I
+ amxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741689182; x=1742293982;
+ d=1e100.net; s=20230601; t=1741689185; x=1742293985;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3lqtvDm4+O4sf9DSJGdtegrsVy+d4ValpI/hJRKJBwY=;
- b=BRdnVrFku8TIIIl3IG+/sXQd4oONh+tZkCU5/YhXTHD5nIzExdBG8scNgmgWr5p/wt
- dpmUZmGW7lNhANpNbaOWTxqhsfTIrfeET3DQGZlMKmeXD4xZk1sqhNCr+dbQZ8RRq8QW
- yJ0xb0kZ6ek1Z8ASQPG3LOLlv7jH1USjWv8mNwLTGz+kcLWTcGTUcJJmFMTnwqIdc/6Z
- MOziwcyrktYQP+/Xw6VX/6zV3lsYdOuezsq3RaQW2ySOVfRiS9Vc1VESEr8eHtLYqiCB
- RwxMi5BLbvEgORE1mks20koDV2X1cy13/v0kMRX9+5ERuYKFsHBzFXVkiQh1ryQ2RkAV
- 7Bew==
-X-Gm-Message-State: AOJu0YxV985tWTTcvfFx1QginPL2yGpEfgW3o952KTeSwjciNTrvvjKc
- Ej9yf0ixD3HgBXbIJ+CV7jFPKYyWBPgQbAknifyvnQwSJgjZCiv/QpLtnIMCF8NXnHWJFmbjdzt
- 7
-X-Gm-Gg: ASbGnctenlb3hblmNdxAK/+Mk9E7Dl1CRBqXZxjpmoEzTtkDQLSzlgDnQdn1y7LuIyu
- XEHlSS1m+6Py5M9QAtFP7GBggmY8wEvwnXVbjiN5p7ay/+gwun07rpDjXxOm4SAPYnOYWxCZOTu
- F0cps0pUcTtVBf2QX8uZOWD6y1Il5qrHRUIp/7w0G28e8PnCR5OKNKIUa/IjwZ1lAhNxJsNJEur
- rZ7OL1xt/rC2H9frAqJvOCXOIH9SejLMVZGmZpL7Tj9XzehKr1p67qZWfT4B9FdHaIHWk8H99g3
- F164Q9x5w0vHbDxeM5uX+Sr2CthqGT2+ERa+ypf2
-X-Google-Smtp-Source: AGHT+IH2DfDmcgXfhHTficswLOTFJvy9m9MisSCnS4ZKSWQceBPbgA8WcPsdQPVFYVDyNUPcpjqpSA==
-X-Received: by 2002:a05:6402:2109:b0:5e0:752a:1c7c with SMTP id
- 4fb4d7f45d1cf-5e76250f713mr2849939a12.1.1741689182017; 
- Tue, 11 Mar 2025 03:33:02 -0700 (PDT)
+ bh=YC/IBcNwbXUuXsQy3U6gg2aohdcL33lcUmQx2355Vjk=;
+ b=p3bY2wlp18g8SkWuKmuHPa9cIL5jHhyxbf2MJNLLpsKFCV3rMOWEmDt9FH2oClFLqi
+ 4PZWN9GWeWyfheduuY3Y4sH5FXOKolMNlNTuVp96UqltbVS6vOI2QP+Eo3sYFoa/LJVe
+ QuIl6JEOwT+LXBw8Z7ciqhGL7+S0Q7Tq+Voull3QOZjrGP8+4pKgTGjjA6tR5/ZPGFXu
+ UHXVMgFV6aE4GQJ4XIhQmFHW/XdeTFSsTsHWivxtTatpnS4MwdGGxcfC23jHcAQTMD83
+ h+5w21bwfFeNYdiOkxIcOfxrEEYeSB0OjvLPYrqfute5vNV//QwUc9FsznXUSeYS43nw
+ KhuA==
+X-Gm-Message-State: AOJu0YyjyucbzMY3ja6yjCTTM0rqUjaKrMZWVGAL44uzWM/uemTTlocc
+ gmZS5aOW4wo26ozT9JV5h/AepDNiSeLTz17yXaxBXsMD0m8OQn8PBPfYUG6VWOOIO6FLSVyzm0B
+ 1
+X-Gm-Gg: ASbGncv3JKqDzMUXB4FPviQB3RL11djP4KgA6g5vuug1W60+DqgYgOL0JffDJzsr0HV
+ eDoLxM+zU05rzb5XwwkJWjShj5eO9D49Ymug2FD/wYQP4iygwfsxMeQv/UV3EZdG3HgxiSr4F4q
+ uvIh0q35mTtkp5DW5LEPfePukaP77n5L51E4UeH+EchOgNnUW3B2k72sPqPmjp728KeJGwLekXm
+ scl1/qtEA+jSG1NpfnHCoKIu+FADGsb1Tt/S8O+m4IxWg11WsIArhsRIrElhGU8Xp4SlYlqGojZ
+ +i7kycLBKofBsUXImPazZsRdre4v6X+rThx+HXHT
+X-Google-Smtp-Source: AGHT+IGQ0V9Q8rqoKugUD5xjkvsSs7RqCMFBoEyvMVWg599k8M6o4WzxRXmjMCXk0siTU3WevnD3Uw==
+X-Received: by 2002:a17:907:cb21:b0:ac2:26a6:febf with SMTP id
+ a640c23a62f3a-ac2ba563dadmr248109466b.20.1741689185108; 
+ Tue, 11 Mar 2025 03:33:05 -0700 (PDT)
 Received: from localhost ([2001:4090:a247:83e0:938:b3cb:2c1b:889c])
  by smtp.gmail.com with UTF8SMTPSA id
- 4fb4d7f45d1cf-5e5c766a16esm8089052a12.60.2025.03.11.03.33.01
+ 4fb4d7f45d1cf-5e5c733f69csm8041155a12.1.2025.03.11.03.33.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 03:33:01 -0700 (PDT)
+ Tue, 11 Mar 2025 03:33:04 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Tue, 11 Mar 2025 11:30:53 +0100
-Subject: [PATCH 14/19] arm64: dts: ti: k3-am62p5-sk: Enable IPC with remote
- processors
+Date: Tue, 11 Mar 2025 11:30:56 +0100
+Subject: [PATCH 17/19] arm: dts: k3-am62p: Add r5 device nodes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-14-666de9c105cb@baylibre.com>
+Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-17-666de9c105cb@baylibre.com>
 References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
@@ -85,16 +84,14 @@ Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>,
  Kevin Hilman <khilman@baylibre.com>, Dhruva Gole <d-gole@ti.com>, 
  Sebin Francis <sebin.francis@ti.com>, Kendall Willis <k-willis@ti.com>, 
  Akashdeep Kaur <a-kaur@ti.com>, 
- Markus Schneider-Pargmann <msp@baylibre.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla <hnagalla@ti.com>, 
- Judith Mendez <jm@ti.com>
+ Markus Schneider-Pargmann <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2779; i=msp@baylibre.com;
- h=from:subject:message-id; bh=XyNWv0yqVZEcb6Uv1GMbO/c0Dl/hwgZYgzN7oMzKKHs=;
- b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCBoeS1iz9Olvm6frlkYF35r6yMn9zIaZrZ+any0Iv
- HhiFo9JbUcpC4MYB4OsmCLL3Q8L39XJXV8Qse6RI8wcViaQIQxcnAIwkVgdRoYPgWV8X6K3H/1y
- zLY3M+tFYpM9U5+h2R25O1rHG8qTGu8wMuz6cGpH290mZ36ZA9s9wzY/rLv0rTRKwfLZ28xY9cD
- 5c5kB
+X-Developer-Signature: v=1; a=openpgp-sha256; l=950; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=Q+gVDEd7CdFr7Ul+S0GGAqyf/NS1Jv1HZohmT+hppSc=;
+ b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCDo87xWp5l33+/DVRr5pdhpzb9066/Hh/H7P1M7yJ
+ Y8sXM/c7ShlYRDjYJAVU2S5+2Hhuzq56wsi1j1yhJnDygQyhIGLUwAmUviU4X/CA/Gz7y+/m75Y
+ v2Le4p+6QarvH7B/2JB+9caTKzHL5mU2MPxPPVIiKvf4kOi84gnJ+UfeM/bck5/s8Us9R9hx3lL
+ eiZxsAA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 11 Mar 2025 14:13:18 +0100
@@ -114,98 +111,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Devarsh Thakkar <devarsht@ti.com>
+These are needed in SPL to be able to resume from DDR immediately after
+booting from IO+DDR.
 
-For each remote proc, reserve memory for IPC and bind the mailbox
-assignments. Two memory regions are reserved for each remote processor.
-The first region of 1MB of memory is used for Vring shared buffers
-and the second region is used as external memory to the remote processor
-for the resource table and for tracebuffer allocations.
-
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-Signed-off-by: Judith Mendez <jm@ti.com>
-Link: https://lore.kernel.org/r/20250210221530.1234009-7-jm@ti.com
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- dts/upstream/src/arm64/ti/k3-am62p5-sk.dts | 50 ++++++++++++++++++++++++++----
- 1 file changed, 44 insertions(+), 6 deletions(-)
+ arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts b/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts
-index 7f3dc39e12bc9ca4a746ff092f946b84a36404b3..37ff0dc54ba8eea4197079b04ada032dd73119d4 100644
---- a/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts
-+++ b/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts
-@@ -48,6 +48,30 @@
- 		#size-cells = <2>;
- 		ranges;
- 
-+		mcu_r5fss0_core0_dma_memory_region: mcu-r5fss-dma-memory-region@9b800000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9b800000 0x00 0x100000>;
-+			no-map;
-+		};
-+
-+		mcu_r5fss0_core0_memory_region: mcu-r5fss-memory-region@9b900000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9b900000 0x00 0xf00000>;
-+			no-map;
-+		};
-+
-+		wkup_r5fss0_core0_dma_memory_region: r5f-dma-memory@9c800000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9c800000 0x00 0x100000>;
-+			no-map;
-+		};
-+
-+		wkup_r5fss0_core0_memory_region: r5f-memory@9c900000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9c900000 0x00 0x1e00000>;
-+			no-map;
-+		};
-+
- 		secure_tfa_ddr: tfa@9e780000 {
- 			reg = <0x00 0x9e780000 0x00 0x80000>;
- 			no-map;
-@@ -57,12 +81,6 @@
- 			reg = <0x00 0x9e800000 0x00 0x01800000>; /* for OP-TEE */
- 			no-map;
- 		};
--
--		wkup_r5fss0_core0_memory_region: r5f-dma-memory@9c900000 {
--			compatible = "shared-dma-pool";
--			reg = <0x00 0x9c900000 0x00 0x01e00000>;
--			no-map;
--		};
+diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+index cf087c6e343a8af6f4bb2093bb6c3f28395a2686..8c2b198dede03fd77f16786f8743313a34902e46 100644
+--- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+@@ -11,8 +11,28 @@
+ 		stdout-path = "serial2:115200n8";
+ 		tick-timer = &main_timer0;
  	};
- 
- 	vmain_pd: regulator-0 {
-@@ -634,6 +652,26 @@
- 	};
++
++	reserved-memory {
++		bootph-pre-ram;
++	};
++};
++
++&wkup_r5fss0_core0_memory_region {
++	bootph-pre-ram;
++};
++
++&cbass_wakeup {
++	bootph-pre-ram;
  };
  
+ &dmsc {
+ 	bootph-pre-ram;
+ };
++
 +&wkup_r5fss0 {
-+	status = "okay";
++	bootph-pre-ram;
 +};
 +
 +&wkup_r5fss0_core0 {
-+	mboxes = <&mailbox0_cluster0 &mbox_r5_0>;
-+	memory-region = <&wkup_r5fss0_core0_dma_memory_region>,
-+			<&wkup_r5fss0_core0_memory_region>;
++	bootph-pre-ram;
 +};
-+
-+&mcu_r5fss0 {
-+	status = "okay";
-+};
-+
-+&mcu_r5fss0_core0 {
-+	mboxes = <&mailbox0_cluster1 &mbox_mcu_r5_0>;
-+	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
-+			<&mcu_r5fss0_core0_memory_region>;
-+};
-+
- &main_uart0 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&main_uart0_pins_default>;
 
 -- 
 2.47.2
