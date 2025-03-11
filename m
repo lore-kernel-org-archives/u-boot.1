@@ -4,86 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4632FC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 09:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09FC8C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 09:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD25680805;
-	Tue, 11 Mar 2025 10:52:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6D90181335;
+	Tue, 11 Mar 2025 10:58:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rPXvyq0R";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ly4YbLlp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BF8780FB9; Tue, 11 Mar 2025 10:52:30 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB90A807D7
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:52:27 +0100 (CET)
+ id AFDFA8141D; Tue, 11 Mar 2025 10:58:13 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F868807D7
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:58:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4393dc02b78so30843115e9.3
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:52:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741686747; x=1742291547; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dRyxneamp8xTe+PrV6Rhjs4vVcJJs00f8B7oMQ/nQF8=;
- b=rPXvyq0R9ZlrWbsn8/JAGnsKHUx1RBm9E+Qy1o08RGzk411ttVq7xRcNbj5YK1JGy3
- FSk2cDGl7pYwAJCMKV9lwadGmCFXFCJHkIDWiqRPVykA0cjZ2lViV2uwyvnNepxpYmgA
- ge70oHmcWhci7cpSotZuxXjk+XHNtLC6IG5dsa4rgSum2HCnLmURl/p3K2hoSkjeXJ9h
- GJ0sYSm71WmElMCenIonrh8iG516yv8bon56xG/IPlKduazo9DJ1yc9U+htJ839wV38p
- b/HwbvoY4iZwXzwv8GLocSzIA9Fjyj5XbnaPPge2shj/1F7DZm6Wi/4P8BkOLRfd7kfA
- VNZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741686747; x=1742291547;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dRyxneamp8xTe+PrV6Rhjs4vVcJJs00f8B7oMQ/nQF8=;
- b=Nd4FQy1xQ/eWE7TBClj/rbSUvMl/QflAPCU/Vggu0wodJaay+DML10/qgewhB3ELh+
- hU1EtgEUP5epr9O/qHA0aDmzrNHZeuWZH033lGS94ddqBy7Pb+MUFjqa7z2lkalLfhDg
- +U8BZQ5JzU+wv9dMroaWcf4BoVCk7F0hCez/rjqAPf0Lg/ND782AEM6V5YID2BgN3fzm
- 3paYXYYCETmK6e4M9fd4xBa7/Ohk8mLnqS0pELYbhkVkDBnHitoSNiWfqH9yYXDVVOTQ
- 3olGXxMv9/0q1FTFgGgZVL/nG6vJ856i5CIc7RiX1w9qw+33kNuCR5+zrXH4SCv8XoMx
- x+ww==
-X-Gm-Message-State: AOJu0YyiUNpH5YZWdE3DwKjyyHavtjePXJpBY0Z5Qnylpgj592VP80l+
- fxQw614nk4Zqvt2a3QpGZ6kQmO7FSpHSE163zfJlcZ+X2aqf5MVC6U2mMWd+rzD13llGiCilLR4
- 6u0QILQ==
-X-Gm-Gg: ASbGncvd99GpVrPIlH2wUzWdz0aEQ56lZbQqBlqtDWWeu/9B0ppF/s14RwDnNhr+zR6
- RtEXDqfJhw/Z7bT9gf9TGepf/caVK+z4H2iIGtCb588Gr1w0X7oRsL1n9O21jfwQlnQfcX2ogwV
- dvJph+dBLuJNIjZxT8gTIAk+kyeeEhrkQXQQzNBUp9okDM8qf0p14RVZjIoeKPHXNmo9dHlEpO/
- BqyAVkeSQtIShrvWrrrwoTQHyiLPauYb/sk6djohEUl6NF0jkYReAhYZtGGn5kdUNFwzUdKeA0k
- gVmWdPJ+DCe0pkezWgCyXUVxHC8+41GGV5W9Z84ZV6j/GuTrhbWgdUI/Kg==
-X-Google-Smtp-Source: AGHT+IF/dIl+ux6nx0k/hzvr0aax5k1nuBDDW1ChbW3ukhmY132LRQNhuNc69VsT62Kzn31BSsJz7w==
-X-Received: by 2002:a05:600c:4f4d:b0:43c:fd1b:d6d6 with SMTP id
- 5b1f17b1804b1-43d01c2e299mr38822425e9.31.1741686747212; 
- Tue, 11 Mar 2025 02:52:27 -0700 (PDT)
-Received: from [192.168.7.94] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ce3d5a0e2sm122466185e9.12.2025.03.11.02.52.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 02:52:26 -0700 (PDT)
-Message-ID: <55f4e35d-dc4c-47c0-9a55-68ba3ae16050@linaro.org>
-Date: Tue, 11 Mar 2025 10:52:26 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52B9w87Q1157524
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 11 Mar 2025 04:58:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741687088;
+ bh=N7aMEWbqzQbISPy6Oz9qq/rfyv7mbTwJJv3OG0Dc2y8=;
+ h=From:To:CC:Subject:Date;
+ b=Ly4YbLlpZZKk9ZgSRarPFFu5kz2nPDjRZUPiCWxt0plqqQWgsibOXYILr1HjiU3Tr
+ QqUqZNH5wXyIvzrSqBaqtXPgQq1IGnLAY3P/JuThbNhPZcKjcd88mxTGc40HNYIfpV
+ 9lnhL1dWuVRBZOtNo2tYdZ73K3STaIk8c3999d4M=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B9w8o3077741;
+ Tue, 11 Mar 2025 04:58:08 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
+ Mar 2025 04:58:08 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 11 Mar 2025 04:58:08 -0500
+Received: from localhost (a0543016.dhcp.ti.com [172.24.227.225])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B9w7AI040634;
+ Tue, 11 Mar 2025 04:58:08 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
+Subject: [PATCH v2 0/8] Add falcon support for am62a, 62p and 62x
+Date: Tue, 11 Mar 2025 15:27:49 +0530
+Message-ID: <20250311095758.3383047-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: Kconfig: Fix submenu for network commands
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20250307151531.12092-1-paul.barker.ct@bp.renesas.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250307151531.12092-1-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,28 +77,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch set adds support for falcon boot on AM62a, 62p and 62x by
+bypassing A53 SPL and U-boot.
 
+Existing Boot flow:
+R5 SPL -> ATF -> A53 SPL -> U-Boot -> Linux Kernel
 
-On 3/7/25 16:15, Paul Barker wrote:
-> The Kconfig parser seems to get confused by the current if conditions
-> following CMD_NET and displays all network command options directly in
-> the "Command line interface" menu instead of in a "Network commands"
-> submenu.
-> 
-> To help out Kconfig we can simplify the if conditions, so that the
-> definition of CMD_NET is followed immediately by an if/endif block that
-> contains all network command options. We can also remove nested checks
-> for CMD_NET or (NET || NET_LWIP).
-> 
-> Fixes: 98ad145db61a ("net: lwip: add DHCP support and dhcp commmand")
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> ---
->  cmd/Kconfig | 15 ++++-----------
->  1 file changed, 4 insertions(+), 11 deletions(-)
+Updated flow:
+R5 SPL -> ATF -> Linux Kernel
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+U-boot's falcon flow expects the jump from SPL to kernel to happen on
+the same core which is not directly applicable for our heterogeneous
+platforms since ATF, OPTEE and other non SPL binaries from tispl.bin
+should be loaded before the kernel by the R5 SPL.
 
-Thanks for the cleanup!
+So we have to use a non std flow to bypass A53 SPL and U-Boot, we first
+load the newly added tispl_falcon.bin instead of tispl.bin which lacks
+u-boot-spl.bin (A53's SPL) and the corresponding fdt. This sets up dm,
+tifs, optee and atf. Once loaded, we load the kernel and the dtb (with
+fixups) at ATF's PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE.
+
+NOTE:
+Since we're now using the SPL to load the kernel and kernel expects a
+2MiB aligned load address, the existing PRELOADED_BL33_BASE has to be
+changed for ATF to 0x80200000.
+
+This patch depends on:
+
+ * [PATCH v3] spl: return header size to spl_load in os boot [1]
+ * [PATCH v2] config: falcon: move CFG_SYS_SPI_* to Kconfig [2]
+ * [PATCH v1] spl: remove usage of CMD_(BOOTI|BOOTZ) from image parsing [3]
+
+[1]: https://lore.kernel.org/u-boot/20250311093546.3371193-1-anshuld@ti.com/
+[2]: https://lore.kernel.org/u-boot/20250311044414.3155688-1-anshuld@ti.com/
+[3]: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.com/
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Changes in v2:
+ * Move to CONFIG_SYS_SPI_* as per [2]
+ * Remove the need for CMD_BOOTI as per [3]
+v1: https://lore.kernel.org/u-boot/20250307075541.2571104-1-anshuld@ti.com/
+---
+Anshul Dalal (8):
+  spl: Kconfig: allow K3 devices to use falcon mode
+  mach-k3: fix reading size and addr from fdt on R5
+  arm: dts: am62a: allow booting from eMMC
+  arch: arm: k3-binman: add fit for falcon boot
+  mach-k3: add eMMC FS boot support for am62[ap]
+  mach-k3: sysfw-loader: update img_hdr for falcon
+  config: add falcon boot config fragment for am62x
+  mach-k3: common: add falcon support for 62[axp]
+
+ arch/arm/dts/k3-am625-sk-binman.dtsi  |  64 ++++++++++++++++
+ arch/arm/dts/k3-am62a-sk-binman.dtsi  |  64 ++++++++++++++++
+ arch/arm/dts/k3-am62a7-sk-u-boot.dtsi |   4 +
+ arch/arm/dts/k3-am62p-sk-binman.dtsi  |  51 +++++++++++++
+ arch/arm/dts/k3-binman.dtsi           |  53 +++++++++++++
+ arch/arm/mach-k3/am62ax/am62a7_init.c |   4 +
+ arch/arm/mach-k3/am62px/am62p5_init.c |   4 +
+ arch/arm/mach-k3/common.c             | 105 ++++++++++++++++++++++++++
+ arch/arm/mach-k3/common_fdt.c         |   4 +-
+ arch/arm/mach-k3/r5/sysfw-loader.c    |   6 +-
+ common/spl/Kconfig                    |   3 +-
+ configs/am62x_r5_falcon.config        |  36 +++++++++
+ 12 files changed, 395 insertions(+), 3 deletions(-)
+ create mode 100644 configs/am62x_r5_falcon.config
 
 -- 
-Jerome
+2.43.0
+
