@@ -4,160 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A980AC28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 05:41:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16167C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 05:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A71E80F9C;
-	Wed, 12 Mar 2025 06:41:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id A74E1805D7;
+	Wed, 12 Mar 2025 06:42:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="QmUPegwH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VW+GKvVn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE529811C1; Wed, 12 Mar 2025 06:41:42 +0100 (CET)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on2060f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::60f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0D846811C1; Tue, 11 Mar 2025 19:45:28 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B52A2805D7
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 06:41:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C157807D7
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 19:45:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L9nDI+lKQ/8ROZky0kr+bStgTCEua40DEF8ne0WPgB6Y8cp9vi67ZDgUPxGJQpxRMb1bkmy+ch/RLbajbMeSDpqzEGR7dus/wMbreXYgK7Yj6bdOAaSSzX/PjJ8wEPhVLQ8Gq1paPKrrWZeYKhExSJuKTW9HkGC9BjV7t0h18UzXUMO7O+TcQVbwbPyXjFmQ8pRHe+Gx5cr4USwNk0R5WLxosu2/KZY6lN0o904fazTk1lAs72c1J1583BwMX8KyUceTnmX2aQj3BPhUhbCI+XIijZIjYskKaYCmy3hdmmegwOLdZHhigOWiwcp8nJs0QHJzQhoHHX2cG7UHQG1X2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+qxVo/T3cvnW3fm3wrmMX+wQ2Wy4jbGAT3ExKaYh2a4=;
- b=mXJZ0R7fH4qQc4Nrst0Go5ZYtL/NXhoO+42J6k7xL8Tf+faWiQirYy/LXr+AsUcYGSe+ojAK//ZZ3PPj3T+DznRBodn8dLKDneuXWzfI9I9fRJbWX4XYL4m2jAFjBqW/i6BCbsczLr988HSUWRy+l3z41kttiUks2IwygO9F6m4ZO4WELPOuLn3C2HTqMY6oC/9v/Xbtp8NOjewBGpYNkVNVqoqUsyZWG1Wc2IqNiF/uJhzEMGSY5e7reV7f1zc9LE6IrV99LWsXXUBht6mAzIHlWymvY6kBv8B3ElHOdBNVQ1BQHW2QUDmslwRns11rGncOwr4yzmF4LxKGPn6AIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+qxVo/T3cvnW3fm3wrmMX+wQ2Wy4jbGAT3ExKaYh2a4=;
- b=QmUPegwHFP6NX2YVkMJKq8EoROa3cxu7R5zODGp67O3XTh/7v00i3VttcJo7pflQNx1zf+HYoTyQkLAQg6CDIj10uW3875NcMKfONtMIntU7xnTSndV8r41yHlf1gThnfajEp2xpiCKHr0sUNr+jV9YPXteSyMp4Al8LInJioVzJlYNexpK08U6xFbV1fEIPQ19DZYLfOrTsllAr+f7kCwi0W+JzPcNLMJEtj56Zg7chv69W6cLqWohaY38XD9HhkbNNUsWlnGMOwpOIvrNLLW41FWGFtrj4pgSa3SnvcdcS9SCZHNpW7yYEvr1zMRnqA38BR3HIq27U8360biYPjQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA1PR04MB10939.eurprd04.prod.outlook.com (2603:10a6:102:489::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Wed, 12 Mar
- 2025 05:41:39 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.8511.026; Wed, 12 Mar 2025
- 05:41:39 +0000
-Date: Wed, 12 Mar 2025 14:49:18 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Adam Ford <aford173@gmail.com>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH V2 10/10] board: beacon: imx8mp: Let clock system enable
- UART clock
-Message-ID: <20250312064918.GI11991@nxa18884-linux>
-References: <20250312003041.110023-1-aford173@gmail.com>
- <20250312003041.110023-11-aford173@gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250312003041.110023-11-aford173@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SI1PR02CA0056.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::7) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e634c42a296so4407081276.3
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:45:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1741718724; x=1742323524; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=McGa6ujeybnHiIqp5b00DLI5A+FKlgDZcOuADqsX5oo=;
+ b=VW+GKvVn8voy7NcAQt5jNCKhhEjDEXcLJHyHZg/aMHn87Aszy1X8+VaSMkbaxVJrRG
+ HGF6sPbkxWVUx4hnKXEpjMcGbF2XcBKDUh3qGC1PFcWP5Q5y9HWe4hc4aoQIUaq4PlP9
+ cYNnoQ5tWZJgIxlcKHQzEgvwiSurkormrgetMWGhDMQTm256nwcYzRKe/vkdBH0kzwSE
+ bxUKWRMVa6vSV3uquctGVnfk/i00t+JlDjQ5iEXKYB+YLkV6CWjr7/BvNbImxgo+S5U5
+ md0DTLnONn3uCjJaF4ArwVpioySr9IHeiL2Zj1U8P/R83RBFbz8wc0JmxCl0vtv3XfdV
+ 0Uig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741718724; x=1742323524;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=McGa6ujeybnHiIqp5b00DLI5A+FKlgDZcOuADqsX5oo=;
+ b=sAJeHDzSTCoRO5TmYiee7U47RI0llXa5GeFq5vWE5HPoXm2kEOxdBNAh39n0zPCvb0
+ 6uH1xaw9ZHZgl3RyaHyaCBByAFfsOh4yvr1hI/6lwWbkX8WIafMHwKXnA0aGwqxcZhCY
+ UIeG1fG5SSEiY9cqPYGf+nDYSwuVQAawbdRnYerSJRi2MK5VKpGcXMDN+SWkP2LfqvP6
+ WImNYuLwJRFqPQyklLee2ieXUQ2mR1LWNAQhc36k/LVz466w0PqLEIXCuffiw509XeKN
+ TJZYsXuQQpalV14y1B0UZRs/BSX18BAB5l75+mD+RBjakuF2GjQbuSJtRUeUsyWYaXru
+ Sd2w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVckk27+JF3L2y1T5/FAeSyyq58NECq0cD8yPP89ibvYlmFNb9ExBSuFiMEnumnoTLUsXNsQ2Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRjZRIZ78vO1FqDRyG0S9LtdTmmhMX3PMyJDAn0/+SMSU5k6Tp
+ dt6bzzv4pjaEbkyhZYiTWIWO+T0ymjNyfSlUcYvKYpPKR3iSN+7iYrRQoFYwffvPzKUAwG9cY48
+ w58ao5Bn2BNVtlNPjbcXKfJp3PFBfUihCJcbulg==
+X-Gm-Gg: ASbGnct8LQU14DFmI2TMEN3SOre3Tt9ROmYETFLQbU8LUT+GEWXH1tubGGE6zROL/yd
+ TjPX3fgMd6J+rtiGw2cvaRzz6sMPI1dpE38DCaQyLXe52Hz31Bp82UCvx63Nv3LKIHS6oNYzw+7
+ 5glf0IhnNoJY8PAyNehmo3QpHD/NU=
+X-Google-Smtp-Source: AGHT+IEZUObAwc/eU6LxHpDuIiQ8Dh6HjdHRQs3UtHxmZv2SPmO7n0M4B8KQ7I5jiKJoUMxpZRtvAwPQT4yUFSNqS7o=
+X-Received: by 2002:a05:6902:2002:b0:e5d:aeb7:6e62 with SMTP id
+ 3f1490d57ef6-e63b51589a0mr5673492276.7.1741718724104; Tue, 11 Mar 2025
+ 11:45:24 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PA1PR04MB10939:EE_
-X-MS-Office365-Filtering-Correlation-Id: f696efba-5a92-4ab4-a2ab-08dd61288f56
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|52116014|7416014|376014|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bm8rerXBnPBm9gmTAZGH981l5oy6WqDEPswo2pqFKN071i5LAGn58vIKQhYS?=
- =?us-ascii?Q?P3C9+1D3aJbkx79O54eehXMEHTs+Ry48qvBt+lmlkHCvKGTcUOCTciWN2hef?=
- =?us-ascii?Q?EnpO5OCMOH6Jhfg7r00RqPlRXYmrqGbc1Cw4vhexLPYsT6q376Z47ncRGII3?=
- =?us-ascii?Q?h3OQ5cKeTIBAsuc1QIt8bRIQ2OqClG/FZSnvdJK2BqVoyVHg2dl1l8BzgVMb?=
- =?us-ascii?Q?F88Y4pJQA3BcECaASwUFLHwioxERoDMtQnAotq49+xjmz3d7W8yUnMEMxvRo?=
- =?us-ascii?Q?2p/AI1cq0xRqc371sFXek978kIO+hG+EPnLcVG0GUlz2J3GVQw2tKH6hIz4R?=
- =?us-ascii?Q?z6Q30YNBT0JhBIx/GtNcgZvd8F50dmyk5ojecxEk3hsc8qQ59qE3zs0vpOGd?=
- =?us-ascii?Q?6JEHmmg7gj82Srpn9BwNrIisqmriftRIOjAcU9Dd2vLpDjZ1/T6Zc7YKH4tN?=
- =?us-ascii?Q?vEWm6xBJ88UMNacS48PsoFomCqm3YhilQGhLfekhJBWVGiNuTEC7T8dmUbNP?=
- =?us-ascii?Q?sfltqaJUAEP7bN53ki/OxrCxwOFawF2X0bDAtJTSelW7cOxDO2Agv8ORk2Lq?=
- =?us-ascii?Q?rZll00T0DrUoZ/qG9+o4J4EJdwBdvxbu0PIbXuOb94G+qwZmhV/wgWwbyrjj?=
- =?us-ascii?Q?xEQc0ViAdI3pQvUBdrcWxp211fgsV0j8RqPx98R1HyKiFn3/0+5U8SDz6g4c?=
- =?us-ascii?Q?SG+KTF/ScMCbaz31xNjqff5xlaKcr9CQDvlIx30ZPfJ3llOwFLUoShSjD5hj?=
- =?us-ascii?Q?nTC+3Y62S9xGp7cEthnI9cP53i9pqOkHBAKeMxm+kkANXH13ViJScewrTLbe?=
- =?us-ascii?Q?FB7lBTK7WarEHnxqL8twmKRR+Kin892UGSQ31B692HCadHzKpqnee+sGwCJS?=
- =?us-ascii?Q?2WPSrwZtVblhpwM5HrVdMMotsUw4RzU/Q5nRwrqduVEB3qJuiDRW99a7WbCb?=
- =?us-ascii?Q?lHKg6Vg2cI6lk79S8UatN1d7gg89rYP43MnzWojiQGj2g/V69bMsqyePsH9l?=
- =?us-ascii?Q?7pUNffvcXYUV7KPiMLtOd8WeX0unFWgvGa/0ylFbD4ymJeEhGjFJkdGqv/DY?=
- =?us-ascii?Q?J+zSe+Q0nrZco0xfndyDcTQ6miBIgqdCUlSUErrFgK2s9UPzMGZxx4UFkTMS?=
- =?us-ascii?Q?i5FaDj4EuZ8er50lhuECGw30MbUbotR+D1PoeXBx3C0dMwWzhpxD8l0r9Rdy?=
- =?us-ascii?Q?B2Z3WNKrOygu/SBFlKcYsK6d8Ob51TlmZgU3SdS6gZq6yFEOG/p/kMOcSNSS?=
- =?us-ascii?Q?91e217WIFulju3PgMSZsV3cykIuF9P3bhQ3qJ7dXsVszwRlFkkm+HdA5ZhwR?=
- =?us-ascii?Q?z8mx9LSeGtXzcnn49vXXPjPhzKghsETTprCzW6XMQaeGvQ3v3ah38yhCuaA4?=
- =?us-ascii?Q?N3xsTEX1nZhxy30YpqU1iD25lUMVwOsfKtpXkAclhP3O2wlk3FuQRQaOOzdZ?=
- =?us-ascii?Q?cMwxtjgVPcrugxoNVP0mrK22jtxa6Yfr?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(52116014)(7416014)(376014)(7053199007)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+i1qxh30xRSo7UYhpDiu1wttVRJsvi4PeTgpdU7jXNOU71Nu8gelv9SffCdf?=
- =?us-ascii?Q?8EeVzNQJ/asU1FtaSrB/deMABZ7u9TJjLEpcdolEMRa+CwBArb52X7t9Kvq5?=
- =?us-ascii?Q?JTT7MzyWhVquo3NWoTehxnOW0I4cFhpOgVA++G3lrNi6urWMFSdyrgy/Bshq?=
- =?us-ascii?Q?Nnkjkya2GneoLuGJ+jhe3kpgVlAcZEd2xSiRy6OkIn7fj8/rXe/A6UdbVOYK?=
- =?us-ascii?Q?txWtbbU609gD/zbeerwj1s8zbzhTeIaVdRABXVw46oAMN8VKCBR15TczIbpR?=
- =?us-ascii?Q?/z09FaanqXDaQJH/vZu0hynlZjqEH7W1zcYopfk3waIbphpNc9rArqW/Oii4?=
- =?us-ascii?Q?xcjsAiYsQBARf2JOw7LH27KnSdr9+YAPv61B3rgEee/LeA6ZfVkmkByXadXV?=
- =?us-ascii?Q?YUHl9VdT0KZX1rkz7yN5pURqLRRYm3JMgFKCDB5cAWYyVKZJEw9ZN2vXe+83?=
- =?us-ascii?Q?oNedh9/r+eTt5w8V0VoEuShxKWbybVlzeAtonHxyHVGEBHoCmFARG4mM9uxL?=
- =?us-ascii?Q?lMI8zMzYqPCRQgrZc/s3/46Um0sW/jOCfnTGiyKXJlvxpzze1WjycaHTmhmn?=
- =?us-ascii?Q?Bypxuu5VJpHglDbg3kUKH4gN9fvLHGbHmjBF4cB4LSUvhktm9wq0ks7rD9Wk?=
- =?us-ascii?Q?UYV1eKR9nLOyQwZV8++zhOLpjP52UA6vEap4YKEZE9dKp8bGTGIuam0xXB9J?=
- =?us-ascii?Q?pQsnUJIozyN6TZOIAf5wp1CJwuwxEjH6pi9DRh23S4owrg8hFp8dHRSligLQ?=
- =?us-ascii?Q?h9fO+BlftWtTQ/UWA3Zli979mwjlgiP74tQy27n0FvMJ9HTb/JiaDiWQeKKu?=
- =?us-ascii?Q?fypef2XcZimpRLl2XBtnIh2SS4JEBoYaZxfufYIQDiN8tRWUR9F2Yr/Jb77s?=
- =?us-ascii?Q?0BFULcyI8sNo9w6tJqTEE1Z3xSUHIj3Qacsq8/87K3QveUX4DfLRGtHZTnwC?=
- =?us-ascii?Q?MwBwjwwJ1XTgPnu+o+42sjahaChZfpBXOBmFpIA2jmClMVwhs3t/TIfP47pK?=
- =?us-ascii?Q?Bx4esRG6FOnvL/o4rz/PMuoTSgPzJPN1AM10uxVzlg3F5UJjQLBa/W93yRLk?=
- =?us-ascii?Q?D790wOQIqqRrtAbBS76xIysv9h0YZIynJHYRs3X4afQ0vGtxVkiFz7VpeNjA?=
- =?us-ascii?Q?TcfE6mGzei9eOJra6BuxyH+B886tm/L/+kInEusy340E5YVFVZGYh8wF4I3S?=
- =?us-ascii?Q?I0uS1W8OZfJxqjbyKnmK8li4GHJumqWrR5xYB6VtKGvZ/Kqay1RenNx7t7c4?=
- =?us-ascii?Q?70cqdHdxt9yb27VNQ08Oq61PgXq6Bl9+u5UvBGbY1KoO5bHFr+N6UuL0zdjB?=
- =?us-ascii?Q?7ftx0xKur5ua2JYpRieLJ6AMzqPzi8PC2hQQQZCOwUcNh8VnKvXULCTNg10A?=
- =?us-ascii?Q?3Jpi2iMcZsj86fUsR3QSIL28ro+7Bgwt4I6/bJjuOg0nPQPFdOb69GWkUvYg?=
- =?us-ascii?Q?EC9D/iXA2E1aaYbBqjhKnmPKjB1Zx6WKW6jX+u/gjbcEg5ZdwlG/squUmk+U?=
- =?us-ascii?Q?fUHUIyseyBSdNh6ibUTw8ntcpfFuuBz18Qe9RN7O+ApBwcn9JVIXKsgTRvn3?=
- =?us-ascii?Q?TW1rPxoHFALMH1ZNE3g/wb+w+12yiqBjDxsalBmG?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f696efba-5a92-4ab4-a2ab-08dd61288f56
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2025 05:41:38.9623 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ahf7WIIFbFVnI+W7S/M+Rld3I9ebfpOMv4CnEXQbBPVKpZsexvPaRWiS2JL8naDKZbvFdAf3WQQw2Uy1w5DOBA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10939
+References: <20250301164922.397441-1-ilias.apalodimas@linaro.org>
+ <20250301164922.397441-5-ilias.apalodimas@linaro.org>
+ <20250311183054.38dc735e@donnerap.manchester.arm.com>
+In-Reply-To: <20250311183054.38dc735e@donnerap.manchester.arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 11 Mar 2025 20:44:48 +0200
+X-Gm-Features: AQ5f1JrJQqaOhZyDCOvo2Zlqpu_2XAJw1p65p2qhJhqOcqWVdjGM1eRTjKVe1xA
+Message-ID: <CAC_iWjKMz-SH-hOOiuDX4PVYkJT4WkGAkQPdaqELrUWRrMr==w@mail.gmail.com>
+Subject: Re: [PATCH v4 4/6] arm64: mmu_change_region_attr() add an option not
+ to break PTEs
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: xypron.glpk@gmx.de, mark.kettenis@xs4all.nl, 
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Tom Rini <trini@konsulko.com>, 
+ Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Stefan Roese <sr@denx.de>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Alex Shumsky <alexthreed@gmail.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>, 
+ uboot-snps-arc@synopsys.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 12 Mar 2025 06:42:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,10 +121,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 11, 2025 at 07:30:30PM -0500, Adam Ford wrote:
->Now that the UART driver can enable the required clocks, remove
->the hard-coded clock enable.
->
->Signed-off-by: Adam Ford <aford173@gmail.com>
+Hi Andre,
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+On Tue, 11 Mar 2025 at 20:31, Andre Przywara <andre.przywara@arm.com> wrote:
+>
+> On Sat,  1 Mar 2025 18:49:02 +0200
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Ilias,
+>
+> > The ARM ARM on section 8.17.1 describes the cases where
+>
+> Thanks for referencing the ARM ARM! The section name would be D8.17.1, and
+> please mention the version of the document, since the numbering is not
+> stable across the different releases. So something like:
+>
+> The ARM ARM (Rev L.a) in section D8.17.1 ("Using break-before-make when
+> updating translation table entries") ...
+
+Sure
+
+>
+> > break-before-make is required when changing live page tables.
+> > Since we can use this function to tweak block and page permssions,
+> > where BBM is not required add an extra argument to the function.
+>
+> It looks like one of the two existing users of this function (the
+> snapdragon code) just calls this function with attr=PTE_TYPE_FAULT, so
+> that would not need to call the full BBM version.
+> The Layerscape code indeed requires it, though.
+
+Yep, I'll leave it up the qualcomm maintainers to pick that
+
+>
+> > While at it add a function description.
+>
+> I think these sentences describe the v2 and older, but don't fit the
+> current patch anymore.
+>
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  arch/arm/cpu/armv8/cache_v8.c | 48 ++++++++++++++++++++---------------
+> >  arch/arm/include/asm/system.h | 18 +++++++++++++
+> >  2 files changed, 46 insertions(+), 20 deletions(-)
+> >
+> > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> > index c4b3da4a8da7..29100913bc82 100644
+> > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > @@ -967,61 +967,69 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+> >       flush_dcache_range(real_start, real_start + real_size);
+> >  }
+> >
+> > -/*
+> > - * Modify MMU table for a region with updated PXN/UXN/Memory type/valid bits.
+> > - * The procecess is break-before-make. The target region will be marked as
+> > - * invalid during the process of changing.
+> > - */
+> > -void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+> > +void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
+> >  {
+> >       int level;
+> >       u64 r, size, start;
+> >
+> > -     start = addr;
+> > -     size = siz;
+> >       /*
+> >        * Loop through the address range until we find a page granule that fits
+> > -      * our alignment constraints, then set it to "invalid".
+> > +      * our alignment constraints, then set it to the new cache attributes
+>
+> It's not cache attributes (those would require BBM), but "permissions" or
+> just attributes.
+
+Yep correct
+
+>
+> Otherwise this looks correct, just changing the permission indeed does not
+> require BBM, so it's just the comment and the commit message that might
+> need changing. And clever function split up!
+
+That was what Richard requested, the initial one was just taking a
+bool argument, but this is indeed better
+
+Since it's only commit message changes, if n one else objects, I'll
+amend it on my PR to Tom
+
+Thanks for taking the time
+/Ilias
+>
+> Cheers,
+> Andre
+>
+> >        */
+> > +     start = addr;
+> > +     size = siz;
+> >       while (size > 0) {
+> >               for (level = 1; level < 4; level++) {
+> > -                     /* Set PTE to fault */
+> > -                     r = set_one_region(start, size, PTE_TYPE_FAULT, true,
+> > -                                        level);
+> > +                     /* Set PTE to new attributes */
+> > +                     r = set_one_region(start, size, attrs, true, level);
+> >                       if (r) {
+> > -                             /* PTE successfully invalidated */
+> > +                             /* PTE successfully updated */
+> >                               size -= r;
+> >                               start += r;
+> >                               break;
+> >                       }
+> >               }
+> >       }
+> > -
+> >       flush_dcache_range(gd->arch.tlb_addr,
+> >                          gd->arch.tlb_addr + gd->arch.tlb_size);
+> >       __asm_invalidate_tlb_all();
+> > +}
+> > +
+> > +/*
+> > + * Modify MMU table for a region with updated PXN/UXN/Memory type/valid bits.
+> > + * The procecess is break-before-make. The target region will be marked as
+> > + * invalid during the process of changing.
+> > + */
+> > +void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+> > +{
+> > +     int level;
+> > +     u64 r, size, start;
+> >
+> > +     start = addr;
+> > +     size = siz;
+> >       /*
+> >        * Loop through the address range until we find a page granule that fits
+> > -      * our alignment constraints, then set it to the new cache attributes
+> > +      * our alignment constraints, then set it to "invalid".
+> >        */
+> > -     start = addr;
+> > -     size = siz;
+> >       while (size > 0) {
+> >               for (level = 1; level < 4; level++) {
+> > -                     /* Set PTE to new attributes */
+> > -                     r = set_one_region(start, size, attrs, true, level);
+> > +                     /* Set PTE to fault */
+> > +                     r = set_one_region(start, size, PTE_TYPE_FAULT, true,
+> > +                                        level);
+> >                       if (r) {
+> > -                             /* PTE successfully updated */
+> > +                             /* PTE successfully invalidated */
+> >                               size -= r;
+> >                               start += r;
+> >                               break;
+> >                       }
+> >               }
+> >       }
+> > +
+> >       flush_dcache_range(gd->arch.tlb_addr,
+> >                          gd->arch.tlb_addr + gd->arch.tlb_size);
+> >       __asm_invalidate_tlb_all();
+> > +
+> > +     mmu_change_region_attr_nobreak(addr, siz, attrs);
+> >  }
+> >
+> >  #else        /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
+> > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+> > index 091082281c73..849b3d0efb7a 100644
+> > --- a/arch/arm/include/asm/system.h
+> > +++ b/arch/arm/include/asm/system.h
+> > @@ -303,8 +303,26 @@ void flush_l3_cache(void);
+> >   * @emerg: Also map the region in the emergency table
+> >   */
+> >  void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
+> > +
+> > +/**
+> > + * mmu_change_region_attr() - change a mapped region attributes
+> > + *
+> > + * @start: Start address of the region
+> > + * @size:  Size of the region
+> > + * @aatrs: New attributes
+> > + */
+> >  void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
+> >
+> > +/**
+> > + * mmu_change_region_attr_nobreak() - change a mapped region attributes without doing
+> > + *                                    break-before-make
+> > + *
+> > + * @start: Start address of the region
+> > + * @size:  Size of the region
+> > + * @aatrs: New attributes
+> > + */
+> > +void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t size, u64 attrs);
+> > +
+> >  /*
+> >   * smc_call() - issue a secure monitor call
+> >   *
+>
