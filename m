@@ -4,77 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4363AC28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DC67C28B30
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CACE0811C1;
-	Tue, 11 Mar 2025 14:46:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CFBCC80FB9;
+	Tue, 11 Mar 2025 14:59:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDUJkI6l";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Tja7z3Sp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E34F281671; Tue, 11 Mar 2025 14:46:42 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 38E3E811C1; Tue, 11 Mar 2025 14:59:24 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0F80801BE
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:46:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 274788003E
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:59:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e5dc299deb4so4805609276.1
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:46:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741700799; x=1742305599; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=w37r5xnubh9EXZqr32mAHKXJPCFF5D2XPeYIF/R3hpI=;
- b=PDUJkI6l6/EY8B5uIdU3htY8fMkHfJgtin5d8sfMxdPF2z92/QxNpIww8iDyo1fKi9
- B7vPhxMET8FhADdYjo0KfndaQJmMk7pIRuyYq3/YUWSKxjRxYbVbkSNZSQ6EEC8N8g12
- mobg7vO6MDJyGrA4ER41zeoOOwhyNpwdyXM7kHMEp3qsklbnW3FRvn5G/elHxVqP0nRY
- Q3Y6jn+h7Hu89a9YObZQvwyBHHdXv16cPAqNRIfnlek/4Gh9Qk8qQ4JV9V7loI2QPA2H
- GrlUb3tgHqKX9mP+EISLFQ9TLOOejjfWQt5B7MniKo/uVI6y4+EbkY3IkAsxReewUD9I
- lHoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741700799; x=1742305599;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=w37r5xnubh9EXZqr32mAHKXJPCFF5D2XPeYIF/R3hpI=;
- b=LUqx3K/q5oUzVVBaXUZ594v5IcdyahdOzQ9gd8EdsGextIYOvjNSsED8XQPvj2Pbl4
- 4t86vDDibbX4jCx7kurt5mOEi5eFVh9JZbqbU2mvzLLjJ3hI/z+9GK3QpvqiDAN3XOr9
- bomGVpgc2BGjXIS4u+blY0NZ94rDxRiVx5bfuorkKSTPwv8ynnFqXwFQw2kUbniwrFfO
- +WZm1zLp0Fsu3EW/XvNZXF/qHoVlIkk3qnZaXq5KgFIZV+MqUf+DE+GjggCJAzIzdadG
- ZrM2Pb+9g5nJZlhDUGwGznBkRZywrIAg3NC9ef23Jh0HuwM6EAkFCC920nPe5yt4f0me
- NguQ==
-X-Gm-Message-State: AOJu0YyMPvRMdS7vDlPEZ5HtGdUHVf8zcVsw0yatE7K5sJfR4Vh94+NP
- V1NS5orpfVD2ENGqXFXvaMuu461UhM2XtAkMmjgMb5m1ECpJAEPMV8L21WCAWQLn9f39+GpcrGz
- s/17GyduwyKU8h5WQUiw67I+9cz4IDyLkepvkFg==
-X-Gm-Gg: ASbGncvx5K9ewpDKby0WPJMF6/mi3cipOPSl72uJdl5S/vAldUfzmIrojoFyXdDq76l
- 5DKNAf+ePQv5kcckA6fEFDlsynUZ7N6J0Z5g+1sXApHItCntzL6Aj+R8cL+1eJA0I2qd85GCj8z
- jbTYCMJyMTsl2fi3CgXU07lRVB7aI=
-X-Google-Smtp-Source: AGHT+IGM+CZPLm9vnjIoDxr2EjGtVu1cv1HNEjbid8fm4AElSgfIBimw8geaDKqjYvAF1zsLdo2iLAwMESvrRjqMWos=
-X-Received: by 2002:a05:6902:310b:b0:e5b:4482:a4f7 with SMTP id
- 3f1490d57ef6-e635c1382fdmr21959516276.12.1741700799492; Tue, 11 Mar 2025
- 06:46:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1741701556; x=1742306356; i=xypron.glpk@gmx.de;
+ bh=TOcVS0EdbsEWh7KzkkJgIzrcnifYcD8tngULgoOdnNc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Tja7z3SpWKcuWFDrWq7vEq/9XCSYI8Yd/YEPaVIyBvIyAnuh0ES2UiwyiuIUi8xb
+ aDHYR9f5LAuY0fBjilOqVtvKmb5/cuqb2UMgF9Ll/QWjcIpBXxOZ65QV+++EoDdli
+ QIV42cVRueP9veSzxpn3MzR6zZLkQV3y6YW8erK0N/iGVh9PrkZgD/sejHXfLGoZ9
+ lVOepTh0ZBFZZiUQzT5zEM9GLRNFE+eqF0aEB0ZIDbFRNSkyJWmuAsewGYM7fnvLB
+ h9rtnFMX3rpbwZISngFvXA9zRreDCoarKLf1xLqhR4ZXwGG10U317bI1R7bxl8/it
+ yTmyVyeDdP13ft+xdA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6UZv-1tq6KA3tkn-000qBp; Tue, 11
+ Mar 2025 14:59:16 +0100
+Message-ID: <94b900c3-56bd-41fa-a2de-a47b21e02ee9@gmx.de>
+Date: Tue, 11 Mar 2025 14:59:06 +0100
 MIME-Version: 1.0
-References: <20250306232256.4150882-1-trini@konsulko.com>
- <20250306232256.4150882-8-trini@konsulko.com>
-In-Reply-To: <20250306232256.4150882-8-trini@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Mar 2025 15:46:03 +0200
-X-Gm-Features: AQ5f1JqxSJZkIr-lK912gURi5I3LnkygDcNf79kzli-wXKCZrs6RGxNwx2Pt2hk
-Message-ID: <CAC_iWjJd5582MP2K9keQ0wXsG1TBF5B7ZgunXhQ+8cPWWC9Byg@mail.gmail.com>
-Subject: Re: [PATCH 07/10] test/py: Rework test_efi_capsule to not use
- virt-make-fs
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/3] booti/bootm: riscv: Verify image arch type
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Janne Grunau <j@jannau.net>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Atish Patra <atishp@atishpatra.org>, u-boot@lists.denx.de
+References: <20250311133506.124914-1-mchitale@ventanamicro.com>
+ <20250311133506.124914-4-mchitale@ventanamicro.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250311133506.124914-4-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:nGYr3ML0i4OVH1iEVFyGbQGQExL1PoO/+hxVihBCWvXdFK0+lvE
+ oZBV+9XrWTbdKPs78oWejOj98u9EKm9mWefUZDCaooEYJGWaWe0UAwL9/M8FibgBK106IXF
+ 6wN46DNWhc3+lvrBGAeXfsVauBG8yT6w0pzTkWGFp/GC/8mL7MWwMOPH+LJba/PAbWZoUzk
+ Wfr8sWg4Zq/CebSThRm5w==
+UI-OutboundReport: notjunk:1;M01:P0:2cLYm1b3o2I=;H+LbLw+xc+hP9WQC1Q+v6TWXw9O
+ MMJiiX+Bf40hiiLslsIlHSJT1KQ723gl1iRj5mJNd2cPE0v+X8hkooDDRxkG/FCXjGj74H6Fy
+ 6tidZKa1D0hdLwxRn2Tleh0kFODuOIClUmuQpdrLZjwzvsBA4O8MrHJnb8pHCSvp0gchTDIdL
+ QmTQDrH9gin/XwKi3wwFclpKU3A+fLoRzOSpzEK5ieFn9IU2MVY0IFlqs4YKNvOLDBOjaGZyg
+ JamB8khbpbuT9VCS+nxnXhpRc274Fijd+t07SuMU28E+ocnFjnNZusdzF2ZxInP7IZ4I/X6wU
+ kPqn6VrxaF8NwLQmDuw7dJRs7GLHcGnWGUyvmV7hULs7VlLAahXtraJQJ6lBMtbrTQz6+yP4O
+ rKvXSBFelGj8JufS1tCMUwN/Ue2CRw6lAHi5XOSb5SePYQZw+24glJYoqlc881CTn5zgvDrKF
+ wQnjO+l3VG07Y/1dMBK1rY0FUuc3+yCE0aAzTp4C6N6zAPhZLm5wZTqWOsA0EhJSHv/kqPH15
+ seVT0QmEM+6THuE8o02WLYSjOMHcNh00Lx7S5bJWlpx8G/2o/FiE7rKYVppozntkwum4oEDeo
+ Cak8QYBMuMHsPGOHND8cvF4JfBbcBwWHJlXGV2o8wLbxaJclH36Wuq1j+4QS9wJw4EA+GNuhq
+ gDNnNFkgwe1pZsDQFrGVVdoe+7pv1kn8ad8QLxv/N3RDHTVn2ibQM/g5msrNaF0tH8Nyou9QD
+ Zqsv7vzLwWuqyg7QiYEj8Hz032VOkmJCAot7zvXUZGQShc3edCz4SxxOTcgzAdgsteXymUVsO
+ CqxM2QZRx8yLgwdUmf1m4cBiM2EJ50ubJLEq2Wj4II0rwDQ810xt9Fkm8HW0SfHfUU6Mf4ZNq
+ Zm6GelKMgYRnIVbqBZpSkzpj22o44nmR6NB62CMCMnC0t4oc2wiuRcSq7uW+zzO/EYAJg34Uz
+ zexc35jC3l2dpGD1KZC+l9y+I3jNxtg34J9m3m9/KQiCpPVzUafmT1Q/m6PBLm7u9IrH+EuNW
+ LB6Y1gSnSB1Sy1b7ghiunyHJRStr9rEskQvSwAU7Wp9qHvAClZ0s0BeWGOLEd/avLc6C9wKQD
+ aofuVl1b3mU/uOSpMKf2Rm84pdYTgUbXi9s/20mAI+dAtu9CaBHiAbHrjlOB0Cdh9o/RPPhnH
+ 6OOrBvo1E71QwDTgSMcAwsI4UuAsPrSqgeBfj54+uFxvyG255bOnM8/xutaUCnEL5/zflrT08
+ bOQ5tUvXqO7G/J37474kBQgqYrRhe9T8geDo1vzU3JZLyNkF+VTNyJZr06dxJDMlmQBcp3kbj
+ /KeaMp5GTzW8OYCH7Nzb3czQSw0oHk4Y4nM0C32vEvB7/wejNWxeCtCuYrz6dDDPRDb/IyKFV
+ oHpJHdRua8bjQ/jkzRSNIkvDDclIts6GUozqyesLaNxhvI5C8eDFcpRZ/i
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,96 +103,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 7 Mar 2025 at 01:23, Tom Rini <trini@konsulko.com> wrote:
+On 11.03.25 14:35, Mayuresh Chitale wrote:
+> Unlike ARM and X86, booting 32-bit images on 64-bit CPUs is currently
+> not supported for Risc-V. Hence, for bootm, disallow booting a FIT
+> or a legacy image that was built for an arch type which is different
+> than the current arch and for booti, set the arch type to be the
+> same as the current arch.
 >
-> The problem with using "virt-make-fs" to make a filesystem image is that
-> it is extremely slow. Switch to using the fs_helper functions we have
-> instead from the filesystem tests as these can add files to images and
-> are significantly faster and still do not require root access.
->
-> The main change here is that our mount point directory has changed from
-> "test_efi_capsule" to "scratch" and so we need to update other functions
-> too. As the disk image that we get created doesn't have a GPT, invoke
-> sgdisk to do a conversion first.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 > ---
-> I tested this as much as I could with an empty
-> board/sandbox/capsule_pub_esl_good.esl which did show me a few issues
-> along the way so I am reasonably confident, but this really does need to
-> be tested on a platform where all tests are run for real.
+>   arch/riscv/lib/bootm.c | 4 ++++
+>   cmd/booti.c            | 5 ++++-
+>   2 files changed, 8 insertions(+), 1 deletion(-)
 >
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  .../tests/test_efi_capsule/capsule_common.py  |  2 +-
->  test/py/tests/test_efi_capsule/conftest.py    | 21 ++++++++++++-------
->  2 files changed, 14 insertions(+), 9 deletions(-)
+> diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
+> index 76c610bcee0..90f71bee6a5 100644
+> --- a/arch/riscv/lib/bootm.c
+> +++ b/arch/riscv/lib/bootm.c
+> @@ -94,6 +94,10 @@ static void boot_jump_linux(struct bootm_headers *ima=
+ges, int flag)
+>   	announce_and_cleanup(fake);
 >
-> diff --git a/test/py/tests/test_efi_capsule/capsule_common.py b/test/py/tests/test_efi_capsule/capsule_common.py
-> index fc0d851c619a..68b2e48bf5a5 100644
-> --- a/test/py/tests/test_efi_capsule/capsule_common.py
-> +++ b/test/py/tests/test_efi_capsule/capsule_common.py
-> @@ -136,7 +136,7 @@ def do_reboot_dtb_specified(u_boot_config, u_boot_console, dtb_filename):
->          u_boot_console -- A console connection to U-Boot.
->          dtb_filename -- DTB file name.
->      """
-> -    mnt_point = u_boot_config.persistent_data_dir + '/test_efi_capsule'
-> +    mnt_point = u_boot_config.persistent_data_dir + '/scratch'
->      u_boot_console.config.dtb = mnt_point + CAPSULE_DATA_DIR \
->                                  + f'/{dtb_filename}'
->      u_boot_console.restart_uboot()
-> diff --git a/test/py/tests/test_efi_capsule/conftest.py b/test/py/tests/test_efi_capsule/conftest.py
-> index 61eab5112a17..7f8a3de46171 100644
-> --- a/test/py/tests/test_efi_capsule/conftest.py
-> +++ b/test/py/tests/test_efi_capsule/conftest.py
-> @@ -7,6 +7,7 @@
->  import os
+>   	if (!fake) {
+> +		if (images->os.arch !=3D IH_ARCH_DEFAULT) {
+> +			printf("Image arch not compatible with host arch.\n");
+> +			hang();
+> +		}
+>   		if (CONFIG_IS_ENABLED(OF_LIBFDT) && images->ft_len) {
+>   #ifdef CONFIG_SMP
+>   			ret =3D smp_call_function(images->ep,
+> diff --git a/cmd/booti.c b/cmd/booti.c
+> index 1a57fe91397..00921ec4a9d 100644
+> --- a/cmd/booti.c
+> +++ b/cmd/booti.c
+> @@ -131,7 +131,10 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int a=
+rgc, char *const argv[])
 >
->  from subprocess import call, check_call, CalledProcessError
-> +from tests import fs_helper
->  import pytest
->  from capsule_defs import CAPSULE_DATA_DIR, CAPSULE_INSTALL_DIR, EFITOOLS_PATH
->
-> @@ -21,12 +22,12 @@ def efi_capsule_data(request, u_boot_config):
->      request -- Pytest request object.
->      u_boot_config -- U-Boot configuration.
->      """
-> -    mnt_point = u_boot_config.persistent_data_dir + '/test_efi_capsule'
-> -    data_dir = mnt_point + CAPSULE_DATA_DIR
-> -    install_dir = mnt_point + CAPSULE_INSTALL_DIR
-> -    image_path = u_boot_config.persistent_data_dir + '/test_efi_capsule.img'
-> -
->      try:
-> +        image_path, mnt_point = fs_helper.setup_image(u_boot_config, 0, 0xc,
-> +                                                      basename='test_efi_capsule')
-> +        data_dir = mnt_point + CAPSULE_DATA_DIR
-> +        install_dir = mnt_point + CAPSULE_INSTALL_DIR
-> +
->          # Create a target device
->          check_call('dd if=/dev/zero of=./spi.bin bs=1MiB count=16', shell=True)
->
-> @@ -88,11 +89,15 @@ def efi_capsule_data(request, u_boot_config):
->          check_call('cp %s/Test* %s' % (u_boot_config.build_dir, data_dir), shell=True)
->          os.environ['PYTHONPATH'] = pythonpath
->
-> -        # Create a disk image with EFI system partition
-> -        check_call('virt-make-fs --partition=gpt --size=+1M --type=vfat %s %s' %
-> -                   (mnt_point, image_path), shell=True)
-> +        # Create a 16MiB partition as the EFI system partition in the disk
-> +        # image
-> +        fsfile = fs_helper.mk_fs(u_boot_config, 'vfat', 0x1000000,
-> +                                 'test_efi_capsule', mnt_point)
-> +        check_call(f'dd if={fsfile} of={image_path} bs=1M seek=1', shell=True)
-> +        check_call('sgdisk --mbrtogpt %s' % image_path, shell=True)
->          check_call('sgdisk %s -A 1:set:0 -t 1:C12A7328-F81F-11D2-BA4B-00A0C93EC93B' %
->                     image_path, shell=True)
-> +        call('rm -f %s' % fsfile, shell=True)
->
->      except CalledProcessError as exception:
->          pytest.skip('Setup failed: %s' % exception.cmd)
-> --
-> 2.43.0
+>   	images.os.os =3D IH_OS_LINUX;
+>   	if (IS_ENABLED(CONFIG_RISCV_SMODE))
+
+Why do we check for S-mode here? Wouldn't checking CONFIG_RISCV be more
+adequate? Think of a micro-controller with only M and U mode.
+
+sipeed_maix_bitm_defconfig has CONFIG_RISCV_MMODE=3Dy, CONFIG_CMD_BOOTI=3D=
+y.
+
+Cf. 3cedc97479ff ("RISCV: image: Add booti support")
+
+Otherwise looks good.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> -		images.os.arch =3D IH_ARCH_RISCV;
+> +		if (IS_ENABLED(CONFIG_64BIT))
+> +			images.os.arch =3D IH_ARCH_RISCV64;
+> +		else
+> +			images.os.arch =3D IH_ARCH_RISCV;
+>   	else if (IS_ENABLED(CONFIG_ARM64))
+>   		images.os.arch =3D IH_ARCH_ARM64;
 >
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
