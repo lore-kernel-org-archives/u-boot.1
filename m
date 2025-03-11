@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B6E2C28B30
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 15:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F8D6C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 16:47:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 634E180F92;
-	Tue, 11 Mar 2025 16:27:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC3968083E;
+	Tue, 11 Mar 2025 17:47:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JtZDGV7b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="npSkbpnU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E6581197; Tue, 11 Mar 2025 16:27:30 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id B1A81807D7; Tue, 11 Mar 2025 17:47:54 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B86278083E
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 16:27:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5500080F92
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 17:47:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-390fdaf2897so5454468f8f.0
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 08:27:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-22334203781so379365ad.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 09:47:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741706848; x=1742311648; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=9t4fk9qhVS2H4TackNxuCd/mqNCKY1jF3sPOs8Pqhvw=;
- b=JtZDGV7bdx5HQG7c5vM0gwDs1od5lqJ4WRyMtSG8qx4mEKHFFjfoiskJeGCpUOujBy
- xhabTd7e97kcaC8cC+sky8+wpId9RQQqPzBTZoo+aBvAqe3K3YBJaKEStwxiqhWZpj6H
- vKZRerfJKhQem3Kplk7qizN7PNkA+gZIjVTTcSih7SYZ9NZT0r3cetA2K/8LnMyEobnS
- V3AH5EW0o+K78nughB8IU+sMasZDd6M4GwHpDn05d06mnzp7ns2BGhkPNS9cYTyaH7n5
- NRWmV9NuOHkdCdKe8x2OnGTBh2HlZS521+2nCze8bhSPSqe9QEbfoNTZnn5RsIN8tGFS
- PEZA==
+ d=gmail.com; s=20230601; t=1741711671; x=1742316471; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GlPTRmdNsxvFOabnkGmzgpu8f89JjhDtbco149TnMJA=;
+ b=npSkbpnUDU+lSCIK2h08oA9rZesI1kiWEpuDsJ85q5ZhWbvCpf22CruoO6llu97ydh
+ W1sGFVTrtBFRy1VzovEhrq2iQxWQvy1xAG/LroaKJwmTAAiYC7vau+/0ooqIi8eTyAD0
+ OJZp/dPN6rU7YIwyjti0BzgcTF3PC8ehsPtgBcd93FLEhvR7Ngg2WlsHSnT1p/GxB5We
+ sVOJgeW08HDafUpqjnlfdpBolsdj95Kq7LbryA7cIPEBW2cV63qWUJUkn+n3MT3IPwZX
+ lFnBggh5Db2YjXAAKOepfMB1hSLSA4jUwJi5NFSehLOb3dGKyK71DtOfFlcLKR4D0AoL
+ inQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741706848; x=1742311648;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9t4fk9qhVS2H4TackNxuCd/mqNCKY1jF3sPOs8Pqhvw=;
- b=L5oabQ6jh8W0GXxeR4CZbSd6gAsBixVBTsCcgMwUiGfQh0Blj6s38dFKIkodmzd/tl
- 3W6DvJMG+FezNTjdKnataI9ShwyWG3z95SiN6mF0Q86QthyzQj+PfvF4keMaFWAnhM+R
- OaXPHz4fNOQdoq33M/JH0ppBDoSwWuNxi2IhEnmlJpvpzj0jmVOjryhr0ZfpJFwZYCSN
- 1bjNQY7hJ+oAbATh3vgRu2z63rVKcjI61vyj29DwNL5pTk9pocPnQXag9OV5M4B8tqwi
- Fonc2qdOVaJywNnrSJuUQh5kpRtxxqI0R5CCiYtMeoLFQhe7ZjNvzI3Nf86BkzYN38J1
- pBTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHgxEO0hLCJtqwumHDukM9GT5djcLBL4GzXLOzaa4sl9WPgs90km1UOf1G5GxUqBmxPxWtulo=@lists.denx.de
-X-Gm-Message-State: AOJu0YypPITcOWzsDYw2o0CAHRI8yRpaWc9uYt5DgfAm686s72sE6hQB
- ENwO8sbSQpE5FUlGS92CKN0ykzHrsP0zbJN9pbZOQXXyw/ED+dV9u1HuUKfitfw=
-X-Gm-Gg: ASbGncvCrOK9BibzlIa3hvRt2kIXTJeIgI7M42llyleLJhkwrlqxDjFjLeROUAjDcA9
- leMp7hYteXuFwDcUO46pMxg3FZGc+GrjjMDZ5/ADxwjIUdaygZsAOXAzqDcVLCPcNAhcaTVZIlk
- Dbig2KU+fY6BTCphhzwgJCPTmraGvpTNR3z+ViNM5jn5mPDJfPjnMWylFV6gLgdkbVQZ2lg2/i3
- gDPkpX6F7pqcuR0gv64N+gIGG12Wzf+L+RfJVaSpgLbwuFqW6fXieIkNzwqmgXtEOHcHnFGuzTi
- IfIil0SXzsu7WBP5qQIsP0E1/QJJ0/plDl+iQ91IBH7tlL0UgWE2R4Q6CaHN/bZGFSWZOsuFrqL
- mKkhAbrKbjuXlyVh8uE+/JyiKFw==
-X-Google-Smtp-Source: AGHT+IGU/kBIbkTWDz0jlprNTGyFAIWGtntRrVKBJtDEKN9vU3ezITg1Hs+ltl9pFr6SHS4oawU04Q==
-X-Received: by 2002:a05:6000:144b:b0:391:47d8:de23 with SMTP id
- ffacd0b85a97d-39147d8dff6mr9730046f8f.31.1741706848046; 
- Tue, 11 Mar 2025 08:27:28 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:f578:9a7d:3957:bef9?
- ([2a0a:ef40:1d11:ab01:f578:9a7d:3957:bef9])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912c0e4065sm18690614f8f.62.2025.03.11.08.27.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 08:27:26 -0700 (PDT)
-Message-ID: <c138a744-4423-4b3e-8b1f-abe77d6e228e@linaro.org>
-Date: Tue, 11 Mar 2025 15:27:25 +0000
+ d=1e100.net; s=20230601; t=1741711671; x=1742316471;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GlPTRmdNsxvFOabnkGmzgpu8f89JjhDtbco149TnMJA=;
+ b=b4Y7bJ5oo21oX552+xFMfWmDsVMXy5LMOodJXKT4e4i1fKgZiu6Nl6rnq6wODhFuYD
+ OQHRUniEeCXf0d4jrUUao2SXYDJIK4zs2vTT0RvuBwnZytWTm/9KZrHWiRHt2e7EPC7S
+ 6nRfoZ0FN7gM5CsUHqqKTZQc8DHHQcVGegBihuIX1zx0RJ6xI70Mk/CctKRRX69u3x9x
+ rHeSuR6POpadboGI8fNBEq7gQkaLWm2sm0uu5HOK+dfk9sfmflzje3aINhef8PnB7/yt
+ 4imyK7t7fAvbrMEGxTzQogyfDE7RTi05uYakWf1zdq8utW3iDzVKPBI4FSFdzOW2l9Fo
+ Clkg==
+X-Gm-Message-State: AOJu0Yzk8j+xShfHGIenD3L3BFjrEW574TUqCr3YdE0kURtuqbtJjBKx
+ 1uStjOsDWjOwiTewYRX6gWU/lL1dATWUNMp2BCWkHrVu6Fn6SZW1me+fs9xnr70=
+X-Gm-Gg: ASbGnctM2huh+4S0KrxqEKUqkc4dttvBxAEkUC2FtS84upyh9khlahO9GwQdZ15qOXa
+ G/0Rge0wbS5HTVLATMM/xMhm3PpKkIJEzN9RHYcRIkMEpHM6zaMzOWs7wMXjiTQ9TGfiHY/a4my
+ XBOlrKtmUlgPqVJBFFOrd9LZQ5f+ItnjevGXBRNiJQyzTH1lG6cMeUuEKcyiSCkMk+zGydD76S7
+ hjBGtUfUZyu4SdUqhcVs5hdcWpuYDS9cPcoE2KWVSC/BjRhIkSHqe8dTgIcb0da70Q3HTCfSDhU
+ xaQIrB/wv4Th0+8RSAW0W4AsFYQWLM2U4g/a17VITZXA9M+/29MebxA=
+X-Google-Smtp-Source: AGHT+IHhHB5A8jWgNLm8ZjLGWgWILo42E+PfGuH4um3t5t8OdPfVh8gfEvyAZnR7JS3zIBQ0LYXEHw==
+X-Received: by 2002:a05:6a00:4fd1:b0:736:4e14:8ec5 with SMTP id
+ d2e1a72fcca58-736ec67eb47mr5445901b3a.11.1741711670652; 
+ Tue, 11 Mar 2025 09:47:50 -0700 (PDT)
+Received: from adriano.. ([190.215.89.187]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-736bf09ae2bsm6941749b3a.74.2025.03.11.09.47.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Mar 2025 09:47:50 -0700 (PDT)
+From: Adriano Cordova <adrianox@gmail.com>
+X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, =trini@konsulko.com,
+ Adriano Cordova <adriano.cordova@canonical.com>
+Subject: [PATCH 00/16] EFI net driver - series 2/2: Support multiple EFI net
+ objects
+Date: Tue, 11 Mar 2025 13:47:42 -0300
+Message-ID: <20250311164758.421900-1-adriano.cordova@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 6/6] configs: add qcom_ipq5424_mmc_defconfig
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, Volodymyr_Babchuk@epam.com, lehmanju@devpi.de,
- sjg@chromium.org, robert.marko@sartura.hr, dmitry.baryshkov@linaro.org,
- andersson@kernel.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250304110105.2762124-1-quic_varada@quicinc.com>
- <20250304110105.2762124-7-quic_varada@quicinc.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250304110105.2762124-7-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,128 +96,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+This series finishes adding support for multiple network interfaces
+in the EFI network stack. This series relies on "EFI net driver -
+ series 1/2: Support multiple EFI net objects". In this series two drivers
+are introduced: first, an EFI driver that manages handles that have the
+efi simple network protocol installed, second, and an ethernet driver that
+implements ethernet operations using a working efi simple network protocol as
+a backend. The U-Boot code will call connect_controller for each U-Boot net
+udevice after creating an efi_net_obj for it, and the first driver will pick
+it up. If connect_controller gets called for a handle with an already existing
+efi simple network protocol on it, the first driver will create a U-Boot net
+udevice managed by the second driver, and an efi_net_obj will be created too.
 
-Thanks for the series, and apologies for the slow reply, i've been out 
-sick and still finding my feet again.
+Adriano Cordova (16):
+  efi_driver: efi_net: Add EFI network device driver
+  efi_loader: efi_net: check efi_search_protocol return value
+  efi_loader: efi_net: Reuse efi_net_obj's
+  efi_loader: efi_net: Let efi_net_obj store pointers to
+    efi_simple_network, efi_simple_network_mode, and the efi handle
+  efi_net: efi_loader: Add efi_netobj_alloc to allocate an efi_net_obj
+  efi_loader: efi_net: Manage EFI net objects with
+    efi_[dis]connect_controller
+  eth_uclass: Add eth_create_device to create a net udevice
+  efi_driver: efi_net: UCLASS_ETH driver for EFI net devices
+  efi_driver: efi_uclass: Add unbind method to efi_driver_ops
+  efi_driver: efi_net: Add efi_net_unbind_drv method to efi_net driver
+  efi_loader: efi_net: Add http, ip4_config2, and pxe on demand
+  efi_loader: efi_net: add snp_owner field to efi_net_obj struct
+  efi_selftest: Add selftest for counting EFI netdevices
+  py/tests: test_efi_selftest: Add test for counting EFI netdevices
+  py/tests: test_efi_selftest: Add test for removing EFI netdevices
+  efi_selftest: Add test for efi_netdev driver
 
-On 3/4/25 11:01, Varadarajan Narayanan wrote:
-> Introduce a defconfig for the Qualcomm IPQ5424 SoC based RDPs.
-> Presently supports eMMC.
-> 
-> Per the flash memory layout, U-Boot size cannot exceed 756KB. With this
-> defconfig, u-boot.mbn size is ~480KB.
-
-What are the differences between this and the other new IPQ platform? 
-Can they share a defconfig?
-
-Alternatively, could most of the things here be de-duplicated so there 
-is a "base" config which they both #include (similarly to 
-qcm6490_defconfig) this way we can nicely keep track of what parts of 
-board specific.
-
-If you'd prefer to keep it this way that's fine too.
-
-Should I be expecting more platforms like this?
-
-Kind regards,
-> 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
->   configs/qcom_ipq5424_mmc_defconfig | 83 ++++++++++++++++++++++++++++++
->   1 file changed, 83 insertions(+)
->   create mode 100644 configs/qcom_ipq5424_mmc_defconfig
-> 
-> diff --git a/configs/qcom_ipq5424_mmc_defconfig b/configs/qcom_ipq5424_mmc_defconfig
-> new file mode 100644
-> index 0000000000..0dd46680b0
-> --- /dev/null
-> +++ b/configs/qcom_ipq5424_mmc_defconfig
-> @@ -0,0 +1,83 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_POSITION_INDEPENDENT=y
-> +CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
-> +CONFIG_ARCH_SNAPDRAGON=y
-> +CONFIG_NR_DRAM_BANKS=24
-> +CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq5424-rdp466"
-> +CONFIG_SYS_LOAD_ADDR=0x50000000
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +# CONFIG_EFI_LOADER is not set
-> +# CONFIG_EFI_BINARY_EXEC is not set
-> +# CONFIG_EFI_VARIABLE_FILE_STORE is not set
-> +# CONFIG_PXE_UTILS is not set
-> +# CONFIG_BOOTSTD is not set
-> +# CONFIG_BOOTMETH_VBE is not set
-> +CONFIG_BOOTDELAY=2
-> +CONFIG_OF_BOARD_SETUP=y
-> +CONFIG_USE_PREBOOT=y
-> +CONFIG_LOG_MAX_LEVEL=9
-> +CONFIG_LOG_DEFAULT_LEVEL=4
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_PART=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_USE_DEFAULT_ENV_FILE=y
-> +CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
-> +CONFIG_CLK=y
-> +CONFIG_CLK_QCOM_IPQ5424=y
-> +CONFIG_DFU_MMC=y
-> +CONFIG_DFU_SCSI=y
-> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
-> +CONFIG_MSM_GPIO=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_PINCONF=y
-> +CONFIG_PINCTRL_QCOM_IPQ5424=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_ADMA=y
-> +CONFIG_MMC_SDHCI_MSM=y
-> +CONFIG_MMC_HS200_SUPPORT=y
-> +CONFIG_DM_MDIO=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_QCOM=y
-> +CONFIG_RGMII=y
-> +CONFIG_PHY=y
-> +CONFIG_PHY_QCOM_QMP_UFS=y
-> +CONFIG_PHY_QCOM_QUSB2=y
-> +CONFIG_SCSI=y
-> +CONFIG_MSM_SERIAL=y
-> +CONFIG_MSM_GENI_SERIAL=y
-> +CONFIG_SOC_QCOM=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_DEBUG_UART_ANNOUNCE=y
-> +CONFIG_DEBUG_UART_BASE=0x1a84000
-> +CONFIG_DEBUG_UART_MSM_GENI=y
-> +CONFIG_DEBUG_UART_CLOCK=14745600
-> +CONFIG_TEXT_BASE=0x8a380000
-> +CONFIG_REMAKE_ELF=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_BOOTSTD_FULL=y
-> +CONFIG_SYS_CBSIZE=1024
-> +CONFIG_SYS_PBSIZE=1024
-> +CONFIG_OF_LIVE=y
-> +CONFIG_MSM_SERIAL=y
-> +CONFIG_DM_EVENT=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_ENV_SIZE=0x40000
-> +CONFIG_ENV_OFFSET=0
-> +CONFIG_PARTITIONS=y
-> +CONFIG_PARTITION_UUIDS=y
-> +CONFIG_MTD=y
-> +CONFIG_MTD_PARTS=y
-> +CONFIG_HUSH_PARSER=y
-> +CONFIG_PARTITIONS=y
-> +CONFIG_EFI_PARTITION=y
-> +# CONFIG_I2C is not set
-> +# CONFIG_INPUT is not set
-> +# CONFIG_SCSI is not set
-> +# CONFIG_SPMI is not set
+ include/efi_driver.h                       |   4 +
+ include/efi_loader.h                       |  30 +-
+ include/net-common.h                       |   2 +
+ lib/efi_driver/Makefile                    |   1 +
+ lib/efi_driver/efi_net_device.c            | 290 +++++++++
+ lib/efi_driver/efi_uclass.c                |   6 +-
+ lib/efi_loader/efi_http.c                  |  30 +-
+ lib/efi_loader/efi_ipconfig.c              |  36 +-
+ lib/efi_loader/efi_net.c                   | 665 +++++++++++++++------
+ lib/efi_loader/efi_setup.c                 |   4 +-
+ lib/efi_selftest/Makefile                  |   2 +-
+ lib/efi_selftest/efi_selftest_net_device.c |  65 ++
+ lib/efi_selftest/efi_selftest_net_driver.c | 310 ++++++++++
+ net/eth-uclass.c                           |  32 +
+ test/py/tests/test_efi_selftest.py         |  45 ++
+ 15 files changed, 1330 insertions(+), 192 deletions(-)
+ create mode 100644 lib/efi_driver/efi_net_device.c
+ create mode 100644 lib/efi_selftest/efi_selftest_net_device.c
+ create mode 100644 lib/efi_selftest/efi_selftest_net_driver.c
 
 -- 
-Caleb (they/them)
+2.48.1
 
