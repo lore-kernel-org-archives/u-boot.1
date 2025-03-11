@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84E4C35FF1
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 01:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C50C28B30
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 01:49:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DA8C81703;
-	Tue, 11 Mar 2025 02:39:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
+	by phobos.denx.de (Postfix) with ESMTP id 1A7A5806D8;
+	Tue, 11 Mar 2025 02:49:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="UxrBO+gJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C593gwW0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AECD0801FB; Tue, 11 Mar 2025 02:39:33 +0100 (CET)
-Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4152A807D9; Tue, 11 Mar 2025 02:49:42 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2654E8168B
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:39:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0FCD801FB
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 02:49:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=per1cycle.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2E24D4033E; Tue, 11 Mar 2025 01:39:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
- s=dkim; t=1741657153;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hrQOFGlFn07pPz014SVQmtCkfvsAk1kL8BIjIC1Viy4=;
- b=UxrBO+gJxsjWKju0eWqKTmAwBY9DvGeBAVK79Nv7EEdeVhQpN3ZlCDivycYMQbbMqxwK/G
- tcETf92Fq8rJ58nY6UE/AtuYJ/6ETAUXWizbJtN1/LUQepA87MnvqXqU5tW91PqRRY77MF
- Pi/itacY1HIe8Vp71Zd8czd+GOoM5YanLsWdt5OtUz2RyjzQogxV0sbfDZi9gmI3foIPyy
- 4VoQU7DRgxStcAManNBE60nnIAyZjF2Isn2WRCN15bU8da6kMlALFRiZWqEM3dsu8tHtXi
- Ci1kbwR7tNX+n7UjZSuUKq0jbv/ONtzreXqB2Jt5GRJ2P2jZYDluqxXy/jmSiw==
-From: Huan Zhou <me@per1cycle.org>
-Date: Tue, 11 Mar 2025 09:38:51 +0800
-Subject: [PATCH v2 4/4] Add reset config options for k1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-22403cbb47fso93504365ad.0
+ for <u-boot@lists.denx.de>; Mon, 10 Mar 2025 18:49:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741657778; x=1742262578; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NcmSGY93TJIOCChHR0BkeyOeVp8lO8SiRGfG7iDu9wQ=;
+ b=C593gwW0Ht4BGk3CRuikEJnmnVMk/l2Q4s9LMdvIewiu+xyBtqDyjU4nHwWD+VIcqv
+ CIWyN76YtkvkIKJlstG2R/MkFSYR4nNhFkptvhe/lBOD9qTKTJZ8iukXkf6fAue5vUAT
+ 3QKIOMUOTptygDaki5RrSX1l4p0g5UUvXku+Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741657778; x=1742262578;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NcmSGY93TJIOCChHR0BkeyOeVp8lO8SiRGfG7iDu9wQ=;
+ b=BGxWCupDueohy+jKY5SpR0aIxv9OlpXeAkkz5cMU/dk42ojVOqU4rhCwqw+Xgu9KOH
+ fRmTVI5NjxRnRK/VimJQEpYNWbQ37ZsXGfSBXrBVeYeQf3RRKDYeS0FkWGvhLgtvGOPu
+ ZzTWpIvEbWkC9T8+Op+l9hZMlnf/E7tRa7qhUX1OfRbVPMw1GLMO+77n5hVJyIndPuF8
+ OJyzED18IBF5e7eN8ZDFvLB3Aj14XcItivSPT8mLmSjCRsODolIHCpuIaVccjfeKCWO8
+ XJeU6711jX0ogO6BmLIN8R7hr5qiqoLbi/msleDGsST18PwoO+RaqZZynfC7KCrqfAAu
+ IG2A==
+X-Gm-Message-State: AOJu0YwquH0Bt073OkZNy/gkb2WYgUnO3a0IXTlHtooN34KQFiSkrT2+
+ Z0pZnpi5RLv6L/Nu2TzGLo9ySNSHV/SyOgNS3w5A8k7C6jXe10/Xub2K191YsN2ssfjpeaB9uur
+ A
+X-Gm-Gg: ASbGnctN8KEKYbRJQSVk+aQE2shnTpKeWNRXheCzSua2oKruhYGU6aRO+g3kmK9HyXy
+ oXqjEOjPgDiU2aJp+Sb12VDXTSXCGKfnrrxtx43f7f4PXXEd0mhmDutf6VVZuwt3BUaXLrDxl+c
+ 31X1XnDhjZXPwi36QBLHreKPXEExZLsv74jvM6xoaG8Zl4hMhSxYDk25GousVC1eJeSZ0khx7kB
+ LsYUyHxWwGVyhgJze4BGt82qrW1f7qwhRxSOeagYR0o2oTrPjKr4Ijy1yxud9fI5GWjX91UVZAD
+ PJ0pd6FAfHM33eClPcDzGg71QDQTIchZQX/9B9hYz2ohVMa44omGO1ws
+X-Google-Smtp-Source: AGHT+IHyG6HpncheBjNBHG750uoumDTOr3McfmgUpxdE6I311Ih2HD+/Ch3B6TcRIRsPlfeXMb9l4g==
+X-Received: by 2002:a17:902:ce0a:b0:220:e338:8d2 with SMTP id
+ d9443c01a7336-2242899474amr238530315ad.21.1741657778520; 
+ Mon, 10 Mar 2025 18:49:38 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22410a91c5bsm85644235ad.186.2025.03.10.18.49.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Mar 2025 18:49:37 -0700 (PDT)
+Date: Mon, 10 Mar 2025 19:49:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20250311014935.GS2640854@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-reset-k1-v2-4-8a838752c265@per1cycle.org>
-References: <20250311-reset-k1-v2-0-8a838752c265@per1cycle.org>
-In-Reply-To: <20250311-reset-k1-v2-0-8a838752c265@per1cycle.org>
-To: u-boot <u-boot@lists.denx.de>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Yixun Lan <dlan@gentoo.org>, 
- Huan Zhou <me@per1cycle.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1741657131; l=1059;
- i=me@per1cycle.org; s=20241231; h=from:subject:message-id;
- bh=QUZYp8MmiUQrgre5+TdfnfPcV5aqf5lnjGSQQlhsz7M=;
- b=k472brUcLvhap//TKftx9Rba4on6DRFtduIBABW57qVCKFlAnFKUlRDQOhF49xo2mqx5HuBYB
- uIDXglnfz9ZDMOrx9fmikJxMfW4630h7emjRgFp07/tnkUl5Xy75yBy
-X-Developer-Key: i=me@per1cycle.org; a=ed25519;
- pk=LfN2kXe1uCRoaEzAJ8quXuPIH4MiEnZHOCRZwGytJwE=
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Z5iBe5wnrtHfV9Fn"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,36 +91,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add RESET_SPACEMIT_K1 option in config
 
-Signed-off-by: Huan Zhou <me@per1cycle.org>
----
- arch/riscv/cpu/k1/Kconfig     | 1 +
- configs/bananapi-f3_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+--Z5iBe5wnrtHfV9Fn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/riscv/cpu/k1/Kconfig b/arch/riscv/cpu/k1/Kconfig
-index d9cd8dce96426bb4cbe9ff38385a4c66116fe341..14201df80f2c0bf304225ef6d8dc8e72ff508815 100644
---- a/arch/riscv/cpu/k1/Kconfig
-+++ b/arch/riscv/cpu/k1/Kconfig
-@@ -13,6 +13,7 @@ config SPACEMIT_K1
- 	imply RISCV_ACLINT if RISCV_MMODE
- 	imply SPL_RISCV_ACLINT if SPL_RISCV_MMODE
- 	imply CMD_CPU
-+	imply DM_RESET
- 	imply SPL_CPU
- 	imply SPL_OPENSBI
- 	imply SPL_LOAD_FIT
-diff --git a/configs/bananapi-f3_defconfig b/configs/bananapi-f3_defconfig
-index 0f12db3db848badda1fc7192aeb0190ac22a269d..7483f128baea9d8971efc9ed166aa042ec32d908 100644
---- a/configs/bananapi-f3_defconfig
-+++ b/configs/bananapi-f3_defconfig
-@@ -18,3 +18,4 @@ CONFIG_HUSH_PARSER=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_NS16550=y
- CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_RESET_SPACEMIT_K1=y
+Here's the latest report.
 
--- 
-2.39.5
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Mar 10, 2025 at 5:43=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
 
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to Das U-Boot
+found with Coverity Scan.
+
+1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+1 defect(s), reported by Coverity Scan earlier, were marked fixed in the
+recent build analyzed by Coverity Scan.
+
+New defect(s) Reported-by: Coverity Scan
+Showing 1 of 1 defect(s)
+
+
+** CID 544194:  Error handling issues  (CHECKED_RETURN)
+/lib/efi_loader/efi_net.c: 1084 in efi_net_set_dp()
+
+
+___________________________________________________________________________=
+_____________________________
+*** CID 544194:  Error handling issues  (CHECKED_RETURN)
+/lib/efi_loader/efi_net.c: 1084 in efi_net_set_dp()
+1078            // If netobj is not started yet, end here.
+1079            if (!netobj) {
+1080                    goto exit;
+1081            }
+1082
+1083            phandler =3D NULL;
+>>>     CID 544194:  Error handling issues  (CHECKED_RETURN)
+>>>     Calling "efi_search_protocol" without checking return value (as is
+done elsewhere 39 out of 43 times).
+1084            efi_search_protocol(&netobj->header, &efi_guid_device_path,
+&phandler);
+1085
+1086            // If the device path protocol is not yet installed,
+install it
+1087            if (!phandler)
+1088                    goto add;
+1089
+
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--Z5iBe5wnrtHfV9Fn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfPlqwACgkQFHw5/5Y0
+tyzEQAwAi+AOju/0hrCsWKuKVD/ALEMqpPs/NmCSqZvRAMidDXmLVp3wG0DO7K/T
+dJNYU2J6sokfuA4GLIMOLxZVqKRARC3bs51afdYOvyzBkzAvXFp5/TNRUBy3J+ZZ
+2/KhWuaWBchvF4uMOnbsUQnsbC3+CggSpSy++oMSl79vmIxaigixuqT4w68lwehl
+qUAhrRbvfFqsKqciUwrB7upZ5iyDuRPBLQ2VyVw5q1iJwtWoiTWmh3ppgk1lSsRs
+WSHEeb4HoePRrrxehtFu2XnzQ7thkAcm1XpSGssUuiYyEe31mJ6MldUUI+7rffOp
+RCrVymjiq3wkgx7iZeRtyvuM4AHbQl662CTcDSK3WJ0Q1oA+wZCYaLLl7XmrpG5q
+OYN13nxeEVssR/MDBoGzUDU4++giboG98LbnmFbPnR98JykIuxIPk2e6iQ9rQ5i8
+P3ld8pQYgqELPcIbX2JW947Cmpina8SHkyrOPUB46k2sfHA7bqKxv7/ngPYRvZuc
+Q6IGp9Ok
+=a9dm
+-----END PGP SIGNATURE-----
+
+--Z5iBe5wnrtHfV9Fn--
