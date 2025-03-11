@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC7CC28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35C6C28B2E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:17:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4976881D1F;
+	by phobos.denx.de (Postfix) with ESMTP id 93B3E81D3B;
 	Tue, 11 Mar 2025 14:13:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OyclqslY";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dFOku2jo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71008814B6; Tue, 11 Mar 2025 11:33:20 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id B3F5A80FB9; Tue, 11 Mar 2025 11:33:22 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65D3D817D3
+ by phobos.denx.de (Postfix) with ESMTPS id 81739817EC
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aaf900cc7fbso1085585366b.3
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ac25520a289so690523566b.3
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689172; x=1742293972;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689176; x=1742293976;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rCFdMQbOn5HP2t7PCmbK7jYrnj38Djj6lbXR62/p/kg=;
- b=OyclqslYELqs9NTrfppTPPDkKYff/nzOuJ0T7RtWCFsh01BBrq1iu2tKzQxfV6h1Wh
- 7Terbvl1dub9cZ9DExsBoOmmi/YMaZ2PP5FUNFmI0rWKlbgIbWnOQzCIKxV2JqdIrj03
- 2rY5GjYBgtgP4r/aMzS05X2cpDorK0DOnWwcTQZ3wuoNoFf1uR6DEEpxhpudaZcBgM5E
- /Uct/SjeLBtUZfHo1Vo6GH0MgtX5EW/Wt3ii9pAVEnmo33jBM47gJd/tOrpISxs+vzw8
- Msm1+xT5HnBq1wZ/NSjq3t+d5IKQdFquexNYmXAY2TXNmsNnDWK7k3s1thnqFQ2HzD3d
- kSBA==
+ :reply-to; bh=ItSlqrQ1bPR+VKxPFrhzL1fLWh16Ys3gxQMqNVOuWnk=;
+ b=dFOku2joer68aOQMOoEfyZmGENggQOb7qf8d7vELT+yblTPuqXYDiVC3QYh0t6X5oX
+ XxFzX2HbXH1BIkIKz8jJYvxh801KejUdJseGCotVdq/3izEf/UXPCU49GBxw/S/nrY1q
+ o05oNoxo8hEu+zxveHN8gTKuo7+ZieBcSn1yermDHFxFAV1cYhxNXp7im07+QV++n7j0
+ Cumx/M8NKwhj9CU72+1/hglRHD3XZfMQnNzv88Klfm6QVT7g/GaXQL3notl0S58yM3dH
+ islU44r2HEWA5/9mHPCMbLOwtS/vQMqUSJZIJtyfTSfimJhGtwQ+TkQVqXfGjHxvDYrp
+ WpIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741689172; x=1742293972;
+ d=1e100.net; s=20230601; t=1741689176; x=1742293976;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rCFdMQbOn5HP2t7PCmbK7jYrnj38Djj6lbXR62/p/kg=;
- b=dZP3Z40Y1HMZjOvZRzvbYsgR/ISJZ3F1graKvS7VGwQBoVPQmkLR3WECeee7QKBgD/
- esk2iWtNi8r27hUTu+RDcdeIWyEA2x9yRPf3THffyBKkWXHSR7zLFHFUTYqtxQX6Ogp9
- p2Wuepfa+4IFsX/tQyHZNETkyWZJQQuiiFZQBDGdCVlxT3ex2zrSZT1P+/ij2ADA7Mst
- c6MexXvB053O5O6bbDDTrdmxv4EUkY5KxDwITwU3F9uW/AgwalHNDROuemYTtUTELMUw
- fLSpgG6RaVJsL4MzfAs7lRQlWt5wMq8LCU3zbgLS7AbzRGdBR4kOfz5Xmz0So32Kub69
- 0M8Q==
-X-Gm-Message-State: AOJu0YwVZ/RPAXX8R2rAwAGt5UqvxMHlq2JYmAU1hBwGhIVcJXQvOoah
- ILZMJD2NgvDTn4b1GEIuxguMxvMg3XhdmjXqMFI03XAFUwdb0ez6Tq/SndL6kQQ42FM89w8ZS/E
- p
-X-Gm-Gg: ASbGnct/nzzp+JCcFDakFEQ2/Q/KYiOZlb8tzd6R0s81DN4GuMnoR2jaVXkq080geLY
- 7U5Ix7zm4e3swBp/SnxuE9nPZbcmJVBslJ77v/1IE/s/f6wlWIoMdWFDItCHEwrOZce+UpWNHg8
- S1Aaxj1VO/xPVtQAx8E82QuHeTv5i2jbJ8nfBE+9ezspN4QnBg6Q7t7ygGdHvwRdCIq0tzUVg34
- JHiBo9ah2DAnCCbONDhZWNHqY6THTylTzYooxx9dJvam9EpnxmceB7tXq0bz+jTdmn9lx8sFabf
- 7NVMtdtkFy8XU9HawaR6EGHVPHKHybfPKQf+AZ1i
-X-Google-Smtp-Source: AGHT+IEI3k+dobF0vur1LEghGbWx+zKNWkl2jFxJAukdxlstI1bfezvWTI9mzGutGsQguFJHVcbWBg==
-X-Received: by 2002:a17:907:60d5:b0:abf:78b6:c565 with SMTP id
- a640c23a62f3a-ac2b9db4878mr385811066b.4.1741689172190; 
- Tue, 11 Mar 2025 03:32:52 -0700 (PDT)
+ bh=ItSlqrQ1bPR+VKxPFrhzL1fLWh16Ys3gxQMqNVOuWnk=;
+ b=O8sC3KUMNIRwbj9jTgEUQFCv4wPXZsIXfFFWNO87cQwMrXmNwluDUJDOEWuaQiBxpS
+ WlxBKTUfiOyr4SUpkl5TF7x1HSLSxY9sJUd8uh9aEPiBUl7Ry78lfTkknL6X/n1AF2Bu
+ I9tz/Z78nKqaBV3VdVaO3BzrIzAZ/c1A4Xmlwwq1GT1jesWhgFeYldPfCMVdF4o3mhAJ
+ n2U0aMNDDepPFO6k0XXsdQ3Y5Xp59XjCdGFRtNmE6VutpFX9sVYB4du84CWMntoDtTOL
+ G75/6GVwjpZl+IVpibNaoXUePrG2Aq3LWpjsjUiXkHJ47PVCWyjtjTzTwA1StCWi5fiB
+ q2ig==
+X-Gm-Message-State: AOJu0YxQEh/4zV1rQagLOwApVfYjp95zYQQSKMrP4mhZVr+Q9rS9AkKL
+ HX/EK9wcsHWhgQOSlSoqgdT17/fAjr8Wfubirda/rNzeBEmpugDCbKMAJL5dZ6CqXesJ9GvqGAF
+ s
+X-Gm-Gg: ASbGncuUqPuVKGIyLHMRXBvLyDktkq2aHdufHbOlnBFQQVaQNQXaGo248TN1/8uapbB
+ /xJmvPMXcCTEwMJ/zPkyQ9tfWQR3UyETRKnV3jX0u3GWj7cQcrIjpR5lsBjsfi8tjirMneH+8XL
+ h75DSfUYizyVDCee0VpVN/m6rwQjLxIL7Z0SHDfKaYtjtUmyAAi3KE0XIcpmxwYySpLPqaz28Gx
+ VZq270FoltqEFT4fEPs3LX/nrOZWRSEg0KE3ibAXL8DstE0IiNRoeWcLYeVd/E50BIHBgeEsPDA
+ 9Lzixmp9k8u87gysGYlJ2Bo9IG5KyA2QgTJ1lCsN
+X-Google-Smtp-Source: AGHT+IGR71U4lkwMVOareNe2IQeQUGCWws0DVbP455qJVU507/C8XPvA1Hy9cUgGvxAhYzPe013X/A==
+X-Received: by 2002:a17:907:94c5:b0:ac1:e752:17d2 with SMTP id
+ a640c23a62f3a-ac2527048bdmr1668810366b.19.1741689176611; 
+ Tue, 11 Mar 2025 03:32:56 -0700 (PDT)
 Received: from localhost ([2001:4090:a247:83e0:938:b3cb:2c1b:889c])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac2a27d2613sm304919666b.12.2025.03.11.03.32.51
+ a640c23a62f3a-ac29fd8e063sm318255066b.42.2025.03.11.03.32.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 03:32:51 -0700 (PDT)
+ Tue, 11 Mar 2025 03:32:56 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Tue, 11 Mar 2025 11:30:44 +0100
-Subject: [PATCH 05/19] arm: mach-k3: common: Add CANUART wakeup check helpers
+Date: Tue, 11 Mar 2025 11:30:48 +0100
+Subject: [PATCH 09/19] arm: mach-k3: am62p5_init: Resume on LPM exit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-5-666de9c105cb@baylibre.com>
+Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-9-666de9c105cb@baylibre.com>
 References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
@@ -86,12 +86,12 @@ Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>,
  Akashdeep Kaur <a-kaur@ti.com>, 
  Markus Schneider-Pargmann <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3218; i=msp@baylibre.com;
- h=from:subject:message-id; bh=QKzluirgtPoy++0BTejuCDxVxAbRbYrAqMVyVkjORmU=;
- b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCDL1JHnoBZ1p3LB0SUOyT+p9uVU7+n1UzNZIKopol
- b+97bKjo5SFQYyDQVZMkeXuh4Xv6uSuL4hY98gRZg4rE8gQBi5OAZhIvTDDX/nDp5pua0l+ad3p
- uXOm9AuHLbIzHh0VX/5q0dEPE/Y0mQkzMry+MrHlCt/HwkvnlJo61HY/TKkTuX3waNPzt1uDPxq
- 9ZGEFAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1026; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=45mUpYpADwpI9p4cBN/e2KEb2FlrZq2BgODnZVZeQjU=;
+ b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCIqeWvuB6bSn2sGKdINX8/O4Xx9Ij35uVnJ/tp1Y0
+ fwy5082HaUsDGIcDLJiiix3Pyx8Vyd3fUHEukeOMHNYmUCGMHBxCsBElsxi+Cs3QeJt1RaVvfw+
+ F4/9n/JwD1PIlLXpp8Xff7dvkf2zwkCQ4X/233Pm258kziuQSwtbqnZp8cd9Dd7H9S3kjBeZng6
+ tVeMFAA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 11 Mar 2025 14:13:18 +0100
@@ -111,83 +111,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add dedicated helper functions to check CANUART wake registers and magic
-word. This helps determining if we are in a wakeup or if CAN IO
-isolation has to be removed.
-
-Also add a helper to detect a low power mode exit/resume.
+When exiting a low power mode with DDR self-refresh, we can directly
+resume after DDR setup is done. Call the common function to resume.
 
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- arch/arm/mach-k3/common.c                | 22 ++++++++++++++++++++--
- arch/arm/mach-k3/common.h                |  1 +
- arch/arm/mach-k3/include/mach/hardware.h |  3 +++
- 3 files changed, 24 insertions(+), 2 deletions(-)
+ arch/arm/mach-k3/am62px/am62p5_init.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index ef40d623058072e89e9b3e53fc0f7ea6b78f96e3..e3554ee6aa8957b8cfcacb452ba391d7b3abf2a9 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -127,13 +127,31 @@ static void wkup_ctrl_remove_can_io_isolation(void)
- 	writel(0, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_GLB);
- }
+diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
+index a61dcaeb00f799a1f9c42f48d63c42815c4dcae3..af63cbe3191526add83652af4003974cbaeff0e5 100644
+--- a/arch/arm/mach-k3/am62px/am62p5_init.c
++++ b/arch/arm/mach-k3/am62px/am62p5_init.c
+@@ -223,6 +223,16 @@ void board_init_f(ulong dummy)
+ 	spl_enable_cache();
  
-+static bool wkup_ctrl_canuart_wakeup_active(void)
-+{
-+	return !!(readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
-+		WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
-+}
+ 	setup_qos();
 +
-+static bool wkup_ctrl_canuart_magic_word_set(void)
-+{
-+	return readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT) ==
-+		WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
-+}
++	if (wkup_ctrl_is_lpm_exit()) {
++		u64 meta_data_addr;
 +
- void wkup_ctrl_remove_can_io_isolation_if_set(void)
- {
--	if (readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
--	    WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE)
-+	if (wkup_ctrl_canuart_wakeup_active() && !wkup_ctrl_canuart_magic_word_set())
- 		wkup_ctrl_remove_can_io_isolation();
- }
++		ret = wkup_r5f_am62_lpm_meta_data_addr(&meta_data_addr);
++		if (ret)
++			panic("Failed to get LPM meta data address %d\n", ret);
++		lpm_resume_from_ddr(meta_data_addr);
++	}
++
+ 	debug("am62px_init: %s done\n", __func__);
  
-+bool wkup_ctrl_is_lpm_exit(void)
-+{
-+	return IS_ENABLED(CONFIG_K3_IODDR) &&
-+		wkup_ctrl_canuart_wakeup_active() &&
-+		wkup_ctrl_canuart_magic_word_set();
-+}
-+
- bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data)
- {
- 	if (strncmp(data->header, K3_ROM_BOOT_HEADER_MAGIC, 7))
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index 0359fea5675bdaf8cdde7989eebac1a695a065ba..5d347c7252d18c06dac21813b8247fa2c57902bc 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -46,6 +46,7 @@ struct ti_sci_handle *get_ti_sci_handle(void);
- void do_board_detect(void);
- void ti_secure_image_check_binary(void **p_image, size_t *p_size);
- void wkup_ctrl_remove_can_io_isolation_if_set(void);
-+bool wkup_ctrl_is_lpm_exit(void);
- 
- #if (IS_ENABLED(CONFIG_K3_QOS))
- void setup_qos(void);
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index bd7407a4b9498207d94a35d8f73b852c7528a086..949badb18dc453421ce0f0d403554ac604cf4534 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -118,6 +118,9 @@ K3_SOC_ID(j722s, J722S)
- #define WKUP_CTRL_MMR_CANUART_WAKE_STAT1			0x1830c
- #define WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
- 
-+#define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT		0x18318
-+#define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
-+
- #define WKUP_CTRL_MMR_PMCTRL_IO_0				0x18084
- #define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOCLK_OVRD_0			BIT(0)
- #define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOOVR_EXTEND_0		BIT(4)
+ 	fixup_a53_cpu_freq_by_speed_grade();
 
 -- 
 2.47.2
