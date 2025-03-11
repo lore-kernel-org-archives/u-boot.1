@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C061DC28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 17:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0320C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 17:56:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C24C48169D;
-	Tue, 11 Mar 2025 18:55:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19C5C8192A;
+	Tue, 11 Mar 2025 18:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JiA2BnsO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WMx3H3zd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EBC781782; Tue, 11 Mar 2025 18:55:51 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 264FA817D8; Tue, 11 Mar 2025 18:55:52 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D17480F92
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 18:55:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 175B88168B
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 18:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-30bae572157so56984661fa.3
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:55:49 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-30797730cbdso61157081fa.3
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:55:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741715748; x=1742320548; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741715749; x=1742320549; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d4kTA2UL6eG1QRPgMO4A+jK4hQeGYDEJl5fEajZ1QMA=;
- b=JiA2BnsOjRCOQp0nIXWGuNxN+OH0mHL8wpzkXOGCMBzWiX47vV6xCw6y8IkrhIf8Bs
- XCQDrj9ckWxI/VM/FvoxpyGjVg1uvi9MduhJkxsl7xKj77+PgEHC3cycFUOBPsHaA1KD
- Qh6iLsZGIZGfnQqOYCE9I5hfFjoAXMDlBWA6D2Ftnz5wIF/bCKju2+WCaEqsYSY64cV0
- thzyN038zo9K8J8vRfoIbIeW1nvr/SjLiCJwcBhHCGqyVBCElScaRmCeAFOBZWMX1UtR
- y1e+NKzK1Rlgc47ZfPydtee7cbk0QjqkBltG5tyh1RUsQz+jfDFr6tFJ4j8SqRRCuCXJ
- A7Fg==
+ bh=OxKh7pT6JD9isv+05Psi5nMfdgSVX39T3zsaR3ZYLdw=;
+ b=WMx3H3zdizfTVRmE8si6oJN4zoZZSsMNHBYHK8lzW7FtIkP/NIyAh1yi+zTz4+ThJB
+ uDHrnaTQOwsDT4I4CdQO8kO41KLDHs7/EwiehUr+O2Uchj6GC3AcMq+TvGU3HsNc8zNc
+ j33J/lq0tEYuPPgbhvBGVP3i0+GMepKfxqNPnTbmDExpmqYnkTsdy3WkEoUCchG1lxc8
+ 4RjdP0zqJzaby2uWZix779eWFSy3q33OT08WbzbEK2CDibnJFJXwn0LV0uAVfx9WvKYX
+ LNMLU6PlnFKbOtUvP92ysXoTSiR94iYdASJ70ZE3Q/9pDGknUetK5DM2BnGYracDZyn0
+ pQgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741715748; x=1742320548;
+ d=1e100.net; s=20230601; t=1741715749; x=1742320549;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d4kTA2UL6eG1QRPgMO4A+jK4hQeGYDEJl5fEajZ1QMA=;
- b=h/sypvYwdXE0L7FgQgJU4Buu5m5YOONk2gjhJy7f7wAcXMO0/oiocN5Wh1rJn8fTgp
- rzedmvhd6W13Tmm/KeNKkSctpLmNnVBM5lS6oqPmdhstYG91NtHwSqhVF2EsvN++9JKl
- dZvqPdpjquuYD//rUVg2Kp5ULeGkuH80zVzrB9ybpDPegRqaH+R88jfsHwLKxVpx/fDW
- inbwFObHL+VzviqLzGVI+A2QVuJ9nf1ixsGcl2MZ2Kf1QEWo7aAMXk0qA/HUncUId7C+
- f1Q7hIANP3CP1qwEEfdUo1ixz+gNfsWlLPQwWotloplNDwxRnU6qKjXi33HvW4cQdH8X
- 7MjA==
-X-Gm-Message-State: AOJu0YxThgFFPFBwFZLXBK4fdMZKDkT8I8ZET8+nA8AZrDmXTRKN7j/J
- 3mRP5OO8Zs+ZVS+L0zU6K/ea3ognt4VHGZhvqcSNUeQcR2ekKOcY
-X-Gm-Gg: ASbGncuh86uvzBhTb6i49wQablKNtA7LRtkOyojZuCy8J0BBVyU1a7jU6AyOGet5H68
- zdJtKfB/CekItV6amAVsaxB+EH1iJm7m2+AAGlvuk2/RZszoCswOj+FVdPPNw+AfR8KO0T3Wxh/
- Dm6u8u9y4U7ty4jikGTXIIcDIqG9cR+epF0KRR85IZmGls9rMd3Hpog+Eh4w441VmoqkwVG7svg
- 3jvZYdrNWlczm3/elKc0Si15EhuDIKqDDemfdKkfelR4X7sY8ZPX0sDTL/ECiJY7wzIwCY3f85x
- hJ8gbfpcKBtd3+zDkCJn7M6O4ZrlmWwZiuiA
-X-Google-Smtp-Source: AGHT+IHBOIBn7WKjERhQsORNhE+OYQu5CgspK3fKgo8X7qbKP5+wxUQKw49Ax0HmaLtfpYGZc6gw8w==
-X-Received: by 2002:a2e:6e15:0:b0:30b:c980:c589 with SMTP id
- 38308e7fff4ca-30c2066a1e4mr16130381fa.14.1741715748371; 
- Tue, 11 Mar 2025 10:55:48 -0700 (PDT)
+ bh=OxKh7pT6JD9isv+05Psi5nMfdgSVX39T3zsaR3ZYLdw=;
+ b=ka2Rro8z4QbEY0AHJnJ3Euxal2geJbIpMwadDU3I5ys1jvpveiAQ/nDwR1ZypvB41Z
+ lo+fimkaw+9W6qD+NCC8ZjTVCiJiS2oht6amAJoyhTamhjAMpKlqtdlcjm6/63p6Uh9T
+ kKfP2X1zhU5E2upto6UcmKdAXruEncPtNMvzyf8tIlaI0R62D6OIjzCtaTP7LH/eco18
+ /agnhRsOWHseJS1VnBXqGxW3s9H2AKT5HBMLo6o4gLpYjwXDKsjklSBdSoW+zSkGZ/tt
+ z1cAcUPDNlnTZmMauBztc7/z38f5rSOXB8niNCD1BzHU98Hxks6m9G5erJndm8Iswfnc
+ +dGg==
+X-Gm-Message-State: AOJu0YxhU+MWmUyb8riT+Axq6c6ix+W8tn7SFKJ7GxvcgAEM6Teyx0KU
+ l8t8BmGo8Nbn69SmZJo6McaWiZZ/kYKY4UcDW7DHJuXFUcxjNoiI
+X-Gm-Gg: ASbGncsN9Dvm0Reo48ZrDbCmS+S3TcXyeBaEhyb+aiSgtLAnAZmREjZTsAFq/b5oPX0
+ 1q09q6GVtrb/bd8Lt6ZYpmNJxDadspS+es75QH7/O7oT88vpDEeqaW4tfqXe00NluYNDP0mOBAm
+ eNkdRCd8XsBEHDId2VLfwmhxehlN3aIq2EpPmwFQDLSzGBV2c3VrmQt1oL7aqx0cwXwWe/drppE
+ x57JbVYN/C5s3rFMzj3/5lnmt0Q5/eH6BGCmzkI3nb8Prt8DDM6gVbKbdq1U0vzzKSGfrct3nMM
+ iDh7JSR2Vie/T1Ayq9R4zfJugXVVrCxBd+Ac
+X-Google-Smtp-Source: AGHT+IHa58dR8doTuLcY9U7zyoN7deN/gfvtVSJbdFwpFVuyVcGv3gD8B8Sm4iruRA4Y8hDdpIWvcg==
+X-Received: by 2002:a2e:7207:0:b0:300:26bc:4311 with SMTP id
+ 38308e7fff4ca-30bf45360a1mr67497961fa.18.1741715749166; 
+ Tue, 11 Mar 2025 10:55:49 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30bfceebd49sm15542811fa.60.2025.03.11.10.55.47
+ 38308e7fff4ca-30bfceebd49sm15542811fa.60.2025.03.11.10.55.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 10:55:47 -0700 (PDT)
+ Tue, 11 Mar 2025 10:55:48 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 3/6] configs: grouper: add 3 second delay before power off
-Date: Tue, 11 Mar 2025 19:55:19 +0200
-Message-ID: <20250311175522.120018-4-clamor95@gmail.com>
+Subject: [PATCH v1 4/6] configs: picasso: add 3 second delay before power off
+Date: Tue, 11 Mar 2025 19:55:20 +0200
+Message-ID: <20250311175522.120018-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250311175522.120018-1-clamor95@gmail.com>
 References: <20250311175522.120018-1-clamor95@gmail.com>
@@ -102,20 +102,20 @@ enhance user experience.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- configs/grouper_defconfig | 2 +-
+ configs/picasso_defconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/grouper_defconfig b/configs/grouper_defconfig
-index 9221ffb46a3..f265db8232f 100644
---- a/configs/grouper_defconfig
-+++ b/configs/grouper_defconfig
-@@ -21,7 +21,7 @@ CONFIG_AUTOBOOT_KEYED=y
+diff --git a/configs/picasso_defconfig b/configs/picasso_defconfig
+index 994951bb81e..a9b7f91b735 100644
+--- a/configs/picasso_defconfig
++++ b/configs/picasso_defconfig
+@@ -21,7 +21,7 @@ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
  CONFIG_AUTOBOOT_KEYED_CTRLC=y
- CONFIG_OF_BOARD_SETUP=y
  CONFIG_OF_SYSTEM_SETUP=y
 -CONFIG_BOOTCOMMAND="bootflow scan; poweroff"
 +CONFIG_BOOTCOMMAND="bootflow scan; echo 'Boot configuration not found... Power off in 3 sec'; sleep 3; poweroff"
- CONFIG_SYS_PBSIZE=2084
+ CONFIG_SYS_PBSIZE=2085
  CONFIG_SPL_FOOTPRINT_LIMIT=y
  CONFIG_SPL_MAX_FOOTPRINT=0x8000
 -- 
