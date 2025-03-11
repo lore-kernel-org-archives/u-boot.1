@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06150C28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:43:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6805EC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:45:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7677D801BE;
-	Tue, 11 Mar 2025 14:43:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5BC78141D;
+	Tue, 11 Mar 2025 14:45:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="efniB2cI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="imMURofs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 484D6807D9; Tue, 11 Mar 2025 14:43:55 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 5742B8164E; Tue, 11 Mar 2025 14:44:59 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA39A8003E
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:43:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F3F801BE
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:44:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6feb0742878so51120127b3.2
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:43:52 -0700 (PDT)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e5ad75ca787so4572581276.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:44:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741700632; x=1742305432; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741700696; x=1742305496; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ynNLNQP7Pow07zpnsv+shYD82cAZBWlUlKUy5JodHEM=;
- b=efniB2cI8Fp42YGmrqlXzaYIaJFQ0rGxujrFZv5SdIEUcqGjHNLNrlGyO4XY86u8FL
- IkULWvy8x1THKxfHLrsuPhlugF7V0KbKCJj7WQUa7LeXP5fIVF/e7x2WuNzrwYGzGFSI
- GCW2anM7CBNLUEv9ch0CYMl/TEZRj3W0BO2GWWOtnZcZ4MUB2lTboBfD1JL6K1rlR9uz
- 2NXmxpgW3FwpdtRxJGeW5TUvBCOQp78KoFWtJjJ0Q/sQyK+d3wxQluw6hWkyMyX5TcF6
- Cj+Ol3WLQCnXD2dFSgJln/fDhkmU/Oyf2xihgFiy4dkk4cB0yJ8gm1eify3Unlv2VTAQ
- YojQ==
+ bh=MvL8C00WJcdLVpSZ/3Tn3CBzZAP5gZa4Hxjqv9GxczQ=;
+ b=imMURofsQ7MorI2K+He6KnDH5qAp8ZnVGOCSFVq7su8oohL/f4Crkg3QdbGbnvpZB3
+ uHaKJzHn6BQyyJb0NVuq9xNZlrkEgf7qNQ33eEXZyoGPPFdxVDQa9hN8nm2oP5zv2wJz
+ XAjBX3M5SnHySyzenqKrNAquinbgE7lQpB9mai1CaGI/GhZ87zvwvntKUHRcCNDo7PSR
+ P1ADDXOlp3OBk6L/lObUKKr9vf8Mfq8wk6OQARKw0igRevMe7ftuK8pwKn1x3epliZQg
+ uImp5SPKCIcwbLZwPzTMUr3DmVFgNv6MAuU+4fos6rXwdmoIMEJYXl6FYsZ5lSc1ZfCO
+ Ek7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741700632; x=1742305432;
+ d=1e100.net; s=20230601; t=1741700696; x=1742305496;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ynNLNQP7Pow07zpnsv+shYD82cAZBWlUlKUy5JodHEM=;
- b=vkiAZbF2ZcW7Yx9g4Mp6NfrDBxzFcRgjc50jZK8PSBnXnad/qIdP1/b789YXz8srkF
- qhPN1fdlYbR2NGy3tpjcLZyg+74jY5n+RLIxiYKNeO9FRpw3BGL02/fyh2K/XBmjvaMy
- wf5faDVoieVJ1QupgC3FurPKh2LXAVhh9qxjWwQBfz9tRBAH7q+jdWPYASjmkQm5diwM
- jUc8Zx9HYrww5BA4RwhHRN0DN10pNDKXPefBvA1l9os+sQeqnMGyzn18FJqZFvPPX5we
- usxqgWBAnKWx+AKgKwcAcKY5ZRyhf84NytCbCEqyV93XkIPg/tIKg5rGFwYVF9v/W72B
- O5sg==
-X-Gm-Message-State: AOJu0YxppoqPhs+fp+yK/J8VuqujlHBY7wLk9v3A46IciDfmUzmyg2LS
- EkwJo22+odWg7VlI107VJGE8oqt+v1IUNVrQ62Q5dVugmotqsihM3RGVvTawLWNaLmdbNv8PUS/
- P+ulED+qD8jqQnOPjALZdQwsKYY4bKfg+yiyNKw==
-X-Gm-Gg: ASbGncu1NQ9XIEtArCV3rCfReG8sPvjBSbZ3CVWFDoVEtfER1isHsGC2PJ+uZlPAua9
- mSZvi8BWNXBAzas/gqOOseClBbiwwZNx2yGoX7dALfhaHVOcEs8nOfWpDd0diPuf2D6uN0dYA6E
- yHw6ad8bbGjTs43njbhvSkNDPzvOE=
-X-Google-Smtp-Source: AGHT+IFzoJvpZxE9zfvrch5RJYZstKBNGOR9dbNadl8F86NAcwf85eYM9CYxYXg1D1oKvhGa+RTh4+luMzkxju3+go0=
-X-Received: by 2002:a05:690c:4807:b0:6fd:2762:9d11 with SMTP id
- 00721157ae682-6febf2a0c0fmr234669317b3.8.1741700631815; Tue, 11 Mar 2025
- 06:43:51 -0700 (PDT)
+ bh=MvL8C00WJcdLVpSZ/3Tn3CBzZAP5gZa4Hxjqv9GxczQ=;
+ b=fNkUbLhgNHlZrp6HDD9fUe97vZvpX51pvamQFALrPQ39LUO2luV8IynFOdC5rZsA5X
+ QfI7rr8PAtWKNlf7uyTzAOiYETXJChOegK4/qcyib6IiHShn4txON3TXhNXZbiPWDhxW
+ rz30t/2fO1Ztwdla9syvrYC0DomueUkZJ+rjBcBMND+N6paHdNp9QCkNNvuqUM/Fzka9
+ zhPRxHZvBRouF9PjRY8PVd5QVbZwH1HmGE6WWXgSOE9GPp3kNlb902WsaK8YaKpbfGIj
+ XEKSIM7jLDgYiX3UWcnKQ6Iut3pA5spDPOBu8GQekOZfRg2f4rIYn2SH3QJ+HAVc2B7s
+ IdNw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXceuE1mq5Ns3gIqQkd2hy6VQDhzk9MyR3ej71xh3gtV8k6JchS+giaGJ6bO/9CN6/hgqWKjFM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyVTN68jJLaGSeH1tejdUnB3syMk7ullG0ASKXLWN7t68IWpw+m
+ fLx1GNF18i2eYEVNJ2M5o2m8xAV+SZYybpdjs/D+fbXP3x+SrhreUOUE32WJ3yX8XSm6xRAQAif
+ NNJSG0f2HOBeq+XoOqGfIK3UvoAnw0TMrwYas6gzix9M53UISi3w=
+X-Gm-Gg: ASbGncsDCCOsqvIFWOYu6q3YJSDths9ftrXKz6+qecsTn2Ritltnfn2eL79Qi0dD2/0
+ 1nKFOwzmWpiipAyTB5rljpzt4/at5LqOMHOqA0Zq8YfluZIq10t7O3ugSQ9uDbyo2XqS7pKV3Iw
+ Wh3WR5V9OHbR4F0rfwNNZdMemVScJvCxeODRnJCg==
+X-Google-Smtp-Source: AGHT+IFm8lT5AxMPy01VRKPwalwK0SQxOIzZZYPtC+7U5ATmBq1JRN8bOwJ+mjwedo2LTF9qRvh80alR+yEJw9J2qYI=
+X-Received: by 2002:a05:6902:11c4:b0:e5d:f98f:6f33 with SMTP id
+ 3f1490d57ef6-e63b515218dmr4977378276.10.1741700695854; Tue, 11 Mar 2025
+ 06:44:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250310115750.1019051-1-sughosh.ganu@linaro.org>
- <20250310115750.1019051-3-sughosh.ganu@linaro.org>
-In-Reply-To: <20250310115750.1019051-3-sughosh.ganu@linaro.org>
+References: <20250310061343.26208-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250310061343.26208-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Mar 2025 15:43:14 +0200
-X-Gm-Features: AQ5f1Jpzswhjvs-OFn_QkkERSZwv9ZYlv2lydoJ8fSdvuli5F6f-sJqV-Ro7q7E
-Message-ID: <CAC_iWjKesPeOfH=Nt6kQZS2nKa+jgt8vtVazNJhc1wm-VzJutQ@mail.gmail.com>
-Subject: Re: [PATCH v7 2/8] efi_loader: install device-tree on configuration
- table on every invocation
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Anton Antonov <Anton.Antonov@arm.com>, 
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
+Date: Tue, 11 Mar 2025 15:44:20 +0200
+X-Gm-Features: AQ5f1JoTiQNnyJ8esBdqNNy0kBFlBRpcUfGvmEKej5xz_UxwqkM7WsPua8nsEsg
+Message-ID: <CAC_iWj+brdTHCMrYUd9nMOymgOzm28XikYM3GuKT=ZyCQTXF-w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] cmd: simplify eficonfig_init()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Weijie Gao <weijie.gao@mediatek.com>, Daniel Golle <daniel@makrotopia.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,44 +92,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
-[...]
-
->  {
-> -       unsigned long fdt_pages;
->         efi_status_t ret = 0;
->         void *fdt, *new_fdt;
-> -       u64 new_fdt_addr;
-> -       uint fdt_size;
-> +       static u64 new_fdt_addr;
-> +       static ulong fdt_pages;
-
-efi_uintn_t fdt_pages
-
-> +       ulong fdt_size;
-> +
-> +       if ((new_fdt_addr && !fdt_pages) || (fdt_pages && !new_fdt_addr)) {
-
-Is there a case when this can happen? I think we can just get rid of it entirely
-
-> +               log_err("%s: Fdt address/size not in the right state\n",
-> +                       __func__);
-> +               return EFI_INVALID_PARAMETER;
-> +       }
-> +
-> +       if (new_fdt_addr) {
-> +               log_debug("%s: Found allocated memory at %#llx, with %#lx pages\n",
-> +                       __func__, new_fdt_addr, fdt_pages);
-> +               ret = efi_free_pages(new_fdt_addr, fdt_pages);
-> +               if (ret != EFI_SUCCESS) {
-> +                       log_err("Unable to free up existing FDT memory region\n");
-> +                       return ret;
-> +               }
-> +       }
+On Mon, 10 Mar 2025 at 08:13, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
->         /*
-[...]
+> As the system table already has pointers to the Simple Text Input and
+> Output Protocols we can directly use these instead of calling
+> OpenProtocol.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         remove unused variable handler
+> ---
+>  cmd/eficonfig.c | 19 ++-----------------
+>  1 file changed, 2 insertions(+), 17 deletions(-)
+>
+> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> index e08b6ba4a5d..629bf1b82c7 100644
+> --- a/cmd/eficonfig.c
+> +++ b/cmd/eficonfig.c
+> @@ -2283,26 +2283,11 @@ static efi_status_t eficonfig_init(void)
+>  {
+>         efi_status_t ret = EFI_SUCCESS;
+>         static bool init;
+> -       struct efi_handler *handler;
+>         unsigned long columns, rows;
+>
+>         if (!init) {
+> -               ret = efi_search_protocol(efi_root, &efi_guid_text_input_protocol, &handler);
+> -               if (ret != EFI_SUCCESS)
+> -                       return ret;
+> -
+> -               ret = efi_protocol_open(handler, (void **)&cin, efi_root, NULL,
+> -                                       EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> -               if (ret != EFI_SUCCESS)
+> -                       return ret;
+> -               ret = efi_search_protocol(efi_root, &efi_guid_text_output_protocol, &handler);
+> -               if (ret != EFI_SUCCESS)
+> -                       return ret;
+> -
+> -               ret = efi_protocol_open(handler, (void **)&cout, efi_root, NULL,
+> -                                       EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> -               if (ret != EFI_SUCCESS)
+> -                       return ret;
+> +               cout = systab.con_out;
+> +               cin = systab.con_in;
+>
+>                 cout->query_mode(cout, cout->mode->mode, &columns, &rows);
+>                 avail_row = rows - (EFICONFIG_MENU_HEADER_ROW_NUM +
+> --
+> 2.48.1
+>
 
-Chers
-/Ilias
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
