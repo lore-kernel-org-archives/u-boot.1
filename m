@@ -4,94 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12798C28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 18:38:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC85C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 20:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C508186D;
-	Tue, 11 Mar 2025 19:37:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 46E7E8083E;
+	Tue, 11 Mar 2025 21:28:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yddB8Vti";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4815B81335; Tue, 11 Mar 2025 15:35:56 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4685801FB
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 15:35:53 +0100 (CET)
+ id 26CFB80F92; Tue, 11 Mar 2025 21:28:40 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 44D60807D7
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 21:28:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4394345e4d5so33117705e9.0
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 07:35:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741703753; x=1742308553;
- darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rlsA7jmOrPhoMg6/nKIHtXI6/BqZb9viipGVTzyVLkU=;
- b=yddB8VtiS2f7RMds1tMR//49hhoEGhdczJmr2AQ+Fsci6B2Qn0qwiIPhHTKdyzyJVf
- 1KXX4wHs3AaZU3UwllusWJmOmYwKXancVWRyvuSKW7FcJIOSppGG9F/ckSpD3HS0e2KR
- ufF0vo4nRbP1x/+ONoMBfJnFavaKBgOwVCnn6qu1lGB/Nu4K6roM+18qDVSGzulauMXb
- 4WwMKQCo8ABGotTdrm9r8amEQ1ajmU1XHhq5c8nVK5Cxqf7SWQA01k8j0AYifUX857Lt
- g4maSpQ2O9AGP11hB/9Bc8fClc79iJRXfJ8x+OZvwToXorbzQrbKQV9S9dkCrMTc1RNr
- Z9Ag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741703753; x=1742308553;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rlsA7jmOrPhoMg6/nKIHtXI6/BqZb9viipGVTzyVLkU=;
- b=dRMnsNhlgs1gzxrltWJeCrlRifVYJ/Auc1rkv0pKe8/uDd10vj7lNWtP8HL4aUCASw
- jUSSEvEo4ci8V75i3Pf/n/XwwyM+IPbmDqAd2+sU5dsM0gX70B2xQQ47s3AYcBpnbOtq
- WLnhhYnN4ECgOfA1ttaCQCE5l2AUHgH8+LnAPWn0vH6qRYUq1Jf1EdA58cpYxxfAgdzP
- rADt3/r/7po/csfvMtESAEeCoYoT/d8xSYG/ebLDM/eioXPicE2SQkb9VqGF3kVjPZiz
- UsQND9lsAavzlQwq2guFwB/QICjzIIli3lrajYMtPiFNJLD83QeXZsey/JV+rC+ljXLW
- p1Xg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXNESa+SdciCxeWNb+Nbt7N6cYm8YOnk/yvcXPQPmlnLBE+MiG1yCH4GXCKM+a6aebLONQSCw0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZQNMcK8KNuyu69tdvNd7c5NWe+36MY0RN4j1hf5zDpQwJc70r
- sLrS/xr0md/RYxH8Z0DeFrWAQVpBmzYZb6IEY1vvLStTUd9Rub9Rqy7r+KHperw=
-X-Gm-Gg: ASbGncv8ZizeHieE04f2tn/bMXWQ9ih9XhfUzk3crrNG6UOOq1x3MP1tFfSMJpFS9Qg
- QnI00c8K6W/rIYTDLdWA0wdy56mxUGaDofroKXnxngJupDT7Gwp1UVgT1jCdv8pI8Njq8mDhf53
- JGYVaGPEbBlQNHt/Hh+CMOjCBNRYjVpu3PLYEd1kU4XxB13HTATjXpMnwsnpm8e63J3WVqDNNzb
- P3nY3uCb2LTa09n8gq/JeMTegZKTIZdbHz+EqVFciH+KuRJsugzHfg0wknczL3YAFvH9tiDhDEH
- Uelxu7OUGSdROgDI5ESXnUYU4MfOHY9lxMZ6eVWA
-X-Google-Smtp-Source: AGHT+IEi4F/rM2PmJKGRiSk/vmRTqLhX6htqtIcDgc1B7+QbLGA1SOT+cBdLpRCkstFAb6JVsojuhw==
-X-Received: by 2002:a05:600c:1c14:b0:43c:f0ae:da7 with SMTP id
- 5b1f17b1804b1-43cf0ae15acmr95668815e9.7.1741703752975; 
- Tue, 11 Mar 2025 07:35:52 -0700 (PDT)
-Received: from localhost ([2001:4090:a247:83e0:8c7a:e319:aa31:249f])
- by smtp.gmail.com with UTF8SMTPSA id
- 5b1f17b1804b1-43ce3d5a0e2sm130397945e9.12.2025.03.11.07.35.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 07:35:52 -0700 (PDT)
-Date: Tue, 11 Mar 2025 15:35:51 +0100
-From: Markus Schneider-Pargmann <msp@baylibre.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Bryan Brattlof <bb@ti.com>, u-boot@lists.denx.de,
- Vishal Mahaveer <vishalm@ti.com>, 
- Kevin Hilman <khilman@baylibre.com>, Dhruva Gole <d-gole@ti.com>, 
- Sebin Francis <sebin.francis@ti.com>, Kendall Willis <k-willis@ti.com>,
- Akashdeep Kaur <a-kaur@ti.com>, 
- Hari Nagalla <hnagalla@ti.com>, Judith Mendez <jm@ti.com>,
- Andrew Davis <afd@ti.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Jai Luthra <j-luthra@ti.com>
-Subject: Re: [PATCH 00/19] am62: IO+DDR resume support
-Message-ID: <c5fvf3an6jnzljh7ady5d64pjtojvq6q3ywmarichgznx7flsa@3jn2f6uf5klg>
-References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
- <CAFA6WYMBHo4O-e-SeG8mZ9ec2RJsBc4F86mCi5un=mxOWfXasQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: n4rV12t5QaO5o94YNdOIfQ==
+X-CSE-MsgGUID: 2vdKF+7gS2iym7qzDcrB8w==
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 12 Mar 2025 05:28:33 +0900
+Received: from [10.24.0.12] (unknown [10.24.0.12])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id BC7A2408D1F5;
+ Wed, 12 Mar 2025 05:28:31 +0900 (JST)
+Message-ID: <01975214-2650-4b33-98d1-39827b984e36@bp.renesas.com>
+Date: Tue, 11 Mar 2025 20:28:30 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yp7ubcace43pg5ty"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYMBHo4O-e-SeG8mZ9ec2RJsBc4F86mCi5un=mxOWfXasQ@mail.gmail.com>
-X-Mailman-Approved-At: Tue, 11 Mar 2025 19:37:38 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
+ <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
+ <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
+Content-Language: en-GB
+In-Reply-To: <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------CTMivv8TeN6FjC3zximrgsSx"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,149 +64,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------CTMivv8TeN6FjC3zximrgsSx
+Content-Type: multipart/mixed; boundary="------------bdunLHWPN7r01GD14mD9HzPH";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Message-ID: <01975214-2650-4b33-98d1-39827b984e36@bp.renesas.com>
+Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
+References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
+ <7ca4a573-c3b5-47b4-b5ee-76288ab6ec0c@mailbox.org>
+ <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
+In-Reply-To: <e317a09e-5ff6-47ae-bf9e-252c22b671e5@bp.renesas.com>
 
---yp7ubcace43pg5ty
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
+--------------bdunLHWPN7r01GD14mD9HzPH
+Content-Type: multipart/mixed; boundary="------------g8t8Ji1qeQXoB3USDHtZDZhl"
+
+--------------g8t8Ji1qeQXoB3USDHtZDZhl
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 00/19] am62: IO+DDR resume support
-MIME-Version: 1.0
 
-Hi Sumit,
+On 08/03/2025 14:54, Paul Barker wrote:
+> On 05/03/2025 20:05, Marek Vasut wrote:
+>> On 3/4/25 5:37 PM, Paul Barker wrote:
+>>
+>> [...]
+>>
+>>> +static int rzg2l_usbphy_ctrl_assert(struct reset_ctl *reset_ctl)
+>>> +{
+>>> +	struct rzg2l_usbphy_ctrl_priv *priv =3D dev_get_priv(reset_ctl->dev=
+);
+>>> +	u32 val;
+>>> +
+>>> +	val =3D readl(priv->regs + RESET);
+>>> +	val |=3D reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1;
+>>
+>> u32 val =3D reset_ctl->id ? PHY_RESET_PORT2 : PHY_RESET_PORT1;
+>>
+>>> +	/* If both ports are in reset, we can also place the PLL into reset=
+=2E */
+>>> +	if ((val & PHY_RESET_MASK) =3D=3D PHY_RESET_MASK)
+>>> +		val |=3D RESET_PLLRESET;
+>>
+>> setbits_le32(priv->regs + RESET, val);
 
-On Tue, Mar 11, 2025 at 04:19:58PM +0530, Sumit Garg wrote:
-> Hi Markus,
->=20
-> On Tue, 11 Mar 2025 at 16:02, Markus Schneider-Pargmann
-> <msp@baylibre.com> wrote:
-> >
-> > Hi,
-> >
-> > this series introduces support to resume from IO+DDR. IO+DDR is a low
-> > power mode of am62a and am62p in which nearly everything is powered off
-> > except DDR which is in self-refresh and a few pins which detect
-> > activity and can wakeup the system again.
-> >
-> > On resume uboot SPL is loaded and checks if this is a IO+DDR resume. If
-> > it is, the DDR initialization sequence in k3-ddrss differs slightly as
-> > it has to get the DDR out of the self-refresh.
-> >
-> > Afterwards a specific address determined from DT is used to get the
-> > metadata that stores relevant context addresses. The context is restored
-> > using the tisci message TI_SCI_MSG_MIN_CONTEXT_RESTORE. At the end all
-> > further initializations are skipped and uboot SPL directly jumps into
-> > the DM resume address which takes care of the rest.
-> >
-> > The devicetree R5F related patches were picked up from the mailinglist
-> > and are required to find the correct address of the metadata.
-> >
-> > k3-ddrss is using absolute register accesses at the moment. I am trying
-> > to submit syscon DT patches upstream to access these through syscon,
-> > unfortunately there is ongoing discussion regarding syscon.
-> >
-> > I tested this on am62a.
-> >
-> > Best,
-> > Markus
-> >
-> > To: Tom Rini <trini@konsulko.com>
-> > To: Vignesh Raghavendra <vigneshr@ti.com>
-> > To: Bryan Brattlof <bb@ti.com>
-> > To: Sumit Garg <sumit.garg@linaro.org>
-> > Cc: u-boot@lists.denx.de
-> >
-> > Cc: Vishal Mahaveer <vishalm@ti.com>
-> > Cc: Kevin Hilman <khilman@baylibre.com>
-> > Cc: Dhruva Gole <d-gole@ti.com>
-> > Cc: Sebin Francis <sebin.francis@ti.com>
-> > Cc: Kendall Willis <k-willis@ti.com>
-> > Cc: Akashdeep Kaur <a-kaur@ti.com>
-> >
-> > Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
-> > ---
-> > Devarsh Thakkar (3):
-> >       arm64: dts: ti: k3-am62a-wakeup: Add R5F device node
-> >       arm64: dts: ti: k3-am62a7-sk: Enable IPC with remote processors
-> >       arm64: dts: ti: k3-am62p5-sk: Enable IPC with remote processors
-> >
-> > Hari Nagalla (2):
-> >       arm64: dts: ti: k3-am62a-mcu: Add R5F remote proc node
-> >       arm64: dts: ti: k3-am62x-sk-common: Enable IPC with remote proces=
-sors
-> >
-> > Jai Luthra (1):
-> >       arm64: dts: ti: k3-am62a-main: Add C7xv device node
-> >
-> > Markus Schneider-Pargmann (13):
-> >       arm: mach-k3: Remove CANUART IO isolation
-> >       arm: mach-k3: Kconfig: Add symbols for IO+DDR Low Power Mode
-> >       ram: k3-ddrss: Add support for DDR in self-refresh
-> >       firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
-> >       arm: mach-k3: common: Add CANUART wakeup check helpers
-> >       arm: mach-k3: common: Add lpm_resume_from_ddr
-> >       arm: mach-k3: common: Helper for LPM meta data address from DT
-> >       arm: mach-k3: am62a7_init: Resume on LPM exit
-> >       arm: mach-k3: am62p5_init: Resume on LPM exit
-> >       arm: dts: k3-am62a: Add r5 device nodes
-> >       arm: dts: k3-am62p: Add r5 device nodes
-> >       configs: am62ax_evm_r5: Enable IODDR resume support
-> >       configs: am62p_evm_r5_defconfig: Enable IODDR resume support
-> >
-> >  arch/arm/dts/k3-am62a7-sk-u-boot.dtsi             |  16 +++
-> >  arch/arm/dts/k3-am62p5-sk-u-boot.dtsi             |  20 +++
-> >  arch/arm/mach-k3/Kconfig                          |   9 ++
-> >  arch/arm/mach-k3/am62ax/am62a7_init.c             |  11 ++
-> >  arch/arm/mach-k3/am62px/am62p5_init.c             |  12 ++
-> >  arch/arm/mach-k3/am62x/am625_init.c               |   2 +
-> >  arch/arm/mach-k3/common.c                         | 162 ++++++++++++++=
-+++++++
-> >  arch/arm/mach-k3/common.h                         |   4 +
-> >  arch/arm/mach-k3/include/mach/hardware.h          |  32 +++++
-> >  configs/am62ax_evm_r5_defconfig                   |   1 +
-> >  configs/am62px_evm_r5_defconfig                   |   1 +
-> >  drivers/firmware/ti_sci.c                         |  38 +++++
-> >  drivers/firmware/ti_sci.h                         |  14 ++
-> >  drivers/ram/k3-ddrss/k3-ddrss.c                   | 165 ++++++++++++++=
-++++++++
->=20
-> >  dts/upstream/src/arm64/ti/k3-am62a-main.dtsi      |  12 ++
-> >  dts/upstream/src/arm64/ti/k3-am62a-mcu.dtsi       |  25 ++++
-> >  dts/upstream/src/arm64/ti/k3-am62a-wakeup.dtsi    |  25 ++++
-> >  dts/upstream/src/arm64/ti/k3-am62a7-sk.dts        |  96 ++++++++++++-
-> >  dts/upstream/src/arm64/ti/k3-am62p5-sk.dts        |  50 ++++++-
-> >  dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi |  35 ++++-
->=20
-> The dts/upstream is a git subtree and is rather a snapshot of upstream
-> devicetree-rebasing repo. It's not allowed to directly patch it but
-> rather we need to resync or cherry-pick patches from upstream [1].
->=20
-> So rather than picking patches from ML, you should wait for them to
-> land in the Linux kernel for a cherry-pick to work. Or otherwise you
-> can choose to rely on *-u-boot.dtsi for the time being.
->=20
-> [1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#res=
-yncing-with-devicetree-rebasing
+Reviewing this again before I send v2: We need to read the RESET
+register separately to determine whether to set the RESET_PLLRESET bit
+or not. Since we need the separate read, we may as well use writel()
+instead of setbits_le32().
 
-Thanks for the link, I didn't notice the handy scripts. Yes these are
-currently only mailinglist patches, but hopefully soon in the kernel so
-I can replace them in this series. I sent the series anyways to get some
-feedback already so I can work on the other aspects that need fixing in
-these patches.
+>>
+>>> +	writel(val, priv->regs + RESET);
+>>> +	return 0;
+>>> +}
 
-Thank you!
+Thanks,
 
-Best
-Markus
+--=20
+Paul Barker
+--------------g8t8Ji1qeQXoB3USDHtZDZhl
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
---yp7ubcace43pg5ty
-Content-Type: application/pgp-signature; name="signature.asc"
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------g8t8Ji1qeQXoB3USDHtZDZhl--
+
+--------------bdunLHWPN7r01GD14mD9HzPH--
+
+--------------CTMivv8TeN6FjC3zximrgsSx
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTd8KHufh7XoFiu4kEkjLTi1BWuPwUCZ9BKQgAKCRAkjLTi1BWu
-P/w8AP4sUqR5RGslkVPXLHwPrlSgseC+obuRR9BLSgODpRzY+AD9FOU8ovgugNZi
-ErtaLadrW2xyqrVLF4BSZTApCNUYBQI=
-=Qgde
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ9Cc7gUDAAAAAAAKCRDbaV4Vf/JGvWBr
+AQDqjGN4SI1QOfID2ZIxF6OLud75PsgN24smYmNNew6HggD/RveROu3p7D3uQ3vfm2xpzcng2scq
+0f05NA+9wurKKQw=
+=Ist3
 -----END PGP SIGNATURE-----
 
---yp7ubcace43pg5ty--
+--------------CTMivv8TeN6FjC3zximrgsSx--
