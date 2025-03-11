@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39865C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 17:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD93AC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 17:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C21DA807D7;
-	Tue, 11 Mar 2025 18:07:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D9585807D7;
+	Tue, 11 Mar 2025 18:55:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NWyM4WaN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iFiYhrQO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B982807D7; Tue, 11 Mar 2025 18:07:51 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 377D981335; Tue, 11 Mar 2025 18:55:48 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 366ED8006D
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 18:07:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1293C801FB
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 18:55:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=5165c3052c=fabrice.gasnier@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52BFR86q006880;
- Tue, 11 Mar 2025 18:07:45 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- s1citHkiNEhPFGPFTrGX7WV3eL0r2JPGeGE1jVyiTeo=; b=NWyM4WaNd4xCiE08
- zsJJW/5q6o2EOcxj7SrNBeyLkDGbZh1nT3Ggx4oYJ1FeY5C6JhSk9Etj4WXb4/El
- n97vqMt03QsatgQ09BbYMCIzqwcLXx9AhnRs0+O+ylY3aZe5WmfwmS2l0UtVs317
- /eQrLvc1Ycqu8+R9jXch6so78jalEldSX9pKg2h7HNyA1IliLi2TOFEtzRX3B5Xf
- IbEHys/PMipu0peBSeMjHn0WZPPIWVNaS+MLljsPhL/4387e24+GIgAj8rYHUYzo
- OHi70urwzKbybNygKgOsSO0N+uCAZOlJ7YQdQdIeMrVPNU8bMe3xKVpy2thBAv5P
- R56skg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4591qs73sg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 11 Mar 2025 18:07:45 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BCF2140050;
- Tue, 11 Mar 2025 18:06:56 +0100 (CET)
-Received: from Webmail-eu.st.com (eqndag1node6.st.com [10.75.129.135])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 12FC250DC56;
- Tue, 11 Mar 2025 18:06:39 +0100 (CET)
-Received: from SAFDAG1NODE1.st.com (10.75.90.17) by EQNDAG1NODE6.st.com
- (10.75.129.135) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 11 Mar
- 2025 18:06:38 +0100
-Received: from [10.48.86.222] (10.48.86.222) by SAFDAG1NODE1.st.com
- (10.75.90.17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 11 Mar
- 2025 18:06:38 +0100
-Message-ID: <d2f3ede4-b415-40f3-a86e-9a03ad03f794@foss.st.com>
-Date: Tue, 11 Mar 2025 18:06:37 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-30761be8fa8so64695101fa.2
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:55:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741715745; x=1742320545; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vUanRaCN6JEcz0BUNbjbD8IBB1o0+DMN6l9Xny66zfY=;
+ b=iFiYhrQOxmk1/xH/w2eejD8J4G3KNMFPWN+Dw04lxjd3oBqz6cKJyCVLbVSjHGDROF
+ wQaPE0ZgbMfdPx1+CCDFq88P6HsyrJKPuoNkZ5CLEDym4uklmO9mImprw5HfHGihc/tW
+ qOfhHOWqjQVzI658g5bfm+9AwwN/q6UmsKcM78o2i4aheFhnO1rHi7v3MK5v+vopvIUZ
+ lbQAlGzNA5qxWw8Ue9XlxiLiyVf58P+nyfS+fA83eP24LgKd6jsb+fzZfaTokUbrBtZs
+ Nshh0EJgo426I5E2ZXHS7eK6sbz9a37A70g7iXkl8OiXBIOCWGOWvkAwBev97Q7ziEqI
+ 7IEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741715745; x=1742320545;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vUanRaCN6JEcz0BUNbjbD8IBB1o0+DMN6l9Xny66zfY=;
+ b=Ncw/kY2TTXGMrNT2Lt8LdLttkQ5tAAJMfvNhgeBqzg8xIafMeWWAHTswqPdmxR5WSl
+ iccjtLpueyV28Y8pMLNqqv2M7/C5xpkp9lwZDQZ0R5fGnkaeJH2zsFX1y+E4KW7mXN0N
+ a9EUJsiQbeYn7L9koqcCuEffNbBVZKqCie6aITLTu8mDNEJrVrLUp2xmdzOl1iYEvIYM
+ tijaEAkKYqUVbZcW56CODPfXLcbD1og4DpbxAwiMEk7Vg6hFNJCN8B/sVpiVVhwHemqI
+ mYL6ovfDVj35jYMUwUPpPpATbTK7zULcN1MzV8llutzIjcLEZhkNXj/MEU6Qg9NFiGp9
+ x8mQ==
+X-Gm-Message-State: AOJu0Yz6n6QmuWIu8ihDVanytBjNvMlYf0GP4gPGEICxzoSN82m1er92
+ Wtuoo83nx6u5sq6lqD4E8i0Ny9s4eagNbewCWZFftyydIB8XYMsT
+X-Gm-Gg: ASbGnct+RRHQDNRskOFBOSTeRfK8CwcRyF2Sc3+VsOPgiUzaWhOPsyzDbu8pp+YSaL2
+ xZkcxS4EGxePuOWlberew59udt6zh/wLtvVaPsRwjpIB+K43Kd9kDOKaV6kivEIqXjOregwO47P
+ M74rlmzd99zkoSTBZCGT67aouklPJjsFF9ge0fhTDo04Xuqx7PF2s/dwVLPU7/MfO7NSG4inN/M
+ ZezQQj06BUNOkNH7Pz5kEnB4UB0qQ3RCoHg/48xg6YtiHfAwwVnCVhw2Xyc061cxAHwUZOBNGrj
+ 48VxZJWijKkZHDHcUzEB89ll00V/IGU/+sau
+X-Google-Smtp-Source: AGHT+IHt1KOU9Kb/2q1NmZ+eZoZQvDpJv3l4bnluic1cB56t2qQgjkK0SIefvm/ThwqDqWtdWOEcuw==
+X-Received: by 2002:a2e:92c6:0:b0:30b:f775:bb25 with SMTP id
+ 38308e7fff4ca-30bf775c0eamr51825231fa.36.1741715744209; 
+ Tue, 11 Mar 2025 10:55:44 -0700 (PDT)
+Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-30bfceebd49sm15542811fa.60.2025.03.11.10.55.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Mar 2025 10:55:43 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/6] tegra: devices: add 3 second delay before power off
+Date: Tue, 11 Mar 2025 19:55:16 +0200
+Message-ID: <20250311175522.120018-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] ARM: dts: stm32: Add TIMERS inverted PWM channel 3
- on STM32MP135F-DK
-To: Cheick Traore <cheick.traore@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>, Olivier Moysan
- <olivier.moysan@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>
-References: <20250311143037.818675-1-cheick.traore@foss.st.com>
- <20250311143037.818675-5-cheick.traore@foss.st.com>
-Content-Language: en-US
-From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-In-Reply-To: <20250311143037.818675-5-cheick.traore@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.222]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SAFDAG1NODE1.st.com
- (10.75.90.17)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-11_04,2025-03-11_02,2024-11-22_01
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,87 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add 3 second delay before power off for some of recent devices to improve
+user experience.
 
+Svyatoslav Ryhel (6):
+  configs: transformer: add 3 second delay before power off
+  configs: endeavoru: add 3 second delay before power off
+  configs: grouper: add 3 second delay before power off
+  configs: picasso: add 3 second delay before power off
+  configs: x3_t30: add 3 second delay before power off
+  configs: qc750: add 3 second delay before power off
 
-On 3/11/25 15:30, Cheick Traore wrote:
-> The pwm source TIM1_CH3N channel (on PE12) in inverted polarity mode
-> will be used to manage the brightness of the panel backlight on
-> STM32MP135F-DK.
-> 
-> Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> 
-> (no changes since v1)
-> 
->  arch/arm/dts/stm32mp13-pinctrl.dtsi | 15 +++++++++++++++
->  arch/arm/dts/stm32mp135f-dk.dts     | 14 ++++++++++++++
->  2 files changed, 29 insertions(+)
+ configs/endeavoru_defconfig       | 2 +-
+ configs/grouper_defconfig         | 2 +-
+ configs/picasso_defconfig         | 2 +-
+ configs/qc750_defconfig           | 2 +-
+ configs/transformer_t20_defconfig | 2 +-
+ configs/transformer_t30_defconfig | 2 +-
+ configs/x3_t30_defconfig          | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-Hi Cheick,
+-- 
+2.43.0
 
-Reviewed-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-
-Thanks,
-Best Regards,
-Fabrice
-
-> 
-> diff --git a/arch/arm/dts/stm32mp13-pinctrl.dtsi b/arch/arm/dts/stm32mp13-pinctrl.dtsi
-> index c01d39f03ea..52c2a9f24d7 100644
-> --- a/arch/arm/dts/stm32mp13-pinctrl.dtsi
-> +++ b/arch/arm/dts/stm32mp13-pinctrl.dtsi
-> @@ -215,6 +215,21 @@
->  		};
->  	};
->  
-> +	pwm1_ch3n_pins_a: pwm1-ch3n-0 {
-> +		pins {
-> +			pinmux = <STM32_PINMUX('E', 12, AF1)>; /* TIM1_CH3N */
-> +			bias-pull-down;
-> +			drive-push-pull;
-> +			slew-rate = <0>;
-> +		};
-> +	};
-> +
-> +	pwm1_ch3n_sleep_pins_a: pwm1-ch3n-sleep-0 {
-> +		pins {
-> +			pinmux = <STM32_PINMUX('E', 12, ANALOG)>; /* TIM1_CH3N */
-> +		};
-> +	};
-> +
->  	pwm3_pins_a: pwm3-0 {
->  		pins {
->  			pinmux = <STM32_PINMUX('B', 1, AF2)>; /* TIM3_CH4 */
-> diff --git a/arch/arm/dts/stm32mp135f-dk.dts b/arch/arm/dts/stm32mp135f-dk.dts
-> index eea740d097c..275823da3c6 100644
-> --- a/arch/arm/dts/stm32mp135f-dk.dts
-> +++ b/arch/arm/dts/stm32mp135f-dk.dts
-> @@ -9,6 +9,7 @@
->  #include <dt-bindings/gpio/gpio.h>
->  #include <dt-bindings/input/input.h>
->  #include <dt-bindings/leds/common.h>
-> +#include <dt-bindings/pwm/pwm.h>
->  #include <dt-bindings/regulator/st,stm32mp13-regulator.h>
->  #include "stm32mp135.dtsi"
->  #include "stm32mp13xf.dtsi"
-> @@ -207,6 +208,19 @@
->  	status = "disabled";
->  };
->  
-> +&timers1 {
-> +	/* spare dmas for other usage */
-> +	/delete-property/dmas;
-> +	/delete-property/dma-names;
-> +	status = "okay";
-> +	pwm1: pwm {
-> +		pinctrl-0 = <&pwm1_ch3n_pins_a>;
-> +		pinctrl-1 = <&pwm1_ch3n_sleep_pins_a>;
-> +		pinctrl-names = "default", "sleep";
-> +		status = "okay";
-> +	};
-> +};
-> +
->  &timers3 {
->  	/delete-property/dmas;
->  	/delete-property/dma-names;
