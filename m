@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F92FC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D27C28B2E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:15:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92839818C7;
+	by phobos.denx.de (Postfix) with ESMTP id E73FE81951;
 	Tue, 11 Mar 2025 14:13:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oq85NIf0";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sw6b4a1S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84D1F8186D; Tue, 11 Mar 2025 11:33:15 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id A0443817D8; Tue, 11 Mar 2025 11:33:15 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6DC680FB9
+ by phobos.denx.de (Postfix) with ESMTPS id BD7CC814B6
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aaeec07b705so830131666b.2
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so347244566b.3
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689186; x=1742293986;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689184; x=1742293984;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1aUQGD3F4JC+u5fcG8nKZhXgqEasD0lEiK0bE40ccEY=;
- b=oq85NIf0J9xNJ/yuS2gApiVhhYq34Ad8YE4bnmUFNuh+RMKxIm/ZZujJBxVhZbIG28
- m5EQIVBDCqRa4DTAWauppI8BumUkPwGfYCq0Nz8dq7FmE1IBwbX7tHQBmFg9LH5/lH50
- lkmeBUx/Lp/JwSWXhfbjf6MCApPR3t8pgQ6BfwX21T4NrYPOWmd5UvC3Z4mwgf+GmZJz
- MPYxsdeaokxrilHw6D7YUoM/k/ILyEsSBqg7aBGRkOjdBgB3iBFDFSG2sHEg4w7PZGz1
- CSZnYIW67Qnigm+PWF1fUgH8iRJaIUUNhLrcfE/N1ErG1D3N6oeYePD2S2gInzv2clh7
- nDRA==
+ :reply-to; bh=pB1J2MeRTHZAIiyD3LZDGYL24tE5mL89PjlCxwqX9Mk=;
+ b=sw6b4a1S5AGea60yh80NWpldYMudF9G1FelAam1mfNX2e5ME/JGr7oaEZFYzxYjf9f
+ 9zozr6A28C1lanuoR0Q/rv+vzX2AXAKVAoyO7m8razx2GydXz91oRN1O0dP6+NbHFdxp
+ hODPR1Fkctzcaidir5JIEXXWcF8sGCCeXngoaEuifbeSk6cAvgf8AK0YO8wYVa3sX8Wp
+ MZWWoroYfq+BYSlQEcpa28CajwFVnjgcT6pWfzMn2CKFeyNr16zPP+Ea1/bkmpCIj72T
+ N8AtiqfNrqbyqXfF9Qk/uhj24nUepUCqVUP89n4PW6qN5RSbWmf5GYTa9g6iOkbRFx3d
+ 9MSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741689186; x=1742293986;
+ d=1e100.net; s=20230601; t=1741689184; x=1742293984;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1aUQGD3F4JC+u5fcG8nKZhXgqEasD0lEiK0bE40ccEY=;
- b=DNB56EUI5sgtw6zxBZ7b4UsRBMt2OwvF0efkpoHGWkJh7cmLSY79obeWWA74lhLiVM
- 6oh3d6QmbfMNawcwz03mGXXUZrJYkz7FHXsX5CwoS0cuEtFj4NtS4Mkt9ey6LZtwHdYs
- 06cYxZt4nPWNiO0Oa85kPCgoXVauEirQjgXUki5HX6ZIrMilbN1iEBgj8Vg+lgZlNhX5
- Kp1mCNAwz+xakGpLwlcQoyBgKMM0cOrrfMZwpIa8uFz55ZwZVg/Y6N4F9aMskp5yz1pz
- rT79X+JcNBd0O05FW5eoHizF7jF81ULIxEZaeM2shiEwQRo+WmOHs6jkGEq89jhMLm/9
- XzwQ==
-X-Gm-Message-State: AOJu0Yyv2jOkqni9MpSPP13sZMnDuG1UZoyxvG34sX6dFPM1eoOo3TF2
- VqxVeCSnwP8EeWegjZ2sYhxdZS4hYZuONypTPqroF5abdOQFTYcMZ6gw08Nv/lZPUL3XZwsBReG
- n
-X-Gm-Gg: ASbGncuQ9GPPvlSPGqTtw2PA3L8eC0EOTI5SPEYxILPd1Rv2l+eIOXrbl+A92MAbgtF
- O+IyCGYo7wvt/pLOQcqbJoDBBgB++hacnbbPGC0pPbPYfvCsaFysf1cN9EZnMV6GfiGKufYu6DP
- 7IoGZD8Zn5VfhULlUW4axQUa92tkErUO64YQyCwKOQgwiGNK2bIdRkdu8Woii3tiYCkqcP+ohjt
- +MOtWZ+rdgB9nCOFlbZywc2u5W5dH9hU7zhj430n8G3hHdI8ctfLcGG3NUnbm2v5eCfIlFmsN1S
- 7gccVTpd77NuYbbjaoQ73HCQDQ2vXzhFqy0YBeWh
-X-Google-Smtp-Source: AGHT+IEQkVJJ/pcWgNfojsXQbBahLwhTqH/vBqHA0PBV7uWpJWqlSI3Spr10fUVWUJtTyYB+KtSQcQ==
-X-Received: by 2002:a17:907:158a:b0:ac2:9683:ad25 with SMTP id
- a640c23a62f3a-ac2b9e22499mr311178866b.34.1741689186122; 
- Tue, 11 Mar 2025 03:33:06 -0700 (PDT)
+ bh=pB1J2MeRTHZAIiyD3LZDGYL24tE5mL89PjlCxwqX9Mk=;
+ b=KFQaZilTL/mAjXiUIw+RcFUddedQ2ED90k2rNlaTXzSR9jIkGJB5W84GGSllrU+fwx
+ qTQdiE4kTKOhfdESfj9D0jJqSGN/xfecBdyaEUVzo6k+wijAWh492ccaG81vR19cTKKB
+ tVb8KQbAhHDjzl/ibCaKwUaswT6kGcA8Wg5L+qjUT9v7R27fp7ZlEij1ioTxRk92vXQs
+ q2AMnq1ZvfUMESvKJsENIDL77QARTJ1yKxysT9GUroYrv/Qqk1lid43TbTMfY4IVxKAQ
+ HM9X+WRbPz/g8ft+cEmFZRKspJZP25q18T0enS+3yQ2c/Kqzqqo422eBjQrJXFrUyrh4
+ rY5g==
+X-Gm-Message-State: AOJu0YxrPcPEhzmxL3FBgleHh1Yz2+1PCG39t1vzN/J4eQnoa0JsQNwa
+ 4zgc9sG3Udfx0VKnIRLJWE+0A8+hMB0aWxHBpQQ2FHSb+9ruYZOcIJimoBYtZgMJfEkNfpqCsFC
+ S
+X-Gm-Gg: ASbGncuqb29TTutgu5PvVYmi7GUc0J61O9mFsim4LC6KeYkQFQv9w/gDzN5WGoNdGI9
+ CDgL26j6nZzsACpI3ZsDz1L6pyISM/wUb9burRE4HUtYyQVq0M1xm66+ZZrt8V+A3ZgHQDPIwOq
+ 1orO4by7wroA9xCo8gr7kVRIxaJX4gp+Ld34D62IUCP/I6IkriBKkCsCPPnEl/jrpLR3AE/sTnD
+ gDT0KkWXSF8MFFzde/rcxu9HlAhPuPvXatyL2ri+Dl18m69l7IILtMP4aOZYet1Jj3h6GXEODQ+
+ 7PCQ7l+6AdNsDGyHFJwCyxAODemiwSdcfmDUPI8L
+X-Google-Smtp-Source: AGHT+IGkCR6iLVVD2xSyHNklmsEPDJqBisEF3Pt0TePf9KUn0Ca9b9kceT+0JWgcPhU1LB7MTlmnqQ==
+X-Received: by 2002:a17:907:6d08:b0:abf:742e:1fd7 with SMTP id
+ a640c23a62f3a-ac253096a6amr2177626966b.57.1741689184088; 
+ Tue, 11 Mar 2025 03:33:04 -0700 (PDT)
 Received: from localhost ([2001:4090:a247:83e0:938:b3cb:2c1b:889c])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac2b184a442sm185193066b.103.2025.03.11.03.33.05
+ a640c23a62f3a-ac29363d604sm391503566b.76.2025.03.11.03.33.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 03:33:05 -0700 (PDT)
+ Tue, 11 Mar 2025 03:33:03 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Tue, 11 Mar 2025 11:30:57 +0100
-Subject: [PATCH 18/19] configs: am62ax_evm_r5: Enable IODDR resume support
+Date: Tue, 11 Mar 2025 11:30:55 +0100
+Subject: [PATCH 16/19] arm: dts: k3-am62a: Add r5 device nodes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-18-666de9c105cb@baylibre.com>
+Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-16-666de9c105cb@baylibre.com>
 References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
@@ -86,12 +86,12 @@ Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>,
  Akashdeep Kaur <a-kaur@ti.com>, 
  Markus Schneider-Pargmann <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=624; i=msp@baylibre.com;
- h=from:subject:message-id; bh=YYK07KrSGF63V9fGDQEEhFTdJY92mwazKGNFBWdQ4So=;
- b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCLr8d/Z7weLmfumwW7Zn6vcvUg/1zC4cK5y17/HmN
- 9c7auwVO0pZGMQ4GGTFFFnuflj4rk7u+oKIdY8cYeawMoEMYeDiFICJdNUw/Pf5qXahO/2l4qL+
- 3C8MzxSz3+Ry2P+eFSdcumR6de+TRcsY/ukUPLHv67mskbWshHk60262yU1fL3XWeU1d9ewC6zq
- FY1wA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=932; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=jZQfqCc8S68dfzQYXneZp1zfMMK4Pey9hMM3BxvEpeY=;
+ b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCFqvkW7wSNteYLP1QXv6UvvAbVvjX9zerPFFqXTlt
+ oOthfmXOkpZGMQ4GGTFFFnuflj4rk7u+oKIdY8cYeawMoEMYeDiFICJ2LMxMkyxfFKReVFhodXJ
+ 8v23NZW2n/n1aUKR49SCNXE2CZ8SiqMZGeac9JROfez1YobEt+/5N48cvDiP+f0Rk+bK5akPv+T
+ E3ucFAA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 11 Mar 2025 14:13:18 +0100
@@ -111,23 +111,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable K3_IODDR to enable support to resume from DDR after exiting
-IO+DDR.
+These are needed in SPL to be able to resume from DDR immediately after
+booting from IO+DDR.
 
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- configs/am62ax_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/k3-am62a7-sk-u-boot.dtsi | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-index 1f7750c4c031a273321df60e3feb39a8f34b0e42..8cccd2dc2fe06ec69ff07389abda6f6fa81ff711 100644
---- a/configs/am62ax_evm_r5_defconfig
-+++ b/configs/am62ax_evm_r5_defconfig
-@@ -107,3 +107,4 @@ CONFIG_SPL_TIMER=y
- CONFIG_OMAP_TIMER=y
- CONFIG_LIB_RATIONAL=y
- CONFIG_SPL_LIB_RATIONAL=y
-+CONFIG_K3_IODDR=y
+diff --git a/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi b/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
+index 7dfbeb10c323bbe1f935a50e3efc87b3276f044e..31cd27670e61ae662ba718daea5307217a143ce8 100644
+--- a/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
+@@ -14,6 +14,14 @@
+ 	memory@80000000 {
+ 		bootph-all;
+ 	};
++
++	reserved-memory {
++		bootph-pre-ram;
++	};
++};
++
++&wkup_r5fss0_core0_memory_region {
++	bootph-pre-ram;
+ };
+ 
+ &cbass_main {
+@@ -68,6 +76,14 @@
+ 	bootph-all;
+ };
+ 
++&wkup_r5fss0 {
++	bootph-pre-ram;
++};
++
++&wkup_r5fss0_core0 {
++	bootph-pre-ram;
++};
++
+ &cbass_wakeup {
+ 	bootph-all;
+ };
 
 -- 
 2.47.2
