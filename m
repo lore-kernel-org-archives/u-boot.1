@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60BDDC28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:16:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BF53C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:16:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EE9881CF0;
+	by phobos.denx.de (Postfix) with ESMTP id E274681A0E;
 	Tue, 11 Mar 2025 14:13:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="T/02lJ0w";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xEA95jck";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F3F380FB9; Tue, 11 Mar 2025 11:33:19 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id EF74881703; Tue, 11 Mar 2025 11:33:19 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08B7181761
+ by phobos.denx.de (Postfix) with ESMTPS id 11A8381782
  for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ac2bfcd2a66so74642066b.0
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:10 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6ff035e9aso641343a12.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689171; x=1742293971;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689181; x=1742293981;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=15X/xSfmZPilC4sx3n19qI28QrL308QJAbeYCd08z7k=;
- b=T/02lJ0wiQ48DRFSbJTSQL5GImdWi9d/50zJqOSqf9lJgJ724X+DvFqKnNTnY6vFVD
- N29Uh3RefSA63TiK0w4EEkHsx6VgdL0DMz9fZAnY1TaUllHeT4iKENLRwpZmbjK8Yxve
- H+JaFjY7AD54ELoA79oCN4a70RBFmz9zR0PaLlEj4PkGcp09dnHH3zkmiJuzmQTRJuq7
- gxXK+UpgGPAYhMzRZK5lXS0O/sYW9ZoRoDvQ2KxrKbx8Z3ZGb4yoa6jbqC9P6Nen+zTx
- CjBw23j9NSbXnDejAyyqzEK9pt2xfyBgv5wZqOY22JxU19lqHm9AEYdXlRwHASQytb7A
- tjow==
+ :reply-to; bh=9x1Ar677Q7oTOeh6Y8GZFKd22RTtLtDDrvs0FFbVvpE=;
+ b=xEA95jckAEWlpMkjsSbin23xV1DAiWXvNVPeg+7q1JAL4c0HiqiDuCuVLP+4whrKH9
+ RXVPieukKeiJ4hwvgW/Y6TnUHDfimVUGl+6eZzWz6+TLSkUdsmVBgnMDmepPOBslrADM
+ R+RrbJat2Dn8dhxIdWgNrHpXps1UK9yMrM0hmv1FOpM1y0mM9gQJXNrFchwzdnvdNUvb
+ o4743WhSORk5b69Rpu9EqAVjYBGqGYRavv42qMCYJW8uxZIt1zWduNIrJjsL6kwRKtJR
+ 05rwrjiyyIXyUCo8LLWYjS6GQE/kLKi7hw6ujvfY7GomtY2E9pEa0VI+Q+Ld8WyfE1sJ
+ oxag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741689171; x=1742293971;
+ d=1e100.net; s=20230601; t=1741689181; x=1742293981;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=15X/xSfmZPilC4sx3n19qI28QrL308QJAbeYCd08z7k=;
- b=sw6SCXpAFS9s/5EQ+NYJvTymkVvpvi/vCdqcFwpTa3DOyusDcKv31F4+MQEZxPdaPY
- 209RjhhGBFJhaRFEMtTHHG0R8ttznHQYSqxbGDXo0JecdKWTpqPeEC5xocFWOFO2gYWN
- YT/7ruQBVZRh3Uprzq0ihu1u2FJMoR6WkX1pfYqljdE81M95Q6C6qoNOttq6ZxkJtLLH
- Drm8GwddHBLa26ENa+rKJS4xVPG21B26v47ZwpEMrDhtEG2X5au9le+mGQzyTfmZK1oJ
- 2KpR5mv9HYtmXmkIhMVldI0RPz+i7vi3cokiXFNPMOro/mE3YTJqsiPe6h0VicaTurGG
- I2iQ==
-X-Gm-Message-State: AOJu0YzccSE+RXKc7kJwmygqnIzfXXJhhDd6Q4p4A/AqAyT2RtOMLsnJ
- k5j7U/Xmzrufeldbhs8ehcteSExcL0SGXQSv3IlV/xIaMW3UT27GkPBuJwTcgm5pKTq3kCFO7Tz
- 1
-X-Gm-Gg: ASbGnctIYyWRbB934mxSmIOnwlFQBLtYn4KtCbqUnTBsXD4tUn7Nj+5tSVOR5QbOK2g
- yd9RlVury5zIgR6f/S80sN7bT1CIpYd7I3l4BRafWJ+ldHNevo7pfTWoaa6qTp9T7Nlp7BQMGhx
- W12mhzptTTx+4ttel34YytMZMoyJHdaf8LzSi8G6ai+7nODqoUUYpe0CMtFJJcWXBSePWoEBk/y
- rRWl2gSZEBmekYj9P4joOIu8m2jMmhGlfREyO67cOJFIDRElBiP3maBLepZfSJ0sgQbGfxq0v/F
- qoeZvkHsgnvgMpkHDpiGijAIAjupcxTOMxyvmPLp
-X-Google-Smtp-Source: AGHT+IGrYZfYRk886RxDgOVyVojSoXNG0xE9DUd8b4EZ5zNLXgjbrwu4dhaqLZAJyuRYpGeFOeGhLw==
-X-Received: by 2002:a17:907:980a:b0:ac0:b05:f0c0 with SMTP id
- a640c23a62f3a-ac2b9db4067mr390023766b.1.1741689170975; 
- Tue, 11 Mar 2025 03:32:50 -0700 (PDT)
+ bh=9x1Ar677Q7oTOeh6Y8GZFKd22RTtLtDDrvs0FFbVvpE=;
+ b=Asl38CHSgKS8eWY8MLyvKQP6g9Hcfbl/obyc2nJTCYcBEYfuwLI7CK1g5+4F7mozrM
+ MRV5MHqRX1nQf9lg5Qbyuhe+ewqN4VLET3dHzkwPP5DGwqRGbmP49erlEXRpj8+YiCv6
+ +Ii6yKR+m6S+pzOHo/InC2JNOa1+JAxZHcFfRWMPeoMewjoN3tfLX5gWQ5AeL/zJq5La
+ Qfz6E/xzIj3rBSOEYXW9a2P4ebwTmqDfkSrEOov2tfDhSPaP6RPbxLWMelQYx778kICL
+ mzn2zuoR9ee816u+8fuSA2q1wbJIwmXrs4LAukdx7dTfu1h69YKgCWepBfCOP2/Mzi3+
+ ww9A==
+X-Gm-Message-State: AOJu0YxFdcx8PFtCgmt3+Bx1+ab8JsCVHZIRNseRlwbEY/21RokoXOHC
+ Z3lcir5h4ndTuEInGi1isoBlQrIofdPTtLA2+YVjCiy8Sakhybu8APZh7+JZUNkLxQZhjJQcrYR
+ r
+X-Gm-Gg: ASbGncsGbHAYKeEudh6JpFJt/5sqKK+2cCYNCw3/p7MXxTNJe6qXcBAUq7bhzFkezBW
+ bsXT2KU4Segu3vEfZvdzT3SxuyvOkpEKGDqUTG0LqOrV1ktQCwjyBEQZdNM16MjVx5BNCFXpdgY
+ nJeqkU+9LTj02/yWkW8c4jlfJi7WU2gWtErZlWn45rV6SC/UrPVJgMU2UwDpEEk/vankbrKXmro
+ XEP9VnEHCA9eoYzD4j82WDzawF37IlXiu5FpP62UN8NMehYOJcwLbdHhpN3I3KLBb4xCTTZ6qhH
+ NpyfQE4Ym6nuJ2Y7LcWyHvE1CMDDiIUhpKh8BAwG
+X-Google-Smtp-Source: AGHT+IEmpKzhBsvULVQTGeu4kZueBibshhl9A5qH9Eh/PSaYG65vX/GjvLmeugw1nXyAqwKfRRQQ8Q==
+X-Received: by 2002:a05:6402:34d4:b0:5e0:9056:33f7 with SMTP id
+ 4fb4d7f45d1cf-5e75f5a3465mr3999782a12.24.1741689180962; 
+ Tue, 11 Mar 2025 03:33:00 -0700 (PDT)
 Received: from localhost ([2001:4090:a247:83e0:938:b3cb:2c1b:889c])
  by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac24a84397fsm811826666b.96.2025.03.11.03.32.50
+ 4fb4d7f45d1cf-5e5c768ecb5sm8074240a12.77.2025.03.11.03.33.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 03:32:50 -0700 (PDT)
+ Tue, 11 Mar 2025 03:33:00 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Tue, 11 Mar 2025 11:30:43 +0100
-Subject: [PATCH 04/19] firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
+Date: Tue, 11 Mar 2025 11:30:52 +0100
+Subject: [PATCH 13/19] arm64: dts: ti: k3-am62a7-sk: Enable IPC with remote
+ processors
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-4-666de9c105cb@baylibre.com>
+Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-13-666de9c105cb@baylibre.com>
 References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
@@ -84,14 +85,16 @@ Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>,
  Kevin Hilman <khilman@baylibre.com>, Dhruva Gole <d-gole@ti.com>, 
  Sebin Francis <sebin.francis@ti.com>, Kendall Willis <k-willis@ti.com>, 
  Akashdeep Kaur <a-kaur@ti.com>, 
- Markus Schneider-Pargmann <msp@baylibre.com>
+ Markus Schneider-Pargmann <msp@baylibre.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla <hnagalla@ti.com>, 
+ Judith Mendez <jm@ti.com>, Andrew Davis <afd@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4464; i=msp@baylibre.com;
- h=from:subject:message-id; bh=1826k2oVV+FBgo7js26h14yHYRwg+GJ0hSbHDTRNoKc=;
- b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCPw9u2l5182elYVv7Re518w2vsebxvTRP5Gr5Xu4k
- NDZ6i7jjlIWBjEOBlkxRZa7Hxa+q5O7viBi3SNHmDmsTCBDGLg4BWAi+z8wMjyZ6bLZdF21Y0Jw
- 8UsBtUD1bv2JT0KEXqivDX63ZHr9B6CKNTcv9yRet5v7cIskx1Qfptfi+Wy3Xitf9mBcbVfzg9+
- PGQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3579; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=UFqwuMyIVllvZ7Jqzt+IiqSGXY/RPIetPlz/XdRIiCU=;
+ b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCGqxCT3v4KsVWOufcOjD5IDgK3NZFDnuXAj89lV4u
+ vHdR5+fd5SyMIhxMMiKKbLc/bDwXZ3c9QUR6x45wsxhZQIZwsDFKQATWdzA8N99drbNqdU+MvEO
+ lfN39z/ZLJ2SUnu1/f4FzXX/CmYGqJUw/E87IdrjudNu04XumF7vGamH4j90R5e9OdNWHn+k6si
+ cK8wA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 11 Mar 2025 14:13:18 +0100
@@ -111,137 +114,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds code to be able to call TI_SCI_MSG_MIN_CONTEXT_RESTORE.
-The context needs to be restored after booting SPL when resuming from
-IO+DDR.
+From: Devarsh Thakkar <devarsht@ti.com>
 
+For each remote proc, reserve memory for IPC and bind the mailbox
+assignments. Two memory regions are reserved for each remote processor.
+The first region of 1MB of memory is used for Vring shared buffers
+and the second region is used as external memory to the remote processor
+for the resource table and for tracebuffer allocations.
+
+Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+Signed-off-by: Judith Mendez <jm@ti.com>
+Acked-by: Andrew Davis <afd@ti.com>
+Link: https://lore.kernel.org/r/20250210221530.1234009-6-jm@ti.com
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- drivers/firmware/ti_sci.c              | 38 ++++++++++++++++++++++++++++++++++
- drivers/firmware/ti_sci.h              | 14 +++++++++++++
- include/linux/soc/ti/ti_sci_protocol.h |  9 ++++++++
- 3 files changed, 61 insertions(+)
+ dts/upstream/src/arm64/ti/k3-am62a7-sk.dts | 96 ++++++++++++++++++++++++++++--
+ 1 file changed, 90 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 190a1e3f5fc3713464b0cbf3ae8c35e3f185a353..f8270d2aa206412989d025502ddf297bc2d433dd 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -2608,6 +2608,41 @@ static int ti_sci_cmd_change_fwl_owner(const struct ti_sci_handle *handle,
- 	return ret;
- }
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+index a6f0d87a50d8a7ebdb61e609e8071d6681dbec9a..ac67c51caa2111db1283060af7ccc7b7780bf204 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+@@ -49,6 +49,42 @@
+ 			linux,cma-default;
+ 		};
  
-+static int ti_sci_cmd_restore_context(const struct ti_sci_handle *handle, u64 ctx_addr)
-+{
-+	struct ti_sci_msg_min_restore_context_req req;
-+	struct ti_sci_msg_hdr *resp;
-+	struct ti_sci_info *info;
-+	struct ti_sci_xfer *xfer;
-+	int ret = 0;
++		c7x_0_dma_memory_region: c7x-dma-memory@99800000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x99800000 0x00 0x100000>;
++			no-map;
++		};
 +
-+	if (IS_ERR(handle))
-+		return PTR_ERR(handle);
-+	if (!handle)
-+		return -EINVAL;
++		c7x_0_memory_region: c7x-memory@99900000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x99900000 0x00 0xf00000>;
++			no-map;
++		};
 +
-+	info = handle_to_ti_sci_info(handle);
++		mcu_r5fss0_core0_dma_memory_region: r5f-dma-memory@9b800000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9b800000 0x00 0x100000>;
++			no-map;
++		};
 +
-+	xfer = ti_sci_setup_one_xfer(info, TI_SCI_MSG_MIN_CONTEXT_RESTORE,
-+				     TI_SCI_FLAG_REQ_ACK_ON_PROCESSED,
-+				     (u32 *)&req, sizeof(req), sizeof(*resp));
-+	if (IS_ERR(xfer)) {
-+		ret = PTR_ERR(xfer);
-+		return ret;
-+	}
++		mcu_r5fss0_core0_memory_region: r5f-dma-memory@9b900000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9b900000 0x00 0xf00000>;
++			no-map;
++		};
 +
-+	req.ctx_lo = (u32)(ctx_addr & 0xffffffff);
-+	req.ctx_hi = (u32)(ctx_addr >> 32);
++		wkup_r5fss0_core0_dma_memory_region: r5f-dma-memory@9c800000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9c800000 0x00 0x100000>;
++			no-map;
++		};
 +
-+	ret = ti_sci_do_xfer(info, xfer);
-+	if (ret) {
-+		dev_err(info->dev, "Failed restoring context %d\n", ret);
-+		return ret;
-+	}
++		wkup_r5fss0_core0_memory_region: r5f-dma-memory@9c900000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9c900000 0x00 0x1e00000>;
++			no-map;
++		};
 +
-+	return ret;
-+}
-+
- /*
-  * ti_sci_setup_ops() - Setup the operations structures
-  * @info:	pointer to TISCI pointer
-@@ -2625,6 +2660,7 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 	struct ti_sci_rm_psil_ops *psilops = &ops->rm_psil_ops;
- 	struct ti_sci_rm_udmap_ops *udmap_ops = &ops->rm_udmap_ops;
- 	struct ti_sci_fwl_ops *fwl_ops = &ops->fwl_ops;
-+	struct ti_sci_lpm_ops *lpm_ops = &ops->lpm_ops;
+ 		secure_tfa_ddr: tfa@9e780000 {
+ 			reg = <0x00 0x9e780000 0x00 0x80000>;
+ 			alignment = <0x1000>;
+@@ -60,12 +96,6 @@
+ 			alignment = <0x1000>;
+ 			no-map;
+ 		};
+-
+-		wkup_r5fss0_core0_memory_region: r5f-dma-memory@9c900000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0x9c900000 0x00 0x01e00000>;
+-			no-map;
+-		};
+ 	};
  
- 	bops->board_config = ti_sci_cmd_set_board_config;
- 	bops->board_config_rm = ti_sci_cmd_set_board_config_rm;
-@@ -2689,6 +2725,8 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
- 	fwl_ops->set_fwl_region = ti_sci_cmd_set_fwl_region;
- 	fwl_ops->get_fwl_region = ti_sci_cmd_get_fwl_region;
- 	fwl_ops->change_fwl_owner = ti_sci_cmd_change_fwl_owner;
-+
-+	lpm_ops->restore_context = ti_sci_cmd_restore_context;
- }
- 
- /**
-diff --git a/drivers/firmware/ti_sci.h b/drivers/firmware/ti_sci.h
-index bb8bc7beeadbed5415eb4450735d488de019e9af..e8fdc652b855e9057b734c3e4f526e380d0b78bd 100644
---- a/drivers/firmware/ti_sci.h
-+++ b/drivers/firmware/ti_sci.h
-@@ -43,6 +43,9 @@
- #define TI_SCI_MSG_QUERY_CLOCK_FREQ	0x010d
- #define TI_SCI_MSG_GET_CLOCK_FREQ	0x010e
- 
-+/* Low Power Mode Requests */
-+#define TI_SCI_MSG_MIN_CONTEXT_RESTORE	0x0308
-+
- /* Processor Control Messages */
- #define TISCI_MSG_PROC_REQUEST		0xc000
- #define TISCI_MSG_PROC_RELEASE		0xc001
-@@ -1530,4 +1533,15 @@ struct ti_sci_msg_fwl_change_owner_info_resp {
- 	u16			owner_permission_bits;
- } __packed;
- 
-+/**
-+ * struct ti_sci_msg_min_restore_context_req - Request to restore context from DDR
-+ *
-+ * @hdr:		Generic Header
-+ */
-+struct ti_sci_msg_min_restore_context_req {
-+	struct ti_sci_msg_hdr	hdr;
-+	u32			ctx_lo;
-+	u32			ctx_hi;
-+} __packed;
-+
- #endif /* __TI_SCI_H */
-diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-index 8e4c43cef3111412b5d894ad29152dde92822a64..1bf261368ca23ab03c60d25732b3e1f7d368b0ec 100644
---- a/include/linux/soc/ti/ti_sci_protocol.h
-+++ b/include/linux/soc/ti/ti_sci_protocol.h
-@@ -594,6 +594,14 @@ struct ti_sci_fwl_ops {
- 	int (*change_fwl_owner)(const struct ti_sci_handle *handle, struct ti_sci_msg_fwl_owner *owner);
+ 	opp-table {
+@@ -737,3 +767,57 @@
+ 		};
+ 	};
  };
- 
-+/**
-+ * struct ti_sci_lpm_ops - Low Power Mode operations
-+ * @restore_context: Request restoring context from DDR.
-+ */
-+struct ti_sci_lpm_ops {
-+	int (*restore_context)(const struct ti_sci_handle *handle, u64 ctx_addr);
++
++&mailbox0_cluster0 {
++	status = "okay";
++
++	mbox_r5_0: mbox-r5-0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
 +};
 +
- /**
-  * struct ti_sci_ops - Function support for TI SCI
-  * @board_ops:	Miscellaneous operations
-@@ -615,6 +623,7 @@ struct ti_sci_ops {
- 	struct ti_sci_rm_psil_ops rm_psil_ops;
- 	struct ti_sci_rm_udmap_ops rm_udmap_ops;
- 	struct ti_sci_fwl_ops fwl_ops;
-+	struct ti_sci_lpm_ops lpm_ops;
- };
- 
- /**
++&mailbox0_cluster1 {
++	status = "okay";
++
++	mbox_c7x_0: mbox-c7x-0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
++};
++
++&mailbox0_cluster2 {
++	status = "okay";
++
++	mbox_mcu_r5_0: mbox-mcu-r5-0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
++};
++
++&wkup_r5fss0 {
++	status = "okay";
++};
++
++&wkup_r5fss0_core0 {
++	mboxes = <&mailbox0_cluster0>, <&mbox_r5_0>;
++	memory-region = <&wkup_r5fss0_core0_dma_memory_region>,
++			<&wkup_r5fss0_core0_memory_region>;
++};
++
++&mcu_r5fss0 {
++	status = "okay";
++};
++
++&mcu_r5fss0_core0 {
++	mboxes = <&mailbox0_cluster2>, <&mbox_mcu_r5_0>;
++	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
++			<&mcu_r5fss0_core0_memory_region>;
++};
++
++&c7x_0 {
++	mboxes = <&mailbox0_cluster1>, <&mbox_c7x_0>;
++	memory-region = <&c7x_0_dma_memory_region>,
++			<&c7x_0_memory_region>;
++	status = "okay";
++};
 
 -- 
 2.47.2
