@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9145C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 14:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAD4C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 14:56:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CCEA81671;
-	Tue, 11 Mar 2025 15:44:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A220081197;
+	Tue, 11 Mar 2025 15:55:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X2c4Ouv+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jUkQ9o5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F83A81197; Tue, 11 Mar 2025 15:44:28 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id ADF0881335; Tue, 11 Mar 2025 15:55:57 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DDC8807D7
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 15:44:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 371248083E
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 15:55:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e5dc299deb4so4883661276.1
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 07:44:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7c559b3eb0bso111429185a.1
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 07:55:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741704264; x=1742309064; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WmBQXd3PiBHhx119Syx8sAw9xeq2QT+y5nPU2LlIepo=;
- b=X2c4Ouv+iu5N9wuhUZLMdB31JU9eLOyoquEZlJ2gJcwhs9SHo+AAYsTXGbz8n+qbdj
- ngiMzcvHeu1T5KwhDGQDJfuJrSmmjfW7r7kb1ypxWE8cI1K/5gySrV1L+wso8p/y8xoY
- FFnG5zH6Ti/n+ac6+7N83PJvQZc0SsSV8OmCyYymUgMexBmRc6QuFnWmrPElW4//KZIi
- bGeC5Nmv361BBch/nE34KsobxhpA7qsEz3U7triVOH+KRl7Wcvgr9vuw0cogN66NArEG
- Lg4ulgxwmXiymH5uUC7eIasPXziRyEtmYrcHO3Wbh5kGoBZRNiS7IlB8ATdnsYcTDUPd
- vnng==
+ d=konsulko.com; s=google; t=1741704954; x=1742309754; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dDw+7zgtklvCkemcrfKVX2oa32Tc5XvL59jgkcskGS0=;
+ b=jUkQ9o5DbrVbYboHsQHSxouf6UY8TJWz+fAbRnYIe4Tp4NFcI7FueZh5m2/vz99Puc
+ ogwNWlRfU/BuhcqVmd1CSZkEWjYlq3hQ+J9w8sZAPhjCHGoJ/RIlHOfoNCNaysVhGl9u
+ /e8UbW+8ZG5jZp5JRaRixAFO6QUjp5c/CZ4tU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741704264; x=1742309064;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WmBQXd3PiBHhx119Syx8sAw9xeq2QT+y5nPU2LlIepo=;
- b=syyFOzy/qyetFWyKiH15EJ8qkgweKZPzjDMWsywmeo7aLHcHYkPYIF26XrXulPD7zG
- fW/bUGY0fViCxc4KKIn+OER9C7sighAdRCYmPwMtAM4WresBSzXiGuLP41cezeurSkRL
- NjzFrVjtzxz0nPYQukb0PVpPVHbJc104tF//gvgE2eoR++nlyGkfNCNZIewuLA5Q1kja
- rlpCtgId9ASY+mUt0GHP1NbGJrGCTgTUj6m0F6XnWUscOqD03QeMahvET5rZXI0aTqAg
- qY6qPiKoBkD1msvnb8O/Dc0e5A8FT30opj43PuBUb46naO728M+9j8g/CKbpe+gdB2ar
- bCuQ==
-X-Gm-Message-State: AOJu0YweuqadDhZdHosVIMS27T8KMcIkT3r6QZ8RJPuQkd8ipoZVCIOY
- Ws6kb36FbH4kO7iYUMWiMwBek9zkpS/2LSJEBoez34Bk7eZTYr88A1h08Aqd/17ERqMciS0cVSe
- S4WsA/PEpc7DRBdco9ZabT0ajMHXctsPuCLJHIg==
-X-Gm-Gg: ASbGnctZx5YKfHxbZkKv6JTR8TJ8CHe9BLJg8jYg+qMtnWcOldzOeL1mtI1zF1f1iJW
- LurMAd723XG3UkQ1Pwv7XKRFmI6SMk+I1o1WqY9rPR9hUqq/I8Tfy5eyU0xYubvFwXYhvn93UiG
- B6CU8e3puYsW1VJ4xtsFxi+5aVvT0=
-X-Google-Smtp-Source: AGHT+IGSXdUCEWKVUv/pTH2q/L7d7uX5KglmdZZl3gHI2+bhxkhrai2c2I88fl6j75jeQ4c08EJMkwJSwENLDZePl1A=
-X-Received: by 2002:a05:6902:2081:b0:e5a:c837:a8c7 with SMTP id
- 3f1490d57ef6-e635c136db5mr22577077276.11.1741704264162; Tue, 11 Mar 2025
- 07:44:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741704954; x=1742309754;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dDw+7zgtklvCkemcrfKVX2oa32Tc5XvL59jgkcskGS0=;
+ b=tZnVHHWQnjLtVN5oA0IgHg+P63cL7KpnJ70ydiW3xzQuTv2hGHTvmOmRtuutVldEwV
+ pCi+YoCdAxpGHXwbfkJqTuxVjhpoFZXXZZlAvlMvpAG3b1BUI0g858VYmvAumH46JKtw
+ tnUIhlcyjCiaciXnC/ndcPY/JCfSf1PWCBjx+ostBPM+qPENx50dfxW3uEIELFo9U0cm
+ 0eLDSrrfcPv6xfdRgYagBe07NesU7VbiRtNRsvb4jxgsR8cGxpg0UgO3U71xS6upaxDK
+ AFi59T9eXG0eo4h6WnsLrILDNn7aGV6cqG1HSbpUah/w2VmGe1zrXIYdLf4fdHUVLHdo
+ Ykfg==
+X-Gm-Message-State: AOJu0YxTopqzHOwRAtiM8vQvJft5UUJAjonzMF43+xEr/yRyfHPeJW3M
+ 06TflLIOwuFjC29sAH6xNrcSCUNJat6Fz1Sso+dUUMF4ixplljUHHjxURzSHl/Y=
+X-Gm-Gg: ASbGnctMVpeFJ4btbEd8P32gId/PjhYt8YjEx/xZBRgxHCRh3upVhNo8O0gZDtBQpa+
+ Ky74iiJJoOt9gZMTXWOeDAe2A4pJSgEF6FocNGkuHxwKQF7j+d6KmlDe86YMUwpJK6Qsj8pZmUC
+ xK0FdNNc52XPSmYcAsjfuyT9b+vJ7+m1p8P1bbkwGP5puk3BEvYgYHVpWZ2oog4JcrhgmCWnrJ+
+ mnJ1XKGdU+ARU8KmeONmm7/d3PrJcrAOiWKQvQ4ELtzRdZK7TrLbEjtd79oGrCc4315n1QpVBwR
+ aa19L8YfBxR1akedrU4kNmd6xBYrCoKdTcYmZjkikYeCdQ==
+X-Google-Smtp-Source: AGHT+IGyK4Lv+1ikJdtML9XO/kKut1mb+47ktombol2/otd7wVqYXUk/d9gLTmpfJfsb6TFMtUsrsg==
+X-Received: by 2002:a05:6214:20c4:b0:6e6:4969:f005 with SMTP id
+ 6a1803df08f44-6e9006c8314mr224017706d6.30.1741704954031; 
+ Tue, 11 Mar 2025 07:55:54 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e8f707c4b5sm73101916d6.1.2025.03.11.07.55.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Mar 2025 07:55:53 -0700 (PDT)
+Date: Tue, 11 Mar 2025 08:55:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com
+Subject: Re: [PATCH v1] spl: remove usage of CMD_(BOOTI|BOOTZ) from image
+ parsing
+Message-ID: <20250311145550.GU2640854@bill-the-cat>
+References: <20250311093709.3372104-1-anshuld@ti.com>
 MIME-Version: 1.0
-References: <AS1P250MB060864865460745C69F23D74A9FF2@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
- <Z7Q43GmC4mpcG249@hera>
- <AS1P250MB0608391F8B37E8E9292205A7A9C42@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
- <CAC_iWjJ6cbx2CKhEf8iBZoW0R3Hv3WZ=buQXc+RdyJENrfYwtg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ6cbx2CKhEf8iBZoW0R3Hv3WZ=buQXc+RdyJENrfYwtg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Mar 2025 16:43:46 +0200
-X-Gm-Features: AQ5f1Jr26AV2uzgdbc-MdmFBcsqDd-5On_yScFDiccUYTtNiUKLxQa_f-5e70Ag
-Message-ID: <CAC_iWjL+QOMBPvk+ZGgivDFt+foRcm8WyAzTWTRmEXfXr1xd1Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tpm: fixed the nv_define_space command in TPMv2
-To: Michel Alex <Alex.Michel@wiedemann-group.com>, niek.nooijens@omron.com
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+8LZoQ6UhblfD9bH"
+Content-Disposition: inline
+In-Reply-To: <20250311093709.3372104-1-anshuld@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,116 +95,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alex,
 
-++ CC Niek who originally authored this
+--+8LZoQ6UhblfD9bH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 20 Feb 2025 at 10:27, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Michel,
->
-> On Thu, 20 Feb 2025 at 09:14, Michel Alex
-> <Alex.Michel@wiedemann-group.com> wrote:
-> >
-> > Hi Ilias,
-> >
-> > I don't know where to find the spec for the tpm v2 nv_define command. I=
- was just wondering
-> > why this command does not work in u-boot. Then I found a patch, that ha=
-s never been
-> > applied to the master, see https://lists.denx.de/pipermail/u-boot/2023-=
-December/542089.html,
->
-> Yes, that patch was useful but unfortunately, it didn't apply to
-> -master cleanly and I haven't seen an updated revision since.
-> I'll have a look at the tpm specs and figure out why this change is
-> working and let you know. You can then send a v2 with a commit message
-> that explains why
->
-> Thanks
-> /Ilias
->
-> > where the nv_define's message buf was "fixed". I tried this change and =
-the nv_define command
-> > is working now.
-> >
-> > Alex
-> >
-> > > -----Original Message-----
-> > > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > Sent: Tuesday, February 18, 2025 8:38 AM
-> > > To: Michel Alex <Alex.Michel@wiedemann-group.com>
-> > > Cc: u-boot@lists.denx.de
-> > > Subject: Re: [PATCH 1/1] tpm: fixed the nv_define_space command in TP=
-Mv2
-> > >
-> > > Vorsicht: Es handelt sich um eine externe E-Mail vom Absender Ilias
-> > > Apalodimas <ilias.apalodimas@linaro.org>. Bitte klicken Sie nicht auf=
- Links oder
-> > > Anh=C3=A4nge, solange Sie nicht von der Echtheit der Nachricht =C3=BC=
-berzeugt sind.
-> > >
-> > > Hi Michel
-> > >
-> > > On Thu, Feb 13, 2025 at 12:43:34PM +0000, Michel Alex wrote:
-> > > > Added 2 HMAC bytes to the command message
-> > >
-> > > Please cc the TPM maintainers, otherwise I might miss this patch.
-> > >
-> > > What the patch does is obvious, can you add a better explanation of
-> > > - what it fixes / what was broken?
-> > > - pointers to spec that define the hmac size and placement?
-> > >
-> > > Thanks
-> > > /Ilias
-> > > >
-> > > > Signed-off-by: Alex Michel <alex.michel@wiedemann-group.com>
-> > > > ---
-> > > >  lib/tpm-v2.c | 5 +++--
-> > > >  1 file changed, 3 insertions(+), 2 deletions(-)
-> > > >
-> > > > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c index
-> > > > 9ca7933c094..4a082af78af 100644
-> > > > --- a/lib/tpm-v2.c
-> > > > +++ b/lib/tpm-v2.c
-> > > > @@ -264,7 +264,7 @@ u32 tpm2_nv_define_space(struct udevice *dev, u=
-32
-> > > space_index,
-> > > >      * chunks below.
-> > > >      */
-> > > >     const int platform_len =3D sizeof(u32);
-> > > > -   const int session_hdr_len =3D 13;
-> > > > +   const int session_hdr_len =3D 15;
-> > > >     const int message_len =3D 14;
-> > > >     uint offset =3D TPM2_HDR_LEN + platform_len + session_hdr_len +
-> > > >             message_len;
-> > > > @@ -277,11 +277,12 @@ u32 tpm2_nv_define_space(struct udevice *dev,=
- u32
-> > > space_index,
-> > > >             /* handles 4 bytes */
-> > > >             tpm_u32(TPM2_RH_PLATFORM),      /* Primary platform see=
-d */
-> > > >
-> > > > -           /* session header 13 bytes */
-> > > > +           /* session header 15 bytes */
-> > > >             tpm_u32(9),                     /* Header size */
-> > > >             tpm_u32(TPM2_RS_PW),            /* Password authorisati=
-on
-> > > */
-> > > >             tpm_u16(0),                     /* nonce_size */
-> > > >             0,                              /* session_attrs */
-> > > > +           tpm_u16(0),                     /* HMAC size */
+On Tue, Mar 11, 2025 at 03:07:09PM +0530, Anshul Dalal wrote:
 
-So looking at this again, and the spec -- we are using a password auth
-just above. So the HMAC shouldn't be needed. Any chance this is the
-TPM2B_AUTH filed we add and it somehow fixes your issue?
+> Using CMD_* configs from spl doesn't make logical sense. Therefore this
+> patch removes the check for CONFIG_CMD_BOOT(I|Z) from the image parsing
+> code during falcon boot and adds compilation targets for image.c and
+> zimage.c on SPL_OS_BOOT.
+>=20
+> More info:
+> https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
+>=20
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  arch/arm/lib/Makefile | 3 +--
+>  common/spl/spl.c      | 6 ++----
+>  2 files changed, 3 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+> index 1c95dd6fed2..0e36d493aee 100644
+> --- a/arch/arm/lib/Makefile
+> +++ b/arch/arm/lib/Makefile
+> @@ -36,8 +36,7 @@ obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o zimage.o
+>  else
+>  obj-$(CONFIG_$(PHASE_)FRAMEWORK) +=3D spl.o
+>  ifdef CONFIG_SPL_FRAMEWORK
+> -obj-$(CONFIG_CMD_BOOTI) +=3D image.o
+> -obj-$(CONFIG_CMD_BOOTZ) +=3D zimage.o
+> +obj-$(CONFIG_SPL_OS_BOOT) +=3D image.o zimage.o
+>  endif
+>  obj-$(CONFIG_OF_LIBFDT) +=3D bootm-fdt.o
+>  endif
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index 76fd56dfe4b..79149ba07db 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -335,8 +335,8 @@ int spl_parse_image_header(struct spl_image_info *spl=
+_image,
+>  		panic("** no mkimage signature but raw image not supported");
+>  	}
+> =20
+> -	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
+> -		ulong start, size;
+> +	if (CONFIG_IS_ENABLED(OS_BOOT)) {
+> +		ulong start, size, end;
+> =20
+>  		if (!booti_setup((ulong)header, &start, &size, 0)) {
+>  			spl_image->name =3D "Linux";
+> @@ -349,8 +349,6 @@ int spl_parse_image_header(struct spl_image_info *spl=
+_image,
+>  			      spl_image->load_addr, spl_image->size);
+>  			return 0;
+>  		}
+> -	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) {
+> -		ulong start, end;
+> =20
+>  		if (!bootz_setup((ulong)header, &start, &end)) {
+>  			spl_image->name =3D "Linux";
 
-Cheers
-/Ilias
-> > > >             tpm_u16(0),                     /* auth_size */
-> > > >
-> > > >             /* message 14 bytes + policy */
-> > > > --
-> > > > 2.43.0
-> > > >
+We need something more clever here now however, likely some new HAS_...
+symbols. What you do here means that all OS_BOOT platforms will have 32
+and 64bit image support, which isn't what we usually want.
+
+--=20
+Tom
+
+--+8LZoQ6UhblfD9bH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfQTvMACgkQFHw5/5Y0
+tyyGUwv/VInqyNyoNqJVGw7jj6sG8Jdf3xNytMkTqROsBQco2GMQV+SPdmJMSvaV
+0dat1+ClwuF0Op42DIWTa5nR9iuJqAy0qXBiM4JTseHEkgUx54rvgbjWawU3LtGh
+9UPC5yTK8OJEvApCgSacai/mj5+oAi9IFT+n8iOCFKj/Ux1l7k9VvAkXR5bb5qJW
+RD0QS+0q/YPmwTNdajQmmlRkoEDMj6FKTAmgJNNGhcfFtqxGqOeNQN28xutAyDHo
+q0x93IXZx5efBobZsgssbqZcewzEgoAECS/wKOGWPFgFh+xhh1KTFd7/ah7z8N5X
+RUZknulNuxT7agmuHhkEbTkkQcsHJDtZ2BuGrcKdRJVDvJbmayvshs+GG8TwCfLD
+OMhdLO9yARDUW1Y6eCcPl1UxzDh/abLEC1zDgQCty1mkiRubIwmlFVQhcWmnpL85
+4HEtpnD/ZFdXYRYrBUx0KKSfs8goy2ihPsKnbxQJnMw3HBPSO+PPD0Fr1lZo1B+d
+TecdnudB
+=RPeY
+-----END PGP SIGNATURE-----
+
+--+8LZoQ6UhblfD9bH--
