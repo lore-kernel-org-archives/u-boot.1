@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33442C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 12:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C4AC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 12:45:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE3A9801FB;
-	Tue, 11 Mar 2025 13:44:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1005E801FB;
+	Tue, 11 Mar 2025 13:45:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FRRa8XFR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b8sCMDVs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CCFE807D7; Tue, 11 Mar 2025 13:44:42 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 3E2F78083E; Tue, 11 Mar 2025 13:45:36 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66C02801BE
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 13:44:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA61F801BE
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 13:45:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e6341e4d0b4so4890631276.0
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 05:44:39 -0700 (PDT)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e60f212fee7so4137123276.1
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 05:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741697078; x=1742301878; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741697133; x=1742301933; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dbe4r4rVBxsAq/npUM2saUCb3+lq0+l4latdxvj34Dc=;
- b=FRRa8XFR13dpKgl7+uOCAsMbm9DJYusY0Tzm57tix7qkdUkpE66bkQMK/3ibbUcHnG
- 2Pr+K6sDD4BisZ+4mZUaj8hfXqt32GcI/ALk5HMc3GEMZuh6Xz4+glqlT/EC3oy4JvQM
- kPQIMN73Sy6ycW5LFvNsa47hsuZg7uu5MQeCiGkCpwgo+o/droZnV4icrFTHuFM4/m2a
- be0j7wgcjhRC9t8id17qM3964pw90wbtlyiof9mGwyo2dKDcmlk5NcJcM9TR051FrNoI
- IglmQoTJQfAevMCvxBqrGFb4etPD1hZ5Jr5jkBzdRFjxPg3cOh6RnS9ZNVxZG2EPqLDL
- 6LuQ==
+ bh=HOiuyGfrmJDzqmQ14k6WXkGIwbDj0u1oadO+IiMZfE8=;
+ b=b8sCMDVs33PRZ0jnSO6JXhxB5lHrrluyaroMbKzGi7mlc2i3PUgX7PYuJmIA+Wja+x
+ 8mM/s+SHdg+KJGSv2qEYcVDuimGZGb7+7Mk1XNrXI4NyPN8jFCoN9ZTq8kKFUv8pIzcF
+ QFnHIDCfmF8KkFKkiE7BRUiqorKQ07Fa0jNMtYYTd0uwVShYo9Tl7Iy/Pww/7sIJr23V
+ OjtutXZsXY0NGGm0W4oUy5UMYhzADz6KO0lcLYX1nrqED9ei0slUMUc0Tgy8fTQHMqb6
+ GJkknQBPoUtmKO7UiKi06KG8AlqGpRVtmTcLRNY/zozMJzJfvLSvhN7+f7Z1jDzQ+9dX
+ 8A7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741697078; x=1742301878;
+ d=1e100.net; s=20230601; t=1741697133; x=1742301933;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dbe4r4rVBxsAq/npUM2saUCb3+lq0+l4latdxvj34Dc=;
- b=ZtWmEco5YfiK/8ZltPkeb/CvZptdjjZRQzHD2Fqod3ISeJdH16xpIDvcCG59sZDQvk
- 5k04cRowLc+5iHluA4yrHbYhBTDxvl089OIJ+CFveLoo25G6oMyv03sfSYXytgY07DJo
- e/dJL8d4iF9MtNxJTqvJDPJYSTxrNlWGqY15xqBJ8AN1tj0yX9llDvWvGKrEqZHDZmL2
- ib6vKMHgqXS8ZBRQrfTTakY+VeCjlrCn9aN39uaEvKBQP3bn+TWG44vf/w5jgvK95Dsf
- zTsXT7XMsuGd2be++RaUbTJYwXLvxzPa54qvS5BTLqPC4mtg7OopOAVfQUulg8ejwC3k
- 71xA==
-X-Gm-Message-State: AOJu0YzKzIyyf0m89UOFSsF7Ig9xKq1mkSmaltOHQ+60ZYA32gwQvz2k
- /HZTO8wDamyyReVKBQUyh1nW53gBZPNmTNLRY5vvoARjhphfj5/yVlYXpASyG2d9F5e8SAGnYsS
- YLSAQjRbKY0H/9gchtciVpz51vZRR2UJo7fimGQ==
-X-Gm-Gg: ASbGncvJVg9IVWH70y+i9lulix2xgyU67KyZGLjw4Fum+jIcAWj7vnv7Kqu0WPv95s/
- 8Px6xA0/KJ7DzWzLFNP4CqhnnuuqdwlygXsvuSfaOMmpDspxil5eGVQiRj6CIU5G3EPdiuAQMUS
- wqDsqOqKxy+LEQX6Gx32V+H4gWrXg=
-X-Google-Smtp-Source: AGHT+IEfC/dZBvNcMa/ljMRjpPD5pVowUTD+GMKD7fcrrE9yLuBdJrECylIHkE8zPW+X9+3GWXkK6QZSnJF5N1qwJJg=
-X-Received: by 2002:a05:6902:480a:b0:e5d:ffca:7062 with SMTP id
- 3f1490d57ef6-e63b51641demr4484952276.7.1741697078174; Tue, 11 Mar 2025
- 05:44:38 -0700 (PDT)
+ bh=HOiuyGfrmJDzqmQ14k6WXkGIwbDj0u1oadO+IiMZfE8=;
+ b=D3UKcghQAhvTLT7fMN9i/qg9lZFrvUNhWU+LI2ASAdUn4PNA5ogi/gunSy5sy+NfT7
+ RHL17xzZax14ZM2n4DOPBMysMiLnxtBPs9IvErGbXtCMMDQaYyHN/j6lkGBSMXg3eB93
+ nsioPMc4drv/EXX33O05ClDOuwy68WcLHbVg0xdmbbakpP0mWS0Pl/M6d7UcO0q+1gfi
+ sLRPuLafDoXzIS/D+eoITeRTc0IyT/j7OGw8nbyYhF6NKu4Wy3zX2rxS2vieXimISTeo
+ C8tDPzWjjGlr8p88r8OBIITVoIlqR707Zev9QM6KDaIGPhh4bmd7521NHZNutHPCQ8Jf
+ 5QKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXph6kDuxWj/pLOhNeFPohayZnOkOLlPTnimwMzcUhXXfF/DNiKls3vsDYqLgnEmbcdCuP1mNU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXdm1hYJ4MGaBCblvBzJc3+i4eo8zdJBkpUbtxInVDrPcTPx7M
+ YZ1N3h9H0o8xTL8a7RmmgG5ITyBeysER5g8cyok3VfoRhOJajjlsWYzqXz9rf1R2bSO5Rv8vMDg
+ dDW/baNMNsas5PU7yYZg+aAu1bdqKzj8iq6kM5w==
+X-Gm-Gg: ASbGncucNoMrG7w2EnvEEilcewZAmcq1NeWlwi8wog8UJI9G59L6BF9JMCaaN8XMOFJ
+ mkcNcKBJ7IpidQIHsJMoNsoockSOeJdgiujxWnQpT7I32KuLzaojXH4zU72uvwhp5cQY7vlrqTh
+ cB5EqLZMCRQO1G7kuTgbZrTO1EdXk=
+X-Google-Smtp-Source: AGHT+IHkyv/WSjZxFe2e4w2qlqdgkXAakosLfGUodV5+1H6XkgyZJB9nAFqWUKwqtrHD6I3vjDEMe8uX7NgRjSJd9x8=
+X-Received: by 2002:a05:6902:2a8b:b0:e5d:c6e8:2e32 with SMTP id
+ 3f1490d57ef6-e635c179f67mr17470214276.24.1741697132645; Tue, 11 Mar 2025
+ 05:45:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250304152510.2832340-1-jerome.forissier@linaro.org>
- <20250304152510.2832340-15-jerome.forissier@linaro.org>
-In-Reply-To: <20250304152510.2832340-15-jerome.forissier@linaro.org>
+References: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
+ <20250302142121.150480-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250302142121.150480-3-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Mar 2025 14:44:02 +0200
-X-Gm-Features: AQ5f1Jow1togYUECZkY9pjLbuRe9SFN8mjTZvxMrG-xuuGZ2-frFJ82TLDnO3gk
-Message-ID: <CAC_iWjL0JO6d2TcaAwVaxorrBjHncGTTyr34uKUa7nm4Zuok2A@mail.gmail.com>
-Subject: Re: [PATCH v3 14/14] MAINTAINERS: add UTHREAD
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 11 Mar 2025 14:44:56 +0200
+X-Gm-Features: AQ5f1JrtdvgovuaEcXe9oEAdBGhZohcje3dyNzI-ZwdPnlIptUFPrD4BOTurOj0
+Message-ID: <CAC_iWjKzoN1_qN=WAtR3rm4KoS9ny72xG_XE0XBk513QLWL+eg@mail.gmail.com>
+Subject: Re: [PATCH 2/5] arm: include asm-generic/int-ll64.h in setjmp.h
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Janne Grunau <j@jannau.net>, Yao Zi <ziyao@disroot.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,39 +101,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 4 Mar 2025 at 17:31, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Sun, 2 Mar 2025 at 16:22, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Add myself as the maintainer for the UTHREAD framework, the spawn/wait
-> commands and the associated tests.
+> Don't assume that u32 and u64 are already defined.
 >
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  MAINTAINERS | 9 +++++++++
->  1 file changed, 9 insertions(+)
+>  arch/arm/include/asm/setjmp.h | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index c1851280e6e..27887bca55d 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1800,6 +1800,15 @@ T:       git https://source.denx.de/u-boot/custodians/u-boot-usb.git topic-xhci
->  F:     drivers/usb/host/xhci*
->  F:     include/usb/xhci.h
+> diff --git a/arch/arm/include/asm/setjmp.h b/arch/arm/include/asm/setjmp.h
+> index 662bec86321..9a7f5af9f8f 100644
+> --- a/arch/arm/include/asm/setjmp.h
+> +++ b/arch/arm/include/asm/setjmp.h
+> @@ -7,6 +7,8 @@
+>  #ifndef _SETJMP_H_
+>  #define _SETJMP_H_     1
 >
-> +UTHREAD
-> +M:     Jerome Forissier <jerome.forissier@linaro.org>
-> +S:     Maintained
-> +F:     lib/uthread.c
-> +F:     include/uthread.h
-> +F:     test/lib/uthread.c
-> +F:     cmd/spawn.c
-> +F:     test/cmd/spawn.c
+> +#include <asm-generic/int-ll64.h>
 > +
->  UUID testing
->  M:     Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
->  S:     Maintained
+>  /*
+>   * This really should be opaque, but the EFI implementation wrongly
+>   * assumes that a 'struct jmp_buf_data' is defined.
 > --
-> 2.43.0
+> 2.48.1
 >
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
