@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE88C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 16:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDDFC28B2F
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 16:50:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F066881B5C;
-	Tue, 11 Mar 2025 17:48:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4129581A04;
+	Tue, 11 Mar 2025 17:48:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XdPBj1xH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gILfyjYi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0668B81A10; Tue, 11 Mar 2025 17:48:22 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 54825807D7; Tue, 11 Mar 2025 17:48:24 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5824817D3
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 17:48:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0570381B42
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 17:48:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-22435603572so66345885ad.1
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 09:48:19 -0700 (PDT)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2235189adaeso411315ad.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 09:48:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741711698; x=1742316498; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741711700; x=1742316500; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IEgSG/qaMqtDTo3lcKlSnZJCLiavug+Wq7hmbpylfbg=;
- b=XdPBj1xHFRZB1T6Xjwgigezv4X2Eqcf+c139WxFU2WJVSEh4JlN3gdK4yocELP1B/F
- +oyg+bZoJhb9KfAaB4yzjuaXXc/Ix0nMyRGIFXv9DFjAhcVGfOlIoGOrF1gse5/SXpCw
- BUF/xym/xYbDjtAbjqNwri/OtbQQUh/+/EPfnHcx12s5gscyr4CHGzC/61vSD8t8iJ+M
- iTDz5K28gvt4LymrREFNDRJziOOM8p2NYHQo5mSSqiDL4ZoyQsjHnmCxgKuO0TMzkDzB
- G0g49OfyMYtl4I5pvWjZtQtQwCzAWG2ZhgpBOnhI7nrEu5vhrndR+t7DjE8mDv17lyr1
- sL+Q==
+ bh=OnYiv5ooMPKDg+0VINrmCQUX5jypwdmLmYwe0ws2uzw=;
+ b=gILfyjYidbvvmK/VcwMrQbb8AdVu7PtrCyJHT4h1jajeuf1b2pk0nolT5aYzLHF4j5
+ G1JiHX+7ibjLyj9wMHo1xERjgXYJq4MXlsKFVFTm/mBqxMRd5L57+lhYRGdsj0dIw0u8
+ mvaiMsu/+6RsmvmTB/8wtcZiNGjzkw13GlrdzP0nUfyumOq22kEniciGbf2wz4Ycm0cf
+ fnOSHMnvAzZ7fnniu+j0I/nA5xt3cgfdKt8qC6HVLN8UMySIqF1AcoQrm7DAjsp6SwfL
+ DM6dK0iTtLrOAAiShmBz9FxNGmW2Fi6V8uYo8zuaoJJAcDJ54XEXnYq5Nxb90aof4QR2
+ KhWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741711698; x=1742316498;
+ d=1e100.net; s=20230601; t=1741711700; x=1742316500;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IEgSG/qaMqtDTo3lcKlSnZJCLiavug+Wq7hmbpylfbg=;
- b=J+GH+1rvhw0Nx5Xy1tL5f5MBAzfxevDWkJsSJsFmAZZ+e8S1uFJ07qmtbEVgAwWER6
- rtBCI5MQjvf3ZfpCJE7dRuU56mA2oJPLz3VxxGXaRnUBUv5iEaYFknvTiaf/rCpf2vew
- wi1H0O9XPI25c975GjsgTH89mnUPvSUI9bBrzNjr5ggYVLDf0685D8hpHVAjXikOohGT
- s3wIOK/jTPx/go5AdfGh5P/b+PJkusYlFYjwC06AKybvP+WdtgGI38fndzD24t/IbWX+
- wq1HvJdz1EIc610VXzQL+nNOTEv0vEWUQqxWdaLLCTYdFJK9ML6VJ4HZPAnX60ng6iTu
- kAMg==
-X-Gm-Message-State: AOJu0YxmZuLjRvsPg6QN8d9We8nwEsCRSig6myAUrab71H6lSdpdEJhy
- AIIKDWAbr9TPY7s59xgACoIuh57YuxQ5djstBKMLzD845rX56wNFyE56ANeAfI8=
-X-Gm-Gg: ASbGncsQ4ooR6YcxFhVh6+kNxtPgZGusjebJQliq5vkYrSyuF1aIp47smKHIxLW91jW
- 1GzCirPKCRGb/u2eZhjkOCvIys1PxukUviRgqCKKjDZ5iDCg6RAZMaS1BRpdU+JCxpqjynH5E1F
- g5h3lsXS0lw3wJseWXLbSrFOIRAjw6syUvdh04qwPcJEdrx44IfGwTf512cI6pxycW9tUqcVC7V
- S0NrnxcNqqk9AaGSJBrYYq3YgDRsZgl2tA8wKD0zxlD/F0P6f8GU24JbnXEo4fGJ9dc74ajETir
- SUjGGWBXs6QHmfDC0PQKU3p1FinpYMOBXQdhgC3itLlPK8BIxfNvatw=
-X-Google-Smtp-Source: AGHT+IHI+4jgtds+A+Eap/jLY6PmkJxVRj+h9ZhkFdo+sotS78vmRusTzsYehqJBiCWqfF5B6xjJUw==
-X-Received: by 2002:a17:903:22c1:b0:223:5525:6239 with SMTP id
- d9443c01a7336-22428c075d8mr311809805ad.38.1741711698141; 
- Tue, 11 Mar 2025 09:48:18 -0700 (PDT)
+ bh=OnYiv5ooMPKDg+0VINrmCQUX5jypwdmLmYwe0ws2uzw=;
+ b=GgpE3+SKsrZd/KQ5h8VAjvXHnYqy2U0xkGE0bA699Sx31UmwKuv9GIu3gBdcplmxTo
+ MKz/HCVYSyorQMyuiDnZ75UuwCwysWny8C/GrsJ6fxlC/tP/l9HqUhUB/BZK1eVauM1y
+ KdpS3XyJogLCnt2uYXWfiH4yB5tB+XaGYFwAkkSxeg7PAaKAW2MeMDvCvcdoSpxUTayn
+ ay0gbYjVX3jZ7sbhDkye68kEnP8fPU/Kbe4LWLglXVV6XrDNiJMvXKO+tV3UQJ+dkCL2
+ RkoZpX9WeMcC++kdNebXxX3uReQq/qygZAF1/1so73MgvxiMxPfBalTs6IGLmbwggfK6
+ E8Yg==
+X-Gm-Message-State: AOJu0YwKQ0PD6FxjhBCVaoDO54rjYGlevYPqmO0YjmXNBSgEdzN2PaId
+ QwH7d3/oStJBj01CQUUBNqWDHrrnGyZ5zhlkbnz6EcjUGJs/Vh7ha4JvGRsKzFY=
+X-Gm-Gg: ASbGnctkvaRqnoKpxt+oDUsr3jGE2As8IgZzT7Ntw+X9Xe9kGk01csYfv51zVGMLvLn
+ UuT45KMfSvvwwhMPi+m3PNP+WH3owcOrhzjGmZBu6ALjfrXOgbgzR5rljeFkBdcFsbshjGfw04e
+ B0iI9vxQLiXRKNUes4RI2oFRz3Ifg47IHX45Cu7FpmOHXiFPXcG70Zpet+FJl9H3YhXq0SNCckA
+ 7PILJjHzhbzNwhllIxAi/8tf4l7THlDC011c3gVSo/dRI0bmWpA6tuCaazcVeFDPTKhh+9cS7MF
+ e6q3cVhjns/0jAkXEdT5z2Nnqqha+3OgEjrkWBbY+ciaZ6KFHy21MMZDNs+Zdkkikg==
+X-Google-Smtp-Source: AGHT+IEL1K5R0IcINHBr0zb2BRbQHVM2USFUh6d/IgJXLBOhnl9RINyxoOfmha3TON6/AsmxZrODgg==
+X-Received: by 2002:a17:902:dacd:b0:21f:98fc:8414 with SMTP id
+ d9443c01a7336-22593df9927mr59205995ad.26.1741711700481; 
+ Tue, 11 Mar 2025 09:48:20 -0700 (PDT)
 Received: from adriano.. ([190.215.89.187]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736bf09ae2bsm6941749b3a.74.2025.03.11.09.48.15
+ d2e1a72fcca58-736bf09ae2bsm6941749b3a.74.2025.03.11.09.48.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 09:48:17 -0700 (PDT)
+ Tue, 11 Mar 2025 09:48:20 -0700 (PDT)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, =trini@konsulko.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 12/16] efi_loader: efi_net: add snp_owner field to efi_net_obj
- struct
-Date: Tue, 11 Mar 2025 13:47:54 -0300
-Message-ID: <20250311164758.421900-13-adriano.cordova@canonical.com>
+Subject: [PATCH 13/16] efi_selftest: Add selftest for counting EFI netdevices
+Date: Tue, 11 Mar 2025 13:47:55 -0300
+Message-ID: <20250311164758.421900-14-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250311164758.421900-1-adriano.cordova@canonical.com>
 References: <20250311164758.421900-1-adriano.cordova@canonical.com>
@@ -99,196 +98,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Two efi_net_obj's could share the same efi_simple_network_protocol interface.
-For example, say a working U-Boot net device is registered in the EFI
-subsystem, this will create an instance of an efi simple network protocol.
-Then another handle, say handle A, could be created using this same efi simple
-network protocol interface, and connect controller could be called. A U-Boot
-udevice would be created for handle A and it would be registered in the EFI
-subsystem as an efi_net_obj with the same simple network protocol interface as
-the efi_net_obj we started with.
-
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- lib/efi_loader/efi_net.c | 51 +++++++++++++++++++++++++---------------
- 1 file changed, 32 insertions(+), 19 deletions(-)
+ lib/efi_selftest/Makefile                  |  2 +-
+ lib/efi_selftest/efi_selftest_net_device.c | 65 ++++++++++++++++++++++
+ 2 files changed, 66 insertions(+), 1 deletion(-)
+ create mode 100644 lib/efi_selftest/efi_selftest_net_device.c
 
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index 5a00e7a570c..3ad51d343da 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -110,6 +110,7 @@ struct efi_net_obj {
- 	struct efi_event *wait_for_packet;
- 	struct efi_event *network_timer_event;
- 	int efi_seq_num;
-+	bool snp_owner;
- };
+diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+index 17fbfad116f..f7e8f02cb20 100644
+--- a/lib/efi_selftest/Makefile
++++ b/lib/efi_selftest/Makefile
+@@ -51,7 +51,7 @@ efi_selftest_variables_runtime.o \
+ efi_selftest_watchdog.o
  
- static int curr_efi_net_obj;
-@@ -134,15 +135,17 @@ static bool efi_netobj_is_active(struct efi_net_obj *netobj)
-  *
-  *
-  * @snp:	pointer to the simple network protocol
-+ * @bool:	snp owner
-  * Return:	pointer to efi_net_obj, NULL on error
-  */
--static struct efi_net_obj *efi_netobj_from_snp(struct efi_simple_network *snp)
-+static struct efi_net_obj *efi_netobj_from_snp(struct efi_simple_network *snp,
-+					       bool snp_owner)
- {
- 	int i;
+ obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
+-obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
++obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o efi_selftest_net_device.o
+ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
+ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
  
- 	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
--		if (net_objs[i] && net_objs[i]->net == snp) {
--			// Do not register duplicate devices
-+		if (net_objs[i] && net_objs[i]->net == snp &&
-+		    (!snp_owner || net_objs[i]->snp_owner)) {
- 			return net_objs[i];
- 		}
- 	}
-@@ -171,7 +174,7 @@ static efi_status_t EFIAPI efi_net_start(struct efi_simple_network *this)
- 		goto out;
- 	}
- 
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	if (this->mode->state != EFI_NETWORK_STOPPED) {
- 		ret = EFI_ALREADY_STARTED;
-@@ -207,7 +210,7 @@ static efi_status_t EFIAPI efi_net_stop(struct efi_simple_network *this)
- 		goto out;
- 	}
- 
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	if (this->mode->state == EFI_NETWORK_STOPPED) {
- 		ret = EFI_NOT_STARTED;
-@@ -250,7 +253,7 @@ static efi_status_t EFIAPI efi_net_initialize(struct efi_simple_network *this,
- 		r = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_INITIALIZED:
-@@ -347,7 +350,7 @@ static efi_status_t EFIAPI efi_net_shutdown(struct efi_simple_network *this)
- 		ret = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_INITIALIZED:
-@@ -553,7 +556,7 @@ static efi_status_t EFIAPI efi_net_get_status(struct efi_simple_network *this,
- 		goto out;
- 	}
- 
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_STOPPED:
-@@ -614,7 +617,7 @@ static efi_status_t EFIAPI efi_net_transmit
- 		goto out;
- 	}
- 
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	/* We do not support jumbo packets */
- 	if (buffer_size > PKTSIZE_ALIGN) {
-@@ -712,7 +715,7 @@ static efi_status_t EFIAPI efi_net_receive
- 		goto out;
- 	}
- 
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_STOPPED:
-@@ -870,7 +873,7 @@ static void EFIAPI efi_network_timer_notify(struct efi_event *event,
- 	if (!this || this->mode->state != EFI_NETWORK_INITIALIZED)
- 		goto out;
- 
--	nt = efi_netobj_from_snp(this);
-+	nt = efi_netobj_from_snp(this, true);
- 	curr_efi_net_obj = nt->efi_seq_num;
- 
- 	// The following only happens if the net obj was removed but the event
-@@ -1205,7 +1208,7 @@ static int efi_netobj_init(struct efi_net_obj *netobj)
- 
- 	dev = netobj->dev;
- 
--	if (efi_netobj_is_active(netobj))
-+	if (efi_netobj_is_active(netobj) || !netobj->snp_owner)
- 		goto set_timers;
- 
- 	if (!netobj->net_mode)
-@@ -1417,6 +1420,7 @@ struct efi_net_obj *efi_netobj_alloc(efi_handle_t handle,
- 			free(netobj->net->mode);
- 		free(netobj->net);
- 	}
-+	netobj->net = NULL;
- 
- 	if (handle) {
- 		netobj->handle = handle;
-@@ -1429,6 +1433,8 @@ struct efi_net_obj *efi_netobj_alloc(efi_handle_t handle,
- 		}
- 	}
- 
-+	netobj->snp_owner = efi_netobj_from_snp(net, true) ? false : true;
+diff --git a/lib/efi_selftest/efi_selftest_net_device.c b/lib/efi_selftest/efi_selftest_net_device.c
+new file mode 100644
+index 00000000000..51963eb328c
+--- /dev/null
++++ b/lib/efi_selftest/efi_selftest_net_device.c
+@@ -0,0 +1,65 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * efi_selftest_net_device
++ *
++ */
 +
- 	if (net) {
- 		netobj->net = net;
- 		netobj->net_mode = net->mode;
-@@ -1556,14 +1562,9 @@ int efi_net_unregister(void *ctx, struct event *event)
- 		return -1;
- 	}
- 
-+	interface = NULL;
- 	if (drv != dev->driver) {
- 		ret = EFI_CALL(efi_disconnect_controller(netobj->handle, NULL, NULL));
--		if (ret != EFI_SUCCESS)
--			return -1;
--		ret = EFI_CALL(efi_close_event(netobj->wait_for_packet));
--		if (ret != EFI_SUCCESS)
--			return -1;
--		ret = EFI_CALL(efi_close_event(netobj->network_timer_event));
- 		if (ret != EFI_SUCCESS)
- 			return -1;
- 
-@@ -1581,6 +1582,15 @@ int efi_net_unregister(void *ctx, struct event *event)
- 		}
- 	}
- 
-+	if (netobj->snp_owner) {
-+		ret = EFI_CALL(efi_close_event(netobj->wait_for_packet));
-+		if (ret != EFI_SUCCESS)
-+			return -1;
-+		ret = EFI_CALL(efi_close_event(netobj->network_timer_event));
-+		if (ret != EFI_SUCCESS)
-+			return -1;
-+	}
++#include <efi_selftest.h>
++#include <net.h>
 +
- #if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
- 	if (netobj->ip4_config2) {
- 		r = efi_ipconfig_unregister(netobj->handle, netobj->ip4_config2);
-@@ -1603,8 +1613,11 @@ int efi_net_unregister(void *ctx, struct event *event)
- 		ret = efi_delete_handle(netobj->handle);
- 		if (ret != EFI_SUCCESS)
- 			return -1;
-+	}
++static struct efi_boot_services *boottime;
 +
-+	efi_free_pool(interface);
- 
--		efi_free_pool(interface);
-+	if (netobj->snp_owner) {
- 		if (netobj->net)
- 			free(netobj->net);
- 		if (netobj->net_mode)
++/*
++ * Setup unit test.
++ *
++ * @handle:	handle of the loaded image
++ * @systable:	system table
++ * Return:	EFI_ST_SUCCESS for success
++ */
++static int setup(const efi_handle_t handle,
++		 const struct efi_system_table *systable)
++{
++	efi_uintn_t num_handles;
++	efi_handle_t *handles;
++
++	boottime = systable->boottime;
++
++	num_handles = 0;
++	boottime->locate_handle_buffer(BY_PROTOCOL, &efi_net_guid,
++				       NULL, &num_handles, &handles);
++	efi_st_printf("Detected %u active EFI net devices\n", (unsigned int)num_handles);
++
++	return EFI_ST_SUCCESS;
++}
++
++/*
++ * Execute unit test.
++ *
++ *
++ * Return:	EFI_ST_SUCCESS for success
++ */
++static int execute(void)
++{
++	return EFI_ST_SUCCESS;
++}
++
++/*
++ * Tear down unit test.
++ *
++ * Return:	EFI_ST_SUCCESS for success
++ */
++static int teardown(void)
++{
++	int exit_status = EFI_ST_SUCCESS;
++
++	return exit_status;
++}
++
++EFI_UNIT_TEST(netdevices) = {
++	.name = "netdevices",
++	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
++	.setup = setup,
++	.execute = execute,
++	.teardown = teardown,
++	.on_request = true,
++};
 -- 
 2.48.1
 
