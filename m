@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BF53C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:16:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC7CC28B2E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:17:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E274681A0E;
-	Tue, 11 Mar 2025 14:13:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4976881D1F;
+	Tue, 11 Mar 2025 14:13:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xEA95jck";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OyclqslY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF74881703; Tue, 11 Mar 2025 11:33:19 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 71008814B6; Tue, 11 Mar 2025 11:33:20 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11A8381782
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65D3D817D3
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5e6ff035e9aso641343a12.0
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:11 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aaf900cc7fbso1085585366b.3
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689181; x=1742293981;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689172; x=1742293972;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9x1Ar677Q7oTOeh6Y8GZFKd22RTtLtDDrvs0FFbVvpE=;
- b=xEA95jckAEWlpMkjsSbin23xV1DAiWXvNVPeg+7q1JAL4c0HiqiDuCuVLP+4whrKH9
- RXVPieukKeiJ4hwvgW/Y6TnUHDfimVUGl+6eZzWz6+TLSkUdsmVBgnMDmepPOBslrADM
- R+RrbJat2Dn8dhxIdWgNrHpXps1UK9yMrM0hmv1FOpM1y0mM9gQJXNrFchwzdnvdNUvb
- o4743WhSORk5b69Rpu9EqAVjYBGqGYRavv42qMCYJW8uxZIt1zWduNIrJjsL6kwRKtJR
- 05rwrjiyyIXyUCo8LLWYjS6GQE/kLKi7hw6ujvfY7GomtY2E9pEa0VI+Q+Ld8WyfE1sJ
- oxag==
+ :reply-to; bh=rCFdMQbOn5HP2t7PCmbK7jYrnj38Djj6lbXR62/p/kg=;
+ b=OyclqslYELqs9NTrfppTPPDkKYff/nzOuJ0T7RtWCFsh01BBrq1iu2tKzQxfV6h1Wh
+ 7Terbvl1dub9cZ9DExsBoOmmi/YMaZ2PP5FUNFmI0rWKlbgIbWnOQzCIKxV2JqdIrj03
+ 2rY5GjYBgtgP4r/aMzS05X2cpDorK0DOnWwcTQZ3wuoNoFf1uR6DEEpxhpudaZcBgM5E
+ /Uct/SjeLBtUZfHo1Vo6GH0MgtX5EW/Wt3ii9pAVEnmo33jBM47gJd/tOrpISxs+vzw8
+ Msm1+xT5HnBq1wZ/NSjq3t+d5IKQdFquexNYmXAY2TXNmsNnDWK7k3s1thnqFQ2HzD3d
+ kSBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741689181; x=1742293981;
+ d=1e100.net; s=20230601; t=1741689172; x=1742293972;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9x1Ar677Q7oTOeh6Y8GZFKd22RTtLtDDrvs0FFbVvpE=;
- b=Asl38CHSgKS8eWY8MLyvKQP6g9Hcfbl/obyc2nJTCYcBEYfuwLI7CK1g5+4F7mozrM
- MRV5MHqRX1nQf9lg5Qbyuhe+ewqN4VLET3dHzkwPP5DGwqRGbmP49erlEXRpj8+YiCv6
- +Ii6yKR+m6S+pzOHo/InC2JNOa1+JAxZHcFfRWMPeoMewjoN3tfLX5gWQ5AeL/zJq5La
- Qfz6E/xzIj3rBSOEYXW9a2P4ebwTmqDfkSrEOov2tfDhSPaP6RPbxLWMelQYx778kICL
- mzn2zuoR9ee816u+8fuSA2q1wbJIwmXrs4LAukdx7dTfu1h69YKgCWepBfCOP2/Mzi3+
- ww9A==
-X-Gm-Message-State: AOJu0YxFdcx8PFtCgmt3+Bx1+ab8JsCVHZIRNseRlwbEY/21RokoXOHC
- Z3lcir5h4ndTuEInGi1isoBlQrIofdPTtLA2+YVjCiy8Sakhybu8APZh7+JZUNkLxQZhjJQcrYR
- r
-X-Gm-Gg: ASbGncsGbHAYKeEudh6JpFJt/5sqKK+2cCYNCw3/p7MXxTNJe6qXcBAUq7bhzFkezBW
- bsXT2KU4Segu3vEfZvdzT3SxuyvOkpEKGDqUTG0LqOrV1ktQCwjyBEQZdNM16MjVx5BNCFXpdgY
- nJeqkU+9LTj02/yWkW8c4jlfJi7WU2gWtErZlWn45rV6SC/UrPVJgMU2UwDpEEk/vankbrKXmro
- XEP9VnEHCA9eoYzD4j82WDzawF37IlXiu5FpP62UN8NMehYOJcwLbdHhpN3I3KLBb4xCTTZ6qhH
- NpyfQE4Ym6nuJ2Y7LcWyHvE1CMDDiIUhpKh8BAwG
-X-Google-Smtp-Source: AGHT+IEmpKzhBsvULVQTGeu4kZueBibshhl9A5qH9Eh/PSaYG65vX/GjvLmeugw1nXyAqwKfRRQQ8Q==
-X-Received: by 2002:a05:6402:34d4:b0:5e0:9056:33f7 with SMTP id
- 4fb4d7f45d1cf-5e75f5a3465mr3999782a12.24.1741689180962; 
- Tue, 11 Mar 2025 03:33:00 -0700 (PDT)
+ bh=rCFdMQbOn5HP2t7PCmbK7jYrnj38Djj6lbXR62/p/kg=;
+ b=dZP3Z40Y1HMZjOvZRzvbYsgR/ISJZ3F1graKvS7VGwQBoVPQmkLR3WECeee7QKBgD/
+ esk2iWtNi8r27hUTu+RDcdeIWyEA2x9yRPf3THffyBKkWXHSR7zLFHFUTYqtxQX6Ogp9
+ p2Wuepfa+4IFsX/tQyHZNETkyWZJQQuiiFZQBDGdCVlxT3ex2zrSZT1P+/ij2ADA7Mst
+ c6MexXvB053O5O6bbDDTrdmxv4EUkY5KxDwITwU3F9uW/AgwalHNDROuemYTtUTELMUw
+ fLSpgG6RaVJsL4MzfAs7lRQlWt5wMq8LCU3zbgLS7AbzRGdBR4kOfz5Xmz0So32Kub69
+ 0M8Q==
+X-Gm-Message-State: AOJu0YwVZ/RPAXX8R2rAwAGt5UqvxMHlq2JYmAU1hBwGhIVcJXQvOoah
+ ILZMJD2NgvDTn4b1GEIuxguMxvMg3XhdmjXqMFI03XAFUwdb0ez6Tq/SndL6kQQ42FM89w8ZS/E
+ p
+X-Gm-Gg: ASbGnct/nzzp+JCcFDakFEQ2/Q/KYiOZlb8tzd6R0s81DN4GuMnoR2jaVXkq080geLY
+ 7U5Ix7zm4e3swBp/SnxuE9nPZbcmJVBslJ77v/1IE/s/f6wlWIoMdWFDItCHEwrOZce+UpWNHg8
+ S1Aaxj1VO/xPVtQAx8E82QuHeTv5i2jbJ8nfBE+9ezspN4QnBg6Q7t7ygGdHvwRdCIq0tzUVg34
+ JHiBo9ah2DAnCCbONDhZWNHqY6THTylTzYooxx9dJvam9EpnxmceB7tXq0bz+jTdmn9lx8sFabf
+ 7NVMtdtkFy8XU9HawaR6EGHVPHKHybfPKQf+AZ1i
+X-Google-Smtp-Source: AGHT+IEI3k+dobF0vur1LEghGbWx+zKNWkl2jFxJAukdxlstI1bfezvWTI9mzGutGsQguFJHVcbWBg==
+X-Received: by 2002:a17:907:60d5:b0:abf:78b6:c565 with SMTP id
+ a640c23a62f3a-ac2b9db4878mr385811066b.4.1741689172190; 
+ Tue, 11 Mar 2025 03:32:52 -0700 (PDT)
 Received: from localhost ([2001:4090:a247:83e0:938:b3cb:2c1b:889c])
  by smtp.gmail.com with UTF8SMTPSA id
- 4fb4d7f45d1cf-5e5c768ecb5sm8074240a12.77.2025.03.11.03.33.00
+ a640c23a62f3a-ac2a27d2613sm304919666b.12.2025.03.11.03.32.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 03:33:00 -0700 (PDT)
+ Tue, 11 Mar 2025 03:32:51 -0700 (PDT)
 From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Tue, 11 Mar 2025 11:30:52 +0100
-Subject: [PATCH 13/19] arm64: dts: ti: k3-am62a7-sk: Enable IPC with remote
- processors
+Date: Tue, 11 Mar 2025 11:30:44 +0100
+Subject: [PATCH 05/19] arm: mach-k3: common: Add CANUART wakeup check helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-13-666de9c105cb@baylibre.com>
+Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-5-666de9c105cb@baylibre.com>
 References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
@@ -85,16 +84,14 @@ Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>,
  Kevin Hilman <khilman@baylibre.com>, Dhruva Gole <d-gole@ti.com>, 
  Sebin Francis <sebin.francis@ti.com>, Kendall Willis <k-willis@ti.com>, 
  Akashdeep Kaur <a-kaur@ti.com>, 
- Markus Schneider-Pargmann <msp@baylibre.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla <hnagalla@ti.com>, 
- Judith Mendez <jm@ti.com>, Andrew Davis <afd@ti.com>
+ Markus Schneider-Pargmann <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3579; i=msp@baylibre.com;
- h=from:subject:message-id; bh=UFqwuMyIVllvZ7Jqzt+IiqSGXY/RPIetPlz/XdRIiCU=;
- b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCGqxCT3v4KsVWOufcOjD5IDgK3NZFDnuXAj89lV4u
- vHdR5+fd5SyMIhxMMiKKbLc/bDwXZ3c9QUR6x45wsxhZQIZwsDFKQATWdzA8N99drbNqdU+MvEO
- lfN39z/ZLJ2SUnu1/f4FzXX/CmYGqJUw/E87IdrjudNu04XumF7vGamH4j90R5e9OdNWHn+k6si
- cK8wA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3218; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=QKzluirgtPoy++0BTejuCDxVxAbRbYrAqMVyVkjORmU=;
+ b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCDL1JHnoBZ1p3LB0SUOyT+p9uVU7+n1UzNZIKopol
+ b+97bKjo5SFQYyDQVZMkeXuh4Xv6uSuL4hY98gRZg4rE8gQBi5OAZhIvTDDX/nDp5pua0l+ad3p
+ uXOm9AuHLbIzHh0VX/5q0dEPE/Y0mQkzMry+MrHlCt/HwkvnlJo61HY/TKkTuX3waNPzt1uDPxq
+ 9ZGEFAA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 11 Mar 2025 14:13:18 +0100
@@ -114,142 +111,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Devarsh Thakkar <devarsht@ti.com>
+Add dedicated helper functions to check CANUART wake registers and magic
+word. This helps determining if we are in a wakeup or if CAN IO
+isolation has to be removed.
 
-For each remote proc, reserve memory for IPC and bind the mailbox
-assignments. Two memory regions are reserved for each remote processor.
-The first region of 1MB of memory is used for Vring shared buffers
-and the second region is used as external memory to the remote processor
-for the resource table and for tracebuffer allocations.
+Also add a helper to detect a low power mode exit/resume.
 
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-Signed-off-by: Judith Mendez <jm@ti.com>
-Acked-by: Andrew Davis <afd@ti.com>
-Link: https://lore.kernel.org/r/20250210221530.1234009-6-jm@ti.com
 Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
 ---
- dts/upstream/src/arm64/ti/k3-am62a7-sk.dts | 96 ++++++++++++++++++++++++++++--
- 1 file changed, 90 insertions(+), 6 deletions(-)
+ arch/arm/mach-k3/common.c                | 22 ++++++++++++++++++++--
+ arch/arm/mach-k3/common.h                |  1 +
+ arch/arm/mach-k3/include/mach/hardware.h |  3 +++
+ 3 files changed, 24 insertions(+), 2 deletions(-)
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
-index a6f0d87a50d8a7ebdb61e609e8071d6681dbec9a..ac67c51caa2111db1283060af7ccc7b7780bf204 100644
---- a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
-+++ b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
-@@ -49,6 +49,42 @@
- 			linux,cma-default;
- 		};
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index ef40d623058072e89e9b3e53fc0f7ea6b78f96e3..e3554ee6aa8957b8cfcacb452ba391d7b3abf2a9 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -127,13 +127,31 @@ static void wkup_ctrl_remove_can_io_isolation(void)
+ 	writel(0, WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_PMCTRL_IO_GLB);
+ }
  
-+		c7x_0_dma_memory_region: c7x-dma-memory@99800000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x99800000 0x00 0x100000>;
-+			no-map;
-+		};
++static bool wkup_ctrl_canuart_wakeup_active(void)
++{
++	return !!(readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
++		WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE);
++}
 +
-+		c7x_0_memory_region: c7x-memory@99900000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x99900000 0x00 0xf00000>;
-+			no-map;
-+		};
++static bool wkup_ctrl_canuart_magic_word_set(void)
++{
++	return readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT) ==
++		WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW;
++}
 +
-+		mcu_r5fss0_core0_dma_memory_region: r5f-dma-memory@9b800000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9b800000 0x00 0x100000>;
-+			no-map;
-+		};
-+
-+		mcu_r5fss0_core0_memory_region: r5f-dma-memory@9b900000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9b900000 0x00 0xf00000>;
-+			no-map;
-+		};
-+
-+		wkup_r5fss0_core0_dma_memory_region: r5f-dma-memory@9c800000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9c800000 0x00 0x100000>;
-+			no-map;
-+		};
-+
-+		wkup_r5fss0_core0_memory_region: r5f-dma-memory@9c900000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0x9c900000 0x00 0x1e00000>;
-+			no-map;
-+		};
-+
- 		secure_tfa_ddr: tfa@9e780000 {
- 			reg = <0x00 0x9e780000 0x00 0x80000>;
- 			alignment = <0x1000>;
-@@ -60,12 +96,6 @@
- 			alignment = <0x1000>;
- 			no-map;
- 		};
--
--		wkup_r5fss0_core0_memory_region: r5f-dma-memory@9c900000 {
--			compatible = "shared-dma-pool";
--			reg = <0x00 0x9c900000 0x00 0x01e00000>;
--			no-map;
--		};
- 	};
+ void wkup_ctrl_remove_can_io_isolation_if_set(void)
+ {
+-	if (readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CANUART_WAKE_STAT1) &
+-	    WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE)
++	if (wkup_ctrl_canuart_wakeup_active() && !wkup_ctrl_canuart_magic_word_set())
+ 		wkup_ctrl_remove_can_io_isolation();
+ }
  
- 	opp-table {
-@@ -737,3 +767,57 @@
- 		};
- 	};
- };
++bool wkup_ctrl_is_lpm_exit(void)
++{
++	return IS_ENABLED(CONFIG_K3_IODDR) &&
++		wkup_ctrl_canuart_wakeup_active() &&
++		wkup_ctrl_canuart_magic_word_set();
++}
 +
-+&mailbox0_cluster0 {
-+	status = "okay";
+ bool is_rom_loaded_sysfw(struct rom_extended_boot_data *data)
+ {
+ 	if (strncmp(data->header, K3_ROM_BOOT_HEADER_MAGIC, 7))
+diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+index 0359fea5675bdaf8cdde7989eebac1a695a065ba..5d347c7252d18c06dac21813b8247fa2c57902bc 100644
+--- a/arch/arm/mach-k3/common.h
++++ b/arch/arm/mach-k3/common.h
+@@ -46,6 +46,7 @@ struct ti_sci_handle *get_ti_sci_handle(void);
+ void do_board_detect(void);
+ void ti_secure_image_check_binary(void **p_image, size_t *p_size);
+ void wkup_ctrl_remove_can_io_isolation_if_set(void);
++bool wkup_ctrl_is_lpm_exit(void);
+ 
+ #if (IS_ENABLED(CONFIG_K3_QOS))
+ void setup_qos(void);
+diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+index bd7407a4b9498207d94a35d8f73b852c7528a086..949badb18dc453421ce0f0d403554ac604cf4534 100644
+--- a/arch/arm/mach-k3/include/mach/hardware.h
++++ b/arch/arm/mach-k3/include/mach/hardware.h
+@@ -118,6 +118,9 @@ K3_SOC_ID(j722s, J722S)
+ #define WKUP_CTRL_MMR_CANUART_WAKE_STAT1			0x1830c
+ #define WKUP_CTRL_MMR_CANUART_WAKE_STAT1_CANUART_IO_MODE	BIT(0)
+ 
++#define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT		0x18318
++#define WKUP_CTRL_MMR_CANUART_WAKE_OFF_MODE_STAT_MW		0x555555
 +
-+	mbox_r5_0: mbox-r5-0 {
-+		ti,mbox-rx = <0 0 0>;
-+		ti,mbox-tx = <1 0 0>;
-+	};
-+};
-+
-+&mailbox0_cluster1 {
-+	status = "okay";
-+
-+	mbox_c7x_0: mbox-c7x-0 {
-+		ti,mbox-rx = <0 0 0>;
-+		ti,mbox-tx = <1 0 0>;
-+	};
-+};
-+
-+&mailbox0_cluster2 {
-+	status = "okay";
-+
-+	mbox_mcu_r5_0: mbox-mcu-r5-0 {
-+		ti,mbox-rx = <0 0 0>;
-+		ti,mbox-tx = <1 0 0>;
-+	};
-+};
-+
-+&wkup_r5fss0 {
-+	status = "okay";
-+};
-+
-+&wkup_r5fss0_core0 {
-+	mboxes = <&mailbox0_cluster0>, <&mbox_r5_0>;
-+	memory-region = <&wkup_r5fss0_core0_dma_memory_region>,
-+			<&wkup_r5fss0_core0_memory_region>;
-+};
-+
-+&mcu_r5fss0 {
-+	status = "okay";
-+};
-+
-+&mcu_r5fss0_core0 {
-+	mboxes = <&mailbox0_cluster2>, <&mbox_mcu_r5_0>;
-+	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
-+			<&mcu_r5fss0_core0_memory_region>;
-+};
-+
-+&c7x_0 {
-+	mboxes = <&mailbox0_cluster1>, <&mbox_c7x_0>;
-+	memory-region = <&c7x_0_dma_memory_region>,
-+			<&c7x_0_memory_region>;
-+	status = "okay";
-+};
+ #define WKUP_CTRL_MMR_PMCTRL_IO_0				0x18084
+ #define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOCLK_OVRD_0			BIT(0)
+ #define WKUP_CTRL_MMR_PMCTRL_IO_0_ISOOVR_EXTEND_0		BIT(4)
 
 -- 
 2.47.2
