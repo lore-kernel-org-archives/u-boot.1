@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A623EC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 09:36:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F378CC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 09:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C6A780805;
-	Tue, 11 Mar 2025 10:36:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8741380805;
+	Tue, 11 Mar 2025 10:37:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="J76B1uwh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y+NX3Fk0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 361CB80F92; Tue, 11 Mar 2025 10:36:06 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 5B0E58083E; Tue, 11 Mar 2025 10:37:25 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F65A807D7
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:36:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE68E807D7
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 10:37:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52B9ZxnN674124
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52B9bLfj1252747
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 11 Mar 2025 04:35:59 -0500
+ Tue, 11 Mar 2025 04:37:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741685759;
- bh=18VffwW93PFbP4ZVZBYsXneRQquHg0gmA1uYKKbXERA=;
+ s=ti-com-17Q1; t=1741685841;
+ bh=iy992Av1VBS7d62FnVKArgg3o7E+KBPM7tM3VMDQkyg=;
  h=From:To:CC:Subject:Date;
- b=J76B1uwhrS2fKoJvH3li2dwcVWhUnOtB6JhKgLpEbsiT5ZA5qhk3UoxaXEyYFKxry
- eACFp3A8XVoP/hk3pxndAXAKF7RPe/IAXmkLuKhyipQKbJf9tQkcrZClJravsF2pOZ
- HN6W/FDkVQ6o8oIZOK7fOi5ziZ87aG5ouFuDxgdU=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B9ZxwR066805;
- Tue, 11 Mar 2025 04:35:59 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ b=y+NX3Fk0I/MDwJOMcoIlJMr88B2h8aR9tkAVUU+n0ljwqvXz3UTlOat5BYRg5YO0U
+ jWkyhbkQtKbEY/0mc8UVNLBNaGd0Qy9pXD/9XguoYxmMIbuJnBm5qzd7JSJPdYcAHX
+ aQFNeahM3Lg/1yyOt/ZKdBK9edhLEJLIlShq8OoE=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B9bLE0067488;
+ Tue, 11 Mar 2025 04:37:21 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
- Mar 2025 04:35:59 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 04:37:20 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 11 Mar 2025 04:35:59 -0500
+ Frontend Transport; Tue, 11 Mar 2025 04:37:20 -0500
 Received: from localhost (a0543016.dhcp.ti.com [172.24.227.225])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B9Zwoh087857;
- Tue, 11 Mar 2025 04:35:59 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52B9bJpJ021096;
+ Tue, 11 Mar 2025 04:37:20 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v3] spl: return header size to spl_load in os boot
-Date: Tue, 11 Mar 2025 15:05:45 +0530
-Message-ID: <20250311093546.3371193-1-anshuld@ti.com>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1] spl: remove usage of CMD_(BOOTI|BOOTZ) from image parsing
+Date: Tue, 11 Mar 2025 15:07:09 +0530
+Message-ID: <20250311093709.3372104-1-anshuld@ti.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -77,91 +76,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During linux build process the header size is computed including the BSS
-whereas it's removed when creating the uncompressed image. Therefore the
-size of the uncompressed image on filesystem will be smaller than the
-size specified in the header.
+Using CMD_* configs from spl doesn't make logical sense. Therefore this
+patch removes the check for CONFIG_CMD_BOOT(I|Z) from the image parsing
+code during falcon boot and adds compilation targets for image.c and
+zimage.c on SPL_OS_BOOT.
 
-This causes issues when loading the kernel image from the SPL (as in
-falcon boot) with spl_load since it compares the read file size from the
-FS to the header size form the image. Which leads to the following check
-in `include/spl_load.h` failing to -EIO when loading kernel image:
+More info:
+https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
 
-  return read < spl_image->size ? -EIO : 0;
-
-Therefore we should return the header size back to spl_load instead of
-the file size in falcon boot when not loading a FIT image.
-
-Bug report:
-https://lore.kernel.org/u-boot/20250214111656.2358748-1-anshuld@ti.com/
-
-Fixes: 775074165d97 ("spl: Add generic spl_load function")
-Reported-by: Anshul Dalal <anshuld@ti.com>
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
-Changes in v3:
- * Added header check for FIT image instead of using CMD_BOOTI
-v2: https://lore.kernel.org/u-boot/20250225142522.9069-1-anshuld@ti.com/
-Changes in v2:
- * Add R-by and fixes tags
- * Expanded commit description with more information
-v1: https://lore.kernel.org/u-boot/20250221151752.2618666-1-anshuld@ti.com/
----
- common/spl/spl_ext.c | 8 ++++++++
- common/spl/spl_fat.c | 7 +++++++
- 2 files changed, 15 insertions(+)
+ arch/arm/lib/Makefile | 3 +--
+ common/spl/spl.c      | 6 ++----
+ 2 files changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
-index c5478820a9b..7e0274a3058 100644
---- a/common/spl/spl_ext.c
-+++ b/common/spl/spl_ext.c
-@@ -11,12 +11,20 @@
- static ulong spl_fit_read(struct spl_load_info *load, ulong file_offset,
- 			  ulong size, void *buf)
- {
-+	struct legacy_img_hdr *header;
- 	int ret;
- 	loff_t actlen;
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index 1c95dd6fed2..0e36d493aee 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -36,8 +36,7 @@ obj-$(CONFIG_CMD_BOOTZ) += bootm.o zimage.o
+ else
+ obj-$(CONFIG_$(PHASE_)FRAMEWORK) += spl.o
+ ifdef CONFIG_SPL_FRAMEWORK
+-obj-$(CONFIG_CMD_BOOTI) += image.o
+-obj-$(CONFIG_CMD_BOOTZ) += zimage.o
++obj-$(CONFIG_SPL_OS_BOOT) += image.o zimage.o
+ endif
+ obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
+ endif
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 76fd56dfe4b..79149ba07db 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -335,8 +335,8 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 		panic("** no mkimage signature but raw image not supported");
+ 	}
  
- 	ret = ext4fs_read(buf, file_offset, size, &actlen);
- 	if (ret)
- 		return ret;
-+
+-	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
+-		ulong start, size;
 +	if (CONFIG_IS_ENABLED(OS_BOOT)) {
-+		header = (struct legacy_img_hdr *)buf;
-+		if (image_get_magic(header) != FDT_MAGIC)
-+			return size;
-+	}
-+
- 	return actlen;
- }
++		ulong start, size, end;
  
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index fce451b7664..f426a068ff9 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -47,6 +47,7 @@ static int spl_register_fat_device(struct blk_desc *block_dev, int partition)
- static ulong spl_fit_read(struct spl_load_info *load, ulong file_offset,
- 			  ulong size, void *buf)
- {
-+	struct legacy_img_hdr *header;
- 	loff_t actread;
- 	int ret;
- 	char *filename = load->priv;
-@@ -55,6 +56,12 @@ static ulong spl_fit_read(struct spl_load_info *load, ulong file_offset,
- 	if (ret)
- 		return ret;
+ 		if (!booti_setup((ulong)header, &start, &size, 0)) {
+ 			spl_image->name = "Linux";
+@@ -349,8 +349,6 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 			      spl_image->load_addr, spl_image->size);
+ 			return 0;
+ 		}
+-	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) {
+-		ulong start, end;
  
-+	if (CONFIG_IS_ENABLED(OS_BOOT)) {
-+		header = (struct legacy_img_hdr *)buf;
-+		if (image_get_magic(header) != FDT_MAGIC)
-+			return size;
-+	}
-+
- 	return actread;
- }
- 
+ 		if (!bootz_setup((ulong)header, &start, &end)) {
+ 			spl_image->name = "Linux";
 -- 
 2.43.0
 
