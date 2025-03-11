@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE9DC28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 07:34:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC49C2BA1B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 07:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A03B6807D9;
-	Tue, 11 Mar 2025 08:34:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 04C47814B6;
+	Tue, 11 Mar 2025 08:35:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CCjChJtO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G3Q+E3+A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E22180F92; Tue, 11 Mar 2025 08:34:45 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id A31DF8164E; Tue, 11 Mar 2025 08:35:00 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAFC3807D7
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 08:34:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 912848144F
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 08:34:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e60aef2711fso3612253276.2
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 00:34:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5499d2134e8so2696643e87.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 00:34:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741678482; x=1742283282; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ilo0UNjuplpq6gfd1oHEsuMiahQTUor6sI39eMLxzDY=;
- b=CCjChJtOm3qVjGNhiq/LLxjIWdJVhOfn6g+snQla+2Uj6J8/zNpiMZW/mZgtKk4uP3
- puc0lYzNQpkCQ1ZhR3SEKy4NccdV1J+leukzN44BiCxkY3ZwsO8MBGKR58jZpcA7+ai5
- LS4R6AvuFam3wRSMhR4B40Fx7sKIeEtj3jpc6X2mYGgICd0qnEveCwN1jykhttbOZH4t
- RpZ7p7p6q+tIwxx4364YkElBqC2IGni8NrgDM2nHuRfMwLV+f8LQCfU9aO3J8E/EqQyY
- 3U8bAOKq+eZTPOn92rNeQd0KnUHQdE8WdB3SXJcB0xNkqL5UMnIoxCy56BuVS9dzqHVp
- YGGg==
+ d=gmail.com; s=20230601; t=1741678498; x=1742283298; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2odm2ZMkgsqgfCXNjk4YJZ4/5cmJuFmc7W3JLfwvcMQ=;
+ b=G3Q+E3+AQm5bkj+MU8XNP2ESDFxjIcUV2iuAYon8TtUdMgY8a1eq76v7kSdqMuAPxx
+ 9Z3oVk8dQYztwb2hBrzBBRUB191+w/65skUQ/02+LK/hH0XfZSZ/YmIKNk69JzwYDS8m
+ BcSGZq1Wl+2O+Oc8uVnVPl1Zi+VfvV+Sowy9vWAEE0finIi3ALM1HwrrjROau0qJva+r
+ As3EzF7xkUmuQXXrZseKCB6vGHmGz5wamXSgA5mOODogJo7JwHeTPKrWFwCTHSw+zxRE
+ ZiznfIzTYXxtaWW4c5crKoyEKxDRmprr9iCThfyzvaLxKwbNvQfYepq2jUQ4xEO+vm4z
+ wtZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741678482; x=1742283282;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1741678498; x=1742283298;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ilo0UNjuplpq6gfd1oHEsuMiahQTUor6sI39eMLxzDY=;
- b=LlNV/c5tHqGTow4ZDtNQKaoaZlu4+Jn1ThwjZI0mYMoshRwsJa5qdAJLmW0YP0fYCv
- 3sTiPBeoAExX6mBMVXDx6IZmDifu3eQ0+/UD0iyyVRGsE3XnL73SA2K/wMvBvNgdRe89
- Fwa8lrvLJpfxO3o2h3VknQSWPr/wr0E7qIVgR+YPdlUIr5LHy/WFU9oesnGncOxUe7wD
- /HfLl50NQZa+nBAzqLi/FddTSiHePO1rJDlgurVzLbT5tYdZJD4nmw3J13iBUV+HA4Sk
- kER0paxGGZDKzHqlGpyIhsad1sn963eXZ2ubyCHVnk34gBRSxH5U698QrVm1KaYM6ego
- nQaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzGLIHt+lfVFObE+Nwc5a7BeKWxlmh4FH/ESrdnXJfocx7gGFTOb+662x5of211mjIj/59xXQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxqCGsja4VazcVilwry/grR1u1DuipKC113ok+Y7bg3TlbA6Msc
- rxbIH/HEUrOS5CuArn6QkhdLyIwLRBywAebkd4aQTlIzZUeiTaFovnDvC4ziINew4RKKMNqEJDK
- Bz3cLqhQasKErOYAo8ecZSy3z4CZvoDVyJmTl4w==
-X-Gm-Gg: ASbGncssG4iq91vkX36oAPnEPDTXHgTJiUq85TX5mjliL9qAtarFW+LZaK+SNfR7B3Y
- PdmY1DI3SE99eMzKYeZz0yPb9R270GcUZZ7eJLKmVI3kbWKSnXti8mBZyLbnbhnPYI5joFJanVp
- lOQlVUcDT+XFqNU/MY2pcugTM8bYw=
-X-Google-Smtp-Source: AGHT+IFul6f2eSg9hOKfIXs/yNizYjcaXavsFy4qsek3diX8BgiJhSGRB0DuqVBcGXA32bf5aYMUrO8VDh8MiIiWnSM=
-X-Received: by 2002:a05:6902:3388:b0:e5a:c67e:6465 with SMTP id
- 3f1490d57ef6-e635c1d721cmr17439176276.38.1741678481751; Tue, 11 Mar 2025
- 00:34:41 -0700 (PDT)
+ bh=2odm2ZMkgsqgfCXNjk4YJZ4/5cmJuFmc7W3JLfwvcMQ=;
+ b=stQBhQqJigmlr+7Fu0rQ6bmSRV3ceJzPVPUf8i8YRe/utknea7xlTkaliHk4HlbNHb
+ OboG76hgfdFF8gyoIeamVuRYoJbRv8RBGOlbreV34VKYxpbbdznjT3Ixzxj0mwACD1Aa
+ AYuwlLaR4hLqvWNr3L9U3XsoHDgb2bKr3TIgqnsr3+h+9BO4tgYHtSwQzpyQd36wQz/8
+ dOf8t+TJO/Rei+arTB42xb1TpYXSEfVmuYMPcInrhrfrWF+xJ9uxjKIsx/Ff0ut+xzZX
+ m6AxeTEq8PSF+WwnzAGFAblIs5Fpzm2s9FhwkSADjtgCXpEcykoZH6UAtoA7NHpiMaiO
+ lPAg==
+X-Gm-Message-State: AOJu0Yx5EnjmUS2/JnfL4EUus8PPd43sS/icOSYoY5ZwLKVldqjQ5fTv
+ 1ACxZUgdpPg+VX5rdItv6HQMLl4KWXXlYiQsZdp5YeYV9hTM5Y00
+X-Gm-Gg: ASbGnctuobV/iqdFPl+zt0C2V42Pz1FOnJE9cnY/p8fBskWhSm7/Tl8dvNm6+F/YOF+
+ f+HLnuWfKDrAgKf7wNbP8upeVNyUA+5tAzVRuNErBfpRxkidGJGZAUqAOKCxUn72BCgDZXqTJhu
+ YzAeZaPooRaWGeDyEZneA2lURU+uAvoLZtoaAfEXIIa7vb7iX1mJK/WC0y2iPO+dnG04dsIJrg0
+ 8xqrsYY3l367b3HkXimFQYpsGHYKvn2ZvUp9Nq+SqUnkRdhAaNUWYd55oinGMmnTs1gUKRsb0bZ
+ brYoG7xaGoU2dRpp/+XlV0c07pa6iz4xAnHu
+X-Google-Smtp-Source: AGHT+IGErGbRANoafT/pRjwMsn0lCmzZ0721YC/KaTCn5DMaoBHtwO0dlc7IsIVdonjTWTIIS/nfoA==
+X-Received: by 2002:a05:6512:2342:b0:545:8a1:5377 with SMTP id
+ 2adb3069b0e04-54990e2bce6mr5100262e87.2.1741678497477; 
+ Tue, 11 Mar 2025 00:34:57 -0700 (PDT)
+Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5498b0bd196sm1676430e87.113.2025.03.11.00.34.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Mar 2025 00:34:57 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2 0/1] common: edid: update timing selection logic
+Date: Tue, 11 Mar 2025 09:34:37 +0200
+Message-ID: <20250311073438.13428-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CdUirikQxEto6yzkO-G-y6mmWa-ek5NZPN9K7EYvyeUAmnxuge6UmHxfp0tb580qFmfHacX5aWFLqrXjXAFs87nP14AZ72vkClzp3U3WBw4=@bens.haus>
- <CADg8p971xqUzCHhV_yZDXbn8OMn_V2DfHoVschZOTfx1dFvV1A@mail.gmail.com>
- <09712f67-51aa-4db5-bb7b-e1305c08d5f1@gmx.de>
- <i0EZ5kRllpIYtHd8QhvzuyTJDkJ2ZrHvCYibVvyxWKY6H-Z1m94rb8AmxFnzDCkq3qRgpj0B1k9S2ozXIb0wW5opuRORg-jS6tAskSfAihE=@bens.haus>
-In-Reply-To: <i0EZ5kRllpIYtHd8QhvzuyTJDkJ2ZrHvCYibVvyxWKY6H-Z1m94rb8AmxFnzDCkq3qRgpj0B1k9S2ozXIb0wW5opuRORg-jS6tAskSfAihE=@bens.haus>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 11 Mar 2025 09:34:05 +0200
-X-Gm-Features: AQ5f1JquGI08h1taKvLNyDoKwHALRwquHsrtYIMG670Mok4tRif7gHvny70yUPc
-Message-ID: <CAC_iWjJKO4Dkbd_x9==Cq=Kb4Cy9S4PQqz7d714U9ErWsdW81A@mail.gmail.com>
-Subject: Re: boottime->efi_allocate_pages() returning EFI_NOT_FOUND
-To: Ben Schneider <ben@bens.haus>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Ard Biesheuvel <ardb@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,31 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+CC Ard
+Older EDID timing algorithms relied solely on detailed timings, typically
+optimized for a display's native resolution. This caused issues with newer
+4K panels on older hardware, which couldn't handle those high resolutions.
+To address this, the algorithm now also considers standard timings, offering
+lower, compatible resolutions. Future improvements may include checking
+established timings for even broader compatibility.
 
-On Sat, 8 Mar 2025 at 19:36, Ben Schneider <ben@bens.haus> wrote:
->
-> On Wednesday, March 5th, 2025 at 12:20 AM, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 3/5/25 09:13, Sughosh Ganu wrote:
-> > >
-> > > Can you check what is the address being asked for in the
-> > > lmb_alloc_addr() function.
-> >
-> > maybe also add a call to lmb_dump_all_force()
->
-> Thank you both! This was exactly what I needed. This appears to be
-> a kernel bug in randomalloc.c which always breaks out of a loop
-> after only one iteration[1] which is unlikely to be the intention.
->
-> Ben
->
-> [1] https://github.com/torvalds/linux/blob/master/drivers/firmware/efi/libstub/randomalloc.c#L133
+---
+Changes in v2:
+- shuffle code to improve readability and avoid duplicates
+---
 
-FWIW we discussed this in the kernel mailing list as well [0]. Ben can
-you apply [1] and see if it fixes your problem?
-[0] https://lore.kernel.org/linux-efi/CAC_iWj+9DNswD7qCc7V8UxsAOaBTzx7QTYA7Yo8py5pEuHdWDw@mail.gmail.com/T/#t
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=446790
+Jonas Schwöbel (1):
+  common: edid: update timing selection logic
 
-Cheers
-/Ilias
+ common/edid.c | 308 ++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 273 insertions(+), 35 deletions(-)
+
+-- 
+2.43.0
+
