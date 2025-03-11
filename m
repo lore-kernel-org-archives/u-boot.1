@@ -4,97 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 042CEC28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F238C28B2E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:22:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5A7D81DCA;
-	Tue, 11 Mar 2025 14:13:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8198580FB9;
+	Tue, 11 Mar 2025 14:22:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HQOb9tTL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fVQSlxLZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A1AA8083E; Tue, 11 Mar 2025 11:33:23 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 16EC48141D; Tue, 11 Mar 2025 14:22:01 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D56B1817A5
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 11:33:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCA90807D7
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:21:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac2a089fbbdso374402066b.1
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 03:33:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e549be93d5eso4828886276.1
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741689175; x=1742293975;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lsubHR8Ol8pfsT8krZWp8t/kYmu9lzpqiUjTuubyI74=;
- b=HQOb9tTLWNrvF8kf052KZH6hpk28W8OpGN96SnzohhUxM1QFZxHQTjoSBF/ewh1exm
- SLbuSl1r8r4mgxZo7IqCK5+Di7bF3CfXTnzwbUZ1gBOx2d8yl1765+cIHg0v7xNqayQy
- xcD1cGeB3XN2tWkQRnRA0/e/qKsqmNkiI1ZEBy2fjTzcJPV4K9DV44Ox0qpwK1r/Ta7K
- 38NvgsvpxhO7RF4CpcekfKJD7qOg8b5SxoCzYB5SJ/I4aTOcMtTmRqOsyFGu6/0f9LQ7
- c2xUoEThHBdfpAOxFFAN8BGLvgtSKmAk37ydCF/RkkQ7icBIBsyPdOh6VgB/0UIBPR66
- 7JYQ==
+ d=linaro.org; s=google; t=1741699317; x=1742304117; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=I1HCPd4owMRS9EzQP4dcjEzMBrKOrEEorEy/X13Pc0M=;
+ b=fVQSlxLZ6JBCM8iCj5RD/Akqiopch/ohOmABD1lY1dGKn5mHJYBB5InAZRX8xuo6Vi
+ DA9jZqqcoZiOGrXIPv2Rj3IkJwZCNDOrxnfJyJBdmGlWsYN8a4lEJLDpPivFvQ5BRTwQ
+ 8oRz4uIl7xQeeixkK2nBlWFORKfNmaCjtF+w2E2isy8tlA/CJiMdmubrkwzLxPmgLZzk
+ NGydE7fEvum5yEUPh1MkDftUxus+XQ494qGUOQm/d1iJnfxN6KQXTR8uN8wmKaZX1EKB
+ xBxqzfSarlRej4I+98EueNLH4XQtzchoGzgC56/0xyFcRuot92Kgw9gAWi8z7MCFA+IJ
+ xtpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741689175; x=1742293975;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lsubHR8Ol8pfsT8krZWp8t/kYmu9lzpqiUjTuubyI74=;
- b=OnxacPIUuOvvoAYwkWEneCmvUt4TbhdLY/8QocnJnRER+WKCJCaOXvOhUAhH3rO9F7
- 4Oz+QFWb7gz5CxbsAHkc/BJTRkRIvhaD0B6I7jipxM/cvpSsqC4mqJ6XhQJJe8TjZjeR
- W51V7L/GnemnDdLq+LjGG5IzVHzDiZcJYdaF/NzHTqUDA4uSYHnidSJJwWcUl+0Tmtz5
- T+ODJSsY2+M3AzooRKh64xsFBObpVACzs6XHTckdxj8Y+eB4MXKkd9rx8aZa50mt9x5x
- ZomtZ1ZvFr6UB9G0BULN8N26KpXNdGhLCgWRt38FqbKcq7GkJeCOPm8RjLC32rxfkBiL
- pvXg==
-X-Gm-Message-State: AOJu0YwT23Rqd8K2Ew9FJeObMySKMX1quNwlHlLR6FFcYwHXi7cCh/Kj
- 2ySvx1YdF1qMS0QrzJ9tcfdEasqXqHwO+E0dSfPGdeTBYlxHLC5a7aN0hoPolBKtwMCtfPe182t
- d
-X-Gm-Gg: ASbGncv3/qH1y+AMLB+9oqG18NzkDt61071MORr50auGuMImh4u0WAx+dI7jkZpoW0M
- +PIk+Poxr8pZ8Rg0S7T2hu8Y872f+eTsfd52g2zwcGQjYSCTe6iwVihbrI12DJDQR1HIQMZPGE9
- aatw/Ez9sGljrBirVM69n6Vy5gPi1T+CuxXONvAmxRRBouxi06GpynoZ4oICaXrKBvhgVjfF8bO
- 3hLLhZIEPd/Ey2gbRPu3tkSdxlr42bc7p/xT5pmrfSUyFBJFUv9jXdxLAld5Cwy5SYlROW0wdXr
- OVeyEW7jmkfSVHbXeyh6KwIH1zWVXWfqsHImTSMP
-X-Google-Smtp-Source: AGHT+IFfEzlrwCjbn0wZvFZhUHShRThJ7CrJMAY/irvxUBg8wyubiNWS19SmDrPpMEGT/y8oVNKLSg==
-X-Received: by 2002:a17:906:340b:b0:ac2:4f30:5033 with SMTP id
- a640c23a62f3a-ac2ba4ec6d5mr315262066b.15.1741689175572; 
- Tue, 11 Mar 2025 03:32:55 -0700 (PDT)
-Received: from localhost ([2001:4090:a247:83e0:938:b3cb:2c1b:889c])
- by smtp.gmail.com with UTF8SMTPSA id
- a640c23a62f3a-ac27e72fbadsm520097266b.154.2025.03.11.03.32.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 03:32:55 -0700 (PDT)
-From: Markus Schneider-Pargmann <msp@baylibre.com>
-Date: Tue, 11 Mar 2025 11:30:47 +0100
-Subject: [PATCH 08/19] arm: mach-k3: am62a7_init: Resume on LPM exit
+ d=1e100.net; s=20230601; t=1741699317; x=1742304117;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=I1HCPd4owMRS9EzQP4dcjEzMBrKOrEEorEy/X13Pc0M=;
+ b=URKv1QmahID/9+xSXVdwhrm2Bw8WYCqxniO9GK+3LMbhTA3d8ayJQjoWY7ZteCJVcp
+ FUH64Hwn9Rl48Eb4UI/NNNa5OvxsHQcEQMSHcU708BBgyjoXzC+A0VOgzoAI6uPAQ7Hb
+ P/Oil6PPnHbcqvZXuULu13qzaIj2Q9FLdKZ8bUTLa8n+ZXlh+4eZnGrGKHxPV2nwtpDn
+ Vw3Mxu2XFxPK6xCR0CYmQRbOXokQUG7Gr8OboYutKxAO026+en76/tMsMmWxJEH/CP1+
+ N4rXzwN3j+pFZd0GiW15SN3VFIu+0KOpK3s4rDg935uxaVNahmsL8ADEmfKQY8cEZ/71
+ wE9Q==
+X-Gm-Message-State: AOJu0YyD4ABumwO83Uj5tonBUpeS1Im87YSeLLzr20MlAELoHf16yCJc
+ nT10e1nN7n7inFzU/PG6zq+gtUX5fU2WAkVOz1A+Qs0LXaUpoBDBuqVfspLH6XnUB7ALMhV0jTa
+ 5C9eOQKXwJpiesfMs1Lavy46Cl+zyS09ytNVUCYci28N7V90BfBU=
+X-Gm-Gg: ASbGnctebYMsBFen/oC+VNOvkpLU3DlgN/5cCEbIBpR7X7LNwKab6qUn7TwhK6Gusm/
+ QAvQaec398H6kvSoKEmIjDuBTx+ysD2PpIfUw2hnqvk1TMJ0BmYyYMhIqkbqPMzaGiS5jWHMQmF
+ yCCVFKyaIbC1LUehKaJ1ZXXw5JkiI=
+X-Google-Smtp-Source: AGHT+IGGgVjNMmXfIejzkCgo5bPzvYTsyq0BQ5jpS0XlWUUVy/ufEf8BZAxMN4JLXabkhTWL9xILwCz8wfUvuDl2p8A=
+X-Received: by 2002:a05:6902:200f:b0:e60:a1fc:1229 with SMTP id
+ 3f1490d57ef6-e635c0f92a8mr24525266276.7.1741699317578; Tue, 11 Mar 2025
+ 06:21:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-8-666de9c105cb@baylibre.com>
-References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
-In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>, 
- Kevin Hilman <khilman@baylibre.com>, Dhruva Gole <d-gole@ti.com>, 
- Sebin Francis <sebin.francis@ti.com>, Kendall Willis <k-willis@ti.com>, 
- Akashdeep Kaur <a-kaur@ti.com>, 
- Markus Schneider-Pargmann <msp@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1020; i=msp@baylibre.com;
- h=from:subject:message-id; bh=MZlxq5Ruc0lg/XjXde9FFw+sQAxv29l/UHXg4GlhMfU=;
- b=owGbwMvMwCGm0rPl0RXRdfaMp9WSGNIvCPKf3uy+6s2LxKhTCwI+J2t4Tf0UWh3gFroytiLcq
- 0Uz5m5SRykLgxgHg6yYIsvdDwvf1cldXxCx7pEjzBxWJpAhDFycAjCRj56MDEf2PD+0fJ9Qiedk
- E43DzSZPXy/nbDVpEZ+s4Va5zSaBfTHD/5CQTfvUe4QSnvL4bvH2mFOyRk5zfe59C6eZbWc0rpp
- +4QQA
-X-Developer-Key: i=msp@baylibre.com; a=openpgp;
- fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
-X-Mailman-Approved-At: Tue, 11 Mar 2025 14:13:18 +0100
+References: <20250310115750.1019051-1-sughosh.ganu@linaro.org>
+ <20250310115750.1019051-2-sughosh.ganu@linaro.org>
+In-Reply-To: <20250310115750.1019051-2-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 11 Mar 2025 15:21:21 +0200
+X-Gm-Features: AQ5f1Joje-PKkpjLpWd9NQvWpdXTyT6npi5wDe3MsTQEs01nrgA477p6iQxEQDM
+Message-ID: <CAC_iWjLiufizRnkEYoKXF9kpC1pPzknz5EbsJ50fpE1Bn7YrYw@mail.gmail.com>
+Subject: Re: [PATCH v7 1/8] efi_loader: remove unused code from copy_fdt()
+To: Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,35 +93,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When exiting a low power mode with DDR self-refresh, we can directly
-resume after DDR setup is done. Call the common function to resume.
+Heinrich, do you remember why this was originally here?
+ I looked at 6422820ac3e59 which moved that code around, but the same
+code was there as well
 
-Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
----
- arch/arm/mach-k3/am62ax/am62a7_init.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+On Mon, 10 Mar 2025 at 13:58, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> There is logic in the copy_fdt() function which is iterating over the
+> platform's DRAM banks and setting the fdt_ram_start variable. However,
+> this variable is not used subsequently in the function. Remove this
+> superfluous code.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> Changes since V6: New patch
+>
+>  lib/efi_loader/efi_helper.c | 14 +-------------
+>  1 file changed, 1 insertion(+), 13 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index 04b2efc4a3b..15ad042bc61 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -454,23 +454,11 @@ efi_status_t efi_env_set_load_options(efi_handle_t handle,
+>   */
+>  static efi_status_t copy_fdt(void **fdtp)
+>  {
+> -       unsigned long fdt_ram_start = -1L, fdt_pages;
+> +       unsigned long fdt_pages;
+>         efi_status_t ret = 0;
+>         void *fdt, *new_fdt;
+>         u64 new_fdt_addr;
+>         uint fdt_size;
+> -       int i;
+> -
+> -       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> -               u64 ram_start = gd->bd->bi_dram[i].start;
+> -               u64 ram_size = gd->bd->bi_dram[i].size;
+> -
+> -               if (!ram_size)
+> -                       continue;
+> -
+> -               if (ram_start < fdt_ram_start)
+> -                       fdt_ram_start = ram_start;
+> -       }
+>
+>         /*
+>          * Give us at least 12 KiB of breathing room in case the device tree
+> --
+> 2.34.1
+>
 
-diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
-index 7697e365c6ea1b9a4819fe813a63d4ee8fc9de8f..a7f7b9b5c2eb48a1049d1a79980e0cff83321a98 100644
---- a/arch/arm/mach-k3/am62ax/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
-@@ -166,6 +166,15 @@ void board_init_f(ulong dummy)
- 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
- 	if (ret)
- 		panic("DRAM init failed: %d\n", ret);
-+
-+	if (wkup_ctrl_is_lpm_exit()) {
-+		u64 meta_data_addr;
-+
-+		ret = wkup_r5f_am62_lpm_meta_data_addr(&meta_data_addr);
-+		if (ret)
-+			panic("Failed to get LPM meta data address %d\n", ret);
-+		lpm_resume_from_ddr(meta_data_addr);
-+	}
- #endif
- 
- 	setup_qos();
-
--- 
-2.47.2
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
