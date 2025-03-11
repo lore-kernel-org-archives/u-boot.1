@@ -4,102 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C59C28B2E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 12:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D605AC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 12:32:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06362807D7;
-	Tue, 11 Mar 2025 13:31:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4F49D81782;
+	Tue, 11 Mar 2025 13:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NRfrYqsF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A06YDzSe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F025816AF; Tue, 11 Mar 2025 13:31:38 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 746FC811C1; Tue, 11 Mar 2025 13:31:40 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A59D80F92
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 13:31:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E84EF8169D
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 13:31:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-390cf7458f5so5173644f8f.2
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 05:31:36 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso23328885e9.3
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 05:31:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741696296; x=1742301096; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741696297; x=1742301097; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lg1GCr+aaE0AevH9o1zlxGBN+hCKIdxCsPW+0VbAXUo=;
- b=NRfrYqsFTnvR+2q9aJsfG1MlRKLKXWBg5Lp30Mb2vb2j5bIRClV89VcPBNWtFFMgat
- IlkhOmJomdDEaiyhBtKR98n/HqO9Tzr90CdDuBWUT6T6gCM2pOLpq1fLGnNZ1VwyB3Ve
- n4RnJbXHgf35rIpOjUPp9PEwSlHA91EMKE/4ncyHEswlLevdV7YoWH/RxuPDBoi/KI6o
- MRbrvDmAUD6g0FBOn+sWkXO/oejDCHM4NYRl1E0u88AaawXGtUWFmlh44pIEpMYjeriz
- ROKwOt0yB1q1f/5Ta+AKz+GgCX5OPJV0hK5bcd25effYI0LWdmrxD3NLyTEqlN1yMz8s
- WnvA==
+ :reply-to; bh=LXKWFEA3RTPR8bp2OOouaWZul+3Id24Z2qdnUFM+ZYM=;
+ b=A06YDzSeXpFcU7CtnxWfSw7wxpQcLE7nW2sfgBI9WANcXMCLVw5or3y5Cp6a9bjuP6
+ kqbkB09XmNkvfblJC8g5c9kbUDzQtBJe+lYIJs8hvQV3JnCmEnp+33RJf3b4LdVfE661
+ pVPf1sOpR90v6oWlG089SnLRhnZ/g/hg/3Gw5D8y24qjp63/WKruYYXjY4qP3KVAyFxv
+ G/hz+0oGJWN60qI2eA89ZxXXAtyv2ycivvM90LNGsgur/24y8tcdNIIY0ujvFCiMZvhi
+ lpXYVSNVH9cGVQST52JGxY3vrC3H+eBLXJwmZay1EcGtj3YGEIOWq+WSn2uTABYsGkqV
+ UzVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741696296; x=1742301096;
+ d=1e100.net; s=20230601; t=1741696297; x=1742301097;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lg1GCr+aaE0AevH9o1zlxGBN+hCKIdxCsPW+0VbAXUo=;
- b=JDzn/RwflTrUI/ujJlnhxUSBqYB6y+gMU0uHRWl+RiJUiWASr07AmtffbVxYqn3qH3
- qMvtN9lIEpA77HI5vtjw0LfDHWQqjlzzFbJoZK4z6BmUF9tT9LaATg/XpR7ev7jROu2t
- xX1ck8NKaL+9YjyX9eg5Hnt57+ZyaEF3IgqQXg/1scQL5niyCH+NzU9PCd0gSRfKWdYo
- aBUKI22kQdgCr3Y95pRFVnSV1X+g/8tjRVpUW13pu2l0ok6x+7WGYMPvAT/iJxp2AgaO
- KeI36Rf9I0UFgEbe2xgVplG8l7U5c6xuWALI1+MYRn6yerqS7ibgBmwjmN+u1E5QI6Cw
- KoPw==
+ bh=LXKWFEA3RTPR8bp2OOouaWZul+3Id24Z2qdnUFM+ZYM=;
+ b=K6F9S2+e56lz2uJR2UWTvF7YCXiYZ+wzn0AGjmMnBD+wjT8L0jpTMOfRgqIZvnLMKT
+ IqfXWuQFw1DLjhXnt9PClbInWJNOBBou7Zwpsl3Vc78Mx/POH4q4nNBLNexGiJ99JEDn
+ z+rCxuee02tujFRvCKVXlCE/H9JN7J3I07ZSncZxzB09VoLsOOQJmDhiOcXJib36u+Vp
+ qEbuNK5H+VO43wuaKP8esSILPh+f2+78JoumnfgCk1EV/bz2Wx1LuB2SQ5RQRGc0p5iz
+ HKriSL46QAKJytURZ4jgpdgmMQ7S8Bwc/0rNNnZo5dSB13oTHj+oZmREaevMLRwuVHkc
+ MPSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfrdQWJdJ3xVfSAFfdfw5sjbO0DrXSUii6LScRzX/PSIuVHf6wvOJEcirkIFf0PavV9c2KIHQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwyYS1G1dI35fuf9ZBSiR8HDVwyPXS6UJfoLQqtl9F+H1LoRGtN
- 6k/MthhT9suVkRX13m+CjyS7HsWGpkgfq1I6adQAl5//De/8Z+82C7M68MOxX4o=
-X-Gm-Gg: ASbGncvnsMY0TfVdKnd4/6nobc+nhvmE/YlRdOxPnVPkxfjI9qmDi0364kKcHiX4lPd
- coGOtZMHrp+KR7ANugzik8+DqnsNQaT3ORAyVlC24gMpSXaDp75mIOKBUvyRLydGV/zkL9m0czD
- YQ2raCYhzTbTwf7HGNJR1UKEua6JoMXJAfHczvTRBbDbZiIK+Xdul3uV3M2qAd4McxlZWYsmDVQ
- 6t/riItP4ozEJ/eLirqwrQCyq+NmdjYYzYiOmE+IyA2Ct9vLbYUSuxW2gv6bNHRS5WLRzGszwv+
- qNcFsbNb0XTUINZUWU7YxnUvbUbGr70ZWRJ+kdyNyRywi2oYUfTVWL9Y6PHTFCo0uGx/nV0D
-X-Google-Smtp-Source: AGHT+IEqFKe5Aogh78ZAXiwmurx3eY1v1EtBMWecoaf483f4RCb9MgpgVPzTqLowKHZnkPhfFiBMwQ==
-X-Received: by 2002:a05:6000:1887:b0:391:2c67:7999 with SMTP id
- ffacd0b85a97d-39132db1bf2mr17663868f8f.48.1741696295584; 
- Tue, 11 Mar 2025 05:31:35 -0700 (PDT)
+ AJvYcCXfrwFEEYbycAlTtLDT3lrOPHv0DspfWA78legjRADGTAVN8U1/uAbxs9IGp5axmDp7ctRWLag=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNXuVBdwXbHrPMei04jNTbfJ0pA82oxZQ9TZ0itX1SyuD5n/e4
+ 8LzxIuJcXWFVl1dPeIP1XjHUeSiu6YA5nwA6FX4Zqu83MHlNE0WkgtUBLjQqLXhLfB7crzlZUBJ
+ /X7s=
+X-Gm-Gg: ASbGncs6ZdPYXwuveFdllyd91jQHwTqQNsEMPJew5psuJPIQoUtxmPVRNyH0XUAICv1
+ VBJ+uowE+MXvfO1T29yOI9QiRE/njIyj1L+NBE3T9qOVMX8+VZIieUOKe97q7rom+HyLOGaDDD8
+ YaNljNfcZzFbG08Zp9oKO0eo5xxQ1ErWjTa7dmVmCwEFpuJ+OlFWHEZWDuK0NQYzKLMQ/HDMgkq
+ ozsPo3BrXy4zoFH084hVjfaqUEyVVuQsAG4X/GV0dYPkLnWhF5uN6ZHv/aWPGxPy0VMeSlj7YaZ
+ D69rHXpEG+QFj/sU2kdcaxB3jxWVid2cDqR7FyhTPJKeWZqCf5ZK+f+5OD7BYBWwM2ImXoSZ
+X-Google-Smtp-Source: AGHT+IHRGx1obvmPvyb0bu0Y23XyXPjtRgeaozqkraZZIj3T3AFQ4uYEXjrTjZscj4Tik2HtjLMCNw==
+X-Received: by 2002:a05:6000:1867:b0:390:f987:26a1 with SMTP id
+ ffacd0b85a97d-39132d885bcmr11453219f8f.29.1741696297188; 
+ Tue, 11 Mar 2025 05:31:37 -0700 (PDT)
 Received: from toyger.rex.connolly.tech
  ([2a0a:ef40:1d11:ab01:f578:9a7d:3957:bef9])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912c0e2f44sm17788586f8f.76.2025.03.11.05.31.34
+ ffacd0b85a97d-3912c0e2f44sm17788586f8f.76.2025.03.11.05.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 05:31:34 -0700 (PDT)
+ Tue, 11 Mar 2025 05:31:36 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 11 Mar 2025 12:31:18 +0000
-Subject: [PATCH v2 3/4] bootretry: check for bootretry variable changes
+Date: Tue, 11 Mar 2025 12:31:19 +0000
+Subject: [PATCH v2 4/4] doc: board/qualcomm: describe phone support and bringup
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250311-qcom-phones-v2-3-83dcd88a6a87@linaro.org>
+Message-Id: <20250311-qcom-phones-v2-4-83dcd88a6a87@linaro.org>
 References: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
 In-Reply-To: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1256;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7654;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=7aGOctiNDBsGQCXk6t7RWfyufw13wgNM/Mg3qxK2xnA=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn0C0hJUb4xNMSTgOmW5g0N3/HtS+8Xd5WkelfC
- zDZGA/Y+KOJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9AtIQAKCRAFgzErGV9k
- thXWEACDFMFINHHwDy5/5jHiVFhkQBwlnOiQdb9lvoDuro17esGdn4QSvXzLfhkxo1YFYDQ5PxP
- 6gVG5anQzmbQNDvaqDjJhYNDfIDN4PhEkyzhrOorIZUnQlEfZDHAZcY889GOkxQcZJAM0Uvjj5p
- l7PmV6yVmDBeA4Ig7nwTYUZpKH0yzcIXyWfLHBhRVScPetE3lRq3UoyXC0Ipq0zPCKQaSlHfw59
- CEin1if30amn6NOscTPo6s72MuadY0Rf7L4SHWrrM+MUlwMfCyeuEF668gqV/jU88aPmgo6jR1D
- XEBFILENAmW24ujWg+e404B8iZXEtuziwSEIb9MQdyhrE0GXAZu0+s+j9gnuxaXl42ErPsfDUKu
- A/mbyi7CrSXmfzvzq2JcG3ICFRuFJc7mHY0aUfmvB/CjAJ7bbIlb4W/tn+bYX/vz1GEWkRkweHr
- NFecbI8VzmQupCnOXOY1uuaMqAUgTrYWrM+JBzOkjt33Y2H4Onn+jeUedA+fa0FchNzJtcBIhfw
- X/nIyq70CMiALNtEyaD+cSZ9mA0wpLchJcgtD5Ew9YWw8n4aGlFE1Swlj5AASRq++BA5TufZ5dW
- ZM0uBloopNV6IIe4a4v29NDxAha5vDh+dsyEnB6hhFa93DUREfl1FAgSPTMZBDzQ/LCQR8wm1du
- aOmkDILyfj0MCPw==
+ bh=L/tAuYJFfDPRVAWBwa+C90Y1usOWEnRNv9NpP444+3I=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn0C0hzDBTG8F6klL7lKQ2QfcbAbVtLxMwDGHhH
+ caZWjMsabWJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9AtIQAKCRAFgzErGV9k
+ tm5qD/kBErXU02w/XDFi25WoAmvlbSRPkkjkjWgHhi3H71s3iowbZ3eWYVQumtGhwweiWoUW1ID
+ GpWTvatAbmo96ozQvuNDcabasgrPab5hBu6463o1YgXHCbxXprkDtXv3Lgsn83FPpYQ20pEuqPe
+ 3rbp6sR8dBySjKvu0wCYhQCW8b+68YTnOnCW7lNVXwog5kmuSt8RJbYquN3zg0awt0cMxY3J7Ag
+ eMNFo7tv6iW/Xt48jCBKNMqmydFw38TLriuyOl/ZTTVLKauFoyzX4r8ZMyDMjGwBKFYtpYzn5tj
+ VPuuD5Zsx87VQCv9qWYNwxf/YaghJ6OAp/W6MxAxG9SRR0ByPMCdHeDnI6QgtEtV+uTrfJwL7Y6
+ IRo2EtO692vNZxwIA63lp2dBImAku8MDlnUre+x0zyPqzWTTEe3OFbZ0nJOdnvLfRb/DuqFt8Nn
+ hELBLi7ttRYGQdHgYqN9FgqxFzS0qhhez/XErM6+iEtfEOI0AmTwh+BtP05zXU6z01CwsrFmdyi
+ qH5vwxF23hU7l4G9MoNYFNq5yQevG26cSEoISfS5s1KQSklIdclw7mA52Ymnw6FUXK+o9dEOQMS
+ L78kqY3l1zSTXLznlhjwhb07pLwMWBHbQ72abO/5GkNy3AaJK2fRrJcAiQbS/FZeC0HJZk213Ft
+ 2hTlUldI2DxAw4g==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -118,38 +120,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To enable more complex sequencing of the bootmenu, autoboot, and
-bootretry, handle changes to the bootretry variable between tries. This
-makes it possible to turn bootretry off (e.g. to drop to a shell) and
-then back on again.
+Add some documentation which attempts to describe Qualcomm smartphone
+support with the qcom-phone.config fragment, as well as a high level
+debugging guide for diagnosing U-Boot issues when UART and framebuffer
+are unavailable.
 
-This makes it possible to have a persistent bootmenu (the only way to
-navigate U-Boot on devices like smartphones which lack a physical
-keyboard) by having bootcmd be defined to launch the bootmenu. This
-allows for menu options like enabling USB mass storage gadget to return
-back to the boot menu once the gadget is shut down.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- boot/bootretry.c | 2 ++
- 1 file changed, 2 insertions(+)
+ doc/board/qualcomm/board.rst  |   5 ++
+ doc/board/qualcomm/index.rst  |   1 +
+ doc/board/qualcomm/phones.rst | 122 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 128 insertions(+)
 
-diff --git a/boot/bootretry.c b/boot/bootretry.c
-index 587b2de7d6b08db07e1dea512a834cb5590c2d12..a60767eaa2ee51970e4695e487ce5651575079ba 100644
---- a/boot/bootretry.c
-+++ b/boot/bootretry.c
-@@ -36,8 +36,10 @@ void bootretry_init_cmd_timeout(void)
-  * reset command line timeout to retry_time seconds
-  */
- void bootretry_reset_cmd_timeout(void)
- {
-+	/* Parse changes to bootretry */
-+	bootretry_init_cmd_timeout();
- 	endtime = endtick(retry_time);
- }
+diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
+index 4d793209f9e31e6447c696ccd07af206dba99645..003d59a18ebd3f19db568fa59e9fd06906e209f2 100644
+--- a/doc/board/qualcomm/board.rst
++++ b/doc/board/qualcomm/board.rst
+@@ -89,8 +89,13 @@ Or for db410c (and other boards not supported by the generic target)::
  
- int bootretry_tstc_timeout(void)
+ 	make CROSS_COMPILE=aarch64-linux-gnu- O=.output dragonboard410c_defconfig
+ 	make O=.output -j$(nproc)
+ 
++Or for smartphones::
++
++	make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
++	make O=.output -j$(nproc)
++
+ - gzip u-boot::
+ 
+ 	gzip u-boot-nodtb.bin
+ 
+diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
+index 8c7969987a9704bd6044197574f8da16b3848bd4..db59b81134b84cd5865a07cd1a294de9bdf12c5f 100644
+--- a/doc/board/qualcomm/index.rst
++++ b/doc/board/qualcomm/index.rst
+@@ -9,4 +9,5 @@ Qualcomm
+    dragonboard410c
+    rb3gen2
+    board
+    debugging
++   phones
+diff --git a/doc/board/qualcomm/phones.rst b/doc/board/qualcomm/phones.rst
+new file mode 100644
+index 0000000000000000000000000000000000000000..d9a582f5abec7801cad997ccae464975dfb24ac3
+--- /dev/null
++++ b/doc/board/qualcomm/phones.rst
+@@ -0,0 +1,122 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Caleb Connolly <caleb.connolly@linaro.org>
++
++======================================
++Booting U-Boot on Qualcomm smartphones
++======================================
++
++About this
++----------
++
++This page attempts to the describe U-Boot support for Qualcomm phones, as a user guide but also a
++technical introduction to How Stuff Works to help new porters.
++
++In broad strokes, U-Boot should boot if the SoC is supported, and the device is already capable of
++booting an upstream Linux kernel.
++
++The list of supported Qualcomm SoCs changes often, for now it is best to look in
++``drivers/clk/qcom/`` to get a rough idea.
++
++For building instructions, see :doc:`board`.
++
++Phone bringup
++-------------
++
++It is usually easier to get Linux booting first, there are many good resources for this such as the
++`postmarketOS wiki`_. Once the device can boot Linux with logs on the display and ideally USB gadget
++support, it is highly likely that U-Boot will boot as well.
++
++For logs on display, you should have a simple framebuffer node defined in your DT, newer devices
++require that this follow the downstream naming scheme (that the DTB is compiled with labels enabled
++and the framebuffer reserved-memory region is labelled ``cont_splash``). Once this is working in
++Linux it should also work in U-Boot.
++
++In practise, U-Boot still has many more papercuts than Linux, which can be sticking points when
++porting a new device. In particular, drivers failing to bind/probe (especially pre-relocation) can
++be tricky to debug without UART since U-Boot will simply panic with no way to inform you of
++the error. As a result, bringing up a new device can be quite frustrating, but there are quite a few
++things you can try.
++
++The phone config
++^^^^^^^^^^^^^^^^
++
++Since most phones lack a physical keyboard or serial port, a special config fragment and environment
++file can be used to provide a more seamless experience. This can be enabled by generating the config
++with::
++
++	make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
++
++The config and associated environment file can be found in board/qualcomm/. The main changes are:
++
++- Panic on hang (so the panic message can be read on the display)
++- Boot retry (to automatically open and re-open the bootmenu)
++- A boot menu with helpful shortcuts (including USB console gadget)
++- Launch the boot menu if power is held during boot or on boot failure
++
++Hang/crash bisection
++--------------------
++
++Without a way to get logs, we can still get quite far with only a few bits of information: what
++happens when you ``fastboot boot u-boot.img``?
++
++Does the device disconnect?
++^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++This can be verified by watching ``dmesg -w``. If it stays connected, it likely means the boot image
++doesn't match what the bootloader expected, use ``unpack_bootimg`` to compare it with a known-good
++boot image (ideally one with an upstream kernel).
++
++Does the device hang?
++^^^^^^^^^^^^^^^^^^^^^
++
++If it stays on a black screen and does nothing, then that's a hang! Since ``qcom-phone.config``
++enables CONFIG_PANIC_HANG, this likely means that you're successfully executing U-Boot code (yay!),
++but something is causing a panic.
++
++It could also be due to a bad memory or register access triggering a secure interrupt, it's worth
++waiting for around a minute to see if the device eventually reboots or goes to crashdump mode. You
++can also disable CONFIG_PANIC_HANG and see if that causes the device to reboot instead, if so then
++it is definitely a U-Boot panic.
++
++With enough time and patience, it should be possible to narrow down the cause of the panic by
++inserting calls to ``reset_cpu()`` (with CONFIG_PANIC_HANG enabled). Then if the device resets you
++know it executed the ``reset_cpu()`` call.
++
++A good place to start is ``board_fdt_blob_setup()`` in ``arch/arm/mach-snapdragon/board.c``, this
++function is called extremely early so adding a reset call is a good way to validate that U-Boot is
++definitely running.
++
++You can then do a binary search starting from the end of ``board_init_f()`` / start of
++``board_init_r()`` and work from there using the init sequences for reference.
++
++The Qualcomm RAM parsing code is a likely culprit, as ABL is known to sometimes give bogus entries
++in the memory node which can trip U-Boot up.
++
++To rule out crashes that might be caused by specific drivers, it's a good idea to disable them and
++re-enable them one by one. Here is a non-exhaustive list of drivers to disable:
++
++- pinctrl
++- mmc
++- scsi/ufs
++- usb (dwc3)
++- phy (usb, ufs)
++- clk (remove clock references from your framebuffer node in DT)
++
++Ideally, it would be possible to use the framebuffer as an early console / debug output, at the time
++of writing there are out of tree patches for this but they haven't been submitted upstream yet.
++
++Does the device reboot or go to crashdump mode?
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++On many devices crashdump mode is disabled, so they will reboot instead (maybe after some delay).
++The same approach as suggested above can be used to figure out where the crash occurs.
++
++If the device is rebooting, you can insert calls to ``hang()`` instead of ``reset_cpu()`` when
++following the instructions above.
++
++The most likely cause of a crashdump is the pinctrl/gpio driver or the SMMU driver, ensure that the
++``apps_smmu`` node in your SoCs devicetree file has one of its compatible strings referenced in
++``drivers/iommu/qcom-hyp-smmu.c``, you can also try disabling the pinctrl driver for your SoC (or
++``CONFIG_PINCTRL`` altogether).
++
++.. _`postmarketOS wiki`: https://wiki.postmarketos.org/wiki/Mainlining
 
 -- 
 2.48.1
