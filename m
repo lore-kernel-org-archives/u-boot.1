@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DEDFC28B30
-	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:35:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2670FC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 11 Mar 2025 13:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95DA2817D8;
-	Tue, 11 Mar 2025 14:35:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 224DE81671;
+	Tue, 11 Mar 2025 14:35:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="aCS/ZP/t";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="CqbI/8Yf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A0A78003E; Tue, 11 Mar 2025 14:35:39 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id DCF04811C1; Tue, 11 Mar 2025 14:35:44 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34C50811C1
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:35:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 823358003E
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 14:35:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-2bcf9d9b60aso1394735fac.3
- for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:35:36 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2c1c9b7bd9aso2558289fac.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 06:35:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1741700134; x=1742304934; darn=lists.denx.de; 
+ d=ventanamicro.com; s=google; t=1741700138; x=1742304938; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fd9RKxIDCgWjHPwIM56sTdKSrqkdoZXKH+qowvuThMA=;
- b=aCS/ZP/thdLApNbj3YpPeX1Fmif5PGcSBkxoTU0VPIYRdJBu1wDQSlTaLyii7TORRJ
- Rn3rYcxdzk3ODVSyQRwUfGrpiwOF+klR9FD2rkLTEGCY5I63nAOW24I3ENMNuKyVFcwJ
- 4pENkMRUcd19a9Xo1f+igPsxcsKr8+n0kO9z5nAgw9s9KAt+nWVKlFNoKi5MpriF0wmk
- iLBXhIu2dPjuicKI6Z4Ns6I3oitAEPtg6NFujNPpLW/NHnSZmIxYRR2Fqm4N7kBMnzxD
- cHyQDAn8KAZH7tbs5bRhe2YqDnn0d6NZtLHZOQRb0DNqYWBAF2TLL1RiD+mb917CH8Bj
- j70Q==
+ bh=is36Na8dvk/foHAtQozAr7j8VafFohAS2dzm0pzp9J8=;
+ b=CqbI/8YfPt36jSERUD60wt+axb58JCypA3gW2yVgmY7qrvUYTTFp9Dx/udZLQjknG+
+ YoLBlOgtczbJ/eO9Fc5BnUJn3fMXfTsq7FJQEp1WeDmauT4zjyOY3ui+EiuSeA4F2WTV
+ p1rrYmrrlM+WVYwFn1xGD2dH/eCZz8+utuV8K177glEwDrK9m+OzfnjGWlnWBQVi4T08
+ u3bq+hXRV/6vxL5n3foGIWuDI4rH33YtMGvEGk8RcscUYGd4fF2g7fu6NzR5T6xmQTrJ
+ 9S9NpuKa93m1ioGesw4kiGjFspC0eazCF0al0oesqxI6EDId4ZJOlFJJWGG/HFrsTkL7
+ EY2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741700134; x=1742304934;
+ d=1e100.net; s=20230601; t=1741700138; x=1742304938;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fd9RKxIDCgWjHPwIM56sTdKSrqkdoZXKH+qowvuThMA=;
- b=FZ0vggpS7s2UYXvdru3o4O/QRymH9pVs9eUU3G0uOVj1KEpk0fuxaZ9EXItQsXBbyt
- Ham7SdEFGlZpxga+n6mTaZOakQpLvIe1mkraSqN2E/0mvyn5QLElsO5wsvEeUORE/l+F
- YVBAfngyVSAWCg2trxpNxAp7e8bV2YVTrwXWTpfU7PZzdCNJ5ejGYK0KGd4Ct37wUsOg
- 9VjWzcyoPXfXp9xD6yquIsZCOtNBGp0cv5QjV4Ka+AJEIX5O/6wxo6Vk1NEGZKMBVN7w
- WJ+oQZ+XkdMRzY5ofnRlzTwr54acHCvgeeip4y3WTS0iyMp4jStejVf5egTey/1kgETB
- IA+A==
-X-Gm-Message-State: AOJu0YzcNrw1SBVuQNLySVsbY3WVTR4UA0tE9ViBww+pD/S3Wny7DZxQ
- TVGAC81/5Mty1DBaBrljcPUt9hJM7uPKbj81pobiWt9w/ZMVys01sQ1rMQqm2UOCTQ/WgVwXJ1s
- C
-X-Gm-Gg: ASbGncuTsrq9xZkLUTz32nHApWrkyb7YsiBBg8kXR3xj2vZCj38GCx3ITiH0rFBABpd
- EMwKJzI1jo0IOW1VlxgmpObQFcqyZzTxcXl/RCNKSSGnj7bjGNZjfNUDxzxy+GtMx3zVUdvf4eN
- +xAyp2Um6NMrsxdtXP6VL88b8vGYKii+YkUoFYZwc+mD0TXvUtaVHSWVbfg5GBZp+9k0Lt+YLuu
- ioct7Xf7DPkkxcavoKeN0w/dicBAIA816xvDQ2jM6zEolpqp026awiFl0RYMju8QWf3gnXEeBDf
- VfNOnQvbT9gUc6HCEvUfzzRJ6n7AwFfdd49eoWG/yyQxjfnuELwGwKRACuHrfHmWyQ==
-X-Google-Smtp-Source: AGHT+IG8w/vjpE3eL4lDY5g5dstDvdST7jmXASCnoRR7vgWQDfGo4+OaTeg+pXPXMMONPpBlMzwEHQ==
-X-Received: by 2002:a05:6871:a58f:b0:2b7:d3f1:dc72 with SMTP id
- 586e51a60fabf-2c2e8905689mr2306517fac.29.1741700134573; 
- Tue, 11 Mar 2025 06:35:34 -0700 (PDT)
+ bh=is36Na8dvk/foHAtQozAr7j8VafFohAS2dzm0pzp9J8=;
+ b=o/bBdb+GRMF6JDH9WabbDhKJWaRfkoFl6SgAWsEZW3KOT4d8sgeZtv992nnGA/at4+
+ HVhbkNpv4u8+nUAocbIqd/cA93sljkPFygcr3nDBPxP18OY9T4HQwNVw3cJTXWTWMBTs
+ 1PDy9IPSxqpdxEz82F6t0C5u8dThmPJfjEkzkhl9G0GL78yyluSXhphZkMT0T9reRzAA
+ koFiu2iAixYqCuxbV1f5ekbyhRYG109vkxpe78O+zEd64ZMyPcwjSW7jB/ORyGtxV82H
+ 446kevFbz38Vqt0zc06L+0fAXSX7IMNTyZpYc1n1h8CPlHE9vodHSyKln1Tm9bO/m/fZ
+ Rl6g==
+X-Gm-Message-State: AOJu0YwSw9p1PR5wcAzoYM0DaE7Ji2BOj6Jbk/FoiUgYf1zc1MHaJc6x
+ WBaf50vfZFCoIB+969Qb/rKCL99teMUM+VmJaAX1UoB/oqW1bsBK5f+pmSRw1F75QGsau6HPoim
+ B
+X-Gm-Gg: ASbGncv8ZNfbeLMEF6AJwWOZBPm5ueycVSIiztEam5+MsPfFWNN0B1c/L4CxAvsjCvk
+ uBtEfpK+odi1buL64plfykDx5yZZuq1WNd1/ogf+GWcmwdheDkJq3p/5JJc9GoqpFXgc8NOqZw5
+ C1jRwneEjImiHX/Hn3fL/9NVXBwZqbtRC4Zvezn3lwYntpyxCUi41IvFgxtMJp6JcDbRz4kFkiS
+ Vs4CkLYyWsBNWnitYiAm9OG+nE7S4GhWPUc1xvGExeDs+xdr7T0h/Gb6h+ICYKw8ZnP9+aGoc6i
+ vVoevVHEdSdWwAhCcVYrwiku6ubW/hEFhZGes1vrHDjzk30bhG/ImDuKClv9DiC2hRqM80QvvcN
+ c
+X-Google-Smtp-Source: AGHT+IEcqDdKVMopxS6/vX0RgSlhA+KfjVM2bUcd4QMmbsNVzFgjjdQcmiajWZM9o/DWynjWNif0sA==
+X-Received: by 2002:a05:6871:530d:b0:2b8:3c87:b491 with SMTP id
+ 586e51a60fabf-2c2614313e3mr9856238fac.26.1741700138094; 
+ Tue, 11 Mar 2025 06:35:38 -0700 (PDT)
 Received: from localhost.localdomain ([103.97.166.196])
  by smtp.googlemail.com with ESMTPSA id
- 586e51a60fabf-2c24883035bsm2578036fac.5.2025.03.11.06.35.29
+ 586e51a60fabf-2c24883035bsm2578036fac.5.2025.03.11.06.35.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 06:35:34 -0700 (PDT)
+ Tue, 11 Mar 2025 06:35:37 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: u-boot@lists.denx.de
 Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Julien Masson <jmasson@baylibre.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v1 1/3] riscv: image: Add new image type for RV64
-Date: Tue, 11 Mar 2025 13:35:03 +0000
-Message-ID: <20250311133506.124914-2-mchitale@ventanamicro.com>
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Yu-Chien Peter Lin <peter.lin@sifive.com>
+Subject: [PATCH v1 2/3] riscv: Select appropriate image type
+Date: Tue, 11 Mar 2025 13:35:04 +0000
+Message-ID: <20250311133506.124914-3-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250311133506.124914-1-mchitale@ventanamicro.com>
 References: <20250311133506.124914-1-mchitale@ventanamicro.com>
@@ -107,41 +100,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Similar to ARM and X86, introduce a new image type which allows u-boot
-to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
+Select between the 32-bit or 64-bit arch type for the image headers
+depending on how the build is configured.
 
 Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 ---
- boot/image.c    | 3 ++-
- include/image.h | 1 +
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ arch/riscv/dts/binman.dtsi      | 14 ++++++++++----
+ arch/riscv/include/asm/u-boot.h |  4 ++++
+ 2 files changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/boot/image.c b/boot/image.c
-index abac254e026..03d5e59b634 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] = {
- 	{	IH_ARCH_ARC,		"arc",		"ARC",		},
- 	{	IH_ARCH_X86_64,		"x86_64",	"AMD x86_64",	},
- 	{	IH_ARCH_XTENSA,		"xtensa",	"Xtensa",	},
--	{	IH_ARCH_RISCV,		"riscv",	"RISC-V",	},
-+	{	IH_ARCH_RISCV,		"riscv",	"RISC-V 32 Bit",},
-+	{	IH_ARCH_RISCV64,	"riscv64",	"RISC-V 64 Bit",},
- 	{	-1,			"",		"",		},
- };
+diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
+index 0405faca574..a1a566b511b 100644
+--- a/arch/riscv/dts/binman.dtsi
++++ b/arch/riscv/dts/binman.dtsi
+@@ -5,6 +5,12 @@
  
-diff --git a/include/image.h b/include/image.h
-index 8a9f779d3ff..12b31166e86 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -139,6 +139,7 @@ enum {
- 	IH_ARCH_X86_64,			/* AMD x86_64, Intel and Via */
- 	IH_ARCH_XTENSA,			/* Xtensa	*/
- 	IH_ARCH_RISCV,			/* RISC-V */
-+	IH_ARCH_RISCV64,		/* RISC-V 64 bit*/
+ #include <config.h>
  
- 	IH_ARCH_COUNT,
- };
++#ifdef CONFIG_64BIT
++#define ARCH "riscv64"
++#else
++#define ARCH "riscv"
++
++#endif
+ / {
+ 	binman: binman {
+ 		multiple-images;
+@@ -31,7 +37,7 @@
+ 					description = "U-Boot";
+ 					type = "standalone";
+ 					os = "U-Boot";
+-					arch = "riscv";
++					arch = ARCH;
+ 					compression = "none";
+ 					load = /bits/ 64 <CONFIG_TEXT_BASE>;
+ 
+@@ -44,7 +50,7 @@
+ 					description = "Linux";
+ 					type = "standalone";
+ 					os = "Linux";
+-					arch = "riscv";
++					arch = ARCH;
+ 					compression = "none";
+ 					load = /bits/ 64 <CONFIG_TEXT_BASE>;
+ 
+@@ -57,7 +63,7 @@
+ 				tee {
+ 					description = "OP-TEE";
+ 					type = "tee";
+-					arch = "riscv";
++					arch = ARCH;
+ 					compression = "none";
+ 					os = "tee";
+ 					load = /bits/ 64 <CONFIG_SPL_OPTEE_LOAD_ADDR>;
+@@ -71,7 +77,7 @@
+ 					description = "OpenSBI fw_dynamic Firmware";
+ 					type = "firmware";
+ 					os = "opensbi";
+-					arch = "riscv";
++					arch = ARCH;
+ 					compression = "none";
+ 					load = /bits/ 64 <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
+ 					entry = /bits/ 64 <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
+diff --git a/arch/riscv/include/asm/u-boot.h b/arch/riscv/include/asm/u-boot.h
+index d5e1d5f3231..a90cc4c21cf 100644
+--- a/arch/riscv/include/asm/u-boot.h
++++ b/arch/riscv/include/asm/u-boot.h
+@@ -23,6 +23,10 @@
+ #include <asm/u-boot-riscv.h>
+ 
+ /* For image.h:image_check_target_arch() */
++#ifdef CONFIG_64BIT
++#define IH_ARCH_DEFAULT IH_ARCH_RISCV64
++#else
+ #define IH_ARCH_DEFAULT IH_ARCH_RISCV
++#endif
+ 
+ #endif	/* _U_BOOT_H_ */
 -- 
 2.43.0
 
