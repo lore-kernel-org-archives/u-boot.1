@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95EB1C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:08:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C978FC28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:08:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF79C81760;
-	Wed, 12 Mar 2025 19:08:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 450E7818C7;
+	Wed, 12 Mar 2025 19:08:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IyF0m3yv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SP41VNVd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E90AB8175D; Wed, 12 Mar 2025 19:08:08 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 18DB68141D; Wed, 12 Mar 2025 19:08:10 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF29480756
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14DB48141D
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac2b10bea16so30827666b.0
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:06 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e63162a0so77240a12.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741802886; x=1742407686; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yxPZdGnuZQFbLB6m8I5lrOHwduPCcn6uq3QxkvRKTYc=;
- b=IyF0m3yvNmSMg+yykWbJNyUNKQggqXiWRGpF39t0stXpdwBipSDCmx6xbBoOurYeSA
- YKw7TkR8d5bOgkpOOWLeAyEILBe8jk7ElzTuD8VRlzxioYphnYO0zvLr9+glfHKDtsuL
- 4MARUjmikbz52W69QVxytE+3tLjti4twA89esvoT1gPqw7T7rt1QPGuPEEPUp95xe7At
- QRsiYOBNXTVyicZMqU5rinNPptSLSQi9oOxDCD5s1XDfRxki7kZ2ofldKCQHhURLGXJf
- y/uZmIi0lYVc/GmgGe/IrBuMKdwnqoqGyrPIwYYPTOnfhMz419JyHDhwPAGQ+UxAEZ+Y
- 2CuQ==
+ d=gmail.com; s=20230601; t=1741802887; x=1742407687; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QmuR9VDwY34N0/iiZFvSSafv5F4fAcVcgNebvXx1jTw=;
+ b=SP41VNVdlAEvjo5vIUcXMULqj+v7KjRtBiOk7DtAPtGebuL4iPToiMM39CGlQi7B8o
+ 2GUpf2J3tlLl4V8t9JrOPEf0vx5uCGPQfy2g4NuoX4O5jGDPlUKUznMhrY3AjGDniuQD
+ IDProNAIToXYGrN1Ls1/juCFtSDIMNxlsnJvlpY2c+6p5Q+dw3GoYfUU4hgsqdVOtvM2
+ +PYUGJtNnYoITKilAg3etjoRpANruRuN6Hs61tzu7FsD+Vr+UsAMej7jgXldBPvyMhkk
+ d6nyicXDslqDWAo49XY4thXnwUdjhziP9X1Mx75zgvoA2NVFtDrwZ2bigsfhCgQ2m378
+ m5SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741802886; x=1742407686;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yxPZdGnuZQFbLB6m8I5lrOHwduPCcn6uq3QxkvRKTYc=;
- b=suhfbqoNvVqVl8EP0ZHNr7DtVRx3RnpFtSEDWrpYDU3EZ2Z34ngXE3kmRPhN/lRMod
- GRynk/NOAcTKq9C7MyPBN6a/+rLG7YmU6/0qoerLlppZ1MTpgJQsac4vsmSLMDlFTYYw
- kcq4rdn/9POHz80hqZzHutmiqo0RM6b7Ds7Kj251uxxM1cE0LJU6C+O3PC9iS1woeCwp
- nXzoxlAsuMkD4a7RmWbR0AnqXX1pLLPC0eptEo54ZyLnP43DXEU3au08NoJXzgjtJYXn
- Yu5XgHOXw/BfbuLqBSw4tsMFaT+yKaX0qNkULUftlY8LqsVG3tJkwIyJxN73OakiADLj
- DBYg==
-X-Gm-Message-State: AOJu0Yy9IBUC/JjxaOfr6XzjHVOsqIvWpD719npuKGd1QoFGeUgXgMPR
- 0FuB6L6njkoNSCtvzhdO/Ce7CSOzmbRCa1sV0ywjgevUBymU/uQJM2nZ7A==
-X-Gm-Gg: ASbGncuyPOXRZOPrjlFF+uQjmf4RNKVWBl1lkRvYInZKRGWhwtRXqZUO46e47JAGkub
- xp39d3MUCH/RDvCCWW8Zy5zq3cbOS8gn7soSWMOkJ1xH/btirj7saCOZlJ7Xvi+cTGKr/mHdvSJ
- 7b6W6du/5zMm6zD8ILduqtTnDZQQaXoK4VgRR7cSkXDZ1w8CuL4+P1HdcV+mSt8HLz4KvR3zGq0
- ZGu8Mkqufd5JFD67RzTV52NMD7hpYWHwDyN/fG5Vnstny98K4qlvZrlSteFsirVr8v/Sca5MpPW
- omKSMT35NAAPpltqlJVhvWrJQErd2+uixsay
-X-Google-Smtp-Source: AGHT+IEGgDb1c2S9t1wg4/UMnlmDqHxMYvKB8QXfyrWh1gRWE12QFvNZyJpiZSIIZ6efVhueXIqrTA==
-X-Received: by 2002:a17:907:6193:b0:ac3:888:ed08 with SMTP id
- a640c23a62f3a-ac30888ed64mr105248866b.44.1741802886292; 
- Wed, 12 Mar 2025 11:08:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741802887; x=1742407687;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QmuR9VDwY34N0/iiZFvSSafv5F4fAcVcgNebvXx1jTw=;
+ b=ktBM1llRX45Vj5ScF13WPQHA+C82u+Nz2CGYr218cNZmuBi+eAp9dBjPfcooC7R2O5
+ ksWbtvaZUV1zEn8TYPBcMsfZ4ZdyduTZLSycUzpq05TFWSbROyxpCIvpNet3zmmHcXdJ
+ QmN9iv+0iwIR+ykO+bIeGgAZcaH8E3OIjTXo+HYCtrR/Xz6xvqHcpUwBAX+HOAedGOVN
+ ZjTzMLu7exzmZUe8A/LeY/XuEz1Qb3hig5xLyTt9BEpR9GOzcnX8F6l2/BLv5s6qSJck
+ 8l/NJfvNYc35fZF5STpun9InK8Ph6G8+UrkVhPkL2JtTDH+WLJQWau0iHBGUzBnpKshG
+ owKA==
+X-Gm-Message-State: AOJu0YzdT7sMD8x3zip6bR6WNbmMFi2zLK68DMYa60i9hgl0hGbaqAil
+ E5u0b7S6wfulaw2OQVFi4oYcWQa4U+t1fFTZx9oNhN55Nlvi0k3Z
+X-Gm-Gg: ASbGncuxj32Cmx/+el0jjHelsEuyuH4CxrMf3zHOx5V2fkOI9AJhwhRYvIbQ9vCXPR3
+ ShOAVgcwawjgd/JYtqSKJpQ0LCdtWIbpxWnQiYn8CITl4pM/EOhMwVK8GAcXQtKlBsGwe5BdssV
+ /v2x9jazHPHvjkLisvyyLPOOCnSM6IgrE0pgiTK7yzlXsGJRKN5zE2dMGUy1mrKV2tYBs3wQZQ6
+ 6sP6pht9bzT9Bykx8KsAgZOQ4MUBqRyboiNpjivYFStamq8th3CTOpJGMrLXVCzm877UgUHBLxv
+ J9av5VJZm/D4+LqanIVL1FSpCSPFDeyqoZaXDT4KXe2bvhU=
+X-Google-Smtp-Source: AGHT+IFxvkUiBQDon/9hcziW9M1PQp5hQ4Cvh79k1SvviWyUkkQAUKnlHk/4Drzbp2CPSe5U7mCcUg==
+X-Received: by 2002:a05:6402:2682:b0:5e5:bb58:d6bd with SMTP id
+ 4fb4d7f45d1cf-5e75df5a949mr11763633a12.10.1741802887382; 
+ Wed, 12 Mar 2025 11:08:07 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.05
+ 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:08:05 -0700 (PDT)
+ Wed, 12 Mar 2025 11:08:07 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 00/13] video: bridge: migrations and fixes
-Date: Wed, 12 Mar 2025 20:07:41 +0200
-Message-ID: <20250312180754.120946-1-clamor95@gmail.com>
+Subject: [PATCH v1 01/13] video: bridge: dp501: convert to video bridge UCLASS
+Date: Wed, 12 Mar 2025 20:07:42 +0200
+Message-ID: <20250312180754.120946-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250312180754.120946-1-clamor95@gmail.com>
+References: <20250312180754.120946-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,31 +98,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate dp501, tc358768 and ssd2825 to bridge UCLASS and OF graph.
-Fix and improve power supply requests, handling clocks, gpios.
-Clean up code a bit.
+Switch from PANEL_UCLASS to VIDEO_BRIDGE_UCLASS since now
+its user driver has bridge support.
 
-Svyatoslav Ryhel (13):
-  video: bridge: dp501: convert to video bridge UCLASS
-  video: bridge: tc358768: convert to video bridge UCLASS
-  video: bridge: tc358768: convert to use of_graph
-  video: bridge: tc358768: simplify power supplies request
-  video: bridge: tc358768: remove need in clock name
-  video: bridge: ssd2825: convert to video bridge UCLASS
-  video: bridge: ssd2825: convert to use of_graph
-  video: bridge: ssd2825: move post configuration from transfer function
-  video: bridge: ssd2825: add HS delays configuration
-  video: bridge: ssd2825: make pixel format calculation more obvious
-  video: bridge: ssd2825: set default minimum tx_clk
-  video: bridge: ssd2825: add power supplies
-  video: bridge: ssd2825: fix reset gpio direction
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ drivers/video/bridge/Kconfig |  2 +-
+ drivers/video/bridge/dp501.c | 27 +++++++++++----------------
+ 2 files changed, 12 insertions(+), 17 deletions(-)
 
- drivers/video/bridge/Kconfig    |   8 +-
- drivers/video/bridge/dp501.c    |  27 +++---
- drivers/video/bridge/ssd2825.c  | 159 +++++++++++++++++++++++---------
- drivers/video/bridge/tc358768.c | 101 +++++++++++---------
- 4 files changed, 183 insertions(+), 112 deletions(-)
-
+diff --git a/drivers/video/bridge/Kconfig b/drivers/video/bridge/Kconfig
+index 21c5a043e02..23fc26729ef 100644
+--- a/drivers/video/bridge/Kconfig
++++ b/drivers/video/bridge/Kconfig
+@@ -9,7 +9,7 @@ config VIDEO_BRIDGE
+ 
+ config VIDEO_BRIDGE_PARADE_DP501
+ 	bool "Support Parade DP501 DP & DVI/HDMI dual mode transmitter"
+-	depends on PANEL && DM_GPIO
++	depends on VIDEO_BRIDGE && PANEL && DM_GPIO
+ 	select DM_I2C
+ 	help
+ 	  The Parade DP501 is a DP & DVI/HDMI dual-mode transmitter. It
+diff --git a/drivers/video/bridge/dp501.c b/drivers/video/bridge/dp501.c
+index 095e3e71fed..9937cfe095b 100644
+--- a/drivers/video/bridge/dp501.c
++++ b/drivers/video/bridge/dp501.c
+@@ -9,6 +9,7 @@
+ #include <log.h>
+ #include <backlight.h>
+ #include <panel.h>
++#include <video_bridge.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <power/regulator.h>
+@@ -206,7 +207,6 @@ struct dp501_priv {
+ 	struct udevice *chip2;
+ 
+ 	struct udevice *vdd;
+-	struct gpio_desc reset_gpio;
+ 	struct gpio_desc enable_gpio;
+ };
+ 
+@@ -484,16 +484,19 @@ static int dp501_panel_timings(struct udevice *dev,
+ 	return 0;
+ }
+ 
+-static void dp501_hw_init(struct dp501_priv *priv)
++static void dp501_hw_init(struct udevice *dev)
+ {
+-	dm_gpio_set_value(&priv->reset_gpio, 1);
++	struct dp501_priv *priv = dev_get_priv(dev);
++	struct video_bridge_priv *uc_priv = dev_get_uclass_priv(dev);
++
++	dm_gpio_set_value(&uc_priv->reset, 1);
+ 
+ 	regulator_set_enable_if_allowed(priv->vdd, 1);
+ 	dm_gpio_set_value(&priv->enable_gpio, 1);
+ 
+ 	udelay(100);
+ 
+-	dm_gpio_set_value(&priv->reset_gpio, 0);
++	dm_gpio_set_value(&uc_priv->reset, 0);
+ 	mdelay(80);
+ }
+ 
+@@ -521,14 +524,6 @@ static int dp501_setup(struct udevice *dev)
+ 	}
+ 
+ 	/* get gpios */
+-	ret = gpio_request_by_name(dev, "reset-gpios", 0,
+-				   &priv->reset_gpio, GPIOD_IS_OUT);
+-	if (ret) {
+-		log_debug("%s: Could not decode reset-gpios (%d)\n",
+-			  __func__, ret);
+-		return ret;
+-	}
+-
+ 	ret = gpio_request_by_name(dev, "enable-gpios", 0,
+ 				   &priv->enable_gpio, GPIOD_IS_OUT);
+ 	if (ret) {
+@@ -544,7 +539,7 @@ static int dp501_setup(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
+-	dp501_hw_init(priv);
++	dp501_hw_init(dev);
+ 
+ 	/* get EDID */
+ 	return panel_get_display_timing(priv->panel, &priv->timing);
+@@ -558,8 +553,8 @@ static int dp501_probe(struct udevice *dev)
+ 	return dp501_setup(dev);
+ }
+ 
+-struct panel_ops dp501_ops = {
+-	.enable_backlight	= dp501_attach,
++static const struct video_bridge_ops dp501_ops = {
++	.attach			= dp501_attach,
+ 	.set_backlight		= dp501_set_backlight,
+ 	.get_display_timing	= dp501_panel_timings,
+ };
+@@ -571,7 +566,7 @@ static const struct udevice_id dp501_ids[] = {
+ 
+ U_BOOT_DRIVER(dp501) = {
+ 	.name		= "dp501",
+-	.id		= UCLASS_PANEL,
++	.id		= UCLASS_VIDEO_BRIDGE,
+ 	.of_match	= dp501_ids,
+ 	.ops		= &dp501_ops,
+ 	.probe		= dp501_probe,
 -- 
 2.43.0
 
