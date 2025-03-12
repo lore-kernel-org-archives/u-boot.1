@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13CEAC28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:16:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56BE2C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:17:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 174A581D3B;
-	Wed, 12 Mar 2025 19:15:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62F2781DE9;
+	Wed, 12 Mar 2025 19:15:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EKs8y4sR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aLvMCyEF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F19F81BC0; Wed, 12 Mar 2025 19:15:45 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 371C581D3B; Wed, 12 Mar 2025 19:15:46 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F71C81D3B
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A15981DE5
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e5cd420781so118295a12.2
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:43 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac27cb35309so26771666b.2
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1741803343; x=1742408143; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZAJo3RL5dNjfdCQGJhV7XgxBcvQUmHJT2a6uwcF/COk=;
- b=EKs8y4sRqzVhYNe+eVbq2DfLAsDfeijYhlZGgOkZZCCPBihPgwffMUDrmJsstLmGCa
- kD//nTPgdWtcOzA9gz7n1nlIubEd60KSX68MIk8LK01H+H63CCSi5PLO+U+/T4yBGvu4
- ovUnSVtZe20dPeBp3ZwB5Ngxt85ZcOsS+YpsIDbJVKtWYk9Tc8ifCcWJGz/lmmPJYAmn
- U9dfN7UUilAo7GN7CkU7zfb69+8nvp3MyFhg0ZYfiEA3s9ejDQYbizIvmtiSKqX5FGo9
- B7A4pqJd/m17QqI0shYrr6hkr9Wcl+hVeAr1j4Fzu9fYZVNE/g6YD74xxFBrAeS9W7z9
- FtvQ==
+ bh=l83AbYaPIyJb8S9zm8Om5eZQ13eyV+4ojnTyPfGvF0A=;
+ b=aLvMCyEFDv6zrqjU9G224aU/ml0KnInFgBfrPH9+XkxGiEicA4vl55JMZugR17WA0i
+ bYL4SWHVJ8Gu+0jI0VOVxdlNQu8e5jlgu4DbuI9eusgLNIqr4OkHSyBrU1iOx5nkzraN
+ 0JyKWmZ3YN45ymQwgFzVpvQmRUKWp5iH7AlrAqzzvEbEXUtgEbuSYGkH09wkthMGCxW4
+ uUguRoZht+HiWjhXNTO4Dso8MjtRtNaoNg64/hQ+kbMrom6stNinhl8ErZ16EhODzhkM
+ BgBu0xbHFxRYnEhMnqAhWRFqx8MOObudMeJhcx7PYT2UTaAFaj7RBIs5aniIhXNRK8SH
+ 9Q2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1741803343; x=1742408143;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZAJo3RL5dNjfdCQGJhV7XgxBcvQUmHJT2a6uwcF/COk=;
- b=hYesHpSkphYZO2Q/bD/itD1LnhqTcpp9jgrD8lIlTTJ3mIwNTcZCvdkynLQ1UIlCqx
- wkoA5eRLs/Bw/7EwtbKsBazfdyrLt3wWXTsa/dWdb5ByqHbcoLlCmZwEfBnHxaCDEPrV
- 4QUbmqtpSaHBnQW9QwpP5atJmUG9xDyDAGqMNTixrZFSCj7dZXfWOm4OzcrzwLM8/S1d
- v9KAqch/0fm6HBo0o/E59LpkI4mPJ0QgYlgolw+8v5YJ7f4YvSqitq7vEnJPFQtzkq2Z
- HXTu6DI24qPvDRRr2hOp2wb7y/8GfBrNJdPwLXtP+DLOWRAQF5vRsPxKl0QAmB0lHxTn
- /3wQ==
-X-Gm-Message-State: AOJu0YylkWmyuvjiWT75TWCzLFScwKQwJKLtAytwU3fhlvsfeM6iiRk/
- aCo1IAVJ0lITrp2pbGusyNJBaFxbJ5waxcBi2YZd/KsDO+GXp6yUGEghQg==
-X-Gm-Gg: ASbGnctG1mEDCtdFC+DRA0zyVherY35GoBM822eDdmZP30Px71OakBNB/Ys5xAIKUNo
- FYu+mRdIuxG0Mg7ajroPASflZAirinjdvkFTT8GaAgT34ImDTZ1ihFEVShuMXhw4+fIrTti8AvN
- 86NvPXeW8J/C9LFN5v3NrkPVAFstBLv+ZverpyNc0MY5YJzwaAoKwc+3AYVSfZmRe7GZ4EcmtMp
- hFPlqD3vwqBkpjcVj4dXn615znlePbDPip1+z4+TV0eHhHSmVUR7F6F+wJ1A3SYxWDCwzSNJss0
- TdCIvYnPsXWHn4jOPRMNS6umICFif8EKy8Se
-X-Google-Smtp-Source: AGHT+IECbQFi3oLfu2evwO5LsfY4P6ap5TCC4/h79JZKSzKOSIoXyBFrqaMudJvK5d0FKWb4NuWa4g==
-X-Received: by 2002:a17:907:3558:b0:ac2:7b08:7dc3 with SMTP id
- a640c23a62f3a-ac27b08917emr1650764766b.20.1741803342580; 
- Wed, 12 Mar 2025 11:15:42 -0700 (PDT)
+ bh=l83AbYaPIyJb8S9zm8Om5eZQ13eyV+4ojnTyPfGvF0A=;
+ b=OPyIfWHrkRf6gxXFZcJrSJqgre+tPLmHZDUy9NmtlNv+mmfXxFEwvbz9cilHHgQ5ZK
+ yANOyLZViDQzhbo/Ej45kfFk7P9+nXKi7QsyZEBrA+ux6ep0fQjOB1tnNmmEUSy6s4X8
+ sZZKw/zrReWfNhqshHrfHZc8o2lxGDlHAzHEP9jmomGKZ1+n/LVsp6m/exh9PakQeDZ3
+ 0Ip8q1BgkFzoplWuEpmfa/OFBwhMsbGekm927N3U2lNDg1e8Dy4xA+HXxZpgZtNzTx/g
+ +61qbOqE5T8MWuaimshrFtejFMd4uZrWOo1wAbzcPstGk900KnPveY1STulWPAXkQgwG
+ O0dw==
+X-Gm-Message-State: AOJu0YwJA4bhWHfn5RJWv55nCZQSnEL5nHjzi7JjKmaT4I4LMOdG2QyG
+ E8AgDCSnrSfyqLbpFP6PHDdN+7HIiri1eRmm3rGuSCndp8PZBwie
+X-Gm-Gg: ASbGncvu+Cf6Wfe1AWDxj7VnfSU4lDjnfFDkhKdiS44bELgN55SrvAnRQJrkgqa6EqA
+ 3wRL2GCQP8cnzML8J21JeFSkwuzKPNlMJIiqf3C/EPoWNnj8Wveoa2+OgdZeZWESw6wwmEkexNp
+ 1dB90pGCBVc4pLBhSKQClA8VlC4UHabs5PaR0BiFX5z1qDkzTdmkl8OQqfY2s6n7YYuW+M6bF0S
+ xoqJoYXwaThctyIOdd05WARrFT25nBZzzKqqD1Nc7fIIuqOJM4BlM4CrD5p47uWyVcGhJECQ22K
+ jbpDQeoWJ85QkKJLTrCo0PcQy+qa3iOGiRQP
+X-Google-Smtp-Source: AGHT+IHSJJr60cj8yep6ehb7vPIyu3v5RHJHXtjrzGR3ISG8FWWKxePSXnQd/MY1abde8lgxS/EkMw==
+X-Received: by 2002:a17:907:724f:b0:ac2:63a9:df0b with SMTP id
+ a640c23a62f3a-ac2b9ea18abmr1137855566b.35.1741803343498; 
+ Wed, 12 Mar 2025 11:15:43 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac28c11561dsm641906666b.145.2025.03.12.11.15.41
+ a640c23a62f3a-ac28c11561dsm641906666b.145.2025.03.12.11.15.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:15:42 -0700 (PDT)
+ Wed, 12 Mar 2025 11:15:43 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 09/11] video: renesas-r69328: add power supplies
-Date: Wed, 12 Mar 2025 20:15:21 +0200
-Message-ID: <20250312181523.121313-10-clamor95@gmail.com>
+Subject: [PATCH v1 10/11] video: samsung-ltl106hl02: add missing LPM flag
+Date: Wed, 12 Mar 2025 20:15:22 +0200
+Message-ID: <20250312181523.121313-11-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312181523.121313-1-clamor95@gmail.com>
 References: <20250312181523.121313-1-clamor95@gmail.com>
@@ -98,70 +98,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert enable GPIO into a set of supplies.
+Add missing MIPI_DSI_MODE_LPM mode flag.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/renesas-r69328.c | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ drivers/video/samsung-ltl106hl02.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/video/renesas-r69328.c b/drivers/video/renesas-r69328.c
-index 164285e3c8e..a4d03fef8a3 100644
---- a/drivers/video/renesas-r69328.c
-+++ b/drivers/video/renesas-r69328.c
-@@ -32,6 +32,9 @@
- #define R69328_POWER_SET	0xD1
+diff --git a/drivers/video/samsung-ltl106hl02.c b/drivers/video/samsung-ltl106hl02.c
+index 5e6c11c4be3..1efc9fca610 100644
+--- a/drivers/video/samsung-ltl106hl02.c
++++ b/drivers/video/samsung-ltl106hl02.c
+@@ -129,7 +129,7 @@ static int samsung_ltl106hl02_probe(struct udevice *dev)
+ 	/* fill characteristics of DSI data link */
+ 	plat->lanes = 4;
+ 	plat->format = MIPI_DSI_FMT_RGB888;
+-	plat->mode_flags = MIPI_DSI_MODE_VIDEO;
++	plat->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_LPM;
  
- struct renesas_r69328_priv {
-+	struct udevice *vdd;
-+	struct udevice *vddio;
-+
- 	struct udevice *backlight;
- 
- 	struct gpio_desc enable_gpio;
-@@ -159,10 +162,15 @@ static int renesas_r69328_of_to_plat(struct udevice *dev)
- 		return ret;
- 	}
- 
--	ret = gpio_request_by_name(dev, "enable-gpios", 0,
--				   &priv->enable_gpio, GPIOD_IS_OUT);
-+	ret = device_get_supply_regulator(dev, "vdd-supply", &priv->vdd);
-+	if (ret) {
-+		log_err("Cannot get vdd-supply: ret = %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = device_get_supply_regulator(dev, "vddio-supply", &priv->vddio);
- 	if (ret) {
--		log_err("could not decode enable-gpios (%d)\n", ret);
-+		log_err("Cannot get vddio-supply: ret = %d\n", ret);
- 		return ret;
- 	}
- 
-@@ -181,14 +189,21 @@ static int renesas_r69328_hw_init(struct udevice *dev)
- 	struct renesas_r69328_priv *priv = dev_get_priv(dev);
- 	int ret;
- 
--	ret = dm_gpio_set_value(&priv->enable_gpio, 1);
-+	ret = regulator_set_enable_if_allowed(priv->vddio, 1);
- 	if (ret) {
--		log_debug("%s: error changing enable-gpios (%d)\n",
-+		log_debug("%s: enabling vddio-supply failed (%d)\n",
- 			  __func__, ret);
- 		return ret;
- 	}
- 	mdelay(5);
- 
-+	ret = regulator_set_enable_if_allowed(priv->vdd, 1);
-+	if (ret) {
-+		log_debug("%s: enabling vdd-supply failed (%d)\n",
-+			  __func__, ret);
-+		return ret;
-+	}
-+
- 	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
- 	if (ret) {
- 		log_debug("%s: error entering reset (%d)\n",
+ 	return samsung_ltl106hl02_hw_init(dev);
+ }
 -- 
 2.43.0
 
