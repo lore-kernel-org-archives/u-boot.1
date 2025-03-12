@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BBB9C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:23:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D414AC28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:23:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ABC581CA4;
-	Wed, 12 Mar 2025 19:23:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A6313819AA;
+	Wed, 12 Mar 2025 19:23:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AoeGM1++";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hJvtxRNP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CF798169D; Wed, 12 Mar 2025 19:23:23 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id BB0B281D25; Wed, 12 Mar 2025 19:23:24 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B2F4807D7
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:23:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A65CC819AA
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:23:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6e91d323346so2272016d6.1
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:23:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5dc89df7eccso106348a12.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:23:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741803799; x=1742408599; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VHt11LqNXlzf7bOrx67kbBtZg27ZFAxjWVCGQGgj7mo=;
- b=AoeGM1++wnvVMZKdXP/LIEJ2gWXm3vADnEpDPipRa1yjCeKwv+SZNx7Kw65IRRrfIb
- gdYaxL7rM1IckXAwzkcb9k036HGuhZiNNw5Znps3aBEHUPYaQpQ8+1Pm6w6SL3io+37R
- OPWOWjbE0baKN0N3e2yqXFiV3XU1EQEFCb5a8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741803799; x=1742408599;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741803801; x=1742408601; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VHt11LqNXlzf7bOrx67kbBtZg27ZFAxjWVCGQGgj7mo=;
- b=WKJ8MJ5kjwu0dv8uiXMp0Q7nNT6KoDCDr1PyhDWEp2yNMiu4q0xHBtZ5VQNzPVb1fS
- 75IUDDREBJOZCYsrPgwOdLDE6cdqUzboutDcg5z300aJFIGYfKLhuc2c4hcNd5ElQLBW
- /NUzJGXdDop7Nogcu3Byg4Sz5HYkNdmJSZ423/JtL/uTGnll1OmMfWzA14LpQWdfJS/2
- ElMOQxvLLEvqVE1CuFo/H4ytZVTGV7DiUjUNydfGG1w8D07rIFVldlL/9N9z3a9RYxUM
- dtwIRnn7v/1Nh+/IlIsAg3nQ+1I5LXi59kx1JLAAgw4fMJFcaHi6cwf6ENsq8A1akL1Z
- 8+Sg==
-X-Gm-Message-State: AOJu0Yyg/lB0Jpqe0tcytgJWK+kqcLM7X8faPoxyIYnq0/Pe4NG3EH/S
- JSOXbZSn3vxLUy5Q7doBLJ907ZUTLpOThYJNkMLfVhImpdHtYHdWXyZkPQEJpb0=
-X-Gm-Gg: ASbGncsMOtBEx33djGWeTe5PNwtknDi19XmeVbQVqv47NcaDdhhdFGZJ0czHBh3hRik
- mUAaUSFComg14Q19oPSaERdzqwpQGn1yF6vdo8U6889fQ3x5EaDRPlX0AgeSpVNIhYfNEMl/AdK
- Q1RnFfl/+9QUOT6LmkPngEY3s0st1AghF7x0bLHX1DnNyLg1asR8hBr3g0gk6sCC/8Sm6KRVWQy
- 2LVmt1iUfcawGc84x+NxtnsP+4FJMzya0PaqXK/iWFqqtJBefK8Rg9eLyNQ0X3bCn6u3EMFglcn
- G1RwHPHmyXcODKTK9uMDkIwr9wmInJc5uVoJsW/mOvK8JA==
-X-Google-Smtp-Source: AGHT+IFWIR6Qt6iWxPj1XndGoJanlrxwhOsaadVKO2YG2vZekDimF2eL431gz7PxBO+5TlGcjdZgEQ==
-X-Received: by 2002:a05:6214:3288:b0:6e8:8e91:fb2 with SMTP id
- 6a1803df08f44-6eadb2cd296mr11653686d6.0.1741803799475; 
- Wed, 12 Mar 2025 11:23:19 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e8f707c61csm87646386d6.4.2025.03.12.11.23.18
+ bh=+ikSecYdRMIi88QkvinMOo7L18IbSQWpRtAdg0JNEXM=;
+ b=hJvtxRNPk78jGiD7pN859MVwIdy5FkyuP7Bgre6vCKAJM9+AlX+8ggJtOG0lGFX1/q
+ R3k3R8x7nojyn248Mp7rYcr0A5D2VBur58h6ye+N1RcLyrkcMpGcNztx5Q2yxJ+2sksm
+ yaysoFBOmGJ571/Vn/LtiTmBlBS41VY/eUvJh7fb5D13EZjToOAjV4oMB16OEL/pic71
+ iY/LCv4XbE+54MJjc8Wr2L6RrZhT0vaB2pzchQNLX19TZ7/en2sSMi5BFSmcSckTs2ir
+ JEO2wf9rjYTFWqaNyX+272mO/0Qz5jzneelkcXTrfkn4yeD4QwOVYe59s18QaW5Dxsj3
+ qs3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741803801; x=1742408601;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+ikSecYdRMIi88QkvinMOo7L18IbSQWpRtAdg0JNEXM=;
+ b=tsUsUqDlrzq4cI1diDtfLIg1aEO8g+mPFk2G8WKNlK4FjPHxlRcNdOkXiYmLfpOiz0
+ 8/I4Irs3C0/8sEBzHVDOp2W+GSfcai+kbEj75RndO+wDzJxD3cEe8OyZdZpmO/4+rVCL
+ 7+rnXjctKF3tmxmjxw4Wb+LR97iAf2yv8meSUeX6+NmMRhhzjtmQep+mVTqKLBpNXgah
+ zmvtAMsOZIDgrO7eFyC12emShkvokgZ+nk8/isuaTzZ6wACvb61+9CuQ9TDr2Lmedg3+
+ +iD8QMQSZg8VxGfulUmztkaIKjSYS+6K9zrryp68i8uwGt5HibZ5EEq6rV3FhiylU4kG
+ fIBA==
+X-Gm-Message-State: AOJu0YwGnJ6vwgwGiKe8IT6uxgc94Y2H4cjfag39Spk+4ZQtLSGZXT+w
+ BGLR1ZgHtwO7Pyr94ALD9w3VSmzwm9Yq1GfamHUr9HKEkVXVqfu8/drpDw==
+X-Gm-Gg: ASbGnctDFwmMyfI2NMsE7qKOZQf3PLnR0zdBzoEvgxsipucuNb+joegTHeDCL197ISz
+ HllfSyljTBN2gGHR4Z8yYbbfZs6GaC2LNNDZy9ADxS6xLB3jclL76SaeVvZtuIVU7SFvynPN64J
+ FJgG2kDAbjK1Cir0HNcvfuLTc9I7siykVoQzu+G0WRPubZLc5QWm9pFauNbuRtla7F2PPQPsflh
+ nTTw0PcfuqUgAw86JDuJB3Y9WHLsrcBbbzMxMZr+5drpLPc/6MhoKRwqmUaxqS05P5mBzi7jGNZ
+ FPGsW0ph4D9h3rKp4a/zu2rwAX4WbgN+5efy
+X-Google-Smtp-Source: AGHT+IHBrk0MbHAUg7m7iYlQAGbtbvVnUXEJoyPNVmJZtfVRjKU/tDhhY7zcKdzyAby6hv3DA1eW8g==
+X-Received: by 2002:a05:6402:5113:b0:5e7:b011:6c09 with SMTP id
+ 4fb4d7f45d1cf-5e7b0116d2amr5797740a12.18.1741803800899; 
+ Wed, 12 Mar 2025 11:23:20 -0700 (PDT)
+Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e5c7669ff1sm9851674a12.53.2025.03.12.11.23.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:23:18 -0700 (PDT)
-Date: Wed, 12 Mar 2025 12:23:16 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com
-Subject: Re: [PATCH v3] spl: remove usage of CMD_BOOT[IZ] from image parsing
-Message-ID: <20250312182316.GX2640854@bill-the-cat>
-References: <20250312124757.789013-1-anshuld@ti.com>
+ Wed, 12 Mar 2025 11:23:20 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 1/3] video: backlight: lm3533: add more flexibility with
+ device tree
+Date: Wed, 12 Mar 2025 20:20:12 +0200
+Message-ID: <20250312182014.121568-2-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250312182014.121568-1-clamor95@gmail.com>
+References: <20250312182014.121568-1-clamor95@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tIicPfH2/jIsQj33"
-Content-Disposition: inline
-In-Reply-To: <20250312124757.789013-1-anshuld@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,127 +97,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Configure LM3533 based on preliminary device tree configuration.
 
---tIicPfH2/jIsQj33
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ drivers/video/lm3533_backlight.c | 65 +++++++++++++++++++++++++++++---
+ 1 file changed, 59 insertions(+), 6 deletions(-)
 
-On Wed, Mar 12, 2025 at 06:17:56PM +0530, Anshul Dalal wrote:
+diff --git a/drivers/video/lm3533_backlight.c b/drivers/video/lm3533_backlight.c
+index 6b51fa0628e..a1a7397cbdc 100644
+--- a/drivers/video/lm3533_backlight.c
++++ b/drivers/video/lm3533_backlight.c
+@@ -7,6 +7,7 @@
+ 
+ #include <backlight.h>
+ #include <dm.h>
++#include <dm/ofnode.h>
+ #include <i2c.h>
+ #include <log.h>
+ #include <linux/delay.h>
+@@ -24,9 +25,23 @@
+ #define LM3533_OVP_FREQUENCY_PWM_POLARITY		0x2C
+ #define LM3533_BRIGHTNESS_REGISTER_A			0x40
+ 
++#define LM3533_BOOST_OVP_16V				16000000UL
++#define LM3533_BOOST_FREQ_500KHZ			500000UL
++
+ struct lm3533_backlight_priv {
+ 	struct gpio_desc enable_gpio;
+ 	u32 def_bl_lvl;
++
++	/* Core */
++	u32 boost_ovp;
++	u32 boost_freq;
++
++	/* Backlight */
++	u32 reg;
++	u16 max_current;		/* 5000 - 29800 uA (800 uA step) */
++	u8 pwm;				/* 0 - 0x3f */
++	bool linear;
++	bool hvled;
+ };
+ 
+ static int lm3533_backlight_enable(struct udevice *dev)
+@@ -92,14 +107,12 @@ static int lm3533_backlight_set_brightness(struct udevice *dev, int percent)
+ 	return 0;
+ }
+ 
+-static int lm3533_backlight_probe(struct udevice *dev)
++static int lm3533_backlight_of_to_plat(struct udevice *dev)
+ {
+ 	struct lm3533_backlight_priv *priv = dev_get_priv(dev);
++	ofnode child;
+ 	int ret;
+ 
+-	if (device_get_uclass_id(dev->parent) != UCLASS_I2C)
+-		return -EPROTONOSUPPORT;
+-
+ 	ret = gpio_request_by_name(dev, "enable-gpios", 0,
+ 				   &priv->enable_gpio, GPIOD_IS_OUT);
+ 	if (ret) {
+@@ -107,8 +120,47 @@ static int lm3533_backlight_probe(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
+-	priv->def_bl_lvl = dev_read_u32_default(dev, "default-brightness-level",
+-						LM3533_BL_MAX_BRIGHTNESS);
++	priv->boost_ovp = dev_read_u32_default(dev, "ti,boost-ovp-microvolt",
++					       LM3533_BOOST_OVP_16V);
++
++	/* boost_ovp is defined in microvolts, convert to enum value */
++	priv->boost_ovp = priv->boost_ovp / (8 * 1000 * 1000) - 2;
++
++	priv->boost_freq = dev_read_u32_default(dev, "ti,boost-freq-hz",
++						LM3533_BOOST_FREQ_500KHZ);
++
++	/* boost_freq is defined in Hz, convert to enum value */
++	priv->boost_freq = priv->boost_freq / (500 * 1000) - 1;
++
++	/* Backlight is one of children but has no dedicated driver */
++	ofnode_for_each_subnode(child, dev_ofnode(dev)) {
++		if (ofnode_device_is_compatible(child, "ti,lm3533-backlight")) {
++			const char *node_name = ofnode_get_name(child);
++
++			if (!strcmp(&node_name[10], "1"))
++				priv->reg = 1;
++			else
++				priv->reg = 0;
++
++			priv->max_current = ofnode_read_u32_default(child, "ti,max-current-microamp",
++								    5000);
++			priv->pwm = ofnode_read_u32_default(child, "ti,pwm-config-mask", 0);
++
++			priv->def_bl_lvl = ofnode_read_u32_default(child, "default-brightness",
++								   LM3533_BL_MAX_BRIGHTNESS);
++
++			priv->linear = ofnode_read_bool(child, "ti,linear-mapping-mode");
++			priv->hvled = ofnode_read_bool(child, "ti,hardware-controlled");
++		}
++	}
++
++	return 0;
++}
++
++static int lm3533_backlight_probe(struct udevice *dev)
++{
++	if (device_get_uclass_id(dev->parent) != UCLASS_I2C)
++		return -EPROTONOSUPPORT;
+ 
+ 	return 0;
+ }
+@@ -127,6 +179,7 @@ U_BOOT_DRIVER(lm3533_backlight) = {
+ 	.name		= "lm3533_backlight",
+ 	.id		= UCLASS_PANEL_BACKLIGHT,
+ 	.of_match	= lm3533_backlight_ids,
++	.of_to_plat	= lm3533_backlight_of_to_plat,
+ 	.probe		= lm3533_backlight_probe,
+ 	.ops		= &lm3533_backlight_ops,
+ 	.priv_auto	= sizeof(struct lm3533_backlight_priv),
+-- 
+2.43.0
 
-> Using CMD_* configs from spl doesn't make logical sense. Therefore this
-> patch replaces the checks for CMD_BOOT[IZ] with newly added configs
-> SPL_HAS_BOOT[IZ].
->=20
-> An imply clause has been added for CMD_BOOTZ to avoid breaking configs
-> that rely on CMD_BOOTZ in falcon boot. There is no such need for
-> CMD_BOOTI since it's already enabled by default for the platforms that
-> support the image format.
->=20
-> More info:
-> https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
->=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
-> Changes in v3:
->  * Add imply clause for CMD_BOOTZ to enable SPL_HAS_BOOTZ
->  * Fix broken check for bootz_setup
-> v2: https://lore.kernel.org/u-boot/20250312094241.629707-1-anshuld@ti.com/
-> Changes in v2:
->  * Add SPL_HAS_BOOT[IZ] configs
-> v1: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.co=
-m/
-> ---
->  arch/arm/lib/Makefile |  4 ++--
->  cmd/Kconfig           |  1 +
->  common/spl/Kconfig    | 13 +++++++++++++
->  common/spl/spl.c      |  5 +++--
->  4 files changed, 19 insertions(+), 4 deletions(-)
->=20
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index 1c95dd6fed2..e857adddd03 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -36,8 +36,8 @@ obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o zimage.o
->  else
->  obj-$(CONFIG_$(PHASE_)FRAMEWORK) +=3D spl.o
->  ifdef CONFIG_SPL_FRAMEWORK
-> -obj-$(CONFIG_CMD_BOOTI) +=3D image.o
-> -obj-$(CONFIG_CMD_BOOTZ) +=3D zimage.o
-> +obj-$(CONFIG_SPL_HAS_BOOTI) +=3D image.o
-> +obj-$(CONFIG_SPL_HAS_BOOTZ) +=3D zimage.o
->  endif
-
-This Makefile hunk is weird and not quite correct today, and this change
-makes it more odd. We should drop the CONFIG_SPL_FRAMEWORK check because
-we're already in an CONFIG_XPL_BUILD check, and since we're making
-needing these objects explicit now the very rare case of
-ARM+SPL+!SPL_FRAMEWORK won't try and include these when not required.
-
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index a04fcaa0e08..9f2ba4d02f8 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -352,6 +352,7 @@ config BOOTM_ELF
-> =20
->  config CMD_BOOTZ
->  	bool "bootz"
-> +	imply SPL_HAS_BOOTZ
->  	help
->  	  Boot the Linux zImage
-> =20
-
-We don't need this hunk at all, we already (should) be getting the right
-file via the current logic in arch/arm/lib/Makefile
-
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 21a5cefee7a..e0e804ae8dc 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1153,6 +1153,19 @@ config SPL_OS_BOOT
->  	  Enable booting directly to an OS from SPL.
->  	  for more info read doc/README.falcon
-> =20
-> +config SPL_HAS_BOOTZ
-> +	bool "Allow booting to kernel zimage from SPL"
-
-How about:
-"Allow booting a zImage style Linux kernel from SPL"
-
-> +	depends on SPL_OS_BOOT
-> +	help
-> +	  Boot a linux zimage from memory in falcon boot.
-> +
-> +config SPL_HAS_BOOTI
-> +	bool "Allow booting to kernel image from SPL"
-
-How about:
-"Allow booting an Image style Linux kernel from SPL"
-
-> +	depends on SPL_OS_BOOT
-> +	default y if ARM64 || RISCV || SANDBOX
-
-Do we need SANDBOX here?
-
---=20
-Tom
-
---tIicPfH2/jIsQj33
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfR0RQACgkQFHw5/5Y0
-tyxfVAv+MM6qpNrZFwVMggEvmKwF9gruF1npVXNHYx76YWzh8+CEhMPk8ZDdGF1c
-cRlyZTQPfmx1NSwfXD0gwotghAJGf8sGCdQsgyzDQDXCJ0J+5UuefyGYMSibUD9v
-o5h/zVZEuULDvmTyLckFHkF1iNrOts0I3EysBrriMzaNQa/wzv5ASaa1Oqefq8VA
-mqdRoL5qO/fLBDBphOErPrICPv4nvqrpH4WyuHBois3HECGAHCAWRu/7iKWGLnA5
-WpSdW8aAgUTuW2I5dUGZDNgHeeXMis6wTvUt+jAW7WqGtUW17lxFbVMyj56R+H9B
-2A9PLXdAYE9k1TB5OtlLj+/vo+IVetscf2ISTX9478FBF94cpUIRKDIL985oPwp6
-CU83toVGYenoQS/+bQegCmeAoOH9Ju+LCWgRO4/xGXjrrnEtXq137W2eB7Jd4tY+
-mzn08VMUlyDxRSPna57HvK6Wy3L6SncZb4NETFWqbtrq30m/wiaW7hJ13CWmot6k
-hBHpymSi
-=WnaD
------END PGP SIGNATURE-----
-
---tIicPfH2/jIsQj33--
