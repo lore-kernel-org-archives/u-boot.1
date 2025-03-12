@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB70C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:39:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57075C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:40:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37E4F8141D;
-	Wed, 12 Mar 2025 19:39:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9693A807D7;
+	Wed, 12 Mar 2025 19:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QwuplJ0s";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="APaP0uum";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF2078141D; Wed, 12 Mar 2025 19:39:49 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 3C9228141D; Wed, 12 Mar 2025 19:40:52 +0100 (CET)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
+ [209.85.167.52])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 459C480756
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:39:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4033680756
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:40:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2f42992f608so458327a91.0
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:39:47 -0700 (PDT)
+Received: by mail-lf1-f52.google.com with SMTP id
+ 2adb3069b0e04-549967c72bcso183391e87.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:40:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741804786; x=1742409586; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/azYb3m0PpobIfy6lUlxbRmVRc2FZdOFxen+svpQ3Kk=;
- b=QwuplJ0s+rWd5nNCh1ESTdvvebl4NEDyKRYw1pc531OjNStayKQvqbvy4pNgLOzmpk
- XyVz8DExEe8L9/2Fr+Q54MmlGfsrqwXH95ACSoOhuwQyfrPGYJxhEmVCJLRxz+rD372Y
- qL/lQX6JfjyCyD5g2quksJ+2tQHXKMd9/LStD0GzVM0bOtL9P6Wn1jUxiCCssRQ4FY1M
- r3QZ8N4yxMipzWiU17OIzDorP1zmj1NGr347TLYNCuGYNirMOl1Z8o5nzVjBSEJfzvXX
- dnVipOBg5uggAnOyshWaojPic/Ty3FeSS7SypbrNcpnt+2su623B3FdqAOieIhsDcJ1b
- s+7Q==
+ d=gmail.com; s=20230601; t=1741804844; x=1742409644; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8muGU7rS11MpBmR5j3eI/cjEDjFdK/3urMK/wGqlobs=;
+ b=APaP0uumzHhV8xALiEbZUYgOvP3WICXPxkVbhynvrBzu/PV6RV/0ZsraA/ZMIc0Ws+
+ wzB8Gm3SFQP9rWrzbFFT32r86dOTc2KCy2pZ0QHovL4iSuH+7MhzDn/Izfl5LpKvg59X
+ FO7SopBYn1+TJqvBrCYhNDnPUpD9vY+NrLgh4GfGTUZydw8bLGaA1JukHpX3pkC47lWd
+ 766DxqbHgpKYtuXryfXe3R07cMWGcQW71mdhlpwnpRVJ4AmmqzrSOblkMXRBYO6zF8K1
+ wOGxGqqqn/2jIcGqMuTWcLtvlb5DorFLGlyI4kXhhqS8A7zZscQbmNtcqrlI+50ZWhxr
+ M0fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741804786; x=1742409586;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/azYb3m0PpobIfy6lUlxbRmVRc2FZdOFxen+svpQ3Kk=;
- b=O3rSv/24tf4xqckDFpNFc0vnH+1eCyM5zSFJBzVcb6r9YKGrirbv0fUZRqcqR3wpDz
- Zhb0B5q+/l2zUVEw0Un8pY7EqhdHJYAJPmV47mltgSPhzEYzGLTELMnP/avUrulIX3Jr
- RQjAnlCbuGw0WqFqUsBkJtQx3yk7WSRrei3rkplFF9A1jyZJMq2ygDmeIu2fhMQxLIYo
- +JYiIScfnHZlxUEY8U9RkPblJqojMwRO9wgPqmLzAO+djCvaPrKScfUdKub15RoG9kHb
- LE+Fnc/yU7IdarS7dtbcnE16GhiHPulJWT8+znF4UHFbQRukzPyotuKEceuP2cZEfNU7
- 1ZiQ==
-X-Gm-Message-State: AOJu0YzfSsq9st6S41VLd032YsZ5vSMvznth28qXUya7oAsCmtGNEUCC
- N5BY65eXshCIQBkfMp7JquWHL+wq//7dlUQf2a2Fx1eZRJUH9CJ/
-X-Gm-Gg: ASbGncse+gbAp1Y6K+LNTB5sax9Q1SlGeJ/MoiszDXvFUoW4f438q6u/Yd0gnD/vWmQ
- v0YJ+Y9rXuqCEAEs1X1WeGOphtV7nK49StFOYwvuH3deUIQKcBt5djL03uzTqnFU3esb+THUmsf
- PnDuC28bpF9puCu7YjJsaMZDP5t1xLfiyxq7uAtLBvy+EKlWgvY5bCu2KGwg2ZnGDBfYL7j4XT0
- Xy4qcFpPy1nrcSoxCJuXKrfV9CuTxyt+uN0C3nwPwBpC0/h+F80iwUZnP2WbTIswce/dsVnBQCb
- FdAeiJ13fSL7aKNRVktNbDat/c55d10Qs8aBjv7usZ6/9IpeOvYq+uSzex0=
-X-Google-Smtp-Source: AGHT+IFatk1Gfy5ckJVxiqozrwyVcL0eBrPd+2AO7IC8DPaIgmokfgbWYb2pyz0M66d+knYMYpfY8g==
-X-Received: by 2002:a17:90b:28c5:b0:2ee:e113:815d with SMTP id
- 98e67ed59e1d1-2ff7ce6f0demr33185977a91.8.1741804785608; 
- Wed, 12 Mar 2025 11:39:45 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:bb06:49e3:76de:6a9e])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3011823562dsm2184598a91.17.2025.03.12.11.39.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:39:45 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20250312
-Date: Wed, 12 Mar 2025 15:39:41 -0300
-Message-Id: <20250312183941.1394738-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1741804844; x=1742409644;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8muGU7rS11MpBmR5j3eI/cjEDjFdK/3urMK/wGqlobs=;
+ b=FBleG5zedjc6q5ZOnEt8ej3cdq+ERbxuSSDae3WJLtDDT9Lzwa7gw56axiCG5tf333
+ Ql5YkeTtzalZlgOXpexRw+eDdIcmx+88SoXDQs9e7rh/cXIHyx1512vuXIwVtUzLguGA
+ Sj7/Gswlc9kpZcJh8szI4gZubb5teUr1QmmA5YALr6iMQAqayMFPwksTdsvyjEGYHrPA
+ nTLZwoyufIIUGo7kALI2IfZA64OHf59fWdc79hHzo0cyQE1igPVzxa/39YAf1yS9B+2A
+ uvLlt1P/bwUk3OGo3LFaIEHMozfYPcN0hr0u9EEvhU7TlLn3x14hVQgqUACGntqT974y
+ oVhg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUr2o8yr5Yy/fXtAw3trF/Wctp147j1HRmc7XJ9Y6iuG9XUNAdBUwoabTBO4Llc2h90grbDYkQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRNO1+HrXpjR+ie18O/u0UyGzELymFtbv5YnG2PrDyjTjECOPy
+ fljZT73wWQ4I5qQwWtsekupnkdi0WLXJkSXkDWJTTM6cVkXF3weJ2vEE5Jccoeyys5tLatDUnZ6
+ /wG6fgiG/DmhWx+GmLdA5l4aJqE4=
+X-Gm-Gg: ASbGncvotWa9XfE+RI864XcA6Nhb5EcH2xMqA1BwS+0k3c4pucdHG+qBC2UWqP5/8EH
+ bLPmEHWTTG85Nxi1ldO+c7Cu6QYpv6noA4WNPENPdVk6fAqoD40QzdMVipfCcSmsVfICEe8wPoD
+ qt85E8ljnN/4AQ2INJUQ+I+x9wn05vuWL7KBrWh9MqF36S82mw4KBM2TDqPw==
+X-Google-Smtp-Source: AGHT+IH6HbS77AMFTfnJevZUhLBK1NSjX/CQyw/bD6hOKV9SQS0apD2ieUSTfT99seA22qQlASeJRKYUnmz7tffoLes=
+X-Received: by 2002:a05:6512:230e:b0:545:22ec:8b6c with SMTP id
+ 2adb3069b0e04-549910b5cf7mr7778106e87.35.1741804844289; Wed, 12 Mar 2025
+ 11:40:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1741770247-123217-1-git-send-email-ye.li@nxp.com>
+In-Reply-To: <1741770247-123217-1-git-send-email-ye.li@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 12 Mar 2025 15:40:33 -0300
+X-Gm-Features: AQ5f1Jp6i1fSkk7fKAz2i7y_GjDT_O-RUl5DDrBd5IMK5QtYGldJ60QHCJ0fddw
+Message-ID: <CAOMZO5AfRSjH=u6Q43Tg0rXfOZe5RUy1H31k7OHhOwHjDUvDfg@mail.gmail.com>
+Subject: Re: [PATCH] imx93_evk: Fix wrong VDDQ voltage setting for LPDDR4x
+To: Ye Li <ye.li@nxp.com>
+Cc: festevam@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, 
+ uboot-imx@nxp.com, ye.li@oss.nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,31 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed, Mar 12, 2025 at 10:02=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
+>
+> The default PCA9451 BUCK2 volt is 0.6v for LPDDR4x VDDQ. The codes
+> are actually used for reworking to LPDDR4 which needs VDDQ at 1.1v.
+> So remove it to avoid LPDDR4x issue.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
 
-Please pull from u-boot-imx/master, thanks.
-
-The following changes since commit a383b9bd4d7e430fe7c254297540bae596649dba:
-
-  Prepare v2025.04-rc4 (2025-03-10 17:31:52 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250312
-
-for you to fetch changes up to e1a9ff95304957a774642ff1bef2b1851a4ae96a:
-
-  imx93_evk: Fix wrong VDDQ voltage setting for LPDDR4x (2025-03-12 15:34:59 -0300)
-
-u-boot-imx-master-20250312
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25106
-
-- Fix VDDQ voltage setting for LPDDR4x on imx93_evk.
-----------------------------------------------------------------
-Ye Li (1):
-      imx93_evk: Fix wrong VDDQ voltage setting for LPDDR4x
-
- board/freescale/imx93_evk/spl.c | 5 -----
- 1 file changed, 5 deletions(-)
+Applied to u-boot-imx/master, thanks.
