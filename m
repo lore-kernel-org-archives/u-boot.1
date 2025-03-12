@@ -4,63 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E7A8C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 09:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA55C28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 10:13:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89C46801FB;
-	Wed, 12 Mar 2025 10:43:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DD1C801FB;
+	Wed, 12 Mar 2025 11:13:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EjNTpYRW";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="e+ZMu5K1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55E8B805D7; Wed, 12 Mar 2025 10:43:16 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02401801BE
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 10:43:12 +0100 (CET)
+ id BC8FB805D7; Wed, 12 Mar 2025 11:13:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C343801BE
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:13:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52C9hAEd1464496
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 12 Mar 2025 04:43:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741772590;
- bh=EF6VANPba25B5aqJu2HpGqf06o6V0p59kBgxDU7dB6A=;
- h=From:To:CC:Subject:Date;
- b=EjNTpYRW/n3UD7UmsxzXQ/9IMuiSU9jGs/ElAU9yVHZYXXux2qFUlcpHqqDCuGMLc
- oSzKkHiOQzldNpq5ZKUYZJDzNfE0LgMpSzxzxmGySs6gLONOq+n9TilkeWtgkUdM4Y
- H1oxjzSg+IBSWyhgrZ4roEwObEQRRRFLlkcWZlAo=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52C9hATY012710
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 12 Mar 2025 04:43:10 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 12
- Mar 2025 04:43:09 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 12 Mar 2025 04:43:09 -0500
-Received: from localhost (a0543016.dhcp.ti.com [172.24.227.196])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52C9h9Jm119647;
- Wed, 12 Mar 2025 04:43:09 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v2] spl: remove usage of CMD_BOOT[IZ] from image parsing
-Date: Wed, 12 Mar 2025 15:12:40 +0530
-Message-ID: <20250312094241.629707-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1741774421; x=1742379221; i=xypron.glpk@gmx.de;
+ bh=/xB9dVxLuenEWOSb9mu4+ElzQLtu04aWy2rFY8F5iLU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=e+ZMu5K1QousB8+grjusVdqK/gbTFpB3z1r21P6xmAv5hRMs2C+0rsxgNvE1CyzV
+ D5HasU/bjlBhfVsXv0PbDPAw7EsdglB8JMrK8/8CANSYnzbNfWC7lMCV2czbucqtz
+ gSnxduGepY8ETer+RH4xJbKOoJDRxxBVBxuk1vAmvEX1BwEgwEDqzqb4SLZXEWYWy
+ u4aaaNJu2Q6IUybhI9Qowkpq5RteYS/BLq1g0nDrkthzI0vKu+2fEDD6ZmOXDLaHH
+ l2vMJmdDLn4p+u6mTlWjEcFuwm9z3TfBDFE6/yIYuablTk3NwxaJm4tSMEPTF8XNn
+ kmDkCTAY4f4LD9fhCg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEUz4-1tzSlr1z9W-006SMy; Wed, 12
+ Mar 2025 11:13:41 +0100
+Message-ID: <e1237408-072c-4473-aafb-ab74196a2c71@gmx.de>
+Date: Wed, 12 Mar 2025 11:13:35 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 4/8] efi_loader: add a function to remove memory from
+ the EFI map
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>, u-boot@lists.denx.de
+References: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
+ <20250312085424.1201148-5-sughosh.ganu@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250312085424.1201148-5-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LrbQFNq0YLqN/WJ5YmH6eg04QOt4CDhqc+RfXuMHKmcL+5no4ZL
+ HVFNR4hVfoekEST3NCUTbYiVv2A7UISINacniq/t/O7+SmzvG3rXc5G429Vr6SOtmzfH9LM
+ naGnyb/kEJwMGaJPSNauSlRqcjou4RbyFrKmInSv7m8f8hup4k1zPVxB0OwzVOh5F/Hy/9o
+ QXXq3uLPJxfK4s7o2tPqQ==
+UI-OutboundReport: notjunk:1;M01:P0:t8HJ15KrL0o=;fiKx+l9a4TXMYId6+irJIMFJoLN
+ ZFtZTsgauf8T4VAvd4GJKMr3PjiX8LZfR2b2lnKbsimjnH0fMpmh+Jo8DZXiv8izLy3butjJx
+ FvaBMJE2ZYONXzz6Nlco51XZ31V8EmbgPdKHi7GJghEJe5jGXKit/hRYqI2wxi3ro+ozYiiX6
+ iM1ndO/wL8bF65WyfDDCjH1meHV1ZfDrObcE7FFsMflrAOerrCtFrnUj+4BBt/06uC4538PFC
+ Id7/Bh5C/gB6lCyd1HuJvqhjHJUtUh4bNEbpWECd3J4dE5VpnDnMNg9TqPEI6Bg5tQHKbgQu4
+ 9SWYzmZbYUnL9748HeXsJ0Y4iFIx+oDCg+ZXdlasaXcjaM0c7GPuOBB6OBahVJ9WepCiPFVhw
+ 6XzvTx5Xet+FKJWrJbqX4j6tRCpNds/2KkLIfHt9skTMLFJag+VBEI6aAGWcnk4ZbB8G3d4rY
+ NeRbLH2LgiiKTA6t94C9KHftuBzDRB7Y5BF+1F43K+NML+vuaGCHzyrr7DHYYMgd12PFBilDg
+ 6UM8mp/Jsf7zkINwwM0S0kQJ9/OYzDn2MIQnOqdkRUpVcEccs2NTQvOt0aRTswjY4h/4Abp/s
+ CElWUMvkTA2gHNZ9LxbzA9tBJON/WIZc0/reH+6vkqZiLdFt/r97ZteuckrVOlx5FPLafZlmE
+ T1kpzkJSEXvwTIRkWZBa0z7QdL9EY+f9y9B7m8TbOwxmVMC6UT1qEzQy/fZe0eiIYgNG+wLic
+ FM+maoP3pvOwOZdilmuj7PlD/1Gz6nbsfHo115+8o6G5AOAsdtGCrfy2hRS64iqrAamAEZV4g
+ BrMWLb4YbhNWo9b21Aojogf5aTI2m44hkE84n4dxbiJp+QuyJccCKLOwr0alKS5WQtLzZ+fpk
+ PROv3n4H3xt4NH+iknAo98ivlxQYyO3g4YIEq80JORuHwNshybVDHWe4pDNwjAI6ExE8SuZS0
+ 5PC1dxSGIMtgrbxvZoBLJA/p/dDXSrZQRlS9am2c7qOfLQU5S7HgZ/GWD9Gq/O2DH4PMESif2
+ +biu71lrLIvWBJD86DLZchZ4MA9U0qjUT6/ApO3hgFBopZpW3ILtRE7QTZ3Z1LogZ6hBYwBos
+ eONGzunFJ0+GqdQyv77MNjFIOYigTcmtwvJnzVKlYbNBWmrCiwr6rXjg1mbjhxae61Ps+Rsdz
+ fi69ZnyDAWURrSElfREOpZLpzRryc6rfYfTtdElQJTGt1rJkPJJxfonc65N5wYUksFaAQv3q3
+ P+72r9KjWiqFcdXmc4SUkCuGipdBFe5x5wBK55dSGFSRvls181S1weBgYsrCeJ1U9xGqGnQcn
+ QFof0VQ49n74XsYzMEkYMrX96tPkB29VfFNhReOWMx8kF6YK5yoRx3wJFsVMuABv+5935uzL+
+ um7dT4tLbOt9WuemQHIidFknwjpcGjI/hoP0D45S0i/4xI1K0nTPqy8jFcP/OhkFcmQEj8wpz
+ eEJsRwv5kbEzMArwLqDj5ETwdmYk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,88 +104,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using CMD_* configs from spl doesn't make logical sense. Therefore this
-patch replaces the checks for CMD_BOOT[IZ] with newly added configs
-SPL_HAS_BOOT[IZ].
+On 12.03.25 09:54, Sughosh Ganu wrote:
+> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> With upcoming changes supporting pmem nodes, we need to remove the
+> pmem area from the EFI memory map. Add a function to do that.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+> Changes since V7: None
+>
+>   include/efi_loader.h        | 18 ++++++++++++
+>   lib/efi_loader/efi_memory.c | 56 ++++++++++++++++++++++++++-----------
+>   2 files changed, 58 insertions(+), 16 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index e9c10819ba2..c20c98c6476 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -878,6 +878,24 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory=
+_map_size,
+>   /* Adds a range into the EFI memory map */
+>   efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+>
+> +/**
+> + * efi_update_memory_map() - update the memory map by adding/removing p=
+ages
+> + *
+> + * @start:			start address, must be a multiple of
+> + *				EFI_PAGE_SIZE
+> + * @pages:			number of pages to add
+> + * @memory_type:		type of memory added
+> + * @overlap_conventional:	region may only overlap free(conventional)
+> + *				memory
+> + * @remove:			remove memory map
+> + * Return:			status code
+> + */
+> +efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_typ=
+e,
+> +				   bool overlap_conventional, bool remove);
 
-More info:
-https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
+Why do we have so many functions that are all doing nearly the same thing:
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
-Changes in v2:
- * Add SPL_HAS_BOOT[IZ] configs
-v1: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.com/
----
- arch/arm/lib/Makefile |  4 ++--
- common/spl/Kconfig    | 13 +++++++++++++
- common/spl/spl.c      |  6 +++---
- 3 files changed, 18 insertions(+), 5 deletions(-)
+* efi_map_update_notify()
+* efi_update_memory_map()
+* efi_remove_memory_map()
+* efi_add_memory_map_pg()
 
-diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index 1c95dd6fed2..e857adddd03 100644
---- a/arch/arm/lib/Makefile
-+++ b/arch/arm/lib/Makefile
-@@ -36,8 +36,8 @@ obj-$(CONFIG_CMD_BOOTZ) += bootm.o zimage.o
- else
- obj-$(CONFIG_$(PHASE_)FRAMEWORK) += spl.o
- ifdef CONFIG_SPL_FRAMEWORK
--obj-$(CONFIG_CMD_BOOTI) += image.o
--obj-$(CONFIG_CMD_BOOTZ) += zimage.o
-+obj-$(CONFIG_SPL_HAS_BOOTI) += image.o
-+obj-$(CONFIG_SPL_HAS_BOOTZ) += zimage.o
- endif
- obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
- endif
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 21a5cefee7a..36c0fb063d0 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1153,6 +1153,19 @@ config SPL_OS_BOOT
- 	  Enable booting directly to an OS from SPL.
- 	  for more info read doc/README.falcon
- 
-+config SPL_HAS_BOOTZ
-+	bool "Allow booting to kernel zimage from SPL"
-+	depends on SPL_OS_BOOT
-+	help
-+	  Boot a linux zimage from memory in falcon boot.
-+
-+config SPL_HAS_BOOTI
-+	bool "Allow booting to kernel image from SPL"
-+	depends on SPL_OS_BOOT
-+	default y if ARM64 || RISCV || SANDBOX
-+	help
-+	  Boot an AArch64 Linux Kernel image from memory in falcon boot.
-+
- config SPL_PAYLOAD_ARGS_ADDR
- 	hex "Address in memory to load 'args' file for Falcon Mode to"
- 	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 76fd56dfe4b..8905c776ea5 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -335,7 +335,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
- 		panic("** no mkimage signature but raw image not supported");
- 	}
- 
--	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
-+	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
- 		ulong start, size;
- 
- 		if (!booti_setup((ulong)header, &start, &size, 0)) {
-@@ -349,9 +349,9 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
- 			      spl_image->load_addr, spl_image->size);
- 			return 0;
- 		}
--	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) {
-+	} else if (CONFIG_IS_ENABLED(OS_BOOT) &&
-+		   IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
- 		ulong start, end;
--
- 		if (!bootz_setup((ulong)header, &start, &end)) {
- 			spl_image->name = "Linux";
- 			spl_image->os = IH_OS_LINUX;
--- 
-2.43.0
+I start failing to understand when to use which. This is getting as
+gruesome as LMB.
+
+Can't we have a single exported function with a properly defined
+interface to cover all use cases?
+
+Best regards
+
+Heinrich
+
+> +
+> +/* Remove memory from the EFI memory map */
+> +efi_status_t efi_remove_memory_map(u64 start, u64 size, int memory_type=
+);
+> +
+>   /* Called by board init to initialize the EFI drivers */
+>   efi_status_t efi_driver_init(void);
+>   /* Called when a block device is added */
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 6d00b186250..3fec40b6de5 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *ma=
+p,
+>   }
+>
+>   /**
+> - * efi_add_memory_map_pg() - add pages to the memory map
+> + * efi_update_memory_map() - update the memory map by adding/removing p=
+ages
+>    *
+>    * @start:			start address, must be a multiple of
+>    *				EFI_PAGE_SIZE
+> @@ -266,12 +266,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *=
+map,
+>    * @memory_type:		type of memory added
+>    * @overlap_conventional:	region may only overlap free(conventional)
+>    *				memory
+> + * @remove:			remove memory map
+>    * Return:			status code
+>    */
+> -static
+> -efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -				   int memory_type,
+> -				   bool overlap_conventional)
+> +efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_typ=
+e,
+> +				   bool overlap_conventional, bool remove)
+>   {
+>   	struct efi_mem_list *lmem;
+>   	struct efi_mem_list *newlist;
+> @@ -279,9 +278,9 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pa=
+ges,
+>   	uint64_t carved_pages =3D 0;
+>   	struct efi_event *evt;
+>
+> -	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
+> +	EFI_PRINT("%s: 0x%llx 0x%llx %d %s %s\n", __func__,
+>   		  start, pages, memory_type, overlap_conventional ?
+> -		  "yes" : "no");
+> +		  "yes" : "no", remove ? "remove" : "add");
+>
+>   	if (memory_type >=3D EFI_MAX_MEMORY_TYPE)
+>   		return EFI_INVALID_PARAMETER;
+> @@ -364,7 +363,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 p=
+ages,
+>   	}
+>
+>   	/* Add our new map */
+> -        list_add_tail(&newlist->link, &efi_mem);
+> +	if (!remove)
+> +		list_add_tail(&newlist->link, &efi_mem);
+> +	else
+> +		free(newlist);
+>
+>   	/* And make sure memory is listed in descending order */
+>   	efi_mem_sort();
+> @@ -401,7 +403,29 @@ efi_status_t efi_add_memory_map(u64 start, u64 size=
+, int memory_type)
+>   	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
+>   	start &=3D ~EFI_PAGE_MASK;
+>
+> -	return efi_add_memory_map_pg(start, pages, memory_type, false);
+> +	return efi_update_memory_map(start, pages, memory_type, false, false);
+> +}
+> +
+> +/**
+> + * efi_remove_memory_map() - remove memory area to the memory map
+> + *
+> + * @start:		start address of the memory area
+> + * @size:		length in bytes of the memory area
+> + * @memory_type:	type of memory removed
+> + *
+> + * Return:		status code
+> + *
+> + * This function automatically aligns the start and size of the memory =
+area
+> + * to EFI_PAGE_SIZE.
+> + */
+> +efi_status_t efi_remove_memory_map(u64 start, u64 size, int memory_type=
+)
+> +{
+> +	u64 pages;
+> +
+> +	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
+> +	start &=3D ~EFI_PAGE_MASK;
+> +
+> +	return efi_update_memory_map(start, pages, memory_type, false, true);
+>   }
+>
+>   /**
+> @@ -502,7 +526,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
+pe type,
+>
+>   	efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
+>   	/* Reserve that map in our memory maps */
+> -	ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
+> +	ret =3D efi_update_memory_map(efi_addr, pages, memory_type, true, fals=
+e);
+>   	if (ret !=3D EFI_SUCCESS) {
+>   		/* Map would overlap, bail out */
+>   		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
+> @@ -823,8 +847,8 @@ static void add_u_boot_and_runtime(void)
+>   		       uboot_stack_size) & ~EFI_PAGE_MASK;
+>   	uboot_pages =3D ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+>   		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+> -	efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE=
+,
+> -			      false);
+> +	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE=
+,
+> +			      false, false);
+>   #if defined(__aarch64__)
+>   	/*
+>   	 * Runtime Services must be 64KiB aligned according to the
+> @@ -842,8 +866,8 @@ static void add_u_boot_and_runtime(void)
+>   	runtime_end =3D (uintptr_t)__efi_runtime_stop;
+>   	runtime_end =3D (runtime_end + runtime_mask) & ~runtime_mask;
+>   	runtime_pages =3D (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+> -	efi_add_memory_map_pg(runtime_start, runtime_pages,
+> -			      EFI_RUNTIME_SERVICES_CODE, false);
+> +	efi_update_memory_map(runtime_start, runtime_pages,
+> +			      EFI_RUNTIME_SERVICES_CODE, false, false);
+>   }
+>
+>   int efi_memory_init(void)
+> @@ -878,11 +902,11 @@ int efi_map_update_notify(phys_addr_t addr, phys_s=
+ize_t size,
+>   	pages =3D efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
+>   	efi_addr &=3D ~EFI_PAGE_MASK;
+>
+> -	status =3D efi_add_memory_map_pg(efi_addr, pages,
+> +	status =3D efi_update_memory_map(efi_addr, pages,
+>   				       op =3D=3D LMB_MAP_OP_RESERVE ?
+>   				       EFI_BOOT_SERVICES_DATA :
+>   				       EFI_CONVENTIONAL_MEMORY,
+> -				       false);
+> +				       false, false);
+>   	if (status !=3D EFI_SUCCESS) {
+>   		log_err("LMB Map notify failure %lu\n",
+>   			status & ~EFI_ERROR_MASK);
 
