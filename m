@@ -4,65 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2412C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 12:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22D2EC28B30
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 12:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45372801FB;
-	Wed, 12 Mar 2025 13:53:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AA2E4805D7;
+	Wed, 12 Mar 2025 13:55:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JhoAK1hz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QQWIHh7S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07C4880756; Wed, 12 Mar 2025 13:53:57 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC18801BE
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 13:53:54 +0100 (CET)
+ id 3DF4280756; Wed, 12 Mar 2025 13:55:08 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CA1B6801FB
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 13:55:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52CCrqlk1496999
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 12 Mar 2025 07:53:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741784032;
- bh=7OgyJQEvwoRtI2R/LaieyHOpMr2pO6u/b6B6BSZPgQM=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=JhoAK1hzIkDWYKYPJzSrPZp1vyLsS7LiUksXQNDNSiN0LwiEsD7SkCqbnWFOpxBFl
- 7A6w+x24AJ2GrN3Aw75qBmBAnkAKmthlPmCfwy4nyGDb64lGMTJwWKLbA8oWZo8EXr
- /48vjIWyquXceQdLY0xju6aoFvri0qSOW8jNvLdI=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52CCrqgM073874
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 12 Mar 2025 07:53:52 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 12
- Mar 2025 07:53:52 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 12 Mar 2025 07:53:51 -0500
-Received: from localhost (a0543016.dhcp.ti.com [172.24.227.196])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52CCroYO062647;
- Wed, 12 Mar 2025 07:53:51 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac2902f7c2aso623730266b.1
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 05:55:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741784105; x=1742388905; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wDk0lBw4StLmz0D3Z4z1AEuFzG2U4Vf0yoZuuJx44uI=;
+ b=QQWIHh7Sq+RIOWDy7KMYgcHZOA3P/yrdNbGQtXaAI32/kD+plPcuoRBr6TlJWZxe3O
+ VW+kIffn2nWkUOLQAf65Y4Yo7Mwo8QLuhtscMNFmCGJh8eVkhXYjGFmfff2AtBBHgZFh
+ /UfOxF2qpAars42NCW8G9vnZFfgd0bJnKLaYdRqp4OFb65YAtGOp+ganYdLCcazyhTIw
+ 0ZCt8hCbT2ogkhY31iNi5/uTkXDXx/IHmgDeBHEfIXY0wr2OjZDFqvdrzIaxBmOl6Po0
+ 69TiyTbcE2pgEYF6I7L16d9/gbuS8pPxdgdW1mjB8Xd6waMprECteX1Ezrlpte7/hmDA
+ hHQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741784105; x=1742388905;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wDk0lBw4StLmz0D3Z4z1AEuFzG2U4Vf0yoZuuJx44uI=;
+ b=INE+0K39kRxyIlaxniKPBNxVSYadfh/6NZJa4C8vIUis9kVJgvfNauKJbWIldcjAAO
+ Sstre8C/0XMIdyXtPXtLznOiEz2iQsH2T2IxcpsSu/mU/6EiKvNco56eKPMS1N96qhhZ
+ jGACNl+EbhPzjcazb4aQ8UTHmVtWZv6cGqIKuzumuFH448M6ilHmrPvV+kbEvj8Uy99L
+ oYKydYBKCmQA4K5HLtwZoWjVuBEtLCnlI9ZNlrTk/Afv7lZSkMAQz7OyVLtoaevTX5Hh
+ l0WGmpkRt9zGpl7dnPKsaQFJBnkxuolAAjYTl3yekB5Le0BqVNyC87G+gxIhb4c+vPtY
+ xnvA==
+X-Gm-Message-State: AOJu0YzHfy9zgC8JcupycnLjRItVxBUxMTQyz72bn37Qe5rE8BVPr3Df
+ dAB/O4dP6cEEZXchPGVzimL5o1n92qWjw6/Fuju8i4bUgBum/qF9
+X-Gm-Gg: ASbGncuOi+pdH8SThcZ1jhZzcGqh2NwSUsMO6QBAh4vus6uxwDfj5cuQ1Zf4Teqlrxs
+ 41+3Rm52AKTN9iKV4e/nt8+Umf+MxGLR0T3ekpSYs65xG561gWXxvjpJIFAMQwlrZ/6nbkY5KnO
+ Dz51wHJbt8+dUUbAHs1O3h9Kbq8hFkFamIjzcL6umZfOWXuMPli6l1ab68OSIeU25n++rqfqEhB
+ Ic1XmyeXnsEFMziHg25ymsgFSIBnF42Iir4aZKHC3KQX7vPYL20UqxncY20cqkenBBibQIckCvn
+ UrXjZJaJEzRoOYeasql58ytoOnH5hp3UxNp5
+X-Google-Smtp-Source: AGHT+IFVdGlm+sEFlS/K9CVJhRCTEqPj2ORQQTl7NHo4/glX4c+sK6gimD8zqUJd7PTthN2ki9O7VQ==
+X-Received: by 2002:a17:907:7f21:b0:ac1:ecb5:7207 with SMTP id
+ a640c23a62f3a-ac252b5bd66mr2709530166b.29.1741784104851; 
+ Wed, 12 Mar 2025 05:55:04 -0700 (PDT)
+Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac239488be1sm1073100766b.74.2025.03.12.05.55.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Mar 2025 05:55:04 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Please pull u-boot-tegra staging
+Date: Wed, 12 Mar 2025 14:54:50 +0200
+Message-ID: <20250312125452.53671-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 12 Mar 2025 18:23:50 +0530
-Message-ID: <D8EAWP9N9CEV.U2POOXX6G9OB@ti.com>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: Re: [PATCH v2] spl: remove usage of CMD_BOOT[IZ] from image parsing
-From: Anshul Dalal <anshuld@ti.com>
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.17.0
-References: <20250312094241.629707-1-anshuld@ti.com>
-In-Reply-To: <20250312094241.629707-1-anshuld@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,95 +94,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed Mar 12, 2025 at 3:12 PM IST, Anshul Dalal wrote:
-> Using CMD_* configs from spl doesn't make logical sense. Therefore this
-> patch replaces the checks for CMD_BOOT[IZ] with newly added configs
-> SPL_HAS_BOOT[IZ].
->
-> More info:
-> https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
->
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
-> Changes in v2:
->  * Add SPL_HAS_BOOT[IZ] configs
-> v1: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.co=
-m/
-> ---
->  arch/arm/lib/Makefile |  4 ++--
->  common/spl/Kconfig    | 13 +++++++++++++
->  common/spl/spl.c      |  6 +++---
->  3 files changed, 18 insertions(+), 5 deletions(-)
->
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index 1c95dd6fed2..e857adddd03 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -36,8 +36,8 @@ obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o zimage.o
->  else
->  obj-$(CONFIG_$(PHASE_)FRAMEWORK) +=3D spl.o
->  ifdef CONFIG_SPL_FRAMEWORK
-> -obj-$(CONFIG_CMD_BOOTI) +=3D image.o
-> -obj-$(CONFIG_CMD_BOOTZ) +=3D zimage.o
-> +obj-$(CONFIG_SPL_HAS_BOOTI) +=3D image.o
-> +obj-$(CONFIG_SPL_HAS_BOOTZ) +=3D zimage.o
->  endif
->  obj-$(CONFIG_OF_LIBFDT) +=3D bootm-fdt.o
->  endif
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 21a5cefee7a..36c0fb063d0 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1153,6 +1153,19 @@ config SPL_OS_BOOT
->  	  Enable booting directly to an OS from SPL.
->  	  for more info read doc/README.falcon
-> =20
-> +config SPL_HAS_BOOTZ
-> +	bool "Allow booting to kernel zimage from SPL"
-> +	depends on SPL_OS_BOOT
-> +	help
-> +	  Boot a linux zimage from memory in falcon boot.
-> +
-> +config SPL_HAS_BOOTI
-> +	bool "Allow booting to kernel image from SPL"
-> +	depends on SPL_OS_BOOT
-> +	default y if ARM64 || RISCV || SANDBOX
-> +	help
-> +	  Boot an AArch64 Linux Kernel image from memory in falcon boot.
-> +
->  config SPL_PAYLOAD_ARGS_ADDR
->  	hex "Address in memory to load 'args' file for Falcon Mode to"
->  	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index 76fd56dfe4b..8905c776ea5 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -335,7 +335,7 @@ int spl_parse_image_header(struct spl_image_info *spl=
-_image,
->  		panic("** no mkimage signature but raw image not supported");
->  	}
-> =20
-> -	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
-> +	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
->  		ulong start, size;
-> =20
->  		if (!booti_setup((ulong)header, &start, &size, 0)) {
-> @@ -349,9 +349,9 @@ int spl_parse_image_header(struct spl_image_info *spl=
-_image,
->  			      spl_image->load_addr, spl_image->size);
->  			return 0;
->  		}
-> -	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) =
-{
-> +	} else if (CONFIG_IS_ENABLED(OS_BOOT) &&
-> +		   IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
->  		ulong start, end;
-> -
->  		if (!bootz_setup((ulong)header, &start, &end)) {
->  			spl_image->name =3D "Linux";
->  			spl_image->os =3D IH_OS_LINUX;
+Dear Tom,
 
-Superseded by v3:
-https://lore.kernel.org/u-boot/20250312124757.789013-1-anshuld@ti.com/
+The following changes since commit dc0ee458f1afae4cb5c8a7b2c875bb24ffdf71ca:
 
-Anshul
+  Prepare v2025.04-rc3 (2025-02-24 16:53:59 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+
+for you to fetch changes up to b156a1171e356f16aac88322b3bdcec071543c6c:
+
+  configs: qc750: add 3 second delay before power off (2025-03-11 19:47:07 +0200)
+
+----------------------------------------------------------------
+Jonas Schwöbel (2):
+      common: edid: update timing selection logic
+      ARM: tegra: clock: fix PLLD/PLLD2 related clock calculations
+
+Svyatoslav Ryhel (26):
+      video: tegra20: dc: switch to newer clk API
+      video: tegra20: dc: remove hardcoded Tegra 2 specific parts
+      video: tegra20: dc: remove excessive headers
+      video: tegra20: dc: improve code quality
+      video: tegra20: dsi: check for panels among child nodes
+      video: tegra20: dsi: switch to newer clk API
+      video: tegra20: dsi: align ganged mode implementation
+      video: tegra20: dsi: make SOL delay calculation mode independent
+      video: tegra20: dsi: calculate packet parameters for video mode
+      video: tegra20: dsi: calculate lanes for ganged mode
+      video: tegra20: dsi: pass source on DSI configuration
+      ARM: tegra: endeavoru: adjust panel node
+      pinctrl: tegra: add Tegra K1 support
+      video: tegra20: dc: dsi: add Tegra K1 compatible
+      video: tegra20: mipi: add Tegra K1 support
+      video: add TI LP855x backlight driver
+      video: panel: add Sharp LQ079L1SX01 MIPI DSI panel driver
+      ARM: tegra124: implement BCT patching
+      board: xiaomi: mocha: add Xiaomi Mi Pad A0101 support
+      ARM: tegra20: mark second DC with bootph-all
+      configs: transformer: add 3 second delay before power off
+      configs: endeavoru: add 3 second delay before power off
+      configs: grouper: add 3 second delay before power off
+      configs: picasso: add 3 second delay before power off
+      configs: x3_t30: add 3 second delay before power off
+      configs: qc750: add 3 second delay before power off
+
+ arch/arm/dts/Makefile                            |   1 +
+ arch/arm/dts/tegra124-xiaomi-mocha.dts           | 592 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/tegra20-u-boot.dtsi                 |   4 +
+ arch/arm/dts/tegra30-htc-endeavoru.dts           |  23 ++-
+ arch/arm/include/asm/arch-tegra124/pinmux.h      |   4 +
+ arch/arm/include/asm/arch-tegra20/clock-tables.h |   2 +
+ arch/arm/mach-tegra/Kconfig                      |   2 +-
+ arch/arm/mach-tegra/clock.c                      |  30 +++-
+ arch/arm/mach-tegra/tegra124/Kconfig             |   5 +
+ arch/arm/mach-tegra/tegra124/Makefile            |   1 +
+ arch/arm/mach-tegra/tegra124/bct.c               |  91 ++++++++++
+ arch/arm/mach-tegra/tegra124/bct.h               |  55 ++++++
+ board/xiaomi/mocha/Kconfig                       |  12 ++
+ board/xiaomi/mocha/MAINTAINERS                   |   8 +
+ board/xiaomi/mocha/Makefile                      |   9 +
+ board/xiaomi/mocha/mocha-spl.c                   |  49 +++++
+ board/xiaomi/mocha/mocha.c                       |  41 +++++
+ board/xiaomi/mocha/mocha.env                     |  23 +++
+ common/edid.c                                    | 308 ++++++++++++++++++++++++++++----
+ configs/endeavoru_defconfig                      |   2 +-
+ configs/grouper_defconfig                        |   2 +-
+ configs/mocha_defconfig                          |  91 ++++++++++
+ configs/picasso_defconfig                        |   2 +-
+ configs/qc750_defconfig                          |   2 +-
+ configs/transformer_t20_defconfig                |   2 +-
+ configs/transformer_t30_defconfig                |   2 +-
+ configs/x3_t30_defconfig                         |   2 +-
+ doc/board/index.rst                              |   1 +
+ doc/board/xiaomi/index.rst                       |   9 +
+ doc/board/xiaomi/mocha.rst                       | 112 ++++++++++++
+ drivers/pinctrl/tegra/pinctrl-tegra.c            |  56 ++++++
+ drivers/video/Kconfig                            |  19 ++
+ drivers/video/Makefile                           |   2 +
+ drivers/video/lp855x_backlight.c                 | 302 +++++++++++++++++++++++++++++++
+ drivers/video/sharp-lq079l1sx01.c                | 288 ++++++++++++++++++++++++++++++
+ drivers/video/tegra20/tegra-dc.c                 | 107 ++++++-----
+ drivers/video/tegra20/tegra-dsi.c                | 231 +++++++++++++++++-------
+ drivers/video/tegra20/tegra-mipi.c               | 134 ++++++++++++--
+ include/configs/mocha.h                          |  25 +++
+ 39 files changed, 2459 insertions(+), 192 deletions(-)
+ create mode 100644 arch/arm/dts/tegra124-xiaomi-mocha.dts
+ create mode 100644 arch/arm/mach-tegra/tegra124/bct.c
+ create mode 100644 arch/arm/mach-tegra/tegra124/bct.h
+ create mode 100644 board/xiaomi/mocha/Kconfig
+ create mode 100644 board/xiaomi/mocha/MAINTAINERS
+ create mode 100644 board/xiaomi/mocha/Makefile
+ create mode 100644 board/xiaomi/mocha/mocha-spl.c
+ create mode 100644 board/xiaomi/mocha/mocha.c
+ create mode 100644 board/xiaomi/mocha/mocha.env
+ create mode 100644 configs/mocha_defconfig
+ create mode 100644 doc/board/xiaomi/index.rst
+ create mode 100644 doc/board/xiaomi/mocha.rst
+ create mode 100644 drivers/video/lp855x_backlight.c
+ create mode 100644 drivers/video/sharp-lq079l1sx01.c
+ create mode 100644 include/configs/mocha.h
+
+Branch contains various upgrades and alignments for Tegra DC and DSI, including
+full support of DSI dual mode for command and video mode panels, adjustments for
+tegra video drivers to work with Tegra K1, adding support for Xiaomi Mi Pad TK1
+based tablet (with adding required panel and backlight drivers), PLLD/D2 clock
+calculation improvements, EDID selection adjustments and minor user experience
+improvements of existing Tegra devices.
+
+Thanks,
+Svyatoslav Ryhel.
