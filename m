@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99605C35FF1
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A019C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:00:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFABF819FC;
-	Wed, 12 Mar 2025 18:59:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3383D817D8;
+	Wed, 12 Mar 2025 18:59:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WLUwQm5u";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A1DIXtj1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DFBD817D8; Wed, 12 Mar 2025 18:59:30 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 38AAD819FC; Wed, 12 Mar 2025 18:59:31 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A42E8175D
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 18:59:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F60981782
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 18:59:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ac2af2f15d1so19653366b.1
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 10:59:28 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so19654866b.1
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 10:59:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741802368; x=1742407168; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741802369; x=1742407169; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u+V8CA4jKyHh54Sljirspc4fnBS6UAhQ83x/oIcN9Ow=;
- b=WLUwQm5uFV/jxpguAofPznZkeO9HIHFIvxtudizkGNyg5UdpaDu3wI76K26OHAfbWg
- qQAHHYbbU1/ef2H0uwLmuj1M7dZz2JBBdZRf7YDdq3wlYITip2OOpTztDs2t68rFXe4t
- GbSRgEAKf6RLKsNTUz2YVTi8AMKslU2qmDh13+cJvc5pLwJxkrHZgeAz4xH7pFTHnMAA
- 7wssCNCSXZgiixEjjN5TWPL1AmZGJdGjgtsdHrp45uuIqmHhVro2VcDJ5eUagYKk06Vm
- NcOXo4QkPQ6LMLUhMirX97/MS5Y0GSloEfdF3+I7VwEev3zB9+4IKnB5Uhsi+Bxvish7
- xPyg==
+ bh=BdN9z4ZEpfVytbWjaNQzrrt1hyfLls/jjFW9/Nps7u0=;
+ b=A1DIXtj1TZkheweshayH3OjxtrMMFpOOJGw7vDdns1QVCQ/UJC0VGQ6YDX4qTf/vyy
+ vnG3E5FxuyWRiomoJtWs+NrXgl8ACdm0sygEpGXgS5xfW4ktvQG48Ut/b6j62r8/Un/k
+ cMkss5EvU1zZel82ZjmhbqvUXt2/VmfKRzndSzYjHhXPoes3Fw4Tq91qp1Y31lgcu1oJ
+ GcZnvX3niDqJp53KEI8+0J9aTDVsiD6Mp7rW+V+LTBAtxF8WwCMnOVIAH2KzZx2UiDCi
+ i6/d78m0Ge/838+w3voUYODQWLCql7L3+95rgaDJOsAet+8ADvvUtO+Ps2na7R4BDG/S
+ /Trw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741802368; x=1742407168;
+ d=1e100.net; s=20230601; t=1741802369; x=1742407169;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u+V8CA4jKyHh54Sljirspc4fnBS6UAhQ83x/oIcN9Ow=;
- b=ZMwAKNylYqUS/AtQWL2b6gXqIPCAW/hWiQeQUcFi6okj1AD0mLitgQqmzp9C7jQeJL
- N4embiR1zeh8NZbIeZ2i+MN9C4gYv96wlWCE638SUFFAJpp/jNWvHAYZvjgvzSSuWYNw
- G9ljieubI3cJ7IiR+tRFLB9oyXK8wSjBmiqXzwGsctHVXf+KG5geBddwhwVBjST2xj6o
- SQ4OChFzSVCCKsagev0PdHXwAqytLTArZrB1LLUqJVXMBFHA9Z4lQyh+sx+WvofAF8Cg
- ohap/dNzXbMsY0UjBT6NunCvXX8dl8sbJn9j+pXBONWq/d/E6S1VePPl66wDoX3Sl+ZD
- J2tg==
-X-Gm-Message-State: AOJu0YysuVnglXnh/eNfY6A7kThp8AY6xREv9er8x+kqe83K30poccI/
- anlwn/Pj2VwO9DXmQnOkyI8mZIE0wIM9XH4830vT/gj9m/r7pOc2
-X-Gm-Gg: ASbGncvKkF6UK4XvBu7ltqALN4f4O9eP436dGCH9nFOB5Lf4i20L6IKtAFNhilOkabQ
- AtP83lydKDfsSGk2vKF67NIaLbZH2sFtqZNzomMoxwbs3hXIvsLDiyQ02H000lfMtMIKCWnR7S6
- 2yKFXr1MUqa9IGT+NJcMroM4n8S4rv+0DEIXxiGcriUcxDcp7AHEDRi5CeS2h8cseeE3cuIEOz2
- nrOh7yBl/R5w85ZaxFQU3SCZt802qJgHUhoJEISzTgur+7qPJ79etkVmF+NkeOjh2X8gULaoIbS
- 5Z7pASw032eJgXoLXmngPqUrQWrH7Sn5ExeNPd+Azbv3ey4=
-X-Google-Smtp-Source: AGHT+IETusdM88Vd936uGO2Jx6RLP6xBeiiarEGLfBCSaX/P0bjfjzzeM2QNr/X+2nXfEIsRm1o5hA==
-X-Received: by 2002:a17:907:7213:b0:abf:6f87:c732 with SMTP id
- a640c23a62f3a-ac2b9de96d4mr1223620166b.20.1741802367653; 
- Wed, 12 Mar 2025 10:59:27 -0700 (PDT)
+ bh=BdN9z4ZEpfVytbWjaNQzrrt1hyfLls/jjFW9/Nps7u0=;
+ b=AD2rvZg/B+wT5XGZ+OvhklPMUHQ+J+W5IcUpcZxgC5cdECLHMefRGofJJiOgYjaoWc
+ pLmNJFZ24KvocuzOQXBHT9xaUY1MiPl/oFQHDu9Pe6r/JKFUNEYI+zZRucN+YZoZiA2a
+ gpk8EWKTm6d81NQ39qtP4ObCv86KUUdT+YnXTiMi3bVrN3Uym8fP7dvAJ3DjnIQiPfLi
+ 14phGh2TF89bR944hvrD/WNo1tsu5oq0jSntGaDNR63Bw1nL5Rs8eOIZ//E0+3aNw93f
+ ntCKUn4hF2X2HRmp9WMF59MseltFNMu5eRgtsg36RnB3DKWRstop+L6CskgWXEFiewrj
+ 44GQ==
+X-Gm-Message-State: AOJu0Yx4YpWnataSDjoVFKYWV45aY2obPvYBUatKqrKRU6955HwCIuyh
+ pS3CaRADKR+yO8CRQAmD3uRRtOXanBn5TA52fibaVBFAKx4CupiV
+X-Gm-Gg: ASbGncs8yz10Da0hXshVfvb8ywMmD2QBa3bQf5cS4E6D6P58GlnQBZvmnC2bi0r9nIO
+ /qv2TxlicyU25s8fRZv2FHFREmGqTBhip9oIQmBqtcFqDi8d+Rsz+BvQ6Bw0WsbocRhB4mc08EW
+ I1I1ArDmtKhyz85rpVbCHa1XSnFa8xPJMnbHqwgK831aZT2sf7VMNkW003GRsWAPXNfWPahI49L
+ AlCClflMrp2jtkdDPEyHqkFPhVV3im0KSSITufhJCu+u2xKsKiqxJLe1YcMse0683p+/IPuz2jm
+ Q8DFL3Tw8q4KJRHrdCzou/GOJSFstgiSOLBu
+X-Google-Smtp-Source: AGHT+IGZsGDylI0UK+ixM9RuGfLZ5E1XPoTO1PWcm39/Xiq1vlEGwNFJru+JhK0Up3GL1ZCkiLYNZQ==
+X-Received: by 2002:a17:907:3e1a:b0:abf:7a26:c47e with SMTP id
+ a640c23a62f3a-ac2b9ea39e3mr1189309866b.43.1741802368606; 
+ Wed, 12 Mar 2025 10:59:28 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac2394825adsm1125291166b.56.2025.03.12.10.59.26
+ a640c23a62f3a-ac2394825adsm1125291166b.56.2025.03.12.10.59.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 10:59:27 -0700 (PDT)
+ Wed, 12 Mar 2025 10:59:28 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 07/10] video: tegra20: dc: support binding child devices
-Date: Wed, 12 Mar 2025 19:58:54 +0200
-Message-ID: <20250312175857.120313-8-clamor95@gmail.com>
+Subject: [PATCH v1 08/10] video: tegra20: pwm-backlight: convert into DC child
+Date: Wed, 12 Mar 2025 19:58:55 +0200
+Message-ID: <20250312175857.120313-9-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312175857.120313-1-clamor95@gmail.com>
 References: <20250312175857.120313-1-clamor95@gmail.com>
@@ -98,27 +98,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement child binding helper within DC bind to support DC PWM backlight
-feature.
+Establish the backlight as a DC display controller child.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/video/tegra20/tegra-pwm-backlight.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index 516a397872a..1f43153ff27 100644
---- a/drivers/video/tegra20/tegra-dc.c
-+++ b/drivers/video/tegra20/tegra-dc.c
-@@ -632,7 +632,7 @@ static int tegra_lcd_bind(struct udevice *dev)
- 	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
- 		(1 << LCD_MAX_LOG2_BPP) / 8;
+diff --git a/drivers/video/tegra20/tegra-pwm-backlight.c b/drivers/video/tegra20/tegra-pwm-backlight.c
+index 79d8a021a3a..998f0df1991 100644
+--- a/drivers/video/tegra20/tegra-pwm-backlight.c
++++ b/drivers/video/tegra20/tegra-pwm-backlight.c
+@@ -17,9 +17,6 @@
  
--	return 0;
-+	return dm_scan_fdt_dev(dev);
- }
+ #include "tegra-dc.h"
  
- static const struct tegra_dc_soc_info tegra20_dc_soc_info = {
+-#define TEGRA_DISPLAY_A_BASE		0x54200000
+-#define TEGRA_DISPLAY_B_BASE		0x54240000
+-
+ #define TEGRA_PWM_BL_MIN_BRIGHTNESS	0x10
+ #define TEGRA_PWM_BL_MAX_BRIGHTNESS	0xFF
+ 
+@@ -106,14 +103,11 @@ static int tegra_pwm_backlight_enable(struct udevice *dev)
+ static int tegra_pwm_backlight_probe(struct udevice *dev)
+ {
+ 	struct tegra_pwm_backlight_priv *priv = dev_get_priv(dev);
++	ofnode dc = ofnode_get_parent(dev_ofnode(dev));
+ 
+-	if (dev_read_bool(dev, "nvidia,display-b-base"))
+-		priv->dc = (struct dc_ctlr *)TEGRA_DISPLAY_B_BASE;
+-	else
+-		priv->dc = (struct dc_ctlr *)TEGRA_DISPLAY_A_BASE;
+-
++	priv->dc = (struct dc_ctlr *)ofnode_get_addr(dc);
+ 	if (!priv->dc) {
+-		log_err("no display controller address\n");
++		log_err("%s: failed to get DC controller\n", __func__);
+ 		return -EINVAL;
+ 	}
+ 
 -- 
 2.43.0
 
