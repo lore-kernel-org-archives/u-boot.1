@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F21BC28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 17:59:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE56C28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 17:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0DEC817D3;
-	Wed, 12 Mar 2025 18:59:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A16881335;
+	Wed, 12 Mar 2025 18:59:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FqZ4kYFS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YDYOprIH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3A918056A; Wed, 12 Mar 2025 18:59:24 +0100 (CET)
+ id 1641D81877; Wed, 12 Mar 2025 18:59:27 +0100 (CET)
 Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
  [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B32228056A
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 18:59:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E075F8056A
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 18:59:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
 Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aaee2c5ee6eso23192566b.1
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 10:59:22 -0700 (PDT)
+ a640c23a62f3a-ac298c8fa50so28324066b.1
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 10:59:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741802362; x=1742407162; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741802364; x=1742407164; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pn8UeEiXeDK0vAt/+b7Z73pbS+1kobx7gkjmMFV48UQ=;
- b=FqZ4kYFS4UDLH6EKFQdpZo+KxXfhJbR/A/bMLZhNHGiR8pRZIi1wxHIZriebShYBMU
- Uh1OzkM3zzj9jrKhseRMOYWIzQ52fZp4knh0Mh2gszfjfbyiYQDPDf/xZQBBTEKbO3eN
- Z25+jT97KYfUopG98eZgSgnZOVXCETp+n0DOk0i5/3uPuFIjhShNYIzIlaRelGugLq/t
- 2HKkIx8xOGla2/fwhBnl0byLcUDrnFzsp/kp1jRUgxgRJmDY4k8sqH+aJTt54bNZY9Qq
- n3LGto/6LsIgWOmCb+kxflvyXguyc4Qc1EgHFMiS0KgXnYVsg/9j3/r9vnP7EOpYOMbm
- yL+w==
+ bh=2R6QilyGYUjmrFB9Wp6pyN6N3qzprQvDw/jNcrp91ro=;
+ b=YDYOprIHfJiqxVPC/fcQYjP27oovNdlg7sWniLNtjhWVYSWWTzJbBRlV1j2i/By0lz
+ rlEhIY3iqKZQM0Tf6U8sNf3CPOxWQXyBTo5ek307si8jNx6iianourH3F9ebb56QpC8S
+ pDMYMkK1jYTXqBe5hAg5CPfjqiht0exveI6KiAvzROPI/6hTuH9QxiI9hl+iOA/+g8YI
+ jkwoIGD1WP+Y7gNQsR7GjUQCllQEtPosfN5nKP5n07mQ3QdXiRdInQaqhK4mhSWj1UoY
+ vU1K/6oGewzrVSeQeuyQT0ohl3PEr4uY4U9AVWnCl/J9Ojf7AZPQeQHYq4IySgM2xcbd
+ IfvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741802362; x=1742407162;
+ d=1e100.net; s=20230601; t=1741802364; x=1742407164;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pn8UeEiXeDK0vAt/+b7Z73pbS+1kobx7gkjmMFV48UQ=;
- b=ItLT1M/zdbt7MflsxxtnnYzJviqp10692PceTMPzvO6d4McZbXLbFr4cwdnRBTpRys
- GQ/Me3itzqEpr1kTjMxROElZlcNWNGqxljhVCll3Q3yNRnilnAWQnTbm8yrEUExtL1DV
- IbX7H+eHjcq7NDHcoT8rUXM5f6t6FEiK4AsZy+3U6TuddZvDxVeW53aRwWqp5zrxrjqG
- dtp/hOi65amfn8ZhAFMZ1KH5nhD0aauDAL85zC1+JHLfGFTqHE0XPR2KQTcjGV2wiSDr
- ZPAciAp4Iynd6BzeUy2zAk/J/sVF0W1IqRSooQ3l68XpM6p6eNiZWks/z6laoTELQoY/
- 0V+w==
-X-Gm-Message-State: AOJu0YyxWSCg0/FkkZZDdJQwshoac3hgeUeq4nIgimk8PcLRFr559Mcn
- IDkFwnmSoMetqyzVHjJBVMY/W2kDY1HTM6PBFo5jpLhHobTaQWpP
-X-Gm-Gg: ASbGnctGQvgkr7YnMHoN99QBumgAzAwj453PQ5mjVUYnhjUc+x2F1UCKRLyW4UN6waq
- 09VKkmU5kU67MgVV9tvNvyVTANM5u/y6QgkOJM4sm5ScXVibHFWUnc09VNfQDDgsSZ6TZxsSPHl
- mVk8DVf4bRHRf+WYNo49quWc+guL97CbTtxXbXjhOHxGxOxref5jBaTLmoSc4M4x/CdzJ2KeCQt
- QFDNiMXBV8yYgsALyVoOe10j5OZSjA89wuGi/UsFAG9OdMK/71i/4sbzHvzvqAX/OL8qSpCFOIi
- gdWPs/89wD/mzloOqoSd6YsM+/JhbL5vLatrOLbxz4n7ObI=
-X-Google-Smtp-Source: AGHT+IFqlL7avQY1iPbxnqAslCn6RYPy+dMHQhrRoo9HUKFXPVZpAzU92HW8Ac8nDfswhIANz1/HRA==
-X-Received: by 2002:a17:907:9455:b0:abe:fed3:9eb8 with SMTP id
- a640c23a62f3a-ac252f5c8b9mr3330972966b.41.1741802361916; 
- Wed, 12 Mar 2025 10:59:21 -0700 (PDT)
+ bh=2R6QilyGYUjmrFB9Wp6pyN6N3qzprQvDw/jNcrp91ro=;
+ b=a8rtAccVFcO6NuL5VHXFsOajnxZf8UPYvhyXtvKOfBQo/CldI5IYT6FAH8Ig68CY/6
+ blIP41DxaZo4oFQqzPvpSCPeNAj6IBz41XOtxfiREt5KSEs90gMMxbQ/70j41dUzTBgO
+ 2ii9IfwSs3j5WnQDywwNtY/daTlBmOhbdz6zaUKbmC9nH0c8mpxUGP8AEtYuGA3Wbua2
+ y3OGdW7R3RVUbNy+TBP8dDGx2eI0KYuCQsEkR0XN7Yy1ZsXfv0MQOhAOnxppBXpNORHp
+ T6J4OFOArNbpve80+eBMc5ZkBbPSMIT3+tlcJaslvTpu319Ffctz09Bhd7bdIZ8xzgrd
+ fWWw==
+X-Gm-Message-State: AOJu0Yyrhmq2HDKq8NfAL8AS9w/u8k8HgWwiUWva7feK6/FqYHTFk3MG
+ VPQK0e2kxRpGqKYDfD7TSxo6G/Y4gqUysE0NEGwG3HrsuhVL9hSL
+X-Gm-Gg: ASbGnct/s2lDWE8eHr86y2juzDNn9GFDSed3OSn/SXJ2y+9CREBiq4d4pl8/V4YJnQu
+ 4YvXVO2K2HT/KRKj3+bQkS6PD2FCc0HTBefLEsujDjfRFw8SXVyYzFxcufqxccCC7U73bhefKQe
+ 4HJC3TYOxgqNmhciRSowh4/zWoqQXy9fQyNGjn8KhKdw7cRyrJipzvthWih0P0NcSamxzuUDC0M
+ g0JQoQE7JicGscZPGzDHwcG9pJyC5/ni+VhDJEbfEJFts3XW17G6pnPqFT87E58qFUzV31RLeJ6
+ Veziru39NGsW5Nlm2t/B1h5YN7rRhyxK4fAxJT1TrA4oTE4=
+X-Google-Smtp-Source: AGHT+IFLB05JVsxO3PrZ+7u2Ec3pevS6XQwdeELRvre0X1odtBlrxiKHiI6vjh9Y/Dzy0HbH8hwNaA==
+X-Received: by 2002:a17:907:97ca:b0:abf:5fa3:cf94 with SMTP id
+ a640c23a62f3a-ac25263c78bmr609077666b.22.1741802363985; 
+ Wed, 12 Mar 2025 10:59:23 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac2394825adsm1125291166b.56.2025.03.12.10.59.21
+ a640c23a62f3a-ac2394825adsm1125291166b.56.2025.03.12.10.59.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 10:59:21 -0700 (PDT)
+ Wed, 12 Mar 2025 10:59:23 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 01/10] video: tegra20: implement a minimal HOST1X driver
- for essential clock and reset setup
-Date: Wed, 12 Mar 2025 19:58:48 +0200
-Message-ID: <20250312175857.120313-2-clamor95@gmail.com>
+Subject: [PATCH v1 03/10] video: tegra20: dc: add video bridge support
+Date: Wed, 12 Mar 2025 19:58:50 +0200
+Message-ID: <20250312175857.120313-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312175857.120313-1-clamor95@gmail.com>
 References: <20250312175857.120313-1-clamor95@gmail.com>
@@ -99,153 +98,307 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a simplified HOST1X driver, limited to the basic clock and reset
-initialization of the bus.
+Rework existing DC driver configuration to support bridges (both external
+and internal DSI and HDMI controllers) and align video devices chain logic
+with Linux implementation. Additionally, this should improve communication
+between DC and internal DSI/HDMI controllers.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/Kconfig        |  5 ++
- drivers/video/tegra20/Makefile       |  1 +
- drivers/video/tegra20/tegra-dc.c     |  5 --
- drivers/video/tegra20/tegra-host1x.c | 86 ++++++++++++++++++++++++++++
- 4 files changed, 92 insertions(+), 5 deletions(-)
- create mode 100644 drivers/video/tegra20/tegra-host1x.c
+ drivers/video/tegra20/tegra-dc.c | 202 +++++++++++++++++++++++--------
+ drivers/video/tegra20/tegra-dc.h |   3 -
+ 2 files changed, 150 insertions(+), 55 deletions(-)
 
-diff --git a/drivers/video/tegra20/Kconfig b/drivers/video/tegra20/Kconfig
-index f5c4843e119..d7c402e95fd 100644
---- a/drivers/video/tegra20/Kconfig
-+++ b/drivers/video/tegra20/Kconfig
-@@ -1,6 +1,11 @@
-+config HOST1X_TEGRA
-+	bool "NVIDIA Tegra host1x BUS support"
-+	depends on SIMPLE_BUS
-+
- config VIDEO_TEGRA20
- 	bool "Enable Display Controller support on Tegra20 and Tegra 30"
- 	depends on OF_CONTROL
-+	select HOST1X_TEGRA
- 	help
- 	   T20/T30 support video output to an attached LCD panel as well as
- 	   other options such as HDMI. Only the LCD is supported in U-Boot.
-diff --git a/drivers/video/tegra20/Makefile b/drivers/video/tegra20/Makefile
-index a75aea2a875..c0fd42a72d5 100644
---- a/drivers/video/tegra20/Makefile
-+++ b/drivers/video/tegra20/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
-+obj-$(CONFIG_HOST1X_TEGRA) += tegra-host1x.o
- obj-$(CONFIG_VIDEO_TEGRA20) += tegra-dc.o
- obj-$(CONFIG_VIDEO_DSI_TEGRA30) += tegra-dsi.o tegra-mipi.o mipi-phy.o
- obj-$(CONFIG_TEGRA_BACKLIGHT_PWM) += tegra-pwm-backlight.o
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index 16a2b5281bf..001967f2a5a 100644
+index 001967f2a5a..6b8275ef9fa 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -319,11 +319,6 @@ static int tegra_display_probe(struct tegra_lcd_priv *priv,
- 						/ priv->pixel_clock) - 2;
- 	log_debug("Display clock %lu, divider %lu\n", rate, priv->scdiv);
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+  * Copyright (c) 2011 The Chromium OS Authors.
++ * Copyright (c) 2024 Svyatoslav Ryhel <clamor95@gmail.com>
+  */
  
--	/*
--	 * HOST1X is init by default at 150MHz with PLLC as parent
--	 */
--	clock_start_periph_pll(PERIPH_ID_HOST1X, CLOCK_ID_CGENERAL,
--			       150 * 1000000);
- 	clock_start_periph_pll(priv->clk->id, priv->clk_parent->id,
- 			       rate);
+ #include <backlight.h>
+@@ -11,6 +12,7 @@
+ #include <log.h>
+ #include <panel.h>
+ #include <video.h>
++#include <video_bridge.h>
+ #include <asm/system.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+@@ -31,7 +33,8 @@ struct tegra_lcd_priv {
+ 	int height;			/* height in pixels */
+ 	enum video_log2_bpp log2_bpp;	/* colour depth */
+ 	struct display_timing timing;
+-	struct udevice *panel;
++	struct udevice *panel;		/* Panels attached to RGB */
++	struct udevice *bridge;		/* Bridge linked with DC */
+ 	struct dc_ctlr *dc;		/* Display controller regmap */
+ 	const struct tegra_dc_soc_info *soc;
+ 	fdt_addr_t frame_buffer;	/* Address of frame buffer */
+@@ -373,11 +376,12 @@ static int tegra_lcd_probe(struct udevice *dev)
+ 	}
  
-diff --git a/drivers/video/tegra20/tegra-host1x.c b/drivers/video/tegra20/tegra-host1x.c
-new file mode 100644
-index 00000000000..58ab871a3b4
---- /dev/null
-+++ b/drivers/video/tegra20/tegra-host1x.c
-@@ -0,0 +1,86 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#include <dm.h>
-+#include <clk.h>
-+#include <log.h>
-+#include <reset.h>
-+#include <linux/delay.h>
-+
-+#include <asm/arch/clock.h>
-+#include <asm/arch-tegra/clk_rst.h>
-+
-+struct tegra_host1x_info {
-+	u32 clk_parent;
-+	u32 rate;
-+};
-+
-+static int tegra_host1x_probe(struct udevice *dev)
-+{
-+	struct clk *clk;
-+	struct reset_ctl reset_ctl;
-+	const struct tegra_host1x_info *info;
-+	int ret;
-+
-+	clk = devm_clk_get(dev, NULL);
-+	if (IS_ERR(clk)) {
-+		log_debug("%s: cannot get HOST1X clock: %ld\n",
-+			  __func__, PTR_ERR(clk));
-+		return PTR_ERR(clk);
+ 	/* Get shift clock divider from Tegra DSI if used */
+-	if (!strcmp(priv->panel->name, TEGRA_DSI_A) ||
+-	    !strcmp(priv->panel->name, TEGRA_DSI_B)) {
+-		struct tegra_dc_plat *dc_plat = dev_get_plat(priv->panel);
++	if (priv->bridge) {
++		if (!strcmp(priv->bridge->driver->name, "tegra_dsi")) {
++			struct tegra_dc_plat *dc_plat = dev_get_plat(priv->bridge);
+ 
+-		priv->scdiv = dc_plat->scdiv;
++			priv->scdiv = dc_plat->scdiv;
++		}
+ 	}
+ 
+ 	/* Clean the framebuffer area */
+@@ -390,10 +394,20 @@ static int tegra_lcd_probe(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
+-	ret = panel_enable_backlight(priv->panel);
+-	if (ret) {
+-		log_debug("%s: Cannot enable backlight, ret=%d\n", __func__, ret);
+-		return ret;
++	if (priv->panel) {
++		ret = panel_enable_backlight(priv->panel);
++		if (ret) {
++			log_debug("%s: Cannot enable backlight, ret=%d\n", __func__, ret);
++			return ret;
++		}
 +	}
 +
-+	ret = reset_get_by_name(dev, "host1x", &reset_ctl);
-+	if (ret) {
-+		log_debug("%s: cannot get HOST1X reset: %d\n",
-+			  __func__, ret);
-+		return ret;
++	if (priv->bridge) {
++		ret = video_bridge_attach(priv->bridge);
++		if (ret) {
++			log_debug("%s: Cannot attach bridge, ret=%d\n", __func__, ret);
++			return ret;
++		}
+ 	}
+ 
+ 	mmu_set_region_dcache_behaviour(priv->frame_buffer, plat->size,
+@@ -408,17 +422,110 @@ static int tegra_lcd_probe(struct udevice *dev)
+ 	log_debug("LCD frame buffer at %08x, size %x\n", priv->frame_buffer,
+ 		  plat->size);
+ 
+-	return panel_set_backlight(priv->panel, BACKLIGHT_DEFAULT);
++	if (priv->panel) {
++		ret = panel_set_backlight(priv->panel, BACKLIGHT_DEFAULT);
++		if (ret)
++			return ret;
 +	}
 +
-+	info = (struct tegra_host1x_info *)dev_get_driver_data(dev);
-+
-+	reset_assert(&reset_ctl);
-+	clock_start_periph_pll(clk->id, info->clk_parent, info->rate);
-+
-+	mdelay(2);
-+	reset_deassert(&reset_ctl);
++	if (priv->bridge) {
++		ret = video_bridge_set_backlight(priv->bridge, BACKLIGHT_DEFAULT);
++		if (ret)
++			return ret;
++	}
 +
 +	return 0;
 +}
 +
-+static const struct tegra_host1x_info tegra20_host1x_info = {
-+	.clk_parent = CLOCK_ID_CGENERAL,
-+	.rate = 150000000, /* 150 MHz */
-+};
++static int tegra_lcd_configure_rgb(struct udevice *dev, ofnode rgb)
++{
++	struct tegra_lcd_priv *priv = dev_get_priv(dev);
++	ofnode remote;
++	int ret;
 +
-+static const struct tegra_host1x_info tegra114_host1x_info = {
-+	.clk_parent = CLOCK_ID_PERIPH,
-+	.rate = 136000000, /* 136 MHz */
-+};
++	remote = ofnode_parse_phandle(rgb, "nvidia,panel", 0);
++	if (!ofnode_valid(remote))
++		return -EINVAL;
 +
-+static const struct udevice_id tegra_host1x_ids[] = {
-+	{
-+		.compatible = "nvidia,tegra20-host1x",
-+		.data = (ulong)&tegra20_host1x_info
-+	}, {
-+		.compatible = "nvidia,tegra30-host1x",
-+		.data = (ulong)&tegra20_host1x_info
-+	}, {
-+		.compatible = "nvidia,tegra114-host1x",
-+		.data = (ulong)&tegra114_host1x_info
-+	}, {
-+		.compatible = "nvidia,tegra124-host1x",
-+		.data = (ulong)&tegra114_host1x_info
-+	}, {
-+		/* sentinel */
++	ret = uclass_get_device_by_ofnode(UCLASS_PANEL, remote, &priv->panel);
++	if (ret) {
++		log_debug("%s: Cannot find panel for '%s' (ret=%d)\n",
++			  __func__, dev->name, ret);
++
++		ret = uclass_get_device_by_ofnode(UCLASS_VIDEO_BRIDGE, remote,
++						  &priv->bridge);
++		if (ret) {
++			log_err("%s: Cannot find panel or bridge for '%s' (ret=%d)\n",
++				__func__, dev->name, ret);
++			return ret;
++		}
 +	}
-+};
 +
-+U_BOOT_DRIVER(tegra_host1x) = {
-+	.name		= "tegra_host1x",
-+	.id		= UCLASS_SIMPLE_BUS,
-+	.of_match	= tegra_host1x_ids,
-+	.probe		= tegra_host1x_probe,
-+	.flags		= DM_FLAG_PRE_RELOC,
-+};
++	return 0;
++}
++
++static int tegra_lcd_configure_internal(struct udevice *dev)
++{
++	struct tegra_lcd_priv *priv = dev_get_priv(dev);
++	struct tegra_dc_plat *dc_plat;
++	ofnode host1x = ofnode_get_parent(dev_ofnode(dev));
++	ofnode node;
++	int ret;
++
++	switch (priv->pipe) {
++	case 0: /* DC0 is usually used for DSI */
++		/* Check for ganged DSI configuration */
++		ofnode_for_each_subnode(node, host1x)
++			if (ofnode_name_eq(node, "dsi") && ofnode_is_enabled(node) &&
++			    ofnode_read_bool(node, "nvidia,ganged-mode"))
++				goto exit;
++
++		/* If no master DSI found loop for any active DSI */
++		ofnode_for_each_subnode(node, host1x)
++			if (ofnode_name_eq(node, "dsi") && ofnode_is_enabled(node))
++				goto exit;
++
++		log_err("%s: failed to find DSI device for '%s'\n",
++			__func__, dev->name);
++
++		return -ENODEV;
++	case 1: /* DC1 is usually used for HDMI */
++		ofnode_for_each_subnode(node, host1x)
++			if (ofnode_name_eq(node, "hdmi"))
++				goto exit;
++
++		log_err("%s: failed to find HDMI device for '%s'\n",
++			__func__, dev->name);
++
++		return -ENODEV;
++	default:
++		log_debug("Unsupported DC selection\n");
++		return -EINVAL;
++	}
++
++exit:
++	ret = uclass_get_device_by_ofnode(UCLASS_VIDEO_BRIDGE, node, &priv->bridge);
++	if (ret) {
++		log_err("%s: failed to get DSI/HDMI device for '%s' (ret %d)\n",
++			__func__, dev->name, ret);
++		return ret;
++	}
++
++	dc_plat = dev_get_plat(priv->bridge);
++
++	/* Fill the platform data for internal devices */
++	dc_plat->dev = dev;
++	dc_plat->dc = priv->dc;
++	dc_plat->pipe = priv->pipe;
++
++	return 0;
+ }
+ 
+ static int tegra_lcd_of_to_plat(struct udevice *dev)
+ {
+ 	struct tegra_lcd_priv *priv = dev_get_priv(dev);
+-	const void *blob = gd->fdt_blob;
+ 	struct display_timing *timing;
+-	int node = dev_of_offset(dev);
+-	int panel_node;
+-	int rgb;
++	ofnode rgb;
+ 	int ret;
+ 
+ 	priv->dc = (struct dc_ctlr *)dev_read_addr_ptr(dev);
+@@ -446,44 +553,42 @@ static int tegra_lcd_of_to_plat(struct udevice *dev)
+ 	priv->rotation = dev_read_bool(dev, "nvidia,180-rotation");
+ 	priv->pipe = dev_read_u32_default(dev, "nvidia,head", 0);
+ 
+-	rgb = fdt_subnode_offset(blob, node, "rgb");
+-	if (rgb < 0) {
+-		log_debug("%s: Cannot find rgb subnode for '%s' (ret=%d)\n",
+-			  __func__, dev->name, rgb);
+-		return -EINVAL;
+-	}
+-
+ 	/*
+-	 * Sadly the panel phandle is in an rgb subnode so we cannot use
+-	 * uclass_get_device_by_phandle().
++	 * Usual logic of Tegra video routing should be next:
++	 * 1. Check rgb subnode for RGB/LVDS panels or bridges
++	 * 2. If none found, then iterate through bridges bound,
++	 *    looking for DSIA or DSIB for DC0 and HDMI for DC1.
++	 * If none of above is valid, then configuration is not
++	 * valid.
+ 	 */
+-	panel_node = fdtdec_lookup_phandle(blob, rgb, "nvidia,panel");
+-	if (panel_node < 0) {
+-		log_debug("%s: Cannot find panel information\n", __func__);
+-		return -EINVAL;
+-	}
+ 
+-	ret = uclass_get_device_by_of_offset(UCLASS_PANEL, panel_node,
+-					     &priv->panel);
+-	if (ret) {
+-		log_debug("%s: Cannot find panel for '%s' (ret=%d)\n", __func__,
+-			  dev->name, ret);
+-		return ret;
++	rgb = dev_read_subnode(dev, "rgb");
++	if (ofnode_valid(rgb) && ofnode_is_enabled(rgb)) {
++		/* RGB is available, use it */
++		ret = tegra_lcd_configure_rgb(dev, rgb);
++		if (ret)
++			return ret;
++	} else {
++		/* RGB is not available, check for internal devices */
++		ret = tegra_lcd_configure_internal(dev);
++		if (ret)
++			return ret;
+ 	}
+ 
+-	/* Fill the platform data for internal devices */
+-	if (!strcmp(priv->panel->name, TEGRA_DSI_A) ||
+-	    !strcmp(priv->panel->name, TEGRA_DSI_B)) {
+-		struct tegra_dc_plat *dc_plat = dev_get_plat(priv->panel);
+-
+-		dc_plat->dev = dev;
+-		dc_plat->dc = priv->dc;
+-		dc_plat->pipe = priv->pipe;
++	if (priv->panel) {
++		ret = panel_get_display_timing(priv->panel, &priv->timing);
++		if (ret) {
++			ret = ofnode_decode_display_timing(rgb, 0, &priv->timing);
++			if (ret) {
++				log_debug("%s: Cannot read display timing for '%s' (ret=%d)\n",
++					  __func__, dev->name, ret);
++				return -EINVAL;
++			}
++		}
+ 	}
+ 
+-	ret = panel_get_display_timing(priv->panel, &priv->timing);
+-	if (ret) {
+-		ret = fdtdec_decode_display_timing(blob, rgb, 0, &priv->timing);
++	if (priv->bridge) {
++		ret = video_bridge_get_display_timing(priv->bridge, &priv->timing);
+ 		if (ret) {
+ 			log_debug("%s: Cannot read display timing for '%s' (ret=%d)\n",
+ 				  __func__, dev->name, ret);
+@@ -503,13 +608,6 @@ static int tegra_lcd_of_to_plat(struct udevice *dev)
+ static int tegra_lcd_bind(struct udevice *dev)
+ {
+ 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
+-	const void *blob = gd->fdt_blob;
+-	int node = dev_of_offset(dev);
+-	int rgb;
+-
+-	rgb = fdt_subnode_offset(blob, node, "rgb");
+-	if ((rgb < 0) || !fdtdec_get_is_enabled(blob, rgb))
+-		return -ENODEV;
+ 
+ 	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
+ 		(1 << LCD_MAX_LOG2_BPP) / 8;
+diff --git a/drivers/video/tegra20/tegra-dc.h b/drivers/video/tegra20/tegra-dc.h
+index 7d0c189ec80..2a4013b3355 100644
+--- a/drivers/video/tegra20/tegra-dc.h
++++ b/drivers/video/tegra20/tegra-dc.h
+@@ -14,9 +14,6 @@
+ /* arch-tegra/dc exists only because T124 uses it */
+ #include <asm/arch-tegra/dc.h>
+ 
+-#define TEGRA_DSI_A		"dsi@54300000"
+-#define TEGRA_DSI_B		"dsi@54400000"
+-
+ struct tegra_dc_plat {
+ 	struct udevice *dev;		/* Display controller device */
+ 	struct dc_ctlr *dc;		/* Display controller regmap */
 -- 
 2.43.0
 
