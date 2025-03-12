@@ -4,44 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F6EC28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 08:56:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E7A8C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 09:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A151A819FC;
-	Wed, 12 Mar 2025 09:55:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 89C46801FB;
+	Wed, 12 Mar 2025 10:43:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EjNTpYRW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8729D8197F; Wed, 12 Mar 2025 09:55:14 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3B583805D7
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 09:55:12 +0100 (CET)
+ id 55E8B805D7; Wed, 12 Mar 2025 10:43:16 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 02401801BE
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 10:43:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7C718152B;
- Wed, 12 Mar 2025 01:55:22 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2566C3F5A1;
- Wed, 12 Mar 2025 01:55:08 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v8 8/8] blkmap: pass information on ISO image to the OS
-Date: Wed, 12 Mar 2025 14:24:24 +0530
-Message-Id: <20250312085424.1201148-9-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
-References: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52C9hAEd1464496
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 12 Mar 2025 04:43:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741772590;
+ bh=EF6VANPba25B5aqJu2HpGqf06o6V0p59kBgxDU7dB6A=;
+ h=From:To:CC:Subject:Date;
+ b=EjNTpYRW/n3UD7UmsxzXQ/9IMuiSU9jGs/ElAU9yVHZYXXux2qFUlcpHqqDCuGMLc
+ oSzKkHiOQzldNpq5ZKUYZJDzNfE0LgMpSzxzxmGySs6gLONOq+n9TilkeWtgkUdM4Y
+ H1oxjzSg+IBSWyhgrZ4roEwObEQRRRFLlkcWZlAo=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52C9hATY012710
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 12 Mar 2025 04:43:10 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 12
+ Mar 2025 04:43:09 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 12 Mar 2025 04:43:09 -0500
+Received: from localhost (a0543016.dhcp.ti.com [172.24.227.196])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52C9h9Jm119647;
+ Wed, 12 Mar 2025 04:43:09 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v2] spl: remove usage of CMD_BOOT[IZ] from image parsing
+Date: Wed, 12 Mar 2025 15:12:40 +0530
+Message-ID: <20250312094241.629707-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,222 +77,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI HTTP boot puts the ISO installer image at some location in
-memory. Information about this image has to be passed on to the OS
-kernel, which is done by adding a persistent memory(pmem) node to the
-devicetree(DT) that is passed to the OS. The OS kernel then gets
-information about the presence of this ISO image and proceeds with the
-installation.
+Using CMD_* configs from spl doesn't make logical sense. Therefore this
+patch replaces the checks for CMD_BOOT[IZ] with newly added configs
+SPL_HAS_BOOT[IZ].
 
-In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-device slice, with the 'preserve' attribute. Add a helper function
-which iterates through all such slices, and invokes a callback. The
-callback adds the pmem node to the DT and removes the corresponding
-memory region from the EFI memory map. Invoke this helper function as
-part of the DT fixup which happens before booting the OS.
+More info:
+https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
-Changes since V7:
-* Fix checkpatch errors in blkmap.c and efi_helper.c
+Changes in v2:
+ * Add SPL_HAS_BOOT[IZ] configs
+v1: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.com/
+---
+ arch/arm/lib/Makefile |  4 ++--
+ common/spl/Kconfig    | 13 +++++++++++++
+ common/spl/spl.c      |  6 +++---
+ 3 files changed, 18 insertions(+), 5 deletions(-)
 
- boot/image-fdt.c            |  7 ++++++
- drivers/block/blkmap.c      | 44 +++++++++++++++++++++++++++++++++++++
- include/blkmap.h            | 17 ++++++++++++++
- include/efi.h               | 13 +++++++++++
- lib/efi_loader/efi_helper.c | 39 ++++++++++++++++++++++++++++++++
- 5 files changed, 120 insertions(+)
-
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 9d1598b1a93..8f718ad29f6 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <fdt_support.h>
- #include <fdtdec.h>
-+#include <efi.h>
- #include <env.h>
- #include <errno.h>
- #include <image.h>
-@@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	if (!ft_verify_fdt(blob))
- 		goto err;
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index 1c95dd6fed2..e857adddd03 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -36,8 +36,8 @@ obj-$(CONFIG_CMD_BOOTZ) += bootm.o zimage.o
+ else
+ obj-$(CONFIG_$(PHASE_)FRAMEWORK) += spl.o
+ ifdef CONFIG_SPL_FRAMEWORK
+-obj-$(CONFIG_CMD_BOOTI) += image.o
+-obj-$(CONFIG_CMD_BOOTZ) += zimage.o
++obj-$(CONFIG_SPL_HAS_BOOTI) += image.o
++obj-$(CONFIG_SPL_HAS_BOOTZ) += zimage.o
+ endif
+ obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
+ endif
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 21a5cefee7a..36c0fb063d0 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1153,6 +1153,19 @@ config SPL_OS_BOOT
+ 	  Enable booting directly to an OS from SPL.
+ 	  for more info read doc/README.falcon
  
-+	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-+		fdt_ret = fdt_efi_pmem_setup(blob);
-+		if (fdt_ret)
-+			goto err;
-+	}
++config SPL_HAS_BOOTZ
++	bool "Allow booting to kernel zimage from SPL"
++	depends on SPL_OS_BOOT
++	help
++	  Boot a linux zimage from memory in falcon boot.
 +
- 	/* after here we are using a livetree */
- 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
- 		struct event_ft_fixup fixup;
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index eefed615998..5f7602d0405 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -498,6 +498,50 @@ err:
- 	return err;
- }
++config SPL_HAS_BOOTI
++	bool "Allow booting to kernel image from SPL"
++	depends on SPL_OS_BOOT
++	default y if ARM64 || RISCV || SANDBOX
++	help
++	  Boot an AArch64 Linux Kernel image from memory in falcon boot.
++
+ config SPL_PAYLOAD_ARGS_ADDR
+ 	hex "Address in memory to load 'args' file for Falcon Mode to"
+ 	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 76fd56dfe4b..8905c776ea5 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -335,7 +335,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 		panic("** no mkimage signature but raw image not supported");
+ 	}
  
-+static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-+{
-+	return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-+		(BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-+}
-+
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx)
-+{
-+	int ret;
-+	u32 size;
-+	ulong addr;
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	struct blkmap *bm;
-+	struct blkmap_mem *bmm;
-+	struct blkmap_slice *bms;
-+	struct blk_desc *bd;
-+
-+	if (!cb) {
-+		log_debug("%s: No callback passed to the function\n", __func__);
-+		return 0;
-+	}
-+
-+	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-+		bm = dev_get_plat(dev);
-+		bd = dev_get_uclass_plat(bm->blk);
-+
-+		list_for_each_entry(bms, &bm->slices, node) {
-+			if (!blkmap_mem_preserve_slice(bms))
-+				continue;
-+
-+			bmm = container_of(bms, struct blkmap_mem, slice);
-+			addr = (ulong)(uintptr_t)bmm->addr;
-+			size = (u32)bms->blkcnt << bd->log2blksz;
-+			ret = cb(ctx, addr, size);
-+			if (ret)
-+				return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- int blkmap_destroy(struct udevice *dev)
- {
- 	int err;
-diff --git a/include/blkmap.h b/include/blkmap.h
-index 754d8671b01..30ce80c0ad1 100644
---- a/include/blkmap.h
-+++ b/include/blkmap.h
-@@ -7,6 +7,7 @@
- #ifndef _BLKMAP_H
- #define _BLKMAP_H
+-	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
++	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
+ 		ulong start, size;
  
-+#include <blk.h>
- #include <dm/lists.h>
- 
- /**
-@@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
- int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
- 			  struct udevice **devp);
- 
-+/**
-+ * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-+ * @cb: Callback function to call for the blkmap slice
-+ * @ctx: Argument to be passed to the callback function
-+ *
-+ * The function is used to iterate through all the blkmap slices, looking
-+ * specifically for memory mapped blkmap mapping which has been
-+ * created with the preserve attribute. The function looks for such slices
-+ * with the relevant attributes and then calls the callback function which
-+ * then does additional configuration as needed.
-+ *
-+ * Return: 0 on success, negative error on failure
-+ */
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx);
-+
- #endif	/* _BLKMAP_H */
-diff --git a/include/efi.h b/include/efi.h
-index d005cb6181e..f9bbb175c3a 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
-  */
- int efi_get_pxe_arch(void);
- 
-+/**
-+ * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-+ * @fdt: Devicetree to add the pmem nodes to
-+ *
-+ * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-+ * and add pmem nodes corresponding to the blkmap slice to the
-+ * devicetree along with removing the corresponding region from the
-+ * EFI memory map.
-+ *
-+ * Returns: 0 on success, negative error on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt);
-+
- #endif /* _LINUX_EFI_H */
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 37e5859741f..62772a0d747 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blkmap.h>
- #include <bootm.h>
- #include <env.h>
- #include <image.h>
-@@ -680,3 +681,41 @@ out:
- 
- 	return ret;
- }
-+
-+/**
-+ * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-+ * @fdt: The devicetree to which pmem node is added
-+ * @addr: start address of the pmem node
-+ * @size: size of the memory of the pmem node
-+ *
-+ * The function adds the pmem node to the device-tree along with removing
-+ * the corresponding region from the EFI memory map. Used primarily to
-+ * pass the information of a RAM based ISO image to the OS.
-+ *
-+ * Return: 0 on success, -ve value on error
-+ */
-+static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-+{
-+	int ret;
-+	efi_status_t status;
-+
-+	ret = fdt_fixup_pmem_region(fdt, addr, size);
-+	if (ret) {
-+		log_err("Failed to setup pmem node for addr %#lx, size %#x, err %d\n",
-+			addr, size, ret);
-+		return ret;
-+	}
-+
-+	status = efi_remove_memory_map(addr, size,
-+				       EFI_CONVENTIONAL_MEMORY);
-+	if (status != EFI_SUCCESS)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+int fdt_efi_pmem_setup(void *fdt)
-+{
-+	return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-+					       fdt);
-+}
+ 		if (!booti_setup((ulong)header, &start, &size, 0)) {
+@@ -349,9 +349,9 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 			      spl_image->load_addr, spl_image->size);
+ 			return 0;
+ 		}
+-	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) {
++	} else if (CONFIG_IS_ENABLED(OS_BOOT) &&
++		   IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
+ 		ulong start, end;
+-
+ 		if (!bootz_setup((ulong)header, &start, &end)) {
+ 			spl_image->name = "Linux";
+ 			spl_image->os = IH_OS_LINUX;
 -- 
-2.34.1
+2.43.0
 
