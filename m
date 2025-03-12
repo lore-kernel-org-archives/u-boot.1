@@ -4,103 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307CBC28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 21:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0A3C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 23:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89421800B6;
-	Wed, 12 Mar 2025 22:08:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A79380F9C;
+	Thu, 13 Mar 2025 00:49:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NIE+Cho5";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="h5Z8eS1q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7951805D7; Wed, 12 Mar 2025 22:08:43 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 73594810F4; Thu, 13 Mar 2025 00:49:34 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2061b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::61b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E1198003E
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 22:08:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D4C380756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 00:49:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 6001E3F2B2
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 21:08:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1741813720;
- bh=DFJTieNzkq9V1qSmEC8ixYBcFl4MNKSAj5+zi/OOoVk=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=NIE+Cho5T+Dl9NwLXVWkuD9ryG3v8csW0kqVCBuIxUUGH630+KRWSjGmBGMDU3PT1
- lRAfK1HVdd/Zx4rhgwIvPB2MIwYfZCdeSQoNZubLmYeAzmnBtfzSAepMrFAOx5MSY0
- 4AZ5+YQ+qx4G6UWbeMtW9MzboPvuoM4ptPF6bjcXe/TiR5xtbCkctkYdcYCAKghHuD
- yI1Yf6oudRQIwzcdBOAFtm08xhJhe9pziytNT17lNTGMvBJZIe5LeYzOua1IpFuXe/
- fUp7gWa9udIqCSNDGFySeObzgwy/Wi1BHlodQY9HttvhbaLNeN2Rj+CBKdEbStDz/U
- oVxFsVko2uZWw==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-43947a0919aso1564305e9.0
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 14:08:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741813720; x=1742418520;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DFJTieNzkq9V1qSmEC8ixYBcFl4MNKSAj5+zi/OOoVk=;
- b=TbwS/8MrL4K+oF8NvojyGPepeT1m6sS4d6IncSu0IbIadZ9tXq1ncBiPxW9XXSo8Hv
- 2gfIauQHdgnJJKsQ/Dz0vZ8ZJy0sHROlQN/y5/jrjcpxd+vSQNj8Bmsyf4F5AJbKChKq
- cVMzYi1TicrwgKXeEPAYm2uoEAM2PHsdZQXZ2yJicXv9jaSoBgMiaTzfcto6JBX2R6K5
- z/PzHqi7QNtU0J9OrAkiTe145h209uxESPWD8meRGb2CrjA/mcqW3VZAHYcY0JctZ+z3
- V11xeRtOr6tGgO2+t1QzKiDs7G7oPtT4P0eBpDfd168E+YWGZmN5pRC/q/8lbjvSAwPr
- Eykw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOl165WxOxWxFMs7uHV6ZZtF41MQxq0dAeWud6GMoiVhb3ewvol1CzHLsnUVHqBt8KC7TwZ8U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzIhsECKc/qMPBUuRlrk2KM1SBw2QVQN+Ll9B800HRHeHX5POkI
- 2GX4trdvNWecvrD6uO1rnsf9Bljx94+455R+FX4S8wk6I3MgDba4FDW5fUfTLu1CUm6/b5JWypT
- D2aPhboVkkyXZ2Oe4hxxhmPtnf9E8r+4N04WLE77jv0PcR4FhMNyUe15I1LTqHGzvl4wAyyWiqC
- Y=
-X-Gm-Gg: ASbGncsbThh8WWHZ6AiPQfoA/1yFlwqofk04QbQcpSbbSlYnGuFuUv4W7MamkyRnXao
- 6lQRH9gYRLDfR5vBJrf0B/iPgqRW5kyuCOtvI1RE1nzE8ReQ+GFubogCxNcUW4xZ2bjGyMoGDhq
- FHhX3NI5yHzpoghxs6hgcEU3ya51jzNuw0P1lPc0/jQrJ7A28PgFOLP+CujPQ4kik2Ob8fzq993
- nY83zAUY5AtYvrPGU2UGxEAQ7jJJTt1FN/RRxcmXQa4f97rnZU9GktTE2w0qtO5W83T1pE5UWCk
- XaRaUzj/x+NjO6Hjb3f8djg/kpgMPSq9gCGWNceO0I2oERqPqm13X4iFBPATYvD4xHtAUECztrQ
- srl6Uzg==
-X-Received: by 2002:a05:600c:1e8c:b0:43c:fc0c:7f33 with SMTP id
- 5b1f17b1804b1-43cfc0c92bcmr132609745e9.2.1741813719811; 
- Wed, 12 Mar 2025 14:08:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHl8SyLUZk7AKGEG8a0JxMw2axzfu6Cq3d+gwmRGUXbo/Dq4AZzDaTIj9FweT4tx2od1ejd8g==
-X-Received: by 2002:a05:600c:1e8c:b0:43c:fc0c:7f33 with SMTP id
- 5b1f17b1804b1-43cfc0c92bcmr132609575e9.2.1741813719368; 
- Wed, 12 Mar 2025 14:08:39 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:345b:e644:8505:68cc:d761?
- ([2a02:3035:6e0:345b:e644:8505:68cc:d761])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d0a731270sm32570825e9.5.2025.03.12.14.08.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Mar 2025 14:08:38 -0700 (PDT)
-Message-ID: <ab576278-e196-4def-8cd4-5c828259cbc5@canonical.com>
-Date: Wed, 12 Mar 2025 22:08:37 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 8/8] blkmap: pass information on ISO image to the OS
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, u-boot@lists.denx.de
-References: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
- <20250312085424.1201148-9-sughosh.ganu@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QnEU1y3CDLigujF3P+Bd8+/dyfWDn5/7iwT9Vj8tK7BFM0x/pwODMA0F215n2PckaOjYw1Ux+wGfi6d4SOCHZi3/rYSAl+Hwp1yM17QuW4RawAPAitDxEPoRejJC1rwKohONF3d2Box3FKA7Zut7F96n0+HnNWKUwU726HnLopBIsc61GNfnhssY1non9Sq/RPw3srQXrJyfOSi7Q4V7LDk3e7f9GnHo8HAk9OWuk27v1QJAofhTVKo1zNtDFKCW7NXQtspcAtKgF1kZ7E7YRL2lSYrWqk/6cg6mz1Q/5PSib6CM4l/0nZnmI1jpxZBeEUbgpm3dyE4U7N6AfFOZrQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1IQ1lxreNOTtcmpbOmPE/0D5MtB7NEiDH1479AqYZIM=;
+ b=s317zVDP+ubU8jl+lU9uf3VcWYmAKiD/kvuI7wnGaq7vfUId5n3flrBRJfQTDPj+osO873o/YaeGInGcJ+JiP2ypkvQ6kexGUWbtIWMOu/B2rhumyhOMaYj6HE+BYeOR9ipcXU9jjdYlYY8BjWKRZJD2WU26TeFUKwsCxJFulrV4FeRvc289r3ikP9VMg45i/SI3vV2sF6f77kMG2DEbH4Emzr+QlApzIbocFYZkXBtGix3BiNyQfyMxQ/5GITJfuwtOsLcEnT+DN52+SxSnjAAwnBrrWWMOQWmUj0STQ4ZtyMwvNMgQm2/IncS+SgGipQ4r8wFBLNifw1oOApbTMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1IQ1lxreNOTtcmpbOmPE/0D5MtB7NEiDH1479AqYZIM=;
+ b=h5Z8eS1qKbg33Yt4s0r6kpzrFn2DHCwx0K/ezIgivbd8j+zJRt3YLRe7oe0vWhC2g6LsYnW0O0JCU6E3xdwJmjOsAlp4fa2BqJwDpx6h4Ipwl8m8rdPKkDk2jPvTbBiNpMypOeWKYV5NJv2qf1kNKFYWWl6IDP8vfV6dM2z1o6WOL+TQHI6DIjPnFVETJgSp7GYfI+Ja5NQzv/qE81JS7kB670wM8Hm21b6XdbROP+o81lSnciMBzWAQneFX0Lr+A78FSq5BwCL+62LxpjxObp3kIQKrx7NAVPr5IUxGNm7+bCZOOaNFtySudBKRNnzh88HNdkVYtq6n2sNEzk7dtg==
+Received: from DB9PR04MB8461.eurprd04.prod.outlook.com (2603:10a6:10:2cf::20)
+ by AS4PR04MB9715.eurprd04.prod.outlook.com (2603:10a6:20b:4f9::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Wed, 12 Mar
+ 2025 23:49:28 +0000
+Received: from DB9PR04MB8461.eurprd04.prod.outlook.com
+ ([fe80::b1b9:faa9:901b:c197]) by DB9PR04MB8461.eurprd04.prod.outlook.com
+ ([fe80::b1b9:faa9:901b:c197%4]) with mapi id 15.20.8534.024; Wed, 12 Mar 2025
+ 23:49:28 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: =?utf-8?B?VmluY2VudCBTdGVobMOp?= <vincent.stehle@arm.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, "tharvey@gateworks.com"
+ <tharvey@gateworks.com>
+Subject: RE: [PATCH] imx8m: soc: cope with existing optee node
+Thread-Topic: [PATCH] imx8m: soc: cope with existing optee node
+Thread-Index: AQHbkbkPO3fdAErKrEyuSCQxmDrzsLNvjiiAgAAPfBCAABGigIAAf87Q
+Date: Wed, 12 Mar 2025 23:49:28 +0000
+Message-ID: <DB9PR04MB8461D8A236FAC9852C8F219F88D02@DB9PR04MB8461.eurprd04.prod.outlook.com>
+References: <20250310123621.389594-1-vincent.stehle@arm.com>
+ <CAOMZO5BV1BBP-f++-NzjzEDXCG1-2WVjma8-e5zpi3yLKGeYCA@mail.gmail.com>
+ <PAXPR04MB84599BAB4FADAC79AB75934388D02@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <CAOMZO5BTGGU=fJkuxjgq++7+qw5maanjZ14p4=9_RhPdO85GgA@mail.gmail.com>
+In-Reply-To: <CAOMZO5BTGGU=fJkuxjgq++7+qw5maanjZ14p4=9_RhPdO85GgA@mail.gmail.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250312085424.1201148-9-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR04MB8461:EE_|AS4PR04MB9715:EE_
+x-ms-office365-filtering-correlation-id: a0735020-2d7b-45bd-ea4d-08dd61c08741
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?NHA4R29ia043SEEyNlFtU0RhQVNiSFFtRXlnaEVBNWJjMERCbm1hQitCa05B?=
+ =?utf-8?B?TG5nMmpDV1lrOXJnOVkzNE1ha2pUWG8zTTNFRmZ0MVpWS3MwcldLQkgzYTRL?=
+ =?utf-8?B?R2pUdEgvY2w3UjgzQlZiV2p1cVQwMzE5cDVKa21JWUY1SUhkcFV1THR2amoz?=
+ =?utf-8?B?cXFwQnlxN0NVS1M1bWV0dG42YXBLN0ZSZ0hDZVRnU3orUW9PcFEzVUgrOEhP?=
+ =?utf-8?B?NzJOVGJZYTdTM254bzhUenBVYzF2Rzh6RHFGNmQyYjNoN2lpcWwzWE1tOUNl?=
+ =?utf-8?B?ZXcwMWYzSVpzS3dHbURJcjd4bXNuNVNwVXBRNGtIeXR1U0trc2R2LzZ4L1Rr?=
+ =?utf-8?B?bXg3RjRxekpSRURIT2tPbWVMbTBNQVNuTTIvOWtxSUt0dllXL1poTW45VDdR?=
+ =?utf-8?B?UXdwS3hPQTd6Vm5rc3llek1penNZYU1Vb1BDTUsvWTR5OVlKWTU4SFVmbkc3?=
+ =?utf-8?B?MmhKOHY4S3lLZldZV09yaEh4SlgxUkUwUktNQlZ0Q2hIVFlRWWdVOWlrWWow?=
+ =?utf-8?B?ODJTbDc1a3RMNE5heHZlaVNUWExKVWJkTkdmTmN3V3Q1MWp3bDNxbmp1NHhP?=
+ =?utf-8?B?ZloyWkpkRlg2UGFLNkU1N1J0Sk5lTDQ5SU5QWW8zNUxwUlNzbTB4NW9NNTlt?=
+ =?utf-8?B?c0dVTGxSTXBOUVEyMFRXL1RYMjdEYUZQeGNNeTNrOVR5YmFkU0F3cS9iS29F?=
+ =?utf-8?B?T25JS1hDMzdIcVhsSVJVaGV0YzdjUFhvNUVaN0FWN2l2dzBMdjNwaWxlQ2pV?=
+ =?utf-8?B?RlBaRDRWbVBNZ0QybFhPUEJMRGFBK2wrb2RoaGZURmpIeDR6cVBWTjF5eGlI?=
+ =?utf-8?B?T1NSQndwSWVRQkhUblovWTg1WmxCbTZkMyt6aWNhNFRsa0JTK3hWMUhyT1Zm?=
+ =?utf-8?B?VkFnQitZSCsybmJHcHkrRlozRS9MN2VCRXZoT2tQN0k3eEg1WFUwNVZmWkps?=
+ =?utf-8?B?bkZxbmZUZXhUQ1F3M0o4bDNDQUJlOFZ4SUliOUZFQ29JenQvWjVTSnc3aXJy?=
+ =?utf-8?B?YkF2TTIrSG85emFFdlNPWDlkTEU1eHFubnZhY3dWY1g5Y3pJQXFleTRGSTdi?=
+ =?utf-8?B?bjI2T2RPZWk0bWpTMnhIWUxlUWRnNWE4RTFPMm10amtzeW9ITnlpRDNhRkRJ?=
+ =?utf-8?B?SzdjLzI2MU9VQ0dkb3RGNWxyampLQkV6bnpkRGF2L3NNU0RvU1M4TWFXNGY3?=
+ =?utf-8?B?VXhBVWVVNk5mbG9aK1R3K29qbmlvRmw1LzJwb1JDSE1QZTdMaEZBZTNiMllW?=
+ =?utf-8?B?YzBRWWZYbUVPZGhRWGFrQVRuN2Z2eEdTSUh2UmNnVkQxcDQwUlFIem41Y2dK?=
+ =?utf-8?B?V082QTM0UDdZZGNSZ3JtUHBvS3ExY215QWZFZzR6c2QrZ3NqZDkrYkJzMUdl?=
+ =?utf-8?B?UisxdnIxdVBTUVZ3dWl6d05hd05kUnlqWnluV1p2Vm5HVXZZdVdxOUl0R3Zr?=
+ =?utf-8?B?T2lPbzFiOHZSb0pBZERHZElYcjhNZHVWT2FIb09lNGNvMWEzcXVVdEhCaC8z?=
+ =?utf-8?B?THdzREFObW5sS3FtUDJXK05mU0FOVm4zTy9jdDEyMzdaV3hVMjQyek5jcG5t?=
+ =?utf-8?B?TEZiVTZ0V2x6WUxwNzZkTTN0bUEwaHNyKytjUC8wNE12UnBoMzhYRmZ6ZndJ?=
+ =?utf-8?B?KzlHbHl4UE1iaU9GMlIwdnZvVERNZ0NOTzVkMThTUEJlOEs0aTdNV25HZVh4?=
+ =?utf-8?B?ZDNTNCt4ekpDVlh3MXpZa1h6NEVmNm1UTEUvcUlwb0VtMnRlOEpXanlZZzQw?=
+ =?utf-8?B?bnhhYkl6Mm5xZnN2b0hQbTJLOTJRYUZuZjQxM3JDdjNYYU9VVDlBSFB4TWZE?=
+ =?utf-8?B?Sm14Zy9jN2JCZWJQdElOcFRla0NvY3JyMHl2cjdWR2RUSjNFaTZJNXp6WGNI?=
+ =?utf-8?B?NTFCcU4vcVMyQXJYSTI3TzZmZWF3d0NOa1phaVZ1anB6WlJWZ0lPKzd6NE8x?=
+ =?utf-8?Q?QNoAcknzJwb7sZW3cduH89YjoFRHb2xP?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB8461.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UDZXMk5aRGtEdzRJTElvdlpIUTNwa0R3cFpCVzRZcFAxSHpjV1dIZnc2b2FQ?=
+ =?utf-8?B?bHBzSWFGQTNGeUlVRkUvOEdmZkxJRy85VWNHZUdWNGxNTXZ0YzhncXJydWRJ?=
+ =?utf-8?B?ZTZLQlg3dTFTNW9yU01iUE4wM2h0U05NVUMrVXc0YXdJVUlMV0NGTUUzak1v?=
+ =?utf-8?B?TGw1V3RQMUM0UkFEOW8rMWpIYk5aWVE2QVRDZ2ovN1NUcEp1dFFmRC85bXAx?=
+ =?utf-8?B?TG03K1lBUlhvNVBHYkZMcE9pMmNuSUlFbDBxVjk4ZlZpcXZlUFdlQnh6Tzlp?=
+ =?utf-8?B?cWVUamErZmdIZFBFT3UxRTc3QytyaTN4bCtIWXlJdHpIQVBUNUJhclVjdkxt?=
+ =?utf-8?B?UXZaQnphalpDcFphQTF4bXg2Mk56aXJmWDM1dGhpb2hLOEdIRnVqWFNOSUgz?=
+ =?utf-8?B?TVRvSmxVZHU5L25jUWI1TUQxbk1XL0d2ZFg3eTNNQTQ2aVdjT08vWkhJRkRV?=
+ =?utf-8?B?Szkwb2dKUll4akJ2Qk1uTGxWb0JLc2hCMTZBdHJuVzFxNnZSWE5JeG9SVGFZ?=
+ =?utf-8?B?TDBYT0hwd3Z1V0VIWkVSYVhWTmN1aUR3TVF0dUVtbkNMZUVscnN5V1ErM2Vk?=
+ =?utf-8?B?Z0NWSVVOS1kxWUN3ZU0rM2E2c0IvZlJNd0oyOVRqWE4xb0pzK1dIR0FjSjgy?=
+ =?utf-8?B?WnIxVHBGM3lnZG1KOGZZQ3BFaGljRFc1MmdlZ0x3anFNRFhiYnJrdWYxUU9T?=
+ =?utf-8?B?MnVSdUJiRmNUZi96QnlwZXFTb1VBcFpUMEZSb2Y0MHZqMUU4SWhkd282RjE3?=
+ =?utf-8?B?YUhuRjJiU0N6cVRpN3lla1hxM2FUR3BPNlRxdk51MmpDNktlWkhNSjFOazg4?=
+ =?utf-8?B?Umd6b2ZKQkdNVE9oOGk5blk3TkNtUE03NFZGK0doUnQ1U1NPUFFZRjFpazJS?=
+ =?utf-8?B?K01SWk5FTU91UFVtZWFrRU1YclF6TVVXa3BnZkkxZ0pvampRU3lYNFBzcjBj?=
+ =?utf-8?B?UW1WbUNLNis5K3BWK2wySnJiZmIwME1vcm9kRDUwYkNGaVFLY1Zud050T1BK?=
+ =?utf-8?B?Q2NRMjI1ZjBwbkdrUm5IdnBZSGcyOUJ2UXpWeDlMSFEvVVVjZFphZWtRQTFl?=
+ =?utf-8?B?aU5oVFBBak1IUk1OSjlaSmU2aU55eWhZR25ZdDJUSjN6cFd1TnVCK3JHUEds?=
+ =?utf-8?B?OFhjL0Q1TFdFTlQyTWt5TTBtZXQ3V0JSeXExTWdGcjZXNnU2SWlLaGFNYWlF?=
+ =?utf-8?B?L0EzYUlMS01mdEpMRWV0QXlDajBZeXVyV09qSTBpTlNQVGZicUV3VjNGeHh0?=
+ =?utf-8?B?bHNXK1kvbURNMXEwQVRPNStQc3dkL1dBdyticXpnTDlIQmVDWTlnSWJiRG5r?=
+ =?utf-8?B?bk41azZSUklVbm43cVluaEdQVTF1VHhiYWt3MGF6OVB0aElWTkh0aTVSeXlQ?=
+ =?utf-8?B?RnBSMjRhUmgxMGJ4VW9IZ1phNDM2OW1DUDN4d0hRZ1M0aXBDQ3lYS21NYk51?=
+ =?utf-8?B?STBNenpYZ091TmtOOGphaGd1cSt5TVNnRzg0WVdIUFE0V2pHTjJYdnpReXN4?=
+ =?utf-8?B?bmV1UC9UM25oUjVOd0g4MUpzaWpEbXdxYWxpRlJMRDRVbUVNWFZKd3Z1N2d1?=
+ =?utf-8?B?OVc2MThEaWM5emM4UGdITDRRWXFyN0hsRHZNV01Hb3NNSUZxeENLMS9IY3hk?=
+ =?utf-8?B?cTRJUk5LbEN6a2ZQZnBsYVU3eE9RQUhOVjdnQmZjWm45YmRGWi81eWpFUDVB?=
+ =?utf-8?B?YkF0VlQvb25vYm9ZbVNKS3NzRTg4TDJVWC9xNnRPcFo3YUtFeEZJUEVnM3Rp?=
+ =?utf-8?B?UHZINC9jSFVpRVNJR0RYRUdSdVBKNkxHTUtuT0p6US9wZFBPYTR2Q2xtM2No?=
+ =?utf-8?B?U0pkcnVkZlphdkZUTVJWcllweWlmbFRDcnAvSW1YenU2UCtIVHlrMjFPZkNx?=
+ =?utf-8?B?VUIxWTZub1pPRmw2TjR6ckZMR04rRG8weXNSeGZvTXRTMGovY1dDak9Fb3hw?=
+ =?utf-8?B?SXJzZXhOb1JDNW9xRlAyNk9FYzVlWmM0VFd3R1NlaE1BSFk3Z21Ib1loTzU2?=
+ =?utf-8?B?QkN4aGZDcTIrUFRySXliWU5TK2xEOWwzQldKdXRYdWJVcEVOMWpMRkV6eEVD?=
+ =?utf-8?B?dkRxeHpwMnNZZUdqOHZabXVGNXVaYndRUjlrZzczckd2bzJNaXRYWTM3cko4?=
+ =?utf-8?Q?f5VE=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB8461.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0735020-2d7b-45bd-ea4d-08dd61c08741
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Mar 2025 23:49:28.6802 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KWQTv51exjXHRT8NG2yklvV9KyoJ/Ss4Mp4kfNKlcR8oW7LL0e/pjJPaLRpLyhv+J116S0wA5fljujr+wpfSOw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9715
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,236 +180,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.03.25 09:54, Sughosh Ganu wrote:
-> The EFI HTTP boot puts the ISO installer image at some location in
-> memory. Information about this image has to be passed on to the OS
-> kernel, which is done by adding a persistent memory(pmem) node to the
-> devicetree(DT) that is passed to the OS. The OS kernel then gets
-> information about the presence of this ISO image and proceeds with the
-> installation.
-> 
-> In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-> device slice, with the 'preserve' attribute. Add a helper function
-> which iterates through all such slices, and invokes a callback. The
-> callback adds the pmem node to the DT and removes the corresponding
-> memory region from the EFI memory map. Invoke this helper function as
-> part of the DT fixup which happens before booting the OS.
-> 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
-> ---
-> Changes since V7:
-> * Fix checkpatch errors in blkmap.c and efi_helper.c
-> 
->   boot/image-fdt.c            |  7 ++++++
->   drivers/block/blkmap.c      | 44 +++++++++++++++++++++++++++++++++++++
->   include/blkmap.h            | 17 ++++++++++++++
->   include/efi.h               | 13 +++++++++++
->   lib/efi_loader/efi_helper.c | 39 ++++++++++++++++++++++++++++++++
->   5 files changed, 120 insertions(+)
-> 
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 9d1598b1a93..8f718ad29f6 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -11,6 +11,7 @@
->   #include <command.h>
->   #include <fdt_support.h>
->   #include <fdtdec.h>
-> +#include <efi.h>
->   #include <env.h>
->   #include <errno.h>
->   #include <image.h>
-> @@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
->   	if (!ft_verify_fdt(blob))
->   		goto err;
->   
-> +	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-> +		fdt_ret = fdt_efi_pmem_setup(blob);
-> +		if (fdt_ret)
-> +			goto err;
-> +	}
-> +
->   	/* after here we are using a livetree */
->   	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
->   		struct event_ft_fixup fixup;
-> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> index eefed615998..5f7602d0405 100644
-> --- a/drivers/block/blkmap.c
-> +++ b/drivers/block/blkmap.c
-> @@ -498,6 +498,50 @@ err:
->   	return err;
->   }
->   
-
-Please, add the missing documentation.
-https://docs.kernel.org/doc-guide/kernel-doc.html#function-documentation
-
-> +static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-> +{
-> +	return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-> +		(BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-> +}
-> +
-> +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-> +					      u32 size), void *ctx)
-> +{
-> +	int ret;
-> +	u32 size;
-> +	ulong addr;
-> +	struct udevice *dev;
-> +	struct uclass *uc;
-> +	struct blkmap *bm;
-> +	struct blkmap_mem *bmm;
-> +	struct blkmap_slice *bms;
-> +	struct blk_desc *bd;
-> +
-> +	if (!cb) {
-> +		log_debug("%s: No callback passed to the function\n", __func__);
-> +		return 0;
-> +	}
-> +
-> +	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-> +		bm = dev_get_plat(dev);
-> +		bd = dev_get_uclass_plat(bm->blk);
-> +
-> +		list_for_each_entry(bms, &bm->slices, node) {
-> +			if (!blkmap_mem_preserve_slice(bms))
-> +				continue;
-> +
-> +			bmm = container_of(bms, struct blkmap_mem, slice);
-> +			addr = (ulong)(uintptr_t)bmm->addr;
-> +			size = (u32)bms->blkcnt << bd->log2blksz;
-> +			ret = cb(ctx, addr, size);
-> +			if (ret)
-> +				return ret;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   int blkmap_destroy(struct udevice *dev)
->   {
->   	int err;
-> diff --git a/include/blkmap.h b/include/blkmap.h
-> index 754d8671b01..30ce80c0ad1 100644
-> --- a/include/blkmap.h
-> +++ b/include/blkmap.h
-> @@ -7,6 +7,7 @@
->   #ifndef _BLKMAP_H
->   #define _BLKMAP_H
->   
-> +#include <blk.h>
->   #include <dm/lists.h>
->   
->   /**
-> @@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
->   int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
->   			  struct udevice **devp);
->   
-> +/**
-> + * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-> + * @cb: Callback function to call for the blkmap slice
-
-Please, describe in sufficient detail for a developer who has to 
-implement such a callback function what information should be provided 
-by the function.
-
-All arguments of cb and its return value need to be described.
-
-Best regards
-
-Heinrich
-
-> + * @ctx: Argument to be passed to the callback function
-> + *
-> + * The function is used to iterate through all the blkmap slices, looking
-> + * specifically for memory mapped blkmap mapping which has been
-> + * created with the preserve attribute. The function looks for such slices
-> + * with the relevant attributes and then calls the callback function which
-> + * then does additional configuration as needed.
-> + *
-> + * Return: 0 on success, negative error on failure
-> + */
-> +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-> +					      u32 size), void *ctx);
-> +
->   #endif	/* _BLKMAP_H */
-> diff --git a/include/efi.h b/include/efi.h
-> index d005cb6181e..f9bbb175c3a 100644
-> --- a/include/efi.h
-> +++ b/include/efi.h
-> @@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
->    */
->   int efi_get_pxe_arch(void);
->   
-> +/**
-> + * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-> + * @fdt: Devicetree to add the pmem nodes to
-> + *
-> + * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-> + * and add pmem nodes corresponding to the blkmap slice to the
-> + * devicetree along with removing the corresponding region from the
-> + * EFI memory map.
-> + *
-> + * Returns: 0 on success, negative error on failure
-> + */
-> +int fdt_efi_pmem_setup(void *fdt);
-> +
->   #endif /* _LINUX_EFI_H */
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index 37e5859741f..62772a0d747 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -5,6 +5,7 @@
->   
->   #define LOG_CATEGORY LOGC_EFI
->   
-> +#include <blkmap.h>
->   #include <bootm.h>
->   #include <env.h>
->   #include <image.h>
-> @@ -680,3 +681,41 @@ out:
->   
->   	return ret;
->   }
-> +
-> +/**
-> + * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-> + * @fdt: The devicetree to which pmem node is added
-> + * @addr: start address of the pmem node
-> + * @size: size of the memory of the pmem node
-> + *
-> + * The function adds the pmem node to the device-tree along with removing
-> + * the corresponding region from the EFI memory map. Used primarily to
-> + * pass the information of a RAM based ISO image to the OS.
-> + *
-> + * Return: 0 on success, -ve value on error
-> + */
-> +static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-> +{
-> +	int ret;
-> +	efi_status_t status;
-> +
-> +	ret = fdt_fixup_pmem_region(fdt, addr, size);
-> +	if (ret) {
-> +		log_err("Failed to setup pmem node for addr %#lx, size %#x, err %d\n",
-> +			addr, size, ret);
-> +		return ret;
-> +	}
-> +
-> +	status = efi_remove_memory_map(addr, size,
-> +				       EFI_CONVENTIONAL_MEMORY);
-> +	if (status != EFI_SUCCESS)
-> +		return -1;
-> +
-> +	return 0;
-> +}
-> +
-> +int fdt_efi_pmem_setup(void *fdt)
-> +{
-> +	return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-> +					       fdt);
-> +}
-
+PiBTdWJqZWN0OiBSZTogW1BBVENIXSBpbXg4bTogc29jOiBjb3BlIHdpdGggZXhpc3Rpbmcgb3B0
+ZWUgbm9kZQ0KPiANCj4gT24gV2VkLCBNYXIgMTIsIDIwMjUgYXQgMTI6MTDigK9QTSBQZW5nIEZh
+biA8cGVuZy5mYW5AbnhwLmNvbT4NCj4gd3JvdGU6DQo+IA0KPiA+IFBhcnRpYWxseSByaWdodC4N
+Cj4gPiBCdXQgVGhlIGlzc3VlIGhlcmUgaXMgdG8gaGFuZGxlIHRoZSBjYXNlIHRoYXQgdGhlIG5v
+ZGUgaXMgY3JlYXRlZCBieQ0KPiA+IG9wdGVlIG9zIGFuZCB1Ym9vdCBzaG91bGQgYnlwYXNzIGNy
+ZWF0aW5nIGl0IGFnYWluLg0KPiANCj4gWWVzLCB0aHMgcGF0Y2ggaXMgY29ycmVjdC4NCj4gDQo+
+IE15IHF1ZXN0aW9uIGlzIGlmIHdlIGFsc28gbmVlZCB0byBwYXNzDQo+IA0KPiAgIGlmICghSVNf
+RU5BQkxFRChDT05GSUdfT1BURUUpKQ0KPiAgICAgICByZXR1cm4gMDsNCj4gDQo+IEFzIGEgc2Vw
+YXJhdGUgcGF0Y2guDQoNCkkgdGhpbmsgbm8sIENPTkZJR19PUFRFRSBpcyBmb3IgVS1Cb290IHRv
+IHVzZSBPUC1URUUgZmVhdHVyZS4NCkJ1dCBoZXJlIHRoZSBub2RlIGNyZWF0aW9uIGlzIGZvciBs
+aW51eCBrZXJuZWwgdG8gdXNlIE9QLVRFRS4NCg0KVGhhbmtzLA0KUGVuZy4NCg0K
