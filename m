@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D37C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:10:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 220C5C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:15:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9AB281DD4;
-	Wed, 12 Mar 2025 19:08:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ABFBA81671;
+	Wed, 12 Mar 2025 19:15:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cU2KxuZw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iJR3wP6B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 973DB81D27; Wed, 12 Mar 2025 19:08:22 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id C347481782; Wed, 12 Mar 2025 19:15:36 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2D1B817A5
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB3C08141D
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5e6c18e2c7dso91492a12.3
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:20 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-abbb12bea54so31345266b.0
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741802900; x=1742407700; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0H5x8ovtosa95B92FkhvCVl4OcNkPeMbUdAIfexMGY4=;
- b=cU2KxuZwiTAo2QrlBgEf8gGirJqrbnEeL5EoruzYj5q4FERBIPzvRm0yybfm92xGXw
- w0fi3QsxqKwwfpV8bYj7PWug1RNPTSbr/IP+K7jkU3lt7u6B6nb5Mx0WDXJNy0UYRD4N
- gRcQZauKBlRZmzwdd9qu+ttx/YabZIL7kh7u7hYVckGuaR2OZACrWoCVT5n5J+GLSZT1
- OyA5fMzVimxhvugGqxXNWOADyISdB3QmtiKrijJ2q1VqK/vbyBK9Q7kamo0ydkJOy26v
- 1nBsiQB+Fng3JPoDEPCWblgdcwtz/xy3wMb9R6ZLkL2VbqzwKGpWBuFQ6pusVeIR8bfJ
- tg+g==
+ d=gmail.com; s=20230601; t=1741803334; x=1742408134; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=m+aLMxOxU57xV3q2C0DUGCLtwzOnE4qBqKRBXOjgw4I=;
+ b=iJR3wP6BQwfumFV/T9pKQzk8oNlPPatavzTohQNMnL0uQo2CokEUM78++quyCWTXb/
+ fbSmxrRQwu5D9lMAqarQ0VaOwuTlMdrQpTPeXKJjZ3wXbPAe9IuPVjMp0j8A7G0tmLZD
+ 2dq9Ju29io43Sw2h83C8rm0Os9XAiM+wNnQpUcxSnub2IxELwRNuQbXGVOkg2KEprC9z
+ 29AuMM/P0VOME1xR2W/zXnlpoO6nEGiF2K5aB8A71CVEhzXcVJWOzt7LWg+/9hEW6BWg
+ 2nxgObVLPULV5Fp+1WJBZh78mfUSyTDiTnfckZIuE5dTDbMXqNu7izlVq72otue0p9iH
+ Rzsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741802900; x=1742407700;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0H5x8ovtosa95B92FkhvCVl4OcNkPeMbUdAIfexMGY4=;
- b=iCjT0Y0pm8Cm/DJZV+ieisF6DQl6AhNS+tRYelTjUozGMQfe304mlXkCl8JBmgMNX1
- H/ogDWB4JUMlnAyN64v5JBmSSV2njGixf3iU4aYVUijvLhYTYtMIr2EIw3WJA1wJiOWL
- 5AHiWgLvAtaPYB5cftWErfImLFuTgv96k+V17lpc0QUqwDobfne60AR0RrrPGfuX1QC8
- AEuhRgZXMWHb70y2wjpHL5GvAuMgvbbD1Rz5AUnVewmxsEq6mUz9lywazxOWoPO7pL5v
- /eyoXMOoABhgfIJKYfg8Ar7BjB2JD3MHTZ29CAp0bmnZPsrF5zwRyGChb2p1uW08qqAY
- Rb9g==
-X-Gm-Message-State: AOJu0Yz4B76+YmZa3BrkObcm5Pu2t4kAYhUSRPVpOCiXhNIp2svoOhfW
- SGuxyjSyYKi67giLvuqQ/fvVt2VQxNazA9+5S6VzClvNK0BYVa1C
-X-Gm-Gg: ASbGncu5Ex1KzGhb0Kx2ZoBDhUXRKxQtFNnWkbgEokdnzW38Q2N/bIBPswsQq3thvC9
- eZqOVhAsRoyIjzQorJrUAgPKSlX0n0ZUpdrLPSE764BCwUZza+qZDvdyzkB494kRMxawwOvbqvE
- wZb0cL029rnI23aiBeRlyqdc3AZpeehxQoAZQ+3MBSCvbYowIagBFysXaKzOYR9AYo0NR2w5T2Z
- du1esOXJ5tfJfgqWkHp1Uqvf5m7T+IlPu+x+xamsGcVlGdoipBo1ra3MCp1ugW53HFcOZC6TT1N
- YBx3LehHZjlmj/kMlcwiKIj6zS1Hw2jVGb8J
-X-Google-Smtp-Source: AGHT+IH2PxAE+UdZb5+GWzihdQ295m8imHwRTEGxhVVynmMH986vGznJSLYKlPLIrWHuNDdAT5MBAQ==
-X-Received: by 2002:a05:6402:4020:b0:5e5:ea02:1230 with SMTP id
- 4fb4d7f45d1cf-5e5ea021550mr32795744a12.28.1741802899972; 
- Wed, 12 Mar 2025 11:08:19 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741803334; x=1742408134;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=m+aLMxOxU57xV3q2C0DUGCLtwzOnE4qBqKRBXOjgw4I=;
+ b=Zig9XkoB+fhvD6H8lK2BpTztHqkt7v5V6H2OBhCzkfFr9hK6RT3C6/UFjcd6mJqCq3
+ L3LGr5EXN9g2a2XVFZgpCke8QPu+hblZlHBBG9jT2WOF+MdKPDBjEuhu/NBy9P9Tioa9
+ 8to3JYXyo3BQ31qJkQYl2+dO6OrZsFqMhugjCHA6q3oG/U8Sr20Jsslt4+nMV5OkoCDE
+ oq0TLeSUpCCvBJAKIMKIK0sJk1Q7+nmvrMmwjiwbz/bI9wqIjiyTaMdRO3f6/IQd5+Na
+ AeET/2CrN8z2onBDOfE8t2IJalnxqFvVmcfMTsvOFXkM2HthM/ik78dGvVczTq9l9Xwd
+ fhtA==
+X-Gm-Message-State: AOJu0YzyMUGrQPgXcxY0nSX88iy7ifU8dycHi5QIxlCQ3JzLpADFd36D
+ yQgh1fVPv1oq+/HGltu4b+heCIyMX/9uclYeICua8As0iP0iQydD
+X-Gm-Gg: ASbGncv77QhuGkkewVb0j7dgKNC+NtG/ydaBEb9dIr6jpHxVL/XvHaIgmn5xm/5NOzR
+ ePJC1+SVJakzs/XxVJ1dXzzSDLOwOyYAvyCLtLaQLKd0hZqMWJI7Ezcwgq0wRn64IJgfIVVoLSS
+ Oqyx0GoFrewbtq9IoWqElpXKJR9nxiMlg2LwJvG2+uKqELUAqbJl+bk01+CtnTCHc8cU9sSUN5f
+ wCcuuqvGkgPjAiKw1vVV73YEbCvsylPvYJfaghPLVU9F768I2mcSYIG4RRFi/koXmi3O31DRuH0
+ mHxORQMP/rjp8rV+v3gCj2PMoL3hAwCEZdqa
+X-Google-Smtp-Source: AGHT+IHVMil9OlUcoac5uLgYPrFn2fp/2fY1rT55F6OVAH0J/xqLuDdqpcNjAC78LApKe0JhyNaAhQ==
+X-Received: by 2002:a17:907:60d2:b0:ac2:a2f9:4728 with SMTP id
+ a640c23a62f3a-ac2a2fa14a9mr1723707866b.56.1741803334164; 
+ Wed, 12 Mar 2025 11:15:34 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.18
+ a640c23a62f3a-ac28c11561dsm641906666b.145.2025.03.12.11.15.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:08:19 -0700 (PDT)
+ Wed, 12 Mar 2025 11:15:33 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
+ Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 13/13] video: bridge: ssd2825: fix reset gpio direction
-Date: Wed, 12 Mar 2025 20:07:54 +0200
-Message-ID: <20250312180754.120946-14-clamor95@gmail.com>
+Subject: [PATCH v1 00/11] video: panel: various panel fixes
+Date: Wed, 12 Mar 2025 20:15:12 +0200
+Message-ID: <20250312181523.121313-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250312180754.120946-1-clamor95@gmail.com>
-References: <20250312180754.120946-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,40 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The reset GPIO signal operates with a low-active logic. The driver
-needs to be adjusted to correctly handle this.
+Fix missing LPM flags on all panels below, adjust endeavoru panel to comply
+DC changes, add power supplies and fix reset gpio behavior for renesas based
+panels.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/video/bridge/ssd2825.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Svyatoslav Ryhel (11):
+  video: endeavoru-panel: move backlight request after probe
+  video: endeavoru-panel: add missing LPM flag
+  video: lg-ld070wx3: add missing LPM flag
+  video: renesas-r61307: add missing mode flags
+  video: renesas-r61307: adjust compatible
+  video: renesas-r61307: fix reset gpio direction
+  video: renesas-r69328: add missing mode flags
+  video: renesas-r69328: fix reset gpio direction
+  video: renesas-r69328: add power supplies
+  video: samsung-ltl106hl02: add missing LPM flag
+  video: sharp-lq101r1sx01: add missing LPM flag
 
-diff --git a/drivers/video/bridge/ssd2825.c b/drivers/video/bridge/ssd2825.c
-index 2a49b895404..a307993377c 100644
---- a/drivers/video/bridge/ssd2825.c
-+++ b/drivers/video/bridge/ssd2825.c
-@@ -471,17 +471,17 @@ static int ssd2825_bridge_hw_init(struct udevice *dev)
- 	}
- 	mdelay(10);
- 
--	ret = dm_gpio_set_value(&uc_priv->reset, 0);
-+	ret = dm_gpio_set_value(&uc_priv->reset, 1);
- 	if (ret) {
--		log_debug("%s: error changing reset-gpios (%d)\n",
-+		log_debug("%s: error entering reset (%d)\n",
- 			  __func__, ret);
- 		return ret;
- 	}
- 	mdelay(10);
- 
--	ret = dm_gpio_set_value(&uc_priv->reset, 1);
-+	ret = dm_gpio_set_value(&uc_priv->reset, 0);
- 	if (ret) {
--		log_debug("%s: error changing reset-gpios (%d)\n",
-+		log_debug("%s: error exiting reset (%d)\n",
- 			  __func__, ret);
- 		return ret;
- 	}
+ drivers/video/endeavoru-panel.c    | 21 ++++++++++-------
+ drivers/video/lg-ld070wx3.c        |  2 +-
+ drivers/video/renesas-r61307.c     | 13 ++++++-----
+ drivers/video/renesas-r69328.c     | 36 +++++++++++++++++++++---------
+ drivers/video/samsung-ltl106hl02.c |  2 +-
+ drivers/video/sharp-lq101r1sx01.c  |  1 +
+ 6 files changed, 49 insertions(+), 26 deletions(-)
+
 -- 
 2.43.0
 
