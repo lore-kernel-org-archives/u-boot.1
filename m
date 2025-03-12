@@ -4,156 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8C52C282EC
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 02:06:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422F5C282EC
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 02:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA95180F92;
-	Wed, 12 Mar 2025 03:06:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 94772807D7;
+	Wed, 12 Mar 2025 03:31:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="BlntuAPP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j8Ekrvgx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27F2180F9C; Wed, 12 Mar 2025 03:06:30 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20602.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::602])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E88A80F9C; Wed, 12 Mar 2025 03:31:56 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA73C801FB
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 03:06:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17162800C2
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 03:31:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q2suQBLlSLIXSyMLd72zYaeSk2IZBs2ezYGojJyUgxQsUet/0dalB1niqvoTsBIfbK2ytuSK+N+SKjx4xtQFWDaN7sIZdKXiyOGw62IY5xCjqwKyZub1L7kXhdS42jHVjlPqDAm8grH/UGn5LKQflHLqoRiG6DQybUTU9s+0pjYZ1ToCfv7lviTnmEFgmMUCRQBgLguftCY5DDDjZfhSIoqDx2mM7ZIayQsmDkZuQJk1Y5V2yT0e/cnhKh3D6kZoMmzMa9bwDkSBfoETOG6Q4ODE1GKcE33o063MTnE5J6f/eK0uvoW1lGsbogJpegwUh8J5pGfDn5cJhvH1KMUOjg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9mtgFCcWhgVyBhA/RcGoQPK1QDVo6tfUjH/k0QxGMFk=;
- b=f7Xr46e2ZFEnfNwXXLpa1OyPuEQKJrKy+n7ad3UFcEHO/LatVkDJBRootcDKD2lK537rG2dw383efhGRDTQOh2DMkRCFhMJMLO6uMBDP+4oMqN0WcFRxM1gkztOKNMTUCkl+4+ay9buCDZy3jevQ6RJqWilRwTmUkOx4+A1BR1q8WBVywMtEwkDeZEP0sJU978zfJtqzwIY0BPSbnMhFCdcNbUbhlRekO7amcNI7BShpOvyH0ZbVK1HV7SlWxC2buam++j3jUjAzZ6biSZQRgITUTmazRz5HBSPPMV7LLx6AoHIc3WgKy3MhWsKV/zC2okCDmeJloYQMsDMpe411YA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9mtgFCcWhgVyBhA/RcGoQPK1QDVo6tfUjH/k0QxGMFk=;
- b=BlntuAPPh2yOd2vl6Mcjh73fNTciIGvQVpGRzzT9snXLdd1WlutIkOliF7kEwOE3ACUaF/3DI+fuTsmyfFE1ZDSsA2Hzw5fSfZDcISGKROllq1bnIbDAs2iBwFOF7lVlCjYqyUpf+invX3QbHfbq0c/T918G+TBqftj68XEo5MPL800e0zbGhS0z/cPfjt9I+UhxUQiQMKNrQ01UuD7i5Ew8yHzy5bfAGJVYTtWZOaXQXKByHd2IW1tdMT59RP2bw6CI2/iQ5fveLVeU9hEYApm6VVioVY5FMLefbLB/LCvoqBRaPFqoaKbTKkUogpE3TGgVXYj3n01iaHMsSGaVbg==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DU4PR04MB10886.eurprd04.prod.outlook.com (2603:10a6:10:580::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.26; Wed, 12 Mar
- 2025 02:06:25 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.8511.026; Wed, 12 Mar 2025
- 02:06:25 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Adam Ford <aford173@gmail.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: "aford@beaconembedded.com" <aford@beaconembedded.com>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>, Fabio Estevam
- <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>, Simon Glass
- <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Emil Kronborg <emil.kronborg@protonmail.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, "tharvey@gateworks.com"
- <tharvey@gateworks.com>, "Z.Q. Hou" <zhiqiang.hou@nxp.com>, Peter Robinson
- <pbrobinson@gmail.com>
-Subject: RE: [PATCH V2 02/10] clk: imx6q: Register UART clocks
-Thread-Topic: [PATCH V2 02/10] clk: imx6q: Register UART clocks
-Thread-Index: AQHbkuYl+AvxIkVSlEuoMc3WAtQxn7NuwMWg
-Date: Wed, 12 Mar 2025 02:06:25 +0000
-Message-ID: <PAXPR04MB84599360CA7FD2E5E707538388D02@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20250312003041.110023-1-aford173@gmail.com>
- <20250312003041.110023-3-aford173@gmail.com>
-In-Reply-To: <20250312003041.110023-3-aford173@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|DU4PR04MB10886:EE_
-x-ms-office365-filtering-correlation-id: 6cbb03ac-acf3-4ed3-2f12-08dd610a7e7a
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?kW1c7v2JlyIrBG5xUpvDonZAlB6Ciw4HEynZsaKPis6bc0TrYvXSM7er+VW6?=
- =?us-ascii?Q?cOA/xFkYtVUmO4ptAm/aNrWvRJPeMk7hiKOee/TEGAkpUjs1D8JakKBY2fVX?=
- =?us-ascii?Q?gLDEPsI0dEio6tPfe9ptN6Cq3jhKrv3rSthbUlJeBiU410SezzZkvJO/GYFv?=
- =?us-ascii?Q?u4kZ755QPzqiwD5aryPFDsEVbYZZRaIYszYXL42Bu5mWxW1e+RjXiMODJnB8?=
- =?us-ascii?Q?2EVHIBJ4XJZzfP8WjUTd0lfIU9ho3mgQfvMhsOBXlgYxj095OivJ6hIsmr3K?=
- =?us-ascii?Q?f1UINJDttHPWYe2f38wCvr/09d/OrfYmsNoei38EF5csK2jUeqKvTs3fQe6d?=
- =?us-ascii?Q?tisNjscmqmU8VWcO3qE/Mf0S7EH1JQ4OOIHgSqneUboTBrY2VgJ0SVMB4cHb?=
- =?us-ascii?Q?aRg8pZCkZhio7NM55x+Ik2kwedsvJ7Xq9G43hZ+Y7D8lgcADA3P/yQOw9wGi?=
- =?us-ascii?Q?ATepsdro5G2hCNR50SYwHfNGmHdZHWKzw9e9YL5Pv8yBFJ0Rc4JJCYg73udC?=
- =?us-ascii?Q?WQZc2is2mJibsH1gm0IACEYIf3sb3YQ3bRyGZWQtK2EnAu8rZqQMx8NrXpvj?=
- =?us-ascii?Q?Mn57HCxpoJicoZOEhaVzL0YJJkVKflpMxQ/FtayKeY2MRx0iS4rTQbwWRiRC?=
- =?us-ascii?Q?v0suvvaaI6XIb33TwlwUOq+7vyXa0lMfsEOXikGW+Qtoxlpz+8J4BaaQZM66?=
- =?us-ascii?Q?BscBchKosJh4nRrUuo1ti/URzSdHJTQ7s3zhunQKg6hILxNIfhh3uYm50HUz?=
- =?us-ascii?Q?V+GqcOcky2P5D7rRbu8kxy1jz0affFkAu08oOOF5K7SHLTCtsO3YK3/OIiLB?=
- =?us-ascii?Q?NAGnGqHK6VEoJJ93lF4COgl3dCkBPeezLxtg4lmFp9rkG5CFgp9+7ba+dT2g?=
- =?us-ascii?Q?nReGJXEUv0EU1aNjQ2YW9q4G6OTY/COzGDZiEGAl3B1cKDwcYWUIcupfzHIy?=
- =?us-ascii?Q?c7bB/I9dVabDI9gZv0+I154pYjQMDSOY6mOgSOVw2XNzIdwhrC4jPYVC/3SQ?=
- =?us-ascii?Q?7bs6ATuh986giGmvUYBWt4erwFk/uuUcXnB2oGassoUXa9ibXXud/S/803O3?=
- =?us-ascii?Q?ySQKxnXpJPulc0kaFJLHuKIH8hfwZj2HDZ0hnS768mA8G7OLBrXlUbW4B2gn?=
- =?us-ascii?Q?+8OwUPl/O8eCTDlDm+0dfAxytYdH0zbMbEOMQrfhHJVNNDviXn2v3lsGgBaX?=
- =?us-ascii?Q?Z+RR+vUdFGa+sBhloPscBqqw0yCwr8ptrcQkGTdbb/hsnePLfNC+ZZnEMbQv?=
- =?us-ascii?Q?keue7N6HseHYqfWdflvX+CYDJLFHVeQsS4soi/gb0uJqDioMMVaLUp6hpIuj?=
- =?us-ascii?Q?t+DWxtWiVRJy2kSHVA27Zf2y3azT88krRyzzeve/WBAUJoOON9oC7QdNh1NS?=
- =?us-ascii?Q?10yk50wr41cqXCMrfJPIvOsq6HQhORt3bxlFDKN/us9MgKKqdqJz6w65d30u?=
- =?us-ascii?Q?2KdLtADgHtmao7lPvggH4Wj0UJOJq9tG?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?uGZdv+P52dd3uLMzntErjvsTsrJsLD7V5UGlyASSoRpOMLT4L3HMrjJcvQJK?=
- =?us-ascii?Q?PkHh/SBoT03b9YWEUo+t6t6B5RT1tSq+H5fBdTZKgGTQ2A53V3vRTm3ZwBcm?=
- =?us-ascii?Q?mb6X7tERVzeJpp6D2gTwV64UgSAUXpS4xy0AJgIJwBsNJ/i0N0/YGL+g0aG/?=
- =?us-ascii?Q?M0ROTvmNWTSEkn51oGaHyJOGxQ0lo7U9Eq8ddm3TQDXbRi4Zw1E1NRemmet3?=
- =?us-ascii?Q?BrUSH6xqjoCT+JggEMQuMg4BoGB9rqhSA8vU/gXwigg8XypAxmqY4lcLgpGX?=
- =?us-ascii?Q?mXnnAFXNKgiDysIl/YMh8kUOjdfT0UboBnDkcX8t7Rch8veLq93ehAU6Pbsp?=
- =?us-ascii?Q?RiQk1AURUzGjl6gYEvPhZLfP3Wpc7Yc1ND3ypTAMem/utRXG5rq7kRsT7KSe?=
- =?us-ascii?Q?DgbYsgzYNeQGLLpDEUcK3m7ElzjaUsr8uNIB83P13RA88eAr9PUCOY5Ix4C2?=
- =?us-ascii?Q?CYk49Lrun0oYFDyf/1xvdfyU+6q55u5kQgff1dx/9hryR2dgasi++ZVIGzxT?=
- =?us-ascii?Q?PHhTt5/8rdQ7mJcOckfVEc+Q2kDwqgoOVVAvP5YOsEGV1aV1garuHV7BM0di?=
- =?us-ascii?Q?y9ziNL2F8oC/RtXfRJ6s0ul9/slHx2/wwVUOsBHKAiISFSjuNXg76QO4tr6J?=
- =?us-ascii?Q?HpMIS/wxR/XaTKzPZNajkLJZ26kCDuuR3CR1U0ux+pYmlblvYNQYcTtQg9DM?=
- =?us-ascii?Q?o/kcc2Q9Fz5X41uVvk5aszp6JnGs5yUIC5un+s06MGavIsJbAW1HgwAqHyf3?=
- =?us-ascii?Q?jSvB5QRwNGSXdVOEaHEjhVc1aNfwDkRhO5TLs2CHNv78g5fF4fjsiBZNKVwO?=
- =?us-ascii?Q?Q0qyAd/euCsu9Dm/QmiVsnbzLnJNhJ/OIHm+XzNnoL2b051mBjSCO87GjGbq?=
- =?us-ascii?Q?GQV+tGHGQlwaUxZzVOHVa/81RJVpu6m/XqANUheT4WBc7kkrvqjO5kBVAGrY?=
- =?us-ascii?Q?z4ktE5uIW+Iehnxc57XMLV9mZc32poz9vBPkWmTA4vUcB/wEv/QeRhJx80qW?=
- =?us-ascii?Q?5ypn1xSe8zon11ddrWPx3n7j+An/QQU12HSRlePJf8v5RftQ2Y3Cnz63YXpb?=
- =?us-ascii?Q?q6EFSExcYSMOZ46ngs6veGmoPckKu+kMYUleloNoZy6Qh+AFWBAEmNM66/yy?=
- =?us-ascii?Q?7R74akvRu1IJPA6KLF5W/sU6Un697M+ww/0sedOwTB1QZs2my3ihlgNQsSvN?=
- =?us-ascii?Q?VNkJ4zhVyZmLC+sYfDC+dicHlWQ2Iv7RajqAKcP2mbKrQDK3SxYVzGbVASjs?=
- =?us-ascii?Q?xq6NgrAnqeH5+EaoRpQKOkjrHmybOBOigxwL3460sjew9j1XlquRqJb0PNp2?=
- =?us-ascii?Q?6Ue5nOtQXus9lsp6EeEQjgS00Pb76pc3CREgdEvZeRIk7FA6FkD59XIH/oxQ?=
- =?us-ascii?Q?H22tunjxnLTSji7u0q3uogzYGYASjKr2tUBMLaAVh31+dAsaU7xPa+1rLcwh?=
- =?us-ascii?Q?eTnRTJyH4Qtlxk2mHHG19SLLb40Zj3Y0J1IYbLegUFothDYdSucghlATMQUG?=
- =?us-ascii?Q?Rx/9yA7qnigxlKvXvv0shw8Fo0fvtOA6POUDfu4NUcrPmG/IyTSJ8bgbBMNE?=
- =?us-ascii?Q?lgg7AOXdQlp0lU2E98w=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-54957f0c657so421061e87.0
+ for <u-boot@lists.denx.de>; Tue, 11 Mar 2025 19:31:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741746712; x=1742351512; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=85GFxk4/ZYUIO8DxrKcZTCjU30NtED1k+xH4QqgyFMk=;
+ b=j8EkrvgxOOjJSWRDnKp+sgxKw37dXZCD08dkIx0ouJ0rKGkrcjNLpsxmmzJb+ublPF
+ Vc5M/z6K9v2sxLuk6wMHoFZkDAtrUzZkOJ/FuwiBOTabWCosP6JTGEwTIHu08X/VC+w8
+ xj/xpyd7a3Mpu42nDwMXrsbNhV6+rQvrH0YXqXavOuE/8e32iW8aUEOcRtHTUlaq3Zfa
+ qPkk4t0r//9WRNGizJC8LHF2Sp8/wujiuVR2nWQMkS0wQ9ML1pf9CmIi8EvPY8HzKBtt
+ jjJJlokXXVb0p/F+8j5sTrrBfz6ukJdNSS5heFAIcKRpi7ktImAhuwL4FUfaETxcQo7R
+ qdUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741746712; x=1742351512;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=85GFxk4/ZYUIO8DxrKcZTCjU30NtED1k+xH4QqgyFMk=;
+ b=jEu4juvQggZEBLIcVskxuDLRkh5Y393r9S1PRLh9U/gB0ZlcnNGnC8evoBpZj8D5jK
+ Kolf50gMqqHsLdlS9fg7rOfjVu5PMeB+GoMJrVRrUg9cPLwVkKh3egoGjXcjynTV6Wr2
+ bnai2ogXblod+oNY2gd42xZW6ijZLsEf7D1QU+ejayIc+WGUuEF4ITZkGX0DEN+q3TMt
+ LtziMqn1FJ6tIZ8KOfVgSJsiL8gDmJ2hhgllhs6ftHa8DX/lySu2a3iOJ6OsW8z1xwgY
+ /EkG9lqtUk0iVKOnhJlBv80mHGN4V5/2MPJ/af+T+IsnicbCIvReGd+N/v9etiOm0bfQ
+ xVcw==
+X-Gm-Message-State: AOJu0YyoA5DL0TblpsBsaufBj4SiDP3ndyggkR6WGGOS03/I+I+OdE5v
+ Fl1pT3UNn+pUMwdQAdeTRtqKERO7jtvDEwmrC7W13T8kmZr6rdY23gi5/K/un9GrAqsFP20G3rP
+ iT3YcPcsxjqCHTr4WaObrKe4Qm0s=
+X-Gm-Gg: ASbGncuSmkpH1XODZJB7YuZ36BL4JnRsxFhtQthyFVOkNR7eo0Vmliv246sAUyxpzat
+ +qjt+iiiENS1Q53USQoVw/gJXgfAAmf3TtZsUV2qHpqdbZbvnICvEeo7rlZjRi8PU3mYWATDdp8
+ 2BarHc7zWZIn9QNDuB/45qHJTjDhX6QSisXiC3St8emThTstvfQMYo738kWw==
+X-Google-Smtp-Source: AGHT+IFtv4gVFpWWVs3lzO1Bdtj7U8VrTeHtFBBeU9GiwHLJhf0tgQcLLPs2yhRpxzVgtI21fzKfDWVz8ExEuCcYhGc=
+X-Received: by 2002:a05:6512:b9d:b0:549:981b:169d with SMTP id
+ 2adb3069b0e04-549abd0fa23mr2251185e87.3.1741746711947; Tue, 11 Mar 2025
+ 19:31:51 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6cbb03ac-acf3-4ed3-2f12-08dd610a7e7a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Mar 2025 02:06:25.5712 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: hHIOnw2CXLc4UGu5brv2vHpP51J3EO0Cc2i0bwRXWJev7gQowray3uHusaZ1QOCl3Z1aPK++yTr7dxgPqHYNNQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10886
+References: <20250312003041.110023-1-aford173@gmail.com>
+In-Reply-To: <20250312003041.110023-1-aford173@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 11 Mar 2025 23:31:40 -0300
+X-Gm-Features: AQ5f1Jrv_zi14v8fj8ro7e1bs7n4ZOejM2tqHy7xSnObSjDHqFgwKy30ugvkAyg
+Message-ID: <CAOMZO5DRn08Q58PeHqi=1V8ZRv6B1+L_CB0NA=arQ2u6XUyi8Q@mail.gmail.com>
+Subject: Re: [PATCH 00/10] clk: imx: Use Clock frameworkt to register UART
+ clocks
+To: Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,14 +102,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH V2 02/10] clk: imx6q: Register UART clocks
->=20
-> In order to use the driver model and clock system to enable UART
-> clocks from the serial driver, it's necessary to register the UART clocks=
-.
-> With the helper function to check for imx6qp vs other variants, the
-> UART can register for both scenarios.
->=20
-> Signed-off-by: Adam Ford <aford173@gmail.com>
+On Tue, Mar 11, 2025 at 9:31=E2=80=AFPM Adam Ford <aford173@gmail.com> wrot=
+e:
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+> V2: Fix name of "ECSPI" and elimiate helper function, and fix build error=
+.
+
+Still get errors in CI:
+
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1057306
+
+Please make sure v3 passes CI.
+
++In file included from board/liebherr/display5/display5.c:30:
+3873+include/dm/platform_data/serial_mxc.h:12:25: error: field 'clks'
+has incomplete type
+3874+ 12 | struct clk_bulk clks;
+3875+ | ^~~~
+3876+make[2]: *** [scripts/Makefile.build:257:
+board/liebherr/display5/display5.o] Error 1
+3877+make[1]: *** [Makefile:1917: board/liebherr/display5] Error 2
+3878+make: *** [Makefile:177: sub-make] Error 2
+3879 arm: + kp_imx6q_tpc
+3880+drivers/clk/imx/clk-imx6q.c: In function 'imx6q_clk_probe':
+3881+drivers/clk/imx/clk-imx6q.c:83:51: error: expected ')' before '{' toke=
+n
+3882+ 83 | if (of_machine_is_compatible("fsl,imx6qp") {
+3883+ | ~ ^~
+3884+ | )
+3885+drivers/clk/imx/clk-imx6q.c:83:9: note:
+'-Wmisleading-indentation' is disabled from this point onwards, since
+column-tracking was disabled due to the size of the code/headers
+3886+ | ^~
+3887+drivers/clk/imx/clk-imx6q.c:83:9: note: adding
+'-flarge-source-files' will allow for more column-tracking support, at
+the expense of compilation time and memory
+3888+drivers/clk/imx/clk-imx6q.c:179:1: error: expected declaration or
+statement at end of input
+3889+ 179 | };
+3890+ | ^
+3891+drivers/clk/imx/clk-imx6q.c: At top level:
+3892+drivers/clk/imx/clk-imx6q.c:41:12: error: 'imx6q_clk_probe'
+defined but not used [-Werror=3Dunused-function]
+3893+ 41 | static int imx6q_clk_probe(struct udevice *dev)
+3894+ | ^~~~~~~~~~~~~~~
+3895+drivers/clk/imx/clk-imx6q.c:39:26: error: 'ecspi_sels' defined
+but not used [-Werror=3Dunused-const-variable=3D]
+3896+ 39 | static const char *const ecspi_sels[] =3D { "pll3_60m", "osc", }=
+;
+3897+ | ^~~~~~~~~~
+3898+drivers/clk/imx/clk-imx6q.c:38:26: error: 'uart_sels' defined but
+not used [-Werror=3Dunused-const-variable=3D]
+3899+ 38 | static const char *const uart_sels[] =3D { "pll3_80m", "osc", };
+3900+ | ^~~~~~~~~
+3901+drivers/clk/imx/clk-imx6q.c:36:26: error: 'periph_pre_sels'
+defined but not used [-Werror=3Dunused-const-variable=3D]
+3902+ 36 | static const char *const periph_pre_sels[] =3D { "pll2_bus",
+"pll2_pfd2_396m",
+3903+ | ^~~~~~~~~~~~~~~
+3904+drivers/clk/imx/clk-imx6q.c:35:26: error: 'periph_sels' defined
+but not used [-Werror=3Dunused-const-variable=3D]
+3905+ 35 | static const char *const periph_sels[] =3D { "periph_pre",
+"periph_clk2", };
+3906+ | ^~~~~~~~~~~
+3907+drivers/clk/imx/clk-imx6q.c:26:23: error: 'imx6q_clk_ops' defined
+but not used [-Werror=3Dunused-variable]
+3908+ 26 | static struct clk_ops imx6q_clk_ops =3D {
+3909+ | ^~~~~~~~~~~~~
+3910+cc1: all warnings being treated as errors
+3911+make[4]: *** [scripts/Makefile.build:257:
+drivers/clk/imx/clk-imx6q.o] Error 1
+3912+make[3]: *** [scripts/Makefile.build:398: drivers/clk/imx] Error 2
+3913+make[2]: *** [scripts/Makefile.build:398: drivers/clk] Error 2
+3914+make[1]: *** [Makefile:1917: drivers] Error 2
+3915+make: *** [Makefile:177: sub-make] Error 2
