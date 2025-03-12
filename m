@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57075C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58DAEC28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9693A807D7;
-	Wed, 12 Mar 2025 19:40:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C05EF807D7;
+	Wed, 12 Mar 2025 19:49:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="APaP0uum";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NnoW7l5r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C9228141D; Wed, 12 Mar 2025 19:40:52 +0100 (CET)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
- [209.85.167.52])
+ id AA9D1817A5; Wed, 12 Mar 2025 19:49:11 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4033680756
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:40:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFCA68056A
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-f52.google.com with SMTP id
- 2adb3069b0e04-549967c72bcso183391e87.3
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:40:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so28757666b.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741804844; x=1742409644; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8muGU7rS11MpBmR5j3eI/cjEDjFdK/3urMK/wGqlobs=;
- b=APaP0uumzHhV8xALiEbZUYgOvP3WICXPxkVbhynvrBzu/PV6RV/0ZsraA/ZMIc0Ws+
- wzB8Gm3SFQP9rWrzbFFT32r86dOTc2KCy2pZ0QHovL4iSuH+7MhzDn/Izfl5LpKvg59X
- FO7SopBYn1+TJqvBrCYhNDnPUpD9vY+NrLgh4GfGTUZydw8bLGaA1JukHpX3pkC47lWd
- 766DxqbHgpKYtuXryfXe3R07cMWGcQW71mdhlpwnpRVJ4AmmqzrSOblkMXRBYO6zF8K1
- wOGxGqqqn/2jIcGqMuTWcLtvlb5DorFLGlyI4kXhhqS8A7zZscQbmNtcqrlI+50ZWhxr
- M0fw==
+ d=gmail.com; s=20230601; t=1741805349; x=1742410149; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ih3IXPyf8Ampy5iDW/nn8JqP6HtPALt7VvLXfoaQgBI=;
+ b=NnoW7l5r+57/rnXHqnO0Wy98BrU+a0PZHxnNwQXJJCpMQxhzwh7FZNSkB2tKLAiUEL
+ WZfMGw9lE7JKqC1uzIZRDEpDPPrl7+nt8GM50zotNwD0edwt4Jitw7fO/i1Itzr0uyZX
+ SXiPXC/XmUuWJytZH4JUZHOt8YBRbL/M5RQ/48fHQVqFUwC+Wzm3KeblH7meZ6St+uZH
+ ECX6U2C24Triis/nG8+YbxaSTuYnK+kiWEnAXpkDJoeDynAuLHwmnmer35vLah0gNMMe
+ MXiZWQbhaUGJJfuk5PylUxQ2srrwYFVEaFNpJRYCsooyWMon2b38khS40xRrQK1u7Dlb
+ 79Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741804844; x=1742409644;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8muGU7rS11MpBmR5j3eI/cjEDjFdK/3urMK/wGqlobs=;
- b=FBleG5zedjc6q5ZOnEt8ej3cdq+ERbxuSSDae3WJLtDDT9Lzwa7gw56axiCG5tf333
- Ql5YkeTtzalZlgOXpexRw+eDdIcmx+88SoXDQs9e7rh/cXIHyx1512vuXIwVtUzLguGA
- Sj7/Gswlc9kpZcJh8szI4gZubb5teUr1QmmA5YALr6iMQAqayMFPwksTdsvyjEGYHrPA
- nTLZwoyufIIUGo7kALI2IfZA64OHf59fWdc79hHzo0cyQE1igPVzxa/39YAf1yS9B+2A
- uvLlt1P/bwUk3OGo3LFaIEHMozfYPcN0hr0u9EEvhU7TlLn3x14hVQgqUACGntqT974y
- oVhg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUr2o8yr5Yy/fXtAw3trF/Wctp147j1HRmc7XJ9Y6iuG9XUNAdBUwoabTBO4Llc2h90grbDYkQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRNO1+HrXpjR+ie18O/u0UyGzELymFtbv5YnG2PrDyjTjECOPy
- fljZT73wWQ4I5qQwWtsekupnkdi0WLXJkSXkDWJTTM6cVkXF3weJ2vEE5Jccoeyys5tLatDUnZ6
- /wG6fgiG/DmhWx+GmLdA5l4aJqE4=
-X-Gm-Gg: ASbGncvotWa9XfE+RI864XcA6Nhb5EcH2xMqA1BwS+0k3c4pucdHG+qBC2UWqP5/8EH
- bLPmEHWTTG85Nxi1ldO+c7Cu6QYpv6noA4WNPENPdVk6fAqoD40QzdMVipfCcSmsVfICEe8wPoD
- qt85E8ljnN/4AQ2INJUQ+I+x9wn05vuWL7KBrWh9MqF36S82mw4KBM2TDqPw==
-X-Google-Smtp-Source: AGHT+IH6HbS77AMFTfnJevZUhLBK1NSjX/CQyw/bD6hOKV9SQS0apD2ieUSTfT99seA22qQlASeJRKYUnmz7tffoLes=
-X-Received: by 2002:a05:6512:230e:b0:545:22ec:8b6c with SMTP id
- 2adb3069b0e04-549910b5cf7mr7778106e87.35.1741804844289; Wed, 12 Mar 2025
- 11:40:44 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741805349; x=1742410149;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ih3IXPyf8Ampy5iDW/nn8JqP6HtPALt7VvLXfoaQgBI=;
+ b=wmzPaiOcZ54Ct5aX9F2c6bLxAmhwjpiJZtIdkdVfN9sGJyJ2+CpcBcDh7wow8JIKts
+ aF9Pgxt4HeEjqDE+LtV82zCLwjtgKzpIiXyUnT0vWh2MA88SGwJtRq0H45BX3/JTqqqu
+ i0+IGXGqepfLPI2BdxRwX82X3v1flnMC0cxsZ2Yq/FHPtTBpWb87jNCiwA3nKPW5TXZ3
+ pHDZNXWLRSCKIci0QzpQzBPitoM+u2cse3+j66QfpzLRIWit9h94q0l36ojwvCgepzmX
+ CE1wNnkbafw57eLIQva3cMbwXesaAC4cafqV3EovDEjIIBkKOUY6ilKAVQ7Pm0hef9Jj
+ vvfA==
+X-Gm-Message-State: AOJu0Yy+ZNbBn5pO9APpQMafGLsTZlEqsTlqAFAsB3OGO1LQTwhCD3Xi
+ Tvsiamo+UDZnO1dQ61+w9G8oqAxwPSoMtsOWLk75ie/SBn2IZuihz9L86g==
+X-Gm-Gg: ASbGnctNx2Juho8mopthFlcwXvIxfZV9x3hXUQarbIx8Bi+Un3KJw/d/2Yd4O7wMglz
+ RlK3YKwNVLSoD5J18ZqJRb3ujb6ekovqo/DcWGsTqjkHvhmfxpzDaxvhEb1jx5ESO42RLUMJwfl
+ IDyEOY0N3sn2FVpZW05NBdvYXPWzLWk1PxCH+8mIWNK9JAFgFyEY/+qI7iFliVYJuMxfhXntAaF
+ gy0mQW/DdEhTvEhuTXRLuiWMYptR93o2YT/3nsdYU++GsX5As05OEMW46kQElnS0CuzCUqSDjjv
+ t01l7TpBfUt5PqoTk98JpzGx52YPN/0HStBp
+X-Google-Smtp-Source: AGHT+IHQGoQ1MnR/UCQldBW0XYlByIYpsusmBBPN5KUShP4lYbTOebAenFQt8pZwwicGxD8aoxkx4A==
+X-Received: by 2002:a17:906:e4a:b0:ac2:64e1:c75a with SMTP id
+ a640c23a62f3a-ac264e1d275mr2315024866b.45.1741805349039; 
+ Wed, 12 Mar 2025 11:49:09 -0700 (PDT)
+Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac29426a87esm593250766b.87.2025.03.12.11.49.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Mar 2025 11:49:08 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Peter Geis <pgwipeout@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/1] board: tegra30: ouya: add basic support for Ouya Game
+ Console
+Date: Wed, 12 Mar 2025 20:48:40 +0200
+Message-ID: <20250312184843.123975-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <1741770247-123217-1-git-send-email-ye.li@nxp.com>
-In-Reply-To: <1741770247-123217-1-git-send-email-ye.li@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 12 Mar 2025 15:40:33 -0300
-X-Gm-Features: AQ5f1Jp6i1fSkk7fKAz2i7y_GjDT_O-RUl5DDrBd5IMK5QtYGldJ60QHCJ0fddw
-Message-ID: <CAOMZO5AfRSjH=u6Q43Tg0rXfOZe5RUy1H31k7OHhOwHjDUvDfg@mail.gmail.com>
-Subject: Re: [PATCH] imx93_evk: Fix wrong VDDQ voltage setting for LPDDR4x
-To: Ye Li <ye.li@nxp.com>
-Cc: festevam@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, 
- uboot-imx@nxp.com, ye.li@oss.nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,12 +94,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 12, 2025 at 10:02=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
->
-> The default PCA9451 BUCK2 volt is 0.6v for LPDDR4x VDDQ. The codes
-> are actually used for reworking to LPDDR4 which needs VDDQ at 1.1v.
-> So remove it to avoid LPDDR4x issue.
->
-> Signed-off-by: Ye Li <ye.li@nxp.com>
+The Ouya microconsole is build on Nvidia Tegra 3 (T33) SoC, featuring a
+quad-core 1.7 GHz ARM Cortex-A9 CPU and a ULP GeForce GPU, paired with 1GB
+of DDR3 RAM and 8GB of internal flash storage.
 
-Applied to u-boot-imx/master, thanks.
+With this iteration all but eMMC works.
+
+Svyatoslav Ryhel (1):
+  board: ouya: add Ouya Game Console support
+
+ arch/arm/dts/Makefile               |    1 +
+ arch/arm/dts/tegra30-ouya.dts       | 2065 +++++++++++++++++++++++++++
+ arch/arm/mach-tegra/tegra30/Kconfig |    5 +
+ board/ouya/ouya/Kconfig             |   12 +
+ board/ouya/ouya/MAINTAINERS         |    8 +
+ board/ouya/ouya/Makefile            |   11 +
+ board/ouya/ouya/ouya-spl.c          |   41 +
+ board/ouya/ouya/ouya.c              |   21 +
+ board/ouya/ouya/ouya.env            |   12 +
+ configs/ouya_defconfig              |   85 ++
+ doc/board/index.rst                 |    1 +
+ doc/board/ouya/index.rst            |    9 +
+ doc/board/ouya/ouya.rst             |  123 ++
+ include/configs/ouya.h              |   23 +
+ include/env/nvidia/prod_upd.env     |    5 +-
+ 15 files changed, 2420 insertions(+), 2 deletions(-)
+ create mode 100644 arch/arm/dts/tegra30-ouya.dts
+ create mode 100644 board/ouya/ouya/Kconfig
+ create mode 100644 board/ouya/ouya/MAINTAINERS
+ create mode 100644 board/ouya/ouya/Makefile
+ create mode 100644 board/ouya/ouya/ouya-spl.c
+ create mode 100644 board/ouya/ouya/ouya.c
+ create mode 100644 board/ouya/ouya/ouya.env
+ create mode 100644 configs/ouya_defconfig
+ create mode 100644 doc/board/ouya/index.rst
+ create mode 100644 doc/board/ouya/ouya.rst
+ create mode 100644 include/configs/ouya.h
+
+-- 
+2.43.0
+
