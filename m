@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6D7C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:23:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF95C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:24:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5119281E06;
-	Wed, 12 Mar 2025 19:23:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FDFD81D8C;
+	Wed, 12 Mar 2025 19:23:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="adO2VUI8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UF5kmBvU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A6A8807D7; Wed, 12 Mar 2025 19:23:25 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 07822807D7; Wed, 12 Mar 2025 19:23:48 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63DE481A0C
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:23:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BE6E81B52
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:23:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5e6194e9d2cso108596a12.2
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:23:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6e8ec399427so1539956d6.2
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741803802; x=1742408602; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OZfJLHVfYrm/RFSd2m6Tj00gYWNoOjU2jmPJCiCb6Mc=;
- b=adO2VUI8gEy75UrYcreFTMogCWiXaUHQP6mk5g2jIBpbuLj97+IKW7V0ba+Q96ogpo
- BaSJHlnORj342h5JZ43DOcFnKuqwuB5Ir/a39rQ6rrs3Ik5VRGMLHC7chJtLZzRO61hO
- VruHdmWLCrzSBY7i0JI0XCTu0x2yYKvkl2+t7sLtVEGxH0xWJWiARiMv4+eyu8VQl4pH
- Zpb2pAqi6+wY1wqScl+vc+0dh92bt5qMa51Xwu6Ft272MJkRBz5P/j6MqukCO8wxn5gr
- VQgQo7Zx2sbfktCY1KKl0P2MHnxyGbuXV7bg4TIjLOK2KL5RHdsjwHMuRq9qTNA1OEGK
- wawA==
+ d=konsulko.com; s=google; t=1741803824; x=1742408624; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tx1phm12DKqC444/oH7a3WmPpXqENrXany7OV9ZzhuI=;
+ b=UF5kmBvUbVmF94vyIpg4Y0LCexDxLsW60kpmSTr/PKI5/z57yrmKS/J2DN/NaVKNwb
+ /R60nk9anMndkWl1Aep/HUbDk57573RBQEF33+NLD9MWO1Tg67YLIfCzm+g5T9KlO6tW
+ LcNuGL9fS1eJv/m1X3G2TybgJZpIH6XnFFL2w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741803802; x=1742408602;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OZfJLHVfYrm/RFSd2m6Tj00gYWNoOjU2jmPJCiCb6Mc=;
- b=nnKMzoDCxDZMEhFvbOqm0exXbBUE+e8uyiM13yYCzqcm8IonabJVKhToMy5XEFssnR
- OXeGnz72aRuOZLoGqgv02I8w3z3SigNCTijqKH/b5wSHYGytGhBHvuf2mDVeqSSg2kTM
- FRLyu/iW8TF0aX2W0msjMtvUQyXXPWDZSPjEfv3OfsAQdF4OcyrxN/emSqWBeyU0cD89
- Nzwbe8qbCVuKKHZVP0PzzujhVMkKRvq8QXlPSMmfbftuyvBoGThjqddHZ1fQCbUmfGpp
- 9q4Mlc0hFDIL9W4HeJz3xzL16PbbdGhcLrsNIHK/dh9kATDFvqwzyeUx5K8HveZV/zn/
- MJ/Q==
-X-Gm-Message-State: AOJu0Yz5bPMHego1UaoHKphra/leLVzPmlKv131N/y3RmxdoRwwJF6f/
- PAd4n2c5aj/7xJGNvRYRjtUk4pcHQj16dk3nm4hYzhTX9VRXgmGz
-X-Gm-Gg: ASbGnctLNgAVIzpM3Dg0M67Iwqy1wEP3e34vgTsKI3DSBsqjdnxYTNudP+JgOMJDPmI
- Q0doUs6DoJv8cJ8UssP/cMHhGnBPSRpxeWeNJgmmQmGN/bqMX1rNMPfVBGVHL/7dJq5ZSAa52pw
- BT+UGjXtl5wKzib9xcWZxympjKHz93bWKIqLBxxnpCXGPrlrEEeKJe29K29psURXsZoDiSKiL+4
- s2VMOOaaSkH+QObRMvACLAV4mk+nGmR+JPgthnPOIpkviSwR3+IMfjfLncgqkb24Z3iJKGv8yNh
- Nah3eO4QtH81Q4Hj4OtmDQQKNzvYNJ9Kg9Re
-X-Google-Smtp-Source: AGHT+IGcqIM0/0/UogNYCx1Gi70tnra5J5ncwYyeNNouA2QffMzvjoOkopHozZ9BHk3EVsZPJkwtiQ==
-X-Received: by 2002:a05:6402:50cb:b0:5e7:b015:c636 with SMTP id
- 4fb4d7f45d1cf-5e7b015c666mr7579933a12.6.1741803801676; 
- Wed, 12 Mar 2025 11:23:21 -0700 (PDT)
-Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c7669ff1sm9851674a12.53.2025.03.12.11.23.21
+ d=1e100.net; s=20230601; t=1741803824; x=1742408624;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tx1phm12DKqC444/oH7a3WmPpXqENrXany7OV9ZzhuI=;
+ b=sclPrcCZH/zRF7nAwZBi/1BfZ5fLJE3kwAOPMTCO6gsGmZKMjUyW6yCZR1nn9bZqK+
+ LVZgjz7+odCtoYtiXMrbOHcX5Hj0H7CVWP6sJizryqIrYUkRyk/3fp/QIkVOcIqY77Lg
+ qREUy7hYx+3sLwukw5i685oetPN3lyR7JiM/qaNcTo66ydqvnzYGbu0a04/LxSIUwuR/
+ mwSNrkRQGykI9QU8EywXbDr8H+/0ASWSxTnOcCqedMzqvqsRe7K1aYjnSHAo2QpH4wa6
+ ZzInAqEMUVnExsW09Wz3TiOjTVDvc5nOqz1DGeItIHZULxDxgpuS1iTaQLB79QOmz4V7
+ vc3w==
+X-Gm-Message-State: AOJu0YwNwpTYzMctZxIrGar2o3mlFOk7N/WRsN+YT/ks8Ks7dCx7Owq+
+ jCqfuC6srcngiwywV00BNUOWQlWrHm8uHxexTVUKJY2OCrvZbUSh9paZkbsX0Ok=
+X-Gm-Gg: ASbGncsbOzmgwM/gniQAzkaV7yHWxgx6sgYKQIMO9pkPVjwYY3g/+ARvOrTnX4jDGoe
+ Y6B/uxhQm60unN5rts1cwaBf78NB/cbC2rueAetxrZt782j9q4r58+nY/aZBDg8cPuc18xbvT3b
+ VWCGMcJyusfgpQadHmI95nk/sotRZ+vmHjJPEEChM/ww/6AwDXbbWp3B8IT0WEHIxbV3FSC4G0u
+ IeBQ32AmzVP4tVmUQF+302SBAiNzhr5DiA0p1BrpnsK2qA48FEWU40xflU/fK3YuQjxDA8Im7Km
+ jrf6AmCv4epoPXWDJD1WaRtHjVoZ3pRFf4WM2DB09R046Q==
+X-Google-Smtp-Source: AGHT+IHNWAK6zOQ9dSgWKLpa2/51O96hBhd9Cvt2BfH4X+EUXMZAPj9J32FclorpZnwxRUopqxZlYg==
+X-Received: by 2002:ad4:5f85:0:b0:6e8:f8ef:d659 with SMTP id
+ 6a1803df08f44-6e9005d80eemr317223436d6.10.1741803824437; 
+ Wed, 12 Mar 2025 11:23:44 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e8f715b6ebsm87558566d6.87.2025.03.12.11.23.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:23:21 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
+ Wed, 12 Mar 2025 11:23:43 -0700 (PDT)
+Date: Wed, 12 Mar 2025 12:23:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/3] video: backlight: lm3533: configure core in the probe
-Date: Wed, 12 Mar 2025 20:20:13 +0200
-Message-ID: <20250312182014.121568-3-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250312182014.121568-1-clamor95@gmail.com>
-References: <20250312182014.121568-1-clamor95@gmail.com>
+Subject: Re: Please pull u-boot-tegra staging
+Message-ID: <20250312182341.GY2640854@bill-the-cat>
+References: <20250312125452.53671-1-clamor95@gmail.com>
+ <20250312181620.GW2640854@bill-the-cat>
+ <CAPVz0n0jGtmV7tN5VhxiMNQYRauNV9pCTL9WLE=Jnv8+D8c6jw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dM6qrM3/XTrSMArq"
+Content-Disposition: inline
+In-Reply-To: <CAPVz0n0jGtmV7tN5VhxiMNQYRauNV9pCTL9WLE=Jnv8+D8c6jw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,79 +96,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Configure core stuff in the probe.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/video/lm3533_backlight.c | 31 ++++++++++++++++++++++++-------
- 1 file changed, 24 insertions(+), 7 deletions(-)
+--dM6qrM3/XTrSMArq
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/video/lm3533_backlight.c b/drivers/video/lm3533_backlight.c
-index a1a7397cbdc..f97f17fec4e 100644
---- a/drivers/video/lm3533_backlight.c
-+++ b/drivers/video/lm3533_backlight.c
-@@ -23,6 +23,10 @@
- #define LM3533_CONTROL_BANK_A_FULLSCALE_CURRENT		0x1F
- #define LM3533_CONTROL_BANK_ENABLE			0x27
- #define LM3533_OVP_FREQUENCY_PWM_POLARITY		0x2C
-+#define   BOOST_OVP_MASK				GENMASK(2, 1)
-+#define   BOOST_OVP_SHIFT				1
-+#define   BOOST_FREQ_MASK				BIT(0)
-+#define   BOOST_FREQ_SHIFT				0
- #define LM3533_BRIGHTNESS_REGISTER_A			0x40
- 
- #define LM3533_BOOST_OVP_16V				16000000UL
-@@ -49,9 +53,6 @@ static int lm3533_backlight_enable(struct udevice *dev)
- 	struct lm3533_backlight_priv *priv = dev_get_priv(dev);
- 	int ret;
- 
--	dm_gpio_set_value(&priv->enable_gpio, 1);
--	mdelay(5);
--
- 	/* HVLED 1 & 2 are controlled by Bank A */
- 	ret = dm_i2c_reg_write(dev, LM3533_SINK_OUTPUT_CONFIG_1, 0x00);
- 	if (ret)
-@@ -77,10 +78,6 @@ static int lm3533_backlight_enable(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
--	ret = dm_i2c_reg_write(dev, LM3533_OVP_FREQUENCY_PWM_POLARITY, 0x0A);
--	if (ret)
--		return ret;
--
- 	return 0;
- }
- 
-@@ -159,9 +156,29 @@ static int lm3533_backlight_of_to_plat(struct udevice *dev)
- 
- static int lm3533_backlight_probe(struct udevice *dev)
- {
-+	struct lm3533_backlight_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
- 	if (device_get_uclass_id(dev->parent) != UCLASS_I2C)
- 		return -EPROTONOSUPPORT;
- 
-+	dm_gpio_set_value(&priv->enable_gpio, 1);
-+	mdelay(5);
-+
-+	ret = dm_i2c_reg_clrset(dev, LM3533_OVP_FREQUENCY_PWM_POLARITY,
-+				BOOST_FREQ_MASK, priv->boost_freq << BOOST_FREQ_SHIFT);
-+	if (ret) {
-+		log_debug("%s: freq config failed %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = dm_i2c_reg_clrset(dev, LM3533_OVP_FREQUENCY_PWM_POLARITY,
-+				BOOST_OVP_MASK, priv->boost_ovp << BOOST_OVP_SHIFT);
-+	if (ret) {
-+		log_debug("%s: ovp config failed %d\n", __func__, ret);
-+		return ret;
-+	}
-+
- 	return 0;
- }
- 
--- 
-2.43.0
+On Wed, Mar 12, 2025 at 08:22:26PM +0200, Svyatoslav Ryhel wrote:
+> =D1=81=D1=80, 12 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 20:16 To=
+m Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > On Wed, Mar 12, 2025 at 02:54:50PM +0200, Svyatoslav Ryhel wrote:
+> > > Dear Tom,
+> > >
+> > > The following changes since commit dc0ee458f1afae4cb5c8a7b2c875bb24ff=
+df71ca:
+> > >
+> > >   Prepare v2025.04-rc3 (2025-02-24 16:53:59 -0600)
+> > >
+> > > are available in the Git repository at:
+> > >
+> > >   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+> > >
+> > > for you to fetch changes up to b156a1171e356f16aac88322b3bdcec071543c=
+6c:
+> > >
+> > >   configs: qc750: add 3 second delay before power off (2025-03-11 19:=
+47:07 +0200)
+> > >
+> > > ----------------------------------------------------------------
+> > > Jonas Schw=C3=B6bel (2):
+> > >       common: edid: update timing selection logic
+> >
+> > One thing I would like to see as a future clean-up is if we can go back
+> > to the old method as a compile time option, if that's reasonable? It's
+> > adding about 10KiB worth of table the way it is today. Thanks.
+> >
+>=20
+> It should be possible to add a config option to guard standard timings
+> and enable them only for devices which need them. Will this be an
+> acceptable solution?
 
+Yes, thanks.
+
+--=20
+Tom
+
+--dM6qrM3/XTrSMArq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfR0S0ACgkQFHw5/5Y0
+tywvIgv+I3lAm2QhYY0SRSjFaI1okTI9/vLTI5SajWzNNUyY33ifRoJGTdO1ftBG
+d6vyFyRQtu2iMKf993BMG1NKtSYcu4hlBfauCAmuLc83ttuyDsDuWmSdHFFQZiUx
+flBwju+p/v7E4ah5VMbC+cxQnzQ27mIewX0FNL5eQh0rWrhV3xmxBNS+72K7NXH0
+2ilV6oWggub9oald/ERyywDSltWM3VtxFFXnXtDtMzRQ3lqC+hIMjMLG+PDrG/Ry
+fI9vFzxXnuQ1/3IP8b89jGu7PFTpICvYna4Tii+bM0gVlIMgS+2RHs9ccWQ7YzK8
+CWXPkxOew1omIzSddmYqO3s35HTZTUpv9pDm54qjjY2xB1FLj1v56iO/7EW00C4e
+2XauysayDznmPqti1flLafbWK+UrCaXGTFk94mpOg+2CChuKHLgAzmc6ssxky4Qp
+c50RJGgCP39Saig9suMtZONe25DonNS5Tb9xnIRYLxs1naDCtgEkaPvvftwx8SkP
+mE1rPget
+=xjvf
+-----END PGP SIGNATURE-----
+
+--dM6qrM3/XTrSMArq--
