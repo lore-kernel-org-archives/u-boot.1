@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029A5C28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B26E5C28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:08:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D652081B42;
-	Wed, 12 Mar 2025 19:08:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 279528175D;
+	Wed, 12 Mar 2025 19:08:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kBOGePJ3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OowIIDVz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A06A81A02; Wed, 12 Mar 2025 19:08:12 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 4C20381BEE; Wed, 12 Mar 2025 19:08:13 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 230428169D
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B49280756
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5e4d50ed90aso91882a12.0
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:10 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5e677f59438so72592a12.2
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741802889; x=1742407689; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741802891; x=1742407691; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XH9d0beqqiP4up8K2VpDy1pi7ykwWXVuwnT/s6ueWjw=;
- b=kBOGePJ3wGY4HM+Sycr2gI6jOnE9vXYySl/nCyJv7PzCHbVc/uibtZ/Ru/euO4JeOa
- YOAUzB4SZPIk+1T4eDf1WUxyvK/k0mHZBY0hYEjRK+Rf+sK3ulq+l3sbu7dpW9BcJyUK
- +h69PUQuO226F/Nqa2MwxWa5JyUeH0EayoGPxupsP8Bw0e4DZ5kFH/SM6lu6EIyHZ9jH
- iqIl9oW/2fqSViLXYNFvD9UcwgBJbvsFedcZSccWYJ6VKMk9wrdBua/S9x8mAz1HY8Zh
- jIQKtXawJK2lNeY4gEDmQum7g44YnMnM61QezPmPoXWBXNW89poBcmme2ZzpakdaoXjw
- oN9g==
+ bh=gYQA7tdeviOl9kt2u/sGwOy290b5YbGQbkCk+DS1EjU=;
+ b=OowIIDVzcjjfth/9JlSbDIr+WNW+Ubcm7odHlAOD0Acm5TwJBpKWc3FASXE1Z7nJ95
+ hl8aDGAgYaCTqi5Uzfc037mirX4lcNHHRWlRoxi4dtRwmsyWJ6QU4PTnF/4XxLtkQ824
+ SxnGhPuL8kNAppp/0kBaDNC33cIZCl8P77CiPjoTzR+FoyWv3fO/qAxs04+FVVJP26ed
+ s2IvDFcYpihI2hJhw+Ewv0GmcUE19gosvvLglSJN3Bia+vLRHWu3gRVwXPqurovR0blK
+ TRqFn2wLUSF3rpl7REJFBxM2Z26iJxm5MD0tZ3TrUAt2hmU27vYBjBUEIYo+RE7vBv3q
+ ddew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741802889; x=1742407689;
+ d=1e100.net; s=20230601; t=1741802891; x=1742407691;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XH9d0beqqiP4up8K2VpDy1pi7ykwWXVuwnT/s6ueWjw=;
- b=PZOw2kmcGTEeI54CxaGde9EIPKrBCqiAoMvPJRahzoa0+XXYcCt3tJyn0zxhY03ZW2
- SgpBXSSq/illKHCvU8GcIpUN8ZYJR1OGtTaTgXt0UXxJ7Xo6ZULbsfvfy8/jdVZaM+NE
- 6vlZpD5u4fMdidJ+rxYAJr43ZhqBOofCb0JyJzGeKosfh1Rw48jmx4IzwJbRwHc1Rgq6
- AuFWhdAtwWR62xXCMuI+rhf7c9q8tn99EPQ/NRICh7hLd9CPIgmgFTXmSPX1tVLpv7UB
- 9lkI0SySwlVROLKF2ManUDhKMToqLGxENpV4yeUnBqGTnMhz+jVZJFQ+yuG6cxSnvI+8
- r00w==
-X-Gm-Message-State: AOJu0YyEJ9ns69P3/kUDQf3QM/DluiTCyMeHjWgQvCfhzg0NehlfVFmu
- qPeg/83YFZD0ovFh9X3LJYd5L31vRJ617yb0eSPAYC95RhwxqGcn
-X-Gm-Gg: ASbGncssKEwNIB15b84SOaAkmQvyzrX0T8ZR7CSvt7NYziMSPrnTd1+Dqlh4gfV1GP9
- 0gr/NanmklAqT+SuK+NURfkQOkVc0JJt36O069SpQg9x6vpn6PG9b3rbWmAuysuWyu6H7pdylUk
- ImYgDFZNxBJPITXh01udfaiZzUbNSiXDWNgz5W0KVOVKdx5jgkd4WzVYIbK096xD0zXgqa43niL
- TaSGzYfg6Aa5kmmFhHDDlkwtm0O5Inrnh1uHL8L1xrn6rj65sixvvu6UbhSLXcinr5yDdV5O1sD
- kcMwhn/9k+7fbeawfT8hd2CRgDvbzpW1T0XD
-X-Google-Smtp-Source: AGHT+IFKLTn2ywzv7nXEX6jt3DAzMuAiH9P67xLfGawbEJyrPcEtIMSR2p/6AKY5s63imOHOrd/p7Q==
+ bh=gYQA7tdeviOl9kt2u/sGwOy290b5YbGQbkCk+DS1EjU=;
+ b=VsZR0wxIr57v1Mkk92Ail+PTB+2KAakzamQC8jaCUK647vFEPB6vkhc2VmUKz46Olc
+ mbyIbiB1+DS+ElLh5yObZI03GGbMTLdTpdq1AqM9Qo5dVCEAjSlVzLpwtwQqHLJEWkdf
+ x56kjCj+yn3Pyhf64a9swpj5YmnxPMk8g/FIyzs6jPA4ZuSu6nVXJbB9WngsCbW2a/Jg
+ ReV67LdAoEuOYhCjjgcKSxouEvzi50v3yTAIamDXOhkvCksSbOwWwC1JQfdBIJfuHJkb
+ VF8pP/mncf7klqRe4X7TaAdgXnJOq7VFKhEIdHWSSZPPbVdPLVjsIryGUIc1b6ZqKOvp
+ M+uQ==
+X-Gm-Message-State: AOJu0YylDpxmebb4cmxwTff2yvu0wDUl4IaJlGF789OXQZb2ymkSBL7T
+ 5n5PKZcqPz4Jbx75K+7fguWafEi1c8dqVPGHr0EWNs5SsrmzcRIV
+X-Gm-Gg: ASbGncs8LFv3kFSRiL9VZhu1/PMfGqb9yE53dcxoBpNkvBXd0PwirYZcKGA+hT7wJSO
+ ukqDglzsV0bBzd7D43dCe6mIXWTIuRVOk48B73eInbrSBShD/GzKE2/xssAtLlUkTckr7MkBUqs
+ 67wU8+glBlZORJPgBNqra+yp66oSXhnAVXlMGCPckrS5ljm0y9JJ95PdPMrenhdWm8JQsXh0Urr
+ x3e/ikqZMlHhjShT7HfhzX7qdMEE31kwKFLJwlKxRAUuwy7xkM/kJvb6SnmCJoKiycr+WWlNNFy
+ zRpZZEkt1u1hlfuqH8RT8i9a4aory3W4WHU+
+X-Google-Smtp-Source: AGHT+IHWY7XDduTP5altvRVEI3CMbmW079r2kJ8zBinddlfxA4V6MytgYanXx9JqnWlaQoEpaJ4tPg==
 X-Received: by 2002:a05:6402:4409:b0:5e7:110a:c55 with SMTP id
- 4fb4d7f45d1cf-5e7110a0c6dmr17758846a12.18.1741802889409; 
- Wed, 12 Mar 2025 11:08:09 -0700 (PDT)
+ 4fb4d7f45d1cf-5e7110a0c6dmr17758947a12.18.1741802890657; 
+ Wed, 12 Mar 2025 11:08:10 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.08
+ 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:08:08 -0700 (PDT)
+ Wed, 12 Mar 2025 11:08:10 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 03/13] video: bridge: tc358768: convert to use of_graph
-Date: Wed, 12 Mar 2025 20:07:44 +0200
-Message-ID: <20250312180754.120946-4-clamor95@gmail.com>
+Subject: [PATCH v1 04/13] video: bridge: tc358768: simplify power supplies
+ request
+Date: Wed, 12 Mar 2025 20:07:45 +0200
+Message-ID: <20250312180754.120946-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312180754.120946-1-clamor95@gmail.com>
 References: <20250312180754.120946-1-clamor95@gmail.com>
@@ -98,75 +99,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use OF graph parsing helpers to get linked panel.
+Simplify power supply request logic.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/bridge/tc358768.c | 29 +++++++++++++++++++++++++----
- 1 file changed, 25 insertions(+), 4 deletions(-)
+ drivers/video/bridge/tc358768.c | 44 ++++++++++++++-------------------
+ 1 file changed, 18 insertions(+), 26 deletions(-)
 
 diff --git a/drivers/video/bridge/tc358768.c b/drivers/video/bridge/tc358768.c
-index b5d45e0e3c9..15bee19a152 100644
+index 15bee19a152..6f1b057c208 100644
 --- a/drivers/video/bridge/tc358768.c
 +++ b/drivers/video/bridge/tc358768.c
-@@ -6,6 +6,7 @@
+@@ -124,6 +124,10 @@
+ #define NANO	1000000000UL
+ #define PICO	1000000000000ULL
  
- #include <clk.h>
- #include <dm.h>
-+#include <dm/ofnode_graph.h>
- #include <i2c.h>
- #include <log.h>
- #include <mipi_display.h>
-@@ -877,6 +878,26 @@ static int tc358768_panel_timings(struct udevice *dev,
- 	return 0;
- }
++static const char * const tc358768_supplies[] = {
++	"vddc-supply", "vddmipi-supply", "vddio-supply"
++};
++
+ struct tc358768_priv {
+ 	struct mipi_dsi_host host;
+ 	struct mipi_dsi_device device;
+@@ -131,9 +135,7 @@ struct tc358768_priv {
+ 	struct udevice *panel;
+ 	struct display_timing timing;
  
-+static int tc358768_get_panel(struct udevice *dev)
-+{
-+	struct tc358768_priv *priv = dev_get_priv(dev);
+-	struct udevice *vddc;
+-	struct udevice *vddmipi;
+-	struct udevice *vddio;
++	struct udevice *supplies[ARRAY_SIZE(tc358768_supplies)];
+ 
+ 	struct clk *refclk;
+ 
+@@ -277,17 +279,17 @@ static void tc358768_hw_enable(struct udevice *dev)
+ 	if (ret)
+ 		log_debug("%s: error enabling refclk (%d)\n", __func__, ret);
+ 
+-	ret = regulator_set_enable_if_allowed(priv->vddc, true);
++	ret = regulator_set_enable_if_allowed(priv->supplies[0], true);
+ 	if (ret)
+ 		log_debug("%s: error enabling vddc (%d)\n", __func__, ret);
+ 
+-	ret = regulator_set_enable_if_allowed(priv->vddmipi, true);
++	ret = regulator_set_enable_if_allowed(priv->supplies[1], true);
+ 	if (ret)
+ 		log_debug("%s: error enabling vddmipi (%d)\n", __func__, ret);
+ 
+ 	mdelay(10);
+ 
+-	ret = regulator_set_enable_if_allowed(priv->vddio, true);
++	ret = regulator_set_enable_if_allowed(priv->supplies[2], true);
+ 	if (ret)
+ 		log_debug("%s: error enabling vddio (%d)\n", __func__, ret);
+ 
+@@ -904,7 +906,7 @@ static int tc358768_setup(struct udevice *dev)
+ 	struct video_bridge_priv *uc_priv = dev_get_uclass_priv(dev);
+ 	struct mipi_dsi_device *device = &priv->device;
+ 	struct mipi_dsi_panel_plat *mipi_plat;
+-	int ret;
 +	int i, ret;
-+
-+	u32 num = ofnode_graph_get_port_count(dev_ofnode(dev));
-+
-+	for (i = 0; i < num; i++) {
-+		ofnode remote = ofnode_graph_get_remote_node(dev_ofnode(dev), i, -1);
-+
-+		ret = uclass_get_device_by_ofnode(UCLASS_PANEL, remote,
-+						  &priv->panel);
-+		if (!ret)
-+			return 0;
-+	}
-+
-+	/* If this point is reached, no panels were found */
-+	return -ENODEV;
-+}
-+
- static int tc358768_setup(struct udevice *dev)
- {
- 	struct tc358768_priv *priv = dev_get_priv(dev);
-@@ -893,11 +914,10 @@ static int tc358768_setup(struct udevice *dev)
- 		return ret;
+ 
+ 	/* The bridge uses 16 bit registers */
+ 	ret = i2c_set_chip_offset_len(dev, 2);
+@@ -937,25 +939,15 @@ static int tc358768_setup(struct udevice *dev)
+ 	priv->dsi_lanes = device->lanes;
+ 
+ 	/* get regulators */
+-	ret = device_get_supply_regulator(dev, "vddc-supply", &priv->vddc);
+-	if (ret) {
+-		log_debug("%s: vddc regulator error: %d\n", __func__, ret);
+-		if (ret != -ENOENT)
+-			return log_ret(ret);
+-	}
+-
+-	ret = device_get_supply_regulator(dev, "vddmipi-supply", &priv->vddmipi);
+-	if (ret) {
+-		log_debug("%s: vddmipi regulator error: %d\n", __func__, ret);
+-		if (ret != -ENOENT)
+-			return log_ret(ret);
+-	}
+-
+-	ret = device_get_supply_regulator(dev, "vddio-supply", &priv->vddio);
+-	if (ret) {
+-		log_debug("%s: vddio regulator error: %d\n", __func__, ret);
+-		if (ret != -ENOENT)
+-			return log_ret(ret);
++	for (i = 0; i < ARRAY_SIZE(tc358768_supplies); i++) {
++		ret = device_get_supply_regulator(dev, tc358768_supplies[i],
++						  &priv->supplies[i]);
++		if (ret) {
++			log_debug("%s: cannot get %s %d\n", __func__,
++				  tc358768_supplies[i], ret);
++			if (ret != -ENOENT)
++				return log_ret(ret);
++		}
  	}
  
--	ret = uclass_get_device_by_phandle(UCLASS_PANEL, dev,
--					   "panel", &priv->panel);
-+	ret = tc358768_get_panel(dev);
- 	if (ret) {
--		log_debug("%s: Cannot get panel: ret=%d\n", __func__, ret);
--		return log_ret(ret);
-+		log_debug("%s: panel not found, ret %d\n", __func__, ret);
-+		return ret;
- 	}
- 
- 	panel_get_display_timing(priv->panel, &priv->timing);
-@@ -976,6 +996,7 @@ U_BOOT_DRIVER(tc358768) = {
- 	.id		= UCLASS_VIDEO_BRIDGE,
- 	.of_match	= tc358768_ids,
- 	.ops		= &tc358768_ops,
-+	.bind		= dm_scan_fdt_dev,
- 	.probe		= tc358768_probe,
- 	.priv_auto	= sizeof(struct tc358768_priv),
- };
+ 	/* get clk */
 -- 
 2.43.0
 
