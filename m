@@ -4,101 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C9D0C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 20:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FCB5C28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 20:52:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43AC180756;
-	Wed, 12 Mar 2025 21:42:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 47469805D7;
+	Wed, 12 Mar 2025 21:52:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TwGDrKwh";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OcTXenju";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F5FA807D7; Wed, 12 Mar 2025 21:42:52 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 8C78B80756; Wed, 12 Mar 2025 21:52:42 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE4DA805D7
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 21:42:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A5068003E
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 21:52:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D2AAE3F175
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 20:42:46 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 2C4363F298
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 20:52:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1741812166;
- bh=6Vgesql+TkrqzO4LASj/YOZuk/OS0sa4J2JVZ7xz8CE=;
+ s=20210705; t=1741812759;
+ bh=nec5nG8Rs2Gug+Jl9tOHLDkbhU4kfnXMzP7FELm3Ff0=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=TwGDrKwh4h7xFnT72aIavE52Jm4KXRxeFhMVrTK/jYniki1NhYceYLXr7k6VpeM+i
- 9K2NhghHyJ6/qO6EgMeStL9aF2jVFuofPIxdTzl/cv13gvHMAnwsk63SENJVp61aHB
- XeDVLAKAtgx0+mPnD/Qbpj9PYIEn+7AuXxxhHpla0MGc8d57XQVkStsWj2P+48ZGmX
- agyLGynbfuW6r2oVXrTe/IauhG36vd5+v9aOMAp4dRIWpEwz/9AnMQhgYQmcZpvqQk
- +38VQN/lJ85QtRgs6YSp72RqeBES0dYgoZhS5iGwt2UJVYsMxYTpNnPUBn0a1afANw
- sxwna/mHnsMog==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-ab76aa0e72bso22263366b.0
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 13:42:46 -0700 (PDT)
+ b=OcTXenjuvl3TUk0OkaBztdoDqZlYcCPe2YLGIRllwujq/XU1EnFKsI+u4ZfOkTmhx
+ cv7U3Jj871R6APEmka6DhwMK2qVGnODH5OVOqd2XL8sGSajBlSSjl9YbSeDV+M8ZNZ
+ JyX8hp2SjdIa98stIsBErzVdTbv/ZCiLAYTlgQmowFhqlZOkVsrrmG0ks+/yfHRHaz
+ uvOuHbSL/W4rfIUGe7+GGs4dBmRJX33fjXkWh9uGsSvVIx3bwN0RcvTEnV/BermkT7
+ 5U4KxddxN6VHai4dTH1bXHaLGlxXIpfxz3imURHRVfS1gES7Cg/JCmhIniq072dHaf
+ wk/VfVbFvpKlQ==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-39131851046so106359f8f.0
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 13:52:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741812165; x=1742416965;
+ d=1e100.net; s=20230601; t=1741812759; x=1742417559;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6Vgesql+TkrqzO4LASj/YOZuk/OS0sa4J2JVZ7xz8CE=;
- b=DmnLV+ZXnpgxWmSCSbm1loJ0YEfdg6Ireq8+8FKe93M87bioBqCqrknaw/AdKZn+9j
- +qOHGlEKV2zDdd1x0vYwhrdnwG/4d0cu/SoOsSmJm20A2EbBpF2WZi8jnu8W730wvAMx
- yM64JaZS11J2EtVIZOV8B5pzuYHuU9MTid98xOQC2Tm8jUba2kfDj114QcSumHIQx5yM
- IT46Seijfm1b8zRr1WZXMJtdtZT+vRrBumhIveR2W+pnZGz1Ws9aQqoCOOsU5Urzm9n3
- H0lndk7M/bIutwHO3M7Nc6I0nqew2WrLrWaIqF0d5++ZughqM/O7yg4LLSh2/3Giu/HM
- Wwmg==
+ bh=nec5nG8Rs2Gug+Jl9tOHLDkbhU4kfnXMzP7FELm3Ff0=;
+ b=b+C5lEVFtEZb3km4X/SE/6VXeM/NY4WkAFOlj4Ujt3laNzI6mgobSA4FG9t7HLwH4d
+ SOACePm8jF+pAvNqDlsCDiRdGB/17Q3Q9mLyZEiLhPYHCf7/Sisk7OXK97mFoebxAyIy
+ W9C+WLh5vUvFud78gbG88AwJ+EhpcF4o5rqPCdTT0L5wYKP/SlwbGH1k3bDP0drMp5SO
+ JL7ERb1H65cYeKSh/GA4WAKeZdNRVNzx+Ik1F+bokTgKLhVzOZdXS+LsOvjioe8mixRO
+ aKZQcyG3wm569i3nbsDb9/K2Kykzx30mGmv+vCz6IZDC3RW9saSFgqoCLcAWw3lrQt2K
+ oOGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKJKQZOcwRnJGgAoP4Cn6P3+6hjmwGJAh+mf831EKKyGZsOXVwxEdua51/PLpIDi8bZcus1CY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+EJJlUpYLJau3ih0pCqUyv4KiaVUB9vH4645sAp92HFSLNaov
- GHjpWkz+tvAmh6NKZHt61VbY8jKu6XxqBO8aTxz6iAdG2a98mIjVsu+1YQZpz4/mOic2xVsps7u
- mdfb29BIPfeLeUzEWx6tudHVz8JAuauIyXG6Ed4GloObjpCurzq78G2qF9MUYNHRqZ84=
-X-Gm-Gg: ASbGncu2dR1FfH2RKNUCt5JEXR8WP8AWGgNH6vQ5KOfTH7sVzknptYkYoc8Vn+8EWCh
- t+nn43hfVsY+96eAqQSV/hLEVxUfV/OhweVaHVa84dHWANdcIVRKEdylEZ2U01A06Bet9j/6Wp6
- Bmu3WuSH9/urBii2MWfC4A8IK9wuy5j3UP0N78xlzmvT3GXdbzedN/rhVg9yPnPxAuxU+C/fOQs
- PtPhpf3u+9Dbs9yHmBQnTCwVfcr9cg39H60jBDWkpAGbNibx6ej86GuKwSVIXstH42zP4fbQsxN
- AdLX5ltG08XaDS9UQ3vb+oGXkngXhqlDmMsZljbEN1QAwMRcfzK3LmVmOY2DsuepR3noQzmafSz
- /Xll/xw==
-X-Received: by 2002:a17:907:3606:b0:abf:61b7:4603 with SMTP id
- a640c23a62f3a-ac252718911mr780982766b.33.1741812165530; 
- Wed, 12 Mar 2025 13:42:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGGamElic8KxCw8N8jQHMIxuglwG1OLqYKtANF/cvWx7gqKHtD/MiqDgAlGzSUBYqBRUlBR2Q==
-X-Received: by 2002:a17:907:3606:b0:abf:61b7:4603 with SMTP id
- a640c23a62f3a-ac252718911mr780979866b.33.1741812165094; 
- Wed, 12 Mar 2025 13:42:45 -0700 (PDT)
+ AJvYcCWh1DnMJlgEVienG5VzCfPxHuUA64UesVEGIvBIE7FLmApC/YWxLFiVIMZVWa/AJIUXedQpcOo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7OiSsn/DwjL+dG7lkaAXt5oAvBu0TSx7Z0ipz8AM4MDmzTZYt
+ Kg7hyGRESnzoKBSSu+j3zU4CyqJRkAH+G+c3kfFVUBWUJvSvIPsWJPU9XRWi/XcoZIhaJ2HXAol
+ dfFbIyDX++JZXiVMmMSi2pg8FXkNQhvOB7bBItZ3Yj8gnAdXVyQOqtaUzbvmVI0fVQow=
+X-Gm-Gg: ASbGnctQMDvmQQsDKSyCdoW2IVWZvb4ZIZRdIuvIJGCZbHgYe+EknUFcEN0yZR71AQx
+ U+JBYr6vmB7s8dqkvwrsUsHgGCIoFuySzAqq0HI1mKlAof8Jlux1fNn7TptqkMvsSI4XVt9uXAE
+ rXzfLDFK+UjFURc2PnQZpufKz+fuiZyQYIBBVo2T9E036gUVoUOlgIpgVoJXff5qSAKiQYZZvHy
+ tocqoSuStQCXg5GGgA7nmOGr60nEowfecy5DeeTo6GwKxCjdw488xtu2iRaCocKLsbhY0yciJcx
+ OlC8MFI/L0PsYss2M6JV6hMx2uNLyboQB0aXkHpSbYY///cWDXEhYsaHywaEqQpE9C2LMQfNVZ0
+ RjwYmSg==
+X-Received: by 2002:adf:cb83:0:b0:391:23de:b19a with SMTP id
+ ffacd0b85a97d-39132d57a26mr14566855f8f.31.1741812758738; 
+ Wed, 12 Mar 2025 13:52:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGQrJYTD7b+YvzpNw7eG54IatXPM9EoIzJuqoENdaCZHSDTextfLaL0sOFwL57ouOYfD5Bs0w==
+X-Received: by 2002:adf:cb83:0:b0:391:23de:b19a with SMTP id
+ ffacd0b85a97d-39132d57a26mr14566840f8f.31.1741812758327; 
+ Wed, 12 Mar 2025 13:52:38 -0700 (PDT)
 Received: from ?IPV6:2a02:3035:6e0:345b:e644:8505:68cc:d761?
  ([2a02:3035:6e0:345b:e644:8505:68cc:d761])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac25ab328b6sm936221566b.124.2025.03.12.13.42.43
+ ffacd0b85a97d-3912c015c2csm21591704f8f.49.2025.03.12.13.52.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Mar 2025 13:42:44 -0700 (PDT)
-Message-ID: <0cc03dfd-2dda-47d8-83ad-cce8d3a3cad1@canonical.com>
-Date: Wed, 12 Mar 2025 21:42:43 +0100
+ Wed, 12 Mar 2025 13:52:36 -0700 (PDT)
+Message-ID: <60a1eccb-e4a1-4e38-b0d8-2e1693cb9abb@canonical.com>
+Date: Wed, 12 Mar 2025 21:52:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 3/8] fdt: add support for adding pmem nodes
+Subject: Re: [PATCH v8 5/8] efi_loader: preserve installer images in pmem
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+ Tobias Waldekranz <tobias@waldekranz.com>, u-boot@lists.denx.de
 References: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
- <20250312085424.1201148-4-sughosh.ganu@linaro.org>
+ <20250312085424.1201148-6-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250312085424.1201148-4-sughosh.ganu@linaro.org>
+In-Reply-To: <20250312085424.1201148-6-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -118,165 +117,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12.03.25 09:54, Sughosh Ganu wrote:
-> From: Masahisa Kojima <kojima.masahisa@socionext.com>
+> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > 
 > One of the problems OS installers face, when running in EFI, is that
 > the mounted ISO after calling ExitBootServices goes away. For some
-
-A mounted ISO only goes away if it is a RAM disk. But you do not mention 
-RAM disks in the first paragraph. Please, add an introductory sentence 
-that this patch is about RAM disk support.
-
-Whether the RAM disk contains an installer or a preinstalled OS or 
-anything else is irrelevant for the the need of a pmem node to support 
-RAM disks. If the RAM disk is partitioned (possibly as ISO9660) or is 
-just a raw disk is irrelevant here, too.
-
 > distros this is a problem since they rely on finding some core packages
 > before continuing the installation. Distros have works around this --
 > e.g Fedora has a special kernel command line parameter called
 > inst.stage2 [0].
+
+The patch is about RAM disks and not about installers.
+
 > 
 > ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
 > don't have anything in place for DTs. Linux and device trees have support
-> for persistent memory devices. So add a function that can inject a pmem
-> node in a DT, so we can use it when launhing OS installers with EFI.
-
-Nits:
-
-%s/launhing/launching/
-
+> for persistent memory devices.
 > 
-> [0]
-> https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
+> It's worth noting that for linux to instantiate the /dev/pmemX device,
+> the memory described in the pmem node has to be omitted from the EFI
+> memory map we hand over to the OS if ZONE_DEVICES and SPARSEMEM is
+> enabled. With those enabled the pmem driver ends up calling
+> devm_memremap_pages() instead of devm_memremap(). The latter works
+> whether the memory is omitted or marked as reserved, but mapping pages
+> only works if the memory is omitted.
 > 
-> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+> On top of that, depending on how the kernel is configured, that memory
+> area must be page aligned or 2MB aligned. PowerPC is an exception here
+> and requires 16MB alignment, but since we don't have EFI support for
+> it, limit the alignment to 2MB.
+> 
+> Ensure that the ISO image is 2MB aligned and remove the region
+> occupied by the image from the EFI memory map.
+> 
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since V7: None
 > 
->   boot/fdt_support.c    | 41 ++++++++++++++++++++++++++++++++++++++++-
->   include/fdt_support.h | 14 ++++++++++++++
->   2 files changed, 54 insertions(+), 1 deletion(-)
+>   lib/efi_loader/efi_bootmgr.c | 22 +++++++++++++++++-----
+>   1 file changed, 17 insertions(+), 5 deletions(-)
 > 
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 49efeec3681..e20b9759138 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -18,6 +18,7 @@
->   #include <dm/ofnode.h>
->   #include <linux/ctype.h>
->   #include <linux/types.h>
-> +#include <linux/sizes.h>
->   #include <asm/global_data.h>
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index c6124c590d9..081eff057f4 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -18,6 +18,8 @@
+>   #include <efi_loader.h>
+>   #include <efi_variable.h>
 >   #include <asm/unaligned.h>
->   #include <linux/libfdt.h>
-> @@ -464,7 +465,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *compat,
->   	do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
->   }
+> +#include <linux/kernel.h>
+> +#include <linux/sizes.h>
 >   
-> -#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
->   /*
->    * fdt_pack_reg - pack address and size array into the "reg"-suitable stream
->    */
-> @@ -493,6 +493,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
->   	return p - (char *)buf;
->   }
->   
-> +#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
->   #if CONFIG_NR_DRAM_BANKS > 4
->   #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
->   #else
-> @@ -2222,3 +2223,41 @@ int fdt_valid(struct fdt_header **blobp)
+>   static const struct efi_boot_services *bs;
+>   static const struct efi_runtime_services *rs;
+> @@ -362,13 +364,16 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
 >   	}
->   	return 1;
->   }
-> +
-> +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size)
-> +{
-> +	u64 pmem_start[2] = { 0 };
-> +	u64 pmem_size[2] = { 0 };
-
-You never use index 1. There is no need for defining an array here.
-You could use:
-
-u64 pmem_start;
-u64 pmem_size;
-
-But better simply define the parameters addr and size of the function as 
-u64 and use them directly.
-
-> +	char pmem_node[32] = {0};
-
-%s/pmem_node/node_name/g
-
-Why should we the initialize the field here?
-
-> +	int nodeoffset, len;
-> +	int err;
-> +	u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
-> +
-> +	if (!IS_ALIGNED(addr, SZ_2M) || !IS_ALIGNED(addr + size, SZ_2M)) {
-> +		printf("Start and end address must be 2MiB aligned\n");
-> +		return -1;
-> +	}
-> +
-> +	snprintf(pmem_node, sizeof(pmem_node), "pmem@%lx", addr);
-> +	nodeoffset = fdt_find_or_add_subnode(blob, 0, pmem_node);
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	err = fdt_setprop_string(blob, nodeoffset, "compatible", "pmem-region");
-> +	if (err)
-> +		return err;
-> +	err = fdt_setprop_empty(blob, nodeoffset, "volatile");
-> +	if (err)
-> +		return err;
-> +	pmem_start[0] = addr;
-> +	pmem_size[0] = size;
-> +	len = fdt_pack_reg(blob, tmp, pmem_start, pmem_size, 1);
-
-len = fdt_pack_reg(blob, tmp, &addr, &size, 1);
-
-assuming that addr, size are changed to u64.
-
-> +	err = fdt_setprop(blob, nodeoffset, "reg", tmp, len);
-> +	if (err < 0) {
-> +		printf("WARNING: could not set pmem %s %s.\n", "reg",
-> +		       fdt_strerror(err));
-> +		return err;
-> +	}
-> +
-> +	return 0;
-> +}
-> diff --git a/include/fdt_support.h b/include/fdt_support.h
-> index f0ad2e6b365..b72cd2920de 100644
-> --- a/include/fdt_support.h
-> +++ b/include/fdt_support.h
-> @@ -507,4 +507,18 @@ void fdt_fixup_pstore(void *blob);
->    */
->   int fdt_kaslrseed(void *blob, bool overwrite);
 >   
-> +/**
-> + * fdt_fixup_pmem_region() - add a pmem node on the device tree
-> + *
-> + * This functions adds/updates a pmem node to the device tree.
-> + * Usually used with EFI installers to preserve installer
-> + * images
-> + *
-> + * @blob:	device tree provided by caller
+>   	/*
+> -	 * TODO: expose the ramdisk to OS.
+> -	 * Need to pass the ramdisk information by the architecture-specific
+> -	 * methods such as 'pmem' device-tree node.
+> +	 * Linux supports 'pmem' which allows OS installers to find, reclaim
 
-Calling device-tree blob and not fdt is confusing.
+If the RAM disk contains is used by an installer is irrelevant here.
+If it is a data disk used by an OS the same patch is needed.
+
+> +	 * the mounted images and continue the installation since the contents
+> +	 * of the pmem region are treated as local media.
+> +	 *
+> +	 * The memory regions used for it needs to be carved out of the EFI
+> +	 * memory map.
+>   	 */
+> -	ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
+> +	ret = efi_remove_memory_map(addr, size, EFI_CONVENTIONAL_MEMORY);
+>   	if (ret != EFI_SUCCESS) {
+> -		log_err("Memory reservation failed\n");
+> +		log_err("Failed to reserve memory\n");
+>   		goto err;
+>   	}
+>   
+> @@ -490,6 +495,13 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+>   		ret = EFI_INVALID_PARAMETER;
+>   		goto err;
+>   	}
+> +	/*
+> +	 * Depending on the kernel configuration, pmem memory area must be page
+> +	 * aligned or 2MB aligned. PowerPC is an exception here and requires
+
+%s/pmem memory area/pmem memory areas/
+
+%s/MB/MiB/
 
 Best regards
 
 Heinrich
 
-> + * @addr:	start address of the pmem node
-> + * @size:	size of the memory of the pmem node
-> + * Return:	0 on success or < 0 on failure
-> + */
-> +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size);
-> +
->   #endif /* ifndef __FDT_SUPPORT_H */
+> +	 * 16MB alignment, but since we don't have EFI support for it, limit
+> +	 * the alignment to 2MB.
+> +	 */
+> +	image_size = ALIGN(image_size, SZ_2M);
+>   
+>   	/*
+>   	 * If the file extension is ".iso" or ".img", mount it and try to load
 
