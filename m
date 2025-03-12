@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A3AC28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0812C28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:09:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B14AE81B4B;
-	Wed, 12 Mar 2025 19:08:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08624807D7;
+	Wed, 12 Mar 2025 19:08:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S9pQ6Vlk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Df2Jogdt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3870980756; Wed, 12 Mar 2025 19:08:19 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id B2BCB81BC5; Wed, 12 Mar 2025 19:08:20 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C6E781D25
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82CB88169D
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:08:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e5c7d6b96fso87596a12.3
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:16 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5dce099f4so74300a12.1
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:08:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741802896; x=1742407696; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741802897; x=1742407697; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DMHfeD/TssdMz79yuyWsbyBP7r1AXdqXCW/hlEZG2Cw=;
- b=S9pQ6Vlk3H7bRX9/uGX76REgVX676UgbIb8BPDpkwP/KAXB/NpIWnFfLR8bu0Ve5Aa
- c/5Wspgj3RK7VIE4Tg8F7pqTf00NxuO7eNMURtAU0CSOxlOxbEJV7xMhiVKRlt3mVCCX
- BNKZqB7LIkMCrcMaVUkcJ/x2jEX0VCmqfvIoyxEixmLAAzvBgvjPhmO2pl/neeIGRCd4
- NT5AAqSSte8JWw/Z33Cc5jNhpJuogMQzDW4h7SxhblmseaoPbPY40CFPE3KxuO/rK2k9
- rsdBHP95Jq4mdbSQuVwTYNt2TXqjQJqrLb1j2KJhfn6UtTmU7n5dBaTmuAVwvaH67llN
- ptYw==
+ bh=3dkTyo6jonBwdHi4t0S6J2ayzO4HO5oEwHNFRWX/juE=;
+ b=Df2JogdtChUxxF82Uh2raOka5mq5kWnLZXg0c2m8ENwTTbgxkuRSxFd8tW/Yx3jYv+
+ 9TXmtQTSvOeyTI+WURi/88B3YoOjtZO8Kemufq/IGU9fnw5cjJ0lJs16HqyhAHBuI/Tn
+ pXVpuFtL48ZpM6GiwFhcRAhzh+SDkRBJ4iNMAGWFAbvrJ7Ia+4Cv8ph0PDMrrtYpu5lu
+ vDHSJbbE1R1T5ewzy4KSZj9248b5wAyKoSnFhowMuGE4QWa3BwxwqVQ/vQ9y5aoq0k9V
+ LoAMo5dZcNaUlRZYl2oSZ1P5s8Bg2zN8TIVlFgGUIPylHyIv4A9Qn5PAtc9kXhOEtJ7c
+ Tdgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741802896; x=1742407696;
+ d=1e100.net; s=20230601; t=1741802897; x=1742407697;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DMHfeD/TssdMz79yuyWsbyBP7r1AXdqXCW/hlEZG2Cw=;
- b=ZuNKY8eaQl6at0XX875wxi7txahpmrtu3pAaRcpCBkZDgVXRAZo7Nb04XFBXzeZNct
- 49TuhUVvFkc0x2EwFGjDS1Lk2/4XCCLuHcou2pKM+t7N9HYe03Tljbyd2fzWzJBAYpf2
- KlQyxz9ndIKM0FtsNCiTv3Arqxunm891cEczsa8o1ka3ZYJ6KEtOZcq/+2kYpRR8AEcx
- yDUJVqBoDR55+BL1mhsu2dr0p1QJOesEczkcdg+Rbxa4EWpWGZsBLHM/6sOSuLohe1oM
- 1oCND5l72GCRpsPZK0PWNGvMxXu0Sq7C+gu7zM3TEz2ueJaGpy9WoZMUxJlh8Vw5L6Ak
- gXjA==
-X-Gm-Message-State: AOJu0YzCEPzBgpVd0ve4oYeV/xWseCp1fUtk2aAWOBlcpKmDQqONkULE
- r5pbTnDf/lPxPGQOHCxizWT8IRZvR8slfw5CNuCp05iWzg7dMZGxs47+PA==
-X-Gm-Gg: ASbGnctIHPVbGplSaRS+OojsL7WCuz3x0EA52FGAd0wenTptfDJ6o0L9HW5CmyQhkcp
- 62zUsSp5/Z+it5oND18wzznTe3jZz7ENuwo/wd2/pdogS/wAT82lGAxK5Q0K2uGwuOQ7g/Lo59n
- tjNTLVIrbK6fKKNxx2Z7SSk5TFaP/rdlTaR80ObBOIL/22ddsNPCCZHGMjdsJgBqmDpmYZk2eTD
- 3WYuWpF7KUR+gFC7h0ujdcqOcTZaEiEbHGiX2eV5zUdUTqaZ+4ryWq5So2UtfBzrcVGEoohK7Le
- fjvvK4wkpebRfGXRYvc6rMPKUJG5qJ2Ut1d3
-X-Google-Smtp-Source: AGHT+IHKs2zulL/sW5/MC/EDYUweXiUJnff4iLs5sb4+KbAIiRdM82X8A1rVZScDaUcZOTYux4f6fg==
-X-Received: by 2002:a05:6402:518a:b0:5e5:ca1b:c425 with SMTP id
- 4fb4d7f45d1cf-5e5e24153e1mr32486489a12.17.1741802895649; 
- Wed, 12 Mar 2025 11:08:15 -0700 (PDT)
+ bh=3dkTyo6jonBwdHi4t0S6J2ayzO4HO5oEwHNFRWX/juE=;
+ b=fHYQchb3xuaianG0YZ900keKM1tXZ78B7F/Lord8eX7YJ/fK92q22j+wDk53Dq7cZN
+ NRO89JFDC37SXrewOxVSZR9aYSDgLix2oWHA+XL0yB8f4HFLW/O3IbEaaaYm5nyVt7av
+ HMF/w08RVqTrZRufkPQczMSHuYwX3Xu5bYN+bXkl8PSCNugWqRsJi6usJcLhMUJQiZX7
+ 28f7tXE2u/DZt1Efz3mQa92TULPLpp6mD18jqpT1ZvI+YmMPGZDkkZTjILpDzW8T7j+r
+ TGSEhd7t3xN7YSdIl7LqdouU6lQI3eT7FnlCIxhm+AvVYXa55iPaykoVp+eKOv+GtwIB
+ uIpw==
+X-Gm-Message-State: AOJu0YxHdoPW8T20mLoqdeDCoiUsldtR+F2NJOlhXeDvrtR3jE4ubBaO
+ gA77Uggivr2KWMzgVqXng2RQejUG8Ji6cbkbHkYrZnC5grww9Md1
+X-Gm-Gg: ASbGncutOs4iKjRuGBo+kBzamri7ggRaffhhLXBj00ADq2P7+g5mmF+VyLVvx0zf6iE
+ nJIvOoIsbCDTuwLgnDBHsQjl6N10OXsXrEec5azZ0ToC2K5WNwgExdSzjR5XUYr23kBS4hwjdu2
+ o5QPuJelNASIitmdGmhIqYDSYkhQ/P7OwR845Iz5O2iulWJERfuvyrZ6cv85zCE+Yxj9lA7pzs7
+ 0eUuXFqby/b38Ja+P/JqgUC9FFjx0DPtrahQuJ7++5Z0BH2PVJz2e7ozCv4mrvh7CI6KTkOE7nt
+ pWn+8OdQcH+GwO0Sh1+jj1qSyJOBGc3OW1A5
+X-Google-Smtp-Source: AGHT+IG68rPVZAF4DOP34UWVWHPalIO+/NsvWn4GwRmHuCqswQpVVqhJ+YSW/3XK8zaktOGuOSy6NQ==
+X-Received: by 2002:a05:6402:1ed0:b0:5e4:cbee:234c with SMTP id
+ 4fb4d7f45d1cf-5e5e22da6cdmr23983857a12.10.1741802896790; 
+ Wed, 12 Mar 2025 11:08:16 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.14
+ 4fb4d7f45d1cf-5e5c733fcd2sm9971635a12.2.2025.03.12.11.08.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:08:15 -0700 (PDT)
+ Wed, 12 Mar 2025 11:08:16 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 09/13] video: bridge: ssd2825: add HS delays configuration
-Date: Wed, 12 Mar 2025 20:07:50 +0200
-Message-ID: <20250312180754.120946-10-clamor95@gmail.com>
+Subject: [PATCH v1 10/13] video: bridge: ssd2825: make pixel format
+ calculation more obvious
+Date: Wed, 12 Mar 2025 20:07:51 +0200
+Message-ID: <20250312180754.120946-11-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312180754.120946-1-clamor95@gmail.com>
 References: <20250312180754.120946-1-clamor95@gmail.com>
@@ -98,68 +99,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set HS Zero and Prepare delays from device tree.
+Use switch condition to get pixel format.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/bridge/ssd2825.c | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ drivers/video/bridge/ssd2825.c | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/video/bridge/ssd2825.c b/drivers/video/bridge/ssd2825.c
-index df69f993ea1..e7c9dc6b62b 100644
+index e7c9dc6b62b..eafd9f55913 100644
 --- a/drivers/video/bridge/ssd2825.c
 +++ b/drivers/video/bridge/ssd2825.c
-@@ -120,6 +120,9 @@ struct ssd2825_bridge_priv {
- 	struct clk *tx_clk;
- 
- 	u32 pll_freq_kbps;	/* PLL in kbps */
-+
-+	u32 hzd;		/* HS Zero Delay in ns */
-+	u32 hpd;		/* HS Prepare Delay is ns */
- };
- 
- static int ssd2825_spi_write(struct udevice *dev, int reg,
-@@ -303,7 +306,9 @@ static void ssd2825_setup_pll(struct udevice *dev)
+@@ -351,8 +351,26 @@ static int ssd2825_bridge_attach(struct udevice *dev)
+ 	struct ssd2825_bridge_priv *priv = dev_get_priv(dev);
  	struct mipi_dsi_device *device = &priv->device;
  	struct display_timing *dt = &priv->timing;
- 	u16 pll_config, lp_div;
-+	u32 nibble_delay, nibble_freq_khz;
- 	u32 pclk_mult, tx_freq_khz, pd_lines;
-+	u8 hzd, hpd;
++	u8 pixel_format;
+ 	int ret;
  
- 	tx_freq_khz = clk_get_rate(priv->tx_clk) / 1000;
- 	pd_lines = mipi_dsi_pixel_format_to_bpp(device->format);
-@@ -315,12 +320,19 @@ static void ssd2825_setup_pll(struct udevice *dev)
- 
- 	lp_div = priv->pll_freq_kbps / (SSD2825_LP_MIN_CLK * 8);
- 
-+	/* nibble_delay in nanoseconds */
-+	nibble_freq_khz = priv->pll_freq_kbps / 4;
-+	nibble_delay = 1000 * 1000 / nibble_freq_khz;
++	/* Set pixel format */
++	switch (device->format) {
++	case MIPI_DSI_FMT_RGB565:
++		pixel_format = 0x00;
++		break;
++	case MIPI_DSI_FMT_RGB666_PACKED:
++		pixel_format = 0x01;
++		break;
++	case MIPI_DSI_FMT_RGB666:
++		pixel_format = 0x02;
++		break;
++	case MIPI_DSI_FMT_RGB888:
++	default:
++		pixel_format = 0x03;
++		break;
++	}
 +
-+	hzd = priv->hzd / nibble_delay;
-+	hpd = (priv->hpd - 4 * nibble_delay) / nibble_delay;
-+
- 	/* Disable PLL */
- 	ssd2825_write_register(dev, SSD2825_PLL_CTRL_REG, 0x0000);
- 	ssd2825_write_register(dev, SSD2825_LINE_CTRL_REG, 0x0001);
+ 	/* Perform SW reset */
+ 	ssd2825_write_register(dev, SSD2825_OPERATION_CTRL_REG, 0x0100);
  
- 	/* Set delays */
--	ssd2825_write_register(dev, SSD2825_DELAY_ADJ_REG_1, 0x2103);
-+	ssd2825_write_register(dev, SSD2825_DELAY_ADJ_REG_1, (hzd << 8) | hpd);
- 
- 	/* Set PLL coeficients */
- 	ssd2825_write_register(dev, SSD2825_PLL_CONFIGURATION_REG, pll_config);
-@@ -515,6 +527,9 @@ static int ssd2825_bridge_probe(struct udevice *dev)
- 		return PTR_ERR(priv->tx_clk);
- 	}
- 
-+	priv->hzd = dev_read_u32_default(dev, "solomon,hs-zero-delay-ns", 133);
-+	priv->hpd = dev_read_u32_default(dev, "solomon,hs-prep-delay-ns", 40);
-+
- 	return ssd2825_bridge_hw_init(dev);
- }
- 
+@@ -371,7 +389,7 @@ static int ssd2825_bridge_attach(struct udevice *dev)
+ 	ssd2825_write_register(dev, SSD2825_RGB_INTERFACE_CTRL_REG_6,
+ 			       SSD2825_HSYNC_HIGH | SSD2825_VSYNC_HIGH |
+ 			       SSD2825_PCKL_HIGH | SSD2825_NON_BURST |
+-			       (3 - device->format));
++			       pixel_format);
+ 	ssd2825_write_register(dev, SSD2825_LANE_CONFIGURATION_REG,
+ 			       device->lanes - 1);
+ 	ssd2825_write_register(dev, SSD2825_TEST_REG, 0x0004);
 -- 
 2.43.0
 
