@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20093C28B30
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 15:38:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FB9C28B2F
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 15:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CB9681545;
-	Wed, 12 Mar 2025 16:38:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5ABB8141D;
+	Wed, 12 Mar 2025 16:42:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="VT8ZrE3m";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qtkLwThJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78D8880FB9; Wed, 12 Mar 2025 16:38:03 +0100 (CET)
+ id 3F7F781545; Wed, 12 Mar 2025 16:42:10 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8C6180756
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 16:38:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7695781335
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 16:42:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=51668757de=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52CFYDbx001239;
- Wed, 12 Mar 2025 16:37:58 +0100
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52CFRi1o027766;
+ Wed, 12 Mar 2025 16:42:05 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- M/ponSeUTjf4GHburdKl6nhHuRqppHuCFolcVs6W9h0=; b=VT8ZrE3mlqgoxwn/
- ErrXA4eAkF6RjDcWKeLpAKuAgY2wNmKe+xBcag+vusFtAX+x2WiGUbANQC2L41X2
- 3Q+PkDTnJFuPWOq6eP2k+Gh6dDsF8lH9xNQE1zgz22Bz/fQehrQWLzIL1JYNG6WU
- vsCYowiTFZpnpDZuLQ32v5axUojM3iZB8uoT6Vo7DxH96XbAfgskR4d3XOmXqxO4
- /aluSRmmC1hREm0UlNL/NkxLHxAedjYIEKGeHPpQiIbdEY2WoXryx5MCXY60NGQA
- JGBxEDAXdAj2Ko5KIXv711+q/uLDJzC0JhB+ShZd66p4rx6lITUoLtdUrrle+t88
- d9TDow==
+ n+ufF7L4x0E1E2RYq31VRkz1ellAe50hHQ3SG3ianNY=; b=qtkLwThJ+e2s1sCj
+ 1FEMNmTSIgpC2YJkn+MvLbYMNmjGrj3R0qV1julww8VMC3HF2NVPJBT1LOVL9K/N
+ dLQEU8JJSlIOSUZ0l8P2eRSsyuuim5iJ+yhbGoj3vWd1e2LSLa/DaWVccLFoDz6q
+ s+hVLan9jSBqXyBO7caKfoWW0yLzROPvlEix3Gi9jUAczwMdcULGgc84iKj/X8h+
+ yXJLBl+Qv5GPiPrdOr47FvORyj8pkX1wgcIII8QNbu2zlStQ6MXCrP6E28hSClHQ
+ Nntiui7ZeqUWOZeTVeX6ppKl9J3H8UhwUEmPnzAI85Qdp7LushWbCRhwkyyFJ4iB
+ WIyRqQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45au3jmf28-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45au3qvevd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 12 Mar 2025 16:37:58 +0100 (CET)
+ Wed, 12 Mar 2025 16:42:05 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 024164006F;
- Wed, 12 Mar 2025 16:37:03 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 42E7640052;
+ Wed, 12 Mar 2025 16:41:23 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1AE9D4ED23E;
- Wed, 12 Mar 2025 16:36:51 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7838158D89D;
+ Wed, 12 Mar 2025 16:41:10 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 12 Mar
- 2025 16:36:50 +0100
-Message-ID: <22913854-e021-4af9-8cfc-48254f108982@foss.st.com>
-Date: Wed, 12 Mar 2025 16:36:50 +0100
+ 2025 16:41:10 +0100
+Message-ID: <90c1b90c-811a-4ecc-bd9e-320d4f0d6f3f@foss.st.com>
+Date: Wed, 12 Mar 2025 16:41:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] pwm: stm32: add driver to support pwm with timer
-To: Cheick Traore <cheick.traore@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Fabrice Gasnier
- <fabrice.gasnier@foss.st.com>, Olivier Moysan <olivier.moysan@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>
-References: <20250311143037.818675-1-cheick.traore@foss.st.com>
- <20250311143037.818675-3-cheick.traore@foss.st.com>
+Subject: Re: [PATCH] board: st: stm32f746-disco: Update MAINTAINERS file
+To: <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+References: <20250310125225.905953-1-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250311143037.818675-3-cheick.traore@foss.st.com>
+In-Reply-To: <20250310125225.905953-1-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -94,266 +91,26 @@ X-Virus-Status: Clean
 
 
 
-On 3/11/25 15:30, Cheick Traore wrote:
-> Add driver to support pwm on STM32MP1X SoCs. The PWM signal is generated
-> using a multifuntion timer which provide a pwm feature. Clock rate and
-> addresses are retrieved from the multifunction timer driver.
+On 3/10/25 13:52, Patrice Chotard wrote:
+> Vikas has left STMicroelectronics several years ago.
+> Put myself as maintainer of stm32f746-disco board.
 > 
-> Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
-> Changes in v2:
-> - add the check of duty_ns and period_ns parameters in pwm-stm32 driver
+>  board/st/stm32f746-disco/MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
->  drivers/pwm/Kconfig     |   8 ++
->  drivers/pwm/Makefile    |   1 +
->  drivers/pwm/pwm-stm32.c | 205 ++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 214 insertions(+)
->  create mode 100644 drivers/pwm/pwm-stm32.c
-> 
-> diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-> index 6e79868d0ef..de312656746 100644
-> --- a/drivers/pwm/Kconfig
-> +++ b/drivers/pwm/Kconfig
-> @@ -105,6 +105,14 @@ config PWM_TEGRA
->  	  32KHz clock is supported by the driver but the duty cycle is
->  	  configurable.
->  
-> +config PWM_STM32
-> +	bool "Enable support for STM32 PWM"
-> +	depends on DM_PWM && MFD_STM32_TIMERS
-> +	help
-> +	  This enables PWM driver for STMicroelectronics STM32 pulse width
-> +	  modulation. It uses STM32 timer devices that can have up to 4 output
-> +	  channels, with complementary outputs and configurable polarity.
-> +
->  config PWM_SUNXI
->  	bool "Enable support for the Allwinner Sunxi PWM"
->  	depends on DM_PWM
-> diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-> index e4d10c8dc3e..76305b93bc9 100644
-> --- a/drivers/pwm/Makefile
-> +++ b/drivers/pwm/Makefile
-> @@ -22,5 +22,6 @@ obj-$(CONFIG_PWM_ROCKCHIP)	+= rk_pwm.o
->  obj-$(CONFIG_PWM_SANDBOX)	+= sandbox_pwm.o
->  obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
->  obj-$(CONFIG_PWM_TEGRA)		+= tegra_pwm.o
-> +obj-$(CONFIG_PWM_STM32)		+= pwm-stm32.o
->  obj-$(CONFIG_PWM_SUNXI)		+= sunxi_pwm.o
->  obj-$(CONFIG_PWM_TI_EHRPWM)	+= pwm-ti-ehrpwm.o
-> diff --git a/drivers/pwm/pwm-stm32.c b/drivers/pwm/pwm-stm32.c
-> new file mode 100644
-> index 00000000000..5fa649b5903
-> --- /dev/null
-> +++ b/drivers/pwm/pwm-stm32.c
-> @@ -0,0 +1,205 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-> + * Author: Cheick Traore <cheick.traore@foss.st.com>
-> + *
-> + * Originally based on the Linux kernel v6.10 drivers/pwm/pwm-stm32.c.
-> + */
-> +
-> +#include <div64.h>
-> +#include <dm.h>
-> +#include <pwm.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/timers.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/time.h>
-> +
-> +#define CCMR_CHANNEL_SHIFT	8
-> +#define CCMR_CHANNEL_MASK	0xFF
-> +
-> +struct stm32_pwm_priv {
-> +	bool have_complementary_output;
-> +	bool invert_polarity;
-> +};
-> +
-> +static u32 active_channels(struct stm32_timers_plat *plat)
-> +{
-> +	return readl(plat->base + TIM_CCER) & TIM_CCER_CCXE;
-> +}
-> +
-> +static int stm32_pwm_set_config(struct udevice *dev, uint channel,
-> +				uint period_ns, uint duty_ns)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_timers_priv *priv = dev_get_priv(dev_get_parent(dev));
-> +	unsigned long long prd, div, dty;
-> +	unsigned int prescaler = 0;
-> +	u32 ccmr, mask, shift;
-> +
-> +	if (duty_ns > period_ns)
-> +		return -EINVAL;
-> +
-> +	/*
-> +	 * Period and prescaler values depends on clock rate
-> +	 * First we need to find the minimal value for prescaler such that
-> +	 *
-> +	 *        period_ns * clkrate
-> +	 *   ------------------------------ < max_arr + 1
-> +	 *   NSEC_PER_SEC * (prescaler + 1)
-> +	 *
-> +	 * This equation is equivalent to
-> +	 *
-> +	 *        period_ns * clkrate
-> +	 *   ---------------------------- < prescaler + 1
-> +	 *   NSEC_PER_SEC * (max_arr + 1)
-> +	 *
-> +	 * Using integer division and knowing that the right hand side is
-> +	 * integer, this is further equivalent to
-> +	 *
-> +	 *   (period_ns * clkrate) // (NSEC_PER_SEC * (max_arr + 1)) ≤ prescaler
-> +	 */
-> +
-> +	div = (unsigned long long)priv->rate * period_ns;
-> +	do_div(div, NSEC_PER_SEC);
-> +	prd = div;
-> +
-> +	do_div(div, priv->max_arr + 1);
-> +	prescaler = div;
-> +	if (prescaler > MAX_TIM_PSC)
-> +		return -EINVAL;
-> +
-> +	do_div(prd, prescaler + 1);
-> +	if (!prd)
-> +		return -EINVAL;
-> +
-> +	/*
-> +	 * All channels share the same prescaler and counter so when two
-> +	 * channels are active at the same time we can't change them
-> +	 */
-> +	if (active_channels(plat) & ~(1 << channel * 4)) {
-> +		u32 psc, arr;
-> +
-> +		psc = readl(plat->base + TIM_PSC);
-> +		arr = readl(plat->base + TIM_ARR);
-> +		if (psc != prescaler || arr != prd - 1)
-> +			return -EBUSY;
-> +	}
-> +
-> +	writel(prescaler, plat->base + TIM_PSC);
-> +	writel(prd - 1, plat->base + TIM_ARR);
-> +	setbits_le32(plat->base + TIM_CR1, TIM_CR1_ARPE);
-> +
-> +	/* Calculate the duty cycles */
-> +	dty = prd * duty_ns;
-> +	do_div(dty, period_ns);
-> +
-> +	writel(dty, plat->base + TIM_CCRx(channel + 1));
-> +
-> +	/* Configure output mode */
-> +	shift = (channel & 0x1) * CCMR_CHANNEL_SHIFT;
-> +	ccmr = (TIM_CCMR_PE | TIM_CCMR_M1) << shift;
-> +	mask = CCMR_CHANNEL_MASK << shift;
-> +	if (channel < 2)
-> +		clrsetbits_le32(plat->base + TIM_CCMR1, mask, ccmr);
-> +	else
-> +		clrsetbits_le32(plat->base + TIM_CCMR2, mask, ccmr);
-> +
-> +	setbits_le32(plat->base + TIM_BDTR, TIM_BDTR_MOE);
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_pwm_set_enable(struct udevice *dev, uint channel,
-> +				bool enable)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
-> +	u32 mask;
-> +
-> +	/* Enable channel */
-> +	mask = TIM_CCER_CC1E << (channel * 4);
-> +	if (priv->have_complementary_output)
-> +		mask |= TIM_CCER_CC1NE << (channel * 4);
-> +
-> +	if (enable) {
-> +		setbits_le32(plat->base + TIM_CCER, mask);
-> +		/* Make sure that registers are updated */
-> +		setbits_le32(plat->base + TIM_EGR, TIM_EGR_UG);
-> +		/* Enable controller */
-> +		setbits_le32(plat->base + TIM_CR1, TIM_CR1_CEN);
-> +	} else {
-> +		clrbits_le32(plat->base + TIM_CCER, mask);
-> +		/* When all channels are disabled, we can disable the controller */
-> +		if (!active_channels(plat))
-> +			clrbits_le32(plat->base + TIM_CR1, TIM_CR1_CEN);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_pwm_set_invert(struct udevice *dev, uint channel,
-> +				bool polarity)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
-> +	u32 mask;
-> +
-> +	mask = TIM_CCER_CC1P << (channel * 4);
-> +	if (priv->have_complementary_output)
-> +		mask |= TIM_CCER_CC1NP << (channel * 4);
-> +
-> +	clrsetbits_le32(plat->base + TIM_CCER, mask, polarity ? mask : 0);
-> +
-> +	return 0;
-> +}
-> +
-> +static void stm32_pwm_detect_complementary(struct udevice *dev)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
-> +	struct stm32_pwm_priv *priv = dev_get_priv(dev);
-> +	u32 ccer;
-> +
-> +	/*
-> +	 * If complementary bit doesn't exist writing 1 will have no
-> +	 * effect so we can detect it.
-> +	 */
-> +	setbits_le32(plat->base + TIM_CCER, TIM_CCER_CC1NE);
-> +	ccer = readl(plat->base + TIM_CCER);
-> +	clrbits_le32(plat->base + TIM_CCER, TIM_CCER_CC1NE);
-> +
-> +	priv->have_complementary_output = (ccer != 0);
-> +}
-> +
-> +static int stm32_pwm_probe(struct udevice *dev)
-> +{
-> +	struct stm32_timers_priv *timer = dev_get_priv(dev_get_parent(dev));
-> +
-> +	if (timer->rate > 1000000000) {
-> +		dev_err(dev, "Clock freq too high (%lu)\n", timer->rate);
-> +		return -EINVAL;
-> +	}
-> +
-> +	stm32_pwm_detect_complementary(dev);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct pwm_ops stm32_pwm_ops = {
-> +	.set_config	= stm32_pwm_set_config,
-> +	.set_enable	= stm32_pwm_set_enable,
-> +	.set_invert	= stm32_pwm_set_invert,
-> +};
-> +
-> +static const struct udevice_id stm32_pwm_ids[] = {
-> +	{ .compatible = "st,stm32-pwm" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(stm32_pwm) = {
-> +	.name		= "stm32_pwm",
-> +	.id		= UCLASS_PWM,
-> +	.of_match	= stm32_pwm_ids,
-> +	.ops		= &stm32_pwm_ops,
-> +	.probe          = stm32_pwm_probe,
-> +	.priv_auto	= sizeof(struct stm32_pwm_priv),
-> +};
+> diff --git a/board/st/stm32f746-disco/MAINTAINERS b/board/st/stm32f746-disco/MAINTAINERS
+> index 18e4c99c4fb..f9c3af6fb8b 100644
+> --- a/board/st/stm32f746-disco/MAINTAINERS
+> +++ b/board/st/stm32f746-disco/MAINTAINERS
+> @@ -1,5 +1,5 @@
+>  STM32F746 DISCOVERY BOARD
+> -M:	Vikas Manocha <vikas.manocha@st.com>
+> +M:	Patrice Chotard <patrice.chotard@foss.st.com>
+>  S:	Maintained
+>  F:	doc/board/st/
+>  F:	board/st/stm32f746-disco
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+Applied to u-boot-stm32/next
