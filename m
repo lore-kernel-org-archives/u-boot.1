@@ -4,88 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA08C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 13:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C583CC28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 13:55:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E4728191C;
-	Wed, 12 Mar 2025 14:01:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EA4F4805D7;
+	Wed, 12 Mar 2025 14:55:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LlM7kg42";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHuzTq2w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37DF280756; Wed, 12 Mar 2025 12:51:19 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id EC8EC80756; Wed, 12 Mar 2025 14:55:27 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99A8C801BE
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 12:51:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8703F801FB
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 14:55:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5495078cd59so7388832e87.1
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 04:51:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7c081915cf3so884392185a.1
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 06:55:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741780276; x=1742385076; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Lk7zENClZx7SLMEKWDiQdyGueTi+Pai7/AFdLQwBiJk=;
- b=LlM7kg42rjggTmPBlwKvaXfF3nYqLn09aBGX+tFWeIO1yLrF/vTdZxt4PiY9pu1byf
- R2XKk6DWZ2cc0VlKXeQ6NFGzJExfdbFYZ/HBSRFxLTJXwgdtRKU5RK3wjGoPOy7kG6kK
- ovfq5sK65zBansXWuiZ3XwzFd9mSTeHWyUa2b0DtEr1hgmDbXRthoOrlesYC/sENaxLI
- qxFuenifbNPhjdiqWWWPDIsBBE49U6Kl7c22c5Z7GzhEa0gnSNblAwJwE9mHzhIIda3y
- NjO5uMU4H1qm4nTM65knspf5BQELHx0y+pqPLoTzT1ZxNoeLFV1j2GgHEhFHTzL6vXHX
- 0mXA==
+ d=konsulko.com; s=google; t=1741787723; x=1742392523; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RI0/mJKEid/NN3zsKW8EUptsYxiv5u/OBUegELhr2hk=;
+ b=XHuzTq2wYWG5WE7vJmKVO4sI7MWjq4VImxAvRbextAdQGOwpk6pjYwMEHVEubqx3cl
+ 8ehP8RNtqx3QNVk+OBXu3FN1Zg6ES/53rnkN8xbZbhdZlGLfY/NqOgP6zn8G9OtbQKgk
+ JHV4PKRUd8oZV8JFSUWO5Bzgxi7JdUwAZM3R0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741780276; x=1742385076;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Lk7zENClZx7SLMEKWDiQdyGueTi+Pai7/AFdLQwBiJk=;
- b=wNTJTh6THehd02XgHOml9gW5yDfmuW+PKEsI16eBnaPVB12R+ZKzAQZUTQRyuzUrir
- +4MYxYcwG3tUu8j+TEa6SuJUj0PI0tx7dTXeWwGConFoguqOMqXO+uTabL+dGQSBoBbw
- xkfxNXdbqNCaE33DQ3mdtppSD1+LDicyONso+Fg9t6fv0dJiehee/MT6q/zoOjHozeCQ
- pIBVeOPXdyWX5ZXYusnomF0J3BHQP0jwHWvrnVMH4P3+71NQcDSKy19Zcqo7Qlo0Mjw9
- nDzOqD4UkbPhdxqj21a9IkMCbaqyjEF8YOg5pfbvbTzOLeImc+bS29G30W9d4lGeeSiQ
- YU/g==
-X-Gm-Message-State: AOJu0YwVO0Bv0WLAUSAi0E5qFmmV5YtxbeAkRzy2ed4MebxSU8BqD47F
- KAsQk/9QE5DqRNxeahW1+WDJfcqjtu6zLsWyF6sCwI6MTtg6GYqtioAtzvAGbrFQUqv6G0Vj2H3
- hHhdWC6d4rqtYbXoMWTM53UYh+Z4=
-X-Gm-Gg: ASbGncuaVn5+sNblF1YkDh/UMq9UdfH2HBC6q4vukcE0GsSXU6aX5qw5XMEl/+BaGk+
- 2ncyT9waKnve0azPQ4j6MI7cB8uAkAvU39qhNxbPiJkjPrYQRob/PpGQRPPSfmNSdFN8TxiGhrY
- 5ecb86MLHDAGoZtfxpCpStc9x6Ww==
-X-Google-Smtp-Source: AGHT+IEINfPSJnXdLOIswrSP91a+yuNPm4O9LjKmBmIt/2FQmN8Vlv3wLogXjkAgUVmw3kKSAfM5/CgD087JZMEsSXY=
-X-Received: by 2002:a05:6512:1094:b0:549:912a:d051 with SMTP id
- 2adb3069b0e04-549aba2a91emr2867773e87.0.1741780275571; Wed, 12 Mar 2025
- 04:51:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741787723; x=1742392523;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RI0/mJKEid/NN3zsKW8EUptsYxiv5u/OBUegELhr2hk=;
+ b=e6Y/8lirW2ETnlFwhB5VkX+TmK87HDJZYeQEIp22zOEUUiQ85TtRB7GG3LDKngX0xY
+ 3N/F5FcscetW65yFzNafT2GSNR2g+SvdIlps/WPFJvhwVyiIX0CaQatAiw0Zg+U7D2zV
+ 80rcWHHHllgzu1ZqPGqsd1QGfV7JGtHPlmp4B44fSLTXK5jfG89637/lUoHrWbJUUMok
+ wKWtQZHF1NwZ49fAGDsV5y+nCGVfX/To+Cy+7ckaB7aNWjbjTg5merOl69FoXi0qaOWk
+ lgHssBzhGy/Ord1H3zLrQsH6vhysX5hZ2FABucDGLTDzgEdV1qsPEzi0zKkbU7UPh10u
+ leIg==
+X-Gm-Message-State: AOJu0YwOs7lCmXShiKJUhJbJKrMBNxtHvZpYrYPB4jCHYXiVb+D0+pa+
+ 68HWXfA7HhVv/R6sSq+WA8nb6NGSzvxiAmzriHhyLmWMXu8qxTjX60d9QWIcZMQ=
+X-Gm-Gg: ASbGncue8vEF485YXSHcfbJeduW23rNhgCP1fPXPWlMsuvyzA00lB+8WioWBF2+4sin
+ rl+zrpfMzxDK/u42b0uYM9F7S3Z3oM3naKjdHpbtop2Z5E4phw7FC+V+p8rJeqFc7PQBAbZAOY1
+ /vUWiYTxQtGnzLlvpyvoJrFgNpyrAO5tw+/YCPu/4q1q+hm4aCJwfk2rNMMC8xM5lwkCirO0fvt
+ AcJgpXHkQBZwZZw5wcC1bjU5T7jD5f94YWIxf1kLorPULSp13IwcqsTM4pXWm4nWUAdOH+IwWmH
+ pwfouIqRjPbuEX4GMcoFdGqBoUxGRXbs31iM5c/RkIs/Th7fSmmFnUQ=
+X-Google-Smtp-Source: AGHT+IHVuZrBmHXPJiiJGARc6jjG7XddiBvs3/a5Dy8tMtbAbCwQEzMgSY9JDQeeInI3LoMH5YW1Zg==
+X-Received: by 2002:a05:620a:2625:b0:7c5:6291:904d with SMTP id
+ af79cd13be357-7c562919180mr807371785a.38.1741787723462; 
+ Wed, 12 Mar 2025 06:55:23 -0700 (PDT)
+Received: from [127.0.1.1] ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c559b27f01sm369924385a.78.2025.03.12.06.55.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Mar 2025 06:55:22 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250311230656.91036-1-marek.vasut+renesas@mailbox.org>
+References: <20250311230656.91036-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/next
+Message-Id: <174178772209.1732220.10343167504856445197.b4-ty@konsulko.com>
+Date: Wed, 12 Mar 2025 07:55:22 -0600
 MIME-Version: 1.0
-References: <20250311133506.124914-1-mchitale@ventanamicro.com>
- <20250311133506.124914-2-mchitale@ventanamicro.com>
-In-Reply-To: <20250311133506.124914-2-mchitale@ventanamicro.com>
-From: =?UTF-8?B?0JzQsNC60YHQuNC8INCc0L7RgdC60LDQu9C10YY=?=
- <maximmosk4@gmail.com>
-Date: Wed, 12 Mar 2025 14:51:01 +0300
-X-Gm-Features: AQ5f1JpmcH43oxurVS5kIZ3CWWgp4wgnqv3YDJ7SByQbu7gxGPRtEx_WIIx3LxI
-Message-ID: <CALUeBeDZFnKHT14FwrpmhqzFDOO3vCzqJA8XRTzAEdCwOSApRQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/3] riscv: image: Add new image type for RV64
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Simon Glass <sjg@chromium.org>, Julien Masson <jmasson@baylibre.com>, 
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
-X-Mailman-Approved-At: Wed, 12 Mar 2025 14:01:40 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,60 +94,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 11 =D0=BC=D0=B0=D1=80. 2025=E2=80=AF=D0=B3. =D0=B2 16:35, May=
-uresh Chitale <mchitale@ventanamicro.com>:
+On Wed, 12 Mar 2025 00:05:56 +0100, Marek Vasut wrote:
 
-> Similar to ARM and X86, introduce a new image type which allows u-boot
-> to distinguish between images built for 32-bit vs 64-bit Risc-V CPUs.
->
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> ---
->  boot/image.c    | 3 ++-
->  include/image.h | 1 +
->  2 files changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/boot/image.c b/boot/image.c
-> index abac254e026..03d5e59b634 100644
-> --- a/boot/image.c
-> +++ b/boot/image.c
-> @@ -92,7 +92,8 @@ static const table_entry_t uimage_arch[] =3D {
->         {       IH_ARCH_ARC,            "arc",          "ARC",          }=
-,
->         {       IH_ARCH_X86_64,         "x86_64",       "AMD x86_64",   }=
-,
->         {       IH_ARCH_XTENSA,         "xtensa",       "Xtensa",       }=
-,
-> -       {       IH_ARCH_RISCV,          "riscv",        "RISC-V",       }=
-,
-> +       {       IH_ARCH_RISCV,          "riscv",        "RISC-V 32 Bit",}=
-,
-> +       {       IH_ARCH_RISCV64,        "riscv64",      "RISC-V 64 Bit",}=
-,
->         {       -1,                     "",             "",             }=
-,
->  };
->
-> diff --git a/include/image.h b/include/image.h
-> index 8a9f779d3ff..12b31166e86 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -139,6 +139,7 @@ enum {
->         IH_ARCH_X86_64,                 /* AMD x86_64, Intel and Via */
->         IH_ARCH_XTENSA,                 /* Xtensa       */
->         IH_ARCH_RISCV,                  /* RISC-V */
->
+> The following changes since commit 1b42f57ec82ceba4d5f08cfb359717232301cfa5:
+> 
+>   Merge tag 'v2025.04-rc4' into next (2025-03-10 20:18:51 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-sh.git next
+> 
+> [...]
 
-I believe s/RISC-V/RISC-V 32 bit/ is more explicit.
-Looks good.
+Merged into u-boot/next, thanks!
 
-Reviewed-by: Maxim Moskalets <maximmosk4@gmail.com>
+-- 
+Tom
 
 
-> +       IH_ARCH_RISCV64,                /* RISC-V 64 bit*/
->
->         IH_ARCH_COUNT,
->  };
-> --
-> 2.43.0
->
->
