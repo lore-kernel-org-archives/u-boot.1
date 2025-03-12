@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60BE4C28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:16:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80768C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:16:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3227C81DEC;
-	Wed, 12 Mar 2025 19:15:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A41181BC0;
+	Wed, 12 Mar 2025 19:15:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JfA6n6UW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UDCWpMsS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58B6B800B6; Wed, 12 Mar 2025 19:15:42 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 5D22381D67; Wed, 12 Mar 2025 19:15:43 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 609258141D
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6910B8056A
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ab7430e27b2so23083366b.3
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:40 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac2bb7ca40bso27295266b.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741803340; x=1742408140; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741803341; x=1742408141; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pMxJDRYfDGrz6mpTkDK6Qb8h0a3FmIit9teaHl/ItgQ=;
- b=JfA6n6UW5VkQlXGJQFowBaPeCAPkJmmPbPeaqvHkVKeZ8DBCR+qA99VAIzAkAnHzI9
- uuQ82i/P9MfkcDQpKTg2G7iIsymSdulesP20az+AADxiyeFqT0GSBWKMtNNqnrfJdo1W
- TS7RykjZnaTl1A3+Xi4T96hoEMS9+/nsvcdcQVnQRr3AJSfVBJE7cYH8uxVjRjypMlyI
- pl8qV2tDhpI8nTL6d5bMItxBj51onsDmDETykOJJnUmu3ckWSzi5qtSQYxH8Rji+7MJB
- QH3QYPeZgFvFEf/cowLcA+/pSHdtfCIsFV/bGspRVesxWWn/jyMxKEpRbPqw3Hl3Kwhv
- hqBg==
+ bh=PN9d7+RJv0xWCMhBpu1kT00Qge/LWwP9YcNtvDoBH/0=;
+ b=UDCWpMsSfrHsSIgO3hjyBU65/T/Cr3Zd2KGZyxQIyvhXIDU1djtekz7iIfqSHGlEo1
+ VUA9HBoq7xS2a2GDR38XrcWPlTZNrvEC27FFSg4BswFpJr6HINSAaFTDoi4XpkZuJLfO
+ GTtRP5ppukql/U1DcmBSKRkSMzt9uUesYkUPeT1WHcdjEVVqWJMqcfV6HhNeQAZBPXpk
+ /O1QcJhehHGziWhSbOYnfVrBOJkZlzqANe7zKVtlZ3443Ims1P3J1gLRN756Lj/TUC0w
+ bZPHu2GnnzChul7OsjE1U7OGwvgGCcSt7iF5UmqIJ9LiyV4l8iLsPMBqnk0kfA/nxbg7
+ hp0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741803340; x=1742408140;
+ d=1e100.net; s=20230601; t=1741803341; x=1742408141;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pMxJDRYfDGrz6mpTkDK6Qb8h0a3FmIit9teaHl/ItgQ=;
- b=tNwRhozKNf1VPr/Y20pPwgAOflbSohgq5uIHGEM+FEdb0CFJDCUcVZFBmVArnLu41l
- Ikd4BULU5ZzweQkH91tCAuIqFiBOM2LTkYFauqTRdyK+JHTaFwRUYi1cBhSAVAtzXVx1
- 000FrRqnikrIQe7vffSos5gRm/T5Hcmswclm7KlC7ntZ+vi/uZB/Ldfv/8UPWFVQ76p7
- M0LNpHJ1i3in7EajwfX+zILIKZrZUAEM80jawxuUTMU1a7q8Cp1+7JvbkUXedmqgUVBU
- 36GoiEmshfFCf8KtSCnamGky1eoZFto9JVTANTn4z9omEvOycfz5LBLfAKWXuX8DngL3
- ghug==
-X-Gm-Message-State: AOJu0YyzJFsomnl9CZN3RGxX4WCOyq6bvWC9IeB14CD6DZl7bDVQIizB
- Bg7ce9JhDdWdGtV+7Moyo4lShkM8gbTNynmslGcFIAvPWuQ7oksR
-X-Gm-Gg: ASbGncvuzJJJ+5pfDRzcpeK4l1kRieTpmJv57EBvHewiKJz2R0/aFTdKHaLjcJa/ogO
- UyrqTXkGDSnAIaxriLe2gDyw0YA7CK81qGMtV9/3DyjW7oBrob22RQkyaHNZO2kDjuFVVktuRy9
- guO6X5MIDtz9ahx3+84gCf2CbMUd485QedkCTVuYrFsLyNjihTc+Wz2iaHWsfe+3Qxjmk3IGw9a
- 9g11CBiOL38/PY4m3r9/9QyJITuY/vhEgZ/KZengCbtgKVLkJRcueLQjzpxA9I4SCc8HMhd6QQd
- Etaifm/Wl+bgklL5feVuhh2qfPAdhJLFlNWT
-X-Google-Smtp-Source: AGHT+IF3sXLdcwIbFk15divZ4Ft66INTfBr//3PrrvrN35mcd0+Hh3dz+r+/nnbcNZ9WNzVm/ivAqg==
-X-Received: by 2002:a17:907:1586:b0:ac2:7cd1:3aa0 with SMTP id
- a640c23a62f3a-ac27cd1416dmr1748342466b.57.1741803339812; 
- Wed, 12 Mar 2025 11:15:39 -0700 (PDT)
+ bh=PN9d7+RJv0xWCMhBpu1kT00Qge/LWwP9YcNtvDoBH/0=;
+ b=sSa4/QFXIGHDdSwIev/diyX68PUCo374TMi40aMVayStaEj4f1m+dU8lh9VyMJO7W2
+ VJuGkAKgPtdPkBKpFDJLAQI1Os1Y8oatCfBwGSDYIDUKsCMWO3FwrshaonAMw9s13EuC
+ QlE1gAhzTaaOOP16+97P0ftofm9SGZEfAuCDPf6sK9cvPGeXjFROIlaiwmfGG0G/RN8K
+ uHUMaPTN9p3OCaZlbbSaf+OTERcX6zyQBnhOqLRD1i9BU+b+yoE/G8sQiZDV93NYLem2
+ 03UZOvGZ/X4YfG2cWrBF1iOvboxeRCUj52zbEKXldfyE+yHDbtgo4BKR8UiYkod2Zzk6
+ dsaQ==
+X-Gm-Message-State: AOJu0YxI5mUCYU+AqLnmFvADPtINjThbp0/x6Mr92JPhIsts2sAZLBf9
+ Ajhd432GW//M6cKWz6QL2f4+tJYylF8L4XY+K4f12OVj2zQ6aM5I
+X-Gm-Gg: ASbGncvArUIlNWXZltYNdj1MrNDZqtlAn7MPXfiOTn1gLmf1R8t4VCoDFeWn6WJBzsz
+ M8nVHUjpLRxsCVEWSf1mUzafHGeuFQ5nqwI8L5PZulzhVE3Ynii/35ijfJCd9vI5zo5CtYiX/bZ
+ LtU1nTUuUPp45qHO7El1PRWQcP8IP8JXS6dD1jF6dya5FcNOtknI00UoMy2v3L+yL+jztP2mPEV
+ YXxi2io1aycm+VvhflUl7i93VUjE8kG+RChr028MxOHEoIfovVDySwFSYANd28ce5FoZiKdgkUj
+ T7Qz77wLrtIROZFia21UFrg3qb12Lrf0Fo4HDTFlg4jFu+k=
+X-Google-Smtp-Source: AGHT+IFTSL53d+9uH06JRMOjyh/TamUUGXjnK3LsW3H9yFAvrCY4na1xOP9/ZwdFTVP1EYYyCA/tYg==
+X-Received: by 2002:a17:907:82a5:b0:abf:7a26:c47b with SMTP id
+ a640c23a62f3a-ac2b9ea18d8mr1015207966b.39.1741803340672; 
+ Wed, 12 Mar 2025 11:15:40 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
  a640c23a62f3a-ac28c11561dsm641906666b.145.2025.03.12.11.15.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:15:39 -0700 (PDT)
+ Wed, 12 Mar 2025 11:15:40 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 06/11] video: renesas-r61307: fix reset gpio direction
-Date: Wed, 12 Mar 2025 20:15:18 +0200
-Message-ID: <20250312181523.121313-7-clamor95@gmail.com>
+Subject: [PATCH v1 07/11] video: renesas-r69328: add missing mode flags
+Date: Wed, 12 Mar 2025 20:15:19 +0200
+Message-ID: <20250312181523.121313-8-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312181523.121313-1-clamor95@gmail.com>
 References: <20250312181523.121313-1-clamor95@gmail.com>
@@ -98,40 +98,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The reset GPIO signal operates with a low-active logic. The driver
-needs to be adjusted to correctly handle this.
+Add missing MIPI DSI mode flags.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/renesas-r61307.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/video/renesas-r69328.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/video/renesas-r61307.c b/drivers/video/renesas-r61307.c
-index 8552c3dd959..ef6fab1e953 100644
---- a/drivers/video/renesas-r61307.c
-+++ b/drivers/video/renesas-r61307.c
-@@ -254,17 +254,17 @@ static int renesas_r61307_hw_init(struct udevice *dev)
- 		return ret;
- 	}
+diff --git a/drivers/video/renesas-r69328.c b/drivers/video/renesas-r69328.c
+index 9861c3fef11..1147785c1e2 100644
+--- a/drivers/video/renesas-r69328.c
++++ b/drivers/video/renesas-r69328.c
+@@ -216,7 +216,8 @@ static int renesas_r69328_probe(struct udevice *dev)
+ 	/* fill characteristics of DSI data link */
+ 	plat->lanes = 4;
+ 	plat->format = MIPI_DSI_FMT_RGB888;
+-	plat->mode_flags = MIPI_DSI_MODE_VIDEO;
++	plat->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_PULSE |
++			   MIPI_DSI_CLOCK_NON_CONTINUOUS | MIPI_DSI_MODE_LPM;
  
--	ret = dm_gpio_set_value(&priv->reset_gpio, 0);
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
- 	if (ret) {
--		log_debug("%s: changing reset-gpio failed (%d)\n",
-+		log_debug("%s: entering reset failed (%d)\n",
- 			  __func__, ret);
- 		return ret;
- 	}
- 	mdelay(5);
- 
--	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 0);
- 	if (ret) {
--		log_debug("%s: changing reset-gpio failed (%d)\n",
-+		log_debug("%s: exiting reset failed (%d)\n",
- 			  __func__, ret);
- 		return ret;
- 	}
+ 	return renesas_r69328_hw_init(dev);
+ }
 -- 
 2.43.0
 
