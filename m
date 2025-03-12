@@ -4,55 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 543E3C28B2F
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 16:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2296C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 16:11:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD0EB81898;
-	Wed, 12 Mar 2025 17:05:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 793CC8056A;
+	Wed, 12 Mar 2025 17:11:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C06E8169D; Wed, 12 Mar 2025 17:05:16 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F10FD8169D
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 17:05:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de; spf=fail
- smtp.mailfrom=muhammad.hazim.izzat.zamri@altera.com
-X-CSE-ConnectionGUID: 0mrwK32JSpiDzU86JqRXsQ==
-X-CSE-MsgGUID: p0oBCGX6S62EISshKkbAwA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11371"; a="68241663"
-X-IronPort-AV: E=Sophos;i="6.14,242,1736841600"; d="scan'208";a="68241663"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
- by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Mar 2025 09:05:11 -0700
-X-CSE-ConnectionGUID: Wp8LdOaST1KQp6YGgA6UCg==
-X-CSE-MsgGUID: XRpcDuplQDK55CNZtBYSiw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,242,1736841600"; d="scan'208";a="120370814"
-Received: from apgcp0d540107.png.altera.com ([10.244.77.29])
- by orviesa009.jf.intel.com with ESMTP; 12 Mar 2025 09:05:09 -0700
-From: muhammad.hazim.izzat.zamri@altera.com
-To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
- Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong <tien.fong.chee@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
- Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>,
- Hazim <muhammad.hazim.izzat.zamri@altera.com>,
- Tingting Meng <tingting.meng@altera.com>
-Subject: [PATCH v1 2/2] drivers: fpga: Follow mainline to pass compatible
- flags to fpga_load
-Date: Thu, 13 Mar 2025 00:04:58 +0800
-Message-Id: <20250312160458.13585-3-muhammad.hazim.izzat.zamri@altera.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250312160458.13585-1-muhammad.hazim.izzat.zamri@altera.com>
-References: <20250312160458.13585-1-muhammad.hazim.izzat.zamri@altera.com>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UJsid2Ci";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 267BC805D7; Wed, 12 Mar 2025 17:11:22 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ED6B800B6
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 17:11:20 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5495c1e1b63so6303e87.0
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 09:11:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741795879; x=1742400679; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dhTikQDGN1aFXagEDi2cVscvgp098UgfxNcsIx3Nt/s=;
+ b=UJsid2Cix45JJXJYsm7YoR/2Edi4YR/qqMw70MwiaR8BzZJE92jYww0xRaVsqrUGF7
+ Svoamo0JvPWxpjw1j+nKKrQ+lvfXK0/FMMCI3bqHOGrjBqwRLVw+fGGEksINpSwrYwHx
+ 6PJEAWW6l0QVeLbtFczU9Zchd4CCbe/M+aCHU+hYdF+4+JdK9QJtHpBFxA8F3JIX9YXB
+ ivBEjt8rXg/d8ZAtv+tpvWNFyz8Mwilz0hbWc4UT4Ol6PQ3m/0KbsCjc87imm1eKSwre
+ QmbMYmpViCitXgSogcxBzIxkFBOwdVs4yhHIY8Qg8RPlgKjMUn5BOnIjW+ZE8sUrWznC
+ PlFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741795879; x=1742400679;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dhTikQDGN1aFXagEDi2cVscvgp098UgfxNcsIx3Nt/s=;
+ b=poEzpe9o7BM2HihMjfkPithz8nobzWAZpGTcdfCGPsmuUgDfDEKe8o4jOLLU3LEb7H
+ EOQ1FW/0egEGMZTjaduNaPcuzLNsakbe117JfLJx0EXZTLjVWRa6A0LMrkYI64GBQ6p8
+ 7o2VsE+FVQstNjI9AS5ENEiXEbz9z+qpzRm9Zf2E31QWalX7eZU+F4oA7MXZKa9i/D7K
+ Xhb9kgCIeM9nDoDOqiz61tLo87ODPtHf54UAXkFHyI2UEGoLXgqkrvS+7/QbS8hvlQlm
+ /upmx/bGsNxjKAf/tgN29agTf434gc8Fzdzw/DtttUSwuZQUe3T4YlpaNN9VYsi2WZEk
+ hvBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX7XMv1CKZHYxAyBVpdgfDRzBa7YtaeNuJCLa5hUvpZO/z9Arvkqp/EH2CIAHZYvpLnfjgN4Nc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/Ce7M+vtt8sMkeuOnJDntsrnKhmZSPEIcg4pRvP4hplkfBmtq
+ gZ27TSDewUVsUK52mQllu89fB5/4vHFqMixOBQtKZw7AZbuiwmss+BGY49KNlUj/tBVf6nr0jq6
+ bEEm8zWR92GrSeT7fzX9T2niKZJ0=
+X-Gm-Gg: ASbGnctN7YcUJ3XRWyirG2StckPHQD9zrptP318qEomhXexDUGccmpwJIDcX8UFI+tA
+ wj6WbOH7Jk9rKYsSPSzze9eDvrR2HlYm3FTLwOkUIz6dQqTBTARWDWv+Gcp+L1lt+PBjITOPeum
+ UiuTEUsq6QjiVkSAOLggkahNycQfnqNlemDGjxr0PBupqWzanZEcUy/3XF+w==
+X-Google-Smtp-Source: AGHT+IHHKL353pIaKpb7x9gYrISIF1V3TkVQqO449PzWvvFUe6WyuoP8I5vnKVXi8PlJeLzKeDuF/IjIBZPW3D2bd2E=
+X-Received: by 2002:a05:6512:33c8:b0:545:9e1:e824 with SMTP id
+ 2adb3069b0e04-549abaf0ab6mr3475077e87.48.1741795878996; Wed, 12 Mar 2025
+ 09:11:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250310123621.389594-1-vincent.stehle@arm.com>
+ <CAOMZO5BV1BBP-f++-NzjzEDXCG1-2WVjma8-e5zpi3yLKGeYCA@mail.gmail.com>
+ <PAXPR04MB84599BAB4FADAC79AB75934388D02@PAXPR04MB8459.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB84599BAB4FADAC79AB75934388D02@PAXPR04MB8459.eurprd04.prod.outlook.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 12 Mar 2025 13:11:07 -0300
+X-Gm-Features: AQ5f1Jpj5p6YWOeDTlGKwSBfnzQwyNw0lh9LLpilSIP4Hpb7wvjaq78WggMSJtY
+Message-ID: <CAOMZO5BTGGU=fJkuxjgq++7+qw5maanjZ14p4=9_RhPdO85GgA@mail.gmail.com>
+Subject: Re: [PATCH] imx8m: soc: cope with existing optee node
+To: Peng Fan <peng.fan@nxp.com>
+Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, 
+ "tharvey@gateworks.com" <tharvey@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,40 +98,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>
+On Wed, Mar 12, 2025 at 12:10=E2=80=AFPM Peng Fan <peng.fan@nxp.com> wrote:
 
-Introducing additional flag to check whether an FPGA driver is able to
-load a particular FPGA bitstream image.
+> Partially right.
+> But The issue here is to handle the case that the node
+> is created by optee os and uboot should bypass creating it again.
 
-Generally, flag variable is used to enable or disable certain features,
-specify additional parameters (such as error handling), or modify how
-the function operates.
+Yes, ths patch is correct.
 
-Hence, in this function flags is an integer that can be used to pass
-configuration options to the fpga_load function. Here, it's
-initialized to 0, meaning no special options are enabled, but it could
-modify the flags to influence the function's behavior.
+My question is if we also need to pass
 
-Signed-off-by: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>
----
- drivers/fpga/altera.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+  if (!IS_ENABLED(CONFIG_OPTEE))
+      return 0;
 
-diff --git a/drivers/fpga/altera.c b/drivers/fpga/altera.c
-index 136ccfc2de..64fda3a307 100644
---- a/drivers/fpga/altera.c
-+++ b/drivers/fpga/altera.c
-@@ -70,8 +70,9 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
- 		       bitstream_type bstype)
- {
- 	int ret_val;
-+	int flags = 0;
-
--	ret_val = fpga_load(devnum, (void *)fpgadata, size, bstype);
-+	ret_val = fpga_load(devnum, (void *)fpgadata, size, bstype, flags);
-
- 	/*
- 	 * Enable the HPS to FPGA bridges when FPGA load is completed
---
-2.25.1
-
+As a separate patch.
