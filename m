@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53651C28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:15:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06744C28B2E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:16:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54D6781A0E;
-	Wed, 12 Mar 2025 19:15:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9DA3081C67;
+	Wed, 12 Mar 2025 19:15:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J0qBl1Yw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nenvyO8l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B20DB8198F; Wed, 12 Mar 2025 19:15:38 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 9B11581BC0; Wed, 12 Mar 2025 19:15:39 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B8A38056A
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADF3581782
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:15:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac2bfcd2a70so20819466b.0
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:36 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so23873866b.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:15:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741803336; x=1742408136; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741803337; x=1742408137; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zsukV0sZw08GHx9KKlgyitkJydTX30Hy1BL6NcvcXJk=;
- b=J0qBl1Ywb25G/q1V8Wrm1ddSF1H9H3S5D9owIV2OmQ6GM4z8OUJFo1JySgkqxKAmJa
- KnicUFHhz0PmHXVdW+XtFupSKse2vm4wT541dlJotzGukBmkHWLSOtmEG1tOuX2XA2+u
- AHHtuYXYg9DdUsF+Rc2ptLD0zSJ0lIcgynZ6L9lXQvwd+JTKBJrKGzulAbIcPvqDolPg
- 7QVe3J+La8ebVEITIBHApY9XlT6vUltfZ6KbNZn585Jy1QJHBfsibxiAWd5dg1J3O4It
- IK7EtA+OFqPYKHhrB8CmWDCMRXJnvsbTuhgqWJ7UAPscQUWXKYNtiwqcFg/tOf4EF1KW
- a/+g==
+ bh=7OSP0jbK/yeZFW+kc0kA6VkVxbs5MpALplE0poVCEuc=;
+ b=nenvyO8lSRMJ6Nyc3MIKKR5zMeOR8Ps8iCEl0dKS5iFQDgKWDoYk8IiAdbZz22uIbl
+ g2/S3ZWmjp663SZ6bL0ZOq4JiUjru5lx21r9cqAJMpkDcdsGL+X/E/Bg2MT2zyFinlHn
+ SB/qH5qFE252okjWV2Uw2IskawC9o7stq8lY6WKTiBBOA+ftpDVwRtZuO1Wc9xZXKx2U
+ OPsZAKjrw2l/EQd26Dg2kmZCYy4+hdTF6So+OH7Xczklb7Z+SOEnoyurjDk+Sn+7yCEe
+ zMK2foFgud3IFMJG0ECirFn1h3nj6m9QaNN8PC6XmLiIv9JQgYbWYiGMFMpmIxzbVMwr
+ siMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741803336; x=1742408136;
+ d=1e100.net; s=20230601; t=1741803337; x=1742408137;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zsukV0sZw08GHx9KKlgyitkJydTX30Hy1BL6NcvcXJk=;
- b=L9bsq2BrfQjj7m3o3lP+xggOAjndIh7yBF+FZ8gvhc2/VLgP2T04YDnxXcqPRjpa8B
- Il4zH3jqP7bLGyBKx2YndblirpBfBeis0uWIAtS9U//PYEORvCWn1R7jGrod6vkc9v5s
- YgEceNtPyHfPFle7ygyIEWn/NoyfTb6NkiwvAgjOQmkDeG6gxFD0L9eACYDKrYjaOF9j
- vowNRHsMy48pGCyWXXbxJ4j2yU4FC2eXffjYRsAsobSB0yhjKIsPsYPAjj4hp4HoulDs
- NTw9R6C9QQ4okHLWkfSzul/5iUN3+IgnU0Z2ikaBEcgGVoVko5D/1RKhKACYm47gbRZ8
- 8cuw==
-X-Gm-Message-State: AOJu0YzQ4Y5GpHJ5VPqjFK6ijdgOOOgBE8nzabieYg3x9iIzyIS+zlpb
- vAgRln8z24CWC2n5snEBRnZILQpHLE7AUKxgUxKWEDmNOQahb9cf
-X-Gm-Gg: ASbGnctnK45NRRBLD4k+/6liH0mJvsSh6ahNfejz6KchVIFaO65/YGRxBjYly4sBV74
- rt55Ww3lHoyK/vcKoRWQkjsWrOTdTGbmwmDSjX5IA+W/AL86vjecWD8ANFtyN/NqqFEobkoomCt
- K4M9aIMXAth2i9JgPBC6RfQbaUnfCXVSkmiXEUQPo6uKeSh1cjgdHL8Pluhpj3J9IZnW/wUcRyy
- 8qu41zGDJzpbJMrau7+JALMiiArq3TPkw9wEHuRxl9ZteUX80g8/OqpIsWu4W57RB05GsxkpyCg
- Bx2Kw7rKS3zWKpP9qWUzZW49wFzqYTJodmrzESfDjLTdQ08=
-X-Google-Smtp-Source: AGHT+IG85q7+XW0XO3J6nI4OZ09HjAiaNNxLzpSSDAvABOHkWxTYKRv5Gu2PMs/lMKl9ndFQQjyuzg==
-X-Received: by 2002:a17:907:6d20:b0:abf:68b5:f798 with SMTP id
- a640c23a62f3a-ac2525af698mr626264166b.9.1741803335851; 
- Wed, 12 Mar 2025 11:15:35 -0700 (PDT)
+ bh=7OSP0jbK/yeZFW+kc0kA6VkVxbs5MpALplE0poVCEuc=;
+ b=fEb9Xx7Jfa1Yv7fGhFl+GZ7qG9YIDqkPBd2m1L9nn69hq4NsvoTUydvZ83Tvj1jjwG
+ Y4CtjL9R4aNo3YujWDoAiq72ycxxx7cl9ADrCFmEo1pas2VLUVW7PqPoDASdHWXzar3F
+ 9ABzGOqs2MivRvkCPrNJpqdjAGDUpV3ejEJiZ0eVDSP0QmhDF8P4HevR338xjmoxPoqH
+ 7khni6dBiRsK3VQu2Fn1S0op0p8kNi+6WyBojVVHDa19CHxvoLTVsGFJ9HDXfUs9YzO0
+ 8VC5Zbrb0Cdikg5t+KNAj9EFp2NXxR5vzoPZwt2mDk3gacmBhzTBzsVo/1FUBxARoc9T
+ nPRw==
+X-Gm-Message-State: AOJu0YwXX8c5wn0/KgkzN8l2Kofx/u5eL01tKD4nLpHQEz3VkIEaId7n
+ QKztAFBO8DXtiep44jcqeXYAqUPGFSYVsoIcyjER6oNwg+7yP9WeXu6e1Q==
+X-Gm-Gg: ASbGnctRTngVUch/5ZGqWd5luniH7GSOwin4TnXGQRMsFCOJToiGUS6BP37Xom8xRlG
+ Efcq0153nojnYQExWux3hJ2GbebBjs2WWhZjdPiggHwMNRKBV8kDJVKrku4KmEp+1ujiLZ6ZDZ5
+ H2B6+pbIYmCI6zUcTBYZh7tvSjs525VAyo2iW1uZJ3NRJbN42Mp+rEwCCiMW+ILY4EXKGJAwNhE
+ hDsdTL4DCfOoRpVwSjGCO6LY5qSY7M5cLn4zvTRL8UAd1Er+N3jfbdi+N7qdi0zf1A2ZkeshNjE
+ Nj/Ceg0kPX35eJPJ8BbELf1Si48oye8TTEKz
+X-Google-Smtp-Source: AGHT+IHjCiLgxXg8+1IsxtRxOeBm3I9LWV+P64Yerp4tG2H1YRlwvk52B0xzL0rXQwj1UYz7xFsTUw==
+X-Received: by 2002:a17:907:3f9b:b0:ac1:e332:b1f6 with SMTP id
+ a640c23a62f3a-ac252102b70mr2857692766b.0.1741803336865; 
+ Wed, 12 Mar 2025 11:15:36 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
  a640c23a62f3a-ac28c11561dsm641906666b.145.2025.03.12.11.15.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 11:15:35 -0700 (PDT)
+ Wed, 12 Mar 2025 11:15:36 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 02/11] video: endeavoru-panel: add missing LPM flag
-Date: Wed, 12 Mar 2025 20:15:14 +0200
-Message-ID: <20250312181523.121313-3-clamor95@gmail.com>
+Subject: [PATCH v1 03/11] video: lg-ld070wx3: add missing LPM flag
+Date: Wed, 12 Mar 2025 20:15:15 +0200
+Message-ID: <20250312181523.121313-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250312181523.121313-1-clamor95@gmail.com>
 References: <20250312181523.121313-1-clamor95@gmail.com>
@@ -102,21 +102,21 @@ Add missing MIPI_DSI_MODE_LPM mode flag.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/endeavoru-panel.c | 2 +-
+ drivers/video/lg-ld070wx3.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/video/endeavoru-panel.c b/drivers/video/endeavoru-panel.c
-index 90f838ecc20..9950ff8bb05 100644
---- a/drivers/video/endeavoru-panel.c
-+++ b/drivers/video/endeavoru-panel.c
-@@ -236,7 +236,7 @@ static int endeavoru_panel_probe(struct udevice *dev)
+diff --git a/drivers/video/lg-ld070wx3.c b/drivers/video/lg-ld070wx3.c
+index 610a06ffe7b..3676e45bc65 100644
+--- a/drivers/video/lg-ld070wx3.c
++++ b/drivers/video/lg-ld070wx3.c
+@@ -158,7 +158,7 @@ static int lg_ld070wx3_probe(struct udevice *dev)
  	/* fill characteristics of DSI data link */
- 	plat->lanes = 2;
+ 	plat->lanes = 4;
  	plat->format = MIPI_DSI_FMT_RGB888;
 -	plat->mode_flags = MIPI_DSI_MODE_VIDEO;
 +	plat->mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_LPM;
  
- 	return endeavoru_panel_hw_init(dev);
+ 	return lg_ld070wx3_hw_init(dev);
  }
 -- 
 2.43.0
