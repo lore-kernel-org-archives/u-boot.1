@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C583CC28B28
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 13:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00A2C28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 14:12:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA4F4805D7;
-	Wed, 12 Mar 2025 14:55:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 341C3805D7;
+	Wed, 12 Mar 2025 15:12:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHuzTq2w";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="emz4+Tt3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC8EC80756; Wed, 12 Mar 2025 14:55:27 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 9492180756; Wed, 12 Mar 2025 15:12:50 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8703F801FB
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 14:55:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E3FC801FB
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 15:12:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7c081915cf3so884392185a.1
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 06:55:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5498c742661so7179934e87.1
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 07:12:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741787723; x=1742392523; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741788768; x=1742393568; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RI0/mJKEid/NN3zsKW8EUptsYxiv5u/OBUegELhr2hk=;
- b=XHuzTq2wYWG5WE7vJmKVO4sI7MWjq4VImxAvRbextAdQGOwpk6pjYwMEHVEubqx3cl
- 8ehP8RNtqx3QNVk+OBXu3FN1Zg6ES/53rnkN8xbZbhdZlGLfY/NqOgP6zn8G9OtbQKgk
- JHV4PKRUd8oZV8JFSUWO5Bzgxi7JdUwAZM3R0=
+ bh=34LBQ/78nb9MoNC+No4T4jmlKWOBbZP6Ck+NzUdQXG4=;
+ b=emz4+Tt3JYFj9A7X1olGBmRsC2qMml+YAzx2YdOqCRk/4YI4ACOQXQvgvEtsqTbMly
+ GO2fxsWwMQKskjy1HNBwx8D4k2Zfs2wTBos6Zl5UqVUYKuiuUehGDg9WOk8LB3xO/R38
+ B9FyUsShKylU5z3y5STG06w07O2a6fUBO2ngpic1oVkdN7Lt/vl3F95L/Jb6J3xN906a
+ KnE5aWGdRTUEXEf7vyzHdtEoHTt9SSIey1srsj11/lXNeCq/T4K/3CVBFWX9wk/YRq/c
+ fw0WKyf1Ii/BHRnLEEc1xI3qVZYy5EThU4kkRvNRhWDm9mF7VAEL2essi7zXBjQjKXyD
+ flvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741787723; x=1742392523;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1741788768; x=1742393568;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RI0/mJKEid/NN3zsKW8EUptsYxiv5u/OBUegELhr2hk=;
- b=e6Y/8lirW2ETnlFwhB5VkX+TmK87HDJZYeQEIp22zOEUUiQ85TtRB7GG3LDKngX0xY
- 3N/F5FcscetW65yFzNafT2GSNR2g+SvdIlps/WPFJvhwVyiIX0CaQatAiw0Zg+U7D2zV
- 80rcWHHHllgzu1ZqPGqsd1QGfV7JGtHPlmp4B44fSLTXK5jfG89637/lUoHrWbJUUMok
- wKWtQZHF1NwZ49fAGDsV5y+nCGVfX/To+Cy+7ckaB7aNWjbjTg5merOl69FoXi0qaOWk
- lgHssBzhGy/Ord1H3zLrQsH6vhysX5hZ2FABucDGLTDzgEdV1qsPEzi0zKkbU7UPh10u
- leIg==
-X-Gm-Message-State: AOJu0YwOs7lCmXShiKJUhJbJKrMBNxtHvZpYrYPB4jCHYXiVb+D0+pa+
- 68HWXfA7HhVv/R6sSq+WA8nb6NGSzvxiAmzriHhyLmWMXu8qxTjX60d9QWIcZMQ=
-X-Gm-Gg: ASbGncue8vEF485YXSHcfbJeduW23rNhgCP1fPXPWlMsuvyzA00lB+8WioWBF2+4sin
- rl+zrpfMzxDK/u42b0uYM9F7S3Z3oM3naKjdHpbtop2Z5E4phw7FC+V+p8rJeqFc7PQBAbZAOY1
- /vUWiYTxQtGnzLlvpyvoJrFgNpyrAO5tw+/YCPu/4q1q+hm4aCJwfk2rNMMC8xM5lwkCirO0fvt
- AcJgpXHkQBZwZZw5wcC1bjU5T7jD5f94YWIxf1kLorPULSp13IwcqsTM4pXWm4nWUAdOH+IwWmH
- pwfouIqRjPbuEX4GMcoFdGqBoUxGRXbs31iM5c/RkIs/Th7fSmmFnUQ=
-X-Google-Smtp-Source: AGHT+IHVuZrBmHXPJiiJGARc6jjG7XddiBvs3/a5Dy8tMtbAbCwQEzMgSY9JDQeeInI3LoMH5YW1Zg==
-X-Received: by 2002:a05:620a:2625:b0:7c5:6291:904d with SMTP id
- af79cd13be357-7c562919180mr807371785a.38.1741787723462; 
- Wed, 12 Mar 2025 06:55:23 -0700 (PDT)
-Received: from [127.0.1.1] ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c559b27f01sm369924385a.78.2025.03.12.06.55.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 06:55:22 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250311230656.91036-1-marek.vasut+renesas@mailbox.org>
-References: <20250311230656.91036-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/next
-Message-Id: <174178772209.1732220.10343167504856445197.b4-ty@konsulko.com>
-Date: Wed, 12 Mar 2025 07:55:22 -0600
+ bh=34LBQ/78nb9MoNC+No4T4jmlKWOBbZP6Ck+NzUdQXG4=;
+ b=KpwTGEuqbDMOHTUzhErdMjLdNH7sHpNCqfop4vWvt7UbNN6jjUXtaKWxF4EKIpqhGT
+ ZRIiD2mDmbDQKcKCP0aSq9JSNAYFp5MGayJDdZ3+8tAlACER0WWwPAQJ1SscKtja0kpD
+ 3LVCfTp9RXUtMipmUEnfPIFDWlWz7vHimBA2ayf6GnXEtXAT+OMaAR81ztcDWnpykGUV
+ 48e5YiM4vpDTJMiyoSNMH/IK5Vxi02S+zUvbTDM3l0Pr6mPsfh5+MZ5bMtZXpQykEIhf
+ MdtYrXypCDGHLpcygJanILRCNBkpYJCmcRy9fka2l0LlK0TcjKkmPsuisn8eSjCqich8
+ 6D1A==
+X-Gm-Message-State: AOJu0YyFIz26DI7Xfp0EskNQDCgRGdQNMP316dzjOKTGj2qKUaO9yIHG
+ Vza/3wuebDGJl2LYXIC8+2CSEjus6PGIF4Suo/lXeYFfl3Fb+jlP7aeHQobkvPj2gvQT9Wg+Me/
+ hsT8rTdOBaq1nZwV1I29h5xkoOSPBvJV2
+X-Gm-Gg: ASbGnct/glt9TagNZAw2oNcsMYOOGEiVhz0dFxYTqAnrBdhGHlSesF7EUy1a8oYYLu3
+ 5B63nXathlucco5H5KIb5gyDjC70J2SDCuzayWzG/MfG4uSLlTRzoBsIbx8SIR/S8w11GccKhbi
+ IxVR0NkxCH8hiwB8tgbA+MD1OGmWz/pxNUSQsWvFoW571Tq9KkhvEq9PYuPw==
+X-Google-Smtp-Source: AGHT+IF95ApKVNTFXU3yWQrmYLE1odU/XfMfoE9jDjx+XAhPvTmvy13MC0wNgyPYtuRJSkq7Z3ESOlonaNYad9x9ngg=
+X-Received: by 2002:a05:6512:3da3:b0:545:296e:ac28 with SMTP id
+ 2adb3069b0e04-54990e67291mr8938863e87.24.1741788767610; Wed, 12 Mar 2025
+ 07:12:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250310123621.389594-1-vincent.stehle@arm.com>
+In-Reply-To: <20250310123621.389594-1-vincent.stehle@arm.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 12 Mar 2025 11:12:35 -0300
+X-Gm-Features: AQ5f1Jrv5ymGy87mPzbk0RKYJygCtikFEI-kYQETMzu6lDB7T7RJIGw0O_aVPzM
+Message-ID: <CAOMZO5BV1BBP-f++-NzjzEDXCG1-2WVjma8-e5zpi3yLKGeYCA@mail.gmail.com>
+Subject: Re: [PATCH] imx8m: soc: cope with existing optee node
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,21 +93,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 12 Mar 2025 00:05:56 +0100, Marek Vasut wrote:
+Hi Vincent,
 
-> The following changes since commit 1b42f57ec82ceba4d5f08cfb359717232301cfa5:
-> 
->   Merge tag 'v2025.04-rc4' into next (2025-03-10 20:18:51 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git next
-> 
-> [...]
+On Mon, Mar 10, 2025 at 9:36=E2=80=AFAM Vincent Stehl=C3=A9 <vincent.stehle=
+@arm.com> wrote:
 
-Merged into u-boot/next, thanks!
+> --- a/arch/arm/mach-imx/imx8m/soc.c
+> +++ b/arch/arm/mach-imx/imx8m/soc.c
+> @@ -1270,8 +1270,9 @@ static int ft_add_optee_node(void *fdt, struct bd_i=
+nfo *bd)
+>                 }
+>         }
+>
+> +       /* Locate the optee node if it exists or create it. */
+>         subpath =3D "optee";
+> -       offs =3D fdt_add_subnode(fdt, offs, subpath);
+> +       offs =3D fdt_find_or_add_subnode(fdt, offs, subpath);
+>         if (offs < 0) {
+>                 printf("Could not create %s node.\n", subpath);
+>                 return offs;
 
--- 
-Tom
+This looks correct.
 
+However, shouldn't we add the optee node only when CONFIG_OPTEE is selected=
+?
 
+--- a/arch/arm/mach-imx/imx8m/soc.c
++++ b/arch/arm/mach-imx/imx8m/soc.c
+@@ -1235,6 +1235,9 @@ static int ft_add_optee_node(void *fdt, struct
+bd_info *bd)
+        int offs;
+        int ret;
+
++       if (!IS_ENABLED(CONFIG_OPTEE))
++               return 0;
++
+        /*
+         * No TEE space allocated indicating no TEE running, so no
+         * need to add optee node in dts
