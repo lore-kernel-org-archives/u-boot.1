@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6B5C28B2E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:22:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7313EC28B28
+	for <u-boot@archiver.kernel.org>; Wed, 12 Mar 2025 18:23:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B25D68141D;
-	Wed, 12 Mar 2025 19:22:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 102A481898;
+	Wed, 12 Mar 2025 19:23:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FjaJfKIs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mzioN1sD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53B138169D; Wed, 12 Mar 2025 19:22:40 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id BD63481BEE; Wed, 12 Mar 2025 19:23:22 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FAA2807D7
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:22:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF9EB8141D
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 19:23:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43d0a5cfd7dso702525e9.1
- for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:22:38 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6c18e2c7dso119824a12.3
+ for <u-boot@lists.denx.de>; Wed, 12 Mar 2025 11:23:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741803757; x=1742408557; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/Ph+CeJatHpFnnV/JkM8qJEXycKaExdC/b87Xymt9eo=;
- b=FjaJfKIsdY4zEeSuxUCxHXOuIGS21mDKTkcKjb+AB+dFo3GDc4WL08NeDud8IEBNJF
- Y+19hKApExZZaS/ZWF8M93TLDz9U7NJIvW/myuKXcrLfq+9sQjTSN6MLi1aa1KfhzyHm
- nQVhF5MafjbzcqKbFxhqu8Rs8O1qhFgi9cALEFdWz3IyCFaoPqrcWqT5IMvBLiyYynZE
- g9X62/5w5NEsF+rjb68NjsugIUaALER6co/rnFMl3fRxW17gJOdRXowSLCK37nmG5g0v
- 38y/4U9Un6BqJPx4MlxTphyGQWEaq7HbWT7Fo9S88ba73KK6O/WsAD3ip6jNY2znAPBc
- tcfQ==
+ d=gmail.com; s=20230601; t=1741803800; x=1742408600; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=v7cvREAqBjxEsD3XA0VU/Fab3imYDnhnUb5281qGwPw=;
+ b=mzioN1sDFtYX+fAPf6DlNggiuc5o6YavfQAYvH9Hb6/dc3dQP2LBFAUrAKvNmmhNxZ
+ uDqxUjXlmopdIjP6e3iLukb2lLW+ymF8y1VXg63IRMKyINFkStHbwIsJSCPwusCR8oXB
+ GGQLpyIyjTWLrrSll6zO7O/MCL0So+pw/aU+2iGSPvwa9DrxkdAUiVC70+uHteTfsLNe
+ GPaAGwCm+rdTtGQ3JRnbxRbQ+QIkE1bs+QBsU3E2RIZ9ogMr9ehXr6fDYky6C/P1D4Wl
+ JW92RUn4rHqwtAS0qog73kJ+CD5/nq2rPp7qykuQ0YJyGer5FUVMXGrKKfeJswM0PQLB
+ AeVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741803757; x=1742408557;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/Ph+CeJatHpFnnV/JkM8qJEXycKaExdC/b87Xymt9eo=;
- b=wp8X3EcB1mR2AODiKjiA55QzzKOXxwpkfTfrFHfzmikkXsnPf/FJ0iUP7dwkgIkC7R
- lmKErw/iEfQjBxeR/goJ4rRAaVOyMdjihddPahFIzbtzOY29fr/k4ILsBd39UfEhSk9/
- C6wIbEB43EEU9YcKMf0nvat7njTD27DCc1dLXUWpxLl2Lb0QZHgjz5Kxt6U3yEWop1zW
- RAjqr2udfJv29RHV/UrV8gJhHre/5tT0GGqy/TRuppA5QIIIOjR8Za/QQsm+ptEnjDcK
- KFo1pDIo+FqfyJsA9tf724ZET7KiOtKKoliOQnNFH+OahYZOMM3COx6G/LEpa5ZgF3g2
- JjZg==
-X-Gm-Message-State: AOJu0Yz+1PJ4FLqUczmJGwfDmYjGqlsoRbSoqeuuek77wy2hS+OcJBhE
- IcpnUZ4GnWl/JTYeUYCYxNqycF5R2SVFTFPF6frm52RBCxrEhwCPzJPr36CFg0JII0bEcR2Am44
- w7FRkdkTjXV713Pxadmb/qwjMv+o=
-X-Gm-Gg: ASbGncvWNpzTbL1tp5dw0+pf4bM18nUKHcMxGmZY4X4YUhzmU/m45Yc/F8rqxQzSbfS
- jTptofWpTRimKDhiQq12+PTDpmIJsXqszLTAVxcdLOeGSVBRfimTblEy/0vR4t92s4h9XRYxIc5
- XOILxaImFUpwB1szi2r5xPjc/Zem8=
-X-Google-Smtp-Source: AGHT+IFy7/82uPtN87UZKxk+EegKDphVlmJ/8z5hkbYxkEm4udcHHNqv4lPAhpfTPtjnctEHPEhIxLse9EzdxzUrG0c=
-X-Received: by 2002:a5d:6484:0:b0:391:2c0c:1270 with SMTP id
- ffacd0b85a97d-39132d77726mr16046758f8f.1.1741803757492; Wed, 12 Mar 2025
- 11:22:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250312125452.53671-1-clamor95@gmail.com>
- <20250312181620.GW2640854@bill-the-cat>
-In-Reply-To: <20250312181620.GW2640854@bill-the-cat>
+ d=1e100.net; s=20230601; t=1741803800; x=1742408600;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v7cvREAqBjxEsD3XA0VU/Fab3imYDnhnUb5281qGwPw=;
+ b=siXJavHmyi598vJ8A6NO8Fy4WUy1UK5+EOYkfWyG/Y50tMl9bUB/Ks5wYiD+X4i+fx
+ pSjUs1Vlk0SHtDifhn7M6bx3kucNpSoPJAf6/6bbdQlvWtEm5sxw5zm5acoXrVrrw7au
+ g+NmazMAZUiMjw2PHvJTAkFtSMPY33gOy1yxngtR1w0DmpAZPbNsneauuM9Hr7HvgPmX
+ 1gY2pzVmMla2FWBpC3z357OpoZ/Q4PmEY4tAas7zJFUvYnVly5nbvUrkTYRz/NRkk2oK
+ 4OhU+Nt1gl+ApfO3FgSQmBn/I7sKcCgI51peY/PIS/E1jWnaLbzQOgplOiLlAhiqH9Wz
+ b0CQ==
+X-Gm-Message-State: AOJu0YyG1fHYWiA9w5RxPNlkemlqB9V1q09uSUQo7pEl5PpADxnrvszD
+ QEFmnJK3dMPC6iO7zX+IyXD8ni72O3zsYNwXsi+6NEBLjNGvT0ri
+X-Gm-Gg: ASbGnctKKPnMfZ++UEcyONLyt+vpYWi0dXg/PrPlEK5VrJK+fo4ozr/6S9HG0vB37Bb
+ kxmyqS3999Jogevb/XZXoSuzQ+6Jc3IkCTMijn4P50ZG/BIYGavOVdvU5K/sU+lTi4ehTHvJ2wp
+ lRC459A/wdsVJYjz4tCTqnJJ7t6xP3YVK0A6qJf+KK9dMd24apS1GDUqvOPJghdVxSJm8H3QPBn
+ ifFa7FNFNC8RxnVaE/FyP0p06z79XF3ekyqOAGo8NLv2cLhxLiChPA0xHoWMencwJ5Eyhwjd+nA
+ GPhCUDmDOZf1G/IENXPZuqKculxAFKY2Og8WHG1jvAP5Gtc=
+X-Google-Smtp-Source: AGHT+IG7a97uPR/4+PGxE1qHbbRXga00OEcHlizE7H0+CMl0XlfopNNs1UikedSASvpHK5T8/apjiA==
+X-Received: by 2002:a50:858d:0:b0:5e6:134e:2321 with SMTP id
+ 4fb4d7f45d1cf-5e6134e63ecmr20067697a12.11.1741803800166; 
+ Wed, 12 Mar 2025 11:23:20 -0700 (PDT)
+Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e5c7669ff1sm9851674a12.53.2025.03.12.11.23.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Mar 2025 11:23:19 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 12 Mar 2025 20:22:26 +0200
-X-Gm-Features: AQ5f1Jq_t8C91IuHXm3el0gqa2Safk5A7AI6Xtd0dxQuYNO5DnIv6ssltmDfVR4
-Message-ID: <CAPVz0n0jGtmV7tN5VhxiMNQYRauNV9pCTL9WLE=Jnv8+D8c6jw@mail.gmail.com>
-Subject: Re: Please pull u-boot-tegra staging
-To: Tom Rini <trini@konsulko.com>
+To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [PATCH v1 0/3] video: backlight: lm3533: improve configurability of
+ device
+Date: Wed, 12 Mar 2025 20:20:11 +0200
+Message-ID: <20250312182014.121568-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,39 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D1=80, 12 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 20:16 Tom =
-Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Wed, Mar 12, 2025 at 02:54:50PM +0200, Svyatoslav Ryhel wrote:
-> > Dear Tom,
-> >
-> > The following changes since commit dc0ee458f1afae4cb5c8a7b2c875bb24ffdf=
-71ca:
-> >
-> >   Prepare v2025.04-rc3 (2025-02-24 16:53:59 -0600)
-> >
-> > are available in the Git repository at:
-> >
-> >   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
-> >
-> > for you to fetch changes up to b156a1171e356f16aac88322b3bdcec071543c6c=
-:
-> >
-> >   configs: qc750: add 3 second delay before power off (2025-03-11 19:47=
-:07 +0200)
-> >
-> > ----------------------------------------------------------------
-> > Jonas Schw=C3=B6bel (2):
-> >       common: edid: update timing selection logic
->
-> One thing I would like to see as a future clean-up is if we can go back
-> to the old method as a compile time option, if that's reasonable? It's
-> adding about 10KiB worth of table the way it is today. Thanks.
->
+Improve configurability of LM3533 mfd, especially backlight which now can
+be flexibly adjusted via device tree.
 
-It should be possible to add a config option to guard standard timings
-and enable them only for devices which need them. Will this be an
-acceptable solution?
+Svyatoslav Ryhel (3):
+  video: backlight: lm3533: add more flexibility with device tree
+  video: backlight: lm3533: configure core in the probe
+  video: backlight: lm3533: set up backlight according to device tree
 
-> --
-> Tom
+ drivers/video/lm3533_backlight.c | 142 ++++++++++++++++++++++++-------
+ 1 file changed, 112 insertions(+), 30 deletions(-)
+
+-- 
+2.43.0
+
