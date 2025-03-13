@@ -4,77 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A9FC282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC11C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28ABE80F9C;
-	Thu, 13 Mar 2025 12:46:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A5B2680756;
+	Thu, 13 Mar 2025 12:55:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GroNEoVT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pd/F/ToF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCE5280FF7; Thu, 13 Mar 2025 12:46:52 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EC1980756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:46:49 +0100 (CET)
+ id D54D0810F4; Thu, 13 Mar 2025 12:55:23 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E92F8007D
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:55:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ab7430e27b2so141836566b.3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 04:46:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741866408; x=1742471208; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SpE3VrqJGTvKR7R8eJFBE0UU5sxQHMunuA6xfkX+0Lw=;
- b=GroNEoVT/IWEd2OnsqXzoc0k3AjGJSpU1X1FigtR35cB33Z90e6PvHFh54CqGzORb1
- cUmLBtsuBaO7iGnaUZZIwzTfNQPKAt+SGjphODiM8IsMiIxdMnQZ7/BTBnN1UaFI1TBh
- 8h28odaRBmI5ozuxfYNi4rLk6Dobf7atBnSBnXr7la4GnyHmayGuC3zP0bf50dAB3YSq
- QvGwwFdA1eWv7FYid8mjf2rYTnMSA1sGriZZ+UP8vMUWp+tTUqQ4QdW2AYo6yb87fjO1
- S6+lxhZkOPKkxvdieu0TLLMSIhQjjXLTPIWWKaBCxDRfkKb2uFuXFIc1dSXD+J44cNLK
- RmlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741866408; x=1742471208;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SpE3VrqJGTvKR7R8eJFBE0UU5sxQHMunuA6xfkX+0Lw=;
- b=Oulpc4yGyZw11XcMpzrufqPxwiUsIAicssixez6dkQdbWAMVVJWvD7dt7C9SlW31ui
- o46VftveC2t+BFPc+PUgjIV49wF1+HEzt9hoewTRytExl7UtPg0viziRNj7n7C92/ggu
- 6c6Gy0lPNR4bIlWibqqGnQQFuqNqeTiJo7S7ZIlWypAo8ydEHFa2SCLEyAZpSwmvpEFf
- MZOEAwZElPjlcizkKJ+dskNLPtwmANeUtnt5hNTKEcNbwbx1qrXA7puqD9HcFahrJ5nl
- rvHf7PCHlddFur8nEv/+BjO5Zh8xI7S23rAae1bW9slH1Li3jgUxKEva/qaYrP2Hfskb
- kbyA==
-X-Gm-Message-State: AOJu0YxOlbADiL+hjeHvKCMPsOIHJ2640wY4Dr7MasZB6Ttv9aKrj6yN
- wccXndMwKWZBLhaCmzDLFs7DORSp5+Kr9UQTcUpjo4/pGb4vqtIuy1lL9cUxywi9ZvDep0fa3Up
- qsyZiphQbujZQFuHlvHG00k6oJAc=
-X-Gm-Gg: ASbGncs9YPy5h6AAOqVbpp3oB9I1+Jw/4IqzVhPlBXQ090X3n310PGQUy+oM39eQYhe
- D2LDWyrQVJotw7mkWx46bi2pd/AWJ4Ttm++ER8qDd6krkGWjvkY2z1F930dQVIjGQp2v3qxsjp+
- m66Dk0H0CNSoXs9HeBsRdki+WzyeqTwnNUqkDzh2BWaBjJCcdrt9oyb6eibho=
-X-Google-Smtp-Source: AGHT+IFiq+6wvCrToc6vSD6YS2bQQiPskMQEUITtB523Ho3j6sy6MVdFe+GF79+tGKSmyl4rPbcWbcyvv1QdGwq/FbQ=
-X-Received: by 2002:a05:6402:3547:b0:5e4:c026:2d7a with SMTP id
- 4fb4d7f45d1cf-5e5e22d8c92mr31001598a12.16.1741866408170; Thu, 13 Mar 2025
- 04:46:48 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=f-akthar@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtJqC1374129
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 13 Mar 2025 06:55:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741866919;
+ bh=nAzEFYbPjQs0DWnUxzj+wgszAjoSE4aXhMo0TYihuZQ=;
+ h=From:To:CC:Subject:Date;
+ b=Pd/F/ToFHBpOuY5MQaR9idg6HWiXxpkZmHnnxASliSYYptPJ8PS6NHpDZCJeNtUDC
+ Aq1t6Y5Mw3CWaOf8mZqohLljVylf/IXe2tld+M3Y9Yxhp1usefgpeLLBc5WdVOlvVb
+ dvMrq6oLpydW3+Nx/kn0Bt+BZU5wVOsELiwTdf1I=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtJWg097063
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 13 Mar 2025 06:55:19 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
+ Mar 2025 06:55:18 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 13 Mar 2025 06:55:19 -0500
+Received: from localhost (fayaz-hp-z2-tower-g4-workstation.dhcp.ti.com
+ [172.24.227.128])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtIXC035184;
+ Thu, 13 Mar 2025 06:55:18 -0500
+From: Harsha Vardhan V M <h-vm@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>
+Subject: [RFC PATCH 0/4] cmd: fuse: Introduce fuse writebuff sub-system and
+ clean up
+Date: Thu, 13 Mar 2025 17:25:13 +0530
+Message-ID: <20250313115517.1181829-1-h-vm@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CALeDE9NNZGOvYQNv=XtHryfebDwjULbm30XmzjE_bAXDuz2w9Q@mail.gmail.com>
- <335a650a-1401-40ea-9ce1-fa86a66b3906@suse.com>
-In-Reply-To: <335a650a-1401-40ea-9ce1-fa86a66b3906@suse.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 13 Mar 2025 11:46:34 +0000
-X-Gm-Features: AQ5f1JqOGVwvE1D7vJXp7kjLzcYlrjqhgyXJCAAnMFOJzy9JFW5jLMeDTBm4HY0
-Message-ID: <CALeDE9PCJoaLNDCcnc2GZin=bSct-QBd+3mDbEgso3J_SNagpg@mail.gmail.com>
-Subject: Re: Pull request: rpi-2025.04
-To: Matthias Brugger <mbrugger@suse.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +79,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 13 Mar 2025 at 11:45, Matthias Brugger <mbrugger@suse.com> wrote:
+This patch series introduces the fuse writebuff sub-system command and
+makes improvements to the existing fuse implementation by removing the
+custom string functions. The patches are required to be applied in
+sequence.
 
-> Hi Peter,
->
-> On 13/03/2025 12:18, Peter Robinson wrote:
-> > Hi Tom,
-> >
-> > Please pull the updates for the Raspberry Pi.
-> >
-> > Updates for RPi for 2025.04:
-> > - Copy Bluetooth device address in DT
-> > - Keep warnings from firmware in DT, if any
-> > - Only add frame buffer node if CONFIG_FDT_SIMPLEFB is set
-> > - Add identifiers for the new RPi 5 series
-> >
-> > The following changes since commit
-> a383b9bd4d7e430fe7c254297540bae596649dba
-> >
-> > https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
-> <https://
-> > source.denx.de/u-boot/custodians/u-boot-raspberrypi.git>
-> > tags/rpi-2025.04-rc4
->
-> Thanks for taking care.
->
-> I wasn't able to find that tag but I think all the commits are in branch
-> rpi-2025.04-rc3 [1]. Maybe you forgot to push your tag?
->
+The series consists of the following changes:
+Patch 1 removes custom string functions and replaces them with standard
+string functions.
+Patch 2 introduces the fuse writebuff sub-system command, allowing to
+write a structured buffer in memory to fuses, and implementing the
+necessary function calls.
+Patch 3 enables the fuse sub-system in the K3 platform.
+Patch 4 updates the documentation to include details about the new fuse
+writebuff command.
 
-Correct! Should be there now :)
+These changes aim to improve the fuse sub-system by the removal of
+custom string functions and the addition of the fuse writebuff
+command improves fuse programming workflows by allowing to write a
+structured buffer in memory to efuses.
 
+Harsha Vardhan V M (4):
+  cmd: fuse: Remove custom string functions
+  cmd: fuse: Add fuse writebuff sub-system command
+  drivers: k3_fuse: Add fuse sub-system func calls
+  docs: fuse: Add fuse writebuff cmd docs
 
-> Regards,
-> Matthias
->
-> [1]
->
-> https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/-/commits/rpi-2025.04-rc3
->
-> >
-> > Apologies for the later requirest. I was out for a medical reason, so
-> I've
-> > limited it to simple fixes/bugs because it's later than I'd hoped.
-> >
-> > I'll do the remainder for the next release.
-> >
-> > Cheers,
-> > Peter
->
->
+ cmd/Kconfig            |  8 +++++
+ cmd/fuse.c             | 49 ++++++++++++++------------
+ doc/README.fuse        | 14 ++++++++
+ drivers/misc/Kconfig   |  7 ++++
+ drivers/misc/Makefile  |  1 +
+ drivers/misc/k3_fuse.c | 78 ++++++++++++++++++++++++++++++++++++++++++
+ include/fuse.h         |  9 +++++
+ 7 files changed, 145 insertions(+), 21 deletions(-)
+ create mode 100644 drivers/misc/k3_fuse.c
+
+-- 
+2.34.1
+
