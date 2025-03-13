@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E7CC282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 21:22:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C09BEC282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58A6A80FF7;
-	Thu, 13 Mar 2025 22:22:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC3FD80F9C;
+	Thu, 13 Mar 2025 23:39:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NCyVomqn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kHzfr76L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F406810E8; Thu, 13 Mar 2025 22:22:37 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id E7E7B810E8; Thu, 13 Mar 2025 23:39:51 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30FF880756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 22:22:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E59BA80756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:39:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7c04df48a5bso138109185a.2
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 14:22:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-391342fc148so1014401f8f.2
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:39:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741900954; x=1742505754; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=j71dXX/2MuG+OeNOSkeCq3G+a5vl6KlbAlMRfjL4jms=;
- b=NCyVomqnT6ugnB6vWpKhFnYWIfM42y/al+XchyaDEUjqA90X2N26mz0Zji3RmhWoqc
- GHqxdLDbZCRMgyaJWWd8+Ooz2vqXnGNDH/I3WnkwvL2uSMWg0rpdvftEln244ouVKLJp
- +TzSGQJuouDWaUrYjzZT1+9RxGnPrU/hKiKVg=
+ d=gmail.com; s=20230601; t=1741905589; x=1742510389; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YQZYtUQDBimvuW0ncdH5cOhhB3S3vrO8oOQ1DhM+eCU=;
+ b=kHzfr76LL+t7Y9ilqYNOzi13qkZQKXu7sdqf0t8UaJyAlP9wQv2wHbdN3T5KVE7qXE
+ dJIacWR2hXYW04xqkzCcT6n8YCxkOtU86mSXdQU/0LOXz9XcPeXDLDkMbkYiGG48ASnx
+ ALLlUKoBs0HutctpN8N1m6ZEF7Cs28/CQLQGb8MSyeaJXxjKpoDpg584ApobLV96IWjo
+ 3n1kiYrj8AfvkUmtjZYLuaKKvfqNpfQlltyCxpNuJ5ogkOZo23S2xoPDGgnqTIcTV+wV
+ E1jvP3FpcTC4h+BX0BO1X63w5svWKUSFEhCPuudDAsKmQpb3zN4U1+HxaGx/g2qStWFG
+ kVYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741900954; x=1742505754;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j71dXX/2MuG+OeNOSkeCq3G+a5vl6KlbAlMRfjL4jms=;
- b=DfqyqPJoeqRiSOurQzlVkEFqlVjH0xNLmhEfZIntBfeEM51nso2c1ryVYaQtZXfKvd
- jIuyRMVndSeVY0m6rp47nNDlX2mQFmkO1Qlw6Zo15Hp4sJceCF9FSKV8mkc0i+LwSIqq
- fdHnDlAlf/vex6ExXsJy1Ndphl4ZA9ljnCwqSS9T/AjRyXyIo7J0JrfxKV9HaPzepMtc
- rRJmh7JK1SVjc39sdh5nfHFaZOlNvhr9j8FZfBrnKWkfFp1Qpz+nrKx9VIQ77EUD5CzI
- f1SMnoxp2Yz3UjT8j7U2cuH/1lIXRXpPu2z7Nu33+yDUQJj/tLDYx/zJ5zrTgCQWJsg/
- Jqbg==
+ d=1e100.net; s=20230601; t=1741905589; x=1742510389;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YQZYtUQDBimvuW0ncdH5cOhhB3S3vrO8oOQ1DhM+eCU=;
+ b=arW9kX8nntv/k5+g88BtPXB1SLiJs18ncnNsTKOsuTS8u/0g4V8ZZUpK4m1tbvg9+L
+ 9UW+HHXOTfByOniYK8WasAcuKhdkFk8dJF91Dd15q8toHGgp5JtBfSh4CiOEsGhVa/0z
+ qK8+S85MQh+EWeSa2j4aFsm4hj5rp2pQDEAe8dAOhR0FdzcS+DYV6dTx302oaWtknPtE
+ kKo14FDOVHeUZ+762rjuhnn091Snd2B6qM8bPYm6sHc5KF7Idg1R6TFUHFn1wgCgymuA
+ HkCFEBHiJOudOyaqvAG9V/ejkks8NUSmX/PeBromxwxE2U+sacCm93aCTs1TPzdfQs1m
+ Gxkw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlsFNGRMb1lWyoeFzyHurzhkyr46eqf0ONDZXv69ljaESXqnIoUh3ETgvbhOi2YjOH7NEBIMo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBNmCW+QLjBAvf+ThOOmuM5tlpTGR+s2f6bdKARdEHkwtcZhxk
- W7rzkX8KTaPp3GMBb32jYyNqVOWPozcqfCIDyVl4NZUtIM9+NC9+PUVvefE/q+c5Kb5o9dHqcXD
- +
-X-Gm-Gg: ASbGnctyh4WipfyvkIyf5P39bj1LgLiYue80sZXkMqZ0G8kTuQfpbNqha30mUzXcqzT
- boNqKzLKjxUTw52jCTvnnz1GYCCdPcK6Vudi7YzOV7omeHTJNw/a1jmfZztbRyDmDG4oFOKka49
- u9NA4xcA5/f9MkBL3ZVox18wwye33RaIsRJNtIp7engBGV6sZ76Jp+5rq6RKFNzv/Ztcw3cVWAx
- xSq/FdLvXpyJm+8yWDe6wg6q71cxvz67y7axDDxd/KC2s5YpvSPMeXBMmnlQzMmiL/laIKR4zHM
- c9/JiVZxfXu3gwk2g1jklR+KQXmXWReETL/nbf+MHAY1JQ==
-X-Google-Smtp-Source: AGHT+IE2K1r/wy8VnuTPgInrlVDeUdlbDvLrGMQzHBtnmTcxuk5aHiVe65H2YC0g48U3p7VjH4F2nw==
-X-Received: by 2002:a05:620a:8810:b0:7c5:3ca5:58fe with SMTP id
- af79cd13be357-7c579eec857mr200651685a.22.1741900954080; 
- Thu, 13 Mar 2025 14:22:34 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c4f4easm146759285a.7.2025.03.13.14.22.32
+ AJvYcCXK7ihBYo3Q2tUkCbMUIysIGx6Ne5GIP35duNG72RY51CUuD7XN8QUQgp/ITM51pdswahVn0z8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzcoXavRoexSfrXOboRNcsxfex0kUKE7FFceV9MA5B8wcA9OTBa
+ YM+6A+ST30zH1a0A8O5SY2v93leyfcfRuDB9RhfdZDy7jDXHfHs0
+X-Gm-Gg: ASbGncs7Vovy1mCw7cykJoQ9QliFzJemPRXePQAyaGw7ZOYnPRR/He+Osa+PUWbdGPH
+ qK5qlQ7DprOLAJlthMUeg2MzSGG84fu5a8Fj+5YYS4NpBX8gdUbguIvGe3oyzVhFP9g9KyI5yWw
+ WbJMPrZpFq2a83zkbPwENftlJBqaV2AlVsr8mt+XMCZ8LfC+Dh7M2/RcxkKjBt1pZt2MYsQJCzh
+ Qo8vbl968lCx/Jz8FxccjRL0XN5tJJM7iZ+UVuDv7T3KA10+OpTWn+/QVlGajFyC2fzXmDkfoc7
+ 7nt6bdgQNaSlTBOoiqTzHCR89isdjiwJc3jeuZVTlVKJj7kcGkWKX6uB65JM5dPFg7MZy+AUlh/
+ LAXAgBd/NlnqnHySdp5VwhBiP8E9bLujuB1fkYtg3sUn63Gr7AroY9vm06ce7zozdaSWvGtl0oy
+ XGL8w=
+X-Google-Smtp-Source: AGHT+IG7gXXI9Kq2DujBbe4b1dM5hLb6sw9qAnUFDYvVN35j1gzNxquUAXZMjSf+1OGX/WRxt8CWhQ==
+X-Received: by 2002:a5d:47cf:0:b0:391:2e31:c7e8 with SMTP id
+ ffacd0b85a97d-3971d1362e8mr154435f8f.2.1741905589163; 
+ Thu, 13 Mar 2025 15:39:49 -0700 (PDT)
+Received: from cypher.home.roving-it.com
+ (2.c.4.1.7.3.6.4.2.a.a.3.0.f.c.2.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
+ [2001:8b0:fb11:2681:2cf0:3aa2:4637:14c2])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-395c8881187sm3419390f8f.41.2025.03.13.15.39.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 14:22:33 -0700 (PDT)
-Date: Thu, 13 Mar 2025 15:22:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@dh-electronics.com
-Subject: Re: [PATCH] ARM: dts: imx: Drop bogus regulator extras on DH i.MX6
- DHCOM DRC02
-Message-ID: <20250313212230.GK2640854@bill-the-cat>
-References: <20250311013430.510151-1-marex@denx.de>
- <CAOMZO5BuSS7Q2h_GOOkhcDyH4UNibe9FJHvHBmB8z+Qy9ZJP3A@mail.gmail.com>
- <da9bee03-b143-4d94-90c3-4e7a08a26e62@denx.de>
- <CAOMZO5DBWfNR2wx1fLbRWX4jjsZ2Nuqt+RQaKqHqhMi=x2b6XA@mail.gmail.com>
+ Thu, 13 Mar 2025 15:39:48 -0700 (PDT)
+From: Peter Robinson <pbrobinson@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH] arm64: Add MIDR entries for Cortex-A55, A73 and A75
+Date: Thu, 13 Mar 2025 22:39:41 +0000
+Message-ID: <20250313223947.1711595-1-pbrobinson@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="k3cwLBbWB35zTegx"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5DBWfNR2wx1fLbRWX4jjsZ2Nuqt+RQaKqHqhMi=x2b6XA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,40 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add MIDR entries for Cortex-A55, Cortex-A73 and
+Cortex-A75 cores.
 
---k3cwLBbWB35zTegx
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+---
+ arch/arm/include/asm/armv8/cpu.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-On Thu, Mar 13, 2025 at 06:10:07PM -0300, Fabio Estevam wrote:
-> On Thu, Mar 13, 2025 at 5:06=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->=20
-> > This is a bugfix, so should be master.
->=20
-> Tom, could you apply this one directly to master?
+diff --git a/arch/arm/include/asm/armv8/cpu.h b/arch/arm/include/asm/armv8/cpu.h
+index 4dbb589aab8..2cc9bc988f0 100644
+--- a/arch/arm/include/asm/armv8/cpu.h
++++ b/arch/arm/include/asm/armv8/cpu.h
+@@ -5,8 +5,11 @@
+ 
+ #define MIDR_PARTNUM_CORTEX_A35		0xD04
+ #define MIDR_PARTNUM_CORTEX_A53		0xD03
++#define MIDR_PARTNUM_CORTEX_A55		0xD05
+ #define MIDR_PARTNUM_CORTEX_A57		0xD07
+ #define MIDR_PARTNUM_CORTEX_A72		0xD08
++#define MIDR_PARTNUM_CORTEX_A73		0xD09
++#define MIDR_PARTNUM_CORTEX_A75		0xD0A
+ #define MIDR_PARTNUM_CORTEX_A76		0xD0B
+ #define MIDR_PARTNUM_SHIFT		0x4
+ #define MIDR_PARTNUM_MASK		(0xFFF << MIDR_PARTNUM_SHIFT)
+-- 
+2.48.1
 
-OK.
-
---=20
-Tom
-
---k3cwLBbWB35zTegx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfTTI8ACgkQFHw5/5Y0
-tyyikAv9Fbm5YkBX8DpIqCe0a241c/HaosJnoqZmTJVW9spg5ZoH3fu7SvaVrlFn
-0CyRFn0IPglKQCk2NRdDlkA8orlnaWOnR8gGA73yieFD4XKpbH9rj5ea3WcbZift
-ppMBI23f6ZGeLo/cpZQcIeeVTgh6YKxG+CELQGUWc8mC7bP0rAV5Sy/SiGfK9DXF
-eUuZ9gXxqwd1IigkkMIXNe8+pFCmSxz1vc6/VAQ82nDqyyAsjL1rU4QE5eQMBU91
-KYSLSeYPMw5k+e9SPV8/kXCxODap2OIP2P5D9I1gcMeloFyFjXqzW5cqedDeGopd
-u1RIdZuBt9G2M9cQmPS/tVOJ9rVI8RS6JAoi9pz5JukAeTLRS74ikZkoLPo7BZSf
-jdflXuGomGqkKKtb7vpozvlbg20l9ymHpQHrCTTEfKCindr+uwVN8lltS3CnQtom
-qmsZx7TcLRj8fUGutzRR/QtAf6+BYhZacNaaozMjOA177NtUiM2bdW2H7RrDsnrG
-yPhkk+mq
-=JE5Q
------END PGP SIGNATURE-----
-
---k3cwLBbWB35zTegx--
