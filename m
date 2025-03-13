@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482AFC282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:45:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C90C35FF1
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:45:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 289AD81A02;
-	Thu, 13 Mar 2025 23:44:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7AF68819B1;
+	Thu, 13 Mar 2025 23:44:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CYCWo3t8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T1GWg0iy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B691819B1; Thu, 13 Mar 2025 23:44:28 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 5586F817D8; Thu, 13 Mar 2025 23:44:30 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04C1081B4B
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3756B817D8
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7be49f6b331so139206985a.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:25 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7c55b53a459so150916285a.3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741905865; x=1742510665; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741905867; x=1742510667; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y4jC7tUWkh6X3z+/sjIkHtusc50cONTaCWfAnY/I0pk=;
- b=CYCWo3t8MTXMJ6BUtSgysiTBekeaf2gkCU9JhrUOLCJcBJmLIJEkcvUtumjRUSU3kS
- Q3nLvCrkhuLfFzSuta4kiKXgIXpyp8BiZVZNCyrlgmIgtiEjHRt5iBfAXnfMhRjpKZEX
- KN61cYYeBB0Mr+lEBmwrgQhdjSA7mDHfFRUuA=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=qIC9m/1CEYgsD4SJPmG+r30Rqv5K2fJG4aSKx/miBXM=;
+ b=T1GWg0iys98LZOafvigdPTycoDl+fClF7/xG+PLFMNzwvITyPt16JDtRNbb/ON2QkE
+ BPyn+dFzpOELarbSYhLpZP3kZThjw2AjnNn7+wPw0Z1OEohilM2F1vrSErJVGBwbLKVB
+ oWt8NwnC6xdaZ+MJ8hvBTTJDu4+jiGporUshA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741905865; x=1742510665;
+ d=1e100.net; s=20230601; t=1741905867; x=1742510667;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y4jC7tUWkh6X3z+/sjIkHtusc50cONTaCWfAnY/I0pk=;
- b=GpBkn/nFTp2+27AqUOOrUN11eTrdavoQPYXJIuzQXNN86mHI0iQuAAKj9UQU+b1Sm9
- HpdRo4W0So3oDG/tGEcOAinTh4DZejPeiQ/Ul20N6ILmJ/qBEgn2liy211YbYqQq+OjT
- +eiVdOPDTdpWKoXB+5McA5WG5PKo2ZNIkByyk9LhHMsp0Ekv3XYakxdJlaJt4NKv3GOW
- UUF1wGigj3LgGnkHAKrNJ0WNFTugOteCSsDeSX8e5YrmCu5gjWpdnt7U21aNuihOmGHs
- fqDdqbhmwqT/YXMDPGvNm4FYS2u1Creh5FIqcfsPcKIfd8D8SoYkLC6PaNYY9YIVEsZK
- JHiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUuuhcbwRVFhJ3cEbL0i9oH9ZIDZXmcEjpEwIQ/uFuHzxrOYGRTPlqW1CV/qaqG8Yb6px4iAN4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6TaO1ml11eUQ+75lyWZFwhX1qt+KwNGMJDBEzmB6LF0mtQBZR
- s1kv8wTNB1aCOfp5V8C2L35k+w509WHScReXgRQcAUsQj0qB8dwkQSgEdoqVErwhpFwoLCvP2X1
- m
-X-Gm-Gg: ASbGncv103tKAUEEA+Sne9vfOVz/fxopWiYndfHSbLmckYI3Eowwmnf+fzU9wbx7vea
- IhjrLgp02XPDn7UaUKiG2OiywHjncsyCxZPUrECTTQYpFKW+1+DF4cnzIlENVqUOCTEppEUvBv3
- owphp5qlLLKUeBAQHBmQcCfnhY6kMLQ+quqZho7B7N6dD+On2Vp+Wcww/5o4awQzHRPLJpnc2Xn
- k+DySSLQCcvVHWtidg+UuUW2+ywTSsNpEP4DRrIxNPrWdRbzI/8IvUHIvG3JZT68seIBbcGOdod
- u5cE1BIr6QWJYudgozVLqDMm4mR/xL+bZ4+xEVWDOlvk
-X-Google-Smtp-Source: AGHT+IEjw4xSIbP46FqriQnYWqlBU61SXjSUc9BCxa/ruHxD2hOK385mtlXu2iEMl0Z1UtYmKtkTbg==
-X-Received: by 2002:a05:620a:2603:b0:7c5:4de8:bf71 with SMTP id
- af79cd13be357-7c57c8f03d1mr14193285a.50.1741905864987; 
- Thu, 13 Mar 2025 15:44:24 -0700 (PDT)
+ bh=qIC9m/1CEYgsD4SJPmG+r30Rqv5K2fJG4aSKx/miBXM=;
+ b=rLF+wljjtj/WsT7vMBsj+fF8zcX4GdW3ZgmqyMS0gtI66qyZdxPLrrPFpkRXZM53d6
+ Cyob4jjd+id8tIH2g42Vf5WZ3ni/skS8A3esXPSJ9HB6ndvjftQFwx6cjTAq5PFrahXJ
+ 8FBwT/tp+OiyyVBne7irNYJm++prQIXHfMAA0LNYT7QiT7yh07TToepp16xGcqb4QPrX
+ NhCJRPpiFmchqNOWRv2jF9CRaxHRWZJWAtVrk1PqsNXSm44Ad1o0VoE1RwoqpiLDHHkD
+ wYdayjLHxHRtbSZNAtL5VoWl2QI8AR+OADUsUoOPSTZV74KE0OmUhcdK3uMUym2YUvHc
+ 0X2A==
+X-Gm-Message-State: AOJu0YwEE4bTPqYolqoAWcAwd5A9mRdcVLY0zFt76Zcney7PK/CXV5BW
+ FtgMOmGIBezzsJHlLdG/NcmyzABjehBWW7aoNtbnOnckevreLUcqyvEaI+W7IOIV1rW/TyxTVDU
+ A
+X-Gm-Gg: ASbGncsWfmHds+g7pJrRof23RfGodSjeDxMWI8hJg10ZzcoxW0uyvxIt3CMb19nW2Xs
+ PkQR4i5/+BoklNn7GWjI2BRggKTP5F4UMBgtiuiAAEq8jrI7n7npXSwP13RhqRN+SZHCOTvLRUJ
+ jgpsPupAhrPCqSrFvcxzVi5vFqJjpYb9xpJ6WVltEaToXgDtS3i1A7p1FMv379NqmUdnfWYD29c
+ fhUiPjPkpqN3pqWWVFBo2R5vVAP+HJTwrmOSLrx3tPrL07bYhhb9CteM955BIHX+kdWWRuegb1r
+ b0kBLkbhPmf7YIhscGhmaJIF/mVWqMi8I//Pe810j/R9
+X-Google-Smtp-Source: AGHT+IHUMO3RE/4p7z8WQhjmHR+vXyBRlmCXB0oxpVIfQp2++rPMdD2CZA7C1bugRNM+QjIIqsuLJg==
+X-Received: by 2002:a05:620a:8004:b0:7c5:4738:8a18 with SMTP id
+ af79cd13be357-7c57c830803mr18135685a.25.1741905867147; 
+ Thu, 13 Mar 2025 15:44:27 -0700 (PDT)
 Received: from [127.0.1.1] ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.23
+ af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 15:44:24 -0700 (PDT)
+ Thu, 13 Mar 2025 15:44:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
-In-Reply-To: <20250305084130.2677310-1-vigneshr@ti.com>
-References: <20250305084130.2677310-1-vigneshr@ti.com>
-Subject: Re: [PATCH] memory: ti-gpmc: Alloc per driver private struct
-Message-Id: <174190586344.2150240.15212788059087971663.b4-ty@konsulko.com>
-Date: Thu, 13 Mar 2025 16:44:23 -0600
+To: u-boot@lists.denx.de, Anton Moryakov <ant.v.moryakov@gmail.com>
+In-Reply-To: <20250225135327.33730-1-ant.v.moryakov@gmail.com>
+References: <20250225135327.33730-1-ant.v.moryakov@gmail.com>
+Subject: Re: [PATCH] lib: rsa: add NULL check for 'algo' in
+Message-Id: <174190586514.2150240.1534506734905191406.b4-ty@konsulko.com>
+Date: Thu, 13 Mar 2025 16:44:25 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,18 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 05 Mar 2025 14:11:30 +0530, Vignesh Raghavendra wrote:
+On Tue, 25 Feb 2025 16:53:27 +0300, Anton Moryakov wrote:
 
-> Driver uses dev_get_priv() but never allocates it in its
-> declaration leading to various crashes. Fix this by explicitly
-> allocating the storage.
+> - Check return value of fdt_getprop for NULL.
+> - Return -EFAULT if 'algo' property is missing.
+> - Prevent NULL pointer dereference in strcmp."
+> 
+> Triggers found by static analyzer Svace.
 > 
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] memory: ti-gpmc: Alloc per driver private struct
-      commit: 628908f849e1a8c99c47aad0df0e4feb7a6b2c9d
+[1/1] lib: rsa: add NULL check for 'algo' in
+      commit: babc6eef2f48970f394816c955a4a7481ce8df80
 -- 
 Tom
 
