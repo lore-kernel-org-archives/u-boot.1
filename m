@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD19BC28B28
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 07:35:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098E3C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 07:36:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6493980548;
-	Thu, 13 Mar 2025 08:35:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 838FD80548;
+	Thu, 13 Mar 2025 08:35:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vUnkJzYk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SEYsC+0j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95BF480756; Thu, 13 Mar 2025 08:35:07 +0100 (CET)
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
+ id 8517A8168B; Thu, 13 Mar 2025 08:35:51 +0100 (CET)
+Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
+ [IPv6:2607:f8b0:4864:20::a33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E5D080540
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 08:35:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5358980540
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 08:35:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-86d377306ddso294507241.2
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 00:35:01 -0700 (PDT)
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-523d8c024dfso256140e0c.3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 00:35:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741851300; x=1742456100; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741851344; x=1742456144; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wsJ3wWxOBJUqi8T2wNbpIsrqGocca/qPtX/Yr5es8qA=;
- b=vUnkJzYkeJkzhV7sNXwOmC85Vt55dyZdifTDYRq6yFbhGsT0X2JM5nNPdG3K+YmsUj
- l9IHBlTWZKYsNipS5HKpRCVTJo7Pp3AZOtO5azA8vEX+fRakNbmpYyRMW0JfvwacWpnl
- c8oGeryKc6ZpW7TcNJzejNdvVUzmAEStUCxMNDA3BrrKuP75BwfBdUpslHVJdX2q90Vs
- xxotDfjyIYM73YFwBrsH1N2XcZj9DVx3tdtdlahNp2JCo/CyCR9i7GYbjHkdrAAeYzk5
- SRSbzeqSAfpQg/VLEXwhS7AG3/Epi7fqq3j1aPfpDakWfcLZeIFKQDo63sVNjIZ2srdt
- r6/Q==
+ bh=m74cjY7unjOhibpejNgGlnZJE3gD6e7/C4L2S3JoUjI=;
+ b=SEYsC+0jXwaJPNIpLSBGsA+nY39cmVrMnal44vgzOJqzCr9IoXwAuBhKCgJM9wF3ea
+ 1q9SmnNjuQewm6jbSlndQTE9EuB1GsyaVtTJbew/epGPNdWzkuzrc+ecO5LmOzNEpyhg
+ EADnO+2SIJqUfhLYHdX1rQ7JziHUKWKAJ0zEx9nNGYHRH8EbVY+HUQQLpyxT1Sv3+1F0
+ 9FdReWAevb9uyKZb4Md2R7S7KIl83ipOS0vZLSOL9a7HFIEwMtXRjzospxpE/Xn+ekJi
+ qHNMOWUoNbMRCNTSpwUt1U8LpDpHUvO5SfnubB5wsSpugUgydXO4YyFqS09J5ouj94T5
+ COzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741851300; x=1742456100;
+ d=1e100.net; s=20230601; t=1741851344; x=1742456144;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wsJ3wWxOBJUqi8T2wNbpIsrqGocca/qPtX/Yr5es8qA=;
- b=FDXfN8sZaPw0NCUVNN3Egz5+uxW0ds2YzK3IykA6IjeGzEJmSqF0FhlWkqV//mDSCP
- 8m3Ox5Nmrh3JVsAXBzf60XZaBsIptpPZE7q4DxKds42htRB17LTg9PkvZBQ/O2psqok5
- c3wYGW1vIM0+cvpvSuZt+VrwkWnndZQCD3hd+iXSHwyMM3vK6si37KdgqTCsVPg5MoH0
- /967lHmEpFTk1uiRWYh/33pTquU5BiKTW7T5JdbfLtytrN7FBdxVzDRVm3FLma2UbNmY
- THcd6gUN/xyfSytlviNL2Fom0AggsY8jiyrAahS9/MDi528oDoXnD7e6CCstt3Jvg3Ss
- HR8A==
+ bh=m74cjY7unjOhibpejNgGlnZJE3gD6e7/C4L2S3JoUjI=;
+ b=PFqK1VIuRxGaVqpsRGw/8g/qa0dL3f5Vx8qHAtDjGtkElslrZv+V54KqHVhxetYP9J
+ iETJP+TlsgUU7B2UzI+9xssgxOjbVpFv+M3mefB4A0qekUaCp7zOiC/7gFLr7SAddK0S
+ 2PXug5hNgXMDlCMSbC+N9OOYI+qerindzctMVvsYiG2CksSQh5GiDFR2kbSF0yB36PXV
+ r0cp4FaXVj2w2zc3PnIZ4tL6rPgGKihskDwwGhvmZFfv9QvqzJot9A3ha9eEdYs3oBNo
+ 9HIeL7vlfy8BgMaMxi8FaG77r5dvzHN/55JHr78tqFdlh4tSn5Kk1fzZ3HyBXTuCimvD
+ L1Ug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVx24SiJBJumb9ClZA6mkycY7SeRBeCyDVTgalMP3VpbIXXuCWdvm8c5zx8ZvMoBLVdNBNdxHs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHVp1uiVjLhcY3Dhosw5eL1YypYXu2HPVIRH6Ni4wwpyegcXqs
- 1Ga60Ewot/aVRdmf2FCkqZjWgu1HXxLw5LReXezE3V9Hwe9/4Pq6GVhtXkkruKeSQDSCewrnlll
- bCLVU8tfEwWhuBMz6jwxG7Awd5DWvFyvuoygnJLc9RVE4nTMp
-X-Gm-Gg: ASbGncu49vTTahCKZxDLF+hiasduQgLcJtNICHM+uxEwli8+yrlPfnphS+pW1M/OV+W
- zUick46Lbl8XcjyexABuXjWflUGgwxtM8/S3i4/3RpbSiOBqv/qLJFd2K54kTHjMv6dDqFjTu5S
- 57U7XrFuPKRp93r4JMMjB6DaRZmivHVCW46beMnA==
-X-Google-Smtp-Source: AGHT+IEPt79UlgOR4coVRxDi7fDYI6+pHPut3qcPtyN7UNRte9ZG9CCqfxUWbKsfs2blOZcEGMbkTR57iekzt7WgMJ0=
-X-Received: by 2002:a05:6102:809c:b0:4c1:8f9b:19f1 with SMTP id
- ada2fe7eead31-4c30a5ab1c7mr19895114137.11.1741851299926; Thu, 13 Mar 2025
- 00:34:59 -0700 (PDT)
+ AJvYcCXZHBxVIW2NWgPJMP1//N43630yGubk36M5DMHTZn7GIACeDzeH1tNEsYrPp3zt78F8rYij/7U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxm5czc8qKJ7CMbooOTy1lwPVJu+T8TpM+sOSzrOIyth5hAMGOh
+ V+6mWNR6AHxokSXVSEDCzBw9ziWrcGAUK+hZZwYfaHtiAwUpMG1izYpAG+LegOhAyCA3ieeIjS8
+ Hj0Z3poA1gIImSPZECVcA6u0bsD0eB7HxTJdz8g==
+X-Gm-Gg: ASbGncuoxk1+PIZli8M+6HlhGlQSOarC7+0+u3qDVoTSitakFU6kl6kW/U9p7tL7b/J
+ i1Dga3/wkFzLM+9eR33azdz9EpvtD7KO586V7uo/o6Yt/RSZ57D3wQ/L1sVsaqLxgbJYGIUQLC5
+ oftFG66RuNQ+TLVcPeBJxAMxE7xq8=
+X-Google-Smtp-Source: AGHT+IFWw29px39cma5Lu/X/WuHAR2mpL/UPYiMOtBIG30GGvwhBzlyeR5/LLl5MVdgXg532ut/Tj7jdU90OQT4f5Mc=
+X-Received: by 2002:a05:6102:6056:b0:4c3:64bd:93ba with SMTP id
+ ada2fe7eead31-4c364bda24fmr6099107137.11.1741851344262; Thu, 13 Mar 2025
+ 00:35:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
- <20250312085424.1201148-6-sughosh.ganu@linaro.org>
- <60a1eccb-e4a1-4e38-b0d8-2e1693cb9abb@canonical.com>
-In-Reply-To: <60a1eccb-e4a1-4e38-b0d8-2e1693cb9abb@canonical.com>
+ <20250312085424.1201148-7-sughosh.ganu@linaro.org>
+ <6e801422-2cbf-4a66-892e-02091cb563a5@canonical.com>
+In-Reply-To: <6e801422-2cbf-4a66-892e-02091cb563a5@canonical.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 13 Mar 2025 13:04:49 +0530
-X-Gm-Features: AQ5f1JqLinlsREzE0IKQpzP4MC9Nfb7JuJgeitr3XJ9TXVN67afpoDhNSLqURSc
-Message-ID: <CADg8p97xjNQG4G+xT1qpuZKkmU-XjuLw+JqQBneiYgOOcwz=HQ@mail.gmail.com>
-Subject: Re: [PATCH v8 5/8] efi_loader: preserve installer images in pmem
+Date: Thu, 13 Mar 2025 13:05:33 +0530
+X-Gm-Features: AQ5f1Jr8clpyKdavz4OXDaDCYRWPcKWWSrovJIKdxXIQO5lNXeulZGhl2jfnaHg
+Message-ID: <CADg8p9711mRNbBc_ko8jm_qg8pPPQ0eRAcLwFZ0Og_jO2TXsLg@mail.gmail.com>
+Subject: Re: [PATCH v8 6/8] blkmap: store type of blkmap slice in
+ corresponding structure
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -96,121 +97,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 13 Mar 2025 at 02:22, Heinrich Schuchardt
+On Thu, 13 Mar 2025 at 02:27, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
 > On 12.03.25 09:54, Sughosh Ganu wrote:
-> > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >
-> > One of the problems OS installers face, when running in EFI, is that
-> > the mounted ISO after calling ExitBootServices goes away. For some
-> > distros this is a problem since they rely on finding some core packages
-> > before continuing the installation. Distros have works around this --
-> > e.g Fedora has a special kernel command line parameter called
-> > inst.stage2 [0].
+> > Add information about the type of blkmap slice as an attribute in the
 >
-> The patch is about RAM disks and not about installers.
+> %s/blkmap slice/blkmap slices/
 
-Okay, will try to not frame the commit message about installers.
+Will change
 
 >
+> > corresponding slice structure. Put information in the blkmap slice
+> > structure to identify if it is associated with a memory or linear
+> > mapped device. Which can then be used to take specific action based on
+> > the type of the blkmap slice.
 > >
-> > ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-> > don't have anything in place for DTs. Linux and device trees have support
-> > for persistent memory devices.
-> >
-> > It's worth noting that for linux to instantiate the /dev/pmemX device,
-> > the memory described in the pmem node has to be omitted from the EFI
-> > memory map we hand over to the OS if ZONE_DEVICES and SPARSEMEM is
-> > enabled. With those enabled the pmem driver ends up calling
-> > devm_memremap_pages() instead of devm_memremap(). The latter works
-> > whether the memory is omitted or marked as reserved, but mapping pages
-> > only works if the memory is omitted.
-> >
-> > On top of that, depending on how the kernel is configured, that memory
-> > area must be page aligned or 2MB aligned. PowerPC is an exception here
-> > and requires 16MB alignment, but since we don't have EFI support for
-> > it, limit the alignment to 2MB.
-> >
-> > Ensure that the ISO image is 2MB aligned and remove the region
-> > occupied by the image from the EFI memory map.
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
+> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > > ---
 > > Changes since V7: None
 > >
-> >   lib/efi_loader/efi_bootmgr.c | 22 +++++++++++++++++-----
-> >   1 file changed, 17 insertions(+), 5 deletions(-)
+> >   drivers/block/blkmap.c | 8 ++++++++
+> >   1 file changed, 8 insertions(+)
 > >
-> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> > index c6124c590d9..081eff057f4 100644
-> > --- a/lib/efi_loader/efi_bootmgr.c
-> > +++ b/lib/efi_loader/efi_bootmgr.c
-> > @@ -18,6 +18,8 @@
-> >   #include <efi_loader.h>
-> >   #include <efi_variable.h>
-> >   #include <asm/unaligned.h>
-> > +#include <linux/kernel.h>
-> > +#include <linux/sizes.h>
+> > diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+> > index 34eed1380dc..453510cca62 100644
+> > --- a/drivers/block/blkmap.c
+> > +++ b/drivers/block/blkmap.c
+> > @@ -16,6 +16,10 @@
 > >
-> >   static const struct efi_boot_services *bs;
-> >   static const struct efi_runtime_services *rs;
-> > @@ -362,13 +364,16 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
-> >       }
+> >   struct blkmap;
 > >
-> >       /*
-> > -      * TODO: expose the ramdisk to OS.
-> > -      * Need to pass the ramdisk information by the architecture-specific
-> > -      * methods such as 'pmem' device-tree node.
-> > +      * Linux supports 'pmem' which allows OS installers to find, reclaim
+> > +/* Attributes of blkmap slice */
 >
-> If the RAM disk contains is used by an installer is irrelevant here.
-> If it is a data disk used by an OS the same patch is needed.
+> Please, provide a description of the constants in Sphinx style
+> explaining what linear and and memory slices are.
 
-Will change
-
->
-> > +      * the mounted images and continue the installation since the contents
-> > +      * of the pmem region are treated as local media.
-> > +      *
-> > +      * The memory regions used for it needs to be carved out of the EFI
-> > +      * memory map.
-> >        */
-> > -     ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
-> > +     ret = efi_remove_memory_map(addr, size, EFI_CONVENTIONAL_MEMORY);
-> >       if (ret != EFI_SUCCESS) {
-> > -             log_err("Memory reservation failed\n");
-> > +             log_err("Failed to reserve memory\n");
-> >               goto err;
-> >       }
-> >
-> > @@ -490,6 +495,13 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> >               ret = EFI_INVALID_PARAMETER;
-> >               goto err;
-> >       }
-> > +     /*
-> > +      * Depending on the kernel configuration, pmem memory area must be page
-> > +      * aligned or 2MB aligned. PowerPC is an exception here and requires
->
-> %s/pmem memory area/pmem memory areas/
->
-> %s/MB/MiB/
-
-Will change
+Okay
 
 -sughosh
 
+>
+> Cf.
+> https://docs.kernel.org/doc-guide/kernel-doc.html#object-like-macro-documentation
 >
 > Best regards
 >
 > Heinrich
 >
-> > +      * 16MB alignment, but since we don't have EFI support for it, limit
-> > +      * the alignment to 2MB.
-> > +      */
-> > +     image_size = ALIGN(image_size, SZ_2M);
+> > +#define BLKMAP_SLICE_LINEAR  BIT(0)
+> > +#define BLKMAP_SLICE_MEM     BIT(1)
+> > +
+> >   /**
+> >    * struct blkmap_slice - Region mapped to a blkmap
+> >    *
+> > @@ -25,12 +29,14 @@ struct blkmap;
+> >    * @node: List node used to associate this slice with a blkmap
+> >    * @blknr: Start block number of the mapping
+> >    * @blkcnt: Number of blocks covered by this mapping
+> > + * @attr: Attributes of blkmap slice
+> >    */
+> >   struct blkmap_slice {
+> >       struct list_head node;
 > >
-> >       /*
-> >        * If the file extension is ".iso" or ".img", mount it and try to load
+> >       lbaint_t blknr;
+> >       lbaint_t blkcnt;
+> > +     uint     attr;
+> >
+> >       /**
+> >        * @read: - Read from slice
+> > @@ -169,6 +175,7 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> >               .slice = {
+> >                       .blknr = blknr,
+> >                       .blkcnt = blkcnt,
+> > +                     .attr = BLKMAP_SLICE_LINEAR,
+> >
+> >                       .read = blkmap_linear_read,
+> >                       .write = blkmap_linear_write,
+> > @@ -248,6 +255,7 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> >               .slice = {
+> >                       .blknr = blknr,
+> >                       .blkcnt = blkcnt,
+> > +                     .attr = BLKMAP_SLICE_MEM,
+> >
+> >                       .read = blkmap_mem_read,
+> >                       .write = blkmap_mem_write,
 >
