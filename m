@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D7DC28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 04:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69BFBC28B2F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BA8580F4C;
-	Fri, 14 Mar 2025 05:51:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 95E2380F0E;
+	Fri, 14 Mar 2025 06:36:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=bens.haus
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oELqS+Rd";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=bens.haus header.i=@bens.haus header.b="axYNZtpr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86FD680F6B; Fri, 14 Mar 2025 05:51:18 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04BDD808A2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:51:15 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52E4pBnc2043982
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 13 Mar 2025 23:51:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741927871;
- bh=a1SP0lFW1ZTiRpmV0CI8dQBH0QP0WSfiPlyipnbu9VY=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=oELqS+RdKO4kadMhdOmRdj8nwUpRU4V8Z4mIBMVncDPT7rKdx4a3hDvIps35Iu3Bl
- p6kjsyBrSB23MrPvZD5t8+d+aXHCjiZDBx3TH+VFimflOan2Gy8mBKAjQMrMw3511g
- N4dK46kXQga5bTjKD/k39OrIjvqT15yJYroGGRL0=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52E4pBMe018100
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Mar 2025 23:51:11 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Mar 2025 23:51:11 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Mar 2025 23:51:11 -0500
-Received: from localhost (a0543016.dhcp.ti.com [172.24.227.196])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52E4pATL081204;
- Thu, 13 Mar 2025 23:51:11 -0500
+ id 8432380F9C; Fri, 14 Mar 2025 00:20:18 +0100 (CET)
+Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
+ [79.135.106.25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FEC58007D
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 00:20:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=bens.haus
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ben@bens.haus
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bens.haus;
+ s=protonmail; t=1741908012; x=1742167212;
+ bh=jbYKeyj6+HbsN77e54ckQUc1Vw9VL+TEqicwsJ19FHo=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=axYNZtprK8aBbUPveZrD51ni3HOJim9omJTuhiZJGJcorCemvNE3OHPO3mws3+NC8
+ R+mam4KUm4M4bV3vUJNuynR1nWj/9tJtfxelYQPPFzyDtkVh5b/OrtwqEeuUmlrd0P
+ xgMu3ZNGF3xkf32XK6bccHaL9HnVmOrokq6PXj/zDRldcCL12SvZPi8nXS5GG2CVfH
+ Njim+YlnXoDq/F/ztFlMs/61OvQVE784sv0jXf5O4ZcKbjtSvpXvbMmPqvdHCnuTSP
+ qi45nLBpbiTQsnvD1Q4nRrmD6BNDCz396XthiyIEr3yT/c/QMU2iih9rdhYgb5vRoa
+ IdDrq1xX7SazA==
+Date: Thu, 13 Mar 2025 23:20:09 +0000
+To: Ard Biesheuvel <ardb@kernel.org>
+From: Ben Schneider <ben@bens.haus>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: boottime->efi_allocate_pages() returning EFI_NOT_FOUND
+Message-ID: <liIpk-rf5MT1ndPhbZRBXLvYYm7vGI3VC8KWAV-LPYu_Xw8wYlkuJdBjRY--CslBe6IicflH_unJefkWdhvOpNiTpseLHi7qSoiR6BTqfcU=@bens.haus>
+In-Reply-To: <CAMj1kXH9=4dk94SKy38AQWpSiJZPRMxrZ6dGzo6b1XWiV7Qrdw@mail.gmail.com>
+References: <CdUirikQxEto6yzkO-G-y6mmWa-ek5NZPN9K7EYvyeUAmnxuge6UmHxfp0tb580qFmfHacX5aWFLqrXjXAFs87nP14AZ72vkClzp3U3WBw4=@bens.haus>
+ <CADg8p971xqUzCHhV_yZDXbn8OMn_V2DfHoVschZOTfx1dFvV1A@mail.gmail.com>
+ <09712f67-51aa-4db5-bb7b-e1305c08d5f1@gmx.de>
+ <i0EZ5kRllpIYtHd8QhvzuyTJDkJ2ZrHvCYibVvyxWKY6H-Z1m94rb8AmxFnzDCkq3qRgpj0B1k9S2ozXIb0wW5opuRORg-jS6tAskSfAihE=@bens.haus>
+ <CAC_iWjJKO4Dkbd_x9==Cq=Kb4Cy9S4PQqz7d714U9ErWsdW81A@mail.gmail.com>
+ <CAC_iWj+R9VA9vNGM=R-UwJCDJ=t9Wa1A28Om4tAX48MmpnKcxA@mail.gmail.com>
+ <si98ZC92YWJExsBQWbCusXzfn_jNmQuszo7DUC1pjA6gx-9vhr2Viu07oL9sdNDBWAYMFKEW_MQyCZqLpLWiU6q90_afofYyie74RiJhFCM=@bens.haus>
+ <CAMj1kXH9=4dk94SKy38AQWpSiJZPRMxrZ6dGzo6b1XWiV7Qrdw@mail.gmail.com>
+Feedback-ID: 124562356:user:proton
+X-Pm-Message-ID: 418c8f93eaf0e84cf45105c071160356bcf73b3a
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 14 Mar 2025 10:21:10 +0530
-Message-ID: <D8FPW8AY1U12.2MPS0YXJXMTJ7@ti.com>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [PATCH v2] config: falcon: move CFG_SYS_SPI_* to Kconfig
-From: Anshul Dalal <anshuld@ti.com>
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.17.0
-References: <20250311044414.3155688-1-anshuld@ti.com>
-In-Reply-To: <20250311044414.3155688-1-anshuld@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Fri, 14 Mar 2025 06:36:33 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,20 +77,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Mar 11, 2025 at 10:14 AM IST, Anshul Dalal wrote:
-> CFG_SYS_SPI_* are used in falcon boot to specify the offsets and size of
-> the respective payloads. This patch moves them to Kconfig keeping the
-> values consistent for each of the affected boards.
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
-> Tested:
->  * U-boot CI: https://github.com/u-boot/u-boot/pull/750
+On Thursday, March 13th, 2025 at 11:11 AM, Ard Biesheuvel <ardb@kernel.org>=
+ wrote:
 
-Refer to the below link for CI tests instead:
-  https://github.com/u-boot/u-boot/commit/acf49ef771fb993e1b8e313dafb6b682c=
-1037ebf
+>=20
+>=20
+> On Thu, 13 Mar 2025 at 18:27, Ben Schneider ben@bens.haus wrote:
+>=20
+> > Hi Ilias,
+> >=20
+> > On Thursday, March 13th, 2025 at 2:35 AM, Ilias Apalodimas ilias.apalod=
+imas@linaro.org wrote:
+> >=20
+> > > Can you apply https://source.denx.de/u-boot/custodians/u-boot-tpm/-/c=
+ommit/b04e708c615c15423ffc80d73430bf2d36fb7c21
+> > > and see if it fixes your problem?
+> >=20
+> > With this patch applied, efi_zboot_entry() appears to proceed to
+> > __decompress() using target =3D 0 (first entry on my device), but
+> > then I get the following messages:
+> >=20
+> > EFI stub: ERROR: EFI decompressor: Out of memory while allocating outpu=
+t buffer
+> > EFI stub: ERROR: EFI decompressor: Decompression failed
+> > efi_free_pages: illegal free 0x0, 0x1140
+>=20
+>=20
+> Seems like the compression code gets confused by a buffer residing at
+> memory address 0x0.
+>=20
+> Could you try the below please?
+>=20
+> --- a/drivers/firmware/efi/libstub/randomalloc.c
+> +++ b/drivers/firmware/efi/libstub/randomalloc.c
+> @@ -75,6 +75,9 @@
+> if (align < EFI_ALLOC_ALIGN)
+> align =3D EFI_ALLOC_ALIGN;
+>=20
+> + if (alloc_min =3D=3D 0)
+> + alloc_min =3D align;
+> +
+> size =3D round_up(size, EFI_ALLOC_ALIGN);
+>=20
+> /* count the suitable slots in each memory map entry */
 
-Anshul
+That did it! With both the patch for U-Boot and this one for the kernel app=
+lied, everything works perfectly.
+
+Ben
