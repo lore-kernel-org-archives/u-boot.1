@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4B81C35FF3
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 16:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2180BC35FF3
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 16:04:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 418F580F9C;
-	Thu, 13 Mar 2025 17:03:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AADA080F9C;
+	Thu, 13 Mar 2025 17:04:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cqs1pQVy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WFWyA7xH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A62B80540; Thu, 13 Mar 2025 17:03:17 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 0B2B080540; Thu, 13 Mar 2025 17:04:15 +0100 (CET)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1154081870
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 17:03:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5BA680F9C
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 17:04:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7c0155af484so149317185a.0
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 09:03:05 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-47688ae873fso11059231cf.0
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 09:04:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741881784; x=1742486584; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741881848; x=1742486648; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6cQhcOO5DFdeeVS9r5MXep+a+EVlCjhbG9v2LtSnpDM=;
- b=Cqs1pQVyWvWcK4gtq0JIkGsODJt6l7vKfx67pKPTpbxo6RDEFWBRj86DEWMKEG+4xN
- qeJC7FjuZTOmuvqLxjxaLMDlyyBdyU/ecRcIgNiVN8NBBCvl4OH29NmQPFXU6LVzQJ2G
- uEsedeJJcUlN3yvD7OiHBfsMr79LQMwmiwX0w=
+ bh=N5PYmRmigyNo4oUZn8dRhEODT0IucJnnmsmkXhX5CbQ=;
+ b=WFWyA7xHyvt0Y2dqqxJHtb6M5k4H9NhpQ6CIdOpiZUyOLPHgut/8zH7GHbXUg3IhzU
+ bLMgwkOAUBmVfn/atfX0yRg4z+YYObFD/esSowNYx3xncGpDq8eJOFKXelcoJELfx4+T
+ 5mfuIn31kQrRt1RnlnJxZB51mMLurf7KSYSBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741881784; x=1742486584;
+ d=1e100.net; s=20230601; t=1741881848; x=1742486648;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6cQhcOO5DFdeeVS9r5MXep+a+EVlCjhbG9v2LtSnpDM=;
- b=phIfsutfziJjaYOaGkNTbrWJuohP6LwgqsZ/u9ENjOXc/zhfXhkUde7vnj2P4AVGN+
- FuIOb8+F6oJmAtI2Lrptu+b9dxdr4vgZ5YiUzeyExc26ORnxUTRczh9BsANgbIQAXaLx
- VvKp85PZ/KhH+7AyzfjFOHkbnKdv/niDTIuiHXj5hgnj+Rz46Bg4Lu3zO2V6p5Qdoa3Z
- eQptM05XcKMLjGOJ/1xGc5cdPB/EThUyjEWpJeLOOg6Tg8J28mYUkU91WDCNFtr7ArcC
- q3ioymghGJMi+fwwOdAN4//CIhsExF8YJOLuBB0yILQ3OctnLjDayKkUO8nxjo6a2/e+
- 1JLQ==
-X-Gm-Message-State: AOJu0YyJGR5nbKNVlf4dPRL8xJ4jwDo2Mluf/UdWx81tSx0zBIFC46a/
- wYZCUfdYRkzDM5GhkXkFR+1dyRLAcsYE1fdEAuohMIEhRFzDBwldn8PUD6qhRVRd6SdPuiSQd8I
- A
-X-Gm-Gg: ASbGncvk4oYCIuUEU5vZjy3g0W2paxK6omXddmgLzw3GoKUQ54nuCWp2XaKRZoCwQHv
- wnAYNZagpAOw20tE9SIIs3aGiCsL4GbMuhwlEVH5qfiz5DVP4Eb81I2rfW+wgz06r2KGqQBOsP5
- 5ZWzukfzekzqsa+aM1H9qSxKMwEVk6PhVUib8CKuU3JSm4P+C/OX465vp7IslUW9k3/zNXvYBLZ
- IZjVud5O0QVSXZadIhf87Vi4UJ3P4KDqVqu8hFYoV2HuXYZF4X7/GUBL6pqSX+UL++j6x04N03G
- AY6vj/fvvvGbjUHpFGXEgvr7AGMtUFFsC6cypS6X7umwrg==
-X-Google-Smtp-Source: AGHT+IGvcRwTkeyMltIH1apAnmehjee/sAYgrPK2eF01rjO6HQV8Pu29uFXz7l92SPCC3vPOM51eTQ==
-X-Received: by 2002:a05:620a:84c4:b0:7c5:5e16:cbeb with SMTP id
- af79cd13be357-7c579ea93femr39480685a.3.1741881783743; 
- Thu, 13 Mar 2025 09:03:03 -0700 (PDT)
+ bh=N5PYmRmigyNo4oUZn8dRhEODT0IucJnnmsmkXhX5CbQ=;
+ b=rI72L6Itayono2e5lG9VAuHZynZYgHjD7FbCkqN5XGqb2i2H1LPd9Qo+KK7aCRzX5b
+ nBNQ5D1Uf0WQxBZabwi8XR8ckAAalKjoLKAy9IzhhjlNdg/hbl0VUMt82++zBtWacR/w
+ hYGfery3ayfNsnFNu5jUR7UEOteBRFDsj7nPxaDyFQiw/SBpB8KLACgA5dYjNu6Fwmd0
+ /+kvVoKsxyvori/fNIkrUIh3S9+tQX9OJaTNSm/LVjoHUkOCwokG8poe+xiOmLHWFkfP
+ gfsvEvjDisDu4HcADLY1zmvs9O6hbVWb6zi4QAyqAWc7PSlszXMhEo2n0FiiNsuFo9fE
+ Tm2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7SLF2OB2WAno6hk3cUpXzVn+Txw5rTPWe9kp0S6jTq/dDE8qVaaws6yrEDxus2DehycIeIhM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFa33nhWJ475Ku5jmwtbv4qKMaPjjrj4kCBpPnUo1A9V99HZ4C
+ /vxaX8vxDZkNtynuwkjzSlvV4y6uciEE3e1SJGRg/PLYDLOCCBUMnQa4Zpb/phU=
+X-Gm-Gg: ASbGncv4jVUfTnE/X6+8CRvIxycFLcnUHHIk+KurjN7nAM8WlnJLh3+tWwhQn5WO43e
+ TsJTvLuCaxOAiDr5laEIF1Mu+yIVgg1lo/YgDnBtHJAjY105ITyaBjCezN9OiSRmp5guvstPK6y
+ BJmsExvyvSFeGwvR1cIX1S4xfRKQPb3Kf+Jo9N624gf4KOokQ5BwAGB3D9LqyxFl4KwmljIivTE
+ SsqbfmzmY8uHg1qVRNRXNiAJ8jtxRxXaB0sv8sLXed1eDomSLRwd7U3csi6vzOlUtGoZR2TxTUK
+ Wb1J999jJRZA5K+1/cusnJ2q2oYPGCFKK+aR3HLteG528Q==
+X-Google-Smtp-Source: AGHT+IH6TzEVa7GBZLnUTVnTs5CkfDAk6lPgUVmZ+I+6W6EC9cq9a8UxVzPk+VLY9NIBRa1T3pcAPw==
+X-Received: by 2002:ac8:5955:0:b0:476:91a5:c832 with SMTP id
+ d75a77b69052e-47691a5cbb2mr226106741cf.32.1741881847662; 
+ Thu, 13 Mar 2025 09:04:07 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c4e8b9sm115520885a.2.2025.03.13.09.03.02
+ d75a77b69052e-476bb6610a5sm10709441cf.34.2025.03.13.09.04.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 09:03:03 -0700 (PDT)
-Date: Thu, 13 Mar 2025 10:03:00 -0600
+ Thu, 13 Mar 2025 09:04:06 -0700 (PDT)
+Date: Thu, 13 Mar 2025 10:04:03 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 3/3] doc/develop/codingstyle.rst: Expand to include
- CONFIG_IS_ENABLED and PHASE_
-Message-ID: <20250313160300.GC2640854@bill-the-cat>
-References: <20250312010021.1671010-1-trini@konsulko.com>
- <20250312010021.1671010-3-trini@konsulko.com>
- <33389606-0c16-4d26-b7e6-44e4f973d29e@cherry.de>
+To: Markus Schneider-Pargmann <msp@baylibre.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>,
+ Kevin Hilman <khilman@baylibre.com>, Dhruva Gole <d-gole@ti.com>,
+ Sebin Francis <sebin.francis@ti.com>,
+ Kendall Willis <k-willis@ti.com>, Akashdeep Kaur <a-kaur@ti.com>
+Subject: Re: [PATCH 02/19] arm: mach-k3: Kconfig: Add symbols for IO+DDR Low
+ Power Mode
+Message-ID: <20250313160403.GD2640854@bill-the-cat>
+References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
+ <20250311-topic-am62-ioddr-v2025-04-rc1-v1-2-666de9c105cb@baylibre.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8UZd0KOMBB80C7YJ"
+ protocol="application/pgp-signature"; boundary="0qQFu3l0AUwNePLN"
 Content-Disposition: inline
-In-Reply-To: <33389606-0c16-4d26-b7e6-44e4f973d29e@cherry.de>
+In-Reply-To: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-2-666de9c105cb@baylibre.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,113 +104,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8UZd0KOMBB80C7YJ
+--0qQFu3l0AUwNePLN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 13, 2025 at 11:20:09AM +0100, Quentin Schulz wrote:
-> Hi Tom,
+On Tue, Mar 11, 2025 at 11:30:41AM +0100, Markus Schneider-Pargmann wrote:
+> There is one new symbol to enable support to resume from IO+DDR where
+> the SoC is turned off and DDR is in self-refresh.
 >=20
-> On 3/12/25 2:00 AM, Tom Rini wrote:
-> > Expand the conditional compilation section to explain when to use
-> > CONFIG_IS_ENABLED rather than IS_ENABLED and provide an example. Next,
-> > note what the PHASE_ macro is supposed to be used for as well.
-> >=20
+> The other symbol is the address of a memory region to be used to store
+> meta data. This has to be the same address as is used by the firmware.
 >=20
-> Ah! Then ignore my comment on Patch 2/3 about the missing CONFIG_IS_ENABL=
-ED
-> :)
+> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
+> ---
+>  arch/arm/mach-k3/Kconfig | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Changes in v2:
-> > - New patch.
-> > ---
-> >   doc/develop/codingstyle.rst | 17 +++++++++++++++++
-> >   1 file changed, 17 insertions(+)
-> >=20
-> > diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
-> > index 7211e4e4eed1..3303fff165de 100644
-> > --- a/doc/develop/codingstyle.rst
-> > +++ b/doc/develop/codingstyle.rst
-> > @@ -192,6 +192,23 @@ inside the block, and check it for correctness (sy=
-ntax, types, symbol
-> >   references, etc).  Thus, you still have to use an #ifdef if the code =
-inside the
-> >   block references symbols that will not exist if the condition is not =
-met.
-> > +In the case where a symbol may be referenced with an xPL-specific Kcon=
-fig
->=20
-> Please provide some information about what xPL means (maybe a link to
-> somewhere it's already explained? doc/develop/init.rst:Board Initialisati=
-on
-> Flow could be a start? Or maybe rather doc/develop/spl.rst which seems to
-> better match what this is referring to?
+> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> index a3ac490f677429b851b4b4b3d6753ef6997884c9..1e6deb3b9cf1c5a8091a88d8c=
+825ebdbb681424a 100644
+> --- a/arch/arm/mach-k3/Kconfig
+> +++ b/arch/arm/mach-k3/Kconfig
+> @@ -150,6 +150,15 @@ config K3_DM_FW
+>  	  bootloader, it makes RM and PM services not being available
+>  	  during R5 SPL execution time.
+> =20
+> +config K3_IODDR
+> +	bool "Enable IO+DDR Low Power Mode support"
+> +	depends on SPL && (SOC_K3_AM62A7 || SOC_K3_AM62P5)
+> +	default n
 
-A problem is that, ah yes, doc/develop/spl.rst exists but needs to be
-renamed to xpl.rst and expanded on too. How about for this patch I
-change this to something like:
-
-When working with xPL (see :doc:`spl` for more information) we need to
-take further care to use the right macro. In the case where a symbol may
-be referenced with an xPL-specific Kconfig...
-
-And in a follow-up patch start addressing spl.rst. And that may get
-slightly blocked on splitting out the patch that allows the HTML code to
-have redirects automatically. I figured that out for the pytest docs
-RFC, so it's just a matter of making that part standalone and posting
-it, I know how to do it.
-
-> > +symbol, use the CONFIG_IS_ENABLED macro instead, in a similar manner:
-> > +
-> > +.. code-block:: c
-> > +
-> > +	if (CONIG_IS_ENABLED(SOMETHING)) {
-> > +		...
-> > +	}
-> > +
-> > +When dealing with a Kconfig symbol that has both a normal name and one=
- or more
-> > +xPL-prefixed names, the Makefile needs special consideration as well. =
-The
-> > +PHASE\_ macro helps us in this situation thusly:
-> > +
-> > +.. code-block:: make
-> > +
-> > +        obj-$(CONFIG_$(PHASE_)SOMETHING) +=3D something.o
-> > +
->=20
-> Please highlight non-English words with double tick quotes, that also rem=
-ove
-> the need to escape special characters like _, e.g.
->=20
-> ``PHASE_``
->=20
-> Looks good to me otherwise,
-
-OK, will do.
+n is already the default, this can be dropped.
 
 --=20
 Tom
 
---8UZd0KOMBB80C7YJ
+--0qQFu3l0AUwNePLN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfTAbQACgkQFHw5/5Y0
-tywUSgwAgp0+CDuvpMDk1E5bbL3Lsk1EgXlGpXfuRcpdMbeL/FaeYHdcQ7Wo2Iep
-ymKqsO11xzOIpoYqxb0X6ACGo9YPiFEcz948X4c6kGFnTEbVkjleZdjsZzvnm9IJ
-eV7ycHovX/rRf2r5vQdFV1Nrj7E7hOER/M8YLxOfPNJ/WSLohGg7DxKJmv91mxuq
-dJh5LlIppckQylrRY7OGnXOzQ4IqQFyGnKcKuu5Vr5jL5ou7n1E23y2KHRAPYpls
-9ws3iHX1sbJ0sGIY2AfORRECJrxvD9T+ahUxVLLon5I4JwPkhN7qQB/5+KsH7iOp
-weckTMy4uKn+xpY/mekJ0bjzASVeDKoLyox8r/eM+6ostBWD3qVgFrWKMBrXOz/t
-yQbaubkUHzvpnWDCbfbIy2eIr5ozV/5lDqwwUcPQYqhWw8rcVTXESQaNfUMEKNjx
-RdXxsFJAzhQd8Qtj3+oGl3OwNj1nB8TNjy7PVhwWlIKpTEaPGo7gV2hOULQ2tAM0
-ARg95+4D
-=lbwt
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfTAfMACgkQFHw5/5Y0
+tyyqiQwAnUpaBpT3kFzKvSiywdCuZwufSzJ73EGiwnVJDPi/8Y/pDQwctZlz8nVl
+gMmyoh9K7NFtNo4oMgDp7BDM7p16b+4AqCdcoKrPHgdLjLaMtUjKNK11UWGO/7hw
+BmaPt7hAONBQ4ek9kH09fz2/dcPIPTic57Hx4nGUVLB/MW1mLeGbejmgHb3P2mJX
+sWhZ6i6+45TYtbayAj40SM1zxFBbyEsJUh8KHT1B0adeI2yTMJ7k6peiXfLEXKAS
+g8+re85PbvSRM8IyT9Yykqm7CybFqjwDDS9qUExpr8gVH89ZiMVK4MHlODBnP9C8
+DeP7f1tKq5v2Ues0KH5lh1KYLBRFKoJF358WXVasOsP0w5s/3TFWrnGvP3UaKnqv
+zvDe5OCh7+OUxGc+yewMpUkz1jn4nNAiXsBZOIWwPp1fRQOtn4Zp/f/Nw+L3fLLe
+zEB+jxDy0VnYUUyoKvsqBEDjhx/xGbb7tcKamnejMoKpI5eLbHGzX5ThteIL9iWN
+PLPmRl/w
+=pHQ0
 -----END PGP SIGNATURE-----
 
---8UZd0KOMBB80C7YJ--
+--0qQFu3l0AUwNePLN--
