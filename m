@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C90C35FF1
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:45:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470FCC282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:45:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AF68819B1;
-	Thu, 13 Mar 2025 23:44:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CEFD88193A;
+	Thu, 13 Mar 2025 23:44:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T1GWg0iy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rT/Tu+2T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5586F817D8; Thu, 13 Mar 2025 23:44:30 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 6706181B5B; Thu, 13 Mar 2025 23:44:32 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3756B817D8
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A69880756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7c55b53a459so150916285a.3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:28 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7c089b2e239so162689185a.0
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741905867; x=1742510667; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741905869; x=1742510669; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qIC9m/1CEYgsD4SJPmG+r30Rqv5K2fJG4aSKx/miBXM=;
- b=T1GWg0iys98LZOafvigdPTycoDl+fClF7/xG+PLFMNzwvITyPt16JDtRNbb/ON2QkE
- BPyn+dFzpOELarbSYhLpZP3kZThjw2AjnNn7+wPw0Z1OEohilM2F1vrSErJVGBwbLKVB
- oWt8NwnC6xdaZ+MJ8hvBTTJDu4+jiGporUshA=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wTRqIDJKmpbPSQIHDhrNdodBkXXRQD8+jFlyDDU2juY=;
+ b=rT/Tu+2TgtaHmqj1JCB/iBHDJHeiYBylgZQ8pW0t7brk/p9RZjTSVw68uttS5+vPH/
+ TmQAo15WCudzCXZVF6fiQv8sIIPlJxuuPd2qWEgRlELB5KffFbI/yXknx+t56HSX9fFH
+ Ka/WY3BCAQVcqg+9cpqecc0lGmZyhT0yiA58Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741905867; x=1742510667;
+ d=1e100.net; s=20230601; t=1741905869; x=1742510669;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qIC9m/1CEYgsD4SJPmG+r30Rqv5K2fJG4aSKx/miBXM=;
- b=rLF+wljjtj/WsT7vMBsj+fF8zcX4GdW3ZgmqyMS0gtI66qyZdxPLrrPFpkRXZM53d6
- Cyob4jjd+id8tIH2g42Vf5WZ3ni/skS8A3esXPSJ9HB6ndvjftQFwx6cjTAq5PFrahXJ
- 8FBwT/tp+OiyyVBne7irNYJm++prQIXHfMAA0LNYT7QiT7yh07TToepp16xGcqb4QPrX
- NhCJRPpiFmchqNOWRv2jF9CRaxHRWZJWAtVrk1PqsNXSm44Ad1o0VoE1RwoqpiLDHHkD
- wYdayjLHxHRtbSZNAtL5VoWl2QI8AR+OADUsUoOPSTZV74KE0OmUhcdK3uMUym2YUvHc
- 0X2A==
-X-Gm-Message-State: AOJu0YwEE4bTPqYolqoAWcAwd5A9mRdcVLY0zFt76Zcney7PK/CXV5BW
- FtgMOmGIBezzsJHlLdG/NcmyzABjehBWW7aoNtbnOnckevreLUcqyvEaI+W7IOIV1rW/TyxTVDU
- A
-X-Gm-Gg: ASbGncsWfmHds+g7pJrRof23RfGodSjeDxMWI8hJg10ZzcoxW0uyvxIt3CMb19nW2Xs
- PkQR4i5/+BoklNn7GWjI2BRggKTP5F4UMBgtiuiAAEq8jrI7n7npXSwP13RhqRN+SZHCOTvLRUJ
- jgpsPupAhrPCqSrFvcxzVi5vFqJjpYb9xpJ6WVltEaToXgDtS3i1A7p1FMv379NqmUdnfWYD29c
- fhUiPjPkpqN3pqWWVFBo2R5vVAP+HJTwrmOSLrx3tPrL07bYhhb9CteM955BIHX+kdWWRuegb1r
- b0kBLkbhPmf7YIhscGhmaJIF/mVWqMi8I//Pe810j/R9
-X-Google-Smtp-Source: AGHT+IHUMO3RE/4p7z8WQhjmHR+vXyBRlmCXB0oxpVIfQp2++rPMdD2CZA7C1bugRNM+QjIIqsuLJg==
-X-Received: by 2002:a05:620a:8004:b0:7c5:4738:8a18 with SMTP id
- af79cd13be357-7c57c830803mr18135685a.25.1741905867147; 
- Thu, 13 Mar 2025 15:44:27 -0700 (PDT)
+ bh=wTRqIDJKmpbPSQIHDhrNdodBkXXRQD8+jFlyDDU2juY=;
+ b=iwYwHUUf/d1P3bB6CRK+MYDq757us/7zGT5CFAuvy+4G5y1xx/FXGvs29pGr+hBKgB
+ jh+djKVC0AtWy6uT0IPiBpqpn/OcqMbUhiAUFburH313jQ8pU/AjSexho6JynCSuBQZb
+ KxwyrOnD28o8SKQDdHV9uIaDgwNwA8/xpF9VsebWCH4sPaNF5AeWYE/uD0LWkuf9MR0O
+ QSkUKH4d8CJHVQN7EKl+1GYrQtisGLxwCHz4Hhiv3vCsLLOWmnwgPQpfqOB7LRlLE7cZ
+ hC11AV7wUO0zZb+Gh/VbsbEJO56T0LW6WVVZtHcpJ5uL+lpxTxNaSMyaLKqyUfgcm561
+ 1JIg==
+X-Gm-Message-State: AOJu0Yx28euEDh2iUUQVg7QXCAi60JrJeCaqtJBDo28GGdPxrs0YVNor
+ nS10cFUy4qSjgeTAtAin6tQJq01PtuRW1vVfT9jGEopGkvcPDXVzw+TgRn+bL9YerBFOPnId5Mj
+ C
+X-Gm-Gg: ASbGnctSXhaNee2Zj8vA3KH9DoZ/hsnnZj/0YHtSHuIe+HL6qTBl3mpCpbWF6RqMIUC
+ FsTMpQd6tHA32Odii0V4j5NeeXhXP2lSrl4SL7MUzakMseeRr89nVluqnRogaegfTCsCWuaPPnO
+ BZjY9y6lNVFRpHVrTJ8aALSRXr4Qomwe9ibLtJWLjZCaFzvgBZqqSr+TStXgB/dXIzfiz17/HXR
+ /M8UHgJTLleRLabdblZXr0aY61gKGdRqzQoDul/1YK9e/oZF2S9RYxL+05TThloL59RI4EY2dzB
+ Kcjc/S3n0qTYVyr4per5SdHuXNZHuvdSPv+MQRtbou8Dcvaoda+gFQI=
+X-Google-Smtp-Source: AGHT+IFjC7mAmadZTDCfKZMGWc4zIxIQ7+vfQYzPKY/HQ0619pQ7gJQuqCBmgx1e0VuZ071SdgBBQw==
+X-Received: by 2002:a05:620a:2181:b0:7c0:ad47:db3d with SMTP id
+ af79cd13be357-7c57c6aadb8mr14550985a.21.1741905869249; 
+ Thu, 13 Mar 2025 15:44:29 -0700 (PDT)
 Received: from [127.0.1.1] ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.25
+ af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 15:44:26 -0700 (PDT)
+ Thu, 13 Mar 2025 15:44:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anton Moryakov <ant.v.moryakov@gmail.com>
-In-Reply-To: <20250225135327.33730-1-ant.v.moryakov@gmail.com>
-References: <20250225135327.33730-1-ant.v.moryakov@gmail.com>
-Subject: Re: [PATCH] lib: rsa: add NULL check for 'algo' in
-Message-Id: <174190586514.2150240.1534506734905191406.b4-ty@konsulko.com>
-Date: Thu, 13 Mar 2025 16:44:25 -0600
+To: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250228100434.56442-1-paul.barker.ct@bp.renesas.com>
+References: <20250228100434.56442-1-paul.barker.ct@bp.renesas.com>
+Subject: Re: [PATCH v2] Kconfig: Introduce CONFIG_WERROR
+Message-Id: <174190586730.2150240.17533866269563373622.b4-ty@konsulko.com>
+Date: Thu, 13 Mar 2025 16:44:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,21 +95,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 25 Feb 2025 16:53:27 +0300, Anton Moryakov wrote:
+On Fri, 28 Feb 2025 10:04:33 +0000, Paul Barker wrote:
 
-> - Check return value of fdt_getprop for NULL.
-> - Return -EFAULT if 'algo' property is missing.
-> - Prevent NULL pointer dereference in strcmp."
+> Add a new config option under "General setup" to enable the -Werror flag
+> when building U-Boot. This is useful during development to help catch
+> mistakes.
 > 
-> Triggers found by static analyzer Svace.
-> 
+> This is based on a similar config option added to the Linux kernel by
+> Linus in 2021 - see Linux commit 3fe617ccafd6 ("Enable '-Werror' by
+> default for all kernel builds"). The modification of KBUILD_CFLAGS is
+> done in Makefile.extrawarn, matching where it was moved in the kernel by
+> Linux commit e88ca24319e4 ("kbuild: consolidate warning flags in
+> scripts/Makefile.extrawarn").
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] lib: rsa: add NULL check for 'algo' in
-      commit: babc6eef2f48970f394816c955a4a7481ce8df80
+[1/1] Kconfig: Introduce CONFIG_WERROR
+      commit: 9805321dfdeb5225fe5c5e0721abf49c0875637e
 -- 
 Tom
 
