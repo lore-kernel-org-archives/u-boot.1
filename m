@@ -4,58 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30E5C282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 10:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD5BC282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:19:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C60C80FF7;
-	Thu, 13 Mar 2025 11:40:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 5EC9F80540;
+	Thu, 13 Mar 2025 12:19:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nxy03srN";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZLeCnkjY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E69F80FF7; Thu, 13 Mar 2025 11:40:38 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 45F2980FF7; Thu, 13 Mar 2025 12:19:15 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30FF680F9C
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 11:40:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3C1378007D
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:19:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 11974A46155;
- Thu, 13 Mar 2025 10:34:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 439A0C4CEDD;
- Thu, 13 Mar 2025 10:40:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1741862421;
- bh=r2KMjQ0Ow49P5VGFzooLmiIC+MqjnVaF5CKn/HrSkTA=;
- h=Date:From:To:Subject:Cc:References:In-Reply-To:From;
- b=nxy03srNmu6Rn1lWv8I9rQlb52dN6wpX6WHwiYNL132um/evWaZBVPZ9abdwPPKU6
- +Ro0PBPtgFDJqDGrz4GdtSpbNGUX86xkTIBfNUZ9pTmi7Hjp7TLJe/ISgWoHIBV/Vr
- wGWDHq21sEdIuvWotI75NcPfaNjAEMJdbiw6Ru8nFaPw5zIRpBM+ONkheAvR7c9dN8
- Onm9pjABRoOYAcnoHCKleZHnXylBZWnk8lcBpadPMsNr5zWnoRto75xFnUxBxGdhQV
- R81g7Zq0/1UHl4NGTnlePRx1q9tq1IJNYH2mGgPD6dRf9s0wuQPsDgQiHYSWfQmfaX
- lzofPWaAw1lCQ==
-Content-Type: multipart/signed;
- boundary=d64b824cdaca910ee34be917a9dc27f47f033581e33888ac4212538d17b1;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Thu, 13 Mar 2025 11:40:17 +0100
-Message-Id: <D8F2OZR75XC6.1EHBQFP9CRT17@kernel.org>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Quentin Schulz" <quentin.schulz@cherry.de>, "Tom Rini"
- <trini@konsulko.com>, "Joe Hershberger" <joe.hershberger@ni.com>
-Subject: Re: [PATCH 3/3] env: mmc: fix offsets relative to the end of the
- partition
-Cc: <u-boot@lists.denx.de>
-X-Mailer: aerc 0.16.0
-References: <20250312074019.2281884-1-mwalle@kernel.org>
- <9c1f674f-8309-4170-b49b-34778afb8563@cherry.de>
-In-Reply-To: <9c1f674f-8309-4170-b49b-34778afb8563@cherry.de>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6c18e2c7dso1444599a12.3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 04:19:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741864747; x=1742469547; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=LcOGMzqbG9qrir/sELUDkQ8pxCXHysKWkD3SnECYjG4=;
+ b=ZLeCnkjY9X+uDRAIwC+vMHA1YeEczuss633DfPtb+3ZRyJ1TmriN0fvl8u5PXFNs4k
+ f+wIK7CG9VXvulA0kJfzWtJK+lkbyzoF+gCeLfC9p85TnI3QOYDhxcGRNAkszANMlidA
+ KqddqbFfJghqxMOjjpn/nbOUtrJv2m9jQ7QJ9luLyz+yk8nObLFvxsnyVxLEf3LV9sdG
+ oUpvLF5UG59XyzwffiVVutoyBSqwhaa5bL3debSK66QytiVlGy55W48SXe4N7hvhFrUz
+ 3tDfByCqCZgJMiyz926i0ridptcM4WVuxji8zbLXn9vQyvFXDtIXuoHnngMMAMLx/oRU
+ Wr0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741864747; x=1742469547;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LcOGMzqbG9qrir/sELUDkQ8pxCXHysKWkD3SnECYjG4=;
+ b=B6BQddfOtnYGI7v/V/XeEK/sflkJWrSUlEPxn2H74ohLqywXedU/5BVKtXXn7YqKCZ
+ m6WJ6vK/SP1ZJUFxJmT8v2jxQAkCHqYoRSg7JFH1SQ1Ng2MJjK3T+ku+ro2XEomC9EiT
+ dU3YLHUXW2X4ZdMb8OvXFRoH6KaDArnAEHS1voo9Okgudv9CwgwRvQhXsC2fjLIhw4ot
+ m5/82qJAqeAfx15yIPq788RrlES5TVloEUk+AnCKJfwPHwZaY+rMTxeDo3BbDEFyjBgF
+ fiGDnh5vildQBc7+/L4jf7I/UUVu0Ao0FNslXbFvPQsOUY6xRgEmNfVica7CWgiqDr/S
+ TA6Q==
+X-Gm-Message-State: AOJu0YxLlb3hozjlb8nZ035Fhl3MVeIfFOaVw/QwLkONCuWmN4jtOY98
+ /DED0XWMwfzImPx5wIj6zpjHKanBc80D85cTnvuiPyYEl4dGwyo9pCdUG+8xFNi/nTasQqEhXuA
+ Y1DCmORIJR5mqLZIvB+B4mMVxxdSHhlH3
+X-Gm-Gg: ASbGncvzG0X8a9FdN85oUb4z+nnTir8PNANO6NukWyVH9woLCFqifVlcJFfPid3vniD
+ acYLkHrQMq9oA1Y7gFAv6Foize7zIl0rSu5mZKQWCQ3dcF2/Zi+kafeP/JuSsEfapv6C1RBU9ch
+ Gg29/QwJHi3vSJ8MRhd+bcnfN+tWbaL+5CEnIRk6agxMhTDYFGv2oW5VJ9zoEnWhMyd1ZPmw==
+X-Google-Smtp-Source: AGHT+IEHt5NuoruYydy9oIgkir3RVD3BecRib9gG02/rHwddIdBt0v9L5q+yQ38UjgN3D/FspV1sF4uNd1kVrXxtrHs=
+X-Received: by 2002:a05:6402:2346:b0:5e0:60ed:f355 with SMTP id
+ 4fb4d7f45d1cf-5e5e22d98dbmr29784041a12.18.1741864747174; Thu, 13 Mar 2025
+ 04:19:07 -0700 (PDT)
+MIME-Version: 1.0
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 13 Mar 2025 11:18:55 +0000
+X-Gm-Features: AQ5f1JrhW5OprzBaMKGlLRWNlxNbWBt4xrwibsbEybj4uDQKFqQd3qGewAQjuvs
+Message-ID: <CALeDE9NNZGOvYQNv=XtHryfebDwjULbm30XmzjE_bAXDuz2w9Q@mail.gmail.com>
+Subject: Pull request: rpi-2025.04
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, mbrugger@suse.com
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,152 +86,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---d64b824cdaca910ee34be917a9dc27f47f033581e33888ac4212538d17b1
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Tom,
 
-Hi,
+Please pull the updates for the Raspberry Pi.
 
-> > According to the help text, you can set negative offsets to indicated
-> > that the offset is relative to the end of the parition. But kconfig
-> > doesn't let you specify negative hex values. I think this fell through
-> > the cracks when converting the symbol from a '#define' to a kconfig
-> > option.
-> >=20
-> > Introduce a new boolean kconfig option to switch on the "relative to th=
-e
-> > end" behavior.
-> >=20
-> > Signed-off-by: Michael Walle <mwalle@kernel.org>
-> > ---
-> >   env/Kconfig | 42 +++++++++++++++++++++++++-----------------
-> >   env/mmc.c   |  8 ++++++++
-> >   2 files changed, 33 insertions(+), 17 deletions(-)
-> >=20
-> > diff --git a/env/Kconfig b/env/Kconfig
-> > index 4438f0b392c..49888bf700c 100644
-> > --- a/env/Kconfig
-> > +++ b/env/Kconfig
-> > @@ -231,14 +231,6 @@ config ENV_IS_IN_MMC
-> >   	  These two #defines specify the offset and size of the environment
-> >   	  area within the specified MMC device.
-> >  =20
-> > -	  If offset is positive (the usual case), it is treated as relative t=
-o
-> > -	  the start of the MMC partition. If offset is negative, it is treate=
-d
-> > -	  as relative to the end of the MMC partition. This can be useful if
-> > -	  your board may be fitted with different MMC devices, which have
-> > -	  different sizes for the MMC partitions, and you always want the
-> > -	  environment placed at the very end of the partition, to leave the
-> > -	  maximum possible space before it, to store other data.
-> > -
-> >   	  These two values are in units of bytes, but must be aligned to an
-> >   	  MMC sector boundary.
-> >  =20
-> > @@ -249,9 +241,6 @@ config ENV_IS_IN_MMC
-> >   	  valid backup copy in case the other copy is corrupted, e.g. due
-> >   	  to a power failure during a "saveenv" operation.
-> >  =20
-> > -	  This value may also be positive or negative; this is handled in the
-> > -	  same way as CONFIG_ENV_OFFSET.
-> > -
-> >   	  In case CONFIG_SYS_MMC_ENV_PART is 1 (i.e. environment in eMMC boo=
-t
-> >   	  partition) then setting CONFIG_ENV_OFFSET_REDUND to the same value
-> >   	  as CONFIG_ENV_OFFSET makes use of the second eMMC boot partition f=
-or
-> > @@ -592,9 +581,18 @@ config ENV_OFFSET
-> >   	  Offset from the start of the device (or partition).
-> >  =20
-> >   	  This offset may be interpreted differently depending on the chosen
-> > -	  ENV_IS_IN_* options. For example, for ENV_IS_IN_MMC=3Dy, this offse=
-t may
-> > -	  be negative to indicate an offset backwards from the end of the
-> > -	  partition. See the relevant help messages for more details.
-> > +	  ENV_IS_IN_* options. See the relevant help messages for more detail=
-s.
-> > +
-> > +config ENV_OFFSET_RELATIVE_END
-> > +	bool "Offset is relative to the end of the partition"
-> > +	depends on ENV_IS_IN_MMC
-> > +	help
-> > +	  Treat the environment offset as relative to the end of the MMC
-> > +	  partition. This can be useful if your board may be fitted with
->
-> I guess by MMC partition you meant hardware MMC partitions, as opposed=20
-> to GPT/MBR partitions?
+Updates for RPi for 2025.04:
+- Copy Bluetooth device address in DT
+- Keep warnings from firmware in DT, if any
+- Only add frame buffer node if CONFIG_FDT_SIMPLEFB is set
+- Add identifiers for the new RPi 5 series
 
-Yes exactly.
+The following changes since commit a383b9bd4d7e430fe7c254297540bae596649dba
 
-> It's not clear from JEDEC standard if there's a word that would apply to=
-=20
-> the boot partitions, User Area (I think it can be split also?), RPMB,=20
-> etc.? But if there's one, maybe use that term?
+https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
+tags/rpi-2025.04-rc4
 
-I didn't come up with that, as I just moved the help text. But I can
-certainly add "(hardware) MMC partition".
+Apologies for the later requirest. I was out for a medical reason, so I've
+limited it to simple fixes/bugs because it's later than I'd hoped.
 
->
-> > +	  different MMC devices, which have different sizes for the MMC
-> > +	  partitions, and you always want the environment placed at the very =
-end
-> > +	  of the partition, to leave the maximum possible space before it, to
-> > +	  store other data.
-> >  =20
-> >   config ENV_OFFSET_REDUND
-> >   	hex "Redundant environment offset"
-> > @@ -607,9 +605,19 @@ config ENV_OFFSET_REDUND
-> >   	  environment location.
-> >  =20
-> >   	  This offset may be interpreted differently depending on the chosen
-> > -	  ENV_IS_IN_* options. For example, for ENV_IS_IN_MMC=3Dy, this offse=
-t may
-> > -	  be negative to indicate an offset backwards from the end of the
-> > -	  partition. See the relevant help messages for more details.
-> > +	  ENV_IS_IN_* options. See the relevant help messages for more detail=
-s.
-> > +
-> > +config ENV_OFFSET_REDUND_RELATIVE_END
-> > +	bool "Offset is relative to the end of the partition"
-> > +	depends on SYS_REDUNDAND_ENVIRONMENT
-> > +	depends on ENV_IS_IN_MMC
-> > +	help
-> > +	  Treat the redundnat environment offset as relative to the end of th=
-e
->
-> s/redundnat/redundant/
->
-> > +	  MMC partition. This can be useful if your board may be fitted with
-> > +	  different MMC devices, which have different sizes for the MMC
-> > +	  partitions, and you always want the environment placed at the very =
-end
-> > +	  of the partition, to leave the maximum possible space before it, to
-> > +	  store other data.
-> >  =20
->
-> Same remark as for ENV_OFFSET_RELATIVE_END.
->
-> Looks good to me otherwise!
+I'll do the remainder for the next release.
 
-Thanks for reviewing.
-
-Let's give this patch a couple more day, then I'll resend it with
-your remarks being addressed.
-
--michael
-
---d64b824cdaca910ee34be917a9dc27f47f033581e33888ac4212538d17b1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZ9K2EhIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/hckAGA69Mmvaixd6a8IE/SeeLgzc7GX3H/jYi8
-0tnw4Crj2PM418HrpFtkzmuawxlXREWEAYDk3Lc97ss9NtDzVMuoMc1ZU3bfdS2e
-r89kqq7jEn5nDcdtRzn6ejG0lgKqX0k6eKA=
-=Pvoq
------END PGP SIGNATURE-----
-
---d64b824cdaca910ee34be917a9dc27f47f033581e33888ac4212538d17b1--
+Cheers,
+Peter
