@@ -4,68 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42B25C282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 20:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCCA8C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 20:24:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0F1F80FF7;
-	Thu, 13 Mar 2025 21:06:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CEEC180FF7;
+	Thu, 13 Mar 2025 21:24:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1741896399;
-	bh=P+ZoWg79W1OL7DfuV7167CpIxBIEMNNatgNx8SBSl+E=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=jwmOUCaRqQ1j4joNso5bAaIaYLhMzypKpn0CvDEnWMmO1gewUiciDYGR9UtOHeOnK
-	 dwAnBla4IZs463w4ltgeOPgqPjyTm/BYfB7NI4A8csuekRiwPP/Nr75FrD5RLSLHIR
-	 7pgWuvfId9exzPSYkSfisotpQvINXqSevGWrYB56bpYjcsm3DA5q98Orf5TvU+2wzj
-	 yIewrfwaHHplCYxxrmV9lR5nGSUPDvg78SsBgg0uy7km07m0hlStWztluO2xbDJzJ9
-	 DqT/1NFqDWwlnyEf8MHjEUkKfMj5vs2Uo8e2YbzXTwK7ovHZ9x71xIARVJSbD3hEl4
-	 EzrakwykTDQ6g==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F27DE8168B; Thu, 13 Mar 2025 21:06:38 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D3480756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 21:06:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="fhIap+B1"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7DB9C103D43BD; Thu, 13 Mar 2025 21:06:34 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1741896395; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=P+ZoWg79W1OL7DfuV7167CpIxBIEMNNatgNx8SBSl+E=;
- b=fhIap+B1l1yhyN4feWS8YaHuyBKqPKOi4aHfyuOuSoRUuNFogIP30J69t/PPnT/QqyS/Mo
- +nXDKy+z52LxpQfn14DrSbPtocTWePVX+DRr0vbFVg2KMIyIctftcsuJBiUV9VB4AUc5/I
- Cte5h2UWrt2pqcDMoZXFqjhAX0v4faDj8Y5aSfYaKIGvQmLfiL2fUaxd7LrJhP6lUVmHza
- RCPq+gTNA2Y7wb5AhFTp5LIRYr/HC8DiZxl8H5ljuxhczasUSybET/DO9HvghVgT9zn/ab
- I9lXdIy+3GmmmlngqkZrTV0B+r4/nJHOJQ1Xj7Ib3+EHFfQD+LMwiCNAJ49Hnw==
-Message-ID: <da9bee03-b143-4d94-90c3-4e7a08a26e62@denx.de>
-Date: Thu, 13 Mar 2025 21:06:33 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n8ZfC9Qk";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BEEAB810E8; Thu, 13 Mar 2025 21:24:33 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AF9F80756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 21:24:31 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7be8f28172dso90986285a.3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 13:24:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741897470; x=1742502270; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UhTdiuJqryYYPdK5Fo4ljRpW8o2TAyDioH0rKtG3eEU=;
+ b=n8ZfC9QkI8k69Bpt6z5hVS6EmdHuKTI6Xzt5z0cFdykU9u81P1X65xuC+1+pHxYgrG
+ sJ62wxYM27X4YHR86QgGe7i821p+Cw8lYTPb50dMAjcuU0nKeCOud7QunpnJtpriSSqv
+ 3/E7f3bdx4JAwFTH7ufNgN4r3xeVpRSPE9csI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741897470; x=1742502270;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UhTdiuJqryYYPdK5Fo4ljRpW8o2TAyDioH0rKtG3eEU=;
+ b=CDqxllbX4QZklm0j11L35k2RfQxIuH7WVrc0g1krnh7KHLuNEW0RQkhw6cqy/sk2ia
+ VgYca5gxGPEcWwaVNVqDaUhy5klOgc7GYA+T7eT6ux3RXKvF4QJcdVW5bj1R+jsU4gkw
+ wPGVZ44bppzTRCCP1Vgf6uAo+XmoTrJqlw5oM3jEJirMrbOHBdxaX/+VXZts/uWweeHe
+ IRbbDnL/U4Nl5LzLp4Svu/NmYnLFpV0RexT6C8sgQNvciGGpBE/npbpTyVmd08moICEW
+ UL9SQ1qSf1Mc+FkIaP2u1W5kNLwdve3RItBaX6dHizzR322xFPo3ayJ6iUZPgd9GaHfg
+ KAjQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXh1W7F9ioOpsXDuLBduST6ySu+ZGIy9k5oM1S29s86Z8BGyqG9rf3Yoib2jTtJmdqT0h82LIo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8w8WHXasnuIb5E8M+uc8x2kCx04lz9VDdaqZuJoCuY0ASpK36
+ o0LYqFQ5O8l0VnM6LuBCzbU1R2Ag8aevYrRGoVcYopFqYKSSkc0PWlZBnJvmEis=
+X-Gm-Gg: ASbGnctIMrvZ/YNYz7MwkSvyI8vfOyraL7Ll1GrkAjvDMsVbGp9+8eJfw6yCunhuixG
+ TsgBlksIjHR+xLqZQiA0iF6wm+wlIDFbL3blfns2I3BWib/O+Lfh9POI/62nbuPaL7SgdunDdfT
+ lpLm3oyE72rxuDeYl2A/TOE6aDakouJ+UJReA39j+oaDr4gyVR5O+bt8eCqN10EGECqZLv53Vki
+ BhIsQ+DZAWeeV6mURWeVDnfR5RBz+rNmQlpLZsRms3OU8h8bxrgDlhlMLXtYtMtRIG0uqmLCkhl
+ cj/sXNi0TlerA+oD0h+4JgVizeooYSRTeC8YNOztqRBEIA==
+X-Google-Smtp-Source: AGHT+IEfQtLa5yhPeVltoKxK34zVQ7wu4BFn+6ZAghRjKfEGW9NgmdLcTkrBiYL+SATjPs4werbpAA==
+X-Received: by 2002:a05:620a:6406:b0:7c5:4de9:533 with SMTP id
+ af79cd13be357-7c579eb43b1mr161941185a.5.1741897469951; 
+ Thu, 13 Mar 2025 13:24:29 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c573d6fb39sm138165885a.85.2025.03.13.13.24.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Mar 2025 13:24:28 -0700 (PDT)
+Date: Thu, 13 Mar 2025 14:24:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Hrushikesh Salunke <h-salunke@ti.com>
+Cc: n-francis@ti.com, s-k6@ti.com, kamlesh@ti.com, a-shenai@ti.com,
+ u-boot@lists.denx.de, s-vadapalli@ti.com, danishanwar@ti.com, srk@ti.com
+Subject: Re: [PATCH v2] configs: am65x_evm_r5_usbdfu_defconfig: Fix USB DFU
+ boot
+Message-ID: <20250313202425.GJ2640854@bill-the-cat>
+References: <20250227115456.283663-1-h-salunke@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: dts: imx: Drop bogus regulator extras on DH i.MX6
- DHCOM DRC02
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20250311013430.510151-1-marex@denx.de>
- <CAOMZO5BuSS7Q2h_GOOkhcDyH4UNibe9FJHvHBmB8z+Qy9ZJP3A@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5BuSS7Q2h_GOOkhcDyH4UNibe9FJHvHBmB8z+Qy9ZJP3A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IC3qvXBnpT3Vahnt"
+Content-Disposition: inline
+In-Reply-To: <20250227115456.283663-1-h-salunke@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,15 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/13/25 8:57 PM, Fabio Estevam wrote:
-> On Mon, Mar 10, 2025 at 10:34 PM Marek Vasut <marex@denx.de> wrote:
->>
->> The regulator extras should be placed in the USB H1 regulator node,
->> the /regulator-usb-h1-vbus. They are already present there in the
->> upstream DT, so delete this bogus node entirely.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
-> 
-> Applied to u-boot-imx/next, thanks.
 
-This is a bugfix, so should be master.
+--IC3qvXBnpT3Vahnt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 27, 2025 at 05:24:56PM +0530, Hrushikesh Salunke wrote:
+
+> Increase the size of malloc region allocated before relocation, as
+> current size is insufficient for DFU boot causing it to overflow and
+> corrupt the stack.
+>=20
+> Fixed regulator configs are required by vtt_supply which is used by
+> "am654_ddrss" driver. Without it during DFU boot DDRSS initialization
+> is failing. These configs are enabled in "am65x_evm_r5_defconfig" but
+> are missing from "am65x_evm_r5_usbdfu_defconfig". Fix that by updating
+> "am65x_evm_r5_usbdfu_defconfig" to include "am65x_evm_r5_defconfig".
+>=20
+> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+> ---
+> This patch is based on following commit in master branch
+> 57bbc4de75f Merge tag 'qcom-fixes-2025.04-rc4' of https://source.denx.de/=
+u-boot/custodians/u-boot-snapdragon
+>=20
+> Changes since v1
+> Instead of directly adding required configs to "am65x_evm_r5_usbdfu_defco=
+nfig",
+> updated it to include "am65x_evm_r5_defconfig".
+>=20
+>  configs/am65x_evm_r5_usbdfu_defconfig | 125 +++++++-------------------
+>  1 file changed, 34 insertions(+), 91 deletions(-)
+
+Please rebase on top of current next, thanks.
+
+--=20
+Tom
+
+--IC3qvXBnpT3Vahnt
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfTPvIACgkQFHw5/5Y0
+tywh5wwAudEHPENSbLn+/4AH2m0q6QrnUpXS9Y/4vxMrcCFX80fLBDXYDykzNl5r
+g6jTDPNEA4wnhkv7aM4mQVn73ugm+0VoOHalY/l4TjANEAdPxoKJCl+FwyBGUOXC
+YiumI4KVDf0u1RTz17cRm3l9xZL1/g4OBQVVfWQAs7ijryscwIGpovaXI1LRHa97
+UdJ88Frf3ts+tUzw67X6QIXNW0BCHLr1JM1LgJHPqpacwtaJdGM6w0ELSOEFJ4eZ
++xFBbkJYom7mCIHj8x6wofjSpxu6xvaehd77FVPKXh/GBS71U77OIzIdVhLpCohU
+/efqGRIuOkA+0+Rzt/Pvcqo21CmAK/jcp0xvnejpfNat/fKAkI1IfNK60Q5oeTin
+f1LMx578r6mKTnApziCmEvn1jq8dWgvLACILDAUdhqvEoRMuXr2Zqt0Mteb7Obss
+4/985Q2JdiXRwGlOQRaisdEPv6iu1o24ASpuXAPvnfM8cH/FO/CDNeQD8ETdpU4M
++6MshqNC
+=uuLW
+-----END PGP SIGNATURE-----
+
+--IC3qvXBnpT3Vahnt--
