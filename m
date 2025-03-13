@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D19CBC282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:56:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2ED5C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:57:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F89180FF7;
-	Thu, 13 Mar 2025 20:56:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39E8B80FF7;
+	Thu, 13 Mar 2025 20:57:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ts+IJT6k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RtjJEd3o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A51F78168B; Thu, 13 Mar 2025 20:56:25 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 9BE208168B; Thu, 13 Mar 2025 20:57:21 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 962F280756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:56:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA0EA80756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:57:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-30613802a6bso15469851fa.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:56:23 -0700 (PDT)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-54991d85f99so2547611e87.1
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:57:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741895783; x=1742500583; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741895838; x=1742500638; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mjJu46hOPkvLgshHHLuWXkEFS5pqnM7FPnkshjvTzxU=;
- b=Ts+IJT6kpHjUBJx5WZ6falQBiw8oDv77cMFINncO5ZGdm2sTFKo2JY6tzVXlqjrwTt
- ic4rzzT8k8eiNAD20xuN24rZYU8CYM/kFfU26n7fjR5GppAqxNlfJ6hnxokZFcH2kRvJ
- s/BiSVVE/vJFAwZMjvKYPTfUmF5mU7p3oEw1ABRrhwD5LbWpCIhTtpAl/uQOPJBRcaYG
- dY8gdi0KPAI3lK+GjnyD5cgfMPANQurs8HXkYXHiFzisoc2otTlh8rbGQJPH4DEsnIhk
- /mc+f2s0jedEzuijvZTZQkOu/ogqGfSfLzt6TzH3mXdz9CRmdIThEI8VIo7tVeRGUR5/
- Jzyg==
+ bh=fA/buzX9YgKRpz6z7c+A6VJvDKMKYwV96ExLuotm0UM=;
+ b=RtjJEd3oj9rTra9K/yplXYrEcDSIWnoHZkKvbJgnwEaFE13YZjmHw9Y/UPbHvy9zKF
+ O1DaV3dJF6fKhTu8VTB+uUEXi34jU0e+wabYXuID4SnTdy66evuIitQY93NXTBlYpqR+
+ XFfn1/huBw329TWbIbByE052DsUzxfOPM+EJRj3h5NcbaGOc5Y18KANzUGVK8/BLpFji
+ h5Tg+PlY3O9ofQP8igIqexQbpoNg95lahAYi0bX5Fihh3mDOTLNAAjXa8SqLJ+s3HLXL
+ YU5sZ7lqaMUxJzDBo2spvPBjUf4Cn9Wh5hkwZ6BsCK5xz8/BL+3IRurMWQ5ViA64rOGj
+ pK2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741895783; x=1742500583;
+ d=1e100.net; s=20230601; t=1741895838; x=1742500638;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mjJu46hOPkvLgshHHLuWXkEFS5pqnM7FPnkshjvTzxU=;
- b=XlKqezkt4OK4yy2AS4FjPSPIg0Q0WkmetiugAM5LlQrePDMxRsgVVeFyIIQljjzTe8
- 24zCe+am70SnlzLp23Wo2UhMAervyGdyawDG6eKLuIvYTcgYchQCRb20ndp99Hqf7ppv
- cTUwVjlvxx0O92mthL1FY9HGD/cPbmM4IaYqeyf5UsMHApex/YLbmQeeK9Xk1j+DgccC
- Fy2c7dHrznD1bY8knDMy+ezA0zIyUixF2oEjtT2NEOtqvgfdnsWr3+DlGq5gFDfo9bhM
- FUq1/KlLyy61qjcIdD8dkcz2GyJypS8N6012yJ70B6ZkfspccXyZUe+sHjTPFWSSIbpX
- lZOw==
-X-Gm-Message-State: AOJu0Yw5jx3VvRM3cL8KNccK1sK5loZZYnUIeZaMtKtNTTMd5+Ug20SN
- 0YU6YnOJcY0/0ChP7UvE9JiZp5IT9o81CiGIoeOQkjdIWslDrp1cfDRMhq/8+IM0oZlhOxHtP13
- Zif12hCldTy4QO5uRVCRyrzDIH7c=
-X-Gm-Gg: ASbGncsuLTiaVltHLSuezZbONqY9vJL5X0YFgvkovMFdb2a6DTNCXTztwTVK4bS0EFj
- yqH9yQZ/WG+9nKpNBwn+4V/3HTVQoKGSWUY5i4jci2BrbPEOqMZqDJyPC5G61Jf0kbq0r0oJahb
- 2IVYF/SNTLqM6AeHVEpClaV1b7TfU6SYp1kfyeJ93kXiwy+UCu5BPAws2Jfg==
-X-Google-Smtp-Source: AGHT+IGk10DYHxK9JAkqkrP6ih3jn0yYA6j8qkkCdRuBLz3BdnX16hagZu6DHYRltyZ1bncmBFWfnJ8/FyBY9k3IrCk=
-X-Received: by 2002:a05:6512:3c9f:b0:549:8fd0:bad8 with SMTP id
- 2adb3069b0e04-549c09eda21mr354335e87.21.1741895782495; Thu, 13 Mar 2025
- 12:56:22 -0700 (PDT)
+ bh=fA/buzX9YgKRpz6z7c+A6VJvDKMKYwV96ExLuotm0UM=;
+ b=ZOQk7GQQk0HIergwqzP5BLBPlXQLau9OEvay9zXMowrWr6XyXSAZl2lfZBFan4LL0v
+ VTKWYmmDpCY6ITP7pJv1p6nc5FIszgukWw22Qi5/97I4Xi7Vv0RjWLH0W3O6p7tPBtCj
+ p4DRUzB6EsS0z4xhSkoTbLlrVKKbmselhBYjg7jlqXuIZ2MN9NdHz30fQYABJGt3gq0F
+ /oCJIpw/prEfUZzJ6Ai62mus3GQCgmEENx01CGpOg/rR2IJN2ez+EGiYI6eAOKbkCb2v
+ vC+oNrhzD2Z9rbLdR46DKS+JAa90WLN7ZA9I1UO4TP7fkkTkrnXr6zIk2P5iXNOamfTI
+ WbLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWN69hExXV7sdbsRRDqsUmS3DrRuiExQZnUWAenEfR1LvY+CVkXhzGhEpUGozLBFt7co+aKgFI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGpLSn5kh7ZtSo6/H/G6c4u7ovWyzSXDc0NjtN08je3HiOgBP1
+ jIvXUZc7K23ZqBaLdqPeLZ7cbTGJpv/7WVhg9z7rT8gw6cC2J2UKAiVM9VPqAgpPUbDZPYAfApd
+ pWdL3dJ+l1yd3Rm8hnzUSmWtjoMo=
+X-Gm-Gg: ASbGncu+2qyboVTVtFVqYfGWRh4wqctMpJ3+htsGmSxbhY94DW7vsc+vxF0JC6KXy1q
+ HdQBxajM8YbLv7Lv9rwsoolx0w12J6qbFXzCz3G3Gvk7L65zlwnLjqnxqj143NcBW1mC2NVUFdC
+ Cpe9ATfTzTXqNjVHcUzfL2byYPWg1De3RizRWJRbAL1Go2AB3pa6pSDlDOAw==
+X-Google-Smtp-Source: AGHT+IGVai3N/VrKR02kxkykN0prVaiVLTTwyysZjxA6Zsx7cxTTYu/yxM8XeNa1DLfKWUxLNcZPyKPLS4ZL2j9DiZ8=
+X-Received: by 2002:a05:6512:2247:b0:545:2a9a:aa02 with SMTP id
+ 2adb3069b0e04-549ba41c627mr1664809e87.19.1741895838028; Thu, 13 Mar 2025
+ 12:57:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250227152942.3966518-1-trini@konsulko.com>
-In-Reply-To: <20250227152942.3966518-1-trini@konsulko.com>
+References: <20250304065740.2732356-1-alice.guo@oss.nxp.com>
+In-Reply-To: <20250304065740.2732356-1-alice.guo@oss.nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 13 Mar 2025 16:56:08 -0300
-X-Gm-Features: AQ5f1JoTvkDUyMXwexDmVlaYqPmQSYIuN4gqGmsfZm2sPYeLa4BKgUhIsFcwH8U
-Message-ID: <CAOMZO5Ax0C=AhuG6pfUq=MW1Ad6z3DNyu9fxvg5KAa+4S+k9gg@mail.gmail.com>
-Subject: Re: [PATCH] mmc: fsl_esdhc: Migrate ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE
- to Kconfig
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Fabio Estevam <festevam@denx.de>
+Date: Thu, 13 Mar 2025 16:57:06 -0300
+X-Gm-Features: AQ5f1JpYz4oiFfyQYksBIk4y0eLVCXGTUNjWINa8cICZM6VdyZpU6bV_oIY0AWU
+Message-ID: <CAOMZO5CiSmD4z+e2gR1Nem7nOAprZt60iqnzJMf_0WzS=qPKsQ@mail.gmail.com>
+Subject: Re: [PATCH v2] mailbox: add i.MX Messaging Unit (MU) driver
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: trini@konsulko.com, sbabic@denx.de, uboot-imx@nxp.com, lukma@denx.de, 
+ seanga2@gmail.com, sjg@chromium.org, alpernebiyasak@gmail.com, marex@denx.de, 
+ u-boot@lists.denx.de, peng.fan@nxp.com, viorel.suman@nxp.com, ye.li@nxp.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,13 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 27, 2025 at 12:47=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
+On Tue, Mar 4, 2025 at 3:58=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
+om> wrote:
 >
-> The flag for enabling the ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE quirk can be
-> handled easily enough in Kconfig. This lets us remove a function but not
-> obviously correct usage of the IS_ENABLED() macro.
+> From: Peng Fan <peng.fan@nxp.com>
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> This patch provides a driver for i.MX Messaging Unit (MU) using the
+> commom mailbox framework.
+>
+> This is ported from Linux (v6.12.8) driver
+> drivers/mailbox/imx-mailbox.c. Its commit SHA is:
+> 39d7d6177f0c ("mailbox: imx: use device name in interrupt name")
+>
+> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Ye Li <ye.li@nxp.com>
 
 Applied to u-boot-imx/next, thanks.
