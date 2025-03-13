@@ -4,91 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC04AC282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 13:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E33CCC282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 14:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F1BC80F9C;
-	Thu, 13 Mar 2025 14:23:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0DD3A80F9C;
+	Thu, 13 Mar 2025 15:52:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S89lxRS5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qgnxrf7P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0134880FF7; Thu, 13 Mar 2025 14:23:39 +0100 (CET)
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [IPv6:2a00:1450:4864:20::642])
+ id DA78580FF7; Thu, 13 Mar 2025 15:51:59 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79CF480540
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 14:23:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5157B80540
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:51:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x642.google.com with SMTP id
- a640c23a62f3a-ac298c8fa50so184393766b.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 06:23:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-476775df2f0so20850971cf.1
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 07:51:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741872214; x=1742477014; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Gc43YnuTDQDHmjbmF3BmtVPdMvJqqCs0Ct/Y0yQtwSc=;
- b=S89lxRS5hNl8Fl7xfpm4SynDdFlz9k+pOCFbjEQrJHHo04tmNnARhyMUFYavP9Vmc5
- peRbucBa4xwgLO6R8NMLg3XZwuy1QUwmLSPVZk+BOediltj5qoEw6qaZ/U1iz8R+Q5/9
- /0QMn1q/QLhUD7viivxUs7WP5azkUB6/2N6IVJkq4JOEpe4FGbPt7LK5Y5JvSP/yesNm
- z9iVkVLKf9fN6LZMwBWo9cQtNY3tfVrCtKEBizl3MMODNnKWhse5wFC5Omadrv9Q08lr
- a4QO28vr3dl8NCD+OsHig92iZCbJEklZq7iYO7eQrQ0N/IbPdMRmNN04pb+FmyZP1ikM
- dL4g==
+ d=konsulko.com; s=google; t=1741877515; x=1742482315; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HY7Rmur+GyI90XqhiiF66E1b2K/FSWhwZFQGnH9EaxI=;
+ b=qgnxrf7P36fIrYyRvDJ0LD8uiwhufWnPukuSTHcFCAca6AtZiQqEhGPDDBwluzDnae
+ e0kak6VAlNE51qYf8X8OPpXHAye98ADVIhYya3eWwKMpiIxuwKahs84xTMjTzKMVrvnM
+ 0YZWDF6VZ08Ddh563ZZ5TwnMenIfMLm6rTPLA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741872214; x=1742477014;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Gc43YnuTDQDHmjbmF3BmtVPdMvJqqCs0Ct/Y0yQtwSc=;
- b=ma+yWxMDYZ1Gks+U4g8s4WOa2d7jThfMncDDFueXcSSAmFg5D/9AKuLLWBpE1g9nP5
- NGD/+5ogIh5KmiBZI3OEi+TxexrO9PgOvBcMfUl25bA+Eccmo+2liIXZInmWSkCdW2Ar
- RynaahTfpXGkTxGVqNc15bR8zDK86cnYyko0Wj1Yz5JNzAm57HBscdlr9KOtRdRe2xy1
- pJgeh7QldcT7H4haEgLgU2pNObulJnGZeRQRR5KKOLv9Mf31P4fh1Fu2i42zDL0roLdU
- jMy0eszcxu65w2Zm+xeDCNQIBaNg3fr4Xm7ay9GZCOEqC7dJsX1Ce3zt2fSK/aIDmVta
- bsYQ==
-X-Gm-Message-State: AOJu0YzNmi5qb6/GQR41AstVTZikTfUondEVP3lAJkYIP99TAiy261yC
- cS9t5+vyoN14QM2yy9WU1YL5l71WEO5BDsSwbt/psr0nNHqXrYAfjpvTkLJloW8=
-X-Gm-Gg: ASbGncsCpzZyBXLgA4ErXlqARozIKjs+Y6bBKEq5fR2E310K93BnH8SJeyqeSUiK9pp
- 9layxdWCj4OQdkNvZky68R8OewkpBsY5nNRkso6jnaRFqLgQjUP6h67P/RrrEwRnjIqZuUxjqbf
- ele5kRIyVRVsu2AXUBtQPGy14uDaca1I6FeWHqBJDt62AqaSaRyUJXAYEl9KTrDnfDygT/vEJmf
- 3+zJSBVU5iA3AnhUgI97oKkEMCpIbp4wyfJeuuNxFttGhhJN0iX1i+2jgy1PDgGjHrsPChjLQHf
- sIr86mwaIyg3eT440RYcgriz3w9QPj8S10pZ6gsVRLSNWhBuIij1QxZJ5MTOkuxFWG8SK0RAvET
- gQRFnySVtFBjmwBkqf+tVArjm
-X-Google-Smtp-Source: AGHT+IGDlkulo9ns1o7OqmJjBU8+F2RY6eXyL2n95oBqiBFmP56DZPxcKol3ZqaXGs9kSGMTU8vLrA==
-X-Received: by 2002:a17:907:1998:b0:ac2:a473:416c with SMTP id
- a640c23a62f3a-ac2a4734de1mr1043381366b.47.1741872213712; 
- Thu, 13 Mar 2025 06:23:33 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:73ef:8d9b:afeb:6d8e?
- ([2a01:e0a:3cb:7bb0:73ef:8d9b:afeb:6d8e])
+ d=1e100.net; s=20230601; t=1741877515; x=1742482315;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HY7Rmur+GyI90XqhiiF66E1b2K/FSWhwZFQGnH9EaxI=;
+ b=i6mxG25RpC9227InHiDzbkgDpdTT5tK7tG3q0AZb65twQPJtPCT2WYNT17fGp5jajH
+ oKo65bqgeUmOi9os5LWiuA3Ca4cc4BWgXuSMGRroPukvsjzDQxIfsZbIAQPb4TkYjcjo
+ Q91X3zON0FkZcUoFbj4dZqYF5CGWyQ+6OsCMnlNdFH+pQK8LsdtV3Adc4pEUkBVDUeTN
+ ivMoYkckokoIFFOayxwJIehrmpgScoLKODaZXeJylC40q4K6rKC0VANCQ4Rd+qHmYNAs
+ vBASwyZ71TIli/Fd1j64BQEQsJgyNAncIifllybINdt2oFEx088Tt+hviQQvkQsBXUD6
+ uYIQ==
+X-Gm-Message-State: AOJu0Yws29wrIIZ6NhDZaEy/hYEGRL0MPx3xh25ZwEIfEQYo6CJpMQ7g
+ lqSIJK1t7kUFNm4FWwfZ9sLIWJbQqlrQ7L38DnC6NkQ/d3pHtByg363YDqCPYSU=
+X-Gm-Gg: ASbGnctxQOxkzzf3tg/c1pgJWR/WeI5T7HSB2G//Us4adpe/B59rlei3tu75w6ej4GI
+ 527wJ4cLYvVr7UdCw4Hng+9plzCtMkJDJibjDcfrbzELslRZqB6TyeCX+tlanwMb4RXXh0WGqJA
+ UZdmbbEvJq2G3MOSvtzoaR7plMWq86rhc8+o3PY3TAWvbuu4JYvGmoCEfY0MyETo0v5jlH2suvl
+ OMX5gXfRPTjJzCg1tjSpkW5TLipRxBqwIuXj+0t/217ucx8z3wSiE4QhQp2zS+JCYM5CBPpSuSE
+ A+vwMlmVRXrkfwo0Iu2vPkjGKGmPzKeTYFkbYBVMJZtO3w==
+X-Google-Smtp-Source: AGHT+IG3Q0QUyPpUHf+lhB3rHFf7mSGuVccoF9TYNcQkttvdu48EVKWKg1Ix0v2LjPXm6OVIPxogBA==
+X-Received: by 2002:a05:622a:1895:b0:471:825d:aa52 with SMTP id
+ d75a77b69052e-476ba94762bmr42625341cf.20.1741877515465; 
+ Thu, 13 Mar 2025 07:51:55 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac31485bd4dsm80342666b.81.2025.03.13.06.23.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Mar 2025 06:23:33 -0700 (PDT)
-Message-ID: <661ee5c6-6b8e-4c6a-9c7c-9e0087d96c45@linaro.org>
-Date: Thu, 13 Mar 2025 14:23:32 +0100
+ d75a77b69052e-476bb6735d0sm10155531cf.44.2025.03.13.07.51.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Mar 2025 07:51:54 -0700 (PDT)
+Date: Thu, 13 Mar 2025 08:51:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com
+Subject: Re: [PATCH v4] spl: remove usage of CMD_BOOT[IZ] from image parsing
+Message-ID: <20250313145152.GZ2640854@bill-the-cat>
+References: <20250313032842.1189977-1-anshuld@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] net: lwip: root certificates
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <cover.1740672437.git.jerome.forissier@linaro.org>
- <CAFLszTiB8FBdOTYE+dn6ZTifZsdO0LU2jXKJZSRkPeKzf7ujPQ@mail.gmail.com>
- <7432dd9e-72e3-4072-88a7-18b58da746b3@linaro.org>
- <CAFLszTiPgVLYKYsLgcZJUCJ=tAAfTD_4v_aejks-4YRy=k-XeA@mail.gmail.com>
- <37799f19-3b7e-47c7-8f79-c010fc9dbe5a@linaro.org>
- <CAFLszTi7536co5PeXNbsA=Dw628gdYiP1F1hf0T9wPs-G4gT0g@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszTi7536co5PeXNbsA=Dw628gdYiP1F1hf0T9wPs-G4gT0g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6mhzNDd3zurTsaEn"
+Content-Disposition: inline
+In-Reply-To: <20250313032842.1189977-1-anshuld@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,132 +95,73 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--6mhzNDd3zurTsaEn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 3/13/25 13:51, Simon Glass wrote:
-> Hi Jerome,
-> 
-> On Fri, 7 Mar 2025 at 10:49, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> Hi Simon,
->>
->> On 3/4/25 16:46, Simon Glass wrote:
->>> Hi Jerome,
->>>
->>> On Thu, 27 Feb 2025 at 09:43, Jerome Forissier
->>> <jerome.forissier@linaro.org> wrote:
->>>>
->>>>
->>>>
->>>> On 2/27/25 17:27, Simon Glass wrote:
->>>>> Hi Jerome,
->>>>>
->>>>> On Thu, 27 Feb 2025 at 09:09, Jerome Forissier
->>>>> <jerome.forissier@linaro.org> wrote:
->>>>>>
->>>>>> This series adds support for HTTP server authentication using root (CA)
->>>>>> certificates.
->>>>>>
->>>>>> As a first step, the wget command is extended to support a sub-command:
->>>>>> cacert <addr> <size>. The memory region shall contain the CA
->>>>>> certificates. With this, it is possible to load the certificates from
->>>>>> storage or get them from the network for example, which is convenient
->>>>>> for testing at least. The Kconfig symbol for this feature is
->>>>>> WGET_CACERT=y.
->>>>>>
->>>>>> Then new Kconfig symbols are added to support providing the certificates
->>>>>> at build time, as a DER or PEM encoded X509 collection:
->>>>>> WGET_BUILTIN_CACERT=y and WGET_BUILTIN_CACERT_PATH=<some path>.
->>>>>> Note that PEM support requires MBEDTLS_LIB_X509_PEM=y (for the cacert
->>>>>> command as well as for the builtin way).
->>>>>>
->>>>>> Here is a complete example (showing only the relevant output from the
->>>>>> various commands):
->>>>>>
->>>>>>  make qemu_arm64_lwip_defconfig
->>>>>>  wget https://curl.se/ca/cacert.pem
->>>>>>  echo CONFIG_WGET_BUILTIN_CACERT=y >>.config
->>>>>>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=cacert.pem >>.config
->>>>>>  make olddefconfig
->>>>>>  make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
->>>>>>  qemu-system-aarch64 -M virt -nographic -cpu max \
->>>>>>         -object rng-random,id=rng0,filename=/dev/urandom \
->>>>>>         -device virtio-rng-pci,rng=rng0 -bios u-boot.bin
->>>>>>  => dhcp
->>>>>>  # HTTPS transfer using the builtin CA certificates
->>>>>>  => wget https://www.google.com/
->>>>>>  18724 bytes transferred in 15 ms (1.2 MiB/s)
->>>>>>  # Disable certificate validation
->>>>>>  => wget cacert 0 0
->>>>>>  # Unsafe HTTPS transfer
->>>>>>  => wget https://www.google.com/
->>>>>>  WARNING: no CA certificates, HTTPS connections not authenticated
->>>>>>  16570 bytes transferred in 15 ms (1.1 MiB/s)
->>>>>>  # Dowload and apply CA certificates from the net
->>>>>>  => wget https://curl.se/ca/cacert.pem
->>>>>>  WARNING: no CA certificates, HTTPS connections not authenticated
->>>>>>  ##
->>>>>>  233263 bytes transferred in 61 ms (3.6 MiB/s)
->>>>>>  => wget cacert $fileaddr $filesize
->>>>>>  # Now HTTPS is authenticated against the new CA
->>>>>>  => wget https://www.google.com/
->>>>>>  18743 bytes transferred in 14 ms (1.3 MiB/s)
->>>>>>  # Drop the certificates again...
->>>>>>  => wget cacert 0 0
->>>>>>  # Check that transfer is not secure
->>>>>>  => wget https://www.google.com/
->>>>>>  WARNING: no CA certificates, HTTPS connections not authenticated
->>>>>>  # Restore the builtin CA
->>>>>>  => wget cacert builtin
->>>>>>  # No more WARNING
->>>>>>  => wget https://www.google.com/
->>>>>>  18738 bytes transferred in 15 ms (1.2 MiB/s)
->>>>>>
->>>>>> Jerome Forissier (5):
->>>>>>   net: lwip: extend wget to support CA (root) certificates
->>>>>>   lwip: tls: enforce checking of server certificates based on CA
->>>>>>     availability
->>>>>>   lwip: tls: warn when no CA exists amd log certificate validation
->>>>>>     errors
->>>>>>   net: lwip: add support for built-in root certificates
->>>>>>   configs: qemu_arm64_lwip_defconfig: enable WGET_CACERT and
->>>>>>     MBEDTLS_LIB_X509_PEM
->>>>>>
->>>>>>  cmd/Kconfig                                   | 29 ++++++
->>>>>>  cmd/net-lwip.c                                | 19 +++-
->>>>>>  configs/qemu_arm64_lwip_defconfig             |  2 +
->>>>>>  .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |  9 +-
->>>>>>  .../lwip/apps/altcp_tls_mbedtls_opts.h        |  6 --
->>>>>>  lib/mbedtls/Makefile                          |  3 +
->>>>>>  lib/mbedtls/mbedtls_def_config.h              |  5 ++
->>>>>>  net/lwip/Makefile                             |  6 ++
->>>>>>  net/lwip/wget.c                               | 90 ++++++++++++++++++-
->>>>>>  9 files changed, 158 insertions(+), 11 deletions(-)
->>>>>
->>>>> Did you manage to add some sandbox tests for lwip?
->>>>
->>>> Unfortunately not. I am testing mostly with QEMU (qemu_arm64_lwip_defconfig)
->>>> and sometimes with KV260 and i.MX93.
->>>
->>> My understanding was that someone was working on it [1] and I had
->>> assumed it was you?
->>
->> Yes, it is on my TODO list. Higher priority things have kept coming in, but
->> hopefully I can resume this work soon.
-> 
-> Until the tests are added, please stop sending new series for lwip. It
-> is just going to make it harder to add the tests later.
+On Thu, Mar 13, 2025 at 08:58:42AM +0530, Anshul Dalal wrote:
 
-I don't see how exactly it would make things harder, but...
+> Using CMD_* configs from spl doesn't make logical sense. Therefore this
+> patch replaces the checks for CMD_BOOT[IZ] with newly added configs
+> SPL_HAS_BOOT[IZ].
+>=20
+> An imply clause has been added for CMD_BOOTZ to avoid breaking configs
+> that rely on CMD_BOOTZ in falcon boot. There is no such need for
+> CMD_BOOTI since it's already enabled by default for the platforms that
+> support the image format.
+>=20
+> More info:
+> https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
+[snip]
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index a04fcaa0e08..9f2ba4d02f8 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -352,6 +352,7 @@ config BOOTM_ELF
+> =20
+>  config CMD_BOOTZ
+>  	bool "bootz"
+> +	imply SPL_HAS_BOOTZ
+>  	help
+>  	  Boot the Linux zImage
+> =20
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 21a5cefee7a..49eb513f923 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1153,6 +1153,19 @@ config SPL_OS_BOOT
+>  	  Enable booting directly to an OS from SPL.
+>  	  for more info read doc/README.falcon
+> =20
+> +config SPL_HAS_BOOTZ
+> +	bool "Allow booting a zImage style Linux kernel from SPL"
+> +	depends on SPL_OS_BOOT
+> +	help
+> +	  Boot a linux zimage from memory in falcon boot.
 
-> It should not
-> take long to add a basic test, e.g. for ping.
+I was going to say this to v3 but you posted v4 already. The solution to
+existing platforms is "default y if ARM && !ARM64" here.
 
-...I'm on it.
+--=20
+Tom
 
-> Regards,
-> Simon
+--6mhzNDd3zurTsaEn
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks,
--- 
-Jerome
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfS8PwACgkQFHw5/5Y0
+tyxE3gv+KBWT5poZ0c7lcpN/FzgBTF+2lcA8Ctld953KF63yDVCTI9zchtqVDILs
+MrbY6RE+/mV2jDS5rE/hGNSBOUj9/UlT4Lv2zvPNqlBinZPmdiD9l5vqEWNFVIq6
+MBMPxkMzH0Re6ZArQaBAK/b/GLes0l9Br08Hg/fe5pJAbl1/kfx6FHOe74yWneUJ
+HhGrjm/L98cLT60WH4gRBhbst/Kwuif6xXVXQ3oG5MHlc/RMNd0vWLbjbyFrDrYj
+FhxDp+qArlKTsP9Py7RtMydX9BKZGsFETHTa+gJPlW5pagoL4Mgtd/TdHm72xpLc
+ufkgZ6gWClBuM9rm9jvm8awI0KdsYTpqDXhbmKE3ylt2dlT5vM4Rfi/8vKqArZwM
+p5/dfBKLGajSqvPqeh/qiP7CVp3OuwQE8jkImPhR5oSrsyld+Pxh/xLEzXqB40BB
+qHQLt9fbltSNt/BfBVo6pbZWuEqUqzBx0qPWA5mOksSaE4y7h2/4qKAK+3L/5NqZ
+VZMYfiui
+=jpGn
+-----END PGP SIGNATURE-----
+
+--6mhzNDd3zurTsaEn--
