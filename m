@@ -4,136 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65AFFC282EC
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 12:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB7C9C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 12:51:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACC8680F9C;
-	Thu, 13 Mar 2025 13:29:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 492B380FF7;
+	Thu, 13 Mar 2025 13:51:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="p5+LrYWY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FM0GAX9h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AAA38168B; Thu, 13 Mar 2025 13:29:06 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::61d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E291F80540; Thu, 13 Mar 2025 13:51:55 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5751A8007D
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 13:29:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8DF780540
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 13:51:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XURw4Ve+lTiY8s22AIEGeSkznTbMeY4uI4eVtzlUMhbHz79U8Ltu9ZFvRgU1cy6baQ9tPmmf/mjmSbfWekPE2jljO++OTjy7hjLRhFU4TVbIwbhgBGAtlXq/6QDZ8XhA0qdEfykufBAWqb7divOa9/GqKoza5RjgsdHOHt0sEBNsPJ2iQH/Yqe2FclCpFyOL7HSPNUws8A78LlP49FzCcShZRczBmwTBUOcC4prT+6RWfvuyn+YnQHMj6eZf77lsZFNqlD2MVN/FFNHdspn1+P/OFnSAF1MWHzYrt+qp2sv12LJyivxNceCe4eS9f+d8gYdN9vMD+8Tp2L2K2B8dgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SjoNhr9eHF5bORlxqKo8jcpTN6A7m0dJybS71GDnhhQ=;
- b=PymfN3+GlP2/N+vAwq7ZHfmuodA74g3kkZOAeB/VXuiGZE7aue0mWQFzCBFXKv+glgbuyr6Ptkp1iq26qW9XuoeyDJt+eHSpMNbushTnmYaVjXStnH4k7IknIJLC9cp2IJpJOHziq6SLx6M+YNKL+BXVctst4pwQMRISzSy5tCvo16EOCTCC8D38GMU79AB/spRpMJm4FOpTN0vTN+YVn5VsTgJSRpzNumCiB27NHCiUDfomuIRknFDUet8Ei+VnuLiLfw9/yT6W2F7iChif6nvLD4SOV5Pv5EF0oxkljCBYb+mTC7SdrktKrSiTWXqpUy1Ysfe5I4VLtpVnuS75HA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SjoNhr9eHF5bORlxqKo8jcpTN6A7m0dJybS71GDnhhQ=;
- b=p5+LrYWYTXXmq/IiQ4HeLHQqz5hOL/ltZFmtuPLGpPsp8nvqfFBYtJZQAoMlHQRTto+dunOiHdCIJZyQWdFmWguYce5wpg6ek2wTnduem+DaMm+BA6kGDN8mrwyFlKyfjqdazRfT5oSDLG3f4+gmWJos1ptkkhArG3Bfj01Qfek=
-Received: from BN9P220CA0002.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:13e::7)
- by MW4PR12MB7165.namprd12.prod.outlook.com (2603:10b6:303:21b::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.28; Thu, 13 Mar
- 2025 12:28:56 +0000
-Received: from BL6PEPF00022575.namprd02.prod.outlook.com
- (2603:10b6:408:13e:cafe::16) by BN9P220CA0002.outlook.office365.com
- (2603:10b6:408:13e::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.25 via Frontend Transport; Thu,
- 13 Mar 2025 12:28:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL6PEPF00022575.mail.protection.outlook.com (10.167.249.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Thu, 13 Mar 2025 12:28:55 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 13 Mar
- 2025 07:28:52 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: versal2: Disable debug console
-Date: Thu, 13 Mar 2025 13:28:48 +0100
-Message-ID: <aa122482cf5b32ded4497469cac1829c6944f0fa.1741868926.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ac2a089fbbdso181573066b.1
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 05:51:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1741870312; x=1742475112; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=kSch8TZXX7ctGXrD74BSeEtfj7gTKiwVWkX8TwSzT3I=;
+ b=FM0GAX9hxLiQVyN+uA4/WoS7rGninlAdHL8ypSkxh0VrLssPv1h1a46XtDQiV62K6R
+ FgeDWKl7hDOdxuGKN+zmdxsHkJzs5UoyOT//fPQ5/kKCztok46KhnMIeyxXNqiJ9qQ0l
+ Z3m6csD/NlxAR6nCU6RkfA0vlB7skR5z2sz4U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741870312; x=1742475112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kSch8TZXX7ctGXrD74BSeEtfj7gTKiwVWkX8TwSzT3I=;
+ b=b9IxoKFRj9DfMwTrWRAGUFldGC2yky/rfGSP7GdBKwL18Ugts7DkA9te51VFWH6wOr
+ cL2oPgJPBlMVAzsc8Llo/1yCk/y/dK9FaWj7wE5dPJJDzFSsKp+RtTZjPpERAs8tS09B
+ FFqmeOLOZN3hv7pN7gU0enOFZjrouXj3fxqqzjfpiFn4M0RukyGR40d7OrCip5uOM+uo
+ 7CgODgpFpHsj+ltKHVj7KqK35nU6Zydc66rGMi7I4sn4qWIfuvTRto1795ID8FyC7vMR
+ Ep3nX4NKgdS6pHudZM36VKY5BIkp9F45COWIdNc/suRsTZ7lT5YFnQ3kYUXMAIonc0gk
+ Eo+A==
+X-Gm-Message-State: AOJu0YyI+j2LKguxOI/3dKq2GuAbdyx/CBsnQ+25NXXkP+ptY9wOADXh
+ ita/2YPVoskJ3NnVPDVIOXphA3vfjmAgdvxFI5MMRiP1Ihh8pCiL/xVsO+PNUWQU70o9DzsTam3
+ sSG2sTv23BLjvRXudHTMzhfWJ0DBhZa5un6RjxSFDWqvX8ZU=
+X-Gm-Gg: ASbGncsPEUTgMxNsy7YiGD/ns77xIy5G/dq++0XKO6gFi662TOZ/EUcsJpADwbwluLA
+ XQB3+MlhJcRJJ9gV5KSc3/YIVjueOgYBXgdsZH4gF3f1QutYYTewhooOJPqXR1fpp8tq7OnEJqr
+ oXL+TuD3KRJ3JxB/22hi/kG2m66PEK
+X-Google-Smtp-Source: AGHT+IEgpJUZfZzvup44k5PCYY3FlJDuO9Aj6x6bSsXl9Lxiw2+c59KwCUQlyqRrV8Um1qZ9SJ3xv2zL6bhVTbasRFA=
+X-Received: by 2002:a17:907:9692:b0:ac1:f247:69f5 with SMTP id
+ a640c23a62f3a-ac312420fdemr255007966b.28.1741870312195; Thu, 13 Mar 2025
+ 05:51:52 -0700 (PDT)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1122; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=L4qc64GRyrYN5cmSMfII9/uDESw7cwlbx7kT0g+bbYw=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvRL5xuf/L+zp6Y1ifuNdaWIXJWpx8kdRSwbch2vcjbeX
- Wz+e2JORywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZjIzvsMcyUFG+N2uq/9K6Dv
- c/fxnvwQLe0ligxzRSdknLGwz31bfUJ367fIsLvWab4aAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00022575:EE_|MW4PR12MB7165:EE_
-X-MS-Office365-Filtering-Correlation-Id: 60e00189-42c1-4cd2-a95d-08dd622a9f0f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FM8MeuYhCcLn9DFMFnltcpIApG0CJeb2WJAsRRlBdmlLWddQIOuOQaWNVUsM?=
- =?us-ascii?Q?aairdU0LCL0CRHZav00bLhzZyeCP7+au/ZFX1vCbRkdU39/1cAsnsElGqRvN?=
- =?us-ascii?Q?+Hcw8Cm61zXeIrMx42XyXYSgWtzNYVtXZYpSuspH5oZAF+TfEjxF25kjEnY8?=
- =?us-ascii?Q?y1qu/J8G2JerUDdIbTfvwGLRfvIFKrXmzNgcAiKkVVZYjrI1L4wfQeMA8qNP?=
- =?us-ascii?Q?A/RkOtB90eIItO1+KKGiTFbttwCo4R+ovB5097gBM9rx66lYyqM56XunlCfe?=
- =?us-ascii?Q?soMpoqMD2eLtHD6rgRwGhyUxBejJgrHo/+ZT7AqZvNifqG4Kz8mlLFIkJCTN?=
- =?us-ascii?Q?XV+u6+Gla4Q9tEqjCnrpV/5el3n1qRiAzTtF1TL01KCXTRGXuJ7pY991wbF1?=
- =?us-ascii?Q?Ip8o+9dmrdasG8E6Tcsww+nWoJvr1XztYlHPVSFhjkpT0PMyeKqCo9+fgimh?=
- =?us-ascii?Q?kPna9vI8eKn/bxXniZRJzwuY/53vW3zEYEvyR0DxcgTqW6YQAJZ6IECZeXps?=
- =?us-ascii?Q?X4c1QR7k6SoFHnEvn1e0p+yGuVFy6/ZNNOVVIaDcUF0id512ODtwFV8gy/BB?=
- =?us-ascii?Q?e9+ONJnbzbhfOaQWzeaOemgTq115xn6qUH/1olewsrA4gxlfKQweyS7BAx03?=
- =?us-ascii?Q?iTGLVVU9NM1JYoGqlNC4PwidyEkCH/tG10+IT7rscORZISVrN77VIaJfQOoE?=
- =?us-ascii?Q?6wOZJ77NRleUAFgmWal8ukGEdKye3S7gdXsi3jTgs3uNodGWQjmqlT6ILO+s?=
- =?us-ascii?Q?BdH8z2ejH9AalkAf8YpwgD/4DwB47MYbCbvdDfj6NVBcvZaQh8clTDPhiL+1?=
- =?us-ascii?Q?CegB+AEPIyO2j3UI6mb7aWzFCdqjmK9yX9RXQALJw4+gEUODS9ECvYyFbWO5?=
- =?us-ascii?Q?UwlmLL1qtqSRCV+Na+4hTfOqg2JbQ7d2L5PaVIPuvp+LeOWGuI+oILNaxIFC?=
- =?us-ascii?Q?qQKwEXqT5UjXGDfytHERlha+iNomlgV1N+MZ2dB6rRvupHWyLy6NZuP8mWQS?=
- =?us-ascii?Q?FwxWdTpEYBPnz//tvKRmPUjejkIjOSFlc0GL57VJDYgojrNFeFAA+JUmElRw?=
- =?us-ascii?Q?MPxPGGDWEds0DNrhVMwkGhVJhAdBWl4brM5hePCVLNrC3CCQ4F9ti8/xKGpG?=
- =?us-ascii?Q?XALdvrfWYGEQlD3Kv9RJRdGJbeLc0UM4Rma7zBVZ5ezY4nuUwvFKkqv/UxAF?=
- =?us-ascii?Q?zx4Jfz35aiVJCRzTkPk+l4y+vyO8H1+ZZhqcVKxm0I46wGrDDe35fphKXm6E?=
- =?us-ascii?Q?Zzv6JKJdjCvsCjav3bUDvb2qRMlVtGjAaDxUtbt78iTUpll4gxHUhZxKPFfa?=
- =?us-ascii?Q?/DNey+EwTIvPIAa86vZtHHcoGriV789lZKK8A7T7YLnWc6JE/Q0PNExs0W4o?=
- =?us-ascii?Q?lQzZTR9aq9gq34rGO2dQigCmxkRj2LkzOoefR/lHZmnJSmaPkStvzfSFrR2c?=
- =?us-ascii?Q?9lFCEk955VJa1gkLOzUEO/Sx4L8U4/HVokqSLt7COWeLTcyVmh3MZA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2025 12:28:55.2918 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60e00189-42c1-4cd2-a95d-08dd622a9f0f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00022575.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7165
+References: <cover.1740672437.git.jerome.forissier@linaro.org>
+ <CAFLszTiB8FBdOTYE+dn6ZTifZsdO0LU2jXKJZSRkPeKzf7ujPQ@mail.gmail.com>
+ <7432dd9e-72e3-4072-88a7-18b58da746b3@linaro.org>
+ <CAFLszTiPgVLYKYsLgcZJUCJ=tAAfTD_4v_aejks-4YRy=k-XeA@mail.gmail.com>
+ <37799f19-3b7e-47c7-8f79-c010fc9dbe5a@linaro.org>
+In-Reply-To: <37799f19-3b7e-47c7-8f79-c010fc9dbe5a@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 13 Mar 2025 12:51:39 +0000
+X-Gm-Features: AQ5f1JrCQYwEvoaJDtepYnWy0Wnfh49of69xq_lUq3SP8lJO5Syt7ZRnYI09NE0
+Message-ID: <CAFLszTi7536co5PeXNbsA=Dw628gdYiP1F1hf0T9wPs-G4gT0g@mail.gmail.com>
+Subject: Re: [PATCH 0/5] net: lwip: root certificates
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,40 +89,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Platforms can use uart0, uart1, dcc or even any other console that's why
-disable debug console. It should be used for debugging purpose only.
+Hi Jerome,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+On Fri, 7 Mar 2025 at 10:49, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On 3/4/25 16:46, Simon Glass wrote:
+> > Hi Jerome,
+> >
+> > On Thu, 27 Feb 2025 at 09:43, Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >>
+> >>
+> >> On 2/27/25 17:27, Simon Glass wrote:
+> >>> Hi Jerome,
+> >>>
+> >>> On Thu, 27 Feb 2025 at 09:09, Jerome Forissier
+> >>> <jerome.forissier@linaro.org> wrote:
+> >>>>
+> >>>> This series adds support for HTTP server authentication using root (CA)
+> >>>> certificates.
+> >>>>
+> >>>> As a first step, the wget command is extended to support a sub-command:
+> >>>> cacert <addr> <size>. The memory region shall contain the CA
+> >>>> certificates. With this, it is possible to load the certificates from
+> >>>> storage or get them from the network for example, which is convenient
+> >>>> for testing at least. The Kconfig symbol for this feature is
+> >>>> WGET_CACERT=y.
+> >>>>
+> >>>> Then new Kconfig symbols are added to support providing the certificates
+> >>>> at build time, as a DER or PEM encoded X509 collection:
+> >>>> WGET_BUILTIN_CACERT=y and WGET_BUILTIN_CACERT_PATH=<some path>.
+> >>>> Note that PEM support requires MBEDTLS_LIB_X509_PEM=y (for the cacert
+> >>>> command as well as for the builtin way).
+> >>>>
+> >>>> Here is a complete example (showing only the relevant output from the
+> >>>> various commands):
+> >>>>
+> >>>>  make qemu_arm64_lwip_defconfig
+> >>>>  wget https://curl.se/ca/cacert.pem
+> >>>>  echo CONFIG_WGET_BUILTIN_CACERT=y >>.config
+> >>>>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=cacert.pem >>.config
+> >>>>  make olddefconfig
+> >>>>  make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
+> >>>>  qemu-system-aarch64 -M virt -nographic -cpu max \
+> >>>>         -object rng-random,id=rng0,filename=/dev/urandom \
+> >>>>         -device virtio-rng-pci,rng=rng0 -bios u-boot.bin
+> >>>>  => dhcp
+> >>>>  # HTTPS transfer using the builtin CA certificates
+> >>>>  => wget https://www.google.com/
+> >>>>  18724 bytes transferred in 15 ms (1.2 MiB/s)
+> >>>>  # Disable certificate validation
+> >>>>  => wget cacert 0 0
+> >>>>  # Unsafe HTTPS transfer
+> >>>>  => wget https://www.google.com/
+> >>>>  WARNING: no CA certificates, HTTPS connections not authenticated
+> >>>>  16570 bytes transferred in 15 ms (1.1 MiB/s)
+> >>>>  # Dowload and apply CA certificates from the net
+> >>>>  => wget https://curl.se/ca/cacert.pem
+> >>>>  WARNING: no CA certificates, HTTPS connections not authenticated
+> >>>>  ##
+> >>>>  233263 bytes transferred in 61 ms (3.6 MiB/s)
+> >>>>  => wget cacert $fileaddr $filesize
+> >>>>  # Now HTTPS is authenticated against the new CA
+> >>>>  => wget https://www.google.com/
+> >>>>  18743 bytes transferred in 14 ms (1.3 MiB/s)
+> >>>>  # Drop the certificates again...
+> >>>>  => wget cacert 0 0
+> >>>>  # Check that transfer is not secure
+> >>>>  => wget https://www.google.com/
+> >>>>  WARNING: no CA certificates, HTTPS connections not authenticated
+> >>>>  # Restore the builtin CA
+> >>>>  => wget cacert builtin
+> >>>>  # No more WARNING
+> >>>>  => wget https://www.google.com/
+> >>>>  18738 bytes transferred in 15 ms (1.2 MiB/s)
+> >>>>
+> >>>> Jerome Forissier (5):
+> >>>>   net: lwip: extend wget to support CA (root) certificates
+> >>>>   lwip: tls: enforce checking of server certificates based on CA
+> >>>>     availability
+> >>>>   lwip: tls: warn when no CA exists amd log certificate validation
+> >>>>     errors
+> >>>>   net: lwip: add support for built-in root certificates
+> >>>>   configs: qemu_arm64_lwip_defconfig: enable WGET_CACERT and
+> >>>>     MBEDTLS_LIB_X509_PEM
+> >>>>
+> >>>>  cmd/Kconfig                                   | 29 ++++++
+> >>>>  cmd/net-lwip.c                                | 19 +++-
+> >>>>  configs/qemu_arm64_lwip_defconfig             |  2 +
+> >>>>  .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |  9 +-
+> >>>>  .../lwip/apps/altcp_tls_mbedtls_opts.h        |  6 --
+> >>>>  lib/mbedtls/Makefile                          |  3 +
+> >>>>  lib/mbedtls/mbedtls_def_config.h              |  5 ++
+> >>>>  net/lwip/Makefile                             |  6 ++
+> >>>>  net/lwip/wget.c                               | 90 ++++++++++++++++++-
+> >>>>  9 files changed, 158 insertions(+), 11 deletions(-)
+> >>>
+> >>> Did you manage to add some sandbox tests for lwip?
+> >>
+> >> Unfortunately not. I am testing mostly with QEMU (qemu_arm64_lwip_defconfig)
+> >> and sometimes with KV260 and i.MX93.
+> >
+> > My understanding was that someone was working on it [1] and I had
+> > assumed it was you?
+>
+> Yes, it is on my TODO list. Higher priority things have kept coming in, but
+> hopefully I can resume this work soon.
 
- configs/amd_versal2_virt_defconfig | 6 ------
- 1 file changed, 6 deletions(-)
+Until the tests are added, please stop sending new series for lwip. It
+is just going to make it harder to add the tests later. It should not
+take long to add a basic test, e.g. for ping.
 
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index a80a62612397..59bda4c71fb0 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -10,10 +10,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SYS_BOOTM_LEN=0x6400000
- CONFIG_SYS_LOAD_ADDR=0x8000000
--CONFIG_DEBUG_UART_BASE=0xf1920000
--CONFIG_DEBUG_UART_CLOCK=100000000
- CONFIG_CMD_FRU=y
--CONFIG_DEBUG_UART=y
- CONFIG_SYS_MEMTEST_START=0x00000000
- CONFIG_SYS_MEMTEST_END=0x00001000
- CONFIG_REMAKE_ELF=y
-@@ -117,9 +114,6 @@ CONFIG_ZYNQMP_POWER_DOMAIN=y
- CONFIG_RESET_SCMI=y
- CONFIG_RESET_ZYNQMP=y
- CONFIG_SCSI=y
--CONFIG_DEBUG_UART_PL011=y
--CONFIG_DEBUG_UART_ANNOUNCE=y
--CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
- CONFIG_SOC_DEVICE=y
--- 
-2.43.0
-
+Regards,
+Simon
