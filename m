@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098E3C282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 07:36:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1BE1C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 07:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 838FD80548;
-	Thu, 13 Mar 2025 08:35:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FA1280756;
+	Thu, 13 Mar 2025 08:38:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SEYsC+0j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sYgu5TsN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8517A8168B; Thu, 13 Mar 2025 08:35:51 +0100 (CET)
-Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
- [IPv6:2607:f8b0:4864:20::a33])
+ id 1743F810F4; Thu, 13 Mar 2025 08:38:09 +0100 (CET)
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
+ [IPv6:2607:f8b0:4864:20::934])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5358980540
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 08:35:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8261480548
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 08:37:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-523d8c024dfso256140e0c.3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 00:35:47 -0700 (PDT)
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-86d6ac4d5a9so323490241.1
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 00:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741851344; x=1742456144; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741851478; x=1742456278; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=m74cjY7unjOhibpejNgGlnZJE3gD6e7/C4L2S3JoUjI=;
- b=SEYsC+0jXwaJPNIpLSBGsA+nY39cmVrMnal44vgzOJqzCr9IoXwAuBhKCgJM9wF3ea
- 1q9SmnNjuQewm6jbSlndQTE9EuB1GsyaVtTJbew/epGPNdWzkuzrc+ecO5LmOzNEpyhg
- EADnO+2SIJqUfhLYHdX1rQ7JziHUKWKAJ0zEx9nNGYHRH8EbVY+HUQQLpyxT1Sv3+1F0
- 9FdReWAevb9uyKZb4Md2R7S7KIl83ipOS0vZLSOL9a7HFIEwMtXRjzospxpE/Xn+ekJi
- qHNMOWUoNbMRCNTSpwUt1U8LpDpHUvO5SfnubB5wsSpugUgydXO4YyFqS09J5ouj94T5
- COzw==
+ bh=76q6f41WzNI1FUDsJ16uhLOnRS6rY20gWc6jtLpnLhg=;
+ b=sYgu5TsNsVygevCRvQl6k27sGFinJhgLrkwwO1O5gXnyKnj30O1xLiLHqD1kywCAzB
+ 58LxyIZt79aFLuvXGstrmVHWLa8ygOwQjk/6Pi1iT6M6yMuxHkD1FjGTCUK/FjQaG3dZ
+ syfrveB384FMBL9E6RjOlc/oahXmLK4FmLJqK6N+lFqOBFvP/lK65JlHlMpex7PNkdr1
+ LHajTKTgwtliJFpbX8aC9HvGvUeUSLeK4Ebc8rwathPxbO/D7vBtMssS8HQflqA7S/8b
+ Y3atuN22iYg9qGuzlYW0fACQlmI2YNZ6aKlCjJQWsWbnQOwZjTSXmm5/R+0S4GZhH0uT
+ puWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741851344; x=1742456144;
+ d=1e100.net; s=20230601; t=1741851478; x=1742456278;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=m74cjY7unjOhibpejNgGlnZJE3gD6e7/C4L2S3JoUjI=;
- b=PFqK1VIuRxGaVqpsRGw/8g/qa0dL3f5Vx8qHAtDjGtkElslrZv+V54KqHVhxetYP9J
- iETJP+TlsgUU7B2UzI+9xssgxOjbVpFv+M3mefB4A0qekUaCp7zOiC/7gFLr7SAddK0S
- 2PXug5hNgXMDlCMSbC+N9OOYI+qerindzctMVvsYiG2CksSQh5GiDFR2kbSF0yB36PXV
- r0cp4FaXVj2w2zc3PnIZ4tL6rPgGKihskDwwGhvmZFfv9QvqzJot9A3ha9eEdYs3oBNo
- 9HIeL7vlfy8BgMaMxi8FaG77r5dvzHN/55JHr78tqFdlh4tSn5Kk1fzZ3HyBXTuCimvD
- L1Ug==
+ bh=76q6f41WzNI1FUDsJ16uhLOnRS6rY20gWc6jtLpnLhg=;
+ b=wpXWlZVqH3p8ZViUv5n0ONMFA8F7L8gnoBTLq6lajYqeh4b8c2jHZC0SpTct9WPkHV
+ i+QVlMZU6by2eMxJ8WkSgK2y56QG3qbKEGkd2OoGqJuRD+iR4M0+DJs5YjFnNK8RrJqO
+ yeBw7pxb3b/jD3bbaHQDFcwGxU4VnhiegACZeUbWl5WQG1ydnCu8egpfjwbnzRQmGcWV
+ 8Kleb7VC6D8IeaZYaUFCSXlpIcXsehIuGK4KYTlIF2LmuOc5n2l5DGYbTmojxdE4ExZg
+ 8Kt+UuZfam8FoThLmt2d/2zOd+Lk7vkbTu2ojymhDEMjzseA97XylgO2Ec9qwXy7J3ea
+ gvEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZHBxVIW2NWgPJMP1//N43630yGubk36M5DMHTZn7GIACeDzeH1tNEsYrPp3zt78F8rYij/7U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxm5czc8qKJ7CMbooOTy1lwPVJu+T8TpM+sOSzrOIyth5hAMGOh
- V+6mWNR6AHxokSXVSEDCzBw9ziWrcGAUK+hZZwYfaHtiAwUpMG1izYpAG+LegOhAyCA3ieeIjS8
- Hj0Z3poA1gIImSPZECVcA6u0bsD0eB7HxTJdz8g==
-X-Gm-Gg: ASbGncuoxk1+PIZli8M+6HlhGlQSOarC7+0+u3qDVoTSitakFU6kl6kW/U9p7tL7b/J
- i1Dga3/wkFzLM+9eR33azdz9EpvtD7KO586V7uo/o6Yt/RSZ57D3wQ/L1sVsaqLxgbJYGIUQLC5
- oftFG66RuNQ+TLVcPeBJxAMxE7xq8=
-X-Google-Smtp-Source: AGHT+IFWw29px39cma5Lu/X/WuHAR2mpL/UPYiMOtBIG30GGvwhBzlyeR5/LLl5MVdgXg532ut/Tj7jdU90OQT4f5Mc=
-X-Received: by 2002:a05:6102:6056:b0:4c3:64bd:93ba with SMTP id
- ada2fe7eead31-4c364bda24fmr6099107137.11.1741851344262; Thu, 13 Mar 2025
- 00:35:44 -0700 (PDT)
+ AJvYcCUS46eBcFn7dKQQPOix+ianCexHyrGK6gpIrbMCf/bdxrDlB4iJovcfwgTEffdSFykaS7Hm8iw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtkzP44EqkSgPzUGaPyR4J6WwOp1ciV6AC6HTiGd52pHJgoc4O
+ c55TyiYq4WGMsEhMZCXL1QEwIpXnKTioMWixcP837s62/1apijKjuLeuEtXGOceNNaZvnHOavak
+ XXm75Zp3ji9fRE/oPXLuAvnrlrirXNo2z9BK/Rw==
+X-Gm-Gg: ASbGncsCWQ9BoUX1KAiq7ONd5fANmntFBw3LBmO2V/tamVCxRohHut1QVmexMjKdapM
+ D16dez4aHp0ZJkbkdKXPwcYjkU0xm3k+y2vSrDT3ApqMBHbQ5qcu1GimCEXkt6UaKY4xwSWsFKv
+ 6Tcebd866xOvc71Jo5yWl6lpGvyE4=
+X-Google-Smtp-Source: AGHT+IGmJx6PgtPH/7qGniT+1cRsOFnKbT3T/qFYJskVUx8mWj4pXVE05JKgbo3oosjqD433h7jGWqVDt0ARQhJu3hw=
+X-Received: by 2002:a05:6102:41a4:b0:4c3:6546:5456 with SMTP id
+ ada2fe7eead31-4c365465d5bmr6436866137.3.1741851478104; Thu, 13 Mar 2025
+ 00:37:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250312085424.1201148-1-sughosh.ganu@linaro.org>
- <20250312085424.1201148-7-sughosh.ganu@linaro.org>
- <6e801422-2cbf-4a66-892e-02091cb563a5@canonical.com>
-In-Reply-To: <6e801422-2cbf-4a66-892e-02091cb563a5@canonical.com>
+ <20250312085424.1201148-8-sughosh.ganu@linaro.org>
+ <32b11359-c517-4556-a24d-f4cb2c5c60f1@canonical.com>
+In-Reply-To: <32b11359-c517-4556-a24d-f4cb2c5c60f1@canonical.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 13 Mar 2025 13:05:33 +0530
-X-Gm-Features: AQ5f1Jr8clpyKdavz4OXDaDCYRWPcKWWSrovJIKdxXIQO5lNXeulZGhl2jfnaHg
-Message-ID: <CADg8p9711mRNbBc_ko8jm_qg8pPPQ0eRAcLwFZ0Og_jO2TXsLg@mail.gmail.com>
-Subject: Re: [PATCH v8 6/8] blkmap: store type of blkmap slice in
- corresponding structure
+Date: Thu, 13 Mar 2025 13:07:47 +0530
+X-Gm-Features: AQ5f1JrgonPKSBXPxQMpOru4jvbdgrJiMXYQMNstcfEbKVYb38Jz2RFIIfxeYWY
+Message-ID: <CADg8p95XMj+Ti58Nw0dRPEMH1EzbPcOUadgVa+QJy1fpxp7fEQ@mail.gmail.com>
+Subject: Re: [PATCH v8 7/8] blkmap: add an attribute to preserve the mem
+ mapping
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -97,45 +97,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 13 Mar 2025 at 02:27, Heinrich Schuchardt
+On Thu, 13 Mar 2025 at 02:30, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
 > On 12.03.25 09:54, Sughosh Ganu wrote:
-> > Add information about the type of blkmap slice as an attribute in the
->
-> %s/blkmap slice/blkmap slices/
-
-Will change
-
->
-> > corresponding slice structure. Put information in the blkmap slice
-> > structure to identify if it is associated with a memory or linear
-> > mapped device. Which can then be used to take specific action based on
-> > the type of the blkmap slice.
+> > Some blkmap memory mapped devices might have to be relevant even after
+> > U-Boot passes control to the next image as part of the platform
+> > boot. An example of such a mapping would be an OS installer ISO image,
+> > information for which has to be provided to the OS kernel. Use the
+> > 'preserve' attribute for such mappings. The code for adding a pmem
+> > node to the device-tree then checks if this attribute is set, and adds
+> > a node only for mappings which have this attribute.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
 > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > > ---
-> > Changes since V7: None
+> > Changes since V7:
+> > * Fix repeated word in the commit message
 > >
-> >   drivers/block/blkmap.c | 8 ++++++++
-> >   1 file changed, 8 insertions(+)
+> >   cmd/blkmap.c                  |  9 +++++++--
+> >   drivers/block/blkmap.c        | 12 ++++++++----
+> >   drivers/block/blkmap_helper.c |  2 +-
+> >   include/blkmap.h              |  4 +++-
+> >   4 files changed, 19 insertions(+), 8 deletions(-)
 > >
+> > diff --git a/cmd/blkmap.c b/cmd/blkmap.c
+> > index 164f80f1387..86a123b1cd3 100644
+> > --- a/cmd/blkmap.c
+> > +++ b/cmd/blkmap.c
+> > @@ -62,13 +62,18 @@ static int do_blkmap_map_mem(struct map_ctx *ctx, int argc, char *const argv[])
+> >   {
+> >       phys_addr_t addr;
+> >       int err;
+> > +     bool preserve = false;
+> >
+> >       if (argc < 2)
+> >               return CMD_RET_USAGE;
+> >
+> >       addr = hextoul(argv[1], NULL);
+> >
+> > -     err = blkmap_map_pmem(ctx->dev, ctx->blknr, ctx->blkcnt, addr);
+> > +     if (argc == 3 && !strcmp(argv[2], "preserve"))
+> > +             preserve = true;
+> > +
+> > +     err = blkmap_map_pmem(ctx->dev, ctx->blknr, ctx->blkcnt, addr,
+> > +                           preserve);
+> >       if (err) {
+> >               printf("Unable to map %#llx at block 0x" LBAF ": %d\n",
+> >                      (unsigned long long)addr, ctx->blknr, err);
+> > @@ -221,7 +226,7 @@ U_BOOT_CMD_WITH_SUBCMDS(
+> >       "blkmap create <label> - create device\n"
+> >       "blkmap destroy <label> - destroy device\n"
+> >       "blkmap map <label> <blk#> <cnt> linear <interface> <dev> <blk#> - device mapping\n"
+> > -     "blkmap map <label> <blk#> <cnt> mem <addr> - memory mapping\n",
+> > +     "blkmap map <label> <blk#> <cnt> mem <addr> [preserve] - memory mapping\n",
+> >       U_BOOT_SUBCMD_MKENT(info, 2, 1, do_blkmap_common),
+> >       U_BOOT_SUBCMD_MKENT(part, 2, 1, do_blkmap_common),
+> >       U_BOOT_SUBCMD_MKENT(dev, 4, 1, do_blkmap_common),
 > > diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> > index 34eed1380dc..453510cca62 100644
+> > index 453510cca62..eefed615998 100644
 > > --- a/drivers/block/blkmap.c
 > > +++ b/drivers/block/blkmap.c
-> > @@ -16,6 +16,10 @@
-> >
-> >   struct blkmap;
-> >
-> > +/* Attributes of blkmap slice */
+> > @@ -19,6 +19,7 @@ struct blkmap;
+> >   /* Attributes of blkmap slice */
+> >   #define BLKMAP_SLICE_LINEAR BIT(0)
+> >   #define BLKMAP_SLICE_MEM    BIT(1)
 >
-> Please, provide a description of the constants in Sphinx style
-> explaining what linear and and memory slices are.
+> Documentation is missing here.
 
-Okay
+Yeah you mentioned this in the earlier commit where this was added. I
+will add the documentation for this.
 
 -sughosh
 
@@ -143,45 +175,81 @@ Okay
 > Cf.
 > https://docs.kernel.org/doc-guide/kernel-doc.html#object-like-macro-documentation
 >
-> Best regards
->
-> Heinrich
->
-> > +#define BLKMAP_SLICE_LINEAR  BIT(0)
-> > +#define BLKMAP_SLICE_MEM     BIT(1)
-> > +
+> > +#define BLKMAP_SLICE_PRESERVE        BIT(2)
+> >
 > >   /**
 > >    * struct blkmap_slice - Region mapped to a blkmap
-> >    *
-> > @@ -25,12 +29,14 @@ struct blkmap;
-> >    * @node: List node used to associate this slice with a blkmap
+> > @@ -241,7 +242,7 @@ static void blkmap_mem_destroy(struct blkmap *bm, struct blkmap_slice *bms)
+> >   }
+> >
+> >   int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> > -                  void *addr, bool remapped)
+> > +                  void *addr, bool remapped, bool preserve)
+> >   {
+> >       struct blkmap *bm = dev_get_plat(dev);
+> >       struct blkmap_mem *bmm;
+> > @@ -266,6 +267,9 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> >               .remapped = remapped,
+> >       };
+> >
+> > +     if (preserve)
+> > +             bmm->slice.attr |= BLKMAP_SLICE_PRESERVE;
+> > +
+> >       err = blkmap_slice_add(bm, &bmm->slice);
+> >       if (err)
+> >               free(bmm);
+> > @@ -276,11 +280,11 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> >   int blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> >                  void *addr)
+> >   {
+> > -     return __blkmap_map_mem(dev, blknr, blkcnt, addr, false);
+> > +     return __blkmap_map_mem(dev, blknr, blkcnt, addr, false, false);
+> >   }
+> >
+> >   int blkmap_map_pmem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> > -                 phys_addr_t paddr)
+> > +                 phys_addr_t paddr, bool preserve)
+> >   {
+> >       struct blkmap *bm = dev_get_plat(dev);
+> >       struct blk_desc *bd = dev_get_uclass_plat(bm->blk);
+> > @@ -291,7 +295,7 @@ int blkmap_map_pmem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> >       if (!addr)
+> >               return -ENOMEM;
+> >
+> > -     err = __blkmap_map_mem(dev, blknr, blkcnt, addr, true);
+> > +     err = __blkmap_map_mem(dev, blknr, blkcnt, addr, true, preserve);
+> >       if (err)
+> >               unmap_sysmem(addr);
+> >
+> > diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
+> > index bfba14110d2..2f1bc28ee5d 100644
+> > --- a/drivers/block/blkmap_helper.c
+> > +++ b/drivers/block/blkmap_helper.c
+> > @@ -28,7 +28,7 @@ int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
+> >       bm = dev_get_plat(bm_dev);
+> >       desc = dev_get_uclass_plat(bm->blk);
+> >       blknum = image_size >> desc->log2blksz;
+> > -     ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr);
+> > +     ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr, true);
+> >       if (ret) {
+> >               log_err("Unable to map %#llx at block %d : %d\n",
+> >                       (unsigned long long)image_addr, 0, ret);
+> > diff --git a/include/blkmap.h b/include/blkmap.h
+> > index d53095437fa..754d8671b01 100644
+> > --- a/include/blkmap.h
+> > +++ b/include/blkmap.h
+> > @@ -60,10 +60,12 @@ int blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
 > >    * @blknr: Start block number of the mapping
-> >    * @blkcnt: Number of blocks covered by this mapping
-> > + * @attr: Attributes of blkmap slice
+> >    * @blkcnt: Number of blocks to map
+> >    * @paddr: The target physical memory address of the mapping
+> > + * @preserve: Mapping intended to be preserved for subsequent stages,
+> > + *           like the OS (e.g. ISO installer)
+> >    * Returns: 0 on success, negative error code on failure
 > >    */
-> >   struct blkmap_slice {
-> >       struct list_head node;
+> >   int blkmap_map_pmem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+> > -                 phys_addr_t paddr);
+> > +                 phys_addr_t paddr, bool preserve);
 > >
-> >       lbaint_t blknr;
-> >       lbaint_t blkcnt;
-> > +     uint     attr;
-> >
-> >       /**
-> >        * @read: - Read from slice
-> > @@ -169,6 +175,7 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-> >               .slice = {
-> >                       .blknr = blknr,
-> >                       .blkcnt = blkcnt,
-> > +                     .attr = BLKMAP_SLICE_LINEAR,
-> >
-> >                       .read = blkmap_linear_read,
-> >                       .write = blkmap_linear_write,
-> > @@ -248,6 +255,7 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-> >               .slice = {
-> >                       .blknr = blknr,
-> >                       .blkcnt = blkcnt,
-> > +                     .attr = BLKMAP_SLICE_MEM,
-> >
-> >                       .read = blkmap_mem_read,
-> >                       .write = blkmap_mem_write,
+> >   /**
+> >    * blkmap_from_label() - Find blkmap from label
 >
