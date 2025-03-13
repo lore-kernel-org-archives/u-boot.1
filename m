@@ -4,58 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F319C2BA1B
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D2EC282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81BA78198A;
-	Thu, 13 Mar 2025 12:55:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C9391810F4;
+	Thu, 13 Mar 2025 12:55:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cebxbr+6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K0ubKChz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5196B8007D; Thu, 13 Mar 2025 12:55:28 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id DE94980F9C; Thu, 13 Mar 2025 12:55:29 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10BDC8175D
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:55:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AC5A81760
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:55:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=f-akthar@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtN9N1374141
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtNB21812281
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
  Thu, 13 Mar 2025 06:55:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1741866923;
- bh=dyqXY31Yd9zjEhg3EkhNaHrLZ8JhV1mEfbKJD+M/HG8=;
+ bh=UBvPO6wPNh4do31fonxmhzkbGc48P3lCFkp8B0Jsfso=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=cebxbr+6JHfbb3FW/42i/mx/mQhor5FC6FgtfsxNHLI21OjMiVumL8gsLtYSmBSL9
- EwVfuso9j1WP/9HYbrGHIKUsUuRSFKZnrLfMMPQ/J8T91b0csxiMPK5CR/s4a9rWbM
- HGUutMFovo3xlwaGI877DsprKvJ5oCT5eooKrzjE=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtNvm110019;
+ b=K0ubKChz5fvz6/bNaYZuOMp4a4QFiEP6DJo4hNXai2rAtgHFPSFR5CpYksmY/lIzm
+ WeDME8iiDCAkGQ7UB+yWwQcr7C2HGUHLAKZ6Um9rUx+GqDQbtBMGhRziSTjAaAF5nz
+ tcbyL489nBho5AP6ySGgJlymmGLQUswGjQEcPL0Y=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtN3w110016;
  Thu, 13 Mar 2025 06:55:23 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from flwvowa01.ent.ti.com (10.64.41.90) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Mar 2025 06:55:23 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 06:55:22 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by flwvowa01.ent.ti.com
+ (10.64.41.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Thu, 13 Mar
+ 2025 06:55:21 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Mar 2025 06:55:22 -0500
+ Frontend Transport; Thu, 13 Mar 2025 06:55:21 -0500
 Received: from localhost (fayaz-hp-z2-tower-g4-workstation.dhcp.ti.com
  [172.24.227.128])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtMv7097515;
- Thu, 13 Mar 2025 06:55:22 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtLcw097501;
+ Thu, 13 Mar 2025 06:55:21 -0500
 From: Harsha Vardhan V M <h-vm@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>
-Subject: [RFC PATCH 3/4] drivers: k3_fuse: Add fuse sub-system func calls
-Date: Thu, 13 Mar 2025 17:25:16 +0530
-Message-ID: <20250313115517.1181829-4-h-vm@ti.com>
+Subject: [RFC PATCH 2/4] cmd: fuse: Add fuse writebuff sub-system command
+Date: Thu, 13 Mar 2025 17:25:15 +0530
+Message-ID: <20250313115517.1181829-3-h-vm@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250313115517.1181829-1-h-vm@ti.com>
 References: <20250313115517.1181829-1-h-vm@ti.com>
@@ -79,131 +83,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add K3_FUSE config option to add and enable fuse sub-system
-implementation function calls.
+Add CMD_FUSE_WRITEBUFF config option to add and enable fuse writebuff
+sub-system command. Add fuse_writebuff function to be invoked on
+writebuff command.
 
 Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
 ---
- drivers/misc/Kconfig   |  7 ++++
- drivers/misc/Makefile  |  1 +
- drivers/misc/k3_fuse.c | 78 ++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 86 insertions(+)
- create mode 100644 drivers/misc/k3_fuse.c
+ cmd/Kconfig    |  8 ++++++++
+ cmd/fuse.c     | 26 ++++++++++++++++++++++----
+ include/fuse.h |  9 +++++++++
+ 3 files changed, 39 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index da84b35e804..834e0285097 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -468,6 +468,13 @@ config STM32MP_FUSE
- 	  for STM32MP architecture.
- 	  This API is needed for CMD_FUSE.
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index cd391d422ae..81c59becc2d 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1236,6 +1236,14 @@ config CMD_FUSE
+ 	  which control the behaviour of the device. The command uses the
+ 	  fuse_...() API.
  
-+config K3_FUSE
-+	bool "Enable TI K3 fuse wrapper providing the fuse API"
-+	depends on MISC && CMD_FUSE && CMD_FUSE_WRITEBUFF
++config CMD_FUSE_WRITEBUFF
++	bool "Support for the fuse writebuff"
++	depends on CMD_FUSE
 +	help
-+	  If you say Y here, you will get support for the fuse API (OTP)
-+	  for TI K3 architecture.
++	  This allows programming fuses, which control the behaviour of
++	  the device, using a structured buffer in memory. The command
++	  uses the fuse_writebuff() API.
 +
- config STM32_RCC
- 	bool "Enable RCC driver for the STM32 SoC's family"
- 	depends on (ARCH_STM32 || ARCH_STM32MP) && MISC
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index dac805e4cdd..0b81ba2604f 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -48,6 +48,7 @@ obj-$(CONFIG_$(XPL_)I2C_EEPROM) += i2c_eeprom.o
- obj-$(CONFIG_IHS_FPGA) += ihs_fpga.o
- obj-$(CONFIG_IMX8) += imx8/
- obj-$(CONFIG_IMX_ELE) += imx_ele/
-+obj-$(CONFIG_K3_FUSE) += k3_fuse.o
- obj-$(CONFIG_LED_STATUS) += status_led.o
- obj-$(CONFIG_LED_STATUS_GPIO) += gpio_led.o
- obj-$(CONFIG_MPC83XX_SERDES) += mpc83xx_serdes.o
-diff --git a/drivers/misc/k3_fuse.c b/drivers/misc/k3_fuse.c
-new file mode 100644
-index 00000000000..4a8ff1f2523
---- /dev/null
-+++ b/drivers/misc/k3_fuse.c
-@@ -0,0 +1,78 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025 Texas Instruments Incorporated, <www.ti.com>
-+ */
-+
-+#include <errno.h>
-+#include <stdio.h>
-+#include <fuse.h>
-+#include <linux/arm-smccc.h>
-+#include <string.h>
-+
-+#define K3_SIP_OTP_WRITEBUFF 0xC2000000
-+#define K3_SIP_OTP_WRITE 0xC2000001
-+#define K3_SIP_OTP_READ 0xC2000002
-+
-+int fuse_read(u32 bank, u32 word, u32 *val)
-+{
-+	struct arm_smccc_res res;
-+
-+	if (bank != 0U) {
-+		printf("Invalid bank argument, ONLY bank 0 is supported\n");
-+		return -EINVAL;
+ config CMD_GPIO
+ 	bool "gpio"
+ 	help
+diff --git a/cmd/fuse.c b/cmd/fuse.c
+index 9f489570634..2d53e6bf2c4 100644
+--- a/cmd/fuse.c
++++ b/cmd/fuse.c
+@@ -43,9 +43,14 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	argc -= 2 + confirmed;
+ 	argv += 2 + confirmed;
+ 
+-	if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
+-			!(str2long(argv[1], (ulong *)&word)))
+-		return CMD_RET_USAGE;
++	if (IS_ENABLED(CONFIG_CMD_FUSE_WRITEBUFF) && !strcmp(op, "writebuff")) {
++		if (argc != 1 || !(str2long(argv[0], &addr)))
++			return CMD_RET_USAGE;
++	} else {
++		if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
++				!(str2long(argv[1], (ulong *)&word)))
++			return CMD_RET_USAGE;
 +	}
+ 
+ 	if (!strcmp(op, "read")) {
+ 		if (argc == 2)
+@@ -153,6 +158,15 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			if (ret)
+ 				goto err;
+ 		}
++	} else if (IS_ENABLED(CONFIG_CMD_FUSE_WRITEBUFF) && !strcmp(op, "writebuff")) {
++		printf("Programming fuses using a structured buffer in memory "
++				"starting at addr 0x%lx\n", addr);
++		if (!confirmed && !confirm_prog())
++			return CMD_RET_FAILURE;
 +
-+	/* Make SiP SMC call and send the word in the parameter register */
-+	arm_smccc_smc(K3_SIP_OTP_READ, word,
-+		      0, 0, 0, 0, 0, 0, &res);
-+
-+	*val = res.a1;
-+	if (res.a0 != 0)
-+		printf("SMC call failed: Error code %lu\n", res.a0);
-+
-+	return res.a0;
-+}
-+
-+int fuse_sense(u32 bank, u32 word, u32 *val)
++		ret = fuse_writebuff(addr);
++		if (ret)
++			goto err;
+ 	} else {
+ 		return CMD_RET_USAGE;
+ 	}
+@@ -178,5 +192,9 @@ U_BOOT_CMD(
+ 	"fuse prog [-y] <bank> <word> <hexval> [<hexval>...] - program 1 or\n"
+ 	"    several fuse words, starting at 'word' (PERMANENT)\n"
+ 	"fuse override <bank> <word> <hexval> [<hexval>...] - override 1 or\n"
+-	"    several fuse words, starting at 'word'"
++	"    several fuse words, starting at 'word'\n"
++#ifdef CONFIG_CMD_FUSE_WRITEBUFF
++	"fuse writebuff [-y] <addr> - program fuse data\n"
++	"    using a structured buffer in memory starting at 'addr'\n"
++#endif /* CONFIG_CMD_FUSE_WRITEBUFF */
+ );
+diff --git a/include/fuse.h b/include/fuse.h
+index 4519821af7e..902b5f56a74 100644
+--- a/include/fuse.h
++++ b/include/fuse.h
+@@ -12,6 +12,7 @@
+ #define _FUSE_H_
+ 
+ #include <linux/types.h>
++#include <linux/errno.h>
+ 
+ /*
+  * Read/Sense/Program/Override interface:
+@@ -25,5 +26,13 @@ int fuse_read(u32 bank, u32 word, u32 *val);
+ int fuse_sense(u32 bank, u32 word, u32 *val);
+ int fuse_prog(u32 bank, u32 word, u32 val);
+ int fuse_override(u32 bank, u32 word, u32 val);
++#ifdef CONFIG_CMD_FUSE_WRITEBUFF
++int fuse_writebuff(ulong addr);
++#else
++static inline int fuse_writebuff(ulong addr)
 +{
 +	return -EPERM;
 +}
-+
-+int fuse_prog(u32 bank, u32 word, u32 val)
-+{
-+	struct arm_smccc_res res;
-+	u32 mask = val;
-+
-+	if (bank != 0U) {
-+		printf("Invalid bank argument, ONLY bank 0 is supported\n");
-+		return -EINVAL;
-+	}
-+
-+	/* Make SiP SMC call and send the word, val and mask in the parameter register */
-+	arm_smccc_smc(K3_SIP_OTP_WRITE, word,
-+		      val, mask, 0, 0, 0, 0, &res);
-+
-+	if (res.a0 != 0)
-+		printf("SMC call failed: Error code %lu\n", res.a0);
-+
-+	return res.a0;
-+}
-+
-+int fuse_override(u32 bank, u32 word, u32 val)
-+{
-+	return -EPERM;
-+}
-+
-+int fuse_writebuff(ulong addr)
-+{
-+	struct arm_smccc_res res;
-+
-+	/* Make SiP SMC call and send the addr in the parameter register */
-+	arm_smccc_smc(K3_SIP_OTP_WRITEBUFF, (unsigned long)addr,
-+		      0, 0, 0, 0, 0, 0, &res);
-+
-+	if (res.a0 != 0)
-+		printf("SMC call failed: Error code %lu\n", res.a0);
-+
-+	return res.a0;
-+}
++#endif	/* CONFIG_CMD_FUSE_WRITEBUFF */
+ 
+ #endif	/* _FUSE_H_ */
 -- 
 2.34.1
 
