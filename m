@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A515C282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22F1C35FF1
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:44:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFE328192A;
-	Thu, 13 Mar 2025 23:44:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3507B81A0E;
+	Thu, 13 Mar 2025 23:44:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U78PnhMB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cTJIATp/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E71C81870; Thu, 13 Mar 2025 23:44:20 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 696718198A; Thu, 13 Mar 2025 23:44:22 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA8E0817D3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E283C8168B
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7be8f28172dso97122085a.3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:17 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7c0a159ded2so159831385a.0
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741905857; x=1742510657; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741905859; x=1742510659; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=214RIJEL4WtSY14xdIjvCnJMbIHYhMiWaSxb/3KjW6E=;
- b=U78PnhMBlWxLqKuct1foa4haJdQGThsZRU4umk+7RetHsuZZNJwWbFcDMFubqrlxi7
- qviKWJIrjGqjgW+l8pwHU6hPCBAjSJn+SqBmPm66V3cxFbJNQ7sx/hIr+rqzFh49pAf2
- LbyXsjYoD1GYywCXHRSkTkW954BJvdoq9ATRM=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Wsm3paYy/SMJ18WOJp0p2KJj5ARAGAIMAoX5CwKjwQA=;
+ b=cTJIATp/IgjLID4sYTHORjwvLAdP4FbYHtYbTLLzgT3iB1T7iRiGHX9WOhdpkF8Vw4
+ aiIyuKsy6c9Pv2b5OryspUuljyST9jx/C2AAtMofEF34iflGpiRRJ+c91cFdjkcE0V4E
+ 6OO1gfiW5wJq3C+ADytz7r09NlxF2PhII/bpA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741905857; x=1742510657;
+ d=1e100.net; s=20230601; t=1741905859; x=1742510659;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=214RIJEL4WtSY14xdIjvCnJMbIHYhMiWaSxb/3KjW6E=;
- b=r1Pjc7LZPMMHWauz6+hcIRnhBHWC+ncHWf3ampcb+M6g4OCsJ/qhs/yC0UE/SWcJtF
- K8DrufRQJ/hznc+cHasCKQ2tyW4cOh4KF/qxM1yjCxXbDRBpBLg4aBguP7M0UZghLbTw
- FQChuTLC9noBcmD4f+gGQ6yL3Gw6ig3VJRVjhW1t3inEBqZcNK4pqGyOzX+h4yxfAGa9
- qOpSZJ7DaPYnSbMxeLpZpCvveqqvIuGLkFclrml0v+obU8qnyoVYQOkt4zc/bARqvmWD
- xc0HTPnRaxyOSAz630pe+vXw32WLdO052ptd+W9+G7pjuyrUcZzc0sTfy2/GenyR810q
- oY+Q==
-X-Gm-Message-State: AOJu0YxAbvveDAhhPg+jmKFAZk0eF/AgVje8BiQLsv8UhR6I5mXSvrSL
- 82ix3+NeMOia1Ax6FNWh/LLJB/ZWPt1oH7O7gpRVzE3OILwvH4HmehJnURHw/4ChLNKlIB1RJua
- w
-X-Gm-Gg: ASbGnctZtHDNFup0a7kOzrN1Cw0LLuYwfodPRUuxWtGmo95XRmzcAljZOeByj5aI5TQ
- hy61q9yDcBPRH6UrfIsrNuK+wwjadMpaA4yr0dUJanx16mnCrzz28ffEaPr9AHwD32Wpxk9nGmB
- 5wSpCHiXs/O3RfWxr+sFVhPu57jESuGJ1JI/2tAtYTYiQOVxLlvfrzeFZlApoiYfSbeJ93cGyF3
- /BdmxIv4uzty2Ka0DRazzrJfBE6IKvqJCxAWlG1rknthmcCy3ihrnerCr6ugT1IPNGn3tpXzjJV
- kXHh/JDyvYumQYjbs8fj1fc8AHqSBY3k2scJYjhfrefk
-X-Google-Smtp-Source: AGHT+IEuQ2VJZd7HiZNqpumhN/02kgAfNRVSplZFoSubVbxG93CUBY0O4J/XEmzfmfNEbE3ctfijOA==
-X-Received: by 2002:a05:620a:601b:b0:7c5:60c7:346 with SMTP id
- af79cd13be357-7c57c73cfffmr19324285a.10.1741905856861; 
- Thu, 13 Mar 2025 15:44:16 -0700 (PDT)
+ bh=Wsm3paYy/SMJ18WOJp0p2KJj5ARAGAIMAoX5CwKjwQA=;
+ b=Zh0dYDhAD/o6vzGCdvviOPzjvaTdfzPh6xAzTW4QnRUFIjnKI5RFPO886crpHVD0dI
+ 9+rLydJAylIt6KhIqo5K7MfIkIM5B3LUSa0kCCHj7/4t+U5fNPz300l5rk0YzXZY5OXv
+ qxQGWtjvzzc31Fo1PpBoFHb/i9crDj0Ae0sQmqvFaVNMQ4Fl3hzL/JQTmDJf5s1HUT+4
+ A4g5R1X0MLSX76PJi6iM7EqP3bWYFqDe2gdoJ4C1Pe016WfaNWRz2F6ILDf3TrQMKpXi
+ LrR1HyFEU6qAfPG6JynnSpqS0QNw09iUZKS+x5xf1y4Xu7o0nep6ACUoopROFJoRmy0m
+ numg==
+X-Gm-Message-State: AOJu0Yy4mjFmfeOTu9KtEs8Dq6Lo7b6PHZLkNux30QEryZbiu6YLGPaZ
+ Ru10hiFrPjC2+9EDoG+5AxsFEEQC6xxwV/np61N4umd9bAw20NYTH3ApiFuEIE0+wwcekSKZP1p
+ M
+X-Gm-Gg: ASbGncssjq5oMu9GnuPphfYmXnSlsNPTHlC5UM4WAac97ywx+Y6jEG3vAJ+6eRjDwOT
+ J7OOgOO2meyJzmU/tFgHLGdPE4TnaQp44pbkMQdllKT+yTSPvIo6G8fz9eVcSdXeTfWC88Hmvci
+ 9J/hLemISvMGBnpH7jORq++WoheoXbPCkSOL7zet25+Xy6Q+CYqoZh0Dx/sjTO2AXyDvySxavoJ
+ Zv6ZQmdRMnt5PfJxSp8No1akqtP/1+2nppoNovMy8fPAvj4TbfE5Q+JM1+kXr9iAHRyEQm0fmXZ
+ 7Yq9rvX45lE+WaiuyqZG1kj82ZgM1T8QkDrAPu3nvXxG
+X-Google-Smtp-Source: AGHT+IHDBSsH3xK5XyRqY9tlYqORK2F2RiyxE8dZ3zkTjQ6caWs/8xpivRGJo80QD6XHxZT4rJTv1A==
+X-Received: by 2002:a05:620a:40d0:b0:7c3:d7ef:f7f5 with SMTP id
+ af79cd13be357-7c57c7e22c9mr13461185a.18.1741905858899; 
+ Thu, 13 Mar 2025 15:44:18 -0700 (PDT)
 Received: from [127.0.1.1] ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.14
+ af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 15:44:15 -0700 (PDT)
+ Thu, 13 Mar 2025 15:44:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250226203109.3831895-1-trini@konsulko.com>
-References: <20250226203109.3831895-1-trini@konsulko.com>
-Subject: Re: [PATCH] test: event: Correct usage of IS_ENABLED() macro in
- test/common/event.c
-Message-Id: <174190585480.2150240.1931622262561279882.b4-ty@konsulko.com>
-Date: Thu, 13 Mar 2025 16:44:14 -0600
+To: Bryan Brattlof <bb@ti.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250227-reserved-memory-v1-1-638a6328884c@ti.com>
+References: <20250227-reserved-memory-v1-1-638a6328884c@ti.com>
+Subject: Re: [PATCH] mach-k3: common_fdt: create a reserved memory node
+Message-Id: <174190585699.2150240.2845430924794022918.b4-ty@konsulko.com>
+Date: Thu, 13 Mar 2025 16:44:16 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,17 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Feb 2025 14:31:09 -0600, Tom Rini wrote:
+On Thu, 27 Feb 2025 11:14:41 -0600, Bryan Brattlof wrote:
 
-> This file was using IS_ENABLED() to test for CONFIG flags but omitted
-> the CONFIG_ prefix and so did not work as expected.
+> Some device trees may not have a reserved-memory node. Rather than
+> exiting early we should create a new reserved-memory node along with
+> the memory carveout for the firmware we (U-Boot) have placed.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] test: event: Correct usage of IS_ENABLED() macro in test/common/event.c
-      commit: 5c2ad0799715e7c02aa98d946a04e526fc5802b0
+[1/1] mach-k3: common_fdt: create a reserved memory node
+      commit: 096aa229a9e5909e40865454208a6a009dc0c02b
 -- 
 Tom
 
