@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC57C282EC
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 16:03:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4B81C35FF3
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 16:03:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD41E80FF7;
-	Thu, 13 Mar 2025 17:02:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 418F580F9C;
+	Thu, 13 Mar 2025 17:03:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eo2xfH9q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cqs1pQVy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D315480540; Thu, 13 Mar 2025 17:02:57 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 7A62B80540; Thu, 13 Mar 2025 17:03:17 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4437D81895
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 17:02:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1154081870
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 17:03:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7c07cd527e4so92050185a.3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 09:02:55 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7c0155af484so149317185a.0
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 09:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741881774; x=1742486574; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741881784; x=1742486584; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=64sVZoDgdcq9RUx7C74r07BakAIgFtTRM7xafOFtVs0=;
- b=eo2xfH9qVieX715GODXOu5prvgW616POCKVsJ+b5JXYgOouWAfl9Tn2DYEAk/ECfkD
- QcCv8X1WbLywEBqHKETUOqM430irE7zvFv/311Y8OvZ3jpLHULskizMW+SxEumWWdMlA
- WtaRNDgmD6V+pAWGwHPDnWmcSYFHARon4UF6o=
+ bh=6cQhcOO5DFdeeVS9r5MXep+a+EVlCjhbG9v2LtSnpDM=;
+ b=Cqs1pQVyWvWcK4gtq0JIkGsODJt6l7vKfx67pKPTpbxo6RDEFWBRj86DEWMKEG+4xN
+ qeJC7FjuZTOmuvqLxjxaLMDlyyBdyU/ecRcIgNiVN8NBBCvl4OH29NmQPFXU6LVzQJ2G
+ uEsedeJJcUlN3yvD7OiHBfsMr79LQMwmiwX0w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741881774; x=1742486574;
+ d=1e100.net; s=20230601; t=1741881784; x=1742486584;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=64sVZoDgdcq9RUx7C74r07BakAIgFtTRM7xafOFtVs0=;
- b=m+XMQxHbnIwCcns2JhIg+sI/6O69+kbM0gDQcvM/qfnNHBSR/zKjDiRA13MQPjaM0U
- KiA6Uxsh2rttmgs9gqmBS/RrXrhE0/MHJnf4JGC5q9mEF1ZffT+y+Hz9zv34OZLtQcUn
- FGcWDZ8Nm2Fz+tD9ZCoH44hA5n8bPyVjf62TyhicKgcMo9gGNVlms4QAakwTLncQM8PS
- 42zMRQKeZBo8Wl7fg4gAPie5Om5P/alXInRqnkdKWidIpvR5TqzKCVDnds+09uglRAgM
- evxGlhzVi03XrtOSaGR9l+oI0GMkVHlxtzhW0kGZx4hMSlHPBjY5tq3GOw5OM+9h/+F8
- +XdQ==
-X-Gm-Message-State: AOJu0YxbRDrzxPx1Ik7Sr2rgUjUwa17FxAV7NAqdboEhWgzXaVeLnBDc
- BI0BVplAUyxzuKKss4H1I6hy80wGp2C5JYoe0mvJ06ZVdKhbFAlyD3Sx//84+u+quTXFHeeYHxj
- v
-X-Gm-Gg: ASbGnctgg2SvSQuaNT3ac7dhe6L6AworIQc60WajCBmCqIxgDr3ZljUPMfcoifcJuH6
- GN+klh3q8fuut1iI1rcrSDNcFVzxv78ugwM2q1+B4Z7ENS2fPsmNAl8EhY7L/P6W2fUYB65kDqx
- 0SabYKB6zuZGLX7KzUo7ZBiA1t9dl5vBlhGPCgP79y35hVWroaj/YLBazeBr9rsiFi0IhAiR7+y
- sEaqasdMBZzItg6heZWGulrH4uO85uYYnYWREFlc4i89xkKzKbviaDutDHxE2Kcy7aWB24QqDOM
- y6Zh3JEBE6Oa1Jvs4RUBIEfUmgt/mfpml/ykctYXAcGLGg==
-X-Google-Smtp-Source: AGHT+IFCPRPiogo1cK/hUDiccuhTkeK98YzpyTZa/rl3+pIp0z3s8sM/47s6tnw8P1gV43KYRj9WNA==
-X-Received: by 2002:a05:620a:688f:b0:7c3:bc90:a46b with SMTP id
- af79cd13be357-7c55e83ce1cmr2012294585a.1.1741881773898; 
- Thu, 13 Mar 2025 09:02:53 -0700 (PDT)
+ bh=6cQhcOO5DFdeeVS9r5MXep+a+EVlCjhbG9v2LtSnpDM=;
+ b=phIfsutfziJjaYOaGkNTbrWJuohP6LwgqsZ/u9ENjOXc/zhfXhkUde7vnj2P4AVGN+
+ FuIOb8+F6oJmAtI2Lrptu+b9dxdr4vgZ5YiUzeyExc26ORnxUTRczh9BsANgbIQAXaLx
+ VvKp85PZ/KhH+7AyzfjFOHkbnKdv/niDTIuiHXj5hgnj+Rz46Bg4Lu3zO2V6p5Qdoa3Z
+ eQptM05XcKMLjGOJ/1xGc5cdPB/EThUyjEWpJeLOOg6Tg8J28mYUkU91WDCNFtr7ArcC
+ q3ioymghGJMi+fwwOdAN4//CIhsExF8YJOLuBB0yILQ3OctnLjDayKkUO8nxjo6a2/e+
+ 1JLQ==
+X-Gm-Message-State: AOJu0YyJGR5nbKNVlf4dPRL8xJ4jwDo2Mluf/UdWx81tSx0zBIFC46a/
+ wYZCUfdYRkzDM5GhkXkFR+1dyRLAcsYE1fdEAuohMIEhRFzDBwldn8PUD6qhRVRd6SdPuiSQd8I
+ A
+X-Gm-Gg: ASbGncvk4oYCIuUEU5vZjy3g0W2paxK6omXddmgLzw3GoKUQ54nuCWp2XaKRZoCwQHv
+ wnAYNZagpAOw20tE9SIIs3aGiCsL4GbMuhwlEVH5qfiz5DVP4Eb81I2rfW+wgz06r2KGqQBOsP5
+ 5ZWzukfzekzqsa+aM1H9qSxKMwEVk6PhVUib8CKuU3JSm4P+C/OX465vp7IslUW9k3/zNXvYBLZ
+ IZjVud5O0QVSXZadIhf87Vi4UJ3P4KDqVqu8hFYoV2HuXYZF4X7/GUBL6pqSX+UL++j6x04N03G
+ AY6vj/fvvvGbjUHpFGXEgvr7AGMtUFFsC6cypS6X7umwrg==
+X-Google-Smtp-Source: AGHT+IGvcRwTkeyMltIH1apAnmehjee/sAYgrPK2eF01rjO6HQV8Pu29uFXz7l92SPCC3vPOM51eTQ==
+X-Received: by 2002:a05:620a:84c4:b0:7c5:5e16:cbeb with SMTP id
+ af79cd13be357-7c579ea93femr39480685a.3.1741881783743; 
+ Thu, 13 Mar 2025 09:03:03 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c7e406sm114258085a.46.2025.03.13.09.02.52
+ af79cd13be357-7c573c4e8b9sm115520885a.2.2025.03.13.09.03.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 09:02:53 -0700 (PDT)
-Date: Thu, 13 Mar 2025 10:02:50 -0600
+ Thu, 13 Mar 2025 09:03:03 -0700 (PDT)
+Date: Thu, 13 Mar 2025 10:03:00 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/3] doc/develop/codingstyle.rst: Add a section on
- conditional compilation
-Message-ID: <20250313160250.GB2640854@bill-the-cat>
+Subject: Re: [PATCH v2 3/3] doc/develop/codingstyle.rst: Expand to include
+ CONFIG_IS_ENABLED and PHASE_
+Message-ID: <20250313160300.GC2640854@bill-the-cat>
 References: <20250312010021.1671010-1-trini@konsulko.com>
- <20250312010021.1671010-2-trini@konsulko.com>
- <07042041-5793-478a-b66e-112d89c00688@cherry.de>
+ <20250312010021.1671010-3-trini@konsulko.com>
+ <33389606-0c16-4d26-b7e6-44e4f973d29e@cherry.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IaVoQ1cxhVCAv1yJ"
+ protocol="application/pgp-signature"; boundary="8UZd0KOMBB80C7YJ"
 Content-Disposition: inline
-In-Reply-To: <07042041-5793-478a-b66e-112d89c00688@cherry.de>
+In-Reply-To: <33389606-0c16-4d26-b7e6-44e4f973d29e@cherry.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,150 +99,113 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---IaVoQ1cxhVCAv1yJ
+--8UZd0KOMBB80C7YJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 13, 2025 at 11:15:35AM +0100, Quentin Schulz wrote:
+On Thu, Mar 13, 2025 at 11:20:09AM +0100, Quentin Schulz wrote:
 > Hi Tom,
 >=20
 > On 3/12/25 2:00 AM, Tom Rini wrote:
-> > In order to make a start on explaining how and when to use certain
-> > macros, we need to document their usage somewhere. As a first step, take
-> > section 21 of the v6.13 Linux Kernel coding-style document on
-> > conditional compilation and add it here.
+> > Expand the conditional compilation section to explain when to use
+> > CONFIG_IS_ENABLED rather than IS_ENABLED and provide an example. Next,
+> > note what the PHASE_ macro is supposed to be used for as well.
 > >=20
+>=20
+> Ah! Then ignore my comment on Patch 2/3 about the missing CONFIG_IS_ENABL=
+ED
+> :)
+>=20
 > > Signed-off-by: Tom Rini <trini@konsulko.com>
 > > ---
 > > Changes in v2:
 > > - New patch.
 > > ---
-> >   doc/develop/codingstyle.rst | 48 +++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 48 insertions(+)
+> >   doc/develop/codingstyle.rst | 17 +++++++++++++++++
+> >   1 file changed, 17 insertions(+)
 > >=20
 > > diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
-> > index fa3cd6aec82e..7211e4e4eed1 100644
+> > index 7211e4e4eed1..3303fff165de 100644
 > > --- a/doc/develop/codingstyle.rst
 > > +++ b/doc/develop/codingstyle.rst
-> > @@ -154,6 +154,54 @@ See `here
-> >   <https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html#fun=
-ction-documentation>`_
-> >   for style.
-> > +Conditional Compilation
-> > +-----------------------
-> > +
-> > +Wherever possible, don't use preprocessor conditionals (#if, #ifdef) i=
-n .c
-> > +files; doing so makes code harder to read and logic harder to follow. =
- Instead,
-> > +use such conditionals in a header file defining functions for use in t=
-hose .c
-> > +files, providing no-op stub versions in the #else case, and then call =
-those
-> > +functions unconditionally from .c files.  The compiler will avoid gene=
-rating
-> > +any code for the stub calls, producing identical results, but the logi=
-c will
-> > +remain easy to follow.
-> > +
-> > +Prefer to compile out entire functions, rather than portions of functi=
-ons or
-> > +portions of expressions.  Rather than putting an ifdef in an expressio=
-n, factor
-> > +out part or all of the expression into a separate helper function and =
-apply the
-> > +conditional to that function.
-> > +
-> > +If you have a function or variable which may potentially go unused in a
-> > +particular configuration, and the compiler would warn about its defini=
-tion
-> > +going unused, mark the definition as __maybe_unused rather than wrappi=
-ng it in
-> > +a preprocessor conditional.  (However, if a function or variable *alwa=
-ys* goes
-> > +unused, delete it.)
-> > +
-> > +Within code, where possible, use the IS_ENABLED macro to convert a Kco=
-nfig
-> > +symbol into a C boolean expression, and use it in a normal C condition=
-al:
+> > @@ -192,6 +192,23 @@ inside the block, and check it for correctness (sy=
+ntax, types, symbol
+> >   references, etc).  Thus, you still have to use an #ifdef if the code =
+inside the
+> >   block references symbols that will not exist if the condition is not =
+met.
+> > +In the case where a symbol may be referenced with an xPL-specific Kcon=
+fig
+>=20
+> Please provide some information about what xPL means (maybe a link to
+> somewhere it's already explained? doc/develop/init.rst:Board Initialisati=
+on
+> Flow could be a start? Or maybe rather doc/develop/spl.rst which seems to
+> better match what this is referring to?
+
+A problem is that, ah yes, doc/develop/spl.rst exists but needs to be
+renamed to xpl.rst and expanded on too. How about for this patch I
+change this to something like:
+
+When working with xPL (see :doc:`spl` for more information) we need to
+take further care to use the right macro. In the case where a symbol may
+be referenced with an xPL-specific Kconfig...
+
+And in a follow-up patch start addressing spl.rst. And that may get
+slightly blocked on splitting out the patch that allows the HTML code to
+have redirects automatically. I figured that out for the pytest docs
+RFC, so it's just a matter of making that part standalone and posting
+it, I know how to do it.
+
+> > +symbol, use the CONFIG_IS_ENABLED macro instead, in a similar manner:
 > > +
 > > +.. code-block:: c
 > > +
-> > +	if (IS_ENABLED(CONFIG_SOMETHING)) {
+> > +	if (CONIG_IS_ENABLED(SOMETHING)) {
 > > +		...
 > > +	}
 > > +
->=20
-> We should mentiond CONFIG_IS_ENABLED here too, as this is probably what m=
-ost
-> people should be using in driver code?
->=20
-> > +The compiler will constant-fold the conditional away, and include or e=
-xclude
-> > +the block of code just as with an #ifdef, so this will not add any run=
-time
-> > +overhead.  However, this approach still allows the C compiler to see t=
-he code
-> > +inside the block, and check it for correctness (syntax, types, symbol
-> > +references, etc).  Thus, you still have to use an #ifdef if the code i=
-nside the
-> > +block references symbols that will not exist if the condition is not m=
-et.
+> > +When dealing with a Kconfig symbol that has both a normal name and one=
+ or more
+> > +xPL-prefixed names, the Makefile needs special consideration as well. =
+The
+> > +PHASE\_ macro helps us in this situation thusly:
+> > +
+> > +.. code-block:: make
+> > +
+> > +        obj-$(CONFIG_$(PHASE_)SOMETHING) +=3D something.o
 > > +
 >=20
-> And I think this is a perfect example why we should follow the
-> aforementioned best practice as this would not happen had we had a stub
-> version of the function instead of the function just not existing? It'd be
-> nice to give that as an example in the docs. Follow-up question: is there=
- a
-> reason for NOT wanting to do that?
+> Please highlight non-English words with double tick quotes, that also rem=
+ove
+> the need to escape special characters like _, e.g.
 >=20
-> > +At the end of any non-trivial #if or #ifdef block (more than a few lin=
-es),
-> > +place a comment after the #endif on the same line, noting the conditio=
-nal
-> > +expression used.  For instance:
-> > +
-> > +.. code-block:: c
-> > +
-> > +	#ifdef CONFIG_SOMETHING
-> > +	...
-> > +	#endif /* CONFIG_SOMETHING */
-> > +
+> ``PHASE_``
 >=20
-> Applicable to the whole patch, maybe highlight non-English words with dou=
-ble
-> tick quotes?
->=20
-> e.g. ``#if``, ``#ifdef``, ``.c``, ``#else``, ``__maybe_unused``,
-> ``IS_ENABLED``, etc...
->=20
-> Looks good to me otherwise, nice addition!
+> Looks good to me otherwise,
 
-I'll reword the commit message to be clearer that this is just literally
-copy / pasting the kernel section as a starting point.
+OK, will do.
 
 --=20
 Tom
 
---IaVoQ1cxhVCAv1yJ
+--8UZd0KOMBB80C7YJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfTAaoACgkQFHw5/5Y0
-tyzpwgv+PSfKj2/JZRmZc7FSLLj1e3q4wSCRtLjcLiMLBfq/fThk6MahsxXaRwgt
-eCshm0yF/AY8VC2SPXABHK+HFAr+DILpXbO7hS/NVQVJDWKBkP2CjV/FlL9HvhXk
-qza7gm3/3tkudJLvi93A366juIO5cqZiWiMYENgW3VOvU10XPrxr/GZZryUfNN1x
-cS+S6nL81Jnrh0+OeFOTdZLRBxOdkeiHcid+SWRfNJOCqWaoly2Nk5mTua8vaKaK
-+NgCq5pD6a8gQ4eD/gNpIIxBNprUpg0M0Bh6KTCb5vWCnDYnuEznc49V8JTlnlbu
-AGbms1UMjMD6M33msoQBX3SdHhe88h+c+Szj1wqBWf5rnsD7RbJCPSP7HLYG4U2y
-3oDJMiJNZS58oX5mzvxyDO6QGB0RwaHozyvfHrkAmGc3eA/Vh3WkyCEBVnRBxzUU
-OAR+v7prHN8zSe3lIUOR3Vj1OTH8g59TP4HpkPDbd8O4hKBvh5Hcx8Q8a0KcxAGW
-rNo5ysRS
-=jFNt
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfTAbQACgkQFHw5/5Y0
+tywUSgwAgp0+CDuvpMDk1E5bbL3Lsk1EgXlGpXfuRcpdMbeL/FaeYHdcQ7Wo2Iep
+ymKqsO11xzOIpoYqxb0X6ACGo9YPiFEcz948X4c6kGFnTEbVkjleZdjsZzvnm9IJ
+eV7ycHovX/rRf2r5vQdFV1Nrj7E7hOER/M8YLxOfPNJ/WSLohGg7DxKJmv91mxuq
+dJh5LlIppckQylrRY7OGnXOzQ4IqQFyGnKcKuu5Vr5jL5ou7n1E23y2KHRAPYpls
+9ws3iHX1sbJ0sGIY2AfORRECJrxvD9T+ahUxVLLon5I4JwPkhN7qQB/5+KsH7iOp
+weckTMy4uKn+xpY/mekJ0bjzASVeDKoLyox8r/eM+6ostBWD3qVgFrWKMBrXOz/t
+yQbaubkUHzvpnWDCbfbIy2eIr5ozV/5lDqwwUcPQYqhWw8rcVTXESQaNfUMEKNjx
+RdXxsFJAzhQd8Qtj3+oGl3OwNj1nB8TNjy7PVhwWlIKpTEaPGo7gV2hOULQ2tAM0
+ARg95+4D
+=lbwt
 -----END PGP SIGNATURE-----
 
---IaVoQ1cxhVCAv1yJ--
+--8UZd0KOMBB80C7YJ--
