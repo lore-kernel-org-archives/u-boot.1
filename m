@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA151C282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D847C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17DE680F9C;
-	Thu, 13 Mar 2025 20:54:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEC098169D;
+	Thu, 13 Mar 2025 20:55:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BykLRLQY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eNl4/Trj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40DCE80756; Thu, 13 Mar 2025 20:54:36 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id E113E8175D; Thu, 13 Mar 2025 20:55:47 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91B7E80756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:54:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4273280FF7
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:55:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2241053582dso35443305ad.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:54:33 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-54996d30bfbso1178190e87.2
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:55:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741895672; x=1742500472; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UTP4571JTowDFjSTKBKk3KkNk+2D/Z2gslKp51l8QKU=;
- b=BykLRLQYQpKD+uWIxcLIYs8ZXShIGtjpsqeHVZoGV08awxYC0OuevTidfnNtcD7J5L
- TUeIwI+V3PxSV7V6EibeelT48KBgCX1++AwFCKXaqQ7L57ND2ZlBtZbjYrzIG79yPBVT
- m1lurfdqc1ljROENyM3CAEXjad61GhIfEaxHObCpmQvYJObzKV+Q9Ban8evTtoJ248Yn
- knZlh0uhBB1Z8Ckbu3sq4VSTfXV/3Ur0YkZHPc76u+OmIN1GMHK5rMvLLby7XxtQDq7j
- xttOMF5ThiecCxmIrPknPEQKk3aN1Ov+3N++kY4slFRzylCtTTd+lJTgLuMgOUihBp0x
- tzsw==
+ d=gmail.com; s=20230601; t=1741895744; x=1742500544; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LqTmRlgyHXZGE3tZgkTAaTRPEz7ixvw8jYTENlo8t0g=;
+ b=eNl4/TrjxvQdBGdQpAygZaUMVnN3swCwv3aRusMJynWyCxM7cfBl8SnAOzMFZpSXDd
+ m5XQe36Es4zxEa7LnMM1lHEXZx4ttV8n8byRN5Avn32jp9eax5ULd76+/OwFpkWC0noQ
+ HBgF50biCbA/MWYprywvaUqsxAjT+u0dSJapr2dNetrNkJoXaoa8yFtD9+pYIB3tK/cV
+ BMbA4rhBaA+CxQ1v/8QBY78olsWkuca3kbGhLZFoTh/fX0Kylh2rKz/H1TznqPtkcGJM
+ rg2QrykeXr2fryt7TpKP7CyU3iK/E7gwaEFQxtpF+3im2ryOFXslYfz7NG8kr/S+It89
+ JEKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741895672; x=1742500472;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UTP4571JTowDFjSTKBKk3KkNk+2D/Z2gslKp51l8QKU=;
- b=VXMvdQQMgpnfpGrykAnjH3RUIC0p9LKQtXf+DcqPUAvSX5s8gXgzeEm5uF/9wYvlXH
- dmbBQ+xypKCQp0kgfKs5VZe+pcIr7pMN/028BxbIE/yVGNpSH14GivA17FbuhsbSruMe
- 69dC5PGSodpblKvbirnm9MnCkuDJT3PjkzFlmuObD3pfUV063oplRE789q+1vdLptOa0
- FeLLPlgmY6aLZcS7RvElYls8YFnpL2zx4oRUprC5ERLB1TC0L8TBHKDEv2YDh0kAMgv/
- Mu/FqZur7QpEZzhfgQP7aDEUtysAoYMzirpXbNc0zyupDQemMvj7mISq6XIRpHYuxYQ1
- j2wA==
-X-Gm-Message-State: AOJu0YwdO/anZQZZ/SGSY7uUKGb0OxvN2Kvr/3mLQsPviG/1d8M7oe1G
- dXXF3EIFUtOgO0TiVFv+yVJp9O0WKvN/3YR6rijPNM9k06LUQxi1
-X-Gm-Gg: ASbGncsg0lfuqJSJmV2EypnK38UpTUbr6uyFIxlxbg6M59jgKZOrojetN/nu6Gma2Hf
- lDdikc5FI5F4MGNqTji3qwgXwrMbnvDM9s5G1YE9sopPdncdDluj9f2o/nX7KQB9BlKaVkFmKO2
- S6ZfL4KTTOaaoxSfKDcwfMdR7DWR3IkHC5gZKUcJ9fEG4rtOVVdwJY60AVe0E8Bym07SUlByw6E
- J3aGkFRC7g+zPLSq7wFudLf4P2MOIocMnhEHHYrD+vldHDXIEbvAM5Z3PRqJDKHPjdOobiG9a8o
- WY3FR+sjENSVpX1yf+u58YIWdblLdkK4/Qbz7lgA7fG3BbkQwgUpn7FBp4lQCHAEnrggig==
-X-Google-Smtp-Source: AGHT+IGlrOSOSopQBYdlzbxnYsP7PGsCimlGTpP5KZozFn3gWcg2HwXVb9W3MdIfC3ibh4xUFxeNAw==
-X-Received: by 2002:a17:903:2446:b0:223:f9a4:3fb6 with SMTP id
- d9443c01a7336-225dd82588emr11360485ad.11.1741895671884; 
- Thu, 13 Mar 2025 12:54:31 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:abab:f7ee:5b0a:8554])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c6ba6f64sm17383495ad.127.2025.03.13.12.54.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 12:54:31 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-next-20250313
-Date: Thu, 13 Mar 2025 16:54:27 -0300
-Message-Id: <20250313195427.1554312-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1741895744; x=1742500544;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LqTmRlgyHXZGE3tZgkTAaTRPEz7ixvw8jYTENlo8t0g=;
+ b=SJaLEbS/D06SobC8jn857WzgUkMnzcFmakT+ygi+Xu88r28AbENt7xnUaBVXHRGtRE
+ XFs18iccy2DSh8tvlLTbIaxHF3GS+807qWyf0+ZALtcchLqt9cmM8bxt2iz6PGJovne3
+ NIuS+EapramqLch9O5OH/0fU/Lre2PzcMtKeSImuAqWWw8S+VtmjZr1WURHJ8ood3WFa
+ j2Gpp9Ad8soa5j0P4qzpgALDRBdJoNeKlZJe+SG4qFkzHFWYQFAJYlLrmt3O5fHqXNU5
+ 2fl4ZXAx7Tg7Jt4z+WZW9BE7RnacArWuldJtRRWFZk+5WapW/OvBHsQDIVFSAROh4DYP
+ lLaA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV8uIwSIISnLby3NiV6wQLcs82WaaRsnJ4ooSM4QbT+Vcvk6bPJN3LuRKm9DSNEeZ/eAF96a60=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyw4hX+GFxphD7gVSyhGACMkSDIYmY2WiezfUUcFC9yjAIrgByA
+ CtfMvpPrqzciLWa+bMwBzgLCqaux+L3nUuuovNgdAgZ1+Eq/N80W5oj0biM8nd2LQvDl9/92WrZ
+ mU3CDyvoYu2lHuUy5mEcDRqXotgA=
+X-Gm-Gg: ASbGncuZomB5JByWD+vDZk5xODPu0mkaYLinyeTSwe8i1417wmBaLLTmunkVCpa/FvA
+ T7Xuv4UW3cnus1r02WQH2ISGXk4ANOOg85qj9n4TJeM4CGD2gPimHLkEoajBSoEc4PsdZL36cvz
+ kK2ZcMZUPNDMvh1mDHm/TOYYD7nsLhq5T2QO8ZWANLlvzgfEuPMFH8FJ9iYA==
+X-Google-Smtp-Source: AGHT+IGMXfBhpk3iMsebAKu3JwyxIIQ/3d0vXXR2xMy8ZmgHEEk5NF8tgxu3S2DW9XK0wpvSLBWQaMuRPasSLnYT6MQ=
+X-Received: by 2002:a05:6512:acd:b0:549:8ed4:fb4f with SMTP id
+ 2adb3069b0e04-549c09f8d51mr418572e87.23.1741895744213; Thu, 13 Mar 2025
+ 12:55:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250307103454.32661-1-ernest.vanhoecke@toradex.com>
+ <20250307103454.32661-2-ernest.vanhoecke@toradex.com>
+In-Reply-To: <20250307103454.32661-2-ernest.vanhoecke@toradex.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 13 Mar 2025 16:55:32 -0300
+X-Gm-Features: AQ5f1JreF4OesKFr0Q86QivPP4FHIRkDrycK3xfQnSEwonXtDRBwCnDwCmfKOo0
+Message-ID: <CAOMZO5CoL4ZJSByySCeRiSBw7GqrMBwViGkadr7Qb-vzFC45_w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] board: toradex: apalis/colibri imx6: Detect new
+ v1.2 SoM variant
+To: ernestvanhoecke@gmail.com
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,69 +99,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, Mar 7, 2025 at 7:35=E2=80=AFAM <ernestvanhoecke@gmail.com> wrote:
+>
+> From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+>
+> Apalis/Colibri iMX6 V1.2 will replace the STMPE811 ADC/Touch controller
+> which is EOL by the TLA2024 ADC and AD7879 touch controller.
+>
+> To support this new version, we detect the presence of the TLA2024
+> during boot and set a new environment variable named "variant". This
+> will allow us and users to select the correct DT easily.
+>
+> By probing via I2C we have a robust detection method instead of relying
+> on the existing "board_rev" environment variable which is set by the
+> config block. Users can use "variant" in their DT selection and do not
+> have to map the board revision to a device tree.
+>
+> "variant" environment variable behaviour:
+> * Empty or absent for all versions below v1.2 (STMPE811)
+> * "-v1.2" for all versions starting from v1.2 (TLA2024 + AD7879)
+>
+> Usage example:
+> setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb
+>
+> Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+> Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> ---
+> v2: Fixed the "From" field
 
-Please pull from u-boot-imx/next, thanks.
-
-The following changes since commit eeefcacb851f7f0bccabc3089a725f5ce86f5c70:
-
-  Merge tag 'u-boot-stm32-20250312' of https://source.denx.de/u-boot/custodians/u-boot-stm into next (2025-03-12 21:36:52 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20250313
-
-for you to fetch changes up to 21a4ac55c0d4eba836a45345d011093ffdc85b5c:
-
-  mailbox: add i.MX Messaging Unit (MU) driver (2025-03-13 15:15:50 -0300)
-
-u-boot-imx-next-20250313
-------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25142
-
-- Support Toradex i.MX6 Apalis/Colibri v1.2 SoM.
-- Guard tee.bin inclusion on imx9,
-- Remove unneeded regulator entry on DH i.MX6 DHCOM DRC02 devicetree.
-- Add i.MX mailbox driver
-- Convert ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE to Kconfig.
-- Cope with existing optee node on imx8m.
-----------------------------------------------------------------
-Ernest Van Hoecke (2):
-      board: toradex: apalis/colibri imx6: Detect new v1.2 SoM variant
-      toradex: apalis/colibri imx6: Select correct DTB for SoM v1.2+
-
-Fabio Estevam (1):
-      imx9: container.cfg: Guard tee.bin inclusion
-
-Marek Vasut (1):
-      ARM: dts: imx: Drop bogus regulator extras on DH i.MX6 DHCOM DRC02
-
-Peng Fan (1):
-      mailbox: add i.MX Messaging Unit (MU) driver
-
-Tom Rini (1):
-      mmc: fsl_esdhc: Migrate ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE to Kconfig
-
-Vincent Stehlé (1):
-      imx8m: soc: cope with existing optee node
-
- MAINTAINERS                               |   1 +
- arch/arm/dts/imx6qdl-dhcom-u-boot.dtsi    |   5 -
- arch/arm/mach-imx/imx8m/soc.c             |   3 +-
- arch/arm/mach-imx/imx9/container.cfg      |   2 +
- arch/powerpc/include/asm/config_mpc85xx.h |   3 -
- board/toradex/apalis_imx6/apalis_imx6.c   |  31 +++
- board/toradex/colibri_imx6/colibri_imx6.c |  31 +++
- configs/apalis_imx6_defconfig             |   2 +-
- configs/colibri_imx6_defconfig            |   2 +-
- drivers/mailbox/Kconfig                   |   7 +
- drivers/mailbox/Makefile                  |   1 +
- drivers/mailbox/imx-mailbox.c             | 443 ++++++++++++++++++++++++++++++
- drivers/mmc/Kconfig                       |   6 +
- drivers/mmc/fsl_esdhc_imx.c               |   8 +-
- include/configs/imxrt1020-evk.h           |   2 -
- include/configs/imxrt1050-evk.h           |   2 -
- include/configs/imxrt1170-evk.h           |   2 -
- 17 files changed, 527 insertions(+), 24 deletions(-)
- create mode 100644 drivers/mailbox/imx-mailbox.c
+Applied both to u-boot-imx/next, thanks.
