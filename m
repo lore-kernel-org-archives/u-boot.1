@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1663C28B2E
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:55:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F319C2BA1B
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 11:55:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22F36817EC;
-	Thu, 13 Mar 2025 12:55:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 81BA78198A;
+	Thu, 13 Mar 2025 12:55:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="c2kwqoVr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cebxbr+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9AE38169D; Thu, 13 Mar 2025 12:55:24 +0100 (CET)
+ id 5196B8007D; Thu, 13 Mar 2025 12:55:28 +0100 (CET)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8696E80F9C
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:55:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10BDC8175D
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:55:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=f-akthar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtKBi1374137
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 13 Mar 2025 06:55:20 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtN9N1374141
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 13 Mar 2025 06:55:23 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741866920;
- bh=r2B+V35vd7FQQUhwOr83M2HCFgsjGKw6qod6QwnZnWc=;
+ s=ti-com-17Q1; t=1741866923;
+ bh=dyqXY31Yd9zjEhg3EkhNaHrLZ8JhV1mEfbKJD+M/HG8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=c2kwqoVrr8593E9BV0D3QxuHR51LajYGAlNi98jqXsfHCzjKvw7Y+SM1XiqLtgIY2
- 25n80watxIb9upzZwLNPKOoqKpjofHKaj0kgotsyc8lW8VRwaURKyvOf1Gsg5S/zoX
- r6b851oFOqDhVVTRVhd5OkO2sJz1aQ1e7hmnyD1E=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52DBtKIH097075
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Mar 2025 06:55:20 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ b=cebxbr+6JHfbb3FW/42i/mx/mQhor5FC6FgtfsxNHLI21OjMiVumL8gsLtYSmBSL9
+ EwVfuso9j1WP/9HYbrGHIKUsUuRSFKZnrLfMMPQ/J8T91b0csxiMPK5CR/s4a9rWbM
+ HGUutMFovo3xlwaGI877DsprKvJ5oCT5eooKrzjE=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtNvm110019;
+ Thu, 13 Mar 2025 06:55:23 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Mar 2025 06:55:20 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 06:55:23 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Mar 2025 06:55:20 -0500
+ Frontend Transport; Thu, 13 Mar 2025 06:55:22 -0500
 Received: from localhost (fayaz-hp-z2-tower-g4-workstation.dhcp.ti.com
  [172.24.227.128])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtJnx035209;
- Thu, 13 Mar 2025 06:55:20 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52DBtMv7097515;
+ Thu, 13 Mar 2025 06:55:22 -0500
 From: Harsha Vardhan V M <h-vm@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>
-Subject: [RFC PATCH 1/4] cmd: fuse: Remove custom string functions
-Date: Thu, 13 Mar 2025 17:25:14 +0530
-Message-ID: <20250313115517.1181829-2-h-vm@ti.com>
+Subject: [RFC PATCH 3/4] drivers: k3_fuse: Add fuse sub-system func calls
+Date: Thu, 13 Mar 2025 17:25:16 +0530
+Message-ID: <20250313115517.1181829-4-h-vm@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250313115517.1181829-1-h-vm@ti.com>
 References: <20250313115517.1181829-1-h-vm@ti.com>
@@ -80,99 +79,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove custom string functions and replace them with normal string
-functions. Remove the custom strtou32 and replace it with str2long.
+Add K3_FUSE config option to add and enable fuse sub-system
+implementation function calls.
 
 Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
 ---
- cmd/fuse.c | 27 ++++++++-------------------
- 1 file changed, 8 insertions(+), 19 deletions(-)
+ drivers/misc/Kconfig   |  7 ++++
+ drivers/misc/Makefile  |  1 +
+ drivers/misc/k3_fuse.c | 78 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 86 insertions(+)
+ create mode 100644 drivers/misc/k3_fuse.c
 
-diff --git a/cmd/fuse.c b/cmd/fuse.c
-index 598ef496a43..9f489570634 100644
---- a/cmd/fuse.c
-+++ b/cmd/fuse.c
-@@ -15,17 +15,6 @@
- #include <vsprintf.h>
- #include <linux/errno.h>
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index da84b35e804..834e0285097 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -468,6 +468,13 @@ config STM32MP_FUSE
+ 	  for STM32MP architecture.
+ 	  This API is needed for CMD_FUSE.
  
--static int strtou32(const char *str, unsigned int base, u32 *result)
--{
--	char *ep;
--
--	*result = simple_strtoul(str, &ep, base);
--	if (ep == str || *ep != '\0')
--		return -EINVAL;
--
--	return 0;
--}
--
- static int confirm_prog(void)
- {
- 	puts("Warning: Programming fuses is an irreversible operation!\n"
-@@ -54,14 +43,14 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 	argc -= 2 + confirmed;
- 	argv += 2 + confirmed;
- 
--	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
--			strtou32(argv[1], 0, &word))
-+	if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
-+			!(str2long(argv[1], (ulong *)&word)))
- 		return CMD_RET_USAGE;
- 
- 	if (!strcmp(op, "read")) {
- 		if (argc == 2)
- 			cnt = 1;
--		else if (argc != 3 || strtou32(argv[2], 0, &cnt))
-+		else if (argc != 3 || !(str2long(argv[2], (ulong *)&cnt)))
- 			return CMD_RET_USAGE;
- 
- 		printf("Reading bank %u:\n", bank);
-@@ -79,7 +68,7 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 	} else if (!strcmp(op, "readm")) {
- 		if (argc == 3)
- 			cnt = 1;
--		else if (argc != 4 || strtou32(argv[3], 0, &cnt))
-+		else if (argc != 4 || !(str2long(argv[3], (ulong *)&cnt)))
- 			return CMD_RET_USAGE;
- 
- 		addr = simple_strtoul(argv[2], NULL, 16);
-@@ -99,7 +88,7 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 		unmap_sysmem(start);
- 	} else if (!strcmp(op, "cmp")) {
--		if (argc != 3 || strtou32(argv[2], 0, &cmp))
-+		if (argc != 3 || !(str2long(argv[2], (ulong *)&cmp)))
- 			return CMD_RET_USAGE;
- 
- 		printf("Comparing bank %u:\n", bank);
-@@ -119,7 +108,7 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 	} else if (!strcmp(op, "sense")) {
- 		if (argc == 2)
- 			cnt = 1;
--		else if (argc != 3 || strtou32(argv[2], 0, &cnt))
-+		else if (argc != 3 || !(str2long(argv[2], (ulong *)&cnt)))
- 			return CMD_RET_USAGE;
- 
- 		printf("Sensing bank %u:\n", bank);
-@@ -139,7 +128,7 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 			return CMD_RET_USAGE;
- 
- 		for (i = 2; i < argc; i++, word++) {
--			if (strtou32(argv[i], 16, &val))
-+			if (!(str2long(argv[i], (ulong *)&val)))
- 				return CMD_RET_USAGE;
- 
- 			printf("Programming bank %u word 0x%.8x to 0x%.8x...\n",
-@@ -155,7 +144,7 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 			return CMD_RET_USAGE;
- 
- 		for (i = 2; i < argc; i++, word++) {
--			if (strtou32(argv[i], 16, &val))
-+			if (!(str2long(argv[i], (ulong *)&val)))
- 				return CMD_RET_USAGE;
- 
- 			printf("Overriding bank %u word 0x%.8x with "
++config K3_FUSE
++	bool "Enable TI K3 fuse wrapper providing the fuse API"
++	depends on MISC && CMD_FUSE && CMD_FUSE_WRITEBUFF
++	help
++	  If you say Y here, you will get support for the fuse API (OTP)
++	  for TI K3 architecture.
++
+ config STM32_RCC
+ 	bool "Enable RCC driver for the STM32 SoC's family"
+ 	depends on (ARCH_STM32 || ARCH_STM32MP) && MISC
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index dac805e4cdd..0b81ba2604f 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -48,6 +48,7 @@ obj-$(CONFIG_$(XPL_)I2C_EEPROM) += i2c_eeprom.o
+ obj-$(CONFIG_IHS_FPGA) += ihs_fpga.o
+ obj-$(CONFIG_IMX8) += imx8/
+ obj-$(CONFIG_IMX_ELE) += imx_ele/
++obj-$(CONFIG_K3_FUSE) += k3_fuse.o
+ obj-$(CONFIG_LED_STATUS) += status_led.o
+ obj-$(CONFIG_LED_STATUS_GPIO) += gpio_led.o
+ obj-$(CONFIG_MPC83XX_SERDES) += mpc83xx_serdes.o
+diff --git a/drivers/misc/k3_fuse.c b/drivers/misc/k3_fuse.c
+new file mode 100644
+index 00000000000..4a8ff1f2523
+--- /dev/null
++++ b/drivers/misc/k3_fuse.c
+@@ -0,0 +1,78 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2025 Texas Instruments Incorporated, <www.ti.com>
++ */
++
++#include <errno.h>
++#include <stdio.h>
++#include <fuse.h>
++#include <linux/arm-smccc.h>
++#include <string.h>
++
++#define K3_SIP_OTP_WRITEBUFF 0xC2000000
++#define K3_SIP_OTP_WRITE 0xC2000001
++#define K3_SIP_OTP_READ 0xC2000002
++
++int fuse_read(u32 bank, u32 word, u32 *val)
++{
++	struct arm_smccc_res res;
++
++	if (bank != 0U) {
++		printf("Invalid bank argument, ONLY bank 0 is supported\n");
++		return -EINVAL;
++	}
++
++	/* Make SiP SMC call and send the word in the parameter register */
++	arm_smccc_smc(K3_SIP_OTP_READ, word,
++		      0, 0, 0, 0, 0, 0, &res);
++
++	*val = res.a1;
++	if (res.a0 != 0)
++		printf("SMC call failed: Error code %lu\n", res.a0);
++
++	return res.a0;
++}
++
++int fuse_sense(u32 bank, u32 word, u32 *val)
++{
++	return -EPERM;
++}
++
++int fuse_prog(u32 bank, u32 word, u32 val)
++{
++	struct arm_smccc_res res;
++	u32 mask = val;
++
++	if (bank != 0U) {
++		printf("Invalid bank argument, ONLY bank 0 is supported\n");
++		return -EINVAL;
++	}
++
++	/* Make SiP SMC call and send the word, val and mask in the parameter register */
++	arm_smccc_smc(K3_SIP_OTP_WRITE, word,
++		      val, mask, 0, 0, 0, 0, &res);
++
++	if (res.a0 != 0)
++		printf("SMC call failed: Error code %lu\n", res.a0);
++
++	return res.a0;
++}
++
++int fuse_override(u32 bank, u32 word, u32 val)
++{
++	return -EPERM;
++}
++
++int fuse_writebuff(ulong addr)
++{
++	struct arm_smccc_res res;
++
++	/* Make SiP SMC call and send the addr in the parameter register */
++	arm_smccc_smc(K3_SIP_OTP_WRITEBUFF, (unsigned long)addr,
++		      0, 0, 0, 0, 0, 0, &res);
++
++	if (res.a0 != 0)
++		printf("SMC call failed: Error code %lu\n", res.a0);
++
++	return res.a0;
++}
 -- 
 2.34.1
 
