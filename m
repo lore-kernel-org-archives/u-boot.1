@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95C19C35FF1
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:44:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A515C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 22:44:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AA84817D3;
+	by phobos.denx.de (Postfix) with ESMTP id DFE328192A;
 	Thu, 13 Mar 2025 23:44:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f9YOPwY5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U78PnhMB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 806828175D; Thu, 13 Mar 2025 23:44:19 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id 1E71C81870; Thu, 13 Mar 2025 23:44:20 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B82478168B
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA8E0817D3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:44:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7c3c4ff7d31so200294385a.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:15 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7be8f28172dso97122085a.3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 15:44:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741905854; x=1742510654; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741905857; x=1742510657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iYRzxx+MrSuC0NCVt7fJgB9WOriosaeqtWUzZSTCjpI=;
- b=f9YOPwY5omStzNRyBb7MBW4UxlwaDFgpTt7j541WaK5BfLwou76ZVoBffdsdYNLFQO
- wGmlj1VQDRaQ1/8Pv3S+BXQCNW0m92k9PnAGM/HUXVq3k2Vmzr5dqnZd/5/+3VS3fKQs
- 7ugibH7F40KJH6uWra8E1IMEqshwYD3FwHSxc=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=214RIJEL4WtSY14xdIjvCnJMbIHYhMiWaSxb/3KjW6E=;
+ b=U78PnhMBlWxLqKuct1foa4haJdQGThsZRU4umk+7RetHsuZZNJwWbFcDMFubqrlxi7
+ qviKWJIrjGqjgW+l8pwHU6hPCBAjSJn+SqBmPm66V3cxFbJNQ7sx/hIr+rqzFh49pAf2
+ LbyXsjYoD1GYywCXHRSkTkW954BJvdoq9ATRM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741905854; x=1742510654;
+ d=1e100.net; s=20230601; t=1741905857; x=1742510657;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iYRzxx+MrSuC0NCVt7fJgB9WOriosaeqtWUzZSTCjpI=;
- b=ZzR5/QnBdTPUcYRH/SBAw/5YEpF43d8VZdIBVU6QIg3EE2PLOp9Roh+WhKQ6BTDvET
- 3zIp++uekFz5HhTSv/ngO+P5Ob/iBoTXbCmS6TfnVPz0guLUneamRV5P1rgivXSWbXb6
- Grnqh7muOztK0qNrgU9loXR0ADxv3clP5yiv1TucNwyU56F59W8e8YZ7+EQ1spIpFemj
- DoWn1Xgs13Vh6mYKGNvIoCuvZ257DjF2zwejscqH3sE8Kw0t6czwKXj4PsWzyVrcpt07
- xzKBmnCCN8r3zUkmAI+OWW1aj7p8ch1WbuSY0w85hX48qnJRZHmiCDcg/O02NqaftxDH
- MuhQ==
-X-Gm-Message-State: AOJu0YzO6YsDNRWne4q2wUqJWhBxSdflZr/qjfo/v5O7+vyIc2OBpTuq
- gV3j45Yi5/nfrN49PhSqUSLqq+Fpco6Sm7O1TDcZi0ZBkscvJ/tAOQRC019qyRZzOt+nhNqNEu5
- i
-X-Gm-Gg: ASbGncvEV3q8yJQh9H21s3sgoz57j8Ffjm5buTNLaS+UeSDvF/a7h7oyI5JJWcxYlu0
- RI+ZmYoEQDpe/U9UC+28nbQwHwYDbxEyIRcwTEjzxxh9e02bbEUQk2iIquHiZJwbQH5CHJmKiOY
- C/4dt7/tOSkwpI1PT/PODY7J0jjgLa25joBiK+zjjroRAUSsWBMpfDkzvNmp6dcFmRrYtbj00Rs
- lE86D3Rza1KyJTOYAthmrHH6jDfBCO/P5hN81nxVImhPuYb6L35sdIaWOdvm4SPlDOmuUyfyz44
- 8mqGzYOT2nrHAndV0th5XLTwgE8A2kSvZj4F5kS27sxI
-X-Google-Smtp-Source: AGHT+IFsjtQhqShMCAkTvPiLx2RPVNpvy9MO5+gGk6PWnt8zsMaBjaIuk0PZoc90TjCsnAEAWsYL9g==
-X-Received: by 2002:a05:620a:4091:b0:7c5:53ab:a745 with SMTP id
- af79cd13be357-7c57c8fb0e7mr15200385a.36.1741905854665; 
- Thu, 13 Mar 2025 15:44:14 -0700 (PDT)
+ bh=214RIJEL4WtSY14xdIjvCnJMbIHYhMiWaSxb/3KjW6E=;
+ b=r1Pjc7LZPMMHWauz6+hcIRnhBHWC+ncHWf3ampcb+M6g4OCsJ/qhs/yC0UE/SWcJtF
+ K8DrufRQJ/hznc+cHasCKQ2tyW4cOh4KF/qxM1yjCxXbDRBpBLg4aBguP7M0UZghLbTw
+ FQChuTLC9noBcmD4f+gGQ6yL3Gw6ig3VJRVjhW1t3inEBqZcNK4pqGyOzX+h4yxfAGa9
+ qOpSZJ7DaPYnSbMxeLpZpCvveqqvIuGLkFclrml0v+obU8qnyoVYQOkt4zc/bARqvmWD
+ xc0HTPnRaxyOSAz630pe+vXw32WLdO052ptd+W9+G7pjuyrUcZzc0sTfy2/GenyR810q
+ oY+Q==
+X-Gm-Message-State: AOJu0YxAbvveDAhhPg+jmKFAZk0eF/AgVje8BiQLsv8UhR6I5mXSvrSL
+ 82ix3+NeMOia1Ax6FNWh/LLJB/ZWPt1oH7O7gpRVzE3OILwvH4HmehJnURHw/4ChLNKlIB1RJua
+ w
+X-Gm-Gg: ASbGnctZtHDNFup0a7kOzrN1Cw0LLuYwfodPRUuxWtGmo95XRmzcAljZOeByj5aI5TQ
+ hy61q9yDcBPRH6UrfIsrNuK+wwjadMpaA4yr0dUJanx16mnCrzz28ffEaPr9AHwD32Wpxk9nGmB
+ 5wSpCHiXs/O3RfWxr+sFVhPu57jESuGJ1JI/2tAtYTYiQOVxLlvfrzeFZlApoiYfSbeJ93cGyF3
+ /BdmxIv4uzty2Ka0DRazzrJfBE6IKvqJCxAWlG1rknthmcCy3ihrnerCr6ugT1IPNGn3tpXzjJV
+ kXHh/JDyvYumQYjbs8fj1fc8AHqSBY3k2scJYjhfrefk
+X-Google-Smtp-Source: AGHT+IEuQ2VJZd7HiZNqpumhN/02kgAfNRVSplZFoSubVbxG93CUBY0O4J/XEmzfmfNEbE3ctfijOA==
+X-Received: by 2002:a05:620a:601b:b0:7c5:60c7:346 with SMTP id
+ af79cd13be357-7c57c73cfffmr19324285a.10.1741905856861; 
+ Thu, 13 Mar 2025 15:44:16 -0700 (PDT)
 Received: from [127.0.1.1] ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.12
+ af79cd13be357-7c573c98225sm154508585a.49.2025.03.13.15.44.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 15:44:14 -0700 (PDT)
+ Thu, 13 Mar 2025 15:44:15 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>
-In-Reply-To: <20250226141952.1195955-1-raymond.mao@linaro.org>
-References: <20250226141952.1195955-1-raymond.mao@linaro.org>
-Subject: Re: [PATCH] tools: add HOSTCFLAGS from openssl pkg-config
-Message-Id: <174190585290.2150240.11043902184438732422.b4-ty@konsulko.com>
-Date: Thu, 13 Mar 2025 16:44:12 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250226203109.3831895-1-trini@konsulko.com>
+References: <20250226203109.3831895-1-trini@konsulko.com>
+Subject: Re: [PATCH] test: event: Correct usage of IS_ENABLED() macro in
+ test/common/event.c
+Message-Id: <174190585480.2150240.1931622262561279882.b4-ty@konsulko.com>
+Date: Thu, 13 Mar 2025 16:44:14 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,21 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Feb 2025 06:19:51 -0800, Raymond Mao wrote:
+On Wed, 26 Feb 2025 14:31:09 -0600, Tom Rini wrote:
 
-> HOSTCFLAGS of some tools components (image-host, rsa-sign and
-> ecdsa-libcrypto) depend on the directory where openssl is installed.
-> Add them via pkg-config.
-> This fixes a potential build failure in tools when openssl in installed
-> in varied directories.
+> This file was using IS_ENABLED() to test for CONFIG flags but omitted
+> the CONFIG_ prefix and so did not work as expected.
 > 
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] tools: add HOSTCFLAGS from openssl pkg-config
-      commit: 7a765a37b3d4dead659a061561489ccce1276923
+[1/1] test: event: Correct usage of IS_ENABLED() macro in test/common/event.c
+      commit: 5c2ad0799715e7c02aa98d946a04e526fc5802b0
 -- 
 Tom
 
