@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B11C35FF1
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:57:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBC5C282DE
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:58:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 215AD80FF7;
-	Thu, 13 Mar 2025 20:57:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C35B80FF7;
+	Thu, 13 Mar 2025 20:58:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lfW2lfT7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cp9399JV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A7AE8168B; Thu, 13 Mar 2025 20:57:51 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 2E3998168B; Thu, 13 Mar 2025 20:58:23 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38AB380756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:57:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D371380756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:58:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5493b5bc6e8so1473410e87.2
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:57:49 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5493b5bc6e8so1473863e87.2
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741895868; x=1742500668; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741895899; x=1742500699; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JFfmTdC7YCA+Y/jJOgAVr0uup1A6kT0hh0N1/2b5FIY=;
- b=lfW2lfT78/JcoQHmnyKHXHvhQY+f8YPib6sXAP3ZAhomlM9pPgZFElkVgZ5HBJ1y4I
- IDI98hC0Y9foMC3p0rRswVIQRkozizsTr9XCMxZayE4o8NgNqTLCPJUoWOqgSa0hC7tC
- rEz0Zx5j/OnxdXYEyR8yfYygonK1apkbU69Zh8s+0oqPFj7EHzP3sCEQ/AYl1QlHxuBS
- /O36EiaIdshDpvFNeXi6nqFJPkQHM04bqmhhryN0dw371CiDwiZSQs/8CEcyBxNeY3rB
- urGsnmh4Ip6Q8jAwkTW9mv6kUHkwesxmfaSobI/yT/kIXaaqU+9N+8crbiXFxKiCIBZv
- lyww==
+ bh=FGvxfT1ZMMKZh905PKarHsU6hG+Ozf/lNIMFy4uLX8E=;
+ b=cp9399JVCSu+d5f3RcH1ys+wS+KmQH/mfLiWIvM/Ep1X6ZufnXcztvZKjnWFeRquYR
+ hpsaKOnfWgOniuTP9Jaxd5E1cPb8A/fqG+GErKGx+rwxJxFuQUrADaxtbs1YFbq6gsvi
+ ASj3QCDAEQmmA8jE2AIVuiHZnCnmLEGcQyLvXrdDdMW/ww9gokK7k1N+RB5Ysr/Bab0t
+ wTGmYd9qUkHx1DgD8Rzy7FEne/Y72IcZ1Q3LlKXnfu5yoJGTRfQ2droFdkkAFBbLGyv1
+ 8tF6YnUwtfp6IxEiqi8kjc/xQGjzV3hjF2cZoxmJr7POVvzGqlBEhPs1k88g4rIDlL8v
+ HWJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741895868; x=1742500668;
+ d=1e100.net; s=20230601; t=1741895899; x=1742500699;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JFfmTdC7YCA+Y/jJOgAVr0uup1A6kT0hh0N1/2b5FIY=;
- b=uSAQtqKkogswylcjVB9BYV8OgLO7GyogzssVj0USOZ+10RvYtGW/P13tb1DSG1s0kf
- 3jAUHiEY6JUMd8zL/MsH2UKx9H8AQbroXlB4YRBdI+F7yABAuH6cAST6wmxdkMwdxUDV
- eDqoDWknqoJVQKuOc8Jgj69h4wKVJhHG6AbNUtJF90VBtUPqcwOwUtUeyBfUrifxNdFl
- +xx9xr6bWJy6PfRBZY9THtuiHDXW9kPttMYHBBCLm04K7adY+lJxkU0BiBg8JOlc+du+
- GDfHMtKBsNEWcUOpDVaPPxjfsStJ3byEdFtq361MmGihfg5N1QZMCelF2FbwOTdDhERm
- 9y5A==
-X-Gm-Message-State: AOJu0Yz1TDeJ6cyS5kjP0w5ykjoMqIxQNoDxMobzXNXcJsivY2GyKRbO
- kp2B55Yzr3CZXkDG8s/T90Zoi46QbYJLvl4pAus5FwUTv+2DLixqvRnmJBoDI5YnR9jF7nGlsm1
- 1tFiM6aK5CcJnjVE+LC/MF7QraWA=
-X-Gm-Gg: ASbGncvj8rfVI8Ie4jRl+NCh2yBkVjgYeNpxPDmhul0Bsf2kg/ExFCyYBkdtK73qOJU
- 5ZIasHAhtme4JYlx6XdmLOWdAkpvNh+i78aAz1NTYX43AVAxLDyB2AqL3dS0R6NvRGpMWusqxWE
- P8Y1UOitRwT3cp4GJdQME485In4Zh51+WSYliBCH3hANSb//JIpKw9g3jkjgnYEJ6r/eMp
-X-Google-Smtp-Source: AGHT+IG3JAxNyvoohsmiyx4IlPElOSroLpqbrU04PIXfw4IwSu+G4Qnw7cocsZxRJ98ATZl9iP8Z4t2oprZobYMbvpI=
-X-Received: by 2002:a05:6512:1113:b0:545:c89:2bc9 with SMTP id
- 2adb3069b0e04-549c0a5b12dmr431780e87.43.1741895868170; Thu, 13 Mar 2025
- 12:57:48 -0700 (PDT)
+ bh=FGvxfT1ZMMKZh905PKarHsU6hG+Ozf/lNIMFy4uLX8E=;
+ b=C/oOR4QatdzdcGa2NWrbx/HHgBSbLsfD4Dbku2JUMYrwGEOT67XUDaaVvqk551P3Gs
+ n0+nBWZm46b1y/8qpqADu+V2VrrC2ZWLyZOmlozTkrAdg1qqB3bFoMda4YvD5/tUWkyz
+ mCuMazK4qvoFxxGfY1dTF8QFHh9p4O6Nnf1DQ61CyRPcobK5iesxRWPPhyaROQuCLK1L
+ 0TzbSrLcW3cMunrxtInwYiJvISGxItmqkEMayhFfMScUDgReFHcCr3zB4BOfgKk+PWYY
+ VSMnVnGofJcPyGsB0pK/3WZOR+93oIZtryVHNMN6gfRM6o5j4/KjAjDt217yEJ5EbH4z
+ uplg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlMbnaLzrErIIvV3u5n0tXyZRLHpOCDLOF8PlmGki8bIeJkeJn76Xl9JAh8jAIa4MFyBkidA4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz4pmvtrpUvCrxtMcEN8qMMGGjt3eslllZPSV9UtkJsQO4cnppV
+ gDmB0X/FdhYUD0YRxKtBBkubzbynn7Ym0BgwiIE7gWi9IfvIEvLHKq8LB6N02PA81cIT3vmvtnC
+ LDS7G9z0Oe0b9R2Mj4DBpn0qq3vMiuw==
+X-Gm-Gg: ASbGncvqCh0u6gsUYWZt9JonwTBgzFP3cFBtvCrNqxLykbyFShk2Fekaa21ZYdM3uyw
+ CoUwXCk+arSJbTAeGnnWkF6vpBZZNB1dPa3yCPAA5bguECcRrfhlwgWqf5tgK5zTorXkg8rWpoz
+ yvEU4U1dx/N6r6OTUB/GaCz41H9KGyvKjGg0pPkeB+jIfQgDYgx3RkW/ogX32kfyWWw5pZ
+X-Google-Smtp-Source: AGHT+IEJOt6EkuG65f1mlyCDuRwFXbK5i+D8W2bJX0xu6fkpQ4ATRm+VnWCFx2ODOPmZrZ9Cxwq4XvCvhLvZAEaSLcU=
+X-Received: by 2002:a05:6512:114b:b0:545:ab8:2bed with SMTP id
+ 2adb3069b0e04-549c09f7fe9mr367027e87.28.1741895899097; Thu, 13 Mar 2025
+ 12:58:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250311013430.510151-1-marex@denx.de>
-In-Reply-To: <20250311013430.510151-1-marex@denx.de>
+References: <20250227165001.252176-1-festevam@gmail.com>
+In-Reply-To: <20250227165001.252176-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 13 Mar 2025 16:57:37 -0300
-X-Gm-Features: AQ5f1JqYEfNztZL8-vCg-RYjL1FblaSKerEWrTnVRXdLL1EHUsaOXixo0351iJw
-Message-ID: <CAOMZO5BuSS7Q2h_GOOkhcDyH4UNibe9FJHvHBmB8z+Qy9ZJP3A@mail.gmail.com>
-Subject: Re: [PATCH] ARM: dts: imx: Drop bogus regulator extras on DH i.MX6
- DHCOM DRC02
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Date: Thu, 13 Mar 2025 16:58:06 -0300
+X-Gm-Features: AQ5f1Jp1APVlmk3O0ubmGi81pJnKf4-jpwqCMk2D1X3rHG14X0g8j_U5xfCX-ck
+Message-ID: <CAOMZO5B8Yfj+-tutUA2bmo6VL_D7768OXg5aq37102seLbJX5g@mail.gmail.com>
+Subject: Re: [PATCH] imx9: container.cfg: Guard tee.bin inclusion
+To: peng.fan@nxp.com
+Cc: ye.li@nxp.com, trini@konsulko.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,12 +94,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 10, 2025 at 10:34=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Thu, Feb 27, 2025 at 1:50=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> The regulator extras should be placed in the USB H1 regulator node,
-> the /regulator-usb-h1-vbus. They are already present there in the
-> upstream DT, so delete this bogus node entirely.
+> From: Fabio Estevam <festevam@denx.de>
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Guard the inclusion of tee.bin with the CONFIG_OPTEE symbol to fix the
+> following build warning:
+>
+>   CHECK    u-boot-container.cfgout
+> WARNING './tee.bin' not found, resulting binary may be not-functional
+>   BINMAN  .binman_stamp
+>   OFCHK   .config
+>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
 Applied to u-boot-imx/next, thanks.
