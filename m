@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2ED5C282DE
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:57:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B11C35FF1
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 19:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E8B80FF7;
-	Thu, 13 Mar 2025 20:57:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 215AD80FF7;
+	Thu, 13 Mar 2025 20:57:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RtjJEd3o";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lfW2lfT7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BE208168B; Thu, 13 Mar 2025 20:57:21 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 3A7AE8168B; Thu, 13 Mar 2025 20:57:51 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA0EA80756
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:57:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38AB380756
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 20:57:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-54991d85f99so2547611e87.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:57:18 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5493b5bc6e8so1473410e87.2
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 12:57:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741895838; x=1742500638; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741895868; x=1742500668; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fA/buzX9YgKRpz6z7c+A6VJvDKMKYwV96ExLuotm0UM=;
- b=RtjJEd3oj9rTra9K/yplXYrEcDSIWnoHZkKvbJgnwEaFE13YZjmHw9Y/UPbHvy9zKF
- O1DaV3dJF6fKhTu8VTB+uUEXi34jU0e+wabYXuID4SnTdy66evuIitQY93NXTBlYpqR+
- XFfn1/huBw329TWbIbByE052DsUzxfOPM+EJRj3h5NcbaGOc5Y18KANzUGVK8/BLpFji
- h5Tg+PlY3O9ofQP8igIqexQbpoNg95lahAYi0bX5Fihh3mDOTLNAAjXa8SqLJ+s3HLXL
- YU5sZ7lqaMUxJzDBo2spvPBjUf4Cn9Wh5hkwZ6BsCK5xz8/BL+3IRurMWQ5ViA64rOGj
- pK2Q==
+ bh=JFfmTdC7YCA+Y/jJOgAVr0uup1A6kT0hh0N1/2b5FIY=;
+ b=lfW2lfT78/JcoQHmnyKHXHvhQY+f8YPib6sXAP3ZAhomlM9pPgZFElkVgZ5HBJ1y4I
+ IDI98hC0Y9foMC3p0rRswVIQRkozizsTr9XCMxZayE4o8NgNqTLCPJUoWOqgSa0hC7tC
+ rEz0Zx5j/OnxdXYEyR8yfYygonK1apkbU69Zh8s+0oqPFj7EHzP3sCEQ/AYl1QlHxuBS
+ /O36EiaIdshDpvFNeXi6nqFJPkQHM04bqmhhryN0dw371CiDwiZSQs/8CEcyBxNeY3rB
+ urGsnmh4Ip6Q8jAwkTW9mv6kUHkwesxmfaSobI/yT/kIXaaqU+9N+8crbiXFxKiCIBZv
+ lyww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741895838; x=1742500638;
+ d=1e100.net; s=20230601; t=1741895868; x=1742500668;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fA/buzX9YgKRpz6z7c+A6VJvDKMKYwV96ExLuotm0UM=;
- b=ZOQk7GQQk0HIergwqzP5BLBPlXQLau9OEvay9zXMowrWr6XyXSAZl2lfZBFan4LL0v
- VTKWYmmDpCY6ITP7pJv1p6nc5FIszgukWw22Qi5/97I4Xi7Vv0RjWLH0W3O6p7tPBtCj
- p4DRUzB6EsS0z4xhSkoTbLlrVKKbmselhBYjg7jlqXuIZ2MN9NdHz30fQYABJGt3gq0F
- /oCJIpw/prEfUZzJ6Ai62mus3GQCgmEENx01CGpOg/rR2IJN2ez+EGiYI6eAOKbkCb2v
- vC+oNrhzD2Z9rbLdR46DKS+JAa90WLN7ZA9I1UO4TP7fkkTkrnXr6zIk2P5iXNOamfTI
- WbLw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWN69hExXV7sdbsRRDqsUmS3DrRuiExQZnUWAenEfR1LvY+CVkXhzGhEpUGozLBFt7co+aKgFI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGpLSn5kh7ZtSo6/H/G6c4u7ovWyzSXDc0NjtN08je3HiOgBP1
- jIvXUZc7K23ZqBaLdqPeLZ7cbTGJpv/7WVhg9z7rT8gw6cC2J2UKAiVM9VPqAgpPUbDZPYAfApd
- pWdL3dJ+l1yd3Rm8hnzUSmWtjoMo=
-X-Gm-Gg: ASbGncu+2qyboVTVtFVqYfGWRh4wqctMpJ3+htsGmSxbhY94DW7vsc+vxF0JC6KXy1q
- HdQBxajM8YbLv7Lv9rwsoolx0w12J6qbFXzCz3G3Gvk7L65zlwnLjqnxqj143NcBW1mC2NVUFdC
- Cpe9ATfTzTXqNjVHcUzfL2byYPWg1De3RizRWJRbAL1Go2AB3pa6pSDlDOAw==
-X-Google-Smtp-Source: AGHT+IGVai3N/VrKR02kxkykN0prVaiVLTTwyysZjxA6Zsx7cxTTYu/yxM8XeNa1DLfKWUxLNcZPyKPLS4ZL2j9DiZ8=
-X-Received: by 2002:a05:6512:2247:b0:545:2a9a:aa02 with SMTP id
- 2adb3069b0e04-549ba41c627mr1664809e87.19.1741895838028; Thu, 13 Mar 2025
- 12:57:18 -0700 (PDT)
+ bh=JFfmTdC7YCA+Y/jJOgAVr0uup1A6kT0hh0N1/2b5FIY=;
+ b=uSAQtqKkogswylcjVB9BYV8OgLO7GyogzssVj0USOZ+10RvYtGW/P13tb1DSG1s0kf
+ 3jAUHiEY6JUMd8zL/MsH2UKx9H8AQbroXlB4YRBdI+F7yABAuH6cAST6wmxdkMwdxUDV
+ eDqoDWknqoJVQKuOc8Jgj69h4wKVJhHG6AbNUtJF90VBtUPqcwOwUtUeyBfUrifxNdFl
+ +xx9xr6bWJy6PfRBZY9THtuiHDXW9kPttMYHBBCLm04K7adY+lJxkU0BiBg8JOlc+du+
+ GDfHMtKBsNEWcUOpDVaPPxjfsStJ3byEdFtq361MmGihfg5N1QZMCelF2FbwOTdDhERm
+ 9y5A==
+X-Gm-Message-State: AOJu0Yz1TDeJ6cyS5kjP0w5ykjoMqIxQNoDxMobzXNXcJsivY2GyKRbO
+ kp2B55Yzr3CZXkDG8s/T90Zoi46QbYJLvl4pAus5FwUTv+2DLixqvRnmJBoDI5YnR9jF7nGlsm1
+ 1tFiM6aK5CcJnjVE+LC/MF7QraWA=
+X-Gm-Gg: ASbGncvj8rfVI8Ie4jRl+NCh2yBkVjgYeNpxPDmhul0Bsf2kg/ExFCyYBkdtK73qOJU
+ 5ZIasHAhtme4JYlx6XdmLOWdAkpvNh+i78aAz1NTYX43AVAxLDyB2AqL3dS0R6NvRGpMWusqxWE
+ P8Y1UOitRwT3cp4GJdQME485In4Zh51+WSYliBCH3hANSb//JIpKw9g3jkjgnYEJ6r/eMp
+X-Google-Smtp-Source: AGHT+IG3JAxNyvoohsmiyx4IlPElOSroLpqbrU04PIXfw4IwSu+G4Qnw7cocsZxRJ98ATZl9iP8Z4t2oprZobYMbvpI=
+X-Received: by 2002:a05:6512:1113:b0:545:c89:2bc9 with SMTP id
+ 2adb3069b0e04-549c0a5b12dmr431780e87.43.1741895868170; Thu, 13 Mar 2025
+ 12:57:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250304065740.2732356-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20250304065740.2732356-1-alice.guo@oss.nxp.com>
+References: <20250311013430.510151-1-marex@denx.de>
+In-Reply-To: <20250311013430.510151-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 13 Mar 2025 16:57:06 -0300
-X-Gm-Features: AQ5f1JpYz4oiFfyQYksBIk4y0eLVCXGTUNjWINa8cICZM6VdyZpU6bV_oIY0AWU
-Message-ID: <CAOMZO5CiSmD4z+e2gR1Nem7nOAprZt60iqnzJMf_0WzS=qPKsQ@mail.gmail.com>
-Subject: Re: [PATCH v2] mailbox: add i.MX Messaging Unit (MU) driver
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: trini@konsulko.com, sbabic@denx.de, uboot-imx@nxp.com, lukma@denx.de, 
- seanga2@gmail.com, sjg@chromium.org, alpernebiyasak@gmail.com, marex@denx.de, 
- u-boot@lists.denx.de, peng.fan@nxp.com, viorel.suman@nxp.com, ye.li@nxp.com
+Date: Thu, 13 Mar 2025 16:57:37 -0300
+X-Gm-Features: AQ5f1JqYEfNztZL8-vCg-RYjL1FblaSKerEWrTnVRXdLL1EHUsaOXixo0351iJw
+Message-ID: <CAOMZO5BuSS7Q2h_GOOkhcDyH4UNibe9FJHvHBmB8z+Qy9ZJP3A@mail.gmail.com>
+Subject: Re: [PATCH] ARM: dts: imx: Drop bogus regulator extras on DH i.MX6
+ DHCOM DRC02
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,21 +95,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 4, 2025 at 3:58=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.c=
-om> wrote:
+On Mon, Mar 10, 2025 at 10:34=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> From: Peng Fan <peng.fan@nxp.com>
+> The regulator extras should be placed in the USB H1 regulator node,
+> the /regulator-usb-h1-vbus. They are already present there in the
+> upstream DT, so delete this bogus node entirely.
 >
-> This patch provides a driver for i.MX Messaging Unit (MU) using the
-> commom mailbox framework.
->
-> This is ported from Linux (v6.12.8) driver
-> drivers/mailbox/imx-mailbox.c. Its commit SHA is:
-> 39d7d6177f0c ("mailbox: imx: use device name in interrupt name")
->
-> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
 Applied to u-boot-imx/next, thanks.
