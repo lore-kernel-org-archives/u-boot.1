@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7441C282EC
-	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 12:52:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F4AFC282EC
+	for <u-boot@archiver.kernel.org>; Thu, 13 Mar 2025 12:52:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 042198175D;
-	Thu, 13 Mar 2025 13:52:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 27F8280F9C;
+	Thu, 13 Mar 2025 13:52:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kjl1sHfM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a7490atC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9743580540; Thu, 13 Mar 2025 13:52:00 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id ABEB280540; Thu, 13 Mar 2025 13:52:01 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8BFF80F9C
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 13:51:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0EA48175D
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 13:51:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ab771575040so380639466b.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 05:51:55 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac2a81e41e3so205154266b.1
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 05:51:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741870315; x=1742475115; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741870319; x=1742475119; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+GP7JZTEB5+GYxlqfXf9ZuDs261q8bctM/+sZVGknVU=;
- b=Kjl1sHfMAbWQQbMhE7Xeu/SRqTAkNGG+imvUktQ2xduqj0adVngiD/3GXdzt7P6XEq
- YEGCTK435jQvz8wPKjmgdOXhnkIFUz1jj8if/45oLq2qwBGuGG8PTtYZUTCnxWova6hN
- hhE2z2CileVIB1RQ06iDvaekBd6la5c714hEY=
+ bh=bBGHq8JrlXYtnhE8dGob71vr+92RrI9PRS0Bc8RlNEc=;
+ b=a7490atClWZPqK2SqpptLuQUmtqrc8+D9BHsGRTeMyUHypHNmRK4tOQF8oTrnWM9h7
+ XJm9MkjzWJcqIiwMeETTJoKo7tporAR8/tHAE0IOlek911Se4KV31byjDThM7wAMHRtu
+ S+1EQ5a+qlCpX+qCQ6L9VTDO0EKc66+zkWAIo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741870315; x=1742475115;
+ d=1e100.net; s=20230601; t=1741870319; x=1742475119;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+GP7JZTEB5+GYxlqfXf9ZuDs261q8bctM/+sZVGknVU=;
- b=A7lopPKCsONZAOHLFP8LypL8lVRITIrR9s93B90n24AUb1K1VJhb+ZIAEAAFzxM5sK
- M3HDXbJ2NkgZtDPmgAooR/NA/uOfsyezfYFnoTq4Z8wYh2jlzurSBZlnOP5AYHmfFYk9
- NGWk7zMj41XBsyWptqj+FTXAncRmQJKw5r9TtPOFFa0h4wW2ZAN+PnxSybRGhts+14QT
- gHbIvfbkXwnhpXx5dIMrdp5RoT5hrYHpnnhhbkMXHMKUONeKU4I3ma079KdQ0aB2SEpm
- E6iZAgxmz79+NmvPyN6jCknY0KexPy+kf1SUnkoUqXK3cDMO49Zwt/d3np20xodnLh75
- fDOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVeA2TsxbB0RB/juSLKUpaGgn+5zeiSGIeixHQjYCTkjyFtYJPk916qHWnadAsfkta/NMMDEeg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyZpw1BRkm8E17t5d44zwE2PlYONlr6CH8zFgpnb5vDj6JRC+Aj
- doQGzP78jfmtsEZGmMGgUWmC+Lx0OjdGhDq+izS/J1m6KmYm+Yqnw/oq0RAI8kcaMC3JbyhLUvH
- w1vhc1gTvoWDekQGlZ+Vrd8nW5/MwUawNL6xX
-X-Gm-Gg: ASbGncu00atO0fAGboQ+/gGoFyeALGnVIXDXyamoYHuYe+tvbLVLBYWMprvfxp+g/UI
- MOFblgIeaAjPPPO7hZhCf/AK2MXhP1ARg6nBhGy4krWrKkY5ppsTIQfPPpaIz4sgw3G600sff8a
- rzg6ly83URmzz5Eu9aJxh25gFU0ydV
-X-Google-Smtp-Source: AGHT+IGJLHTsfIsN6ag5V8PyBtxnzrtPaTNyokGtVcUBAmah/mSbxqMIV+nVJwxpxu20Pkg0YJs+1IxGY5PBz+XY19w=
-X-Received: by 2002:a17:907:cb1b:b0:abf:68b5:f78b with SMTP id
- a640c23a62f3a-ac3123e1adamr199828966b.24.1741870314650; Thu, 13 Mar 2025
- 05:51:54 -0700 (PDT)
+ bh=bBGHq8JrlXYtnhE8dGob71vr+92RrI9PRS0Bc8RlNEc=;
+ b=tVsM0l/3jOpZ2+Wd7LJ3rA02PR+4DB94hEJwBBqebPak618awliTF/lessaJGpdVKc
+ 4zGzbyKyGxsxaGm9VS7jb3johlVhcRetfeH4h+HKt+CREZuop5HhmbzbVfvJm4oo5/wf
+ OH+Po8bAKgWr2eccuDhgPeiwJ6iC3TOYlHXuydCOM6iONSsHAIhjkI3tpwGIXaCMPGTA
+ iDx82y6GUx9+iCZPACxLYMsE04qyRqULkjqf7uaxhG/YDMN+TlDx2RnaeF/DyrojhvaH
+ Xvh9U5iYQkJOi/scEAau0fBZrmI1HMtc19A0isAOlCEU/JBJ9ubwFs228Mqd1yJCBHbe
+ LwQQ==
+X-Gm-Message-State: AOJu0YyjJB9aZr0Pkux4Pku0lDNNEEN1/jcQ7ShCLR7+Z0G24QgwJgsI
+ JnIjvdrI2IjkJM99a9cIMCsPI8uxDsJUH2Ul9hPgtuhc2zFf2/sZY19fqm+EBzt+dw7R3ZfQSiS
+ GBnD2YsY/C8QmyonXqAL3au8EK+/zhStQ4HjgpNn9EedRw+Q=
+X-Gm-Gg: ASbGncuO/Dd6eRSqJdQRoAV5Ol/bdzILbXhE/oFCJ7rkXOD+xnsgHhupOGtLzvum6gW
+ ylksINVahitdzI5W1dgEJ9b+k/JZCorHz+kO9Zdovy/oFBaz0GIzUYTNg+6yVHyrm8f/+62LYwk
+ rRCC2O3Sgtd+mDiKHhCyoMpMuoGL/R
+X-Google-Smtp-Source: AGHT+IHt0PM6BQgfNDgMC0EuuRqHJfIZg3Ee4vZT1/7fumYdYD7HqwEOkaDYyEVVrCGiA+ifOjU30NEQMmkdP4Y/p34=
+X-Received: by 2002:a17:907:a1a0:b0:ac3:f95:dbd4 with SMTP id
+ a640c23a62f3a-ac30f95dfb2mr221682666b.42.1741870318878; Thu, 13 Mar 2025
+ 05:51:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250308155127.27893-1-clamor95@gmail.com>
- <20250308155127.27893-2-clamor95@gmail.com>
-In-Reply-To: <20250308155127.27893-2-clamor95@gmail.com>
+References: <20250312090130.2951848-1-naresh.solanki@9elements.com>
+In-Reply-To: <20250312090130.2951848-1-naresh.solanki@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Mar 2025 12:51:41 +0000
-X-Gm-Features: AQ5f1JrPOQCFwBwzJ0PxcYrOrSEXNva-2utheo3epu6kRq11FdZaNqksSfiacIo
-Message-ID: <CAFLszTif3hES=EOa7vYxx5zrmkte-YgvtjA0mjYNZC3YxP9ePw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] sandbox: remap memory load addresses
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Thu, 13 Mar 2025 12:51:43 +0000
+X-Gm-Features: AQ5f1Jpwq9RmlbH9lSlbA4ctl4vyhG6Dri-mCOit_2KEHhwTBzQixjZewSFsXIE
+Message-ID: <CAFLszTgQmnhUsaFmPYsrZKP5KickAbyoSb7Vj8DvuiZY427rJw@mail.gmail.com>
+Subject: Re: [PATCH] x86: spl: Add support for NVMe boot device
+To: Naresh Solanki <naresh.solanki@9elements.com>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,23 +86,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 8 Mar 2025 at 15:52, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+On Wed, 12 Mar 2025 at 09:01, Naresh Solanki
+<naresh.solanki@9elements.com> wrote:
 >
-> The existing memory layout places the bloblist at 0xb000 and the fdt at
-> 0x100, resulting in a 0xaf00 size constraint for the fdt. This constraint
-> has been reached. Lets modify the layout by moving the bloblist to 0x100,
-> device tree to 0x1000 and placing early memory allocation after pre-console
-> buffer at 0xf4000. This should guarantee sufficient memory allocation for
-> future expansion.
+> This change adds `BOOT_DEVICE_NVME` to the `enum` list in
+> `arch/x86/include/asm/spl.h`,
+> enabling NVMe as a recognized boot device for SPL (Secondary Program
+> Loader).
 >
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> Tested x86 hardware with Coreboot + uboot payload.
+
+I believe the correct names are:
+
+coreboot
+U-Boot
+
+> Verified successful boot to NVMe drive.
+>
+> Signed-off-by: Naresh Solanki <naresh.solanki@9elements.com>
 > ---
->  arch/sandbox/Kconfig         | 2 +-
->  common/Kconfig               | 2 +-
->  doc/arch/sandbox/sandbox.rst | 6 +++---
->  include/configs/sandbox.h    | 2 +-
->  test/lib/kconfig.c           | 8 ++++----
->  5 files changed, 10 insertions(+), 10 deletions(-)
 >
+>  arch/x86/include/asm/spl.h | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
