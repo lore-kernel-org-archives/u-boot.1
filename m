@@ -4,56 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296A4C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 20:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1F9C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 20:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC16B81F4E;
-	Fri, 14 Mar 2025 21:09:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 51FCE81F71;
+	Fri, 14 Mar 2025 21:09:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=os-cillation.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=os-cillation.de header.i=@os-cillation.de header.b="h7bfCF8C";
+	dkim=pass (2048-bit key; unprotected) header.d=os-cillation.de header.i=@os-cillation.de header.b="WJrPRhsM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DE8381F49; Fri, 14 Mar 2025 21:09:09 +0100 (CET)
+ id 8286681F49; Fri, 14 Mar 2025 21:09:10 +0100 (CET)
 Received: from os-cillation.de (mx.os-c.de [213.165.83.196])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C67F81E92
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:09:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C5C581F4E
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:09:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=os-cillation.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hd@os-cillation.de
 Received: from core2024.osc.gmbh (p578a635d.dip0.t-ipconnect.de [87.138.99.93])
- by os-cillation.de (Postfix) with ESMTPSA id 04F40C026E
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:09:04 +0100 (CET)
+ by os-cillation.de (Postfix) with ESMTPSA id 09047C026D;
+ Fri, 14 Mar 2025 21:09:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=os-cillation.de;
- s=202409; t=1741982945;
+ s=202409; t=1741982948;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UTkx11zlMPyMP9Q8GD+9wA+a4io7r8fo02KbPDEJnNQ=;
- b=h7bfCF8CFtRvw2/x9/vJiZe4Kp7ezP0UOGN6VBcRoUgbKYhCesjrF62efv4xn+RdcDjbdd
- oSLFuiCoGQNxflz8+zxYe9OcK8bxQJVG4AveLvQD7H+Y61WD5iFULvWN1rl+Voa3guIU/p
- 1MK8ZZxX2CKmiv9UidP5M5wKT687wm4HiYghhnIy7dJ+wWrBin/cY82MH9rYnxum0OqJOy
- 7rVGO/zx2ThYB9uYWyiZHQfmfEIZREFTIAmyT6ECT7szdltHmMe0BkScgtmJ+TymTt9snh
- QC9Rrecw24320ltRnd2r7ehGJ1m/jxoMtv6RnjM50n9TKTTlw19gXlkP6lCMbg==
+ bh=welKN1baXCJdMkUucfhnvGGjyRAZwUHVc2LMzYWRnwg=;
+ b=WJrPRhsMGMTltUakoCx+8YCHRwmgObDhThio/FZcr5+w7jgdKqkWxbWyuQYiF9DaKBAfej
+ 29UMVbhcNjGyiFIj7eCI3nEiCUIgkglaoplU8t6N42O2LqLeE1liKnosBeZCfc4/Z6quAw
+ HuaXoT8jeA54AYOwYmdhwXO72Lu0Chd+1MWprsFZxN224FB+B8Pr+kOno8tZjI3PYCyQW6
+ fH5yvfuoB9Wez1vSQYewNVcWhNpkm0iY1cV9IqrStoHF1luWubLUsJjdsTCLi4YQytkNVc
+ 7sX++cFMzq3vPdQpKoU4/utd8SRkoPdSX2ZzSogKm1jiGxvY8ewLDPLi8mDsdA==
 Authentication-Results: os-cillation.de;
  auth=pass smtp.auth=os-c@schweissgut.net smtp.mailfrom=hd@os-cillation.de
 Received: from hd2022.osc.gmbh (hd2022.osc.gmbh [192.168.3.45])
- by core2024.osc.gmbh (Postfix) with ESMTPSA id 7BC2720032D;
- Fri, 14 Mar 2025 21:09:04 +0100 (CET)
+ by core2024.osc.gmbh (Postfix) with ESMTPSA id B14EA20032D;
+ Fri, 14 Mar 2025 21:09:07 +0100 (CET)
 From: Hendrik Donner <hd@os-cillation.de>
 To: u-boot@lists.denx.de
-Cc: Hendrik Donner <hd@os-cillation.de>
-Subject: [PATCH 0/2] Do not use CONFIG_XPL_BUILD in device tree
-Date: Fri, 14 Mar 2025 21:08:30 +0100
-Message-ID: <20250314200832.154758-1-hd@os-cillation.de>
+Cc: Hendrik Donner <hd@os-cillation.de>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/2] imx8qxp: Do not use CONFIG_XPL_BUILD in device tree
+Date: Fri, 14 Mar 2025 21:08:31 +0100
+Message-ID: <20250314200832.154758-2-hd@os-cillation.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <2849ff05-ef67-4471-aece-422daa57040f@cherry.de>
+In-Reply-To: <20250314200832.154758-1-hd@os-cillation.de>
 References: <2849ff05-ef67-4471-aece-422daa57040f@cherry.de>
+ <20250314200832.154758-1-hd@os-cillation.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,17 +76,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As discussed on the mailing list, move instances of CONFIG_XPL_BUILD
-back to the initially used CONFIG_SPL in device trees.
+In c9713c155127 the device tree was moved
+from CONFIG_SPL to CONFIG_SPL_BUILD and later to CONFIG_XPL_BUILD, but
+the CONFIG_xPL_BUILD defines are never set for device trees, breaking
+the build. Move the guards back to CONFIG_SPL.
 
-Hendrik Donner (2):
-  imx8qxp: Do not use CONFIG_XPL_BUILD in device tree
-  imx8qm: Do not use CONFIG_XPL_BUILD in device tree
-
- arch/arm/dts/imx8qm-u-boot.dtsi  | 4 +++-
+Fixes: c9713c155127 ("imx8-u-boot: Fix SPL guard option")
+Signed-off-by: Hendrik Donner <hd@os-cillation.de>
+---
  arch/arm/dts/imx8qxp-u-boot.dtsi | 4 ++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/arch/arm/dts/imx8qxp-u-boot.dtsi b/arch/arm/dts/imx8qxp-u-boot.dtsi
+index 8058caae9ba..db6a3dedb95 100644
+--- a/arch/arm/dts/imx8qxp-u-boot.dtsi
++++ b/arch/arm/dts/imx8qxp-u-boot.dtsi
+@@ -10,7 +10,7 @@
+ };
+ 
+ &binman {
+-#ifdef CONFIG_XPL_BUILD
++#ifdef CONFIG_SPL
+ 	u-boot-spl-ddr {
+ 		align = <4>;
+ 		align-size = <4>;
+@@ -120,7 +120,7 @@
+ 		};
+ 	};
+ 
+-#ifdef CONFIG_XPL_BUILD
++#ifdef CONFIG_SPL
+ 	imx-boot {
+ 		filename = "flash.bin";
+ 		pad-byte = <0x00>;
 -- 
 2.43.0
 
