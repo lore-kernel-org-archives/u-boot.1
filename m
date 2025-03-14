@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47BE3C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:53:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9498FC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:53:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B488381E81;
-	Fri, 14 Mar 2025 17:53:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 163CA81EDD;
+	Fri, 14 Mar 2025 17:53:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CCsCM0tu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sLkJVpOO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D0781ECA; Fri, 14 Mar 2025 17:53:11 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id EC44981EDD; Fri, 14 Mar 2025 17:53:21 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7678A81E6C
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:53:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77C6E81E6C
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:53:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6e17d3e92d9so17931766d6.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:53:09 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6e8f06e13a4so30260406d6.0
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:53:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741971188; x=1742575988; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741971198; x=1742575998; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EIBJik3Hb9yVHwVx9OMoRlTduNWi+41nAp1Eyx27coM=;
- b=CCsCM0tuFDWKy7L0J2Nmwf0f5qRFW5gmhOPlJkSgatnu5ZjXUnXlB4T98uhkIGM1Ar
- 9ANZoPHJflSl7rfWY2kN4x41JQrfCWqRsefZNAkbdGOlEImj/DZF1REM5k9U30cyrOkp
- Fq1Vs0zYIZNAlSGd1wglToYN42ery+PRgNchI=
+ bh=vgCFE5Zrm6R4MCLwk9M3MrBZwscDs5ZsZAH7lTWFR9Y=;
+ b=sLkJVpOOxEk0OL165O2D3OE3Y92hwHRI1hiAkRTcORl02tHsBdvkqyvxXAPBHA7Caj
+ L1V5I4++qm7xLz3OPmsMc/rj2IrK5klcSQMv4g75xqHWycOPblqEPw+lqNPxe4v6ZLUw
+ SoWPj3wKiP4iL080JYL87BGdrIIFtRLmjwNmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741971188; x=1742575988;
+ d=1e100.net; s=20230601; t=1741971198; x=1742575998;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EIBJik3Hb9yVHwVx9OMoRlTduNWi+41nAp1Eyx27coM=;
- b=pzw4LaEbQPJKt6+r1xSQrKY69aZ5VuaBAzggS1wI/oS99ntK0+N/cfa6fyKtlmz4/Z
- VHEWdYDCnqUhsvzeHb/G4TgMjlxuuGFesKIWWXVFqK4kPcv/zF4qhwWITnSlHuVrKiFE
- 0S2jOe1nz5EZ3NRovIZocBixtB0zlQl9laHjuoLuweaZEyByUMcGDw2CkDU95A65FWOh
- gIZKyWAKBtMnWRi0lhEWwNpiAMRL+suOSob6pInBS8Lr0ACV/VdS2bI7kYEYM3iztH5i
- Lafyk9Dqb/ZrO/tLX62Mc5GOGTFV+3kqZ/LBS1XAkHl1AnWZky+eei42QBKA+LknKN7c
- uMtg==
-X-Gm-Message-State: AOJu0YxvQel2NZtNkBVWlvq69HD5Vhej8aboBY4fsOQzc06VxZbHO5cz
- sHdIbhOqXk77c7YgRIqinZNIw8jythJcrRmfo16xVogbF8pswwPH1S2lTXpk3Bk=
-X-Gm-Gg: ASbGncvCbxAnPBd2lyOlRhjQxOGcDmV6L06S9WU7wWFHBnDC/A8YX5Fip8z0NtBwTE4
- 08cDli/9AC+ij+8MCxsTLeNqHv/s9eeryKWE6oK0eeGCJa8CM9ALYp6imIoNQcVXLogBGjhi7NT
- UaxsuJ0nvXYs12oVjlQrG041ex7p0GxbB0VTxEIIZnwEioUL4nCnhtLFrD/baX0MwiXMbhzBJnu
- q37jVR9fto8pRre6b+szFBAW7c6O8uJB3TKkDVFsICmL/aAFPXIUB/dYiH4xWtz3UuTxkXqhx7+
- +wW/6dmRug0RN8IOhMiPepUe6Tyh1mWtH9Z9MyRotPuWVzptOw05KMn9
-X-Google-Smtp-Source: AGHT+IEz4P3RbSPdVazIn/yy2rV7RlB4IRGxsc7oq2LxR4o+LBdiorwvysUq/SPzeQLqDJWJyi5S5g==
-X-Received: by 2002:a05:6214:27e4:b0:6e4:6ee1:a282 with SMTP id
- 6a1803df08f44-6eaeaa63b85mr43863996d6.18.1741971188100; 
- Fri, 14 Mar 2025 09:53:08 -0700 (PDT)
+ bh=vgCFE5Zrm6R4MCLwk9M3MrBZwscDs5ZsZAH7lTWFR9Y=;
+ b=XPFUCmseAvijgvBOXFptBai4uoSm7nIOYF+7XpKLqpH8Q5IUxBmnZasUMOwitBFVxz
+ vxKhdemrkC6TVXVSYs8lMTrymK0m9k4N/L8bcr6pnlvT5jIRRilel7sTZKKb3KiTPoIj
+ 1iSOssgFMpm0J/GbvByZAx7EudqaqQF7Et5JY1gfB0fRK6hcX4vSL54UoWRwMKCPoKHp
+ v9vn5Bap/WqI1O3k/e12O15Qv2C8K5O9M1GxuWLxHw5uIiCCEee9J9Ju8RWts80LJ09o
+ vVlqOyv3CHr5UIdFDlPRpEZQ8BqT0Or4VaY3wbR9TyPljTXaQyLvpKqqWgJNBmBbcuKx
+ ZvrA==
+X-Gm-Message-State: AOJu0YwYH0KwuAuOO+mURI6dIA7f7IWmNCcHxL0xHYM6NBKLgScUGocw
+ /j51bDE2TtH8zcL9/g/B53Y/rMRy7bMorw90RG5i735fi+n9xAXEEMrTDARrlSE=
+X-Gm-Gg: ASbGncsbJCFTl6o/BbSJRFP8uckcbjOeXaKQks3wZ6NOJETPwqgfk7buojOg/fjIcZR
+ 6Vk1RFC32sX03BHApteK1V0oPC3LXNqBdkffPmAgHfackoyHJjpK9wemo0qaPtZWXvHu+VI+GMX
+ 8c+T954tDJ711cmltSv+HQ5kdCH7pXyScPqcPnjn48Rq5cXKRdhq4pzAPP3dMlcWgOTm27TPr04
+ 0DTHffiki8WpbE8wEdYSkLJB4Nxr3ihdKXiOiJBB0p0SCSDJI5uIjIzGpepiS+nLwZhYqrkD7iv
+ mfVtpnUt/OXJ7V9EI5SjfXmDHc4k7bodA4kY/W3Q0bZJVg==
+X-Google-Smtp-Source: AGHT+IGD6pYajRXk4+A+J+8GJ0vleHCiZt01MJZU/Rn3rtQ7K/wEVk7JC9ze51xJOzB3y2FmxTpPZQ==
+X-Received: by 2002:a05:6214:5016:b0:6e4:4012:b6f1 with SMTP id
+ 6a1803df08f44-6eaeabdde9cmr47619526d6.3.1741971198348; 
+ Fri, 14 Mar 2025 09:53:18 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6eade237957sm26071156d6.42.2025.03.14.09.53.05
+ 6a1803df08f44-6eade209bcdsm26394586d6.24.2025.03.14.09.53.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 09:53:07 -0700 (PDT)
-Date: Fri, 14 Mar 2025 10:53:03 -0600
+ Fri, 14 Mar 2025 09:53:17 -0700 (PDT)
+Date: Fri, 14 Mar 2025 10:53:13 -0600
 From: Tom Rini <trini@konsulko.com>
 To: dinesh.maniyam@altera.com
 Cc: u-boot@lists.denx.de, Marek <marex@denx.de>,
@@ -87,16 +87,16 @@ Cc: u-boot@lists.denx.de, Marek <marex@denx.de>,
  Hazim <muhammad.hazim.izzat.zamri@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>,
  Sieu Mun Tang <sieu.mun.tang@altera.com>
-Subject: Re: [resend v2 04/13] drivers: Enabled Kconfig and Makefile for i3c
- support
-Message-ID: <20250314165303.GX2640854@bill-the-cat>
+Subject: Re: [resend v2 05/13] drivers: i3c: Enabled Kconfig and Makefile for
+ DWI3C
+Message-ID: <20250314165313.GY2640854@bill-the-cat>
 References: <20250314040902.43621-1-dinesh.maniyam@altera.com>
- <20250314040902.43621-5-dinesh.maniyam@altera.com>
+ <20250314040902.43621-6-dinesh.maniyam@altera.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5XLRei0yCyYR1I3r"
+ protocol="application/pgp-signature"; boundary="/KDpCkW9Gbq+tRh3"
 Content-Disposition: inline
-In-Reply-To: <20250314040902.43621-5-dinesh.maniyam@altera.com>
+In-Reply-To: <20250314040902.43621-6-dinesh.maniyam@altera.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,49 +115,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---5XLRei0yCyYR1I3r
+--/KDpCkW9Gbq+tRh3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 14, 2025 at 12:08:53PM +0800, dinesh.maniyam@altera.com wrote:
+On Fri, Mar 14, 2025 at 12:08:54PM +0800, dinesh.maniyam@altera.com wrote:
 
 > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 >=20
-> Add new i3c driver to U-Boot drivers.
+> Enable the Kconfig and Makefile for the MIPI DWI3C driver.
 >=20
 > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 > ---
->  drivers/Kconfig      |  2 ++
->  drivers/Makefile     |  1 +
->  drivers/i3c/Kconfig  | 16 ++++++++++++++++
->  drivers/i3c/Makefile |  3 +++
->  4 files changed, 22 insertions(+)
->  create mode 100755 drivers/i3c/Kconfig
->  create mode 100755 drivers/i3c/Makefile
+>  drivers/i3c/Kconfig         |  3 +++
+>  drivers/i3c/Makefile        |  1 +
+>  drivers/i3c/master/Kconfig  | 11 +++++++++++
+>  drivers/i3c/master/Makefile |  3 +++
+>  4 files changed, 18 insertions(+)
+>  create mode 100755 drivers/i3c/master/Kconfig
+>  create mode 100755 drivers/i3c/master/Makefile
+>=20
+> diff --git a/drivers/i3c/Kconfig b/drivers/i3c/Kconfig
+> index fa68612787b..8140b530bb5 100755
+> --- a/drivers/i3c/Kconfig
+> +++ b/drivers/i3c/Kconfig
+> @@ -14,3 +14,6 @@ menuconfig I3C
+>  	  If you want I3C support, you should say Y here and also to the
+>  	  specific driver for your bus adapter(s) below.
+> =20
+> +if I3C
+> +source "drivers/i3c/master/Kconfig"
+> +endif # I3C
 
-In this patch you should update the top-level MAINTAINERS file and list
-I3C and list yourself there.
+We should have empty lines around if / endif here.
 
 --=20
 Tom
 
---5XLRei0yCyYR1I3r
+--/KDpCkW9Gbq+tRh3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUXugACgkQFHw5/5Y0
-tywlPwv9GtXsH9wz0GtpsI1xEJXaOcrO+sMB5gBXmUvTYSW6LshlYoj9tsRbjgPo
-7s8OBtOqhso9bdopdpxbPoFMCtjRx6tgSbzXaLfIlJGzXHteGX+fXpjIMDrMIIig
-OQ4L/H8a184I1j/rJOZn5gkossdAm0e29rksEhU6YcBvpXL8aOrat2ZtKBsD4val
-ItEvP8Jh6DEvVBrIoez+HYjh7R94ttbznnzmk7XwZyLPrKe0e19vM96m0oYNbfCn
-Ae7rtgWU1DNTvOXXNgZB85wzQkFpLbSmYw8iDmMmESRSoMneDmYsQa9uGnII8Whe
-S7+CandSB4Grjv8Yusl4IUlg/oj0acZMxn4gKidXykmpdSho4Ivdzyt8QoaqSDDH
-MSeh7cNdQrMUX5qcjxdg5M2AEeGxZMwhZVgMEFIhtKLnOrkRRpCZA//DKOIPaXWs
-xIT/ivCJqVm7N29LfHJhgfU2R1o4qg8CYGy0VE92QpQN/jixwgDjrQS8jYKqNyTS
-u9KUWEF7
-=Y7bE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUXvkACgkQFHw5/5Y0
+tyxeJgv/U2T3hVXDXOMtipqsoe7G5H9RTZgqMGwdChzysczgQ4idW2vKsNK30tdv
+ZflBUtnf3VDm6YN9hSYVVbH/SYEG6ZDOrKdxJtbzUqe5fawk5q76LTEmzjBcxfoi
+rxn3uPDBBoKcPSUidhmw7HsCzPabor2EH2TjMF0zAHFzQFLw9wuumlYYq5KXUP0X
+Xv5GpRXcBqsYG8bLcJ89m5T24OOMPVdnltdxZ0Qd0Tl34Um19hh5PLRB2dS6Fmdj
+TZSErf0OmaaHOgNjE99FWwPVMAcAHJB9JR4Iq7j7U0H9IZRstjiI4HrYA8q7U9bD
+RcfHpksL2iUJeDPIAgTd1mb0+dUbCOXwzF4CWiks8MYRlWhHp/CHqikfEhYDEtv5
+SrFJgseWbKmjuw7LOOULbCxSp25THNwNHkXcjuTu7Nm0jnKUQdhsj7RZI8WkGGdm
+zfVe1PLDpNwtL57OoxI3vkulA8vYwoW+31TaOB8PGbbaEG2e9jz14JvN449Or60j
+WNYKDuV3
+=gOlU
 -----END PGP SIGNATURE-----
 
---5XLRei0yCyYR1I3r--
+--/KDpCkW9Gbq+tRh3--
