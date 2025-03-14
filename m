@@ -4,93 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A72C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 22:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E573C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 22:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 426AF82006;
-	Fri, 14 Mar 2025 23:02:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 35B6481E5B;
+	Fri, 14 Mar 2025 23:59:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a8y+sp8o";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="EqjWqhh8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17E2282027; Fri, 14 Mar 2025 23:02:02 +0100 (CET)
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
- [IPv6:2a00:1450:4864:20::643])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 57EBF81FE6; Fri, 14 Mar 2025 21:19:40 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6070081F0B
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 23:01:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AABB281E92
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x643.google.com with SMTP id
- a640c23a62f3a-aaee2c5ee6eso379589466b.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:01:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741989719; x=1742594519; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Hr2CJUw/LCzKXtFJ+maoJPPsfCPEG6sRpbifVOf7kjo=;
- b=a8y+sp8o4uci4KkBiXCVbXggqkHUK1J1UBT1HQyBwX5dO5qiIKl4vTrDN0OqoAWwui
- aTmvfzYmQ5lfSLf8bqklAJ/I5cxDbeoymO/+MqiaGz93WyuB/lISauW1f8oej27GuyZN
- deaivxj7o1qMaplHvtwv0z5LbiU47Sd2z9YqEMZugpipf1ZuUI3P+D8xdqje7wQyMIKK
- Jssrha+qPkTHXFSkDYVdgZJVwgRPYOQ7CSjBEMmtEZqO8AerfxJ0XL9alvT2So9UfBkk
- sAfJOn7lZfkqTD8pDnKer2zdx87cxZm5K2A7batxdSkh+Z37O6MMTPDrgj65PWLJfVda
- 8SGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741989719; x=1742594519;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Hr2CJUw/LCzKXtFJ+maoJPPsfCPEG6sRpbifVOf7kjo=;
- b=Mmgpzz+4P3+qdf65qkBAA6GR97dLGYQHNQExN6yAAbpLOrrmG4kmmT8DNMLr2u0Hru
- 7C9SjPI694cbBknVgnjRJqoD5Vtnffd7PhiMaEstvs8bv3BPkxZUMUkUBGIH9N8YAaAt
- wgpn5G9+b7nY8HE0SL/xxzEbFfxxmeTxfvOozZVDp+E54tbEP24Y90g8HlWn9DjDc3xA
- lmIV6KPVpWTHL0RyxdvM0/mm7pWGy6u3RYtQwbrbJ2ZsoAdW0V3D4R3bPafe5y0Jz0+s
- WhKSC5wXu2Hiq86z5EjD95W9O5CUKvKQTKuUffiSPNHOh+nvZ8ws/xHp7FC2LKc7BwM2
- 4DHQ==
-X-Gm-Message-State: AOJu0YzQ72kgTplCTwsqkJadSJ4VLpalq6JK4F5ulN251FpFFmFixtRc
- S/xggnL3NPOlRUdJZELzBMHqiYrndX1JO/TLkw+EcLuG2jJpgszgX0bBQlWd3lU6CpaODs2aGVG
- DjcEmWw==
-X-Gm-Gg: ASbGncvYVgZjteS7t3BluKVVUB9d1fwU+5Vxh4WLjCFBxB89ETyV55yqk4WxbdJIVzS
- Pvrsal+uDyN6j+eRz5wXXATeIltj1HFlZvpz/q2dGx9YLROWODdZIS91Yx0t6qmUED5PBEcOZfZ
- nBo0OQExCbU7DYaQXNKsgRRlQcWTIcv6OjnBrlP/EuPFZ/EI7R6lLPIyy0C1K0aGF4KAxX0sd2v
- XKBPRFtQP1Zz8DsvgTfgoWpaIj8bglC6VRPV9oaFps4uhFhWt7/QkODmNhQh+414xcYNjiPJCQv
- nrvhgCdnMoazb+h8QDVALGzk8TRdwjGIbdQUDckokWKGlxXDzkMDlG15xJnT/jSSH/ZIGkapQn/
- LIubWBGE6T2grHbhAwxtbaosr
-X-Google-Smtp-Source: AGHT+IGgadcOJdCAxW8vBtgPcnEJLlJpXetSIfVTVk6vq+vABTSQMgWYTu6ZbRB3OanLULKdgucDjA==
-X-Received: by 2002:a17:907:2d89:b0:ac2:7a6d:c927 with SMTP id
- a640c23a62f3a-ac3304d698cmr478872466b.50.1741989718667; 
- Fri, 14 Mar 2025 15:01:58 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:1b28:6813:ebd6:3349?
- ([2a01:e0a:3cb:7bb0:1b28:6813:ebd6:3349])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac3146aeb5asm279160266b.36.2025.03.14.15.01.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Mar 2025 15:01:58 -0700 (PDT)
-Message-ID: <4d9f3038-0f9b-456b-89bb-290b6c8c41fa@linaro.org>
-Date: Fri, 14 Mar 2025 23:01:57 +0100
+ spf=pass smtp.mailfrom=jeremy.compostella@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1741983578; x=1773519578;
+ h=from:to:subject:date:message-id:mime-version;
+ bh=uB5D8dtHrio5H8YdZzg4l39KRHXkdkTFdeQZRAr/8tE=;
+ b=EqjWqhh85Sf44848xSXZtFD1plLT+4T9nejOsUFjmRrUSo1hFWGFCDVE
+ fRJu1Jy5Qnown+eg+fZNKwWJ+NQJgL5QlCASauiGSY/QxmRC4GmuOEezp
+ kvJLANlpUxLHkw/RB44rjJ2z7YEc48N3PxaHHevAU72/ddNz7fesJSxwb
+ bBitrsXetEROCsKPBgDm5fbGDLgGX7ez7oTvkCg0cjlLf0S8MPPutmIUv
+ bWb9bolgc+XOTaaYMOB0X2/s84JFmI1rHS7a2Kx5POHj4SqQJK5LGlcxG
+ KvRhJiA1XLUwZaK3ssMC9TdAsNrGZHnRWAPl9TZfQ3fl+FOoamJKaDQy5 A==;
+X-CSE-ConnectionGUID: +2YdKW12Tji+xZ7k0yH2aw==
+X-CSE-MsgGUID: xxOyE87kQdqqvl0l0V4Txw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11373"; a="43055665"
+X-IronPort-AV: E=Sophos;i="6.14,246,1736841600"; d="scan'208";a="43055665"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Mar 2025 13:19:36 -0700
+X-CSE-ConnectionGUID: 9A5fz0LCRMqadq5SV1PTiw==
+X-CSE-MsgGUID: Lt0sXts7RYKCmcXqcvGhkQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.14,246,1736841600"; d="scan'208";a="121332352"
+Received: from ldmartin-desk2.corp.intel.com (HELO
+ jcompost-mobl.amr.corp.intel.com) ([10.125.108.223])
+ by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Mar 2025 13:19:36 -0700
+From: Jeremy Compostella <jeremy.compostella@intel.com>
+To: <u-boot@lists.denx.de>
+Subject: [PATCH] arch/x86: Add 64-bit U-Boot configuration without SPL
+Date: Fri, 14 Mar 2025 13:19:35 -0700
+Message-ID: <87ldt7uzzc.fsf@jcompost-mobl.amr.corp.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Organization: Intel Corporation - 2200 Mission College Blvd. Santa Clara, CA
+ 95052. USA
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] net: lwip: root certificates
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <cover.1740672437.git.jerome.forissier@linaro.org>
- <CAFLszTiB8FBdOTYE+dn6ZTifZsdO0LU2jXKJZSRkPeKzf7ujPQ@mail.gmail.com>
- <7432dd9e-72e3-4072-88a7-18b58da746b3@linaro.org>
- <CAFLszTiPgVLYKYsLgcZJUCJ=tAAfTD_4v_aejks-4YRy=k-XeA@mail.gmail.com>
- <37799f19-3b7e-47c7-8f79-c010fc9dbe5a@linaro.org>
- <CAFLszTi7536co5PeXNbsA=Dw628gdYiP1F1hf0T9wPs-G4gT0g@mail.gmail.com>
- <661ee5c6-6b8e-4c6a-9c7c-9e0087d96c45@linaro.org>
-Content-Language: en-US
-In-Reply-To: <661ee5c6-6b8e-4c6a-9c7c-9e0087d96c45@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Mailman-Approved-At: Fri, 14 Mar 2025 23:59:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,141 +78,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+This commit introduces a new configuration option X86_RUN_64BIT_NO_SPL
+to allow building U-Boot as a 64-bit binary without using the SPL
+(Secondary Program Loader). The motivation is to simplify the boot
+process for specific x86-based platforms that do not require SPL, such
+as those booting directly from a 64-bit coreboot firmware.
 
-On 3/13/25 14:23, Jerome Forissier wrote:
-> 
-> 
-> On 3/13/25 13:51, Simon Glass wrote:
->> Hi Jerome,
->>
->> On Fri, 7 Mar 2025 at 10:49, Jerome Forissier
->> <jerome.forissier@linaro.org> wrote:
->>>
->>> Hi Simon,
->>>
->>> On 3/4/25 16:46, Simon Glass wrote:
->>>> Hi Jerome,
->>>>
->>>> On Thu, 27 Feb 2025 at 09:43, Jerome Forissier
->>>> <jerome.forissier@linaro.org> wrote:
->>>>>
->>>>>
->>>>>
->>>>> On 2/27/25 17:27, Simon Glass wrote:
->>>>>> Hi Jerome,
->>>>>>
->>>>>> On Thu, 27 Feb 2025 at 09:09, Jerome Forissier
->>>>>> <jerome.forissier@linaro.org> wrote:
->>>>>>>
->>>>>>> This series adds support for HTTP server authentication using root (CA)
->>>>>>> certificates.
->>>>>>>
->>>>>>> As a first step, the wget command is extended to support a sub-command:
->>>>>>> cacert <addr> <size>. The memory region shall contain the CA
->>>>>>> certificates. With this, it is possible to load the certificates from
->>>>>>> storage or get them from the network for example, which is convenient
->>>>>>> for testing at least. The Kconfig symbol for this feature is
->>>>>>> WGET_CACERT=y.
->>>>>>>
->>>>>>> Then new Kconfig symbols are added to support providing the certificates
->>>>>>> at build time, as a DER or PEM encoded X509 collection:
->>>>>>> WGET_BUILTIN_CACERT=y and WGET_BUILTIN_CACERT_PATH=<some path>.
->>>>>>> Note that PEM support requires MBEDTLS_LIB_X509_PEM=y (for the cacert
->>>>>>> command as well as for the builtin way).
->>>>>>>
->>>>>>> Here is a complete example (showing only the relevant output from the
->>>>>>> various commands):
->>>>>>>
->>>>>>>  make qemu_arm64_lwip_defconfig
->>>>>>>  wget https://curl.se/ca/cacert.pem
->>>>>>>  echo CONFIG_WGET_BUILTIN_CACERT=y >>.config
->>>>>>>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=cacert.pem >>.config
->>>>>>>  make olddefconfig
->>>>>>>  make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
->>>>>>>  qemu-system-aarch64 -M virt -nographic -cpu max \
->>>>>>>         -object rng-random,id=rng0,filename=/dev/urandom \
->>>>>>>         -device virtio-rng-pci,rng=rng0 -bios u-boot.bin
->>>>>>>  => dhcp
->>>>>>>  # HTTPS transfer using the builtin CA certificates
->>>>>>>  => wget https://www.google.com/
->>>>>>>  18724 bytes transferred in 15 ms (1.2 MiB/s)
->>>>>>>  # Disable certificate validation
->>>>>>>  => wget cacert 0 0
->>>>>>>  # Unsafe HTTPS transfer
->>>>>>>  => wget https://www.google.com/
->>>>>>>  WARNING: no CA certificates, HTTPS connections not authenticated
->>>>>>>  16570 bytes transferred in 15 ms (1.1 MiB/s)
->>>>>>>  # Dowload and apply CA certificates from the net
->>>>>>>  => wget https://curl.se/ca/cacert.pem
->>>>>>>  WARNING: no CA certificates, HTTPS connections not authenticated
->>>>>>>  ##
->>>>>>>  233263 bytes transferred in 61 ms (3.6 MiB/s)
->>>>>>>  => wget cacert $fileaddr $filesize
->>>>>>>  # Now HTTPS is authenticated against the new CA
->>>>>>>  => wget https://www.google.com/
->>>>>>>  18743 bytes transferred in 14 ms (1.3 MiB/s)
->>>>>>>  # Drop the certificates again...
->>>>>>>  => wget cacert 0 0
->>>>>>>  # Check that transfer is not secure
->>>>>>>  => wget https://www.google.com/
->>>>>>>  WARNING: no CA certificates, HTTPS connections not authenticated
->>>>>>>  # Restore the builtin CA
->>>>>>>  => wget cacert builtin
->>>>>>>  # No more WARNING
->>>>>>>  => wget https://www.google.com/
->>>>>>>  18738 bytes transferred in 15 ms (1.2 MiB/s)
->>>>>>>
->>>>>>> Jerome Forissier (5):
->>>>>>>   net: lwip: extend wget to support CA (root) certificates
->>>>>>>   lwip: tls: enforce checking of server certificates based on CA
->>>>>>>     availability
->>>>>>>   lwip: tls: warn when no CA exists amd log certificate validation
->>>>>>>     errors
->>>>>>>   net: lwip: add support for built-in root certificates
->>>>>>>   configs: qemu_arm64_lwip_defconfig: enable WGET_CACERT and
->>>>>>>     MBEDTLS_LIB_X509_PEM
->>>>>>>
->>>>>>>  cmd/Kconfig                                   | 29 ++++++
->>>>>>>  cmd/net-lwip.c                                | 19 +++-
->>>>>>>  configs/qemu_arm64_lwip_defconfig             |  2 +
->>>>>>>  .../src/apps/altcp_tls/altcp_tls_mbedtls.c    |  9 +-
->>>>>>>  .../lwip/apps/altcp_tls_mbedtls_opts.h        |  6 --
->>>>>>>  lib/mbedtls/Makefile                          |  3 +
->>>>>>>  lib/mbedtls/mbedtls_def_config.h              |  5 ++
->>>>>>>  net/lwip/Makefile                             |  6 ++
->>>>>>>  net/lwip/wget.c                               | 90 ++++++++++++++++++-
->>>>>>>  9 files changed, 158 insertions(+), 11 deletions(-)
->>>>>>
->>>>>> Did you manage to add some sandbox tests for lwip?
->>>>>
->>>>> Unfortunately not. I am testing mostly with QEMU (qemu_arm64_lwip_defconfig)
->>>>> and sometimes with KV260 and i.MX93.
->>>>
->>>> My understanding was that someone was working on it [1] and I had
->>>> assumed it was you?
->>>
->>> Yes, it is on my TODO list. Higher priority things have kept coming in, but
->>> hopefully I can resume this work soon.
->>
->> Until the tests are added, please stop sending new series for lwip. It
->> is just going to make it harder to add the tests later.
-> 
-> I don't see how exactly it would make things harder, but...
-> 
->> It should not
->> take long to add a basic test, e.g. for ping.
-> 
-> ...I'm on it.
+Key changes include:
 
-Please see https://lists.denx.de/pipermail/u-boot/2025-March/583551.html.
+- Updated arch/x86/Kconfig to add a new choice for 64-bit U-Boot without
+  SPL.
 
-Thanks,
+- Modified logic in arch/x86/cpu/coreboot/coreboot.c and
+  arch/x86/lib/zimage.c to use CONFIG_X86_64 instead of
+  CONFIG_X86_RUN_64BIT for consistency.
+
+- Adjusted the arch/x86/cpu/coreboot/Kconfig to select BINMAN based on
+  the CONFIG_X86_RUN_64BIT configuration.
+
+- Created a new defconfig file configs/coreboot64-no-spl_defconfig to
+  provide default configurations for building U-Boot in this new
+  mode. This includes enabling 64-bit operation, setting appropriate
+  memory addresses, and specifying boot arguments and commands.
+
+- Updated include/config_distro_bootcmd.h to determine the correct boot
+  EFI file name based on the new configuration.
+
+These changes are aimed at enhancing the flexibility and compatibility
+of U-Boot on x86 platforms, particularly for systems utilizing 64-bit
+coreboot without the need for a separate SPL stage.
+
+TEST=Built and booted U-Boot using the new configuration option on a
+     coreboot-64-bit-supported device. Verified successful boot process and
+     execution of U-Boot in 64-bit mode without SPL.
+
+Signed-off-by: Jeremy Compostella <jeremy.compostella@intel.com>
+---
+ arch/x86/Kconfig                    |  8 +++-
+ arch/x86/cpu/coreboot/Kconfig       |  2 +-
+ arch/x86/cpu/coreboot/coreboot.c    |  2 +-
+ arch/x86/lib/zimage.c               |  2 +-
+ configs/coreboot64-no-spl_defconfig | 62 +++++++++++++++++++++++++++++
+ include/config_distro_bootcmd.h     |  2 +-
+ 6 files changed, 73 insertions(+), 5 deletions(-)
+ create mode 100644 configs/coreboot64-no-spl_defconfig
+
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 006a59d6fa6..ecccad692e6 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -30,7 +30,7 @@ config X86_RUN_32BIT
+ 	  arch_phys_memset() can be used for basic access to other memory.
+ 
+ config X86_RUN_64BIT
+-	bool "64-bit"
++	bool "32-bit SPL followed by 64-bit U-Boot"
+ 	select X86_64
+ 	select SPL if !EFI_APP
+ 	select SPL_SEPARATE_BSS if !EFI_APP
+@@ -40,6 +40,12 @@ config X86_RUN_64BIT
+ 	  runs through the 16-bit and 32-bit init, then switches to 64-bit
+ 	  mode and jumps to U-Boot proper.
+ 
++config X86_RUN_64BIT_NO_SPL
++	bool "64-bit"
++	select X86_64
++	help
++	  Build U-Boot as a 64-bit binary without SPL.
++
+ endchoice
+ 
+ config X86_64
+diff --git a/arch/x86/cpu/coreboot/Kconfig b/arch/x86/cpu/coreboot/Kconfig
+index 085302c0482..66f25533b97 100644
+--- a/arch/x86/cpu/coreboot/Kconfig
++++ b/arch/x86/cpu/coreboot/Kconfig
+@@ -26,7 +26,7 @@ config SYS_COREBOOT
+ 	imply CBMEM_CONSOLE
+ 	imply X86_TSC_READ_BASE
+ 	imply USE_PREBOOT
+-	select BINMAN if X86_64
++	select BINMAN if X86_RUN_64BIT
+ 	select SYSINFO
+ 	imply SYSINFO_EXTRA
+ 
+diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
+index fa7430b436f..d0719d1a405 100644
+--- a/arch/x86/cpu/coreboot/coreboot.c
++++ b/arch/x86/cpu/coreboot/coreboot.c
+@@ -22,7 +22,7 @@ int arch_cpu_init(void)
+ {
+ 	int ret;
+ 
+-	ret = IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
++	ret = IS_ENABLED(CONFIG_X86_64) ? x86_cpu_reinit_f() :
+ 		x86_cpu_init_f();
+ 	if (ret)
+ 		return ret;
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index 2eece34a073..ca3bd713ff2 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -424,7 +424,7 @@ int zboot_go(void)
+ 
+ 	entry = state.load_address;
+ 	image_64bit = false;
+-	if (IS_ENABLED(CONFIG_X86_RUN_64BIT) &&
++	if (IS_ENABLED(CONFIG_X86_64) &&
+ 	    (hdr->xloadflags & XLF_KERNEL_64)) {
+ 		image_64bit = true;
+ 	}
+diff --git a/configs/coreboot64-no-spl_defconfig b/configs/coreboot64-no-spl_defconfig
+new file mode 100644
+index 00000000000..dd07524560b
+--- /dev/null
++++ b/configs/coreboot64-no-spl_defconfig
+@@ -0,0 +1,62 @@
++CONFIG_X86=y
++CONFIG_TEXT_BASE=0x1110000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_NR_DRAM_BANKS=8
++CONFIG_ENV_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="coreboot"
++CONFIG_PRE_CON_BUF_ADDR=0x100000
++CONFIG_X86_RUN_64BIT_NO_SPL=y
++CONFIG_VENDOR_COREBOOT=y
++CONFIG_TARGET_COREBOOT=y
++CONFIG_FIT=y
++CONFIG_FIT_SIGNATURE=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
++CONFIG_SYS_MONITOR_BASE=0x01110000
++CONFIG_SHOW_BOOT_PROGRESS=y
++CONFIG_USE_BOOTARGS=y
++CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then bootflow boot; fi"
++CONFIG_PRE_CONSOLE_BUFFER=y
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_LOG=y
++CONFIG_LOGF_LINE=y
++CONFIG_LOGF_FUNC=y
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_CMD_IDE=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SATA=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_BOOTFILESIZE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_SOUND=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_MAC_PARTITION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_USE_BOOTFILE=y
++CONFIG_BOOTFILE="bzImage"
++CONFIG_TFTP_TSIZE=y
++CONFIG_USE_ROOTPATH=y
++CONFIG_REGMAP=y
++CONFIG_SYSCON=y
++# CONFIG_ACPIGEN is not set
++CONFIG_SYS_IDE_MAXDEVICE=4
++CONFIG_SYS_ATA_DATA_OFFSET=0
++CONFIG_SYS_ATA_REG_OFFSET=0
++CONFIG_SYS_ATA_ALT_OFFSET=0
++CONFIG_ATAPI=y
++CONFIG_LBA48=y
++CONFIG_SYS_64BIT_LBA=y
++CONFIG_NVME_PCI=y
++# CONFIG_PCI_PNP is not set
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SOUND=y
++CONFIG_SOUND_I8254=y
++CONFIG_VIDEO_COPY=y
++CONFIG_CONSOLE_TRUETYPE=y
++CONFIG_CONSOLE_SCROLL_LINES=5
++CONFIG_CMD_DHRYSTONE=y
++# CONFIG_GZIP is not set
++CONFIG_SMBIOS_PARSER=y
+diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+index 0a4e4b8ff85..8ac3a4feeb8 100644
+--- a/include/config_distro_bootcmd.h
++++ b/include/config_distro_bootcmd.h
+@@ -112,7 +112,7 @@
+ #define BOOTEFI_NAME "bootarm.efi"
+ #elif defined(CONFIG_X86_RUN_32BIT)
+ #define BOOTEFI_NAME "bootia32.efi"
+-#elif defined(CONFIG_X86_RUN_64BIT)
++#elif defined(CONFIG_X86_64)
+ #define BOOTEFI_NAME "bootx64.efi"
+ #elif defined(CONFIG_ARCH_RV32I)
+ #define BOOTEFI_NAME "bootriscv32.efi"
 -- 
-Jerome
+2.48.1
 
-> 
->> Regards,
->> Simon
-> 
-> Thanks,
