@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACC1C35FF1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3129C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB57281DF6;
-	Fri, 14 Mar 2025 17:10:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4163581E67;
+	Fri, 14 Mar 2025 17:10:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b3TDTEHG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f+SOU+cH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01B8F81E25; Fri, 14 Mar 2025 17:10:12 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id BC14081E06; Fri, 14 Mar 2025 17:10:13 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D35281D0B
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:10:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6948481DF6
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:10:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso15904995e9.2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:10:09 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43cf034d4abso21746975e9.3
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:10:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741968609; x=1742573409; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9QvWNjdxy7EGe4NvWVloL0aAugxc6ORiiEV7er9sZlw=;
- b=b3TDTEHGOoIWxnH79mJloUB0Hy42zRfJ7h6o2NjK2uvNElp5RYx9L4PwfQvV5XgHYw
- 8i7FPBV8AN3hHy+vk8eShjEJJDoOSx7R4kp3EQGMjcEviV6zJaOGyKHoIZnN4CWSDRJN
- 9Qv1GUFPa4mlFy9et1ZLXCp2JyBmMrkcBt9eMQ2sPIAMwr40GDuVGxFy1SkW0YwaAQMm
- Bum2woUMXd2IwOIvS4on0W9x/quVCeF/WsYnCTOG0cmNVeJpUYC2yTcbADaBRDm5KQWy
- Eo/+jkZQ4UHv1KT8Jqcq5t5FRtY4wgjOQp5VUMrDKTCWhGIvQlkfhfPzaan88UyqsdeC
- /UwA==
+ d=linaro.org; s=google; t=1741968611; x=1742573411; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=RYaEkdklrHuyHTUKVW2PrUFP5rOcqczCKRkflSTVPCs=;
+ b=f+SOU+cHSpSPQ7uNuhiDISoDpi3zkxr8EADWciS4l3mZzh7GkDar8BNrR0a8m8vHDX
+ ufmKiAzSw2+qt1ZO3clqPaqs1fOltOLrTD3NsTzbDfOmxZp+BDaLFoMfT0a3kglu01M+
+ 7G1UNymJbu0ukAx3O0j/WIl9p0hIeKsbgtsrwQAWT6wfPPMxefW6ozzF/A1BpqunU50k
+ ZSfueE5XaJLJaoR5mGu3MDLvGfRRtRwDr40YkqQHUNBDaxMoN6BKwwsl+X8adxHyuFFX
+ p9aOG6+lnBBSDFfu3sCTDJToRDexxQnoBAQ5Q2cjrXua8BfVsU+u33Qh9229Mz5OBX1j
+ 7c6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741968609; x=1742573409;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9QvWNjdxy7EGe4NvWVloL0aAugxc6ORiiEV7er9sZlw=;
- b=hdtYSfyIcPP+WWc+4lj65mw0uHC7PghM6ZK4tLoI93UolNBDMiXoroZiNpMQybn9qy
- 2s7t6fVH4usMQcdtq13NjzNkJydN3zZWCpHMA7SJkbFsQqh32FYdSZadW7GgVobuwfBw
- TkfNO4aIvSgK9NDLZdM95xm/ssetJF82BuLwd2pGw62fcXEjz9gPXXZm98q7bUMhTPgO
- LhGZBB3CYdTjSHfziS9i9EjyZdAsd1VKGJftCMGrpQs7tcQSQOnK+T8mHMYQ4ImDVkRI
- IoYHYWTSh48YCXkQyt0B36jK/Qy+OG53odTbfxl50Eu0D93gln7uD9M+JXr71SdJtNBD
- E2sQ==
-X-Gm-Message-State: AOJu0Ywsq3imH/iQ180hXiRp027MECFjv4dPix5PM7XMvOK+5DLSFz4E
- jdqrqsSOmRvuRivaYB8GBwf95vtNXXvpaePbH+hhWVdHne4L+9aypC1nCIW/jEk=
-X-Gm-Gg: ASbGnctRwzweCDk+bqVlj0hzh9qhn4ZCau/dUZmXgqEBCrI1OS0EQwR/lzXlEHkUghN
- 6H3yROe4hPzVPStHnW1syI++Ym0jPidPtWJ9/STAcqlEqdA7FSEt0xW9AXFfdnu+ZmFSO0eIiH+
- Ql9pwpF0NuUNw1+aKtH0sMSz9o2GqVIT/jf7WG1hW8LnRq0dpkBooGcFIOX/cYSn+ykbK9ian96
- ERhY7lbdCL/tFPFH3zRbsTz5pPPuZ+Jak1mUcWPtO78d4QRBL2iRwGrPJrPqlvbYXVbD2UuMWiQ
- P+DCY/kC2dt5sSR1lG9RsC5tdEOecSjxh5ENLk4/PzOQ9ztpTevd6eBGKawQ
-X-Google-Smtp-Source: AGHT+IESIIW5VQ2l/tqh4XP6R7TIPevPs6HriuMJPW/3GeNm3cYuosNOHypCbQDHc5YgDeB/TF2F9Q==
-X-Received: by 2002:a05:600c:358c:b0:43c:f513:958a with SMTP id
- 5b1f17b1804b1-43d1ecc3969mr41643175e9.13.1741968608644; 
- Fri, 14 Mar 2025 09:10:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741968611; x=1742573411;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RYaEkdklrHuyHTUKVW2PrUFP5rOcqczCKRkflSTVPCs=;
+ b=dxoo8czFe384lWJpzss8OEh7peAx5NuYsB1IJV3wkzyg1dAt4EJwfIKK0Shyy+/l6e
+ FjTHLAEd4AfFZ7cW6qrHdfRBGyIRBLevJU2H9SG7WBCgkqIUNYpiSPcYCq3yO14ma4Vk
+ uqiOi88Na+Cth0IU9jVcHMDAdxq1chyD/xJ21vMTs2UWxJrXaSwOJW1eTKZWNmRTj5z1
+ duTrqt1Aw8Qqi5p/6ka/OvWjm2swFg4nJEx4zYauBwy2on8WWvOhXr8k4YF9zxTJuZGq
+ bKSB3KP7IqMphNj80dzLnBK9rhDUSFQZZJq3d9IHzXMZLuZUWllmR0kv28VFzmllicye
+ GsqA==
+X-Gm-Message-State: AOJu0YwKyVqUHcXOFaXoXDv3X4mzK2s+9WanhUJzZvQ83e58RPrFmYR3
+ J5Wtzg+XUODGV5OWtuF3noXBfXvZm9xmWsrdfksUY+No/OrajCS9hwz7FYom9nk=
+X-Gm-Gg: ASbGncvBftwgi8S31Dx0CKX2gZ6O5YhkzYvEPIXAQpBaDiYUFeCMHbnnGL6QHKP3nxK
+ wtyz3ZeJDLe1Tvcl1GP2e5FjLAuzTiZUURDk61EzcxPT8zZNRtr/EFoV9SjDD1xTBgaQ6Q8cxdC
+ VgTh1VldeJYBhh1IXNIPSQG73LGZBtzrJWle8a4ZCgaO2Jh4bUX6acWa5BteryMsUEOYlaCoYZ3
+ HZZcfkClgWiXHi3gFQlcZ7AWIIPSPO1AxL0JW9fOr5X/FdlnxrM/OAMZwNFsKy5X7V0zGyhOKr2
+ 1KFOUkDlZAnfB9M4c1102qTOLzGEGbuoESq/Ph2dXN6lwM0cMY7n6a8vfxz5
+X-Google-Smtp-Source: AGHT+IEMfrp8wsZOXrE/soYS9n59BR1E6anKs7wo9ZkvZagfRuGn/5bvWTahMZvjzQ5TphgMwyCe0g==
+X-Received: by 2002:a05:600c:4708:b0:43c:f184:2e16 with SMTP id
+ 5b1f17b1804b1-43d1ec72502mr45946825e9.5.1741968610836; 
+ Fri, 14 Mar 2025 09:10:10 -0700 (PDT)
 Received: from toyger.powerhub ([2a0a:ef40:1d11:ab01:2b81:563b:c694:c380])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fdda29esm22035015e9.7.2025.03.14.09.10.07
+ 5b1f17b1804b1-43d1fdda29esm22035015e9.7.2025.03.14.09.10.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 09:10:08 -0700 (PDT)
+ Fri, 14 Mar 2025 09:10:09 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH 0/3] Qualcomm: implement support for GENI firmware loading
-Date: Fri, 14 Mar 2025 16:09:43 +0000
-Message-Id: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
+Date: Fri, 14 Mar 2025 16:09:44 +0000
+Subject: [PATCH 1/3] i2c: geni: fix error message wording in clk_disable
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMdU1GcC/z2N0Q6CIBiFX8Vx3d8QcKJrrfdoXiD8GEulwKzN+
- e6Rbl1+Z+d8ZyERg8NI6mwhAWcXnR8T5IeM6JsaOwRnEhNGWUF5LqDD0UHvlQH7BopaCc6skJU
- mafIIaN1n012bnQM+X8k67SEZMEa1Wevs9JdGXTJJYfABQfde3yPMOVBAZQohZKm5xEvvRhX80
- Yfu/PtqVUxlPwxuqrNK0oKz3FiDLWnW9Quf4kEb2AAAAA==
-X-Change-ID: 20250314-geni-load-fw-0eca432f489c
+Message-Id: <20250314-geni-load-fw-v1-1-587f25f2812f@linaro.org>
+References: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
+In-Reply-To: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
 To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -87,21 +84,21 @@ To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2267;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1026;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=acHcfyafrdPrAsilVBLEDesZIdhyw+KxTZ6jeLfQjok=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn1FTfbLJcilnpBbOCuDZaXl220uydFh4WaF1rf
- nzsuHOipFOJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9RU3wAKCRAFgzErGV9k
- tlVwD/0dW60dO+ZQ1GwEmDuChedGiwoySvaffP6inSRpTytuEBrdZ5rE21Nf2asQ9jY3Xjf9egj
- 5oG6rEUZeLXEFTfAJ7gb8f8zOsSSU+I7p3BHL39IDw2hE4gJi+4EN2e9vbjskDUFESW8myJnb4h
- 6vpAtIFnLySA9XjINVHdL7Qpy53y9tRicI5Tlv9JBpH9RXaFo1kRy5fHRqECH2eWrWfowo57392
- cM/qy8PDe8CoHto/4We4o8D2Vd1BgyfvRDkthi7ycOCxXeBcf0jGxZiAcEk5DYNmm9BApK4KhS4
- zR3spxdJF2IXULPVfZu4wdMbuPRVX3OEi9JDUrzU7SIXJaANbkxNVtD7Z7RW+MQQs3cmbYecPjQ
- IQoxCHUoPIshvTJ9SiaRKloE80f9Jb8IuuH3mN/UUSqsAq2h8T3LWtb5JgtwFCuqqeCHQoaWme7
- 3f5ExtNtoh24GCK1dhBDmjaMza9SMVuEQ5xuCWKHnW0EhRrWpMXDiKJll9ctKFToz+hPIGlR/eJ
- WDJtyZBszOgVpOVUMEhqYuTPHtIxTieOr2KySSO0NX/XDYiSXOS4evToZ8pgMTv52aMvmS+me6r
- isTQ23CiCG4GCfN1eUMol2T9RMkLoh9cN3/x2QPmnDJg0JykNC29b4nib0FpCp6kFZmZKTwdukA
- g5bF7wodOQ+brlA==
+ bh=ViSEXF6ulexxcTGCSNBJr7i9oebVqkC6IUyOhAzuwc8=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn1FTfLbgSt1XZUKwCuQV6BbcNYo70P0B5A7xcr
+ LwpHUtlzVqJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9RU3wAKCRAFgzErGV9k
+ tld3D/9Fl0bUwCdw4ttQv0Lsa0TawinLCpRmsYeFJsS3d0V+mPOvFk+p7XfeVvrnZ3B2i6deXig
+ yo2+AfQWeE9MSw0SiL5YGGZ3tzt8YeBwcJ69ONblYKBTIxGCW7m27a4jyXqlMULIgA9p2JCkW9j
+ IbY2/xTUBwV0BeMDIR512vHxdAJNb89Kwj/ZGSA+MBNL5+dKwbhOSqcVDpIR5Po+1n7sE8ulc/z
+ LXqLVVkb+63ePyKs+VRis2Qaron0XEkEZAZpL5A9vjPdpqY0ENOKeZ0JF2jp5eq+Hr4SFTna5JO
+ /jJ6CxrjYd/LCTK43ttC6SaRxVdRxhuOGwUjNorKZepKzvYOz8DhTB4FaV/4Z4qYLjnNil5Pmah
+ ZFGaGjcQ0N5WD4noEaCZZQ4155vlwugx/YtYLN88ZUmrKcm1jQVHpdnIfJXPaCtZ6nn8q5BZuSk
+ YSpmBPoTToZfdnd1rIgqv6GxfvlNRGwvhNvKFMb3yM1i83n56CcA8QSBRbU/Xzj8qTbkgE08/Xw
+ jHWuM1auObMlN65DLegoNfhhiq/jVhvcLlYs0BMxRXA2MJazYZScLIt1ltH5ZnDkdsT1uc1bZUd
+ cJqlvDeLboBQBkXAvGiRY93MuexPwaHV97vLCk6TRLyEScuqtB7QuxMdif8ujN/Q9D5FBqAKPXX
+ YZ4pjkr0RyCADOA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -120,54 +117,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GENI block on Qualcomm platforms contains many Serial Engines (SEs),
-these are general purpose hardware blocks capable of implementing any
-low speed protocol (UART, SPI, I2C, etc).
+Correct the error messages so they accurately describe that we failed to
+disable the clocks, not to enable them.
 
-The protocol implementation is provided in the form of firmware which is
-programmed in to the peripheral, typically by the EDK2 bootloader. Up
-until now we have primarily been chainloading U-Boot, and therefore
-haven't had to deal with this problem.
-
-However, when running U-Boot as the primary bootloader it is necessary
-to handle loading and writing the firmware.
-
-Support for doing this in Linux is also in progress [1], this series is
-largely based on that one, however the Linux patches expect the firmware
-to be provided in /lib/firmware, and will only exist on newer kernels.
-
-Since we may want to use peripheral (e.g. EEPROM) inside U-Boot it is
-still useful to implement firmware loading in U-Boot.
-
-The approach taken here is to bind all peripheral devices which don't
-need firmware loading (e.g. the serial port), then wait until
-EVT_LAST_STAGE_INIT to handle loading the firmware from storage and
-probing the remaining peripherals. We forcefully probe them so that they
-will trigger firmware loading and will be available to Linux.
-
-For testing on the RB3 Gen 2 [2] is needed so that the i2c peripherals
-can be probed.
-
-[1]: https://lore.kernel.org/linux-arm-msm/20250303124349.3474185-1-quic_vdadhani@quicinc.com/
-[2]: https://lore.kernel.org/u-boot/20250314-sc7280-more-clocks-v1-0-ead54487c38e@linaro.org/
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (3):
-      i2c: geni: fix error message wording in clk_disable
-      misc: introduce Qcom GENI wrapper
-      i2c: geni: load firmware if required
+ drivers/i2c/geni_i2c.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
- arch/arm/Kconfig                 |   1 +
- drivers/i2c/geni_i2c.c           |  14 +-
- drivers/misc/Kconfig             |   9 +
- drivers/misc/Makefile            |   1 +
- drivers/misc/qcom_geni.c         | 576 +++++++++++++++++++++++++++++++++++++++
- drivers/serial/serial_msm_geni.c |  13 -
- include/soc/qcom/geni-se.h       |  36 +++
- include/soc/qcom/qup-fw-load.h   | 178 ++++++++++++
- 8 files changed, 811 insertions(+), 17 deletions(-)
----
-base-commit: 9805321dfdeb5225fe5c5e0721abf49c0875637e
+diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
+index eabf5c76c21c2bc12c80dbb9fb498a0080928248..4eb41ba852f7790ca646c8ba38f29fdb727fa804 100644
+--- a/drivers/i2c/geni_i2c.c
++++ b/drivers/i2c/geni_i2c.c
+@@ -330,17 +330,15 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
+ 
+ 	if (geni->is_master_hub) {
+ 		ret = clk_disable(&geni->core);
+ 		if (ret) {
+-			dev_err(dev, "clk_enable core failed %d\n", ret);
+-			return ret;
++			dev_err(dev, "clk_disable core failed %d\n", ret);
+ 		}
+ 	}
+ 
+ 	ret = clk_disable(&geni->se);
+ 	if (ret) {
+-		dev_err(dev, "clk_enable se failed %d\n", ret);
+-		return ret;
++		dev_err(dev, "clk_disable se failed %d\n", ret);
+ 	}
+ 
+ 	return 0;
+ }
 
-Caleb Connolly <caleb.connolly@linaro.org>
+-- 
+2.48.1
 
