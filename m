@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F656C28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:54:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C748C28B2F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61BEB81877;
-	Fri, 14 Mar 2025 06:54:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A88E5810F4;
+	Fri, 14 Mar 2025 06:54:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nPKp85H/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xgu0AmwM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAE2F81877; Fri, 14 Mar 2025 06:54:46 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 64A9D81B52; Fri, 14 Mar 2025 06:54:53 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97396808A2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 06:54:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F2C38198F
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 06:54:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-22355618fd9so35133435ad.3
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 22:54:44 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2239aa5da08so34717095ad.3
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 22:54:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741931683; x=1742536483; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jnuVS+NkQM+1X/a/vcIwvEzRyHJiJTjKX1XzE7LcfNE=;
- b=nPKp85H/bLaftI6JU2ic2tkxC0JCSl9zdUdfFEJ5sDxwc3SeyNBAL0cXkdrOGfKoI1
- Y8dfJ48/Y8qn6PLCKcDvR6weyePUQgJvfkDiwX1tRMTZUFORvt5wp3M1QfFqlL8PAuTq
- X02YOtRBncPNrb1a3LUHulND7c5yfgnjDsDSg//N0niJbcQcx/By+5uLte8AXQOIXkNG
- Nl1vyfpbnzZh96squHMa8jpxokxZv4nktHfd5xo76rYZ4o/sDW1FjFXnXRMQBGEzWD8H
- 4UCgbkdEP3BovqJQAherNetEzMmdVwivzjT/45uLBxowzDSZ6BJjeoqCFEMaEQ888q89
- VPeQ==
+ d=gmail.com; s=20230601; t=1741931690; x=1742536490; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=p6SdfGhurtLqpqR1f1sI53XKZhZO+KV7CuTxCDtgOTk=;
+ b=Xgu0AmwMeriVPcsQntZS1wKsE41O7sqi1sBREIO6cfhalE4wR+KiP9sLapj05qSYAH
+ RObFoyBzcj1hXYNq0lImFu5EFmhqsBO90HKnwLuLVmtPGXum4uJMIadcxM0SXntK47Ey
+ tCupEk27CDN1JyxsBiSBjMAM8uaO9j42SA8YVdmkAwYGPYaHvAefqd+RvIfBcxVoDTy+
+ LJa+4+Aw5GytARP5uBVLS9Q5eeCzLA3B6uy8jd5wN5W+CzjLyCbW0t+gjmhFir1fkCBD
+ sklwJU4sBZlxG7RJv/RWP9+VZEvn36P/8g/1lLf8QVsJj3tQPNB2YPtkapovYSNFBcUv
+ RBjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741931683; x=1742536483;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jnuVS+NkQM+1X/a/vcIwvEzRyHJiJTjKX1XzE7LcfNE=;
- b=ww0zKGJltRqiZJe5E1CoPSBBcZbLH9BZDbiJH6eT2QMH6WjXoPrWQR1W0QAgy9boqa
- lMGhvs6YS0z15kje82rCE1f0nFja3QvMYe4Ima86FZ4rKY409yzUotVnT5/7gpFWYT2J
- U/sYrtm4pYeZ0fEtmD2alAe1BOQEUmcUrro5zl/RUgiKtgWbDRpE+ab0XOR4fcssn/Cv
- S1fdWn7/rcCTluiKxIw4/Xt1u7pEI+DZx7yTANWfLwHb8x/8Hz2cpUQm5PB/6i49MqBZ
- 0U0iUFmsfbRwuH9qQoXhuYWVuzOB2guoiqe+aEvwCNEugRtTfOCBzfeHFPAAvHkcjwXW
- LUSQ==
-X-Gm-Message-State: AOJu0Yx2po/7VS2jlxh38uN9ircZFnuISyVafv3UtEkynlQ1ndFnKoaS
- Ku12PFEEQP4jSfZ8ujWY5M3T8WqTJppopBMCXymKrFndtdRkzUpHlw4YKJvd
-X-Gm-Gg: ASbGncssrRibSAcKQGG0bh+jrjmO1dr4/Vnb/TCHi/dYn8PkO4C4T9EVqiaZg7lI5fJ
- PJAcj08I1DwLOfFjW5AFJv9Z+fYy0oStnwX8fJOlI0DfQQHMGWWA7nWcIpakhqjUXW+buEAdkgV
- 81/sOChnd6x1HFINmwNOI5SX7oJD2P+6DHIkfq2w6tn0r15DB0C9VSHVrpHRHoJiNthpX+j0z/o
- xjeAxaVU+2YcQcA/oSwwxw4hrlPEiBwGbnhPuCnnm6EwQ6elI8k1XMKuZ+Cig5HQ9fJODJGO2lJ
- Amx0fdvAgytsJLOXcjdG5eHNI86OghukwpPw/zdB58EHDA5J9VhJkQxbSBMdGWR4vn6cn2Lw53J
- EwTMzeeJ393r5xP1nIgoOczSa7Hy4uhA/fYc=
-X-Google-Smtp-Source: AGHT+IHfSCtJnWPZhkF3i/O/FPP1cmMNaZYqg+x0TH5D5y2xcVY2qeUiFmMot6awI8M9skg73uzcxA==
-X-Received: by 2002:a17:902:ccc6:b0:224:255b:c934 with SMTP id
- d9443c01a7336-225e0b2750dmr15660005ad.51.1741931682985; 
- Thu, 13 Mar 2025 22:54:42 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741931690; x=1742536490;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=p6SdfGhurtLqpqR1f1sI53XKZhZO+KV7CuTxCDtgOTk=;
+ b=J2kHLQTjIQesdVsKOkgyOdma8I5M+uxVdcmeuwD/Tfqvrqe9uANSFasSA5cTwxCoH9
+ V1k3AOoBY+z6xbT0r3fz7K1coAtUIxjaAqk9IoU2scjsItfz2z8PUSZBwkkhvoy8gPrT
+ uVtt7KFP1KtsF0+YMVKUY/Ko105szYaqu2c0Zo1hn7FdfdwSsDc58BtWLb9cE0dolD04
+ n2oAtiIWBmYA3/SVfHSW7qzxvnxnhnQbJO8dcFQNQvnRwPUzw3zyiu/tuHykGlAy+8wD
+ k8AuDLT3NSruT5oLeAyGETpdod92Qcsfe4f5PAOjqqS5ZkaYUNvH4loO0jqqWsDi7mO1
+ lDYw==
+X-Gm-Message-State: AOJu0YyH76BL3GvxzaCHXmkbszZb7tGxuPb0THOTpYmygr5p66Kp01Oq
+ qtDXEQEIHKFBk3h6zvxqvVcZYvE0oDE9g6/T18nDokeNSUgcV2z5fe2x8s0z
+X-Gm-Gg: ASbGnctunaRMq2d4RECS5n0ZmrFec7+Y+/KZNhnPYbgiZLEf6rwT/3PUjXxUSVCIMYD
+ cJsUknT/ODnh68sAg8e5QbstJGH/JI0FMTS4vwObiLDBdPCJC93ixNERo/AiDKnkTON5Cw223My
+ hNnIOb1Vcc0nWhJowibuoSC82ETR2iOHtuCHAusAkxTmdJSzL+2xbLNluW3PQymSi9aVhNxTfTl
+ O2baPmLkAIEHEiNIUO+x8EJQMDAziQ/K6idgerWaOdHJ5ObOB6Njuya33pu8jrbK3Lsw3L2h68F
+ ytr1Sn5bL0QX0QiQBg0rN9JlyMAcNZitb89fqewjA2eLVBtgOkXL03pkOQ/BhzHY8R0yeteBHL2
+ cBRBZ0azr4Xhw7/eVFpR8UuINnlLp4T13NaY=
+X-Google-Smtp-Source: AGHT+IEV/SMlv0keTpPDNomlhFS0WhiCuFK79On0Ykl2ZYfDHeSaiooAWAcXWdqTIi9sigIfrC5srA==
+X-Received: by 2002:a17:903:228d:b0:21f:61a9:be7d with SMTP id
+ d9443c01a7336-225e0b195fbmr19650505ad.49.1741931689669; 
+ Thu, 13 Mar 2025 22:54:49 -0700 (PDT)
 Received: from ISCN5CG2520RPD.infineon.com (sp49-98-234-101.mse.spmode.ne.jp.
  [49.98.234.101]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c68a8574sm22846505ad.86.2025.03.13.22.54.37
+ d9443c01a7336-225c68a8574sm22846505ad.86.2025.03.13.22.54.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 22:54:42 -0700 (PDT)
+ Thu, 13 Mar 2025 22:54:49 -0700 (PDT)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
@@ -78,10 +79,13 @@ Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
  Shinsuke.Okada@infineon.com, Daisuke.Nakata@infineon.com,
  tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH 0/2] zynqmp parallel memories support for Infineon Flash
-Date: Fri, 14 Mar 2025 14:53:35 +0900
-Message-Id: <cover.1741930961.git.Takahiro.Kuwano@infineon.com>
+Subject: [PATCH 1/2] spi: zynqmp_gqspi: Make WR_ANY_REG opcode not use striped
+ access
+Date: Fri, 14 Mar 2025 14:53:36 +0900
+Message-Id: <7c0cb88d00bc27550887607ad3d8ce0779a4683c.1741930961.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1741930961.git.Takahiro.Kuwano@infineon.com>
+References: <cover.1741930961.git.Takahiro.Kuwano@infineon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,20 +106,34 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Some of Infineon SPI-NOR chips use vendor or device specific commands
-which we need to take care for parallel memories configuration in zynqmp.
+SPINOR_OP_WR_ANY_REG (0x71) opcode must not be performed in striped
+access mode to write the same register value to two Flash devices in
+parallel memory configuration. The opcde 0x71 is also used as Read
+Configuration Register-2 (SPINOR_OP_RD_CR2). To distiguish it, data
+direction needs to be checked.
 
-Tested with Infineon S25HS02GT flash and AMD EK-VMK180 board.
+The following commit is related to this patch.
+217b0a28b6d ("spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver")
 
-Takahiro Kuwano (2):
-  spi: zynqmp_gqspi: Make WR_ANY_REG opcode not use striped access
-  mtd: spi-nor-core: Rework spansion_sr_ready() for parallel memories
-    support
+Tested-by: Hiroyuki Saito <Hiroyuki.Saito2@infineon.com> 
+Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+---
+ drivers/spi/zynqmp_gqspi.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
- drivers/mtd/spi/spi-nor-core.c | 37 ++++++++++++++++++++++++++++++++--
- drivers/spi/zynqmp_gqspi.c     |  2 ++
- 2 files changed, 37 insertions(+), 2 deletions(-)
-
+diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
+index 2a095d0c58e..f47c3058942 100644
+--- a/drivers/spi/zynqmp_gqspi.c
++++ b/drivers/spi/zynqmp_gqspi.c
+@@ -841,6 +841,8 @@ static bool zynqmp_qspi_update_stripe(const struct spi_mem_op *op)
+ 		return false;
+ 	case SPINOR_OP_WRSR2:
+ 		return op->addr.nbytes != 0;
++	case SPINOR_OP_WR_ANY_REG:
++		return op->data.dir != SPI_MEM_DATA_OUT;
+ 	default:
+ 		return true;
+ 	}
 -- 
 2.34.1
 
