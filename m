@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD1F5C28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 06:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D043FC35FF1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 06:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E772817D8;
+	by phobos.denx.de (Postfix) with ESMTP id 54AAD819B1;
 	Fri, 14 Mar 2025 07:47:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jZtJW3fc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fQzdbEGl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E9268197F; Fri, 14 Mar 2025 07:47:44 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 3900781760; Fri, 14 Mar 2025 07:47:45 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEE6281760
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:47:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F13B81870
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:47:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ac339f53df9so8162566b.1
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:47:40 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ab78e6edb99so262199566b.2
+ for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741934860; x=1742539660; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cuEwG6PyTMR86MFDYDcB/C8dhpjH0nrz8h68sr2qhWc=;
- b=jZtJW3fcoj6SyxfU114wTlo9bpH09a4uT5RZMCerS0+E//2NvZNOtyQN+Z05cpr8nD
- wHszeUpdUysP3HBpaz6hN0c7QsPw4RftTSpPCr6ckIL387jhHmJuD55ftnX8Js98cosm
- 8SFUurGp6T5Jt3uZgYeiQX5VgIgF5KDGpOaGXoGmO1ciTvWnGUhoQ6PD2fS2S+kV628p
- enQFSYmHAzEllcHoO1jW2z/mqu78dFGT8aDO57qh/zKlpNDmsKkpn+IBKzXlIuaEqBCP
- dbSfmlmZy0MOeYhkk28WU95GGOppkB/ntFYcsYPilL4x+J9dDc/2ShaxwPWP46UfIT7W
- 9VQw==
+ d=gmail.com; s=20230601; t=1741934861; x=1742539661; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Bs5vDH3Pao9BaGk8XeKtoTrSrgUrLCFEpX3GQArSZiE=;
+ b=fQzdbEGlrl5YCejPASJtCrexrHectFUqaR9X2RMCEORs9FPVIFK0+kFVJI7gKBnSra
+ v/5poyxCQfZ4XZaexXE1L+TxQKdEX6LDSz0BSz0sQeKWoX9b1Z0rn1SsxPg+OrVWMBP0
+ 3LQ/ZrGzBTMlHBqDfgj8rchKIVPO5E354ACLrKH8XUuAkNKn91tpmEzaErQjH8wVv4a2
+ iL0ng5L4o7oksQQy/SjSko3G0D+tmRmG/Z6z0fEZyUoD+vlRBvaJhJ1VvdtfL47yguyl
+ jb9eaoF0RfHWQpzYahmI4VhumRnLainbTAATo778HSir9P/0C/ghge2CRzI+ufHx/wbS
+ Y+Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741934860; x=1742539660;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cuEwG6PyTMR86MFDYDcB/C8dhpjH0nrz8h68sr2qhWc=;
- b=JGJWba6A4W0Ug47aoNW4HOXXsNW81pgcTu5Jn2wlsoy9njTSebVuHp+VZkal+/uGtj
- UCzBz+lOv4N5p52QHQC8wgiqevxYucuSQKDGxppl72pB3ZS7FE4X5tMqOsasT/Qwr1UN
- A7808kGRp/RS6/IuOSDDqjLQyJ7kXaRDU9BcMjz3oI/wqHFyt+MlXrBsi8ZvGmP5nV6Z
- jgL+58vWA5bQsWMZiqVBR25SAN+LUMpCJAZ+PUu37qwIV+adWmQuYwrZpVXda2LKaYXm
- uigwoRvlMlUtLsK1XjH/+pk+F7P727ls6LAnIFDyQGe4wy8P1dVEm99cuPsxaUW8wcy8
- V3rQ==
-X-Gm-Message-State: AOJu0YzKDE7uBvCAsaSvlK2vQHOppSmnw2iDB6sY1J/GZKVq/NnF6RYE
- VQcVc2s/+APoSOixEgf65uNx9hyoZYXEd3KPwI0HadjxU+kX+OAS
-X-Gm-Gg: ASbGnctctECGWDgHXHOsjLz+Iet7nx2shUJ3r+O09+dHK1hsNjIPy/3sSIivPF/uAIC
- vtlRXSWcwU4fXaPBjtXAg+vlqB23zfVAAoXTJ1DztRgQSSWKaVWTjRrrpFndLUMQ/E1Ys+jsF4x
- 6L1+2uObP19mjUi38Pd/oDaFxsh0V4fWRhy2oOuqgXzHNQY2OBJrU5npSEHAmJSDX2oc8OLWxkR
- Nht9V4AtLxIWMApbpv/NhIeSpqT8SqnoSMWpcDAKRNVoze61+AaKLwrGDiPTGY2qO86gJpwlvLh
- 0ZErQAYBv5QPDQz2iOrfmjtL2HeVhg4MXlqz
-X-Google-Smtp-Source: AGHT+IGep5nnVfp+nyr9a8Spzowt1cLyPORYX0T9WX2Gia6J5np+J4R9EwCD4a6HcM45/FWrWjlqQg==
-X-Received: by 2002:a17:907:9694:b0:ac3:131c:fd0d with SMTP id
- a640c23a62f3a-ac3303bcd03mr151255466b.39.1741934859895; 
- Thu, 13 Mar 2025 23:47:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1741934861; x=1742539661;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Bs5vDH3Pao9BaGk8XeKtoTrSrgUrLCFEpX3GQArSZiE=;
+ b=Boqpl/1BtCW1psIKdtOfxBaM7FQNs7BsRgTWCqnkRkgk3onb7ofgo7Ptd7VfBCG/Tz
+ nXlE5iV9A8Xi3EFjSPHwqjdAx4e9OHd0vfwjBAYZtWO+UbHH2qJ+AYYziPngR+qFbZq0
+ osUlbi3cHdXxMoGMF+G1NMYapnnFvUK4AgkKsUn/boKke9N/wKfcSM+07JE6TTOuUI01
+ 1/Pa9WY3oBQK1i4SmUMrK9fMRcJ7UDotIWLfOFe0+2jMGCQeRbhgTcthvPWQu+u+0FKT
+ 9PbC6nUZjiFPszaN/IlE8PRgQN/QbJ7xzNdXDIVH7+6HkKa7X3QURURWp6GMuDFSqm9f
+ ZddQ==
+X-Gm-Message-State: AOJu0YzTQfc0smFTPW6aR6enDkTwxXliBTET6kmZm3DfmuAm+TtGd2RS
+ SiTYzwDoi4QGmcNIVC2CQC6tZ0TnUPJ3H0JqXKRI2lpKmu/2rrQHiiM30A==
+X-Gm-Gg: ASbGnctVbqqmy8RbW2zH39hmtUyQLsrNiL1z1cQdz7k+Q/ZaxZdpVITnuTChRnunWu0
+ z5RfC7x6L+TIC3H16uGkDpSKcbJo8tFH5cvUpMCEAI01W9uHL2EFJUxqMrIXdPSjDjQBfhITkaq
+ zRuSXmw0uqXr7YTSRy+pDHQ6NvDPsQT6mdPl1opxm5yfEpVNVXxuOzcZdk5b5U0jQMEuuzLTVf2
+ mcUHHjkM31lKoiyc324bLTUj+hP975gsUmY5MovX6SXNh9ROaTxz4qEIZXSPfyfU352LLJX1Plt
+ jYtfcc3ZxS6UGa6BIV9PeYJ6uJQ1j8Md+JUp
+X-Google-Smtp-Source: AGHT+IEI+JORcs24XFKRuB1AVvn4zBaG953mBos+xony8rl5BXVlb3gSgvJs35wRD0t8JB5skU0uLw==
+X-Received: by 2002:a17:907:2d24:b0:ac2:622f:39c1 with SMTP id
+ a640c23a62f3a-ac3302c574emr107246566b.22.1741934860892; 
+ Thu, 13 Mar 2025 23:47:40 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac314a49c37sm179471766b.158.2025.03.13.23.47.38
+ a640c23a62f3a-ac314a49c37sm179471766b.158.2025.03.13.23.47.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 23:47:39 -0700 (PDT)
+ Thu, 13 Mar 2025 23:47:40 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -74,11 +75,13 @@ To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>, Anton Bambura <jenneron@protonmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/1] video: edid: guard standard timings EDID expansion
+Subject: [PATCH v1 1/1] video: edid: guard standard timings EDID expansion
  behind kconfig
-Date: Fri, 14 Mar 2025 08:47:19 +0200
-Message-ID: <20250314064720.5767-1-clamor95@gmail.com>
+Date: Fri, 14 Mar 2025 08:47:20 +0200
+Message-ID: <20250314064720.5767-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250314064720.5767-1-clamor95@gmail.com>
+References: <20250314064720.5767-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,13 +105,78 @@ detailed timing information is necessary, consuming significant space. To
 mitigate this, the table is made configurable via kconfig, allowing it to
 be excluded when not needed.
 
-Svyatoslav Ryhel (1):
-  video: edid: guard standard timings EDID expansion behind kconfig
-
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
  common/edid.c         | 6 ++++++
  drivers/video/Kconfig | 6 ++++++
  2 files changed, 12 insertions(+)
 
+diff --git a/common/edid.c b/common/edid.c
+index e2ac7100a88..e5aa4ca494f 100644
+--- a/common/edid.c
++++ b/common/edid.c
+@@ -16,6 +16,7 @@
+ #include <linux/ctype.h>
+ #include <linux/string.h>
+ 
++#if CONFIG_IS_ENABLED(I2C_EDID_STANDARD)
+ #define TIMING(c, ha, hfp, hbp, hsl, va, vfp, vbp, vsl, f)	\
+ 	.pixelclock = { (c), (c), (c) },			\
+ 	.hactive = { (ha), (ha), (ha) },			\
+@@ -206,6 +207,7 @@ static const struct display_timing dmt_timings[] = {
+ 	{ TIMING(556188000, 4096, 8, 32, 40, 2160, 48, 8, 6,
+ 		 DISPLAY_FLAGS_HSYNC_HIGH | DISPLAY_FLAGS_VSYNC_LOW) },
+ };
++#endif
+ 
+ int edid_check_info(struct edid1_info *edid_info)
+ {
+@@ -417,6 +419,7 @@ static bool edid_get_standard_timing(struct edid1_info *edid, int i, unsigned in
+ 	return false;
+ }
+ 
++#if CONFIG_IS_ENABLED(I2C_EDID_STANDARD)
+ static bool edid_find_valid_standard_timing(struct edid1_info *buf,
+ 					    struct display_timing *timing,
+ 					    bool (*mode_valid)(void *priv,
+@@ -446,6 +449,7 @@ static bool edid_find_valid_standard_timing(struct edid1_info *buf,
+ 
+ 	return found;
+ }
++#endif
+ 
+ int edid_get_timing_validate(u8 *buf, int buf_size,
+ 			     struct display_timing *timing,
+@@ -493,10 +497,12 @@ int edid_get_timing_validate(u8 *buf, int buf_size,
+ 		}
+ 	}
+ 
++#if CONFIG_IS_ENABLED(I2C_EDID_STANDARD)
+ 	/* Look for timing in Standard Timings */
+ 	if (!found)
+ 		found = edid_find_valid_standard_timing(edid, timing, mode_valid,
+ 							mode_valid_priv);
++#endif
+ 
+ 	if (!found)
+ 		return -EINVAL;
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index b1ef73f3e5c..11d17076a96 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -721,6 +721,12 @@ config I2C_EDID
+ 	help
+ 	   This enables library for accessing EDID data from an LCD panel.
+ 
++config I2C_EDID_STANDARD
++	bool "Enable standard timings EDID library expansion"
++	depends on I2C_EDID
++	help
++	   This enables standard timings expansion for EDID data from an LCD panel.
++
+ config DISPLAY
+ 	bool "Enable Display support"
+ 	depends on DM
 -- 
 2.43.0
 
