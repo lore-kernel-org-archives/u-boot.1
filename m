@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC2EAC282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9965AC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:03:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B34581DED;
+	by phobos.denx.de (Postfix) with ESMTP id D884081EBB;
 	Fri, 14 Mar 2025 17:02:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ct+NQunE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YybIVXEH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CF6D81E81; Fri, 14 Mar 2025 17:02:41 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 7D02881E18; Fri, 14 Mar 2025 17:02:41 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9423081E14
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:02:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E1A681DE9
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:02:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ac2a9a74d9cso466632466b.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:02:38 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac25d2b2354so401209466b.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:02:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741968158; x=1742572958; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741968159; x=1742572959; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1FFLPgg6zVUsd9enOm+7N6NcjtN+NvBv9jSH7YzFhoc=;
- b=Ct+NQunEEh+TS9I63YZGTqT+bMEVRhrYyXZ9WSzi2XrkImyhXrCC2vi57nQYb7PyOO
- jzTcff6tN7CyEQqV/SlZQecoG2ogtk65NBWV+bks9ldXxEa/vVwEuPzUnMjlAj5ktqRG
- /70eH0xEDwKxi5HZR3Scf3vK2HDk6Dg+1Fvek3hKlyxuWMNav7oZLLEEYFfwTh1obQyY
- H+RNFe7a1WjlMU9UkPV+gu/j8FTiERK2deOUWTbUo53UkIMiU3a4alOWBv87PiwRAAs+
- QFDOmVmrXrsL37nFCjrmjyROVc0uXpqXxIfda+EHC2yrv+hKxqbA9cC48bBevd5hmxue
- +A0g==
+ bh=WnMpcNP9NtTrvV7sefm6IlQnVRV84F2bIJQZDZLSC0E=;
+ b=YybIVXEHKfxRerZmABtTnOtG6mmi4T0LHQdabZEOEVgi9Vs3BiUWBu1jI4yjEnlFO1
+ svl4qGIjGsC7xD16yDyjz+JjiRw/tK6vJOKasCgNjQKhdOJbXq/Db5AaQL2XznbeEpR3
+ cpOLlQu8VdEOXjwlRcIH2KVtMEnYTFo7MbMtYn4uao1Lg0bOQtjDW2ckDVWaHJuFPf1g
+ zVUlVWc+fLUjKcD50+CGLGUPQHS6sutFSna+1+NgSVEd7HuXcAzDCEYMoR8YrxvpuDPQ
+ wirRFUqgB9FewDeOtFRFaY+xrAdblCaoMmatADVYlHO7AYSZTGundcgh10XoC1NWF1z8
+ OJ3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741968158; x=1742572958;
+ d=1e100.net; s=20230601; t=1741968159; x=1742572959;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1FFLPgg6zVUsd9enOm+7N6NcjtN+NvBv9jSH7YzFhoc=;
- b=lb2wland/RctFoV5oCM9abQSZZn428HX3o2F7B4eb8m6sYi7y8FooaRSEU/zckY4gs
- Eh5VPE8QiHwTM3DXZsfduu5DO4l0zQE81+GT6jpmXOvV1hXXy5KgYhzKMwslf/t14bJy
- x+vdL8uaayvvTngL03+i2Qeu8UftrLIn27pJYmaFMe4MVk8Js61i+/s25c3AWHHXcFld
- EVZg0KIExeuaY67j7z6HrTOFy4TR9qz9+MQsWPLqAO9uYWPWqwYim9cuy3GCsyh5LzSM
- A6DY4S0v0lk+PMpIB6xOUj8FGod/BYCUTLKBk/WL+ubTGfWAaTxBBC16mhR86qUzTe3G
- O7Rg==
-X-Gm-Message-State: AOJu0YzzUFbo2HTCrb1mR/hVJ/kfNiw9UhbsOYGL6Q6Jc1ZXsX4Iiq7M
- TTQ+rxGCtbnEI2VAoqui65QTeL5ViNsuv/ZoDVvrOZbRO8/kkhFh
-X-Gm-Gg: ASbGncvvckZqUjm69RGRnoin/j1uLlKnxm9yhJE4pZT3F7bJ7cUsHkWUwtTXu3U8pUd
- iaoJiMMYYxGEspGIT6JhX32d86W8dgjcdTVKJNf7UjDVZY/s8UKeiXtPGKuZ2gX5tTvvhMn/M/C
- w23WO3m7FPgZvH/sriuadjM6cFwgtS4Cp3MsnMtFolUBzk24ArxT6iyjly8f8ITQ3vXP9J6FFMN
- qfnaKkIQ07bI4x71wG157hRlkcr/sT6vkG5DacNV7Elc81qvsCAZclXTHeJUT1ecIsR031oa62n
- +BYaAy9Zmt6ihYyKXUdvb86oCv7Qoru60dQT
-X-Google-Smtp-Source: AGHT+IG9KcjEfKu/f5w5dAs5/yhJYZ86fYo6lcCSMf2pbkc45Kqca0XL3zhoGx1RQ/L5T6drouQ7cw==
-X-Received: by 2002:a17:907:97d3:b0:ac3:271e:6b1d with SMTP id
- a640c23a62f3a-ac3303dfca8mr413343566b.51.1741968157808; 
- Fri, 14 Mar 2025 09:02:37 -0700 (PDT)
+ bh=WnMpcNP9NtTrvV7sefm6IlQnVRV84F2bIJQZDZLSC0E=;
+ b=SkUiu588Gh4AHhXe/KaR2BPWnc+uC7Qj1anhiA3l7eThmS8+f4cBuDiArUwnNCMFzd
+ RO9AB0MJ8kXvLFl1oe97GoZlDxK0kdzn0s3wVkXp/wcM5goStlMINM4iTD/z76aOX6rh
+ Zvv+Hkgk8MP62SWiRaVl1OAo0aWIYppmvTmiAtSomJjn2E13Qp5HyFGp2td73v4XchrH
+ /fhGF+T+oKQKXVseCV7arbxlic3l8KDfE+VzFx5mZmx9NnxH5IXTL+RCbjiw3x06uV1E
+ WXCLKYLg8XRSwYmEc929x6HQdfEPm51ezVIvoaLN6h+1TNexh6XLVmsxZFyljXsFWolT
+ d6sA==
+X-Gm-Message-State: AOJu0Yx46TL1sIWka6r7XvNE+GWNGNOB7Jzbi9xmgVF6IDg4iU+Yt7XZ
+ Llc7R151r5HX/9i+I2BVGx8efO9hI6Uy34OAiXnMIIfB/hrchIk2
+X-Gm-Gg: ASbGncuvZo+VHop+c+IDzBnHNtX1pPMSgMb/Rfssi2z0tBZs0N9n1ojolQbQKF0mtda
+ 5J52mPCiVCb/ef+KJ4zZKS8LbPpTXgBb0g1wd/wxWtIM6M3Laab5sgUPnToxuuzo91kYqv0Mti7
+ HkFE1PrFvMkIbhZxYyd/phLzHQ25USV1+GYu7nGLrhE1MDbwDP5H+LS5Yr+CGKyHmbyHOdfrrTI
+ WWvv6LdZ4FZLQPZAHwNwFutrkaguPQ5ByHMWrx5cJcwxx3RjrzkCC2In2yDr6bqHGMKOcMzlzG2
+ qPmNZBdqa5VGj5PbuLp5Wmz1Qt07XW6mIYyo
+X-Google-Smtp-Source: AGHT+IEdcqCXElgrzNxgzPdR1mqqTfZrudjJ70w6MYsQ2ldNYS8rUPuFmx+PT251sD3Xk5BBJHGxaw==
+X-Received: by 2002:a17:907:868a:b0:abf:40a2:40c8 with SMTP id
+ a640c23a62f3a-ac3302f370dmr336686666b.28.1741968158693; 
+ Fri, 14 Mar 2025 09:02:38 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
  a640c23a62f3a-ac314a47fdcsm242953066b.146.2025.03.14.09.02.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 09:02:37 -0700 (PDT)
+ Fri, 14 Mar 2025 09:02:38 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 3/4] ARM: tegra: p1801-t: enable HDMI
-Date: Fri, 14 Mar 2025 18:02:15 +0200
-Message-ID: <20250314160216.36327-4-clamor95@gmail.com>
+Subject: [PATCH v1 4/4] ARM: tegra: tf700t: upgrade bindings
+Date: Fri, 14 Mar 2025 18:02:16 +0200
+Message-ID: <20250314160216.36327-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250314160216.36327-1-clamor95@gmail.com>
 References: <20250314160216.36327-1-clamor95@gmail.com>
@@ -98,54 +98,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind HDMI for ASUS AiO P1801-t to provide full panel support and improve
-usability.
+Align TF700T bindings with existing upstream device trees. OF_UPSTREAM
+migration is possible already but resulting size of binary exceeds maximum
+allowed size with full size trees.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-asus-p1801-t.dts | 12 +-----------
- configs/transformer_t30_defconfig     |  2 ++
- 2 files changed, 3 insertions(+), 11 deletions(-)
+ arch/arm/dts/tegra30-asus-tf700t.dts | 96 +++++++++++++++++++---------
+ 1 file changed, 67 insertions(+), 29 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-asus-p1801-t.dts b/arch/arm/dts/tegra30-asus-p1801-t.dts
-index 243ff2bda26..4b7b64b477b 100644
---- a/arch/arm/dts/tegra30-asus-p1801-t.dts
-+++ b/arch/arm/dts/tegra30-asus-p1801-t.dts
-@@ -34,20 +34,10 @@
+diff --git a/arch/arm/dts/tegra30-asus-tf700t.dts b/arch/arm/dts/tegra30-asus-tf700t.dts
+index 6dc760b90d6..47606ede9d6 100644
+--- a/arch/arm/dts/tegra30-asus-tf700t.dts
++++ b/arch/arm/dts/tegra30-asus-tf700t.dts
+@@ -15,7 +15,14 @@
+ 			rgb {
+ 				status = "okay";
  
- 	host1x@50000000 {
- 		dc@54200000 {
--			clocks = <&tegra_car TEGRA30_CLK_DISP1>,
--				 <&tegra_car TEGRA30_CLK_PLL_D_OUT0>;
--
--			rgb {
--				status = "okay";
--
--				nvidia,panel = <&hdmi>;
--			};
-+			status = "disabled";
+-				nvidia,panel = <&tc358768>;
++				/delete-property/ nvidia,panel;
++
++				port {
++					dpi_output: endpoint {
++						remote-endpoint = <&bridge_input>;
++						bus-width = <24>;
++					};
++				};
+ 			};
  		};
+ 	};
+@@ -118,38 +125,69 @@
+ 				vddio-supply = <&vdd_1v8_vio>;
+ 				vddmipi-supply = <&vdd_1v2_mipi>;
  
- 		hdmi: hdmi@54280000 {
--			clocks = <&tegra_car TEGRA30_CLK_HDMI>,
--				 <&tegra_car TEGRA30_CLK_PLL_D_OUT0>;
+-				panel = <&panel>;
++				/*
++				 * Panasonic VVX10F004B00 or HYDIS HV101WU1-1E1
++				 * LCD SuperIPS+ Full HD panel.
++				 */
++				panel@1 {
++					compatible = "panasonic,vvx10f004b00";
++					reg = <1>;
++
++					power-supply = <&vdd_pnl_reg>;
++					backlight = <&backlight>;
++
++					display-timings {
++						timing@0 {
++							/* 1920x1200@60Hz */
++							clock-frequency = <154000000>;
++
++							hactive = <1920>;
++							hfront-porch = <48>;
++							hback-porch = <80>;
++							hsync-len = <32>;
++							hsync-active = <1>;
++
++							vactive = <1200>;
++							vfront-porch = <3>;
++							vback-porch = <26>;
++							vsync-len = <6>;
++							vsync-active = <1>;
++						};
++					};
++
++					port {
++						panel_input: endpoint {
++							remote-endpoint = <&bridge_output>;
++						};
++					};
++				};
++
++				ports {
++					#address-cells = <1>;
++					#size-cells = <0>;
++
++					port@0 {
++						reg = <0>;
++
++						bridge_input: endpoint {
++							remote-endpoint = <&dpi_output>;
++							bus-width = <24>;
++						};
++					};
++
++					port@1 {
++						reg = <1>;
++
++						bridge_output: endpoint {
++							remote-endpoint = <&panel_input>;
++						};
++					};
++				};
+ 			};
+ 		};
+ 	};
+ 
+-	panel: panel {
+-		compatible = "panasonic,vvx10f004b00";
 -
- 			status = "okay";
+-		power-supply = <&vdd_pnl_reg>;
+-		backlight = <&backlight>;
+-
+-		/delete-property/ enable-gpios;
+-
+-		display-timings {
+-			timing@0 {
+-				/* 1920x1200@60Hz */
+-				clock-frequency = <154000000>;
+-
+-				hactive = <1920>;
+-				hfront-porch = <48>;
+-				hback-porch = <80>;
+-				hsync-len = <32>;
+-				hsync-active = <1>;
+-
+-				vactive = <1200>;
+-				vfront-porch = <3>;
+-				vback-porch = <26>;
+-				vsync-len = <6>;
+-				vsync-active = <1>;
+-			};
+-		};
+-	};
++	/delete-node/ panel;
  
- 			hdmi-supply = <&hdmi_5v0_sys>;
-diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
-index 9d63755533a..f5a666d8a17 100644
---- a/configs/transformer_t30_defconfig
-+++ b/configs/transformer_t30_defconfig
-@@ -89,6 +89,8 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0b05
- CONFIG_USB_GADGET_PRODUCT_NUM=0x4daf
- CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
-+CONFIG_VIDEO_BRIDGE=y
- # CONFIG_VIDEO_LOGO is not set
- CONFIG_VIDEO_BRIDGE_TOSHIBA_TC358768=y
- CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_HDMI_TEGRA=y
+ 	vdd_1v2_mipi: regulator-mipi {
+ 		compatible = "regulator-fixed";
 -- 
 2.43.0
 
