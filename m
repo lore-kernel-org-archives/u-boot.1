@@ -4,103 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E91BC35FF1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:10:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5470FC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:11:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 702A281EC9;
-	Fri, 14 Mar 2025 17:10:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C604481E06;
+	Fri, 14 Mar 2025 17:11:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W0Fw9NX8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VTGx9XQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D0CC81D0B; Fri, 14 Mar 2025 17:10:16 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 39D1181ECA; Fri, 14 Mar 2025 17:11:22 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2317281E60
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:10:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4262881D0B
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:11:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso15568485e9.3
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:10:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5e033c2f106so3184343a12.3
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:11:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741968613; x=1742573413; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=m7gY1WwR6KH3cYQj8zYD1g5PogSocjblNij8cGVotGU=;
- b=W0Fw9NX8EJcMG7amR8T6swfcgMEsWUOl+8NC5bVnFOzCl8oSDHJqh74DxGwu+ZQgCz
- RIK+DDmLey2aImAVZWwKkLwCoYKrSLKktfM+CftJCy1ID0M9Hjrxp0SBvqAsRmL9uxBl
- 19ZfYqcFGD/PILQzwnOb3DtyWp8zna/CLJORMr6bZw9yAd82kUm1L9k8lefFFjhw+Fw/
- azLn15+4eKDkKxZ575HWipV3dgcnKFYXy5cRanp/0ESxlG0RpHLXNG3hPlrKj2ZjoY0q
- QjIxBq1pZ4B5wmBLhm+t7DXWf3+PPm133AVNgAKxh/smWiTf11ER0sdM9odv70QSiZyh
- xhPA==
+ d=gmail.com; s=20230601; t=1741968680; x=1742573480; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/fJbPqmYepULTLC/w7BBSh1dLTNY/ETO8dv58oViIoE=;
+ b=VTGx9XQiCnvxeTlDTPZdnrqQkR1jC3Vz4gdbTOJiUpqHkgpOHTgP1PtCMe5XVGRLjs
+ 26V3rlPTfL9+YgiVqsS1Pa0vNUgUdJD6At9O9J1PjAGeoHFkmmMaB8qKnKJjoAhwPf0M
+ GVuDfSPLCYXwpR0Ul51Uj5EtGW0rOW7zOiXhvpFrc19+ShGrTz51738ecAB4ejBMj5pw
+ fYrhbzO4t7hgYepn7q/ZBfTRXp+jzkUXULzd332191vaqS7/P4YOrtYByR7pRMMpqi0R
+ wm2Sn7aKcT0pjM4IGbAAaKzeBkfTvsFKajgXojtevWVGvNZAKTLzLMmhNyLJBiLIDmTB
+ Bq/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741968613; x=1742573413;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m7gY1WwR6KH3cYQj8zYD1g5PogSocjblNij8cGVotGU=;
- b=NHIiBVX6k6hxHxjs//KgdgRd2pzNsLwpjzv6Wy/fMAWea/d+K/ZxVTt+4ABfJOlnnH
- FnfrwvIRJj/zFy10I0CSoG+bQm4QpZH261AqS9DIHOxthFpQaQsGExvD6ZmnQQRYFeiw
- /LgaTKwFdeigDqxnNSC4QFZM1rz1qZFoqpO3IvDHbmQVQ3FK2S1XBNXygacw088dhZkS
- Ju+DgWWex8u+omq61brdUZ6tlkvdy4g/Mh++S0QD5YNABo1VjPFVIbwQb7pTNaosLi4u
- 54Ayf4HhkawqD2r6H9n9Hewo8QS2Zn1ajmueqftBnui7PzFkE3fH3cFt/ltI27IGza04
- dbXw==
-X-Gm-Message-State: AOJu0Yx5/SIAxNlB41aXShV8iyff8amnmZMEdAkl2wVsI5t0bGtn1nKS
- lnirOPJPPJLP3o8qD857OT6eYz8x01J37dEQAyxoXxBvHITFUshKd5L2iTrJ40A=
-X-Gm-Gg: ASbGncv+A1T3RdoTcdpCgO53GPBHBRpMir/IgxOPq5rlC4XbibBSSRWh0lAhkwZSLNb
- XeLKCbDhbUXDmu36MrZZcGsPquPjf3N65uaLoCeNYFgOzuriewZpim+IXbgyTRx7jGky0xmdTQn
- rSq6YT6JtyreoXKK4BCsjEIKjlLGfJfKattY1L96eLmpyjt+aRafzd/0irLycLW403rTUTDavJf
- LiAuUjdVQsMnXT0P4wi2ifGWyiHRT1hv5yywBtCoDN9ztMQSstLfyDb6QXd0PgoBlLaikoKz+Y+
- k4IssLjn4nkZUWpYs2hM49U80YHG3fk/YBZFioTJ997j5KrhGhBNGWmuAmTT
-X-Google-Smtp-Source: AGHT+IE+ud0i2/3FrRkPbPytPHbcw6rqb4hV8s+QmY7TP2ZYrZ8RbDS0R92zqcfOhguu1vy+DJYfkA==
-X-Received: by 2002:a05:600c:4fcc:b0:43c:fab3:4fad with SMTP id
- 5b1f17b1804b1-43d1ec80ebcmr46109425e9.16.1741968613441; 
- Fri, 14 Mar 2025 09:10:13 -0700 (PDT)
-Received: from toyger.powerhub ([2a0a:ef40:1d11:ab01:2b81:563b:c694:c380])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fdda29esm22035015e9.7.2025.03.14.09.10.12
+ d=1e100.net; s=20230601; t=1741968680; x=1742573480;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/fJbPqmYepULTLC/w7BBSh1dLTNY/ETO8dv58oViIoE=;
+ b=tM09VMG2oWnef6+cGZoxOChtzPhPfSnNQyp2KTwA0/ouAUHEQ0pqWMiJbRWKFbjABB
+ mZAxX4kMNEvKdhWgbHtdlhaFKDFDMRyG81FU0WpQ4zPUoyDe4FXR3o6lI4ALGS+dHdAU
+ gS98xpOz1s6OFeq/9e9+7Up7wduxH1DsQ4U+wJt6XghvryJtCKZla5kweKLFpMB5csgE
+ 3cWdKCbQGZosogU64LGWPQXzoyHLIFl6E3QYSBO7bq/ALG8QVRuU0SC3ACIU76kEdlDb
+ U5RegFF+2hsKKZ36s1ISjCbpeUyrXeRCGu15m4bwlvCKZgPoVQb0nkQwmvZVeFgl+KZO
+ pkjQ==
+X-Gm-Message-State: AOJu0YxVN/92tAIGfOXuuMKwicAjAVRqE4Kkgv4yfOS5iGIx03Hd7ggT
+ F8/rITGJrm9d6YPNqZy7e+KfJX025OrxEFkbHbNXb1m6kr0W3abg1a63Sg==
+X-Gm-Gg: ASbGncuicw0N4O86Zsmqc8cv0Hv5KPFXgLihO/VF08KXdFu3ypy6LySx96iZhxgSagL
+ dw8zTOswDZAWguY2pYBFGtGcC7BR+2hP/Kw5DXmgsrsJHS0YEhEg09RfPoYE8durN7tpU2w44Zv
+ nxfgZnFDd1UjkOM67ZOAtEp+SI2Vtj1/uanYCmBfBqIlHIyETZazt+2oN8/1ltjAx2z4dKsqblX
+ jjHfxvMnotp8M+htA3XH1KLCUiCjPUdPSyTuFbDL/sQNRJI2SfTONNvqXGIOQS2WZGFBog9ZZef
+ XoMPFX2aon4xXj6qVOD7oR3P12gcJO863S6c
+X-Google-Smtp-Source: AGHT+IEjvwYw/LVX429oXpG3FyraOGuLdQbuZ7HE18NAiUDc6QmANUPFrIYHivdbhw+jalYlXSH89g==
+X-Received: by 2002:a05:6402:5186:b0:5e5:b572:a6d7 with SMTP id
+ 4fb4d7f45d1cf-5e89e6b0648mr4233504a12.6.1741968679483; 
+ Fri, 14 Mar 2025 09:11:19 -0700 (PDT)
+Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e8169bcdb3sm2161904a12.43.2025.03.14.09.11.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 09:10:12 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 14 Mar 2025 16:09:46 +0000
-Subject: [PATCH 3/3] i2c: geni: load firmware if required
+ Fri, 14 Mar 2025 09:11:19 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/4] pinctrl: tegra: minor driver fixes
+Date: Fri, 14 Mar 2025 18:10:56 +0200
+Message-ID: <20250314161100.36894-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250314-geni-load-fw-v1-3-587f25f2812f@linaro.org>
-References: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
-In-Reply-To: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
-To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1213;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=O4h31HcZZFiO4Leu/igtmoWvKycGGWqyK/wV8F/7Gck=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn1FTfWq8w+ZqlwIAwpIzdYy394g/QHRHvlAEkW
- rlM+ihk2T6JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9RU3wAKCRAFgzErGV9k
- tuXcD/oCnyxd7y6zdfPWccX1efcO62y1Ousv6zO3KFy25ENzHJbd2OrU5AQCXLsspqiggavpKKa
- 6/gGLo5THgRbAdSBckXHcmaI1CoAqgpW+c+An3P9oYXzbmZu4f0/JjeDmOgmf0Kzi9kZMXJssGy
- 9jB4e2UQtSSGfCK7tYZmt375g4cT/OZ3N2ZiLjTs/mAmTabdgPP6kEteoAzfkbgbyyRWcMmJaea
- hzXHJiy8G1piHIRHLJbg+ZDmqTGyBS9dBEaqWsXz7cKIEZUkNantEKAUM1tn26JVZjNgRwYIFEo
- LcwEn5f3u0tGvDOi5eAhHIEFro9Oym9rpk25CZuEPZ7e56U3usD0wVsODQm45xGI8/gGns7ucTJ
- s+tq87HyzlidHKicZP6z1qZfDWulHhPW//WMh16gISC7Cs7P+DZb7kEWlUfq8eA79XHaIGHf3n0
- lMFZRrntNdSxtEtBb+zhiYvF2eWp5ndBH0pSKt6DhzGlSMVnolAJHWsMa2ybl3H3RaC+AKI2j6p
- VZyuLE9UHA5k6IFjD45vG9dxGpH3k17D5qdL6Uzfm/R+9TOhpn3uesQPpS3MSy+Ik6lWn0bvGdN
- 7mQ9UAc/825sVY4P5A6T0F4qQo/byW9jSDqfS0EzbGUPbYAqegZRmyAjdNrC8cfljgtOzmcUmDS
- EtJ47QomcuLFMCA==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,44 +94,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Load firmware for the peripheral if necessary.
+Adjust pinctrl driver to better work with Tegra Linux device trees regards
+lock, io-reset and open-drain properties. Fix pin and drive default values
+and fix function naming mismatches on Tegra 2.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- drivers/i2c/geni_i2c.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Svyatoslav Ryhel (4):
+  pinctrl: tegra: adjust default values of pins
+  pinctrl: tegra: adjust pin state lists
+  pinctrl: tegra20: fix function naming mismatches
+  ARM: tegra: dts: fix lock, io-reset and open-drain properties
 
-diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-index 4eb41ba852f7790ca646c8ba38f29fdb727fa804..fca0fab7201a2f86ff4a8c12d053297e660c4621 100644
---- a/drivers/i2c/geni_i2c.c
-+++ b/drivers/i2c/geni_i2c.c
-@@ -21,8 +21,9 @@
- #include <clk.h>
- #include <reset.h>
- #include <time.h>
- #include <soc/qcom/geni-se.h>
-+#include <soc/qcom/qup-fw-load.h>
- 
- #define SE_I2C_TX_TRANS_LEN		0x26c
- #define SE_I2C_RX_TRANS_LEN		0x270
- #define SE_I2C_SCL_COUNTERS		0x278
-@@ -498,8 +499,15 @@ static int geni_i2c_probe(struct udevice *dev)
- 	proto = readl(geni->base + GENI_FW_REVISION_RO);
- 	proto &= FW_REV_PROTOCOL_MSK;
- 	proto >>= FW_REV_PROTOCOL_SHFT;
- 
-+	if (proto == 0xff) {
-+		qcom_geni_load_firmware(geni->base, dev);
-+		proto = readl(geni->base + GENI_FW_REVISION_RO);
-+		proto &= FW_REV_PROTOCOL_MSK;
-+		proto >>= FW_REV_PROTOCOL_SHFT;
-+	}
-+
- 	if (proto != GENI_SE_I2C) {
- 		dev_err(dev, "Invalid proto %d\n", proto);
- 		geni_i2c_disable_clocks(dev, geni);
- 		return -ENXIO;
+ arch/arm/dts/tegra124-xiaomi-mocha.dts        | 14 +++---
+ arch/arm/dts/tegra30-asus-p1801-t.dts         | 28 +++++------
+ arch/arm/dts/tegra30-asus-tf600t.dts          | 44 +++++++++---------
+ arch/arm/dts/tegra30-asus-transformer.dtsi    | 26 +++++------
+ .../dts/tegra30-lenovo-ideapad-yoga-11.dts    | 46 +++++++++----------
+ arch/arm/dts/tegra30-microsoft-surface-rt.dts | 38 +++++++--------
+ arch/arm/dts/tegra30-wexler-qc750.dts         | 10 ++--
+ arch/arm/include/asm/arch-tegra/pinmux.h      | 20 ++++----
+ arch/arm/include/asm/arch-tegra20/pinmux.h    |  6 +--
+ drivers/pinctrl/tegra/pinctrl-tegra.c         | 34 +++++++-------
+ 10 files changed, 133 insertions(+), 133 deletions(-)
 
 -- 
-2.48.1
+2.43.0
 
