@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D3B7C35FF1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFFFC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:44:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E152081E13;
-	Fri, 14 Mar 2025 15:44:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DDC181E1F;
+	Fri, 14 Mar 2025 15:44:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M6l45TTB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lAUzBz6D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA3781E02; Fri, 14 Mar 2025 15:44:15 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id B5B6581E14; Fri, 14 Mar 2025 15:44:22 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39DDA81DE9
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:44:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F6B081D42
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac2963dc379so372836766b.2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:44:13 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-abf3d64849dso360935866b.3
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:44:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741963452; x=1742568252; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741963460; x=1742568260; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e9z5RcSR7stov4Bhhudyy563tQLKBIERbsSIjPpIXCM=;
- b=M6l45TTB4rnqwEkyoPBLn8nCjLaJpZLItKAF4tgM5NYR85hSUmq9ONnxiaMFtX+3rG
- gZ3wU7p8MjIgIg2uHgHhAxa6a1aSCzxmmTRzgHNepgKdvVBpkSc9ezSynWx4VqTypR5/
- AmtlzhBaVKbd+m2fLw83wjH9ULnvfP6BOyV5U=
+ bh=VS0Kve83MZTr+llTZtrmSpiATDFCY7Gs4XxciZqaW3c=;
+ b=lAUzBz6D8DCiQOro7MENwz0yVUs+SlRidIfMwwJFwNntlosSxjU1M/awFSvFki6Z1i
+ tIVkjwmyFePf7eERzveMSu1yp7fFNbrgWFh2LAsu9D2NsHPMcBky+ywJetnYbLAHNwH5
+ imIH3s1eEbC2Xu7HmVFUPZ+xyXmeVVE5gDFKA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741963452; x=1742568252;
+ d=1e100.net; s=20230601; t=1741963460; x=1742568260;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=e9z5RcSR7stov4Bhhudyy563tQLKBIERbsSIjPpIXCM=;
- b=HTQMAdwQ5RGAy1//m5Batik0guBqm8jzL9XhE26PoVM+m53gxfpdWTyJlYDBoBLPY+
- ZRUhHdwKrwrgZDDaRXAAUFMk8zx82WkcgCCGkDywzYHR/nkHaJfpQgqOB5//Ds7fSaJX
- j/nY1REBRqesh4dZFNwYbdmPC/KxU7Nw4JCiz5iVM3V+VEupoJ+N1PiC54vqS2pGVaQ4
- x3cSQFvidNea+oA+MLWvfyqTVs+8GI/BJHBGyCU57fN18SmJ8aFOAuARwlQZQZNr7htG
- GhIXvMcDbfudBWx1DNVxbtxz6QcKzqSH9+vjp+L6GfPq4LK4MKFCQmZrIgVn4h0naBfT
- EVCA==
-X-Gm-Message-State: AOJu0YxZlY5cUGg51DX9RyEdQ1eAhfhpygzcwA7EOToS4IxqHETMHbMd
- wU4WuWt3jLUgj35g3KsZh1PU5QNBzJX01dmJByEZc5Sekorz578D+pie6+Ymidvnebg9juGpCQB
- 5SsdUDzvKKfQ29KK3hEKLkAAL+FGhJ55On6nB
-X-Gm-Gg: ASbGncscHvbv464jmhTqPxxYVyECYQ39FPiRougZ57Yg7yVyjijXZNCWUS43yu2WFcp
- o+XjIvjc0itMU8kqE/0eONCHsu52bMafNON4y4e6YQLINiBNy+SBvjl7t2Za/cUpx66Ke3D2TbV
- wUHiqEuICqMIVOB+iz2HnqgGpn1+cm
-X-Google-Smtp-Source: AGHT+IGd1obm9EpDcUPCxaM43KQIvcxu7SuucYyNZCWJVtTNWjhqNIWrrQp4RYiN6ZcdTUb/CU9kwHBxzAYyUf5SyFs=
-X-Received: by 2002:a17:906:6a0a:b0:ac2:9c7d:e144 with SMTP id
- a640c23a62f3a-ac3303f770amr311269266b.40.1741963452585; Fri, 14 Mar 2025
- 07:44:12 -0700 (PDT)
+ bh=VS0Kve83MZTr+llTZtrmSpiATDFCY7Gs4XxciZqaW3c=;
+ b=RqNTEfdKgyITrT9QoQcvQpFzp2Gh4o2QFiEeJf3upadG20WU3/jGPmVtndfTK8RhdX
+ s8pTz9iDlVKZmgly2tnk4hH21RartVOrXhPdGy2cX2UIqbqK4l7XgdEUt2dDJJYI3ajW
+ BqgbMXkndI+ER1liZ5ykqfh1/Ieo/3yxUYxUsLV1J10SUKfa8M818zCpVMcEhuELBULH
+ L6++Rd1z9BDvcR1Ls3zwi7HJf9Hw1qi722dh6B7h9bEN/OBQxKyfjiOiUg2z8uxKjjHD
+ ZszXlONEvbE8mMNa5Lsn8Dfxprcf58uJZAruPZt3Q0A53SBp8+H1up8HWVT0YApNOJB+
+ 7bXQ==
+X-Gm-Message-State: AOJu0Yxe/kTai29RF0fKdARDZtcz5/ZwFqkj3C+kHmFeF54hYPkzvvXw
+ Zdr+yaFi9pDa3v2x2l1sykzNKK9ks43T8IklYqIGLcsrqM379MABPrWyVoFReoJpYxC9aAtr+No
+ VMoh73h5IHBx5gmkDCHx7kUEx4F82+onPTJLN
+X-Gm-Gg: ASbGncvfE0NdlDUIsEMf3cb3rqWo3rCdcgMr7QeR07pk3aMDkp7OEu64UDnLOYZMEYX
+ mAaiu6X4+2J53A6c4TkCxfOs/SvirmjYXf1wSCRFcWh9K45DUQYA+5CwcEPoMH0s39VSWZlQZ1P
+ B0LAfyB7iZVei5wv8vIh2/zZjVFHRN
+X-Google-Smtp-Source: AGHT+IHd1MrBTZUGEtcsrJr2stZXLVkY4neLYbDVbIVAyXiFHUiWqupoYfdCyul9tpd58SaOjhl3IyFpukugn8YAOHQ=
+X-Received: by 2002:a17:907:3f9f:b0:ab7:6606:a8b9 with SMTP id
+ a640c23a62f3a-ac3303f75c6mr281605866b.42.1741963459903; Fri, 14 Mar 2025
+ 07:44:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250306160428.3041057-1-sjg@chromium.org>
- <20250306160428.3041057-47-sjg@chromium.org>
- <20250307142436.GM2640854@bill-the-cat>
-In-Reply-To: <20250307142436.GM2640854@bill-the-cat>
+ <20250306160428.3041057-31-sjg@chromium.org>
+ <20250307190946.GU2640854@bill-the-cat>
+In-Reply-To: <20250307190946.GU2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Mar 2025 14:44:00 +0000
-X-Gm-Features: AQ5f1Jq3Y0y8TPNN3qyvzTUh8VCrQDQIWBQyvhIW-pf-8oEo3lZ2PD7VOk-m0LY
-Message-ID: <CAFLszThxRPX8N8pnJfEkm60OJ3BxJx18YbbfVE_0janzmOdWvQ@mail.gmail.com>
-Subject: Re: [PATCH v4 46/47] RFC: test/py: Deal with timeouts
+Date: Fri, 14 Mar 2025 14:44:04 +0000
+X-Gm-Features: AQ5f1JpwOU5G3I1obZcW2d4H9bCmgObUtQyhMK9sFYm42_9ufyn-ORLknFdRku8
+Message-ID: <CAFLszTgdpsURmOpYTMMuqsk8eisiTmFi3YZucSeYevLTYsGk_w@mail.gmail.com>
+Subject: Re: [PATCH v4 30/47] test/py: Add a helper to send characters
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Love Kumar <love.kumar@amd.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
+ Love Kumar <love.kumar@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,26 +92,27 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 7 Mar 2025 at 14:24, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 7 Mar 2025 at 19:09, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Mar 06, 2025 at 09:04:13AM -0700, Simon Glass wrote:
+> On Thu, Mar 06, 2025 at 09:03:57AM -0700, Simon Glass wrote:
 >
-> > The distro test takes a little longer to shut down and restart, so
-> > add more time to this operation.
+> > The existing run_command() method is not great for sending things other
+> > than U-Boot commands. Add a helper for sending arbitrary strings as well
+> > as control characters.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> In the test, make use of u_boot_console.temporary_timeout(val) ?
+> This seems fine so:
+>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+>
+> And so that it doesn't get lost nor expand this series more, an issue to
+> cleanup the existing users that would benefit from the "send" macro
+> would be good.
 
-ensure_spawned() actually sets up the initial timeout, so I don't see
-how I can do this in the test. It is immediately overwritten by this
-function.
+Yes:
 
->
-> > Disable the sleep command for now, as it seems to be unreliable on
-> > QEMU with '-cpu host'.
->
-> Update the sjg lab stanza to also make use of TEST_PY_TEST_SPEC I think.
-
-OK ta.
+https://source.denx.de/u-boot/u-boot/-/issues/47
 
 Regards,
 Simon
