@@ -4,81 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444A0C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 17:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 770B2C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 18:10:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A735F81760;
-	Fri, 14 Mar 2025 18:56:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D121681ED8;
+	Fri, 14 Mar 2025 19:10:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=wwwdotorg.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ozMVSWjD";
+	dkim=pass (2048-bit key; unprotected) header.d=wwwdotorg.org header.i=@wwwdotorg.org header.b="HClmTLW5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EB9281ED8; Fri, 14 Mar 2025 18:56:44 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC46181F0D; Fri, 14 Mar 2025 19:10:42 +0100 (CET)
+Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C89F68001F
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:56:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F07681E92
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 19:10:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=wwwdotorg.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7c54a9d3fcaso236014385a.2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 10:56:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741975001; x=1742579801; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+qF7TFEBdxhOGBLBoFBazU20BPrpISosC/CSLz2vc8g=;
- b=ozMVSWjDvv5QnkvmelnSvG4LL2hjAs+/fIBHmDT6Obx5S3NsXRmoNZSwJyswKGRS06
- 47JKZotxQpA4jd5wSJAJOSulh84gWtLZxQfIervzeGKxVwBeRraVu63PHu8Ou7p7tS8B
- 9L4grxk8uiAQjw18/pmEFA9SYEXnK9GnxELVw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741975001; x=1742579801;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+qF7TFEBdxhOGBLBoFBazU20BPrpISosC/CSLz2vc8g=;
- b=lchkwXi0EdKP7xfXHoqVrJf1UOCJtRILTvMy53m1+f98sFCPmnKCjnN/R6AGosgSwr
- GHuw/BXZnCJdG7KUQE1jo6RUCUurQiv5Hfu6I3hOM4Mb46BmKqc2B++rFIsDMykpgEr5
- J4l0nseWejCM60GxfqSTIkFrFQj87Dv4Kd79VPhj0NOtbZsRSiPNuo252DmgGNp6JjYZ
- Ipw3Yoz+poyJsdRlJ+QB13+CV5KueYIT+d1gF6mqlIwKJTaAZP/Dl5Nc7UGwQXPCYxLS
- x6kzafxEI1mDw8fCTQcLQyBQx/qD0bZUqLn72bA4ZUKMsrZIiM49bKptIn03lip59PQ4
- b+NA==
-X-Gm-Message-State: AOJu0YxdDkdk1fTYXReTq3/HOSWBHP1IZZ5Eag4AqhGugrv+3fPEMXBf
- 3re3HApqanBcbcO2gh+ROlLIYHazg08/GQrGymZG2/mRc2rMj/pUToOFEiZW8SM1m0OaS8njMx1
- 2
-X-Gm-Gg: ASbGncsuYYXMyMx269a176XiG+CnC+uHpWbND+lHQ7iFxtHDVAoK+Ma+M3cg0Ca/48j
- K8ZsxF9BiLzQtP3+aGRNsFGlED4jukS5jzs1+fyzPMbdCXQf93KV7rFKxzIwNhWToY6H+TQdJUd
- xSlcultLx9rLcdT9CAgX5Qp1DyGMrlALGlWjfAwhzEkCn4XsXcq4xjC3aBZozxhtlLckuW0F050
- Hu5/7pVvbFMRbV3L3FZegqAsqvtgWTkvt/v2SIfb8+H20F2TW5WAOtxFpblo65usdhtPic6sisS
- m9nWEMGpNJdGCho0no5qZukKEmHMnBseqGrsbdnkdG5h
-X-Google-Smtp-Source: AGHT+IHVdyqnK1dx64Xv3BDcqe+3nZ0/KO5I33HNIyY8s2q2KoKnGZ7mcn11wefUk6PCrO+1nYDfXw==
-X-Received: by 2002:a05:620a:4092:b0:7c5:588a:5c1e with SMTP id
- af79cd13be357-7c57c810c7fmr479263385a.30.1741975000792; 
- Fri, 14 Mar 2025 10:56:40 -0700 (PDT)
-Received: from [127.0.1.1] ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c9e0c7sm282196885a.58.2025.03.14.10.56.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 10:56:39 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: andre.przywara@arm.com, richard.henderson@linaro.org
-In-Reply-To: <20250314140726.294800-1-ilias.apalodimas@linaro.org>
-References: <20250314140726.294800-1-ilias.apalodimas@linaro.org>
-Subject: Re: Pull request for mmu-next-14032025
-Message-Id: <174197499864.3210237.9567052878081129604.b4-ty@konsulko.com>
-Date: Fri, 14 Mar 2025 11:56:38 -0600
+ spf=pass smtp.mailfrom=swarren@wwwdotorg.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=wwwdotorg.org;
+ s=default; t=1741975839;
+ bh=wrk1jxSk11b6J2NSiRJzlpuWRTadYjMe9V4tnY6wp8o=;
+ h=From:To:Cc:Subject:Date:From;
+ b=HClmTLW5pBIBaLDTSoC69/isZ+yQ7YfqBJrhls6hVo4hIVjvD60Z7Ewz46OQRzC3C
+ OnopsGruF5i7APpVVgf76xUVhSI7vLq0QF2d5y05ebltjOYKlvOlWngAecpPb/vVOs
+ 4BHoqmgJP+i6iuzK5yWfhoOfFYqGJdcNlWlUTMfANu/B1rdRbB4bsB61gU+Pyf67+p
+ YFY8QHRdkZZAMF26pX3p/Ed2HooywtuEzztSdE02uQ6JuppgzGdqtwPuwHDcOHhyN3
+ E9y09niYLIIJO1/l8lo6iJlZC1CPNYa3Y7LkwYSqcg0anXf4hWk6G64TFtaYph1MQ8
+ Dom4TiTU1rfhA==
+Received: from sprint.hsd1.co.comcast.net (c-76-25-134-221.hsd1.co.comcast.net
+ [76.25.134.221])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by avon.wwwdotorg.org (Postfix) with ESMTPSA id ECF601C0121;
+ Fri, 14 Mar 2025 12:10:38 -0600 (MDT)
+From: Stephen Warren <swarren@wwwdotorg.org>
+To: trini@konsulko.com
+Cc: twarren@nvidia.com, sjg@chromium.org, u-boot@lists.denx.de,
+ Stephen Warren <swarren@nvidia.com>
+Subject: [PATCH] disable mail for swarren
+Date: Fri, 14 Mar 2025 12:10:31 -0600
+Message-ID: <20250314181031.7978-1-swarren@wwwdotorg.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-NVConfidentiality: public
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +69,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 14 Mar 2025 16:07:26 +0200, Ilias Apalodimas wrote:
+From: Stephen Warren <swarren@nvidia.com>
 
-> The following changes since commit 9805321dfdeb5225fe5c5e0721abf49c0875637e:
-> 
->   Kconfig: Introduce CONFIG_WERROR (2025-03-13 14:23:11 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/mmu-next-14032025
-> 
-> [...]
+I haven't been involved in U-Boot development for quite a while, so
+CCing me on patches isn't currently useful. Add a .mailmap entry that I
+believe will turn off patch CCs. This can always be removed if I become
+active again! Remove myself from a few MAINTAINERS failed and the git
+mailrc file too.
+---
+ .mailmap                             | 2 ++
+ board/compal/paz00/MAINTAINERS       | 1 -
+ board/compulab/trimslice/MAINTAINERS | 1 -
+ board/nvidia/beaver/MAINTAINERS      | 1 -
+ board/nvidia/jetson-tk1/MAINTAINERS  | 2 +-
+ board/nvidia/p2771-0000/MAINTAINERS  | 2 +-
+ board/nvidia/ventana/MAINTAINERS     | 1 -
+ doc/git-mailrc                       | 2 +-
+ 8 files changed, 5 insertions(+), 7 deletions(-)
 
-Merged into u-boot/next, thanks!
-
+diff --git a/.mailmap b/.mailmap
+index ff85151702f8..250edffc0729 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -124,6 +124,8 @@ Srinivas Neeli <srinivas.neeli@amd.com> <srinivas.neeli@xilinx.com>
+ Stefan Roese <sr@denx.de> <stroese>
+ Stefano Babic <sbabic@denx.de>
+ Stefano Stabellini <stefano.stabellini@amd.com> <stefano.stabellini@xilinx.com>
++No generic patch CC mail please <noreply@example.com> <swarren@wwwdotorg.org>
++No generic patch CC mail please <noreply@example.com> <swarren@nvidia.com>
+ Sumit Garg <sumit.garg@kernel.org> <sumit.garg@linaro.org>
+ Tom Rini <trini@konsulko.com> <trini@ti.com>
+ Tomas Thoresen <tomas.thoresen@amd.com> <tomast@xilinx.com>
+diff --git a/board/compal/paz00/MAINTAINERS b/board/compal/paz00/MAINTAINERS
+index ee2b2e95458d..ba174cd190db 100644
+--- a/board/compal/paz00/MAINTAINERS
++++ b/board/compal/paz00/MAINTAINERS
+@@ -1,6 +1,5 @@
+ PAZ00 BOARD
+ M:	Tom Warren <twarren@nvidia.com>
+-M:	Stephen Warren <swarren@nvidia.com>
+ S:	Maintained
+ F:	board/compal/paz00/
+ F:	include/configs/paz00.h
+diff --git a/board/compulab/trimslice/MAINTAINERS b/board/compulab/trimslice/MAINTAINERS
+index 85b120017f7f..4eb868c0c838 100644
+--- a/board/compulab/trimslice/MAINTAINERS
++++ b/board/compulab/trimslice/MAINTAINERS
+@@ -1,6 +1,5 @@
+ TRIMSLICE BOARD
+ M:	Tom Warren <twarren@nvidia.com>
+-M:	Stephen Warren <swarren@nvidia.com>
+ S:	Maintained
+ F:	board/compulab/trimslice/
+ F:	include/configs/trimslice.h
+diff --git a/board/nvidia/beaver/MAINTAINERS b/board/nvidia/beaver/MAINTAINERS
+index 26bcacc8ec95..20d5836b9ec8 100644
+--- a/board/nvidia/beaver/MAINTAINERS
++++ b/board/nvidia/beaver/MAINTAINERS
+@@ -1,6 +1,5 @@
+ BEAVER BOARD
+ M:	Tom Warren <twarren@nvidia.com>
+-M:	Stephen Warren <swarren@nvidia.com>
+ S:	Maintained
+ F:	board/nvidia/beaver/
+ F:	include/configs/beaver.h
+diff --git a/board/nvidia/jetson-tk1/MAINTAINERS b/board/nvidia/jetson-tk1/MAINTAINERS
+index a5c687d149f4..f0d8f5eb8e52 100644
+--- a/board/nvidia/jetson-tk1/MAINTAINERS
++++ b/board/nvidia/jetson-tk1/MAINTAINERS
+@@ -1,5 +1,5 @@
+ JETSON-TK1 BOARD
+-M:	Stephen Warren <swarren@nvidia.com>
++M:	Tom Warren <twarren@nvidia.com>
+ S:	Maintained
+ F:	board/nvidia/jetson-tk1/
+ F:	include/configs/jetson-tk1.h
+diff --git a/board/nvidia/p2771-0000/MAINTAINERS b/board/nvidia/p2771-0000/MAINTAINERS
+index cf4913a9a1db..1a49e63231de 100644
+--- a/board/nvidia/p2771-0000/MAINTAINERS
++++ b/board/nvidia/p2771-0000/MAINTAINERS
+@@ -1,5 +1,5 @@
+ P2771-0000 BOARD
+-M:	Stephen Warren <swarren@nvidia.com>
++M:	Tom Warren <twarren@nvidia.com>
+ S:	Maintained
+ F:	board/nvidia/p2771-0000/
+ F:	include/configs/p2771-0000.h
+diff --git a/board/nvidia/ventana/MAINTAINERS b/board/nvidia/ventana/MAINTAINERS
+index 285b84dbdcbf..ba65a2bfc2fb 100644
+--- a/board/nvidia/ventana/MAINTAINERS
++++ b/board/nvidia/ventana/MAINTAINERS
+@@ -1,6 +1,5 @@
+ VENTANA BOARD
+ M:	Tom Warren <twarren@nvidia.com>
+-M:	Stephen Warren <swarren@nvidia.com>
+ S:	Maintained
+ F:	board/nvidia/ventana/
+ F:	include/configs/ventana.h
+diff --git a/doc/git-mailrc b/doc/git-mailrc
+index 1177e42df2f5..a29155224eae 100644
+--- a/doc/git-mailrc
++++ b/doc/git-mailrc
+@@ -74,7 +74,7 @@ alias samsung        uboot, prom
+ alias snapdragon     uboot, mateusz
+ alias socfpga        uboot, marex, dinh, simongoldschmidt, tienfong
+ alias sunxi          uboot, jagan, apritzel
+-alias tegra          uboot, sjg, Tom Warren <twarren@nvidia.com>, Stephen Warren <swarren@nvidia.com>
++alias tegra          uboot, sjg, Tom Warren <twarren@nvidia.com>
+ alias tegra2         tegra
+ alias ti             uboot, trini
+ alias uniphier       uboot, masahiro
 -- 
-Tom
-
+2.34.1
 
