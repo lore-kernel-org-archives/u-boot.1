@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B8AC35FF1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F8C5C35FF1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 16:11:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23B5081EEF;
-	Fri, 14 Mar 2025 17:11:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B47081EE7;
+	Fri, 14 Mar 2025 17:11:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OWora1fM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D8ZlOPur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C651781F0D; Fri, 14 Mar 2025 17:11:23 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 1C3BF81F0D; Fri, 14 Mar 2025 17:11:25 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCA3F81E1C
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:11:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 228AB81EE7
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:11:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5e033c2f106so3184391a12.3
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:11:21 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5e56b229d60so6224023a12.0
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:11:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741968681; x=1742573481; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741968682; x=1742573482; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QrxCjGSIYMyaNyxH925aWwPMQ7dYmX+aDOBTJqjy92w=;
- b=OWora1fMgBFTcb23CVjZr8do2IkiEn9UF4aVbu30Yfzqp7uBSR+00I+f7xk0OyFl+N
- +CGSYWNyEjz1xK1Nl1nYKnOrfUrT2+TTfHaMQ80W5YVjQtLh0JTlRE9uYcQwFO8Pmo3p
- j+I3qKRqXHMH+szscEQWKZTD/B/Rbyfw5hfGV5DuwVYDtz8gPrrHOVyOBCjrBwTVnZ89
- 2FRnal0DgHaitrpdB0+J4VdQQhhDKAH9F3e6OMXJKI4wKcNqsLSxehOfMPQWSTq+aKOJ
- yovLVSvMXgTQuexTqbkYLK57M+3FFpa07m0wAKZdg9VBDwsvQi44ZnZ0Lj3fdg2s0hW0
- cEKg==
+ bh=JtBjT6+vtmucb2+4Ynew4mSWvaX1J9BwGbtlxwy66JY=;
+ b=D8ZlOPurfiyUi0ebXXliDthSkf/43WLbaWkjNQ9uEz6iaJoEbE4ESHKvtJr61rNYsc
+ LJOXBUsBTuwiRApDhTjRReHov1uweS5PUkxTkpLtCbM2Z15Yu+b4jz0LEnQ2iI6esmo+
+ EGu+WNqDB/drX7VAS0y2WWRUBJG6a661Wj3zdoIjFuw5Cd3vGwXDa6cRWx3SVTbDZxu4
+ yu7sYWk1pnkTRpmEAMldBGuP+lGp4RrgLImDINaBLgTcPVOxs6ZkG6xD+OJYr+yyI81T
+ aYZKDHk3lp8ac6MgV/HnHecu3GFhYKk9rY1WLqyIEup3AGMrEc0S4CS4O+Iefc7SF1n1
+ 8NfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741968681; x=1742573481;
+ d=1e100.net; s=20230601; t=1741968682; x=1742573482;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QrxCjGSIYMyaNyxH925aWwPMQ7dYmX+aDOBTJqjy92w=;
- b=R26xh2DP1Zj4+X3jsryfLReGmtTMk9VGEUJLVe/2KKXXPt5Q2dHI7owOHTh4Z5Kap2
- sFpDnz+NyjECUBu34T5moqmPYyo9UsPuICFCH1cS2AcBipDIbWUz1xFOEgrZUu8s6k9m
- vaibQgF4nyEi8gCKB+1WPWBI4tv23Wq+nrf1pAUC13wOk8VNG9U8qVkG2SwD6Qta+Ngy
- n6W3puNgNAX8cIdpS6wjC9gGKG1I6sOG1s6S8uqnMjatwunJtgM7MucbDnjbu/cDdFAs
- KxdkexxomKaulejNJrcMPrq1wY41EsQYrRMaNje4jLST2VO2dzFXidsaFYAJjYqdfv6S
- Z0Gw==
-X-Gm-Message-State: AOJu0YyuxJ9edoSlt0mgfL7xafqqIWuU5jFgxBKUFS7UtpsaGhSUUUOx
- YhqQBOiIydUpDpcTVjJckEbkMRpfO1YJtTNJukuuJusVhi+dMEsb
-X-Gm-Gg: ASbGnctQ/S4KJrikh2x0yIwpGMdnQUY6iHLO76hxT6V8d9pmZV0iCJgYELyX9BqhmOu
- 1FmARe/0dpodbBxpC1WfodFh06r4zMCnDBluYYFOp1TMc9wG6SYf2EcSlCdVwZ9Iuaa5wz88kcH
- JiAhmVr+xR7HjseKuZ/34qwMVF9zD2npCLwE24aClCz5M0BSdVUdW9h6ahTAdksBEjHEBDcNFEr
- 7jvFvN2tQzKVXfLIaIARZhv0zjX7cZPY7IbMjIP59yabZzAcW0lwCD7TlMbHylEpiFPN6tXMVtl
- sm3KdAU1TQXkgs+x7w09JGHwindVhm89FWsO
-X-Google-Smtp-Source: AGHT+IEJwus/wwqje7vQw0UlLmNM2AVX550MeyAPOJc+jExXFMXifB/u5euiWbDs/6eva+Ba4oSBrA==
-X-Received: by 2002:a05:6402:3550:b0:5df:25e8:26d2 with SMTP id
- 4fb4d7f45d1cf-5e89e6b1121mr3845775a12.5.1741968680408; 
- Fri, 14 Mar 2025 09:11:20 -0700 (PDT)
+ bh=JtBjT6+vtmucb2+4Ynew4mSWvaX1J9BwGbtlxwy66JY=;
+ b=PG0VxPs9PblGaFrq4r7VuP8sBzmq72quBe720p3TAZeUZpPGi2WbaXpcIZuQFW8s8G
+ gpUWgrErrCQMj56HHf+90W1z788q9twK6kgWjWaiTBdQKhjFHd8rqoxEdTjD8pL5erre
+ 4CX3vWO64dZpKL7cSqQ5j3HZwQix0FrtfTcnuXdVwFTSXIVMKdDwWH4H0XnN4vL5iv+X
+ eqtozK2YKB9sJDy0QOZ89z/d6w6GW51QLZFKUPlsXq88vTWUQmgw0KZbR84LhDz6QkfQ
+ aTDrggjUoJhKVsfK8WfUM5WjrVHoUu22lrH9S/Z7x03ZnCZ9IB4XiDY6rydUVxZLUDjP
+ VNtw==
+X-Gm-Message-State: AOJu0YyHeFbRwXQfRqmwGMXVd1lHsdBFCiQLjxir4/Kg9hiLE8NaG056
+ CxWGseqWDZcLs/0KTlbAKRlwBwk7K7WL87vVKHtgsD43vEkMCbAVreLFBA==
+X-Gm-Gg: ASbGnctcvEc/KcGgo0H98kciy6PvNym627+/oCimlgb9NcnmZytbeK0JMWAR6h+w3ce
+ EiqQyShmMCGBWQ1Phf07tz/DUXxQBn3LdiTd0nKuZBLCSUwyYn8176d5EWDL5Z254LlzCJLU2G6
+ 77MZx/+bJl0bZ/0FS6uUIPJUXz2i7rdNcl8kZPzrJVCZGgrOZa6Qm8n93mCtOYtSuxad8TVpKtw
+ uYubB7UnzbhG460rUaZrj+9oPQVPky4W9Yeisyt0y26rI6tRIEPmJkLMKVSwgUPiLk2dzbYMzvm
+ NSNbv2C3xvQydoxCTjgv1KQkmdjKKkHAyxxu
+X-Google-Smtp-Source: AGHT+IFv+U91aX3oeABGnKBq3y6gSD4au5rEmBdURUjjLn1rPv2DVyIXTwNm2i9DciOUHv0skTNfbw==
+X-Received: by 2002:a05:6402:42ca:b0:5e6:11be:f5d0 with SMTP id
+ 4fb4d7f45d1cf-5e814f0b1f9mr7768922a12.12.1741968681284; 
+ Fri, 14 Mar 2025 09:11:21 -0700 (PDT)
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e8169bcdb3sm2161904a12.43.2025.03.14.09.11.19
+ 4fb4d7f45d1cf-5e8169bcdb3sm2161904a12.43.2025.03.14.09.11.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 14 Mar 2025 09:11:20 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
@@ -73,9 +73,9 @@ To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/4] pinctrl: tegra: adjust default values of pins
-Date: Fri, 14 Mar 2025 18:10:57 +0200
-Message-ID: <20250314161100.36894-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/4] pinctrl: tegra: adjust pin state lists
+Date: Fri, 14 Mar 2025 18:10:58 +0200
+Message-ID: <20250314161100.36894-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250314161100.36894-1-clamor95@gmail.com>
 References: <20250314161100.36894-1-clamor95@gmail.com>
@@ -97,87 +97,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current default pin and drive values were more of temporary
-placeholders. They have to be replaced with accurate default values as
-specified in the TRM and header file.
+Modify the pin state lists for lock, io-reset, rcv-sel, and e-io-hv
+properties by repositioning the default value to the end. This change
+addresses conflicts with device tree representations of TEGRA_PIN_DISABLE
+and TEGRA_PIN_ENABLE.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/pinctrl/tegra/pinctrl-tegra.c | 34 +++++++++++++--------------
- 1 file changed, 17 insertions(+), 17 deletions(-)
+ arch/arm/include/asm/arch-tegra/pinmux.h | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/pinctrl/tegra/pinctrl-tegra.c b/drivers/pinctrl/tegra/pinctrl-tegra.c
-index e6b957f5537..b04be168bc8 100644
---- a/drivers/pinctrl/tegra/pinctrl-tegra.c
-+++ b/drivers/pinctrl/tegra/pinctrl-tegra.c
-@@ -23,18 +23,18 @@ static void tegra_pinctrl_set_drive(struct udevice *config, int drvcnt)
- 		return;
- 	}
+diff --git a/arch/arm/include/asm/arch-tegra/pinmux.h b/arch/arm/include/asm/arch-tegra/pinmux.h
+index 4b6e8419504..9a5cc93884c 100644
+--- a/arch/arm/include/asm/arch-tegra/pinmux.h
++++ b/arch/arm/include/asm/arch-tegra/pinmux.h
+@@ -34,41 +34,41 @@ enum pmux_pin_io {
  
--	drive_group[0].slwf = dev_read_u32_default(config, "nvidia,slew-rate-falling", 0);
--	drive_group[0].slwr = dev_read_u32_default(config, "nvidia,slew-rate-rising", 0);
--	drive_group[0].drvup = dev_read_u32_default(config, "nvidia,pull-up-strength", 0);
--	drive_group[0].drvdn = dev_read_u32_default(config, "nvidia,pull-down-strength", 0);
-+	drive_group[0].slwf = dev_read_u32_default(config, "nvidia,slew-rate-falling", PMUX_SLWF_NONE);
-+	drive_group[0].slwr = dev_read_u32_default(config, "nvidia,slew-rate-rising", PMUX_SLWR_NONE);
-+	drive_group[0].drvup = dev_read_u32_default(config, "nvidia,pull-up-strength", PMUX_DRVUP_NONE);
-+	drive_group[0].drvdn = dev_read_u32_default(config, "nvidia,pull-down-strength", PMUX_DRVDN_NONE);
- #ifdef TEGRA_PMX_GRPS_HAVE_LPMD
--	drive_group[0].lpmd = dev_read_u32_default(config, "nvidia,low-power-mode", 0);
-+	drive_group[0].lpmd = dev_read_u32_default(config, "nvidia,low-power-mode", PMUX_LPMD_NONE);
- #endif
- #ifdef TEGRA_PMX_GRPS_HAVE_SCHMT
--	drive_group[0].schmt = dev_read_u32_default(config, "nvidia,schmitt", 0);
-+	drive_group[0].schmt = dev_read_u32_default(config, "nvidia,schmitt", PMUX_SCHMT_NONE);
- #endif
- #ifdef TEGRA_PMX_GRPS_HAVE_HSM
--	drive_group[0].hsm = dev_read_u32_default(config, "nvidia,high-speed-mode", 0);
-+	drive_group[0].hsm = dev_read_u32_default(config, "nvidia,high-speed-mode", PMUX_HSM_NONE);
- #endif
- 
- 	for (i = 1; i < drvcnt; i++)
-@@ -142,31 +142,31 @@ static void tegra_pinctrl_set_pin(struct udevice *config, int pincnt)
- 
- 	pinmux_group[0].func = i;
- 
--	pinmux_group[0].pull = dev_read_u32_default(config, "nvidia,pull", 0);
--	pinmux_group[0].tristate = dev_read_u32_default(config, "nvidia,tristate", 0);
-+	pinmux_group[0].pull = dev_read_u32_default(config, "nvidia,pull", PMUX_PULL_NORMAL);
-+	pinmux_group[0].tristate = dev_read_u32_default(config, "nvidia,tristate", PMUX_TRI_TRISTATE);
- #ifdef TEGRA_PMX_PINS_HAVE_E_INPUT
--	pinmux_group[0].io = dev_read_u32_default(config, "nvidia,enable-input", 0);
-+	pinmux_group[0].io = dev_read_u32_default(config, "nvidia,enable-input", PMUX_PIN_NONE);
- #endif
  #ifdef TEGRA_PMX_PINS_HAVE_LOCK
--	pinmux_group[0].lock = dev_read_u32_default(config, "nvidia,lock", 0);
-+	pinmux_group[0].lock = dev_read_u32_default(config, "nvidia,lock", PMUX_PIN_LOCK_DEFAULT);
- #endif
- #ifdef TEGRA_PMX_PINS_HAVE_OD
--	pinmux_group[0].od = dev_read_u32_default(config, "nvidia,open-drain", 0);
-+	pinmux_group[0].od = dev_read_u32_default(config, "nvidia,open-drain", PMUX_PIN_OD_DEFAULT);
- #endif
- #ifdef TEGRA_PMX_PINS_HAVE_IO_RESET
--	pinmux_group[0].ioreset = dev_read_u32_default(config, "nvidia,io-reset", 0);
-+	pinmux_group[0].ioreset = dev_read_u32_default(config, "nvidia,io-reset", PMUX_PIN_IO_RESET_DEFAULT);
- #endif
- #ifdef TEGRA_PMX_PINS_HAVE_RCV_SEL
--	pinmux_group[0].rcv_sel = dev_read_u32_default(config, "nvidia,rcv-sel", 0);
-+	pinmux_group[0].rcv_sel = dev_read_u32_default(config, "nvidia,rcv-sel", PMUX_PIN_RCV_SEL_DEFAULT);
- #endif
- #ifdef TEGRA_PMX_PINS_HAVE_E_IO_HV
--	pinmux_group[0].e_io_hv = dev_read_u32_default(config, "nvidia,io-hv", 0);
-+	pinmux_group[0].e_io_hv = dev_read_u32_default(config, "nvidia,io-hv", PMUX_PIN_E_IO_HV_DEFAULT);
- #endif
- #ifdef TEGRA_PMX_PINS_HAVE_SCHMT
--	pinmux_group[0].schmt = dev_read_u32_default(config, "nvidia,schmitt", 0);
-+	pinmux_group[0].schmt = dev_read_u32_default(config, "nvidia,schmitt", PMUX_SCHMT_NONE);
- #endif
- #ifdef TEGRA_PMX_PINS_HAVE_HSM
--	pinmux_group[0].hsm = dev_read_u32_default(config, "nvidia,high-speed-mode", 0);
-+	pinmux_group[0].hsm = dev_read_u32_default(config, "nvidia,high-speed-mode", PMUX_HSM_NONE);
+ enum pmux_pin_lock {
+-	PMUX_PIN_LOCK_DEFAULT = 0,
+-	PMUX_PIN_LOCK_DISABLE,
++	PMUX_PIN_LOCK_DISABLE = 0,
+ 	PMUX_PIN_LOCK_ENABLE,
++	PMUX_PIN_LOCK_DEFAULT,
+ };
  #endif
  
- 	for (i = 1; i < pincnt; i++)
+ #ifdef TEGRA_PMX_PINS_HAVE_OD
+ enum pmux_pin_od {
+-	PMUX_PIN_OD_DEFAULT = 0,
+-	PMUX_PIN_OD_DISABLE,
++	PMUX_PIN_OD_DISABLE = 0,
+ 	PMUX_PIN_OD_ENABLE,
++	PMUX_PIN_OD_DEFAULT,
+ };
+ #endif
+ 
+ #ifdef TEGRA_PMX_PINS_HAVE_IO_RESET
+ enum pmux_pin_ioreset {
+-	PMUX_PIN_IO_RESET_DEFAULT = 0,
+-	PMUX_PIN_IO_RESET_DISABLE,
++	PMUX_PIN_IO_RESET_DISABLE = 0,
+ 	PMUX_PIN_IO_RESET_ENABLE,
++	PMUX_PIN_IO_RESET_DEFAULT,
+ };
+ #endif
+ 
+ #ifdef TEGRA_PMX_PINS_HAVE_RCV_SEL
+ enum pmux_pin_rcv_sel {
+-	PMUX_PIN_RCV_SEL_DEFAULT = 0,
+-	PMUX_PIN_RCV_SEL_NORMAL,
++	PMUX_PIN_RCV_SEL_NORMAL = 0,
+ 	PMUX_PIN_RCV_SEL_HIGH,
++	PMUX_PIN_RCV_SEL_DEFAULT,
+ };
+ #endif
+ 
+ #ifdef TEGRA_PMX_PINS_HAVE_E_IO_HV
+ enum pmux_pin_e_io_hv {
+-	PMUX_PIN_E_IO_HV_DEFAULT = 0,
+-	PMUX_PIN_E_IO_HV_NORMAL,
++	PMUX_PIN_E_IO_HV_NORMAL = 0,
+ 	PMUX_PIN_E_IO_HV_HIGH,
++	PMUX_PIN_E_IO_HV_DEFAULT,
+ };
+ #endif
+ 
 -- 
 2.43.0
 
