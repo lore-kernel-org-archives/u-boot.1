@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F709C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 18:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90F34C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 19:00:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E5B981C67;
-	Fri, 14 Mar 2025 19:50:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F25F881F4D;
+	Fri, 14 Mar 2025 20:00:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p9lBGK9K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WSh5IA61";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E86281E92; Fri, 14 Mar 2025 19:50:05 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 9971681F4E; Fri, 14 Mar 2025 20:00:18 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B93080F9A
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 19:49:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EC2C80F9A
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 20:00:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e64096aa08fso18105276.2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 11:49:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43948021a45so542935e9.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 12:00:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741978198; x=1742582998; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2BYKXGSkSjfL7qfAPawm6+bU+QQyj5P5ukoDaMzTTRs=;
- b=p9lBGK9Kw4J/D85RWYIDY4tAvsUny+eIC7UHOKvGYjmQR4FNNCMqQ4ZBt3zcLSIdJb
- Hgsj2Z0SQlr5FFW+yOMhJlnZgflDoMPrILjlLVMoXZy00sE2W3NLdk2SrKrpA96e+lOA
- HDCVJfItSVH2pyrPPiRqJOUw5Ww4unVqycKB3RNNR8s8Nwp5wWku6EgN5tj5JLw19q/5
- 7yAzeeCWF+Zq3n0F9W9pGWI+hq+x4Y5enSWsklY2D7mlNn9q/I3yrecQZlfh2TF+jGVh
- qHrGuLQZeSF+irq1RDta/PZ+WwMHxcmL8ZnE7Grfsx/oFTIz3EYdQ/aW0WaHXDW96BEu
- 2eGw==
+ d=gmail.com; s=20230601; t=1741978816; x=1742583616; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ICQqNFwxmp1QbkWF70VVLWMfzJY6GtsrlBNQE76TDks=;
+ b=WSh5IA61grOH+Nfbxh7QW9z+m0yebFJs9OXsuC4Q7gq6WhDzTS445RFmEGhkkW4SIn
+ ESwFpRTTphQ+ZPG6ue3IasWaYksak+S0GUJztsVzeVSU5FXDgLMRpuyGxmjQ5eI3t/37
+ qhTf7S/zOo/AcGcZwTIzQays0JRBFKkd1WtCa1t/HU1S97mZD601x1DfhZ8o32ShY4G+
+ 7KejZP+EeJsSKGTQ37iSkCDFBp3CBdyMviD43C28xg1oM8MSRURWEMsivt6f0E9s/6ir
+ xSTCe5oEUEp0yog51GWj7mvBTHwCqsjtyrJ6nZO1/dGxPPDyM1RFZiLrG/8osDGCpVgm
+ P7iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741978198; x=1742582998;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2BYKXGSkSjfL7qfAPawm6+bU+QQyj5P5ukoDaMzTTRs=;
- b=dmBQITKmRGht4XG/hZ9wJs/W9bTfKQ9TjNR4qAizUwYyPq6YJkY7it/OgXsO2jiqLJ
- L3r96cp04XCx528cizhlkD41FOSPCNocif3/3+c3vxuQsEu0uJJRnduTgVJ9XeaxNA3+
- /MeyYbehMlx9FJjRX7kwHRBfeJJUpLarffY40MMzOnneFskgz3Lx+tK0kHtdgT23TpLv
- LNEbL8qiQ3U8D5wtup9q9WJdFXMTKSM+BOGkg5lEHcfBcFcQrR0VV0GpeEvyw6ABUfUo
- 7eq5w0BPcki/8FYojM4bHvSjyUCLJQC9Fk3XW5HYatlcK1mXHCOEx/1lzPQw9wdH/pto
- pduQ==
+ d=1e100.net; s=20230601; t=1741978816; x=1742583616;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ICQqNFwxmp1QbkWF70VVLWMfzJY6GtsrlBNQE76TDks=;
+ b=V91dD4TQo12U6QExckp+m8F6zswM5AOs4OfjbMoUXHfrU85Zdmm81ylT1z4eVyk/ob
+ fjAeE9uAB9/3IsTNTOaluHUGQWNroFhvMRtEZHz8ODrlRpO+MtwN8VlNK5u2j5Bk7oYN
+ VFFCjPo8f9dlrXdLjJNq60I/ldSO/1RK8o5AsgDzG32sMIJMsjBwdqSW1+ha7CEbaKUw
+ RiQr4rgveBDE4zeJr2SH9QPF46Z+lrgs9D3lkT2d+lM+sfR/+2xiqdH0uXj7oV5mLPZI
+ Ng046sRmHwB8PGKsIRLu3Y4sl2b1S60EyIW1s8j13oFHiqqJWN3jbqY6FW946ew99Q5O
+ AUoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhUTta53d+oQ/OFwHcCneyTTT4fd7UWqFoeWUamCQY4I6yBtWvpqleemaCiZpu2RVMgp9LwAY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0EfKG043BJh63zl4GZtJCU9bBwsa9PSfZXAVRU6ZPHEIjgBKU
- hGqgi+Iwy5hx3fUqwrMXptwOzb0hcR9oyOQEcL1X0MgrfxjKVNxHKGj6hZo4WREaUHItGhkjP+Q
- rbdaWGDGIx9puhpRCFWgfKbIH0ChGAaxGr2Z7fQ==
-X-Gm-Gg: ASbGncvqW1aRjWlKYwM1vgB7rcGQVo9DRHX4bafWJfQ2UczcYkCLoRIMu3ZXWP5AHbg
- dSvmThwg0VL2uJDrb1Aesbv5++vrCS2RR8HPElMlWkYzKEvkat/HbihgQbOdQVMCdlN+FBI9yU3
- jeq2rIOC7zK4hbs/Kdsp0RKUr3DBs=
-X-Google-Smtp-Source: AGHT+IH+VEy877SOFbugqhtr8cSkhsDUBPntfnqmucKqFSB9iWC7hz7kGwsgLz+9iUxTzVw83HXK7c6f9V/NfELnsuM=
-X-Received: by 2002:a05:6902:114a:b0:e5e:1034:db93 with SMTP id
- 3f1490d57ef6-e63f65b50b4mr4660758276.34.1741978198463; Fri, 14 Mar 2025
- 11:49:58 -0700 (PDT)
+ AJvYcCV/EV4yd4XhTVgwnA2GYnbMEk8ty78RVhJ4HeM/ivF7hqqv3z5fahIvboKlWqbxyIOegosPhtU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyOa1UvrbBRp7jBv84/YngKUGW6SA9fVlnCAyGTw1Z46ehHEibD
+ ju+18vZdSdRmeu5hDldXnQlLBwOiI81lUV7KPqkS6/46Al116ZoE
+X-Gm-Gg: ASbGncszO8+LBbZhS6z5FLjirExIBFSBY1BligjQV4xCU8ydwHNE/T0KKvusE1iw++k
+ AKaGuQMSZuoTg/4zGD4wj5WsUptwjaDC2qOLr3hxZL/6QEoNhistkTn3ibNWC96/LxOjT2D/zJa
+ E5T7fbbZy9YM6a2nS2Ndk2690It7fIRLwiMM8b98vNQXico+vLbVpM9g7TVbbqiwTTQX3v68lo2
+ QBSn5MeSPxUJUIZNAN/1OK2n1wevE/xt0OVfjpsjKHh8+4HZnF/uHuGRzBKwdYnFt9nQW9a0Nhg
+ SmLEMkTJitPkvg0Fxi7Af6ernRZNeSx0SnMmXf5OiWEtfWQ3jAvmExHm9TM0e0KLv0SRPOiRuYq
+ ASUkWkUa+cMNh9w==
+X-Google-Smtp-Source: AGHT+IH5dxhzm1zqVycl4WKxOtfo2uBjdM/4tdUgQWPAV4jCXc33yVzeM2pIazPSQRuUSCTHt8Vg1Q==
+X-Received: by 2002:a05:600c:3399:b0:43d:2230:300f with SMTP id
+ 5b1f17b1804b1-43d2230311bmr33490605e9.0.1741978815584; 
+ Fri, 14 Mar 2025 12:00:15 -0700 (PDT)
+Received: from localhost.localdomain (93-34-90-129.ip49.fastwebnet.it.
+ [93.34.90.129]) by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-43d1ffc3e67sm25547965e9.17.2025.03.14.12.00.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Mar 2025 12:00:15 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stephen Boyd <sboyd@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v2 0/6] airoha: Add initial support AN7581
+Date: Fri, 14 Mar 2025 19:59:20 +0100
+Message-ID: <20250314185941.27834-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
- <at3MKdVWObOe2t0ulEO_390BtudxQ52-_iW2VGgpz0spI-UhNxRfC9TCtcUduXUIHSuBPt7vTR3iC4bOhT1IZTyI9hKIrHhBt8-82P4PIqM=@bens.haus>
-In-Reply-To: <at3MKdVWObOe2t0ulEO_390BtudxQ52-_iW2VGgpz0spI-UhNxRfC9TCtcUduXUIHSuBPt7vTR3iC4bOhT1IZTyI9hKIrHhBt8-82P4PIqM=@bens.haus>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Mar 2025 20:49:21 +0200
-X-Gm-Features: AQ5f1JpwjCl5bf1m7LwzlBwln8kICStepX0UTNlxMQT9tW5B9IacS0LJQbztx9M
-Message-ID: <CAC_iWjKGxqF8L=3r1-EuDN=Jmb0rPV+-54+g7x79m8dm-4o=yg@mail.gmail.com>
-Subject: Re: [PATCH] lmb: change the return code on lmb_alloc_addr()
-To: Ben Schneider <ben@bens.haus>
-Cc: xypron.glpk@gmx.de, ardb@kernel.org, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Nam Cao <namcao@linutronix.de>, Baruch Siach <baruch@tkos.co.il>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,20 +101,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
+This little series adds initial support for Airoha AN7581 SoC.
 
-> > ret = lmb_alloc_addr(ram - 1, 1, LMB_NONE);
-> > - ut_asserteq(ret, 0);
-> > + ut_asserteq(ret, -1);
-> > }
-> >
-> > lmb_pop(&store);
-> > --
-> > 2.47.2
->
-> Tested-by: Ben Schneider <ben@bens.haus>
+With the help of some backport patch, this use OF_UPSTREAM
+directly.
 
-Thanks Ben.
-Especially for the testing and the whole debugging saga
+Posting this to have the targer and the very basic driver.
 
-/Ilias
+Ethernet, SNAND and eMMC support is already ready downstream
+and will be posted shortly after this gets approved.
+
+Having the first driver ready permits to separately push
+dedicate series for SNAND, eMMC and Ethrnet as they all depends
+on basic support of clock and reset and nothing else.
+
+Changes v2:
+- Use OF_UPSTREAM directly
+- Backport some patch for OF_UPSTREAM
+- Make use of u-boot.dtsi files
+- Fix defconfig
+- Use pattern for MAINTAINERS file
+- Correctly handle SYS_BOARD/SYS_CONFIG_NAME
+- Drop config for header file
+
+Christian Marangi (6):
+  airoha: Add initial support for Airoha AN7581 SoC
+  clk: airoha: Add support for Airoha AN7581 SoC clock
+  reset: airoha: Add driver for controlling reset line of AN7581
+  arm64: dts: airoha: en7581: Add Clock Controller node
+  dt-bindings: clock: drop NUM_CLOCKS define for EN7581
+  dt-bindings: clock: add ID for eMMC for EN7581
+
+ arch/arm/Kconfig                              |   9 +
+ arch/arm/Makefile                             |   1 +
+ arch/arm/dts/an7581-u-boot.dtsi               |  18 +
+ arch/arm/dts/en7581-evb-u-boot.dtsi           |  11 +
+ arch/arm/mach-airoha/Kconfig                  |  32 ++
+ arch/arm/mach-airoha/Makefile                 |   5 +
+ arch/arm/mach-airoha/an7581/Makefile          |   3 +
+ arch/arm/mach-airoha/an7581/init.c            |  47 ++
+ arch/arm/mach-airoha/cpu.c                    |  20 +
+ board/airoha/an7581/MAINTAINERS               |   5 +
+ board/airoha/an7581/Makefile                  |   3 +
+ board/airoha/an7581/an7581_rfb.c              |  16 +
+ configs/an7581_evb_defconfig                  |  78 +++
+ drivers/clk/Makefile                          |   1 +
+ drivers/clk/airoha/Makefile                   |   3 +
+ drivers/clk/airoha/clk-airoha.c               | 454 ++++++++++++++++++
+ drivers/reset/Kconfig                         |   7 +
+ drivers/reset/Makefile                        |   1 +
+ drivers/reset/reset-airoha.c                  | 173 +++++++
+ .../include/dt-bindings/clock/en7523-clk.h    |   2 +-
+ dts/upstream/src/arm64/airoha/en7581.dtsi     |   8 +
+ include/configs/an7581.h                      |  19 +
+ 22 files changed, 915 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/an7581-u-boot.dtsi
+ create mode 100644 arch/arm/dts/en7581-evb-u-boot.dtsi
+ create mode 100644 arch/arm/mach-airoha/Kconfig
+ create mode 100644 arch/arm/mach-airoha/Makefile
+ create mode 100644 arch/arm/mach-airoha/an7581/Makefile
+ create mode 100644 arch/arm/mach-airoha/an7581/init.c
+ create mode 100644 arch/arm/mach-airoha/cpu.c
+ create mode 100644 board/airoha/an7581/MAINTAINERS
+ create mode 100644 board/airoha/an7581/Makefile
+ create mode 100644 board/airoha/an7581/an7581_rfb.c
+ create mode 100644 configs/an7581_evb_defconfig
+ create mode 100644 drivers/clk/airoha/Makefile
+ create mode 100644 drivers/clk/airoha/clk-airoha.c
+ create mode 100644 drivers/reset/reset-airoha.c
+ create mode 100644 include/configs/an7581.h
+
+-- 
+2.48.1
+
