@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67AB2C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 15:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5923C35FF1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 15:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D78C781DCC;
-	Fri, 14 Mar 2025 16:36:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F9F481DEC;
+	Fri, 14 Mar 2025 16:51:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MehGpuuh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NfWA7CZe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C080781DE9; Fri, 14 Mar 2025 16:36:21 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id E596281DED; Fri, 14 Mar 2025 16:51:01 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F6E181D52
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 16:36:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78D7481DE9
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 16:50:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6e8fd49b85eso32943066d6.0
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 08:36:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-39129fc51f8so1997424f8f.0
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 08:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741966578; x=1742571378; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RUp7xvW/Fqwb19KCjfHIhUdLP09bv2SP5OEToCLNWnQ=;
- b=MehGpuuhr5PVRizpobiYHxViZlvDit2izus2qmB4hqmCeg6pQATyqpAMaVOgXf2Ba7
- AKjPPHEXDO4/UvGrMpWdULTG15j4z1DZamzEjlTvlKuNgqy8/PhhJnJflg7DgUIAEdlr
- upR1fR6UamkBwjYCSH6K9QLjB8OVfCBJ4PrZ0=
+ d=linaro.org; s=google; t=1741967459; x=1742572259; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=X9MZV/xfqenlsEYC1WXATMchlnySnzu46NHN8q1wVzY=;
+ b=NfWA7CZeeLYUxkMxJleZi6Xr3Awu6vE1puDrZNnkG/HMncVO+OxG34yS5CqWdkb+mR
+ +Yq8RXw7WFzQ3pPK9mPIMXw5hPC+w9O7EjrCYJ4wO5L3eP6Vw3i82Xymd4UopPwiL9LO
+ 2fLnr+DX4UMHz19UtHxma11o9P2ArFgBg6cE0TR5dLW1uGHC7PSs6G1XCTdJWLN9MA09
+ Ib8CdTFmS1pvBCfsaReuu9krXATaBEx6ISTj/SUceBTzRWnqGjnDUyiM9+frxB87euoH
+ 3rTn+NRlkhSfW/RwC80Mei+n0yHw7pbr1UfNPNCpyIewXr4KMqqYLXhCnuwuH3O78NET
+ C73w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741966578; x=1742571378;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RUp7xvW/Fqwb19KCjfHIhUdLP09bv2SP5OEToCLNWnQ=;
- b=ely52pnNkT+/eemKFLDwN35FiC1yDZ+ahOlw5hImKRfP+r4S+TayV2WO608YLCx3Wu
- a8QcXox+JAN9D7KVbb8flWYq9Jjf6MTcajxP6QYrMaB17p6aI5rkoWc3BSaGZm/2e+vY
- qmvx7QfnGH7k2xwhmAcPo7FK6+5LDZ3Ssy+N4IGhMX2ed3ssjD1rGkHpaT3x6Yx7qiFv
- N0NdanPHipbNbfyGl66+Wz2+KEuvQHYmEJxKoSn99lIxisDbISa4RIEJpJGaisvLrvNI
- rN79jp6WnLDdhYfCjtacYhObBeBeV9b7t5hJIx0c/OGLtYu8lW7nONQa5HreDgWvEDqm
- kqxQ==
-X-Gm-Message-State: AOJu0YyW87Gt0+g2E1O4iSKE9qkmtFGt8rk3VdfWDbU3J048Xy0CG6DQ
- QyQNxeyyrSja1RXTNVeupwqluBn6tcaQUZTKSpd2nsHaxMUnlOHQ2HM01JrWfBU=
-X-Gm-Gg: ASbGncuvnqzQyE1fSUWtxa7m+tnGEFHwCEElX+UVx8xdNXSEbzZCcAUUOSmz/Xs7W0k
- bJ1CGCFOBApTlyXIUrlUPs2o1BC8cAbx05ToO4y5c4ax56B2K2+y4YQgg0eVCqVxQlEx+JqFAJ4
- WiMyUL9WNl/gQaNRmILpnjoVVuaEytQcBhEodfK4D/DQcwlAYdVgfjwP5xJUmidZIqXYaQT3Aid
- 4b58CmIrT1wpTPyb9WWHl5+ZJx6rQbum5kbQr8gsYRv/BMHQlfrxVeqzqi76317qC2xPmRAhWEh
- HSB9PnmLloPMVu+6lzcdFjaO8/VZ6g2u9nGLESliWSTstLgqKu+2V7SP
-X-Google-Smtp-Source: AGHT+IHfYLLsExbQCHcvNFEgs0x3d62WUmfsf7McOqwat1dAvNf69OHWEicUvI3hkOstaN/l3jYcKg==
-X-Received: by 2002:a05:6214:3285:b0:6d8:932a:eaa3 with SMTP id
- 6a1803df08f44-6eaea9e915dmr46876386d6.3.1741966578524; 
- Fri, 14 Mar 2025 08:36:18 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
+ d=1e100.net; s=20230601; t=1741967459; x=1742572259;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=X9MZV/xfqenlsEYC1WXATMchlnySnzu46NHN8q1wVzY=;
+ b=WRxquY59orytNdwCeA7QfeUcxiLtWH5Q/22seSFKDIJlgmIngfFZfcOL/6N3F/CAoA
+ ZgVf7R6HRQAxPt28setpKWtKWt6+yFZj834PFyc57vZYqWcWz4jqN4C/SC9PjlVEWK/j
+ ACPVeor2TVMgpaWA+aVXPpybyo1QNpynirNV7nsdPjIbkLFqBrlPPSeBoR5sYLdyQYrk
+ GujQFSax6yJhR1YszpLD8VBhXT8Dbw2X5Ck2eYNuPQijOUzdh1A4/sNqCTq0Rc/Otkr5
+ DGyeULtqIEerv8tdD9Cv2WDMkFrx2kq/PT8pBqCK4Gwrilob6FKRsP5CPJVfTcs7+LUm
+ y6dA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzKHhYXcjXYE5c8MB1N5BNtL6OSNQAZ6OplDNO5p8+a/oW52hGHDOJu11OpiWjetdOSaPe7OY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwO9Wq+YDSL9Uzx+qABy7IqUvYeSAjXQftebKkfA96ISVIoSzEF
+ oeh5M5zeGgD/T5nJOOojr3aQ7lz0wZHhzMdK9aEG9qwOKbTCzzTfZ3rm4iYMJyc=
+X-Gm-Gg: ASbGnct/xUQjJnqh6hiOigZ8suJNH6uWzykVM2H6cNW9fZmrmM8vwwufNVIGx1hDXht
+ 0J2IGUfNGufyJUh2gq77r2Koxxf1B8ZxSfmf0hDtLWnGmDHw1Ec9VG24vIMxnggs8LfLK0TQ2Lg
+ NbGyS2KpjgiCPqMs/QjHwTRo2mm861Z5lf/Tq1BKcLAQDtdN/XVeJJyO3VyREKjL97udm1d4Lo6
+ 6aiAkp15/g+M/YzWB4JXWnAo0XyPEAW/E5MyKYm5+k/ourKQAsPpjuThvVTmKyZyuQOZgyuMZqF
+ 9DUKUHwRGv+RX7XgGT5tGlNUxcBBPVi2ERkp+oPxrICa3Sd1Z/AOAs/oXuMW8k8Ftmqvo6T4956
+ P43eU1abQ3bL6W9wyYZgYyNM4Mg==
+X-Google-Smtp-Source: AGHT+IGHKfA4u8J2qYSY2xOdjGVQcoUkyEqLE3+vBy8mw/9PHV8d0roDwHxbR0ag6MvOxfPFhnBeaw==
+X-Received: by 2002:a5d:5847:0:b0:391:3f64:ecfe with SMTP id
+ ffacd0b85a97d-3971cd5801cmr4438408f8f.10.1741967458746; 
+ Fri, 14 Mar 2025 08:50:58 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:2b81:563b:c694:c380?
+ ([2a0a:ef40:1d11:ab01:2b81:563b:c694:c380])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6eade34c121sm25138956d6.107.2025.03.14.08.36.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 08:36:17 -0700 (PDT)
-Date: Fri, 14 Mar 2025 09:36:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Brandon Maier <brandon.maier@collins.com>
-Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
-Message-ID: <20250314153615.GR2640854@bill-the-cat>
-References: <20250209212714.2317040-1-sjg@chromium.org>
- <20250209212714.2317040-2-sjg@chromium.org>
- <20250217192316.GW1233568@bill-the-cat>
- <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
+ ffacd0b85a97d-395cb318acfsm6084321f8f.70.2025.03.14.08.50.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Mar 2025 08:50:58 -0700 (PDT)
+Message-ID: <50257462-cf99-42bb-a76c-b9ec9f6635ba@linaro.org>
+Date: Fri, 14 Mar 2025 15:50:57 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U3q2IIBP3c/sRq76"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/4] Better smartphone support (Qualcomm)
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
+ <CALeDE9Nm+ZV6_3Vs0CE1o8vngquRq-JvvpsdUOLceM2nxkf7_g@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CALeDE9Nm+ZV6_3Vs0CE1o8vngquRq-JvvpsdUOLceM2nxkf7_g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,64 +105,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peter,
 
---U3q2IIBP3c/sRq76
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 3/13/25 19:07, Peter Robinson wrote:
+> Hey Caleb,
+> 
+>     Improve support for running U-Boot on [Qualcomm] smartphones, with:
+> 
+> 
+> Is there anything in this that is QCom specific? Like should this also 
+> work on the Pinephone phones which have either a Allwinner or Rockchip SoC?
 
-On Fri, Mar 14, 2025 at 02:45:27PM +0000, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 17 Feb 2025 at 19:23, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
-> >
-> > > Reduce the number of warnings in this file.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >  tools/buildman/func_test.py   |   4 +-
-> > >  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++--------------=
---
-> > >  2 files changed, 128 insertions(+), 116 deletions(-)
-> >
-> > As I think these all were warnings from whatever other linting you had
-> > mentioned in another thread, I deferred this patch as it also doesn't
-> > cleanly apply.
->=20
-> Some of it, yes. But most of it is fixing things that we should fix.
+The ideas here could be adapted to other platforms, but unfortunately 
+the implementation itself (e.g. the environment file) is Qualcomm 
+specific. Every device will be slightly different here and - at least 
+with the current approach - it can't be made very generic.
 
-To be clear, to the extent any of it was pylint problems, they've now
-been addressed as we've moved to pylint 3.3.4.
+> 
+>     * A boot menu which can be entered by holding power during boot
+>     * Hang on panic (so errors can be read on the display)
+>     * Serial gadget which can be enabled by holding volume down or via
+>        boot menu
+> 
+>     In its current form, U-Boot's boot menu is perfectly adequate, however
+>     once an option is picked U-Boot will never return to the menu, always to
+>     the CLI.
+> 
+> 
+> I wonder if it makes sense to make this a generic option selectable by 
+> Kconfig.
 
-> This is going to open up a significant diff for patman, unfortunately,
-> just as I am adding new features for series management. So please
-> consider applying it. I can rebase if you like?
+I couldn't really see a nice way to do this. The commands get run 
+through the shell interpreter anyways.
+> 
+>     On a phone (with no keyboard), dropping to the CLI effectively makes the
+>     device unusable until manually rebooted, since there is no way to run
+>     any commands...
+> 
+>     To rectify this, let's revive CONFIG_BOOT_RETRY for the hush parser and
+>     add an option CONFIG_RETRY_BOOTCMD to run the contents of "bootcmd".
+> 
+> 
+> Is there a way to do this without hush, a bit of thinking out loud by 
+> with this hush makes less sense, and compiling it out has the plus of it 
+> not being available from a security PoV.
 
-Yes, that's fine, please just explain what's showing the warnings or
-otherwise update the commit message.
+I don't think so, since we rely on the shell to run the commands in the 
+menu.
+> 
+>     This provides for a flexible menu system which we can enter and exit.
+>     See qcom-phone.env in patch 1 for more details.
+> 
+> 
+> This over all sounds like a good way forward.
+> 
+>     Finally, provide some rough-ish documentation to describe how Qualcomm
+>     phone support works and outline some debugging steps for when UART and
+>     the framebuffer are unavailable.
+> 
+> 
+> Can we make that generic phone?
 
---=20
-Tom
+The techniques described in the doc may apply to non-Qualcomm hardware, 
+but I have no experience with it, and I know that a lot of the things I 
+describe are Qualcomm specific. For example under what situations a 
+Qualcomm device is likely to hang and/or reset itself, as well the 
+framebuffer.
 
---U3q2IIBP3c/sRq76
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+> I have both of the pinephones, I can likely try this id there's no 
+> specific qcom-isms, or if there's specific features I need to be aware 
+> of I can see what they're missing at least.
 
------BEGIN PGP SIGNATURE-----
+You could surely write a similar env file for the pinephone with a boot 
+menu based on the same logic, I don't think that would be a lot of effort.
+> 
+>     ---
+>     Changes in v3:
+>     - Minor wording/clarification improvements in docs
+>     - Introduce CONFIG_RETRY_BOOTCMD rather than changing the default
+>        behaviour.
+>     - Enable some more gadgets in the phone config fragment.
+>     - Link to v2: https://lore.kernel.org/u-boot/20241004-qcom-phones-
+>     v2-0-c7ab67ac3043@linaro.org <https://lore.kernel.org/u-
+>     boot/20241004-qcom-phones-v2-0-c7ab67ac3043@linaro.org>
+> 
+>     Changes in v2:
+>     - Fix CONFIG_BUTTON_REMAP_PHONE_KEYS name in qcom-phone.config
+>     - Add Tom and Simon to CC
+>     - Link to v1: https://lore.kernel.org/r/20240831-qcom-phones-
+>     v1-0-08614edd8e35@linaro.org <https://lore.kernel.org/r/20240831-
+>     qcom-phones-v1-0-08614edd8e35@linaro.org>
+> 
+>     ---
+>     Caleb Connolly (4):
+>            board/qualcomm: introduce phone config
+>            cli_hush: support running bootcmd on boot retry
+>            bootretry: check for bootretry variable changes
+>            doc: board/qualcomm: describe phone support and bringup
+> 
+>       board/qualcomm/qcom-phone.config |  17 ++++++
+>       board/qualcomm/qcom-phone.env    |  49 ++++++++++++++++
+>       boot/Kconfig                     |   7 +++
+>       boot/bootretry.c                 |   2 +
+>       common/cli_hush.c                |   6 +-
+>       common/cli_hush_upstream.c       |   6 +-
+>       doc/board/qualcomm/board.rst     |   5 ++
+>       doc/board/qualcomm/index.rst     |   1 +
+>       doc/board/qualcomm/phones.rst    | 122 +++++++++++++++++++++++++++
+>     ++++++++++++
+>       9 files changed, 211 insertions(+), 4 deletions(-)
+>     ---
+>     base-commit: 78f8c8c58f7d3f7c3a26af4afbd08aba21c14c90
+> 
+>     Caleb Connolly <caleb.connolly@linaro.org
+>     <mailto:caleb.connolly@linaro.org>>
+> 
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUTOsACgkQFHw5/5Y0
-tyxa0Av7B+p2tN45vJzXJofKYTE51mPLV0yQHrmSjFV8BsZ6eO10Un3vqTKMNfPn
-1xGFc8UVVVbqiq49fAUxsMUOba4BLIdMzsb0ThNSO13i7VYuON4/QAsvk1XkkK34
-If6xo2EQb262VYgnnYbmZ9Shd6kvqTs6ouIF83tsoAUyAdvh6OrnOMCPCexFNgCJ
-7dKgvQxORZfYMllpTmERHSwv2FiqM74HNrs9ifcw2RCBI6nc2N/dWcwQ4JU5v0Tn
-gL0xu/b/dWhjqsypYpQVFi9GGwarVVmQu5LolTyMS2IW0NnNrap2/dEtd8VJcyoT
-ctQSX2KoKjR4jMsPH60aycvWjs4qPakfty7u3QrkQ+tEfIFc27r4MiUO5PHByFjM
-WM8vPWpTFn9RyXb+ZHDBgjWM+5ReWv2m4PlkrkKDukU7uVTRNG6IQXLXLh9lVN9w
-mIq7g2Wj8drl0mglmfIS5URoJnGVEBOPMmHxv1JgJwbRfgCgwiXryeO9533IazUS
-zHniJ9Sr
-=fvjz
------END PGP SIGNATURE-----
+-- 
+Caleb (they/them)
 
---U3q2IIBP3c/sRq76--
