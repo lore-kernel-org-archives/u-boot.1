@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17EF1C28B30
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D30C28B2F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:37:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5C3381BC0;
-	Fri, 14 Mar 2025 06:36:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 110FD81CA4;
+	Fri, 14 Mar 2025 06:36:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="mcg9QcDJ";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="u1CZgbBc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DDCF80F9C; Fri, 14 Mar 2025 05:09:57 +0100 (CET)
+ id 6CE85808A2; Fri, 14 Mar 2025 05:10:03 +0100 (CET)
 Received: from CH4PR04CU002.outbound.protection.outlook.com
  (mail-northcentralusazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 086E6808A2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:09:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 090E380F4C
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:10:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oQv8gvIRJboeKOLr8C/hRJ5YbYNUtwit41ivbXS2An0DVJaf/w1ueP/ngB17RXUBfxAUoc9hb/BLIQyGMB+c0AcyUcRemBNz1hs6IXcLwxexTtwa7ft6gD1BjzaCgSiZUMmOb7MJESzKUMA8SumSGWXAJjw7pa9VTO2NPicyoVYDjo5QmLLaSfOoMDYuNluDwwcrUUaT6dOOK+uYi6RC3E+1BYFo+ihXOHO3zXyRN6Yni/iZsdQK6QDPIhmSOyDKdP95nt4+rbASo9pJCQY4KOK9Wqdo2Qffj10baFuj2PSEbSYoSaBezSJpDLgxxRWmbk3QNQ/RTzG8YjyaT7Vt+A==
+ b=tiMcDH4J5RzdB2CRfxyfHT6WBMWpTphzpxuMpxVTNsqu8hOKHTIoY9jh2PNGIli8zZdTVav1L0ImDNVGFOaTbRLRI3y45vfCLaDhjpp3QLkbCBU7pUtxU0tTzr0ijdf69aNkpi8nbfzgMMaQazO47Z6W+cwXo38ogDDWtvWcOWkl9YfbrdGMhQcwyfX4TjOCVtPTpy8fa7afypPZ3dxbqKazW8iVkVzb5hvA9zG2nLL4MEIN29oVyaYXPSSt+3HJQT3aPfI+RJPVOqukq5fwchf4o5luZDXRaGCATlCEQhAOyK6m0fqOo61d+pPFg/TRCsy+jIh85dNDq/0wXHlJmw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dTbGCRuyKeqTnQRpVhf8NZWyqPZj7aF9fV6bcAobgeQ=;
- b=DgAhqkDqYzcjH352Cdmj0skn0EXWGMvdRnuhujT373DACR8T4hNMjpn5ZOk75i7Ny26JbEJdN+qEYPfXtH9egjn0xp4194xuOxBYNZmoju8pUV3sXul5yIVnM5DuTMC+0eSAqdNlGGpFLNKLP7AvPohpu/vYrl7lvb0TGbw6Iq8OQtNTUwgVqAkoLh0ewuHyj00DHq1a5BBn7RFDzjrbYDmEIrxisaU9661AKhJ8NSSWhLxi5CbGAQqmQZxOQ8txtX2eYml8C3f2mfPRQz/2edE0QqQjjb8+XOFvsdgB2QhDumcgdtdYyAFZ+13hTFsqS96P0I2NAI2ntJlI5ozj+g==
+ bh=wtoaW3jVz/93IG/TnFM/gFl4Jb1iYJpnJr25cH5jPfQ=;
+ b=VISJJ6ATdxIuQVTVN96myINxbs6fcPHf2updWgXvlchM2GoZy9dzJaiAVPNLzT7GcXlvfudpN8+mQUZB9H1ZJ1J0boeH4tgFgSf4l9538zQnrYzcL0aHn94dcMT1YhdIz8BtrD4sJF8bZ5c7b/TjM/9A4N1D+dEvRKXLXDGfk9qEycH0FCexaiSSD5j0ltgbyw/crDIG94lRkrNJtRydiCeunPBZEnUnctww7MYYFf38fxSykXIcCOGU46FcjYQbDrog6vMbcImDQi3BUEskFkvAzJgp/5K5nIRSCxvRRNCc4jM77MgdecS55L+hU6oqGm88LiwqXm5SE0x6mYAyaA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dTbGCRuyKeqTnQRpVhf8NZWyqPZj7aF9fV6bcAobgeQ=;
- b=mcg9QcDJ+PEEtx6yNKYSrhuPiqOD3ycpo1MGOYw5jbFJ94Bl9IADpcVmCOmxgGyHMfPovKa9LRcWLryWf7x4Hr9Fy9iIkai2bzJTFMzHi6mydLoCgpOz7YZ9RLj1tyF9wlnMrQ8K+PGcpgSGd7VEqEMBj+CWln1igjOkLHT20uSvNQ+Qce00Ifd35elPB2UiGI9xNnapQ1cNVc+3haBlPoDD0/YCna5cbIGJHz8TZL7twwBBb/ADMadsA7nagT0qPh1O0xdiqhr2qjBBBzX9z+pgifMzHf3nb7hwWGHmSUhL1ppwQlEhO6i4ScjmdS0XOqM6qLY63SfGbYcZ3p1VJw==
+ bh=wtoaW3jVz/93IG/TnFM/gFl4Jb1iYJpnJr25cH5jPfQ=;
+ b=u1CZgbBcn6g0J86MkuJqSLVs4YrpfgsJ1khDCJGSnNhIytlcScVuR+lankZ3pzkiQiM7hehwKZy54FONFu2ixXy5Z1AW5NlP4NFd9b7UNHbAPnaJoT7HRCPWGymo3K1x3f9MQo41IBIYSI1wheyVNgz7exJzS8G/t/YD64rbcrDBF2Xm0gFjilfZiXXGRHh6C4o/6OGoyot061LHIsTLkCpguZN8VeKIk7TXOpCxAS4df4C8T4vGEwUQrNoRWW10rbcmXA5KyirDxcuXQazuhZMWc3uGKXI+LtSXRNJqLcpap1LsAwiK4k+D1s6G0GmBxWPriLmpb2hgr3IqN4kWrA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from BN7PR03MB4387.namprd03.prod.outlook.com (2603:10b6:408:3b::30)
  by SJ0PR03MB5757.namprd03.prod.outlook.com (2603:10b6:a03:2d8::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Fri, 14 Mar
- 2025 04:09:51 +0000
+ 2025 04:09:59 +0000
 Received: from BN7PR03MB4387.namprd03.prod.outlook.com
  ([fe80::35a4:cfc4:3214:874]) by BN7PR03MB4387.namprd03.prod.outlook.com
  ([fe80::35a4:cfc4:3214:874%4]) with mapi id 15.20.8511.026; Fri, 14 Mar 2025
- 04:09:51 +0000
+ 04:09:59 +0000
 From: dinesh.maniyam@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -75,10 +75,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>,
  Sieu Mun Tang <sieu.mun.tang@altera.com>
-Subject: [resend v2 04/13] drivers: Enabled Kconfig and Makefile for i3c
- support
-Date: Fri, 14 Mar 2025 12:08:53 +0800
-Message-Id: <20250314040902.43621-5-dinesh.maniyam@altera.com>
+Subject: [resend v2 05/13] drivers: i3c: Enabled Kconfig and Makefile for DWI3C
+Date: Fri, 14 Mar 2025 12:08:54 +0800
+Message-Id: <20250314040902.43621-6-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20250314040902.43621-1-dinesh.maniyam@altera.com>
 References: <20250314040902.43621-1-dinesh.maniyam@altera.com>
@@ -90,76 +89,75 @@ X-ClientProxiedBy: SJ0PR13CA0184.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BN7PR03MB4387:EE_|SJ0PR03MB5757:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c131688-7d71-413b-d6fb-08dd62ae1186
+X-MS-Office365-Filtering-Correlation-Id: d9016c6e-ffc3-470c-1765-08dd62ae15db
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8j6p+xd1oP5gqR+68ELsf73WOhjSK+U8Anl/TG0RYO7+bf4pdxXJDNW9agyF?=
- =?us-ascii?Q?NXG7hzXz7z2Gf3pOWygrnJT1INudmrnrATibBNVQwhnJEtGQoJmqKM6OaR2B?=
- =?us-ascii?Q?wzzMaHCDjBRj5ebxMHKX+nOQhTnXYXq3SLvkbdeuarN7HG6xv6evqRZ5onI8?=
- =?us-ascii?Q?3llTAWuQ3IcmXMwKqjGwnY88Uds/nqDsLlbyhex2+gUdTaTM7kk7Qh5UOwr3?=
- =?us-ascii?Q?DpDleRoGZoVg8TUMWP/9JnDwh8VdkLe97KgUuki+QRY8xpsRZg4NEMYSd/dI?=
- =?us-ascii?Q?Lu69DQMPYNcYKHeoesietrq668qS/rKLyEhPqGeOflmw5HKKYZ86zuKHFlfN?=
- =?us-ascii?Q?YG5UHRjWWHplduJ+ZQxrC189ehOtN8hkCqyiKBdposW/hIDIDCgHbXHPAwIv?=
- =?us-ascii?Q?WMAywdfVjOBkKC/tg1uOQcXVAw+o30jJ+4/UqxAQY7nwd7Ws8cmutD2gjgts?=
- =?us-ascii?Q?jyci6NUnsPgbRqfK8wc0QszILPzvwqqJnr1rGHlNKlOQ6R9tLpaglGsfHw9P?=
- =?us-ascii?Q?zX82pWFui/DWHiNcqNscjEu0HFrxcgszG1925s+T9nLtEDmj8hINOgubrzEB?=
- =?us-ascii?Q?99Aen9fEFWCO1+u95Ecv7ky5XWZj0UEK9JhFElJxu1Scup4uXX/PKYXrlbG2?=
- =?us-ascii?Q?c9Z8MSCAsdJ1vJ8Qg/HbWlW/FAbAx259wE8Ne7Eiw8ulX64ClXBW7pdN6TY8?=
- =?us-ascii?Q?bLVFAFTkbGwOKRQgzaM54KRonsFsqUSsuK+oeJhgfLl4S+Q1vm/klp3vZmED?=
- =?us-ascii?Q?4i1/qRyV972WbsD/TeFuO5wlDbyQClbcjo6T2RVs0IK4dLAZMTrHyH5zmKGH?=
- =?us-ascii?Q?odWRptv71PQ9on2M/p9aaitK3MNn2X3e6wZ0pFTiwylk6MCS5zrZpPLluU37?=
- =?us-ascii?Q?vMGgnxklX4LeXdpHh1/rR5iD5GsK2gdrLSmRuAx9q9FzGnFLGQzmuDLr+Tex?=
- =?us-ascii?Q?CMrDlgd7uALrMNChe49cr6ITgM62pDg9WdmbvFE9ocj91dVcVL/m3J/J5xgI?=
- =?us-ascii?Q?KubHOPpNPecfgMlX0zBMCMWWTMJLzDh02pea5lxOXtG3oTu3oynbtSiv4zfg?=
- =?us-ascii?Q?ezCZFiyqsVYNqpTLulBgjVBGr8IQuq4/6hatRg0pFc+P5x4B00kXSkJXe+8E?=
- =?us-ascii?Q?wF4Fj3/MWCl1Ab/UNFDKWhKHk8GrWiBkH34b/hnj+u3IRrigpQe4cMAG0iP5?=
- =?us-ascii?Q?9xvViwqqKeVz4N8uwUOBlx6YDIMH5LncUD3vCvbe/4+16HqjPDX9N8VC7C4c?=
- =?us-ascii?Q?zirltDXPHKctsb6y9ih6vqsHkYgp2NzeObcjd4oQEgGmx4P88IPM3DB5nhD/?=
- =?us-ascii?Q?CTRd76CXEp2S8IdTdW5EJLISeU2dgQetnNTb5G2THdGw2Q7Ro+uXzllurARP?=
- =?us-ascii?Q?lPOVwKVLT+KUnR2cWYHyxyDcK2uS?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?q3NtO5K9c5uO37ZX/GGA4sMY+i7CPUhKJhCMISLBvE26nUryDi/YzBwCra/p?=
+ =?us-ascii?Q?+xM3mHN/XD5O/yIYSW5AxtEICRynshtVDcMb/u4cB+b5mFTcHVRnW485N98M?=
+ =?us-ascii?Q?HIqmKCaBq/T8Y5/9SY4pn43XCG2rqVzKyQ9uXzkevNOsopDY3uFU9+hPQBcf?=
+ =?us-ascii?Q?5lngW0WU8jB+2azdl1qmENwCyTriCPAw//WFjkpw8WBousVIJD7iWrPSZ2zP?=
+ =?us-ascii?Q?kOxSzAvW2oavfi1S1lCw65RbsRQqorFQX15ut0F9WgnGwXAVyj9ZewBys+0I?=
+ =?us-ascii?Q?bC7O8c5M8Yb5nvD6CaCYbNiFiveUQcMJ2GZptHDxQGEOQYWGnW6WeTD9r8CW?=
+ =?us-ascii?Q?Gdy3+3f1gXE36UnrEnMVn9SoJiMGVN8TDXLihoxOsN1+q0qDeVHWxwnXQ295?=
+ =?us-ascii?Q?xK0DlI4PLCg+vEKe15JZr62QGvkhhuz7Xj/TqvXLxNbBGKiYXtM4g2ji0CqX?=
+ =?us-ascii?Q?fut8N/pczbEQg8N4HYGPvax/B3d3do+HoNAfRCa5K8UyfmPqsCIX0F/fNO+q?=
+ =?us-ascii?Q?j9QB94+ptd39L7v51V62H5ax1N6A2XYv4jyumsaplRzo5ggDwnotC9u2rLij?=
+ =?us-ascii?Q?xIj78AQ5bGmXIbmfEQ3UYPfyHhNcUMP86r+asfbqoTllcO9snjdshX6MdoHp?=
+ =?us-ascii?Q?WN9DCyHMD1jE861kkLP6dwwDlSfy6DX6BjazVKDwu75OX2yx5BfkjJ55KGcm?=
+ =?us-ascii?Q?OvpitCQk1LShIPmWRCuturpdo5rpHmi+eUioCg+HO9FifSfSzy3G3HN2eNWp?=
+ =?us-ascii?Q?MYzXhDpBrkjTImN2NvvjFNH29CtROrDyefP92pnrcKDzqLmTdwvcO1NIQNIQ?=
+ =?us-ascii?Q?HxC1dP4WI32RC4yqNSJQYg08q+23uA0jllSGId8FFo6e39WkePnySmQhxr6d?=
+ =?us-ascii?Q?aZ8oblZDmUykTBXhb5FwFwVX+wtPXjySKebU003ytfyhj3FcKOMn/c4Ip/na?=
+ =?us-ascii?Q?zgW2nL5z35I99bC2q+DGqa4UoL5IyGaiktimLib1WhTy6nAbOYrfVisxauqQ?=
+ =?us-ascii?Q?NjVrWtZJLyEb0WAYt+kKsbf4WdLQ75jAK8xECcNXjGVq6Povlolfdktab7r8?=
+ =?us-ascii?Q?jTXkHYE3MZ4ZAhtOdB9MY6hdkgdFa5bmIy90RGughfXaCcn9BCRmTfpq8eP7?=
+ =?us-ascii?Q?vh0x2uXoVFTMMRkY0OU7N6GUpNfew6JQKuMNj586EYAPUUFGitntav0ThkYt?=
+ =?us-ascii?Q?pgFOKeY17XAjBFnd1Aq4LIyEYr4AUOhF6firQicRhSLlxCH+Nedi5U1HAFRx?=
+ =?us-ascii?Q?r+CYulINISnADFTB4YTO4dYzMTcJu15xFK5P8qSLsHZPKWDSVDgqc5T0Qtbu?=
+ =?us-ascii?Q?C6XXEsBg7bfLKj9vosjDPAe1OktYBOglqrK+X7DRykMDoA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BN7PR03MB4387.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0iXdRZK4YjlhkKekFGdA3MpqHOZShTwVXALCvQZpEB1O2BvWDjY2KJVWRLgF?=
- =?us-ascii?Q?WcbBCA83RYGuoE9l7xsGPlL21qZluJEJglB5CapoV84GwXyddlDZVurHr5Q8?=
- =?us-ascii?Q?Thql854w2VYeTFMI2EDekJprbaZdm2sBO8ng2RCQgbmz7n3cisuTi4hh/3yq?=
- =?us-ascii?Q?LbmYC0zktAY4BSjfV67TrhYLzEkC/+hd93bAg9Oq9BcExfS+TQ0LOTe7ov2y?=
- =?us-ascii?Q?j2hz6XdTIblQwkxV3/qvuNisVlDA+dQlaPCaw0SC0HLfHbl85GeJkEXhDb4q?=
- =?us-ascii?Q?bGw6vdtCB1RV5OX0wFA6qpE02mv6B9HIW6Ef0PsC9eDZMPx9dgE9O12me3gM?=
- =?us-ascii?Q?jLpmGHqXjrQiytS+dmrzwzb3yAJ65qIVwA7gCw9Q/JYx2SEWd4VBh3++QZmW?=
- =?us-ascii?Q?O/2rSUBlMnf3ZSKBmhnOL+TZCvtV3CorgsqUgTPk+7zqKFejvOhY2204l8vq?=
- =?us-ascii?Q?iNWMyVo461X4LdexZE1DBMkXAmHpxjrnLvLXpapjMRbI54INW2dQfUfNYXXE?=
- =?us-ascii?Q?k/mlPX3ll079UPMBgh/w/PjgkBzEEg878DVw5psrpx5KaYAzHESbXY/9nnfl?=
- =?us-ascii?Q?WMAPkLBvTXz0oyWr8gK7o9HVoUi4KX1Kq6cMtSha4IVD0amcNuuAocZbwShW?=
- =?us-ascii?Q?o724TRHvNW1iI3THigQLJK8mHNsFyD/nLNEaqaUvVTrbVxKIau9s7cndigmY?=
- =?us-ascii?Q?DYPOO9hAQzR/Q1ms5JCWkYeQyRPfmtCqdfnsdLoZfSTFm8Mmtq3sfYXS6DeT?=
- =?us-ascii?Q?RkTXyhtCooFsrZVtbl5fVy4HfoGbo5rVFTjJSgr5FSU69aqhiLuV2KxW6IZY?=
- =?us-ascii?Q?vusqStF7Bxsg0HkmLnwWHUt1hkUDQzx48dngEuFLGX6bXXSVqU+lC/2poOTM?=
- =?us-ascii?Q?BTdmiJKpc/6Q/3o/Y5GpBxtApiu33/L21Lpevzb3Vd3qxdjyyZmFUMLkMCGi?=
- =?us-ascii?Q?27TKd/QHqPxzKH0i8LVP94GXKgx5H8QHY2Gkkp+J2VjbKAYn3HikENq37r74?=
- =?us-ascii?Q?ZoZ6pqYCxTZ2dFftah3ASSJUSER2WxJFjsUUVCuIb2WttUZE/XBDTJlynGVd?=
- =?us-ascii?Q?heXeVuYPOcNH08C06KkRdNImcTm61UgouQiBzzNsAsyEnYmkP/Cr+yzJ0+uV?=
- =?us-ascii?Q?pkhrb15kFVbwVa3iRJXSX+q0w/G8URfAvxQ93t0icfHui7xMdR15MTX9S3zT?=
- =?us-ascii?Q?B3doTLuLfGp3PXPsC9JF0d5LxU73cikhm8XO3tLPS9xJNZBjLUrdfZ7qlluc?=
- =?us-ascii?Q?vp7/uo6imgU5crTTplqP3L9NDdSRV3hNiYBC6OeS+35yTU0pcBaN5uV4eaCW?=
- =?us-ascii?Q?0ePB7Y7o0mb1CodGHiRabhZZ/pYlePLDnTqYqt6/r0uDbcrUdpN9jAwDqczh?=
- =?us-ascii?Q?WqTuQ2moIezm+9e1E21I7S5cX8SBdpcbS7VvFrnalTOvL/VtDVx8TYpxeNCS?=
- =?us-ascii?Q?2WTwZcWFR1/zQ/Wf2mQFjDzXeoi/JBACeHwxR+oNukPSa+oOj5CYLmiDGQ8e?=
- =?us-ascii?Q?PtrdJO1zF133ZSBH5m5+4OypBP6Z/s56VbuL/gbKXQfOxVDyhlmIsI7DmH2I?=
- =?us-ascii?Q?7KPgCjlkWbkqAgMLC2MxfEM4+QCHC4csrT20S17j3O0HC6F82Aasm81f5lXH?=
- =?us-ascii?Q?+Q=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?RYHJUNlDZUre+XT8yVtyn3te/bsgJW+bBHO73NdVDy4mSJnU6ODWDrVnGJAz?=
+ =?us-ascii?Q?xhNeKwCJ0FV+/NQrK3RR9tOMLzDqbsG2HSD3g9Bn4VoEMZ4TYDaIlQsajw1m?=
+ =?us-ascii?Q?Tk86LFglDEy6dP3PgVLIB8Srrt5OoBPKAbZNp16qFY80zOcbeB1cHmdhH6YE?=
+ =?us-ascii?Q?MbClD6IczT2Gg1RXtNZvlLAWluRU6Ub/S34uYr7R2KX/sHehjnDQUv6nR86C?=
+ =?us-ascii?Q?b2DM+pNjcW+gMUT5ez674nVDMPm2uFKG0FWOK4jROeN/AjTfk8RTZJp5i/59?=
+ =?us-ascii?Q?9uCjdopur1LJvUNNmReNSDRqA+vFToeRCOMWk+rZ5IZFTwyDMgnKIwvffMrM?=
+ =?us-ascii?Q?mcQsMjIaL8kMKnb1216iaJTVfTQOPTAihHcGCoMWHcRZ2swzf4BUBUguNa0c?=
+ =?us-ascii?Q?lnKpTToOtM92RYF3GGcX26VsQIMVJkYpEXenh8CoAvcDRQf44ZpsGX+wzqu1?=
+ =?us-ascii?Q?c9vwEHw7YDeFIZ3w5ePDZ3xPjajAPc5m+SBX6A4VQFDS8tksVh2gdipOehze?=
+ =?us-ascii?Q?FaWMTHof6lBp+4K/k3OezSjWvXByi4RWvPab3WsnZ5HMB9pJiXM6enS8HUyg?=
+ =?us-ascii?Q?UGo7SJ3LKkzCYdP8uAkGbBNYsymW2EgRtmZ7LP9i62a2+jPMLDrpMumtJoXV?=
+ =?us-ascii?Q?5GzXUED53toi1G/lPvyZws45tXC6sBQqP40z5qlHn1dqel9G+HqYyUolpKq1?=
+ =?us-ascii?Q?o/HmblhgkG+vNM21qBm64dZHAgLF054gDeBrM0j8W0hqHD0vpk8FtOW9aLZk?=
+ =?us-ascii?Q?mSpICU4widen99OQ6FEcuiGcJFHiSZ0QwjLSgc8vir9e7QCtJFZszsp10qf/?=
+ =?us-ascii?Q?hc0Sqb2dJ0fr+kntYzfPaK9b8mJ4ybHkKOTrZ9cOZGuDCq0Xcw0+ZGrnEzKg?=
+ =?us-ascii?Q?U1V6HwgDzAGPMAekzZ8pf9kLbUiToiYW83W5qdbEzqz5ncZcgiIpEd8dkHdy?=
+ =?us-ascii?Q?gW9el/01EAT9N//BR6c1v2DgzbQ0SasZNMdue/Auw390OGFL3qD1hMx2GF+X?=
+ =?us-ascii?Q?4Hr0FO4Awf4VbSfDQoScxiKMV5VJ1PzeXBXjoBO1B0q1dF/z5lzXrZyJwrQu?=
+ =?us-ascii?Q?cOk+fd9mdbxUp40yUB9FeIb15lfjs9vfd3YtM0gydAuV8gHusTWlF9rBxiI1?=
+ =?us-ascii?Q?bR95GTJGQJRMHRSjyXNVI/pVc5oaYqg1vqQvvbQDcUV9pt9Xyg4Hr4QARL1N?=
+ =?us-ascii?Q?NfqZdtJkS9Zk9BjXoPibT0YMUJ4yZJSm7sRjp/ZMxHt0kjXm+J7hkJfnesH+?=
+ =?us-ascii?Q?SNp6NO2bfnJGVCwEciT9mHmF0Maglr2bigZsjT7Mk7c2ldF01wWClUL1pBhh?=
+ =?us-ascii?Q?SBJxozlSMj5NXT9cOBWZ8HrMSzpKN0EXg2WFCUp0K5EhXXTgkxyk+mgmZgfE?=
+ =?us-ascii?Q?D0uQm3tb+FtaJWME3SGyAzfo2gD58m7FK1HNISf8T9qF8ZuFY0nM9pdmCU1f?=
+ =?us-ascii?Q?qFeuUEysu4ZFo8bddCK9vJkDQVgN/GGmnRnCp928eMHjvCBPHIhC/7rUvSuz?=
+ =?us-ascii?Q?JUnEShFtDwDE0EKpgKCt5n20OkRedQULwMK9tW8IQ31MldAPstzyd02FOMZm?=
+ =?us-ascii?Q?8G4RH1CXPm1uDq5DsXB55OZRAKT0ddk+L6uI5n2KJGaYll0cycW+YGlSP+be?=
+ =?us-ascii?Q?KQ=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c131688-7d71-413b-d6fb-08dd62ae1186
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9016c6e-ffc3-470c-1765-08dd62ae15db
 X-MS-Exchange-CrossTenant-AuthSource: BN7PR03MB4387.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2025 04:09:51.7172 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2025 04:09:58.9807 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: L8ZkE+koIcyxdZdn5h8a6XfFAxhHEdRy9kFS0gTJltzuMaXtOWru/Q1x9HLjh+sfyeYWsYH9ljzTf9lKcg4nBLWlfmN4SCoaz9U5fgKyVzU=
+X-MS-Exchange-CrossTenant-UserPrincipalName: p2yKEqc1TsHaOEpzuZpBxIvUFCAGU8Q9fdDgKmBIxVYPiIFYP1bKORPmgkBK90GIkGd+Buf90hf3zTofzGxIF9d6YxEDMoS/trrhfVdQl8c=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5757
 X-Mailman-Approved-At: Fri, 14 Mar 2025 06:36:33 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -180,74 +178,64 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Add new i3c driver to U-Boot drivers.
+Enable the Kconfig and Makefile for the MIPI DWI3C driver.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
- drivers/Kconfig      |  2 ++
- drivers/Makefile     |  1 +
- drivers/i3c/Kconfig  | 16 ++++++++++++++++
- drivers/i3c/Makefile |  3 +++
- 4 files changed, 22 insertions(+)
- create mode 100755 drivers/i3c/Kconfig
- create mode 100755 drivers/i3c/Makefile
+ drivers/i3c/Kconfig         |  3 +++
+ drivers/i3c/Makefile        |  1 +
+ drivers/i3c/master/Kconfig  | 11 +++++++++++
+ drivers/i3c/master/Makefile |  3 +++
+ 4 files changed, 18 insertions(+)
+ create mode 100755 drivers/i3c/master/Kconfig
+ create mode 100755 drivers/i3c/master/Makefile
 
-diff --git a/drivers/Kconfig b/drivers/Kconfig
-index a073230c26d..0b0c610e629 100644
---- a/drivers/Kconfig
-+++ b/drivers/Kconfig
-@@ -56,6 +56,8 @@ source "drivers/hwspinlock/Kconfig"
- 
- source "drivers/i2c/Kconfig"
- 
-+source "drivers/i3c/Kconfig"
-+
- source "drivers/input/Kconfig"
- 
- source "drivers/iommu/Kconfig"
-diff --git a/drivers/Makefile b/drivers/Makefile
-index 0e1f58c515b..fd155835ab6 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -17,6 +17,7 @@ obj-$(CONFIG_$(PHASE_)DRIVERS_MISC) += misc/
- obj-$(CONFIG_$(PHASE_)SYSRESET) += sysreset/
- obj-$(CONFIG_$(PHASE_)FIRMWARE) +=firmware/
- obj-$(CONFIG_$(PHASE_)I2C) += i2c/
-+obj-$(CONFIG_$(PHASE_)I3C) += i3c/
- obj-$(CONFIG_$(PHASE_)INPUT) += input/
- obj-$(CONFIG_$(PHASE_)LED) += led/
- obj-$(CONFIG_$(PHASE_)MMC) += mmc/
 diff --git a/drivers/i3c/Kconfig b/drivers/i3c/Kconfig
-new file mode 100755
-index 00000000000..fa68612787b
---- /dev/null
+index fa68612787b..8140b530bb5 100755
+--- a/drivers/i3c/Kconfig
 +++ b/drivers/i3c/Kconfig
-@@ -0,0 +1,16 @@
-+menuconfig I3C
-+	tristate "I3C support"
-+	select I2C
-+	help
-+	  I3C is a serial protocol standardized by the MIPI alliance.
-+
-+	  It's supposed to be backward compatible with I2C while providing
-+	  support for high speed transfers and native interrupt support
-+	  without the need for extra pins.
-+
-+	  The I3C protocol also standardizes the slave device types and is
-+	  mainly designed to communicate with sensors.
-+
-+	  If you want I3C support, you should say Y here and also to the
-+	  specific driver for your bus adapter(s) below.
-+
+@@ -14,3 +14,6 @@ menuconfig I3C
+ 	  If you want I3C support, you should say Y here and also to the
+ 	  specific driver for your bus adapter(s) below.
+ 
++if I3C
++source "drivers/i3c/master/Kconfig"
++endif # I3C
 diff --git a/drivers/i3c/Makefile b/drivers/i3c/Makefile
-new file mode 100755
-index 00000000000..5bb44a8d64f
---- /dev/null
+index 5bb44a8d64f..5ddc4743c86 100755
+--- a/drivers/i3c/Makefile
 +++ b/drivers/i3c/Makefile
+@@ -1,3 +1,4 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+ obj-y				:= i3c-uclass.o device.o master.o
++obj-y				+= master/
+diff --git a/drivers/i3c/master/Kconfig b/drivers/i3c/master/Kconfig
+new file mode 100755
+index 00000000000..22bb7c21ea1
+--- /dev/null
++++ b/drivers/i3c/master/Kconfig
+@@ -0,0 +1,11 @@
++config DW_I3C_MASTER
++	tristate "Synospsys DesignWare I3C master driver"
++	depends on I3C
++	help
++	  Support for Synopsys DesignWare MIPI I3C Controller.
++
++	  For details please see
++	  https://www.synopsys.com/dw/ipdir.php?ds=mipi_i3c
++
++	  This driver can also be built as a module.  If so, the module
++	  will be called dw-i3c-master.
+diff --git a/drivers/i3c/master/Makefile b/drivers/i3c/master/Makefile
+new file mode 100755
+index 00000000000..c7562f1aa33
+--- /dev/null
++++ b/drivers/i3c/master/Makefile
 @@ -0,0 +1,3 @@
 +# SPDX-License-Identifier: GPL-2.0
 +
-+obj-y				:= i3c-uclass.o device.o master.o
++obj-$(CONFIG_DW_I3C_MASTER) += dw-i3c-master.o
 -- 
 2.26.2
 
