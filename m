@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 298ECC28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E109C28B30
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 05:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62CC78193A;
+	by phobos.denx.de (Postfix) with ESMTP id DEADB81C84;
 	Fri, 14 Mar 2025 06:36:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="NcqbGLIg";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Si35SKku";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A16A480F9C; Fri, 14 Mar 2025 05:10:39 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id E895580F9C; Fri, 14 Mar 2025 05:10:46 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AEC580F4C
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:10:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C61A1808A2
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:10:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vbeIFZnbiTjmehJDOe/AcifNUlkL72RvPbWIOQQoftqnbbhfX2VDn8S5eazBkPoN9Cf4YFSUmKOYxKOZVT0P9MdVZsogWFw5erYO/M93UdZsulyTFYB7gYmunsA2ddl8i4IRlORIeyTbv24HnoM3NrycYR+ELgg3ecxQe5RtmCm6mfMWJiBMFZoJRQj72bpsDYhkasWX8V5UHvXnXHymxe5uqptCBqrnz9oQCij1CLj3qz8mvdsNgArUGo7od8pqGrGDPxkYzwokuJUx/m1WmBBwA4QThDIo0UP57dW/9LZi2NWCpsJEwXLQyFu4OA0Z3yxHI79WlLlxHzTnh1sVgg==
+ b=lY2uanISX3MuqWki3FG5vMTuQBBXC3NHh/DUWm0XZsQzjoFEMuhAdjXPV7hQqNNq2mYtY2WKvjHIQVCHNSIIy67jpbGCOdIck9io4schQh0QNIF0Vhs4Ox0VqaTHG1KxLfiRSXIN0QA5UZlLsbypLaepCjIikECPyqboPdijKXwYRc+t3t6ytM+wbW6jrsVqrbCbL6XCn2kWjx+muRAxOQ36vW/yRhLFoKZtRNKFgjCYaON5E2Ybys/T9Xrlam/G/L6s/wFa7draY/9Mck98eOyeS/xlVInOiNwHYt/wchFcroq5ooJbJKGzzMjLOFIzaarEzU6w51Y3UnAN+uWyzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NJ+xitCYl4pAwroX12dqHokxtCJJKhOCeh1SIpN8C8s=;
- b=bKeRaOJPbrSXgDc1kMh+V3iHgTLXuoQ2pQ0Ao/blxBK1FIWO/59BS1951me5tmDKaZGb0w4hkQ2c+Q1Km+j5OUe1NOanpqu/gZfV/okSvpBTR12UTddy4p7bJnDxhEWfRt5LMQYvc4Ji6qYCRvaxLjPNYPg1kumIMWMCJ1jJ+z02+AW3fZ+Ifk9YF35f8KmWz47Sh6HalXPhFUSYFy1CmMZ7tl67JB3aKZksSPEqM6hjTVnxwW2Ru1I04Sv5joqPQ5yZ9YtdLef/pUEVv4u3G/rW1sAtOfX0qnQdM+VborzkXJ+EMz9KAdbXVQEq5cS47BcgY+CXKi+zKIMXOeSB/w==
+ bh=eiSxTXYGeddoXVY3fvahtbdiCHwCvE2YC8WI3Mg4R2w=;
+ b=utbcKHFUT7fTfawSS8xRJJLDM/hgGdMiB68Yq0XBvDJw/LgNK8H4aeMrCi0UTKeQ5rJBDBLAgofm/vAiNbYKnU+JU+RL3E7TnKrmUKzYkJWGk54FSINyqveuzHFUMwHT/JHMOa1kUcn7R2mlzkvhpETXAzRXlM+9bY7i4zz3hMakqbpRPhwSzkiRkAo8XPQDML7mYoDXBcW08VkY1inwjqx2Bd1pLw3b7tK4FptKOVfUtMt75M45U3Ot8tkFEjId/U6xWOLSkN1OYVgtwEzDL+bm5/fdTycIhCgeeAYnf8QSdXgAnfq70O9VVQJRDfkOIZbzRodSk+NCXdJpMNpm+Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NJ+xitCYl4pAwroX12dqHokxtCJJKhOCeh1SIpN8C8s=;
- b=NcqbGLIgLSRfO/mDUlvj0wkFnXGNEwmKU8fF1Jf6/5p0MeNoSI+PO1utOKc16bZDoUuYJEG+NXPUCV/xFl7RlafMCYP/jrNK5kIG67n7TZ0/9yR8YWIIHF/05JSZxo4/JJXts2qU7kczSn1/apC32+pAgnA9Rt8aEnyt9HruC2N5nhP3KmF6gJOHiVDNHj2KzPCh9iT6HlYvytLfKX7kqcgfArwcxDJlLg+6lB0xmWde9jLlmhkm8VBee30BZkMN9ZSvj+Sj1fcttbX3S6jOa/IGbFeyDvFQKfqVqYNw1KzQECiR6pgx7C/o+zTrUyLDe/KMdpjxeu0zDhv1FVQqpw==
+ bh=eiSxTXYGeddoXVY3fvahtbdiCHwCvE2YC8WI3Mg4R2w=;
+ b=Si35SKkuTiREoToA+f51E1ttq1VqNXTv6Nso1waUe88H1H15BwRAL5nP5E5ikTLMLZLDlLV45RrKduzOQ2zxZzIi89sLxWbuY/mC6xGgkCLFkelP7wmK+QwzWsDTok/SX7liLqhzA5o5qSAaDp0bmyLMdApATDyoPrCfqWyMJQUw4/yyYoG7hMgXxrUig0oYJStEzYa1jnE0M0jQEKw76rgRZdcqBqclRz99KSXNRE6max/ld3K+9PSfenh+pRFOHNbllJWdCBEL3HL2HO1AixLNxbGmb+mu55zxVThSiok33yXyBAv5NACV/6MsxJO5M72m1+7WFnX+D+tM8dX11w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from BN7PR03MB4387.namprd03.prod.outlook.com (2603:10b6:408:3b::30)
  by SJ0PR03MB5757.namprd03.prod.outlook.com (2603:10b6:a03:2d8::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Fri, 14 Mar
- 2025 04:10:35 +0000
+ 2025 04:10:42 +0000
 Received: from BN7PR03MB4387.namprd03.prod.outlook.com
  ([fe80::35a4:cfc4:3214:874]) by BN7PR03MB4387.namprd03.prod.outlook.com
  ([fe80::35a4:cfc4:3214:874%4]) with mapi id 15.20.8511.026; Fri, 14 Mar 2025
- 04:10:35 +0000
+ 04:10:42 +0000
 From: dinesh.maniyam@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -75,10 +75,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@altera.com>,
  Jit Loon Lim <jit.loon.lim@altera.com>,
  Sieu Mun Tang <sieu.mun.tang@altera.com>
-Subject: [resend v2 10/13] cmd: Enabled Kconfig and Makefile for DWI3C cmd
- support
-Date: Fri, 14 Mar 2025 12:08:59 +0800
-Message-Id: <20250314040902.43621-11-dinesh.maniyam@altera.com>
+Subject: [resend v2 11/13] test: cmd: Add simple test for i3c
+Date: Fri, 14 Mar 2025 12:09:00 +0800
+Message-Id: <20250314040902.43621-12-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20250314040902.43621-1-dinesh.maniyam@altera.com>
 References: <20250314040902.43621-1-dinesh.maniyam@altera.com>
@@ -90,76 +89,75 @@ X-ClientProxiedBy: SJ0PR13CA0184.namprd13.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BN7PR03MB4387:EE_|SJ0PR03MB5757:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0cc8a7ee-be15-4e80-1637-08dd62ae2b99
+X-MS-Office365-Filtering-Correlation-Id: 9806de2c-9680-466d-a839-08dd62ae2fe5
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MOWz/KFRbDCJRXb4vAHZ/BE9AqqtEtWPQrnTWLC8phy4+YrVz8kTDh2Ca5Hd?=
- =?us-ascii?Q?GWxz19VwNiAodcEzMAGIXmt45ERKGwvTYnHlpEzes5XSOxSlc1NUmscybL7t?=
- =?us-ascii?Q?V0DvBSifFUfP4KMsa17daW8xW180n6naHd0O0xpUeJvbOnmKhSTV7QggisHe?=
- =?us-ascii?Q?+f1ENrDIAYsyl30vyTKU8vMOzioHTh6S2a0sWgMfNByMbP+xTTYNKjZ7RbXJ?=
- =?us-ascii?Q?IQ4k1C1Aq+BO3Ngn+PQJVr6ZPcy7g5EWAMb3jcU82n3f7IRkRwFfuz2IBsXo?=
- =?us-ascii?Q?hyO/ILtCSUGn/usx7KHLTo0YGaDKYJ+5t41qZDxLW7x1OsYg4C71zJ7cwDRY?=
- =?us-ascii?Q?WuwJ5PCADtqGsyug4OQBP+H5uMSCofKleyJuZDFNxWrhW29oAJRcJCXNOLF8?=
- =?us-ascii?Q?bTSJB2eD90vXo0JylyobUSXt49Kdu8KLu410KHDQHYsUmd6k/uQm6UE/cZFS?=
- =?us-ascii?Q?lEZV8T/5d0NTRqYfcnb4AOGLFzhauOEXZG7vgUfH+oC0YhD6/vOH/11aDvJY?=
- =?us-ascii?Q?Jyd2MFrZ00Irtw5mrFJy6HbeldJ/mScYU1V7rjERvpykn1LAeR95E98lbqjh?=
- =?us-ascii?Q?YY/+mR4pIzNGE3UCLABtOC2Y5CzZbnxlFS4q5ZSqKFwMhrOsiYZ0OG7obpY8?=
- =?us-ascii?Q?pVg9zgZna/kP6ylCffImbEy/KHMFk9qUxKt6Xzqvh70nC2dpP327QfBWW6JZ?=
- =?us-ascii?Q?Rk18XvID7/OK88+GrqqC32HNYyESPqkQmTPiJZDcAt8fp7+sascW1xkIH/Hv?=
- =?us-ascii?Q?ihYukl4i+EV/GJ+0KCAMdmK/df5VcFnaDFBNfU6Tvsy2xLL3uU9tyiiq76kJ?=
- =?us-ascii?Q?PdKA9OzJGGCDk3iaZauJSuE3ldjAwtvVlHyvS0wIPlCSzD7pL9pAWftJxEXQ?=
- =?us-ascii?Q?puV0IPqW/kawaAph/0Bc150Dn5jeV48v42d7eG1YGLM3IB24j4iKdYn5COny?=
- =?us-ascii?Q?TZuGZRXnpWQvMpw1cYe1IuXa1zU5w3dNsLqRx1sHi4vBRVdZuDBPRuOwUpxW?=
- =?us-ascii?Q?vCVjoWsibxR5S9K/KdwUbGCqqP/kFNAjdXQvIvQJsIDv0HczLP1+EckKXmcn?=
- =?us-ascii?Q?yfpjZw73aqIe/YBkwmlR8rI2mZWfbEStEQN+W2xAizJgNKWyQzoIU7o5BzHc?=
- =?us-ascii?Q?20zYHVOmiwsqLH8R+EvP+fHxqf+Y9Y5IMiGuI+oZfDoe+1RIydDU5apPB367?=
- =?us-ascii?Q?2lT1437jPjlryZhFKQ+47HUqCb6RidypphsYaFhHQBoMdw59ivoFB7Dv43/c?=
- =?us-ascii?Q?2OlYprH8i7bpopK+4vzT3Z1DU1ZoZG39YGdV9cMjTHaWtZHYBv0ka45IoL8E?=
- =?us-ascii?Q?osjQu7rHiJVWEdaJ9aOZRdJt6dbbNWHywm0xKgNzEWw0cPv4YZar6cxB4qiu?=
- =?us-ascii?Q?0aTQtQip0HSd+cCrCeGsEQeRfIOm?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zovEqfSAptC/6G+R6OKkHFig7fSFl7tOjWFIOCPx3gNzUFzfZDEvUVCoXu6O?=
+ =?us-ascii?Q?notu+mKkkb91amWaj78Vc7gbPFYyuB5O30z93D/hz1wQXp8atHJyavRi5qvz?=
+ =?us-ascii?Q?VpUtpIud1byO0JqPgtcSgI6MC1Wx4/YWbWRHFZMpB8Tejg+fFBFyyV/PLrTv?=
+ =?us-ascii?Q?biLXKDrDMyaVsBLvNQPEA6AC2x1w4BiE3FO0zhzLRCNq2PTvINwzV73ptQaq?=
+ =?us-ascii?Q?1t68GYxeg6Wj4yVOol+HMua8jEWL50VDmlaoOyj9eEPpsQgFfuCKoRQDHqBK?=
+ =?us-ascii?Q?AXfO/NqtAjgs4Gv1P5YHVRr1zfGykk7KB0L1RUVuy3vncG8nWOv2JPbfEbKT?=
+ =?us-ascii?Q?e1/f5TY05WYj7E7D3v60T5FdrJb4cwRBwPc0j+r79ZFjCgBtk3GnIFPb60ou?=
+ =?us-ascii?Q?6IbRo/GPnD5+kiEJh0RWQwD91eOI8sS8fAm7h+dSph6qXHoZMWQh9EsMQohG?=
+ =?us-ascii?Q?ZTZrLPRM+c+7xOpRDUKbj0kjgVm7rlnacfkLgqXdHeIGJCLxu+l0ySGzf1qE?=
+ =?us-ascii?Q?uXAYFoKLiTJX+LLt9lUT7cu8kyrlGWUnfCT+wt+bK7zuB2Oku+B9obzdvpCo?=
+ =?us-ascii?Q?JE/y6lwypLFvKcR/eeOWJ3dQz75ll/vBgcKEN9ln0ADjH6GqA1sTO5TnjcXZ?=
+ =?us-ascii?Q?T7YVre0priX9cWO2bNS+aAtuTXKnCLH7NziWCcoCTAhlrnzRRXR4tsSmwkHX?=
+ =?us-ascii?Q?2Fxo/uvXRT7DRtZOlIkxli71y5vE3zDq7JVEDkeZLGwZKXc1igSpXB2EolRD?=
+ =?us-ascii?Q?mI0mUbWBXxWUK0xMBX3udq3eADDMl3CSQEyfm9O2q726kYsIr+ML/d6h+a6Z?=
+ =?us-ascii?Q?t2gFEdzd2zn7dbxv5r0OvbPszE6Fuzpqg9dCgH4XAjOCXcSsfjxHnk8zt64l?=
+ =?us-ascii?Q?nOkv/XTjKBKx3fq9XB5UL1brRZT37CpLEjmTApN0A+r4GR9xbMh8UBcPWkta?=
+ =?us-ascii?Q?6A918hnnqZA2Rs0Zo8HPHuNtD+MUyxSFk4a3C8Yt53SY07mTLi0jvhHqcL4V?=
+ =?us-ascii?Q?RCsw7fniZPw5K8nqaIC7hpD9TPSi0TZ86GTRUpTt04PNSkcO6tnOhBg320Ft?=
+ =?us-ascii?Q?Ldc8sFMQArNk3r84CheL91ulWB5VtOyUi6a9CyurHe4DRA7zthvrRGp+SojL?=
+ =?us-ascii?Q?sBc8BZZNi7pg0ObE7diHrRqqOGHkduMDSev8iZBTougZQoOkoYgrhg7kedL7?=
+ =?us-ascii?Q?5wMzSPgEEoITsRgaRynB2JIVBGlPsog2yCj/CzQ528dxzsJSypmXDH79hnyi?=
+ =?us-ascii?Q?MD+0+jFjOhXcbSHaHUA/nNfawvrsrzT7+/o8whK72JyMmg1WU4QSp8KiBuS3?=
+ =?us-ascii?Q?C784UOVHRE8Lg86jXY+Kbbq5rVswsynmuMsxIqW8IMXbVg=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BN7PR03MB4387.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MOdLwrb9g76Pbg9nAvwJCdBoE68uo+DUE0+2CFcfWk/VY7VeIqm2MyZy6C6e?=
- =?us-ascii?Q?70O4SVFbdW06F2ypdCjrWGcmmQLQiaaW3i/E4TmRdGRgWhTXBjUdfsdPQWlN?=
- =?us-ascii?Q?m6NWlONtkAs65oZcn+GVXk7LrtXFJNZiKpxry2N/PazXOd7j59oJfl3PjoaU?=
- =?us-ascii?Q?gWq8tsUSC/70DULrWuyOtCqestd7oWKJ+9Z5JYWEKmIzTnBMFpZFk/ILHVA8?=
- =?us-ascii?Q?aQiTV0YCYs/IsfTmFqMQsyff42gnDeA7uRPMTFY1+UI0NXM+TnkLQg2ympq0?=
- =?us-ascii?Q?KtADTx/x6CXStdW+WMsRWPLnyLosYaD5h+FoR5F71DSe+E65J51sK8IXSfJw?=
- =?us-ascii?Q?5ALqn4pEUaRUcjTjNgvTm4V0Rf8MPxUl1hUUMZQTfQjbIwU0tOyBhuRjCSOE?=
- =?us-ascii?Q?R3Rudj/BLeHC0eyjFY3NOk8yphDuPiHyooGtlkF0UKTL6RlQVktTMG4YML3C?=
- =?us-ascii?Q?3VZXrTA6Qq10wDysaKkNoJIK/t70JysYrV0U9R2D5xwmjQtdccp3cEMjJDl/?=
- =?us-ascii?Q?re+jQhQEDQckWMsVriGnbsry3OZxTRL4FCrW6NgqH8HM051wz3Be6Rveg1Jv?=
- =?us-ascii?Q?0CGNGGfeon4fJP12znx6kiOtsvTJGYU0A1e5Carc4kzrCx5PRZdZHplfa1OR?=
- =?us-ascii?Q?E3NAYFs3aWh7ewApOOVjc11N62R8HbL2QVHK8aTohIrLXxMruJ2SwQT9JffI?=
- =?us-ascii?Q?RL6Kv90akzXvJHPWdK2FDIaeQAY6NdwFxF0c5HCNEZZDpZNxcR/+zOSxBy/A?=
- =?us-ascii?Q?K4yaWRSW+mekf/rhHp5doFE2TlEcdbhBLyE/8zgswTOR7ItG6fgX5Pfh7LWy?=
- =?us-ascii?Q?Cd+CLQUF3P14zYivXvjxXSa9HubMhzGtZkktyk0U+R8hO1EeZdr0dAZ+lvgp?=
- =?us-ascii?Q?Qv5nMgb2xqFBHjPG1PoNUaZm54uQuMQAibxuaLMCZS2Zj+tcKVpzYp0D414c?=
- =?us-ascii?Q?G6EHU4MTQWfA8xV4/fb0Tp5P9aCvK2rq2EKElrnickHI+NBIuGXjnIJzt09b?=
- =?us-ascii?Q?WZhv1qZbztDjwIpks9205hq0UoGZ+kDFIi4G7XV3Ib+hkUKeUsN9lFKaK99Z?=
- =?us-ascii?Q?xr1NsbnLW/5hR60TmGy2LpXI1SzA3jTc+Pdtt0Gd/qzowVlF4bXqi0eEL6H6?=
- =?us-ascii?Q?1QNW6LM/tM5niwButjWhjdugZZnPnsl0m24Q0aJtkgdO34v5oO9PGHt280kC?=
- =?us-ascii?Q?LMsb09j5DBZUokWNIJrUADaXKwuTkZ0ZqqDfEmSRzgzy2Q7n4NEAnv/Mq7G9?=
- =?us-ascii?Q?Gzks9Q3ovn9auK0SJsUeA42uU3vSljlg1TQNjDrHQ9YMLlk8vlK15QQxFBr4?=
- =?us-ascii?Q?LWOKbr9fV2Trv8OFFH3gXDfKqvTTFLzkOV3fGivetuIE8Wh6PWYmYzn+G22F?=
- =?us-ascii?Q?hGR9pbBExAxyN/VobQG7qLh5y6CSMT78JaWQDbpUgprc1dc/01tsmOuo3zq8?=
- =?us-ascii?Q?/pRj2ya6eKV5s2ergleyg50LYiUWqDHdNkz+FOFDvATr4XQZIL2SwVNDI60g?=
- =?us-ascii?Q?7j51YqrV1pPuI29olpbBkMXj3Hd5LQ2SnXwbpfQ68EXehGQ4KDF9bQmD7MPw?=
- =?us-ascii?Q?mKBN2cDaaxNZVhqYM0bFrqNaSaeYoQkogSqpi8Jh7ee7wMw1swaeX//U1z2F?=
- =?us-ascii?Q?zg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5ffA2zM+A52x1SfmSdg5eQeW02lb8ojBmXH+wzxXzcH2JjIxvgOj6qCoCFMM?=
+ =?us-ascii?Q?1gxuF/xS1GvDwP8wwGq29LRdHthe4h5Fm33lrrabADNtFzJZFH676UELvI3w?=
+ =?us-ascii?Q?lVPsOf87XBtK6tC2HjtYXFhrTJe+VJS0deV/vjse/tzXOoyGAgJGD1ZcfXak?=
+ =?us-ascii?Q?cnf9rJiS6TGlpSKmc5aSvMHbIZc0C1dKKm1ggkiDthAG/0deLrlLBvgf5O0m?=
+ =?us-ascii?Q?u6uyHulLDnOrkS1olSqMqQ4QS/fOv/Luk6PrH8J0v6xASqSoxqF3f/pWTEf3?=
+ =?us-ascii?Q?k3t0T+OQOt8PJv6PjyHuQAjaTL9O2N4zZiFYHgRE+1zsuPOf7x0sODaeluwi?=
+ =?us-ascii?Q?AnS+YYDSDsw7xqv8uFGNjbxPA0TNbkCrsJBsSjsa/0Li2YAvTJ7tQ6+bdk4k?=
+ =?us-ascii?Q?g3P0H9+kQlO1L9jPVUB4LMYw6Ktgbe4PD90kNhOMn+tVLbG7jmeAdN1YQbPx?=
+ =?us-ascii?Q?/Zh1ZqANpjR62uDe5WAr57T4SKWbJnMfQKecb6MIvALKSyrQCwVrLoXWb6rX?=
+ =?us-ascii?Q?y6MZZdyga4uOcnIgw5xC44ZXzpSeBzJqLqr6ZRVOicVEK17ZXJ2w44XLGMf+?=
+ =?us-ascii?Q?EtHVtYJisSU167csmjvwiLsInyrxBEvRW/Er65pXKjNfa6SEqVtMSEoXQaqO?=
+ =?us-ascii?Q?q8B8e2yFw4vIi7Ue1CiGJe7jfPWz5htPhPxrT3SXnvci5hZDcYOjVOgXbd7J?=
+ =?us-ascii?Q?6d1JNNOqMnwX4phE7R1qP54ICMh5ti/K5oem5kV5PafD8t5riXGFsBvbBCyb?=
+ =?us-ascii?Q?NLfAWEYxZiRTDU7FxEflwEzmtNt0SygCe8fTIdhNOkv6XbOP01NgoLCF1akV?=
+ =?us-ascii?Q?u0KzyAyIHikIq5695XokAYPzqUTIgV0kQD1+7mpNqzYJNPyIB9ekHpWht1MS?=
+ =?us-ascii?Q?SOxaBKoMb1BPzwKOijvYUGByaqConHhdiMhn22hwjZkSNqu7GI4+tQMQ3QJZ?=
+ =?us-ascii?Q?u3ltD8Y0nFhMfi86LFSFQq8BJUm0ZOr7VYvXwH/EctCF3Fqdh6HAVoNCqnSA?=
+ =?us-ascii?Q?Ao8IMmdMqk78tysWbQttUTKbVOu3g85GC6ZCoT9Y1sta9WnSq+LV6dchBs38?=
+ =?us-ascii?Q?mVnL3yZWAJriRZJQP8qmCmeBENRa/wdBbFGL7qvvyn+EH4KmVgKM6Hfg0nvf?=
+ =?us-ascii?Q?qI4MGuwDChfWkHO6jNoRw7T+QGf7ZovcbJPzvn90oB1sjxh1E2+O1nAAx99a?=
+ =?us-ascii?Q?VmutxgrpfQUrA5lYG5g1HKh3UDh2iosLrZAi/APfa1EBcP2jGyPOBYxYNglm?=
+ =?us-ascii?Q?VQkxNvDzyeRzUnbCNREWC4W1SG0EJT4fnKvO+QIk6VF+pYdKP3tPCDBJDZpp?=
+ =?us-ascii?Q?2mIZCWAA09YZlT3nFhfo0G7fEa/y233l6LWY2TZKWChliVKjlO3FHffNdDZi?=
+ =?us-ascii?Q?RvT5/htF276Shztxf3bGUfqSWBldHU/KMxKswnc6mH4IOp+DsEP+aY6gI065?=
+ =?us-ascii?Q?cQjt2ZahP538wgq9rmfiMWCRexrxrixtKM2YEtSzW67VZMXSMLbaMdEBr8KW?=
+ =?us-ascii?Q?HIhwMkjwRqWio3KEMuvogcZecT0SnVm6l5MDp/Jiug7xBE3UbwyQbfk8HyKP?=
+ =?us-ascii?Q?Smu0XWFdPyKV9a6rvMCCE0sMXMobjjYtIvMctKsXCvA2YJl8caAJlDDHFk0F?=
+ =?us-ascii?Q?gQ=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0cc8a7ee-be15-4e80-1637-08dd62ae2b99
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9806de2c-9680-466d-a839-08dd62ae2fe5
 X-MS-Exchange-CrossTenant-AuthSource: BN7PR03MB4387.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2025 04:10:35.3973 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2025 04:10:42.6381 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UHZvTweBN4SNYS94QyjVzHEnt7AfiCF1b0x5qhF6Mp2v6R+ZOzr70woy6t6tJcvaLRV6bRn+77a/GV2bNdeEWgwO6I+UoAeSvz3EJ+NeKos=
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZTsfwciFqhWei+b7hP9ipsIUjeox1ekQuN1iCo0FgUgp0KqI7yOMdfamn/XlbXKfFj/GOAzskuLgAx0JnRtF6Yb+g9S6VU9mAlx6mtcRXVQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5757
 X-Mailman-Approved-At: Fri, 14 Mar 2025 06:36:33 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -180,44 +178,87 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Enable the Kconfig and Makefile for the
-DWI3C driver cmd support.
+Add simple test to check i3c controller defined in sandbox test DT.
+Basically, this test case will check validity of the i3c controller
+by probing it and perform basic commands of cmd/i3c.c
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
- cmd/Kconfig  | 6 ++++++
- cmd/Makefile | 1 +
- 2 files changed, 7 insertions(+)
+ test/cmd/Makefile |  1 +
+ test/cmd/i3c.c    | 52 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 53 insertions(+)
+ create mode 100755 test/cmd/i3c.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 642cc1116e8..551959731f0 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1327,6 +1327,12 @@ config CMD_I2C
- 	help
- 	  I2C support.
- 
-+config CMD_I3C
-+	bool "i3c"
-+	help
-+	  Enable command to list i3c devices connected to the i3c controller
-+	  and perform read and write on the connected i3c devices.
-+
- config CMD_W1
- 	depends on W1
- 	default y if W1
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 8410be576bb..082470fa104 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -95,6 +95,7 @@ obj-$(CONFIG_CMD_GPIO) += gpio.o
- obj-$(CONFIG_CMD_HISTORY) += history.o
- obj-$(CONFIG_CMD_HVC) += smccc.o
- obj-$(CONFIG_CMD_I2C) += i2c.o
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index d8a5e77402d..d1c49e2c97a 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -34,6 +34,7 @@ obj-$(CONFIG_CMD_PWM) += pwm.o
+ obj-$(CONFIG_CMD_READ) += rw.o
+ obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
+ obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
 +obj-$(CONFIG_CMD_I3C) += i3c.o
- obj-$(CONFIG_CMD_IOTRACE) += iotrace.o
- obj-$(CONFIG_CMD_HASH) += hash.o
- obj-$(CONFIG_CMD_IDE) += ide.o disk.o
+ ifdef CONFIG_NET
+ obj-$(CONFIG_CMD_WGET) += wget.o
+ endif
+diff --git a/test/cmd/i3c.c b/test/cmd/i3c.c
+new file mode 100755
+index 00000000000..471dfacd5c7
+--- /dev/null
++++ b/test/cmd/i3c.c
+@@ -0,0 +1,52 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++#include <dm.h>
++#include <dm/test.h>
++#include <test/test.h>
++#include <test/ut.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++/* Basic test for probing i3c controller with invalid name */
++static int dm_test_i3c_cmd_probe_invalid_master(struct unit_test_state *uts)
++{
++	ut_asserteq(1, run_command("i3c any", 0));
++	ut_assert_nextline("i3c0 (i3c_sandbox)");
++	ut_assert_nextline("i3c1 (i3c_sandbox)");
++	ut_assert_nextline("i3c master controller is not initialized: any");
++	ut_assert_console_end();
++
++	return 0;
++}
++DM_TEST(dm_test_i3c_cmd_probe_invalid_master, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_DM);
++
++/* Basic test of the i3c controller for valid name as per test DT */
++static int dm_test_i3c_cmd_probe_valid_master(struct unit_test_state *uts)
++{
++	ut_asserteq(0, run_command("i3c i3c0", 0));
++	ut_assert_nextline("current dev: i3c0");
++	ut_assert_console_end();
++
++	ut_asserteq(0, run_command("i3c current", 0));
++	ut_assert_nextline("current dev: i3c0");
++	ut_assert_console_end();
++
++	ut_asserteq(0, run_command("i3c i3c1", 0));
++	ut_assert_nextline("current dev: i3c1");
++	ut_assert_console_end();
++
++	ut_asserteq(0, run_command("i3c current", 0));
++	ut_assert_nextline("current dev: i3c1");
++	ut_assert_console_end();
++
++	ut_asserteq(0, run_command("i3c list", 0));
++	ut_assert_nextline("i3c0 (i3c_sandbox)");
++	ut_assert_nextline("i3c1 (i3c_sandbox)");
++	ut_assert_console_end();
++
++	return 0;
++}
++DM_TEST(dm_test_i3c_cmd_probe_valid_master, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_DM);
 -- 
 2.26.2
 
