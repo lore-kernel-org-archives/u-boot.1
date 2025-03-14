@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F27C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 18:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F709C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 18:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A11F81F0D;
-	Fri, 14 Mar 2025 19:32:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E5B981C67;
+	Fri, 14 Mar 2025 19:50:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ajS8BaxK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p9lBGK9K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42B9581F0D; Fri, 14 Mar 2025 19:32:11 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 8E86281E92; Fri, 14 Mar 2025 19:50:05 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D7A281E92
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 19:32:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B93080F9A
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 19:49:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46fa764aac2so23174951cf.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 11:32:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e64096aa08fso18105276.2
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 11:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741977128; x=1742581928; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=p0RWGqkdhNFvyU+Q4vxSeXHq1AIfUrxX1hozsy7BSz8=;
- b=ajS8BaxKvjDbipgTzuAHq4IZ45ZAIwYpA4Zp5Nvg5gg8WdXn6W1KqjORx6Y8kLNTvU
- 0OzL5GDkq89yU4lEXj1GVo5eYdjYCrawY/gqolE0JXIGQLELUbRpGO0OqyBAhU2vqDQa
- c1UwhMqqL7f8kTeGZCNfZK1DV8OrL2d8krsO8=
+ d=linaro.org; s=google; t=1741978198; x=1742582998; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2BYKXGSkSjfL7qfAPawm6+bU+QQyj5P5ukoDaMzTTRs=;
+ b=p9lBGK9Kw4J/D85RWYIDY4tAvsUny+eIC7UHOKvGYjmQR4FNNCMqQ4ZBt3zcLSIdJb
+ Hgsj2Z0SQlr5FFW+yOMhJlnZgflDoMPrILjlLVMoXZy00sE2W3NLdk2SrKrpA96e+lOA
+ HDCVJfItSVH2pyrPPiRqJOUw5Ww4unVqycKB3RNNR8s8Nwp5wWku6EgN5tj5JLw19q/5
+ 7yAzeeCWF+Zq3n0F9W9pGWI+hq+x4Y5enSWsklY2D7mlNn9q/I3yrecQZlfh2TF+jGVh
+ qHrGuLQZeSF+irq1RDta/PZ+WwMHxcmL8ZnE7Grfsx/oFTIz3EYdQ/aW0WaHXDW96BEu
+ 2eGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741977128; x=1742581928;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=p0RWGqkdhNFvyU+Q4vxSeXHq1AIfUrxX1hozsy7BSz8=;
- b=rW7CxoGH0SFOkIFqfGJm7E7KwfchTlmMyNton5zTEYeq9RDvwWCro9lfaicQ4FZDd/
- vE6xTbFLzlp0tSgWZYivLx706cZKXxNb/gLsbp9r2nao7b7633+10jWxJry9M8J9Md5T
- Y6sjNqzc6IHsOEgw3h6UFM5fm43JFS3zHiHrMppmBOb1PBjgYh+ExGWrjnRuhNrC7a6N
- BNZtTw1Mt8gmvfy16R+T8oEFp6JbPeGjHO7xLMUyRaakl4aumxQsiJN3ZF191iMjg2Fw
- uVaQBjRKsH273zylEaDplcPpwOu9t91n1LkY27yxUqxj0FwpbWa9CG5eL8Q3ss7hPjO9
- nyjQ==
+ d=1e100.net; s=20230601; t=1741978198; x=1742582998;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2BYKXGSkSjfL7qfAPawm6+bU+QQyj5P5ukoDaMzTTRs=;
+ b=dmBQITKmRGht4XG/hZ9wJs/W9bTfKQ9TjNR4qAizUwYyPq6YJkY7it/OgXsO2jiqLJ
+ L3r96cp04XCx528cizhlkD41FOSPCNocif3/3+c3vxuQsEu0uJJRnduTgVJ9XeaxNA3+
+ /MeyYbehMlx9FJjRX7kwHRBfeJJUpLarffY40MMzOnneFskgz3Lx+tK0kHtdgT23TpLv
+ LNEbL8qiQ3U8D5wtup9q9WJdFXMTKSM+BOGkg5lEHcfBcFcQrR0VV0GpeEvyw6ABUfUo
+ 7eq5w0BPcki/8FYojM4bHvSjyUCLJQC9Fk3XW5HYatlcK1mXHCOEx/1lzPQw9wdH/pto
+ pduQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4BZqHylHzTSguTdwPvAaBDQ69dBT054FTfoPfvWO2HzQpAmCIvm+j+P1Z7KPH6MUa+Rmn9A0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9gyLyG3Cf7FUfUcLaiWUH209bQoGSB5n8bizNSa2rOnmwwqCc
- IfbkTg2vv4Hw/KR8PuyYJQoFKe7JyS0El027n1PXWS1ssqQSieEN8bDhvRV8+hA=
-X-Gm-Gg: ASbGncvXrn3jZ2wZAW8BRwVjK0QjD0FvV4e0uZPPE02DLjlkp10lwxgMD9utAoc6JIE
- 7YkLapw6Xw6zCkRETrh3aUjZuE78vsXeaDsDmpR5j2cRN0rRLpve2OQnLUmPjmFHWnzLoEyvetk
- gArg3Os6qqJdZLSdPhajf59F2krDo6Ch0OkC9Uab8lZQS8MY5tKLlWTbRkqVzSOaRdv6+/zUn2K
- /iRpyxHqII6GxGJy6y60eW6j2HrERR5yqLGU0FqCo+5CTpqHHdnQQvT6zlt1i+FJKRsefFNNidI
- UMsQwSJFl5RmuWsD1ICnOQaDnpZGwFgmU0D4iMt5Ae0gwg==
-X-Google-Smtp-Source: AGHT+IH+qG/zoocjmjCVGamNmFePKnZeZkkfHjl9T3RuGHwwbkdVo4zeiNCQyaD0MADnmwv2ShxMQw==
-X-Received: by 2002:a05:622a:206:b0:476:955f:91e2 with SMTP id
- d75a77b69052e-476c815f058mr50965611cf.29.1741977127333; 
- Fri, 14 Mar 2025 11:32:07 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-476bb611c83sm26028951cf.2.2025.03.14.11.32.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 11:32:06 -0700 (PDT)
-Date: Fri, 14 Mar 2025 12:32:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Stephen Warren <swarren@wwwdotorg.org>,
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: twarren@nvidia.com, sjg@chromium.org, u-boot@lists.denx.de,
- Stephen Warren <swarren@nvidia.com>
-Subject: Re: [PATCH] disable mail for swarren
-Message-ID: <20250314183203.GE2640854@bill-the-cat>
-References: <20250314181031.7978-1-swarren@wwwdotorg.org>
+ AJvYcCWhUTta53d+oQ/OFwHcCneyTTT4fd7UWqFoeWUamCQY4I6yBtWvpqleemaCiZpu2RVMgp9LwAY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0EfKG043BJh63zl4GZtJCU9bBwsa9PSfZXAVRU6ZPHEIjgBKU
+ hGqgi+Iwy5hx3fUqwrMXptwOzb0hcR9oyOQEcL1X0MgrfxjKVNxHKGj6hZo4WREaUHItGhkjP+Q
+ rbdaWGDGIx9puhpRCFWgfKbIH0ChGAaxGr2Z7fQ==
+X-Gm-Gg: ASbGncvqW1aRjWlKYwM1vgB7rcGQVo9DRHX4bafWJfQ2UczcYkCLoRIMu3ZXWP5AHbg
+ dSvmThwg0VL2uJDrb1Aesbv5++vrCS2RR8HPElMlWkYzKEvkat/HbihgQbOdQVMCdlN+FBI9yU3
+ jeq2rIOC7zK4hbs/Kdsp0RKUr3DBs=
+X-Google-Smtp-Source: AGHT+IH+VEy877SOFbugqhtr8cSkhsDUBPntfnqmucKqFSB9iWC7hz7kGwsgLz+9iUxTzVw83HXK7c6f9V/NfELnsuM=
+X-Received: by 2002:a05:6902:114a:b0:e5e:1034:db93 with SMTP id
+ 3f1490d57ef6-e63f65b50b4mr4660758276.34.1741978198463; Fri, 14 Mar 2025
+ 11:49:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6mgRTm/hOUuycrOp"
-Content-Disposition: inline
-In-Reply-To: <20250314181031.7978-1-swarren@wwwdotorg.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
+ <at3MKdVWObOe2t0ulEO_390BtudxQ52-_iW2VGgpz0spI-UhNxRfC9TCtcUduXUIHSuBPt7vTR3iC4bOhT1IZTyI9hKIrHhBt8-82P4PIqM=@bens.haus>
+In-Reply-To: <at3MKdVWObOe2t0ulEO_390BtudxQ52-_iW2VGgpz0spI-UhNxRfC9TCtcUduXUIHSuBPt7vTR3iC4bOhT1IZTyI9hKIrHhBt8-82P4PIqM=@bens.haus>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 14 Mar 2025 20:49:21 +0200
+X-Gm-Features: AQ5f1JpwjCl5bf1m7LwzlBwln8kICStepX0UTNlxMQT9tW5B9IacS0LJQbztx9M
+Message-ID: <CAC_iWjKGxqF8L=3r1-EuDN=Jmb0rPV+-54+g7x79m8dm-4o=yg@mail.gmail.com>
+Subject: Re: [PATCH] lmb: change the return code on lmb_alloc_addr()
+To: Ben Schneider <ben@bens.haus>
+Cc: xypron.glpk@gmx.de, ardb@kernel.org, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Nam Cao <namcao@linutronix.de>, Baruch Siach <baruch@tkos.co.il>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,59 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+[...]
 
---6mgRTm/hOUuycrOp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> > ret = lmb_alloc_addr(ram - 1, 1, LMB_NONE);
+> > - ut_asserteq(ret, 0);
+> > + ut_asserteq(ret, -1);
+> > }
+> >
+> > lmb_pop(&store);
+> > --
+> > 2.47.2
+>
+> Tested-by: Ben Schneider <ben@bens.haus>
 
-On Fri, Mar 14, 2025 at 12:10:31PM -0600, Stephen Warren wrote:
+Thanks Ben.
+Especially for the testing and the whole debugging saga
 
-> From: Stephen Warren <swarren@nvidia.com>
->=20
-> I haven't been involved in U-Boot development for quite a while, so
-> CCing me on patches isn't currently useful. Add a .mailmap entry that I
-> believe will turn off patch CCs. This can always be removed if I become
-> active again! Remove myself from a few MAINTAINERS failed and the git
-> mailrc file too.
-
-Thanks for your time and contributions over the years Stephen.
-
-> ---
->  .mailmap                             | 2 ++
->  board/compal/paz00/MAINTAINERS       | 1 -
->  board/compulab/trimslice/MAINTAINERS | 1 -
->  board/nvidia/beaver/MAINTAINERS      | 1 -
->  board/nvidia/jetson-tk1/MAINTAINERS  | 2 +-
->  board/nvidia/p2771-0000/MAINTAINERS  | 2 +-
->  board/nvidia/ventana/MAINTAINERS     | 1 -
->  doc/git-mailrc                       | 2 +-
->  8 files changed, 5 insertions(+), 7 deletions(-)
-
-I'm adding in Thierry Reding and Svyatoslav Ryhel because Tom Warren has
-also stepped away from U-Boot a while ago now and those boards should
-likely be taken over by someone else, and the doc/git-mailrc alias
-updated further.
-
---=20
-Tom
-
---6mgRTm/hOUuycrOp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUdhsACgkQFHw5/5Y0
-tyxb/wv8DfhplB2FhJnQ/Z6XdcHXfSdhsA1mGpFiqQYBH6JodpMBTI19YPlnOqE8
-Lpgy3WNk1ta+zFrTP9MEmvmERJQZ4NfBnBWg75vag4NSXVM23hBtHV1VnPWTqo7y
-/7ql/0O/ACV3bRWhOLI+pzW5KYYKHW1yL30k0cGriakPxpQxxvrNB0qoAHHcfo41
-jZYOQHElKDkYrH+w4nVvzvDBeWTouWtEYaoUYggSiNouYAK0vL3TP5hn5sVNa1rF
-kayXH+B9feieGlK289coEHSH9p/+l5PeDh/zcYvdMkcYuvGq/8LDcD6NOg81I4JU
-q8VH1Zn5L1ya499xEB2q5PUDJt6SXyOEtRLx5mwMWeKWy9dkdiYA6/FtT7ouZEpE
-hdwq8URrWfjVVaXX7+fxDBBjHERHTW5d6rA+SYvifztGcKuteLhIhDpkf6jyju9b
-x5QPeOVVR8vf9oawhZpwTNc+9kaxzF6hfVZSUFCxq3KDsKeRgY3BOlIAPkl7iuhK
-Fmx+ieRk
-=BJN0
------END PGP SIGNATURE-----
-
---6mgRTm/hOUuycrOp--
+/Ilias
