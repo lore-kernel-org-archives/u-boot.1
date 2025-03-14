@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35087C28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 20:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF00FC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 20:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3710E81FC8;
-	Fri, 14 Mar 2025 21:39:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E54AF81FE6;
+	Fri, 14 Mar 2025 21:39:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O2rIKofF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KNLWDmjz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D1B81FC7; Fri, 14 Mar 2025 21:39:39 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 9333A81E8C; Fri, 14 Mar 2025 21:39:42 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BF6E81E8C
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:39:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D443681E8C
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:39:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7c55500cf80so197328585a.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 13:39:37 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7c55500cf80so197331385a.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 13:39:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741984776; x=1742589576; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741984779; x=1742589579; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5o2u1djcNVsKcJFVVemtKBMVXu0BAdT2+Q0ZSbEyFqs=;
- b=O2rIKofF5EKZT5hdUrT1wsnJv7lMJFyZ+2LBlX144Jd+Vphum17UVwHwZRtdhlJQUk
- REZZw5hJHXqX5o/N6Q/k2r7NbKPZ+DsXUfNsuvL5FGT5PAnP9PfPzv5Fxwcb+J2VlGLr
- phySeTbFafjYti7X9V2nJWasrXxqZO8ipLCqg=
+ bh=Gk3mAz2qUd9aecayEZaGE9MOabpjDoam5lzqg5t5Wlc=;
+ b=KNLWDmjzRiusY1l73pxbgUbNGAOjR93gEsa9L71I8Y64ndJ0aWxiJ5Opv/rLBREwND
+ pJNpbizQ1m0kknuMHw2pjqckSgtEjN5Lq3MooHQnpBmyCTj2TEEZK/9VEZMIU9177BGv
+ yU8j32Ub24O9VY8bWROHok5YBwT8qrKq4YCm4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741984776; x=1742589576;
+ d=1e100.net; s=20230601; t=1741984779; x=1742589579;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5o2u1djcNVsKcJFVVemtKBMVXu0BAdT2+Q0ZSbEyFqs=;
- b=jJz/WLRQotyWc+dA+jF5IpMEApkwEh4rFe6qSi5cSNppycCzVeUagYTHYb7L9FVW1s
- z5tkxZ9YuuzrEp9WlfdFhM+AXDoCGsWd04U5KFVHNWZ7d2CvS72eTBzSJmK+c33xEUJj
- NB87z3ddaxsansRqUL2TTD5oi+mCxddJrDiuNfYSyFRRqNv5aXbA1HM4JyxXTFO4Jmgc
- uOUqvTGnWbhUCnnMYRRnyrnRI9GIunQiE+vCQF6MSxSvE/aOb8lOeTCowYE2CIyJSyb8
- IaRUfhdKgT29WsbojWODu+sLz4G+KW07B5wm+EyFJ2gCvIhQjaVumVmNM1E0P3J1CAte
- tS2Q==
-X-Gm-Message-State: AOJu0YxczTTCI4HXZ/hjyX2+tvZT12jrYTTsv5+LzCdCpsJAIL5cXERE
- vL5GZq0sbCypBMoy3ZSk26nkfAv0IOGiuwtZT5p6GmnB+FqzeHtMGjT/SyLngVp7eaOUue8R/IO
- e
-X-Gm-Gg: ASbGncucR1fWuPxFBvsuFrZCEc0NK1B/v0GhrOszFXlqkP3YjzAwJvfHvkjswj+mNjq
- H8iJV71jiMWbllBVwHaHwSnOurp+CwudUOJLcJTLKRzw+pxCuKyZZSHAHh/ZlWW8ot4o1kWdXa4
- K2jZo4LpuB7SsyJREwb4VIU1fGtwq9NQQjZOI2LxRiRvwYAog9TvWt9WtWaJOeFcTe5S/MYP2tL
- IwbU4WVKMYfjwCGHpPSBQTZ5ru4vUfLuG+NF6SBnrrPIaiaI0WnJvmp0BLQK78gkXeDI1AX2nbD
- HooXy6/o2VRzJ3mCxuLnhLinHePaoDWey3jbPyfQ2MW5
-X-Google-Smtp-Source: AGHT+IGuz5Smo51u5Jog8bnHP4Mxy7ROVje/OMzraRM0qwzq0F7qGma8J+jiAIMsaVTok42r1XH2Hw==
-X-Received: by 2002:a05:620a:4546:b0:7c5:47e0:e705 with SMTP id
- af79cd13be357-7c57c7e5bf5mr457474685a.24.1741984776377; 
- Fri, 14 Mar 2025 13:39:36 -0700 (PDT)
+ bh=Gk3mAz2qUd9aecayEZaGE9MOabpjDoam5lzqg5t5Wlc=;
+ b=tKeCwf9CFLp7r7+7ekiAWad++EWIfaBWk4ZMS4AXYoU/90uuM/5MLXlicah5HKXtmf
+ XjDojTEtYTgFgOD4Vj0sGSro+bAqtd1ZhBsj8qSNernq+oRPywAOJTsCOsXtPBjcrX36
+ dXD85TXugoc+0Ia4ihFIeBmdTm4RQQUP4vT8LRryUboIPCg9Qr8ROFXMUcF2z1mHdosn
+ B7F5+1qzSTtzdyTeM7aLLnxERWjNz+YS+3yf6pEjK7PkCxAL6ewFDpENjtciuDeRvBiH
+ gF+BHKy3gvgVWcR8fq2FSJaw107NsLEfJEPHI/wVQKsRZz0eSEAne07L+SC38G0FOClp
+ 8r5g==
+X-Gm-Message-State: AOJu0YwD6E5qzbOIUdDZNjBzB9PWu5RB0D6SgYu07W0YJslcqSqQ4lEX
+ GonYP0VwpqGWI85pKdiQynwj5wlbKy81jT/oknHFEXDLGF1cmx+e59go6prh31I=
+X-Gm-Gg: ASbGncurIPGEYe58mEYfsOV+0eEW2RcytsO8CCdrto3AnWfKukh0sM/I500MMYyS18U
+ Fp5hs9c+aePDb+GVT6w5ARiHLskJgUBhvL0zgYvAPIif0w0W8lxklNtWWF4MYtUVI+7E2d4+CUf
+ fUA0ssAkJlZNviMB2to4nkc/IMJyLJgX7nXgOGmTLWr1Tyj+fyjYvnfGprPRdnLaqcgGZ6C1OEl
+ 6aZ1ymqyrWbxy1wHhjQM9uKDZ8Qp15HLB+XZHBZ2MsZzfXCy2MoMbhQ8LLS/zRmdsiCneQCzpU/
+ wESPFAUhfhjjIKsnKtNK0pKNY0JftfRWajCoaxyXWbiC
+X-Google-Smtp-Source: AGHT+IHctdMvLIxEmVThYhQwStensdDeTk5bh7xS1s5jlAf1jS9rbQ3+oC3RhDgKsql/afaulUqI1Q==
+X-Received: by 2002:a05:620a:2406:b0:7c5:5801:ea9a with SMTP id
+ af79cd13be357-7c57c7b9a13mr459736485a.11.1741984778814; 
+ Fri, 14 Mar 2025 13:39:38 -0700 (PDT)
 Received: from [127.0.1.1] ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573d72b94sm298787485a.77.2025.03.14.13.39.33
+ af79cd13be357-7c573d72b94sm298787485a.77.2025.03.14.13.39.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 13:39:35 -0700 (PDT)
+ Fri, 14 Mar 2025 13:39:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>
-Cc: marex@denx.de, clamor95@gmail.com, alexander.sverdlin@siemens.com, 
- kever.yang@rock-chips.com, mkorpershoek@baylibre.com, 
- ilias.apalodimas@linaro.org, peng.fan@nxp.com, jenneron@protonmail.com, 
- jonasschwoebel@yahoo.de, Anatolij Gustschin <agust@denx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, 
- Soeren Moch <smoch@web.de>
-In-Reply-To: <bea64d2913c5c768989d7fcf5201449997187016.1740927024.git.dsimic@manjaro.org>
-References: <bea64d2913c5c768989d7fcf5201449997187016.1740927024.git.dsimic@manjaro.org>
-Subject: Re: [PATCH] common: console: Delete obsolete VIDCONSOLE_AS_{LCD,
- NAME} options
-Message-Id: <174198477335.2277875.15177172661013316270.b4-ty@konsulko.com>
-Date: Fri, 14 Mar 2025 14:39:33 -0600
+To: j-humphreys@ti.com, javier.tia@linaro.org, ilias.apalodimas@linaro.org, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com
+In-Reply-To: <20250301080049.965438-1-s-vadapalli@ti.com>
+References: <20250301080049.965438-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH v2 0/2] Enable USB MSC Boot for AM62, AM62A and AM62P
+Message-Id: <174198477654.2277875.1584947982375094939.b4-ty@konsulko.com>
+Date: Fri, 14 Mar 2025 14:39:36 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,21 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 02 Mar 2025 15:52:57 +0100, Dragan Simic wrote:
+On Sat, 01 Mar 2025 13:30:47 +0530, Siddharth Vadapalli wrote:
 
-> The configuration options CONFIG_VIDCONSOLE_AS_LCD and CONFIG_VIDCONSOLE_AS_
-> NAME have been marked as obsolete and scheduled for deletion in late 2020.
+> This series adds config fragment for enabling USB MSC boot and USB
+> Storage devices which are applicable to AM62, AM62A and AM62P SoCs.
 > 
-> That's already long overdue and the last remaining consumers of these options
-> have already migrated to using "vidconsole" in their "stdout" and "stderr"
-> environment variables, so let's delete these two configuration options.
+> Series is based on commit
+> 962217d218c Merge patch series "boards: siemens: iot2050: SM variant, sysinfo support, fixes & cleanups"
+> of the next branch of U-Boot.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] common: console: Delete obsolete VIDCONSOLE_AS_{LCD, NAME} options
-      commit: f853295a6a0913f9d0df72c11dc62834452820f4
+[1/2] configs: am62x_r5: introduce fragment for USB MSC boot
+      commit: 460581fa7895c253cb401e2bbd1f6a7e43b41f82
+[2/2] configs: am62x_a53: introduce fragment for USB MSC boot
+      commit: 45306e894bc376908e8e0955ff43d68131739ba6
 -- 
 Tom
 
