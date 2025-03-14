@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A434C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809FAC35FF1
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:43:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BE1E81DE3;
-	Fri, 14 Mar 2025 15:28:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D1E2B81D3B;
+	Fri, 14 Mar 2025 15:43:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mg2bmJ4B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AoLuciVe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EB5981D3B; Fri, 14 Mar 2025 15:28:06 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 4392081D27; Fri, 14 Mar 2025 15:43:45 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1701480F9A
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:28:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 241D081D27
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:43:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-474f0c1e1c6so4307111cf.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:28:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac2c663a3daso445833966b.2
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:43:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741962483; x=1742567283; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0obWbRKbU97kYzZTFbAkXixYSdb+9ZhMcxNsTaKvQGw=;
- b=mg2bmJ4B5lFoyfFS2gOW7K70pXLF75nsP3lfadO25iMWpyV84uwF1EV5Jn0sQ+tN2f
- jdObHJ02WuaE9u2ExGt8U/aEdPUDBjTx4cOCMacQmraEgMaNUiWgZRY8rSZOQoW2dNa2
- 5Nqv1evtkv1y/NuFgpEhyM+0w8nXklXdwklS8=
+ d=chromium.org; s=google; t=1741963422; x=1742568222; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yA7cttECxEJsG4GyuGm7cSfe8hNtt7g5KvOlwdXiRuE=;
+ b=AoLuciVePrfEKMoVuzBW3zO2Di1hoyqeDL2yMeeW+BUqYOjL5VzwCS0PDbsmun9c+d
+ rd9sgLxB2UHQaduBdTz0uwdqbLBS7ZpOCJ3JGMgI5SRjQW7IZcTl9/RwRst031Xy2RqO
+ Z2mXYrOjNFnqsM4jfT8XXMsj8K2L8dSpabmn4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741962483; x=1742567283;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0obWbRKbU97kYzZTFbAkXixYSdb+9ZhMcxNsTaKvQGw=;
- b=m3BVutB9Ju/WJXupbM8DnDYdBylug6Fot6xB8crH8vGLgea0surqKViqfudBfXWFrC
- y1tRv5chKV6cUFQJbau0dbJyFnxTh08W/WY4UGqzFl+5dOo7m1z9aTZ83k8TO0ZwdsVc
- S8wvYSBVnDWXWrJJKxbAxje9pPgKhjEMtTgTWCRAzNbmnaGaYAThsWXaqmK5L3j5GhIT
- M28C30aap8SAz3ed5+sKPua1R/WLvTSyoz6ua4StchIvESdrO22AyAIsYW8ZzuzXJoL2
- 3X59ber2Xc3qHRZqiLxDsf/P88YFZOkrcFU01A8NKgzWxD9eN1CG7JrXng7aoe3BJt8i
- Albg==
+ d=1e100.net; s=20230601; t=1741963422; x=1742568222;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yA7cttECxEJsG4GyuGm7cSfe8hNtt7g5KvOlwdXiRuE=;
+ b=UA9LXa9VTSm4TiG2u74zBr/CCqvHCpAeKUgKgbqlSGvW6zl9Q74fmyaKg3Ybz7IUjx
+ VOWvupGq1ArF68SsI6JsagUBrTbrWurQdGUwqVtXUY5DnAILDs9GNSRmb9F54fOBxHdV
+ JZMXmCnkc49Z0wPyLdDorzssxwgZynN5p0qW0o1NHiD9A8iDoUXVPTp4BXuA4BwWPN9k
+ 2d1tT0842tFWmPSWPUCHsem+373scm/M38NjjEQvjDveXShQCHNW+kCOnHAG9LGWZt8i
+ +E2cGmTY3YxqeGOFcEjxJJARJ2mknQ1HSDB2X0d7gpLOwJKHGmWE3thE7npjjUmdMD2P
+ zf6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9QqHKBVM+9VM56cFw/fBnqlVx/ESBe7Bj8R0FK7Z0L6WFp0kE/FXZca9O1fOMdxlm8wjPEQg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNOCeWlD5HT/WXoQhT3uYAMs1eNREkRaA1Oi+S8aY1QMtK8riF
- 1en7oW5zXKQIS+jc4bSyuA7nPwqJWpEzJzos7WENCpLNMsFGNcck27B/HDCZsvM=
-X-Gm-Gg: ASbGncvNZKKJvOVJ4dd/dmi3ZGyolvKMQUGhEs4KTsvpwlhyy1XUfcklbYwsG4Ak33h
- BvHp0Sv3bThub+Cowg8qy24Bl8YswqdB6RKgIUGA61bURTYOcp214TtV6D7rvjtmJpR1bW2OlNn
- nY2zTrZRTIZYo/kyeBdvzGbyKk+nkO916hGrCYURrYKuPX8fqeh4mBPnKZnzRLsVai6kDS9PwQB
- LBgiS23GvH8JRuAII1onbt6vz9AHgYSqD7JgPQit4goid/yrbaybLTXZCuiK5Ew986N+A708aw5
- S6qRWBOjaTeNK3t8NNWUEzt6ol5u/1vAOleEPMJjt7bEMw==
-X-Google-Smtp-Source: AGHT+IFsiSU6nSZbVijbhne73NHyZW1aZBRlQ5OqX6IcUJJnMIRjeN0PSFZ5pdzQz/5/cj4rV2h/Hw==
-X-Received: by 2002:a05:622a:180d:b0:476:6215:eaf7 with SMTP id
- d75a77b69052e-476c813f762mr41356971cf.19.1741962482991; 
- Fri, 14 Mar 2025 07:28:02 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-476bb82a5c4sm23436351cf.68.2025.03.14.07.28.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 07:28:02 -0700 (PDT)
-Date: Fri, 14 Mar 2025 08:27:59 -0600
-From: Tom Rini <trini@konsulko.com>
-To: ziniu.wang_1@nxp.com
-Cc: peng.fan@nxp.com, jh80.chung@samsung.com, pbrobinson@gmail.com,
- marek.vasut+renesas@mailbox.org, tharvey@gateworks.com,
- jonas@kwiboo.se, sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH] mmc: mmc_boot: support sandisk and micron emmc boot/rpmb
- partition resizing
-Message-ID: <20250314142759.GO2640854@bill-the-cat>
-References: <20250314081024.1035144-1-ziniu.wang_1@nxp.com>
+ AJvYcCVHeRG+GkjkVrZbhuUYcnZ3a0OBdiMlih4Z67AnZeXLS7ZA9Xn5qCR2qmzE9FAeMoDcW7MB5D4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzIfqZFv+jIvX4aPmK8r3o/uAFak8tDy6wVTmW3wxRmslMxa/lz
+ gk5mxAL0MzjlFoXekfSFCZ16jpesiJmijD9UMr+vEueZZDxNL0lfCAZaInxcsbhkoFWC3ZZPpoh
+ aFKsgOszJTO6LWzplohFhuyfzOB+r3gjXI2rf
+X-Gm-Gg: ASbGnctolPtusS0CRFGihlMZla50osOnnNs52b9qvii+TXSwEOXf9OruXA8JGAdkf1z
+ vimBSzCAZp1BO08ZwLHmLhynyoiIIK5qNdDgpMita9JHiPpSsP3i4mVo9mU5GgCzYJ8VJNUCG14
+ bBRXR70gD3iI/d1ErY55WCdUTIUCo8
+X-Google-Smtp-Source: AGHT+IFDasuvie2a1VszHkUsoYyPbpkH1ZQkdpk+T5vpBDXvtO6YWzuFI/DI8WxkEsaYobE5C5ubMd/2aaON43UJt9I=
+X-Received: by 2002:a17:907:7f86:b0:ac3:1605:3805 with SMTP id
+ a640c23a62f3a-ac3302515afmr326642666b.33.1741963422429; Fri, 14 Mar 2025
+ 07:43:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/zYP64BpEXOCVz5e"
-Content-Disposition: inline
-In-Reply-To: <20250314081024.1035144-1-ziniu.wang_1@nxp.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250306002533.2380866-1-sjg@chromium.org>
+ <20250306002533.2380866-7-sjg@chromium.org>
+ <b3fab4fc-7e4f-4359-bf15-813158d16b80@gmx.de>
+In-Reply-To: <b3fab4fc-7e4f-4359-bf15-813158d16b80@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 14 Mar 2025 14:43:29 +0000
+X-Gm-Features: AQ5f1JrP-aM3BBs5da6jOK0zS_qRKeXPB0SrwkLqItiJCbG6FUH4wwwp49RSi-E
+Message-ID: <CAFLszThKCtNk5t93KTGo=mLGK497xhOjHu=qcAnqQPMy1cemjw@mail.gmail.com>
+Subject: Re: [PATCH v5 06/29] x86: Move the bootm state for zimage into cmd/
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,73 +92,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---/zYP64BpEXOCVz5e
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, 8 Mar 2025 at 05:07, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 3/6/25 01:25, Simon Glass wrote:
+> > Rather than holding the state in the implementation code, move it to the
+> > command code. The state is now passed to the implementation functions
+> > and can there (with future work) be pass in from bootstd, without going
+>
+> Nits
+> %s/pass/passsed/
+>
+> > through the commands.
+>
+> One of our (not yet achieved) development targets is to be able to build
+> without a command line interface.
 
-On Fri, Mar 14, 2025 at 04:10:24PM +0800, ziniu.wang_1@nxp.com wrote:
+This is actually possible with bootstd today, at least with some bootmeths.
 
-> From: Luke Wang <ziniu.wang_1@nxp.com>
->=20
-> Current mmc bootpart-resize cmd only support samsung emmc boot/rpmb
-> partition resizing. Add sandisk and micron emmc boot/rpmb partition
-> resizing support. The commands and parameters for resizing partitions
-> are different for each manufacturer. Select the corresponding function
-> according to cid.
->=20
-> Signed-off-by: Luke Wang <ziniu.wang_1@nxp.com>
-> ---
-[snip]
-> +	/* Set EXT_CSD[175] ERASE_GROUP_DEF to 0x01 */
-> +	err =3D mmc_switch(mmc, 0, 175, 0x01);
-> +	if (err)
-> +		goto error;
-> +
-> +	/* Set EXT_CSD[127:125] for boot partition size, [125] is low byte */
-> +	err =3D mmc_switch(mmc, 0, 125, bootsize);
+> Moving the bootm state to cmd/ sounds
+> like going into a contrary direction.
 
-We should define EXT_CSD_BOOT_SIZE_MULT to 125.
+It is passed from cmd/ to the implementation, so that (in future)
+bootstd can pass it in, without needing the cmd/ code.
 
-> +	if (err)
-> +		goto error;
-> +
-> +	err =3D mmc_switch(mmc, 0, 126, 0x00);
-> +	if (err)
-> +		goto error;
-> +
-> +	err =3D mmc_switch(mmc, 0, 127, 0x00);
-> +	if (err)
-> +		goto error;
-> +
-> +	/* Set EXT_CSD[155] PARTITION_SETTING_COMPLETE to 0x01 */
-> +	err =3D mmc_switch(mmc, 0, 155, 0x01);
+>
+> Maybe it is just the commit message that is not clear enough.
 
+Can you suggest an update?
 
-And if we don't have 126/127/155 defined today, we should use
-reasonable names for them too. Any other command numbers I missed as
-well please.
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >   arch/x86/include/asm/zimage.h | 22 +++++-----
+> >   arch/x86/lib/zimage.c         | 75 +++++++++++++++++------------------
+> >   cmd/bootflow.c                |  5 ++-
+> >   cmd/x86/zboot.c               | 20 ++++++----
+> >   include/bootm.h               |  8 +++-
+> >   5 files changed, 73 insertions(+), 57 deletions(-)
+> >
 
---=20
-Tom
+[..]
 
---/zYP64BpEXOCVz5e
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUPO8ACgkQFHw5/5Y0
-tyxNSAv8CrLckh8AxEmDPTuG6grS/QwxWJ4BiMvD+YxnnnUP8EecyfTSfTPEslM9
-Un1w41OxpQ9/tcz1ZuabNekd1KwLlbEpvnTGXJeM5yD81WZ+Ew+ffsMV1J61TT+X
-D/5qNaIU0M5PRF6FP6FIotMzyKK06DyVklSEiIL15bvuUn2XsNs4lLW1G85piUNm
-tnA2u/PJzYYW8l5i71kbKGNSgM5oREO7/zjSctI/NuNwZnkYo+P3/IzaxkRJk5Zi
-NNxdS8IJcK4kSv+TYHa5b7WRxcXVWf0UUTE4lc2K+T8HJWcjAaq1Eb3HGnCUT8i+
-UpxwerBMbP5Ky+WMWCHtNpEMTWtOkw3MyKj09b48e//TynQN6m0N8OaapYplMLia
-jv9d7th9xnFgRwD7Bt7TFpPB/nnmTmfWnDbByx/mTxmnb/WCwsfPOWsgQGYZWRYg
-QjkIW1/hzz5gCy0RUPUW+s+ZKbgWpTiqmkvKfASOV7B+bMWJmeg3NVIWVinjDyTp
-0gD+apbF
-=0OWp
------END PGP SIGNATURE-----
-
---/zYP64BpEXOCVz5e--
+Regards,
+SImon
