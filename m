@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18589C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A447C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:28:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 863B481C64;
-	Fri, 14 Mar 2025 15:27:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 285A581D5A;
+	Fri, 14 Mar 2025 15:28:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g37gY8I9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nt6LwIW6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FA8281C67; Fri, 14 Mar 2025 15:27:52 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 6F99D81D5A; Fri, 14 Mar 2025 15:28:01 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A2D980F9A
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:27:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F7D781DCC
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:27:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-4769f3e19a9so13551331cf.0
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:27:49 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7c55500cf80so169277985a.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:27:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741962469; x=1742567269; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741962476; x=1742567276; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KbEJ3ymQwEP6ha9Jz7JB3aWK6VG4EV2FaHgtdpN8YZQ=;
- b=g37gY8I9pnb8sYWO37OwHzP79+dUTReDFNvUlOeZGIBOJS7+AfckzS+vU79LLQKrlk
- 8ln8peeP0fd9PRYBwJcTwk4EqTrs56V5JAVKj8iFMMEmVJEg1o0ZTUCTQhWsIaVHVwR3
- 5NZAqL0AXlml1ZsGW9n6BwSFhORjO6kYnikaA=
+ bh=9J43Ba4zeldc9WIRPpX45Em5Q4tide2Qe/CKm/roKyg=;
+ b=nt6LwIW6sW4qoFY7Oj4xxwRXjl8w5P5CaPBxxm8Ums9bjDG7u1a4JZhcoUKZ+pDlQu
+ HuGhYIEzrtZmTuZbB8LCdm3bhfE0X5U46Tv9jQOyow5TWE/KNUKd/8tIgsIklCc2fSsW
+ GtgBlKROF4oTVJRezZHiApXPXmwNuYcjOYZVs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741962469; x=1742567269;
+ d=1e100.net; s=20230601; t=1741962476; x=1742567276;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KbEJ3ymQwEP6ha9Jz7JB3aWK6VG4EV2FaHgtdpN8YZQ=;
- b=aucDJmHSGdwnsUO9jdCsue5fs/2KVJaR7/fnrwgRwqNmeavCCqu/DBSam7VuiaIJaW
- PQo4f+54uW5m4cNJpANaFcU1uniVNyVv5EhvbFcU+nZA2IjNKbd7WPazEGqAtgQv7LXI
- yIKXH5PzaedQPaoGSot+HxYqTS55DsB2uLLElFLwXbXk7/yls/ZPuONnbsfetDOX/Y57
- 0k3ZIemJw8EcD7BHKAAHG0tPvC6dXra9xqUcWUccEybm6m+nd2H8DWvDIIa0QgUqXWJy
- 7x8Nia4umhMrFFuHXQXgUgtmd61lpK/7Jl/i0fEIh0lJFp7hKQV3K9pJFOUUxBVMNrJL
- ICHQ==
-X-Gm-Message-State: AOJu0YwfeCbRFV1UReZjancyfK4QARiFOhC+ohQ17CpRb36afgtGU22P
- RiBxKpKPUt/tyQSmdEl9MVpa4puhw5uI0HoMXJbobxWRhnSURk38/7i+Myti8LI=
-X-Gm-Gg: ASbGncv+ftqAMHxgVneCxk9O3EcsBCzeBUYVy1USdXiJ+4q3Ww7tz0qroMbVSZrXRwl
- fsgGGOHDMTXrg4k43LeBv53cBa3IMPlTqdWqw03NYk2q0xkv294bxeX0tf1GDocyCqNFngTj5MM
- aeguWXPLZmL0tRV2S2xzxmu0hAmMa2XC+P1paor2y8GMmiZxg2YFLe3oQjiD0W3hm0istvkBizk
- xzJpv8YslMuV10bTAvVWDVpJuwQPSiXYcSVPqzsph2Ct35+RpZSTQ/5W3usqDhLuXvZRyutVkMY
- 8SLBWMnnhFDJOHrizDf3fOXCQY77gIbFt02kVg0odUgfHPuml8m0wiFw
-X-Google-Smtp-Source: AGHT+IHsI44SPdVJ/tsj0CyypFqj/aUWTJp3+DHpxdgHq75RuB9aohUnqJG/hWLljdmNpSv6XduRqw==
-X-Received: by 2002:a05:6214:5284:b0:6e6:6089:4978 with SMTP id
- 6a1803df08f44-6eaeaa5d9e6mr33261666d6.24.1741962468829; 
- Fri, 14 Mar 2025 07:27:48 -0700 (PDT)
+ bh=9J43Ba4zeldc9WIRPpX45Em5Q4tide2Qe/CKm/roKyg=;
+ b=k6FC+CK2Krja57++MfdHKXOcJAcCrBX0rZ7D5VoYcOrAz3Py/C8znnHql0rb+tO/bJ
+ IJ0s92vAttdMq2WiSO6wckBX7kjCn+NssWRyJFoc5DffUjTGqbtVnvVC3Yp9CQtL9mPt
+ PYVMjBVRITn+0DRc5rHS1AerfJRTgk6Enc95JxZNGVmapGE3B2HLVCZRNFlVp/hZgPqC
+ ni3ASfHRTtQVdWlxLrg2DXGt6ZGr394Chnrso41vVpo7Lh80LT03Wlwnyq7WZ+VUhxO6
+ y+5tIE+exHUlpnU62hRk+mrw8J+k9urB7vLovEo2mt2bBiQ5h+BLFZzQKPknEhZ9zPnr
+ B9OQ==
+X-Gm-Message-State: AOJu0YxVCoDkUKEKU0NPH0WAEY648pcrRXk+bb/Z2GcOM2wjI0p0TcRH
+ 50eoXgufPBn/IY+F01lMnPorJccvfTS/OZp7NlzHj2E3T84nCcEmP4BicFFZAAo=
+X-Gm-Gg: ASbGncttesQl6Gt1FZtTkrg68oSQqT4AUXNV7Et6uD1SHQEipFVXrlBjjhABine+dvK
+ lgswKVjfXYnXm0OQUEEeaaj0byRsRw8GTfWduh+eLRGe847DvKDX8ASWD9BiJFUJ/wv6wfg5nDb
+ d664oZ1uz+D3ff4R5D8kgHyewLauNWMcaAtIt9iBZvaSfwPzL1n1x5iX5iaTeg9CO6TIyCdCOHi
+ C4edipBga2F+Pm1IN6FdxY3bqL3aid5+Qcj3dvsMozE7GzZe+OGmFnMmMdVvPpbcYTAolm6iS8y
+ BN5kvwx1tax+zjjEdwm9hG6pKK39NPdomPyBxyZg11I1Eg==
+X-Google-Smtp-Source: AGHT+IEJOSKJJ5fyfBiHLyHPr8JFOVSJeAoDp1M2tHdfNow0g+HFCYfcqlf/SVyUjB4ErAIxxWKpNg==
+X-Received: by 2002:a05:620a:8903:b0:7c5:4463:29a7 with SMTP id
+ af79cd13be357-7c57c90a73amr409452585a.37.1741962476487; 
+ Fri, 14 Mar 2025 07:27:56 -0700 (PDT)
 Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6eade3349dbsm24283426d6.75.2025.03.14.07.27.47
+ af79cd13be357-7c573da455dsm257935285a.115.2025.03.14.07.27.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 07:27:48 -0700 (PDT)
-Date: Fri, 14 Mar 2025 08:27:44 -0600
+ Fri, 14 Mar 2025 07:27:56 -0700 (PDT)
+Date: Fri, 14 Mar 2025 08:27:52 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
@@ -75,15 +75,15 @@ Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v2 07/11] fs: exfat: Add U-Boot porting layer
-Message-ID: <20250314142744.GM2640854@bill-the-cat>
+Subject: Re: [PATCH v2 11/11] test_fs: Add exfat tests
+Message-ID: <20250314142752.GN2640854@bill-the-cat>
 References: <20250313191348.170054-1-marex@denx.de>
- <20250313191348.170054-8-marex@denx.de>
+ <20250313191348.170054-12-marex@denx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="++MpyoAZvWEppUbC"
+ protocol="application/pgp-signature"; boundary="tt/mjFejjPTcmxyu"
 Content-Disposition: inline
-In-Reply-To: <20250313191348.170054-8-marex@denx.de>
+In-Reply-To: <20250313191348.170054-12-marex@denx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,105 +102,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---++MpyoAZvWEppUbC
+--tt/mjFejjPTcmxyu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 13, 2025 at 08:13:23PM +0100, Marek Vasut wrote:
+On Thu, Mar 13, 2025 at 08:13:27PM +0100, Marek Vasut wrote:
 
-> Add U-Boot adjustments to the libexfat code and integrate
-> the result into U-Boot filesystem layer. This provides full
-> read-write exfat support for U-Boot available via generic
-> filesystem interface.
+> Add tests for the exfat filesystem. These tests are largely an
+> extension of the FS_GENERIC tests with the following notable
+> exceptions.
 >=20
-> FS_DIRENT_NAME_LEN is increased to 1024 in case exfat is
-> enabled, because EXFAT can use UTF16 names, which do not
-> fit into current FS_DIRENT_NAME_LEN. To avoid affecting
-> every configuration, increase FS_DIRENT_NAME_LEN only in
-> case EXFAT is enabled.
+> The filesystem image for exfat tests is generated using combination
+> of exfatprogs mkfs.exfat and python fattools. The fattols are capable
+> of generating exfat filesystem images too, but this is not used, the
+> fattools are only used as a replacement for dosfstools 'mcopy' and
+> 'mdir', which are used to insert files and directories into existing
+> fatfs images and list existing fatfs images respectively, without the
+> need for superuser access to mount such images.
 >=20
-> Example usage via sandbox, assuming disk.img with one exfat partition:
->=20
-> Drive info:
-> $ ./u-boot -Tc 'host bind 0 ../disk.img ; host info 0'
-> dev       blocks  blksz label           path
->   0       262144    512 0               ../disk.img
->=20
-> List files:
-> $ ./u-boot -Tc 'host bind 0 ../disk.img ; ls host 0:1 /api'
->       475   Kconfig
->       230   Makefile
->      1873   README
->      ...
-> 10 file(s), 0 dir(s)
->=20
-> Load and checksum a file:
-> $ ./u-boot -Tc 'host bind 0 ../disk.img ; load host 0:1 $loadaddr .config=
- ; \
->                 crc32 $loadaddr $filesize'
-> 56724 bytes read in 1 ms (54.1 MiB/s)
-> crc32 for 00000000 ... 0000dd93 =3D=3D> b2e847c9
->=20
-> $ crc32 .config
-> b2e847c9
->=20
-> Load .config file to RAM, store the file into FS as /newconfig,
-> load the /newconfig into RAM and checksum the file:
-> $ ./u-boot -Tc 'host bind 0 ../disk.img ; load host 0:1 $loadaddr .config=
- ; \
-> 		save host 0:1 $loadaddr /newconfig $filesize ; \
-> 		load host 0:1 0x10000 /newconfig ; \
-> 		crc32 0x10000 $filesize'
-> 56724 bytes read in 1 ms (54.1 MiB/s)
-> 56724 bytes written in 0 ms
-> 56724 bytes read in 0 ms
-> crc32 for 00010000 ... 0001dd93 =3D=3D> b2e847c9
->=20
-> Remove file 3.txt and create new directory /newdir:
-> $ ./u-boot -Tc 'host bind 0 ../disk.img ; ls host 0:1 / ; \
->                 rm host 0:1 3.txt ; mkdir host 0:1 /newdir ; \
-> 		ls host 0:1 /'
-> ...
->         0   1.txt
->         0   2.txt
->         0   3.txt
->         0   4.txt
->         0   5.txt
->=20
-> 7 file(s), 4 dir(s)
-> ...
->         0   1.txt
->         0   2.txt
->             newdir/
->         0   4.txt
->         0   5.txt
->=20
-> 6 file(s), 5 dir(s)
+> The exfat filesystem has no filesystem specific command, there is only
+> the generic filesystem command interface, therefore check_ubconfig()
+> has to special case exfat and skip check for CONFIG_CMD_EXFAT and
+> instead check for CONFIG_FS_EXFAT.
 >=20
 > Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+[snip]
+> diff --git a/test/py/tests/test_fs/fstest_helpers.py b/test/py/tests/test=
+_fs/fstest_helpers.py
+> index c1447b4d43e..8f2e1fcf47d 100644
+> --- a/test/py/tests/test_fs/fstest_helpers.py
+> +++ b/test/py/tests/test_fs/fstest_helpers.py
+> @@ -9,6 +9,8 @@ def assert_fs_integrity(fs_type, fs_img):
+>      try:
+>          if fs_type =3D=3D 'ext4':
+>              check_call('fsck.ext4 -n -f %s' % fs_img, shell=3DTrue)
+> +        if fs_type =3D=3D 'exfat':
+> +            check_call('fsck.exfat -n %s' % fs_img, shell=3DTrue)
+>          elif fs_type in ['fat12', 'fat16', 'fat32']:
+>              check_call('fsck.fat -n %s' % fs_img, shell=3DTrue)
+>      except CalledProcessError:
 
-Acked-by: Tom Rini <trini@konsulko.com>
+This should be elif not if? Not a big deal if there's nothing else
+needing a v3 however. Everything else looks good, thanks.
 
 --=20
 Tom
 
---++MpyoAZvWEppUbC
+--tt/mjFejjPTcmxyu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUPN0ACgkQFHw5/5Y0
-tyyGngv/dR3vi90flBT8B19XTBX91jvNaXYEbEt9H/qI37H78BmoZut37OZ1gVAN
-JeU44yYXzpID1SltacAvdVq8VAdwvv0qbrXcyoqkROPPF+gEnT90gyK3VvRoDfBh
-6Jk5PhT/WSgBSRvfW4HNILjXu27TAm1XpwcB41vAhgDA7i5X/cZjYIiswkgLHEA2
-sY6YVrDedDc3kFU+PalQ/QsUQ2Fi1QtRSpPaRrkHZY0aLZLKBLJHEaC0axNEtXiz
-t+zRlfBY/4UWOJru4HY7pbm3OwQL9ywdcQcYWwUzIIQWAc5UaFuwCk8cmsqSDl13
-NAa+OP6DWXCoQKC4JCdvUsOZk5PzRXKroJpmHMwee7O+Y8ljGE6FIuTsscxU24NA
-huDI6F7r453Wp9uBYVH2JeDRkhogrCDBjrMmuZ/MmlMSN85cmC2kpEzB19NT+Do8
-xU+Ku29QIiZoG8jkaOoIHX4WrfgiIycR2x/fsjspSrWSxn2eSTCneXW1KQe+U+lA
-/jsBf2AV
-=dNCo
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfUPOgACgkQFHw5/5Y0
+tyzLfQwAo6StUiCdflYbcheJw9GcamHas2hX0Js3uf3LFp2GW4bFtfoG99J+ruya
+W+JKZcuhGt4ufeOcnX3MyfQ/kfOwrYMPMhkpznysWtwrYOyFYXpPfllVCepLB9sK
+aykTBG/+kUSnN66rbw6C+XPWEfTLCKpTK2cEQY28L8dYOmyj5jC3YgCT0Oq6itJ1
+WJWrngB0fKH4pfm3aw1ULp1WaUF0K8UjLAzhAwrbdLvhtYUnLLRR8x2W2lvtiUq/
+gksepGWrWrQ7VFNiEcRLkz3+dkb6k0vxVVvmRSXEpmkbSqLJzrFWcXUZcw4k3Odq
+uVYUip/QIfcgvVt7woJG9kH3DWkJaRZFM+HblNvv8hneVadMBdcJxOtKSRw0jMxI
+/jzPrUt7Vv430O+rvwQSU3JO5TzcSgvd2DxYiqzfI3sfsXUKcGa2ufcIvnxVZ/sY
+EJ3jbo2wGztjzLFv//tU2PbXrqMYtUZPCUld3N5sChBQvSiiNUMmo6Sk1uZdi+8F
+wYyLapva
+=s0O0
 -----END PGP SIGNATURE-----
 
---++MpyoAZvWEppUbC--
+--tt/mjFejjPTcmxyu--
