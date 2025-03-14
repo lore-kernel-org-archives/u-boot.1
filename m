@@ -4,53 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED438C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 13:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FD38C282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 13:43:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14D6381A10;
-	Fri, 14 Mar 2025 14:28:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 530638198F;
+	Fri, 14 Mar 2025 14:43:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="HSj0wNJC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Lajp/Y1g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4144181B42; Fri, 14 Mar 2025 14:28:40 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E965E81A0E
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 14:28:37 +0100 (CET)
+ id C812E81A0E; Fri, 14 Mar 2025 14:43:26 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 72A1880F9C
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 14:43:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id E29631F93A;
- Fri, 14 Mar 2025 14:28:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1741958917;
- bh=0KfcEakarwDzrxJrmprn9td4jgkELT5OVxGWU/7ZBhI=; h=From:To:Subject;
- b=HSj0wNJCGcOWBsJyQfKDFfvhUEOSA3iVpSnuIh6/xH0PXvWOwTiSocB0aRO7ORnw5
- 9qy7uRLE2BHcAYD4etwXZT9x58hRCOkrLi0QeiOtI2X82ifLyPKze0KorGamOekkJ8
- NPJeMFfHSo06JHRJLJ39ZRhSQ58OASkfqmrI8AMPZ8Ru9uQqLOybEhhGqEKIIYIm6V
- ssIK4V9HwIEvHDFqNMfa1khe6shcLwhLwmHUXJSQEVK6NuBkHm4CcuqoDL61Q8SHwS
- ERHp4FURlPYu0pc1z6iYDqtCezMQ8DEqxIJpNgKurlab1VsUr5VqrahFK3Rzku0zR5
- fxoSyYujs9hwA==
-Date: Fri, 14 Mar 2025 14:28:32 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Stefan Eichenberger <eichest@gmail.com>, trini@konsulko.com
-Cc: stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
- n-francis@ti.com, emanuele.ghidoli@toradex.com,
- francesco.dolcini@toradex.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
- restore
-Message-ID: <20250314132832.GA25644@francesco-nb>
-References: <20250314100734.23777-1-eichest@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52EDhMO62176817
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 14 Mar 2025 08:43:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741959802;
+ bh=+XRWaUGQoZaPZipRTOoCn2Qa1E1U9gqLsCzi2+UxogU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Lajp/Y1gGk8/cFncIvRZ37UgF6MYyWWN8UU8QNXiHt+EF09ZHdHhnoz7/9PWKgXLl
+ muo5DXua0fKY4nv2BKbrSjjsX55D+7Y38znQzWZersqLaZ9Lm0di6P5lUeN0iIkNA+
+ MCXBuBZ3MSPsIEoe+lixC4j9aRgukKYEVuL6DsWE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52EDhMTp097696
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 14 Mar 2025 08:43:22 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Mar 2025 08:43:22 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 14 Mar 2025 08:43:22 -0500
+Received: from [10.24.69.179] ([10.24.69.179])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52EDhKUS114244;
+ Fri, 14 Mar 2025 08:43:20 -0500
+Message-ID: <768e6b56-b55a-834b-4abc-41b9cee701e1@ti.com>
+Date: Fri, 14 Mar 2025 19:13:19 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250314100734.23777-1-eichest@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [EXTERNAL] Re: [RFC PATCH 1/4] cmd: fuse: Remove custom string
+ functions
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <k-malarvizhi@ti.com>,
+ <kamlesh@ti.com>
+References: <20250313115517.1181829-1-h-vm@ti.com>
+ <20250313115517.1181829-2-h-vm@ti.com>
+ <20250313161539.GE2640854@bill-the-cat>
+From: Harsha Vardhan V M <h-vm@ti.com>
+In-Reply-To: <20250313161539.GE2640854@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,37 +85,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
 
-On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrote:
-> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> 
-> The get_ram_size() function fails to restore the original RAM data when
-> the data cache is enabled. This issue was observed on an AM625 R5 SPL
-> with 512MB of RAM and is a regression that became visible with
-> commit bc07851897bd ("board: ti: Pull redundant DDR functions to a common
-> location and Fixup DDR size when ECC is enabled").
-> 
-> Observed boot failure messages:
->   Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
->   Authentication passed
->   Starting ATF on ARM64 core...
-> 
-> The system then hangs. This indicates that without a data cache flush,
-> data in the cache is not coherent with RAM, preventing the system from
-> booting. This was verified by printing the content of this address when
-> the issue occurs.
-> 
-> Add a data cache flush after each restore operation to resolve this
-> issue.
-> 
-> Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to a common location and Fixup DDR size when ECC is enabled")
-> Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when cache is enabled")
-> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-This patch is for master, and it is hopefully fixing the last remaining
-issue that is preventing our board to boot with current U-Boot.
+On 13/03/25 21:45, Tom Rini wrote:
+> On Thu, Mar 13, 2025 at 05:25:14PM +0530, Harsha Vardhan V M wrote:
+> 
+>> Remove custom string functions and replace them with normal string
+>> functions. Remove the custom strtou32 and replace it with str2long.
+>>
+>> Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
+> 
+> Thanks for doing this.
+> 
+>> ---
+>>   cmd/fuse.c | 27 ++++++++-------------------
+>>   1 file changed, 8 insertions(+), 19 deletions(-)
+>>
+>> diff --git a/cmd/fuse.c b/cmd/fuse.c
+>> index 598ef496a43..9f489570634 100644
+>> --- a/cmd/fuse.c
+>> +++ b/cmd/fuse.c
+>> @@ -15,17 +15,6 @@
+>>   #include <vsprintf.h>
+>>   #include <linux/errno.h>
+>>   
+>> -static int strtou32(const char *str, unsigned int base, u32 *result)
+>> -{
+>> -	char *ep;
+>> -
+>> -	*result = simple_strtoul(str, &ep, base);
+>> -	if (ep == str || *ep != '\0')
+>> -		return -EINVAL;
+>> -
+>> -	return 0;
+>> -}
+>> -
+>>   static int confirm_prog(void)
+>>   {
+>>   	puts("Warning: Programming fuses is an irreversible operation!\n"
+>> @@ -54,14 +43,14 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
+>>   	argc -= 2 + confirmed;
+>>   	argv += 2 + confirmed;
+>>   
+>> -	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
+>> -			strtou32(argv[1], 0, &word))
+>> +	if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
+>> +			!(str2long(argv[1], (ulong *)&word)))
+> 
+> I didn't know we had "str2long" which is a differently rarely used
+> function. Why not just simple_strtoul inline? Am I missing something?
+> Thanks.
+> 
 
-Thanks,
-Francesco
-
+We cannot use simple_strtoul inline directly because we need proper 
+error checking to ensure the simple_strtoul conversion was successful. 
+The str2long function is a wrapper around simple_strtoul and the 
+necessary error checks. Hence, using str2long here.
+Thanks.
