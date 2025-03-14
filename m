@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D043FC35FF1
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 06:47:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63C9C28B2F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 08:44:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54AAD819B1;
-	Fri, 14 Mar 2025 07:47:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DF31E8186D;
+	Fri, 14 Mar 2025 09:44:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fQzdbEGl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gMopR9PW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3900781760; Fri, 14 Mar 2025 07:47:45 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 4A11A81951; Fri, 14 Mar 2025 09:44:35 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F13B81870
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:47:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDCDB81760
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 09:44:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ab78e6edb99so262199566b.2
- for <u-boot@lists.denx.de>; Thu, 13 Mar 2025 23:47:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43cef035a3bso12440925e9.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 01:44:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741934861; x=1742539661; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bs5vDH3Pao9BaGk8XeKtoTrSrgUrLCFEpX3GQArSZiE=;
- b=fQzdbEGlrl5YCejPASJtCrexrHectFUqaR9X2RMCEORs9FPVIFK0+kFVJI7gKBnSra
- v/5poyxCQfZ4XZaexXE1L+TxQKdEX6LDSz0BSz0sQeKWoX9b1Z0rn1SsxPg+OrVWMBP0
- 3LQ/ZrGzBTMlHBqDfgj8rchKIVPO5E354ACLrKH8XUuAkNKn91tpmEzaErQjH8wVv4a2
- iL0ng5L4o7oksQQy/SjSko3G0D+tmRmG/Z6z0fEZyUoD+vlRBvaJhJ1VvdtfL47yguyl
- jb9eaoF0RfHWQpzYahmI4VhumRnLainbTAATo778HSir9P/0C/ghge2CRzI+ufHx/wbS
- Y+Mw==
+ d=linaro.org; s=google; t=1741941872; x=1742546672; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Pw9X+Y5X/erdPczz6VGYcNjee8wP/w0c60tn2vgGJY8=;
+ b=gMopR9PW5q1Mr0mPiuu8BHaF2h4/fjZsekHlqulc85niWd3ZhIoIZeQfYd9iliQU/x
+ wjutWsSKOcD5fJbrv83MyQP9IBhMRQshHL/9aLsv1U+RxHPd7Av9+WOfJ5OXvlzf52WB
+ iGlaQkdiNLvTIzpv/nOC+27eIdXa7RtOYuyj9/DqQBql/VyeSTxB0odI+WrbP9U75rHN
+ CXQqGF/g6moZaPYJfECuKj6Kxp0T9JdNGw46mW+YP3Nny8H9rrReE7tVIXxdMZkMC1Ja
+ b93WwpkBHg80BKzr5ZpqIooTPUThYCKNr0d8zuaT1BYPjO8mW4+G2EESUtcwXNVEJd8v
+ Zo2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741934861; x=1742539661;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Bs5vDH3Pao9BaGk8XeKtoTrSrgUrLCFEpX3GQArSZiE=;
- b=Boqpl/1BtCW1psIKdtOfxBaM7FQNs7BsRgTWCqnkRkgk3onb7ofgo7Ptd7VfBCG/Tz
- nXlE5iV9A8Xi3EFjSPHwqjdAx4e9OHd0vfwjBAYZtWO+UbHH2qJ+AYYziPngR+qFbZq0
- osUlbi3cHdXxMoGMF+G1NMYapnnFvUK4AgkKsUn/boKke9N/wKfcSM+07JE6TTOuUI01
- 1/Pa9WY3oBQK1i4SmUMrK9fMRcJ7UDotIWLfOFe0+2jMGCQeRbhgTcthvPWQu+u+0FKT
- 9PbC6nUZjiFPszaN/IlE8PRgQN/QbJ7xzNdXDIVH7+6HkKa7X3QURURWp6GMuDFSqm9f
- ZddQ==
-X-Gm-Message-State: AOJu0YzTQfc0smFTPW6aR6enDkTwxXliBTET6kmZm3DfmuAm+TtGd2RS
- SiTYzwDoi4QGmcNIVC2CQC6tZ0TnUPJ3H0JqXKRI2lpKmu/2rrQHiiM30A==
-X-Gm-Gg: ASbGnctVbqqmy8RbW2zH39hmtUyQLsrNiL1z1cQdz7k+Q/ZaxZdpVITnuTChRnunWu0
- z5RfC7x6L+TIC3H16uGkDpSKcbJo8tFH5cvUpMCEAI01W9uHL2EFJUxqMrIXdPSjDjQBfhITkaq
- zRuSXmw0uqXr7YTSRy+pDHQ6NvDPsQT6mdPl1opxm5yfEpVNVXxuOzcZdk5b5U0jQMEuuzLTVf2
- mcUHHjkM31lKoiyc324bLTUj+hP975gsUmY5MovX6SXNh9ROaTxz4qEIZXSPfyfU352LLJX1Plt
- jYtfcc3ZxS6UGa6BIV9PeYJ6uJQ1j8Md+JUp
-X-Google-Smtp-Source: AGHT+IEI+JORcs24XFKRuB1AVvn4zBaG953mBos+xony8rl5BXVlb3gSgvJs35wRD0t8JB5skU0uLw==
-X-Received: by 2002:a17:907:2d24:b0:ac2:622f:39c1 with SMTP id
- a640c23a62f3a-ac3302c574emr107246566b.22.1741934860892; 
- Thu, 13 Mar 2025 23:47:40 -0700 (PDT)
-Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac314a49c37sm179471766b.158.2025.03.13.23.47.40
+ d=1e100.net; s=20230601; t=1741941872; x=1742546672;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Pw9X+Y5X/erdPczz6VGYcNjee8wP/w0c60tn2vgGJY8=;
+ b=A/bs/y70zsOJib3CVIgwlo1Ilaav+6JSPiw196cVYkzoEwJ4cUCvSl/fOUDR34y3mA
+ CfJfEtJe2lrkCydmo50NApyLvrmY7hIJ58ng6UCFPjCPNpJpxyKzNqAp4dvsbuDFxr0y
+ uWeOEgUUsJOSD25bi0d9LWHOoqQwvhekeZ7tqhQN9P+nCRXyGxFkYCV3+xPqRNxhoGUu
+ cLk2g0476DcrnjkQuy4AM7fktGIcBEYlPOgjHDmt1xG4sCgMbuzh1F6zzXEeDLbobzfh
+ V/ma70Xa8JeSxTbsftl1yWHgUYlyz96fZdPlX3MXcYb0mVZ/RJaJ2y4twM1LUe9PNLWZ
+ wofg==
+X-Gm-Message-State: AOJu0Yw4ck5HZkePGX+qH5eOmHQbvzvaR/E5K+FY2J/fyLKl2pZZUdtg
+ GDEhI2ztRtMyfc/J2ALvPRmzAj5FdV2VfzD3NQaEsqpWnANPb3DOfFJjZatJIBeijt2oKd+3m9R
+ KE6E=
+X-Gm-Gg: ASbGncsLYJ0YGY4mS/TXvafV+3AAg4MM/88CR7dG4CGi/dgKoCDkvpRC4Bn5fGl7s49
+ flkbD6SiCYyN5GEk4KVUoWJmDzeu6NxcNZhPt7rwPgrvWTme4ZzECNsvUKYjxxwN6rKTlQabBjg
+ FkO46pLZb675+xmq+zehxmOpf43uZ1CdXB+mzYQsRsLBkalE0zcTXksZBS8BST0Trf9V9SkUbs1
+ CGW7in6qVffxwZeCi8MlM6VcYC4UkzAW/e9hsvtcrqS9ZzzLtrhGARHJkHFCVJdnzHa44X6NjvU
+ GpktFW+upFnVungwtxNLYDLc+ooqvQw1E6jnkGV9pkSt0y3Z5A4k4Q==
+X-Google-Smtp-Source: AGHT+IFgE1iiIjRieTCtNsmL1aBJR73pqsUyc6DthbIjdOPFBlUM9dQky+H71AZ3253PUjMQOvhIOw==
+X-Received: by 2002:a05:600c:154c:b0:43c:fd27:a216 with SMTP id
+ 5b1f17b1804b1-43d1ecff43amr18227455e9.23.1741941870422; 
+ Fri, 14 Mar 2025 01:44:30 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:74e6:8b31:6e12:36a6])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d1fd6b2acsm10691675e9.0.2025.03.14.01.44.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 23:47:40 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Simon Glass <sjg@chromium.org>, Anton Bambura <jenneron@protonmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] video: edid: guard standard timings EDID expansion
- behind kconfig
-Date: Fri, 14 Mar 2025 08:47:20 +0200
-Message-ID: <20250314064720.5767-2-clamor95@gmail.com>
+ Fri, 14 Mar 2025 01:44:30 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: lwip: do_ping() should return CMD_RET_FAILURE when no
+ device
+Date: Fri, 14 Mar 2025 09:44:10 +0100
+Message-ID: <20250314084411.4165751-1-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250314064720.5767-1-clamor95@gmail.com>
-References: <20250314064720.5767-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,83 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since EDID only indicates supported standard timings, a large table with
-detailed timing information is necessary, consuming significant space. To
-mitigate this, the table is made configurable via kconfig, allowing it to
-be excluded when not needed.
+do_ping() expects ping_loop() to return a negative value on error, so
+that it can propagate it to the caller as CMD_RET_FAILURE. This is not
+the case when no ethernet device is found, so fix that.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- common/edid.c         | 6 ++++++
- drivers/video/Kconfig | 6 ++++++
- 2 files changed, 12 insertions(+)
+ net/lwip/ping.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/edid.c b/common/edid.c
-index e2ac7100a88..e5aa4ca494f 100644
---- a/common/edid.c
-+++ b/common/edid.c
-@@ -16,6 +16,7 @@
- #include <linux/ctype.h>
- #include <linux/string.h>
+diff --git a/net/lwip/ping.c b/net/lwip/ping.c
+index 200a702bbb5..c586a96806d 100644
+--- a/net/lwip/ping.c
++++ b/net/lwip/ping.c
+@@ -121,7 +121,7 @@ static int ping_loop(struct udevice *udev, const ip_addr_t *addr)
  
-+#if CONFIG_IS_ENABLED(I2C_EDID_STANDARD)
- #define TIMING(c, ha, hfp, hbp, hsl, va, vfp, vbp, vsl, f)	\
- 	.pixelclock = { (c), (c), (c) },			\
- 	.hactive = { (ha), (ha), (ha) },			\
-@@ -206,6 +207,7 @@ static const struct display_timing dmt_timings[] = {
- 	{ TIMING(556188000, 4096, 8, 32, 40, 2160, 48, 8, 6,
- 		 DISPLAY_FLAGS_HSYNC_HIGH | DISPLAY_FLAGS_VSYNC_LOW) },
- };
-+#endif
+ 	netif = net_lwip_new_netif(udev);
+ 	if (!netif)
+-		return CMD_RET_FAILURE;
++		return -ENODEV;
  
- int edid_check_info(struct edid1_info *edid_info)
- {
-@@ -417,6 +419,7 @@ static bool edid_get_standard_timing(struct edid1_info *edid, int i, unsigned in
- 	return false;
- }
+ 	printf("Using %s device\n", udev->name);
  
-+#if CONFIG_IS_ENABLED(I2C_EDID_STANDARD)
- static bool edid_find_valid_standard_timing(struct edid1_info *buf,
- 					    struct display_timing *timing,
- 					    bool (*mode_valid)(void *priv,
-@@ -446,6 +449,7 @@ static bool edid_find_valid_standard_timing(struct edid1_info *buf,
- 
- 	return found;
- }
-+#endif
- 
- int edid_get_timing_validate(u8 *buf, int buf_size,
- 			     struct display_timing *timing,
-@@ -493,10 +497,12 @@ int edid_get_timing_validate(u8 *buf, int buf_size,
- 		}
- 	}
- 
-+#if CONFIG_IS_ENABLED(I2C_EDID_STANDARD)
- 	/* Look for timing in Standard Timings */
- 	if (!found)
- 		found = edid_find_valid_standard_timing(edid, timing, mode_valid,
- 							mode_valid_priv);
-+#endif
- 
- 	if (!found)
- 		return -EINVAL;
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index b1ef73f3e5c..11d17076a96 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -721,6 +721,12 @@ config I2C_EDID
- 	help
- 	   This enables library for accessing EDID data from an LCD panel.
- 
-+config I2C_EDID_STANDARD
-+	bool "Enable standard timings EDID library expansion"
-+	depends on I2C_EDID
-+	help
-+	   This enables standard timings expansion for EDID data from an LCD panel.
-+
- config DISPLAY
- 	bool "Enable Display support"
- 	depends on DM
 -- 
 2.43.0
 
