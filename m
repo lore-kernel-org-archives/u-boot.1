@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77FBDC282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 19:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A39CC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 19:00:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F5A181F30;
+	by phobos.denx.de (Postfix) with ESMTP id 9F49B81F7B;
 	Fri, 14 Mar 2025 20:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kCBLlbtt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iY8F/kbK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3D6881F4E; Fri, 14 Mar 2025 20:00:19 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id B007780F9A; Fri, 14 Mar 2025 20:00:21 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5F481F32
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 20:00:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 677D580F9A
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 20:00:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-39127512371so1573486f8f.0
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 12:00:17 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cf06eabdaso427195e9.2
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 12:00:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741978817; x=1742583617; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1741978819; x=1742583619; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4OhGuTxm1bRKu0kRC4zn5po3MiSj5HdbJoKMzRr5m9s=;
- b=kCBLlbttZWGaEGwsYdsyOMFR6mF+yQMYGhzwUbynSYccTnJDtBQXUzwtqk/LtY7Kdi
- U5kic0TnXYF3s8hYAtPeGzZkrRXca4Tjmtl2bmAGWlt0hEpHAVjOE2Sw/9YgBrK9KyAE
- 6nI55Bq8P4VcoR9qfkwjhf4LhGU35hNciTgbRMVv/lHpsKF4r5Boj8wHKJDqSNwWOFQb
- rzKHAVO8MBc1JNkf5La7JMgh7BkjYVqY0OpTs7cGaTw2SFBWSgEbl0LS3JuKCwRqyPlE
- 97pS0dN5k904CRLJ3HUTwn62/MpdPv6NAwd03756uZjoxZSNftz31h4je3rZxYCsBacV
- I6HQ==
+ :reply-to; bh=A5KKhX/RUnWHtYstF0fEdvmlKGZNGHo5qayTshecuHg=;
+ b=iY8F/kbK+wIh0loOmGFnoph6ujdAY55mSdc4tBDuc4YgbfiWbuq6fSTMwycLgm0aMG
+ 9Hewu1SUlcTm0XD3TNChpb+HdEh1980+VzwYMCfMnG8qw0InjGRpTPXduFBcj8QBbyH4
+ LexnWyDdMIhfxxxVBc4NEKQraXqAa1Fu5dZO1HW8wmyyr3CQvojcAGaiwBtv8As/j+oF
+ 0yUZ5pVaXf9T/6Ov7lFhhV1eij1L8EVMI33M63dtm+ciUh2hupFtxZKECyORQEFhusqP
+ mW+ApNIClZrVlh7koxmVudjEewPvngf8XeR65G+nR1hg2EQqDS7KGTjkn2rOpfSBw76H
+ FpGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741978817; x=1742583617;
+ d=1e100.net; s=20230601; t=1741978819; x=1742583619;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4OhGuTxm1bRKu0kRC4zn5po3MiSj5HdbJoKMzRr5m9s=;
- b=dAUhMSF0H5y+3JTLpwNKuFNkDo1GWi4adfBq7G9DRLfu+1oGy5G6qOzURHdZjDLB7n
- tQu6drdxUU4skc0xYM/vTIfv+ABEEdxZ0jcKlwrzyoysAhimIzZ5NrUxHBZBjjHwokR3
- MiWuyFKL8dQ0dMcif7cQxSjT9TuKTQxb8PSAVWDtGmHktMRxrPkr+F9li+qT3CK+XW10
- rPBkoBqSqvkZRnElMprErtuzs+o+oUTObkiCOSlY+HLUt8UtBKBSpqMehPJERA1C0pXv
- J/HetQHqOr2dQvCilKvFEqDNmoV1NGOwoeqEuSMbWJQra2gDamhHEuu+b/g/GaTTsyeI
- +eJA==
+ bh=A5KKhX/RUnWHtYstF0fEdvmlKGZNGHo5qayTshecuHg=;
+ b=VTgB6q6BXbM+dh0xod3KjoopUHqhA45q3OKJnev1JSTdSFRfoxk9PWf9jAtmTuQONg
+ Gb8LVa8H22vXuCc2fbKg3PJMfVYVPT4/Znt+PJe3y80P1fb6PUGt4vn/y6U29AthICY1
+ ZFxl6EFDl9kI8BNcqmnvUDGH/9X/BinqCdlXCxXQW5af0auRZDN3nESYvq9MdP3w6mFJ
+ VRcHJKWY6kpgmNZXlbO50G4VRPYk1w/SHdz3QrsxL0Cbdk3fk9ukcQKZaA5hmoOmCcjP
+ zmQfUXYE+/zuqieEsRttMHS63YId/XZgo2TSzGpTv6dR5cSLLNLWl7Yyd/OdHcEsMRaL
+ eo1w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuz6LV4YasWJSHpXMy2NtXM2PKDvVEZZ71zlYrdAXvfq0pAjWzBh8XFZkkygkZQYpG0ZR5I6I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXT2UNIgCCwn7MyLH8uRpleTDcOytaU0z62IZBXDG9ifaYtWRh
- SC9NsPnVGlCyJ0VFvRQNp1Mh3GO73MnXYN9wxhM0Rk2kIS2JHyYxBLQMEw==
-X-Gm-Gg: ASbGncuExa01E6C/L4nYxyXP4pendi2iTQIk3eGyydQaRNfgm72ZdattlZmQBlHfg9L
- Xtmj1TL7xpro+O0nERgOpj3RDSKs6V58NVxGWLmp1eYJaz4kFy3FfhK0HqtzGjPm/g8kCmsEUkD
- d/L0Xb3X6wfzq2Ox66R8Wtx9YHcvxLqRMf607FbJWaVnAfhpQX7QHBXprroswRrqFXYjoTRpPLe
- 1JmYDDVz24tMENzeJoZzfxgahllAr4FBlv3XxYoGulsFElMKEdcKo7MwO5vVz99TA5JitijMW/7
- eZJngR/EEGQMonovofj3o9Kvs+fbcZ8A2im0tyBdCOXq9He8bp07BAaswRpqsLo5CCEsRtTNHXS
- s/dpSAaU+lsfbDw==
-X-Google-Smtp-Source: AGHT+IGKwUlltNof/Uv9WBxhmSJroSHH+0UtQbagG2gGyzyy7CUKNaJp4Js2pqEOKhX9FnEPNczung==
-X-Received: by 2002:a5d:584a:0:b0:391:2192:ccd6 with SMTP id
- ffacd0b85a97d-3971ee44b62mr5747286f8f.39.1741978816753; 
- Fri, 14 Mar 2025 12:00:16 -0700 (PDT)
+ AJvYcCWsGEGe6sZXoEcXp+fQ+OIkh3OkvU6zf5O9LCxpofQ+oU5l9a5IVxGOS2+c6hOKOu+bY1VB358=@lists.denx.de
+X-Gm-Message-State: AOJu0YyveQVOKc/QBM1JMniCViSjXGONbaO36LAkF7gLP43FGMQfctqE
+ /6cYx7IT33KjEegR3j89+aMlGAmdXLHRzwzn0Lz081c3CVjxy/dZ
+X-Gm-Gg: ASbGncsoUAEps6YXGtpHlUsFryJLX0269Weo+sBQLX7eK0uWYca8gLffIknhOme40gA
+ Litks099Q8kvPsJBWFTNePE7gjfZKDHtnl+juwzQ46IwKJZarCebXmK4NuyUXIpgPDWgNjJ9qh3
+ blIHt3ut6++Xs1MoVJrmHGxlrZZN9DBVPGuOnUlBoOfWiR8ymZnN9dVuKjnfOYVWtP2OrbV2sIg
+ zKPDBc2Fvz1Y9jZh3eTdiex21tzT0kyGAxgMImXsmJ5KK0xHv9+wbxV+ZW1GvB5FtnC+rvCWxg5
+ 3/XSICNm7YbjLVwfEE4HMO5WV8Pyw9rMnbRwF2Nq9CsdR1UOSFxKwavjrubWWAl/l25De7rd1s3
+ ipt4SsS/BDjJhZQ==
+X-Google-Smtp-Source: AGHT+IEixBC26RUsW3GvZY/4UhYjmZrEgR6sLtu/QGxSSdH79a0TpXO5IhUoGWhrjh7DeKLeYnaKFA==
+X-Received: by 2002:a05:6000:400f:b0:390:d82d:6d4f with SMTP id
+ ffacd0b85a97d-39720d47024mr3723243f8f.52.1741978818553; 
+ Fri, 14 Mar 2025 12:00:18 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-129.ip49.fastwebnet.it.
  [93.34.90.129]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-43d1ffc3e67sm25547965e9.17.2025.03.14.12.00.15
+ 5b1f17b1804b1-43d1ffc3e67sm25547965e9.17.2025.03.14.12.00.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 12:00:16 -0700 (PDT)
+ Fri, 14 Mar 2025 12:00:18 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
@@ -80,9 +80,9 @@ To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
  AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 1/6] airoha: Add initial support for Airoha AN7581 SoC
-Date: Fri, 14 Mar 2025 19:59:21 +0100
-Message-ID: <20250314185941.27834-2-ansuelsmth@gmail.com>
+Subject: [PATCH v2 2/6] clk: airoha: Add support for Airoha AN7581 SoC clock
+Date: Fri, 14 Mar 2025 19:59:22 +0100
+Message-ID: <20250314185941.27834-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250314185941.27834-1-ansuelsmth@gmail.com>
 References: <20250314185941.27834-1-ansuelsmth@gmail.com>
@@ -104,408 +104,489 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial support for Airoha AN7581 SoC. This adds the initial Kconfig
-and Makefile entry for the SoC, an U-Boot specific DTSI and initial config
-for it. Also add the initial code for CPU and RAM initialization.
+Add support for Airoha AN7581 SoC clock driver. This mainly needed for
+eMMC support to correctly get the current clock applied.
+
+Based on the Linux clk-en7523.c but majorly reworked for U-Boot that
+doesn't require CCF subsystem.
+
+Major modification, support for set_rate, realtime get_rate and split
+for reset part to a different driver.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/Kconfig                     |  9 ++++
- arch/arm/Makefile                    |  1 +
- arch/arm/dts/an7581-u-boot.dtsi      | 18 +++++++
- arch/arm/dts/en7581-evb-u-boot.dtsi  | 11 ++++
- arch/arm/mach-airoha/Kconfig         | 32 ++++++++++++
- arch/arm/mach-airoha/Makefile        |  5 ++
- arch/arm/mach-airoha/an7581/Makefile |  3 ++
- arch/arm/mach-airoha/an7581/init.c   | 47 +++++++++++++++++
- arch/arm/mach-airoha/cpu.c           | 20 +++++++
- board/airoha/an7581/MAINTAINERS      |  5 ++
- board/airoha/an7581/Makefile         |  3 ++
- board/airoha/an7581/an7581_rfb.c     | 16 ++++++
- configs/an7581_evb_defconfig         | 78 ++++++++++++++++++++++++++++
- include/configs/an7581.h             | 19 +++++++
- 14 files changed, 267 insertions(+)
- create mode 100644 arch/arm/dts/an7581-u-boot.dtsi
- create mode 100644 arch/arm/dts/en7581-evb-u-boot.dtsi
- create mode 100644 arch/arm/mach-airoha/Kconfig
- create mode 100644 arch/arm/mach-airoha/Makefile
- create mode 100644 arch/arm/mach-airoha/an7581/Makefile
- create mode 100644 arch/arm/mach-airoha/an7581/init.c
- create mode 100644 arch/arm/mach-airoha/cpu.c
- create mode 100644 board/airoha/an7581/MAINTAINERS
- create mode 100644 board/airoha/an7581/Makefile
- create mode 100644 board/airoha/an7581/an7581_rfb.c
- create mode 100644 configs/an7581_evb_defconfig
- create mode 100644 include/configs/an7581.h
+ drivers/clk/Makefile            |   1 +
+ drivers/clk/airoha/Makefile     |   3 +
+ drivers/clk/airoha/clk-airoha.c | 438 ++++++++++++++++++++++++++++++++
+ 3 files changed, 442 insertions(+)
+ create mode 100644 drivers/clk/airoha/Makefile
+ create mode 100644 drivers/clk/airoha/clk-airoha.c
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index da6f1174934..4729ac39257 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -600,6 +600,13 @@ choice
- 	prompt "Target select"
- 	default TARGET_HIKEY
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index fe0e49f6112..8411205ee04 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
+ obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
  
-+config ARCH_AIROHA
-+	bool "Airoha SoCs"
-+	select DM
-+	select OF_CONTROL
-+	help
-+	  Support for the Airoha soc.
-+
- config ARCH_AT91
- 	bool "Atmel AT91"
- 	select GPIO_EXTRA_HEADER
-@@ -2251,6 +2258,8 @@ config SYS_KWD_CONFIG
- 	  Path within the source directory to the kwbimage.cfg file to use
- 	  when packaging the U-Boot image for use.
- 
-+source "arch/arm/mach-airoha/Kconfig"
-+
- source "arch/arm/mach-apple/Kconfig"
- 
- source "arch/arm/mach-aspeed/Kconfig"
-diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index 7334e79965f..5ecadb2ef1b 100644
---- a/arch/arm/Makefile
-+++ b/arch/arm/Makefile
-@@ -51,6 +51,7 @@ PLATFORM_CPPFLAGS += $(arch-y) $(tune-y)
- 
- # Machine directory name.  This list is sorted alphanumerically
- # by CONFIG_* macro name.
-+machine-$(CONFIG_ARCH_AIROHA)		+= airoha
- machine-$(CONFIG_ARCH_APPLE)		+= apple
- machine-$(CONFIG_ARCH_ASPEED)		+= aspeed
- machine-$(CONFIG_ARCH_AT91)		+= at91
-diff --git a/arch/arm/dts/an7581-u-boot.dtsi b/arch/arm/dts/an7581-u-boot.dtsi
+ obj-y += adi/
++obj-y += airoha/
+ obj-y += analogbits/
+ obj-y += imx/
+ obj-$(CONFIG_CLK_JH7110) += starfive/
+diff --git a/drivers/clk/airoha/Makefile b/drivers/clk/airoha/Makefile
 new file mode 100644
-index 00000000000..0316b73f3a5
+index 00000000000..1744c5f7236
 --- /dev/null
-+++ b/arch/arm/dts/an7581-u-boot.dtsi
-@@ -0,0 +1,18 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/ {
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		atf-reserved-memory@80000000 {
-+			no-map;
-+			reg = <0x0 0x80000000 0x0 0x40000>;
-+		};
-+	};
-+};
-+
-+&uart1 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/en7581-evb-u-boot.dtsi b/arch/arm/dts/en7581-evb-u-boot.dtsi
-new file mode 100644
-index 00000000000..ebd3b8b4958
---- /dev/null
-+++ b/arch/arm/dts/en7581-evb-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/ {
-+	/* When running as a first-stage bootloader this isn't filled in automatically */
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x80000000 0x0 0x20000000>;
-+	};
-+};
-+
-+#include "an7581-u-boot.dtsi"
-diff --git a/arch/arm/mach-airoha/Kconfig b/arch/arm/mach-airoha/Kconfig
-new file mode 100644
-index 00000000000..be3562ae3ff
---- /dev/null
-+++ b/arch/arm/mach-airoha/Kconfig
-@@ -0,0 +1,32 @@
-+if ARCH_AIROHA
-+
-+config SYS_VENDOR
-+	default "airoha"
-+
-+choice
-+	prompt "Airoha board select"
-+
-+config TARGET_AN7581
-+	bool "Airoha AN7581 SoC"
-+	select ARM64
-+	help
-+	  The Airoha EN7581 is a ARM-based SoC with a quad-core Cortex-A7
-+	  including NEON and GPU, Mali-450 graphics, several DDR3 options,
-+	  crypto engine, built-in Wi-Fi / Bluetooth combo chip, JPEG decoder,
-+	  video interfaces supporting HDMI and MIPI, and video codec support.
-+	  Peripherals include Gigabit Ethernet, switch, USB3.0 and OTG, PCIe,
-+	  I2S, PCM, S/PDIF, UART, SPI, I2C, IR TX/RX, and PWM.
-+
-+endchoice
-+
-+config SYS_SOC
-+	default "an7581" if TARGET_AN7581
-+
-+config SYS_BOARD
-+	default "an7581" if TARGET_AN7581
-+
-+config SYS_CONFIG_NAME
-+	default "an7581" if TARGET_AN7581
-+
-+endif
-+
-diff --git a/arch/arm/mach-airoha/Makefile b/arch/arm/mach-airoha/Makefile
-new file mode 100644
-index 00000000000..215a300373b
---- /dev/null
-+++ b/arch/arm/mach-airoha/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y	+= cpu.o
-+
-+obj-$(CONFIG_TARGET_AN7581) += an7581/
-diff --git a/arch/arm/mach-airoha/an7581/Makefile b/arch/arm/mach-airoha/an7581/Makefile
-new file mode 100644
-index 00000000000..886ab7e4eb9
---- /dev/null
-+++ b/arch/arm/mach-airoha/an7581/Makefile
++++ b/drivers/clk/airoha/Makefile
 @@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y += init.o
-diff --git a/arch/arm/mach-airoha/an7581/init.c b/arch/arm/mach-airoha/an7581/init.c
++# SPDX-License-Identifier: GPL-2.0
++# Core
++obj-$(CONFIG_ARCH_AIROHA) += clk-airoha.o
+diff --git a/drivers/clk/airoha/clk-airoha.c b/drivers/clk/airoha/clk-airoha.c
 new file mode 100644
-index 00000000000..cefe9c6db9e
+index 00000000000..96d120feba7
 --- /dev/null
-+++ b/arch/arm/mach-airoha/an7581/init.c
-@@ -0,0 +1,47 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/drivers/clk/airoha/clk-airoha.c
+@@ -0,0 +1,438 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Based on the Linux clk-en7523.c but majorly reworked
++ * for U-Boot that doesn't require CCF subsystem.
++ *
++ * Major modification, support for set_rate, realtime
++ * get_rate and split for reset part to a different driver.
++ *
++ * Author: Lorenzo Bianconi <lorenzo@kernel.org> (original driver)
++ *	   Christian Marangi <ansuelsmth@gmail.com>
++ */
 +
-+#include <fdtdec.h>
-+#include <init.h>
-+#include <asm/armv8/mmu.h>
-+#include <asm/system.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <dm/devres.h>
++#include <dm/device_compat.h>
++#include <dm/lists.h>
++#include <regmap.h>
++#include <syscon.h>
 +
-+int print_cpuinfo(void)
-+{
-+	printf("CPU:   Airoha AN7581\n");
-+	return 0;
-+}
++#include <dt-bindings/clock/en7523-clk.h>
 +
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
++#define REG_GSW_CLK_DIV_SEL		0x1b4
++#define REG_EMI_CLK_DIV_SEL		0x1b8
++#define REG_BUS_CLK_DIV_SEL		0x1bc
++#define REG_SPI_CLK_DIV_SEL		0x1c4
++#define REG_SPI_CLK_FREQ_SEL		0x1c8
++#define REG_NPU_CLK_DIV_SEL		0x1fc
 +
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
++#define REG_NP_SCU_PCIC			0x88
++#define REG_NP_SCU_SSTR			0x9c
++#define REG_PCIE_XSI0_SEL_MASK		GENMASK(14, 13)
++#define REG_PCIE_XSI1_SEL_MASK		GENMASK(12, 11)
++#define REG_CRYPTO_CLKSRC2		0x20c
 +
-+void reset_cpu(ulong addr)
-+{
-+	psci_system_reset();
-+}
++#define EN7581_MAX_CLKS			9
 +
-+static struct mm_region an7581_mem_map[] = {
-+	{
-+		/* DDR */
-+		.virt = 0x80000000UL,
-+		.phys = 0x80000000UL,
-+		.size = 0x80000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
-+	}, {
-+		.virt = 0x00000000UL,
-+		.phys = 0x00000000UL,
-+		.size = 0x20000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		0,
++struct airoha_clk_desc {
++	int id;
++	const char *name;
++	u32 base_reg;
++	u8 base_bits;
++	u8 base_shift;
++	union {
++		const unsigned int *base_values;
++		unsigned int base_value;
++	};
++	size_t n_base_values;
++
++	u16 div_reg;
++	u8 div_bits;
++	u8 div_shift;
++	u16 div_val0;
++	u8 div_step;
++	u8 div_offset;
++};
++
++struct airoha_clk_priv {
++	struct regmap *chip_scu_map;
++	struct airoha_clk_soc_data *data;
++};
++
++struct airoha_clk_soc_data {
++	u32 num_clocks;
++	const struct airoha_clk_desc *descs;
++};
++
++static const u32 gsw_base[] = { 400000000, 500000000 };
++static const u32 slic_base[] = { 100000000, 3125000 };
++
++static const u32 emi7581_base[] = { 540000000, 480000000, 400000000, 300000000 };
++static const u32 bus7581_base[] = { 600000000, 540000000 };
++static const u32 npu7581_base[] = { 800000000, 750000000, 720000000, 600000000 };
++static const u32 crypto_base[] = { 540000000, 480000000 };
++static const u32 emmc7581_base[] = { 200000000, 150000000 };
++
++static const struct airoha_clk_desc en7581_base_clks[EN7581_MAX_CLKS] = {
++	[EN7523_CLK_GSW] = {
++		.id = EN7523_CLK_GSW,
++		.name = "gsw",
++
++		.base_reg = REG_GSW_CLK_DIV_SEL,
++		.base_bits = 1,
++		.base_shift = 8,
++		.base_values = gsw_base,
++		.n_base_values = ARRAY_SIZE(gsw_base),
++
++		.div_bits = 3,
++		.div_shift = 0,
++		.div_step = 1,
++		.div_offset = 1,
++	},
++	[EN7523_CLK_EMI] = {
++		.id = EN7523_CLK_EMI,
++		.name = "emi",
++
++		.base_reg = REG_EMI_CLK_DIV_SEL,
++		.base_bits = 2,
++		.base_shift = 8,
++		.base_values = emi7581_base,
++		.n_base_values = ARRAY_SIZE(emi7581_base),
++
++		.div_bits = 3,
++		.div_shift = 0,
++		.div_step = 1,
++		.div_offset = 1,
++	},
++	[EN7523_CLK_BUS] = {
++		.id = EN7523_CLK_BUS,
++		.name = "bus",
++
++		.base_reg = REG_BUS_CLK_DIV_SEL,
++		.base_bits = 1,
++		.base_shift = 8,
++		.base_values = bus7581_base,
++		.n_base_values = ARRAY_SIZE(bus7581_base),
++
++		.div_bits = 3,
++		.div_shift = 0,
++		.div_step = 1,
++		.div_offset = 1,
++	},
++	[EN7523_CLK_SLIC] = {
++		.id = EN7523_CLK_SLIC,
++		.name = "slic",
++
++		.base_reg = REG_SPI_CLK_FREQ_SEL,
++		.base_bits = 1,
++		.base_shift = 0,
++		.base_values = slic_base,
++		.n_base_values = ARRAY_SIZE(slic_base),
++
++		.div_reg = REG_SPI_CLK_DIV_SEL,
++		.div_bits = 5,
++		.div_shift = 24,
++		.div_val0 = 20,
++		.div_step = 2,
++	},
++	[EN7523_CLK_SPI] = {
++		.id = EN7523_CLK_SPI,
++		.name = "spi",
++
++		.base_reg = REG_SPI_CLK_DIV_SEL,
++
++		.base_value = 400000000,
++
++		.div_bits = 5,
++		.div_shift = 8,
++		.div_val0 = 40,
++		.div_step = 2,
++	},
++	[EN7523_CLK_NPU] = {
++		.id = EN7523_CLK_NPU,
++		.name = "npu",
++
++		.base_reg = REG_NPU_CLK_DIV_SEL,
++		.base_bits = 2,
++		.base_shift = 8,
++		.base_values = npu7581_base,
++		.n_base_values = ARRAY_SIZE(npu7581_base),
++
++		.div_bits = 3,
++		.div_shift = 0,
++		.div_step = 1,
++		.div_offset = 1,
++	},
++	[EN7523_CLK_CRYPTO] = {
++		.id = EN7523_CLK_CRYPTO,
++		.name = "crypto",
++
++		.base_reg = REG_CRYPTO_CLKSRC2,
++		.base_bits = 1,
++		.base_shift = 0,
++		.base_values = crypto_base,
++		.n_base_values = ARRAY_SIZE(crypto_base),
++	},
++	[EN7581_CLK_EMMC] = {
++		.id = EN7581_CLK_EMMC,
++		.name = "emmc",
++
++		.base_reg = REG_CRYPTO_CLKSRC2,
++		.base_bits = 1,
++		.base_shift = 12,
++		.base_values = emmc7581_base,
++		.n_base_values = ARRAY_SIZE(emmc7581_base),
 +	}
 +};
-+struct mm_region *mem_map = an7581_mem_map;
-diff --git a/arch/arm/mach-airoha/cpu.c b/arch/arm/mach-airoha/cpu.c
-new file mode 100644
-index 00000000000..a578e964664
---- /dev/null
-+++ b/arch/arm/mach-airoha/cpu.c
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0
 +
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <init.h>
-+#include <wdt.h>
-+#include <dm/uclass-internal.h>
-+
-+int arch_cpu_init(void)
++static u32 airoha_clk_get_base_rate(const struct airoha_clk_desc *desc, u32 val)
 +{
-+	icache_enable();
++	if (!desc->base_bits)
++		return desc->base_value;
++
++	val >>= desc->base_shift;
++	val &= (1 << desc->base_bits) - 1;
++
++	if (val >= desc->n_base_values)
++		return 0;
++
++	return desc->base_values[val];
++}
++
++static u32 airoha_clk_get_div(const struct airoha_clk_desc *desc, u32 val)
++{
++	if (!desc->div_bits)
++		return 1;
++
++	val >>= desc->div_shift;
++	val &= (1 << desc->div_bits) - 1;
++
++	if (!val && desc->div_val0)
++		return desc->div_val0;
++
++	return (val + desc->div_offset) * desc->div_step;
++}
++
++static int airoha_clk_enable(struct clk *clk)
++{
++	struct airoha_clk_priv *priv = dev_get_priv(clk->dev);
++	struct airoha_clk_soc_data *data = priv->data;
++	int id = clk->id;
++
++	if (id > data->num_clocks)
++		return -EINVAL;
 +
 +	return 0;
 +}
 +
-+void enable_caches(void)
++static int airoha_clk_disable(struct clk *clk)
 +{
-+	/* Enable D-cache. I-cache is already enabled in start.S */
-+	dcache_enable();
++	return 0;
 +}
-diff --git a/board/airoha/an7581/MAINTAINERS b/board/airoha/an7581/MAINTAINERS
-new file mode 100644
-index 00000000000..28ec2fbf2ea
---- /dev/null
-+++ b/board/airoha/an7581/MAINTAINERS
-@@ -0,0 +1,5 @@
-+AN7581
-+M:	Christian Marangi <ansuelsmth@gmail.com>
-+S:	Maintained
-+N:      airoha
-+N:      an7581
-diff --git a/board/airoha/an7581/Makefile b/board/airoha/an7581/Makefile
-new file mode 100644
-index 00000000000..70f8db7bce9
---- /dev/null
-+++ b/board/airoha/an7581/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
 +
-+obj-y	+= an7581_rfb.o
-diff --git a/board/airoha/an7581/an7581_rfb.c b/board/airoha/an7581/an7581_rfb.c
-new file mode 100644
-index 00000000000..aa73679d929
---- /dev/null
-+++ b/board/airoha/an7581/an7581_rfb.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Author: Christian Marangi <ansuelsmth@gmail.com>
-+ */
-+
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int board_init(void)
++static ulong airoha_clk_get_rate(struct clk *clk)
 +{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
++	struct airoha_clk_priv *priv = dev_get_priv(clk->dev);
++	struct airoha_clk_soc_data *data = priv->data;
++	const struct airoha_clk_desc *desc;
++	struct regmap *map = priv->chip_scu_map;
++	int id = clk->id;
++	u32 reg, val;
++	ulong rate;
++	int ret;
++
++	if (id > data->num_clocks) {
++		dev_err(clk->dev, "Invalid clk ID %d\n", id);
++		return 0;
++	}
++
++	desc = &data->descs[id];
++
++	ret = regmap_read(map, desc->base_reg, &val);
++	if (ret) {
++		dev_err(clk->dev, "Failed to read reg for clock %s\n",
++			desc->name);
++		return 0;
++	}
++
++	rate = airoha_clk_get_base_rate(desc, val);
++
++	reg = desc->div_reg ? desc->div_reg : desc->base_reg;
++	ret = regmap_read(map, reg, &val);
++	if (ret) {
++		dev_err(clk->dev, "Failed to read reg for clock %s\n",
++			desc->name);
++		return 0;
++	}
++
++	rate /= airoha_clk_get_div(desc, val);
++
++	return rate;
++}
++
++static int airoha_clk_search_rate(const struct airoha_clk_desc *desc, int div,
++				  ulong rate)
++{
++	int i;
++
++	/* Single base rate */
++	if (!desc->base_bits) {
++		if (rate != desc->base_value / div)
++			goto err;
++
++		return 0;
++	}
++
++	/* Check every base rate with provided divisor */
++	for (i = 0; i < desc->n_base_values; i++)
++		if (rate == desc->base_values[i] / div)
++			return i;
++
++err:
++	return -EINVAL;
++}
++
++static ulong airoha_clk_set_rate(struct clk *clk, ulong rate)
++{
++	struct airoha_clk_priv *priv = dev_get_priv(clk->dev);
++	struct airoha_clk_soc_data *data = priv->data;
++	const struct airoha_clk_desc *desc;
++	struct regmap *map = priv->chip_scu_map;
++	int div_val, base_val;
++	u32 reg, val, mask;
++	int id = clk->id;
++	int div;
++	int ret;
++
++	if (id > data->num_clocks) {
++		dev_err(clk->dev, "Invalid clk ID %d\n", id);
++		return 0;
++	}
++
++	desc = &data->descs[id];
++
++	if (!desc->base_bits && !desc->div_bits) {
++		dev_err(clk->dev, "Can't set rate for fixed clock %s\n",
++			desc->name);
++		return 0;
++	}
++
++	if (!desc->div_bits) {
++		/* Divisor not supported, just search in base rate */
++		div_val = 0;
++		base_val = airoha_clk_search_rate(desc, 1, rate);
++		if (base_val < 0) {
++			dev_err(clk->dev, "Invalid rate for clock %s\n",
++				desc->name);
++			return 0;
++		}
++	} else {
++		div_val = 0;
++
++		/* Check if div0 satisfy the request */
++		if (desc->div_val0) {
++			base_val = airoha_clk_search_rate(desc, desc->div_val0,
++							  rate);
++			if (base_val >= 0) {
++				div_val = 0;
++				goto apply;
++			}
++
++			/* Skip checking first divisor val */
++			div_val = 1;
++		}
++
++		/* Simulate rate with every divisor supported */
++		for (div_val = div_val + desc->div_offset;
++		     div_val < BIT(desc->div_bits) - 1; div_val++) {
++			div = div_val * desc->div_step;
++
++			base_val = airoha_clk_search_rate(desc, div, rate);
++			if (base_val >= 0)
++				break;
++		}
++
++		if (div_val == BIT(desc->div_bits) - 1) {
++			dev_err(clk->dev, "Invalid rate for clock %s\n",
++				desc->name);
++			return 0;
++		}
++	}
++
++apply:
++	if (desc->div_bits) {
++		reg = desc->div_reg ? desc->div_reg : desc->base_reg;
++
++		mask = (BIT(desc->div_bits) - 1) << desc->div_shift;
++		val = div_val << desc->div_shift;
++
++		ret = regmap_update_bits(map, reg, mask, val);
++		if (ret) {
++			dev_err(clk->dev, "Failed to update div reg for clock %s\n",
++				desc->name);
++			return 0;
++		}
++	}
++
++	if (desc->base_bits) {
++		mask = (BIT(desc->base_bits) - 1) << desc->base_shift;
++		val = base_val << desc->base_shift;
++
++		ret = regmap_update_bits(map, desc->base_reg, mask, val);
++		if (ret) {
++			dev_err(clk->dev, "Failed to update reg for clock %s\n",
++				desc->name);
++			return 0;
++		}
++	}
++
++	return rate;
++}
++
++const struct clk_ops airoha_clk_ops = {
++	.enable = airoha_clk_enable,
++	.disable = airoha_clk_disable,
++	.get_rate = airoha_clk_get_rate,
++	.set_rate = airoha_clk_set_rate,
++};
++
++static int airoha_clk_probe(struct udevice *dev)
++{
++	struct airoha_clk_priv *priv = dev_get_priv(dev);
++	ofnode chip_scu_node;
++
++	chip_scu_node = ofnode_by_compatible(ofnode_null(),
++					     "airoha,en7581-chip-scu");
++	if (!ofnode_valid(chip_scu_node))
++		return -EINVAL;
++
++	priv->chip_scu_map = syscon_node_to_regmap(chip_scu_node);
++	if (IS_ERR(priv->chip_scu_map))
++		return PTR_ERR(priv->chip_scu_map);
++
++	priv->data = (void *)dev_get_driver_data(dev);
 +
 +	return 0;
 +}
-diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
-new file mode 100644
-index 00000000000..f09b5b603a2
---- /dev/null
-+++ b/configs/an7581_evb_defconfig
-@@ -0,0 +1,78 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_AIROHA=y
-+CONFIG_TEXT_BASE=0x81E00000
-+CONFIG_SYS_MALLOC_F_LEN=0x4000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_ENV_OFFSET=0x7c000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="airoha/en7581-evb"
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x81800000
-+CONFIG_BUILD_TARGET="u-boot.bin"
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DEFAULT_FDT_FILE="en7581-evb"
-+CONFIG_SYS_PBSIZE=1049
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_SYS_MAXARGS=8
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_BOOTMENU=y
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_XIMG is not set
-+CONFIG_CMD_BIND=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_SPI=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_LOG=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_REGMAP=y
-+CONFIG_SYSCON=y
-+CONFIG_CLK=y
-+CONFIG_DMA=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_EON=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHYLIB=y
-+CONFIG_PHY=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_RAM=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_SHA512=y
-diff --git a/include/configs/an7581.h b/include/configs/an7581.h
-new file mode 100644
-index 00000000000..64f04c9d9a5
---- /dev/null
-+++ b/include/configs/an7581.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Configuration for Airoha AN7581
-+ */
 +
-+#ifndef __AN7581_H
-+#define __AN7581_H
++static const struct airoha_clk_soc_data en7581_data = {
++	.num_clocks = ARRAY_SIZE(en7581_base_clks),
++	.descs = en7581_base_clks,
++};
 +
-+#include <linux/sizes.h>
++static const struct udevice_id airoha_clk_ids[] = {
++	{ .compatible = "airoha,en7581-scu",
++	  .data = (ulong)&en7581_data,
++	},
++	{ }
++};
 +
-+#define CFG_SYS_UBOOT_BASE		CONFIG_TEXT_BASE
-+
-+#define CFG_SYS_INIT_RAM_ADDR           CONFIG_TEXT_BASE
-+#define CFG_SYS_INIT_RAM_SIZE           SZ_2M
-+
-+/* DRAM */
-+#define CFG_SYS_SDRAM_BASE		0x80000000
-+
-+#endif
++U_BOOT_DRIVER(airoha_clk) = {
++	.name = "clk-airoha",
++	.id = UCLASS_CLK,
++	.of_match = airoha_clk_ids,
++	.probe = airoha_clk_probe,
++	.priv_auto = sizeof(struct airoha_clk_priv),
++	.ops = &airoha_clk_ops,
++};
 -- 
 2.48.1
 
