@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55484C28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 04:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D7DC28B2F
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 04:51:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 820178168B;
-	Fri, 14 Mar 2025 05:02:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4BA8580F4C;
+	Fri, 14 Mar 2025 05:51:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DqnmySyr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oELqS+Rd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9277281760; Fri, 14 Mar 2025 05:02:29 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 86FD680F6B; Fri, 14 Mar 2025 05:51:18 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0090C80F4C
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:02:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04BDD808A2
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 05:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52E42PDj1575592
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52E4pBnc2043982
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 13 Mar 2025 23:02:25 -0500
+ Thu, 13 Mar 2025 23:51:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741924945;
- bh=uKRkdSxmYhKDqy1vBoL/x8VWZ2v8F2flYaeP94B4I3g=;
- h=Date:To:CC:Subject:From:References:In-Reply-To;
- b=DqnmySyrJBitXOPJocJ4b/P0YIA8kIVRsiqKv8dH2Q7XhApQx6z78wguQNsNzz0OX
- vNUu60oyKMSp9IgYuwN0p2/sU2WN6bn2XQEGAkDDcLSenWl8bpHrmnpfM+b04NnEFs
- kGcJ4Xp34pcRZQHUrYTFnnupLRrUUZDl0vT+wYjg=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52E42PGq023236
+ s=ti-com-17Q1; t=1741927871;
+ bh=a1SP0lFW1ZTiRpmV0CI8dQBH0QP0WSfiPlyipnbu9VY=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=oELqS+RdKO4kadMhdOmRdj8nwUpRU4V8Z4mIBMVncDPT7rKdx4a3hDvIps35Iu3Bl
+ p6kjsyBrSB23MrPvZD5t8+d+aXHCjiZDBx3TH+VFimflOan2Gy8mBKAjQMrMw3511g
+ N4dK46kXQga5bTjKD/k39OrIjvqT15yJYroGGRL0=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52E4pBMe018100
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Mar 2025 23:02:25 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 13 Mar 2025 23:51:11 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Mar 2025 23:02:25 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 23:51:11 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Mar 2025 23:02:24 -0500
+ Frontend Transport; Thu, 13 Mar 2025 23:51:11 -0500
 Received: from localhost (a0543016.dhcp.ti.com [172.24.227.196])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52E42O0X031152;
- Thu, 13 Mar 2025 23:02:24 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52E4pATL081204;
+ Thu, 13 Mar 2025 23:51:11 -0500
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 14 Mar 2025 09:32:23 +0530
-Message-ID: <D8FOUVZ7WGH4.38DARW47YMG7@ti.com>
-To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: Re: [PATCH v4] spl: remove usage of CMD_BOOT[IZ] from image parsing
+Date: Fri, 14 Mar 2025 10:21:10 +0530
+Message-ID: <D8FPW8AY1U12.2MPS0YXJXMTJ7@ti.com>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [PATCH v2] config: falcon: move CFG_SYS_SPI_* to Kconfig
 From: Anshul Dalal <anshuld@ti.com>
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
 X-Mailer: aerc 0.17.0
-References: <20250313032842.1189977-1-anshuld@ti.com>
-In-Reply-To: <20250313032842.1189977-1-anshuld@ti.com>
+References: <20250311044414.3155688-1-anshuld@ti.com>
+In-Reply-To: <20250311044414.3155688-1-anshuld@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,124 +79,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Mar 13, 2025 at 8:58 AM IST, Anshul Dalal wrote:
-> Using CMD_* configs from spl doesn't make logical sense. Therefore this
-> patch replaces the checks for CMD_BOOT[IZ] with newly added configs
-> SPL_HAS_BOOT[IZ].
+On Tue Mar 11, 2025 at 10:14 AM IST, Anshul Dalal wrote:
+> CFG_SYS_SPI_* are used in falcon boot to specify the offsets and size of
+> the respective payloads. This patch moves them to Kconfig keeping the
+> values consistent for each of the affected boards.
 >
-> An imply clause has been added for CMD_BOOTZ to avoid breaking configs
-> that rely on CMD_BOOTZ in falcon boot. There is no such need for
-> CMD_BOOTI since it's already enabled by default for the platforms that
-> support the image format.
->
-> More info:
-> https://lore.kernel.org/u-boot/20250310135544.GV2640854@bill-the-cat/
->
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
 > Signed-off-by: Anshul Dalal <anshuld@ti.com>
 > ---
-> Changes in v4:
->  * Don't set SPL_HAS_BOOTI for sandbox by default
->  * Updated prompts for SPL_HAS_BOOT[IZ]
->  * Removed check for SPL_HAS_FRAMEWORK from Makefile
-> v3: https://lore.kernel.org/u-boot/20250312124757.789013-1-anshuld@ti.com=
-/
-> Changes in v3:
->  * Add imply clause for CMD_BOOTZ to enable SPL_HAS_BOOTZ
->  * Fix broken check for bootz_setup
-> v2: https://lore.kernel.org/u-boot/20250312094241.629707-1-anshuld@ti.com=
-/
-> Changes in v2:
->  * Add SPL_HAS_BOOT[IZ] configs
-> v1: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.co=
-m/
-> ---
->  arch/arm/lib/Makefile |  6 ++----
->  cmd/Kconfig           |  1 +
->  common/spl/Kconfig    | 13 +++++++++++++
->  common/spl/spl.c      |  5 +++--
->  4 files changed, 19 insertions(+), 6 deletions(-)
->
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index 1c95dd6fed2..e409f7a7947 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -35,10 +35,8 @@ obj-$(CONFIG_CMD_BOOTM) +=3D bootm.o
->  obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o zimage.o
->  else
->  obj-$(CONFIG_$(PHASE_)FRAMEWORK) +=3D spl.o
-> -ifdef CONFIG_SPL_FRAMEWORK
-> -obj-$(CONFIG_CMD_BOOTI) +=3D image.o
-> -obj-$(CONFIG_CMD_BOOTZ) +=3D zimage.o
-> -endif
-> +obj-$(CONFIG_SPL_HAS_BOOTI) +=3D image.o
-> +obj-$(CONFIG_SPL_HAS_BOOTZ) +=3D zimage.o
->  obj-$(CONFIG_OF_LIBFDT) +=3D bootm-fdt.o
->  endif
->  ifdef CONFIG_ARM64
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index a04fcaa0e08..9f2ba4d02f8 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -352,6 +352,7 @@ config BOOTM_ELF
-> =20
->  config CMD_BOOTZ
->  	bool "bootz"
-> +	imply SPL_HAS_BOOTZ
->  	help
->  	  Boot the Linux zImage
-> =20
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 21a5cefee7a..49eb513f923 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1153,6 +1153,19 @@ config SPL_OS_BOOT
->  	  Enable booting directly to an OS from SPL.
->  	  for more info read doc/README.falcon
-> =20
-> +config SPL_HAS_BOOTZ
-> +	bool "Allow booting a zImage style Linux kernel from SPL"
-> +	depends on SPL_OS_BOOT
-> +	help
-> +	  Boot a linux zimage from memory in falcon boot.
-> +
-> +config SPL_HAS_BOOTI
-> +	bool "Allow booting an Image style Linux kernel from SPL"
-> +	depends on SPL_OS_BOOT
-> +	default y if ARM64 || RISCV
-> +	help
-> +	  Boot an uncompressed linux kernel image from memory in falcon boot.
-> +
->  config SPL_PAYLOAD_ARGS_ADDR
->  	hex "Address in memory to load 'args' file for Falcon Mode to"
->  	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index 76fd56dfe4b..445c3ef24fe 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -335,7 +335,7 @@ int spl_parse_image_header(struct spl_image_info *spl=
-_image,
->  		panic("** no mkimage signature but raw image not supported");
->  	}
-> =20
-> -	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI)) {
-> +	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_SPL_HAS_BOOTI)) {
->  		ulong start, size;
-> =20
->  		if (!booti_setup((ulong)header, &start, &size, 0)) {
-> @@ -349,7 +349,8 @@ int spl_parse_image_header(struct spl_image_info *spl=
-_image,
->  			      spl_image->load_addr, spl_image->size);
->  			return 0;
->  		}
-> -	} else if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTZ)) =
-{
-> +	} else if (CONFIG_IS_ENABLED(OS_BOOT) &&
-> +		   IS_ENABLED(CONFIG_SPL_HAS_BOOTZ)) {
->  		ulong start, end;
-> =20
->  		if (!bootz_setup((ulong)header, &start, &end)) {
+> Tested:
+>  * U-boot CI: https://github.com/u-boot/u-boot/pull/750
 
-Superseded by v5:
-https://lore.kernel.org/u-boot/20250314035505.4029331-1-anshuld@ti.com/
+Refer to the below link for CI tests instead:
+  https://github.com/u-boot/u-boot/commit/acf49ef771fb993e1b8e313dafb6b682c=
+1037ebf
 
 Anshul
