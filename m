@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86042C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7080BC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 14:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9167E81E5A;
-	Fri, 14 Mar 2025 15:45:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 00EBA81D65;
+	Fri, 14 Mar 2025 15:45:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BfcaZbaR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q3suqRgn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93A3381D65; Fri, 14 Mar 2025 15:45:28 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 8A0A181D8C; Fri, 14 Mar 2025 15:45:43 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A079981DE9
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:45:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B7CA81D42
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 15:45:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac25313ea37so434162566b.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:45:26 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac25d2b2354so385418366b.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 07:45:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741963526; x=1742568326; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741963541; x=1742568341; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eWiSEav5ZTYqyUGckR4NwxK/n87+KTunpVIm29ZNeSs=;
- b=BfcaZbaRH7QGaLKMbosFbe65t8NJViGiCr9IXpoD4xcuazdq1wos2ghUhR203bj4Lx
- m9pXiLVbP/L3PEwEl6DK8iZsE12VSv273QLazntBsF3vz5L6pmS5c3disADWIe/Ja9jd
- FbbaavIu8sqzEOVZcURMxeAiouePeCR4oXLnU=
+ bh=kU9SlnBTRrRZwrvsZu45hcddYe1NblwVq6xwCVHCzKI=;
+ b=Q3suqRgnWbMHVmF5ABcRn3+GgoKYw5Pub3+8dYDB1zVcFaEox52M7iTu6edDX8yt8o
+ yLTp8d+vFl20r//DHI7HJUZG3s/2e5LTZjscbrFOxKPpqJ9DkzZK9zhP1YE8Y1qU1UW2
+ +a9nhPf9KMbZV/HCX3VF+VC8Q50r42q3Xtjqc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741963526; x=1742568326;
+ d=1e100.net; s=20230601; t=1741963541; x=1742568341;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eWiSEav5ZTYqyUGckR4NwxK/n87+KTunpVIm29ZNeSs=;
- b=HmzHJNjLEuyvpyp17YUt5faXSOAGtMKEe2oByuJLgkG0Ba/frBP9gZXYMws8MVgzqi
- 7meZ/nLUYITGjn5OTZ8VQA0l8e6be3DokmFj66K2pNKfUMHAEwmlBuaQBAGvOfqV9jsL
- B3tRvC5z6n3lQbDO3G4I7y8bOyPT+wMBun3ADLKazD14735JTz4K96YRXJLd5bg3GgfX
- 6E8eEBJd0zQztIPikppMTT22+kLDfl11YHV7VvC9MioLkI/SlLyOyzw7CApV+DRPAi90
- A/iLqW+w9AcKwtsrjTzcsDpcnkxF9eOdLMu4mBfW49f0Emg7lvlSoDzd+X/rnQzrB/rH
- gMvA==
-X-Gm-Message-State: AOJu0Yz9aECJ2VLZvIWe1Dn+ZO9rP4QnlD3qfMYtE7y6zRZpCcOrIYRD
- TbPNQorS5AXHIAmavRDxQ52RzOy56PpFydIsBHGTu9XbEdr174QyslvrrkFfrnv3+INUhMDXFUa
- ZRWAnHJptsfxTui2vCsFviUMncy2QXfTqMQgK
-X-Gm-Gg: ASbGncteNMlvBHxdN+2dpYn7of2AKO40LFeZOksxaIG9TjXCQ3ImPu6h1OgNskOj508
- SBlQUZEnOczLemispkO3GAhoWVU95ZacTkyp5NjB1LtMHYETmZRwII8io5xIQm4tIH5gIkq3rgZ
- ZND8ohlPC1sevcj7y66/9Ec7jTU7sc
-X-Google-Smtp-Source: AGHT+IHbpyrYWEOQReZWeLDJsQnaiOL/B0RotzhAhl57+3oQvy8jhdmkA4XwpwH57EDuTswovikUqldts0XW0Do4wv8=
-X-Received: by 2002:a17:907:9487:b0:ac3:ef4:d34d with SMTP id
- a640c23a62f3a-ac330272dd5mr320651966b.28.1741963526049; Fri, 14 Mar 2025
- 07:45:26 -0700 (PDT)
+ bh=kU9SlnBTRrRZwrvsZu45hcddYe1NblwVq6xwCVHCzKI=;
+ b=kxl7Rs+Qyq7hDZrj9rkV7v7p3oTWJsI7rJewz51zAzOOcgPb0OBSJfx0V8I96hR1m7
+ 4cnWBcsMjsvnSog5CwvLA8LV0X++6ZLPzmWxJKoK3qqJsUgui+5zIWsT+GDTC+gJE+7F
+ 7Pz5G0ohuUFtUZpaVA/6FsBLHzxOjV/0CoQs4OeXK7J503dXQ16UUHHhRMPLYsGLbrh1
+ K5FrX3xa0Xec8CLEZQBFb7OdMWVnm+9njr84uBQ5/yMc6Yzf0DGfAS5qgblcQDD6WC0F
+ +5O3Vv4SvcuZoy+8jUfQlgKQxY3M7k4+7eBvXZDlXR7BNfDsX6ROxXz4Hw4xpzc7PXSi
+ KkHA==
+X-Gm-Message-State: AOJu0YxKX1xSYnHekdJslPtCljqQkQjaluJi/dHIJoNdQOX9O/iAO9io
+ qp8V7DGXYFcOGHbcqCawrY7myR4H+3L/FWZ8izmxvP3rn7etYvIL4pi8Lc4TE2t+e8K0jUO2SZ+
+ DSS6ZEOXqIUd/VUYTsH/I5Tq0mT7xy+yUb0oa
+X-Gm-Gg: ASbGnct5NplbaEQLZ6+56KMJeJzbvNewnsRMOJVLTkGZSvQ555rSybId/HfnfMDm14r
+ SlqCUVYePTybWwkYQLbhm33MJsvKNptgGjMcuQ8ZR1jCU700TVCyZbDCFSGYEpxZpsr3MYzX0fC
+ PoYHiRSUuq+5xHj1oa9MXo4tA8mkhG4iKPLQiDgEQ=
+X-Google-Smtp-Source: AGHT+IFYVK0t70gcVSKuJldndAgKrx6EE7y/MvUEuY+xAgUMrE2gtGne8LJtb+X986thJwoKvSUmAOuuoALXHJjVGqs=
+X-Received: by 2002:a17:907:d92:b0:abf:733f:5c42 with SMTP id
+ a640c23a62f3a-ac3301e0188mr337572966b.8.1741963540947; Fri, 14 Mar 2025
+ 07:45:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-28-sjg@chromium.org>
- <20250217174557.GP1233568@bill-the-cat>
-In-Reply-To: <20250217174557.GP1233568@bill-the-cat>
+References: <20250209212714.2317040-1-sjg@chromium.org>
+ <20250209212714.2317040-2-sjg@chromium.org>
+ <20250217192316.GW1233568@bill-the-cat>
+In-Reply-To: <20250217192316.GW1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Mar 2025 14:45:14 +0000
-X-Gm-Features: AQ5f1Jpe3XZjlRLCX0qZMDl2hdG1EJYL6Ra_MY-KJDph6iZ235WqObaC3gxc-zc
-Message-ID: <CAFLszTh_0ndtaSUADePBB6qNLQHzO555+pgd0ndyygAGHe-X3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 27/28] RFC: test/py: Deal with timeouts
+Date: Fri, 14 Mar 2025 14:45:27 +0000
+X-Gm-Features: AQ5f1JrdPEhXM3t5T8hgNJDe4NhYGowSG6GvBmQTFh6fU8BPPIOOdc3HSnt7zWg
+Message-ID: <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
+Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Love Kumar <love.kumar@amd.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brandon Maier <brandon.maier@collins.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,28 +90,33 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 17 Feb 2025 at 17:46, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 17 Feb 2025 at 19:23, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Feb 16, 2025 at 01:44:12PM -0700, Simon Glass wrote:
+> On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
 >
-> > The distro test takes a little longer to shut down and restart, so
-> > add more time to this operation.
-> >
-> > Disable the sleep command for now, as it seems to be unreliable on
-> > QEMU with '-cpu host'.
-> >
-> > More thought will be needed for both of these problems.
+> > Reduce the number of warnings in this file.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  tools/buildman/func_test.py   |   4 +-
+> >  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++----------------
+> >  2 files changed, 128 insertions(+), 116 deletions(-)
 >
-> We already do:
->     TEST_PY_TEST_SPEC: "not sleep"
-> for every QEMU target in CI. The test fuzz-factor is generally enough
-> for sandbox, but maybe we should just make that test opt-in.
+> As I think these all were warnings from whatever other linting you had
+> mentioned in another thread, I deferred this patch as it also doesn't
+> cleanly apply.
 
-It is useful to have it on real boards. For QEMU there is actually a
-bug on x86 where the timer is wrong in some cases. Still, we are
-making progress.
+Some of it, yes. But most of it is fixing things that we should fix.
+
+This is going to open up a significant diff for patman, unfortunately,
+just as I am adding new features for series management. So please
+consider applying it. I can rebase if you like?
 
 Regards,
 Simon
+
+
+>
+> --
+> Tom
