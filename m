@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FD38C282EC
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 13:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A8BC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 13:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 530638198F;
-	Fri, 14 Mar 2025 14:43:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07EFA81A0E;
+	Fri, 14 Mar 2025 14:45:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Lajp/Y1g";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HHkwV2Wl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C812E81A0E; Fri, 14 Mar 2025 14:43:26 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 410F581B5B; Fri, 14 Mar 2025 14:45:49 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72A1880F9C
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 14:43:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34A2580F9C
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 14:45:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52EDhMO62176817
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 14 Mar 2025 08:43:22 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52EDjiVu1651898
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 14 Mar 2025 08:45:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741959802;
- bh=+XRWaUGQoZaPZipRTOoCn2Qa1E1U9gqLsCzi2+UxogU=;
+ s=ti-com-17Q1; t=1741959944;
+ bh=T1W7GxRgE+ir5WLGFsDpj2EieOlQVt35Y8/Ssm6bMUs=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Lajp/Y1gGk8/cFncIvRZ37UgF6MYyWWN8UU8QNXiHt+EF09ZHdHhnoz7/9PWKgXLl
- muo5DXua0fKY4nv2BKbrSjjsX55D+7Y38znQzWZersqLaZ9Lm0di6P5lUeN0iIkNA+
- MCXBuBZ3MSPsIEoe+lixC4j9aRgukKYEVuL6DsWE=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52EDhMTp097696
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 14 Mar 2025 08:43:22 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
- Mar 2025 08:43:22 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ b=HHkwV2WlrBCwWqCGZcDSB5qvrm1tbU6FAMY9tl45mnarOKDgMj+pQv7oxXAGpHAAd
+ /cW8/s7Zx1sHyeDKjKfTDpV01uz3+7bb5+GMd/PdeAfzFXi2Z1N8n2YxBHcI6L2SPc
+ p1RuIr7P30S1gTUkpVVkfQa20oSViWQqRtcgQTWA=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52EDjiFM109096;
+ Fri, 14 Mar 2025 08:45:44 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE105.ent.ti.com
  (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 14
+ Mar 2025 08:45:43 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 14 Mar 2025 08:43:22 -0500
+ Frontend Transport; Fri, 14 Mar 2025 08:45:44 -0500
 Received: from [10.24.69.179] ([10.24.69.179])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52EDhKUS114244;
- Fri, 14 Mar 2025 08:43:20 -0500
-Message-ID: <768e6b56-b55a-834b-4abc-41b9cee701e1@ti.com>
-Date: Fri, 14 Mar 2025 19:13:19 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52EDjfO5036903;
+ Fri, 14 Mar 2025 08:45:42 -0500
+Message-ID: <df29c7e3-c1fe-d572-48b5-6d4117873d12@ti.com>
+Date: Fri, 14 Mar 2025 19:15:41 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [EXTERNAL] Re: [RFC PATCH 1/4] cmd: fuse: Remove custom string
- functions
+Subject: Re: [EXTERNAL] Re: [RFC PATCH 2/4] cmd: fuse: Add fuse writebuff
+ sub-system command
 Content-Language: en-US
 To: Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <k-malarvizhi@ti.com>,
  <kamlesh@ti.com>
 References: <20250313115517.1181829-1-h-vm@ti.com>
- <20250313115517.1181829-2-h-vm@ti.com>
- <20250313161539.GE2640854@bill-the-cat>
+ <20250313115517.1181829-3-h-vm@ti.com>
+ <20250313161807.GF2640854@bill-the-cat>
 From: Harsha Vardhan V M <h-vm@ti.com>
-In-Reply-To: <20250313161539.GE2640854@bill-the-cat>
+In-Reply-To: <20250313161807.GF2640854@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,58 +86,21 @@ X-Virus-Status: Clean
 
 
 
-On 13/03/25 21:45, Tom Rini wrote:
-> On Thu, Mar 13, 2025 at 05:25:14PM +0530, Harsha Vardhan V M wrote:
+On 13/03/25 21:48, Tom Rini wrote:
+> On Thu, Mar 13, 2025 at 05:25:15PM +0530, Harsha Vardhan V M wrote:
 > 
->> Remove custom string functions and replace them with normal string
->> functions. Remove the custom strtou32 and replace it with str2long.
+>> Add CMD_FUSE_WRITEBUFF config option to add and enable fuse writebuff
+>> sub-system command. Add fuse_writebuff function to be invoked on
+>> writebuff command.
 >>
 >> Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
 > 
-> Thanks for doing this.
+> Pending updates for what I asked in part one,
 > 
->> ---
->>   cmd/fuse.c | 27 ++++++++-------------------
->>   1 file changed, 8 insertions(+), 19 deletions(-)
->>
->> diff --git a/cmd/fuse.c b/cmd/fuse.c
->> index 598ef496a43..9f489570634 100644
->> --- a/cmd/fuse.c
->> +++ b/cmd/fuse.c
->> @@ -15,17 +15,6 @@
->>   #include <vsprintf.h>
->>   #include <linux/errno.h>
->>   
->> -static int strtou32(const char *str, unsigned int base, u32 *result)
->> -{
->> -	char *ep;
->> -
->> -	*result = simple_strtoul(str, &ep, base);
->> -	if (ep == str || *ep != '\0')
->> -		return -EINVAL;
->> -
->> -	return 0;
->> -}
->> -
->>   static int confirm_prog(void)
->>   {
->>   	puts("Warning: Programming fuses is an irreversible operation!\n"
->> @@ -54,14 +43,14 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
->>   	argc -= 2 + confirmed;
->>   	argv += 2 + confirmed;
->>   
->> -	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
->> -			strtou32(argv[1], 0, &word))
->> +	if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
->> +			!(str2long(argv[1], (ulong *)&word)))
-> 
-> I didn't know we had "str2long" which is a differently rarely used
-> function. Why not just simple_strtoul inline? Am I missing something?
-> Thanks.
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 > 
 
-We cannot use simple_strtoul inline directly because we need proper 
-error checking to ensure the simple_strtoul conversion was successful. 
-The str2long function is a wrapper around simple_strtoul and the 
-necessary error checks. Hence, using str2long here.
+I assume that by ‘part one,’ you are referring to the question about why 
+we don’t use simple_strtoul inline. I’ve addressed that in the other 
+thread. Let me know if further clarification is needed.
 Thanks.
