@@ -4,62 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA491C28B2F
-	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 20:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC3BC282EC
+	for <u-boot@archiver.kernel.org>; Fri, 14 Mar 2025 20:10:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4605D81FDE;
-	Fri, 14 Mar 2025 21:09:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=os-cillation.de
+	by phobos.denx.de (Postfix) with ESMTP id 3724A81ECD;
+	Fri, 14 Mar 2025 21:10:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=os-cillation.de header.i=@os-cillation.de header.b="AgQY80AB";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="o0AOFcPa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4E7E81E92; Fri, 14 Mar 2025 21:09:12 +0100 (CET)
-Received: from os-cillation.de (mx.os-c.de [213.165.83.196])
+ id 723AB81F49; Fri, 14 Mar 2025 19:36:18 +0100 (CET)
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09F6581E92
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 21:09:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=os-cillation.de
+ by phobos.denx.de (Postfix) with ESMTPS id 22F0981E92
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 19:36:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mainlining.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hd@os-cillation.de
-Received: from core2024.osc.gmbh (p578a635d.dip0.t-ipconnect.de [87.138.99.93])
- by os-cillation.de (Postfix) with ESMTPSA id CF00CC026F;
- Fri, 14 Mar 2025 21:09:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=os-cillation.de;
- s=202409; t=1741982949;
+ spf=pass smtp.mailfrom=adrian@mainlining.org
+Received: from [172.20.123.186] (xdsl-78-35-81-182.nc.de [78.35.81.182])
+ by mail.mainlining.org (Postfix) with ESMTPSA id 82CFEBBAC0;
+ Fri, 14 Mar 2025 18:36:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mainlining.org;
+ s=psm; t=1741977375;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WP724tOTX6Ghgn4M1J+ElrtHrmjnPJu7F90tpO45DhI=;
- b=AgQY80ABFDH/Ven96SQA53w6NL6MtVj005WLXoVBnSSFdhSu3IXMJYetIS4MpzzhN/1u80
- RytXtUSYua/a0srxzPRcrybUt1gpBBuz8FJzcUgDrFIns9CxSdnSoYR66EEhkejXB4x0sE
- v8RVQlzk4mXtLewVULiQIy226F9u4mHQ7+tiHley7RcM/rTl230QVHdqyF27zWgJuNTLWx
- dtsgbJW3lIztjQCmM1AOIUrhQPOvyeS5NJik3qvRd1dar/h41wIX5x2avRaqtQ2wNKYiDO
- xUX2n62iXtq7jBX07aI7Fv3rWzw4eADuc8rbRn2SAaZVgzxmrXNCbDW0oXXCPQ==
-Authentication-Results: os-cillation.de;
- auth=pass smtp.auth=os-c@schweissgut.net smtp.mailfrom=hd@os-cillation.de
-Received: from hd2022.osc.gmbh (hd2022.osc.gmbh [192.168.3.45])
- by core2024.osc.gmbh (Postfix) with ESMTPSA id 7331320032D;
- Fri, 14 Mar 2025 21:09:09 +0100 (CET)
-From: Hendrik Donner <hd@os-cillation.de>
-To: u-boot@lists.denx.de
-Cc: Hendrik Donner <hd@os-cillation.de>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/2] imx8qm: Do not use CONFIG_XPL_BUILD in device tree
-Date: Fri, 14 Mar 2025 21:08:32 +0100
-Message-ID: <20250314200832.154758-3-hd@os-cillation.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250314200832.154758-1-hd@os-cillation.de>
-References: <2849ff05-ef67-4471-aece-422daa57040f@cherry.de>
- <20250314200832.154758-1-hd@os-cillation.de>
+ bh=tOQgmIC5QceO+KtTKM6E9Ch8udwYqzcrOWbow4eVQUQ=;
+ b=o0AOFcPayWyC495aBAqOw2/zn25OS3Rjlrq9B4Sn27YU97abR8CVK+Tkw47gw9bs4DOm02
+ nBOEdFrBRMhX5PFEp6isFRbSgliF1p3lDWYNLXvEIj9ZthaqEot5E362Pv1tQRg3ycQ6uD
+ gIp81OuiK7jp4W/UYnSSSF/E59DcpfhCkHTKV4vfK0JCcIV20/kz2qTfIyFfKeeGSNlxUr
+ /uGOvq18gZW8JviInUcTMoZ1cy3bldS9CfUb8mETK2ZrsSN7JH62YlrKWqRm4PeLmvhy5W
+ ed+L1sRkmXI6ilmDsLAVtDE0QdmLDeWBiV9m0No0k1b4nF823jXDJ7m45WOs5Q==
+Message-ID: <269344d3-f8ad-4ae2-ab26-ff376f1f7960@mainlining.org>
+Date: Fri, 14 Mar 2025 19:36:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/4] Better smartphone support (Qualcomm)
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
+Content-Language: en-US
+From: Jens Reidel <adrian@mainlining.org>
+In-Reply-To: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 14 Mar 2025 21:10:25 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,47 +72,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In c9713c15512 the device tree was moved
-from CONFIG_SPL to CONFIG_SPL_BUILD and later to CONFIG_XPL_BUILD, but
-the CONFIG_xPL_BUILD defines are never set for device trees, breaking
-the build. Move the guards back to CONFIG_SPL.
+On 3/11/25 1:31 PM, Caleb Connolly wrote:
+> Improve support for running U-Boot on [Qualcomm] smartphones, with:
+> 
+> * A boot menu which can be entered by holding power during boot
+> * Hang on panic (so errors can be read on the display)
+> * Serial gadget which can be enabled by holding volume down or via
+>    boot menu
+> 
+> In its current form, U-Boot's boot menu is perfectly adequate, however
+> once an option is picked U-Boot will never return to the menu, always to
+> the CLI.
+> 
+> On a phone (with no keyboard), dropping to the CLI effectively makes the
+> device unusable until manually rebooted, since there is no way to run
+> any commands...
+> 
+> To rectify this, let's revive CONFIG_BOOT_RETRY for the hush parser and
+> add an option CONFIG_RETRY_BOOTCMD to run the contents of "bootcmd".
+> This provides for a flexible menu system which we can enter and exit.
+> See qcom-phone.env in patch 1 for more details.
+> 
+> Finally, provide some rough-ish documentation to describe how Qualcomm
+> phone support works and outline some debugging steps for when UART and
+> the framebuffer are unavailable.
+> 
+> ---
+> Changes in v3:
+> - Minor wording/clarification improvements in docs
+> - Introduce CONFIG_RETRY_BOOTCMD rather than changing the default
+>    behaviour.
+> - Enable some more gadgets in the phone config fragment.
+> - Link to v2: https://lore.kernel.org/u-boot/20241004-qcom-phones-v2-0-c7ab67ac3043@linaro.org
+> 
+> Changes in v2:
+> - Fix CONFIG_BUTTON_REMAP_PHONE_KEYS name in qcom-phone.config
+> - Add Tom and Simon to CC
+> - Link to v1: https://lore.kernel.org/r/20240831-qcom-phones-v1-0-08614edd8e35@linaro.org
+> 
+> ---
+> Caleb Connolly (4):
+>        board/qualcomm: introduce phone config
+>        cli_hush: support running bootcmd on boot retry
+>        bootretry: check for bootretry variable changes
+>        doc: board/qualcomm: describe phone support and bringup
+> 
+>   board/qualcomm/qcom-phone.config |  17 ++++++
+>   board/qualcomm/qcom-phone.env    |  49 ++++++++++++++++
+>   boot/Kconfig                     |   7 +++
+>   boot/bootretry.c                 |   2 +
+>   common/cli_hush.c                |   6 +-
+>   common/cli_hush_upstream.c       |   6 +-
+>   doc/board/qualcomm/board.rst     |   5 ++
+>   doc/board/qualcomm/index.rst     |   1 +
+>   doc/board/qualcomm/phones.rst    | 122 +++++++++++++++++++++++++++++++++++++++
+>   9 files changed, 211 insertions(+), 4 deletions(-)
+> ---
+> base-commit: 78f8c8c58f7d3f7c3a26af4afbd08aba21c14c90
+> 
+> Caleb Connolly <caleb.connolly@linaro.org>
+> 
 
-Also add a missing guard analog to 645a42d7ee8 to fix a similar build
-issue.
+I've tested this on a Xiaomi Mi 9T / Redmi K20 (xiaomi-davinci, Qualcomm 
+SM7150) with a handful of patches on top for SM7150 support.
 
-Fixes: c9713c15512 ("imx8-u-boot: Fix SPL guard option")
-Signed-off-by: Hendrik Donner <hd@os-cillation.de>
----
- arch/arm/dts/imx8qm-u-boot.dtsi | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+I had to manually enable the following configs for USB serial gadget to 
+work, so I suggest enabling them like others already pointed out:
+CONFIG_DM_USB_GADGET=y
+CONFIG_USB_FUNCTION_ACM=y
 
-diff --git a/arch/arm/dts/imx8qm-u-boot.dtsi b/arch/arm/dts/imx8qm-u-boot.dtsi
-index af229501a4d..8492b3f4c78 100644
---- a/arch/arm/dts/imx8qm-u-boot.dtsi
-+++ b/arch/arm/dts/imx8qm-u-boot.dtsi
-@@ -10,7 +10,7 @@
- };
- 
- &binman {
--#ifdef CONFIG_XPL_BUILD
-+#ifdef CONFIG_SPL
- 	u-boot-spl-ddr {
- 		align = <4>;
- 		align-size = <4>;
-@@ -122,6 +122,7 @@
- 		};
- 	};
- 
-+#ifdef CONFIG_SPL
- 	imx-boot {
- 		filename = "flash.bin";
- 		pad-byte = <0x00>;
-@@ -132,4 +133,5 @@
- 			type = "blob-ext";
- 		};
- 	};
-+#endif
- };
--- 
-2.43.0
+Also, for EFI boot to work I added the following configs, not sure which 
+ones were actually making the difference:
+CONFIG_EFI_RT_VOLATILE_STORE=y
+CONFIG_EFI_SET_TIME=y
+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+CONFIG_EFI_CAPSULE_ON_DISK=y
+CONFIG_EFI_IGNORE_OSINDICATIONS=y
+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 
+With those enabled, everything works as expected and is comfortable to 
+navigate. Thanks for your work!
+
+Tested-by: Jens Reidel <adrian@mainlining.org> # xiaomi-davinci
+
+Best regards,
+Jens
