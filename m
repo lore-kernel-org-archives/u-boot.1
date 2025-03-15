@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35EEC28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:19:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA78C35FF1
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:20:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7431A8122F;
-	Sat, 15 Mar 2025 23:18:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3222810F4;
+	Sat, 15 Mar 2025 23:18:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IQkZvFGs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dy1obYlA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6192810F4; Sat, 15 Mar 2025 23:18:34 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 39C748193A; Sat, 15 Mar 2025 23:18:36 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88368817D8
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBCF480F70
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-223fd89d036so64423125ad.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:32 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-22398e09e39so66732095ad.3
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742077111; x=1742681911; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742077112; x=1742681912; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xMZlWb3jctzDMEE3EOU1HsoBaXRZ4TfFvMn/2pYkYe8=;
- b=IQkZvFGsCIQf2omn4oxqRTF9dhN0y9nMRRzPKk4w6xDhXq3A3RAcULArN3QrLbPwn1
- 8rcFPtrxXHNnkUG97h+Os+xJ30nVF4sAxzKMiYbuGcqSak1sCRnMlGIlm1el9GqDYizy
- tl9mferojNHU3asmilqR1eoEJ8iNyxfSa8W467KU2JbSIafixg8JLDe65Om4Hi3pi+Xu
- yXX54WD+LvJs2qm2HpRF6Uqnb3Wz7cqtOzFghn0dLM1b0HccnWmSfnSPbFB93XB2x4Bc
- pA/NoKZ3FR7VG4l8J9LSKjF/TmRngm82COk9ekwCBo/kFNQ9mxQ+hezuwnyyPA7F4TFJ
- h2SQ==
+ bh=S1NlGxBkObCp+1sPxyNkQJc1tDVLAMyJMRpZ2sjvG/w=;
+ b=Dy1obYlA3sDnymcaR4u1o1qNeYfRtcE0LZqMue36IAluhKlWL7tMPuZ4gevFy7j4oD
+ IelEHN7ZsxUAFJmteT/KGdrAVpCFju4Yt6j6K2n0ce4uIM9J7PrrRqOgHCXgPOdvRXgJ
+ CP4DFIGr4EDpZ3kkcVp9/5PS8tgb2h6X0pLrINTXhKfpTdatsTZNUxkoCi0ev978NvV3
+ kggd242AMzfnY6gPUaArJMMyLv3Ec2nX6X+exjFRBr0/JZtOYTckTTEezFERd50uNHFw
+ xA6gyGAciRJHX7miup1MPoIYcpmNlgmPWImy3yXKDmCZZwNNCJ+gwJ6kVZr2fFhkFCZr
+ rOZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742077111; x=1742681911;
+ d=1e100.net; s=20230601; t=1742077112; x=1742681912;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xMZlWb3jctzDMEE3EOU1HsoBaXRZ4TfFvMn/2pYkYe8=;
- b=TsJgb33+Q2bD9VbT383YPr9otJixy3GYzDoBJUWkgTtSkemGAZ4R7wRcc9kumi3y9e
- 8q8B99qV5KEq+v0YgnPR3w/Lus8fdrLEEqK8Lb9X4T8KTZmFGe4/WHqZSRhIZhIMNXNa
- qCtkLkLpwI4cG39iDS3OhDoldFs619TtbeY7BEs1bZqb3gmYrb/vruBgBSxPWHy/EgG8
- bPz64gGwNZ+lCMaJwFclFp6hgcrNpTnQM7mfajqfhYLqTTfoQGSt5xc35Bc2Kv9jY9Jy
- D/Z1VuUaefPGhk9dk9islIfAfJkRFFed8+tpF7ivdiK9012o9/AGwDfoiLzwTVH/LLoK
- 1Dcg==
+ bh=S1NlGxBkObCp+1sPxyNkQJc1tDVLAMyJMRpZ2sjvG/w=;
+ b=YLtfm+ZCFaDUtO4Qe0TwxqEHt8W8o7oQleWU9AMAbC3csFzwxQncjvvT79YJcdWBFQ
+ vA1CWCfQJ7Uchcayl5TXpB26cX73ACnAdHgylIvd83ttJCH5c8HV4ghoWqA9ByujFI4D
+ 9V5UvYY6Ko65D9pXo+I6EzuypMGgEycINKRawJn4sLNJ43uSz91J4z0kRQ70kx6tqVUM
+ lxXeym5BYTnSk/5j0XgDkFElaOW/fe2hndh7fo6In5e4hqpGe8+eednKT8LDehFRk0iT
+ 5kOvS3KNOhkiRkr63H5tL96/OX5IbmIGua5zmDFpTdZ1brqmEsiVZwzty9xDCXy2RrV1
+ LaKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyL3Q0GEkrvHLPRdsVKGia62AbnfN9dZ8ARxbNMcwMYFggiNmVNgt3S2iIzVliSY5cfns/vWQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YznOSzQfa7m2MKyTt2GjTNgnlYkuklPuVsAvfi3Ml4aRU3aJfOx
- DE0/YimMMZbOAiV25ylNciOf8sY+DqqnbLK59AUBQiM8QnxgR72Z
-X-Gm-Gg: ASbGncvVdb4ay34e+oCTvh4OukydgZfQeiz7e934ITNuxGeLJTGMwfnjS7km6Fdjwum
- mqWw9gf1aeN2k+bf+Lss6xa8p3W27csYxa79uOvlj9TORwQgVKw5GkHnKAXOVQRYRx9bcAwjePv
- rfuPoNOa2+2m5np+P/nz1zS/t7QFY1cHzQ94xw+pqxNbCKVw/NJLg+SmeRcl/mtOV265TyX/q6h
- yLAuZqKSJM1n5W+9FgpnF0oy4S1RP72c/nEUJpRN4J5wEURO6Xy7Dp/h17CrMZrWoo2V2zP6/LX
- HeGjl2pcMcojAkbTtA4BXtvqCMQCj2rKzFHcA+L9FnSnLMLCII4F3DA=
-X-Google-Smtp-Source: AGHT+IHQdlIo6iEcDbpPORIR9PmMa7GE2t0SAaRemC+Cx9l6PLbrJzIWbATojnnkpC4M53rV8fEa8A==
-X-Received: by 2002:a05:6a00:3d52:b0:736:7a00:e522 with SMTP id
- d2e1a72fcca58-7372236e170mr6693723b3a.2.1742077111096; 
- Sat, 15 Mar 2025 15:18:31 -0700 (PDT)
+ AJvYcCXbCU/HGa6uV4t++ILNbpout5ecEa3NG6h7rUNr5agKrYed/VmAJ9alnv1aYtZkBS485PkKSds=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxfwczz0+L2emLwPapNC0/Oj2Lyr6voNi0X9LlMgGugMb3/8aG6
+ TCDElQVYk41LhnfQn3EjwsidUOkXxs5MDAjAdgdruPz2j3RfD1dh
+X-Gm-Gg: ASbGncuSjD0AXTt1UMz8xxHqEZnqUWmPdt+2H340n67ZeqeWJYj4ChTdbFEx1hjnrmS
+ 3d0eAX0S/P2MpWwAov7i/XF3w6h/w+kepcHU11j3GiCFomHUcqTZfIFHYogYAUqCdn/DAYi8/5A
+ hW7ZVK39nWJrEUlmhpnXFz+2Pmw0q/L25UuCtXjY70nSCvPEiN4TXVXCS7eTpdrlczDA90TAhC7
+ zqk8PE+o7V7Wb2I+y+Av1ZdQ3UCB1l54nEfdFhla4gDlMAtawzE3G/PDUBXSHiYayZHZMOJkGKD
+ p16Kn18bFNwaBKj8NpkrqE6DRylMHnp3UQ1St/K4Xy9wzobarl/PWCQ=
+X-Google-Smtp-Source: AGHT+IHo8vuA6gPZbNkr9VkRbwYJ0IBhXt7HV156OsqxZzFb8QjNUi+NgrGhfdwzihmJnSKMquYLuA==
+X-Received: by 2002:a05:6a00:9286:b0:736:a694:1a0c with SMTP id
+ d2e1a72fcca58-7372242ec49mr9092939b3a.21.1742077112451; 
+ Sat, 15 Mar 2025 15:18:32 -0700 (PDT)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:f31:f69b:ca22:e094])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.29
+ d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 15:18:30 -0700 (PDT)
+ Sat, 15 Mar 2025 15:18:32 -0700 (PDT)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -81,9 +81,10 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH v2 10/15] makefile: Add READELF command variable
-Date: Sat, 15 Mar 2025 15:18:08 -0700
-Message-ID: <20250315221813.1265193-11-CFSworks@gmail.com>
+Subject: [PATCH v2 11/15] arm: riscv: efi: Export _start symbol from
+ crt0_*_efi stubs
+Date: Sat, 15 Mar 2025 15:18:09 -0700
+Message-ID: <20250315221813.1265193-12-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250315221813.1265193-1-CFSworks@gmail.com>
 References: <20250315221813.1265193-1-CFSworks@gmail.com>
@@ -105,39 +106,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This allows setting READELF=llvm-readelf in order to use the LLVM
-version of the readelf utility. It also aligns with the practice of not
-using $(CROSS_COMPILE) in any build recipes directly, reducing the
-number of places where $(CROSS_COMPILE) is used.
+While the _start label is only intended for use locally to populate the
+(hand-written) PE header, the linker script includes ENTRY(_start) which
+designates it as the entry point in the output ELF, resulting in linker
+warnings under some linkers (e.g. LLVM's lld) due to _start not being a
+globally-visible symbol. Since  ELF is only an intermediary build
+format, and the aforementioned PE header correctly points to _start, the
+ENTRY(_start) directive could easily be removed to silence this warning.
+
+However, since some developers who are debugging EFI by analyzing the
+intermediary ELF may appreciate having correct entry-point information,
+this patch instead promotes the _start labels to global symbols,
+silencing the linker warning and making the intermediary ELF reflect the
+true entry point.
+
+This patch doesn't affect the final output binaries in any way.
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/arm/lib/crt0_aarch64_efi.S | 1 +
+ arch/arm/lib/crt0_arm_efi.S     | 1 +
+ arch/riscv/lib/crt0_riscv_efi.S | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index 05a93813afa..fb5cd67745f 100644
---- a/Makefile
-+++ b/Makefile
-@@ -406,6 +406,7 @@ LDR		= $(CROSS_COMPILE)ldr
- STRIP		= $(CROSS_COMPILE)strip
- OBJCOPY		= $(CROSS_COMPILE)objcopy
- OBJDUMP		= $(CROSS_COMPILE)objdump
-+READELF		= $(CROSS_COMPILE)readelf
- LEX		= flex
- YACC		= bison
- AWK		= awk
-@@ -2177,7 +2178,7 @@ System.map:	u-boot
- # ARM relocations should all be R_ARM_RELATIVE (32-bit) or
- # R_AARCH64_RELATIVE (64-bit).
- checkarmreloc: u-boot
--	@RELOC="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
-+	@RELOC="`$(READELF) -r -W $< | cut -d ' ' -f 4 | \
- 		grep R_A | sort -u`"; \
- 	if test "$$RELOC" != "R_ARM_RELATIVE" -a \
- 		 "$$RELOC" != "R_AARCH64_RELATIVE"; then \
+diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64_efi.S
+index e21b54fdbcb..003d5f83041 100644
+--- a/arch/arm/lib/crt0_aarch64_efi.S
++++ b/arch/arm/lib/crt0_aarch64_efi.S
+@@ -144,6 +144,7 @@ section_table:
+ 		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+ 
+ 	.align		12
++	.globl		_start
+ _start:
+ 	stp		x29, x30, [sp, #-32]!
+ 	mov		x29, sp
+diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
+index 235b3a0c48f..593ee1e194a 100644
+--- a/arch/arm/lib/crt0_arm_efi.S
++++ b/arch/arm/lib/crt0_arm_efi.S
+@@ -143,6 +143,7 @@ section_table:
+ 		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+ 
+ 	.align		12
++	.globl		_start
+ _start:
+ 	stmfd		sp!, {r0-r2, lr}
+ 
+diff --git a/arch/riscv/lib/crt0_riscv_efi.S b/arch/riscv/lib/crt0_riscv_efi.S
+index 9eacbe4a859..f170e4b26d6 100644
+--- a/arch/riscv/lib/crt0_riscv_efi.S
++++ b/arch/riscv/lib/crt0_riscv_efi.S
+@@ -179,6 +179,7 @@ section_table:
+ 		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+ 
+ 	.align		12
++	.globl		_start
+ _start:
+ 	addi		sp, sp, -(SIZE_LONG * 3)
+ 	SAVE_LONG(a0, 0)
 -- 
 2.48.1
 
