@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81828C282EC
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5797BC28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 09:24:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D7A282155;
-	Sat, 15 Mar 2025 02:29:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5385680540;
+	Sat, 15 Mar 2025 10:24:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pK8R2AUq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R7eKnosB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BDA08215B; Sat, 15 Mar 2025 02:29:40 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 287F28058A; Sat, 15 Mar 2025 10:24:50 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77EB182116
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2228C8043C
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 10:24:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7c0a159ded2so335824585a.0
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3913fdd0120so1530269f8f.0
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:24:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742002176; x=1742606976; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=2/M9kUcK6I2xl78zyRMP9rEp/M4WNLI3G7HqcEZBHV0=;
- b=pK8R2AUqF2ozCVzJy/qgTJjaKxAVeSUWTXo2ZZPC+Ds78p/cb+KL8oiKgovX6lHBLe
- i+eduNUitJNllYI2dTpCA3CUORpKfsWVTE5qZty4n4Kz9eNGrTBnhYi1ZMJZ8sShE75i
- OtwIphYFyP+7UC32TsTrpCILcCYq/eEmZbW/A=
+ d=gmail.com; s=20230601; t=1742030687; x=1742635487; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3k/cTMEYdwt00YxQ2XPJKoGNbMltjk8OG3d2FF5sFy4=;
+ b=R7eKnosBcSgFIxEoTDo2FYOYqI1LVYcW4cqM4si8NFL1nPBB3S1Ieuwmv+6VhrJO0y
+ y9EPnuqsgMf314WRCcqj9AlzuC719/OxrYDZq3gkxZW18dP/D8qoMeyEwgfQa8ARCy+x
+ mKuNWmJZX42dvw2CZ39BhvbMeyb348uWyXPwQ3MkTHZ9zAfhhIcqLEVGLTWKLvs+mN/Q
+ ji2nZaXsdzsB1L7i3Qsw/GoYc/wdl2oiAMo160ELP9GD19oEhQAFM15GnY7FGeIV2m69
+ awSUZs70RPiWNyku/l6QBMwQMeGbokGwXpx2bUlJEqrYSnjygwtdhty/TZjDRW+U20ao
+ H6UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742002176; x=1742606976;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2/M9kUcK6I2xl78zyRMP9rEp/M4WNLI3G7HqcEZBHV0=;
- b=j3rqsHVJPdP5ZvKdtFHPI4R5/sFOfFHb+JkxDICsvJg0mPVP7HcIan2X8dh53cgVXN
- xZ3XetbfdJvx/EoaoCQLyccpV+p0WXxL+JhlxfHhXbkzL6RdF9NuYZSQsTWLtiNZ1dOy
- t9BYtmJ2jzIQH9kTQk+XM2GzflQ1gmbiGlSwoioZQzDb/zSIw1QaLaJWpY7v7VmTmaVC
- eopj48bZ9FG43Ex7LEVaAu65wjpieGhSVnHySsIvZTXLFrtMykUOGpRaHg8rTSXAUeXt
- 5ejN7uPbEDwUFvATZqrmvTH2Sm6poE+Gn4fWjO0FUpHl/h7qGKSJVijLoVCwOiPy5VBP
- 46ow==
-X-Gm-Message-State: AOJu0YyRlz24pxkpn/9pLVeUavSES5YAeUkbg4vxD4rk/HnsLfQvQAoG
- aUhfY4sdRHikkATEFVLuEdBSMv+tFNZiGzRKLyFK4Db2ZGf+fevqCzWDHABXdlubVpFPoXBIiNY
- Z
-X-Gm-Gg: ASbGncv1sJsKf46fn6rI6010sl6G5CHa0cfvmv5QrHYwONIMVFwCkeoqwjfVLfeqNO3
- 6VnCPxZsuZyQU/tWUuga946YyMfwLTSimWDceFqc8IIVzxXVsHVb0fGXOyAgVLBxN1eBBSqOaSP
- +vOj5Esq8tWu3UeDaeTpQ5h1Ir4WK4qKd9K8go7ushXkesiubD+pcAwK1TIL0jm0o4RbkAi1sd6
- i5H72S0myc73mrTyszJ98Qk5zjwR+etXy9BVfTqYsQo5RZmrIlROLBmDp1IJ12tbsyRgw0WH48C
- 35lYxv0Bk1RgKVDay1BFF4CEHrXMsngxeFv1yqpyIjOydFzxpfXxQGNjHzk=
-X-Google-Smtp-Source: AGHT+IHPMJRxad7s/nwy68o5s0C/7zk4d/JrtsoDcJod9y2AI/nmIAm6aGbH6A42cHcqL26lx6vVgg==
-X-Received: by 2002:a05:620a:2488:b0:7c5:5670:bd75 with SMTP id
- af79cd13be357-7c57c90c63amr648932985a.46.1742002176384; 
- Fri, 14 Mar 2025 18:29:36 -0700 (PDT)
-Received: from bill-the-cat.. ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573c6fafcsm323767285a.25.2025.03.14.18.29.34
- for <u-boot@lists.denx.de>
+ d=1e100.net; s=20230601; t=1742030687; x=1742635487;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3k/cTMEYdwt00YxQ2XPJKoGNbMltjk8OG3d2FF5sFy4=;
+ b=NHK//BZJ/diqpy5b3/c8xc7JtWFFHuQ0/y1GsnEx5Egy8DoY9qicU4Mb5WpmGrYIGf
+ sR4Mz/QJlrAjwZAhTt2KaGP+RLALo3xF7mLtcGN025Ta5dvA5K0OyBQSXCevMJ7Rtvkw
+ ZkQwtHlz2m9jSNRlxJHZwHKpAdMcu8HFXPpsOxDZAi62Zp9C+FMBeRNtN7ieU0UHdxtG
+ V+Ddqarul9oGTtAXKvp0UU34V7WqX4oO77P8wx2Hs4411jT0UdEZ2FxmCu1FI5P7m2db
+ Tx50rN3nHWrag8ZxywhsstKEFIjErjNFaz28rnXsmHPUqbn1Gs+9spAafeWUcDbN/Kpu
+ tQKg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWcoZj0X0IW7VRMS03XLwLMzqEz9QTxSnlco+4VXVOoT0pRp9SUFFsQ9VxAbwP8TKJkrTSM66Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YyepfTGRHbO3oLI6vRFa6ghC1iUMpMpImvONPTSqN3UkR2rfhD7
+ W/UEpkMTqC15vlR6RXQW19pX2Qnv7bv2zeEg+1IC2mGaqVUizI4K
+X-Gm-Gg: ASbGncs7P+UoejcH0nkrFgk5QmWylUOXDj/Vri8sRvqECnZQGxpSYsV+4dmR2OakxQV
+ x8I8VKHRDyg78Zf/dibEHFQP7R51vEZVeIvGY5mNxWHK0G2ehSDEe9qneV+f8ExrdiOYZpGeNnA
+ WYnm53CVzHFHE+ClfIUtEZ6SQ8skZnO5gaNgyYjl6xhSx0DHzxWB2x3LRIGXjz6W71QMf3Oibam
+ vBKCgBs0lKTjTJD/UOCEp8f3NpxfpHcqVNaDsvO9BXbNDxmsynr83K3X131Jpzn9g6gXeA1DtUP
+ vnqWrRUO1thxpIwqc9eGpooRKokWlHic78VwYkuyJ+4YnoNwyIPm1cLAWcj9tqVx8AIzwvI9m+Q
+ KSvNqC9j1QPLbSA==
+X-Google-Smtp-Source: AGHT+IGZldJp9vl3QwL9VXzUN0Lb+OyMQJNwQPBKtSfolSHAgtUWbRTBH0jWoLDwQ1K3qkSCBrH0OQ==
+X-Received: by 2002:a05:6000:1f88:b0:391:2306:5131 with SMTP id
+ ffacd0b85a97d-3971f7f8ab4mr7734929f8f.45.1742030687234; 
+ Sat, 15 Mar 2025 02:24:47 -0700 (PDT)
+Received: from localhost.localdomain (93-34-90-129.ip49.fastwebnet.it.
+ [93.34.90.129]) by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-43d1fdc8e9esm23256105e9.1.2025.03.15.02.24.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 18:29:35 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] Kconfig: Fix "warning: style: quotes recommended" warnings
-Date: Fri, 14 Mar 2025 19:29:33 -0600
-Message-ID: <20250315012933.399487-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ Sat, 15 Mar 2025 02:24:46 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Tero Kristo <t-kristo@ti.com>,
+ u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Subject: [RESEND PATCH] clk: fix crash on clk_set_rate clean rate cache
+Date: Sat, 15 Mar 2025 10:24:14 +0100
+Message-ID: <20250315092420.793-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,60 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have three warnings about needing to use quotes around some strings
-in Kconfig files today. In two of these cases we can just add the
-missing strings. In the case of INTEL_PINCTRL_PADCFG_PADTOL the symbol
-is never referenced and should be dropped.
+It's currently possible to make the bootloader crash on calling
+clk_set_rate caused by the loop in clk_clean_rate_cache.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+The loop assume that every child of the clock node are also clock
+device but this is not always the case. For example it's common for a
+clock to bind to a reset device or also expose a syscon if the clock
+register map is also used to apply special configuration.
+
+In such case, on accessing a device as a clock, the bootloader crash. To
+correctly handle this, check if the child device is actually a clock and
+ignore otherwise.
+
+Fixes: 6b7fd3128f71 ("clk: fix set_rate to clean up cached rates for the hierarchy")
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- Kconfig                       | 2 +-
- drivers/pinctrl/intel/Kconfig | 3 ---
- lib/Kconfig                   | 4 +++-
- 3 files changed, 4 insertions(+), 5 deletions(-)
+RESEND as there was a problem with email To:
 
-diff --git a/Kconfig b/Kconfig
-index 70dc385dd2f2..a508c5430f0d 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -748,7 +748,7 @@ source "dts/Kconfig"
+ drivers/clk/clk-uclass.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 353ae476068..8f3309d9530 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -554,6 +554,9 @@ static void clk_clean_rate_cache(struct clk *clk)
+ 	clk->rate = 0;
  
- source "env/Kconfig"
- 
--menu Networking
-+menu "Networking"
- 
- choice
- 	prompt "Networking stack"
-diff --git a/drivers/pinctrl/intel/Kconfig b/drivers/pinctrl/intel/Kconfig
-index 316a8fe27fda..0d8bfc53c114 100644
---- a/drivers/pinctrl/intel/Kconfig
-+++ b/drivers/pinctrl/intel/Kconfig
-@@ -8,9 +8,6 @@ config INTEL_PINCTRL_DUAL_ROUTE_SUPPORT
- 	bool
- 	default y
- 
--config INTEL_PINCTRL_PADCFG_PADTOL
--	bool n
--
- config INTEL_PINCTRL_IOSTANDBY
- 	bool
- 	default y
-diff --git a/lib/Kconfig b/lib/Kconfig
-index a21b3378fa74..179544611148 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -445,7 +445,9 @@ config CIRCBUF
- source "lib/dhry/Kconfig"
- 
- menu "Alternative crypto libraries"
--source lib/mbedtls/Kconfig
+ 	list_for_each_entry(child_dev, &clk->dev->child_head, sibling_node) {
++		if (device_get_uclass_id(child_dev) != UCLASS_CLK)
++			continue;
 +
-+source "lib/mbedtls/Kconfig"
-+
- endmenu
- 
- menu "Security support"
+ 		clkp = dev_get_clk_ptr(child_dev);
+ 		clk_clean_rate_cache(clkp);
+ 	}
 -- 
-2.43.0
+2.48.1
 
