@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C20CC35FF1
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:18:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C06C35FF1
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:18:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B66A810EB;
-	Sat, 15 Mar 2025 23:18:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C83D3811DF;
+	Sat, 15 Mar 2025 23:18:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d2HLY4iS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E5o14acE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33A19809A4; Sat, 15 Mar 2025 23:18:22 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 939A681100; Sat, 15 Mar 2025 23:18:23 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9950809A4
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5ABB28058A
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-30155bbbed9so943447a91.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:19 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-223959039f4so66751365ad.3
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742077098; x=1742681898; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742077100; x=1742681900; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4qQuUJzPhcB3525WwsQuK/LkKz++dwAR1dMAUbWZF54=;
- b=d2HLY4iSMIAm+KrLtSC09SCsP6iXWUqNKnxhEyLadwcQ+rLIMWJweyxaslXhRNn7wD
- po84nhy8kkHCRJxd5cb2+j8PVQd/rXduAEIdWDkGr34amEC9Fwxs60OcrjrhPazwOFrA
- LBakqMXEupWTN4cChARjxvyVk/gT0diKJiv9wJaeCB9KbTMRMzYMkYAeBqqSLnN1+OBE
- xmQh2bZw6biyj+qXbFXUw7lcDE0QIfg6DUuRKZT71Fp4bXb+hF7EtsgWxCH9w63Yf2MR
- /wq6elEZeufUKQFth4b9npMP/lyK5FeAMtqY6tfGwoye3uiJcBq+vNRysk3T1JgaPZpq
- FPhA==
+ bh=PdBdtT/tZDocWsNJDE80Vl0rKR4EhGfgbqzhzPglR1s=;
+ b=E5o14acE9GETSTl9fLF3OqjHjIF38A9F6gCGhtaSmkkNpJVywZmaJ1tPrtecABZzE2
+ qQfdPWUXRC+O3jm7G06ey9B6XFnj3tWxX3TpVNtokB3k7Z4IEGvqcnkXfRCZV9hD/s7N
+ 8ZS2YFgMIjoMfbsha1zVTIXPZFLsYRPwKS7jWTSucvdQOCJ2EYIGqyuLBLYy7M3ok0Jt
+ N8AB1cBBWKAiN/QxgN1Nbo4dIUzsxrabZB4KIxy+GCK3s9jFJipNQaq0ntl42vnPe7n0
+ UBdl4fqkIamaLZVRyfUcv0mgJLXhInyP07pKwliBgj8mCr65nPgxZ6wyETK7LwIzkoRj
+ bJvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742077098; x=1742681898;
+ d=1e100.net; s=20230601; t=1742077100; x=1742681900;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4qQuUJzPhcB3525WwsQuK/LkKz++dwAR1dMAUbWZF54=;
- b=VpZyCe+Q+dOdWUEx6FJrcsFHJ9WNs8sXWfacystg4mOxt3hQRfrfdRdaTO12lwTcUk
- EYgCiT7jVkMdBntKgYLi2BlZJyklplLIhiNGk4CX2WbEK5HiNGbcxNFJBL+heElsyxto
- yXWlV3sHcpRU6AzjgAyyLOOrO7Ajkq8U2uptyuhhASXp5ATDvazVR9zhoPGprXGLz5VE
- TgNN/t1/i1w3/6GLh+MT8wgtJOIwIhap0qSfTF6dwobeys/dbEeKSNHOjVEc2sfBiN+o
- e6mecNzf38BVQuLcybihBP5q9XMuMGsCvHjBH5Yjt9OfMF/QFtRE7RaAfJmmHeXIIpHY
- bHSw==
+ bh=PdBdtT/tZDocWsNJDE80Vl0rKR4EhGfgbqzhzPglR1s=;
+ b=iIxHk3I1T9+f7uoX8ubfkOckxXivnbDDXNpv44nk0wK2iNTeBVkG5iJEHOGGHg/xec
+ iE/pWHSqI7NcaKh+NgOwncEru4BlgaTW+OUEj3kJYPm+J2Yw3ouJ9I47yUVw8fSY4qlU
+ 0gfDUoDTp+5YhGlcy9hS4ybTYvOxMX3gUecpQnH4WsLV5j50IWg849bRnP2G1MYf0xfM
+ CfTqM+/S2oexNHxEudv3fMz41kbGC19UIINP+q/1+LkgEk9QTiG4t5qCQuOUWdBI+uXZ
+ t9AzNBocCn6X2J1nLGvgUKfNSirljfuOpEiKWdZo2nCa2/LJJCDsfI5ji8uyfGxGqA2U
+ yvtw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/yOP2eILPoa20KMez0yXJBdZWwuHi3hOKzJjogu+77FFhgC/RJv6PoJZgQjc76StWAsSS5/0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3drb7lJhgbI/iLxRDYEI2mfA5VFOtHzefJW59/epm/kDfc3Yl
- Epx5jHJajRw6vDR0m6OmWZKwffLMXAGQaq02hBxnqpqxtXYLH8Un
-X-Gm-Gg: ASbGncuBUrDr3v55YWL1wFIOcbIW5UrbGQaqi/sM5AZlh2+NJFDV4tWugYFy6GYJocx
- QhSj0sdIEn2GqjrmWaXnYs4/IcSF4p/Hsd9Y2+oByUlISZHBB0ullDXJWkrOK0K5gSn9vad4MUv
- rpIm48U6JnBvF1BA62fNHCDJ2M7pVuhXFKy+MzTWTRefpM0qb2QeXZwRx+F0xh1hYbYaNMS9IkF
- xMIH5S9v0Q9TpcjYDUmDNBomtNu8AfUq7LNJxmquZVDXCOlzfuu/yZsRf3Evgj2/WJkE9RHxOPf
- Sza4nX6bInupnWqsyyGztBxUPwiwnEKQHYmDI0wS3yNkKX7M+8F9wOQ=
-X-Google-Smtp-Source: AGHT+IFA/1nUB/Dkd6aa9tcaG904zzn4tokjsygmx/kcuW9bzy/eNqcDL4zHOg9n/7OZlbGna7xMDQ==
-X-Received: by 2002:a05:6a21:1fc7:b0:1f5:7007:9eb1 with SMTP id
- adf61e73a8af0-1f5c12cd9bemr12224099637.34.1742077098402; 
- Sat, 15 Mar 2025 15:18:18 -0700 (PDT)
+ AJvYcCVmMuaOTfeKwZMTBzI7IBxFKeLfW/8wtDrCErxyNzy283yAdIp7s9AsxdEtO3cPG2TPin8hznY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwscePVwcS6WOKY6m36I0SEFDXT9e9/qceXRhHj0wZrsaD6sc4G
+ rcagnQiADpPL2mHXcQ4j9evmoWWq4t+kiqX4ZsEDSp+VckK3Q5BbF48RERtfcPM=
+X-Gm-Gg: ASbGncuPTZcCv1YHVTMAHgM8C7ni6h/2VdIFIDClZV59eH4kCOFSeHGI/RNByWM7d84
+ +MkYZ5SfFJ8Y01k1yMs2zN2EHbxbZMF1nmV4sN6h1859Us+vd+IEb9zWK4zQC9VAW1f7X4ClvEw
+ Y6uXOpFwGZTSJmp8CoJPcEJDSSsUe/KbLy7GkRgQHBH6AMuE+qiHOmvWABpl6UaVeGSoLVeaQ+R
+ UsY6BE6P9ocGxi6olGxjOc+dDvt92fRDRmNTdYy+ricTanbdvJ7ewnig6yy2A+ZI9AEMB/21K2U
+ vEZ/JEFCPrNUvKY3ollm7C+gebJFRI7VUkrtFCAP+VOr/EIWUV4qi6CJlV/TorMTTQ==
+X-Google-Smtp-Source: AGHT+IEoLYnGqPbGtUKsFOu5Xj2j36f0wsI1pt08mFguBKxOFqhPMbX54yQizWFmB2K3U4SQAGZ+iA==
+X-Received: by 2002:a05:6a00:4f92:b0:736:532b:7c10 with SMTP id
+ d2e1a72fcca58-737223fccabmr9033223b3a.21.1742077099853; 
+ Sat, 15 Mar 2025 15:18:19 -0700 (PDT)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:f31:f69b:ca22:e094])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.17
+ d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 15:18:17 -0700 (PDT)
+ Sat, 15 Mar 2025 15:18:19 -0700 (PDT)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -81,10 +81,9 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH v2 01/15] arm: Remove stray .mmutable reference in linker
- script
-Date: Sat, 15 Mar 2025 15:17:59 -0700
-Message-ID: <20250315221813.1265193-2-CFSworks@gmail.com>
+Subject: [PATCH v2 02/15] arm: Exclude eabi_compat from LTO
+Date: Sat, 15 Mar 2025 15:18:00 -0700
+Message-ID: <20250315221813.1265193-3-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250315221813.1265193-1-CFSworks@gmail.com>
 References: <20250315221813.1265193-1-CFSworks@gmail.com>
@@ -106,39 +105,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The .mmutable section was deprecated in 2012 [1] and finally removed
-entirely from U-Boot in 2022 [2], so this special handling is no longer
-necessary. Remove it to tidy up the linker script.
-
-[1]: dde3b70dcf3d ("arm: add a common .lds link script")
-[2]: 3135ba642f9a ("arm: pxa: Remove CONFIG_CPU_PXA25X")
+These symbols need to survive the IR-level dead function elimination pass,
+since nothing at the IR level is referencing them (calls to these are inserted
+later, at codegen time).
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/cpu/u-boot.lds | 9 ---------
- 1 file changed, 9 deletions(-)
+ arch/arm/lib/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index 2f50087f57a..63e82a09fad 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -169,15 +169,6 @@ SECTIONS
- 	_end = .;
- 	_image_binary_end = .;
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index 1c95dd6fed2..74cd5051552 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -92,6 +92,7 @@ obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi_table.o
+ # For EABI conformant tool chains, provide eabi_compat()
+ ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
+ extra-y	+= eabi_compat.o
++CFLAGS_REMOVE_eabi_compat.o := $(LTO_CFLAGS)
+ endif
  
--	/*
--	 * Deprecated: this MMU section is used by pxa at present but
--	 * should not be used by new boards/CPUs.
--	 */
--	. = ALIGN(4096);
--	.mmutable : {
--		*(.mmutable)
--	}
--
- /*
-  * These sections occupy the same memory, but their lifetimes do
-  * not overlap: U-Boot initializes .bss only after applying dynamic
+ # some files can only build in ARM or THUMB2, not THUMB1
 -- 
 2.48.1
 
