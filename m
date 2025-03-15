@@ -4,94 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5540C282EC
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 00:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F34C282EC
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 033FA82040;
-	Sat, 15 Mar 2025 01:12:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0119981F7E;
+	Sat, 15 Mar 2025 02:27:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MHGZJ/ax";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XzQb5jtA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95D8D82047; Sat, 15 Mar 2025 01:12:33 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id D3CDC8209F; Sat, 15 Mar 2025 02:27:43 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D07D81F7E
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 01:12:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BB3081F59
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:27:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-300f92661fcso351545a91.3
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 17:12:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-476a57a9379so37220951cf.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:27:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741997550; x=1742602350; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=oSVGQ+pxUrXoOognGaiAa0fxAT8e/wKwhjVJIADqEOI=;
- b=MHGZJ/axEMxrOuxYTa9dgHWap+kbVYbIc3qkxNkt4gARnE7vVyn397pThfd8CeKWZN
- eplxgfbkyA7dZmraHnbatHRAuH1tCyXNqiupX8yoQu3Y5WkvQIw4jT8/+Hf5LSemjDjH
- eu0kONsc+LIOOYgTVjVJsPtrGXg4YjW4cAtepSvBvEstohQpv5l2ENXaEppvQHMHv+qY
- AjlmcB68AROyg0k1fuADLpA40ClGsLju9FrCVUlUH6fk4Vt+/O5sjGBfNK0ho559Z8ar
- MORRa+VVeyGCv6IiD2jhIP2ym0rUC1CECKhXYgiC9+kxGMD1tttSp3RmyIhm55BFBpeu
- JP8g==
+ d=konsulko.com; s=google; t=1742002060; x=1742606860; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=e02qKBqYFeYtWUgPbmR+yJwhz19citSUhGwT0D2u3jk=;
+ b=XzQb5jtAnNrZH2G0ledsyEde3Yqq0JLf0yVvZwr7O//VVzYPHr9UDxesG3RZ8N60kR
+ 6qq7rMDtFChzCl9Yml2xdhY1SuE6hTJ7LJ0038aecZFULEQVL8EHVvmKJcIYWye3hijH
+ 3wVGV0zK13NGT028Fe7ZDdga4Q2jgECbjGVeQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741997550; x=1742602350;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oSVGQ+pxUrXoOognGaiAa0fxAT8e/wKwhjVJIADqEOI=;
- b=fJTXRA2bIGfenLNqsYY0t0h7NK0IXXX6drAlpsQYoGXG5TqQ2/z91njkghvwKV66Yp
- MacLDqQAc/bqVEl3YXNbqeLOswnlpZUImH/sy4b0JfVBmB4WSKdpdWpIT5/NvWtTk0KR
- JatVFyiQ//ro1uOrx6x69JRRGS6ju8xjjTv9N/hLwhRIB6/C1EmwDxRpnWHKtY6fQLw5
- vUwUPwhO+OU1csIDyqr79TvOS5Z2hTmwQZ6ajK4NBjO4k3xPuE8cDZMnVmNwes7i+VDb
- ROxyRmQYxj22NxBJFSanBJAbNVNQ0YXXiUQXMPkq046ebDv/MOodxFMgjLczbX8Y39J1
- vrkg==
-X-Gm-Message-State: AOJu0YxnqnZRwK3fxrDpgajseu0G/iQRbtCge6iuem92Q0UN34W9nyXz
- Hm+UuSfVnmJB0+906JtuwI2mrMKw1NHpNoOXxJTe4exywCsQnUCp
-X-Gm-Gg: ASbGncvZ8/5fetjG90jQ6BejR2ApvnWt2tKLTcVHlH/wTcOD/5mGByosC2bfbzoMegy
- uB71WpsY1xl7WePZYtDqhVtgnuMg4hE/YczuqnC3AR5lLB/rkyUyZlV5sEuf7e16vbswXgeJrg+
- IINlBW0I0qFp4YF2FCKBTCGqpoZq9MzqW8XohIDbotY5i4WsGh0HWrytQSsBoayIWC/o8MxQFJi
- WA8epXPRm8Fxg0mmLeP9pUtkLx315VyekCekaYjd4ZXuiq6iMHIUpR1mAljIqhH39Jx8382OFDi
- zwiKUmrCLHfN34jeJeLZfvDIrUymXcnaRaEh9n+qPl7Q1EAkvB3/s6hEFzMOK53yOvBOf3E7+2v
- hWsVzhhNkbY/8WBGnJx8X
-X-Google-Smtp-Source: AGHT+IGAMJu/35UFa9cN4GxGjIemPNcidOHTjGHbw5z2U7IcOBj5U6dqEk8M8e24TKes8CD/mu3IwQ==
-X-Received: by 2002:a17:90b:2cc3:b0:2ee:f076:20f1 with SMTP id
- 98e67ed59e1d1-30151acdcf1mr6461010a91.0.1741997549650; 
- Fri, 14 Mar 2025 17:12:29 -0700 (PDT)
-Received: from [192.168.0.10] (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-301539d3f17sm1633649a91.10.2025.03.14.17.12.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Mar 2025 17:12:29 -0700 (PDT)
-Message-ID: <ee59e161-7b0a-4cdf-a4da-16aedbe9afb8@gmail.com>
-Date: Sat, 15 Mar 2025 09:12:25 +0900
+ d=1e100.net; s=20230601; t=1742002060; x=1742606860;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e02qKBqYFeYtWUgPbmR+yJwhz19citSUhGwT0D2u3jk=;
+ b=h1LwR7jswW1YQJksVwpI+BQt7khfmWWBz1PDvdXyrihDBgPZs4hmtbh6nf7a7s/WxG
+ 5hdUwVOg55GsWjZ/x3IGLD1ecCP7meKQYYuqLI8f56Uumg66FDGryVG8NBUgQ+N1tBb0
+ rrxZs4CAI/ZPPWYZJzgvRBaRvd909t6Po7z7U9Sr4s0tAnGr9h3iA19uo8jl/zig36Wn
+ IrOIoYG015tH4r1+RQSxSxMb/k0SfXslrQ9GZa4NkIA4vvw07ziBtAmlnDmquvAVQ7Oq
+ qUu3Kdi3/bnCUUUlVH5i6GvpxLGneNm8O8RFoQWuihXupSAq33RuxUCjb9JABNDJRwUh
+ KWdg==
+X-Gm-Message-State: AOJu0YxuwapGnVpE98QeD/owAFJpEgiyjJfCwv0nYj5bvRjzYngrMl9h
+ lXB+9HWkgXEv+2uHEUtZYKi4ni59cFnG4i4c/qAAyTRv5MZPsuwDBEgkwXLGRKCfshYsMXFb93Y
+ D
+X-Gm-Gg: ASbGnct/FOwKOv9t66c+j5J8osIbHBDOvZ5mlqiSTUIJcmxiKRvXAaVR3GcbYiX3aFG
+ CiD84EmbGN6pDnnDHv5Q4DjAmnalDV/eJ8Vy9ykY05fvmdBV66NK2kG4enS6d7+mZo9x8VPaVVz
+ vslaRorNpfRo0Zm6jo8BdPP11ctkGYUuUrEjmjtotK6CdLLitLAdcCOhixXA7Gn2ENIlV+XH8ND
+ 0uR5CQBrAABN35fkqio4tKPrIZID0jchrM+SfG3Jsm410bD+IQph6gr1GyIMihS+hGj20J8cmlC
+ vV30ABpMGhi7us/nPU8h82K59btCWHpq0acgeNK6cx+WY9rr
+X-Google-Smtp-Source: AGHT+IEpCMwoCRQsU9xCbiEJDPPCulX8PLqLCE/hV0AKP6ba05M9u2ECPyRVabF5aChz44k2SLQK8Q==
+X-Received: by 2002:a05:622a:5e8b:b0:472:6aa:d6be with SMTP id
+ d75a77b69052e-476c8142d12mr62461521cf.17.1742002060054; 
+ Fri, 14 Mar 2025 18:27:40 -0700 (PDT)
+Received: from bill-the-cat.. ([187.192.142.234])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-476bb82c1b7sm29263711cf.74.2025.03.14.18.27.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Mar 2025 18:27:39 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>
+Subject: [PATCH 1/2] usb: ulpi: Remove unused omap-ulpi-viewport driver
+Date: Fri, 14 Mar 2025 19:27:35 -0600
+Message-ID: <20250315012736.399197-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] mtd: spi-nor-core: Rework spansion_sr_ready() for
- parallel memories support
-To: Tom Rini <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>,
- jagan@amarulasolutions.com, vigneshr@ti.com, pratyush@kernel.org,
- ashok.reddy.soma@amd.com, venkatesh.abbarapu@amd.com,
- Hiroyuki.Saito2@infineon.com, Shinsuke.Okada@infineon.com,
- Daisuke.Nakata@infineon.com, Bacem.Daassi@infineon.com,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-References: <cover.1741930961.git.Takahiro.Kuwano@infineon.com>
- <39ff6a5876f739f27aae4121f0669545def4aafe.1741930961.git.Takahiro.Kuwano@infineon.com>
- <b4fa6dc3-d9c5-4543-8410-5125a6fc9b7f@linaro.org>
- <20250314145415.GP2640854@bill-the-cat>
-Content-Language: en-US
-From: Takahiro Kuwano <tkuw584924@gmail.com>
-In-Reply-To: <20250314145415.GP2640854@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,29 +91,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/14/2025 11:54 PM, Tom Rini wrote:
-> On Fri, Mar 14, 2025 at 07:40:17AM +0000, Tudor Ambarus wrote:
->> + Marek,
->>
->> Hi,
->>
->> On 3/14/25 5:53 AM, tkuw584924@gmail.com wrote:
->>> spansion_sr_ready() needs to support parallel memories configuration,
->>> that reads status register value from each devices and combines the
->>> status bits, likewise read_sr() and read_fsr().
->>
->> SNOR_F_HAS_PARALLEL describes 2 flashes that work in parallel mode. And
->> we hacked SPI NOR and used a single spi_nor object to handle both
->> flashes which is obviously wrong.
->>
->> My 2c is that we shouldn't build on top of a crumbling foundation. Until
->> everything's moved on top of SPI NOR, I'd accept just fixes on this
->> subject, so no new support. Tom and Jagan to decide.
-> 
-> Yes, I believe I was expecting some patches to redo / rework what we
-> have in-tree currently.
-> 
-Understood our current position and status, thanks!
+The last platform to enable this driver was removed in 2019. Remove this
+unused code and documentation now.
 
-Takahiro
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Marek Vasut <marex@denx.de>
+---
+ doc/README.omap-ulpi-viewport         | 27 ----------
+ drivers/usb/ulpi/Kconfig              |  5 --
+ drivers/usb/ulpi/Makefile             |  1 -
+ drivers/usb/ulpi/omap-ulpi-viewport.c | 71 ---------------------------
+ 4 files changed, 104 deletions(-)
+ delete mode 100644 doc/README.omap-ulpi-viewport
+ delete mode 100644 drivers/usb/ulpi/omap-ulpi-viewport.c
+
+diff --git a/doc/README.omap-ulpi-viewport b/doc/README.omap-ulpi-viewport
+deleted file mode 100644
+index a5240b9e2951..000000000000
+--- a/doc/README.omap-ulpi-viewport
++++ /dev/null
+@@ -1,27 +0,0 @@
+-Reference code ""drivers/usb/ulpi/omap-ulpi-viewport.c"
+-
+-Contains the ulpi read write api's to perform
+-any ulpi phy port access on omap platform.
+-
+-On omap ehci reg map contains INSNREG05_ULPI
+-register which offers the ulpi phy access so
+-any ulpi phy commands should be passsed using this
+-register.
+-
+-omap-ulpi-viewport.c is a low level function
+-implementation of "drivers/usb/ulpi/ulpi.c"
+-
+-To enable and use omap-ulpi-viewport.c
+-we require CONFIG_USB_ULPI_VIEWPORT_OMAP and
+-CONFIG_USB_ULPI be enabled in config file.
+-
+-Any ulpi ops request can be done with ulpi.c
+-and soc specific binding and usage is done with
+-omap-ulpi-viewport implementation.
+-
+-Ex: scenario:
+-omap-ehci driver code requests for ulpi phy reset if
+-ehci is used in phy mode, which will call ulpi phy reset
+-the ulpi phy reset does ulpi_read/write from viewport
+-implementation which will do ulpi reset using the
+-INSNREG05_ULPI register.
+diff --git a/drivers/usb/ulpi/Kconfig b/drivers/usb/ulpi/Kconfig
+index 001564d40c63..482114d6c11d 100644
+--- a/drivers/usb/ulpi/Kconfig
++++ b/drivers/usb/ulpi/Kconfig
+@@ -14,11 +14,6 @@ config USB_ULPI_VIEWPORT
+ 	  Support generic ULPI Viewport implementation that is used on
+ 	  some Tegra and Snapdragon devices.
+ 
+-config USB_ULPI_VIEWPORT_OMAP
+-	bool "OMAP ULPI Viewport"
+-	help
+-	  Support ULPI Viewport implementation that is used on OMAP devices.
+-
+ endchoice
+ 
+ config USB_ULPI
+diff --git a/drivers/usb/ulpi/Makefile b/drivers/usb/ulpi/Makefile
+index f05b7743531e..5565948bc12d 100644
+--- a/drivers/usb/ulpi/Makefile
++++ b/drivers/usb/ulpi/Makefile
+@@ -4,4 +4,3 @@
+ 
+ obj-$(CONFIG_USB_ULPI)		+= ulpi.o
+ obj-$(CONFIG_USB_ULPI_VIEWPORT)	+= ulpi-viewport.o
+-obj-$(CONFIG_USB_ULPI_VIEWPORT_OMAP)	+= omap-ulpi-viewport.o
+diff --git a/drivers/usb/ulpi/omap-ulpi-viewport.c b/drivers/usb/ulpi/omap-ulpi-viewport.c
+deleted file mode 100644
+index 6f0c3eb154ee..000000000000
+--- a/drivers/usb/ulpi/omap-ulpi-viewport.c
++++ /dev/null
+@@ -1,71 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * OMAP ulpi viewport support
+- * Based on drivers/usb/ulpi/ulpi-viewport.c
+- *
+- * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com
+- * Author: Govindraj R <govindraj.raja@ti.com>
+- */
+-
+-#include <log.h>
+-#include <asm/io.h>
+-#include <linux/delay.h>
+-#include <usb/ulpi.h>
+-
+-#define OMAP_ULPI_WR_OPSEL	(2 << 22)
+-#define OMAP_ULPI_RD_OPSEL	(3 << 22)
+-#define OMAP_ULPI_START		(1 << 31)
+-
+-/*
+- * Wait for having ulpi in done state
+- */
+-static int ulpi_wait(struct ulpi_viewport *ulpi_vp, u32 mask)
+-{
+-	int timeout = CFG_USB_ULPI_TIMEOUT;
+-
+-	while (--timeout) {
+-		if (!(readl(ulpi_vp->viewport_addr) & mask))
+-			return 0;
+-
+-		udelay(1);
+-	}
+-
+-	return ULPI_ERROR;
+-}
+-
+-/*
+- * Issue a ULPI read/write request
+- */
+-static int ulpi_request(struct ulpi_viewport *ulpi_vp, u32 value)
+-{
+-	int err;
+-
+-	writel(value, ulpi_vp->viewport_addr);
+-
+-	err = ulpi_wait(ulpi_vp, OMAP_ULPI_START);
+-	if (err)
+-		debug("ULPI request timed out\n");
+-
+-	return err;
+-}
+-
+-int ulpi_write(struct ulpi_viewport *ulpi_vp, u8 *reg, u32 value)
+-{
+-	u32 val = OMAP_ULPI_START | (((ulpi_vp->port_num + 1) & 0xf) << 24) |
+-			OMAP_ULPI_WR_OPSEL | ((u32)reg << 16) | (value & 0xff);
+-
+-	return ulpi_request(ulpi_vp, val);
+-}
+-
+-u32 ulpi_read(struct ulpi_viewport *ulpi_vp, u8 *reg)
+-{
+-	int err;
+-	u32 val = OMAP_ULPI_START | (((ulpi_vp->port_num + 1) & 0xf) << 24) |
+-			 OMAP_ULPI_RD_OPSEL | ((u32)reg << 16);
+-
+-	err = ulpi_request(ulpi_vp, val);
+-	if (err)
+-		return err;
+-
+-	return readl(ulpi_vp->viewport_addr) & 0xff;
+-}
+-- 
+2.43.0
 
