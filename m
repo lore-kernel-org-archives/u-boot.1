@@ -4,93 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EBB6C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB27C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDDD680F91;
-	Sat, 15 Mar 2025 15:38:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BF3180F70;
+	Sat, 15 Mar 2025 15:48:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ElLALV3A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TqbTwfqM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E721380F9A; Sat, 15 Mar 2025 15:38:43 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id B244680F9A; Sat, 15 Mar 2025 15:48:31 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61DE980756
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:38:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01E2580ECC
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:48:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e22e6ed2so4557872a12.3
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:38:41 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac2aeada833so588410766b.0
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:48:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742049521; x=1742654321; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742050108; x=1742654908; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TVbtizlVjyZk3wsqRuH5bDpwtK5POmwHDxT89XS3p1g=;
- b=ElLALV3AK7mAgtLSrmK5E5+qhWEi0Ga2H4smCrJRKthDy7r/hVU9cIDOoIWd3bcmTG
- +27e8rpwS4y9vqggytDhcyzhu+IsQEESSdGOKLVTnAIRUKUdoCNVOzTe6Wgu7rB71hP1
- VMziTYvp2Km4BUoJLQcgXtUj7Q2YdwuKpc/Pk=
+ bh=Yucmc3HqGk/nN/gw/nmYe7VT7xePafI571CnyWAiFO8=;
+ b=TqbTwfqMcHtklyHJyfOsgMy4ufLVW1ovQSSOLjG0sHmpP5EguIX8H+v92YVHWjxxQa
+ HmcvEK49A9I76XXfi174PoPmcl0eHRu9nTRC33E8EYElz2XipnhbeiX7mgjq6hDa3mmI
+ wREzxhgZKpScApOMmzvkSqJpnVVYwbe0BInyc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742049521; x=1742654321;
+ d=1e100.net; s=20230601; t=1742050108; x=1742654908;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TVbtizlVjyZk3wsqRuH5bDpwtK5POmwHDxT89XS3p1g=;
- b=Ni7s2kbu8rlp8w5FlEMEQY7YcWprswGVEBrTnnlxETtmMM4iJdiiPe6acnLQd+W6Af
- 7PwPKGDm7ac+RrV+Eq1xSVaTnM9LGJ2i7OsWT8UR1x2m5sAF6QOWilcZ5/eVAD1G8Z3E
- sS5ctziLjRQzt58jSo2cHqgSJqyfyGfR3OVmtx+oIhlXy+xYTgC72YmKXrs7CCxV104r
- u992lFcSMf/sJsAgEOrGYz76Pk51gB4sdxtMLsY0c7Hf/ajVrn4CMS8LAto86jiaAVSd
- iLSzoZlpvBkwfddCLfGSLtU5XnchezEFJBDd6rT+qgDP4fkgqjVDslfg9SIQA1tJH1Xj
- UcMQ==
-X-Gm-Message-State: AOJu0YzAOTD94MjSFoN2If/rNNN2nx6HPUIPqNM8AOu+iYrQVSFrh2UD
- /b7SkrUhyB7VudYpugrw8YUc1of5NrXHUIjpdzvnJMdWhlWSCe3dlXj+0ygk9OpHOJZm4B+MsAk
- zmLinwMWbiwCCNIFbRZupfCYvOse8KFJRbSBU
-X-Gm-Gg: ASbGncvOopxWe/rvhCCaHH1FG6KJ0L1RdsdWU5jSjJKBzVyz0BNTqUV/6oHB6ZOh0dW
- oa/J+bu9IB7+GvDfPidNO+7NlfDiDRSP1IDmjxrkvrVALIC+7XM9a//NvVSIfAOmAYRM2uwVxDD
- Z4O7uI33zIP+Iy9G/5VEhZZluwAgJzDVogU+tp7w==
-X-Google-Smtp-Source: AGHT+IHJaF9e0zV3ssuT+IiVhzCmNBte73n5CcXuKYJjrLmbw2arKls2ZPF9rh5JhvxJGOeh6TDAYLeE7UrzFjB3HCk=
-X-Received: by 2002:a05:6402:2793:b0:5e6:1996:7902 with SMTP id
- 4fb4d7f45d1cf-5e8a0c0d26fmr6916482a12.32.1742049520664; Sat, 15 Mar 2025
- 07:38:40 -0700 (PDT)
+ bh=Yucmc3HqGk/nN/gw/nmYe7VT7xePafI571CnyWAiFO8=;
+ b=rqgMBG0IxpQmpTJbfJcjFMRzAgo7WWpOywHpE3W70mpC8oi61rX9Pc0KHdtPhPcvnU
+ PT+lJYUuGJk5nyF++nyxFcrhQc85M1DlqmquntuuopT72ahFCpUH2zQlHwX9WnPtrmrF
+ voDMBBEbcUjHzsnae/HF6sX+4zf7m029Up2ZRlGIjNb/rXPhXDlQRS+3bTMzfRHHENJX
+ Xlg/0wPCnTF+oKCMCDKnB7/XNezgRJ6dEJaJ3flfiJ+hmqEspV0uhFxyPjV5OildcYk4
+ tout4RnPc5tQOHvczexRO3yUU/9KRbbLNVZnv/f6P4shXSBO8mEw03WGbi6YkEXnuyMI
+ GBIw==
+X-Gm-Message-State: AOJu0YxR4pqMp+r3cvCBItlNS6tyUC4oOK0V9oDQWV/Vg8CcA6yF6UIM
+ PHM880MFwBXOHXoRyXPTPc9/wYY9YVHL+nZ/XddhFQCsfV1zzqPQx0EXxS2QlfdXzL+I4eTG32z
+ QL62nSIbbdiJjcCe6+FRErGf+mJJ3EQryDWhD
+X-Gm-Gg: ASbGnctex3OVIFt5Naw1kVI7ZQfzuJ0qlTy1KOmGsXa8O1wL1OKaWvgqjZvaWxdDOno
+ mRzZPkqBcq5kG3klG+7it0GV4sM41JSYrsTn9TyvYHN1j8/btH0yv5KBjWO2OvT/pg/jeCJMyOK
+ sjIj54XoZ8TnNRLKb8e+rvyOr/I3SUc/2fZmZdaw==
+X-Google-Smtp-Source: AGHT+IFGIMWeGPPgIzif9O5N3upux4kOwR4WSsxXit577UpeD8Wy09dULxGDft0L8hC6GDJ/+BfIUuWt2if3hZuvBLU=
+X-Received: by 2002:a17:907:9713:b0:abf:68b5:f78b with SMTP id
+ a640c23a62f3a-ac3314ebabfmr579253466b.24.1742050108398; Sat, 15 Mar 2025
+ 07:48:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250306160428.3041057-1-sjg@chromium.org>
- <20250307142255.GL2640854@bill-the-cat>
- <CAFLszTgtYsVQW-kETzUAdvJvAT6fN_53TeoN7o8wu52Ze3u56Q@mail.gmail.com>
- <20250314160652.GS2640854@bill-the-cat>
- <CAFLszTjGV==WftDU6C=S8VB28QJLvFJGS0H3=PKwTCjkZvNibQ@mail.gmail.com>
- <20250315135749.GI2640854@bill-the-cat>
-In-Reply-To: <20250315135749.GI2640854@bill-the-cat>
+References: <20250209212714.2317040-1-sjg@chromium.org>
+ <20250209212714.2317040-2-sjg@chromium.org>
+ <20250217192316.GW1233568@bill-the-cat>
+ <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
+ <20250314153615.GR2640854@bill-the-cat>
+In-Reply-To: <20250314153615.GR2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Mar 2025 14:38:29 +0000
-X-Gm-Features: AQ5f1JryOCU1CPd9qV8swCUkqyaT5LDarLbQvIYJbFTEBjjncUyBQewbAE2hkI4
-Message-ID: <CAFLszTjEONSErVbE0O5E0+izUDO8yFNZ+hwzvHjvx-nTczzeSQ@mail.gmail.com>
-Subject: Re: [PATCH v4 00/47] x86: Improve operation under QEMU
+Date: Sat, 15 Mar 2025 14:48:18 +0000
+X-Gm-Features: AQ5f1Jrn8WHAucu19t2IBBkuJCuGPK4-qy9ChGcPzXJRQIPQMqo_VwLtaC8J2HU
+Message-ID: <CAFLszThguOxcC2nR467Qc9U+VdO91F48mhPuv7d6DDF7WKbyqQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Angelo Dureghello <angelo@kernel-space.org>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Julius Lehmann <lehmanju@devpi.de>, Love Kumar <love.kumar@amd.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Philip Oberfichtner <pro@denx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Richard Weinberger <richard@nod.at>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, qemu-devel@nongnu.org
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brandon Maier <brandon.maier@collins.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,141 +92,164 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sat, 15 Mar 2025 at 13:57, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 14 Mar 2025 at 15:36, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Mar 15, 2025 at 12:54:25PM +0000, Simon Glass wrote:
+> On Fri, Mar 14, 2025 at 02:45:27PM +0000, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Fri, 14 Mar 2025 at 16:06, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 17 Feb 2025 at 19:23, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Mar 14, 2025 at 02:44:35PM +0000, Simon Glass wrote:
-> > > > Hi Tom,
+> > > On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
+> > >
+> > > > Reduce the number of warnings in this file.
 > > > >
-> > > > On Fri, 7 Mar 2025 at 14:23, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Mar 06, 2025 at 09:03:27AM -0700, Simon Glass wrote:
-> > > > >
-> > > > > > U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but it
-> > > > > > is not perfect.
-> > > > > >
-> > > > > > With both builds, executing the VESA ROM causes an intermittent hang, at
-> > > > > > least on some AMD CPUs.
-> > > > > >
-> > > > > > With qemu-x86_64 kvm cannot be used since the move to long mode (64-bit)
-> > > > > > is done in a way that works on real hardware but not with QEMU. This
-> > > > > > means that performance is 4-5x slower than it could be, at least on my
-> > > > > > CPU.
-> > > > > >
-> > > > > > We can work around the first problem by using Bochs, which is anyway a
-> > > > > > better choice than VESA for QEMU. The second can be addressed by using
-> > > > > > the same descriptor across the jump to long mode.
-> > > > > >
-> > > > > > With an MTRR fix this allows booting into Ubuntu on qemu-x86_64
-> > > > > >
-> > > > > > In v3 some e820 patches are included to make booting reliable and avoid
-> > > > > > ACPI tables being dropped. Also, several MTTR problems are addressed, to
-> > > > > > support memory sizes above 4GB reliably.
-> > > > >
-> > > > > Do you plan to rebase the prerequisite series' this requires so that it
-> > > > > can be merged?
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
 > > > >
-> > > > Here's my understanding of where things are:
-> > > >
-> > > > 1. You rejected the membuf series and my replies to try to resolve
-> > > > that haven't gone anywhere yet. So your tree doesn't have any tests
-> > > > for that code and still has the old naming.
+> > > >  tools/buildman/func_test.py   |   4 +-
+> > > >  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++----------------
+> > > >  2 files changed, 128 insertions(+), 116 deletions(-)
 > > >
-> > > https://patchwork.ozlabs.org/comment/3473898/ is a well thought out not
-> > > gratuitous summary of why the series as it stands is a step in the wrong
-> > > direction. Tests are good. They're not a reason to pull an otherwise bad
-> > > series. This series should be rebased to not depend on that series. The
-> > > tests from the other series should be split out.
+> > > As I think these all were warnings from whatever other linting you had
+> > > mentioned in another thread, I deferred this patch as it also doesn't
+> > > cleanly apply.
 > >
-> > It's not a bad series, unfortunately. I replied with my own comments
-> > and I stand by them.
-> >
-> > I don't mind if you want to drop the #ifdef (which shows how a flag
-> > could be used and the code-size impact). But other than that, I am
-> > firm on this for now. I've already applied it to my tree and a membuf
-> > implementation with tests and without a power-of-two limitation is
-> > important for my current work on distros and expo.
+> > Some of it, yes. But most of it is fixing things that we should fix.
 >
-> Well, you need to rebase this series without that then as I'm not going
-> to take something another long time project contributor said was wrong
-> and offered lots of constructive feedback on.
+> To be clear, to the extent any of it was pylint problems, they've now
+> been addressed as we've moved to pylint 3.3.4.
 
-It doesn't affect this series. It is for future work.
-
-We'll see if the LTPC replies to my concerns.
+Actually, I don't know about those problems, but that's fine.
 
 >
-> > > > 2. I sent the first part of the PXE series so you could apply that.
-> > >
-> > > Yes, I should be applying that next week.
-> > >
-> > > > 3. You rejected the second part of this series because it didn't
-> > > > include support for lwip without cmdline. I offered to handle that
-> > > > case later but I'm pretty sure you rejected that too.
-> > >
-> > > That's not how I would characterize it, no. I said you should probably
-> > > focus on sandbox + lwip, since you're the sandbox guru and ask Jerome to
-> > > do the net_loop-alike thing, since he's one of the network custodians
-> > > and the lwip person. I was trying to direct you to where your efforts
-> > > might be most useful but if you insist on instead doing the
-> > > net_loop-alike part and Jerome ack's it, that's fine.
-> >
-> > As you know there have been many arguments from the EFI guys about
-> > sandbox and you have already rejected my sandbox-focussed EFI-memory
-> > series for your tree. If I were actually a guru, that wouldn't have
-> > happened.
-> >
-> > I see that Jerome has created some tests, which is good.
-> >
-> > So really, you should consider applying the full PXE series so that
-> > Jerome can build on that and add support for non-CMDLINE PXE in lwip
-> > in a way that you would like.
+> > This is going to open up a significant diff for patman, unfortunately,
+> > just as I am adding new features for series management. So please
+> > consider applying it. I can rebase if you like?
 >
-> I saw that Jerome posted sandbox for lwip as well and was pleased. You
-> can pickup whatever is left and move forward once both your current
-> series and his have been merged.
+> Yes, that's fine, please just explain what's showing the warnings or
+> otherwise update the commit message.
 
-For now I've just applied it to my tree. I believe my offer of adding
-non-CMDLINE lwip immediately after you applied it was a good
-compromise, but not good enough, so for now I've decided to just move
-on.
+Before:
 
->
-> > > > 4. This series is now marked 'changes requested' but the only feedback
-> > > > I see is in the RFC patch.
-> > >
-> > > Yes, rebase to something that can be applied is a change I've requested.
-> > > Because my feedback was "Do you plan to rebase the prerequisite series'
-> > > this requires so that it can be merged?". I would have otherwise merged
-> > > it by now.
-> >
-> > OK I sent a PR.
->
-> Eh? v4 as-is needs to be rebased to mainline. That you didn't make it
-> against mainline but instead your tree is why this wasn't merged
-> already.
+************* Module u_boot_pylib.gitutil
+tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
+(missing-module-docstring)
+tools/u_boot_pylib/gitutil.py:13:0: C0103: Constant name
+"use_no_decorate" doesn't conform to UPPER_CASE naming style
+(invalid-name)
+tools/u_boot_pylib/gitutil.py:40:19: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:65:20: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:72:25: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:64:12: W0612: Unused variable 'msg'
+(unused-variable)
+tools/u_boot_pylib/gitutil.py:114:21: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:121:25: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:122:17: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:139:41: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:141:40: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:146:4: R1705: Unnecessary "elif" after
+"return", remove the leading "el" from "elif" (no-else-return)
+tools/u_boot_pylib/gitutil.py:151:15: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:153:25: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:171:11: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:189:21: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:243:22: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:255:22: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:272:22: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:305:22: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:317:22: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:320:0: R0913: Too many arguments (6/5)
+(too-many-arguments)
+tools/u_boot_pylib/gitutil.py:320:0: R0917: Too many positional
+arguments (6/5) (too-many-positional-arguments)
+tools/u_boot_pylib/gitutil.py:345:16: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:347:12: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:353:4: R1705: Unnecessary "else" after
+"return", remove the "else" and de-indent the code inside it
+(no-else-return)
+tools/u_boot_pylib/gitutil.py:402:16: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:416:7: R1714: Consider merging these
+comparisons with 'in' by using 'suppresscc in ('all', 'cccmd')'. Use a
+set instead if elements are hashable. (consider-using-in)
+tools/u_boot_pylib/gitutil.py:420:15: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:433:0: R0913: Too many arguments (12/5)
+(too-many-arguments)
+tools/u_boot_pylib/gitutil.py:433:0: R0917: Too many positional
+arguments (12/5) (too-many-positional-arguments)
+tools/u_boot_pylib/gitutil.py:433:0: R0914: Too many local variables
+(17/15) (too-many-locals)
+tools/u_boot_pylib/gitutil.py:512:19: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:514:19: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:520:24: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:433:0: R1710: Either all return
+statements in a function should return an expression, or none of them
+should. (inconsistent-return-statements)
+tools/u_boot_pylib/gitutil.py:435:36: W0613: Unused argument
+'get_maintainer_script' (unused-argument)
+tools/u_boot_pylib/gitutil.py:592:14: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:593:8: R1720: Unnecessary "else" after
+"raise", remove the "else" and de-indent the code inside it
+(no-else-raise)
+tools/u_boot_pylib/gitutil.py:601:18: C0209: Formatting a regular
+string which could be an f-string (consider-using-f-string)
+tools/u_boot_pylib/gitutil.py:682:4: W0603: Using the global statement
+(global-statement)
 
-I sent a PR for the test series, to try to get that landed in your
-tree. At least that will help reduce the diff with new tests. The PR
-is the only prereq for v5 of this series (Ubuntu test).
+------------------------------------------------------------------
+Your code has been rated at 8.41/10 (previous run: 8.37/10, +0.04)
 
->
-> > > Patchwork reflects mainline status.
-> >
-> > OK. I am finding it more and more slow and painful. Since we are
-> > talking about Patchwork, I noticed some patches assigned to me in
-> > there, so I've assigned them to you. I'll try to look there more
-> > often.
->
-> I guess you missed the email where I told you what was assigned to you
-> in patchwork and could easily be put in a pull request by you to me to
-> get to mainline.
 
-Well let's see how things go over the next few days.
+After:
+
+************* Module u_boot_pylib.gitutil
+tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
+(missing-module-docstring)
+tools/u_boot_pylib/gitutil.py:325:0: R0913: Too many arguments (6/5)
+(too-many-arguments)
+tools/u_boot_pylib/gitutil.py:325:0: R0917: Too many positional
+arguments (6/5) (too-many-positional-arguments)
+tools/u_boot_pylib/gitutil.py:439:0: R0913: Too many arguments (11/5)
+(too-many-arguments)
+tools/u_boot_pylib/gitutil.py:439:0: R0917: Too many positional
+arguments (11/5) (too-many-positional-arguments)
+tools/u_boot_pylib/gitutil.py:439:0: R0914: Too many local variables
+(16/15) (too-many-locals)
+tools/u_boot_pylib/gitutil.py:694:4: W0603: Using the global statement
+(global-statement)
+
+------------------------------------------------------------------
+Your code has been rated at 9.73/10 (previous run: 8.41/10, +1.32)
+
+The patch is here:
+
+https://patchwork.ozlabs.org/project/uboot/patch/20250209212714.2317040-2-sjg@chromium.org/
+
+It looks like it will apply for you, if first you accept my PR.
 
 Regards,
-SImon
+Simon
