@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6BFC35FF3
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FEE9C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0094781DE3;
-	Sat, 15 Mar 2025 15:28:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E80C81D1F;
+	Sat, 15 Mar 2025 15:28:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l0MeQ8Js";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lNjUVzVz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 459FC81EC0; Sat, 15 Mar 2025 15:28:18 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id C647780F70; Sat, 15 Mar 2025 15:28:21 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42BD380F70
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:28:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B489B81ED8
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:28:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43cf05f0c3eso4129295e9.0
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:28:16 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43948021a45so6380755e9.1
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:28:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742048895; x=1742653695; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742048897; x=1742653697; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KHbemXiu5rRtYpiipAUbjOCQrUkto37/hy8eDHI+6Mk=;
- b=l0MeQ8JsUM16YqOxo/88hT3RzxaD2VBrl+9jnf5QYpawo0Y7+th1Vb9PIoMSNNi2vq
- vqTXdlMNYw+baETn8kTuV+vTlw7cQqe+4oM8k77AmU0+VcooEAxvKeEKQeb8eQr4hOqS
- gswuM/4EcVvNd9S9jvOj/6hZcCAxYTh4wm59Q=
+ bh=CnQvkjxejgtQsoJZCMItWFnO0NC3anMrsLYmvnDNxZ4=;
+ b=lNjUVzVzWN2qZiA8UhOZNo74j2urNf7QD01EVIOSOxjTWDFOglBrrenn53h/ELha6A
+ wOUaXDFOFq/QtwZ5gzhNRiYW+f4MtifinV1D8yBSazDRzs6u8ccCAm6S6Y6O4IWOg34x
+ EePMmD9GmWBQRZ1KzoPeI41t3PRe3Az36xsz8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742048895; x=1742653695;
+ d=1e100.net; s=20230601; t=1742048897; x=1742653697;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KHbemXiu5rRtYpiipAUbjOCQrUkto37/hy8eDHI+6Mk=;
- b=QkCGrEtIZ6KJh9I38iktQRz9TfVCcj5UxSJUQKzxrRxipCa5BEVdREoMjCP1v4kQPa
- LyEhQuOPFG4G/hIaViFtbgo0EYozc/WZ/e7ICCWP0knEy4YSPD0P9wv1bVVC/H9eWPP7
- y2ta2ZA0rRpKKfhO07EhxqwRVCTMmF4CXPRIz9lIhe7Du08T7G+re4mQGeXJP+76i3h9
- wF5xnujktV6YclVkyLuI1G+Ld1tuJ0H8ItESehpiEQoy/cRIXWbTTbS47DFD6rdElyTn
- SylDnMg2F9jB1D82XKZQ7WOVDxjMn+9SIaKtn4e+Fx+I63ug3HTljB4+6nOQN/hVBLAB
- jiLA==
-X-Gm-Message-State: AOJu0YwU3j3xvTOoI3BiarAb6LZC05EEq0wdlNRLSoljr3dgIiQTaNi9
- rG2kifAovL3DKZdBfDqsW0ysKoIvFKRq4GpbxIwKOfGCv7/K4FCyK1ieQ5QR5T2y9uLZdbeasQZ
- 3Dw==
-X-Gm-Gg: ASbGncs+Ma3Acwvs66qo+QOCAvEXKaPYiAMGNdiW+YmQcJ06GIRm6U039sKx1Xd8FTM
- IZ54sSUcTBmOvMJeyrsSTJPpauTHCmJXy1pIEjsRhTinpXm/FQY72CYmE0c0P39RNx5UJ4PkrTK
- E4h+4CRR814nN/Pnu1Lr8y6jc+aa+kBTE+IyBqKIL8R2UwL88SVVjyvuSd3X3RMCXYd5IoImyps
- +9KvRRlw9oGCD2eAfQdnZaC2cJixZODvPweGqHlvLBDDQ6zgPXYhfJJlq7f6XK9MSlhNW+EbJuz
- 1uBJHSOIc8hQGQ+/g+sOAiVU99TkLRE7HzLNhqNa0nUnpTh29MpM
-X-Google-Smtp-Source: AGHT+IELxllAnZwEAGZ8NrG/cLC6SvW8i14wvU4pc5UT5L6/sjtKQCOIYLGJaXF6gkMhg7Qs9ukrbg==
-X-Received: by 2002:a05:600c:4690:b0:434:fa55:eb56 with SMTP id
- 5b1f17b1804b1-43d1ec765b7mr83986575e9.7.1742048895179; 
- Sat, 15 Mar 2025 07:28:15 -0700 (PDT)
+ bh=CnQvkjxejgtQsoJZCMItWFnO0NC3anMrsLYmvnDNxZ4=;
+ b=j46zhnOV+2EdQlUWrz+BoDjCsw2sUjGMaw7jJp+K9JxN+YbuiffL6ImbsjW0bCePNn
+ QTNoofahw4E0vgIwS6gzLSpaAXU9lsfdXB7jzjfkbuioQbVPWOheJto5+PNkOi6admmB
+ JWINb6po4oskuS4HYDUWRKP26+9HAl7GSjKojoSUvhrGNC1rIRTp2sXESBCelygsLF6l
+ 7WBleXMchIT9x8PD6Y3GahAs0t5BN58gmCTsrZel7nTqsXlgeku1PtGM7RUe3utoudEa
+ ZNLW5L/tAKCvt8O91SD9hCq/7ywd2rw2J7/oqTHGD2y4ZEksmQbfMshqs6CTGFaA9Nsk
+ 3rEw==
+X-Gm-Message-State: AOJu0YygbZkARGtiPwsNPDyGYnZuyjF2nAR8aODX1zHRKFIcf1Edw5mD
+ PJO8cve0PC5OkYyrW1xy/vKEk8T+9kTc65gmJbVzHHY/B8LwjfeyNYNC4SqzvMJui3OewmbFbNv
+ ZwA==
+X-Gm-Gg: ASbGnctXYNjuKc2gv+Fw/R0HR501jQUiip7MYN3T+PL97ukaX0HGAyCJWGPZJly1yET
+ P0SQqyVJOwtJNnW9ZETI4pGJ3EZRhKfQDOpjdO54Fu2CFiOJr4fMSTEhIkq9p9I/YLP467FTbZ7
+ D5J8lcm7cojG2xuOKC44c+GmpgpA/gqqPGD5f8lxgO4dlY4NnuXQ15RSIPsE/uJB31EntJZ1kGe
+ i8QW7I//l439Ko7bjQd4cHjOBWR0PWNJO9T17QEzvQnGdoMvWMayWr3iz0Cv6FkekeVX+957dnt
+ 8y8rQg4ki6tw4qjWPXZJU7zVv6w7SUm1YSEoG/yDHqEJ/AM8KuCk
+X-Google-Smtp-Source: AGHT+IFC+pYPD6WYbSP9ZzB1H/6Nn69DA+pWZIdqcSDIA+1qIvdvOjkAtTVSzMsaK6cw8LPpBmg5bA==
+X-Received: by 2002:a05:600c:3b02:b0:43b:ce3c:19d0 with SMTP id
+ 5b1f17b1804b1-43d1ecd2dbamr86234835e9.29.1742048897215; 
+ Sat, 15 Mar 2025 07:28:17 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.28.13
+ 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.28.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 07:28:14 -0700 (PDT)
+ Sat, 15 Mar 2025 07:28:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 31/46] test/py: Allow tests to be filtered by role
-Date: Sat, 15 Mar 2025 14:25:51 +0000
-Message-ID: <20250315142643.2600605-32-sjg@chromium.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 32/46] x86: e820: Add a function to dump the e820 table
+Date: Sat, 15 Mar 2025 14:25:52 +0000
+Message-ID: <20250315142643.2600605-33-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250315142643.2600605-1-sjg@chromium.org>
 References: <20250315142643.2600605-1-sjg@chromium.org>
@@ -96,78 +94,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some test can only be run by a particular board in a lab, e.g. because
-they are loaded with an OS image used by the test. Add a way to specify
-this in tests.
+There is already code for this in zimage. Move it to the e820 file so
+it can be used elsewhere.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v3)
 
-Changes in v2:
-- Add new patch to allow tests to be filtered by role
+Changes in v3:
+- Add new patch with a function to dump the e820 table
 
- test/py/conftest.py | 22 ++++++++++++++++++++++
- test/py/pytest.ini  |  1 +
- 2 files changed, 23 insertions(+)
+ arch/x86/include/asm/e820.h |  8 ++++++++
+ arch/x86/lib/e820.c         | 23 +++++++++++++++++++++++
+ arch/x86/lib/zimage.c       | 22 ++--------------------
+ 3 files changed, 33 insertions(+), 20 deletions(-)
 
-diff --git a/test/py/conftest.py b/test/py/conftest.py
-index e59897c1f78..5aea85647af 100644
---- a/test/py/conftest.py
-+++ b/test/py/conftest.py
-@@ -334,6 +334,7 @@ def pytest_configure(config):
-     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
-     ubconfig.connection_ok = True
-     ubconfig.timing = config.getoption('timing')
-+    ubconfig.role = config.getoption('role')
+diff --git a/arch/x86/include/asm/e820.h b/arch/x86/include/asm/e820.h
+index 1ab709abfc8..cc3758b59fd 100644
+--- a/arch/x86/include/asm/e820.h
++++ b/arch/x86/include/asm/e820.h
+@@ -39,6 +39,14 @@ unsigned int install_e820_map(unsigned int max_entries,
+ unsigned int cb_install_e820_map(unsigned int max_entries,
+ 				 struct e820_entry *entries);
  
-     env_vars = (
-         'board_type',
-@@ -760,6 +761,26 @@ def setup_singlethread(item):
-         if worker_id and worker_id != 'master':
-             pytest.skip('must run single-threaded')
- 
-+def setup_role(item):
-+    """Process any 'role' marker for a test.
++/**
++ * e820_dump() - Dump an e820 table
++ *
++ * @entries: Pointer to first entry
++ * @count: Number of entries in the table
++ */
++void e820_dump(struct e820_entry *entries, uint count);
 +
-+    Skip this test if the role does not match.
-+
-+    Args:
-+        item (pytest.Item): The pytest test item
-+    """
-+    required_roles = []
-+    for roles in item.iter_markers('role'):
-+        role = roles.args[0]
-+        if role.startswith('!'):
-+            if ubconfig.role == role[1:]:
-+                pytest.skip(f'role "{ubconfig.role}" not supported')
-+                return
-+        else:
-+            required_roles.append(role)
-+    if required_roles and ubconfig.role not in required_roles:
-+        pytest.skip(f'board "{ubconfig.role}" not supported')
-+
- def start_test_section(item):
-     anchors[item.name] = log.start_section(item.name)
+ #endif /* __ASSEMBLY__ */
  
-@@ -781,6 +802,7 @@ def pytest_runtest_setup(item):
-     setup_buildconfigspec(item)
-     setup_requiredtool(item)
-     setup_singlethread(item)
-+    setup_role(item)
+ #endif /* _ASM_X86_E820_H */
+diff --git a/arch/x86/lib/e820.c b/arch/x86/lib/e820.c
+index d478b7486e3..00ca94776d2 100644
+--- a/arch/x86/lib/e820.c
++++ b/arch/x86/lib/e820.c
+@@ -10,6 +10,29 @@
  
- def pytest_runtest_protocol(item, nextitem):
-     """pytest hook: Called to execute a test.
-diff --git a/test/py/pytest.ini b/test/py/pytest.ini
-index 26d83f83e00..361be0178ee 100644
---- a/test/py/pytest.ini
-+++ b/test/py/pytest.ini
-@@ -12,3 +12,4 @@ markers =
-     requiredtool: U-Boot: Required host tools for a test.
-     slow: U-Boot: Specific test will run slowly.
-     singlethread: Cannot run in parallel
-+    role: U-Boot: Indicates the lab 'role' which can execute this test
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++static const char *const e820_type_name[E820_COUNT] = {
++	[E820_RAM] = "RAM",
++	[E820_RESERVED] = "Reserved",
++	[E820_ACPI] = "ACPI",
++	[E820_NVS] = "ACPI NVS",
++	[E820_UNUSABLE] = "Unusable",
++};
++
++void e820_dump(struct e820_entry *entries, uint count)
++{
++	int i;
++
++	printf("%12s  %10s  %s\n", "Addr", "Size", "Type");
++	for (i = 0; i < count; i++) {
++		struct e820_entry *entry = &entries[i];
++
++		printf("%12llx  %10llx  %s\n", entry->addr, entry->size,
++		       entry->type < E820_COUNT ?
++		       e820_type_name[entry->type] :
++		       simple_itoa(entry->type));
++	}
++}
++
+ /*
+  * Install a default e820 table with 4 entries as follows:
+  *
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index 26d623711bc..3ffc7593f87 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -475,14 +475,6 @@ static void print_num64(const char *name, u64 value)
+ 	printf("%-20s: %llx\n", name, value);
+ }
+ 
+-static const char *const e820_type_name[E820_COUNT] = {
+-	[E820_RAM] = "RAM",
+-	[E820_RESERVED] = "Reserved",
+-	[E820_ACPI] = "ACPI",
+-	[E820_NVS] = "ACPI NVS",
+-	[E820_UNUSABLE] = "Unusable",
+-};
+-
+ static const char *const bootloader_id[] = {
+ 	"LILO",
+ 	"Loadlin",
+@@ -570,24 +562,14 @@ void zimage_dump(struct bootm_info *bmi, bool show_cmdline)
+ {
+ 	struct boot_params *base_ptr;
+ 	struct setup_header *hdr;
+-	int i;
+ 
+ 	base_ptr = bmi->base_ptr;
+ 	printf("Setup located at %p:\n\n", base_ptr);
+ 	print_num64("ACPI RSDP addr", base_ptr->acpi_rsdp_addr);
+ 
+ 	printf("E820: %d entries\n", base_ptr->e820_entries);
+-	if (base_ptr->e820_entries) {
+-		printf("%12s  %10s  %s\n", "Addr", "Size", "Type");
+-		for (i = 0; i < base_ptr->e820_entries; i++) {
+-			struct e820_entry *entry = &base_ptr->e820_map[i];
+-
+-			printf("%12llx  %10llx  %s\n", entry->addr, entry->size,
+-			       entry->type < E820_COUNT ?
+-			       e820_type_name[entry->type] :
+-			       simple_itoa(entry->type));
+-		}
+-	}
++	if (base_ptr->e820_entries)
++		e820_dump(base_ptr->e820_map, base_ptr->e820_entries);
+ 
+ 	hdr = &base_ptr->hdr;
+ 	print_num("Setup sectors", hdr->setup_sects);
 -- 
 2.43.0
 
