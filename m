@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8907C282EC
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E84DC28B30
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15DB8820E8;
-	Sat, 15 Mar 2025 02:29:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63E328211F;
+	Sat, 15 Mar 2025 02:29:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gzfqPNPy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MZPY7F35";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60BFA820B0; Sat, 15 Mar 2025 02:29:11 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 60F1E820F5; Sat, 15 Mar 2025 02:29:11 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 550138213D
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 392848213E
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7c081915cf3so347553885a.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:00 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6dd420f82e2so37131086d6.1
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742002139; x=1742606939; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=LvFZqUbn7+5n6prAdEyZkFhN4y6mw+D75enNmIWijhA=;
- b=gzfqPNPyxBT1d2WM3EggSSKqll/lXRirA6oQ+35uiGlrjA/eVilav6oVfxp3UJ9N1T
- KQ7GftskwnYBvrFC12j6EkwAUhr1khPfSbcP9Az1K8yq9rVumjboC9eHF6SO+r4MBn8c
- LOn3qsTrNj80cShi6CGhYzxxyJM7CtaTGCsxE=
+ d=konsulko.com; s=google; t=1742002143; x=1742606943; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uylKCW8WLXEv0oXHujS559HH6BZlXhwlrtLB1+kRH5M=;
+ b=MZPY7F35XPhk1haUszPSxLlwcfS7BuWV2y9BtPbTTdsc0rOZSpMJVDbwWHcHjSHVZU
+ 14Ufgi1EIj5963jeHaIA+ao6MFxYyHgyBhBTk2bsectnIygCJcSftBDYSGa6sfpiqpmb
+ kR+dFKFyV89LOylP0QWSRd0JS7xhMnutbbxW4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742002139; x=1742606939;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LvFZqUbn7+5n6prAdEyZkFhN4y6mw+D75enNmIWijhA=;
- b=Pg7dP8nvxjt0F2FZwPzwAlccLo3EuaYXlkqWZIIQA6cmyY5HyhfztisEcrcqxVWXrN
- Bl28+5ZqjLYs4iTwNo/zzmv6/M2C/aVqWOKTCIpCfI8EfKxUCsqdnwZy3tuPYPSFgDSe
- hHIDoh9Cj9Ye+yFd2TNCF6TLs3QnJUjoMV0cPqRQhcu7Fveyj4oFqz16x8Y9VLYk36ao
- j6z87iSdWBtkG41o0GI3T0ZBFCnSgl29oKGOtcHvtw3jMqn2e5n99UHlMD0Fns1NAAbM
- R9I/pmu6RMm38Ow3YNEVfap5O8xFUmimrs0ytmIfOUHM8xUQF+wkFa5eOnp3VjXApipP
- Kb0w==
-X-Gm-Message-State: AOJu0YxjmoIM64TdI1R9XYi3/ARzE10oFFjWlAUrVUtxqrJ74gC2zm7f
- qGe8zgKBzc/AP0zhFxZUvauXRm47NmLmzmjsfrOxds2fyETThGNGHfHDBa51hTuutZWvJHbSGGQ
- F
-X-Gm-Gg: ASbGnctnKDoMU6xuCSlCdw+/pKE96f+y7nkHNSypohOaOfu2TiHIupCCM6Z/BcXr44X
- 3Blh3/sEsAJbOIAXUemPX89AFiG8T4zJYWWB2ouQYB5E18RJ6iGYCEcL0LgBpP150TFdrmLCHF1
- Wl9gd0cdX4ySQ6EGYXc8vqJpTVlcjs0GmIHkKfB3PKtlCLPIp96/MbbthfGXtkG1YLQMwIpW1NA
- fbCs65Vp6TGRyRZAwjdvlJBSh/3lruG4CuxY0lCBcGjgy4jkLj9CvHYAsEkF4da0qGGZsXW3boY
- EDdIFlzqGf/kXSj9dm759JetEefXwgM4DnB7ZLl6+xRYEP8x
-X-Google-Smtp-Source: AGHT+IHGiBnDPw2dPqyvr1HTxO32cUYkiNEAujcbsoOml4qZa4hDYCCAJq5nE0XXCt3IEdR4lij9Lw==
-X-Received: by 2002:a05:620a:2947:b0:7c5:5800:ddba with SMTP id
- af79cd13be357-7c57c7d46d6mr706867885a.22.1742002139244; 
- Fri, 14 Mar 2025 18:28:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742002143; x=1742606943;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uylKCW8WLXEv0oXHujS559HH6BZlXhwlrtLB1+kRH5M=;
+ b=H4/ZN7qPtQ+SFaHGSmfi4qYSVeU7eI1RM8Ux3DQ/liWzzvNqMspBpylgv5PzOFj0ME
+ Kpw7IbFmx0qlLtOO3+zOEPnr2HqRjvxZG+NtezJORw4Ksv4SiXuX0MKhoKQdw0s9nduO
+ 8nnjF+VtTAeP8S1Kxj2sWoQKjbQF2p/QrhSfZF9WjL4tZZeUinFe3QpVdbXoW/FT7FUq
+ cNVPRNgHQAVeirMMUE9hw81acmVRqli6/NErjjiox4bPxDJF0rHn92ccFAF1vVJpt5QJ
+ ILbbNQlk3Es7ftlshFcAixPQFMCLVw8OzdQP8kexoxE4WIRCQfqjde/8cvIwVs+ySJB6
+ TFkA==
+X-Gm-Message-State: AOJu0YzW9yhbX3NOnpUcx6nlHZqr7UJkWQ5gzLGcaRraYVQ5JwHcz5yf
+ 7w4fk+Q/zt7Xwe6dyscV4OAE6gI3KEox/IoHagFkyTd0YgS/FRLmdgHk/yPRqv3UeGexBF/urB9
+ D
+X-Gm-Gg: ASbGncsk5TrIyfb6nuMNyU//LA68Rr00/Z7Ofr/FEND6vrixpCTiRcdF7Q20zFXoAEu
+ 12gpaFSgy1VJIsGOvb4QLZiLwUl95QRSXxCp257/s9NkgJEAX89v8RqqpLUtylnvC7HRp2WxMy/
+ /Y0Fy9F2eApdoQmkFNMsFjeQIAbXYi+wpNuHP/pfVXfc3SJhVE24uPIuN1tlMtP8i/JywqN3ApP
+ WOQUBurQOHcerhH54GaIlXaKqkuOtsNfPygMWKmEbE7Kt2uZTu3VwDRLs6y6WuBX7XIEGpYUYNj
+ ZKb7HfFY4ZIFeYI99UkbkLvTOpnHGXhfqpwnlZTTnrMSYyPj
+X-Google-Smtp-Source: AGHT+IGUDrDk64PvX+bH34jfC+dFLmIpXjWxsVQBVotqgs3BMR314vvaQ6UISfYXVTGd7XemT6BItA==
+X-Received: by 2002:a05:6214:1d2b:b0:6ea:d090:6365 with SMTP id
+ 6a1803df08f44-6eaeaace24bmr59487426d6.32.1742002143139; 
+ Fri, 14 Mar 2025 18:29:03 -0700 (PDT)
 Received: from bill-the-cat.. ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573d89448sm321165885a.90.2025.03.14.18.28.57
- for <u-boot@lists.denx.de>
+ 6a1803df08f44-6eade24d030sm30430876d6.53.2025.03.14.18.29.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 18:28:58 -0700 (PDT)
+ Fri, 14 Mar 2025 18:29:02 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] cmd: Correct dependency for CMD_LINK_LOCAL
-Date: Fri, 14 Mar 2025 19:28:56 -0600
-Message-ID: <20250315012856.399360-1-trini@konsulko.com>
+Cc: Tien Fong Chee <tien.fong.chee@altera.com>
+Subject: [PATCH] ARM: socfpga: Drop incorrect imply
+ SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION*
+Date: Fri, 14 Mar 2025 19:29:00 -0600
+Message-ID: <20250315012900.399381-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -90,27 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Given how LIB_RAND is handled now, we should be depending on one of the
-implementations and not selecting one of them.
+The use of both "imply SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION" and
+"imply SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE" here is wrong as
+those are both part of the same choice statement. Furthermore you cannot
+select/imply something from a choice statement, it must be a "default ...
+if ..." construct within the choice statement in question.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: Tien Fong Chee <tien.fong.chee@altera.com>
+---
+ arch/arm/Kconfig | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index cd391d422ae2..aaebdfdd0c1c 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2062,7 +2062,7 @@ config CMD_SNTP
- 
- config CMD_LINK_LOCAL
- 	bool "linklocal"
--	select LIB_RAND
-+	depends on (LIB_RAND || LIB_HW_RAND)
- 	help
- 	  Acquire a network IP address using the link-local protocol
- 
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index cf08fe63f1e7..071fbf1fb202 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1163,8 +1163,6 @@ config ARCH_SOCFPGA
+ 	imply SPL_DM_SPI_FLASH
+ 	imply SPL_LIBDISK_SUPPORT
+ 	imply SPL_MMC
+-	imply SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+-	imply SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+ 	imply SPL_SPI_FLASH_SUPPORT
+ 	imply SPL_SPI
+ 	imply L2X0_CACHE
 -- 
 2.43.0
 
