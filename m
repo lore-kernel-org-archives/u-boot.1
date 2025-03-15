@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD538C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 21:48:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A2BC28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:18:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0C92809A4;
-	Sat, 15 Mar 2025 22:48:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 235D880F9A;
+	Sat, 15 Mar 2025 23:18:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y2yOPzaE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YTfZqh/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A63EE80C93; Sat, 15 Mar 2025 22:48:01 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id F2AC180F70; Sat, 15 Mar 2025 23:18:20 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87A518058A
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 22:47:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FE338058A
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7c54a9d3fcaso336952185a.2
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 14:47:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-224341bbc1dso60377805ad.3
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742075277; x=1742680077; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=F+GXQthhFvRF/s5PUKO7POoJTZ/xo+th+v+Y6qa4mg0=;
- b=Y2yOPzaEzpRaMt68TyeK7BaEbfknC9w2wIqUfhNePe1je1H8ducKhvk2EndKcZ35za
- +pYXtLHWi6wEEOMNHUQxwZP79ptsCH1NacSKuAC/bY0ew4MosbfVi1NYJNLI8mIZeqdt
- gVFRmYPegQhcVfGRzINQ3LZ7qL0GwVoQ+G5Ns=
+ d=gmail.com; s=20230601; t=1742077097; x=1742681897; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ciJgYrdT5YQqrCqFvqJv4Qxu7Kia0ISH/pcpHkP1KMI=;
+ b=YTfZqh/l/k8xF5fpE2wPdvA6VhoKLmSZpNzemK9XDqQvjHA0syzE+kPuMeQGiWABWK
+ RgHe4JnNGTnOFF1CewpKuqzsFxBuwyEclEn+12lYFdiZvWwJFLI9xAWHbypKgoFwlKr/
+ nM6YOlvKMwdTtkofkVqFiCPyd4IG/zleqUnKVW3HvTRJgAmTuZhTSU5pTFXvT0HTOqRb
+ Nq3DmTKHFY2fTyxehmJiQK71p3wDSlECn0cxAXMq4otqT9o5UR8WY6zrhuWUy9X66WUY
+ U6su/SPZXcJhckYtv3JW4Fe/y2yQZpx0wlbWxoUN9Z0No+kD66Dc0Chk23G6W2ZKfLsJ
+ 3FKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742075277; x=1742680077;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F+GXQthhFvRF/s5PUKO7POoJTZ/xo+th+v+Y6qa4mg0=;
- b=thbiuNldCYqEXNFI5CCZT4FoG0D53CtT/UYVyTlnA2r/VEH0UCf1gTvnUNyUcnPF4Q
- uNENcw2D5kqImkW1+9FTVBafmGPz97x0kouJ2px7oxss47H14f4Ep4JubIpOfEjRxLb3
- jwPuF4KcI1SbzDM5SL4fKukcR+PIVDOEaovpsbePFiE/TRAWf65oF3/FcZjjFKZLhdEv
- mft5GJcBWLzlLRg+zYWn/t1ne1+qlnVK+zSEOwHSkJ7nqnbM/ZjcUX8d34P7Jy7efTIg
- 38g4wTJzm6NkgqKLozeYKOEUP/OlWyG0UlAhJoHI25lCJVLvNEJfptWY44vpRL9DFMmV
- K6/A==
-X-Gm-Message-State: AOJu0Yyt2vL3+7/YDhNT6Vy6mt3Y7BA8Ev8AOnUGjt1bQUmlLRQ3Vkjf
- 7mkvbxxYtzgBggEoAuFZZ4NUvMxVoPnIWyeZDA3K0y0cUh/kOVzJBe21gP1mLSs=
-X-Gm-Gg: ASbGncuUZGRFuEsACmRcXmoy/XQi5VS1ypUJBpS3yIRr8GesvGg2wtd1Tn0cXO3EYS/
- IwACZuirwKQSH86AkyFymPc20X9s9I5mu//dK7j8q1UhlKitl5o3abZr7/ooUp76zYnJ5jWlOJO
- 4ALWEUzd0RycrjYVrkTnQAfVi6iNSRwp61f6kUHqJtOOW8hS7Ypop54hQzrn7VQw2GkIzB5s2FK
- Z6yEBcthvq8HiAZHqlSCfBVh1NYfcpIWd8HDMm9HCpF5nGjjA6uMswou/3sAAe/TzIPxZN6mXLY
- lkeZ6XrS8NoguuqPmBd5VbCaBXjZp4U1Elq6jkeyBaZKL0j7+IXd+qri
-X-Google-Smtp-Source: AGHT+IHo0Ty7u7x1eDd3OCL89PJecvT6OgXkoslZaMqQrXgtFYE8cIB5TC1rmlB+hgt03/ugq3VLyQ==
-X-Received: by 2002:a05:620a:4091:b0:7c5:53ab:a745 with SMTP id
- af79cd13be357-7c57c8fb0e7mr1341695485a.36.1742075277216; 
- Sat, 15 Mar 2025 14:47:57 -0700 (PDT)
-Received: from bill-the-cat ([187.192.142.234])
+ d=1e100.net; s=20230601; t=1742077097; x=1742681897;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ciJgYrdT5YQqrCqFvqJv4Qxu7Kia0ISH/pcpHkP1KMI=;
+ b=DUB1xzkSMoq6a6pcR4D0ieOD2fuZ5kDF5PMeuGtpK3eIdqp4Eqez+doKXFSLuYPv7x
+ Mf47fMNT1iTmYIp7Ezs0YR1jyiskfuVl8cPYCZ1vk72aB8AwiflDf/4fFtM/4qhg9yOB
+ u4cEqDW87tjU2Ptd7wdJMqokpi6Pe4jr+KwpHpAuTVZ6NH6ePmBc60aIdX3puJU4p6K6
+ BTUkj6+qr8qu9XcdBU86M2aFV/WRfi1HO0tO7fRiR6i39RG6NmlsaKGgNW0zBL4MfotF
+ jNVk61M602OJciAHtku5RRKxnBLurtQ56TXzwNOrdp0HuHv82p0Zdv4ezhDw3Qioy3cF
+ eoag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4zlrmbpZZDsWJsAXoZ2OtZj3dRxxHTkvfXVvgdhaBapoWc0wMGACBHzurJIJK/GeJAPo/XB4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvAHjIJuY6wJ9xUkrhVqb6VDjAagwPKtOQTY+dk1lHRCs4bBxq
+ q6N+kBVv47/PFaVrzDe5JFiuD7arS9+nxhyK+jrEZ8lI3WORWzxy
+X-Gm-Gg: ASbGncsSWvJ0ZFthMs38QGi6UMtRS9GaNV0DYxP0T6LZoqQnixPEpxUn51Jv3cp0Vu6
+ nm92Ik5XmPd9Dh9E0sviQ8CBFYJPNpPfnftB6YPmRqmktawFOwJJPGheULX5eePaqKr02VwrCEo
+ WBIyIRm9ZInqhoOfEwubgPFC8m9krmyv7C2bfa6dwSZHJ+rbb0ctZUViu9Ckhj/OLlV/Y81nzhN
+ 1DGHOQQRtMwerqrNO+J0/rbx0Sf7cGkzp3Tuoy6yeCDAtcwIpGkgjOobz/lOolsMwz81JwcVe7H
+ m5zZPFezJYK7H6KsaHf77qLTkHoPqxlVeQaYBhfUlEsC5WruxvR2zDMjOP/Vqmcv+w==
+X-Google-Smtp-Source: AGHT+IHm/d4apcCYdX3UXNgRXcXpht4FOtKlKo9HEDhZpf9Ug00NMZUK4Ofg0wX4rfofLdZpTbYn8w==
+X-Received: by 2002:a05:6a00:3d4a:b0:736:a7ec:a366 with SMTP id
+ d2e1a72fcca58-7372238a794mr6965492b3a.9.1742077097018; 
+ Sat, 15 Mar 2025 15:18:17 -0700 (PDT)
+Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:f31:f69b:ca22:e094])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573da455dsm411828885a.115.2025.03.15.14.47.54
+ d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 14:47:55 -0700 (PDT)
-Date: Sat, 15 Mar 2025 15:47:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Brandon Maier <brandon.maier@collins.com>
-Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
-Message-ID: <20250315214752.GK2640854@bill-the-cat>
-References: <20250209212714.2317040-1-sjg@chromium.org>
- <20250209212714.2317040-2-sjg@chromium.org>
- <20250217192316.GW1233568@bill-the-cat>
- <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
- <20250314153615.GR2640854@bill-the-cat>
- <CAFLszThguOxcC2nR467Qc9U+VdO91F48mhPuv7d6DDF7WKbyqQ@mail.gmail.com>
- <20250315152314.GJ2640854@bill-the-cat>
- <CAFLszTitxR9CnQZdSdS8mvxEncRQ8Xn77ZAbHTjKuHnvtneCZA@mail.gmail.com>
+ Sat, 15 Mar 2025 15:18:16 -0700 (PDT)
+From: Sam Edwards <cfsworks@gmail.com>
+X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
+ Sam Edwards <CFSworks@gmail.com>
+Subject: [PATCH v2 00/15] Various toolchain compatibility fixes/improvements
+Date: Sat, 15 Mar 2025 15:17:58 -0700
+Message-ID: <20250315221813.1265193-1-CFSworks@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5o6RpHH0F6QzEZ2M"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTitxR9CnQZdSdS8mvxEncRQ8Xn77ZAbHTjKuHnvtneCZA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,229 +102,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello again U-Boot list,
 
---5o6RpHH0F6QzEZ2M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is v2 of my "misc. fixes" series, sent to prepare the codebase for more
+direct LLVM support in the near future. This series contains several fixes that
+I found in the process of preparing that support and which address issues
+independent of any future feature or enhancement. I am sending these now, both
+so that their inclusion is not delayed by discussion on my upcoming series and
+to make the latter more manageable.
 
-On Sat, Mar 15, 2025 at 03:50:55PM +0000, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 15 Mar 2025 at 15:23, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sat, Mar 15, 2025 at 02:48:18PM +0000, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 14 Mar 2025 at 15:36, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Mar 14, 2025 at 02:45:27PM +0000, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 17 Feb 2025 at 19:23, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > Reduce the number of warnings in this file.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > >  tools/buildman/func_test.py   |   4 +-
-> > > > > > >  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++------=
-----------
-> > > > > > >  2 files changed, 128 insertions(+), 116 deletions(-)
-> > > > > >
-> > > > > > As I think these all were warnings from whatever other linting =
-you had
-> > > > > > mentioned in another thread, I deferred this patch as it also d=
-oesn't
-> > > > > > cleanly apply.
-> > > > >
-> > > > > Some of it, yes. But most of it is fixing things that we should f=
-ix.
-> > > >
-> > > > To be clear, to the extent any of it was pylint problems, they've n=
-ow
-> > > > been addressed as we've moved to pylint 3.3.4.
-> > >
-> > > Actually, I don't know about those problems, but that's fine.
-> > >
-> > > >
-> > > > > This is going to open up a significant diff for patman, unfortuna=
-tely,
-> > > > > just as I am adding new features for series management. So please
-> > > > > consider applying it. I can rebase if you like?
-> > > >
-> > > > Yes, that's fine, please just explain what's showing the warnings or
-> > > > otherwise update the commit message.
-> > >
-> > > Before:
-> > >
-> > > ************* Module u_boot_pylib.gitutil
-> > > tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
-> > > (missing-module-docstring)
-> > > tools/u_boot_pylib/gitutil.py:13:0: C0103: Constant name
-> > > "use_no_decorate" doesn't conform to UPPER_CASE naming style
-> > > (invalid-name)
-> > > tools/u_boot_pylib/gitutil.py:40:19: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:65:20: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:72:25: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:64:12: W0612: Unused variable 'msg'
-> > > (unused-variable)
-> > > tools/u_boot_pylib/gitutil.py:114:21: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:121:25: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:122:17: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:139:41: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:141:40: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:146:4: R1705: Unnecessary "elif" after
-> > > "return", remove the leading "el" from "elif" (no-else-return)
-> > > tools/u_boot_pylib/gitutil.py:151:15: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:153:25: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:171:11: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:189:21: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:243:22: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:255:22: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:272:22: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:305:22: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:317:22: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:320:0: R0913: Too many arguments (6/5)
-> > > (too-many-arguments)
-> > > tools/u_boot_pylib/gitutil.py:320:0: R0917: Too many positional
-> > > arguments (6/5) (too-many-positional-arguments)
-> > > tools/u_boot_pylib/gitutil.py:345:16: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:347:12: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:353:4: R1705: Unnecessary "else" after
-> > > "return", remove the "else" and de-indent the code inside it
-> > > (no-else-return)
-> > > tools/u_boot_pylib/gitutil.py:402:16: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:416:7: R1714: Consider merging these
-> > > comparisons with 'in' by using 'suppresscc in ('all', 'cccmd')'. Use a
-> > > set instead if elements are hashable. (consider-using-in)
-> > > tools/u_boot_pylib/gitutil.py:420:15: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:433:0: R0913: Too many arguments (12/5)
-> > > (too-many-arguments)
-> > > tools/u_boot_pylib/gitutil.py:433:0: R0917: Too many positional
-> > > arguments (12/5) (too-many-positional-arguments)
-> > > tools/u_boot_pylib/gitutil.py:433:0: R0914: Too many local variables
-> > > (17/15) (too-many-locals)
-> > > tools/u_boot_pylib/gitutil.py:512:19: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:514:19: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:520:24: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:433:0: R1710: Either all return
-> > > statements in a function should return an expression, or none of them
-> > > should. (inconsistent-return-statements)
-> > > tools/u_boot_pylib/gitutil.py:435:36: W0613: Unused argument
-> > > 'get_maintainer_script' (unused-argument)
-> > > tools/u_boot_pylib/gitutil.py:592:14: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:593:8: R1720: Unnecessary "else" after
-> > > "raise", remove the "else" and de-indent the code inside it
-> > > (no-else-raise)
-> > > tools/u_boot_pylib/gitutil.py:601:18: C0209: Formatting a regular
-> > > string which could be an f-string (consider-using-f-string)
-> > > tools/u_boot_pylib/gitutil.py:682:4: W0603: Using the global statement
-> > > (global-statement)
-> > >
-> > > ------------------------------------------------------------------
-> > > Your code has been rated at 8.41/10 (previous run: 8.37/10, +0.04)
-> > >
-> > >
-> > > After:
-> > >
-> > > ************* Module u_boot_pylib.gitutil
-> > > tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
-> > > (missing-module-docstring)
-> > > tools/u_boot_pylib/gitutil.py:325:0: R0913: Too many arguments (6/5)
-> > > (too-many-arguments)
-> > > tools/u_boot_pylib/gitutil.py:325:0: R0917: Too many positional
-> > > arguments (6/5) (too-many-positional-arguments)
-> > > tools/u_boot_pylib/gitutil.py:439:0: R0913: Too many arguments (11/5)
-> > > (too-many-arguments)
-> > > tools/u_boot_pylib/gitutil.py:439:0: R0917: Too many positional
-> > > arguments (11/5) (too-many-positional-arguments)
-> > > tools/u_boot_pylib/gitutil.py:439:0: R0914: Too many local variables
-> > > (16/15) (too-many-locals)
-> > > tools/u_boot_pylib/gitutil.py:694:4: W0603: Using the global statement
-> > > (global-statement)
-> > >
-> > > ------------------------------------------------------------------
-> > > Your code has been rated at 9.73/10 (previous run: 8.41/10, +1.32)
-> >
-> > And it's not clear where these warnings come from or why they matter or
-> > how to check things further.
->=20
-> Quite a few of them have been there for a while, but most of them are
-> coming from newer versions of pylint, where people come up with new
-> warnings. The f-string thing is the main one, since that feature was
-> not available when the code was written, but now you get a warning if
-> you don't use it, because Python.
+PLEASE APPLY PARTIALLY! I have tried to sort these so that the most
+straightforward changes come first. If any patch proves contentious, you can
+either skip it or stop applying the series at that point. Any patches that need
+revisions will be included in a future series, but I'm trying to avoid there
+being a v3 of *this* series. :)
 
-OK. But pylint_err isn't complaining.
+Happy Saturday,
+Sam
 
-> > > The patch is here:
-> > >
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20250209212714.23170=
-40-2-sjg@chromium.org/
-> > >
-> > > It looks like it will apply for you, if first you accept my PR.
-> >
-> > It does, but I'm still not thrilled with the commit message.
->=20
-> I could do a new one with the info above if you like. We are going to
-> have this all over the place...
+Changes v1->v2:
+- Carried forward acked/reviewed tags
+- Dropped two patches (one was incorrect, the other can be fixed differently)
+- Minor phrasing changes to commit messages
+- Instead of removing `ENTRY(_start)`, I instead added `.globl _start` where
+  appropriate, in the EFI apps
 
-Are we going to have to? If it's not an error I don't know how much
-effort *needs* to be put in to it.
+Sam Edwards (15):
+  arm: Remove stray .mmutable reference in linker script
+  arm: Exclude eabi_compat from LTO
+  arm: Add __aeabi_memclr in eabi_compat
+  arm: Add aligned-memory aliases to eabi_compat
+  arm: Discard unwanted sections in linker script
+  arm: Replace 'adrl' in EFI crt0
+  x86: Fix call64's section flags
+  makefile: Avoid objcopy --gap-fill for .hex/.srec
+  makefile: Add `norelro` linker option
+  makefile: Add READELF command variable
+  arm: riscv: efi: Export _start symbol from crt0_*_efi stubs
+  efi_loader: Move .dynamic out of .text in EFI
+  scripts/Makefile.lib: efi: Preserve the .dynstr section as well
+  spl: riscv: opensbi: Error on misaligned FDT
+  spl: Align FDT load address
 
-So yes, please provide a much clearer commit message for this patch.
-Nothing is complaining until you ask a tool to give a complaint report,
-so it's not nearly as obviously critical as "CI fails now" or "Everyone
-gets spammed by python when using buildman".
+ Makefile                        | 14 ++++++++------
+ arch/arm/cpu/u-boot.lds         | 29 ++++++++++-------------------
+ arch/arm/lib/Makefile           |  1 +
+ arch/arm/lib/crt0_aarch64_efi.S |  1 +
+ arch/arm/lib/crt0_arm_efi.S     |  4 +++-
+ arch/arm/lib/eabi_compat.c      | 17 +++++++++++++++++
+ arch/riscv/lib/crt0_riscv_efi.S |  1 +
+ arch/x86/cpu/i386/call64.S      |  2 +-
+ common/spl/spl_fit.c            |  2 +-
+ common/spl/spl_opensbi.c        |  5 +++++
+ lib/efi_loader/elf_efi.ldsi     |  6 +++---
+ scripts/Makefile.lib            |  4 ++--
+ 12 files changed, 53 insertions(+), 33 deletions(-)
 
---=20
-Tom
+-- 
+2.48.1
 
---5o6RpHH0F6QzEZ2M
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfV9YAACgkQFHw5/5Y0
-tyy5rwwAm3SxaSUdhS44y8ne3F00ADFV7SKMyIUxabqkNXihDFgK4jef0bq097dq
-3QWNwpW8FgLP8LyvY4r7KuO1AigUcubizBK9NnuYMHg8oTP2PEIztlUd6ol46zew
-Jz/GTYeFSoo4PiyPVzelFjb6EZVWWxCItWN3Ah/g1D9Y+n0e9wuAnYUPUBxJrN97
-y2KceazaSjVuzg5aK7VKoBIG04DVB3cE9U313fcrFQY7K6OeE7/A075eYtIVoaqE
-mQ9Z86N8tl/9FrPHDt8q6/k9wh+ESFpBpnSkXEcKOCbHW1ejOQFKg4O1Qx/W28z9
-K4tStOswl4CcKH+SyUbmcJxxCvnZR0x26GjH0CWpJKDOEnJEiSfFFR7FDpYUTHMu
-/BsUbrD9WYqljBqGFZAvEi+599Ehltg4R4nJy4L7NRkp1/oO+U35jWUJQC6NV2t1
-FU1AJq+JpI3wcNKQVczXrF2fKnrCGUfoTxtHWht6/F77KG3JK3KEVeTfJ6gefuwG
-qmc/hmAp
-=cg9s
------END PGP SIGNATURE-----
-
---5o6RpHH0F6QzEZ2M--
