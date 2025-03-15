@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F34C282EC
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D4ABC282EC
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:27:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0119981F7E;
-	Sat, 15 Mar 2025 02:27:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5027A8209C;
+	Sat, 15 Mar 2025 02:27:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XzQb5jtA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L7jk0eub";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3CDC8209F; Sat, 15 Mar 2025 02:27:43 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 84CF8820DE; Sat, 15 Mar 2025 02:27:45 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BB3081F59
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:27:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4297D82047
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:27:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-476a57a9379so37220951cf.1
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:27:41 -0700 (PDT)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-476964b2c1dso13731061cf.3
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:27:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742002060; x=1742606860; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=e02qKBqYFeYtWUgPbmR+yJwhz19citSUhGwT0D2u3jk=;
- b=XzQb5jtAnNrZH2G0ledsyEde3Yqq0JLf0yVvZwr7O//VVzYPHr9UDxesG3RZ8N60kR
- 6qq7rMDtFChzCl9Yml2xdhY1SuE6hTJ7LJ0038aecZFULEQVL8EHVvmKJcIYWye3hijH
- 3wVGV0zK13NGT028Fe7ZDdga4Q2jgECbjGVeQ=
+ d=konsulko.com; s=google; t=1742002062; x=1742606862; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aACZAY8pH++CzRwe2n6ayF1kGlksnCUjOKhC0aT3Lfc=;
+ b=L7jk0eub0DmHPYUvADOCt+D32/hzPZza4hQxKlljQZ952ZlE7+TYZJlYjJ1gPppeTv
+ iXF+567LiGHqgh4J9Rj01+E49AFKw3822V18sWTlAHw/R/ALgFQGLh3AmaF9vpIfnfnM
+ DetrsUNraASuDnoeX1cBtV96DbfLULtMEp7VQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742002060; x=1742606860;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e02qKBqYFeYtWUgPbmR+yJwhz19citSUhGwT0D2u3jk=;
- b=h1LwR7jswW1YQJksVwpI+BQt7khfmWWBz1PDvdXyrihDBgPZs4hmtbh6nf7a7s/WxG
- 5hdUwVOg55GsWjZ/x3IGLD1ecCP7meKQYYuqLI8f56Uumg66FDGryVG8NBUgQ+N1tBb0
- rrxZs4CAI/ZPPWYZJzgvRBaRvd909t6Po7z7U9Sr4s0tAnGr9h3iA19uo8jl/zig36Wn
- IrOIoYG015tH4r1+RQSxSxMb/k0SfXslrQ9GZa4NkIA4vvw07ziBtAmlnDmquvAVQ7Oq
- qUu3Kdi3/bnCUUUlVH5i6GvpxLGneNm8O8RFoQWuihXupSAq33RuxUCjb9JABNDJRwUh
- KWdg==
-X-Gm-Message-State: AOJu0YxuwapGnVpE98QeD/owAFJpEgiyjJfCwv0nYj5bvRjzYngrMl9h
- lXB+9HWkgXEv+2uHEUtZYKi4ni59cFnG4i4c/qAAyTRv5MZPsuwDBEgkwXLGRKCfshYsMXFb93Y
- D
-X-Gm-Gg: ASbGnct/FOwKOv9t66c+j5J8osIbHBDOvZ5mlqiSTUIJcmxiKRvXAaVR3GcbYiX3aFG
- CiD84EmbGN6pDnnDHv5Q4DjAmnalDV/eJ8Vy9ykY05fvmdBV66NK2kG4enS6d7+mZo9x8VPaVVz
- vslaRorNpfRo0Zm6jo8BdPP11ctkGYUuUrEjmjtotK6CdLLitLAdcCOhixXA7Gn2ENIlV+XH8ND
- 0uR5CQBrAABN35fkqio4tKPrIZID0jchrM+SfG3Jsm410bD+IQph6gr1GyIMihS+hGj20J8cmlC
- vV30ABpMGhi7us/nPU8h82K59btCWHpq0acgeNK6cx+WY9rr
-X-Google-Smtp-Source: AGHT+IEpCMwoCRQsU9xCbiEJDPPCulX8PLqLCE/hV0AKP6ba05M9u2ECPyRVabF5aChz44k2SLQK8Q==
-X-Received: by 2002:a05:622a:5e8b:b0:472:6aa:d6be with SMTP id
- d75a77b69052e-476c8142d12mr62461521cf.17.1742002060054; 
- Fri, 14 Mar 2025 18:27:40 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742002062; x=1742606862;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aACZAY8pH++CzRwe2n6ayF1kGlksnCUjOKhC0aT3Lfc=;
+ b=k0a+h/hkBfgMf0PpQTqfJWpvrMrt6OK+FOHYhQh1ULGRz//RM1jKcWxn0FvuA2OxCt
+ CVfsvCWlRYMLzeUsn3i7oyoCkrq2upR6xhhO7Oz5vU+LAK5riW7DztQcLV3i3sfJxRLl
+ yd3pDs3x+v7S7W73AKewbJzLIxOj1EaOaxoBp4cmqf7Yx2qpxGjLQObT+WzgFusHWcVC
+ 2O4JaCC3NpOtAKwUPNFgTvQuyu1w94qiMtyrMWwLZzoLZtBCh10BR4W774kiXapjVsLa
+ 19/N5/O2VILXtWbQh8VVRsa4svDcWaXaSZB8TfBofkB7UIFSdScwdLdAH02ShTwzBqk2
+ 282A==
+X-Gm-Message-State: AOJu0YxBEP1SFdtQCWcHwZXG1FZzKiytn/DeLQjiqM8zy1ALhakIPu3c
+ JvZvy7fJD2/zfAxvZLOYWoEfMvthmsBL8BjUxLhBnZzAWdygYhigAwqKLULUnzKuMMA/rUZhgMi
+ n
+X-Gm-Gg: ASbGncuoFQK6WP93m+s99qTMVrV1U4Dac3g+MzH2WSb5V1bBdpynGDrE5eEZ+Fec+Tv
+ 3HmE6gH/b1p6RHQprYbdgSiLLdAdgZY9OCgSn3p/KWgKBS7yp2HP4yLcUCSc4MOyE37zlV8oM7e
+ F13DOSsotAon3tlLlLBo3wD1HdQZkD5wpKTkVI9Md/R/CDuNRpl5LhZpwVrdAItiR930enu0HIP
+ m2eVdPDaOktQ1auA65kW7G36p6ZJH/nwGg3xUP6r9VBpuRRyUssyZzFyF8ukdvb3DVFXBSQvtQR
+ gxDs3qi6dYOcfOpbANIyWZHBITk8esZe8cpc6YKSEsfTQjno
+X-Google-Smtp-Source: AGHT+IGEEo1f59b3UVazUNwLyVDB/jFGUitiGtz//Og9peBAAxv6/sF2SqjmVXSpeANFg2cK+zHaag==
+X-Received: by 2002:a05:622a:134a:b0:476:b461:249b with SMTP id
+ d75a77b69052e-476c813ae4amr66602851cf.12.1742002062158; 
+ Fri, 14 Mar 2025 18:27:42 -0700 (PDT)
 Received: from bill-the-cat.. ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-476bb82c1b7sm29263711cf.74.2025.03.14.18.27.38
+ d75a77b69052e-476bb82c1b7sm29263711cf.74.2025.03.14.18.27.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 18:27:39 -0700 (PDT)
+ Fri, 14 Mar 2025 18:27:41 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>
-Subject: [PATCH 1/2] usb: ulpi: Remove unused omap-ulpi-viewport driver
-Date: Fri, 14 Mar 2025 19:27:35 -0600
-Message-ID: <20250315012736.399197-1-trini@konsulko.com>
+Subject: [PATCH 2/2] usb: ulpi: Clean up how we enable support
+Date: Fri, 14 Mar 2025 19:27:36 -0600
+Message-ID: <20250315012736.399197-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250315012736.399197-1-trini@konsulko.com>
+References: <20250315012736.399197-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,156 +94,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The last platform to enable this driver was removed in 2019. Remove this
-unused code and documentation now.
+The way we enable ULPI support today isn't something that should work.
+The "optional" keyword in a choice statement is not a documented
+feature. To make this work in a supported way, make USB_ULPI something
+we ask about if USB_HOST is set. Next, we move the choice of what
+viewer to use to be after the framework portion and to depend on that.
+We then borrow a few words from the top-level README to make the help
+text here clearer. Finally we make the Qualcomm driver select ULPI as
+it's required and we make the tegra driver not duplicate a check that
+Kconfig now handles for us.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Marek Vasut <marex@denx.de>
 ---
- doc/README.omap-ulpi-viewport         | 27 ----------
- drivers/usb/ulpi/Kconfig              |  5 --
- drivers/usb/ulpi/Makefile             |  1 -
- drivers/usb/ulpi/omap-ulpi-viewport.c | 71 ---------------------------
- 4 files changed, 104 deletions(-)
- delete mode 100644 doc/README.omap-ulpi-viewport
- delete mode 100644 drivers/usb/ulpi/omap-ulpi-viewport.c
+ README                        | 12 ------------
+ drivers/usb/host/Kconfig      |  7 +++++--
+ drivers/usb/host/ehci-tegra.c |  7 -------
+ drivers/usb/ulpi/Kconfig      | 23 ++++++++++++-----------
+ 4 files changed, 17 insertions(+), 32 deletions(-)
 
-diff --git a/doc/README.omap-ulpi-viewport b/doc/README.omap-ulpi-viewport
-deleted file mode 100644
-index a5240b9e2951..000000000000
---- a/doc/README.omap-ulpi-viewport
-+++ /dev/null
-@@ -1,27 +0,0 @@
--Reference code ""drivers/usb/ulpi/omap-ulpi-viewport.c"
+diff --git a/README b/README
+index 067c1ee2b646..1c44e65b29a5 100644
+--- a/README
++++ b/README
+@@ -482,18 +482,6 @@ The following options need to be configured:
+ 			for your device
+ 			- CONFIG_USBD_PRODUCTID 0xFFFF
+ 
+-- ULPI Layer Support:
+-		The ULPI (UTMI Low Pin (count) Interface) PHYs are supported via
+-		the generic ULPI layer. The generic layer accesses the ULPI PHY
+-		via the platform viewport, so you need both the genric layer and
+-		the viewport enabled. Currently only Chipidea/ARC based
+-		viewport is supported.
+-		To enable the ULPI layer support, define CONFIG_USB_ULPI and
+-		CONFIG_USB_ULPI_VIEWPORT in your board configuration file.
+-		If your ULPI phy needs a different reference clock than the
+-		standard 24 MHz then you have to define CFG_ULPI_REF_CLK to
+-		the appropriate value in Hz.
 -
--Contains the ulpi read write api's to perform
--any ulpi phy port access on omap platform.
+ - MMC Support:
+ 		CONFIG_SH_MMCIF
+ 		Support for Renesas on-chip MMCIF controller
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index 3dc79770eeb1..5c9e8fc9d15e 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -262,7 +262,7 @@ endif
+ config USB_EHCI_MSM
+ 	bool "Support for Qualcomm on-chip EHCI USB controller"
+ 	depends on DM_USB
+-	select USB_ULPI_VIEWPORT
++	select USB_ULPI
+ 	select MSM8916_USB_PHY
+ 	---help---
+ 	  Enables support for the on-chip EHCI controller on Qualcomm
+@@ -279,7 +279,10 @@ config USB_EHCI_TEGRA
+ 	depends on ARCH_TEGRA
+ 	select USB_EHCI_IS_TDI
+ 	---help---
+-	  Enable support for Tegra on-chip EHCI USB controller
++	  Enable support for Tegra on-chip EHCI USB controller. If you enable
++	  ULPI and your PHY needs a different reference clock than the standard
++	  24 MHz then you have to define CFG_ULPI_REF_CLK to the appropriate
++	  value in Hz.
+ 
+ config USB_EHCI_ZYNQ
+ 	bool "Support for Xilinx Zynq on-chip EHCI USB controller"
+diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegra.c
+index 7c73eb66b605..89b87886da18 100644
+--- a/drivers/usb/host/ehci-tegra.c
++++ b/drivers/usb/host/ehci-tegra.c
+@@ -25,13 +25,6 @@
+ #define HOSTPC1_DEVLC	0x84
+ #define HOSTPC1_PSPD(x)		(((x) >> 25) & 0x3)
+ 
+-#ifdef CONFIG_USB_ULPI
+-	#ifndef CONFIG_USB_ULPI_VIEWPORT
+-	#error	"To use CONFIG_USB_ULPI on Tegra Boards you have to also \
+-		define CONFIG_USB_ULPI_VIEWPORT"
+-	#endif
+-#endif
 -
--On omap ehci reg map contains INSNREG05_ULPI
--register which offers the ulpi phy access so
--any ulpi phy commands should be passsed using this
--register.
--
--omap-ulpi-viewport.c is a low level function
--implementation of "drivers/usb/ulpi/ulpi.c"
--
--To enable and use omap-ulpi-viewport.c
--we require CONFIG_USB_ULPI_VIEWPORT_OMAP and
--CONFIG_USB_ULPI be enabled in config file.
--
--Any ulpi ops request can be done with ulpi.c
--and soc specific binding and usage is done with
--omap-ulpi-viewport implementation.
--
--Ex: scenario:
--omap-ehci driver code requests for ulpi phy reset if
--ehci is used in phy mode, which will call ulpi phy reset
--the ulpi phy reset does ulpi_read/write from viewport
--implementation which will do ulpi reset using the
--INSNREG05_ULPI register.
+ /* Parameters we need for USB */
+ enum {
+ 	PARAM_DIVN,                     /* PLL FEEDBACK DIVIDer */
 diff --git a/drivers/usb/ulpi/Kconfig b/drivers/usb/ulpi/Kconfig
-index 001564d40c63..482114d6c11d 100644
+index 482114d6c11d..d969360f7eb4 100644
 --- a/drivers/usb/ulpi/Kconfig
 +++ b/drivers/usb/ulpi/Kconfig
-@@ -14,11 +14,6 @@ config USB_ULPI_VIEWPORT
+@@ -1,8 +1,18 @@
+ comment "ULPI drivers"
+ 
++config USB_ULPI
++	bool "ULPI support"
++	depends on USB_HOST
++	help
++	  Select to commnicate with USB PHY via ULPI interface.
++	  The ULPI (UTMI Low Pin (count) Interface) is a wrapper on UTMI+ core
++	  that is used as PHY Transreceiver for USB controllers.
++
++	  This driver uses ULPI viewports that are specific for each SoC.
++
+ choice
+ 	prompt "ULPI Viewport type"
+-	optional
++	depends on USB_ULPI
+ 	help
+ 	  Select ULPI viewport (SoC-side interface to ULPI) implementation
+ 	  appropriate for the device if you want to communicate with
+@@ -10,18 +20,9 @@ choice
+ 
+ config USB_ULPI_VIEWPORT
+ 	bool "Generic ULPI Viewport"
++	depends on USB_ULPI
+ 	help
  	  Support generic ULPI Viewport implementation that is used on
  	  some Tegra and Snapdragon devices.
  
--config USB_ULPI_VIEWPORT_OMAP
--	bool "OMAP ULPI Viewport"
--	help
--	  Support ULPI Viewport implementation that is used on OMAP devices.
--
  endchoice
- 
- config USB_ULPI
-diff --git a/drivers/usb/ulpi/Makefile b/drivers/usb/ulpi/Makefile
-index f05b7743531e..5565948bc12d 100644
---- a/drivers/usb/ulpi/Makefile
-+++ b/drivers/usb/ulpi/Makefile
-@@ -4,4 +4,3 @@
- 
- obj-$(CONFIG_USB_ULPI)		+= ulpi.o
- obj-$(CONFIG_USB_ULPI_VIEWPORT)	+= ulpi-viewport.o
--obj-$(CONFIG_USB_ULPI_VIEWPORT_OMAP)	+= omap-ulpi-viewport.o
-diff --git a/drivers/usb/ulpi/omap-ulpi-viewport.c b/drivers/usb/ulpi/omap-ulpi-viewport.c
-deleted file mode 100644
-index 6f0c3eb154ee..000000000000
---- a/drivers/usb/ulpi/omap-ulpi-viewport.c
-+++ /dev/null
-@@ -1,71 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * OMAP ulpi viewport support
-- * Based on drivers/usb/ulpi/ulpi-viewport.c
-- *
-- * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com
-- * Author: Govindraj R <govindraj.raja@ti.com>
-- */
 -
--#include <log.h>
--#include <asm/io.h>
--#include <linux/delay.h>
--#include <usb/ulpi.h>
+-config USB_ULPI
+-	bool "ULPI support"
+-	depends on (USB_ULPI_VIEWPORT || USB_ULPI_VIEWPORT_OMAP)
+-	help
+-	  Select to commnicate with USB PHY via ULPI interface.
+-	  ULPI is wrapper on UTMI+ core that is used as
+-	  PHY Transreceiver for USB controllers.
 -
--#define OMAP_ULPI_WR_OPSEL	(2 << 22)
--#define OMAP_ULPI_RD_OPSEL	(3 << 22)
--#define OMAP_ULPI_START		(1 << 31)
--
--/*
-- * Wait for having ulpi in done state
-- */
--static int ulpi_wait(struct ulpi_viewport *ulpi_vp, u32 mask)
--{
--	int timeout = CFG_USB_ULPI_TIMEOUT;
--
--	while (--timeout) {
--		if (!(readl(ulpi_vp->viewport_addr) & mask))
--			return 0;
--
--		udelay(1);
--	}
--
--	return ULPI_ERROR;
--}
--
--/*
-- * Issue a ULPI read/write request
-- */
--static int ulpi_request(struct ulpi_viewport *ulpi_vp, u32 value)
--{
--	int err;
--
--	writel(value, ulpi_vp->viewport_addr);
--
--	err = ulpi_wait(ulpi_vp, OMAP_ULPI_START);
--	if (err)
--		debug("ULPI request timed out\n");
--
--	return err;
--}
--
--int ulpi_write(struct ulpi_viewport *ulpi_vp, u8 *reg, u32 value)
--{
--	u32 val = OMAP_ULPI_START | (((ulpi_vp->port_num + 1) & 0xf) << 24) |
--			OMAP_ULPI_WR_OPSEL | ((u32)reg << 16) | (value & 0xff);
--
--	return ulpi_request(ulpi_vp, val);
--}
--
--u32 ulpi_read(struct ulpi_viewport *ulpi_vp, u8 *reg)
--{
--	int err;
--	u32 val = OMAP_ULPI_START | (((ulpi_vp->port_num + 1) & 0xf) << 24) |
--			 OMAP_ULPI_RD_OPSEL | ((u32)reg << 16);
--
--	err = ulpi_request(ulpi_vp, val);
--	if (err)
--		return err;
--
--	return readl(ulpi_vp->viewport_addr) & 0xff;
--}
+-	  This driver uses ULPI viewports that are specific for each SoC.
 -- 
 2.43.0
 
