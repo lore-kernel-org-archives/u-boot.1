@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB49C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6BFC35FF3
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E77281EC9;
-	Sat, 15 Mar 2025 15:28:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0094781DE3;
+	Sat, 15 Mar 2025 15:28:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kkdzW4mx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l0MeQ8Js";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 355D581D1F; Sat, 15 Mar 2025 15:28:16 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 459FC81EC0; Sat, 15 Mar 2025 15:28:18 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36A0D80F70
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:28:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42BD380F70
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:28:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cfebc343dso4184165e9.2
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:28:14 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43cf05f0c3eso4129295e9.0
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:28:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742048893; x=1742653693; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742048895; x=1742653695; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YwMyDR71gGGBpXxyD7jqEPyMHzxrsjutps/tR2I+A+A=;
- b=kkdzW4mxpwdfPUyWA/ElCGsZbd1YasUZprzVO36JBc35hWDwVkBPwGELTB4/PHOc6/
- Ob3W5pAg1Gi9CEmpuDaFAQeN/ep12dPQLPYOoe8B/K5ooKwffDxu9Zu2oMxDds44A146
- fF4TI4wIEyLNgcGKacHtNMF+C9SmIoHogqxiY=
+ bh=KHbemXiu5rRtYpiipAUbjOCQrUkto37/hy8eDHI+6Mk=;
+ b=l0MeQ8JsUM16YqOxo/88hT3RzxaD2VBrl+9jnf5QYpawo0Y7+th1Vb9PIoMSNNi2vq
+ vqTXdlMNYw+baETn8kTuV+vTlw7cQqe+4oM8k77AmU0+VcooEAxvKeEKQeb8eQr4hOqS
+ gswuM/4EcVvNd9S9jvOj/6hZcCAxYTh4wm59Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742048893; x=1742653693;
+ d=1e100.net; s=20230601; t=1742048895; x=1742653695;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YwMyDR71gGGBpXxyD7jqEPyMHzxrsjutps/tR2I+A+A=;
- b=nHrQjSLDMjAJEdYjzc8rTLixSPuFLBfDVomrRgtMNJBaiRJVVIUAM4Apb3KaqPyVd+
- SkeMHzTT8CywyA75Ursumcp7MH+4U7Ln6I9PxAQJbntm6asRmZw5ykWV3OouzKBYCek6
- 0smfgNZ6NCDW+QZXhBDY/07dqb5NobHGT98SCyvX74soAZ+q+9rfEKw7hlHDMuq0WbSQ
- 4cV6uUUjktPzdRVApIQuu+7oP6c70uYI8UPoeRi3CzuCznZ8/nnS46CXcl5x39kW+18O
- 8Za7kspCUK8hmw+sRct8TX9gPMV1fUxAhRfu0MaWJ/GY9K46zCBmbBdjpMlnKjg337Rm
- bzpg==
-X-Gm-Message-State: AOJu0YxYkz8cWKDvHvk6/XdgrtB8MZirLebumYytxUYVjgdKJWOZ5Qhh
- v9LamDpgZ44Hz5qXj6cKOObmrDKoTkAK7/egoxVZ8/aARs7oTmHgo5+A+U4YdBIJNyuYo/qDxnW
- n7A==
-X-Gm-Gg: ASbGncs4FQsYsznyXQyt614+hoOByrnePavpVcvQ7VHEBXfuEbm67Gy0Ms0Bf+NF9hF
- 0neTG6nDvGuoL6D1BwJQorNpxK3b9buihJGfLVkUTyUiUoeSaVGsMVUyz/8XxkuMOHRTa147Afi
- zJAzaNzM8PIbFj+VFgHxGuiRuk89ly0YP7HZGe2nGUAvNIS+rZJtc7ZbT7f6F0CS3akxj/46oP2
- CRAZdBkuVuBSmlvHvGUaySDROIk816oes28MRh7mcm3YSOsoP4/bHeWmJ+qtznpztOAt9HTIhyP
- 31af3Nvwh4F3ul2TZAm+LUC0NoNRC6KWy/0NPa7P3g==
-X-Google-Smtp-Source: AGHT+IENdYPOoyB4YiCx8BwkLUfjNhzsJ8T4xnRHmkcUtHKE2gEGC0IXU87albw7F2qTLaeM0PaKzw==
-X-Received: by 2002:a05:600c:1913:b0:43c:fe90:1282 with SMTP id
- 5b1f17b1804b1-43d1ec79e9emr83843465e9.7.1742048893105; 
- Sat, 15 Mar 2025 07:28:13 -0700 (PDT)
+ bh=KHbemXiu5rRtYpiipAUbjOCQrUkto37/hy8eDHI+6Mk=;
+ b=QkCGrEtIZ6KJh9I38iktQRz9TfVCcj5UxSJUQKzxrRxipCa5BEVdREoMjCP1v4kQPa
+ LyEhQuOPFG4G/hIaViFtbgo0EYozc/WZ/e7ICCWP0knEy4YSPD0P9wv1bVVC/H9eWPP7
+ y2ta2ZA0rRpKKfhO07EhxqwRVCTMmF4CXPRIz9lIhe7Du08T7G+re4mQGeXJP+76i3h9
+ wF5xnujktV6YclVkyLuI1G+Ld1tuJ0H8ItESehpiEQoy/cRIXWbTTbS47DFD6rdElyTn
+ SylDnMg2F9jB1D82XKZQ7WOVDxjMn+9SIaKtn4e+Fx+I63ug3HTljB4+6nOQN/hVBLAB
+ jiLA==
+X-Gm-Message-State: AOJu0YwU3j3xvTOoI3BiarAb6LZC05EEq0wdlNRLSoljr3dgIiQTaNi9
+ rG2kifAovL3DKZdBfDqsW0ysKoIvFKRq4GpbxIwKOfGCv7/K4FCyK1ieQ5QR5T2y9uLZdbeasQZ
+ 3Dw==
+X-Gm-Gg: ASbGncs+Ma3Acwvs66qo+QOCAvEXKaPYiAMGNdiW+YmQcJ06GIRm6U039sKx1Xd8FTM
+ IZ54sSUcTBmOvMJeyrsSTJPpauTHCmJXy1pIEjsRhTinpXm/FQY72CYmE0c0P39RNx5UJ4PkrTK
+ E4h+4CRR814nN/Pnu1Lr8y6jc+aa+kBTE+IyBqKIL8R2UwL88SVVjyvuSd3X3RMCXYd5IoImyps
+ +9KvRRlw9oGCD2eAfQdnZaC2cJixZODvPweGqHlvLBDDQ6zgPXYhfJJlq7f6XK9MSlhNW+EbJuz
+ 1uBJHSOIc8hQGQ+/g+sOAiVU99TkLRE7HzLNhqNa0nUnpTh29MpM
+X-Google-Smtp-Source: AGHT+IELxllAnZwEAGZ8NrG/cLC6SvW8i14wvU4pc5UT5L6/sjtKQCOIYLGJaXF6gkMhg7Qs9ukrbg==
+X-Received: by 2002:a05:600c:4690:b0:434:fa55:eb56 with SMTP id
+ 5b1f17b1804b1-43d1ec765b7mr83986575e9.7.1742048895179; 
+ Sat, 15 Mar 2025 07:28:15 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.28.11
+ 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.28.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 07:28:12 -0700 (PDT)
+ Sat, 15 Mar 2025 07:28:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Love Kumar <love.kumar@amd.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: [PATCH v5 30/46] test/py: Add a helper to send characters
-Date: Sat, 15 Mar 2025 14:25:50 +0000
-Message-ID: <20250315142643.2600605-31-sjg@chromium.org>
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 31/46] test/py: Allow tests to be filtered by role
+Date: Sat, 15 Mar 2025 14:25:51 +0000
+Message-ID: <20250315142643.2600605-32-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250315142643.2600605-1-sjg@chromium.org>
 References: <20250315142643.2600605-1-sjg@chromium.org>
@@ -96,65 +96,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing run_command() method is not great for sending things other
-than U-Boot commands. Add a helper for sending arbitrary strings as well
-as control characters.
+Some test can only be run by a particular board in a lab, e.g. because
+they are loaded with an OS image used by the test. Add a way to specify
+this in tests.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
 (no changes since v2)
 
 Changes in v2:
-- Add new patch with a helper to send characters
+- Add new patch to allow tests to be filtered by role
 
- test/py/console_base.py | 25 +++++++++++++++++--------
- 1 file changed, 17 insertions(+), 8 deletions(-)
+ test/py/conftest.py | 22 ++++++++++++++++++++++
+ test/py/pytest.ini  |  1 +
+ 2 files changed, 23 insertions(+)
 
-diff --git a/test/py/console_base.py b/test/py/console_base.py
-index b080c389547..073ab0462dc 100644
---- a/test/py/console_base.py
-+++ b/test/py/console_base.py
-@@ -369,21 +369,30 @@ class ConsoleBase(object):
-             output.append(self.run_command(cmd))
-         return output
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index e59897c1f78..5aea85647af 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -334,6 +334,7 @@ def pytest_configure(config):
+     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
+     ubconfig.connection_ok = True
+     ubconfig.timing = config.getoption('timing')
++    ubconfig.role = config.getoption('role')
  
--    def ctrlc(self):
--        """Send a CTRL-C character to U-Boot.
-+    def send(self, msg):
-+        """Send characters without waiting for echo, etc."""
-+        self.run_command(msg, wait_for_prompt=False, wait_for_echo=False,
-+                         send_nl=False)
+     env_vars = (
+         'board_type',
+@@ -760,6 +761,26 @@ def setup_singlethread(item):
+         if worker_id and worker_id != 'master':
+             pytest.skip('must run single-threaded')
+ 
++def setup_role(item):
++    """Process any 'role' marker for a test.
 +
-+    def ctrl(self, char):
-+        """Send a CTRL- character to U-Boot.
- 
-         This is useful in order to stop execution of long-running synchronous
-         commands such as "ums".
- 
-         Args:
--            None.
--
--        Returns:
--            Nothing.
-+            char (str): Character to send, e.g. 'C' to send Ctrl-C
-         """
-+        self.log.action(f'Sending Ctrl-{char}')
-+        self.send(chr(ord(char) - ord('@')))
- 
--        self.log.action('Sending Ctrl-C')
--        self.run_command(chr(3), wait_for_echo=False, send_nl=False)
-+    def ctrlc(self):
-+        """Send a CTRL-C character to U-Boot.
++    Skip this test if the role does not match.
 +
-+        This is useful in order to stop execution of long-running synchronous
-+        commands such as "ums".
-+        """
-+        self.ctrl('C')
++    Args:
++        item (pytest.Item): The pytest test item
++    """
++    required_roles = []
++    for roles in item.iter_markers('role'):
++        role = roles.args[0]
++        if role.startswith('!'):
++            if ubconfig.role == role[1:]:
++                pytest.skip(f'role "{ubconfig.role}" not supported')
++                return
++        else:
++            required_roles.append(role)
++    if required_roles and ubconfig.role not in required_roles:
++        pytest.skip(f'board "{ubconfig.role}" not supported')
++
+ def start_test_section(item):
+     anchors[item.name] = log.start_section(item.name)
  
-     def wait_for(self, text):
-         """Wait for a pattern to be emitted by U-Boot.
+@@ -781,6 +802,7 @@ def pytest_runtest_setup(item):
+     setup_buildconfigspec(item)
+     setup_requiredtool(item)
+     setup_singlethread(item)
++    setup_role(item)
+ 
+ def pytest_runtest_protocol(item, nextitem):
+     """pytest hook: Called to execute a test.
+diff --git a/test/py/pytest.ini b/test/py/pytest.ini
+index 26d83f83e00..361be0178ee 100644
+--- a/test/py/pytest.ini
++++ b/test/py/pytest.ini
+@@ -12,3 +12,4 @@ markers =
+     requiredtool: U-Boot: Required host tools for a test.
+     slow: U-Boot: Specific test will run slowly.
+     singlethread: Cannot run in parallel
++    role: U-Boot: Indicates the lab 'role' which can execute this test
 -- 
 2.43.0
 
