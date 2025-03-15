@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED7AAC28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 15:37:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D49B1C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 15:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23C1C809A4;
-	Sat, 15 Mar 2025 16:37:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1661D809A4;
+	Sat, 15 Mar 2025 16:51:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h06Da5jv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HFojQTId";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E36680C93; Sat, 15 Mar 2025 16:37:20 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 66B8C80C93; Sat, 15 Mar 2025 16:51:10 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5CE780756
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 16:37:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C463480756
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 16:51:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2ff187f027fso969959a91.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 08:37:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaeec07b705so482351766b.2
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 08:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742053036; x=1742657836; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pufmbCOUK6VHsBoOusnuAXpY/p4gnnc+m+L7cDbS5WY=;
- b=h06Da5jvWo0yL0dQ8FlHvH03N+M+fi0chiR8JRKfzgpfZ10aS/xiWVa16sBfMtISa/
- LJFeioe5UeBYZjvBSdJHuKpuEc/Reb0x6W3yOiCUsetXDxLC/RDjmKy6KwA4LAuLLMVn
- uUTM1wLK48cbCXhrJ/L6n41wNvBEBfpmu5lk6NaCgiRqt7Efv/ebpZ3yBRRgPET/FXPS
- ILrQ1UoWKFdIfpHGSVo24AwH+dPsohf2CWZ/T1R94H83r50lNBlWxyGaKo1Y+x3lL64M
- BK9Mq/ySjfQyfZxNsvzPKZqE+NZ8UIWjrTMxOdBeP4kpEmPUAG/KHB1Ln6WiPwkv0uLM
- 5RMg==
+ d=chromium.org; s=google; t=1742053867; x=1742658667; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q2tQx7LPOBpzAFtWKO+ozS6VpcZIoiKHEEW+esRkRJE=;
+ b=HFojQTIdTkAkTWgweJliVHydWIjOUtzccrH9bcRVDgfLMEjB/U4qKSJTaXJZCz40RI
+ gfV5CvCNYy5rZmLo77jbFdMgwidzzzFicVYt72Jd5sKZrzv/+0iB3i+5R5LWB0Mjnstp
+ 0e3x/sbKvbMjEwNjeSvO9I+T6aQ/2ugNqNKSM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742053036; x=1742657836;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pufmbCOUK6VHsBoOusnuAXpY/p4gnnc+m+L7cDbS5WY=;
- b=WI6a7YrMCVhcWgiESiZuT1zA3tRVtfJoOQ0nAX3TlFlRRKuamusQIX/eZu5gpYd4Sc
- jVBskWhdME/FNSJYYK4+3RUVQz770In6OuZQ++L98gAcXRGY2CB+KrRQXoIqnZUxzmz5
- +zaW9iWitX2Si9EuGi4TxmLQi9OdUMfW+4m7suupYJqt//W8M/0Sl15OnmL608l/Rsx5
- pnz84s+qncFCxBX4jHXQIrHGUGqKG4GywvUJen2UoDuHbtinHwHch04y5F/2/POzpfob
- eFn+1dzSTIPRi9jtudzBQKNFW3ofcqX1+0Rd/EpaRWXiVJZmZClh7rwEmMjKGpGshl3c
- jWsw==
-X-Gm-Message-State: AOJu0YypiAU39hPK3V0mZbg+Z7UztutKZ/FQ1Wx/C40lpluYs301vg/P
- Zw2fXidY8JbSl5Qhzq6lQ7hCsFEcVWF83qtscEywHWzSgm5B+Uud8XwMKdQMdRhAsaWKCG3hbhH
- C/9ez5eD6LtqkrTm0kev0+TtPKmQ=
-X-Gm-Gg: ASbGncvVakZBQL2+PcwLHYnKmynEEOdBGYCcCF5TnV/r4dyWF/8tCTwIUAadSus9o61
- 8X/Qps51kS2slM82Kijx9dUBxz73h598d5waElOd1rrSCayWay5kAnD/szoNNE4w1WHKk6oe6kI
- oBaDsa5UZEgrH+ahoHltDJQQtlzA==
-X-Google-Smtp-Source: AGHT+IEA2SUdkXUzF8tKKqg7yBoytBCSsWfNxzD3MteX6EbqXpmQoWxi4IwuA5MOQYMPA+ucDii6ZD26/x0pYnEnZ64=
-X-Received: by 2002:a17:90b:1f87:b0:2ee:c30f:33c9 with SMTP id
- 98e67ed59e1d1-30152189910mr8396058a91.14.1742053036242; Sat, 15 Mar 2025
- 08:37:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742053867; x=1742658667;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q2tQx7LPOBpzAFtWKO+ozS6VpcZIoiKHEEW+esRkRJE=;
+ b=cS1aUEMeUX98zGivhMVY9G7xabPaewY6Ly9OHet9hlYd46xBi2d5z9Q66ENsjJgKGK
+ XK5ilSgqJAKR0JF5XryGyc6EoPCZC+nhPEvuWBlW+GWPQtjEGariK/GorASzmRYXsjGK
+ lAiD/3Rz5maxynMeY5JZIyQ1gceS24MxRCQLB/blsC6AHNimcd2hH9MxD17uhFQdnRQ1
+ u2by9gbTPZa7h72AnRUJw6xonirgSAARCOlW/DYmQsdCMlFxUmCk0li7v2Pdc+hS7IzT
+ V/kgyD9WdJtRJBHv8PMvUawK6DPKZrjMZhW744Un2KOu8+0HBtlUsXbHBEC2cVDGKfco
+ qtrA==
+X-Gm-Message-State: AOJu0Yw0wvk0gKHqm2hsx+7h9oGugmWvJz2XydQu5fBVRKWbwm/lpaCY
+ 5fKXVmyqCdrB47cnDDr/+Ne0Hl9jFrr3FoTV8w079e4pp/QrWrf0pybQlFJZmJZ+eVqV8tWfWhj
+ laYq7hZP+qElTULBsmT+KKDDjyQ61nQ2Qjux5
+X-Gm-Gg: ASbGncvzcmf4ccHS+K5O9n2cJEp2EGpmSthMKuNtFbnxT6cKPUuUIr6Pwj6u8XR0+Tg
+ 6KigkJ9ROsJM5XB6M7hIZvSIxt5k8q5fZ2Ajk0PVQ/1CLsmmluTc3+KCDb+y0Hk1RXztL8DhK1X
+ TnwC2NfsBe8bZi/JWbnfGcg1jr1qQXCg1deF3E5Q==
+X-Google-Smtp-Source: AGHT+IFRPvuMdQg8kuUiYM1tE8l0bfsda0elfdaJWxf23vzZopLfFKBdbbszjZugxm0Ynf8Tpgz8FZ/AkxYVg0hnH1c=
+X-Received: by 2002:a17:907:9808:b0:ac2:4b9:dff8 with SMTP id
+ a640c23a62f3a-ac3301f18e7mr678506266b.32.1742053867200; Sat, 15 Mar 2025
+ 08:51:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250312003041.110023-1-aford173@gmail.com>
- <CAOMZO5DRn08Q58PeHqi=1V8ZRv6B1+L_CB0NA=arQ2u6XUyi8Q@mail.gmail.com>
-In-Reply-To: <CAOMZO5DRn08Q58PeHqi=1V8ZRv6B1+L_CB0NA=arQ2u6XUyi8Q@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Sat, 15 Mar 2025 10:37:04 -0500
-X-Gm-Features: AQ5f1JrKTH2utc6pl_CmgPsEP2FhiSayIf0nbcHHMfb13a4okBuf9vN6GBkBAQE
-Message-ID: <CAHCN7x+grtVs1JDvfth+7VdT1Xm=_GSBsr0PD1XQSPxpRBZcfw@mail.gmail.com>
-Subject: Re: [PATCH 00/10] clk: imx: Use Clock frameworkt to register UART
- clocks
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Peter Robinson <pbrobinson@gmail.com>
+References: <20250209212714.2317040-1-sjg@chromium.org>
+ <20250209212714.2317040-2-sjg@chromium.org>
+ <20250217192316.GW1233568@bill-the-cat>
+ <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
+ <20250314153615.GR2640854@bill-the-cat>
+ <CAFLszThguOxcC2nR467Qc9U+VdO91F48mhPuv7d6DDF7WKbyqQ@mail.gmail.com>
+ <20250315152314.GJ2640854@bill-the-cat>
+In-Reply-To: <20250315152314.GJ2640854@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 15 Mar 2025 15:50:55 +0000
+X-Gm-Features: AQ5f1Jp8HQKzEG0d2yKL7NW7k-rS-KdZRoF4ueGSnmHagGHp58C_AX0j25XryYY
+Message-ID: <CAFLszTitxR9CnQZdSdS8mvxEncRQ8Xn77ZAbHTjKuHnvtneCZA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brandon Maier <brandon.maier@collins.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,89 +92,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 11, 2025 at 9:31=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> On Tue, Mar 11, 2025 at 9:31=E2=80=AFPM Adam Ford <aford173@gmail.com> wr=
-ote:
->
-> > ---
-> > V2: Fix name of "ECSPI" and elimiate helper function, and fix build err=
-or.
->
-> Still get errors in CI:
->
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1057306
->
-> Please make sure v3 passes CI.
+Hi Tom,
 
-I ran the config that failed on my V3, and it passes that build test,
-but I don't want to waste your time if it fails on others I don't know
-about.  Can you point me to documentation on how to test this across
-multiple boards/platforms before I resubmit it?
-
-adam
+On Sat, 15 Mar 2025 at 15:23, Tom Rini <trini@konsulko.com> wrote:
 >
-> +In file included from board/liebherr/display5/display5.c:30:
-> 3873+include/dm/platform_data/serial_mxc.h:12:25: error: field 'clks'
-> has incomplete type
-> 3874+ 12 | struct clk_bulk clks;
-> 3875+ | ^~~~
-> 3876+make[2]: *** [scripts/Makefile.build:257:
-> board/liebherr/display5/display5.o] Error 1
-> 3877+make[1]: *** [Makefile:1917: board/liebherr/display5] Error 2
-> 3878+make: *** [Makefile:177: sub-make] Error 2
-> 3879 arm: + kp_imx6q_tpc
-> 3880+drivers/clk/imx/clk-imx6q.c: In function 'imx6q_clk_probe':
-> 3881+drivers/clk/imx/clk-imx6q.c:83:51: error: expected ')' before '{' to=
-ken
-> 3882+ 83 | if (of_machine_is_compatible("fsl,imx6qp") {
-> 3883+ | ~ ^~
-> 3884+ | )
-> 3885+drivers/clk/imx/clk-imx6q.c:83:9: note:
-> '-Wmisleading-indentation' is disabled from this point onwards, since
-> column-tracking was disabled due to the size of the code/headers
-> 3886+ | ^~
-> 3887+drivers/clk/imx/clk-imx6q.c:83:9: note: adding
-> '-flarge-source-files' will allow for more column-tracking support, at
-> the expense of compilation time and memory
-> 3888+drivers/clk/imx/clk-imx6q.c:179:1: error: expected declaration or
-> statement at end of input
-> 3889+ 179 | };
-> 3890+ | ^
-> 3891+drivers/clk/imx/clk-imx6q.c: At top level:
-> 3892+drivers/clk/imx/clk-imx6q.c:41:12: error: 'imx6q_clk_probe'
-> defined but not used [-Werror=3Dunused-function]
-> 3893+ 41 | static int imx6q_clk_probe(struct udevice *dev)
-> 3894+ | ^~~~~~~~~~~~~~~
-> 3895+drivers/clk/imx/clk-imx6q.c:39:26: error: 'ecspi_sels' defined
-> but not used [-Werror=3Dunused-const-variable=3D]
-> 3896+ 39 | static const char *const ecspi_sels[] =3D { "pll3_60m", "osc",=
- };
-> 3897+ | ^~~~~~~~~~
-> 3898+drivers/clk/imx/clk-imx6q.c:38:26: error: 'uart_sels' defined but
-> not used [-Werror=3Dunused-const-variable=3D]
-> 3899+ 38 | static const char *const uart_sels[] =3D { "pll3_80m", "osc", =
-};
-> 3900+ | ^~~~~~~~~
-> 3901+drivers/clk/imx/clk-imx6q.c:36:26: error: 'periph_pre_sels'
-> defined but not used [-Werror=3Dunused-const-variable=3D]
-> 3902+ 36 | static const char *const periph_pre_sels[] =3D { "pll2_bus",
-> "pll2_pfd2_396m",
-> 3903+ | ^~~~~~~~~~~~~~~
-> 3904+drivers/clk/imx/clk-imx6q.c:35:26: error: 'periph_sels' defined
-> but not used [-Werror=3Dunused-const-variable=3D]
-> 3905+ 35 | static const char *const periph_sels[] =3D { "periph_pre",
-> "periph_clk2", };
-> 3906+ | ^~~~~~~~~~~
-> 3907+drivers/clk/imx/clk-imx6q.c:26:23: error: 'imx6q_clk_ops' defined
-> but not used [-Werror=3Dunused-variable]
-> 3908+ 26 | static struct clk_ops imx6q_clk_ops =3D {
-> 3909+ | ^~~~~~~~~~~~~
-> 3910+cc1: all warnings being treated as errors
-> 3911+make[4]: *** [scripts/Makefile.build:257:
-> drivers/clk/imx/clk-imx6q.o] Error 1
-> 3912+make[3]: *** [scripts/Makefile.build:398: drivers/clk/imx] Error 2
-> 3913+make[2]: *** [scripts/Makefile.build:398: drivers/clk] Error 2
-> 3914+make[1]: *** [Makefile:1917: drivers] Error 2
-> 3915+make: *** [Makefile:177: sub-make] Error 2
+> On Sat, Mar 15, 2025 at 02:48:18PM +0000, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 14 Mar 2025 at 15:36, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Mar 14, 2025 at 02:45:27PM +0000, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 17 Feb 2025 at 19:23, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
+> > > > >
+> > > > > > Reduce the number of warnings in this file.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > >  tools/buildman/func_test.py   |   4 +-
+> > > > > >  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++----------------
+> > > > > >  2 files changed, 128 insertions(+), 116 deletions(-)
+> > > > >
+> > > > > As I think these all were warnings from whatever other linting you had
+> > > > > mentioned in another thread, I deferred this patch as it also doesn't
+> > > > > cleanly apply.
+> > > >
+> > > > Some of it, yes. But most of it is fixing things that we should fix.
+> > >
+> > > To be clear, to the extent any of it was pylint problems, they've now
+> > > been addressed as we've moved to pylint 3.3.4.
+> >
+> > Actually, I don't know about those problems, but that's fine.
+> >
+> > >
+> > > > This is going to open up a significant diff for patman, unfortunately,
+> > > > just as I am adding new features for series management. So please
+> > > > consider applying it. I can rebase if you like?
+> > >
+> > > Yes, that's fine, please just explain what's showing the warnings or
+> > > otherwise update the commit message.
+> >
+> > Before:
+> >
+> > ************* Module u_boot_pylib.gitutil
+> > tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
+> > (missing-module-docstring)
+> > tools/u_boot_pylib/gitutil.py:13:0: C0103: Constant name
+> > "use_no_decorate" doesn't conform to UPPER_CASE naming style
+> > (invalid-name)
+> > tools/u_boot_pylib/gitutil.py:40:19: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:65:20: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:72:25: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:64:12: W0612: Unused variable 'msg'
+> > (unused-variable)
+> > tools/u_boot_pylib/gitutil.py:114:21: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:121:25: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:122:17: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:139:41: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:141:40: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:146:4: R1705: Unnecessary "elif" after
+> > "return", remove the leading "el" from "elif" (no-else-return)
+> > tools/u_boot_pylib/gitutil.py:151:15: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:153:25: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:171:11: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:189:21: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:243:22: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:255:22: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:272:22: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:305:22: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:317:22: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:320:0: R0913: Too many arguments (6/5)
+> > (too-many-arguments)
+> > tools/u_boot_pylib/gitutil.py:320:0: R0917: Too many positional
+> > arguments (6/5) (too-many-positional-arguments)
+> > tools/u_boot_pylib/gitutil.py:345:16: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:347:12: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:353:4: R1705: Unnecessary "else" after
+> > "return", remove the "else" and de-indent the code inside it
+> > (no-else-return)
+> > tools/u_boot_pylib/gitutil.py:402:16: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:416:7: R1714: Consider merging these
+> > comparisons with 'in' by using 'suppresscc in ('all', 'cccmd')'. Use a
+> > set instead if elements are hashable. (consider-using-in)
+> > tools/u_boot_pylib/gitutil.py:420:15: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:433:0: R0913: Too many arguments (12/5)
+> > (too-many-arguments)
+> > tools/u_boot_pylib/gitutil.py:433:0: R0917: Too many positional
+> > arguments (12/5) (too-many-positional-arguments)
+> > tools/u_boot_pylib/gitutil.py:433:0: R0914: Too many local variables
+> > (17/15) (too-many-locals)
+> > tools/u_boot_pylib/gitutil.py:512:19: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:514:19: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:520:24: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:433:0: R1710: Either all return
+> > statements in a function should return an expression, or none of them
+> > should. (inconsistent-return-statements)
+> > tools/u_boot_pylib/gitutil.py:435:36: W0613: Unused argument
+> > 'get_maintainer_script' (unused-argument)
+> > tools/u_boot_pylib/gitutil.py:592:14: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:593:8: R1720: Unnecessary "else" after
+> > "raise", remove the "else" and de-indent the code inside it
+> > (no-else-raise)
+> > tools/u_boot_pylib/gitutil.py:601:18: C0209: Formatting a regular
+> > string which could be an f-string (consider-using-f-string)
+> > tools/u_boot_pylib/gitutil.py:682:4: W0603: Using the global statement
+> > (global-statement)
+> >
+> > ------------------------------------------------------------------
+> > Your code has been rated at 8.41/10 (previous run: 8.37/10, +0.04)
+> >
+> >
+> > After:
+> >
+> > ************* Module u_boot_pylib.gitutil
+> > tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
+> > (missing-module-docstring)
+> > tools/u_boot_pylib/gitutil.py:325:0: R0913: Too many arguments (6/5)
+> > (too-many-arguments)
+> > tools/u_boot_pylib/gitutil.py:325:0: R0917: Too many positional
+> > arguments (6/5) (too-many-positional-arguments)
+> > tools/u_boot_pylib/gitutil.py:439:0: R0913: Too many arguments (11/5)
+> > (too-many-arguments)
+> > tools/u_boot_pylib/gitutil.py:439:0: R0917: Too many positional
+> > arguments (11/5) (too-many-positional-arguments)
+> > tools/u_boot_pylib/gitutil.py:439:0: R0914: Too many local variables
+> > (16/15) (too-many-locals)
+> > tools/u_boot_pylib/gitutil.py:694:4: W0603: Using the global statement
+> > (global-statement)
+> >
+> > ------------------------------------------------------------------
+> > Your code has been rated at 9.73/10 (previous run: 8.41/10, +1.32)
+>
+> And it's not clear where these warnings come from or why they matter or
+> how to check things further.
+
+Quite a few of them have been there for a while, but most of them are
+coming from newer versions of pylint, where people come up with new
+warnings. The f-string thing is the main one, since that feature was
+not available when the code was written, but now you get a warning if
+you don't use it, because Python.
+
+>
+> > The patch is here:
+> >
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250209212714.2317040-2-sjg@chromium.org/
+> >
+> > It looks like it will apply for you, if first you accept my PR.
+>
+> It does, but I'm still not thrilled with the commit message.
+
+I could do a new one with the info above if you like. We are going to
+have this all over the place...
+
+Regards,
+Simon
