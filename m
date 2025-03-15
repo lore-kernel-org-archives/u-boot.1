@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB48C28B30
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F347C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:28:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A358B810F5;
-	Sat, 15 Mar 2025 15:27:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 09B0381877;
+	Sat, 15 Mar 2025 15:27:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PlMpmJTB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zr+tfDzi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B627E8122F; Sat, 15 Mar 2025 15:27:29 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 9E9AD809A4; Sat, 15 Mar 2025 15:27:30 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10FFF8198A
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:27:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5881810F5
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:27:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-39141ffa9fcso2542819f8f.0
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:27:26 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4394a0c65fcso6241895e9.1
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:27:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742048844; x=1742653644; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742048847; x=1742653647; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kkUisr++RVCj0iT98bJ+JIPBV1uE2F7bmbEsJn6hXDg=;
- b=PlMpmJTB9xxBFTTlT91xWczqPytahZU8F0V/g9heb7/pPFaoD+GTV2BBDniCxEFWkX
- 369Z51jzKFPc4z6kojP+lfgKlCkrldxXZEdI5+x+aT7uHzDlj0OTSR1+1198ikvGOFj8
- gaL77E9yhiRX5gG5dl8UrRFtgYXYEK2GUYeu8=
+ bh=cgYQ1DBcTz0GQCTNBv2O8yfAQ8mKNJyLlRGuzmVQMpo=;
+ b=Zr+tfDziweZ59KfvMtQPZrnvIa7A5KXQ0P2FNM6G0me3/fbALL15S9xA0hXl8YDTWd
+ 7u2Su1hAiDqQpq4KjuuHtS7ufNBjZeVt+MyuqmeSDBv29AgKlLjuik1bPYHDLN8cNfBz
+ iWpyHOZYSdh277d/u4nvEYTlAASooF0t71EmI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742048844; x=1742653644;
+ d=1e100.net; s=20230601; t=1742048847; x=1742653647;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kkUisr++RVCj0iT98bJ+JIPBV1uE2F7bmbEsJn6hXDg=;
- b=tmNantG5ixoBqIh8INXYOiojmY4+A5oP3YLHDSySdmcOSRYS1DCPfnLPc5xFYCgNz1
- V5QZZaiWln9pzKjbr4Hz9ewLge6GwFcoNMAkJapfxDKXHlJM9QlpLQysB1fn/kLr7x3e
- YTfBKW+FXfLB5aoV3VSn4wB26Co8eAy0nHaMynEb/QMSQi+aAFYCdqZD197AwHD2XypG
- LGSErc2l98lc9yn3AvwQz4fAE7vVz7zdgATNfWf4V/GVX8Cn4sH83Fe80Qkz+tXwn6wn
- mEh3Pg47AjiV4F6q8M+SI5h5ucniNSaFFF3jRrcS92TSUuknhhz9MB1j0a5HkxkSfO/p
- OePA==
-X-Gm-Message-State: AOJu0YzVfZb0oARasPEWmhTnqs9Ow58ezeZxLqCctS5NntXmVYFI1kzt
- NDJ30CdyjeUD1iBwe20RMxP6E0HJz6izHY9/upnl1VhRrfz9c9lTWNwTiMERsetQl2zy8dP4DeX
- zbw==
-X-Gm-Gg: ASbGncsAh4oa8jn3HbGi8KlznZu5oYyr6iNuXRScW2x8BISy5nn8po4egUT9I/XokB4
- aMXcRfqyQeMH26rFFmNCtKszJtZ94ZzVGYuewozedr3/EjH79c/XAM6M7YhoXBdlhDxNIa8Z7YF
- uUM//brT3xreb4Hi3RfZbxC9cnYfhFBk7hjfEpup6c7pL2Pn5og+QIQEQo99VbEZrUftpZUT2VG
- 3Bxy8JeJwdPSj0cRyc257HznEMY3zxFy+ij5AcTc9hi49o4sOmhoS9QGKoig0IGKsHtE2g3ysrW
- GND3iyGctM3PSJCo7JBK/4zmeKQ9JG7IKgvH2TkjgzvFkHHxxNSR
-X-Google-Smtp-Source: AGHT+IHZLwBn91H4bJ56qitoCNXq/pSZPVVGMDqsdvculW0iwlCk+/e1ptE5ViwkL2pjLFCZDR3+zA==
-X-Received: by 2002:a5d:64a1:0:b0:390:e8e4:7e3e with SMTP id
- ffacd0b85a97d-3971cd573fbmr8384534f8f.6.1742048844637; 
- Sat, 15 Mar 2025 07:27:24 -0700 (PDT)
+ bh=cgYQ1DBcTz0GQCTNBv2O8yfAQ8mKNJyLlRGuzmVQMpo=;
+ b=RciKogxqq1ZQq5ispax2RmOegnUoLKKtFJSvP+yamQtt+vM9NYcmfy347U6KfRqljF
+ FIxWrClHSV6GNyfpxOKxesP7CxlDbqyr9uwKEL//ivv50nRmoQBk2LcGQuvPI3/nkfIV
+ 97cXQUb9VMjU5MAbYl2JM4QESfEk4eF4hhZtkSkyfMdQtz9L2I4G45JlOOA/eItAkP0c
+ H4hvHOa+wa05Nr80B4pL1gwAI44ZTOnu3kstnzoev3ryP2nfeB+ywr30Rn9SfUWvAji1
+ KPS+g4K9XLgOGetG2hWjPtvrKWF/Uphnmw6XZ+t/fP98nLQSBPTULbi4F4MDx/OENoY+
+ amSQ==
+X-Gm-Message-State: AOJu0Yyma8E4UeqcfTWxu3EK0DGFR9d7IkoS9koL1r059T+k+RYo3/Gn
+ P9JN6qUjRDIFlpVq3Tgh/95fy5jQHQmM/7ccgCEd1Gr0Vaz8MvgLWhVUNhqtdmC6flWFP0Qjir8
+ 0Gg==
+X-Gm-Gg: ASbGnctDSUVEzgJIuDvBy00ygSP1f9NQeGf/qEeglYQrZVoMkcl4IQegyvb9hw+8MSK
+ xBEFnR+oksH1R7R3eKZexyCKV7dZHEspXbafwJR71ayy5TsAXkOQT/nBl1UNgdzsadZkoUpwtAq
+ dRn3zBYp22qevtnOyGbsS3e4DHsV8Sqf1QVhko0TNiZoSXtpD8aELiX7vM8vI8MEw0R21B3CSVy
+ MlZNS66JbJoMBJ3d6spHjJkcK2w2WOLgLIrl2TdZc6JhAD5GIrkDzNp3mQ9tJaCgU1krsJYp6WY
+ yuMw9zFh+/s9itOyJqh4bTMxIAzKOwMQlZblY46gcA==
+X-Google-Smtp-Source: AGHT+IGaN///fExRXYFjfmtZoUZWNWCHjfrYygvh+YQWPQhyqcRh9vEDlkjUGGeDtN+JOjPHhwMWfQ==
+X-Received: by 2002:a05:600c:5494:b0:43d:b85:1831 with SMTP id
+ 5b1f17b1804b1-43d1ebfe809mr86373555e9.0.1742048847010; 
+ Sat, 15 Mar 2025 07:27:27 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.27.22
+ 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.27.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 07:27:24 -0700 (PDT)
+ Sat, 15 Mar 2025 07:27:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 07/46] x86: Drop mpspec from the SPL build
-Date: Sat, 15 Mar 2025 14:25:27 +0000
-Message-ID: <20250315142643.2600605-8-sjg@chromium.org>
+Subject: [PATCH v5 08/46] x86: Add some log categories
+Date: Sat, 15 Mar 2025 14:25:28 +0000
+Message-ID: <20250315142643.2600605-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250315142643.2600605-1-sjg@chromium.org>
 References: <20250315142643.2600605-1-sjg@chromium.org>
@@ -97,30 +94,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not needed in SPL, so drop it.
+Add categories for i8259 and bios files, so that log statements have the
+right category.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/x86/lib/bios.c            | 3 +++
+ arch/x86/lib/bios_interrupts.c | 2 ++
+ arch/x86/lib/i8259.c           | 2 ++
+ 3 files changed, 7 insertions(+)
 
-diff --git a/arch/x86/lib/Makefile b/arch/x86/lib/Makefile
-index 43e6a1de77d..a908356e8a6 100644
---- a/arch/x86/lib/Makefile
-+++ b/arch/x86/lib/Makefile
-@@ -26,7 +26,9 @@ obj-y	+= e820.o
- obj-y	+= init_helpers.o
- obj-y	+= interrupts.o
- obj-y	+= lpc-uclass.o
-+ifndef CONFIG_XPL_BUILD
- obj-y	+= mpspec.o
-+endif
- obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi_nhlt.o
- obj-y	+= northbridge-uclass.o
- obj-$(CONFIG_I8259_PIC) += i8259.o
+diff --git a/arch/x86/lib/bios.c b/arch/x86/lib/bios.c
+index 03f7360032c..acae635cf19 100644
+--- a/arch/x86/lib/bios.c
++++ b/arch/x86/lib/bios.c
+@@ -5,6 +5,9 @@
+  * Copyright (C) 2007 Advanced Micro Devices, Inc.
+  * Copyright (C) 2009-2010 coresystems GmbH
+  */
++
++#define LOG_CATEGRORY	LOGC_ARCH
++
+ #include <compiler.h>
+ #include <bios_emul.h>
+ #include <irq_func.h>
+diff --git a/arch/x86/lib/bios_interrupts.c b/arch/x86/lib/bios_interrupts.c
+index b2cf1527b1c..3ae6c193ec7 100644
+--- a/arch/x86/lib/bios_interrupts.c
++++ b/arch/x86/lib/bios_interrupts.c
+@@ -7,6 +7,8 @@
+  * Copyright (C) 2007-2009 coresystems GmbH
+  */
+ 
++#define LOG_CATEGRORY	LOGC_ARCH
++
+ #include <log.h>
+ #include <asm/pci.h>
+ #include "bios_emul.h"
+diff --git a/arch/x86/lib/i8259.c b/arch/x86/lib/i8259.c
+index 465ff70146f..088f78f4661 100644
+--- a/arch/x86/lib/i8259.c
++++ b/arch/x86/lib/i8259.c
+@@ -13,6 +13,8 @@
+  * Programmable Interrupt Controllers.
+  */
+ 
++#define LOG_CATEGORY	UCLASS_IRQ
++
+ #include <log.h>
+ #include <asm/io.h>
+ #include <asm/i8259.h>
 -- 
 2.43.0
 
