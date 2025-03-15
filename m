@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBE2C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 09:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EE4C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 11:58:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEE198058A;
-	Sat, 15 Mar 2025 10:41:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 49F5580C93;
+	Sat, 15 Mar 2025 12:58:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VvqGbFCr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W0edXipa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6792C806FC; Sat, 15 Mar 2025 10:41:16 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 3FA4D80E93; Sat, 15 Mar 2025 12:58:17 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A45B980540
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 10:41:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id DC212809A4
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 12:58:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2ff784dc055so710880a91.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:41:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5493b5bc6e8so3051106e87.2
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 04:58:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1742031672; x=1742636472;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RUGrQmCLcmSj+VnDfkCBt8nMdq/nUEufPPEs14TNubc=;
- b=VvqGbFCrQJ/QkXQ+LrZXdViujv2olNbOhoMG4ofxvTCEE2gBKviRDwsrKJfpGZ+ecm
- NwexpJRL1z9fyhJMVwq/6ReGjrugSrRAYxV5LtZKNTKkyvxquKHEN+lLzLhZqRU7AcdB
- zGO7lwsiCcFBSM83fbXanY991tTRt8LWXx2GM=
+ d=gmail.com; s=20230601; t=1742039894; x=1742644694; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WJQgfXJkXdbPmWAM2BOhG+tbZI3GcNkLoS5ljXa2wmQ=;
+ b=W0edXipaLs7D6DxjbrYwSiQKtqgpkHyRhpCpDRmccpMqPzI8KuW6qBKYm7l4Q4rH/7
+ GvilYX+UiSRFodQEQ/HnR3AcwJfQ9WpNVdf33ariYpfjlWKr6KQ3SKjrndSTaJIrblGJ
+ 9UrMGB2ftYYCa2hCVGiQ2l1GOI0p7eWWrzpu9kSH3GvOIjPC6p+yGK5yAkdFg2Sdcayp
+ XyvbrF7/H202YYZb9+2vKzGBdBXR6J99F5349spr0TNnPpgIhGc8AAzXaZozdM2ZHUDj
+ uGEbm0XG0HLlBD0tg4vS9VfxDAiWW5d+qbNBNDJH2nlvM6Xlr8ZfuJLup2iHLiRAibqn
+ oRog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742031672; x=1742636472;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RUGrQmCLcmSj+VnDfkCBt8nMdq/nUEufPPEs14TNubc=;
- b=kc4/d/ICLKAEaB8Lx4wywmIBt4GnZc9/Et/OnIL+c6RWQy9l/737S12l38kc/YWcTs
- 4pMyirzDbxrlYGa8XrBP1KHXTGzs0o/y88WdY2Sy85F00jGrPtsNuyBUCM9VHnC6zM4E
- bwwYHPcb+nU4k8XKeiSHQa1xrMIOxOC3W69lqE+IpA3gN2siuvQ6xO318KJ5vT7KkCRf
- x+p9aCXbSEkexf6ntt2cmVkfIFxEB0gDl1M11xP50LUTeASryRBbFXhYYhh4j0sijQh5
- 90W9BAECRH+C15WCbbRsmAgskORO0N9lZsKd3D1X+dsNGaG8ZImERBX/oA4p97OBBZdr
- 6d8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUKx1QsvuIEqEOAJIF0/c+zp+pkhvFoG/zKtyFtpd2rA4Hc0h3DZwVmBzewwmlg1nqpvcOe1SU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQLmuUeAJ8LzfKxW3e8kISOIQjVVkWLz0YqqNnOCl7lxROBm78
- pYgHrAQ5XrladNARr9hq6yXP2CpAVwSmgR2kChLmqKflLZvA10utDusDtW/Oh/8rNXJffs/0K3H
- JmJFnSwZogfnOQdJtJrLaud/614WxDD5Jsq1Ljg==
-X-Gm-Gg: ASbGncsMsOhTpFboF3Tw6Vsjp7dNJDwlEMLjVMt5qeQ+tLWVcQ+wn7EV/tuBijl0u+i
- ULKEGdgH9l71mAG6fYF4MKVM9s9eDaq3Ez5yAWrRqDIBwmRfaVCc1UPaldyXevHI6Iim0Xd5it/
- GpkzI32ZsOpEtMs68/ABc/3IQ=
-X-Google-Smtp-Source: AGHT+IGSuwTPIJ0n6mf7YxDZFK6ZF6lzjWHLWFHdfGBIRXSw9HS9mkBFKPP3svfJxhvUpVSHtaU09j2zhi/ofzIBdNI=
-X-Received: by 2002:a17:90b:1113:b0:2f9:bcd8:da33 with SMTP id
- 98e67ed59e1d1-30151cef70emr6028291a91.21.1742031671824; Sat, 15 Mar 2025
- 02:41:11 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742039894; x=1742644694;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WJQgfXJkXdbPmWAM2BOhG+tbZI3GcNkLoS5ljXa2wmQ=;
+ b=AZV35YAqGR6zn6rRLuvKnUjiGylEpSwVjzvS3NIIkPLsOCyZpzIRBKEdQBNoB0RQEH
+ 0L8AneB+oOxT20WY/l7EZ3i4OIn4XOjMLD/+tAAq+L9k6u6XhoOoSmokFWQ/EIbxYMhE
+ apD1a4HhRAdLypzYX+sfNf6Pb2dXMeA4nETy1mv7bQhQEgXzhiKouiXQyDTQzluw1liz
+ jub1GOkDbrfpsDgoi+h5RwZ9G5bYcYaQKw1sKbQMMXTGvQIp5SRoSzkFjGe/Qvao6vS6
+ PXma7BrI6Yz3gfkY5PMTPOUXhZK88mFe8zHsmjz7RgnDsN0VslVyxpqePMZ0tpMIe3ym
+ Yc6g==
+X-Gm-Message-State: AOJu0YySweyc3VzR9cTqGfoqvyb4mhX6Ox9mVwtgOKU2tbIDq8S9q+Jg
+ iRpLftBjOiMrA3Wp0fqNzucd/Jzny0qAOL/+7fIWuW959wWi2DAj8kIHgIYXZNZsNB44BXODmJP
+ XdczIqD8ObjQzPwrA4z0SBSqWM9k=
+X-Gm-Gg: ASbGncuyg2wJlBXa9B1ANr4CMtwwA2Ogz2wmct25/0wbAuWCV8TDicgywRLt5WXheBU
+ BOJY+8ep7TOWm68fFD3/e3tQE9xNU3OqgRjyLwYNHieBe/qVEDMelxyFp3PuMsvfcxzsEiuzxay
+ VbKdEHiY8IZq3aSfwutVfAdm12YifPBuIDvKoy9/3Xe8ORGQMbJlCkcUH79A==
+X-Google-Smtp-Source: AGHT+IFJW3FzuoIVXOaxkOYdE51E3W5mHPnDGGWVRgw/mkU+dJsb7tfoDPSNev5dkb6+3b7KJgVyPlVnhh4ATIygl4g=
+X-Received: by 2002:a05:6512:3192:b0:549:7394:2cd0 with SMTP id
+ 2adb3069b0e04-549c3907dcamr2343369e87.19.1742039893829; Sat, 15 Mar 2025
+ 04:58:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250315092420.793-1-ansuelsmth@gmail.com>
-In-Reply-To: <20250315092420.793-1-ansuelsmth@gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 15 Mar 2025 10:41:00 +0100
-X-Gm-Features: AQ5f1JpyK94d33O7eJxJk1amgfM38GiU-Lbp7plF6KZ88TCiR_n_KwNU0Pq8_qQ
-Message-ID: <CAOf5uwmbO3iKtzJKPqcJp1utTaSY87i0AsfTqFZ2P6QCdzJ4Gw@mail.gmail.com>
-Subject: Re: [RESEND PATCH] clk: fix crash on clk_set_rate clean rate cache
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- Tero Kristo <t-kristo@ti.com>, u-boot@lists.denx.de
+References: <2849ff05-ef67-4471-aece-422daa57040f@cherry.de>
+ <20250314200832.154758-1-hd@os-cillation.de>
+ <20250314200832.154758-2-hd@os-cillation.de>
+In-Reply-To: <20250314200832.154758-2-hd@os-cillation.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 15 Mar 2025 08:58:01 -0300
+X-Gm-Features: AQ5f1Jq4DlImp1T4zeF1jVuDDqvlBbVOw4YYx_jhbsPMwu6ukz-aRM29cfA9X9Q
+Message-ID: <CAOMZO5BEhVGq7JGOcL_hsNAe8Qf84tKkFY1_+mm18dk7842p3g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] imx8qxp: Do not use CONFIG_XPL_BUILD in device tree
+To: Hendrik Donner <hd@os-cillation.de>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,69 +95,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Hendrik,
 
-On Sat, Mar 15, 2025 at 10:24=E2=80=AFAM Christian Marangi <ansuelsmth@gmai=
-l.com>
-wrote:
+On Fri, Mar 14, 2025 at 5:09=E2=80=AFPM Hendrik Donner <hd@os-cillation.de>=
+ wrote:
+>
+> In c9713c155127 the device tree was moved
+> from CONFIG_SPL to CONFIG_SPL_BUILD and later to CONFIG_XPL_BUILD, but
+> the CONFIG_xPL_BUILD defines are never set for device trees, breaking
+> the build. Move the guards back to CONFIG_SPL.
 
-> It's currently possible to make the bootloader crash on calling
-> clk_set_rate caused by the loop in clk_clean_rate_cache.
->
-> The loop assume that every child of the clock node are also clock
-> device but this is not always the case. For example it's common for a
-> clock to bind to a reset device or also expose a syscon if the clock
-> register map is also used to apply special configuration.
->
-> In such case, on accessing a device as a clock, the bootloader crash. To
-> correctly handle this, check if the child device is actually a clock and
-> ignore otherwise.
->
-> Fixes: 6b7fd3128f71 ("clk: fix set_rate to clean up cached rates for the
-> hierarchy")
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> ---
-> RESEND as there was a problem with email To:
->
->  drivers/clk/clk-uclass.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index 353ae476068..8f3309d9530 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -554,6 +554,9 @@ static void clk_clean_rate_cache(struct clk *clk)
->         clk->rate =3D 0;
->
->         list_for_each_entry(child_dev, &clk->dev->child_head,
-> sibling_node) {
-> +               if (device_get_uclass_id(child_dev) !=3D UCLASS_CLK)
-> +                       continue;
-> +
->                 clkp =3D dev_get_clk_ptr(child_dev);
->                 clk_clean_rate_cache(clkp);
->         }
->
+Please provide details about the "breaking the build". Which target
+fails to build currently?
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+After applying this series, the previous build failures return:
 
-Michael
+aarch64: + imx8qm_mek
+291
++WARNING 'mx8qm-ahab-container.img' not found, resulting binary is
+not-functional
+292
++binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
+spl/u-boot-spl.cfgout -T imx8image -e 0x100000
+./mkimage-out.spl.mkimage': Fail open first container file
+mx8qm-ahab-container.img
+293
++
+294
++make[1]: *** [Makefile:1133: .binman_stamp] Error 1
+295
++make: *** [Makefile:177: sub-make] Error 2
 
-
-> --
-> 2.48.1
->
->
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Please check:
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1062980/viewer
