@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994AEC28B30
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F5FAC28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:30:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8395D81DDF;
-	Sat, 15 Mar 2025 15:28:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D28BC81D25;
+	Sat, 15 Mar 2025 15:28:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EpCBTr5P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YcFsgy2N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2042481D4F; Sat, 15 Mar 2025 15:28:01 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 2796A81A02; Sat, 15 Mar 2025 15:28:03 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C01081DB4
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:27:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6F1A81D25
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:28:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-394780e98easo1929216f8f.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:27:57 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4393dc02b78so3191135e9.3
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:28:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742048875; x=1742653675; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742048880; x=1742653680; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bNuzJfPDaZaB7ecS5GRPPbVXmgD5XgLjxuFZewrYlIg=;
- b=EpCBTr5P79gwcRE7RpXpHYtJDBPRBTBirjE4DtrxQKOFdsKFkDh0ZwGFh1TN5g347C
- Q6l3CdyNmNbs1z2lJPoKS+GK1Rs6XfI9OIvzpiXcsDB+18kTRmkLwWeG2cEQx9ekmGFR
- 8w+sP1GNwNe8VMnmmOCVuPpIMis1RVv3m7dxQ=
+ bh=oyCyNfvr7ekEAM/HrefntssbTGBF9fursFujLpQtXfM=;
+ b=YcFsgy2NRb6YDCAtBOwMtHO0BjvrgmjxdCXkdhNry8/HVIzE3Dgc4LZLPeeok/8VH1
+ SrCFo0doqNN1xK4KUM3n0V9d1ijyL+AhngP3QQHq/qNpVnRcS/SFtjgStLJ3aMskkGDP
+ j4eyR0RUPtrQ4ogYRKhC29NErqe+nHOgcnh6A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742048875; x=1742653675;
+ d=1e100.net; s=20230601; t=1742048880; x=1742653680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bNuzJfPDaZaB7ecS5GRPPbVXmgD5XgLjxuFZewrYlIg=;
- b=JWIlCpAUEzrD/ceohSadIvkazMOqR1X1yWXPkZgo28OPxidMdJK6Ab1/hrhUSUvGgZ
- m2rTh38oQJ27fe2JV0UwOUWAzdIIKK2vCeOBnFY4XHkyD+ArQbt+95Sz6MebU73vjpAO
- uky41Uv8ccujWjnPwZQXTpwDUsvWeGiHm+sD5R5sobL7XIuh8O/fQIB7AKUJ/6Ewaz57
- p6RLYqPuWjYoTkCd2TECLaounO0Koma20qHG9wzQ7UqmQJGGIcjJ/4TRDW+YDvUgNL/O
- kMGFhPAbWI7SXp7azmGUWOXV9EXfKDHrxuMgMdKAh7W+UKphcN7wYmZF29yDoTbo+cj9
- eUCw==
-X-Gm-Message-State: AOJu0Yw5rGdp9YkTiToIiK7UwsRADxh0XF8Dm0N0ggUZ7snuxioWg7tY
- 56iiBeW5ahBBb+A+4jt6U4RUwjppwX9aHEZ7jGbXECHG4yQSlbsYT3Q9V1dqqD441FvXZfkMdCS
- 2VA==
-X-Gm-Gg: ASbGncvg9VOAlzkg5nE1OteOyhUgclvFJ3kjAKa6D7htsNOu9kHdUkyvhW3wE6XUZux
- NcJTdQUhLDTdL3CoZksvLyc91jDr7rNJ926sJVjhP8z435iraoFGkpOE90x7ObYFoxyGaFYZJtg
- gbzZ0mJEJmsp8OjvUY3o9ps0kibLPGqQ4tHxc/iR4hdCGiS/PyLadsyBL9v69++S+Zqk2bJIPnk
- SrSPyWm7wcEBqNMe9nUSCcyIPtyrj7K12efxYf5VS1C7unu1k2E4nXEOuG2d2oguHQet49LARZS
- 2dlI3fiNM4zj9pa0y8UY0gKdiR5WAZ2TkND/paqAsGJa0eMshzKM
-X-Google-Smtp-Source: AGHT+IEOLAsq3pBrZ0CGkvfyMhHNy1ffqi/2LO2cei8/JBJPPNTDrgbVs0GoGmRqn9LAF1dGdKeQvA==
-X-Received: by 2002:a5d:47cf:0:b0:391:412b:e23f with SMTP id
- ffacd0b85a97d-3971d333492mr9054459f8f.15.1742048874930; 
- Sat, 15 Mar 2025 07:27:54 -0700 (PDT)
+ bh=oyCyNfvr7ekEAM/HrefntssbTGBF9fursFujLpQtXfM=;
+ b=uxKVdPVxy0UztIfaiKhybp4fjQsZIZLPFM8KW5QmGoknv0Kwdoct3/RfGOOH8rN0uT
+ 88BwEqt7fVR4UAykmtZMzXIn3GYTD9YxTeq+L2BZ2LEEijqOcrkErkLdY33dPZ9QXVLc
+ yc/SYOYa60BXKCVxxwbd6RneVicbkb1ZGYOTbL4XIDUf7PPGUcp81BUNaVXow5+DdDtn
+ DIeS4IDe3x4JdQz7wYS6mwufhAU7URJPpOdztz2odhvEFZf/g8KrfBZPlCpC5+7JQHnI
+ 9jYwKbGC1NmiicHoQ5aUrl8F1SYtNig8Otn48HU4aUVPPPIrRcu3xJoDgHCFANP69i/c
+ cDAg==
+X-Gm-Message-State: AOJu0Yx9QH8hAtUC4g5Z2nEgZ9AfEtMwXZLASFFR5KwU6qdi3JSFEdN1
+ Vvs2tMHSXYTIc/7XNuZzIo4gIFhrDb3KsTv2VkVHyvdxDHWNTJ8DafF32aKeCaomRbvMjIDr6p/
+ 5RQ==
+X-Gm-Gg: ASbGnculEkYlLGl4ccsb5naNMnyIGdRYL18NzWs3BI/ajLnZn0GT8KgmIwtDqH54Cbo
+ GGgfIMlnT0ntLPRdOdZ0HZy/jXPElbTbzH94Pzq8uog2BO/6vV31PSEc+ZR/3Nl+diRhIsqiDEk
+ DGZAbhBxrBfZrzq7g3mMEEallXhatD8kWn09zssDeOwFvi2T2pZ9givU47RR+iGcu0ROrcfXACv
+ CPQSrnrjWQC7YeqiqnLzkeL9fBrSMj891n+lg9fkdX44xj8QpzDyXuz845RlD0fUxx9qUdPiXlT
+ oO3ExCYj5UBAAUj+7+yBAV1GtjQYnbg0Zl0fN37nRw==
+X-Google-Smtp-Source: AGHT+IFNAHZyEeGDlbgz9ZX9Penv0NMB8k0hClPf7zaiCCf3vaJAV6pXBKOKouTI7ngyaqudSai3HQ==
+X-Received: by 2002:a05:600c:4693:b0:43c:f1b8:16ad with SMTP id
+ 5b1f17b1804b1-43d1ece17d8mr85263645e9.30.1742048879661; 
+ Sat, 15 Mar 2025 07:27:59 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.27.53
+ 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.27.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 07:27:54 -0700 (PDT)
+ Sat, 15 Mar 2025 07:27:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 22/46] x86: Add functions to convert between mtrr size and
- mask
-Date: Sat, 15 Mar 2025 14:25:42 +0000
-Message-ID: <20250315142643.2600605-23-sjg@chromium.org>
+ Philip Oberfichtner <pro@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 24/46] x86: Update cpuid_eax et al to work on amd64
+Date: Sat, 15 Mar 2025 14:25:44 +0000
+Message-ID: <20250315142643.2600605-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250315142643.2600605-1-sjg@chromium.org>
 References: <20250315142643.2600605-1-sjg@chromium.org>
@@ -96,12 +95,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than repeating the same code in several places, add some
-functions which can do the conversion.
+The existing functions work but the register clobbers are wrong, so
+strange bugs results.
 
-Use the cpu_phys_address_size() function to obtain the physical-address
-size, since it is more reliable with kvm, where the host CPU may have a
-different value from the emulation CPU.
+The original functions were taken from a very old version of Linux.
+Update them from Linux 6.13
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -109,137 +107,102 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v3)
 
 Changes in v3:
-- Add new patch with functions to convert between mtrr size and mask
+- Add new patch to update cpuid_eax et al to work on amd64
 
- arch/x86/cpu/mtrr.c         | 33 +++++++++++++++++++++++++--------
- arch/x86/include/asm/mtrr.h | 16 ++++++++++++++++
- cmd/x86/mtrr.c              |  5 ++---
- 3 files changed, 43 insertions(+), 11 deletions(-)
+ arch/x86/include/asm/cpu.h | 75 +++++++++++++-------------------------
+ 1 file changed, 25 insertions(+), 50 deletions(-)
 
-diff --git a/arch/x86/cpu/mtrr.c b/arch/x86/cpu/mtrr.c
-index 07ea89162de..fca7b28f815 100644
---- a/arch/x86/cpu/mtrr.c
-+++ b/arch/x86/cpu/mtrr.c
-@@ -16,6 +16,7 @@
-  * since the MTRR registers are sometimes in flux.
-  */
- 
-+#include <cpu.h>
- #include <cpu_func.h>
- #include <log.h>
- #include <sort.h>
-@@ -39,6 +40,27 @@ static const char *const mtrr_type_name[MTRR_TYPE_COUNT] = {
- 	"Back",
- };
- 
-+u64 mtrr_to_size(u64 mask)
-+{
-+	u64 size;
-+
-+	size = ~mask & ((1ULL << cpu_phys_address_size()) - 1);
-+	size |= (1 << 12) - 1;
-+	size += 1;
-+
-+	return size;
-+}
-+
-+u64 mtrr_to_mask(u64 size)
-+{
-+	u64 mask;
-+
-+	mask = ~(size - 1);
-+	mask &= (1ull << cpu_phys_address_size()) - 1;
-+
-+	return mask;
-+}
-+
- /* Prepare to adjust MTRRs */
- void mtrr_open(struct mtrr_state *state, bool do_caches)
- {
-@@ -68,11 +90,9 @@ void mtrr_close(struct mtrr_state *state, bool do_caches)
- 
- static void set_var_mtrr(uint reg, uint type, uint64_t start, uint64_t size)
- {
--	u64 mask;
-+	u64 mask = mtrr_to_mask(size);
- 
- 	wrmsrl(MTRR_PHYS_BASE_MSR(reg), start | type);
--	mask = ~(size - 1);
--	mask &= (1ULL << CONFIG_CPU_ADDR_BITS) - 1;
- 	wrmsrl(MTRR_PHYS_MASK_MSR(reg), mask | MTRR_PHYS_MASK_VALID);
+diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
+index 1f1b545ea50..5d24c17f8a3 100644
+--- a/arch/x86/include/asm/cpu.h
++++ b/arch/x86/include/asm/cpu.h
+@@ -109,61 +109,36 @@ static inline struct cpuid_result cpuid_ext(int op, unsigned ecx)
+ 	return result;
  }
  
-@@ -204,8 +224,7 @@ int mtrr_add_request(int type, uint64_t start, uint64_t size)
- 	req->size = size;
- 	debug("%d: type=%d, %08llx  %08llx\n", gd->arch.mtrr_req_count - 1,
- 	      req->type, req->start, req->size);
--	mask = ~(req->size - 1);
--	mask &= (1ULL << CONFIG_CPU_ADDR_BITS) - 1;
-+	mask = mtrr_to_mask(req->size);
- 	mask |= MTRR_PHYS_MASK_VALID;
- 	debug("   %016llx %016llx\n", req->start | req->type, mask);
- 
-@@ -360,9 +379,7 @@ int mtrr_list(int reg_count, int cpu_select)
- 
- 		base = info.mtrr[i].base;
- 		mask = info.mtrr[i].mask;
--		size = ~mask & ((1ULL << CONFIG_CPU_ADDR_BITS) - 1);
--		size |= (1 << 12) - 1;
--		size += 1;
-+		size = mtrr_to_size(mask);
- 		valid = mask & MTRR_PHYS_MASK_VALID;
- 		type = mtrr_type_name[base & MTRR_BASE_TYPE_MASK];
- 		printf("%d   %-5s %-12s %016llx %016llx %016llx\n", i,
-diff --git a/arch/x86/include/asm/mtrr.h b/arch/x86/include/asm/mtrr.h
-index 2e995f54061..67e897daa25 100644
---- a/arch/x86/include/asm/mtrr.h
-+++ b/arch/x86/include/asm/mtrr.h
-@@ -90,6 +90,22 @@ struct mtrr_info {
- 	struct mtrr mtrr[MTRR_MAX_COUNT];
- };
- 
-+/**
-+ * mtrr_to_size() - Convert a mask to a size value
-+ *
-+ * @mask: Value of the mask register
-+ * Return: associated size
-+ */
-+u64 mtrr_to_size(u64 mask);
-+
-+/**
-+ * mtrr_to_mask() - Convert a size to a mask value
-+ *
-+ * @size: Value of the size register
-+ * Return: associated mask, without MTRR_PHYS_MASK_VALID
-+ */
-+u64 mtrr_to_mask(u64 size);
-+
- /**
-  * mtrr_open() - Prepare to adjust MTRRs
-  *
-diff --git a/cmd/x86/mtrr.c b/cmd/x86/mtrr.c
-index b2afb598c73..93be84f74b8 100644
---- a/cmd/x86/mtrr.c
-+++ b/cmd/x86/mtrr.c
-@@ -14,7 +14,7 @@ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
+-/*
+- * CPUID functions returning a single datum
+- */
+-static inline unsigned int cpuid_eax(unsigned int op)
++static inline void native_cpuid(unsigned int *eax, unsigned int *ebx,
++				unsigned int *ecx, unsigned int *edx)
  {
- 	const char *typename = argv[0];
- 	uint32_t start, size;
--	uint64_t base, mask;
-+	u64 base, mask;
- 	int type = -1;
- 	bool valid;
- 	int ret;
-@@ -31,8 +31,7 @@ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
+-	unsigned int eax;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax)
+-		: "0" (op)
+-		: "ecx", "edx", "edi");
+-	return eax;
++	/* ecx is often an input as well as an output. */
++	asm volatile("cpuid"
++	    : "=a" (*eax),
++	      "=b" (*ebx),
++	      "=c" (*ecx),
++	      "=d" (*edx)
++	    : "0" (*eax), "2" (*ecx)
++	    : "memory");
+ }
  
- 	base = start | type;
- 	valid = native_read_msr(MTRR_PHYS_MASK_MSR(reg)) & MTRR_PHYS_MASK_VALID;
--	mask = ~((uint64_t)size - 1);
--	mask &= (1ULL << CONFIG_CPU_ADDR_BITS) - 1;
-+	mask = mtrr_to_mask(size);
- 	if (valid)
- 		mask |= MTRR_PHYS_MASK_VALID;
+-static inline unsigned int cpuid_ebx(unsigned int op)
+-{
+-	unsigned int eax, ebx;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%ebx, %%esi;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax), "=S" (ebx)
+-		: "0" (op)
+-		: "ecx", "edx", "edi");
+-	return ebx;
++#define native_cpuid_reg(reg)					\
++static inline unsigned int cpuid_##reg(unsigned int op)	\
++{								\
++	unsigned int eax = op, ebx, ecx = 0, edx;		\
++								\
++	native_cpuid(&eax, &ebx, &ecx, &edx);			\
++								\
++	return reg;						\
+ }
  
+-static inline unsigned int cpuid_ecx(unsigned int op)
+-{
+-	unsigned int eax, ecx;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax), "=c" (ecx)
+-		: "0" (op)
+-		: "edx", "edi");
+-	return ecx;
+-}
+-
+-static inline unsigned int cpuid_edx(unsigned int op)
+-{
+-	unsigned int eax, edx;
+-
+-	__asm__("mov %%ebx, %%edi;"
+-		"cpuid;"
+-		"mov %%edi, %%ebx;"
+-		: "=a" (eax), "=d" (edx)
+-		: "0" (op)
+-		: "ecx", "edi");
+-	return edx;
+-}
++/*
++ * Native CPUID functions returning a single datum.
++ */
++native_cpuid_reg(eax)
++native_cpuid_reg(ebx)
++native_cpuid_reg(ecx)
++native_cpuid_reg(edx)
+ 
+ #if CONFIG_IS_ENABLED(X86_64)
+ static inline int flag_is_changeable_p(u32 flag)
 -- 
 2.43.0
 
