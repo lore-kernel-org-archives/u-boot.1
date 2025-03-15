@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E041BC28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 19:01:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD538C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 21:48:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D5BB809A4;
-	Sat, 15 Mar 2025 20:01:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C0C92809A4;
+	Sat, 15 Mar 2025 22:48:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sSbyBgaV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y2yOPzaE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80C3180F9A; Sat, 15 Mar 2025 20:01:34 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id A63EE80C93; Sat, 15 Mar 2025 22:48:01 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 422F8807B1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 20:01:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87A518058A
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 22:47:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3914aba1ce4so2789726f8f.2
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 12:01:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7c54a9d3fcaso336952185a.2
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 14:47:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742065291; x=1742670091; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=BiorSvMYuRZsMgDCOC/26u5gcMj6gxOwotCLVQEmqn0=;
- b=sSbyBgaVskto7zjKjK2Ei1XmQt8wtLmf0s4159INo9odmG0uDWtFmPT/1oXNumcgzv
- e/TW9hhj9YPdqbv1DBCtpFByUztjDxsA6dFRq7LZFHRC9ZrxaRNaa036Bp/IU4vZSOWm
- lONm4AOrGOuxOt9u0c3Mo9R4PRznJY1kya+6m6zUiMpFgHwa/VktYU883aj05WpVhOmV
- RBp9WFeB89KJgrvs8TCdAQoUslJkAPYTCjGDx6EI0E80Abm388B+SEjWjD5ifhYBi1Z2
- /iuLqWIhYsklXrl57F24QBRAyJRbFFp+gF1r7zueYrmUGH+OGqxpQNwDhJwByFSgLkb0
- lTEQ==
+ d=konsulko.com; s=google; t=1742075277; x=1742680077; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=F+GXQthhFvRF/s5PUKO7POoJTZ/xo+th+v+Y6qa4mg0=;
+ b=Y2yOPzaEzpRaMt68TyeK7BaEbfknC9w2wIqUfhNePe1je1H8ducKhvk2EndKcZ35za
+ +pYXtLHWi6wEEOMNHUQxwZP79ptsCH1NacSKuAC/bY0ew4MosbfVi1NYJNLI8mIZeqdt
+ gVFRmYPegQhcVfGRzINQ3LZ7qL0GwVoQ+G5Ns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742065291; x=1742670091;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=BiorSvMYuRZsMgDCOC/26u5gcMj6gxOwotCLVQEmqn0=;
- b=t4g0rN4QHlRgDA3rvv36bt1YPFC38+FilyqTVXoPNSRsHUDB8yW7M/ya1wbWFecMGM
- 9bmaMpDOR5FResHHIRHTaacmkcUhXKmpiplmqIcqtsjQpPEbi/y3nFbydzzAtVwfHhL1
- kCKtkqOl0Kow2LrkN+O4q6ifv2zrkhzAPJhrenCPZa7d6U2p47ahbbq1qYNBRT6InNK9
- q/+G+D4hqn5rukStBfpNK6AO9FP8UMKebUBihzt4o/ckCk8qsk0RTu2s0QB6fqjQ4mFr
- PRfZ+4PFJDuj4dTLepmUhgb86YQxVLe1UVmh6ZOIof3Pufd/gaN+CaPRR9hZr1ylScQx
- YB7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVg13PCNdobd2LuvE7k0JQjV1Eb6vQu84HtkvYT1RJsn0Xpqb2t12pY9SuIhiKJxPmwx+lZNmk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwkijKggmRkw752eFn8ryxqxRekoLnlKJwr4oDyz0TCfsrTckz2
- k5GZKLdIMFCCV/D3ENuBNcLM163lBazZ+bJZehvHsqi03G3IwY20yOyvdtgAH50=
-X-Gm-Gg: ASbGncscc0cagayqB4WllUm7XCvndz1fK9VBNH8w6wVtXMi3R6SHVvmurCN4ghJOma8
- OtVs/LqhIJB0A9HnQ6vLzqCyq1nIBL6zoFdNkuLfeueuPJHxBateQBT5ygGfbvBgnuk2jO0x/zQ
- 8/cg+fN6gvTsJHI3LTXhPDTVW5msvcCLNkGtdDMV09FGwRX40hjRSRvXqcKWX/nEBUhfsEECrwS
- Kc1NGJOcdW1F9rBBRcYW3q0kR79Q5M1cLAzlEF7zZiDbU2uSpWCMtx8/piAdCqA3wyxPIm4djM7
- az+GEMLNsZPLR9tFn+2F9W7xub9RRcQsGySlCZDRPxcEEr97ZWYIzn3dxveKW37JZSi5KaBLwYD
- 0k8YRa8a/YycVkAIlGxzVE9MmdA==
-X-Google-Smtp-Source: AGHT+IF9DL4f2dAU3OYJjoO7LSzSRgQD0W+CWYCJi9oru/yYBVStK2BfAzijrOvykxYKI4kufoIkNw==
-X-Received: by 2002:a05:6000:2c7:b0:390:e535:8758 with SMTP id
- ffacd0b85a97d-3971cd57c70mr9296988f8f.9.1742065290708; 
- Sat, 15 Mar 2025 12:01:30 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:b200:8793:a229:149a?
- ([2a0a:ef40:1d11:ab01:b200:8793:a229:149a])
+ d=1e100.net; s=20230601; t=1742075277; x=1742680077;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F+GXQthhFvRF/s5PUKO7POoJTZ/xo+th+v+Y6qa4mg0=;
+ b=thbiuNldCYqEXNFI5CCZT4FoG0D53CtT/UYVyTlnA2r/VEH0UCf1gTvnUNyUcnPF4Q
+ uNENcw2D5kqImkW1+9FTVBafmGPz97x0kouJ2px7oxss47H14f4Ep4JubIpOfEjRxLb3
+ jwPuF4KcI1SbzDM5SL4fKukcR+PIVDOEaovpsbePFiE/TRAWf65oF3/FcZjjFKZLhdEv
+ mft5GJcBWLzlLRg+zYWn/t1ne1+qlnVK+zSEOwHSkJ7nqnbM/ZjcUX8d34P7Jy7efTIg
+ 38g4wTJzm6NkgqKLozeYKOEUP/OlWyG0UlAhJoHI25lCJVLvNEJfptWY44vpRL9DFMmV
+ K6/A==
+X-Gm-Message-State: AOJu0Yyt2vL3+7/YDhNT6Vy6mt3Y7BA8Ev8AOnUGjt1bQUmlLRQ3Vkjf
+ 7mkvbxxYtzgBggEoAuFZZ4NUvMxVoPnIWyeZDA3K0y0cUh/kOVzJBe21gP1mLSs=
+X-Gm-Gg: ASbGncuUZGRFuEsACmRcXmoy/XQi5VS1ypUJBpS3yIRr8GesvGg2wtd1Tn0cXO3EYS/
+ IwACZuirwKQSH86AkyFymPc20X9s9I5mu//dK7j8q1UhlKitl5o3abZr7/ooUp76zYnJ5jWlOJO
+ 4ALWEUzd0RycrjYVrkTnQAfVi6iNSRwp61f6kUHqJtOOW8hS7Ypop54hQzrn7VQw2GkIzB5s2FK
+ Z6yEBcthvq8HiAZHqlSCfBVh1NYfcpIWd8HDMm9HCpF5nGjjA6uMswou/3sAAe/TzIPxZN6mXLY
+ lkeZ6XrS8NoguuqPmBd5VbCaBXjZp4U1Elq6jkeyBaZKL0j7+IXd+qri
+X-Google-Smtp-Source: AGHT+IHo0Ty7u7x1eDd3OCL89PJecvT6OgXkoslZaMqQrXgtFYE8cIB5TC1rmlB+hgt03/ugq3VLyQ==
+X-Received: by 2002:a05:620a:4091:b0:7c5:53ab:a745 with SMTP id
+ af79cd13be357-7c57c8fb0e7mr1341695485a.36.1742075277216; 
+ Sat, 15 Mar 2025 14:47:57 -0700 (PDT)
+Received: from bill-the-cat ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395c83b6b2bsm9598780f8f.26.2025.03.15.12.01.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 15 Mar 2025 12:01:29 -0700 (PDT)
-Message-ID: <c437fdb1-81b5-455a-8c22-85424346a345@linaro.org>
-Date: Sat, 15 Mar 2025 19:01:27 +0000
+ af79cd13be357-7c573da455dsm411828885a.115.2025.03.15.14.47.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Mar 2025 14:47:55 -0700 (PDT)
+Date: Sat, 15 Mar 2025 15:47:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brandon Maier <brandon.maier@collins.com>
+Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
+Message-ID: <20250315214752.GK2640854@bill-the-cat>
+References: <20250209212714.2317040-1-sjg@chromium.org>
+ <20250209212714.2317040-2-sjg@chromium.org>
+ <20250217192316.GW1233568@bill-the-cat>
+ <CAFLszTjXnz7coW9_MSLxWVH+Ea5bdka8oYByG4LQtTUNpije7g@mail.gmail.com>
+ <20250314153615.GR2640854@bill-the-cat>
+ <CAFLszThguOxcC2nR467Qc9U+VdO91F48mhPuv7d6DDF7WKbyqQ@mail.gmail.com>
+ <20250315152314.GJ2640854@bill-the-cat>
+ <CAFLszTitxR9CnQZdSdS8mvxEncRQ8Xn77ZAbHTjKuHnvtneCZA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lmb: change the return code on lmb_alloc_addr()
-To: Tom Rini <trini@konsulko.com>, Ben Schneider <ben@bens.haus>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
- ardb@kernel.org, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Nam Cao <namcao@linutronix.de>,
- Baruch Siach <baruch@tkos.co.il>, Sam Protsenko
- <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>,
- u-boot@lists.denx.de
-References: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
- <at3MKdVWObOe2t0ulEO_390BtudxQ52-_iW2VGgpz0spI-UhNxRfC9TCtcUduXUIHSuBPt7vTR3iC4bOhT1IZTyI9hKIrHhBt8-82P4PIqM=@bens.haus>
- <CAC_iWjKGxqF8L=3r1-EuDN=Jmb0rPV+-54+g7x79m8dm-4o=yg@mail.gmail.com>
- <OX9trAy3JSNd8o9Ho8NejmCIh32WQR9El_tPJG0UAcHsn_TB3VsPbNFz2l5E0hXPExObST2VM91xgLD5Ak1AvY3xRgQQEHz1LZCwadhyOYI=@bens.haus>
- <20250314234608.GG2640854@bill-the-cat>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250314234608.GG2640854@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5o6RpHH0F6QzEZ2M"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTitxR9CnQZdSdS8mvxEncRQ8Xn77ZAbHTjKuHnvtneCZA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,32 +103,228 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--5o6RpHH0F6QzEZ2M
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 3/14/25 23:46, Tom Rini wrote:
-> On Fri, Mar 14, 2025 at 11:26:59PM +0000, Ben Schneider wrote:
->>> Thanks Ben.
->>
->> Happy to help. In case the context is useful, I wound up here
->> because I use U-Boot to load systemd-boot which then, in turn, loads
->> the kernel. Unlike GRUB, systemd-boot does not provide decompression
->> and recommends using EFI_ZBOOT[0].
->>
->> Perhaps it is uncommon to: a) have the first good memory entry
->> start at zero, b) use systemd-boot instead of GRUB, c) use the
->> compressed kernel on aarch64, d) all of the above? :)
->>
->> Thanks for everyone's help!
->>
->> Ben
->>
->> [0] https://github.com/systemd/systemd/issues/23788
-> 
-> Oh interesting, so now we're at 3 years in to having some form of now we
-> can decompress a kernel image again.
+On Sat, Mar 15, 2025 at 03:50:55PM +0000, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sat, 15 Mar 2025 at 15:23, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Mar 15, 2025 at 02:48:18PM +0000, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 14 Mar 2025 at 15:36, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Mar 14, 2025 at 02:45:27PM +0000, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 17 Feb 2025 at 19:23, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
+> > > > > >
+> > > > > > > Reduce the number of warnings in this file.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > >
+> > > > > > >  tools/buildman/func_test.py   |   4 +-
+> > > > > > >  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++------=
+----------
+> > > > > > >  2 files changed, 128 insertions(+), 116 deletions(-)
+> > > > > >
+> > > > > > As I think these all were warnings from whatever other linting =
+you had
+> > > > > > mentioned in another thread, I deferred this patch as it also d=
+oesn't
+> > > > > > cleanly apply.
+> > > > >
+> > > > > Some of it, yes. But most of it is fixing things that we should f=
+ix.
+> > > >
+> > > > To be clear, to the extent any of it was pylint problems, they've n=
+ow
+> > > > been addressed as we've moved to pylint 3.3.4.
+> > >
+> > > Actually, I don't know about those problems, but that's fine.
+> > >
+> > > >
+> > > > > This is going to open up a significant diff for patman, unfortuna=
+tely,
+> > > > > just as I am adding new features for series management. So please
+> > > > > consider applying it. I can rebase if you like?
+> > > >
+> > > > Yes, that's fine, please just explain what's showing the warnings or
+> > > > otherwise update the commit message.
+> > >
+> > > Before:
+> > >
+> > > ************* Module u_boot_pylib.gitutil
+> > > tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
+> > > (missing-module-docstring)
+> > > tools/u_boot_pylib/gitutil.py:13:0: C0103: Constant name
+> > > "use_no_decorate" doesn't conform to UPPER_CASE naming style
+> > > (invalid-name)
+> > > tools/u_boot_pylib/gitutil.py:40:19: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:65:20: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:72:25: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:64:12: W0612: Unused variable 'msg'
+> > > (unused-variable)
+> > > tools/u_boot_pylib/gitutil.py:114:21: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:121:25: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:122:17: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:139:41: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:141:40: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:146:4: R1705: Unnecessary "elif" after
+> > > "return", remove the leading "el" from "elif" (no-else-return)
+> > > tools/u_boot_pylib/gitutil.py:151:15: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:153:25: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:171:11: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:189:21: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:243:22: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:255:22: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:272:22: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:305:22: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:317:22: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:320:0: R0913: Too many arguments (6/5)
+> > > (too-many-arguments)
+> > > tools/u_boot_pylib/gitutil.py:320:0: R0917: Too many positional
+> > > arguments (6/5) (too-many-positional-arguments)
+> > > tools/u_boot_pylib/gitutil.py:345:16: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:347:12: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:353:4: R1705: Unnecessary "else" after
+> > > "return", remove the "else" and de-indent the code inside it
+> > > (no-else-return)
+> > > tools/u_boot_pylib/gitutil.py:402:16: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:416:7: R1714: Consider merging these
+> > > comparisons with 'in' by using 'suppresscc in ('all', 'cccmd')'. Use a
+> > > set instead if elements are hashable. (consider-using-in)
+> > > tools/u_boot_pylib/gitutil.py:420:15: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:433:0: R0913: Too many arguments (12/5)
+> > > (too-many-arguments)
+> > > tools/u_boot_pylib/gitutil.py:433:0: R0917: Too many positional
+> > > arguments (12/5) (too-many-positional-arguments)
+> > > tools/u_boot_pylib/gitutil.py:433:0: R0914: Too many local variables
+> > > (17/15) (too-many-locals)
+> > > tools/u_boot_pylib/gitutil.py:512:19: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:514:19: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:520:24: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:433:0: R1710: Either all return
+> > > statements in a function should return an expression, or none of them
+> > > should. (inconsistent-return-statements)
+> > > tools/u_boot_pylib/gitutil.py:435:36: W0613: Unused argument
+> > > 'get_maintainer_script' (unused-argument)
+> > > tools/u_boot_pylib/gitutil.py:592:14: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:593:8: R1720: Unnecessary "else" after
+> > > "raise", remove the "else" and de-indent the code inside it
+> > > (no-else-raise)
+> > > tools/u_boot_pylib/gitutil.py:601:18: C0209: Formatting a regular
+> > > string which could be an f-string (consider-using-f-string)
+> > > tools/u_boot_pylib/gitutil.py:682:4: W0603: Using the global statement
+> > > (global-statement)
+> > >
+> > > ------------------------------------------------------------------
+> > > Your code has been rated at 8.41/10 (previous run: 8.37/10, +0.04)
+> > >
+> > >
+> > > After:
+> > >
+> > > ************* Module u_boot_pylib.gitutil
+> > > tools/u_boot_pylib/gitutil.py:1:0: C0114: Missing module docstring
+> > > (missing-module-docstring)
+> > > tools/u_boot_pylib/gitutil.py:325:0: R0913: Too many arguments (6/5)
+> > > (too-many-arguments)
+> > > tools/u_boot_pylib/gitutil.py:325:0: R0917: Too many positional
+> > > arguments (6/5) (too-many-positional-arguments)
+> > > tools/u_boot_pylib/gitutil.py:439:0: R0913: Too many arguments (11/5)
+> > > (too-many-arguments)
+> > > tools/u_boot_pylib/gitutil.py:439:0: R0917: Too many positional
+> > > arguments (11/5) (too-many-positional-arguments)
+> > > tools/u_boot_pylib/gitutil.py:439:0: R0914: Too many local variables
+> > > (16/15) (too-many-locals)
+> > > tools/u_boot_pylib/gitutil.py:694:4: W0603: Using the global statement
+> > > (global-statement)
+> > >
+> > > ------------------------------------------------------------------
+> > > Your code has been rated at 9.73/10 (previous run: 8.41/10, +1.32)
+> >
+> > And it's not clear where these warnings come from or why they matter or
+> > how to check things further.
+>=20
+> Quite a few of them have been there for a while, but most of them are
+> coming from newer versions of pylint, where people come up with new
+> warnings. The f-string thing is the main one, since that feature was
+> not available when the code was written, but now you get a warning if
+> you don't use it, because Python.
 
-I've been using ZBOOT w/ U-Boot for ~2 years now on ARM64. Can recommend :D
-> 
+OK. But pylint_err isn't complaining.
 
--- 
-Caleb (they/them)
+> > > The patch is here:
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20250209212714.23170=
+40-2-sjg@chromium.org/
+> > >
+> > > It looks like it will apply for you, if first you accept my PR.
+> >
+> > It does, but I'm still not thrilled with the commit message.
+>=20
+> I could do a new one with the info above if you like. We are going to
+> have this all over the place...
 
+Are we going to have to? If it's not an error I don't know how much
+effort *needs* to be put in to it.
+
+So yes, please provide a much clearer commit message for this patch.
+Nothing is complaining until you ask a tool to give a complaint report,
+so it's not nearly as obviously critical as "CI fails now" or "Everyone
+gets spammed by python when using buildman".
+
+--=20
+Tom
+
+--5o6RpHH0F6QzEZ2M
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfV9YAACgkQFHw5/5Y0
+tyy5rwwAm3SxaSUdhS44y8ne3F00ADFV7SKMyIUxabqkNXihDFgK4jef0bq097dq
+3QWNwpW8FgLP8LyvY4r7KuO1AigUcubizBK9NnuYMHg8oTP2PEIztlUd6ol46zew
+Jz/GTYeFSoo4PiyPVzelFjb6EZVWWxCItWN3Ah/g1D9Y+n0e9wuAnYUPUBxJrN97
+y2KceazaSjVuzg5aK7VKoBIG04DVB3cE9U313fcrFQY7K6OeE7/A075eYtIVoaqE
+mQ9Z86N8tl/9FrPHDt8q6/k9wh+ESFpBpnSkXEcKOCbHW1ejOQFKg4O1Qx/W28z9
+K4tStOswl4CcKH+SyUbmcJxxCvnZR0x26GjH0CWpJKDOEnJEiSfFFR7FDpYUTHMu
+/BsUbrD9WYqljBqGFZAvEi+599Ehltg4R4nJy4L7NRkp1/oO+U35jWUJQC6NV2t1
+FU1AJq+JpI3wcNKQVczXrF2fKnrCGUfoTxtHWht6/F77KG3JK3KEVeTfJ6gefuwG
+qmc/hmAp
+=cg9s
+-----END PGP SIGNATURE-----
+
+--5o6RpHH0F6QzEZ2M--
