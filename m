@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EE4C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 11:58:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8278C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 12:45:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49F5580C93;
-	Sat, 15 Mar 2025 12:58:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CEAA880C93;
+	Sat, 15 Mar 2025 13:45:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W0edXipa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RZkL/G0G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FA4D80E93; Sat, 15 Mar 2025 12:58:17 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 1308580ECC; Sat, 15 Mar 2025 13:45:06 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC212809A4
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 12:58:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40CEE808A2
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 13:45:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5493b5bc6e8so3051106e87.2
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 04:58:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5e61375c108so3818877a12.1
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 05:45:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742039894; x=1742644694; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WJQgfXJkXdbPmWAM2BOhG+tbZI3GcNkLoS5ljXa2wmQ=;
- b=W0edXipaLs7D6DxjbrYwSiQKtqgpkHyRhpCpDRmccpMqPzI8KuW6qBKYm7l4Q4rH/7
- GvilYX+UiSRFodQEQ/HnR3AcwJfQ9WpNVdf33ariYpfjlWKr6KQ3SKjrndSTaJIrblGJ
- 9UrMGB2ftYYCa2hCVGiQ2l1GOI0p7eWWrzpu9kSH3GvOIjPC6p+yGK5yAkdFg2Sdcayp
- XyvbrF7/H202YYZb9+2vKzGBdBXR6J99F5349spr0TNnPpgIhGc8AAzXaZozdM2ZHUDj
- uGEbm0XG0HLlBD0tg4vS9VfxDAiWW5d+qbNBNDJH2nlvM6Xlr8ZfuJLup2iHLiRAibqn
- oRog==
+ d=chromium.org; s=google; t=1742042701; x=1742647501; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=qgsxVVVdkN3oWaISZmMXsv+77ulndW8BdW9IczsbNYM=;
+ b=RZkL/G0GD4IpeS0/tslN5RVcxZys5d5zcy+mdQQ5ZARp/MhzQUsrV/2GIMX1ZI9gg9
+ yHqWpON/nqsoaDrPauLmbjtwDZj8K4au5KYz7w20oL4yYOS9ryNOsSN7L14B8f03aV4V
+ OqzZoip7l3L7o3ejtf/na5Vel+RRgyTv0R3xo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742039894; x=1742644694;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WJQgfXJkXdbPmWAM2BOhG+tbZI3GcNkLoS5ljXa2wmQ=;
- b=AZV35YAqGR6zn6rRLuvKnUjiGylEpSwVjzvS3NIIkPLsOCyZpzIRBKEdQBNoB0RQEH
- 0L8AneB+oOxT20WY/l7EZ3i4OIn4XOjMLD/+tAAq+L9k6u6XhoOoSmokFWQ/EIbxYMhE
- apD1a4HhRAdLypzYX+sfNf6Pb2dXMeA4nETy1mv7bQhQEgXzhiKouiXQyDTQzluw1liz
- jub1GOkDbrfpsDgoi+h5RwZ9G5bYcYaQKw1sKbQMMXTGvQIp5SRoSzkFjGe/Qvao6vS6
- PXma7BrI6Yz3gfkY5PMTPOUXhZK88mFe8zHsmjz7RgnDsN0VslVyxpqePMZ0tpMIe3ym
- Yc6g==
-X-Gm-Message-State: AOJu0YySweyc3VzR9cTqGfoqvyb4mhX6Ox9mVwtgOKU2tbIDq8S9q+Jg
- iRpLftBjOiMrA3Wp0fqNzucd/Jzny0qAOL/+7fIWuW959wWi2DAj8kIHgIYXZNZsNB44BXODmJP
- XdczIqD8ObjQzPwrA4z0SBSqWM9k=
-X-Gm-Gg: ASbGncuyg2wJlBXa9B1ANr4CMtwwA2Ogz2wmct25/0wbAuWCV8TDicgywRLt5WXheBU
- BOJY+8ep7TOWm68fFD3/e3tQE9xNU3OqgRjyLwYNHieBe/qVEDMelxyFp3PuMsvfcxzsEiuzxay
- VbKdEHiY8IZq3aSfwutVfAdm12YifPBuIDvKoy9/3Xe8ORGQMbJlCkcUH79A==
-X-Google-Smtp-Source: AGHT+IFJW3FzuoIVXOaxkOYdE51E3W5mHPnDGGWVRgw/mkU+dJsb7tfoDPSNev5dkb6+3b7KJgVyPlVnhh4ATIygl4g=
-X-Received: by 2002:a05:6512:3192:b0:549:7394:2cd0 with SMTP id
- 2adb3069b0e04-549c3907dcamr2343369e87.19.1742039893829; Sat, 15 Mar 2025
- 04:58:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742042701; x=1742647501;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=qgsxVVVdkN3oWaISZmMXsv+77ulndW8BdW9IczsbNYM=;
+ b=O5N6Ir6n0d6YnjjfdgTCV/nEbXqUZiGLF6cq3hyD9Hnn/yLMg1jTtZMYVLdST7SrxG
+ K4u6pOXPRGygrQuk+sZBouTIVu1lCBrtVCTMife5elOWKJbjju/3NRZKRPabi2B921RO
+ fggTpQLf0MKhHij3h+sG5q7dHZ0t+QJeCGC+cDE0gJ5Cw4W/QAPFYrYRaEf+f2Jy1tJi
+ 8NVL9UYtirK1yP93Adq2pc8CJQSoyTfoWfJrEBAOJw8V8qOAqC6OcjhOfQjRmzW2bORK
+ jC/XkpMzMgXc6DFHNNS8you9YrFZx2k77gF6hn5ViSpgMVyMIxL2pAXKlWWIiNqtG1Hl
+ ZLtw==
+X-Gm-Message-State: AOJu0YxX+fKj1jUs6TN3JikmfWto6rnbnVQ5iOcKXuU9OcJj91WVzif9
+ 1ZecqTaE3S737vLLLYXBMf3LFMi0rPmNiADuJbcrjERw/iv8pTdDGghGla+P3mvaz4mju2rIhrH
+ CcclttvPwT9TmkE86dWqBnNvHHvY0KspkinRZgJBVhghPuCLehSWq
+X-Gm-Gg: ASbGncu0dSe66084WZkEbJAG1kXcx51wY00a6e9AUaaa7AvmJxMh9w91Uj6H4vc78yf
+ Rdgd0YUyK+ykzEgjxAOzX67FhnHBz2wc+d7HDB5r6o3HWlxOUPuagcl0qFgVNJEBSUTc1A6W+Xl
+ nRbmj2LW6OXQVL7CIXiE8mStoDQhxQMI/CCVKB0w==
+X-Google-Smtp-Source: AGHT+IHlRL0UwKraLRBPvgzNmpNVT3xnFKrAD1w4XQf2wewE77FksgiqJsQISIxhEpHM9QxuLCX+pay/dPqNqzT+0jo=
+X-Received: by 2002:a05:6402:40c4:b0:5dc:c531:e5c0 with SMTP id
+ 4fb4d7f45d1cf-5e8a09faca8mr6612205a12.27.1742042701538; Sat, 15 Mar 2025
+ 05:45:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <2849ff05-ef67-4471-aece-422daa57040f@cherry.de>
- <20250314200832.154758-1-hd@os-cillation.de>
- <20250314200832.154758-2-hd@os-cillation.de>
-In-Reply-To: <20250314200832.154758-2-hd@os-cillation.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 15 Mar 2025 08:58:01 -0300
-X-Gm-Features: AQ5f1Jq4DlImp1T4zeF1jVuDDqvlBbVOw4YYx_jhbsPMwu6ukz-aRM29cfA9X9Q
-Message-ID: <CAOMZO5BEhVGq7JGOcL_hsNAe8Qf84tKkFY1_+mm18dk7842p3g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] imx8qxp: Do not use CONFIG_XPL_BUILD in device tree
-To: Hendrik Donner <hd@os-cillation.de>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 15 Mar 2025 12:44:50 +0000
+X-Gm-Features: AQ5f1Jobwdf2ZaS0EW6VDxu_Bc0YTgKR9qVS-YW3HmydaMaynoN2g81UHqQhZGE
+Message-ID: <CAFLszTiy_23MXgSB4U8P5WyDxM-AKu6wO=4G+u1Wv6P6YpPvPw@mail.gmail.com>
+Subject: Please pull u-boot-dm
+To: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,36 +81,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hendrik,
+Hi Tom,
 
-On Fri, Mar 14, 2025 at 5:09=E2=80=AFPM Hendrik Donner <hd@os-cillation.de>=
- wrote:
->
-> In c9713c155127 the device tree was moved
-> from CONFIG_SPL to CONFIG_SPL_BUILD and later to CONFIG_XPL_BUILD, but
-> the CONFIG_xPL_BUILD defines are never set for device trees, breaking
-> the build. Move the guards back to CONFIG_SPL.
+Here is my attempt to get the test-rename stuff landed in your tree.
+If you would rather do another round of patches, PTML.
 
-Please provide details about the "breaking the build". Which target
-fails to build currently?
 
-After applying this series, the previous build failures return:
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/25171
 
-aarch64: + imx8qm_mek
-291
-+WARNING 'mx8qm-ahab-container.img' not found, resulting binary is
-not-functional
-292
-+binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n
-spl/u-boot-spl.cfgout -T imx8image -e 0x100000
-./mkimage-out.spl.mkimage': Fail open first container file
-mx8qm-ahab-container.img
-293
-+
-294
-+make[1]: *** [Makefile:1133: .binman_stamp] Error 1
-295
-+make: *** [Makefile:177: sub-make] Error 2
+The following changes since commit 00dfb7038ea4dfe9d9667143bfecd11c05cab6fa:
 
-Please check:
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1062980/viewer
+  Merge patch series "Enable USB MSC Boot for AM62, AM62A and AM62P"
+(2025-03-14 14:36:18 -0600)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-pull-15mar25
+
+for you to fetch changes up to 13e8d14442a85a8556211a9950a5b6f80b447901:
+
+  test: Make net tests depend on CONFIG_CMD_NET (2025-03-15 11:47:05 +0000)
+
+----------------------------------------------------------------
+Sync up on test renames
+
+----------------------------------------------------------------
+Simon Glass (6):
+      test/py: Shorten u_boot_console
+      test/py: Drop u_boot_ prefix on test files
+      test/py: Drop importing utils as util
+      test/py: Drop assigning ubman to cons
+      test/py: Show info about module-loading
+      test: Make net tests depend on CONFIG_CMD_NET
+
+ README                                                             |   2 +-
+ doc/develop/py_testing.rst                                         |  16 +-
+ doc/develop/tests_writing.rst                                      |  12 +-
+ test/py/conftest.py                                                |
+89 +++++-----
+ test/py/{u_boot_console_base.py => console_base.py}                |   8 +-
+ test/py/{u_boot_console_exec_attach.py => console_board.py}        |   6 +-
+ test/py/{u_boot_console_sandbox.py => console_sandbox.py}          |   8 +-
+ test/py/{u_boot_spawn.py => spawn.py}                              |   0
+ test/py/tests/fit_util.py                                          |  42 ++---
+ test/py/tests/test_000_version.py                                  |   8 +-
+ test/py/tests/test_android/test_ab.py                              |  48 +++---
+ test/py/tests/test_android/test_abootimg.py                        |
+133 ++++++++-------
+ test/py/tests/test_android/test_avb.py                             |  49 +++---
+ test/py/tests/test_bind.py                                         |
+72 ++++----
+ test/py/tests/test_bootmenu.py                                     |  46 ++---
+ test/py/tests/test_bootstage.py                                    |  18 +-
+ test/py/tests/test_button.py                                       |  16 +-
+ test/py/tests/test_cat/test_cat.py                                 |   6 +-
+ test/py/tests/test_dfu.py                                          |  54 +++---
+ test/py/tests/test_dm.py                                           |  28 ++--
+ test/py/tests/test_efi_bootmgr/test_efi_bootmgr.py                 |  34 ++--
+ test/py/tests/test_efi_capsule/capsule_common.py                   |
+60 +++----
+ test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py        |
+100 +++++------
+ test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py        |
+126 +++++++-------
+ test/py/tests/test_efi_capsule/test_capsule_firmware_signed_fit.py |
+104 ++++++------
+ test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py |
+104 ++++++------
+ test/py/tests/test_efi_fit.py                                      |
+93 +++++-----
+ test/py/tests/test_efi_loader.py                                   |
+84 +++++-----
+ test/py/tests/test_efi_secboot/test_authvar.py                     |
+120 ++++++-------
+ test/py/tests/test_efi_secboot/test_signed.py                      |
+148 ++++++++--------
+ test/py/tests/test_efi_secboot/test_signed_intca.py                |  46 ++---
+ test/py/tests/test_efi_secboot/test_unsigned.py                    |  42 ++---
+ test/py/tests/test_efi_selftest.py                                 |
+180 ++++++++++----------
+ test/py/tests/test_eficonfig/test_eficonfig.py                     |
+106 ++++++------
+ test/py/tests/test_env.py                                          |
+82 +++++----
+ test/py/tests/test_event_dump.py                                   |   9 +-
+ test/py/tests/test_extension.py                                    |  32 ++--
+ test/py/tests/test_fit.py                                          |
+67 ++++----
+ test/py/tests/test_fit_auto_signed.py                              |  35 ++--
+ test/py/tests/test_fit_ecdsa.py                                    |  31 ++--
+ test/py/tests/test_fit_hashes.py                                   |  29 ++--
+ test/py/tests/test_fpga.py                                         |
+280 +++++++++++++++----------------
+ test/py/tests/test_fs/conftest.py                                  |   1 -
+ test/py/tests/test_fs/test_basic.py                                |
+104 ++++++------
+ test/py/tests/test_fs/test_erofs.py                                |
+76 ++++-----
+ test/py/tests/test_fs/test_ext.py                                  |
+124 +++++++-------
+ test/py/tests/test_fs/test_fs_cmd.py                               |   4 +-
+ test/py/tests/test_fs/test_fs_fat.py                               |   6 +-
+ test/py/tests/test_fs/test_mkdir.py                                |  48 +++---
+ test/py/tests/test_fs/test_rename.py                               |
+132 +++++++--------
+ test/py/tests/test_fs/test_squashfs/test_sqfs_load.py              |  54 +++---
+ test/py/tests/test_fs/test_squashfs/test_sqfs_ls.py                |
+64 +++----
+ test/py/tests/test_fs/test_symlink.py                              |  46 ++---
+ test/py/tests/test_fs/test_unlink.py                               |  50 +++---
+ test/py/tests/test_gpio.py                                         |
+106 ++++++------
+ test/py/tests/test_gpt.py                                          |
+178 ++++++++++----------
+ test/py/tests/test_handoff.py                                      |   5 +-
+ test/py/tests/test_help.py                                         |  28 ++--
+ test/py/tests/test_i2c.py                                          |  44 ++---
+ test/py/tests/test_kconfig.py                                      |  16 +-
+ test/py/tests/test_log.py                                          |  20 +--
+ test/py/tests/test_lsblk.py                                        |   4 +-
+ test/py/tests/test_md.py                                           |  22 +--
+ test/py/tests/test_mdio.py                                         |  32 ++--
+ test/py/tests/test_memtest.py                                      |  26 +--
+ test/py/tests/test_mii.py                                          |  50 +++---
+ test/py/tests/test_mmc.py                                          |
+156 ++++++++---------
+ test/py/tests/test_mmc_rd.py                                       |  54 +++---
+ test/py/tests/test_mmc_wr.py                                       |  20 +--
+ test/py/tests/test_net.py                                          |
+142 ++++++++--------
+ test/py/tests/test_net_boot.py                                     |
+144 ++++++++--------
+ test/py/tests/test_of_migrate.py                                   |  43 +++--
+ test/py/tests/test_ofplatdata.py                                   |  11 +-
+ test/py/tests/test_optee_rpmb.py                                   |  10 +-
+ test/py/tests/test_part.py                                         |   4 +-
+ test/py/tests/test_pinmux.py                                       |  32 ++--
+ test/py/tests/test_pstore.py                                       |  48 +++---
+ test/py/tests/test_qfw.py                                          |   8 +-
+ test/py/tests/test_reset.py                                        |  24 +--
+ test/py/tests/test_sandbox_exit.py                                 |  28 ++--
+ test/py/tests/test_sandbox_opts.py                                 |  16 +-
+ test/py/tests/test_saveenv.py                                      |
+70 ++++----
+ test/py/tests/test_scp03.py                                        |   8 +-
+ test/py/tests/test_scsi.py                                         |  48 +++---
+ test/py/tests/test_semihosting/test_hostfs.py                      |  14 +-
+ test/py/tests/test_sf.py                                           |
+66 ++++----
+ test/py/tests/test_shell_basics.py                                 |  30 ++--
+ test/py/tests/test_sleep.py                                        |  26 +--
+ test/py/tests/test_smbios.py                                       |  16 +-
+ test/py/tests/test_source.py                                       |  45 +++--
+ test/py/tests/test_spi.py                                          |
+242 +++++++++++++-------------
+ test/py/tests/test_spl.py                                          |  15 +-
+ test/py/tests/test_stackprotector.py                               |   8 +-
+ test/py/tests/test_suite.py                                        |
+71 ++++----
+ test/py/tests/test_tpm2.py                                         |
+194 ++++++++++-----------
+ test/py/tests/test_trace.py                                        |
+81 +++++----
+ test/py/tests/test_ums.py                                          |  49 +++---
+ test/py/tests/test_unknown_cmd.py                                  |   6 +-
+ test/py/tests/test_upl.py                                          |  15 +-
+ test/py/tests/test_usb.py                                          |
+206 +++++++++++------------
+ test/py/tests/test_ut.py                                           |
+224 ++++++++++++-------------
+ test/py/tests/test_vbe.py                                          |  17 +-
+ test/py/tests/test_vbe_vpl.py                                      |  33 ++--
+ test/py/tests/test_vboot.py                                        |
+188 ++++++++++-----------
+ test/py/tests/test_vpl.py                                          |  11 +-
+ test/py/tests/test_xxd/test_xxd.py                                 |   6 +-
+ test/py/tests/test_zynq_secure.py                                  |
+96 +++++------
+ test/py/tests/test_zynqmp_rpu.py                                   |
+100 +++++------
+ test/py/tests/test_zynqmp_secure.py                                |  42 ++---
+ test/py/{u_boot_utils.py => utils.py}                              |  44 ++---
+ 110 files changed, 3253 insertions(+), 3271 deletions(-)
+ rename test/py/{u_boot_console_base.py => console_base.py} (99%)
+ rename test/py/{u_boot_console_exec_attach.py => console_board.py} (95%)
+ rename test/py/{u_boot_console_sandbox.py => console_sandbox.py} (93%)
+ rename test/py/{u_boot_spawn.py => spawn.py} (100%)
+ rename test/py/{u_boot_utils.py => utils.py} (89%)
+
+Regards,
+Simon
