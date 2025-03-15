@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC3CC282EC
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:30:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51165C282EC
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:30:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E843E8210A;
-	Sat, 15 Mar 2025 02:29:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34DDA8214B;
+	Sat, 15 Mar 2025 02:29:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="agGLrlYr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XqLRuJQw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DF8A82148; Sat, 15 Mar 2025 02:29:32 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id EB6878214A; Sat, 15 Mar 2025 02:29:33 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1154B8215B
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 480638214D
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7c54c52d8easo417963085a.0
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:28 -0700 (PDT)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7c0848d475cso395934985a.2
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742002167; x=1742606967; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CUaGsTsXThcOcf3KZs6F4xD7DLWGCtoTQwpyVZIJ5nU=;
- b=agGLrlYrmYVfb0P8zX3V9JsuToC/474UNxy0A3GtD1xlB4+0WmHr+qvJRQm3OQS53l
- togb+t9tiofK5mGIEBXVTlRl14IJahgZ+/OLB9cHB/eNIjmibNv80tdUxMiCOMxHOcnd
- RQ2fnjGdRG44Wm2KjUzklLmUjhlr4A0UY1NVo=
+ d=konsulko.com; s=google; t=1742002169; x=1742606969; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0TFF/3nJTe2cGXVop/PVqQeZJVvOxNkUn4TUunKnoGw=;
+ b=XqLRuJQwnBYKrEOVX4CwbYDwm14M6IfN/TIPKkZk0JDVxdiKb8k7G1o9+GalOqAIfn
+ pX2fH704s3FWww/tEY85pTg9BGQwayz0dzWe9yFoMwCB3Dy4fST9C+l2+r1dn9b4HtCd
+ 856EW9husMJ3srjXxsW8oUAnKI0Xp0NkMEYjA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742002167; x=1742606967;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CUaGsTsXThcOcf3KZs6F4xD7DLWGCtoTQwpyVZIJ5nU=;
- b=pNu7CjhvszxjyW8dklUld8iwFFqzFXdIX0kcj98f1wzhKZ9IfsCQUx/4suKaMir3bO
- 0FLa0JAOQyI0NQAzqESr3rhIVi7jyJfU4ngWkufsGJFa7QPCIYrCyNgUUFKYUBOQfsi5
- bGkmlLG+AjZa/iJ3nAgEIOsQ0d02dmF60xW9hufJeS8g9Lg2FvXLH0xJIT4mtxDypppc
- Z8CHmTwvzuKdRqihES96o8apOZsI/UmGZml4fx4Oj4NO3svnwBEzH38aGcyDA0/81Atk
- rBEMrMfB5ddXPxaaCDJ9GoNa6E3bXBFZvzu3QUM8kZi8EaFj7IBFwP76R71BcFC/yGjy
- y+MA==
-X-Gm-Message-State: AOJu0Yxh1kWIr2QWFG9FRdUfRLMUgWLEL+EPaREhXdUatApVstBUbxuT
- 9cgwBY5f5zqO03xLkEpOP9pl5F7N+T0iwtXQAlhHUt4mx885SWFpk5zPLJ3ixLDIVgvE153FPfq
- p
-X-Gm-Gg: ASbGncvuzSslx3QYgHva1pov8DSZMv0hQSZVfF8amHvrttNBCE1unMku09m5xPVKPNM
- KqaB1FV9wIaEcsxM7RkHPGjod5AI05f1ovZcAL1CPuBaYhfWaL3WG5TY0v5Wa7U+CzFlvClPxLz
- 2LCvRd66nY+RGMwxHJ6o37TkLLoGJ6nfGPMvCVrIx2zvy0HllvsroBi7a08HbLnrLU+tUigkvyf
- fcjZ1yMDDIdP5dp249fbtONnG9/kA85AiTHm+ZwF5kpBjjC8VkwNw76h4SCmxAEOUk+dhYnxXwK
- 4xgMLfOx+ryqpX+NmZZ1R8Sbmitq5XGO98bWGmaZwe/xfZ2M
-X-Google-Smtp-Source: AGHT+IF3dx5W7zki7nm0SsYYvpQIKepfY4JJ8f8enDP71dIQGZP1M4FQTQtthx0oFWkDQvE9JKSNRw==
-X-Received: by 2002:a05:620a:439e:b0:7c5:5cc4:ca67 with SMTP id
- af79cd13be357-7c57c6aad7cmr569358285a.23.1742002166901; 
- Fri, 14 Mar 2025 18:29:26 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742002169; x=1742606969;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0TFF/3nJTe2cGXVop/PVqQeZJVvOxNkUn4TUunKnoGw=;
+ b=YchIQ8XxfR3GL3dkYaHVRxtpIhm7IJofHZRkXlVhThQ7gDd1pDfqN6Fjb9xFW5oQmR
+ siejnj9a0Cv7SAbj+UIJcqoWuq8KPz8ROQrhKlwYELb60wbepBgw4cFdO0x0ZNUvigAI
+ snl5FCCVeRBCT5LCEot1ULY0zyhBpiv/trAQb9pQsizsUT93uo9uaIDz9QWCjs8ATrhv
+ XNVq44zKVB1m72ma70JvJmdqWg2XBvSe9+HPdKQwsBu7OvhoTSVoB1CbSzRVhWReLVmw
+ iwKYpjlHxrHEF/qXxeIxwblAf1Q3IcD0fwEj0xQy08lYgLXY3VxH9Xe7DW8nJ6CWDcUW
+ ACHw==
+X-Gm-Message-State: AOJu0YwE5KyehFVPi3nS3+rrM5vzm073Tgir23tx264ChH/b6JCOl0Q1
+ yoGeKKWh9xc97+Ppq0kKsPCU2fZXwDZTCAgmJOK13eMwwAs9QS7bdDP+E2I+jLQ0/LLeQeVihkR
+ B
+X-Gm-Gg: ASbGncsPucs2Lqu8bz6T4UNBee9uUfoTtNqAqOtdk003vYo2QgnhsTlTOOsgt0H6CN0
+ W3i153z8OiArryeRxA8Q84LAm3jYUgYCD6n7lmsSvKGycUlo9sCZWCOQRILwdqUC6wWOqxbdF/h
+ Z27gXl2UkCxJ0eV8uHI10uUYNGeH/7eFtNKH5DushS8GOw8eJbM/ULagT0pqDSgPl4R/ZawKnnH
+ tqzkAnJpa+eP0JVbvCURsNFK6D+5zjzuhRFWqo9+Lvw5aCf5JL8qUa/eKgyKvn/xZ8yhHwd08R7
+ IbDDMAyQXACXw+wUtrCwpiTZYbM1d7lDfYreE5iNPeCl702F
+X-Google-Smtp-Source: AGHT+IGwG8SHu8OqjGsx/T6txWc/DFUlKOeHb7qaRA1YDPwsciL+lijh/VE6uz2Vapl09/fx7u9nMA==
+X-Received: by 2002:a05:620a:4725:b0:7c3:bdce:d1f7 with SMTP id
+ af79cd13be357-7c57c928f65mr582647885a.58.1742002169256; 
+ Fri, 14 Mar 2025 18:29:29 -0700 (PDT)
 Received: from bill-the-cat.. ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c573d89b16sm322555485a.92.2025.03.14.18.29.24
+ af79cd13be357-7c573d89b16sm322555485a.92.2025.03.14.18.29.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 18:29:25 -0700 (PDT)
+ Fri, 14 Mar 2025 18:29:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, uboot-snps-arc@synopsys.com
-Subject: [PATCH 1/2] arc: Rework Kconfig choice menus
-Date: Fri, 14 Mar 2025 19:29:22 -0600
-Message-ID: <20250315012923.399465-1-trini@konsulko.com>
+Subject: [PATCH 2/2] arc: Migrate to SYS_{BIG,LITTLE}_ENDIAN fully
+Date: Fri, 14 Mar 2025 19:29:23 -0600
+Message-ID: <20250315012923.399465-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250315012923.399465-1-trini@konsulko.com>
+References: <20250315012923.399465-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,88 +95,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently we get a number of warnings about using "select" statements
-on "choice" options and that this as no effect. Rework some of these so
-that we use "depends on" rather than select for the CPU, and have the
-CPU select the MMU version. The MMU version is no longer prompted for.
+With the way we now prompt for big or little endian support, the "select
+... if ..." portion of the ARC symbol doesn't work as intended. But now
+that we do have a globally visible prompt for big or little, switch to
+using that fully instead of a custom symbol.
 
+Fixes: cbef295441b4 ("Kconfig: Unify endian support option")
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>
 Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 Cc: uboot-snps-arc@synopsys.com
 ---
- arch/arc/Kconfig | 22 ++++++----------------
- 1 file changed, 6 insertions(+), 16 deletions(-)
+ arch/Kconfig                  | 2 --
+ arch/arc/Kconfig              | 5 -----
+ configs/nsim_700be_defconfig  | 2 +-
+ configs/nsim_hs38be_defconfig | 2 +-
+ 4 files changed, 2 insertions(+), 9 deletions(-)
 
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 35b19f9bfdca..e5a003d1ddc4 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -82,8 +82,6 @@ config ARC
+ 	select TIMER
+ 	select SUPPORT_BIG_ENDIAN
+ 	select SUPPORT_LITTLE_ENDIAN
+-	select SYS_BIG_ENDIAN if CPU_BIG_ENDIAN
+-	select SYS_LITTLE_ENDIAN if !CPU_BIG_ENDIAN
+ 
+ config ARM
+ 	bool "ARM architecture"
 diff --git a/arch/arc/Kconfig b/arch/arc/Kconfig
-index 6ae66bb163c0..be9774dc2896 100644
+index be9774dc2896..ab90aa90e8ae 100644
 --- a/arch/arc/Kconfig
 +++ b/arch/arc/Kconfig
-@@ -66,28 +66,20 @@ config CPU_ARCHS38
+@@ -99,11 +99,6 @@ config ARC_MMU_VER
+ 	default 3 if ARC_MMU_V3
+ 	default 4 if ARC_MMU_V4
  
- endchoice
- 
--choice
--	prompt "MMU Version"
--	default ARC_MMU_V3 if CPU_ARC770D
--	default ARC_MMU_V2 if CPU_ARC750D
--	default ARC_MMU_ABSENT if CPU_ARCEM6
--	default ARC_MMU_ABSENT if CPU_ARCHS36
--	default ARC_MMU_V4 if CPU_ARCHS38
+-config CPU_BIG_ENDIAN
+-	bool "Enable Big Endian Mode"
+-	help
+-	  Build kernel for Big Endian Mode of ARC CPU
 -
- config ARC_MMU_ABSENT
--	bool "No MMU"
-+	bool
+ config SYS_ICACHE_OFF
+ 	bool "Do not enable icache"
  	help
- 	  No MMU
- 
- config ARC_MMU_V2
--	bool "MMU v2"
-+	bool
- 	depends on CPU_ARC750D
- 	help
- 	  Fixed the deficiency of v1 - possible thrashing in memcpy sceanrio
- 	  when 2 D-TLB and 1 I-TLB entries index into same 2way set.
- 
- config ARC_MMU_V3
--	bool "MMU v3"
-+	bool
- 	depends on CPU_ARC770D
- 	help
- 	  Introduced with ARC700 4.10: New Features
-@@ -95,13 +87,11 @@ config ARC_MMU_V3
- 	  Shared Address Spaces (SASID)
- 
- config ARC_MMU_V4
--	bool "MMU v4"
-+	bool
- 	depends on CPU_ARCHS38
- 	help
- 	  Introduced as a part of ARC HS38 release.
- 
--endchoice
--
- config ARC_MMU_VER
- 	int
- 	default 0 if ARC_MMU_ABSENT
-@@ -172,14 +162,14 @@ config TARGET_AXS103
- 
- config TARGET_EMSDP
- 	bool "Synopsys EM Software Development Platform"
--	select CPU_ARCEM6
-+	depends on CPU_ARCEM6
- 
- config TARGET_HSDK
- 	bool "Support Synopsys HSDK or HSDK-4xD board"
- 
- config TARGET_IOT_DEVKIT
- 	bool "Synopsys Brite IoT Development kit"
--	select CPU_ARCEM6
-+	depends on CPU_ARCEM6
- 
- endchoice
- 
+diff --git a/configs/nsim_700be_defconfig b/configs/nsim_700be_defconfig
+index 4832195f6b47..f51d17516550 100644
+--- a/configs/nsim_700be_defconfig
++++ b/configs/nsim_700be_defconfig
+@@ -1,5 +1,4 @@
+ CONFIG_ARC=y
+-CONFIG_CPU_BIG_ENDIAN=y
+ CONFIG_TARGET_NSIM=y
+ CONFIG_NSIM_BOARD_CPPFLAGS="-mcpu=arc700 -mlock -mswape"
+ CONFIG_TEXT_BASE=0x81000000
+@@ -14,6 +13,7 @@ CONFIG_DEBUG_UART_BASE=0xf0000000
+ CONFIG_DEBUG_UART_CLOCK=70000000
+ CONFIG_SYS_CLK_FREQ=70000000
+ CONFIG_DEBUG_UART=y
++CONFIG_SYS_BIG_ENDIAN=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="console=ttyS0,115200n8"
+diff --git a/configs/nsim_hs38be_defconfig b/configs/nsim_hs38be_defconfig
+index 67de123d16bb..3ae76cd140bb 100644
+--- a/configs/nsim_hs38be_defconfig
++++ b/configs/nsim_hs38be_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_ARC=y
+ CONFIG_ISA_ARCV2=y
+-CONFIG_CPU_BIG_ENDIAN=y
+ CONFIG_TARGET_NSIM=y
+ CONFIG_NSIM_BOARD_CPPFLAGS="-mcpu=archs"
+ CONFIG_TEXT_BASE=0x81000000
+@@ -15,6 +14,7 @@ CONFIG_DEBUG_UART_BASE=0xf0000000
+ CONFIG_DEBUG_UART_CLOCK=70000000
+ CONFIG_SYS_CLK_FREQ=70000000
+ CONFIG_DEBUG_UART=y
++CONFIG_SYS_BIG_ENDIAN=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="console=ttyS0,115200n8"
 -- 
 2.43.0
 
