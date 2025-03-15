@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED905C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEAF6C28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 14:27:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A91A38168B;
-	Sat, 15 Mar 2025 15:27:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0467B8186D;
+	Sat, 15 Mar 2025 15:27:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g/6C0k4W";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aS9RjdUD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6987F810EB; Sat, 15 Mar 2025 15:27:13 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 07D8580ECC; Sat, 15 Mar 2025 15:27:16 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5405180756
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:27:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11F5F80F9A
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5e61375c108so3883554a12.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:27:11 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43cfa7e7f54so3400575e9.1
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 07:27:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1742048831; x=1742653631; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vUzLVYF7DzwQuOngu0LRMNlzkHZSXDDcOE1exCcGkZo=;
- b=g/6C0k4WbAU5IBxXFDGmKFcgtTkelCCfK5JgdcaYrmoDQfyhHE3u24DgxAhq6KvRDO
- 8tsyWUeMwKok/x6QsnMKnT5cz2btL/A/xl9YztM/e2vPsTVksWmFmOBnUuxvBBu77Kw7
- zuOgEwpPFnpIBKl6qKXmAhmdyrZtYDsUbqhik=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YQfL4L6uYerdOiZWpujGOWu5RaO1Hox5ZOiRJHUzlu0=;
+ b=aS9RjdUDJiu/q1tQ54d/WRaDokM5ufRjH/M3KW9ND5/xTpuuZOtM4XEglt2nGYPvzX
+ oiKYDmBDQgHgfsaGlLLAdqePDhyBtL/68C6xeDP+X6JXuLzxs8Fk1zfxxzE6si98PHLD
+ ftF+QV6GuR9c4NhpeoJcbXI61tgzE4Jn0leUA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1742048831; x=1742653631;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vUzLVYF7DzwQuOngu0LRMNlzkHZSXDDcOE1exCcGkZo=;
- b=figbDdqyUGssoDdkrYYAeo2V06IwCcZ8If1vJjP0pS4KPbrsaxbCojZ+uRH74Potkk
- bsJc+fmveuPBpVi3Vfn9CmPJnbeUMCRkBEDPrWr5Dlwoficzt78+gRimGdWLYWpLqndR
- 3JYqzn7kcpT3gD0IY2MZFcK6ehfPBkoFSkngUlR5Rek3xTYHX883peomMGCS76lcQBbH
- i64Ezf64qkddD7nFkdOHx3DcyRIbkbybfa/nvZU2W+S+VYeolYzzsHR3WP3MVkdSlFCc
- ANOB3D1ywEgImR9vJxIbmmneBtw90GQsc/WEf2KlQU7jVRAOPMb55BLhmbuLhnT3XWfu
- fHmQ==
-X-Gm-Message-State: AOJu0YwlaujzZLkvSmsg9x3Ef2QoeGCM44sGW8NPFY3DGiDm/hF03xLN
- EyJGyhDSY7XxTm2OGBunqnjqMqCQyVhRUjrdHELzHOJEQP0OdxiEfUC7mRqHpSnUorENEkaBDIM
- 6jDVN/H8ZASJHAN2gJ+IZaw8z9Cf18AFprhwG
-X-Gm-Gg: ASbGncv0NVaCGJj11gcglVfrTOO9x0J6S96eJ+fpqQij2CnN9i1T2Fk8yQQ7ZW1kxBB
- h290O/UcsH+9FwN45DEwlVKVHsRzSevI/Xx6cmb6ZOZwhT++FA1gzA7+RHfFjM+nJ0y0b32N6az
- arEgMyphvZfGNHwwqf0wbxRHRj2lY=
-X-Google-Smtp-Source: AGHT+IGe1piTVu3iRDPBuuhWUO76kmXPV/nKm05tJ79RyTMY5JPecjeO2nNjKiOsHCaPvWE/39ibxuVNxT/8CcVjTAU=
-X-Received: by 2002:a05:6402:5210:b0:5dc:7643:4f3d with SMTP id
- 4fb4d7f45d1cf-5e89e6aba08mr7146757a12.1.1742048830756; Sat, 15 Mar 2025
- 07:27:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250306160428.3041057-1-sjg@chromium.org>
- <20250306160428.3041057-47-sjg@chromium.org>
- <20250307142436.GM2640854@bill-the-cat>
- <CAFLszThxRPX8N8pnJfEkm60OJ3BxJx18YbbfVE_0janzmOdWvQ@mail.gmail.com>
- <20250314161518.GT2640854@bill-the-cat>
-In-Reply-To: <20250314161518.GT2640854@bill-the-cat>
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YQfL4L6uYerdOiZWpujGOWu5RaO1Hox5ZOiRJHUzlu0=;
+ b=DaJZZiY1qqclrmCTmD8bNtmWLPAHs7sK8iAxeNoglr296UFWEHFBYc7SEdU2gybRGZ
+ ilbVRdlRpHwK8aOGx2TrzCgKRLuPBaplmqWZ7LSdRx0I4MrvvDxssp7I7pB5f05kzcQu
+ 2juryvJp0mwi8/yQGoi/DUlZ7b1gjNJF3b3DJMi6zjou3DxiEM1AiRjp94oXv22HkBqt
+ bPZwRFxyHBHbpLGqr6wKhvZ5e0Oh5bbef7Pn+wmFxRfDQ1cwiFZJb2zSdDpBhzVsYu9x
+ d5WohOExxl6Zh4G+oLgZXkWKPrJW8asEJY6kvWQsjwokqwKnWGFzoQ6nEDD0NPzDIPLr
+ bRxQ==
+X-Gm-Message-State: AOJu0YzzNgjG2Pl2yuq0Fi58DH8TpIZEeJadcX7eArGgw9foDqgPrUcc
+ D+YOeXp60LJ1xJPpsfq/FXvdFRFySweC/Pqu9cT2vtnBdJbOCgIQ8Muzr0MaD+qUjaNUzGXDhhB
+ jNQ==
+X-Gm-Gg: ASbGncvXqZjeHkiXi4CC3+wVV/JeLjGIDOoamEVPVFtlxLwEnLHyzqvv6iYNKpvuMYQ
+ 6Dois6gYIbvpb+jH4o7qG3MybEKy49nuofyFlfjRydYcw77bowcn5ageAB99DNLCTAi6zVzReSK
+ 7n6LO34kM6uFNNyBnGdJ9LKrhtQRM7WtqhZep/Vx+M5P5InumVUDhZLPWb81bz2sNGFZmRhAzyj
+ 4zAaiyJ0gSXfmJ/yi9Q81xrWa1NX2YJhRTR099EHxiqQVmXBxSt1cT5Nf1SKima3zB/3t+t4nEF
+ wBLm6oeb96TzG2IkUkxll6KLRk8UmFYBC8OGUYt7c/M4HYP8837y
+X-Google-Smtp-Source: AGHT+IGP6GLuULuLifjJl55ggA+6KeiJTUVtuCinu8M+k/ztp81ES3e2fxtcWWfO3M8ImuHAXoAxVA==
+X-Received: by 2002:a05:600c:210d:b0:43b:c305:3954 with SMTP id
+ 5b1f17b1804b1-43d18081271mr111579235e9.8.1742048831244; 
+ Sat, 15 Mar 2025 07:27:11 -0700 (PDT)
+Received: from chromium.org ([169.155.233.10])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d1fe29386sm52105055e9.17.2025.03.15.07.27.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Mar 2025 07:27:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Mar 2025 14:26:59 +0000
-X-Gm-Features: AQ5f1JrY9EuQWHJY321BkUslNTJErvOQaOh4Vk6G6rCK79Ldz3rEhE5yC6lfn6s
-Message-ID: <CAFLszTgDW3=zWZUgkyJiU=nMiSW+DZ1_-+sbJri9JbAs+zUQgA@mail.gmail.com>
-Subject: Re: [PATCH v4 46/47] RFC: test/py: Deal with timeouts
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Love Kumar <love.kumar@amd.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 02/46] sandbox: Correct a typo in mapmem
+Date: Sat, 15 Mar 2025 14:25:22 +0000
+Message-ID: <20250315142643.2600605-3-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250315142643.2600605-1-sjg@chromium.org>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,33 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This should say 'cast', not 'case', so fix it.
 
-On Fri, 14 Mar 2025 at 16:15, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Mar 14, 2025 at 02:44:00PM +0000, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 7 Mar 2025 at 14:24, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Mar 06, 2025 at 09:04:13AM -0700, Simon Glass wrote:
-> > >
-> > > > The distro test takes a little longer to shut down and restart, so
-> > > > add more time to this operation.
-> > >
-> > > In the test, make use of u_boot_console.temporary_timeout(val) ?
-> >
-> > ensure_spawned() actually sets up the initial timeout, so I don't see
-> > how I can do this in the test. It is immediately overwritten by this
-> > function.
->
-> We use this in a number of other tests today, so it either doesn't
-> actually work anywhere and we luck out, or you need to look harder at
-> how your new test is written? It would would be good to know that it
-> doesn't actually work if that's the case..
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Hmmm it turns out that the problem was one of timing, where an arrow
-key is seen as an escape. I'll send a v5.
+(no changes since v1)
 
-Regards,
-Simon
+ include/mapmem.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/mapmem.h b/include/mapmem.h
+index f496c96d16c..8ec03d59f0b 100644
+--- a/include/mapmem.h
++++ b/include/mapmem.h
+@@ -33,7 +33,7 @@ static inline phys_addr_t map_to_sysmem(const void *ptr)
+  * nomap_sysmem() - pass through an address unchanged
+  *
+  * This is used to indicate an address which should NOT be mapped, e.g. in
+- * SMBIOS tables. Using this function instead of a case shows that the sandbox
++ * SMBIOS tables. Using this function instead of a cast shows that the sandbox
+  * conversion has been done
+  */
+ static inline void *nomap_sysmem(phys_addr_t paddr, unsigned long len)
+-- 
+2.43.0
+
