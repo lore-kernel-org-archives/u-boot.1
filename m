@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13950C28B28
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98DEFC28B28
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 22:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2617E81A0E;
-	Sat, 15 Mar 2025 23:18:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7915B81B42;
+	Sat, 15 Mar 2025 23:18:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PtNk1vPC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lv1v70Ej";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB60A81BEE; Sat, 15 Mar 2025 23:18:37 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 09F2381CC5; Sat, 15 Mar 2025 23:18:39 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ABAF810E8
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAFDB81A0C
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 23:18:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-30155bbbed9so943555a91.1
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:35 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2239c066347so64839725ad.2
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 15:18:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742077114; x=1742681914; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742077115; x=1742681915; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+JmYEnZygaDYl10iJdaZbDjupkhGBuIBaksOLX3jHGA=;
- b=PtNk1vPC9bTGoGUNp0OO/5/6KZnjHtfGRRro4KVatIoyEdXexSAL6M1u+yAvBnIfKt
- 0cuviVDKessxxc5qHKoidLyq1AHyTsexVqsykZjlnN9ZlrxEi60C7zHvOXFKz0t4weZk
- aEuo5BYz9PaMX5J83GB5FpokCnEXrQuKeaAkVnMorjLV0GoevZNoH9/5Z7VroHIuTbfI
- kzxgDI4vy/Sc+++VZn8RJte+881NHT+AAHR8ZFL3A4dMTWlmE/jrEePg1efz8id4ccij
- 5TXamdu7X0ip/9HndcHJAGfM1xwp50QvL7F9Bn8JFbdULv3Eq7pZElJHB+YBNFpfI+SN
- aKbQ==
+ bh=zC75K261DEwIBnQmAz5hKZ6h2fopWo5Ud/LKAcDIBQI=;
+ b=lv1v70Ej1lAv4MYDsXxSRV5SZsJ60vKTumrto4n+jSIBV1pZPen3vGkIrtoEmJxZu3
+ a6CmvsmdmSZfvUVnpJiUwHfO/4x4Pnweos9SuIvqRNknrnNXXFGt8teyNUsT+sTFv1D8
+ zRSS8EsBH0U/VQUrTndzrocC2GgwFSvsvaeaKbZzbILcSrKoPsAQcObOdJuS67xdkhrL
+ 3OQ7g4NsxRQ+e9brF4qCFSzUOoTINwJZYRvfCrDIdX9aGtdERpuudeyjPlBfF+4JXmLg
+ 7b6c8a9/VPDdKxKmQpOzjMDTHR9Z9mCeKwLa64WjCMslLrwD9Lp/p4X/MqN8FT5BD/5K
+ bwTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742077114; x=1742681914;
+ d=1e100.net; s=20230601; t=1742077115; x=1742681915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+JmYEnZygaDYl10iJdaZbDjupkhGBuIBaksOLX3jHGA=;
- b=UajC6Rx+UUC4UAWDp7ISDusWtTh/jOz0DgLprPn9B7rYOa23mIsiRhUIewVXGSJHXz
- Rf/flNTEoKvWcs8dl/B8uqOWkQ3WCxwV0qyakXDSWQPaXOsmP7U1jWhlKOQ4CJLpWb5N
- yWBn7RrljVIbJHpmqDmJs/OORd9PNze2FDpiRt2Nf0zS4NtqMIh31frhNpY6Gauy8VQv
- 5e7FCad+LHELLP0kJu4sBzUu6SnSciIgpsH254LC76lq/oabd10XYVwPTgzfu2v/TfcG
- lD344e8e1ubXW1UimyRtVeQiFomlXU4LIsd/14suC7i3bRLCcE9a83T7EwI1Rnulkm/p
- T34w==
+ bh=zC75K261DEwIBnQmAz5hKZ6h2fopWo5Ud/LKAcDIBQI=;
+ b=uGX8aoZiIt9bUwGR/3G9sabye+IR7YJD1GWxxH/Q7LQ/+KmEpW7RFrMYlMT5qEulDW
+ KohEbQbsWG5G8cH9cNdpmdQZn2tM0/RWWeWe47pI3OhNRsNCqGE7fw0ISN3OLLAmTR+r
+ TQRzdbUYuwCfd63DkrBJvUp4R5S9hovXoSvqPUSR9zwE3R40U/LIIzGA3J+ikOAvkSgP
+ IVDHcZjrkGU3VM3kFqR6ad+ljIBvGFrwL32AqpSwtLkku2VfVAyy4bJgopChQs1/htTI
+ nUQDm3k+HQlaGZBtXMRcx/Ag4+uWJrIV4lrdbbaDF5TBVCFsn1vQchSv88d7orQAdtYe
+ uLUg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFRA/XQp5BP29lyl3Vhtuuas42oMlyUUv4e53p5a6RH6o2InJb9D9PmxAYDJ0nHLFGIY5d234=@lists.denx.de
-X-Gm-Message-State: AOJu0YxqeVETS9HOF41bM1F8TU3HpvdLJ8VFDEgGfywtPywd6C9Pn6bi
- sW9WVKt8hEDrf8/u01DSKchg0cm4VRHgL/yevvtHAjI3WJy9LoDk
-X-Gm-Gg: ASbGncttZE5Uk6hhx40Fo4w/lzDaHCTLRqAFH6biQ1n8GNA7RyJC0sXBW4HZUq2oIQJ
- Y4AQLyTsPa5zifVWavfjr9sb+NSILQ78pFfbhTP+4LqiL6u7I/okryz03n0YK6pkGnkvBpmVCLX
- /fhySQ5pAdhRCajL11IQy7FHxhTsUZwmR3vW9t5X9TbKv3hTUbMlBPA8s2NeWtcBsaHsV6j8sAl
- b9tn9o3WSwM9SXLcNCMckr7twDn8Yq0GN2Q+kqCtX6OpDbpg2RbmR08SGpZBMabDHmn1VnA6Beb
- xtIWZWDAlRF5dGnReIYBYjNekIZoFblO1gQ/z4BiqESjZECzqltraAw=
-X-Google-Smtp-Source: AGHT+IHQfgpJ9ZIy2CPyezkQOLzy80aBdKXTLbAcHZuYJNkp+uHrD8n6Ohag/BXiYfzyPDO5MGpeYQ==
-X-Received: by 2002:a05:6a21:78a9:b0:1f3:26e5:55bc with SMTP id
- adf61e73a8af0-1f5c132278emr8427216637.42.1742077114086; 
- Sat, 15 Mar 2025 15:18:34 -0700 (PDT)
+ AJvYcCVq/JnxOHRSM7Uhw/mB7zZB4+XLEquthI6s28w7ovih1eBUovSpHetBVq9358aDfMOn+nq8LEg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHtcH/XDGQok1DemyB5vmcOV6ozTyNleY+Oa+lM7REujYG+lbv
+ 4kQRFk+vPyrjuT1gsF5OYcqzvLfMBPzxMinxXeIhGFBmYE1URVZe
+X-Gm-Gg: ASbGncv3bV9ZCv6/cJTgZffdu3F4uLE3CaLAPPwUpTLrRNcqkn+Rs7dl5D29HHle/gF
+ xJzs11gd8NylstNnZTmcAw/Kt/C4MU/fzTS1m8PWGPw+GgbGnxjn0U7fshFcdAxlCVq9Oj5mP/B
+ 2vf5oPd/Tcoeb38V1YEjEaksbniXGiCCSO/XuG7xHdQDHzQAiiRZHgDw9YMImnqa7diODc2kVLR
+ RAQqY1JL/kR5SywF8GJbuW0CxRIpQuOJPq2Pp7Bp04PLLUP0m7R8htfDM83obvDMis/7negvxre
+ doXeaHA/6AwLdaD1HQIstBy0W+CLb10YgxjUgQDQ75or9srC8CyVM/A=
+X-Google-Smtp-Source: AGHT+IEoTEa5Tw9KMKCjkHm7QWIZeSMPxRbtItWN7h9Bn4nP/jWZ9zI2AdfBsF4V6YuRiv4/hwJR3Q==
+X-Received: by 2002:a05:6a21:e8d:b0:1f3:418d:91b5 with SMTP id
+ adf61e73a8af0-1f5c11e7130mr11100614637.24.1742077115392; 
+ Sat, 15 Mar 2025 15:18:35 -0700 (PDT)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:f31:f69b:ca22:e094])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.32
+ d2e1a72fcca58-73711578a5csm4899380b3a.74.2025.03.15.15.18.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Mar 2025 15:18:33 -0700 (PDT)
+ Sat, 15 Mar 2025 15:18:34 -0700 (PDT)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -80,11 +80,11 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
- Sam Edwards <CFSworks@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 12/15] efi_loader: Move .dynamic out of .text in EFI
-Date: Sat, 15 Mar 2025 15:18:10 -0700
-Message-ID: <20250315221813.1265193-13-CFSworks@gmail.com>
+ Sam Edwards <CFSworks@gmail.com>
+Subject: [PATCH v2 13/15] scripts/Makefile.lib: efi: Preserve the .dynstr
+ section as well
+Date: Sat, 15 Mar 2025 15:18:11 -0700
+Message-ID: <20250315221813.1265193-14-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250315221813.1265193-1-CFSworks@gmail.com>
 References: <20250315221813.1265193-1-CFSworks@gmail.com>
@@ -106,46 +106,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI applications need to be relocatable. Ordinarily, this is achieved
-through a PE-format .reloc section, but since that requires toolchain
-tricks to achieve, U-Boot's EFI applications instead embed ELF-flavored
-relocation information and use it for self-relocation; thus, the
-.dynamic section needs to be preserved.
-
-Before this patch, it was tacked on to the end of .text, but this was
-not proper: A .text section is SHT_PROGBITS, while the .dynamic section
-is SHT_DYNAMIC. Attempting to combine them like this creates a section
-type mismatch. While GNU ld doesn't seem to complain, LLVM's lld
-considers this a fatal linking error.
-
-This patch moves .dynamic out to its own section, so that the output ELF
-has the correct types. (They're all mashed together when converting to
-binary anyway, so this patch causes no change in the final .efi output.)
+This section is required by .dynamic and llvm-objcopy will exit with a
+fatal error if it is not also preserved in the output.
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_loader/elf_efi.ldsi | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ scripts/Makefile.lib | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/lib/efi_loader/elf_efi.ldsi b/lib/efi_loader/elf_efi.ldsi
-index 190a88fb69e..4fa5ca43872 100644
---- a/lib/efi_loader/elf_efi.ldsi
-+++ b/lib/efi_loader/elf_efi.ldsi
-@@ -21,10 +21,10 @@ SECTIONS
- 		*(.gnu.linkonce.t.*)
- 		*(.srodata)
- 		*(.rodata*)
--		. = ALIGN(16);
--		*(.dynamic);
--		. = ALIGN(512);
- 	}
-+	. = ALIGN(16);
-+	.dynamic : { *(.dynamic) }
-+	. = ALIGN(512);
- 	.rela.dyn : { *(.rela.dyn) }
- 	.rela.plt : { *(.rela.plt) }
- 	.rela.got : { *(.rela.got) }
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 18993435eae..275c308154b 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -513,8 +513,8 @@ $(obj)/%_efi.S: $(obj)/%.efi
+ 	$(call cmd,S_efi)
+ 
+ quiet_cmd_efi_objcopy = OBJCOPY $@
+-cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data -j \
+-		.dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc \
++cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data \
++		-j .dynamic -j .dynstr  -j .dynsym -j .rel* -j .reloc \
+ 		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+ 
+ $(obj)/%.efi: $(obj)/%_efi.so
 -- 
 2.48.1
 
