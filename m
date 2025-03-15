@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81288C282EC
-	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC3CC282EC
+	for <u-boot@archiver.kernel.org>; Sat, 15 Mar 2025 01:30:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77DA482115;
-	Sat, 15 Mar 2025 02:29:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E843E8210A;
+	Sat, 15 Mar 2025 02:29:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C2tsAeuD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="agGLrlYr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34D3A82116; Sat, 15 Mar 2025 02:29:23 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 2DF8A82148; Sat, 15 Mar 2025 02:29:32 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAD8282107
- for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1154B8215B
+ for <u-boot@lists.denx.de>; Sat, 15 Mar 2025 02:29:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6e86b92d3b0so23799666d6.2
- for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:20 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7c54c52d8easo417963085a.0
+ for <u-boot@lists.denx.de>; Fri, 14 Mar 2025 18:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742002160; x=1742606960; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742002167; x=1742606967; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pWbJi7dD5KMzDPlXlvPWGdQGclrlQkR8N3soT9+cgog=;
- b=C2tsAeuD6ufOnZEvivTs2QrFW8Tc2ME/Ojain81pFM0UEzVVo3IrEuQGFQoDkZxQjE
- c8/4hWvfGmEzNfhwxcEpToLs8+7dlyeow96wBSE5E0k5SxyS7KuC+3u7kRGkEb7sLUbI
- SuHWGxovvseUWK7BaZnSirMlHlrIEnXg36guc=
+ bh=CUaGsTsXThcOcf3KZs6F4xD7DLWGCtoTQwpyVZIJ5nU=;
+ b=agGLrlYrmYVfb0P8zX3V9JsuToC/474UNxy0A3GtD1xlB4+0WmHr+qvJRQm3OQS53l
+ togb+t9tiofK5mGIEBXVTlRl14IJahgZ+/OLB9cHB/eNIjmibNv80tdUxMiCOMxHOcnd
+ RQ2fnjGdRG44Wm2KjUzklLmUjhlr4A0UY1NVo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742002160; x=1742606960;
+ d=1e100.net; s=20230601; t=1742002167; x=1742606967;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pWbJi7dD5KMzDPlXlvPWGdQGclrlQkR8N3soT9+cgog=;
- b=SyHvKy6XeEI66w/MuUpquqkMEJK+YIVKH7Qh/cv1Iw+D/MfYoM+kIIlTPdNqxSkBoE
- J3uW2zN+YalngftCVuRqHnOMTCkJdqR3usH9QPlbpWeZP1N8JZECCUlbGNibslWOT2vK
- QR6zSGrJv7t4vQ7GTiYpS2vNJAmMXoTaSdKm8DTZRPd1VYcP533K05WPLgYkJ1xszzrP
- ZFX+q/JuQyOkXx7xcYCpKb2jm5YUFyRqBD3wr3XxIVID0NxcT2uOUqJrep1KgZfuJpTb
- W9yqcaMhxtYYkyD6jrjH7T/Ez8fcHQenYuIWlUBSs9S9mjIraDWWLZRZqFmWrObFAcbG
- FWIA==
-X-Gm-Message-State: AOJu0Ywd9if/arS0aArLLQqwnzy16lsucH+z6//E6oXGe5hDMggYi6ei
- RMv0CinYwDN2I/ARaNVNG+5ImyzB9XmannpXNbDhlTgZYMlXz9wXsU5DO8467wshDs8Pzg794fg
- 1
-X-Gm-Gg: ASbGncsjXwMPTWv7Xb9MkyeZg2WyyUmfZ6pkdqogrnMQpPOzHMG9ItyhlV2lAcEF5Wr
- yuS3TDIOv+h5CB/w4F3ZyQ4f9kGK+/E1tc8rurb/oFnp278qCOk+tyCRwb7BYwY/WbdDzVwh89G
- xXrR5kqdb2cJZS6AaaU9t5h5m93y64FJ5wFVpNIHPp7gx233FEl/8+nLjXo0W09Ch63mdYlJAtv
- nd/0FRgORbTFgYuLtvtRP4ZfYeOKX8UjWUXoJbTWs0ySleLRHZ+vc10WP+xJ5lDSN+/T8ytrJI6
- qFH3IV6BbbLkOM1LYsGLJS6NO5N2hUKzhS7u1zUpSoU2AClK
-X-Google-Smtp-Source: AGHT+IFK6LnmQdOybR1i5/og3Ya1ctkVy9zkPhrn4dwzryOpmXW/h+1Vp9PXctm1czOMevovKussyQ==
-X-Received: by 2002:a0c:e785:0:b0:6e8:f945:ece with SMTP id
- 6a1803df08f44-6eaf676e302mr13634776d6.11.1742002159764; 
- Fri, 14 Mar 2025 18:29:19 -0700 (PDT)
+ bh=CUaGsTsXThcOcf3KZs6F4xD7DLWGCtoTQwpyVZIJ5nU=;
+ b=pNu7CjhvszxjyW8dklUld8iwFFqzFXdIX0kcj98f1wzhKZ9IfsCQUx/4suKaMir3bO
+ 0FLa0JAOQyI0NQAzqESr3rhIVi7jyJfU4ngWkufsGJFa7QPCIYrCyNgUUFKYUBOQfsi5
+ bGkmlLG+AjZa/iJ3nAgEIOsQ0d02dmF60xW9hufJeS8g9Lg2FvXLH0xJIT4mtxDypppc
+ Z8CHmTwvzuKdRqihES96o8apOZsI/UmGZml4fx4Oj4NO3svnwBEzH38aGcyDA0/81Atk
+ rBEMrMfB5ddXPxaaCDJ9GoNa6E3bXBFZvzu3QUM8kZi8EaFj7IBFwP76R71BcFC/yGjy
+ y+MA==
+X-Gm-Message-State: AOJu0Yxh1kWIr2QWFG9FRdUfRLMUgWLEL+EPaREhXdUatApVstBUbxuT
+ 9cgwBY5f5zqO03xLkEpOP9pl5F7N+T0iwtXQAlhHUt4mx885SWFpk5zPLJ3ixLDIVgvE153FPfq
+ p
+X-Gm-Gg: ASbGncvuzSslx3QYgHva1pov8DSZMv0hQSZVfF8amHvrttNBCE1unMku09m5xPVKPNM
+ KqaB1FV9wIaEcsxM7RkHPGjod5AI05f1ovZcAL1CPuBaYhfWaL3WG5TY0v5Wa7U+CzFlvClPxLz
+ 2LCvRd66nY+RGMwxHJ6o37TkLLoGJ6nfGPMvCVrIx2zvy0HllvsroBi7a08HbLnrLU+tUigkvyf
+ fcjZ1yMDDIdP5dp249fbtONnG9/kA85AiTHm+ZwF5kpBjjC8VkwNw76h4SCmxAEOUk+dhYnxXwK
+ 4xgMLfOx+ryqpX+NmZZ1R8Sbmitq5XGO98bWGmaZwe/xfZ2M
+X-Google-Smtp-Source: AGHT+IF3dx5W7zki7nm0SsYYvpQIKepfY4JJ8f8enDP71dIQGZP1M4FQTQtthx0oFWkDQvE9JKSNRw==
+X-Received: by 2002:a05:620a:439e:b0:7c5:5cc4:ca67 with SMTP id
+ af79cd13be357-7c57c6aad7cmr569358285a.23.1742002166901; 
+ Fri, 14 Mar 2025 18:29:26 -0700 (PDT)
 Received: from bill-the-cat.. ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6eade2097f3sm30314246d6.17.2025.03.14.18.29.17
+ af79cd13be357-7c573d89b16sm322555485a.92.2025.03.14.18.29.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 18:29:18 -0700 (PDT)
+ Fri, 14 Mar 2025 18:29:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Teresa Remmet <t.remmet@phytec.de>
-Subject: [PATCH] phycore_imx8mp: Rework some of the RAM related Kconfig symbols
-Date: Fri, 14 Mar 2025 19:29:16 -0600
-Message-ID: <20250315012916.399442-1-trini@konsulko.com>
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, uboot-snps-arc@synopsys.com
+Subject: [PATCH 1/2] arc: Rework Kconfig choice menus
+Date: Fri, 14 Mar 2025 19:29:22 -0600
+Message-ID: <20250315012923.399465-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,39 +92,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As the code is today, we get a warning about "select" statements on
-"choice" options not doing anything. In this case we can easily fix this
-by dropping the select line as the following choice statement handles
-things correctly. We also drop the "default false" line as false / n is
-the default.
+Currently we get a number of warnings about using "select" statements
+on "choice" options and that this as no effect. Rework some of these so
+that we use "depends on" rather than select for the CPU, and have the
+CPU select the MMU version. The MMU version is no longer prompted for.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Teresa Remmet <t.remmet@phytec.de>
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>
+Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+Cc: uboot-snps-arc@synopsys.com
 ---
- board/phytec/phycore_imx8mp/Kconfig | 2 --
- 1 file changed, 2 deletions(-)
+ arch/arc/Kconfig | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
 
-diff --git a/board/phytec/phycore_imx8mp/Kconfig b/board/phytec/phycore_imx8mp/Kconfig
-index bdf9e97beaa6..caf9cb0c3c39 100644
---- a/board/phytec/phycore_imx8mp/Kconfig
-+++ b/board/phytec/phycore_imx8mp/Kconfig
-@@ -45,7 +45,6 @@ config PHYCORE_IMX8MP_RAM_SIZE_4GB
+diff --git a/arch/arc/Kconfig b/arch/arc/Kconfig
+index 6ae66bb163c0..be9774dc2896 100644
+--- a/arch/arc/Kconfig
++++ b/arch/arc/Kconfig
+@@ -66,28 +66,20 @@ config CPU_ARCHS38
  
- config PHYCORE_IMX8MP_RAM_SIZE_8GB
- 	bool "8GB RAM"
--	select PHYCORE_IMX8MP_USE_2GHZ_RAM_TIMINGS
- 	help
- 	  Set RAM size fix to 8GB for phyCORE-i.MX8MP.
- 	  Only 2GHz RAMs are supported.
-@@ -54,7 +53,6 @@ endchoice
+ endchoice
  
- config PHYCORE_IMX8MP_RAM_FREQ_FIX
- 	bool "Set phyCORE-i.MX8MP RAM frequency fix instead of detecting"
--	default false
+-choice
+-	prompt "MMU Version"
+-	default ARC_MMU_V3 if CPU_ARC770D
+-	default ARC_MMU_V2 if CPU_ARC750D
+-	default ARC_MMU_ABSENT if CPU_ARCEM6
+-	default ARC_MMU_ABSENT if CPU_ARCHS36
+-	default ARC_MMU_V4 if CPU_ARCHS38
+-
+ config ARC_MMU_ABSENT
+-	bool "No MMU"
++	bool
  	help
- 	  RAM frequency is automatic being detected with the help of
- 	  the EEPROM introspection data. Set RAM frequency to a fix value
+ 	  No MMU
+ 
+ config ARC_MMU_V2
+-	bool "MMU v2"
++	bool
+ 	depends on CPU_ARC750D
+ 	help
+ 	  Fixed the deficiency of v1 - possible thrashing in memcpy sceanrio
+ 	  when 2 D-TLB and 1 I-TLB entries index into same 2way set.
+ 
+ config ARC_MMU_V3
+-	bool "MMU v3"
++	bool
+ 	depends on CPU_ARC770D
+ 	help
+ 	  Introduced with ARC700 4.10: New Features
+@@ -95,13 +87,11 @@ config ARC_MMU_V3
+ 	  Shared Address Spaces (SASID)
+ 
+ config ARC_MMU_V4
+-	bool "MMU v4"
++	bool
+ 	depends on CPU_ARCHS38
+ 	help
+ 	  Introduced as a part of ARC HS38 release.
+ 
+-endchoice
+-
+ config ARC_MMU_VER
+ 	int
+ 	default 0 if ARC_MMU_ABSENT
+@@ -172,14 +162,14 @@ config TARGET_AXS103
+ 
+ config TARGET_EMSDP
+ 	bool "Synopsys EM Software Development Platform"
+-	select CPU_ARCEM6
++	depends on CPU_ARCEM6
+ 
+ config TARGET_HSDK
+ 	bool "Support Synopsys HSDK or HSDK-4xD board"
+ 
+ config TARGET_IOT_DEVKIT
+ 	bool "Synopsys Brite IoT Development kit"
+-	select CPU_ARCEM6
++	depends on CPU_ARCEM6
+ 
+ endchoice
+ 
 -- 
 2.43.0
 
