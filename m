@@ -4,73 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C77A0C282DE
-	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 17:53:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AEECC282DE
+	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 19:32:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF90E80ECC;
-	Sun, 16 Mar 2025 18:53:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 436DC80ECC;
+	Sun, 16 Mar 2025 20:32:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Di6n85qE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dNjVpdWr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADDC380F4C; Sun, 16 Mar 2025 18:53:15 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 9457D810E8; Sun, 16 Mar 2025 20:32:11 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E39A380C93
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 18:53:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 70939801DE
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 20:32:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-300fefb8e06so1963496a91.0
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 10:53:12 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e63162a0so5561291a12.3
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 12:32:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1742147591; x=1742752391;
- darn=lists.denx.de; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=cdCTOtQxMwVAPbOUFJNN1Lo11Nus9m8YQ0cbRwizqng=;
- b=Di6n85qE6XPX0IxXKHi/UhHW1X+o6YcsMKEKbSXpcnnjgfi+2WaTXdnsfbP5BvQ+9D
- R1zcqARjUmyY+OzJDh381nhuYJU3cKkKoQtf65Rljn4AaCUQBMdl6u5l57BrrAwUL3PU
- m8RtG47G/MbU2/VolOu19ze9FIiaISC3fMDjw=
+ d=gmail.com; s=20230601; t=1742153528; x=1742758328; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2HNcsKQPFZ2FHZbkD/7OXxWpEAsLaCS0S6qGobISXnQ=;
+ b=dNjVpdWrTsQ2imyYdMex3Mk4el22qZ1EYkyn753N/Ei89or9L7sxIucDv+lNHUPc/Z
+ Rvip4PQmyDMUcQGlKYSsHFjcxCRfA3L76/2bivPXpRLAeiPK6nWM9H3prqJJgpr75cH/
+ DW8oKz3hz3DeC+loq6V4ebLItqzIRwv5GZIr0FsysiLfsaNmZdY9Sym5AMvEcnZs8Dvy
+ 959JorTzM/xk/YtlOZPviM/NAiuiVDg2w7o3Wv3tQB5QeVQ2UiBCuTmU13lk7efR1RO6
+ sY+UnlZsPKBB60AC0wE63V++JmmDXAB8O7ykHCL6jkO2jhwEbETH1dssLcajiOLbeE7b
+ napQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742147591; x=1742752391;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cdCTOtQxMwVAPbOUFJNN1Lo11Nus9m8YQ0cbRwizqng=;
- b=w6c3/+i1NL8yI0HrjuFF1yaZbcKo2/nBVWHoAH2s0rb4TddmG8Dr7m0uULRaJnIVvM
- BgizRvz15D3A6S6VyZZ6C1EAmaZSFt8LvkgBuj1zckMaq9wsjP4XeaLhLgWAlklGgjo1
- Il+Kv78Y5xr7r7mqEIxilIwUTI6G+lx0w6ubr3lnFspbnV6b5w3yYA7JYdZ41aNrcomA
- LOI7xvZ1JfTx8Wxl5Gls+QxUiXlKPVI3Tb6C5BU0dCWInOeenGQewuzz/ZrXrCKLAuML
- Df6A1Zc6wxdW33KZXtB2qRTQo6xGboQtNYM7cJNrCHOZem5Z18BN2H6GF8rbV7Ztz6qS
- hC5A==
+ d=1e100.net; s=20230601; t=1742153528; x=1742758328;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2HNcsKQPFZ2FHZbkD/7OXxWpEAsLaCS0S6qGobISXnQ=;
+ b=Xms3LpPY+CxZZyE8/9jUCcruDN06vl5zBi2zbp/Y5HPDIf9DX76tcfZsbpOg+Om+8s
+ etQeYGpW5xAaZFYpvuxcKeUYsFg+F8NlMx2T66ExD8WhgUi6lsRME9Auq3AF5Bg46PzD
+ dnC/HIJwLbH3QtYMBKJmFLaRpuOxu3BJ5oxWbUdY6jIcvLMNCxeTR531r/+sAZSV3Dvp
+ Qh9hBjoBuZkvtpmE7bgIP5E3on13OdE0tr93/khIKA4fpfEIi0IJ4L1hOID5OjSn18w8
+ WGXP++HtcjuIxW2Vz/chSyElxc5OrfVYgAaSD3hiNtp4732DOKEXL4fcN+F9Zz4eZO8j
+ 2oHQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRrywYLbsjmutiET/SW4PuEfFdrSUGEgmXXLCthzmT0No4TDZvUN2zcRTXCpE2bc3mNEwGnnE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6GLiWWGI65dqETuwS50xPkQtWhI7RgAsykqFmRSGMr9qdqdGn
- kAhEuYaalSTIg1S2qgN4SR1XhLMg/sQd5aZPRvhOnuSJaCljkVYxZJ37nh+J+YlXREIm2E3BNok
- Vg0Pth6hyf5G8SeWUkn6j92HxSB1GH2Fezp+vUFCjqusx9NENxfKbVg==
-X-Gm-Gg: ASbGncuzjMqyLbnGLG/oPBzu1f5YlYem5sLsBkqo7QPrR+VLiTK9ktwlvXxpOqrF7TK
- wH+R5ShL7xf3+06cXpl1EarpNIOaKuCqux8eGZLYIzL1xTMKoo2G+XjTveyH/ZMkZoqXoBh3ueU
- p7yZDPj2sN8pfFwUPidOPfhkRrzKwPzufhAQ==
-X-Google-Smtp-Source: AGHT+IEtyq5WZy5xt698SPHg4btrAICAYK2Mj8YBX8S468+eoLE6ts8b5ZqXLeNpaomrOGuAeexBh5xs9ZmMt1TD8gY=
-X-Received: by 2002:a17:90a:e18f:b0:2fe:afa7:eaf8 with SMTP id
- 98e67ed59e1d1-30151cd790emr11802263a91.13.1742147591358; Sun, 16 Mar 2025
- 10:53:11 -0700 (PDT)
+ AJvYcCVNdotReQE5VpyvDBLBKaN8x0D2VUB1F3ieACKJIAMN0bRjrfUpzIPMn2n6JHLzkN/jobzQFmQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzIt8jK3Gk6HcUKm/nAVoXsu98Neg6UWD4hrwJcZSYTYsqOrCD
+ HnJfQ1I4nGn8JWkc4WNDqQq16xSxlV1XcBYxjUkXWSUgAAhi23t8l7BTbMVc2t9NmJ3Xf+IGzDB
+ zGniCBdD5t6wmjHtFMvkJrVwnMvI=
+X-Gm-Gg: ASbGncuMtthpz3rLaXy/K/VNtOm7Lw+1OVDumnJSyAAHVuBxd5ZyJT+HC3o9b3JHmWi
+ PJlPtyaocARCxvUi/06ZPHaZWRuG1dxpr9035wYhThN8dl+eHrkmih2XZVgUgwtCJSo4GdQ+JlV
+ F4EYLRoIEakoa02DQOUXVMzN5GPjhxJUfIazM/CPw5v5gdSHIjuWq1tW8BJbs=
+X-Google-Smtp-Source: AGHT+IE5wBYu155s0QdOVDlKeQ2KQppTygVW872ZJkAB9bR/0hnnIOAHj/T5MmjYY2HywQ/Osm03DmEbhThTLQVOoHE=
+X-Received: by 2002:a05:6402:210e:b0:5e4:a1e8:3f04 with SMTP id
+ 4fb4d7f45d1cf-5e89f152ab5mr6848722a12.8.1742153527566; Sun, 16 Mar 2025
+ 12:32:07 -0700 (PDT)
 MIME-Version: 1.0
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 16 Mar 2025 18:53:00 +0100
-X-Gm-Features: AQ5f1JqH-Cw55XmEDeqOstsKZm-GG1aG_ez58z-dfLC01MfbcmJQFCMDECMCSoA
-Message-ID: <CAOf5uwkfa9c7Z=CRorRKxku55G==CDvUpmChm8U+Hfmy6HNOfw@mail.gmail.com>
-Subject: Pull request for u-boot-nand-next External
-To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
+References: <20250315221813.1265193-1-CFSworks@gmail.com>
+ <ACC5355E-F949-42BD-8BDC-C2C8C740DB34@gmx.de>
+In-Reply-To: <ACC5355E-F949-42BD-8BDC-C2C8C740DB34@gmx.de>
+From: Sam Edwards <cfsworks@gmail.com>
+Date: Sun, 16 Mar 2025 12:31:55 -0700
+X-Gm-Features: AQ5f1JpuYF6E34wKVghjfe7do1AjoPXK6Z1g6L5lYlpsEcZ-5UL19xEG_kq8zIw
+Message-ID: <CAH5Ym4ipjaOiY36x+1tinFqudjpwtRRtcXRu7P8311AAKmZDwg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/15] Various toolchain compatibility
+ fixes/improvements
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,69 +101,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 15d6518c942f0da13f9a7ceeadbd925c3317ec8d:
+On Sat, Mar 15, 2025 at 10:27=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@g=
+mx.de> wrote:
+>
+> Am 15. M=C3=A4rz 2025 23:17:58 MEZ schrieb Sam Edwards <cfsworks@gmail.co=
+m>:
+> >Hello again U-Boot list,
+> >
+> >This is v2 of my "misc. fixes" series, sent to prepare the codebase for =
+more
+> >direct LLVM support in the near future. This series contains several fix=
+es that
+> >I found in the process of preparing that support and which address issue=
+s
+> >independent of any future feature or enhancement. I am sending these now=
+, both
+> >so that their inclusion is not delayed by discussion on my upcoming seri=
+es and
+> >to make the latter more manageable.
+> >
+> >PLEASE APPLY PARTIALLY! I have tried to sort these so that the most
+> >straightforward changes come first. If any patch proves contentious, you=
+ can
+> >either skip it or stop applying the series at that point. Any patches th=
+at need
+> >revisions will be included in a future series, but I'm trying to avoid t=
+here
+> >being a v3 of *this* series. :)
+> >
+> >Happy Saturday,
+> >Sam
+>
+> Hello Sam,
+>
+> I wonder why there are only ARM and X86 specific patches in this series .=
+ Wouldn't some of the changes also be needed for RISC-V and other architect=
+ures?
 
-  ARM: dts: imx: Drop bogus regulator extras on DH i.MX6 DHCOM DRC02
-(2025-03-13 15:22:48 -0600)
+Hi Heinrich,
 
-are available in the Git repository at:
+The breakdown of arch-specific patches is: 6 for ARM, 1 for RISC-V, 1
+for X86. This distribution was only because ARM needed more work, not
+because it received more attention. (Some architectures, like
+"sandbox," required no fixes, and MIPS appears to need only
+compiler-side improvements at this time, for example.)
 
-  git://source.denx.de:u-boot/custodians/u-boot-nand-flash.git nand-next
+>
+> For EFI we have carved out a linker script include file to harmonize the =
+linker scripts used by ARM and RISC-V. Shouldn't we do the same for main U-=
+Boot?
 
-for you to fetch changes up to 448d27f6adf6de576860fdb9c3c4ecbe51819e33:
+I like the idea in principle, but I'm skeptical because EFI
+applications have a much more uniform and constrained memory layout
+compared to raw binaries on [vendor-specific board]. So while it's
+possible to mostly unify the memory layout, doing so would take
+significantly more effort than with EFI. Plus, most of our supported
+architectures don't have EFI at all, so unifying EFI across a few
+architectures isn't a strong indicator that this approach would scale
+well. Also, Linux doesn't do this either, and I'd expect they would
+have if it were a good idea.
 
-  mtd: rawnand: meson: always use OOB bytes during write (2025-03-16
-14:02:05 +0100)
+That said, I'd prefer to keep this patchset focused on fixing these
+immediate issues rather than reworking the linker scripts more
+broadly. If we want to explore that as a separate effort, I think it
+would need a deeper discussion.
 
-This merge request add support for cadence raw nand driver for agilex board
-and
-add a fix to meson driver
+Happy Sunday,
+Sam
 
-The patches pass the pipeline CI:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/25178
-
-----------------------------------------------------------------
-Arseniy Krasnov (1):
-      mtd: rawnand: meson: always use OOB bytes during write
-
-Dinesh Maniyam (17):
-      dt: nand: add cadence nand dt-bindings
-      arm: dts: agilex5: Enabled cdns-nand dts setting
-      drivers: mtd: nand: Add driver for Cadence Nand
-      drivers: mtd: nand: cadence: Add support for read status command
-      drivers: mtd: nand: cadence: Add support for readid command
-      drivers: mtd: nand: cadence: Add support for NAND_CMD_PARAM
-      drivers: mtd: nand: cadence: Add support for NAND_CMD_RESET
-      drivers: mtd: nand: cadence: Support cmd SET_FEATURES & GET_FEATURES
-      drivers: mtd: nand: cadence: Flush & invalidate dma descriptor
-      drivers: mtd: nand: cadence: Poll for desc complete status
-      drivers: mtd: nand: cadence: Use bounce buffer
-      drivers: nand: Enabled Kconfig and Makefile for cdns-nand
-      drivers: mtd: nand: base: Add support for Hardware ECC for check bad
-block
-      drivers: mtd: nand: spl: Add support for nand SPL load image
-      drivers: mtd: nand: Enabled Kconfig and Makefile for Cadence-SPL
-      drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
-      configs: nand2_defconfig: Enable configs for nand boot
-
- arch/arm/dts/socfpga_agilex5.dtsi              |   14 +
- arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |    9 +-
- arch/arm/dts/socfpga_agilex5_socdk.dts         |   19 +
- board/intel/agilex5-socdk/MAINTAINERS          |    2 +
- configs/socfpga_agilex5_nand2_defconfig        |   31 +
- doc/device-tree-bindings/mtd/cadence,nand.yaml |   98 +
- drivers/mtd/nand/raw/Kconfig                   |   24 +-
- drivers/mtd/nand/raw/Makefile                  |    2 +
- drivers/mtd/nand/raw/cadence_nand.c            | 2423
-++++++++++++++++++++++++
- drivers/mtd/nand/raw/cadence_spl.c             |   59 +
- drivers/mtd/nand/raw/meson_nand.c              |    4 +-
- drivers/mtd/nand/raw/nand_base.c               |   69 +-
- include/cadence-nand.h                         |  529 ++++++
- include/linux/mtd/rawnand.h                    |   12 +
- 14 files changed, 3266 insertions(+), 29 deletions(-)
- create mode 100644 configs/socfpga_agilex5_nand2_defconfig
- create mode 100644 doc/device-tree-bindings/mtd/cadence,nand.yaml
- create mode 100644 drivers/mtd/nand/raw/cadence_nand.c
- create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
- create mode 100644 include/cadence-nand.h
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >Changes v1->v2:
+> >- Carried forward acked/reviewed tags
+> >- Dropped two patches (one was incorrect, the other can be fixed differe=
+ntly)
+> >- Minor phrasing changes to commit messages
+> >- Instead of removing `ENTRY(_start)`, I instead added `.globl _start` w=
+here
+> >  appropriate, in the EFI apps
+> >
+> >Sam Edwards (15):
+> >  arm: Remove stray .mmutable reference in linker script
+> >  arm: Exclude eabi_compat from LTO
+> >  arm: Add __aeabi_memclr in eabi_compat
+> >  arm: Add aligned-memory aliases to eabi_compat
+> >  arm: Discard unwanted sections in linker script
+> >  arm: Replace 'adrl' in EFI crt0
+> >  x86: Fix call64's section flags
+> >  makefile: Avoid objcopy --gap-fill for .hex/.srec
+> >  makefile: Add `norelro` linker option
+> >  makefile: Add READELF command variable
+> >  arm: riscv: efi: Export _start symbol from crt0_*_efi stubs
+> >  efi_loader: Move .dynamic out of .text in EFI
+> >  scripts/Makefile.lib: efi: Preserve the .dynstr section as well
+> >  spl: riscv: opensbi: Error on misaligned FDT
+> >  spl: Align FDT load address
+> >
+> > Makefile                        | 14 ++++++++------
+> > arch/arm/cpu/u-boot.lds         | 29 ++++++++++-------------------
+> > arch/arm/lib/Makefile           |  1 +
+> > arch/arm/lib/crt0_aarch64_efi.S |  1 +
+> > arch/arm/lib/crt0_arm_efi.S     |  4 +++-
+> > arch/arm/lib/eabi_compat.c      | 17 +++++++++++++++++
+> > arch/riscv/lib/crt0_riscv_efi.S |  1 +
+> > arch/x86/cpu/i386/call64.S      |  2 +-
+> > common/spl/spl_fit.c            |  2 +-
+> > common/spl/spl_opensbi.c        |  5 +++++
+> > lib/efi_loader/elf_efi.ldsi     |  6 +++---
+> > scripts/Makefile.lib            |  4 ++--
+> > 12 files changed, 53 insertions(+), 33 deletions(-)
+> >
+>
