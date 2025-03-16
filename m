@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE778C282DE
-	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 13:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 673C0C35FF1
+	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 13:55:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50B52810EB;
+	by phobos.denx.de (Postfix) with ESMTP id 9E0E88198F;
 	Sun, 16 Mar 2025 14:54:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MwxXPuZg";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QSUatYtc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mpDR8KJb";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nuyL150u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DCCE81101; Sun, 16 Mar 2025 14:54:50 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 8BD5681A02; Sun, 16 Mar 2025 14:54:51 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 790A2810EB
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 14:54:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 241F88141E
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 14:54:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,7 +30,7 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZG03D1XkZz9sbY;
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ZG03D66dgz9sjR;
  Sun, 16 Mar 2025 14:54:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1742133288;
@@ -38,12 +38,12 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ap38yoL6kpx29g8d5LgKmw72McZ1mLP8v/PcqnDtb5E=;
- b=MwxXPuZgEllcjb/iGg/K+5bhabRgcYw+WL6ipf8L5wBNKGtgj9uYtK9/M0MMwgSDfIGL/D
- G579y34dnsg0dYf7BSTX5P+MSifBQSR7gJSt649lfEPP3ighyWMhrUXg0YDHi4lHGJIe3f
- awo2sf5M4eo0irNBXyUbnplLDOoipgwFy+up/q76udRcyXTDCHNFglAaIi0a57UIdm1Tq4
- vznYuiFyqcpPBztO34CTo61zpnJORVI3h5zSNg7AJkwrX/euCPXbZVod14wvqVF0Y/eM1p
- bS2jzX6MIZEA28wkWjs78R7JqXCVfbgCh2hVvsKKoc10n9WOm/Ejx8PNeBx8fw==
+ bh=kzub3QcOc4fEVRMhpcavCyOkpsbBHQNifaZoKFnrM1g=;
+ b=mpDR8KJbM2FhZCPfZMsrD0DeRCALfMKFxLWZsZIcJpAUx+4p0wZXu1qk0qSC5yifb8xwkf
+ 4OJJL656T21LN92E3P1xSz9GMSz0IdfprOPdi7oUtTcexKgxLmJkEXnPCWyP8K5yyj43jM
+ sXNXYeTFK6etXiAZo432+hRXljWg0rgaR9OFh2qPeLi216aJdxq4E2vG87aMso6bM6va0L
+ OKqyFl8ZNu+QwCAAq4ymKn8w1YQ9cAcKRTPlSEoTFy4E4cvkGaNm1rStDffBKM6iBy3Ef1
+ N0hBQaPRS+6QERv6GIqZ6S0ggZvv8OLaNf+lBQDBzDfjzEhu83RjAQeKeHoMMw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1742133286;
@@ -51,25 +51,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ap38yoL6kpx29g8d5LgKmw72McZ1mLP8v/PcqnDtb5E=;
- b=QSUatYtc8jl1SbUIuyTB/+ei2F6zOAj4Bsgow5KuAf2k2gycKpBcZTRF2NxeDRyNgmggbz
- ou2EeG16eYWok6imiS/6/ZUpWSh45Ww03N8vulPJqf5uk9I87cFNHCpaaTdIQHwiUjSq0r
- zwgZ2H2SPbn5fza21d9zLst5EO6IbQB8ENsGeh3/OJ1+45ieDuPZMe0KXrh2JNMXAhkaJJ
- EjEs5Mv0fDyJbImOA19krLqNIqzR0jw5b+88/82fNIzjlE/5upTYiQFgGWmfoa+Jgj+y2f
- 8Xv8yPHRyRcvsI3/1jZkU77M29NM0VvzhFS21smwTvO7LGXzLuX8698npfiDlQ==
+ bh=kzub3QcOc4fEVRMhpcavCyOkpsbBHQNifaZoKFnrM1g=;
+ b=nuyL150uG0xUPVgTSnkaEFhEQt7UdhOiTAcVobll/960jI7W0VNCKOgmBI3tFMbViGYRDK
+ O7W5XtBH44MzqCktbf7CzJFBXvjMmOyWLrpVIEG1cv+pze6hyljS6DRri7hxbTv0bzb1EE
+ FubIiLYaGXtLe04NqaIBKJgY0qIkYat7yX/urHvvqs8DIwDOaYZF2N4WXWLGHDs85ssirP
+ Z5FYATT44tr8EfaiLTuhF4+wMzhxSsQ3Or0wRFlSP5y9SNsx+t12CMLr7aYToKZkVHgNFo
+ MwwUEHVlr7QEOZI5ufka0R0gPcfBpJjVwIkJsjoZaIrwxMXiaqPpKpAGkYKwsQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/7] ram: renesas: dbsc5: Synchronize initialization code to
- rev.1.10
-Date: Sun, 16 Mar 2025 14:51:42 +0100
-Message-ID: <20250316135417.7909-5-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 6/7] ram: renesas: dbsc5: Add V4H-3/V4H-5/V4H-7 OTP based
+ detection
+Date: Sun, 16 Mar 2025 14:51:43 +0100
+Message-ID: <20250316135417.7909-6-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250316135417.7909-1-marek.vasut+renesas@mailbox.org>
 References: <20250316135417.7909-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: qyjeticcocabyg4dddrw9qs7qbabgmsn
-X-MBO-RS-ID: 7d02cbe64d63e94b3c6
+X-MBO-RS-ID: d5a68b3de09e0276615
+X-MBO-RS-META: jg5nwn7arofeoqk75b1ux8cjygyj53x5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,9 +86,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the DRAM initialization code to match DBSC5 initialization code
-rev.1.10 , which is currently the latest version available. This makes
-DRAM initialization operational on Renesas R-Car V4H R8A779G0 rev.3.0.
+Add auto-detection and handling of Renesas R-Car V4H-3 and V4H-5
+in addition to V4H-7 SoC variants based on OTP fuse programming.
+The V4H-3 and V4H-5 variants have reduced DRAM frequency options.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -96,161 +96,120 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/ram/renesas/dbsc5/dram.c | 67 +++++++++++++++-----------------
- 1 file changed, 31 insertions(+), 36 deletions(-)
+ drivers/ram/renesas/dbsc5/dbsc5.c |  3 +-
+ drivers/ram/renesas/dbsc5/dbsc5.h |  1 +
+ drivers/ram/renesas/dbsc5/dram.c  | 48 ++++++++++++++++++++-----------
+ 3 files changed, 35 insertions(+), 17 deletions(-)
 
+diff --git a/drivers/ram/renesas/dbsc5/dbsc5.c b/drivers/ram/renesas/dbsc5/dbsc5.c
+index d24b7c5c30a..4cbc6aeda43 100644
+--- a/drivers/ram/renesas/dbsc5/dbsc5.c
++++ b/drivers/ram/renesas/dbsc5/dbsc5.c
+@@ -59,7 +59,8 @@ int renesas_dbsc5_bind(struct udevice *dev)
+ 
+ struct renesas_dbsc5_data r8a779g0_dbsc5_data = {
+ 	.clock_node = "renesas,r8a779g0-cpg-mssr",
+-	.reset_node = "renesas,r8a779g0-rst"
++	.reset_node = "renesas,r8a779g0-rst",
++	.otp_node = "renesas,r8a779g0-otp",
+ };
+ 
+ static const struct udevice_id renesas_dbsc5_ids[] = {
+diff --git a/drivers/ram/renesas/dbsc5/dbsc5.h b/drivers/ram/renesas/dbsc5/dbsc5.h
+index c410eb0c5ed..bf22fcb8c11 100644
+--- a/drivers/ram/renesas/dbsc5/dbsc5.h
++++ b/drivers/ram/renesas/dbsc5/dbsc5.h
+@@ -23,6 +23,7 @@
+ struct renesas_dbsc5_data {
+ 	const char		*clock_node;
+ 	const char		*reset_node;
++	const char		*otp_node;
+ };
+ 
+ #endif /* __DRIVERS_RAM_RENESAS_DBSC5_DBSC5_H__ */
 diff --git a/drivers/ram/renesas/dbsc5/dram.c b/drivers/ram/renesas/dbsc5/dram.c
-index 0616658e9f8..1b70faff7f7 100644
+index 1b70faff7f7..c5c57858aac 100644
 --- a/drivers/ram/renesas/dbsc5/dram.c
 +++ b/drivers/ram/renesas/dbsc5/dram.c
-@@ -220,6 +220,7 @@ static const u16 jedec_spec2_tRFC_ab[] = {
- #define PHY_RDLVL_RDDQS_DQ_TE_DLY_OBS		DDR_REGDEF(0x00, 0x09, 0x103F)
- #define PHY_WDQLVL_STATUS_OBS			DDR_REGDEF(0x00, 0x20, 0x1043)
- #define PHY_DATA_DC_CAL_START			DDR_REGDEF(0x18, 0x01, 0x104D)
-+#define PHY_SLV_DLY_CTRL_GATE_DISABLE		DDR_REGDEF(0x10, 0x01, 0x104E)
- #define PHY_REGULATOR_EN_CNT			DDR_REGDEF(0x18, 0x06, 0x1050)
- #define PHY_VREF_INITIAL_START_POINT		DDR_REGDEF(0x00, 0x09, 0x1055)
- #define PHY_VREF_INITIAL_STOP_POINT		DDR_REGDEF(0x10, 0x09, 0x1055)
-@@ -469,7 +470,7 @@ static const u32 DDR_PHY_SLICE_REGSET_V4H[DDR_PHY_SLICE_REGSET_NUM_V4H] = {
- 	0x00000000, 0x00500050, 0x00500050, 0x00500050,
- 	0x00500050, 0x0D000050, 0x10100004, 0x06102010,
- 	0x61619041, 0x07097000, 0x00644180, 0x00803280,
--	0x00808001, 0x13010100, 0x02000016, 0x10001003,
-+	0x00808001, 0x13010101, 0x02000016, 0x10001003,
- 	0x06093E42, 0x0F063D01, 0x011700C8, 0x04100140,
- 	0x00000100, 0x000001D1, 0x05000068, 0x00030402,
- 	0x01400000, 0x80800300, 0x00160010, 0x76543210,
-@@ -512,8 +513,8 @@ static const u32 DDR_PHY_ADR_G_REGSET_V4H[DDR_PHY_ADR_G_REGSET_NUM_V4H] = {
- 	0x00040101, 0x00000000, 0x00000000, 0x00000064,
- 	0x00000000, 0x00000000, 0x39421B42, 0x00010124,
- 	0x00520052, 0x00000052, 0x00000000, 0x00000000,
--	0x00000000, 0x00000000, 0x00000000, 0x00000000,
--	0x00000000, 0x00000000, 0x00000000, 0x07030102,
-+	0x00010001, 0x00000000, 0x00000000, 0x00010001,
-+	0x00000000, 0x00000000, 0x00010001, 0x07030102,
- 	0x01030307, 0x00000054, 0x00004096, 0x08200820,
- 	0x08200820, 0x08200820, 0x08200820, 0x00000820,
- 	0x004103B8, 0x0000003F, 0x000C0006, 0x00000000,
-@@ -1294,7 +1295,7 @@ static const struct dbsc5_table_patch dbsc5_table_patch_slice_mbpsdiv_572 = {
- };
- 
- static const struct dbsc5_table_patch dbsc5_table_patch_adr_g_mbpsdiv_572 = {
--	PHY_PAD_ACS_RX_PCLK_CLK_SEL, 0x03
-+	PHY_PAD_ACS_RX_PCLK_CLK_SEL, 0x02
- };
- 
- static const struct dbsc5_table_patch dbsc5_table_patch_adr_g_mbpsdiv_400[] = {
-@@ -1713,14 +1714,17 @@ static void dbsc5_clk_wait_dbpdstat1(struct udevice *dev, u32 status)
+@@ -4364,16 +4364,20 @@ static int renesas_dbsc5_dram_probe(struct udevice *dev)
  {
+ #define RST_MODEMR0			0x0
+ #define RST_MODEMR1			0x4
++#define OTP_MONITOR17			0x1144
+ 	struct renesas_dbsc5_data *data = (struct renesas_dbsc5_data *)dev_get_driver_data(dev);
+ 	ofnode cnode = ofnode_by_compatible(ofnode_null(), data->clock_node);
+ 	ofnode rnode = ofnode_by_compatible(ofnode_null(), data->reset_node);
++	ofnode onode = ofnode_by_compatible(ofnode_null(), data->otp_node);
  	struct renesas_dbsc5_dram_priv *priv = dev_get_priv(dev);
+ 	void __iomem *regs_dbsc_a = priv->regs + DBSC5_DBSC_A_OFFSET;
  	void __iomem *regs_dbsc_d = priv->regs + DBSC5_DBSC_D_OFFSET;
--	u32 i, ch, reg;
-+	u32 i, ch, chk, reg;
+ 	phys_addr_t rregs = ofnode_get_addr(rnode);
+ 	const u32 modemr0 = readl(rregs + RST_MODEMR0);
+ 	const u32 modemr1 = readl(rregs + RST_MODEMR1);
+-	u32 breg, reg, md, sscg;
++	phys_addr_t oregs = ofnode_get_addr(onode);
++	const u32 otpmon17 = readl(oregs + OTP_MONITOR17);
++	u32 breg, reg, md, sscg, product;
+ 	u32 ch, cs;
  
- 	for (i = 0; i < 2; i++) {
- 		do {
- 			reg = status;
--			r_foreach_vch(dev, ch)
-+			chk = 0;
-+			r_foreach_vch(dev, ch) {
- 				reg &= readl(regs_dbsc_d + DBSC_DBPDSTAT1(ch));
--		} while (reg != status);
-+				chk |= readl(regs_dbsc_d + DBSC_DBPDSTAT0(ch));
+ 	/* Get board data */
+@@ -4428,29 +4432,41 @@ static int renesas_dbsc5_dram_probe(struct udevice *dev)
+ 
+ 	/* Decode DDR operating frequency from MD[37:36,19,17] pins */
+ 	md = ((modemr0 & BIT(19)) >> 18) | ((modemr0 & BIT(17)) >> 17);
++	product = otpmon17 & 0xff;
+ 	sscg = (modemr1 >> 4) & 0x03;
+ 	if (sscg == 2) {
+ 		printf("MD[37:36] setting 0x%x not supported!", sscg);
+ 		hang();
+ 	}
+ 
+-	if (md == 0) {
+-		if (sscg == 0) {
+-			priv->ddr_mbps = 6400;
+-			priv->ddr_mbpsdiv = 1;
+-		} else {
+-			priv->ddr_mbps = 19000;
+-			priv->ddr_mbpsdiv = 3;
+-		}
+-	} else if (md == 1) {
+-		priv->ddr_mbps = 6000;
+-		priv->ddr_mbpsdiv = 1;
+-	} else if (md == 2) {
+-		priv->ddr_mbps = 5500;
+-		priv->ddr_mbpsdiv = 1;
+-	} else if (md == 3) {
++	if (product == 0x2) {			/* V4H-3 */
+ 		priv->ddr_mbps = 4800;
+ 		priv->ddr_mbpsdiv = 1;
++	} else if (product == 0x1) {		/* V4H-5 */
++		if (md == 3)
++			priv->ddr_mbps = 4800;
++		else
++			priv->ddr_mbps = 5000;
++		priv->ddr_mbpsdiv = 1;
++	} else {				/* V4H-7 */
++		if (md == 0) {
++			if (sscg == 0) {
++				priv->ddr_mbps = 6400;
++				priv->ddr_mbpsdiv = 1;
++			} else {
++				priv->ddr_mbps = 19000;
++				priv->ddr_mbpsdiv = 3;
 +			}
-+		} while (reg != status && !(chk & BIT(0)));
- 	}
- }
- 
-@@ -3491,13 +3495,10 @@ static void dbsc5_manual_write_dca(struct udevice *dev)
- {
- 	struct renesas_dbsc5_dram_priv *priv = dev_get_priv(dev);
- 	const u32 rank = priv->ch_have_this_cs[1] ? 0x2 : 0x1;
--	u32 slv_dly_center[DRAM_CH_CNT][CS_CNT][SLICE_CNT];
--	u32 slv_dly_center_cyc;
--	u32 slv_dly_center_dly;
-+	u32 phy_slv_dly[DRAM_CH_CNT][CS_CNT][SLICE_CNT];
-+	u32 phy_slv_dly_avg[DRAM_CH_CNT][SLICE_CNT];
- 	u32 slv_dly_min[DRAM_CH_CNT][SLICE_CNT];
- 	u32 slv_dly_max[DRAM_CH_CNT][SLICE_CNT];
--	u32 slv_dly_min_tmp[DRAM_CH_CNT][CS_CNT][SLICE_CNT];
--	u32 slv_dly_max_tmp[DRAM_CH_CNT][CS_CNT][SLICE_CNT];
- 	u32 phy_dcc_code_min[DRAM_CH_CNT][SLICE_CNT];
- 	u32 phy_dcc_code_max[DRAM_CH_CNT][SLICE_CNT];
- 	u32 phy_dcc_code_mid;
-@@ -3521,18 +3522,9 @@ static void dbsc5_manual_write_dca(struct udevice *dev)
- 		dbsc5_ddr_setval_all_ch_all_slice(dev, PHY_PER_CS_TRAINING_INDEX, cs);
- 		r_foreach_vch(dev, ch) {
- 			for (slice = 0; slice < SLICE_CNT; slice++) {
--				slv_dly_center[ch][cs][slice] =
--					dbsc5_ddr_getval_slice(dev, ch, slice, PHY_CLK_WRDQS_SLAVE_DELAY);
--				slv_dly_center_cyc = slv_dly_center[ch][cs][slice] & 0x180;
--				slv_dly_center_dly = slv_dly_center[ch][cs][slice] & 0x7F;
--				slv_dly_min_tmp[ch][cs][slice] =
--					slv_dly_center_cyc |
--					(slv_dly_center_dly * ratio_min / ratio_min_div);
--				slv_dly_max_tmp[ch][cs][slice] = slv_dly_center_cyc;
--				if ((slv_dly_center_dly * ratio_max) > (0x7F * ratio_max_div))
--					slv_dly_max_tmp[ch][cs][slice] |= 0x7F;
--				else
--					slv_dly_max_tmp[ch][cs][slice] |= slv_dly_center_dly * ratio_max / ratio_max_div;
-+				phy_slv_dly[ch][cs][slice] =
-+					dbsc5_ddr_getval_slice(dev, ch, slice,
-+							       PHY_CLK_WRDQS_SLAVE_DELAY);
- 			}
- 		}
- 	}
-@@ -3540,22 +3532,22 @@ static void dbsc5_manual_write_dca(struct udevice *dev)
- 	r_foreach_vch(dev, ch) {
- 		for (slice = 0; slice < SLICE_CNT; slice++) {
- 			if (rank == 0x2) {
--				if (slv_dly_max_tmp[ch][0][slice] < slv_dly_max_tmp[ch][1][slice])
--					slv_dly_max[ch][slice] = slv_dly_max_tmp[ch][1][slice];
--				else
--					slv_dly_max[ch][slice] = slv_dly_max_tmp[ch][0][slice];
--
--				if (slv_dly_min_tmp[ch][0][slice] < slv_dly_min_tmp[ch][1][slice])
--					slv_dly_min[ch][slice] = slv_dly_min_tmp[ch][0][slice];
--				else
--					slv_dly_min[ch][slice] = slv_dly_min_tmp[ch][1][slice];
-+				/* Calculate average between ranks */
-+				phy_slv_dly_avg[ch][slice] = (phy_slv_dly[ch][0][slice] +
-+							      phy_slv_dly[ch][1][slice]) / 2;
- 			} else {
--				slv_dly_max[ch][slice] = slv_dly_max_tmp[ch][0][slice];
--				slv_dly_min[ch][slice] = slv_dly_min_tmp[ch][0][slice];
-+				phy_slv_dly_avg[ch][slice] = phy_slv_dly[ch][0][slice];
- 			}
-+			/* Determine the search range */
-+			slv_dly_min[ch][slice] = (phy_slv_dly_avg[ch][slice] & 0x07F) * ratio_min / ratio_min_div;
-+			slv_dly_max[ch][slice] = (phy_slv_dly_avg[ch][slice] & 0x07F) * ratio_max / ratio_max_div;
-+			if (slv_dly_max[ch][slice] > 0x7F)
-+				slv_dly_max[ch][slice] = 0x7F;
- 		}
++		} else if (md == 1) {
++			priv->ddr_mbps = 6000;
++			priv->ddr_mbpsdiv = 1;
++		} else if (md == 2) {
++			priv->ddr_mbps = 5500;
++			priv->ddr_mbpsdiv = 1;
++		} else if (md == 3) {
++			priv->ddr_mbps = 4800;
++			priv->ddr_mbpsdiv = 1;
++		}
  	}
  
-+	dbsc5_ddr_setval_all_ch_all_slice(dev, PHY_SLV_DLY_CTRL_GATE_DISABLE, 0x1);
-+
- 	for (i = 0; i <= 0x7F; i++) {
- 		r_foreach_vch(dev, ch) {
- 			for (slice = 0; slice < SLICE_CNT; slice++) {
-@@ -3621,13 +3613,16 @@ static void dbsc5_manual_write_dca(struct udevice *dev)
- 			for (slice = 0; slice < SLICE_CNT; slice++) {
- 				dbsc5_ddr_setval_slice(dev, ch, slice,
- 						       PHY_CLK_WRDQS_SLAVE_DELAY,
--						       slv_dly_center[ch][cs][slice]);
-+						       phy_slv_dly[ch][cs][slice]);
- 				dbsc5_ddr_setval_slice(dev, ch, slice,
- 						       SC_PHY_WCK_CALC, 0x1);
- 				dbsc5_ddr_setval(dev, ch, SC_PHY_MANUAL_UPDATE, 0x1);
- 			}
- 		}
- 	}
-+
-+	dbsc5_ddr_setval_all_ch_all_slice(dev, PHY_SLV_DLY_CTRL_GATE_DISABLE, 0x0);
-+
- 	dbsc5_ddr_setval_all_ch_all_slice(dev, PHY_PER_CS_TRAINING_MULTICAST_EN, 0x1);
- 
- 	r_foreach_vch(dev, ch) {
+ 	priv->ddr_mul = CLK_DIV(priv->ddr_mbps, priv->ddr_mbpsdiv * 2,
 -- 
 2.47.2
 
