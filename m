@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4102C282DE
-	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 08:33:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70AE6C282DE
+	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 08:33:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93C59811DF;
-	Sun, 16 Mar 2025 09:33:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F382D81877;
+	Sun, 16 Mar 2025 09:33:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="cAHUYrQy";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="etRPbd5Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C134C811DF; Sun, 16 Mar 2025 09:33:26 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 691638186D; Sun, 16 Mar 2025 09:33:28 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75984803DF
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 09:33:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6955781100
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 09:33:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5e5cd420781so6599301a12.2
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 01:33:23 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5cd420781so6599334a12.2
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 01:33:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1742114003; x=1742718803; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1742114006; x=1742718806; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i+4DD7ylqx3lgBItL7zcOFivcRfc2S5e+lspwOfvEw0=;
- b=cAHUYrQydiTB/ir5oUArWbtRR9ivS7w1F0inOsAPggddSp/jdJuSF8fOgLs/17IzeA
- KDSsQ/ox+zHEMhqD7iaUVmmBe8BCCuw+5dgBR15HLW+QeRBq937Cfb4pUY4n68haB25P
- dqYAxempxIc7oiB93jFdHIkJ51rFKddXO0cHCW50VP8T7GiOY9OVn2cl5EZuIIvzn1WC
- EIqbCGQb3lLshdEoRpNvgH6xL0YFJQ+CZh5rfiUQygYLtCQLcNeEbQTN6h/kcsqYSLdm
- AKXWv6dhghvq6kuE5zPybobFtZ7VNKun+fbCx3nvCVozo7a/FbnPdIUkKdjFF46uPB+Q
- cfuA==
+ bh=TCNCvJQci4hlDMwBJiOKVLYJxK2nUHHlqpYHh2jegpw=;
+ b=etRPbd5ZneR3v+2L8KyhUjIy3uM4P43AqqAIqB0Sq2WqLvyulrpML/F8u70I6k45G9
+ sUb98Et80auYRCNseShGBbj6lTd0+vLhxNdJinPPTwW1DzZEZN9TnZNnUUQCgWXC9IiN
+ dC+J//p+C2IebXsEtgL9hsBFVFjbVRck1/w9AygoF17pkhzqsSEH2s50BDxwKs5ySepK
+ i657FAtDKXn3A9bfsnX4VlWE+WCttaWLRUv34nftzX8+8VyRSwPL7tA0anJBrnxXbYxk
+ sYTypmI7H3k5PjMYnKu9ocPu0tc8bkqr7lJXx4CdZgZ9CLE8c6nmIjURGgTSsii9V7of
+ cFuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742114003; x=1742718803;
+ d=1e100.net; s=20230601; t=1742114006; x=1742718806;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i+4DD7ylqx3lgBItL7zcOFivcRfc2S5e+lspwOfvEw0=;
- b=YqaGl3ztyoZ2i7xXzhDvOK2IZrM5slppL6BOcAEuGNLn/rOVY1mkG3oBlF0dLZttU0
- EUSGTPZblod7YfygHm/cb9E7oNbQtnszdwarBp7sU3vmE6Z91kD74MENsa4ZRmJEqN6A
- QcpzDwUdbwoYAZRvAboGUOIupyg5LZMGUrGMqw0bJQNCirB+NugyEtIiFpnuENN/lJZW
- 1RGpXC2ApKxDJzc/8pLsxfYfSzrlHD4sjrWncC80XRYNixZUlY06v3DyD95D+2odEkH4
- hGCHepMZPAW1XQtrJE2jlv8OlVDdVbUm2LgvoGF9LCfFrtUkegl3+UurCWeRFaYDY6HF
- IbYg==
+ bh=TCNCvJQci4hlDMwBJiOKVLYJxK2nUHHlqpYHh2jegpw=;
+ b=X/WfFq7oAEvNFRcXNlTAOWac6zY6rJ28vAURVy2d75+Bihq6HpccAXNSY+8I9VL+n3
+ AMRpvly86EEyofabmOeMRhSq4Zy2qBvB7zD4N23bSfJL7S3oLfJ3CiaWbaKIfuOpg6uY
+ 4ypo/3WP/LvnMoFd0rLjRBmj6IAW+SdUju+cBpnkC6ZC/OglvLpzxZAydPtEQ3qSOCkM
+ 0cIvo6jNykzl1Y5keVgLNSkhDadDHyeKgBoLjjTn9xSfB0NZ9jPjkYmXSkOWugk6F2VT
+ r7WZS8pXjetH9NAeY3EcqcTY3cNcgRyofme0Nx2Xeij6cD2oT2E84IBGO4QjYDfP0ej1
+ ZZ1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX1QRAE2/iMIdj3WymnaotYTdacY6SsLP98K9kYEUkykvo87eYKw3malI8x9Mi0yl0cUCAuD2c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzyDwgVrdHMmaDwQmXRzoO1G8ZlJmRdIMxN7Ch0nsESIFq0gpAA
- jt25zS9FRNmYKf2mYq4mndFN9aZNJ9OG1Js+qQQpgecFlqbWlBTKs9Y0h38r7mA=
-X-Gm-Gg: ASbGncvf8kBBY7KbaLXOIQfOz3pt9VLdvR/TEme3QuzSTLQrY2rf9fUo0MWFZVbJkbE
- ge2tF+sWb0qsmNOsIMO7qRVJUYinpzX0pTTh7CehwH/XxYAjeo7tXVZLTkjYsYngmE2EH9i45oK
- DoeBVL9jBHk+V76suB3ilEPssurjiVxv1QtvEnFEa2s2mLyU0O6y0DhgvaFfeIHgIKVX2J7sK1/
- 9Uyr6AomB3ZXIVBlKj+8CLF0VDk7DgM1NlhPog9XWipgKl7rLnP/Sx6N+KQ8FR95yhfxYvB36UE
- h7KzosKDrVo1msU33yCx+/yr9IUJoD+7EBhvCD5DMcLkagHI8a2hFhPFuM/mHP/cV1TBU/DU3lt
- JAX8mubxLsRE+kl3EtDwdJlGdkOghnLB39+zUt026JUE=
-X-Google-Smtp-Source: AGHT+IFfQiND9D76OCdw4oz3lcS9b9K6QRRs7DH+l2la9w6maeLOnV569frZMAQK98PaLcdxi3m1Pg==
-X-Received: by 2002:a05:6402:42c3:b0:5dc:7823:e7e4 with SMTP id
- 4fb4d7f45d1cf-5e89fa2c0d2mr8438131a12.12.1742114002804; 
- Sun, 16 Mar 2025 01:33:22 -0700 (PDT)
+ AJvYcCWMN+eKkGIu13gpB5ZiChnGYpEHMij5btsCDY4Z69GGdL1K5GpWaWjP03nPRGETxZUGO2ilaOk=@lists.denx.de
+X-Gm-Message-State: AOJu0YziXJbYmPrpkIaD/9MEAa4wTKpWOJP0JArK0gVsyfpumtb8tAUV
+ aC5jn8zJYUmzITdwn6Bq4P9lsddSA5nWX49WRVnNDQqKGg6ZBDeqqMj7SgpW2Zc=
+X-Gm-Gg: ASbGncvUX5wiRjwkoaCLdWhJkiUFO0Cgg5CGzbSb7DmuI/Dlg9jKtcOYCQlpt6kHCul
+ yP5pRvmfXeS977imxUtSCixFXTC8RWaYQLFtn+Y1jQJoepr3WNmf+K3jrynuXkbrIfbXbxqJJWj
+ SOCAlVvty7aZpQTVfaOqxsmd2CtUVk7C/nA+hVwV15UzdTbC8rTZvtwnPwq8PQXdECxNGH1qIVM
+ 3TuOoOCPIGV2JUn5tIwjEaW4iOoUfRVEFOEJJtUeOtpqcDr8QRBouLbSvK1QEQC2Ut6kKs+7SIp
+ 17COz3rgUJxomLPSKY8ADUIVujj9oUz0/TAXtBOprEMKDxloSlzd8TNqsnG1tHuuae5eJLjs0xc
+ vtafVbKimmgRGEK5sWZMHm//18l+wT6C6fYWYwwEpKlwzqfXAlou1Bg==
+X-Google-Smtp-Source: AGHT+IGXdBvMYFvtzeMZPPGRxJo0RyIwX4Ufak9stZTCgW/+WILKQdVavqIQGX1DhAppUbJhOgxBuw==
+X-Received: by 2002:a50:9b1c:0:b0:5e4:97bc:6577 with SMTP id
+ 4fb4d7f45d1cf-5e8a0c14598mr6442575a12.20.1742114005864; 
+ Sun, 16 Mar 2025 01:33:25 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e816ad38f3sm4335232a12.63.2025.03.16.01.33.21
+ 4fb4d7f45d1cf-5e816ad38f3sm4335232a12.63.2025.03.16.01.33.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Mar 2025 01:33:22 -0700 (PDT)
+ Sun, 16 Mar 2025 01:33:24 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 3/5] acpi: Clear reserved bits in IORT
-Date: Sun, 16 Mar 2025 09:32:54 +0100
-Message-ID: <20250316083300.2692377-3-patrick.rudolph@9elements.com>
+Subject: [PATCH 4/5] acpi: Conditionally set mapping_offset in IORT
+Date: Sun, 16 Mar 2025 09:32:55 +0100
+Message-ID: <20250316083300.2692377-4-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250316083300.2692377-1-patrick.rudolph@9elements.com>
 References: <20250316083300.2692377-1-patrick.rudolph@9elements.com>
@@ -102,44 +102,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The IORT spec says that reserved bits must be set to zero, thus clear
-all fields of the struct before starting to fill out non-reserved
-fields.
+The spec recommends to set the mapping_offset only when there are
+ID mappings as indicated by the mapping_count field.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 ---
- lib/acpi/acpi_table.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ lib/acpi/acpi_table.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 97cd8e8ddb0..fc43862ec37 100644
+index fc43862ec37..4ad1f56e961 100644
 --- a/lib/acpi/acpi_table.c
 +++ b/lib/acpi/acpi_table.c
-@@ -615,6 +615,7 @@ int acpi_iort_add_named_component(struct acpi_ctx *ctx,
- 	node->length += strlen(device_name) + 1;
+@@ -649,7 +649,9 @@ int acpi_iort_add_rc(struct acpi_ctx *ctx,
+ 	node->type = ACPI_IORT_NODE_PCI_ROOT_COMPLEX;
+ 	node->revision = 2;
+ 	node->mapping_count = num_mappings;
+-	node->mapping_offset = sizeof(struct acpi_iort_node) + sizeof(struct acpi_iort_rc);
++	if (num_mappings)
++		node->mapping_offset = sizeof(struct acpi_iort_node) +
++				       sizeof(struct acpi_iort_rc);
  
- 	comp = (struct acpi_iort_named_component *)node->node_data;
-+	memset(comp, '\0', sizeof(struct acpi_iort_named_component));
+ 	node->length = sizeof(struct acpi_iort_node);
+ 	node->length += sizeof(struct acpi_iort_rc);
+@@ -709,7 +711,9 @@ int acpi_iort_add_smmu_v3(struct acpi_ctx *ctx,
+ 	node->type = ACPI_IORT_NODE_SMMU_V3;
+ 	node->revision = 5;
+ 	node->mapping_count = num_mappings;
+-	node->mapping_offset = sizeof(struct acpi_iort_node) + sizeof(struct acpi_iort_smmu_v3);
++	if (num_mappings)
++		node->mapping_offset = sizeof(struct acpi_iort_node) +
++				       sizeof(struct acpi_iort_smmu_v3);
  
- 	comp->node_flags = node_flags;
- 	comp->memory_properties = memory_properties;
-@@ -655,6 +656,8 @@ int acpi_iort_add_rc(struct acpi_ctx *ctx,
- 	node->length += sizeof(struct acpi_iort_id_mapping) * num_mappings;
- 
- 	rc = (struct acpi_iort_rc *)node->node_data;
-+	memset(rc, '\0', sizeof(struct acpi_iort_rc));
-+
- 	rc->mem_access_properties = mem_access_properties;
- 	rc->ats_attributes = ats_attributes;
- 	rc->pci_segment_number = pci_segment_number;
-@@ -713,6 +716,7 @@ int acpi_iort_add_smmu_v3(struct acpi_ctx *ctx,
- 	node->length += sizeof(struct acpi_iort_id_mapping) * num_mappings;
- 
- 	smmu = (struct acpi_iort_smmu_v3 *)node->node_data;
-+	memset(smmu, '\0', sizeof(struct acpi_iort_smmu_v3));
- 
- 	smmu->base_address = base_address;
- 	smmu->flags = flags;
+ 	node->length = sizeof(struct acpi_iort_node);
+ 	node->length += sizeof(struct acpi_iort_smmu_v3);
 -- 
 2.48.1
 
