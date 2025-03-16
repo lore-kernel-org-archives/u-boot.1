@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 955E1C282DE
-	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 13:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D9EC282DE
+	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 13:51:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2D2F80ECC;
-	Sun, 16 Mar 2025 14:51:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FED280ECC;
+	Sun, 16 Mar 2025 14:51:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wYslSJyv";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="FmJ8Wni/";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OW2JjT7l";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mYPqcFle";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 063EC80F4C; Sun, 16 Mar 2025 14:51:04 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id A590280F4C; Sun, 16 Mar 2025 14:51:37 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B374680C93
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 14:51:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B469380C93
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 14:51:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZFzys45Qqz9tGG;
- Sun, 16 Mar 2025 14:51:01 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZFzzW3rzCz9sGQ;
+ Sun, 16 Mar 2025 14:51:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742133061;
+ s=mail20150812; t=1742133095;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Q59R31oKI38J2Ai+tMvsUUt2UFXoqEb6R+F4Zzezwv0=;
- b=wYslSJyvlZUwoUuF5FgBfQaQRme5HzakWbLoLztnma/IcnyUOsDVglhZOMl2ykPHkVH0Og
- D7Ic3CY2mli2zd4GwTzlE0wNvzxGHwwiU4AOZeVolLBwuYhsWHVeJVcgWapPgCvJuoeMPy
- 27gJaSbpLGR7sdoieJUSxTl0E1b/FFbV8B5iN70F4DJdaqbXhdwsapXmJx8BelDtknLaxy
- qajVIHJN4BYWgc+KYVRjNQpTzdu9mg3XFxV2ne4LQZi8gzTGLM2CPyzWHSrroOebb6/AoM
- Sf9MS6/nqwmJI0I15f9p7Drj66SYAGoRffXL5YNQEbeROeSBGpYpzqXy/DqMSQ==
+ bh=gophunncjbljYTZJBb8wIsIVo3KgquSWafoNP9WB1cg=;
+ b=OW2JjT7lpZuXptFag7BUlju8IgHLcR3o//txanh07XV6MasqfQasfEILCzuySEVnuVsJqh
+ NT06f7pIKd09gX7pf5qUWaKns81/oQvPREmzaJUMCdzTB3qDlQKpf8yV/wGjMELhkuBAX+
+ XwJZuoJnpIcRuf90DrjZtHWeFWg8/wKSIjX2rUp6CBeE86w89PQ1KLObX94i5n1iu+LcO2
+ tEhX3bHb/wzlKObr5w7pVMMyNqCyKGURPNg8l75tfTc4CUOP9zzCfnfLHGJt7z9PyLJXgM
+ GGhF97NGrvVvuKjOpbylpsH6Dq1PPw61UyrUV/W0ZBTlUKi3s2hZhrzl8sN7Lg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742133059;
+ s=mail20150812; t=1742133093;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Q59R31oKI38J2Ai+tMvsUUt2UFXoqEb6R+F4Zzezwv0=;
- b=FmJ8Wni/T9tOqh1dZB2GF0O8o9CRpuLQ3GmjYlupfroAFLZpa9V7Du8hGcuB161vZGQZsR
- rnylZWrbpm70/eRmkjGLyKNtxnsaE+OJRSwzxoD/G71wKmEf9r3F1nsVu97px4AxjrB1v9
- RLYfjrtiTPHHvhLFStregL4c2IoBlLU5gW6IFW057r3E/4IUT9Nz0wPTAcixYqq7wiXeY4
- MMtlLcjeZ2ZbK7C0Qzo3a1J8Zc4HXqg12RQeyvLgXyMwCtU/XxR0l6XjRVb+T8ZY9XGHn8
- 1X7rNzJ3V0XU/W52AUgGU8F3u8TYLBn110PH64pwNZJCK7F4IYQ7/p2BW2rLKg==
+ bh=gophunncjbljYTZJBb8wIsIVo3KgquSWafoNP9WB1cg=;
+ b=mYPqcFle/+GsG2XYC8CDkPXtB85rO4/Hs5yCb/RTynkElzhv1/7r/s6aZo39FXQtJy5ePD
+ 60dgwvOImFyNZeCjnlkvsIeEZDn33vQQ65MdbAXwvjKMmxp27fL65p+h7vOHR99jcNoXlL
+ Pet9CC9inRfoxXkyt9l1pOL++bdqAkIaZtc6z42+rSS9aWq+zVeB2bn02lZ5Z/5FLDrRqc
+ cGXcDf6mmSYh3Bk1MGmsnBW1qNVEBhgz/DaUO4ysCkiQ0a9IXGmzExe9tM9xb+KBMQayp3
+ V3WJEJQeYJtcaK9tlgRt6+2oUjvyTy4migQsvOPc8gqPUkucXlkf60Etxr8rgA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: renesas: Drop stale common Makefile description
-Date: Sun, 16 Mar 2025 14:50:41 +0100
-Message-ID: <20250316135046.7843-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] arm64: renesas: Drop stale R-Car V4H SPL implementation
+ description
+Date: Sun, 16 Mar 2025 14:51:09 +0100
+Message-ID: <20250316135124.7881-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: j3nk7ixjerk6qnf48ojf5i3i7dnruxom
-X-MBO-RS-ID: 3c343d4b69c58f54f66
-X-Rspamd-Queue-Id: 4ZFzys45Qqz9tGG
+X-MBO-RS-ID: 8f4503d5da1f912cfc8
+X-MBO-RS-META: s8pnwnyem63s77ntmfwurc8oyao3owgf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,31 +83,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove stale Makefile description, this used to be valid for the
-original Makefile from which the common Makefile was made generic,
-but is no longer applicable to the common Makefile.
+The R-Car V4H SPL implementation was originally running on the Cortex-R52
+core, but this is no longer the case. Majority of the SPL now runs on the
+Cortex-A76 core. Drop the stale description.
 
-Fixes: c7d2d7f90a91 ("ARM: renesas: Simplify board Makefiles")
+Fixes: ec53fdee5bec ("arm64: renesas: Add Renesas R-Car V4H SPL implementation")
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- board/renesas/common/Makefile | 2 --
- 1 file changed, 2 deletions(-)
+ board/renesas/common/gen4-spl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/renesas/common/Makefile b/board/renesas/common/Makefile
-index 347be5cc93c..5e51b691178 100644
---- a/board/renesas/common/Makefile
-+++ b/board/renesas/common/Makefile
-@@ -1,6 +1,4 @@
- #
--# board/renesas/whitehawk/Makefile
--#
- # Copyright (C) 2024 Marek Vasut <marek.vasut+renesas@mailbox.org>
- #
- # SPDX-License-Identifier: GPL-2.0+
+diff --git a/board/renesas/common/gen4-spl.c b/board/renesas/common/gen4-spl.c
+index e46ef0a3075..ebfefab7253 100644
+--- a/board/renesas/common/gen4-spl.c
++++ b/board/renesas/common/gen4-spl.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * R-Car Gen4 Cortex-R52 SPL
++ * R-Car Gen4 SPL
+  *
+  * Copyright (C) 2024 Marek Vasut <marek.vasut+renesas@mailbox.org>
+  */
 -- 
 2.47.2
 
