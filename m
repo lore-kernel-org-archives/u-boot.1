@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AEECC282DE
-	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 19:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B93C35FF1
+	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 22:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 436DC80ECC;
-	Sun, 16 Mar 2025 20:32:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F3BF680F4C;
+	Sun, 16 Mar 2025 23:18:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dNjVpdWr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NJZfCzPs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9457D810E8; Sun, 16 Mar 2025 20:32:11 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 8E8D7810E8; Sun, 16 Mar 2025 23:18:11 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70939801DE
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 20:32:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08B5980ECC
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 23:18:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e63162a0so5561291a12.3
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 12:32:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2243803b776so18651955ad.0
+ for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 15:18:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742153528; x=1742758328; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742163487; x=1742768287; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2HNcsKQPFZ2FHZbkD/7OXxWpEAsLaCS0S6qGobISXnQ=;
- b=dNjVpdWrTsQ2imyYdMex3Mk4el22qZ1EYkyn753N/Ei89or9L7sxIucDv+lNHUPc/Z
- Rvip4PQmyDMUcQGlKYSsHFjcxCRfA3L76/2bivPXpRLAeiPK6nWM9H3prqJJgpr75cH/
- DW8oKz3hz3DeC+loq6V4ebLItqzIRwv5GZIr0FsysiLfsaNmZdY9Sym5AMvEcnZs8Dvy
- 959JorTzM/xk/YtlOZPviM/NAiuiVDg2w7o3Wv3tQB5QeVQ2UiBCuTmU13lk7efR1RO6
- sY+UnlZsPKBB60AC0wE63V++JmmDXAB8O7ykHCL6jkO2jhwEbETH1dssLcajiOLbeE7b
- napQ==
+ bh=sLtuBoxyiEKDapIh+rFWhH2O9mmjR7TA653sMrPivm0=;
+ b=NJZfCzPsxaUHw3T7Ns9byVy7N4fTYUHXwFBoZ9qsZPlGuWU5H+hGRXmwP2enFwbEZD
+ uxUxZSKDL83qxBm4DMqLWlbM5BreigfvLaRoJ0FRabwt5dEXDe3C3nmreXRQ+DujoGI6
+ uosXdopZlaW9s/GO4bgLUVGTYfnakzkudVrvaPGiIlBuhxNc+ync8/ESKL7PF0XMEBOa
+ TRhi0MUfBeyT2vkUDeFJam846JbHS/0rIQ7NRX7kXs6Ps6JIFw5UuVNS6w3MlQnw1zuX
+ GedTYVk6oKGD9jmKF7RWy4lzOfhT1+pqoUDk+IAULDuEDzfMPcMmr4DxUQ/Y9WWybFiA
+ kg/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742153528; x=1742758328;
+ d=1e100.net; s=20230601; t=1742163487; x=1742768287;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2HNcsKQPFZ2FHZbkD/7OXxWpEAsLaCS0S6qGobISXnQ=;
- b=Xms3LpPY+CxZZyE8/9jUCcruDN06vl5zBi2zbp/Y5HPDIf9DX76tcfZsbpOg+Om+8s
- etQeYGpW5xAaZFYpvuxcKeUYsFg+F8NlMx2T66ExD8WhgUi6lsRME9Auq3AF5Bg46PzD
- dnC/HIJwLbH3QtYMBKJmFLaRpuOxu3BJ5oxWbUdY6jIcvLMNCxeTR531r/+sAZSV3Dvp
- Qh9hBjoBuZkvtpmE7bgIP5E3on13OdE0tr93/khIKA4fpfEIi0IJ4L1hOID5OjSn18w8
- WGXP++HtcjuIxW2Vz/chSyElxc5OrfVYgAaSD3hiNtp4732DOKEXL4fcN+F9Zz4eZO8j
- 2oHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNdotReQE5VpyvDBLBKaN8x0D2VUB1F3ieACKJIAMN0bRjrfUpzIPMn2n6JHLzkN/jobzQFmQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzzIt8jK3Gk6HcUKm/nAVoXsu98Neg6UWD4hrwJcZSYTYsqOrCD
- HnJfQ1I4nGn8JWkc4WNDqQq16xSxlV1XcBYxjUkXWSUgAAhi23t8l7BTbMVc2t9NmJ3Xf+IGzDB
- zGniCBdD5t6wmjHtFMvkJrVwnMvI=
-X-Gm-Gg: ASbGncuMtthpz3rLaXy/K/VNtOm7Lw+1OVDumnJSyAAHVuBxd5ZyJT+HC3o9b3JHmWi
- PJlPtyaocARCxvUi/06ZPHaZWRuG1dxpr9035wYhThN8dl+eHrkmih2XZVgUgwtCJSo4GdQ+JlV
- F4EYLRoIEakoa02DQOUXVMzN5GPjhxJUfIazM/CPw5v5gdSHIjuWq1tW8BJbs=
-X-Google-Smtp-Source: AGHT+IE5wBYu155s0QdOVDlKeQ2KQppTygVW872ZJkAB9bR/0hnnIOAHj/T5MmjYY2HywQ/Osm03DmEbhThTLQVOoHE=
-X-Received: by 2002:a05:6402:210e:b0:5e4:a1e8:3f04 with SMTP id
- 4fb4d7f45d1cf-5e89f152ab5mr6848722a12.8.1742153527566; Sun, 16 Mar 2025
- 12:32:07 -0700 (PDT)
+ bh=sLtuBoxyiEKDapIh+rFWhH2O9mmjR7TA653sMrPivm0=;
+ b=GxUd7BxGeQ8OuOUkB/K0CpVsMYgdQ3GL1cHKPuz0G1rksCQ9LK+8vkehINAbhZn/sD
+ XslRvIDOQsy9To2agbi6RcQwdlStOK3GdafgiyD+GhPZMtMabkevwBMX8WRRBTmKk6Ea
+ A9RTMLftVea4Trp6CTkEgAFIjqw5nOpApjY7RpXuiu8InxnrMlAqHZfOYhfgZOYFGJcy
+ mugb1TX5/+Q0rshvsWiAu3cQlRMQrO13iPZcYjxge10RJ4CMUHn6EJRRHja0DmlqqwO0
+ zAP557YVrHyTXLDO89/Mrn6fr02x6fZlBRg4I2lfjOwZRSoi8QYKnoXL2V+jsIRIJc6b
+ Lsdw==
+X-Gm-Message-State: AOJu0YxPnVZi/nWNgYgMZJqS7XfLZ/2zCBTVwFNLBHA8libKQyzpVMYX
+ N6+x5gJradOLwoRzytqbOPMecBd7QN7ZEYdEi5FlvsDAuFn6U6p3UoZaLydygZW28YwmOMsuSLB
+ VJ8CDUS/cF7O7I/uUWQ6E+/N6cew=
+X-Gm-Gg: ASbGnctI+eEi1LYQRGzM9/CPqXBq8NiCGaD7J4ByuJiXa0NM9gsB9ey1fW0bObwdmP6
+ xrF/OtJqRyX2mQ5a+al8Kgl829q95eAmv3F2kx350oeSZo76nYSdXKgLQF9sM126VBniEst0pCH
+ y5l7lLurfQw24CU5aDUtRT6fHk8t5jj6po8QJB
+X-Google-Smtp-Source: AGHT+IEpCbTnlWGoOJYyeP2ojuz/OkI9vt9CABW3VbpU+a09tFQCCGRfUHGBVRi4g7yEDEoxNLzuTIKUF8N/lGv4giw=
+X-Received: by 2002:a17:90b:4a42:b0:2ff:53ad:a0ec with SMTP id
+ 98e67ed59e1d1-30151cd1a0amr10903922a91.21.1742163487418; Sun, 16 Mar 2025
+ 15:18:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250315221813.1265193-1-CFSworks@gmail.com>
- <ACC5355E-F949-42BD-8BDC-C2C8C740DB34@gmx.de>
-In-Reply-To: <ACC5355E-F949-42BD-8BDC-C2C8C740DB34@gmx.de>
-From: Sam Edwards <cfsworks@gmail.com>
-Date: Sun, 16 Mar 2025 12:31:55 -0700
-X-Gm-Features: AQ5f1JpuYF6E34wKVghjfe7do1AjoPXK6Z1g6L5lYlpsEcZ-5UL19xEG_kq8zIw
-Message-ID: <CAH5Ym4ipjaOiY36x+1tinFqudjpwtRRtcXRu7P8311AAKmZDwg@mail.gmail.com>
-Subject: Re: [PATCH v2 00/15] Various toolchain compatibility
- fixes/improvements
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de
+References: <20250312003041.110023-1-aford173@gmail.com>
+ <CAOMZO5DRn08Q58PeHqi=1V8ZRv6B1+L_CB0NA=arQ2u6XUyi8Q@mail.gmail.com>
+ <CAHCN7x+grtVs1JDvfth+7VdT1Xm=_GSBsr0PD1XQSPxpRBZcfw@mail.gmail.com>
+ <CAOMZO5B0MgkAoBww0pPVnv4TAyqRmGJSn6hBwivgc2ZtpF+fyQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5B0MgkAoBww0pPVnv4TAyqRmGJSn6hBwivgc2ZtpF+fyQ@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Sun, 16 Mar 2025 17:17:56 -0500
+X-Gm-Features: AQ5f1JpGIXIrJKIiT8rxIaDjCO-Fc8Qs18eVxfKZKMeBymj9LJEGhFJmk8hghWY
+Message-ID: <CAHCN7xLi+MHsQaG=vyOcyM5d5ontn=+W1kL0op1HedmkbDt=oQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] clk: imx: Use Clock frameworkt to register UART
+ clocks
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -101,118 +105,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Mar 15, 2025 at 10:27=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
+On Sat, Mar 15, 2025 at 11:17=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 >
-> Am 15. M=C3=A4rz 2025 23:17:58 MEZ schrieb Sam Edwards <cfsworks@gmail.co=
-m>:
-> >Hello again U-Boot list,
-> >
-> >This is v2 of my "misc. fixes" series, sent to prepare the codebase for =
-more
-> >direct LLVM support in the near future. This series contains several fix=
-es that
-> >I found in the process of preparing that support and which address issue=
-s
-> >independent of any future feature or enhancement. I am sending these now=
-, both
-> >so that their inclusion is not delayed by discussion on my upcoming seri=
-es and
-> >to make the latter more manageable.
-> >
-> >PLEASE APPLY PARTIALLY! I have tried to sort these so that the most
-> >straightforward changes come first. If any patch proves contentious, you=
- can
-> >either skip it or stop applying the series at that point. Any patches th=
-at need
-> >revisions will be included in a future series, but I'm trying to avoid t=
-here
-> >being a v3 of *this* series. :)
-> >
-> >Happy Saturday,
-> >Sam
+> Hi Adam,
 >
-> Hello Sam,
+> On Sat, Mar 15, 2025 at 12:37=E2=80=AFPM Adam Ford <aford173@gmail.com> w=
+rote:
 >
-> I wonder why there are only ARM and X86 specific patches in this series .=
- Wouldn't some of the changes also be needed for RISC-V and other architect=
-ures?
+> > I ran the config that failed on my V3, and it passes that build test,
+> > but I don't want to waste your time if it fails on others I don't know
+> > about.  Can you point me to documentation on how to test this across
+> > multiple boards/platforms before I resubmit it?
+>
+> Please check doc/develop/ci_testing.rst
+>
+> "The second way is to use GitHub.  This requires a GitHub account
+> and to fork the repository at https://github.com/u-boot/u-boot and to the=
+n
+> submit a pull request as this will trigger an Azure pipeline run.  Clicki=
+ng on
+> your pull request on the list at https://github.com/u-boot/u-boot/pulls a=
+nd
+> then the "Checks" tab will show the results."
 
-Hi Heinrich,
+The doc you referred me to states:  Currently, we support running
+GitLab CI pipelines only for custodians, due to the resources the
+project has available
 
-The breakdown of arch-specific patches is: 6 for ARM, 1 for RISC-V, 1
-for X86. This distribution was only because ARM needed more work, not
-because it received more attention. (Some architectures, like
-"sandbox," required no fixes, and MIPS appears to need only
-compiler-side improvements at this time, for example.)
+I tried pushing my branch to Github, but I don't have permission.  I
+tried pushing it to my own github account, but it doesn't appear the
+CI/CD stuff work.  I looked at the log provided from the pipeline, and
+I have been able to successfully build for that machine along with a
+couple others that I have manually tested.  Are you OK if I submit, or
+is there something you want me to try before I do it?  I have a second
+series I would like to submit soon which reduce my SPL size when
+enabling CLK and CCF from:
 
->
-> For EFI we have carved out a linker script include file to harmonize the =
-linker scripts used by ARM and RISC-V. Shouldn't we do the same for main U-=
-Boot?
+   text    data     bss     dec     hex filename
+  95988   22668      80 118736   1cfd0 spl/u-boot-spl
+to
+  91898   22668      80 114646   1bfd6 spl/u-boot-spl
 
-I like the idea in principle, but I'm skeptical because EFI
-applications have a much more uniform and constrained memory layout
-compared to raw binaries on [vendor-specific board]. So while it's
-possible to mostly unify the memory layout, doing so would take
-significantly more effort than with EFI. Plus, most of our supported
-architectures don't have EFI at all, so unifying EFI across a few
-architectures isn't a strong indicator that this approach would scale
-well. Also, Linux doesn't do this either, and I'd expect they would
-have if it were a good idea.
+It requires this series in order to accomplish some of these goals.
 
-That said, I'd prefer to keep this patchset focused on fixing these
-immediate issues rather than reworking the linker scripts more
-broadly. If we want to explore that as a separate effort, I think it
-would need a deeper discussion.
-
-Happy Sunday,
-Sam
-
->
-> Best regards
->
-> Heinrich
->
-> >
-> >Changes v1->v2:
-> >- Carried forward acked/reviewed tags
-> >- Dropped two patches (one was incorrect, the other can be fixed differe=
-ntly)
-> >- Minor phrasing changes to commit messages
-> >- Instead of removing `ENTRY(_start)`, I instead added `.globl _start` w=
-here
-> >  appropriate, in the EFI apps
-> >
-> >Sam Edwards (15):
-> >  arm: Remove stray .mmutable reference in linker script
-> >  arm: Exclude eabi_compat from LTO
-> >  arm: Add __aeabi_memclr in eabi_compat
-> >  arm: Add aligned-memory aliases to eabi_compat
-> >  arm: Discard unwanted sections in linker script
-> >  arm: Replace 'adrl' in EFI crt0
-> >  x86: Fix call64's section flags
-> >  makefile: Avoid objcopy --gap-fill for .hex/.srec
-> >  makefile: Add `norelro` linker option
-> >  makefile: Add READELF command variable
-> >  arm: riscv: efi: Export _start symbol from crt0_*_efi stubs
-> >  efi_loader: Move .dynamic out of .text in EFI
-> >  scripts/Makefile.lib: efi: Preserve the .dynstr section as well
-> >  spl: riscv: opensbi: Error on misaligned FDT
-> >  spl: Align FDT load address
-> >
-> > Makefile                        | 14 ++++++++------
-> > arch/arm/cpu/u-boot.lds         | 29 ++++++++++-------------------
-> > arch/arm/lib/Makefile           |  1 +
-> > arch/arm/lib/crt0_aarch64_efi.S |  1 +
-> > arch/arm/lib/crt0_arm_efi.S     |  4 +++-
-> > arch/arm/lib/eabi_compat.c      | 17 +++++++++++++++++
-> > arch/riscv/lib/crt0_riscv_efi.S |  1 +
-> > arch/x86/cpu/i386/call64.S      |  2 +-
-> > common/spl/spl_fit.c            |  2 +-
-> > common/spl/spl_opensbi.c        |  5 +++++
-> > lib/efi_loader/elf_efi.ldsi     |  6 +++---
-> > scripts/Makefile.lib            |  4 ++--
-> > 12 files changed, 53 insertions(+), 33 deletions(-)
-> >
->
+adam
