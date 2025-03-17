@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71D30C35FF1
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:15:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C80FC28B2F
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B587811B2;
-	Mon, 17 Mar 2025 04:15:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8562781100;
+	Mon, 17 Mar 2025 04:15:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742181303;
-	bh=x0XMnCE0CwFMMRVRuP5jYBLN8d0WJwI43+JB7e2WfhU=;
+	s=phobos-20191101; t=1742181305;
+	bh=WjLH/stAB2VFyeD2cYwR2qm1z7tq+IKfzvEyaaHvPXI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zUynMzBn/iYP6YCXwIWr575V28b2im8C8m5KK65oaf4caE4bmOiJphpROcItqeW9O
-	 dBsKgj/01BsmUW15hRUfzUSGVOjvS0gUVAyJfoo+RTTO4/BeitpHEzyCZ1WPtp3VDr
-	 OW+l8PqY3DTbb10uKv3KYKOxu1wzYhJwjF7ZyJMS6Zy4onCq3fm/xTuOnt6Hfb4KBi
-	 FAv5/5DWaMdEuK40V+FbuEv1B58zuFJjf8wOgGa3Y0qWq5ucmd1XmUcPIb+1et1FZb
-	 qZ7wdJkc1xYtfNtzx40I38tpFNnYGH0ATBdt0m5SdGz5rD8dJhVyzHLaccjz7iR3GT
-	 GhaVz7pEIZvdA==
+	b=MlQjB9nYSS5ZIPrt7/cSw+NxH4JG4LJ+AFwpWKeYoH4yccA3/QHs5SmFO7vcmwirq
+	 q0eMr1URooH1MoggbxzVu0nhpFYsOpKnhEDZuKSVbnhZ9syjNlnwjjLlOLBFjyaNhi
+	 jEnhQScdergpqaJblYkLZSyC1KPle/j9we9JvrJoxF3ZIlhbrbk7rH+H6/UkAd7ZXF
+	 8KtTn+f0trbQUXLP280ocXaIznu/ixO89lI6ecY2UuLrHwplY1JVX2eYw4baXu7r3Y
+	 5m0zvdf/83pn7EMYYl5p46/CEZDtIUIqnMOn1ONZFhVU4P5QS5qB2m94+BEhR64M1o
+	 dibJrCFb8oG8Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21B8C81B4B; Mon, 17 Mar 2025 04:15:00 +0100 (CET)
+ id 430A2817EC; Mon, 17 Mar 2025 04:15:04 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAE4181100
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:14:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E74F8810F5
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:15:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Ye8hX0qH"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="gSaneHxI"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5D21F101F71C0; Mon, 17 Mar 2025 04:14:56 +0100 (CET)
+ with ESMTPSA id 5259D101F71C2; Mon, 17 Mar 2025 04:15:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742181297; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1742181301; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=x0XMnCE0CwFMMRVRuP5jYBLN8d0WJwI43+JB7e2WfhU=;
- b=Ye8hX0qHpUJtbCVTwEZrts5L/J6XssTsQRiF+7rjLbhyWRy0BLjI9JYV452+rd+uwtTo2A
- cWlHTpd2rhUntYo3CJMBEbdZ52hBsdPlaldaoK1d11k/FGtBZGkauMA2TZA6MkXg1SJrvu
- DfQXrXsDkcwph7KirWVgm4rdvUZLjsBhIXbav2OxkgS5/tD7Q0jKw2ELxLa25Sd3h44x2J
- H5wWr2IpUmuCN58D8uG1XhyC9dJwS2nERp5x50hVWrz4D92z8b9oYKyEfjgjo1RQLVLnSJ
- Xs/dc6MCRiHNA6JQyBRLl0xvmp8i3vwmsWHjkMI9O4QN8ZH0KBEWwVUrMobgYg==
+ bh=WjLH/stAB2VFyeD2cYwR2qm1z7tq+IKfzvEyaaHvPXI=;
+ b=gSaneHxI5KSo/Fs25DnX1CMAoDT23TLk5rPPQqQK3rhDc5Rq8LZwVgYdAxwPk78kQf0HjH
+ XY1YKYBqDFWNjbTQs6/QoRD7G8Ur9Oe4I+Jssu1BrJxWHIqfAorqDdx3wbg1OWzTZtekVp
+ tFvQPrlLyxNKY1SlwaK7JxgJ4jjLDQuQPq5MnmKCCTx3ZHGFT9AMxqwhJKGD+2atAkqY+Z
+ C90lZA02PqD3HG4rlzVhtE/GA15l4g6WZHXaPD3mik9bIsw0jwPxth/x08RhSP94Mcy8U/
+ mopJxLe9cUOWiGAFQfsv7CSeSuKwLMP6W5/YbIYFoh+y4twIZm41gPL9zRroGg==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
@@ -57,13 +57,14 @@ Cc: Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 05/11] fs: Add generic fs_devread() implementation
-Date: Mon, 17 Mar 2025 04:12:44 +0100
-Message-ID: <20250317031418.223019-6-marex@denx.de>
+Subject: [PATCH v3 08/11] fs: exfat: Fix conversion overflow errors
+Date: Mon, 17 Mar 2025 04:12:47 +0100
+Message-ID: <20250317031418.223019-9-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250317031418.223019-1-marex@denx.de>
 References: <20250317031418.223019-1-marex@denx.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -82,9 +83,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add generic implementation of write into a block device to be used
-by filesystem implementations. This is a pair function for already
-existing fs_devread().
+Fix the following conversion overflow errors. The UTF8-to-UTF16
+conversion is done through 32bit wchar_t, but U-Boot codebase is
+built with -fshort-wchar which limits wchar_t to 16bit. Replace
+the built-in wchar_t with u32 to assure the intermediate type is
+32bit.
+
+"
+fs/exfat/utf.c: In function ‘utf8_to_wchar’:
+fs/exfat/utf.c:165:23: warning: overflow in conversion from ‘int’ to ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short unsigned int)*input << 18 & 1835008’ to ‘0’ [-Woverflow]
+  165 |                 *wc = ((wchar_t) input[0] & 0x07) << 18;
+      |                       ^
+fs/exfat/utf.c:170:23: warning: overflow in conversion from ‘int’ to ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short unsigned int)*input << 24 & 50331648’ to ‘0’ [-Woverflow]
+  170 |                 *wc = ((wchar_t) input[0] & 0x03) << 24;
+      |                       ^
+fs/exfat/utf.c:175:23: warning: overflow in conversion from ‘int’ to ‘wchar_t’ {aka ‘short unsigned int’} changes value from ‘(int)(short unsigned int)*input << 30 & 1073741824’ to ‘0’ [-Woverflow]
+  175 |                 *wc = ((wchar_t) input[0] & 0x01) << 30;
+      |                       ^
+"
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -99,135 +115,117 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: No change
+V2: Rework the patch, replace wchar_t with u32
 V3: No change
 ---
- fs/fs_internal.c      | 102 ++++++++++++++++++++++++++++++++++++++++++
- include/fs_internal.h |   2 +
- 2 files changed, 104 insertions(+)
+ fs/exfat/utf.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/fs/fs_internal.c b/fs/fs_internal.c
-index 51c1719361b..ab4847ac257 100644
---- a/fs/fs_internal.c
-+++ b/fs/fs_internal.c
-@@ -92,3 +92,105 @@ int fs_devread(struct blk_desc *blk, struct disk_partition *partition,
- 	}
- 	return 1;
+diff --git a/fs/exfat/utf.c b/fs/exfat/utf.c
+index b1d09e76478..8a28e7621ca 100644
+--- a/fs/exfat/utf.c
++++ b/fs/exfat/utf.c
+@@ -23,7 +23,7 @@
+ #include "exfat.h"
+ #include <errno.h>
+ 
+-static char* wchar_to_utf8(char* output, wchar_t wc, size_t outsize)
++static char* wchar_to_utf8(char* output, u32 wc, size_t outsize)
+ {
+ 	if (wc <= 0x7f)
+ 	{
+@@ -82,14 +82,14 @@ static char* wchar_to_utf8(char* output, wchar_t wc, size_t outsize)
+ 	return output;
  }
-+
-+int fs_devwrite(struct blk_desc *blk, struct disk_partition *partition,
-+	        lbaint_t sector, int byte_offset, int byte_len, const char *buf)
-+{
-+	unsigned block_len;
-+	int log2blksz;
-+	ALLOC_CACHE_ALIGN_BUFFER(char, sec_buf, (blk ? blk->blksz : 0));
-+	if (blk == NULL) {
-+		log_err("** Invalid Block Device Descriptor (NULL)\n");
-+		return 0;
-+	}
-+	log2blksz = blk->log2blksz;
-+
-+	/* Check partition boundaries */
-+	if ((sector + ((byte_offset + byte_len - 1) >> log2blksz))
-+	    >= partition->size) {
-+		log_debug("read outside partition " LBAFU "\n", sector);
-+		return 0;
-+	}
-+
-+	/* Get the read to the beginning of a partition */
-+	sector += byte_offset >> log2blksz;
-+	byte_offset &= blk->blksz - 1;
-+
-+	log_debug(" <" LBAFU ", %d, %d>\n", sector, byte_offset, byte_len);
-+
-+	if (byte_offset != 0) {
-+		int readlen;
-+		/* read first part which isn't aligned with start of sector */
-+		if (blk_dread(blk, partition->start + sector, 1,
-+			      (void *)sec_buf) != 1) {
-+			log_err(" ** %s read error **\n", __func__);
-+			return 0;
-+		}
-+
-+		readlen = min((int)blk->blksz - byte_offset,
-+			      byte_len);
-+		memcpy(sec_buf + byte_offset, buf, readlen);
-+
-+		if (blk_dwrite(blk, partition->start + sector, 1,
-+			      (void *)sec_buf) != 1) {
-+			log_err(" ** %s write error **\n", __func__);
-+			return 0;
-+		}
-+		buf += readlen;
-+		byte_len -= readlen;
-+		sector++;
-+	}
-+
-+	if (byte_len == 0)
-+		return 1;
-+
-+	/* write sector aligned part */
-+	block_len = byte_len & ~(blk->blksz - 1);
-+
-+	if (block_len == 0) {
-+		if (blk_dread(blk, partition->start + sector, 1,
-+			  (void *)sec_buf) != 1) {
-+			log_err(" ** %s read error **\n", __func__);
-+			return 0;
-+		}
-+
-+		memcpy(sec_buf, buf, byte_len);
-+
-+		if (blk_dwrite(blk, partition->start + sector, 1,
-+			      (void *)sec_buf) != 1) {
-+			log_err(" ** %s write error **\n", __func__);
-+			return 0;
-+		}
-+
-+		return 1;
-+	}
-+
-+	if (blk_dwrite(blk, partition->start + sector,
-+		       block_len >> log2blksz, (void *)buf) !=
-+			block_len >> log2blksz) {
-+		log_err(" ** %s write error - block\n", __func__);
-+		return 0;
-+	}
-+	block_len = byte_len & ~(blk->blksz - 1);
-+	buf += block_len;
-+	byte_len -= block_len;
-+	sector += block_len / blk->blksz;
-+
-+	if (byte_len != 0) {
-+		/* read rest of data which are not in whole sector */
-+		if (blk_dread(blk, partition->start + sector, 1,
-+			      (void *)sec_buf) != 1) {
-+			log_err("* %s read error - last part **\n", __func__);
-+			return 0;
-+		}
-+
-+		memcpy(sec_buf, buf, byte_len);
-+
-+		if (blk_dwrite(blk, partition->start + sector, 1,
-+			      (void *)sec_buf) != 1) {
-+			log_err(" ** %s write error - last part **\n", __func__);
-+			return 0;
-+		}
-+	}
-+	return 1;
-+}
-diff --git a/include/fs_internal.h b/include/fs_internal.h
-index 07f6bc5ea40..351582db61a 100644
---- a/include/fs_internal.h
-+++ b/include/fs_internal.h
-@@ -12,5 +12,7 @@
  
- int fs_devread(struct blk_desc *, struct disk_partition *, lbaint_t, int, int,
- 	       char *);
-+int fs_devwrite(struct blk_desc *, struct disk_partition *, lbaint_t, int, int,
-+	        const char *);
+-static const le16_t* utf16_to_wchar(const le16_t* input, wchar_t* wc,
++static const le16_t* utf16_to_wchar(const le16_t* input, u32* wc,
+ 		size_t insize)
+ {
+ 	if ((le16_to_cpu(input[0]) & 0xfc00) == 0xd800)
+ 	{
+ 		if (insize < 2 || (le16_to_cpu(input[1]) & 0xfc00) != 0xdc00)
+ 			return NULL;
+-		*wc = ((wchar_t) (le16_to_cpu(input[0]) & 0x3ff) << 10);
++		*wc = ((u32) (le16_to_cpu(input[0]) & 0x3ff) << 10);
+ 		*wc |= (le16_to_cpu(input[1]) & 0x3ff);
+ 		*wc += 0x10000;
+ 		return input + 2;
+@@ -108,7 +108,7 @@ int exfat_utf16_to_utf8(char* output, const le16_t* input, size_t outsize,
+ 	const le16_t* iend = input + insize;
+ 	char* optr = output;
+ 	const char* oend = output + outsize;
+-	wchar_t wc;
++	u32 wc;
  
- #endif /* __U_BOOT_FS_INTERNAL_H__ */
+ 	while (iptr < iend)
+ 	{
+@@ -136,7 +136,7 @@ int exfat_utf16_to_utf8(char* output, const le16_t* input, size_t outsize,
+ 	return 0;
+ }
+ 
+-static const char* utf8_to_wchar(const char* input, wchar_t* wc,
++static const char* utf8_to_wchar(const char* input, u32* wc,
+ 		size_t insize)
+ {
+ 	size_t size;
+@@ -147,32 +147,32 @@ static const char* utf8_to_wchar(const char* input, wchar_t* wc,
+ 
+ 	if ((input[0] & 0x80) == 0)
+ 	{
+-		*wc = (wchar_t) input[0];
++		*wc = (u32) input[0];
+ 		return input + 1;
+ 	}
+ 	else if ((input[0] & 0xe0) == 0xc0)
+ 	{
+-		*wc = ((wchar_t) input[0] & 0x1f) << 6;
++		*wc = ((u32) input[0] & 0x1f) << 6;
+ 		size = 2;
+ 	}
+ 	else if ((input[0] & 0xf0) == 0xe0)
+ 	{
+-		*wc = ((wchar_t) input[0] & 0x0f) << 12;
++		*wc = ((u32) input[0] & 0x0f) << 12;
+ 		size = 3;
+ 	}
+ 	else if ((input[0] & 0xf8) == 0xf0)
+ 	{
+-		*wc = ((wchar_t) input[0] & 0x07) << 18;
++		*wc = ((u32) input[0] & 0x07) << 18;
+ 		size = 4;
+ 	}
+ 	else if ((input[0] & 0xfc) == 0xf8)
+ 	{
+-		*wc = ((wchar_t) input[0] & 0x03) << 24;
++		*wc = ((u32) input[0] & 0x03) << 24;
+ 		size = 5;
+ 	}
+ 	else if ((input[0] & 0xfe) == 0xfc)
+ 	{
+-		*wc = ((wchar_t) input[0] & 0x01) << 30;
++		*wc = ((u32) input[0] & 0x01) << 30;
+ 		size = 6;
+ 	}
+ 	else
+@@ -192,7 +192,7 @@ static const char* utf8_to_wchar(const char* input, wchar_t* wc,
+ 	return input + size;
+ }
+ 
+-static le16_t* wchar_to_utf16(le16_t* output, wchar_t wc, size_t outsize)
++static le16_t* wchar_to_utf16(le16_t* output, u32 wc, size_t outsize)
+ {
+ 	if (wc <= 0xffff) /* if character is from BMP */
+ 	{
+@@ -216,7 +216,7 @@ int exfat_utf8_to_utf16(le16_t* output, const char* input, size_t outsize,
+ 	const char* iend = input + insize;
+ 	le16_t* optr = output;
+ 	const le16_t* oend = output + outsize;
+-	wchar_t wc;
++	u32 wc;
+ 
+ 	while (iptr < iend)
+ 	{
 -- 
 2.47.2
 
