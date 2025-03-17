@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5481BC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 06:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B2B5C35FF3
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 06:58:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8AD380FEC;
-	Mon, 17 Mar 2025 07:58:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3AD3A81A0C;
+	Mon, 17 Mar 2025 07:58:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="WwzqFi5D";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="KK4ldi8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6477281A0E; Mon, 17 Mar 2025 07:57:59 +0100 (CET)
+ id C694480FEC; Mon, 17 Mar 2025 07:57:59 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DB7880FEC
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:57:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B94C81BC5
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:57:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1648c5b74=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1742194676; x=1773730676;
+ t=1742194677; x=1773730677;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=j+1xO1NhbjsxMeqNnimztD70HXpgKNd7LqRqAdnSt3Y=;
- b=WwzqFi5Dlw8Mjw/XSEMAyH2WzoH737UPuiZ048ifiw+JnicPPv1+IOjh
- MWHKK9qrRV4+XAjtyD2BZCi7jBEl6JUlMlJcUPIe1VrVK9TMqk5BFlOyU
- igGHMkH8K+L7Dl9NAU5QsmLDTTBDDpDyQXPG363dOvwnHYdx3q81Am5bh
- 9bd7cr/XfxsSLtlCulmdVDSFp2MEBfNsd+Nt4TZOS6OYMrRwXzUALUpnP
- Jy94zwN13kIyUs6CNNlOjZnDXRBL4nyB0zuNfO7D6APGcKG6Ahd68fiFh
- 9aeqRWHnsitIxLvLgKxUbGeOIshNkOqSvKpQ9H4p8AkxQrGqcqXW/Bz5X g==;
+ bh=9XRV/7LdBQDHmmJEZu96mwjEcxE262CzG/C3DmEyV18=;
+ b=KK4ldi8ckLGtL1bwutPgvrEmC09mYhMiG6wZFJFmDOKSMpUKACx1IXw7
+ 4cgyLIgNDZQHazcAg9gCYFzWxj3RL5B+p8PlauN9dcJt5DTq3y4QOFOgb
+ 6Fa8yLcUorPl0AYfqRqsnmsJ5i/fOHPWNeFxEBEyfu9t7y7TOZ4t0zX9J
+ hKw+jEI2M064sjWO64XXst/8vRhYvQEVKX7u2/W2psGYLSTyxUl7IZT6G
+ W6gUruZqU2bUnh8SqZsysc4deeYCUFW3kJbkqorGzF5w7eKSu6MUTrw6z
+ sXknqr7/OMRpKuHDynJGXecrzwcf5CbtrVKq6LOjMOZ9QH17HAEv6A3Mp A==;
 X-CSE-ConnectionGUID: Sws07wq8RW+JT7IS8AtykQ==
-X-CSE-MsgGUID: cRmEaOcBTYainixszzf71g==
-X-IronPort-AV: E=Sophos;i="6.14,253,1736838000"; d="scan'208";a="39670427"
+X-CSE-MsgGUID: o7cbotvGTp+Bnxd9S2F/IA==
+X-IronPort-AV: E=Sophos;i="6.14,253,1736838000"; d="scan'208";a="39670438"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Mar 2025 23:57:54 -0700
+ 16 Mar 2025 23:57:55 -0700
 Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Sun, 16 Mar 2025 23:57:14 -0700
+ 15.1.2507.44; Sun, 16 Mar 2025 23:57:22 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Sun, 16 Mar 2025 23:57:07 -0700
+ 15.1.2507.44 via Frontend Transport; Sun, 16 Mar 2025 23:57:14 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
@@ -62,10 +62,10 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <william.zhang@broadcom.com>, <nicolas.ferre@microchip.com>,
  <u-boot@lists.denx.de>
 CC: <manikandan.m@microchip.com>
-Subject: [PATCH v4 6/8] ARM: dts: at91: sam9x75_curiosity: add tweaks for
- sam9x75 curiosity board
-Date: Mon, 17 Mar 2025 12:26:07 +0530
-Message-ID: <20250317065609.55071-7-manikandan.m@microchip.com>
+Subject: [PATCH v4 7/8] board: sam9x75_curiosity: Add support for sam9x75
+ curiosity
+Date: Mon, 17 Mar 2025 12:26:08 +0530
+Message-ID: <20250317065609.55071-8-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250317065609.55071-1-manikandan.m@microchip.com>
 References: <20250317065609.55071-1-manikandan.m@microchip.com>
@@ -88,128 +88,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the SoC and board DT are already available in dts/upstream,
-add the difference from upstream DTS to at91-sam9x75_curiosity-u-boot.dtsi
+Add board specific functions for sam9x75 curiosity
 
 Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- .../dts/at91-sam9x75_curiosity-u-boot.dtsi    | 107 ++++++++++++++++++
- 1 file changed, 107 insertions(+)
- create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+ arch/arm/mach-at91/Kconfig                    |  8 +++
+ board/atmel/sam9x75_curiosity/Kconfig         | 15 +++++
+ board/atmel/sam9x75_curiosity/MAINTAINERS     |  6 ++
+ board/atmel/sam9x75_curiosity/Makefile        |  7 ++
+ .../sam9x75_curiosity/sam9x75_curiosity.c     | 66 +++++++++++++++++++
+ include/configs/sam9x75_curiosity.h           | 23 +++++++
+ 6 files changed, 125 insertions(+)
+ create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
+ create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
+ create mode 100644 board/atmel/sam9x75_curiosity/Makefile
+ create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+ create mode 100644 include/configs/sam9x75_curiosity.h
 
-diff --git a/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
+index 5429257875d..d21534ce883 100644
+--- a/arch/arm/mach-at91/Kconfig
++++ b/arch/arm/mach-at91/Kconfig
+@@ -158,6 +158,13 @@ config TARGET_SAM9X60_CURIOSITY
+         select BOARD_EARLY_INIT_F
+         select BOARD_LATE_INIT
+ 
++config TARGET_SAM9X75_CURIOSITY
++	bool "SAM9X75 CURIOSITY board"
++	select SAM9X7
++	select BOARD_EARLY_INIT_F
++	select BOARD_LATE_INIT
++	imply OF_UPSTREAM
++
+ config TARGET_SAMA5D2_PTC_EK
+ 	bool "SAMA5D2 PTC EK board"
+ 	select BOARD_EARLY_INIT_F
+@@ -355,6 +362,7 @@ source "board/atmel/at91sam9rlek/Kconfig"
+ source "board/atmel/at91sam9x5ek/Kconfig"
+ source "board/atmel/sam9x60ek/Kconfig"
+ source "board/atmel/sam9x60_curiosity/Kconfig"
++source "board/atmel/sam9x75_curiosity/Kconfig"
+ source "board/atmel/sama7g5ek/Kconfig"
+ source "board/atmel/sama7g54_curiosity/Kconfig"
+ source "board/atmel/sama5d2_ptc_ek/Kconfig"
+diff --git a/board/atmel/sam9x75_curiosity/Kconfig b/board/atmel/sam9x75_curiosity/Kconfig
 new file mode 100644
-index 00000000000..dc4fef950ec
+index 00000000000..8ea93a21aa3
 --- /dev/null
-+++ b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
-@@ -0,0 +1,107 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++++ b/board/atmel/sam9x75_curiosity/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_SAM9X75_CURIOSITY
++
++config SYS_BOARD
++	default "sam9x75_curiosity"
++
++config SYS_VENDOR
++	default "atmel"
++
++config SYS_SOC
++	default "at91"
++
++config SYS_CONFIG_NAME
++	default "sam9x75_curiosity"
++
++endif
+diff --git a/board/atmel/sam9x75_curiosity/MAINTAINERS b/board/atmel/sam9x75_curiosity/MAINTAINERS
+new file mode 100644
+index 00000000000..a175053418f
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/MAINTAINERS
+@@ -0,0 +1,6 @@
++SAM9X75 CURIOSITY BOARD
++M:	Manikandan Muralidharan <manikandan.m@microchip.com>
++S:	Maintained
++F:	board/atmel/sam9x75_curiosity/
++F:	include/configs/sam9x75_curiosity.h
++F:	arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+diff --git a/board/atmel/sam9x75_curiosity/Makefile b/board/atmel/sam9x75_curiosity/Makefile
+new file mode 100644
+index 00000000000..1f36d613229
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++#
++# Author: Manikandan Muralidharan <manikandan.m@microchip.com>
++
++obj-y += sam9x75_curiosity.o
+diff --git a/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c b/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+new file mode 100644
+index 00000000000..4e7c5667e21
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * at91-sam9x75_curiosity-u-boot.dtsi - Device Tree file for SAM9X75
-+ * CURIOSITY board.
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ *
++ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
++ */
++
++#include <debug_uart.h>
++#include <init.h>
++#include <asm/io.h>
++#include <asm/arch/at91sam9_smc.h>
++#include <asm/arch/at91_common.h>
++#include <asm/arch/at91_rstc.h>
++#include <asm/arch/at91_sfr.h>
++#include <asm/arch/clk.h>
++#include <asm/arch/gpio.h>
++#include <asm/mach-types.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++void at91_prepare_cpu_var(void);
++
++int board_late_init(void)
++{
++	at91_prepare_cpu_var();
++
++	return 0;
++}
++
++#if (IS_ENABLED(CONFIG_DEBUG_UART_BOARD_INIT))
++static void board_dbgu0_hw_init(void)
++{
++	at91_pio3_set_a_periph(AT91_PIO_PORTA, 26, 1);	/* DRXD */
++	at91_pio3_set_a_periph(AT91_PIO_PORTA, 27, 1);	/* DTXD */
++
++	at91_periph_clk_enable(ATMEL_ID_DBGU);
++}
++
++void board_debug_uart_init(void)
++{
++	board_dbgu0_hw_init();
++}
++#endif
++
++int board_early_init_f(void)
++{
++	return 0;
++}
++
++int board_init(void)
++{
++	/* address of boot parameters */
++	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
++
++	return 0;
++}
++
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
++
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
+diff --git a/include/configs/sam9x75_curiosity.h b/include/configs/sam9x75_curiosity.h
+new file mode 100644
+index 00000000000..62a855d9f01
+--- /dev/null
++++ b/include/configs/sam9x75_curiosity.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Configuration settings for the SAM9X75 CURIOSITY board.
 + *
 + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
 + *
 + * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
 + */
 +
-+/ {
-+	cpus {
-+		cpu@0 {
-+			clocks = <&pmc PMC_TYPE_CORE 25>, <&pmc PMC_TYPE_CORE 17>, <&main_xtal>;
-+			clock-names = "cpu", "master", "xtal";
-+		};
-+	};
++#ifndef __CONFIG_H__
++#define __CONFIG_H__
 +
-+	clocks {
-+		slow_rc_osc: slow_rc_osc {
-+			compatible = "fixed-clock";
-+			#clock-cells = <0>;
-+			clock-frequency = <18500>;
-+		};
++#define CFG_SYS_AT91_SLOW_CLOCK	32768
++#define CFG_SYS_AT91_MAIN_CLOCK	24000000	/* 24 MHz crystal */
 +
-+		main_rc: main_rc {
-+			compatible = "fixed-clock";
-+			#clock-cells = <0>;
-+			clock-frequency = <12000000>;
-+		};
-+	};
++#define CFG_USART_BASE   ATMEL_BASE_DBGU
++#define CFG_USART_ID     0 /* ignored in arm */
 +
-+	ahb {
-+		bootph-all;
++/* SDRAM */
++#define CFG_SYS_SDRAM_BASE		0x20000000
++#define CFG_SYS_SDRAM_SIZE		0x10000000      /* 256 megs */
 +
-+		apb {
-+			bootph-all;
-+
-+			pinctrl {
-+				bootph-all;
-+			};
-+		};
-+	};
-+
-+	chosen {
-+		bootph-all;
-+	};
-+};
-+
-+&clk32k {
-+	bootph-all;
-+	clocks = <&slow_rc_osc>, <&slow_xtal>;
-+};
-+
-+&dbgu {
-+	bootph-all;
-+};
-+
-+&gmac {
-+	compatible = "microchip,sam9x7-gem", "cdns,sama7g5-gem";
-+};
-+
-+&main_rc {
-+	bootph-all;
-+};
-+
-+&main_xtal {
-+	bootph-all;
-+};
-+
-+&pinctrl_dbgu_default {
-+	bootph-all;
-+};
-+
-+&pinctrl_sdmmc0_default {
-+	bootph-all;
-+};
-+
-+&pioA {
-+	bootph-all;
-+};
-+
-+&pioB {
-+	bootph-all;
-+};
-+
-+&pit64b0 {
-+	bootph-all;
-+};
-+
-+&pmc {
-+	bootph-all;
-+	clocks = <&clk32k 1>, <&clk32k 0>, <&main_xtal>, <&main_rc>;
-+	clock-names = "td_slck", "md_slck", "main_xtal", "main_rc";
-+};
-+
-+&sdmmc0 {
-+	bootph-all;
-+};
-+
-+&slow_xtal {
-+	bootph-all;
-+};
-+
-+&slow_rc_osc {
-+	bootph-all;
-+};
++#endif
 -- 
 2.25.1
 
