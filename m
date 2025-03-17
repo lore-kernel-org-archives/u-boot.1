@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5063C28B2F
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FA2C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:31:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39F9E80F4C;
-	Mon, 17 Mar 2025 04:20:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 07C2280FEC;
+	Mon, 17 Mar 2025 04:31:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KW4XNJ1y";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KL3W7S4Q";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742182303;
+	bh=hP9uCR3yzF/MFUF6xjYAo2XaQDuDwIFuuWVMo1NbXeQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Fs4rU4NO9HJMb5aOvspw99/nKON36ka8Ju+QRBihMnwdcgwj6alFFoL6V1BOAn+zy
+	 XJZUGRr5q7xIZ123O3UkgvjxAvbIKfY8QMJ6IiBTVivXjGkSQ5pSUe95aeKXjkGW9V
+	 MDfDiS7J3iZlbqmq+3xdl+aYw/eJxSgeph/Ifoo5PAjnahQdgrfuARACGbT15fe5zx
+	 15WZqgyHyUXqgXbhnfC8OMd0tQcrIl0O6OA0XzzGhRMvMjyDgcNp9VO74sMd+Zn8OO
+	 YFEbTobp1rdAfQMso7Qes1dyVe/QA+wSwgQQtc5Q6u/zkEwi14an55nIJ8sRf0FH1y
+	 njT0KKcjKcBaA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4690810EB; Mon, 17 Mar 2025 04:20:05 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 0ED54810F4; Mon, 17 Mar 2025 04:31:41 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 810CA8058A
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:20:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CBF880F4C
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZGKwL0gVXz9sTY;
- Mon, 17 Mar 2025 04:20:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742181602;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=bnZnPJST0aCyU2IRytnFeM+QRbAlkNFiZrEAAslfBgk=;
- b=KW4XNJ1y83g5Z7EI7lbHok3P1C0KsxnOvsrpz5dUMfEqMOlAEd/adDYOQIrSwMhCLrmqXw
- idGNOfygd6cu1TTQJIe4ztT76D3uhUw2X+j4AOc+2cjga0p7atpO6RzjIBXvAL9oIYU3VX
- zZYgJ/s73Ep9wAkreIsN0HZ7A8ErOJWaZJx9oQ+vi6aL26hyzmEz/cN9iGTMtibGN6wTBb
- ZB70KzSPBycBOI4DZb/Rf3ukZW7TgZWokWVC/2QMPgSuAXdZmmROwn7ou+V60S37m4NcBI
- JDScUYdmaK7d8cTvYEknDkBNyjRfnL9ZBPt85btTlRvRQfwQfNQdAknpa7jzKg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742181599;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=bnZnPJST0aCyU2IRytnFeM+QRbAlkNFiZrEAAslfBgk=;
- b=KL3W7S4QGZ/LL6ysORmNiwO24U4n86wABrr7/uKQq2Dnhr5r3yfaOr3kNvy8v7gzIgHKNF
- dL19rRKWpKlrZIofcxtqvAoOfdrWuCQj4FXidkaGsHsE5DEe41+AhrUqBbanjUfSKnooBz
- vmmmVpJHqDfjdsEGz9pS/rM2lvYBy5DYcHYVMhh+dAB83c/DaKFa5q8x19Jy4rgakY9x2Q
- 8L1LZwTvbwT1arBFy+VBJQUKu7DHvP55/1QybXKdo0mdtXfjxllE1O7e0IjLx5+2pLifH/
- TfFGI+moPOKkuXgDelsHOH4ts9/kF1V33sPlUdVT+B8/igRraHsX+VPYLgaAFg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Mon, 17 Mar 2025 04:16:11 +0100
-Message-ID: <20250317031940.223352-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="LbcRnBng"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1FC80103D1FFE; Mon, 17 Mar 2025 04:31:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742182297; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=hP9uCR3yzF/MFUF6xjYAo2XaQDuDwIFuuWVMo1NbXeQ=;
+ b=LbcRnBng6BT6mGQkk4rjHr3X1UWfLnQqvpGoy6IsDnel8m2dlrIH+4iWLxeN1MPrA1Jp0U
+ 3M4kN3G1mLf/FPL38AWJAqna1a2TOA6dKMRM82oh4/kb9cooJa06RvaLMk/L+V36EUF356
+ /DhqrPazFDV4tPWghWdCNZalRPNOJJ+uEumtDB0kCtY2Wlhk0Q3ddyQ3PBj2iDD8oa/Ho5
+ Ds3hltUojfXPpq1/TbFF32tdh4OVB1fNwZF+BQxB+Cn2x878UhznBv0ntD4wTpkJn70YoP
+ ER2JYjrrUW3fnic4UUEASHwkAN+/yJzB+HK2k+Ts00zKp07mEYA0mOiGJWUjMg==
+Message-ID: <f40e5f42-3f29-448a-8c2b-76945f1ccc1e@denx.de>
+Date: Mon, 17 Mar 2025 04:21:50 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 6acb641a7103610f856
-X-MBO-RS-META: k98m6wrszt5jwaitn7qesucbiboqhnfs
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/8] Add Starfive JH7110 Cadence USB driver
+To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
+References: <20250306062032.50314-1-minda.chen@starfivetech.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250306062032.50314-1-minda.chen@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,46 +83,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are mainly DBSC5 DRAM controller specific fixes and updates for current
-release. There is the long overdue BL31 start V4H board code as well, that
-should be in the current release to make the V4H White Hawk board usable with
-SPL, and a fallback U-Boot PSCI implementation enablement to make sure the
-board always boots. And finally, there are two comment fixes.
+On 3/6/25 7:20 AM, Minda Chen wrote:
+> Add Starfive JH7110 Cadence USB driver and related PHY driver.
+> So the codes can be used in visionfive2 and star64 7110 board.
+> 
+> The driver is almost the same with kernel driver.
+> 
+> Test with Star64 JH7110 board USB 3.0 + USB 2.0 host.
+> The code can work.
+> 
+> The Starfive JH7110 has enable CONFIG_OF_UPSTREAM. The dts is
+> from kernel
+Applied all except
 
-The following changes since commit 15d6518c942f0da13f9a7ceeadbd925c3317ec8d:
+[PATCH v7 8/8] MAINTAINERS: Update Starfive visionfive2 maintain files.
 
-  ARM: dts: imx: Drop bogus regulator extras on DH i.MX6 DHCOM DRC02 (2025-03-13 15:22:48 -0600)
+Can you please rebase the "MAINTAINERS: Update Starfive visionfive2 
+maintain files." and send it separately ?
 
-are available in the Git repository at:
+I already sent USB PR, you were on CC, so you should see the 1/8..7/8 
+patches are already on their way to u-boot/master .
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
-
-for you to fetch changes up to 885fd621a309a2c3f8e8d41bdc8ff893221dc478:
-
-  ram: renesas: dbsc5: Make struct renesas_dbsc5_board_config public (2025-03-16 14:56:16 +0100)
-
-----------------------------------------------------------------
-Marek Vasut (11):
-      arm64: renesas: Add TFA BL31 handoff support on Renesas R-Car Gen4
-      arm64: renesas: Enable fallback PSCI on Renesas R-Car R8A779G0 V4H White Hawk
-      ARM: renesas: Drop stale common Makefile description
-      arm64: renesas: Drop stale R-Car V4H SPL implementation description
-      arm64: dts: renesas: Make OTP available in SPL on R8A779G0 V4H
-      ram: renesas: dbsc5: Fix bitrate MD pin parsing
-      ram: renesas: dbsc5: Fix JS1 index calculation
-      ram: renesas: dbsc5: Fix DBTR11 calculation
-      ram: renesas: dbsc5: Synchronize initialization code to rev.1.10
-      ram: renesas: dbsc5: Add V4H-3/V4H-5/V4H-7 OTP based detection
-      ram: renesas: dbsc5: Make struct renesas_dbsc5_board_config public
-
- arch/arm/dts/r8a779g0-u-boot.dtsi    |   4 +
- board/renesas/common/Makefile        |   2 -
- board/renesas/common/gen4-common.c   | 126 ++++++++++++++++++++++++++
- board/renesas/common/gen4-spl.c      |   2 +-
- configs/r8a779g0_whitehawk_defconfig |   2 +
- drivers/ram/renesas/dbsc5/dbsc5.c    |   3 +-
- drivers/ram/renesas/dbsc5/dbsc5.h    |   1 +
- drivers/ram/renesas/dbsc5/dram.c     | 167 ++++++++++++++---------------------
- include/dbsc5.h                      |  56 ++++++++++++
- 9 files changed, 258 insertions(+), 105 deletions(-)
- create mode 100644 include/dbsc5.h
+Sorry for the abysmal delay in replies on my side.
