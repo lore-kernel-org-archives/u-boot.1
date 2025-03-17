@@ -4,91 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2BEFC28B30
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DEE0C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E47D68198F;
-	Mon, 17 Mar 2025 14:48:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E48778198F;
+	Mon, 17 Mar 2025 14:50:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jdpSooG4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OzyM1+Zp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D8768081A; Mon, 17 Mar 2025 14:48:35 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 212BE8197D; Mon, 17 Mar 2025 14:50:51 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97F8D81B5C
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:48:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A96780F70
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:50:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4394036c0efso14015885e9.2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:48:31 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3913cf69784so3785912f8f.1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742219311; x=1742824111; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0rUe5EIUSoxVGczviAoIz1SV7XkFGIX/XpF3oACkShY=;
- b=jdpSooG47JuDw0+qSn5JGCFdNSR1rZFc/TCWu/tEf/kkzzcBoYb+kCulJEs21XGnm3
- 78FaU+DXvuQVZvw7taEn+qBoA4Y186rGYJs1UmEt96gBx7ghxBJ4FdmKzdVq2vGcWy/8
- N7Hg+pO+y1EQc/uHwMiZnTqu/85/fqM5VjSUjbWqgD00dJvrULZxO5VUsn/2B9m0zO88
- ClVYAwv+rdycE97LIZdPCtkTO+ReGRxrTNYLLJ9uKe+oZIRbmj0zEU1R+fjn0soVrcEJ
- 5vijFVzqczainkeQQTNuoPy17r+TkXyki1l5RXOrQTZqwT3DHJ8LQ/0mjLtVoiwZnOKG
- xEiA==
+ d=linaro.org; s=google; t=1742219447; x=1742824247; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ioEcKxPeOjICE2PfQbJvZs5MsmQMoDhnob1CnUCmzYE=;
+ b=OzyM1+ZprrSY6R+JJNDGcuVyfI5+JMEXFqLUMmy3beUVSrvyLQDaFxytW8hWGdcBd1
+ /pKIsLpfMs+ScGfpUhembYYrUE//jBppHWRplu/1Sguft1bwiLNMa3KFvNGkom+f7Rdj
+ ydSjtqtvh+axY9EU+ZhObECDKtrjYWDAYa4idpbBiQyqSz5IzRhY0a1ngHH9qGk7gQkc
+ t2aal4v6k0xCt0gguKffuYvTImH7UDa7VmpsVAT5ZtM6m1Mu5TzBh7LriqaT1pr4GVSw
+ NEcqcqr9dd7uUjfsBxOq7OpUa+eNkjJXSA7aylz8r1pN1lumAoZ9uZfBjKe9lrjlqAh9
+ Z+Gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742219311; x=1742824111;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0rUe5EIUSoxVGczviAoIz1SV7XkFGIX/XpF3oACkShY=;
- b=nzFZWn3vQ9lIQn7Z+0YPXYFfxSvgegvndQvZGw19vs9DJmSVcbkJkUWRwNEnLTnGMK
- NWMRiY2rytF5b23jOw/rM3kuDs5p6Ioh9cvCVVzBXBQoxqYqttDU4Zt9fLylZuR8cNW1
- A3mt0inD/nlnpbGVtDUOuB7b0ATFF/VTay9C5WZVA6BxGAdY7BkzLpN+wX76M4l+2X5o
- +9S6i1zZoPNdttD6W/anm1zQnjbv6VyZrLTYRXI86IafX17R0giypzUNzsqvTiDQ/slK
- J1XLzd7cEPTC/OK+s22XB9pHr4i4oSzdLOm0wJSHfG0X5+zzonZyZ9mNSTqI974FcfJx
- AUEw==
+ d=1e100.net; s=20230601; t=1742219447; x=1742824247;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ioEcKxPeOjICE2PfQbJvZs5MsmQMoDhnob1CnUCmzYE=;
+ b=vv4o2cSiQmhkHqMHVh8BxbaVt8s8XdQVViRGRlhpCI+dMBNTMj1y7DY0Q1HkW3B8Av
+ vyKqjY5yJHDmtJkb/15htkDQMO2alENQLuWxf5ySkSeAQDPIvmOBPP/nY8pzSq5LsHLX
+ cfZ1e7Mu9yciRhoO+QVaisz/lapjfcWSHkBs1dICSX8yRBdmZtY8OGlpSWZjxKng1HNF
+ jhcvOS6VzrosKf1RaHEHfvs5LyUmgT9s9R7A3/XZpa1Xut4AGG/CvFrfmU6EI7uJQwVi
+ wSuIYHxmGM4a6tqcBAU/9Q5HqHEds+fVhXWl3RSfO+tdgHeqbl+35HCwIadvFisbUtO9
+ mmew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCElVUoOkmRwlyisNXgEjKSKWQ9BwkfOgS6jN2clb3hFEektCz/smo7ziqczeFVaFg/n36daQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzEUzpU28AT0QJ/XRyftKB0WQJJAw49xMQfB112F7i308+kFbjs
- c/UzqkycSvLRoqQNGY8kJPR05S4wauDHNk2idDct9FAi+yl9bUjinaFFW5ldbZWFXrNV/BolGgr
- 7rk8=
-X-Gm-Gg: ASbGncuQxs2egDNbCCzqKL72eRVPUS8YLj9T1MpCcoeiz6zD45Cmw/LGPpJP0BY2bFo
- hvSZgHwcZ3QKct73//ijL/zb3sOPihcUppGw5FgNC03xJdnYCgNDG/3VQjj+FKBxKnblDe1dOTe
- GBY5NX/c8rJ88GG+Jjn6xi0hRZdZhCMiZW8LMQcgiMVjDiEZ7Am6kKLoX11CzM7HdRfF6WidHpF
- OIBrnhSnniejtlMhoXq1IbY2VXR9my9xq/WmEsiQlTQrRx0iCseLwzh9l95pkctmJdM49SvqCnf
- 4m0Ezs/846N+H69aDW2m06HKo5sZ1MIdXhrQtgXKToJ8wmXVca6ppkFGiILt
-X-Google-Smtp-Source: AGHT+IFhe9MobBE1FwapPAAmEaaYb/RcXlzfESyq7XbwTUeMvVGyMwi16yArMwVUb0K23bF6D3jTZQ==
-X-Received: by 2002:a05:600c:3b97:b0:43b:c878:144c with SMTP id
- 5b1f17b1804b1-43d1ec784dbmr128564885e9.12.1742219311098; 
- Mon, 17 Mar 2025 06:48:31 -0700 (PDT)
-Received: from [192.168.1.116] ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
+ AJvYcCXfupsTJa6PJe34MSM8l/ftNZqrlvjlXLLY1LE2UHdwDYpdj5RnUKttTuqINIVL+P88tlhPves=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGFpjGcLYzh9jxo6Gnb+32vU8A3Ghy+xWFUCpVtp5t4GmzPfwW
+ azc73AEVmk7e8NiPOKllhVdxciKdvolScViZec4HzG5I9OCBR9CEwciNqwBp440Z7pqAiOzZ30h
+ iXCE=
+X-Gm-Gg: ASbGncvrrPLS7YDsaeHDcdFDvbrBhXt+zXNJxTSOaO4nmTdfdJBzrHB5dfkqz5OfKgm
+ fF7BdGQGf1qoFV41wRBJkqngEDoHSpm4B7gZvhXgqDCyDRww61wGCfcqK7/rc6J4tBB5GgVYkpv
+ GmSce+d+HOSdPIyYxXfnNSpsb8YQHW4YwlgMsf5FlQ/aKoucBlzamr25Z2QfH89JuMqKZokfg+/
+ AY0Wh3mIwg7QrWEN2yH3nTsJEEE1rdo8GlxgsIcTuGnifRgWVdv4tmeqtO7Am+VFii2rzW33dB/
+ +fx7A46luqudy3WL6Tqwk73dNndl2Zcyrscl9kG8lLBkb0eZ0zfht/pOJSFKJVRWRxumWbnYQES
+ Q9bsUBopcQGH7IVsDqXTtXL4xj8D1+rYg60X2
+X-Google-Smtp-Source: AGHT+IF/zAT2tYttsS8YfMWG7vYUGU0JSgLfjo/DOqcZvPAUgICraZqG9ThXuz5cDdx1qLK9wH8Stg==
+X-Received: by 2002:a5d:6d08:0:b0:391:4940:45c3 with SMTP id
+ ffacd0b85a97d-39720e3c9bcmr14194516f8f.54.1742219446769; 
+ Mon, 17 Mar 2025 06:50:46 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9?
+ ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d200fae4asm105655945e9.27.2025.03.17.06.48.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 06:48:30 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Julius Lehmann <lehmanju@devpi.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Robert Marko <robert.marko@sartura.hr>, Sumit Garg <sumit.garg@kernel.org>, 
- Tom Rini <trini@konsulko.com>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20250317132519.46080-1-caleb.connolly@linaro.org>
-References: <20250317132519.46080-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] pinctrl/qcom: fix kconfig option names
-Message-Id: <174221930997.73541.15483519776374375595.b4-ty@linaro.org>
-Date: Mon, 17 Mar 2025 13:48:29 +0000
+ ffacd0b85a97d-395cb318af0sm15125453f8f.73.2025.03.17.06.50.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Mar 2025 06:50:46 -0700 (PDT)
+Message-ID: <0ea959fb-eaf5-4d90-a4b8-1298ac4d09d7@linaro.org>
+Date: Mon, 17 Mar 2025 13:50:45 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/6] MSM8916: Bring secondary cores online with spin-table
+To: Tom Rini <trini@konsulko.com>
+Cc: Sam Day <me@samcday.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250128-msm8916-smp-support-v1-0-39587f18cf0c@samcday.com>
+ <b72d521f-6df5-4ab1-a00d-65ab7dc14ac6@linaro.org>
+ <20250317134558.GM2640854@bill-the-cat>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250317134558.GM2640854@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,18 +108,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Mon, 17 Mar 2025 13:25:14 +0000, Caleb Connolly wrote:
-> A copy-paste error is starting to get out of hand... Fix all these so
-> they don't look like clock drivers in menuconfig.
+
+On 3/17/25 13:45, Tom Rini wrote:
+> On Mon, Mar 17, 2025 at 01:13:22PM +0000, Caleb Connolly wrote:
+>> Hi Sam,
+>>
+>> Can you re-send this without all the prerequisite-patch-id tags? b4 is
+>> desperately trying to apply ~140 patches from some old next branch to my
+>> tree and tbh im not sure how to make it stop.
 > 
+> You can use --merge-base HEAD to override that I think. If not I think
+> it's worth asking tools@kernel.org because that sounds like a bug to me.
+
+I think Sam had a bunch of big series pulled in for some reason, the bug 
+is listing them all as prerequisite patches imo
 > 
 
-Applied, thanks!
-
-[1/1] pinctrl/qcom: fix kconfig option names
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/364f6610278d
-
-Best regards,
 -- 
-Caleb Connolly <caleb.connolly@linaro.org>
+Caleb (they/them)
 
