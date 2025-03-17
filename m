@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 445A4C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 16:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC57C35FF3
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 16:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A61180F4C;
-	Mon, 17 Mar 2025 17:15:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEE828168B;
+	Mon, 17 Mar 2025 17:15:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i7OCd/Xu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a4Uu8RHf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA5F80F70; Mon, 17 Mar 2025 17:15:12 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id EA5248122F; Mon, 17 Mar 2025 17:15:12 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D234681101
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 17:15:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0972880F4C
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 17:15:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3912baafc58so4018842f8f.1
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 09:15:09 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3913fdd003bso2283760f8f.1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 09:15:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742228109; x=1742832909; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742228110; x=1742832910; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=RYoNDWBd1pk52lnnae64fQWh33wTs+zkh3+IU/o8DjU=;
- b=i7OCd/XuMR0CPn4ti91HqEtQAaXi/qO8vNgaWVdByF2P7OQVIHFSngmJuT2mp43IeV
- uc8s0pARWsBhOswUJ5SvEJPSCBivLV8b0fNbgAw9Om1iMiJkL4NuYPuLLzgcaofvbglf
- H6IYXRbXRdQUHHfBTHHTazO9ov222fViQ/0GXWMI5X9ZcGFJi0/nHPvYOdzQJEH1n9DY
- 5FJDQZ9hjaPVo0w1pWFgZfX6b1m9M2RjLteGRStvZA78E3vkjDmbYRsCkdohSrzKm4Cs
- +x8aq6VIXJqi5tI0uSRWBtJKIk4Ad4KvpRoL3nZMVp794kocVFUWPyjYS7Dd36DjVCff
- 4SNw==
+ :reply-to; bh=P+WVDpSXY/Mk3XgOObAayDEvFQZxsL4LqvkDSiaI6pI=;
+ b=a4Uu8RHfYwfxl9s3cDt/pvYf6gwCXnwbeWCw5NbxMiUd/hJWOMyWDeGlGbvTodBy9l
+ wMSIX0rcXKENFoNrwXpGm2SQy7C5IDk+KWf77MyoL96Mqolzf7UJoboI/LAb9AhDBjcU
+ Ym5wRdVy0dXVOPxOweeR7Aony1dO0AAhTLiztQgL6Xrbt1+d+djgZyp7PbQts0fyE639
+ 4dAU3xCVnlnjJfUaZZgHY4CncwBON1/lxYhsspq5c0g5Ug7CmZ/CjT8aTafkouSDW+UJ
+ qnpS2eSHWhAcc7/sinJhodMOAhHDw5xYL5qWWaQLIdLWYnW7O2L5v7qjMwZZoozY9+L8
+ 3lpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742228109; x=1742832909;
+ d=1e100.net; s=20230601; t=1742228110; x=1742832910;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RYoNDWBd1pk52lnnae64fQWh33wTs+zkh3+IU/o8DjU=;
- b=QR9tXUeJC/AYifgm/qV07fLk+hQ+Ia2vcJhfmkfODCHzgBbzhhMKjpXoCYb1d0xGB+
- iHOrxSUIBSBvrNngws4rDD2uzOHZy92hfEBrpxh/yQGTHwhlTXb9erAAwMbLIabfdSr/
- aabWyXf8hAtbEjzjDFXnAUqCOtf/aDsgmAMzBatAG7n8+csLPHROIpJXmZGbFnn2QO5/
- KchZvP1fHMM7PlsDs4Dy7y5KgIMC/vN8WG4kOvl8uiXr+SgImRkcRicoHU06smwXeTDU
- 2gqaO72dho671hq0R2xMcwJFqWO/W6O8M5GHCUKewUytM0cFB35tj6JoN9JgVqMFMHt4
- wCpw==
-X-Gm-Message-State: AOJu0YwlMTWjkvklMwGNXgAQE7zY2DuL1vyIF925RZnlxjl+b0eiGQJR
- TJgTDhbGVZHEMRz3Tpjuy1FCbXpkCOqNbeDuIMWGymS4FQfPrG6FQXO4zhrdGuU=
-X-Gm-Gg: ASbGncuuijO6G8S9s6hHebluN8ea5nVl8dFFdaCAjpLNbMSIdVUxisTgKdYNx3XLrOU
- U2T1cQ9YkVSqxGMnbqS8HxMJFkU6afwWwsgkgkK12nKiZlB7FanFfITTByv2K+mLOUjoFgQNMmo
- bATGImIM52AYfBwNZlp1BzONfg+er0ImppqdKIvoO40XAHwH8LXmoE03bdWUuDRlYddOKTNq2YU
- 36ddHszXtIHs7xK60+KNJNv+TYtQbpfIvOe8la8dIYr8+0Li4AXf89M6VBw2y0QsVCrNwhQqWpb
- F657Q8ZP25IytWb5qDOG68sqVXAXQqPdJeoL/fizR95ncTqIm0QXeK6xM1GnPJK/9CND2Lo=
-X-Google-Smtp-Source: AGHT+IGsV9O8mR2Gus96BHIsf9kiod8x0OARZO6Y34FSNcOWdzVNqR/ZgQWa2+XZlLIVxbe0p7uFyA==
-X-Received: by 2002:a05:6000:18a8:b0:38f:4fa6:bb24 with SMTP id
- ffacd0b85a97d-3971f41160emr14942250f8f.39.1742228109209; 
- Mon, 17 Mar 2025 09:15:09 -0700 (PDT)
+ bh=P+WVDpSXY/Mk3XgOObAayDEvFQZxsL4LqvkDSiaI6pI=;
+ b=SxG22PizdNMnUl8W+YLHtTukt623WhdhIsF2bWq9uV79lWl1PSNeg4IjYMD2P9A7mt
+ XCQaEEtLTx/UCd26DQPK5quU/XVTn6wA6OBq5WrHMl+baA4ZEx/Hay/TzbnrO8ZynqMO
+ cC2Yz/krEQWvbfLbKXpROk7FeP3asK/JeZY5k0+ZeIbKK0MWoKfYtqlnxgLeOpZvW7ll
+ 65d1aVSseJSjDxtNwH0zIaDDyjjVg/W2m87Cawj7JpxLUXrIksigrv0zYy4ZENdFiIUL
+ Z3AYHBuUKMGM/gAzuPTmlE2akG9VfKdRiw7t0rdn6xeaxI9Ca5uYwM/M+G5JQeS4Aiuh
+ oCdA==
+X-Gm-Message-State: AOJu0Yya6gZJBck9ojRkV4tG9FuzGXwuS5r8VnRJZMYITpI0gWWk7cOo
+ 3Gn7CFW28IMMlFl8Et2YxnkfudupKZ3GkoYLFJo8azp0qxV49QgBHb+nb18B8dU=
+X-Gm-Gg: ASbGncsZn0/LIWHYciPCbGpeKJdatcQ8WCIvAM/mfvFdeZAQYNw+hAa449PEe9s1Jgq
+ /EoB4A9Cxj5KdoIGW/SiyZXBruyYm75UB18Dnlym4sis3ObjFrHVpwruWkHxyY+om3VvNRnirN9
+ dxneAqDfnyOopXNP1uVyqbOoxTjS7NfzEP9YnzhU85iLxbjRyUtJupUCqsMDnGN6tq0bYLvB/BZ
+ YF/OLwDZl97CUsM27gG0b7Dg2bWKWMLXpGJAW54ch10RjMpgUPd3zJTEyClKj5ItHx2aa3fgKsB
+ 2VCt0G8/n693SNO3yT2zgksUjMPuH+Wt/5gNGR5KLeN9mXJD+ovvMke/FPpY
+X-Google-Smtp-Source: AGHT+IEnE7SRE8/J6hDj8rYbhajUpi7UUzUqv9PymCQtippoLl14XxJkB7H6epQNS1lXNaGtCaiR6A==
+X-Received: by 2002:a5d:6dad:0:b0:391:952:c74a with SMTP id
+ ffacd0b85a97d-3996bb44ca3mr35079f8f.8.1742228110400; 
+ Mon, 17 Mar 2025 09:15:10 -0700 (PDT)
 Received: from [192.168.1.116] ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395c888167bsm15382001f8f.45.2025.03.17.09.15.08
+ ffacd0b85a97d-395c888167bsm15382001f8f.45.2025.03.17.09.15.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 09:15:08 -0700 (PDT)
+ Mon, 17 Mar 2025 09:15:09 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 17 Mar 2025 16:15:01 +0000
-Subject: [PATCH 1/2] clk/stub: add sc7280-rpmh clock
+Date: Mon, 17 Mar 2025 16:15:02 +0000
+Subject: [PATCH 2/2] clk/qcom: sc7280: add missing UFS and MMC clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250317-sc7280-mmc-ufs-clocks-v1-1-38e05c16511b@linaro.org>
+Message-Id: <20250317-sc7280-mmc-ufs-clocks-v1-2-38e05c16511b@linaro.org>
 References: <20250317-sc7280-mmc-ufs-clocks-v1-0-38e05c16511b@linaro.org>
 In-Reply-To: <20250317-sc7280-mmc-ufs-clocks-v1-0-38e05c16511b@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
@@ -83,21 +83,21 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Sumit Garg <sumit.garg@kernel.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=786;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1569;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=mxsTDUVNawHPfqewlS9Zkb5/HM4q0L138+12OiETZFE=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn2EqK42tJNjcGd976fwELG6km5G9PMddFOA/+p
- SJucNjvi22JAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9hKigAKCRAFgzErGV9k
- tonLD/968pgiQQTKQhamqBztWwZpn9hp/9Abxd9WvuS7ccFpuyktivDeytfHZv+hjaUktBPBv1C
- fjs7G+oF56WTUiKb6UPKNGf6e4nJTWj6kdqDiLl2X9JHBn1BCuyffVW4BZsFuyCJl3Aol6Koupy
- N9uozniSmspFABKjsp+RTpXp8LuHBatLwXy1PCYAeqOOJuJ2J30A1OFEw3eRVv4QXxAwNGiTb6y
- F6Mp5oZ68H4dnKmA/2DvFvdS48nchJMgjxMm07p0k1wGBwVwKfLzljA5FSD4iSddu7zTrpdrLNB
- uWm9Ztr+SynMVtfDqLZlxY/rbGrTzlnh5Vx+nIg+6PoGGaX/2f7EJzU2/0vDnUWgRUebGpC2LcL
- MOwkKJAHUe2fJqrjPK629yPafIS9c+JQQK3yj9Gy19qDT7zTlNKLhQWk5ccb0m6PwT7Cq7KJA7g
- xtyVYRQzEX/CoouEBstgM9Jwvmtbw0SdhH+DiZH60QdlFmjLJtbcbo+5K/k+CYo18+wOM3P488/
- WyBYoXQWZfriC9MHFqwq3VK7AQ+5XllKL8A+E5/tGfydrqWBzDwUPj3S93FFPnbxfubFt+u7Trg
- 6r5nDuwmWNUuoi9BQ+kQQYB6+BQmp7tc2i1cxwTArotRtyfo62Lm9RyVPRsEKrtq5BRQaWOroU8
- GEQqV/XATA6bcoQ==
+ bh=274yFWAVcD4QFEJiDqDnn7YTJyP05G6pVVzrkKyid4c=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn2EqKcWxQWGgAQ7PxFwbdwBp45pdhuXc5mpnRK
+ SWZaQGymbqJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ9hKigAKCRAFgzErGV9k
+ tjHOD/4lribEv8GZnZkJrYi7ITq1W/yGuT/9/nqh0LtFGpteFvEs2iDnukvtDxl7KI0pUsu19c0
+ 1DE+xXIcVVHB5h3idGUMv1PYFamOXlMLZcj4DIMOxbGGGienEHbaKS34ftbAvlZrWxNQ7DV8dDf
+ MiS7E5LywQUlsLm+2aNC9VFce8ronn84jm2E3nlD3oM0C+MDrOYW1w48YXgSMivo39FL2G2+CsR
+ 79BJFFPBVoUEnBPCYLOBkXGItIsHRLAUvYDYFPPqgLnEpg+WvasvcdL3itEtpjznx4RUAWrGLqP
+ UibV/ewdBMWuJyYzkUDW0OeX4F/RZH9WLDU8R2X183Bm9S3KlKR1rFJnwYLjWI07RTh2df0QioP
+ HCLgKJOZIhKj4bebkEVwhJxaJIrhzy4e1Zlpg0E8z7I/dl14bm2XR9fstKXiN9X9sHgJXkbKxMT
+ WVVGBWcDV4o1yx1XC89aQskfx8EwDGB2CtDTb5JgKsw9Z18DyXb1g2+NcMBwpLbuxqwxUzMXCxY
+ CtdGiPz/nHbWmhVQk3uHHiqcBp6DjO92La40RElpeEKfYETw/3AhKnmwBRP6tgc1fmAc0bIEy1X
+ VVqUpzCyydNC+pIlLHjrhpSndwKplh9/sY+dh61PcrZuLHn2MJHYKBytdFHOmbaevCabSsefOnJ
+ UyutLDSWQcfxWlA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,27 +116,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stub the RPMh clock controller on SC7280
+These are all usually enabled, hence we don't (yet) bother configuring
+their RCG src clocks.
+
+Add them to remove the errors about missing clocks when the UFS and MMC
+drivers probe.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/clk/clk-stub.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/clk/qcom/clock-sc7280.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-index 5fbbb07b7f7b93e619baf596064c4b3a3bfeecc0..343fa5cd3fe1704c6bb15a8c9852b9b4e4990351 100644
---- a/drivers/clk/clk-stub.c
-+++ b/drivers/clk/clk-stub.c
-@@ -49,8 +49,9 @@ static struct clk_ops stub_clk_ops = {
+diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
+index 8691f08109b39639d8a5defe75161049399bf682..9aff8a847ad1bd59b7ec7246f5719e4d7c32ec65 100644
+--- a/drivers/clk/qcom/clock-sc7280.c
++++ b/drivers/clk/qcom/clock-sc7280.c
+@@ -106,8 +106,19 @@ static const struct gate_clk sc7280_clks[] = {
+ 	GATE_CLK(GCC_AGGRE_NOC_PCIE_CENTER_SF_AXI_CLK, 0x52008, BIT(28)),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x52008, BIT(10)),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x52008, BIT(11)),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK, 0x52008, BIT(13)),
++	GATE_CLK(GCC_UFS_PHY_AXI_CLK, 0x77010, BIT(0)),
++	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x770cc, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_AHB_CLK, 0x77018, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x7705c, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK, 0x7709c, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK, 0x7701c, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK, 0x77020, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK, 0x770b8, BIT(0)),
++	GATE_CLK(GCC_UFS_1_CLKREF_EN, 0x8c000, BIT(0)),
++	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x14008, BIT(0)),
++	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x14004, BIT(0)),
  };
  
- static const struct udevice_id stub_clk_ids[] = {
- 	{ .compatible = "qcom,rpmcc" },
-+	{ .compatible = "qcom,sc7280-rpmh-clk" },
- 	{ .compatible = "qcom,sm8150-rpmh-clk" },
- 	{ .compatible = "qcom,sm8250-rpmh-clk" },
- 	{ .compatible = "qcom,sm8550-rpmh-clk" },
- 	{ .compatible = "qcom,sm8650-rpmh-clk" },
+ static int sc7280_enable(struct clk *clk)
+ {
 
 -- 
 2.48.1
