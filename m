@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29CA9C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 21:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32703C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 22:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EBF980F4C;
-	Mon, 17 Mar 2025 22:45:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 59E8A80107;
+	Mon, 17 Mar 2025 23:17:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PlsEQE73";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="VwRVWRT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41D5C810F4; Mon, 17 Mar 2025 22:45:13 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 893F6810F4; Mon, 17 Mar 2025 17:18:54 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF7798056A
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 22:45:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E487880F4C
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 17:18:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6ff1e375a47so43334417b3.1
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:45:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742247909; x=1742852709; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=t2UNhTQZDu522zni0UZ3iMSNkh+ObmktT1yq60LKgA4=;
- b=PlsEQE73A25nJ7HoVnM5Ep+yEQhmCAMuV8mQRKc6qlxll/iPkWdAge755jvS1XUJRu
- kKL8+3sQjocTcQacPqco5MliFG/HvzPNGFZTx1imCCVOcjqfJFCNuvG2x3+GyD9YnxpF
- GBfUrG0w85hYEsSgVqx8IvAf+9hLcn/y7yDFs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742247909; x=1742852709;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t2UNhTQZDu522zni0UZ3iMSNkh+ObmktT1yq60LKgA4=;
- b=FKSGe93rJLdhTpmizc+Vp4NvhEr9wL/IwtS7wjBRbF+FWt/TM0/x5hAb/Lw7zCNjM6
- fPvKd+Q9hXpmH7hVllOu6ud9qbYiiB5uQNg3HOf3/XwmRT/q6FJxQU949MgCCFsOFUyf
- TqmPamDZZvaa4D7ROwsPIfx/8t0omNZarwRlfDbEOlSGhlyQnNPiPf3gzu7V8yoNxY0X
- vAuTquDPkMsr205YMuz85Z6pWT6l3PXifN3Vimf0oGZoq8s6nMkcOHs2amyveJGYDuQE
- Qfr5SRUJsOFMdHI+L1Kd+BaMxczDCBqpX2cQ9JxlVQThFKEUfhTgKUTijzClbJk9U2f2
- HSUg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXF1OACCVm0hThZ/lNT+69jrYX1570lxttukr+MWYp5WiYECBUhDk7V7OQe3n85ARkC38mdN5s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzbQJoG3vkCk3uDvtvzrDjmuZz6xn4VVZoSqyw/nVoalJZxZx5
- wbtEy+zUOTcyP5KAa83NveT23XcH9ZBAMpJb7eF0NBqlQVpeDSK7xSKeR1D2iAc=
-X-Gm-Gg: ASbGncvq0TUNkZAA2R3ApaJI7JQ5ObNvHBaOlpU/mTCwpEcXHJ1VJmtk0i62TEgEWEh
- bK6U9qlyTNmhRGwk1vKfNu8QkhSvLo86ywyFsIynoAGStdNcierFI35EA2wRJ0K2LBfuZTQjzdn
- 203uoQ5r+XFHkB/6cqNoQXr9vkWpQWakWf0MN4V6YhxkkSO8pK7fmJ6NcUK2pxIZPzzo9gJDHxG
- m8+7iXygHIDNV8twEV82HmxAIelh8P+T8Dv+3pY3hroPt78tg36BG+cwCGne6vlCFNW/17wGp4x
- 3KW0iotQJzSl7nPU44DuJaE7XinOq6PdAQdNo0owUgbGYg==
-X-Google-Smtp-Source: AGHT+IFkbuZGxDfirGCtV5E9L+cG5NdI7Dk7JccA2TV3o7Uw+Bqhp4SvOuvykXEItw8YIfgVfs7AVA==
-X-Received: by 2002:a05:690c:6f0a:b0:6f9:8910:38a3 with SMTP id
- 00721157ae682-6ff460dfdbdmr184775657b3.37.1742247909651; 
- Mon, 17 Mar 2025 14:45:09 -0700 (PDT)
-Received: from bill-the-cat ([187.144.138.125])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6ff3288bd3csm23477317b3.51.2025.03.17.14.45.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 14:45:09 -0700 (PDT)
-Date: Mon, 17 Mar 2025 15:45:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Sam Day <me@samcday.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Subject: Re: [PULL] Please pull qcom-next-20250317
-Message-ID: <20250317214506.GT2640854@bill-the-cat>
-References: <20250317152328.107426-1-caleb.connolly@linaro.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3en52eCrdytSQI53"
-Content-Disposition: inline
-In-Reply-To: <20250317152328.107426-1-caleb.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 82a3d679-034b-11f0-b9e9-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 82a3d679-034b-11f0-b9e9-005056994fde;
+ Mon, 17 Mar 2025 17:18:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=XzBd/ck5ZwYkgbIVLOmLhwouDd/Nv/DzvDgojlUTIPg=;
+ b=VwRVWRT1DTiu37fDdRzzeGklfPeXhcU0QHhmKrFdPIns3VzL+8ekTkp1O1Imx7ah+X27qka9Q9OYK
+ 2A+puj2i0KN2yvednYsJI4rRnqEkV+VyG1Rf235OLKAv1gexHxCKFZzEn3qdMzSI419nSpE0KVT1MI
+ tEEi3PAC3va9SiLeIxI2jFKm+vGi8bpiYy7ssDh6u2L6dNzDiD/o/eR+wJjRBD/EPCtgf7hWponot6
+ VuoA2/3pw4erV6A64czxpIeSodlAAjatPXjGfmrOiJScistJb7GsljS+UclUvsc/b91LNLO4P/YM0r
+ MAl3Prrq5BXeT04L8YNQQva84tAd0qA==
+X-KPN-MID: 33|ciqc9yNAs9W/zeeqro6jXVwyyDIDIJOa5N9n9taLrIkBdtMDvlueQUneDLDDGbI
+ UxJr7fICfOX95JcNvf6aPYHUFrzc6wz2TUf2rrKCL8c4=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|yFHHBrFLQRHMppDSYyj9Fo5EFHb8HCCP9i4hDx/aq1C63zLCALrgJjs0ImJ+p4f
+ 7pyGn964U9t6+VRPhaCroXQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 827312ed-034b-11f0-99d9-00505699772e;
+ Mon, 17 Mar 2025 17:18:50 +0100 (CET)
+Date: Mon, 17 Mar 2025 17:18:49 +0100
+Message-Id: <875xk78wba.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, e@freeshell.de, ilias.apalodimas@linaro.org,
+ rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ andy.tang@nxp.com, mingkai.hu@nxp.com, Ashish.Kumar@nxp.com,
+ priyanka.jain@nxp.com, wasim.khan@nxp.com,
+ udit.agarwal@nxp.com, meenakshi.aggarwal@nxp.com,
+ patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com,
+ Manish.Tomar@nxp.com, matt@traverse.com.au,
+ caleb.connolly@linaro.org, tien.fong.chee@altera.com,
+ michal.simek@amd.com, sumit.garg@kernel.org,
+ patrick.rudolph@9elements.com, alif.zakuan.yuslaimi@intel.com,
+ Oliver.Gaskell@analog.com, duje.mihanovic@skole.hr,
+ robert.marko@sartura.hr, lukas.funke@weidmueller.com,
+ peng.fan@nxp.com, jj251510319013@gmail.com,
+ adrianox@gmail.com, sjg@chromium.org, sughosh.ganu@linaro.org,
+ vincent.stehle@arm.com, raymond.mao@linaro.org,
+ maks.mishinfz@gmail.com, semen.protsenko@linaro.org,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+In-Reply-To: <20250317133845.138061-1-ilias.apalodimas@linaro.org> (message
+ from Ilias Apalodimas on Mon, 17 Mar 2025 15:38:36 +0200)
+Subject: Re: [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
+References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
+X-Mailman-Approved-At: Mon, 17 Mar 2025 23:17:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,86 +90,666 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Date: Mon, 17 Mar 2025 15:38:36 +0200
+> 
+> The EFI subsystem defines its own bounce buffer for devices that
+> can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
+> which can be reused instead of defining another symbol.
+> The only limitation for EFI is that we don't know how big the file a user
+> chooses to transfer is and as a result we can't depend on allocating the
+> memory from the malloc area, which can prove too small.
+> 
+> So allocate an EFI buffer of the correct size and pass it to the DM,
+> which already supports bounce buffering via bounce_buffer_start_extalign()
 
---3en52eCrdytSQI53
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The existing bounce buffer code servers a completely different purpose
+though.  It exists to make sure that hardware with cache-incoherent
+DMA can safely do the required cache flushes.
 
-On Mon, Mar 17, 2025 at 03:16:24PM +0000, Caleb Connolly wrote:
+This means that:
 
-> Hi Tom,
->=20
-> A new platform and a nice handful of improvements for Qualcomm so far
-> this cycle:
->=20
-> * msm8916 gets proper sysreset and spin-table support
-> * the first new IPQ platform is added - the IPQ9574. The IPQ series are
->   used in routers. The flashing process is also documented
-> * mach-snapdragon gains the ability to boot with an internal FDT and
->   still parse memory from an externally provided one
-> * SC7280 gets a pinctrl driver and various clock driver improvements.
-> * Qualcom clock drivers will now actually return an error when attempting
->   to enable a clock which isn't described.
-> * Qualcomm pinctrl drivers will now return an error when attempting to
->   configure an invalid function mux
->=20
-> Kind regards,
-> Caleb
->=20
-> The following changes since commit 0e1fc465fea62ebae91f2f56cb823e8b37ee10=
-77:
->=20
->   Merge tag 'dm-pull-15mar25' of git://git.denx.de/u-boot-dm into next (2=
-025-03-15 08:19:31 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git tags/qcom-ne=
-xt-20250317
->=20
-> for you to fetch changes up to 69aab567407efe67b8b2a10a3843656101b402ca:
->=20
->   pinctrl/qcom: fix kconfig option names (2025-03-17 15:12:26 +0000)
->=20
+* SoCs with cache-coherent DMA don't necessarily set BOUNCE_BUFFER.
+  Looks like you added that option to all the SoCs where you remove
+  EFI_LOADER_BOUNCE_BUFFER.
 
-This PR and specifically:
+* SoCs that (now) set BOUNCE_BUFFER may double bounce if the buffers
+  aren't properly aligned.  I suppose that this won't happen since
+  efi_disk_add_dev() sets medio.io_align to the device block size
+  which is typically larger than the cache line size.
 
-commit 61a1a1b8ca73bb9c5797d9f5a300a51afffc0aaa
-Author: Sam Day <me@samcday.com>
-Date:   Sat Jan 25 19:59:15 2025 +0000
+Still the commit message is somewhat misleading; this code doesn't
+really make us use the DM bounce buffering code.
 
-    mach-snapdragon: use PSCI sysreset driver
-   =20
-    Drop the `board_reset` function from mach-snapdragon board code, and
-    instead use the standard PSCI sysreset driver.
-   =20
-    Signed-off-by: Sam Day <me@samcday.com>
-    Link: https://lore.kernel.org/r/20250125-msm8916-sysreset-v1-1-62073932=
-ff0e@samcday.com
-    Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+I also spotted a few bugs in the implementation.  See below.
 
-Break building on dragonboard410c, dragonboard820c, and hmibsc.
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  arch/arm/Kconfig                              |  8 ++
+>  configs/ls1028aqds_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/ls1028aqds_tfa_defconfig              |  1 -
+>  configs/ls1028aqds_tfa_lpuart_defconfig       |  1 -
+>  configs/ls1028ardb_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/ls1028ardb_tfa_defconfig              |  1 -
+>  configs/ls1043ardb_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/ls1043ardb_tfa_defconfig              |  1 -
+>  configs/ls1046ardb_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/ls1046ardb_tfa_defconfig              |  1 -
+>  configs/ls1088aqds_tfa_defconfig              |  1 -
+>  configs/ls1088ardb_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/ls1088ardb_tfa_defconfig              |  1 -
+>  configs/ls2088aqds_tfa_defconfig              |  1 -
+>  configs/ls2088ardb_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/ls2088ardb_tfa_defconfig              |  1 -
+>  configs/lx2160aqds_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/lx2160aqds_tfa_defconfig              |  1 -
+>  configs/lx2160ardb_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/lx2160ardb_tfa_defconfig              |  1 -
+>  configs/lx2160ardb_tfa_stmm_defconfig         |  1 -
+>  configs/lx2162aqds_tfa_SECURE_BOOT_defconfig  |  1 -
+>  configs/lx2162aqds_tfa_defconfig              |  1 -
+>  .../lx2162aqds_tfa_verified_boot_defconfig    |  1 -
+>  configs/ten64_tfa_defconfig                   |  1 -
+>  include/efi_loader.h                          |  4 -
+>  lib/efi_loader/Kconfig                        |  7 --
+>  lib/efi_loader/efi_disk.c                     | 78 +++++++------------
+>  lib/efi_loader/efi_memory.c                   | 16 ----
+>  29 files changed, 36 insertions(+), 101 deletions(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index cf08fe63f1e7..bb946e69254c 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1417,6 +1417,7 @@ config TARGET_LS2080A_EMU
+>  	select ARCH_LS2080A
+>  	select ARM64
+>  	select ARMV8_MULTIENTRY
+> +	select BOUNCE_BUFFER
+>  	select FSL_DDR_SYNC_REFRESH
+>  	select GPIO_EXTRA_HEADER
+>  	help
+> @@ -1432,6 +1433,7 @@ config TARGET_LS1088AQDS
+>  	select ARMV8_MULTIENTRY
+>  	select ARCH_SUPPORT_TFABOOT
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select GPIO_EXTRA_HEADER
+>  	select SUPPORT_SPL
+>  	select FSL_DDR_INTERACTIVE if !SD_BOOT
+> @@ -1448,6 +1450,7 @@ config TARGET_LS2080AQDS
+>  	select ARMV8_MULTIENTRY
+>  	select ARCH_SUPPORT_TFABOOT
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select GPIO_EXTRA_HEADER
+>  	select SUPPORT_SPL
+>  	imply SCSI
+> @@ -1467,6 +1470,7 @@ config TARGET_LS2080ARDB
+>  	select ARMV8_MULTIENTRY
+>  	select ARCH_SUPPORT_TFABOOT
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select SUPPORT_SPL
+>  	select FSL_DDR_BIST
+>  	select FSL_DDR_INTERACTIVE if !SPL
+> @@ -1485,6 +1489,7 @@ config TARGET_LS2081ARDB
+>  	select ARM64
+>  	select ARMV8_MULTIENTRY
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select GPIO_EXTRA_HEADER
+>  	select SUPPORT_SPL
+>  	help
+> @@ -1500,6 +1505,7 @@ config TARGET_LX2160ARDB
+>  	select ARMV8_MULTIENTRY
+>  	select ARCH_SUPPORT_TFABOOT
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select GPIO_EXTRA_HEADER
+>  	help
+>  	  Support for NXP LX2160ARDB platform.
+> @@ -1514,6 +1520,7 @@ config TARGET_LX2160AQDS
+>  	select ARMV8_MULTIENTRY
+>  	select ARCH_SUPPORT_TFABOOT
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select GPIO_EXTRA_HEADER
+>  	help
+>  	  Support for NXP LX2160AQDS platform.
+> @@ -1529,6 +1536,7 @@ config TARGET_LX2162AQDS
+>  	select ARMV8_MULTIENTRY
+>  	select ARCH_SUPPORT_TFABOOT
+>  	select BOARD_LATE_INIT
+> +	select BOUNCE_BUFFER
+>  	select GPIO_EXTRA_HEADER
+>  	help
+>  	  Support for NXP LX2162AQDS platform.
+> diff --git a/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig
+> index 97eb7d9dca4c..e3b1018f6f8e 100644
+> --- a/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig
+> @@ -23,7 +23,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1028aqds_tfa_defconfig b/configs/ls1028aqds_tfa_defconfig
+> index cc53c17f543b..5b7dd4bf7dd5 100644
+> --- a/configs/ls1028aqds_tfa_defconfig
+> +++ b/configs/ls1028aqds_tfa_defconfig
+> @@ -25,7 +25,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1028aqds_tfa_lpuart_defconfig b/configs/ls1028aqds_tfa_lpuart_defconfig
+> index 8da7271c7f85..a38c81e83199 100644
+> --- a/configs/ls1028aqds_tfa_lpuart_defconfig
+> +++ b/configs/ls1028aqds_tfa_lpuart_defconfig
+> @@ -24,7 +24,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
+> index 3f71a37559be..da225e1dad8f 100644
+> --- a/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
+> @@ -23,7 +23,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1028ardb_tfa_defconfig b/configs/ls1028ardb_tfa_defconfig
+> index 89e452bdb1a8..829cc5204d34 100644
+> --- a/configs/ls1028ardb_tfa_defconfig
+> +++ b/configs/ls1028ardb_tfa_defconfig
+> @@ -25,7 +25,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig
+> index 1b41fe608dae..04ca2a3afd81 100644
+> --- a/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig
+> @@ -24,7 +24,6 @@ CONFIG_PCIE2=y
+>  CONFIG_PCIE3=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1043ardb_tfa_defconfig b/configs/ls1043ardb_tfa_defconfig
+> index ca100bd4bca9..a6ca63cd8f79 100644
+> --- a/configs/ls1043ardb_tfa_defconfig
+> +++ b/configs/ls1043ardb_tfa_defconfig
+> @@ -26,7 +26,6 @@ CONFIG_PCIE2=y
+>  CONFIG_PCIE3=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig
+> index 6b4e834ad4a0..9c22d542a6f8 100644
+> --- a/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig
+> @@ -24,7 +24,6 @@ CONFIG_PCIE2=y
+>  CONFIG_PCIE3=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1046ardb_tfa_defconfig b/configs/ls1046ardb_tfa_defconfig
+> index a8f20f9b87b7..4eab8ea19e8e 100644
+> --- a/configs/ls1046ardb_tfa_defconfig
+> +++ b/configs/ls1046ardb_tfa_defconfig
+> @@ -26,7 +26,6 @@ CONFIG_PCIE2=y
+>  CONFIG_PCIE3=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ls1088aqds_tfa_defconfig b/configs/ls1088aqds_tfa_defconfig
+> index df86bf982ee4..31d56f587af8 100644
+> --- a/configs/ls1088aqds_tfa_defconfig
+> +++ b/configs/ls1088aqds_tfa_defconfig
+> @@ -29,7 +29,6 @@ CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
+> index df472eeb404d..c910b73634f9 100644
+> --- a/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
+> @@ -26,7 +26,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/ls1088ardb_tfa_defconfig b/configs/ls1088ardb_tfa_defconfig
+> index 8d640f6594b2..682007e803d1 100644
+> --- a/configs/ls1088ardb_tfa_defconfig
+> +++ b/configs/ls1088ardb_tfa_defconfig
+> @@ -28,7 +28,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+>  CONFIG_SYS_MEMTEST_END=0x9fffffff
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/ls2088aqds_tfa_defconfig b/configs/ls2088aqds_tfa_defconfig
+> index 8c86b8b11eb3..ea73a4cda971 100644
+> --- a/configs/ls2088aqds_tfa_defconfig
+> +++ b/configs/ls2088aqds_tfa_defconfig
+> @@ -23,7 +23,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig b/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig
+> index 3fd1de967896..7f53397cdcb1 100644
+> --- a/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig
+> @@ -27,7 +27,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/ls2088ardb_tfa_defconfig b/configs/ls2088ardb_tfa_defconfig
+> index f053044fa56e..398dfe068015 100644
+> --- a/configs/ls2088ardb_tfa_defconfig
+> +++ b/configs/ls2088ardb_tfa_defconfig
+> @@ -29,7 +29,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig b/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig
+> index 321ed71993b8..afb842978209 100644
+> --- a/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig
+> @@ -28,7 +28,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_OF_BOARD_SETUP=y
+>  CONFIG_OF_STDOUT_VIA_ALIAS=y
+> diff --git a/configs/lx2160aqds_tfa_defconfig b/configs/lx2160aqds_tfa_defconfig
+> index 465f07ee7f82..ec23ed384c44 100644
+> --- a/configs/lx2160aqds_tfa_defconfig
+> +++ b/configs/lx2160aqds_tfa_defconfig
+> @@ -30,7 +30,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig b/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig
+> index 478a01b566c6..71f4436eca06 100644
+> --- a/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig
+> @@ -29,7 +29,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_OF_BOARD_SETUP=y
+>  CONFIG_OF_STDOUT_VIA_ALIAS=y
+> diff --git a/configs/lx2160ardb_tfa_defconfig b/configs/lx2160ardb_tfa_defconfig
+> index 8fd18825569c..6be3890de3ed 100644
+> --- a/configs/lx2160ardb_tfa_defconfig
+> +++ b/configs/lx2160ardb_tfa_defconfig
+> @@ -31,7 +31,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/lx2160ardb_tfa_stmm_defconfig b/configs/lx2160ardb_tfa_stmm_defconfig
+> index cf65897af898..ef89b0f34575 100644
+> --- a/configs/lx2160ardb_tfa_stmm_defconfig
+> +++ b/configs/lx2160ardb_tfa_stmm_defconfig
+> @@ -32,7 +32,6 @@ CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+>  CONFIG_EFI_MM_COMM_TEE=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig b/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig
+> index 46b6085a52fe..2b31be10899b 100644
+> --- a/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig
+> +++ b/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig
+> @@ -28,7 +28,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_OF_BOARD_SETUP=y
+>  CONFIG_OF_STDOUT_VIA_ALIAS=y
+> diff --git a/configs/lx2162aqds_tfa_defconfig b/configs/lx2162aqds_tfa_defconfig
+> index 41e0262f3ca5..43f8069cfde5 100644
+> --- a/configs/lx2162aqds_tfa_defconfig
+> +++ b/configs/lx2162aqds_tfa_defconfig
+> @@ -30,7 +30,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+>  CONFIG_OF_BOARD_SETUP=y
+> diff --git a/configs/lx2162aqds_tfa_verified_boot_defconfig b/configs/lx2162aqds_tfa_verified_boot_defconfig
+> index 7abfdbafbdf1..33b362c20b65 100644
+> --- a/configs/lx2162aqds_tfa_verified_boot_defconfig
+> +++ b/configs/lx2162aqds_tfa_verified_boot_defconfig
+> @@ -30,7 +30,6 @@ CONFIG_FSL_QIXIS=y
+>  CONFIG_REMAKE_ELF=y
+>  CONFIG_MP=y
+>  CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_SIGNATURE=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTDELAY=10
+> diff --git a/configs/ten64_tfa_defconfig b/configs/ten64_tfa_defconfig
+> index a65209e8335b..f35de31718f7 100644
+> --- a/configs/ten64_tfa_defconfig
+> +++ b/configs/ten64_tfa_defconfig
+> @@ -16,7 +16,6 @@ CONFIG_PCI=y
+>  CONFIG_AHCI=y
+>  CONFIG_SYS_FSL_NUM_CC_PLLS=3
+>  CONFIG_MP=y
+> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_BOOTSTD_FULL=y
+>  CONFIG_BOOTSTD_BOOTCOMMAND=y
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index e9c10819ba26..3ed27e97a083 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -894,10 +894,6 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
+>  				    struct efi_loaded_image_obj **handle_ptr,
+>  				    struct efi_loaded_image **info_ptr);
+> 
+> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> -extern void *efi_bounce_buffer;
+> -#define EFI_LOADER_BOUNCE_BUFFER_SIZE (64 * 1024 * 1024)
+> -#endif
+> 
+>  /* shorten device path */
+>  struct efi_device_path *efi_dp_shorten(struct efi_device_path *dp);
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 6130af14337e..bc08776ef4a6 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -490,13 +490,6 @@ config EFI_HTTP_PROTOCOL
+>  endmenu
+> 
+>  menu "Misc options"
+> -config EFI_LOADER_BOUNCE_BUFFER
+> -	bool "EFI Applications use bounce buffers for DMA operations"
+> -	help
+> -	  Some hardware does not support DMA to full 64bit addresses. For this
+> -	  hardware we can create a bounce buffer so that payloads don't have to
+> -	  worry about platform details.
+> -
+>  config EFI_GRUB_ARM32_WORKAROUND
+>  	bool "Workaround for GRUB on 32bit ARM"
+>  	default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
+> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> index 5452640354e0..a0202032bb5a 100644
+> --- a/lib/efi_loader/efi_disk.c
+> +++ b/lib/efi_loader/efi_disk.c
+> @@ -105,6 +105,8 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
+>  	int blksz;
+>  	int blocks;
+>  	unsigned long n;
+> +	u64 bb = 0xffffffff;
+> +	void *bb_ptr = buffer;
+> 
+>  	diskobj = container_of(this, struct efi_disk_obj, ops);
+>  	blksz = diskobj->media.block_size;
+> @@ -113,27 +115,35 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
+>  	EFI_PRINT("blocks=%x lba=%llx blksz=%x dir=%d\n",
+>  		  blocks, lba, blksz, direction);
+> 
+> +	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && (uintptr_t)buffer >= SZ_4G + buffer_size - 1) {
 
---=20
-Tom
+Shouldn't that check be
 
---3en52eCrdytSQI53
-Content-Type: application/pgp-signature; name="signature.asc"
+	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && (uintptr_t)buffer + buffer_size - 1 >= SZ_4G) {
 
------BEGIN PGP SIGNATURE-----
+?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfYl+IACgkQFHw5/5Y0
-tywjVAv5AX+A4tHSGvOcui0d55dZgLTuv1jTaQ38+bM76VDQQfInQv9AFw2Ad50y
-PGTrqRV85VZ06kntQMw19jF9gzAauC7/Nc7dQzw51gZeckHUtQGcSw9o3zjpoOtk
-TNyOygGqmA2AuAZcn/7HO/EZg4xUwpnR+GYuhgG96jBwDwVer+pwdLJW0Y+qwu9c
-KxPtozWhqj3MpLcykXcx8qbFr2jBGMeeZajEAk00aqN4zVNJH8X8PE7KJQpUUL9c
-HnMrDBAHJESSSqPikrB1jSb+XDgqPUHmL82+PtSc8uzbHrVMmhtc1Z9TYckmpbv9
-WS5vWJUTzlCDq80QH6wCvQd1dDGgyM6kHXHNeMNMyUhrGYiUOXy51f+1mvGwjMfh
-A8QADip6S1zgG4A0Gi+JBMrDUMyKjuhBEea9wflzietes97htXVsMqaqqU9tdTIS
-3VQ4b6VkpM7F7SUHBh4VPEdSY2/lDp63qckuJ9dOnaMjf29aRrInBl8WKdPQBX+E
-A61qmEa7
-=ulgK
------END PGP SIGNATURE-----
+> +		if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
+> +				       buffer_size >> EFI_PAGE_SHIFT, &bb) != EFI_SUCCESS)
+> +			return EFI_OUT_OF_RESOURCES;
+> +
+> +		bb_ptr = (void *)(uintptr_t)bb;
+> +	}
+>  	/* We only support full block access */
+> -	if (buffer_size & (blksz - 1))
+> +	if (buffer_size & (blksz - 1)) {
+> +		if (buffer != bb_ptr)
+> +			efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
+>  		return EFI_BAD_BUFFER_SIZE;
+> +	}
 
---3en52eCrdytSQI53--
+Any reason why you don't check the buffer_size check before allocating
+the bounce buffer?  That way you don't have to worry about freeing it
+here.
+
+You're missing a memcpy() here in the case direction == EFI_DISK_WRITE.
+
+>  	if (CONFIG_IS_ENABLED(PARTITIONS) &&
+>  	    device_get_uclass_id(diskobj->header.dev) == UCLASS_PARTITION) {
+>  		if (direction == EFI_DISK_READ)
+> -			n = disk_blk_read(diskobj->header.dev, lba, blocks,
+> -					  buffer);
+> +			n = disk_blk_read(diskobj->header.dev, lba, blocks, bb_ptr);
+>  		else
+> -			n = disk_blk_write(diskobj->header.dev, lba, blocks,
+> -					   buffer);
+> +			n = disk_blk_write(diskobj->header.dev, lba, blocks, bb_ptr);
+>  	} else {
+>  		/* dev is a block device (UCLASS_BLK) */
+>  		struct blk_desc *desc;
+> 
+>  		desc = dev_get_uclass_plat(diskobj->header.dev);
+>  		if (direction == EFI_DISK_READ)
+> -			n = blk_dread(desc, lba, blocks, buffer);
+> +			n = blk_dread(desc, lba, blocks, bb_ptr);
+>  		else
+> -			n = blk_dwrite(desc, lba, blocks, buffer);
+> +			n = blk_dwrite(desc, lba, blocks, bb_ptr);
+>  	}
+> 
+>  	/* We don't do interrupts, so check for timers cooperatively */
+> @@ -141,8 +151,16 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
+> 
+>  	EFI_PRINT("n=%lx blocks=%x\n", n, blocks);
+> 
+> -	if (n != blocks)
+> +	if (n != blocks) {
+> +		if (buffer != bb_ptr)
+> +			efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
+>  		return EFI_DEVICE_ERROR;
+> +	}
+> +
+> +	if (buffer != bb_ptr) {
+> +		memcpy(buffer, bb_ptr, buffer_size);
+
+This memcpy() is only necessary if direction == EFI_DISK_READ.
+
+> +		efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
+> +	}
+> 
+>  	return EFI_SUCCESS;
+>  }
+> @@ -166,7 +184,6 @@ static efi_status_t EFIAPI efi_disk_read_blocks(struct efi_block_io *this,
+>  			u32 media_id, u64 lba, efi_uintn_t buffer_size,
+>  			void *buffer)
+>  {
+> -	void *real_buffer = buffer;
+>  	efi_status_t r;
+> 
+>  	if (!this)
+> @@ -184,31 +201,12 @@ static efi_status_t EFIAPI efi_disk_read_blocks(struct efi_block_io *this,
+>  	    (this->media->last_block + 1) * this->media->block_size)
+>  		return EFI_INVALID_PARAMETER;
+> 
+> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> -	if (buffer_size > EFI_LOADER_BOUNCE_BUFFER_SIZE) {
+> -		r = efi_disk_read_blocks(this, media_id, lba,
+> -			EFI_LOADER_BOUNCE_BUFFER_SIZE, buffer);
+> -		if (r != EFI_SUCCESS)
+> -			return r;
+> -		return efi_disk_read_blocks(this, media_id, lba +
+> -			EFI_LOADER_BOUNCE_BUFFER_SIZE / this->media->block_size,
+> -			buffer_size - EFI_LOADER_BOUNCE_BUFFER_SIZE,
+> -			buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
+> -	}
+> -
+> -	real_buffer = efi_bounce_buffer;
+> -#endif
+> -
+>  	EFI_ENTRY("%p, %x, %llx, %zx, %p", this, media_id, lba,
+>  		  buffer_size, buffer);
+> 
+> -	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, real_buffer,
+> +	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, buffer,
+>  			       EFI_DISK_READ);
+> 
+> -	/* Copy from bounce buffer to real buffer if necessary */
+> -	if ((r == EFI_SUCCESS) && (real_buffer != buffer))
+> -		memcpy(buffer, real_buffer, buffer_size);
+> -
+>  	return EFI_EXIT(r);
+>  }
+> 
+> @@ -232,7 +230,6 @@ static efi_status_t EFIAPI efi_disk_write_blocks(struct efi_block_io *this,
+>  			u32 media_id, u64 lba, efi_uintn_t buffer_size,
+>  			void *buffer)
+>  {
+> -	void *real_buffer = buffer;
+>  	efi_status_t r;
+> 
+>  	if (!this)
+> @@ -252,29 +249,10 @@ static efi_status_t EFIAPI efi_disk_write_blocks(struct efi_block_io *this,
+>  	    (this->media->last_block + 1) * this->media->block_size)
+>  		return EFI_INVALID_PARAMETER;
+> 
+> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> -	if (buffer_size > EFI_LOADER_BOUNCE_BUFFER_SIZE) {
+> -		r = efi_disk_write_blocks(this, media_id, lba,
+> -			EFI_LOADER_BOUNCE_BUFFER_SIZE, buffer);
+> -		if (r != EFI_SUCCESS)
+> -			return r;
+> -		return efi_disk_write_blocks(this, media_id, lba +
+> -			EFI_LOADER_BOUNCE_BUFFER_SIZE / this->media->block_size,
+> -			buffer_size - EFI_LOADER_BOUNCE_BUFFER_SIZE,
+> -			buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
+> -	}
+> -
+> -	real_buffer = efi_bounce_buffer;
+> -#endif
+> -
+>  	EFI_ENTRY("%p, %x, %llx, %zx, %p", this, media_id, lba,
+>  		  buffer_size, buffer);
+> 
+> -	/* Populate bounce buffer if necessary */
+> -	if (real_buffer != buffer)
+> -		memcpy(real_buffer, buffer, buffer_size);
+> -
+> -	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, real_buffer,
+> +	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, buffer,
+>  			       EFI_DISK_WRITE);
+> 
+>  	return EFI_EXIT(r);
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 6d00b1862505..d7a8cb89e5b5 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -40,10 +40,6 @@ struct efi_mem_list {
+>  /* This list contains all memory map items */
+>  static LIST_HEAD(efi_mem);
+> 
+> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> -void *efi_bounce_buffer;
+> -#endif
+> -
+>  /**
+>   * struct efi_pool_allocation - memory block allocated from pool
+>   *
+> @@ -852,18 +848,6 @@ int efi_memory_init(void)
+> 
+>  	add_u_boot_and_runtime();
+> 
+> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> -	/* Request a 32bit 64MB bounce buffer region */
+> -	uint64_t efi_bounce_buffer_addr = 0xffffffff;
+> -
+> -	if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
+> -			       (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
+> -			       &efi_bounce_buffer_addr) != EFI_SUCCESS)
+> -		return -1;
+> -
+> -	efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
+> -#endif
+> -
+>  	return 0;
+>  }
+> 
+> --
+> 2.47.2
+> 
+> 
