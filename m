@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D84C3C28B2F
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B606C35FF1
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:15:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C51FF8129F;
-	Mon, 17 Mar 2025 04:14:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19D44817D8;
+	Mon, 17 Mar 2025 04:14:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742181295;
-	bh=tqCHgcaRBPAlt8G9eLQjokhqR5JbH221Y+lddqNldF8=;
+	s=phobos-20191101; t=1742181298;
+	bh=SDhFu3QxGYSG19FG+JWVR/cMR6XFvwrp5Idtzd2HyF0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=w+sdHxVaOU1QeEGBTATOMSIRw0XD42k0sYzJxfzBTLTQrzASyEkiCwlB7G6lxucoX
-	 req1KR1WSPqu9d3nYftB1mw39MP1sQ4GmsQT4u4YjaDXwAHDMcIOGsLAgS2ltmFeUk
-	 z2/6jdOzqcXXzO0jkMzPyOwI3E1kotDQJeUt1vEZQZ5Opbn2EfU1/LmKc/r9+RAl/T
-	 ePo9QB+THj6hhiP/7QumOO2UjUejDq8/E3/UnNZNLKLuSdGWvppTQwjbQ0XLb5dYvJ
-	 RBhYO+ILFprANTbAI9d2hbEyVVNnHrGMvGwEaHXZht9k+Aoe6R7xqibxkxKmz6pHon
-	 RKFMx41QU/3yg==
+	b=n+7kIbGFC3w1KvyZOGMw5J5QqMk5yDt1e69WNHND5WB8acVpYlMtDOQFLgA5OV+yF
+	 lUxudunjtH5c7jNkGXHdEe4zzVh2wwX0bdueWt0GDaSQmRSYkBKeH2uM4VR+q13o8/
+	 IpIQv0niIRFkkHaaElfCsUjuugiXqn18J6msRiFAR6RCZb9zjNF1dGznsrE7lmluhR
+	 k0MgHcBx6jBf/DMNJEiP/QWy6OucECEiOaKFuGlyHgZTc1F/s0h92hcpS8s2SeolPg
+	 v0HCvt96l8Udhk+A3eIZ0+8Oui5jiFsLfh0CPVawty+F0A1WFfHPH6lhMrUvX47nOU
+	 6hwKh0SBm9Uwg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05DDE801DE; Mon, 17 Mar 2025 04:14:55 +0100 (CET)
+ id 9F4D28168B; Mon, 17 Mar 2025 04:14:56 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08FFD80F4C
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:14:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2508A810F5
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:14:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="WuAyvtfT"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Fg8kTls9"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 716F2101F7A30; Mon, 17 Mar 2025 04:14:51 +0100 (CET)
+ with ESMTPSA id B746E101F7A3D; Mon, 17 Mar 2025 04:14:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742181292; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1742181293; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=tqCHgcaRBPAlt8G9eLQjokhqR5JbH221Y+lddqNldF8=;
- b=WuAyvtfTUkwdeerREWjpzTOIdjhJCtM+SQoqUwZRCcenBr23TwQsWxtc+BN9vxKrx6vA1/
- HJQhzfipclg8ufKMmaJyEoF/fKUGplTLIbaS+ijZz4ypKo7BObvBGVbBTVvf0YUAL8wVhi
- y4SPHmd5kKa5CfBS/RtSqg2myQZrYBhDsux8WI01GNGBlx3gQIhmAZbDiUMYl3VF6RFeeq
- gu5lGRVpHjev/uu3cIOASvjhj0xFsEHHYFjwME2GS5AvIVzQExmMgMzvpQkSeLHFDHoQA+
- FpIWFpJSX4VBKOPA+1mJYpKedj4XzdWhhyvIF6Fr3yhv306CILsAaTF63mnpRQ==
+ bh=SDhFu3QxGYSG19FG+JWVR/cMR6XFvwrp5Idtzd2HyF0=;
+ b=Fg8kTls9NgHxpKHM+/aa0WSRuA5N4+hkNj0a8x20f7iFPBG2MIbEroIJuaCw1KWCqgEjGu
+ FJ6lomf3Q7KnItWr5+ZKjiQYOyUyM/49BPQ45dd6kKd7RO2xDrqU3CXQoptdr8z6k0G4mp
+ l6N2rXhccnZnwXTeA3YkgTPZZ3hCUPQp8TusnrTQMzD1CoKAISgVQ+YknkNeuUvmuxtzXi
+ pGDGaMxxgeg7DbXSEDJ0mXB5MrkTjqAbnNm9/tjlAMCqCBbKmv80Oq5VC3F04ZAhiUyLDr
+ 0KVuCvqgjgQBdSy3DQsv3GtAxOQHuRDtBsbZnvShg/Zt5DN4fyS/enxXORZ6WQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
@@ -57,9 +57,9 @@ Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 01/11] cmd: fs: Add generic mkdir implementation
-Date: Mon, 17 Mar 2025 04:12:40 +0100
-Message-ID: <20250317031418.223019-2-marex@denx.de>
+Subject: [PATCH v3 02/11] cmd: fs: Add generic rm implementation
+Date: Mon, 17 Mar 2025 04:12:41 +0100
+Message-ID: <20250317031418.223019-3-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250317031418.223019-1-marex@denx.de>
 References: <20250317031418.223019-1-marex@denx.de>
@@ -82,8 +82,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add generic implementation of the 'mkdir' command to create directories
-in filesystems using the generic filesystem API.
+Add generic implementation of the 'rm' command to delete files
+from filesystems using the generic filesystem API.
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Marek Vasut <marex@denx.de>
@@ -106,24 +106,24 @@ V3: No change
  1 file changed, 14 insertions(+)
 
 diff --git a/cmd/fs.c b/cmd/fs.c
-index 3faf7627447..bccc3a129bd 100644
+index bccc3a129bd..7f1ab8f0fd2 100644
 --- a/cmd/fs.c
 +++ b/cmd/fs.c
-@@ -85,6 +85,20 @@ U_BOOT_CMD(
+@@ -99,6 +99,20 @@ U_BOOT_CMD(
  	"      device type 'interface' instance 'dev'."
  );
  
-+static int do_mkdir_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
-+			    char *const argv[])
++static int do_rm_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
++			 char *const argv[])
 +{
-+	return do_mkdir(cmdtp, flag, argc, argv, FS_TYPE_ANY);
++	return do_rm(cmdtp, flag, argc, argv, FS_TYPE_ANY);
 +}
 +
 +U_BOOT_CMD(
-+	mkdir,	4,	1,	do_mkdir_wrapper,
-+	"create a directory",
-+	"<interface> [<dev[:part]>] <directory>\n"
-+	"    - Create a directory 'directory' of partition 'part' on\n"
++	rm,	4,	1,	do_rm_wrapper,
++	"delete a file",
++	"<interface> [<dev[:part]>] <filename>\n"
++	"    - delete a file with the name 'filename' on\n"
 +	"      device type 'interface' instance 'dev'."
 +);
 +
