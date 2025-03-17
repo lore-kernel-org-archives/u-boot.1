@@ -4,92 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C183BC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 08:43:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63B2AC282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 08:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2533280107;
-	Mon, 17 Mar 2025 09:43:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A58408058A;
+	Mon, 17 Mar 2025 09:59:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hoqGaHSy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sBldVtCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68CA18058A; Mon, 17 Mar 2025 09:43:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5983C800C2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 09:43:41 +0100 (CET)
+ id 52E1280F4C; Mon, 17 Mar 2025 09:59:48 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C85580107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 09:59:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1742201021; x=1742805821; i=xypron.glpk@gmx.de;
- bh=g9bPGaTD0tjCPI2p4JmngOjHUEw+Ff1Pub/QwLUZbmU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=hoqGaHSyZLJGJNAq7N4CzAQDcrO2EfdotmF9MGplUn1bMKOZygFbNQBIC2DQVFQ9
- PH7w7cT10FgXpAcrgQ8jMvLwxCPlY5oR624DlnOmXo/KsY5LcNLqBE0g3kGgDRukT
- bJvigwaE5qCvvwPs/mDl1EHavK3ekiw6LbToeQIA83OaFYwc1fimDrIosZbiYIGZb
- hHI8ufylGUSdVZ2a9tT7IwdGpEnAc7rduFe9Fc0IPk2qsYhQyZnadn9ZrDIlKKvo+
- 2Av55fXOyPOB/13k9VlsIw1xj/GZLRjVsnu9nRzKMPU//lap2HzrQLuc8ydpMId8y
- EfMeYNoaK2YHfskgUw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.111.26]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtfJX-1t3NvH2t8J-016ruV; Mon, 17
- Mar 2025 09:43:40 +0100
-Message-ID: <294b2187-64c3-491a-b9ef-45ed7861240c@gmx.de>
-Date: Mon, 17 Mar 2025 09:43:35 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52H8xhWQ2754582
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Mon, 17 Mar 2025 03:59:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1742201983;
+ bh=PRmBUrNR8OekVVNeerGvEqyub7KKjsqxcJR1I2DXZxs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=sBldVtCkUn4a3nhpscitYujwgPaD6srjj9ab+Mr0WA2q0gmgGRFA2XVKvY8WFuFh0
+ m3FBopz007pdiU7G4Aq8PxOmdGxZvuT/XKB6kqxFYWH+imy0cO/LfIIJDsorWFWGnU
+ 8gYi1W0LUf8JqCSMPnc2Fd3HTZkh0PKV7CgXDzDk=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52H8xhFC026474;
+ Mon, 17 Mar 2025 03:59:43 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 17
+ Mar 2025 03:59:42 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 17 Mar 2025 03:59:42 -0500
+Received: from [10.24.69.179] ([10.24.69.179])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52H8xeR3068461;
+ Mon, 17 Mar 2025 03:59:40 -0500
+Message-ID: <f9ae49bc-0bc8-54a9-acaa-e1d80bfbcb45@ti.com>
+Date: Mon, 17 Mar 2025 14:29:39 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/15] arm: riscv: efi: Export _start symbol from
- crt0_*_efi stubs
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, u-boot@lists.denx.de
-References: <20250315221813.1265193-1-CFSworks@gmail.com>
- <20250315221813.1265193-12-CFSworks@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [RFC PATCH 1/4] cmd: fuse: Remove custom string functions
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250315221813.1265193-12-CFSworks@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ZxtGceD5Lj7t78K6qnG22c4If621M09m/uTBxPXlW6bAhod5M8L
- 52mZSNAcnZI7mTXW/U4BwLvXjLOwFfZAPn1mBGPh4JWHAbHVPA+hguHkt4EjKWewEOq3CC+
- iZdO4j8ds97erMUIUstdvIjBqQVysNUdRCv3yP4FEUBoo5aUaUwrrqk79UhLbaqoM1e3p9R
- QSgQ7CVA1xooLmeQxJLkQ==
-UI-OutboundReport: notjunk:1;M01:P0:4ZTewhadabw=;wTFJut61Msep4f1GAgudjH9kscQ
- 2E7iondFx4Qzdm9N3rU3bhb67fXUULj8aFKSzQ01xPdDVyLJAv7ZjdEHr0yEKiMCPgnWANZ3K
- 1jBHblqf3c9DS+qE0JcdsHFaIgiYzamQmqP2gEia5WJGLkWye25Yye+PJtjMP+KMe1zba+X1I
- k5kjs/D6Onk1IsvoVdWUTXBUqYqTsqqRBSlLms6nYQv4mo+BIDkFunFjkB9WHmjWD6d5vgNU7
- c6le8ISu5hjlT1pjqIT23EC6/2eThDmIe/DMZa4DRptwx/QsA6m/9CBNq7p47uxGe3QazqIai
- zR3YcXoxUOuMr6taAMUBtDfIBzhNoJ2VlRRSFkeIAt60pTh/KBlIvZlOu3SPAnRxGfY2+nh/k
- cCvzzXrByS5DUPUfZ2zvw/lkmQ0N+7KN6j3t6zw1LowArsUJ9EVx4m5aJ+oBvYRAisxgcpfJo
- vsf3R0JTbX0hgEHByf5JfJKcL8kgkFQHEz8bP0VdfZ0fCd0hM4cpLRT9kxPM751bQ1+TBwAk6
- 0ZMvCV7bOnqPXa5ju+pzr7K/cND88yS6QVLcJZHDqbVD2oTOK0lbDBdclyW4/AD+qVAq937/u
- la4hlqvn97D84vq6FxTpsvBJvCRIdsPUoQK7gDwyrLiHFDGOlsJteoDvfyBt4Xn02o5bdNE0A
- JlTLt6nOt4AWYXLHVnvSAB7JJ36mrN9rZ2kF0nXgYS7W9nQxPMSXUL8BgJSjh/t2WXlocD+55
- tr5B1M5IybJelALHrgoWpNnfID2wFiQmXQPzLjsQVCP3GPR9bwZgta9ELN/F+gOZwkpuriNNW
- Qq5VLzXUBJWka7lhzaLJgOpQOz9S96t9iWzFnYRRF5rLxQ7LIce5v3OrGaqtjvTfdjnm2dnYT
- TJ8OQ4haf+iTb8Qd3uGAerHwIGiM3ko3hsL2lV7V/aU/BaSK0+fAKvBKIBMmuDTMjseeAaoqA
- 8zPbOPWDFpuP2PtXXHptYmdPHG5oTT5s5nqeAUyNLGyJMZSRDlJYiy4+t2n1AevEIfkwLdf/T
- 29hI7TAt02fKpiMJ1uCl/GXPxdK6l3mntYPJTtdvQTXOCk/2kDKFF6Z1eVvYfxAk4WFnzgeH2
- t0g5WVLWOxHUpTmWqMC/0HRf/FQpK8r8NMfycVoM0e2+txnPC2jlHSwwazQwNoTdVk7zB/7+b
- BeJ+tlEwtenKvu34KTp76atjfoI+xKQRpdmShGpWSp+qo3uHM5s+87uN2VzxYgQZRffApeiQ3
- yzex7oVDaUn+AqoEEzJ2zEjt3pC6Oq0xhadMc32p/ho657+nVJR72fCZJlcPEToK/WrQ3a1ZL
- 7hIJMKYKBF6OcX18GfQaMxzrFL6Tou+sZATDOCcZ3a4bLuSy3TYZ2phgZ8itO1Jkt+4TbKenR
- ts8Bawj4rkoooSVYaunoCMn9zL5U0n85v71aFHSLdcSIDebO5MWf3lTAwJQuIOoZdR9v887wA
- z+KKsHKWQuJfwZaujpXgkT+oiLmY=
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <k-malarvizhi@ti.com>,
+ <kamlesh@ti.com>
+References: <20250313115517.1181829-1-h-vm@ti.com>
+ <20250313115517.1181829-2-h-vm@ti.com>
+ <20250313161539.GE2640854@bill-the-cat>
+ <768e6b56-b55a-834b-4abc-41b9cee701e1@ti.com>
+ <20250314140928.GL2640854@bill-the-cat>
+From: Harsha Vardhan V M <h-vm@ti.com>
+In-Reply-To: <20250314140928.GL2640854@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,69 +85,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/15/25 23:18, Sam Edwards wrote:
-> While the _start label is only intended for use locally to populate the
-> (hand-written) PE header, the linker script includes ENTRY(_start) which
-> designates it as the entry point in the output ELF, resulting in linker
-> warnings under some linkers (e.g. LLVM's lld) due to _start not being a
-> globally-visible symbol. Since  ELF is only an intermediary build
-> format, and the aforementioned PE header correctly points to _start, the
-> ENTRY(_start) directive could easily be removed to silence this warning.
->
-> However, since some developers who are debugging EFI by analyzing the
-> intermediary ELF may appreciate having correct entry-point information,
-> this patch instead promotes the _start labels to global symbols,
-> silencing the linker warning and making the intermediary ELF reflect the
-> true entry point.
->
-> This patch doesn't affect the final output binaries in any way.
->
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-> ---
->   arch/arm/lib/crt0_aarch64_efi.S | 1 +
->   arch/arm/lib/crt0_arm_efi.S     | 1 +
->   arch/riscv/lib/crt0_riscv_efi.S | 1 +
->   3 files changed, 3 insertions(+)
->
-> diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64=
-_efi.S
-> index e21b54fdbcb..003d5f83041 100644
-> --- a/arch/arm/lib/crt0_aarch64_efi.S
-> +++ b/arch/arm/lib/crt0_aarch64_efi.S
-> @@ -144,6 +144,7 @@ section_table:
->   		 IMAGE_SCN_CNT_INITIALIZED_DATA)
->
->   	.align		12
-> +	.globl		_start
->   _start:
->   	stp		x29, x30, [sp, #-32]!
->   	mov		x29, sp
-> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-> index 235b3a0c48f..593ee1e194a 100644
-> --- a/arch/arm/lib/crt0_arm_efi.S
-> +++ b/arch/arm/lib/crt0_arm_efi.S
-> @@ -143,6 +143,7 @@ section_table:
->   		 IMAGE_SCN_CNT_INITIALIZED_DATA)
->
->   	.align		12
-> +	.globl		_start
->   _start:
->   	stmfd		sp!, {r0-r2, lr}
->
-> diff --git a/arch/riscv/lib/crt0_riscv_efi.S b/arch/riscv/lib/crt0_riscv=
-_efi.S
-> index 9eacbe4a859..f170e4b26d6 100644
-> --- a/arch/riscv/lib/crt0_riscv_efi.S
-> +++ b/arch/riscv/lib/crt0_riscv_efi.S
-> @@ -179,6 +179,7 @@ section_table:
->   		 IMAGE_SCN_CNT_INITIALIZED_DATA)
->
->   	.align		12
-> +	.globl		_start
->   _start:
->   	addi		sp, sp, -(SIZE_LONG * 3)
->   	SAVE_LONG(a0, 0)
+On 14/03/25 19:39, Tom Rini wrote:
+> On Fri, Mar 14, 2025 at 07:13:19PM +0530, Harsha Vardhan V M wrote:
+>>
+>>
+>> On 13/03/25 21:45, Tom Rini wrote:
+>>> On Thu, Mar 13, 2025 at 05:25:14PM +0530, Harsha Vardhan V M wrote:
+>>>
+>>>> Remove custom string functions and replace them with normal string
+>>>> functions. Remove the custom strtou32 and replace it with str2long.
+>>>>
+>>>> Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
+>>>
+>>> Thanks for doing this.
+>>>
+>>>> ---
+>>>>    cmd/fuse.c | 27 ++++++++-------------------
+>>>>    1 file changed, 8 insertions(+), 19 deletions(-)
+>>>>
+>>>> diff --git a/cmd/fuse.c b/cmd/fuse.c
+>>>> index 598ef496a43..9f489570634 100644
+>>>> --- a/cmd/fuse.c
+>>>> +++ b/cmd/fuse.c
+>>>> @@ -15,17 +15,6 @@
+>>>>    #include <vsprintf.h>
+>>>>    #include <linux/errno.h>
+>>>> -static int strtou32(const char *str, unsigned int base, u32 *result)
+>>>> -{
+>>>> -	char *ep;
+>>>> -
+>>>> -	*result = simple_strtoul(str, &ep, base);
+>>>> -	if (ep == str || *ep != '\0')
+>>>> -		return -EINVAL;
+>>>> -
+>>>> -	return 0;
+>>>> -}
+>>>> -
+>>>>    static int confirm_prog(void)
+>>>>    {
+>>>>    	puts("Warning: Programming fuses is an irreversible operation!\n"
+>>>> @@ -54,14 +43,14 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
+>>>>    	argc -= 2 + confirmed;
+>>>>    	argv += 2 + confirmed;
+>>>> -	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
+>>>> -			strtou32(argv[1], 0, &word))
+>>>> +	if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
+>>>> +			!(str2long(argv[1], (ulong *)&word)))
+>>>
+>>> I didn't know we had "str2long" which is a differently rarely used
+>>> function. Why not just simple_strtoul inline? Am I missing something?
+>>> Thanks.
+>>
+>> We cannot use simple_strtoul inline directly because we need proper error
+>> checking to ensure the simple_strtoul conversion was successful. The
+>> str2long function is a wrapper around simple_strtoul and the necessary error
+>> checks. Hence, using str2long here.
+>> Thanks.
+> 
+> I'm sorry I'm still not getting it. We virtually never call str2long. I
+> was taking a quick look at why if anything the 4 callers in the entire
+> tree today have more special error checking requirements than every
+> other command which parses user input.
+> 
 
+Hi Tom,
+I tried to retain the error checking done by the custom strtou32 
+function, hence replaced the custom strtou32 function with str2long. I 
+did notice that in some other files in the cmd/ directory, 
+simple_strtoul is used inline with NULL as the endp parameter, like 
+this: simple_strtoul(argv[2], NULL, 16).
+
+Do I proceed with replacing the custom strtou32 function with 
+simple_strtoul inline by passing NULL as the endp parameter, similar to 
+the example above? Please let me know if you have an alternative suggestion.
+
+Thanks,
+Harsha
