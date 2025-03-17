@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1459CC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36E0C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4801680107;
-	Mon, 17 Mar 2025 14:46:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 165118122F;
+	Mon, 17 Mar 2025 14:48:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cxKx8chh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dZ1o3ugT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 386BF8081A; Mon, 17 Mar 2025 14:46:05 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 2D8FC811DF; Mon, 17 Mar 2025 14:48:23 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 126F6800C2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:46:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2AA3800C2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:48:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6ff0c9d1761so38537527b3.1
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:46:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cfa7e7f54so12021405e9.1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:48:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742219162; x=1742823962; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FhmO1chrD32a1ctorSIx+MpBjZD0vYH3RyzrNiP1nnY=;
- b=cxKx8chhmFzzOvVyeWRvCH+WEbBluZgyhFAOb4Q+AB8w+u4vgb4e9XijcQ2A2yWmSS
- PEGG7jfPSqU/ykytVTNsXgWbZ358stLTaIQTKX+TErv9QLePwKzd8NL0yWFFs47484xf
- Q5kJ2uPvBGhpk4MYjApYV2aI2F29h52Qy0AhU=
+ d=linaro.org; s=google; t=1742219300; x=1742824100; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=fCC6ssaTjWquuWUUPr5wVdktCcNO9CCBrLHHTPkwy54=;
+ b=dZ1o3ugTRv5olcNvqMzUpLrTkDjpUY1Q3j4fuL0HG8QS4vIkkli4jQndbePL5xZdGZ
+ NcnFnKfpwDostH9c5UjQzRwvh1zBgRvZlIi2XKC9kscWre55vYu4RWxVZP2HCw6Pq/W+
+ ZUJZWT8L/sChR1StIxBvfzouYSlhn8Am3eJg0QC5g8oTIsOXzZ7UZbM9hfbsYqzBudQh
+ G17fuahVbbAe1j17Q8yHpjN1+S+6cbROhOCgfyu8eBwuYqRKuXfqq0cSpPVUUkZOblbY
+ 7IA5G8aOa8X4YWiRUctQ0gfkFVSGM72DC/ne3Pe7+QjAFAzP2wZDVcU/n+y4YFxkGLBf
+ ZGkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742219162; x=1742823962;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FhmO1chrD32a1ctorSIx+MpBjZD0vYH3RyzrNiP1nnY=;
- b=j9dzJ5Eub6ylljx9eel2ef+oS9W6hpZOhwTHd7x4YC5F/BYnJwJEI1GYQn+Jv7RlxN
- vWmTqlsHmeqhlw9VIBpIqPT7GlnFWedeAfqpKgmJbGo3v/Nvz34lmAg0N/UaJURPQbrF
- 0kp049TYn7VPWRobg8rboxfSbPot/ehcGkifgja5Voy7r/b159XsH3CB6YG2VLncvTk2
- JeggBntKYRxGB0k0cnuKIUvRZFIOsqVF4nq1aWBWou4yjwhI+0Jqas++VG28D6ICiMuq
- IRBLT2CfZp8C/kM5MizVbrw5dmFH2840I9blZQqG8s7OOHLDqKe339q9wxuXV4xE28dt
- lt/Q==
+ d=1e100.net; s=20230601; t=1742219300; x=1742824100;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fCC6ssaTjWquuWUUPr5wVdktCcNO9CCBrLHHTPkwy54=;
+ b=qe2owD0HzAULk07bdhoN4wboKvyQuZWxpGDVYURaLLoxT3eNCBjBXCgFE6kXu4PSbs
+ pYIWVdC/eBXUI6SNlzitSTEvKExZzuJPoiKJ/nQoxAXaJpA7udM5PDDGRPMYef0sPLyg
+ zoovWi9falqqK5+NBUNVxgAO2LGZnhP/CkBwF6sfoQe93uCZaQ2R6Xu9RHVUMwIBr038
+ QYT7G6OoSWJAKkSjRHH8UWlWKZOphmZz1i6NDLGU/TOvb6ntGibnCIW2yGiV77bBlwGg
+ Jhd9P2b8C5u1snvt1CibpqBn9dfbKnWKnjvxYwLSK9oVAO/tCSBwjQThV/ahqnxgZthg
+ 4fKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgnkgDUz4YFvUWcFV3C39bxpjqGhlp4X+Syg5gzjRY3QRGN35xjgtqpO+MyjKYiq5jqduzJZI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJIlMeO+0LQJiNBndEWzVO+B4gXmddc8mZVbCWXBKKOngTzYou
- OhCnhbCYtaR+qw4Zl6GQdTJ2pbSLbkovsDmbA0XZJiDuIr3SjFWergvIU7Wp9XQ=
-X-Gm-Gg: ASbGncv0AVLm87/LjBVclBz5e2YAQzjdF0V25AzHSc1eAhl8kWRCcgys1wJXHyqo37Z
- nw+AUBwHHVX72Rxmt9d4swV97kpImEvrqUw49qlmJjhH7p4uJv6DL+jI43sZegJVYTS93GFEGEw
- OZ3nOnRnHKl06igEPGTmODL9uGeeI4C4W1INVZtS7wGq3eIhlHYg+mStyBq/O/k4oCnHMde90na
- zt2r5n0K3f4CMAP/eAW6zUqw/ko/7c8K+MsYBc+aQtvXAAFVrgf8XJhPCAb1Cx5O19HTdJnH/5x
- rZOYS8l1UgYDnS0wnvzdjej6D2q0PA0P85d6uRsv3QN16CzCq3I68vk=
-X-Google-Smtp-Source: AGHT+IEv7NlPKPaxtjMAsqWC8FMLnv+DpN6IHcq+UB47Ab/JkqGPf41PErmB95XsWbjRoBisow0cRg==
-X-Received: by 2002:a05:690c:4c0d:b0:6fb:91a9:94da with SMTP id
- 00721157ae682-6ff45e452e9mr154395087b3.5.1742219161914; 
- Mon, 17 Mar 2025 06:46:01 -0700 (PDT)
-Received: from bill-the-cat ([187.192.128.10])
+ AJvYcCWGKcWVSlYHhCIOyHr4/49vf4TytDe0cjH2EIxnfZe8LD/NUrxZyxiRpfCbgcPgJEuqpVz+va0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsoYqdoAhBuMeOiez+kyzatvjjrqd0UvXh9BUMMYUXNZf+bnJU
+ ZNunnAg4A65UbHgeM/bTRYxwo4WCO8MmwTJAuY3zrMOP3iSZPJKtahSVq+TFjmU=
+X-Gm-Gg: ASbGncvLl7q0iLvulblDcjnRFmUBAugAA+Of0jJvRb2M72quGRbVArdwPmDuCxFlBtt
+ 3iU28JCZDj5MJ1/I9kJklAhuoXQXI7xoOQYBbucP/gqcddNWIMfrqSukR0vYrS0FLgsOkotJzhJ
+ xWyX5y3dNgyrvkxaW9Sl6g4Cc8bo4wW4EoCdbcCz3hHGMALMuAsT6g0lm5iRLyMYUB1nf3PLzcr
+ TPYBMmu/EGnekMeXbxY40zQXPJof2XVl+LL6Ei0fET8bMjuRHTLdrQRRGtN4bBlP1/6f942PwdK
+ QyVN5O+Yu0maWAGaV5CwtJ7lZvOHp/Uv4MIoi0v/IvfLg8GIQGXdLNRRGNg3ITK8w/Pwcf4=
+X-Google-Smtp-Source: AGHT+IHUQjFWn13Om1b9epLl4TIjW25FguE9SkKSfIOEbZZsQoZRFOTgGTBPqN97+SalW4LkwWkVPQ==
+X-Received: by 2002:a05:600c:2191:b0:43b:bfa7:c7d with SMTP id
+ 5b1f17b1804b1-43d1805a5b1mr163314285e9.2.1742219300247; 
+ Mon, 17 Mar 2025 06:48:20 -0700 (PDT)
+Received: from [192.168.1.116] ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6ff32c7a735sm22013397b3.81.2025.03.17.06.46.00
+ 5b1f17b1804b1-43d200fae4asm105655945e9.27.2025.03.17.06.48.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 06:46:01 -0700 (PDT)
-Date: Mon, 17 Mar 2025 07:45:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Sam Day <me@samcday.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Subject: Re: [PATCH 0/6] MSM8916: Bring secondary cores online with spin-table
-Message-ID: <20250317134558.GM2640854@bill-the-cat>
-References: <20250128-msm8916-smp-support-v1-0-39587f18cf0c@samcday.com>
- <b72d521f-6df5-4ab1-a00d-65ab7dc14ac6@linaro.org>
+ Mon, 17 Mar 2025 06:48:19 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: trini@konsulko.com, neil.armstrong@linaro.org, lukma@denx.de, 
+ seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ ilias.apalodimas@linaro.org, sjg@chromium.org, Volodymyr_Babchuk@epam.com, 
+ lehmanju@devpi.de, pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org, 
+ robert.marko@sartura.hr, u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+In-Reply-To: <20250130053751.3148614-1-quic_varada@quicinc.com>
+References: <20250130053751.3148614-1-quic_varada@quicinc.com>
+Subject: Re: [PATCH v2 0/6] Add initial support for IPQ9574 based boards
+Message-Id: <174221929860.73541.5722921702095270974.b4-ty@linaro.org>
+Date: Mon, 17 Mar 2025 13:48:18 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ixlARAwDjb8O/k80"
-Content-Disposition: inline
-In-Reply-To: <b72d521f-6df5-4ab1-a00d-65ab7dc14ac6@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,40 +104,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ixlARAwDjb8O/k80
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 30 Jan 2025 11:07:45 +0530, Varadarajan Narayanan wrote:
+> These patches introduce the initial support code needed
+> for the QTI IPQ9574 SoC and RDP433 board.
+> 
+> 	SoC	: Qualcomm IPQ9574
+> 	RAM	: 2GB DDR4
+> 	Flash	: eMMC 8GB
+> 	WiFi	: 1 x 2.4GHz, 1 x 5GHz, 1 x 6GHz
+> 
+> [...]
 
-On Mon, Mar 17, 2025 at 01:13:22PM +0000, Caleb Connolly wrote:
-> Hi Sam,
->=20
-> Can you re-send this without all the prerequisite-patch-id tags? b4 is
-> desperately trying to apply ~140 patches from some old next branch to my
-> tree and tbh im not sure how to make it stop.
+Applied, thanks!
 
-You can use --merge-base HEAD to override that I think. If not I think
-it's worth asking tools@kernel.org because that sounds like a bug to me.
+[1/6] dts: ipq9574-rdp433-u-boot: add override dtsi
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/25edbbf7fde8
+[2/6] clk/qcom: add initial clock driver for ipq9574
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/ad3e8a2f59e7
+[3/6] pinctrl: qcom: Add ipq9574 pinctrl driver
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/1b734e019048
+[4/6] mmc: msm_sdhci: Reset clocks before reconfiguration
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/5bff42afd1c0
+[5/6] qcom_defconfig: enable ipq9574 clock & pinctrl driver
+      (no commit info)
+[6/6] configs: add ipq9574_mmc_defconfig
+      (no commit info)
 
---=20
-Tom
+Best regards,
+-- 
+Caleb Connolly <caleb.connolly@linaro.org>
 
---ixlARAwDjb8O/k80
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfYJ5YACgkQFHw5/5Y0
-tyyKdgv/Q7Xl0vMQkMv/7kDWggMe8DqDZpF/6EU5ikOhzS5Dz+j/rPgQ81JFIO64
-W6r1iJwhHXMDoUu3FEX1xAJl4bF3gQkZmZF2UxjJdDVoG2Uj45hTs8x5GZHI+YXB
-J3xkz4Ue1LMWcacUUvNtHr/DPMF+IJnL6IcqEmjbLzSTuKdrHo1mGzc6GWvDA+bW
-rhnuYyZc9jzEPDAEMGccwWypVDQq776zFPH4r1gahIi1OyF84E7wtD3UNgENQvoA
-clhnDej5/G3vqWsFOS9HhLicgL0lcaz0rcMct6xCXJBbPe21DZ8nXelIYM5JJqik
-9crUJy+yA57EQ6jt8KQOHMGlBK23yUaLP0fFB43tOKNUkAIwGPAmOyZhZoG9UIdq
-0mvOanEUkbIJMrXmNqA+gfuf5R/E+3wR5IaE1jwpMKum9tmeWMOsArJgQswT4wnv
-8Nlbb9hmVEWbA+K6UANpR1SvXxfzx5vbXihai68zZBenfZVhf3YzTqZ0Zz0r+uUa
-QTK8zcyc
-=xGpo
------END PGP SIGNATURE-----
-
---ixlARAwDjb8O/k80--
