@@ -4,113 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6130AC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 11:36:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B10E7C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 12:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 936B980107;
-	Mon, 17 Mar 2025 12:36:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 377DB8081A;
+	Mon, 17 Mar 2025 13:42:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=os-cillation.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D2D480F4C; Mon, 17 Mar 2025 12:36:43 +0100 (CET)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20708.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::708])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE9BD800C2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 12:36:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minda.chen@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GXbopx/LC8lcsECTE+u39LfzbsBSqh1PXY6702Jt2lNaQrZYaLiPdQ6gc2Vpq0keKm7CxcBtZFPHwXxHaRp2gUIVdNAjsmct9JQaRTQuZWd9kFoxDmUCebTVAQr8uSwe2OFDKATu8m9Jxq7GNRRB10vGrGSzxYatw1NZQt1ks40L+00CrojVPd119dc/QW4B21xhMuflW/1sNSaXwUNVCiqfj5e1zEC5q1RSndquALqGinnky2BD2TAFu8z84aed59V9g30h44L8Ezm2FVdfhrp5r2kFB9g2yhp5mXOF8nZQ5Ojg933BeU/rA9p3KhM1d9qI8K+VInI10Dv7J8z4Ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wbFRzmsHYVGKgAxMddJJvW4ZyK15S9vnDwVo3D8WnKA=;
- b=kDotA1rfsfNfH1z+SOBHhodYLv29vwD9sUbEZ/7OiTTqfxtFgWYOvWl65E74thrnCbzvBQvuBRnh/zEA/bulyC354kN8hwybEcQdCHFKIaWnLE8R5J0hcSh15MmkicwtTkneit8Xs6Kv5mN0G9rclOBXC+FI+KSLMYlLA53PPeotw3/LVG0YunTrUBcpeELXE4f/xh+xz3jNbPT+O7E1vjvL4gDRmwnEdDr1QOdulUJqx00ZBu2WMdP2+7T2Yf3iEd/1RVF53SB9AECJGcSPIgA8t3L+GYJpnz6P6F08tQ7I+dDlNNtk3Y2AOe+PJmjwP4VKJvx93YYpLMdKhSzQkg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:25::15) by SHXPR01MB0605.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:1d::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.37; Mon, 17 Mar
- 2025 11:36:34 +0000
-Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- ([fe80::3f35:8db2:7fdf:9ffb]) by
- SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::3f35:8db2:7fdf:9ffb%4])
- with mapi id 15.20.8377.007; Mon, 17 Mar 2025 11:36:34 +0000
-From: Minda Chen <minda.chen@starfivetech.com>
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>
-Subject: [PATCH v1] MAINTAINERS: Add USB driver file to visionfive2 maintain
- files.
-Date: Mon, 17 Mar 2025 19:36:27 +0800
-Message-Id: <20250317113627.84885-1-minda.chen@starfivetech.com>
-X-Mailer: git-send-email 2.17.1
-Content-Type: text/plain
-X-ClientProxiedBy: NT0PR01CA0018.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c510::11) To SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:25::15)
+	dkim=pass (2048-bit key; unprotected) header.d=os-cillation.de header.i=@os-cillation.de header.b="VTmFHCv4";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CC3BA80F4C; Mon, 17 Mar 2025 13:42:02 +0100 (CET)
+Received: from os-cillation.de (mx.os-c.de [213.165.83.196])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 75E1B80107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 13:42:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=os-cillation.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hd@os-cillation.de
+Received: from core2024.osc.gmbh (p578a635d.dip0.t-ipconnect.de [87.138.99.93])
+ by os-cillation.de (Postfix) with ESMTPSA id AF4A2C00B2;
+ Mon, 17 Mar 2025 13:41:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=os-cillation.de;
+ s=202409; t=1742215319;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=O2IGVhjXy52u3a4Ygo66lr/LGu7MJKlZZdF+yadrs2Q=;
+ b=VTmFHCv4uxF+9LzQtBmoSZbhM3eHBzIM6zZUO7KRE1V3vSLsMpXkTlDEVTgVq5pB4+wJw3
+ V38JaqKSG+H2k11wc8BlktY0Lr4v5N3U7/vVuC5G7UZebQW8k5eEZ+DgFNwk2Irg5DsJUt
+ tWwR7wzBXmvyTx+6VzZ42EKPgg5L4e2kfUn3PUFYDO2ZkVlZ7M6+N1qpJbFAOpgRQbxwcb
+ aIBwx8cfDprQ7No0IL3B2ATjb6sFBg6qnWs1mVdj7J0pDBV/l83Gz6VPvh60mEO2oFeL82
+ P68pexyg+c/762Crk3Tkqid+PYwKmw8ZgPQm15wxJELIHiu6evHB6vmxQPEs5w==
+Authentication-Results: os-cillation.de;
+ auth=pass smtp.auth=os-c@schweissgut.net smtp.mailfrom=hd@os-cillation.de
+Received: from [192.168.3.45] (hd2022.osc.gmbh [192.168.3.45])
+ by core2024.osc.gmbh (Postfix) with ESMTPSA id 528F0200964;
+ Mon, 17 Mar 2025 13:41:59 +0100 (CET)
+Message-ID: <068224a3-dab2-4753-a360-10618feb283e@os-cillation.de>
+Date: Mon, 17 Mar 2025 13:41:59 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SHXPR01MB0863:EE_|SHXPR01MB0605:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f4010a1-4cd1-464d-9a46-08dd6547f85f
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|41320700013|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: oWrEWDH6VXlhO7jJFd/bmaGuUGFEx63gO/mJ515kbzK/oAAk8cR+0GJUKCUUNeAQ//PashdbbOv1KIg0+jqM8phz8oENQ0F002qHvsibmfY1JYl68KX1/NnHqeRxItpxPEYZGAtIa6R+se+e5GmLlP5R307pb1LOplFlP8crirLhhOKZYPaqZulOxN4aU1+KC1p+GD9SJC1l4FHs91vVfihLWkWKY0NQqEX+hAgD9ZJ/cOyNmVrMUIkoFGT9R/zYzPrnQRLEXZf3O1jPTmUkIukrg/YH4Fe2zRSvNAZocKPvQXtsg9+0OIUPvYA4YnOCpU3efz/aL/25p7/WmVYH+MfMYH1gKqkJG0SUbmWNbwnlUzyhnRviZiC13Z7Lem6y3jFDWtSu/vV4jOe1VZNN4ORFZ9gbKrtR0+S4DfADqpC0IpFpqkiMgFzhr0rDUfYO9TzEl5SZG3OU0ztylT5fQWehjpRb10VQwUGSmO+euxohZJeNVhuvE8RdPVZJCL2FqFA+d3aVL6zhHOHokRuNXG0lI9kQf2uh6eYKYLEDJAdENDaCLRi5eMuzXFXJtf/ilLCtNir+1XaU9T9oKBPV5Z39omAjvFicNUT+3XIUd74=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(41320700013)(366016)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xOfE/uncASRFw7YgcQ8uO+Cd13mWa2hw+eclO+Wq5RnUhOlGD0xouZWHo5lO?=
- =?us-ascii?Q?YhKKHwLo0tygDEkbpYXd8o5RBNazFmmFuRlpGzrLVSZoWOKcI0/m4zY8kXqk?=
- =?us-ascii?Q?ec/jNhVEauiTnO+jjB6lX5Gnu54OaUqnhQzfI6TGPAVe/1v5qi55iZKU8X37?=
- =?us-ascii?Q?1LH3kcE3NypN5ZXn3o7L/wPJd4ds7HtyDH9XPn3N18+2IWLmw83RsCFALrgd?=
- =?us-ascii?Q?moIoapZYPXeXOfy2/yjEU5s0+/ayMNaG6ydDB5MeDV6igf4kbT3961tEVvT9?=
- =?us-ascii?Q?ujr5nlTU+dA2q0aYa8792R9u1t2vJdwiaVnzIPgVICmtf3uIaK2O6HFDoGwK?=
- =?us-ascii?Q?v0za9RBWn9wz43MOv2FckI0J9nbaXDH2Uw79F1TmwbMyCGon1/qFuhZAN7F4?=
- =?us-ascii?Q?G13WPYYu4KLJBLqLznIejvK4g2k4av9cXC5Ti3TIUi6ODRucBcaVJVsU5ugc?=
- =?us-ascii?Q?xqdTW2ZXa+fyNaPhNz+to6Pc68zX9KZHluTHz/K6K7W0/XhX5ILRW7qM8L1b?=
- =?us-ascii?Q?yDvfMZRfayKYXQwiirJtUu+8+atwVknSwhk5rQiGgcWDUsC6ibZ2Yjp4qHQZ?=
- =?us-ascii?Q?eD+uIF8UoCf4qQCHL2R7ZZ3OezzkSJVHWv5X6WJbciWB1/LT0GMN+etbSmCz?=
- =?us-ascii?Q?cf3Y+aKF8d4pGOf7jwBNBJexMFzRGQYrUdr6CZjfesjenEK5kDM2D0luFmNX?=
- =?us-ascii?Q?9rakcK4G0YCawV87afdRdonqAoZr6RbLmMQK+edfRph67M/yvdkP7TeEz8Ei?=
- =?us-ascii?Q?vGdIDY8ib4iRzx4Cnc3iRlcswxhlN/eUz3sUgssVloc6iy3J3sOdeE0kQg/U?=
- =?us-ascii?Q?pZP/R5h9UteSz4GRL0bO5QH9G5LgT9MnWpiuoY6KkMPsqs6Z+zEM/mOF/gOP?=
- =?us-ascii?Q?u9yr0CNDYQW3qLtgsf2SJKF66fR46YyH7Z3yoS4yq784Hz4d52ijf5zjs9uR?=
- =?us-ascii?Q?V103kfGeAdwADXjTBK0n73SYNHXcFplxabNHzQ/mU1NbXXKw3Sx5yKeqO21E?=
- =?us-ascii?Q?bDVV2upVz+CjMU1T2BsWre9l/EF4NdwPF385o8Ke3V63RxtwUjDB1Xq08TRy?=
- =?us-ascii?Q?7bSM928MQ7vpnrOp8dVJst9hTcqNzEUFwvi8KIu7TkvLUMbrDyQYv2ttA+Zz?=
- =?us-ascii?Q?tpQtY4YgMtixx1HScDOUA/2xzbE4HFKHajpgZB8gvUMdZCZNnSKDSHdTXYAw?=
- =?us-ascii?Q?m4ddh3hHN4ZsVj1mNFn3zZPellnyj5IB5MYJ5MyK7P0S1mIOX5iwSn30VdWI?=
- =?us-ascii?Q?nXrDXoPyyVsOPOP1LVFcWJLf8vrohKIkIT/HLC6DvFMs8FfulAAk94Wm3lne?=
- =?us-ascii?Q?0cnpWYkCiXNQfAuTsDpBb2Qya2FiJnY4GR/NXuaBJ9RpX7CBXlu7flSA25nb?=
- =?us-ascii?Q?ifIiPUVswnhM0Zgakm37T4dhDPZGQ4/1QKBoIX6Wh2fg7CFo2dAbVX7PvXki?=
- =?us-ascii?Q?rWxuvTL9eLnemvAPJrAcj9QjWPU7f7Jmw1CaNVo6/qvddvEyNWK1jZO4ml0W?=
- =?us-ascii?Q?/gXoM6WlfMY1rKn+3er0AIvZBuQ2WEcMoTBDpQB7VrpyqQz8Jugpv3SgxWqk?=
- =?us-ascii?Q?Bo33vmztMNW34GQ5fzjfv0uwwUgd40w5BOVJAy92mqg8ZclCSrKoyndT55b8?=
- =?us-ascii?Q?/g=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f4010a1-4cd1-464d-9a46-08dd6547f85f
-X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2025 11:36:34.2413 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: O022tzBDgGrGF034k979o2vc87DJO/M7V8YFhD63vkqm9aUlHTRojx7O64KgVECpQ21J77Ga8RNG5XWgeZw4x5PTQJPUtQ+z1N7xXh7Cm6k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0605
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] imx8qxp: Do not use CONFIG_XPL_BUILD in device tree
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+References: <2849ff05-ef67-4471-aece-422daa57040f@cherry.de>
+ <20250314200832.154758-1-hd@os-cillation.de>
+ <20250314200832.154758-2-hd@os-cillation.de>
+ <CAOMZO5BEhVGq7JGOcL_hsNAe8Qf84tKkFY1_+mm18dk7842p3g@mail.gmail.com>
+ <a872429d-7ba5-4936-b496-c80af4444d4e@cherry.de>
+Content-Language: en-US
+From: Hendrik Donner <hd@os-cillation.de>
+Autocrypt: addr=hd@os-cillation.de; keydata=
+ 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 li+2
+In-Reply-To: <a872429d-7ba5-4936-b496-c80af4444d4e@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,25 +124,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add USB related file to Starfive visionfive2 MAINTAINERS.
-The N: pattern can override this.
 
-Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
----
- board/starfive/visionfive2/MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+Hello,
 
-diff --git a/board/starfive/visionfive2/MAINTAINERS b/board/starfive/visionfive2/MAINTAINERS
-index 898e284ce2c..f1d2deb9f5c 100644
---- a/board/starfive/visionfive2/MAINTAINERS
-+++ b/board/starfive/visionfive2/MAINTAINERS
-@@ -3,5 +3,6 @@ M:	Minda Chen <minda.chen@starfivetech.com>
- M:	Hal Feng <hal.feng@starfivetech.com>
- S:	Maintained
- F:	drivers/ram/starfive/
-+F:	drivers/usb/cdns3/cdns3-starfive.c
- N:	jh7110
- N:	visionfive2
--- 
-2.17.1
+On 17.03.25 12:10, Quentin Schulz wrote:
+> Hi Fabio,
+> 
+> On 3/15/25 12:58 PM, Fabio Estevam wrote:
+>> Hi Hendrik,
+>>
+>> On Fri, Mar 14, 2025 at 5:09 PM Hendrik Donner <hd@os-cillation.de> 
+>> wrote:
+>>>
+>>> In c9713c155127 the device tree was moved
+>>> from CONFIG_SPL to CONFIG_SPL_BUILD and later to CONFIG_XPL_BUILD, but
+>>> the CONFIG_xPL_BUILD defines are never set for device trees, breaking
+>>> the build. Move the guards back to CONFIG_SPL.
+>>
+>> Please provide details about the "breaking the build". Which target
+> 
+> The nodes will simply never be added, because CONFIG_XPL_BUILD (or 
+> CONFIG_SPL_BUILD) simply aren't passed to dtc.
+> 
+> So essentially, this is equivalent to dead/noop code.
+> 
+>> fails to build currently?
+>>
+>> After applying this series, the previous build failures return:
+>>
+> 
+> Yes, it was never fixed, just silenced by never building it.
+> 
+> See https://lore.kernel.org/u-boot/2849ff05-ef67-4471- 
+> aece-422daa57040f@cherry.de/
+> 
+
+additional information: the documentation is already telling the user to
+acquire the missing binary blobs:
+
+https://docs.u-boot.org/en/latest/board/nxp/imx8qxp_mek.html#get-scfw-tcm-bin-and-ahab-container-img
+
+So the error from make should not happen with the correct blobs being
+present.
+
+But most aspect were already discussed in the mail thread this patch
+series was in response to.
+
+Regards,
+Hendrik
+
+> Cheers,
+> Quentin
 
