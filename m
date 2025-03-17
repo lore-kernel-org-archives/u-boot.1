@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E803C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:03:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B484CC282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A139C81101;
-	Mon, 17 Mar 2025 15:03:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FDCA810F5;
+	Mon, 17 Mar 2025 15:04:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WrUm00A1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c/5gttgb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0608D81101; Mon, 17 Mar 2025 15:03:13 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id D4D0A81101; Mon, 17 Mar 2025 15:04:09 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C833F80107
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:03:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA7A280107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:04:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3995ff6b066so893914f8f.3
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:03:10 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso16236045e9.2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742220190; x=1742824990; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742220247; x=1742825047; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=1huRy8BAZoO0RiA4KLA2Pw7IwXgKkbmWmLlx5NhKVk0=;
- b=WrUm00A1bO3HlDTfgGpj5WXB5myykB9u+/XJLqgkU3d7b9TFTW/8w6+umFHHgdUFa4
- 4/SNHDMYQzggfmk4iRwJAM+8onrviXqDGprUBthg1vgmcUq2OqCEqhc8YO8KXdFCS7Yr
- NjWhlYT0WwEMMf9+NmxSHlYhLsbW6sskprMeMFZopSbeE1XwDowUiLS61UOsKJAKOOaU
- 0wR3ZD8nqfpp7Kh+tOnOhf2QhCzompj386+ll+jSjRswmYIZ6fImeCMpQw95gC9Q23Pn
- nem7HCYiV6YRHn+eeEZ37Ti8eBa30hMI66MZtbvopvxSfknckP+8ReMcvaKRaZwsLTFN
- cUSA==
+ :reply-to; bh=REiMitY3EYATKPRZfjdCBApToG8YD5AzOcu2SeDUo3Q=;
+ b=c/5gttgbNaVoDsMvVJ/VgocLcra5Q7CTmR248lN3lqlgxC25wmn5VjUPRySBaX1vG4
+ TCNvfJ3r5qrgZ4Kt6S/Xg+BLN0fu71Ywot+ftIuiod6kUSXfHXlK28ENBqDy98hYfxQa
+ Hn1slAj1UYawGc5zvUYFz8TY/0MWjJAfeZ8EHSmEuqLt5ipEeo3GRNCZr1Z+U7bmdgvP
+ 9gRYxz1T94FySjnwU9JHagwlj6DnLL356rNup9HwvtYY3fC/JrqUexlrPREKV578a+Z/
+ knUtHTqhn/BRr8tVCwWxTfczCBTCmKgU9iEl4wr+3Tz4Wzg/Hvo2s+XplVzLF1M1y6gp
+ 8paQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742220190; x=1742824990;
+ d=1e100.net; s=20230601; t=1742220247; x=1742825047;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=1huRy8BAZoO0RiA4KLA2Pw7IwXgKkbmWmLlx5NhKVk0=;
- b=hhB5JdTMyGy5fC47nHV8NtzlwE07jKkAH+ioOlYiLF25vK1Zo7BbCF1gMCnzikUwrQ
- DALmijiYESkUNqJVaNxwVHy+Kenq9ClmRwI0UfJzk178L4bwaS/iuxRgRqeOw+0f75GU
- OlCsz3myldS92uPiTFIdA1c94ZxCGa4YjxWnN4Qs7H3Bp5GrrYc6dlBjqzTmMHEMp4CN
- /wrqYB0W+eH8eCQ+M8gpocqLX3NCBPgFl4zTUq2l4QxneEmgJPV/frvap7D4TZaRLSVI
- osgmkIgcXZRTyLgthyWHxzQGZhlYJ928egBNpEo2PmeGv6S7IdEGLmmR98V/Gb1pYv4T
- 54/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUrmqYah30AqA/Bg3uv99os+niIMwaM8aMmB8F3hWj+YGNyQgyvE+GaBhSVU9coqgjqECKgnB4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzYhcB3dfN7o+dLGQ9HQcYATXw6dbe4Z7Bw8VhPlSOhK9UkuzXB
- cCCMBHuORnfNnW4g+MwfE3AbmJorI2YMxPWJEQvf7DPn8OtY2oUiMTebmQQB8/s=
-X-Gm-Gg: ASbGncsn62ZkL6BCEuVThgt15uklDGrQUpAzE39gz+X+X4V5n3hTWjQwPvr/mhb8MZG
- /0O+c0P1aZ9/Cg8xouyj4tZYJDKXi3DQYAeULn2os+mmfI3k9iSK78mt/8i4BMQ+Bibc3x36mHU
- q5M8XJdAAK6vfKrprrRWmfX52cbd2fMgzyIiP3jPgm2YIwrcebOnaKQWkPbMNWa4ui+NuB6RLdI
- PinX677MucXAlyz4lC2kJ7TNUhXcn/jBuCS3Zt0NuBg7iGCSHYUq5/JqhdDHqGWTLLko6EPU27+
- Bq4MJPrDeKTzxYWCadmvDh9jo7IY70/hBlPzeugl/+37aSKYl0F9PRjnqsa8a1a2CfXyMIJb+yZ
- 6DE6cIV8la7agdIOgZmZqfmVOxjTHEOEl
-X-Google-Smtp-Source: AGHT+IGT/KnYroBKVS71/M9ylLUzb3VvU/zq/fu/JfTKDPvRckRFQdtALSyWGBEMQL1DJhQbEVW4pw==
-X-Received: by 2002:a05:6000:1545:b0:391:2e6a:30de with SMTP id
- ffacd0b85a97d-3971e971991mr15818776f8f.19.1742220190134; 
- Mon, 17 Mar 2025 07:03:10 -0700 (PDT)
+ bh=REiMitY3EYATKPRZfjdCBApToG8YD5AzOcu2SeDUo3Q=;
+ b=HTWrAZ1gs1cDsy3TejuGTB8wjk4Rmngo6xzc98jBjgQi/GoRN08CKssG32n0ygULZt
+ zycOBSI8MFGgUjX+zO0g6lXR0eX+RUx7YK0ah7XyFH37PAMjKhkswuq5/xULV5730JBz
+ at1U37/ngdBsxQA1OizjASB41/hKccziK77/HnnkuUxUSfQ/+EYl024u8Z6QxCHnTS2i
+ zphxaKa0Pa11bEVqtK9/0ZxdcTOrumUq9vCXmjI+Va/gF57XRmfHS0ZlvHYkp6SQrxun
+ EIUJU3DKQgSQE9ialR6UerqVLnXYjKi5wtQnQx1E2Vo2r6p4SYb4noBfA+DNZkjcBsLU
+ SG+Q==
+X-Gm-Message-State: AOJu0YylIxcnaBIohzeMVV0FB8bqMPKZhzr1W6SNPKGt+x8UO7Q8mXTi
+ z5MXFjEtkdADgbcwQtEi2NsO+tAZa2y4gad3JNWX1trwY9dlT05l9DL2zZZkp48=
+X-Gm-Gg: ASbGncs4wVvi55tui5pOA3jKzYvcDIfTgPaFhC/28Br8QpoAXZ+bLoOAaX8NfbhLNZZ
+ AXN4gMub/f9H4/Pn5WEIq7QCICaQBIeTBXtk9MUChaL4xC3sZHaMUXdsZkg9h0VcUnLyFHIqYoe
+ 1F+UIM08R+0l0ixST+651B5SPGM67ZHoyytboXDbq/ptQxEDtJKFLoJfp0AwHDn3PjCUvEiXSlB
+ 4ua3lV1C12+Gq7wSKnsXvTnfbWSxUiMe9WnmCEYA29Yh2N++SZ6X2GqBqDPZ3cESy8ELWBvbn6u
+ HC5nYGuSzIJIVaIjo5sCPTUVrURh+09r0r0VX7tAkX6SoW/GiM7IAlfFUABIBPcv/KjLplulTji
+ mFj0uxl91RYxrHH3bc2hCQEN/ZVjFkkQs
+X-Google-Smtp-Source: AGHT+IHAhTXrwd2xNXZVztoaEM/95bS5rvg4MySi28GfiiCa2jGOP0gmTTDyVXns4TOnP8GF/5W/yQ==
+X-Received: by 2002:a05:600c:4eca:b0:43d:bb9:ad00 with SMTP id
+ 5b1f17b1804b1-43d1ecc7d78mr138247915e9.15.1742220246745; 
+ Mon, 17 Mar 2025 07:04:06 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:1a77:b55f:a550:458c?
  ([2a01:e0a:3d9:2080:1a77:b55f:a550:458c])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395c8975febsm15455843f8f.59.2025.03.17.07.03.09
+ 5b1f17b1804b1-43d2010e0bfsm104742405e9.36.2025.03.17.07.04.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 07:03:09 -0700 (PDT)
-Message-ID: <9c1f0efe-c92d-44fc-91fc-7cdac6392e3e@linaro.org>
-Date: Mon, 17 Mar 2025 15:03:09 +0100
+ Mon, 17 Mar 2025 07:04:06 -0700 (PDT)
+Message-ID: <161b113e-4cd2-4870-9a87-30a64b1385a9@linaro.org>
+Date: Mon, 17 Mar 2025 15:04:05 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/3] clk/qcom: sc7280: add GENI, PCIe, and more USB clocks
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250314-sc7280-more-clocks-v1-0-ead54487c38e@linaro.org>
- <20250314-sc7280-more-clocks-v1-3-ead54487c38e@linaro.org>
+Subject: Re: [PATCH 1/3] i2c: geni: fix error message wording in clk_disable
+To: Caleb Connolly <caleb.connolly@linaro.org>, Heiko Schocher <hs@denx.de>,
+ Tom Rini <trini@konsulko.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
+ <20250314-geni-load-fw-v1-1-587f25f2812f@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250314-sc7280-more-clocks-v1-3-ead54487c38e@linaro.org>
+In-Reply-To: <20250314-geni-load-fw-v1-1-587f25f2812f@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,178 +131,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14/03/2025 16:31, Caleb Connolly wrote:
-> Add support for a bunch of new clocks, including PCIe, GENI (for all
-> peripherals used on the RB3 Gen 2), and some missing USB clocks.
+On 14/03/2025 17:09, Caleb Connolly wrote:
+> Correct the error messages so they accurately describe that we failed to
+> disable the clocks, not to enable them.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/clk/qcom/clock-sc7280.c | 104 +++++++++++++++++++++++++++++++++++-----
->   1 file changed, 93 insertions(+), 11 deletions(-)
+>   drivers/i2c/geni_i2c.c | 6 ++----
+>   1 file changed, 2 insertions(+), 4 deletions(-)
 > 
-> diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
-> index 2cbc01b6e0a4f1db0e4a894cd869b532d6b3fa45..8691f08109b39639d8a5defe75161049399bf682 100644
-> --- a/drivers/clk/qcom/clock-sc7280.c
-> +++ b/drivers/clk/qcom/clock-sc7280.c
-> @@ -15,31 +15,66 @@
->   #include <dt-bindings/clock/qcom,gcc-sc7280.h>
+> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
+> index eabf5c76c21c2bc12c80dbb9fb498a0080928248..4eb41ba852f7790ca646c8ba38f29fdb727fa804 100644
+> --- a/drivers/i2c/geni_i2c.c
+> +++ b/drivers/i2c/geni_i2c.c
+> @@ -330,17 +330,15 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
 >   
->   #include "clock-qcom.h"
->   
-> -#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf038
->   #define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf020
-> +#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf038
-> +#define USB30_SEC_MASTER_CLK_CMD_RCGR 0x9e020
-> +#define USB30_SEC_MOCK_UTMI_CLK_CMD_RCGR 0x9e038
-> +#define PCIE_1_AUX_CLK_CMD_RCGR 0x8d058
-> +#define PCIE1_PHY_RCHNG_CMD_RCGR 0x8d03c
-> +#define PCIE_1_PIPE_CLK_PHY_MUX 0x8d054
-> +
-> +static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
-> +	F(66666667, CFG_CLK_SRC_GPLL0_EVEN, 4.5, 0, 0),
-> +	F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
-> +	F(200000000, CFG_CLK_SRC_GPLL0_ODD, 1, 0, 0),
-> +	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
-> +	{ }
-> +};
-> +
-> +static const struct freq_tbl ftbl_gcc_usb30_sec_master_clk_src[] = {
-> +	F(60000000, CFG_CLK_SRC_GPLL0_EVEN, 5, 0, 0),
-> +	F(120000000, CFG_CLK_SRC_GPLL0_EVEN, 2.5, 0, 0),
-> +	{ }
-> +};
->   
->   static ulong sc7280_set_rate(struct clk *clk, ulong rate)
->   {
->   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +	const struct freq_tbl *freq;
->   
->   	if (clk->id < priv->data->num_clks)
->   		debug("%s: %s, requested rate=%ld\n", __func__, priv->data->clks[clk->id].name, rate);
->   
->   	switch (clk->id) {
-> -	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> -		WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
-> -		clk_rcg_set_rate(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-> -		return rate;
->   	case GCC_USB30_PRIM_MASTER_CLK:
-> -		WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
-> +		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
->   		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
-> -				     1, 0, 0, CFG_CLK_SRC_GPLL0_ODD, 8);
-> -		clk_rcg_set_rate(priv->base, 0xf064, 0, 0);
-> -		return rate;
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-> +		return freq->freq;
-> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> +		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 1, 0);
-> +		return 19200000;
-> +	case GCC_USB3_PRIM_PHY_AUX_CLK_SRC:
-> +		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 1, 0);
-> +		return 19200000;
-> +	case GCC_USB30_SEC_MASTER_CLK:
-> +		freq = qcom_find_freq(ftbl_gcc_usb30_sec_master_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, USB30_SEC_MASTER_CLK_CMD_RCGR,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-> +		return freq->freq;
-> +	case GCC_USB30_SEC_MOCK_UTMI_CLK:
-> +		clk_rcg_set_rate(priv->base, USB30_SEC_MOCK_UTMI_CLK_CMD_RCGR, 1, 0);
-> +		return 19200000;
-> +	case GCC_USB3_SEC_PHY_AUX_CLK_SRC:
-> +		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 1, 0);
-> +		return 19200000;
-> +	case GCC_PCIE1_PHY_RCHNG_CLK:
-> +		clk_rcg_set_rate(priv->base, PCIE1_PHY_RCHNG_CMD_RCGR, 5, CFG_CLK_SRC_GPLL0_EVEN);
-> +		return 100000000;
->   	default:
-> -		return 0;
-> +		return rate;
+>   	if (geni->is_master_hub) {
+>   		ret = clk_disable(&geni->core);
+>   		if (ret) {
+> -			dev_err(dev, "clk_enable core failed %d\n", ret);
+> -			return ret;
+> +			dev_err(dev, "clk_disable core failed %d\n", ret);
+>   		}
 >   	}
+>   
+>   	ret = clk_disable(&geni->se);
+>   	if (ret) {
+> -		dev_err(dev, "clk_enable se failed %d\n", ret);
+> -		return ret;
+> +		dev_err(dev, "clk_disable se failed %d\n", ret);
+>   	}
+>   
+>   	return 0;
 >   }
->   
->   static const struct gate_clk sc7280_clks[] = {
-> @@ -49,15 +84,37 @@ static const struct gate_clk sc7280_clks[] = {
->   	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0xf018, 1),
->   	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0xf01c, 1),
->   	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf054, 1),
->   	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf058, 1),
-> +	GATE_CLK(GCC_CFG_NOC_USB3_SEC_AXI_CLK, 0x9e07c, 1),
-> +	GATE_CLK(GCC_USB30_SEC_MASTER_CLK, 0x9e010, 1),
-> +	GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK, 0x9e080, 1),
-> +	GATE_CLK(GCC_USB30_SEC_SLEEP_CLK, 0x9e018, 1),
-> +	GATE_CLK(GCC_USB30_SEC_MOCK_UTMI_CLK, 0x9e01c, 1),
-> +	GATE_CLK(GCC_USB3_SEC_PHY_AUX_CLK, 0x9e054, 1),
-> +	GATE_CLK(GCC_USB3_SEC_PHY_COM_AUX_CLK, 0x9e058, 1),
-> +	GATE_CLK(GCC_PCIE_CLKREF_EN, 0x8c004, 1),
-> +	GATE_CLK(GCC_PCIE_1_PIPE_CLK, 0x52000, BIT(30)),
-> +	GATE_CLK(GCC_PCIE_1_AUX_CLK, 0x52000, BIT(29)),
-> +	GATE_CLK(GCC_PCIE_1_CFG_AHB_CLK, 0x52000, BIT(28)),
-> +	GATE_CLK(GCC_PCIE_1_MSTR_AXI_CLK, 0x52000, BIT(27)),
-> +	GATE_CLK(GCC_PCIE_1_SLV_AXI_CLK, 0x52000, BIT(26)),
-> +	GATE_CLK(GCC_PCIE_1_SLV_Q2A_AXI_CLK, 0x52000, BIT(25)),
-> +	GATE_CLK(GCC_PCIE1_PHY_RCHNG_CLK, 0x52000, BIT(23)),
-> +	GATE_CLK(GCC_DDRSS_PCIE_SF_CLK, 0x52000, BIT(19)),
-> +	GATE_CLK(GCC_AGGRE_NOC_PCIE_TBU_CLK, 0x52000, BIT(18)),
-> +	GATE_CLK(GCC_AGGRE_NOC_PCIE_1_AXI_CLK, 0x52000, BIT(11)),
-> +	GATE_CLK(GCC_AGGRE_NOC_PCIE_CENTER_SF_AXI_CLK, 0x52008, BIT(28)),
-> +	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x52008, BIT(10)),
-> +	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x52008, BIT(11)),
-> +	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK, 0x52008, BIT(13)),
->   };
->   
->   static int sc7280_enable(struct clk *clk)
->   {
->   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
->   
-> -	if (priv->data->num_clks < clk->id) {
-> +	if (priv->data->num_clks <= clk->id) {
->   		debug("%s: unknown clk id %lu\n", __func__, clk->id);
->   		return 0;
->   	}
->   
-> @@ -70,8 +127,31 @@ static int sc7280_enable(struct clk *clk)
->   	case GCC_USB30_PRIM_MASTER_CLK:
->   		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
->   		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
->   		break;
-> +	case GCC_AGGRE_USB3_SEC_AXI_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB30_SEC_MASTER_CLK);
-> +		fallthrough;
-> +	case GCC_USB30_SEC_MASTER_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB3_SEC_PHY_AUX_CLK);
-> +		qcom_gate_clk_en(priv, GCC_USB3_SEC_PHY_COM_AUX_CLK);
-> +		break;
-> +	case GCC_PCIE_1_PIPE_CLK:
-> +		clk_phy_mux_enable(priv->base, PCIE_1_PIPE_CLK_PHY_MUX, true);
-> +		break;
-> +	case GCC_PCIE_1_AUX_CLK:
-> +		clk_rcg_set_rate_mnd(priv->base, PCIE_1_AUX_CLK_CMD_RCGR, 1, 0, 0,
-> +				     CFG_CLK_SRC_CXO, 16);
-> +		break;
-> +	case GCC_QUPV3_WRAP0_S0_CLK:
-> +		clk_rcg_set_rate_mnd(priv->base, 0x17010, 1, 0, 0, CFG_CLK_SRC_CXO, 16);
-> +		break;
-> +	case GCC_QUPV3_WRAP0_S1_CLK:
-> +		clk_rcg_set_rate_mnd(priv->base, 0x17140, 1, 0, 0, CFG_CLK_SRC_CXO, 16);
-> +		break;
-> +	case GCC_QUPV3_WRAP0_S3_CLK:
-> +		clk_rcg_set_rate_mnd(priv->base, 0x173a0, 1, 0, 0, CFG_CLK_SRC_CXO, 16);
-> +		break;
->   	}
->   
->   	return qcom_gate_clk_en(priv, clk->id);
->   }
-> @@ -97,8 +177,10 @@ static const struct qcom_reset_map sc7280_gcc_resets[] = {
->   
->   static const struct qcom_power_map sc7280_gdscs[] = {
->   	[GCC_UFS_PHY_GDSC] = { 0x77004 },
->   	[GCC_USB30_PRIM_GDSC] = { 0xf004 },
-> +	[GCC_USB30_SEC_GDSC] = { 0x9e004 },
-> +	[GCC_PCIE_1_GDSC] = { 0x8d004 },
->   };
->   
->   static const phys_addr_t sc7280_rcg_addrs[] = {
->   	0x10f020, // USB30_PRIM_MASTER_CLK_CMD_RCGR
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
