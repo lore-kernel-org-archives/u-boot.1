@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31123C28B30
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF359C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:49:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F75F819B1;
-	Mon, 17 Mar 2025 14:48:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6463A8197F;
+	Mon, 17 Mar 2025 14:48:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OZdA9s4j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vS6JA0z+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7944281877; Mon, 17 Mar 2025 14:48:27 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id CDB63800C2; Mon, 17 Mar 2025 14:48:28 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F0D58081A
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:48:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F1CB800C2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43cfa7e7f54so12022305e9.1
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:48:25 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4394a823036so20385515e9.0
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:48:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742219305; x=1742824105; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742219306; x=1742824106; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r1/z2QFHl/qqDcFuV+ujN3omVBV4GpVuxXZfl/Q5CXg=;
- b=OZdA9s4jKcUaKLoL1QG/onpPNujSMXYpNujfyF1PDbQeksFPiurwf6Z6koVohI1sgz
- iiDawcvZfQAEQ2EmXe2SxvKNSPwMUVItvdvEm01IdiHW7tqjr8CHFI8852GrfT8K6Toj
- 0A7f70DQb0H8i8SS+xdpNjIgZ2zrdpImZDGjg5TaEbYxoXD1gdWQm+NLJOvVKb/cQoYV
- a9oCR9qgMvvbePWNnKO57S9PenhjY7wR1eI9NQH66NSU++QWJjCbtKbEFEc4G0iKDD6R
- oGUbRFDSwk7ZMdnzk9UP9PZLKm/OWtPrldj1AcoDsIh1wSXU3HQOmRkQCT/qTHgd71mM
- CZbA==
+ bh=KGa6KR81QHBijn3uFrVDLc5ddRiuLW6FesRh737Nl98=;
+ b=vS6JA0z+bESnMWFYie5XW4iZeH1dSs/mDgkY4JS8VsDSz2lO/nOLARAlzd7jy/mk9t
+ gRIQYGCp4XXKJfs8JB5S1SXjTUaX1rRaZKa0acVmYN291pN4ATFAUpOGyaMCh/+LEAxw
+ CdC5TGdyYcuC5LwpKMbVPzJkvkEXFbW+9ylVCZffAsfw0RpoKrsvG71D2Nlw8TWr4YIo
+ ghQ4TMlC41YZX21XPZxyPU2f2aUCNs8yIJKATEcZKyQFlHyqePMWwkv8t548zguNSfnO
+ 4S+LrbErBxMKNBPUI1/zkOj5NwEqVrACtFKeHbhHuXhYpHO9HA/t5GpHNHHni83Gkwt+
+ GTKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742219305; x=1742824105;
+ d=1e100.net; s=20230601; t=1742219306; x=1742824106;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r1/z2QFHl/qqDcFuV+ujN3omVBV4GpVuxXZfl/Q5CXg=;
- b=ivafYxdEALf3JPGgX7QkmFm5EFx5nq1OwWbCpS6iohmNEF9FO18ymigBDWEIjtj8Qx
- xM8TvxcftlQEpU2EgmCeF4IgWtedtRKHsPxQlQmZ0bwF66aFr3aeZL7xVQ8u3Nq5rC7c
- b17a5MzyhUKqizYpChhxIOj+ssngP0XbucObl8id7JRwX2zqdCUBA6m+hwERVySJd5A2
- M9FkTYB2i3YSAtAse5zn/DAof+7wh95wzMbYZbdhfPE8oE/5IbPy6kz2hE2AI/3LHHBD
- Th1CaljmqRhQofWdjITemJ+SaMTf1pwQ2Duf8lr4N8ZTHupGqYR/l5uC2zqu3y9+nzKQ
- dZyA==
+ bh=KGa6KR81QHBijn3uFrVDLc5ddRiuLW6FesRh737Nl98=;
+ b=blIUuPBcP7Wpjc3Pts4PBiGwLFM0PLZLgOwBTGmhKepsnI8K6wDnSBeAV64ARY39cN
+ 3fX31NIWS7pvQ7/nW+G2V2cBo0njP/PuFCGYjHiR7MILFzSWS27foWdfADwcFebVbKaC
+ 7MMHroWt5ZCAJnRG0ADH2iiFw60lLlzzHrVEMVbg4gCFBWMPt6KgjfIPKHpmFrEtXW0R
+ 0gm3tfTaWPqppqVjllySrf2SYtKrkFmSfWaLj7f63GYE02IwsDpTqzt7+M04T2L4xjYJ
+ A8zddA9F7anLasyi0s18ie1Z9jvmxXIdCDx4H7bZKvUcniWTZO5w4Kh5fMwUxWsGTxl1
+ AQ5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAl1bQDe92Wj12CnBDUnij6cdAKyIYrQrnc+6Qhs6KTR3cUIg19mt2yQBdYjNuuI7bqkpEr64=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWnivvahlSkUCRn4oZ74dT1OB0PyBnurJNPlH1KGdkYiRd/6kK
- gAM8/xX6zV8ATA/UtcOq2p6N8tIot8IJX2TfQjstLKIIrGw8EEErsJl4o/jPHCI=
-X-Gm-Gg: ASbGncuH3hY3ZuqNWkzAu2LAb610TGl5HsQdLwKNxCGneriW3Ggz8YYpUOotwR+ALSJ
- OzpdDuYJo9lB9dLLEpNyqzY19+5V7nQ4l88aEAyxXRg+xD5F5a8mdAdehE+d1JURMubLGm+gppn
- bjHBVmCDdXZHdHW9ELo4huBnxJPouYzaquXP+Tpmq9YJtgbxXI/KWdQHLcbraJxfoRNUiiDN8Vo
- fu84mq77/qsuxAVUu7Eh3TrA00l1vxbRI+Nk7OxATR7DgOboktTQ3Usp++MZhfDaZD3QMZQjC28
- PySUsWvTV5WDE2+vgZXN8cb4LgksqOuWimjuJBQLV5/aLQqpVN8b5mUwMyhu
-X-Google-Smtp-Source: AGHT+IGQlGRimvZMUu58dnSlR8Zwv+yX6I0QUmssO8u8Ti6I02+SfOpJatA9N2AWE5DXitiEvubJ/A==
-X-Received: by 2002:a05:600c:420b:b0:43b:4829:8067 with SMTP id
- 5b1f17b1804b1-43d1806c066mr145986335e9.6.1742219304665; 
- Mon, 17 Mar 2025 06:48:24 -0700 (PDT)
+ AJvYcCXC5VLyugiKJ9rkkt5jwvsIuhJP/hIAwoza8IUSyHvLFF3Suh4nd3PAIllt4H7seUdsQlRtAo8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwklhHwRsuSEvCa9IMvXZkfM1246opEtdtSjM7ktRiIJFL/7Mcb
+ FztHrGI/NcJhhAn3etOJGIe4r2zW+kNk131MhlQeaA39qyRI8e5AVyCz+RRp7ZM=
+X-Gm-Gg: ASbGnctmxeyKjNfBo3EhemQ+h3gza5byalnsvR1TlcAFhQh1ct4ptJbUOsspeQB21HJ
+ yvEEFU57oyOXgXl9ES0Hdmp9LZMoYBZDWNzlaijKDF0oJ2w7a6TckrQ5Tc+yRm53M1pP+PqrXNX
+ bvA5TEWNtScyzwJd4KSDvVPXdvYJGy8gG3aXsa4ciNIcmpgS9KlnhQ0Ytos3FQedD9iRNfn8Mxh
+ /4s16oDWqsm7Niw/dN/23sq4uMA6ojLK+s+OLihtToiV5lTJhiipXTm68F2DHa5Q1b8vpYhcORI
+ 3cpU00ZzWwa3Z8ZJm+PU8EWnq53IIrsImDGVxssDCY/bgCCzRobzB25lfh3r2fDsD1IfS+k=
+X-Google-Smtp-Source: AGHT+IFLznCi+trDAwwS5q/iwWHXAgs9TXIfPUw4Nu293l3Ep4Rb3g4y/OWckcTG5zzabeyE+Of/HQ==
+X-Received: by 2002:adf:c08b:0:b0:391:39bd:a381 with SMTP id
+ ffacd0b85a97d-3971dbe0c60mr7909890f8f.30.1742219305998; 
+ Mon, 17 Mar 2025 06:48:25 -0700 (PDT)
 Received: from [192.168.1.116] ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d200fae4asm105655945e9.27.2025.03.17.06.48.23
+ 5b1f17b1804b1-43d200fae4asm105655945e9.27.2025.03.17.06.48.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 06:48:23 -0700 (PDT)
+ Mon, 17 Mar 2025 06:48:25 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Robert Marko <robert.marko@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sumit Garg <sumit.garg@kernel.org>, Sam Day <me@samcday.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Stephan Gerhold <stephan.gerhold@linaro.org>
-In-Reply-To: <20250212-msm-rng-fixes-v2-0-645cf8d3fd3c@samcday.com>
-References: <20250212-msm-rng-fixes-v2-0-645cf8d3fd3c@samcday.com>
-Subject: Re: [PATCH v2 0/5] rng: msm: fixes for MSM8916
-Message-Id: <174221930340.73541.8589905483285508278.b4-ty@linaro.org>
-Date: Mon, 17 Mar 2025 13:48:23 +0000
+To: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Matthias Brugger <mbrugger@suse.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Sam Day <me@samcday.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20250123-qcom-parse-memory-updates-v3-1-c5332b81ea9f@samcday.com>
+References: <20250123-qcom-parse-memory-updates-v3-1-c5332b81ea9f@samcday.com>
+Subject: Re: [PATCH v3] mach-snapdragon: support parsing memory info from
+ external FDT
+Message-Id: <174221930476.73541.17341209911906609382.b4-ty@linaro.org>
+Date: Mon, 17 Mar 2025 13:48:24 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -107,32 +105,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 12 Feb 2025 07:01:20 +0000, Sam Day wrote:
-> The msm-rng driver is currently broken on MSM8916.
+On Thu, 23 Jan 2025 12:12:14 +0000, Sam Day wrote:
+> qcom_parse_memory is updated to return a -ENODATA error if the passed
+> FDT does not contain a /memory node, or that node is incomplete (size=0)
 > 
-> The first issue is that the core clock isn't defined and thus not being
-> enabled before registers in the PRNG block are accessed.
-> 
-> The second issue is that the enable method is only initializing the PRNG
-> registers if the block is *already* initialized. This would have likely
-> caused issues elsewhere once the driver was in more active use, but the
-> problems on MSM8916 are immediate: trying to modify the state of LFSR_CFG
-> causes SErrors, presumably because this register is protected by TZ.
+> board_fdt_blob_setup first tries to call qcom_parse_memory with the
+> internal FDT (if present+valid). If that fails, it tries again with the
+> external FDT (again, if present+valid).
 > 
 > [...]
 
 Applied, thanks!
 
-[1/5] clk/qcom: apq8016: use BIT macro for clk en_vals
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/61781206cf19
-[2/5] clk/qcom: apq8016: add PRNG_AHB_CLK
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d146a8771f87
-[3/5] rng: msm: don't enable PRNG if it's already enabled
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/6e933cd69ad9
-[4/5] clk/qcom: apq8016: improve clk_enable logging
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/dc8754e8e408
-[5/5] rng: msm: keep core clock disabled when PRNG not in use
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/2babb61428dc
+[1/1] mach-snapdragon: support parsing memory info from external FDT
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/11ff5a57e2fb
 
 Best regards,
 -- 
