@@ -4,116 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B484CC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:04:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F149CC282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FDCA810F5;
-	Mon, 17 Mar 2025 15:04:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6B377810F4;
+	Mon, 17 Mar 2025 15:06:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c/5gttgb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VUkorvwV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4D0A81101; Mon, 17 Mar 2025 15:04:09 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id D17F2810F5; Mon, 17 Mar 2025 15:06:48 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA7A280107
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:04:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B52080F70
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:06:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso16236045e9.2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:04:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6ff1e375a47so38276997b3.1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742220247; x=1742825047; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=REiMitY3EYATKPRZfjdCBApToG8YD5AzOcu2SeDUo3Q=;
- b=c/5gttgbNaVoDsMvVJ/VgocLcra5Q7CTmR248lN3lqlgxC25wmn5VjUPRySBaX1vG4
- TCNvfJ3r5qrgZ4Kt6S/Xg+BLN0fu71Ywot+ftIuiod6kUSXfHXlK28ENBqDy98hYfxQa
- Hn1slAj1UYawGc5zvUYFz8TY/0MWjJAfeZ8EHSmEuqLt5ipEeo3GRNCZr1Z+U7bmdgvP
- 9gRYxz1T94FySjnwU9JHagwlj6DnLL356rNup9HwvtYY3fC/JrqUexlrPREKV578a+Z/
- knUtHTqhn/BRr8tVCwWxTfczCBTCmKgU9iEl4wr+3Tz4Wzg/Hvo2s+XplVzLF1M1y6gp
- 8paQ==
+ d=konsulko.com; s=google; t=1742220405; x=1742825205; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dSrDfb2VgS9DftruOgPjxjMekMpPCavXjsch9ANmVVI=;
+ b=VUkorvwVU9VlnLf4ZRx4gwK5iLyFhEAcg2CC4Qe8qqFySwAPYgTD7u31dQ0zm7c/iW
+ EdtXuOIM3oU+j1YpjO21Y1JkrjOtFG1FdKUkU5Tr/Y3ZvkuPyT04fsNFjD6LTr+IWAoN
+ Pl6U3L5z/h2rLymQnVqf4flD1OXP10n6vpky4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742220247; x=1742825047;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=REiMitY3EYATKPRZfjdCBApToG8YD5AzOcu2SeDUo3Q=;
- b=HTWrAZ1gs1cDsy3TejuGTB8wjk4Rmngo6xzc98jBjgQi/GoRN08CKssG32n0ygULZt
- zycOBSI8MFGgUjX+zO0g6lXR0eX+RUx7YK0ah7XyFH37PAMjKhkswuq5/xULV5730JBz
- at1U37/ngdBsxQA1OizjASB41/hKccziK77/HnnkuUxUSfQ/+EYl024u8Z6QxCHnTS2i
- zphxaKa0Pa11bEVqtK9/0ZxdcTOrumUq9vCXmjI+Va/gF57XRmfHS0ZlvHYkp6SQrxun
- EIUJU3DKQgSQE9ialR6UerqVLnXYjKi5wtQnQx1E2Vo2r6p4SYb4noBfA+DNZkjcBsLU
- SG+Q==
-X-Gm-Message-State: AOJu0YylIxcnaBIohzeMVV0FB8bqMPKZhzr1W6SNPKGt+x8UO7Q8mXTi
- z5MXFjEtkdADgbcwQtEi2NsO+tAZa2y4gad3JNWX1trwY9dlT05l9DL2zZZkp48=
-X-Gm-Gg: ASbGncs4wVvi55tui5pOA3jKzYvcDIfTgPaFhC/28Br8QpoAXZ+bLoOAaX8NfbhLNZZ
- AXN4gMub/f9H4/Pn5WEIq7QCICaQBIeTBXtk9MUChaL4xC3sZHaMUXdsZkg9h0VcUnLyFHIqYoe
- 1F+UIM08R+0l0ixST+651B5SPGM67ZHoyytboXDbq/ptQxEDtJKFLoJfp0AwHDn3PjCUvEiXSlB
- 4ua3lV1C12+Gq7wSKnsXvTnfbWSxUiMe9WnmCEYA29Yh2N++SZ6X2GqBqDPZ3cESy8ELWBvbn6u
- HC5nYGuSzIJIVaIjo5sCPTUVrURh+09r0r0VX7tAkX6SoW/GiM7IAlfFUABIBPcv/KjLplulTji
- mFj0uxl91RYxrHH3bc2hCQEN/ZVjFkkQs
-X-Google-Smtp-Source: AGHT+IHAhTXrwd2xNXZVztoaEM/95bS5rvg4MySi28GfiiCa2jGOP0gmTTDyVXns4TOnP8GF/5W/yQ==
-X-Received: by 2002:a05:600c:4eca:b0:43d:bb9:ad00 with SMTP id
- 5b1f17b1804b1-43d1ecc7d78mr138247915e9.15.1742220246745; 
- Mon, 17 Mar 2025 07:04:06 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:1a77:b55f:a550:458c?
- ([2a01:e0a:3d9:2080:1a77:b55f:a550:458c])
+ d=1e100.net; s=20230601; t=1742220405; x=1742825205;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dSrDfb2VgS9DftruOgPjxjMekMpPCavXjsch9ANmVVI=;
+ b=prJOd6JFlwIkFBWqHkfCfpLEmAM3j3dEZnEpJsVkbTFeh5ZcB4F5VGXbP7pKeBgZls
+ T6X09+MP7TbbZhymnxvhw3xJuv+sNdEIWoPwARGYrnNf6WmLzkdIvsL3WLCM5jweHWp4
+ e+hgfT3fz0CMp9YOaeMXQKd7IQSe2V2oNFhJYkj634/v2v2VhO0yzAbU239OTsskElGC
+ HKl07d7Ca7C0VOlw+htQQOEWLklfSmYQOs4HILQzPDer87d7sMdLAocKom6zxUfsHxGt
+ i+8rLEcHrzbB7Uyk3MWZiokB+w6aNNFh3/ndT/YTdJHlNarmphQ2+FqDBdu8N5NJ8slX
+ UHWA==
+X-Gm-Message-State: AOJu0YypmlHo7q9+GMINiJqwNoolqq8A/hYkTgpaPINgZw08rGzbq9HO
+ 3AERWbpuwoieaax74Nyh9MTbJJUXdQmOtOdht2JQhPgIlLIBtHzZO5cZqpqPKHo=
+X-Gm-Gg: ASbGncvmX+fAAyFbDcdRM6FJxybRB1k7COqkxuyjMTTU4u3Yp6FfeomaSbraFa+eCpc
+ bVUcj4TO/Zh3GnFnvrDC2QKF5mr3VLu1uSvH3RHIDkWUpb4ruoBs3eUAxntaBhrZl7TBBldVPDX
+ rx7VdVkpKmhpwDPBmJZbz0wG5MGNhC8YUkdJ1vbk6w4hJ8C0Uuq2AuhahQqN1ubJzJRYenJ0e85
+ TKl/tD8edjnbanjhKZTPLpGo+WbY2CtBflm1iCUdsI65Tv7k6QQLtrJFyxj+sO2y8MIg0Lur//g
+ ncACYjIaUTFLph5L+GKoGCEips7a2qocwjNT2u6vek9mDw==
+X-Google-Smtp-Source: AGHT+IFXJ+bkhqCmgkyvBHh+LpedeJgdsMatB+WLs1TWz8UL2tV20nuQpAvNXikObg0ER9EuQb3vRg==
+X-Received: by 2002:a05:690c:4d02:b0:6fe:bf9d:f6de with SMTP id
+ 00721157ae682-6ff45be03dfmr154777847b3.0.1742220405015; 
+ Mon, 17 Mar 2025 07:06:45 -0700 (PDT)
+Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d2010e0bfsm104742405e9.36.2025.03.17.07.04.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 07:04:06 -0700 (PDT)
-Message-ID: <161b113e-4cd2-4870-9a87-30a64b1385a9@linaro.org>
-Date: Mon, 17 Mar 2025 15:04:05 +0100
+ 00721157ae682-6ff32cb5971sm21633087b3.108.2025.03.17.07.06.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Mar 2025 07:06:44 -0700 (PDT)
+Date: Mon, 17 Mar 2025 08:06:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com
+Subject: Re: [PATCH] cmd: version: Get information about GCC and LD back
+Message-ID: <20250317140641.GN2640854@bill-the-cat>
+References: <59827eccb8a90957e3d4f09059e43cc7fe6c92dc.1741255948.git.michal.simek@amd.com>
+ <20250306140250.GX2640854@bill-the-cat>
+ <41f1ec1b-2c36-4ab1-9e99-77459deff366@amd.com>
+ <fb24a61e-0fb5-4430-b5e1-1c2b25ca8159@amd.com>
+ <20250310135605.GX2640854@bill-the-cat>
+ <1704f391-e76c-49b9-83d9-e1a738da971c@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/3] i2c: geni: fix error message wording in clk_disable
-To: Caleb Connolly <caleb.connolly@linaro.org>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
- <20250314-geni-load-fw-v1-1-587f25f2812f@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250314-geni-load-fw-v1-1-587f25f2812f@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8QDC3FvTahTxiBI2"
+Content-Disposition: inline
+In-Reply-To: <1704f391-e76c-49b9-83d9-e1a738da971c@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,45 +94,83 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14/03/2025 17:09, Caleb Connolly wrote:
-> Correct the error messages so they accurately describe that we failed to
-> disable the clocks, not to enable them.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/i2c/geni_i2c.c | 6 ++----
->   1 file changed, 2 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-> index eabf5c76c21c2bc12c80dbb9fb498a0080928248..4eb41ba852f7790ca646c8ba38f29fdb727fa804 100644
-> --- a/drivers/i2c/geni_i2c.c
-> +++ b/drivers/i2c/geni_i2c.c
-> @@ -330,17 +330,15 @@ static int geni_i2c_disable_clocks(struct udevice *dev, struct geni_i2c_priv *ge
->   
->   	if (geni->is_master_hub) {
->   		ret = clk_disable(&geni->core);
->   		if (ret) {
-> -			dev_err(dev, "clk_enable core failed %d\n", ret);
-> -			return ret;
-> +			dev_err(dev, "clk_disable core failed %d\n", ret);
->   		}
->   	}
->   
->   	ret = clk_disable(&geni->se);
->   	if (ret) {
-> -		dev_err(dev, "clk_enable se failed %d\n", ret);
-> -		return ret;
-> +		dev_err(dev, "clk_disable se failed %d\n", ret);
->   	}
->   
->   	return 0;
->   }
-> 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+--8QDC3FvTahTxiBI2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Mar 17, 2025 at 10:48:57AM +0100, Michal Simek wrote:
+> Hi Tom,
+>=20
+> On 3/10/25 14:56, Tom Rini wrote:
+> > On Mon, Mar 10, 2025 at 08:49:32AM +0100, Michal Simek wrote:
+> > >=20
+> > >=20
+> > > On 3/6/25 15:12, Michal Simek wrote:
+> > > >=20
+> > > >=20
+> > > > On 3/6/25 15:02, Tom Rini wrote:
+> > > > > On Thu, Mar 06, 2025 at 11:12:30AM +0100, Michal Simek wrote:
+> > > > > > U-Boot version command is no longer showing information about G=
+CC and LD.
+> > > > > > The reason is that version.h has been removed that's why CC_VER=
+SION_STRING
+> > > > > > and LD_VERSION_STRING are not pass.
+> > > > > > Values are generated to generated/version_autogenerated.h which=
+ is sourced
+> > > > > > in version.h.
+> > > > > >=20
+> > > > > > Fixes: 54ecce2cbf90 ("version: Separate our version string from
+> > > > > > the version command")
+> > > > > > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > > > > > ---
+> > > > > >=20
+> > > > > > Tom: Not sure if this has been done on purpose or not but this =
+issue has
+> > > > > > been reported by our regression team.
+> > > > >=20
+> > > > > It wasn't on purpose, no. Did you put this through CI / confirm
+> > > > > sandbox_nocmdline still builds?
+> > > >=20
+> > > > Nope I did not.
+> > >=20
+> > > CI is not reporting any issue.
+> > >=20
+> > > https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipeline=
+s/25029
+>=20
+> Are you going to take this to 2025.04?
+> Or to next?
+>=20
+> I don't mind. I can also take it via my tree just let me know.
+
+Ah good question. I suppose I should pick this up for master.
+
+--=20
+Tom
+
+--8QDC3FvTahTxiBI2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfYLG0ACgkQFHw5/5Y0
+tyxWOAv/bUUo/EnJ2BDLV40o9Rq0ebAGGxTrm8Rw/p9oUzb6oeTA7RFgj8QFQ4IH
+7o7ew1658VJgOvmBz/xnkht6JDb2ro6Tn8RqdNHitnP3/nXM1EDEx4sfXvm+DTVN
+R8i3SM/xiwmJoGKDbXFVWQpjk/y7tmXN7ydzX1ndD/AnlxbvvPNf0B/FEV1vKbpu
+CqLbiPXlL9pST1ByVQAzTw4a+VyHCWmowr7iMCViUzL+l0j+hB00tlo4uugtsiPD
+SPKWiwdxBwjqqI/Ouo4bf7HwsUlgqSrL2dmJQag5lrpj+rNUEORekdnnROsORACD
+qImj9BAgcMSKY/ga/4zBQt9X5PMwiu8jIGVBMQPsTHpwFoXYSLO+xlxThJDB1sGc
+iA/6e0mzY67Hjz7DuwCWde6TOytsSqhv7gng5/8AdRWw7SXG+L/JuFiAofFCaX+s
+rxKEHRodKcUjL+nE80ZykckdHR0QRLEZJ+Q1DL+B9/J+rdOKmRublAuUJ3vN/dqr
+kJy2N3H5
+=V9Jr
+-----END PGP SIGNATURE-----
+
+--8QDC3FvTahTxiBI2--
