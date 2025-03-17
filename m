@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF359C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79CD3C28B30
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6463A8197F;
+	by phobos.denx.de (Postfix) with ESMTP id AB91B81C64;
 	Mon, 17 Mar 2025 14:48:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vS6JA0z+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FaytA263";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDB63800C2; Mon, 17 Mar 2025 14:48:28 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 3BB7A8081A; Mon, 17 Mar 2025 14:48:30 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F1CB800C2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:48:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0006A8168B
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:48:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4394a823036so20385515e9.0
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:48:26 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43cf034d4abso23980615e9.3
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:48:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742219306; x=1742824106; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742219307; x=1742824107; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KGa6KR81QHBijn3uFrVDLc5ddRiuLW6FesRh737Nl98=;
- b=vS6JA0z+bESnMWFYie5XW4iZeH1dSs/mDgkY4JS8VsDSz2lO/nOLARAlzd7jy/mk9t
- gRIQYGCp4XXKJfs8JB5S1SXjTUaX1rRaZKa0acVmYN291pN4ATFAUpOGyaMCh/+LEAxw
- CdC5TGdyYcuC5LwpKMbVPzJkvkEXFbW+9ylVCZffAsfw0RpoKrsvG71D2Nlw8TWr4YIo
- ghQ4TMlC41YZX21XPZxyPU2f2aUCNs8yIJKATEcZKyQFlHyqePMWwkv8t548zguNSfnO
- 4S+LrbErBxMKNBPUI1/zkOj5NwEqVrACtFKeHbhHuXhYpHO9HA/t5GpHNHHni83Gkwt+
- GTKQ==
+ bh=6Oz1Y6X8JE5RfaKFMHgZ0FsTl0LqiXIGYVeXrZQwMgs=;
+ b=FaytA263h8W5dWAh+Y9TJBMPyQWXVlc7ioIoRM+IiqqJjGWAfKaZ1p7CA7wEW9hVoS
+ JPAwf4K1tBtfNG25tzgAVINCE/LHwkvuRMNB2lvzwWsog4DNwUhe6vD0va2gH8+IQHXK
+ zIFpGpG9Kd5c5Ez4hmHX1ZVfAgEWy9Ozj+vd9Gie6gWrhYZVpqNN/TvCyCNVA/0+IwhO
+ HiTo6jAFojC015rLxIJGx9LCIU87yNFuuZdLs4xuIs+aYT4WH7HHBbaqByS5p/TDexoL
+ laUczb+OLCpu3B4XBOkeJr2pnVPGUADQcdom5O8r/AkbbKuthWgXQ0HCEi/NhD2+JrpO
+ wjdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742219306; x=1742824106;
+ d=1e100.net; s=20230601; t=1742219307; x=1742824107;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KGa6KR81QHBijn3uFrVDLc5ddRiuLW6FesRh737Nl98=;
- b=blIUuPBcP7Wpjc3Pts4PBiGwLFM0PLZLgOwBTGmhKepsnI8K6wDnSBeAV64ARY39cN
- 3fX31NIWS7pvQ7/nW+G2V2cBo0njP/PuFCGYjHiR7MILFzSWS27foWdfADwcFebVbKaC
- 7MMHroWt5ZCAJnRG0ADH2iiFw60lLlzzHrVEMVbg4gCFBWMPt6KgjfIPKHpmFrEtXW0R
- 0gm3tfTaWPqppqVjllySrf2SYtKrkFmSfWaLj7f63GYE02IwsDpTqzt7+M04T2L4xjYJ
- A8zddA9F7anLasyi0s18ie1Z9jvmxXIdCDx4H7bZKvUcniWTZO5w4Kh5fMwUxWsGTxl1
- AQ5A==
+ bh=6Oz1Y6X8JE5RfaKFMHgZ0FsTl0LqiXIGYVeXrZQwMgs=;
+ b=FV1mEwnwDOUFictnjssEoI2pUCKL7oydaYimePqeCWsvz03Fu19pGKcZGW64ufQEew
+ roOrdJCiRgVME4q/S4ToWvYVNLwHQAv+OWdzDBqGhjhTcshq2GGT10SJ+9EmDHjwae7a
+ Mck0JXBqX0YfSwNIdlEUp4PYV61seaRm2dCGVwaJW/LPLC4s8MOFH+j1YIMZoUgo1Xu/
+ DTOvlbcQH3ppn2+05aqEplIITEMZqmF9FQd3D8+pbOs8rEo+fxsQu7iUihlsL68zNt6Y
+ dznJW8JwLXBzn4DMxrmuf3+/+h7XaNG2+9FA49/1EcGusZmNIeBGmEPmVAxp0CL0tL+P
+ sdew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXC5VLyugiKJ9rkkt5jwvsIuhJP/hIAwoza8IUSyHvLFF3Suh4nd3PAIllt4H7seUdsQlRtAo8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwklhHwRsuSEvCa9IMvXZkfM1246opEtdtSjM7ktRiIJFL/7Mcb
- FztHrGI/NcJhhAn3etOJGIe4r2zW+kNk131MhlQeaA39qyRI8e5AVyCz+RRp7ZM=
-X-Gm-Gg: ASbGnctmxeyKjNfBo3EhemQ+h3gza5byalnsvR1TlcAFhQh1ct4ptJbUOsspeQB21HJ
- yvEEFU57oyOXgXl9ES0Hdmp9LZMoYBZDWNzlaijKDF0oJ2w7a6TckrQ5Tc+yRm53M1pP+PqrXNX
- bvA5TEWNtScyzwJd4KSDvVPXdvYJGy8gG3aXsa4ciNIcmpgS9KlnhQ0Ytos3FQedD9iRNfn8Mxh
- /4s16oDWqsm7Niw/dN/23sq4uMA6ojLK+s+OLihtToiV5lTJhiipXTm68F2DHa5Q1b8vpYhcORI
- 3cpU00ZzWwa3Z8ZJm+PU8EWnq53IIrsImDGVxssDCY/bgCCzRobzB25lfh3r2fDsD1IfS+k=
-X-Google-Smtp-Source: AGHT+IFLznCi+trDAwwS5q/iwWHXAgs9TXIfPUw4Nu293l3Ep4Rb3g4y/OWckcTG5zzabeyE+Of/HQ==
-X-Received: by 2002:adf:c08b:0:b0:391:39bd:a381 with SMTP id
- ffacd0b85a97d-3971dbe0c60mr7909890f8f.30.1742219305998; 
- Mon, 17 Mar 2025 06:48:25 -0700 (PDT)
+ AJvYcCXG5+wTg2jY8Roy46t5CKoSKxfox/rHyoQ3gQ3rmX8bTcrNlBhTB0TUPdipia7fjrdIACSSkus=@lists.denx.de
+X-Gm-Message-State: AOJu0YxksMhftSeHQDtXagfmTIx6Ovj4HfEeIinSZFjiauKsPX8GlMgM
+ dgUzlJDwFEPJfNDtTCeVdDitSkOv4seJVddBON8OJnSYJywpJkk/ACdwuSCKmhehsg9aW02LYIw
+ AsgI=
+X-Gm-Gg: ASbGncuCYpypP/RzHwBqcSEWXFSvXdEz6ZcyPL4c+V8mkc6SNCoXSYQ6kczBOREldWP
+ B5nU8eA+p9KXgxYkLCzwre2QbpSASlOZzxdKPGeszNlrhFOdnhDJ9G4sPpojM69w8RGp1nZ1b+H
+ Oh7Q+Q+jBS9MtwLTUiJWsF+6mmvLicwklqMBrtk9PWkkWZrjyBdjzGoFkaftDfTRZWWogIYi6Qn
+ FiXB91R26VyQMRQ2V38C0UwwZf28wEobGLjT3nbb0npBP5jR+wudjr0dBioXqkvycZn2j6+bP6a
+ Lz0jTCZMYNKL2ttJsOoovxnBqXIROj9zIfhypxuaRdwLTiLG6WFY/TEP+ZPI0+sJEkXU/Bg=
+X-Google-Smtp-Source: AGHT+IET7beWW++GbuglnCtTDYPHPsfOrwiVTDySLMlRU8Wv1sjfaaUTnHK+bYFObl5jUPQ6bq1ksw==
+X-Received: by 2002:a05:600c:4f41:b0:43c:e7a7:aea0 with SMTP id
+ 5b1f17b1804b1-43d1ecd94b6mr118001595e9.26.1742219307463; 
+ Mon, 17 Mar 2025 06:48:27 -0700 (PDT)
 Received: from [192.168.1.116] ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d200fae4asm105655945e9.27.2025.03.17.06.48.24
+ 5b1f17b1804b1-43d200fae4asm105655945e9.27.2025.03.17.06.48.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 06:48:25 -0700 (PDT)
+ Mon, 17 Mar 2025 06:48:26 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Matthias Brugger <mbrugger@suse.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Sam Day <me@samcday.com>
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20250123-qcom-parse-memory-updates-v3-1-c5332b81ea9f@samcday.com>
-References: <20250123-qcom-parse-memory-updates-v3-1-c5332b81ea9f@samcday.com>
-Subject: Re: [PATCH v3] mach-snapdragon: support parsing memory info from
- external FDT
-Message-Id: <174221930476.73541.17341209911906609382.b4-ty@linaro.org>
-Date: Mon, 17 Mar 2025 13:48:24 +0000
+In-Reply-To: <20250127-qcom-handle-absent-psci-v1-1-e762f2db938c@samcday.com>
+References: <20250127-qcom-handle-absent-psci-v1-1-e762f2db938c@samcday.com>
+Subject: Re: [PATCH] mach-snapdragon: handle platforms without PSCI support
+Message-Id: <174221930616.73541.3304986118588546443.b4-ty@linaro.org>
+Date: Mon, 17 Mar 2025 13:48:26 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,20 +103,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 23 Jan 2025 12:12:14 +0000, Sam Day wrote:
-> qcom_parse_memory is updated to return a -ENODATA error if the passed
-> FDT does not contain a /memory node, or that node is incomplete (size=0)
+On Mon, 27 Jan 2025 14:48:55 +0000, Sam Day wrote:
+> Most MSM8916 devices shipped without PSCI support. The history is quite
+> nuanced (a good overview can be found in [1]), but the end result is
+> that the upstream DTs for this SoC pretend that PSCI exists, and it's
+> expected that the bootloader handles the case where it doesn't. This is
+> codified by the de-facto bootloader for MSM8916 devices, lk2nd [2].
 > 
-> board_fdt_blob_setup first tries to call qcom_parse_memory with the
-> internal FDT (if present+valid). If that fails, it tries again with the
-> external FDT (again, if present+valid).
+> So we handle it here by deleting the /psci node if we detect the absence
+> of PSCI. We need to do this early to ensure sysreset works correctly,
+> since the PSCI firmware driver is PRE_RELOC and binds the PSCI sysreset
+> driver.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] mach-snapdragon: support parsing memory info from external FDT
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/11ff5a57e2fb
+[1/1] mach-snapdragon: handle platforms without PSCI support
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/773a46b18b09
 
 Best regards,
 -- 
