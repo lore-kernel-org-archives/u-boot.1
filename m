@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D0AC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3480FC282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F9A780F70;
-	Mon, 17 Mar 2025 15:23:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B038780F70;
+	Mon, 17 Mar 2025 15:32:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jt1B6UcU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FWHI4g4O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 413FD810F4; Mon, 17 Mar 2025 15:23:30 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 517AF810F4; Mon, 17 Mar 2025 15:32:05 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01BAD80F4C
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:23:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2563B80F4C
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:32:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7c55500d08cso383640585a.0
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:23:27 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6ff37565232so35671567b3.3
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:32:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742221407; x=1742826207; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742221922; x=1742826722; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NWyy1/aXzQ2ALAq5ZbwLqn2BmGNIxAMucIHdGVRBnW8=;
- b=jt1B6UcUMCNspig1TaVF5nWg9thi4YcrzelHEEmFmW8zsyi01aLursX6bOasaFumXH
- 7b6xmsRADg62WjRt5BUKomXlbZKE7ngsPmse8NyThQowl28PNupbbYRxS+6lPBwbQpjm
- kltKm9HrMD+evIw0MKqDGyX/WjFyImqa1e81Y=
+ bh=i24PaytB1eQ0innpLUmlqm9q4Azo49UdsjCGL6SJ8io=;
+ b=FWHI4g4O6RFMtho1yn87qHfygnuKrb34whFP5TK7VZ+Rzm4+CSAh8gvpD3ZGb+4JoL
+ Wpkz8dq/KGQHo3WRxYvyeG8WnJhcNetFM4K3VU/84jB7VTwvj0r8A5f9YgAFVdN7+84O
+ U1jMYLl1ljdmbA7Qazoto/3rP4p+mJuwMDrAk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742221407; x=1742826207;
+ d=1e100.net; s=20230601; t=1742221922; x=1742826722;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NWyy1/aXzQ2ALAq5ZbwLqn2BmGNIxAMucIHdGVRBnW8=;
- b=DIxALt9czwKgtnoVQ3p4PoXezOmTaGlVrau8w85x1q4cG4RiltxfM7rhYaiPL6VsiB
- 9BitzVEtO9QhsM8mdqj2jNVwh5497ruLXzS7mdydeQfoY/a/S0gJcUo8LbpR38WBEjF7
- OhkgVCmdDw6xX+Yw3wDUbxTyB+JzqXubMjA/8/tibAT/1K+OmVMBEskXTBrahhHAURVF
- VLLtZmPZrmhx9FLOQCUmESApJ96sLNEvXvbuvYegVD0/Pyf2g1WssWxd6H/+ViEwleea
- c0kUDtm6DkMbWW/wskVw8I7/Sx+eeT437LC5qE9Nw0Pq/RPL8F0xOsDgRry/rVhO+68c
- RTLw==
-X-Gm-Message-State: AOJu0Ywomq/ZyWvpgjiylgpmomyCdaDYUwmwIacwik7cP3IKSLdkJxGi
- Mro/JNUXDWdRxlWFb5iw3LQHI+ALAZll4AjN1djkQN0MVdMdzV/Ift+/WnKiuF8=
-X-Gm-Gg: ASbGncvpdaimA0CQUhbAyN1wTK338AjMm6WbIfiyTD+ViAuCDp0aDVgJv6bm+3nAuF+
- pHP4UCaYdy0all6iY8mOUsyvf5ScjCPyHs66gBkPtQcNPBRjwReZ46mS0Nq9bFT85kw9r1Zf3hw
- mjAY+v/3eCjlQXrpCUOUmzbmz/DFCtKVR4BMqlaz6XgNQGwO5BdWnlFjB6JkVbBLgjMenGxlZCu
- aeuR3XVK1O7rqhq7xgxjhU8qz1rj+MpRXa/wzacoWxkacRcMH10ObzPLEDnj3WoP9gFZEjnlF3X
- hZzIzIBOL5xC/0HkKGCDHRNYNHNTk6DEeOo0HLExtN+iHQ==
-X-Google-Smtp-Source: AGHT+IFHX1BC6USBxlO3xfSimRl5ca+/TgxDUI7tqunDcCsekZbOtr5NhiKsCvPv6bA4gXEWPwwVdg==
-X-Received: by 2002:a05:6214:c47:b0:6e6:5f08:e77d with SMTP id
- 6a1803df08f44-6eaeaa64726mr193468926d6.19.1742221406814; 
- Mon, 17 Mar 2025 07:23:26 -0700 (PDT)
+ bh=i24PaytB1eQ0innpLUmlqm9q4Azo49UdsjCGL6SJ8io=;
+ b=aAiaJQ20RivAYPRZVdo3Pk6kHQy8UgBk+FFggk3me4sqqphYizujoZ42B6Bo/57u1B
+ dIKPaRN48IegnqOAo+Kdhm7t/HF4HCirFXz9iYUFS+nj99hiqA7YCRDR+fZhYE+HtNt4
+ yMxxXdNdVGlDQ6uRUWbjKbcjc2sg/6rv3O+mKYAY0AfURP9lJP9JTQx3N6LZkqjkDkAZ
+ TMpNVLhhAb/+u418hSZ02UVq9i8IFI9pagqzAAkiOxkPpf5WbvNvUAYq+pZoCK8Z2Y0N
+ 20PylLQHdrX7MaTSowkP0udR/TK4KhE8Q6UNFQ+gY+F4zbhnV3P4YycL01O33mUKcQhA
+ RaPg==
+X-Gm-Message-State: AOJu0YyE9IFeUfh5bCT0LJLRtDJgSiSDFmB3swxA67S80pyHoPAZHOPq
+ 8pOrh2LcZsNDIAEFNz/RJ9r0Dq6lP51i/dak3EhamYeSaBa4GnLubxwz0l41EnA=
+X-Gm-Gg: ASbGncspJ9oiDPhXvFg4vMNkSrL/A6wc9N+oFVNJMa+HO8ctvh2NIqck76d0QgUwuNO
+ ml7cVd+OQK0SWQSqa0H9rtn3Bqptvp53HiR5k5jGnr2sG3hkhy+c3CY4QU+WFFaX1wc8S7py/YZ
+ 3L0lB0yjYsYED6a+9583ooudOO7IuZ9t1aLG6MR+QFIX3jXqrW4AXTRW4e9FjSt9L4DJJ2K+rYF
+ xQJCpImya9RtIEfxO8P57ITOnBVVr79zgNAT2ZZZ9Hc3xGovgn+aobGzaP6cyOhMGeO99295X+3
+ sGqgqL0Wshg6mvtYSjZHJVhNECdbf7w2WISy67n5YD2gyw==
+X-Google-Smtp-Source: AGHT+IGES5cY1eOBoAd4ZtY91o41Nzf5ybqv3wSjbvphcZ3pygazKnz02ZuUYDpTLo0U9jFJlTVKiQ==
+X-Received: by 2002:a05:690c:7281:b0:6fb:b907:d965 with SMTP id
+ 00721157ae682-6ff45e6881emr157434257b3.3.1742221921764; 
+ Mon, 17 Mar 2025 07:32:01 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6eaeeb1370asm37337816d6.82.2025.03.17.07.23.25
+ 00721157ae682-6ff3286a658sm21772917b3.35.2025.03.17.07.32.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 07:23:26 -0700 (PDT)
-Date: Mon, 17 Mar 2025 08:23:23 -0600
+ Mon, 17 Mar 2025 07:32:01 -0700 (PDT)
+Date: Mon, 17 Mar 2025 08:31:58 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Harsha Vardhan V M <h-vm@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, k-malarvizhi@ti.com, kamlesh@ti.com
-Subject: Re: [RFC PATCH 1/4] cmd: fuse: Remove custom string functions
-Message-ID: <20250317142323.GO2640854@bill-the-cat>
-References: <20250313115517.1181829-1-h-vm@ti.com>
- <20250313115517.1181829-2-h-vm@ti.com>
- <20250313161539.GE2640854@bill-the-cat>
- <768e6b56-b55a-834b-4abc-41b9cee701e1@ti.com>
- <20250314140928.GL2640854@bill-the-cat>
- <f9ae49bc-0bc8-54a9-acaa-e1d80bfbcb45@ti.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v5 07/46] x86: Drop mpspec from the SPL build
+Message-ID: <20250317143158.GP2640854@bill-the-cat>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-8-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ladKdSZnuo3X5xVE"
+ protocol="application/pgp-signature"; boundary="tOMPt3PMc8ymtz/K"
 Content-Disposition: inline
-In-Reply-To: <f9ae49bc-0bc8-54a9-acaa-e1d80bfbcb45@ti.com>
+In-Reply-To: <20250315142643.2600605-8-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,118 +99,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ladKdSZnuo3X5xVE
+--tOMPt3PMc8ymtz/K
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 17, 2025 at 02:29:39PM +0530, Harsha Vardhan V M wrote:
->=20
->=20
-> On 14/03/25 19:39, Tom Rini wrote:
-> > On Fri, Mar 14, 2025 at 07:13:19PM +0530, Harsha Vardhan V M wrote:
-> > >=20
-> > >=20
-> > > On 13/03/25 21:45, Tom Rini wrote:
-> > > > On Thu, Mar 13, 2025 at 05:25:14PM +0530, Harsha Vardhan V M wrote:
-> > > >=20
-> > > > > Remove custom string functions and replace them with normal string
-> > > > > functions. Remove the custom strtou32 and replace it with str2lon=
-g.
-> > > > >=20
-> > > > > Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
-> > > >=20
-> > > > Thanks for doing this.
-> > > >=20
-> > > > > ---
-> > > > >    cmd/fuse.c | 27 ++++++++-------------------
-> > > > >    1 file changed, 8 insertions(+), 19 deletions(-)
-> > > > >=20
-> > > > > diff --git a/cmd/fuse.c b/cmd/fuse.c
-> > > > > index 598ef496a43..9f489570634 100644
-> > > > > --- a/cmd/fuse.c
-> > > > > +++ b/cmd/fuse.c
-> > > > > @@ -15,17 +15,6 @@
-> > > > >    #include <vsprintf.h>
-> > > > >    #include <linux/errno.h>
-> > > > > -static int strtou32(const char *str, unsigned int base, u32 *res=
-ult)
-> > > > > -{
-> > > > > -	char *ep;
-> > > > > -
-> > > > > -	*result =3D simple_strtoul(str, &ep, base);
-> > > > > -	if (ep =3D=3D str || *ep !=3D '\0')
-> > > > > -		return -EINVAL;
-> > > > > -
-> > > > > -	return 0;
-> > > > > -}
-> > > > > -
-> > > > >    static int confirm_prog(void)
-> > > > >    {
-> > > > >    	puts("Warning: Programming fuses is an irreversible operation=
-!\n"
-> > > > > @@ -54,14 +43,14 @@ static int do_fuse(struct cmd_tbl *cmdtp, int=
- flag, int argc,
-> > > > >    	argc -=3D 2 + confirmed;
-> > > > >    	argv +=3D 2 + confirmed;
-> > > > > -	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
-> > > > > -			strtou32(argv[1], 0, &word))
-> > > > > +	if (argc < 2 || !(str2long(argv[0], (ulong *)&bank)) ||
-> > > > > +			!(str2long(argv[1], (ulong *)&word)))
-> > > >=20
-> > > > I didn't know we had "str2long" which is a differently rarely used
-> > > > function. Why not just simple_strtoul inline? Am I missing somethin=
-g?
-> > > > Thanks.
-> > >=20
-> > > We cannot use simple_strtoul inline directly because we need proper e=
-rror
-> > > checking to ensure the simple_strtoul conversion was successful. The
-> > > str2long function is a wrapper around simple_strtoul and the necessar=
-y error
-> > > checks. Hence, using str2long here.
-> > > Thanks.
-> >=20
-> > I'm sorry I'm still not getting it. We virtually never call str2long. I
-> > was taking a quick look at why if anything the 4 callers in the entire
-> > tree today have more special error checking requirements than every
-> > other command which parses user input.
-> >=20
->=20
-> Hi Tom,
-> I tried to retain the error checking done by the custom strtou32 function,
-> hence replaced the custom strtou32 function with str2long. I did notice t=
-hat
-> in some other files in the cmd/ directory, simple_strtoul is used inline
-> with NULL as the endp parameter, like this: simple_strtoul(argv[2], NULL,
-> 16).
->=20
-> Do I proceed with replacing the custom strtou32 function with simple_strt=
-oul
-> inline by passing NULL as the endp parameter, similar to the example abov=
-e?
+On Sat, Mar 15, 2025 at 02:25:27PM +0000, Simon Glass wrote:
 
-Yes, that would be good, thanks!
+> This is not needed in SPL, so drop it.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> (no changes since v1)
+>=20
+>  arch/x86/lib/Makefile | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/arch/x86/lib/Makefile b/arch/x86/lib/Makefile
+> index 43e6a1de77d..a908356e8a6 100644
+> --- a/arch/x86/lib/Makefile
+> +++ b/arch/x86/lib/Makefile
+> @@ -26,7 +26,9 @@ obj-y	+=3D e820.o
+>  obj-y	+=3D init_helpers.o
+>  obj-y	+=3D interrupts.o
+>  obj-y	+=3D lpc-uclass.o
+> +ifndef CONFIG_XPL_BUILD
+>  obj-y	+=3D mpspec.o
+> +endif
+>  obj-$(CONFIG_$(PHASE_)ACPIGEN) +=3D acpi_nhlt.o
+>  obj-y	+=3D northbridge-uclass.o
+>  obj-$(CONFIG_I8259_PIC) +=3D i8259.o
+
+What's going on? This should be discarded if unused in SPL
+automatically.
 
 --=20
 Tom
 
---ladKdSZnuo3X5xVE
+--tOMPt3PMc8ymtz/K
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfYMFcACgkQFHw5/5Y0
-tyx0HAv/Q41ygSS65t3o7g3OJD37/aZDoBxgv4bwskGK8dtWN6wIg0+ASWtQUDqd
-DbMiY3oKQnyt+HJGc5LvoVAxm+R7nROe4HkIa74BSXuz66S9v7Fhhsd8x09Bvjy0
-ir73Fk3bXVjWzjSywrRmtesEAJ+blRKMW8pEQtoS3MbUWMTe4COO9HpbUkZB+RXv
-5XsVsNxkxOPNznW7MoxFEpEjWCqoTHri94TJYfYlBryqAbdhWRk6i8F09d2BNOQ1
-QM5xw6cCnFArsVttSkIuXus4Ao9dMXeTMW5XqzBafB2d/BxGGL/rTo5TWfpFkb67
-nvqc13G4N1jJN/R2OBVFMo695W0j+4BS3q59wkoO8hRH/q9rPYd8vYwVN6fN0jME
-Z/Y4zOpo1OzODfTGCxHpM9ireZMMoicPW/7MQfTB/hGVIFY/pC9jZYNvc3/kjwPL
-4ZeUgQ5RBozdj2BkRmh4n8rbPvoZkr6pqETvV5g4MP80ADoKfZnpIc8hyNzYIXFT
-8VBo+1Z9
-=n/4G
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfYMl4ACgkQFHw5/5Y0
+tywxrwv/aIKcp6QwOaX53afjvxM1ihRiY4TmHq5M48sOEFO3uQBdIVSn9apK627z
+PsXcJQlC17+XnSsK3xYB0vG3LQhxVJD/3sgevvzE8rpkFbTl5n3ffgbXinKHrGYd
+O0ctZGlYCov/DVoBJ0SJyM51YwmXvIF+KHDl9IR/myvmRpsemrut3kBkqxJoNYvK
+7t3xn3iI+F2xFeI8MlGJiKv5HclhjnJtIPrGzgaBbcfsqr+FmnB61ffSAqWCboV+
+UfFGLL2nn1oU0iZViP2oIxSIvGMcd2dK+rE9IkwP/vOLEfHI5i9gNXuI3qDJuekY
+qklwHeKf8reg8EtO/Fxhm3Ohusn2zycY3CNp7p1RlWaTXYoRJNRbsaAcOgz1IC2J
+LAFxfC+z4qHvewFvPx3m4CAR9cTha4WYo0IkB7U6d/Xwh0oOlaWJEr2nxQoZ8c1+
+s7kXuz2nCAZR+fKyfO4Ozdthu4EuPjBF2xgIMuRQlW+Baa78TUykk7kGUGUrHI3C
+hc0vdxl3
+=yesQ
 -----END PGP SIGNATURE-----
 
---ladKdSZnuo3X5xVE--
+--tOMPt3PMc8ymtz/K--
