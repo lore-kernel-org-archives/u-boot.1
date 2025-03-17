@@ -4,95 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7328C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBC5C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 13:25:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43E5580107;
-	Mon, 17 Mar 2025 14:24:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A3B2B80107;
+	Mon, 17 Mar 2025 14:25:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JNLMC5YJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Lso/2oGz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D427B8081A; Mon, 17 Mar 2025 14:24:20 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 787898081A; Mon, 17 Mar 2025 14:25:27 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7BDE800C2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:24:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EF75800C2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 14:25:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43cf06eabdaso20806155e9.2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:24:18 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-38f2f391864so2510579f8f.3
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 06:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742217858; x=1742822658; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=B8ikTGB8tRiWFjdSc5lKws3THMOki/Z018KPbU0pops=;
- b=JNLMC5YJayciLjFkXEu9luSuIZx+JzaUyk2MS8UKbHm+oKWaTFd4PSusY8lZSEVpag
- HUK7oYHKRswmPeC09OdxG3lkxDHwNzUxnGDzY8ULC1yiSb2cOU3hKCwnRoIeiu+A2Sgq
- /+Al0M7nWcXMZc4IrX7fhkMiUlaPEKlQ9BXIPdL9mEgU/V45WZrGZoYvlmnIMiN7QPBY
- QM5+gbRof8pXzA+VNIzsd2XTJLHHI3x3yY6jyhQAZgDwoU/iP3I3izP+3NOwTYYF4pAf
- ze7FrED0cv3VK1aYDLhrtv/NQLCv0s2d+ZgjHFZydI9//fU9X+4D6w95p9QPTD+SxuGw
- nm6g==
+ d=linaro.org; s=google; t=1742217925; x=1742822725; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=B9CFYjmuBAfhFjes+322EOgHjoMj4Z9LoKbsOkPqiWk=;
+ b=Lso/2oGzyT52GaAyIm2+RnyQasTNPIryUK5a6KnQyXIZbTUUH+kIeVJEcniqH7H7w1
+ oQFA/osnDcyCUqpwhUhq4pSSTrZb164IquKpM4kn0IfG5XkdqKjqBFrewVT9NCZuW8XN
+ AJ8+vyrwuJtOeYwLCuO3U2jT4EYGwXJAxVUVt++EI9aORaQNceQ9K2FrhKuXiMsKi7B7
+ p8NM46rU/BA2nU84kk7mcbHVSvuaDTAFbttOUIIYzswIlUcuZ+66sPqIE0H6SrlWzk3V
+ w32Pb78N+PrghyPFQ9bxfz7oudZGD7aiSX13n4llWLGYT3Oth7OhouNrtnLFnkLPb/ax
+ SUPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742217858; x=1742822658;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=B8ikTGB8tRiWFjdSc5lKws3THMOki/Z018KPbU0pops=;
- b=TqqLAWLBiJt8R7zZzDSCqZ+5YSlqVHd+h6whm/tOn+RlsKDowLBDCv+KjYH/0psgTJ
- 3cqW+GiWJVVNEEJCvC9ACj2LsamrcdXZ/k5dbsU19f88R64g1VU16ISCkGfe2lvE10Qx
- rRfKIuv++gvzNb7AwGDge88jKmGLw1or4zfgDfBoaTev/hL2UBCOBguvi60A83VDu/Cz
- +6EtZIUK1BGCkqQdhCHI1q//sp1Ygy9TjAwzOBCm/2f3zooftKnmYzS7dI0Bzd2PDPgl
- 7K+n6mQWHmJfFuQ7f0e6djAsb+HbgOakoqHH6AjtYQBjCDVC7yLbxQXB+uTerIwa+5hw
- YNLA==
+ d=1e100.net; s=20230601; t=1742217925; x=1742822725;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B9CFYjmuBAfhFjes+322EOgHjoMj4Z9LoKbsOkPqiWk=;
+ b=H97oZ4YijY13ffqF9w+neMAHoa/VAkOPbGxRmQ4MA1dCDbOgRPKhsp510Ut03FY3YL
+ eGOafsvvaTwdQ9g8OWya9QX9jzN6l1eEQAWrF+730k3HhuLiN07qoofsEOi2BcuYZYkW
+ iLGnn5fAMtYoWniSDnZwWIvx9Eybow3BxeYCYYUmNawFLGZdv3DAzlOs8y6mbbGHlp5q
+ cdKlV3kdyEbNF+DzQODh9Pm4PKBhSpBEXp2Y5HU0Xz9rKJil7olCVmN94HKB/Bwjx5K7
+ 3oCybilmPmqRob1kkdMPUJJkyPhQPpeiHgkinK6jTJqr2+5HXrfsTwUhiZLDVS3VkTJR
+ 9UDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVBAZHzwljTcJq+rwwbmlILDlIEffLGg3ODAHivzqPgu63/7CZxtksMtmHVs9rYnvZFok5WahQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+d9OJvKaoIGau+5cGlgMDNqhb8iUnR6H09yPQoVUCZZW9doFt
- 1T0gFkE/L+3Hh8N9t7FTxvsIPDUaCLAsIpt/dVyEcvTAyyLb5A/UmX2/NzhVZ1E=
-X-Gm-Gg: ASbGncup5WipZKax7jwTGClH6N4FSDBuyyASLd5qWF5x5Vf/gbFYRi8OOUDlinhvf2o
- GLBWbvHVW11aR6DYeH/j3QiwHIwfoQW9qDhd2mRWbgEMGnJZHkVVyjzCJP7VAAPc/ui9aTP+lhq
- hUOqqn9/MTXNEDaiu5kdSikPcT7HInhvCEvO4FBMCtUZqkWVBvRuB5JosU2LQVLs/In8h6cHtoI
- GoWOZaurE0NYolJNDweAHIeCVlvnSi0sRfobr/nXc4tXA0dzYXh7CVklPRZir0UPXGytqvvuQ+l
- By7OSxKOPEBkndzbB/pyHDozoMPFA5NdapP9tz/AiAVzh8BiqBdauW6s/uw0XvZr7iMI0dsId2Y
- C/eiTD20lARxa7zuTtDCIaNJQyw==
-X-Google-Smtp-Source: AGHT+IF1MID3dDPnFxdeqaXuuJctDDFbj6ykziYTNMeNE1uTTs9VjXxHDKQgoJ2xu3/Rmtw2TiW33w==
-X-Received: by 2002:a5d:588f:0:b0:391:487f:27e7 with SMTP id
- ffacd0b85a97d-39720e3cb45mr14121838f8f.55.1742217858104; 
- Mon, 17 Mar 2025 06:24:18 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9?
- ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
+ AJvYcCVftuUfiX549qc0qzaUgG/TG143YHhF5xo/cbogn7L0dhh7oP4R5XCd4lnFYUmswWAmOjHDaJw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwfsllqsEP3mplQae/8lsMIq9hq2YxZ6r2hl6LZZ8N9KmORX9OT
+ HQ6govyBWqtDu5Ks4Yqn5kIUF6HK4A3yo0dq8wN2t8cIQ9X8Q1tCsJkb0rPXOGc=
+X-Gm-Gg: ASbGncumW9mepcyqseN2hVVNVPf7jyTRk0Au7sDfZdyVuU0Vu1SBLyW5JP1pWEPj8Ea
+ ymHqc+qG3ouwD5dbIeA1peI4MplcAM/ir4JDEDdNhzx5Fof1vTAv3fow6TPOMGot6Neiwr1HUzg
+ pQRoEb6feffMeVdpwRkbD+FCLCNrziyodzIr4I1OZkoXRGBJGRgA87+eYBANiAmbFacfAfqLwOL
+ v1ggJgay4/uQrYFIWFt4HcJM4FK5yjdBSyxmIK5a5/BDDdwtco3U9LCdyxYLgSoG8XpXPbixI68
+ /cg7v3MAcemplNA7eamy6LdLbv9WqmXEpzCuIbG4msI89Lo0sgl7bgqmRKVM
+X-Google-Smtp-Source: AGHT+IEHBW6+7MY8BKYnStAhFfp61DyW18CWZbcETyZ4pE5cEVLO5tFYU5pBDh9kcc6NoXIyM7YWaQ==
+X-Received: by 2002:a05:6000:1aca:b0:391:40b8:e890 with SMTP id
+ ffacd0b85a97d-3971d9f2097mr11920863f8f.22.1742217924663; 
+ Mon, 17 Mar 2025 06:25:24 -0700 (PDT)
+Received: from toyger.powerhub ([2a0a:ef40:1d11:ab01:670b:cd84:4753:5ae9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe294b5sm105413355e9.21.2025.03.17.06.24.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 06:24:17 -0700 (PDT)
-Message-ID: <d6c02898-b91e-48fc-868b-ed64ddd1287a@linaro.org>
-Date: Mon, 17 Mar 2025 13:24:15 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 6/6] configs: add qcom_ipq5424_mmc_defconfig
-To: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@linaro.org,
- lukma@denx.de, seanga2@gmail.com, Volodymyr_Babchuk@epam.com,
- lehmanju@devpi.de, sjg@chromium.org, robert.marko@sartura.hr,
- dmitry.baryshkov@linaro.org, andersson@kernel.org, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20250304110105.2762124-1-quic_varada@quicinc.com>
- <20250304110105.2762124-7-quic_varada@quicinc.com>
- <c138a744-4423-4b3e-8b1f-abe77d6e228e@linaro.org>
- <Z9FK+10hx9lMFUaI@hu-varada-blr.qualcomm.com>
-Content-Language: en-US
+ ffacd0b85a97d-395c888117csm14773562f8f.44.2025.03.17.06.25.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Mar 2025 06:25:23 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <Z9FK+10hx9lMFUaI@hu-varada-blr.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Julius Lehmann <lehmanju@devpi.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>, Sumit Garg <sumit.garg@kernel.org>,
+ Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: u-boot-qcom@groups.io,
+	u-boot@lists.denx.de
+Subject: [PATCH] pinctrl/qcom: fix kconfig option names
+Date: Mon, 17 Mar 2025 13:25:14 +0000
+Message-ID: <20250317132519.46080-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.48.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,61 +101,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+A copy-paste error is starting to get out of hand... Fix all these so
+they don't look like clock drivers in menuconfig.
 
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ drivers/pinctrl/qcom/Kconfig | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-On 3/12/25 08:51, Varadarajan Narayanan wrote:
-> On Tue, Mar 11, 2025 at 03:27:25PM +0000, Caleb Connolly wrote:
->> Hi Varadarajan,
->>
->> Thanks for the series, and apologies for the slow reply, i've been out sick
->> and still finding my feet again.
-> 
-> Oops. Sorry to have troubled you.
-
-no worries :D
-> 
->> On 3/4/25 11:01, Varadarajan Narayanan wrote:
->>> Introduce a defconfig for the Qualcomm IPQ5424 SoC based RDPs.
->>> Presently supports eMMC.
->>>
->>> Per the flash memory layout, U-Boot size cannot exceed 756KB. With this
->>> defconfig, u-boot.mbn size is ~480KB.
->>
->> What are the differences between this and the other new IPQ platform? Can
->> they share a defconfig?
-> 
-> They are very similar. At this point, CONFIG_DEFAULT_DEVICE_TREE,
-> CONFIG_CLK_QCOM_xxx, CONFIG_PINCTRL_QCOM_xxx, CONFIG_DEBUG_UART_xxx and memory
-> map are different.
-> 
->> Alternatively, could most of the things here be de-duplicated so there is a
->> "base" config which they both #include (similarly to qcm6490_defconfig) this
->> way we can nicely keep track of what parts of board specific.
->>
->> If you'd prefer to keep it this way that's fine too.
-> 
-> Would having an ipq_defconfig and including that in ipq9574 and ipq5424
-> defconfigs be a good approach?
-
-No, I don't think so since every defconfig needs to build, and that one 
-would be missing options.
-
-You could have one board inherit from another?
-
-Perhaps it makes sense to just keep things as-is.
-
-Kind regards,
-> 
->> Should I be expecting more platforms like this?
-> 
-> Yes.
-> 
-> Thanks
-> Varada
-> 
-> 
-> [ . . . ]
-
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 103ab05ed26e..f4a3942ee2f6 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -6,23 +6,23 @@ config PINCTRL_QCOM
+ 
+ menu "Qualcomm pinctrl drivers"
+ 
+ config PINCTRL_QCOM_APQ8016
+-	bool "Qualcomm APQ8016 GCC"
++	bool "Qualcomm APQ8016 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the MSM8916 / APQ8016
+ 	  Snapdragon 410 SoC, as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_APQ8096
+-	bool "Qualcomm APQ8096 GCC"
++	bool "Qualcomm APQ8096 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the MSM8996 / APQ8096
+ 	  Snapdragon 820 SoC, as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_IPQ4019
+-	bool "Qualcomm IPQ4019 GCC"
++	bool "Qualcomm IPQ4019 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
+ 	  as well as the associated GPIO driver.
+@@ -34,16 +34,16 @@ config PINCTRL_QCOM_IPQ9574
+ 	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_QCM2290
+-	bool "Qualcomm QCM2290 GCC"
++	bool "Qualcomm QCM2290 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon QCM2290 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_QCS404
+-	bool "Qualcomm QCS404 GCC"
++	bool "Qualcomm QCS404 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
+ 	  as well as the associated GPIO driver.
+@@ -55,51 +55,51 @@ config PINCTRL_QCOM_SC7280
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SC7280 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_SDM845
+-	bool "Qualcomm SDM845 GCC"
++	bool "Qualcomm SDM845 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon 845 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_SM6115
+-	bool "Qualcomm SM6115 GCC"
++	bool "Qualcomm SM6115 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SM6115 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_SM8150
+-	bool "Qualcomm SM8150 GCC"
++	bool "Qualcomm SM8150 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SM8150 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_SM8250
+-	bool "Qualcomm SM8250 GCC"
++	bool "Qualcomm SM8250 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SM8250 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_SM8550
+-	bool "Qualcomm SM8550 GCC"
++	bool "Qualcomm SM8550 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SM8550 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_SM8650
+-	bool "Qualcomm SM8650 GCC"
++	bool "Qualcomm SM8650 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SM8650 SoC,
+ 	  as well as the associated GPIO driver.
+ 
+ config PINCTRL_QCOM_X1E80100
+-	bool "Qualcomm X1E80100 GCC"
++	bool "Qualcomm X1E80100 Pinctrl"
+ 	select PINCTRL_QCOM
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon X1E80100 SoC,
+ 	  as well as the associated GPIO driver.
 -- 
-Caleb (they/them)
+2.48.1
 
