@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CEBCC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 08:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 069E5C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 08:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B8D0810F4;
-	Mon, 17 Mar 2025 09:34:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 51BE180F70;
+	Mon, 17 Mar 2025 09:34:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6EB58141E; Mon, 17 Mar 2025 09:34:38 +0100 (CET)
+ id 64B8D81428; Mon, 17 Mar 2025 09:34:41 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3F9188058A
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 09:34:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 1E4FE80107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 09:34:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 850FC13D5;
- Mon, 17 Mar 2025 01:34:44 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 84F3913D5;
+ Mon, 17 Mar 2025 01:34:47 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D3BD53F673;
- Mon, 17 Mar 2025 01:34:32 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 128283F673;
+ Mon, 17 Mar 2025 01:34:35 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,11 +33,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Tobias Waldekranz <tobias@waldekranz.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v9 3/8] fdt: add support for adding pmem nodes
-Date: Mon, 17 Mar 2025 14:03:57 +0530
-Message-Id: <20250317083402.412310-4-sughosh.ganu@linaro.org>
+Subject: [PATCH v9 4/8] efi_loader: allow for removal of memory from the EFI
+ map
+Date: Mon, 17 Mar 2025 14:03:58 +0530
+Message-Id: <20250317083402.412310-5-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250317083402.412310-1-sughosh.ganu@linaro.org>
 References: <20250317083402.412310-1-sughosh.ganu@linaro.org>
@@ -59,131 +59,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Masahisa Kojima <kojima.masahisa@socionext.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-One of the problems an OS may face, when running in EFI, is that
-a mounted ISO, after calling ExitBootServices goes away, if that ISO
-is resident in RAM memory as a ramdisk.
+With upcoming changes supporting pmem nodes, we need to remove the
+pmem area from the EFI memory map. Rename efi_add_memory_map_pg() to
+efi_update_memory_map(), and allow removing memory from the EFI memory
+map.
 
-ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-don't have anything in place for DTs. Linux and device trees have support
-for persistent memory devices. So add a function that can inject a pmem
-node in a DT, so we can pass information on the ramdisk the OS.
-
-Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V8:
-* Re-word the commit message to indicate that the ramdisk information
-  is being passed to the OS through pmem node
-* Change the type of addr and size parameters to the
-  fdt_fixup_pmem_region() as u64
-* Rename the first parameter of fdt_fixup_pmem_region() as fdt instead
-  of blob
-* Modify the format specifier of snprintf() call in
-  fdt_fixup_pmem_region() accordingly
-* Remove pmem_start and pmem_size array variables in
-  fdt_fixup_pmem_region()
-* s/pmem_node/node_name/g
-* Do not initialise node_name variable
+* Re-word the commit message to indicate using efi_update_memory_map()
+  for removal of memory from the EFI memory map
+* Use efi_update_memory_map() for removing memory from the EFI memory
+  map instead of adding a new function efi_remove_memory_map()
 
- boot/fdt_support.c    | 39 ++++++++++++++++++++++++++++++++++++++-
- include/fdt_support.h | 14 ++++++++++++++
- 2 files changed, 52 insertions(+), 1 deletion(-)
+ include/efi_loader.h        | 15 +++++++++++++++
+ lib/efi_loader/efi_memory.c | 34 ++++++++++++++++++----------------
+ 2 files changed, 33 insertions(+), 16 deletions(-)
 
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 49efeec3681..92f2f534ee0 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -18,6 +18,7 @@
- #include <dm/ofnode.h>
- #include <linux/ctype.h>
- #include <linux/types.h>
-+#include <linux/sizes.h>
- #include <asm/global_data.h>
- #include <asm/unaligned.h>
- #include <linux/libfdt.h>
-@@ -464,7 +465,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *compat,
- 	do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
- }
- 
--#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
- /*
-  * fdt_pack_reg - pack address and size array into the "reg"-suitable stream
-  */
-@@ -493,6 +493,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
- 	return p - (char *)buf;
- }
- 
-+#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
- #if CONFIG_NR_DRAM_BANKS > 4
- #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
- #else
-@@ -2222,3 +2223,39 @@ int fdt_valid(struct fdt_header **blobp)
- 	}
- 	return 1;
- }
-+
-+int fdt_fixup_pmem_region(void *fdt, u64 pmem_start, u64 pmem_size)
-+{
-+	char node_name[32];
-+	int nodeoffset, len;
-+	int err;
-+	u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
-+
-+	if (!IS_ALIGNED(pmem_start, SZ_2M) ||
-+	    !IS_ALIGNED(pmem_start + pmem_size, SZ_2M)) {
-+		printf("Start and end address must be 2MiB aligned\n");
-+		return -1;
-+	}
-+
-+	snprintf(node_name, sizeof(node_name), "pmem@%llx", pmem_start);
-+	nodeoffset = fdt_find_or_add_subnode(fdt, 0, node_name);
-+	if (nodeoffset < 0)
-+		return nodeoffset;
-+
-+	err = fdt_setprop_string(fdt, nodeoffset, "compatible", "pmem-region");
-+	if (err)
-+		return err;
-+	err = fdt_setprop_empty(fdt, nodeoffset, "volatile");
-+	if (err)
-+		return err;
-+
-+	len = fdt_pack_reg(fdt, tmp, &pmem_start, &pmem_size, 1);
-+	err = fdt_setprop(fdt, nodeoffset, "reg", tmp, len);
-+	if (err < 0) {
-+		printf("WARNING: could not set pmem %s %s.\n", "reg",
-+		       fdt_strerror(err));
-+		return err;
-+	}
-+
-+	return 0;
-+}
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index f0ad2e6b365..049190cf3d7 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -471,6 +471,20 @@ int fdt_valid(struct fdt_header **blobp);
-  */
- int fdt_get_cells_len(const void *blob, char *nr_cells_name);
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index e9c10819ba2..5f769786786 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -878,6 +878,21 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+ /* Adds a range into the EFI memory map */
+ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
  
 +/**
-+ * fdt_fixup_pmem_region() - add a pmem node on the device tree
++ * efi_update_memory_map() - update the memory map by adding/removing pages
 + *
-+ * This functions adds/updates a pmem node to the device tree.
-+ * Usually used with EFI installers to preserve installer
-+ * images
-+ *
-+ * @fdt:	device tree provided by caller
-+ * @addr:	start address of the pmem node
-+ * @size:	size of the memory of the pmem node
-+ * Return:	0 on success or < 0 on failure
++ * @start:			start address, must be a multiple of
++ *				EFI_PAGE_SIZE
++ * @pages:			number of pages to add
++ * @memory_type:		type of memory added
++ * @overlap_conventional:	region may only overlap free(conventional)
++ *				memory
++ * @remove:			remove memory map
++ * Return:			status code
 + */
-+int fdt_fixup_pmem_region(void *fdt, u64 pmem_start, u64 pmem_size);
++efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_type,
++				   bool overlap_conventional, bool remove);
 +
- #endif /* !USE_HOSTCC */
+ /* Called by board init to initialize the EFI drivers */
+ efi_status_t efi_driver_init(void);
+ /* Called when a block device is added */
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 6d00b186250..487b5e302cc 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+ }
  
- #ifdef USE_HOSTCC
+ /**
+- * efi_add_memory_map_pg() - add pages to the memory map
++ * efi_update_memory_map() - update the memory map by adding/removing pages
+  *
+  * @start:			start address, must be a multiple of
+  *				EFI_PAGE_SIZE
+@@ -266,12 +266,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+  * @memory_type:		type of memory added
+  * @overlap_conventional:	region may only overlap free(conventional)
+  *				memory
++ * @remove:			remove memory map
+  * Return:			status code
+  */
+-static
+-efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+-				   int memory_type,
+-				   bool overlap_conventional)
++efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_type,
++				   bool overlap_conventional, bool remove)
+ {
+ 	struct efi_mem_list *lmem;
+ 	struct efi_mem_list *newlist;
+@@ -279,9 +278,9 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+ 	uint64_t carved_pages = 0;
+ 	struct efi_event *evt;
+ 
+-	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
++	EFI_PRINT("%s: 0x%llx 0x%llx %d %s %s\n", __func__,
+ 		  start, pages, memory_type, overlap_conventional ?
+-		  "yes" : "no");
++		  "yes" : "no", remove ? "remove" : "add");
+ 
+ 	if (memory_type >= EFI_MAX_MEMORY_TYPE)
+ 		return EFI_INVALID_PARAMETER;
+@@ -364,7 +363,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+ 	}
+ 
+ 	/* Add our new map */
+-        list_add_tail(&newlist->link, &efi_mem);
++	if (!remove)
++		list_add_tail(&newlist->link, &efi_mem);
++	else
++		free(newlist);
+ 
+ 	/* And make sure memory is listed in descending order */
+ 	efi_mem_sort();
+@@ -401,7 +403,7 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type)
+ 	pages = efi_size_in_pages(size + (start & EFI_PAGE_MASK));
+ 	start &= ~EFI_PAGE_MASK;
+ 
+-	return efi_add_memory_map_pg(start, pages, memory_type, false);
++	return efi_update_memory_map(start, pages, memory_type, false, false);
+ }
+ 
+ /**
+@@ -502,7 +504,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 
+ 	efi_addr = (u64)(uintptr_t)map_sysmem(addr, 0);
+ 	/* Reserve that map in our memory maps */
+-	ret = efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
++	ret = efi_update_memory_map(efi_addr, pages, memory_type, true, false);
+ 	if (ret != EFI_SUCCESS) {
+ 		/* Map would overlap, bail out */
+ 		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
+@@ -823,8 +825,8 @@ static void add_u_boot_and_runtime(void)
+ 		       uboot_stack_size) & ~EFI_PAGE_MASK;
+ 	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+ 		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+-	efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+-			      false);
++	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
++			      false, false);
+ #if defined(__aarch64__)
+ 	/*
+ 	 * Runtime Services must be 64KiB aligned according to the
+@@ -842,8 +844,8 @@ static void add_u_boot_and_runtime(void)
+ 	runtime_end = (uintptr_t)__efi_runtime_stop;
+ 	runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
+ 	runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+-	efi_add_memory_map_pg(runtime_start, runtime_pages,
+-			      EFI_RUNTIME_SERVICES_CODE, false);
++	efi_update_memory_map(runtime_start, runtime_pages,
++			      EFI_RUNTIME_SERVICES_CODE, false, false);
+ }
+ 
+ int efi_memory_init(void)
+@@ -878,11 +880,11 @@ int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
+ 	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
+ 	efi_addr &= ~EFI_PAGE_MASK;
+ 
+-	status = efi_add_memory_map_pg(efi_addr, pages,
++	status = efi_update_memory_map(efi_addr, pages,
+ 				       op == LMB_MAP_OP_RESERVE ?
+ 				       EFI_BOOT_SERVICES_DATA :
+ 				       EFI_CONVENTIONAL_MEMORY,
+-				       false);
++				       false, false);
+ 	if (status != EFI_SUCCESS) {
+ 		log_err("LMB Map notify failure %lu\n",
+ 			status & ~EFI_ERROR_MASK);
 -- 
 2.34.1
 
