@@ -4,118 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DFEBC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:35:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863D6C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 15:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E9CA80F70;
-	Mon, 17 Mar 2025 15:35:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B26748081A;
+	Mon, 17 Mar 2025 16:13:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CMv6i9l6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CzttDCCd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6239280F4C; Mon, 17 Mar 2025 15:35:52 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id AF2F380F4C; Mon, 17 Mar 2025 16:13:25 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 526E7810F4
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:35:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61DAA80107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 16:13:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cfe63c592so24911645e9.2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:35:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-6fee50bfea5so40545867b3.1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 08:13:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742222149; x=1742826949; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=euaayHnjrMZhC4biRgVRAd7Vi6lyK+ErluNcPd8xVwA=;
- b=CMv6i9l6rgoFlqQjpLRHoCHNjd+QBLiz8HdGYSTDMb5aj5vmFNQ9T/PbmzMlyJk2GQ
- i8zpQvxqjDNlaeXBXXZSTRx40vfpcJhyElIDH+C2tjiC2fxF7aAAQzLkJ/PJUMS2b+m7
- clLRaBg7hxVGeiN2fuU+lta5/CNtKN/lw20Ol1ThbLVSH2SJ/shbAQcITYNlj+1PGII1
- DW72veiSgdHjWhXYGjxc2Z+sM3J2zk3Pmo7NjcRL9SPrS8OYuDHWLaS5GhsnGDbhqJdk
- 1kbCxO5o5RE9ScQY+s8LMsS5/jy3gcDRckACrd1rHOOaz4JCEK784Fdn2igfWQcdJ83e
- +71w==
+ d=konsulko.com; s=google; t=1742224402; x=1742829202; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jK1LJHKlkuKBrHalx2yqZTccSaGJF4uK+XofHEos5JE=;
+ b=CzttDCCdt8FU3zUj5IZUvOiZTis7lt4sFQ2aYwChQC7VLyL6yM6hA3D7toQJ2RJ0FZ
+ /PN/Bm8tKDgKoDLiT/oIkwolbpI4crozSmZA5n2N0D8JR41c0XelPWhB/+GWc0hsslWn
+ ChF7WZuv8kMDS+QpkpgnqDGfDkL3W+/oMgqts=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742222149; x=1742826949;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=euaayHnjrMZhC4biRgVRAd7Vi6lyK+ErluNcPd8xVwA=;
- b=Fvis5FnTFAoTAh7A54P8B6ws3dV1k4RXpInA4SQTw7XFDyMfJb2Oh6cUiIUEkL8QiC
- x1yP0nT9uCeu53rjMAapXw6JN9GWtDGC6rWmThalqJUV6IKaaLvh1hU9t3e/lcLFCVW9
- E0JmMxngdYxmdN7FgKhqOO8TSz40Rvg4hQ7m53yynq4q2y3sxpOgQzbNyasqZeLrxjcV
- 7i+NRFyW2jGG84imoP5xz5GLiToOwZm/C41fl2DjmXzUB/MQkojwv11RfduELHrnC2tR
- nZE3L+Ba4FE9AGVJMl8eizFGXO92mRPwFnyYv2aK6ATuAYti+Mg/dUFIssoShREm9QpH
- RTkA==
-X-Gm-Message-State: AOJu0Yx0JuKSpRtrefXJfIXQYqVTs+CNmuhHlc9kgAyG3xfM5UT2EeUX
- TEx6h966sl2h1ZoJzP7IKWo74c5js0JT1zrxjTlYbJj3de0h4e0GdQsmsHpurSY=
-X-Gm-Gg: ASbGnctbwEezpZk/Yupl2i8MvKJWQtbdGpAqlzZXXDFWt0dYS2Aj32BwEiOHr3TGtb7
- fLiXAda0kLQHlpXMjJk2H2DZCWUy8C8QXXxAgjCaHSaGC9EfmvN9aF02oItLdYwrOinAwpkN3HZ
- Wh3aQIffCL8am2gDFEsgyno/+9JgtiX6Sb+lIDKsZn6Lo3+Uylt4g3FSbPxQAVAVnoZz//QiQni
- 95bnmoH9S+UPP2kob0pLG/jGREFnZuHOyRdlbLDg+Jn0RYE7k78O77XD2BCH2/jQPJHeat4fyR6
- pgbrS4+5g1qP8s7CZbvuixo/7E5Mkb9ieZE1qi2OuzG/9gNFOgUMsc6oxyx4y2rPj3zWuWAO2gw
- l/3k4D87tVjd5K9YpgOm+BQ==
-X-Google-Smtp-Source: AGHT+IFARpNsPReV36NpAO8X/MYLYBxzUI9l3gix2tRn9bbb3Y/tGk+lLDXVpuamRFBdP9KRzH39kA==
-X-Received: by 2002:a5d:47c9:0:b0:390:e311:a8c7 with SMTP id
- ffacd0b85a97d-3971cd57eb0mr12885776f8f.5.1742222148495; 
- Mon, 17 Mar 2025 07:35:48 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:1a77:b55f:a550:458c?
- ([2a01:e0a:3d9:2080:1a77:b55f:a550:458c])
+ d=1e100.net; s=20230601; t=1742224402; x=1742829202;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jK1LJHKlkuKBrHalx2yqZTccSaGJF4uK+XofHEos5JE=;
+ b=GyWNDpjdn3ttPq9FfgUyWXdrN8wzGP5hdwqudRJwQ8Ov5NBWYkgbp2VoMps5r8HDTA
+ 8IC7LQOafu21sPg/pabXnzASiUBrz4FcMojov2uP3GYfxoFP9El2ZlFGWEMc9kVayzVO
+ S9z/QnyG5mZUOlQuNbl02xjb+HLv8aaA4WR1INget8tCbIFwR9VuLk63eDemM+hRr1Lw
+ M4X3TbJD8UZOoNdKQ6DE6AaD0sddPGqn2WlnynDvAHsBJOqcoipt5anN36Rczxzh4wV4
+ sft05kOTYMMOIIDQ5Qym0uxWOlmAnFXDuRJEbFZIyFnuvqoE5CSoDZQNHnx3gnJbhFHg
+ lfAQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXH1G5smZflgt7rOadSzf8qj0MdnqoSAx//z2T1U3K7mLZhrFPt2nwkEw+xT0tyKHrmaGZo4aA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2rOjJbd2W3BzHH9NvIz1KnrRt05f8HhSJcNbHrrdJ8qbacsts
+ 9hZA/hicxUIGsa98Ex14SHRJed2tIAARXsv6xmDTG4l8njbNudXxGSby31LVBjk=
+X-Gm-Gg: ASbGnct2MhWolPolyIOmrKM9u+WeGemL2+X9a1WclxX14mJdQQK96xIz75k2Zrt9guu
+ DGx5E6YgFm9nMyJ0VgSqiSETHxVzI3GWjshdpIcMCWdDIIvv57z3bsndOXy4X9HKoiHht/C2cHL
+ Vl78CQEZiN29olM91A4d0iwgc1a9sAz0b3ZcziepN1OHjr3X8BjJWhiOhhIsPYRT4x+FSx6JsaN
+ 8oq72hN1QG74nq1TlRAaPlS+V4ZnlYuyo75BB9jE2iM4afGrLE0G+9f5jE6LyeFz+ti49bkx7kF
+ 4tp/iWeCQr+Zfl9xoIgg4SbmtcDOvV4Wu5Z+W98Mow58ug==
+X-Google-Smtp-Source: AGHT+IFiuhAVP0jGYIt/f8l15cSsi8D8/TArj8zMKmt9OB+QiVzUUyysLktAPgnqtQPPufTr6kk+ug==
+X-Received: by 2002:a05:690c:6e0c:b0:6fd:5a3b:7af9 with SMTP id
+ 00721157ae682-6ff45fa637bmr182517517b3.20.1742224402205; 
+ Mon, 17 Mar 2025 08:13:22 -0700 (PDT)
+Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1ffc4173sm107032915e9.20.2025.03.17.07.35.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 07:35:48 -0700 (PDT)
-Message-ID: <076ac1e8-b02d-4dfb-9527-e5f3319989c0@linaro.org>
-Date: Mon, 17 Mar 2025 15:35:47 +0100
+ 00721157ae682-6ff32cba5basm21989097b3.113.2025.03.17.08.13.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Mar 2025 08:13:21 -0700 (PDT)
+Date: Mon, 17 Mar 2025 09:13:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Prasanth Babu Mantena <p-mantena@ti.com>
+Cc: sjg@chromium.org, alpernebiyasak@gmail.com, u-boot@lists.denx.de,
+ vigneshr@ti.com, u-kumar1@ti.com, n-francis@ti.com, vaishnav.a@ti.com
+Subject: Re: [PATCH] common: spl: Enable Instruction cache after relocation
+ in board_init_r
+Message-ID: <20250317151318.GR2640854@bill-the-cat>
+References: <20250317064507.1702120-1-p-mantena@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH 2/3] misc: introduce Qcom GENI wrapper
-To: Caleb Connolly <caleb.connolly@linaro.org>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
- <20250314-geni-load-fw-v1-2-587f25f2812f@linaro.org>
- <1e8f7d84-d6a9-44df-ab28-afe8c6ef00fc@linaro.org>
- <9e1833dc-ef35-4d96-9e4a-9714b6630ff7@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <9e1833dc-ef35-4d96-9e4a-9714b6630ff7@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XxYm1gasaIXgl5rj"
+Content-Disposition: inline
+In-Reply-To: <20250317064507.1702120-1-p-mantena@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,998 +93,56 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17/03/2025 15:33, Caleb Connolly wrote:
-> 
-> 
-> On 3/17/25 14:12, Neil Armstrong wrote:
->> On 14/03/2025 17:09, Caleb Connolly wrote:
->>> Qualcomm peripherals like UART, SPI, I2C, etc are all exposed under a
->>> common GENI Serial Engine wrapper device. Replace the stub driver we use
->>> for this currently with a full-on misc device and implement support for
->>> loading peripheral firmware.
->>>
->>> Each of the peripherals has it's own protocol-specific firmware, this is
->>> stored on the internal storage of the device with a well-known partition
->>> type GUID.
->>>
->>> To support this, GENI will bind peripherals in two stages. First the
->>> ones that already have firmware loaded (such as the serial port) are
->>> bound in the typical way. But devices that require firmware loading are
->>> deferred until EVT_LAST_STAGE_INIT. At this point we can be sure that
->>> the storage device is available, so we load the firmware and then bind
->>> and probe the remaining children.
->>>
->>> Child devices are expected to determine if firmware loading is necessary
->>> and call qcom_geni_load_firmware().
->>>
->>> Since Linux currently doesn't support loading firmware (and firmware may
->>> not be available), we probe all GENI peripherals to ensure that they
->>> always load firmwaree if necessary.
->> -------------/\ firmwares
->>
->> Hmm binding all QUP serial engines seems quite brutal, and this is really
->> only needed when fws are not loaded by previous bootloader.
-> 
-> In the best-case where no firmware loading is needed this should behave almost the same as before, except for reading the GENI_FW_REVISION_RO register for each (enabled) SE, so I don't think it's too bad.
-> 
-> I do wonder if there's a case where reading GENI_FW_REVISION_RO would fail due to missing resources (like if GCC_QUPV3_WRAP_0_M_AHB_CLK is disabled). But testing with the AHB clocks off doesn't seem to cause any issues, so I guess it's fine??
 
-Yeah it may be a fixed register, but let me test it on my sm8550 & sm8650 boards first to be sure
-it doesn't break.
+--XxYm1gasaIXgl5rj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Neil
+On Mon, Mar 17, 2025 at 12:15:07PM +0530, Prasanth Babu Mantena wrote:
 
-> 
->>
->> Apart this, the design looks good :-)
->>
->>>
->>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>> ---
->>>   arch/arm/Kconfig                 |   1 +
->>>   drivers/misc/Kconfig             |   9 +
->>>   drivers/misc/Makefile            |   1 +
->>>   drivers/misc/qcom_geni.c         | 576 +++++++++++++++++++++++++++++ ++++++++++
->>>   drivers/serial/serial_msm_geni.c |  13 -
->>>   include/soc/qcom/geni-se.h       |  36 +++
->>>   include/soc/qcom/qup-fw-load.h   | 178 ++++++++++++
->>>   7 files changed, 801 insertions(+), 13 deletions(-)
->>>
->>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->>> index cf08fe63f1e7dc73480b2ba0b707a7e891073d53..6149f284596641689407e076af5ad020176bd7dc 100644
->>> --- a/arch/arm/Kconfig
->>> +++ b/arch/arm/Kconfig
->>> @@ -1116,8 +1116,9 @@ config ARCH_SNAPDRAGON
->>>       select BOARD_LATE_INIT
->>>       select OF_BOARD
->>>       select SAVE_PREV_BL_FDT_ADDR
->>>       select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
->>> +    select QCOM_GENI
->>>       imply OF_UPSTREAM
->>>       imply CMD_DM
->>>   config ARCH_SOCFPGA
->>> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
->>> index da84b35e8043bcef71ce78e03d1da2c445bf3af5..415832c73e2cb5a85ae8378977d597e5aedb5fb8 100644
->>> --- a/drivers/misc/Kconfig
->>> +++ b/drivers/misc/Kconfig
->>> @@ -82,8 +82,17 @@ config GATEWORKS_SC
->>>         Enable access for the Gateworks System Controller used on Gateworks
->>>         boards to provide a boot watchdog, power control, temperature monitor,
->>>         voltage ADCs, and EEPROM.
->>> +config QCOM_GENI
->>> +    bool "Qualcomm Generic Interface (GENI) driver"
->>> +    depends on MISC
->>> +    select PARTITION_TYPE_GUID
->>> +    help
->>> +      Enable support for Qualcomm GENI and it's peripherals. GENI is responseible
->>
->> -------------------------------------------------------------------------/\ responsible
->>
->>> +      for providing a common interface for various peripherals like UART, I2C, SPI,
->>> +      etc.
->>> +
->>>   config ROCKCHIP_EFUSE
->>>           bool "Rockchip e-fuse support"
->>>       depends on MISC
->>>       help
->>> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
->>> index dac805e4cdd48a8127f37d68d9fb5ba0bd17ab15..6866edbd8119268c0cc03abdc8529bd191f1c2d8 100644
->>> --- a/drivers/misc/Makefile
->>> +++ b/drivers/misc/Makefile
->>> @@ -67,8 +67,9 @@ obj-$(CONFIG_QFW_PIO) += qfw_pio.o
->>>   obj-$(CONFIG_QFW_MMIO) += qfw_mmio.o
->>>   obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
->>>   obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
->>>   endif
->>> +obj-$(CONFIG_QCOM_GENI) += qcom_geni.o
->>>   obj-$(CONFIG_$(PHASE_)ROCKCHIP_EFUSE) += rockchip-efuse.o
->>>   obj-$(CONFIG_$(PHASE_)ROCKCHIP_OTP) += rockchip-otp.o
->>>   obj-$(CONFIG_$(PHASE_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
->>>   obj-$(CONFIG_SANDBOX) += syscon_sandbox.o misc_sandbox.o
->>> diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
->>> new file mode 100644
->>> index 0000000000000000000000000000000000000000..2b652765aa310b5a21d4aa99b50842c2e17e5942
->>> --- /dev/null
->>> +++ b/drivers/misc/qcom_geni.c
->>> @@ -0,0 +1,576 @@
->>> +// SPDX-License-Identifier: GPL-2.0
->>> +/*
->>> + * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
->>> + * Copyright (c) 2025, Linaro Ltd.
->>> + */
->>> +
->>> +#include <blk.h>
->>> +#include <part.h>
->>> +#include <dm/device.h>
->>> +#include <dm/read.h>
->>> +#include <dm/device-internal.h>
->>> +#include <dm/lists.h>
->>> +#include <elf.h>
->>> +#include <linux/bitops.h>
->>> +#include <linux/delay.h>
->>> +#include <linux/io.h>
->>> +#include <linux/ioport.h>
->>> +#include <misc.h>
->>> +#include <linux/printk.h>
->>> +#include <soc/qcom/geni-se.h>
->>> +#include <soc/qcom/qup-fw-load.h>
->>> +#include <dm/device_compat.h>
->>> +
->>> +struct qup_se_rsc {
->>> +    phys_addr_t base;
->>> +    phys_addr_t wrapper_base;
->>> +    struct udevice *dev;
->>> +
->>> +    enum geni_se_xfer_mode mode;
->>> +    enum geni_se_protocol_type protocol;
->>> +};
->>> +
->>> +struct geni_se_plat {
->>> +    bool need_firmware_load;
->>> +};
->>> +
->>> +/**
->>> + * geni_enable_interrupts() Enable interrupts.
->>> + * @rsc: Pointer to a structure representing SE-related resources.
->>> + *
->>> + * Enable the required interrupts during the firmware load process.
->>> + *
->>> + * Return: None.
->>> + */
->>> +static void geni_enable_interrupts(struct qup_se_rsc *rsc)
->>> +{
->>> +    u32 reg_value;
->>> +
->>> +    /* Enable required interrupts. */
->>> +    writel_relaxed(M_COMMON_GENI_M_IRQ_EN, rsc->base + GENI_M_IRQ_ENABLE);
->>> +
->>> +    reg_value = S_CMD_OVERRUN_EN | S_ILLEGAL_CMD_EN |
->>> +                S_CMD_CANCEL_EN | S_CMD_ABORT_EN |
->>> +                S_GP_IRQ_0_EN | S_GP_IRQ_1_EN |
->>> +                S_GP_IRQ_2_EN | S_GP_IRQ_3_EN |
->>> +                S_RX_FIFO_WR_ERR_EN | S_RX_FIFO_RD_ERR_EN;
->>> +    writel_relaxed(reg_value, rsc->base + GENI_S_IRQ_ENABLE);
->>> +
->>> +    /* DMA mode configuration. */
->>> +    reg_value = DMA_TX_IRQ_EN_SET_RESET_DONE_EN_SET_BMSK |
->>> +            DMA_TX_IRQ_EN_SET_SBE_EN_SET_BMSK |
->>> +            DMA_TX_IRQ_EN_SET_DMA_DONE_EN_SET_BMSK;
->>> +    writel_relaxed(reg_value, rsc->base + DMA_TX_IRQ_EN_SET);
->>> +    reg_value = DMA_RX_IRQ_EN_SET_FLUSH_DONE_EN_SET_BMSK |
->>> +            DMA_RX_IRQ_EN_SET_RESET_DONE_EN_SET_BMSK |
->>> +            DMA_RX_IRQ_EN_SET_SBE_EN_SET_BMSK |
->>> +            DMA_RX_IRQ_EN_SET_DMA_DONE_EN_SET_BMSK;
->>> +    writel_relaxed(reg_value, rsc->base + DMA_RX_IRQ_EN_SET);
->>> +}
->>> +
->>> +/**
->>> + * geni_flash_fw_revision() - Flash the firmware revision.
->>> + * @rsc: Pointer to a structure representing SE-related resources.
->>> + * @hdr: Pointer to the ELF header of the Serial Engine.
->>> + *
->>> + * Flash the firmware revision and protocol into the respective register.
->>> + *
->>> + * Return: None.
->>> + */
->>> +static void geni_flash_fw_revision(struct qup_se_rsc *rsc, struct elf_se_hdr *hdr)
->>> +{
->>> +    u32 reg_value;
->>> +
->>> +    /* Flash firmware revision register. */
->>> +    reg_value = (hdr->serial_protocol << FW_REV_PROTOCOL_SHFT) |
->>> +            (hdr->fw_version & 0xFF << FW_REV_VERSION_SHFT);
->>> +    writel_relaxed(reg_value, rsc->base + SE_GENI_FW_REVISION);
->>> +
->>> +    reg_value = (hdr->serial_protocol << FW_REV_PROTOCOL_SHFT) |
->>> +            (hdr->fw_version & 0xFF << FW_REV_VERSION_SHFT);
->>> +
->>> +    writel_relaxed(reg_value, rsc->base + SE_S_FW_REVISION);
->>> +}
->>> +
->>> +/**
->>> + * geni_configure_xfer_mode() - Set the transfer mode.
->>> + * @rsc: Pointer to a structure representing SE-related resources.
->>> + *
->>> + * Set the transfer mode to either FIFO or DMA according to the mode specified by the protocol
->>> + * driver.
->>> + *
->>> + * Return: 0 if successful, otherwise return an error value.
->>> + */
->>> +static int geni_configure_xfer_mode(struct qup_se_rsc *rsc)
->>> +{
->>> +    /* Configure SE FIFO, DMA or GSI mode. */
->>> +    switch (rsc->mode) {
->>> +    case GENI_GPI_DMA:
->>> +        geni_setbits32(rsc->base + QUPV3_SE_GENI_DMA_MODE_EN,
->>> +                   GENI_DMA_MODE_EN_GENI_DMA_MODE_EN_BMSK);
->>> +        writel_relaxed(0x0, rsc->base + SE_IRQ_EN);
->>> +        writel_relaxed(SE_GSI_EVENT_EN_BMSK, rsc->base + SE_GSI_EVENT_EN);
->>> +        break;
->>> +
->>> +    case GENI_SE_FIFO:
->>> +        geni_clrbits32(rsc->base + QUPV3_SE_GENI_DMA_MODE_EN,
->>> +                   GENI_DMA_MODE_EN_GENI_DMA_MODE_EN_BMSK);
->>> +        writel_relaxed(SE_IRQ_EN_RMSK, rsc->base + SE_IRQ_EN);
->>> +        writel_relaxed(0x0, rsc->base + SE_GSI_EVENT_EN);
->>> +        break;
->>> +
->>> +    case GENI_SE_DMA:
->>> +        geni_setbits32(rsc->base + QUPV3_SE_GENI_DMA_MODE_EN,
->>> +                   GENI_DMA_MODE_EN_GENI_DMA_MODE_EN_BMSK);
->>> +        writel_relaxed(SE_IRQ_EN_RMSK, rsc->base + SE_IRQ_EN);
->>> +        writel_relaxed(0x0, rsc->base + SE_GSI_EVENT_EN);
->>> +        break;
->>> +
->>> +    default:
->>> +        dev_err(rsc->dev, "invalid se mode: %d\n", rsc->mode);
->>> +        return -EINVAL;
->>> +    }
->>> +    return 0;
->>> +}
->>> +
->>> +/**
->>> + * geni_config_common_control() - Configure common CGC and disable high priority interrupt.
->>> + * @rsc: Pointer to a structure representing SE-related resources.
->>> + *
->>> + * Configure the common CGC and disable high priority interrupts until the current low priority
->>> + * interrupts are handled.
->>> + *
->>> + * Return: None.
->>> + */
->>> +static void geni_config_common_control(struct qup_se_rsc *rsc)
->>> +{
->>> +    /*
->>> +     * Disable high priority interrupt until current low priority interrupts are handled.
->>> +     */
->>> +    geni_setbits32(rsc->wrapper_base + QUPV3_COMMON_CFG,
->>> +               FAST_SWITCH_TO_HIGH_DISABLE_BMASK);
->>> +
->>> +    /*
->>> +     * Set AHB_M_CLK_CGC_ON to indicate hardware controls se-wrapper cgc clock.
->>> +     */
->>> +    geni_setbits32(rsc->wrapper_base + QUPV3_SE_AHB_M_CFG,
->>> +               AHB_M_CLK_CGC_ON_BMASK);
->>> +
->>> +    /* Let hardware to control common cgc. */
->>> +    geni_setbits32(rsc->wrapper_base + QUPV3_COMMON_CGC_CTRL,
->>> +               COMMON_CSR_SLV_CLK_CGC_ON_BMASK);
->>> +}
->>> +
->>> +static int load_se_firmware(struct qup_se_rsc *rsc, struct elf_se_hdr *hdr)
->>> +{
->>> +    const u32 *fw_val_arr, *cfg_val_arr;
->>> +    const u8 *cfg_idx_arr;
->>> +    u32 i, reg_value, mask, ramn_cnt;
->>> +    int ret;
->>> +
->>> +    fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
->>> +    cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
->>> +    cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
->>> +
->>> +    geni_config_common_control(rsc);
->>> +
->>> +    /* Allows to drive corresponding data according to hardware value. */
->>> +    writel_relaxed(0x0, rsc->base + GENI_OUTPUT_CTRL);
->>> +
->>> +    /* Set SCLK and HCLK to program RAM */
->>> +    geni_setbits32(rsc->base + GENI_CGC_CTRL, GENI_CGC_CTRL_PROG_RAM_SCLK_OFF_BMSK |
->>> +               GENI_CGC_CTRL_PROG_RAM_HCLK_OFF_BMSK);
->>> +    writel_relaxed(0x0, rsc->base + SE_GENI_CLK_CTRL);
->>> +    geni_clrbits32(rsc->base + GENI_CGC_CTRL, GENI_CGC_CTRL_PROG_RAM_SCLK_OFF_BMSK |
->>> +               GENI_CGC_CTRL_PROG_RAM_HCLK_OFF_BMSK);
->>> +
->>> +    /* Enable required clocks for DMA CSR, TX and RX. */
->>> +    reg_value = DMA_GENERAL_CFG_AHB_SEC_SLV_CLK_CGC_ON_BMSK |
->>> +        DMA_GENERAL_CFG_DMA_AHB_SLV_CLK_CGC_ON_BMSK |
->>> +        DMA_GENERAL_CFG_DMA_TX_CLK_CGC_ON_BMSK |
->>> +        DMA_GENERAL_CFG_DMA_RX_CLK_CGC_ON_BMSK;
->>> +
->>> +    geni_setbits32(rsc->base + DMA_GENERAL_CFG, reg_value);
->>> +
->>> +    /* Let hardware control CGC by default. */
->>> +    writel_relaxed(DEFAULT_CGC_EN, rsc->base + GENI_CGC_CTRL);
->>> +
->>> +    /* Set version of the configuration register part of firmware. */
->>> +    writel_relaxed(hdr->cfg_version, rsc->base + GENI_INIT_CFG_REVISION);
->>> +    writel_relaxed(hdr->cfg_version, rsc->base + GENI_S_INIT_CFG_REVISION);
->>> +
->>> +    /* Configure GENI primitive table. */
->>> +    for (i = 0; i < hdr->cfg_size_in_items; i++)
->>> +        writel_relaxed(cfg_val_arr[i],
->>> +                   rsc->base + GENI_CFG_REG0 + (cfg_idx_arr[i] * sizeof(u32)));
->>> +
->>> +    /* Configure condition for assertion of RX_RFR_WATERMARK condition. */
->>> +    reg_value = readl_relaxed(rsc->base + QUPV3_SE_HW_PARAM_1);
->>> +    mask = (reg_value >> RX_FIFO_WIDTH_BIT) & RX_FIFO_WIDTH_MASK;
->>> +    writel_relaxed(mask - 2, rsc->base + GENI_RX_RFR_WATERMARK_REG);
->>> +
->>> +    /* Let hardware control CGC */
->>> +    geni_setbits32(rsc->base + GENI_OUTPUT_CTRL, DEFAULT_IO_OUTPUT_CTRL_MSK);
->>> +
->>> +    ret = geni_configure_xfer_mode(rsc);
->>> +    if (ret) {
->>> +        dev_err(rsc->dev, "failed to configure xfer mode: %d\n", ret);
->>> +        return ret;
->>> +    }
->>> +
->>> +    geni_enable_interrupts(rsc);
->>> +
->>> +    geni_flash_fw_revision(rsc, hdr);
->>> +
->>> +    ramn_cnt = hdr->fw_size_in_items;
->>> +    if (hdr->fw_size_in_items % 2 != 0)
->>> +        ramn_cnt++;
->>> +
->>> +    if (ramn_cnt >= MAX_GENI_CFG_RAMn_CNT) {
->>> +        dev_err(rsc->dev, "firmware size is too large\n");
->>> +        return -EINVAL;
->>> +    }
->>> +
->>> +    /* Program RAM address space. */
->>> +    for (i = 0; i < hdr->fw_size_in_items; i++)
->>> +        writel_relaxed(fw_val_arr[i], rsc->base + SE_GENI_CFG_RAMN + i * sizeof(u32));
->>> +
->>> +    /* Put default values on GENI's output pads. */
->>> +    writel_relaxed(0x1, rsc->base + GENI_FORCE_DEFAULT_REG);
->>> +
->>> +    /* High to low SCLK and HCLK to finish RAM. */
->>> +    geni_setbits32(rsc->base + GENI_CGC_CTRL, GENI_CGC_CTRL_PROG_RAM_SCLK_OFF_BMSK |
->>> +            GENI_CGC_CTRL_PROG_RAM_HCLK_OFF_BMSK);
->>> +    geni_setbits32(rsc->base + SE_GENI_CLK_CTRL, GENI_CLK_CTRL_SER_CLK_SEL_BMSK);
->>> +    geni_clrbits32(rsc->base + GENI_CGC_CTRL, GENI_CGC_CTRL_PROG_RAM_SCLK_OFF_BMSK |
->>> +            GENI_CGC_CTRL_PROG_RAM_HCLK_OFF_BMSK);
->>> +
->>> +    /* Serial engine DMA interface is enabled. */
->>> +    geni_setbits32(rsc->base + SE_DMA_IF_EN, DMA_IF_EN_DMA_IF_EN_BMSK);
->>> +
->>> +    /* Enable or disable FIFO interface of the serial engine. */
->>> +    if (rsc->mode == GENI_SE_FIFO)
->>> +        geni_clrbits32(rsc->base + SE_FIFO_IF_DISABLE, FIFO_IF_DISABLE);
->>> +    else
->>> +        geni_setbits32(rsc->base + SE_FIFO_IF_DISABLE, FIFO_IF_DISABLE);
->>> +
->>> +    return 0;
->>> +}
->>> +
->>> +/**
->>> + * elf_phdr_valid() - Validate an ELF header.
->>> + * @phdr: Pointer to the ELF header.
->>> + *
->>> + * Validate the ELF header by comparing the fields stored in p_flags and the payload type.
->>> + *
->>> + * Return: true if the validation is successful, false otherwise.
->>> + */
->>> +static bool elf_phdr_valid(const Elf32_Phdr *phdr)
->>> +{
->>> +    if (phdr->p_type != PT_LOAD || !phdr->p_memsz)
->>> +        return false;
->>> +
->>> +    if (MI_PBT_PAGE_MODE_VALUE(phdr->p_flags) == MI_PBT_NON_PAGED_SEGMENT &&
->>> +        MI_PBT_SEGMENT_TYPE_VALUE(phdr->p_flags) != MI_PBT_HASH_SEGMENT &&
->>> +        MI_PBT_ACCESS_TYPE_VALUE(phdr->p_flags) != MI_PBT_NOTUSED_SEGMENT &&
->>> +        MI_PBT_ACCESS_TYPE_VALUE(phdr->p_flags) != MI_PBT_SHARED_SEGMENT)
->>> +        return true;
->>> +
->>> +    return false;
->>> +}
->>> +
->>> +/**
->>> + * valid_seg_size() - Validate the segment size.
->>> + * @pelfseg: Pointer to the ELF header.
->>> + * @p_filesz: Pointer to the file size.
->>> + *
->>> + * Validate the ELF segment size by comparing the file size.
->>> + *
->>> + * Return: true if the segment is valid, false if the segment is invalid.
->>> + */
->>> +static bool valid_seg_size(struct elf_se_hdr *pelfseg, Elf32_Word p_filesz)
->>> +{
->>> +    if (p_filesz >= pelfseg->fw_offset + pelfseg->fw_size_in_items * sizeof(u32) &&
->>> +        p_filesz >= pelfseg->cfg_idx_offset + pelfseg- >cfg_size_in_items * sizeof(u8) &&
->>> +        p_filesz >= pelfseg->cfg_val_offset + pelfseg- >cfg_size_in_items * sizeof(u32))
->>> +        return true;
->>> +    return false;
->>> +}
->>> +
->>> +/**
->>> + * read_elf() - Read an ELF file.
->>> + * @rsc: Pointer to the SE resources structure.
->>> + * @fw: Pointer to the firmware buffer.
->>> + * @pelfseg: Pointer to the SE-specific ELF header.
->>> + * @phdr: Pointer to one of the valid headers from the list in the firmware buffer.
->>> + *
->>> + * Read the ELF file and output a pointer to the header data, which contains the firmware data and
->>> + * any other details.
->>> + *
->>> + * Return: 0 if successful, otherwise return an error value.
->>> + */
->>> +static int read_elf(struct qup_se_rsc *rsc, const void *fw,
->>> +            struct elf_se_hdr **pelfseg)
->>> +{
->>> +    Elf32_Phdr *phdr;
->>> +    const Elf32_Ehdr *ehdr = (const Elf32_Ehdr *)fw;
->>> +    Elf32_Phdr *phdrs = (Elf32_Phdr *)(ehdr + 1);
->>> +    const u8 *addr;
->>> +    int i;
->>> +
->>> +    ehdr = (Elf32_Ehdr *)fw;
->>> +
->>> +    if (ehdr->e_phnum < 2)
->>> +        return -EINVAL;
->>> +
->>> +    for (i = 0; i < ehdr->e_phnum; i++) {
->>> +        phdr = &phdrs[i];
->>> +        if (!elf_phdr_valid(phdr))
->>> +            continue;
->>> +
->>> +        if (phdr->p_filesz >= sizeof(struct elf_se_hdr)) {
->>> +            addr =  fw + phdr->p_offset;
->>> +            *pelfseg = (struct elf_se_hdr *)addr;
->>> +
->>> +            if ((*pelfseg)->magic == MAGIC_NUM_SE &&
->>> +                (*pelfseg)->version == 1 &&
->>> +                valid_seg_size(*pelfseg, phdr->p_filesz) &&
->>> +                (*pelfseg)->serial_protocol == rsc->protocol &&
->>> +                (*pelfseg)->serial_protocol != GENI_SE_NONE)
->>> +                return 0;
->>> +        }
->>> +    }
->>> +    return -EINVAL;
->>> +}
->>> +
->>> +int qcom_geni_load_firmware(phys_addr_t qup_base,
->>> +                struct udevice *dev)
->>> +{
->>> +    struct qup_se_rsc rsc;
->>> +    struct elf_se_hdr *hdr;
->>> +    int ret;
->>> +    void *fw;
->>> +
->>> +    rsc.dev = dev;
->>> +    rsc.base = qup_base;
->>> +    rsc.wrapper_base = dev_read_addr(dev->parent);
->>> +
->>> +    /* FIXME: GSI DMA mode if device has property qcom,gsi-dma- allowed */
->>> +    rsc.mode = GENI_SE_FIFO;
->>> +
->>> +    switch (device_get_uclass_id(dev)) {
->>> +    case UCLASS_I2C:
->>> +        rsc.protocol = GENI_SE_I2C;
->>> +        break;
->>> +    case UCLASS_SPI:
->>> +        rsc.protocol = GENI_SE_SPI;
->>> +        break;
->>> +    case UCLASS_SERIAL:
->>> +        rsc.protocol = GENI_SE_UART;
->>> +        break;
->>> +    default:
->>> +        return -EINVAL;
->>> +    }
->>> +
->>> +    /* The firmware blob is the private data of the GENI wrapper (parent) */
->>> +    fw = dev_get_priv(dev->parent);
->>> +
->>> +    ret = read_elf(&rsc, fw, &hdr);
->>> +    if (ret) {
->>> +        dev_err(dev, "Failed to read ELF: %d\n", ret);
->>> +        return ret;
->>> +    }
->>> +
->>> +    printf("Loading firmware for %s\n", dev->name);
->>> +
->>> +    return load_se_firmware(&rsc, hdr);
->>> +}
->>> +
->>> +/*
->>> + * We need to determine if firmware loading is necessary. Best way to do that is to check the FW
->>> + * revision of each QUP and see if it has already been loaded.
->>> + */
->>> +static int geni_se_of_to_plat(struct udevice *dev)
->>> +{
->>> +    ofnode child;
->>> +    struct resource res;
->>> +    u32 proto;
->>> +    struct geni_se_plat *plat = dev_get_plat(dev);
->>> +
->>> +    plat->need_firmware_load = false;
->>> +
->>> +    dev_for_each_subnode(child, dev) {
->>> +        if (!ofnode_is_enabled(child))
->>> +            continue;
->>> +
->>> +        if (ofnode_read_resource(child, 0, &res))
->>> +            continue;
->>> +
->>> +        proto = readl(res.start + GENI_FW_REVISION_RO);
->>> +        proto &= FW_REV_PROTOCOL_MSK;
->>> +        proto >>= FW_REV_PROTOCOL_SHFT;
->>> +
->>> +        if (proto == GENI_SE_INVALID_PROTO) {
->>> +            plat->need_firmware_load = true;
->>> +        } else {
->>> +            /* Bind any devices that don't need firmware loading now. */
->>> +            lists_bind_fdt(dev, child, NULL, NULL, false);
->>> +        }
->>> +    }
->>> +
->>> +    return 0;
->>> +}
->>> +
->>> +#define QUPFW_PART_TYPE_GUID "21d1219f-2ed1-4ab4-930a-41a16ae75f7f"
->>> +
->>> +static int find_qupfw_part(struct udevice **blk_dev, struct disk_partition *part_info)
->>> +{
->>> +    struct blk_desc *desc;
->>> +    int ret, partnum;
->>> +
->>> +    uclass_foreach_dev_probe(UCLASS_BLK, *blk_dev) {
->>> +        if (device_get_uclass_id(*blk_dev) != UCLASS_BLK)
->>> +            continue;
->>> +
->>> +        desc = dev_get_uclass_plat(*blk_dev);
->>> +        if (!desc || desc->part_type == PART_TYPE_UNKNOWN)
->>> +            continue;
->>> +        for (partnum = 1;; partnum++) {
->>> +            ret = part_get_info(desc, partnum, part_info);
->>> +            if (ret)
->>> +                break;
->>> +            if (!strcmp(part_info->type_guid, QUPFW_PART_TYPE_GUID))
->>> +                return 0;
->>> +        }
->>> +    }
->>> +
->>> +    return -ENOENT;
->>> +}
->>> +
->>> +static int probe_children_load_firmware(struct udevice *dev)
->>> +{
->>> +    struct geni_se_plat *plat;
->>> +    ofnode child;
->>> +    struct udevice *child_dev;
->>> +    struct resource res;
->>> +    u32 proto;
->>> +
->>> +    plat = dev_get_plat(dev);
->>> +
->>> +    dev_for_each_subnode(child, dev) {
->>> +        if (!ofnode_is_enabled(child))
->>> +            continue;
->>> +
->>> +        if (ofnode_read_resource(child, 0, &res))
->>> +            continue;
->>> +
->>> +        proto = readl(res.start + GENI_FW_REVISION_RO);
->>> +        proto &= FW_REV_PROTOCOL_MSK;
->>> +        proto >>= FW_REV_PROTOCOL_SHFT;
->>> +
->>> +        if (proto != GENI_SE_INVALID_PROTO)
->>> +            continue;
->>> +
->>> +        /*
->>> +         * Now we're ready, bind and probe the child, this will trigger firmware loading.
->>> +         */
->>> +        lists_bind_fdt(dev, child, &child_dev, NULL, false);
->>> +        debug("Probing child %s for fw loading\n", child_dev->name);
->>> +        device_probe(child_dev);
->>> +    }
->>> +
->>> +    return 0;
->>> +}
->>> +
->>> +#define MAX_FW_BUF_SIZE (128 * 1024)
->>> +
->>> +/*
->>> + * Load firmware for QCOM GENI peripherals from the dedicated partition on storage and bind/probe
->>> + * all the peripheral devices that need firmware to be loaded.
->>> + */
->>> +static int qcom_geni_fw_initialise(void)
->>> +{
->>> +    debug("Loading firmware for QCOM GENI SE\n");
->>> +    struct udevice *geni_wrapper, *blk_dev;
->>> +    struct disk_partition part_info;
->>> +    int ret;
->>> +    void *fw_buf;
->>> +    size_t fw_size = MAX_FW_BUF_SIZE;
->>> +    struct geni_se_plat *plat;
->>> +
->>> +    /* Find the first GENI SE wrapper that needs fw loading */
->>> +    for (uclass_first_device(UCLASS_MISC, &geni_wrapper);
->>> +         geni_wrapper;
->>> +         uclass_next_device(&geni_wrapper)) {
->>> +        if (device_get_uclass_id(geni_wrapper) == UCLASS_MISC &&
->>> +            !strcmp(geni_wrapper->driver->name, "geni-se-qup")) {
->>> +            plat = dev_get_plat(geni_wrapper);
->>> +            if (plat->need_firmware_load)
->>> +                break;
->>> +        }
->>> +    }
->>> +    if (!geni_wrapper) {
->>> +        printf("GENI SE wrapper not found\n");
->>> +        return 0;
->>> +    }
->>> +
->>> +    ret = find_qupfw_part(&blk_dev, &part_info);
->>> +    if (ret) {
->>> +        printf("QUP firmware partition not found\n");
->>> +        return 0;
->>> +    }
->>> +
->>> +    if (part_info.size * part_info.blksz > MAX_FW_BUF_SIZE) {
->>> +        printf("Firmware partition too large\n");
->>> +        return -EINVAL;
->>> +    }
->>> +    fw_size = part_info.size * part_info.blksz;
->>> +
->>> +    fw_buf = malloc(fw_size);
->>> +    if (!fw_buf) {
->>> +        printf("Failed to allocate buffer for firmware\n");
->>> +        return -ENOMEM;
->>> +    }
->>> +    memset(fw_buf, 0, fw_size);
->>> +
->>> +    ret = blk_read(blk_dev, part_info.start, part_info.size, fw_buf);
->>> +    if (ret < 0) {
->>> +        printf("Failed to read firmware from partition\n");
->>> +        free(fw_buf);
->>> +        return 0;
->>> +    }
->>> +
->>> +    /*
->>> +     * OK! Firmware is loaded, now bind and probe remaining children. They will attempt to load
->>> +     * firmware during probe. Do this for each GENI SE wrapper that needs firmware loading.
->>> +     */
->>> +    for (; geni_wrapper;
->>> +         uclass_next_device(&geni_wrapper)) {
->>> +        if (device_get_uclass_id(geni_wrapper) == UCLASS_MISC &&
->>> +            !strcmp(geni_wrapper->driver->name, "geni-se-qup")) {
->>> +            plat = dev_get_plat(geni_wrapper);
->>> +            if (plat->need_firmware_load) {
->>> +                dev_set_priv(geni_wrapper, fw_buf);
->>> +                probe_children_load_firmware(geni_wrapper);
->>> +            }
->>> +        }
->>> +    }
->>> +
->>> +    return 0;
->>> +}
->>> +
->>> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, qcom_geni_fw_initialise);
->>> +
->>> +static const struct udevice_id geni_ids[] = {
->>> +    { .compatible = "qcom,geni-se-qup" },
->>> +    {}
->>> +};
->>> +
->>> +U_BOOT_DRIVER(sifive_otp) = {
->>
->> Bad copy paste !
->>
->>> +    .name = "geni-se-qup",
->>> +    .id = UCLASS_MISC,
->>> +    .of_match = geni_ids,
->>> +    .of_to_plat = geni_se_of_to_plat,
->>> +    .plat_auto = sizeof(struct geni_se_plat),
->>> +    .flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
->>> +};
->>> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/ serial_msm_geni.c
->>> index cb6c09fdd09eecdcbdc7a9f6b53ce14e97a1919b..44603ead77cd9f7948a2bf52ebddfebbfeb9f1c2 100644
->>> --- a/drivers/serial/serial_msm_geni.c
->>> +++ b/drivers/serial/serial_msm_geni.c
->>> @@ -604,21 +604,8 @@ U_BOOT_DRIVER(serial_msm_geni) = {
->>>       .ops = &msm_serial_ops,
->>>       .flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
->>>   };
->>> -static const struct udevice_id geniqup_ids[] = {
->>> -    { .compatible = "qcom,geni-se-qup" },
->>> -    { }
->>> -};
->>> -
->>> -U_BOOT_DRIVER(geni_se_qup) = {
->>> -    .name = "geni-se-qup",
->>> -    .id = UCLASS_NOP,
->>> -    .of_match = geniqup_ids,
->>> -    .bind = dm_scan_fdt_dev,
->>> -    .flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
->>> -};
->>> -
->>>   #ifdef CONFIG_DEBUG_UART_MSM_GENI
->>>   static struct msm_serial_data init_serial_data = {
->>>       .base = CONFIG_VAL(DEBUG_UART_BASE)
->>> diff --git a/include/soc/qcom/geni-se.h b/include/soc/qcom/geni-se.h
->>> index 698a9256d2656d3fd207cb48a9f4918afc365a1b..fc9a8e82cd88a63cd50dcfb0647fa28b53adad37 100644
->>> --- a/include/soc/qcom/geni-se.h
->>> +++ b/include/soc/qcom/geni-se.h
->>> @@ -5,16 +5,24 @@
->>>   #ifndef _QCOM_GENI_SE
->>>   #define _QCOM_GENI_SE
->>> +enum geni_se_xfer_mode {
->>> +    GENI_SE_INVALID,
->>> +    GENI_SE_FIFO,
->>> +    GENI_SE_DMA,
->>> +    GENI_GPI_DMA,
->>> +};
->>> +
->>>   /* Protocols supported by GENI Serial Engines */
->>>   enum geni_se_protocol_type {
->>>       GENI_SE_NONE,
->>>       GENI_SE_SPI,
->>>       GENI_SE_UART,
->>>       GENI_SE_I2C,
->>>       GENI_SE_I3C,
->>>       GENI_SE_SPI_SLAVE,
->>> +    GENI_SE_INVALID_PROTO = 255,
->>>   };
->>>   #define QUP_HW_VER_REG            0x4
->>> @@ -28,8 +36,9 @@ enum geni_se_protocol_type {
->>>   #define GENI_SER_M_CLK_CFG        0x48
->>>   #define GENI_SER_S_CLK_CFG        0x4c
->>>   #define GENI_IF_DISABLE_RO        0x64
->>>   #define GENI_FW_REVISION_RO        0x68
->>> +#define GENI_DFS_IF_CFG            0x80
->>>   #define SE_GENI_CLK_SEL            0x7c
->>>   #define SE_GENI_CFG_SEQ_START        0x84
->>>   #define SE_GENI_BYTE_GRAN        0x254
->>>   #define SE_GENI_DMA_MODE_EN        0x258
->>> @@ -56,17 +65,26 @@ enum geni_se_protocol_type {
->>>   #define SE_GENI_RX_RFR_WATERMARK_REG    0x814
->>>   #define SE_GENI_IOS            0x908
->>>   #define SE_DMA_TX_IRQ_STAT        0xc40
->>>   #define SE_DMA_TX_IRQ_CLR        0xc44
->>> +#define SE_DMA_TX_IRQ_EN_SET        0xc4c
->>>   #define SE_DMA_TX_FSM_RST        0xc58
->>>   #define SE_DMA_RX_IRQ_STAT        0xd40
->>>   #define SE_DMA_RX_IRQ_CLR        0xd44
->>> +#define SE_DMA_RX_IRQ_EN_SET        0xd4c
->>>   #define SE_DMA_RX_LEN_IN        0xd54
->>>   #define SE_DMA_RX_FSM_RST        0xd58
->>>   #define SE_GSI_EVENT_EN            0xe18
->>>   #define SE_IRQ_EN            0xe1c
->>>   #define SE_HW_PARAM_0            0xe24
->>>   #define SE_HW_PARAM_1            0xe28
->>> +#define SE_DMA_GENERAL_CFG        0xe30
->>> +
->>> +/* GENI_DFS_IF_CFG fields */
->>> +#define DFS_IF_EN BIT(0)
->>> +
->>> +/* SE_DMA_RX_IRQ_EN_SET fields */
->>> +#define RESET_DONE_EN_SET BIT(3)
->>>   /* GENI_FORCE_DEFAULT_REG fields */
->>>   #define FORCE_DEFAULT    BIT(0)
->>> @@ -261,5 +279,23 @@ enum geni_se_protocol_type {
->>>   /* QUP SE VERSION value for major number 2 and minor number 5 */
->>>   #define QUP_SE_VERSION_2_5                  0x20050000
->>> +/* SE_DMA_GENERAL_CFG */
->>> +#define DMA_RX_CLK_CGC_ON        BIT(0)
->>> +#define DMA_TX_CLK_CGC_ON        BIT(1)
->>> +#define DMA_AHB_SLV_CFG_ON        BIT(2)
->>> +#define AHB_SEC_SLV_CLK_CGC_ON        BIT(3)
->>> +#define DUMMY_RX_NON_BUFFERABLE        BIT(4)
->>> +#define RX_DMA_ZERO_PADDING_EN        BIT(5)
->>> +#define RX_DMA_IRQ_DELAY_MSK        GENMASK(8, 6)
->>> +#define RX_DMA_IRQ_DELAY_SHFT        6
->>> +
->>> +#define GENI_SE_DMA_DONE_EN    BIT(0)
->>> +#define GENI_SE_DMA_EOT_EN    BIT(1)
->>> +#define GENI_SE_DMA_AHB_ERR_EN    BIT(2)
->>> +
->>> +#define GENI_SE_DMA_EOT_BUF    BIT(0)
->>> +
->>> +#define GENI_DMA_MODE_EN    BIT(0)
->>> +
->>>   #endif
->>> diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw- load.h
->>> new file mode 100644
->>> index 0000000000000000000000000000000000000000..a67a93c72a4b705eff5bd29b185a4172c19ae1d7
->>> --- /dev/null
->>> +++ b/include/soc/qcom/qup-fw-load.h
->>> @@ -0,0 +1,178 @@
->>> +/* SPDX-License-Identifier: GPL-2.0 */
->>> +/*
->>> + * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
->>> + */
->>> +#ifndef _LINUX_QCOM_QUP_FW_LOAD
->>> +#define _LINUX_QCOM_QUP_FW_LOAD
->>> +
->>> +#include <linux/kernel.h>
->>> +
->>> +/*Magic numbers*/
->>> +#define MAGIC_NUM_SE            0x57464553
->>> +
->>> +/* Common SE registers*/
->>> +#define GENI_INIT_CFG_REVISION        0x0
->>> +#define GENI_S_INIT_CFG_REVISION    0x4
->>> +#define GENI_FORCE_DEFAULT_REG        0x20
->>> +#define GENI_CGC_CTRL            0x28
->>> +#define GENI_CFG_REG0            0x100
->>> +
->>> +#define QUPV3_SE_HW_PARAM_1        0xE28
->>> +#define RX_FIFO_WIDTH_BIT        24
->>> +#define RX_FIFO_WIDTH_MASK        0x3F
->>> +
->>> +/*Same registers as GENI_DMA_MODE_EN*/
->>> +#define QUPV3_SE_GENI_DMA_MODE_EN    0x258
->>> +#define GENI_M_IRQ_ENABLE        0x614
->>> +#define GENI_S_IRQ_ENABLE        0x644
->>> +#define GENI_RX_RFR_WATERMARK_REG    0x814
->>> +#define DMA_TX_IRQ_EN_SET        0xC4C
->>> +#define DMA_RX_IRQ_EN_SET        0xD4C
->>> +#define DMA_GENERAL_CFG            0xE30
->>> +#define SE_GENI_FW_REVISION        0x1000
->>> +#define SE_S_FW_REVISION        0x1004
->>> +#define SE_GENI_CFG_RAMN        0x1010
->>> +#define SE_GENI_CLK_CTRL        0x2000
->>> +#define SE_DMA_IF_EN            0x2004
->>> +#define SE_FIFO_IF_DISABLE        0x2008
->>> +
->>> +#define MAX_GENI_CFG_RAMn_CNT        455
->>> +
->>> +#define MI_PBT_NON_PAGED_SEGMENT    0x0
->>> +#define MI_PBT_HASH_SEGMENT        0x2
->>> +#define MI_PBT_NOTUSED_SEGMENT        0x3
->>> +#define MI_PBT_SHARED_SEGMENT        0x4
->>> +#define MI_PBT_FLAG_PAGE_MODE_MASK    0x100000
->>> +#define MI_PBT_FLAG_PAGE_MODE_SHIFT    0x14
->>> +#define MI_PBT_FLAG_SEGMENT_TYPE_MASK    0x7000000
->>> +#define MI_PBT_FLAG_SEGMENT_TYPE_SHIFT    0x18
->>> +#define MI_PBT_FLAG_ACCESS_TYPE_MASK    0xE00000
->>> +#define MI_PBT_FLAG_ACCESS_TYPE_SHIFT    0x15
->>> +
->>> +#define MI_PBT_PAGE_MODE_VALUE(x) \
->>> +    (((x) & MI_PBT_FLAG_PAGE_MODE_MASK) >> \
->>> +      MI_PBT_FLAG_PAGE_MODE_SHIFT)
->>> +
->>> +#define MI_PBT_SEGMENT_TYPE_VALUE(x) \
->>> +    (((x) & MI_PBT_FLAG_SEGMENT_TYPE_MASK) >> \
->>> +        MI_PBT_FLAG_SEGMENT_TYPE_SHIFT)
->>> +
->>> +#define MI_PBT_ACCESS_TYPE_VALUE(x) \
->>> +    (((x) & MI_PBT_FLAG_ACCESS_TYPE_MASK) >> \
->>> +      MI_PBT_FLAG_ACCESS_TYPE_SHIFT)
->>> +
->>> +/* GENI_FORCE_DEFAULT_REG fields */
->>> +#define FORCE_DEFAULT            BIT(0)
->>> +
->>> +/* FW_REVISION_RO fields */
->>> +#define FW_REV_PROTOCOL_SHFT        8
->>> +#define FW_REV_VERSION_SHFT        0
->>> +
->>> +#define GENI_FW_REVISION_RO        0x68
->>> +#define GENI_S_FW_REVISION_RO        0x6C
->>> +
->>> +/* SE_GENI_DMA_MODE_EN */
->>> +#define GENI_DMA_MODE_EN        BIT(0)
->>> +
->>> +/* GENI_M_IRQ_EN fields */
->>> +#define M_CMD_DONE_EN            BIT(0)
->>> +#define M_IO_DATA_DEASSERT_EN        BIT(22)
->>> +#define M_IO_DATA_ASSERT_EN        BIT(23)
->>> +#define M_RX_FIFO_RD_ERR_EN        BIT(24)
->>> +#define M_RX_FIFO_WR_ERR_EN        BIT(25)
->>> +#define M_RX_FIFO_WATERMARK_EN        BIT(26)
->>> +#define M_RX_FIFO_LAST_EN        BIT(27)
->>> +#define M_TX_FIFO_RD_ERR_EN        BIT(28)
->>> +#define M_TX_FIFO_WR_ERR_EN        BIT(29)
->>> +#define M_TX_FIFO_WATERMARK_EN        BIT(30)
->>> +#define M_COMMON_GENI_M_IRQ_EN    (GENMASK(6, 1) | \
->>> +                M_IO_DATA_DEASSERT_EN | \
->>> +                M_IO_DATA_ASSERT_EN | M_RX_FIFO_RD_ERR_EN | \
->>> +                M_RX_FIFO_WR_ERR_EN | M_TX_FIFO_RD_ERR_EN | \
->>> +                M_TX_FIFO_WR_ERR_EN)
->>> +
->>> +/* GENI_S_IRQ_EN fields */
->>> +#define S_CMD_OVERRUN_EN        BIT(1)
->>> +#define S_ILLEGAL_CMD_EN        BIT(2)
->>> +#define S_CMD_CANCEL_EN            BIT(4)
->>> +#define S_CMD_ABORT_EN            BIT(5)
->>> +#define S_GP_IRQ_0_EN            BIT(9)
->>> +#define S_GP_IRQ_1_EN            BIT(10)
->>> +#define S_GP_IRQ_2_EN            BIT(11)
->>> +#define S_GP_IRQ_3_EN            BIT(12)
->>> +#define S_RX_FIFO_RD_ERR_EN        BIT(24)
->>> +#define S_RX_FIFO_WR_ERR_EN        BIT(25)
->>> +#define S_COMMON_GENI_S_IRQ_EN    (GENMASK(5, 1) | GENMASK(13, 9) | \
->>> +                 S_RX_FIFO_RD_ERR_EN | S_RX_FIFO_WR_ERR_EN)
->>> +
->>> +#define GENI_CGC_CTRL_PROG_RAM_SCLK_OFF_BMSK        0x00000200
->>> +#define GENI_CGC_CTRL_PROG_RAM_HCLK_OFF_BMSK        0x00000100
->>> +
->>> +#define GENI_DMA_MODE_EN_GENI_DMA_MODE_EN_BMSK        0x00000001
->>> +
->>> +#define DMA_TX_IRQ_EN_SET_RESET_DONE_EN_SET_BMSK    0x00000008
->>> +#define DMA_TX_IRQ_EN_SET_SBE_EN_SET_BMSK        0x00000004
->>> +#define DMA_TX_IRQ_EN_SET_DMA_DONE_EN_SET_BMSK        0x00000001
->>> +
->>> +#define DMA_RX_IRQ_EN_SET_FLUSH_DONE_EN_SET_BMSK    0x00000010
->>> +#define DMA_RX_IRQ_EN_SET_RESET_DONE_EN_SET_BMSK    0x00000008
->>> +#define DMA_RX_IRQ_EN_SET_SBE_EN_SET_BMSK        0x00000004
->>> +#define DMA_RX_IRQ_EN_SET_DMA_DONE_EN_SET_BMSK        0x00000001
->>> +
->>> +#define DMA_GENERAL_CFG_AHB_SEC_SLV_CLK_CGC_ON_BMSK    0x00000008
->>> +#define DMA_GENERAL_CFG_DMA_AHB_SLV_CLK_CGC_ON_BMSK    0x00000004
->>> +#define DMA_GENERAL_CFG_DMA_TX_CLK_CGC_ON_BMSK        0x00000002
->>> +#define DMA_GENERAL_CFG_DMA_RX_CLK_CGC_ON_BMSK        0x00000001
->>> +
->>> +#define GENI_CLK_CTRL_SER_CLK_SEL_BMSK            0x00000001
->>> +#define DMA_IF_EN_DMA_IF_EN_BMSK            0x00000001
->>> +#define SE_GSI_EVENT_EN_BMSK                0x0000000f
->>> +#define SE_IRQ_EN_RMSK                    0x0000000f
->>> +
->>> +#define QUPV3_COMMON_CFG                0x0120
->>> +#define FAST_SWITCH_TO_HIGH_DISABLE_BMASK        0x00000001
->>> +
->>> +#define QUPV3_SE_AHB_M_CFG                0x0118
->>> +#define AHB_M_CLK_CGC_ON_BMASK                0x00000001
->>> +
->>> +#define QUPV3_COMMON_CGC_CTRL                0x021C
->>> +#define COMMON_CSR_SLV_CLK_CGC_ON_BMASK            0x00000001
->>> +
->>> +/* access ports */
->>> +#define geni_setbits32(_addr, _v) writel_relaxed(readl_relaxed(_addr) |  (_v), (_addr))
->>> +#define geni_clrbits32(_addr, _v) writel_relaxed(readl_relaxed(_addr) & ~(_v), (_addr))
->>> +
->>> +/**
->>> + * struct elf_se_hdr - firmware configurations
->>> + *
->>> + * @magic: set to 'SEFW'
->>> + * @version: A 32-bit value indicating the structure’s version number
->>> + * @core_version: QUPV3_HW_VERSION
->>> + * @serial_protocol: Programmed into GENI_FW_REVISION
->>> + * @fw_version: Programmed into GENI_FW_REVISION
->>> + * @cfg_version: Programmed into GENI_INIT_CFG_REVISION
->>> + * @fw_size_in_items: Number of (uint32_t) GENI_FW_RAM words
->>> + * @fw_offset: Byte offset of GENI_FW_RAM array
->>> + * @cfg_size_in_items: Number of GENI_FW_CFG index/value pairs
->>> + * @cfg_idx_offset: Byte offset of GENI_FW_CFG index array
->>> + * @cfg_val_offset: Byte offset of GENI_FW_CFG values array
->>> + */
->>> +struct elf_se_hdr {
->>> +    u32 magic;
->>> +    u32 version;
->>> +    u32 core_version;
->>> +    u16 serial_protocol;
->>> +    u16 fw_version;
->>> +    u16 cfg_version;
->>> +    u16 fw_size_in_items;
->>> +    u16 fw_offset;
->>> +    u16 cfg_size_in_items;
->>> +    u16 cfg_idx_offset;
->>> +    u16 cfg_val_offset;
->>> +};
->>> +
->>> +struct udevice;
->>> +
->>> +int qcom_geni_load_firmware(phys_addr_t qup_base, struct udevice *dev);
->>> +
->>> +#endif /* _LINUX_QCOM_QUP_FW_LOAD */
->>>
->>
->> Thx,
->> Neil
-> 
+> ICACHE is enabled in board_init_f which executes only before relocation.
+> Instruction cache invalidation is needed after relocation as well in the
+> common spl, which is taken care in the u-boot init_sequence, but missing
+> for the spl. So, enable it at the start of board_init_r for spl, which
+> invalidates icache needed after instruction relocation.
+>=20
+> Fixes: 52a86e69e20 ("arm: k3: Enable instruction cache for main domain SP=
+L")
+> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+> ---
+>  arch/arm/mach-k3/common.c | 1 +
+>  common/spl/spl.c          | 1 +
+>  2 files changed, 2 insertions(+)
 
+What's missing from spl_enable_cache() in K3 already? And looking more
+at this, since Rockchip does this slightly differently I wonder if we
+need to think harder about making some of these hook points generic.
+
+--=20
+Tom
+
+--XxYm1gasaIXgl5rj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfYPAcACgkQFHw5/5Y0
+tywSEgv8DgBaF+GiNBV57Q5kehaSx6nB1nJrm2f0HZHM1SuMLOAkABbYs6sjYmOF
+muBlpJRZK0+PV1LK4gCi1YG+5t4e8hATE2hmfDBqpyMt289Fb3kfmd7UvFZSX/t9
+i/e1RVaj/JbNOW5LERgZO1NfrYzv0DeOQLSiv1WHdJtBhC/Jc8xJaBKQqX0+jSeZ
+TlIq8r47pfhKFTmXSHG6rN1X5KFzO6TLHoa6nm8h2h2XhL7S5n5a8ZH1LKE1xxrs
+wlHhPQn42q9Tm0+xsVUmdbL/SolU/qvazCKBFrIBBZkN+kc15inSiG4kguwfbM4A
+eRCBETJy31JuTAxF3SCME2/o65yFutxsHL7Xzo3k+UjybgrvAo34peI27IdlU3oN
+XnPc6JxBuAeHLC7gYJ1OaEGI6GEueKgebkf9M6Oxo2o69ZnvuLBgLN3dIWuKJNly
+UrpoETSDKSMpqMre1GQmu4uSs3ajjao8MeH1s5zF/6ddRPtF1EC6nO4LLhXa04UL
+IoEtGv+G
+=cKTc
+-----END PGP SIGNATURE-----
+
+--XxYm1gasaIXgl5rj--
