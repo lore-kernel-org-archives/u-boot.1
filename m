@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C4FAC282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 06:45:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5FCC282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 06:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4753A810F4;
-	Mon, 17 Mar 2025 07:45:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F35C880F4C;
+	Mon, 17 Mar 2025 07:56:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dUqkP+AV";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="qmYCkOab";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 045C781100; Mon, 17 Mar 2025 07:45:24 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7B8880F4C
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:45:20 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52H6jIFf2713546
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 17 Mar 2025 01:45:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742193918;
- bh=FfAbxy1ALg0EB5cq7bGQqDvQFwbRwoKAsbds8B1jSYg=;
- h=From:To:CC:Subject:Date;
- b=dUqkP+AVrfwSvU7FAuauBrEJIv5CSc1jyi16Tmm98yRTZBrvJXNG9fQZZkZL6kS8l
- BLVf+aF4/p4f7UdkLF3jv64LLR1Cpf1W52OwfS7PRdumIXdiL5gRWSpQPhHJw3dIhN
- hmdHdkyyyELY2U/UNDrZPysrK6XMhVxxP6btoeUY=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52H6jI83049888
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 17 Mar 2025 01:45:18 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 17
- Mar 2025 01:45:18 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 17 Mar 2025 01:45:17 -0500
-Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
- [172.24.227.142])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52H6jEpw063994;
- Mon, 17 Mar 2025 01:45:15 -0500
-From: Prasanth Babu Mantena <p-mantena@ti.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <n-francis@ti.com>, <vaishnav.a@ti.com>
-Subject: [PATCH] common: spl: Enable Instruction cache after relocation in
- board_init_r
-Date: Mon, 17 Mar 2025 12:15:07 +0530
-Message-ID: <20250317064507.1702120-1-p-mantena@ti.com>
-X-Mailer: git-send-email 2.34.1
+ id 621E181100; Mon, 17 Mar 2025 07:56:53 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CFC0180107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:56:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1648c5b74=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1742194611; x=1773730611;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=9PsS8S8aZKL7oglC+qrdTH5q4Yqsw5JYzgOAHIjLfUU=;
+ b=qmYCkOabTXJxS6E1WLP/qFeSoOXMhnzTHz13ZEVALn54WxONoZWsUF8d
+ LezwKjuXkBYeIlxjgb/a4kV0v9nPCvJaQocKXwRo8jpS1nu40ERQpUMfl
+ 8FRUxaZIpT51B7OtROO1sAssOslYnW9ZjaSpTNMqcpKQgi8lHyEP4bGCS
+ N6d/LxtkL+XMs90ryUe3+wsPdgJ0rCFq+T4kvrYuHW6lWiswJE5Zl1+r1
+ zagsQt5a/4RiyeGb1tbw+Ma9gkrN1HtaXEg+BS9rUno+3C52nzpTuo2lK
+ EoiI+17xLbspGCDXlCWiTSeG5Aer/nSZutHnhIuDGWQcXheFzUYqIqMd4 Q==;
+X-CSE-ConnectionGUID: IVX55pi7TFqyIf6mJ6M0sg==
+X-CSE-MsgGUID: 6B6DtaQjS0mhI+/o3rcQ+Q==
+X-IronPort-AV: E=Sophos;i="6.14,253,1736838000"; d="scan'208";a="39230082"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 16 Mar 2025 23:56:49 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Sun, 16 Mar 2025 23:56:30 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
+ 15.1.2507.44 via Frontend Transport; Sun, 16 Mar 2025 23:56:23 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
+ <seanga2@gmail.com>, <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
+ <nathan.morrison@timesys.com>, <ilias.apalodimas@linaro.org>,
+ <greg.malysa@timesys.com>, <caleb.connolly@linaro.org>,
+ <Oliver.Gaskell@analog.com>, <robert.marko@sartura.hr>,
+ <jerome.forissier@linaro.org>, <semen.protsenko@linaro.org>,
+ <william.zhang@broadcom.com>, <nicolas.ferre@microchip.com>,
+ <u-boot@lists.denx.de>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH v4 0/8] Add support for sam9x7 SoC and SAM9X75 Curiosity board
+Date: Mon, 17 Mar 2025 12:26:01 +0530
+Message-ID: <20250317065609.55071-1-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,43 +85,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ICACHE is enabled in board_init_f which executes only before relocation.
-Instruction cache invalidation is needed after relocation as well in the
-common spl, which is taken care in the u-boot init_sequence, but missing
-for the spl. So, enable it at the start of board_init_r for spl, which
-invalidates icache needed after instruction relocation.
+This patch series adds support for the new SoC family - sam9x7.
+ - sam9x7 SoC is added
+ - Clock driver for sam9x7 is added
+ - Target board SAM9X75 Curiosity is added with its differences in DT
+ and MMC config support 
 
-Fixes: 52a86e69e20 ("arm: k3: Enable instruction cache for main domain SPL")
-Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
----
- arch/arm/mach-k3/common.c | 1 +
- common/spl/spl.c          | 1 +
- 2 files changed, 2 insertions(+)
+----
+changes in v4:
+- 1/8 - Drop the local include file clock/at91.h and the update
+	the MAINTAINERS respectively.
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index fa8cd93d664..e4eb33512e7 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -266,6 +266,7 @@ static __maybe_unused void k3_dma_remove(void)
- void spl_board_prepare_for_boot(void)
- {
- #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
-+	icache_disable();
- 	dcache_disable();
- #endif
- #if IS_ENABLED(CONFIG_SPL_DMA) && IS_ENABLED(CONFIG_SPL_DM_DEVICE_REMOVE)
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 76fd56dfe4b..1db9a258e35 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -696,6 +696,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	debug(">>" PHASE_PROMPT "board_init_r()\n");
- 
- 	spl_set_bd();
-+	enable_caches();
- 
- 	if (IS_ENABLED(CONFIG_SPL_SYS_MALLOC)) {
- 		mem_malloc_init(SPL_SYS_MALLOC_START, SPL_SYS_MALLOC_SIZE);
+changes in v3:
+- 1/8 - rename at91.h to at91-pmc-status.h, update the SoC DTs
+	and MAINTAINERS file respectively
+- 4/8 - update header from clk/at91.h to clock/at91.h 
+
+changes in v2:
+- 1/8 - add additional PMC clock definition to support the sam9x7 upstream DT
+- 6/8 - Remove support for SoC DT and board DTS as they are already available
+        in dts/upstream
+      - add the differences in DT files between upstream Linux DT and U-Boot DT to
+        at91-sam9x75_curiosity-u-boot.dtsi
+- 7/8 - Add OF_UPSTREAM support for sam9x75 curiosity board
+- 8/8 - update the DEFAULT_DEVICE_TREE config to <vendor/name>
+
+----
+
+Manikandan Muralidharan (4):
+  dt-bindings: drop at91.h from clock includes
+  ARM: dts: at91: sam9x75_curiosity: add tweaks for sam9x75 curiosity
+    board
+  board: sam9x75_curiosity: Add support for sam9x75 curiosity
+  configs: sam9x75_curiosity: Add initial mmc default config
+
+Varshini Rajendran (4):
+  clk: at91: sam9x60-pll: add support for core clock frequency inputs
+  clk: at91: sam9x60-pll: add support for HW PLL freq dividers
+  clk: at91: sam9x7: add pmc driver for sam9x7 SoC family
+  ARM: at91: Add sam9x7 soc
+
+ MAINTAINERS                                   |    1 -
+ .../dts/at91-sam9x75_curiosity-u-boot.dtsi    |  107 ++
+ arch/arm/mach-at91/Kconfig                    |   12 +
+ arch/arm/mach-at91/arm926ejs/Makefile         |    1 +
+ arch/arm/mach-at91/arm926ejs/sam9x7_devices.c |   49 +
+ arch/arm/mach-at91/include/mach/hardware.h    |    2 +
+ arch/arm/mach-at91/include/mach/sam9x7.h      |  172 +++
+ board/atmel/sam9x75_curiosity/Kconfig         |   15 +
+ board/atmel/sam9x75_curiosity/MAINTAINERS     |    7 +
+ board/atmel/sam9x75_curiosity/Makefile        |    7 +
+ .../sam9x75_curiosity/sam9x75_curiosity.c     |   66 +
+ configs/sam9x75_curiosity_mmc_defconfig       |   73 ++
+ drivers/clk/at91/Makefile                     |    1 +
+ drivers/clk/at91/clk-sam9x60-pll.c            |   55 +-
+ drivers/clk/at91/pmc.h                        |    2 +
+ drivers/clk/at91/sam9x60.c                    |    7 +
+ drivers/clk/at91/sam9x7.c                     | 1094 +++++++++++++++++
+ drivers/clk/at91/sama7g5.c                    |    6 +
+ include/configs/sam9x75_curiosity.h           |   23 +
+ include/dt-bindings/clock/at91.h              |   23 -
+ 20 files changed, 1689 insertions(+), 34 deletions(-)
+ create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+ create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+ create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
+ create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
+ create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
+ create mode 100644 board/atmel/sam9x75_curiosity/Makefile
+ create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+ create mode 100644 configs/sam9x75_curiosity_mmc_defconfig
+ create mode 100644 drivers/clk/at91/sam9x7.c
+ create mode 100644 include/configs/sam9x75_curiosity.h
+ delete mode 100644 include/dt-bindings/clock/at91.h
+
 -- 
-2.34.1
+2.25.1
 
