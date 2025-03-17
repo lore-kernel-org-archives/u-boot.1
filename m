@@ -4,91 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B93C35FF1
-	for <u-boot@archiver.kernel.org>; Sun, 16 Mar 2025 22:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E665BC28B2F
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 01:50:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3BF680F4C;
-	Sun, 16 Mar 2025 23:18:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E8BA1801DE;
+	Mon, 17 Mar 2025 02:50:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NJZfCzPs";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742176257;
+	bh=4LN0mIUXTRNfZJy9BGSRwtB63WXwyyCvXu3+g18smQY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OFH8yAJhFZL2X00S1VXMMX1t2Me0VFEonUGbUrZyq+wBbuu0MWFq9bPlIC2FLZNVh
+	 15oCl7flROfmKCJA8duphUHSNlClagSb/wh/PNAZRKhNoXpMpRYq0e2IMZyOThb2T+
+	 97EJbAUBKaEzvF8n9UCV+hQMwSJX0ny83VM4RF2xAHp3OWuh6sElOytZR85a3d8XNo
+	 KDHd7Pre4yhl8zuBbeiLc0oBfA9HSrFT3sXGYMSzOHM8ddjXBRl/7iM+qlKAzATAEf
+	 t8o50yELG8QWeHDjt2jRuiR6OCUXSxhZ8xdM1VfesfgrHsMKw/NHQKlQuy3V6ejwU/
+	 yOUWXttu0RqZg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E8D7810E8; Sun, 16 Mar 2025 23:18:11 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 575C28058A; Mon, 17 Mar 2025 02:50:56 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08B5980ECC
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 23:18:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53D65800C1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 02:50:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2243803b776so18651955ad.0
- for <u-boot@lists.denx.de>; Sun, 16 Mar 2025 15:18:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742163487; x=1742768287; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sLtuBoxyiEKDapIh+rFWhH2O9mmjR7TA653sMrPivm0=;
- b=NJZfCzPsxaUHw3T7Ns9byVy7N4fTYUHXwFBoZ9qsZPlGuWU5H+hGRXmwP2enFwbEZD
- uxUxZSKDL83qxBm4DMqLWlbM5BreigfvLaRoJ0FRabwt5dEXDe3C3nmreXRQ+DujoGI6
- uosXdopZlaW9s/GO4bgLUVGTYfnakzkudVrvaPGiIlBuhxNc+ync8/ESKL7PF0XMEBOa
- TRhi0MUfBeyT2vkUDeFJam846JbHS/0rIQ7NRX7kXs6Ps6JIFw5UuVNS6w3MlQnw1zuX
- GedTYVk6oKGD9jmKF7RWy4lzOfhT1+pqoUDk+IAULDuEDzfMPcMmr4DxUQ/Y9WWybFiA
- kg/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742163487; x=1742768287;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sLtuBoxyiEKDapIh+rFWhH2O9mmjR7TA653sMrPivm0=;
- b=GxUd7BxGeQ8OuOUkB/K0CpVsMYgdQ3GL1cHKPuz0G1rksCQ9LK+8vkehINAbhZn/sD
- XslRvIDOQsy9To2agbi6RcQwdlStOK3GdafgiyD+GhPZMtMabkevwBMX8WRRBTmKk6Ea
- A9RTMLftVea4Trp6CTkEgAFIjqw5nOpApjY7RpXuiu8InxnrMlAqHZfOYhfgZOYFGJcy
- mugb1TX5/+Q0rshvsWiAu3cQlRMQrO13iPZcYjxge10RJ4CMUHn6EJRRHja0DmlqqwO0
- zAP557YVrHyTXLDO89/Mrn6fr02x6fZlBRg4I2lfjOwZRSoi8QYKnoXL2V+jsIRIJc6b
- Lsdw==
-X-Gm-Message-State: AOJu0YxPnVZi/nWNgYgMZJqS7XfLZ/2zCBTVwFNLBHA8libKQyzpVMYX
- N6+x5gJradOLwoRzytqbOPMecBd7QN7ZEYdEi5FlvsDAuFn6U6p3UoZaLydygZW28YwmOMsuSLB
- VJ8CDUS/cF7O7I/uUWQ6E+/N6cew=
-X-Gm-Gg: ASbGnctI+eEi1LYQRGzM9/CPqXBq8NiCGaD7J4ByuJiXa0NM9gsB9ey1fW0bObwdmP6
- xrF/OtJqRyX2mQ5a+al8Kgl829q95eAmv3F2kx350oeSZo76nYSdXKgLQF9sM126VBniEst0pCH
- y5l7lLurfQw24CU5aDUtRT6fHk8t5jj6po8QJB
-X-Google-Smtp-Source: AGHT+IEpCbTnlWGoOJYyeP2ojuz/OkI9vt9CABW3VbpU+a09tFQCCGRfUHGBVRi4g7yEDEoxNLzuTIKUF8N/lGv4giw=
-X-Received: by 2002:a17:90b:4a42:b0:2ff:53ad:a0ec with SMTP id
- 98e67ed59e1d1-30151cd1a0amr10903922a91.21.1742163487418; Sun, 16 Mar 2025
- 15:18:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="M7yP40Dr"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B0A71101F7A32; Mon, 17 Mar 2025 02:50:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742176253; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=4LN0mIUXTRNfZJy9BGSRwtB63WXwyyCvXu3+g18smQY=;
+ b=M7yP40DrP7eaL1YClOoHirt0Wzt9/st86NtSR1RO8t9Dx1ipsXxVkrVNVgDGktKPKBg+T5
+ D2CurdZG9lgWYb6d+WjQkW//Nk+UsmjShtVRevnj8/TkbcdhfAZoBxqp9PCoH01DR19O+1
+ ENCXQa7lM6EnIsyaSvvPV8VdMRLO/81ISfT+JGAJetXr2OCBmkBLbQMNyUy5CG6bqUw5Vz
+ BkxBjkimWWElNKBchPk2deB7G9zGojy7AjRLPPkHDhryZ6cj40CZTLKKEnwcKUfwrcTKSn
+ wDWzLTo2nD56WVELIE8zT6yG+fg23DXN83XvcanoXcJXRA4yD6JZXF5UfgQMdw==
+Message-ID: <eb7ab28b-ef10-4dd2-9611-2a9d384c3657@denx.de>
+Date: Mon, 17 Mar 2025 02:04:38 +0100
 MIME-Version: 1.0
-References: <20250312003041.110023-1-aford173@gmail.com>
- <CAOMZO5DRn08Q58PeHqi=1V8ZRv6B1+L_CB0NA=arQ2u6XUyi8Q@mail.gmail.com>
- <CAHCN7x+grtVs1JDvfth+7VdT1Xm=_GSBsr0PD1XQSPxpRBZcfw@mail.gmail.com>
- <CAOMZO5B0MgkAoBww0pPVnv4TAyqRmGJSn6hBwivgc2ZtpF+fyQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5B0MgkAoBww0pPVnv4TAyqRmGJSn6hBwivgc2ZtpF+fyQ@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Sun, 16 Mar 2025 17:17:56 -0500
-X-Gm-Features: AQ5f1JpGIXIrJKIiT8rxIaDjCO-Fc8Qs18eVxfKZKMeBymj9LJEGhFJmk8hghWY
-Message-ID: <CAHCN7xLi+MHsQaG=vyOcyM5d5ontn=+W1kL0op1HedmkbDt=oQ@mail.gmail.com>
-Subject: Re: [PATCH 00/10] clk: imx: Use Clock frameworkt to register UART
- clocks
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/11] test_fs: Add exfat tests
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Baruch Siach <baruch@tkos.co.il>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20250313191348.170054-1-marex@denx.de>
+ <20250313191348.170054-12-marex@denx.de>
+ <20250314142752.GN2640854@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250314142752.GN2640854@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,48 +86,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Mar 15, 2025 at 11:17=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
->
-> Hi Adam,
->
-> On Sat, Mar 15, 2025 at 12:37=E2=80=AFPM Adam Ford <aford173@gmail.com> w=
-rote:
->
-> > I ran the config that failed on my V3, and it passes that build test,
-> > but I don't want to waste your time if it fails on others I don't know
-> > about.  Can you point me to documentation on how to test this across
-> > multiple boards/platforms before I resubmit it?
->
-> Please check doc/develop/ci_testing.rst
->
-> "The second way is to use GitHub.  This requires a GitHub account
-> and to fork the repository at https://github.com/u-boot/u-boot and to the=
-n
-> submit a pull request as this will trigger an Azure pipeline run.  Clicki=
-ng on
-> your pull request on the list at https://github.com/u-boot/u-boot/pulls a=
-nd
-> then the "Checks" tab will show the results."
-
-The doc you referred me to states:  Currently, we support running
-GitLab CI pipelines only for custodians, due to the resources the
-project has available
-
-I tried pushing my branch to Github, but I don't have permission.  I
-tried pushing it to my own github account, but it doesn't appear the
-CI/CD stuff work.  I looked at the log provided from the pipeline, and
-I have been able to successfully build for that machine along with a
-couple others that I have manually tested.  Are you OK if I submit, or
-is there something you want me to try before I do it?  I have a second
-series I would like to submit soon which reduce my SPL size when
-enabling CLK and CCF from:
-
-   text    data     bss     dec     hex filename
-  95988   22668      80 118736   1cfd0 spl/u-boot-spl
-to
-  91898   22668      80 114646   1bfd6 spl/u-boot-spl
-
-It requires this series in order to accomplish some of these goals.
-
-adam
+On 3/14/25 3:27 PM, Tom Rini wrote:
+> On Thu, Mar 13, 2025 at 08:13:27PM +0100, Marek Vasut wrote:
+> 
+>> Add tests for the exfat filesystem. These tests are largely an
+>> extension of the FS_GENERIC tests with the following notable
+>> exceptions.
+>>
+>> The filesystem image for exfat tests is generated using combination
+>> of exfatprogs mkfs.exfat and python fattools. The fattols are capable
+>> of generating exfat filesystem images too, but this is not used, the
+>> fattools are only used as a replacement for dosfstools 'mcopy' and
+>> 'mdir', which are used to insert files and directories into existing
+>> fatfs images and list existing fatfs images respectively, without the
+>> need for superuser access to mount such images.
+>>
+>> The exfat filesystem has no filesystem specific command, there is only
+>> the generic filesystem command interface, therefore check_ubconfig()
+>> has to special case exfat and skip check for CONFIG_CMD_EXFAT and
+>> instead check for CONFIG_FS_EXFAT.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+> [snip]
+>> diff --git a/test/py/tests/test_fs/fstest_helpers.py b/test/py/tests/test_fs/fstest_helpers.py
+>> index c1447b4d43e..8f2e1fcf47d 100644
+>> --- a/test/py/tests/test_fs/fstest_helpers.py
+>> +++ b/test/py/tests/test_fs/fstest_helpers.py
+>> @@ -9,6 +9,8 @@ def assert_fs_integrity(fs_type, fs_img):
+>>       try:
+>>           if fs_type == 'ext4':
+>>               check_call('fsck.ext4 -n -f %s' % fs_img, shell=True)
+>> +        if fs_type == 'exfat':
+>> +            check_call('fsck.exfat -n %s' % fs_img, shell=True)
+>>           elif fs_type in ['fat12', 'fat16', 'fat32']:
+>>               check_call('fsck.fat -n %s' % fs_img, shell=True)
+>>       except CalledProcessError:
+> 
+> This should be elif not if? Not a big deal if there's nothing else
+> needing a v3 however. Everything else looks good, thanks.
+Yes, it should be elif . Unfortunately, there is now a clean up change 
+in next which modifies test/py/tests/test_fs/test_basic.py and conflicts 
+badly with 3/11 in this series, so I need to carefully rebase that patch 
+on top of current next. I'll send V3 once it is done.
