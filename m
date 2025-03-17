@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2CABC35FF3
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 06:57:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC691C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 06:57:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30A6180FEC;
-	Mon, 17 Mar 2025 07:57:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 865C580F4C;
+	Mon, 17 Mar 2025 07:57:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="oZKe9wh4";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="P+yL9688";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F13F680FEC; Mon, 17 Mar 2025 07:57:09 +0100 (CET)
+ id DB0DC80FEC; Mon, 17 Mar 2025 07:57:51 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E81F80107
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:57:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40CEA80107
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:57:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1648c5b74=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1742194624; x=1773730624;
+ t=1742194669; x=1773730669;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=u46wmWTLF6XkkFrdD0hYxQDNY/6tnKg/OHW17LR8A70=;
- b=oZKe9wh4uB4nlCsnGs5XYbdyoRgdP6qGV0RQozSCzYrmkykjL6ROPhmK
- i4hw38RpXQvQEVDqYdhwJawaaB9qkV7zPpZG3h3wi6+0dJr4I9giCLJhy
- EdoA1YAj4JOAG82iNpO/vALc9t38ZVs0fimsiNCeNKz0rW2Q4OMQVrgTu
- uWS22+EriHb/6NMPRYMG0+Ba6IdpwZvq9BKoMAdBRoSa7Tnn04W2s6is4
- Sbs01CZfyK68Bmjy9clt/vZKQO8pIenv50w2hBtrqnPa3vbgFGLt+gpMA
- gZUxiOkqGxRJD1W27w9z5MfbCOGZnPh6byj1OL5g7vZrzd8kt55kaqQoR A==;
-X-CSE-ConnectionGUID: XxKq7o/LShev8YANILPu4A==
-X-CSE-MsgGUID: HcERHhBLQ/m20mJd4FYMeA==
-X-IronPort-AV: E=Sophos;i="6.14,253,1736838000"; d="scan'208";a="206763708"
+ bh=QTK0NrX22qKdlGpITe7KqS+7BAVGa5fWZ0F7nwKZozY=;
+ b=P+yL9688r7WvrHe8FqwWkRBqH7/kXxMS9WL22z6eHq6WiKUHS9rlnxNv
+ h0ZqrjKOVEqFlTo1eeWsVqeBGJhP09YLvq+8P6kd5Jr55P2lplwBLozMP
+ RMa1nhGrd22mSK0IBTIlqt5+MqcEnb+2E5NUK4Yrqwo9Hfq8soay5Qelr
+ lMx2ylEydAIp7sgFSxglFhpC8kvGh+jUwWvC/YANMnBFLrBmEMU8+OF1p
+ +BE9WcD63G0Kl+mtGCP91Noj/1Kchio1DKnmti/7j2skV6EdtXrcqwenp
+ PEE8YTgnSc8Rp9zkpbrr3BhIuXiUhJSoLljo2CbvcCFzfov1JaJVTZNkW g==;
+X-CSE-ConnectionGUID: ejhlvDAdTGyUzbs46q8tBA==
+X-CSE-MsgGUID: CdOSzmqESbySnIP8GpJ3ug==
+X-IronPort-AV: E=Sophos;i="6.14,253,1736838000"; d="scan'208";a="206763722"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Mar 2025 23:57:02 -0700
+ 16 Mar 2025 23:57:47 -0700
 Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
  chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Sun, 16 Mar 2025 23:56:59 -0700
+ 15.1.2507.44; Sun, 16 Mar 2025 23:57:07 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Sun, 16 Mar 2025 23:56:52 -0700
+ 15.1.2507.44 via Frontend Transport; Sun, 16 Mar 2025 23:56:59 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
@@ -64,9 +64,9 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
 CC: <manikandan.m@microchip.com>, Varshini Rajendran
  <varshini.rajendran@microchip.com>, Balamanikandan Gunasundar
  <balamanikandan.gunasundar@microchip.com>
-Subject: [PATCH v4 4/8] clk: at91: sam9x7: add pmc driver for sam9x7 SoC family
-Date: Mon, 17 Mar 2025 12:26:05 +0530
-Message-ID: <20250317065609.55071-5-manikandan.m@microchip.com>
+Subject: [PATCH v4 5/8] ARM: at91: Add sam9x7 soc
+Date: Mon, 17 Mar 2025 12:26:06 +0530
+Message-ID: <20250317065609.55071-6-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250317065609.55071-1-manikandan.m@microchip.com>
 References: <20250317065609.55071-1-manikandan.m@microchip.com>
@@ -91,1129 +91,294 @@ X-Virus-Status: Clean
 
 From: Varshini Rajendran <varshini.rajendran@microchip.com>
 
-Add PMC driver support for sam9x7 SoC family
+Add new Microchip sam9x7 SoC based on an ARM926.
 
 Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
-[balamanikandan.gunasundar@microchip.com: Add peripheral clock id for pmecc]
 Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- drivers/clk/at91/Makefile |    1 +
- drivers/clk/at91/sam9x7.c | 1094 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 1095 insertions(+)
- create mode 100644 drivers/clk/at91/sam9x7.c
+ arch/arm/mach-at91/Kconfig                    |   4 +
+ arch/arm/mach-at91/arm926ejs/Makefile         |   1 +
+ arch/arm/mach-at91/arm926ejs/sam9x7_devices.c |  49 +++++
+ arch/arm/mach-at91/include/mach/hardware.h    |   2 +
+ arch/arm/mach-at91/include/mach/sam9x7.h      | 172 ++++++++++++++++++
+ 5 files changed, 228 insertions(+)
+ create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+ create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
 
-diff --git a/drivers/clk/at91/Makefile b/drivers/clk/at91/Makefile
-index e53dcb4ca7a..6cca861f81c 100644
---- a/drivers/clk/at91/Makefile
-+++ b/drivers/clk/at91/Makefile
-@@ -12,6 +12,7 @@ obj-$(CONFIG_AT91_SAM9X60_PLL)	+= clk-sam9x60-pll.o
- obj-$(CONFIG_AT91_SAM9X60_USB)	+= clk-sam9x60-usb.o
- obj-$(CONFIG_SAMA7G5)		+= sama7g5.o
- obj-$(CONFIG_SAM9X60)		+= sam9x60.o
-+obj-$(CONFIG_SAM9X7)		+= sam9x7.o
- else
- obj-y += compat.o
- endif
-diff --git a/drivers/clk/at91/sam9x7.c b/drivers/clk/at91/sam9x7.c
+diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
+index 7c4ccc427c8..5429257875d 100644
+--- a/arch/arm/mach-at91/Kconfig
++++ b/arch/arm/mach-at91/Kconfig
+@@ -43,6 +43,10 @@ config SAM9X60
+ 	bool
+ 	select CPU_ARM926EJS
+ 
++config SAM9X7
++	bool
++	select CPU_ARM926EJS
++
+ config SAMA7G5
+ 	bool
+ 	select CPU_V7A
+diff --git a/arch/arm/mach-at91/arm926ejs/Makefile b/arch/arm/mach-at91/arm926ejs/Makefile
+index 8f0bc5d997e..977299a5911 100644
+--- a/arch/arm/mach-at91/arm926ejs/Makefile
++++ b/arch/arm/mach-at91/arm926ejs/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_AT91SAM9G45)	+= at91sam9m10g45_devices.o
+ obj-$(CONFIG_AT91SAM9N12)	+= at91sam9n12_devices.o
+ obj-$(CONFIG_AT91SAM9X5)	+= at91sam9x5_devices.o
+ obj-$(CONFIG_SAM9X60)		+= sam9x60_devices.o
++obj-$(CONFIG_SAM9X7)		+= sam9x7_devices.o
+ obj-y += clock.o
+ obj-y += cpu.o
+ ifndef CONFIG_$(PHASE_)SYSRESET
+diff --git a/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c b/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
 new file mode 100644
-index 00000000000..b362d2f9858
+index 00000000000..c65764a3de4
 --- /dev/null
-+++ b/drivers/clk/at91/sam9x7.c
-@@ -0,0 +1,1094 @@
++++ b/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+@@ -0,0 +1,49 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Varshini Rajendran <varshini.rajendran@microchip.com>
-+ *
 + */
 +
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <dt-bindings/clock/at91.h>
-+#include <linux/clk-provider.h>
-+
-+#include "pmc.h"
-+
-+/**
-+ * Clock identifiers to be used in conjunction with macros like
-+ * AT91_TO_CLK_ID()
-+ *
-+ * @ID_MD_SLCK:			TD slow clock identifier
-+ * @ID_TD_SLCK:			MD slow clock identifier
-+ * @ID_MAIN_XTAL:		Main Xtal clock identifier
-+ * @ID_MAIN_RC:			Main RC clock identifier
-+ * @ID_MAIN_RC_OSC:		Main RC Oscillator clock identifier
-+ * @ID_MAIN_OSC:		Main Oscillator clock identifier
-+ * @ID_MAINCK:			MAINCK clock identifier
-+ * @ID_PLL_U_FRAC:		UPLL fractional clock identifier
-+ * @ID_PLL_U_DIV:		UPLL divider clock identifier
-+ * @ID_PLL_A_FRAC:		APLL fractional clock identifier
-+ * @ID_PLL_A_DIV:		APLL divider clock identifier
-+ * @ID_PLL_A_2_DIV:		PLLA DIV2 divider clock identifier
-+ * @ID_PLL_AUDIO_FRAC:		Audio PLL fractional clock identifier
-+ * @ID_PLL_AUDIO_DIVPMC:	Audio PLL divider clock identifier
-+ * @ID_PLL_AUDIO_DIVIO:		Audio PLL IO divider clock identifier
-+ * @ID_PLL_LVDS_FRAC:		LVDS PLL fractional clock identifier
-+ * @ID_PLL_LVDS_DIV:		LVDS PLL divider clock identifier
-+
-+ * @ID_MCK_DIV:			MCK DIV clock identifier
-+
-+ * @ID_UTMI:			UTMI clock identifier
-+
-+ * @ID_PROG0:			Programmable 0 clock identifier
-+ * @ID_PROG1:			Programmable 1 clock identifier
-+
-+ * @ID_PCK0:			PCK0 system clock identifier
-+ * @ID_PCK1:			PCK1 system clock identifier
-+ * @ID_DDR:			DDR system clock identifier
-+ * @ID_QSPI:			QSPI system clock identifier
-+ *
-+ * @ID_MCK_PRES:		MCK PRES clock identifier
-+ *
-+ * Note: if changing the values of this enums please sync them with
-+ *	 device tree
-+ */
-+enum pmc_clk_ids {
-+	ID_MD_SLCK		= 0,
-+	ID_TD_SLCK		= 1,
-+	ID_MAIN_XTAL		= 2,
-+	ID_MAIN_RC		= 3,
-+	ID_MAIN_RC_OSC		= 4,
-+	ID_MAIN_OSC		= 5,
-+	ID_MAINCK		= 6,
-+
-+	ID_PLL_U_FRAC		= 7,
-+	ID_PLL_U_DIV		= 8,
-+	ID_PLL_A_FRAC		= 9,
-+	ID_PLL_A_DIV		= 10,
-+	ID_PLL_A_2_DIV		= 11,
-+	ID_PLL_AUDIO_FRAC	= 12,
-+	ID_PLL_AUDIO_DIVPMC	= 13,
-+	ID_PLL_AUDIO_DIVIO	= 14,
-+	ID_PLL_LVDS_FRAC	= 15,
-+	ID_PLL_LVDS_DIV		= 16,
-+
-+	ID_MCK_DIV		= 17,
-+
-+	ID_UTMI			= 18,
-+
-+	ID_PROG0		= 19,
-+	ID_PROG1		= 20,
-+
-+	ID_PCK0			= 21,
-+	ID_PCK1			= 22,
-+
-+	ID_DDR			= 23,
-+	ID_QSPI			= 24,
-+
-+	ID_MCK_PRES		= 25,
-+
-+	ID_MAX,
-+};
-+
-+/**
-+ * PLL type identifiers
-+ * @PLL_TYPE_FRAC:	fractional PLL identifier
-+ * @PLL_TYPE_DIV:	divider PLL identifier
-+ */
-+enum pll_type {
-+	PLL_TYPE_FRAC,
-+	PLL_TYPE_DIV,
-+};
-+
-+/* Clock names used as parents for multiple clocks. */
-+static const char *clk_names[] = {
-+	[ID_MAIN_RC_OSC]	= "main_rc_osc",
-+	[ID_MAIN_OSC]		= "main_osc",
-+	[ID_MAINCK]		= "mainck",
-+	[ID_PLL_U_DIV]		= "upll_divpmcck",
-+	[ID_PLL_A_DIV]		= "plla_divpmcck",
-+	[ID_PLL_A_2_DIV]	= "plla_div2pmcck",
-+	[ID_PLL_AUDIO_DIVPMC]	= "pll_audio_divpmcck",
-+	[ID_PLL_AUDIO_DIVIO]	= "pll_audio_diviock",
-+	[ID_PLL_LVDS_DIV]	= "pll_lvds_divpmcck",
-+	[ID_MCK_PRES]		= "mck_pres",
-+	[ID_MCK_DIV]		= "mck_div",
-+};
-+
-+/* Fractional PLL core output range. */
-+static const struct clk_range plla_core_outputs[] = {
-+	{ .min = 800000000, .max = 1600000000 },
-+};
-+
-+static const struct clk_range upll_core_outputs[] = {
-+	{ .min = 600000000, .max = 960000000 },
-+};
-+
-+static const struct clk_range lvdspll_core_outputs[] = {
-+	{ .min = 600000000, .max = 1200000000 },
-+};
-+
-+static const struct clk_range audiopll_core_outputs[] = {
-+	{ .min = 600000000, .max = 1200000000 },
-+};
-+
-+static const struct clk_range plladiv2_core_outputs[] = {
-+	{ .min = 800000000, .max = 1600000000 },
-+};
-+
-+/* Fractional PLL output range. */
-+static const struct clk_range plla_outputs[] = {
-+	{ .min = 400000000, .max = 800000000 },
-+};
-+
-+static const struct clk_range upll_outputs[] = {
-+	{ .min = 300000000, .max = 480000000 },
-+};
-+
-+static const struct clk_range lvdspll_outputs[] = {
-+	{ .min = 175000000, .max = 550000000 },
-+};
-+
-+static const struct clk_range audiopll_outputs[] = {
-+	{ .min = 0, .max = 300000000 },
-+};
-+
-+static const struct clk_range plladiv2_outputs[] = {
-+	{ .min = 200000000, .max = 400000000 },
-+};
-+
-+/* PLL characteristics. */
-+static const struct clk_pll_characteristics plla_characteristics = {
-+	.input = { .min = 20000000, .max = 50000000 },
-+	.num_output = ARRAY_SIZE(plla_outputs),
-+	.output = plla_outputs,
-+	.core_output = plla_core_outputs,
-+};
-+
-+static const struct clk_pll_characteristics upll_characteristics = {
-+	.input = { .min = 20000000, .max = 50000000 },
-+	.num_output = ARRAY_SIZE(upll_outputs),
-+	.output = upll_outputs,
-+	.core_output = upll_core_outputs,
-+	.upll = true,
-+};
-+
-+static const struct clk_pll_characteristics lvdspll_characteristics = {
-+	.input = { .min = 20000000, .max = 50000000 },
-+	.num_output = ARRAY_SIZE(lvdspll_outputs),
-+	.output = lvdspll_outputs,
-+	.core_output = lvdspll_core_outputs,
-+};
-+
-+static const struct clk_pll_characteristics audiopll_characteristics = {
-+	.input = { .min = 20000000, .max = 50000000 },
-+	.num_output = ARRAY_SIZE(audiopll_outputs),
-+	.output = audiopll_outputs,
-+	.core_output = audiopll_core_outputs,
-+};
-+
-+static const struct clk_pll_characteristics plladiv2_characteristics = {
-+	.input = { .min = 20000000, .max = 50000000 },
-+	.num_output = ARRAY_SIZE(plladiv2_outputs),
-+	.output = plladiv2_outputs,
-+	.core_output = plladiv2_core_outputs,
-+};
-+
-+/* Layout for fractional PLLs. */
-+static const struct clk_pll_layout pll_layout_frac = {
-+	.mul_mask = GENMASK(31, 24),
-+	.frac_mask = GENMASK(21, 0),
-+	.mul_shift = 24,
-+	.frac_shift = 0,
-+};
-+
-+/* Layout for fractional PLL ID PLLA. */
-+static const struct clk_pll_layout plla_layout_frac = {
-+	.mul_mask = GENMASK(31, 24),
-+	.frac_mask = GENMASK(21, 0),
-+	.mul_shift = 24,
-+	.frac_shift = 0,
-+	.div2 = 1,
-+};
-+
-+/* Layout for DIV PLLs. */
-+static const struct clk_pll_layout pll_layout_divpmc = {
-+	.div_mask = GENMASK(7, 0),
-+	.endiv_mask = BIT(29),
-+	.div_shift = 0,
-+	.endiv_shift = 29,
-+};
-+
-+/* Layout for DIV PLLs. */
-+static const struct clk_pll_layout plladiv2_layout_divpmc = {
-+	.div_mask = GENMASK(7, 0),
-+	.endiv_mask = BIT(29),
-+	.div_shift = 0,
-+	.endiv_shift = 29,
-+	.div2 = 1,
-+};
-+
-+/* Layout for DIVIO dividers. */
-+static const struct clk_pll_layout pll_layout_divio = {
-+	.div_mask	= GENMASK(19, 12),
-+	.endiv_mask	= BIT(30),
-+	.div_shift	= 12,
-+	.endiv_shift	= 30,
-+};
-+
-+/* MCK characteristics. */
-+static const struct clk_master_characteristics mck_characteristics = {
-+	.output = { .min = 32000000, .max = 266666666 },
-+	.divisors = { 1, 2, 4, 3, 5},
-+	.have_div3_pres = 1,
-+};
-+
-+/* MCK layout. */
-+static const struct clk_master_layout mck_layout = {
-+	.mask = 0x373,
-+	.pres_shift = 4,
-+	.offset = 0x28,
-+};
-+
-+/* Programmable clock layout. */
-+static const struct clk_programmable_layout programmable_layout = {
-+	.pres_mask = 0xff,
-+	.pres_shift = 8,
-+	.css_mask = 0x1f,
-+	.have_slck_mck = 0,
-+	.is_pres_direct = 1,
-+};
-+
-+/* Peripheral clock layout. */
-+static const struct clk_pcr_layout sam9x7_pcr_layout = {
-+	.offset = 0x88,
-+	.cmd = BIT(31),
-+	.gckcss_mask = GENMASK(12, 8),
-+	.pid_mask = GENMASK(6, 0),
-+};
-+
-+/**
-+ * PLL clocks description
-+ * @n:		clock name
-+ * @p:		clock parent
-+ * @l:		clock layout
-+ * @t:		clock type
-+ * @c:		pll characteristics
-+ * @f:		true if clock is fixed and not changeable by driver
-+ * @id:		clock id corresponding to PLL driver
-+ * @cid:	clock id corresponding to clock subsystem
-+ */
-+static const struct {
-+	const char *n;
-+	const char *p;
-+	const struct clk_pll_layout *l;
-+	const struct clk_pll_characteristics *c;
-+	u8 t;
-+	u8 f;
-+	u8 id;
-+	u8 cid;
-+} sam9x7_plls[] = {
-+	{
-+		.n = "plla_fracck",
-+		.p = "mainck",
-+		.l = &plla_layout_frac,
-+		.c = &plla_characteristics,
-+		.t = PLL_TYPE_FRAC,
-+		.f = 1,
-+		.id = 0,
-+		.cid = ID_PLL_A_FRAC,
-+	},
-+
-+	{
-+		.n = "plla_divpmcck",
-+		.p = "plla_fracck",
-+		.l = &pll_layout_divpmc,
-+		.c = &plla_characteristics,
-+		.t = PLL_TYPE_DIV,
-+		.f = 1,
-+		.id = 0,
-+		.cid = ID_PLL_A_DIV,
-+	},
-+
-+	{
-+		.n = "upll_fracck",
-+		.p = "main_osc",
-+		.l = &pll_layout_frac,
-+		.c = &upll_characteristics,
-+		.t = PLL_TYPE_FRAC,
-+		.f = 1,
-+		.id = 1,
-+		.cid = ID_PLL_U_FRAC,
-+	},
-+
-+	{
-+		.n = "upll_divpmcck",
-+		.p = "upll_fracck",
-+		.l = &pll_layout_divpmc,
-+		.c = &upll_characteristics,
-+		.t = PLL_TYPE_DIV,
-+		.f = 1,
-+		.id = 1,
-+		.cid = ID_PLL_U_DIV,
-+	},
-+
-+	{
-+		.n = "audiopll_fracck",
-+		.p = "main_osc",
-+		.l = &pll_layout_frac,
-+		.c = &audiopll_characteristics,
-+		.t = PLL_TYPE_FRAC,
-+		.f = 1,
-+		.id = 2,
-+		.cid = ID_PLL_AUDIO_FRAC,
-+	},
-+
-+	{
-+		.n = "audiopll_divpmcck",
-+		.p = "audiopll_fracck",
-+		.l = &pll_layout_divpmc,
-+		.c = &audiopll_characteristics,
-+		.t = PLL_TYPE_DIV,
-+		.f = 1,
-+		.id = 2,
-+		.cid = ID_PLL_AUDIO_DIVPMC,
-+	},
-+
-+	{
-+		.n = "audiopll_diviock",
-+		.p = "audiopll_fracck",
-+		.l = &pll_layout_divio,
-+		.c = &audiopll_characteristics,
-+		.t = PLL_TYPE_DIV,
-+		.f = 1,
-+		.id = 2,
-+		.cid = ID_PLL_AUDIO_DIVIO,
-+	},
-+
-+	{
-+		.n = "lvdspll_fracck",
-+		.p = "main_osc",
-+		.l = &pll_layout_frac,
-+		.c = &lvdspll_characteristics,
-+		.t = PLL_TYPE_FRAC,
-+		.f = 1,
-+		.id = 3,
-+		.cid = ID_PLL_LVDS_FRAC,
-+	},
-+
-+	{
-+		.n = "lvdspll_divpmcck",
-+		.p = "lvdspll_fracck",
-+		.l = &pll_layout_divpmc,
-+		.c = &lvdspll_characteristics,
-+		.t = PLL_TYPE_DIV,
-+		.f = 1,
-+		.id = 3,
-+		.cid = ID_PLL_LVDS_DIV,
-+	},
-+
-+	{
-+		.n = "plla_div2pmcck",
-+		.p = "plla_fracck",
-+		.l = &plladiv2_layout_divpmc,
-+		.c = &plladiv2_characteristics,
-+		.t = PLL_TYPE_DIV,
-+		.f = 1,
-+		.id = 4,
-+		.cid = ID_PLL_A_2_DIV,
-+	},
-+
-+};
-+
-+/**
-+ * Programmable clock description
-+ * @n:			clock name
-+ * @cid:		clock id corresponding to clock subsystem
-+ */
-+static const struct {
-+	const char *n;
-+	u8 cid;
-+} sam9x7_prog[] = {
-+	{ .n = "prog0", .cid = ID_PROG0, },
-+	{ .n = "prog1", .cid = ID_PROG1, },
-+};
-+
-+/* Mux table for programmable clocks. */
-+static u32 sam9x7_prog_mux_table[] = { 0, 1, 2, 3, 4, 5, 6, };
-+
-+/**
-+ * System clock description
-+ * @n:			clock name
-+ * @p:			parent clock name
-+ * @id:			clock id corresponding to system clock driver
-+ * @cid:		clock id corresponding to clock subsystem
-+ */
-+static const struct {
-+	const char *n;
-+	const char *p;
-+	u8 id;
-+	u8 cid;
-+} sam9x7_systemck[] = {
-+	{ .n = "ddrck", .p = "mck_pres", .id = 2, .cid = ID_DDR, },
-+	{ .n = "pck0",	.p = "prog0",	 .id = 8, .cid = ID_PCK0, },
-+	{ .n = "pck1",	.p = "prog1",	 .id = 9, .cid = ID_PCK1, },
-+};
-+
-+/**
-+ * Peripheral clock description
-+ * @n:		clock name
-+ * @id:		clock id
-+ */
-+static const struct {
-+	const char *n;
-+	u8 id;
-+} sam9x7_periphck[] = {
-+	{ .n = "pioA_clk",	.id = 2, },
-+	{ .n = "pioB_clk",	.id = 3, },
-+	{ .n = "pioC_clk",	.id = 4, },
-+	{ .n = "flex0_clk",	.id = 5, },
-+	{ .n = "flex1_clk",	.id = 6, },
-+	{ .n = "flex2_clk",	.id = 7, },
-+	{ .n = "flex3_clk",	.id = 8, },
-+	{ .n = "flex6_clk",	.id = 9, },
-+	{ .n = "flex7_clk",	.id = 10, },
-+	{ .n = "flex8_clk",	.id = 11, },
-+	{ .n = "sdmmc0_clk",	.id = 12, },
-+	{ .n = "flex4_clk",	.id = 13, },
-+	{ .n = "flex5_clk",	.id = 14, },
-+	{ .n = "flex9_clk",	.id = 15, },
-+	{ .n = "flex10_clk",	.id = 16, },
-+	{ .n = "tcb0_clk",	.id = 17, },
-+	{ .n = "pwm_clk",	.id = 18, },
-+	{ .n = "adc_clk",	.id = 19, },
-+	{ .n = "dma0_clk",	.id = 20, },
-+	{ .n = "uhphs_clk",	.id = 22, },
-+	{ .n = "udphs_clk",	.id = 23, },
-+	{ .n = "gmac_clk",	.id = 24, },
-+	{ .n = "lcd_clk",	.id = 25, },
-+	{ .n = "sdmmc1_clk",	.id = 26, },
-+	{ .n = "ssc_clk",	.id = 28, },
-+	{ .n = "mcan0_clk",	.id = 29, },
-+	{ .n = "mcan1_clk",	.id = 30, },
-+	{ .n = "flex11_clk",	.id = 32, },
-+	{ .n = "flex12_clk",	.id = 33, },
-+	{ .n = "i2s_clk",	.id = 34, },
-+	{ .n = "qspi_clk",	.id = 35, },
-+	{ .n = "gfx2d_clk",	.id = 36, },
-+	{ .n = "pit64b0_clk",	.id = 37, },
-+	{ .n = "trng_clk",	.id = 38, },
-+	{ .n = "aes_clk",	.id = 39, },
-+	{ .n = "tdes_clk",	.id = 40, },
-+	{ .n = "sha_clk",	.id = 41, },
-+	{ .n = "classd_clk",	.id = 42, },
-+	{ .n = "isi_clk",	.id = 43, },
-+	{ .n = "pioD_clk",	.id = 44, },
-+	{ .n = "tcb1_clk",	.id = 45, },
-+	{ .n = "dbgu_clk",	.id = 47, },
-+	{ .n = "pmecc_clk",	.id = 48, },
-+	{ .n = "mpddr_clk",	.id = 49, },
-+	{ .n = "csi2dc_clk",	.id = 52, },
-+	{ .n = "csi4l_clk",	.id = 53, },
-+	{ .n = "dsi4l_clk",	.id = 54, },
-+	{ .n = "lvdsc_clk",	.id = 56, },
-+	{ .n = "pit64b1_clk",	.id = 58, },
-+	{ .n = "puf_clk",	.id = 59, },
-+	{ .n = "gmactsu_clk",	.id = 67, },
-+};
-+
-+/**
-+ * Generic clock description
-+ * @n:			clock name
-+ * @ep:			extra parents names
-+ * @ep_mux_table:	extra parents mux table
-+ * @ep_clk_mux_table:	extra parents clock mux table (for CCF)
-+ * @r:			clock output range
-+ * @ep_count:		extra parents count
-+ * @id:			clock id
-+ */
-+static const struct {
-+	const char *n;
-+	const char *ep[8];
-+	const char ep_mux_table[8];
-+	const char ep_clk_mux_table[8];
-+	struct clk_range r;
-+	u8 ep_count;
-+	u8 id;
-+} sam9x7_gck[] = {
-+	{
-+		.n = "flex0_gclk",
-+		.id = 5,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex1_gclk",
-+		.id = 6,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex2_gclk",
-+		.id = 7,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex3_gclk",
-+		.id = 8,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex6_gclk",
-+		.id = 9,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex7_gclk",
-+		.id = 10,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex8_gclk",
-+		.id = 11,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "sdmmc0_gclk",
-+		.id = 12,
-+		.r = { .max = 105000000 },
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "flex4_gclk",
-+		.id = 13,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex5_gclk",
-+		.id = 14,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex9_gclk",
-+		.id = 15,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex10_gclk",
-+		.id = 16,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "tcb0_gclk",
-+		.id = 17,
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "adc_gclk",
-+		.id = 19,
-+		.ep = { "upll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 5, 8, },
-+		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "gmac_gclk",
-+		.id = 24,
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "lcd_gclk",
-+		.id = 25,
-+		.r = { .max = 75000000 },
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "sdmmc1_gclk",
-+		.id = 26,
-+		.r = { .max = 105000000 },
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "mcan0_gclk",
-+		.id = 29,
-+		.r = { .max = 80000000 },
-+		.ep = { "upll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 5, 8, },
-+		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "mcan1_gclk",
-+		.id = 30,
-+		.r = { .max = 80000000 },
-+		.ep = { "upll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 5, 8, },
-+		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "flex11_gclk",
-+		.id = 32,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "flex12_gclk",
-+		.id = 33,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "i2s_gclk",
-+		.id = 34,
-+		.r = { .max = 100000000 },
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "qspi_gclk",
-+		.id = 35,
-+		.r = { .max = 200000000 },
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "pit64b0_gclk",
-+		.id = 37,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "classd_gclk",
-+		.id = 42,
-+		.r = { .max = 100000000 },
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "tcb1_gclk",
-+		.id = 45,
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+	{
-+		.n = "dbgu_gclk",
-+		.id = 47,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "mipiphy_gclk",
-+		.id = 55,
-+		.r = { .max = 27000000 },
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "pit64b1_gclk",
-+		.id = 58,
-+		.ep = { "plla_div2pmcck", },
-+		.ep_mux_table = { 8, },
-+		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-+		.ep_count = 1,
-+	},
-+
-+	{
-+		.n = "gmac_tsu_gclk",
-+		.id = 67,
-+		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-+		.ep_mux_table = { 6, 8, },
-+		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-+		.ep_count = 2,
-+	},
-+
-+};
-+
-+#define prepare_mux_table(_allocs, _index, _dst, _src, _num, _label)	\
-+	do {								\
-+		int _i;							\
-+		(_dst) = kzalloc(sizeof(*(_dst)) * (_num), GFP_KERNEL);	\
-+		if (!(_dst)) {						\
-+			ret = -ENOMEM;					\
-+			goto _label;					\
-+		}							\
-+		(_allocs)[(_index)++] = (_dst);				\
-+		for (_i = 0; _i < (_num); _i++)				\
-+			(_dst)[_i] = (_src)[_i];			\
-+	} while (0)
-+
-+static int sam9x7_clk_probe(struct udevice *dev)
++#include <asm/arch/at91_common.h>
++#include <asm/arch/clk.h>
++#include <asm/arch/gpio.h>
++#include <asm/io.h>
++
++unsigned int get_chip_id(void)
 +{
-+	void __iomem *base = (void *)devfdt_get_addr_ptr(dev);
-+	unsigned int *clkmuxallocs[64], *muxallocs[64];
-+	const char *p[10];
-+	unsigned int cm[10], m[10], *tmpclkmux, *tmpmux;
-+	struct clk clk, *c;
-+	int ret, muxallocindex = 0, clkmuxallocindex = 0, i, j;
-+	static const struct clk_range r = { 0, 0 };
-+
-+	if (!base)
-+		return -EINVAL;
-+
-+	memset(muxallocs, 0, ARRAY_SIZE(muxallocs));
-+	memset(clkmuxallocs, 0, ARRAY_SIZE(clkmuxallocs));
-+
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_get_by_id(clk.id, &c);
-+	if (ret)
-+		return ret;
-+
-+	clk_names[ID_TD_SLCK] = kmemdup(clk_hw_get_name(c),
-+					strlen(clk_hw_get_name(c)) + 1,
-+					GFP_KERNEL);
-+	if (!clk_names[ID_TD_SLCK])
-+		return -ENOMEM;
-+
-+	ret = clk_get_by_index(dev, 1, &clk);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_get_by_id(clk.id, &c);
-+	if (ret)
-+		return ret;
-+
-+	clk_names[ID_MD_SLCK] = kmemdup(clk_hw_get_name(c),
-+					strlen(clk_hw_get_name(c)) + 1,
-+					GFP_KERNEL);
-+	if (!clk_names[ID_MD_SLCK])
-+		return -ENOMEM;
-+
-+	ret = clk_get_by_index(dev, 2, &clk);
-+	if (ret)
-+		return ret;
-+
-+	clk_names[ID_MAIN_XTAL] = kmemdup(clk_hw_get_name(&clk),
-+					  strlen(clk_hw_get_name(&clk)) + 1,
-+					  GFP_KERNEL);
-+	if (!clk_names[ID_MAIN_XTAL])
-+		return -ENOMEM;
-+
-+	ret = clk_get_by_index(dev, 3, &clk);
-+	if (ret)
-+		goto fail;
-+
-+	clk_names[ID_MAIN_RC] = kmemdup(clk_hw_get_name(&clk),
-+					strlen(clk_hw_get_name(&clk)) + 1,
-+					GFP_KERNEL);
-+	if (ret)
-+		goto fail;
-+
-+	/* Register main rc oscillator. */
-+	c = at91_clk_main_rc(base, clk_names[ID_MAIN_RC_OSC],
-+			     clk_names[ID_MAIN_RC]);
-+	if (IS_ERR(c)) {
-+		ret = PTR_ERR(c);
-+		goto fail;
-+	}
-+	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_RC_OSC), c);
-+
-+	/* Register main oscillator. */
-+	c = at91_clk_main_osc(base, clk_names[ID_MAIN_OSC],
-+			      clk_names[ID_MAIN_XTAL], false);
-+	if (IS_ERR(c)) {
-+		ret = PTR_ERR(c);
-+		goto fail;
-+	}
-+	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_OSC), c);
-+
-+	/* Register mainck. */
-+	p[0] = clk_names[ID_MAIN_RC_OSC];
-+	p[1] = clk_names[ID_MAIN_OSC];
-+	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_RC_OSC);
-+	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_OSC);
-+	prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm, 2,
-+			  fail);
-+	c = at91_clk_sam9x5_main(base, clk_names[ID_MAINCK], p,
-+				 2, tmpclkmux, PMC_TYPE_CORE);
-+	if (IS_ERR(c)) {
-+		ret = PTR_ERR(c);
-+		goto fail;
-+	}
-+	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK), c);
-+
-+	/* Register PLL fracs clocks. */
-+	for (i = 0; i < ARRAY_SIZE(sam9x7_plls); i++) {
-+		if (sam9x7_plls[i].t != PLL_TYPE_FRAC)
-+			continue;
-+
-+		c = sam9x60_clk_register_frac_pll(base, sam9x7_plls[i].n,
-+						  sam9x7_plls[i].p,
-+						  sam9x7_plls[i].id,
-+						  sam9x7_plls[i].c,
-+						  sam9x7_plls[i].l,
-+						  sam9x7_plls[i].f);
-+		if (IS_ERR(c)) {
-+			ret = PTR_ERR(c);
-+			goto fail;
-+		}
-+		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_plls[i].cid), c);
-+	}
-+
-+	/* Register PLL div clocks. */
-+	for (i = 0; i < ARRAY_SIZE(sam9x7_plls); i++) {
-+		if (sam9x7_plls[i].t != PLL_TYPE_DIV)
-+			continue;
-+
-+		c = sam9x60_clk_register_div_pll(base, sam9x7_plls[i].n,
-+						 sam9x7_plls[i].p,
-+						 sam9x7_plls[i].id,
-+						 sam9x7_plls[i].c,
-+						 sam9x7_plls[i].l,
-+						 sam9x7_plls[i].f);
-+		if (IS_ERR(c)) {
-+			ret = PTR_ERR(c);
-+			goto fail;
-+		}
-+		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_plls[i].cid), c);
-+	}
-+
-+	/* Register MCK pres clock. */
-+	p[0] = clk_names[ID_MD_SLCK];
-+	p[1] = clk_names[ID_MAINCK];
-+	p[2] = clk_names[ID_PLL_A_DIV];
-+	p[3] = clk_names[ID_PLL_U_DIV];
-+	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
-+	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
-+	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_A_DIV);
-+	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_U_DIV);
-+	prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm, 4,
-+			  fail);
-+	c = at91_clk_register_master_pres(base, clk_names[ID_MCK_PRES], p, 4,
-+					  &mck_layout, &mck_characteristics,
-+					  tmpclkmux);
-+	if (IS_ERR(c)) {
-+		ret = PTR_ERR(c);
-+		goto fail;
-+	}
-+	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_PRES), c);
-+
-+	/* Register MCK div clock. */
-+	c = at91_clk_register_master_div(base, clk_names[ID_MCK_DIV],
-+					 clk_names[ID_MCK_PRES],
-+					 &mck_layout, &mck_characteristics);
-+	if (IS_ERR(c)) {
-+		ret = PTR_ERR(c);
-+		goto fail;
-+	}
-+	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV), c);
-+
-+	/* Register programmable clocks. */
-+	p[0] = clk_names[ID_MD_SLCK];
-+	p[1] = clk_names[ID_TD_SLCK];
-+	p[2] = clk_names[ID_MAINCK];
-+	p[3] = clk_names[ID_MCK_DIV];
-+	p[4] = clk_names[ID_PLL_A_DIV];
-+	p[5] = clk_names[ID_PLL_U_DIV];
-+	p[6] = clk_names[ID_PLL_AUDIO_DIVPMC];
-+	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
-+	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_TD_SLCK);
-+	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
-+	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV);
-+	cm[4] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_A_DIV);
-+	cm[5] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_U_DIV);
-+	cm[6] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_AUDIO_DIVPMC);
-+	for (i = 0; i < ARRAY_SIZE(sam9x7_prog); i++) {
-+		prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm,
-+				  7, fail);
-+
-+		c = at91_clk_register_programmable(base, sam9x7_prog[i].n, p,
-+						   7, i, &programmable_layout,
-+						   tmpclkmux,
-+						   sam9x7_prog_mux_table);
-+		if (IS_ERR(c)) {
-+			ret = PTR_ERR(c);
-+			goto fail;
-+		}
-+		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_prog[i].cid), c);
-+	}
-+
-+	/* System clocks. */
-+	for (i = 0; i < ARRAY_SIZE(sam9x7_systemck); i++) {
-+		c = at91_clk_register_system(base, sam9x7_systemck[i].n,
-+					     sam9x7_systemck[i].p,
-+					     sam9x7_systemck[i].id);
-+		if (IS_ERR(c)) {
-+			ret = PTR_ERR(c);
-+			goto fail;
-+		}
-+		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_SYSTEM, sam9x7_systemck[i].cid),
-+		       c);
-+	}
-+
-+	/* Peripheral clocks. */
-+	for (i = 0; i < ARRAY_SIZE(sam9x7_periphck); i++) {
-+		c = at91_clk_register_sam9x5_peripheral(base, &sam9x7_pcr_layout,
-+							sam9x7_periphck[i].n,
-+							clk_names[ID_MCK_DIV],
-+							sam9x7_periphck[i].id,
-+							&r);
-+		if (IS_ERR(c)) {
-+			ret = PTR_ERR(c);
-+			goto fail;
-+		}
-+		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_PERIPHERAL,
-+				      sam9x7_periphck[i].id), c);
-+	}
-+
-+	/* Generic clocks. */
-+	p[0] = clk_names[ID_MD_SLCK];
-+	p[1] = clk_names[ID_TD_SLCK];
-+	p[2] = clk_names[ID_MAINCK];
-+	p[3] = clk_names[ID_MCK_DIV];
-+	m[0] = 0;
-+	m[1] = 1;
-+	m[2] = 2;
-+	m[3] = 3;
-+	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
-+	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_TD_SLCK);
-+	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
-+	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV);
-+	for (i = 0; i < ARRAY_SIZE(sam9x7_gck); i++) {
-+		for (j = 0; j < sam9x7_gck[i].ep_count; j++) {
-+			p[4 + j] = sam9x7_gck[i].ep[j];
-+			m[4 + j] = sam9x7_gck[i].ep_mux_table[j];
-+			cm[4 + j] = AT91_TO_CLK_ID(PMC_TYPE_CORE,
-+						   sam9x7_gck[i].ep_clk_mux_table[j]);
-+		}
-+		prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm,
-+				  4 + sam9x7_gck[i].ep_count, fail);
-+		prepare_mux_table(muxallocs, muxallocindex, tmpmux, m,
-+				  4 + sam9x7_gck[i].ep_count, fail);
-+
-+		c = at91_clk_register_generic(base, &sam9x7_pcr_layout,
-+					      sam9x7_gck[i].n, p, tmpclkmux,
-+					      tmpmux, 4 + sam9x7_gck[i].ep_count,
-+					      sam9x7_gck[i].id,
-+					      &sam9x7_gck[i].r);
-+		if (IS_ERR(c)) {
-+			ret = PTR_ERR(c);
-+			goto fail;
-+		}
-+		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_GCK, sam9x7_gck[i].id), c);
-+	}
-+
-+	return 0;
-+
-+fail:
-+	for (i = 0; i < ARRAY_SIZE(muxallocs); i++)
-+		kfree(muxallocs[i]);
-+
-+	for (i = 0; i < ARRAY_SIZE(clkmuxallocs); i++)
-+		kfree(clkmuxallocs[i]);
-+
-+	return ret;
++	/* The 0x40 is the offset of cidr in DBGU */
++	return readl(ATMEL_BASE_DBGU + 0x40);
 +}
 +
-+static const struct udevice_id sam9x7_clk_ids[] = {
-+	{ .compatible = "microchip,sam9x7-pmc" },
-+	{ /* Sentinel. */ },
-+};
++unsigned int get_extension_chip_id(void)
++{
++	/* The 0x44 is the offset of exid in DBGU */
++	return readl(ATMEL_BASE_DBGU + 0x44);
++}
 +
-+U_BOOT_DRIVER(at91_sam9x7_pmc) = {
-+	.name = "at91-sam9x7-pmc",
-+	.id = UCLASS_CLK,
-+	.of_match = sam9x7_clk_ids,
-+	.ops = &at91_clk_ops,
-+	.probe = sam9x7_clk_probe,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++char *get_cpu_name(void)
++{
++	unsigned int extension_id = get_extension_chip_id();
++
++	if (cpu_is_sam9x7()) {
++		switch (extension_id) {
++		case ARCH_EXID_SAM9X70:
++			return "SAM9X70";
++		case ARCH_EXID_SAM9X72:
++			return "SAM9X72";
++		case ARCH_EXID_SAM9X75:
++			return "SAM9X75";
++		case ARCH_EXID_SAM9X75_D1M:
++			return "SAM9X75 16MB DDR2 SiP";
++		case ARCH_EXID_SAM9X75_D5M:
++			return "SAM9X75 64MB DDR2 SiP";
++		case ARCH_EXID_SAM9X75_D1G:
++			return "SAM9X75 125MB DDR3L SiP";
++		case ARCH_EXID_SAM9X75_D2G:
++			return "SAM9X75 250MB DDR3L SiP";
++		default:
++			return "Unknown CPU type";
++		}
++	} else {
++		return "Unknown CPU type";
++	}
++}
+diff --git a/arch/arm/mach-at91/include/mach/hardware.h b/arch/arm/mach-at91/include/mach/hardware.h
+index 988ef492b62..de89714b097 100644
+--- a/arch/arm/mach-at91/include/mach/hardware.h
++++ b/arch/arm/mach-at91/include/mach/hardware.h
+@@ -23,6 +23,8 @@
+ # include <asm/arch/at91sam9x5.h>
+ #elif defined(CONFIG_SAM9X60)
+ # include <asm/arch/sam9x60.h>
++#elif defined(CONFIG_SAM9X7)
++# include <asm/arch/sam9x7.h>
+ #elif defined(CONFIG_SAMA7G5)
+ # include <asm/arch/sama7g5.h>
+ #elif defined(CONFIG_SAMA5D2)
+diff --git a/arch/arm/mach-at91/include/mach/sam9x7.h b/arch/arm/mach-at91/include/mach/sam9x7.h
+new file mode 100644
+index 00000000000..998fa786f90
+--- /dev/null
++++ b/arch/arm/mach-at91/include/mach/sam9x7.h
+@@ -0,0 +1,172 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Chip-specific header file for the SAM9X7 SoC.
++ *
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ */
++
++#ifndef __SAM9X7_H__
++#define __SAM9X7_H__
++
++/*
++ * Peripheral identifiers/interrupts.
++ */
++#define ATMEL_ID_FIQ		0	/* Advanced Interrupt Controller - FIQ */
++#define ATMEL_ID_SYS		1	/* System Controller Interrupt */
++#define ATMEL_ID_PIOA		2	/* Parallel I/O Controller A */
++#define ATMEL_ID_PIOB		3	/* Parallel I/O Controller B */
++#define ATMEL_ID_PIOC		4	/* Parallel I/O Controller C */
++#define ATMEL_ID_FLEXCOM0	5	/* FLEXCOM 0 */
++#define ATMEL_ID_FLEXCOM1	6	/* FLEXCOM 1 */
++#define ATMEL_ID_FLEXCOM2	7	/* FLEXCOM 2 */
++#define ATMEL_ID_FLEXCOM3	8	/* FLEXCOM 3 */
++#define ATMEL_ID_FLEXCOM6	9	/* FLEXCOM 6 */
++#define ATMEL_ID_FLEXCOM7	10	/* FLEXCOM 7 */
++#define ATMEL_ID_FLEXCOM8	11	/* FLEXCOM 8 */
++#define ATMEL_ID_SDMMC0		12	/* SDMMC 0 */
++#define ATMEL_ID_FLEXCOM4	13	/* FLEXCOM 4 */
++#define ATMEL_ID_FLEXCOM5	14	/* FLEXCOM 5 */
++#define ATMEL_ID_FLEXCOM9	15	/* FLEXCOM 9 */
++#define ATMEL_ID_FLEXCOM10	16	/* FLEXCOM 10 */
++#define ATMEL_ID_TC01		17	/* Timer Counter 0, 1, 2, 3, 4 and 5 */
++#define ATMEL_ID_PWM		18	/* Pulse Width Modulation Controller */
++#define ATMEL_ID_ADC		19	/* ADC Controller */
++#define ATMEL_ID_XDMAC0		20	/* XDMA Controller 0 */
++#define ATMEL_ID_MATRIX		21	/* BUS Matrix */
++#define ATMEL_ID_UHPHS		22	/* USB Host High Speed */
++#define ATMEL_ID_UDPHS		23	/* USB Device High Speed */
++#define ATMEL_ID_GMAC		24	/* GMAC */
++#define ATMEL_ID_LCDC		25	/* LCD Controller */
++#define ATMEL_ID_SDMMC1		26	/* SDMMC 1 */
++#define ATMEL_ID_SSC		28	/* Synchronous Serial Controller */
++#define ATMEL_ID_IRQ		31	/* Advanced Interrupt Controller - IRQ */
++#define ATMEL_ID_TRNG		38	/* True Random Number Generator */
++#define ATMEL_ID_PIOD		44	/* Parallel I/O Controller D */
++#define ATMEL_ID_DBGU		47	/* Debug unit */
++
++/*
++ * User Peripheral physical base addresses.
++ */
++#define ATMEL_BASE_FLEXCOM4	0xf0000000
++#define ATMEL_BASE_FLEXCOM5	0xf0004000
++#define ATMEL_BASE_XDMA0	0xf0008000
++#define ATMEL_BASE_SSC		0xf0010000
++#define ATMEL_BASE_QSPI		0xf0014000
++#define ATMEL_BASE_CAN0		0xf8000000
++#define ATMEL_BASE_CAN1		0xf8004000
++#define ATMEL_BASE_TC0		0xf8008000
++#define ATMEL_BASE_TC1		0xf800c000
++#define ATMEL_BASE_FLEXCOM6	0xf8010000
++#define ATMEL_BASE_FLEXCOM7	0xf8014000
++#define ATMEL_BASE_FLEXCOM8	0xf8018000
++#define ATMEL_BASE_FLEXCOM0	0xf801c000
++#define ATMEL_BASE_FLEXCOM1	0xf8020000
++#define ATMEL_BASE_FLEXCOM2	0xf8024000
++#define ATMEL_BASE_FLEXCOM3	0xf8028000
++#define ATMEL_BASE_GMAC		0xf802c000
++#define ATMEL_BASE_PWM		0xf8034000
++#define ATMEL_BASE_LCDC		0xf8038000
++#define ATMEL_BASE_UDPHS	0xf803c000
++#define ATMEL_BASE_FLEXCOM9	0xf8040000
++#define ATMEL_BASE_FLEXCOM10	0xf8044000
++#define ATMEL_BASE_ISC		0xf8048000
++#define ATMEL_BASE_ADC		0xf804c000
++#define ATMEL_BASE_SFR		0xf8050000
++#define ATMEL_BASE_SYS		0xffffc000
++
++/*
++ * System Peripherals
++ */
++#define ATMEL_BASE_MATRIX	0xffffde00
++#define ATMEL_BASE_PMECC	0xffffe000
++#define ATMEL_BASE_PMERRLOC	0xffffe600
++#define ATMEL_BASE_MPDDRC	0xffffe800
++#define ATMEL_BASE_SMC		0xffffea00
++#define ATMEL_BASE_SDRAMC	0xffffec00
++#define ATMEL_BASE_AIC		0xfffff100
++#define ATMEL_BASE_DBGU		0xfffff200
++#define ATMEL_BASE_PIOA		0xfffff400
++#define ATMEL_BASE_PIOB		0xfffff600
++#define ATMEL_BASE_PIOC		0xfffff800
++#define ATMEL_BASE_PIOD		0xfffffa00
++#define ATMEL_BASE_PMC		0xfffffc00
++#define ATMEL_BASE_RSTC		0xfffffe00
++#define ATMEL_BASE_SHDWC	0xfffffe10
++#define ATMEL_BASE_PIT		0xfffffe40
++#define ATMEL_BASE_GPBR		0xfffffe60
++#define ATMEL_BASE_RTC		0xfffffea8
++#define ATMEL_BASE_WDT		0xffffff80
++
++/*
++ * Internal Memory.
++ */
++#define ATMEL_BASE_ROM		0x00100000 /* Internal ROM base address */
++#define ATMEL_BASE_SRAM		0x00300000 /* Internal SRAM base address */
++#define ATMEL_BASE_UDPHS_FIFO	0x00500000 /* USB Device HS controller */
++#define ATMEL_BASE_OHCI		0x00600000 /* USB Host controller (OHCI) */
++#define ATMEL_BASE_EHCI		0x00700000 /* USB Host controller (EHCI) */
++
++/*
++ * External memory
++ */
++#define ATMEL_BASE_CS0		0x10000000
++#define ATMEL_BASE_CS1		0x20000000
++#define ATMEL_BASE_CS2		0x30000000
++#define ATMEL_BASE_CS3		0x40000000
++#define ATMEL_BASE_CS4		0x50000000
++#define ATMEL_BASE_CS5		0x60000000
++#define ATMEL_BASE_SDMMC0	0x80000000
++#define ATMEL_BASE_SDMMC1	0x90000000
++
++/*
++ * SAM9x7 series chip id definitions
++ */
++#define ARCH_ID_SAM9X7		0x89750030
++#define ARCH_EXID_SAM9X70	0x00000005
++#define ARCH_EXID_SAM9X72	0x00000004
++#define ARCH_EXID_SAM9X75	0x00000000
++#define ARCH_EXID_SAM9X75_D1G	0x00000018
++#define ARCH_EXID_SAM9X75_D2G	0x00000020
++#define ARCH_EXID_SAM9X75_D1M	0x00000003
++#define ARCH_EXID_SAM9X75_D5M	0x00000010
++
++#define cpu_is_sam9x7()	(get_chip_id() == ARCH_ID_SAM9X7)
++
++/*
++ * Cpu Name
++ */
++#define ATMEL_CPU_NAME	get_cpu_name()
++
++/*
++ * Timer
++ */
++#define CFG_SYS_TIMER_COUNTER	0xf0028000
++
++/*
++ * Other misc defines
++ */
++#define ATMEL_PIO_PORTS		4
++#define CPU_HAS_PCR
++#define CPU_NO_PLLB
++#define PLL_ID_PLLA		0
++#define PLL_ID_UPLL		1
++#define PLL_ID_AUDIOPLL		2
++#define PLL_ID_LVDSPLL		3
++#define PLL_ID_PLLA_DIV_2	4
++
++/*
++ * PMECC table in ROM
++ */
++#define ATMEL_PMECC_INDEX_OFFSET_512	0x0000
++#define ATMEL_PMECC_INDEX_OFFSET_1024	0x8000
++
++/*
++ * SAM9X7 specific prototypes
++ */
++#ifndef __ASSEMBLY__
++unsigned int get_chip_id(void);
++unsigned int get_extension_chip_id(void);
++char *get_cpu_name(void);
++#endif
++
++#endif
 -- 
 2.25.1
 
