@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FA2C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:31:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338F2C28B30
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07C2280FEC;
-	Mon, 17 Mar 2025 04:31:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7EC928058A;
+	Mon, 17 Mar 2025 04:55:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742182303;
-	bh=hP9uCR3yzF/MFUF6xjYAo2XaQDuDwIFuuWVMo1NbXeQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Fs4rU4NO9HJMb5aOvspw99/nKON36ka8Ju+QRBihMnwdcgwj6alFFoL6V1BOAn+zy
-	 XJZUGRr5q7xIZ123O3UkgvjxAvbIKfY8QMJ6IiBTVivXjGkSQ5pSUe95aeKXjkGW9V
-	 MDfDiS7J3iZlbqmq+3xdl+aYw/eJxSgeph/Ifoo5PAjnahQdgrfuARACGbT15fe5zx
-	 15WZqgyHyUXqgXbhnfC8OMd0tQcrIl0O6OA0XzzGhRMvMjyDgcNp9VO74sMd+Zn8OO
-	 YFEbTobp1rdAfQMso7Qes1dyVe/QA+wSwgQQtc5Q6u/zkEwi14an55nIJ8sRf0FH1y
-	 njT0KKcjKcBaA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ED54810F4; Mon, 17 Mar 2025 04:31:41 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CBF880F4C
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="LbcRnBng"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1FC80103D1FFE; Mon, 17 Mar 2025 04:31:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742182297; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=hP9uCR3yzF/MFUF6xjYAo2XaQDuDwIFuuWVMo1NbXeQ=;
- b=LbcRnBng6BT6mGQkk4rjHr3X1UWfLnQqvpGoy6IsDnel8m2dlrIH+4iWLxeN1MPrA1Jp0U
- 3M4kN3G1mLf/FPL38AWJAqna1a2TOA6dKMRM82oh4/kb9cooJa06RvaLMk/L+V36EUF356
- /DhqrPazFDV4tPWghWdCNZalRPNOJJ+uEumtDB0kCtY2Wlhk0Q3ddyQ3PBj2iDD8oa/Ho5
- Ds3hltUojfXPpq1/TbFF32tdh4OVB1fNwZF+BQxB+Cn2x878UhznBv0ntD4wTpkJn70YoP
- ER2JYjrrUW3fnic4UUEASHwkAN+/yJzB+HK2k+Ts00zKp07mEYA0mOiGJWUjMg==
-Message-ID: <f40e5f42-3f29-448a-8c2b-76945f1ccc1e@denx.de>
-Date: Mon, 17 Mar 2025 04:21:50 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NfYxURWm";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6D68880F4C; Mon, 17 Mar 2025 04:55:40 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A431F800C2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:55:37 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52H3tZFE2222832
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Sun, 16 Mar 2025 22:55:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1742183735;
+ bh=8EoJDI1SOtVgLIm1Kfw0OziWBg8cH6nWVbFIhbiPv5U=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=NfYxURWm2MK7d4FQLaQHOQfGmMQWC7qttmqz2zgcRp99OT1hrLA5l6se3nZwaFOOZ
+ +PsBlQs0NuLW5Dtgqz9HubMnx0ZTu2AoMhTFpnMJ3hrc6YH4HV5RvaNLDiM8FYdCnV
+ 3ETiIvIwm94CTApgUzFuwqhfKlbhn/m3FZDQsNMg=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52H3tZmm106500;
+ Sun, 16 Mar 2025 22:55:35 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 16
+ Mar 2025 22:55:35 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 16 Mar 2025 22:55:35 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52H3tWK6000568;
+ Sun, 16 Mar 2025 22:55:33 -0500
+Message-ID: <b8a97a67-7eab-452b-afda-6d70168b5502@ti.com>
+Date: Mon, 17 Mar 2025 09:25:31 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/8] Add Starfive JH7110 Cadence USB driver
-To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
-References: <20250306062032.50314-1-minda.chen@starfivetech.com>
+Subject: Re: [PATCH] configs: am68_sk_r5: Enable AVS config
+To: Udit Kumar <u-kumar1@ti.com>, <trini@konsulko.com>, <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, <nm@ti.com>, <m-chawdhry@ti.com>,
+ <j-keerthy@ti.com>, <m-shah@ti.com>, <a-limaye@ti.com>
+References: <20250314123824.2886341-1-u-kumar1@ti.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250306062032.50314-1-minda.chen@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250314123824.2886341-1-u-kumar1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,25 +82,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/6/25 7:20 AM, Minda Chen wrote:
-> Add Starfive JH7110 Cadence USB driver and related PHY driver.
-> So the codes can be used in visionfive2 and star64 7110 board.
+Hi Udit
+
+On 14/03/25 18:08, Udit Kumar wrote:
+> Enable AVS config
 > 
-> The driver is almost the same with kernel driver.
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> ---
+> Test logs
+> https://gist.github.com/uditkumarti/9b30461e66aa27e4a813a65f1c552e51#file-gistfile1-txt-L298
 > 
-> Test with Star64 JH7110 board USB 3.0 + USB 2.0 host.
-> The code can work.
+> Following print was added to see AVS voltage setting at
+> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+> index 0774e0a4c9e..ed1a5768147 100644
+> --- a/drivers/misc/k3_avs.c
+> +++ b/drivers/misc/k3_avs.c
+> @@ -142,7 +142,7 @@ static int k3_avs_program_voltage(struct k3_avs_privdata *priv,
 > 
-> The Starfive JH7110 has enable CONFIG_OF_UPSTREAM. The dts is
-> from kernel
-Applied all except
+>                 vd2->flags |= VD_FLAG_INIT_DONE;
+>         }
+> -
+> +       printf("Finally setting voltage \n");
 
-[PATCH v7 8/8] MAINTAINERS: Update Starfive visionfive2 maintain files.
+Was this printf intended to be in the patch?
 
-Can you please rebase the "MAINTAINERS: Update Starfive visionfive2 
-maintain files." and send it separately ?
+>         return regulator_set_value(vd->supply, volt);
+>  }
+> 
+> 
+>  configs/am68_sk_r5_defconfig | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
+> index 097bed62061..d6ef89c7b84 100644
+> --- a/configs/am68_sk_r5_defconfig
+> +++ b/configs/am68_sk_r5_defconfig
+> @@ -6,7 +6,6 @@ CONFIG_SOC_K3_J721S2=y
+>  CONFIG_TARGET_J721S2_R5_EVM=y
+>  
+>  CONFIG_ESM_K3=n
+> -CONFIG_K3_AVS0=n
+>  CONFIG_ESM_PMIC=n
+>  CONFIG_DM_REGULATOR_TPS65941=n
+>  CONFIG_PMIC_TPS65941=n
 
-I already sent USB PR, you were on CC, so you should see the 1/8..7/8 
-patches are already on their way to u-boot/master .
-
-Sorry for the abysmal delay in replies on my side.
+-- 
+Thanking You
+Neha Malcom Francis
