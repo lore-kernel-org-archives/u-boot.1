@@ -4,64 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6272C35FF1
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A22C28B2F
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 03:16:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B26E817EC;
+	by phobos.denx.de (Postfix) with ESMTP id 7A14A81A04;
 	Mon, 17 Mar 2025 04:15:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1742181308;
-	bh=0v+ncBBcIl64mCsrytplpnmfZwB3+xF1v7ss+kB8J10=;
+	bh=uGsMTgJg1KIv8URSJDzi7OVydY3qJEKFfmiztYY9qCk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Tr9exfQUDzcvwAJQ+hXawhg/++cBw5z0iRlGWV7/wBj4PI6+sEBa5YXYC58FJXwWw
-	 6XAFv1v0JypXO6ejxx1B8ZHWoNy1uo0sKT4M9iwXtxePO75S7XsjCcE/1diPA1O52D
-	 QUtZdXaY8m/nMF170BCyrhxILZwgmVfYWTqxxhkwXOCSuV3MH0I092ucsIbhmlhesb
-	 n7jBlrRtpPE/s+aGOE4rP/kPxyq7Lj1BJllQ4aZodRtOqTcyLh8KatQm4tdBoaRQYX
-	 KPDn41opHaji9QmS2dIukOCpJnJNa+WuJW190mwCCbd4uic2CBIbsRixt8U5pz0Gq4
-	 2517K6XXtRQZA==
+	b=wQsncuaI2hikKIB3/QxOwFG11UbSvnfMKLb5JUzw7ccl07Qohj8LRlVjg7aA2EJlO
+	 7Guo3nlHzCAiZNlDv1UGEsVdjsnqrqx0IEwWptFZogB/tL3wc8eCC38Uww3GaG3u6b
+	 mC/mFe0Cp2OTaB3MeVq2jPM7GCM5YDsG4T5IB/Dewe47T+k1wE3PcpSXQ5v49AyJ6d
+	 K9kKXIhvB6Mr7hJMbhRWCvXYfAMfWTHf8RmGOqvNGQPkz82j5yfqHFzg3I/njptwkD
+	 58NGVQ71BAutx13+AqLuMP8A4v2BqFyn1mxOgxSYKKjw/6VyotfIFiVEq50H8NsM/H
+	 JdmQPjjWitrWg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6916F810EB; Mon, 17 Mar 2025 04:15:05 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 98423801DE; Mon, 17 Mar 2025 04:15:06 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D46E81760
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:15:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A7E7810F5
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 04:15:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="D7xnmS/1"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Bx+1l7cJ"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 98B58101F7A30; Mon, 17 Mar 2025 04:15:01 +0100 (CET)
+ with ESMTPSA id EDF19101F7A3D; Mon, 17 Mar 2025 04:15:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742181302; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1742181304; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=0v+ncBBcIl64mCsrytplpnmfZwB3+xF1v7ss+kB8J10=;
- b=D7xnmS/18zNesa4aL3N5OTsdO+KusXHKiqJdsuCJNMUqRqzsYvaOJdyDJVdtVIoIPvzvR2
- cDh1nXnDrkWIPcsDuiFw1KI7udoJuKsqDdirDShTNvrVgPg4o63XIrO204qRfg1T9iGAd4
- CYGrBnAUoip60ettkd01H7vQAbUsBW5immz2yIuuy8YIhF6+dyQVd5KeNde/de4j1LXUfa
- VnDdXQj8/xaFeZx0frpHVakZ1ASWNLOQ2oPhBnoH0v5Csv+bG1qRmWOlw6Gx6F7v5CKAH6
- 7gkOd74c6Hk0e3cLbLlx8+6DrnOShHtco/blndE2bggHnIUW3kpgyE+G3uFEHA==
+ bh=uGsMTgJg1KIv8URSJDzi7OVydY3qJEKFfmiztYY9qCk=;
+ b=Bx+1l7cJQ8lzPJ7/K7KnS8oeO7FrWUehNgkYSLdS9Y4IrGD9vVnqNymlBOhDjVtBLgQCT9
+ RmoK14pLgdigOvVgVD/mnbNB02ufF0cMZEuqTssvtFIrFdoR0jN3EKoSH4Lpc96OpnFe97
+ BhziHd5oPBS+R9K4R9zu9FOAt9NFccD1hmcNGQVnOKkdcg2x5zdc10w2htTIRD2upEB8Ie
+ h/nFP7kYPN6zEsW/TqI33Ty8R+ks8D9ZmC0LocGjKR3UX8NX+S5U7h/ClHavKmHq6LYDb2
+ MdgFOhisuShbxFl6kGaJO1qHVzRGAYIyTBR/fHzv5fq/vgCEd8CUWiylEocKFw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Baruch Siach <baruch@tkos.co.il>,
+Cc: Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hiago De Franco <hiago.franco@toradex.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 09/11] fs: exfat: Demote filesystem detection failure
- message to debug()
-Date: Mon, 17 Mar 2025 04:12:48 +0100
-Message-ID: <20250317031418.223019-10-marex@denx.de>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 10/11] configs: sandbox: Enable exfat support
+Date: Mon, 17 Mar 2025 04:12:49 +0100
+Message-ID: <20250317031418.223019-11-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250317031418.223019-1-marex@denx.de>
 References: <20250317031418.223019-1-marex@denx.de>
@@ -84,14 +81,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Demote "exFAT file system is not found" message to debug(). This is
-printed when U-Boot attempts to auto-detect the filesystem via generic
-filesystem API by attempting to mount the device, and fails to do so
-because there is another filesystem in place. The libexfat-fuse code
-prints this an error, which interferes with 'test_gpt' test. Demote
-the message to debug().
+Enable exfat support in sandbox and sandbox64 to assure build and
+test coverage of this filesystem on both 32bit and 64bit builds.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: Baruch Siach <baruch@tkos.co.il>
@@ -105,30 +97,37 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: Add RB from Tom
+V2: No change
 V3: No change
 ---
- fs/exfat/mount.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ configs/sandbox64_defconfig | 1 +
+ configs/sandbox_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/fs/exfat/mount.c b/fs/exfat/mount.c
-index c17a84735fc..0ff297af67b 100644
---- a/fs/exfat/mount.c
-+++ b/fs/exfat/mount.c
-@@ -226,7 +226,12 @@ int exfat_mount(struct exfat* ef, const char* spec, const char* options)
- 	}
- 	if (memcmp(ef->sb->oem_name, "EXFAT   ", 8) != 0)
- 	{
--		exfat_error("exFAT file system is not found");
-+#ifndef __UBOOT__
-+		exfat_error(
-+#else
-+		exfat_debug(
-+#endif
-+		"exFAT file system is not found");
- 		exfat_free(ef);
- 		return -EIO;
- 	}
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 7960b2ef42e..1236ce474a6 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -267,6 +267,7 @@ CONFIG_WDT_SANDBOX=y
+ CONFIG_WDT_ALARM_SANDBOX=y
+ CONFIG_FS_CBFS=y
+ CONFIG_FS_CRAMFS=y
++CONFIG_FS_EXFAT=y
+ CONFIG_CMD_DHRYSTONE=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 0b3c765389c..87f21fdbd12 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -352,6 +352,7 @@ CONFIG_WDT_ALARM_SANDBOX=y
+ CONFIG_WDT_FTWDT010=y
+ CONFIG_FS_CBFS=y
+ CONFIG_FS_CRAMFS=y
++CONFIG_FS_EXFAT=y
+ CONFIG_ADDR_MAP=y
+ CONFIG_PANIC_HANG=y
+ CONFIG_CMD_DHRYSTONE=y
 -- 
 2.47.2
 
