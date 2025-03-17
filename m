@@ -4,116 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0044C28B30
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A935C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 14:16:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FF22810F5;
-	Mon, 17 Mar 2025 15:13:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 60D79810F4;
+	Mon, 17 Mar 2025 15:16:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TAJjUsJ6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bKLefw7i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4233A8129F; Mon, 17 Mar 2025 15:13:42 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 7D7A8810F5; Mon, 17 Mar 2025 15:16:47 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43316810F4
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:13:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 274C080F70
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 15:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43ce71582e9so14340235e9.1
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:13:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-30bfc79ad97so57645511fa.1
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 07:16:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742220820; x=1742825620; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=B4Tvff9QKsklxg6kRH1wC+FR5Xq2/mGqeX27/A7P/R0=;
- b=TAJjUsJ6xgn8Vy+hPz441bTr42GIpdBE4TMfp2Qd5ieyjVzubC+p5O2afInL74yuZV
- v5+HlzgzMgDAZBQE6OCAuLehb4KJLeMFv0jWdz/prpmmNFEEv+VbjuZAa1qotrgm6ftc
- n/nPvNS9lUWC5QnWNBF8O86kRMiur+LZW8TTTOCKBpfJ/lYAepV070HOu6L9/cag8As2
- JIm6r2FAQyekrvXucrjEeKgwQBbl8f41/32PPUD10fb4BRRENNTxvocpRVb/73uM5G+W
- CIB/LIJqzajT4XStTtFRs4YVm+XckJA1XbQpUMzX9fsmzPBCim6bGww1SN8vN1LZp4qu
- +yog==
+ d=gmail.com; s=20230601; t=1742221004; x=1742825804; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BCaJ2oDQgOLRTkThNwhau17UCfuTTmLHNEhqblcsESI=;
+ b=bKLefw7inGYscKWIibc8GtX29dgQJ/nYzKiO6g9xBsd224qIdr/epOFZ7t74ahajM/
+ h8Gb5NYuGyy/pT4UeoRpr74ciu7v/HU1XuhxU2R7ertEw0jFQ6VURb663OCRUv0eaans
+ WX/9UdBFF2tlmaUQ3iIOGeWhPODImCczAnlX7yOBqyGoRBoQChsJ53g3ltFIsKSghhcA
+ WLXiMj6Myo2myUAfJXU3Jg+SQ5FW9p43SszwhdKx2QzAFbwlL2vj9VQK5fp+oHdk/6U6
+ AHQkQK+wIACQfqdircoI4DnehBMhIHmYJsruOZ/uE20ph5ZoROnCAej8eExpSH9eKbAU
+ HpDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742220820; x=1742825620;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=B4Tvff9QKsklxg6kRH1wC+FR5Xq2/mGqeX27/A7P/R0=;
- b=hrB/EhntWaUozLgJZe8p0/0Ogfvx6emdmonPtAb7XdPqHArf5aEwLIwfmDzJgsrRS1
- ioBOZSV7zVIbEahKN03J92w1qvEZl/M1jHTqlipmHLAwvOsdE9UIZcy98HwBGr6AwhUI
- DJzGHdRkETgpQtbNEICp7weU6UEhh6ZSCaHzR4VGFLQC/flyT5erRY5wkDkbboe6J2yT
- S7Sj4N0P76K4wX8zaYxJrBLwwEElmQEQpvRFOleGKxVKjXuSBvoeg0ZuA8GI+Yg2rWtW
- fY3nkbCqENWFbXB9ARwkxKYiM5kPuij5Z15mp3CMKw5MriMlrY3OZkaVfSP8onr0Vm7d
- nTgQ==
-X-Gm-Message-State: AOJu0Yz3NJ3m0OhFT/vdC23HlaSGIy6/L6HvxohWdsCbeRh4DsixGHzT
- YxkuVqqfKaJ8ZWojQoc/1FKiyYdKOhnabWj/yiVmw5fxCKL6wStc9hIRxr7p3KY=
-X-Gm-Gg: ASbGncta/u+gh8ZzTxb6o+MUPCD5lEJJY4gveBaDjI2DGa202opbO/sisxB2Y+e1N9A
- 6AwS9DuatO5Ce7XWzUak4zgfRMACo9iODpapuli0ckU/PDSMWfWfMZ/hRWUCMGiHbh5hGbb57dl
- VDKhD6+jli92Sq1BZw1aaZ4s7k0Am6SBSQKfaoWaAcEwr/TPuQJ5JybDQ2fasL3uoXhuvKw6QAT
- kY90JcexCIlxjeaTxmsROj+Jts1yoLPCT5oAEVWW+qHkLotXJvG9SpE1iXlz2iXo6HwA9srVimm
- aqt4bjJ4pW6pxobjS5j6/NnhvTh7QyQkTlIWdiYl9E5aPikdjL3xk8Vl5aDvWNVxLVu2S9yy8Uq
- bF+fgMOP/kFvo5rFukV1s3Q==
-X-Google-Smtp-Source: AGHT+IHr9T+pmtyH0rJEVhfVBK/byHEftV2PznagbFkCRZyHWSI99dlnmxxBn1CCPVCSC4T2LF8l/w==
-X-Received: by 2002:a05:600c:350a:b0:43c:f70a:2af0 with SMTP id
- 5b1f17b1804b1-43d1ec8643amr137848475e9.16.1742220819677; 
- Mon, 17 Mar 2025 07:13:39 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:1a77:b55f:a550:458c?
- ([2a01:e0a:3d9:2080:1a77:b55f:a550:458c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe15470sm105954715e9.15.2025.03.17.07.13.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 07:13:39 -0700 (PDT)
-Message-ID: <71f37ccb-8831-4e59-bf2c-16840c469db2@linaro.org>
-Date: Mon, 17 Mar 2025 15:13:38 +0100
+ d=1e100.net; s=20230601; t=1742221004; x=1742825804;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BCaJ2oDQgOLRTkThNwhau17UCfuTTmLHNEhqblcsESI=;
+ b=YVyInQkA8eVytRKapR6/YS6JXn2uOPFyPiNw5r7aZMpEGwf5IcpKBivyfxJnoF4r7J
+ highz0QklXhY6K1+UcetIOpMT52W3eg+YHdu+zbptM4tc2N5wwecTrIsWNJ4trgT5xf7
+ nUSCWkWxQuROXkic15moiJlz8aIPA0EZZ5HVpy13aqy+j9T2QvKBnh2m3yqDjwZUAUiC
+ B0tHW5ud7FiIiQxJA4ypizLI9FuE+f85y3XOpfIpZ8GiM13lKoTrH2rnryiahHpdVE/q
+ a+15U0/gq5jimhR8cylIx1B2Ww1gfGokQBzFulmYq4vHXs9J9sgdY3ij5awVzOuCUahJ
+ sU5g==
+X-Gm-Message-State: AOJu0YyDzsx40g5fle1aJVSVWEqsECXHZmJtlnwzGij6ikL8I2boNxR4
+ qRSrZkgtGrJkAIMpBM4rMkxH/3OnL2qOcWpkkTQtsf+NDqzugvx0ASuk2lHkuvRtM4ZuPmz1kTT
+ 9aY99Ju1J2UA4B2jhgZkLCE4vrRs=
+X-Gm-Gg: ASbGncsL/N4IFTyli0ULwNQT1hI27i0gzcYoJJWHfzZsAdqR5UzxTPfSiG/T6SWXMTS
+ BnUJPcKUG134f93RYXz2qv0/xFyaJzOuZlYgz8b+NIItBCvHR6pKE8Sf9o//OgLOewndwp7RtvM
+ osfVTPPnIEPgW32tVexWY+NObAoc0KcKmD2TJncDChpimQkJSAqhiEK2T0kg==
+X-Google-Smtp-Source: AGHT+IFtTmELKpREsrAOVJI7fTS4boIL9nsLtsssrKzmum7sRC+paA2bcGW/aD5WP+V/lSFarAhL39vVD/XHZT28gzQ=
+X-Received: by 2002:ac2:4c47:0:b0:549:7c5f:d961 with SMTP id
+ 2adb3069b0e04-549c3f94061mr6462553e87.17.1742221003986; Mon, 17 Mar 2025
+ 07:16:43 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/3] i2c: geni: load firmware if required
-To: Caleb Connolly <caleb.connolly@linaro.org>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250314-geni-load-fw-v1-0-587f25f2812f@linaro.org>
- <20250314-geni-load-fw-v1-3-587f25f2812f@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250314-geni-load-fw-v1-3-587f25f2812f@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250312003041.110023-1-aford173@gmail.com>
+ <CAOMZO5DRn08Q58PeHqi=1V8ZRv6B1+L_CB0NA=arQ2u6XUyi8Q@mail.gmail.com>
+ <CAHCN7x+grtVs1JDvfth+7VdT1Xm=_GSBsr0PD1XQSPxpRBZcfw@mail.gmail.com>
+ <CAOMZO5B0MgkAoBww0pPVnv4TAyqRmGJSn6hBwivgc2ZtpF+fyQ@mail.gmail.com>
+ <CAHCN7xLi+MHsQaG=vyOcyM5d5ontn=+W1kL0op1HedmkbDt=oQ@mail.gmail.com>
+In-Reply-To: <CAHCN7xLi+MHsQaG=vyOcyM5d5ontn=+W1kL0op1HedmkbDt=oQ@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 17 Mar 2025 11:16:32 -0300
+X-Gm-Features: AQ5f1Jq1JbSset6JXMgI4yA7-xUB9hU5U97B3TEeuDje43yCy7853YQsVgSCbSc
+Message-ID: <CAOMZO5AqJo7NgwxxonBfFDHU=C-5ksk-opRSzSXkWy6pur8kJg@mail.gmail.com>
+Subject: Re: [PATCH 00/10] clk: imx: Use Clock frameworkt to register UART
+ clocks
+To: Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,53 +101,32 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14/03/2025 17:09, Caleb Connolly wrote:
-> Load firmware for the peripheral if necessary.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/i2c/geni_i2c.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
-> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-> index 4eb41ba852f7790ca646c8ba38f29fdb727fa804..fca0fab7201a2f86ff4a8c12d053297e660c4621 100644
-> --- a/drivers/i2c/geni_i2c.c
-> +++ b/drivers/i2c/geni_i2c.c
-> @@ -21,8 +21,9 @@
->   #include <clk.h>
->   #include <reset.h>
->   #include <time.h>
->   #include <soc/qcom/geni-se.h>
-> +#include <soc/qcom/qup-fw-load.h>
->   
->   #define SE_I2C_TX_TRANS_LEN		0x26c
->   #define SE_I2C_RX_TRANS_LEN		0x270
->   #define SE_I2C_SCL_COUNTERS		0x278
-> @@ -498,8 +499,15 @@ static int geni_i2c_probe(struct udevice *dev)
->   	proto = readl(geni->base + GENI_FW_REVISION_RO);
->   	proto &= FW_REV_PROTOCOL_MSK;
->   	proto >>= FW_REV_PROTOCOL_SHFT;
->   
-> +	if (proto == 0xff) {
+On Sun, Mar 16, 2025 at 7:18=E2=80=AFPM Adam Ford <aford173@gmail.com> wrot=
+e:
 
--------------------- GENI_SE_INVALID_PROTO
+> The doc you referred me to states:  Currently, we support running
+> GitLab CI pipelines only for custodians, due to the resources the
+> project has available
 
-> +		qcom_geni_load_firmware(geni->base, dev);
-> +		proto = readl(geni->base + GENI_FW_REVISION_RO);
-> +		proto &= FW_REV_PROTOCOL_MSK;
-> +		proto >>= FW_REV_PROTOCOL_SHFT;
-> +	}
-> +
->   	if (proto != GENI_SE_I2C) {
->   		dev_err(dev, "Invalid proto %d\n", proto);
->   		geni_i2c_disable_clocks(dev, geni);
->   		return -ENXIO;
-> 
+Correct, so you should use the Github method.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> I tried pushing my branch to Github, but I don't have permission.  I
+> tried pushing it to my own github account, but it doesn't appear the
+> CI/CD stuff work.  I looked at the log provided from the pipeline, and
+
+You should clone U-Boot into your local Github repo. Push your series
+into your repo and then create a pull request at:
+https://github.com/u-boot/u-boot/pulls
+
+Not sure about the problem you got.
+
+> I have been able to successfully build for that machine along with a
+> couple others that I have manually tested.  Are you OK if I submit, or
+> is there something you want me to try before I do it?  I have a second
+
+Feel free to post your updated series and I'll get it to run through CI.
