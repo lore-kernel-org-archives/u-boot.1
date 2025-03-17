@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AFA2C282EC
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 09:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A0B6C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 10:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A624B80107;
-	Mon, 17 Mar 2025 10:49:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BF56380107;
+	Mon, 17 Mar 2025 11:04:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="b2WP+W91";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Wsk7SplQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1EF18058A; Mon, 17 Mar 2025 10:49:09 +0100 (CET)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2406::604])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8255E8058A; Mon, 17 Mar 2025 11:04:31 +0100 (CET)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::628])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68A91800C2
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 10:49:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABC8F800C2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 11:04:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Mn3F/Gi+v1449wEjaadvibQfpkDzz7kYNIyKgXXL+qGm/5kWm6VQXsMF61CyVvqseuO2yggCrqT0nUg/slWO5ZwapfwGxyPKbEQpbWRV0tETInht7rCI/Yj6NOr9Si3gyFn5zuvL5Ycs4spI8bIJRJcCpjM3gPMLwdCGws0jdqEVkzDFZn2j9s/HUIBOUoE4CE7CzkJNgS/4ob2gH/FT5aexIJjk4FlY3GdL6s8ENY+tVf2eE/oyoonmfuYmWZS7hFuZk8PH7jKGSNYfa7JhGASSb1Ax18KM8u12avg0Ap6Z6dSSYmw0GWg8oI+b9nqeuOYkcpbABXjW58K8586LDw==
+ b=WaLp2yAklDWgPLWBQmf0QWH7HAvAPBC0vTNWoGvwhcpC9QcrlewVp+ON5GvlxPUq56Z4hNZD/VRb7J1lesczIxJ2dyOBCirdj7zTLWG4eYl3G7wpH5MeF0zsdMIhgHCzSe8GEV172dUgWpiyLBm2WIeP2h+X6haOZO590hrNcmICYDvThpIFZbCqDvVHpguAOq5bMheBtx0F2MzyDevveLW0RRig4H8lBYUZzpLuq21i+HtILzmxWOE9w/DZowytGtOWynQa7i9GvnMXh7cVmtu3Sih7T5LsGdIfOR2sJOfFMphg/QKrFfndkJ4/WXYjf6kGkTSIL1mELfn95JveKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rzGk/dRt+fQexnlLo5vdVgaIG+e2UqW5/xJSog/iSkc=;
- b=GCSrLxdxo+MH1iksuA+iWSfaTkQ7tBifOoRHh5QnzsmhD52cHP34MBAbF6c8uPbNT7pz0BLt9w3U8QE/qS9d1ccZtAZzb3eoeIVQ6rKrC10jFeZKP87NYNUt5++MRQASd71HzXiHR5WUno4t+8xGBAlhVIu137dOtMdb2+KggcXPZ3q+dPOwdckUIM4UkPPqH7U/yykO5kMLpIXEtEEvVId/2zoFQRP+dVv8FmH9qEjCPu/tmaaMgTwcX35K3wYfRYy/jEKwnYCP5M/i411lCBsaPmG3u1W4hA1TugQazNOS2+LQiI9zE32GHhyfevDKDTOG4fW2mDDuSd0/LxoTDQ==
+ bh=URERxYPcdCxKUlIzOmdqsVaWCXL7gIR9sPUFuLA3Jvo=;
+ b=Rg/SQm8InSbHnIS7wJqcr4Qt4lxzac1Fci/Mg3F30eJz3Ej3JP3U736vw1nhTbJbcKLvFY+eBq5VmEuhhnSxlXvnu31anJBobT46sHu5CDp8RbZOVdvFhhOkYjI39i1r0Npf6sGQeR+dwymgHmHd9v/gGg3HUvpP6OuWT6DBvT1/l9BytwXz9Arcvx6gomsQ/0nldHDEmGoX7hS+1UFvR98LtIMPTgRKW9oYBSBZzrDzzPeQQDgpkmQBMItlULgd9FI8Jmp4+13MlaA9RyTcjGvTfQC2z1N38QQL+p1rb1vlc3h0lTeD3xni4drMhF1rkxS2hUBBTgJ5JiF3apDRTg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rzGk/dRt+fQexnlLo5vdVgaIG+e2UqW5/xJSog/iSkc=;
- b=b2WP+W91GEOwvnGVGc8Hr9mPhYOU4iud1qYRA+WxkjdmwV9nyT46bp6C2Oi9J56Z9MYvjjzAPCNLmU9W0fpOyHxVQ0CCC1ii22xwx/qvSzP2yS8CZOCd0JCAaefiiouQhlDsjtcG8K0eylF8hlOvIkFSuxfmPtJ5mDh8VHNcsbg=
+ bh=URERxYPcdCxKUlIzOmdqsVaWCXL7gIR9sPUFuLA3Jvo=;
+ b=Wsk7SplQReyi9YiE6CY2eZQjRvBPIWsg4FKdTO4RYnSvT2uX6mA+mSvqNUAppILYB2e2x9ajjMIhAlia39MgeQwaFLsCwofhlF9Xv470ZaVb98oEIKIWf75N5LHvuqrDesdKoe1EtcEZobxWQ8UnZAEG9I5P5Oryel64519Nd78=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SN7PR12MB8101.namprd12.prod.outlook.com (2603:10b6:806:321::7)
- by DM4PR12MB6088.namprd12.prod.outlook.com (2603:10b6:8:af::18) with
- Microsoft SMTP Server (version=TLS1_2,
+ by BN5PR12MB9511.namprd12.prod.outlook.com (2603:10b6:408:2a9::14)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Mon, 17 Mar
- 2025 09:49:04 +0000
+ 2025 10:04:25 +0000
 Received: from SN7PR12MB8101.namprd12.prod.outlook.com
  ([fe80::fdb:e120:f99c:c899]) by SN7PR12MB8101.namprd12.prod.outlook.com
  ([fe80::fdb:e120:f99c:c899%4]) with mapi id 15.20.8534.031; Mon, 17 Mar 2025
- 09:49:04 +0000
-Message-ID: <1704f391-e76c-49b9-83d9-e1a738da971c@amd.com>
-Date: Mon, 17 Mar 2025 10:48:57 +0100
+ 10:04:25 +0000
+Message-ID: <5829a440-c1e6-4c4d-994c-a96adcc7bc57@amd.com>
+Date: Mon, 17 Mar 2025 11:04:04 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: version: Get information about GCC and LD back
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com
-References: <59827eccb8a90957e3d4f09059e43cc7fe6c92dc.1741255948.git.michal.simek@amd.com>
- <20250306140250.GX2640854@bill-the-cat>
- <41f1ec1b-2c36-4ab1-9e99-77459deff366@amd.com>
- <fb24a61e-0fb5-4430-b5e1-1c2b25ca8159@amd.com>
- <20250310135605.GX2640854@bill-the-cat>
+Subject: Re: [PATCH 1/1] drivers: fpga: Add partial reconfiguration console
+ commands
+To: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
+References: <20250314114758.29078-1-nareshkumar.ravulapalli@altera.com>
+ <20250314114758.29078-2-nareshkumar.ravulapalli@altera.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -109,99 +110,100 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20250310135605.GX2640854@bill-the-cat>
+In-Reply-To: <20250314114758.29078-2-nareshkumar.ravulapalli@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0109.eurprd09.prod.outlook.com
- (2603:10a6:803:78::32) To SN7PR12MB8101.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1P195CA0034.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:5a::23) To SN7PR12MB8101.namprd12.prod.outlook.com
  (2603:10b6:806:321::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8101:EE_|DM4PR12MB6088:EE_
-X-MS-Office365-Filtering-Correlation-Id: 81da353c-1601-44d0-7311-08dd6538f420
+X-MS-TrafficTypeDiagnostic: SN7PR12MB8101:EE_|BN5PR12MB9511:EE_
+X-MS-Office365-Filtering-Correlation-Id: 25b96817-22eb-49f7-55fe-08dd653b18bc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eFpEK1llUFNVKzU2L0VaN3cxc0RuMTg5enZwdUEzb2ZIejVoSW5UZTBPK2xq?=
- =?utf-8?B?bVV3aDE0NU9jU0J3UjlHSkVxZWRmUSs4Wkp2bklNcWpEaWdDbnExeEdkdnda?=
- =?utf-8?B?QUhOUVl2TTV3QXJaR2swa3RBM09NbWxyN0RWZlI5NUd2c3lva3cwWFZpVUpM?=
- =?utf-8?B?M1A4OW84dVRERnhSSFk1Tlg5RFlQOWJFeGtzUHQ3VkV1ZndYSDVkdXl4QTk4?=
- =?utf-8?B?Ni9sd3c2Z2pUZEpKYUMzK0JXa2RFRzU2ODBLSnY4eVlRNWZFODczRHR6SXd6?=
- =?utf-8?B?VGc3Njh6R01SeXZGNGZtaWpGaFB5anY5Wmx0UGFpMDIraFRTcG1pNHh2ZU9s?=
- =?utf-8?B?Skl2eUtiSS9FMEVwQWhLSU04ZGJaYzVOdzl6ZmZXR0dxVzN4bGZoZ2d2aXcy?=
- =?utf-8?B?L002TndVcGh6cnJrY1Bqc1RNZDRsWjlJQld3QkdmT1RHV29kV2NLekhKRGNh?=
- =?utf-8?B?emh1akNPMDR2QXFNbUxwV1liZEhNSmhzN3lIc21HWW92TlVJQUdiMGZZVGhu?=
- =?utf-8?B?Z1VFRnNlRk95U21sOVVtVU13OTY3RDQvV2lNeis4UVZKOGRjQnZXaHhIanJu?=
- =?utf-8?B?L2V2WDg0b0NtdXMwVCsvM1FrVk9YWTBDWnQwZTErVExHRlNSTFNHbW95b3Fn?=
- =?utf-8?B?NlhvNzBFWENKU2hkTnRhVDVkSFJFRHh2dERaSkhjTXNzMkg0WGRteWhKMjBi?=
- =?utf-8?B?cjZ6VW5QeWcrRnYybDh2NkZid2dhb3N6Zld4eWdBdXdCY285Y3NSVU1sdXhz?=
- =?utf-8?B?eTd3Qzk1QlEwUjZ3L2w0N1pIZlBBKzJ2aFQvNGpuSDh0NEgwaStKYThncS8z?=
- =?utf-8?B?aVVJVllZS2NuOE5UaHVkK3pwMkxmeW94Q2FqL2xIQWE2SUtPckRYUFVrZ21z?=
- =?utf-8?B?TUJVMW1uQXBDQ1Izd0RwRy9sVWFDUGs4WjJtSFdPcmN2dk5lRWVQamVvOFRr?=
- =?utf-8?B?KzB0N1J1ZG5QUDNqUittcjQ5ZjBVMmplRWNYd01Gbk05VGtXdm94MUdwYUJq?=
- =?utf-8?B?a2lKV2ZtMFM1NkdqRGlnMm5vUDhNYXJ2a1IxY3NBa1VXQnRWeHRqaXd1ZndE?=
- =?utf-8?B?ek1LaUpiTlRtVDI3MytWS1Q1djc0RmpTdGRSa3lCMUFTRnYxRUd3UmlxRFVD?=
- =?utf-8?B?dnNPUFhjYWlUQlI4UmQ0MTZBVjlNUGVidCszWjFocnZaTTlzSHQzeUhYb1ps?=
- =?utf-8?B?VUxteW9DZGZ1bitpeUlPMlZBUUdvUlIxemd1bmw2VVljTVRjTHpOOWpNeTdW?=
- =?utf-8?B?N3dDbXNuYm5XaHpNREM0VTlSOXJ2MWZOelJOZWJxbjczU2JrdzdPVy9Ub1dM?=
- =?utf-8?B?d0NXdXdseUJDUjlaTGdudTZsV2tFMFZRRXNIU3BCblVidmhOcndYSG5wRkxr?=
- =?utf-8?B?djhTVXRHRmlWUVdOU29xU1J3ZGhhc2diYy9FdXFCZldGR1FwU0poSHU2cUpi?=
- =?utf-8?B?MWJUamc5MGY3NVQrdWVydklBV2NrNlpZSStuR0FqcVdsWEZkWnd3WU9zQStv?=
- =?utf-8?B?R3pUaVVGOXlYSkt5MzVXajJpblU5VGszR2cyaW83NHlMMTR6UVFrcXdrbzVs?=
- =?utf-8?B?QWdVTW4vc2lHOEhKZHZVOW5oMDh2YmVNUStXUlhxSnRlSzAya2lGaHJ4c1hP?=
- =?utf-8?B?NWRETFBsRzFaRDc4M1dPYWtTZGVtMGxuM2xVczdOb2dhN25tOUh4bjRvcDRv?=
- =?utf-8?B?NWlLdGQrcE8vYm5zWUFPM1ZWcDBqTjNjU2ZQcmpDMEQ4WjFPRXdlb2pmcUN4?=
- =?utf-8?Q?F5LuYmiPA3h70LaNbRplJTex6RxS7MByyf/iHQy?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?U3BXbStHVFJQQnpta0pjbWxWV1dBRVF1SytIZm02amsrSnEzRXhUM1hpemlp?=
+ =?utf-8?B?YW00ZE9EMXFCbVZGa041ZDhJdzJLekF2OUFaYThvQW41WEdrTkxpT0JKNCtj?=
+ =?utf-8?B?S2Q1Wmgyd0Q5RC9FYTZ6djFBV3pwMjhtTFpjemFuTVh0dGZ1T2VWcjU4NGYr?=
+ =?utf-8?B?VHZtSm1YYVBna051cFYwakRBVjVXWlQxKzZtdFZja2E0OHBRRjhHMWp0alFr?=
+ =?utf-8?B?YUlVM2swbVlxSDdyaG1RZFF0QjlYWm5nOFkwQXdVR1lLZ00yc3pXM1lKdThm?=
+ =?utf-8?B?ckhESm1VaVBaSTk5QktVUmVjblZ6OSt0Mm92YXpQTC9mMGdIeHN5ZkFYdXp6?=
+ =?utf-8?B?SXdtMjVYWnRyRzdEVVFEaEd3OHhDSDc0SFRWWElnVmdqdlhwemsvSUdSdUFL?=
+ =?utf-8?B?akRldmxBdWdnRGhjVWpwb0JvSnNobmVMOVNDSmhGN0FyUzJEbWJsN3ExUzBC?=
+ =?utf-8?B?amVQYTZhS1NDSUdPUFFlVXVGNkVFbjNUaERSMi84TnYyTE9UaEVXMUhnOFFF?=
+ =?utf-8?B?VFRwZnlPU2VYc1BXN09sOXBRN2tEOWk5VnBpUWNJNHk5WXQzT3cvZGcxbCt0?=
+ =?utf-8?B?RCtvSUs5eHl2L0RqRTJXWVpxT2htWmhLTU10d21sYlhNWHZyVU05OGdZNTV6?=
+ =?utf-8?B?N2MzR2ovV0c4RStFa2VSZkowM0lldzI0SGk5RXZ4RHJMeUZBRHRFMzRMaHJU?=
+ =?utf-8?B?UUI0WXVHSWIvNEc0ZFNPTDBUTFl6bm9KMHo1OTFFRWN5bVZHb1dHTUtFREFN?=
+ =?utf-8?B?VGgybkFwMk9mQ1U4dGZKNkhOTzg0eEs0U1grd00ydHhQbytyNE9NeVkyWHZ0?=
+ =?utf-8?B?aVZjZEUyV0JEQm84TU1lK28vMGxpcWd4L0NkT2xTRG9VcVRYb3N1dGJoaEN6?=
+ =?utf-8?B?dmJQVitkV0dkVkdwRXNMUHIrMEtYamNHdnlUc0p1dGJnNW9MSnNkR2IrT1I2?=
+ =?utf-8?B?N3FtUnlyeGM2cWhLaU9NTGpLZnQyQ1ZwVG5YVTdCc1V0eVBhdTdoSjFyVStz?=
+ =?utf-8?B?NjB2MlZYMDVzZkRSbTUxZnZwVmt2MU1aT3o2K2hyV09LM1FnMkhtUW5uTEhG?=
+ =?utf-8?B?b241cTRudjBoRzZuQUtUSW4yWXhRUTZidWZZZ0FKLzJtVjAyaVdkUVVJT1hk?=
+ =?utf-8?B?dEpveG1YbExULzNNV1p6MEdqd3MxQkI0VVhQR2FwUkFqOFFJT1RBdDZYVmdk?=
+ =?utf-8?B?dm5ZZUI1NU5CMnZPMWRZV043VlZ2MXU0R2I0WTY0ZFc2a2VXV0sxRmRWNTdU?=
+ =?utf-8?B?dUIzaWZUVE1neklPdDRWZWVDdTRiN0lKeTdEVG02SWlhQzZXZzcrT3JUK0Uw?=
+ =?utf-8?B?TGJXcU9iUG1tQTU2SEN0dzA4NlZUckRIejBHR0R0RWkvRW9OdlByN3VpWTI1?=
+ =?utf-8?B?T2o3VFBCUUJTd1ltUGNsUnJuM3hZZENLK1NSRmJuekp4UW5WdkpUczR0aHF5?=
+ =?utf-8?B?TWVxRGQ0VU5iVmFQWUROV2FPdWprTlZJVGRBbSt3U3k2MGtEekJseXhBV21k?=
+ =?utf-8?B?OFRKSkpVY0gvbDY5anNNemlJNVJuMmdGK2c2VVE0RVo2UHZPZGFUNW15dGVX?=
+ =?utf-8?B?RVpEc0hZUHlFZXVNbGpOZ1BvUFdJYVVyWFpxczJOWFM1TkVTREJiQ2J3NTlj?=
+ =?utf-8?B?ZXdYeHVQNXhBa0hRNXk2QW1rL1pTVlZOQnZCYUJMbHFJWUFnMlc3SVU2Y3U2?=
+ =?utf-8?B?a1ZMc2FDWEVIMHduYmVqZVRrKzgrSXprZzNlU0plTnJjZks2eHNhbjZMak5R?=
+ =?utf-8?B?elNPZFlJdmovTFZveDgzdmNpa1hEOU1mTFQxeTgwTUFPdS9oMDZ3aTE2TE5J?=
+ =?utf-8?B?Q0pVMkRsVm9pL05JNVNSUT09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN7PR12MB8101.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Nk56QW54ZHhITEZ6KzZaWVRKRXQyTlZDdWZhQUdrK3M3eVI0bnhyelR5TVZN?=
- =?utf-8?B?QllzQ2Zja2dERGpDRFozUHB0TEYvdHJQYzhUazJwYmZxa08rbHFMRHFPTnlP?=
- =?utf-8?B?bjRRSWFsaE5OR0x3SmhjTFdEbHpuL2VsV3VjY2hKMTduY1BxTEN2MHZDOTcx?=
- =?utf-8?B?TlEraG1XQzBMdkRlWUFpTkk4WmNxTDhMTFVEVEh5U0t3OGYvZi82OVhESnpF?=
- =?utf-8?B?VjFXMlR4aDFVMi9rVFg2bWpQdVorUmd3aW54YWdBYmlpMEI0R0E2SmlQbDRr?=
- =?utf-8?B?ZElzaUJuN0ViaUN2RXZIRnQ1a2RIOHNmcXRBOFFPbUJhVDd0OFIvN05wczZi?=
- =?utf-8?B?aTN0dVFvcm1tejB6NHF0RUg3S1lzZ2J4TTM4Y2RhVEVacU9WNmxFQTZveDV5?=
- =?utf-8?B?S2lUL2JpeUhWWmF2bnZ2QUpGTUcwREZtZmFJQjVwemJQaDdPdytOSndiSjFP?=
- =?utf-8?B?d3BTV1BVKzZMU2pFVkJyVzh0Y1cvTUxGRzkvcnAxNndsR1RZTDhodWxNalE3?=
- =?utf-8?B?S01jRERJUkE4RlU4cGh1WFdESGIrTUpmMlR0alhGUGMrV1VUTDRqYUNmUjBq?=
- =?utf-8?B?UlJ1aExWWWRFckNHM3VXbDB3Q05QYUFDNEgyUnpNYUthcWFzd2hBNWM3ZHVq?=
- =?utf-8?B?RUJXSk00dk5DV3ozS0RmcVI1T0lReEJOckZxeVFpemF5SmJranBzZEF1YlFJ?=
- =?utf-8?B?eDVmRStCbVJnM1ovZDhUb2J6T0Z6OWFLOW8zd1U0ZjdpUEZvR3BaMmlyRXlD?=
- =?utf-8?B?a0Zia0x5WmxXR2FFeTBTVTREek1ZWC95T0lWcTVqcjNwemVhRHJJRHBVVDAv?=
- =?utf-8?B?M2ZWOFcxRGlXaG5WNVE4SURtdFlhaEZqamZEdE95SWQxcTBrcG9maVpXVE0w?=
- =?utf-8?B?cy9vMWd0L2JIeFFTdDczbzdncUlLWEN2Qm1YV1pubFBMMXBvd1pJMGNpYmlm?=
- =?utf-8?B?K1pUc0JWa090OW5icXhOVnpjdTY0ZHphZ2lqbnJRVkRzM3B5MjJyc1dyUHNQ?=
- =?utf-8?B?S29qeURRaDBaL0RwZ0tyb0hKREVHSC9YY2ZGV1pWQkdxNjY0dHAxRWJLN1JY?=
- =?utf-8?B?NWxRaU9kM0lSN1pMNG1QcWxZODJrTzJSQ3N0NTZHSEJkYW5NSFQwYVJHM3Y1?=
- =?utf-8?B?TjdHWjVtNFRLWWVGQkdmUmdrZDB6OEdpVDFDeVVZY0NmNWdMMlZuR3BaOWdU?=
- =?utf-8?B?eEVNbm1CQ3hhV2hjNXJlSnJhdXE5K2Erc0N4NTZDWmdPVjRVU1NlNjkwRm5u?=
- =?utf-8?B?M1NKenRlSHdXQ2UrV3lOR3NRaUNSdzRLMStza3EyY2QzdkJnM1pnMFFsYzNW?=
- =?utf-8?B?alRNcExtc0hsSHUxK0RraUwwMC85SDJLbnF2cmRvNjVybHk0eVZCcVBWWTlO?=
- =?utf-8?B?WC9CMUZKSlhqeFNCQVFlMzZBMVFFQmd1bm1ma0RzOFk1ZXlER2VRVkJHN3RW?=
- =?utf-8?B?cE5BUHBnbE9XcWIxVGZreE5Rb2cvQkVuZGVtM1BYamVMdE14MU9pZkxHTXMv?=
- =?utf-8?B?eW83OTV4WkJ5OENlVlN4dXp2RDBuSWwwNkFPR0tKTGp0dGRCQlpDU3dHN2I2?=
- =?utf-8?B?d0lvRnZXZEo2S2tZaWpEZ3BmY1N1QWpram9kUmVqOWhGbE1MRGQrUVYxYXpM?=
- =?utf-8?B?OGZBdEw2S2xkOHAvUWgzWEVHZThjdHNuL0lhY3MzcTFtclpqNzNMbnBwNnp5?=
- =?utf-8?B?S2JFSStzdjRrb3ArZ2NLeENhLzJ1eGZudUJoSE1RdVlZV3JxN3kyNG9vaHcw?=
- =?utf-8?B?cEdiR0ExcGhUdlMzeE1TT2g5dHVMSVVmMkZ2dUZGSEgzald6SEVOUUZZeENB?=
- =?utf-8?B?d2JVNm1RYXRFWlJKS1ZuSUxvZDYyTEZyTFpKbWtlU2FENkdLQ2RaT3crTGZt?=
- =?utf-8?B?T1pXMTRDNUNpVlQxZkxjNkp1VjZkamVxVDdJZkdwUFdocXpVeTZDdmNwL2FW?=
- =?utf-8?B?ZlU0WVBwT29JbXZOOXZFNEk4NEpXcnBBR0pwVDFyMUdsUVpqT1JvRlNpUUwz?=
- =?utf-8?B?dENtblZtZkdiMnJxS215emE0dFlYS0JqQWFJZElrb1hJVitjSm9NYzZubEVU?=
- =?utf-8?B?bzFwMkFwdTFOZ1R4WXVCWHlJYVBhb0MyUnpNYzkweU1PdXNMcWoyeU12aVF4?=
- =?utf-8?Q?6kIZTPs0tm4FN7CoCaWFlWSHf?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UlA4dHBQRXVjem1xa2lTTnNQUmYwWnpOdU14MlRYNFJOREhPYm1ia0RwNHV3?=
+ =?utf-8?B?cTdKZHJKV0ovSVlxMzdmYUFEQllJaStqVTBxblBFalBIMU9ZNlVkY25XUm1T?=
+ =?utf-8?B?TUR3eDZpU1plWjdiUUxLcDJQNE5sd2RlMDVBbm8rMnVlZi8vQkZhRldrMUp4?=
+ =?utf-8?B?UGxKM2YxclE2UVh4MXNXMjU5SmU3WmY5N1NpNnpvSUNjUFZYWERXVVBteWwz?=
+ =?utf-8?B?eEl1cFNJSDF4eWdRcjBYV2FKcGI3UVYxZ2RQWUtxSE9YWkRFVnlEN3VnRGxo?=
+ =?utf-8?B?cE83dUFmeCtOa3ozSG50djFneDdPZnlNSEU5N3ZtN043TTFPSnRNMVdkZVly?=
+ =?utf-8?B?bGt0dnQvRnFiSnFPQ0JwcWRGRnFWekRsR045SEFENmF0ckZoMkJiTEhrUjc2?=
+ =?utf-8?B?MWFlRFg3a2lFUGZQeW1mNmxoMGFEcm42akRMRXpZZiszQlNVNjc0THVRYlpU?=
+ =?utf-8?B?RXBaUSthM2tYNU5FNEtZN1NuZytrRWczZkxRWERRdGtlaUZVenlEYWx2ZHF2?=
+ =?utf-8?B?UDdOemU5SVBTNnY1Q0J6NGhZcmttdlZhQ3BkcHVGaUh5N2RIOGJQd0dpV0xW?=
+ =?utf-8?B?RTQxYjhtR1hZMmI3QlBwV0F1NVpKVWZybGFKSSttaHVKQk5rLzMwOWt1Yk9k?=
+ =?utf-8?B?TjJMdHVJLzMyV3gzWkN2UVNPMXlLMDFkTnVnVmc1VHptaEZIUldlWHNVbWxL?=
+ =?utf-8?B?L095MlYyaXN0UnVWdEpvSFJxOGg3bmR3SFlaOE9LcmZSYm1TVll4Q1h5Y3B2?=
+ =?utf-8?B?WEpYVHFFd3dyOStXdTJVTFVkRXNVY01pZzZXQXJ3UTF1bUhhaEt6NlRWSW1M?=
+ =?utf-8?B?NnBXclk2YnBoTHBmQkdxMU1ZUE15V1ZQT3pQS2tCay8xbG9sakl5MXVmQzBt?=
+ =?utf-8?B?Tmk5QzBUYjBYU2ZwU2FoMno2T3l2K3BzY3VDWG9QNTFHTUFNc0FQai9GTDBD?=
+ =?utf-8?B?VDgweEZoT0NuSjdVNnBZbU5IVHZra3c1aWFsZHFiclNBOFlCdnBTQVV4SVN1?=
+ =?utf-8?B?anpLR3diQXFCbjd3WHlUdUtldkZIbm5NRzF4T1N2OVg4MEltcE9rR1N0MCtE?=
+ =?utf-8?B?YmwyRUczZEZVUDFxNW11M2VkREJhUnU3QWNvcTBKckQrTkl1dE1OV2krTnht?=
+ =?utf-8?B?OHpHM2NubnBMNVNKS25sN0hpTTBSbkdHVTNIK0RxMm1SRjNYMWMzZHozRW9y?=
+ =?utf-8?B?bDZwU0tjZDdGZlA2V3JIbFltOVBEZisyTnRCR3hiSmMyY2QzZ2h5eUx4Z3Rr?=
+ =?utf-8?B?TFlVWC9qNFJOZXhVbXByaXQwOGpLWndxYlk4bmtIRm50TUdLVFBFMnJYNlFo?=
+ =?utf-8?B?OUNUeDVWZnB6UjZqWEZvNG1lTlZLVG5RbWhFQTlhL2ZIWVNNaXlpQUx4UGZB?=
+ =?utf-8?B?ZFBscGtEbStDNjhVdkVnUlR3aTZUMjU5OWhrRDN6OXJRbkZrYllUVDFud2di?=
+ =?utf-8?B?SXROaUtOS0FCdG92VEdSdWREOTlYeENyejl2RmFObGtDWnpqc2s0OU9Zd0tB?=
+ =?utf-8?B?MkdJYUFRaUE0azBPNEtrelduL1MvbE4zd1lwWlp0MW9iaDBmd3lXajdBTGRX?=
+ =?utf-8?B?MFFmRDFxdnltYzFpNVl2bEgwSk5GUUZaM3dBSldQYkRvQmdldHF3ZGwrS0hS?=
+ =?utf-8?B?YmI3OC9aSGNPTy9wc1FkdmI5TzRUUytRalN3L3g5enIwNWh0ajZFNzl0MmNp?=
+ =?utf-8?B?dEFmbVAxU1lDa0swRGpUNHljN2dzNEQzbGlKYkFRWjlKWGVTVFFSdllBbFc5?=
+ =?utf-8?B?Z1NOR3BDc0dwZmxRaHpNVUNSMnJJRlBxaE54cDhrUFM0RUxOV3pjamJkYUwx?=
+ =?utf-8?B?R2dQSWZCa3RJTnEzUnlHOWp4MmRvUXpoSTBFYU9uVzlJejJXOS9TY0QrRWtp?=
+ =?utf-8?B?aUQxMFczbjgrakVTczh4aFlKSFZhSVlQS3VoYW5GaHhjOXZqKy9lbTQyVERz?=
+ =?utf-8?B?ckxWMFVNSTE4QmpEbVF4S0o5dG4rdmg3YUlmV2dxL0RSaGROR214T2ZIeC92?=
+ =?utf-8?B?SVBDMFM2QWFNZmJ1NkhRanF0anJXU3lpSTVha2hGYUwzL1JqOE1VcEgraEky?=
+ =?utf-8?B?TEdhLzI5ZTRMeUwzRzZ6R0xoV1RXWHBCVDdiMHlZaGNRenZJUE9wekE1ZmJx?=
+ =?utf-8?Q?ucH1hRh7JyejbWGfZnrcjUMZm?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81da353c-1601-44d0-7311-08dd6538f420
+X-MS-Exchange-CrossTenant-Network-Message-Id: 25b96817-22eb-49f7-55fe-08dd653b18bc
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8101.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2025 09:49:04.6866 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2025 10:04:25.5306 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /aaPPs2wa77JdesaKtap3S807w6vFMY3XHjhGg0R1UTiazSqKWOp6scx85vbNU0r
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6088
+X-MS-Exchange-CrossTenant-UserPrincipalName: eK8TR+bDZnPyvh2e4FuB0QQFbsBQyJy8qaK4h9JHMvVR5i9a1NFsMN55FZzn6DSp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9511
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -218,45 +220,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On 3/10/25 14:56, Tom Rini wrote:
-> On Mon, Mar 10, 2025 at 08:49:32AM +0100, Michal Simek wrote:
->>
->>
->> On 3/6/25 15:12, Michal Simek wrote:
->>>
->>>
->>> On 3/6/25 15:02, Tom Rini wrote:
->>>> On Thu, Mar 06, 2025 at 11:12:30AM +0100, Michal Simek wrote:
->>>>> U-Boot version command is no longer showing information about GCC and LD.
->>>>> The reason is that version.h has been removed that's why CC_VERSION_STRING
->>>>> and LD_VERSION_STRING are not pass.
->>>>> Values are generated to generated/version_autogenerated.h which is sourced
->>>>> in version.h.
->>>>>
->>>>> Fixes: 54ecce2cbf90 ("version: Separate our version string from
->>>>> the version command")
->>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>>>> ---
->>>>>
->>>>> Tom: Not sure if this has been done on purpose or not but this issue has
->>>>> been reported by our regression team.
->>>>
->>>> It wasn't on purpose, no. Did you put this through CI / confirm
->>>> sandbox_nocmdline still builds?
->>>
->>> Nope I did not.
->>
->> CI is not reporting any issue.
->>
->> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipelines/25029
 
-Are you going to take this to 2025.04?
-Or to next?
+On 3/14/25 12:47, Naresh Kumar Ravulapalli wrote:
+> Partial Reconfiguration (pr) command is added to U-Boot console. The
+> pr command will use the Freeze Controller which can freeze and
+> unfreeze the specified partial reconfiguration region. The pr command
+> supports multiple regions for partial reconfiguration by specifying
+> the region ID.
+> 
+> Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>
+> ---
+>   drivers/fpga/Kconfig    |   9 ++
+>   drivers/fpga/Makefile   |   1 +
+>   drivers/fpga/intel_pr.c | 191 ++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 201 insertions(+)
+>   create mode 100644 drivers/fpga/intel_pr.c
+> 
+> diff --git a/drivers/fpga/Kconfig b/drivers/fpga/Kconfig
+> index 62cb77b098..bf34d11a9d 100644
+> --- a/drivers/fpga/Kconfig
+> +++ b/drivers/fpga/Kconfig
+> @@ -66,6 +66,15 @@ config FPGA_LATTICE
+>   	  This is used for the lattice FPGAs. Please check the source code as
+>   	  there is no documentation for this at present.
+>   
+> +config FPGA_INTEL_PR
+> +	bool "Enable Intel FPGA Partial Reconfiguration driver"
+> +	depends on FPGA_ALTERA
+> +	help
+> +	  Say Y here to enable the Intel FPGA Partial Reconfiguration driver
+> +
+> +	  This provides basic functionality for partial reconfiguration which
+> +	  include the freeze controller support.
+> +
+>   config FPGA_XILINX
+>   	bool "Enable Xilinx FPGA drivers"
+>   	select FPGA
+> diff --git a/drivers/fpga/Makefile b/drivers/fpga/Makefile
+> index 610c168fc3..70a8f88836 100644
+> --- a/drivers/fpga/Makefile
+> +++ b/drivers/fpga/Makefile
+> @@ -25,4 +25,5 @@ obj-$(CONFIG_FPGA_STRATIX_V) += stratixv.o
+>   obj-$(CONFIG_FPGA_SOCFPGA) += socfpga.o
+>   obj-$(CONFIG_TARGET_SOCFPGA_GEN5) += socfpga_gen5.o
+>   obj-$(CONFIG_TARGET_SOCFPGA_ARRIA10) += socfpga_arria10.o
+> +obj-$(CONFIG_FPGA_INTEL_PR) += intel_pr.o
+>   endif
+> diff --git a/drivers/fpga/intel_pr.c b/drivers/fpga/intel_pr.c
+> new file mode 100644
+> index 0000000000..ecca2c9eeb
+> --- /dev/null
+> +++ b/drivers/fpga/intel_pr.c
+> @@ -0,0 +1,191 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (C) 2018 Intel Corporation
 
-I don't mind. I can also take it via my tree just let me know.
+2018? That's quite old file.
+
+> + */
+> +
+> +#include <command.h>
+> +#include <errno.h>
+> +#include <wait_bit.h>
+> +#include <asm/global_data.h>
+> +#include <asm/io.h>
+> +#include <linux/bitops.h>
+> +#include <linux/libfdt.h>
+> +#include <fdtdec.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +#define FREEZE_CSR_STATUS_OFFSET		0
+> +#define FREEZE_CSR_CTRL_OFFSET			4
+> +#define FREEZE_CSR_ILLEGAL_REQ_OFFSET		8
+> +#define FREEZE_CSR_REG_VERSION			12
+> +
+> +#define FREEZE_TIMEOUT				20000
+> +
+> +#define FREEZE_CSR_STATUS_FREEZE_REQ_DONE	BIT(0)
+> +#define FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE	BIT(1)
+> +
+> +#define FREEZE_CSR_CTRL_FREEZE_REQ		BIT(0)
+> +#define FREEZE_CSR_CTRL_RESET_REQ		BIT(1)
+> +#define FREEZE_CSR_CTRL_UNFREEZE_REQ		BIT(2)
+> +
+> +static int intel_get_freeze_br_addr(fdt_addr_t *addr, unsigned int region)
+> +{
+> +	int offset;
+> +	char freeze_br[12];
+> +	struct fdt_resource r;
+> +	int ret;
+> +
+> +	snprintf(freeze_br, sizeof(freeze_br), "freeze_br%d", region);
+
+_ is not allowed char for alias.
+
+https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/aliases.yaml#L30
+
+> +
+> +	const char *alias = fdt_get_alias(gd->fdt_blob, freeze_br);
+> +
+> +	if (!alias)	{
+> +		printf("alias %s not found in dts\n", freeze_br);
+> +		return -ENODEV;
+> +	}
+> +
+> +	offset = fdt_path_offset(gd->fdt_blob, alias);
+> +	if (offset < 0) {
+> +		printf("%s not found in dts\n", alias);
+> +		return -ENODEV;
+> +	}
+> +
+> +	ret = fdt_get_resource(gd->fdt_blob, offset, "reg", 0, &r);
+> +	if (ret) {
+> +		printf("%s has no 'reg' property!\n", freeze_br);
+> +		return ret;
+> +	}
+> +
+> +	*addr = r.start;
+> +
+> +	return ret;
+> +}
+> +
+> +static int intel_freeze_br_req_ack(fdt_addr_t addr, u32 req_ack)
+> +{
+> +	u32 status, illegal, ctrl;
+> +	int ret = -ETIMEDOUT;
+> +	unsigned long start = get_timer(0);
+> +
+> +	while (1) {
+> +		illegal = readl(addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
+> +		if (illegal) {
+> +			printf("illegal request 0x%08x detected in freeze bridge\n", illegal);
+> +
+> +			writel(illegal, addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
+> +
+> +			illegal = readl(addr + FREEZE_CSR_ILLEGAL_REQ_OFFSET);
+> +			if (illegal)
+> +				printf("illegal request 0x%08x detected in freeze bridge are not cleared\n",
+> +				       illegal);
+> +
+> +			ret = -EINVAL;
+> +			break;
+> +		}
+> +
+> +		status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
+> +		status &= req_ack;
+> +		if (status) {
+> +			ctrl = readl(addr + FREEZE_CSR_CTRL_OFFSET);
+> +			printf("%s request %x acknowledged %x %x\n",
+> +			       __func__, req_ack, status, ctrl);
+> +
+> +			ret = 0;
+> +			break;
+> +		}
+> +
+> +		if (get_timer(start) > FREEZE_TIMEOUT)
+> +			break;
+> +
+> +		udelay(1);
+> +		schedule();
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int intel_freeze_br_do_freeze(unsigned int region)
+> +{
+> +	u32 status;
+> +	int ret;
+> +	fdt_addr_t addr;
+> +
+> +	ret = intel_get_freeze_br_addr(&addr, region);
+> +	if (ret)
+> +		return ret;
+> +
+> +	status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
+> +
+> +	if (status & FREEZE_CSR_STATUS_FREEZE_REQ_DONE)
+> +		return 0;
+
+newline
+
+> +	else if (!(status & FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE))
+
+no reason for this else.
+
+> +		return -EINVAL;
+> +
+> +	writel(FREEZE_CSR_CTRL_FREEZE_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
+> +
+> +	ret = intel_freeze_br_req_ack(addr, FREEZE_CSR_STATUS_FREEZE_REQ_DONE);
+> +	if (ret)
+
+Don't you want to show the reason for this failure at least in debug?
+
+> +		writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
+> +	else
+> +		writel(FREEZE_CSR_CTRL_RESET_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
+> +
+> +	return ret;
+> +}
+> +
+> +static int intel_freeze_br_do_unfreeze(unsigned int region)
+> +{
+> +	u32 status;
+> +	int ret;
+> +	fdt_addr_t addr;
+> +
+> +	ret = intel_get_freeze_br_addr(&addr, region);
+> +	if (ret)
+> +		return ret;
+> +
+> +	writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
+> +
+> +	status = readl(addr + FREEZE_CSR_STATUS_OFFSET);
+> +
+> +	if (status & FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE)
+> +		return 0;
+> +	else if (!(status & FREEZE_CSR_STATUS_FREEZE_REQ_DONE))
+
+again no reason for else here.
+
+> +		return -EINVAL;
+> +
+> +	writel(FREEZE_CSR_CTRL_UNFREEZE_REQ, addr + FREEZE_CSR_CTRL_OFFSET);
+> +
+> +	ret = intel_freeze_br_req_ack(addr, FREEZE_CSR_STATUS_UNFREEZE_REQ_DONE);
+> +
+> +	writel(0, addr + FREEZE_CSR_CTRL_OFFSET);
+> +
+> +	return ret;
+> +}
+> +
+> +static int do_pr(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> +{
+> +	const char *cmd;
+> +	char *region;
+> +	unsigned int region_num = 0;
+> +
+> +	if (argc != 2 && argc != 3)
+> +		return CMD_RET_USAGE;
+> +
+> +	cmd = argv[1];
+> +	if (argc == 3)
+> +		region_num = simple_strtoul(argv[2], &region, 0);
+> +
+> +	if (strcmp(cmd, "start") == 0)
+> +		return intel_freeze_br_do_freeze(region_num);
+> +	else if (strcmp(cmd, "end") == 0)
+> +		return intel_freeze_br_do_unfreeze(region_num);
+> +
+> +	return CMD_RET_USAGE;
+> +}
+> +
+> +U_BOOT_CMD(
+> +	pr, 3, 1, do_pr,
+> +	"SoCFPGA partial reconfiguration (pr) control",
+> +	"start [region ID]\n"
+> +	"	- start the pr by freezing the region\n"
+> +	"end [region ID]\n"
+> +	"	- end the pr by unfreezing the PR region\n"
+> +);
+
+I don't think this is the reasonable way how to wire it up. We already have fpga 
+command and this should be the part of it.
 
 Thanks,
 Michal
+
 
