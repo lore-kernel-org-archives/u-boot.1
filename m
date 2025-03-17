@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D78C28B28
-	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 10:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 304B4C282EC
+	for <u-boot@archiver.kernel.org>; Mon, 17 Mar 2025 10:21:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7AB581100;
-	Mon, 17 Mar 2025 11:06:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DBFF780107;
+	Mon, 17 Mar 2025 11:21:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NFt1Fj8x";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="kFOjsEnK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3DC48122F; Mon, 17 Mar 2025 11:06:47 +0100 (CET)
-Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
- [IPv6:2607:f8b0:4864:20::a2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 86DBB80F4C; Mon, 17 Mar 2025 11:21:39 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 848648141E
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 11:06:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 148CA800C2
+ for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 11:21:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-5241abb9761so1857814e0c.1
- for <u-boot@lists.denx.de>; Mon, 17 Mar 2025 03:06:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742206002; x=1742810802; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fGjydFhOTtf9dDpMYGav5WNmoaKOF9deIyUxJiwJ7NI=;
- b=NFt1Fj8xUa1l0xC4l25qTqAzUXGYcQfrTA0s10dNywKEQOdsaZVy0UOuWYWdXz747Q
- m/zTH0yI6I9HBQXmginqqnfx8hEAb6Q08XR8zs4XpKjCOBNntzGsk9mq5Qad6yD63vxZ
- XvhYM4/1HctUgJfY6whnItxWGWXqgUh2MH3wXNV0khZzPT5cxqgSCT2GXeiJzI+qjLZ6
- l9n0tWrDCuDuiMlJHaO83kQKkRWTy8uuKjhTeVyNgR0JlVbtxE7TivWD1mimwPvwWAEb
- Z0BcpgO7J2wv3nMOR+CVOGyoNvpRtWTcwNuFdYyvIkl8tw1ut6TGWMdvT/dso04fPVss
- rsGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742206002; x=1742810802;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fGjydFhOTtf9dDpMYGav5WNmoaKOF9deIyUxJiwJ7NI=;
- b=A70tBqIUQYxRBh4BeszA4cvokteUy8jBFCx+EZJR05v3IdlvEStEjZO/XYQWO8CP0G
- SZ749rtY5DTZ3rXy2NSppA4RnlzW6QObBeKHwBKxVl2uCMDsbP2T9PsPkHmIld+wn9eq
- zMo4Gh46l4YzfGW6irhxgE2JjgzOLusDfO7zTCJvH9eqS9rR3w4/M6oTY1DWOWHfR0X9
- jWLmH0DB1kLIbN4ZXhEaHpmm3eGpqq6dFIwMn2GfIkdMrTiIthNNiLWFB3odgLVaVZm2
- 7xUVEY49tb7IKr35+Kxdswa49VVyQ00ediB/SroGqu16MokW9IjU61QJR4ndc22TNLJI
- rHRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6cLnZNIDiOo2/JEDW5xnV9WJUyY8Uy32yKNj2tRX6zPJphk2GYMWuMyTKsK79yBEyGh6XjcQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzs1/C7GAYFEGJkJhNHIFHwQ3rLQcAwxVtK2f3MhFCWAfkCRJ2l
- kopcvy1Gz0cX62jmF7m8occ7Z7Hb1xii70uh677r9dEXcz/C+z5oBY9gHoPvCzsuR4ZqxsGAWA/
- KYKBrUAD4icWgtRDKSPGNEdWtKDOyZWBPbF5jVQ==
-X-Gm-Gg: ASbGnctkdSQJLeNJfAR/ea6f1nQ3PjOYXkC3mA0E80S63PPnbZOSAFNaSwKfiyM8LBg
- 0KCdUJgUIU6he6zI73qVItoeoaHosdH7vjdIKBgBTqwt1fZIJnrJ6yGJuV+NjGWMGtUaq30HFCL
- FRsZvVkOYQ727IYMgZRyH1mOlvOFs=
-X-Google-Smtp-Source: AGHT+IGgk5NA/tzMoUHiGgdlYAoPc49f/YRwjT1f/7o548hRuKTEJLnncbnLXRHHOYcLKwq5iA55PCBozX3OD2mZw6g=
-X-Received: by 2002:a05:6102:3a0a:b0:4c1:9159:859c with SMTP id
- ada2fe7eead31-4c38316408dmr7148335137.15.1742206002224; Mon, 17 Mar 2025
- 03:06:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 2CCF8100016;
+ Mon, 17 Mar 2025 13:21:36 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2CCF8100016
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1742206896;
+ bh=kPTIm+IvHjAnO3L48o+g0vuGETZRHpDx75pjqV313DY=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=kFOjsEnKnAiCSh+fQErzmqI0qkypoYbPn2/AlQu+tSx7GjejDTVLvX+sfHobn3UOy
+ /XmQLcirYiaZGyNfwC5ZVwCnaERTpCvAat0TYCdhY3U26+TH3a3y0mylnWO1dRf/4S
+ BOQcNARDmlixnrzKmhJG3w9Pq3NJaCZzf5pWZ3doWLOi9E9ZBD5ymRhqJD0V/jqESV
+ gl33C7lOd3/2tg2mks0UARd3dVgtQe6Q/75Rj3JJUHWBKpPHaJpB4v19YOFSRe4ARK
+ fUfE9Ze34cb71VTdtnTdRzGPGPfbWph/1CAs4NlP9FHszDSnezDKY7NuWjSr1LH0vs
+ Sb99E/xMld3ww==
+Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
+ [172.24.201.216])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon, 17 Mar 2025 13:21:36 +0300 (MSK)
+Message-ID: <b6cb6f26-91d3-902f-652d-50e8e6f21122@salutedevices.com>
+Date: Mon, 17 Mar 2025 13:21:30 +0300
 MIME-Version: 1.0
-References: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 17 Mar 2025 15:36:31 +0530
-X-Gm-Features: AQ5f1JpvsCtYClSbsu92bATB3Ti-GfjM2K2z_ha_zVsIAQ_Vp24Ny6tOF_ImyBA
-Message-ID: <CADg8p94t0XCvD==6V4nF0CeakVz8WDaTk6uw8ctEVMMeJvXEOw@mail.gmail.com>
-Subject: Re: [PATCH] lmb: change the return code on lmb_alloc_addr()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, ardb@kernel.org, Ben Schneider <ben@bens.haus>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Nam Cao <namcao@linutronix.de>, 
- Baruch Siach <baruch@tkos.co.il>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Janne Grunau <j@jannau.net>, Caleb Connolly <caleb.connolly@linaro.org>,
- u-boot@lists.denx.de
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH v1] mtd: rawnand: meson: always use OOB bytes during write
+Content-Language: en-US
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
+ <kernel@salutedevices.com>, <oxffffaa@gmail.com>
+References: <d087411f-c2fd-75a8-6041-31623aba53ae@salutedevices.com>
+ <CAOf5uwmftbyysOL_Gf1BRgQmP7EyCS_=Jn5ge4KUbA5efbe_Hw@mail.gmail.com>
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <CAOf5uwmftbyysOL_Gf1BRgQmP7EyCS_=Jn5ge4KUbA5efbe_Hw@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [172.28.65.111]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
+X-KSMG-Rule-ID: 1
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 191835 [Mar 17 2025]
+X-KSMG-AntiSpam-Version: 6.1.1.11
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 51 0.3.51
+ 68896fb0083a027476849bf400a331a2d5d94398,
+ {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:7.1.1,5.0.1;
+ salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2025/03/17 05:57:00 #27790323
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,176 +103,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 14 Mar 2025 at 16:27, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Ben reports a failure to boot the kernel on hardware that starts its
-> physical memory from 0x0.
-> The reason is that lmb_alloc_addr(), which is supposed to reserve a
-> specific address, takes the address as the first argument, but then also
-> returns the address for success or failure and treats 0 as a failure.
->
-> Since we already know the address change the prototype to return an int.
->
-> Reported-by: Ben Schneider <ben@bens.haus>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
+Hi, thanks!
 
-Reviewed-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
->  fs/fs.c                     |  2 +-
->  include/lmb.h               |  6 ++---
->  lib/efi_loader/efi_memory.c |  3 +--
->  lib/lmb.c                   |  6 ++---
->  test/lib/lmb.c              | 53 +++++++++++++++++++------------------
->  5 files changed, 35 insertions(+), 35 deletions(-)
->
-
-[...]
-
-> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> index fcb5f1af532a..01b1c7fdedd0 100644
-> --- a/test/lib/lmb.c
-> +++ b/test/lib/lmb.c
-> @@ -531,21 +531,21 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
->
->         /* Try to allocate a page twice */
->         b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-> -       ut_asserteq(b, alloc_addr_a);
-> -       b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
->         ut_asserteq(b, 0);
-> +       b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> +       ut_asserteq(b, -1);
->         b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-> -       ut_asserteq(b, alloc_addr_a);
-> +       ut_asserteq(b, 0);
->         b = lmb_alloc_addr(alloc_addr_a, 0x2000, LMB_NONE);
-> -       ut_asserteq(b, alloc_addr_a);
-> +       ut_asserteq(b, 0);
->         ret = lmb_free(alloc_addr_a, 0x2000);
->         ut_asserteq(ret, 0);
->         b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> -       ut_asserteq(b, alloc_addr_a);
-> -       b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
->         ut_asserteq(b, 0);
-> +       b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-> +       ut_asserteq(b, -1);
->         b = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> -       ut_asserteq(b, 0);
-> +       ut_asserteq(b, -1);
->         ret = lmb_free(alloc_addr_a, 0x1000);
->         ut_asserteq(ret, 0);
->
-> @@ -561,22 +561,22 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
->
->         /* allocate blocks */
->         a = lmb_alloc_addr(ram, alloc_addr_a - ram, LMB_NONE);
-> -       ut_asserteq(a, ram);
-> +       ut_asserteq(a, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 3, ram, 0x8010000,
->                    alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
->         b = lmb_alloc_addr(alloc_addr_a + 0x10000,
->                            alloc_addr_b - alloc_addr_a - 0x10000, LMB_NONE);
-> -       ut_asserteq(b, alloc_addr_a + 0x10000);
-> +       ut_asserteq(b, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, ram, 0x10010000,
->                    alloc_addr_c, 0x10000, 0, 0);
->         c = lmb_alloc_addr(alloc_addr_b + 0x10000,
->                            alloc_addr_c - alloc_addr_b - 0x10000, LMB_NONE);
-> -       ut_asserteq(c, alloc_addr_b + 0x10000);
-> +       ut_asserteq(c, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
->                    0, 0, 0, 0);
->         d = lmb_alloc_addr(alloc_addr_c + 0x10000,
->                            ram_end - alloc_addr_c - 0x10000, LMB_NONE);
-> -       ut_asserteq(d, alloc_addr_c + 0x10000);
-> +       ut_asserteq(d, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, ram_size,
->                    0, 0, 0, 0);
->
-> @@ -586,57 +586,58 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, ram_size,
->                    0, 0, 0, 0);
->
-> -       ret = lmb_free(d, ram_end - alloc_addr_c - 0x10000);
-> +       /* free thge allocation from d */
-
-nit: typo in the comment
-
-> +       ret = lmb_free(alloc_addr_c + 0x10000, ram_end - alloc_addr_c - 0x10000);
->         ut_asserteq(ret, 0);
->
->         /* allocate at 3 points in free range */
->
->         d = lmb_alloc_addr(ram_end - 4, 4, LMB_NONE);
-> -       ut_asserteq(d, ram_end - 4);
-> +       ut_asserteq(d, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, ram, 0x18010000,
-> -                  d, 4, 0, 0);
-> -       ret = lmb_free(d, 4);
-> +                  ram_end - 4, 4, 0, 0);
-> +       ret = lmb_free(ram_end - 4, 4);
->         ut_asserteq(ret, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
->                    0, 0, 0, 0);
->
->         d = lmb_alloc_addr(ram_end - 128, 4, LMB_NONE);
-> -       ut_asserteq(d, ram_end - 128);
-> +       ut_asserteq(d, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, ram, 0x18010000,
-> -                  d, 4, 0, 0);
-> -       ret = lmb_free(d, 4);
-> +                  ram_end - 128, 4, 0, 0);
-> +       ret = lmb_free(ram_end - 128, 4);
->         ut_asserteq(ret, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
->                    0, 0, 0, 0);
->
->         d = lmb_alloc_addr(alloc_addr_c + 0x10000, 4, LMB_NONE);
-> -       ut_asserteq(d, alloc_addr_c + 0x10000);
-> +       ut_asserteq(d, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010004,
->                    0, 0, 0, 0);
-> -       ret = lmb_free(d, 4);
-> +       ret = lmb_free(alloc_addr_c + 0x10000, 4);
->         ut_asserteq(ret, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram, 0x18010000,
->                    0, 0, 0, 0);
->
-> -       /* allocate at the bottom */
-> -       ret = lmb_free(a, alloc_addr_a - ram);
-> +       /* allocate at the bottom a was assigned to ram at the top */
-
-nit: can be split into two sentences. "allocate at the bottom. a was
-assigned..."
-
--sughosh
-
-> +       ret = lmb_free(ram, alloc_addr_a - ram);
->         ut_asserteq(ret, 0);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, ram + 0x8000000,
->                    0x10010000, 0, 0, 0, 0);
->
->         d = lmb_alloc_addr(ram, 4, LMB_NONE);
-> -       ut_asserteq(d, ram);
-> -       ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, d, 4,
-> +       ut_asserteq(d, 0);
-> +       ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, ram, 4,
->                    ram + 0x8000000, 0x10010000, 0, 0);
->
->         /* check that allocating outside memory fails */
->         if (ram_end != 0) {
->                 ret = lmb_alloc_addr(ram_end, 1, LMB_NONE);
-> -               ut_asserteq(ret, 0);
-> +               ut_asserteq(ret, -1);
->         }
->         if (ram != 0) {
->                 ret = lmb_alloc_addr(ram - 1, 1, LMB_NONE);
-> -               ut_asserteq(ret, 0);
-> +               ut_asserteq(ret, -1);
->         }
->
->         lmb_pop(&store);
-> --
-> 2.47.2
->
+On 17.03.2025 09:09, Michael Nazzareno Trimarchi wrote:
+> Hi Arseniy
+> 
+> On Sun, Dec 22, 2024 at 10:23 PM Arseniy Krasnov <
+> avkrasnov@salutedevices.com> wrote:
+> 
+>> If 'oob_required' is not set by the caller (for example 'oobbuf' is NULL),
+>> then driver doesn't copy OOB data from 'oob_poi' to special controller
+>> structures, so zeroes will be written as OOB. But, generic raw NAND logic
+>> in 'nand_base.c' already handles case when OOB is not required to write by
+>> filling 'oob_poi' with 0xFF's. So let's remove 'oob_required' check to
+>> always read 'oob_poi' data for OOB.
+>>
+>> Kernel driver (drivers/mtd/nand/raw/meson_nand.c) works in the same way,
+>> so need to keep same behaviour here.
+>>
+>> Fixes: c2e8c4d09a7a ("mtd: rawnand: Meson NAND controller support")
+>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+>> ---
+>>  drivers/mtd/nand/raw/meson_nand.c | 4 +---
+>>  1 file changed, 1 insertion(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/mtd/nand/raw/meson_nand.c
+>> b/drivers/mtd/nand/raw/meson_nand.c
+>> index 81122315f4..82a12ac061 100644
+>> --- a/drivers/mtd/nand/raw/meson_nand.c
+>> +++ b/drivers/mtd/nand/raw/meson_nand.c
+>> @@ -607,9 +607,7 @@ static int meson_nfc_write_page_hwecc(struct mtd_info
+>> *mtd, struct nand_chip *ch
+>>                 memcpy(meson_chip->data_buf, buf, mtd->writesize);
+>>
+>>         memset(meson_chip->info_buf, 0, chip->ecc.steps * PER_INFO_BYTE);
+>> -
+>> -       if (oob_required)
+>> -               meson_nfc_set_user_byte(chip, chip->oob_poi);
+>> +       meson_nfc_set_user_byte(chip, chip->oob_poi);
+>>
+>>         return meson_nfc_write_page_sub(chip, page, false);
+>>  }
+>>
+> 
+> Applied and sent already the pull request
+> 
+> Michael
+> 
+> 
+>> --
+>> 2.30.1
+>>
+> 
+> 
