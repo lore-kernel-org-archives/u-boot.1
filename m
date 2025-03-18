@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64FEC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 13:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C82C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 14:04:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C18480F4C;
-	Tue, 18 Mar 2025 14:57:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03A9B80F4C;
+	Tue, 18 Mar 2025 15:04:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eh/FIHG9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ps5b5ViF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9DD3810E8; Tue, 18 Mar 2025 14:57:46 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id E8EC9810E8; Tue, 18 Mar 2025 15:04:08 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7610E800B6
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 14:57:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97AC1800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 15:04:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-22401f4d35aso105808665ad.2
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 06:57:44 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ff615a114bso4546466a91.0
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 07:04:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742306263; x=1742911063; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742306645; x=1742911445; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DHKNlWK5KP4Rino0SsEnL8dznBPR2Rbhbl2/2GpKeLw=;
- b=eh/FIHG9hnlElsoWZBIo5MzL2mtXmutOy+AvK1LsHdODWVu+HVf1L3xg8xQb8ytWjk
- 1j27p77CH+6qBpL4GZEhYQys0nzi0kkYqNKLqijFdF1a8Ab0Jn8PSUkXJKKeTvvzKBLD
- o5VpfjI/ZRw2LGmBrZ1TlWbKuDOpdqfULA1QI=
+ bh=Cnja7rsGYpPj7isaVo1cnjlHI4EY3kgmemysq416KcY=;
+ b=Ps5b5ViFAM1Pidb8Hg8tRlxdXAAomHvQhh2o9fAu4+UkJjbZXNos2IsiZrQkoQNWXq
+ bjcxf1sRVFNkgVhew40XoK+MyxmJ476iHp+I7YkBJAc+0Yche+qxakA/jrwSyeypTOrQ
+ BNC1do7gCi5fMJuckD3tP/INRigdU9Ui1iE2U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742306263; x=1742911063;
+ d=1e100.net; s=20230601; t=1742306645; x=1742911445;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DHKNlWK5KP4Rino0SsEnL8dznBPR2Rbhbl2/2GpKeLw=;
- b=q0w/rKe8Odx75L0+lQG58+vdcB1y+R9XgKMBXNa7+GQts1vpIiotRU3SwF+nWxNXDK
- Yj2XC+/j/0Ac9f21e7XewkTXThWNxglWAto3X2QhxtfFD2PbXZaQwDPNtYBE06DRl4mh
- rZRdaXmvlnDZ7oItRjViEdUWC+amsdZTA/roijm6mG+EYFBshJGFCwZpPkuSL0cTrdj4
- wIslrZsMUVEJaaOJmvzHpk/xHGqRlicPja9vBc52s/wlmStR4ZmaVyoh6o3mf+2VXTh6
- i8eVgycJzmUdKig7VeKIEmqEdRBnY0eAl1hFjHQ5Ti336UdEI03MEeS+l8XjA83atDDh
- 2duA==
-X-Gm-Message-State: AOJu0Yw+o5mz4ZvWDGu/eQ7HFqYqcBgrlNbZv22UOQcVr5z/Xd7Ch2Rj
- hM0KBhYcg/U1rNjbVK2wQnyVj/PNwpl0EAWCwS/xMipWXjWb40Z9Xg5eE/4wtCk=
-X-Gm-Gg: ASbGncuDPVuYyo9AJwN1gEnSBFO9ktqAls4WgGifuBUc2jwV8O4geGiPrrA5SJoU3GK
- Ii9jXL//WbzUskby6QYmCFofKZ8ukLVJFP7ebuUj7e3/pKC6LEDwAOFR0LqpKnoHvVjEajGdFf+
- GwdDAtc30nPjhJqw7Ry/2mgGmczgSK/1Qvns/F8AZIZXyLZ4Y6oUufiP/pCpbXH0wT47dOsfALa
- HhszevqcJzF+INo6SNkmTVuyRgCS2f2I/H0DnAepxhREfKsT96Tvo+tdM+rodIK/QMNlrXP8FFw
- beAzyrH6oQMZ8YiRsTJLJCuJYHkL0Aj7aOaHBVMmSnhJEg==
-X-Google-Smtp-Source: AGHT+IHgl9gVvoMkibvOwsrOi/4A7ytVflBDGi4vOpz/v121V75TnxOh0xwFYat0GTiwXI+Yqz026A==
-X-Received: by 2002:a17:902:c951:b0:223:5e76:637a with SMTP id
- d9443c01a7336-2262c562e3bmr44018305ad.23.1742306262868; 
- Tue, 18 Mar 2025 06:57:42 -0700 (PDT)
+ bh=Cnja7rsGYpPj7isaVo1cnjlHI4EY3kgmemysq416KcY=;
+ b=WP1ey+z8INrlGFsxZduptajHMYyvXpmaME+SJJPVyaU5A/y2b4HasPPdgqDWZ14wkk
+ Cbw7tMrL3qqFlYsMN56TavsdrVBd2JQR0WNCnnvNFEaHxtJrABIJQyhgomOmIxYBuOak
+ AkgGv84JaDcMSZEQtXgGVxEV/iJcapVR1uGLibVa3UWKIYStkrPDz0thx6/hk6i1xS4a
+ EUPTupMVKqB/xfEybMVpqYMk9qhhBV6G5jNM8RZk1O6Gv2P+HmEB9J2zdwUTIuoKX+8z
+ 2sNN2DpZ6ZXFxXwj48tY0pdw9BkkxvgHWxDvhiK8ytdnFtOUSOLWIM3hJFdyMeELE/eW
+ lUOA==
+X-Gm-Message-State: AOJu0Yz8NbEJ0N3ANqG5P2bBR4H2XT2494DRz5f6azRh79Ti2d8SbDY+
+ BSTwiHVYwlAXraY+af803Cb7hOJq/yQm3SW2TUwP757062nmToWAepV675z86VA=
+X-Gm-Gg: ASbGncvC8kEqrW6wn5BcjfHn7GfiGcrGFWFYciGUsdeYEv78DrORpHgveiK1ZJBuQvR
+ Sy+mac7PY2kiFfAsdU3T5ETSBO46we7d0Wj+ix1iJFwkwbJJGeDhqJVBeKONATSmGsdUaFw/YEH
+ HxD6K7RXo15/2prcUWTQPNNejlV/5NiyqUnqt4CfkKh7siWNVDj/IjkcbGsGHas/MVtAP1hPAIu
+ BK0U45LH124OZDCIXdUO8JkVwG1PVEn/a7IAgHBi3mYppSyxwMvGOFTmf2iazQSX7O0iHnIJdaj
+ f4qF/9CYh8QTLzh1cL+ieI48EatjSwfLFGU29RAzr1q/leRZ9aDgMLiA
+X-Google-Smtp-Source: AGHT+IHL6l3jMQylXP75nG7bTESKeQcytrdTBrJOgOpJ6+9jvwwdOBUpGQA1L8mtC+WR2/qH/5HsTw==
+X-Received: by 2002:a05:6a20:7f97:b0:1ee:5f21:6720 with SMTP id
+ adf61e73a8af0-1fa513b8f20mr4821371637.16.1742306645012; 
+ Tue, 18 Mar 2025 07:04:05 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c68886a8sm94440135ad.44.2025.03.18.06.57.41
+ 41be03b00d2f7-af56ea0428fsm8987390a12.38.2025.03.18.07.04.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 06:57:42 -0700 (PDT)
-Date: Tue, 18 Mar 2025 07:57:39 -0600
+ Tue, 18 Mar 2025 07:04:04 -0700 (PDT)
+Date: Tue, 18 Mar 2025 08:04:00 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] ARM: socfpga: Drop incorrect imply
- SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION*
-Message-ID: <20250318135739.GW2640854@bill-the-cat>
-References: <20250315012900.399381-1-trini@konsulko.com>
- <SN6PR03MB35836ECB9BAFF92F78B520FEA7DE2@SN6PR03MB3583.namprd03.prod.outlook.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v5 38/46] boot: Consider non-bootable partitions
+Message-ID: <20250318140400.GX2640854@bill-the-cat>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-39-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a57qBbqSZDyhCo5F"
+ protocol="application/pgp-signature"; boundary="0g/83C4/l2cO9qYj"
 Content-Disposition: inline
-In-Reply-To: <SN6PR03MB35836ECB9BAFF92F78B520FEA7DE2@SN6PR03MB3583.namprd03.prod.outlook.com>
+In-Reply-To: <20250315142643.2600605-39-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,63 +106,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---a57qBbqSZDyhCo5F
+--0g/83C4/l2cO9qYj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 18, 2025 at 03:11:44AM +0000, Chee, Tien Fong wrote:
-> Hi Tony,
+On Sat, Mar 15, 2025 at 02:25:58PM +0000, Simon Glass wrote:
+
+> Any 'bootable' flag in a DOS partition causes boostd to only scan
+> bootable partitions for that media. This can mean that extlinux.conf
+> files on the root disk are missed.
 >=20
-> > -----Original Message-----
-> > From: Tom Rini <trini@konsulko.com>
-> > Sent: Saturday, March 15, 2025 9:29 AM
-> > To: u-boot@lists.denx.de
-> > Cc: Chee, Tien Fong <tien.fong.chee@altera.com>
-> > Subject: [PATCH] ARM: socfpga: Drop incorrect imply
-> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION*
-> >=20
-> > The use of both "imply
-> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION" and "imply
-> > SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE" here is wrong
-> > as those are both part of the same choice statement. Furthermore you
-> > cannot select/imply something from a choice statement, it must be a
-> > "default ...
-> > if ..." construct within the choice statement in question.
+> Put this logic behind a flag and update the documentation.
 >=20
-> I think the imply here which allows for overwritten in defconfig.
+> For now, the flag is enabled, to preserve existing behaviour. Future
+> work may provide a command (or some other mechanism) to control this.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-It doesn't. The specific warning is that these imply statements have no
-effect.
-
-> To support the "default....if...", new config for platform specific in
-> Kconfig is required. Is there any other approach better to support
-> this?
-
-Adding "default SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION if ..." to the
-choice statement is fine. But the follow-up question is if it's
-something worth being listed like that compared with just being set as
-needed in the defconfig.
+Isn't this backwards as the existing behavior (prior to bootstd) was to
+scan and use these files, and so that's the behavior we need to preserve
+by default.
 
 --=20
 Tom
 
---a57qBbqSZDyhCo5F
+--0g/83C4/l2cO9qYj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfZe9AACgkQFHw5/5Y0
-tywgnQv9ErkTewNVIs/DVY1AF8+fbzOcH9OO2Y7N2t3/B+Dc5Jxrc3rUzeRxO9fZ
-h88qfNFRldogEm2O9xP8esCFphdSEBx89zkJX9M0S9Ge8hQHrXfxS5xGzQPU+Zb/
-FrL+pn37ZATGNyB24CXofl4r8JTFWvwh5SHE9cdGqOZ3quPD3/VxJrXYQdzCSJXo
-Zr67ABWLJcIq3WMkv4M+Eoz9KSwkfoR4VbhHUE1mh/6HS2cVh/ma2Rkqp6x/DmHP
-61ezoDQEPhwIpVxfuv0B0DeKUjwqI4ynlNq5jAEwyE+yqcHoMxOX5weSr0fTjfuI
-Sfp3vkbEOqsaCryDM5FNWQHdzEamthxLcEjNWb5WbIzdIJtOarIymLvaOviVHyLI
-OMdZvARQ9K4KNuE7ShgKvm0fEuYJGdhMxFgwqVZo36M5pnwi1xDKX+vt3DcBz0Ix
-XdaRDPIDXE6hA8VGPOw2QgCFqu3Vuija6rx5puUwduULswpsrVgiueTsEEyZbagi
-OKJ8I/m5
-=U6bA
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfZfVAACgkQFHw5/5Y0
+tywAsQwAko5JRy4jF+heUG8ECk3Q3lRUj4x+HGXbxxVV6lWKJVAtZ+BUxPe9k916
+ojz+CEgH7zvsvOnhJKBCS2/Q9XL/t/yY2sTfiflXg4a6u1cShA5Yzhy6s2HFMuXN
+pMarT0GtfFbarlknggqKRUhNi7PGYVXsyHFgobJi/9LqGwqsTajr9d2njknvIDFE
+B1a8GFcnL0W7fGnjwdFlix3EAPzXafbI1KHhkshljvsl1ms8coPTo2pc4Xj1uwvM
+2OnPPr/MHc5q1Db8zo7EXw/TircrdGh1npaOuYxzAIDiApVTnLPOBbTnEkFo8v2Z
+XCU7ocG0rDike3DE+YkbUCpkHqncDypSrmvHjjcR39UQrw8vWkPUsDyPldcYXWyd
+iZTDKtNFdEhWBQq3HDYm0ihiDj4suZOSXZFVIUZNrXLoz2EMfDkQko9diLe5ybfv
+9U17bcWgwxfijQXLzZUTilP0hPlEgEz7Yuzoym4Ej41FlghHIr7GCDlEhd6FFS/U
+hc9LZ9Ud
+=UJmc
 -----END PGP SIGNATURE-----
 
---a57qBbqSZDyhCo5F--
+--0g/83C4/l2cO9qYj--
