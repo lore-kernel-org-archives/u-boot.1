@@ -4,84 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CDCC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 16:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0D5C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 16:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47AF581026;
-	Tue, 18 Mar 2025 17:10:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8384081026;
+	Tue, 18 Mar 2025 17:20:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j7o8GcY1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dKi/+Gsg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C152810F4; Tue, 18 Mar 2025 17:10:55 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 7D232810F4; Tue, 18 Mar 2025 17:20:49 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C85C2800B6
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 17:10:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05E5C800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 17:20:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2260c915749so36765575ad.3
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:10:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4393dc02b78so23661005e9.3
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742314251; x=1742919051; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R/UMiNEQHZFEwTii5/3WEwanuQDfxdfyKsq3Hb6gauY=;
- b=j7o8GcY1B+denEW60IJUZQLJovRcc/8dsMEIgDU0zxIeva8XG7pvGmR7kqJqHMKVzI
- 4zSx4YYAwQPI9493DwhZGluant76oOQzYWDbMTEsFnbTbZdtv8PDbKIWtyIOiODeTBHu
- b9RHSgIZWX1XOxUGCq5Fcc+vpiWwi3y+mtw20=
+ d=linaro.org; s=google; t=1742314846; x=1742919646; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=T1lzdPyZmkij68K+y+Kgia110zVtysvaRRf1WEjxr+Q=;
+ b=dKi/+Gsgki3IZ90OESoQLT7q6EUISSK6MNnwDmnccgNo59t9/WAnQGpI0ET1SOhkCS
+ xQtdRj5uF/zeo57Mf8zM3oBHjHV96kbk40BfNj3qPUuy51VGtwrBM5DV5aFwUd7zVD1i
+ 8LXXFsqyOktw9Rb+U5tjsHqdwFTUJE0UpH2fJquGX/Gk/UUpG+e/+O+qkaiHe2hR2Y5n
+ ZcgGQJqnNTOJLTINhYbuermk5BkuLjxgrhT16c8uBuwredHpdOr8f9nKhpwZROXZMaPQ
+ hYbt9Kq+RECGDQKDSW3KTcJ6Ng8j2G/5mNfpfximzp8jbIeND6fI+bUAtvf7USxQa/mB
+ lPPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742314251; x=1742919051;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R/UMiNEQHZFEwTii5/3WEwanuQDfxdfyKsq3Hb6gauY=;
- b=xJgHY351JYyRZ3ZZJb58nKZNH/xhY+3x9lQvJb6bGbfoIX1vya5WQxRorRi4sLU0U5
- fM/RVFC6HcY4na7GO8eAdLMRsfyG/G5HIlGRSH4ldfEUBDLxiM3nPY3O2AaXViG+gB1R
- /6c41szpqbjqui6WvWPe3r/ydcEXV+XBEzzYR6LY3uqGmv6aMzUnZ4bDllsHcNq/MP9Y
- GyBdYRm7yJtOpCstzDjiKwA8uK5tLUPsZNjzFbAzTOCCXQaJ3k7felu/207GpX0Bs9Aq
- c+EGx8on19fNk/snY44yjOpAVk4i2hfZpkzGlNLbA5+W1+ZS+/6eossy8Ed7qE+TxLLS
- 1Rhw==
-X-Gm-Message-State: AOJu0YyAL6DVZZdHFZgGYdvBcMElWKD7Dzem1sF29qnEC+dVl8GG3c0v
- 9lz3JHyO5FwzU5EfPM49MDzhOFqjVdP4zfaZDXq47A0CcP6rvH/9vq85LSS9i+M=
-X-Gm-Gg: ASbGncvZYtOliwhgEk6Sj+hD93/5WB4Teikq1M7hQ2X2f2ffAbQIPQ+dwwdU8JZE/gu
- YDPwvoqYZ5lJY6fs0NBsJ0ybKCUDpfiCQDF9r8UqRFmdRPqiU6dAFHm7E2AR+BORZQ2iIxLb824
- iC+BED1fBNM2FjsRmfRRUdf2StAjarzm191kGey4Q6e5LW5i8zBxR2gq4thmwwBytiefNi5dSTz
- 5Tuo3puA3mertaSUUcd0KGEFTi4GTst1hJt8cBr+maYEw4oLTS5TDE50VFGMfZt5+N47DEtMjkd
- iTUDP5DVKxM6zVClyCHsIkAD53LAqW2e1ojezjc6Ls/ltg==
-X-Google-Smtp-Source: AGHT+IGrAWnXf9q0rqGChpWn9nkca9qfKi8qZd2onSf/YD/aB5gOwxwXDKhK/9T0246xPYzOP7/C7A==
-X-Received: by 2002:a17:902:ce0a:b0:223:3630:cd32 with SMTP id
- d9443c01a7336-225e0b2fa2amr234895945ad.53.1742314251258; 
- Tue, 18 Mar 2025 09:10:51 -0700 (PDT)
-Received: from bill-the-cat ([187.144.138.125])
+ d=1e100.net; s=20230601; t=1742314846; x=1742919646;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=T1lzdPyZmkij68K+y+Kgia110zVtysvaRRf1WEjxr+Q=;
+ b=vDPafqKIfCz5+ZAH8ObmiURHr9zYQfg5glJKq1MfAj3mWhcyG+ODAxZA9EbEgzGL8a
+ Xo1ik0cN0m0UAF32ypCgvIHShH6lzYF50mw0qTsrlghbANaA03vZ+OOzaDQHSZNbG5WV
+ 3HJrxGoEeqL3DEUfLmP+aTYEGCrqXKbj0t/Yf5Z3UbXUGbcW3gClF+HGne8GxxBpAPQk
+ HembXpCUMQzB/4XAZsIrGv2MXUMU3ze4yiu2Eqinth19YbYRP/dPNayz1PYNPEkR/KeQ
+ gjLknmcBDZjA0XSR1CGK9Vay+ooQutXSGBPXsyA4LCK/faSFbjw9BS0lf6+SdEaSd1I7
+ 9Vlw==
+X-Gm-Message-State: AOJu0YxtGNkd9vQWQ2Nr1uV0ovPM3fYGD/wBocjKGhhr8irE9y6tEyiW
+ 8GU247ycPYr2hDp8m6ysY6Oa5jnQWHF5IGZAL5iEC+ddUxa3ws5n4YV6I4622Hg=
+X-Gm-Gg: ASbGncvHFTW3HQdC21skCd0ofRl59261Ko0JhI0aR6rHFHLodpfewNqdWCbQbn3nMgn
+ 5CFrCElZBWgzC3p2uJFcgy28G/lApcHb2r4xm6nYlguEN2UBpRjLLF0FD8TXySkhpBNbQ7+Np+s
+ 0/5AfT6zwS6Imtl+Gh7JTRLnmOqI+hMMdWPZ7cnGW3lKISg4D/5rmmotu3dmmr5u6zF1bLxChIv
+ sabGRZmp7DiDl+XdjNP5oEOB7pjNnETirl5R+HPNgof3rCXn2GWR1n1FhoLl8SW5Zfyri64pVSB
+ PA7MjYl/hxctVGUC7/qP6W+J4nwmsUpuodcQoqgsTpjRM1JJt6CzFIl/tGMDMJG8j4jzANfE3TT
+ mtfyniTeKh+WPZwZ89xSgpg==
+X-Google-Smtp-Source: AGHT+IGrz/7QjoKyMi1l8kSVH/VTSc7aSucLd6sRg7soTwINuVNr5lOy88shjNAV56ocMhIWLO0lDQ==
+X-Received: by 2002:a05:600c:310e:b0:43c:e478:889 with SMTP id
+ 5b1f17b1804b1-43d3b7c9e1bmr28639285e9.0.1742314846380; 
+ Tue, 18 Mar 2025 09:20:46 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:eac1:f2d4:84a8:c5ff?
+ ([2a01:e0a:3d9:2080:eac1:f2d4:84a8:c5ff])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c68aa938sm96420815ad.96.2025.03.18.09.10.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 09:10:50 -0700 (PDT)
-Date: Tue, 18 Mar 2025 10:10:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Harsha Vardhan V M <h-vm@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, k-malarvizhi@ti.com, kamlesh@ti.com
-Subject: Re: [EXTERNAL] Re: [RFC PATCH v3 1/5] cmd: fuse: Remove custom
- string functions
-Message-ID: <20250318161048.GB2640854@bill-the-cat>
-References: <20250318105047.256022-1-h-vm@ti.com>
- <20250318105047.256022-2-h-vm@ti.com>
- <20250318140932.GY2640854@bill-the-cat>
- <e78678b0-3f56-831f-fda7-eac3a0eae31b@ti.com>
+ 5b1f17b1804b1-43d1fe60b46sm136977245e9.32.2025.03.18.09.20.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Mar 2025 09:20:46 -0700 (PDT)
+Message-ID: <5ac73ad3-d718-45d5-8578-a37f6fd25d4b@linaro.org>
+Date: Tue, 18 Mar 2025 17:20:45 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2wQhk0MKrbJn/xhY"
-Content-Disposition: inline
-In-Reply-To: <e78678b0-3f56-831f-fda7-eac3a0eae31b@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-ufs-next-20250318
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,67 +119,47 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---2wQhk0MKrbJn/xhY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a welcome cleanup and sync with the v6.12 UFS headers to ease
+code sync from Linux.
 
-On Tue, Mar 18, 2025 at 09:38:59PM +0530, Harsha Vardhan V M wrote:
->=20
->=20
-> On 18/03/25 19:39, Tom Rini wrote:
-> > On Tue, Mar 18, 2025 at 04:20:43PM +0530, Harsha Vardhan V M wrote:
-> >=20
-> > > Remove custom string functions and replace them with normal string
-> > > functions. Remove the custom strtou32 and replace it with
-> > > simple_strtoul.
-> > >=20
-> > > Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
-> > [snip]
-> > > @@ -54,14 +43,18 @@ static int do_fuse(struct cmd_tbl *cmdtp, int fla=
-g, int argc,
-> > >   	argc -=3D 2 + confirmed;
-> > >   	argv +=3D 2 + confirmed;
-> > > -	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
-> > > -			strtou32(argv[1], 0, &word))
-> > > +	if (argc < 2)
-> > >   		return CMD_RET_USAGE;
-> > > +	bank =3D (u32)simple_strtoul(argv[0], NULL, 0);
-> >=20
-> > Do we really need these casts?
-> >=20
->=20
-> Not really, Just added them to make it explicit.
-> I can remove the casts if that's preferred.
+Thanks,
+Neil
 
-Yes, please drop the casts throughout and post the next iteration as
-non-RFC, thanks!
+The following changes since commit 0e1fc465fea62ebae91f2f56cb823e8b37ee1077:
 
---=20
-Tom
+   Merge tag 'dm-pull-15mar25' of git://git.denx.de/u-boot-dm into next (2025-03-15 08:19:31 -0600)
 
---2wQhk0MKrbJn/xhY
-Content-Type: application/pgp-signature; name="signature.asc"
+are available in the Git repository at:
 
------BEGIN PGP SIGNATURE-----
+   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-ufs-next-20250318
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfZmv0ACgkQFHw5/5Y0
-tywfIQv/cm09ktBF4SuRsMd/vkkY4Cn+OErTnfXDCO5JmKjIGO05f6YOh1HT1XHf
-rMYsCwd3djQE+uWIN6iVUc5UH1YZMFLOMm8tR729YIjhlf9FbKWfnAPrrCGWodIh
-BthgerozQZVWAG31d0jYMgmKQSwsXb6yan+hyo3LyxlLSjYHcNnRO0BjVCLXU8J9
-FG0b0QoUlqpRMkAOS3pG5AyxBFA2CK+buKFCbHd1lfsO5ppHIv8nPE0OjVOiSbDY
-WgNlBg3mo1H6p0iJHgdFUqt2MTc1R4Ok7qS6cyMpVa4UBLh+4qlqg/rP0f5yV3BM
-61m63mTi1i6emyVrmCkmW+rQR5gJ1TA6xihfIvQYeDQomd30Tso+Avln86iOiDUr
-3vTMSNVHfeHCmM+IxbP4chxzRks4e5Mbtd2CsCmUYl85Z3UxuxDEx7i5pC8nRtME
-6BkZPDrT/cGMaJnW5hTusg5+prPtKA+I2k7zjn8Ftc8iAwonCS7r1Yv1xblL3Y5M
-TZXcmUWF
-=u1rM
------END PGP SIGNATURE-----
+for you to fetch changes up to d232d7fdbf6f86e11f2dda2211132fdcffa8b5aa:
 
---2wQhk0MKrbJn/xhY--
+   ufs: core: sync ufshci.h with Linux v6.12 (2025-03-18 15:55:08 +0100)
+
+----------------------------------------------------------------
+- initial cleanup and defines sync with Linux v6.12
+
+----------------------------------------------------------------
+Neil Armstrong (6):
+       ufs: core: include missing include/ufs.h
+       ufs: core: mark unexported functions as static
+       ufs: core: cosmetic fixups
+       ufs: core: move ufshci defines in a separate header
+       ufs: core: sync unipro.h with Linux v6.12
+       ufs: core: sync ufshci.h with Linux v6.12
+
+  drivers/ufs/ufs.c    |  44 +++--
+  drivers/ufs/ufs.h    | 335 +-----------------------------------
+  drivers/ufs/ufshci.h | 469 +++++++++++++++++++++++++++++++++++++++++++++++++++
+  drivers/ufs/unipro.h | 128 ++++++++------
+  4 files changed, 571 insertions(+), 405 deletions(-)
+  create mode 100644 drivers/ufs/ufshci.h
