@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9190BC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 12:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45647C28B28
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 12:47:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 980A18193A;
+	by phobos.denx.de (Postfix) with ESMTP id ED2038198F;
 	Tue, 18 Mar 2025 13:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2CG+ULs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PZJiFy8j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CE16811B2; Tue, 18 Mar 2025 09:31:42 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 9AC4C811BB; Tue, 18 Mar 2025 09:31:43 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 566E580107
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:31:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A317E810E8
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:31:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=arturkow2000@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ac28e66c0e1so830371666b.0
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:31:40 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aaecf50578eso982955966b.2
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:31:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742286699; x=1742891499; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742286701; x=1742891501; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j3XEHhdFfWOItOIH/XN/FCgOGZC8dwg/Xx3+RYNnWdw=;
- b=Y2CG+ULsSSM/9QdVjutB9/MakCDAPp0CZxYQloTCTP7zu130y/a4SePGdwiMi0vCmr
- 0B6OcPQiMn57uJGqPOF4L981AMdIIwsMAp9zFOHE4fdZp0+RrfSO8ciXWGgaXNpB8uq8
- IELcjIJjw8lFE9KN6Plo88pL6eOHE2kS8nvKkH4W04w6BzKakMflnKKTd1PVS2UQFPMt
- u69+686Rd7yl4bPACe9DpXOgISAKgm6TxUVCPloc5Pq+e6DoKICoi96PX4HD+2pvSMgh
- dDtwPueAXujXWjesuDhILee34HU2kXiAcjUJuoLzYxW9cpPqwyB6Jkm88DqXBVhAcyC0
- 7nSw==
+ bh=atpsG9vcLoel0zCk2MsO381WuNKoH2r0N8Fi57XZXNk=;
+ b=PZJiFy8jHf0DN5u+i9T6oqVs7zhIABiuQHs7CzIVFKRWLFaGfC6Omyy7M7Lpl9y59S
+ TbwQLRmTACw60+AQGUdTS+nATQyfLc756nO451H24Rv0Vz+M4xDNDQj5NVa6to13kqsi
+ DrQCrd+SQbV9n1+GNO/5N7F6Qsw4mLd1cNf0OSQOW/5U2H949xGnl4476SN4NsRNzSSx
+ tjkUobcsLeu8vBoGS3D47L3AIS59SuqNDkBqbiUuS7Zb63eQKPdfFEjAiS93/LVotBRn
+ WaYclKfe9DF/Xm7dOAyLcOFNmq9TuA8xtJCeWmJKu8bkLMd/oXDRcgDuBnBbRNwLTZkv
+ d6cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742286699; x=1742891499;
+ d=1e100.net; s=20230601; t=1742286701; x=1742891501;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j3XEHhdFfWOItOIH/XN/FCgOGZC8dwg/Xx3+RYNnWdw=;
- b=Pc+vQf+XvA/MotUgp7DPY/73pqpm+nBRrdVHyNqyk51zSr0VaB63+k/Z2+aCE6d2xO
- wIth6wDW/iy72+XdiLCNyhR1ZPm7x4d/DCz3KlIr9VLRapS4L1UoUvSJnXeZrHiQeDXO
- tWCxB3DWq8PYEmnr8pEyWogSDBNQm5vcwCrA4B/3QD12YrPwWcr6jqaRQ4VCoDXj33DB
- 08IEHOVvlvRLvC60sWndpC3Js6izlrqfU9hP+ckN58SZGqrv75Ae+prNpXcV0TwaeZLQ
- GjEm33iflZ7GdSzwDnNf6/TVtBZ7MeOEKnOOWW4slZWZtFu0iI4RH6kk3V62lFXv0IHq
- iWAg==
-X-Gm-Message-State: AOJu0YxWrWYN+lIxcMD+xTNwxZ/KrFaRAFmgbTcPbBFFZImZBC0g8Phv
- ngXkHJj7esJRF7Xoa3rAGVaWrNyjvKng7m31sRUtEUHnQiR+U5NSdZ96y/+Y
-X-Gm-Gg: ASbGncsYeu99NmFnGvQtBOxij8NZ406b/0GeuaP7v6qVvB6rZH3QKMZTvHuQTX7IvRB
- WpXHTHzPWnnQJi3LUPAio2OSjLUNU8P9o8teBKuDEn8XzS/QXgtdRZ/qVR8g/v2DFU/CcGV4bcN
- ubnJ/hhN0BnaYwEnPA3gXEld2c9TmG9qyreplNMMBuDbv5yk+pKtJmpytSgcFmS869vKXmmzjXH
- kyDMKwQyeGtJn9p2djDRpcSKT2DVhJxcNPEo24/JLeszycbPcjFb9a9OIXx1w+KVpEpf7v/Bfp6
- f6I9brgVYp9kB2b/WbKGDVK1FpGv39jbquy5lC/BwKBbYPZgmY8p
-X-Google-Smtp-Source: AGHT+IEzGue0Ul0npgDv0DSlqeHOZn4GjRVKKO9kt6+kHmavvpOL9pZ0tEQoWuG4GO1/PQD6u5HaiQ==
-X-Received: by 2002:a17:906:d554:b0:ac2:a42a:999b with SMTP id
- a640c23a62f3a-ac3304e33bamr1391942766b.52.1742286699149; 
- Tue, 18 Mar 2025 01:31:39 -0700 (PDT)
+ bh=atpsG9vcLoel0zCk2MsO381WuNKoH2r0N8Fi57XZXNk=;
+ b=mT1Ne4sskKqM6bwYcVQCatUNfigSF1juQzKvBVb3WGcoaxYl5J2+b6ub/zM/c3/Chm
+ 3bRVigb/6mb5kg9y7x1emU5qJ/jCjJs4wRzqcmBi6h14shgKmge+oV3DNNPPVHUVr54S
+ +dWL6fA9+d6ACreWYPYbjVEJqKdpG/BXybVL2U4JTkpnAqLAa7KiG4BNMsjh2PrQLSzz
+ 8tdKdDX1JeQb/3HOsO6Z9Kd/DRTMOsoeaVWpEsOH+9K9+fbjNa1thMir9eyqUBSQnbjG
+ WhX/GlyIkYJ7DHBgOKcQauXSn/Zg9kEfFISRRENeDIS973fSzlDneFPW+aBDC4pNJoFl
+ UPHg==
+X-Gm-Message-State: AOJu0YwY7UCIVuIuGA7Idk82Cx9IItXlMqeIgCxaiMaZlXLSaMFiAcXA
+ AvJZwCtyNExVarfby4htdqaIzmR5PCBLBchpySXonxNPchcXz0tdJC+qhrI7
+X-Gm-Gg: ASbGncuHXybLYRBZ8GfxUS9qwGdUbdR0H2oesAnB0uudQGMJePGk49/tzlcmCMeMNKg
+ zCFSrVctAJ3PXeJ+tHl/L9hLMs01CyjTPh8XIiW46CVYZU6poGT6yzEETiXLNXBz7/bMmjO9k5y
+ JMNXFDLnDbYwPBjXthfSwNIyXfvHavun5ycsd6HNH1Tj3bukHMSynNmqUIigyxa/p/HrJdDsfja
+ NH0vDiRwPmWLK7sOyfh506hmNqAWVVLYK+pPhGJlBZyR+jWC23Zs7ZLXyi+NMlt4O91XGKYRLBX
+ ShSUVefFZJZheFENYm29i/XbeWsl1jjOeHqs5ctXyHbp1fgKpRxe
+X-Google-Smtp-Source: AGHT+IHf7bpFJ0D4ScEr08isQ7Pzrq3WBcl3Ie2BPl22NtuRpjyjQ0qzTvYrnkuT6U6f4R/DREabiw==
+X-Received: by 2002:a17:907:7ea4:b0:ac3:4229:91dc with SMTP id
+ a640c23a62f3a-ac38d58acf9mr238114266b.47.1742286700534; 
+ Tue, 18 Mar 2025 01:31:40 -0700 (PDT)
 Received: from eta.play.pl ([2a02:a312:c49b:a180:4e11:d045:a94e:c696])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac314a3e0acsm816189366b.142.2025.03.18.01.31.38
+ a640c23a62f3a-ac314a3e0acsm816189366b.142.2025.03.18.01.31.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 01:31:38 -0700 (PDT)
+ Tue, 18 Mar 2025 01:31:39 -0700 (PDT)
 From: Artur Kowalski <arturkow2000@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Artur Kowalski <arturkow2000@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Simon Glass <sjg@chromium.org>, Stephen Warren <swarren@nvidia.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+Cc: Artur Kowalski <arturkow2000@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stephen Warren <swarren@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
  Tom Warren <twarren@nvidia.com>
-Subject: [PATCH 2/4] tegra: respect CONFIG_TEGRA_ENABLE_UART* options on
- Transformer T20
-Date: Tue, 18 Mar 2025 09:30:45 +0100
-Message-ID: <20250318083103.63250-3-arturkow2000@gmail.com>
+Subject: [PATCH 3/4] ARM: tegra: expose UART-A over uSD on Transformer T20
+Date: Tue, 18 Mar 2025 09:30:46 +0100
+Message-ID: <20250318083103.63250-4-arturkow2000@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250318083103.63250-1-arturkow2000@gmail.com>
 References: <20250318083103.63250-1-arturkow2000@gmail.com>
@@ -102,38 +100,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If debug UART is set to anything other than UARTD, U-Boot's SPL hangs
-trying to communicate with UARTD which clock won't be ungated. With this
-patch it is possible to boot with UARTA enabled.
+Default pinmux setting using IRTX and IRRX pins doesn't seem ever used.
+Change that to SDB and SDD pins, so that the device can be debugged
+through uSD slot when UART is set to UART-A.
 
 Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
 ---
 
- include/configs/transformer-t20.h | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/arm/mach-tegra/tegra20/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/configs/transformer-t20.h b/include/configs/transformer-t20.h
-index 6a3d9b24036..d3a98cc5a70 100644
---- a/include/configs/transformer-t20.h
-+++ b/include/configs/transformer-t20.h
-@@ -16,7 +16,17 @@
- #define CFG_TEGRA_BOARD_STRING		"ASUS Transformer"
+diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra/tegra20/Kconfig
+index 3349f1e2786..aa98b4d3d5f 100644
+--- a/arch/arm/mach-tegra/tegra20/Kconfig
++++ b/arch/arm/mach-tegra/tegra20/Kconfig
+@@ -57,6 +57,7 @@ config TARGET_TEC
+ config TARGET_TRANSFORMER_T20
+ 	bool "Asus Tegra20 Transformer board"
+ 	select BOARD_LATE_INIT
++	select TEGRA_UARTA_SDB_SDD
  
- /* Board-specific serial config */
-+#if defined(CONFIG_TEGRA_ENABLE_UARTA)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTA_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTB)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTB_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTC)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARCD_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTD)
- #define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTD_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTE)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTE_BASE
-+#endif
- 
- #include "tegra-common-post.h"
- 
+ config TARGET_TRIMSLICE
+ 	bool "Compulab TrimSlice board"
 -- 
 2.48.1
 
