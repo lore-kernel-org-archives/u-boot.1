@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA98C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 10:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ABD6C28B28
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 10:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7004181D5D;
-	Tue, 18 Mar 2025 11:47:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B058381DF6;
+	Tue, 18 Mar 2025 11:47:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mTlabkeR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cB0sX2l0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 275A9819AA; Tue, 18 Mar 2025 11:47:37 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 16C0A81CAF; Tue, 18 Mar 2025 11:47:38 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08F3A81D0B
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 11:47:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 136CE81D42
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 11:47:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3912baafc58so4678801f8f.1
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 03:47:35 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43690d4605dso21748785e9.0
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 03:47:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742294854; x=1742899654; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742294855; x=1742899655; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2sekQU63kloVru5EHGh5HfRGGGGNQWsXJL/Sb3hAiTA=;
- b=mTlabkeRYM/en4JrYvTj7Ctx7GVzEP7NETGbg2R5WdBHb9r2DhEyA6kj0qBLZ1CrBg
- otEgwdYGOhzcPASvNHNk9LYiXeEvCDDOcavlLU6zbpCrtShys6uDvTc3trfXgu398mJl
- AGqGxMDB8+IuenCExI100SuZLyCKyh4c6JQ5RE81L/LlEiPOt0hgK+QRY7fyh+rj8wKb
- ijtb18R/bio4fCUCVpbV+QN1ftFXHhGk5N3geb3aEJNFRn0G+5MD21cevBtg23CRc4fP
- l3ZTs1wPTQmdUeeQlDOMb90jJlHAtpr/GGeP1Ows37b5T+nnVduHJ0XJt0lUHkkrCH/1
- hj4w==
+ bh=oFltWPALYkQiMDNUmSg+en3vLnxEiJ0+n8F2dvwsl/U=;
+ b=cB0sX2l0ahGWOIdKHbXSf+mahpHwC3JaN3OnW89eVaEXwQYzM1WCumiou2/EFQXNN/
+ TCBYJW6EB/jKK3QNVW2Nb2ik98X3rzkdCviht4hMSLh/dO3RVwJYNbPA1oqNrOpOxP36
+ dIi2x/baVnjonDdOG0mJSeT0MyrrNAyFnkhUht25bdPDQewuAeNBPEThVHdwaxqJhnmM
+ LpcZv0WISGWDa323vNfwFlfdGHa9U78NFNQH1U4rxwnfRtjiBS1+DTPGhLChdIxzoYEz
+ KUl0VWPvp0nbyQUPff/AYJMU3eZx19T5SQaU5ScbS+2ELZ2wswxIkRU563XcjgCkfwtS
+ BNBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742294854; x=1742899654;
+ d=1e100.net; s=20230601; t=1742294855; x=1742899655;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2sekQU63kloVru5EHGh5HfRGGGGNQWsXJL/Sb3hAiTA=;
- b=Xbze2qJ8A6M72VJJK2lqDxQEk99UYlLkRhcVkZo9lHxbJoou2hlX+pEurViB0caGI6
- xKpqAAEzgC210o+c6byVvNCANZgBeTJILfKrCOQqrDuMlVHNkk+Dz5QlUWTmY1q0xP3B
- A9wyKRykiyliPttfTTZ4vd011nYPiiz+bRA9xcH4wYj0xHhx9K/wx0DLdepwuRsulW51
- +jnVpNvrn4DM6OyGK4kvaBa5t5i987MpPoCoBPRYlnJ2b7IwiGsCvR28X1u9/BsA0lt6
- 6/VSzFIbmGA7HJHQnlfATtAMRF3mpr5xxRh8CPwl+x9Nzrdblt/DtLh1dOH4HhH83DV0
- 8wgw==
-X-Gm-Message-State: AOJu0Yzpk1ZZD9DIaAoErzT7nAMOk9blsONZ46zkkiHg5DJ4DKqyiKIy
- 13Jo6RX7df3GFLNL2cSGcLjvbOccS4CJ34FpUY5vw3cIGWHIQz7x4EZ5m/NIanidhbgZqyYpK4o
- Vajg=
-X-Gm-Gg: ASbGnctKDG5dcYz/ie1YXZv05W+WLtVkMcYpkxmfiAIARy3QmOzS7JnUDzTNKBwQp8q
- YaHCfmCL5xa+DrtPPWKf5rZbYNWFlgphYUe235R+5NUIl+9qitbslVF+B/AZn80JY66TtQY/heJ
- mgErM+p1aiAvqiIibSdGtNI6H/LHJ1tvnhl8RwLLxSExQE/ROtlBKhaRHEGgH7hTKkNPCCbhOlQ
- d/sbYt43nyui93IgHgJKIwI2cmZ+Dngbca3aCG1bdDmd2BswJhjnVz74Es7zmJNHgIh19liuYIl
- Rntc1DZMvazTJIAGWRx9h0QBhPGDjOemcnhX5zfW6MRt74QNOd750w==
-X-Google-Smtp-Source: AGHT+IHefRkATaTjOMfBhRrT+q8NjRyaCCwQjgsgYLA1qNbcQohAga+5sMJBweu9p+I3tXUCD0ULMA==
-X-Received: by 2002:a05:6000:1ace:b0:391:41c9:7a87 with SMTP id
- ffacd0b85a97d-3971fdc6db1mr17812194f8f.51.1742294854184; 
- Tue, 18 Mar 2025 03:47:34 -0700 (PDT)
+ bh=oFltWPALYkQiMDNUmSg+en3vLnxEiJ0+n8F2dvwsl/U=;
+ b=gZW9dgUfBmGl3BwbSNMK3T+9BU2f5zE5QJ8zgplNarKoTV4XoSLSkT6uDoJ5pTtpqD
+ lxZKyuQZFBvdwt4KuEGB8udr6N+Ft1RlvQsRxf70YxCwzP+fz1vM0KZr75zmwFj4aTE6
+ RXk0en/N7a1M2d3q1wUb8MBpRDzgG8Ql8k774Siii6dkZalVWT0X3/fzPHhOZ6t7i4tM
+ 2Af+f4MFcbBHMsHIruG53onss1r0HOeBr6jdbCA6V2WD52GyxElwznR7jFLcqBu4js5T
+ AYDoP3Zj9pBBf+G3GRdwTGnS8U0bjXrwjfKaUuiTd0UZBCeiufWkSK3IWKFE6gTCXWNq
+ stmg==
+X-Gm-Message-State: AOJu0YxgpcGt6PqI2GQ7+iYLszFB1oMM6kBbNJzLrQsTmRtCFJOR2c7j
+ GoXOZVklsKPz0aZCa/UekeG0VrtMzX7djEQ19gnJtt3DIMKSD8VDly2Nce4vJx+2dl8HL1UatSf
+ B3q4=
+X-Gm-Gg: ASbGnctMvPb2tG64i8v3gHdehBOjxvw/kO6Pt/ONhI3pfEnrJhgOizhlvJD6oF2pmy2
+ jE3ay5u9XHznLV4u1hvu0nih3f79VMFj4myfYgeXCNzOJJ9f5V4CkvctIOoWqhRLn1CgctL+BBh
+ u/cXN/dzNF4E0EP2wpXct8M0k9++RzDWsBizn+N4I/whITIpbXweI90DbvA0PlEDA4aEqqY1jMX
+ TFitqhLcVqmg+XoLQlKQBTr7Qnl2w23NNBYob6ISD5M5XMMxJ4i8GgeRZU18dkT+0+ADoUPAvJJ
+ 2Pu6X5iAx3CVm+zHJct+kypgqAZXKmn+WUm/PnbSSc+kfkYCmSVGbw==
+X-Google-Smtp-Source: AGHT+IHxtQ1yz2pJZGLMSyf2SkSU0rZt61E/92oqX7Cj8t/boNL6lmt0ltE65Sg1EWY1vyMGvKGVjg==
+X-Received: by 2002:a05:600c:4f92:b0:43d:9d5:474d with SMTP id
+ 5b1f17b1804b1-43d3b7cc234mr16180105e9.0.1742294855289; 
+ Tue, 18 Mar 2025 03:47:35 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:78bd:2e7e:120c:26bb])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fdda2dbsm131788185e9.2.2025.03.18.03.47.33
+ 5b1f17b1804b1-43d1fdda2dbsm131788185e9.2.2025.03.18.03.47.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 03:47:33 -0700 (PDT)
+ Tue, 18 Mar 2025 03:47:35 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: [PATCH v4 12/14] cmd: add spawn and wait commands
-Date: Tue, 18 Mar 2025 11:46:48 +0100
-Message-ID: <20250318104659.1114340-13-jerome.forissier@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH v4 13/14] test: cmd: add test for spawn and wait commands
+Date: Tue, 18 Mar 2025 11:46:49 +0100
+Message-ID: <20250318104659.1114340-14-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250318104659.1114340-1-jerome.forissier@linaro.org>
 References: <20250318104659.1114340-1-jerome.forissier@linaro.org>
@@ -106,280 +100,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a spawn command which runs another command in the background, as
-well as a wait command to suspend the shell until one or more background
-jobs have completed. The job_id environment variable is set by spawn and
-wait accepts optional job ids, so that one can selectively wait on any
-job.
-
-Example:
-
- => date; spawn sleep 5; spawn sleep 3; date; echo "waiting..."; wait; date
- Date: 2025-02-21 (Friday)    Time: 17:04:52
- Date: 2025-02-21 (Friday)    Time: 17:04:52
- waiting...
- Date: 2025-02-21 (Friday)    Time: 17:04:57
- =>
-
-Another example showing how background jobs can make initlizations
-faster. The board is i.MX93 EVK, with one spinning HDD connected to
-USB1 via a hub, and a network cable plugged into ENET1.
-
- # From power up / reset
- u-boot=> setenv autoload 0
- u-boot=> setenv ud "usb start; dhcp"
- u-boot=> time run ud
- [...]
- time: 8.058 seconds
-
- # From power up / reset
- u-boot=> setenv autoload 0
- u-boot=> setenv ud "spawn usb start; spawn dhcp; wait"
- u-boot=> time run ud
- [...]
- time: 4.475 seconds
+Test the spawn and wait commands.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- cmd/Kconfig  |  17 +++++
- cmd/Makefile |   2 +
- cmd/spawn.c  | 188 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 207 insertions(+)
- create mode 100644 cmd/spawn.c
+ test/cmd/Makefile |  1 +
+ test/cmd/spawn.c  | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
+ create mode 100644 test/cmd/spawn.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index cd391d422ae..0cbb75edfbe 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -3079,4 +3079,21 @@ config CMD_MESON
- 	help
- 	  Enable useful commands for the Meson Soc family developed by Amlogic Inc.
- 
-+config CMD_SPAWN
-+	bool "spawn and wait commands"
-+	depends on UTHREAD
-+	help
-+	  spawn runs a command in the background and sets the job_id environment
-+	  variable. wait is used to suspend the shell execution until one or more
-+	  jobs are complete.
-+
-+config CMD_SPAWN_NUM_JOBS
-+	int "Maximum number of simultaneous jobs for spawn"
-+	default 16
-+	help
-+	  Job identifiers are in the range 1..CMD_SPAWN_NUM_JOBS. In other words
-+	  there can be no more that CMD_SPAWN_NUM_JOBS running simultaneously.
-+	  When a jobs exits, its identifier is available to be re-used by the next
-+	  spawn command.
-+
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index d8a5e77402d..cf47f04851c 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -39,3 +39,4 @@ obj-$(CONFIG_CMD_WGET) += wget.o
  endif
-diff --git a/cmd/Makefile b/cmd/Makefile
-index c1275d466c8..b61f6586157 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -239,6 +239,8 @@ obj-$(CONFIG_CMD_SCP03) += scp03.o
- 
- obj-$(CONFIG_HUSH_SELECTABLE) += cli.o
- 
+ obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
+ endif
 +obj-$(CONFIG_CMD_SPAWN) += spawn.o
-+
- obj-$(CONFIG_ARM) += arm/
- obj-$(CONFIG_RISCV) += riscv/
- obj-$(CONFIG_SANDBOX) += sandbox/
-diff --git a/cmd/spawn.c b/cmd/spawn.c
+diff --git a/test/cmd/spawn.c b/test/cmd/spawn.c
 new file mode 100644
-index 00000000000..f7a9f225f93
+index 00000000000..8f48f5ee25c
 --- /dev/null
-+++ b/cmd/spawn.c
-@@ -0,0 +1,188 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/test/cmd/spawn.c
+@@ -0,0 +1,32 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * Copyright (c) 2011 The Chromium OS Authors.
++ * Tests for spawn and wait commands
++ *
++ * Copyright 2025, Linaro Ltd.
 + */
 +
 +#include <command.h>
-+#include <console.h>
-+#include <malloc.h>
-+#include <vsprintf.h>
-+#include <uthread.h>
++#include <test/cmd.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+/* Spawn arguments and job index  */
-+struct spa {
-+	int argc;
-+	char **argv;
-+	unsigned int job_idx;
-+};
-+
-+/*
-+ * uthread group identifiers for each running job
-+ * 0: job slot available, != 0: uthread group id
-+ * Note that job[0] is job_id 1, job[1] is job_id 2 etc.
-+ */
-+static unsigned int job[CONFIG_CMD_SPAWN_NUM_JOBS];
-+/*
-+ * Return values of the commands run as jobs */
-+static enum command_ret_t job_ret[CONFIG_CMD_SPAWN_NUM_JOBS];
-+
-+static void spa_free(struct spa *spa)
++static int test_cmd_spawn(struct unit_test_state *uts)
 +{
-+	int i;
++	ut_assertok(run_command("wait; spawn sleep 2; setenv j ${job_id}; "
++				"spawn setenv spawned true; "
++				"setenv jj ${job_id}; wait; "
++				"echo ${j} ${jj} ${spawned}", 0));
++	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
++	ut_asserteq_ptr(uts->actual_str,
++			strstr(uts->actual_str, "1 2 true"));
 +
-+	if (!spa)
-+		return;
++	ut_assertok(run_command("spawn true; wait; setenv t $?; spawn false; "
++				"wait; setenv f $?; wait; echo $t $f $?", 0));
++	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
++	ut_asserteq_ptr(uts->actual_str,
++			strstr(uts->actual_str, "0 1 0"));
++	ut_assert_console_end();
 +
-+	for (i = 0; i < spa->argc; i++)
-+		free(spa->argv[i]);
-+	free(spa->argv);
-+	free(spa);
-+}
-+
-+static struct spa *spa_create(int argc, char *const argv[])
-+{
-+	struct spa *spa;
-+	int i;
-+
-+	spa = calloc(1, sizeof(*spa));
-+	if (!spa)
-+		return NULL;
-+	spa->argc = argc;
-+	spa->argv = malloc(argc * sizeof(char *));
-+	if (!spa->argv)
-+		goto err;
-+	for (i = 0; i < argc; i++) {
-+		spa->argv[i] = strdup(argv[i]);
-+		if (!spa->argv[i])
-+			goto err;
-+	}
-+	return spa;
-+err:
-+	spa_free(spa);
-+	return NULL;
-+}
-+
-+static void spawn_thread(void *arg)
-+{
-+	struct spa *spa = (struct spa *)arg;
-+	ulong cycles = 0;
-+	int repeatable = 0;
-+
-+	job_ret[spa->job_idx] = cmd_process(0, spa->argc, spa->argv,
-+					    &repeatable, &cycles);
-+	spa_free(spa);
-+}
-+
-+static unsigned int next_job_id(void)
-+{
-+	int i;
-+
-+	for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
-+		if (!job[i])
-+			return i + 1;
-+
-+	/* No job available */
 +	return 0;
 +}
-+
-+static void refresh_jobs(void)
-+{
-+	int i;
-+
-+	for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
-+		if (job[i] && uthread_grp_done(job[i]))
-+			job[i] = 0;
-+
-+}
-+
-+static int do_spawn(struct cmd_tbl *cmdtp, int flag, int argc,
-+		    char *const argv[])
-+{
-+	unsigned int id;
-+	unsigned int idx;
-+	struct spa *spa;
-+	int ret;
-+
-+	if (argc == 1)
-+		return CMD_RET_USAGE;
-+
-+	spa = spa_create(argc - 1, argv + 1);
-+	if (!spa)
-+		return CMD_RET_FAILURE;
-+
-+	refresh_jobs();
-+
-+	id = next_job_id();
-+	if (!id)
-+		return CMD_RET_FAILURE;
-+	idx = id - 1;
-+
-+	job[idx] = uthread_grp_new_id();
-+
-+	ret = uthread_create(NULL, spawn_thread, spa, 0, job[idx]);
-+	if (ret) {
-+		job[idx] = 0;
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	ret = env_set_ulong("job_id", id);
-+	if (ret)
-+		return CMD_RET_FAILURE;
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+U_BOOT_CMD(spawn, CONFIG_SYS_MAXARGS, 0, do_spawn,
-+	   "run commands and summarize execution time",
-+	   "command [args...]\n");
-+
-+static enum command_ret_t wait_job(unsigned int idx)
-+{
-+	int prev = disable_ctrlc(false);
-+
-+	while (!uthread_grp_done(job[idx])) {
-+		if (ctrlc()) {
-+			puts("<INTERRUPT>\n");
-+			disable_ctrlc(prev);
-+			return CMD_RET_FAILURE;
-+		}
-+		uthread_schedule();
-+	}
-+
-+	job[idx] = 0;
-+	disable_ctrlc(prev);
-+
-+	return job_ret[idx];
-+}
-+
-+static int do_wait(struct cmd_tbl *cmdtp, int flag, int argc,
-+		   char *const argv[])
-+{
-+	enum command_ret_t ret = CMD_RET_SUCCESS;
-+	unsigned long id;
-+	unsigned int idx;
-+	int i;
-+
-+	if (argc == 1) {
-+		for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
-+			if (job[idx])
-+				ret = wait_job(i);
-+	} else {
-+		for (i = 1; i < argc; i++) {
-+			id = dectoul(argv[i], NULL);
-+			if (id < 0 || id > CONFIG_CMD_SPAWN_NUM_JOBS)
-+				return CMD_RET_USAGE;
-+			idx = (int)id - 1;
-+			ret = wait_job(idx);
-+		}
-+	}
-+
-+	return ret;
-+}
-+
-+U_BOOT_CMD(wait, CONFIG_SYS_MAXARGS, 0, do_wait,
-+	   "wait for one or more jobs to complete",
-+	   "[job_id ...]\n"
-+	   "    - Wait until all specified jobs have exited and return the\n"
-+	   "      exit status of the last job waited for. When no job_id is\n"
-+	   "      given, wait for all the background jobs.\n");
++CMD_TEST(test_cmd_spawn, UTF_CONSOLE);
 -- 
 2.43.0
 
