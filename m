@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5035C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 14:22:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A66C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 14:32:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46F92817D8;
-	Tue, 18 Mar 2025 15:22:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 08E89817D8;
+	Tue, 18 Mar 2025 15:32:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CifQTK6O";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EU64718S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0DF88186D; Tue, 18 Mar 2025 15:22:54 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 70777817D8; Tue, 18 Mar 2025 15:32:21 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E26D3800B6
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 15:22:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED58A800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 15:32:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-224341bbc1dso106853205ad.3
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 07:22:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43cf58eea0fso18050165e9.0
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 07:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742307770; x=1742912570; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=acnSIz4kDzi5K4F/ZHEhdRyIuQNTnpuhVxnL+uOewx8=;
- b=CifQTK6ODEpRAo/BctFOEDzVq2ZUO5cJn0wgvhWFZMYOQvsUR5ghUkjeqx5EyxHQwr
- +kyt4jTbpxYtuQDE7DjgCCwlJ9oli6noqMZ8qq+u/YzMKbwJ+bmSchpfygazpLakjN/H
- oFSb6rhOaP1ZEy9siRst6IhDizf6E6gEELWl0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742307770; x=1742912570;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1742308338; x=1742913138; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=acnSIz4kDzi5K4F/ZHEhdRyIuQNTnpuhVxnL+uOewx8=;
- b=EdENb9qHPt1VuZ9Y1QvMq88vNUEziGRSM60QI6/bv9GGtKPpuuIUpdtXsnsEWztuiL
- 46I2/WYBUaNbcKTrBKLLVm2wxZisk2udZOquFnrTE09Mcii8dsT8VUISiaVIaDsJoAiO
- wITycTc0ncf1/AyyUIiWaB6NFiIRk/gcN+mUdERW9jMrCsMoZdQO3UFGKMvzkfXBp7Nv
- Zlj2lMjRyiv6hoa1ZghivuP6a96IgejbDRQkUHSeviYcOYQkmnxZfoIyM+neU5CM1v7B
- 4HafDQbzshXHg4837flYxTpohHxQWdjuZWm0CuBUU0TbmEVTfu6umt0NR+8Sp2WUxkbv
- hp9g==
-X-Gm-Message-State: AOJu0YxSa3J40LOIAvxdu5vXF99q8XT+xXLtzakOZRWulw/7ukb9znjA
- qbcVMRQswICODVxXsOWuTV9ILOTq2mp0tsghHGQC+sLPuRSLtvrWEI1jNlxPsFjjT82mjkhByBV
- o
-X-Gm-Gg: ASbGnct7JGDvKK9ITNHqsVs6RbdYuOaqgjNBDnnqyqq2rl0lc/Yu7heuqRtElKw9Zv8
- hz5FOcwnTLk1oR2o+V4OutXJ1srGAM8Hex9U3n6Z2syspBO0o421QkoTVin9/uQSORG1r3L1jXr
- uoFF8vezOxYUcqLotLHgwQWpvt1OZzC6+njxgNeFuwexrGK8qAAkNLUfrXJBeHSpY2H8RyvjtVY
- bIhJnAhShiPfM5HbTUn8p698i1PfX7+UAMwAR5XU4Z/HRaOskOOwHS0FXWlgIASXWRhfYnQLl1m
- LX5cNzoiXv9Kx1eQiewYd7TkXtN4g1d0cfbDRpnga40L2w==
-X-Google-Smtp-Source: AGHT+IFCdNLZ5FvhGlclptN8w9WkJLGIbIPGfjzvE3awgh+O57a1smD5lsE6iIGYf9v0m9ITAiUj4A==
-X-Received: by 2002:a05:6a00:ac8:b0:736:8c0f:774f with SMTP id
- d2e1a72fcca58-737572d54c3mr4674758b3a.22.1742307770204; 
- Tue, 18 Mar 2025 07:22:50 -0700 (PDT)
-Received: from bill-the-cat ([187.144.138.125])
+ bh=XjzDwxZdS0agJ/4ounegG02oBXOVZnc/ipU6Y8RBM0c=;
+ b=EU64718Sr5TQe03NWt7G0DiNV3D9wn9iJQ7O3fagPyO2XSxsnyKicaxGLyo7+HYz1u
+ m1/0YZs+6XuGr8YjywpLw5AJJixYGd+vSIXfaIldLhldI+FLWAlYHXxobcNReQc+Ejek
+ PJDJDbu7Z9lrwIJWKGlpAWEFAmkPp6Wy3RTArtxaA+2EiznimIgetJa/A1zQhPOc4XnX
+ q3+z4G7yqg7+KRftvfHgJi8BpTmXNVgnmZXvX3vVXqE8r0MOXBdb0+fR78ZK/l20UQqs
+ CdYOQepFEEyxM1QwxCx6ZwBxVvQknTt3r76IKJQuSo8zPYOqTDsMqemeUK6TgjkahvUS
+ /ffA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742308338; x=1742913138;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XjzDwxZdS0agJ/4ounegG02oBXOVZnc/ipU6Y8RBM0c=;
+ b=gDP2rp/YiNNI7e1uPMQVmPhXYki7mqhyaCt8eksYmzYM3AN7RuOV/MPHz3zo/TUZqQ
+ brILptm4ra3OwpQOccmx0eAIfBPvsV9vTij3r8BN0P7OXP7Z9G7vCjBxHeJdw3mhG+H0
+ rRciKhguIle1q+PrtyikwJoI4PogBEg8PhvQSlP/fR/clVgVGPdgnfv/pM54zfXfN7TK
+ 88Al2FDZJtwLizPbt4h+gWihG/cAkbCaPfACDKOh9+fdanmcF89j5ieXtID8ivX0kwXh
+ jtTcCqX+p1nniFMUfg5BDxAjEIzi6ut/VqcjoHRryk5i7hnHI9KK/e5rXeNC5qD+OvL0
+ BSsA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV1pS4MfZDdDg6kf9Zy6c2GcL912pd8aaqW+DR90VVzvGi5y4P7G/28vJH1yoKmz0VRm1zcSCs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4oczyV86/selvJKOaA3GusVJrxiCueuNyAhkMOSCBNX+j8HRb
+ lhbNe8ltMXe/qcuJwKgdbP5WNFswt2cmG87oVEBHtXDBeGELfLBZeYBcJiWObg8=
+X-Gm-Gg: ASbGncsIAuu4iqhEvkDm4+nxHDvHpvrt2do+jlWenjcjYV+Y9GLW5+SGnyMElevYYjx
+ 5jAsE+nvo1xgmeJYMKXYsxsDoiitC9WUTv/5qt0Xg2+/+5s9Wfe+ERx3qCVVEfwU6nlfwfOKGPk
+ fZXKcw2jqx2JiIDzdx9L5+6P5lPemp1XUVLyPKk76QNEHMX9S8+UKI5XbNLOTpyu4Bt7ZfkDom+
+ F23vFiXVUFwVScEAogGy3QbJxaMczx1lDQ8Ve5hGBrbX8RwT+v50jXu7PEPWmEM0FOGOil5aICo
+ TQb0HC+bZOAMyniRv25j6f9d1mCRsejDhecglRMsQ6DQpktUtk6DHariPu6IpjAMKVYoT2EisCf
+ n
+X-Google-Smtp-Source: AGHT+IFQOXcHPvZ4g+ztwBf9Gh595kL+gsLZc12JmxMk7PUofA6x0W3M5AXqEhiI9lOgWstSEM2rJQ==
+X-Received: by 2002:a05:600c:3ba6:b0:43d:ed:ad07 with SMTP id
+ 5b1f17b1804b1-43d3b9cd740mr22165735e9.29.1742308338294; 
+ Tue, 18 Mar 2025 07:32:18 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56ea7f6e2sm9097811a12.60.2025.03.18.07.22.48
+ ffacd0b85a97d-395c7df35bdsm17836971f8f.5.2025.03.18.07.32.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 07:22:49 -0700 (PDT)
-Date: Tue, 18 Mar 2025 08:22:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: Re: [PATCH v4 00/47] x86: Improve operation under QEMU
-Message-ID: <20250318142246.GZ2640854@bill-the-cat>
-References: <20250306160428.3041057-1-sjg@chromium.org>
- <20250307142255.GL2640854@bill-the-cat>
- <CAFLszTgtYsVQW-kETzUAdvJvAT6fN_53TeoN7o8wu52Ze3u56Q@mail.gmail.com>
- <20250314160652.GS2640854@bill-the-cat>
- <CAFLszTjGV==WftDU6C=S8VB28QJLvFJGS0H3=PKwTCjkZvNibQ@mail.gmail.com>
- <20250315135749.GI2640854@bill-the-cat>
- <CAFLszTjEONSErVbE0O5E0+izUDO8yFNZ+hwzvHjvx-nTczzeSQ@mail.gmail.com>
- <20250317230521.GU2640854@bill-the-cat>
- <CAFLszThJTWD1hejKfr9TfQYJRCiMoVQufkB+4=3K9Vf+bEBPYg@mail.gmail.com>
+ Tue, 18 Mar 2025 07:32:17 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: michal.simek@amd.com, marek.vasut+renesas@mailbox.org, 
+ bmeng.cn@gmail.com, venkatesh.abbarapu@amd.com, u-boot@lists.denx.de, 
+ Love Kumar <love.kumar@amd.com>
+In-Reply-To: <20241230-topic-ufs-cleanup-v2-0-4c6d7994a45d@linaro.org>
+References: <20241230-topic-ufs-cleanup-v2-0-4c6d7994a45d@linaro.org>
+Subject: Re: [PATCH v2 0/6] ufs: core: initial cleanup and defines sync
+ with Linux v6.12
+Message-Id: <174230833764.3931542.14369419014688447493.b4-ty@linaro.org>
+Date: Tue, 18 Mar 2025 15:32:17 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3XNkLBAIICW7NY4F"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThJTWD1hejKfr9TfQYJRCiMoVQufkB+4=3K9Vf+bEBPYg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,178 +105,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---3XNkLBAIICW7NY4F
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 30 Dec 2024 11:30:54 +0100, Neil Armstrong wrote:
+> This serie fixes the build and checkpatch warnings, and
+> does a split of the ufs.h into a separate ufshci.h which
+> helps syndhronizing the defines from Linux v6.12.
+> 
+> No functional changes intended, tests on hardware
+> are welcome.
+> 
+> [...]
 
-On Tue, Mar 18, 2025 at 08:32:27AM +0000, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 18 Mar 2025 at 00:05, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > [cc list trimmed and adding Rasmus]
-> >
-> > On Sat, Mar 15, 2025 at 02:38:29PM +0000, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 15 Mar 2025 at 13:57, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Mar 15, 2025 at 12:54:25PM +0000, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 14 Mar 2025 at 16:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Mar 14, 2025 at 02:44:35PM +0000, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 7 Mar 2025 at 14:23, Tom Rini <trini@konsulko.com> wr=
-ote:
-> > > > > > > >
-> > > > > > > > On Thu, Mar 06, 2025 at 09:03:27AM -0700, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > U-Boot can start and boot an OS in both qemu-x86 and qemu=
--x86_64 but it
-> > > > > > > > > is not perfect.
-> > > > > > > > >
-> > > > > > > > > With both builds, executing the VESA ROM causes an interm=
-ittent hang, at
-> > > > > > > > > least on some AMD CPUs.
-> > > > > > > > >
-> > > > > > > > > With qemu-x86_64 kvm cannot be used since the move to lon=
-g mode (64-bit)
-> > > > > > > > > is done in a way that works on real hardware but not with=
- QEMU. This
-> > > > > > > > > means that performance is 4-5x slower than it could be, a=
-t least on my
-> > > > > > > > > CPU.
-> > > > > > > > >
-> > > > > > > > > We can work around the first problem by using Bochs, whic=
-h is anyway a
-> > > > > > > > > better choice than VESA for QEMU. The second can be addre=
-ssed by using
-> > > > > > > > > the same descriptor across the jump to long mode.
-> > > > > > > > >
-> > > > > > > > > With an MTRR fix this allows booting into Ubuntu on qemu-=
-x86_64
-> > > > > > > > >
-> > > > > > > > > In v3 some e820 patches are included to make booting reli=
-able and avoid
-> > > > > > > > > ACPI tables being dropped. Also, several MTTR problems ar=
-e addressed, to
-> > > > > > > > > support memory sizes above 4GB reliably.
-> > > > > > > >
-> > > > > > > > Do you plan to rebase the prerequisite series' this require=
-s so that it
-> > > > > > > > can be merged?
-> > > > > > >
-> > > > > > > Here's my understanding of where things are:
-> > > > > > >
-> > > > > > > 1. You rejected the membuf series and my replies to try to re=
-solve
-> > > > > > > that haven't gone anywhere yet. So your tree doesn't have any=
- tests
-> > > > > > > for that code and still has the old naming.
-> > > > > >
-> > > > > > https://patchwork.ozlabs.org/comment/3473898/ is a well thought=
- out not
-> > > > > > gratuitous summary of why the series as it stands is a step in =
-the wrong
-> > > > > > direction. Tests are good. They're not a reason to pull an othe=
-rwise bad
-> > > > > > series. This series should be rebased to not depend on that ser=
-ies. The
-> > > > > > tests from the other series should be split out.
-> > > > >
-> > > > > It's not a bad series, unfortunately. I replied with my own comme=
-nts
-> > > > > and I stand by them.
-> > > > >
-> > > > > I don't mind if you want to drop the #ifdef (which shows how a fl=
-ag
-> > > > > could be used and the code-size impact). But other than that, I am
-> > > > > firm on this for now. I've already applied it to my tree and a me=
-mbuf
-> > > > > implementation with tests and without a power-of-two limitation is
-> > > > > important for my current work on distros and expo.
-> > > >
-> > > > Well, you need to rebase this series without that then as I'm not g=
-oing
-> > > > to take something another long time project contributor said was wr=
-ong
-> > > > and offered lots of constructive feedback on.
-> > >
-> > > It doesn't affect this series. It is for future work.
-> > >
-> > > We'll see if the LTPC replies to my concerns.
-> >
-> > Well, I guess I'm going to regret choosing to not chime in there at the
-> > time and say that no, working against your tree is the wrong direction.
-> > There's certainly enough feedback in that thread for you to make a v2
-> > against mainline.  Because to be clear, no, your v1 isn't going in
-> > mainline.
->=20
-> Firstly it does not affect this series, so I hope you can pull this
-> series in soon.
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
 
-A problematic side effect of your large series postings is that it ends
-up being where unrelated stuff is talked about. I'm not judging v5 of
-*this* series based on membuf.
+[1/6] ufs: core: include missing include/ufs.h
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/938ce571b89cdada5ee210150254972a07df6ef2
+[2/6] ufs: core: mark unexported functions as static
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/c20826be04046ebe7f5a03070cf00645e4380e35
+[3/6] ufs: core: cosmetic fixups
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/03012e85998fb0d796359c7270d2b3887863aee6
+[4/6] ufs: core: move ufshci defines in a separate header
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/124ba1eb9fb5537b9b600727e99d4587b733be64
+[5/6] ufs: core: sync unipro.h with Linux v6.12
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/2f2c7c3c8d67fd4c40d1c0582f641cef1fa1b24e
+[6/6] ufs: core: sync ufshci.h with Linux v6.12
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/a59fda334828596677a2a764d12bdb3eb6381730
 
-> This is the first I've heard of a v2 for membuf. From my side I don't
+-- 
+Neil
 
-That's what "Changes Requested" means, you need to do a vN+1 of it.
-
-> want to rewrite it to use a different algorithm, nor force it to use a
-> power-of-two size. That was not the point of my series. Here is the
-> cover letter:
->=20
-> >>>>
-> The membuff implementation curently has no tests. It also assumes that
-> head and tail can never correspond unless the buffer is empty.
->=20
-> This series provides a compile-time flag to support a 'full' flag. It
-> also adds some tests of the main routines.
->=20
-> The data structure is also renamed to membuf which fits better with
-> U-Boot.
->=20
-> There may be some cases in the code which could be optimised a little,
-> but the implementation is functional.
-> <<<<
->=20
-> As I said, I'm happy to drop the addition of a compile-time flag. It
-> was mostly to see if anyone thought it was a good idea.
->=20
-> So how about just applying the first 7 patches? I can do a revert of
-> patch 8 in my tree. Then if Rasmus wants to rewrite it he can do so,
-> so long as the power-of-two size isn't mandatory.
-
-If you want to post a v2 of the membuff series against next that doesn't
-contain changes that've been strongly objected to, yes, I'll review it.
-No, I won't go and see if your v1 still applies to next. Given all of
-the other test/ changes I would assume it doesn't.
-
---=20
-Tom
-
---3XNkLBAIICW7NY4F
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfZgbIACgkQFHw5/5Y0
-tyzjagv5AXwO2ADm65MNGbuXGTwwWBAtCrZxQ7Y9aDX1S73kWTzKSK24wRMgEmDQ
-i1L86lGBebiEQ4e+XOFtnc5iE+KB16twz+vdC2Ot05RXnggy7nygaul13H4AYuFg
-C4tooPQiK4r+EYOI3BojMh6inlSND9V1o7T6KojQcrdhWk8z+gwOPNnzqd0Uwoby
-0WYbT1dv7WPRm3+zBKEwHw9z8n405Dx2meOL8VKyjbybQibJssnwsVwuB3wsXOgl
-ypO7ofU9odn+nmO6bFSOAKgs88RMJioPJDnFVH+vxT6OuAs2Zat7VgfAoIRqWJ7c
-DGqtrK6b41Bd+37OeUJbT+0Kugs3RJXa6G4xwgKNzB4855PMB5zxXAZeDMU5hNhD
-+wq5tFaGi4yyx4Qp+IFofS7iqcnjIHO22fmO8m8q5jehNwXshGUMB7HCiof1/kRW
-gdWKT7gdRsZ+BgJAe0dYLvtiXQoIJrUHOnOwhz7We+Sfc4gDIHsmj6UjIQrL5dUg
-U93CFG2I
-=E2Sa
------END PGP SIGNATURE-----
-
---3XNkLBAIICW7NY4F--
