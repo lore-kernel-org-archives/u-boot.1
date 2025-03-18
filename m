@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEBB5C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 10:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 505B3C28B28
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 10:51:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D95E8168B;
-	Tue, 18 Mar 2025 11:51:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79B4E81DCD;
+	Tue, 18 Mar 2025 11:51:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qzlME8ck";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HdXsmMPF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FBCE81D25; Tue, 18 Mar 2025 11:51:18 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id F216F81B5C; Tue, 18 Mar 2025 11:51:23 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 730308186D
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 11:51:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A7E8E8186D
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 11:51:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=f-akthar@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52IApDNU3044649
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52IApKK43130285
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 18 Mar 2025 05:51:13 -0500
+ Tue, 18 Mar 2025 05:51:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742295073;
- bh=/d17zyelCnSJBffvpmLO3x2n1rYU8n1OdlgNFdZtY2M=;
+ s=ti-com-17Q1; t=1742295080;
+ bh=HfFkYiUtLRjAfd6MOOC32VKEoI7HW7MLhxcc9fCvdLo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qzlME8ckOBvpj8DAeJLEgzeEBvHYjNVSzX7GSQLmNqYlm/NhOO3wW93j5pas64JUz
- loUcd5m4nry7N4iTp/pBP7460OuDtGT0NpxWpOGdQIJxAeyER3G3f55YPubi3zUB8J
- 9PcluVilx242rbKpvXvYnPcCb7H6RMtskdQNKGb0=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52IApDQ6014905
+ b=HdXsmMPF3JrKAjq+Rc7mM/w2heW0x/o/iGiPHHdC64tXbY5NJEEYxmxoSWDc+w/03
+ hUOemAh9v01K3k/tL/rK/86LBsBdUPBls6wjxKneK2DKS24THRIaGwqj733PzK6YFe
+ 7NmiY0O39/VOo7KkLcbo+jfkH83pPAhtdVT477PU=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52IApJxj015067
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 18 Mar 2025 05:51:13 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 18 Mar 2025 05:51:19 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
- Mar 2025 05:51:13 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 05:51:19 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 18 Mar 2025 05:51:13 -0500
+ Frontend Transport; Tue, 18 Mar 2025 05:51:19 -0500
 Received: from localhost (fayaz-hp-z2-tower-g4-workstation.dhcp.ti.com
  [172.24.227.181] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52IApCPE057194;
- Tue, 18 Mar 2025 05:51:12 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52IApIEh095211;
+ Tue, 18 Mar 2025 05:51:19 -0500
 From: Harsha Vardhan V M <h-vm@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <vigneshr@ti.com>, <k-malarvizhi@ti.com>,
  <kamlesh@ti.com>
-Subject: [RFC PATCH v3 3/5] cmd: fuse: Add fuse writebuff sub-system command
-Date: Tue, 18 Mar 2025 16:20:45 +0530
-Message-ID: <20250318105047.256022-4-h-vm@ti.com>
+Subject: [RFC PATCH v3 4/5] drivers: k3_fuse: Add fuse sub-system func calls
+Date: Tue, 18 Mar 2025 16:20:46 +0530
+Message-ID: <20250318105047.256022-5-h-vm@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250318105047.256022-1-h-vm@ti.com>
 References: <20250318105047.256022-1-h-vm@ti.com>
@@ -81,117 +81,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add CMD_FUSE_WRITEBUFF config option to add and enable fuse writebuff
-sub-system command. Add fuse_writebuff function to be invoked on
-writebuff command.
+Add K3_FUSE config option to add and enable fuse sub-system
+implementation function calls.
 
 Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig    |  8 ++++++++
- cmd/fuse.c     | 30 +++++++++++++++++++++++++-----
- include/fuse.h |  9 +++++++++
- 3 files changed, 42 insertions(+), 5 deletions(-)
+ drivers/misc/Kconfig   |  7 ++++
+ drivers/misc/Makefile  |  1 +
+ drivers/misc/k3_fuse.c | 78 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 86 insertions(+)
+ create mode 100644 drivers/misc/k3_fuse.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index cd391d422ae..81c59becc2d 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1236,6 +1236,14 @@ config CMD_FUSE
- 	  which control the behaviour of the device. The command uses the
- 	  fuse_...() API.
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index da84b35e804..834e0285097 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -468,6 +468,13 @@ config STM32MP_FUSE
+ 	  for STM32MP architecture.
+ 	  This API is needed for CMD_FUSE.
  
-+config CMD_FUSE_WRITEBUFF
-+	bool "Support for the fuse writebuff"
-+	depends on CMD_FUSE
++config K3_FUSE
++	bool "Enable TI K3 fuse wrapper providing the fuse API"
++	depends on MISC && CMD_FUSE && CMD_FUSE_WRITEBUFF
 +	help
-+	  This allows programming fuses, which control the behaviour of
-+	  the device, using a structured buffer in memory. The command
-+	  uses the fuse_writebuff() API.
++	  If you say Y here, you will get support for the fuse API (OTP)
++	  for TI K3 architecture.
 +
- config CMD_GPIO
- 	bool "gpio"
- 	help
-diff --git a/cmd/fuse.c b/cmd/fuse.c
-index 9825477c8da..076907f1c8b 100644
---- a/cmd/fuse.c
-+++ b/cmd/fuse.c
-@@ -43,11 +43,18 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 	argc -= 2 + confirmed;
- 	argv += 2 + confirmed;
- 
--	if (argc < 2)
--		return CMD_RET_USAGE;
-+	if (IS_ENABLED(CONFIG_CMD_FUSE_WRITEBUFF) && !strcmp(op, "writebuff")) {
-+		if (argc == 1)
-+			addr = simple_strtoul(argv[0], NULL, 16);
-+		else
-+			return CMD_RET_USAGE;
-+	} else {
-+		if (argc < 2)
-+			return CMD_RET_USAGE;
- 
--	bank = (u32)simple_strtoul(argv[0], NULL, 0);
--	word = (u32)simple_strtoul(argv[1], NULL, 0);
-+		bank = (u32)simple_strtoul(argv[0], NULL, 0);
-+		word = (u32)simple_strtoul(argv[1], NULL, 0);
+ config STM32_RCC
+ 	bool "Enable RCC driver for the STM32 SoC's family"
+ 	depends on (ARCH_STM32 || ARCH_STM32MP) && MISC
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index dac805e4cdd..0b81ba2604f 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -48,6 +48,7 @@ obj-$(CONFIG_$(XPL_)I2C_EEPROM) += i2c_eeprom.o
+ obj-$(CONFIG_IHS_FPGA) += ihs_fpga.o
+ obj-$(CONFIG_IMX8) += imx8/
+ obj-$(CONFIG_IMX_ELE) += imx_ele/
++obj-$(CONFIG_K3_FUSE) += k3_fuse.o
+ obj-$(CONFIG_LED_STATUS) += status_led.o
+ obj-$(CONFIG_LED_STATUS_GPIO) += gpio_led.o
+ obj-$(CONFIG_MPC83XX_SERDES) += mpc83xx_serdes.o
+diff --git a/drivers/misc/k3_fuse.c b/drivers/misc/k3_fuse.c
+new file mode 100644
+index 00000000000..4a8ff1f2523
+--- /dev/null
++++ b/drivers/misc/k3_fuse.c
+@@ -0,0 +1,78 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2025 Texas Instruments Incorporated, <www.ti.com>
++ */
++
++#include <errno.h>
++#include <stdio.h>
++#include <fuse.h>
++#include <linux/arm-smccc.h>
++#include <string.h>
++
++#define K3_SIP_OTP_WRITEBUFF 0xC2000000
++#define K3_SIP_OTP_WRITE 0xC2000001
++#define K3_SIP_OTP_READ 0xC2000002
++
++int fuse_read(u32 bank, u32 word, u32 *val)
++{
++	struct arm_smccc_res res;
++
++	if (bank != 0U) {
++		printf("Invalid bank argument, ONLY bank 0 is supported\n");
++		return -EINVAL;
 +	}
- 
- 	if (!strcmp(op, "read")) {
- 		if (argc == 2)
-@@ -161,6 +168,15 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- 			if (ret)
- 				goto err;
- 		}
-+	} else if (IS_ENABLED(CONFIG_CMD_FUSE_WRITEBUFF) && !strcmp(op, "writebuff")) {
-+		printf("Programming fuses using a structured buffer in memory "
-+				"starting at addr 0x%lx\n", addr);
-+		if (!confirmed && !confirm_prog())
-+			return CMD_RET_FAILURE;
 +
-+		ret = fuse_writebuff(addr);
-+		if (ret)
-+			goto err;
- 	} else {
- 		return CMD_RET_USAGE;
- 	}
-@@ -186,5 +202,9 @@ U_BOOT_CMD(
- 	"fuse prog [-y] <bank> <word> <hexval> [<hexval>...] - program 1 or\n"
- 	"    several fuse words, starting at 'word' (PERMANENT)\n"
- 	"fuse override <bank> <word> <hexval> [<hexval>...] - override 1 or\n"
--	"    several fuse words, starting at 'word'"
-+	"    several fuse words, starting at 'word'\n"
-+#ifdef CONFIG_CMD_FUSE_WRITEBUFF
-+	"fuse writebuff [-y] <addr> - program fuse data\n"
-+	"    using a structured buffer in memory starting at 'addr'\n"
-+#endif /* CONFIG_CMD_FUSE_WRITEBUFF */
- );
-diff --git a/include/fuse.h b/include/fuse.h
-index 4519821af7e..902b5f56a74 100644
---- a/include/fuse.h
-+++ b/include/fuse.h
-@@ -12,6 +12,7 @@
- #define _FUSE_H_
- 
- #include <linux/types.h>
-+#include <linux/errno.h>
- 
- /*
-  * Read/Sense/Program/Override interface:
-@@ -25,5 +26,13 @@ int fuse_read(u32 bank, u32 word, u32 *val);
- int fuse_sense(u32 bank, u32 word, u32 *val);
- int fuse_prog(u32 bank, u32 word, u32 val);
- int fuse_override(u32 bank, u32 word, u32 val);
-+#ifdef CONFIG_CMD_FUSE_WRITEBUFF
-+int fuse_writebuff(ulong addr);
-+#else
-+static inline int fuse_writebuff(ulong addr)
++	/* Make SiP SMC call and send the word in the parameter register */
++	arm_smccc_smc(K3_SIP_OTP_READ, word,
++		      0, 0, 0, 0, 0, 0, &res);
++
++	*val = res.a1;
++	if (res.a0 != 0)
++		printf("SMC call failed: Error code %lu\n", res.a0);
++
++	return res.a0;
++}
++
++int fuse_sense(u32 bank, u32 word, u32 *val)
 +{
 +	return -EPERM;
 +}
-+#endif	/* CONFIG_CMD_FUSE_WRITEBUFF */
- 
- #endif	/* _FUSE_H_ */
++
++int fuse_prog(u32 bank, u32 word, u32 val)
++{
++	struct arm_smccc_res res;
++	u32 mask = val;
++
++	if (bank != 0U) {
++		printf("Invalid bank argument, ONLY bank 0 is supported\n");
++		return -EINVAL;
++	}
++
++	/* Make SiP SMC call and send the word, val and mask in the parameter register */
++	arm_smccc_smc(K3_SIP_OTP_WRITE, word,
++		      val, mask, 0, 0, 0, 0, &res);
++
++	if (res.a0 != 0)
++		printf("SMC call failed: Error code %lu\n", res.a0);
++
++	return res.a0;
++}
++
++int fuse_override(u32 bank, u32 word, u32 val)
++{
++	return -EPERM;
++}
++
++int fuse_writebuff(ulong addr)
++{
++	struct arm_smccc_res res;
++
++	/* Make SiP SMC call and send the addr in the parameter register */
++	arm_smccc_smc(K3_SIP_OTP_WRITEBUFF, (unsigned long)addr,
++		      0, 0, 0, 0, 0, 0, &res);
++
++	if (res.a0 != 0)
++		printf("SMC call failed: Error code %lu\n", res.a0);
++
++	return res.a0;
++}
 -- 
 2.34.1
 
