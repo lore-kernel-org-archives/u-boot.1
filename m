@@ -4,96 +4,192 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA89C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 09:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27A07C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 09:04:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03606805D7;
-	Tue, 18 Mar 2025 10:03:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 86E02805D7;
+	Tue, 18 Mar 2025 10:04:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=topic.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="heDHP5uK";
+	dkim=pass (2048-bit key; unprotected) header.d=topic.nl header.i=@topic.nl header.b="voST+DA3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6D01810E8; Tue, 18 Mar 2025 10:03:03 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E647D810E8; Tue, 18 Mar 2025 10:04:29 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0C0080548
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:03:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89CEC80548
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:04:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=topic.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43cfebc343dso21752385e9.2
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 02:03:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742288580; x=1742893380; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=huGTHUNGHH/NCbgNfnMihr8DwsrJSf/rdo1YQAui5lU=;
- b=heDHP5uK7Q7yxMlUUV3kqVJD+Ksc7JRhF24D4S2kRhkSRtofx1kShsRTnX0VCC0eEN
- IkV/UUUX8Sgj4WO9mFYMSkUep18Zi/NfNH1daE5YCdgz+LRJ61X24BG6q46M2rjb9ws3
- 1WexGMpSP10ClybOLzu4202UOCzELRkgn3d9Nas8zRf6b077V/kAQgDiAArb37mt6Vns
- 2yzfvyCaAnpDQDHvODMOzGhMlnIEXAb52/YEgt+iZsH5/4OkbpEBV7YGE1/AKYTdd3Jb
- lvsolljmEckH3HNQnGa3rc/z+JNQ+2kgIis4SMGXnUWUjr8hofKfFxHhgm68sowlRit3
- 0yNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742288580; x=1742893380;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=huGTHUNGHH/NCbgNfnMihr8DwsrJSf/rdo1YQAui5lU=;
- b=KRThRbM49k4tJH70btTf8Ok6OxXPqeTa+5K48rfGmI+NKW46gyClASnMhxDyLW3CJ/
- JpHJ7Mge/d93sKWm9S7z15ySsYdlclVbwqxSx+B0auaiqujnZSFYGV6KcV777sIMsMeL
- tv6BPM7GjxtINUm8ZzN4YR4oQdpTYgpDC8Pbo2tekbpVKpsqhqBLbjiFus/uXcD1s5QZ
- luqF9HfXW++ItXFnr/1+6z5voopW2qb3ld8e5Ikr7ZuF0yBwQlCrZ+NsfP5497uKfvdg
- MwmxPTF89D4MdBDy+7pSvfEPfGTinig/LGh/3NGdcUOIsq2Bhwu220rcKvKEPKNSheOt
- tv5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUp2ru6eBafd1Rma356w8z3LPekeO9mUQwmx5Uvxbc49UbPWkkXoew0lBg8UtvOKQ9csWmBXyA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyFRssln0yxld4/n8zDrTvg4GJJAo9FtIafPH57pXbAxy3eE9jo
- T2AXzOCgpy5yt//7r2hmyZtKtF/CeSB2hevmXdwoAehtnmmW2usKqWIfHyhJ47U=
-X-Gm-Gg: ASbGnctuGAIbmIdvCNF8AaOZf1hdOYcS1uN4CVUnE2CqlcdocVU7r0CtPHAb8Uhxg59
- usL3FlU/Yo9bnhTn7yz8TwBNwpWDzvRovzM0w4sZGnVdIAZPuFs/sPqY9ztlOA+R42lMGO25G7n
- p+HOqwJDb/htM8E6GZvtLoGlvpq87QhiaKeeGrABOCwHGi3pVZ66JlphYoaLD+wZXBz2U1EqVWt
- +weLHXuoCRjVMeCQSvBufS2adLE+owv0b3NtQ8SUcjOkbE8oMYXXWYA753dQLeuC2a5PWgrIjMx
- 9nRdmkn6eIhT8pgtjQnzPzZbFjNEq9C9w70yGfxDEz9+zjCcJrir
-X-Google-Smtp-Source: AGHT+IGN3ZhRPh1ycqx6dBpJXX2LZgjHmOf670V5LpZqPNSuCk60lgA9cUvVVTZHtUh4nHWkrfhUMg==
-X-Received: by 2002:a05:6000:18a8:b0:391:2d8f:dd56 with SMTP id
- ffacd0b85a97d-3971ded3840mr15670536f8f.29.1742288580056; 
- Tue, 18 Mar 2025 02:03:00 -0700 (PDT)
-Received: from [192.168.0.24] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395c7df320csm17330225f8f.7.2025.03.18.02.02.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Mar 2025 02:02:59 -0700 (PDT)
-Message-ID: <b34d536c-0d1d-46f4-86a8-9d54716d2878@linaro.org>
-Date: Tue, 18 Mar 2025 11:02:55 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=mike.looijmans@topic.nl
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g4JKSL4j25XayDJmhbk2E3aiyaBfENtqtqtYVeD7D+wnLEcwvIY+G1l5qKXYhLgxkbEAPE5/h+jqKmhGjiG/3Y+8Cpf9dNwem4SL2vohdiGO28rNLTxy7syqwZgxxVcERwmra/k3KQ9tfzx2eZ24hiS5Q8xtOsk42ekMXhaaCv4ICnm9SokmBID/RkGLpUfEktI0QM1sh5fkyZdT2PijkAoMpPck84XRRXmqtPy35QgPZ0GKswJjqlIJT9nIR9EnHUSsTxbwcJlFa3fNZ3+KU9LaLfmA3O0Knas2aQyJI7W0ch/I/aZ+9i992BXEFzh2WqbivB9FZn40bUo0i8XpXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=P3ZxhrpR4voA8Ui4qUG1Nt7xHEu7weMDbMOuSxI+gwM=;
+ b=Crx8NjvCBJL2YjZPnQ44rovsD7B7N0ClHSPkAr7BfBt2/ZV9WUdW6B2XW9tDnkWd6g+YJB9GGyQ7MR3DpucmiMO83IKPr/DGbGRAYh3W4iHBVUJj6sFLBaLwE0OGRuWhDUmi+N3ibyuqsBwzfCU2PT7VE7CYPvWZPhZrZRFwP2mF5X6R6Xmds22dIifjhVUVjUKBY571flMTvuJGUdtEncaeNxcat9i8OganPkLbNFx9LkDnrdPatETGm5pD4fNG80/uih2oejcHeHsc5D53coNr693aJ9ybsEBQhvp0JNqWXJcIsGXvoq3pqrjyGy2QgHP62CXbBOwcxCyr9h0RZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 13.93.42.39) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=topic.nl;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=topic.nl;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=topic.nl; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=P3ZxhrpR4voA8Ui4qUG1Nt7xHEu7weMDbMOuSxI+gwM=;
+ b=voST+DA3bTEDbHIfhKQtwbwTnvPOH4N8vKvJHJlRhS1zme5X1qbq6q08OoIUX7JjPQIwxUgQDCNNbTF20lgbTbvY/PXnza6ucv2WUf9DjPfmtW6z1YQhsr5RCd9gvKnF+NPmJgse4NJk3b80Lc6lZMvkMBcvm5ARcOrjEPe1RtOZ7yYwN+sNsPBlkf1gZHr2kLUu4U1RgnaoBIevR/+Mo56/y0lbV3RG/MVpXFC1jJ2G5Dc8b5y4PD+nLWaKtxwlp6FCtFpyz8X85Yn5zJNHTKEiBnH5hZiRlEVyd/y9RzLe6n5gUCNN02M99exx+KMi0Vdud1ybirrh/cGYRdPThA==
+Received: from DB7PR05CA0054.eurprd05.prod.outlook.com (2603:10a6:10:2e::31)
+ by AM9PR04MB8130.eurprd04.prod.outlook.com (2603:10a6:20b:3b5::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Tue, 18 Mar
+ 2025 09:04:23 +0000
+Received: from DB1PEPF0003922D.eurprd03.prod.outlook.com
+ (2603:10a6:10:2e:cafe::b6) by DB7PR05CA0054.outlook.office365.com
+ (2603:10a6:10:2e::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.34 via Frontend Transport; Tue,
+ 18 Mar 2025 09:04:23 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 13.93.42.39)
+ smtp.mailfrom=topic.nl; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=topic.nl;
+Received-SPF: Pass (protection.outlook.com: domain of topic.nl designates
+ 13.93.42.39 as permitted sender) receiver=protection.outlook.com;
+ client-ip=13.93.42.39; helo=westeu12-emailsignatures-cloud.codetwo.com; pr=C
+Received: from westeu12-emailsignatures-cloud.codetwo.com (13.93.42.39) by
+ DB1PEPF0003922D.mail.protection.outlook.com (10.167.8.100) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8534.20 via Frontend Transport; Tue, 18 Mar 2025 09:04:23 +0000
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com (104.47.11.49) by
+ westeu12-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12)
+ via SMTP; Tue, 18 Mar 2025 09:04:22 +0000
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=topic.nl;
+Received: from AS8PR04MB8644.eurprd04.prod.outlook.com (2603:10a6:20b:42b::12)
+ by PA3PR04MB11204.eurprd04.prod.outlook.com (2603:10a6:102:4aa::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Tue, 18 Mar
+ 2025 09:04:20 +0000
+Received: from AS8PR04MB8644.eurprd04.prod.outlook.com
+ ([fe80::e86d:f110:534e:480a]) by AS8PR04MB8644.eurprd04.prod.outlook.com
+ ([fe80::e86d:f110:534e:480a%5]) with mapi id 15.20.8534.031; Tue, 18 Mar 2025
+ 09:04:20 +0000
+Message-ID: <cd57ac47-02b6-458e-86a7-7c837a89b550@topic.nl>
+Date: Tue, 18 Mar 2025 10:04:19 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/8] clk: at91: sam9x7: add pmc driver for sam9x7 SoC
- family
-To: Manikandan Muralidharan <manikandan.m@microchip.com>,
- Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com, sjg@chromium.org,
- mkorpershoek@baylibre.com, nathan.morrison@timesys.com,
- ilias.apalodimas@linaro.org, greg.malysa@timesys.com,
- caleb.connolly@linaro.org, Oliver.Gaskell@analog.com,
- robert.marko@sartura.hr, jerome.forissier@linaro.org,
- semen.protsenko@linaro.org, william.zhang@broadcom.com,
- nicolas.ferre@microchip.com, u-boot@lists.denx.de
-Cc: Varshini Rajendran <varshini.rajendran@microchip.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-References: <20250317065609.55071-1-manikandan.m@microchip.com>
- <20250317065609.55071-5-manikandan.m@microchip.com>
-From: Eugen Hristev <eugen.hristev@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20250317065609.55071-5-manikandan.m@microchip.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Language: en-US, nl
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Subject: block devices on MTD and UBI
+Organization: Topic
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: AM0PR02CA0157.eurprd02.prod.outlook.com
+ (2603:10a6:20b:28d::24) To AS8PR04MB8644.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42b::12)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8644:EE_|PA3PR04MB11204:EE_|DB1PEPF0003922D:EE_|AM9PR04MB8130:EE_
+X-MS-Office365-Filtering-Correlation-Id: 365fc752-6f25-4c2e-2ca1-08dd65fbe089
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|1800799024|366016|376014|52116014|38350700014; 
+X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?Mk03NjdQZUUyU3daQTlscFBkNXhIc05BTUVZWm9abnZaZWR3bmtxNnlQdC9n?=
+ =?utf-8?B?dkIvYlI5QVN5VGhYK2orU0xYNVl4N3d0clVQUzBBMXpWN0s5Rmd6VzBoZGxU?=
+ =?utf-8?B?WTR6aURLQmgwYU02ZlY0VllqaFVyNFZlVExWYm1xaURyN3o0VUlmVmJueU1T?=
+ =?utf-8?B?K1RGendzT3Y4ZWd3aEh5RkhibmdpRG1xL1B5eFBQY2JIMHVQN1FDUkxJcGkv?=
+ =?utf-8?B?ZEpZUVo3Q3BsVTVoc1RyRGthNmJ4TE9IOGRNYk80RVpSZ2ZYU2ExMGRlSGdr?=
+ =?utf-8?B?K2x2RXdkMTdBTllsNzhBWTBPcFQzT0NDTGFmNnQ3V0lUK2hpQUlUSGE0Y3JE?=
+ =?utf-8?B?NzVoaDlRbjcrekVZVzFEd1VkalZFTDZad2FCZUxuajRHYU9YZllVVmFvOU9z?=
+ =?utf-8?B?dXhHOFowR3JxcEtqSHlQYUlsUkZDRzN3Yi9JY2FzS0w5eHQ4RU1Jc3BrdTBG?=
+ =?utf-8?B?NHc0VWFIcW5ubnJWVzF4MUU4aG1PVUdVZjVLYjlrVnBvUS9pclhQTnVFUDJH?=
+ =?utf-8?B?cXlrN2tpMnBzb3F2TmhZQTNVZTNYb0NLUjNQenAzSnhoeFJRd21FYmk2ZDB4?=
+ =?utf-8?B?WjJ0OEhtaVNOVDkrZWlqRFNSMlpiTURyT3lFaHA2dUVZTHh4UCs4UXY5dWFM?=
+ =?utf-8?B?akswU3I5cmxGdHpTbmZxZEtqYUNWamt1MUQ4ZVBVak96NGN5bURMNTNtckRw?=
+ =?utf-8?B?aEx6NC9LZldpcUxuOXByRVRBdnZuQVYyc3Zja3p1NmFRUEo2aGlSQ0dab2FF?=
+ =?utf-8?B?UVJZZklMbU1KR1FjY1Q4VmRyVk1sOG5GT2UyK0k3ZTEwcS9EMjRZMGZFL2ky?=
+ =?utf-8?B?dlhBd2pyeU5QMzBiTlNPRE9Id3F3bGl4YUtCR3RmNGd6RmlpclB5VVdRYkJI?=
+ =?utf-8?B?YjdUbnJTRmFPQUxZRnh2ZWNFSFM1d1FIYnU3VlhrZWlzaUJxYThtaEpQcUZy?=
+ =?utf-8?B?cHJPT2VjTFNJMzF4Lys0TUhxTmdtdERIdmVkT1JpRkxMcXE3WnBqcm1uTi91?=
+ =?utf-8?B?ZGZacE5YaUFIQzhGQTFaaDl3Q1N3SGxjK3NsdGRKdzIzT21uZ3NDTEZpZnRI?=
+ =?utf-8?B?aEJjdFl4bHRHZUlCSW9pMGRVbWxBUm5ZWFgvVHhQdlFsN01rVFBMUGVLNEJ5?=
+ =?utf-8?B?aFZYUE9HYmM0V2F1aUg3Tk9ISHNEc05KanVzYmk4dUxzdjBCS3FQRHdzSmEz?=
+ =?utf-8?B?M2pSTXVVRXRuaUJWaHlXZU5FeVQ0UUk2N1M1QXVhOFZMZloxZTdkbHR5aDEy?=
+ =?utf-8?B?VmFBekJYU3FTUVFhTkJQTE52TEJ3RGYyemZJYjZDcTUwbzNuZjZITWpiL2F5?=
+ =?utf-8?B?clBLZERXZ29panVHdkw0dnRHWUpzWGJYdGorY2w4bDlTZ2I1Nnc5NHZFM2pr?=
+ =?utf-8?B?WGZRQVp5cC9sM1VjZldTTCtxamVpc0hYcEZHTlUwN0ZpZXdscDJJQ2RqK2da?=
+ =?utf-8?B?RDJGang5dVBzaVBxeXc3clRYNEdReFN5cTdqNTZHVVorc3o3ZGlDOW9iWnVl?=
+ =?utf-8?B?dzNSOE1QTE1jQ3BCN0ZvZWNoSVVzSEZRdWJSeG5hUG5wbGdvMEh6SllMbUNC?=
+ =?utf-8?B?R2dCQXYvcG9YMCtvbDRIM2VFVUZYaWpCWTRUSjN5VDVsbEJsL3FZekZLVzNq?=
+ =?utf-8?B?elVmOVJBeS9LNmhJWFB6SEZsclM2WHI3Tmh0L0hKVFgwU1lnRVFzMnRDMnlM?=
+ =?utf-8?B?cE54ZU1PalE2REFJR3pDTFlIQnNKT29JRmpDSFJoL0I0R29FcGFTYWlTQU92?=
+ =?utf-8?B?MlNvSWhOSnVVQjJoSkdPVXdTMlc1SnlMTWZzUHJ3WC9oeDNjVHpQcnBObWVv?=
+ =?utf-8?B?c3l0aThaVFBvNmlpWDRWbnNKY1BoQUNNWmZMdm4ySDRSVVRmb2FLN0xITmcy?=
+ =?utf-8?Q?nVaalivpEzugK?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AS8PR04MB8644.eurprd04.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR04MB11204
+X-CodeTwo-MessageID: be1512e4-9f1c-4a52-afef-4f3070bb29cb.20250318090422@westeu12-emailsignatures-cloud.codetwo.com
+X-CodeTwoProcessed: true
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB1PEPF0003922D.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: a8603c6a-2927-4f03-1206-08dd65fbde9b
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|14060799003|376014|82310400026|35042699022|36860700013|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MzViMDd2aDZCU3o3YzFYeTA1ZDR5eHgxaXplUnpyd2FCeHNNdTFNdkhwZWta?=
+ =?utf-8?B?dGdDM1RZdlZtajBiYTBNYVhML1NrYlhweVZaa1JOV3JnbmF5aWp5d3RDdmtj?=
+ =?utf-8?B?bDkxYUFRVXNKTDc5d3RMbm02Zkp2NHo1MVFXenVybnpPaXZyU0lWK09JSXZk?=
+ =?utf-8?B?OUwrQmxmemp0WHY2ejBBY1I5Sm0waGtQaCtnT0wrTmJRUEZFNXFlcEFJK2lt?=
+ =?utf-8?B?eVc2STI5alhLTDdUZVRXQ2NDUnZYRGRUTHVVa1VMaTY4cTB0V1lZU2ZsalU5?=
+ =?utf-8?B?dktjMDZMbFpkMEg5UnRxQldtc0pOTnRGOU9QS1l2bnhLMitJQzVraEc5b0Ri?=
+ =?utf-8?B?K0FQcFUyZ2JQY1dyd2hwKzhZeDU2U0psS2FTUlVlbGhnWW9YOHB2Q0RiTlhN?=
+ =?utf-8?B?bkwrQUkyMSt4emFITEIzdVRQWTViOVB6dzJJSm0ydEw3VEJFbkVaT2FrM1hV?=
+ =?utf-8?B?Y01lRjBydGd4Rk5mTjhZT01qb3A0bVIzVlRodG9SZGVLdDZOUUdqd05MUjd0?=
+ =?utf-8?B?RXVzUFJkdEp4V1lYU0V0UU1YNVRhZVNOZlRtLzgwTngrVWFRb25GSVN5R0FD?=
+ =?utf-8?B?c2oyc3B2dmlnZFc5TW5hZnBuUnZ3dC9lcEgvU2JZVGljVTVBcVd2ZmZhcmlD?=
+ =?utf-8?B?L0pTUWRlOUtIMUZ0RkJ1K0tObW1DREZ4dUNtQ3ZidDBEK2IxTzJxaUtsU29m?=
+ =?utf-8?B?cENNWUROQ1ZqUkNrTHdsVGZ3b2RiVndzcHdkQlFxbUR1QzlmM0lxRjJpVVBL?=
+ =?utf-8?B?Nkl1N3ZmNHYyR2dHQ290OW40N1NBYmJDY05IN0xzRzdlc0lKQ3lSSjdPTHNo?=
+ =?utf-8?B?WHRseHV5ZWtQaUVEVS8wbE8vVVk3Q2dnTHpmcFo3NHJuZGNrVzk0SmtSb29O?=
+ =?utf-8?B?VytTbHJLdW5nZ3JTK3lHTUpNRjc3aEVhMEdWZU0rY0ROT0JRUFNrR0trTmVS?=
+ =?utf-8?B?U280UHNna2VkMWN5RmtpWklYVXE1bTVtTUZaR2tTWlNDdGJTdit2L2xQV1NL?=
+ =?utf-8?B?S1ZKQU5LajBpRlVkcWZmOEp5QUVQd2NhOW5jK0w4Q2RwbGROdEY3cm85UXdM?=
+ =?utf-8?B?SW1rUSs1c2dway9BUE1VLzF5Y291U3ZjbDlCY1Nud0tGYm9jSVVoRVk1cE1Y?=
+ =?utf-8?B?aFZOM3JIN1ZWSGNUY2IzSktaZElHL3dkSHcyU0VNNDR2YUVKWnVQbXM0a3JL?=
+ =?utf-8?B?ejJBcmlnWThuU2hYd1o1bXVFNkV4UnBpb2tHYTNRdFJHMCtLYTAzOHBMOFRT?=
+ =?utf-8?B?Qnd4ZHliZE1HUGpsVjhTeUpwbW9SdUZIa0JmSlNQN3JiQytlV0dJOWJtczdC?=
+ =?utf-8?B?bDh1ckFYKzJScFVRNXQ1SzlmSkE0aVRCZUUrNFFWb2cwdXNWRHJVL1JTUlhi?=
+ =?utf-8?B?S3hVMlRuM1RNWXUrNTlZeXduYTdSNVFmWldqc0xjNENhNGtjWm1icGw2Nnlj?=
+ =?utf-8?B?UmJwVjNNb2t3QmIzYjdpM3B6LzJrbUlGdm9PbG1mNnlGYndwT0hmbFdodTl0?=
+ =?utf-8?B?S1IySk5mbkNFVGFJNjlLTFZycUcyNnNMTFRDazcyT1NieDZHNmNTNHN3K0kx?=
+ =?utf-8?B?RUhYL0s1eWgrcU5xSmN6eXpJcWE3ek9JZ3RjVFAzQmRJNDh6bmNvaHpCemt6?=
+ =?utf-8?B?UzR0WERCMlEvY21ld0ZISDNSVWJXaS9TZ1J3QTlmMmJYdEk3cmtkY3QvaXVO?=
+ =?utf-8?B?Z0J0S3hVd3EzRnFjWGt0UVhVRldTK0RPODFuKy9YQnlpbmZwQWhZbFh4Q1JJ?=
+ =?utf-8?B?YXdmdmVCMVhCdENac3ZibFhtT2VxemRNWjJmSm90TWFqQXRBM3BmT1Y4Sm5I?=
+ =?utf-8?B?M1N3bWJrOFpDOUVKSFZkQXZYbmhpdTVNdmpYZFo5bUNBY01XSjRiRFFhVnRR?=
+ =?utf-8?B?Nm5XaVIrWW5veDVEemhRSGt4UkcvNTYra05nZ0VISGhNK2creXZuSnc1RVRM?=
+ =?utf-8?Q?k0QgN2ZAgCo=3D?=
+X-Forefront-Antispam-Report: CIP:13.93.42.39; CTRY:NL; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:westeu12-emailsignatures-cloud.codetwo.com;
+ PTR:westeu12-emailsignatures-cloud.codetwo.com; CAT:NONE;
+ SFS:(13230040)(14060799003)(376014)(82310400026)(35042699022)(36860700013)(1800799024);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: topic.nl
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2025 09:04:23.4292 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 365fc752-6f25-4c2e-2ca1-08dd65fbe089
+X-MS-Exchange-CrossTenant-Id: 449607a5-3517-482d-8d16-41dd868cbda3
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=449607a5-3517-482d-8d16-41dd868cbda3; Ip=[13.93.42.39];
+ Helo=[westeu12-emailsignatures-cloud.codetwo.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF0003922D.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8130
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,1142 +206,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+I think I have everything set up to access MTD (and UBI) devices as=20
+"block", however, lsblk always ignores them, and refuses to list=20
+anything but the mmc. I can read ubifs and boot from it though, and=20
+since UBI runs on top of MTD block devices, MTD block device should be=20
+working, right?
+
+I also have UBI_BLOCK enabled, so I would expect UBI volumes to appear=20
+in the "lsblk" as well.
+
+Example U-boot session:
+
+Zynq> mtd list
+SF: Detected n25q256ax1 with page size 256 Bytes, erase size 64 KiB,=20
+total 32 MiB
+List of MTD devices:
+* nor0
+ =C2=A0 - device: flash@0
+ =C2=A0 - parent: spi@e000d000
+ =C2=A0 - driver: jedec_spi_nor
+ =C2=A0 - path: /axi/spi@e000d000/flash@0
+ =C2=A0 - type: NOR flash
+ =C2=A0 - block size: 0x10000 bytes
+ =C2=A0 - min I/O: 0x1 bytes
+ =C2=A0 - 0x000000000000-0x000002000000 : "nor0"
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - 0x000000000000-0x=
+000000100000 : "qspi-boot-bin"
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - 0x000000100000-0x=
+000002000000 : "qspi-rootfs"
+
+Zynq> lsblk
+Block Driver=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Devices
+-----------------------------
+efi_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : <none>
+mmc_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : mmc 0
+mtd_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : <none>
+ubi_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : <none>
+usb_storage_blk=C2=A0=C2=A0=C2=A0=C2=A0 : <none>
+
+Zynq> ubi part qspi-rootfs
+Zynq> ubi list
+0: qspi-rootfs
+Zynq> lsblk
+Block Driver=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Devices
+-----------------------------
+efi_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : <none>
+mmc_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : mmc 0
+mtd_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : <none>
+ubi_blk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 : <none>
+usb_storage_blk=C2=A0=C2=A0=C2=A0=C2=A0 : <none>
 
 
-On 3/17/25 08:56, Manikandan Muralidharan wrote:
-> From: Varshini Rajendran <varshini.rajendran@microchip.com>
-> 
-> Add PMC driver support for sam9x7 SoC family
-> 
-> Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
-> [balamanikandan.gunasundar@microchip.com: Add peripheral clock id for pmecc]
-> Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-> ---
->  drivers/clk/at91/Makefile |    1 +
->  drivers/clk/at91/sam9x7.c | 1094 +++++++++++++++++++++++++++++++++++++
->  2 files changed, 1095 insertions(+)
->  create mode 100644 drivers/clk/at91/sam9x7.c
-> 
-> diff --git a/drivers/clk/at91/Makefile b/drivers/clk/at91/Makefile
-> index e53dcb4ca7a..6cca861f81c 100644
-> --- a/drivers/clk/at91/Makefile
-> +++ b/drivers/clk/at91/Makefile
-> @@ -12,6 +12,7 @@ obj-$(CONFIG_AT91_SAM9X60_PLL)	+= clk-sam9x60-pll.o
->  obj-$(CONFIG_AT91_SAM9X60_USB)	+= clk-sam9x60-usb.o
->  obj-$(CONFIG_SAMA7G5)		+= sama7g5.o
->  obj-$(CONFIG_SAM9X60)		+= sam9x60.o
-> +obj-$(CONFIG_SAM9X7)		+= sam9x7.o
->  else
->  obj-y += compat.o
->  endif
-> diff --git a/drivers/clk/at91/sam9x7.c b/drivers/clk/at91/sam9x7.c
-> new file mode 100644
-> index 00000000000..b362d2f9858
-> --- /dev/null
-> +++ b/drivers/clk/at91/sam9x7.c
-> @@ -0,0 +1,1094 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-> + *
-> + * Author: Varshini Rajendran <varshini.rajendran@microchip.com>
-> + *
-> + */
-> +
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <dt-bindings/clock/at91.h>
-> +#include <linux/clk-provider.h>
-> +
-> +#include "pmc.h"
-> +
-> +/**
-> + * Clock identifiers to be used in conjunction with macros like
-> + * AT91_TO_CLK_ID()
-> + *
-> + * @ID_MD_SLCK:			TD slow clock identifier
-> + * @ID_TD_SLCK:			MD slow clock identifier
-> + * @ID_MAIN_XTAL:		Main Xtal clock identifier
-> + * @ID_MAIN_RC:			Main RC clock identifier
-> + * @ID_MAIN_RC_OSC:		Main RC Oscillator clock identifier
-> + * @ID_MAIN_OSC:		Main Oscillator clock identifier
-> + * @ID_MAINCK:			MAINCK clock identifier
-> + * @ID_PLL_U_FRAC:		UPLL fractional clock identifier
-> + * @ID_PLL_U_DIV:		UPLL divider clock identifier
-> + * @ID_PLL_A_FRAC:		APLL fractional clock identifier
-> + * @ID_PLL_A_DIV:		APLL divider clock identifier
-> + * @ID_PLL_A_2_DIV:		PLLA DIV2 divider clock identifier
-> + * @ID_PLL_AUDIO_FRAC:		Audio PLL fractional clock identifier
-> + * @ID_PLL_AUDIO_DIVPMC:	Audio PLL divider clock identifier
-> + * @ID_PLL_AUDIO_DIVIO:		Audio PLL IO divider clock identifier
-> + * @ID_PLL_LVDS_FRAC:		LVDS PLL fractional clock identifier
-> + * @ID_PLL_LVDS_DIV:		LVDS PLL divider clock identifier
-> +
-> + * @ID_MCK_DIV:			MCK DIV clock identifier
-> +
-> + * @ID_UTMI:			UTMI clock identifier
-> +
-> + * @ID_PROG0:			Programmable 0 clock identifier
-> + * @ID_PROG1:			Programmable 1 clock identifier
-> +
-> + * @ID_PCK0:			PCK0 system clock identifier
-> + * @ID_PCK1:			PCK1 system clock identifier
-> + * @ID_DDR:			DDR system clock identifier
-> + * @ID_QSPI:			QSPI system clock identifier
-> + *
-> + * @ID_MCK_PRES:		MCK PRES clock identifier
-> + *
-> + * Note: if changing the values of this enums please sync them with
-> + *	 device tree
-> + */
-> +enum pmc_clk_ids {
-> +	ID_MD_SLCK		= 0,
-> +	ID_TD_SLCK		= 1,
-> +	ID_MAIN_XTAL		= 2,
-> +	ID_MAIN_RC		= 3,
-> +	ID_MAIN_RC_OSC		= 4,
-> +	ID_MAIN_OSC		= 5,
-> +	ID_MAINCK		= 6,
-> +
-> +	ID_PLL_U_FRAC		= 7,
-> +	ID_PLL_U_DIV		= 8,
-> +	ID_PLL_A_FRAC		= 9,
-> +	ID_PLL_A_DIV		= 10,
-> +	ID_PLL_A_2_DIV		= 11,
-> +	ID_PLL_AUDIO_FRAC	= 12,
-> +	ID_PLL_AUDIO_DIVPMC	= 13,
-> +	ID_PLL_AUDIO_DIVIO	= 14,
-> +	ID_PLL_LVDS_FRAC	= 15,
-> +	ID_PLL_LVDS_DIV		= 16,
-> +
-> +	ID_MCK_DIV		= 17,
-> +
-> +	ID_UTMI			= 18,
-> +
-> +	ID_PROG0		= 19,
-> +	ID_PROG1		= 20,
-> +
-> +	ID_PCK0			= 21,
-> +	ID_PCK1			= 22,
-> +
-> +	ID_DDR			= 23,
-> +	ID_QSPI			= 24,
-> +
-> +	ID_MCK_PRES		= 25,
-> +
-> +	ID_MAX,
-> +};
-> +
-> +/**
-> + * PLL type identifiers
-> + * @PLL_TYPE_FRAC:	fractional PLL identifier
-> + * @PLL_TYPE_DIV:	divider PLL identifier
-> + */
-> +enum pll_type {
-> +	PLL_TYPE_FRAC,
-> +	PLL_TYPE_DIV,
-> +};
-> +
-> +/* Clock names used as parents for multiple clocks. */
-> +static const char *clk_names[] = {
-> +	[ID_MAIN_RC_OSC]	= "main_rc_osc",
-> +	[ID_MAIN_OSC]		= "main_osc",
-> +	[ID_MAINCK]		= "mainck",
-> +	[ID_PLL_U_DIV]		= "upll_divpmcck",
-> +	[ID_PLL_A_DIV]		= "plla_divpmcck",
-> +	[ID_PLL_A_2_DIV]	= "plla_div2pmcck",
-> +	[ID_PLL_AUDIO_DIVPMC]	= "pll_audio_divpmcck",
-> +	[ID_PLL_AUDIO_DIVIO]	= "pll_audio_diviock",
-> +	[ID_PLL_LVDS_DIV]	= "pll_lvds_divpmcck",
-> +	[ID_MCK_PRES]		= "mck_pres",
-> +	[ID_MCK_DIV]		= "mck_div",
-> +};
-> +
-> +/* Fractional PLL core output range. */
-> +static const struct clk_range plla_core_outputs[] = {
-> +	{ .min = 800000000, .max = 1600000000 },
-> +};
-> +
-> +static const struct clk_range upll_core_outputs[] = {
-> +	{ .min = 600000000, .max = 960000000 },
-> +};
-> +
-> +static const struct clk_range lvdspll_core_outputs[] = {
-> +	{ .min = 600000000, .max = 1200000000 },
-> +};
-> +
-> +static const struct clk_range audiopll_core_outputs[] = {
-> +	{ .min = 600000000, .max = 1200000000 },
-> +};
-> +
-> +static const struct clk_range plladiv2_core_outputs[] = {
-> +	{ .min = 800000000, .max = 1600000000 },
-> +};
-> +
-> +/* Fractional PLL output range. */
-> +static const struct clk_range plla_outputs[] = {
-> +	{ .min = 400000000, .max = 800000000 },
-> +};
-> +
-> +static const struct clk_range upll_outputs[] = {
-> +	{ .min = 300000000, .max = 480000000 },
-> +};
-> +
-> +static const struct clk_range lvdspll_outputs[] = {
-> +	{ .min = 175000000, .max = 550000000 },
-> +};
-> +
-> +static const struct clk_range audiopll_outputs[] = {
-> +	{ .min = 0, .max = 300000000 },
-> +};
-> +
-> +static const struct clk_range plladiv2_outputs[] = {
-> +	{ .min = 200000000, .max = 400000000 },
-> +};
-> +
-> +/* PLL characteristics. */
-> +static const struct clk_pll_characteristics plla_characteristics = {
-> +	.input = { .min = 20000000, .max = 50000000 },
-> +	.num_output = ARRAY_SIZE(plla_outputs),
-> +	.output = plla_outputs,
-> +	.core_output = plla_core_outputs,
-> +};
-> +
-> +static const struct clk_pll_characteristics upll_characteristics = {
-> +	.input = { .min = 20000000, .max = 50000000 },
-> +	.num_output = ARRAY_SIZE(upll_outputs),
-> +	.output = upll_outputs,
-> +	.core_output = upll_core_outputs,
-> +	.upll = true,
-> +};
-> +
-> +static const struct clk_pll_characteristics lvdspll_characteristics = {
-> +	.input = { .min = 20000000, .max = 50000000 },
-> +	.num_output = ARRAY_SIZE(lvdspll_outputs),
-> +	.output = lvdspll_outputs,
-> +	.core_output = lvdspll_core_outputs,
-> +};
-> +
-> +static const struct clk_pll_characteristics audiopll_characteristics = {
-> +	.input = { .min = 20000000, .max = 50000000 },
-> +	.num_output = ARRAY_SIZE(audiopll_outputs),
-> +	.output = audiopll_outputs,
-> +	.core_output = audiopll_core_outputs,
-> +};
-> +
-> +static const struct clk_pll_characteristics plladiv2_characteristics = {
-> +	.input = { .min = 20000000, .max = 50000000 },
-> +	.num_output = ARRAY_SIZE(plladiv2_outputs),
-> +	.output = plladiv2_outputs,
-> +	.core_output = plladiv2_core_outputs,
-> +};
-> +
-> +/* Layout for fractional PLLs. */
-> +static const struct clk_pll_layout pll_layout_frac = {
-> +	.mul_mask = GENMASK(31, 24),
-> +	.frac_mask = GENMASK(21, 0),
-> +	.mul_shift = 24,
-> +	.frac_shift = 0,
-> +};
-> +
-> +/* Layout for fractional PLL ID PLLA. */
-> +static const struct clk_pll_layout plla_layout_frac = {
-> +	.mul_mask = GENMASK(31, 24),
-> +	.frac_mask = GENMASK(21, 0),
-> +	.mul_shift = 24,
-> +	.frac_shift = 0,
-> +	.div2 = 1,
-> +};
-> +
-> +/* Layout for DIV PLLs. */
-> +static const struct clk_pll_layout pll_layout_divpmc = {
-> +	.div_mask = GENMASK(7, 0),
-> +	.endiv_mask = BIT(29),
-> +	.div_shift = 0,
-> +	.endiv_shift = 29,
-> +};
-> +
-> +/* Layout for DIV PLLs. */
-> +static const struct clk_pll_layout plladiv2_layout_divpmc = {
-> +	.div_mask = GENMASK(7, 0),
-> +	.endiv_mask = BIT(29),
-> +	.div_shift = 0,
-> +	.endiv_shift = 29,
-> +	.div2 = 1,
-> +};
-> +
-> +/* Layout for DIVIO dividers. */
-> +static const struct clk_pll_layout pll_layout_divio = {
-> +	.div_mask	= GENMASK(19, 12),
-> +	.endiv_mask	= BIT(30),
-> +	.div_shift	= 12,
-> +	.endiv_shift	= 30,
-> +};
-> +
-> +/* MCK characteristics. */
-> +static const struct clk_master_characteristics mck_characteristics = {
-> +	.output = { .min = 32000000, .max = 266666666 },
-> +	.divisors = { 1, 2, 4, 3, 5},
-> +	.have_div3_pres = 1,
-> +};
-> +
-> +/* MCK layout. */
-> +static const struct clk_master_layout mck_layout = {
-> +	.mask = 0x373,
-> +	.pres_shift = 4,
-> +	.offset = 0x28,
-> +};
-> +
-> +/* Programmable clock layout. */
-> +static const struct clk_programmable_layout programmable_layout = {
-> +	.pres_mask = 0xff,
-> +	.pres_shift = 8,
-> +	.css_mask = 0x1f,
-> +	.have_slck_mck = 0,
-> +	.is_pres_direct = 1,
-> +};
-> +
-> +/* Peripheral clock layout. */
-> +static const struct clk_pcr_layout sam9x7_pcr_layout = {
-> +	.offset = 0x88,
-> +	.cmd = BIT(31),
-> +	.gckcss_mask = GENMASK(12, 8),
-> +	.pid_mask = GENMASK(6, 0),
-> +};
-> +
-> +/**
-> + * PLL clocks description
-> + * @n:		clock name
-> + * @p:		clock parent
-> + * @l:		clock layout
-> + * @t:		clock type
-> + * @c:		pll characteristics
-> + * @f:		true if clock is fixed and not changeable by driver
-> + * @id:		clock id corresponding to PLL driver
-> + * @cid:	clock id corresponding to clock subsystem
-> + */
-> +static const struct {
-> +	const char *n;
-> +	const char *p;
-> +	const struct clk_pll_layout *l;
-> +	const struct clk_pll_characteristics *c;
-> +	u8 t;
-> +	u8 f;
-> +	u8 id;
-> +	u8 cid;
-> +} sam9x7_plls[] = {
-> +	{
-> +		.n = "plla_fracck",
-> +		.p = "mainck",
-> +		.l = &plla_layout_frac,
-> +		.c = &plla_characteristics,
-> +		.t = PLL_TYPE_FRAC,
-> +		.f = 1,
-> +		.id = 0,
-> +		.cid = ID_PLL_A_FRAC,
-> +	},
-> +
-> +	{
-> +		.n = "plla_divpmcck",
-> +		.p = "plla_fracck",
-> +		.l = &pll_layout_divpmc,
-> +		.c = &plla_characteristics,
-> +		.t = PLL_TYPE_DIV,
-> +		.f = 1,
-> +		.id = 0,
-> +		.cid = ID_PLL_A_DIV,
-> +	},
-> +
-> +	{
-> +		.n = "upll_fracck",
-> +		.p = "main_osc",
-> +		.l = &pll_layout_frac,
-> +		.c = &upll_characteristics,
-> +		.t = PLL_TYPE_FRAC,
-> +		.f = 1,
-> +		.id = 1,
-> +		.cid = ID_PLL_U_FRAC,
-> +	},
-> +
-> +	{
-> +		.n = "upll_divpmcck",
-> +		.p = "upll_fracck",
-> +		.l = &pll_layout_divpmc,
-> +		.c = &upll_characteristics,
-> +		.t = PLL_TYPE_DIV,
-> +		.f = 1,
-> +		.id = 1,
-> +		.cid = ID_PLL_U_DIV,
-> +	},
-> +
-> +	{
-> +		.n = "audiopll_fracck",
-> +		.p = "main_osc",
-> +		.l = &pll_layout_frac,
-> +		.c = &audiopll_characteristics,
-> +		.t = PLL_TYPE_FRAC,
-> +		.f = 1,
-> +		.id = 2,
-> +		.cid = ID_PLL_AUDIO_FRAC,
-> +	},
-> +
-> +	{
-> +		.n = "audiopll_divpmcck",
-> +		.p = "audiopll_fracck",
-> +		.l = &pll_layout_divpmc,
-> +		.c = &audiopll_characteristics,
-> +		.t = PLL_TYPE_DIV,
-> +		.f = 1,
-> +		.id = 2,
-> +		.cid = ID_PLL_AUDIO_DIVPMC,
-> +	},
-> +
-> +	{
-> +		.n = "audiopll_diviock",
-> +		.p = "audiopll_fracck",
-> +		.l = &pll_layout_divio,
-> +		.c = &audiopll_characteristics,
-> +		.t = PLL_TYPE_DIV,
-> +		.f = 1,
-> +		.id = 2,
-> +		.cid = ID_PLL_AUDIO_DIVIO,
-> +	},
-> +
-> +	{
-> +		.n = "lvdspll_fracck",
-> +		.p = "main_osc",
-> +		.l = &pll_layout_frac,
-> +		.c = &lvdspll_characteristics,
-> +		.t = PLL_TYPE_FRAC,
-> +		.f = 1,
-> +		.id = 3,
-> +		.cid = ID_PLL_LVDS_FRAC,
-> +	},
-> +
-> +	{
-> +		.n = "lvdspll_divpmcck",
-> +		.p = "lvdspll_fracck",
-> +		.l = &pll_layout_divpmc,
-> +		.c = &lvdspll_characteristics,
-> +		.t = PLL_TYPE_DIV,
-> +		.f = 1,
-> +		.id = 3,
-> +		.cid = ID_PLL_LVDS_DIV,
-> +	},
-> +
-> +	{
-> +		.n = "plla_div2pmcck",
-> +		.p = "plla_fracck",
-> +		.l = &plladiv2_layout_divpmc,
-> +		.c = &plladiv2_characteristics,
-> +		.t = PLL_TYPE_DIV,
-> +		.f = 1,
-> +		.id = 4,
-> +		.cid = ID_PLL_A_2_DIV,
-> +	},
-> +
-> +};
-> +
-> +/**
-> + * Programmable clock description
-> + * @n:			clock name
-> + * @cid:		clock id corresponding to clock subsystem
-> + */
-> +static const struct {
-> +	const char *n;
-> +	u8 cid;
-> +} sam9x7_prog[] = {
-> +	{ .n = "prog0", .cid = ID_PROG0, },
-> +	{ .n = "prog1", .cid = ID_PROG1, },
-> +};
-> +
-> +/* Mux table for programmable clocks. */
-> +static u32 sam9x7_prog_mux_table[] = { 0, 1, 2, 3, 4, 5, 6, };
-> +
-> +/**
-> + * System clock description
-> + * @n:			clock name
-> + * @p:			parent clock name
-> + * @id:			clock id corresponding to system clock driver
-> + * @cid:		clock id corresponding to clock subsystem
-> + */
-> +static const struct {
-> +	const char *n;
-> +	const char *p;
-> +	u8 id;
-> +	u8 cid;
-> +} sam9x7_systemck[] = {
-> +	{ .n = "ddrck", .p = "mck_pres", .id = 2, .cid = ID_DDR, },
-> +	{ .n = "pck0",	.p = "prog0",	 .id = 8, .cid = ID_PCK0, },
-> +	{ .n = "pck1",	.p = "prog1",	 .id = 9, .cid = ID_PCK1, },
-> +};
-> +
-> +/**
-> + * Peripheral clock description
-> + * @n:		clock name
-> + * @id:		clock id
-> + */
-> +static const struct {
-> +	const char *n;
-> +	u8 id;
-> +} sam9x7_periphck[] = {
-> +	{ .n = "pioA_clk",	.id = 2, },
-> +	{ .n = "pioB_clk",	.id = 3, },
-> +	{ .n = "pioC_clk",	.id = 4, },
-> +	{ .n = "flex0_clk",	.id = 5, },
-> +	{ .n = "flex1_clk",	.id = 6, },
-> +	{ .n = "flex2_clk",	.id = 7, },
-> +	{ .n = "flex3_clk",	.id = 8, },
-> +	{ .n = "flex6_clk",	.id = 9, },
-> +	{ .n = "flex7_clk",	.id = 10, },
-> +	{ .n = "flex8_clk",	.id = 11, },
-> +	{ .n = "sdmmc0_clk",	.id = 12, },
-> +	{ .n = "flex4_clk",	.id = 13, },
-> +	{ .n = "flex5_clk",	.id = 14, },
-> +	{ .n = "flex9_clk",	.id = 15, },
-> +	{ .n = "flex10_clk",	.id = 16, },
-> +	{ .n = "tcb0_clk",	.id = 17, },
-> +	{ .n = "pwm_clk",	.id = 18, },
-> +	{ .n = "adc_clk",	.id = 19, },
-> +	{ .n = "dma0_clk",	.id = 20, },
-> +	{ .n = "uhphs_clk",	.id = 22, },
-> +	{ .n = "udphs_clk",	.id = 23, },
-> +	{ .n = "gmac_clk",	.id = 24, },
-> +	{ .n = "lcd_clk",	.id = 25, },
-> +	{ .n = "sdmmc1_clk",	.id = 26, },
-> +	{ .n = "ssc_clk",	.id = 28, },
-> +	{ .n = "mcan0_clk",	.id = 29, },
-> +	{ .n = "mcan1_clk",	.id = 30, },
-> +	{ .n = "flex11_clk",	.id = 32, },
-> +	{ .n = "flex12_clk",	.id = 33, },
-> +	{ .n = "i2s_clk",	.id = 34, },
-> +	{ .n = "qspi_clk",	.id = 35, },
-> +	{ .n = "gfx2d_clk",	.id = 36, },
-> +	{ .n = "pit64b0_clk",	.id = 37, },
-> +	{ .n = "trng_clk",	.id = 38, },
-> +	{ .n = "aes_clk",	.id = 39, },
-> +	{ .n = "tdes_clk",	.id = 40, },
-> +	{ .n = "sha_clk",	.id = 41, },
-> +	{ .n = "classd_clk",	.id = 42, },
-> +	{ .n = "isi_clk",	.id = 43, },
-> +	{ .n = "pioD_clk",	.id = 44, },
-> +	{ .n = "tcb1_clk",	.id = 45, },
-> +	{ .n = "dbgu_clk",	.id = 47, },
-> +	{ .n = "pmecc_clk",	.id = 48, },
-> +	{ .n = "mpddr_clk",	.id = 49, },
-> +	{ .n = "csi2dc_clk",	.id = 52, },
-> +	{ .n = "csi4l_clk",	.id = 53, },
-> +	{ .n = "dsi4l_clk",	.id = 54, },
-> +	{ .n = "lvdsc_clk",	.id = 56, },
-> +	{ .n = "pit64b1_clk",	.id = 58, },
-> +	{ .n = "puf_clk",	.id = 59, },
-> +	{ .n = "gmactsu_clk",	.id = 67, },
-> +};
-> +
-> +/**
-> + * Generic clock description
-> + * @n:			clock name
-> + * @ep:			extra parents names
-> + * @ep_mux_table:	extra parents mux table
-> + * @ep_clk_mux_table:	extra parents clock mux table (for CCF)
-> + * @r:			clock output range
-> + * @ep_count:		extra parents count
-> + * @id:			clock id
-> + */
-> +static const struct {
-> +	const char *n;
-> +	const char *ep[8];
-> +	const char ep_mux_table[8];
-> +	const char ep_clk_mux_table[8];
-> +	struct clk_range r;
-> +	u8 ep_count;
-> +	u8 id;
-> +} sam9x7_gck[] = {
-> +	{
-> +		.n = "flex0_gclk",
-> +		.id = 5,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex1_gclk",
-> +		.id = 6,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex2_gclk",
-> +		.id = 7,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex3_gclk",
-> +		.id = 8,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex6_gclk",
-> +		.id = 9,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex7_gclk",
-> +		.id = 10,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex8_gclk",
-> +		.id = 11,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "sdmmc0_gclk",
-> +		.id = 12,
-> +		.r = { .max = 105000000 },
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "flex4_gclk",
-> +		.id = 13,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex5_gclk",
-> +		.id = 14,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex9_gclk",
-> +		.id = 15,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex10_gclk",
-> +		.id = 16,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "tcb0_gclk",
-> +		.id = 17,
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "adc_gclk",
-> +		.id = 19,
-> +		.ep = { "upll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 5, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "gmac_gclk",
-> +		.id = 24,
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "lcd_gclk",
-> +		.id = 25,
-> +		.r = { .max = 75000000 },
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "sdmmc1_gclk",
-> +		.id = 26,
-> +		.r = { .max = 105000000 },
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "mcan0_gclk",
-> +		.id = 29,
-> +		.r = { .max = 80000000 },
-> +		.ep = { "upll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 5, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "mcan1_gclk",
-> +		.id = 30,
-> +		.r = { .max = 80000000 },
-> +		.ep = { "upll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 5, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "flex11_gclk",
-> +		.id = 32,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "flex12_gclk",
-> +		.id = 33,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "i2s_gclk",
-> +		.id = 34,
-> +		.r = { .max = 100000000 },
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "qspi_gclk",
-> +		.id = 35,
-> +		.r = { .max = 200000000 },
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "pit64b0_gclk",
-> +		.id = 37,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "classd_gclk",
-> +		.id = 42,
-> +		.r = { .max = 100000000 },
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "tcb1_gclk",
-> +		.id = 45,
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +	{
-> +		.n = "dbgu_gclk",
-> +		.id = 47,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "mipiphy_gclk",
-> +		.id = 55,
-> +		.r = { .max = 27000000 },
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "pit64b1_gclk",
-> +		.id = 58,
-> +		.ep = { "plla_div2pmcck", },
-> +		.ep_mux_table = { 8, },
-> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
-> +		.ep_count = 1,
-> +	},
-> +
-> +	{
-> +		.n = "gmac_tsu_gclk",
-> +		.id = 67,
-> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
-> +		.ep_mux_table = { 6, 8, },
-> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
-> +		.ep_count = 2,
-> +	},
-> +
-> +};
-> +
-> +#define prepare_mux_table(_allocs, _index, _dst, _src, _num, _label)	\
-> +	do {								\
-> +		int _i;							\
-> +		(_dst) = kzalloc(sizeof(*(_dst)) * (_num), GFP_KERNEL);	\
-> +		if (!(_dst)) {						\
-> +			ret = -ENOMEM;					\
-> +			goto _label;					\
-> +		}							\
-> +		(_allocs)[(_index)++] = (_dst);				\
-> +		for (_i = 0; _i < (_num); _i++)				\
-> +			(_dst)[_i] = (_src)[_i];			\
-> +	} while (0)
-> +
-> +static int sam9x7_clk_probe(struct udevice *dev)
-> +{
-> +	void __iomem *base = (void *)devfdt_get_addr_ptr(dev);
-> +	unsigned int *clkmuxallocs[64], *muxallocs[64];
-> +	const char *p[10];
-> +	unsigned int cm[10], m[10], *tmpclkmux, *tmpmux;
-> +	struct clk clk, *c;
-> +	int ret, muxallocindex = 0, clkmuxallocindex = 0, i, j;
-> +	static const struct clk_range r = { 0, 0 };
-> +
-> +	if (!base)
-> +		return -EINVAL;
-> +
-> +	memset(muxallocs, 0, ARRAY_SIZE(muxallocs));
-> +	memset(clkmuxallocs, 0, ARRAY_SIZE(clkmuxallocs));
-> +
-> +	ret = clk_get_by_index(dev, 0, &clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = clk_get_by_id(clk.id, &c);
-> +	if (ret)
-> +		return ret;
-> +
-> +	clk_names[ID_TD_SLCK] = kmemdup(clk_hw_get_name(c),
-> +					strlen(clk_hw_get_name(c)) + 1,
-> +					GFP_KERNEL);
-> +	if (!clk_names[ID_TD_SLCK])
-> +		return -ENOMEM;
-> +
-> +	ret = clk_get_by_index(dev, 1, &clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = clk_get_by_id(clk.id, &c);
-> +	if (ret)
-> +		return ret;
-> +
-> +	clk_names[ID_MD_SLCK] = kmemdup(clk_hw_get_name(c),
-> +					strlen(clk_hw_get_name(c)) + 1,
-> +					GFP_KERNEL);
-> +	if (!clk_names[ID_MD_SLCK])
-> +		return -ENOMEM;
-> +
-> +	ret = clk_get_by_index(dev, 2, &clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	clk_names[ID_MAIN_XTAL] = kmemdup(clk_hw_get_name(&clk),
-> +					  strlen(clk_hw_get_name(&clk)) + 1,
-> +					  GFP_KERNEL);
-> +	if (!clk_names[ID_MAIN_XTAL])
-> +		return -ENOMEM;
-> +
-> +	ret = clk_get_by_index(dev, 3, &clk);
+I would have expected the SPI NOR flash to appear in the "mtd_blk"=20
+devices, and would expect the UBI volumes to appear in the "ubi_blk" list.
+What am I missing?
 
-Linux does not have this clock if I am not mistaking.
-This is the "main_rc" , right ?
-Legacy speaking, U-boot has had four clocks on the PMC.
-But now you are writing this new pmc driver for sam9x7.
-Can you remove this clock such that the binding would be aligned to linux ?
-What is this clock required for ?
+What I'm aiming for here is to be able to:
+- Read from squashfs in (raw) MTD partition (NOR flash is ideal for that)
+- Read kernel/devicetree (fit) from UBI volume
+- Read from squashfs inside UBI volume
 
-Eugen
 
-> +	if (ret)
-> +		goto fail;
-> +
-> +	clk_names[ID_MAIN_RC] = kmemdup(clk_hw_get_name(&clk),
-> +					strlen(clk_hw_get_name(&clk)) + 1,
-> +					GFP_KERNEL);
-> +	if (ret)
-> +		goto fail;
-> +
-> +	/* Register main rc oscillator. */
-> +	c = at91_clk_main_rc(base, clk_names[ID_MAIN_RC_OSC],
-> +			     clk_names[ID_MAIN_RC]);
-> +	if (IS_ERR(c)) {
-> +		ret = PTR_ERR(c);
-> +		goto fail;
-> +	}
-> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_RC_OSC), c);
-> +
-> +	/* Register main oscillator. */
-> +	c = at91_clk_main_osc(base, clk_names[ID_MAIN_OSC],
-> +			      clk_names[ID_MAIN_XTAL], false);
-> +	if (IS_ERR(c)) {
-> +		ret = PTR_ERR(c);
-> +		goto fail;
-> +	}
-> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_OSC), c);
-> +
-> +	/* Register mainck. */
-> +	p[0] = clk_names[ID_MAIN_RC_OSC];
-> +	p[1] = clk_names[ID_MAIN_OSC];
-> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_RC_OSC);
-> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_OSC);
-> +	prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm, 2,
-> +			  fail);
-> +	c = at91_clk_sam9x5_main(base, clk_names[ID_MAINCK], p,
-> +				 2, tmpclkmux, PMC_TYPE_CORE);
-> +	if (IS_ERR(c)) {
-> +		ret = PTR_ERR(c);
-> +		goto fail;
-> +	}
-> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK), c);
-> +
-> +	/* Register PLL fracs clocks. */
-> +	for (i = 0; i < ARRAY_SIZE(sam9x7_plls); i++) {
-> +		if (sam9x7_plls[i].t != PLL_TYPE_FRAC)
-> +			continue;
-> +
-> +		c = sam9x60_clk_register_frac_pll(base, sam9x7_plls[i].n,
-> +						  sam9x7_plls[i].p,
-> +						  sam9x7_plls[i].id,
-> +						  sam9x7_plls[i].c,
-> +						  sam9x7_plls[i].l,
-> +						  sam9x7_plls[i].f);
-> +		if (IS_ERR(c)) {
-> +			ret = PTR_ERR(c);
-> +			goto fail;
-> +		}
-> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_plls[i].cid), c);
-> +	}
-> +
-> +	/* Register PLL div clocks. */
-> +	for (i = 0; i < ARRAY_SIZE(sam9x7_plls); i++) {
-> +		if (sam9x7_plls[i].t != PLL_TYPE_DIV)
-> +			continue;
-> +
-> +		c = sam9x60_clk_register_div_pll(base, sam9x7_plls[i].n,
-> +						 sam9x7_plls[i].p,
-> +						 sam9x7_plls[i].id,
-> +						 sam9x7_plls[i].c,
-> +						 sam9x7_plls[i].l,
-> +						 sam9x7_plls[i].f);
-> +		if (IS_ERR(c)) {
-> +			ret = PTR_ERR(c);
-> +			goto fail;
-> +		}
-> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_plls[i].cid), c);
-> +	}
-> +
-> +	/* Register MCK pres clock. */
-> +	p[0] = clk_names[ID_MD_SLCK];
-> +	p[1] = clk_names[ID_MAINCK];
-> +	p[2] = clk_names[ID_PLL_A_DIV];
-> +	p[3] = clk_names[ID_PLL_U_DIV];
-> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
-> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
-> +	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_A_DIV);
-> +	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_U_DIV);
-> +	prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm, 4,
-> +			  fail);
-> +	c = at91_clk_register_master_pres(base, clk_names[ID_MCK_PRES], p, 4,
-> +					  &mck_layout, &mck_characteristics,
-> +					  tmpclkmux);
-> +	if (IS_ERR(c)) {
-> +		ret = PTR_ERR(c);
-> +		goto fail;
-> +	}
-> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_PRES), c);
-> +
-> +	/* Register MCK div clock. */
-> +	c = at91_clk_register_master_div(base, clk_names[ID_MCK_DIV],
-> +					 clk_names[ID_MCK_PRES],
-> +					 &mck_layout, &mck_characteristics);
-> +	if (IS_ERR(c)) {
-> +		ret = PTR_ERR(c);
-> +		goto fail;
-> +	}
-> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV), c);
-> +
-> +	/* Register programmable clocks. */
-> +	p[0] = clk_names[ID_MD_SLCK];
-> +	p[1] = clk_names[ID_TD_SLCK];
-> +	p[2] = clk_names[ID_MAINCK];
-> +	p[3] = clk_names[ID_MCK_DIV];
-> +	p[4] = clk_names[ID_PLL_A_DIV];
-> +	p[5] = clk_names[ID_PLL_U_DIV];
-> +	p[6] = clk_names[ID_PLL_AUDIO_DIVPMC];
-> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
-> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_TD_SLCK);
-> +	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
-> +	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV);
-> +	cm[4] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_A_DIV);
-> +	cm[5] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_U_DIV);
-> +	cm[6] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_AUDIO_DIVPMC);
-> +	for (i = 0; i < ARRAY_SIZE(sam9x7_prog); i++) {
-> +		prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm,
-> +				  7, fail);
-> +
-> +		c = at91_clk_register_programmable(base, sam9x7_prog[i].n, p,
-> +						   7, i, &programmable_layout,
-> +						   tmpclkmux,
-> +						   sam9x7_prog_mux_table);
-> +		if (IS_ERR(c)) {
-> +			ret = PTR_ERR(c);
-> +			goto fail;
-> +		}
-> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_prog[i].cid), c);
-> +	}
-> +
-> +	/* System clocks. */
-> +	for (i = 0; i < ARRAY_SIZE(sam9x7_systemck); i++) {
-> +		c = at91_clk_register_system(base, sam9x7_systemck[i].n,
-> +					     sam9x7_systemck[i].p,
-> +					     sam9x7_systemck[i].id);
-> +		if (IS_ERR(c)) {
-> +			ret = PTR_ERR(c);
-> +			goto fail;
-> +		}
-> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_SYSTEM, sam9x7_systemck[i].cid),
-> +		       c);
-> +	}
-> +
-> +	/* Peripheral clocks. */
-> +	for (i = 0; i < ARRAY_SIZE(sam9x7_periphck); i++) {
-> +		c = at91_clk_register_sam9x5_peripheral(base, &sam9x7_pcr_layout,
-> +							sam9x7_periphck[i].n,
-> +							clk_names[ID_MCK_DIV],
-> +							sam9x7_periphck[i].id,
-> +							&r);
-> +		if (IS_ERR(c)) {
-> +			ret = PTR_ERR(c);
-> +			goto fail;
-> +		}
-> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_PERIPHERAL,
-> +				      sam9x7_periphck[i].id), c);
-> +	}
-> +
-> +	/* Generic clocks. */
-> +	p[0] = clk_names[ID_MD_SLCK];
-> +	p[1] = clk_names[ID_TD_SLCK];
-> +	p[2] = clk_names[ID_MAINCK];
-> +	p[3] = clk_names[ID_MCK_DIV];
-> +	m[0] = 0;
-> +	m[1] = 1;
-> +	m[2] = 2;
-> +	m[3] = 3;
-> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
-> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_TD_SLCK);
-> +	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
-> +	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV);
-> +	for (i = 0; i < ARRAY_SIZE(sam9x7_gck); i++) {
-> +		for (j = 0; j < sam9x7_gck[i].ep_count; j++) {
-> +			p[4 + j] = sam9x7_gck[i].ep[j];
-> +			m[4 + j] = sam9x7_gck[i].ep_mux_table[j];
-> +			cm[4 + j] = AT91_TO_CLK_ID(PMC_TYPE_CORE,
-> +						   sam9x7_gck[i].ep_clk_mux_table[j]);
-> +		}
-> +		prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm,
-> +				  4 + sam9x7_gck[i].ep_count, fail);
-> +		prepare_mux_table(muxallocs, muxallocindex, tmpmux, m,
-> +				  4 + sam9x7_gck[i].ep_count, fail);
-> +
-> +		c = at91_clk_register_generic(base, &sam9x7_pcr_layout,
-> +					      sam9x7_gck[i].n, p, tmpclkmux,
-> +					      tmpmux, 4 + sam9x7_gck[i].ep_count,
-> +					      sam9x7_gck[i].id,
-> +					      &sam9x7_gck[i].r);
-> +		if (IS_ERR(c)) {
-> +			ret = PTR_ERR(c);
-> +			goto fail;
-> +		}
-> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_GCK, sam9x7_gck[i].id), c);
-> +	}
-> +
-> +	return 0;
-> +
-> +fail:
-> +	for (i = 0; i < ARRAY_SIZE(muxallocs); i++)
-> +		kfree(muxallocs[i]);
-> +
-> +	for (i = 0; i < ARRAY_SIZE(clkmuxallocs); i++)
-> +		kfree(clkmuxallocs[i]);
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct udevice_id sam9x7_clk_ids[] = {
-> +	{ .compatible = "microchip,sam9x7-pmc" },
-> +	{ /* Sentinel. */ },
-> +};
-> +
-> +U_BOOT_DRIVER(at91_sam9x7_pmc) = {
-> +	.name = "at91-sam9x7-pmc",
-> +	.id = UCLASS_CLK,
-> +	.of_match = sam9x7_clk_ids,
-> +	.ops = &at91_clk_ops,
-> +	.probe = sam9x7_clk_probe,
-> +	.flags = DM_FLAG_PRE_RELOC,
-> +};
+I can read files from UBIFS (and boot into Linux using bootcmd_ubifs)=20
+just fine, e.g.:
+Zynq> ubifsmount ubi0:qspi-rootfs
+Zynq> ls ubi 0
+<DIR>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 5200=C2=A0 Fri Mar 09 12:34=
+:56 2018=C2=A0 bin
+<DIR>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 160=C2=A0 Fri Mar 09 =
+12:34:56 2018=C2=A0 dev
+<DIR>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 4984=C2=A0 Fri Mar 09 12:34=
+:56 2018=C2=A0 etc
+...
+
+
+--=20
+Mike Looijmans
+System Expert
+
+TOPIC Embedded Products B.V.
+Materiaalweg 4, 5681 RJ Best
+The Netherlands
+
+T: +31 (0) 499 33 69 69
+E: mike.looijmans@topic.nl
+W: www.topic.nl
+
+
 
