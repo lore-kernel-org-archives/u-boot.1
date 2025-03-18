@@ -4,82 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7968C282EC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 02:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C53C35FF3
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 03:16:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1C8181101;
-	Wed, 19 Mar 2025 03:52:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F26481101;
+	Wed, 19 Mar 2025 04:16:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oGeePfVG";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RF5MlmcP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gD3LCv1x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 915068129F; Wed, 19 Mar 2025 03:52:16 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 59BAA810F4; Tue, 18 Mar 2025 17:36:03 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F25681026
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 03:52:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EEC3800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 17:36:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZHYCK6yPRz9smd;
- Wed, 19 Mar 2025 03:52:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742352734;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NQgYvZ9dTg5tbOzqNAgOk/t35ZAOPK9ddlqe7wCWevw=;
- b=oGeePfVGTqxBPGXCMXFwNkMIYtTqqWb52KWhhn6S/T2CMJuh54EMCH6eLB3CknFA0Pf9+i
- oVLS3BvV06H84w6cLNg4R7pxb5JkGyAi7k5XhLJHtM1ECakJJSrzufHRT+2A+kIrqJ4Zuf
- Wg70PdTQ/Txr+w+nEnSwnRggEwtNAGhndjPJLiLGbHimq+H5Jcsu+XaNufK9HCK95Nr447
- wPX90ReNAtJlkKm7A1EZi/zlye1OdbtU4DT0GHTt7oq+m8KaKEu+xlHrhNZP492rBZkwSs
- U825Ba/8uIRcHXYlbHplQbD8hv4yiuFZ+Ip+6q3T8xpWlSIqoSWvQinO2nkhqA==
-Message-ID: <995192fe-c9ec-48f1-aa9e-514da0e0aece@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742352732;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NQgYvZ9dTg5tbOzqNAgOk/t35ZAOPK9ddlqe7wCWevw=;
- b=RF5MlmcPDfDq4BDZySitkSKoqEjt5CTGT9KBbslJBP4uC131KukiVybF3h3rz3T8C2Gcc+
- isMl/twjNHXm+rbA00cv2LSt1Q9UpabcQj2tR8MQ9aPN5SyQPXjNr6he9Yl4S6XSj7UAM2
- visfhTih6XWe8sH+5syQ76AQ7arC3pESy8zAxf1RW2w0HHj2LBlHApTlFnbYeU5ecNgUYb
- IoFytFiP5GaRRgpbjiwqCl14rFwMKss5CXK/0kEa89VttFShgJ9rxOXoVzXtJ9CDoH5Zte
- TaSZKcEOB3YXT+DhnPkj8qkoK4E8lY3gq4VYkfWiaznPXGZugzdWs8lqmh+Z6A==
-Date: Wed, 19 Mar 2025 03:52:08 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH v2] net: miiphybb: Update documentation
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20250308203625.1317615-1-marek.vasut+renesas@mailbox.org>
- <a2fe2373-08a9-483a-bdd9-9158f739898a@canonical.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <a2fe2373-08a9-483a-bdd9-9158f739898a@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1c17fc27902f8332d11
-X-MBO-RS-META: my7m6jxpmtqjg5s95aqiwa9act4othox
-X-Rspamd-Queue-Id: 4ZHYCK6yPRz9smd
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3914bc3e01aso3940487f8f.2
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:36:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742315760; x=1742920560;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jqzMq/F9ZArdTvI9qm1htkIw5h/t8ipIjSKw20I0ydM=;
+ b=gD3LCv1xdNpzEN1UkLLgy/8MFPfGaDqAvilQlvWPyFlCAbHVpLavUZgbjoPUxh5wYf
+ lEsKluzQaWu0ssJDHoQMYne0JSF/P2yD3zH/kFldEjFzqHj54OorIk5VNHd1KpjXYH68
+ tYC+Nh1UYAFavUk2flelLO07/xiKkSZIl1i/gAqpBDlvTQhQjsdwKsxC1zlaFluqub3L
+ /Idm0Ib3N848Om9ZL678itkHvv3HMiukdF25OecsExnFSml7ZrHLpLhRkjSUfp+aH4mq
+ Yrgx9go2ipkn/8Cjkgx+QIcyUGtcNvRb2inzm4Aw6DEF99wvosLyUchPrA/66/XSED77
+ t1AQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742315760; x=1742920560;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jqzMq/F9ZArdTvI9qm1htkIw5h/t8ipIjSKw20I0ydM=;
+ b=M0Cr1OiYELoE8gWPwB8KusDTIYEbcn+zrIEsbhIbRJsttEtENlYsTbB8CDDmJUKNFF
+ G7VeYxWnnW+MdpEZqNkXjqIdaJkbYTUlkGHgDZjMYO4rMwkeGiX7wegHPgKrRxFWxKZj
+ kNeqv9DSNmnW/Zt+N+2+dpcT8zuqXUlw8ZHtn/sKfhCp5UHPHdE8eV28AhmfdOZd1Hsr
+ 1CtXeCyNbUi7ZR41Dsaf/r51a6mNE0E9Xt1HPDZkx7pAteENd0TO56VKfUXF3oGj2VCO
+ xYhqODSFPDoR7GoNV3Qq8KezNL/kCrXqD6Wl1mrtURf7dcs1ZwMKLtqlJpaOJ7SeSnCh
+ exgg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVjvw8PCYvdejvfrMNk0rRR9of/ybb0bEO3LfGPTkmayEGpBegghBrG9aJBhjt6ekyQiefLwl4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNz2R/OeB9+DlCy2v3zWcTChc9tUQwMSqBxyJ+aBMmo5wf40W4
+ WVkD2OLNsQqYNPHyKsCqwqKDoNNZ1TG099oRburmcJs57YJhvyDdFrza9SAthpY=
+X-Gm-Gg: ASbGncv+l/rek3+SlmV3A7d5O1imRg7k1Noo18SFsqF8gLzYzfZ9BzgUoUexo3NraWp
+ FA+9+b7WSc9bfAtWKAxTkMlYofdscYJ/u19AsO6C8yFIf4eIAhs5r/oVZ1x7cjzAxdW2tp0IrQd
+ sQa5jzx6CuLjifs36ZbIRCYLAaPTVfcR7AlZILsOAaaW87f/nxvnfJk65mbfiYTlV/QCngWHLpQ
+ SAa3GEu6VDSSpCOyac389KGRKK15u+5kLTH1AIa1GOF709R8D3nhWamNOyslr5w0Weyk1366Dyh
+ 99Rxbrydb8cXy852buRVclLXdIOHBRhJ7e8TpE8M
+X-Google-Smtp-Source: AGHT+IF3Z/YBmLNHhTv9njDU2yLALLraVHcRN2JARfL4xV+tIlvNVGYd/gfOlCgu6509CO83H+opiQ==
+X-Received: by 2002:a5d:47a3:0:b0:391:32b1:9458 with SMTP id
+ ffacd0b85a97d-3971d1348abmr16692122f8f.3.1742315760446; 
+ Tue, 18 Mar 2025 09:36:00 -0700 (PDT)
+Received: from localhost ([2001:4091:a247:8016:e858:454a:c0c9:731c])
+ by smtp.gmail.com with UTF8SMTPSA id
+ ffacd0b85a97d-395cb7eb92csm19036097f8f.91.2025.03.18.09.35.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Mar 2025 09:35:59 -0700 (PDT)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=4617e0b235e8f72fca8d0771db5c5aa133b4dcd2deb4f21a3ad6c72ea608;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Tue, 18 Mar 2025 17:35:54 +0100
+Message-Id: <D8JJDZQ010F7.4Y0FI46J6FVS@baylibre.com>
+To: "Tom Rini" <trini@konsulko.com>
+Cc: "Sumit Garg" <sumit.garg@linaro.org>, "Vignesh Raghavendra"
+ <vigneshr@ti.com>, "Bryan Brattlof" <bb@ti.com>, <u-boot@lists.denx.de>,
+ "Vishal Mahaveer" <vishalm@ti.com>, "Kevin Hilman" <khilman@baylibre.com>,
+ "Dhruva Gole" <d-gole@ti.com>, "Sebin Francis" <sebin.francis@ti.com>,
+ "Kendall Willis" <k-willis@ti.com>, "Akashdeep Kaur" <a-kaur@ti.com>
+Subject: Re: [PATCH 02/19] arm: mach-k3: Kconfig: Add symbols for IO+DDR Low
+ Power Mode
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+X-Mailer: aerc 0.20.1
+References: <20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com>
+ <20250311-topic-am62-ioddr-v2025-04-rc1-v1-2-666de9c105cb@baylibre.com>
+ <20250313160403.GD2640854@bill-the-cat>
+In-Reply-To: <20250313160403.GD2640854@bill-the-cat>
+X-Mailman-Approved-At: Wed, 19 Mar 2025 04:16:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,79 +107,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/10/25 7:32 PM, Heinrich Schuchardt wrote:
-> On 08.03.25 21:36, Marek Vasut wrote:
->> Update the miiphybb documentation to match current implementation.
->> The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
->> The example is updated to match current Renesas RAVB driver, which
->> is one of the miiphybb users.
->>
->> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Jim Liu <jim.t90615@gmail.com>
->> Cc: Joe Hershberger <joe.hershberger@ni.com>
->> Cc: Mario Six <mario.six@gdsys.cc>
->> Cc: Michael Chang <zhang971090220@gmail.com>
->> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
->> Cc: Parvathi Bhogaraju <pbhogaraju@microsoft.com>
->> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
->> Cc: Ramon Fried <rfried.dev@gmail.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->> V2: - Fix language bugs
->>      - Add RB from Paul
->> ---
->>   doc/README.bitbangMII | 66 ++++++++++++++++++++++++++++++-------------
-> 
-> It would be preferable to move this document into doc/devel/ as .rst file.
-> 
->>   1 file changed, 47 insertions(+), 19 deletions(-)
->>
->> diff --git a/doc/README.bitbangMII b/doc/README.bitbangMII
->> index 05ab20376f3..78b4ef880cb 100644
->> --- a/doc/README.bitbangMII
->> +++ b/doc/README.bitbangMII
->> @@ -1,39 +1,67 @@
->> -This patch rewrites the miiphybb ( Bit-banged MII bus driver ) in 
->> order to
->> -support an arbitrary number of mii buses. This feature is useful when 
->> your
->> -board uses different mii buses for different phys and all (or a part) 
->> of these
->> -buses are implemented via bit-banging mode.
->> +The miiphybb ( Bit-banged MII bus driver ) supports an arbitrary 
->> number of
->> +MII buses. This feature is useful when a driver uses different MII 
->> buses for
->> +different PHYs and all (or a part) of these buses are implemented via
->> +bit-banging mode.
->>   The driver requires that the following macros should be defined into 
->> the board
-> 
-> CONFIG_BITBANGMII=y enables the miiphybb driver.
-> 
->>   configuration file:
->>   CONFIG_BITBANGMII    - Enable the miiphybb driver
->> -The board code needs to fill the bb_miiphy_buses[] array with a 
->> record for
->> -each required bus and declare the bb_miiphy_buses_num variable with the
->> -number of mii buses. The record (struct bb_miiphy_bus) has the following
->> +The driver code needs to allocate a regular MDIO device using 
->> mdio_alloc()
->> +and assign .read and .write accessors which wrap bb_miiphy_read() and
->> +bb_miiphy_write() functions respectively. The bb_miiphy_read() and
->> +bb_miiphy_write() functions take a pointer to a callback structure,
->> +struct bb_miiphy_bus_ops. The struct bb_miiphy_bus_ops has the following
->>   fields/callbacks (see miiphy.h for details):
-> 
-> Please, add the description of struct bb_miiphy_bus_op miiphy.h and add 
-> the file to the API documentation. You could also put the example and 
-> the programming guidance there.
-It seems you did that already while applying a modified version of this 
-patch and the .rst conversion patch to master ? Thanks !
+--4617e0b235e8f72fca8d0771db5c5aa133b4dcd2deb4f21a3ad6c72ea608
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-One more nitpick, the modified version should not be applied to master, 
-it should only be in next, where the matching bbmiiphy code update which 
-prompted the documentation change is applied.
+On Thu Mar 13, 2025 at 5:04 PM CET, Tom Rini wrote:
+> On Tue, Mar 11, 2025 at 11:30:41AM +0100, Markus Schneider-Pargmann wrote=
+:
+>> There is one new symbol to enable support to resume from IO+DDR where
+>> the SoC is turned off and DDR is in self-refresh.
+>>=20
+>> The other symbol is the address of a memory region to be used to store
+>> meta data. This has to be the same address as is used by the firmware.
+>>=20
+>> Signed-off-by: Markus Schneider-Pargmann <msp@baylibre.com>
+>> ---
+>>  arch/arm/mach-k3/Kconfig | 9 +++++++++
+>>  1 file changed, 9 insertions(+)
+>>=20
+>> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+>> index a3ac490f677429b851b4b4b3d6753ef6997884c9..1e6deb3b9cf1c5a8091a88d8=
+c825ebdbb681424a 100644
+>> --- a/arch/arm/mach-k3/Kconfig
+>> +++ b/arch/arm/mach-k3/Kconfig
+>> @@ -150,6 +150,15 @@ config K3_DM_FW
+>>  	  bootloader, it makes RM and PM services not being available
+>>  	  during R5 SPL execution time.
+>> =20
+>> +config K3_IODDR
+>> +	bool "Enable IO+DDR Low Power Mode support"
+>> +	depends on SPL && (SOC_K3_AM62A7 || SOC_K3_AM62P5)
+>> +	default n
+>
+> n is already the default, this can be dropped.
+
+Thank you! Fixed for the next version.
+
+--4617e0b235e8f72fca8d0771db5c5aa133b4dcd2deb4f21a3ad6c72ea608
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iIcEABYKAC8WIQTd8KHufh7XoFiu4kEkjLTi1BWuPwUCZ9mg6hEcbXNwQGJheWxp
+YnJlLmNvbQAKCRAkjLTi1BWuPwfTAP41ETYJB/YqysZLgC7TSMXl+Cqykb4uu0ZV
+x+Lw0Ro0ygEAnn1ffLHc4lCUCG25ZE8GCpAzSBk+FrG2ig2fcvm8DAw=
+=k15H
+-----END PGP SIGNATURE-----
+
+--4617e0b235e8f72fca8d0771db5c5aa133b4dcd2deb4f21a3ad6c72ea608--
