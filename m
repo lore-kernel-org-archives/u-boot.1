@@ -4,86 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AE8BC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 17:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A885EC28B2F
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 18:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4ED481D4F;
-	Tue, 18 Mar 2025 18:02:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E2BCB810F4;
+	Tue, 18 Mar 2025 19:46:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rnzuO3U0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pv94feNk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6860C8191C; Tue, 18 Mar 2025 18:02:49 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16AEC81026
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 18:02:46 +0100 (CET)
+ id E18C38129F; Tue, 18 Mar 2025 19:46:42 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2512E81026
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 19:46:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-223fb0f619dso100461155ad.1
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:02:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742317364; x=1742922164; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MhRM1qfmOYRGujd/Y5ZOz+gJWmpUSGuJWk/teaL7oVQ=;
- b=rnzuO3U0UnRG+9Mw2IAy9hyCwCdM4Ffh/dZMl1PkFiFR9B+WmwcpTXR4cbtG6F9uQ2
- haseJw9ZFeor3X7/VqW0GYs1tEQ/RWuwxTOJCaeSyyM+g9eOsTZ5s41Vczqi126YsRaF
- IvvO41SoIF3XVcOJgEMBkDUcAl+FCDfJMtqpo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742317364; x=1742922164;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MhRM1qfmOYRGujd/Y5ZOz+gJWmpUSGuJWk/teaL7oVQ=;
- b=I2XYU/rf4fbKXMMxD0wvuiW8U1XWtGlF9JdHY/qEWT9swGcOTsA9n9GmMHSB/5VW2h
- j4+wLHHDi3iXTUtyR2yytiu6QjWhcGVgXEiT8nRxbBcyANMgvqphnRk+dIwUScCW6KmD
- +k//5xxTkkKMa0/374YD5AGtQXLeQa8poR1+0TryIIF/lZc1ObTqUuM6K+JxdZopJBPq
- ZasTiK8q2hfjDokreks6iwOBhuuZAOalUOznCMmXMjgqd7j2fN3GJSWmLVSzbegSnykK
- lgYyWcZo2V6tiljSBrPIAvSC5wKtbehFSsEdlFsKYHO1JyfrTV1fDkb0GECWqwZ5Lo+g
- gQNw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5rD+LZI36RBZhl8OmTPVG8/RU4ZMOroxA4ubCOmqSXWhmSNajawi7RxkMi2AqohVIsYb/8LM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUOPKQ5F0J7l5DhQbwKrLcwNZqIw6CwhvOm7hvgH0GL4c88dF8
- Cq23UAvzl8qjrlH9pDiCrskiZ6XMsbv+JlXgslaftMhJokr2t2JILAY/+m78nkM=
-X-Gm-Gg: ASbGncvKvZwNVRNRHR0Tu2el2/FGD7ecYl8fiRLSbGjlxTe4MGcF75qNuqX2SSAOkj5
- reIJd+MiiDFiZDJuEiTSQ5geg50a5b42RU87sDhLF/UhKjnQOzrzmyz5hVSerNft5wotUH51rbB
- OnD5O/sD/DNYKrs8fX0/ps3guCAf8Rqa7yM9Zl1GHJHsuRecIyLPq5z+PWIsy/ZefmYheblcUMy
- nX2Nog7wmHId46cvRD/o9qqZvbfKsyTyzK1FMss+PJh09DN4uTSntBYVlWCQlueAry1QGDgIQwf
- 000OEe+rmGUePlAzd94bEd+N/AaTSbP1yfkkbhTZTi4u
-X-Google-Smtp-Source: AGHT+IGFuRl27qC8JtrU0ecCZA8HpPFwciJadY+vZ01udaLQUIWK7lYusMG5efgvge/6JUnh3hxgXQ==
-X-Received: by 2002:a17:902:dad1:b0:224:b60:3cd3 with SMTP id
- d9443c01a7336-225e0a6c240mr242300505ad.19.1742317364423; 
- Tue, 18 Mar 2025 10:02:44 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.138.125])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c6bd4e0dsm97501595ad.221.2025.03.18.10.02.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 10:02:43 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Minda Chen <minda.chen@starfivetech.com>, 
- Hal Feng <hal.feng@starfivetech.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Rick Chen <rick@andestech.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, E Shattow <e@freeshell.de>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250304160403.380961-1-heinrich.schuchardt@canonical.com>
-References: <20250304160403.380961-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] dumpimage: fix handling of StarFive SPL too long
-Message-Id: <174231736302.1761706.4503316177757189574.b4-ty@konsulko.com>
-Date: Tue, 18 Mar 2025 11:02:43 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52IIkcUc2708087
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 18 Mar 2025 13:46:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1742323598;
+ bh=61rQFVRlD84LIVJRugGCwjB9MVLINC9g+FjDyDtD8Fw=;
+ h=From:To:CC:Subject:Date;
+ b=Pv94feNknABD/2vPxFSkaXsSJ03iEqvoZMb5UlBRnzNS7IVUvjHlHecmzdlkN6hgM
+ sIKk9+elZtYtl62VH3AIviHrxf4B2nmbLvTUCUb7TTttZUIWe0icSUpnqxXjSrt9U5
+ mBbF17FW+SYbjr8FfKzNQd9W6/NPFGtdXUio6E+k=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52IIkcZm025506
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 18 Mar 2025 13:46:38 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
+ Mar 2025 13:46:37 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 18 Mar 2025 13:46:37 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52IIkXBU010776;
+ Tue, 18 Mar 2025 13:46:34 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <trini@konsulko.com>, <vigneshr@ti.com>
+CC: <n-francis@ti.com>, <u-boot@lists.denx.de>, <nm@ti.com>,
+ <m-chawdhry@ti.com>, <j-keerthy@ti.com>, <m-shah@ti.com>,
+ <a-limaye@ti.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH v2] configs: am68_sk_r5: Enable AVS config
+Date: Wed, 19 Mar 2025 00:16:28 +0530
+Message-ID: <20250318184628.3309548-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,22 +80,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Mar 2025 17:04:03 +0100, Heinrich Schuchardt wrote:
+Enable AVS config
 
-> The header of the StarFive U-Boot SPL file u-boot-spl.normal.out has a
-> field indicating the payload size. When copying U-Boot SPL from a
-> partition the copied file might be too long.
-> 
-> Currently in this situation a misleading error message 'Incorrect CRC32' is
-> written.
-> 
-> [...]
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+---
+Change log
+changes in v2
+Removed extra test code, which was added below tearline
+link to v1: https://lore.kernel.org/all/20250314123824.2886341-1-u-kumar1@ti.com/
 
-Applied to u-boot/master, thanks!
+ configs/am68_sk_r5_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-[1/1] dumpimage: fix handling of StarFive SPL too long
-      commit: 15ba2b7356af035bc7dfd5c279e9658291fc7cf3
+diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
+index 097bed62061..d6ef89c7b84 100644
+--- a/configs/am68_sk_r5_defconfig
++++ b/configs/am68_sk_r5_defconfig
+@@ -6,7 +6,6 @@ CONFIG_SOC_K3_J721S2=y
+ CONFIG_TARGET_J721S2_R5_EVM=y
+ 
+ CONFIG_ESM_K3=n
+-CONFIG_K3_AVS0=n
+ CONFIG_ESM_PMIC=n
+ CONFIG_DM_REGULATOR_TPS65941=n
+ CONFIG_PMIC_TPS65941=n
 -- 
-Tom
-
+2.34.1
 
