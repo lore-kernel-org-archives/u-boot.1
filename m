@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8BDFC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 12:47:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC439C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 12:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F177380F4C;
-	Tue, 18 Mar 2025 13:47:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 477CD817D8;
+	Tue, 18 Mar 2025 13:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PuQogZwK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VwiR6VkX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B11BE810E8; Tue, 18 Mar 2025 09:31:39 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 1BC2D810E8; Tue, 18 Mar 2025 09:31:41 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B053980107
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:31:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14018805D7
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=arturkow2000@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ac2aeada833so1042678466b.0
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:31:37 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac2a81e41e3so1190729866b.1
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:31:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742286697; x=1742891497; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=w0uHwtESAZApWdOSHoU3zs742FxEhLtolYoSqVIaHZY=;
- b=PuQogZwKb7O9DlSkaNiZrN2EIqlMbK4rTMYYP7VinGgQzJNWwJle3h25TQU5zPvndp
- MA9/hn+CFBThBQfmWJZkkUAF17OLR0z3z/NE2H3zhMuOf/CNMQdUFBFb8iIcm5d+Ro+d
- 2DAr70QzSof/sKViIYRP3MNLQT4LTC9Xu+y+yhYYdPZlqINAc5hkbiqjzO8LLH0hPrCE
- Uwa+L3C8vxkSj27UDjO3snVuKylYwshnjR1Yc9eGM3cnaEksmdMONwEQ42tAx0X9MtnD
- lYH1fjn8Hh5n+ijIf5EzzoupFzDIHBrgHuKTi8teGbjydZcPsseFB2c0T1ujhCDUHVhC
- RgxA==
+ d=gmail.com; s=20230601; t=1742286698; x=1742891498; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0/rbDTXfYX5XiimyFx4aDsUpA5GqVeq4MVFLJXJHQFE=;
+ b=VwiR6VkXQmPgRr+ZgUJ3ek+rZ1eFQCO/6FRxLbACOSNR839INoAPO/xeHxzgqBjOYT
+ /tuJdkEA3lozjBiFSvZLWim0GN29uQFG1YAbXxPlr8W6oP2kuuOZPS84PV66ZcHkxrFz
+ I87VkJ52ToBlSasFcgfwQePyLXH85IdsVqP1/Iq9jQzsTLA3TPB9Q6DC7yRL6Jf1vhIi
+ 0WiFvHiKC5pmot8bhYkYs1OhFljCum2uhLNruavFlWlYjA7Qo7KtP1VPgy7VGZvW7ExP
+ sU4MO2MxkMSxz8bExQNOvkOsiDV/SvlAKHZa89chqAE18OlLMNinLa2CD55I4xVV+xFV
+ eJMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742286697; x=1742891497;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=w0uHwtESAZApWdOSHoU3zs742FxEhLtolYoSqVIaHZY=;
- b=dDx4kY9t706UYF4n5JJ5oc5ivN+idc+eq4pfJj8gk4MZckfQR9NcNz6FW54bLMZara
- 65QytNrh3cxMH7ES0BnVplwD+2xqdvjMRZbJfONYczQNEupFzOokBRnhmZ7brJJFGlYA
- skT7AomFTQ5II58df5eHpBuA2sE/9jEtrA08r1EYVFMb9Rg1HNkzvOqhgGE3qTtR8KFv
- ge36mpG+yGVK2e4e6KYez1ac45EMsCryv5x2dbu2RiPRvSkSiZp1wPo85h88WNk4n7CX
- 6PLAc00P9POCicAfi1gpG+RVtsVkLMb3vP9mQXDhclypfb9tVTcI9GV7JpmNgmgnWzXV
- 5OEg==
-X-Gm-Message-State: AOJu0YyJMI/Fw/0Tj3eXgvPueBZEvBkGgtD0mirb2vvlReL9CV1WvWx4
- l8S3aOedhi8DKYNQpUnreqiF6Y0YPW2ZB8XFFw5BfOVXnTqJ/9ydhF9a8Wkq
-X-Gm-Gg: ASbGncv6+71lfamH/YWOaRQAI/IUKD7YrOmttSioVQa4MWC8risS64UWg4e2y1U2SFS
- D682sEKYFkDsAogr3+7l4z9zwA66g59tyGd5bBZgf3MW9EKgGVCBQCPZtn5K0fOIL/wqO7RwOnW
- L10TFNAFi7NbsO0XUmX0R8vUdjmRQctrXX3d+gU1XPQUd8vDurNA3GJE/wLDX9ZXbcYhuWzIW6q
- eLuMswtnUFmE3kZh4+MZ92j2BBrF6KeZ0SP4n9tes7NtSz5JpsVf+Hra0U1+J2j0VbdSokQdReJ
- vhnyTqMxfieLg2WUyxRby2KpCNNi6kzRn3wvP3IjjFVeezUSCZum
-X-Google-Smtp-Source: AGHT+IHNxkMEAkvH+QjV61YYUAvnwhgOe4SDKjP8d+NyDQybUaQ2KsPBDQpIIbaHmk0USBFv1+3lzQ==
-X-Received: by 2002:a17:907:7212:b0:abf:6f25:9881 with SMTP id
- a640c23a62f3a-ac38ffef2abmr186516166b.25.1742286696269; 
- Tue, 18 Mar 2025 01:31:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742286698; x=1742891498;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0/rbDTXfYX5XiimyFx4aDsUpA5GqVeq4MVFLJXJHQFE=;
+ b=ApS7z3gTbnd3t48ONfep1D2p8B3vLqj0gJJPPxMNs6GVs6hLNqKvq00RoulJBYdFoH
+ SeMvXv8OU9wbWag/n1ifGixYg4GF7o6OFmNAY0mo9RP3U9tUWfqtryPVZQF8I9O/4aGZ
+ QQUjE+T07z/Y+lw8SBOL4EvHNrWaVP/xwNHh9+yXUGrWmqIrHz229NkYWkWCf6OGvImP
+ ZnYOeRSLEkQiIOX2H6YUW9vTGJbeH5jsUyOAJWB5JALjTA1ufVuBD9NNJxxLvqdCFIbQ
+ CdxGWz83CxS0I7uABvp9Y0LeuYCR2L6xvbj9nf7J0gSQ7sPgLqs3J5YdfIoJKqHdKMGm
+ RTEw==
+X-Gm-Message-State: AOJu0YxnpeEoGJPVj7LjyVEh6vKZ9HOor+sBtJPEYFKYaaFE+DL1C8/b
+ d/MNi/T9NLJ1XTwlLsTecmx63p+hJ2zBAN5Bn4OVK0PLjYfiOOtfMMSgHkiV
+X-Gm-Gg: ASbGnctHLyMLHAU3J6ugo/eT/0WUjKOap76A3t1A3Eps+Km2jljHbsR0d3gyCPTq4PG
+ w5VBezBij7P+OP9P79sxfGI0dNprjwPd8cmVOCnyvGM/MNc9ZL5TNV3emb8BhVxHZKxdKD/3R/x
+ e7/J5GfZfYH97nUS/UNUrOTBphwO40E0LpTNgn2RV4FR6jYvOI6ZZ87DrEweJq/+FSaD3DEpeGG
+ iQhrfJE2Vut5eUnAqi40fRj9eM3kH5DV9Jpgwtt+d+dHClnIycAB9hJZiJyrwclYmf9I3EInKYn
+ MloZFyTnqY6SZtymTtjeLKI9vYihRgkmzWyeyaoTJBaqcHrZ7NnT
+X-Google-Smtp-Source: AGHT+IE5BloK7cxJNIIWqUk9JJaogNyU7e9kxYnsTtRnAIaLGUnOEQ5/3dDJjaqvBOPaSBJ54M51zg==
+X-Received: by 2002:a17:907:3e08:b0:ac3:f95:dbd4 with SMTP id
+ a640c23a62f3a-ac38d51502fmr293568166b.42.1742286697772; 
+ Tue, 18 Mar 2025 01:31:37 -0700 (PDT)
 Received: from eta.play.pl ([2a02:a312:c49b:a180:4e11:d045:a94e:c696])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac314a3e0acsm816189366b.142.2025.03.18.01.31.35
+ a640c23a62f3a-ac314a3e0acsm816189366b.142.2025.03.18.01.31.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 01:31:35 -0700 (PDT)
+ Tue, 18 Mar 2025 01:31:37 -0700 (PDT)
 From: Artur Kowalski <arturkow2000@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Artur Kowalski <arturkow2000@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
  Stephen Warren <swarren@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
  Tom Warren <twarren@nvidia.com>
-Subject: [PATCH 0/4] Support UART over MicroSD slot on Transformer T20
-Date: Tue, 18 Mar 2025 09:30:43 +0100
-Message-ID: <20250318083103.63250-1-arturkow2000@gmail.com>
+Subject: [PATCH 1/4] tegra: add funcmux for exposing UART over uSD slot on
+ Tegra 20
+Date: Tue, 18 Mar 2025 09:30:44 +0100
+Message-ID: <20250318083103.63250-2-arturkow2000@gmail.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250318083103.63250-1-arturkow2000@gmail.com>
+References: <20250318083103.63250-1-arturkow2000@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 18 Mar 2025 13:47:17 +0100
@@ -101,34 +104,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+UART-A can be exposed through uSD, this was tested on Transformer T20
+but should work on all Ventana-based boards.
 
-The first patch in the series brings general pinmux support for exposing
-UART over SDB/SDD pins on T20. The following patches bring support
-Transformer T20 allowing to enable UART over uSD by setting
+TX is exported on SDD pingroup corresponding to uSD CLK pin
+RX is exported on SDB which is CMD pin in uSD slot
 
-CONFIG_TEGRA_ENABLE_UARTA=y
-CONFIG_DEVICE_TREE_INCLUDES="tegra20-asus-transformer-uart-usd.dtsi"
+Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
+---
 
-Similarily, support for UART over uSD could be brought to Ventana which
-has uSD on the same pins as TF101, and other Ventana-based boards.
+ arch/arm/include/asm/arch-tegra20/funcmux.h | 1 +
+ arch/arm/mach-tegra/board.c                 | 4 +++-
+ arch/arm/mach-tegra/tegra20/Kconfig         | 3 +++
+ drivers/pinctrl/tegra/funcmux-tegra20.c     | 9 ++++++++-
+ 4 files changed, 15 insertions(+), 2 deletions(-)
 
-
-Artur Kowalski (4):
-  tegra: add funcmux for exposing UART over uSD slot on Tegra 20
-  tegra: respect CONFIG_TEGRA_ENABLE_UART* options on Transformer T20
-  ARM: tegra: expose UART-A over uSD on Transformer T20
-  board: asus: transformer: add DTSI file for enabling UART over uSD
-    slot
-
- .../tegra20-asus-transformer-uart-usd.dtsi    | 31 +++++++++++++++++++
- arch/arm/include/asm/arch-tegra20/funcmux.h   |  1 +
- arch/arm/mach-tegra/board.c                   |  4 ++-
- arch/arm/mach-tegra/tegra20/Kconfig           |  4 +++
- drivers/pinctrl/tegra/funcmux-tegra20.c       |  9 +++++-
- include/configs/transformer-t20.h             | 10 ++++++
- 6 files changed, 57 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm/dts/tegra20-asus-transformer-uart-usd.dtsi
-
+diff --git a/arch/arm/include/asm/arch-tegra20/funcmux.h b/arch/arm/include/asm/arch-tegra20/funcmux.h
+index e9e96c1f933..bafcf857620 100644
+--- a/arch/arm/include/asm/arch-tegra20/funcmux.h
++++ b/arch/arm/include/asm/arch-tegra20/funcmux.h
+@@ -19,6 +19,7 @@ enum {
+ 	FUNCMUX_UART1_UAA_UAB,
+ 	FUNCMUX_UART1_GPU,
+ 	FUNCMUX_UART1_SDIO1,
++	FUNCMUX_UART1_SDB_SDD,
+ 	FUNCMUX_UART2_UAD = 0,
+ 	FUNCMUX_UART4_GMC = 0,
+ 
+diff --git a/arch/arm/mach-tegra/board.c b/arch/arm/mach-tegra/board.c
+index 7ca56a3b081..d34152723b0 100644
+--- a/arch/arm/mach-tegra/board.c
++++ b/arch/arm/mach-tegra/board.c
+@@ -169,7 +169,9 @@ static int uart_configs[] = {
+ 	FUNCMUX_UART1_GPU,
+  #elif defined(CONFIG_TEGRA_UARTA_SDIO1)
+ 	FUNCMUX_UART1_SDIO1,
+- #else
++#elif defined(CONFIG_TEGRA_UARTA_SDB_SDD)
++	FUNCMUX_UART1_SDB_SDD,
++#else
+ 	FUNCMUX_UART1_IRRX_IRTX,
+ #endif
+ 	FUNCMUX_UART2_UAD,
+diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra/tegra20/Kconfig
+index e2735d93e28..3349f1e2786 100644
+--- a/arch/arm/mach-tegra/tegra20/Kconfig
++++ b/arch/arm/mach-tegra/tegra20/Kconfig
+@@ -17,6 +17,9 @@ config TEGRA_UARTA_GPU
+ config TEGRA_UARTA_SDIO1
+ 	bool
+ 
++config TEGRA_UARTA_SDB_SDD
++	bool
++
+ choice
+ 	prompt "Tegra20 board select"
+ 	optional
+diff --git a/drivers/pinctrl/tegra/funcmux-tegra20.c b/drivers/pinctrl/tegra/funcmux-tegra20.c
+index 951ae196161..f60d5aad3a4 100644
+--- a/drivers/pinctrl/tegra/funcmux-tegra20.c
++++ b/drivers/pinctrl/tegra/funcmux-tegra20.c
+@@ -62,8 +62,15 @@ int funcmux_select(enum periph_id id, int config)
+ 			pinmux_tristate_disable(PMUX_PINGRP_SDIO1);
+ 			bad_config = 0;
+ 			break;
++		case FUNCMUX_UART1_SDB_SDD:
++			pinmux_set_func(PMUX_PINGRP_SDB, PMUX_FUNC_UARTA);
++			pinmux_set_func(PMUX_PINGRP_SDD, PMUX_FUNC_UARTA);
++			pinmux_tristate_disable(PMUX_PINGRP_SDB);
++			pinmux_tristate_disable(PMUX_PINGRP_SDD);
++			bad_config = 0;
++			break;
+ 		}
+-		if (!bad_config) {
++		if (!bad_config && config != FUNCMUX_UART1_SDB_SDD) {
+ 			/*
+ 			 * Tegra appears to boot with function UARTA pre-
+ 			 * selected on mux group SDB. If two mux groups are
 -- 
 2.48.1
 
