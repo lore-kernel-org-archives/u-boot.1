@@ -4,90 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C82C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 14:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F155DC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 14:09:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03A9B80F4C;
-	Tue, 18 Mar 2025 15:04:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D41E80F4C;
+	Tue, 18 Mar 2025 15:09:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ps5b5ViF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cV1NGPUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8EC9810E8; Tue, 18 Mar 2025 15:04:08 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id B2225810E8; Tue, 18 Mar 2025 15:09:39 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97AC1800B6
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 15:04:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4463B800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 15:09:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2ff615a114bso4546466a91.0
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 07:04:06 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-22580c9ee0aso98032135ad.2
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 07:09:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742306645; x=1742911445; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742306976; x=1742911776; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Cnja7rsGYpPj7isaVo1cnjlHI4EY3kgmemysq416KcY=;
- b=Ps5b5ViFAM1Pidb8Hg8tRlxdXAAomHvQhh2o9fAu4+UkJjbZXNos2IsiZrQkoQNWXq
- bjcxf1sRVFNkgVhew40XoK+MyxmJ476iHp+I7YkBJAc+0Yche+qxakA/jrwSyeypTOrQ
- BNC1do7gCi5fMJuckD3tP/INRigdU9Ui1iE2U=
+ bh=h6r2N19UmaBNGTerggO14CmTgCmLdPZz+gvgLHexxiw=;
+ b=cV1NGPUXjqVelgkVh0Rxw3brFGtr+/RybEZ+h016lMMYRYKyMX69vvqzL2Vwz30ar8
+ tzUYLzEio5n0hl7kAPk9P5AKxYh2r5d1dMLnw8EpB/qStA5QxeRI7mNM2jb9RR1gNZ0R
+ fLRuxGhsISXPKR+RaEUwqcw2Su7nalJXN1aXE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742306645; x=1742911445;
+ d=1e100.net; s=20230601; t=1742306976; x=1742911776;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Cnja7rsGYpPj7isaVo1cnjlHI4EY3kgmemysq416KcY=;
- b=WP1ey+z8INrlGFsxZduptajHMYyvXpmaME+SJJPVyaU5A/y2b4HasPPdgqDWZ14wkk
- Cbw7tMrL3qqFlYsMN56TavsdrVBd2JQR0WNCnnvNFEaHxtJrABIJQyhgomOmIxYBuOak
- AkgGv84JaDcMSZEQtXgGVxEV/iJcapVR1uGLibVa3UWKIYStkrPDz0thx6/hk6i1xS4a
- EUPTupMVKqB/xfEybMVpqYMk9qhhBV6G5jNM8RZk1O6Gv2P+HmEB9J2zdwUTIuoKX+8z
- 2sNN2DpZ6ZXFxXwj48tY0pdw9BkkxvgHWxDvhiK8ytdnFtOUSOLWIM3hJFdyMeELE/eW
- lUOA==
-X-Gm-Message-State: AOJu0Yz8NbEJ0N3ANqG5P2bBR4H2XT2494DRz5f6azRh79Ti2d8SbDY+
- BSTwiHVYwlAXraY+af803Cb7hOJq/yQm3SW2TUwP757062nmToWAepV675z86VA=
-X-Gm-Gg: ASbGncvC8kEqrW6wn5BcjfHn7GfiGcrGFWFYciGUsdeYEv78DrORpHgveiK1ZJBuQvR
- Sy+mac7PY2kiFfAsdU3T5ETSBO46we7d0Wj+ix1iJFwkwbJJGeDhqJVBeKONATSmGsdUaFw/YEH
- HxD6K7RXo15/2prcUWTQPNNejlV/5NiyqUnqt4CfkKh7siWNVDj/IjkcbGsGHas/MVtAP1hPAIu
- BK0U45LH124OZDCIXdUO8JkVwG1PVEn/a7IAgHBi3mYppSyxwMvGOFTmf2iazQSX7O0iHnIJdaj
- f4qF/9CYh8QTLzh1cL+ieI48EatjSwfLFGU29RAzr1q/leRZ9aDgMLiA
-X-Google-Smtp-Source: AGHT+IHL6l3jMQylXP75nG7bTESKeQcytrdTBrJOgOpJ6+9jvwwdOBUpGQA1L8mtC+WR2/qH/5HsTw==
-X-Received: by 2002:a05:6a20:7f97:b0:1ee:5f21:6720 with SMTP id
- adf61e73a8af0-1fa513b8f20mr4821371637.16.1742306645012; 
- Tue, 18 Mar 2025 07:04:05 -0700 (PDT)
+ bh=h6r2N19UmaBNGTerggO14CmTgCmLdPZz+gvgLHexxiw=;
+ b=k91v9mFJoZdzLkvvjm0yEFtnKrixHv2vOrZyMtqIdv+mUAJu0CnU7slsr16kxeafz3
+ MpwKugSaK+y0N4aTgNoP0/xYhTYItNiJ5jts1xNz8p9/t9tZS9drxOmnVBKfF68Lp1Bz
+ hF1V29+rbcVgcaVLFSLKo8wdxpHcy1+tyh7KZsZLXMyNKzbeijA/f8AOAqpF7OjkBe0m
+ GV/CSxUzz+mRMY1gPifsqD6iEM0ZIJu2H4EijZRNunpKofy2o1q92Qns+rKTFWb5qBMK
+ ru2VW59j0UD18LiDEiLxWHhfTff/fPxvYPwklPk+7S/HwdkSTBwbRrIxOjIkOQklwAKN
+ 5txQ==
+X-Gm-Message-State: AOJu0Yy63ue2dWKwnihK+xhVFsp/37rkler8bG3HjmCSrc36STXz3Epr
+ m/L7kRqa7r67brbuZcOCxtTWK5OgH4HvXntmyzZas/8EUbPNGIoaH54y97uSZ+T6tLcqIFBYNuE
+ v
+X-Gm-Gg: ASbGncv0iNoM1I3lM3FfqOt+KEpKwodX2HhPXbxlpcOaWbtT0f+l0cVZCCie/8VOt8x
+ AV03+tCTEKn+i9QmmeR/Jf6ys9HWEUtBSROqNujZzZZrGPSVo83IaD/bYbvL9tiLqOi/jbtfT8j
+ 9A/dR45b7ATjd6JMNepb0SSpowhHJmq4ehFib3Vyi+j8OZcU6dntty6/Zq013jzMQFZ0fN21NwR
+ Pr8EwBvHlB3ikdlJmImrYcEKdamCmfmXlCFejdS7TgpkNnsAMhvSe0YlwRy9ZhFFV93GiiJZ98/
+ 3IN5yKbrgBbJ2tpXnbE8Hxq5Wuth0u04+00nz+pemd35Uw==
+X-Google-Smtp-Source: AGHT+IGYoWbg5w5PB2VzjlWTubVrJ52x43dbavq70SR7KK3jZL2FE2SPPZYJ685lGoK85XTUHt/rNw==
+X-Received: by 2002:a17:903:2445:b0:224:826:279e with SMTP id
+ d9443c01a7336-225e0b29588mr195477415ad.50.1742306975571; 
+ Tue, 18 Mar 2025 07:09:35 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56ea0428fsm8987390a12.38.2025.03.18.07.04.02
+ d9443c01a7336-225c6bbe910sm94499535ad.178.2025.03.18.07.09.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 07:04:04 -0700 (PDT)
-Date: Tue, 18 Mar 2025 08:04:00 -0600
+ Tue, 18 Mar 2025 07:09:34 -0700 (PDT)
+Date: Tue, 18 Mar 2025 08:09:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v5 38/46] boot: Consider non-bootable partitions
-Message-ID: <20250318140400.GX2640854@bill-the-cat>
-References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-39-sjg@chromium.org>
+To: Harsha Vardhan V M <h-vm@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, k-malarvizhi@ti.com, kamlesh@ti.com
+Subject: Re: [RFC PATCH v3 1/5] cmd: fuse: Remove custom string functions
+Message-ID: <20250318140932.GY2640854@bill-the-cat>
+References: <20250318105047.256022-1-h-vm@ti.com>
+ <20250318105047.256022-2-h-vm@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0g/83C4/l2cO9qYj"
+ protocol="application/pgp-signature"; boundary="lZExrwGL2vjRhKzk"
 Content-Disposition: inline
-In-Reply-To: <20250315142643.2600605-39-sjg@chromium.org>
+In-Reply-To: <20250318105047.256022-2-h-vm@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,47 +97,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0g/83C4/l2cO9qYj
+--lZExrwGL2vjRhKzk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 15, 2025 at 02:25:58PM +0000, Simon Glass wrote:
+On Tue, Mar 18, 2025 at 04:20:43PM +0530, Harsha Vardhan V M wrote:
 
-> Any 'bootable' flag in a DOS partition causes boostd to only scan
-> bootable partitions for that media. This can mean that extlinux.conf
-> files on the root disk are missed.
+> Remove custom string functions and replace them with normal string
+> functions. Remove the custom strtou32 and replace it with
+> simple_strtoul.
 >=20
-> Put this logic behind a flag and update the documentation.
->=20
-> For now, the flag is enabled, to preserve existing behaviour. Future
-> work may provide a command (or some other mechanism) to control this.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
+[snip]
+> @@ -54,14 +43,18 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, i=
+nt argc,
+>  	argc -=3D 2 + confirmed;
+>  	argv +=3D 2 + confirmed;
+> =20
+> -	if (argc < 2 || strtou32(argv[0], 0, &bank) ||
+> -			strtou32(argv[1], 0, &word))
+> +	if (argc < 2)
+>  		return CMD_RET_USAGE;
+> =20
+> +	bank =3D (u32)simple_strtoul(argv[0], NULL, 0);
 
-Isn't this backwards as the existing behavior (prior to bootstd) was to
-scan and use these files, and so that's the behavior we need to preserve
-by default.
+Do we really need these casts?
 
 --=20
 Tom
 
---0g/83C4/l2cO9qYj
+--lZExrwGL2vjRhKzk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfZfVAACgkQFHw5/5Y0
-tywAsQwAko5JRy4jF+heUG8ECk3Q3lRUj4x+HGXbxxVV6lWKJVAtZ+BUxPe9k916
-ojz+CEgH7zvsvOnhJKBCS2/Q9XL/t/yY2sTfiflXg4a6u1cShA5Yzhy6s2HFMuXN
-pMarT0GtfFbarlknggqKRUhNi7PGYVXsyHFgobJi/9LqGwqsTajr9d2njknvIDFE
-B1a8GFcnL0W7fGnjwdFlix3EAPzXafbI1KHhkshljvsl1ms8coPTo2pc4Xj1uwvM
-2OnPPr/MHc5q1Db8zo7EXw/TircrdGh1npaOuYxzAIDiApVTnLPOBbTnEkFo8v2Z
-XCU7ocG0rDike3DE+YkbUCpkHqncDypSrmvHjjcR39UQrw8vWkPUsDyPldcYXWyd
-iZTDKtNFdEhWBQq3HDYm0ihiDj4suZOSXZFVIUZNrXLoz2EMfDkQko9diLe5ybfv
-9U17bcWgwxfijQXLzZUTilP0hPlEgEz7Yuzoym4Ej41FlghHIr7GCDlEhd6FFS/U
-hc9LZ9Ud
-=UJmc
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfZfpwACgkQFHw5/5Y0
+tyxFtwv9GJB42Q8MqyN+6a7QHbJ9mnGQutoxylGPOK/nFKHbrOwX2NRtrXSP8srr
+6Tzhil1JT80PNuHwqCbmSrNVJOI+LBkcUmkI1mEJHEBkqb5RwgWJScWNCEwkilEj
+F5dJi0SYhfiRyedn/aIg6EkjlARep3yR/UA7LPqQGKrQiBQvjNe2yLOBB2NOUM1s
+taPf/NaeNXeW1PFoy+UPntgC419D/jDdiOW/i97+mKFdPaPc7wvTZENwJ5XkNp3k
+1IBsb4wjLU3yIQa8B384nT5N8aeTgPTtJ/IQS0Idg5hReJHPECs3AUYSLlIpEpyO
+ewVcnu0uZxvESyQho5wJUrZ4HWNllGV2kATc6FuRGFohqGOXiwaNs0mDO5DYEjFD
+wrSXJSMQTnzMrAJQTuWTpPjOIKFrpCgF0zbu3KT7e0eWHjRbyrM0QbdAhipPZk0R
+KNd7CO1W9ZccUTJABxDiClrhjo7mgnXhee19wojXb/7iuFT+yLUFneEHwQcg4aHN
+bf5+ahuw
+=0otO
 -----END PGP SIGNATURE-----
 
---0g/83C4/l2cO9qYj--
+--lZExrwGL2vjRhKzk--
