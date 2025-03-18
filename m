@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D57C28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 17:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37D09C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 17:02:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A85B48193A;
-	Tue, 18 Mar 2025 18:01:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02A118129F;
+	Tue, 18 Mar 2025 18:01:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q5ezU7fA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LIibXjhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DAA1819AA; Tue, 18 Mar 2025 18:01:44 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 6D8BD81BC5; Tue, 18 Mar 2025 18:01:46 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 247B7800B6
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 18:01:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 197648193A
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 18:01:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-301493f461eso4091498a91.3
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:01:42 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-226185948ffso48953265ad.0
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742317301; x=1742922101; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742317302; x=1742922102; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M9bfzlLatioUol3pn7DJSZuvLRbFRjqgbj4GV5DAGZ0=;
- b=q5ezU7fAzu5UKhg/v5f6S4ocViDQO3nqkO7ZUb2vmRfi2p7+EJlN0oR8nvRXnzcTgK
- zZHrD13w4fK/z8/V266wMZh6MparaecWiQk/RI4jr3PZtgLQBn//Ed8HENZ0CSfwU1Yx
- GfSA8ibmtl8j1vRvzdhQAQcWo5MJZoU9aK/j4=
+ bh=mSA5k9B8OtPb4hR4U1E36U6/j1Apq5HEkg/ZPGAna4k=;
+ b=LIibXjhjnVi3kCiVAdTx5b889so6/SpevyDNVoEO9APYQzKg5y3+J7McKb5cLL6GCf
+ 8ZgbDjQxmGnGFgVtKcQH88CfWthjg901qI3GT1e2exWt/HWQcUHM59dBauGbzOfjSkxt
+ O9BYTn2ydfqPxmOJyfaBOTHJiIu+3aIvUZ3SQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742317301; x=1742922101;
+ d=1e100.net; s=20230601; t=1742317302; x=1742922102;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M9bfzlLatioUol3pn7DJSZuvLRbFRjqgbj4GV5DAGZ0=;
- b=JvkWDW0HIsxR39gWggJr1rIV8JgHzKs5XQHRHiwDixbAY74zJ4SCAEukU8CJoj8uYT
- cF/Fr0pF5YT9liXcEbn4tgs1OSYEswBhFQPlxAhpOzXNrvWuucPM1koFWNpDwUkm4coW
- rgPtoJNsagokSgOVNZQpJ7JTtAo4OOmjIqSUhR8Np0P8ZmaRCgL0DlwJqrcNFMhDQAbZ
- REFPJm8Ugg/vAYO5t+OYS2Jyq12Iw9w81Nt8Bnwa9Sq1+IXfiFHVP4Klo5h9fzQPRBGZ
- CS5FbV4B6syKbtw1OoARIyQGFHDsk1edGNExrTtgt+gkwxpi4F32rqNn1xJKMEXsktvA
- qf7g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU0CfBrg+sB2m+g6tzSyoyl/r3FlCVkl4c2yFIdPk5bAxiA9rl6sJoRUP74xn0LVj+XR0VuHTI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2el//P0tBdXJJu43F2IdaY39OnB5gX9rK3LrI+e8oUiMBWCA3
- qpfm2z8DfdfOpKlE5Z2sn8WuOjBNTlUv8GWQagy9YYKSC96z1T85a9kziKr2Geg/+39f+fp3mDC
- P
-X-Gm-Gg: ASbGnct1WZkbWmPesIi75CTe6ATsAyulGubyIaFxW6nZYSAhpxIUcYIV4aK8Zef+umY
- 0mWr/6nCHPhPHiEX+stQFkXcHhmRIC3xlZcEfryjyvTQ9ZBvKbI4jjriHGdVeRRSC1ZrpYopKDo
- tCof8zfwFoljuTtrC6aQu8fAPhwrIMyJZoxxu2cV46iDCXyhBzjQ1WBJp0Mwhn3Q7VTN4L7Q9H2
- XX452VjA2ll9b3EtwjzgDsOkh6bNApevoY+MKNLktIsyXNt/nhvE7U3pH+ENmdFsyKAtCIg3qMf
- 4UuPlPYROjDsDsZyg7C9oNBzoJMfgd0bLp1+FjcrkoCs
-X-Google-Smtp-Source: AGHT+IGOBwjnliEstewdVJvLg+SYVT4cVDF9PkK9cmzBxyYC/lWjHbdajEchIxOuqpM9seoAbFmzag==
-X-Received: by 2002:a17:90b:4b0b:b0:2fe:9783:afd3 with SMTP id
- 98e67ed59e1d1-301a5b00731mr3998876a91.2.1742317300621; 
- Tue, 18 Mar 2025 10:01:40 -0700 (PDT)
+ bh=mSA5k9B8OtPb4hR4U1E36U6/j1Apq5HEkg/ZPGAna4k=;
+ b=nePVTF978kSLUQfowfpSak0wzKVE6U5NYulyDYEb+a5Po+4dKLBSyG08WlOibvGlEt
+ LgWlYbRX50mf1cVO3xivXtm6tm3bGD+6DPyIaPYutMeIYsqt1rddlLZEGrR/egCBv0zL
+ 9S9qiSPtmF0GlQrqua2VRJTtEX2mDvQt39lPcCMFX2rnkjTiRuHsEcNx6l9ximYlFv+f
+ cOCkMfh5O/gHHEu1ZRgupfDxcL8YnuAoMr3T9a4M0gdsnfnGB1KAtULQ0OCvkn3yVYpg
+ P25GkMzWtLyTFulri+WbsxxszUb/65+6FBpNxQ2Mcc+yDWGOFByeGUhx3z1/DwaNLgAk
+ ylcQ==
+X-Gm-Message-State: AOJu0YwbSMYeKQEWrrYvtVT3FcOOnnAc9It5GwnHvK06KeVnPJhA3D00
+ VCiQe8KnORj1ZnDGZdiLv+9VA1lXWeHviCWhLMf4iyxeh15Wlhz8DBnWYl/rFfY=
+X-Gm-Gg: ASbGncsbzJOkffpBjblPaH3FYNMI+/dWpMSzYHCXvnjNhAOjmtJC2A5adV40oCg6LDO
+ j1HuDbicV2WSbkVpu2XSJ1i6jNnSO31ggYYxHa1vBQbijDPPA24QWBMdDyHI/oUbZ7anUO6WbRu
+ baYY4iVw6X1eJOwgzRDA9j/A502qj4r1TNtsjeRC63iREAHVnb6edMV8f+MWa03JKOs8MT0dLms
+ nYl5Kt3KnqCw03oGnrxur8iFMOuxmrEQrmg7FOhgJzO9IlrS1TUYQ1onNT6+HCFtDAWdFhhGrxD
+ MitsjaTg2QjB1ZhGYXbvC4oApbgP65GzyNgGiWGk7hom
+X-Google-Smtp-Source: AGHT+IHnMVYsdqK4384MYtVagXMLx10xNRH95j7bY0Jq3eujy9XMVRBvKBNj+ELhW1P0YQjvNi+J+A==
+X-Received: by 2002:a17:90b:1d45:b0:2fe:861b:1ae3 with SMTP id
+ 98e67ed59e1d1-301a5b12641mr4680723a91.8.1742317302423; 
+ Tue, 18 Mar 2025 10:01:42 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3015363273fsm8458551a91.34.2025.03.18.10.01.39
+ 98e67ed59e1d1-3015363273fsm8458551a91.34.2025.03.18.10.01.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 10:01:40 -0700 (PDT)
+ Tue, 18 Mar 2025 10:01:41 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Harrison Mutai <harrison.mutai@arm.com>
-Cc: nd@arm.com, u-boot@lists.denx.de
-In-Reply-To: <20250304165204.53097-1-harrison.mutai@arm.com>
-References: <20250304165204.53097-1-harrison.mutai@arm.com>
-Subject: Re: [PATCH 0/2] vepxpress64: disable CRC32 by default and add FVP
- with TF-A guide
-Message-Id: <174231729981.1761337.3280576575728409584.b4-ty@konsulko.com>
-Date: Tue, 18 Mar 2025 11:01:39 -0600
+To: u-boot@lists.denx.de, upstream@lists.phytec.de, 
+ Wadim Egorov <w.egorov@phytec.de>
+Cc: ggiordano@phytec.com, d.schultz@phytec.de, joe.hershberger@ni.com, 
+ n-francis@ti.com, afd@ti.com, nmorrisson@phytec.com, d-gole@ti.com
+In-Reply-To: <20250305045838.3614661-1-w.egorov@phytec.de>
+References: <20250305045838.3614661-1-w.egorov@phytec.de>
+Subject: Re: [PATCH 00/13] *** Various Improvements for phyCORE-AM62/A SoMs ***
+Message-Id: <174231730085.1761337.1465026984189180056.b4-ty@konsulko.com>
+Date: Tue, 18 Mar 2025 11:01:40 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,26 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Mar 2025 16:52:00 +0000, Harrison Mutai wrote:
+On Wed, 05 Mar 2025 05:58:25 +0100, Wadim Egorov wrote:
 
-> This patch introduces two updates to the vexpress64 project:
+> This patch series syncs the phyCORE-AM62Ax feature-wise with our other
+> K3-based SoMs by adding SoM overlay handling and capsule updates. It
+> also introduces support for USBDFU boot and includes various minor fixes.
 > 
-> - Disable CRC32 by default to prevent aborts in a standard FVP setup.
-> - Add a guide for running FVP with TF-A, providing a clear starting point for
->   users.
-> 
-> Harrison Mutai (2):
->   vepxress64: disable CRC32 by default to prevent aborts
->   vepxress64: add guide for running FVP with TF-A
+> Daniel Schultz (1):
+>   board: phytec: common: Add phyCORE-AM62Ax
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] vepxress64: disable CRC32 by default to prevent aborts
-      commit: 1d41f7afdf17c45ff8a6853742c9a61b371b73d0
-[2/2] vepxress64: add guide for running FVP with TF-A
-      commit: c4b48b0a6b72e97842e87babf432fee4d3a2bb39
+[01/13] arm: dts: k3-am62a-phycore-som-binman: Provide capsule nodes
+        commit: fc70ff633eb83ae246c4ffac944300a6674d45f8
+[02/13] include: configs: phycore-am62ax: Define capsule FW names
+        commit: 7193c252db3578766a3d7fb4019a27fb16b418f8
+[03/13] configs: phycore_am62ax_a53_defconfig: Enable capsule update
+        commit: 44ac48c2bc3d31c78dc9455bdc14ac36649b9f62
+[04/13] doc: phytec: k3: Add a common part for Environment and EFI Capsules
+        commit: 2708c0b23fd488ae262c1c2a3449e16aa05dbd41
+[05/13] configs: Add phycore_am62ax_r5_usbdfu_defconfig
+        commit: adf4d5e9e8ddf8a02cd2cea4f4d19944583654bb
+[06/13] board: phytec: phycore_am62x: Use custom k3_dfu.env fragment
+        commit: 7719682164ee3d8a21e3b5d62d8eb28f0acbd45d
+[07/13] board: phytec: phycore_am62ax: Add Network/SPI/DFU env variables
+        commit: d78bc6ea9f96079e82771c8659e0e9529d85f9ba
+[08/13] arch: arm: dts: k3-am62a7-phyboard-lyra: Add missing boot phase tag
+        commit: fcf09a76e27828ba0f8b69389e819c30e1716798
+[09/13] arch: arm: dts: k3-am625-phyboard-lyra: Add missing boot phase tag
+        commit: 61b907e9370f36b29845a8262489a49410828ca6
+[10/13] board: phytec: common: k3: Make configure_capsule_updates() static
+        commit: cc5c55567e3abeaa64b632375c1faa9bd09d6472
+[11/13] board: phytec: common: Add phyCORE-AM62Ax
+        commit: 1afc1a7401775143cee7558f632e337c2d14e337
+[12/13] arm: dts: k3-am62a-phycore-som-binman: Add SoM overlays
+        commit: 71582e7fa83adbdeb5e0f7f3f0a441e6c2875a3d
+[13/13] configs: phycore_am62ax_a53_defconfig: Add SoM overlays to OF_OVERLAY_LIST
+        commit: 953af03171d94d7b2a7f587d4b0c8f1c826ff1f0
 -- 
 Tom
 
