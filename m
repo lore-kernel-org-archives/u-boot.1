@@ -4,144 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E0C9C282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 09:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5C60C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 10:47:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 832E680548;
-	Tue, 18 Mar 2025 10:23:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sii.pl
+	by phobos.denx.de (Postfix) with ESMTP id C64AB8168B;
+	Tue, 18 Mar 2025 11:47:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sii.pl header.i=@sii.pl header.b="bLu+0h8F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EdvvP2NW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 777FD805D7; Tue, 18 Mar 2025 10:23:58 +0100 (CET)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on2072e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::72e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 72F4480F70; Tue, 18 Mar 2025 11:47:22 +0100 (CET)
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 504B680107
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:23:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E05E580107
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 11:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sii.pl
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pkochanowski@sii.pl
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MDBRXBvJ9/gEOmzvCJJMU60lTUGYCbI/XNfSuevZ5O9jVmoicA0yizNJqt0t+1QREqOLHJpmqnc9/rO9tf0A2NZJFQxHBRJMvQUr7ZuOAf9+n7rXacTCfiQjNzHtnOU1t4YGObOjD8WPbw2BVSlKytHBB8L40HzI39p0HMEmbMZebFesteDV1xF0hvjsPLdlocasU+Uql61iVKVjkp1ystAvIL233T3pP8ovTU7bb7tcyPhhM0IBBkzj0LFtyDfI5s1PF19JQLt5U05avxKns5gvHef8Bqh5ztpJCSZwPRQygfecRnHxUBayhcu/zkgPY2gULYHL8EbuSkL9IfaZGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WIseNOwCwm7+vu5cZpqqlYBAqQ0slzdL4IsdwMMU7Sw=;
- b=u3LcrUNG5DTe+LH6mhgnAZ0Rl83gpt2goHUATM6ynaBDKFYCX1zyGtsm3lCGn8Gc3rK5JE3bxft0Tf6+q5sE29qvddrvcLXJ/kMOMVxyjH5x4Zs6HtL4Zxcve6yWhBNyA9Cb5+5ygmF2LEHiGopzcA8aAXjWBfNgC7gUDUiRPhExmAq8Aclj/phBs9LkIw9TQ6eTC52I1lmpCbawUh1fFCRHHzZP/msH3CQibBml73BIYXR7PII2rQoN2ZJum+2ZliVVSUdOf2+Ez8tb5vzeg6G9SPk8lQzixjD2Wsdhs5XFI5LEwLIZJKgVm7a6USaFTDAhRvVUKNrH54bXSotL+Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=sii.pl; dmarc=pass action=none header.from=sii.pl; dkim=pass
- header.d=sii.pl; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sii.pl; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WIseNOwCwm7+vu5cZpqqlYBAqQ0slzdL4IsdwMMU7Sw=;
- b=bLu+0h8FOYewKoSgzwoox5G9/NyE3W3QU4pjP8fMNlFR2r3u1grZg5mL41Ok7ensJHR7wamhiIJZM6yaKLdAMr9/2cVU08kbBEj+7LIGX1TTnRNeJSyrxGlye5qCmyeKhcKqPFUrR/zvMngCfw15X/ywxruir+hv9e7DnBdyFksFawOHCTTrOwXLcCXZxqe6nW989kEcSXHKZiYNWS2VqsAsrOZaXEJLAvBW6L6WdKd1YaKU5F36Z0aAJs/VnbuqD77dOeeG+kp1c0xlDiFz7CK76DbrI9E5UPI4Y6Tc2seO6XEnoGd3W2ucSEuqv+XC7W34kHCnCh8yd5HUQmXT+w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=sii.pl;
-Received: from AM8P191MB1394.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:1ea::16)
- by DBBP191MB2411.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53b::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Tue, 18 Mar
- 2025 09:23:54 +0000
-Received: from AM8P191MB1394.EURP191.PROD.OUTLOOK.COM
- ([fe80::3b87:5dbc:ea30:3331]) by AM8P191MB1394.EURP191.PROD.OUTLOOK.COM
- ([fe80::3b87:5dbc:ea30:3331%6]) with mapi id 15.20.8534.031; Tue, 18 Mar 2025
- 09:23:54 +0000
-From: Pawel Kochanowski <pkochanowski@sii.pl>
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso33328025e9.3
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 03:47:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1742294839; x=1742899639; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yOPgufj4kLRMSWQlYufILY6J9GW0j2tb3LYdXXWjnn4=;
+ b=EdvvP2NWhuk37bz+wflCIK/0f8lsC0uusUIOxoFJ7hZgaOngEzE8mwDKmfBTVdon2w
+ j/zzIevm2fQz/ablLDFn2aeiF+i3FhWNn4HlGvqtRGEkGatb45bYvmNjvkmjeCqeuOkL
+ 6uAoHS0V6HFZnXQEn9IbYR/PXLh5fhI//h+1A01iwUfP0q7yCpNuFNEDffNH0caSBoh/
+ z/R6hVKOpTF1vQ2z9WwIPevRtQDXQ/W7WuaXXNTjhDj0jCYcV/UlUc4mNO8JKjtxuH+k
+ 5+qUeaRjLHYhyN2zci7h64F61Y1zRv64CACSxhuZlGGSx8Xj1ZMfi5TBnilQS3QEr82d
+ nnew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742294839; x=1742899639;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yOPgufj4kLRMSWQlYufILY6J9GW0j2tb3LYdXXWjnn4=;
+ b=lsxaFzChgsObWtV+t0iCfj9jEAzS5xs83tZ50x8b+OMN4RnN8uWOjiDz4zIYYJdC85
+ HoANrjAxQXTash3kDySu1t7kkzbp27C5p6w1J1ZlQ8TcRP6ijKaHUFYjSZtM2DxVP9TM
+ O0Yjx39RQFSEv+8Zik7JXiutM5asKGqFgwBlo+p8RebcPhiKmXpRBMtnt18sU+CkbS4X
+ NZ7ZQgsd+/tbFxkGWXUJf4em3q5u6OfRmTGhbC632re1u5cpztv2pKJOsJ+EWPEIS2vz
+ igmyRpeOfkzd/uf5ELJwjmmf7vsno9OT2h2qcj8TuXE+Y9vnVqxSvF11zBfepFWTB00X
+ VtFg==
+X-Gm-Message-State: AOJu0YwTJ4eNoa4bvuBe3ZEI8BhHsxZveUXCadCD7+x7795F54u7IvPn
+ TKvVaQVj/pgOng1dR2FFoWNow/QbqFl+NXbqU//iq4YZmIiMn43CGliB2xDbaBDS78zVC1uUeEU
+ doiDJZw==
+X-Gm-Gg: ASbGncvRP+12pnaSU6cU6HUAPTUEXB3Mob+UozETrOev2V7g0S74yjDocLed8N/t5bV
+ UfHwIimeWTihC2qcyG22V/XoM5Revqzz4zFSZux1QAaE07YUEKud4JTIiBkDAWJfb97xln/TF5N
+ N3dJd5mspceoxlCtcDUiNcG6faoWdLMQCnef/EjWjbTc6zgGp8VsQ0ld1e1TYW7Sv0arrfb68v1
+ v+1ZX686m/j8LGDpKA2qEwKvdMSouzMBIE7dmALeu/KPZiws+bj/SwLd8K38Xt9KhkReSYfD8Es
+ f2si+PGUD94v355185MeMJCAj8J/S61Bf3438Q9yaUucFUtsKN4CoA==
+X-Google-Smtp-Source: AGHT+IF5kAZKsv52MkmtVpfPg8ABjyCefO4jUVijQQMmkj/cPuWZAe7zzAXrpY60+3m+gFep5tPXbA==
+X-Received: by 2002:a05:600c:3492:b0:439:643a:c8d5 with SMTP id
+ 5b1f17b1804b1-43d3b7cc0bemr18717245e9.0.1742294839004; 
+ Tue, 18 Mar 2025 03:47:19 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:78bd:2e7e:120c:26bb])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d1fdda2dbsm131788185e9.2.2025.03.18.03.47.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Mar 2025 03:47:18 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Pawel Kochanowski <pkochanowski@sii.pl>,
- Gabriel Nesteruk <gnesteruk@sii.pl>
-Subject: [PATCH v2] efi: Make FDT extra space configurable
-Date: Tue, 18 Mar 2025 10:22:18 +0100
-Message-ID: <20250318092327.55203-1-pkochanowski@sii.pl>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v4 00/14] Uthreads
+Date: Tue, 18 Mar 2025 11:46:36 +0100
+Message-ID: <20250318104659.1114340-1-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: WA0P291CA0014.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::19) To AM8P191MB1394.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:20b:1ea::16)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8P191MB1394:EE_|DBBP191MB2411:EE_
-X-MS-Office365-Filtering-Correlation-Id: 483bda90-fe79-4143-a158-08dd65fe9a38
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?McGOnmaNlElr6FIf0PU+mJIAfA9yxaN6AtVMH46D7BuciFIW9SZ7Cga+VgE7?=
- =?us-ascii?Q?Ig60KfqIpWe5r69KDkz9xkNQK0LvFBS6LHSzvYtpdEYMV3CvR0GzWzLecv8f?=
- =?us-ascii?Q?fSIcc/OoTaTsYIoVtd7o/cCnDEEvlCQ69XRRFM8mGmezCi0nUkk/x34h3h09?=
- =?us-ascii?Q?jD3zvRXH71dVqJLaNE+xl2JkwC5emlA5QcN3JUot6HuWhU2wH24dSKvO1v/+?=
- =?us-ascii?Q?Oo+g+Sq+B4JSOeJKNbEBtbLp41hhNtWdQUjYxSsdJm8XS349B7ATQAwN+ug9?=
- =?us-ascii?Q?RSib9OQ9hrkLIftuHEKos520xiT2kJ7LOflTmjLK/x9jndW7EGOazoiIc10V?=
- =?us-ascii?Q?zHOPFngxksoWmW8gDcEDJFkBfKYfd+1vSv4jTvNg+eh1XRc6pTvJKSbuntCu?=
- =?us-ascii?Q?FJ2jzk6NVKicKFSrBpu+0GB7GaE9hHgVs7mm638+2RboQVNVhSI40mkkYbH4?=
- =?us-ascii?Q?ehXLgYIx3OlRrhqQsd5+Efe4t/pqcYilFKa4V7RlD4QE3rYg8AFagkDqpi0y?=
- =?us-ascii?Q?kf1ANDcSB38EAQVLpPrgb7ok/FxCMRxxOmOmNIFGfp7nu2ueoV4DYs6DZhRJ?=
- =?us-ascii?Q?0/VkjN9e4mFpj8/yE+8wpcASKe19tSpPMwLBMOwtNaTtS6vLZDv4IW09MHi3?=
- =?us-ascii?Q?w9qM4ox/KNDCMqwnntqd9luGm9QyTf7qt5dErwy+Nzd8+dm5SCyGsR3r92mL?=
- =?us-ascii?Q?WuVxzjRzeAcFX8ONaggnugnDTo5aa0v4SmQio3X3y5IEMg+82iFO74Qhgrs5?=
- =?us-ascii?Q?EPow5A6o6GdGdH46IiQ5evdIGWoQLxLJZ+MYQSoCnHAgvDFDsQd0Bh5HnMkt?=
- =?us-ascii?Q?sSp3sQIhLMRJ1iFj2mRrusawmu7h/FjZ1WsSDCz+fR8hmo01UAjJELJm46ov?=
- =?us-ascii?Q?zJ1SwEZBBVJZ+XTcL6yMcmFyOwyiPMcg2ZED+dSToTytFTR+x6/g0ZTUlUps?=
- =?us-ascii?Q?JkEj1Q15k8XA8Q8UJDRgRPGSqA4uCHP5NhWrA/oHxmJQXyhfbcCj4ksatJaT?=
- =?us-ascii?Q?PSoMPXLOhS2+TF4VPoeBA7irpmVR27SRbq8E7nLG7xJIv1wYqm9bFo4UjUjp?=
- =?us-ascii?Q?N7Qh93QpXz/Kp9HYi2XJQKkT8cjUDraoddiT0ijb4WM+sk9BymNfHYMKyHnk?=
- =?us-ascii?Q?8bDulzd1H3ED/Zxi4shTMScBMkPEv5PA9sxBLQkGRVtrUwMFo2WDg9Vvmjhb?=
- =?us-ascii?Q?z0E0k7mHelH3ePQTEa7JHryFDkGB83om8WPWCAYXhOvoKb5n476mqv6LZuwS?=
- =?us-ascii?Q?NTdKFx6wdaYkrHEnzkO4LlA5YCU6dh/HlL/owTYfgjbfxNteXw1m8YUkWOQT?=
- =?us-ascii?Q?Llg2E0q/IbZtiv3OGGjEM/ET5nzM/xz7bMsaUBwEhhvuqKUowf6KUCgb2HL2?=
- =?us-ascii?Q?a/KoPRLypiI93fegAtjWj/MnqPu8T1Quo682D/97vLXjqI/Obk6aUOd7w1ba?=
- =?us-ascii?Q?+Ejyoij0Z08YWavDIjvyTrn0/BBbZ+mS?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8P191MB1394.EURP191.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tBwy3RE+EjL+xQT6bmlYRC1z70h0TIG2S78SEVdKbf1SAT5YAIiCDYHt3jcc?=
- =?us-ascii?Q?esK6BvAkz3z2l+WtGkg5LEK+d2TqgoY/heYkXOFzyPdryhPB5MZVwK8Zm52m?=
- =?us-ascii?Q?eg1HUwzfFx02Dt6yXxOpOsh15s3Z6WHySnBmBdRbI1DlGn+bqFO8Da1HkFFz?=
- =?us-ascii?Q?6K7Tor1H7fAN3siJAM+QGKGUacXyCW4CbyM0RoUFt9GMf6NR7v3b9I4StlBt?=
- =?us-ascii?Q?yyzH5PpWHzTLMGXaRMZeYbAZVo0jqm3c2oKyXaqsDbNADtBBeBabHkog0jMA?=
- =?us-ascii?Q?7qq4o3Cq9Dzg6XGV+ehTQ49WOM1P5k5dnMQYYqBTOeT88scdKPcMKmubAWmI?=
- =?us-ascii?Q?qGnOJV3nX76dVe9f7ChzQuQ80Y32S3ATmCqDLlDPBzhNoqbLHPX2LfmdWCoQ?=
- =?us-ascii?Q?COqlA25n/Dllht/DG8ZkV/S/7U2voSw89xqeie+L9OOkHrj7eHmF27sk5dBW?=
- =?us-ascii?Q?XMWcpAsbmjAgrLuK5Q2ym5D0X/KQugw3WJevhs4HaKOrTTeGlXiar8cNfcrs?=
- =?us-ascii?Q?/1WCx33GKE9+DvzQWfkNElogumHkLIZEH7rLCHJeC2j1ry3OmwuOMF6YD3/8?=
- =?us-ascii?Q?K7Q63t7PkMLHAR/ZBY6m4VQ2MCecSiuRx/pbt6+9AGIZLLWKUVATmaY1zeKa?=
- =?us-ascii?Q?nWuICWOvGUZffsRgUKKjV6caiOI1FY63O5NaM5SJGEjIJ3NZf5W3xxzXSlZE?=
- =?us-ascii?Q?HHCn7HDxuZobaWQVoZIqLgyI9nmyvrle6QGgOTRTmtrcwbjLRArQUYtlY8Pc?=
- =?us-ascii?Q?/MCBgFhPV5fgpXs6H/ngA6NQnPMVshtc+/kR+SbI21sX4qEFxk9ZkaG1aAUv?=
- =?us-ascii?Q?sJ/yp06/MR8+Ae/Eqxmygj0F3O9+BaA9ieZ1QZpWIQpfj3Jeg+L+TLUUMHR+?=
- =?us-ascii?Q?/6iUbcba2vd1SqHs/59Jjm+AUdFV6yVRma62xnrar/lrNfPVJRVwqHKTYYmf?=
- =?us-ascii?Q?Sqn2De2ikLlHaK7curhvibqUIxc0F8L9Y//U4WjQOrR/dF3emqq7i+Vsw8Xa?=
- =?us-ascii?Q?EKGQJCbmzQhTsgPtdFmyEQUgQpwWtJi1ZcHPC1X3uRYm+l138C59sYWEYP9X?=
- =?us-ascii?Q?x9o3NHVp5JkEg/JO/7gYuFg2q3JkggBXeVyvxL5bObmAbFBqmyfCYYOsTzkn?=
- =?us-ascii?Q?Xz/JfgYu4R4vaKkumDjv/OGq71D3sop/5O1kgdhzuFvw8dmw+qYlTCfffhHw?=
- =?us-ascii?Q?/aEmIDzO+ssVWn32xdFD/CGZr9w30tOehQtCtdep7MpZN1yR4EBMvtH5oztM?=
- =?us-ascii?Q?4pFqUPcFZkU1CnOOIXq57DKq50Y7PheSA6ITtGKDaf1VxKXe9INAw4oUOq0r?=
- =?us-ascii?Q?Q2h5PZRjnKYDol4ZMv8tx27JqSf1O92euhq/GtN7Eudj102QGxHSTTdcxs3j?=
- =?us-ascii?Q?3HIY4B7k+xYGLdEpDFXOGvAw6oLXcrLXoFEH8puDqcKhjKpKJBVYNusED/fw?=
- =?us-ascii?Q?qeVUgcavo2m5TarGDVxiUU7VrJEtPUBeOAVosy8N6VR9pcTqUAhF8aNxNJ9k?=
- =?us-ascii?Q?n+ZNHclrfuu65GmZ221fozuVu/hI4fm2GTFiK4LbFPWWdse2bEek8bqjQwSQ?=
- =?us-ascii?Q?MhWF6MCnIxtTm0vyZEE6JvvTc1bnvmOiOqoXQEBR?=
-X-OriginatorOrg: sii.pl
-X-MS-Exchange-CrossTenant-Network-Message-Id: 483bda90-fe79-4143-a158-08dd65fe9a38
-X-MS-Exchange-CrossTenant-AuthSource: AM8P191MB1394.EURP191.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2025 09:23:54.1403 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f9bd6df6-c449-481f-abb5-37bd036beb76
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rwjPQ3vPynSa1OtfNicCMPoqMaxUFuK4FazUjyq9mvB+O9rAIiI/OuOhxp7jYSrnzb4iJ87YdhcS23F0HGNoDA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBP191MB2411
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,54 +95,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot currently reserves only 0x3000 bytes when copying the FDT
-in copy_fdt(), which may not be sufficient if additional nodes
-(such as FMAN firmware) are added later.
+This series introduces threads and uses them to improve the performance
+of the USB bus scanning code and to implement background jobs in the
+shell via two new commands: 'spawn' and 'wait'.
 
-This patch uses the exisitng SYS_FDT_PAD to reserve space for FDT fixup
-instead of hardcoded value.
+The threading framework is called 'uthread' and is inspired from the
+barebox threads [2]. setjmp() and longjmp() are used to save and
+restore contexts, as well as a non-standard extension called initjmp().
+This new function is added in several patches, one for each
+architecture that supports HAVE_SETJMP. A new symbol is defined:
+HAVE_INITJMP. Two tests, one for initjmp() and one for the uthread
+scheduling, are added to the lib suite.
 
-This change prevents potential corruption when resizing FDT after
-EFI boot, especially when firmware like FMAN requires additional
-space.
+After introducing threads and making schedule() and udelay() a thread
+re-scheduling point, the USB stack initialization is modified to benefit
+from concurrency when UTHREAD is enabled, where uthreads are used in
+usb_init() to initialize and scan multiple busses at the same time.
+The code was tested on arm64 and arm QEMU with 4 simulated XHCI buses
+and some devices. On this platform the USB scan takes 2.2 s instead of
+5.6 s. Tested on i.MX93 EVK with two USB hubs, one ethernet adapter and
+one webcam on each, "usb start" takes 2.4 s instead of 4.6 s.
 
-Signed-off-by: Gabriel Nesteruk <gnesteruk@sii.pl>
-Signed-off-by: Pawel Kochanowski <pkochanowski@sii.pl>
----
-Changes since version 1:
-- Removed custom CONFIG_FDT_EXTRA_SPACE in favor of already present SYS_FDT_PAD
-- Use the define also in efi_dt_fixup.c
+Finally, the spawn and wait commands are introduced, allowing the use of
+threads from the shell. Tested on the i.MX93 EVK with a spinning HDD
+connected to USB1 and the network connected to ENET1. The USB plus DHCP
+init sequence "spawn usb start; spawn dhcp; wait" takes 4.5 seconds
+instead of 8 seconds for "usb start; dhcp".
 
- lib/efi_loader/efi_dt_fixup.c | 2 +-
- lib/efi_loader/efi_helper.c   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=446674
+[2] https://github.com/barebox/barebox/blob/master/common/bthread.c
 
-diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-index 26928cfc454..544e1aa9808 100644
---- a/lib/efi_loader/efi_dt_fixup.c
-+++ b/lib/efi_loader/efi_dt_fixup.c
-@@ -168,7 +168,7 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
- 		/* Check size */
- 		required_size = fdt_off_dt_strings(dtb) +
- 				fdt_size_dt_strings(dtb) +
--				0x3000;
-+				CONFIG_SYS_FDT_PAD;
- 		total_size = fdt_totalsize(dtb);
- 		if (required_size < total_size)
- 			required_size = total_size;
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 04b2efc4a3b..40e5d31575a 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -477,7 +477,7 @@ static efi_status_t copy_fdt(void **fdtp)
- 	 * needs to be expanded later.
- 	 */
- 	fdt = *fdtp;
--	fdt_pages = efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
-+	fdt_pages = efi_size_in_pages(fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
- 	fdt_size = fdt_pages << EFI_PAGE_SHIFT;
- 
- 	ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+Changes in v4:
+- Rebase on top of next (at 0e1fc465fea "Merge tag 'dm-pull-15mar25' of
+git://git.denx.de/u-boot-dm into next")
+- Add a stack_sz parameter to initjmp(). This is made necessary by the
+sandbox implementation which relies on sigaltstack(), which need both
+the stack base address and its size in its stack_t argument. In any
+case it is cleaner to provide the exact stack boundaries. With that,
+a crash was fixed on sandbox in the lib_initjmp unit test.
+@Ilias: I kept your R-b on the two patches with a trivial change
+(passing one more parameter), but I removed it from "arm: add initjmp()"
+since there's one more line of assembly code and who knows what I might
+have done wrong ;)
+- Remove symbol UTHREAD_GRANULARITY and use a tight scheduling loop in
+delay() instead. Tests on an i.MX93 board have shown that setting
+UTHREAD_GRANULARITY as low as 10 microseconds (or higher) can have a
+negative impact on the console input (some key presses do not register)
+while 0 makes the console fully responsive.  The test consist in running
+"spawn sleep 10" and typing a command. I suspect other platforms may
+behave similarly, therefore do not bother with the added complexity of
+a configurable delay.
+- Apply review tags
+
+Changes in v3:
+- Rebase on top of Heinrich's series "common: cleanup usage of structure
+jmp_buf_data":
+https://patchwork.ozlabs.org/project/uboot/list/?series=446674
+https://lists.denx.de/pipermail/u-boot/2025-March/582221.html
+- HAVE_INITJMP now depends on HAVE_SETJMP. Provide proper Sphinx-like
+documentaion for initjmp().
+- test/lib/initjmp.c: change SPDX license tag from GPL2.0+ to
+GPL-2.0-or-later
+- Add doc/api/setjmp.rst. The initjmp() test is used as an example in the
+documentation.
+- uthread_create() now accepts an optional user-allocated struct uthread
+- Remove the list_empty() test from uthread_schedule() (not needed)
+- Add Sphinx doc to all functions in uthread.h (moved from uthread.c).
+- Add doc/api/uthread.rst. The uthread test is used as an example in the
+documentation.
+- Document struct uthread and its components
+- Provide numbers to justify the scheduling loop in udelay() in commit
+"lib: time: hook uthread_schedule() into udelay()".
+- Do not insert uthread_schedule() in common/console.c:fgetc() since it
+is already in schedule()
+- The wait command can be interrupted with Ctrl-C
+- Switch spawn and wait tests from DM_TEST() to CMD_TEST()
+- Add MAINTAINERS entry
+- Apply review tags
+
+Changes in v2:
+- Rewrite the cover letter, do not mention the older coroutines series
+- Rebased onto next
+- UTHREAD_STACK_SIZE is set to 32768 (32 KiB) instead of 32178
+- Remove uthread_free_all() and let threads be freed as they terminate
+by uthread_schedule()
+- Add function descriptions
+- Add documentation (doc/develop/uthread.rst)
+- Explain initjmp() in the description of "arch: introduce symbol
+HAVE_INITJMP".
+- Add thread groups (uthread_grp_new_id() and uthread_grp_done())
+- Add the spawn and wait commands
+
+Jerome Forissier (14):
+  arch: introduce initjmp() and Kconfig symbol HAVE_INITJMP
+  arm: add initjmp()
+  riscv: add initjmp()
+  sandbox: add initjmp()
+  test: lib: add initjmp() test
+  uthread: add cooperative multi-tasking interface
+  cyclic: invoke uthread_schedule() from schedule()
+  lib: time: hook uthread_schedule() into udelay()
+  test: lib: add uthread test
+  dm: usb: move bus initialization into new static function
+    usb_init_bus()
+  dm: usb: initialize and scan multiple buses simultaneously with
+    uthread
+  cmd: add spawn and wait commands
+  test: cmd: add test for spawn and wait commands
+  MAINTAINERS: add UTHREAD
+
+ MAINTAINERS                   |   9 ++
+ arch/Kconfig                  |   9 ++
+ arch/arm/lib/setjmp.S         |  12 +++
+ arch/arm/lib/setjmp_aarch64.S |  10 ++
+ arch/riscv/lib/setjmp.S       |  11 ++
+ arch/sandbox/cpu/Makefile     |  11 +-
+ arch/sandbox/cpu/initjmp.c    | 175 +++++++++++++++++++++++++++++++
+ cmd/Kconfig                   |  17 +++
+ cmd/Makefile                  |   2 +
+ cmd/spawn.c                   | 188 ++++++++++++++++++++++++++++++++++
+ common/cyclic.c               |   3 +
+ doc/api/index.rst             |   2 +
+ doc/api/setjmp.rst            |  20 ++++
+ doc/api/uthread.rst           |  19 ++++
+ drivers/usb/host/usb-uclass.c | 168 +++++++++++++++++++++---------
+ include/setjmp.h              |  32 ++++++
+ include/u-boot/schedule.h     |   3 +
+ include/uthread.h             | 123 ++++++++++++++++++++++
+ lib/Kconfig                   |  21 ++++
+ lib/Makefile                  |   2 +
+ lib/time.c                    |   9 +-
+ lib/uthread.c                 | 139 +++++++++++++++++++++++++
+ test/boot/bootdev.c           |  14 +--
+ test/boot/bootflow.c          |   2 +-
+ test/cmd/Makefile             |   1 +
+ test/cmd/spawn.c              |  32 ++++++
+ test/lib/Makefile             |   2 +
+ test/lib/initjmp.c            |  73 +++++++++++++
+ test/lib/uthread.c            |  80 +++++++++++++++
+ 29 files changed, 1128 insertions(+), 61 deletions(-)
+ create mode 100644 arch/sandbox/cpu/initjmp.c
+ create mode 100644 cmd/spawn.c
+ create mode 100644 doc/api/setjmp.rst
+ create mode 100644 doc/api/uthread.rst
+ create mode 100644 include/uthread.h
+ create mode 100644 lib/uthread.c
+ create mode 100644 test/cmd/spawn.c
+ create mode 100644 test/lib/initjmp.c
+ create mode 100644 test/lib/uthread.c
+
 -- 
 2.43.0
 
