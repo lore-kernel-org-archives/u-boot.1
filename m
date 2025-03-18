@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5636C28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 12:57:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3526C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 13:23:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 391F7810E8;
-	Tue, 18 Mar 2025 13:57:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D78CF810F4;
+	Tue, 18 Mar 2025 14:23:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrR8/U6g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d4b+VIrP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A29E817D8; Tue, 18 Mar 2025 13:57:57 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 41C46800B6; Tue, 18 Mar 2025 14:23:40 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BE1881026
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 13:57:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CEE1800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 14:23:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5499e3ec54dso5640204e87.0
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 05:57:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-22401f4d35aso104255385ad.2
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 06:23:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742302675; x=1742907475; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zW65MGCkwG3SZiJjviYwE8iJjlEsoylm9wifg3NwsqA=;
- b=TrR8/U6gUDJdJd5hZ4/MVRVaEZ4rQ2Fs6VMUzqmjNhuddVkwgXH+IPxILkkf8kOnoG
- Dcq/WaTupYJRrO1yYlQ8/zzsEqwkxRbAb5Ly7ur/+uPss9k0MTWtlwodyo6mn7KeKwsx
- odh9KGxWZnMKJTB3G9SP4hP8yD7snt0EjcTSbLWrxmRFPU9Xl6+M3KknfRC0ssjX6GKg
- NYKwK7ED0nMoKAVOnJIcjMUoDWL0/omvE+W22xQ77mj0xbfVs+ZLvB7Y+CBM4+V6LGQj
- oOo4M83AHTbCayUr5LaCMrIX9WZL/qqnTM6Ye+95Dwtkf+jfucR4tY0UEbBX1VWuJ1ON
- RXLA==
+ d=gmail.com; s=20230601; t=1742304216; x=1742909016; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8LAmF5txgOMIHH3bYbRmMfv+DK4X4pe9JIxrsUUDyeU=;
+ b=d4b+VIrPjKootdMcC0g5jenmPS3zxZlUtlCJGiCtqD/GlnFeOZLPtX6HUmYTjx7L4+
+ X4VZfT4OIbDNew8Y49swO3WOZOYiKw0dUbZ9gw0pArO05wVMe4W5VMzHOmjYZOHMYnF3
+ HGIyqC5NProtpaGCSm1D6WoydLfD7+0DHAObsxa0JNCjXtZhkNB1m5k4CVehSHrbHOKW
+ GUC2fCnHXQ8MTSEfdCdQ+z0v8ghtXaGn6tRAoxmOrSBaYT3dPO2KILUEYp1uZmvmLpGD
+ aK4x9rMaG4vb39KveMgHewmuyTtn7DDlBRRD+9Kb1NWm8RQ4I6rFXED/vEew5PhQWOoU
+ gVmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742302675; x=1742907475;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zW65MGCkwG3SZiJjviYwE8iJjlEsoylm9wifg3NwsqA=;
- b=nmHKCHSOT8oY7mfnE9wHFestidmI4y3CSvvfJbpPkc3SWpOezm0EGdbVu4Grexq347
- 6pabpBFNWNIVMXuBGrgSPFtUhFnFUHMd9prBefm35jLEyJ4wA4YzXfHd688HlZu/KnUZ
- m1CDKMTh/UYAeBKzIebIOPov1Fpb01ENx0YBaJa7y0I563O8pqcXe235BqupgkoqntEc
- krcIdB2bDIV7BrbvGws0cBGfrXDyJ8oJI1zI+sWlFBAwD9VQMid5qO6EdkhIrjNw5lfS
- FOH81CAE0Hozc6uX8ZQI5cRcsrunnAqCiVCxQsGTe4Fsr7ykE0WhdIfJk2M071JiFKxy
- oEeg==
-X-Gm-Message-State: AOJu0YwbfzR82tF5TBfXHD8fvhgSFjd83iGGZ72+5GySme+qx4ldo7Dd
- WKKy7qRTgIn0CS18Su6oYqsenNxjXo13sM/T/VcnebhnvqUdAjpKmR8f5GyTL4P9a54Rh5Wa39m
- DzkoFd7sI08ZxwMS4DFqnGXSIoVQ=
-X-Gm-Gg: ASbGnctY29nHCA+ckZ0PTyP+OonyjyTY+cLfx6KdZfYdouF2uqctnJBHkj1diltNUkc
- GMnDO2fdCqwiqUUkSRRxbnpvUDltYUvW1m4P1QnXuhAU/jAuL/Xpq/oUuRpJBaweghD+iLKk/jt
- /y2O8J2JYXxIXjl27Enfsv/ZRW6kIYSeU5D0X3pCXwBfeZkan/mQfyTdm3yg==
-X-Google-Smtp-Source: AGHT+IGA5LTkFJD5vIt8OzMfJn/34CWZOIG3BeshJXCtVOba7eStuUQy1Q/AlYdyoHTTVvjYzM4mMhyqx7TmY/BTaU4=
-X-Received: by 2002:a05:6512:3f07:b0:545:c89:2bc9 with SMTP id
- 2adb3069b0e04-549c39aaac3mr9388531e87.43.1742302674456; Tue, 18 Mar 2025
- 05:57:54 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742304216; x=1742909016;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8LAmF5txgOMIHH3bYbRmMfv+DK4X4pe9JIxrsUUDyeU=;
+ b=gBLp64ZNU81ScWAqMiJMQsd+JBM7ef3fy2x5U3l3flpcIwmqoiMtvlCvQHNg29ISSK
+ nkz0P9nZeXLZ1wgZQWnPxa+VjA8IYuY3CWWhETlBOErtDO744cmziND4rWyFWDmH6iMq
+ ddWhFoHdilYYv/3JqHiFgG+eaBnvVW9H98SUm08NT/pKKjkRRYwUan3G1cUIdoOHhg4b
+ pz5V5FuF9y2QzfZpdRKiit1qXhjLYgHPB1Nfbx9eu9mx/g/JFf4V1yMqDSmjnlBGgth5
+ oWfInoBlW6dVVuBfkEnNAQNgtuDN2lr7lqqpiPa71NdbE86No4xhgjeCQnS0kNhOWFaj
+ SEeQ==
+X-Gm-Message-State: AOJu0YwRALJIYflGucsRT2m1JZSyMxAovH4drTb+jYth9NM9n96JXPGX
+ ynaWeesTkzKfeIWkeENFFYECV+cR/81Sx0iVL1v8lm4rF6eRgcfh9ySXLGTuSW8=
+X-Gm-Gg: ASbGnctB9VbqFvLYzhffzveuWLTtJvHyo3oz/tui9gzSof10t8qqf/sraJz/VK1FgvZ
+ V4bv/LE2+KPTtkfxQyFoGeCleaVRO7AXMVohPaUurEh3tqg69pL4JUfLOfgZDAoupMHWyq14CUQ
+ PBIyeNC/vJt57Org3B6Mnjr4iNg4yM/h8iT5BrMn2z1YSJj6IvQbWI52bLPaGmQ0GShJt2G5z5G
+ 6xov71pqcio0T9rdGkdPm5Keu3pgBRSRB3jNBuKJcAXkVs+8fZPDxXWBv2h4/5IP7q2mBF71dGT
+ J0sd/U4kai8+F8HQPhoROmHybLJ7wONaK3XT2/wtLZvpJ09TDbviHJMP
+X-Google-Smtp-Source: AGHT+IEJmGtaOuVtv2mVdtN5Fpar0svWu3G4VDf6W+2LfdMVknuDqIYqaBizwxJNobrUpNvAhJ9/RA==
+X-Received: by 2002:a17:902:e801:b0:224:1eaa:5de1 with SMTP id
+ d9443c01a7336-2262c554e0fmr47517395ad.18.1742304216480; 
+ Tue, 18 Mar 2025 06:23:36 -0700 (PDT)
+Received: from adriano.. ([2800:300:6f53:4a50:2bbd:7872:4328:2b1c])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-225c6ba70f3sm93685945ad.157.2025.03.18.06.23.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Mar 2025 06:23:36 -0700 (PDT)
+From: Adriano Cordova <adrianox@gmail.com>
+X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
+To: u-boot@lists.denx.de
+Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
+Subject: [PATCH 0/3] Add initrd support to bootm EFI payloads
+Date: Tue, 18 Mar 2025 10:23:44 -0300
+Message-ID: <20250318132347.646703-1-adriano.cordova@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250318104659.1114340-1-jerome.forissier@linaro.org>
- <20250318104659.1114340-3-jerome.forissier@linaro.org>
- <CAOMZO5DRxYEgL7aW4s86i9GBWCZTwTQKQWLw8d-SrrvHmKF-wg@mail.gmail.com>
- <913699e0-816a-4b69-921d-d4ead3e3bf0b@linaro.org>
-In-Reply-To: <913699e0-816a-4b69-921d-d4ead3e3bf0b@linaro.org>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 18 Mar 2025 09:57:42 -0300
-X-Gm-Features: AQ5f1JoHmYn0LfksKhfApYzjh68P2iKLhju42ccSoc2gFNsR8TEtfsyi6LphjI0
-Message-ID: <CAOMZO5CCjFnaiZ_VwNj-eEW0XDhBF=eTPP8M=hfL=QVXDR-gGw@mail.gmail.com>
-Subject: Re: [PATCH v4 02/14] arm: add initjmp()
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Yu-Chien Peter Lin <peter.lin@sifive.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,16 +95,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Next boot stages can acces an initrd via a handle with a specific device
+path and an EFI_LOAD_FILE2_PROTOCOL installed on it. In U-Boot, this functionality
+is currently only implemented when booting with the EFI boot manager. This series
+implements this functionality also for the bootm command when the os is of EFI type,
+e.g. when booting FIT images with an EFI kernel.
 
-On Tue, Mar 18, 2025 at 9:51=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+Adriano Cordova (3):
+  efi_loader: efi_load_initrd: provide a memory mapped initrd
+  efi_loader: binary_run: register an initrd
+  bootm: add support for initrd in do_bootm_efi
 
-> The motivation is described in "[PATCH v4 01/14] arch: introduce initjmp(=
-)
-> and Kconfig symbol HAVE_INITJMP" [1]. Do you think a few words should be
-> repeated for each and every platform (currently: arm, riscv, sandbox)?
+ boot/bootm_os.c                  |  4 +-
+ cmd/bootefi.c                    |  2 +-
+ include/efi_loader.h             |  4 +-
+ lib/efi_loader/efi_bootbin.c     | 20 +++++++--
+ lib/efi_loader/efi_bootmgr.c     |  2 +-
+ lib/efi_loader/efi_load_initrd.c | 71 +++++++++++++++++++++++++++-----
+ 6 files changed, 84 insertions(+), 19 deletions(-)
 
-Yes, repeating the explanation for every platform would be better.
+-- 
+2.48.1
 
-Thanks
