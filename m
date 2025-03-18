@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A4AC282EC
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 08:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 272AFC282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 08:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C58180548;
-	Tue, 18 Mar 2025 09:32:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BAEB88193A;
+	Tue, 18 Mar 2025 09:32:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jBfqhM/W";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YyfXaeYv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A163805D7; Tue, 18 Mar 2025 09:32:43 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id BB7FF81877; Tue, 18 Mar 2025 09:32:50 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BA1580107
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:32:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC9280107
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:32:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac2c663a3daso405858366b.2
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:32:40 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac2bdea5a38so884626766b.0
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742286760; x=1742891560; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742286768; x=1742891568; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6pHcl2peZHY0pSZTS3c5S5ikqO5S9znICwA6rhpb4Io=;
- b=jBfqhM/WXibSFTalbJbYQE/yHFZx91xxSC6O09wBVjbHlL6SnXwpVWu7hsAvcPg+Lq
- X5U5Yug17KuQtygvYTTqips/GFSAn34cLs1aZ7t5yiOMlXpPzYN08vtJpWuWpzClkuQ0
- N8kDKcyqJucT3Wr/yFKFQrDunKaCXTBlgnAiM=
+ bh=SfQ+C/Lrf6hQt8fKqMTT0yce2T7vkyTMhe5OOr5L1nA=;
+ b=YyfXaeYvM2gCyxe/lBZ45W1kr0vrbz2eclK4iEHbyT+RKRqdBK9WarZzp0n9HTCp3d
+ WJL9PDtbSyUHbsbfajogPeL4GTnYaiwRrJnPH5b/yUZsdKU9TBOnKrWQYIxXYp0E8gZb
+ 0DTyFXGP3z6awltXAp2jMbQNXkljKuGAdogH8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742286760; x=1742891560;
+ d=1e100.net; s=20230601; t=1742286768; x=1742891568;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6pHcl2peZHY0pSZTS3c5S5ikqO5S9znICwA6rhpb4Io=;
- b=FIa3FPxLpHeAXFB3EFTe80Ci5999tawe/6c/Xfj/vpwqHD7Wd8DtOTlHVlGHMeP9TN
- fjocGo5+ITDTmu0p0JtInD/fDeo0PRJT5zAnzcmTqQPtwzd0vZgWrMSlvOGnWdD3kZal
- IelAU/uj+wNaaNLI2DjP0gOPN4Hgbu6SBYb6I7LzAF5kgKWqS9NoSdG1wHjmDIXFYHze
- 0Dsp1mv0bYjrxkNMu+BZJTl07FTaXaiXhc/oi82CNVShNn9mc5e8TIvnE4DJABqj6msv
- eSwDyKXk1TdYmaaI5IAkKkJuAewExVD7aVLzmWgsPl71uPZqS8mRHvq7N0iRamMvELK0
- TqaQ==
-X-Gm-Message-State: AOJu0YyNeuEA0kz3cjueqOpBZ/uRtgYAbkWNQNc+tk6cPtaUGC2+2FEj
- v2BlTwd2gV2PObi334px2Suqhf8F7dGQeHGrRR2nQoCaGsFHeh/EezgW7CtouErLeJ19ePDstXs
- kBCBLkey+Sh2rqKlY8kTin1u5GcjHA1/3nUQ9
-X-Gm-Gg: ASbGncubTlUA7HTVlwcNfg69XvZS14pRaBXwOmrItRkALgbzXaUXTLcrZ1iNHvob2In
- pKV8r8d6bxrWmeaCbAfsa+BjfK5ZotGee0tPozcUK8bCY3vGiOiqwxAMLDfbzxud7pxd8vsuV0/
- 9grSKOsNlNGzOIneOUULUXeCsHBxk=
-X-Google-Smtp-Source: AGHT+IGP2jUe5wXaXtY/8CkOtJD1Xys0f6rov2ANSY3c/KMmjJ76D6o6zSqsgeNaDDZjA9tw7Xlo3GfzuFrL0hE2ngM=
-X-Received: by 2002:a17:907:9725:b0:ac2:723a:670f with SMTP id
- a640c23a62f3a-ac3301e6170mr1314416366b.24.1742286759850; Tue, 18 Mar 2025
- 01:32:39 -0700 (PDT)
+ bh=SfQ+C/Lrf6hQt8fKqMTT0yce2T7vkyTMhe5OOr5L1nA=;
+ b=tO8Vrtvf3AJ9w6GyeQPXiGZyVaWhnGxwr+l+iJXagL0hxK3vHyHwUli5nrZrUQ8CFN
+ RUnisTCgpKhaw+tYDl1Acb43uH3XosBcZFXdGi1fzOVGbhEfbl/w18+Y9k0QBI1AXhGH
+ CrmCMaRZP7C85Qxk7BK+ZvsYgWbJBXAZUF+PXm5ktFDbOSfc9KyCzrxOR0twPANy6v5m
+ TneIPjt7gQwFl8ZSJgQUggVeUOW8Xtj/tRIQVw8PoRtSevwmYW/slbDGRkRELsys7Mg0
+ /qPFw2xE+aXvzKGU3wgHhHAAplhyFiGq16XaZpZMdVyttk9RYV6yF6bourYoaFD9NqJu
+ 7d0w==
+X-Gm-Message-State: AOJu0YxO7MJ9swsfN5SUJIJLofSb/dsr71+Iy4CIxPlDhReTrJT8Cs30
+ xKa0QEtJKqD3k13m8fwC/G6f6q8Qdo+NHrCbUYIM5+2XLTFqaeIFyyk9z/5a1gVhrRO/pvRXCXT
+ lv3DTJ4i9N7ZDwZUsSULYK4bsbCLoJ9nsBjvG
+X-Gm-Gg: ASbGncungqO9Tuyiizr1sQAAdQkIdC0dEz8j3ETI13WIJtdDq0rCX9GXw4cLLwBk1ZG
+ G5a1NuJCA1ERdBZImDni2IaG6yvKE+2OrmlesmSD4ajSiUVlmybG5356K/yeB6Hc5nINxI/R7kz
+ vmJkX2KW7/C3KSjxir/whtXvMybWaVJgcJQlnkIg==
+X-Google-Smtp-Source: AGHT+IHEa5SBGz8KeewoRZULy0KheY8hNOMbWw7iOsJccgDhaCY3isJTUR2TlOfleXUnNFoEDDUmDXgPoOuwX0WHRYs=
+X-Received: by 2002:a17:907:d2dc:b0:ac3:9587:f2a1 with SMTP id
+ a640c23a62f3a-ac39587f83bmr209283766b.20.1742286768116; Tue, 18 Mar 2025
+ 01:32:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250306160428.3041057-1-sjg@chromium.org>
- <20250307142255.GL2640854@bill-the-cat>
- <CAFLszTgtYsVQW-kETzUAdvJvAT6fN_53TeoN7o8wu52Ze3u56Q@mail.gmail.com>
- <20250314160652.GS2640854@bill-the-cat>
- <CAFLszTjGV==WftDU6C=S8VB28QJLvFJGS0H3=PKwTCjkZvNibQ@mail.gmail.com>
- <20250315135749.GI2640854@bill-the-cat>
- <CAFLszTjEONSErVbE0O5E0+izUDO8yFNZ+hwzvHjvx-nTczzeSQ@mail.gmail.com>
- <20250317230521.GU2640854@bill-the-cat>
-In-Reply-To: <20250317230521.GU2640854@bill-the-cat>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-8-sjg@chromium.org>
+ <20250317143158.GP2640854@bill-the-cat>
+In-Reply-To: <20250317143158.GP2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 18 Mar 2025 08:32:27 +0000
-X-Gm-Features: AQ5f1JrxNmr3KOSSAlVhqG1kt-hSf8HD0HCF9Rvt3q5mJ-iqH4Vt9y50q2JG3ag
-Message-ID: <CAFLszThJTWD1hejKfr9TfQYJRCiMoVQufkB+4=3K9Vf+bEBPYg@mail.gmail.com>
-Subject: Re: [PATCH v4 00/47] x86: Improve operation under QEMU
+Date: Tue, 18 Mar 2025 08:32:34 +0000
+X-Gm-Features: AQ5f1JrCLB1hi7LPW-hjjdBQ9-I7b7Pan-NA77yY-pACNG2Gu5X_e3JkpXh7iWk
+Message-ID: <CAFLszTheHiu3rG+Qtk23ctddUF1_Am=6qGSkSA-+Lp9ndGR2jQ@mail.gmail.com>
+Subject: Re: [PATCH v5 07/46] x86: Drop mpspec from the SPL build
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Rasmus Villemoes <ravi@prevas.dk>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,114 +92,41 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 18 Mar 2025 at 00:05, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 17 Mar 2025 at 15:32, Tom Rini <trini@konsulko.com> wrote:
 >
-> [cc list trimmed and adding Rasmus]
+> On Sat, Mar 15, 2025 at 02:25:27PM +0000, Simon Glass wrote:
 >
-> On Sat, Mar 15, 2025 at 02:38:29PM +0000, Simon Glass wrote:
-> > Hi Tom,
+> > This is not needed in SPL, so drop it.
 > >
-> > On Sat, 15 Mar 2025 at 13:57, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Mar 15, 2025 at 12:54:25PM +0000, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 14 Mar 2025 at 16:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Mar 14, 2025 at 02:44:35PM +0000, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 7 Mar 2025 at 14:23, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Mar 06, 2025 at 09:03:27AM -0700, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but it
-> > > > > > > > is not perfect.
-> > > > > > > >
-> > > > > > > > With both builds, executing the VESA ROM causes an intermittent hang, at
-> > > > > > > > least on some AMD CPUs.
-> > > > > > > >
-> > > > > > > > With qemu-x86_64 kvm cannot be used since the move to long mode (64-bit)
-> > > > > > > > is done in a way that works on real hardware but not with QEMU. This
-> > > > > > > > means that performance is 4-5x slower than it could be, at least on my
-> > > > > > > > CPU.
-> > > > > > > >
-> > > > > > > > We can work around the first problem by using Bochs, which is anyway a
-> > > > > > > > better choice than VESA for QEMU. The second can be addressed by using
-> > > > > > > > the same descriptor across the jump to long mode.
-> > > > > > > >
-> > > > > > > > With an MTRR fix this allows booting into Ubuntu on qemu-x86_64
-> > > > > > > >
-> > > > > > > > In v3 some e820 patches are included to make booting reliable and avoid
-> > > > > > > > ACPI tables being dropped. Also, several MTTR problems are addressed, to
-> > > > > > > > support memory sizes above 4GB reliably.
-> > > > > > >
-> > > > > > > Do you plan to rebase the prerequisite series' this requires so that it
-> > > > > > > can be merged?
-> > > > > >
-> > > > > > Here's my understanding of where things are:
-> > > > > >
-> > > > > > 1. You rejected the membuf series and my replies to try to resolve
-> > > > > > that haven't gone anywhere yet. So your tree doesn't have any tests
-> > > > > > for that code and still has the old naming.
-> > > > >
-> > > > > https://patchwork.ozlabs.org/comment/3473898/ is a well thought out not
-> > > > > gratuitous summary of why the series as it stands is a step in the wrong
-> > > > > direction. Tests are good. They're not a reason to pull an otherwise bad
-> > > > > series. This series should be rebased to not depend on that series. The
-> > > > > tests from the other series should be split out.
-> > > >
-> > > > It's not a bad series, unfortunately. I replied with my own comments
-> > > > and I stand by them.
-> > > >
-> > > > I don't mind if you want to drop the #ifdef (which shows how a flag
-> > > > could be used and the code-size impact). But other than that, I am
-> > > > firm on this for now. I've already applied it to my tree and a membuf
-> > > > implementation with tests and without a power-of-two limitation is
-> > > > important for my current work on distros and expo.
-> > >
-> > > Well, you need to rebase this series without that then as I'm not going
-> > > to take something another long time project contributor said was wrong
-> > > and offered lots of constructive feedback on.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > It doesn't affect this series. It is for future work.
+> > (no changes since v1)
 > >
-> > We'll see if the LTPC replies to my concerns.
+> >  arch/x86/lib/Makefile | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/arch/x86/lib/Makefile b/arch/x86/lib/Makefile
+> > index 43e6a1de77d..a908356e8a6 100644
+> > --- a/arch/x86/lib/Makefile
+> > +++ b/arch/x86/lib/Makefile
+> > @@ -26,7 +26,9 @@ obj-y       += e820.o
+> >  obj-y        += init_helpers.o
+> >  obj-y        += interrupts.o
+> >  obj-y        += lpc-uclass.o
+> > +ifndef CONFIG_XPL_BUILD
+> >  obj-y        += mpspec.o
+> > +endif
+> >  obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi_nhlt.o
+> >  obj-y        += northbridge-uclass.o
+> >  obj-$(CONFIG_I8259_PIC) += i8259.o
 >
-> Well, I guess I'm going to regret choosing to not chime in there at the
-> time and say that no, working against your tree is the wrong direction.
-> There's certainly enough feedback in that thread for you to make a v2
-> against mainline.  Because to be clear, no, your v1 isn't going in
-> mainline.
+> What's going on? This should be discarded if unused in SPL
+> automatically.
 
-Firstly it does not affect this series, so I hope you can pull this
-series in soon.
-
-This is the first I've heard of a v2 for membuf. From my side I don't
-want to rewrite it to use a different algorithm, nor force it to use a
-power-of-two size. That was not the point of my series. Here is the
-cover letter:
-
->>>>
-The membuff implementation curently has no tests. It also assumes that
-head and tail can never correspond unless the buffer is empty.
-
-This series provides a compile-time flag to support a 'full' flag. It
-also adds some tests of the main routines.
-
-The data structure is also renamed to membuf which fits better with
-U-Boot.
-
-There may be some cases in the code which could be optimised a little,
-but the implementation is functional.
-<<<<
-
-As I said, I'm happy to drop the addition of a compile-time flag. It
-was mostly to see if anyone thought it was a good idea.
-
-So how about just applying the first 7 patches? I can do a revert of
-patch 8 in my tree. Then if Rasmus wants to rewrite it he can do so,
-so long as the power-of-two size isn't mandatory.
+Yes and I'm actually not sure about this. It probably relates to the
+trouble I had getting BIOS ROMs going in SPL, but since I gave up on
+that, this patch doesn't seem to be needed.
 
 Regards,
 Simon
