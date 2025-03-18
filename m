@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 831D3C28B28
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 15:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2EC0C28B28
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 15:24:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2EBB81D27;
-	Tue, 18 Mar 2025 16:21:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 334E781026;
+	Tue, 18 Mar 2025 16:24:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AC9tjHcl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZnuL/5JN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83D4B81951; Tue, 18 Mar 2025 16:21:25 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id EE2AA810F4; Tue, 18 Mar 2025 16:24:16 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8232C81C64
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 16:21:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAF7D800B6
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 16:24:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43d0c18e84eso17134275e9.3
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 08:21:23 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-abbd96bef64so1014795666b.3
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 08:24:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742311281; x=1742916081; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EESBZnOLPFW+FJgYkWDurgNAw3gvJ4uYGp20jM4cQLA=;
- b=AC9tjHclRxjYudBZtDNjm0NByuTzf3xVAJk+34Vp8zYSspI5ExESbOtx6gD6kd+Co8
- G3mH98H7Fv8x4jV054XnDSYOSh9pHtHXrQ4swZeawS4RI8i9n+mMp5zprwf+m3O61DQk
- 2JHk1e2/m+YFBGucyGyKNhlnSWWtRNfu8DJnk=
+ d=chromium.org; s=google; t=1742311454; x=1742916254; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9ynchHR1rdhOhNAdlgd6LOVJR3sPIw6GGCPJhAFU4NU=;
+ b=ZnuL/5JNBJYXocNdKYQWoI3apH1c/0Wd1SDXbZLTdg54YxPOxfIZGZeClty2SgtYTv
+ 79V3L1Z2Duwe34EqoHtFf985LlPHOhhyJbp3OOyC3uTcH98SD2Wym0wQUj2Z+Fd//p8Q
+ MeoB3tasQdbRsCkBeu8vUVIPtNEYNcuTUA84o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742311281; x=1742916081;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EESBZnOLPFW+FJgYkWDurgNAw3gvJ4uYGp20jM4cQLA=;
- b=uycVGcIdeY72UpwWeeAJQyCH4//KET0hU5TISxlCfETrra5Oz4VhADIzCBoh14Jph8
- L73RbgRYHbRLiaIgNErjGWR1Gl5IHRvP8IzZ7QMtD58KmGLIZ2Op25cSKZ2TqYBEcNTL
- IxxB23KJenH3U9i4h5OKX2TyQ7qElDHkalPpsFYjhmtRRKomfDtW1wo/JNE0MJiAbGeY
- M17kxW/AjtjwdQNCljVMEKj6AWyGdx6kuxLDnFCJyI/Z9gAwH3Xz9Hst9IS2swrexDAE
- iiKuPToTOvSpWYzEVrAhz+IFIrDHRngViLKuIPWGF7RI+o6lwepvYfCFuxYJ7pYVgFZE
- Ns/g==
-X-Gm-Message-State: AOJu0YyEsdupnYM2T53Tt7EXUT9YcWBZvRCCMjgpGJkG7KnsMM1jmYaq
- CXAg58fI3YJkjlwpVtAETbo+auGRSqT8RvSLo1beyfQ++vHXmfgofI0wesl+mLMy3WzDhDrDZ4h
- m3POU
-X-Gm-Gg: ASbGncuhlIKIqSGFCjuCren30TcEsA8LjTXkJ0iplgFENQI8xmzrzMDjZ7f5gjy4eDu
- zlgM0489WSqIK9FfWev1veyzSSm8YDBnLC6cJmq6gik+i/m60CswkEvXDLgeRVESbEWGv0n9o4V
- behSRkmAjD8czxpyTWN5EKm5fjxd49dGBWBt9VXFKPHo0YidBB1R1ufbmNp/3ZrijKr++mCHryN
- rHC5gg9t2KSw4RILxXcAm9U9ziDjDkcuWV5H8/HbUldUVsODJjfDD1aMIh0HoIalgBfugGM8ah6
- /DPdrEkFlO8F9/+YwGZVoSRUR95H1l8aRSe6Dr1Mxw==
-X-Google-Smtp-Source: AGHT+IEKAVbvtCHhERGssf9PhklB+C3HTcyDvDDNbAm4/+xQdZbfVe0SKwNF3wzR5WuP/gYfurL/BA==
-X-Received: by 2002:a05:600c:1d2a:b0:43d:1c3:cb2e with SMTP id
- 5b1f17b1804b1-43d3b9a4268mr32463415e9.17.1742311281291; 
- Tue, 18 Mar 2025 08:21:21 -0700 (PDT)
-Received: from chromium.org ([169.155.233.10])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d1fe60d37sm136962225e9.27.2025.03.18.08.21.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Mar 2025 08:21:20 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 7/7] membuf: Minor code-style improvements
-Date: Tue, 18 Mar 2025 16:20:48 +0100
-Message-ID: <20250318152059.1464369-8-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250318152059.1464369-1-sjg@chromium.org>
-References: <20250318152059.1464369-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1742311454; x=1742916254;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9ynchHR1rdhOhNAdlgd6LOVJR3sPIw6GGCPJhAFU4NU=;
+ b=Km5V9h4jdm4+WASk/QnyF5YCPGiz9W4OMtPI2p++b3RJ7+oKZzcMOPy/9XjsbVe1a8
+ 4qS4U0CiHkyQufPDOvyGlPcGrA0BaqCNyWFhPnvE21ZBdcAjKFigOh6rnhrGrkhOO4BA
+ 0ZCNUKp+XKcR+mAQLb4Uf9FF+UR0JVbMrawSeDJSOqAIRPGStIHrTM0g8aRshSenhMiW
+ 88B4UF9eFREsgx0T81hrQ+G3qc4e4RfF/WVICgUfhtNHC1ViFVEMg6ob0UrqCzMKM7dy
+ LQIQSejr71R8m21GiJwES0/0qupYSq9q8Q/cRfIDPDDEy7oINE0ej228zHPiAaYRU+22
+ U0Zg==
+X-Gm-Message-State: AOJu0YydVKnS5IwrI3789uYi4lVmVeGU4rha1RHiI6WeJm/K4T293OcU
+ 90167H9HCVAIa9sAzr+MaWhIB+UcMRfunPyuj4bOUBhgXRpnqWnPc1JwfkX71KPzcBwmX72TCD7
+ 4PBUU+wJ6RPmlAe5VrxMG2pJEo9E4XOcQ4MAf
+X-Gm-Gg: ASbGnctYQwLmE3GuC7eGYtJb8p0QSa9+Ceu5og6Sl2jxD56cNWpJkBM3vzS9cyfuByv
+ 92ciHVhqh1ffyTjKGbZaN/WTy35Njw2jZIT9jUU4VI5h2sYtRc/QDC8r2D4Jhsqu5AKvpwPkH9i
+ Vvr0RVNQDpDAMxJQBWRhHrf1p11bY=
+X-Google-Smtp-Source: AGHT+IFBlyxgDn1o/Xv9GTLn3xecZZYepNxOrTxY/MpXeXnd3zmL3lo12paeUiIHbctgCJFJ+mJ4TDCWvtW3tAtjgy0=
+X-Received: by 2002:a17:906:f597:b0:ac2:a4ec:46c2 with SMTP id
+ a640c23a62f3a-ac33041c003mr1619902066b.49.1742311454374; Tue, 18 Mar 2025
+ 08:24:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-39-sjg@chromium.org>
+ <20250318140400.GX2640854@bill-the-cat>
+In-Reply-To: <20250318140400.GX2640854@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 18 Mar 2025 15:24:02 +0000
+X-Gm-Features: AQ5f1JoFUNupUV28Ac13N_MNKSvoj1ez2T86bR8fLTszGHdOu9kewiVZmzilqqQ
+Message-ID: <CAFLszTgCZSydxeNoeVGrR9SF7-_9pZjU+NBGXVDgXG6WzYyCYA@mail.gmail.com>
+Subject: Re: [PATCH v5 38/46] boot: Consider non-bootable partitions
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,60 +97,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the start in end in the comment. Comment a missing variable in
-membuf_readline() and fix its line length.
+Hi Tom,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Tue, 18 Mar 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, Mar 15, 2025 at 02:25:58PM +0000, Simon Glass wrote:
+>
+> > Any 'bootable' flag in a DOS partition causes boostd to only scan
+> > bootable partitions for that media. This can mean that extlinux.conf
+> > files on the root disk are missed.
+> >
+> > Put this logic behind a flag and update the documentation.
+> >
+> > For now, the flag is enabled, to preserve existing behaviour. Future
+> > work may provide a command (or some other mechanism) to control this.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+>
+> Isn't this backwards as the existing behavior (prior to bootstd) was to
+> scan and use these files, and so that's the behavior we need to preserve
+> by default.
 
-(no changes since v1)
+Not so far as I know, but I've already spent too much time trying to
+decode those scripts.
 
- include/membuf.h | 6 ++++--
- lib/membuf.c     | 3 ++-
- 2 files changed, 6 insertions(+), 3 deletions(-)
+If you look at scan_dev_for_boot_part, that is what I was trying to
+replicate with bootstd.
 
-diff --git a/include/membuf.h b/include/membuf.h
-index 636ed703ee7..46764690f53 100644
---- a/include/membuf.h
-+++ b/include/membuf.h
-@@ -25,7 +25,7 @@
-  *
-  * .............xxxxxxxxxxxxxxxx.........................
-  *		^		^
-- *		tail		head
-+ * ^start	tail		head                     ^end
-  *
-  * xxxxxxxxxxxxx................xxxxxxxxxxxxxxxxxxxxxxxxx
-  *		^		^
-@@ -194,11 +194,13 @@ int membuf_free(struct membuf *mb);
-  * @mb: membuff to adjust
-  * @str: Place to put the line
-  * @maxlen: Maximum line length (excluding terminator)
-+ * @minch: Minimum ASCII character to permit as part of the line (e.g. ' ')
-  * @must_fit: If true then str is empty if line doesn't fit
-  * Return: number of bytes read (including terminator) if a line has been
-  *	   read, 0 if nothing was there or line didn't fit when must_fit is set
-  */
--int membuf_readline(struct membuf *mb, char *str, int maxlen, int minch, bool must_fit);
-+int membuf_readline(struct membuf *mb, char *str, int maxlen, int minch,
-+		    bool must_fit);
- 
- /**
-  * membuf_extend_by() - expand a membuff
-diff --git a/lib/membuf.c b/lib/membuf.c
-index 695d16d051e..f38ff36cb0b 100644
---- a/lib/membuf.c
-+++ b/lib/membuf.c
-@@ -287,7 +287,8 @@ int membuf_free(struct membuf *mb)
- 			(mb->end - mb->start) - 1 - membuf_avail(mb);
- }
- 
--int membuf_readline(struct membuf *mb, char *str, int maxlen, int minch, bool must_fit)
-+int membuf_readline(struct membuf *mb, char *str, int maxlen, int minch,
-+		    bool must_fit)
- {
- 	int len;  /* number of bytes read (!= string length) */
- 	char *s, *end;
--- 
-2.43.0
-
+Regards,
+SImon
