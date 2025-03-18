@@ -4,83 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ED60C28B28
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 08:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA89C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 09:03:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82F57805D7;
-	Tue, 18 Mar 2025 09:55:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 03606805D7;
+	Tue, 18 Mar 2025 10:03:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DKGlh00y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="heDHP5uK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5680810E8; Tue, 18 Mar 2025 09:55:11 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id C6D01810E8; Tue, 18 Mar 2025 10:03:03 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82F5080548
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 09:55:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0C0080548
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 10:03:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-39104c1cbbdso3023439f8f.3
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 01:55:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43cfebc343dso21752385e9.2
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 02:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742288109; x=1742892909; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=z9iO2fz1HuYituLH8OCg8gDqs0RXCKUdyIz7j9c2tW0=;
- b=DKGlh00ywfDd6i1ceASCAv8LkUe2rMlPFOlb4CvmVHkenLoHbuXp+sstsjpBsrzrxS
- TuY/2fnnSNtIdIhgx6C7CLIXKXepXey8kgL1T3g/KWN/12SNfFm35GxRQ/nxOvQlfmes
- UFR3oSGKxjfCcI8v7UldzMOUhOgNBWpJONfPyLIenufFQp0/8FVvD2wXie3ifm3VL3Vf
- 0fVWZeXqmUEdB26ZwCa5weUgLHy9tXrnfDxB93QuqTNl+zj5jEjksJAa6Tmey1Lc67L5
- jqZFCkBAFKxi4lnqhrL/qOGFtVgZt7zMjMef6fIDyIiN916x6k/A2xSEzCMMJWE8tghv
- nCJw==
+ d=linaro.org; s=google; t=1742288580; x=1742893380; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=huGTHUNGHH/NCbgNfnMihr8DwsrJSf/rdo1YQAui5lU=;
+ b=heDHP5uK7Q7yxMlUUV3kqVJD+Ksc7JRhF24D4S2kRhkSRtofx1kShsRTnX0VCC0eEN
+ IkV/UUUX8Sgj4WO9mFYMSkUep18Zi/NfNH1daE5YCdgz+LRJ61X24BG6q46M2rjb9ws3
+ 1WexGMpSP10ClybOLzu4202UOCzELRkgn3d9Nas8zRf6b077V/kAQgDiAArb37mt6Vns
+ 2yzfvyCaAnpDQDHvODMOzGhMlnIEXAb52/YEgt+iZsH5/4OkbpEBV7YGE1/AKYTdd3Jb
+ lvsolljmEckH3HNQnGa3rc/z+JNQ+2kgIis4SMGXnUWUjr8hofKfFxHhgm68sowlRit3
+ 0yNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742288109; x=1742892909;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z9iO2fz1HuYituLH8OCg8gDqs0RXCKUdyIz7j9c2tW0=;
- b=Il1H4VYw17T0PbotWLodEhVjtPQkJH+A9+MoAMRV/6kufYTaIZfGOFHmulSeXJPWgk
- 6cj3PNb+L4uk4m5AMOfVLhexFUxcjO3bSX7diEVDu2I0+GxPJaP14joPkLiIG0UZBTnJ
- M3/+5ABD8kMGfv56YC5ohvHLkuhlJRLkbUDXY/AwUS4nuppKNyhhSxzjGdeSJkdEUgV4
- KZG8jQZR2qFtcTDD3gyD18XdZ7IeQ4ye2bP7p3v8/Lk8sbzApKGFaqXgmJSf3yv7p7Sz
- CSb07YRFikaKhdCXvz9/Q7NtWEyq+aGvPCwHCDJ1JUWP1Trm5ai8bCF6RDnwFFZ5d88c
- CkfQ==
-X-Gm-Message-State: AOJu0YzH8hx/2lip9uhhkYVBwHrRBUbogPnZAqnZz+p2bJYEoAPQAbkL
- EmyrHgGSeBx1rVVpDEjSMXTJXsablS/X/eybMjBISy1SyCFKiZ5s+FVGdYiyIoGMelkBDrtvT+R
- VB0NOL8nmMJV8TXFl4K7fBTyufFE=
-X-Gm-Gg: ASbGncstTgjpLhZ7Tv3X9acIbVZzFE57dBEgY6y89aghsgSWVadsTkkVNsP8JZkt0/H
- u8VlZE/Hyv+/ZaJelAtvFJDCEhqmwPXBV+xmpByJ/LVcMaIDYNFwA+E82XmrMkevf2cAWDojw65
- Z7v87Wn57jmCXNGOvjhxfWEO0D5fA=
-X-Google-Smtp-Source: AGHT+IFAtZNFL7awVAQXLVvm6NE34GBZ1huVkiFMIQHWV2FnFKAoLwpHqX9i9lUE7KGUV/bzDjGmI2Tu0miJlNiOrX0=
-X-Received: by 2002:a5d:584d:0:b0:391:6fd:bb65 with SMTP id
- ffacd0b85a97d-3971d2344a5mr12287045f8f.9.1742288108720; Tue, 18 Mar 2025
- 01:55:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742288580; x=1742893380;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=huGTHUNGHH/NCbgNfnMihr8DwsrJSf/rdo1YQAui5lU=;
+ b=KRThRbM49k4tJH70btTf8Ok6OxXPqeTa+5K48rfGmI+NKW46gyClASnMhxDyLW3CJ/
+ JpHJ7Mge/d93sKWm9S7z15ySsYdlclVbwqxSx+B0auaiqujnZSFYGV6KcV777sIMsMeL
+ tv6BPM7GjxtINUm8ZzN4YR4oQdpTYgpDC8Pbo2tekbpVKpsqhqBLbjiFus/uXcD1s5QZ
+ luqF9HfXW++ItXFnr/1+6z5voopW2qb3ld8e5Ikr7ZuF0yBwQlCrZ+NsfP5497uKfvdg
+ MwmxPTF89D4MdBDy+7pSvfEPfGTinig/LGh/3NGdcUOIsq2Bhwu220rcKvKEPKNSheOt
+ tv5w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUp2ru6eBafd1Rma356w8z3LPekeO9mUQwmx5Uvxbc49UbPWkkXoew0lBg8UtvOKQ9csWmBXyA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyFRssln0yxld4/n8zDrTvg4GJJAo9FtIafPH57pXbAxy3eE9jo
+ T2AXzOCgpy5yt//7r2hmyZtKtF/CeSB2hevmXdwoAehtnmmW2usKqWIfHyhJ47U=
+X-Gm-Gg: ASbGnctuGAIbmIdvCNF8AaOZf1hdOYcS1uN4CVUnE2CqlcdocVU7r0CtPHAb8Uhxg59
+ usL3FlU/Yo9bnhTn7yz8TwBNwpWDzvRovzM0w4sZGnVdIAZPuFs/sPqY9ztlOA+R42lMGO25G7n
+ p+HOqwJDb/htM8E6GZvtLoGlvpq87QhiaKeeGrABOCwHGi3pVZ66JlphYoaLD+wZXBz2U1EqVWt
+ +weLHXuoCRjVMeCQSvBufS2adLE+owv0b3NtQ8SUcjOkbE8oMYXXWYA753dQLeuC2a5PWgrIjMx
+ 9nRdmkn6eIhT8pgtjQnzPzZbFjNEq9C9w70yGfxDEz9+zjCcJrir
+X-Google-Smtp-Source: AGHT+IGN3ZhRPh1ycqx6dBpJXX2LZgjHmOf670V5LpZqPNSuCk60lgA9cUvVVTZHtUh4nHWkrfhUMg==
+X-Received: by 2002:a05:6000:18a8:b0:391:2d8f:dd56 with SMTP id
+ ffacd0b85a97d-3971ded3840mr15670536f8f.29.1742288580056; 
+ Tue, 18 Mar 2025 02:03:00 -0700 (PDT)
+Received: from [192.168.0.24] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-395c7df320csm17330225f8f.7.2025.03.18.02.02.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Mar 2025 02:02:59 -0700 (PDT)
+Message-ID: <b34d536c-0d1d-46f4-86a8-9d54716d2878@linaro.org>
+Date: Tue, 18 Mar 2025 11:02:55 +0200
 MIME-Version: 1.0
-References: <20250318083103.63250-1-arturkow2000@gmail.com>
-In-Reply-To: <20250318083103.63250-1-arturkow2000@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 18 Mar 2025 10:54:56 +0200
-X-Gm-Features: AQ5f1JriTQghlXtfvG0qQnKrLBF4RHZfrf87yWzHUZGs1xcebMMd8m-_uCnIrKY
-Message-ID: <CAPVz0n3JF78RQYbckMcwN6JZC+adUG+oHNzof7Wkxd+EqeBkJA@mail.gmail.com>
-Subject: Re: [PATCH 0/4] Support UART over MicroSD slot on Transformer T20
-To: Artur Kowalski <arturkow2000@gmail.com>
-Cc: u-boot@lists.denx.de, Francesco Dolcini <francesco.dolcini@toradex.com>, 
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Stephen Warren <swarren@nvidia.com>, 
- Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
- Tom Warren <twarren@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/8] clk: at91: sam9x7: add pmc driver for sam9x7 SoC
+ family
+To: Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com, sjg@chromium.org,
+ mkorpershoek@baylibre.com, nathan.morrison@timesys.com,
+ ilias.apalodimas@linaro.org, greg.malysa@timesys.com,
+ caleb.connolly@linaro.org, Oliver.Gaskell@analog.com,
+ robert.marko@sartura.hr, jerome.forissier@linaro.org,
+ semen.protsenko@linaro.org, william.zhang@broadcom.com,
+ nicolas.ferre@microchip.com, u-boot@lists.denx.de
+Cc: Varshini Rajendran <varshini.rajendran@microchip.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+References: <20250317065609.55071-1-manikandan.m@microchip.com>
+ <20250317065609.55071-5-manikandan.m@microchip.com>
+From: Eugen Hristev <eugen.hristev@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20250317065609.55071-5-manikandan.m@microchip.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,53 +110,1142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 18 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 10:31 Artu=
-r Kowalski <arturkow2000@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
->
-> The first patch in the series brings general pinmux support for exposing
-> UART over SDB/SDD pins on T20. The following patches bring support
-> Transformer T20 allowing to enable UART over uSD by setting
->
-> CONFIG_TEGRA_ENABLE_UARTA=3Dy
-> CONFIG_DEVICE_TREE_INCLUDES=3D"tegra20-asus-transformer-uart-usd.dtsi"
->
-> Similarily, support for UART over uSD could be brought to Ventana which
-> has uSD on the same pins as TF101, and other Ventana-based boards.
->
 
-Hey there, thank you for looking into U-Boot for Tegra. If something I
-will say hurts or offends you, I am sorry it was not intentional.
 
-Anyway, apart funcmux changes, all other changes you propose are
-redundant. Asus dedicated uart for logging and console is UARTD any
-other uart configuration must not be added since it will disrupt
-existing configuration. If you need uart and cannot resolve an issue
-without it you can always solder to uart-d or locally mux sd to uart
-console fix your issue and remove it. Uart is not intended way to
-interact with Asus TF101 and doesn't need to be exposed, panel and
-fastboot console are and can be used to resolve most of issues.
+On 3/17/25 08:56, Manikandan Muralidharan wrote:
+> From: Varshini Rajendran <varshini.rajendran@microchip.com>
+> 
+> Add PMC driver support for sam9x7 SoC family
+> 
+> Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
+> [balamanikandan.gunasundar@microchip.com: Add peripheral clock id for pmecc]
+> Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+> ---
+>  drivers/clk/at91/Makefile |    1 +
+>  drivers/clk/at91/sam9x7.c | 1094 +++++++++++++++++++++++++++++++++++++
+>  2 files changed, 1095 insertions(+)
+>  create mode 100644 drivers/clk/at91/sam9x7.c
+> 
+> diff --git a/drivers/clk/at91/Makefile b/drivers/clk/at91/Makefile
+> index e53dcb4ca7a..6cca861f81c 100644
+> --- a/drivers/clk/at91/Makefile
+> +++ b/drivers/clk/at91/Makefile
+> @@ -12,6 +12,7 @@ obj-$(CONFIG_AT91_SAM9X60_PLL)	+= clk-sam9x60-pll.o
+>  obj-$(CONFIG_AT91_SAM9X60_USB)	+= clk-sam9x60-usb.o
+>  obj-$(CONFIG_SAMA7G5)		+= sama7g5.o
+>  obj-$(CONFIG_SAM9X60)		+= sam9x60.o
+> +obj-$(CONFIG_SAM9X7)		+= sam9x7.o
+>  else
+>  obj-y += compat.o
+>  endif
+> diff --git a/drivers/clk/at91/sam9x7.c b/drivers/clk/at91/sam9x7.c
+> new file mode 100644
+> index 00000000000..b362d2f9858
+> --- /dev/null
+> +++ b/drivers/clk/at91/sam9x7.c
+> @@ -0,0 +1,1094 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
+> + *
+> + * Author: Varshini Rajendran <varshini.rajendran@microchip.com>
+> + *
+> + */
+> +
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <dt-bindings/clock/at91.h>
+> +#include <linux/clk-provider.h>
+> +
+> +#include "pmc.h"
+> +
+> +/**
+> + * Clock identifiers to be used in conjunction with macros like
+> + * AT91_TO_CLK_ID()
+> + *
+> + * @ID_MD_SLCK:			TD slow clock identifier
+> + * @ID_TD_SLCK:			MD slow clock identifier
+> + * @ID_MAIN_XTAL:		Main Xtal clock identifier
+> + * @ID_MAIN_RC:			Main RC clock identifier
+> + * @ID_MAIN_RC_OSC:		Main RC Oscillator clock identifier
+> + * @ID_MAIN_OSC:		Main Oscillator clock identifier
+> + * @ID_MAINCK:			MAINCK clock identifier
+> + * @ID_PLL_U_FRAC:		UPLL fractional clock identifier
+> + * @ID_PLL_U_DIV:		UPLL divider clock identifier
+> + * @ID_PLL_A_FRAC:		APLL fractional clock identifier
+> + * @ID_PLL_A_DIV:		APLL divider clock identifier
+> + * @ID_PLL_A_2_DIV:		PLLA DIV2 divider clock identifier
+> + * @ID_PLL_AUDIO_FRAC:		Audio PLL fractional clock identifier
+> + * @ID_PLL_AUDIO_DIVPMC:	Audio PLL divider clock identifier
+> + * @ID_PLL_AUDIO_DIVIO:		Audio PLL IO divider clock identifier
+> + * @ID_PLL_LVDS_FRAC:		LVDS PLL fractional clock identifier
+> + * @ID_PLL_LVDS_DIV:		LVDS PLL divider clock identifier
+> +
+> + * @ID_MCK_DIV:			MCK DIV clock identifier
+> +
+> + * @ID_UTMI:			UTMI clock identifier
+> +
+> + * @ID_PROG0:			Programmable 0 clock identifier
+> + * @ID_PROG1:			Programmable 1 clock identifier
+> +
+> + * @ID_PCK0:			PCK0 system clock identifier
+> + * @ID_PCK1:			PCK1 system clock identifier
+> + * @ID_DDR:			DDR system clock identifier
+> + * @ID_QSPI:			QSPI system clock identifier
+> + *
+> + * @ID_MCK_PRES:		MCK PRES clock identifier
+> + *
+> + * Note: if changing the values of this enums please sync them with
+> + *	 device tree
+> + */
+> +enum pmc_clk_ids {
+> +	ID_MD_SLCK		= 0,
+> +	ID_TD_SLCK		= 1,
+> +	ID_MAIN_XTAL		= 2,
+> +	ID_MAIN_RC		= 3,
+> +	ID_MAIN_RC_OSC		= 4,
+> +	ID_MAIN_OSC		= 5,
+> +	ID_MAINCK		= 6,
+> +
+> +	ID_PLL_U_FRAC		= 7,
+> +	ID_PLL_U_DIV		= 8,
+> +	ID_PLL_A_FRAC		= 9,
+> +	ID_PLL_A_DIV		= 10,
+> +	ID_PLL_A_2_DIV		= 11,
+> +	ID_PLL_AUDIO_FRAC	= 12,
+> +	ID_PLL_AUDIO_DIVPMC	= 13,
+> +	ID_PLL_AUDIO_DIVIO	= 14,
+> +	ID_PLL_LVDS_FRAC	= 15,
+> +	ID_PLL_LVDS_DIV		= 16,
+> +
+> +	ID_MCK_DIV		= 17,
+> +
+> +	ID_UTMI			= 18,
+> +
+> +	ID_PROG0		= 19,
+> +	ID_PROG1		= 20,
+> +
+> +	ID_PCK0			= 21,
+> +	ID_PCK1			= 22,
+> +
+> +	ID_DDR			= 23,
+> +	ID_QSPI			= 24,
+> +
+> +	ID_MCK_PRES		= 25,
+> +
+> +	ID_MAX,
+> +};
+> +
+> +/**
+> + * PLL type identifiers
+> + * @PLL_TYPE_FRAC:	fractional PLL identifier
+> + * @PLL_TYPE_DIV:	divider PLL identifier
+> + */
+> +enum pll_type {
+> +	PLL_TYPE_FRAC,
+> +	PLL_TYPE_DIV,
+> +};
+> +
+> +/* Clock names used as parents for multiple clocks. */
+> +static const char *clk_names[] = {
+> +	[ID_MAIN_RC_OSC]	= "main_rc_osc",
+> +	[ID_MAIN_OSC]		= "main_osc",
+> +	[ID_MAINCK]		= "mainck",
+> +	[ID_PLL_U_DIV]		= "upll_divpmcck",
+> +	[ID_PLL_A_DIV]		= "plla_divpmcck",
+> +	[ID_PLL_A_2_DIV]	= "plla_div2pmcck",
+> +	[ID_PLL_AUDIO_DIVPMC]	= "pll_audio_divpmcck",
+> +	[ID_PLL_AUDIO_DIVIO]	= "pll_audio_diviock",
+> +	[ID_PLL_LVDS_DIV]	= "pll_lvds_divpmcck",
+> +	[ID_MCK_PRES]		= "mck_pres",
+> +	[ID_MCK_DIV]		= "mck_div",
+> +};
+> +
+> +/* Fractional PLL core output range. */
+> +static const struct clk_range plla_core_outputs[] = {
+> +	{ .min = 800000000, .max = 1600000000 },
+> +};
+> +
+> +static const struct clk_range upll_core_outputs[] = {
+> +	{ .min = 600000000, .max = 960000000 },
+> +};
+> +
+> +static const struct clk_range lvdspll_core_outputs[] = {
+> +	{ .min = 600000000, .max = 1200000000 },
+> +};
+> +
+> +static const struct clk_range audiopll_core_outputs[] = {
+> +	{ .min = 600000000, .max = 1200000000 },
+> +};
+> +
+> +static const struct clk_range plladiv2_core_outputs[] = {
+> +	{ .min = 800000000, .max = 1600000000 },
+> +};
+> +
+> +/* Fractional PLL output range. */
+> +static const struct clk_range plla_outputs[] = {
+> +	{ .min = 400000000, .max = 800000000 },
+> +};
+> +
+> +static const struct clk_range upll_outputs[] = {
+> +	{ .min = 300000000, .max = 480000000 },
+> +};
+> +
+> +static const struct clk_range lvdspll_outputs[] = {
+> +	{ .min = 175000000, .max = 550000000 },
+> +};
+> +
+> +static const struct clk_range audiopll_outputs[] = {
+> +	{ .min = 0, .max = 300000000 },
+> +};
+> +
+> +static const struct clk_range plladiv2_outputs[] = {
+> +	{ .min = 200000000, .max = 400000000 },
+> +};
+> +
+> +/* PLL characteristics. */
+> +static const struct clk_pll_characteristics plla_characteristics = {
+> +	.input = { .min = 20000000, .max = 50000000 },
+> +	.num_output = ARRAY_SIZE(plla_outputs),
+> +	.output = plla_outputs,
+> +	.core_output = plla_core_outputs,
+> +};
+> +
+> +static const struct clk_pll_characteristics upll_characteristics = {
+> +	.input = { .min = 20000000, .max = 50000000 },
+> +	.num_output = ARRAY_SIZE(upll_outputs),
+> +	.output = upll_outputs,
+> +	.core_output = upll_core_outputs,
+> +	.upll = true,
+> +};
+> +
+> +static const struct clk_pll_characteristics lvdspll_characteristics = {
+> +	.input = { .min = 20000000, .max = 50000000 },
+> +	.num_output = ARRAY_SIZE(lvdspll_outputs),
+> +	.output = lvdspll_outputs,
+> +	.core_output = lvdspll_core_outputs,
+> +};
+> +
+> +static const struct clk_pll_characteristics audiopll_characteristics = {
+> +	.input = { .min = 20000000, .max = 50000000 },
+> +	.num_output = ARRAY_SIZE(audiopll_outputs),
+> +	.output = audiopll_outputs,
+> +	.core_output = audiopll_core_outputs,
+> +};
+> +
+> +static const struct clk_pll_characteristics plladiv2_characteristics = {
+> +	.input = { .min = 20000000, .max = 50000000 },
+> +	.num_output = ARRAY_SIZE(plladiv2_outputs),
+> +	.output = plladiv2_outputs,
+> +	.core_output = plladiv2_core_outputs,
+> +};
+> +
+> +/* Layout for fractional PLLs. */
+> +static const struct clk_pll_layout pll_layout_frac = {
+> +	.mul_mask = GENMASK(31, 24),
+> +	.frac_mask = GENMASK(21, 0),
+> +	.mul_shift = 24,
+> +	.frac_shift = 0,
+> +};
+> +
+> +/* Layout for fractional PLL ID PLLA. */
+> +static const struct clk_pll_layout plla_layout_frac = {
+> +	.mul_mask = GENMASK(31, 24),
+> +	.frac_mask = GENMASK(21, 0),
+> +	.mul_shift = 24,
+> +	.frac_shift = 0,
+> +	.div2 = 1,
+> +};
+> +
+> +/* Layout for DIV PLLs. */
+> +static const struct clk_pll_layout pll_layout_divpmc = {
+> +	.div_mask = GENMASK(7, 0),
+> +	.endiv_mask = BIT(29),
+> +	.div_shift = 0,
+> +	.endiv_shift = 29,
+> +};
+> +
+> +/* Layout for DIV PLLs. */
+> +static const struct clk_pll_layout plladiv2_layout_divpmc = {
+> +	.div_mask = GENMASK(7, 0),
+> +	.endiv_mask = BIT(29),
+> +	.div_shift = 0,
+> +	.endiv_shift = 29,
+> +	.div2 = 1,
+> +};
+> +
+> +/* Layout for DIVIO dividers. */
+> +static const struct clk_pll_layout pll_layout_divio = {
+> +	.div_mask	= GENMASK(19, 12),
+> +	.endiv_mask	= BIT(30),
+> +	.div_shift	= 12,
+> +	.endiv_shift	= 30,
+> +};
+> +
+> +/* MCK characteristics. */
+> +static const struct clk_master_characteristics mck_characteristics = {
+> +	.output = { .min = 32000000, .max = 266666666 },
+> +	.divisors = { 1, 2, 4, 3, 5},
+> +	.have_div3_pres = 1,
+> +};
+> +
+> +/* MCK layout. */
+> +static const struct clk_master_layout mck_layout = {
+> +	.mask = 0x373,
+> +	.pres_shift = 4,
+> +	.offset = 0x28,
+> +};
+> +
+> +/* Programmable clock layout. */
+> +static const struct clk_programmable_layout programmable_layout = {
+> +	.pres_mask = 0xff,
+> +	.pres_shift = 8,
+> +	.css_mask = 0x1f,
+> +	.have_slck_mck = 0,
+> +	.is_pres_direct = 1,
+> +};
+> +
+> +/* Peripheral clock layout. */
+> +static const struct clk_pcr_layout sam9x7_pcr_layout = {
+> +	.offset = 0x88,
+> +	.cmd = BIT(31),
+> +	.gckcss_mask = GENMASK(12, 8),
+> +	.pid_mask = GENMASK(6, 0),
+> +};
+> +
+> +/**
+> + * PLL clocks description
+> + * @n:		clock name
+> + * @p:		clock parent
+> + * @l:		clock layout
+> + * @t:		clock type
+> + * @c:		pll characteristics
+> + * @f:		true if clock is fixed and not changeable by driver
+> + * @id:		clock id corresponding to PLL driver
+> + * @cid:	clock id corresponding to clock subsystem
+> + */
+> +static const struct {
+> +	const char *n;
+> +	const char *p;
+> +	const struct clk_pll_layout *l;
+> +	const struct clk_pll_characteristics *c;
+> +	u8 t;
+> +	u8 f;
+> +	u8 id;
+> +	u8 cid;
+> +} sam9x7_plls[] = {
+> +	{
+> +		.n = "plla_fracck",
+> +		.p = "mainck",
+> +		.l = &plla_layout_frac,
+> +		.c = &plla_characteristics,
+> +		.t = PLL_TYPE_FRAC,
+> +		.f = 1,
+> +		.id = 0,
+> +		.cid = ID_PLL_A_FRAC,
+> +	},
+> +
+> +	{
+> +		.n = "plla_divpmcck",
+> +		.p = "plla_fracck",
+> +		.l = &pll_layout_divpmc,
+> +		.c = &plla_characteristics,
+> +		.t = PLL_TYPE_DIV,
+> +		.f = 1,
+> +		.id = 0,
+> +		.cid = ID_PLL_A_DIV,
+> +	},
+> +
+> +	{
+> +		.n = "upll_fracck",
+> +		.p = "main_osc",
+> +		.l = &pll_layout_frac,
+> +		.c = &upll_characteristics,
+> +		.t = PLL_TYPE_FRAC,
+> +		.f = 1,
+> +		.id = 1,
+> +		.cid = ID_PLL_U_FRAC,
+> +	},
+> +
+> +	{
+> +		.n = "upll_divpmcck",
+> +		.p = "upll_fracck",
+> +		.l = &pll_layout_divpmc,
+> +		.c = &upll_characteristics,
+> +		.t = PLL_TYPE_DIV,
+> +		.f = 1,
+> +		.id = 1,
+> +		.cid = ID_PLL_U_DIV,
+> +	},
+> +
+> +	{
+> +		.n = "audiopll_fracck",
+> +		.p = "main_osc",
+> +		.l = &pll_layout_frac,
+> +		.c = &audiopll_characteristics,
+> +		.t = PLL_TYPE_FRAC,
+> +		.f = 1,
+> +		.id = 2,
+> +		.cid = ID_PLL_AUDIO_FRAC,
+> +	},
+> +
+> +	{
+> +		.n = "audiopll_divpmcck",
+> +		.p = "audiopll_fracck",
+> +		.l = &pll_layout_divpmc,
+> +		.c = &audiopll_characteristics,
+> +		.t = PLL_TYPE_DIV,
+> +		.f = 1,
+> +		.id = 2,
+> +		.cid = ID_PLL_AUDIO_DIVPMC,
+> +	},
+> +
+> +	{
+> +		.n = "audiopll_diviock",
+> +		.p = "audiopll_fracck",
+> +		.l = &pll_layout_divio,
+> +		.c = &audiopll_characteristics,
+> +		.t = PLL_TYPE_DIV,
+> +		.f = 1,
+> +		.id = 2,
+> +		.cid = ID_PLL_AUDIO_DIVIO,
+> +	},
+> +
+> +	{
+> +		.n = "lvdspll_fracck",
+> +		.p = "main_osc",
+> +		.l = &pll_layout_frac,
+> +		.c = &lvdspll_characteristics,
+> +		.t = PLL_TYPE_FRAC,
+> +		.f = 1,
+> +		.id = 3,
+> +		.cid = ID_PLL_LVDS_FRAC,
+> +	},
+> +
+> +	{
+> +		.n = "lvdspll_divpmcck",
+> +		.p = "lvdspll_fracck",
+> +		.l = &pll_layout_divpmc,
+> +		.c = &lvdspll_characteristics,
+> +		.t = PLL_TYPE_DIV,
+> +		.f = 1,
+> +		.id = 3,
+> +		.cid = ID_PLL_LVDS_DIV,
+> +	},
+> +
+> +	{
+> +		.n = "plla_div2pmcck",
+> +		.p = "plla_fracck",
+> +		.l = &plladiv2_layout_divpmc,
+> +		.c = &plladiv2_characteristics,
+> +		.t = PLL_TYPE_DIV,
+> +		.f = 1,
+> +		.id = 4,
+> +		.cid = ID_PLL_A_2_DIV,
+> +	},
+> +
+> +};
+> +
+> +/**
+> + * Programmable clock description
+> + * @n:			clock name
+> + * @cid:		clock id corresponding to clock subsystem
+> + */
+> +static const struct {
+> +	const char *n;
+> +	u8 cid;
+> +} sam9x7_prog[] = {
+> +	{ .n = "prog0", .cid = ID_PROG0, },
+> +	{ .n = "prog1", .cid = ID_PROG1, },
+> +};
+> +
+> +/* Mux table for programmable clocks. */
+> +static u32 sam9x7_prog_mux_table[] = { 0, 1, 2, 3, 4, 5, 6, };
+> +
+> +/**
+> + * System clock description
+> + * @n:			clock name
+> + * @p:			parent clock name
+> + * @id:			clock id corresponding to system clock driver
+> + * @cid:		clock id corresponding to clock subsystem
+> + */
+> +static const struct {
+> +	const char *n;
+> +	const char *p;
+> +	u8 id;
+> +	u8 cid;
+> +} sam9x7_systemck[] = {
+> +	{ .n = "ddrck", .p = "mck_pres", .id = 2, .cid = ID_DDR, },
+> +	{ .n = "pck0",	.p = "prog0",	 .id = 8, .cid = ID_PCK0, },
+> +	{ .n = "pck1",	.p = "prog1",	 .id = 9, .cid = ID_PCK1, },
+> +};
+> +
+> +/**
+> + * Peripheral clock description
+> + * @n:		clock name
+> + * @id:		clock id
+> + */
+> +static const struct {
+> +	const char *n;
+> +	u8 id;
+> +} sam9x7_periphck[] = {
+> +	{ .n = "pioA_clk",	.id = 2, },
+> +	{ .n = "pioB_clk",	.id = 3, },
+> +	{ .n = "pioC_clk",	.id = 4, },
+> +	{ .n = "flex0_clk",	.id = 5, },
+> +	{ .n = "flex1_clk",	.id = 6, },
+> +	{ .n = "flex2_clk",	.id = 7, },
+> +	{ .n = "flex3_clk",	.id = 8, },
+> +	{ .n = "flex6_clk",	.id = 9, },
+> +	{ .n = "flex7_clk",	.id = 10, },
+> +	{ .n = "flex8_clk",	.id = 11, },
+> +	{ .n = "sdmmc0_clk",	.id = 12, },
+> +	{ .n = "flex4_clk",	.id = 13, },
+> +	{ .n = "flex5_clk",	.id = 14, },
+> +	{ .n = "flex9_clk",	.id = 15, },
+> +	{ .n = "flex10_clk",	.id = 16, },
+> +	{ .n = "tcb0_clk",	.id = 17, },
+> +	{ .n = "pwm_clk",	.id = 18, },
+> +	{ .n = "adc_clk",	.id = 19, },
+> +	{ .n = "dma0_clk",	.id = 20, },
+> +	{ .n = "uhphs_clk",	.id = 22, },
+> +	{ .n = "udphs_clk",	.id = 23, },
+> +	{ .n = "gmac_clk",	.id = 24, },
+> +	{ .n = "lcd_clk",	.id = 25, },
+> +	{ .n = "sdmmc1_clk",	.id = 26, },
+> +	{ .n = "ssc_clk",	.id = 28, },
+> +	{ .n = "mcan0_clk",	.id = 29, },
+> +	{ .n = "mcan1_clk",	.id = 30, },
+> +	{ .n = "flex11_clk",	.id = 32, },
+> +	{ .n = "flex12_clk",	.id = 33, },
+> +	{ .n = "i2s_clk",	.id = 34, },
+> +	{ .n = "qspi_clk",	.id = 35, },
+> +	{ .n = "gfx2d_clk",	.id = 36, },
+> +	{ .n = "pit64b0_clk",	.id = 37, },
+> +	{ .n = "trng_clk",	.id = 38, },
+> +	{ .n = "aes_clk",	.id = 39, },
+> +	{ .n = "tdes_clk",	.id = 40, },
+> +	{ .n = "sha_clk",	.id = 41, },
+> +	{ .n = "classd_clk",	.id = 42, },
+> +	{ .n = "isi_clk",	.id = 43, },
+> +	{ .n = "pioD_clk",	.id = 44, },
+> +	{ .n = "tcb1_clk",	.id = 45, },
+> +	{ .n = "dbgu_clk",	.id = 47, },
+> +	{ .n = "pmecc_clk",	.id = 48, },
+> +	{ .n = "mpddr_clk",	.id = 49, },
+> +	{ .n = "csi2dc_clk",	.id = 52, },
+> +	{ .n = "csi4l_clk",	.id = 53, },
+> +	{ .n = "dsi4l_clk",	.id = 54, },
+> +	{ .n = "lvdsc_clk",	.id = 56, },
+> +	{ .n = "pit64b1_clk",	.id = 58, },
+> +	{ .n = "puf_clk",	.id = 59, },
+> +	{ .n = "gmactsu_clk",	.id = 67, },
+> +};
+> +
+> +/**
+> + * Generic clock description
+> + * @n:			clock name
+> + * @ep:			extra parents names
+> + * @ep_mux_table:	extra parents mux table
+> + * @ep_clk_mux_table:	extra parents clock mux table (for CCF)
+> + * @r:			clock output range
+> + * @ep_count:		extra parents count
+> + * @id:			clock id
+> + */
+> +static const struct {
+> +	const char *n;
+> +	const char *ep[8];
+> +	const char ep_mux_table[8];
+> +	const char ep_clk_mux_table[8];
+> +	struct clk_range r;
+> +	u8 ep_count;
+> +	u8 id;
+> +} sam9x7_gck[] = {
+> +	{
+> +		.n = "flex0_gclk",
+> +		.id = 5,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex1_gclk",
+> +		.id = 6,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex2_gclk",
+> +		.id = 7,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex3_gclk",
+> +		.id = 8,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex6_gclk",
+> +		.id = 9,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex7_gclk",
+> +		.id = 10,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex8_gclk",
+> +		.id = 11,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "sdmmc0_gclk",
+> +		.id = 12,
+> +		.r = { .max = 105000000 },
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "flex4_gclk",
+> +		.id = 13,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex5_gclk",
+> +		.id = 14,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex9_gclk",
+> +		.id = 15,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex10_gclk",
+> +		.id = 16,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "tcb0_gclk",
+> +		.id = 17,
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "adc_gclk",
+> +		.id = 19,
+> +		.ep = { "upll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 5, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "gmac_gclk",
+> +		.id = 24,
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "lcd_gclk",
+> +		.id = 25,
+> +		.r = { .max = 75000000 },
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "sdmmc1_gclk",
+> +		.id = 26,
+> +		.r = { .max = 105000000 },
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "mcan0_gclk",
+> +		.id = 29,
+> +		.r = { .max = 80000000 },
+> +		.ep = { "upll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 5, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "mcan1_gclk",
+> +		.id = 30,
+> +		.r = { .max = 80000000 },
+> +		.ep = { "upll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 5, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_U_DIV, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "flex11_gclk",
+> +		.id = 32,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "flex12_gclk",
+> +		.id = 33,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "i2s_gclk",
+> +		.id = 34,
+> +		.r = { .max = 100000000 },
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "qspi_gclk",
+> +		.id = 35,
+> +		.r = { .max = 200000000 },
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "pit64b0_gclk",
+> +		.id = 37,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "classd_gclk",
+> +		.id = 42,
+> +		.r = { .max = 100000000 },
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "tcb1_gclk",
+> +		.id = 45,
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +	{
+> +		.n = "dbgu_gclk",
+> +		.id = 47,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "mipiphy_gclk",
+> +		.id = 55,
+> +		.r = { .max = 27000000 },
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "pit64b1_gclk",
+> +		.id = 58,
+> +		.ep = { "plla_div2pmcck", },
+> +		.ep_mux_table = { 8, },
+> +		.ep_clk_mux_table = { ID_PLL_A_2_DIV, },
+> +		.ep_count = 1,
+> +	},
+> +
+> +	{
+> +		.n = "gmac_tsu_gclk",
+> +		.id = 67,
+> +		.ep = { "audiopll_divpmcck", "plla_div2pmcck", },
+> +		.ep_mux_table = { 6, 8, },
+> +		.ep_clk_mux_table = { ID_PLL_AUDIO_DIVPMC, ID_PLL_A_2_DIV, },
+> +		.ep_count = 2,
+> +	},
+> +
+> +};
+> +
+> +#define prepare_mux_table(_allocs, _index, _dst, _src, _num, _label)	\
+> +	do {								\
+> +		int _i;							\
+> +		(_dst) = kzalloc(sizeof(*(_dst)) * (_num), GFP_KERNEL);	\
+> +		if (!(_dst)) {						\
+> +			ret = -ENOMEM;					\
+> +			goto _label;					\
+> +		}							\
+> +		(_allocs)[(_index)++] = (_dst);				\
+> +		for (_i = 0; _i < (_num); _i++)				\
+> +			(_dst)[_i] = (_src)[_i];			\
+> +	} while (0)
+> +
+> +static int sam9x7_clk_probe(struct udevice *dev)
+> +{
+> +	void __iomem *base = (void *)devfdt_get_addr_ptr(dev);
+> +	unsigned int *clkmuxallocs[64], *muxallocs[64];
+> +	const char *p[10];
+> +	unsigned int cm[10], m[10], *tmpclkmux, *tmpmux;
+> +	struct clk clk, *c;
+> +	int ret, muxallocindex = 0, clkmuxallocindex = 0, i, j;
+> +	static const struct clk_range r = { 0, 0 };
+> +
+> +	if (!base)
+> +		return -EINVAL;
+> +
+> +	memset(muxallocs, 0, ARRAY_SIZE(muxallocs));
+> +	memset(clkmuxallocs, 0, ARRAY_SIZE(clkmuxallocs));
+> +
+> +	ret = clk_get_by_index(dev, 0, &clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = clk_get_by_id(clk.id, &c);
+> +	if (ret)
+> +		return ret;
+> +
+> +	clk_names[ID_TD_SLCK] = kmemdup(clk_hw_get_name(c),
+> +					strlen(clk_hw_get_name(c)) + 1,
+> +					GFP_KERNEL);
+> +	if (!clk_names[ID_TD_SLCK])
+> +		return -ENOMEM;
+> +
+> +	ret = clk_get_by_index(dev, 1, &clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = clk_get_by_id(clk.id, &c);
+> +	if (ret)
+> +		return ret;
+> +
+> +	clk_names[ID_MD_SLCK] = kmemdup(clk_hw_get_name(c),
+> +					strlen(clk_hw_get_name(c)) + 1,
+> +					GFP_KERNEL);
+> +	if (!clk_names[ID_MD_SLCK])
+> +		return -ENOMEM;
+> +
+> +	ret = clk_get_by_index(dev, 2, &clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	clk_names[ID_MAIN_XTAL] = kmemdup(clk_hw_get_name(&clk),
+> +					  strlen(clk_hw_get_name(&clk)) + 1,
+> +					  GFP_KERNEL);
+> +	if (!clk_names[ID_MAIN_XTAL])
+> +		return -ENOMEM;
+> +
+> +	ret = clk_get_by_index(dev, 3, &clk);
 
-Best regards,
-Svyatoslav R.
+Linux does not have this clock if I am not mistaking.
+This is the "main_rc" , right ?
+Legacy speaking, U-boot has had four clocks on the PMC.
+But now you are writing this new pmc driver for sam9x7.
+Can you remove this clock such that the binding would be aligned to linux ?
+What is this clock required for ?
 
->
-> Artur Kowalski (4):
->   tegra: add funcmux for exposing UART over uSD slot on Tegra 20
->   tegra: respect CONFIG_TEGRA_ENABLE_UART* options on Transformer T20
->   ARM: tegra: expose UART-A over uSD on Transformer T20
->   board: asus: transformer: add DTSI file for enabling UART over uSD
->     slot
->
->  .../tegra20-asus-transformer-uart-usd.dtsi    | 31 +++++++++++++++++++
->  arch/arm/include/asm/arch-tegra20/funcmux.h   |  1 +
->  arch/arm/mach-tegra/board.c                   |  4 ++-
->  arch/arm/mach-tegra/tegra20/Kconfig           |  4 +++
->  drivers/pinctrl/tegra/funcmux-tegra20.c       |  9 +++++-
->  include/configs/transformer-t20.h             | 10 ++++++
->  6 files changed, 57 insertions(+), 2 deletions(-)
->  create mode 100644 arch/arm/dts/tegra20-asus-transformer-uart-usd.dtsi
->
-> --
-> 2.48.1
->
+Eugen
+
+> +	if (ret)
+> +		goto fail;
+> +
+> +	clk_names[ID_MAIN_RC] = kmemdup(clk_hw_get_name(&clk),
+> +					strlen(clk_hw_get_name(&clk)) + 1,
+> +					GFP_KERNEL);
+> +	if (ret)
+> +		goto fail;
+> +
+> +	/* Register main rc oscillator. */
+> +	c = at91_clk_main_rc(base, clk_names[ID_MAIN_RC_OSC],
+> +			     clk_names[ID_MAIN_RC]);
+> +	if (IS_ERR(c)) {
+> +		ret = PTR_ERR(c);
+> +		goto fail;
+> +	}
+> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_RC_OSC), c);
+> +
+> +	/* Register main oscillator. */
+> +	c = at91_clk_main_osc(base, clk_names[ID_MAIN_OSC],
+> +			      clk_names[ID_MAIN_XTAL], false);
+> +	if (IS_ERR(c)) {
+> +		ret = PTR_ERR(c);
+> +		goto fail;
+> +	}
+> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_OSC), c);
+> +
+> +	/* Register mainck. */
+> +	p[0] = clk_names[ID_MAIN_RC_OSC];
+> +	p[1] = clk_names[ID_MAIN_OSC];
+> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_RC_OSC);
+> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAIN_OSC);
+> +	prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm, 2,
+> +			  fail);
+> +	c = at91_clk_sam9x5_main(base, clk_names[ID_MAINCK], p,
+> +				 2, tmpclkmux, PMC_TYPE_CORE);
+> +	if (IS_ERR(c)) {
+> +		ret = PTR_ERR(c);
+> +		goto fail;
+> +	}
+> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK), c);
+> +
+> +	/* Register PLL fracs clocks. */
+> +	for (i = 0; i < ARRAY_SIZE(sam9x7_plls); i++) {
+> +		if (sam9x7_plls[i].t != PLL_TYPE_FRAC)
+> +			continue;
+> +
+> +		c = sam9x60_clk_register_frac_pll(base, sam9x7_plls[i].n,
+> +						  sam9x7_plls[i].p,
+> +						  sam9x7_plls[i].id,
+> +						  sam9x7_plls[i].c,
+> +						  sam9x7_plls[i].l,
+> +						  sam9x7_plls[i].f);
+> +		if (IS_ERR(c)) {
+> +			ret = PTR_ERR(c);
+> +			goto fail;
+> +		}
+> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_plls[i].cid), c);
+> +	}
+> +
+> +	/* Register PLL div clocks. */
+> +	for (i = 0; i < ARRAY_SIZE(sam9x7_plls); i++) {
+> +		if (sam9x7_plls[i].t != PLL_TYPE_DIV)
+> +			continue;
+> +
+> +		c = sam9x60_clk_register_div_pll(base, sam9x7_plls[i].n,
+> +						 sam9x7_plls[i].p,
+> +						 sam9x7_plls[i].id,
+> +						 sam9x7_plls[i].c,
+> +						 sam9x7_plls[i].l,
+> +						 sam9x7_plls[i].f);
+> +		if (IS_ERR(c)) {
+> +			ret = PTR_ERR(c);
+> +			goto fail;
+> +		}
+> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_plls[i].cid), c);
+> +	}
+> +
+> +	/* Register MCK pres clock. */
+> +	p[0] = clk_names[ID_MD_SLCK];
+> +	p[1] = clk_names[ID_MAINCK];
+> +	p[2] = clk_names[ID_PLL_A_DIV];
+> +	p[3] = clk_names[ID_PLL_U_DIV];
+> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
+> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
+> +	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_A_DIV);
+> +	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_U_DIV);
+> +	prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm, 4,
+> +			  fail);
+> +	c = at91_clk_register_master_pres(base, clk_names[ID_MCK_PRES], p, 4,
+> +					  &mck_layout, &mck_characteristics,
+> +					  tmpclkmux);
+> +	if (IS_ERR(c)) {
+> +		ret = PTR_ERR(c);
+> +		goto fail;
+> +	}
+> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_PRES), c);
+> +
+> +	/* Register MCK div clock. */
+> +	c = at91_clk_register_master_div(base, clk_names[ID_MCK_DIV],
+> +					 clk_names[ID_MCK_PRES],
+> +					 &mck_layout, &mck_characteristics);
+> +	if (IS_ERR(c)) {
+> +		ret = PTR_ERR(c);
+> +		goto fail;
+> +	}
+> +	clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV), c);
+> +
+> +	/* Register programmable clocks. */
+> +	p[0] = clk_names[ID_MD_SLCK];
+> +	p[1] = clk_names[ID_TD_SLCK];
+> +	p[2] = clk_names[ID_MAINCK];
+> +	p[3] = clk_names[ID_MCK_DIV];
+> +	p[4] = clk_names[ID_PLL_A_DIV];
+> +	p[5] = clk_names[ID_PLL_U_DIV];
+> +	p[6] = clk_names[ID_PLL_AUDIO_DIVPMC];
+> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
+> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_TD_SLCK);
+> +	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
+> +	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV);
+> +	cm[4] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_A_DIV);
+> +	cm[5] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_U_DIV);
+> +	cm[6] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_PLL_AUDIO_DIVPMC);
+> +	for (i = 0; i < ARRAY_SIZE(sam9x7_prog); i++) {
+> +		prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm,
+> +				  7, fail);
+> +
+> +		c = at91_clk_register_programmable(base, sam9x7_prog[i].n, p,
+> +						   7, i, &programmable_layout,
+> +						   tmpclkmux,
+> +						   sam9x7_prog_mux_table);
+> +		if (IS_ERR(c)) {
+> +			ret = PTR_ERR(c);
+> +			goto fail;
+> +		}
+> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_CORE, sam9x7_prog[i].cid), c);
+> +	}
+> +
+> +	/* System clocks. */
+> +	for (i = 0; i < ARRAY_SIZE(sam9x7_systemck); i++) {
+> +		c = at91_clk_register_system(base, sam9x7_systemck[i].n,
+> +					     sam9x7_systemck[i].p,
+> +					     sam9x7_systemck[i].id);
+> +		if (IS_ERR(c)) {
+> +			ret = PTR_ERR(c);
+> +			goto fail;
+> +		}
+> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_SYSTEM, sam9x7_systemck[i].cid),
+> +		       c);
+> +	}
+> +
+> +	/* Peripheral clocks. */
+> +	for (i = 0; i < ARRAY_SIZE(sam9x7_periphck); i++) {
+> +		c = at91_clk_register_sam9x5_peripheral(base, &sam9x7_pcr_layout,
+> +							sam9x7_periphck[i].n,
+> +							clk_names[ID_MCK_DIV],
+> +							sam9x7_periphck[i].id,
+> +							&r);
+> +		if (IS_ERR(c)) {
+> +			ret = PTR_ERR(c);
+> +			goto fail;
+> +		}
+> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_PERIPHERAL,
+> +				      sam9x7_periphck[i].id), c);
+> +	}
+> +
+> +	/* Generic clocks. */
+> +	p[0] = clk_names[ID_MD_SLCK];
+> +	p[1] = clk_names[ID_TD_SLCK];
+> +	p[2] = clk_names[ID_MAINCK];
+> +	p[3] = clk_names[ID_MCK_DIV];
+> +	m[0] = 0;
+> +	m[1] = 1;
+> +	m[2] = 2;
+> +	m[3] = 3;
+> +	cm[0] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MD_SLCK);
+> +	cm[1] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_TD_SLCK);
+> +	cm[2] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MAINCK);
+> +	cm[3] = AT91_TO_CLK_ID(PMC_TYPE_CORE, ID_MCK_DIV);
+> +	for (i = 0; i < ARRAY_SIZE(sam9x7_gck); i++) {
+> +		for (j = 0; j < sam9x7_gck[i].ep_count; j++) {
+> +			p[4 + j] = sam9x7_gck[i].ep[j];
+> +			m[4 + j] = sam9x7_gck[i].ep_mux_table[j];
+> +			cm[4 + j] = AT91_TO_CLK_ID(PMC_TYPE_CORE,
+> +						   sam9x7_gck[i].ep_clk_mux_table[j]);
+> +		}
+> +		prepare_mux_table(clkmuxallocs, clkmuxallocindex, tmpclkmux, cm,
+> +				  4 + sam9x7_gck[i].ep_count, fail);
+> +		prepare_mux_table(muxallocs, muxallocindex, tmpmux, m,
+> +				  4 + sam9x7_gck[i].ep_count, fail);
+> +
+> +		c = at91_clk_register_generic(base, &sam9x7_pcr_layout,
+> +					      sam9x7_gck[i].n, p, tmpclkmux,
+> +					      tmpmux, 4 + sam9x7_gck[i].ep_count,
+> +					      sam9x7_gck[i].id,
+> +					      &sam9x7_gck[i].r);
+> +		if (IS_ERR(c)) {
+> +			ret = PTR_ERR(c);
+> +			goto fail;
+> +		}
+> +		clk_dm(AT91_TO_CLK_ID(PMC_TYPE_GCK, sam9x7_gck[i].id), c);
+> +	}
+> +
+> +	return 0;
+> +
+> +fail:
+> +	for (i = 0; i < ARRAY_SIZE(muxallocs); i++)
+> +		kfree(muxallocs[i]);
+> +
+> +	for (i = 0; i < ARRAY_SIZE(clkmuxallocs); i++)
+> +		kfree(clkmuxallocs[i]);
+> +
+> +	return ret;
+> +}
+> +
+> +static const struct udevice_id sam9x7_clk_ids[] = {
+> +	{ .compatible = "microchip,sam9x7-pmc" },
+> +	{ /* Sentinel. */ },
+> +};
+> +
+> +U_BOOT_DRIVER(at91_sam9x7_pmc) = {
+> +	.name = "at91-sam9x7-pmc",
+> +	.id = UCLASS_CLK,
+> +	.of_match = sam9x7_clk_ids,
+> +	.ops = &at91_clk_ops,
+> +	.probe = sam9x7_clk_probe,
+> +	.flags = DM_FLAG_PRE_RELOC,
+> +};
+
