@@ -4,66 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A885EC28B2F
-	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 18:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCAD3C282EC
+	for <u-boot@archiver.kernel.org>; Tue, 18 Mar 2025 19:12:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2BCB810F4;
-	Tue, 18 Mar 2025 19:46:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 34A21810F4;
+	Tue, 18 Mar 2025 20:12:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pv94feNk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="REjtJcUY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E18C38129F; Tue, 18 Mar 2025 19:46:42 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2512E81026
- for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 19:46:39 +0100 (CET)
+ id 080CD8193A; Tue, 18 Mar 2025 20:12:01 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B4EFC81026
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 20:11:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52IIkcUc2708087
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 18 Mar 2025 13:46:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742323598;
- bh=61rQFVRlD84LIVJRugGCwjB9MVLINC9g+FjDyDtD8Fw=;
- h=From:To:CC:Subject:Date;
- b=Pv94feNknABD/2vPxFSkaXsSJ03iEqvoZMb5UlBRnzNS7IVUvjHlHecmzdlkN6hgM
- sIKk9+elZtYtl62VH3AIviHrxf4B2nmbLvTUCUb7TTttZUIWe0icSUpnqxXjSrt9U5
- mBbF17FW+SYbjr8FfKzNQd9W6/NPFGtdXUio6E+k=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52IIkcZm025506
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 18 Mar 2025 13:46:38 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
- Mar 2025 13:46:37 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 18 Mar 2025 13:46:37 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52IIkXBU010776;
- Tue, 18 Mar 2025 13:46:34 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <vigneshr@ti.com>
-CC: <n-francis@ti.com>, <u-boot@lists.denx.de>, <nm@ti.com>,
- <m-chawdhry@ti.com>, <j-keerthy@ti.com>, <m-shah@ti.com>,
- <a-limaye@ti.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v2] configs: am68_sk_r5: Enable AVS config
-Date: Wed, 19 Mar 2025 00:16:28 +0530
-Message-ID: <20250318184628.3309548-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-226185948ffso51645355ad.0
+ for <u-boot@lists.denx.de>; Tue, 18 Mar 2025 12:11:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1742325117; x=1742929917; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b9AdQ/iZQiEybKKt2D+WifV6k+bYnDJmJ8WmY5ZlY6k=;
+ b=REjtJcUYHPLiWNZ0AtCKfCdUmlkO7fhssa1VAGO3xiCPeQFbGc0wqhvG3xAkBxR4UM
+ hm+XNoKXyBqAqVbJtg+TeqPWAdMEbfsgJGsoI2HPN2RVex4LbS2VgxGRxaDBQsKL9dE3
+ N0dDK8XpbUNKQfaJRjW6K8bG5DDMMRIdsu5ZU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742325117; x=1742929917;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=b9AdQ/iZQiEybKKt2D+WifV6k+bYnDJmJ8WmY5ZlY6k=;
+ b=NBpd+RRQhSbcr5kYPD9eKo32nh07TRgSiFL1zEZxmH1mUJ1OoCLXEX3Wb4v59wYjuA
+ LfnxmhdooUp1usiXqYhqE8Y1x70N8j2O9Wvmn5B6ohFjPItbaVyNda0aNf3XhEo0c3sH
+ 7YyYT17QcqBZR/4qd3TqSquNLYW2et/P/GKsUKWEBNdJX1hJvgCfTQo0w2lDFLpBFi6T
+ 1Ej7mC8mQhKlpKIF53kh8fd68QkCbfRtYAJSmpDK1fMFSgnokg+Sfz1kdN2CTPsdZMv4
+ cRRSnvtGgaRc1R8lcLsh4r80YelUuMrzD+aSKpHyA3vC4i0fymlaJwNOckb8PWC9tYt6
+ pG8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3l2YIPKUKlRh3M0f3NMWymMHGdjv/lFV5l5/oedTL68myLKrALpw3mG5xEWfngYccnjmS6+o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7AHtpZbB74+kfYHeQf7wISIDJZzQeM+xdLzdbnNmAVXgRJmyK
+ NHqNR8LL6u8ki6f2fyJ9oRUV4m9e5wDUp7GSBpkXnU6DKMpvB+qGuwpBEO+0aTwdhwNvCM2fS1Q
+ /
+X-Gm-Gg: ASbGncuiwFluExmElFHvBuu+qIKWG6b2MMb8zSuChXJxRqOxw2dXKSJtbwTJgYU2G4B
+ SnUq8KKtq9TznYzfdHS2X4H3jFcjBXIK4sdTs9GAIVYrlcdGFlmF2YgrM4Wwo48coebUfDV4Ywr
+ 59z0dIU+UNNVXaO1sSckUmTVHt7scvvwgBFbaiFR+QbOGDLh37y0pYi5OidYMbJqEqSTOHWo/x5
+ N2JEC1OlIQDGPFjxjQFRnfBjxbe0XWPCZBJascdNjj26wEkVxUtB1HBP7HHmQHWeTu+ZEbUvhIe
+ bCjqDTCX5Kki5IljGqVfv77uL4GRnBogigCXaP9j8m7g
+X-Google-Smtp-Source: AGHT+IFN4oOlYTemewjK4U02gZSfSFDuLdJWGqrqdGs0uMMEx7wIQQMfTTM9v6Jw8bW/OHS7Mmtl4Q==
+X-Received: by 2002:a17:902:da87:b0:220:cd9f:a180 with SMTP id
+ d9443c01a7336-2262c625001mr61732925ad.53.1742325117253; 
+ Tue, 18 Mar 2025 12:11:57 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.138.125])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-225c688866asm98989985ad.50.2025.03.18.12.11.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Mar 2025 12:11:56 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+In-Reply-To: <76380583-858e-4d69-a412-25ddef988705@linaro.org>
+References: <76380583-858e-4d69-a412-25ddef988705@linaro.org>
+Subject: Re: [GIT PULL] Please pull u-boot-amlogic-20250318 into next
+Message-Id: <174232511609.1770758.3649930286570115403.b4-ty@konsulko.com>
+Date: Tue, 18 Mar 2025 13:11:56 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,30 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable AVS config
+On Tue, 18 Mar 2025 17:06:18 +0100, Neil Armstrong wrote:
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Change log
-changes in v2
-Removed extra test code, which was added below tearline
-link to v1: https://lore.kernel.org/all/20250314123824.2886341-1-u-kumar1@ti.com/
+> Here's a small set of changes for Amlogic SoC support.
+> 
+> Thanks,
+> Neil
+> 
+> The following changes since commit 0e1fc465fea62ebae91f2f56cb823e8b37ee1077:
+> 
+>    Merge tag 'dm-pull-15mar25' of git://git.denx.de/u-boot-dm into next (2025-03-15 08:19:31 -0600)
+> 
+> [...]
 
- configs/am68_sk_r5_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+Merged into u-boot/next, thanks!
 
-diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
-index 097bed62061..d6ef89c7b84 100644
---- a/configs/am68_sk_r5_defconfig
-+++ b/configs/am68_sk_r5_defconfig
-@@ -6,7 +6,6 @@ CONFIG_SOC_K3_J721S2=y
- CONFIG_TARGET_J721S2_R5_EVM=y
- 
- CONFIG_ESM_K3=n
--CONFIG_K3_AVS0=n
- CONFIG_ESM_PMIC=n
- CONFIG_DM_REGULATOR_TPS65941=n
- CONFIG_PMIC_TPS65941=n
 -- 
-2.34.1
+Tom
+
 
