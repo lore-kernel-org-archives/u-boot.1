@@ -4,79 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54244C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C452EC35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CD7681EC9;
-	Wed, 19 Mar 2025 16:05:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 54F5B81F44;
+	Wed, 19 Mar 2025 16:15:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="duCGLeHD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Yqjm06GC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A048212F; Wed, 19 Mar 2025 16:05:07 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47ABD82115
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 16:04:59 +0100 (CET)
+ id 1BED481F0D; Wed, 19 Mar 2025 16:15:58 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 022868198A
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 16:15:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-22349bb8605so156270425ad.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 08:04:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396698; x=1743001498; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=shMDfAtRPkPZ/jYYCBVlKNtqkRcaybLQIcrHkOHmTjA=;
- b=duCGLeHDb1HTrv0oVKfxEfIuKcdm61ijp7BXWt61wF9/8/j15pBoo1htN53AsRRyw2
- 4aULdMcSouaiSqkt0/6Hlif1xH8pFmZuT8SllWqhTjh0+Mmv65IsSQ9nPgWyxxc503da
- yhLLlMX0e2j11MaVnmB9FUAbG2PjirkG7mR9o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396698; x=1743001498;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=shMDfAtRPkPZ/jYYCBVlKNtqkRcaybLQIcrHkOHmTjA=;
- b=A6h2RaJjK1igvfl8m3bxq/r4ZlVyJKthnE7fuDx8EBllX1BQCcj9VrqP5u/CRH0oRe
- kwBFoFljmccWaplIJMZsNWmlMCp068sHJ25hcw024YiZIELep6y9cL03b9dhq1YA9GJw
- 7zVVNfWaMcJbYtiNE084tm3xQyqQ9MlXo06YGSu0CkmXzEkt52QM1mLrI+GTBiHuQ1/3
- oN3+x3gBOfGwZ/105fnEw9AUwkw2vUa4ghHGa77woenITGJTf336alqjw0jm5jfc13Wh
- H+Uoueu9L4aqKaKA+ot4IaocZPJFeAx/snaq38lSN5AlLdz4+3MfoN1BFvgq00nyN5qf
- jg6g==
-X-Gm-Message-State: AOJu0Ywax6PL8VMWd3MqKBdGy0ueiVUC1X0fD51YJ3GFTuXzhBDDvhD3
- LCJZRS3T6X81w/q5tB1sMZ4I33r9Ju39lDNS5gh60w0xdzUV+2l/G4hFISMca+neK6QGN7fUmet
- vLL2JEYnpqI/118h+Nu2QgNLzlX+0H7Qt8Mf9
-X-Gm-Gg: ASbGncsBA8u/PByH6VlxqZlHa6NLVyFhSvCETPn1urola9sW+pyHZU8ZDxmZDSXQj9t
- tW3wjLe6R0h7K+CwHo8Kq24sjfom3Z/3ghwfHaezn1wKmeXdwF29AxRnPWo8qvuPharRA8ThaRc
- U3+XSckbt+GOL9m9am/6mrEy1oWbs=
-X-Google-Smtp-Source: AGHT+IH14bft0zJYwm+XrHxKk7vyT2TecrAbAYoUnQpp62Z8eC5jqvKj2ZCKXZIScx5ERMqUEoM8Rf4UAEzPnUHujUA=
-X-Received: by 2002:a17:90a:d407:b0:2ee:d63f:d73 with SMTP id
- 98e67ed59e1d1-301bde6e7b6mr5448560a91.11.1742396697758; Wed, 19 Mar 2025
- 08:04:57 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52JFFqsQ357008
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 19 Mar 2025 10:15:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1742397352;
+ bh=CjwmE1W0PdwnfntciOJ2ujlo9L2T5p/lbC/9/72yM/w=;
+ h=From:To:CC:Subject:Date;
+ b=Yqjm06GC1L/MSnIxh9XJI7B+AYWTMAdcDfsiCm8tU4V1ZGz2MnwqGuDhiewWsnulk
+ 4R9ZhKGtyugcBHnFGkvsudwKAEedIFKDS49AJvRBP7UrMpR2Kwc+Q33klZ+PlmC1F/
+ nB0DWYp52sl4kpIAhgXL/nKtjk1yPwka+GlyKFU4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52JFFq2k011582
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 19 Mar 2025 10:15:52 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
+ Mar 2025 10:15:52 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 19 Mar 2025 10:15:52 -0500
+Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52JFFpML123058;
+ Wed, 19 Mar 2025 10:15:51 -0500
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH] arm: dts: k3: Remove leftover file after OF_UPSTREAM
+Date: Wed, 19 Mar 2025 10:15:50 -0500
+Message-ID: <20250319151550.163275-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20250319115911.2204045-1-sjg@chromium.org>
- <20250319115911.2204045-7-sjg@chromium.org>
- <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
-In-Reply-To: <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 Mar 2025 15:04:39 +0000
-X-Gm-Features: AQ5f1Jrhtguj1OGw8IjwjijkrawnSTNviqatU3zkU33hqVlJ8Vwd4Z7hxH3V_qc
-Message-ID: <CAFLszTj+ygCXS6u8H4Mk7TiQk8rGeJDd3efDnX3Kr8LqGEKWuQ@mail.gmail.com>
-Subject: Re: [PATCH 6/6] lib: Provide a signed version of simple_itoa()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,31 +79,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+The file k3-am62a7.dtsi is part of upstream DT and should
+have been removed when migrating to OF_UPSTREAM but must
+have been missed. Do this here.
 
-On Wed, 19 Mar 2025 at 13:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
-e:
->
-> Am 19. M=C3=A4rz 2025 12:59:08 MEZ schrieb Simon Glass <sjg@chromium.org>=
-:
-> >In some cases we want to show a signed value to the user without needing
-> >to use the full printf() implementation. Add a new version of the
-> >simple_itoa() function to handle this.
->
-> Where will this be used?
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ arch/arm/dts/k3-am62a7.dtsi | 104 ------------------------------------
+ 1 file changed, 104 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-am62a7.dtsi
 
-In a following series.
+diff --git a/arch/arm/dts/k3-am62a7.dtsi b/arch/arm/dts/k3-am62a7.dtsi
+deleted file mode 100644
+index f86a23404e6..00000000000
+--- a/arch/arm/dts/k3-am62a7.dtsi
++++ /dev/null
+@@ -1,104 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only OR MIT
+-/*
+- * Device Tree Source for AM62A7 SoC family in Quad core configuration
+- *
+- * TRM: https://www.ti.com/lit/zip/spruj16
+- *
+- * Copyright (C) 2020-2024 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-
+-/dts-v1/;
+-
+-#include "k3-am62a.dtsi"
+-
+-/ {
+-	cpus {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		cpu-map {
+-			cluster0: cluster0 {
+-				core0 {
+-					cpu = <&cpu0>;
+-				};
+-
+-				core1 {
+-					cpu = <&cpu1>;
+-				};
+-
+-				core2 {
+-					cpu = <&cpu2>;
+-				};
+-
+-				core3 {
+-					cpu = <&cpu3>;
+-				};
+-			};
+-		};
+-
+-		cpu0: cpu@0 {
+-			compatible = "arm,cortex-a53";
+-			reg = <0x000>;
+-			device_type = "cpu";
+-			enable-method = "psci";
+-			i-cache-size = <0x8000>;
+-			i-cache-line-size = <64>;
+-			i-cache-sets = <256>;
+-			d-cache-size = <0x8000>;
+-			d-cache-line-size = <64>;
+-			d-cache-sets = <128>;
+-			next-level-cache = <&L2_0>;
+-		};
+-
+-		cpu1: cpu@1 {
+-			compatible = "arm,cortex-a53";
+-			reg = <0x001>;
+-			device_type = "cpu";
+-			enable-method = "psci";
+-			i-cache-size = <0x8000>;
+-			i-cache-line-size = <64>;
+-			i-cache-sets = <256>;
+-			d-cache-size = <0x8000>;
+-			d-cache-line-size = <64>;
+-			d-cache-sets = <128>;
+-			next-level-cache = <&L2_0>;
+-		};
+-
+-		cpu2: cpu@2 {
+-			compatible = "arm,cortex-a53";
+-			reg = <0x002>;
+-			device_type = "cpu";
+-			enable-method = "psci";
+-			i-cache-size = <0x8000>;
+-			i-cache-line-size = <64>;
+-			i-cache-sets = <256>;
+-			d-cache-size = <0x8000>;
+-			d-cache-line-size = <64>;
+-			d-cache-sets = <128>;
+-			next-level-cache = <&L2_0>;
+-		};
+-
+-		cpu3: cpu@3 {
+-			compatible = "arm,cortex-a53";
+-			reg = <0x003>;
+-			device_type = "cpu";
+-			enable-method = "psci";
+-			i-cache-size = <0x8000>;
+-			i-cache-line-size = <64>;
+-			i-cache-sets = <256>;
+-			d-cache-size = <0x8000>;
+-			d-cache-line-size = <64>;
+-			d-cache-sets = <128>;
+-			next-level-cache = <&L2_0>;
+-		};
+-	};
+-
+-	L2_0: l2-cache0 {
+-		compatible = "cache";
+-		cache-unified;
+-		cache-level = <2>;
+-		cache-size = <0x80000>;
+-		cache-line-size = <64>;
+-		cache-sets = <512>;
+-	};
+-};
+-- 
+2.39.2
 
-> Why can't printf be used?
-
-It can, but it is clumsy to do that.
-
-> Why would this fit into this series which is about test improvements and =
-not about functional changes?
-
-It seems to fit in here, since I added a test for the existing function.
-
-[..]
-
-Regards,
-Simon
