@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCB3C35FFC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54244C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:06:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A347820F6;
-	Wed, 19 Mar 2025 16:04:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7CD7681EC9;
+	Wed, 19 Mar 2025 16:05:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nkxYwjfK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="duCGLeHD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0B8B82063; Wed, 19 Mar 2025 16:04:56 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 31A048212F; Wed, 19 Mar 2025 16:05:07 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A631A80FF0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 16:04:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47ABD82115
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 16:04:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-301918a4e3bso6332795a91.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 08:04:53 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-22349bb8605so156270425ad.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 08:04:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396692; x=1743001492; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H72TjV+1wx9IFqWRBdxU34PR5T2Nq+oV5S30MOO3XZs=;
- b=nkxYwjfKDIABxVKxTlCulM1Qj0rAHIb++cKGkdhjouC8pqzbLxHVH21ZvTl7zEAYKc
- EWOLrogSDom3gW5FbSJjOtRaaf8jAOFACpnuDtlJ3dMFQrThILDSw4eosXt8Ii4Wg/ZZ
- ZUU0Ieb1+kvlnHtLEwgMM74mK08UY6pkHL+w8=
+ d=chromium.org; s=google; t=1742396698; x=1743001498; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=shMDfAtRPkPZ/jYYCBVlKNtqkRcaybLQIcrHkOHmTjA=;
+ b=duCGLeHDb1HTrv0oVKfxEfIuKcdm61ijp7BXWt61wF9/8/j15pBoo1htN53AsRRyw2
+ 4aULdMcSouaiSqkt0/6Hlif1xH8pFmZuT8SllWqhTjh0+Mmv65IsSQ9nPgWyxxc503da
+ yhLLlMX0e2j11MaVnmB9FUAbG2PjirkG7mR9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396692; x=1743001492;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H72TjV+1wx9IFqWRBdxU34PR5T2Nq+oV5S30MOO3XZs=;
- b=VflyLzFABxJ/SL445Loo6iqE3UhHrATImzdpDuOGmjajwAqOdm5snRi2UwAlFI+mpJ
- b7b4yJresVYVCcOjzUrNgbDkV4aBI9gDFHWqpsHE+jIKkhB1QlIpCPgG63IYWcbitEya
- WtRxdOG5CryF4nRQHlWwbDIfQzm6i/DWxAJw2mqed1LCQ4A899/qhVVppXJgvbNd4x3Z
- 5Ov2DYbctDQtX/IJkpYq+onXEzHfiP8RqS+yxM2aF82Ci3ktW+pADW3KmO5ppCeoy4wg
- rt711HjiNmX0flfZYzVjTDnRjosnP/phItg0c6/nBGJwPDC8ZVOmzmEpSMfgCuSrB/Lu
- /Fbw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsmoNHm2ak9UMqrHpAx9OzWe7TWh52NnBh9mf8ezjG+YxoIGCLhdEqKRK0v8bl0NtX2QCBg2s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/nkC2xLPeUBO6PIFwWIIz+7VAfzjhghg/HoUyA+gQU5l7ZAfv
- ia45Zdj0x+gknYyOtqpbt2R4wBEPXeTGkazCibJC8fRA4T/Da8FraU5TiZM76gH8op33KuTMG1r
- cjhhjDnXCbvqqeWdKK0KBonTJm7F/fxIO1dil9lCnYvMmPbc=
-X-Gm-Gg: ASbGnct9hgdAvXCkKyB62E/pVZOJlNHWXztLIzXb3fsvGIewLOGgVrxZ332F2nsWjM3
- FKkC4Ih7QwJHoaFmWOmduV94iU8luC5i/Q8Y3VmKcMISk03fa+N6aYPX+3chCxGSSGAgSNlQEch
- GPaT93wFUldoAhjS7h5RywHziRrOA=
-X-Google-Smtp-Source: AGHT+IH4WMDQYVNLe9okAcnTlOz+kUxzz9UbgM7krxSDPpuISpSNv9e/lD0cIEgAU8e7G55EAV4ghxNgAMv2B65pOqA=
-X-Received: by 2002:a17:90b:1d4f:b0:2f4:432d:250d with SMTP id
- 98e67ed59e1d1-301bdf852f0mr4301639a91.21.1742396692232; Wed, 19 Mar 2025
- 08:04:52 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742396698; x=1743001498;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=shMDfAtRPkPZ/jYYCBVlKNtqkRcaybLQIcrHkOHmTjA=;
+ b=A6h2RaJjK1igvfl8m3bxq/r4ZlVyJKthnE7fuDx8EBllX1BQCcj9VrqP5u/CRH0oRe
+ kwBFoFljmccWaplIJMZsNWmlMCp068sHJ25hcw024YiZIELep6y9cL03b9dhq1YA9GJw
+ 7zVVNfWaMcJbYtiNE084tm3xQyqQ9MlXo06YGSu0CkmXzEkt52QM1mLrI+GTBiHuQ1/3
+ oN3+x3gBOfGwZ/105fnEw9AUwkw2vUa4ghHGa77woenITGJTf336alqjw0jm5jfc13Wh
+ H+Uoueu9L4aqKaKA+ot4IaocZPJFeAx/snaq38lSN5AlLdz4+3MfoN1BFvgq00nyN5qf
+ jg6g==
+X-Gm-Message-State: AOJu0Ywax6PL8VMWd3MqKBdGy0ueiVUC1X0fD51YJ3GFTuXzhBDDvhD3
+ LCJZRS3T6X81w/q5tB1sMZ4I33r9Ju39lDNS5gh60w0xdzUV+2l/G4hFISMca+neK6QGN7fUmet
+ vLL2JEYnpqI/118h+Nu2QgNLzlX+0H7Qt8Mf9
+X-Gm-Gg: ASbGncsBA8u/PByH6VlxqZlHa6NLVyFhSvCETPn1urola9sW+pyHZU8ZDxmZDSXQj9t
+ tW3wjLe6R0h7K+CwHo8Kq24sjfom3Z/3ghwfHaezn1wKmeXdwF29AxRnPWo8qvuPharRA8ThaRc
+ U3+XSckbt+GOL9m9am/6mrEy1oWbs=
+X-Google-Smtp-Source: AGHT+IH14bft0zJYwm+XrHxKk7vyT2TecrAbAYoUnQpp62Z8eC5jqvKj2ZCKXZIScx5ERMqUEoM8Rf4UAEzPnUHujUA=
+X-Received: by 2002:a17:90a:d407:b0:2ee:d63f:d73 with SMTP id
+ 98e67ed59e1d1-301bde6e7b6mr5448560a91.11.1742396697758; Wed, 19 Mar 2025
+ 08:04:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319072203.327431-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250319072203.327431-1-ilias.apalodimas@linaro.org>
+References: <20250319115911.2204045-1-sjg@chromium.org>
+ <20250319115911.2204045-7-sjg@chromium.org>
+ <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
+In-Reply-To: <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 Mar 2025 15:04:20 +0000
-X-Gm-Features: AQ5f1Jr8ZcW2f8Ijg0T_tWz3S8_aYdrxpCnbtxA9FaXZoSdJT4HmQ_F9s0WGL5g
-Message-ID: <CAFLszTi8gTWr_BYv9nAJ1d_kN0FJQ+tbVGL81EsOFuALtWR96w@mail.gmail.com>
-Subject: Re: [PATCH] arm64: Fix page permissions for platforms running at EL2
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, Caleb Connolly <caleb.connolly@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Date: Wed, 19 Mar 2025 15:04:39 +0000
+X-Gm-Features: AQ5f1Jrhtguj1OGw8IjwjijkrawnSTNviqatU3zkU33hqVlJ8Vwd4Z7hxH3V_qc
+Message-ID: <CAFLszTj+ygCXS6u8H4Mk7TiQk8rGeJDd3efDnX3Kr8LqGEKWuQ@mail.gmail.com>
+Subject: Re: [PATCH 6/6] lib: Provide a signed version of simple_itoa()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,45 +93,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Heinrich,
 
-On Wed, 19 Mar 2025 at 08:22, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Wed, 19 Mar 2025 at 13:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
+e:
 >
-> We currently set both and print both PXN and UXN bits when removing
-> execution for pages. This happens even in the existing per platform
-> definitions of 'struct mm_region'.
+> Am 19. M=C3=A4rz 2025 12:59:08 MEZ schrieb Simon Glass <sjg@chromium.org>=
+:
+> >In some cases we want to show a signed value to the user without needing
+> >to use the full printf() implementation. Add a new version of the
+> >simple_itoa() function to handle this.
 >
-> That's not entirely correct though. For stage-1 translations, if a
-> platform runs on a translation regime with a single privilege level or the
-> the translation regime supports two privilege levels and we are not
-> in EL1&0 with HCR_EL2.{NV, NV1} = {1, 1} only BIT54 (XN) is needed
-> and BIT53(PXN) is reserved 0.
->
-> Currently we support Non-Secure EL2, Non-secure EL2&0 and Non-secure
-> EL1&0.
->
-> We already have get_effective_el() which returns 1 if we are
-> - Running in EL1 so we assume an EL1 translation regime but without
->   checking HCR_EL2.{NV, NV1} != {1,1}
-> - Running in EL2 with HCR_EL2.E2H = 1
->
-> The only problem with the above is that if we are in EL1&0 and
-> HCR_EL2.{NV1, NV} == {1, 1}, then
-> - Bit[54] holds the PXN instead of the UXN
-> - The Effective value of UXN is 0
-> - Bit[53] is RES0
->
-> So let's re-use that function and set PXN only when we are in
-> and EL[2|1]&0 translation regime.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  arch/arm/cpu/armv8/cache_v8.c | 28 ++++++++++++++++++++++++----
->  1 file changed, 24 insertions(+), 4 deletions(-)
->
+> Where will this be used?
 
-Perhaps add a test?
+In a following series.
+
+> Why can't printf be used?
+
+It can, but it is clumsy to do that.
+
+> Why would this fit into this series which is about test improvements and =
+not about functional changes?
+
+It seems to fit in here, since I added a test for the existing function.
+
+[..]
 
 Regards,
 Simon
