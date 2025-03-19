@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0847C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E2EBC35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1329820F6;
-	Wed, 19 Mar 2025 15:56:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3354F81F7B;
+	Wed, 19 Mar 2025 15:56:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kfKJiYMu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IC6W8MFg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0EE582148; Wed, 19 Mar 2025 15:56:22 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id C1E6082120; Wed, 19 Mar 2025 15:56:24 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3F3681DCC
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A64538212F
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43cf034d4abso49535865e9.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:20 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3997205e43eso1127164f8f.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396180; x=1743000980; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396181; x=1743000981; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wXT5MKpwOE02CMM1RRG1EGjQXPEHnt3UiW+5QTdtzjw=;
- b=kfKJiYMuyAYxeSQNjCqVMuNERrxchRATmue5UN7X368FVvOx3QbNYkf05Wkmjk/uUl
- aj8nicb5UZ5ms3cq4/9lSBGxUfiM6WeE3cGFZRoCaT7wieOfwFxsT2dniWY4h9qHpjbx
- 5nheIb7/FWwfWT4JGw6i9kVs7zb41JCgyqto4=
+ bh=04a6OcFdzaRyBEcMoCZJVEGxEMdrvl2PcjrMY1JBzSU=;
+ b=IC6W8MFgaBDqnwD90yiWV0amwu1rXO/R/HDdHUPTuxYcCFI9wUpOZcbcwNZ9xcTUAP
+ ZKX5M83YgCQb84O+bpXMMyxrhy7Vm/5LjYAfrdE2C4vjtrmLteCs8ABR1CVQSCPLAWXw
+ 6ykqo1Y2JZrNKoyQu37uElpBfdUFIJzcliTvs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396180; x=1743000980;
+ d=1e100.net; s=20230601; t=1742396181; x=1743000981;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wXT5MKpwOE02CMM1RRG1EGjQXPEHnt3UiW+5QTdtzjw=;
- b=pBi+u75tmqwUhGiPTf3WSDixy9uN6uYPiwADJOhRvQxVR0o/4kmfuRWOLalo54mszn
- JIADkakSC8z9wwejtoomc/RdpsFmL5uX4YHsfL0wAanpkj76h6E6xwopOMtj7Y/PgenU
- yaZCv5ayunff3neJ5IlV/x3bReEUVbJFWdJP6EE+RbvbSTQHSAD9L10eyxLyENOM5EQM
- VQAWeFuOwt2/n6ZTmIhxf0EltCzeoJBHeZ+QErVPsNuA5XdvagBfCL0pi+JD4tOajC1F
- VKRvdtvyALFgSNm8ZSWf7oeDTVp9b5AEulbA8PC/Cw/z+41w4SlzyT6vpOlfS7eYs7Sf
- /61A==
-X-Gm-Message-State: AOJu0Yz/Mp9eFYuy5KB3bMAdfCXymMRfyFZHQkdJ2lzci4sgTh1EghwU
- AgGKmmCxxAIEbt8ItbWHyVAELov2GfEj9FRboL6FAKbSJeQDU9WoaTcQqr8Te6AAZ1BH0uy8s5k
+ bh=04a6OcFdzaRyBEcMoCZJVEGxEMdrvl2PcjrMY1JBzSU=;
+ b=NUGf/7krOGnD7jESban04Sbs8rJhYfk64DZvNA6MGkrfRJMYlHWe/EE/xL9alGgIa1
+ tajL/IJ9lPljJxGypyzV0+mlrU8vFbVsyz00Qqe15C2DwEdd0T+t5mL3rta/y3YLTpYR
+ n+NbfJHDyGf75UzFGl//exM+51wHOru7PYR8IMDqv+R7R44zgFe946TwaJZivRumkknP
+ 5S5lN2/KaXjesc8S4pEfxLogVllEJlq5g7VYRLYGD+7nFReqGUbN7mOu2cpLxG3w4E/p
+ v6sXGGuWUddPgzQICabNEPlPPZadvs1FSrmw4LFb2X5l260hsP4O0F5caSq6biukILD/
+ ZChg==
+X-Gm-Message-State: AOJu0YylnWt6DrAov3o4mMXHaPV4rkSnslp39xrLQSe/MzfaQcMEJ6C2
+ d2UE1GWfqogsfBN9iNeu5MuE82hwb9vc9oRz2TLxe9Ou2sT4sxQ0q7FgtqLg5+QnOEsJPfdIRaQ
  =
-X-Gm-Gg: ASbGncs4zb0EQOEBcVXP1KmDdyaNOFnB7LOowNJ7l+QAVJKTHmD5cYJB0oJONHoQvPg
- eKIH1ebFrUgW15ZheO6h0wRZ6daibIOMiGRQj+JXBPvb9jsaWorBD0FhaYVgraNs7FIMXgyw6yH
- WWtr1BcB68TOtXJPIKEXUMM8XhQetwCUUYSLqc+fz5d6eG0r3FpItx9cckGcRVb1drTdsxgf6xm
- EAFdWfGumeHMMNP81FfR4aWIp4V2M6VdlSg5n1erJLyWMvYI1lEuaB3GBYdIlIdYNR2irT+Ztt2
- 1o76e0cUeWw9iavalSr5h70NCir/yg78EkDBYd6sYg==
-X-Google-Smtp-Source: AGHT+IHRh0c7kIWsDmHPTyKCcnM3kysJdqs1LmZFYZQMMkl/Z8U2gs/P3+tqwVwDuwlOUfILIMz+Aw==
-X-Received: by 2002:a05:6000:1549:b0:391:2d61:4542 with SMTP id
- ffacd0b85a97d-399739b4057mr2561260f8f.11.1742396179451; 
- Wed, 19 Mar 2025 07:56:19 -0700 (PDT)
+X-Gm-Gg: ASbGncvQ3JSIVdAwENoy195NO4NE113xF7JjHUEMImOkMObiMpI0xy1vhcw3U+YSKsu
+ 1gRR6JqNzUrqWxyCfelZ57QedsbexcLRXNLd0UYrGv/NwAEE7fAoMVIF+pSsBYGZ+uJXwlB1DNw
+ +obfCtmrP71scpfopEbtNp0S55DM11ixtc3G6GVlX4of/rQaQqYL5BAKT3WIWiyGHGbnfFvsxJD
+ Jw+g4/tkYNhJTgS4xHAnXY0ZdUivVIZPcawacVnidZGUqFI6p/qW1Y3DrlCbfNTpkrPhgJCuPfJ
+ alSb5nwlQpBAaH+h7J0BDT7lkc+5kCKQ29+ExiWI+A==
+X-Google-Smtp-Source: AGHT+IHM/tDjWUWzWqTMXiTNjMQoOeQdCujdjgNew2qTPV8dtADOcUVx/Vl1D06VZIQopUQT47tdCw==
+X-Received: by 2002:a05:6000:1787:b0:390:de33:b0ef with SMTP id
+ ffacd0b85a97d-399739d3dbcmr2267382f8f.30.1742396181508; 
+ Wed, 19 Mar 2025 07:56:21 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.18
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:56:18 -0700 (PDT)
+ Wed, 19 Mar 2025 07:56:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 28/52] expo: Make bounding-box calculation more flexible
-Date: Wed, 19 Mar 2025 15:54:33 +0100
-Message-ID: <20250319145512.2391122-29-sjg@chromium.org>
+Subject: [PATCH 29/52] expo: Support setting the size and bounds of an object
+Date: Wed, 19 Mar 2025 15:54:34 +0100
+Message-ID: <20250319145512.2391122-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -94,325 +94,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In some cases it is useful to obtain more than just two bounding boxes
-from a menu, e.g. to line up all descriptions vertically.
+Add a function to allow the size of an object to be set independently
+of its position.
 
-Use an array to obtain bounding-box information and calculate it
-separately for each item.
+Also add a function to permit the object's bounding box to be set
+independently of its dimensions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c          | 61 +++++++++++++++++++++++++++----------------
- boot/scene_internal.h | 46 ++++++++++++++++++++++++++------
- boot/scene_menu.c     | 58 ++++++++++++++++++++++++++--------------
- 3 files changed, 115 insertions(+), 50 deletions(-)
+ boot/scene.c     | 29 +++++++++++++++++++++++++++++
+ include/expo.h   | 24 ++++++++++++++++++++++++
+ test/boot/expo.c | 11 +++++++++++
+ 3 files changed, 64 insertions(+)
 
 diff --git a/boot/scene.c b/boot/scene.c
-index ff6712a0db6..6142d2b736d 100644
+index 6142d2b736d..dd48589f378 100644
 --- a/boot/scene.c
 +++ b/boot/scene.c
-@@ -326,9 +326,9 @@ int scene_obj_get_hw(struct scene *scn, uint id, int *widthp)
-  */
- static void scene_render_background(struct scene_obj *obj, bool box_only)
- {
-+	struct vidconsole_bbox bbox[SCENEBB_count], *sel;
- 	struct expo *exp = obj->scene->expo;
- 	const struct expo_theme *theme = &exp->theme;
--	struct vidconsole_bbox bbox, label_bbox;
- 	struct udevice *dev = exp->display;
- 	struct video_priv *vid_priv;
- 	struct udevice *cons = exp->cons;
-@@ -347,17 +347,20 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
- 	}
- 
- 	/* see if this object wants to render a background */
--	if (scene_obj_calc_bbox(obj, &bbox, &label_bbox))
-+	if (scene_obj_calc_bbox(obj, bbox))
-+		return;
-+
-+	sel = &bbox[SCENEBB_label];
-+	if (!sel->valid)
- 		return;
- 
- 	vidconsole_push_colour(cons, fore, back, &old);
--	video_fill_part(dev, label_bbox.x0 - inset, label_bbox.y0 - inset,
--			label_bbox.x1 + inset, label_bbox.y1 + inset,
-+	video_fill_part(dev, sel->x0 - inset, sel->y0 - inset,
-+			sel->x1 + inset, sel->y1 + inset,
- 			vid_priv->colour_fg);
- 	vidconsole_pop_colour(cons, &old);
- 	if (box_only) {
--		video_fill_part(dev, label_bbox.x0, label_bbox.y0,
--				label_bbox.x1, label_bbox.y1,
-+		video_fill_part(dev, sel->x0, sel->y0, sel->x1, sel->y1,
- 				vid_priv->colour_bg);
- 	}
- }
-@@ -730,8 +733,7 @@ int scene_send_key(struct scene *scn, int key, struct expo_action *event)
+@@ -236,6 +236,35 @@ int scene_obj_set_size(struct scene *scn, uint id, int w, int h)
  	return 0;
  }
  
--int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox,
--			struct vidconsole_bbox *label_bbox)
-+int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox bbox[])
- {
- 	switch (obj->type) {
- 	case SCENEOBJT_NONE:
-@@ -741,14 +743,15 @@ int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox,
- 	case SCENEOBJT_MENU: {
- 		struct scene_obj_menu *menu = (struct scene_obj_menu *)obj;
- 
--		scene_menu_calc_bbox(menu, bbox, label_bbox);
-+		scene_menu_calc_bbox(menu, bbox);
- 		break;
- 	}
- 	case SCENEOBJT_TEXTLINE: {
- 		struct scene_obj_textline *tline;
- 
- 		tline = (struct scene_obj_textline *)obj;
--		scene_textline_calc_bbox(tline, bbox, label_bbox);
-+		scene_textline_calc_bbox(tline, &bbox[SCENEBB_all],
-+					 &bbox[SCENEBB_label]);
- 		break;
- 	}
- 	}
-@@ -916,28 +919,42 @@ int scene_iter_objs(struct scene *scn, expo_scene_obj_iterator iter,
- 	return 0;
- }
- 
-+int scene_bbox_join(const struct vidconsole_bbox *src, int inset,
-+		    struct vidconsole_bbox *dst)
++int scene_obj_set_width(struct scene *scn, uint id, int w)
 +{
-+	if (dst->valid) {
-+		dst->x0 = min(dst->x0, src->x0 - inset);
-+		dst->y0 = min(dst->y0, src->y0);
-+		dst->x1 = max(dst->x1, src->x1 + inset);
-+		dst->y1 = max(dst->y1, src->y1);
-+	} else {
-+		dst->x0 = src->x0 - inset;
-+		dst->y0 = src->y0;
-+		dst->x1 = src->x1 + inset;
-+		dst->y1 = src->y1;
-+		dst->valid = true;
-+	}
++	struct scene_obj *obj;
++
++	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
++	if (!obj)
++		return log_msg_ret("find", -ENOENT);
++	obj->bbox.x1 = obj->bbox.x0 + w;
 +
 +	return 0;
 +}
 +
- int scene_bbox_union(struct scene *scn, uint id, int inset,
- 		     struct vidconsole_bbox *bbox)
++int scene_obj_set_bbox(struct scene *scn, uint id, int x0, int y0, int x1,
++		       int y1)
++{
++	struct scene_obj *obj;
++
++	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
++	if (!obj)
++		return log_msg_ret("find", -ENOENT);
++	obj->bbox.x0 = x0;
++	obj->bbox.y0 = y0;
++	obj->bbox.x1 = x1;
++	obj->bbox.y1 = y1;
++	obj->flags |= SCENEOF_SIZE_VALID;
++
++	return 0;
++}
++
+ int scene_obj_set_hide(struct scene *scn, uint id, bool hide)
  {
- 	struct scene_obj *obj;
-+	struct vidconsole_bbox local;
- 
- 	if (!id)
- 		return 0;
- 	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
- 	if (!obj)
- 		return log_msg_ret("obj", -ENOENT);
--	if (bbox->valid) {
--		bbox->x0 = min(bbox->x0, obj->bbox.x0 - inset);
--		bbox->y0 = min(bbox->y0, obj->bbox.y0);
--		bbox->x1 = max(bbox->x1, obj->bbox.x1 + inset);
--		bbox->y1 = max(bbox->y1, obj->bbox.y1);
--	} else {
--		bbox->x0 = obj->bbox.x0 - inset;
--		bbox->y0 = obj->bbox.y0;
--		bbox->x1 = obj->bbox.x1 + inset;
--		bbox->y1 = obj->bbox.y1;
--		bbox->valid = true;
--	}
-+	local.x0 = obj->bbox.x0;
-+	local.y0 = obj->bbox.y0;
-+	local.x1 = obj->bbox.x1;
-+	local.y1 = obj->bbox.y1;
-+	local.valid = true;
-+	scene_bbox_join(&local, inset, bbox);
- 
- 	return 0;
- }
-diff --git a/boot/scene_internal.h b/boot/scene_internal.h
-index ec9008ea593..ac2a36d6e4d 100644
---- a/boot/scene_internal.h
-+++ b/boot/scene_internal.h
-@@ -13,6 +13,27 @@ struct vidconsole_bbox;
- 
- typedef int (*expo_scene_obj_iterator)(struct scene_obj *obj, void *priv);
+ 	int ret;
+diff --git a/include/expo.h b/include/expo.h
+index 6f0547a4b38..990cb3094ee 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -673,6 +673,30 @@ int scene_obj_set_pos(struct scene *scn, uint id, int x, int y);
+  */
+ int scene_obj_set_size(struct scene *scn, uint id, int w, int h);
  
 +/**
-+ * enum scene_bbox_t - Parts of an object which can have a bounding box
++ * scene_obj_set_width() - Set the width of an object
 + *
-+ * Objects can provide any or all of these bounding boxes
-+ *
-+ * @SCENEBB_label: Menu-item label
-+ * @SCENEBB_key: Menu-item key label
-+ * @SCENEBB_desc: Menu-item Description
-+ * @SCENEBB_curitem: Current item (pointed to)
-+ * @SCENEBB_all: All the above objects combined
++ * @scn: Scene to update
++ * @id: ID of object to update
++ * @w: width in pixels
++ * Returns: 0 if OK, -ENOENT if @id is invalid
 + */
-+enum scene_bbox_t {
-+	SCENEBB_label,
-+	SCENEBB_key,
-+	SCENEBB_desc,
-+	SCENEBB_curitem,
-+	SCENEBB_all,
++int scene_obj_set_width(struct scene *scn, uint id, int w);
 +
-+	SCENEBB_count,
-+};
-+
- /**
-  * expo_lookup_scene_id() - Look up a scene ID
-  *
-@@ -291,6 +312,19 @@ struct scene_menitem *scene_menuitem_find_seq(const struct scene_obj_menu *menu,
- struct scene_menitem *scene_menuitem_find_val(const struct scene_obj_menu *menu,
- 					      int val);
- 
 +/**
-+ * scene_bbox_join() - update bouding box with a given src box
++ * scene_obj_set_bbox() - Set the bounding box of an object
 + *
-+ * Updates @dst so that it encompasses the bounding box @src
-+ *
-+ * @src: Input bounding box
-+ * @inset: Amount of inset to use for width
-+ * @dst: Bounding box to update
-+ * Return: 0 if OK, -ve on error
++ * @scn: Scene to update
++ * @id: ID of object to update
++ * @x0: x position, in pixels from left side
++ * @y0: y position, in pixels from top
++ * @x1: ending x position (right side)
++ * @y1: ending y position (botton side)
++ * Returns: 0 if OK, -ENOENT if @id is invalid
 + */
-+int scene_bbox_join(const struct vidconsole_bbox *src, int inset,
-+		    struct vidconsole_bbox *dst);
++int scene_obj_set_bbox(struct scene *scn, uint id, int x0, int y0, int x1,
++		       int y1);
 +
  /**
-  * scene_bbox_union() - update bouding box with the demensions of an object
+  * scene_obj_set_hide() - Set whether an object is hidden
   *
-@@ -319,13 +353,11 @@ int scene_textline_calc_dims(struct scene_obj_textline *tline);
-  * scene_menu_calc_bbox() - Calculate bounding boxes for the menu
-  *
-  * @menu: Menu to process
-- * @bbox: Returns bounding box of menu including prompts
-- * @label_bbox: Returns bounding box of labels
-+ * @bbox: List of bounding box to fill in
-  * Return: 0 if OK, -ve on error
-  */
- void scene_menu_calc_bbox(struct scene_obj_menu *menu,
--			  struct vidconsole_bbox *bbox,
--			  struct vidconsole_bbox *label_bbox);
-+			  struct vidconsole_bbox *bbox);
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index 94c13e9b71f..2a430d3d482 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -584,6 +584,17 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	ut_asserteq(50 + 160, obj->bbox.x1);
+ 	ut_asserteq(400 + 160, obj->bbox.y1);
  
- /**
-  * scene_textline_calc_bbox() - Calculate bounding box for the textline
-@@ -343,12 +375,10 @@ void scene_textline_calc_bbox(struct scene_obj_textline *menu,
-  * scene_obj_calc_bbox() - Calculate bounding boxes for an object
-  *
-  * @obj: Object to process
-- * @bbox: Returns bounding box of object including prompts
-- * @label_bbox: Returns bounding box of labels (active area)
-+ * @bbox: Returns bounding boxes for object
-  * Return: 0 if OK, -ve on error
-  */
--int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox,
--			struct vidconsole_bbox *label_bbox);
-+int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox);
- 
- /**
-  * scene_textline_open() - Open a textline object
-diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-index 490fb42995c..6d945cfa62d 100644
---- a/boot/scene_menu.c
-+++ b/boot/scene_menu.c
-@@ -132,55 +132,73 @@ static int menu_point_to_item(struct scene_obj_menu *menu, uint item_id)
- }
- 
- void scene_menu_calc_bbox(struct scene_obj_menu *menu,
--			  struct vidconsole_bbox *bbox,
--			  struct vidconsole_bbox *label_bbox)
-+			  struct vidconsole_bbox *bbox)
- {
- 	const struct expo_theme *theme = &menu->obj.scene->expo->theme;
- 	const struct scene_menitem *item;
-+	int i;
- 
--	bbox->valid = false;
--	scene_bbox_union(menu->obj.scene, menu->title_id, 0, bbox);
-+	for (i = 0; i < SCENEBB_count; i++)
-+		bbox[i].valid = false;
- 
--	label_bbox->valid = false;
-+	scene_bbox_union(menu->obj.scene, menu->title_id, 0,
-+			 &bbox[SCENEBB_all]);
- 
- 	list_for_each_entry(item, &menu->item_head, sibling) {
-+		struct vidconsole_bbox local;
++	scene_obj_set_width(scn, OBJ_MENU, 170);
++	ut_asserteq(50 + 170, obj->bbox.x1);
++	scene_obj_set_bbox(scn, OBJ_MENU, 60, 410, 50 + 160, 400 + 160);
++	ut_asserteq(60, obj->bbox.x0);
++	ut_asserteq(410, obj->bbox.y0);
++	ut_asserteq(50 + 160, obj->bbox.x1);
++	ut_asserteq(400 + 160, obj->bbox.y1);
 +
-+		local.valid = false;
- 		scene_bbox_union(menu->obj.scene, item->label_id,
--				 theme->menu_inset, bbox);
--		scene_bbox_union(menu->obj.scene, item->key_id, 0, bbox);
--		scene_bbox_union(menu->obj.scene, item->desc_id, 0, bbox);
--		scene_bbox_union(menu->obj.scene, item->preview_id, 0, bbox);
-+				 theme->menu_inset, &local);
-+		scene_bbox_union(menu->obj.scene, item->key_id, 0, &local);
-+		scene_bbox_union(menu->obj.scene, item->desc_id, 0, &local);
-+		scene_bbox_union(menu->obj.scene, item->preview_id, 0, &local);
++	/* reset back to normal */
++	scene_obj_set_bbox(scn, OBJ_MENU, 50, 400, 50 + 160, 400 + 160);
 +
-+		scene_bbox_join(&local, 0, &bbox[SCENEBB_all]);
- 
--		/* Get the bounding box of all labels */
-+		/* Get the bounding box of all individual fields */
- 		scene_bbox_union(menu->obj.scene, item->label_id,
--				 theme->menu_inset, label_bbox);
-+				 theme->menu_inset, &bbox[SCENEBB_label]);
-+		scene_bbox_union(menu->obj.scene, item->key_id,
-+				 theme->menu_inset, &bbox[SCENEBB_key]);
-+		scene_bbox_union(menu->obj.scene, item->desc_id,
-+				 theme->menu_inset, &bbox[SCENEBB_desc]);
-+
-+		if (menu->cur_item_id == item->id)
-+			scene_bbox_join(&local, 0, &bbox[SCENEBB_curitem]);
- 	}
- 
- 	/*
- 	 * subtract the final menuitem's gap to keep the insert the same top
- 	 * and bottom
- 	 */
--	label_bbox->y1 -= theme->menuitem_gap_y;
-+	bbox[SCENEBB_label].y1 -= theme->menuitem_gap_y;
- }
- 
- int scene_menu_calc_dims(struct scene_obj_menu *menu)
- {
--	struct vidconsole_bbox bbox, label_bbox;
-+	struct vidconsole_bbox bbox[SCENEBB_count], *cur;
- 	const struct scene_menitem *item;
- 
--	scene_menu_calc_bbox(menu, &bbox, &label_bbox);
-+	scene_menu_calc_bbox(menu, bbox);
- 
- 	/* Make all labels the same size */
--	if (label_bbox.valid) {
-+	cur = &bbox[SCENEBB_label];
-+	if (cur->valid) {
- 		list_for_each_entry(item, &menu->item_head, sibling) {
- 			scene_obj_set_size(menu->obj.scene, item->label_id,
--					   label_bbox.x1 - label_bbox.x0,
--					   label_bbox.y1 - label_bbox.y0);
-+					   cur->x1 - cur->x0,
-+					   cur->y1 - cur->y0);
- 		}
- 	}
- 
--	if (bbox.valid) {
--		menu->obj.dims.x = bbox.x1 - bbox.x0;
--		menu->obj.dims.y = bbox.y1 - bbox.y0;
-+	cur = &bbox[SCENEBB_all];
-+	if (cur->valid) {
-+		menu->obj.dims.x = cur->x1 - cur->x0;
-+		menu->obj.dims.y = cur->y1 - cur->y0;
-+
-+		menu->obj.bbox.x1 = cur->x1;
-+		menu->obj.bbox.y1 = cur->y1;
- 	}
- 
- 	return 0;
+ 	/* render it */
+ 	expo_set_scene_id(exp, SCENE1);
+ 	ut_assertok(expo_render(exp));
 -- 
 2.43.0
 
