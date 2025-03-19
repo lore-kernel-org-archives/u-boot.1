@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B336BC35FFC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AEEC35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47E0F8272A;
+	by phobos.denx.de (Postfix) with ESMTP id 8F1EE827A6;
 	Wed, 19 Mar 2025 15:56:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kXre2pxe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GJDIzgxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DE6A82107; Wed, 19 Mar 2025 15:56:49 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 4847782107; Wed, 19 Mar 2025 15:56:50 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A37AA8213E
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A8D482115
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4394345e4d5so33005395e9.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:46 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43d0359b1fcso6051585e9.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396206; x=1743001006; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396207; x=1743001007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ccsgKwcaQEeejZD0evGES572XtjQuT5UPQ4oZj/e+28=;
- b=kXre2pxe43TKXxP1uPDw2E9+zIkczrUylL+bpiuRRDz9MUsK/GggdNru+2ia1EUcfp
- LKK0EKz1wmoSwZM6cKgjeXF6o8pFvJR9mHHEEm2lBgOLNyIecRUoZBYDAA/bcWGFSii3
- jSDA2RTweb60Ak4VrL78Eh52nidBo0jMMAeOM=
+ bh=7ev1+2sRgSRl4qmwvv9a3EYTWZI+1/i8IOqRqog5LjQ=;
+ b=GJDIzgxoNnqkAU2NmLdk6uLQe2Yo/jTPKxcvEcsnIdEurhHU3vhimi4I+VAGNGcGpC
+ yFterQac3QnT4uJcuax03x0RLN1pBvxjsUdacljBvxRjwMdr4fesWT0rXG9Sk72XtXRz
+ I6qqqwA40udf6zOIw2M8v6OinXRUa/wcXHVqw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396206; x=1743001006;
+ d=1e100.net; s=20230601; t=1742396207; x=1743001007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ccsgKwcaQEeejZD0evGES572XtjQuT5UPQ4oZj/e+28=;
- b=MPD1IGb7epG4nJgX6MKVTZf3gXD3aG4LBDBzBQjpIphSdKks4jko1SZw+BtMH0asGF
- od600/2b+k+LunqKisoQKg8zH+PEv4gkmbz7ahG5FJWHlVAtDrsyFeyrEJZnJB50i5FB
- nnnuYH3mnJUysCU2J1qHLy4y6saLYFNpla3ki3D6tLghVifJKKaJjkG71QqaPKu0qufI
- yfdU2Pha/BN50eNP4yXRc17/Vp3E/2JK4Xbs8khRg/lCwjuIUHO1Kbd6HJQXCVAit04j
- Mxm2qzu1aV+kzKM5Fovu8XIc+KgNnVThLlgk857bQ4QPIeRdbDFi4GxCoUDAvmoAoR9l
- FBrA==
-X-Gm-Message-State: AOJu0YxdWFNCvIDeqMXqiRZ1158U8VsfCwhJ/fSg9fRASvLnGDErL5wX
- XBQZ7nD4ATv9ZWxtco5P19MjFfUx75gRQeuRAKbZZbr5wp+oemhHvix+31n3P7RwU04cI3tjALA
+ bh=7ev1+2sRgSRl4qmwvv9a3EYTWZI+1/i8IOqRqog5LjQ=;
+ b=SEMhHWTaJ0Fel1OL6WrzIXfdKOjtc3TCkzR0zM3rY7JPE7ulcM18HfD0trrxt0k5ko
+ b9F2Z4Pyy3Qg5A4V92Yf5vIi3f+gjcRuIqBGJJS4tPyssqnv1be7+Vzte0xl1NB1ywpe
+ jiJOIlRD0/dl+98xOU2vrz7tR/wxd+vscHnb4iJMq1a1opoKrywPHBXuzZETM0nItkRM
+ gZvXfCQ8HGk76eiw8rJvuPq0B0h/yAY704h6JqvSg7b1o5zN7tIgOjKZrGugd+Tc2pH2
+ lc5H4vk8jlov0tLYZGCCaZ6Yc47ywSahWPkhihmHxD2sSp0iIvL0QX0n2m4iHDXo5s80
+ DStw==
+X-Gm-Message-State: AOJu0YxYE8CO374r/sfU38kOaSo1aN/U1eKo1ADnudwneYKu/tLMxa71
+ jvBu4XPdajgwdE4efSjOvLYS+Nq88bfZPXKWSpSed0mOQH5gjV+DMXA/c7sBjQeq1PUgh7mtTU0
  =
-X-Gm-Gg: ASbGncsm05tu5t09AmnumD5WIfZ7b3xjE0MAc0MO9TstwcWhKsDjvhtcnU3+XLCx7oe
- RekBWJDLUxHE3kaakZaPtFUGNFTQh5ayoV1S1I679gK9cCBbKNlOW0XIHtArUzWjw58eAcKNu6A
- 4msYTAxEw+8kSNHNoQy4a5hpnxEK7fAyBYBNWhxEQqYIXTWd0SXEDa4ekxlvVwVID6k52IaE8dT
- q+nlGsolnBSQyqqG3VNsUB5ryWLEXaJ76IjGoaJvvzWxOrFZgochIGJ5pea2QjaaS4QMBEIk+10
- 6Od0OSxU8gAThMNsSK5B5l9x4Tt4qCE5ZMQ4jH61jQ==
-X-Google-Smtp-Source: AGHT+IEXIX3W+4SI6wx0GQZn1BsjoXMMPD5AAFU/B4JcMz4YuMFCFw08PiKVY4yD3DLSjL4QQkWm/Q==
-X-Received: by 2002:a05:600c:674f:b0:43c:e2dd:98ea with SMTP id
- 5b1f17b1804b1-43d43842641mr33126685e9.22.1742396205512; 
- Wed, 19 Mar 2025 07:56:45 -0700 (PDT)
+X-Gm-Gg: ASbGncuID6JQJd0RFmQ/S35xpRKnrRE/tulN2yPtLP44Yr4X2reT/FnWFjjCoK2T0pW
+ YqWMyDYwK9D1OJDWXdOhBOnqOtxB+Y8YPIdFpxSWzvNJvY0lTQ5ixt+ZZFHEFTMYSJlaESE+1dX
+ DfgRdApBZ3m64uyY5AArqackS/xO+/Ib2DSXL+fDTxU51vmmsSBRBvX5PTUNEz37vKRZi6LCmQN
+ 1ux+gcWDhl45gnIkFASBAhZiW4aHJ+YjqQsEs4l2RO3NXMQfNnS1/mWT2U5ZsbMOtjszroGYJxr
+ c1iLHoGqaAHxWWy8Q1ZOO2TS0i4jgtXxwF9gK9Lvyg==
+X-Google-Smtp-Source: AGHT+IFpx/goTCMhmyV6/9M7gi/Ak2DG/N1glJ/HwAVxxXjcfDyIrXvz3Rk1q1y9S7euKIvb2QH5qg==
+X-Received: by 2002:a05:600c:5856:b0:43b:bfa7:c7d with SMTP id
+ 5b1f17b1804b1-43d3b95f76fmr60066125e9.2.1742396207081; 
+ Wed, 19 Mar 2025 07:56:47 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.44
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:56:44 -0700 (PDT)
+ Wed, 19 Mar 2025 07:56:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 42/52] expo: Drop the gap between groups of menu items
-Date: Wed, 19 Mar 2025 15:54:47 +0100
-Message-ID: <20250319145512.2391122-43-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 43/52] expo: Add forward declarations to scene_internal.h
+Date: Wed, 19 Mar 2025 15:54:48 +0100
+Message-ID: <20250319145512.2391122-44-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -94,32 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The gap is intended to separate options which are on different bootdevs,
-but most of the time there is only one. So drop this gap.
-
-Keep the code around in case it becomes useful to have it in the style,
-or based on some other mechanism.
+Provide some forward declarations for types used in this file, to keep
+the LSP happy and avoid errors if the caller happens not to include the
+required header.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootflow_menu.c | 3 +++
- 1 file changed, 3 insertions(+)
+ boot/scene_internal.h | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 986334e95e2..ace89545fa9 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -117,6 +117,9 @@ int bootflow_menu_add(struct expo *exp, struct bootflow *bflow, int seq,
- 	}
+diff --git a/boot/scene_internal.h b/boot/scene_internal.h
+index 760cc629b86..95927472875 100644
+--- a/boot/scene_internal.h
++++ b/boot/scene_internal.h
+@@ -9,8 +9,21 @@
+ #ifndef __SCENE_INTERNAL_H
+ #define __SCENE_INTERNAL_H
  
- 	add_gap = priv->last_bootdev != bflow->dev;
++#include <linux/types.h>
 +
-+	/* disable this gap for now, since it looks a little ugly */
-+	add_gap = false;
- 	priv->last_bootdev = bflow->dev;
++struct expo;
++struct expo_action;
++struct expo_arrange_info;
++struct expo_theme;
++struct scene_obj;
++struct scene_obj_menu;
++struct scene_obj_textline;
++struct scene_obj_txtedit;
++struct scene_txt_generic;
+ struct vidconsole_bbox;
  
- 	ret = expo_str(exp, "prompt", STR_POINTER, ">");
++enum scene_obj_t;
++
+ typedef int (*expo_scene_obj_iterator)(struct scene_obj *obj, void *priv);
+ 
+ /**
 -- 
 2.43.0
 
