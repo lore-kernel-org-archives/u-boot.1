@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA39C35FFC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E81B2C35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAE7081F6B;
-	Wed, 19 Mar 2025 15:56:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 020F782075;
+	Wed, 19 Mar 2025 15:56:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ci4L8ePF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A1l5xJEM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA6A2820AA; Wed, 19 Mar 2025 15:56:16 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id E4F84820F6; Wed, 19 Mar 2025 15:56:17 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19E8B8211F
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9A63820F5
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cebe06e9eso33694755e9.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:14 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cfba466b2so46862145e9.3
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396173; x=1743000973; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396175; x=1743000975; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GGvuws4CVBT1h4PkzwC0CajG2uavGgCmKOyatWMP0cU=;
- b=Ci4L8ePFiY1ljXvmFBbcYvbdN0NYmRtG2P29Ak9ha9ZYKcYptNTh33ngugMSrO1clS
- FYvjoRBCa05dnRsz+/ipfnwv2mnL9QjtBBcMl+3Uaxjg9KqqgcQBVC6VASYHe8DPnQSU
- joV6VvAQaWZD662yRomJa8qUuKyulhSwQuPm0=
+ bh=nO2shK3McbXuO5iQFZMXMiUqTgkelxr4CWJmT6J99Nw=;
+ b=A1l5xJEMeBr9IaZdum0N2kwn5RTantF+aMw3dzT3vLk/hp0bNnjStorHz510T+1tN9
+ DK2+z+J8uHqaG332hUgcviPLGijKcSKvzkSsbTksoCWrG4qh2bHwTa8HjAdA6/TczzJt
+ zHsLpGxcwpjo2CxGtbBlKIybBskyt95Vx5bnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396173; x=1743000973;
+ d=1e100.net; s=20230601; t=1742396175; x=1743000975;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GGvuws4CVBT1h4PkzwC0CajG2uavGgCmKOyatWMP0cU=;
- b=DGbZsm0kvq/Vuvm2lbGUvvid1+0xxwca4wIS0tAHzzbcb26hgaa9G+LGMq+WhGU9TG
- xxIgn4Emr5uMTO+RdGQe7H73JlmTNOZ2D1BCx+qMLExX3m+3u8AENBq//jN7VtYrFu8U
- GVLWaExMOPdJA5VY6hjWAZ62hA6PB88L0Evldi7KVDdcPR79aLteHevNWwJH73N9FWAV
- NPDJN5FFKrPgnC8HMsnzlmERnqBFGWTLGQMO8eaD3jXJQBsARKVleHST8M7/g0v26rT6
- sNmSYkAmKawlUGDXRn91G9e1epwscH5xqucn7GYx3Hy5CQzeXGZS2QrXQ6oo+aHHVsKL
- 61Jg==
-X-Gm-Message-State: AOJu0YwBMqms1L61YKD2FcYgpyEdT7WbxOnZYd3OCMfggaT3M3LJCeKQ
- rRdPRR44KKG/vPtG+sn1RdS427GuD9xv/iKtFs+YtzsFh1CVU12eh6ezQx1tZc9Lw0IsTZBb4Ak
+ bh=nO2shK3McbXuO5iQFZMXMiUqTgkelxr4CWJmT6J99Nw=;
+ b=Njwciy6kFcwr9POevnrbBa+etkwzsryNjHlHPsVH7mM1uVbA6ELt2P1yUcfnUk3wTf
+ E5G7bf0VIlOy0gKX6+VhiW+4dMTiTaF7UtfALklYxfGlzXhSFHC8TQAjUzoAME+yb70Z
+ dyxDv3WmR+tvMk4ct3QgHmfIPuDD9p0mUyei0bJJ0Qkz3eEbSQb9ulH3o9JeWvqliuUy
+ 2kqRjwFqqzUJUyIL4NFwjmbr0PUDKnzsCLMzYBJAMTfOH71cNvqv3uyS4d732cGqGU5P
+ tvgOo7uXcPB+ETay+b83C4KimnQO5gqD25WqiDrGiBitlV4hitNvRUlcwsbltor9Hfe9
+ su0A==
+X-Gm-Message-State: AOJu0YzD+JwnOK/aVNvNHSFuxKt3M0+PA1TxmxSV3MgRQYL2g+77BLJi
+ O7zi1952JmiR1mZ7n3oPfUsAFUmkRK/wX2/2MvIrJtbph+Ql8XR9+4RB1SLd5LcCoaOLxfDXOBs
  =
-X-Gm-Gg: ASbGncu11pqBq0wiVTGxo8sfgsqDHYawtfB7YzHKAI+0PTj2CMJPxFJxHJnxDq3sVU/
- rFAu2aNYg2xx6Tv10w3iRZeaeqX1sDfEnrKbfD5+86M7mHNC81U1mu3jCD/U5+aF3HKntbfx+2G
- ZF9zzfkEy1th6PgYMPcMDvgWhfyK7iBV3ZSs6vZ9mjhSEoiBJ0+KhjIyBBa2G+S+EK+1K9F48ce
- vkMgLH1BY4dP7+jCcWA7KCy3auO0golzN2BQOVgmsFHZYm8uUSmXnudKYSoOjhTB/V8MNP6D40k
- ki0GCA5W7XesvCafr5c2XuAhtLJjUuWak4ATEyF8/w==
-X-Google-Smtp-Source: AGHT+IF3RxjizXl2g5mh0FPBzV8KZkq8MXIPqloe649uODA12ZFouLRefGzkSUSEsLECQHX8wDAW4Q==
-X-Received: by 2002:a05:600c:870f:b0:43c:f00b:d581 with SMTP id
- 5b1f17b1804b1-43d43880eb4mr31134975e9.29.1742396172857; 
- Wed, 19 Mar 2025 07:56:12 -0700 (PDT)
+X-Gm-Gg: ASbGncuq1qEognpfBTNQL4LdmIgXpPREFV9z3YF2F0pZXnAg6YFzo5MtD9wTg/EJObp
+ i56hUruP0YSq4Ene4RLI0coLeT5CPkTf/1NRp8SZN1nglHEZYWMBEPJGgVnnoiWKDsqqAjawjS0
+ aJqV11HywvCsFmQR+4g3Av1i/mzPYjHxHid/epCo61Frg8L5O3cbPehkJnAm9zFV5/6VHJswElE
+ 0ViLEDzicRtoHM2pQjOk/0RpC6ATwcAYIJ32N1UhKQXHdO489BbZv/GzMLJe1zvbjdIBHsh4WH1
+ EWtZlEpza+MHeXPkclZ1cYqdBYhtg40NuUVwA94K3A==
+X-Google-Smtp-Source: AGHT+IGQcuwuVEQ6M4vxyGf9aKm1zuOdc6OdCVFmQ4Ajq9wKiM3wBoo/Vqul8yoUPcfmjRsaMtkcxQ==
+X-Received: by 2002:a05:600c:3b92:b0:439:9a40:aa0b with SMTP id
+ 5b1f17b1804b1-43d43882ebcmr25524435e9.25.1742396174481; 
+ Wed, 19 Mar 2025 07:56:14 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.11
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:56:11 -0700 (PDT)
+ Wed, 19 Mar 2025 07:56:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 24/52] expo: Rename scene_dim to scene_obj_bbox
-Date: Wed, 19 Mar 2025 15:54:29 +0100
-Message-ID: <20250319145512.2391122-25-sjg@chromium.org>
+Subject: [PATCH 25/52] expo: Rename x and y in struct scene_obj_bbox
+Date: Wed, 19 Mar 2025 15:54:30 +0100
+Message-ID: <20250319145512.2391122-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -94,47 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present we assume that each object is a simple box and that it fills
-the whole box.
-
-This is quite limiting for text objects, which we may want to centre
-within the box. We need a position within the box where drawing starts.
-
-Rename the scene_dim struct to indicate that it is a bounding box.
+These coordinates are the top left values, so rename them to x0 and y0
+in preparation for changing the width and height to x1 and y1
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c          | 36 +++++++++++-----------
- boot/scene_menu.c     | 12 ++++----
- boot/scene_textline.c | 22 ++++++-------
- include/expo.h        |  8 ++---
- test/boot/expo.c      | 72 +++++++++++++++++++++----------------------
- 5 files changed, 75 insertions(+), 75 deletions(-)
+ boot/scene.c          | 24 ++++++++++----------
+ boot/scene_menu.c     |  8 +++----
+ boot/scene_textline.c | 16 ++++++-------
+ include/expo.h        |  8 +++----
+ test/boot/expo.c      | 52 +++++++++++++++++++++----------------------
+ 5 files changed, 54 insertions(+), 54 deletions(-)
 
 diff --git a/boot/scene.c b/boot/scene.c
-index fb82ffe768c..fbc6f783257 100644
+index fbc6f783257..75b1e4faba5 100644
 --- a/boot/scene.c
 +++ b/boot/scene.c
 @@ -211,8 +211,8 @@ int scene_obj_set_pos(struct scene *scn, uint id, int x, int y)
  	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
  	if (!obj)
  		return log_msg_ret("find", -ENOENT);
--	obj->dim.x = x;
--	obj->dim.y = y;
-+	obj->bbox.x = x;
-+	obj->bbox.y = y;
- 
- 	return 0;
- }
-@@ -224,8 +224,8 @@ int scene_obj_set_size(struct scene *scn, uint id, int w, int h)
- 	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
- 	if (!obj)
- 		return log_msg_ret("find", -ENOENT);
--	obj->dim.w = w;
--	obj->dim.h = h;
-+	obj->bbox.w = w;
-+	obj->bbox.h = h;
+-	obj->bbox.x = x;
+-	obj->bbox.y = y;
++	obj->bbox.x0 = x;
++	obj->bbox.y0 = y;
  
  	return 0;
  }
@@ -142,137 +126,89 @@ index fb82ffe768c..fbc6f783257 100644
  	struct udevice *cons = text_mode ? NULL : exp->cons;
  	int x, y, ret;
  
--	x = obj->dim.x;
--	y = obj->dim.y;
-+	x = obj->bbox.x;
-+	y = obj->bbox.y;
+-	x = obj->bbox.x;
+-	y = obj->bbox.y;
++	x = obj->bbox.x0;
++	y = obj->bbox.y0;
  
  	switch (obj->type) {
  	case SCENEOBJT_NONE:
-@@ -420,8 +420,8 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
- 			if (obj->flags & SCENEOF_POINT) {
- 				vidconsole_push_colour(cons, fore, back, &old);
- 				video_fill_part(dev, x - theme->menu_inset, y,
--						x + obj->dim.w,
--						y + obj->dim.h,
-+						x + obj->bbox.w,
-+						y + obj->bbox.h,
- 						vid_priv->colour_bg);
- 			}
- 			vidconsole_set_cursor_pos(cons, x, y);
-@@ -766,8 +766,8 @@ int scene_calc_dims(struct scene *scn, bool do_menus)
- 				ret = scene_obj_get_hw(scn, obj->id, &width);
- 				if (ret < 0)
- 					return log_msg_ret("get", ret);
--				obj->dim.w = width;
--				obj->dim.h = ret;
-+				obj->bbox.w = width;
-+				obj->bbox.h = ret;
- 			}
- 			break;
- 		}
 @@ -916,15 +916,15 @@ int scene_bbox_union(struct scene *scn, uint id, int inset,
  	if (!obj)
  		return log_msg_ret("obj", -ENOENT);
  	if (bbox->valid) {
--		bbox->x0 = min(bbox->x0, obj->dim.x - inset);
--		bbox->y0 = min(bbox->y0, obj->dim.y);
--		bbox->x1 = max(bbox->x1, obj->dim.x + obj->dim.w + inset);
--		bbox->y1 = max(bbox->y1, obj->dim.y + obj->dim.h);
-+		bbox->x0 = min(bbox->x0, obj->bbox.x - inset);
-+		bbox->y0 = min(bbox->y0, obj->bbox.y);
-+		bbox->x1 = max(bbox->x1, obj->bbox.x + obj->bbox.w + inset);
-+		bbox->y1 = max(bbox->y1, obj->bbox.y + obj->bbox.h);
+-		bbox->x0 = min(bbox->x0, obj->bbox.x - inset);
+-		bbox->y0 = min(bbox->y0, obj->bbox.y);
+-		bbox->x1 = max(bbox->x1, obj->bbox.x + obj->bbox.w + inset);
+-		bbox->y1 = max(bbox->y1, obj->bbox.y + obj->bbox.h);
++		bbox->x0 = min(bbox->x0, obj->bbox.x0 - inset);
++		bbox->y0 = min(bbox->y0, obj->bbox.y0);
++		bbox->x1 = max(bbox->x1, obj->bbox.x0 + obj->bbox.w + inset);
++		bbox->y1 = max(bbox->y1, obj->bbox.y0 + obj->bbox.h);
  	} else {
--		bbox->x0 = obj->dim.x - inset;
--		bbox->y0 = obj->dim.y;
--		bbox->x1 = obj->dim.x + obj->dim.w + inset;
--		bbox->y1 = obj->dim.y + obj->dim.h;
-+		bbox->x0 = obj->bbox.x - inset;
-+		bbox->y0 = obj->bbox.y;
-+		bbox->x1 = obj->bbox.x + obj->bbox.w + inset;
-+		bbox->y1 = obj->bbox.y + obj->bbox.h;
+-		bbox->x0 = obj->bbox.x - inset;
+-		bbox->y0 = obj->bbox.y;
+-		bbox->x1 = obj->bbox.x + obj->bbox.w + inset;
+-		bbox->y1 = obj->bbox.y + obj->bbox.h;
++		bbox->x0 = obj->bbox.x0 - inset;
++		bbox->y0 = obj->bbox.y0;
++		bbox->x1 = obj->bbox.x0 + obj->bbox.w + inset;
++		bbox->y1 = obj->bbox.y0 + obj->bbox.h;
  		bbox->valid = true;
  	}
  
 diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-index df14a6c0409..f0a060a6356 100644
+index f0a060a6356..00bbf9a3849 100644
 --- a/boot/scene_menu.c
 +++ b/boot/scene_menu.c
 @@ -102,7 +102,7 @@ static int update_pointers(struct scene_obj_menu *menu, uint id, bool point)
  		label = scene_obj_find(scn, item->label_id, SCENEOBJT_NONE);
  
  		ret = scene_obj_set_pos(scn, menu->pointer_id,
--					menu->obj.dim.x + 200, label->dim.y);
-+					menu->obj.bbox.x + 200, label->bbox.y);
+-					menu->obj.bbox.x + 200, label->bbox.y);
++					menu->obj.bbox.x0 + 200, label->bbox.y0);
  		if (ret < 0)
  			return log_msg_ret("ptr", ret);
  	}
-@@ -179,8 +179,8 @@ int scene_menu_calc_dims(struct scene_obj_menu *menu)
- 	}
- 
- 	if (bbox.valid) {
--		menu->obj.dim.w = bbox.x1 - bbox.x0;
--		menu->obj.dim.h = bbox.y1 - bbox.y0;
-+		menu->obj.bbox.w = bbox.x1 - bbox.x0;
-+		menu->obj.bbox.h = bbox.y1 - bbox.y0;
- 	}
- 
- 	return 0;
 @@ -198,12 +198,12 @@ int scene_menu_arrange(struct scene *scn, struct expo_arrange_info *arr,
  	int x, y;
  	int ret;
  
--	x = menu->obj.dim.x;
--	y = menu->obj.dim.y;
-+	x = menu->obj.bbox.x;
-+	y = menu->obj.bbox.y;
+-	x = menu->obj.bbox.x;
+-	y = menu->obj.bbox.y;
++	x = menu->obj.bbox.x0;
++	y = menu->obj.bbox.y0;
  	if (menu->title_id) {
  		int width;
  
--		ret = scene_obj_set_pos(scn, menu->title_id, menu->obj.dim.x, y);
-+		ret = scene_obj_set_pos(scn, menu->title_id, menu->obj.bbox.x, y);
+-		ret = scene_obj_set_pos(scn, menu->title_id, menu->obj.bbox.x, y);
++		ret = scene_obj_set_pos(scn, menu->title_id, menu->obj.bbox.x0, y);
  		if (ret < 0)
  			return log_msg_ret("tit", ret);
  
 diff --git a/boot/scene_textline.c b/boot/scene_textline.c
-index 6adef7cc173..4467bc4abcf 100644
+index 4467bc4abcf..2ffeffeb5f5 100644
 --- a/boot/scene_textline.c
 +++ b/boot/scene_textline.c
-@@ -77,11 +77,11 @@ int scene_textline_calc_dims(struct scene_obj_textline *tline)
- 		return log_msg_ret("nom", ret);
- 
- 	if (bbox.valid) {
--		tline->obj.dim.w = bbox.x1 - bbox.x0;
--		tline->obj.dim.h = bbox.y1 - bbox.y0;
-+		tline->obj.bbox.w = bbox.x1 - bbox.x0;
-+		tline->obj.bbox.h = bbox.y1 - bbox.y0;
- 
--		scene_obj_set_size(scn, tline->edit_id, tline->obj.dim.w,
--				   tline->obj.dim.h);
-+		scene_obj_set_size(scn, tline->edit_id, tline->obj.bbox.w,
-+				   tline->obj.bbox.h);
- 	}
- 
- 	return 0;
 @@ -95,16 +95,16 @@ int scene_textline_arrange(struct scene *scn, struct expo_arrange_info *arr,
  	int x, y;
  	int ret;
  
--	x = tline->obj.dim.x;
--	y = tline->obj.dim.y;
-+	x = tline->obj.bbox.x;
-+	y = tline->obj.bbox.y;
+-	x = tline->obj.bbox.x;
+-	y = tline->obj.bbox.y;
++	x = tline->obj.bbox.x0;
++	y = tline->obj.bbox.y0;
  	if (tline->label_id) {
--		ret = scene_obj_set_pos(scn, tline->label_id, tline->obj.dim.x,
-+		ret = scene_obj_set_pos(scn, tline->label_id, tline->obj.bbox.x,
- 					y);
+-		ret = scene_obj_set_pos(scn, tline->label_id, tline->obj.bbox.x,
+-					y);
++		ret = scene_obj_set_pos(scn, tline->label_id,
++					tline->obj.bbox.x0, y);
  		if (ret < 0)
  			return log_msg_ret("tit", ret);
  
  		ret = scene_obj_set_pos(scn, tline->edit_id,
--					tline->obj.dim.x + 200, y);
-+					tline->obj.bbox.x + 200, y);
+-					tline->obj.bbox.x + 200, y);
++					tline->obj.bbox.x0 + 200, y);
  		if (ret < 0)
  			return log_msg_ret("tit", ret);
  
@@ -280,10 +216,10 @@ index 6adef7cc173..4467bc4abcf 100644
  		if (ret)
  			return log_msg_ret("sav", ret);
  
--		vidconsole_set_cursor_visible(cons, true, txt->obj.dim.x,
--					      txt->obj.dim.y, scn->cls.num);
-+		vidconsole_set_cursor_visible(cons, true, txt->obj.bbox.x,
-+					      txt->obj.bbox.y, scn->cls.num);
+-		vidconsole_set_cursor_visible(cons, true, txt->obj.bbox.x,
+-					      txt->obj.bbox.y, scn->cls.num);
++		vidconsole_set_cursor_visible(cons, true, txt->obj.bbox.x0,
++					      txt->obj.bbox.y0, scn->cls.num);
  	}
  
  	return 0;
@@ -291,62 +227,46 @@ index 6adef7cc173..4467bc4abcf 100644
  	if (!txt)
  		return log_msg_ret("cur", -ENOENT);
  
--	vidconsole_set_cursor_pos(cons, txt->obj.dim.x, txt->obj.dim.y);
-+	vidconsole_set_cursor_pos(cons, txt->obj.bbox.x, txt->obj.bbox.y);
+-	vidconsole_set_cursor_pos(cons, txt->obj.bbox.x, txt->obj.bbox.y);
++	vidconsole_set_cursor_pos(cons, txt->obj.bbox.x0, txt->obj.bbox.y0);
  	vidconsole_entry_start(cons);
  	cli_cread_init(&scn->cls, abuf_data(&tline->buf), tline->max_chars);
  	scn->cls.insert = true;
 diff --git a/include/expo.h b/include/expo.h
-index a2b093c521d..42e934e3ff2 100644
+index 42e934e3ff2..84dc77f771e 100644
 --- a/include/expo.h
 +++ b/include/expo.h
-@@ -192,14 +192,14 @@ enum scene_obj_t {
- };
- 
+@@ -194,14 +194,14 @@ enum scene_obj_t {
  /**
-- * struct scene_dim - Dimensions of an object
-+ * struct scene_obj_bbox - Dimensions of an object
+  * struct scene_obj_bbox - Dimensions of an object
   *
-  * @x: x position, in pixels from left side
-  * @y: y position, in pixels from top
+- * @x: x position, in pixels from left side
+- * @y: y position, in pixels from top
++ * @x0: x position, in pixels from left side
++ * @y0: y position, in pixels from top
   * @w: width, in pixels
   * @h: height, in pixels
   */
--struct scene_dim {
-+struct scene_obj_bbox {
- 	int x;
- 	int y;
+ struct scene_obj_bbox {
+-	int x;
+-	int y;
++	int x0;
++	int y0;
  	int w;
-@@ -232,7 +232,7 @@ enum {
-  * @name: Name of the object (allocated)
-  * @id: ID number of the object
-  * @type: Type of this object
-- * @dim: Dimensions for this object
-+ * @bbox: Dimensions for this object
-  * @flags: Flags for this object
-  * @bit_length: Number of bits used for this object in CMOS RAM
-  * @start_bit: Start bit to use for this object in CMOS RAM
-@@ -243,7 +243,7 @@ struct scene_obj {
- 	char *name;
- 	uint id;
- 	enum scene_obj_t type;
--	struct scene_dim dim;
-+	struct scene_obj_bbox bbox;
- 	u8 flags;
- 	u8 bit_length;
- 	u16 start_bit;
+ 	int h;
+ };
 diff --git a/test/boot/expo.c b/test/boot/expo.c
-index b32a4596e85..77b956bdf06 100644
+index 77b956bdf06..9c940825278 100644
 --- a/test/boot/expo.c
 +++ b/test/boot/expo.c
 @@ -270,8 +270,8 @@ static int expo_object_attr(struct unit_test_state *uts)
  	ut_assert(id > 0);
  
  	ut_assertok(scene_obj_set_pos(scn, OBJ_LOGO, 123, 456));
--	ut_asserteq(123, img->obj.dim.x);
--	ut_asserteq(456, img->obj.dim.y);
-+	ut_asserteq(123, img->obj.bbox.x);
-+	ut_asserteq(456, img->obj.bbox.y);
+-	ut_asserteq(123, img->obj.bbox.x);
+-	ut_asserteq(456, img->obj.bbox.y);
++	ut_asserteq(123, img->obj.bbox.x0);
++	ut_asserteq(456, img->obj.bbox.y0);
  
  	ut_asserteq(-ENOENT, scene_obj_set_pos(scn, OBJ_TEXT2, 0, 0));
  
@@ -354,10 +274,10 @@ index b32a4596e85..77b956bdf06 100644
  	ut_asserteq(0, menu->pointer_id);
  
  	ut_assertok(scene_obj_set_pos(scn, OBJ_MENU, 50, 400));
--	ut_asserteq(50, menu->obj.dim.x);
--	ut_asserteq(400, menu->obj.dim.y);
-+	ut_asserteq(50, menu->obj.bbox.x);
-+	ut_asserteq(400, menu->obj.bbox.y);
+-	ut_asserteq(50, menu->obj.bbox.x);
+-	ut_asserteq(400, menu->obj.bbox.y);
++	ut_asserteq(50, menu->obj.bbox.x0);
++	ut_asserteq(400, menu->obj.bbox.y0);
  
  	id = scene_txt_str(scn, "title", OBJ_MENU_TITLE, STR_MENU_TITLE,
  			   "Main Menu", &tit);
@@ -365,101 +285,89 @@ index b32a4596e85..77b956bdf06 100644
  	ut_asserteq(id, menu->cur_item_id);
  
  	/* the title should be at the top */
--	ut_asserteq(menu->obj.dim.x, tit->obj.dim.x);
--	ut_asserteq(menu->obj.dim.y, tit->obj.dim.y);
-+	ut_asserteq(menu->obj.bbox.x, tit->obj.bbox.x);
-+	ut_asserteq(menu->obj.bbox.y, tit->obj.bbox.y);
+-	ut_asserteq(menu->obj.bbox.x, tit->obj.bbox.x);
+-	ut_asserteq(menu->obj.bbox.y, tit->obj.bbox.y);
++	ut_asserteq(menu->obj.bbox.x0, tit->obj.bbox.x0);
++	ut_asserteq(menu->obj.bbox.y0, tit->obj.bbox.y0);
  
  	/* the first item should be next */
--	ut_asserteq(menu->obj.dim.x, name1->obj.dim.x);
--	ut_asserteq(menu->obj.dim.y + 32, name1->obj.dim.y);
-+	ut_asserteq(menu->obj.bbox.x, name1->obj.bbox.x);
-+	ut_asserteq(menu->obj.bbox.y + 32, name1->obj.bbox.y);
+-	ut_asserteq(menu->obj.bbox.x, name1->obj.bbox.x);
+-	ut_asserteq(menu->obj.bbox.y + 32, name1->obj.bbox.y);
++	ut_asserteq(menu->obj.bbox.x0, name1->obj.bbox.x0);
++	ut_asserteq(menu->obj.bbox.y0 + 32, name1->obj.bbox.y0);
  
--	ut_asserteq(menu->obj.dim.x + 230, key1->obj.dim.x);
--	ut_asserteq(menu->obj.dim.y + 32, key1->obj.dim.y);
-+	ut_asserteq(menu->obj.bbox.x + 230, key1->obj.bbox.x);
-+	ut_asserteq(menu->obj.bbox.y + 32, key1->obj.bbox.y);
+-	ut_asserteq(menu->obj.bbox.x + 230, key1->obj.bbox.x);
+-	ut_asserteq(menu->obj.bbox.y + 32, key1->obj.bbox.y);
++	ut_asserteq(menu->obj.bbox.x0 + 230, key1->obj.bbox.x0);
++	ut_asserteq(menu->obj.bbox.y0 + 32, key1->obj.bbox.y0);
  
--	ut_asserteq(menu->obj.dim.x + 200, ptr->obj.dim.x);
--	ut_asserteq(menu->obj.dim.y + 32, ptr->obj.dim.y);
-+	ut_asserteq(menu->obj.bbox.x + 200, ptr->obj.bbox.x);
-+	ut_asserteq(menu->obj.bbox.y + 32, ptr->obj.bbox.y);
+-	ut_asserteq(menu->obj.bbox.x + 200, ptr->obj.bbox.x);
+-	ut_asserteq(menu->obj.bbox.y + 32, ptr->obj.bbox.y);
++	ut_asserteq(menu->obj.bbox.x0 + 200, ptr->obj.bbox.x0);
++	ut_asserteq(menu->obj.bbox.y0 + 32, ptr->obj.bbox.y0);
  
--	ut_asserteq(menu->obj.dim.x + 280, desc1->obj.dim.x);
--	ut_asserteq(menu->obj.dim.y + 32, desc1->obj.dim.y);
-+	ut_asserteq(menu->obj.bbox.x + 280, desc1->obj.bbox.x);
-+	ut_asserteq(menu->obj.bbox.y + 32, desc1->obj.bbox.y);
+-	ut_asserteq(menu->obj.bbox.x + 280, desc1->obj.bbox.x);
+-	ut_asserteq(menu->obj.bbox.y + 32, desc1->obj.bbox.y);
++	ut_asserteq(menu->obj.bbox.x0 + 280, desc1->obj.bbox.x0);
++	ut_asserteq(menu->obj.bbox.y0 + 32, desc1->obj.bbox.y0);
  
--	ut_asserteq(-4, prev1->obj.dim.x);
--	ut_asserteq(menu->obj.dim.y + 32, prev1->obj.dim.y);
-+	ut_asserteq(-4, prev1->obj.bbox.x);
-+	ut_asserteq(menu->obj.bbox.y + 32, prev1->obj.bbox.y);
+-	ut_asserteq(-4, prev1->obj.bbox.x);
+-	ut_asserteq(menu->obj.bbox.y + 32, prev1->obj.bbox.y);
++	ut_asserteq(-4, prev1->obj.bbox.x0);
++	ut_asserteq(menu->obj.bbox.y0 + 32, prev1->obj.bbox.y0);
  	ut_asserteq(true, prev1->obj.flags & SCENEOF_HIDE);
  
  	/* check iterating through scene items */
-@@ -548,41 +548,41 @@ static int expo_render_image(struct unit_test_state *uts)
+@@ -548,39 +548,39 @@ static int expo_render_image(struct unit_test_state *uts)
  	/* check dimensions of text */
  	obj = scene_obj_find(scn, OBJ_TEXT, SCENEOBJT_NONE);
  	ut_assertnonnull(obj);
--	ut_asserteq(400, obj->dim.x);
--	ut_asserteq(100, obj->dim.y);
--	ut_asserteq(126, obj->dim.w);
--	ut_asserteq(40, obj->dim.h);
-+	ut_asserteq(400, obj->bbox.x);
-+	ut_asserteq(100, obj->bbox.y);
-+	ut_asserteq(126, obj->bbox.w);
-+	ut_asserteq(40, obj->bbox.h);
+-	ut_asserteq(400, obj->bbox.x);
+-	ut_asserteq(100, obj->bbox.y);
++	ut_asserteq(400, obj->bbox.x0);
++	ut_asserteq(100, obj->bbox.y0);
+ 	ut_asserteq(126, obj->bbox.w);
+ 	ut_asserteq(40, obj->bbox.h);
  
  	/* check dimensions of image */
  	obj = scene_obj_find(scn, OBJ_LOGO, SCENEOBJT_NONE);
  	ut_assertnonnull(obj);
--	ut_asserteq(50, obj->dim.x);
--	ut_asserteq(20, obj->dim.y);
--	ut_asserteq(160, obj->dim.w);
--	ut_asserteq(160, obj->dim.h);
-+	ut_asserteq(50, obj->bbox.x);
-+	ut_asserteq(20, obj->bbox.y);
-+	ut_asserteq(160, obj->bbox.w);
-+	ut_asserteq(160, obj->bbox.h);
+-	ut_asserteq(50, obj->bbox.x);
+-	ut_asserteq(20, obj->bbox.y);
++	ut_asserteq(50, obj->bbox.x0);
++	ut_asserteq(20, obj->bbox.y0);
+ 	ut_asserteq(160, obj->bbox.w);
+ 	ut_asserteq(160, obj->bbox.h);
  
  	/* check dimensions of menu labels - both should be the same width */
  	obj = scene_obj_find(scn, ITEM1_LABEL, SCENEOBJT_NONE);
  	ut_assertnonnull(obj);
--	ut_asserteq(50, obj->dim.x);
--	ut_asserteq(436, obj->dim.y);
--	ut_asserteq(29, obj->dim.w);
--	ut_asserteq(18, obj->dim.h);
-+	ut_asserteq(50, obj->bbox.x);
-+	ut_asserteq(436, obj->bbox.y);
-+	ut_asserteq(29, obj->bbox.w);
-+	ut_asserteq(18, obj->bbox.h);
+-	ut_asserteq(50, obj->bbox.x);
+-	ut_asserteq(436, obj->bbox.y);
++	ut_asserteq(50, obj->bbox.x0);
++	ut_asserteq(436, obj->bbox.y0);
+ 	ut_asserteq(29, obj->bbox.w);
+ 	ut_asserteq(18, obj->bbox.h);
  
  	obj = scene_obj_find(scn, ITEM2_LABEL, SCENEOBJT_NONE);
  	ut_assertnonnull(obj);
--	ut_asserteq(50, obj->dim.x);
--	ut_asserteq(454, obj->dim.y);
--	ut_asserteq(29, obj->dim.w);
--	ut_asserteq(18, obj->dim.h);
-+	ut_asserteq(50, obj->bbox.x);
-+	ut_asserteq(454, obj->bbox.y);
-+	ut_asserteq(29, obj->bbox.w);
-+	ut_asserteq(18, obj->bbox.h);
+-	ut_asserteq(50, obj->bbox.x);
+-	ut_asserteq(454, obj->bbox.y);
++	ut_asserteq(50, obj->bbox.x0);
++	ut_asserteq(454, obj->bbox.y0);
+ 	ut_asserteq(29, obj->bbox.w);
+ 	ut_asserteq(18, obj->bbox.h);
  
  	/* check dimensions of menu */
  	obj = scene_obj_find(scn, OBJ_MENU, SCENEOBJT_NONE);
  	ut_assertnonnull(obj);
--	ut_asserteq(50, obj->dim.x);
--	ut_asserteq(400, obj->dim.y);
--	ut_asserteq(160, obj->dim.w);
--	ut_asserteq(160, obj->dim.h);
-+	ut_asserteq(50, obj->bbox.x);
-+	ut_asserteq(400, obj->bbox.y);
-+	ut_asserteq(160, obj->bbox.w);
-+	ut_asserteq(160, obj->bbox.h);
+-	ut_asserteq(50, obj->bbox.x);
+-	ut_asserteq(400, obj->bbox.y);
++	ut_asserteq(50, obj->bbox.x0);
++	ut_asserteq(400, obj->bbox.y0);
+ 	ut_asserteq(160, obj->bbox.w);
+ 	ut_asserteq(160, obj->bbox.h);
  
- 	/* render it */
- 	expo_set_scene_id(exp, SCENE1);
 -- 
 2.43.0
 
