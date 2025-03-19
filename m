@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54671C35FFC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:58:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0EC2C35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 762C9820AE;
-	Wed, 19 Mar 2025 15:56:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D412E820E1;
+	Wed, 19 Mar 2025 15:56:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RNq2kcyo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="giF2bkFf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03C6881FFC; Wed, 19 Mar 2025 15:56:00 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 9697C820DE; Wed, 19 Mar 2025 15:56:01 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F299C82075
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:55:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DDC481DE3
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:55:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3913fdd0120so3756744f8f.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:55:57 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43cfa7e7f54so5872325e9.1
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:55:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396157; x=1743000957; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396158; x=1743000958; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Nhrbqd+Ura7IlG+cOul1nbZH/bj08awwxkXE+6DwlYw=;
- b=RNq2kcyokbyrK3nD6Uz5uIUc02/Ec2S38CcUGfDYvFW2oP3OngNTNbq7EDOrCIywjB
- 3rs2YDVEFT/vzRTAvDPW5C1Z9d7bgrWLIixVhldzGfS/tu8V0l4mIoRzTsEGrtfS433R
- bMKMMnmkLghvV7aVpH3EJECq3q1GNWeAM0ebQ=
+ bh=voV0qKkzVoOEhB6Uq/4TZr5PQE48ZormDknU3gOFnOE=;
+ b=giF2bkFfd06NXYFFutPz/wLN6CJv6Cr4SC/WRHaW47efG0EfEK9fwkoeU/quN5vyJB
+ rkU38onhq/qht3sVgRxasXtyCtJcVzsddJ0iq8gyNbTmZqYObX8fpdZL3oqImF0WwNWm
+ SYvpRDRVQCWAVxlnJxRchQlNp5nrYVgov0Ncw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396157; x=1743000957;
+ d=1e100.net; s=20230601; t=1742396158; x=1743000958;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Nhrbqd+Ura7IlG+cOul1nbZH/bj08awwxkXE+6DwlYw=;
- b=pxHpIGfcZ89+hmLUeZzQ6BD+yBt2WXJngOgSJbLfVgMzuGkF6AI9XjdX/lCttIbmj/
- CxvZa9DHi/dcuzBU3FCntFN9VvPvqmQfTuYvw5N7F40jtzVeLCN94CAEE8S5HAt/pMUU
- meJfCgMG7suJ0nCg/cgqhkpMf5dr0HFXvIKDxim1U2B/2R5B+i9n0Yv+bZ9qOuiOCnVk
- exMVtOFFCWjGM2Vl8OlLoreNccROu9DQx6xp6FAwbX0bFSrXas/pKyYteXCuHsHyeaTj
- 1Q2H4zvT+xJkJ4FbOf1FfETidLjQUFBNFw2SnFCnFK6mHLO6S5pxuxv8QnEO4gDLEkb/
- xP/w==
-X-Gm-Message-State: AOJu0Yxb06tjE7mwAEg9IsgJDrgRg5mL6AZ5SkZGrxLJGKOOTY+mUyuJ
- gaeJCSUdGYl1N42rJjgO6Vnf/Cgy2sqxnRdirr9M/NkjpEf7Y2XhP1YDioB/twuG1U52YiCBMTY
+ bh=voV0qKkzVoOEhB6Uq/4TZr5PQE48ZormDknU3gOFnOE=;
+ b=UM8fV2l4O+cIMa9HtnGf4MhVSrks8bfKL8mDciBwOfNB+uJeoVjSKnGC3h/3xWwhJc
+ 8TbZO14Ei3My7s6pFAeL6gndFUWdAZhcow5Ccx8xZJZsQUwRHIEIoAm+sWWDFhhHFaUv
+ eWyWCdqIx3r9TZtnEwgj29NhrpcJ7uthXXx7aEQ8Db9WyYjskqTWbGbae60rC2QbK3tD
+ EmP/6GGHT3j0uTcbC7+HXhEKl+AGPaZEH03pa/tc3HYcRPJV7Pd+VP24NHJNsUhHuCo1
+ 9pbans00QF92HCdEzACdId8UMHtWNVMzmR0Zwts+GXYvaC5JEdPxOpkMrz+4kz4wQJWI
+ 8iKw==
+X-Gm-Message-State: AOJu0YxqUEMcYhIKY6WyRxLXRKQLIaxFVtpvqZQOv9CtE0ihfS96du+6
+ IFFqhh/mrSetRMPbbDqPL5Y3IiZjsf+6El5+gH0xBMYDpTKOE1a1Dc50xHE/bF04xOUk63wmSBE
  =
-X-Gm-Gg: ASbGncvDu08TtqdZeor8aQaRn2V7TIDnXxqL4yeybZqWlRxgyR+FmI9wOXdIoECDYBY
- 2Tpm4/KuNxG/5ft5x4xgbDpePOUctEFTYJ7WLrkcKhZG4PSoLfLhdAObjD9EdImUxDd8CmRZSG5
- mlVmLc2wgoqx0coyinhl/vLjK+r6secE+FUK09GzXrcvDBEfbcdMYg2d/y7cOyLQUpL8jAiMDDk
- z0Pc5IyEDkcna6c4ycMdDcP+n33L39X+AQHXVGo1gjlPZkKhAfbi7Awxw9cRRFH3cAUXcEisgCZ
- OrRtOTNIrEttyXL415ogVHgYB1bnMZLaSY027dl5pqC9z8jT7CAd
-X-Google-Smtp-Source: AGHT+IHKz/28LzvyD92sf306DbHbLHDAEn0IwUKxc/BQkPoTNhbQnmSz+KJywUP/+3aicBjdyNkkyA==
-X-Received: by 2002:a05:6000:156b:b0:391:253b:405d with SMTP id
- ffacd0b85a97d-39973b50785mr3156465f8f.41.1742396156891; 
- Wed, 19 Mar 2025 07:55:56 -0700 (PDT)
+X-Gm-Gg: ASbGncsaCn56MYy5KeiY2SY63ewntHZ032ochogPzvsLtQ9wIbaH5PPat7V6Qnirspv
+ AF96nHsTbHtG1vjPj+Q+58on8uAOfTvzX9aOpO7pZcuelzm5trk+FlfyOjzNSKPLZOstQIqlvS4
+ 5fB9anRTB6jTDUDssn/f//+Ccn/k+xsU9XNWGmTJZi9BaoHOEIRKOCx7mJo3Rw+1FR2KLxqOk/L
+ 0xxHrouX3/Qz3CbkcX7GxgtwQfFxTsfB/GD6x9Q4o01A45uwNLg9VltKVO5nCfyrUfLMRQ+ncV/
+ U8/JE+FBEtId7vvnNPl0qhTBtVVYO2hS/JAJNCC0hw==
+X-Google-Smtp-Source: AGHT+IFL/gZWr/aM7bNY8u6BoDiE92ifdPtX3TTVuPHO1Jcue8eazKywWec/BwdOyqAQSuGaEv9X+A==
+X-Received: by 2002:a05:600c:a582:b0:43c:f509:2bbf with SMTP id
+ 5b1f17b1804b1-43d3ba0f49amr58075335e9.15.1742396158486; 
+ Wed, 19 Mar 2025 07:55:58 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.55.55
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.55.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:55:55 -0700 (PDT)
+ Wed, 19 Mar 2025 07:55:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/52] expo: Destroy the cedit expo when done
-Date: Wed, 19 Mar 2025 15:54:20 +0100
-Message-ID: <20250319145512.2391122-16-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 16/52] expo: Create a rendering test for cedit
+Date: Wed, 19 Mar 2025 15:54:21 +0100
+Message-ID: <20250319145512.2391122-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -94,28 +95,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Once 'cedit run' is completed, destroy the expo so that a fresh one is
-used for any future editing.
+Add a test to check that the cedit renders as expected.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/cedit.c | 2 ++
- 1 file changed, 2 insertions(+)
+ test/boot/cedit.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/cmd/cedit.c b/cmd/cedit.c
-index b0eca7b4daf..2e15b063462 100644
---- a/cmd/cedit.c
-+++ b/cmd/cedit.c
-@@ -285,6 +285,8 @@ static int do_cedit_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 		log_err("Failed (err=%dE)\n", ret);
- 		return CMD_RET_FAILURE;
- 	}
-+	expo_destroy(cur_exp);
-+	cur_exp = NULL;
+diff --git a/test/boot/cedit.c b/test/boot/cedit.c
+index 4d1b99bc2ea..df191a09f89 100644
+--- a/test/boot/cedit.c
++++ b/test/boot/cedit.c
+@@ -5,11 +5,13 @@
+  */
  
+ #include <cedit.h>
++#include <dm.h>
+ #include <env.h>
+ #include <expo.h>
+ #include <mapmem.h>
+ #include <dm/ofnode.h>
+ #include <test/ut.h>
++#include <test/video.h>
+ #include "bootstd_common.h"
+ #include <test/cedit-test.h>
+ #include "../../boot/scene_internal.h"
+@@ -220,3 +222,27 @@ static int cedit_cmos(struct unit_test_state *uts)
  	return 0;
  }
+ BOOTSTD_TEST(cedit_cmos, UTF_CONSOLE);
++
++/* Check the cedit displays correctely */
++static int cedit_render(struct unit_test_state *uts)
++{
++	struct video_priv *vid_priv;
++	extern struct expo *cur_exp;
++	struct udevice *dev;
++	struct scene *scn;
++	struct expo *exp;
++
++	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
++
++	exp = cur_exp;
++	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
++	ut_asserteq(ID_SCENE1, cedit_prepare(exp, &vid_priv, &scn));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(4929, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
++	expo_destroy(exp);
++	cur_exp = NULL;
++
++	return 0;
++}
++BOOTSTD_TEST(cedit_render, UTF_DM | UTF_SCAN_FDT);
 -- 
 2.43.0
 
