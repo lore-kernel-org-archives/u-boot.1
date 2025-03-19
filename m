@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EFFC35FFB
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:25:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D77C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:25:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9BCF81C64;
-	Wed, 19 Mar 2025 21:25:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D6878129F;
+	Wed, 19 Mar 2025 21:25:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="JMv+ZC14";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="h4MTe3K1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A678F81A0E; Wed, 19 Mar 2025 21:25:25 +0100 (CET)
+ id 0AD5B81CC5; Wed, 19 Mar 2025 21:25:27 +0100 (CET)
 Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
  [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0C3181101
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:25:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7229C8193A
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:25:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sbellary@baylibre.com
 Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-22403cbb47fso140801225ad.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 13:25:22 -0700 (PDT)
+ d9443c01a7336-223fd89d036so149749055ad.1
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 13:25:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742415921; x=1743020721;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742415923; x=1743020723;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZpKcCOPt3W2gEydPOLcDYc8W71Xw7Mb4WLeBSXEjixE=;
- b=JMv+ZC14t/Xev9rCCUWw/lfWiTqXiLkLknP5upZuNtMfwQXbn42devkUwUyDREZIAr
- Z7Bmh4Z42I6cby6lNlkx5G12U+Fh+W2oO78lVoRGC/xWvF2/G35I3eHdiOzWGaDLZvi8
- t5uN/rlM1oKiskL10bbedRX58QEfw/yGQeTP3znyjKB9xUaK/CgCuYp7fkQ4wI3r1fC2
- NgaItPEL3X6+KBzIjCazyTai096wvpWjJgvdmwLHG1elRySTHl6F1gq2f+2c7cJq0nv1
- wsl+LakhhbPT8g/5C67jMnT60zFM4C8sCwsNnKqWGPwVa8NIpZ7K5zZ781uUMZfce84v
- po4A==
+ bh=Rh5g2SsSoJW5x0eqnBTy1KqRtOqymTlg5NBVyE8KxZ8=;
+ b=h4MTe3K1Zshck7/PMxSX7Lfcjt9vaHJQ6X3TferQ0yTzXOTuGOK94Pb7dGSDOTRzAx
+ v2qf5bgKcJgCkm7DhC9/Tu/G5M0CCw2e856YK9GeL97Va7RvxhDeVz49lL9GrKoNSqwe
+ fM8oRn8pcCZ29bfGMiELMVoUEe5HHFjLFfsiM0yg9yVT2cYgJ2UY96TTFoiC4RBfpa/N
+ IwCplSQYtoBlJpMPrepXUv4I9Oy7kqskE+XcwSJqknovLY1nxHa6y6BwRthgxQcdSG4y
+ Pq4eFH7hUigdWub0bgm7P2TAB81xCHf5GJ9MbU4OT602EuFl1XlbwgQNoK/wMKwcTF2U
+ 6gDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742415921; x=1743020721;
+ d=1e100.net; s=20230601; t=1742415923; x=1743020723;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZpKcCOPt3W2gEydPOLcDYc8W71Xw7Mb4WLeBSXEjixE=;
- b=uhPVfsQ8ynrMXTh+iJazfUM4H7SLNRgVM9dZpDbafV1FkgXAd+4SkvBhOt+Tt4prPD
- Un6HemZtrDKaYAVsBfPzckP9GRgmCJuF09Muq1obDrkiJ9niN5KYv/KTtsobAFq7o1R+
- 7tKG3EvJoL2hnZjqDPfs7sZxsOSgEU8fwZawQC9TFwQQqONU0kKbVafRbwiTp2qTl/Mf
- TU4yrzcDXdogg8Erjhjng4WC9RTawiO3AW/w/yFeDYPTXrvSE4115ru3Q0AKhZ1CH4Sb
- NU+0+RZn18jPLuAOAd8sepRjTFu0mLZfuD11/3+JvbczbdekxWoBb6qAx6Pj7Q8KbbdY
- wJvA==
+ bh=Rh5g2SsSoJW5x0eqnBTy1KqRtOqymTlg5NBVyE8KxZ8=;
+ b=PVoxVtYLOUP9AvdjvdsAMTfYvzzeYTvLFhcd0Bn4hEry3UJLe8odzRkVzI/2if5kja
+ f1WzInMFpArG4vqcqin6OfXzmdC4UFOacjLRxXA0ecof5EruezzCXFcpoHpqOEfcyxOX
+ Z+EZPUwMC89AuDWz6arJQScTaXO6PriS3qCZYKX3vm48iT+EfXGb0lztCp/4Aq43/0Fu
+ SvfhcZc3Z810uea/aiP2QaNefJ6BfvwnciKdCIog+NLLXDPYf3iHTfRgrzikVXRfKIJT
+ amXdSDep4kP0WHPT+jRl1IxdltDJNCgjxMDJ3f8Mx98aWBgQkB7FT2DCpIyISnpHZmRC
+ 17XA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUwMIA95wFqWR8a5vzDqwgOug+hXYLle4wbgQnPvqH3YMywMlanJlSzVoTntTavTq0G4jyHdu4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJ+fXrGykhXLNIMgE2kZzJPsrPnWKEOs4AO9XpWlOPj5BP+cp6
- q35Sgq7gOz/5fXjidi8lSSWpvVmsYbmwXU/DKEJv9D1G5uIdflZPLyVuX80FvbM=
-X-Gm-Gg: ASbGncvDOjSGS+n2WvIbph3xSaNR0u4n/0WWwkr8+mJurqNR04VQHjheICkNXRqyA90
- TQZz5kZt97SovyCwHergZQbxTXx2FKHEcq2ip6y62F8LJEU37r08qLwYyKQN/EMKiTyH76QavV9
- ql4wIPsJinhOLZqljEy7yFLllZNoT7ltqcVjdE9rH6wfuH9GTkc7yH41YevrfFMuOcT96hSsNYJ
- DFbnxdwIq1vPUcCblbaBMS0VfyRmnbhKcLG7EEK+FMwCsw/Z3XtXpl3j6o4cqMa/85TAZgMv0aj
- Uyum+W3Xl0xjkSSXg/lCD86EEwV4hbuBpmtnlj1j+Bbg0CBjEoIQQb4NnGKCDKhznsP1Jse0JN5
- MspKMI6N7iF4yWZIT+Q==
-X-Google-Smtp-Source: AGHT+IHBn4rSa1LKkiwvF+PiDrOvlIrcLegVo9oLdQbtM+rE/hnkua5fxvdaSvitRcMJFbni4FN6IA==
-X-Received: by 2002:a05:6a00:1ad4:b0:736:32d2:aa93 with SMTP id
- d2e1a72fcca58-7377aa4dc65mr1054398b3a.20.1742415921326; 
- Wed, 19 Mar 2025 13:25:21 -0700 (PDT)
+ AJvYcCVNtDcZ04DmA3BorcEjmDq9X+KudENeb2d/OygXyeZQWR5abYQrWX6lhbU2ZW4+/ZCiKvGuo7E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4fiF3Mxqi32jlES3uUPsinlPCG183MClOxj40WAmh/YaKkZGF
+ 7zrrKS1c8y5vhmlgKqjzDF6zDnb09f0fETTAhCg7k/DiAeM7tI6etFIXHtquj2g=
+X-Gm-Gg: ASbGnctonyr1E89gEf71HUSnjYzRm0rvfYIVT4TfuU+iK2bwJZMOxVNhViwGamST2Xz
+ WUY54e4UP4pz/1JOH9D1zP2PdEWvXXERgThdjVdB0mI7PLXJ2sNs5c4Sl9k0mrzB+dXlEF0qOoh
+ dOsShuXJ1xqFIjxAz4QPHnO4TkcW/1PVZJPDobOUel6YXPN01xssMoE54xF5MXC4ktARxqMpCkc
+ 934mqRlys4rAHi9pCOrr9Jg64FAHFQvlsqZ5AJ1M0vHGGSLZtWBzTcHZKmSlKFry5CtuL+xohrA
+ mTaCxlY/t8Xae5+fQmTChas2vJPVGbqMhDkWf2aNBtX5ObqnNiP5vJ0Vnx0TO/DDBn7SVHJlnBk
+ FzQI1Nx2qnK7ZMVcSVg==
+X-Google-Smtp-Source: AGHT+IHJDCZt+dsXUCQkuaCPo1TRxUrxdN8tcJXwHydSlipEKP1W0WV3DL3eslN6LFFpPfauII2K3A==
+X-Received: by 2002:a05:6a00:1885:b0:72d:3b2e:fef9 with SMTP id
+ d2e1a72fcca58-7376d70bb8cmr6587934b3a.20.1742415922924; 
+ Wed, 19 Mar 2025 13:25:22 -0700 (PDT)
 Received: from dev-linux.. (syn-076-088-115-008.res.spectrum.com.
  [76.88.115.8]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73730ca057csm8886757b3a.48.2025.03.19.13.25.20
+ d2e1a72fcca58-73730ca057csm8886757b3a.48.2025.03.19.13.25.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 13:25:20 -0700 (PDT)
+ Wed, 19 Mar 2025 13:25:22 -0700 (PDT)
 From: Sukrut Bellary <sbellary@baylibre.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Sukrut Bellary <sbellary@baylibre.com>,
  Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
  Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/3] pwm: ti: am33xx: Enable Auxiliary PWM using eCAP
-Date: Wed, 19 Mar 2025 13:25:14 -0700
-Message-Id: <20250319202516.3300444-2-sbellary@baylibre.com>
+Subject: [PATCH 2/3] board: ti: am335x: Enable eCAP0 PWM and LCD pin muxing
+Date: Wed, 19 Mar 2025 13:25:15 -0700
+Message-Id: <20250319202516.3300444-3-sbellary@baylibre.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250319202516.3300444-1-sbellary@baylibre.com>
 References: <20250319202516.3300444-1-sbellary@baylibre.com>
@@ -102,254 +102,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In am33xx SOC[1], enhanced capture (eCAP) supports auxiliary PWM (APWM).
-This series adds the PWM driver support for the APWM feature for eCAP on
-AM33xx.
+On AM335x EVM[1],
+1. pin AM335X_ECAP0_IN_PWM0_OUT is used to enable the
+backlight. ECAP0 can be configured in single channel PWM mode.
+If CONFIG_PWM_TI_ECAP is enabled, perform eCAP0 pin muxing.
 
-eCAP HW also supports the capture mode. Currently, this driver only
-supports APWM.
+2. Pins LCD_DATA0 - LCD_DATA15, gpmc_ad8 - gpmc_ad15 and
+lcd_vsync, lcd_sync, lcd_ac_bias_en, lcd_pclk are used for driving LCD.
+If CONFIG_AM335X_LCD is enabled, perform the LCD pin muxing.
 
-This is based on the Linux kernel driver -> drivers/pwm/pwm-tiecap.c
-Version: v6.12
-
-[1] AM335x TRM - https://www.ti.com/lit/ug/spruh73q/spruh73q.pdf
-[2] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
+This is required to enable splash screen support on AM335x EVM.
+[1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
 
 Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
 ---
- drivers/pwm/Kconfig      |   6 ++
- drivers/pwm/Makefile     |   1 +
- drivers/pwm/pwm-tiecap.c | 198 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 205 insertions(+)
- create mode 100644 drivers/pwm/pwm-tiecap.c
+ board/ti/am335x/mux.c | 49 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-index 6e79868d0efc..cbdc87bfccc6 100644
---- a/drivers/pwm/Kconfig
-+++ b/drivers/pwm/Kconfig
-@@ -118,3 +118,9 @@ config PWM_TI_EHRPWM
- 	default y
- 	help
- 	  PWM driver support for the EHRPWM controller found on TI SOCs.
-+
-+config PWM_TI_ECAP
-+	bool "Enable support for ECAP PWM"
-+	depends on DM_PWM && ARCH_OMAP2PLUS
-+	help
-+	  PWM driver support for the ECAP controller found on TI SOCs.
-diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-index e4d10c8dc3ef..5bd9837014da 100644
---- a/drivers/pwm/Makefile
-+++ b/drivers/pwm/Makefile
-@@ -24,3 +24,4 @@ obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
- obj-$(CONFIG_PWM_TEGRA)		+= tegra_pwm.o
- obj-$(CONFIG_PWM_SUNXI)		+= sunxi_pwm.o
- obj-$(CONFIG_PWM_TI_EHRPWM)	+= pwm-ti-ehrpwm.o
-+obj-$(CONFIG_PWM_TI_ECAP)	+= pwm-tiecap.o
-diff --git a/drivers/pwm/pwm-tiecap.c b/drivers/pwm/pwm-tiecap.c
-new file mode 100644
-index 000000000000..13cf50aa2843
---- /dev/null
-+++ b/drivers/pwm/pwm-tiecap.c
-@@ -0,0 +1,198 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * ECAP PWM driver
-+ *
-+ * Copyright (C) 2024 BayLibre, SAS
-+ * Author: Sukrut Bellary <sbellary@baylibre.com>
-+ */
-+
-+#include <clk.h>
-+#include <div64.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <pwm.h>
-+#include <asm/io.h>
-+
-+/* eCAP module registers */
-+#define ECAP_PWM_CAP1			0x08
-+#define ECAP_PWM_CAP2			0x0C
-+#define ECAP_PWM_CAP3			0x10
-+#define ECAP_PWM_CAP4			0x14
-+
-+#define ECAP_PWM_ECCTL2			0x2A
-+#define ECAP_PWM_ECCTL2_APWM_POL_LOW	BIT(10)
-+#define ECAP_PWM_ECCTL2_APWM_MODE	BIT(9)
-+#define ECAP_PWM_ECCTL2_TSCTR_FREERUN	BIT(4)
-+#define ECAP_PWM_ECCTL2_SYNC_SEL_DISA	(BIT(7) | BIT(6))
-+
-+#define NSEC_PER_SEC			1000000000L
-+
-+enum tiecap_pwm_polarity {
-+	TIECAP_PWM_POLARITY_NORMAL,
-+	TIECAP_PWM_POLARITY_INVERSED
+diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
+index 960de15398f8..b661731a038d 100644
+--- a/board/ti/am335x/mux.c
++++ b/board/ti/am335x/mux.c
+@@ -274,6 +274,47 @@ static struct module_pin_mux uart3_icev2_pin_mux[] = {
+ 	{-1},
+ };
+ 
++#if IS_ENABLED(CONFIG_AM335X_LCD)
++static struct module_pin_mux lcd_pin_mux[] = {
++	{OFFSET(lcd_data0), (MODE(0))},		/* LCD-Data(0) */
++	{OFFSET(lcd_data1), (MODE(0))},		/* LCD-Data(1) */
++	{OFFSET(lcd_data2), (MODE(0))},		/* LCD-Data(2) */
++	{OFFSET(lcd_data3), (MODE(0))},		/* LCD-Data(3) */
++	{OFFSET(lcd_data4), (MODE(0))},		/* LCD-Data(4) */
++	{OFFSET(lcd_data5), (MODE(0))},		/* LCD-Data(5) */
++	{OFFSET(lcd_data6), (MODE(0))},		/* LCD-Data(6) */
++	{OFFSET(lcd_data7), (MODE(0))},		/* LCD-Data(7) */
++	{OFFSET(lcd_data8), (MODE(0))},		/* LCD-Data(8) */
++	{OFFSET(lcd_data9), (MODE(0))},		/* LCD-Data(9) */
++	{OFFSET(lcd_data10), (MODE(0))},	/* LCD-Data(10) */
++	{OFFSET(lcd_data11), (MODE(0))},	/* LCD-Data(11) */
++	{OFFSET(lcd_data12), (MODE(0))},	/* LCD-Data(12) */
++	{OFFSET(lcd_data13), (MODE(0))},	/* LCD-Data(13) */
++	{OFFSET(lcd_data14), (MODE(0))},	/* LCD-Data(14) */
++	{OFFSET(lcd_data15), (MODE(0))},	/* LCD-Data(15) */
++	{OFFSET(gpmc_ad15), (MODE(1))},		/* LCD-Data(16) */
++	{OFFSET(gpmc_ad14), (MODE(1))},		/* LCD-Data(17) */
++	{OFFSET(gpmc_ad13), (MODE(1))},		/* LCD-Data(18) */
++	{OFFSET(gpmc_ad12), (MODE(1))},		/* LCD-Data(19) */
++	{OFFSET(gpmc_ad11), (MODE(1))},		/* LCD-Data(20) */
++	{OFFSET(gpmc_ad10), (MODE(1))},		/* LCD-Data(21) */
++	{OFFSET(gpmc_ad9), (MODE(1))},		/* LCD-Data(22) */
++	{OFFSET(gpmc_ad8), (MODE(1))},		/* LCD-Data(23) */
++	{OFFSET(lcd_vsync), (MODE(0))},		/* LCD-VSync */
++	{OFFSET(lcd_hsync), (MODE(0))},		/* LCD-HSync */
++	{OFFSET(lcd_ac_bias_en), (MODE(0))},	/* LCD-DE */
++	{OFFSET(lcd_pclk), (MODE(0))},		/* LCD-CLK */
++	{-1},
 +};
++#endif
 +
-+enum tiecap_pwm_state {
-+	TIECAP_APWM_DISABLED,
-+	TIECAP_APWM_ENABLED
++#if IS_ENABLED(CONFIG_PWM_TI_ECAP)
++static struct module_pin_mux ecap_pin_mux[] = {
++	{OFFSET(ecap0_in_pwm0_out), (MODE(0))},         /* ecap0_in_pwm0_out */
++	{-1},
 +};
++#endif
 +
-+struct tiecap_pwm_priv {
-+	fdt_addr_t regs;
-+	u32 clk_rate;
-+	enum tiecap_pwm_state pwm_state;
-+};
+ #if defined(CONFIG_NOR_BOOT)
+ void enable_norboot_pin_mux(void)
+ {
+@@ -389,6 +430,14 @@ void enable_board_pin_mux(void)
+ 			configure_module_pin_mux(mmc1_pin_mux);
+ 			configure_module_pin_mux(spi0_pin_mux);
+ 		}
 +
-+static int tiecap_pwm_set_config(struct udevice *dev, uint channel,
-+				 uint period_ns, uint duty_ns)
-+{
-+	struct tiecap_pwm_priv *priv = dev_get_priv(dev);
-+	u32 period_cycles, duty_cycles;
-+	unsigned long long c;
-+	u16 value;
++		#if IS_ENABLED(CONFIG_AM335X_LCD)
++			configure_module_pin_mux(lcd_pin_mux);
++		#endif
 +
-+	c = priv->clk_rate;
-+	c = c * period_ns;
-+	do_div(c, NSEC_PER_SEC);
-+	period_cycles = (u32)c;
-+
-+	if (period_cycles < 1) {
-+		period_cycles = 1;
-+		duty_cycles = 1;
-+	} else {
-+		c = priv->clk_rate;
-+		c = c * duty_ns;
-+		do_div(c, NSEC_PER_SEC);
-+		duty_cycles = (u32)c;
-+	}
-+
-+	value = readw(priv->regs + ECAP_PWM_ECCTL2);
-+
-+	/* Configure APWM mode & disable sync option */
-+	value |= ECAP_PWM_ECCTL2_APWM_MODE | ECAP_PWM_ECCTL2_SYNC_SEL_DISA;
-+
-+	writew(value, priv->regs + ECAP_PWM_ECCTL2);
-+
-+	if (priv->pwm_state == TIECAP_APWM_DISABLED) {
-+		/* Update active registers */
-+		writel(duty_cycles, priv->regs + ECAP_PWM_CAP2);
-+		writel(period_cycles, priv->regs + ECAP_PWM_CAP1);
-+	} else {
-+		/* Update shadow registers to configure period and
-+		 * compare values. This helps current pwm period to
-+		 * complete on reconfiguring.
-+		 */
-+		writel(duty_cycles, priv->regs + ECAP_PWM_CAP4);
-+		writel(period_cycles, priv->regs + ECAP_PWM_CAP3);
-+	}
-+
-+	return 0;
-+}
-+
-+static int tiecap_pwm_set_enable(struct udevice *dev, uint channel, bool enable)
-+{
-+	struct tiecap_pwm_priv *priv = dev_get_priv(dev);
-+	u16 value;
-+
-+	value = readw(priv->regs + ECAP_PWM_ECCTL2);
-+
-+	if (enable) {
-+		/*
-+		 * Enable 'Free run Time stamp counter mode' to start counter
-+		 * and  'APWM mode' to enable APWM output
-+		 */
-+		value |= ECAP_PWM_ECCTL2_TSCTR_FREERUN | ECAP_PWM_ECCTL2_APWM_MODE;
-+		priv->pwm_state = TIECAP_APWM_ENABLED;
-+	} else {
-+		/* Disable 'Free run Time stamp counter mode' to stop counter
-+		 * and 'APWM mode' to put APWM output to low
-+		 */
-+		value &= ~(ECAP_PWM_ECCTL2_TSCTR_FREERUN | ECAP_PWM_ECCTL2_APWM_MODE);
-+		priv->pwm_state = TIECAP_APWM_DISABLED;
-+	}
-+
-+	writew(value, priv->regs + ECAP_PWM_ECCTL2);
-+
-+	return 0;
-+}
-+
-+static int tiecap_pwm_set_invert(struct udevice *dev, uint channel,
-+				 bool polarity)
-+{
-+	struct tiecap_pwm_priv *priv = dev_get_priv(dev);
-+	u16 value;
-+
-+	value = readw(priv->regs + ECAP_PWM_ECCTL2);
-+
-+	if (polarity == TIECAP_PWM_POLARITY_INVERSED)
-+		/* Duty cycle defines LOW period of PWM */
-+		value |= ECAP_PWM_ECCTL2_APWM_POL_LOW;
-+	else
-+		/* Duty cycle defines HIGH period of PWM */
-+		value &= ~ECAP_PWM_ECCTL2_APWM_POL_LOW;
-+
-+	writew(value, priv->regs + ECAP_PWM_ECCTL2);
-+
-+	return 0;
-+}
-+
-+static int tiecap_pwm_of_to_plat(struct udevice *dev)
-+{
-+	struct tiecap_pwm_priv *priv = dev_get_priv(dev);
-+
-+	priv->regs = dev_read_addr(dev);
-+	if (priv->regs == FDT_ADDR_T_NONE) {
-+		dev_err(dev, "invalid address\n");
-+		return -EINVAL;
-+	}
-+
-+	dev_dbg(dev, "regs=0x%08lx\n", priv->regs);
-+
-+	return 0;
-+}
-+
-+static int tiecap_pwm_probe(struct udevice *dev)
-+{
-+	struct tiecap_pwm_priv *priv = dev_get_priv(dev);
-+	struct clk clk;
-+	int err;
-+
-+	err = clk_get_by_name(dev, "fck", &clk);
-+	if (err) {
-+		dev_err(dev, "failed to get clock\n");
-+		return err;
-+	}
-+
-+	priv->clk_rate = clk_get_rate(&clk);
-+	if (IS_ERR_VALUE(priv->clk_rate) || !priv->clk_rate) {
-+		dev_err(dev, "failed to get clock rate\n");
-+		if (IS_ERR_VALUE(priv->clk_rate))
-+			return priv->clk_rate;
-+
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct pwm_ops tiecap_pwm_ops = {
-+	.set_config     = tiecap_pwm_set_config,
-+	.set_enable     = tiecap_pwm_set_enable,
-+	.set_invert     = tiecap_pwm_set_invert,
-+};
-+
-+static const struct udevice_id tiecap_pwm_ids[] = {
-+	{ .compatible = "ti,am3352-ecap" },
-+	{ .compatible = "ti,am33xx-ecap" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(tiecap_pwm) = {
-+	.name   = "tiecap_pwm",
-+	.id     = UCLASS_PWM,
-+	.of_match = tiecap_pwm_ids,
-+	.ops    = &tiecap_pwm_ops,
-+	.probe  = tiecap_pwm_probe,
-+	.of_to_plat     = tiecap_pwm_of_to_plat,
-+	.priv_auto      = sizeof(struct tiecap_pwm_priv),
-+};
++		#if IS_ENABLED(CONFIG_PWM_TI_ECAP)
++			configure_module_pin_mux(ecap_pin_mux);
++		#endif
+ 	} else if (board_is_idk()) {
+ 		/* Industrial Motor Control (IDK) */
+ 		configure_module_pin_mux(mii1_pin_mux);
 -- 
 2.34.1
 
