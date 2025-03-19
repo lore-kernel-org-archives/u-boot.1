@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6348CC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 261C3C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:24:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4E8381A0E;
-	Wed, 19 Mar 2025 15:20:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A47DB81D5A;
+	Wed, 19 Mar 2025 15:24:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a1wvh6yZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HXdRDt5a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7026081D5A; Wed, 19 Mar 2025 15:20:46 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 76E9B81DE3; Wed, 19 Mar 2025 15:24:45 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2938C8193A
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:20:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 280C381A0E
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:24:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-22403cbb47fso130586565ad.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:20:44 -0700 (PDT)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-22435603572so113789095ad.1
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:24:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742394042; x=1742998842; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742394282; x=1742999082; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bqmmQMrAhqt9XQqNaN9gsIpD0NEGu/higblhVEoJTKk=;
- b=a1wvh6yZqlP/o9AgnssdnZ6Lon2NZqstWI/5AXSmZPBL525Kuccurcu8exevrfUorU
- Umrqb21EICz6Tv3C1befpTCLg9/wCYTNBTdyJ1A73QZoW9Dk7KBDbjIvlTIhCzeVzJLW
- lajxgYGrSz+Z+LkO7aeXkfcYcLHI5w18BmQvY=
+ bh=4LXzK/1omymmmouWUfQqrPoudM8oUCyWKpL11E6jqGI=;
+ b=HXdRDt5akVl96Ew/DpJslTx+bQqv1c3wuENV89ko/2E2yqgatfpqeLRQEXyklDbJ1f
+ 9IRmS8hjUbi08/EiNJF9W2DnTpE3vx9Ruy+jodqEoAhHbzOpLzuTr8Dm/B6YknhwaRj3
+ MXTGp0jeNcuFLVpUxdzvg1INCU6WJ/e/4OXaw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742394042; x=1742998842;
+ d=1e100.net; s=20230601; t=1742394282; x=1742999082;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bqmmQMrAhqt9XQqNaN9gsIpD0NEGu/higblhVEoJTKk=;
- b=Wkn1fPAds3jwxry9NKeBi7IEzQJOZsoi0r7gXkvrn3/3TlOY88Lb6fmtl57F5Iqnsk
- F1NA/gW6lSHOGB4dxDV2H36I/Jm2vp9zDAx++no3j9SHIuCniZnGH8N3uBEhVsVsqrbo
- FLCelUUVhwTDuttUIoxlrRrSiOn+hjndajybWXhH11YPtOeSOUAVttzwsa/GKb+7NwcL
- qvC28mZN16OC3CfqDtvG63m96l77k+jFWzyF6rZ1t2CZxHfEyTcor7NGfohy2Oip8m6i
- ZS4SZFUDLzu5uD+4Mmjju/BII6DALzyANaf483mE2BjgfldS0Szb8JJuGYSeyK5gcZTq
- NCeA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtbXTMS3qM6Vm+NbiTEmdgfIGuz7XgOSx8NHPAWNRO36dHX8znosnTiUnw//6ukzu2zpIFU8M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9+IEnGxnkAGPbr4pxwLlnk2V+yJwKD0FoRCUuBy2FaYp38V3D
- MbgdV+OLq3I+GBMGXHwd2yhYSiiCGPOfyXpZ9mksfwd1p0TlF9uvRp9nHPRyrBk=
-X-Gm-Gg: ASbGncuPkrh3BByfxI63BFQzJDTUgwQrJBkr4aTc7cGbB01LMCUpFgz3sGntBXg6T4W
- 5bELZ493HRCESw6u4rrsGkqZjI8Wuh4lfJkZJKzAlfKmW6kyji1g7cIM8/5stUK3qgk8REzPhI0
- QU0TuMzDSVMbL9DXak19S/5fROrrX7gS/eUEt9tZWm6yly9BVRjpV2cnplpqt5BS4Yp/hrcoIJK
- A0lqEATbC11dMY1P/Ipp6ZkTR6PbVQz0HEngqQqyNNiQ13NaC47uwVksh8enQzt7Lf5/2XoaIc1
- 4pROkMHgYywfS7q57pjM2kawfUm1d6RHTyJXtNEu+/TtwA==
-X-Google-Smtp-Source: AGHT+IFb8+lFaltgPjWMvYnRFn6tdNk95l/jBcepMTT6Oyjjsy1jPwqKFoiQo6KxhxO0rqO0S+B3ZA==
-X-Received: by 2002:a05:6a00:3cc3:b0:736:4b6d:82dd with SMTP id
- d2e1a72fcca58-7376d5f26c5mr3860351b3a.2.1742394042390; 
- Wed, 19 Mar 2025 07:20:42 -0700 (PDT)
+ bh=4LXzK/1omymmmouWUfQqrPoudM8oUCyWKpL11E6jqGI=;
+ b=wUiO71lfVzjZsVqxo4Nz7RGs0YhVDSIfPctT3KVy6ne9YutKvxUQymdxAlbkz4LQJg
+ YPxe05lSbk9BpMbwZ/X610rY8fG+Y2Lqz26xrdcP9RAo1lARQ0kBQBs+vSKPJW3H20qp
+ QP5okAxgFQHCmVW/ILg8GeW+1t8+4L7qi99bxN1oVYfTa9VNptw2XQC3ooTuxcjGV6lj
+ ayhLG0BCBmdELgeTZOFtNswlykiED9ihQk9sIC50VWdKSA8jvvRvq2LWfu9PTuw+hXfC
+ 9okAKl9ppqnviKuPBaUFE3vtNn2yxmWtdWB9PnKjFFNdKLgyCb84op+jKXhyt5xmN0GW
+ wKXw==
+X-Gm-Message-State: AOJu0YxBxHlznkdD3jo7Ycf342Lhest2VtfeUHXy5LdDeMr4IXlpRT6p
+ W3Tw5Ox7GjkEDPKZQmyIPYwbZpxQCZ215F009pdp8hXXgi3i4ZovjtATHM8ZxpQhs9DAtUNy/b4
+ 1
+X-Gm-Gg: ASbGncuxGS8pXx6b747l1QrQgiKBhL5sGXwMSjbmzBGc//lJiFy0i5QmOkstJo/AefS
+ w2Ae9WF/shqM9gNG8bwHZKJk3fqbhxgrxreD0UsiVP1HBF0Y0z+g0MBh7Ke/DSPHomIfkhqfeAW
+ 4YZBHpF3lllJigCfz+A2g1veKJ4BGUamiXthwH7sVDq2PN3W3GhpzTyGfgdxL92eeKSfwQASZqb
+ 9DLaaUQg2aBcHMCWYBsQXQBMnAfS15TKVHv9rl/eXllVUBEomjHooIzkDO1fs8ieQTOcwUy7Yga
+ 41AfUzG/WNwkO6ElAExcIQeF0NyOSIg6+XNgCHW6lGKquA==
+X-Google-Smtp-Source: AGHT+IE1UcvhLhBoDCWujx7cPm5VCxSjxvnPRwVtF2op+ijP0R8Sl/wyBMgZguDI2Vd5Ji/1DTmWJw==
+X-Received: by 2002:a05:6a21:492:b0:1f5:8eec:e500 with SMTP id
+ adf61e73a8af0-1fbeb185eecmr5206055637.9.1742394281598; 
+ Wed, 19 Mar 2025 07:24:41 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711695493sm11978107b3a.137.2025.03.19.07.20.40
+ 41be03b00d2f7-af56ea7daddsm11010342a12.54.2025.03.19.07.24.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:20:41 -0700 (PDT)
-Date: Wed, 19 Mar 2025 08:20:38 -0600
+ Wed, 19 Mar 2025 07:24:41 -0700 (PDT)
+Date: Wed, 19 Mar 2025 08:24:38 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: Re: [PATCH 6/6] lib: Provide a signed version of simple_itoa()
-Message-ID: <20250319142038.GE2640854@bill-the-cat>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 3/6] test: Add a test for strim()
+Message-ID: <20250319142438.GF2640854@bill-the-cat>
 References: <20250319115911.2204045-1-sjg@chromium.org>
- <20250319115911.2204045-7-sjg@chromium.org>
- <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
+ <20250319115911.2204045-4-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gYsP2tCsJ5k3V4Z5"
+ protocol="application/pgp-signature"; boundary="rfiwxZ+/CvvKMN2G"
 Content-Disposition: inline
-In-Reply-To: <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
+In-Reply-To: <20250319115911.2204045-4-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,45 +97,88 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gYsP2tCsJ5k3V4Z5
-Content-Type: text/plain; charset=iso-8859-1
+--rfiwxZ+/CvvKMN2G
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 19, 2025 at 01:12:30PM +0100, Heinrich Schuchardt wrote:
-> Am 19. M=E4rz 2025 12:59:08 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >In some cases we want to show a signed value to the user without needing
-> >to use the full printf() implementation. Add a new version of the
-> >simple_itoa() function to handle this.
->=20
-> Where will this be used?
-> Why can't printf be used?
-> Why would this fit into this series which is about test improvements and =
-not about functional changes?
+On Wed, Mar 19, 2025 at 12:59:05PM +0100, Simon Glass wrote:
 
-It would be more fair to say that only one patch in this series is about
-testing and 5 are adding otherwise unused changes to functions that
-presumably are used in some later as yet to be posted series.
+> This function trims whitespace from the start and end of a string. Add a
+> test for it.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  test/lib/string.c | 31 +++++++++++++++++++++++++++++++
+>  1 file changed, 31 insertions(+)
+
+This got me to ask "What even is using strim and where did it come
+=66rom?". To which the answer is:
+- A few places, but it's probably reasonable.
+- Linux, pre-2011.
+
+I say the latter because we're missing a bug fix to the strim function
+that's been there since 2011:
+
+commit 66f6958e69d8055277356d3cc2e7a1d734db1755
+Author: Michael Holzheu <holzheu@linux.vnet.ibm.com>
+Date:   Mon Oct 31 17:12:37 2011 -0700
+
+    lib/string.c: fix strim() semantics for strings that have only blanks
+   =20
+    Commit 84c95c9acf0 ("string: on strstrip(), first remove leading spaces
+    before running over str") improved=7F the performance of the strim()
+    function.
+   =20
+    Unfortunately this changed the semantics of strim() and broke my code.
+    Before the patch it was possible to use strim() without using the return
+    value for removing trailing spaces from strings that had either only
+    blanks or only trailing blanks.
+   =20
+    Now this does not work any longer for strings that *only* have blanks.
+   =20
+    Before patch: "   " -> ""    (empty string)
+    After patch:  "   " -> "   " (no change)
+   =20
+    I think we should remove your patch to restore the old behavior.
+   =20
+    The description (lib/string.c):
+   =20
+     * Note that the first trailing whitespace is replaced with a %NUL-term=
+inator
+   =20
+    =3D> The first trailing whitespace of a string that only has whitespace
+       characters is the first whitespace
+   =20
+    The patch restores the old strim() semantics.
+   =20
+    Signed-off-by: Michael Holzheu <holzheu@linux.vnet.ibm.com>
+    Cc: Andre Goddard Rosa <andre.goddard@gmail.com>
+    Cc: Martin Schwidefsky <schwidefsky@de.ibm.com>
+    Cc: Heiko Carstens <heiko.carstens@de.ibm.com>
+    Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+    Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
 
 --=20
 Tom
 
---gYsP2tCsJ5k3V4Z5
+--rfiwxZ+/CvvKMN2G
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfa0q8ACgkQFHw5/5Y0
-tyx2sQv/SgNRbYy5EvdOqB4VAnNVeCTrmv7cPGrwDqCsUJ3Mn8GQ2M4AdaLFpOpS
-r88AIuuz08LpGeX4COJgyllSI3TBcmSGPo4HDOVLkLIv/dc6IymYNJQFu1DqKlx5
-S6veudmOe/dYTrTqHtsI3NbdDdi7y25HS+CJnrw/9rGOxoB+idgE6ABy+PCoLJoC
-xXB4zXRZ2OzPbWcbEl6vAYc2aKPGy2ZpPIAt4z/o2LjBa3XexmUYxzW+sxdTtMIK
-M16jh2CGWrd+UsizVLSfobLDPI8ug+mcvt7dZyL/djLqKsQiavcinKe3kWEOE5sC
-Q8a/BO/zUSSEYez2nsakiIdENCznuVhGYrH2Vt9ORAbEk2caODfgyakOEkDaNYt6
-ml9PeLkYtA3QVQn5MRNWeWf0LtK/a9uHw3BLf7Yx7QwL5KklLvmZQRMkMVZaLP0W
-GL+RZVyVgphtZf4/aX2SuOVv1DMI1uTGsrleBm3MXgaHqWhFWMk/Lzep1uKF6iD0
-wZc+ueRd
-=PH/m
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfa06YACgkQFHw5/5Y0
+tywS2QwAmUM1/WW3lDLgMCeh5PTI3IfIAsysVmKyu9lYZFlthn/Rkq4+OqTpg9ok
+gnmmoJIYTOiC/TL8YqAlqDE5q1KLmFJVszqU9VhDmZg9XxdI8/zoTjWuFJhYZ+ha
+9uO/7d8IeY2wKmuDEy6abdNIv/GVxCgqtsCJ5XS/o5QSTDl6KlfjYKuMgr4wRPy3
+tPcke00BVBjd4BJezD6KriqssEP1ZZTzTcYBfB4YW5DFtlwCqB6ltuiAQdQmXGxd
+b4BxSLXrTsIzR4O45Cxqjh3LO542B5Dw48ezwld0pb2qeNiF3hpJR/XYXDRsJ1rI
+ZZUrWNowdDP/iUSGjSUmnvnYgXsJPfYSFUUKO/90Z4U4zr6Vkxy78TxZzxTHSHyR
+4jorFJKpDtCc6HtdXirAmMDnpwoNRTceaYe9oPFUGKQPYb9Tivqo4lVUxDNbcwsu
+6qqPC23g/JNLlaGW5kiuAeLF/f2uj4tvodJb3mks8hKooPx39cD0WilzhqizKI4J
+d/3vwc7n
+=/F72
 -----END PGP SIGNATURE-----
 
---gYsP2tCsJ5k3V4Z5--
+--rfiwxZ+/CvvKMN2G--
