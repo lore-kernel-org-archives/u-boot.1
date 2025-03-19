@@ -4,83 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E23C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:45:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FC6CC35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:52:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43AEA81E5A;
-	Wed, 19 Mar 2025 15:45:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 20A7C81DFA;
+	Wed, 19 Mar 2025 15:52:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OJ0rmu3k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ArOZursY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E6B81FBC; Wed, 19 Mar 2025 15:45:03 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 5EDAE81DED; Wed, 19 Mar 2025 15:52:27 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E575581DCC
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:45:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E0EE81DCC
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:52:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-225e3002dffso80859425ad.1
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:45:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2ff694d2d4dso6659172a91.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742395499; x=1743000299; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TFJ1MQOgIM7kLsbQbExOmMu7IFs5QG0fyoX/i0CSwho=;
- b=OJ0rmu3kj7bgrir4UKCHZqGIRiwRumfPk96TEg1QPUfMRWRfwqVP+bI+mkJU0QCzjH
- EFotoCCsFlY7ouyMTpalIBbP/+orXlllqeAVYN9RPK5R7rqsavz74H+KvVF9YvvqG4se
- gXpcTJAtQ3NwCGsRowGvU/xKQyuXZI4cNI5CQwdNNY3T9hNP7HIldLx0AGcWG56DPEC1
- 84YtUm/irgJheqvX36O4hVoTxBJgL+SEkFlgmcidJ13tWR8aXjdelDcnVHtxPNFbid3Y
- 8nWDGSl6oZyoLRNLUMeoStLW6pjdUgOly/K/fCaMZ+gURsQRi+cAWVeC6Kf45b4QnNBv
- vB9A==
+ d=konsulko.com; s=google; t=1742395943; x=1743000743; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=V/ib0xLUUxVUPUYeCKaAnc7b27TS8of0vdHuy3F0Qpg=;
+ b=ArOZursYQGMiPPHss7DnKyyrAEjGLdrwxrhf58wq43UFurmp1zRkP11IVs42uycUf+
+ xf2bThMRXl3LbGlHDxVzWxsWNamXVFEQmfG65jl+lA01ZZAz1+3j+5zupep1cL0l0rLb
+ R/sC4hBGquZH0HPtCf5ukZ22YbLv7mK/X6wKM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742395499; x=1743000299;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TFJ1MQOgIM7kLsbQbExOmMu7IFs5QG0fyoX/i0CSwho=;
- b=cCzfXZ7UDDI4IUiQH8oHq6F6kbSmn1CxYb3SBOVg2BJzNa7i5OM3Z0iC0dJHDNbJQb
- HA0caGxZ+6bh4jOs9OrzflOzRlg6xdPiJdAhSX78QIYscAwAAkMnHTQwOdLgnY7PjPKO
- 5FxP+vt7VxpF+IxINW1BR4GgLTWCB/scesIZZ7oQpVGipcYSiQXpCy+PHAqudK4SiHZ3
- krvF/wCfCwlZJzfJntwFmWNx16aZaCnShgAD69dHxtQGQapINvPXW1BGY6S7tRoTOFQ8
- pl9EuFep3iYB/4U3HeM7DcBGmWwVuRWsuqHqwe4aj5yQ19oHMDv9l0Utnx+BILvAphvu
- M+yg==
-X-Gm-Message-State: AOJu0YyDiWSolocnsuImXAGdajsFRq0JMRpHgwlZuqcV6ompi3U8Lc5D
- oygnENlrmhOjO6FIl/hYfnAjmVH/yBNIgAekx388Uihbc9CqukXmtuLaqNa8yIEq3A==
-X-Gm-Gg: ASbGncv6AUCt3GkoPyTDMzrQ6Ffiueq7AN4xB84rOOU2LE5BV1kQ97RJeMG9qNr4kN1
- n1zuzR4byz2GsHhkoYxDJnYMEmEaIfYlcSR8DuGKBtRSqJEPbGbAe0iSE65VeJxM1qVNZV1OMQn
- OzB+7c2sY9V/xb09jAGuB0plpBsGU/qUmiRVIk0aCkGfLjRF1v/XfYOp7O5JXuOtw9BjTiosse/
- D+sM/GMCuopb76wKlgSMCmkyxRINs4yf7brF5lktC4w6OHDRcs04y8wQxMbE6zRJF9bnxTdGIWa
- hBl46qlmbNuo6WjIMdxM9zP/lK/ZIMu+gOSZ4vl5LxHufgdk6hZoRWc=
-X-Google-Smtp-Source: AGHT+IG288YqiIeM+033OIKhhAGkOnjfba1+YLhcT9QVLmFW2OzOKMH7Wt8Y7V4AAJFFIO4lr+VdQg==
-X-Received: by 2002:a17:902:da85:b0:224:1c1:4aba with SMTP id
- d9443c01a7336-22649a67ed8mr40670655ad.50.1742395499445; 
- Wed, 19 Mar 2025 07:44:59 -0700 (PDT)
-Received: from adriano.. ([186.175.132.62]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c6ba734esm114812915ad.141.2025.03.19.07.44.57
+ d=1e100.net; s=20230601; t=1742395943; x=1743000743;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V/ib0xLUUxVUPUYeCKaAnc7b27TS8of0vdHuy3F0Qpg=;
+ b=RM36R6AZlTJbDDkJmvtMgc1tbBL4TDtmnIajWJ3qwtKIl0MwQShJ/Y6DcmZUlFzt0a
+ cGH2g2BMOJuzU08AFM0faxFP9rqz1tGZw66ydwprS7Bl81yo7SiEhH95Ji1uHaJrS4TC
+ G3IA8pKOkl4bqoPYyMPCwMJXydwAkdgxijFSUutOjvt1xmDWGYifpaN6yIJ7WxhYhdbD
+ 8jvd3MfeM3DmEFOXrH5I4FYUNGaTKjho5e0dpbT8BIDksqTUitDqD74L4Qk0U3smsF4u
+ nUqsxyml+xgUJ25MVwM4bVdnZv9D6dVkVgnHBdLzZrZwuVN0A0Axl516SYY3IQfIzSaH
+ wbPw==
+X-Gm-Message-State: AOJu0YxXmdepLfDe1NbkO0ynbHdoQcODOm5xUYsL8coFxb4ArnZPYiUK
+ /dUf0/Wh9mCV4qz2g3dZkKdiOkLZow9+WDytJdUO7Iusn5oMWOS4dQiOpA22fkE=
+X-Gm-Gg: ASbGncuoM2yEid6tCZwTn9KX3jqm+OJjbmNy0QYM4E30bOiAp+7LFfGPmrmZLq/baDN
+ UsYAg/c1gpPRwdX2h9+HkNEtE5ywQzLszCS4vEVD3PhhSdxi2rpvNYrY0TNTd5Fnqk08xN1FmWX
+ 8qpvfv7erFWReV1fJivVKTxq9XOhCFqs48ochzkQEBvQGYgF2aMQ0Ic/46SY1y0IYggAUEhEwto
+ mvsZQilobEiozNqTskk/kzzLiB1qtey1WOckgIcQXxUQ8OiROvqKOPv6O1HqGVKdu2aobtvvvfD
+ hixKqtjL8Mh+S/DlJsdrthBdgqE3Iz5nuHmbbJdZU8+7zw==
+X-Google-Smtp-Source: AGHT+IHwud6aSn9hOhQHIyd5muZrMKfUDqw4Ai4/53s6p8PXidRZWDLcZWkG+02QdH0KBb/EG6e2QA==
+X-Received: by 2002:a17:90b:55cc:b0:2ff:698d:ef74 with SMTP id
+ 98e67ed59e1d1-301be205905mr4165598a91.26.1742395943480; 
+ Wed, 19 Mar 2025 07:52:23 -0700 (PDT)
+Received: from bill-the-cat ([187.144.138.125])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-301bf5a1b6bsm1673359a91.29.2025.03.19.07.52.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:44:59 -0700 (PDT)
-From: Adriano Cordova <adrianox@gmail.com>
-X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
-To: u-boot@lists.denx.de
-Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v2 3/3] bootm: add support for initrd in do_bootm_efi
-Date: Wed, 19 Mar 2025 11:45:01 -0300
-Message-ID: <20250319144501.32277-4-adriano.cordova@canonical.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250319144501.32277-1-adriano.cordova@canonical.com>
-References: <20250319144501.32277-1-adriano.cordova@canonical.com>
+ Wed, 19 Mar 2025 07:52:22 -0700 (PDT)
+Date: Wed, 19 Mar 2025 08:52:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Julius Lehmann <lehmanju@devpi.de>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 09/17] test/py: Add a test image for Ubuntu
+Message-ID: <20250319145218.GG2640854@bill-the-cat>
+References: <20250319143820.2385092-1-sjg@chromium.org>
+ <20250319143820.2385092-10-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aogxCqBkuuZ4fd5F"
+Content-Disposition: inline
+In-Reply-To: <20250319143820.2385092-10-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,32 +108,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass a pointer to a memory mapped initrd and its size to
-efi_binary_run. The EFI stack will register an EFI_LOAD_FILE2_PROTOCOL
-for the next boot stage to access this initrd.
 
-Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
----
+--aogxCqBkuuZ4fd5F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(no changes since v1)
+On Wed, Mar 19, 2025 at 03:38:03PM +0100, Simon Glass wrote:
 
- boot/bootm_os.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+> Add an extlinux image that contains a few Ubuntu entries.
+>=20
+> Increase the number of sandbox-USB-hub ports to permit this.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-index f403f352be1..35a32f8c912 100644
---- a/boot/bootm_os.c
-+++ b/boot/bootm_os.c
-@@ -508,7 +508,8 @@ static int do_bootm_efi(int flag, struct bootm_info *bmi)
- 	ret = efi_binary_run(image_buf, images->os.image_len,
- 			     images->ft_len
- 			     ? images->ft_addr : EFI_FDT_USE_INTERNAL,
--				 NULL, 0);
-+				 (void *)images->initrd_start,
-+				 (size_t)(images->initrd_end - images->initrd_start));
- 
- 	return ret;
- }
--- 
-2.48.1
+I don't understand what this test adds. In neither the current Fedora
+test nor in this new test are we actually booting something, we're just
+taking a sample extlinux.conf and making sure it doesn't fail. Is it
+that we're testing in a useful fashion now having two labels?
 
+We should probably be clear about what we're doing in the tests and
+instead of adding seemingly arbitrary distributions add an extlinux test
+and testcases.
+
+--=20
+Tom
+
+--aogxCqBkuuZ4fd5F
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfa2h4ACgkQFHw5/5Y0
+tyxnhQwAnp7TZK8L2yP/mlvq0cPV7Czbqzs9YmQjtuO/Zj4ADr0mpJgU69PgorxE
+/aDF7pSsR1Zv8jiSWvtaZ0w1omsUWS+o2Vq175blTFgj5gAbnLDMSODWUOiSOnhh
+cBrobJkqJEIGUaNPKZeFuzqjEVBwttBWRxt1XhGz7I8YxeK00ZDUwqcDBdIZLkKy
+o9Di0AaQVlD3nMkvxjaUz6aP2gDAj6QsdsUtvna17oIdQ9dvtcxJj5eWA7pZgoHl
+n7Yu+t3k2/rEb/Kw0nkjjXKzUlJaK+Kb+d1/TzPlTg86E6QWB+fn6c/PwyAt21ja
+/gq0lJhNFZKk1LiLrcNMSyY7R4zhT9yTQe7W60ASq7Mmiqm/j73eW1PRC9Bh5d32
+iqCyxH1BCwvQChmM6oN5oQITypdCBIXoMcAMGNcndsQPz+HMP7abcH5z3IS4O8uw
+Whw2Wm4iSRmVlb/JReaOY979xrJXDSiUE6mULqVD6SWGhf9nXg5oVIG9W2/TWYdW
+SBh18MHy
+=Xlou
+-----END PGP SIGNATURE-----
+
+--aogxCqBkuuZ4fd5F--
