@@ -4,67 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1077BC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 08:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45083C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 08:48:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C8CA8197D;
-	Wed, 19 Mar 2025 09:48:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C976A8129F;
+	Wed, 19 Mar 2025 09:48:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M+VUhi1k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R2rq+joq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BC6181101; Wed, 19 Mar 2025 09:48:02 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 088DB81B52
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 09:47:59 +0100 (CET)
+ id 7667981101; Wed, 19 Mar 2025 09:48:47 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 362418141E
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 09:48:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=f-akthar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52J8lwvK278795
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 19 Mar 2025 03:47:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742374078;
- bh=uIyo3b7+acHUVvUuF5wB350XwXFnPdBK9mVuMysk7yM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=M+VUhi1k6L9Kz4A4LTI3sozQ/WFgABehf5sqpH+BjdaJ8wAZsmfIlJeNlARd9w6Yd
- KAkl6L9moH8DLxw/NfwlTORRgD/KSTvXZ9kz/DcemWR5ug3w4Z5lDs//j0HMP9ugMs
- EA2mkbmFHlzB7RCLOUU8NBvxZEF1lwQ0TQdk9lUw=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52J8lwks120725
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 19 Mar 2025 03:47:58 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Mar 2025 03:47:58 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Mar 2025 03:47:57 -0500
-Received: from localhost (fayaz-hp-z2-tower-g4-workstation.dhcp.ti.com
- [172.24.227.181] (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52J8lv39054658;
- Wed, 19 Mar 2025 03:47:57 -0500
-From: Harsha Vardhan V M <h-vm@ti.com>
-To: <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <vigneshr@ti.com>, <k-malarvizhi@ti.com>,
- <kamlesh@ti.com>
-Subject: [PATCH 5/5] doc: cmd: Add fuse writebuff cmd documentation
-Date: Wed, 19 Mar 2025 14:17:14 +0530
-Message-ID: <20250319084714.335777-6-h-vm@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250319084714.335777-1-h-vm@ti.com>
-References: <20250319084714.335777-1-h-vm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e64405b3b9aso1752947276.1
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 01:48:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1742374124; x=1742978924; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KJpNcPJgPlPjB0B8OEP1C510gR1prZ6RrJGYA3Pmi6Q=;
+ b=R2rq+joq126syfjy6sEZrqlRYC6fiNAWgCYwiHEbS3zHbX54e+QwoLNYVWmn9eyl9z
+ OLPRY6TKE3oh0y337D8LH2Dstms1wSSX5fifY2NVm4LnXIR+AD4Y5hWGAlxFveB2gFi8
+ aHenxToA/b7WwQc+Hnb+0MZ4tUAto0mOlfJAVKd+tJV8xyewTmSivoIxfAJWoAY5jQ3i
+ 7EkJ+s4FCjgwiahz4GUwNVHMFGPTp7fk8yJQaMfqpqTd6JHHWCGeHC3/yNk8Nxqmq4GC
+ wfzdVUU6DcY8ydVClJ2JeOmb+inXCv9tHp4Ffk8AYDAmrATxwVbDPPz4r5gJLpO8+gAs
+ 1Y4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742374124; x=1742978924;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KJpNcPJgPlPjB0B8OEP1C510gR1prZ6RrJGYA3Pmi6Q=;
+ b=pfqsRiRVDM5YhDbd8CJcOWfzmnCkJygAlJg0xLcPGpVxhkLh/0aoK3+NWmt8Vjs1ga
+ WxpH9kgviTEfQ3ey9szA2f9O7Rjd3RqGI1CWUSqQ6lwoTSIUxVgCBEi4wLzbROjQWU58
+ qUGC2m+nRa6V91goy5hJQ0kkSbuWyvR1By+N5HRSHQEo28ibr/sU/IhCMqUVmkoaEhDr
+ TYK43iOy9yuu9/ZdhKvEoMYufHEvijB4zUueiYTwjlXBTtb0saMehAkP11t/hCD6mlNT
+ e2ibwze/T1Urq3tEzaRhClgw3giEqGmxKmlXb6fbTr5nTKj3D2fkxaovM3PcojncOV+x
+ qO/w==
+X-Gm-Message-State: AOJu0YyLc4t+njfFHK/5Th2ltYpJOym5TTSCPHXgnB7zmJI9ihSw3a27
+ UTYuD+3aWgv7XNvAa/KZgoqcyfGr3nX49TsxNbuIhuwfRONQa/Acry3qLwFkxd+riHF+Zv8hcaa
+ Ki2xhXf0LUtZeCNV8TbO4NOeYFqsBQo2c5JWhbw==
+X-Gm-Gg: ASbGncsWoXDwQ1ODN64dTy27O0OwOqkjtC1baEtMLNB/qkygjzrsAB6Cbhv+XvM/qc8
+ 6wOKLxKW8PbqsxQU4hRxbMxTQwL3Y0hDHEZji6bqn4D/vgtYfKVtF0kPPfcflffO7IXHOppnuZG
+ FObZTtTn3cyxAtmoDk7aiHFuWrI74=
+X-Google-Smtp-Source: AGHT+IEgbGp7xliI2hSQzPBPOrDZarIT263ihx4nXXrOB3boMSWcvFdooxQuJQwN58Tt1+vjv74apH/fkAKETVPGfLU=
+X-Received: by 2002:a05:6902:4810:b0:e60:78b9:1502 with SMTP id
+ 3f1490d57ef6-e667b3bf7f8mr2392511276.16.1742374121277; Wed, 19 Mar 2025
+ 01:48:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250318132347.646703-1-adriano.cordova@canonical.com>
+In-Reply-To: <20250318132347.646703-1-adriano.cordova@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 19 Mar 2025 10:48:05 +0200
+X-Gm-Features: AQ5f1JroRxTlRfO1-qAF2kHgBFGg2NmY-ogdlAjXAexsB248fkWHpksbN9OUvLU
+Message-ID: <CAC_iWjJgS2oudWw7DTDW4uPtaGvw8MSdzo1VyswX8CLYD9dL0g@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Add initrd support to bootm EFI payloads
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org, 
+ trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,62 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add fuse writebuff sub-system command documentation.
+Hi Adriano,
 
-Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
----
- doc/usage/cmd/fuse.rst | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+On Tue, 18 Mar 2025 at 15:23, Adriano Cordova <adrianox@gmail.com> wrote:
+>
+> Next boot stages can acces an initrd via a handle with a specific device
+> path and an EFI_LOAD_FILE2_PROTOCOL installed on it. In U-Boot, this functionality
+> is currently only implemented when booting with the EFI boot manager. This series
+> implements this functionality also for the bootm command when the os is of EFI type,
+> e.g. when booting FIT images with an EFI kernel.
 
-diff --git a/doc/usage/cmd/fuse.rst b/doc/usage/cmd/fuse.rst
-index 6e330eddfea..42c6e209f99 100644
---- a/doc/usage/cmd/fuse.rst
-+++ b/doc/usage/cmd/fuse.rst
-@@ -17,6 +17,7 @@ Synopsis
-     fuse sense <bank> <word> [<cnt>]
-     fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
-     fuse override <bank> <word> <hexval> [<hexval>...]
-+    fuse writebuff [-y] <addr>
- 
- Description
- -----------
-@@ -79,6 +80,16 @@ Commands
-   fuses have already been programmed or are locked (if the SoC allows to
-   override a locked fuse).
- 
-+- **fuse writebuff [-y] <addr>**
-+  Programs fuse data using a structured buffer in memory starting at 'addr'.
-+  This operation directly affects the fusebox and is irreversible.
-+
-+  The structure of the buffer should contain all necessary details for
-+  programming fuses, such as the values to be written to the fuse, optional
-+  metadata for validation or programming constraints and any configuration
-+  data required for the operation. Define CONFIG_CMD_FUSE_WRITEBUFF to
-+  enable the fuse writebuff command.
-+
- Examples
- --------
- 
-@@ -144,10 +155,19 @@ fuse override
-     u-boot=> fuse override 0 1 0x00000003
-       Overriding bank 0 word 0x00000001 with 0x00000003...
- 
-+fuse writebuff
-+~~~~~~~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse writebuff -y 0x84000000
-+      Programming fuses with buffer at addr 0x84000000
-+
- Configuration
- -------------
- 
- The fuse commands are available if CONFIG_CMD_FUSE=y.
-+The fuse writebuff command is available if CONFIG_CMD_FUSE_WRITEBUFF=y.
- 
- Return code
- -----------
--- 
-2.34.1
+I'll have a look at the patches shortly. I have a question about the
+entire series though.
 
+The initrd was plugged into the efi boot manager because it's easy to
+configure entries of
+kernel-initrd-dtb. The initrd can also be loaded by passing a kernel
+command line parameter.
+
+That parameter can either be initrd=<file> with the limitation that
+the initrd needs to be on the same filesystem as the kernel image.
+On newer kernels you can also pass initrd=<device path>. I am not sure
+what's the best option when loading the initrd for a FIT image.
+
+Thanks
+/Ilias
+
+
+
+>
+> Adriano Cordova (3):
+>   efi_loader: efi_load_initrd: provide a memory mapped initrd
+>   efi_loader: binary_run: register an initrd
+>   bootm: add support for initrd in do_bootm_efi
+>
+>  boot/bootm_os.c                  |  4 +-
+>  cmd/bootefi.c                    |  2 +-
+>  include/efi_loader.h             |  4 +-
+>  lib/efi_loader/efi_bootbin.c     | 20 +++++++--
+>  lib/efi_loader/efi_bootmgr.c     |  2 +-
+>  lib/efi_loader/efi_load_initrd.c | 71 +++++++++++++++++++++++++++-----
+>  6 files changed, 84 insertions(+), 19 deletions(-)
+>
+> --
+> 2.48.1
+>
