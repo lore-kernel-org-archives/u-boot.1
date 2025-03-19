@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EDBFC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 09:28:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63EB9C35FFF
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 09:28:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53A998129F;
-	Wed, 19 Mar 2025 10:28:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id AF9F18129F;
+	Wed, 19 Mar 2025 10:28:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=arnaud.patard@collabora.com header.b="iIuuESoo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ro82xKNk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCFCE8141E; Wed, 19 Mar 2025 10:28:15 +0100 (CET)
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E3E4B8141E; Wed, 19 Mar 2025 10:28:43 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 192C281101
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 10:28:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9E2081101
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 10:28:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=collabora.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=arnaud.patard@collabora.com
-ARC-Seal: i=1; a=rsa-sha256; t=1742376490; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=TOTTQGdsr3s8lLF7oqIyaBKK0zpvaKJt6Y5ncSBGyeYEv8cGFfP14MhklWeUjOvOqVjIjrK9WzozFjQmBIFFHG9w4Rt2SiD/v5H5JECCaMc1d3vedsq/6xg85T1bCTJcwhh4oNJzXBDUxeNF9H4dg995Ayn2GQeaWXAt+qHNqSg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1742376490;
- h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
- bh=yWs8I7FgtvKl88BpXCdYqxBAkM4I1Ne4lh+EknA9iFI=; 
- b=keR9GdLvh/icNZIlS3xlwN5sBdZmnK0PPG7gDADkJHftf23z9yk7u4KJNvd7myPZGnLEleOcA5US/MB66ZpBUR/6D9D4o3a60wxJaSxmLz9n09iztHUQTLvzAlUi35HjN1QQr07//6mTv46Qh6D1PIk3nvU5Ms6eoZkz7StaTe8=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=collabora.com;
- spf=pass  smtp.mailfrom=arnaud.patard@collabora.com;
- dmarc=pass header.from=<arnaud.patard@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1742376489; 
- s=zohomail; d=collabora.com; i=arnaud.patard@collabora.com;
- h=Message-ID:Subject:Subject:From:From:To:To:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To:Cc;
- bh=yWs8I7FgtvKl88BpXCdYqxBAkM4I1Ne4lh+EknA9iFI=;
- b=iIuuESooDgUoduIqL8vZQJACbiIbgetnFjPKfZIFaFdlEWTT6l6UblJeKDwy6+Th
- Pc7r7cUkNV54mGOwX+KMTFBlP6zuw4Ii8BO2E8TJsX/j5c0ffw/xfDk0oWUnzyK00LT
- D7RPuSADdOwkpe5y+how4qECu2wAvLtm1N3uIk6E=
-Received: by mx.zohomail.com with SMTPS id 1742376486847236.5994665871458;
- Wed, 19 Mar 2025 02:28:06 -0700 (PDT)
-Message-ID: <5d76a7d1e26fc86ed5854197779d9a10fb7e8db4.camel@collabora.com>
-Subject: Re: [PATCH 0/3] Add support for RAM boot from maskrom mode
-From: Arnaud Patard <arnaud.patard@collabora.com>
-To: u-boot@lists.denx.de
-Date: Wed, 19 Mar 2025 10:28:04 +0100
-In-Reply-To: <20250220231358.432367-1-jonas@kwiboo.se>
-References: <20250220231358.432367-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e63c966fe37so4552589276.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 02:28:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1742376520; x=1742981320; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rZWhEgTQVBZrzRuoMmoNoi93H0XG0Rn+T1QTpvT3iIk=;
+ b=ro82xKNkSQFb48cewB/XS6MonTYTGKdTe1zU3LJ1gobvaxnPn6yNUZ7RdI4Ssjafsx
+ ggWn8Vlc4tvcTRk7iZKOlB0W2dY1OHxyDJ3xIUiaUkpZFWmFDpq31Bz+ZqqNLeUA0pUW
+ axkT1dXiPXGuKvYQSgUsJAr4Gxn5BjoVAJ12byvh7YTVv1qT4aevfsleZ0nxrh5lwpGU
+ Xb+Bsv05VdECW46VlVIv9kH85Xpno0psCinjd3wFqmWzz/FTC/cIMoTrTvqMh6It6lyC
+ SClsiCtr2ix7oj/DoDeVn5eOOgJYUmQBaOzES1bXH0Tix3tTqaAq2YMOT9poXec4rjqu
+ C4hA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742376520; x=1742981320;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rZWhEgTQVBZrzRuoMmoNoi93H0XG0Rn+T1QTpvT3iIk=;
+ b=KBOkipithLBDazNDMcoxVhqdjFzUyHf9EIe0qS05foF9BFKaFtPO5qxldrAdJGTUkH
+ kYnBFGStkHJO6kprkM4+umWbhnoEVofbsKQYjniU669lyy+nPR4WnQFU1yIAFNGW3Ssu
+ OqUwTpfcAVLP8xn5Lk2pispMn6KRGjvedw9tg7ZzjAQbsu01S3XpA9p5KrrVH6iPVdSo
+ LWkcSfpfjg/RGwjGglG+n5dvyxpxt6bt+dQSL5fASoR5F8/oR7wBwsZt8Qg/BJJAnjX+
+ n+XgWQw41NzUhwcf33iWqVmlBjcEV4NqthTMKHP2jnpxLZ/R8zeFFkyJi+eWKMut8Ydt
+ 33LQ==
+X-Gm-Message-State: AOJu0YwX22aDdl2+6/yY36n4lSl1712ZFSJYApT6+jeF3ktRbLQD8jQT
+ YneIsbtSCR6e7DhKukI7+ulfJqlAFVuPqdX7mPWYpIJYfR+TvJOrrdSpyV+EmPY0FcqmfnCbp5w
+ b2ZuD84+s5yuWRudM1U0cE2RL1px+RkzOTI1iZaFZgFjRdHQI
+X-Gm-Gg: ASbGnctyAK+jz+mkMs+GlqgNaqiGfEW6Yp4Z/yAQsFp2b0dtlhZt2wh2czo7bVB3FXC
+ V82xMcSs16E10Z7yCuXWEN3Up9i/wz9aQ3uKILM/gyx2EFjGgPSfRDN3m8daofjCe57mLN47RBm
+ l5fn2wV/NUjwaxa++7gBHIlh0oLhg=
+X-Google-Smtp-Source: AGHT+IGSlbfq1ys/gMPDQ1tzCicgRZHegNd9zO9HxjslgckcbGIPK77m0H8Ve3xWKXzVHfkKPMTzwn+WYIk0zVzg7ws=
+X-Received: by 2002:a25:7243:0:b0:e63:ec04:3140 with SMTP id
+ 3f1490d57ef6-e667b3a1a21mr1939604276.10.1742376520592; Wed, 19 Mar 2025
+ 02:28:40 -0700 (PDT)
 MIME-Version: 1.0
-X-ZohoMailClient: External
+References: <20250318132347.646703-1-adriano.cordova@canonical.com>
+ <20250318132347.646703-2-adriano.cordova@canonical.com>
+In-Reply-To: <20250318132347.646703-2-adriano.cordova@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 19 Mar 2025 11:28:04 +0200
+X-Gm-Features: AQ5f1Jr4wh8bHtfc4liPfpSB1cuPq4zBss1Y-iE5UpoXg3soh7NpdAsq55T035k
+Message-ID: <CAC_iWjJ=+dqqVen8b6NfsUx8-NpkzOeYbq4UG-LUcf7E=88jwg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] efi_loader: efi_load_initrd: provide a memory mapped
+ initrd
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org, 
+ trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,63 +92,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Tue, 18 Mar 2025 at 15:23, Adriano Cordova <adrianox@gmail.com> wrote:
+>
+> U-Boot can pass an initrd to subsequent boot stages via the
+> EFI_LOAD_FILE2_PROTOCOL. The current implementation only supports
+> this functionality via the efi boot manager: the initrd is taken
+> from the load options of the BootCurrent variable. This commit adds
+> support for registering a memory mapped initrd, e.g. loaded from a
+> FIT image. For now this new method takes precedence over loading the
+> initrd from the BootCurrent variable (if both are present) because
+> the BootCurrent variable is not cleared on exiting the boot manager.
 
-On Thu, 2025-02-20 at 23:13 +0000, Jonas Karlman wrote:
-> The BootROM in Rockchip SoCs will enter maskrom mode when boot
-> firmware
-> cannot be found in nand/spi/mmc storage.
->=20
-> In maskrom mode the USB OTG port can accept one of two custom
-> commands.
->=20
-> Initially a 0x471 command to load TPL into SRAM. After TPL has been
-> executed and it has returned back-to-BROM, a 0x472 command to load
-> SPL
-> into start of DRAM.
->=20
-> This series add two binman images that can be used to RAM boot from
-> maskrom mode:
-> - u-boot-rockchip-usb471.bin that contains TPL to init DRAM.
-> - u-boot-rockchip-usb472.bin that contains SPL and the normal FIT
-> =C2=A0 payload with i.e. U-Boot proper, TF-A and FDT.
->=20
-> These images can be used with rkbin tools/boot_merger to create a
-> loader
-> image to be used with rkdeveloptool or rockusb tools, e.g.:
->=20
-> =C2=A0 Create loader image:
-> =C2=A0=C2=A0=C2=A0 $ ../rkbin/tools/boot_merger ./RK3588MINIALL.ini
->=20
-> =C2=A0 Boot from maskrom:
-> =C2=A0=C2=A0=C2=A0 $ rkdeveloptool db u-boot-rockchip-rk3588-loader.bin
-> =C2=A0=C2=A0 or
-> =C2=A0=C2=A0=C2=A0 $ rockusb download-boot u-boot-rockchip-rk3588-loader.=
-bin
->=20
-> Or directly with tools such as rkflashtool or rkusbboot:
->=20
-> =C2=A0 $ rkflashtool l < u-boot-rockchip-usb471.bin
-> =C2=A0 $ rkflashtool L < u-boot-rockchip-usb472.bin
-> =C2=A0or
-> =C2=A0 $ rkusbboot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
->=20
-> This series depend on the "rockchip: ROCKCHIP_COMMON_STACK_ADDR
-> improvements" series [1] and the "rockchip: dts: Create a template
-> for
-> the FIT" patch [2]. See [3] for a branch with all depends.
->=20
-> [1] https://patchwork.ozlabs.org/cover/2050003/
-> [2] https://patchwork.ozlabs.org/patch/2044607/
-> [3]
-> https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ramboo=
-t-v1
->=20
-I've tested this tree tagged by "ramboot-v1" on rk3399 and rk3588 with
-the generated u-boot-rockchip-usb47?.bin files and it's working fine.
+So for this to happen you have to
+- Invoke the boot manager and eventually have an entry that eventually fails
+- Load a FIT image with bootm right after that?
 
-This work sounds very useful imho, and possibly easier to use than DFU
-in SPL. Any hope to see this merged in next release ?
+Looking at the efi_bootmgr.c , removing BootCurrent on fails seems
+straightforward. Bu I can live with this for now.
 
-If it helps:
-Tested-by: Arnaud Patard <arnaud.patard@collabora.com>
+[...]
+
+Thanks
+/Ilias
