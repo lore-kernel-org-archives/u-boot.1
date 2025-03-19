@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 013BCC35FFF
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 08:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33B5AC35FFF
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 08:48:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90E658141E;
-	Wed, 19 Mar 2025 09:47:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D61F48197F;
+	Wed, 19 Mar 2025 09:47:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W/Ao8gwR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nyiQJGRV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0C548197D; Wed, 19 Mar 2025 09:47:39 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id C1EBA81101; Wed, 19 Mar 2025 09:47:48 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 595B28141E
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 09:47:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CBAB8197F
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 09:47:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=f-akthar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52J8lZDF2894091
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52J8li6v2834985
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 19 Mar 2025 03:47:35 -0500
+ Wed, 19 Mar 2025 03:47:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742374055;
- bh=QmGl7DN3XkQjuDRwAuwNy7Yvgpk/GsgzJsJjxTsmPkU=;
+ s=ti-com-17Q1; t=1742374064;
+ bh=pRlMW4FQJi4f2AqtPq+2n3bljEYAA2M6yj+kZXLeIGk=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=W/Ao8gwR7yzYGm6TTYOoKT/saPgx04HqGy6dZFE7rOPkiKVNsjG8Utk6SChKkr7de
- 0N8pLasSbFyQ0LOR19Tm2zhtW2cpkM1CbkSgU2I3Ip/OT7jj8VXsgoSReTcNdcZRwB
- JgpYx959aii6DeQQCp/m2Yb/ofipmNtZtLYsCwAw=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52J8lZ9b120556
+ b=nyiQJGRVcIiGK0F8F6pETFbRP9+h1Xpno8gYLGMO4evumDVSXoz1n/dFL+m7NGr6n
+ uMbYScV40YzAE5DSgVOUHKeUhNZ+DghJeeeikK3W9n2dKSi2Oa+5ZVNm5gCkXrQxdo
+ 2Vo4E0iL6bmevA+28p9xsYdhoQIqKjV8ZSkf35Uc=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52J8liM3030627
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 19 Mar 2025 03:47:35 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Mar 2025 03:47:35 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ Wed, 19 Mar 2025 03:47:44 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
  (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
+ Mar 2025 03:47:44 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Mar 2025 03:47:35 -0500
+ Frontend Transport; Wed, 19 Mar 2025 03:47:44 -0500
 Received: from localhost (fayaz-hp-z2-tower-g4-workstation.dhcp.ti.com
  [172.24.227.181] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52J8lY7S022001;
- Wed, 19 Mar 2025 03:47:35 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52J8lfHL054497;
+ Wed, 19 Mar 2025 03:47:43 -0500
 From: Harsha Vardhan V M <h-vm@ti.com>
 To: <u-boot@lists.denx.de>
 CC: <trini@konsulko.com>, <vigneshr@ti.com>, <k-malarvizhi@ti.com>,
  <kamlesh@ti.com>
-Subject: [PATCH 2/5] doc: cmd: Add documentation for fuse command
-Date: Wed, 19 Mar 2025 14:17:11 +0530
-Message-ID: <20250319084714.335777-3-h-vm@ti.com>
+Subject: [PATCH 3/5] cmd: fuse: Add fuse writebuff sub-system command
+Date: Wed, 19 Mar 2025 14:17:12 +0530
+Message-ID: <20250319084714.335777-4-h-vm@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250319084714.335777-1-h-vm@ti.com>
 References: <20250319084714.335777-1-h-vm@ti.com>
@@ -81,266 +81,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the 'fuse' sub-system commands in
-doc/usage/cmd/fuse.rst file.
-Remove doc/README.fuse file.
+Add CMD_FUSE_WRITEBUFF config option to add and enable fuse writebuff
+sub-system command. Add fuse_writebuff function to be invoked on
+writebuff command.
 
 Signed-off-by: Harsha Vardhan V M <h-vm@ti.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- doc/README.fuse        |  67 ------------------
- doc/usage/cmd/fuse.rst | 156 +++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst    |   1 +
- 3 files changed, 157 insertions(+), 67 deletions(-)
- delete mode 100644 doc/README.fuse
- create mode 100644 doc/usage/cmd/fuse.rst
+ cmd/Kconfig    |  8 ++++++++
+ cmd/fuse.c     | 30 +++++++++++++++++++++++++-----
+ include/fuse.h |  9 +++++++++
+ 3 files changed, 42 insertions(+), 5 deletions(-)
 
-diff --git a/doc/README.fuse b/doc/README.fuse
-deleted file mode 100644
-index 1bc91c44a6a..00000000000
---- a/doc/README.fuse
-+++ /dev/null
-@@ -1,67 +0,0 @@
--Fuse API functions and commands
--
--The fuse API allows to control a fusebox and how it is used by the upper
--hardware layers.
--
--A fuse corresponds to a single non-volatile memory bit that can be programmed
--(i.e. blown, set to 1) only once. The programming operation is irreversible. A
--fuse that has not been programmed reads 0.
--
--Fuses can be used by SoCs to store various permanent configuration and data,
--e.g. boot configuration, security configuration, MAC addresses, etc.
--
--A fuse word is the smallest group of fuses that can be read at once from the
--fusebox control IP registers. This is limited to 32 bits with the current API.
--
--A fuse bank is the smallest group of fuse words having a common ID, as defined
--by each SoC.
--
--Upon startup, the fusebox control IP reads the fuse values and stores them to a
--volatile shadow cache.
--
--See the README files of the drivers implementing this API in order to know the
--SoC- and implementation-specific details.
--
--Functions / commands:
--
--   int fuse_read(u32 bank, u32 word, u32 *val);
--   fuse read <bank> <word> [<cnt>]
--      Read fuse words from the shadow cache.
--
--   int fuse_sense(u32 bank, u32 word, u32 *val);
--   fuse sense <bank> <word> [<cnt>]
--      Sense - i.e. read directly from the fusebox, skipping the shadow cache -
--      fuse words. This operation does not update the shadow cache.
--
--      This is useful to know the true value of fuses if an override has been
--      performed (see below).
--
--   int fuse_prog(u32 bank, u32 word, u32 val);
--   fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
--      Program fuse words. This operation directly affects the fusebox and is
--      irreversible. The shadow cache is updated accordingly or not, depending on
--      each IP.
--
--      Only the bits to be programmed should be set in the input value (i.e. for
--      fuse bits that have already been programmed and hence should be left
--      unchanged by a further programming, it is preferable to clear the
--      corresponding bits in the input value in order not to perform a new
--      hardware programming operation on these fuse bits).
--
--   int fuse_override(u32 bank, u32 word, u32 val);
--   fuse override <bank> <word> <hexval> [<hexval>...]
--      Override fuse words in the shadow cache.
--
--      The fusebox is unaffected, so following this operation, the shadow cache
--      may differ from the fusebox values. Read or sense operations can then be
--      used to get the values from the shadow cache or from the fusebox.
--
--      This is useful to change the behaviors linked to some cached fuse values,
--      either because this is needed only temporarily, or because some of the
--      fuses have already been programmed or are locked (if the SoC allows to
--      override a locked fuse).
--
--Configuration:
--
--   CONFIG_CMD_FUSE
--      Define this to enable the fuse commands.
-diff --git a/doc/usage/cmd/fuse.rst b/doc/usage/cmd/fuse.rst
-new file mode 100644
-index 00000000000..6e330eddfea
---- /dev/null
-+++ b/doc/usage/cmd/fuse.rst
-@@ -0,0 +1,156 @@
-+.. SPDX-License-Identifier: GPL-2.0+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index cd391d422ae..81c59becc2d 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1236,6 +1236,14 @@ config CMD_FUSE
+ 	  which control the behaviour of the device. The command uses the
+ 	  fuse_...() API.
+ 
++config CMD_FUSE_WRITEBUFF
++	bool "Support for the fuse writebuff"
++	depends on CMD_FUSE
++	help
++	  This allows programming fuses, which control the behaviour of
++	  the device, using a structured buffer in memory. The command
++	  uses the fuse_writebuff() API.
 +
-+.. index::
-+   single: fuse (command)
+ config CMD_GPIO
+ 	bool "gpio"
+ 	help
+diff --git a/cmd/fuse.c b/cmd/fuse.c
+index a23cedba90f..6c42c096809 100644
+--- a/cmd/fuse.c
++++ b/cmd/fuse.c
+@@ -43,11 +43,18 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	argc -= 2 + confirmed;
+ 	argv += 2 + confirmed;
+ 
+-	if (argc < 2)
+-		return CMD_RET_USAGE;
++	if (IS_ENABLED(CONFIG_CMD_FUSE_WRITEBUFF) && !strcmp(op, "writebuff")) {
++		if (argc == 1)
++			addr = simple_strtoul(argv[0], NULL, 16);
++		else
++			return CMD_RET_USAGE;
++	} else {
++		if (argc < 2)
++			return CMD_RET_USAGE;
+ 
+-	bank = simple_strtoul(argv[0], NULL, 0);
+-	word = simple_strtoul(argv[1], NULL, 0);
++		bank = simple_strtoul(argv[0], NULL, 0);
++		word = simple_strtoul(argv[1], NULL, 0);
++	}
+ 
+ 	if (!strcmp(op, "read")) {
+ 		if (argc == 2)
+@@ -161,6 +168,15 @@ static int do_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			if (ret)
+ 				goto err;
+ 		}
++	} else if (IS_ENABLED(CONFIG_CMD_FUSE_WRITEBUFF) && !strcmp(op, "writebuff")) {
++		printf("Programming fuses using a structured buffer in memory "
++				"starting at addr 0x%lx\n", addr);
++		if (!confirmed && !confirm_prog())
++			return CMD_RET_FAILURE;
 +
-+fuse command
-+============
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    fuse read <bank> <word> [<cnt>]
-+    fuse cmp <bank> <word> <hexval>
-+    fuse readm <bank> <word> <addr> [<cnt>]
-+    fuse sense <bank> <word> [<cnt>]
-+    fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
-+    fuse override <bank> <word> <hexval> [<hexval>...]
-+
-+Description
-+-----------
-+
-+The fuse API allows to control a fusebox and how it is used by the upper
-+hardware layers.
-+
-+A fuse corresponds to a single non-volatile memory bit that can be programmed
-+(i.e., blown, set to 1) only once. The programming operation is irreversible.
-+A fuse that has not been programmed reads as 0.
-+
-+Fuses can be used by SoCs to store various permanent configurations and data,
-+such as boot configurations, security settings, MAC addresses, etc.
-+
-+A fuse 'word' is the smallest group of fuses that can be read at once from
-+the fusebox control IP registers. In the current API, this is limited to 32 bits.
-+
-+A fuse 'bank' is the smallest group of fuse words having a common ID, as
-+defined by each SoC.
-+
-+Upon startup, the fusebox control IP reads the fuse values and stores them in a
-+volatile shadow cache.
-+
-+Commands
-+--------
-+
-+- **fuse read <bank> <word> [<cnt>]**
-+  Reads 1 or 'cnt' fuse words, starting at 'word' from the shadow cache.
-+
-+- **fuse cmp <bank> <word> <hexval>**
-+  Compares 'hexval' to fuse at 'word'.
-+
-+- **fuse readm <bank> <word> <addr> [<cnt>]**
-+  Reads 1 or 'cnt' fuse words, starting at 'word' into memory at 'addr'.
-+
-+- **fuse sense <bank> <word> [<cnt>]**
-+  Sense 1 or 'cnt' fuse words, starting at 'word'.
-+  Sense - i.e. read directly from the fusebox, skipping the shadow cache -
-+  fuse words. This operation does not update the shadow cache. This is
-+  useful to know the true value of fuses if an override has been
-+  performed (see below).
-+
-+- **fuse prog [-y] <bank> <word> <hexval> [<hexval>...]**
-+  Permanently programs 1 or several fuse words, starting at 'word'.
-+  This operation directly affects the fusebox and is irreversible. The
-+  shadow cache is updated accordingly or not, depending on each IP.
-+  Only the bits to be programmed should be set in the input value (i.e.
-+  for fuse bits that have already been programmed and hence should be
-+  left unchanged by a further programming, it is preferable to clear
-+  the corresponding bits in the input value in order not to perform a
-+  new hardware programming operation on these fuse bits).
-+
-+- **fuse override <bank> <word> <hexval> [<hexval>...]**
-+  Override 1 or several fuse words, starting at 'word' in the shadow cache.
-+  The fusebox is unaffected, so following this operation, the shadow cache
-+  may differ from the fusebox values. Read or sense operations can then be
-+  used to get the values from the shadow cache or from the fusebox.
-+  This is useful to change the behaviours linked to some cached fuse values,
-+  either because this is needed only temporarily, or because some of the
-+  fuses have already been programmed or are locked (if the SoC allows to
-+  override a locked fuse).
-+
-+Examples
-+--------
-+
-+fuse read
-+~~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse read 0 1
-+      Reading bank 0:
-+
-+      Word 0x00000001: 00000001
-+
-+fuse cmp
-+~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse cmp 0 1 0x1
-+      Comparing bank 0:
-+
-+      Word 0x00000001:
-+      Value 0x00000001:0x00000001
-+      passed
-+
-+fuse readm
-+~~~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse readm 0 1 0x83000000
-+      Reading bank 0 len 1 to 0x83000000
-+
-+fuse sense
-+~~~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse sense 0 1
-+      Sensing bank 0:
-+
-+      Word 0x00000001: 00000001
-+
-+fuse prog
-+~~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse prog 0 1 0x00000002
-+      Programming bank 0 word 0x00000001 to 0x00000002...
-+      Warning: Programming fuses is an irreversible operation!
-+               This may brick your system.
-+               Use this command only if you are sure of what you are doing!
-+
-+      Really perform this fuse programming? <y/N>
-+      y
-+
-+fuse override
-+~~~~~~~~~~~~~
-+
-+::
-+
-+    u-boot=> fuse override 0 1 0x00000003
-+      Overriding bank 0 word 0x00000001 with 0x00000003...
-+
-+Configuration
-+-------------
-+
-+The fuse commands are available if CONFIG_CMD_FUSE=y.
-+
-+Return code
-+-----------
-+
-+The return value $? is set to 0 (true) if the command is successful,
-+1 (false) otherwise.
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index fc058476f39..372ef56c967 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -72,6 +72,7 @@ Shell commands
-    cmd/fdt
-    cmd/font
-    cmd/for
-+   cmd/fuse
-    cmd/fwu_mdata
-    cmd/gpio
-    cmd/gpt
++		ret = fuse_writebuff(addr);
++		if (ret)
++			goto err;
+ 	} else {
+ 		return CMD_RET_USAGE;
+ 	}
+@@ -186,5 +202,9 @@ U_BOOT_CMD(
+ 	"fuse prog [-y] <bank> <word> <hexval> [<hexval>...] - program 1 or\n"
+ 	"    several fuse words, starting at 'word' (PERMANENT)\n"
+ 	"fuse override <bank> <word> <hexval> [<hexval>...] - override 1 or\n"
+-	"    several fuse words, starting at 'word'"
++	"    several fuse words, starting at 'word'\n"
++#ifdef CONFIG_CMD_FUSE_WRITEBUFF
++	"fuse writebuff [-y] <addr> - program fuse data\n"
++	"    using a structured buffer in memory starting at 'addr'\n"
++#endif /* CONFIG_CMD_FUSE_WRITEBUFF */
+ );
+diff --git a/include/fuse.h b/include/fuse.h
+index 4519821af7e..902b5f56a74 100644
+--- a/include/fuse.h
++++ b/include/fuse.h
+@@ -12,6 +12,7 @@
+ #define _FUSE_H_
+ 
+ #include <linux/types.h>
++#include <linux/errno.h>
+ 
+ /*
+  * Read/Sense/Program/Override interface:
+@@ -25,5 +26,13 @@ int fuse_read(u32 bank, u32 word, u32 *val);
+ int fuse_sense(u32 bank, u32 word, u32 *val);
+ int fuse_prog(u32 bank, u32 word, u32 val);
+ int fuse_override(u32 bank, u32 word, u32 val);
++#ifdef CONFIG_CMD_FUSE_WRITEBUFF
++int fuse_writebuff(ulong addr);
++#else
++static inline int fuse_writebuff(ulong addr)
++{
++	return -EPERM;
++}
++#endif	/* CONFIG_CMD_FUSE_WRITEBUFF */
+ 
+ #endif	/* _FUSE_H_ */
 -- 
 2.34.1
 
