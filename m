@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B044DC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA39C35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:59:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FBDB81DE3;
-	Wed, 19 Mar 2025 15:56:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AAE7081F6B;
+	Wed, 19 Mar 2025 15:56:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KoaktSAq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ci4L8ePF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1CF081F7B; Wed, 19 Mar 2025 15:56:13 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id EA6A2820AA; Wed, 19 Mar 2025 15:56:16 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB4A482075
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19E8B8211F
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cfba466b2so46861365e9.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:11 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43cebe06e9eso33694755e9.3
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396171; x=1743000971; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396173; x=1743000973; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2/iWeCWAY/mTyLDDPesOMWF3WYvqswlhdDpwOPH0Em0=;
- b=KoaktSAq+vFQ5bMbCAQwtCDqb/BjQeaVeDW72p8M7GgUig1qLLTRjh46brcZ/GE9Lw
- Ha2iuMvtxo80/G4SEgwsKCRnSus8BMKVta7bzKU5kBXYH2Su1idbpGofzBG3OJCkjpB9
- Uwd6USw6MAZqexxl3RFUH5vfWOx4fXfdv/DqM=
+ bh=GGvuws4CVBT1h4PkzwC0CajG2uavGgCmKOyatWMP0cU=;
+ b=Ci4L8ePFiY1ljXvmFBbcYvbdN0NYmRtG2P29Ak9ha9ZYKcYptNTh33ngugMSrO1clS
+ FYvjoRBCa05dnRsz+/ipfnwv2mnL9QjtBBcMl+3Uaxjg9KqqgcQBVC6VASYHe8DPnQSU
+ joV6VvAQaWZD662yRomJa8qUuKyulhSwQuPm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396171; x=1743000971;
+ d=1e100.net; s=20230601; t=1742396173; x=1743000973;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2/iWeCWAY/mTyLDDPesOMWF3WYvqswlhdDpwOPH0Em0=;
- b=kNMrrLu5fMB3wqF/5SdBqA5rHOvGrUw7K34laNrAkDUKfkP0uElwEYV/xcTOU/2lS+
- rnLyqN1G6dEHthqOq/m0yZp1g4Wb4ofLiUnTN/yKMjdcReOLjLpdrLARL3yKng8k6/no
- BaNmoLfiI4wUqvrkrdKxGIO4kDB68YN5m2Ew1YmV6LS9x5kH1WOdzr1s5REXw1oCi1fF
- a5rY1x7TNb4BaF2mTZbxXnWPC55ZNuaTzR21b9GZWKIUfgs3lDv/UL6JaRcFptIZjAjg
- IpskLMNMk2WXYTF4fWFQIeCivFbiUL8OAIgeAstWABi3YzNnNNN69v/PesNBNflskE2j
- jReA==
-X-Gm-Message-State: AOJu0YzNr7bHN3naazlBHAaX0+VxDC0FJmWWUBrEeFyHO/ss5RSPHdwv
- /aEaSEEl+hTNlT+nqeacrBsxO3bgqGuDEvhfXb/bGasIo/233SDYj299mjl+J0knddjsQlAhdgM
+ bh=GGvuws4CVBT1h4PkzwC0CajG2uavGgCmKOyatWMP0cU=;
+ b=DGbZsm0kvq/Vuvm2lbGUvvid1+0xxwca4wIS0tAHzzbcb26hgaa9G+LGMq+WhGU9TG
+ xxIgn4Emr5uMTO+RdGQe7H73JlmTNOZ2D1BCx+qMLExX3m+3u8AENBq//jN7VtYrFu8U
+ GVLWaExMOPdJA5VY6hjWAZ62hA6PB88L0Evldi7KVDdcPR79aLteHevNWwJH73N9FWAV
+ NPDJN5FFKrPgnC8HMsnzlmERnqBFGWTLGQMO8eaD3jXJQBsARKVleHST8M7/g0v26rT6
+ sNmSYkAmKawlUGDXRn91G9e1epwscH5xqucn7GYx3Hy5CQzeXGZS2QrXQ6oo+aHHVsKL
+ 61Jg==
+X-Gm-Message-State: AOJu0YwBMqms1L61YKD2FcYgpyEdT7WbxOnZYd3OCMfggaT3M3LJCeKQ
+ rRdPRR44KKG/vPtG+sn1RdS427GuD9xv/iKtFs+YtzsFh1CVU12eh6ezQx1tZc9Lw0IsTZBb4Ak
  =
-X-Gm-Gg: ASbGncvRJZyD50GrRY7G07aWt4d0LWSerj0yJX8xvSbQtqAB6apB5Y0GZCntGujNOeo
- VaeuN0AQ3+NRxlEJPvkvubYbKwUzz9/D7E5WZsIMEaQ86aXBMfVecvrMrdYzlJ+cjHVTBM4gpwS
- nkzbMJOgO6Zlc0NRJa+xyDU4xvvBP73FjsGP8BagHFoIiOcdofyouwnPGTh2vGKNWcppfvR6Oi+
- 9+iR8dL0sp4fJ+l4tsrCOAFJSqy5jfHhlbAbKbYWH8c5OJWPBqhAwhXRIyd2sI3rbiY1NZodgr7
- pLIofMjus43//j2ub3GieyhMidJFoje68+r/JWIoSA==
-X-Google-Smtp-Source: AGHT+IETLy434ujVEtWw424mqmhzq2qnK9bbi4Dl7SVqsUWFbiPkAM6beiWJAuB8jR6z3/r+FhnvVg==
-X-Received: by 2002:a05:600c:5250:b0:43c:fc0c:7f33 with SMTP id
- 5b1f17b1804b1-43d43781e4emr29601675e9.2.1742396170503; 
- Wed, 19 Mar 2025 07:56:10 -0700 (PDT)
+X-Gm-Gg: ASbGncu11pqBq0wiVTGxo8sfgsqDHYawtfB7YzHKAI+0PTj2CMJPxFJxHJnxDq3sVU/
+ rFAu2aNYg2xx6Tv10w3iRZeaeqX1sDfEnrKbfD5+86M7mHNC81U1mu3jCD/U5+aF3HKntbfx+2G
+ ZF9zzfkEy1th6PgYMPcMDvgWhfyK7iBV3ZSs6vZ9mjhSEoiBJ0+KhjIyBBa2G+S+EK+1K9F48ce
+ vkMgLH1BY4dP7+jCcWA7KCy3auO0golzN2BQOVgmsFHZYm8uUSmXnudKYSoOjhTB/V8MNP6D40k
+ ki0GCA5W7XesvCafr5c2XuAhtLJjUuWak4ATEyF8/w==
+X-Google-Smtp-Source: AGHT+IF3RxjizXl2g5mh0FPBzV8KZkq8MXIPqloe649uODA12ZFouLRefGzkSUSEsLECQHX8wDAW4Q==
+X-Received: by 2002:a05:600c:870f:b0:43c:f00b:d581 with SMTP id
+ 5b1f17b1804b1-43d43880eb4mr31134975e9.29.1742396172857; 
+ Wed, 19 Mar 2025 07:56:12 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.09
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:56:09 -0700 (PDT)
+ Wed, 19 Mar 2025 07:56:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 23/52] expo: Allow adding a single bootflow to a menu
-Date: Wed, 19 Mar 2025 15:54:28 +0100
-Message-ID: <20250319145512.2391122-24-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 24/52] expo: Rename scene_dim to scene_obj_bbox
+Date: Wed, 19 Mar 2025 15:54:29 +0100
+Message-ID: <20250319145512.2391122-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -96,196 +94,372 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor bootflow_menu_add_all() to call a new bootflow_menu_add() to
-add each of its bootflows.
+At present we assume that each object is a simple box and that it fills
+the whole box.
 
-Move the last_bootdev value into struct menu_priv to make this work.
+This is quite limiting for text objects, which we may want to centre
+within the box. We need a position within the box where drawing starts.
+
+Rename the scene_dim struct to indicate that it is a bounding box.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootflow_menu.c | 102 ++++++++++++++++++++++++-------------------
- include/bootflow.h   |  16 +++++++
- 2 files changed, 73 insertions(+), 45 deletions(-)
+ boot/scene.c          | 36 +++++++++++-----------
+ boot/scene_menu.c     | 12 ++++----
+ boot/scene_textline.c | 22 ++++++-------
+ include/expo.h        |  8 ++---
+ test/boot/expo.c      | 72 +++++++++++++++++++++----------------------
+ 5 files changed, 75 insertions(+), 75 deletions(-)
 
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 9b97156d943..19cd84e6454 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -25,9 +25,11 @@
-  * struct menu_priv - information about the menu
-  *
-  * @num_bootflows: Number of bootflows in the menu
-+ * @last_bootdev: bootdev of the last bootflow added to the menu, NULL if none
-  */
- struct menu_priv {
- 	int num_bootflows;
-+	struct udevice *last_bootdev;
- };
+diff --git a/boot/scene.c b/boot/scene.c
+index fb82ffe768c..fbc6f783257 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -211,8 +211,8 @@ int scene_obj_set_pos(struct scene *scn, uint id, int x, int y)
+ 	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
+ 	if (!obj)
+ 		return log_msg_ret("find", -ENOENT);
+-	obj->dim.x = x;
+-	obj->dim.y = y;
++	obj->bbox.x = x;
++	obj->bbox.y = y;
  
- int bootflow_menu_new(struct expo **expp)
-@@ -77,14 +79,16 @@ int bootflow_menu_new(struct expo **expp)
  	return 0;
  }
+@@ -224,8 +224,8 @@ int scene_obj_set_size(struct scene *scn, uint id, int w, int h)
+ 	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
+ 	if (!obj)
+ 		return log_msg_ret("find", -ENOENT);
+-	obj->dim.w = w;
+-	obj->dim.h = h;
++	obj->bbox.w = w;
++	obj->bbox.h = h;
  
--int bootflow_menu_add_all(struct expo *exp)
-+int bootflow_menu_add(struct expo *exp, struct bootflow *bflow, int seq,
-+		      struct scene **scnp)
- {
- 	struct menu_priv *priv = exp->priv;
--	struct udevice *last_bootdev;
--	struct bootflow *bflow;
-+	char str[2], *label, *key;
- 	struct scene *scn;
-+	uint preview_id;
- 	uint scene_id;
--	int ret, i;
-+	bool add_gap;
-+	int ret;
+ 	return 0;
+ }
+@@ -369,8 +369,8 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
+ 	struct udevice *cons = text_mode ? NULL : exp->cons;
+ 	int x, y, ret;
  
- 	ret = expo_first_scene_id(exp);
- 	if (ret < 0)
-@@ -92,13 +96,57 @@ int bootflow_menu_add_all(struct expo *exp)
- 	scene_id = ret;
- 	scn = expo_lookup_scene_id(exp, scene_id);
+-	x = obj->dim.x;
+-	y = obj->dim.y;
++	x = obj->bbox.x;
++	y = obj->bbox.y;
  
--	last_bootdev = NULL;
-+	*str = seq < 10 ? '0' + seq : 'A' + seq - 10;
-+	str[1] = '\0';
-+	key = strdup(str);
-+	if (!key)
-+		return log_msg_ret("key", -ENOMEM);
-+	label = strdup(dev_get_parent(bflow->dev)->name);
-+	if (!label) {
-+		free(key);
-+		return log_msg_ret("nam", -ENOMEM);
-+	}
-+
-+	add_gap = priv->last_bootdev != bflow->dev;
-+	priv->last_bootdev = bflow->dev;
-+
-+	ret = expo_str(exp, "prompt", STR_POINTER, ">");
-+	ret |= scene_txt_str(scn, "label", ITEM_LABEL + seq,
-+			      STR_LABEL + seq, label, NULL);
-+	ret |= scene_txt_str(scn, "desc", ITEM_DESC + seq, STR_DESC + seq,
-+			    bflow->os_name ? bflow->os_name :
-+			    bflow->name, NULL);
-+	ret |= scene_txt_str(scn, "key", ITEM_KEY + seq, STR_KEY + seq, key,
-+			      NULL);
-+	preview_id = 0;
-+	if (bflow->logo) {
-+		preview_id = ITEM_PREVIEW + seq;
-+		ret |= scene_img(scn, "preview", preview_id,
-+				     bflow->logo, NULL);
-+	}
-+	ret |= scene_menuitem(scn, OBJ_MENU, "item", ITEM + seq,
-+				  ITEM_KEY + seq, ITEM_LABEL + seq,
-+				  ITEM_DESC + seq, preview_id,
-+				  add_gap ? SCENEMIF_GAP_BEFORE : 0,
-+				  NULL);
-+
-+	if (ret < 0)
-+		return log_msg_ret("itm", -EINVAL);
-+	priv->num_bootflows++;
-+	*scnp = scn;
-+
-+	return 0;
-+}
-+
-+int bootflow_menu_add_all(struct expo *exp)
-+{
-+	struct bootflow *bflow;
-+	struct scene *scn;
-+	int ret, i;
-+
- 	for (ret = bootflow_first_glob(&bflow), i = 0; !ret && i < 36;
- 	     ret = bootflow_next_glob(&bflow), i++) {
- 		struct bootmeth_uc_plat *ucp;
--		char str[2], *label, *key;
--		uint preview_id;
--		bool add_gap;
- 
- 		if (bflow->state != BOOTFLOWST_READY)
- 			continue;
-@@ -108,43 +156,7 @@ int bootflow_menu_add_all(struct expo *exp)
- 		if (ucp->flags & BOOTMETHF_GLOBAL)
- 			continue;
- 
--		*str = i < 10 ? '0' + i : 'A' + i - 10;
--		str[1] = '\0';
--		key = strdup(str);
--		if (!key)
--			return log_msg_ret("key", -ENOMEM);
--		label = strdup(dev_get_parent(bflow->dev)->name);
--		if (!label) {
--			free(key);
--			return log_msg_ret("nam", -ENOMEM);
--		}
--
--		add_gap = last_bootdev != bflow->dev;
--		last_bootdev = bflow->dev;
--
--		ret = expo_str(exp, "prompt", STR_POINTER, ">");
--		ret |= scene_txt_str(scn, "label", ITEM_LABEL + i,
--				      STR_LABEL + i, label, NULL);
--		ret |= scene_txt_str(scn, "desc", ITEM_DESC + i, STR_DESC + i,
--				    bflow->os_name ? bflow->os_name :
--				    bflow->name, NULL);
--		ret |= scene_txt_str(scn, "key", ITEM_KEY + i, STR_KEY + i, key,
--				      NULL);
--		preview_id = 0;
--		if (bflow->logo) {
--			preview_id = ITEM_PREVIEW + i;
--			ret |= scene_img(scn, "preview", preview_id,
--					     bflow->logo, NULL);
--		}
--		ret |= scene_menuitem(scn, OBJ_MENU, "item", ITEM + i,
--					  ITEM_KEY + i, ITEM_LABEL + i,
--					  ITEM_DESC + i, preview_id,
--					  add_gap ? SCENEMIF_GAP_BEFORE : 0,
--					  NULL);
--
--		if (ret < 0)
--			return log_msg_ret("itm", -EINVAL);
--		priv->num_bootflows++;
-+		LOGR("bao", bootflow_menu_add(exp, bflow, i, &scn));
+ 	switch (obj->type) {
+ 	case SCENEOBJT_NONE:
+@@ -420,8 +420,8 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
+ 			if (obj->flags & SCENEOF_POINT) {
+ 				vidconsole_push_colour(cons, fore, back, &old);
+ 				video_fill_part(dev, x - theme->menu_inset, y,
+-						x + obj->dim.w,
+-						y + obj->dim.h,
++						x + obj->bbox.w,
++						y + obj->bbox.h,
+ 						vid_priv->colour_bg);
+ 			}
+ 			vidconsole_set_cursor_pos(cons, x, y);
+@@ -766,8 +766,8 @@ int scene_calc_dims(struct scene *scn, bool do_menus)
+ 				ret = scene_obj_get_hw(scn, obj->id, &width);
+ 				if (ret < 0)
+ 					return log_msg_ret("get", ret);
+-				obj->dim.w = width;
+-				obj->dim.h = ret;
++				obj->bbox.w = width;
++				obj->bbox.h = ret;
+ 			}
+ 			break;
+ 		}
+@@ -916,15 +916,15 @@ int scene_bbox_union(struct scene *scn, uint id, int inset,
+ 	if (!obj)
+ 		return log_msg_ret("obj", -ENOENT);
+ 	if (bbox->valid) {
+-		bbox->x0 = min(bbox->x0, obj->dim.x - inset);
+-		bbox->y0 = min(bbox->y0, obj->dim.y);
+-		bbox->x1 = max(bbox->x1, obj->dim.x + obj->dim.w + inset);
+-		bbox->y1 = max(bbox->y1, obj->dim.y + obj->dim.h);
++		bbox->x0 = min(bbox->x0, obj->bbox.x - inset);
++		bbox->y0 = min(bbox->y0, obj->bbox.y);
++		bbox->x1 = max(bbox->x1, obj->bbox.x + obj->bbox.w + inset);
++		bbox->y1 = max(bbox->y1, obj->bbox.y + obj->bbox.h);
+ 	} else {
+-		bbox->x0 = obj->dim.x - inset;
+-		bbox->y0 = obj->dim.y;
+-		bbox->x1 = obj->dim.x + obj->dim.w + inset;
+-		bbox->y1 = obj->dim.y + obj->dim.h;
++		bbox->x0 = obj->bbox.x - inset;
++		bbox->y0 = obj->bbox.y;
++		bbox->x1 = obj->bbox.x + obj->bbox.w + inset;
++		bbox->y1 = obj->bbox.y + obj->bbox.h;
+ 		bbox->valid = true;
  	}
  
- 	ret = scene_arrange(scn);
-diff --git a/include/bootflow.h b/include/bootflow.h
-index 5f65129ca65..aa46cec4979 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -15,6 +15,7 @@
+diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+index df14a6c0409..f0a060a6356 100644
+--- a/boot/scene_menu.c
++++ b/boot/scene_menu.c
+@@ -102,7 +102,7 @@ static int update_pointers(struct scene_obj_menu *menu, uint id, bool point)
+ 		label = scene_obj_find(scn, item->label_id, SCENEOBJT_NONE);
  
- struct bootstd_priv;
- struct expo;
-+struct scene;
+ 		ret = scene_obj_set_pos(scn, menu->pointer_id,
+-					menu->obj.dim.x + 200, label->dim.y);
++					menu->obj.bbox.x + 200, label->bbox.y);
+ 		if (ret < 0)
+ 			return log_msg_ret("ptr", ret);
+ 	}
+@@ -179,8 +179,8 @@ int scene_menu_calc_dims(struct scene_obj_menu *menu)
+ 	}
  
- enum {
- 	BOOTFLOW_MAX_USED_DEVS	= 16,
-@@ -507,6 +508,21 @@ int bootflow_menu_new(struct expo **expp);
-  */
- int bootflow_menu_add_all(struct expo *exp);
+ 	if (bbox.valid) {
+-		menu->obj.dim.w = bbox.x1 - bbox.x0;
+-		menu->obj.dim.h = bbox.y1 - bbox.y0;
++		menu->obj.bbox.w = bbox.x1 - bbox.x0;
++		menu->obj.bbox.h = bbox.y1 - bbox.y0;
+ 	}
  
-+/**
-+ * bootflow_menu_add() - Add a bootflow to a menu
-+ *
-+ * Adds a new bootflow to the end of a menu. The caller must be careful to pass
-+ * seq=0 for the first bootflow added, 1 for the second, etc.
-+ *
-+ * @exp: Menu to update
-+ * @bflow: Bootflow to add
-+ * @seq: Sequence number of this bootflow (0 = first)
-+ * @scnp: Returns a pointer to the scene
-+ * Return 0 on success, -ve on error
-+ */
-+int bootflow_menu_add(struct expo *exp, struct bootflow *bflow, int seq,
-+		      struct scene **scnp);
-+
+ 	return 0;
+@@ -198,12 +198,12 @@ int scene_menu_arrange(struct scene *scn, struct expo_arrange_info *arr,
+ 	int x, y;
+ 	int ret;
+ 
+-	x = menu->obj.dim.x;
+-	y = menu->obj.dim.y;
++	x = menu->obj.bbox.x;
++	y = menu->obj.bbox.y;
+ 	if (menu->title_id) {
+ 		int width;
+ 
+-		ret = scene_obj_set_pos(scn, menu->title_id, menu->obj.dim.x, y);
++		ret = scene_obj_set_pos(scn, menu->title_id, menu->obj.bbox.x, y);
+ 		if (ret < 0)
+ 			return log_msg_ret("tit", ret);
+ 
+diff --git a/boot/scene_textline.c b/boot/scene_textline.c
+index 6adef7cc173..4467bc4abcf 100644
+--- a/boot/scene_textline.c
++++ b/boot/scene_textline.c
+@@ -77,11 +77,11 @@ int scene_textline_calc_dims(struct scene_obj_textline *tline)
+ 		return log_msg_ret("nom", ret);
+ 
+ 	if (bbox.valid) {
+-		tline->obj.dim.w = bbox.x1 - bbox.x0;
+-		tline->obj.dim.h = bbox.y1 - bbox.y0;
++		tline->obj.bbox.w = bbox.x1 - bbox.x0;
++		tline->obj.bbox.h = bbox.y1 - bbox.y0;
+ 
+-		scene_obj_set_size(scn, tline->edit_id, tline->obj.dim.w,
+-				   tline->obj.dim.h);
++		scene_obj_set_size(scn, tline->edit_id, tline->obj.bbox.w,
++				   tline->obj.bbox.h);
+ 	}
+ 
+ 	return 0;
+@@ -95,16 +95,16 @@ int scene_textline_arrange(struct scene *scn, struct expo_arrange_info *arr,
+ 	int x, y;
+ 	int ret;
+ 
+-	x = tline->obj.dim.x;
+-	y = tline->obj.dim.y;
++	x = tline->obj.bbox.x;
++	y = tline->obj.bbox.y;
+ 	if (tline->label_id) {
+-		ret = scene_obj_set_pos(scn, tline->label_id, tline->obj.dim.x,
++		ret = scene_obj_set_pos(scn, tline->label_id, tline->obj.bbox.x,
+ 					y);
+ 		if (ret < 0)
+ 			return log_msg_ret("tit", ret);
+ 
+ 		ret = scene_obj_set_pos(scn, tline->edit_id,
+-					tline->obj.dim.x + 200, y);
++					tline->obj.bbox.x + 200, y);
+ 		if (ret < 0)
+ 			return log_msg_ret("tit", ret);
+ 
+@@ -198,8 +198,8 @@ int scene_textline_render_deps(struct scene *scn,
+ 		if (ret)
+ 			return log_msg_ret("sav", ret);
+ 
+-		vidconsole_set_cursor_visible(cons, true, txt->obj.dim.x,
+-					      txt->obj.dim.y, scn->cls.num);
++		vidconsole_set_cursor_visible(cons, true, txt->obj.bbox.x,
++					      txt->obj.bbox.y, scn->cls.num);
+ 	}
+ 
+ 	return 0;
+@@ -220,7 +220,7 @@ int scene_textline_open(struct scene *scn, struct scene_obj_textline *tline)
+ 	if (!txt)
+ 		return log_msg_ret("cur", -ENOENT);
+ 
+-	vidconsole_set_cursor_pos(cons, txt->obj.dim.x, txt->obj.dim.y);
++	vidconsole_set_cursor_pos(cons, txt->obj.bbox.x, txt->obj.bbox.y);
+ 	vidconsole_entry_start(cons);
+ 	cli_cread_init(&scn->cls, abuf_data(&tline->buf), tline->max_chars);
+ 	scn->cls.insert = true;
+diff --git a/include/expo.h b/include/expo.h
+index a2b093c521d..42e934e3ff2 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -192,14 +192,14 @@ enum scene_obj_t {
+ };
+ 
  /**
-  * bootflow_menu_apply_theme() - Apply a theme to a bootmenu
+- * struct scene_dim - Dimensions of an object
++ * struct scene_obj_bbox - Dimensions of an object
   *
+  * @x: x position, in pixels from left side
+  * @y: y position, in pixels from top
+  * @w: width, in pixels
+  * @h: height, in pixels
+  */
+-struct scene_dim {
++struct scene_obj_bbox {
+ 	int x;
+ 	int y;
+ 	int w;
+@@ -232,7 +232,7 @@ enum {
+  * @name: Name of the object (allocated)
+  * @id: ID number of the object
+  * @type: Type of this object
+- * @dim: Dimensions for this object
++ * @bbox: Dimensions for this object
+  * @flags: Flags for this object
+  * @bit_length: Number of bits used for this object in CMOS RAM
+  * @start_bit: Start bit to use for this object in CMOS RAM
+@@ -243,7 +243,7 @@ struct scene_obj {
+ 	char *name;
+ 	uint id;
+ 	enum scene_obj_t type;
+-	struct scene_dim dim;
++	struct scene_obj_bbox bbox;
+ 	u8 flags;
+ 	u8 bit_length;
+ 	u16 start_bit;
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index b32a4596e85..77b956bdf06 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -270,8 +270,8 @@ static int expo_object_attr(struct unit_test_state *uts)
+ 	ut_assert(id > 0);
+ 
+ 	ut_assertok(scene_obj_set_pos(scn, OBJ_LOGO, 123, 456));
+-	ut_asserteq(123, img->obj.dim.x);
+-	ut_asserteq(456, img->obj.dim.y);
++	ut_asserteq(123, img->obj.bbox.x);
++	ut_asserteq(456, img->obj.bbox.y);
+ 
+ 	ut_asserteq(-ENOENT, scene_obj_set_pos(scn, OBJ_TEXT2, 0, 0));
+ 
+@@ -360,8 +360,8 @@ static int expo_object_menu(struct unit_test_state *uts)
+ 	ut_asserteq(0, menu->pointer_id);
+ 
+ 	ut_assertok(scene_obj_set_pos(scn, OBJ_MENU, 50, 400));
+-	ut_asserteq(50, menu->obj.dim.x);
+-	ut_asserteq(400, menu->obj.dim.y);
++	ut_asserteq(50, menu->obj.bbox.x);
++	ut_asserteq(400, menu->obj.bbox.y);
+ 
+ 	id = scene_txt_str(scn, "title", OBJ_MENU_TITLE, STR_MENU_TITLE,
+ 			   "Main Menu", &tit);
+@@ -407,24 +407,24 @@ static int expo_object_menu(struct unit_test_state *uts)
+ 	ut_asserteq(id, menu->cur_item_id);
+ 
+ 	/* the title should be at the top */
+-	ut_asserteq(menu->obj.dim.x, tit->obj.dim.x);
+-	ut_asserteq(menu->obj.dim.y, tit->obj.dim.y);
++	ut_asserteq(menu->obj.bbox.x, tit->obj.bbox.x);
++	ut_asserteq(menu->obj.bbox.y, tit->obj.bbox.y);
+ 
+ 	/* the first item should be next */
+-	ut_asserteq(menu->obj.dim.x, name1->obj.dim.x);
+-	ut_asserteq(menu->obj.dim.y + 32, name1->obj.dim.y);
++	ut_asserteq(menu->obj.bbox.x, name1->obj.bbox.x);
++	ut_asserteq(menu->obj.bbox.y + 32, name1->obj.bbox.y);
+ 
+-	ut_asserteq(menu->obj.dim.x + 230, key1->obj.dim.x);
+-	ut_asserteq(menu->obj.dim.y + 32, key1->obj.dim.y);
++	ut_asserteq(menu->obj.bbox.x + 230, key1->obj.bbox.x);
++	ut_asserteq(menu->obj.bbox.y + 32, key1->obj.bbox.y);
+ 
+-	ut_asserteq(menu->obj.dim.x + 200, ptr->obj.dim.x);
+-	ut_asserteq(menu->obj.dim.y + 32, ptr->obj.dim.y);
++	ut_asserteq(menu->obj.bbox.x + 200, ptr->obj.bbox.x);
++	ut_asserteq(menu->obj.bbox.y + 32, ptr->obj.bbox.y);
+ 
+-	ut_asserteq(menu->obj.dim.x + 280, desc1->obj.dim.x);
+-	ut_asserteq(menu->obj.dim.y + 32, desc1->obj.dim.y);
++	ut_asserteq(menu->obj.bbox.x + 280, desc1->obj.bbox.x);
++	ut_asserteq(menu->obj.bbox.y + 32, desc1->obj.bbox.y);
+ 
+-	ut_asserteq(-4, prev1->obj.dim.x);
+-	ut_asserteq(menu->obj.dim.y + 32, prev1->obj.dim.y);
++	ut_asserteq(-4, prev1->obj.bbox.x);
++	ut_asserteq(menu->obj.bbox.y + 32, prev1->obj.bbox.y);
+ 	ut_asserteq(true, prev1->obj.flags & SCENEOF_HIDE);
+ 
+ 	/* check iterating through scene items */
+@@ -548,41 +548,41 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	/* check dimensions of text */
+ 	obj = scene_obj_find(scn, OBJ_TEXT, SCENEOBJT_NONE);
+ 	ut_assertnonnull(obj);
+-	ut_asserteq(400, obj->dim.x);
+-	ut_asserteq(100, obj->dim.y);
+-	ut_asserteq(126, obj->dim.w);
+-	ut_asserteq(40, obj->dim.h);
++	ut_asserteq(400, obj->bbox.x);
++	ut_asserteq(100, obj->bbox.y);
++	ut_asserteq(126, obj->bbox.w);
++	ut_asserteq(40, obj->bbox.h);
+ 
+ 	/* check dimensions of image */
+ 	obj = scene_obj_find(scn, OBJ_LOGO, SCENEOBJT_NONE);
+ 	ut_assertnonnull(obj);
+-	ut_asserteq(50, obj->dim.x);
+-	ut_asserteq(20, obj->dim.y);
+-	ut_asserteq(160, obj->dim.w);
+-	ut_asserteq(160, obj->dim.h);
++	ut_asserteq(50, obj->bbox.x);
++	ut_asserteq(20, obj->bbox.y);
++	ut_asserteq(160, obj->bbox.w);
++	ut_asserteq(160, obj->bbox.h);
+ 
+ 	/* check dimensions of menu labels - both should be the same width */
+ 	obj = scene_obj_find(scn, ITEM1_LABEL, SCENEOBJT_NONE);
+ 	ut_assertnonnull(obj);
+-	ut_asserteq(50, obj->dim.x);
+-	ut_asserteq(436, obj->dim.y);
+-	ut_asserteq(29, obj->dim.w);
+-	ut_asserteq(18, obj->dim.h);
++	ut_asserteq(50, obj->bbox.x);
++	ut_asserteq(436, obj->bbox.y);
++	ut_asserteq(29, obj->bbox.w);
++	ut_asserteq(18, obj->bbox.h);
+ 
+ 	obj = scene_obj_find(scn, ITEM2_LABEL, SCENEOBJT_NONE);
+ 	ut_assertnonnull(obj);
+-	ut_asserteq(50, obj->dim.x);
+-	ut_asserteq(454, obj->dim.y);
+-	ut_asserteq(29, obj->dim.w);
+-	ut_asserteq(18, obj->dim.h);
++	ut_asserteq(50, obj->bbox.x);
++	ut_asserteq(454, obj->bbox.y);
++	ut_asserteq(29, obj->bbox.w);
++	ut_asserteq(18, obj->bbox.h);
+ 
+ 	/* check dimensions of menu */
+ 	obj = scene_obj_find(scn, OBJ_MENU, SCENEOBJT_NONE);
+ 	ut_assertnonnull(obj);
+-	ut_asserteq(50, obj->dim.x);
+-	ut_asserteq(400, obj->dim.y);
+-	ut_asserteq(160, obj->dim.w);
+-	ut_asserteq(160, obj->dim.h);
++	ut_asserteq(50, obj->bbox.x);
++	ut_asserteq(400, obj->bbox.y);
++	ut_asserteq(160, obj->bbox.w);
++	ut_asserteq(160, obj->bbox.h);
+ 
+ 	/* render it */
+ 	expo_set_scene_id(exp, SCENE1);
 -- 
 2.43.0
 
