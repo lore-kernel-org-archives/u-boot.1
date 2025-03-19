@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D4EFC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 12:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9EEBC35FFB
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 12:00:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 982A681CE7;
-	Wed, 19 Mar 2025 12:59:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E171A81D67;
+	Wed, 19 Mar 2025 12:59:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c+E42bXi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N2F7UZ4+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C0EE81CAF; Wed, 19 Mar 2025 12:59:36 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 1D02381A0C; Wed, 19 Mar 2025 12:59:38 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9850481BC0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 12:59:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1974081951
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 12:59:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43cfe574976so28297695e9.1
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 04:59:34 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3912d2c89ecso6132159f8f.2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 04:59:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742385573; x=1742990373; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742385575; x=1742990375; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wHX1p3aCRXxT5WScXjhp7nHAhgY/lZhfe6JQVX91crs=;
- b=c+E42bXiC4EM0PbDG9CFt93rrVL2nLrNpYN5HZ6LhjFzo1GHVXTRdZ8DQSlPzuZzrQ
- i67wFgAnNQ7Hhn1Rty+IiHwFWr+uB/Nty3Bt+4UCeD0jXZSTlJ5G4+x82YkUYri8H06x
- 9VWHWAvPPCjBP3yKLsEr4PghNPaiOkwRsPFII=
+ bh=JLuTyc5ph5bcSKJr0GzPpw0mobMKA9QhFP85FBodOhY=;
+ b=N2F7UZ4+2kan5R233GdAyp0JnnK5DlTQZUYRXDxmAwWNmiwfNFKwu49nA3918bpyNl
+ m9+wKE4rbmS6W9Ttyox9ubCuT0GYB3QOxlWuv8+gznSuEyjjHCcC3xWAvi3iH/n81xDI
+ f0DZJrHltaoO+nN9skI5nfshSlwOK+u+fkf7Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742385573; x=1742990373;
+ d=1e100.net; s=20230601; t=1742385575; x=1742990375;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wHX1p3aCRXxT5WScXjhp7nHAhgY/lZhfe6JQVX91crs=;
- b=L/Qbvra9kNm005XB6nDgKhp1kRupr7/47hAD2k0lehLEgtmSG0oDMdeNOPbaltQUpi
- inilabrWDShToyZNOVkPbducpzRtBpNpxxUe2EDaIHF6j1TDyGCOiAg4FOqiUHIDcUuI
- PPnB3Pn/DnhkwUg4gJug7VoGXCpVqs3p4rFQwwP28cwyu7/8RqfZ64De7FBnZHkqBbYy
- QSA0dFz/iHa2+HQIcKMTUrZoxOa+seUQORRqv0bjzCuDjNEvPAqj+bCLgdq+/Xzqj0yT
- nvMwDysUkRXMsetPhSx67xItxluQtpLWciFmkXUEClFCSDwRVFpNqWMWwYVgjmIMg8Aw
- Xx0g==
-X-Gm-Message-State: AOJu0YyneFEmTY04qiOFmg6KVNALPvOkvAc1DxXHGCeXPbuqQgR8BU1R
- mt/77HZkeAo00ynO2lMrD+ou2il8uRGceVy7NqJf1oq6bvQ9AvZTwnMscuLxmSvMEEYJ+87NEzw
- 3kg==
-X-Gm-Gg: ASbGncuVMQ+ky9e8SnkMthXvivy0jXqfyMDxVJFIRWO0u7Z5zk9HYdUdwfCtnNCypQc
- +9Ls2HhxzuOU4wzy8lRS6DccfZJZU3oQZLhDVg/vsTdaIZVbxbb7FIrjyhMMBox8dtfqOoH+kn5
- H2eQdcOv8SIp4IS/O6lXOJgtYIyuWxI7EugJvka9qLVs58cM4R+ZXNwgj1uF92W2dRMFbz/MLR6
- 2pu1zsp44N5tT3JRz1y5HAlbmGlOHVB0Nzp4ZpRhFkjB9SxPRzO7nfjPXuM/Opp09nStWQ7LPQx
- Do+4Tf0t5uSMzSriDNq+f9E6C2bMtY57Gx7CRs0OEge1DdYZi17z
-X-Google-Smtp-Source: AGHT+IGtU+0upbNEvHYeFx94M+vCujcccfLCQnzzlJmasyJNQOCAvsbktHqM1epgO0eBx2mTCvFUJw==
-X-Received: by 2002:a5d:59a7:0:b0:399:6af3:7a77 with SMTP id
- ffacd0b85a97d-399739bf15emr2256865f8f.19.1742385573461; 
- Wed, 19 Mar 2025 04:59:33 -0700 (PDT)
+ bh=JLuTyc5ph5bcSKJr0GzPpw0mobMKA9QhFP85FBodOhY=;
+ b=wvDzZqQtBuX/B+GyoLrljSa4k6+zAmZatJv7vo6m6ZvzCWyL6XGx3d9AufoTSc9gUd
+ ZsE/ke4mQ1D0FU+/OIGG+ZUGL3t9kPNk/5V1TAcrR5Bt/bbtG2RxZxax3JUea3x9haLO
+ CZTUqMgry5wk9NaA4tCNAY5Vd3hRnrkcUFLRVZsat1P6GyBHVkIZ2lKFTD60metBtmra
+ cMRqaZ90lkC//0NdKu09L48Olq0ZZh9cBTd0eZVUGc0SoeLC95H+rX1LTFWwSqSarkWW
+ 6+14/wfz5DNMNbQea5gOzTHG+IChXm6ICCkvCm3wifHrG5wEoEE2bJdE3oGFcgepbhjq
+ HThA==
+X-Gm-Message-State: AOJu0YwGPveHL2zo+4BO6QGs8/UdFOpemFe+akQ2Aq7r4A26dkYpYUB6
+ DO0cmwa+Lge3OhHSLEg3INkS0X1Q/IEj1CV3FDTJg6o6csA092Kp1lz/E4KbOHWZP1ps2tfUy0S
+ Urw==
+X-Gm-Gg: ASbGncs4eelFvOt8wXpKjbBGW/5vYZMDIrFCXihehzWsqrRoytj/nQ3HjQ6Im+9i+kf
+ VXo3Ft8lTXqFGg3sQFmwwETRpsq9cFLis47bASRSMtATHbrrdSBHj4AFeCWSqXgmlW2Hcj4DBUc
+ eX86iqjzKB1scgiTNlzxNJlKKHMfEzrTyavaPxJYxQPdH3UlmbKuJu90w+d00VmDFmZ4R856e5G
+ m1TWDJdoh/1BVIrOTny/4xKWgL9gKLSwYcQkubh9tG5gohejW2z2Lb40LRPykoqfu9pBkEWqvpK
+ 0+kTM9yi72mhbRqdi9aSKN26aV1Q2KDyCQpL2QZe/w==
+X-Google-Smtp-Source: AGHT+IFPripcjQXI8s8pJ0asU6iXXf5+O3N6AiTFyBRQIKVQEBipgUazLyZLKYpTWJB5/GL9PER3IA==
+X-Received: by 2002:a05:6000:1568:b0:391:3cf6:95fd with SMTP id
+ ffacd0b85a97d-399739e5de2mr1986766f8f.30.1742385574993; 
+ Wed, 19 Mar 2025 04:59:34 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395cb7ea16csm20606906f8f.82.2025.03.19.04.59.31
+ ffacd0b85a97d-395cb7ea16csm20606906f8f.82.2025.03.19.04.59.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 04:59:31 -0700 (PDT)
+ Wed, 19 Mar 2025 04:59:34 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/6] test: Add a test for strim()
-Date: Wed, 19 Mar 2025 12:59:05 +0100
-Message-ID: <20250319115911.2204045-4-sjg@chromium.org>
+Subject: [PATCH 4/6] membuf: Add an easy way to set up a buffer with data
+Date: Wed, 19 Mar 2025 12:59:06 +0100
+Message-ID: <20250319115911.2204045-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319115911.2204045-1-sjg@chromium.org>
 References: <20250319115911.2204045-1-sjg@chromium.org>
@@ -94,54 +94,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function trims whitespace from the start and end of a string. Add a
-test for it.
+In some cases it is useful to set up a buffer with some data to read,
+e.g. when reading lines from a text file. Add a helper for this.
+
+Tidy up the comment for membuf_init() while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/lib/string.c | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+ include/membuf.h | 15 ++++++++++++++-
+ lib/membuf.c     |  8 ++++++++
+ 2 files changed, 22 insertions(+), 1 deletion(-)
 
-diff --git a/test/lib/string.c b/test/lib/string.c
-index 8d22f3fd68f..af84dd0715e 100644
---- a/test/lib/string.c
-+++ b/test/lib/string.c
-@@ -221,3 +221,34 @@ static int lib_memdup(struct unit_test_state *uts)
- 	return 0;
+diff --git a/include/membuf.h b/include/membuf.h
+index b495a72652b..f5c474cf730 100644
+--- a/include/membuf.h
++++ b/include/membuf.h
+@@ -222,7 +222,9 @@ int membuf_readline(struct membuf *mb, char *str, int maxlen, int minch,
+ int membuf_extend_by(struct membuf *mb, int by, int max);
+ 
+ /**
+- * membuf_init() - set up a new membuff using an existing membuff
++ * membuf_init() - set up a new membuff using an existing buffer
++ *
++ * The buffer is initially empty
+  *
+  * @mb: membuff to set up
+  * @buff: Address of buffer
+@@ -230,6 +232,17 @@ int membuf_extend_by(struct membuf *mb, int by, int max);
+  */
+ void membuf_init(struct membuf *mb, char *buff, int size);
+ 
++/**
++ * membuf_init_with_data() - set up a new membuff using existing data
++ *
++ * The buffer is set up to contain the provided data
++ *
++ * @mb: membuff to set up
++ * @buff: Address of buffer
++ * @size: Size of buffer
++ */
++void membuf_init_with_data(struct membuf *mb, char *buff, int size);
++
+ /**
+  * membuf_uninit() - clear a membuff so it can no longer be used
+  *
+diff --git a/lib/membuf.c b/lib/membuf.c
+index 016430ae988..347c92e3326 100644
+--- a/lib/membuf.c
++++ b/lib/membuf.c
+@@ -405,6 +405,14 @@ void membuf_init(struct membuf *mb, char *buff, int size)
+ 	membuf_purge(mb);
  }
- LIB_TEST(lib_memdup, 0);
-+
-+static int lib_strim(struct unit_test_state *uts)
+ 
++void membuf_init_with_data(struct membuf *mb, char *buff, int size)
 +{
-+	char buf[BUFLEN];
++	char *data;
 +
-+	strcpy(buf, "abc");
-+	ut_asserteq_str("abc", strim(buf));
-+
-+	/* leading space */
-+	strcpy(buf, " abc");
-+	ut_asserteq_str("abc", strim(buf));
-+
-+	/* multiple leading spaces */
-+	strcpy(buf, "  abc");
-+	ut_asserteq_str("abc", strim(buf));
-+
-+	/* multiple internal spaces */
-+	strcpy(buf, "  a   bc");
-+	ut_asserteq_str("a   bc", strim(buf));
-+
-+	/* with trailing space */
-+	strcpy(buf, "  a   bc ");
-+	ut_asserteq_str("a   bc", strim(buf));
-+
-+	/* with multiple trailing spaces */
-+	strcpy(buf, "  a   bc   ");
-+	ut_asserteq_str("a   bc", strim(buf));
-+
-+	return 0;
++	membuf_init(mb, buff, size);
++	membuf_putraw(mb, size, true, &data);
 +}
-+LIB_TEST(lib_strim, 0);
++
+ int membuf_new(struct membuf *mb, int size)
+ {
+ 	mb->start = malloc(size);
 -- 
 2.43.0
 
