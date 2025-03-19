@@ -4,89 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8594FC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:25:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FDC6C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 22:08:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73EFB81D0B;
-	Wed, 19 Mar 2025 21:25:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 0083F810F4;
+	Wed, 19 Mar 2025 23:08:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bMKJFrNI";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742422104;
+	bh=O0DtA49/EFv6lMPbUPy/w9ZyxiKcym/V04VPBvtA30k=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=HhiooIV2JX90yHmqa0ssmB6ICgtC6bR53ESI2iVAlIEweJCu3/TEJM98PQc/Kr0Cr
+	 /+Tw9+lzes9f9rEDlj68feXN3Kg+cqGBtDJSodv96/2HjY1gUfj6Np5FudPy/XfZls
+	 9ehJQ9U9pvV1Pl6czGsn2a7M4kqOcbM1260/nzvPXddgRKUs0eus6iQn8RIaMtipmG
+	 ZdG6VV4XtKZsVoGOQrKbsROQWHko4Dl5bn94PhYrcUlDMcNUGa0ZU7gU1GEumDkvk/
+	 P1C1DK8I3W7UKXCL3ldnkg9cHAZHwwmmTD4GrVXmFIrJA89FpwrFIM3zpdic4+HAvw
+	 kfNXKUwgH1ZYg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3227C810F4; Wed, 19 Mar 2025 21:25:28 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5129A81101; Wed, 19 Mar 2025 23:08:23 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A475B81B4B
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:25:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9AC2810F2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 23:08:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sbellary@baylibre.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-223f4c06e9fso948565ad.1
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 13:25:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742415924; x=1743020724;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/OmsvKDqeU5gvgJi0YGDhPIf2ofw0zSSXy3Dop0VVJ8=;
- b=bMKJFrNI+wiC6nBHQOw1KSJ/ryX9ZpooVIO/jKCrnvRiDNQhEwf9oE2YwPcqjdeBkd
- oki72LIJTeli87Ogs/lEjWwLLNnvU+kYQi95Jo8ZtQ0XcoJfumBjLb+ltXJbn2UhGAZm
- CBRRF3Nj9DUhL/a+FR5uLJlRkUf/sUOTnSJkwns3SUAyamHWF2S+aaj47j9rhUD2Nmy0
- OEfXuOk1Mk69zoolpNG/CVmXmzExuyowcRYnXaiLEQ0woa/GWPfKvRsYwKjciI5Axi0H
- x5wCObEdgEBBnnPDJxP/uPbhXqmnRbNTBpDLhyHDchAW0So3RqJx2L3gxrMdLr25HyQ+
- m+Ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742415924; x=1743020724;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/OmsvKDqeU5gvgJi0YGDhPIf2ofw0zSSXy3Dop0VVJ8=;
- b=hzH+vwWkRq+WG/yj5OpuRLGivjI1x6U11YiTbUjv9a7FCoEdGuKhfjGMCW/njF5Y/b
- zU/R0iW4spZf1W+IZkFGnNaFr5J7LVYuuyt94kQdRf083eHWm78/3MThk+sS0/PCBlVj
- /zYCrLZkd1D9eYwHoxmdbJQz9J2cpPqkskPk/Gy/77YGr72trhq/WqGAye9Y4DkcVMNt
- ste5dGIH7v99USTNnnFHWZs+BShPz6+DQgdxAmMmJcAFVqrS4br4kSs2QsTkrMwV+7ri
- iiw5dcnx53WzN430NStM7w0fZsHPtqDT8heucqsiQJ+657ML+nWbjT6qThF9HAcTMGj5
- MLeg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXmr0w/dZ7BERj6+gBoLFYiaC+c2/Bk3AIa+cTfbxzgBANKE9YKvp7FoQx5LLxnRisWKgqfXU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmGxDhefGogT4f51HnNiwvsDY75rPsmvagvfE4ZhpsHAvYFc0r
- kK0V5UQt6W6K5HignBY2c8qJ1SQV0L1vFBw+OuFbNxglxjL9dgjRXnobjAJCrVTOZDxfwdtOn5a
- o
-X-Gm-Gg: ASbGncuCqAcA7/6zYaMcpbSPFq8136k07udn5RI5SH2UGb59cVD66ffQvRPIi3cxCGj
- GR1W/M+In2nq44sZVV9VwJwqTptDpcHD1E+LIt6fdThChb8sxB9rGLtr1gAVYEXuNKjoKcxCZAo
- GH57V0cH2JZaPRyuk5uUBPkuD+rISlB8q8L+r7ehpu/WST7qGr+qMZcuhcgOJhA1PoMGcmlF7r4
- 9N+1TKwuHoYeRL7r2w+EwB2tg/U/pZAbCaTLIScvF545O14nuv1lO+Q7Ov+JGYh7iaxbNODG6aG
- 65Gem0Z+aR2Zr3cmV6wKEBNOCq7xb1M5X/noMqFYV7U0XmhxyPho2s7MNa6rkQV0lRLEvf8j7XP
- LU8LFiL8=
-X-Google-Smtp-Source: AGHT+IHq8y8jrtmND2BhnmIE0f5Gj4j1UXfhcbdwkHAgekT+zGvIBcuBxftT3N9BysU9tD6tkOgorg==
-X-Received: by 2002:a17:903:2301:b0:223:fbbe:599c with SMTP id
- d9443c01a7336-2265e743ce3mr13765535ad.19.1742415924191; 
- Wed, 19 Mar 2025 13:25:24 -0700 (PDT)
-Received: from dev-linux.. (syn-076-088-115-008.res.spectrum.com.
- [76.88.115.8]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73730ca057csm8886757b3a.48.2025.03.19.13.25.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 13:25:23 -0700 (PDT)
-From: Sukrut Bellary <sbellary@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Sukrut Bellary <sbellary@baylibre.com>,
- Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
- Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH 3/3] arm: dts: am335x: Add nodes for lcdc, panel and backlight
-Date: Wed, 19 Mar 2025 13:25:16 -0700
-Message-Id: <20250319202516.3300444-4-sbellary@baylibre.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250319202516.3300444-1-sbellary@baylibre.com>
-References: <20250319202516.3300444-1-sbellary@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="bacycYEH"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 5B93F101E9152; Wed, 19 Mar 2025 23:08:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742422099; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=O0DtA49/EFv6lMPbUPy/w9ZyxiKcym/V04VPBvtA30k=;
+ b=bacycYEHH4SnTvh3wC23kYyBA1Ll7hnIxaQXcQiGBuxb07OlQbKqcTtI3HPySDHSXxpOaU
+ ooUwL9BLQ5WXhTpKl26zHdQ3DsZ7ZBQQZJHicSTAp8/1g1EEDmlgJQ0QhDFQujbj+15y1W
+ SVqqhx1ERVbmUyWe0zyhanKVXCByr4rC8E9Fu7SRhfxmVqY6s/NrsBtdmSqcflBgdUe4P6
+ g2CzvfFm0szXmOZXwJd9AiFTOYJrUpVxAeT9DoKeyErvE4xlgZbBR4sVCR5gFPLlqyvL3m
+ 91l+lYIaRzCkgch9pB+g5+v/yUAELkTPNiAsAxRxZBCRMuh0vP3LDd7o2OKjoA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Felipe Balbi <felipe.balbi@linux.intel.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
+Date: Wed, 19 Mar 2025 23:07:52 +0100
+Message-ID: <20250319220805.219001-1-marex@denx.de>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,64 +77,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For AM335x EVM[1], enable nodes required to enable the support for LCD
-and PWM backlight.
-This is required for the splash screen support.
+The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
+it crashes. This is a result of the previous hard-coded EP setup in
+drivers/usb/gadget/epautoconf.c which did special-case EP allocation
+for SPL builds, and which was since converted to this callback, but
+without the special-case EP allocation in SPL part.
 
-[1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
+This reinstates the SPL part in an isolated manner, only for NXP iMX
+SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
 
-Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
+Fixes: 1918b8010c32 ("usb: dwc3: gadget: Convert epautoconf workaround to match_ep callback")
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- arch/arm/dts/am335x-evm.dts | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+NOTE: This should go into master as a bugfix.
+---
+ drivers/usb/dwc3/gadget.c | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/am335x-evm.dts b/arch/arm/dts/am335x-evm.dts
-index 6e799621678b..d4f93e75ced5 100644
---- a/arch/arm/dts/am335x-evm.dts
-+++ b/arch/arm/dts/am335x-evm.dts
-@@ -98,7 +98,7 @@
- 		};
- 	};
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index e5a383407a2..477ecd02098 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -1631,8 +1631,25 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
+ 		return dwc3_find_ep(gadget, "ep1in");
+ 	if (usb_endpoint_is_bulk_out(desc))
+ 		return dwc3_find_ep(gadget, "ep2out");
+-	if (usb_endpoint_is_int_in(desc))
++	if (usb_endpoint_is_int_in(desc)) {
++		/*
++		 * Special workaround for NXP UUU tool in SPL.
++		 *
++		 * The tool excepts the interrupt-in endpoint to be ep1in,
++		 * otherwise it crashes. This is a result of the previous
++		 * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
++		 * which did special-case EP allocation for SPL builds,
++		 * and which was since converted to this callback, but
++		 * without the special-case EP allocation in SPL part.
++		 *
++		 * This reinstates the SPL part in an isolated manner,
++		 * only for NXP iMX SoCs, only for SPL builds, and only
++		 * for the ep1in interrupt-in endpoint.
++		 */
++		if (IS_ENABLED(CONFIG_MACH_IMX) && IS_ENABLED(CONFIG_XPL_BUILD))
++			return dwc3_find_ep(gadget, "ep1in");
+ 		return dwc3_find_ep(gadget, "ep3in");
++	}
  
--	backlight {
-+	backlight: backlight {
- 		compatible = "pwm-backlight";
- 		pwms = <&ecap0 0 50000 0>;
- 		brightness-levels = <0 51 53 56 62 75 101 152 255>;
-@@ -110,6 +110,7 @@
- 		status = "okay";
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&lcd_pins_s0>;
-+		backlight = <&backlight>;
- 		panel-info {
- 			ac-bias           = <255>;
- 			ac-bias-intrpt    = <0>;
-@@ -137,6 +138,12 @@
- 				vsync-active = <1>;
- 			};
- 		};
-+		port {
-+			panel_0: endpoint@0 {
-+				remote-endpoint = <&lcdc_0>;
-+			};
-+		};
-+
- 	};
- 
- 	sound {
-@@ -478,6 +485,12 @@
- 
- &lcdc {
- 	status = "okay";
-+
-+	port {
-+		lcdc_0: endpoint@0 {
-+			remote-endpoint = <&panel_0>;
-+		};
-+	};
- };
- 
- &elm {
+ 	return NULL;
+ }
 -- 
-2.34.1
+2.47.2
 
