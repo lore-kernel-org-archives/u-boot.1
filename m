@@ -4,82 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 261C3C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6EDC35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:38:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A47DB81D5A;
-	Wed, 19 Mar 2025 15:24:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 48C7A8193A;
+	Wed, 19 Mar 2025 15:38:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HXdRDt5a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YaiTENEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76E9B81DE3; Wed, 19 Mar 2025 15:24:45 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id C71EE819B1; Wed, 19 Mar 2025 15:38:33 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 280C381A0E
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:24:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63C28803CC
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-22435603572so113789095ad.1
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:24:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso35942075e9.2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:38:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742394282; x=1742999082; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4LXzK/1omymmmouWUfQqrPoudM8oUCyWKpL11E6jqGI=;
- b=HXdRDt5akVl96Ew/DpJslTx+bQqv1c3wuENV89ko/2E2yqgatfpqeLRQEXyklDbJ1f
- 9IRmS8hjUbi08/EiNJF9W2DnTpE3vx9Ruy+jodqEoAhHbzOpLzuTr8Dm/B6YknhwaRj3
- MXTGp0jeNcuFLVpUxdzvg1INCU6WJ/e/4OXaw=
+ d=chromium.org; s=google; t=1742395110; x=1742999910; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kS6v9+IUQ4zNFVkzW5+AORPzZYfD1zEYidptJeCFP/o=;
+ b=YaiTENEZmOBPxA0d1O1qrkYZlpQa5xxGhjnxxQZ0saKwsVmzmrU0Gits7Dg6iZrGC9
+ 3HE6Rp5HhJYt7iDayTCfQdIL02SdS/y+HeaSI+jDqp6RcvdliMVKuoPwQtYwNRVT1GtB
+ yKGmVx/yHqH/ccbYpL9NCYh4GxqmzQDcutv0k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742394282; x=1742999082;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4LXzK/1omymmmouWUfQqrPoudM8oUCyWKpL11E6jqGI=;
- b=wUiO71lfVzjZsVqxo4Nz7RGs0YhVDSIfPctT3KVy6ne9YutKvxUQymdxAlbkz4LQJg
- YPxe05lSbk9BpMbwZ/X610rY8fG+Y2Lqz26xrdcP9RAo1lARQ0kBQBs+vSKPJW3H20qp
- QP5okAxgFQHCmVW/ILg8GeW+1t8+4L7qi99bxN1oVYfTa9VNptw2XQC3ooTuxcjGV6lj
- ayhLG0BCBmdELgeTZOFtNswlykiED9ihQk9sIC50VWdKSA8jvvRvq2LWfu9PTuw+hXfC
- 9okAKl9ppqnviKuPBaUFE3vtNn2yxmWtdWB9PnKjFFNdKLgyCb84op+jKXhyt5xmN0GW
- wKXw==
-X-Gm-Message-State: AOJu0YxBxHlznkdD3jo7Ycf342Lhest2VtfeUHXy5LdDeMr4IXlpRT6p
- W3Tw5Ox7GjkEDPKZQmyIPYwbZpxQCZ215F009pdp8hXXgi3i4ZovjtATHM8ZxpQhs9DAtUNy/b4
- 1
-X-Gm-Gg: ASbGncuxGS8pXx6b747l1QrQgiKBhL5sGXwMSjbmzBGc//lJiFy0i5QmOkstJo/AefS
- w2Ae9WF/shqM9gNG8bwHZKJk3fqbhxgrxreD0UsiVP1HBF0Y0z+g0MBh7Ke/DSPHomIfkhqfeAW
- 4YZBHpF3lllJigCfz+A2g1veKJ4BGUamiXthwH7sVDq2PN3W3GhpzTyGfgdxL92eeKSfwQASZqb
- 9DLaaUQg2aBcHMCWYBsQXQBMnAfS15TKVHv9rl/eXllVUBEomjHooIzkDO1fs8ieQTOcwUy7Yga
- 41AfUzG/WNwkO6ElAExcIQeF0NyOSIg6+XNgCHW6lGKquA==
-X-Google-Smtp-Source: AGHT+IE1UcvhLhBoDCWujx7cPm5VCxSjxvnPRwVtF2op+ijP0R8Sl/wyBMgZguDI2Vd5Ji/1DTmWJw==
-X-Received: by 2002:a05:6a21:492:b0:1f5:8eec:e500 with SMTP id
- adf61e73a8af0-1fbeb185eecmr5206055637.9.1742394281598; 
- Wed, 19 Mar 2025 07:24:41 -0700 (PDT)
-Received: from bill-the-cat ([187.144.138.125])
+ d=1e100.net; s=20230601; t=1742395110; x=1742999910;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kS6v9+IUQ4zNFVkzW5+AORPzZYfD1zEYidptJeCFP/o=;
+ b=glUSo5svDCwrbfjfVi/zgDA4yNzcp2Mnm2nTcpnVTmZmfoCr4+WfBSd0BaFhfkjYYU
+ pY255TQgycremaryQjXm4Mqrfv043YkRx37JGWqHnZJGdATCMya8fbm6tgd/EeTDj3KA
+ 2rZG8J6EFs1NEPU3kQZOJpkuEz27JHwGU45SdmHNxiaBzMzIYk+fiFijcJVcPNQFisiQ
+ 7ZnlXeZFGk/0kEkUfMWtWqDsGebzqmen/PlVnU+ig/HRS73SmSV0hKf9ftbMeBn5uQn5
+ +NyVcEeLUhVnCtd0FWgCr1A9XQfulKRQV5OzujXpCb03tfi4nxlLMcyMv0tu6ePVzRqz
+ 4SWA==
+X-Gm-Message-State: AOJu0YwXnN1UCOc1uzzSP6dK4aiFrRzfAv4b6qwOXjJWyu0M4ug3JhGT
+ g6De7LNmdgIGUMppTs8QgQq+Jubq8EawxPhbdLQBjXM/rWpvX/wvj2r6cWvPu+tKTUIpBZHFAuA
+ =
+X-Gm-Gg: ASbGncuJygtXLm7Uv695rooxN+kAYTfFg3sZT1/VDYdGI3TGd5wRJ8M3lst6VUNllPI
+ 8m0w5dEb9L3y6r6y2eFQKbey4dEIY3mEsSjwmEqTY5VRTY+agqftJN42nY+ENGEzz0Rknn+qafm
+ ftUT31NW0udIG5PmM7avam24gcT/fVwBHF4s5g3G6gCfZHIgveXNtnjG1hszou9zlETCcw3uOKJ
+ bkc8MK1lB10Cj6MbvHthnMsaDoh3Bo3cZSNRY8Mpk22/wj1YUjzSOJgIE6iQOGDb6V43NcUUIZd
+ P6p8B9sWHQbP2CxecQZQFICbyqMtwGoMEfXaMGAZQQ5+yCoyBfWU
+X-Google-Smtp-Source: AGHT+IGRQ8QPLlRgVfBlVaLaYpZkw5Fg/AKvTaB3Vuuy836Gwv9Nk42/0+K4iJ6+idaQSRiolpa27w==
+X-Received: by 2002:a05:6000:1549:b0:391:31f2:b99e with SMTP id
+ ffacd0b85a97d-399739b4089mr2581014f8f.2.1742395110136; 
+ Wed, 19 Mar 2025 07:38:30 -0700 (PDT)
+Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56ea7daddsm11010342a12.54.2025.03.19.07.24.40
+ ffacd0b85a97d-395cb318a80sm21534428f8f.61.2025.03.19.07.38.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:24:41 -0700 (PDT)
-Date: Wed, 19 Mar 2025 08:24:38 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 3/6] test: Add a test for strim()
-Message-ID: <20250319142438.GF2640854@bill-the-cat>
-References: <20250319115911.2204045-1-sjg@chromium.org>
- <20250319115911.2204045-4-sjg@chromium.org>
+ Wed, 19 Mar 2025 07:38:29 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Baruch Siach <baruch@tkos.co.il>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>, Roger Knecht <rknecht@pm.me>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 00/17] bootstd: Useability improvements
+Date: Wed, 19 Mar 2025 15:37:54 +0100
+Message-ID: <20250319143820.2385092-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rfiwxZ+/CvvKMN2G"
-Content-Disposition: inline
-In-Reply-To: <20250319115911.2204045-4-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,89 +111,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series collects together some bootstd improvements:
 
---rfiwxZ+/CvvKMN2G
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- Improve iteration when there are a lot of devices
+- Add a test image for Ubuntu (to compliment Fedora)
+- Improve the naming of USB devices and bootdevs
+- Add a new command to set the bootdev order
+- Add a little more debugging
+- Use an abuf when dealing with allocate files
+- A few other minor things in bootstd
 
-On Wed, Mar 19, 2025 at 12:59:05PM +0100, Simon Glass wrote:
+Most of these issues were found when adding the new test image and more
+USB devices to sandbox.
 
-> This function trims whitespace from the start and end of a string. Add a
-> test for it.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  test/lib/string.c | 31 +++++++++++++++++++++++++++++++
->  1 file changed, 31 insertions(+)
 
-This got me to ask "What even is using strim and where did it come
-=66rom?". To which the answer is:
-- A few places, but it's probably reasonable.
-- Linux, pre-2011.
+Simon Glass (17):
+  fs: boot: Update fs_read_alloc() to use abuf
+  fs: boot: Update fs_load_alloc() to use abuf
+  fs: boot: Update bootmeth_alloc_other() to use abuf
+  bootstd: Add more debugging to bootmeth_efi
+  bootstd: Add more debugging to bootmeth_extlinux
+  bootstd: Try all bootmeths on the final partition
+  bootstd: Fully complete iteration of a uclass
+  test/py: Split out core of Fedora image into a new function
+  test/py: Add a test image for Ubuntu
+  usb: Use more useful names for block devices
+  sandbox: Use a unique name for each USB controller
+  bootstd: Tweak scanning with labels
+  bootstd: Tidy up a nested CONFIG_IS_ENABLED(BOOTSTD)
+  bootstd: Provide a command to select the bootdev order
+  bootstd: Correct the comment for bootmeth_set_order()
+  bootstd: Expand debugging in bootdev_find_in_blk()
+  bootstd: Mention FS state in bootmeth_read_bootflow()
 
-I say the latter because we're missing a bug fix to the strim function
-that's been there since 2011:
+ arch/sandbox/dts/test.dts      |  13 +++-
+ boot/bootdev-uclass.c          | 112 +++++++++++++++++++++++----------
+ boot/bootflow.c                |  37 ++++++-----
+ boot/bootmeth-uclass.c         |  17 +++--
+ boot/bootmeth_efi.c            |   5 +-
+ boot/bootmeth_extlinux.c       |  14 ++++-
+ boot/bootmeth_script.c         |   6 +-
+ boot/bootstd-uclass.c          |  18 ++++++
+ cmd/bootdev.c                  |  37 +++++++++++
+ cmd/bootflow.c                 |   2 +-
+ cmd/cat.c                      |  13 ++--
+ cmd/cedit.c                    |  18 +++---
+ doc/usage/cmd/bootdev.rst      |  36 +++++++++++
+ drivers/usb/emul/sandbox_hub.c |   2 +-
+ drivers/usb/host/usb-uclass.c  |  14 ++++-
+ fs/fs.c                        |  28 ++++-----
+ include/bootdev.h              |  60 ++++++++++--------
+ include/bootflow.h             |   2 +-
+ include/bootmeth.h             |  12 ++--
+ include/bootstd.h              |  10 +++
+ include/fs.h                   |  18 +++---
+ test/boot/bootdev.c            |  83 ++++++++++++++++++------
+ test/boot/bootflow.c           |  10 +--
+ test/dm/blk.c                  |   4 +-
+ test/dm/usb.c                  |   8 +--
+ test/py/tests/test_ut.py       | 111 +++++++++++++++++++++++++-------
+ 26 files changed, 487 insertions(+), 203 deletions(-)
 
-commit 66f6958e69d8055277356d3cc2e7a1d734db1755
-Author: Michael Holzheu <holzheu@linux.vnet.ibm.com>
-Date:   Mon Oct 31 17:12:37 2011 -0700
+-- 
+2.43.0
 
-    lib/string.c: fix strim() semantics for strings that have only blanks
-   =20
-    Commit 84c95c9acf0 ("string: on strstrip(), first remove leading spaces
-    before running over str") improved=7F the performance of the strim()
-    function.
-   =20
-    Unfortunately this changed the semantics of strim() and broke my code.
-    Before the patch it was possible to use strim() without using the return
-    value for removing trailing spaces from strings that had either only
-    blanks or only trailing blanks.
-   =20
-    Now this does not work any longer for strings that *only* have blanks.
-   =20
-    Before patch: "   " -> ""    (empty string)
-    After patch:  "   " -> "   " (no change)
-   =20
-    I think we should remove your patch to restore the old behavior.
-   =20
-    The description (lib/string.c):
-   =20
-     * Note that the first trailing whitespace is replaced with a %NUL-term=
-inator
-   =20
-    =3D> The first trailing whitespace of a string that only has whitespace
-       characters is the first whitespace
-   =20
-    The patch restores the old strim() semantics.
-   =20
-    Signed-off-by: Michael Holzheu <holzheu@linux.vnet.ibm.com>
-    Cc: Andre Goddard Rosa <andre.goddard@gmail.com>
-    Cc: Martin Schwidefsky <schwidefsky@de.ibm.com>
-    Cc: Heiko Carstens <heiko.carstens@de.ibm.com>
-    Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
-    Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
-
---=20
-Tom
-
---rfiwxZ+/CvvKMN2G
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfa06YACgkQFHw5/5Y0
-tywS2QwAmUM1/WW3lDLgMCeh5PTI3IfIAsysVmKyu9lYZFlthn/Rkq4+OqTpg9ok
-gnmmoJIYTOiC/TL8YqAlqDE5q1KLmFJVszqU9VhDmZg9XxdI8/zoTjWuFJhYZ+ha
-9uO/7d8IeY2wKmuDEy6abdNIv/GVxCgqtsCJ5XS/o5QSTDl6KlfjYKuMgr4wRPy3
-tPcke00BVBjd4BJezD6KriqssEP1ZZTzTcYBfB4YW5DFtlwCqB6ltuiAQdQmXGxd
-b4BxSLXrTsIzR4O45Cxqjh3LO542B5Dw48ezwld0pb2qeNiF3hpJR/XYXDRsJ1rI
-ZZUrWNowdDP/iUSGjSUmnvnYgXsJPfYSFUUKO/90Z4U4zr6Vkxy78TxZzxTHSHyR
-4jorFJKpDtCc6HtdXirAmMDnpwoNRTceaYe9oPFUGKQPYb9Tivqo4lVUxDNbcwsu
-6qqPC23g/JNLlaGW5kiuAeLF/f2uj4tvodJb3mks8hKooPx39cD0WilzhqizKI4J
-d/3vwc7n
-=/F72
------END PGP SIGNATURE-----
-
---rfiwxZ+/CvvKMN2G--
+base-commit: 569681e993486b830035064f23ec87bcd70795d1
+branch: schc
