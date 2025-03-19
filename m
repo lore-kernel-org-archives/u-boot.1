@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD4DC35FFB
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 458A0C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:21:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DF7C8197D;
+	by phobos.denx.de (Postfix) with ESMTP id 6B91781B4B;
 	Wed, 19 Mar 2025 21:21:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="iTDwo7xw";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="nGqTHPNT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17B4181C67; Wed, 19 Mar 2025 21:21:03 +0100 (CET)
+ id 65DDD81D3B; Wed, 19 Mar 2025 21:21:04 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A53A810F4
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:20:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3922181A0E
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:21:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 6858110000D;
- Wed, 19 Mar 2025 23:20:58 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6858110000D
+ by mx1.sberdevices.ru (Postfix) with ESMTP id A6C55100014;
+ Wed, 19 Mar 2025 23:20:59 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru A6C55100014
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1742415658;
- bh=H3WE+GS7B6YVabiOijgU/qFvdi56abgkSCgGv3g16sM=;
+ s=mail; t=1742415659;
+ bh=/2cxCbxHsQ1eMmh7bRhWYOA84MGhtZATSCZoFu6239A=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=iTDwo7xw6hyus4AAcjCZUliNdp8PKOIddTy1rzlUMfOkBMxYfa7oQimZE/O0DS/rW
- fTuNBVe8J23vWyKvz3w8T469BAM9dG+6BLV/XzoHs9JIE8teDZSOED2JXtHaW4bnI8
- SsT1I8n2pzplwf9tvZ5YBOORZrvRW9JiqZOLy9eBP38XEtRHtUu6o9hzNVpDYjOLwE
- HTuBezhj/XrpwvmxJVczUz4UVeZO4wUwLpAeT2bm3L0eg+2KBUlNydMTAbOjL4d13N
- m8IATH/Vp4biXqkAUwQDteH4oFAK89fqA4DcF40NTuVZ4eYlb511nIxP7l5c1MKs2C
- R2AqKyFlcRVIA==
+ b=nGqTHPNTDJ7omdBx6cHKokgA0EdbUhg8fOzqsov5I5BI5Hp79rLrguYzJahMTiz0u
+ mYeKeDyQ+gAQaavl7cRzq+VkU7GTWqxBFe4gdpQoOhKKJolwbXVBykzVBlLMUOILoa
+ lJOmKdohQFFFZ1hFqJUIa6pFI0Lhp8frAjgQpkejWqiE71bECiHiEVUA2aLP77r96k
+ oAD1f37ogV7Wrj4/d27MokVxxB6qiAOWvN7AjiM8E7wK7vUEf8rCTibuuW24A4cHVR
+ /4QwE/Kn8JqRgjJpQtkBTVpdSDvszngiI/FCRGOjvYiAnyrcNmlhZNHCOUPus5xWjK
+ FQZzNmFMcKOGg==
 Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
  [172.24.201.216])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 19 Mar 2025 23:20:58 +0300 (MSK)
+ Wed, 19 Mar 2025 23:20:59 +0300 (MSK)
 From: Arseniy Krasnov <avkrasnov@salutedevices.com>
 To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
@@ -57,19 +57,17 @@ To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@salutedevices.com>, <oxffffaa@gmail.com>,
- <avkrasnov@salutedevices.com>, Vladimir Mitrofanov
- <vvmitrofanov@salutedevices.com>, Evgeny Bachinin
- <EABachinin@salutedevices.com>
-Subject: [PATCH v1 01/11] arch: arm: meson: sm: add commands to reboot device
- in different modes
-Date: Wed, 19 Mar 2025 23:20:35 +0300
-Message-ID: <20250319202045.1407-2-avkrasnov@salutedevices.com>
+ <avkrasnov@salutedevices.com>
+Subject: [PATCH v1 05/11] mtd: rawnand: meson: move some defines to dedicated
+ header
+Date: Wed, 19 Mar 2025 23:20:39 +0300
+Message-ID: <20250319202045.1407-6-avkrasnov@salutedevices.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20250319202045.1407-1-avkrasnov@salutedevices.com>
 References: <20250319202045.1407-1-avkrasnov@salutedevices.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [172.28.65.111]
 X-ClientProxiedBy: p-exch-cas-a-m2.sberdevices.ru (172.24.201.210) To
  p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
@@ -110,238 +108,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vladimir Mitrofanov <vvmitrofanov@salutedevices.com>
-
-There are several commands to reboot device in specific mode
-(cold, normal, etc.), these commands helps to enter flashing mode
-and set boot source device:
-
-1) MESON_SMC_CMD_BL1_FIRST_BOOT_SRC_SET
-
-  This command tells BL1 that it must load BL2 from USB data path. It is
-  used in ADNL protocol logic when burning process is started from the
-  U-Boot command line: when 'adnl' is entered, this command tells BL1 to
-  load BL2 from USB, then board is rebooted. After reboot BL2 and next
-  stage loaders will be loaded from USB, sticky register has value that
-  we are in ADNL mode, thus booted U-Boot enters ADNL mode to start data
-  burning.
-
-  Used in adnl-based SoC families: a1, s4, c1, с2, sc2, t7, etc.
-
-2) MESON_SMC_CMD_REBOOT_MODE_SET
-  Used in optimus-based SoC families: axg, g12a, g12b, sm1, etc.
-
-3) MESON_SMC_CMD_USB_BOOT_MODE_SET
-  Used in optimus-based SoC families: axg, g12a, g12b, sm1, etc.
+We need these values and macro to correctly write "bootloader"
+partition in Optimus protocol, so let's export them to arch-meson
+header and also provide more detailed information about each
+macro.
 
 Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Signed-off-by: Vladimir Mitrofanov <vvmitrofanov@salutedevices.com>
-Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
 ---
- arch/arm/include/asm/arch-meson/sm.h | 98 +++++++++++++++++++++++++++-
- arch/arm/mach-meson/sm.c             | 39 +++++++++++
- drivers/sm/meson-sm.c                |  3 +
- include/meson/sm.h                   |  3 +
- 4 files changed, 142 insertions(+), 1 deletion(-)
+ arch/arm/include/asm/arch-meson/rawnand.h | 38 +++++++++++++++++++++++
+ drivers/mtd/nand/raw/meson_nand.c         | 13 +-------
+ 2 files changed, 39 insertions(+), 12 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-meson/rawnand.h
 
-diff --git a/arch/arm/include/asm/arch-meson/sm.h b/arch/arm/include/asm/arch-meson/sm.h
-index 4d614955fc2..087f8b4d5fa 100644
---- a/arch/arm/include/asm/arch-meson/sm.h
-+++ b/arch/arm/include/asm/arch-meson/sm.h
-@@ -83,7 +83,7 @@ int meson_sm_get_serial(void *buffer, size_t size);
-  */
- int meson_sm_get_chip_id(struct meson_sm_chip_id *chip_id);
- 
--enum {
-+enum meson_reboot_mode {
- 	REBOOT_REASON_COLD = 0,
- 	REBOOT_REASON_NORMAL = 1,
- 	REBOOT_REASON_RECOVERY = 2,
-@@ -134,4 +134,100 @@ int meson_sm_pwrdm_set(size_t index, int cmd);
- #define meson_sm_pwrdm_on(index) \
- 	meson_sm_pwrdm_set(index, PWRDM_ON)
- 
+diff --git a/arch/arm/include/asm/arch-meson/rawnand.h b/arch/arm/include/asm/arch-meson/rawnand.h
+new file mode 100644
+index 00000000000..81bf6ef7e37
+--- /dev/null
++++ b/arch/arm/include/asm/arch-meson/rawnand.h
+@@ -0,0 +1,38 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Below is the list of SCPI_CMD commands, issued by U-Boot and passed to SCP
-+ * co-processor via SMC to BL31 (TF-A). BL31 routes these commands to SCP
-+ * via mailbox.
-+ *
-+ * Commands instruct the SCP how to set/control POC pins in order to choose
-+ * first boot source, specified by the particular command below. These POC pins
-+ * are readable by BootROM and used to determine the boot sequence. Usually,
-+ * the normal default boot sequence, seen on production device is
-+ *     NAND/eMMC -> SD -> USB
-+ *
-+ * Commands below change the first boot source.
-+ *
-+ * NOTE:
-+ * these commands are used along with meson_sm_set_bl1_first_boot_source() on
-+ * Amlogic SoCs where ADNL burning protocol is utilized.
-+ * Refer to meson_sm_set_usb_boot_mode() for the same functionality but on SoCs
-+ * with Optimus burning protocol.
++ * (C) Copyright 2025 SaluteDevices, Inc.
 + */
 +
-+/**
-+ * define SCPI_CMD_USB_BOOT - sets the first boot source into USB with timeout
-+ *
-+ * Additionally, force the BootROM (BL1) to wait for the Host's enumeration
-+ * with timeout
-+ */
-+#define SCPI_CMD_USB_BOOT 0xB0
++#ifndef __MESON_RAWNAND_H__
++#define __MESON_RAWNAND_H__
 +
-+/**
-+ * define SCPI_CMD_USB_UNBOOT - sets the first boot source into USB w/o timeout
-+ *
-+ * Additionally, force the BootROM to wait for the Host's enumeration with
-+ * uninterruptible wait, i.e. forever
-+ */
-+#define SCPI_CMD_USB_UNBOOT 0xB1
++#include <asm/arch/nand.h>
++#include <linux/mtd/mtd.h>
++#include <linux/mtd/rawnand.h>
 +
-+/**
-+ * define SCPI_CMD_SDCARD_BOOT - sets the first boot source into SD card
-+ */
-+#define SCPI_CMD_SDCARD_BOOT 0xB2
++/* M2N means 'memory to NAND', e.g. write. */
++#define NFC_CMD_M2N	((0 << 17) | BIT(21))
++/* N2M means 'NAND to memory', e.g. read. */
++#define NFC_CMD_N2M	((1 << 17) | BIT(21))
 +
-+/**
-+ * define SCPI_CMD_CLEAR_BOOT - sets the first boot source into default one
++/*
++ * Macro to create value for read/write command.
 + *
-+ * BootROM follows a pre-defined boot sequence stored in SoC ROM code.
++ * 'cmd_dir' - direction, e.g. read or write.
++ * 'ran' - scrambler mode (enabled or not).
++ * 'bch' - ECC mode (strength and size).
++ * 'short_mode' - short mode (enabled or not).
++ * 'page_size' - size of page.
++ * 'pages' - number of pages to access.
 + */
-+#define SCPI_CMD_CLEAR_BOOT 0xB3
++#define CMDRWGEN(cmd_dir, ran, bch, short_mode, page_size, pages)	\
++	(								\
++		(cmd_dir)		    	|			\
++		((ran))	        		|			\
++		((bch) << 14)			|			\
++		((short_mode) << 13)		|			\
++		(((page_size) & 0x7F) << 6)	|			\
++		((pages) & 0x3F)					\
++	)
 +
-+/**
-+ * meson_sm_set_bl1_first_boot_source - sets the first boot source for BootROM.
-+ * @cmd: command to set first boot source visible to BootROM during boot.
-+ *       Use SCPI_CMD_* as commands.
-+ *
-+ * BootROM checks POC-pins (POC0, POC1, POC2) to determine in which order it
-+ * must probe the various methods of booting the system. The order is usually
-+ * pre-defined. But function changes the first boot source of that pre-defined
-+ * order.
-+ *
-+ * @return: zero on success or error code on failure.
-+ */
-+int meson_sm_set_bl1_first_boot_source(u64 cmd);
-+
-+/**
-+ * meson_sm_reboot - reboots device in a appropriate mode
-+ * All possible modes described in &enum meson_reboot_mode
-+ *
-+ * @mode: reboot mode.
-+ * @return: zero on success or error code on failure.
-+ */
-+int meson_sm_reboot(u64 mode);
-+
-+/**
-+ * enum meson_usb_boot_mode - modes for meson_sm_set_usb_boot_mode()
-+ * @FORCE_USB_BOOT: Forces BootROM to boot with firmware transferred by PC
-+ * 		    burning tool via USB. This mode has influence despite of the
-+ * 		    previously selected boot source. This mode persists between
-+ * 		    reboots and must be cleared.
-+ * @CLEAR_USB_BOOT: Clears previous mode.
-+ *
-+ * These modes are used in conjunction with meson_sm_set_usb_boot_mode() on
-+ * Amlogic SoCs where Optimus burning protocol is utilized.
-+ */
-+enum meson_usb_boot_mode {
-+	CLEAR_USB_BOOT = 1,
-+	FORCE_USB_BOOT = 2,
-+};
-+
-+/**
-+ * meson_sm_set_usb_boot_mode - sets the mode of usb interface that will be used during boot
-+ * All possible modes described in &enum meson_usb_boot_mode
-+ *
-+ * @mode: reboot mode.
-+ * @return: zero on success or error code on failure.
-+ */
-+int meson_sm_set_usb_boot_mode(u64 mode);
-+
- #endif /* __MESON_SM_H__ */
-diff --git a/arch/arm/mach-meson/sm.c b/arch/arm/mach-meson/sm.c
-index b1f91ca29ce..53b07e1dfe9 100644
---- a/arch/arm/mach-meson/sm.c
-+++ b/arch/arm/mach-meson/sm.c
-@@ -236,6 +236,17 @@ int meson_sm_get_reboot_reason(void)
- 	return FIELD_GET(REBOOT_REASON_MASK, reason);
- }
++#endif
+diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
+index 28c851f103b..81122315f45 100644
+--- a/drivers/mtd/nand/raw/meson_nand.c
++++ b/drivers/mtd/nand/raw/meson_nand.c
+@@ -11,6 +11,7 @@
  
-+static int meson_sm_call(u32 smc, struct pt_regs *regs, s32 *retval)
-+{
-+	struct udevice *dev;
-+
-+	dev = meson_get_sm_device();
-+	if (IS_ERR(dev))
-+		return PTR_ERR(dev);
-+
-+	return sm_call(dev, smc, retval, regs);
-+}
-+
- int meson_sm_pwrdm_set(size_t index, int cmd)
- {
- 	struct udevice *dev;
-@@ -256,3 +267,31 @@ int meson_sm_pwrdm_set(size_t index, int cmd)
+ #include <nand.h>
+ #include <asm/io.h>
++#include <asm/arch/rawnand.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+ #include <dm/ofnode.h>
+@@ -34,8 +35,6 @@
+ #define NFC_CMD_AIL			((2 << 16) | (3 << 20))
+ #define NFC_CMD_AIH			((3 << 16) | (3 << 20))
+ #define NFC_CMD_SEED			((8 << 16) | (3 << 20))
+-#define NFC_CMD_M2N			((0 << 17) | (2 << 20))
+-#define NFC_CMD_N2M			((1 << 17) | (2 << 20))
+ #define NFC_CMD_RB			BIT(20)
+ #define NFC_CMD_SCRAMBLER_ENABLE	BIT(19)
+ #define NFC_CMD_SCRAMBLER_DISABLE	0
+@@ -61,16 +60,6 @@
+ #define NFC_REG_PINS		0x30
+ #define NFC_REG_VER		0x38
  
- 	return err;
- }
-+
-+int meson_sm_set_bl1_first_boot_source(u64 cmd)
-+{
-+	struct pt_regs regs = { 0 };
-+
-+	regs.regs[1] = cmd;
-+
-+	return meson_sm_call(MESON_SMC_CMD_BL1_FIRST_BOOT_SRC_SET,
-+			     &regs, NULL);
-+}
-+
-+int meson_sm_reboot(u64 mode)
-+{
-+	struct pt_regs regs = { 0 };
-+
-+	regs.regs[1] = mode;
-+
-+	return meson_sm_call(MESON_SMC_CMD_REBOOT_MODE_SET, &regs, NULL);
-+}
-+
-+int meson_sm_set_usb_boot_mode(u64 mode)
-+{
-+	struct pt_regs regs = { 0 };
-+
-+	regs.regs[1] = mode;
-+
-+	return meson_sm_call(MESON_SMC_CMD_USB_BOOT_MODE_SET, &regs, NULL);
-+}
-diff --git a/drivers/sm/meson-sm.c b/drivers/sm/meson-sm.c
-index 87eba1486db..f413d8335b3 100644
---- a/drivers/sm/meson-sm.c
-+++ b/drivers/sm/meson-sm.c
-@@ -168,8 +168,11 @@ static const struct meson_sm_data meson_sm_gxbb_data = {
- 	.cmd = {
- 		SET_CMD(MESON_SMC_CMD_EFUSE_READ,  0x82000030),
- 		SET_CMD(MESON_SMC_CMD_EFUSE_WRITE, 0x82000031),
-+		SET_CMD(MESON_SMC_CMD_USB_BOOT_MODE_SET, 0x82000043),
- 		SET_CMD(MESON_SMC_CMD_CHIP_ID_GET, 0x82000044),
-+		SET_CMD(MESON_SMC_CMD_BL1_FIRST_BOOT_SRC_SET, 0x82000087),
- 		SET_CMD(MESON_SMC_CMD_PWRDM_SET,   0x82000093),
-+		SET_CMD(MESON_SMC_CMD_REBOOT_MODE_SET, 0x84000009),
- 	},
- };
- 
-diff --git a/include/meson/sm.h b/include/meson/sm.h
-index fbaab1f1ee0..b9621f95cbe 100644
---- a/include/meson/sm.h
-+++ b/include/meson/sm.h
-@@ -13,6 +13,9 @@ enum meson_smc_cmd {
- 	MESON_SMC_CMD_EFUSE_WRITE, /* write efuse memory */
- 	MESON_SMC_CMD_CHIP_ID_GET, /* readh chip unique id */
- 	MESON_SMC_CMD_PWRDM_SET,   /* do command at specified power domain */
-+	MESON_SMC_CMD_BL1_FIRST_BOOT_SRC_SET, /* setup first boot source for BootROM */
-+	MESON_SMC_CMD_REBOOT_MODE_SET, /* Reboot device in desired mode */
-+	MESON_SMC_CMD_USB_BOOT_MODE_SET, /* Run boot from USB device */
- 	MESON_SMC_CMD_COUNT,
- };
- 
+-#define CMDRWGEN(cmd_dir, ran, bch, short_mode, page_size, pages)	\
+-	(								\
+-		(cmd_dir)			|			\
+-		(ran)				|			\
+-		((bch) << 14)			|			\
+-		((short_mode) << 13)		|			\
+-		(((page_size) & 0x7f) << 6)	|			\
+-		((pages) & 0x3f)					\
+-	)
+-
+ #define GENCMDDADDRL(adl, addr)		((adl) | ((addr) & 0xffff))
+ #define GENCMDDADDRH(adh, addr)		((adh) | (((addr) >> 16) & 0xffff))
+ #define GENCMDIADDRL(ail, addr)		((ail) | ((addr) & 0xffff))
 -- 
 2.30.1
 
