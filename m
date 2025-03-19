@@ -4,85 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F40C2C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 13:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4522DC35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 13:09:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 438628141E;
-	Wed, 19 Mar 2025 14:02:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D51681D0B;
+	Wed, 19 Mar 2025 14:09:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gT019Woq";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="i98OBhUF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A78978193A; Wed, 19 Mar 2025 14:02:43 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6F9781D3B; Wed, 19 Mar 2025 14:09:06 +0100 (CET)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::620])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA1F881101
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 14:02:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56C6C81CA8
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 14:09:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-300f92661fcso7325008a91.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 06:02:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742389359; x=1742994159; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2CUXSDxwKwiscpMBNNZxi+Fypu0JSpyA6DWjg9/vz90=;
- b=gT019WoqAoEovvhgTT7fcaKdAfzVDwyBgbI761Jp2zk8LiwGPg5YBQ/pw87ViLqCHP
- W84Pld6G66eJNVcSsT6LDxtLiNFhzwLnOn1d4jeAMUQK5s1nT4hz/u4wBC/Zhko6wTYb
- rmzqnRvjY/2dcVPZqx1N96UEYy/LIhQqrp12TykKNMhtVNKoRqSuKQ9TLSzoAao0c0uo
- MYWKMRDRldtIIxzUR52Riso2+hGVCErvR+r7xG8f6iMJzF/K89YruN49OiCC0OyTKvWs
- 4ECGnyea9H9JJFKGiFh6/KhXzoq6Gwbsz812nTpF0Pv1Y1dTjfd68vYJdXb82zImdqwg
- gWfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742389359; x=1742994159;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2CUXSDxwKwiscpMBNNZxi+Fypu0JSpyA6DWjg9/vz90=;
- b=gS/G3JNsFvbKO3ZU0gNnqVT2cAC0NeLYIE26EfFSd+L+2RF35TloZP4NxysS2GLqtP
- xDjCcy8A0crAciya08v4XjtDdDVm1EAe4JEBFLIzU4hiLOddIr5Y68ZVEcznjPkq4qYV
- ZMZAsfjaWO92YcmqZmkf1S1YVKQCoQwZPNA2S+utH/ddbEAKk6khVXt7DKkyrjevhvor
- WFBy+D4Y4hEGIp9w+r1XSTswclYbIYpuaRavCnGE1u5+U14ScZTL3/hl0p4rrdIguTLz
- fSJB2qCyjoc+CTb6kz5paRSHUMplsPzvRoIbYriNTkW0rSzgE1EaHevcNIEVpkO2jCA1
- XkTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUi1/9g+yuafxlq9AlthO6erglLYwgE9t24ru5LqCuhE+KWUtMntsaNobTbIsDXPt3IYShnS0I=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyg+GV2XJpSD4SE25zTSzGXCSbWMF2aU+qdj6im1+MFG9a4bLNq
- DG0hCWJORrSpKqLXKgWrLoDj1/IuLPyvJreA4TYBgk+T/wQzaRibQVVsOMCFwPdEpLeG1ZppI7m
- z48ps5wOj1ZirQGN63vSNZwKdFSc=
-X-Gm-Gg: ASbGncs3v7t07C/GyVEdh1Z96TTwBWBcI63AweEUMuQ0ZxdHzuHk9DfjdESDT9pYVAk
- /ETlF97t78cGouFqGMiC7OjDfj1AIG+AVA6n+HQA6YbPCrpWXh7m2dc2DV0WgumJoC76vv8nhdk
- vVBl9vYUKCU9Pi6mliu/ARZdQ2mNnMOdbi42ybHw==
-X-Google-Smtp-Source: AGHT+IHkBHErhEgfxxPm7M8P3nh7dytcemL4Bfw8Dr3+0mQqdV0LvUVj4t0I1Qn6krHcK5J4/s8QwRTlxoHkcWJ/ktw=
-X-Received: by 2002:a17:90b:1f8d:b0:2fe:e0a9:49d4 with SMTP id
- 98e67ed59e1d1-301bde5c92fmr4410955a91.2.1742389359142; Wed, 19 Mar 2025
- 06:02:39 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ysBrpqAfmyuZ2ycjyaDaIS+qAhGP1QQizvCsI8MAE2OtMWw5j0YH+hRlbsYZDbuXL7T3koF6BiCyQsu01/winITKQbfdHUwC9zHWLTJLJ/EefPODv9808tHA4pNxS96bVhuW7dT4DR8Tqk5MhiKjl0VFzOjGsJdRQPeWq+zbqujgA61ulxoyWxX1D+QDj+KDNISucEjHUsdhdFPvkpMCsF9WRm5fVTVduWeISngttl5Yiu1n3hmvMwRZfvKQukDYUc/jG2yU82gEQPyRDPPZ6EuvTmXqC/1aFiUk72LrTcd9pSrQXuy5msrC/iiqLT2M7WiR92MrTOEHxp7VIdNmhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cuqmzhhYFvEEJk4Y34RDdxxKp1RgULY4LjFFnMpGfvk=;
+ b=ydqn0LLS/OVeMjYU9GbijaaqSMBNhf5dcbS/M4sLecmO+9HruXwtI6eh/EQC7UHqs2g6dRjmY+YGG4KrufdidH9NTrX7euTyhMjC74plor3SxP/iW7nkkMgrPFRlgWbv7HjHF5t3PcZNct09T/INDs7NrKsjo8nm6DjefaOSxpDBoGdjh2Qx5MZVKIyrgvppmi0T2rheYN7rJR6KkN0hdhJiJoM4VjcB057dhGtRvPsQMc6GGjxWNo9jj4fWZW9WC/IHw5RXNRlSvRqcpV2fo1llZ01zeZAWBAoLhCZU0uNzou/fzaUgVj/YQHywBdBhjR820Bjnytulwyu03Ylxpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cuqmzhhYFvEEJk4Y34RDdxxKp1RgULY4LjFFnMpGfvk=;
+ b=i98OBhUFDiVaDCDhmSiKWTQbKXu2oDOTf/g/jR6JsK5lOO4oCacXj7+U5fkCJkxY7NDjd/J6Nf/e9/iTc1XFl4/owqcBekcoWBq6NQXNaxJL6/PcCKdWhWd3OZPTonWr3MmHhOft31cPV6JA3D43qt5R0+yZV9iJ6/yJZWUtqFo=
+Received: from DS7PR05CA0101.namprd05.prod.outlook.com (2603:10b6:8:56::21) by
+ CY8PR12MB7337.namprd12.prod.outlook.com (2603:10b6:930:53::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8534.34; Wed, 19 Mar 2025 13:08:59 +0000
+Received: from DS3PEPF0000C37B.namprd04.prod.outlook.com
+ (2603:10b6:8:56:cafe::d2) by DS7PR05CA0101.outlook.office365.com
+ (2603:10b6:8:56::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.33 via Frontend Transport; Wed,
+ 19 Mar 2025 13:08:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS3PEPF0000C37B.mail.protection.outlook.com (10.167.23.5) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8534.20 via Frontend Transport; Wed, 19 Mar 2025 13:08:59 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 19 Mar
+ 2025 08:08:56 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: zynqmp: Use CONFIG_SPL_FS_LOAD_PAYLOAD_NAME in binman
+Date: Wed, 19 Mar 2025 14:08:47 +0100
+Message-ID: <022449eaa99ce8b96bd1c0af9bece2241180be6d.1742389724.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250318132347.646703-1-adriano.cordova@canonical.com>
- <20250318132347.646703-3-adriano.cordova@canonical.com>
- <CAC_iWjKA8tzKdcRSUPWVdDkRNf2GEiz6dzbM6J6A+f788QqyJQ@mail.gmail.com>
- <CAMGU2hXE2gzQs7iibLMB66jJAL5qXm9CGpx5cvJ7AGP5vg8nFw@mail.gmail.com>
- <CAC_iWjJUjpDR_jAKVBg0We9=s=2hvxp7f6Yh8C+KVWs099AL=Q@mail.gmail.com>
-In-Reply-To: <CAC_iWjJUjpDR_jAKVBg0We9=s=2hvxp7f6Yh8C+KVWs099AL=Q@mail.gmail.com>
-From: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
-Date: Wed, 19 Mar 2025 10:02:26 -0300
-X-Gm-Features: AQ5f1JoQXDhIJGwwRNzJsTY93cqXs-588tSxu-uwQTTuEIju5nLk9P-PRCapTO4
-Message-ID: <CAMGU2hUV1Ats4H56Tzqd0+RhOzB1i2BRLh5oCx8CNZrjbGRnSQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] efi_loader: binary_run: register an initrd
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Adriano Cordova <adriano.cordova@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2076; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=FaW8geCv/+uasTKO1Bm8GLvt1KNmCtFV0fs6+sUwYzc=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvRbBx/wH5oTufbxdLXu4Nhv7NXh+tIdqa/6haznVbZLr
+ 25sPTu/I5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAExEuYNhnnrzS02lzP8z2O9c
+ U6hf9pTz/t2dPxnmcLntLHzzS2mCUXzUlEebTJJOuNw7DgA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37B:EE_|CY8PR12MB7337:EE_
+X-MS-Office365-Filtering-Correlation-Id: ed19c645-89b2-43a2-7aa1-08dd66e73680
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?m2ybqQRGERrZ5iUerNA4Q2EBvt2gY66fslznujd7zqWccmhLwGCQNaTv2AwM?=
+ =?us-ascii?Q?OYt1PH3xjCfhxAj8bWymQWm8FPhq8tptxK1CcEmoYiqta02N3XtpSrjrcfI0?=
+ =?us-ascii?Q?Hv2VtfjahK3EqS85xXQmnXMK/nYxo7jgBmVpgkYJrGROcGgttg73ODasTOPC?=
+ =?us-ascii?Q?hfdTOu7s7S35nZqmznu5c8zO/wP0CB++Ekru7+7V7HaaIp9xEsDn2uj3LFvK?=
+ =?us-ascii?Q?RvgnRO+LZmw+cHMo/wIsQ1kJtY+9f8TberZRRYGQFNxnRNWWSSPUR+I3m9gF?=
+ =?us-ascii?Q?Rbq6HsUsHV2YeCNDynMjG/nxYeA+0RACwikUIXFcXcYygVCvFxv8Mc9m5lwm?=
+ =?us-ascii?Q?JWSAzoPGwj8wJIUIWtbWFHv1SHXXzj0PIiK+o99l8/6HkOSraj3l1iOIr1QL?=
+ =?us-ascii?Q?hw1p5pDrpXUue+6evgrTkZKKcTbPqGYw0lC83ySvHryW1rMG1wNhjFot0yvU?=
+ =?us-ascii?Q?AShpu8K9VN6zk5CBOpRPVLWfDImy4llZqV5p4HGYdc/h+kL7quwgjS38eUUa?=
+ =?us-ascii?Q?E4KSdJ2q5A7oaAXvlUGK9Se48ZItaDnG6WD8XwjKnXtflxt1i/8t86tePKE9?=
+ =?us-ascii?Q?rRst3/5pN9FtGhfLJ2wHs3MLpOUB0QSHwh/Du7NiqKXfyAgC6Huk0V9BWsX7?=
+ =?us-ascii?Q?hTwizZVJbLKTSdPD0J2AADqwA4erbS0eFL5CF/zR3xZviYfWMmzOzP4slfDD?=
+ =?us-ascii?Q?tsHQ0dJBfvgpLE2iD1G7wr/sN2vrwN4veJB6CmLWzvYGJOuExf7LMrTGZ/DR?=
+ =?us-ascii?Q?YS9Dw8RQ0Yx3RxkQaa2sMyxAMlwBhwD7+UA1H22aQk8Qpi5LPJ/lBcGFFLXo?=
+ =?us-ascii?Q?eNAfIt6LNwGjC3Dn5W81wF/UZtnhJlsbUZzWSc2NxlI2L/d18kO5a+ztxHI/?=
+ =?us-ascii?Q?Jznd7ULxImUqL1LQbf+5CtT2rdcOoTHwybmjGg9lUIWk+ehyh6QxUpJ8v3tG?=
+ =?us-ascii?Q?whq4KmzyPqKkjEPQA5RI5k9+AoBZRsVvRq7b0jO5nr620xQWvvdLns/1j2Fk?=
+ =?us-ascii?Q?4dmwWz4Zpb8CQkgiGPyJ/jaciJdFOYRgUopjpvxh77St/n+sQi82puYZeJuA?=
+ =?us-ascii?Q?6TicTujBtzypeE2NZQDsktiCfztkmpzbxjYAmkL6yVExan5Iiv0YZ5Ro7kBy?=
+ =?us-ascii?Q?2qU3JWVnbGZFXLRCXG3Y0o/erhR+cdg0kAqXnZCivxuLsqQFgSQjiVWwgnsW?=
+ =?us-ascii?Q?3iGHdSejrJTAEiWtQT1QyNQ4PucegO8blwrl2VgU/nRjq/uKXRqdCckGias2?=
+ =?us-ascii?Q?vQpIJggZ7eyTmbZ72nxC21JkT8wLg/kR+Y6RKFSE90MBALkoSNaXqXYm8CjE?=
+ =?us-ascii?Q?PFFNDvtfbytIJiYauD/ixlaq8S0YqZP5Wlh8yHMbA0hITxIuKqFzC+j/8Dg0?=
+ =?us-ascii?Q?SzGOYXPa0ThZ5Z1LRjosvooOmK8IKOocgXq8RB4sUUoXkaypFYcOpBhgnIeH?=
+ =?us-ascii?Q?8Gy5d0n4jTpmzstsqLZ8MVv2nR0ckkJu5YhPSnbI19Ah3fjrIpH3Fxs5bD8v?=
+ =?us-ascii?Q?Di8rhsdovNIk9Pk=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2025 13:08:59.3409 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed19c645-89b2-43a2-7aa1-08dd66e73680
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37B.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7337
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,92 +150,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+u-boot.itb name is coming via CONFIG_SPL_FS_LOAD_PAYLOAD_NAME and it's
+change will affect SD boot mode that's why start to use it.
 
-Ok, I will change that in a v2. As a question: in here it is a U-Boot
-routine the one that is doing the memcpy of the initrd, the one implemented
-in the load_file2 protocol, the OS never knows about this dp explicitly,
-could we technically use reserved data in here then?
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-Il mer 19 mar 2025, 09:37 Ilias Apalodimas <ilias.apalodimas@linaro.org> ha
-scritto:
+ arch/arm/dts/zynqmp-binman-som.dts | 11 ++++++-----
+ arch/arm/dts/zynqmp-binman.dts     |  8 ++++----
+ 2 files changed, 10 insertions(+), 9 deletions(-)
 
-> On Wed, 19 Mar 2025 at 14:07, Adriano C=C3=B3rdova <adrianox@gmail.com> w=
-rote:
-> >
-> > Hi Ilias,
-> >
-> > El mi=C3=A9, 19 mar 2025 a las 6:32, Ilias Apalodimas (<
-> ilias.apalodimas@linaro.org>) escribi=C3=B3:
-> >>
-> >> Hi Adriano,
-> >>
-> >> [...]
-> >>
-> >> >   */
-> >> >  static efi_status_t efi_binary_run_dp(void *image, size_t size, voi=
-d
-> *fdt,
-> >> > +                                     void *initrd, size_t initd_sz,
-> >> >                                       struct efi_device_path *dp_dev=
-,
-> >> >                                       struct efi_device_path *dp_img=
-)
-> >> >  {
-> >> >         efi_status_t ret;
-> >> > +       struct efi_device_path *dp_initrd;
-> >> >
-> >> >         /* Initialize EFI drivers */
-> >> >         ret =3D efi_init_obj_list();
-> >> > @@ -230,6 +234,14 @@ static efi_status_t efi_binary_run_dp(void
-> *image, size_t size, void *fdt,
-> >> >         if (ret !=3D EFI_SUCCESS)
-> >> >                 return ret;
-> >> >
-> >> > +       dp_initrd =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> (uintptr_t)initrd, initd_sz);
-> >>
-> >> Why do we need reserved memory? What the EFI stub does, is allocate a
-> >> new memory buffer which you later copy the initrd to.
-> >> I think Boot Services Data is enough.
->
-> I meant to write loader data*
->
-> >
-> >
-> > dp_initrd is freed when the efi application returns in
-> efi_initrd_deregister. Do you suggest to change it to
-> > Boot Sevices Data and when the efi application returns just assume that
-> it is freed?
->
-> You will still have to free it on failures which is what
-> efi_initrd_deregister() will do once we return from efi boot manager.
-> But if you define it as reserved memory, it won't be usable by the OS.
-> Since linux will eventually copy that memory in a buffer it allocated,
-> you don't have to preserve it. So you can just define it as
-> EFI_LOADER_DATA
->
-> >  I took the usage from:
-> >
-> https://github.com/u-boot/u-boot/blob/8bc3542384e3a1219e5ffb62b79d16dddc1=
-b1fb9/lib/efi_loader/efi_bootmgr.c#L514
->
-> This is a different use-case. In this we download and run an EFI
-> application from memory and I guess the assumption is that the EFI
-> application will return so the type doesn't matter that much as it
-> will eventually be freed. This obviously is not the case if the EFI
-> application is a kernel.
-> That being said, I think we can switch this to LOADER_CODE as well.
-> Heinrich any ideas?
->
-> Thanks
-> /Ilias
->
-> >
-> >>
-> >>
-> >> [...]
-> >>
-> >> Thanks
-> >> /Ilias
->
+diff --git a/arch/arm/dts/zynqmp-binman-som.dts b/arch/arm/dts/zynqmp-binman-som.dts
+index d5b63ef604ba..26a5a634a9c8 100644
+--- a/arch/arm/dts/zynqmp-binman-som.dts
++++ b/arch/arm/dts/zynqmp-binman-som.dts
+@@ -14,7 +14,7 @@
+ 	binman: binman {
+ 		multiple-images;
+ 
+-#ifdef CONFIG_SPL
++#if defined(CONFIG_SPL)
+ 		fit-dtb.blob {
+ 			filename = "fit-dtb.blob";
+ 			pad-byte = <0>;
+@@ -102,10 +102,10 @@
+ 				};
+ 			};
+ 		};
+-
+-		/* u-boot.itb generation in a static way */
++#if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
++		/* Generation in a static way */
+ 		itb {
+-			filename = "u-boot.itb";
++			filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+ 			pad-byte = <0>;
+ 
+ 			fit {
+@@ -227,12 +227,13 @@
+ 			};
+ 			blob-ext@2 {
+ 				offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+-				filename = "u-boot.itb";
++				filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+ 			};
+ 			fdtmap {
+ 			};
+ 		};
+ #endif
++#endif
+ #endif
+ 	};
+ };
+diff --git a/arch/arm/dts/zynqmp-binman.dts b/arch/arm/dts/zynqmp-binman.dts
+index 252c2ad552b0..d2ccd9d32ec6 100644
+--- a/arch/arm/dts/zynqmp-binman.dts
++++ b/arch/arm/dts/zynqmp-binman.dts
+@@ -14,10 +14,10 @@
+ 	binman: binman {
+ 		multiple-images;
+ 
+-#ifdef CONFIG_SPL
+-		/* u-boot.itb generation in a static way */
++#if defined(CONFIG_SPL) && defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
++		/* Generation in a static way */
+ 		itb {
+-			filename = "u-boot.itb";
++			filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+ 			pad-byte = <0>;
+ 
+ 			fit {
+@@ -196,7 +196,7 @@
+ 			};
+ 			blob-ext@2 {
+ 				offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+-				filename = "u-boot.itb";
++				filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+ 			};
+ 			fdtmap {
+ 			};
+-- 
+2.43.0
+
