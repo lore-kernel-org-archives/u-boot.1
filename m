@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D877EC282EC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 02:37:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7968C282EC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 02:52:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 774588129F;
-	Wed, 19 Mar 2025 03:37:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F1C8181101;
+	Wed, 19 Mar 2025 03:52:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RE4TIoNb";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="WYwl/k8n";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oGeePfVG";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RF5MlmcP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A608815D1; Wed, 19 Mar 2025 03:37:14 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 915068129F; Wed, 19 Mar 2025 03:52:16 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B97581101
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 03:37:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F25681026
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 03:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZHXsz5jxFz9t1c;
- Wed, 19 Mar 2025 03:37:11 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZHYCK6yPRz9smd;
+ Wed, 19 Mar 2025 03:52:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742351831;
+ s=mail20150812; t=1742352734;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=X5LFO6baxIZm15TOslVhj1F5rVA/Jhf3oqujNzXiJEk=;
- b=RE4TIoNbMPy1JpZNicjYlmkfp6xVFuwPIImehilUUY0OY7etKNH6eoxZe55vCxfYp19DjS
- Ho+HXqrAHksnFVqgVD9Pp93MqFsvyAERoTUhZW3B5eRvQ4nXrRmMd8ZCP4eoRv0FXLLMuC
- lnVdjyijyeTE8ZGFrB87wuhphg/vBF8uaZBRpHmqdbXE9HjIWeR/+8JYJRx3/CnKNpi1uz
- 7fAgcZEIe/Mq9tHavBSDAmzGaPnsdEsdGLxCRcqfDxBiSzKjKjSKCcKP3g4Hvcy1akLVaC
- 8b8OsoHUucu+e0aZn9WLHqnlfKyUixtZc+U3FOZIYhTCsB0HgM1G3fbOO/KWYg==
-Message-ID: <8e8b157c-54e4-4830-aa23-ff7e57ca140e@mailbox.org>
+ bh=NQgYvZ9dTg5tbOzqNAgOk/t35ZAOPK9ddlqe7wCWevw=;
+ b=oGeePfVGTqxBPGXCMXFwNkMIYtTqqWb52KWhhn6S/T2CMJuh54EMCH6eLB3CknFA0Pf9+i
+ oVLS3BvV06H84w6cLNg4R7pxb5JkGyAi7k5XhLJHtM1ECakJJSrzufHRT+2A+kIrqJ4Zuf
+ Wg70PdTQ/Txr+w+nEnSwnRggEwtNAGhndjPJLiLGbHimq+H5Jcsu+XaNufK9HCK95Nr447
+ wPX90ReNAtJlkKm7A1EZi/zlye1OdbtU4DT0GHTt7oq+m8KaKEu+xlHrhNZP492rBZkwSs
+ U825Ba/8uIRcHXYlbHplQbD8hv4yiuFZ+Ip+6q3T8xpWlSIqoSWvQinO2nkhqA==
+Message-ID: <995192fe-c9ec-48f1-aa9e-514da0e0aece@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742351829;
+ s=mail20150812; t=1742352732;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=X5LFO6baxIZm15TOslVhj1F5rVA/Jhf3oqujNzXiJEk=;
- b=WYwl/k8nEMs2KqWusy7aQbuWMeq5Yhmm3fKEg703V1Rw77eyTly2Dk7vOqrS5h3jhaXdcQ
- TWRuWo4IesZACPE3hHskKYrNyDx81Hs6t8gUI16EUwkLmBvpY+hOpS4/PenMbk8scnphR3
- k8HjZU2s1d9vaGcVMTX8TxCBwBRGPD8RRjjyhlPpim92E6nOc7pNg6KIgEzznuiiJf8wjW
- nCrGxtNou4kc4fEx5w+hvl8cdk+JIpFgbWmp7NhWyxq4xsCKDVQt0dDyEonRxZ1ZLMmHZX
- +tuBG1bnCy/gsVqJrNXHrfsk3N1x1j94dddvb4MTnUOce6lngm3opUhYjmx8Xg==
-Date: Wed, 19 Mar 2025 03:37:08 +0100
+ bh=NQgYvZ9dTg5tbOzqNAgOk/t35ZAOPK9ddlqe7wCWevw=;
+ b=RF5MlmcPDfDq4BDZySitkSKoqEjt5CTGT9KBbslJBP4uC131KukiVybF3h3rz3T8C2Gcc+
+ isMl/twjNHXm+rbA00cv2LSt1Q9UpabcQj2tR8MQ9aPN5SyQPXjNr6he9Yl4S6XSj7UAM2
+ visfhTih6XWe8sH+5syQ76AQ7arC3pESy8zAxf1RW2w0HHj2LBlHApTlFnbYeU5ecNgUYb
+ IoFytFiP5GaRRgpbjiwqCl14rFwMKss5CXK/0kEa89VttFShgJ9rxOXoVzXtJ9CDoH5Zte
+ TaSZKcEOB3YXT+DhnPkj8qkoK4E8lY3gq4VYkfWiaznPXGZugzdWs8lqmh+Z6A==
+Date: Wed, 19 Mar 2025 03:52:08 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/3] net: ravb: Fix error handling in ravb_probe
-From: Marek Vasut <marek.vasut@mailbox.org>
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+Subject: Re: [PATCH v2] net: miiphybb: Update documentation
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
- <20250304200712.92514-4-paul.barker.ct@bp.renesas.com>
- <6e0ede59-6923-463e-bfbc-23cba4c73ced@mailbox.org>
- <08f9ee8d-53e5-4d79-98d0-2afe53c01612@bp.renesas.com>
- <7f02496d-e2e4-4629-a32a-5059d07c94a9@mailbox.org>
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250308203625.1317615-1-marek.vasut+renesas@mailbox.org>
+ <a2fe2373-08a9-483a-bdd9-9158f739898a@canonical.com>
 Content-Language: en-US
-In-Reply-To: <7f02496d-e2e4-4629-a32a-5059d07c94a9@mailbox.org>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <a2fe2373-08a9-483a-bdd9-9158f739898a@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 3c5aaoehq995an59zd8f34i1o7o51tg8
-X-MBO-RS-ID: d0f5b20d4b5601038d9
+X-MBO-RS-ID: 1c17fc27902f8332d11
+X-MBO-RS-META: my7m6jxpmtqjg5s95aqiwa9act4othox
+X-Rspamd-Queue-Id: 4ZHYCK6yPRz9smd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,62 +96,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/19/25 3:34 AM, Marek Vasut wrote:
-> On 3/5/25 9:39 PM, Paul Barker wrote:
->> Hi Marek,
+On 3/10/25 7:32 PM, Heinrich Schuchardt wrote:
+> On 08.03.25 21:36, Marek Vasut wrote:
+>> Update the miiphybb documentation to match current implementation.
+>> The static struct bb_miiphy_bus bb_miiphy_buses[] array is removed.
+>> The example is updated to match current Renesas RAVB driver, which
+>> is one of the miiphybb users.
+>>
+>> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Jim Liu <jim.t90615@gmail.com>
+>> Cc: Joe Hershberger <joe.hershberger@ni.com>
+>> Cc: Mario Six <mario.six@gdsys.cc>
+>> Cc: Michael Chang <zhang971090220@gmail.com>
+>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>> Cc: Parvathi Bhogaraju <pbhogaraju@microsoft.com>
+>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Cc: Ramon Fried <rfried.dev@gmail.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>> V2: - Fix language bugs
+>>      - Add RB from Paul
+>> ---
+>>   doc/README.bitbangMII | 66 ++++++++++++++++++++++++++++++-------------
 > 
-> Hi,
+> It would be preferable to move this document into doc/devel/ as .rst file.
 > 
->> On 05/03/2025 19:55, Marek Vasut wrote:
->>> On 3/4/25 9:07 PM, Paul Barker wrote:
->>>> In ravb_probe(), we were missing a couple of things in the error
->>>> handling path:
->>>>
->>>>     * We must unregister the MDIO bus before freeing the corresponding
->>>>       struct mii_dev instance to avoid the potential for use-after-free
->>>>       bugs.
->>>>
->>>>     * We must free the resources acquired by clk_get_bulk() even if the
->>>>       clocks have not yet been enabled.
->>>>
->>>> Fixes: 8ae51b6f324e ("net: ravb: Add Renesas Ethernet RAVB driver")
->>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->>>> ---
->>>>    drivers/net/ravb.c | 14 ++++++++------
->>>>    1 file changed, 8 insertions(+), 6 deletions(-)
->>>>
->>>> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
->>>> index 6bd94cf6bb1b..83cf6e0d19f4 100644
->>>> --- a/drivers/net/ravb.c
->>>> +++ b/drivers/net/ravb.c
->>>> @@ -591,7 +591,7 @@ static int ravb_probe(struct udevice *dev)
->>>>        ret = clk_get_bulk(dev, &eth->clks);
->>>>        if (ret < 0)
->>>> -        goto err_mdio_alloc;
->>>> +        goto err_clk_get;
->>>>        mdiodev = mdio_alloc();
->>>>        if (!mdiodev) {
->>>> @@ -613,23 +613,25 @@ static int ravb_probe(struct udevice *dev)
->>>>        /* Bring up PHY */
->>>>        ret = clk_enable_bulk(&eth->clks);
->>>>        if (ret)
->>>> -        goto err_mdio_register;
->>>> +        goto err_clk_enable;
->>>>        ret = ravb_reset(dev);
->>>>        if (ret)
->>>> -        goto err_mdio_reset;
->>>> +        goto err_clk_enable;
->>>
->>> Shouldn't this also assure clk_disable_bulk() is called ?
+>>   1 file changed, 47 insertions(+), 19 deletions(-)
 >>
->> Looking at include/clk.h, the comment for clk_release_bulk() says:
->>
->>      For each clock contained in the clock bulk struct, this function 
->> will check
->>      if clock has been previously requested and then will disable and 
->> free it.
->>
->> So we shouldn't need to separately call clk_disable_bulk().
-> Understood. Thank you for checking.
+>> diff --git a/doc/README.bitbangMII b/doc/README.bitbangMII
+>> index 05ab20376f3..78b4ef880cb 100644
+>> --- a/doc/README.bitbangMII
+>> +++ b/doc/README.bitbangMII
+>> @@ -1,39 +1,67 @@
+>> -This patch rewrites the miiphybb ( Bit-banged MII bus driver ) in 
+>> order to
+>> -support an arbitrary number of mii buses. This feature is useful when 
+>> your
+>> -board uses different mii buses for different phys and all (or a part) 
+>> of these
+>> -buses are implemented via bit-banging mode.
+>> +The miiphybb ( Bit-banged MII bus driver ) supports an arbitrary 
+>> number of
+>> +MII buses. This feature is useful when a driver uses different MII 
+>> buses for
+>> +different PHYs and all (or a part) of these buses are implemented via
+>> +bit-banging mode.
+>>   The driver requires that the following macros should be defined into 
+>> the board
+> 
+> CONFIG_BITBANGMII=y enables the miiphybb driver.
+> 
+>>   configuration file:
+>>   CONFIG_BITBANGMII    - Enable the miiphybb driver
+>> -The board code needs to fill the bb_miiphy_buses[] array with a 
+>> record for
+>> -each required bus and declare the bb_miiphy_buses_num variable with the
+>> -number of mii buses. The record (struct bb_miiphy_bus) has the following
+>> +The driver code needs to allocate a regular MDIO device using 
+>> mdio_alloc()
+>> +and assign .read and .write accessors which wrap bb_miiphy_read() and
+>> +bb_miiphy_write() functions respectively. The bb_miiphy_read() and
+>> +bb_miiphy_write() functions take a pointer to a callback structure,
+>> +struct bb_miiphy_bus_ops. The struct bb_miiphy_bus_ops has the following
+>>   fields/callbacks (see miiphy.h for details):
+> 
+> Please, add the description of struct bb_miiphy_bus_op miiphy.h and add 
+> the file to the API documentation. You could also put the example and 
+> the programming guidance there.
+It seems you did that already while applying a modified version of this 
+patch and the .rst conversion patch to master ? Thanks !
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+One more nitpick, the modified version should not be applied to master, 
+it should only be in next, where the matching bbmiiphy code update which 
+prompted the documentation change is applied.
