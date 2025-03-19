@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB61DC35FF3
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 03:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3067C35FFB
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 03:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 500DD8191C;
-	Wed, 19 Mar 2025 04:32:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D46D8141E;
+	Wed, 19 Mar 2025 04:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742355131;
-	bh=1oo6cZ2VYG/zZkwb9cQJOMEaaJCApC1aWdpuobVJfN4=;
+	s=phobos-20191101; t=1742355134;
+	bh=q7hIZeiWxUhncJiV6qNPdiWhXSVEm/OfM+dRH6hehss=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ulu1ukBIk6lviKq6XO4GmTJS07F9o1OU58Yuo/Ru5IneluCvHMihOTEOpCJ4258CP
-	 DQ+9rJ+oulDndFiFGATxpNgT7VmK1ZjbWce5HMOyieinNDOU7ZDZ1ThQUUy0a8U7UM
-	 csoC+Nsf6veLeUo7IdgL0IWngxxUfYfuRAYKmpuTLYOBP2NyCqdw+fcflVdR9vYbUI
-	 0aCVcKDcUgWZZSOMJLORuBmVP69R0Fb6wNfvqsDrENBFkYsmCu2BfEcsMnSZgwFDL0
-	 1LAArgzSySPt20HjGLGvbCJU/RCBHT+/HuYT6z9m8ysTyb0OjYNi0pibQPRDGpLnnb
-	 p2ctnOF8ebx8w==
+	b=lq1LK5XznNENeF5hCtJGixy/2nyzuTx6jO/FWVqq/vGjtmt7xk6kkWA+VBGMTa2UP
+	 kpqBDKmabimx/KbbFjaUtdtvxV9H5tkJszDdyxCAJIX93hTL/4NYuuCO82oP6fZuPi
+	 2luEa79oLAzgcXWqEf0scY5c2RQnA/ULJd+9yU5IY4sFw9h48qI7ad4TuOFCdv2RBr
+	 lX8Ggk5ExOxAsPOqJCRhe53p0NgCYI01Zt7DzKa1CSIrq+cY3uRwb2645Acb7bvkNQ
+	 JxQ9H15KQnWeiNscKRMKNVlyPaifelO/Vee9QBFR54uoT+qJwWXFyiMc1milbCViKS
+	 lVURYpFhc6OSg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C63F8815D1; Wed, 19 Mar 2025 04:32:10 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 1FBA1819B1; Wed, 19 Mar 2025 04:32:13 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7D7E8129F
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 04:32:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24CC68129F
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 04:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="FGRTCMLm"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="C/Rn+M8h"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0A067103BB5FD; Wed, 19 Mar 2025 04:32:05 +0100 (CET)
+ with ESMTPSA id F26DA101E91C2; Wed, 19 Mar 2025 04:32:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742355127; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1742355130; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=1oo6cZ2VYG/zZkwb9cQJOMEaaJCApC1aWdpuobVJfN4=;
- b=FGRTCMLmholAYyBlLSnPvMxw220KuJu80Hg6zL3Jds/D2SVttLRQZF2L1YpNAvf/1xR8mQ
- jv3ShYBShb69PQ4YZy5etlsQDIgBUf1qardQP01Oj50cPcYbApc0WzFy2F+Xa5eUUWjf1K
- VAfE+EvK6BuazWdtDgj/Z+60Hp5Tpt6lgb6t/pbw1AQYCt3h8sWxogm3j9qVPfeQlF4+nt
- clJFmzxwOweL8JoUNCWLnVsL8yWn84mD1cqBRhRPhTh3IqydEtfSXKtYfS1P0oSRywW00W
- 1AHV0WgVNpO0VALXp4zfKyLKZIaO6+zfhIYCbCSBCdnJKnDmGAhYwGi3IcpEmw==
-Message-ID: <e09f009d-4a00-45a7-9a33-dba22da6ca4b@denx.de>
-Date: Wed, 19 Mar 2025 04:23:17 +0100
+ bh=q7hIZeiWxUhncJiV6qNPdiWhXSVEm/OfM+dRH6hehss=;
+ b=C/Rn+M8hJ18d5PrfHacvrY90/ilfZVRisnIj6SEaGghKRWWqbiwgIcJUq7z8gmQfJY0rxS
+ KhJIau5KuZ8Vjdq9f68BrrZQ4/cLkLlZj9IRQ6j8dgAIDwhrrqXK8EmgusPjHHGQFhPdzv
+ wGhxXeN1sXEiuDakWW2Db73d32H9X7c9T+02ovBkIhseXVuLqvcYN1tQh79fXOpqK+PLW0
+ riOgjoTykyQgXygA2y9qYCnCKT6bHksxtYl007zjq/Zno/p71pRzHdR8Ikn145G1ZzaX3C
+ f6ikT7HvCrvGnYWzSGEBcBzGPACAfocb0PYH66JHieBjCgBF4t75yt4zvSM1Fg==
+Message-ID: <c13805fe-5379-46ef-ad13-e371c71376ac@denx.de>
+Date: Wed, 19 Mar 2025 04:31:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/24] clk: Add clk_resolve_parent_clk() and fix up iMX
- clock drivers
-To: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Subject: Re: [PATCH] arm64: imx8mp: Gracefully handle disabled
+ ENV_IS_IN_SPI_FLASH
+To: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>,
+ Fabio Estevam <festevam@denx.de>
 Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan
- <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com,
- Fabio Estevam <festevam@gmail.com>
-References: <20250319031852.233537-1-marex@denx.de>
+ Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, u-boot@dh-electronics.com
+References: <20250319032828.249156-1-marex@denx.de>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250319031852.233537-1-marex@denx.de>
+In-Reply-To: <20250319032828.249156-1-marex@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -83,65 +82,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/19/25 4:17 AM, Marek Vasut wrote:
-> Add clk_resolve_parent_clk() to resolve parent clock udevice name
-> based on clock-names DT property. This is used in SoC clock drivers
-> to look up the clock name in clock tables, which matches a clock
-> name in DT clock-names property, and convert it into udevice name
-> which is used by U-Boot clock framework to look up parent clock in
-> e.g. clk_register() using uclass_get_device_by_name(UCLASS_CLK,
-> parent_name, &parent);
+On 3/19/25 4:28 AM, Marek Vasut wrote:
+> In case ENV_IS_IN_SPI_FLASH is disabled, returning ENVL_SPI_FLASH
+> leads to failure to find environment driver on start up. Fix this
+> by testing whether ENV_IS_IN_SPI_FLASH is enabled and if not, then
+> return ENVL_NOWHERE instead.
 > 
-> Pass struct udevice pointer through the various iMX clock drivers.
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> ---
+>   board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
-> Marek Vasut (24):
->    clk: Add clk_resolve_parent_clk()
->    clk: clk-mux: Fold clk_register_mux()
->    clk: clk-mux: Use struct udevice instead of struct device
->    clk: clk-mux: Resolve parent clock by name
->    clk: imx: Pass struct udevice into imx_clk_mux*()
->    clk: imx: Pass struct udevice to clk_register_mux()
->    clk: clk-gate: Use struct udevice instead of struct device
->    clk: clk-gate: Resolve parent clock by name
->    clk: imx: gate2: Use struct udevice instead of struct device
->    clk: imx: gate2: Resolve parent clock by name
->    clk: imx: Pass struct udevice into imx_clk_gate*()
->    clk: imx: Pass struct udevice to clk_register_gate*()
->    clk: clk-composite: Use struct udevice instead of struct device
->    clk: clk-composite: Resolve parent clock by name
->    clk: imx: Pass struct udevice into imx_clk_composite*()
->    clk: imx: Convert clock-osc-* back to osc_*
->    clk: imx: Pass struct udevice into imx_clk_pllv3*()
->    clk: imx: pllv3: Resolve parent clock by name
->    clk: clk-divider: Use struct udevice instead of struct device
->    clk: imx: Pass struct udevice into imx_clk_divider*()
->    clk: clk-divider: Resolve parent clock by name
->    clk: clk-fixed-factor: Use struct udevice instead of struct device
->    clk: clk-fixed-factor: Resolve parent clock by name
->    clk: imx: Pass struct udevice into imx_clk_fixed_factor*()
-> 
->   drivers/clk/clk-composite.c        |   4 +-
->   drivers/clk/clk-divider.c          |   7 +-
->   drivers/clk/clk-fixed-factor.c     |   6 +-
->   drivers/clk/clk-gate.c             |   5 +-
->   drivers/clk/clk-mux.c              |  47 +---
->   drivers/clk/clk-uclass.c           |  18 ++
->   drivers/clk/imx/clk-composite-8m.c |   4 +-
->   drivers/clk/imx/clk-gate2.c        |   5 +-
->   drivers/clk/imx/clk-imx6q.c        |  66 +++---
->   drivers/clk/imx/clk-imx8mm.c       | 236 +++++++++----------
->   drivers/clk/imx/clk-imx8mn.c       | 230 +++++++++----------
->   drivers/clk/imx/clk-imx8mp.c       | 348 ++++++++++++++---------------
->   drivers/clk/imx/clk-imx8mq.c       | 226 +++++++++----------
->   drivers/clk/imx/clk-imx93.c        |   8 +-
->   drivers/clk/imx/clk-imxrt1020.c    |  38 ++--
->   drivers/clk/imx/clk-imxrt1050.c    |  70 +++---
->   drivers/clk/imx/clk-imxrt1170.c    |  30 +--
->   drivers/clk/imx/clk-pllv3.c        |   9 +-
->   drivers/clk/imx/clk.h              | 116 +++++-----
->   include/clk.h                      |   9 +
->   include/linux/clk-provider.h       |  10 +-
->   21 files changed, 754 insertions(+), 738 deletions(-)
-Sigh, get maintainers missed Fabio, sorry, +CCed now.
+> diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+> index 4af3cbe9fe2..4275436b128 100644
+> --- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+> @@ -186,5 +186,7 @@ int board_late_init(void)
+>   
+>   enum env_location env_get_location(enum env_operation op, int prio)
+>   {
+> -	return prio ? ENVL_UNKNOWN : ENVL_SPI_FLASH;
+> +	return prio ? ENVL_UNKNOWN : CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH,
+> +						       (ENVL_SPI_FLASH),
+> +						       (ENVL_NOWHERE));
+>   }
 
-Fabio, do you want me to resend this with you on CC?
++CC Fabio too ... hmmm, get maintainers is acting up a bit today.
