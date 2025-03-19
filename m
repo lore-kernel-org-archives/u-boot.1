@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E61C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:56:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A158BC35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:57:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4512981F64;
-	Wed, 19 Mar 2025 15:55:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A2B282027;
+	Wed, 19 Mar 2025 15:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KcPBpPaX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N+HVO3me";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7292E81F7B; Wed, 19 Mar 2025 15:55:46 +0100 (CET)
+ id 78DD081FFC; Wed, 19 Mar 2025 15:55:47 +0100 (CET)
 Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
  [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B804E8203F
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:55:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D5E181EC9
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:55:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4394345e4d5so32998445e9.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:55:43 -0700 (PDT)
+ 5b1f17b1804b1-43948f77f1aso34202315e9.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:55:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396143; x=1743000943; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396144; x=1743000944; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7VDMi+f+mT6C3SMXCYdNAAZmPvCE2W4aK2vyZziXAYc=;
- b=KcPBpPaXy+JGVoFDv934W8B8xycH075UdgIh0YcfHJNcktrz1C+xIdWF7OPwOf5V8b
- MZoJVmJSdND77krflgaSWfF2x2jgFUcLYvypr3bZUN35bnxUD/f8DLHR2UcLdq3NbDqq
- XZOvTtTA0eKh5LqfPWEZnNa3/rC9AenZXH6V0=
+ bh=sNblkeO7DtYMaQHnKmjUAZnkA06RZVRs7XxY43jhM4Q=;
+ b=N+HVO3menri2wwnZxlyK+C0/IhJK17gIEX/AvI+t0ylLBccsxRJvjIxJqUwVl6xI8R
+ JBlmkuFAnXi7Jr14Gq3ZbMh5SwQqza4aDzCsJZYoWc7h7fuvxIH0Rqzvbx/R2Tr27n89
+ 1Dz9jo6BTjnrHLtq+bjOBC8xbISHNaFrtN3L4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396143; x=1743000943;
+ d=1e100.net; s=20230601; t=1742396144; x=1743000944;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7VDMi+f+mT6C3SMXCYdNAAZmPvCE2W4aK2vyZziXAYc=;
- b=NzwoP43wTbqpHOpWXFpjPT3UOZ5VRD+9goVFhqhch7ANBwgt+bd5kFDXbUkiqw+s3U
- HS4Ajl4eV7Z+3xEAurWNVkdLEHmZpHIN/K3dgPK3NihghnhomvVBYG7ByWpVDzzIq7ZU
- 4Rg0gD+Z+E4lbWgRL+VYijbyLItHH2cBF05dbpLRH1mrejPauKcWDj12nIg2ylifVCV9
- Xf1RLDY9L54qqD7w7c4qMMrQU3iobHzQyFIMwbta7gl5Su/OQW57iIHHW3kL+v6XseEP
- NUtQTISJFuC9ftdonb4GPqVqWpS0jIJGxHYI5CNGsdwnilu7EPa/TB66p6B701ChTraU
- 5bwA==
-X-Gm-Message-State: AOJu0Yzwspf5GPxRShqf0aQWl7kcfQA88u/xLUQx4CgxJmQCCJcPDfSJ
- 2VxqyGRRLuO/ZzNgYwjApZQ34vE1Z8EP4LdkO7MGiez37AqFmZ53GYBgB5hGdcfK4LKhotyM2gI
+ bh=sNblkeO7DtYMaQHnKmjUAZnkA06RZVRs7XxY43jhM4Q=;
+ b=tVrHveJ95+jueotzBVQ2loJYjYRsP4ldxlY5eQI5By24Fg+z1EkztPD2J1IcjvMKc7
+ QddhT77Mzl+mCfkBzgtLhsDJjKqyS5CnMEmlXWVTEPYlQ9T65ICk2zJXioGbnIknuMep
+ QhZ+X/ZBj5nkeJ6Ne3ZrKEvFhJOz3hjXMMnhJYmOSpV8kXQXNmpH0KP6tMtBXBclV8jP
+ eYBsVVPpSRsW/jyNs4um3VKfXoUs+w3oRCPZBm9eujZJ1gsZk8fa+wvtUwORA+qG5CUf
+ qYtw6c7aoECVor8ktUlyZG5NzJMzWLWWrrkOpxZ+HzlRxHhPwvkXs+b3LiE3IfQ31y9D
+ AQRQ==
+X-Gm-Message-State: AOJu0YyGEprdx102lV3k1tT03a+Ee/yyUNAPHVHwKa1W3cGXjQbui89A
+ weweBXVgIejqePV4QIbUUf7wkz5UkykXD2Izu7CD7HUDF1Ve3Bd6o/OzUAWZKjfjH6KYRKXbbjk
  =
-X-Gm-Gg: ASbGncs3IX69ChAbSyWkAwinKbhVTs6mQqK/sVTfjYp18ta3vns7jxUGd0DQ0PhXdGp
- cbf4O/MnLheCvBPe9+E5E/XuhGmVEpq6qUZVmc/3OD8WWvPKaNaoiHaYxCJcAomkF4E+ugju03C
- 0+fvJ/quqD8MCQhEfcncr2y1wMMj/Jb4CGQrR/f7N2JnHua6hyiec+Slrnbu+vxiTPvpu5lX2iB
- 6D+RPhzayarhLPi4Vl3DHnrlDHW8Qe5W3N6oVob4J5ybI0zSxsAQBKNGYJoSC8AxUB0fMQGrgtp
- i7NEpzIeXhU381aQvwREDtGil4lZ+0pT5Xzj2x/tDQ==
-X-Google-Smtp-Source: AGHT+IHCFY1TqMDchhRchxAuynssHduxgkSCtXDUMSnhtNJYRHHiv/lqgfpmEv9zBV8cBKH+/SzsSQ==
-X-Received: by 2002:a05:600c:348e:b0:43c:f16a:641e with SMTP id
- 5b1f17b1804b1-43d43781690mr26770035e9.6.1742396142645; 
- Wed, 19 Mar 2025 07:55:42 -0700 (PDT)
+X-Gm-Gg: ASbGncthcVhmjUDE9P70zpPFItyKlrRCfpniNhQq+m1iKVU8WjA6l/VhQg9fHW90kh/
+ YXxD1NwmVKfNZrSfXTL1lrEQ29rjThI1sq+Zx1O5mY79PmJLM8sFpcirEb6oxnL9erWv46RgQJ4
+ NB7Nn/TQIH/C23/S1sUUFiWUUg3KWUFl6ryRdPnhl4DO5XI2qNt2agL2wU4VXBFrDy2Ey6F7dig
+ GRCRcldMqOT8kxpUa/z8tu3AYwVo9vJhwToiFa1W0kS9dSMsX6/Yi8ZDq87JO/uFrWdi9+Tc7ms
+ 33HmH8mKK7fdK+BSTqr+RGxG4ZLxvEQKHAmnJpBZKQ==
+X-Google-Smtp-Source: AGHT+IHpt/O8MbWltUlopWd6xxXgRrXCerDotvKsxhp2U07/BDYbV1MTQGVlLUCwecbapz7Hf8w5yw==
+X-Received: by 2002:a05:600c:870f:b0:43c:f00b:d581 with SMTP id
+ 5b1f17b1804b1-43d43880eb4mr31119775e9.29.1742396144241; 
+ Wed, 19 Mar 2025 07:55:44 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.55.41
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.55.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:55:41 -0700 (PDT)
+ Wed, 19 Mar 2025 07:55:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Janne Grunau <j@jannau.net>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 08/52] video: Add a way to write a partial string to the
- console
-Date: Wed, 19 Mar 2025 15:54:13 +0100
-Message-ID: <20250319145512.2391122-9-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 09/52] console: Support a format string for stderr output
+Date: Wed, 19 Mar 2025 15:54:14 +0100
+Message-ID: <20250319145512.2391122-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -97,94 +97,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When writing multiple lines of text we need to be able to control which
-text goes on each line. Add a new vidconsole_put_stringn() function to
-help with this.
+Add a console_printf_select_stderr() function so that it is not
+necessary for the caller to process the format string.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/video/vidconsole-uclass.c | 13 ++++++++++---
- include/video_console.h           | 17 +++++++++++++++++
- test/dm/video.c                   |  3 ++-
- 3 files changed, 29 insertions(+), 4 deletions(-)
+ common/console.c  | 18 ++++++++++++++++++
+ include/console.h | 15 +++++++++++++++
+ 2 files changed, 33 insertions(+)
 
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index 3259bd2ef7d..fa329bd1b37 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -508,12 +508,14 @@ int vidconsole_put_char(struct udevice *dev, char ch)
- 	return 0;
+diff --git a/common/console.c b/common/console.c
+index 3362a32a7a0..c6dfed6e201 100644
+--- a/common/console.c
++++ b/common/console.c
+@@ -359,6 +359,24 @@ void console_puts_select_stderr(bool serial_only, const char *s)
+ 		console_puts_select(stderr, serial_only, s);
  }
  
--int vidconsole_put_string(struct udevice *dev, const char *str)
-+int vidconsole_put_stringn(struct udevice *dev, const char *str, int maxlen)
- {
--	const char *s;
-+	const char *s, *end = NULL;
- 	int ret;
- 
--	for (s = str; *s; s++) {
-+	if (maxlen != -1)
-+		end = str + maxlen;
-+	for (s = str; *s && (maxlen == -1 || s < end); s++) {
- 		ret = vidconsole_put_char(dev, *s);
- 		if (ret)
- 			return ret;
-@@ -522,6 +524,11 @@ int vidconsole_put_string(struct udevice *dev, const char *str)
- 	return 0;
- }
- 
-+int vidconsole_put_string(struct udevice *dev, const char *str)
++int console_printf_select_stderr(bool serial_only, const char *fmt, ...)
 +{
-+	return vidconsole_put_stringn(dev, str, -1);
++	char buf[CONFIG_SYS_PBSIZE];
++	va_list args;
++	int ret;
++
++	va_start(args, fmt);
++
++	/* For this to work, buf must be larger than anything we ever want to
++	 * print.
++	 */
++	ret = vscnprintf(buf, sizeof(buf), fmt, args);
++	va_end(args);
++	console_puts_select_stderr(serial_only, buf);
++
++	return ret;
 +}
 +
- static void vidconsole_putc(struct stdio_dev *sdev, const char ch)
+ static void console_puts(int file, const char *s)
  {
- 	struct udevice *dev = sdev->priv;
-diff --git a/include/video_console.h b/include/video_console.h
-index 1bb265dc9da..e4fc776e2d3 100644
---- a/include/video_console.h
-+++ b/include/video_console.h
-@@ -499,6 +499,23 @@ int vidconsole_entry_start(struct udevice *dev);
+ 	int i;
+diff --git a/include/console.h b/include/console.h
+index 57fdb0834c1..8d0d7bb8a4c 100644
+--- a/include/console.h
++++ b/include/console.h
+@@ -169,6 +169,21 @@ int console_announce_r(void);
   */
- int vidconsole_put_char(struct udevice *dev, char ch);
+ void console_puts_select_stderr(bool serial_only, const char *s);
  
 +/**
-+ * vidconsole_put_stringn() - Output part of a string to the current console pos
++ * console_printf_select_stderr() - Output a formatted string to selected devs
 + *
-+ * Outputs part of a string to the console and advances the cursor. This
-+ * function handles wrapping to new lines and scrolling the console. Special
-+ * characters are handled also: \n, \r, \b and \t.
++ * This writes to stderr only. It is useful for outputting errors. Note that it
++ * uses its own buffer, separate from the print buffer, to allow printing
++ * messages within console/stdio code
 + *
-+ * The device always starts with the cursor at position 0,0 (top left). It
-+ * can be adjusted manually using vidconsole_position_cursor().
-+ *
-+ * @dev:	Device to adjust
-+ * @str:	String to write
-+ * @maxlen:	Maximum chars to output, or -1 for all
-+ * Return: 0 if OK, -ve on error
++ * @serial_only: true to output only to serial, false to output to everything
++ *	else
++ * @fmt: Printf format string, followed by format arguments
++ * Return: number of characters written
 + */
-+int vidconsole_put_stringn(struct udevice *dev, const char *str, int maxlen);
++int console_printf_select_stderr(bool serial_only, const char *fmt, ...)
++		__attribute__ ((format (__printf__, 2, 3)));
 +
  /**
-  * vidconsole_put_string() - Output a string to the current console position
+  * console_clear() - Clear the console
   *
-diff --git a/test/dm/video.c b/test/dm/video.c
-index c1b2a502b47..a9b2482631f 100644
---- a/test/dm/video.c
-+++ b/test/dm/video.c
-@@ -607,7 +607,8 @@ static int dm_test_video_truetype(struct unit_test_state *uts)
- 	ut_assertok(video_get_nologo(uts, &dev));
- 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
- 	vidconsole_put_string(con, test_string);
--	ut_asserteq(12174, compress_frame_buffer(uts, dev, false));
-+	vidconsole_put_stringn(con, test_string, 30);
-+	ut_asserteq(13184, compress_frame_buffer(uts, dev, false));
- 	ut_assertok(check_copy_frame_buffer(uts, dev));
- 
- 	return 0;
 -- 
 2.43.0
 
