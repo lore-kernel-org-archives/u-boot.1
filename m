@@ -4,95 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6EDC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28014C35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:38:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48C7A8193A;
-	Wed, 19 Mar 2025 15:38:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92EF481E06;
+	Wed, 19 Mar 2025 15:38:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YaiTENEZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CINbOXqO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C71EE819B1; Wed, 19 Mar 2025 15:38:33 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 3117C81E02; Wed, 19 Mar 2025 15:38:48 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63C28803CC
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:38:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA37581DE3
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:38:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso35942075e9.2
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:38:31 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-38f2f391864so3986011f8f.3
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742395110; x=1742999910; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kS6v9+IUQ4zNFVkzW5+AORPzZYfD1zEYidptJeCFP/o=;
- b=YaiTENEZmOBPxA0d1O1qrkYZlpQa5xxGhjnxxQZ0saKwsVmzmrU0Gits7Dg6iZrGC9
- 3HE6Rp5HhJYt7iDayTCfQdIL02SdS/y+HeaSI+jDqp6RcvdliMVKuoPwQtYwNRVT1GtB
- yKGmVx/yHqH/ccbYpL9NCYh4GxqmzQDcutv0k=
+ d=chromium.org; s=google; t=1742395125; x=1742999925; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D9rTcXbUNRe3OxIorWASboU/Fku7vYdN77JmmCWRuvs=;
+ b=CINbOXqOI7+cS7pVIUA+qGseyQAKgSBJbQvPdlI3sJNJJjh/7h3FORIYUfvxaARTHZ
+ kABWVMdLG1cGg4YzvERTJfUv6PPJuJMx68dUMrwqT5UBKrJBDWAdRx1ZhQlu+ZhyANFB
+ 8unBrGDNlshA7fGMrRBCFVqu0rIUCoiBSfBac=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742395110; x=1742999910;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kS6v9+IUQ4zNFVkzW5+AORPzZYfD1zEYidptJeCFP/o=;
- b=glUSo5svDCwrbfjfVi/zgDA4yNzcp2Mnm2nTcpnVTmZmfoCr4+WfBSd0BaFhfkjYYU
- pY255TQgycremaryQjXm4Mqrfv043YkRx37JGWqHnZJGdATCMya8fbm6tgd/EeTDj3KA
- 2rZG8J6EFs1NEPU3kQZOJpkuEz27JHwGU45SdmHNxiaBzMzIYk+fiFijcJVcPNQFisiQ
- 7ZnlXeZFGk/0kEkUfMWtWqDsGebzqmen/PlVnU+ig/HRS73SmSV0hKf9ftbMeBn5uQn5
- +NyVcEeLUhVnCtd0FWgCr1A9XQfulKRQV5OzujXpCb03tfi4nxlLMcyMv0tu6ePVzRqz
- 4SWA==
-X-Gm-Message-State: AOJu0YwXnN1UCOc1uzzSP6dK4aiFrRzfAv4b6qwOXjJWyu0M4ug3JhGT
- g6De7LNmdgIGUMppTs8QgQq+Jubq8EawxPhbdLQBjXM/rWpvX/wvj2r6cWvPu+tKTUIpBZHFAuA
+ d=1e100.net; s=20230601; t=1742395125; x=1742999925;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=D9rTcXbUNRe3OxIorWASboU/Fku7vYdN77JmmCWRuvs=;
+ b=mVkdjRlPWKwwXSwuCqBfsdJxKAeTAxdyPPCHNIMc7/Ja/g8xtVgXtsN5Vxo8ptCBfr
+ yapiWmb2UeUIPbaA2SOZKK75SF+9P5KUlPFz1Hxde4Qn7UV1CCJs4p/fM73JC6OmJkg2
+ UJAdSHUGkCyRkl1f/l89qlEid66ENwfpEY18acLNf6JdcRP3lBPKHjIf7cXE+wmw8NCp
+ Xf53H6TRcBprjbEM5sAOZjRX+nILWFTUBX45qQ1KlY2ZVh9iJa2HrKRPMBMPJRHtM6ft
+ j/Xp8yc3oEJdOAZ8+Um1DX5GobdvWZDwUnz5RT5ySwxDm8D2ZoBIaQDyyWWBMvZBetlf
+ aSIA==
+X-Gm-Message-State: AOJu0YyN3+ciNAXx0kq6sQBPFNCq4NlHzi+5zZm6IPDpRjx6OR6Rj+Oo
+ VYNeEbwxAyoXkHwGCMqaOVLQYO4Q2AnDFDO/9Y8R/frh/9YZ3cX9lzOs5dlnb2KxQCaJy61R/wk
  =
-X-Gm-Gg: ASbGncuJygtXLm7Uv695rooxN+kAYTfFg3sZT1/VDYdGI3TGd5wRJ8M3lst6VUNllPI
- 8m0w5dEb9L3y6r6y2eFQKbey4dEIY3mEsSjwmEqTY5VRTY+agqftJN42nY+ENGEzz0Rknn+qafm
- ftUT31NW0udIG5PmM7avam24gcT/fVwBHF4s5g3G6gCfZHIgveXNtnjG1hszou9zlETCcw3uOKJ
- bkc8MK1lB10Cj6MbvHthnMsaDoh3Bo3cZSNRY8Mpk22/wj1YUjzSOJgIE6iQOGDb6V43NcUUIZd
- P6p8B9sWHQbP2CxecQZQFICbyqMtwGoMEfXaMGAZQQ5+yCoyBfWU
-X-Google-Smtp-Source: AGHT+IGRQ8QPLlRgVfBlVaLaYpZkw5Fg/AKvTaB3Vuuy836Gwv9Nk42/0+K4iJ6+idaQSRiolpa27w==
-X-Received: by 2002:a05:6000:1549:b0:391:31f2:b99e with SMTP id
- ffacd0b85a97d-399739b4089mr2581014f8f.2.1742395110136; 
- Wed, 19 Mar 2025 07:38:30 -0700 (PDT)
+X-Gm-Gg: ASbGnct12zxzWSypFJZPKpuffkujZNVIRDA9FyfUjdX10sYO+PhnPZaExJBAP2FEV6y
+ A64GconEHin9ooNpKJpp40op+3aBUPJYfZ1f0vg5xEL/jGMBqQSk0+KJP5F+7qTFE4hBqDC38Hl
+ Boi6Tj9bvP3ebFDrzaLEtGiUwCRsm88AEtn4MRb48dTVXix9qHBFp52ObNS5EgjEe6CxXlYIQCY
+ ydz35mwaTvc9g9jWx2l7I8pJXlQOwMKvgDqm/zSJL4M+d2rQp8eFhMcR+T4tO0ouEij0ykAnrq/
+ vVpHx4qw5XKee7qNYc+anEGBd0adNb/0bgMH2EAD6w==
+X-Google-Smtp-Source: AGHT+IFmlWrXzBI4xJDxtDElrCxAl/cZ64kp6qbVJWO4Shm4Dyexp8JAqMvfF0gtSTZfYdpK6aZYug==
+X-Received: by 2002:a5d:5983:0:b0:390:f641:d8bb with SMTP id
+ ffacd0b85a97d-39973b500d3mr2485393f8f.36.1742395124779; 
+ Wed, 19 Mar 2025 07:38:44 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395cb318a80sm21534428f8f.61.2025.03.19.07.38.27
+ ffacd0b85a97d-395cb318a80sm21534428f8f.61.2025.03.19.07.38.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:38:29 -0700 (PDT)
+ Wed, 19 Mar 2025 07:38:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Baruch Siach <baruch@tkos.co.il>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dragan Simic <dsimic@manjaro.org>,
- Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
  Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Weinberger <richard@nod.at>, Roger Knecht <rknecht@pm.me>,
- Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 00/17] bootstd: Useability improvements
-Date: Wed, 19 Mar 2025 15:37:54 +0100
-Message-ID: <20250319143820.2385092-1-sjg@chromium.org>
+ Nam Cao <namcao@linutronix.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/17] fs: boot: Update fs_read_alloc() to use abuf
+Date: Wed, 19 Mar 2025 15:37:55 +0100
+Message-ID: <20250319143820.2385092-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250319143820.2385092-1-sjg@chromium.org>
+References: <20250319143820.2385092-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,69 +99,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series collects together some bootstd improvements:
+Using an abuf for this function simplifies returning the size and also
+makes it easier to free memory afterwards. Update the API and callers.
 
-- Improve iteration when there are a lot of devices
-- Add a test image for Ubuntu (to compliment Fedora)
-- Improve the naming of USB devices and bootdevs
-- Add a new command to set the bootdev order
-- Add a little more debugging
-- Use an abuf when dealing with allocate files
-- A few other minor things in bootstd
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Most of these issues were found when adding the new test image and more
-USB devices to sandbox.
+ boot/bootmeth-uclass.c | 19 ++++++++++---------
+ fs/fs.c                | 25 +++++++++++--------------
+ include/fs.h           |  8 +++++---
+ 3 files changed, 26 insertions(+), 26 deletions(-)
 
-
-Simon Glass (17):
-  fs: boot: Update fs_read_alloc() to use abuf
-  fs: boot: Update fs_load_alloc() to use abuf
-  fs: boot: Update bootmeth_alloc_other() to use abuf
-  bootstd: Add more debugging to bootmeth_efi
-  bootstd: Add more debugging to bootmeth_extlinux
-  bootstd: Try all bootmeths on the final partition
-  bootstd: Fully complete iteration of a uclass
-  test/py: Split out core of Fedora image into a new function
-  test/py: Add a test image for Ubuntu
-  usb: Use more useful names for block devices
-  sandbox: Use a unique name for each USB controller
-  bootstd: Tweak scanning with labels
-  bootstd: Tidy up a nested CONFIG_IS_ENABLED(BOOTSTD)
-  bootstd: Provide a command to select the bootdev order
-  bootstd: Correct the comment for bootmeth_set_order()
-  bootstd: Expand debugging in bootdev_find_in_blk()
-  bootstd: Mention FS state in bootmeth_read_bootflow()
-
- arch/sandbox/dts/test.dts      |  13 +++-
- boot/bootdev-uclass.c          | 112 +++++++++++++++++++++++----------
- boot/bootflow.c                |  37 ++++++-----
- boot/bootmeth-uclass.c         |  17 +++--
- boot/bootmeth_efi.c            |   5 +-
- boot/bootmeth_extlinux.c       |  14 ++++-
- boot/bootmeth_script.c         |   6 +-
- boot/bootstd-uclass.c          |  18 ++++++
- cmd/bootdev.c                  |  37 +++++++++++
- cmd/bootflow.c                 |   2 +-
- cmd/cat.c                      |  13 ++--
- cmd/cedit.c                    |  18 +++---
- doc/usage/cmd/bootdev.rst      |  36 +++++++++++
- drivers/usb/emul/sandbox_hub.c |   2 +-
- drivers/usb/host/usb-uclass.c  |  14 ++++-
- fs/fs.c                        |  28 ++++-----
- include/bootdev.h              |  60 ++++++++++--------
- include/bootflow.h             |   2 +-
- include/bootmeth.h             |  12 ++--
- include/bootstd.h              |  10 +++
- include/fs.h                   |  18 +++---
- test/boot/bootdev.c            |  83 ++++++++++++++++++------
- test/boot/bootflow.c           |  10 +--
- test/dm/blk.c                  |   4 +-
- test/dm/usb.c                  |   8 +--
- test/py/tests/test_ut.py       | 111 +++++++++++++++++++++++++-------
- 26 files changed, 487 insertions(+), 203 deletions(-)
-
+diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+index 014b7588e8d..78a3671f96a 100644
+--- a/boot/bootmeth-uclass.c
++++ b/boot/bootmeth-uclass.c
+@@ -332,7 +332,8 @@ int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align,
+ 			enum bootflow_img_t type)
+ {
+ 	struct blk_desc *desc = NULL;
+-	void *buf;
++	struct abuf buf;
++	ulong addr;
+ 	uint size;
+ 	int ret;
+ 
+@@ -346,13 +347,13 @@ int bootmeth_alloc_file(struct bootflow *bflow, uint size_limit, uint align,
+ 		return log_msg_ret("all", ret);
+ 
+ 	bflow->state = BOOTFLOWST_READY;
+-	bflow->buf = buf;
++	addr = abuf_addr(&buf);
++	bflow->buf = abuf_uninit_move(&buf, NULL);
+ 
+ 	if (bflow->blk)
+ 		desc = dev_get_uclass_plat(bflow->blk);
+ 
+-	if (!bootflow_img_add(bflow, bflow->fname, type, map_to_sysmem(buf),
+-			      size))
++	if (!bootflow_img_add(bflow, bflow->fname, type, addr, size))
+ 		return log_msg_ret("bai", -ENOMEM);
+ 
+ 	return 0;
+@@ -362,9 +363,10 @@ int bootmeth_alloc_other(struct bootflow *bflow, const char *fname,
+ 			 enum bootflow_img_t type, void **bufp, uint *sizep)
+ {
+ 	struct blk_desc *desc = NULL;
++	struct abuf buf;
+ 	char path[200];
+ 	loff_t size;
+-	void *buf;
++	size_t bsize;
+ 	int ret;
+ 
+ 	snprintf(path, sizeof(path), "%s%s", bflow->subdir, fname);
+@@ -388,12 +390,11 @@ int bootmeth_alloc_other(struct bootflow *bflow, const char *fname,
+ 	if (ret)
+ 		return log_msg_ret("all", ret);
+ 
+-	if (!bootflow_img_add(bflow, bflow->fname, type, map_to_sysmem(buf),
+-			      size))
++	if (!bootflow_img_add(bflow, bflow->fname, type, abuf_addr(&buf), size))
+ 		return log_msg_ret("boi", -ENOMEM);
+ 
+-	*bufp = buf;
+-	*sizep = size;
++	*bufp = abuf_uninit_move(&buf, &bsize);
++	*sizep = bsize;
+ 
+ 	return 0;
+ }
+diff --git a/fs/fs.c b/fs/fs.c
+index 77f7879276a..e904b93258a 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -1010,31 +1010,27 @@ int do_fs_types(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+ 	return CMD_RET_SUCCESS;
+ }
+ 
+-int fs_read_alloc(const char *fname, ulong size, uint align, void **bufp)
++int fs_read_alloc(const char *fname, ulong size, uint align, struct abuf *buf)
+ {
+ 	loff_t bytes_read;
+-	ulong addr;
+-	char *buf;
+ 	int ret;
+ 
+ 	if (!align)
+ 		align = ARCH_DMA_MINALIGN;
+ 
+-	buf = memalign(align, size + 1);
+-	if (!buf)
++	abuf_init(buf);
++	if (!abuf_realloc(buf, size + 1))
+ 		return log_msg_ret("buf", -ENOMEM);
+-	addr = map_to_sysmem(buf);
++	buf->size--;
+ 
+-	ret = fs_read(fname, addr, 0, size, &bytes_read);
++	ret = fs_read(fname, abuf_addr(buf), 0, size, &bytes_read);
+ 	if (ret) {
+-		free(buf);
++		abuf_uninit(buf);
+ 		return log_msg_ret("read", ret);
+ 	}
+ 	if (size != bytes_read)
+ 		return log_msg_ret("bread", -EIO);
+-	buf[size] = '\0';
+-
+-	*bufp = buf;
++	((char *)buf->data)[size] = '\0';
+ 
+ 	return 0;
+ }
+@@ -1043,8 +1039,9 @@ int fs_load_alloc(const char *ifname, const char *dev_part_str,
+ 		  const char *fname, ulong max_size, ulong align, void **bufp,
+ 		  ulong *sizep)
+ {
++	struct abuf buf;
++	size_t bsize;
+ 	loff_t size;
+-	void *buf;
+ 	int ret;
+ 
+ 	if (fs_set_blk_dev(ifname, dev_part_str, FS_TYPE_ANY))
+@@ -1063,8 +1060,8 @@ int fs_load_alloc(const char *ifname, const char *dev_part_str,
+ 	ret = fs_read_alloc(fname, size, align, &buf);
+ 	if (ret)
+ 		return log_msg_ret("al", ret);
+-	*sizep = size;
+-	*bufp = buf;
++	*bufp = abuf_uninit_move(&buf, &bsize);
++	*sizep = bsize;
+ 
+ 	return 0;
+ }
+diff --git a/include/fs.h b/include/fs.h
+index 2474880385d..7ff649da821 100644
+--- a/include/fs.h
++++ b/include/fs.h
+@@ -7,6 +7,7 @@
+ 
+ #include <rtc.h>
+ 
++struct abuf;
+ struct cmd_tbl;
+ 
+ #define FS_TYPE_ANY	0
+@@ -326,11 +327,12 @@ int do_fs_types(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+  * @fname: Filename to read
+  * @size: Size of file to read (must be correct!)
+  * @align: Alignment to use for memory allocation (0 for default: ARCH_DMA_MINALIGN)
+- * @bufp: On success, returns the allocated buffer with the nul-terminated file
+- *	in it
++ * @buf: On success, returns the allocated buffer with the nul-terminated file
++ *	in it. The buffer size is set to the size excluding the terminator. The
++ *	buffer is inited by this function and must be uninited by the caller
+  * Return: 0 if OK, -ENOMEM if out of memory, -EIO if read failed
+  */
+-int fs_read_alloc(const char *fname, ulong size, uint align, void **bufp);
++int fs_read_alloc(const char *fname, ulong size, uint align, struct abuf *buf);
+ 
+ /**
+  * fs_load_alloc() - Load a file into allocated space
 -- 
 2.43.0
 
-base-commit: 569681e993486b830035064f23ec87bcd70795d1
-branch: schc
