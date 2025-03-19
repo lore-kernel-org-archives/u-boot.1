@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9EEBC35FFB
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 12:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25DF4C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 12:00:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E171A81D67;
-	Wed, 19 Mar 2025 12:59:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 371C481BC0;
+	Wed, 19 Mar 2025 12:59:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N2F7UZ4+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hq0g5+OO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D02381A0C; Wed, 19 Mar 2025 12:59:38 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 22EEB81D25; Wed, 19 Mar 2025 12:59:40 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1974081951
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 12:59:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2B5881D5A
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 12:59:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3912d2c89ecso6132159f8f.2
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 04:59:36 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so31236045e9.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 04:59:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742385575; x=1742990375; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742385577; x=1742990377; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JLuTyc5ph5bcSKJr0GzPpw0mobMKA9QhFP85FBodOhY=;
- b=N2F7UZ4+2kan5R233GdAyp0JnnK5DlTQZUYRXDxmAwWNmiwfNFKwu49nA3918bpyNl
- m9+wKE4rbmS6W9Ttyox9ubCuT0GYB3QOxlWuv8+gznSuEyjjHCcC3xWAvi3iH/n81xDI
- f0DZJrHltaoO+nN9skI5nfshSlwOK+u+fkf7Y=
+ bh=kqocY9btUAb4Z7YuGrsDBrQdneNJJSt/7DcVGBAHz0I=;
+ b=hq0g5+OOgXg8j6QnGN3hwpM9B2+nExDFljh89ICKZTOXx92bbklJvPIkegTzgmxhC7
+ 8hJf5UWJ5E0GSLQqH7Xu3CMVDmZqk0awW4ElGwPoZzrld0FkytrUFJ+BXb5bMpeErhMa
+ 7YfPHukIlY/idLt/JgftBCdLwbHntiIrqfCUI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742385575; x=1742990375;
+ d=1e100.net; s=20230601; t=1742385577; x=1742990377;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JLuTyc5ph5bcSKJr0GzPpw0mobMKA9QhFP85FBodOhY=;
- b=wvDzZqQtBuX/B+GyoLrljSa4k6+zAmZatJv7vo6m6ZvzCWyL6XGx3d9AufoTSc9gUd
- ZsE/ke4mQ1D0FU+/OIGG+ZUGL3t9kPNk/5V1TAcrR5Bt/bbtG2RxZxax3JUea3x9haLO
- CZTUqMgry5wk9NaA4tCNAY5Vd3hRnrkcUFLRVZsat1P6GyBHVkIZ2lKFTD60metBtmra
- cMRqaZ90lkC//0NdKu09L48Olq0ZZh9cBTd0eZVUGc0SoeLC95H+rX1LTFWwSqSarkWW
- 6+14/wfz5DNMNbQea5gOzTHG+IChXm6ICCkvCm3wifHrG5wEoEE2bJdE3oGFcgepbhjq
- HThA==
-X-Gm-Message-State: AOJu0YwGPveHL2zo+4BO6QGs8/UdFOpemFe+akQ2Aq7r4A26dkYpYUB6
- DO0cmwa+Lge3OhHSLEg3INkS0X1Q/IEj1CV3FDTJg6o6csA092Kp1lz/E4KbOHWZP1ps2tfUy0S
- Urw==
-X-Gm-Gg: ASbGncs4eelFvOt8wXpKjbBGW/5vYZMDIrFCXihehzWsqrRoytj/nQ3HjQ6Im+9i+kf
- VXo3Ft8lTXqFGg3sQFmwwETRpsq9cFLis47bASRSMtATHbrrdSBHj4AFeCWSqXgmlW2Hcj4DBUc
- eX86iqjzKB1scgiTNlzxNJlKKHMfEzrTyavaPxJYxQPdH3UlmbKuJu90w+d00VmDFmZ4R856e5G
- m1TWDJdoh/1BVIrOTny/4xKWgL9gKLSwYcQkubh9tG5gohejW2z2Lb40LRPykoqfu9pBkEWqvpK
- 0+kTM9yi72mhbRqdi9aSKN26aV1Q2KDyCQpL2QZe/w==
-X-Google-Smtp-Source: AGHT+IFPripcjQXI8s8pJ0asU6iXXf5+O3N6AiTFyBRQIKVQEBipgUazLyZLKYpTWJB5/GL9PER3IA==
-X-Received: by 2002:a05:6000:1568:b0:391:3cf6:95fd with SMTP id
- ffacd0b85a97d-399739e5de2mr1986766f8f.30.1742385574993; 
- Wed, 19 Mar 2025 04:59:34 -0700 (PDT)
+ bh=kqocY9btUAb4Z7YuGrsDBrQdneNJJSt/7DcVGBAHz0I=;
+ b=PG8N5ONNsG+1HjYPMBUV7cXjwzor1tsx0pazneZ7IFvSNCMammz37ACFOMPgRw6LJI
+ VF4zaWDF6IalY/XZGM+F+f3WPOb6k/tUfGXpEuVC+quJMRgwABIrBAr0GiOW4z3HaP1T
+ 3fEWQvaPqX9RWf+dj6BUYLnO8bXwTkWxsfzRJg9ZD6XB/bu0dnSABhopBiJ6O5JzaVl0
+ 6tMZnlbvqbKqhXRW60+TZmFbCiFcc1LL/Aye5nHcG/Arb26KziOTWBEydVMKwM5kQVaR
+ HRyvgqzOyfwQKhZ2pR5sqmUbPkRWjgN4mR//NtEP9jQBE9aMhtB44hG1QHzyi6E6K6tc
+ M64w==
+X-Gm-Message-State: AOJu0YxpJbNGtoQg4/76Ajbvl5IxBRjSEm3vHQcyKXw7Vtca9ANzEHT7
+ m4LSAzkJWu8eFl9pPY+OBBhCWmGQWV61LC3TkKu0P3OilxGSK3E4xlc1LoF22RX7l11AKeyqaux
+ 2wg==
+X-Gm-Gg: ASbGncsq0iIGSIvzsHU4z2iGcqYzaZ1iFd+Rdf+rQjd9s6C3hU1N8rfWeP4r5Otojk7
+ 1sV4XI6yYKGJdG0rWzXR6FFsMeo621inF/t5JPfe1UYVYHs02u1ISIH2uYuH/jBj6SX7Ma+udIy
+ FDihl/lNhs3fC6dIEVht9JeRxLSNCan/qOKqjHYqGHDC8/2lprF0WsW/MEKoJZ3rTvm38P0oiwF
+ uqF6EG9psnS6rWlh7cnK7UCleoy8oxwAiQny3gPZXhKwgWOS6d2YKtKE7oc21lc1LQBkhUtzrQw
+ QegIQY1H6ceFyLgXkHBmQ0WpQzIPmB/n8opJ2VsBsQ==
+X-Google-Smtp-Source: AGHT+IEXBMfWALDrDn4i37o5gqF7MnPl5MKemzx88E/kyF6hCb9xTQ3NA0PTwy1OeqPSEJRsahDJ6g==
+X-Received: by 2002:a05:600c:b9b:b0:43c:e70d:4504 with SMTP id
+ 5b1f17b1804b1-43d43842251mr18472965e9.19.1742385576798; 
+ Wed, 19 Mar 2025 04:59:36 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395cb7ea16csm20606906f8f.82.2025.03.19.04.59.33
+ ffacd0b85a97d-395cb7ea16csm20606906f8f.82.2025.03.19.04.59.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 04:59:34 -0700 (PDT)
+ Wed, 19 Mar 2025 04:59:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/6] membuf: Add an easy way to set up a buffer with data
-Date: Wed, 19 Mar 2025 12:59:06 +0100
-Message-ID: <20250319115911.2204045-5-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Tom Rini <trini@konsulko.com>,
+ Trevor Woerner <twoerner@gmail.com>
+Subject: [PATCH 5/6] sandbox: Enable PHYS_64BIT for 64-bit builds
+Date: Wed, 19 Mar 2025 12:59:07 +0100
+Message-ID: <20250319115911.2204045-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319115911.2204045-1-sjg@chromium.org>
 References: <20250319115911.2204045-1-sjg@chromium.org>
@@ -94,70 +99,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In some cases it is useful to set up a buffer with some data to read,
-e.g. when reading lines from a text file. Add a helper for this.
+Sandbox is special in that we use the bitness of the host. This should
+extend to PHYS_64BIT as well, so enable this option when building on a
+64-bit host.
 
-Tidy up the comment for membuf_init() while we are here.
+Update the conditions in io.h so that 64-bit access is available.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/membuf.h | 15 ++++++++++++++-
- lib/membuf.c     |  8 ++++++++
- 2 files changed, 22 insertions(+), 1 deletion(-)
+ Kconfig                       | 1 +
+ arch/sandbox/include/asm/io.h | 4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/include/membuf.h b/include/membuf.h
-index b495a72652b..f5c474cf730 100644
---- a/include/membuf.h
-+++ b/include/membuf.h
-@@ -222,7 +222,9 @@ int membuf_readline(struct membuf *mb, char *str, int maxlen, int minch,
- int membuf_extend_by(struct membuf *mb, int by, int max);
+diff --git a/Kconfig b/Kconfig
+index 2e63896c477..c80d6128260 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -448,6 +448,7 @@ endif # EXPERT
+ config PHYS_64BIT
+ 	bool "64bit physical address support"
+ 	select FDT_64BIT
++	default y if HOST_64BIT
+ 	help
+ 	  Say Y here to support 64bit physical memory address.
+ 	  This can be used not only for 64bit SoCs, but also for
+diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
+index 3d09170063f..3c3545a2747 100644
+--- a/arch/sandbox/include/asm/io.h
++++ b/arch/sandbox/include/asm/io.h
+@@ -39,13 +39,13 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
+ #define readb(addr) sandbox_read((const void *)addr, SB_SIZE_8)
+ #define readw(addr) sandbox_read((const void *)addr, SB_SIZE_16)
+ #define readl(addr) sandbox_read((const void *)addr, SB_SIZE_32)
+-#ifdef CONFIG_SANDBOX64
++#ifdef CONFIG_HOST_64BIT
+ #define readq(addr) sandbox_read((const void *)addr, SB_SIZE_64)
+ #endif
+ #define writeb(v, addr) sandbox_write((void *)addr, v, SB_SIZE_8)
+ #define writew(v, addr) sandbox_write((void *)addr, v, SB_SIZE_16)
+ #define writel(v, addr) sandbox_write((void *)addr, v, SB_SIZE_32)
+-#ifdef CONFIG_SANDBOX64
++#ifdef CONFIG_HOST_64BIT
+ #define writeq(v, addr) sandbox_write((void *)addr, v, SB_SIZE_64)
+ #endif
  
- /**
-- * membuf_init() - set up a new membuff using an existing membuff
-+ * membuf_init() - set up a new membuff using an existing buffer
-+ *
-+ * The buffer is initially empty
-  *
-  * @mb: membuff to set up
-  * @buff: Address of buffer
-@@ -230,6 +232,17 @@ int membuf_extend_by(struct membuf *mb, int by, int max);
-  */
- void membuf_init(struct membuf *mb, char *buff, int size);
- 
-+/**
-+ * membuf_init_with_data() - set up a new membuff using existing data
-+ *
-+ * The buffer is set up to contain the provided data
-+ *
-+ * @mb: membuff to set up
-+ * @buff: Address of buffer
-+ * @size: Size of buffer
-+ */
-+void membuf_init_with_data(struct membuf *mb, char *buff, int size);
-+
- /**
-  * membuf_uninit() - clear a membuff so it can no longer be used
-  *
-diff --git a/lib/membuf.c b/lib/membuf.c
-index 016430ae988..347c92e3326 100644
---- a/lib/membuf.c
-+++ b/lib/membuf.c
-@@ -405,6 +405,14 @@ void membuf_init(struct membuf *mb, char *buff, int size)
- 	membuf_purge(mb);
- }
- 
-+void membuf_init_with_data(struct membuf *mb, char *buff, int size)
-+{
-+	char *data;
-+
-+	membuf_init(mb, buff, size);
-+	membuf_putraw(mb, size, true, &data);
-+}
-+
- int membuf_new(struct membuf *mb, int size)
- {
- 	mb->start = malloc(size);
 -- 
 2.43.0
 
