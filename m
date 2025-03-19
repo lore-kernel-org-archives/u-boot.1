@@ -4,117 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E159C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 16:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C52A8C35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 16:39:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 663D581E47;
-	Wed, 19 Mar 2025 17:20:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 336CA81EC5;
+	Wed, 19 Mar 2025 17:39:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QnBPoeYQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="euZf7NM6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3B8C81E6C; Wed, 19 Mar 2025 17:20:05 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 37FBF81F59; Wed, 19 Mar 2025 17:39:16 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F91B81E18
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 17:20:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F6C181E6C
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 17:39:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43ce71582e9so33131525e9.1
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 09:20:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2ff6e91cff5so7481049a91.2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 09:39:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742401202; x=1743006002; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=IM0dKk0KfhNjxJc5TX9x+uZArNjdWT0ljDsixL3uLHU=;
- b=QnBPoeYQ60SlOsO9OZFhA2zuXG2J8SPpKtHupPS+l7oxUHoSZHxFrB3iqtEWPYR+iE
- d2LukaZyFWiZqlnWNtFcJkvIrEcM5BVAJ6OuJzZpV1/Rk9TgIGifFngQCcR5m30hclVK
- Yo1skXxlmsyGNeJYvBbSXaFO6uMOmBsZYanFq54yQgs3m6EGBcGYUfcL4/t1jKV1kedl
- KUgn3vzJ9jKPu8PPw3GbDrYoFFJCoc0nACn5T1k741KAQ6JLMmJ02Y4h5lTEP636yDYj
- Ub8/Ux+57dw08gMQ+wfaYdi3C5xuLjiVx/xEKduo22UGZOQkDeVstgRAkapHsompVSq0
- zv+Q==
+ d=gmail.com; s=20230601; t=1742402352; x=1743007152; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rzOpl2LRj9R8K6mU2e6SvGCxhSh6AQ4cU1XJ3+gjejA=;
+ b=euZf7NM6SxZf2h6DtsVQTf6zp0DwbVOQrcszLboBeKZyLV6XxvAdvUil3/N/xc23Ep
+ jmFaccpy5zoKyku1PxyKMlsc55Qi1YZZv8X8AeS0xI5ZWlFTKx3vys/1Cp3GP2Bx5UL8
+ TgyncmJAmiDcPWIHwg0W0FNOqWjporbtZb9PRF9CfUmWTmvpsCuI6NwcypxcODzpgdd0
+ MYXq5FCbIaOrkX9rMuY/LyCc9bb8fzH8Irot//KEZs6Hjw7h8ySVA8zfeogJzE5BsHJV
+ KGXdzyEecfKDpkTZ9fCWp5zbU8IiM44z9WKMdivvTNGUzuQ2BAp+xuNehwfeuvOLJxep
+ uPRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742401202; x=1743006002;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=IM0dKk0KfhNjxJc5TX9x+uZArNjdWT0ljDsixL3uLHU=;
- b=TXZBtsV6ZKxVpqk6Bi9j6PyM/PCg2goxPK/YrOZVmpxD61bT56hwhehotszORTUsEC
- U1CMytTEyIf73KFgZWUj9G4olWsO1fiN61N0VBPb8KBE1zKQgNuo9wdxaxezbmJZQoyz
- 0yYfpjiZeD0kwAkLJGo6uLyzuR5TbiyOUS6XoE0MxvKO5IuvjlCUIsjD59fwdtAfNOc/
- IzPGQWyurvnPIxTUhsm6mZ2WUfS55E8jT/ycD+1pN710Xh6RdVwtnhwNJFF9su2BduNM
- k27I4rbuxUGgwldKuInYmW+8Dypnclo9zQ1UdtLy2aNrlOfyw+eitpYitGrX5KAGrtPz
- tnBg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYmjFg2+zmImjcBuq3UrOszu0Z/evc0Htapkw9mrZ9AeAnZZQ8fbP284tPYFHNwjW5gsBgn1k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6vuGXZQsBvzPRL2OhBQbmxe9sIqMkHEcYwoyi9OH77WM4L7dL
- 6h1/bRmsX+VGD2YwOgCubKAtKcvEOOlybd0159UWhq/52ipz1HmEPzWON2Y56SQ=
-X-Gm-Gg: ASbGncvwyWRDFu1w2rPV7V6aik2A7ndPzg1cHdgb9n8rdXXhylRO8S/ReULSlO0jMFl
- a+5VUP1HdEn2XeebpCMPRwWuVzZnMGWBjrAXQppyefR7LFkRZAbtlCNu3oX/fsjsW8SdmR0c9pE
- vmfcUUhcnbvbpUqSTimd3M7Gc5jBHc6IuJqDMv8xQjvTOjolO/NThg89lbJXeAH+XWvdVNzzh0O
- gsL7XogwOwutng2EasPQON2M17HHoWUT64PqsIl+L4V9XSfnqtSwW0z/ky4nD2WOUfuUEp/1wsI
- aCu2JfJ64u2mRqhdmB+xVe07wx54eT7zFfVeB+4+k8ugipGno+X0gmKFcjsKhAhb5yHa1b9LvMv
- WppRIrfsW6cHaWmvYIQLXtg==
-X-Google-Smtp-Source: AGHT+IHNTX2JH3jGP12LHd1GZvglKj8VSDInEAxB3dLYII7jcqIPlDNOcWvoqjo2tYm3+3gMcqBj0A==
-X-Received: by 2002:a05:600c:1d02:b0:43d:683:8caa with SMTP id
- 5b1f17b1804b1-43d437dbd27mr31858045e9.15.1742401202482; 
- Wed, 19 Mar 2025 09:20:02 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:f407:ab81:b45a:93e8?
- ([2a01:e0a:3d9:2080:f407:ab81:b45a:93e8])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d43f33242sm23216865e9.5.2025.03.19.09.20.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Mar 2025 09:20:02 -0700 (PDT)
-Message-ID: <44597d3f-9a9e-47a9-8279-7aecc1ef8791@linaro.org>
-Date: Wed, 19 Mar 2025 17:20:01 +0100
+ d=1e100.net; s=20230601; t=1742402352; x=1743007152;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rzOpl2LRj9R8K6mU2e6SvGCxhSh6AQ4cU1XJ3+gjejA=;
+ b=ooUXDEGFHfUe+s6czAvmKTJ9DqrsL36kBcvFkj1hLGBtxpvZ9Ulc2o87praTt/Q8xF
+ Gm3R+jjqxGUVAkhSq6n8kRyvzZz+HyDJWt9t/TlpZB4gW9ut5DMJaLAEpd4ZjQbZ3VDy
+ IMBt6jyztL2pm9QumBQ79PWnyObZnReX3gdbIx8r4USmJv35WKtuYjlWcEomKBxN16d0
+ AKKR2iZ9wivg7nmr0Hnm6zYRpwUG0Ai2rad9AaZ4UWOmMZ2oebP9LsooXNDzVGGliCHT
+ BBA438yzw7ZY3P52W3srqNThC+56MXw6kHe9dH1Gp1+srogzldIc3mCFMgL3PLmIJ9GS
+ 9ieA==
+X-Gm-Message-State: AOJu0Yz8L7KhWFLTtBRZ223/Dv/yOCRnAAPEmRUDYHZQM2y/dov0kVRD
+ YpcVmSr4R7zwN/aN8L2GmMTMu/kLSoHO0Xk79xhIqLzhiEkDL0OFRrfD+06+KDGpOsfcmenTCy0
+ apbBva8i+W0kGDvWDcsgXru6I6Ko=
+X-Gm-Gg: ASbGncuuFASMud8FKPQjmcu/Pp0KJyFp71okTrV/t3meO6sV5Ll70bquyyL9sPglvVP
+ jp7TNFkFitT8C8bPR5J7q56I0x+A54WOkLUR8Hviucygt/oqIPA31h5nxRn5KCBNOo7UVZFqWgO
+ 5mTzwX2gdgEx7ZAvBTURR96vzutg==
+X-Google-Smtp-Source: AGHT+IFh7khwljbF8dJokcw8mZgjovua7ngDmy87cFbSnsduDD6LD0uN8GTCFmwc5Ch5QMkmj81IZ7l9DwVvAYVWZNE=
+X-Received: by 2002:a17:90a:dfc8:b0:2ee:b875:6d30 with SMTP id
+ 98e67ed59e1d1-301bde54d03mr4362812a91.9.1742402352002; Wed, 19 Mar 2025
+ 09:39:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] clk/qcom: sdm845: add missing USB3 clocks
-To: Sam Day <me@samcday.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250319-sdm845-usb-clocks-v1-1-ddea854f62ec@samcday.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250319-sdm845-usb-clocks-v1-1-ddea854f62ec@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250318233849.587520-1-aford173@gmail.com>
+ <20250318233849.587520-2-aford173@gmail.com>
+ <CAOMZO5Ah3zG50Do_kGx=63RmX16hFrrgzsBk6Zgm6tQoB-VTLg@mail.gmail.com>
+In-Reply-To: <CAOMZO5Ah3zG50Do_kGx=63RmX16hFrrgzsBk6Zgm6tQoB-VTLg@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Wed, 19 Mar 2025 11:39:00 -0500
+X-Gm-Features: AQ5f1Jr0417KGqoZ-2A1qmMMqGCIRnCBln1uHlq6nusc7DJbYUP9oA_ibCPmMuA
+Message-ID: <CAHCN7xKd2geEkK77kYBp1jQJpiM_NNpTPP43ONNYsUNgEtaVrA@mail.gmail.com>
+Subject: Re: [PATCH V3 01/10] clk: imx6q: Properly handle imx6qp ECSPI clk_sels
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Tim Harvey <tharvey@gateworks.com>, 
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,40 +97,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19/03/2025 16:45, Sam Day wrote:
-> These are necessary for USB gadget to come up properly, now that
-> qcom_gate_clk_en fails on unknown clocks.
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
->   drivers/clk/qcom/clock-sdm845.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-> index adffb0cb2402a6b27e0e998af2f121c519301820..1b85b05632fe1100a6ad60dbd430272d8ae1e77a 100644
-> --- a/drivers/clk/qcom/clock-sdm845.c
-> +++ b/drivers/clk/qcom/clock-sdm845.c
-> @@ -77,7 +77,9 @@ static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
->   }
->   
->   static const struct gate_clk sdm845_clks[] = {
-> +	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,		0x8201c, 0x00000001),
->   	GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK,		0x82020, 0x00000001),
-> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x0502c, 0x00000001),
->   	GATE_CLK(GCC_CFG_NOC_USB3_SEC_AXI_CLK,		0x05030, 0x00000001),
->   	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,		0x5200c, 0x00000400),
->   	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,		0x5200c, 0x00000800),
-> 
-> ---
-> base-commit: 69fb899133b6c374eff11b13482371bec6898a01
-> change-id: 20250319-sdm845-usb-clocks-9b794fd89522
-> 
-> Best regards,
+On Wed, Mar 19, 2025 at 11:15=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
+>
+> On Tue, Mar 18, 2025 at 8:42=E2=80=AFPM Adam Ford <aford173@gmail.com> wr=
+ote:
+>
+> > +       if (of_machine_is_compatible("fsl,imx6qp")
+>
+> Missing closing parenthesis.
+>
+> > -       clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+> > -              imx_clk_divider("ecspi_root", "pll3_60m", base + 0x38, 1=
+9, 6));
+> > +       if (of_machine_is_compatible("fsl,imx6qp")
+>
+> Same here.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Sorry about all the noise.
+
+I think I forgot to type 'git add' before the "git commit --amend" so
+the fix didn't get applied, but because the same file was shown in the
+commit message, it looked like the fix was in place.  I'll have to
+confirm when I get back to my build machine.
+
+I'll manually build a few more mx6 platforms and try to spend some
+more time trying to figure out the CI/CD tools.
+
+adam
