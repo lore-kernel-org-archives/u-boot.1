@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E2EBC35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:00:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F20C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:00:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3354F81F7B;
-	Wed, 19 Mar 2025 15:56:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8110D82131;
+	Wed, 19 Mar 2025 15:56:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IC6W8MFg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kSJlLBtE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E6082120; Wed, 19 Mar 2025 15:56:24 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id BC95282040; Wed, 19 Mar 2025 15:56:26 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A64538212F
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 394B08214D
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:56:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3997205e43eso1127164f8f.0
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:22 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-390cf7458f5so5907196f8f.2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:56:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396181; x=1743000981; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396183; x=1743000983; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=04a6OcFdzaRyBEcMoCZJVEGxEMdrvl2PcjrMY1JBzSU=;
- b=IC6W8MFgaBDqnwD90yiWV0amwu1rXO/R/HDdHUPTuxYcCFI9wUpOZcbcwNZ9xcTUAP
- ZKX5M83YgCQb84O+bpXMMyxrhy7Vm/5LjYAfrdE2C4vjtrmLteCs8ABR1CVQSCPLAWXw
- 6ykqo1Y2JZrNKoyQu37uElpBfdUFIJzcliTvs=
+ bh=rwvwypD+9e+fz6ya7wNZg+HBcg1u5y+04IxQ31ApPYI=;
+ b=kSJlLBtE2jJulkBErqZergVYGTkE/3yo47B1BNFE/XZYBfO/3QV3FjduccrjSVuhCs
+ 6sXPzcoYV+UryAY963VtnJNc/gB7lJTwA9ddJ/FFy5n8mNNysPZMme4ULyzZC9GCv6lz
+ PU1xkE2eQdC7Cd1IALAevIuwyw7voN7E5ewv0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396181; x=1743000981;
+ d=1e100.net; s=20230601; t=1742396183; x=1743000983;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=04a6OcFdzaRyBEcMoCZJVEGxEMdrvl2PcjrMY1JBzSU=;
- b=NUGf/7krOGnD7jESban04Sbs8rJhYfk64DZvNA6MGkrfRJMYlHWe/EE/xL9alGgIa1
- tajL/IJ9lPljJxGypyzV0+mlrU8vFbVsyz00Qqe15C2DwEdd0T+t5mL3rta/y3YLTpYR
- n+NbfJHDyGf75UzFGl//exM+51wHOru7PYR8IMDqv+R7R44zgFe946TwaJZivRumkknP
- 5S5lN2/KaXjesc8S4pEfxLogVllEJlq5g7VYRLYGD+7nFReqGUbN7mOu2cpLxG3w4E/p
- v6sXGGuWUddPgzQICabNEPlPPZadvs1FSrmw4LFb2X5l260hsP4O0F5caSq6biukILD/
- ZChg==
-X-Gm-Message-State: AOJu0YylnWt6DrAov3o4mMXHaPV4rkSnslp39xrLQSe/MzfaQcMEJ6C2
- d2UE1GWfqogsfBN9iNeu5MuE82hwb9vc9oRz2TLxe9Ou2sT4sxQ0q7FgtqLg5+QnOEsJPfdIRaQ
+ bh=rwvwypD+9e+fz6ya7wNZg+HBcg1u5y+04IxQ31ApPYI=;
+ b=lg/K+KvD2w1EnzVjVNloVvE12CNzI+Hy4C/O7YxwS1H4V2qZ3fH68SXQiqTS4q3X6A
+ F04l37e2f0SFDe4fppduY31hcxHrMfJabH1S/yqZCoOQgvI0nwjM2PuUqsOi6O8Y8B+4
+ EzjLy5SMBKuMrBkw+Iqw71+enOSpMztd0MDRi0Ues3LRAG/nltdYWQJ+IwWrO3+wiLWv
+ wk23qXXOCeHuQ1wigjGMVKY57KjGAryBErQh2XX22xKiG5XPCeoZdRiQaScdffuBO/ZK
+ CZVh8d9cDL/mRsAWJ6bevdNgNKHZw+HGRkTYS/pFa37edSPlHtprr/SKQj1eCBfWFlUF
+ HsYw==
+X-Gm-Message-State: AOJu0YxaNOVNxqh6DlQqgNvghys9igSeJKJSXssLHJ8Kh+DCHDv4+dCp
+ iMkff7/GfGz+ZzkH7ss4N1aKQr1sr2u2DQYTdQk5OMUFx3k4qibLLVRGRLoQlxIkLgR3PgIrAoc
  =
-X-Gm-Gg: ASbGncvQ3JSIVdAwENoy195NO4NE113xF7JjHUEMImOkMObiMpI0xy1vhcw3U+YSKsu
- 1gRR6JqNzUrqWxyCfelZ57QedsbexcLRXNLd0UYrGv/NwAEE7fAoMVIF+pSsBYGZ+uJXwlB1DNw
- +obfCtmrP71scpfopEbtNp0S55DM11ixtc3G6GVlX4of/rQaQqYL5BAKT3WIWiyGHGbnfFvsxJD
- Jw+g4/tkYNhJTgS4xHAnXY0ZdUivVIZPcawacVnidZGUqFI6p/qW1Y3DrlCbfNTpkrPhgJCuPfJ
- alSb5nwlQpBAaH+h7J0BDT7lkc+5kCKQ29+ExiWI+A==
-X-Google-Smtp-Source: AGHT+IHM/tDjWUWzWqTMXiTNjMQoOeQdCujdjgNew2qTPV8dtADOcUVx/Vl1D06VZIQopUQT47tdCw==
-X-Received: by 2002:a05:6000:1787:b0:390:de33:b0ef with SMTP id
- ffacd0b85a97d-399739d3dbcmr2267382f8f.30.1742396181508; 
- Wed, 19 Mar 2025 07:56:21 -0700 (PDT)
+X-Gm-Gg: ASbGncumq+CHI2vBM2QSKbpZ5mhtLdsVOSWQH8vFRWPDE3866qJtgRYsJTit7UuXOWx
+ mrGFcWoURBzIJGi/mtyYyQfleJTI8KEyaVCg7oC6ipgTORsEVsaxcKiwgBknz+/4PrBoN4o5PfV
+ h7YAlFT86hnncTQnNNkgHT1Kx+GLpR9iLvcHUnOFugzoITey4I56jHwR5FroNqI7V/JRV/57eOp
+ wbjAwvkolCQjg28Lvrqo0jnhFOIHEhcqN2+9uCy1SRFD5obWkFQjpaHvxUaqqb4rT7321mr4qLQ
+ ipEsQyRS3sGPGSfwxzEwktuTpupX278EmY3FZCO/mA==
+X-Google-Smtp-Source: AGHT+IEU9DmThSrMeOeEvxvlKMNHHVAzcUR85/RU19bLfleVFfwLp06xF6zYYOM6zK6DQZ53J2E8jA==
+X-Received: by 2002:a5d:47aa:0:b0:391:158f:3d59 with SMTP id
+ ffacd0b85a97d-399739c23afmr3748028f8f.15.1742396183009; 
+ Wed, 19 Mar 2025 07:56:23 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.20
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.56.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:56:20 -0700 (PDT)
+ Wed, 19 Mar 2025 07:56:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 29/52] expo: Support setting the size and bounds of an object
-Date: Wed, 19 Mar 2025 15:54:34 +0100
-Message-ID: <20250319145512.2391122-30-sjg@chromium.org>
+Subject: [PATCH 30/52] expo: Line up all menu objects
+Date: Wed, 19 Mar 2025 15:54:35 +0100
+Message-ID: <20250319145512.2391122-31-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -94,117 +94,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a function to allow the size of an object to be set independently
-of its position.
-
-Also add a function to permit the object's bounding box to be set
-independently of its dimensions.
+At present labels are lined up vertically. Do the same with keys and
+descriptions, since it looks nicer.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c     | 29 +++++++++++++++++++++++++++++
- include/expo.h   | 24 ++++++++++++++++++++++++
- test/boot/expo.c | 11 +++++++++++
- 3 files changed, 64 insertions(+)
+ boot/scene_menu.c | 22 ++++++++++++++--------
+ test/boot/expo.c  | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 44 insertions(+), 8 deletions(-)
 
-diff --git a/boot/scene.c b/boot/scene.c
-index 6142d2b736d..dd48589f378 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -236,6 +236,35 @@ int scene_obj_set_size(struct scene *scn, uint id, int w, int h)
- 	return 0;
- }
+diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+index 6d945cfa62d..8aa77924b33 100644
+--- a/boot/scene_menu.c
++++ b/boot/scene_menu.c
+@@ -182,14 +182,20 @@ int scene_menu_calc_dims(struct scene_obj_menu *menu)
  
-+int scene_obj_set_width(struct scene *scn, uint id, int w)
-+{
-+	struct scene_obj *obj;
-+
-+	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
-+	if (!obj)
-+		return log_msg_ret("find", -ENOENT);
-+	obj->bbox.x1 = obj->bbox.x0 + w;
-+
-+	return 0;
-+}
-+
-+int scene_obj_set_bbox(struct scene *scn, uint id, int x0, int y0, int x1,
-+		       int y1)
-+{
-+	struct scene_obj *obj;
-+
-+	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
-+	if (!obj)
-+		return log_msg_ret("find", -ENOENT);
-+	obj->bbox.x0 = x0;
-+	obj->bbox.y0 = y0;
-+	obj->bbox.x1 = x1;
-+	obj->bbox.y1 = y1;
-+	obj->flags |= SCENEOF_SIZE_VALID;
-+
-+	return 0;
-+}
-+
- int scene_obj_set_hide(struct scene *scn, uint id, bool hide)
- {
- 	int ret;
-diff --git a/include/expo.h b/include/expo.h
-index 6f0547a4b38..990cb3094ee 100644
---- a/include/expo.h
-+++ b/include/expo.h
-@@ -673,6 +673,30 @@ int scene_obj_set_pos(struct scene *scn, uint id, int x, int y);
-  */
- int scene_obj_set_size(struct scene *scn, uint id, int w, int h);
+ 	scene_menu_calc_bbox(menu, bbox);
  
-+/**
-+ * scene_obj_set_width() - Set the width of an object
-+ *
-+ * @scn: Scene to update
-+ * @id: ID of object to update
-+ * @w: width in pixels
-+ * Returns: 0 if OK, -ENOENT if @id is invalid
-+ */
-+int scene_obj_set_width(struct scene *scn, uint id, int w);
-+
-+/**
-+ * scene_obj_set_bbox() - Set the bounding box of an object
-+ *
-+ * @scn: Scene to update
-+ * @id: ID of object to update
-+ * @x0: x position, in pixels from left side
-+ * @y0: y position, in pixels from top
-+ * @x1: ending x position (right side)
-+ * @y1: ending y position (botton side)
-+ * Returns: 0 if OK, -ENOENT if @id is invalid
-+ */
-+int scene_obj_set_bbox(struct scene *scn, uint id, int x0, int y0, int x1,
-+		       int y1);
-+
- /**
-  * scene_obj_set_hide() - Set whether an object is hidden
-  *
+-	/* Make all labels the same size */
+-	cur = &bbox[SCENEBB_label];
+-	if (cur->valid) {
+-		list_for_each_entry(item, &menu->item_head, sibling) {
+-			scene_obj_set_size(menu->obj.scene, item->label_id,
+-					   cur->x1 - cur->x0,
+-					   cur->y1 - cur->y0);
+-		}
++	/* Make all field types the same width */
++	list_for_each_entry(item, &menu->item_head, sibling) {
++		cur = &bbox[SCENEBB_label];
++		if (cur->valid)
++			scene_obj_set_width(menu->obj.scene, item->label_id,
++					    cur->x1 - cur->x0);
++		cur = &bbox[SCENEBB_key];
++		if (cur->valid)
++			scene_obj_set_width(menu->obj.scene, item->key_id,
++					    cur->x1 - cur->x0);
++		cur = &bbox[SCENEBB_desc];
++		if (cur->valid)
++			scene_obj_set_width(menu->obj.scene, item->desc_id,
++					    cur->x1 - cur->x0);
+ 	}
+ 
+ 	cur = &bbox[SCENEBB_all];
 diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 94c13e9b71f..2a430d3d482 100644
+index 2a430d3d482..70db33d48b1 100644
 --- a/test/boot/expo.c
 +++ b/test/boot/expo.c
-@@ -584,6 +584,17 @@ static int expo_render_image(struct unit_test_state *uts)
- 	ut_asserteq(50 + 160, obj->bbox.x1);
- 	ut_asserteq(400 + 160, obj->bbox.y1);
+@@ -576,6 +576,36 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	ut_asserteq(50 + 29, obj->bbox.x1);
+ 	ut_asserteq(454 + 18, obj->bbox.y1);
  
-+	scene_obj_set_width(scn, OBJ_MENU, 170);
-+	ut_asserteq(50 + 170, obj->bbox.x1);
-+	scene_obj_set_bbox(scn, OBJ_MENU, 60, 410, 50 + 160, 400 + 160);
-+	ut_asserteq(60, obj->bbox.x0);
-+	ut_asserteq(410, obj->bbox.y0);
-+	ut_asserteq(50 + 160, obj->bbox.x1);
-+	ut_asserteq(400 + 160, obj->bbox.y1);
++	/* same for the key */
++	obj = scene_obj_find(scn, ITEM1_KEY, SCENEOBJT_NONE);
++	ut_assertnonnull(obj);
++	ut_asserteq(280, obj->bbox.x0);
++	ut_asserteq(436, obj->bbox.y0);
++	ut_asserteq(280 + 9, obj->bbox.x1);
++	ut_asserteq(436 + 18, obj->bbox.y1);
 +
-+	/* reset back to normal */
-+	scene_obj_set_bbox(scn, OBJ_MENU, 50, 400, 50 + 160, 400 + 160);
++	obj = scene_obj_find(scn, ITEM2_KEY, SCENEOBJT_NONE);
++	ut_assertnonnull(obj);
++	ut_asserteq(280, obj->bbox.x0);
++	ut_asserteq(454, obj->bbox.y0);
++	ut_asserteq(280 + 9, obj->bbox.x1);
++	ut_asserteq(454 + 18, obj->bbox.y1);
 +
- 	/* render it */
- 	expo_set_scene_id(exp, SCENE1);
- 	ut_assertok(expo_render(exp));
++	/* and the description */
++	obj = scene_obj_find(scn, ITEM1_DESC, SCENEOBJT_NONE);
++	ut_assertnonnull(obj);
++	ut_asserteq(330, obj->bbox.x0);
++	ut_asserteq(436, obj->bbox.y0);
++	ut_asserteq(330 + 89, obj->bbox.x1);
++	ut_asserteq(436 + 18, obj->bbox.y1);
++
++	obj = scene_obj_find(scn, ITEM2_DESC, SCENEOBJT_NONE);
++	ut_assertnonnull(obj);
++	ut_asserteq(330, obj->bbox.x0);
++	ut_asserteq(454, obj->bbox.y0);
++	ut_asserteq(330 + 89, obj->bbox.x1);
++	ut_asserteq(454 + 18, obj->bbox.y1);
++
+ 	/* check dimensions of menu */
+ 	obj = scene_obj_find(scn, OBJ_MENU, SCENEOBJT_NONE);
+ 	ut_assertnonnull(obj);
 -- 
 2.43.0
 
