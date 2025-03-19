@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAEF8C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709A0C36001
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 14:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1510B81E6C;
-	Wed, 19 Mar 2025 15:55:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62A9481F30;
+	Wed, 19 Mar 2025 15:55:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cmdOjmMA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M1B+5xIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E86D82012; Wed, 19 Mar 2025 15:55:37 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id C451E81E60; Wed, 19 Mar 2025 15:55:38 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25DFB81EC9
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:55:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB2AD81E60
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 15:55:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43cfe63c592so51479135e9.2
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:55:35 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43948021a45so47346105e9.1
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 07:55:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396134; x=1743000934; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396136; x=1743000936; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ok5BsbyCnVdM0R2qe67a/kntfUsxct3Lrr/6qy44l78=;
- b=cmdOjmMAhLj8JyRo/iOu4HiNYWoi7p8NT3MPZwHeFuDKZOq+g333AVBdWS3pcryq28
- zL0Yvm/g7zOQob7637RaxDE22JrDwGf4TFZpBB/nh73n+LUUlGbQFpll7lw3Kz0QRTDY
- Fng62rtGMoKgm+DfaL1z/CBLY8Hj8CyZ+lJYA=
+ bh=vjbI8EEIUoQ362UBCM++dOL1m1Y9BxmUuC6WjlvwnSc=;
+ b=M1B+5xITk1pxSRduvaetxjun6UA+PN6dYroukG9suYKbbqA4zRRREs7dtPMGef9oRp
+ kDJPSRxaQ7w/uKb50eOW9IvBympWk8r9+SRCIJGcArF/IU1TpypQB8v+Ery4rap3PT1x
+ k49EDTQzaPTBpQA9c7RbmVLD4Ffwa10+KQVjg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396134; x=1743000934;
+ d=1e100.net; s=20230601; t=1742396136; x=1743000936;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ok5BsbyCnVdM0R2qe67a/kntfUsxct3Lrr/6qy44l78=;
- b=XJBv0G/jB0m8vjUouR9V195JoWCgD7UHw9XXntrX9CO0fHJTFK27Kp7GdcbKiOinDG
- 6hhuJmo5BaBGrILpA1YMyOgzk65a2A99aLGA9v0EnLtrNAgwqdOdNepXzpYmKfbSJSgG
- 1f49cOhdLtSUfCY3oaNXxArqe3eF4E2Xx+8tgN5Oju9pTwBBx9oLIs86cs5SRbMwtfQz
- GhZYqXjHI32DB8WipbBIH+GflOt9FRvpLzywdlm0TkqNK6Zt/XPc7sfOQc8x+l1mWet6
- watCRhoG9a/qkuRhdvlqb3q/wk00J7gbUB8FAK+a74j7b8H0DQXLGQQ4gcRc7UKyHacr
- QGWw==
-X-Gm-Message-State: AOJu0Yx0FX3lsX4EONVvsGNh65KUqfaA86JzbO7rV+auuBSF3toXTiCi
- 9DXbV5OM5kzGWIETvvPxio22gsBkJPUv8A+yg9O79CraI9sk3P/SLmNUbM+S88L3fxCHER3Qags
+ bh=vjbI8EEIUoQ362UBCM++dOL1m1Y9BxmUuC6WjlvwnSc=;
+ b=IqPf/+Ccm6SQ9C8A14Xays2Avwtqb9rkDxbx6gu18XYv4BKqxeyszatwiTxsr4ajd6
+ H+0BOrIAeUEpWoGypyo8J1+7ddE7UiynDJRFSSxkkrI8V1FzByBb8XdLBkqD098e3mZc
+ XijXpKnELUtOa4z5nNNuG/6vtvDVU/8205mqksN+vwhP4fEnFYXcgaAB35fO4ZE6sDkQ
+ qWuohb31HTGM7IFFmJ6vqQt6YN1VWQccCz4eKa+SVEq1cpXLYzfBPLlGIdfD0dEOEXWs
+ OObrjvD1d6rQq/ZupiXcsWIifg7azuaezp7wiZuqGVZxDtSag4leTg2WavgZxSwfz+F5
+ Bn7A==
+X-Gm-Message-State: AOJu0YyIf9KBteLavQSlZl0EhNIh+bYA8Qw55sJcI03cbV7MCiTY+X1U
+ B/Nc68BTNM3MNYmN5WHHa7+Lxx8CoGUBsVf0r8GXd4XNwrN2xsaDXWmDItv7yzw/2NmwVC/YKho
  =
-X-Gm-Gg: ASbGncttbNlsEF4YzFOPawdCWEt4qgQVs8HV/Uj3OPJ44Jhh1ik0S6jZCSTvtQzncY2
- +edUSP+S/QCGECkgpndVhXhOJrfOjLDwh9QZauftkX1+jCLo0FgitU9TOd8IIkXYPi+AD5MhCGg
- tX+Vc509ODE0VxwNqETgL8T1c/S9o5+mRclXOV+SspXNqBmsa7BH2UM98MtkFbo9vH3LmtAESiA
- U1JAfbpQNd5VDVhx00ZBSEkRAKJOMx9oBTkSsu54qJo57LHcMcqwst8Vvbf5r0Wu9EH9W7puo8g
- +cD7ah0KAvBKiS+w3oivcY+T0sryRuaOvtq7WfoVvNxnTnL6X/om
-X-Google-Smtp-Source: AGHT+IFLPej8OeXIqOtTg85S3mrPGFh+ClUXU2bEtjCmnBbVWTs40oozbj8/qaL6ih40rpr224AUGg==
-X-Received: by 2002:a05:600c:a08e:b0:43c:fcbc:9680 with SMTP id
- 5b1f17b1804b1-43d4383d0c6mr24723945e9.25.1742396133938; 
- Wed, 19 Mar 2025 07:55:33 -0700 (PDT)
+X-Gm-Gg: ASbGncuh26A6mH/PjaIz9ZIYKdaTy5I7ptJ77D1kzt01EDN3bMQ8jvSC1SOMTHHBCfR
+ cqashdeq4Sc2MF23tLonTdKF+LDhRAXceGLQzOn4m9IR4Z5p1TqS1Siuno2BIpKXryopXtQa8No
+ 404CjAwuMDzIvPy7PO499QiMhXa0jEHVirO4hN4KVVLiN3QhO/jtCnUJ9TgyqZ65NvjFUPMZeC9
+ Xak4DePTy8Kk6Ohu1i2cnCHCh1FEF+a8GV0saxZbzB5PIXmY4zP5TtTnBKji79B3aAbU5RJhFwx
+ M+R0KZ410qutI0DCRnH4jY+HgUzhobKcwdFg30gqeg==
+X-Google-Smtp-Source: AGHT+IHKinOY/lKUxzEKham7aYOxT6+QyWxpWtPezrq7mkHqBqNufnYlP/u8k217Q/Z/BYvsOhSG4g==
+X-Received: by 2002:a05:600c:2d85:b0:43d:47b7:b32d with SMTP id
+ 5b1f17b1804b1-43d47b7b4c4mr7963765e9.25.1742396135569; 
+ Wed, 19 Mar 2025 07:55:35 -0700 (PDT)
 Received: from chromium.org ([169.155.233.10])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.55.32
+ 5b1f17b1804b1-43d440ed786sm20891315e9.38.2025.03.19.07.55.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 07:55:33 -0700 (PDT)
+ Wed, 19 Mar 2025 07:55:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Janne Grunau <j@jannau.net>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/52] video: Begin support for measuring multiple lines of
- text
-Date: Wed, 19 Mar 2025 15:54:09 +0100
-Message-ID: <20250319145512.2391122-5-sjg@chromium.org>
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 05/52] video: truetype: Fill in the measured line
+Date: Wed, 19 Mar 2025 15:54:10 +0100
+Message-ID: <20250319145512.2391122-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250319145512.2391122-1-sjg@chromium.org>
 References: <20250319145512.2391122-1-sjg@chromium.org>
@@ -97,191 +96,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the vidconsole API so that measure() can measure multiple lines
-of text. This will make it easier to implement multi-line fields in
-expo.
-
-Tidy up the function comments while we are here.
+Create a measured line for the (single) line of text.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c                      |  2 +-
- drivers/video/console_truetype.c  |  3 +-
- drivers/video/vidconsole-uclass.c |  7 +++--
- include/video_console.h           | 50 +++++++++++++++++++++++--------
- test/dm/video.c                   |  5 +++-
- 5 files changed, 49 insertions(+), 18 deletions(-)
+ drivers/video/console_truetype.c | 36 +++++++++++++++++++++++---------
+ test/dm/video.c                  | 13 +++++++++++-
+ 2 files changed, 38 insertions(+), 11 deletions(-)
 
-diff --git a/boot/scene.c b/boot/scene.c
-index 15e7a8b3387..d3ae5816bef 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -298,7 +298,7 @@ int scene_obj_get_hw(struct scene *scn, uint id, int *widthp)
- 		}
- 
- 		ret = vidconsole_measure(scn->expo->cons, txt->font_name,
--					 txt->font_size, str, &bbox);
-+					 txt->font_size, str, &bbox, NULL);
- 		if (ret)
- 			return log_msg_ret("mea", ret);
- 		if (widthp)
 diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
-index 980baee83cf..7b9033818d3 100644
+index 7b9033818d3..39d77ad9818 100644
 --- a/drivers/video/console_truetype.c
 +++ b/drivers/video/console_truetype.c
-@@ -733,7 +733,8 @@ static int truetype_select_font(struct udevice *dev, const char *name,
- }
- 
- static int truetype_measure(struct udevice *dev, const char *name, uint size,
--			    const char *text, struct vidconsole_bbox *bbox)
-+			    const char *text, struct vidconsole_bbox *bbox,
-+			    struct alist *lines)
+@@ -737,11 +737,13 @@ static int truetype_measure(struct udevice *dev, const char *name, uint size,
+ 			    struct alist *lines)
  {
  	struct console_tt_metrics *met;
++	struct vidconsole_mline mline;
++	const char *s;
  	stbtt_fontinfo *font;
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index a1dfd35b7b8..4ca41dc331e 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -608,14 +608,17 @@ int vidconsole_select_font(struct udevice *dev, const char *name, uint size)
- }
- 
- int vidconsole_measure(struct udevice *dev, const char *name, uint size,
--		       const char *text, struct vidconsole_bbox *bbox)
-+		       const char *text, struct vidconsole_bbox *bbox,
-+		       struct alist *lines)
- {
- 	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
- 	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
+ 	int lsb, advance;
+-	const char *s;
+ 	int width;
+-	int last;
++	int start;
++	int lastch;
  	int ret;
  
- 	if (ops->measure) {
--		ret = ops->measure(dev, name, size, text, bbox);
-+		if (lines)
-+			alist_empty(lines);
-+		ret = ops->measure(dev, name, size, text, bbox, lines);
- 		if (ret != -ENOSYS)
- 			return ret;
- 	}
-diff --git a/include/video_console.h b/include/video_console.h
-index 13197fa4518..ee9ce3c0e37 100644
---- a/include/video_console.h
-+++ b/include/video_console.h
-@@ -6,6 +6,7 @@
- #ifndef __video_console_h
- #define __video_console_h
+ 	ret = get_metrics(dev, name, size, &met);
+@@ -754,25 +756,39 @@ static int truetype_measure(struct udevice *dev, const char *name, uint size,
  
-+#include <alist.h>
- #include <video.h>
+ 	font = &met->font;
+ 	width = 0;
+-	for (last = 0, s = text; *s; s++) {
++	bbox->y1 = 0;
++	start = 0;
++	for (lastch = 0, s = text; *s; s++) {
++		int neww;
+ 		int ch = *s;
  
- struct abuf;
-@@ -119,6 +120,19 @@ struct vidconsole_bbox {
- 	int y1;
- };
- 
-+/**
-+ * vidconsole_mline - Holds information about a line of measured text
-+ *
-+ * @bbox: Bounding box of the line, assuming it starts at 0,0
-+ * @start: String index of the first character in the line
-+ * @len: Number of characters in the line
-+ */
-+struct vidconsole_mline {
-+	struct vidconsole_bbox bbox;
-+	int start;
-+	int len;
-+};
-+
- /**
-  * struct vidconsole_ops - Video console operations
-  *
-@@ -228,18 +242,23 @@ struct vidconsole_ops {
- 	int (*select_font)(struct udevice *dev, const char *name, uint size);
- 
- 	/**
--	 * measure() - Measure the bounds of some text
-+	 * measure() - Measure the bounding box of some text
- 	 *
--	 * @dev:	Device to adjust
-+	 * @dev:	Console device to use
- 	 * @name:	Font name to use (NULL to use default)
- 	 * @size:	Font size to use (0 to use default)
- 	 * @text:	Text to measure
- 	 * @bbox:	Returns bounding box of text, assuming it is positioned
- 	 *		at 0,0
-+	 * @lines:	If non-NULL, this must be an alist of
-+	 *		struct vidconsole_mline inited by caller. A separate
-+	 *		record is added for each line of text
-+	 *
- 	 * Returns: 0 on success, -ENOENT if no such font
- 	 */
- 	int (*measure)(struct udevice *dev, const char *name, uint size,
--		       const char *text, struct vidconsole_bbox *bbox);
-+		       const char *text, struct vidconsole_bbox *bbox,
-+		       struct alist *lines);
- 
- 	/**
- 	 * nominal() - Measure the expected width of a line of text
-@@ -320,19 +339,24 @@ int vidconsole_get_font(struct udevice *dev, int seq,
-  */
- int vidconsole_select_font(struct udevice *dev, const char *name, uint size);
- 
--/*
-- * vidconsole_measure() - Measuring the bounding box of some text
-+/**
-+ * vidconsole_measure() - Measure the bounding box of some text
-  *
-- * @dev: Console device to use
-- * @name: Font name, NULL for default
-- * @size: Font size, ignored if @name is NULL
-- * @text: Text to measure
-- * @bbox: Returns nounding box of text
-- * Returns: 0 if OK, -ve on error
-+ * @dev:	Device to adjust
-+ * @name:	Font name to use (NULL to use default)
-+ * @size:	Font size to use (0 to use default)
-+ * @text:	Text to measure
-+ * @bbox:	Returns bounding box of text, assuming it is positioned
-+ *		at 0,0
-+ * @lines:	If non-NULL, this must be an alist of
-+ *		struct vidconsole_mline inited by caller. The list is emptied
-+ *		and then a separate record is added for each line of text
-+ *
-+ * Returns: 0 on success, -ENOENT if no such font
-  */
- int vidconsole_measure(struct udevice *dev, const char *name, uint size,
--		       const char *text, struct vidconsole_bbox *bbox);
+-		/* Used kerning to fine-tune the position of this character */
+-		if (last)
+-			width += stbtt_GetCodepointKernAdvance(font, last, ch);
 -
-+		       const char *text, struct vidconsole_bbox *bbox,
-+		       struct alist *lines);
- /**
-  * vidconsole_nominal() - Measure the expected width of a line of text
-  *
+ 		/* First get some basic metrics about this character */
+ 		stbtt_GetCodepointHMetrics(font, ch, &advance, &lsb);
++		neww = width + advance;
+ 
+-		width += advance;
+-		last = ch;
++		/* Use kerning to fine-tune the position of this character */
++		if (lastch)
++			neww += stbtt_GetCodepointKernAdvance(font, lastch, ch);
++		lastch = ch;
++
++		width = neww;
+ 	}
+ 
++	/* add the line */
++	mline.bbox.x0 = 0;
++	mline.bbox.y0 = bbox->y1;
++	mline.bbox.x1 = tt_ceil((double)width * met->scale);
++	bbox->y1 += met->font_size;
++	mline.bbox.y1 = bbox->y1;
++	mline.start = start;
++	mline.len = (s - text) - start;
++	if (lines && !alist_add(lines, mline))
++		return log_msg_ret("ttM", -ENOMEM);
++
+ 	bbox->valid = true;
+ 	bbox->x0 = 0;
+ 	bbox->y0 = 0;
+ 	bbox->x1 = tt_ceil((double)width * met->scale);
+-	bbox->y1 = met->font_size;
+ 
+ 	return 0;
+ }
 diff --git a/test/dm/video.c b/test/dm/video.c
-index 6ce1a756e25..cfc831b6931 100644
+index cfc831b6931..d3fd74a9a9a 100644
 --- a/test/dm/video.c
 +++ b/test/dm/video.c
-@@ -788,6 +788,7 @@ static int dm_test_font_measure(struct unit_test_state *uts)
+@@ -785,6 +785,7 @@ static int dm_test_font_measure(struct unit_test_state *uts)
+ 		"attempting more than you can do and for making a certainty of "
+ 		"what you try. But this principle, like others in life and "
+ 		"war, has its exceptions.";
++	const struct vidconsole_mline *line;
  	struct vidconsole_bbox bbox;
  	struct video_priv *priv;
  	struct udevice *dev, *con;
-+	struct alist lines;
- 
- 	ut_assertok(uclass_get_device(UCLASS_VIDEO, 0, &dev));
- 	priv = dev_get_uclass_priv(dev);
-@@ -797,11 +798,13 @@ static int dm_test_font_measure(struct unit_test_state *uts)
+@@ -798,13 +799,23 @@ static int dm_test_font_measure(struct unit_test_state *uts)
  	/* this is using the Nimbus font with size of 18 pixels */
  	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
  	vidconsole_position_cursor(con, 0, 0);
--	ut_assertok(vidconsole_measure(con, NULL, 0, test_string, &bbox));
-+	ut_assertok(vidconsole_measure(con, NULL, 0, test_string, &bbox,
-+				       &lines));
++	alist_init_struct(&lines, struct vidconsole_mline);
+ 	ut_assertok(vidconsole_measure(con, NULL, 0, test_string, &bbox,
+ 				       &lines));
  	ut_asserteq(0, bbox.x0);
  	ut_asserteq(0, bbox.y0);
  	ut_asserteq(0x47a, bbox.x1);
  	ut_asserteq(0x12, bbox.y1);
-+	ut_asserteq(0, lines.count);
+-	ut_asserteq(0, lines.count);
++	ut_asserteq(1, lines.count);
++
++	line = alist_get(&lines, 0, struct vidconsole_mline);
++	ut_assertnonnull(line);
++	ut_asserteq(0, line->bbox.x0);
++	ut_asserteq(0, line->bbox.y0);
++	ut_asserteq(0x47a, line->bbox.x1);
++	ut_asserteq(0x12, line->bbox.y1);
++	ut_asserteq(0, line->start);
++	ut_asserteq(strlen(test_string), line->len);
  
  	return 0;
  }
