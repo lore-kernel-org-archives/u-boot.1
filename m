@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E78C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD29C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 20:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B752481D5A;
-	Wed, 19 Mar 2025 21:21:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A07E81A0E;
+	Wed, 19 Mar 2025 21:21:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="VRZUViPf";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="PhkH2gMc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F4D381D3B; Wed, 19 Mar 2025 21:21:05 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id A59598197D; Wed, 19 Mar 2025 21:21:05 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB4AC8193A
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:20:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85A7481B42
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 21:21:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 2DB76100012;
- Wed, 19 Mar 2025 23:20:59 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2DB76100012
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 07FEB120012;
+ Wed, 19 Mar 2025 23:21:00 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 07FEB120012
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1742415659;
- bh=rTEv5jRKvBhPuHncn2gTz1h76Na5PC+0ObMbSI3BuB0=;
+ s=mail; t=1742415660;
+ bh=Oaz9kK497lphS7IZ2pMXR0Imi4OVRcRz+na1ZPtEt9c=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=VRZUViPfHU7YYEAdAOh+7lobNvL8wf8KhdGR6szYmG5PqImc0k09ERbMoXyPznuem
- 0iLYKvC6myGYEB0E5tl9lx5VMNR1nJvEzytGjLrXd1fj0XtOYwRYIP9iFLUtzLz3Ne
- P6/VpQUiApq5jOCdEigrrN4D/4J+8WYCLIlV+4Rzkhp68VpwYx3msmSy8A0+KYuSz9
- 1fZ3UllEpVP5U1X+q00o+UXjFb0CXEuiYgzeUQnht5ZDRhUtSDxkdjAkJxYh/WguVo
- fvCBWHPXLNudCbSpSpCFHl9WtbDBbXX5GFknZdNbHwFqlIxHJpPPcyVPfHP0+wlq5U
- IrJS+4+Hp8yiA==
+ b=PhkH2gMcMaZ//sjak2bVu254mb92xG4Z4zS3tFfDMdaTJ2WJtFx0wNF8cA60RzNKs
+ 3seMFansTvl8ty6H544C5dToxprbalw+wQHLlaveeP9sECTgrjQfl2JVz9RAk/+h89
+ 1S6DRw9RZFl0XT5iFnJArwyeoQxQvKWu2pcBfR0HMyzpi+6qZ0hbN7+CtCmKo+ok+x
+ EWXg6wZz7muuxkf5/sDwQRkLlWEZtfugAcUsEBPMljsHn60azV0RfYOhOW/Br0DEBl
+ 71KRNje0+I2IPBj0V0jRd13tCt5SI6la4xyCsr4b183P6hsl8WeSCxwoHFQxIazXrR
+ Si4dOXOF3MuUQ==
 Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
  [172.24.201.216])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 19 Mar 2025 23:20:58 +0300 (MSK)
+ Wed, 19 Mar 2025 23:20:59 +0300 (MSK)
 From: Arseniy Krasnov <avkrasnov@salutedevices.com>
 To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
@@ -58,10 +58,9 @@ To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@salutedevices.com>, <oxffffaa@gmail.com>,
  <avkrasnov@salutedevices.com>
-Subject: [PATCH v1 03/11] usb: gadget: fastboot: make part of USB fastboot
- code shared
-Date: Wed, 19 Mar 2025 23:20:37 +0300
-Message-ID: <20250319202045.1407-4-avkrasnov@salutedevices.com>
+Subject: [PATCH v1 06/11] arch: arm: meson: bootloader write support
+Date: Wed, 19 Mar 2025 23:20:40 +0300
+Message-ID: <20250319202045.1407-7-avkrasnov@salutedevices.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20250319202045.1407-1-avkrasnov@salutedevices.com>
 References: <20250319202045.1407-1-avkrasnov@salutedevices.com>
@@ -81,16 +80,16 @@ X-KSMG-AntiSpam-Status: not_detected
 X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 51 0.3.51
- 68896fb0083a027476849bf400a331a2d5d94398, {Tracking_uf_ne_domains},
+ 68896fb0083a027476849bf400a331a2d5d94398,
  {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
- salutedevices.com:7.1.1, FromAlignment: s
+ salutedevices.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2025/03/19 19:47:00
-X-KSMG-LinksScanning: Clean, bases: 2025/03/19 19:47:00
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
 X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2025/03/19 17:18:00 #27803216
+ bases: 2025/03/19 19:45:00 #27804052
 X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,784 +107,632 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is preparation for fastboot-based flashing protocols (such as Amlogic
-ADNL). When device enters ADNL mode, it becomes "fastboot" device from
-USB point of view, so to avoid copy-paste of USB part of fastboot protocol,
-reimplement it as shared code between fastboot and ADNL implementations.
+BootROM of Amlogic SoCs that use ADNL/Optimus protocols needs
+special layout of "bootloader" partition. So let's implement
+functions that support bootloader writing on such SoCs. This is
+prerequisite for ADNL/Optimus implementation.
+
+We place such functions to 'arch/arm/mach-meson', because this
+code is also needed by 'fastboot' protocol which can also write
+"bootloader" partition.
 
 Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
 ---
- drivers/usb/gadget/Makefile            |   2 +-
- drivers/usb/gadget/f_fastboot.c        | 295 +----------------------
- drivers/usb/gadget/f_fastboot_common.c | 320 +++++++++++++++++++++++++
- drivers/usb/gadget/f_fastboot_common.h |  71 ++++++
- 4 files changed, 403 insertions(+), 285 deletions(-)
- create mode 100644 drivers/usb/gadget/f_fastboot_common.c
- create mode 100644 drivers/usb/gadget/f_fastboot_common.h
+ arch/arm/include/asm/arch-meson/nand.h    |  34 +++
+ arch/arm/include/asm/arch-meson/spinand.h |  43 ++++
+ arch/arm/mach-meson/Kconfig               |  31 +++
+ arch/arm/mach-meson/Makefile              |   4 +-
+ arch/arm/mach-meson/rawnand.c             | 291 ++++++++++++++++++++++
+ arch/arm/mach-meson/spinand.c             | 158 ++++++++++++
+ 6 files changed, 559 insertions(+), 2 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-meson/nand.h
+ create mode 100644 arch/arm/include/asm/arch-meson/spinand.h
+ create mode 100644 arch/arm/mach-meson/rawnand.c
+ create mode 100644 arch/arm/mach-meson/spinand.c
 
-diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
-index 4bda224ff1a..6c16ad83f6e 100644
---- a/drivers/usb/gadget/Makefile
-+++ b/drivers/usb/gadget/Makefile
-@@ -27,7 +27,7 @@ obj-$(CONFIG_USB_GADGET_DOWNLOAD) += g_dnl.o
- obj-$(CONFIG_USB_FUNCTION_THOR) += f_thor.o
- obj-$(CONFIG_DFU_OVER_USB) += f_dfu.o
- obj-$(CONFIG_USB_FUNCTION_MASS_STORAGE) += f_mass_storage.o
--obj-$(CONFIG_USB_FUNCTION_FASTBOOT) += f_fastboot.o
-+obj-$(CONFIG_USB_FUNCTION_FASTBOOT) += f_fastboot.o f_fastboot_common.o
- obj-$(CONFIG_USB_FUNCTION_SDP) += f_sdp.o
- obj-$(CONFIG_USB_FUNCTION_ROCKUSB) += f_rockusb.o
- obj-$(CONFIG_USB_FUNCTION_ACM)	+= f_acm.o
-diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
-index 3c76d42c5ef..9298658b569 100644
---- a/drivers/usb/gadget/f_fastboot.c
-+++ b/drivers/usb/gadget/f_fastboot.c
-@@ -23,29 +23,7 @@
- #include <linux/compiler.h>
- #include <g_dnl.h>
- #include <rabbith.h>
--
--#define FASTBOOT_INTERFACE_CLASS	0xff
--#define FASTBOOT_INTERFACE_SUB_CLASS	0x42
--#define FASTBOOT_INTERFACE_PROTOCOL	0x03
--
--#define RX_ENDPOINT_MAXIMUM_PACKET_SIZE_2_0  (0x0200)
--#define RX_ENDPOINT_MAXIMUM_PACKET_SIZE_1_1  (0x0040)
--#define TX_ENDPOINT_MAXIMUM_PACKET_SIZE      (0x0040)
--
--#define EP_BUFFER_SIZE			4096
--/*
-- * EP_BUFFER_SIZE must always be an integral multiple of maxpacket size
-- * (64 or 512 or 1024), else we break on certain controllers like DWC3
-- * that expect bulk OUT requests to be divisible by maxpacket size.
-- */
--
--struct f_fastboot {
--	struct usb_function usb_function;
--
--	/* IN/OUT EP's and corresponding requests */
--	struct usb_ep *in_ep, *out_ep;
--	struct usb_request *in_req, *out_req;
--};
-+#include "f_fastboot_common.h"
- 
- static char fb_ext_prop_name[] = "DeviceInterfaceGUID";
- static char fb_ext_prop_data[] = "{4866319A-F4D6-4374-93B9-DC2DEB361BA9}";
-@@ -66,113 +44,7 @@ static struct usb_os_desc_table fb_os_desc_table = {
- 	.os_desc = &fb_os_desc,
- };
- 
--static inline struct f_fastboot *func_to_fastboot(struct usb_function *f)
--{
--	return container_of(f, struct f_fastboot, usb_function);
--}
--
--static struct f_fastboot *fastboot_func;
--
--static struct usb_endpoint_descriptor fs_ep_in = {
--	.bLength            = USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType    = USB_DT_ENDPOINT,
--	.bEndpointAddress   = USB_DIR_IN,
--	.bmAttributes       = USB_ENDPOINT_XFER_BULK,
--	.wMaxPacketSize     = cpu_to_le16(64),
--};
--
--static struct usb_endpoint_descriptor fs_ep_out = {
--	.bLength		= USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType	= USB_DT_ENDPOINT,
--	.bEndpointAddress	= USB_DIR_OUT,
--	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
--	.wMaxPacketSize		= cpu_to_le16(64),
--};
--
--static struct usb_endpoint_descriptor hs_ep_in = {
--	.bLength		= USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType	= USB_DT_ENDPOINT,
--	.bEndpointAddress	= USB_DIR_IN,
--	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
--	.wMaxPacketSize		= cpu_to_le16(512),
--};
--
--static struct usb_endpoint_descriptor hs_ep_out = {
--	.bLength		= USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType	= USB_DT_ENDPOINT,
--	.bEndpointAddress	= USB_DIR_OUT,
--	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
--	.wMaxPacketSize		= cpu_to_le16(512),
--};
--
--static struct usb_interface_descriptor interface_desc = {
--	.bLength		= USB_DT_INTERFACE_SIZE,
--	.bDescriptorType	= USB_DT_INTERFACE,
--	.bInterfaceNumber	= 0x00,
--	.bAlternateSetting	= 0x00,
--	.bNumEndpoints		= 0x02,
--	.bInterfaceClass	= FASTBOOT_INTERFACE_CLASS,
--	.bInterfaceSubClass	= FASTBOOT_INTERFACE_SUB_CLASS,
--	.bInterfaceProtocol	= FASTBOOT_INTERFACE_PROTOCOL,
--};
--
--static struct usb_descriptor_header *fb_fs_function[] = {
--	(struct usb_descriptor_header *)&interface_desc,
--	(struct usb_descriptor_header *)&fs_ep_in,
--	(struct usb_descriptor_header *)&fs_ep_out,
--	NULL,
--};
--
--static struct usb_descriptor_header *fb_hs_function[] = {
--	(struct usb_descriptor_header *)&interface_desc,
--	(struct usb_descriptor_header *)&hs_ep_in,
--	(struct usb_descriptor_header *)&hs_ep_out,
--	NULL,
--};
--
--/* Super speed */
--static struct usb_endpoint_descriptor ss_ep_in = {
--	.bLength		= USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType	= USB_DT_ENDPOINT,
--	.bEndpointAddress	= USB_DIR_IN,
--	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
--	.wMaxPacketSize		= cpu_to_le16(1024),
--};
--
--static struct usb_endpoint_descriptor ss_ep_out = {
--	.bLength		= USB_DT_ENDPOINT_SIZE,
--	.bDescriptorType	= USB_DT_ENDPOINT,
--	.bEndpointAddress	= USB_DIR_OUT,
--	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
--	.wMaxPacketSize		= cpu_to_le16(1024),
--};
--
--static struct usb_ss_ep_comp_descriptor fb_ss_bulk_comp_desc = {
--	.bLength =		sizeof(fb_ss_bulk_comp_desc),
--	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
--};
--
--static struct usb_descriptor_header *fb_ss_function[] = {
--	(struct usb_descriptor_header *)&interface_desc,
--	(struct usb_descriptor_header *)&ss_ep_in,
--	(struct usb_descriptor_header *)&fb_ss_bulk_comp_desc,
--	(struct usb_descriptor_header *)&ss_ep_out,
--	(struct usb_descriptor_header *)&fb_ss_bulk_comp_desc,
--	NULL,
--};
--
--static struct usb_endpoint_descriptor *
--fb_ep_desc(struct usb_gadget *g, struct usb_endpoint_descriptor *fs,
--	    struct usb_endpoint_descriptor *hs,
--	    struct usb_endpoint_descriptor *ss)
--{
--	if (gadget_is_superspeed(g) && g->speed >= USB_SPEED_SUPER)
--		return ss;
--
--	if (gadget_is_dualspeed(g) && g->speed == USB_SPEED_HIGH)
--		return hs;
--	return fs;
--}
-+static struct fastboot_funcs *fastboot_func;
- 
- /*
-  * static strings, in UTF-8
-@@ -196,179 +68,34 @@ static struct usb_gadget_strings *fastboot_strings[] = {
- 
- static void rx_handler_command(struct usb_ep *ep, struct usb_request *req);
- 
--static void fastboot_complete(struct usb_ep *ep, struct usb_request *req)
--{
--	int status = req->status;
--	if (!status)
--		return;
--	printf("status: %d ep '%s' trans: %d\n", status, ep->name, req->actual);
--}
--
- static int fastboot_bind(struct usb_configuration *c, struct usb_function *f)
- {
--	int id;
--	struct usb_gadget *gadget = c->cdev->gadget;
--	struct f_fastboot *f_fb = func_to_fastboot(f);
--	const char *s;
--
--	/* DYNAMIC interface numbers assignments */
--	id = usb_interface_id(c, f);
--	if (id < 0)
--		return id;
--	interface_desc.bInterfaceNumber = id;
--
--	/* Enable OS and Extended Properties Feature Descriptor */
--	c->cdev->use_os_string = 1;
--	f->os_desc_table = &fb_os_desc_table;
--	f->os_desc_n = 1;
--	f->os_desc_table->if_id = id;
--	INIT_LIST_HEAD(&fb_os_desc.ext_prop);
--	fb_ext_prop.name_len = strlen(fb_ext_prop.name) * 2 + 2;
--	fb_os_desc.ext_prop_len = 10 + fb_ext_prop.name_len;
--	fb_os_desc.ext_prop_count = 1;
--	fb_ext_prop.data_len = strlen(fb_ext_prop.data) * 2 + 2;
--	fb_os_desc.ext_prop_len += fb_ext_prop.data_len + 4;
--	list_add_tail(&fb_ext_prop.entry, &fb_os_desc.ext_prop);
--
--	id = usb_string_id(c->cdev);
--	if (id < 0)
--		return id;
--	fastboot_string_defs[0].id = id;
--	interface_desc.iInterface = id;
--
--	f_fb->in_ep = usb_ep_autoconfig(gadget, &fs_ep_in);
--	if (!f_fb->in_ep)
--		return -ENODEV;
--	f_fb->in_ep->driver_data = c->cdev;
--
--	f_fb->out_ep = usb_ep_autoconfig(gadget, &fs_ep_out);
--	if (!f_fb->out_ep)
--		return -ENODEV;
--	f_fb->out_ep->driver_data = c->cdev;
--
--	f->descriptors = fb_fs_function;
--
--	if (gadget_is_dualspeed(gadget)) {
--		/* Assume endpoint addresses are the same for both speeds */
--		hs_ep_in.bEndpointAddress = fs_ep_in.bEndpointAddress;
--		hs_ep_out.bEndpointAddress = fs_ep_out.bEndpointAddress;
--		/* copy HS descriptors */
--		f->hs_descriptors = fb_hs_function;
--	}
--
--	if (gadget_is_superspeed(gadget)) {
--		ss_ep_in.bEndpointAddress = fs_ep_in.bEndpointAddress;
--		ss_ep_out.bEndpointAddress = fs_ep_out.bEndpointAddress;
--		f->ss_descriptors = fb_ss_function;
--	}
--
--	s = env_get("serial#");
--	if (s)
--		g_dnl_set_serialnumber((char *)s);
--
--	return 0;
-+	return fastboot_common_bind(c, f, &fb_os_desc_table, &fb_os_desc,
-+				    (struct usb_string **)&fastboot_string_defs,
-+				    &fb_ext_prop);
- }
- 
- static void fastboot_unbind(struct usb_configuration *c, struct usb_function *f)
- {
--	f->os_desc_table = NULL;
--	list_del(&fb_os_desc.ext_prop);
-+	fastboot_common_unbind(c, f, &fb_os_desc);
- 	memset(fastboot_func, 0, sizeof(*fastboot_func));
- }
- 
- static void fastboot_disable(struct usb_function *f)
- {
--	struct f_fastboot *f_fb = func_to_fastboot(f);
--
--	usb_ep_disable(f_fb->out_ep);
--	usb_ep_disable(f_fb->in_ep);
--
--	if (f_fb->out_req) {
--		free(f_fb->out_req->buf);
--		usb_ep_free_request(f_fb->out_ep, f_fb->out_req);
--		f_fb->out_req = NULL;
--	}
--	if (f_fb->in_req) {
--		free(f_fb->in_req->buf);
--		usb_ep_free_request(f_fb->in_ep, f_fb->in_req);
--		f_fb->in_req = NULL;
--	}
--}
--
--static struct usb_request *fastboot_start_ep(struct usb_ep *ep)
--{
--	struct usb_request *req;
--
--	req = usb_ep_alloc_request(ep, 0);
--	if (!req)
--		return NULL;
--
--	req->length = EP_BUFFER_SIZE;
--	req->buf = memalign(CONFIG_SYS_CACHELINE_SIZE, EP_BUFFER_SIZE);
--	if (!req->buf) {
--		usb_ep_free_request(ep, req);
--		return NULL;
--	}
--
--	memset(req->buf, 0, req->length);
--	return req;
-+	fastboot_common_disable(f);
- }
- 
- static int fastboot_set_alt(struct usb_function *f,
- 			    unsigned interface, unsigned alt)
- {
--	int ret;
--	struct usb_composite_dev *cdev = f->config->cdev;
--	struct usb_gadget *gadget = cdev->gadget;
--	struct f_fastboot *f_fb = func_to_fastboot(f);
--	const struct usb_endpoint_descriptor *d;
--
--	debug("%s: func: %s intf: %d alt: %d\n",
--	      __func__, f->name, interface, alt);
--
--	d = fb_ep_desc(gadget, &fs_ep_out, &hs_ep_out, &ss_ep_out);
--	ret = usb_ep_enable(f_fb->out_ep, d);
--	if (ret) {
--		puts("failed to enable out ep\n");
--		return ret;
--	}
--
--	f_fb->out_req = fastboot_start_ep(f_fb->out_ep);
--	if (!f_fb->out_req) {
--		puts("failed to alloc out req\n");
--		ret = -EINVAL;
--		goto err;
--	}
--	f_fb->out_req->complete = rx_handler_command;
--
--	d = fb_ep_desc(gadget, &fs_ep_in, &hs_ep_in, &ss_ep_in);
--	ret = usb_ep_enable(f_fb->in_ep, d);
--	if (ret) {
--		puts("failed to enable in ep\n");
--		goto err;
--	}
--
--	f_fb->in_req = fastboot_start_ep(f_fb->in_ep);
--	if (!f_fb->in_req) {
--		puts("failed alloc req in\n");
--		ret = -EINVAL;
--		goto err;
--	}
--	f_fb->in_req->complete = fastboot_complete;
--
--	ret = usb_ep_queue(f_fb->out_ep, f_fb->out_req, 0);
--	if (ret)
--		goto err;
--
--	return 0;
--err:
--	fastboot_disable(f);
--	return ret;
-+	return fastboot_common_set_alt(f, interface, alt,
-+				       rx_handler_command);
- }
- 
- static int fastboot_add(struct usb_configuration *c)
- {
--	struct f_fastboot *f_fb = fastboot_func;
-+	struct fastboot_funcs *f_fb = fastboot_func;
- 	int status;
- 
- 	debug("%s: cdev: 0x%p\n", __func__, c->cdev);
-@@ -515,7 +242,7 @@ static void multiresponse_on_complete(struct usb_ep *ep, struct usb_request *req
- 	/* If response is final OKAY/FAIL response disconnect this handler and unset cmd */
- 	if (!strncmp("OKAY", response, 4) || !strncmp("FAIL", response, 4)) {
- 		multiresponse_cmd = -1;
--		fastboot_func->in_req->complete = fastboot_complete;
-+		fastboot_func->in_req->complete = fastboot_common_complete;
- 	}
- }
- 
-diff --git a/drivers/usb/gadget/f_fastboot_common.c b/drivers/usb/gadget/f_fastboot_common.c
+diff --git a/arch/arm/include/asm/arch-meson/nand.h b/arch/arm/include/asm/arch-meson/nand.h
 new file mode 100644
-index 00000000000..9e509503d2d
+index 00000000000..1f5a20d237b
 --- /dev/null
-+++ b/drivers/usb/gadget/f_fastboot_common.c
-@@ -0,0 +1,320 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/include/asm/arch-meson/nand.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * (C) Copyright 2008 - 2009
-+ * Windriver, <www.windriver.com>
-+ * Tom Rix <Tom.Rix@windriver.com>
-+ *
-+ * Copyright 2011 Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-+ *
-+ * Copyright 2014 Linaro, Ltd.
-+ * Rob Herring <robh@kernel.org>
-+ *
-+ * Copyright (c) 2025 SaluteDevices, Inc.
-+ * Author: Arseniy Krasnov <avkrasnov@salutedevices.com>
++ * (C) Copyright 2023-2024 SaluteDevices, Inc.
 + */
 +
-+#include <env.h>
-+#include "f_fastboot_common.h"
++#ifndef __MESON_NAND_H__
++#define __MESON_NAND_H__
 +
-+static struct usb_endpoint_descriptor fs_ep_in = {
-+	.bLength            = USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType    = USB_DT_ENDPOINT,
-+	.bEndpointAddress   = USB_DIR_IN,
-+	.bmAttributes       = USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize     = cpu_to_le16(64),
-+};
++#define BOOT_LOADER     "bootloader"
++#define BOOT_BL2        "bl2"
++#define BOOT_SPL        "spl"
++#define BOOT_TPL        "tpl"
++#define BOOT_FIP        "fip"
 +
-+static struct usb_endpoint_descriptor fs_ep_out = {
-+	.bLength		= USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType	= USB_DT_ENDPOINT,
-+	.bEndpointAddress	= USB_DIR_OUT,
-+	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize		= cpu_to_le16(64),
-+};
++#define BL2_COPY_NUM            (CONFIG_MESON_BL2_COPY_NUM)
++#define BL2_IMAGE_SIZE_PER_COPY (CONFIG_MESON_BL2_IMAGE_SIZE)
++#define BL2_TOTAL_PAGES         1024
 +
-+static struct usb_interface_descriptor interface_desc = {
-+	.bLength		= USB_DT_INTERFACE_SIZE,
-+	.bDescriptorType	= USB_DT_INTERFACE,
-+	.bInterfaceNumber	= 0x00,
-+	.bAlternateSetting	= 0x00,
-+	.bNumEndpoints		= 0x02,
-+	.bInterfaceClass	= FASTBOOT_INTERFACE_CLASS,
-+	.bInterfaceSubClass	= FASTBOOT_INTERFACE_SUB_CLASS,
-+	.bInterfaceProtocol	= FASTBOOT_INTERFACE_PROTOCOL,
-+};
++#define TPL_COPY_NUM            (CONFIG_MESON_TPL_COPY_NUM)
++#define TPL_SIZE_PER_COPY       0x200000
 +
-+static struct usb_descriptor_header *fb_fs_function[] = {
-+	(struct usb_descriptor_header *)&interface_desc,
-+	(struct usb_descriptor_header *)&fs_ep_in,
-+	(struct usb_descriptor_header *)&fs_ep_out,
-+	NULL,
-+};
++#define NAND_RSV_BLOCK_NUM      48
 +
-+static struct usb_endpoint_descriptor hs_ep_in = {
-+	.bLength		= USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType	= USB_DT_ENDPOINT,
-+	.bEndpointAddress	= USB_DIR_IN,
-+	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize		= cpu_to_le16(512),
-+};
++/**
++ * meson_bootloader_write - write 'bootloader' partition to NAND
++ *                          according to the required layout. It will
++ *                          write BL2, TPL and info pages.
++ *
++ * @buf: buffer with BL2 and TPL
++ * @length: buffer length
++ * @return: 0 on success, -errno otherwise.
++ */
++int meson_bootloader_write(unsigned char *buf, size_t length);
++#endif
+diff --git a/arch/arm/include/asm/arch-meson/spinand.h b/arch/arm/include/asm/arch-meson/spinand.h
+new file mode 100644
+index 00000000000..1628c8bd4e0
+--- /dev/null
++++ b/arch/arm/include/asm/arch-meson/spinand.h
+@@ -0,0 +1,43 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * (C) Copyright 2024 SaluteDevices, Inc.
++ */
 +
-+static struct usb_endpoint_descriptor hs_ep_out = {
-+	.bLength		= USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType	= USB_DT_ENDPOINT,
-+	.bEndpointAddress	= USB_DIR_OUT,
-+	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize		= cpu_to_le16(512),
-+};
++#ifndef __MESON_SPINAND_H__
++#define __MESON_SPINAND_H__
 +
-+static struct usb_descriptor_header *fb_hs_function[] = {
-+	(struct usb_descriptor_header *)&interface_desc,
-+	(struct usb_descriptor_header *)&hs_ep_in,
-+	(struct usb_descriptor_header *)&hs_ep_out,
-+	NULL,
-+};
++#include <stdint.h>
++#include <string.h>
++#include <asm/types.h>
++#include <asm/arch-meson/nand.h>
++#include <linux/compiler_attributes.h>
++#include <linux/mtd/mtd.h>
 +
-+/* Super speed */
-+static struct usb_endpoint_descriptor ss_ep_in = {
-+	.bLength		= USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType	= USB_DT_ENDPOINT,
-+	.bEndpointAddress	= USB_DIR_IN,
-+	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize		= cpu_to_le16(1024),
-+};
++struct meson_spi_nand_info_page {
++	char magic[8];  /* Magic header of info page. */
++	/* Info page version, +1 when you update this struct. */
++	u8 version;     /* 1 for now. */
++	u8 mode;        /* 1 discrete, 0 compact. */
++	u8 bl2_num;     /* bl2 copy number. */
++	u8 fip_num;     /* fip copy number. */
++	union {
++		struct {
++			u8 rd_max;		/* spi nand max read io. */
++			u8 oob_offset;		/* User bytes offset. */
++			u8 planes_per_lun;	/* number of planes per LUN. */
++			u8 rsv;			/* Reserved gap. */
++			u32 fip_start;		/* Start pages. */
++			u32 fip_pages;		/* Pages per fip. */
++			u32 page_size;		/* spi nand page size (bytes). */
++			u32 page_per_blk;	/* Page number per block. */
++			u32 oob_size;		/* Valid oob size (bytes). */
++			u32 bbt_start;		/* BBT start pages. */
++			u32 bbt_valid;		/* BBT valid offset pages. */
++			u32 bbt_size;		/* BBT occupied bytes. */
++		} __packed spinand;		/* spi nand. */
++		struct {
++			u32 reserved;
++		} emmc;
++	} dev;
++} __packed;
++#endif
+diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+index 7570f48e25f..883ee78f49b 100644
+--- a/arch/arm/mach-meson/Kconfig
++++ b/arch/arm/mach-meson/Kconfig
+@@ -93,4 +93,35 @@ config SYS_BOARD
+ 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+ 	  be used.
+ 
++config MESON_BL2_COPY_NUM
++	depends on ADNL || FASTBOOT_FLASH
++	int "Number of BL2 copies written to storage"
++	default 8
++	help
++		The ADNL / Optimus / fastboot protocol writes several copies of BL2
++		bootloader during firmware update process.
 +
-+static struct usb_endpoint_descriptor ss_ep_out = {
-+	.bLength		= USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType	= USB_DT_ENDPOINT,
-+	.bEndpointAddress	= USB_DIR_OUT,
-+	.bmAttributes		= USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize		= cpu_to_le16(1024),
-+};
++config MESON_TPL_COPY_NUM
++	depends on ADNL || FASTBOOT_FLASH
++	int "Number of TPL copies written to storage"
++	default 4
++	help
++		The ADNL / Optimus / fastboot protocol writes several copies of TPL
++		bootloader during firmware update process.
 +
-+static struct usb_ss_ep_comp_descriptor fb_ss_bulk_comp_desc = {
-+	.bLength =		sizeof(fb_ss_bulk_comp_desc),
-+	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
-+};
++config MESON_BL2_IMAGE_SIZE
++	depends on ADNL || FASTBOOT_FLASH
++	hex "Size of BL2 image"
++	default 0x10000
++	help
++		Size of BL2 image, passed by ADNL / Optimus / fastboot protocols.
 +
-+static struct usb_descriptor_header *fb_ss_function[] = {
-+	(struct usb_descriptor_header *)&interface_desc,
-+	(struct usb_descriptor_header *)&ss_ep_in,
-+	(struct usb_descriptor_header *)&fb_ss_bulk_comp_desc,
-+	(struct usb_descriptor_header *)&ss_ep_out,
-+	(struct usb_descriptor_header *)&fb_ss_bulk_comp_desc,
-+	NULL,
-+};
++config MESON_BL2_IMAGE_OFFSET
++	depends on ADNL || FASTBOOT_FLASH
++	hex "Offset from info page to BL2 image"
++	default 0x800
++	help
++		For each copy of BL2, this is offset from info page to BL2 image. Used
++		by Optimus and fastboot protocols.
 +
-+static struct usb_endpoint_descriptor *fastboot_common_ep_desc(struct usb_gadget *g,
-+							       struct usb_endpoint_descriptor *fs,
-+							       struct usb_endpoint_descriptor *hs,
-+							       struct usb_endpoint_descriptor *ss)
+ endif
+diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+index 535b0878b91..f63f91dde35 100644
+--- a/arch/arm/mach-meson/Makefile
++++ b/arch/arm/mach-meson/Makefile
+@@ -4,6 +4,6 @@
+ 
+ obj-y += board-common.o sm.o board-info.o
+ obj-$(CONFIG_MESON_GX) += board-gx.o
+-obj-$(CONFIG_MESON_AXG) += board-axg.o
++obj-$(CONFIG_MESON_AXG) += board-axg.o rawnand.o
+ obj-$(CONFIG_MESON_G12A) += board-g12a.o
+-obj-$(CONFIG_MESON_A1) += board-a1.o
++obj-$(CONFIG_MESON_A1) += board-a1.o spinand.o
+diff --git a/arch/arm/mach-meson/rawnand.c b/arch/arm/mach-meson/rawnand.c
+new file mode 100644
+index 00000000000..6b91674200e
+--- /dev/null
++++ b/arch/arm/mach-meson/rawnand.c
+@@ -0,0 +1,291 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2024 SaluteDevices, Inc.
++ */
++
++#include <nand.h>
++#include <asm/types.h>
++#include <asm/arch/rawnand.h>
++#include <linux/compiler_attributes.h>
++#include <linux/mtd/mtd.h>
++#include <linux/sizes.h>
++
++struct raw_nand_setup {
++	union {
++		u32 d32;
++		struct {
++			unsigned cmd:22;	/* NAND controller cmd to read. */
++			unsigned large_page:1;	/* Page is large. */
++			unsigned no_rb:1;	/* No RB. */
++			unsigned a2:1;		/* A2 cmd enable flag. */
++			unsigned reserved25:1;	/* Gap. */
++			unsigned page_list:1;	/* Page list is enabled. */
++			unsigned sync_mode:2;	/* Always 0 according vendor doc. */
++			unsigned size:2;	/* Always 0 according vendor doc. */
++			unsigned active:1;	/* Always 0 according vendor doc. */
++		} b;
++	} cfg;
++	u16 id;
++	u16 max;
++} __packed;
++
++struct raw_nand_cmd {
++	unsigned char type;
++	unsigned char val;
++} __packed;
++
++struct raw_ext_info {
++	u32 read_info;
++	u32 new_type;
++	u32 page_per_blk;
++	u32 xlc;
++	u32 ce_mask;
++	u32 boot_num;
++	u32 each_boot_pages;
++	/* for compatible reason */
++	u32 bbt_occupy_pages;
++	u32 bbt_start_block;
++} __packed;
++
++struct raw_fip_info {
++	u16 version;
++	u16 mode;
++	u32 fip_start;
++} __packed;
++
++struct raw_nand_info_page {
++	struct raw_nand_setup nand_setup;
++	unsigned char page_list[16];
++	struct raw_nand_cmd retry_usr[32];
++	struct raw_ext_info ext_info;
++	struct raw_fip_info fip_info;
++	u32 ddrp_start_page;
++} __packed;
++
++static void meson_raw_fill_oobbuf_with_magic(u8 *oobbuf, size_t oobavail)
 +{
-+	if (gadget_is_superspeed(g) && g->speed >= USB_SPEED_SUPER)
-+		return ss;
-+
-+	if (gadget_is_dualspeed(g) && g->speed == USB_SPEED_HIGH)
-+		return hs;
-+	return fs;
++	for (size_t j = 0; j < oobavail; j += 2) {
++		oobbuf[j] = 0x55;
++		oobbuf[j + 1] = 0xaa;
++	}
 +}
 +
-+void fastboot_common_complete(struct usb_ep *ep, struct usb_request *req)
++static int meson_raw_raw_nand_info_page_prepare(struct mtd_info *mtd, void *oobbuf)
 +{
-+	int status = req->status;
++	struct nand_chip *nand_chip = mtd_to_nand(mtd->parent);
++	struct raw_nand_info_page *p_nand_page0;
++	struct raw_ext_info *ext_info;
++	struct raw_nand_setup *nand_setup;
++	struct raw_fip_info *fip_info;
++	u32 config_data;
 +
-+	if (!status)
-+		return;
++	p_nand_page0 = oobbuf;
++	memset(p_nand_page0, 0x0, sizeof(struct raw_nand_info_page));
++	nand_setup = &p_nand_page0->nand_setup;
++	ext_info   = &p_nand_page0->ext_info;
 +
-+	printf("status: %d ep '%s' trans: %d\n", status, ep->name, req->actual);
-+}
++	config_data = CMDRWGEN(NFC_CMD_N2M, 0, 1, 0, nand_chip->ecc.size >> 3,
++			       nand_chip->ecc.steps);
 +
-+int fastboot_common_bind(struct usb_configuration *c, struct usb_function *f,
-+			 struct usb_os_desc_table *fb_os_desc_table,
-+			 struct usb_os_desc *fb_os_desc,
-+			 struct usb_string **fastboot_string_defs,
-+			 struct usb_os_desc_ext_prop *fb_ext_prop)
-+{
-+	int id;
-+	struct usb_gadget *gadget = c->cdev->gadget;
-+	struct fastboot_funcs *f_fb = func_to_fastboot_funcs(f);
-+	const char *s;
++	config_data = config_data | BIT(23) | BIT(22) | BIT(21);
++	nand_setup->cfg.d32 = config_data;
++	nand_setup->id = 0;
++	nand_setup->max = 0;
 +
-+	/* DYNAMIC interface numbers assignments */
-+	id = usb_interface_id(c, f);
-+	if (id < 0)
-+		return id;
++	ext_info->read_info = 1;
++	ext_info->page_per_blk = mtd->erasesize / mtd->writesize;
++	ext_info->ce_mask = 0x01;
++	ext_info->xlc = 1;
++	ext_info->boot_num = TPL_COPY_NUM;
++	ext_info->each_boot_pages = TPL_SIZE_PER_COPY / mtd->writesize;
++	ext_info->bbt_occupy_pages = 0x1;
++	ext_info->bbt_start_block = 0x14; /* Amlogic keeps BBT in hardcoded offset. */
 +
-+	interface_desc.bInterfaceNumber = id;
++	p_nand_page0->ddrp_start_page = 0xb00;
 +
-+	/* Enable OS and Extended Properties Feature Descriptor */
-+	c->cdev->use_os_string = 1;
-+	f->os_desc_table = fb_os_desc_table;
-+	f->os_desc_n = 1;
-+	f->os_desc_table->if_id = id;
-+	INIT_LIST_HEAD(&fb_os_desc->ext_prop);
-+	fb_ext_prop->name_len = strlen(fb_ext_prop->name) * 2 + 2;
-+	fb_os_desc->ext_prop_len = 10 + fb_ext_prop->name_len;
-+	fb_os_desc->ext_prop_count = 1;
-+	fb_ext_prop->data_len = strlen(fb_ext_prop->data) * 2 + 2;
-+	fb_os_desc->ext_prop_len += fb_ext_prop->data_len + 4;
-+	list_add_tail(&fb_ext_prop->entry, &fb_os_desc->ext_prop);
-+
-+	id = usb_string_id(c->cdev);
-+	if (id < 0)
-+		return id;
-+
-+	fastboot_string_defs[0]->id = id;
-+	interface_desc.iInterface = id;
-+
-+	f_fb->in_ep = usb_ep_autoconfig(gadget, &fs_ep_in);
-+	if (!f_fb->in_ep)
-+		return -ENODEV;
-+
-+	f_fb->in_ep->driver_data = c->cdev;
-+
-+	f_fb->out_ep = usb_ep_autoconfig(gadget, &fs_ep_out);
-+	if (!f_fb->out_ep)
-+		return -ENODEV;
-+
-+	f_fb->out_ep->driver_data = c->cdev;
-+
-+	f->descriptors = fb_fs_function;
-+
-+	if (gadget_is_dualspeed(gadget)) {
-+		/* Assume endpoint addresses are the same for both speeds */
-+		hs_ep_in.bEndpointAddress = fs_ep_in.bEndpointAddress;
-+		hs_ep_out.bEndpointAddress = fs_ep_out.bEndpointAddress;
-+		/* copy HS descriptors */
-+		f->hs_descriptors = fb_hs_function;
-+	}
-+
-+	if (gadget_is_superspeed(gadget)) {
-+		ss_ep_in.bEndpointAddress = fs_ep_in.bEndpointAddress;
-+		ss_ep_out.bEndpointAddress = fs_ep_out.bEndpointAddress;
-+		f->ss_descriptors = fb_ss_function;
-+	}
-+
-+	s = env_get("serial#");
-+	if (s)
-+		g_dnl_set_serialnumber((char *)s);
++	fip_info = &p_nand_page0->fip_info;
++	fip_info->version = 1;
++	fip_info->mode = 1; /* Discrete mode. */
++	fip_info->fip_start = BL2_TOTAL_PAGES +
++		(NAND_RSV_BLOCK_NUM * ext_info->page_per_blk);
 +
 +	return 0;
 +}
 +
-+void fastboot_common_unbind(struct usb_configuration *c,
-+			    struct usb_function *f,
-+			    struct usb_os_desc *fb_os_desc)
-+{
-+	f->os_desc_table = NULL;
-+	list_del(&fb_os_desc->ext_prop);
-+}
-+
-+static void __fastboot_common_disable(struct usb_function *f, bool disable_out, bool disable_in)
-+{
-+	struct fastboot_funcs *f_fb = func_to_fastboot_funcs(f);
-+
-+	if (disable_out)
-+		usb_ep_disable(f_fb->out_ep);
-+
-+	if (disable_in)
-+		usb_ep_disable(f_fb->in_ep);
-+
-+	if (f_fb->out_req) {
-+		free(f_fb->out_req->buf);
-+		usb_ep_free_request(f_fb->out_ep, f_fb->out_req);
-+		f_fb->out_req = NULL;
-+	}
-+	if (f_fb->in_req) {
-+		free(f_fb->in_req->buf);
-+		usb_ep_free_request(f_fb->in_ep, f_fb->in_req);
-+		f_fb->in_req = NULL;
-+	}
-+}
-+
-+void fastboot_common_disable(struct usb_function *f)
-+{
-+	return __fastboot_common_disable(f, true, true);
-+}
-+
-+static struct usb_request *fastboot_common_start_ep(struct usb_ep *ep)
-+{
-+	struct usb_request *req;
-+
-+	req = usb_ep_alloc_request(ep, 0);
-+	if (!req)
-+		return NULL;
-+
-+	req->length = EP_BUFFER_SIZE;
-+	req->buf = memalign(CONFIG_SYS_CACHELINE_SIZE, EP_BUFFER_SIZE);
-+	if (!req->buf) {
-+		usb_ep_free_request(ep, req);
-+		return NULL;
-+	}
-+
-+	memset(req->buf, 0, req->length);
-+	return req;
-+}
-+
-+int fastboot_common_set_alt(struct usb_function *f,
-+			    unsigned int interface, unsigned int alt,
-+			    void (*rx_handler)(struct usb_ep *ep, struct usb_request *req))
++static int meson_raw_write_info_page(struct mtd_info *mtd, loff_t offset, size_t *actual)
 +{
 +	int ret;
-+	struct usb_composite_dev *cdev = f->config->cdev;
-+	struct usb_gadget *gadget = cdev->gadget;
-+	struct fastboot_funcs *f_adnl = func_to_fastboot_funcs(f);
-+	const struct usb_endpoint_descriptor *d;
-+	bool disable_out = false;
-+	bool disable_in = false;
++	struct mtd_oob_ops ops;
++	u8 *datbuf = (u8 *)calloc(mtd->writesize, sizeof(u8));
 +
-+	debug("%s: func: %s intf: %u alt: %u\n",
-+	      __func__, f->name, interface, alt);
-+
-+	d = fastboot_common_ep_desc(gadget, &fs_ep_out, &hs_ep_out, &ss_ep_out);
-+	ret = usb_ep_enable(f_adnl->out_ep, d);
-+	if (ret) {
-+		puts("failed to enable out ep\n");
-+		return ret;
++	if (!datbuf) {
++		pr_err("Failed to allocate data buf for info page\n");
++		return -ENOMEM;
 +	}
 +
-+	disable_out = true;
++	meson_raw_raw_nand_info_page_prepare(mtd, datbuf);
 +
-+	f_adnl->out_req = fastboot_common_start_ep(f_adnl->out_ep);
-+	if (!f_adnl->out_req) {
-+		puts("failed to alloc out req\n");
-+		ret = -EINVAL;
-+		goto err;
++	memset(&ops, 0, sizeof(struct mtd_oob_ops));
++	ops.len = mtd->writesize;
++	ops.datbuf = datbuf;
++	ops.ooblen = mtd->oobavail;
++	ops.mode = MTD_OPS_AUTO_OOB;
++	ops.oobbuf = calloc(mtd->oobavail, sizeof(u8));
++
++	if (!ops.oobbuf) {
++		pr_err("Failed to allocate OOB buf for info page\n");
++		free(datbuf);
++		return -ENOMEM;
 +	}
 +
-+	f_adnl->out_req->complete = rx_handler;
++	meson_raw_fill_oobbuf_with_magic(ops.oobbuf, mtd->oobavail);
 +
-+	d = fastboot_common_ep_desc(gadget, &fs_ep_in, &hs_ep_in, &ss_ep_in);
-+	ret = usb_ep_enable(f_adnl->in_ep, d);
-+	if (ret) {
-+		puts("failed to enable in ep\n");
-+		goto err;
-+	}
++	ret = mtd_write_oob(mtd, offset, &ops);
++	*actual = ops.retlen;
 +
-+	disable_in = true;
++	free(ops.oobbuf);
++	free(datbuf);
 +
-+	f_adnl->in_req = fastboot_common_start_ep(f_adnl->in_ep);
-+	if (!f_adnl->in_req) {
-+		puts("failed alloc req in\n");
-+		ret = -EINVAL;
-+		goto err;
-+	}
-+	f_adnl->in_req->complete = fastboot_common_complete;
-+
-+	ret = usb_ep_queue(f_adnl->out_ep, f_adnl->out_req, 0);
-+	if (ret)
-+		goto err;
-+
-+	return 0;
-+err:
-+	__fastboot_common_disable(f, disable_out, disable_in);
 +	return ret;
 +}
 +
-+struct fastboot_funcs *func_to_fastboot_funcs(struct usb_function *f)
++static int meson_raw_write_bl2(unsigned char *src_data)
 +{
-+	return container_of(f, struct fastboot_funcs, usb_function);
++	int ret;
++	size_t i;
++	nand_erase_options_t opts;
++	struct mtd_info *mtd;
++	size_t bl2_copy_limit;
++	struct nand_chip *nand;
++	size_t oobbuff_size;
++	struct mtd_oob_ops ops;
++	size_t src_size = BL2_IMAGE_SIZE_PER_COPY;
++	loff_t dest = 0;
++	size_t copy_num = BL2_COPY_NUM;
++
++	pr_info("Writing BL2\n");
++
++	mtd = get_mtd_device_nm(BOOT_LOADER);
++	if (IS_ERR_OR_NULL(mtd)) {
++		pr_err("Failed to get mtd device \"bootloader\" ret: %ld\n", PTR_ERR(mtd));
++		return PTR_ERR(mtd);
++	}
++
++	if (mtd->oobavail & 1) {
++		pr_err("Invalid OOB available bytes: %u\n", mtd->oobavail);
++		return -ENODEV;
++	}
++
++	memset(&opts, 0, sizeof(opts));
++	opts.offset = dest;
++	opts.length = mtd->size;
++	if (nand_erase_opts(mtd, &opts)) {
++		pr_err("Failed to erase \"bootloader\"\n");
++		return -EIO;
++	}
++
++	bl2_copy_limit = mtd->size / BL2_COPY_NUM;
++
++	memset(&ops, 0, sizeof(struct mtd_oob_ops));
++	ops.len = src_size;
++	ops.datbuf = src_data;
++	ops.ooblen = mtd->oobavail * (src_size / mtd->writesize + 1);
++	ops.mode = MTD_OPS_AUTO_OOB;
++
++	nand = mtd_to_nand(mtd->parent);
++	oobbuff_size = (mtd->writesize / nand->ecc.size) * ops.ooblen;
++
++	ops.oobbuf = calloc(oobbuff_size, sizeof(u8));
++
++	if (!ops.oobbuf) {
++		pr_err("Failed to allocate OOB buf for BL2\n");
++		return -ENOMEM;
++	}
++
++	meson_raw_fill_oobbuf_with_magic(ops.oobbuf, ops.ooblen);
++
++	for (i = 0; i < copy_num; i++) {
++		size_t actual = 0;
++		loff_t offset_in_partition = dest + i * bl2_copy_limit;
++
++		if (mtd_block_isbad(mtd, offset_in_partition)) {
++			pr_info("Skip badblock at %llx\n", offset_in_partition);
++			continue;
++		}
++
++		ret = meson_raw_write_info_page(mtd, offset_in_partition, &actual);
++		if (ret)
++			goto free_oobbuf;
++
++		offset_in_partition += CONFIG_MESON_BL2_IMAGE_OFFSET +
++				       (actual - mtd->writesize);
++		ret = mtd_write_oob(mtd, offset_in_partition, &ops);
++		if (ret)
++			goto free_oobbuf;
++	}
++
++free_oobbuf:
++	free(ops.oobbuf);
++
++	return ret;
 +}
-diff --git a/drivers/usb/gadget/f_fastboot_common.h b/drivers/usb/gadget/f_fastboot_common.h
++
++static int meson_raw_write_tpl(unsigned char *src_data, size_t src_size)
++{
++	int ret;
++	size_t i;
++	struct mtd_info *mtd;
++	nand_erase_options_t opts;
++	loff_t dest = 0;
++	size_t copy_num = TPL_COPY_NUM;
++
++	pr_info("Writing TPL\n");
++	mtd = get_mtd_device_nm(BOOT_TPL);
++
++	if (IS_ERR_OR_NULL(mtd)) {
++		pr_err("Failed to get mtd device \"tpl\" ret: %ld\n", PTR_ERR(mtd));
++		return PTR_ERR(mtd);
++	}
++
++	memset(&opts, 0, sizeof(nand_erase_options_t));
++	opts.offset = dest;
++	opts.length = mtd->size;
++	if (nand_erase_opts(mtd, &opts)) {
++		pr_err("Failed to erase \"tpl\"\n");
++		return -EIO;
++	}
++
++	for (i = 0; i < copy_num; i++) {
++		loff_t offset_in_partition = dest + i * TPL_SIZE_PER_COPY;
++
++		ret = nand_write_skip_bad(mtd, offset_in_partition, &src_size,
++					  NULL, mtd->size / TPL_COPY_NUM, src_data, 0);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++int meson_bootloader_write(unsigned char *buf, size_t length)
++{
++	int ret;
++
++	if (!buf) {
++		pr_err("Empty buffer is received\n");
++		return -EINVAL;
++	}
++
++	ret = meson_raw_write_bl2(buf);
++	if (ret)
++		return ret;
++
++	/* Write FIP. FIP is also called TPL */
++	ret = meson_raw_write_tpl(buf + BL2_IMAGE_SIZE_PER_COPY,
++				  length - BL2_IMAGE_SIZE_PER_COPY);
++	if (ret)
++		return ret;
++
++	pr_info("\"Bootloader (BL2+TPL)\" is written\n");
++	return 0;
++}
+diff --git a/arch/arm/mach-meson/spinand.c b/arch/arm/mach-meson/spinand.c
 new file mode 100644
-index 00000000000..dba7d7003ba
+index 00000000000..dbad4ba0e9f
 --- /dev/null
-+++ b/drivers/usb/gadget/f_fastboot_common.h
-@@ -0,0 +1,71 @@
++++ b/arch/arm/mach-meson/spinand.c
+@@ -0,0 +1,158 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * (C) Copyright 2008 - 2009
-+ * Windriver, <www.windriver.com>
-+ * Tom Rix <Tom.Rix@windriver.com>
-+ *
-+ * Copyright 2011 Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-+ *
-+ * Copyright 2014 Linaro, Ltd.
-+ * Rob Herring <robh@kernel.org>
-+ *
-+ * Copyright (c) 2025 SaluteDevices, Inc.
-+ * Author: Arseniy Krasnov <avkrasnov@salutedevices.com>
++ * (C) Copyright 2023 SaluteDevices, Inc.
 + */
 +
-+#ifndef __F_FASTBOOT_COMMON_H_
-+#define __F_FASTBOOT_COMMON_H_
-+#include <g_dnl.h>
++#include <nand.h>
++#include <asm/arch/spinand.h>
++#include <linux/mtd/mtd.h>
++#include <linux/mtd/nand.h>
++#include <linux/sizes.h>
 +
-+/*
-+ * EP_BUFFER_SIZE must always be an integral multiple of maxpacket size
-+ * (64 or 512 or 1024), else we break on certain controllers like DWC3
-+ * that expect bulk OUT requests to be divisible by maxpacket size.
-+ */
-+#define EP_BUFFER_SIZE			4096
++#define SPINAND_MAGIC		"AMLIFPG"
++#define SPINAND_INFO_VER	1
 +
-+#define FASTBOOT_INTERFACE_CLASS	0xff
-+#define FASTBOOT_INTERFACE_SUB_CLASS	0x42
-+#define FASTBOOT_INTERFACE_PROTOCOL	0x03
++static void meson_bootloader_setup_info_page(struct meson_spi_nand_info_page *info_page,
++					     struct mtd_info *mtd)
++{
++	struct nand_device *nand_dev;
++	u32 page_per_blk;
 +
-+struct fastboot_funcs {
-+	struct usb_function usb_function;
++	nand_dev = mtd_to_nanddev(mtd->parent);
++	page_per_blk = mtd->erasesize / mtd->writesize;
++	info_page->version = SPINAND_INFO_VER;
++	/* DISCRETE only */
++	info_page->mode = 1;
++	info_page->bl2_num = BL2_COPY_NUM;
++	info_page->fip_num = TPL_COPY_NUM;
++	info_page->dev.spinand.rd_max = 2;
++	info_page->dev.spinand.fip_start = BL2_TOTAL_PAGES + NAND_RSV_BLOCK_NUM * page_per_blk;
++	info_page->dev.spinand.fip_pages = TPL_SIZE_PER_COPY / mtd->writesize;
++	info_page->dev.spinand.page_size = mtd->writesize;
++	info_page->dev.spinand.page_per_blk = page_per_blk;
++	info_page->dev.spinand.oob_size = mtd->oobsize;
++	info_page->dev.spinand.oob_offset = 0;
++	info_page->dev.spinand.bbt_start = 0;
++	info_page->dev.spinand.bbt_valid = 0;
++	info_page->dev.spinand.bbt_size = 0;
++	info_page->dev.spinand.planes_per_lun = nand_dev->memorg.planes_per_lun;
++}
 +
-+	/* IN/OUT EP's and corresponding requests */
-+	struct usb_ep *in_ep, *out_ep;
-+	struct usb_request *in_req, *out_req;
-+};
++static int meson_store_boot_write_bl2(struct mtd_info *mtd, void *buf, unsigned int copy_idx,
++				      struct meson_spi_nand_info_page *info_page)
++{
++        unsigned int size_per_copy;
++	loff_t offset;
++	size_t retlen;
++	int ret;
 +
-+void fastboot_common_complete(struct usb_ep *ep, struct usb_request *req);
++	size_per_copy = mtd->writesize * (BL2_TOTAL_PAGES / BL2_COPY_NUM);
++	offset = mtd->offset + (copy_idx * size_per_copy);
++	ret = mtd_write(mtd, offset, BL2_IMAGE_SIZE_PER_COPY, &retlen, buf);
++	if (ret)
++		return ret;
 +
-+/*
-+ * Initializes USB function 'f' with provided resources and binds it to the
-+ * USB configuration 'c'.
-+ */
-+int fastboot_common_bind(struct usb_configuration *c, struct usb_function *f,
-+			 struct usb_os_desc_table *fb_os_desc_table,
-+			 struct usb_os_desc *fb_os_desc,
-+			 struct usb_string **fastboot_string_defs,
-+			 struct usb_os_desc_ext_prop *fb_ext_prop);
++	/*
++	 * Info page is written directly after each BL2 image. For
++	 * example let:
++	 * BL2_TOTAL_PAGES = 1024
++	 * BL2_COPY_NUM = 8
++	 * BL2_IMAGE_SIZE_PER_COPY = 65536 = 0x10000
++	 * size_per_copy = 2048 * (1024 / 8) = 0x40000
++	 *
++	 * BL2 image will be written to BL2_COPY_NUM
++	 * locations:
++	 * 0x00000
++	 * 0x40000
++	 * 0x80000
++	 * 0xc0000
++	 * 0x100000
++	 * 0x140000
++	 * 0x180000
++	 * 0x1c0000
++	 *
++	 * Info pages will be written to BL2_COPY_NUM
++	 * locations:
++	 * 0x10000
++	 * 0x50000
++	 * 0x90000
++	 * 0xd0000
++	 * 0x110000
++	 * 0x150000
++	 * 0x190000
++	 * 0x1d0000
++	 *
++	 * Here is the same, in picture:
++	 *
++	 *          BL2_TOTAL_PAGES == 1024
++	 *             BL2_COPY_NUM == 8
++	 *  /---------------------------------------\
++	 *  |                                       |
++	 *
++	 *  |AB  |AB  |AB  |AB  |AB  |AB  |AB  |AB  |
++	 *  |____|____|____|____|____|____|____|____|
++	 *  ^    ^
++	 *  |    |
++	 *  |____|__ size_per_copy == 0x40000
++	 *
++	 *  A - is BL2 image. It is BL2_IMAGE_SIZE_PER_COPY == 0x10000 bytes.
++	 *  B - is info page.
++	 */
++	offset += BL2_IMAGE_SIZE_PER_COPY;
 +
-+/* Reverse for 'fastboot_bind_common()'. */
-+void fastboot_common_unbind(struct usb_configuration *c,
-+			    struct usb_function *f,
-+			    struct usb_os_desc *fb_os_desc);
++	return mtd_write(mtd, offset, sizeof(*info_page),
++			 &retlen, (u8 *)info_page);
++}
 +
-+/*
-+ * Setups endpoints, allocates memory and sets callbacks for both IN and
-+ * OUT requests.
-+ */
-+int fastboot_common_set_alt(struct usb_function *f,
-+			    unsigned int interface, unsigned int alt,
-+			    void (*rx_handler)(struct usb_ep *ep,
-+					       struct usb_request *req));
++static int meson_store_boot_write_tpl(void *buf, size_t size, unsigned int copy_idx)
++{
++	loff_t offset;
++	struct mtd_info *mtd;
++	loff_t limit;
++	size_t retlen = 0;
 +
-+/* Disables provided USB function 'f'. */
-+void fastboot_common_disable(struct usb_function *f);
++	mtd = get_mtd_device_nm(BOOT_TPL);
++	if (IS_ERR_OR_NULL(mtd))
++		return -ENODEV;
 +
-+/* Returns parent struct of 'f'. */
-+struct fastboot_funcs *func_to_fastboot_funcs(struct usb_function *f);
++	offset = mtd->offset + (copy_idx * TPL_SIZE_PER_COPY);
++	limit = offset + TPL_SIZE_PER_COPY;
 +
-+#endif /* __F_FASTBOOT_COMMON_H_ */
++	return nand_write_skip_bad(mtd->parent, offset, &size, &retlen,
++				   limit, buf, 0);
++}
++
++int meson_bootloader_write(unsigned char *buf, size_t length)
++{
++	struct meson_spi_nand_info_page info_page;
++	unsigned int copy_idx;
++	struct mtd_info *mtd;
++	int ret;
++
++	/* 'buf' contains BL2 and TPL. If there is only BL2 or
++	 * even less - input data is invalid.
++	 */
++	if (length <= BL2_IMAGE_SIZE_PER_COPY)
++		return -EINVAL;
++
++	mtd = get_mtd_device_nm(BOOT_LOADER);
++	if (IS_ERR_OR_NULL(mtd))
++		return -ENODEV;
++
++	meson_bootloader_setup_info_page(&info_page, mtd);
++
++	for (copy_idx = 0; copy_idx < BL2_COPY_NUM; copy_idx++) {
++		ret = meson_store_boot_write_bl2(mtd, buf, copy_idx, &info_page);
++		if (ret)
++			return ret;
++	}
++
++	for (copy_idx = 0; copy_idx < TPL_COPY_NUM; copy_idx++) {
++		ret = meson_store_boot_write_tpl(buf + BL2_IMAGE_SIZE_PER_COPY,
++						 length - BL2_IMAGE_SIZE_PER_COPY, copy_idx);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
 -- 
 2.30.1
 
