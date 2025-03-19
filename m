@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD4F1C35FFA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 12:18:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDE7C35FFA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 12:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A96D8193A;
-	Wed, 19 Mar 2025 13:18:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3FE45819B1;
+	Wed, 19 Mar 2025 13:31:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FtiPA0dB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PjdSRhoI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54D6F81A04; Wed, 19 Mar 2025 13:18:54 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id C4CBC81026; Wed, 19 Mar 2025 08:26:05 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 007DF815D1
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 13:18:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A303C81026
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 08:25:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e53c9035003so5164922276.2
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 05:18:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-223594b3c6dso140608325ad.2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 00:25:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742386731; x=1742991531; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SE9fPwScjdbQN+Dsf39vlztAjMvJA9XVgMWHjMQW6yc=;
- b=FtiPA0dBSUrjYKV/NtYaEvHNiccieZd1HqeY/U6xG209LWRMUW7VzFUQRRb1Fw9BeR
- q2z7pwq2RXs8fy7DL34FaPGfxI9HHXFGrdRpgzQ4x1KOjb54If5tUfVA0rXXUJ2NTeD1
- BmL1vjNT4MsexzZ7Ko6JAKo9e9Fu5L2KqGLSh7u/zyldw+tpV0diXHMa2feP7mCaYxzT
- t2iAwLJZpsb7d7nk7ESf8R5qh2U5m0FUmVW/oFYY6QmB2jNQjxdAvDGT/JHHDighA9vT
- ggQQWqbdMDjrXeg7E1frVLNzfmbew2Q+SWp9Sk0O1c51G7AEo+mRao4owogO2j6+3WdO
- SydQ==
+ d=gmail.com; s=20230601; t=1742369158; x=1742973958; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XDmFi5L62urAXKZ3aTdvX780+9QY/mQISQuhPLm3v5g=;
+ b=PjdSRhoIgNBBC+fY9G058tVDBmGXk8wbhQ7Y5bcBo0wcoOtzD542AnzNBd4VQLvC6q
+ Fq/pRK/FrAnhJCBHvNLFhbgLS8cG2+g2ABwzt256YMbmpacMmsBSWde//nrc3poic/ax
+ flWKzR0CufDiDntl/a/ewTsrFhdPlhTn6ny1TnEKLVyz/PZQOGiaSKVICWijIBhQsYII
+ P/6RKd4Mn77RxX2yxt9wWcjoy3sJpqh0d0E//1/J+uLt/gm5elE18yzQtEnuKLtdQhhX
+ MzbeVZ9M8tPnC6Efy8HYUMewG8eXA7UtrG3Zik79BQwUbvm0DshzaFQaMzHEV6TBsPm3
+ O3Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742386731; x=1742991531;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SE9fPwScjdbQN+Dsf39vlztAjMvJA9XVgMWHjMQW6yc=;
- b=w68wdCfCPGIJNaabGpOCMPVPclzmZhAZusYdZ0J1MNFQTAxhrE/BA3c15zTSSal4eS
- oDWhfW00leNRQfeD7b0v55sFMl1Rl7JyK8UtzcH5SQqdKYg77y94GiXrnGy1pNfpsFSK
- zCwvIOoAfcoqB/TcUg3AtyqzJqB2YaerRonpfIBt1Ic3YR6qknhnTnF2w3kU+byJZRlE
- nzhwqGqN6Zcf3Dox4xTfTw40YzT6b3wCCBMsJU8BOvcPhJqnMz7rEbA4Sde7wvKqMbmT
- z1oAn1Fq0/fdRLaEQsRfP9M70sjiyY/Xadz96KbWY64pWW6OqSLIbXsMbxMMcoBe2MRS
- fP8g==
-X-Gm-Message-State: AOJu0YzZAUTRSUxxP9MMN6Vl0prN+46EyRlgkqJHOv6iEF5DQvL2hWwb
- dvT9BCwJyU31fKtlqClMbmurJ00Iw1IXJzP33A8y0RC8vep2Ksv0RVz79IsJp9UYmqtHNz0ER27
- f0riO/1rcnogxnV9XqgmpFqf2/ytw4CxNr/Ho+w==
-X-Gm-Gg: ASbGncsC1tZ745Q3v/D8oAT8YMlqzzrZbacvDxZvAS0YoeJNfDadD0RpBn5fIXvBKzN
- dMPcNz6kXoyMyJ0keoPE+vXovAlPMk5s8AcSPFPrtCeGgMmlf6bXvAv2nvfM7Gwd3y3eD+4CFHK
- L8qqoNgu9UtR4802qwo0dm4FgfxP4=
-X-Google-Smtp-Source: AGHT+IFnXWmOsS0uhDYZ8DAmGLhy0r+RHrwE8E8Ck5bwRmzg7tAiW65tjh3EK8CsW2ZAD1F7Fd3GBVJBZ9PlXxLqdtI=
-X-Received: by 2002:a05:6902:843:b0:e60:9dd3:38c9 with SMTP id
- 3f1490d57ef6-e667b3a4751mr3008816276.7.1742386730836; Wed, 19 Mar 2025
- 05:18:50 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742369158; x=1742973958;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XDmFi5L62urAXKZ3aTdvX780+9QY/mQISQuhPLm3v5g=;
+ b=dW2ZOqt/TRLKXKj9BYlujlC11GltK5cqwZsMZdw8Vg4/xI7+RlZ+we32wOqJ1EqjHs
+ cmSFjSrmqvabCGeDO2A++cJ/O3ZtXWyDV69KgablkFV21ncbQgkIoEiShXGlIIvbKshw
+ eEeI2VaL6STkTqED8trZRdgt0R24XCyI46joc8YaFegdpihKtTd4YUUUklf+8VZ9EjUf
+ cdhhgJmybophMkf9l7h+vgfDJ4uRdThKNrRdtEkd6RFryPFYIx/EWHxsQPg9ehInaMVx
+ Sq3KWXWZJakCXOErgwuuJEFW93TF7use+18QZpU5TDEGNsgfm9uY/Gg0k6oYUjFH2QwG
+ nhOA==
+X-Gm-Message-State: AOJu0YyFo9MCaf8WFzkDUq/ZUY9uNxdKBT8WaempV0SDc/fyPb0UrBcH
+ uyMRN2DHTL8VlsoAwoQekoJjONiK42U+Ko5x9JxlfKjzR1ejptQJ1WHPYhHa
+X-Gm-Gg: ASbGnctoZafWcBEUAqOACbP+98EnZBfBg/ZU/I/lUX7Pi64QvscjOfhVq1nykTJU9un
+ kV8BXqWRWiTbfKgCMPuC9sJa0VqLVyZn4t+TCTOttx/4pEMUUvXv5vh0JXIB1wzaCPhufKWxGXb
+ 9TFI8zX9PPsQj/U5Yv/pJvQuZxHD6Z+iuKHKumoixVQYUaTIPsZpGO6FTz3JwjdBvSayaYQFb/H
+ EdTlggZUoGgtnLV+Hinrepl8lszxCm2vD5T6A5MTovYb/MmhMfuQ3uL4HKSoPwk6nJ9ZOKKEiVn
+ On5J7oJHult9GJwK7nwV65qagNf9woutbh2kld8cP/KJJyT6iIZ6THKVQrvQPrXUJdKVIvCpdGw
+ i7MXn5exBmw2KgrfVbg==
+X-Google-Smtp-Source: AGHT+IGWnukV51QNuW3XzGy7p9gsGQazHEmkJYYGASyGUiioQW3gTPzN9Vj3pS+oKbdb7ZXTve9eaA==
+X-Received: by 2002:a05:6a00:4651:b0:725:96f2:9e63 with SMTP id
+ d2e1a72fcca58-7376d6ff5b5mr3163751b3a.24.1742369157843; 
+ Wed, 19 Mar 2025 00:25:57 -0700 (PDT)
+Received: from aristo-b7flip.. (118-163-61-247.hinet-ip.hinet.net.
+ [118.163.61.247]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7371152948fsm11262683b3a.16.2025.03.19.00.25.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Mar 2025 00:25:57 -0700 (PDT)
+From: Aristo Chen <jj251510319013@gmail.com>
+X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
+To: u-boot@lists.denx.de
+Cc: peng.fan@nxp.com, trini@konsulko.com, aristo.chen@canonical.com,
+ festevam@denx.de, marex@denx.de, jerome.forissier@linaro.org,
+ ilias.apalodimas@linaro.org
+Subject: [PATCH] configs: Remove duplicated bootcmd 'mmc dev ${mmcdev}'
+Date: Wed, 19 Mar 2025 15:25:20 +0800
+Message-Id: <20250319072520.100555-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250318132347.646703-1-adriano.cordova@canonical.com>
- <CAC_iWjJgS2oudWw7DTDW4uPtaGvw8MSdzo1VyswX8CLYD9dL0g@mail.gmail.com>
- <CAMGU2hW4Axz3vkqcDFFNYMxW2JQxNRoNxvAZ2mrMrQGC78NQYw@mail.gmail.com>
-In-Reply-To: <CAMGU2hW4Axz3vkqcDFFNYMxW2JQxNRoNxvAZ2mrMrQGC78NQYw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 19 Mar 2025 14:18:14 +0200
-X-Gm-Features: AQ5f1JrvyXm0GUIkSegF7ypclFSdkyX9irGJa-iB2_aOhpjetL7TOAlPIN5Q6s8
-Message-ID: <CAC_iWjK4+tqogut0YQ7KZOVwMKawzfC3D+79iLZ=sxSGw7Piig@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Add initrd support to bootm EFI payloads
-To: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, sjg@chromium.org, 
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 19 Mar 2025 13:31:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,85 +98,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Mar 2025 at 14:12, Adriano C=C3=B3rdova <adrianox@gmail.com> wro=
-te:
->
->
->
-> El mi=C3=A9, 19 mar 2025 a las 5:48, Ilias Apalodimas (<ilias.apalodimas@=
-linaro.org>) escribi=C3=B3:
->>
->> Hi Adriano,
->>
->> On Tue, 18 Mar 2025 at 15:23, Adriano Cordova <adrianox@gmail.com> wrote=
-:
->> >
->> > Next boot stages can acces an initrd via a handle with a specific devi=
-ce
->> > path and an EFI_LOAD_FILE2_PROTOCOL installed on it. In U-Boot, this f=
-unctionality
->> > is currently only implemented when booting with the EFI boot manager. =
-This series
->> > implements this functionality also for the bootm command when the os i=
-s of EFI type,
->> > e.g. when booting FIT images with an EFI kernel.
->>
->> I'll have a look at the patches shortly. I have a question about the
->> entire series though.
->>
->> The initrd was plugged into the efi boot manager because it's easy to
->> configure entries of
->> kernel-initrd-dtb. The initrd can also be loaded by passing a kernel
->> command line parameter.
->>
->> That parameter can either be initrd=3D<file> with the limitation that
->> the initrd needs to be on the same filesystem as the kernel image.
->> On newer kernels you can also pass initrd=3D<device path>. I am not sure
->> what's the best option when loading the initrd for a FIT image.
->>
->> Thanks
->> /Ilias
->
->
-> Currently the initrd in FIT images with EFI os is completely ignored. It =
-can't be passed as initrd=3D<file>
-> because it is not a file, it is just memory mapped, and I am not sure if =
-it can be passed as initrd=3D<device path>
-> as I am not sure if the kernel expects a file system device path or if a =
-memory device path would be picked
-> up.
-> In this series the functionality is added following what bootmgr already =
-does, which also works for passing
-> the initrd to a boot stage that understands EFI but not command line, but=
- investigating the other way is also an option.
+The 'mmc dev ${mmcdev}' is defined twice, so remove the duplicated one
 
-Yea, I don't know if loading it from a memory-backed device path is an
-option either. I am fine with the current idea, I was just wondering
-if we specifically want EFI LOAD2 or just find a way to load it.
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ configs/mx6sxsabreauto_defconfig          | 2 +-
+ configs/mx6ul_14x14_evk_defconfig         | 2 +-
+ configs/mx6ul_9x9_evk_defconfig           | 2 +-
+ configs/mx6ull_14x14_evk_defconfig        | 2 +-
+ configs/mx6ull_14x14_evk_plugin_defconfig | 2 +-
+ configs/mx6ulz_14x14_evk_defconfig        | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-Thanks
-/Ilias
->
-> Thanks,
-> Adriano
->>
->>
->>
->> >
->> > Adriano Cordova (3):
->> >   efi_loader: efi_load_initrd: provide a memory mapped initrd
->> >   efi_loader: binary_run: register an initrd
->> >   bootm: add support for initrd in do_bootm_efi
->> >
->> >  boot/bootm_os.c                  |  4 +-
->> >  cmd/bootefi.c                    |  2 +-
->> >  include/efi_loader.h             |  4 +-
->> >  lib/efi_loader/efi_bootbin.c     | 20 +++++++--
->> >  lib/efi_loader/efi_bootmgr.c     |  2 +-
->> >  lib/efi_loader/efi_load_initrd.c | 71 +++++++++++++++++++++++++++----=
--
->> >  6 files changed, 84 insertions(+), 19 deletions(-)
->> >
->> > --
->> > 2.48.1
->> >
+diff --git a/configs/mx6sxsabreauto_defconfig b/configs/mx6sxsabreauto_defconfig
+index 870b7a1be10..25b0b11342d 100644
+--- a/configs/mx6sxsabreauto_defconfig
++++ b/configs/mx6sxsabreauto_defconfig
+@@ -13,7 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="imx6sx-sabreauto"
+ # CONFIG_CMD_BMODE is not set
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="mmc dev ${mmcdev};mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
++CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_MAXARGS=32
+diff --git a/configs/mx6ul_14x14_evk_defconfig b/configs/mx6ul_14x14_evk_defconfig
+index f841b21c016..737a079eaa7 100644
+--- a/configs/mx6ul_14x14_evk_defconfig
++++ b/configs/mx6ul_14x14_evk_defconfig
+@@ -24,7 +24,7 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x88000000
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev};mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
++CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+ CONFIG_SYS_PBSIZE=532
+ # CONFIG_CONSOLE_MUX is not set
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+diff --git a/configs/mx6ul_9x9_evk_defconfig b/configs/mx6ul_9x9_evk_defconfig
+index 11a18d16f52..964d00a4085 100644
+--- a/configs/mx6ul_9x9_evk_defconfig
++++ b/configs/mx6ul_9x9_evk_defconfig
+@@ -24,7 +24,7 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x88000000
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev};mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
++CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+ CONFIG_SYS_PBSIZE=532
+ # CONFIG_CONSOLE_MUX is not set
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+diff --git a/configs/mx6ull_14x14_evk_defconfig b/configs/mx6ull_14x14_evk_defconfig
+index 316f74c278b..369bc0f2e0a 100644
+--- a/configs/mx6ull_14x14_evk_defconfig
++++ b/configs/mx6ull_14x14_evk_defconfig
+@@ -14,7 +14,7 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x88000000
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev};mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
++CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_ARCH_MISC_INIT=y
+ CONFIG_BOARD_EARLY_INIT_F=y
+diff --git a/configs/mx6ull_14x14_evk_plugin_defconfig b/configs/mx6ull_14x14_evk_plugin_defconfig
+index 8be5963a433..97d4f9fc65f 100644
+--- a/configs/mx6ull_14x14_evk_plugin_defconfig
++++ b/configs/mx6ull_14x14_evk_plugin_defconfig
+@@ -15,7 +15,7 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x88000000
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev};mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
++CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_ARCH_MISC_INIT=y
+ CONFIG_BOARD_EARLY_INIT_F=y
+diff --git a/configs/mx6ulz_14x14_evk_defconfig b/configs/mx6ulz_14x14_evk_defconfig
+index 2c13dd4dbc3..1a49bc2cf01 100644
+--- a/configs/mx6ulz_14x14_evk_defconfig
++++ b/configs/mx6ulz_14x14_evk_defconfig
+@@ -14,7 +14,7 @@ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x88000000
+ CONFIG_SUPPORT_RAW_INITRD=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev};mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
++CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_HUSH_PARSER=y
+-- 
+2.34.1
+
