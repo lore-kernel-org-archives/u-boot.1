@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5FFC35FFC
-	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:05:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D812DC35FFC
+	for <u-boot@archiver.kernel.org>; Wed, 19 Mar 2025 15:05:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E48C81F7B;
-	Wed, 19 Mar 2025 16:04:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A467D82033;
+	Wed, 19 Mar 2025 16:04:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hxyBYXMn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d1OHh2Rq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB3CE80FF0; Wed, 19 Mar 2025 16:04:08 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id E264F80FF0; Wed, 19 Mar 2025 16:04:13 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8E7982033
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 16:04:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF4EC82033
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 16:04:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e63162a0so10304011a12.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 08:04:06 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5deb6482cso1690292a12.1
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 08:04:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742396646; x=1743001446; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742396651; x=1743001451; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RLb/hRBQRKSYML5DF0DoHenIMuGcyKNvvlNQOiN1Qfs=;
- b=hxyBYXMnsXsTRm0enty0y2qv4hCsvQ/ylZNbI6pTiD/XMUI6U/zBc5FIPbOGHHIxX8
- 33IlQjUPJjv9JhcAPLrk5EqmTBBiXn8pbnnP+JCGkln9XqWTpVtQC0lc4BgOiEKyJk1Z
- q4i76jVErxaVHAwI3RI1IIy9At9F2bBUGuvXM=
+ bh=Bw4JP66cGwYWu/n/ckSzL/a+7yOwIB99VPw4zub/fOE=;
+ b=d1OHh2RqyoMGM6f1KYoXM7XWwiIiUFLw74vJ4Y1Mi4AZ4HyIapdzR5+R0vxhXAur/t
+ Js4V5j50zISaxS1r9D+5+nSg7dbXdN3yfoWqb7IaUXEJRTIafrYwf9aWu73Sz4xu1p0l
+ CfdJANIk2oAXoI7MnYSgmzW5hTDl7Ter7YQZU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396646; x=1743001446;
+ d=1e100.net; s=20230601; t=1742396651; x=1743001451;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RLb/hRBQRKSYML5DF0DoHenIMuGcyKNvvlNQOiN1Qfs=;
- b=HAhL++mVpT3Sd3iVuntsgqzBt4MSVpGVqq+9O/d1lWAVu0XO0zeNV2rIcOqrcSyivN
- U4R1+F9nvI2vHxWs02XnJHundvbGC7kBLlMvN8irC+MQe6kXpheXGJOOWX1yYgrNZE30
- btCTSTU50KoedrbcDG7Td1UEVbS0wuLdIkNwIqtHT0yAuRVw8iXBOdrwRXBLruAPpsvq
- b72MIUeI0y87xVTy21slJnjDJN/bAbZq+V76rRzT0Z+LlLTua6ItH4V4AffYNwikSu8H
- /U6ZO5M7sAe3exvrPKxGqaUJvN5F0PanELC+r1BkeYg+uTWBxyeFTR7zPF2bLPLgEcJ+
- Q0yg==
-X-Gm-Message-State: AOJu0YxNuVaBVVk5GhwnVzBM4I7pv8aQ2QA/zr020w6SsbOtEcqzBqg5
- V0oFe6+ycgWe2bHMTK7omUKIFxC10EYJPwxmNfwEOLzDVrgYgMAD7QXOVSl9ILK+8c+6thGLeId
- dOXf4To/ASTpOtFCjoTXSuq4a5jB5K0x7Phlm
-X-Gm-Gg: ASbGncsuW2LGRxXth81m8DpkouS+/bhSfC/CMGCvWAdur7PmfWO3qoLimhbnqjURvjD
- D42GF0KSTRdi0/chirUniVEzZnwJ1J/nByWpQlV0SkLqnLgXnn5cO90H0svy7/D8B0fqnkoeK73
- DxfUV4HUbe8vj/W3Up/kI76k6WwPs=
-X-Google-Smtp-Source: AGHT+IFSRObOOWin1KuYUL4oqWBCyq2K+CkJ1ndj1MHkENmp9mi7nquQ2jDnBSfzSBs+09Wt1y9K+V66qlJItxBm6Fs=
-X-Received: by 2002:a17:906:d7cc:b0:ac3:afb1:dee7 with SMTP id
- a640c23a62f3a-ac3b7dd4e7cmr359780966b.28.1742396646179; Wed, 19 Mar 2025
- 08:04:06 -0700 (PDT)
+ bh=Bw4JP66cGwYWu/n/ckSzL/a+7yOwIB99VPw4zub/fOE=;
+ b=WpX07ERrk6iwt+GoV83+mBj2TnJJ+KiVTDw9paiOR8ZbhJcX4NKfJVIsKxrHUppafs
+ BS4pjzbiJETsM1Q+ZPqSUMXyYvmUKuaeq8rxd7iG4nAx0VwkFw5OW0Qf/ixUEymAer2Q
+ QUydgIw6ZgVGkLOBfQN/eTUvUleysiC8/UFWySIzXgEPj6O3vPpPkbadHctDyAvHcuef
+ qO4yIL7EMIhmJVtY+mg/p7IhwHzcX18436DS1Hmucrsjo/E4Wqc40bA819q0MYDz1oZJ
+ CeZNfhSLLuaN4DdepeC25O2PWqERs1Qu6+ZqZPXq5lwIF1NGuQGPD+aenCM1QcJ71z9B
+ ElPA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUsVgZfPtRysyLL6ayMwnrFZG8d1YRSQRNO+wCUXNvNRJDldCFLKq209x88CW4lmPtzg1WJwek=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2VySFqOYvCY64RY+vL5LJFmC0Km1TwVR1P1JZ+YfdCGEC6VvF
+ Ra9/kLiTRWCWU86WLMMFoITyd2HFuE3E6AgjF7d977kYC2VNoU6Ll5ZXGTsxlvH+MDFLZbWIRT0
+ pPmPljuUVOWz0+YT4cnWy6f6QEzaz85W16ZMy
+X-Gm-Gg: ASbGnctQlQeUwpMHhcwSceTqUdJgM8HquLt+4S5Tdocu2AA65G7dIfqkfaEgDk2zKqu
+ /yL41YRLd1QgWWgQEbu9YPf9HVFDniTDVOmde/cIocqkMnDglp0TlxormQxuULMPUqS7E1Zbhhb
+ v6yqPkfiZCUkK4pFdjwPqdcLu6elYAv/xwvv/QoA==
+X-Google-Smtp-Source: AGHT+IHfCVtBCsitmjvT2Q60OjjUGdmTCW6HJQ0Qc1k+EMvpTudaPZtchJPlQ7z/bI+OoZt35nPQdFz8Mqaa00Wf1Xo=
+X-Received: by 2002:a17:907:f50a:b0:ac3:3e43:f451 with SMTP id
+ a640c23a62f3a-ac3b6abe286mr334000066b.5.1742396651123; Wed, 19 Mar 2025
+ 08:04:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319114947.2188805-1-sjg@chromium.org>
- <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
-In-Reply-To: <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
+References: <20250318104659.1114340-1-jerome.forissier@linaro.org>
+ <20250318104659.1114340-11-jerome.forissier@linaro.org>
+ <95cadc8b-2922-4bd2-8a0c-8ecdb5885bed@denx.de>
+ <e6549ff5-b2dc-4e32-9a6b-c18ed963945a@linaro.org>
+In-Reply-To: <e6549ff5-b2dc-4e32-9a6b-c18ed963945a@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 Mar 2025 15:03:53 +0000
-X-Gm-Features: AQ5f1Jq-uqa0X9n4c_LyMPGlKNwLPMKItJqGNuAuoI-HcqzabAq32U1kWtJVlXI
-Message-ID: <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
-Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Wed, 19 Mar 2025 15:03:57 +0000
+X-Gm-Features: AQ5f1Jqnv9LP2tYzfc3pDSElxe4Rn1c73bD23rT1G5qmsZ9EtqR6bhtyVNSuNns
+Message-ID: <CAFLszTji6M4s4Q0u0=Wf57oQUwy8Hxnkzf_x8p4HVP8iU=YfQw@mail.gmail.com>
+Subject: Re: [PATCH v4 10/14] dm: usb: move bus initialization into new static
+ function usb_init_bus()
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dragan Simic <dsimic@manjaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,102 +95,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Jerome,
 
-On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Wed, 19 Mar 2025 at 11:44, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Hi Simon,
+> Hello Marek,
 >
-> On 3/19/25 12:49 PM, Simon Glass wrote:
-> > Logging of function return-values is used very frequently in U-Boot now.
-> > Add a few helper macros to make it less verbose to use.
+> On 3/18/25 13:20, Marek Vasut wrote:
+> > On 3/18/25 11:46 AM, Jerome Forissier wrote:
+> >> To prepare for the introduction of threads in the USB initialization
+> >> sequence, move code out of usb_init() into a new helper function:
+> >> usb_init_bus(). No functional change.
+> >>
+> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> ---
+> >>   drivers/usb/host/usb-uclass.c | 88 +++++++++++++++++++----------------
+> >>   1 file changed, 48 insertions(+), 40 deletions(-)
+> >>
+> >> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+> >> index bfec303e7af..cc803241461 100644
+> >> --- a/drivers/usb/host/usb-uclass.c
+> >> +++ b/drivers/usb/host/usb-uclass.c
+> >> @@ -287,9 +287,55 @@ static int usb_probe_companion(struct udevice *bus)
+> >>       return 0;
+> >>   }
+> >>   +static int controllers_initialized;
+> > I'm afraid this won't work, you will have to track the controllers in a list somehow, because it is possible to unbind DM devices even using the 'unbind' command from U-Boot command line.
 > >
-> > It turns out that the log_ret() variants are not so useful, since it is
-> > not obviously where the error is coming from. So only the log_msg_ret()
-> > variants are worthy of these macros.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   include/log.h | 26 ++++++++++++++++++++++++++
-> >   1 file changed, 26 insertions(+)
-> >
-> > diff --git a/include/log.h b/include/log.h
-> > index 4f6d6a2c2cf..bdda7af570c 100644
-> > --- a/include/log.h
-> > +++ b/include/log.h
-> > @@ -380,6 +380,32 @@ void __assert_fail(const char *assertion, const char *file, unsigned int line,
-> >   #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
-> >   #endif
-> >
-> > +/*
-> > + * LOGR() - helper macro for calling a function and logging error returns
-> > + *
-> > + * Logs if the function returns a negative value
-> > + *
-> > + * Usage:   LOGR("abc", my_function(...));
-> > + */
-> > +#define LOGR(_msg, _expr)    do {            \
-> > +     int _ret = _expr;                       \
-> > +     if (_ret < 0)                           \
-> > +             return log_msg_ret(_msg, _ret); \
-> > +     } while (0)
-> > +
-> > +/*
-> > + * LOGZ() - helper macro for calling a function and logging error returns
-> > + *
-> > + * Logs if the function returns a non-zero value
-> > + *
-> > + * Usage:   LOGZ("abc", my_function(...));
-> > + */
-> > +#define LOGZ(_msg, _expr)    do {            \
-> > +     int _ret = _expr;                       \
-> > +     if (_ret)                               \
-> > +             return log_msg_retz(_msg, _ret);        \
-> > +     } while (0)
-> > +
+> > Also, why not simply track the controller state using DM in the first place?
 >
-> Mmmm not sure this forced return call is a good idea, this would forbid
-> us from performing some unwinding for example.
+> I'll keep controllers_initialized local to usb_init() and use device_active()
+> in the second uclass_foreach_dev() loop.
 
-Yes, it is really only for simple cases. Without the return, there
-isn't much value and you may as well not use this macro.
+Could you please take a bit of a look at collecting the USB-scanning
+state into a struct?
 
->
-> I don't really see how that is better than simply calling
->
-> return log_msg_retz("abc", my_function());
+We should be able to call it using iteration:
 
-That's not the intention. It actually replaces:
+struct usb_iter iter;
 
-ret = my_function();
-if (ret)
-    return_log_msg_ret("abc", ret);
+usb_iter_init(&iter);
+usb_iter_process()
 
-I use this a lot in my code. You can't always just return, since there
-may not be an error.
+It could collect all the devices it finds into an alist and then the
+caller can take a look.
 
->
-> ?
->
-> If we were to keep this, I would recommend to rename the macro and fix
-> the docstring because it does not only log if the function returns a
-> non-zero value. It does actually return.
->
-> So something like
->
-> LOGZ_AND_RETURN(_msg, _expr)
->
-> maybe?
+The reason I am keen on this is that it will potentially allow removal
+of the time delays in the USB stack, so we can deal with sticks which
+take longer to respond.
 
-Sure, longer names are easier to learn, but then it is so long I doubt
-anyone would use it.
+I may have this wrong, but it seems that the primary delay is in
+usb_urb_submit(). So what we really need is an usb_urb_async() which
+enqueues the urb and then another method to poll it. That would
+perhaps allow much faster USB since all devices would be scanning in
+parallel, including individual devices on the same hub.
 
-Perhaps LOG_RET() and LOG_RETZ() ? But they might get confused with
-log_ret() and log_retz(), which I am actually thinking of deleting.
-
-I would like the shortest possible name to avoid spilling functions
-onto the next line all the time.
+Turning the USB stack 'inside out' is how I've made bootstd work. I
+means that devices which are found can be reported as they are found
+and we can potentially wait a long time for the long-tail devices,
+while still returning immediately to the cmdline so the user can
+continue.
 
 Regards,
-SImon
+Simon
