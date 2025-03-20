@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F3DBC35FFF
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FABC28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:14:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C4E18129F;
-	Thu, 20 Mar 2025 15:00:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BA6F180540;
+	Thu, 20 Mar 2025 15:14:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XYIY17S6";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742480049;
+	bh=R2s7cD1QygNZxHXG26AOa0TNTkLG/VHPchhKUc9EBd4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jke1YUpseIWoKojHS/TC6bEjKRMXnyZ2Tlt+HcAK6J6bWFUJdkv8mZfAj6Dz09lVq
+	 MZUAdSRGS5O0ukwMPph0eWctQEosqGXEVMzbyDLBS8kkBpHGwZjGqsN0J+PIGnSZYV
+	 LLdDSeRYjFsZf6hUdjgap/wuA5lV/Ti+VWGpk7Bf8va4QdO3zTsqduU98Hy1zxkLbf
+	 SUfl+cB2lUO5eOWu6NQ7CmYNAJj+JQ8bN8mDn9hwph/Glwi1w4igbnd1tPdruQD7XV
+	 KH7Jr1LMIEG7QFFuf+aByMkgQH06aoerBdkiZoOapPBSlVCnPlX4f5wksixi1SciCj
+	 lfDkwVewghJYQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F36D881101; Thu, 20 Mar 2025 15:00:49 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2E373806FC; Thu, 20 Mar 2025 15:14:09 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4927F819B1
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:00:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B0488003E
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:14:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2ff64550991so1081300a91.0
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:00:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742479245; x=1743084045; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=A8634JPKmY+nq+QA5YUua9+6dhYR7I+bxyt/wOcsVWI=;
- b=XYIY17S6mBdX0oeFgoeiWhcYn98Fl9rQpuwXiK9QtUm8HWFE9lRK3D9KPbVAXZOYmG
- RsNncwt7yFf5OJKhvwWPz8M/nMzHGvb+PfYPtRyAZqzHMOieEbvT/SiO1yUzoLBq/KIi
- KEsfsPl+7mMvjzpV1sdxD3dt50n72CbKixXDE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742479245; x=1743084045;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=A8634JPKmY+nq+QA5YUua9+6dhYR7I+bxyt/wOcsVWI=;
- b=SmWUjf6VjDS7vdfPLV4THPkjhawGHORw5r+HgjfZg2ssDaYdrfZL/LksPAZqjsQ/SC
- Z3uiwgs1E1DFMDhrRRGZAhvEsgYODH4sZPY+I+erEreGqB8cD1p0Bdhod9DTtJKJzy81
- Vxp3G6sqkSq3eHzdum3jBuGcX/snJOzKSZWJlUTI5GNNmluUaP3C6ww7t1PYw4fd2tu1
- uCzOkICoadJKoKsfjb0zzt03mGaaI6+G8sLZrbnlRnRIdwh5EmJq4pl4ro1AoIvZhymR
- dl+F5sP4pTWpObz4Eurc0ziuAYxLLQ+gzZLZ82I/1h8/pXPRJbw/I7VWkIWqfSbywXQz
- +cmA==
-X-Gm-Message-State: AOJu0YxCFV/6oqFxy1AZgSIRvu9oGoJ2mBkLbB630XlkG9u2+YEEsfIk
- FFvzJ/6e7ZUb79xP51fyAVtHgfd9VBo0umpAeHSlWRvM2OhCltDgoyYLFOWy+dyM/tH4ZJbLLjw
- b
-X-Gm-Gg: ASbGncv6XgRivekuau1Q6n0J6vjFNSsExP0+IKR7uOaUmxBlEHM4/TRnDKUKV6BE5NO
- iTZekEVHtnkMWTDQkVGupgWGmDMrfak+btck8TP7ADAzdy4zEKvTRxbkQgxyUyGoyUfhzxLKeFC
- ivTOL8wwtVIOi5kZJ2dO/3I/r+CstOSOwH2Fu4lmZgV0ERAV9w5gCiS4ANiE5Cxc95/KIsMgVy3
- UjC0qLVnqyG77iyyP1uMkYH1YkGobjYzyqfY8S+KI07khszU46WGmNvvAZZ2wRjC1kj70aRWkzp
- KlV1MQk20dNjPIj3xAI9cma1BJjXh4ahdAgd9ksp1wxJFlG2
-X-Google-Smtp-Source: AGHT+IGLPhZInPg18i7/dwZ9naLhlt84vVu/woqrqv4LIq6Wen/9RSQHQbh5+yhHjCCA82GJ0dQv6g==
-X-Received: by 2002:a17:90b:4fc3:b0:2fe:7f40:420a with SMTP id
- 98e67ed59e1d1-301d52c42femr5760557a91.17.1742479244614; 
- Thu, 20 Mar 2025 07:00:44 -0700 (PDT)
-Received: from bill-the-cat.. ([187.144.138.125])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-301bf59cd49sm3857532a91.22.2025.03.20.07.00.43
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 07:00:44 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH v2 10/10] Dockerfile: Update to drop virt-make-fs packages
-Date: Thu, 20 Mar 2025 07:59:31 -0600
-Message-ID: <20250320140030.2052434-11-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250320140030.2052434-1-trini@konsulko.com>
-References: <20250320140030.2052434-1-trini@konsulko.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="aV755Z33"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2DDE010204043; Thu, 20 Mar 2025 15:14:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742480045; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=R2s7cD1QygNZxHXG26AOa0TNTkLG/VHPchhKUc9EBd4=;
+ b=aV755Z33I5NqhMo7TCTSU287DjF57oXDBeKxPOtsA1S4PpDT+eTtk9I23YOTxa01/PhOoJ
+ lHWBPttEc9JTyTdpPvUaaUBMDZ4NRXUIgNCAbHn+rATFD+Ij4fc/oBloV72enQd5q/oDxo
+ bmO0e5N6Eso/+IVlDcfY//94kJrM/Xn2LtrN7tN94ecW3Uxw+DxPhMCqwqdb/da5/ZzEnG
+ vGLQRaREXxkSisui92OtEKyPmApjPjfoIFmUbz6Jcya4YZx9WXCJztfVgPZKe9yIH/kYD5
+ xPmBflfDFFag3WoXC2yfzsNQ4+EEgBs2h2QEiRlZuVzutftYH8R4x/xf6OyPRg==
+Message-ID: <513b3e03-72d6-4997-8fb7-ca5d8a530097@denx.de>
+Date: Thu, 20 Mar 2025 15:14:03 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tiny-printf: Add support for upper case hex values
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Benedikt Spranger <b.spranger@linutronix.de>, Simon Glass
+ <sjg@chromium.org>, John Ogness <john.ogness@linutronix.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
+ <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
+ <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,48 +85,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we do not need nor want people to use virt-make-fs for
-filesystem tests, remove the related packages from the installation
-list.
+On 3/20/25 3:00 PM, Quentin Schulz wrote:
+> Hi Marek,
+> 
+> On 3/20/25 12:49 PM, Marek Vasut wrote:
+>> On 3/20/25 11:23 AM, Christoph Niedermaier wrote:
+>>> If tiny printf is used with 0x%08X (upper case X) the output is
+>>> always 0x00000000. It could be confusing if upper case instead
+>>> of lower case is used intentionally or accidentally because the
+>>> actual value is not output. To avoid this confusion, tiny printf
+>>> is extended to support also the formatting with %X.
+>>>
+>>> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+>> TINY_PRINTF is meant to be tiny, i.e. not consume a lot of space, at 
+>> the expense of functionality. This is meant to be used in size 
+>> constrained environments, like the SPL. If you need full vsprintf() 
+>> formatting support, disable TINY_PRINTF in your config and use the 
+>> regular vsprintf() implementation.
+> 
+> The issue is that disabling TINY_PRINTF may not be possible (size 
+> constraints) and some code is compiled for different stages and people 
+> typically don't check whether the format used in printf is valid with 
+> tiny_printf. I've had this issue already in the past, I vaguely recall 
+> "complaining" about it on IRC.
+> 
+> Maybe there's something we can do to verify that the code is working how 
+> we expect it to work, regardless of tiny_printf/full printf selection? 
+> checkpatch or a compile-time check for the formats maybe?
+> 
+> But yeah, essentially the whole thing is... if we continue like this, 
+> we'll just end up getting closer and closer to the full printf which is 
+> not something we want :)
+Shall we maybe patch tiny printf to print '?' on unsupported formatting 
+characters, or outright complain that users should fix their code ?
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- None
----
- tools/docker/Dockerfile | 5 -----
- 1 file changed, 5 deletions(-)
+For the %x/%X thing, we could technically fall back from %X to %x , 
+which would do the printing with minimum footprint increase, albeit 
+slightly malformed:
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 569912303fc9..f28fbf97cac6 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -91,7 +91,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	libconfuse-dev \
- 	libgit2-dev \
- 	libjson-glib-dev \
--	libguestfs-tools \
- 	libgnutls28-dev \
- 	libgnutls30 \
- 	liblz4-tool \
-@@ -105,7 +104,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	libtool \
- 	libudev-dev \
- 	libusb-1.0-0-dev \
--	linux-image-generic \
- 	lzma-alone \
- 	lzop \
- 	mount \
-@@ -142,9 +140,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	xxd \
- 	zip
- 
--# Make kernels readable for libguestfs tools to work correctly
--RUN chmod +r /boot/vmlinu*
--
- # Build GRUB UEFI targets for ARM & RISC-V, 32-bit and 64-bit
- RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 	cd /tmp/grub && \
--- 
-2.43.0
+diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+index 0503c17341f..48db7b1f78f 100644
+--- a/lib/tiny-printf.c
++++ b/lib/tiny-printf.c
+@@ -284,6 +284,7 @@ static int _vprintf(struct printf_info *info, const 
+char *fmt, va_list va)
+                                 islong = true;
+                                 /* no break */
+                         case 'x':
++                       case 'X':
+                                 if (islong) {
+                                         num = va_arg(va, unsigned long);
+                                         div = 1UL << (sizeof(long) * 8 
+- 4);
 
