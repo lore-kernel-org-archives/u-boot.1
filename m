@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D148C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 17:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39040C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 17:40:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E28C806FC;
-	Thu, 20 Mar 2025 18:40:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8CC4C8070C;
+	Thu, 20 Mar 2025 18:40:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VM7yxFP/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vn3mTeJE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2152B8070C; Thu, 20 Mar 2025 18:40:18 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 21082803CC; Thu, 20 Mar 2025 18:40:32 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6092803CC
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 18:40:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6C668141E
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 18:40:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2235189adaeso22173755ad.0
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 10:40:15 -0700 (PDT)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-223f4c06e9fso19246385ad.1
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 10:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742492414; x=1743097214; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742492428; x=1743097228; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a1GaULRd4zTKjNs/8F/4dUgiUP9iApIoy/93nO8euq0=;
- b=VM7yxFP/A72tMO3wqlUyZ98+uCjDxvDkbvSEliunVjNHs4kOUbDiMsWik0yU4Wks/4
- 7RoNgppEX9kDL5JvtFv+s1OVBthQ1bXmXcZVYOskDsFV944B2NULbRMnvvYxwDtBmObD
- O7CL7PVyQitntTCbhje5IiYSXf7zMfQlc8vLI=
+ bh=xcaNaTVv/izIdChPgGBFrga0nzm9rNzKOUC82DIKo/o=;
+ b=Vn3mTeJESzALVjbuWWvvfyRgusOS4OH5d+Z6NKZWFLNebKrCmdIYL0sXYBSkppmljW
+ kOhIVOeTkrVTy7r199IyQfRazxCGSb4KMZTEH8r9vKZDAt2btrM1VVCTX4xYu5JEKfR9
+ U3k4lP7mEy5wYNtK+rxSSABJOeC3bzNi59CW4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742492414; x=1743097214;
+ d=1e100.net; s=20230601; t=1742492428; x=1743097228;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a1GaULRd4zTKjNs/8F/4dUgiUP9iApIoy/93nO8euq0=;
- b=R4h+xxwzMHSMufc8J4Hhi2ZqFXPxl3cdI//SJaFDe2M9Zsh2JpNdA6qOkf5ROOJnpB
- +Hd9eHMRCDw7mvbztucBUXhAUNTX6nJpFVpPiUJ2qAxMdTLgJMFWSI99vg1McNGMqWTT
- fBk/Rsg4U85Rls4VCQnbZOeXuqYBNtINkcdfCJ2mkTijfaHKdcKaO7WS7AvlkDUPrD7A
- abZaybfapwF3EKtBZxsqHowm90Jgko+aK8Wg8nSKaRjRtXDffS5mZTDuZFxrZNXSMB8F
- hDIsjlvq+WxE5LgjIk0NPI/GV7uQoPz5fW2EQJzJMsApvvvqekqghMRZeYw8VgFeEde3
- LJfg==
-X-Gm-Message-State: AOJu0YxcZeCW8cQcoMdFjvxZC6A6rkzuO7umJ8jgi1l9w2sMMrQjDdlf
- 7vDapvrVub2PnkGk614MqpEEJSEalxoGcO3ye+GgyX+I5/AymrI6ySxlzTsKRk8=
-X-Gm-Gg: ASbGncs+IyaeXKk4IBR4wOxzZTEhfiCKuq6zuBEdn9E6wWiEwgniRWVlFRqzjaEZA0L
- 9kSq6l8tEcH13NbX4BJizhZHEtTMI3sqUHM1PBFGaaRq7M1dwJTC+7kZZeVZxtiJGLsTGRY851e
- Uw3EzY0ydR40FEtph7/YdRO2IEX9w4n+udcPkrlR1oQOUTN5swc4evLcLBtzfK1w4CZXUJUCxsG
- N9M4O/ebn539/gbe/pyv3Jkut5NDhmKa93JKI8OtGtWAuWRPGycrODuoT1NFcdBqEf984l+meMS
- 5a11swrA11NCKlb142LQ7SSZQpuD2hTgd7ddW2JYMfFt
-X-Google-Smtp-Source: AGHT+IHwj8ws3kX3l33uhaDEfUR2U8fML/hMF76IYOhnYag+5GV1HNEwdovOsvdIhOoJDqSwAUlfCQ==
-X-Received: by 2002:a17:902:ea0c:b0:215:742e:5cff with SMTP id
- d9443c01a7336-22780ad6afamr5397735ad.16.1742492413893; 
- Thu, 20 Mar 2025 10:40:13 -0700 (PDT)
+ bh=xcaNaTVv/izIdChPgGBFrga0nzm9rNzKOUC82DIKo/o=;
+ b=JRgiaEGtLBlxcNk+jfqoA99QIbSs373Q6KvdVk/9Ei86a7r2IfgyGW8tg3ghUaC9j6
+ WLtAQFNBP9s21r79qqQn0Q8PzPMtc6xMx+GkRgMq24SPlD6M+oRxwtTAAJf1+om6KnEo
+ WaTVoCVdu+ekrTRkkSkfxMQM+iD4vZNJSnIv29fEk1fG9CSK91rCHcz3RU+dOrfseoqN
+ PSRichTVm2YLYSVcubORKhEGZdGJUu1XMQDw5EybhISoSE0gkVpgkUWR2NYJm2yi4c7i
+ CnSUH+BcFrYr1cpGQ0NHU7JLZeHOguaYizVSZvZm7IlPmCy8I8lHk9Eq/9R9JVZf5rzY
+ VBEA==
+X-Gm-Message-State: AOJu0YzEbPTcYTch4G7xaSHwAYgG6wcx57kDJZQpCJ0g++G1Vl4D2B0W
+ VaR65xm9KBsYRgynLUl/e5uzWwxvjtN0M53fiK6lnZRvpqgPeLp76LQSQuXYbkk=
+X-Gm-Gg: ASbGncvUYoPEAnsFfwU2fVpdqh4dNSvJrOdZ8OsKYNct3HEBLjdL2Jk8TzU0KpS984c
+ kF0vj1+eUFHAUpnC2RevmWv3CuhP5GrP/eGUrDDfmdbq5USGgkwynmZQFnlxJlE1OMve0Xb12Dk
+ RtGdhq8Q23QpUX9urspzIwn1+so5Jd+wfKLHMT5INTPyIt0vE2TnANFIXWHJOVCabLYec0daJ20
+ 4WXb0Ecr9TGl9VQTuMoScQLhuWYF8Hi5Y+IdlhCQ/qyrSMpL1qdVNHvlAZIMDsnxrjGGHG7giHl
+ AXovMHMg/Xbq4Wcf5E5JxishDgnWHbLB5lKIsAw3H5rV
+X-Google-Smtp-Source: AGHT+IHbI/rw+5QJAmhvqh2RBtUl6KrsCniXihArtp32JxWJWJXzXnQgGu66r8WyGZaudoE20CPqSw==
+X-Received: by 2002:a17:902:ce0c:b0:21f:5063:d3ca with SMTP id
+ d9443c01a7336-2265e743fd5mr76063965ad.16.1742492428270; 
+ Thu, 20 Mar 2025 10:40:28 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-227811da369sm538665ad.170.2025.03.20.10.40.12
+ d9443c01a7336-22780f45e1asm670475ad.80.2025.03.20.10.40.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 10:40:13 -0700 (PDT)
+ Thu, 20 Mar 2025 10:40:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250319234923.264256-1-marek.vasut+renesas@mailbox.org>
-References: <20250319234923.264256-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/next
-Message-Id: <174249241277.2082349.11847966495795233355.b4-ty@konsulko.com>
-Date: Thu, 20 Mar 2025 11:40:12 -0600
+To: francesco.dolcini@toradex.com, Stefan Eichenberger <eichest@gmail.com>
+Cc: u-boot@lists.denx.de, 
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>
+In-Reply-To: <20250319161704.1618876-1-eichest@gmail.com>
+References: <20250319161704.1618876-1-eichest@gmail.com>
+Subject: Re: [PATCH v1] board: verdin-am62: remove spl_perform_fixups
+Message-Id: <174249242733.2082429.3990320978456535754.b4-ty@konsulko.com>
+Date: Thu, 20 Mar 2025 11:40:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,21 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Mar 2025 00:48:00 +0100, Marek Vasut wrote:
+On Wed, 19 Mar 2025 17:16:23 +0100, Stefan Eichenberger wrote:
 
-> Renesas RZ/G2L USB support, remaining RAVB ethernet fix and
-> KSZ9031 LED errata fix for next.
-> 
-> The following changes since commit 8bc3542384e3a1219e5ffb62b79d16dddc1b1fb9:
-> 
->   Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE" (2025-03-18 13:12:51 -0600)
-> 
-> are available in the Git repository at:
+> spl_perform_fixups is redundant in the current implementation. SPLs call
+> dram_init during spl_enable_cache in arch/arm/mach-k3/common.c. In
+> U-Boot, dram_init and dram_init_banksize are automatically called in
+> init_sequence_f. Therefore, SPLs and U-Boot always determine the correct
+> RAM size. During Linux boot, fdt_fixup_memory_banks adjusts the RAM size
+> in the Linux device tree, ensuring correct RAM usage.
 > 
 > [...]
 
-Merged into u-boot/next, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] board: verdin-am62: remove spl_perform_fixups
+      commit: 7ad543619463e8817b3044041ac74749a217bbe0
 -- 
 Tom
 
