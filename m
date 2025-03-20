@@ -4,89 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E614FC28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:18:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D590C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:21:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75377806FC;
-	Thu, 20 Mar 2025 15:18:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B9E2806FC;
+	Thu, 20 Mar 2025 15:21:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="slK+JvXY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cHApol77";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33B9C81101; Thu, 20 Mar 2025 15:18:45 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 6F88480540; Thu, 20 Mar 2025 15:21:30 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB85A80540
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:18:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10EA6807AE
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:21:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-3012885752dso1451225a91.2
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:18:42 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-301cda78d48so1577898a91.0
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:21:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742480321; x=1743085121; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742480486; x=1743085286; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KRGjyMG+1j0HSgccAhJJv377703fuMd3TVKD3svYI94=;
- b=slK+JvXYfHnifABmFG3aZh1yJVWU3H77PsZhFYkD2HBEJByzkbP9uR6KyQqQ168Oer
- TMTl8XEiav49u3GISSpqcjuKtlW+IPwUePH66Q9qXlljBhbTuILAngTVU0Q2edGi6eKd
- 7FM1l5OacaWe6LHmZf1ztKh6b6oGyY7Xkx5RE=
+ bh=ivSCZU4ry6WYyZLhqWM6aWuWtjImGf3l5IWkiCfNENA=;
+ b=cHApol77NW9t/9r1w+oKZJ3NKmu4CBe967ErOoiaH5L7RZnOa+SRZKpqsM7n1LGYqH
+ oQSCcFVcVj51dinaUpOlSk7ASjyODlxaGUmyQa3wb2grcgtgY0yUV4AVbm00O1l2N8af
+ A6lWiro59c8u90qYtarniKlxA8YgRt1ZeP97E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742480321; x=1743085121;
+ d=1e100.net; s=20230601; t=1742480486; x=1743085286;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KRGjyMG+1j0HSgccAhJJv377703fuMd3TVKD3svYI94=;
- b=HQsofqyMyilr6CBcMJIhxtvDASdghIC+4k1/r+rBGj0v50rpgHeCoVN/LOlRpRfvgz
- OZ2UXk/E9NaaRi/Di1j0FeWNQDwg3P9qkFMbojet4PHXc+qEXvMiyV6mdNgFiOrEnQaA
- ON0qj37AZi0wJMaJ4/af77lcx26/C4hyuwLRb2trVFdgBqKGD4o4gT+3Zm++fqwmAfd+
- 7RfmERgHJYJTwkU0wfZO4sFdwOYa42h46z2tC1jKqTZ6eiXODy992/mcCu2ciKCclRrV
- 7cUtrmUDfi68eCSf9W3lG/22M2ORw5IW4AeeUU9n1ZbhYu4whCprVpY3D1Gyvi9g1P8f
- udLw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVMbO9k/q3M3xgKn8lY6N76nvci4sED858DIJlEXmH0lz+JWXqyh5SV1ZtIEK+3MnWSffrFD/Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3RPk4DAa9I3c2htEI/HeNnQAX35G5zs+QqN1HosXVFkKNJfe1
- ed2jTWozZ4/pTGZDPndWqDfgaNR6z5GK40hG1AI6VJWZ6v7IPyzh4QVfLZWXvvY=
-X-Gm-Gg: ASbGncsM+2AlN+5iM3/NUfhKKtnvMFPPnuF6mN45OPADxE0GaPH5lQxfxTMgM0Y/Ocn
- OU9igFUU1IUA9nKmTOG5NLciUSUnkQlVu3KPn2R8ooSo2dWviQY4dROirpdkiVtfgsUuTpW+no1
- Lt+gW+4ZSFKTLE1b2fS6BYuVsMREcnSV8bx02fiS1no0A5JMxI4PiGwurhos6gkKj+JiJ8u5I6x
- N8G46iUl7clBLcOuLrLg/8bCKJFmNGiZumRGCh6KH0f+LLuQGwt1065zVcDrHIztkytxJSQr+NV
- LU7pWUA3zOgdrIh/TrCp58kAlptEV0YNkipk/8EuUzNLZQ==
-X-Google-Smtp-Source: AGHT+IErXXKXp6TJ1qEiJadQWtNbovO9xqdKf87DMvmalnU0BJT1bttWD6EYjaScfJWlw9px/NHqQQ==
-X-Received: by 2002:a05:6a20:7f87:b0:1f5:8748:76b0 with SMTP id
- adf61e73a8af0-1fbecd36bffmr12326170637.29.1742480321079; 
- Thu, 20 Mar 2025 07:18:41 -0700 (PDT)
+ bh=ivSCZU4ry6WYyZLhqWM6aWuWtjImGf3l5IWkiCfNENA=;
+ b=c65YyLTFe2S3RdjdFsLKaXF1YTSx0w8qDe2q4ibLXT6H8R/BQRgAC/vESw5ONGFvZ/
+ Z3mnd1QBoUjAyCYsWQl/G7OiBT6/L/m2yQiIEgpqv7WQjTovpUm1fOHkST+tToge/k8F
+ 4AHYWIBeFfQ0TzOWl93z7ITCAuqoZg86HZt4k/7+E5VsK2OXCGglPtNbkh0etqqhigYP
+ y0AV+23xRhtqatlXbDcti7QSG/3ZzzoWeM6XftFLMMOGWTWaYh9arFwC0qRFnRWy/Em0
+ EoY0v6oMAYJaSxWIf8XadDxOFAw4EVvU4MIJVecfefPxvNJlie6eo2VSkPiAm5XbgjlI
+ ENwQ==
+X-Gm-Message-State: AOJu0YwlRHh0Un2VCtSWPgRPQBJeser9Tt+RVbazn+LgSMlQqWDXRsX0
+ fWsE5LYAfCp75x10QigrdhMoz7um+MnFuZf4udy8WHvX+91uFqrGiFZ5d8lv62M=
+X-Gm-Gg: ASbGnctQsQtidvDhfdk+ePepqwglbHbiKyZ2k19kBaIY11rq+egz506z88k6jQXOhD0
+ 7P2Ec8ufLWGqv6fWOFgja3ia0ADjryinXiKSBdYU9K/Z5GR7FudgHVxi7a44BoK4NkrlSa9QExW
+ 7pdnPDplgo9uUu7h1JlkzrhWc5WghiUjRffbn0pETxUzlMNtFxi7wum8OdXu7OIeA3dplgv+K73
+ 4ouLy/HOCp2mfEm3NB3/6pC5hhiptDpW26yGJrQ+L8jgMXoKXOmowlszlvangmMXwwjjfAvxVHO
+ oW4gFZqlQlE33II/Nw9a6VpfYq6CGEaFWKaCrvKlrIe0rQ==
+X-Google-Smtp-Source: AGHT+IG5XTfB1sHPljPk2V4Ygzd//vZMNUENp22kHyEiEQwngNndsuXG24M5Mb3WlV/zqTj1qVSp0A==
+X-Received: by 2002:a17:90b:1f8d:b0:2f6:be57:49d2 with SMTP id
+ 98e67ed59e1d1-301d52c3851mr6194366a91.17.1742480486358; 
+ Thu, 20 Mar 2025 07:21:26 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56e9e0fd8sm12913279a12.26.2025.03.20.07.18.39
+ 98e67ed59e1d1-301bf589bccsm3918958a91.11.2025.03.20.07.21.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 07:18:40 -0700 (PDT)
-Date: Thu, 20 Mar 2025 08:18:37 -0600
+ Thu, 20 Mar 2025 07:21:25 -0700 (PDT)
+Date: Thu, 20 Mar 2025 08:21:21 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@lists.denx.de, Benedikt Spranger <b.spranger@linutronix.de>,
- Simon Glass <sjg@chromium.org>, John Ogness <john.ogness@linutronix.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] tiny-printf: Add support for upper case hex values
-Message-ID: <20250320141837.GP2640854@bill-the-cat>
-References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
- <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
- <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
- <513b3e03-72d6-4997-8fb7-ca5d8a530097@denx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/52] expo: Various features and improvements
+Message-ID: <20250320142121.GQ2640854@bill-the-cat>
+References: <20250319145512.2391122-1-sjg@chromium.org>
+ <20250319145742.GI2640854@bill-the-cat>
+ <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uJNMT09AX6LeDz5W"
+ protocol="application/pgp-signature"; boundary="YXduJx9WB4OhdG+S"
 Content-Disposition: inline
-In-Reply-To: <513b3e03-72d6-4997-8fb7-ca5d8a530097@denx.de>
+In-Reply-To: <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,82 +118,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uJNMT09AX6LeDz5W
+--YXduJx9WB4OhdG+S
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 20, 2025 at 03:14:03PM +0100, Marek Vasut wrote:
-> On 3/20/25 3:00 PM, Quentin Schulz wrote:
-> > Hi Marek,
-> >=20
-> > On 3/20/25 12:49 PM, Marek Vasut wrote:
-> > > On 3/20/25 11:23 AM, Christoph Niedermaier wrote:
-> > > > If tiny printf is used with 0x%08X (upper case X) the output is
-> > > > always 0x00000000. It could be confusing if upper case instead
-> > > > of lower case is used intentionally or accidentally because the
-> > > > actual value is not output. To avoid this confusion, tiny printf
-> > > > is extended to support also the formatting with %X.
-> > > >=20
-> > > > Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.c=
-om>
-> > > TINY_PRINTF is meant to be tiny, i.e. not consume a lot of space, at
-> > > the expense of functionality. This is meant to be used in size
-> > > constrained environments, like the SPL. If you need full vsprintf()
-> > > formatting support, disable TINY_PRINTF in your config and use the
-> > > regular vsprintf() implementation.
-> >=20
-> > The issue is that disabling TINY_PRINTF may not be possible (size
-> > constraints) and some code is compiled for different stages and people
-> > typically don't check whether the format used in printf is valid with
-> > tiny_printf. I've had this issue already in the past, I vaguely recall
-> > "complaining" about it on IRC.
-> >=20
-> > Maybe there's something we can do to verify that the code is working how
-> > we expect it to work, regardless of tiny_printf/full printf selection?
-> > checkpatch or a compile-time check for the formats maybe?
-> >=20
-> > But yeah, essentially the whole thing is... if we continue like this,
-> > we'll just end up getting closer and closer to the full printf which is
-> > not something we want :)
-> Shall we maybe patch tiny printf to print '?' on unsupported formatting
-> characters, or outright complain that users should fix their code ?
+On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
+> >
+> > > This series collects together some new features for expo to make it m=
+ore
+> > > useful for boot menus:
+> > >
+> > > - measurement and display of multi-line text objects
+> > > - internal alignment for objects (e.g. centred text)
+> > > - editable strings in text fields
+> > > - new 'box' object to draw a rectangle
+> > > - highlighting of menu items, rather than just relying on a pointer
+> > >
+> > > Expo's boot menu is restructured so that it is possible to iterate
+> > > through various bootdevs and update the menu as new ones are found. T=
+his
+> > > is more in keeping with how bootstd works.
+> > >
+> > > A new textedit object is added, intended to provide a simple text
+> > > editor. Future work will complete this.
+> > >
+> > > With this series the boot menu has a better layout and appearance.
+> > >
+> > >
+> > > Simon Glass (52):
+> >
+> > I see you haven't internalized the "don't post massive series" feedback
+> > yet. Please, stop posting massive patch series. Figure out how to
+> > logically break things down in to smaller chunks that can be
+> > meaningfully reviewed.
+>=20
+> I could split this into two series of ~25 patches, perhaps. Would that be=
+ OK?
+>=20
+> I believe no one else is using expo yet, apart from postmarketOS,
+> except the trivial case of 'bootflow scan -m' but I'm hoping that will
+> change in the future. I believe that Linaro is mostly encouraging EFI
+> bootmgr and the text-based menu. That could be converted to use expo
+> but I doubt anyone has looked into that, particularly as grub is being
+> pushed as well. I did look at converting the existing menu code a year
+> or two ago, but it seemed better to eventually deprecate it.
+>=20
+> Also, there is a following series which I split out and will post
+> separately, but not for a while as I have a lot outstanding.
+>=20
 
-This sounds good to me, adding ? in the output.
-
-> For the %x/%X thing, we could technically fall back from %X to %x , which
-> would do the printing with minimum footprint increase, albeit slightly
-> malformed:
-
-There's 109 hits on "%X" and another 489 on "%0.X", so I think it's
-reasonable to do either of:
-- Misprint A-F as a-f (in other words, treat it like 'x'
-- Audit the callers and change them to 'x' from 'X'. We normally don't
-  capitalize the output and there's all sorts of patches over the years
-  changing them to lowercase in other places.
-
-We have done both for other format specifiers and tiny-printf before in
-the past.
+It would make sense to split expo out to its own series as there's not
+likely to be any feedback there. All of the other parts of the series
+already have something else in their subject and that would be logical
+places to split this up more and then assign to the appropriate
+custodian. Thanks.
 
 --=20
 Tom
 
---uJNMT09AX6LeDz5W
+--YXduJx9WB4OhdG+S
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfcI70ACgkQFHw5/5Y0
-tywAVwwAmvsXH9VrXJ7Kokx0ocoBBBNacvwI9PiYbLyrhjiPGbykqyd8lx0mHALy
-Wj+in1pirgGHCg2s2U6wmijGAxHBR6hfeVsXmSriFJhUS76frf7JqYC1jTzcMVZS
-Phg9bC09kS49dWNLJ+TS/YVYcwSogPrTueDbhDmqsQsLtjLN2Gn9Ae6nyeChHtAg
-g7hPvJPyuRYjzSGWRyH3bWity1l5h03jwbA1JFus6gVC6z9UN74LmHJQ5/m1t012
-RiOSjn0UwdqisNVsWOuOyy8WU7395jJYRUfD2a6fmxVtPF8vfNQUdQRH1AFkKg5U
-2w8zoTwcgcLm1VL1fo07s+kDQwzRT+uzDWxP/BGZUfgN/3W6VTZFT4nO1H58+GFU
-XG8LJklV23bLgeooaL9xIWI+RIt/UHVSn7t+7gpu7Cl/LeYP703jsmlZnMdcZI7E
-KJ6/3GBaQgYR45HO0RC73E70kLKOmfLmb3PB2F112BfKvEi1bNDkTiwtt4mPgiJQ
-4qvl1diU
-=ySJP
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfcJGEACgkQFHw5/5Y0
+tywYWAwAjuHa05REb9fyEzSj+HMfyDFe9UlxXBsScG+LmvVXxT/tmYkRoHI6tozf
+lm3ZJRRUA5rs7ODRLB+FHlbcMPx0YBRPuczFscw8yJ9fR8lSwRqlWxphprviBvW4
+4lK3VjfWlCrsY/JOWAc2enVH4r+Gz8qCCYevJA3WMj/C1zP40AxvAKlb465zNEp2
+OarkF/dpO34qea7SPueTTArRO5eMta29n1Ay8QmsdLLQf1PfaZ0wL3kvp9F+p7/2
+CANLUE7B+cY8Dj4qIGSNqHmW48BjB6TuVNCFvhEvM7EEBey2Mn3be6Rm53cYP36g
+S3GVVMCR+wEXFMqzcFtRYSXd8dKiz6lRT82YZ5Ow+DklAuQvh7b5hkxATuwB/gwp
+2o3kPl581hQiA/LaatY1rfb5wRopBeIkS4OCX2Siua/ru3RLz1fyf894kXIn6Tgp
+GFDqh9XdVd+4FrU1PuHXuY2jPaEi6t1Tv7omp4dMj5thO7b5BES8akUXiJWQogBa
+HoCLYSBX
+=LnrC
 -----END PGP SIGNATURE-----
 
---uJNMT09AX6LeDz5W--
+--YXduJx9WB4OhdG+S--
