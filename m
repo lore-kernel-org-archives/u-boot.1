@@ -4,70 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3558C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 06:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA0F6C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 06:55:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A43E8083E;
-	Thu, 20 Mar 2025 07:50:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AB2DD809D4;
+	Thu, 20 Mar 2025 07:55:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kzZLyCQX";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742453729;
+	bh=zqW462bVV5gTsieEGB9Lh2ygjTiSRZybghUtQNo4zhE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=g2sjVdUpHY4MLQa0ZYuv/4NnG/xPxv9sSwf693Hr1A6rk12NTUag1+ASZUVxjmkbA
+	 jom56oCpzp7NdD8Oe63MxwXBCpuqx4nMFSJBr1nfToF/9YJuRpf0N/+ump1vW0Ps1j
+	 iEBUaoRnpDLQjgvKjclQpuMuB7J9Cbg1lVPKSIfdzqQRSbixzTT5j6Ewty0n0F9rmI
+	 6MMF6ZgGYJgLZ03BqhnxZVAaCPB5PUYgnFgAZAj0ter8KfxnYJPwt1qll9MvNq7IEb
+	 3dUdIZZwi1WUbWCg3Kar9szNvauxDPVSk7sCW5QXepwlV5O9vLM0ubZWaI/zHCa5mz
+	 7uMYqgXrzdu8Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07F3C8083E; Thu, 20 Mar 2025 07:50:35 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9440E8003E
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:50:32 +0100 (CET)
+ id E60EC8129F; Thu, 20 Mar 2025 07:55:28 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DB7EE8083E
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:55:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52K6oUkh3147278
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 20 Mar 2025 01:50:30 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742453430;
- bh=aPgSjYMyiCIepAa64lFchU9cE3xeZRjWxnsMeujHCec=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=kzZLyCQXxN2MtMq89X/U/XFe7c7KfpuvnhgGXJMZsICRWhLk0QD63RKVkPcYRKAVa
- N8BnfDycRQiudp4D58gROsPnBk45NI71/+VNlwT+zzTSTIRfuDuPhV4rT0X8AJ5syQ
- D6fzD6X1IluqwIbVA0ior719pne/SR6xDfB/VHsY=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52K6oUjW006774
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 20 Mar 2025 01:50:30 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
- Mar 2025 01:50:29 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 20 Mar 2025 01:50:29 -0500
-Received: from [10.24.69.37]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52K6oR1q116874;
- Thu, 20 Mar 2025 01:50:28 -0500
-Message-ID: <6e0cf522-4878-4620-a2ad-db2933697a3e@ti.com>
-Date: Thu, 20 Mar 2025 12:20:27 +0530
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4ZJGYR3p1xz9tRl;
+ Thu, 20 Mar 2025 07:55:23 +0100 (CET)
+Message-ID: <9d9d3196-2e59-45bd-b388-72b75ee645e5@denx.de>
+Date: Thu, 20 Mar 2025 07:55:22 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] mux: Kconfig: Add Kconfig options for MUX_MMIO
-To: Anurag Dutta <a-dutta@ti.com>, <trini@konsulko.com>
-CC: <s-vadapalli@ti.com>, <vaishnav.a@ti.com>, <a-limaye@ti.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>
-References: <20250320063004.1069653-1-a-dutta@ti.com>
- <20250320063004.1069653-2-a-dutta@ti.com>
+Subject: Re: [PATCH] configs: mvebu_espressobin_ultra-88f3720_defconfig:
+ disable SATA
+To: Benjamin Schneider <bschnei@gmail.com>
+Cc: Benjamin Schneider <ben@bens.haus>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ u-boot@lists.denx.de
+References: <20250228192240.129406-1-ben@bens.haus>
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250320063004.1069653-2-a-dutta@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250228192240.129406-1-ben@bens.haus>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Rspamd-Queue-Id: 4ZJGYR3p1xz9tRl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,42 +73,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20/03/25 12:00, Anurag Dutta wrote:
-> Add Kconfig options for MUX_MMIO so that it can be enabled
-> in SPL stage.
+On 28.02.25 20:22, Benjamin Schneider wrote:
+> This device uses the SCSI subsystem to interface with SATA devices.
+> Trying to use the sata command results in an unhandled exception.
+> This has the side effect of also causing bootflow scan to raise
+> an unhandled exception when it attempts to probe the SATA
+> subsystem. Disabling the sata command fixes this issue and does
+> not remove support for any boot devices.
 > 
-> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+> Signed-off-by: Benjamin Schneider <ben@bens.haus>
+
+Reviewed-by: Stefan Roese <sr@denx.de>
+
+Thanks,
+Stefan
+
 > ---
->  drivers/mux/Kconfig | 10 ++++++++++
->  1 file changed, 10 insertions(+)
 > 
-> diff --git a/drivers/mux/Kconfig b/drivers/mux/Kconfig
-> index f15ee4f833f..2b95eb02177 100644
-> --- a/drivers/mux/Kconfig
-> +++ b/drivers/mux/Kconfig
-> @@ -10,6 +10,16 @@ config MULTIPLEXER
->  
->  if MULTIPLEXER
->  
-> +config SPL_MUX_MMIO
-> +	bool "MMIO register bitfield-controlled Multiplexer"
-> +        depends on MULTIPLEXER && SYSCON
-> +        help
-> +          MMIO register bitfield-controlled Multiplexer controller.
-> +
-> +          The driver builds multiplexer controllers for bitfields in a syscon
-> +          register. For N bit wide bitfields, there will be 2^N possible
-> +          multiplexer states.
-> +
->  config MUX_MMIO
->  	bool "MMIO register bitfield-controlled Multiplexer"
->  	depends on MULTIPLEXER && SYSCON
+>   configs/mvebu_espressobin_ultra-88f3720_defconfig | 1 -
+>   1 file changed, 1 deletion(-)
+> 
+> diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> index 6f1a66f5f1..1cbeee8fcb 100644
+> --- a/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> +++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> @@ -34,7 +34,6 @@ CONFIG_CMD_I2C=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_MTD=y
+>   CONFIG_CMD_PCI=y
+> -CONFIG_CMD_SATA=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_USB=y
+>   CONFIG_CMD_WDT=y
 
-
-Maybe I'm missing something but what is this config supposed to do
-exactly? It only depends on a couple of configs (is not selecting them)
-and I don't see it doing anything in the code.
-
--- 
-Thanking You
-Neha Malcom Francis
