@@ -4,66 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A354C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 18:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1504C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 19:03:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F04D806FC;
-	Thu, 20 Mar 2025 19:42:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0DD12806FC;
+	Thu, 20 Mar 2025 20:03:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="TWsnol2P";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="RmRSnNka";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6A1F8070C; Thu, 20 Mar 2025 19:42:29 +0100 (CET)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B5B1803CC
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 19:42:27 +0100 (CET)
+ id CA6158070C; Thu, 20 Mar 2025 20:03:51 +0100 (CET)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
+ by phobos.denx.de (Postfix) with ESMTP id 81EFA803CC
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 20:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1742496124;
- bh=6bDyxj2rJNVvbt7M+B67LRHv3K0WgxHu0aLG6jz/WCs=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=TWsnol2PAYlP4IvLwSlNub+738R3N7r1l98Xlo8TML1CYV2z2HL8pS64NK6ejspxy
- 8kr5Terjbvvwr4Zy4w9me/vgWFvYm+HQ2Cb+4acNyED4Xk+VQy+ZXIsilIflfgg8RE
- icFefy+HWZsuMb7EHu4L31eBnbnZtldbLDb1x41mhizkvgqE0JyFZDpA7ONmEBSk/F
- 1LQ03BIj4MZdGRO2YgAuO0HJMR0EeqZZQ5pUXJl4BFBNTPjJEnuyVItPRXKNCVe5ky
- o+smT6QL4kxoio1UP6DK93P81ive3LxPY8QAET1gqCIelY3VP9fHAFTc03pEbf1M+3
- 1GM9S/wzu8jXg==
-X-secureTransport-forwarded: yes
+ s=dhelectronicscom; t=1742497411;
+ bh=43lQRiWzpJRHSVjjc1BuO497xRXI/zrwgWm3lDTqMY8=;
+ h=From:To:CC:Subject:Date:From;
+ b=RmRSnNkaHzTG7aAdggEUa/JBOcC+ikr4WPZG4h14uD9d/Uf6kTpi9RxMmw7ODt1Fi
+ cG+t2VEs8gbnR8U/Df6Vii6EmeWMOZ3aXXyivAdBVwtrsILeN3H1TNBgPb+LHAt4wV
+ s7RD/qIsQ45qttJTXJ5tL3f5fwpittw2RQHsLCkSRHerPTNeHGDX07aCcPj85kAxcY
+ 9KIz76u8G3teRwh24zS74oLwhZha+NCEvD0rHUTO7Sepr7TkBJL8G5jsOh7d2FKTgj
+ RwgSeeBxLMWT9HhcsirzvIIGJIYQoEdJv4GzO3lfCP5qGK0umyE1J/V3z3JMJSSFRP
+ 7hsas3qECtaHQ==
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Tom Rini <trini@konsulko.com>
-CC: Quentin Schulz <quentin.schulz@cherry.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Benedikt Spranger <b.spranger@linutronix.de>, "Simon
- Glass" <sjg@chromium.org>, John Ogness <john.ogness@linutronix.de>, "Jerome
- Forissier" <jerome.forissier@linaro.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
-Subject: RE: [PATCH] tiny-printf: Add support for upper case hex values
-Thread-Topic: [PATCH] tiny-printf: Add support for upper case hex values
-Thread-Index: AQHbmYJXS9LfVQSOoEantzWfxGK4yLN72G+AgAAkmwCAAAPYgIAAAUaAgAAZBTCAACzLgIAAFAGA
-Date: Thu, 20 Mar 2025 18:41:33 +0000
-Message-ID: <6a3d121dec474f4e83bfdc8ee00d8fd8@dh-electronics.com>
-References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
- <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
- <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
- <513b3e03-72d6-4997-8fb7-ca5d8a530097@denx.de>
- <20250320141837.GP2640854@bill-the-cat>
- <b43b5a7016ed4fa08e934c294457b424@dh-electronics.com>
- <20250320182829.GS2640854@bill-the-cat>
-In-Reply-To: <20250320182829.GS2640854@bill-the-cat>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Marek Vasut
+ <marex@denx.de>, Tom Rini <trini@konsulko.com>, Benedikt Spranger
+ <b.spranger@linutronix.de>, Simon Glass <sjg@chromium.org>, John Ogness
+ <john.ogness@linutronix.de>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH V2] tiny-printf: Improve %X formatting
+Date: Thu, 20 Mar 2025 20:01:47 +0100
+Message-ID: <20250320190147.1050427-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,111 +64,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Tom Rini <trini@konsulko.com>
-Sent: Thursday, March 20, 2025 7:28 PM
-> On Thu, Mar 20, 2025 at 05:58:56PM +0000, Christoph Niedermaier wrote:
-> > From: Tom Rini <trini@konsulko.com>
-> > Sent: Thursday, March 20, 2025 3:19 PM
-> > > On Thu, Mar 20, 2025 at 03:14:03PM +0100, Marek Vasut wrote:
-> > > > On 3/20/25 3:00 PM, Quentin Schulz wrote:
-> > > > > Hi Marek,
-> > > > >
-> > > > > On 3/20/25 12:49 PM, Marek Vasut wrote:
-> > > > > > On 3/20/25 11:23 AM, Christoph Niedermaier wrote:
-> > > > > > > If tiny printf is used with 0x%08X (upper case X) the output =
-is
-> > > > > > > always 0x00000000. It could be confusing if upper case instea=
-d
-> > > > > > > of lower case is used intentionally or accidentally because t=
-he
-> > > > > > > actual value is not output. To avoid this confusion, tiny pri=
-ntf
-> > > > > > > is extended to support also the formatting with %X.
-> > > > > > >
-> > > > > > > Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electro=
-nics.com>
-> > > > > > TINY_PRINTF is meant to be tiny, i.e. not consume a lot of spac=
-e, at
-> > > > > > the expense of functionality. This is meant to be used in size
-> > > > > > constrained environments, like the SPL. If you need full vsprin=
-tf()
-> > > > > > formatting support, disable TINY_PRINTF in your config and use =
-the
-> > > > > > regular vsprintf() implementation.
-> > > > >
-> > > > > The issue is that disabling TINY_PRINTF may not be possible (size
-> > > > > constraints) and some code is compiled for different stages and p=
-eople
-> > > > > typically don't check whether the format used in printf is valid =
-with
-> > > > > tiny_printf. I've had this issue already in the past, I vaguely r=
-ecall
-> > > > > "complaining" about it on IRC.
-> > > > >
-> > > > > Maybe there's something we can do to verify that the code is work=
-ing how
-> > > > > we expect it to work, regardless of tiny_printf/full printf selec=
-tion?
-> > > > > checkpatch or a compile-time check for the formats maybe?
-> > > > >
-> > > > > But yeah, essentially the whole thing is... if we continue like t=
-his,
-> > > > > we'll just end up getting closer and closer to the full printf wh=
-ich is
-> > > > > not something we want :)
-> > > > Shall we maybe patch tiny printf to print '?' on unsupported format=
-ting
-> > > > characters, or outright complain that users should fix their code ?
-> > >
-> > > This sounds good to me, adding ? in the output.
-> > >
-> > > > For the %x/%X thing, we could technically fall back from %X to %x ,=
- which
-> > > > would do the printing with minimum footprint increase, albeit sligh=
-tly
-> > > > malformed:
-> > >
-> > > There's 109 hits on "%X" and another 489 on "%0.X", so I think it's
-> > > reasonable to do either of:
-> > > - Misprint A-F as a-f (in other words, treat it like 'x'
-> > > - Audit the callers and change them to 'x' from 'X'. We normally don'=
-t
-> > >   capitalize the output and there's all sorts of patches over the yea=
-rs
-> > >   changing them to lowercase in other places.
-> > >
-> > > We have done both for other format specifiers and tiny-printf before =
-in
-> > > the past.
-> >
-> > If we taking about adding feature, I think that the patch don't really
-> > add a new feature, it's just a variant of %x. I reuse part of the %x co=
-de.
-> > So if size matters here the size of the object file (not stripped):
-> >
-> > Before:
-> > -rw-r--r-- 1 developer developer 19340 Mar 20 15:32 tiny-printf.o
-> >
-> > After with current patch:
-> > -rw-r--r-- 1 developer developer 21212 Mar 20 15:38 tiny-printf.o
-> > =3D> Diff: 1872 Bytes (+9,67%)
-> >
-> > I have another patch, where I don't introduce two new function and
-> > don't use an enum. Then it looks like this:
-> > -rw-r--r-- 1 developer developer 19888 Mar 20 16:53 tiny-printf.o
-> > =3D> Diff: 548 Bytes (+2,83%)
-> >
-> > Would this increase in size be OK for %X?
-> > So there will be no misprint.
-> >
-> > Otherwise, a misprint for %X would be fine with me, because I still
-> > get the correct value.
->=20
-> Tiny really does mean tiny in this case so yes, I would prefer the
-> single digit byte increase of adding 'X' to the 'x' case. Thanks!
+If tiny printf is used with 0x%08X (upper case X) the output is
+always 0x00000000. It could be confusing if upper case instead
+of lower case is used intentionally or accidentally because the
+actual value is not output. To avoid this confusion, treat output
+of %X as %x. As a compromise for tiny printf, the hex value is
+then output correctly, but in lower case. This is done to keep it
+tiny printf small.
 
-OK, I will make a V2 with this changes.
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+---
+Cc: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Benedikt Spranger <b.spranger@linutronix.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: John Ogness <john.ogness@linutronix.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/tiny-printf.c | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+index 0503c17341f..48db7b1f78f 100644
+--- a/lib/tiny-printf.c
++++ b/lib/tiny-printf.c
+@@ -284,6 +284,7 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
+ 				islong = true;
+ 				/* no break */
+ 			case 'x':
++			case 'X':
+ 				if (islong) {
+ 					num = va_arg(va, unsigned long);
+ 					div = 1UL << (sizeof(long) * 8 - 4);
+-- 
+2.30.2
 
-Regards
-Christoph
