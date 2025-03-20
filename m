@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00D4C35FFF
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E614FC28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63E9380540;
-	Thu, 20 Mar 2025 15:15:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 75377806FC;
+	Thu, 20 Mar 2025 15:18:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VCtGyV7d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="slK+JvXY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B008806FC; Thu, 20 Mar 2025 15:15:25 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 33B9C81101; Thu, 20 Mar 2025 15:18:45 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AC8B8003E
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:15:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB85A80540
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:18:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-225fbdfc17dso12815345ad.3
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:15:22 -0700 (PDT)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-3012885752dso1451225a91.2
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:18:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742480121; x=1743084921; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742480321; x=1743085121; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3HhWKEMwNyF6DSt48zmLxTnF5wFbeeYu6viqvpUyD4s=;
- b=VCtGyV7dUJBW+JiBf2ue2jdAWP2o3XfM2sdZM2HNQ7LrPQUcx+0ZOV93RVvbQhNJ/c
- uZZhDbmLiG6aDwX69p49BxvXpwkA+CeRi8hQGSygQIZZK3WQ/mEkkUt05cDqAfnpqgin
- yFxNQSOoxrp0M8AfMy7CdleDAxH9Q0BkLdkwE=
+ bh=KRGjyMG+1j0HSgccAhJJv377703fuMd3TVKD3svYI94=;
+ b=slK+JvXYfHnifABmFG3aZh1yJVWU3H77PsZhFYkD2HBEJByzkbP9uR6KyQqQ168Oer
+ TMTl8XEiav49u3GISSpqcjuKtlW+IPwUePH66Q9qXlljBhbTuILAngTVU0Q2edGi6eKd
+ 7FM1l5OacaWe6LHmZf1ztKh6b6oGyY7Xkx5RE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742480121; x=1743084921;
+ d=1e100.net; s=20230601; t=1742480321; x=1743085121;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3HhWKEMwNyF6DSt48zmLxTnF5wFbeeYu6viqvpUyD4s=;
- b=NdaxoYzH8wp23n1KX3LGSdogRvpGv0iZSEnTl1Ko/zyl1F+XqfF4EvACHtGejzds2t
- ++E++cDCzdlKZnujceMjnn7X1Hc/rohlmL6fTrV6BS/OwMmB5+t/ubBsuDMGj26ufvAZ
- U9D9XFT0u7d0BK2t9Ba+fB8E1OeSjFssob8NrIowvsRawDDp4pa7GxzPjvgvnKJYkgYO
- WcmTvbH6hsxEhkEtgmO9uxNQszY+CDtE4Yiedeuy+oinkPMhfWLWzW+MGLAigXsn8uNr
- W0AAk0MZEuCm7cFNN/2JWT2jELmEGS4IpguVNTJrzfe+2sxJrpx20co70rvP9xyJSRot
- /mQA==
-X-Gm-Message-State: AOJu0Yz4peW8HpVQZoSY2CHNep9imaFrGmlRVdFnBsUZOg63sA3KlbVW
- ij5mtHCE99H3dEWgQfrcZ8HuvVdSQU8nhgvQu2fOt0+sUyvQoDfgJ2gu8k7fcetc1W2fOZj5vuK
- w
-X-Gm-Gg: ASbGncth6zzc+8j94KuuoKMvigPZHd91FhigO1Pi4JznbjAri28QZQRlpxiLoXnSPnw
- yzE9foF/PMMx55EtSI1vaojzg4L6srkw1IAYaRU1UYcWfKhngUzXM+dlkWAqOhHGXxdxyNDAG+z
- lD3qMPMlagXe6LvPpNnZI581yBDGWZjPxjW93596fOecyhUmLXQWi/vZe3OW6/Xy9a+48N1AQmO
- 6GoP17oRYFYVU+8yUlgntLrTd4GBSCrTuV7OBdGz0+gtitPihJxeRCSk9WLz3SwLLT3ouKzA4RO
- gYVd1aKVotuaWj5qYnBQScnUEHtojjNJSXSQlFOkjWvj4Q==
-X-Google-Smtp-Source: AGHT+IH7uybmUde9pxQSyFmAG/Hp9mV7fE1c+aVRlyqXR59tAP5/5SjwLGhPAEXnc0b7KaytEbIkDA==
-X-Received: by 2002:a17:903:1a23:b0:220:c911:3f60 with SMTP id
- d9443c01a7336-22649c94744mr99368825ad.47.1742480121321; 
- Thu, 20 Mar 2025 07:15:21 -0700 (PDT)
+ bh=KRGjyMG+1j0HSgccAhJJv377703fuMd3TVKD3svYI94=;
+ b=HQsofqyMyilr6CBcMJIhxtvDASdghIC+4k1/r+rBGj0v50rpgHeCoVN/LOlRpRfvgz
+ OZ2UXk/E9NaaRi/Di1j0FeWNQDwg3P9qkFMbojet4PHXc+qEXvMiyV6mdNgFiOrEnQaA
+ ON0qj37AZi0wJMaJ4/af77lcx26/C4hyuwLRb2trVFdgBqKGD4o4gT+3Zm++fqwmAfd+
+ 7RfmERgHJYJTwkU0wfZO4sFdwOYa42h46z2tC1jKqTZ6eiXODy992/mcCu2ciKCclRrV
+ 7cUtrmUDfi68eCSf9W3lG/22M2ORw5IW4AeeUU9n1ZbhYu4whCprVpY3D1Gyvi9g1P8f
+ udLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMbO9k/q3M3xgKn8lY6N76nvci4sED858DIJlEXmH0lz+JWXqyh5SV1ZtIEK+3MnWSffrFD/Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3RPk4DAa9I3c2htEI/HeNnQAX35G5zs+QqN1HosXVFkKNJfe1
+ ed2jTWozZ4/pTGZDPndWqDfgaNR6z5GK40hG1AI6VJWZ6v7IPyzh4QVfLZWXvvY=
+X-Gm-Gg: ASbGncsM+2AlN+5iM3/NUfhKKtnvMFPPnuF6mN45OPADxE0GaPH5lQxfxTMgM0Y/Ocn
+ OU9igFUU1IUA9nKmTOG5NLciUSUnkQlVu3KPn2R8ooSo2dWviQY4dROirpdkiVtfgsUuTpW+no1
+ Lt+gW+4ZSFKTLE1b2fS6BYuVsMREcnSV8bx02fiS1no0A5JMxI4PiGwurhos6gkKj+JiJ8u5I6x
+ N8G46iUl7clBLcOuLrLg/8bCKJFmNGiZumRGCh6KH0f+LLuQGwt1065zVcDrHIztkytxJSQr+NV
+ LU7pWUA3zOgdrIh/TrCp58kAlptEV0YNkipk/8EuUzNLZQ==
+X-Google-Smtp-Source: AGHT+IErXXKXp6TJ1qEiJadQWtNbovO9xqdKf87DMvmalnU0BJT1bttWD6EYjaScfJWlw9px/NHqQQ==
+X-Received: by 2002:a05:6a20:7f87:b0:1f5:8748:76b0 with SMTP id
+ adf61e73a8af0-1fbecd36bffmr12326170637.29.1742480321079; 
+ Thu, 20 Mar 2025 07:18:41 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-225c68883fesm135858395ad.6.2025.03.20.07.15.20
+ 41be03b00d2f7-af56e9e0fd8sm12913279a12.26.2025.03.20.07.18.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 07:15:20 -0700 (PDT)
-Date: Thu, 20 Mar 2025 08:15:18 -0600
+ Thu, 20 Mar 2025 07:18:40 -0700 (PDT)
+Date: Thu, 20 Mar 2025 08:18:37 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 3/6] test: Add a test for strim()
-Message-ID: <20250320141518.GO2640854@bill-the-cat>
-References: <20250319115911.2204045-1-sjg@chromium.org>
- <20250319115911.2204045-4-sjg@chromium.org>
- <20250319142438.GF2640854@bill-the-cat>
- <CAFLszTjG-uhXLWE7+fWZtHLfjns7oAEqcxr1Q2NNgVnFaAUH=A@mail.gmail.com>
- <20250319153847.GL2640854@bill-the-cat>
- <CAFLszTgZV8A9HcmS=3nHdz2M_+eGLdX9qnEnYzJAEJ_QgoWSxg@mail.gmail.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ u-boot@lists.denx.de, Benedikt Spranger <b.spranger@linutronix.de>,
+ Simon Glass <sjg@chromium.org>, John Ogness <john.ogness@linutronix.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH] tiny-printf: Add support for upper case hex values
+Message-ID: <20250320141837.GP2640854@bill-the-cat>
+References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
+ <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
+ <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
+ <513b3e03-72d6-4997-8fb7-ca5d8a530097@denx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RUZfgY1022C8buq1"
+ protocol="application/pgp-signature"; boundary="uJNMT09AX6LeDz5W"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgZV8A9HcmS=3nHdz2M_+eGLdX9qnEnYzJAEJ_QgoWSxg@mail.gmail.com>
+In-Reply-To: <513b3e03-72d6-4997-8fb7-ca5d8a530097@denx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,141 +105,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RUZfgY1022C8buq1
+--uJNMT09AX6LeDz5W
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 20, 2025 at 03:43:30AM +0000, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 19 Mar 2025 at 16:38, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Mar 19, 2025 at 03:04:16PM +0000, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 19 Mar 2025 at 15:24, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Mar 19, 2025 at 12:59:05PM +0100, Simon Glass wrote:
-> > > >
-> > > > > This function trims whitespace from the start and end of a string=
-=2E Add a
-> > > > > test for it.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > >  test/lib/string.c | 31 +++++++++++++++++++++++++++++++
-> > > > >  1 file changed, 31 insertions(+)
-> > > >
-> > > > This got me to ask "What even is using strim and where did it come
-> > > > from?". To which the answer is:
-> > > > - A few places, but it's probably reasonable.
-> > > > - Linux, pre-2011.
-> > > >
-> > > > I say the latter because we're missing a bug fix to the strim funct=
-ion
-> > > > that's been there since 2011:
-> > > >
-> > > > commit 66f6958e69d8055277356d3cc2e7a1d734db1755
-> > > > Author: Michael Holzheu <holzheu@linux.vnet.ibm.com>
-> > > > Date:   Mon Oct 31 17:12:37 2011 -0700
-> > > >
-> > > >     lib/string.c: fix strim() semantics for strings that have only =
-blanks
-> > > >
-> > > >     Commit 84c95c9acf0 ("string: on strstrip(), first remove leadin=
-g spaces
-> > > >     before running over str") improved  the performance of the stri=
-m()
-> > > >     function.
-> > > >
-> > > >     Unfortunately this changed the semantics of strim() and broke m=
-y code.
-> > > >     Before the patch it was possible to use strim() without using t=
-he return
-> > > >     value for removing trailing spaces from strings that had either=
- only
-> > > >     blanks or only trailing blanks.
-> > > >
-> > > >     Now this does not work any longer for strings that *only* have =
-blanks.
-> > > >
-> > > >     Before patch: "   " -> ""    (empty string)
-> > > >     After patch:  "   " -> "   " (no change)
-> > > >
-> > > >     I think we should remove your patch to restore the old behavior.
-> > > >
-> > > >     The description (lib/string.c):
-> > > >
-> > > >      * Note that the first trailing whitespace is replaced with a %=
-NUL-terminator
-> > > >
-> > > >     =3D> The first trailing whitespace of a string that only has wh=
-itespace
-> > > >        characters is the first whitespace
-> > > >
-> > > >     The patch restores the old strim() semantics.
-> > > >
-> > > >     Signed-off-by: Michael Holzheu <holzheu@linux.vnet.ibm.com>
-> > > >     Cc: Andre Goddard Rosa <andre.goddard@gmail.com>
-> > > >     Cc: Martin Schwidefsky <schwidefsky@de.ibm.com>
-> > > >     Cc: Heiko Carstens <heiko.carstens@de.ibm.com>
-> > > >     Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
-> > > >     Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
-> > > >
-> > > > --
-> > > > Tom
-> > >
-> > > Here is the comment for the function, of note given Linux's disdain
-> > > for commenting code:
-> > >
-> > > /**
-> > >  * strim - Removes leading and trailing whitespace from @s.
-> > >  * @s: The string to be stripped.
-> > >  *
-> > >  * Note that the first trailing whitespace is replaced with a %NUL-te=
-rminator
-> > >  * in the given string @s. Returns a pointer to the first non-whitesp=
-ace
-> > >  * character in @s.
-> > >  */
-> > >
-> > > Given that comment, I don't see a bug here. But of course we could add
-> > > a test for it and adjust the function too. PLMK.
-> >
-> > Did your test add a testcase for the situation described above?
->=20
-> No. I didn't know about that case. The function comment does not
-> suggest that it handles a whitespace-only string in that way. In fact,
-> even the Linux commit which changes the behaviour doesn't update the
-> comment to mention that behaviour.
->=20
-> Anyway, let me know what you'd like to do.
+On Thu, Mar 20, 2025 at 03:14:03PM +0100, Marek Vasut wrote:
+> On 3/20/25 3:00 PM, Quentin Schulz wrote:
+> > Hi Marek,
+> >=20
+> > On 3/20/25 12:49 PM, Marek Vasut wrote:
+> > > On 3/20/25 11:23 AM, Christoph Niedermaier wrote:
+> > > > If tiny printf is used with 0x%08X (upper case X) the output is
+> > > > always 0x00000000. It could be confusing if upper case instead
+> > > > of lower case is used intentionally or accidentally because the
+> > > > actual value is not output. To avoid this confusion, tiny printf
+> > > > is extended to support also the formatting with %X.
+> > > >=20
+> > > > Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.c=
+om>
+> > > TINY_PRINTF is meant to be tiny, i.e. not consume a lot of space, at
+> > > the expense of functionality. This is meant to be used in size
+> > > constrained environments, like the SPL. If you need full vsprintf()
+> > > formatting support, disable TINY_PRINTF in your config and use the
+> > > regular vsprintf() implementation.
+> >=20
+> > The issue is that disabling TINY_PRINTF may not be possible (size
+> > constraints) and some code is compiled for different stages and people
+> > typically don't check whether the format used in printf is valid with
+> > tiny_printf. I've had this issue already in the past, I vaguely recall
+> > "complaining" about it on IRC.
+> >=20
+> > Maybe there's something we can do to verify that the code is working how
+> > we expect it to work, regardless of tiny_printf/full printf selection?
+> > checkpatch or a compile-time check for the formats maybe?
+> >=20
+> > But yeah, essentially the whole thing is... if we continue like this,
+> > we'll just end up getting closer and closer to the full printf which is
+> > not something we want :)
+> Shall we maybe patch tiny printf to print '?' on unsupported formatting
+> characters, or outright complain that users should fix their code ?
 
-Well, being a function we borrow from the linux kernel, we should follow
-how it works and backport the trivial change to match how it behaves,
-then add tests in 2/2.
+This sounds good to me, adding ? in the output.
+
+> For the %x/%X thing, we could technically fall back from %X to %x , which
+> would do the printing with minimum footprint increase, albeit slightly
+> malformed:
+
+There's 109 hits on "%X" and another 489 on "%0.X", so I think it's
+reasonable to do either of:
+- Misprint A-F as a-f (in other words, treat it like 'x'
+- Audit the callers and change them to 'x' from 'X'. We normally don't
+  capitalize the output and there's all sorts of patches over the years
+  changing them to lowercase in other places.
+
+We have done both for other format specifiers and tiny-printf before in
+the past.
 
 --=20
 Tom
 
---RUZfgY1022C8buq1
+--uJNMT09AX6LeDz5W
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfcIvEACgkQFHw5/5Y0
-tyydTQv7BwIACDycV3RHyTFXUghbsfJjuucvMqL7F8AJ5pbrI+yygvzA40/PXum2
-YWGMqgGez8w15np9UvD72ETkXtMVNYrpgRyCDZ7lJiiGhWFiQroHO/0vyDpKC3yB
-BU/fkKxreqbPYWg7LmiwU1mdG837MBp5AYJZBD83zTMjuIRLRhoqE6Urr8MrNJZP
-BjRlupzVT7zxR88byIDgwwXV4rakJkvxvY7AqYWmn2JsSW2hBT9wD+vf/nF8+5uJ
-ba9lAMYjHwjUZbaLVDlj3UxqMSDkJNEFNIxC0bhGQpaBXFBKZJUK4L5PT8RPVghW
-hQy7muT62h1GVjTRxh2YyGdVHEI751SGLR9sJa3Y2r1MMdl81yG0mTk9RWdKgrk9
-xSrqTf2JnIk/eDXqXMm1ivdVC7UQcA3VZ0YOwurjSambqkJQayzj1tkrL3cNZmbS
-tWK2gEvyhE5k56bSj7zS4FQ1wB5ma/vok6AuYQN8qLxmIzzhnGbKFzeQQ1UxoLGo
-CeZuftW3
-=pi0d
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfcI70ACgkQFHw5/5Y0
+tywAVwwAmvsXH9VrXJ7Kokx0ocoBBBNacvwI9PiYbLyrhjiPGbykqyd8lx0mHALy
+Wj+in1pirgGHCg2s2U6wmijGAxHBR6hfeVsXmSriFJhUS76frf7JqYC1jTzcMVZS
+Phg9bC09kS49dWNLJ+TS/YVYcwSogPrTueDbhDmqsQsLtjLN2Gn9Ae6nyeChHtAg
+g7hPvJPyuRYjzSGWRyH3bWity1l5h03jwbA1JFus6gVC6z9UN74LmHJQ5/m1t012
+RiOSjn0UwdqisNVsWOuOyy8WU7395jJYRUfD2a6fmxVtPF8vfNQUdQRH1AFkKg5U
+2w8zoTwcgcLm1VL1fo07s+kDQwzRT+uzDWxP/BGZUfgN/3W6VTZFT4nO1H58+GFU
+XG8LJklV23bLgeooaL9xIWI+RIt/UHVSn7t+7gpu7Cl/LeYP703jsmlZnMdcZI7E
+KJ6/3GBaQgYR45HO0RC73E70kLKOmfLmb3PB2F112BfKvEi1bNDkTiwtt4mPgiJQ
+4qvl1diU
+=ySJP
 -----END PGP SIGNATURE-----
 
---RUZfgY1022C8buq1--
+--uJNMT09AX6LeDz5W--
