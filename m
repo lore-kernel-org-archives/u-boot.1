@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D73ABC28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 08:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1206FC28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 09:05:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC9F3810F2;
-	Thu, 20 Mar 2025 09:44:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 555EA809D4;
+	Thu, 20 Mar 2025 10:05:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="fBW53G9l";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Zcehqbn8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C754A81101; Thu, 20 Mar 2025 09:44:12 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::60b])
+ id CEF42810F2; Thu, 20 Mar 2025 10:05:14 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::61e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FD36809D4
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 09:44:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A85A8001F
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 10:05:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=U/42vnmcvtqX6UTNb49H143k3fblKtA5nMJxv7b9mJg+TIStGSGtD6JHiycN6dr/GeG7r7f2BbDpp2/M/4WBcPpn94EfYImc9lyZrRswWsASXONu4wxYhnDIqQhD82t4sPNNm8gdR53uIeDUiUJhyAC8Ca9fsuosurRgpci/jCS6Ok6YKSnbliymGblLN26QZKBplVJAxCgHPd56uQEoquevtR/DRayjTZbiLtcTAaRHAVzVUAKkSgrWvjLyyX49G3c7m1G3xGyCnfRcQAw0fZYrugt2MMoq9YX3EPjk5EJ5SeaLzvVu4Jxg79G3UF81KLdKd17pyFY6iXLfg5tj3w==
+ b=na+FTyUb1cP4gNKCXkQGHDnXzRl0kK+zeHzteYc4FCEL2w3aPhYNRR10/TmtXz63LFdpFB+ySwYco79rnsdl+8Vdd1JGmOiiawvjDDEeaW5bvFpfpmZQWpBC/HwLTT05RGD30u1l9bg6O7eMPxwV9OvzapQw0OVy8poGU3ViP3kLmZCeN+r0mlS1YzdLqz+fxIWcSZONWhGnWVAkOoKO2HcJBu4TyQBLJEzwCxml7oKCnyPCV6Po3bSjcjuTtXHJ8d3imWbiVVYmL3GUreS+nveM+hhw3uFsmTl33LQRMO1KsHYKE+Fb4OhODbDzu1Rr40mi7yRdkakmaYL4yeOi+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LJiiO32qP4cEvq1GRAI3xPLORzd8EeoGr4qvRlEKIoI=;
- b=kqSsGMbF+ZqW8KXvNgmk8HMIDCGjsiXlx4T47bv5/MJj7UPC1zVeNB1RkQJmFYLgL30UKNZhFBDVz8VFHwRHy04tYZe5BW7zfF53AVnDpzaUor99B+NpPYOlCs5Ya8Bwgqr6+ihnGSg93gUctkw86FHaUJ6hQCj9FtIxFz0RldH/6ax+i7+CTs/kbUbeY6S7ytn0DtmVO2nJKuun4fdo5WsYTIAvzlrFEEEdfptuwWjgfp/NqDRJLiSfwc1GK35Rd9rCVpZ5ZIpKdz8JWsEbTq9xMnNZE8DorgUEH2G7ijtzhmUSXCrWDMQeB8E32OcNeD+ljibWsIWayyjBfY7wBA==
+ bh=Fn5RE81CMSjERgycG5z58qt7Kje8adUII2/SpMHVb14=;
+ b=VdQIRyxYN5WqmBNRqaerwgZC3JxNyNAdWM4OsUMw9qCINyzNDFTkDpLcpfy6Qrx3lhUd2O/bexXQ6yQajnWEtCLUSbRLvjQ8I2yD7TnCcMulmZGathSCunFlG0mCVE/K8cli0DmGXAYAkpAavcckqzPP+KF5x3ppKzE1OpgLMg6gnJu1F2DYJ1XPW1Mb/aQuhfnfVcTu8+I+lZY8c8KxdR4SUHLntUh2Nqu6mjnCBZiXXnHnPkoajL76Vs58yhNweLEM+xfaaCIMaXh+y7oatD19RLDL/CALrxDkW1JwrzFKNu21CbdhgiAFovfmI1588SCERUN3P3QqqVoQPLFT+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LJiiO32qP4cEvq1GRAI3xPLORzd8EeoGr4qvRlEKIoI=;
- b=fBW53G9l8t4XIodbhfS5bPUCj1uhDLRGTM03hmolZdFmDZvgW6IXtrw5Th01v2Bau1UJodfY6V0+XUHvtfaShAFAXfOv4IKS6//VgIkoQzao77D3crp4s0zwCnYQuBfrv0Zcb/7imDdOaIpeKr5RcFaecKDhq4ZPgNzqbWygv8c=
-Received: from MW4P223CA0012.NAMP223.PROD.OUTLOOK.COM (2603:10b6:303:80::17)
- by CH3PR12MB9079.namprd12.prod.outlook.com (2603:10b6:610:1a1::9) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=Fn5RE81CMSjERgycG5z58qt7Kje8adUII2/SpMHVb14=;
+ b=Zcehqbn8Ev/pkt/fsjuC6SvQ6eMS9PJQ5JeaxsH8diNUajQebJXKUqiBwtq1EvEd2j+WO+53QrIIb4+XXB7hzcIDu7Uwootks3v9iln/fPreSXzrTffG5zlXf2NqHMBotkhfL1DgKtuMxq74umC4jv2rukdQSecG7Rt2laY7ed0=
+Received: from BN9PR03CA0368.namprd03.prod.outlook.com (2603:10b6:408:f7::13)
+ by PH7PR12MB6718.namprd12.prod.outlook.com (2603:10b6:510:1b1::11)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.34; Thu, 20 Mar
- 2025 08:44:06 +0000
-Received: from SJ5PEPF000001D3.namprd05.prod.outlook.com
- (2603:10b6:303:80:cafe::f9) by MW4P223CA0012.outlook.office365.com
- (2603:10b6:303:80::17) with Microsoft SMTP Server (version=TLS1_3,
+ 2025 09:05:08 +0000
+Received: from BN2PEPF000044A2.namprd02.prod.outlook.com
+ (2603:10b6:408:f7:cafe::c7) by BN9PR03CA0368.outlook.office365.com
+ (2603:10b6:408:f7::13) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.33 via Frontend Transport; Thu,
- 20 Mar 2025 08:44:05 +0000
+ 20 Mar 2025 09:05:08 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,29 +59,27 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001D3.mail.protection.outlook.com (10.167.242.55) with Microsoft
+ BN2PEPF000044A2.mail.protection.outlook.com (10.167.243.153) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Thu, 20 Mar 2025 08:44:05 +0000
+ 15.20.8534.20 via Frontend Transport; Thu, 20 Mar 2025 09:05:07 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 20 Mar
- 2025 03:44:01 -0500
+ 2025 04:05:04 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: versal2: Disable DEBUG uart for mini configurations
-Date: Thu, 20 Mar 2025 09:43:53 +0100
-Message-ID: <ff61ec2fc213bb3a9640015c6588e9b48ae38967.1742460228.git.michal.simek@amd.com>
+CC: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH] arm64: versal2: Update the text base and dtb address
+Date: Thu, 20 Mar 2025 10:05:00 +0100
+Message-ID: <3ffb6f1f7ff418f01ccc2eccf8a834441f9f0b74.1742461498.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4162; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=NJk3a4SU4zjj+oX2YJUozubJX372lMtHO1rBZ7+iwLA=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvTbV72elTd92i9y/o7fjv8mW9/VF9f/s2+VL9BPXRI1s
- z+cb8b5jlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjCRa00M87OiNzufu1ZVzi21
- y83JMVyp+o6ZIcNc+Wu/k7+fu86g+8alvfHHhdITtsqFAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=830; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=FZreSyOGKjOE36kQOSYEeKlW1XTalt1pncUOLCrpSW8=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvTbt2yzvwlLce450GiquPcPI/+KkH1zLTX5+ELeG+0u1
+ lcT3ZnTEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACbycC3DfM+vLNdW3ercVdgc
+ No+t+tHzLxpTVzDMs1/ANUl3wgzNrR77z+88XdcosqoiDQA=
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -91,52 +89,52 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D3:EE_|CH3PR12MB9079:EE_
-X-MS-Office365-Filtering-Correlation-Id: 793e1774-16c2-4125-26ed-08dd678b5f6c
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A2:EE_|PH7PR12MB6718:EE_
+X-MS-Office365-Filtering-Correlation-Id: 575ca612-d2de-4b33-b8b4-08dd678e4fde
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1YRtPkaFlXCpIkMQ4e9gWBkdApSFWpLTYCgn3gw2Ien63w2cojRt0m74xKBy?=
- =?us-ascii?Q?xXKcvvv6ichj7MWFQmthFWaU8oYhyp8gUUsUTCpep2Tl5np76oamuEV7Rdcp?=
- =?us-ascii?Q?PhCXeiWYiAe2Tw3i5VIpEty/ETOAiapU/t06CJTIUP+eLFsk+Q6p1L4XP5+V?=
- =?us-ascii?Q?eJD7w1XPz8ZbREAx6bmD9jB19ml3Ls3aKTeo6+9bxHIRzj3LvEwiZcBNzEJq?=
- =?us-ascii?Q?WaaA2+6Xc4hCDyUhrBIr8zPkpi356hdLHqi+YdtqgUK2mfAlV1JYCxYbKFNE?=
- =?us-ascii?Q?HyibsNcYzGSJvoO5005S5NdK3XbK9Ojf9vEiyPGDhuaOAXeM/qJwIANjZMuS?=
- =?us-ascii?Q?/Tm7zU1FgH0sEKwpeynviMBKnPG+IAfn/73xu6JCw+y1qa8Ci+vTzCF63nfR?=
- =?us-ascii?Q?8yOFTKhMWsY0pyACe7Yrh5mjVMPjq20XsdPd1/HWZvMJJ+Exb0X33wry7n93?=
- =?us-ascii?Q?8JPZoSefSI5zhVnkqF4aSkY0nfzQQzlnHun26wj7mXiDzqaPb3lV4Zcwj8Rq?=
- =?us-ascii?Q?shLyWet/BPJVLkF8xRBKivMd8OLCiwgFvmJVGxW/9D6wVS2I3FfctpygKIf5?=
- =?us-ascii?Q?uZkaqWLgCIp0N2bp5Z+nOChVExNjHHe62MgEAnynXnQG1iDX5HCsZaPN9dAw?=
- =?us-ascii?Q?TazCc+LeT01hEYBwDkIx1LVBEzx6oXKjrDM+8NyBH91yLqc/jtDwtd0z7Wx9?=
- =?us-ascii?Q?y/LfvBhar0T0wdP1Xpo6sOyU3rmoxeIoMlDdYRJdD8UCML8qFhyZpfYCNWWF?=
- =?us-ascii?Q?Umd2wdAabHLk0cibN6QDuvBbh19qM1DqREqoZyrODdGuFUT8WqcEp5yC3IoI?=
- =?us-ascii?Q?Mk2piaYLvUneCs4sLg9VOdXP4P5PtgsTIU8PCik8EcizAaw+RktFIScloqLI?=
- =?us-ascii?Q?dsmw6vU+39daNn7Uess+hbOcSbE3nUthYKRY4jC4ZgZ44GHtUZqy7eBXyWi0?=
- =?us-ascii?Q?FtXmvNrgbmttzzB4rQuDQSuGtvP6d68CZkF5wSx79V253je6l0hB+93Mw4Wl?=
- =?us-ascii?Q?VAd68TeCD1x23JZ2z0jqsBsAERL/KPEfJclYtFSXduzNnvsiO47wOeqpN18f?=
- =?us-ascii?Q?3xcJ6QX1ShTetRF9eZj4h98JSD43gIt/CxntzxKNiYOu0YBUkEB96gn6hKuH?=
- =?us-ascii?Q?0FCPEVF7OX2mew155y14q7WB4/CkmwRAF1bAv9KMtLexP9dmn2+3wjFMspKS?=
- =?us-ascii?Q?GcY/E++SBI0aS+UBTvrAzZsukWpuxHy+PkhZeYNLv7Lupi+1AqOucj8SjJu6?=
- =?us-ascii?Q?HiJiPFg2kxOABBacdy8SpQqGUz3sbUbB0/Z+mZkaXfHqSom25nFTuzRIBKbo?=
- =?us-ascii?Q?3ZN3LLhD9wP/33Zd26SNeXNq02wkNMeuElThfm0nbVbW8nk/qg+er2nlGAVI?=
- =?us-ascii?Q?XruJGGLihXpu1Ze9yQMNFvpd+pule1CHl5SVoty7It+ahpkgjRELwk9YkCkR?=
- =?us-ascii?Q?Ln3gkwJPBxlFvdkmhpJP+RMb/zW6hgjRiwHBHKLp7YKOWoXjGxsnzXbq0lLR?=
- =?us-ascii?Q?CJ4UyGLdB8N4hD8=3D?=
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?InmcZz2DtiAROaf48fVcXpE10NP9Z8cg7GSiRtWNVtthOM7a6mrNFNjvJQ7K?=
+ =?us-ascii?Q?yChCRZ/CrrF+qGooPZd6EH+L4F54Wwyr4MD+yUppzw6/yFxqnqfTqmj9ywY9?=
+ =?us-ascii?Q?6IcpnPV6/UytWWrP/Mwsu/ogKWtWAMDRsB6d2aT3WsneZGwFSRLZPAig0Ef2?=
+ =?us-ascii?Q?DTe7x8W/B7rQk1aJ0JeiqVdqVc3mVB9xW2JmnviGHUzob9WSzzRRo/mVqTbF?=
+ =?us-ascii?Q?OPmTUWx/q5kAXY1Lmo/IN6GTElc+q8Zpl0+EXAaVl4JT6XBNL6eILBQ2u7TB?=
+ =?us-ascii?Q?C6jm8oipC0DzVaXu0thnQzpQR9cmYryWSC3gca1NCbuUMq42OHvo2hVClUvY?=
+ =?us-ascii?Q?XYtwe4wKYpwoi7I9/13cDZhJ71uP3NPeBibAHSu4Nw6wnoebVZ27nj7NQdL1?=
+ =?us-ascii?Q?zaUd1LME+Te7GfwYjH5LqG/ulSvhUtvTSbO6KjYkKLOP4ePRAOXv36u7QOlS?=
+ =?us-ascii?Q?maIQcC61lj4citHHjn0+ZZbdCXJ+mlIxTb7JcWU4y5Iim/SBeCigQm0e/l3O?=
+ =?us-ascii?Q?/Ao1HltGCZWJD4KOZI6AJzwQirZLQegQatzOx9bkr0Hz7YufIzJYFi2pmMiw?=
+ =?us-ascii?Q?XaWrZMBBH/5HCRyxkX/pO94aIrpygExawMXOtZBg3nbYeIdpIamGpCwwjiq4?=
+ =?us-ascii?Q?IQ3a9TzJgi439bkNStaqQzQMApLifLRKLD0HDGxssBG+b+sYznaMziUKyRbL?=
+ =?us-ascii?Q?ISSMbjogbpD9MHKLST3/VUpuA20IVIdM4r1my85N98SVVz/hz8r6R8chB31v?=
+ =?us-ascii?Q?k9qHiIzpB+udCZ5u5KWlnzk3focSBrkDsy7XabdHsjCzK8ZPViYgOQyxfqhO?=
+ =?us-ascii?Q?k0xoGrfm3VtwbxKOKQGcM66gia8irLU0gflBBtGxW8U0PzSIKyUgqeUEZvFg?=
+ =?us-ascii?Q?jCdiBB3akAciFrVmfJOUlCaLVlxyHzeoZBfK11tlVTaCfA2+c6gFImQb6RCE?=
+ =?us-ascii?Q?LRsgMK11CpCEXNyz4ME56ibBD35SvBGz/JebaOR+jDeSkyvvhQ5xvHp0JkER?=
+ =?us-ascii?Q?YhKRUnsT+lGE/ngWCS31RDINZXOujKgdibEFMVXkIUR4hZNguwXoJhVDeLi6?=
+ =?us-ascii?Q?llgCw5b6LBA1X/DTVD09pe6m3+5uHAzPXkMI3gRCbdIBBX9lwFg9w3PqjB5X?=
+ =?us-ascii?Q?TvZyeTx3fWGIXsciSaqzzWNSXAyWXJqdLjxigxIdw4vAiiU/D7osl4caw5XD?=
+ =?us-ascii?Q?5loZGJUdLkYRbSvBJzd8/wCXlscpmYmt/xHl0QUpUlal+dODpkjmu5eaudwY?=
+ =?us-ascii?Q?lO+M9igb+R8wMkJcCjytL4l4+/py5Mwe1QMZ/rDoDMKUMkHZmAEcBnaU684g?=
+ =?us-ascii?Q?avl7dhYtcomHN04BvFIeOTqY5pgzQ0oW4U3W7gj1RQLkwFWUh4omzCBQKUk6?=
+ =?us-ascii?Q?MsGZAu5aD35tgljNs2PNftDXZo+FNTe93Fm6pyuPf2K/3qbqMqV5La5L5xXb?=
+ =?us-ascii?Q?xC1zetYtEL1ph41l+M3gvHzNNICuPRQD75DgixW/h9OTTKfVbmpq0QnD9kkc?=
+ =?us-ascii?Q?etjhH+mG0AtE7nM=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2025 08:44:05.4266 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 793e1774-16c2-4125-26ed-08dd678b5f6c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2025 09:05:07.9179 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 575ca612-d2de-4b33-b8b4-08dd678e4fde
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D3.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A2.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9079
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6718
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,125 +151,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no reason to enable DEBUG uart used for early debugging by default
-that's why disable it.
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 
+Update the TEXT_BASE and DTB address as per the new memory map.
+
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- configs/amd_versal2_mini_defconfig      | 6 ------
- configs/amd_versal2_mini_emmc_defconfig | 6 ------
- configs/amd_versal2_mini_ospi_defconfig | 6 ------
- configs/amd_versal2_mini_qspi_defconfig | 6 ------
- 4 files changed, 24 deletions(-)
+ configs/amd_versal2_virt_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/amd_versal2_mini_defconfig b/configs/amd_versal2_mini_defconfig
-index b6571186030d..d224583f56ae 100644
---- a/configs/amd_versal2_mini_defconfig
-+++ b/configs/amd_versal2_mini_defconfig
-@@ -13,12 +13,9 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xBBF20000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-mini"
- CONFIG_SYS_LOAD_ADDR=0xBBF80000
--CONFIG_DEBUG_UART_BASE=0xf1920000
--CONFIG_DEBUG_UART_CLOCK=100000000
- CONFIG_XILINX_MINI=y
- CONFIG_SYS_MEM_RSVD_FOR_MMU=y
- # CONFIG_PSCI_RESET is not set
--CONFIG_DEBUG_UART=y
- CONFIG_SYS_MEMTEST_START=0x00000000
- CONFIG_SYS_MEMTEST_END=0x00001000
- # CONFIG_EXPERT is not set
-@@ -71,9 +68,6 @@ CONFIG_NO_NET=y
- # CONFIG_INPUT is not set
- # CONFIG_MMC is not set
- # CONFIG_POWER is not set
--CONFIG_DEBUG_UART_PL011=y
--CONFIG_DEBUG_UART_ANNOUNCE=y
--CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
- # CONFIG_GZIP is not set
-diff --git a/configs/amd_versal2_mini_emmc_defconfig b/configs/amd_versal2_mini_emmc_defconfig
-index da3eebe3fdfc..3afc6cb2736b 100644
---- a/configs/amd_versal2_mini_emmc_defconfig
-+++ b/configs/amd_versal2_mini_emmc_defconfig
-@@ -10,11 +10,8 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-mini"
- CONFIG_SYS_LOAD_ADDR=0x8000000
--CONFIG_DEBUG_UART_BASE=0xf1920000
--CONFIG_DEBUG_UART_CLOCK=100000000
- CONFIG_XILINX_MINI=y
- # CONFIG_PSCI_RESET is not set
--CONFIG_DEBUG_UART=y
- # CONFIG_EXPERT is not set
- CONFIG_REMAKE_ELF=y
- # CONFIG_EFI_LOADER is not set
-@@ -60,9 +57,6 @@ CONFIG_NO_NET=y
- CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ZYNQ=y
--CONFIG_DEBUG_UART_PL011=y
--CONFIG_DEBUG_UART_ANNOUNCE=y
--CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
- CONFIG_FAT_WRITE=y
-diff --git a/configs/amd_versal2_mini_ospi_defconfig b/configs/amd_versal2_mini_ospi_defconfig
-index 8b9c44017eba..54328e85784a 100644
---- a/configs/amd_versal2_mini_ospi_defconfig
-+++ b/configs/amd_versal2_mini_ospi_defconfig
-@@ -13,12 +13,9 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xBBF20000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-mini"
- CONFIG_SYS_LOAD_ADDR=0xBBF80000
--CONFIG_DEBUG_UART_BASE=0xf1920000
--CONFIG_DEBUG_UART_CLOCK=100000000
- CONFIG_XILINX_MINI=y
- CONFIG_SYS_MEM_RSVD_FOR_MMU=y
- # CONFIG_PSCI_RESET is not set
--CONFIG_DEBUG_UART=y
- # CONFIG_EXPERT is not set
- CONFIG_REMAKE_ELF=y
- # CONFIG_LEGACY_IMAGE_FORMAT is not set
-@@ -72,9 +69,6 @@ CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
- CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_SPI_FLASH_MT35XU=y
- # CONFIG_POWER is not set
--CONFIG_DEBUG_UART_PL011=y
--CONFIG_DEBUG_UART_ANNOUNCE=y
--CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
- CONFIG_SPI=y
-diff --git a/configs/amd_versal2_mini_qspi_defconfig b/configs/amd_versal2_mini_qspi_defconfig
-index e17ca8657251..48fb7ae0e7f3 100644
---- a/configs/amd_versal2_mini_qspi_defconfig
-+++ b/configs/amd_versal2_mini_qspi_defconfig
-@@ -13,12 +13,9 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xBBF20000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-mini"
- CONFIG_SYS_LOAD_ADDR=0xBBF80000
--CONFIG_DEBUG_UART_BASE=0xf1920000
--CONFIG_DEBUG_UART_CLOCK=100000000
- CONFIG_XILINX_MINI=y
- CONFIG_SYS_MEM_RSVD_FOR_MMU=y
- # CONFIG_PSCI_RESET is not set
--CONFIG_DEBUG_UART=y
- # CONFIG_EXPERT is not set
- CONFIG_REMAKE_ELF=y
- # CONFIG_LEGACY_IMAGE_FORMAT is not set
-@@ -65,9 +62,6 @@ CONFIG_NO_NET=y
- # CONFIG_INPUT is not set
- # CONFIG_MMC is not set
- # CONFIG_POWER is not set
--CONFIG_DEBUG_UART_PL011=y
--CONFIG_DEBUG_UART_ANNOUNCE=y
--CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
- CONFIG_SPI=y
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index 59bda4c71fb0..087c7f047335 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -3,7 +3,7 @@ CONFIG_COUNTER_FREQUENCY=375000
+ CONFIG_POSITION_INDEPENDENT=y
+ CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
+ CONFIG_ARCH_VERSAL2=y
+-CONFIG_TEXT_BASE=0x8000000
++CONFIG_TEXT_BASE=0x40000000
+ CONFIG_SYS_MALLOC_F_LEN=0x100000
+ CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-virt"
+ CONFIG_OF_LIBFDT_OVERLAY=y
 -- 
 2.43.0
 
