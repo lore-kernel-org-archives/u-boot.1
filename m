@@ -4,73 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A41CC35FFF
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 03:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE52C35FFF
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 03:39:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8ECC809D4;
-	Thu, 20 Mar 2025 04:27:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB25E803CC;
+	Thu, 20 Mar 2025 04:39:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bby53f9i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZDt+8+Wp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E003C80FF0; Thu, 20 Mar 2025 04:27:13 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 57F88809D4; Thu, 20 Mar 2025 04:39:41 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 377478083E
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 04:27:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5536C803CC
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 04:39:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac29af3382dso57799966b.2
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 20:27:11 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5e677f59438so538103a12.2
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 20:39:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742441230; x=1743046030; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1742441978; x=1743046778; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cjIazI9UdpDAZTUsDvpKLZK3DV71xz1pHSnMewgtS+Q=;
- b=Bby53f9iwJQrTmc7jE6AMGVk9gtpEVGY3MofMsK7zS9AzW7XoKGOi+Rc6f1GN43gbV
- FyUPHtb/wiFRHLz9UGqwlk0LkQk/pnv5sWApP4xyb22e4rNsheKfZA3WcqG1g8FpTmsP
- 2HtOdJp5xAvKF7Rs0Ky4Il6t0roWUiq1yUqNI=
+ bh=0nkNmLhJ9YsT95wGpmPPm57xNFORphIoQX/KhCDleHg=;
+ b=ZDt+8+Wp7+YoYbY00s/aASGFc1TA4pGdK0ZNNMH28ING3h5VRS9ztea8xdk4h2B+cD
+ sKb3EOy02gkVjhTXfIvrdfVhJzQmR31vuZ5GHztrZuwHW79QUg6uuQ0NX1hS2+Tj4saw
+ 5s6aW4dnt1OylAxHHrguKYAc2xGKNkkch5hQQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742441230; x=1743046030;
+ d=1e100.net; s=20230601; t=1742441978; x=1743046778;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cjIazI9UdpDAZTUsDvpKLZK3DV71xz1pHSnMewgtS+Q=;
- b=cIkAtUdrydtDc2qVhigJU6jtAfiljD20uNI/tXqPWQXMF+n0YVaqiTwrnHqrlPfPvC
- Rgx1BXiyO1GVjwWf4q4RXP3FmW+BdUJYy0awB5cMYWj+i8Fj+8NaOmy8nKl5tQSJKdFT
- Ha8hrkZYc7qaCKO10fsAs28Vw2y3ilkk9WvhjN0Es8Du2MoBAhYPcD6I8K6lCZIiBKVc
- +wT3OgXebESvQnzMsUzPNCh4WPkuPLQH4+ovuZbrXNggoC1O/x8K580Y8YmjNnhy3q0f
- dRTf2mKGRwTmlUpIbThVM6qoRTpGz8SdV8EpOtRnu22Tej/R7K7RNf4P0zeYW+wAgm5g
- 6/5g==
-X-Gm-Message-State: AOJu0Yz+bUGMNuB3YwxcYDSvscacJ53WmVrCD4ZfWtEJm6WKzzSjApeS
- QRH9niNkmGOR5wzIv/cLr61tNBYT/JAyrlgAmDkCJ9QcqHYwkQIuDZneWKhoTKo+ANFBqdlugjP
- Mjf4Pz1dYIIb0p2IlZ83DtqwbufEsBzWhLCui0qHppoPw9Ow=
-X-Gm-Gg: ASbGncuJUsjbMJzKcVVSUchnF1zRGC2kE5U1BmartH28q9tr5ukhbCtNaZchy98nlER
- 2zYFN4DIUr2HyRxumqSar3JRlZ+0KO+QmIcFeFoW2ocmRqwk3tsGhdTEQUl/sfWamGgDWiZ2NZO
- QXyoioQ/5m04N/BHCeC5F1EJSQtMg=
-X-Google-Smtp-Source: AGHT+IFWmWa8YUO6PB5NU/Zog4H8MbTMOuYa8SRv1RQQmP/rTCeljvsvnyTKuj4PSP9vsM4oJBemWI9SHoxnCvdB4do=
-X-Received: by 2002:a17:906:d54e:b0:ac3:bcaa:3320 with SMTP id
- a640c23a62f3a-ac3cdf8e393mr217989366b.11.1742441230498; Wed, 19 Mar 2025
- 20:27:10 -0700 (PDT)
+ bh=0nkNmLhJ9YsT95wGpmPPm57xNFORphIoQX/KhCDleHg=;
+ b=HoKrkfmEpEYrKc4X4hWBmdqA9l9O/AkEhiWk5q/DVanXdqpMB6K+BeVvthL7tpJHOq
+ KV3Vr8x5irz+pVlUo3ftz6NiWI8FiYOk1SE/cJ5gHrtM7u/2H0V8bXbB7ydxmzE8Rsul
+ y2SFbbKYMiTdeV4qmojB7TEvpJnddwqzfkzPUDw+wPhGOQBV1N5XGOrKnpNTzy+Vpi/E
+ TYgJouqRCjAUOfCxDS3y5hpmNhP+0UhUqROnb5iPBsSgoni0yiGY92LNdHiZL4vV239A
+ AVG3+nKMBj9U/7a0oUC+Gzn9KQ3yUhES6tSZQGmq6se7zOWA9RnO2q8K/JcZVPRGBGKt
+ 0ueA==
+X-Gm-Message-State: AOJu0Yxj2IulsdpO7rjAgKiCuouasyvxZQ0Bp67GHPMvjBgao2wcleZE
+ Qnzn1nEdUiSU5c59b6LCP5dNMg07EH3SkactQIYUxCKnslPv4zSp9YhquPkSbIUhNeSto7qW/VL
+ 2pwjHh7zZbXnFi+ztO1fVWSKs9PDv2T/0ui26
+X-Gm-Gg: ASbGncvH2juKYtlFXjuADdSAX0Xz7/HpVljNi66vT+LgVapsmuZm8oc4n/5VfcihJUc
+ N30qzGXYONTbWRuPqZb+8KjfaxE8VrHU0BGdjjJXEssNhz237+rHp9EtIWpE8O2hpNph9LXGhXD
+ kQ+aAK1EgVhyUKFcjliFdpnQPxfZo=
+X-Google-Smtp-Source: AGHT+IGOooJ+sKEeaZ5UbfqHcQzTU9qCKLP8pHPYFSezmgrJMopx3d2SyY58smaNGP5axNjP04UYSG+yTEXd11Nfn/g=
+X-Received: by 2002:a05:6402:2810:b0:5e5:e022:a73d with SMTP id
+ 4fb4d7f45d1cf-5eb9f6c4270mr1564227a12.15.1742441977685; Wed, 19 Mar 2025
+ 20:39:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319114947.2188805-1-sjg@chromium.org>
- <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
- <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
- <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
-In-Reply-To: <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
+References: <20250319145512.2391122-1-sjg@chromium.org>
+ <20250319145742.GI2640854@bill-the-cat>
+In-Reply-To: <20250319145742.GI2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Mar 2025 03:26:58 +0000
-X-Gm-Features: AQ5f1JqWOeU9otjRIN20aEWgasIW3VU3k1g1X8PC8yVCHz8yjGxPA15kL14O4P4
-Message-ID: <CAFLszTic6gt4fT4pVVthd-3rRy6JZ_28QLXWOYPak=ZJqYH5QQ@mail.gmail.com>
-Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Thu, 20 Mar 2025 03:39:26 +0000
+X-Gm-Features: AQ5f1JqxTT07N2WFmiPwhTCQKY5CvHikfyI9nZHyOTHA95khvGCferlR2V7UvFM
+Message-ID: <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
+Subject: Re: [PATCH 00/52] expo: Various features and improvements
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,135 +103,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Tom,
 
-On Wed, 19 Mar 2025 at 16:31, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon
+> On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
 >
-> On 3/19/25 4:03 PM, Simon Glass wrote:
-> > Hi Quentin,
+> > This series collects together some new features for expo to make it more
+> > useful for boot menus:
 > >
-> > On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 3/19/25 12:49 PM, Simon Glass wrote:
-> >>> Logging of function return-values is used very frequently in U-Boot now.
-> >>> Add a few helper macros to make it less verbose to use.
-> >>>
-> >>> It turns out that the log_ret() variants are not so useful, since it is
-> >>> not obviously where the error is coming from. So only the log_msg_ret()
-> >>> variants are worthy of these macros.
-> >>>
-> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>> ---
-> >>>
-> >>>    include/log.h | 26 ++++++++++++++++++++++++++
-> >>>    1 file changed, 26 insertions(+)
-> >>>
-> >>> diff --git a/include/log.h b/include/log.h
-> >>> index 4f6d6a2c2cf..bdda7af570c 100644
-> >>> --- a/include/log.h
-> >>> +++ b/include/log.h
-> >>> @@ -380,6 +380,32 @@ void __assert_fail(const char *assertion, const char *file, unsigned int line,
-> >>>    #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
-> >>>    #endif
-> >>>
-> >>> +/*
-> >>> + * LOGR() - helper macro for calling a function and logging error returns
-> >>> + *
-> >>> + * Logs if the function returns a negative value
-> >>> + *
-> >>> + * Usage:   LOGR("abc", my_function(...));
-> >>> + */
-> >>> +#define LOGR(_msg, _expr)    do {            \
-> >>> +     int _ret = _expr;                       \
-> >>> +     if (_ret < 0)                           \
-> >>> +             return log_msg_ret(_msg, _ret); \
-> >>> +     } while (0)
-> >>> +
-> >>> +/*
-> >>> + * LOGZ() - helper macro for calling a function and logging error returns
-> >>> + *
-> >>> + * Logs if the function returns a non-zero value
-> >>> + *
-> >>> + * Usage:   LOGZ("abc", my_function(...));
-> >>> + */
-> >>> +#define LOGZ(_msg, _expr)    do {            \
-> >>> +     int _ret = _expr;                       \
-> >>> +     if (_ret)                               \
-> >>> +             return log_msg_retz(_msg, _ret);        \
-> >>> +     } while (0)
-> >>> +
-> >>
-> >> Mmmm not sure this forced return call is a good idea, this would forbid
-> >> us from performing some unwinding for example.
+> > - measurement and display of multi-line text objects
+> > - internal alignment for objects (e.g. centred text)
+> > - editable strings in text fields
+> > - new 'box' object to draw a rectangle
+> > - highlighting of menu items, rather than just relying on a pointer
 > >
-> > Yes, it is really only for simple cases. Without the return, there
-> > isn't much value and you may as well not use this macro.
+> > Expo's boot menu is restructured so that it is possible to iterate
+> > through various bootdevs and update the menu as new ones are found. This
+> > is more in keeping with how bootstd works.
 > >
-> >>
-> >> I don't really see how that is better than simply calling
-> >>
-> >> return log_msg_retz("abc", my_function());
+> > A new textedit object is added, intended to provide a simple text
+> > editor. Future work will complete this.
 > >
-> > That's not the intention. It actually replaces:
+> > With this series the boot menu has a better layout and appearance.
 > >
-> > ret = my_function();
-> > if (ret)
-> >      return_log_msg_ret("abc", ret);
 > >
-> > I use this a lot in my code. You can't always just return, since there
-> > may not be an error.
-> >
+> > Simon Glass (52):
 >
-> I see, I read too fast again. Only return if it's an error.
->
-> >>
-> >> ?
-> >>
-> >> If we were to keep this, I would recommend to rename the macro and fix
-> >> the docstring because it does not only log if the function returns a
-> >> non-zero value. It does actually return.
-> >>
-> >> So something like
-> >>
-> >> LOGZ_AND_RETURN(_msg, _expr)
-> >>
-> >> maybe?
-> >
-> > Sure, longer names are easier to learn, but then it is so long I doubt
-> > anyone would use it.
-> >
-> > Perhaps LOG_RET() and LOG_RETZ() ? But they might get confused with
-> > log_ret() and log_retz(), which I am actually thinking of deleting.
-> >
-> > I would like the shortest possible name to avoid spilling functions
-> > onto the next line all the time.
-> >
->
-> It should be absolutely obvious from the macro name that this can in
-> fact return because missing to unwind code is among the things
-> developers typically easily miss already, so with this macro it'll be
-> even easier to forget about undoing things.
->
+> I see you haven't internalized the "don't post massive series" feedback
+> yet. Please, stop posting massive patch series. Figure out how to
+> logically break things down in to smaller chunks that can be
+> meaningfully reviewed.
 
-Yes that's true. We don't have a huge amount of tests for this 'undo'
-code either. I would bet that a code-coverage map would show that.
+I could split this into two series of ~25 patches, perhaps. Would that be OK?
 
-Subce the macro only returns if there is an error,that could be
-important if we are trying to have a descriptive name. Perhaps the
-logging bit is less important.
+I believe no one else is using expo yet, apart from postmarketOS,
+except the trivial case of 'bootflow scan -m' but I'm hoping that will
+change in the future. I believe that Linaro is mostly encouraging EFI
+bootmgr and the text-based menu. That could be converted to use expo
+but I doubt anyone has looked into that, particularly as grub is being
+pushed as well. I did look at converting the existing menu code a year
+or two ago, but it seemed better to eventually deprecate it.
 
-How about ERR_RET() or RET_ON_ERR() ? The last one is getting long too.
-
-> I'm not sure this downside outweighs the benefits to be honest, but I
-> also don't write a lot of code these days so /me shrugs
-
-I am thinking of the code here:
-
-https://elixir.bootlin.com/u-boot/v2024.10/source/boot/bootflow_menu.c#L61
+Also, there is a following series which I split out and will post
+separately, but not for a while as I have a lot outstanding.
 
 Regards,
 Simon
