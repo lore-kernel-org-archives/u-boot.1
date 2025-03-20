@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 256A7C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 03:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F13C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 03:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F5598083E;
-	Thu, 20 Mar 2025 04:41:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB4DE8198A;
+	Thu, 20 Mar 2025 04:43:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gxvju/HU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c6EdDWaP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D70F80FF0; Thu, 20 Mar 2025 04:41:49 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 438338198A; Thu, 20 Mar 2025 04:43:32 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3F89803CC
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 04:41:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A50308083E
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 04:43:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5dc89df7eccso602094a12.3
- for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 20:41:46 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5cded3e2eso514989a12.0
+ for <u-boot@lists.denx.de>; Wed, 19 Mar 2025 20:43:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742442106; x=1743046906; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u9F736zT/d9VCrYiXEA10ZRXYur9oeqcnLrZLNzx+WU=;
- b=Gxvju/HUcCd1qJcIoAgkJzG6XPdHYj7o+QJMBNJ/S53luvaEl5NznpJ/epQ00Qbnp5
- YqA8qeE+tHSN2pWq/c/0dsdndWR/jzN3QmTIFfk348m7mmkrCPXvZBjGEqHflKJ598uS
- jOOiN7xal/7TBI6v75L8ZiRRXmTTOBPc+hqhU=
+ d=chromium.org; s=google; t=1742442209; x=1743047009; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Mf1MJucvdfQdi3IfjZhpXlb4dI004EMaZYIG2L30Ibc=;
+ b=c6EdDWaPO2hwO5D9wIh4K7WaLJf6ZDrZ4aeg6lWo9ZYovhKCiQg87/r/1af0Xitr21
+ qCPe83ko9MJhUwqoGlY9TfHa6bXMtNsfaGOO+xnHPcFRpJKRV5H11G834NqyATCtwv8e
+ MW22GnhZreWFFOozCO3fUWXjsTipZVigB4xoA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742442106; x=1743046906;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=u9F736zT/d9VCrYiXEA10ZRXYur9oeqcnLrZLNzx+WU=;
- b=sncYdUOMBCtJvPEJAyIG7CnzbiUJuofujsybznnm8d8vImABY2BkCMeGiMvtDmSb7w
- 5lEK6EvoSc/pjSf5TOeLagD5fHPSjwpE6278Mz0/j+cpHImOQyF8EXU9zpaH4QtYQq+w
- 4/y4GkrYweCI6vQBAoV29mZdAqippeqwakXmqfG5tZ2+AaR9KWKb1giUniywWlAEpV0f
- ODTEd+bEtozOmBUhG7w/EP78pE19UU0n2/lKcgRvnLiZl5cbRe+toUr0+8u5PgfTJPol
- TZ/J+G+SEBHHOrTzS14I5rX40oFbLyLLSAve/bfSrYksYNEOPYnhNNiJQL+/PULB1xtz
- jDHQ==
-X-Gm-Message-State: AOJu0YxtgMkvnuB/D3tmt9RJiSlob5uRxYGt6KfUEFXZebNlYnGzbeAX
- ua/1YTJ1zhzzYGrRvr4tFN3Rp/ct7SMtxRZP1djDkP6E30WNf/NK66jgSw8uqL/vfpxL5ULUgGc
- 6yicXRxufmOg6R+RAAe54Dhc8dM1TYGIa55Uz
-X-Gm-Gg: ASbGnctxrNEgWbMqVXlre80u+FqIhU7KqvjeZyTXZ0ng43aH3a7NBqWIm3RRe9RXnsZ
- IcYs/+YkccNJ8bItjxhHUunUTRtbaGQLpxEGgMUFzK9ckRC+ETXXpSH8muKSafvP1DsBjobVSTy
- y+sXtucj8uWeUn32sFHVk7p24ZTpknrj0IpjFUtQ==
-X-Google-Smtp-Source: AGHT+IH++t/Ni6/l10Eu4Q/GiBB+gUAPS74BTvH8JfbLIyjscHlhG6NOPetjC/EL0VUHWftwqSm9OAcPcrZ0JLu1qUw=
-X-Received: by 2002:a05:6402:2789:b0:5e4:d2c9:455c with SMTP id
- 4fb4d7f45d1cf-5eb80d16e56mr4325029a12.10.1742442106237; Wed, 19 Mar 2025
- 20:41:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742442209; x=1743047009;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Mf1MJucvdfQdi3IfjZhpXlb4dI004EMaZYIG2L30Ibc=;
+ b=nGe+i+4I77Pn/4DeOpQ8imfrCWN/P9xwwHM0yayBfbtuXVisnKJVfI0A0SJ5vvdb5t
+ Dejg6z6G7LxLEkf2qn/3/g5lFSMMVemIxT92fpGi9bw8QWB3cXF0d9x+xGJTJEhzFp0E
+ xZg1/RR3BOXDy/pCtWf6nNyMCcUampbSCp9muylkd3aTbb5tGfi7EtHqSivmJtT14yEB
+ B9VDWRP2F9PE+8vLz5Ad2nCQjQcoZTfeLnA2aJc5x7Eo9vJOYKOpklCGGmGJxVJ8gVRg
+ 4w2TnEE2jNtw4ikLuvdNUJq5ClYfrsTv4lr0f2dF6EvzzEoVecGfWVJNDe78JkwcdLTT
+ acMA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVCz2IkQzc1OkaghDB0KiGD0bwmj36tHlkowSQuZ/z2SNBSooToHL7Tx9l/eT9oznuk09NwUGc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDDvsdkTvDjxwAsXirUS8D5HLZciEsIa/4bi7wayGxkWzYknbc
+ DQwuTuCyklg/hpC4M8InW0gzQXKyAiIk/+OKBj55vvsjgrOP6BhPetjwCG6Qmvl32qLe56D9Fn+
+ Vxa4f71mC0s5Dl/vFVWzID03uuVIJxqBKZtGP
+X-Gm-Gg: ASbGnctvlpEbER9Omhw7qZyVmRW6nqhtbn7qelEfV/G4BfNaUkqSTj3EgU+mUlWkMLh
+ drmDDdTKj35kiUX/65aEHcEDe6IxFwjNbDT6jYrFjC3qKpqPAIFmhgCPwzpvb9jOT7Khcjv4Gea
+ aMGU9FGc4AjZP0F0fihl1UfBWhilohVHnhp1L4Mw==
+X-Google-Smtp-Source: AGHT+IEhaIwyyh9NNPmJ4486jHa/ebIA5WWuW59Q4OjMiNzUcJcq+PsChcBMQaQ+FH4sHO3MIpLTn2bpfnYeCrwX/5M=
+X-Received: by 2002:a05:6402:d08:b0:5de:dfd0:9d22 with SMTP id
+ 4fb4d7f45d1cf-5eb80fa48bamr5008159a12.22.1742442209215; Wed, 19 Mar 2025
+ 20:43:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-10-sjg@chromium.org>
- <20250319145218.GG2640854@bill-the-cat>
- <CAFLszTiRm3YEQqU1w75uFp5gFZ1HiPv41vNX7VFy8XS80udVRw@mail.gmail.com>
- <20250319153510.GJ2640854@bill-the-cat>
-In-Reply-To: <20250319153510.GJ2640854@bill-the-cat>
+References: <20250319115911.2204045-1-sjg@chromium.org>
+ <20250319115911.2204045-7-sjg@chromium.org>
+ <ABCF9413-6C51-4EBA-9907-95C5097A8D86@gmx.de>
+ <20250319142038.GE2640854@bill-the-cat>
+ <CAFLszTg17Q+ovvc2MeHLadsSdK+LJuHsXhf=fFybkbf=zLy36A@mail.gmail.com>
+ <20250319153621.GK2640854@bill-the-cat>
+In-Reply-To: <20250319153621.GK2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Mar 2025 03:41:33 +0000
-X-Gm-Features: AQ5f1Jqkmc6x8NxhWgEeSQqs4v2hCj8h_MWc0axNbhADvvhNR1wNik-cUqea6RI
-Message-ID: <CAFLszTg8a7CCiyyVVQdHDHNJ3MEP-Zxbbao_riy+iTzDt2u-KA@mail.gmail.com>
-Subject: Re: [PATCH 09/17] test/py: Add a test image for Ubuntu
+Date: Thu, 20 Mar 2025 03:43:17 +0000
+X-Gm-Features: AQ5f1JpMCPxzLJx6OQlS7PRSy3eMK7zAfyy2bFqLZzLMi2xi99euhWUxzLGfbto
+Message-ID: <CAFLszTgTC5bG=tLeHQ8CYCymLND4bykiWQCgBhszcUORhT5LGw@mail.gmail.com>
+Subject: Re: [PATCH 6/6] lib: Provide a signed version of simple_itoa()
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Julius Lehmann <lehmanju@devpi.de>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Raymond Mao <raymond.mao@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,60 +101,39 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 19 Mar 2025 at 16:35, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 19 Mar 2025 at 16:36, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Mar 19, 2025 at 03:04:28PM +0000, Simon Glass wrote:
+> On Wed, Mar 19, 2025 at 03:04:00PM +0000, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Wed, 19 Mar 2025 at 15:52, Tom Rini <trini@konsulko.com> wrote:
+> > On Wed, 19 Mar 2025 at 15:20, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Wed, Mar 19, 2025 at 03:38:03PM +0100, Simon Glass wrote:
-> > >
-> > > > Add an extlinux image that contains a few Ubuntu entries.
+> > > On Wed, Mar 19, 2025 at 01:12:30PM +0100, Heinrich Schuchardt wrote:
+> > > > Am 19. M=C3=A4rz 2025 12:59:08 MEZ schrieb Simon Glass <sjg@chromiu=
+m.org>:
+> > > > >In some cases we want to show a signed value to the user without n=
+eeding
+> > > > >to use the full printf() implementation. Add a new version of the
+> > > > >simple_itoa() function to handle this.
 > > > >
-> > > > Increase the number of sandbox-USB-hub ports to permit this.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Where will this be used?
+> > > > Why can't printf be used?
+> > > > Why would this fit into this series which is about test improvement=
+s and not about functional changes?
 > > >
-> > > I don't understand what this test adds. In neither the current Fedora
-> > > test nor in this new test are we actually booting something, we're just
-> > > taking a sample extlinux.conf and making sure it doesn't fail. Is it
-> > > that we're testing in a useful fashion now having two labels?
+> > > It would be more fair to say that only one patch in this series is ab=
+out
+> > > testing and 5 are adding otherwise unused changes to functions that
+> > > presumably are used in some later as yet to be posted series.
 > >
-> > I didn't think so either, which is why I never did this before. But it
-> > turns out that there were some bugs, too.
+> > Sure, would you like me to change the cover letter?
 >
-> I don't understand you, sorry. You don't think so either to what?
+> No, I'd like to see the test by itself and defer the unused additions
+> until there's something to review it alongside of.
 
-I didn't think we needed two extlinux examples on different boot
-devices, but we do.
-
->
-> > > We should probably be clear about what we're doing in the tests and
-> > > instead of adding seemingly arbitrary distributions add an extlinux test
-> > > and testcases.
-> >
-> > This is not actually a test case. It is simply creating a new image.
-> > The test cases are in the other patches, so please take a look there.
->
-> Nothing in this series quickly reads as adding tests and fixing problems
-> with extlinux parsing, it's all bootmeth stuff?
-
-It isn't about the actual parsing of the .conf file, although I would
-like to add tests there as we have none apart from what I have added
-in my PXE series. It's more about having multiple devices with
-bootable OSes on them. This series tidies up and fixes this. We need
-to have an image available on more than one device to spot these
-problems.
-
-Currently we have two accessible to sandbox, one extlinux and one
-EFI*. I decided to add a third, using extlinux.
-
-Again, this is not a test case, but provides an image for the test
-cases in this series.
+So you don't want simple_itoa_signed() or abuf_printf() until you see
+the series which uses it? I'm struggling to square that with your
+request to break things up into smaller chunks, though.
 
 Regards,
 Simon
-
-* The boot_efi() test in your tree is only a subset of the full test,
-as you know
