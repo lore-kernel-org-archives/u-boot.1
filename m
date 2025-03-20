@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2589C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 12:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B16B5C35FFF
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 12:52:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF5D9807AE;
-	Thu, 20 Mar 2025 13:52:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42FDB803CC;
+	Thu, 20 Mar 2025 13:52:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="JdbGS+Ta";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="RNmyx0ru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC7A18070C; Thu, 20 Mar 2025 13:52:07 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 6EA468141E; Thu, 20 Mar 2025 13:52:09 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C5808003E
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 13:52:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1584880540
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 13:52:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ab78e6edb99so123847366b.2
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 05:52:05 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aaeec07b705so124370666b.2
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 05:52:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1742475125; x=1743079925; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/nAkvvTJghKFKBAr++jRFEChSA/57yZsVMAmpN41EXw=;
- b=JdbGS+TaMSHcebULxwju8bauuNDQF/wfN971Fb4cNqEFnpj8mwGptpdem8F44gNMay
- YGHQ29J3tzhev9aXBq6TC1lXN9fLLM3VD3cRyrMChlone9oEUM9hkk9e3NskafUTClYf
- G/6R4N1qtQHanTNWCCCwoXCgTZ66z6IhAOVVsKLss/LhEroEO6Wg1iVmzQ96jH9iauwd
- PT7xAay48m+Ra12Jhbqe5WYDQbDPKhKBDhUEao5bF/QGxv07cckPcny/rzsoHqx/C7Sf
- rR3zzRnTCYZeBFbguoymfW1GWxt8K146MIf5rM50FxlUt5daUNwynx+XO2++Q0Kglfa4
- s/wA==
+ d=9elements.com; s=google; t=1742475126; x=1743079926; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rdkNWU2tW65WejyaUDiiyRrCxdRlFjOHXvPOKRWKRTo=;
+ b=RNmyx0ruGAJ3T8AOk63vkoIJ/Xh6+ysbosuj8/1N8eLP8n6nWA83qXEEG0/vyyfhIZ
+ WTQIWoHPT6oGilDeDPtNlINDBgUaKnnKJAi/HjCpvTRXef69zFrgki8l8KN811cT+YUY
+ uzgh5gG92FV06C8SS4j28NjZAL+kkFW8RJpig9nFK7uSylBshcZvM7Q7Y9WnvrDpaNR+
+ /nodw1BKmNP4itYGw6k6yiNbnqNcFsFx57uSutgLsWQvBIQwObHhzdMyQHSNfPhor9tC
+ lSAqlIEZDYHxCuQwX0B9z59u1aA4XEnmfIxLokeQDQtocO6kOGAPVglVaU8BLOetdMkQ
+ IUwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742475125; x=1743079925;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/nAkvvTJghKFKBAr++jRFEChSA/57yZsVMAmpN41EXw=;
- b=Zo3J7BGqZZs0417k0aJ16Q37c/9UjiTpLcPejNOgUwYEi9USqEnwqViEeHAn/mPamd
- 57iNWThvXYcxFFLzrIGFm4ubkF2VBuUZORyqAHRuA6IvbXBpP86SF3L46VobysZk9+VV
- GuXwb8GNtBFFVwBFLTPEMjCxwk4hEcVfwS5WXX8FSMuyaHr+kO5jw4lIfJcukyL/kz3b
- N9rPMH/ZtyaVcLdyLIcQk2gTfK/IVlKFmu9iKv6plrCz0c5Pe1jaHXhK514URaKZ91PF
- aQu+VqcVH6WV6CqDs7Pd7TN2171Lxsa3N44P/RytM48ksez1iL2nQldhTw/pwCRwqpNZ
- uSVA==
+ d=1e100.net; s=20230601; t=1742475126; x=1743079926;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rdkNWU2tW65WejyaUDiiyRrCxdRlFjOHXvPOKRWKRTo=;
+ b=P2q7dfMilymooMmFahb3Y3PxdDvjHHGRBM0WT0I6rYDMrI5GTDM4QoU+nLof5Y4tA9
+ IMj7N6ok/pbHndPQjJr7enZ06Zzqk70Ds8s4wQU42fuf0yBS+xX2ZMLrLQrYuQ5XpJY9
+ T+lOIfzqUdfR0KZQEEprx3CR64BSnF6ygf2FYyTYvx+nTddI97Qigi2ZRhSQgZdmBFS2
+ WvL5tMudfzS32ci6cXYcDtnwyLRZNlrwq7x+cS0ZZrozgWMzUUaaWX6CjL+nsPWNOrED
+ Ud9HD+qNS8w4+gryESGCWRaB1YceTj5AEqi4Ncui/um168hBi5q18136KZIjwtkj2Jtc
+ 7eDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVEwZaooFZt58Y/CY8QdAGqoN959cjWFXFkByLAx5xOjrd01KkI1Scmcv0ZBV/Gs6AmjmIiI4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+XmXxe6kqQK3fb9rJFtWufEenpacNo91MK/5tL6F/iH2qOJXz
- xw5m/qMVSOWxv9uCFLGEwqOJp3mHhlfAoWezkqomNZJ2CH3Ivzjx7IEWszV51+4Y6B+ufFu1hN7
- McZQ=
-X-Gm-Gg: ASbGnctkRNc4Yf7c39MihIBWgDNOn9CcvUN7QYonXLf/VLqkCJt5lehoM9TDKHTejUq
- sgbGwu2IOwJUiu9X29Jr5ka1plDfP1XX12BTmCPeFDQibRHApx5HImRhBdqN780QU/QEBIgf1oh
- 91JcFs90wzHTZdxho9006obarC4UsuUlniUljhVwrcqJmd5qkTXzZ1nrBBUO11eWmNiO23OfP2f
- TQ+nX+RY/4aGZV8rixL5wLRysqB9UuVPjllCna5xFABFFphZT2MFvOl42L6KLN8msV1z/SPEmkt
- 0TQuHmMI3k5WImieKr0ALAMsV051V824ACoznygNc62KZDU2++qEmcDcs+R285Al0HZJPUgwKZk
- 2GSpamKjXoyFT+yFxh3tMi86YziZp7sbzm7VpRqxBM0pPwZMa9zNkUg==
-X-Google-Smtp-Source: AGHT+IGPS05kWacAZJryaKrDMwzjo3X6tQ8Q9jIz0aOvreptrcup2ZTxuuHOh+jFP9S1+dPChB/Qjw==
-X-Received: by 2002:a17:906:c144:b0:ac2:b9c8:b7ba with SMTP id
- a640c23a62f3a-ac3cdf76c1emr357020166b.10.1742475124547; 
- Thu, 20 Mar 2025 05:52:04 -0700 (PDT)
+ AJvYcCVooxBlcyBWDPcsuigl0K1tbYdUIPCZ3dICfAU9rpa2+HfARcCJzbRMEx72sjB25udBHuN0/T4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfHLHP4tFqj2EXHQML8A/ZuEyODpz/NRVM7AFMpmXy5GNdq/YT
+ Ll6AlFzmhqjWUt/uWujUGWgroYFQfShZGmME4aa5n9DFbVsa0WjWLcM798LeqPA=
+X-Gm-Gg: ASbGncsw1F9hkrUnT6dNSpEMukB2TBZOdeJbjyMZC870mTJ3sKpRPBKFbLdbjN58w76
+ do4QIQHXCE0UDS6PnknwVH57+rtBlyXD1MES5QJSeyDiWUK3UbVlp00NVtawN0HdZ1f00e+p58p
+ hyUIxUVDUUSODiVGrYYL/VOnWunzzJvb+tnTlOezP6KIrViEvgP+dG1LRIzhY2xdz+8w7plARVa
+ ZgSPDgLJ3J6HJGC/0v8BhA8m3MRWAxEH0AIg2vjdT1JPRoNGX69d19N7X230444FEvASPWXm+aq
+ KSUHVbodKSNwes2rjfRLCTsAEMhV91ANRrvLWco2apbZo491zUNse6pTBuL2nhbt8ewrQZHX3BP
+ NI4kOIbccVDoFTnr84z/kLjETkV3GGgSZiH2u8JrROtQ=
+X-Google-Smtp-Source: AGHT+IHjvByMTj6zzIeabOZbSCyfekodhJ89tM17KaCI2a6mKESFq9um6TSepGQnRhNPX1Rp1R7Vdg==
+X-Received: by 2002:a17:907:60ce:b0:ac2:6913:7cc6 with SMTP id
+ a640c23a62f3a-ac3b7d7f6d9mr700385766b.31.1742475126253; 
+ Thu, 20 Mar 2025 05:52:06 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac314a462basm1162284666b.133.2025.03.20.05.52.03
+ a640c23a62f3a-ac314a462basm1162284666b.133.2025.03.20.05.52.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 05:52:03 -0700 (PDT)
+ Thu, 20 Mar 2025 05:52:05 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 1/3] arm: gic-v3: Scan for subnodes
-Date: Thu, 20 Mar 2025 13:51:56 +0100
-Message-ID: <20250320125201.27459-1-patrick.rudolph@9elements.com>
+Subject: [PATCH 2/3] emulation: qemu-sbsa: Move ITS node into GICv3 node
+Date: Thu, 20 Mar 2025 13:51:57 +0100
+Message-ID: <20250320125201.27459-2-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250320125201.27459-1-patrick.rudolph@9elements.com>
+References: <20250320125201.27459-1-patrick.rudolph@9elements.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,29 +102,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 According to the binding [1] the ITS node should be a subnode of the
-GICv3 node. Since the ITS node has it's own driver, manually probe for
-possible subnodes after binding since dm_scan_fdt() is not recursive.
+GICv3 node. Thus move it now that the driver binds subnodes as well.
 
 1: https://www.kernel.org/doc/Documentation/devicetree/bindings/interrupt-controller/arm%2Cgic-v3.txt
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 ---
- arch/arm/lib/gic-v3-its.c | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/dts/qemu-sbsa.dts            | 10 ++++++----
+ board/emulation/qemu-sbsa/qemu-sbsa.c |  2 +-
+ 2 files changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-index 51cc2397768..34f05e94672 100644
---- a/arch/arm/lib/gic-v3-its.c
-+++ b/arch/arm/lib/gic-v3-its.c
-@@ -232,6 +232,9 @@ U_BOOT_DRIVER(arm_gic_v3) = {
- 	.id		= UCLASS_IRQ,
- 	.of_match	= gic_v3_ids,
- 	.ops		= &arm_gic_v3_ops,
-+#if CONFIG_IS_ENABLED(OF_REAL)
-+	.bind		= dm_scan_fdt_dev,
-+#endif
- 	ACPI_OPS_PTR(&gic_v3_acpi_ops)
+diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
+index ed00e501366..099b51b927f 100644
+--- a/arch/arm/dts/qemu-sbsa.dts
++++ b/arch/arm/dts/qemu-sbsa.dts
+@@ -97,11 +97,13 @@
+ 		      /bits/ 64 <0 0>,
+ 		      /bits/ 64 <SBSA_GIC_HBASE_ADDR SBSA_GIC_HBASE_LENGTH>,
+ 		      /bits/ 64 <SBSA_GIC_VBASE_ADDR SBSA_GIC_VBASE_LENGTH>;
+-	};
+ 
+-	its {
+-		compatible = "arm,gic-v3-its";
+-		status = "disabled";
++		its: msi-controller {
++			compatible = "arm,gic-v3-its";
++			msi-controller;
++			#msi-cells = <1>;
++			status = "disabled";
++		};
+ 	};
  };
+ 
+diff --git a/board/emulation/qemu-sbsa/qemu-sbsa.c b/board/emulation/qemu-sbsa/qemu-sbsa.c
+index 3943c924320..cf1d5acf5cb 100644
+--- a/board/emulation/qemu-sbsa/qemu-sbsa.c
++++ b/board/emulation/qemu-sbsa/qemu-sbsa.c
+@@ -202,7 +202,7 @@ static int fdtdec_fix_gic(void *fdt)
+ 	smc_get_gic_its_base(&gic_its_base);
+ 
+ 	if (gic_its_base != 0) {
+-		offs = fdt_path_offset(fdt, "/its");
++		offs = fdt_path_offset(fdt, "/interrupt-controller/msi-controller");
+ 		if (offs < 0)
+ 			return offs;
  
 -- 
 2.48.1
