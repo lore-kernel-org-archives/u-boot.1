@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CF3C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 06:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3558C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 06:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F17080F0E;
-	Thu, 20 Mar 2025 07:46:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A43E8083E;
+	Thu, 20 Mar 2025 07:50:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UMDl+S6m";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kzZLyCQX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9820580FF0; Thu, 20 Mar 2025 07:46:07 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 07F3C8083E; Thu, 20 Mar 2025 07:50:35 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF5FA809D4
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:46:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9440E8003E
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:50:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52K6k3xt3167118
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 20 Mar 2025 01:46:03 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52K6oUkh3147278
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 20 Mar 2025 01:50:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1742453163;
- bh=EYqQdEXc5aa+6aDgZAqzQXG5HL+ov9X88dxdOGbppbE=;
+ s=ti-com-17Q1; t=1742453430;
+ bh=aPgSjYMyiCIepAa64lFchU9cE3xeZRjWxnsMeujHCec=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=UMDl+S6mKUSpbhsQrqH6TeG6qKYdq2/7n29uP1bvw7XUS3T7qhS60hXvX9X/lZnME
- erK2ZcQ9RSmuEaFO4e3xVbZxAcY5GbDqAy+Y8VJXNSu0jypcLH4ydtUuiXODKQB6FR
- PUR+M72JopK1knH9/rpmIncrRuRXzH9pYf4/zEp8=
+ b=kzZLyCQXxN2MtMq89X/U/XFe7c7KfpuvnhgGXJMZsICRWhLk0QD63RKVkPcYRKAVa
+ N8BnfDycRQiudp4D58gROsPnBk45NI71/+VNlwT+zzTSTIRfuDuPhV4rT0X8AJ5syQ
+ D6fzD6X1IluqwIbVA0ior719pne/SR6xDfB/VHsY=
 Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52K6k3Hf020834;
- Thu, 20 Mar 2025 01:46:03 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE110.ent.ti.com
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52K6oUjW006774
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 20 Mar 2025 01:50:30 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE110.ent.ti.com
  (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
- Mar 2025 01:46:02 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2025 01:50:29 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 20 Mar 2025 01:46:02 -0500
+ Frontend Transport; Thu, 20 Mar 2025 01:50:29 -0500
 Received: from [10.24.69.37]
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
  (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52K6k0jH111746;
- Thu, 20 Mar 2025 01:46:00 -0500
-Message-ID: <535b97ce-6802-47a6-8fcd-5157766d012b@ti.com>
-Date: Thu, 20 Mar 2025 12:15:59 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52K6oR1q116874;
+ Thu, 20 Mar 2025 01:50:28 -0500
+Message-ID: <6e0cf522-4878-4620-a2ad-db2933697a3e@ti.com>
+Date: Thu, 20 Mar 2025 12:20:27 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/3] mux: Kconfig: Add Kconfig options for MUX_MMIO
@@ -83,8 +84,6 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anurag,
-
 On 20/03/25 12:00, Anurag Dutta wrote:
 > Add Kconfig options for MUX_MMIO so that it can be enabled
 > in SPL stage.
@@ -105,9 +104,6 @@ On 20/03/25 12:00, Anurag Dutta wrote:
 > +config SPL_MUX_MMIO
 > +	bool "MMIO register bitfield-controlled Multiplexer"
 > +        depends on MULTIPLEXER && SYSCON
-
-Indentation seems to be off
-
 > +        help
 > +          MMIO register bitfield-controlled Multiplexer controller.
 > +
@@ -118,6 +114,11 @@ Indentation seems to be off
 >  config MUX_MMIO
 >  	bool "MMIO register bitfield-controlled Multiplexer"
 >  	depends on MULTIPLEXER && SYSCON
+
+
+Maybe I'm missing something but what is this config supposed to do
+exactly? It only depends on a couple of configs (is not selecting them)
+and I don't see it doing anything in the code.
 
 -- 
 Thanking You
