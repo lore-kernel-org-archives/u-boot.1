@@ -4,102 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D590C28B30
-	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00D29C28B30
+	for <u-boot@archiver.kernel.org>; Thu, 20 Mar 2025 14:22:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B9E2806FC;
-	Thu, 20 Mar 2025 15:21:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 851B9806FC;
+	Thu, 20 Mar 2025 15:22:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cHApol77";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJZXHDCI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F88480540; Thu, 20 Mar 2025 15:21:30 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 1B94181101; Thu, 20 Mar 2025 15:22:48 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10EA6807AE
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:21:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5A2380540
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 15:22:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-301cda78d48so1577898a91.0
- for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:21:27 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-225477548e1so15042895ad.0
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 07:22:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742480486; x=1743085286; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742480564; x=1743085364; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ivSCZU4ry6WYyZLhqWM6aWuWtjImGf3l5IWkiCfNENA=;
- b=cHApol77NW9t/9r1w+oKZJ3NKmu4CBe967ErOoiaH5L7RZnOa+SRZKpqsM7n1LGYqH
- oQSCcFVcVj51dinaUpOlSk7ASjyODlxaGUmyQa3wb2grcgtgY0yUV4AVbm00O1l2N8af
- A6lWiro59c8u90qYtarniKlxA8YgRt1ZeP97E=
+ bh=GNBaz0dZF2C/5pHInEds8hgOWIpKbyRjVoOL/JUfREc=;
+ b=bJZXHDCIgzhevg5vta7lqgeIDlbgq3sNSTu8Er0qjSi+pGC8vjt6Ybp1W5RUZRXYLs
+ e7pdBJQbuFtBZuCN3RWEMb0pNQqTMwyAhZYfDNvalA/mhEhCDJgNIwkKp+2ktI8t+33z
+ sVAU5Fg/J4sMq1k+aenlEOvgDlC82pBRnfKys=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742480486; x=1743085286;
+ d=1e100.net; s=20230601; t=1742480564; x=1743085364;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ivSCZU4ry6WYyZLhqWM6aWuWtjImGf3l5IWkiCfNENA=;
- b=c65YyLTFe2S3RdjdFsLKaXF1YTSx0w8qDe2q4ibLXT6H8R/BQRgAC/vESw5ONGFvZ/
- Z3mnd1QBoUjAyCYsWQl/G7OiBT6/L/m2yQiIEgpqv7WQjTovpUm1fOHkST+tToge/k8F
- 4AHYWIBeFfQ0TzOWl93z7ITCAuqoZg86HZt4k/7+E5VsK2OXCGglPtNbkh0etqqhigYP
- y0AV+23xRhtqatlXbDcti7QSG/3ZzzoWeM6XftFLMMOGWTWaYh9arFwC0qRFnRWy/Em0
- EoY0v6oMAYJaSxWIf8XadDxOFAw4EVvU4MIJVecfefPxvNJlie6eo2VSkPiAm5XbgjlI
- ENwQ==
-X-Gm-Message-State: AOJu0YwlRHh0Un2VCtSWPgRPQBJeser9Tt+RVbazn+LgSMlQqWDXRsX0
- fWsE5LYAfCp75x10QigrdhMoz7um+MnFuZf4udy8WHvX+91uFqrGiFZ5d8lv62M=
-X-Gm-Gg: ASbGnctQsQtidvDhfdk+ePepqwglbHbiKyZ2k19kBaIY11rq+egz506z88k6jQXOhD0
- 7P2Ec8ufLWGqv6fWOFgja3ia0ADjryinXiKSBdYU9K/Z5GR7FudgHVxi7a44BoK4NkrlSa9QExW
- 7pdnPDplgo9uUu7h1JlkzrhWc5WghiUjRffbn0pETxUzlMNtFxi7wum8OdXu7OIeA3dplgv+K73
- 4ouLy/HOCp2mfEm3NB3/6pC5hhiptDpW26yGJrQ+L8jgMXoKXOmowlszlvangmMXwwjjfAvxVHO
- oW4gFZqlQlE33II/Nw9a6VpfYq6CGEaFWKaCrvKlrIe0rQ==
-X-Google-Smtp-Source: AGHT+IG5XTfB1sHPljPk2V4Ygzd//vZMNUENp22kHyEiEQwngNndsuXG24M5Mb3WlV/zqTj1qVSp0A==
-X-Received: by 2002:a17:90b:1f8d:b0:2f6:be57:49d2 with SMTP id
- 98e67ed59e1d1-301d52c3851mr6194366a91.17.1742480486358; 
- Thu, 20 Mar 2025 07:21:26 -0700 (PDT)
+ bh=GNBaz0dZF2C/5pHInEds8hgOWIpKbyRjVoOL/JUfREc=;
+ b=eTxhkPahhzmj31N2HyR7cfchZSjUZFmUHfYzrz7fuEnACEyv/sEobNzknm0jXoEfRq
+ u4eBgLfV2jLvwpti8KMeKhDNAWcAjkV/mANZzqYWV+yGa4cpgb4AhXqVuAmz16gn823n
+ bAy+OW4v0/Z3fyLzVAci0Ek1t9KWJO5yooe3lEU59V+q8knj0AjGVJpyjQ0Va2uZWxNv
+ UT+85D74p0tMN1z/g4N7cicBlbA6GGRq/bFqkXWBcoByRU1QgWGDZ1toz0wi2Pky688x
+ vI6lfl/zTfHWAJH78nl9p0AI7gqwYxOaHa4vleEW9rYeVbxOTR3lslbq66yUpYIP48KP
+ UKUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXIRUYvPUmKOiuOPi/kvJLhVhijs+PnodJSpHJtTC73WtB3VgvIgs+5slCz6rm1LNsv/ElJcPs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXIVURfNHWpO6hv52IXtu7CES+gYt9e+7Y1qpqGvqVFZ2OzBZ9
+ ccRTg6Wh9CN5PDh/oGICzzCOcvAJwT1z3AzXqkAgx43piGCCxDqwOs7qkj1Endi7/XsDcJDmIBp
+ o
+X-Gm-Gg: ASbGncsQ84DjJ9HpFvFtNx4zs7Z54hXfsTavQUCSm6Gu6y4GjRq+0Xm+nSvjE3pqyib
+ 6ai/gyj+cfKwEY0cvSTo6iNFt9C7jQLbHStAkj3BmDs+aQJCkcWmbD5V1oudmDtnhN7nQbBzK4/
+ oZEpbFbOmkN1nzBsBBq6i5y29Nn/e+lb15jscTfZhEBmRa8sbTL2kdp50dgeceycxfWg3Sv3+aq
+ Rqf7HrB0M75zM3xznUX6NTpjIwRnNRLQWvLw6KQeTocdfkeqm/1FcMw/2wl/fU4a2iLQQaSB8HU
+ mHl+b+QZ9eRIrY8sPeiWaxapC62nBAYrWXt8wGFsGnBn3w==
+X-Google-Smtp-Source: AGHT+IG/+igN3uG11Jp5oj0ndIA24SFj/Lp14/okbo2lnB5sxSB/fr06b6rc/lpyv4Oz6o3LCaPI6g==
+X-Received: by 2002:a05:6a00:896:b0:736:6ac4:d1ff with SMTP id
+ d2e1a72fcca58-7377a819ee3mr5146007b3a.3.1742480563951; 
+ Thu, 20 Mar 2025 07:22:43 -0700 (PDT)
 Received: from bill-the-cat ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-301bf589bccsm3918958a91.11.2025.03.20.07.21.23
+ d2e1a72fcca58-737116b1ed7sm14285481b3a.176.2025.03.20.07.22.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Mar 2025 07:21:25 -0700 (PDT)
-Date: Thu, 20 Mar 2025 08:21:21 -0600
+ Thu, 20 Mar 2025 07:22:43 -0700 (PDT)
+Date: Thu, 20 Mar 2025 08:22:40 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 00/52] expo: Various features and improvements
-Message-ID: <20250320142121.GQ2640854@bill-the-cat>
-References: <20250319145512.2391122-1-sjg@chromium.org>
- <20250319145742.GI2640854@bill-the-cat>
- <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v5 38/46] boot: Consider non-bootable partitions
+Message-ID: <20250320142240.GR2640854@bill-the-cat>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-39-sjg@chromium.org>
+ <20250318140400.GX2640854@bill-the-cat>
+ <CAFLszTgCZSydxeNoeVGrR9SF7-_9pZjU+NBGXVDgXG6WzYyCYA@mail.gmail.com>
+ <20250318155256.GA2640854@bill-the-cat>
+ <CAFLszTjC47nk3FmEyHw13zaaWwdcEavk3JY5iewKWF65iVqHiA@mail.gmail.com>
+ <20250319154047.GM2640854@bill-the-cat>
+ <CAFLszThVHKU+nZhmp5ysNxqTnLJ8AMX8E8eO2zvBhDQTZ5LYNw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YXduJx9WB4OhdG+S"
+ protocol="application/pgp-signature"; boundary="VIfhnSaT3LK/TzB3"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
+In-Reply-To: <CAFLszThVHKU+nZhmp5ysNxqTnLJ8AMX8E8eO2zvBhDQTZ5LYNw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,86 +115,97 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YXduJx9WB4OhdG+S
+--VIfhnSaT3LK/TzB3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
+On Thu, Mar 20, 2025 at 03:43:36AM +0000, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+> On Wed, 19 Mar 2025 at 16:40, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
+> > On Wed, Mar 19, 2025 at 03:03:49PM +0000, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 18 Mar 2025 at 16:53, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Mar 18, 2025 at 03:24:02PM +0000, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, 18 Mar 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sat, Mar 15, 2025 at 02:25:58PM +0000, Simon Glass wrote:
+> > > > > >
+> > > > > > > Any 'bootable' flag in a DOS partition causes boostd to only =
+scan
+> > > > > > > bootable partitions for that media. This can mean that extlin=
+ux.conf
+> > > > > > > files on the root disk are missed.
+> > > > > > >
+> > > > > > > Put this logic behind a flag and update the documentation.
+> > > > > > >
+> > > > > > > For now, the flag is enabled, to preserve existing behaviour.=
+ Future
+> > > > > > > work may provide a command (or some other mechanism) to contr=
+ol this.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > >
+> > > > > > Isn't this backwards as the existing behavior (prior to bootstd=
+) was to
+> > > > > > scan and use these files, and so that's the behavior we need to=
+ preserve
+> > > > > > by default.
+> > > > >
+> > > > > Not so far as I know, but I've already spent too much time trying=
+ to
+> > > > > decode those scripts.
+> > > > >
+> > > > > If you look at scan_dev_for_boot_part, that is what I was trying =
+to
+> > > > > replicate with bootstd.
+> > > >
+> > > > The feedback from the community call where this was brought up was =
+that
+> > > > it used to work and now didn't, I thought. Heinrich, I think you ha=
+d one
+> > > > of the cases here (something about RISC-V and multiple distros?) or=
+ am I
+> > > > misremembering?
+> > >
+> > > OK let's see if Heinrich chimes in.
+> > >
+> > > Are there notes for the call? It would help me if they could all be in
+> > > a shared document, like we used to use[1].
 > >
-> > > This series collects together some new features for expo to make it m=
-ore
-> > > useful for boot menus:
-> > >
-> > > - measurement and display of multi-line text objects
-> > > - internal alignment for objects (e.g. centred text)
-> > > - editable strings in text fields
-> > > - new 'box' object to draw a rectangle
-> > > - highlighting of menu items, rather than just relying on a pointer
-> > >
-> > > Expo's boot menu is restructured so that it is possible to iterate
-> > > through various bootdevs and update the menu as new ones are found. T=
-his
-> > > is more in keeping with how bootstd works.
-> > >
-> > > A new textedit object is added, intended to provide a simple text
-> > > editor. Future work will complete this.
-> > >
-> > > With this series the boot menu has a better layout and appearance.
-> > >
-> > >
-> > > Simon Glass (52):
-> >
-> > I see you haven't internalized the "don't post massive series" feedback
-> > yet. Please, stop posting massive patch series. Figure out how to
-> > logically break things down in to smaller chunks that can be
-> > meaningfully reviewed.
+> > Yes, they're in email.
 >=20
-> I could split this into two series of ~25 patches, perhaps. Would that be=
- OK?
->=20
-> I believe no one else is using expo yet, apart from postmarketOS,
-> except the trivial case of 'bootflow scan -m' but I'm hoping that will
-> change in the future. I believe that Linaro is mostly encouraging EFI
-> bootmgr and the text-based menu. That could be converted to use expo
-> but I doubt anyone has looked into that, particularly as grub is being
-> pushed as well. I did look at converting the existing menu code a year
-> or two ago, but it seemed better to eventually deprecate it.
->=20
-> Also, there is a following series which I split out and will post
-> separately, but not for a while as I have a lot outstanding.
->=20
+> What subject should I search for to find them? I looked for 'community
+> call' and a few other things, but cannot find them.
 
-It would make sense to split expo out to its own series as there's not
-likely to be any feedback there. All of the other parts of the series
-already have something else in their subject and that would be logical
-places to split this up more and then assign to the appropriate
-custodian. Thanks.
+They're in reply to every announcement email and sent to all three
+lists.
 
 --=20
 Tom
 
---YXduJx9WB4OhdG+S
+--VIfhnSaT3LK/TzB3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfcJGEACgkQFHw5/5Y0
-tywYWAwAjuHa05REb9fyEzSj+HMfyDFe9UlxXBsScG+LmvVXxT/tmYkRoHI6tozf
-lm3ZJRRUA5rs7ODRLB+FHlbcMPx0YBRPuczFscw8yJ9fR8lSwRqlWxphprviBvW4
-4lK3VjfWlCrsY/JOWAc2enVH4r+Gz8qCCYevJA3WMj/C1zP40AxvAKlb465zNEp2
-OarkF/dpO34qea7SPueTTArRO5eMta29n1Ay8QmsdLLQf1PfaZ0wL3kvp9F+p7/2
-CANLUE7B+cY8Dj4qIGSNqHmW48BjB6TuVNCFvhEvM7EEBey2Mn3be6Rm53cYP36g
-S3GVVMCR+wEXFMqzcFtRYSXd8dKiz6lRT82YZ5Ow+DklAuQvh7b5hkxATuwB/gwp
-2o3kPl581hQiA/LaatY1rfb5wRopBeIkS4OCX2Siua/ru3RLz1fyf894kXIn6Tgp
-GFDqh9XdVd+4FrU1PuHXuY2jPaEi6t1Tv7omp4dMj5thO7b5BES8akUXiJWQogBa
-HoCLYSBX
-=LnrC
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfcJLAACgkQFHw5/5Y0
+tyw/pQwAmmy+rNP9HDWdBPZuSgrWCN4RJp20rk6mA0oGqtHymIBvGxsC09d78lWr
+tkR8rFucKzSEpNMJZL8Oh5DTPuTu9T2bjzzQZCUyxmJmOoe6tuWhsL8iV4wcb9GY
+aRzlFU/vtg2qsF/4uCEVwb1hAj+sVRUlSqDy0T/eIVywDINgtzhBoWFK1yDQtV+y
+2+kruwkIpckX/x/OeZLyRnh95ee0+bNvfwX7DaU4ceXa8lIdPOrhtLD/VpxeVhRL
+YQwMnoYhLENom3nEa1hKMA02yNhVrazLnrDLgy3pL2bYxXs9ablzDvn9SrUd0ztc
+5JbfNnfrf1vd0ENLk6N5xWZfqaTZ1SEniFgR1cTo2Li5QDGuMfJ/jj1DJQzyuydg
+gfxTvxRZtriS3x8F3w30Pykbk2hZgjh7ay51uFz04/VEB10akR0q4bwPfIokxVpY
+vAD+inxow36NCbRp2tf3UxRgXDVPu9LygmfXSMXydrDWfYYEnUlMJE4YjS1uGcR8
+V3iNABgV
+=BPA5
 -----END PGP SIGNATURE-----
 
---YXduJx9WB4OhdG+S--
+--VIfhnSaT3LK/TzB3--
