@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A71C36000
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 19:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7CDC36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 19:42:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CA618082A;
-	Fri, 21 Mar 2025 20:23:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 19AFA8082A;
+	Fri, 21 Mar 2025 20:42:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742584985;
-	bh=xwEBzad26flTcXLFD2OFHURPM8J5indOZbchA9+HnYk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hzrNxUFfaz5AVqSnmoWbZ39IfA7aEUoCTi6zIJ7ywGX37MLMWGWIzBt2wMS+xHnvq
-	 rf6JwnrSF3ncwHL/zc9eb+n2OVJ+6dwyJkWxO+Zd6EKwRmVrSlodhcvfGPJjmm5tDw
-	 htGd4rNR3E7oOFNe5IUsWlTfV3oTAamd1QKXP0AGD+XlfWpVX1t5OYK2jOZlnhkJ7g
-	 K4fD7t4pRLAr0fZLuogJhSfeVVYUo3Hc/cC7MMj2S/9uVuV+o6IpJDp9mqqkcqNFxC
-	 wSeXdNHMK+prKHfaUKMjykIPgz1+jJkAKhk7x/Qt+l8abwsqs5nfxDGSvkxiep+rBV
-	 PazAzaYdSIX+A==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E6FD4808A2; Fri, 21 Mar 2025 20:23:03 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C695B806D8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 20:23:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="HTLHOsXk"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D089510206773; Fri, 21 Mar 2025 20:22:56 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742584980; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=xwEBzad26flTcXLFD2OFHURPM8J5indOZbchA9+HnYk=;
- b=HTLHOsXkZuaDssaXpnDRIXrt1cgTSV1h1HfAWM+PL1qczrg4hE9uEBdjRd8pI6TWjGehLa
- 8j228dGKrrim70tA5rnLL+dG7aq/2wm1E5DLJ45McEWG6o+hwq+hcJuNwrVwFrmlG2egqn
- xLNbzihxcCMgpTMARxonwDqp5/dfZtW9FOsYEZYWIyvT72E+c4CbpxLw6i4Hr+D4z57YAS
- 4NU0ap4DqJpGKWrEb1P/8QQ/aFGvKfgftPmTcSlpmNCNiW2KzFR3jWbquYj3vJSzNCQNiQ
- Bp/jg84i0vHx5ahCO/BrG4Szdyb1SQGdOdmnknlLZnkStCHxe8qtIsiBAUssRg==
-Message-ID: <1fac6372-b251-4778-b3fe-7f7eda3aac8f@denx.de>
-Date: Fri, 21 Mar 2025 20:22:55 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oe/TXTEm";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7B301808A2; Fri, 21 Mar 2025 20:42:48 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DB06806D8
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 20:42:46 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e5ad75ca787so2203366276.0
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 12:42:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1742586164; x=1743190964; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=99EzEL4PhimenXr/Ee/uRd/EKlIIQ5AwmGUN87eHLuI=;
+ b=oe/TXTEmc2JAZpxLV0ep1oZmhrjMChFkXz47CBQSjBhYQnoXu/c1mn3ugvSbBanxa9
+ 7AAJ6GXeKt7TQX6fF6rmkBXLm4auKbjyksl21M6lKItOdKFStvzSw/oooco8TAxfIvSX
+ znPgt6c4iZ5Ub3lRWbsdpjN9bAaJO+208JSSBEmVX0GhI3PN5yDrbmIL4SOBsqROicfY
+ qWn38IUSCNAc/r1mnq1Gp2uY4frT2zqiJyiqDDFc46JlFavY2tcHCVQd81atRtWZIZKw
+ xHuwEwh5eTHjJtUXEdn8FPxegy4/I1eT/G8dEVBLem/eUmiSoxlvchGZZQripv19Nn3c
+ XBXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742586164; x=1743190964;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=99EzEL4PhimenXr/Ee/uRd/EKlIIQ5AwmGUN87eHLuI=;
+ b=SVqZkkTP6wSBNftv7uNToGNIKsf/ZcyLEzPZuIh0UC6wBXaW/ObOcY03jsG1EEaJTj
+ jf75CwACtDPvdL+BO3KYT8V0Sbe8YIFRqeaAIHwhTBv4iQWve8yXMU7/MIyVjyDt4FWG
+ QS9/fR24bd7X+2QgvPRtCOk9VkzkvQfwt8OkNn3RIfKMx5aMkv8072Q9QLGFsBvu9GVL
+ gen9TNOvaYgTRnj0kr8kdqUZ+JAPyqznJv1OA/Vc/tcMIIPJ/UhePRLvTctbuw8QlIL8
+ VmUf3c9iB5eC4EuCy117fbZ7dxjTUMU60IasFT2NtM2viuLSSsHPYrtCU7bjEGMd7yKA
+ VLcw==
+X-Gm-Message-State: AOJu0YwulPWy/CaX9FiNJsrHRp1lKjuIiI9Jkro2vbl/75Kozzi7xHuu
+ KvkWtldWSAlZyiLBDWIWZuFH3iSpB9/atrGdOrBhJ2jaQINcvUs6QSUev7yTq3a+eXOU7MyZqBx
+ KmOrL9bULeBRUcMUHqRZZ8XOO0ci22O/iYEIIIg==
+X-Gm-Gg: ASbGncv9u1zYG9m0f8ulv/UZnsZIQMjDTgjBGwiNYiOpKdqezsgZ0YYnNr4HUVNF+h5
+ NT2s/DSPveyUSNk9FWsgTHcZZcPC3s94yiA0sZz9m5SXZFkq6ErOW4UtmV2vLsJUmhjCoLftXBm
+ QvUYLugTSNdEXuehu/ExEJBig=
+X-Google-Smtp-Source: AGHT+IFwepuXw/Pem64SFiQmUZqM1Zxrcs5t/gT0Qv9OdqBcTvOJw1pYYeMtVjXOQskPPylbSfXst8OyTBDJ5UfDUSk=
+X-Received: by 2002:a05:6902:1b06:b0:e49:5f2d:e722 with SMTP id
+ 3f1490d57ef6-e66a321e489mr6807090276.14.1742586164489; Fri, 21 Mar 2025
+ 12:42:44 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2] cmd: env: select: Add output for available evironment
- targets
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
-References: <20250321184357.4079845-1-cniedermaier@dh-electronics.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250321184357.4079845-1-cniedermaier@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250321124216.1268147-1-jerome.forissier@linaro.org>
+In-Reply-To: <20250321124216.1268147-1-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 21 Mar 2025 21:42:08 +0200
+X-Gm-Features: AQ5f1JptuyXVaCC2nT2WhcYdtSm2gZ3LawAQ9A9IXG9tNtlLL-kJIJn6puy8j08
+Message-ID: <CAC_iWjJbSP=+aDcHP59mf425spGy8wB+7sQ6qCrYnCJbJ1Ax-A@mail.gmail.com>
+Subject: Re: [PATCH] net: remove commented out line
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,46 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/21/25 7:43 PM, Christoph Niedermaier wrote:
-> Add parameter "-l" for printing available environment targets. The
-> active target is marked with an asterisk. This is done by adding
-> the function env_select_print_list().
-> 
-> If "env select" is called without a target parameter the result is
-> "Select Environment on <NULL>: driver not found". Replace this not
-> so useful output by showing the env usage message instead.
-> 
-> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+On Fri, 21 Mar 2025 at 14:42, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Commit 1d5d292b7941 ("net: split net into net{,-common,-legacy,-lwip}")
+> inadvertendly left a commented out declaration for do_wget() in
+> net-common.h. Remove it.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
-> V2: - Showing available environment targets by parameter "-l"
->      - Showing env usage message if env select is called without a target
-> ---
->   cmd/nvedit.c  | 19 ++++++++++++++++++-
->   env/env.c     | 16 ++++++++++++++++
->   include/env.h |  7 +++++++
->   3 files changed, 41 insertions(+), 1 deletion(-)
-> 
-> diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-> index 1f259801293..de64094db4d 100644
-> --- a/cmd/nvedit.c
-> +++ b/cmd/nvedit.c
-> @@ -499,6 +499,23 @@ static int do_env_load(struct cmd_tbl *cmdtp, int flag, int argc,
->   static int do_env_select(struct cmd_tbl *cmdtp, int flag, int argc,
->   			 char *const argv[])
->   {
-> +	if (!argv[1])
-> +		return CMD_RET_USAGE;
-> +
-> +	while (argc > 1 && **(argv + 1) == '-') {
-Two higher level things:
+>  include/net-common.h | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/include/net-common.h b/include/net-common.h
+> index 29d31f37263..89679e20860 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -518,7 +518,6 @@ int wget_do_request(ulong dst_addr, char *uri);
+>   * Return:     true if uri is valid, false if uri is invalid
+>   */
+>  bool wget_validate_uri(char *uri);
+> -//int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+>
+>  /**
+>   * enum wget_http_method - http method
+> --
+> 2.43.0
+>
 
-- Can you first convert cmd/nvedit.h to use include/getopt.h and then
-   use getopt() here too ? This hand rolled arg parsing is repulsive,
-   the multiple ad-hoc copies of that are even worse.
-- Please write a test for this, see test/cmd/ , maybe Simon can help
-   with details of this ... ?
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
