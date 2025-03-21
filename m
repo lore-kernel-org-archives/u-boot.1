@@ -4,79 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200BCC36002
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 12:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E5DDC36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 12:31:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E5DC806D8;
-	Fri, 21 Mar 2025 13:29:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2A2A805C8;
+	Fri, 21 Mar 2025 13:31:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M1jRjeaV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YcfCGnBt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0939E803DF; Fri, 21 Mar 2025 13:29:57 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id ED98E806D8; Fri, 21 Mar 2025 13:31:21 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F2AC8197D
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 13:29:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF4AB803DF
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 13:31:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2260c915749so25157925ad.3
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 05:29:54 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5495c1e1b63so2357540e87.0
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 05:31:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742560193; x=1743164993; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CNGf3cGVOHh6xuUjhlSXqnHlPZLw0AUd42oz6BRTO90=;
- b=M1jRjeaVws6leZ07D1fXcqyRHfoTBtfIqaZ6Se5FNeB97sQN+DIJrw1ChTM/x4UPpT
- NpVskG2T/JAqMn/rmDFXHB2ZbbXtz4UecbmvkaOu4eWUwIq9P5gOzTGZbjs5v5IG7APZ
- +Kd2s+SsmIAqjvCiuMQfx+jfBIUYRl/uS3agaXhjd0K76G9p8uXk4lizG7DXcVVTwsuu
- 41zCaW58QMgY8p2r2bqcPAucl79KCTEkWu5weC1HiihQbTVus+TkJvh8jpC+cZlfxu3w
- acKir0xW2E8yxq3zGXCl6pApH+y0bxkOH41SeHQlW8QIFexVXgI6tcCp2MHX99KPteeG
- jYSQ==
+ d=gmail.com; s=20230601; t=1742560279; x=1743165079; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Dzs883+pFRcUERp7sj/RD09VBnnYPOUc3qNn3/g6tI8=;
+ b=YcfCGnBtT9zzL7q8FxkKa0nf4Xr24YxCUh+SVKzks10eutBI9Z4C+rXzfvfP1T68+O
+ sjNKL0SizccFJSx+Gs9MN7pPJFZh6taY7gbtL9/KekhXQlAJj9EHIefR/8INST+zu5rc
+ 4xm8tmhhS0Hs5Ey2zIlCWsc3PXdWrx5hEMu6NnvuITwuB0nHvmKy1IkGHI0Jt+lgzqGA
+ Cl8wkLtrfYmtKyjaGSJ7x7mhB37kblIPhynbEHgmzW9x+riXJzzIzQrT9POSFpLfOMst
+ FtevZ3BLJZanVYUH1Pbrlh+9J8OL3Nxd5c+rXbXgDTH547fSWbRb7lPjvbhSzewURmJ2
+ EVlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742560193; x=1743164993;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CNGf3cGVOHh6xuUjhlSXqnHlPZLw0AUd42oz6BRTO90=;
- b=Mbcfy1yukhghGRoSbDV/1wTJegG9ZC6J6pLi3VssdqhCoi4ASmFaF6hMtL1IXd6UkZ
- 8cM0wCBsqqxngk5FtAy1/CulZYhGpSkcRAJf6RGK3R9iXqzklp2Hl/j8bjhE8YTmHeuT
- 6qP924/lNTZHMbU4MH4rI02W59ONxWLMtEAP5VUxbRhUgsAO9TQWGI69XFYEaISyy63v
- fZ/sGlobfnmNes6WHj9Q+nILwZ99uH5T6nfoBO+qBPwuHWTEfA/c6C6n8ivw998ZNo8B
- ZWobfU4FcLAiz2bFiVjhZKUEySn9ejgYnJF9pnA5kecS8C0Wxe1DrdBe9Hi4VZSRh2Zn
- lbYQ==
-X-Gm-Message-State: AOJu0YwWST6+Fgn7esVlswi8Z5u3FZB3PFxlGsV9HN91Izgg0LynB4wJ
- Edsi0IclJPYlAUhrlWlJsB8EGiMrihUQjb7vqAkRysX9CySQIHOx8yQznQ==
-X-Gm-Gg: ASbGncvSOgNcTRN96+svt6YeX6DRUc1UUHHCiKozZtmUwr0Xa4ItYMMNvk9hG4Rt61d
- 4yFNGsyQrGHYM8o1k82SIEy6Sx4mWswY1NKkMSDihY2nFP+ruBUuPbLlgg/moAXUTJPjl1L49dr
- zGP3bCPT9hd7MlEAPVTm+VRyTmnr2uTH0Tzgl7TfWFYhqebWl5/5tAtVbGi2jHf92/9Q7Kb2Vul
- E6OVeFPbIlITij4vBG+79eGHS7VFiuHFWlE1KnAMAxt52oocEh1z3vlxE/3RrzdYL1nZ/D/HBIl
- Q2XqljHrRoJVMvaabGuORdJMCJZm0WoHzmHHVng3Q6iwIWEw8Z+mZlpUXvU=
-X-Google-Smtp-Source: AGHT+IHbxbqHlHmRNU99sO+2Ecjuv0VOTMcSMX4FPzocYniaxCBwMJcrJm9DyAesxDIH2M2h/yRl7A==
-X-Received: by 2002:a17:902:ef12:b0:224:249f:9734 with SMTP id
- d9443c01a7336-22780c54cfemr56111815ad.4.1742560192649; 
- Fri, 21 Mar 2025 05:29:52 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14d:9099:464d:8348:47a:56fd:2ab7])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22780f4baffsm15193205ad.66.2025.03.21.05.29.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Mar 2025 05:29:52 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-next-20250321
-Date: Fri, 21 Mar 2025 09:29:47 -0300
-Message-Id: <20250321122947.26401-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1742560279; x=1743165079;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Dzs883+pFRcUERp7sj/RD09VBnnYPOUc3qNn3/g6tI8=;
+ b=iKdUtUR4n7YMY2XwWo6o3LGvdkJyC96VJkhIVqGv5ur3smrC9QcaLXWkY8vpgzijnW
+ uVjUuO0aLRlJvkQ5qVunDNXzrF8rjaUOqwvCBXP0WoUutG4hDH0UGTD4ceC1sV78pbDT
+ RNB3kkrCGNqNiLmu6YiiKqePK5pS89E3vhuPXyhfJMmS52lXwiHum5f4ztHba0FTIxAt
+ n/S25Y73Rtp+xqP7ClRwB2DmcGH/GV2TPkydJ+7c0V7GXnjtf0ANFl2a37EVX2VoLlRP
+ e6w3QeQ3Cx4hupVoYESbtbSqAHlK0QO5IsNGmoDIQ+a4yF33hS6um9K9CtHthxJpquF3
+ uQww==
+X-Gm-Message-State: AOJu0YwSX12rcL9Rt0qmKYGG1GB5H2N1TljUk/16S71mnWeT83NZKrMa
+ hdYSbH06+uI1H4Hq26NsjEgdo+hTiYLoUl1MwfRvNQEKvsfJDPyYD+RVCoQc1dgRwkOh1y1MHJT
+ eIjGjDhU+Jm+7lmXOF06MltdEoAs=
+X-Gm-Gg: ASbGncvXGek1czMkZS0eGKfI2GXHfQL+dsnCAbDlGZQAATHpTi9A6M3w77nBFvzS1pm
+ XmjtkMVJYGEkqSBbSmNmvYCeDGp8m4L+B0EqRrEPrVe8g2pJbH+XVG5b5fm9Cy2+E96Vzn3KEPA
+ LnnrJgDj6tWL17k7t7GWogT2oIX8qO3v9UL/UZgcVehJ6fEa2z0HqpW2wpWj+gYuGKN6bk
+X-Google-Smtp-Source: AGHT+IH1BhIkDCERlTZoQiIGC7GDt2WJZMm8PIUsnXQlyyPIgCwWFOQg4/fhfQT0YEM3a9PcewovKXNCn2QQMEoP7qE=
+X-Received: by 2002:a05:6512:3e1f:b0:545:bb6:8e41 with SMTP id
+ 2adb3069b0e04-54ad650cc86mr1178016e87.52.1742560278812; Fri, 21 Mar 2025
+ 05:31:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250318233849.587520-1-aford173@gmail.com>
+ <20250318233849.587520-2-aford173@gmail.com>
+ <CAOMZO5Ah3zG50Do_kGx=63RmX16hFrrgzsBk6Zgm6tQoB-VTLg@mail.gmail.com>
+ <CAHCN7xKd2geEkK77kYBp1jQJpiM_NNpTPP43ONNYsUNgEtaVrA@mail.gmail.com>
+ <CAOMZO5C2dnenrhcUgRaKYuYPtDbKgvXQO4JQT34GPXfek1Mh8Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5C2dnenrhcUgRaKYuYPtDbKgvXQO4JQT34GPXfek1Mh8Q@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 21 Mar 2025 09:31:07 -0300
+X-Gm-Features: AQ5f1JrVzBKaO03ag7PZFUjDSDR4Ze6B4Kjv8B5gSJCAIVy67aHVovZxXIrRLxc
+Message-ID: <CAOMZO5DvcfD67MnGHYrt4hYv+y05=QfUt412c8Cnb3ShoU7HbA@mail.gmail.com>
+Subject: Re: [PATCH V3 01/10] clk: imx6q: Properly handle imx6qp ECSPI clk_sels
+To: Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Tim Harvey <tharvey@gateworks.com>, 
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,65 +104,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed, Mar 19, 2025 at 2:27=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 
-Please pull from u-boot-imx/next, thanks.
+> I have manually fixed patches 1 and 2 and now CI is happy with the series=
+.
+>
+> No need to resend it.
 
-The following changes since commit 8bc3542384e3a1219e5ffb62b79d16dddc1b1fb9:
-
-  Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE" (2025-03-18 13:12:51 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20250321
-
-for you to fetch changes up to cc9dcba9cce185d8bca2dc5c4b55b21f4505cbe8:
-
-  configs: Remove duplicated bootcmd 'mmc dev ${mmcdev}' (2025-03-20 08:18:35 -0300)
-
-u-boot-imx-next-20250321
-------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25267
-
-- Allow the registration and enablement of the i.MX UART clocks via DM,
-without the need of manually calling init_uart_clk().
-- Remove duplicated 'mmc dev ${mmcdev}' commands.
-- Rework some of the RAM related Kconfig symbols for phycore_imx8mp.
-----------------------------------------------------------------
-Adam Ford (10):
-      clk: imx6q: Properly handle imx6qp ECSPI clk_sels
-      clk: imx6q: Register UART clocks
-      clk: imx8mm: register UART clocks
-      clk: imx8mn: register UART clocks
-      serial: mxc: Support bulk enabling clocks
-      board: beacon: imx8mm: Let clock system enable UART clock
-      board: beacon: imx8mn: Let clock system enable UART clock
-      clk: imx: select SPL_CLK_COMPOSITE_CCF when SPL_CLK_IMX8MP
-      configs: imx8mp_beacon: Select SPL_CLK_IMX8MP
-      board: beacon: imx8mp: Let clock system enable UART clock
-
-Aristo Chen (1):
-      configs: Remove duplicated bootcmd 'mmc dev ${mmcdev}'
-
-Tom Rini (1):
-      phycore_imx8mp: Rework some of the RAM related Kconfig symbols
-
- board/beacon/imx8mm/spl.c                 |  6 +-----
- board/beacon/imx8mn/spl.c                 |  2 --
- board/beacon/imx8mp/spl.c                 |  2 --
- board/phytec/phycore_imx8mp/Kconfig       |  2 --
- configs/imx8mp_beacon_defconfig           |  1 +
- configs/mx6sxsabreauto_defconfig          |  2 +-
- configs/mx6ul_14x14_evk_defconfig         |  2 +-
- configs/mx6ul_9x9_evk_defconfig           |  2 +-
- configs/mx6ull_14x14_evk_defconfig        |  2 +-
- configs/mx6ull_14x14_evk_plugin_defconfig |  2 +-
- configs/mx6ulz_14x14_evk_defconfig        |  2 +-
- drivers/clk/imx/Kconfig                   |  1 +
- drivers/clk/imx/clk-imx6q.c               | 28 +++++++++++++++++++++++--
- drivers/clk/imx/clk-imx8mm.c              | 34 +++++++++++++++++++++++++++++++
- drivers/clk/imx/clk-imx8mn.c              | 32 +++++++++++++++++++++++++++++
- drivers/serial/serial_mxc.c               | 11 ++++++++++
- include/dm/platform_data/serial_mxc.h     |  3 +++
- 17 files changed, 115 insertions(+), 19 deletions(-)
+Applied the series to u-boot-imx/next, thanks.
