@@ -4,77 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7CDC36000
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 19:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF68AC36001
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 23:21:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19AFA8082A;
-	Fri, 21 Mar 2025 20:42:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AEEA0809A4;
+	Sat, 22 Mar 2025 00:21:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oe/TXTEm";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KSy+HYOZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B301808A2; Fri, 21 Mar 2025 20:42:48 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 75D57810FE; Sat, 22 Mar 2025 00:21:35 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DB06806D8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 20:42:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DE38806FC
+ for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 00:21:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e5ad75ca787so2203366276.0
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 12:42:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742586164; x=1743190964; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=99EzEL4PhimenXr/Ee/uRd/EKlIIQ5AwmGUN87eHLuI=;
- b=oe/TXTEmc2JAZpxLV0ep1oZmhrjMChFkXz47CBQSjBhYQnoXu/c1mn3ugvSbBanxa9
- 7AAJ6GXeKt7TQX6fF6rmkBXLm4auKbjyksl21M6lKItOdKFStvzSw/oooco8TAxfIvSX
- znPgt6c4iZ5Ub3lRWbsdpjN9bAaJO+208JSSBEmVX0GhI3PN5yDrbmIL4SOBsqROicfY
- qWn38IUSCNAc/r1mnq1Gp2uY4frT2zqiJyiqDDFc46JlFavY2tcHCVQd81atRtWZIZKw
- xHuwEwh5eTHjJtUXEdn8FPxegy4/I1eT/G8dEVBLem/eUmiSoxlvchGZZQripv19Nn3c
- XBXw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 2F37E3FCCF
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 23:21:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1742599292;
+ bh=MyELMPqZWXR1CrIQaIMutNUbRkDtiAi8rIEzWJ7TJUE=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=KSy+HYOZSRHHHVDMcYYpjI3Y126bMiE5NPpKThZ+XXDC7OWQbYjz1g5JoQeGAiw9B
+ GI1rK7ZjlDLB2rokOEph2rxFtEIXzVnKyVlpUl4Szz5BSUdjvuL+WEv8lywE1z7q/v
+ dSsgBB90uB6iuTUwWNEPZZ6sDMngoDEgHUTdvkhfThEXyAzxurtYBM/qmy5Ov319Nx
+ scYCMx0ziPke2Mn1lgFtXUBCmfR0TRNpjFT/IXpANKyLbboQBuTAVrrjHmYSK8AsNs
+ pMPnrANEYuH1oxtFNzczSsH7y/yex6OxUTzAjzTsXhYbbmUZY8NwKzXeR8QP9RYa4a
+ R+YlyWaEX1P1A==
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-ab397fff5a3so189785166b.1
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 16:21:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742586164; x=1743190964;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1742599291; x=1743204091;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=99EzEL4PhimenXr/Ee/uRd/EKlIIQ5AwmGUN87eHLuI=;
- b=SVqZkkTP6wSBNftv7uNToGNIKsf/ZcyLEzPZuIh0UC6wBXaW/ObOcY03jsG1EEaJTj
- jf75CwACtDPvdL+BO3KYT8V0Sbe8YIFRqeaAIHwhTBv4iQWve8yXMU7/MIyVjyDt4FWG
- QS9/fR24bd7X+2QgvPRtCOk9VkzkvQfwt8OkNn3RIfKMx5aMkv8072Q9QLGFsBvu9GVL
- gen9TNOvaYgTRnj0kr8kdqUZ+JAPyqznJv1OA/Vc/tcMIIPJ/UhePRLvTctbuw8QlIL8
- VmUf3c9iB5eC4EuCy117fbZ7dxjTUMU60IasFT2NtM2viuLSSsHPYrtCU7bjEGMd7yKA
- VLcw==
-X-Gm-Message-State: AOJu0YwulPWy/CaX9FiNJsrHRp1lKjuIiI9Jkro2vbl/75Kozzi7xHuu
- KvkWtldWSAlZyiLBDWIWZuFH3iSpB9/atrGdOrBhJ2jaQINcvUs6QSUev7yTq3a+eXOU7MyZqBx
- KmOrL9bULeBRUcMUHqRZZ8XOO0ci22O/iYEIIIg==
-X-Gm-Gg: ASbGncv9u1zYG9m0f8ulv/UZnsZIQMjDTgjBGwiNYiOpKdqezsgZ0YYnNr4HUVNF+h5
- NT2s/DSPveyUSNk9FWsgTHcZZcPC3s94yiA0sZz9m5SXZFkq6ErOW4UtmV2vLsJUmhjCoLftXBm
- QvUYLugTSNdEXuehu/ExEJBig=
-X-Google-Smtp-Source: AGHT+IFwepuXw/Pem64SFiQmUZqM1Zxrcs5t/gT0Qv9OdqBcTvOJw1pYYeMtVjXOQskPPylbSfXst8OyTBDJ5UfDUSk=
-X-Received: by 2002:a05:6902:1b06:b0:e49:5f2d:e722 with SMTP id
- 3f1490d57ef6-e66a321e489mr6807090276.14.1742586164489; Fri, 21 Mar 2025
- 12:42:44 -0700 (PDT)
+ bh=MyELMPqZWXR1CrIQaIMutNUbRkDtiAi8rIEzWJ7TJUE=;
+ b=vFYtJP5idHQ3+JGkEZN/+igR036LZ1bj3ckXCbK0a3PCHAMkKUeGJqHHuXe0gdTmMG
+ 1Sok6YRtmc3JMznjZEU1agzJeMnHCNfcv5pkH/h+KyHhYaPNuJc5VfLeRhauRovU1VqT
+ Z9W5NnGDuFY1+ErWl7zTEV5Eh0JsavDd22YuzkuGdDWzs2brz8fSdpjCWcyXHFjuv1Rk
+ Yz9xl0IA5sv4fuSVHankR3jdbQji8CKFgqGMuSP0C+XJ4IHAeLe992pmQVRMFBx1Hr7c
+ i8LCg7skRA6WeP7v8uvubmB/Ogabvl/pwEi0p9x2kKumhGjNWZueQJVObTkYdNgFQD++
+ hmwA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXw8yredmxZpYwxvASbId1MPunUsYXbN65XiW3pYUlZZdBolnbWJhgJN8NMhP8LkKord4hLRKE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz69BOneCAHmBdResOdwE3PCNwSc/lD1Z6rJl73UaaV0APL1do0
+ 8YUUh1qL+efRtiI7ICk7BvrQUDroN4Jt7jzRRt4cBg3o1LYsehqUjcexEv3rZJUDKr8ANSmsUjN
+ uzNFufW/BWVtB+ErQzWdod+b17ubzYBIW3tLFeT1t4jzzv2BUizswmx3oyJQXrTQVIBE=
+X-Gm-Gg: ASbGncvBm6/uO5KcZvLCJCooRzYXgvJWUQMDQPyD2z7eL/+ZgIvbCFqKc9FPkorPdJk
+ l2c69wFZuxAdF4bmZBzZulEaINAr13Y1k2EMmWIrC4R5mDR8TS1GwwdornYknUhziqhJLjqC+aU
+ RdNFo65qbQRm8mWPitBSspMxJysJYApvEanwV5psyZJnR/SbkUJuk1sd3Tb2g2NPO1CgPUmJ/uX
+ A2Nhfsv/Y7bGTT1XNJGxHeJTmL16aZqHrLn4LiPnGkM+Kp68nXn30k948Jem699Kw0pwjsBjxjh
+ lDaOq6WU4w/dsvbZwG7g3vuaFUa5fGr3DG3/RMT8llJcVCSL1judoEQhei4QCx4XcKpnL6rZUVr
+ BI1NlpZjdOTTBNH1zoQ==
+X-Received: by 2002:a17:906:d7cc:b0:ac2:b813:ac25 with SMTP id
+ a640c23a62f3a-ac3cdbe1802mr946515766b.14.1742599291513; 
+ Fri, 21 Mar 2025 16:21:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFGDwBCVkvx7EhizPTnwMEPVYbNLMQgrhNJo22PA1k8wLehde77Eq/KtkAQKN5lANuA34LOdA==
+X-Received: by 2002:a17:906:d7cc:b0:ac2:b813:ac25 with SMTP id
+ a640c23a62f3a-ac3cdbe1802mr946512266b.14.1742599291012; 
+ Fri, 21 Mar 2025 16:21:31 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac3efd3aa21sm231673866b.158.2025.03.21.16.21.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Mar 2025 16:21:30 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Fiona Klute <fiona.klute@gmx.de>, Martin Stolpe <martinstolpe@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/5] acpi: simplify updating ACPI table header checksum
+Date: Sat, 22 Mar 2025 00:21:15 +0100
+Message-ID: <20250321232121.251800-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250321124216.1268147-1-jerome.forissier@linaro.org>
-In-Reply-To: <20250321124216.1268147-1-jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 21 Mar 2025 21:42:08 +0200
-X-Gm-Features: AQ5f1JptuyXVaCC2nT2WhcYdtSm2gZ3LawAQ9A9IXG9tNtlLL-kJIJn6puy8j08
-Message-ID: <CAC_iWjJbSP=+aDcHP59mf425spGy8wB+7sQ6qCrYnCJbJ1Ax-A@mail.gmail.com>
-Subject: Re: [PATCH] net: remove commented out line
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Adriano Cordova <adrianox@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,32 +116,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Mar 2025 at 14:42, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Commit 1d5d292b7941 ("net: split net into net{,-common,-legacy,-lwip}")
-> inadvertendly left a commented out declaration for do_wget() in
-> net-common.h. Remove it.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  include/net-common.h | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 29d31f37263..89679e20860 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -518,7 +518,6 @@ int wget_do_request(ulong dst_addr, char *uri);
->   * Return:     true if uri is valid, false if uri is invalid
->   */
->  bool wget_validate_uri(char *uri);
-> -//int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
->
->  /**
->   * enum wget_http_method - http method
-> --
-> 2.43.0
->
+Introduce a new function to update ACPI table headers.
+This allows to simplify the existing code.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Heinrich Schuchardt (5):
+  acpi: new function acpi_update_checksum()
+  acpi: simplify updating header checksum
+  x86/acpi: simplify updating header checksum
+  qemu-sbsa: simplify updating ACPI table header checksum
+  arm: simplify updating ACPI table header checksum
+
+ arch/arm/mach-bcm283x/bcm2711_acpi.c |  4 ++--
+ arch/x86/cpu/apollolake/hostbridge.c |  2 +-
+ arch/x86/lib/acpi_nhlt.c             |  2 +-
+ arch/x86/lib/acpi_table.c            | 11 ++++-------
+ board/emulation/qemu-sbsa/acpi.c     |  4 ++--
+ board/raspberrypi/rpi/rpi.c          |  2 +-
+ include/acpi/acpi_table.h            |  7 +++++++
+ lib/acpi/acpi.c                      |  7 +++++++
+ lib/acpi/acpi_table.c                | 18 +++++++-----------
+ lib/acpi/base.c                      |  6 ++----
+ lib/acpi/csrt.c                      |  2 +-
+ lib/acpi/mcfg.c                      |  2 +-
+ lib/acpi/ssdt.c                      |  2 +-
+ 13 files changed, 37 insertions(+), 32 deletions(-)
+
+-- 
+2.48.1
+
