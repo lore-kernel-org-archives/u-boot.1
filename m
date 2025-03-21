@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE01C35FFF
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 11:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11455C35FFF
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 11:47:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65036807D7;
-	Fri, 21 Mar 2025 12:34:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 619CC808A2;
+	Fri, 21 Mar 2025 12:47:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mn1Bhyb7";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EOPOoUvC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98EF4808A2; Fri, 21 Mar 2025 12:34:49 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id E479081219; Fri, 21 Mar 2025 12:47:43 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96BA7805C8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 12:34:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F184E807D7
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 12:47:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1742556884; x=1743161684; i=xypron.glpk@gmx.de;
- bh=lrJ/ymAIfE2FcVYJ3XgyxeO4PBjlnHyM4aY69V9jrFs=;
+ s=s31663417; t=1742557657; x=1743162457; i=xypron.glpk@gmx.de;
+ bh=d/4ua8Bk/jvZR8JBQ3NRqpySk1JdIHbkpKiHde/lPI8=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=mn1Bhyb7kbvQY8cPCamOyLpemlyD2ao6ve4ucQuZuLSOebJXFRP6prGnYsYI0vMY
- pQKTZ9n8QoFkRT61eMxpbkR53faFOBXFvrw0F7C4p5bxWTkBfE3pxt+9+BGA/AtrC
- 6eKFSBPkrx+UPHZ4Y6HvvbwRZ+y10XJFYv7KJhwejKtmtK7+WsdO1bunJ3+Xz3Vtd
- dc58rxx7A5YXbG7g3zOkt8dxO94LGFcBYRm8f/cCaapMFiichP7UD/Z+uUBBb59SB
- YAiQXRh0snUHuchu65QvA/dDOV4L6j1cHR0b6eJjcirK4v2EhKNHkMTkLEW1uFvAe
- xQL7Qg9s22Xew9LhJw==
+ b=EOPOoUvC62Ujv8ZHJI1pNbuLg4VitgwXdrd242pZLvZwRqXp8RGFQGJ/UlOoH/ig
+ Nk5DH3gvUwF0Yz2ARHHqozoFCbQpzLwNRmyvUcwbPcHp5U908OHJcLq/kzsytJ9vp
+ tnfgGeCwTmozdyqZMtUNq4xHYg4FFiKimMXjiRBI8xoR+zgBKGSIF1RU0RdAjGFh3
+ GC/5PigVm0dW586BkouxwGqPd1jUNickA7MylqJkG2ZKCjftud9uKmhtPWL8x9fGM
+ GhPcNRehyg6YnrS0y9KcYwh2iIFzEMP8vLKpRTwxvMpkwt0/ZcBAEKhG+qyVb9i8O
+ rCCousm/AyWsr9sI6A==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M5QJJ-1tuDCg3qgX-00B4Yh; Fri, 21
- Mar 2025 12:34:43 +0100
-Message-ID: <9e22e439-cd75-4046-b2b6-33b545f091dd@gmx.de>
-Date: Fri, 21 Mar 2025 12:34:43 +0100
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N63VY-1t75f62cQa-00uRVO; Fri, 21
+ Mar 2025 12:47:36 +0100
+Message-ID: <d308b128-5a3c-4d77-ad04-0aa5c8e87006@gmx.de>
+Date: Fri, 21 Mar 2025 12:47:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 44/46] test: acpi: Correct memory leaks
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v5 43/46] acpi: Add a checksum to the DMAR table
+To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-45-sjg@chromium.org>
+ <20250315142643.2600605-44-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250315142643.2600605-45-sjg@chromium.org>
+In-Reply-To: <20250315142643.2600605-44-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lVbMmBOz/2UJGlJ3RWQw9xpDSQ5MDPi3cJjKSAqBBY9nGMnL6py
- +psIXhD2BW/JCULgHCz0Xlr6OGEVpRu5nronMPOeRie61cFMKs9aNxhHaDoS0xl9hw7xcwe
- W24VWpJHRDLBfH/rC/DvruQj7UJWbWbO3tQHWCCWEfCkSnjMtIeT12Ij4KPT/1sDFH1dsDD
- d5nligCsELnffH7EdNkUg==
-UI-OutboundReport: notjunk:1;M01:P0:FCAtpWXE+mQ=;mlPBgjc9Sv2guoNzTlfqWDkHjad
- hEja+UAVVkQZclCwYqmLgkUQrTHH6A/QkLALrLTakEbmAcie01znRsXjO/7KORX9jZJH/DfmZ
- wXu++fdbC2BD9qd61SDUKPVK1Th7q8NFPYXyVJ3ZBkFwf04XHLhfewfHwjBfWtXsa9lWMb1Wg
- C9Eg7b1mdE28L70rn+RLIBIdwuv+5pOvesemz9p4SQ0ZpUUaA7GRiQsgQ98TGi1O/dH3wmyQs
- n0qRGbEIHJm5XClNyCA4E75xidsqwn5DqNY82LoamnGqt0Ki8WDxPf5//EMWEeOKT5kC1pjqx
- TaJx6Q+ajeMOqTqoRaPraeq4SnbEwVxTj+N4z7XbnMHEjSCNzI0vbxONFqz+OYD2/9qFQ9BYL
- JWt6I7wmVPXzjcMIgrQjK9Ol6PTEi2AXJlQBvENSjoU3YCe5ncBAapUOD862VMzn6hw8/sHIj
- OSVmHRbUDEIyXdQrEJm3W/FQFX6zqCTqOfpPHvdWg03mVWLBpvQyFM/wIBs8AAHVs2JRvWygw
- laAbMifhey4SBY692e9UxYVYhNfsWlOMBon1RqyVvqE2acatkZdqGVPoE6ADdLE4b65MQZke9
- Azea25uSOujKOizz848EnU8LDp2olxpk8WkwyZWixToHvQZTSBVitmB7DXVwh61d2Yb45XPgW
- Ad7E2k1Al68qf9jwiJMQSyBZRcakbf50Nlu2h2f/3xWifVVNbUiwKqep9tjeD5p9jCHOEvT8U
- 1VkpDjwHTqiISCWLvX+I6ewWwMIJ+m7wAAnOc6Qf6M5BsSLOTX9bPatuVjgrvtDwNkpKZti1b
- sZnptf/EhiNBXWRg7YLBfYLVQxW109h2/tHuzdNcqM6Icaw/eOhXFNvrXQMu3/9WtAfK4ckjq
- BBHiJ1o+1UDGXA7TCrXSp/Y8iz81cs7C/BMp73hrmKjA/INHKCx++nC1AJSGT53jYLPIW9p+B
- KaePkKIOQbogtBmBHlNCDmmb6KzNhGsZztzDEY6x/7Rrm8gk2T3ZXEE34jRrJgYJphNot9yjh
- lzaR7H08FKgxIcjjGJVE4VEPAnjK+PtAuSCxX7AEN+glkMbGrRLH3i7YRPdJEeQPuZ69uD1e0
- 8Oo59kLIYC70Ihcs/T8GRcUc9IFkoO6RnfzMVeOgE5X/lpxhSi6uVjW6A44DzNVASbe4tiYIP
- oAcqXamxL9ccPwOFaQItpVlMTVPgJQD3y+X2n8zhGIrHMGvZ+7Ouqe+SRj94NmYRSG7jlzTd/
- cIb477drNfUaDK6GVopDPXLXQKx+OUbWxClZmgSfOEH9TSmAub/Mn0fh21pUBf23nwar5aXVn
- XIymvesLSPEcNBeIPtgnvL57F9vD6oDKQPFOvMblZGkn2vC424GPRzHkMmbZuQJHg3M1wn48u
- GTQj2nUuBKysvTuSnydoDE3ltOyTscMfA4pQ/foABULdS5dVCO6aSjc8EkFQd/6IomwNKv1Pm
- Q0lCm0Hrk8zpe272K0fHUgg7/aLo=
+X-Provags-ID: V03:K1:nc31ig0KDDEj3wpvgV0ISHKOvrfjprlNgbD7rMwWMDGGGMWf5+Y
+ pv4TeddEGe8ga/oLsFWF0Q/MiQ950bj3aRB+QtOufWFWPPbc1TZfhY7BAxbz251PpFKhZ1k
+ wNks8er48fq6OIoToe9Tv2YDoYqbNZ9Pn/vODx6GLsfv7aeEbJM9Il90FAfa9P75Ob+NK/y
+ /Hrk4G3kNPQL7bG09jtiA==
+UI-OutboundReport: notjunk:1;M01:P0:umg4Vy/TE8M=;+Kvij/51RUHFTKhp70JW6yEyKTQ
+ kIKC/O0a6jgSHqCqoWUauk9naM1WMvAq9tS21iPOmue6MZJrBxe9yhuFWJdhLpeVH43VYP0tm
+ gDd/mni+EChuzfgMWCZ1k7uSYegXehfTr9miKZwzkqAWk80G7RrUfzI2MbIWdxec97Jf51hK6
+ 6ut8KWwhUk+bawhP10FRcksHOE+9ibiNzyBrrxnuWk4J7DVc4oS4YSYYDVEAKefVQcUrFoZt0
+ S2Y61qB0+5y7RCpMhyQodTt7oSKjlqvyjseZ1H7Qv8u6pSBWTkjBwbpPxy/TuEzQmeIjnbEkb
+ t0acQVxiYOin00xmVw7zpwtp1zMtbXaqE+3KFNnLIQgsKffUQFrkSg5HOOK2YY4y9tp6i96Ed
+ UOVQlj3HFdIobtipDLmNUfv+AdT1SOuQV09IpOgp2gERacj/MHW+zftAruAj6yUsp4EPgWQtF
+ hY1LT2/RmBSxgOZUEkdY817Mtkk3gBJi2YpZyiz30GyVD/loIVugyhZEzm/zyUh1eocgPgKgA
+ nJON5c+736ZvktKD3GTXc9S1jAs6i03XyRRoyKgCqQjVxDY9Mdc+j5UXs9ODKqodYvMcaswPB
+ w1AIU10qDLUIah5rkg/gPn+b934f4jB1ZwdajLAup+1cysQI0eVO4mB/7RgI6/Cb8WGCGap1o
+ 16GzEZy5krkxOsqpxLMmXAzxYOJQ749tyTgGxEx9mnZ0+Mw77A9NZPfzzwBhs5uIOd76CLQ3Z
+ 70+PqrZ0xi87Uu0QG1Y3QsjZmXKaxZvPl01ZUevNOxfm2zbhGhnZ7tY/W7Bcylv2sSS+chWws
+ HPNaW1Trpc6rMGqjvGHB/yi7OCoymHGm630AoCEWa5a37M83PhEPrR/gJwS3VMSNyrDQfpQ++
+ xdulQtdQfgWsYZZqjEpSQsswDtpFNSKNY9Y9cFHD+8kdrw40zVTfUXaDik90UBwmcKFduLnRt
+ vzmzDVJnITRliqEb1q57jEeIsyhlsn1NBYpgG3+PE1xFz88etnO8WVYaU4jwZDST6WFYll/XY
+ iJScPlHjGjDggyzDZ9tK0vUm5+7wlBhrfHi4tU8/JPxMrMkm7q7N60sFMFZFQwZNI7bR1ClFn
+ RYrx92JRcL9AzX21I+NBml0XoZtptCoAjqv4GXXcDje9OCMihiYiU/a/zBf6AbQiaVOKDzjdM
+ 58LmLtppv/Q/hNLtkJCzEPEkvAyFf8UVNK8Bu3ksTgpGRUCt7jxw1cWT1p/ZbEqsS1K8RngyC
+ oNac1YlamS5+zX8/A4uqjVEJMjQnpOPVPUUcjoiKlMQDgtZI0jLzedN7HcIS9NXJloLOThX/2
+ 3pRhhDBctYgNCbpY5CS0MhypEGdAHw21uXJNenIQiEEZAgty55Z3rXhwFByGd15aHx3brC1Rb
+ L5sbR7/u9PD81+i/9oFls53HOUFD8cg0mlEN4g4pUW9ETv+MJFn6BICUMieMPP6VlMFQPjtXF
+ lmIqvdRmO/ObDPnI3TqK+Iu2dMrk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,95 +104,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 15.03.25 15:26, Simon Glass wrote:
-> Free the memory used in tests to avoid a leak. Also unmap the addresses
-> for sandbox.
+> This table lacks a correct checksum at present, so fix it.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
 > ---
 >
 > (no changes since v3)
 >
 > Changes in v3:
-> - Add new patch to correct memory leaks in the ACPI test
+> - Add new patch to add a checksum to the DMAR table
 >
->   test/dm/acpi.c | 13 +++++++++++++
->   1 file changed, 13 insertions(+)
+>   lib/acpi/acpi_table.c | 1 +
+>   1 file changed, 1 insertion(+)
 >
-> diff --git a/test/dm/acpi.c b/test/dm/acpi.c
-> index 39a26bbb492..f98f9d1e74b 100644
-> --- a/test/dm/acpi.c
-> +++ b/test/dm/acpi.c
-> @@ -309,6 +309,8 @@ static int dm_test_acpi_write_tables(struct unit_tes=
-t_state *uts)
->   	}
->   	ut_asserteq(0, ctx.rsdt->entry[3]);
->   	ut_asserteq(0, ctx.xsdt->entry[3]);
-> +	unmap_sysmem(buf);
-> +	free(buf);
+> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+> index 3805b61159e..4044a64d688 100644
+> --- a/lib/acpi/acpi_table.c
+> +++ b/lib/acpi/acpi_table.c
+> @@ -66,6 +66,7 @@ int acpi_create_dmar(struct acpi_dmar *dmar, enum dmar=
+_flags flags)
 >
->   	return 0;
->   }
-> @@ -386,6 +388,8 @@ static int dm_test_acpi_ctx_and_base_tables(struct u=
-nit_test_state *uts)
->
->   	ut_asserteq(nomap_to_sysmem(rsdt), rsdp->rsdt_address);
->   	ut_asserteq(nomap_to_sysmem(xsdt), rsdp->xsdt_address);
-> +	unmap_sysmem(buf);
-> +	free(buf);
->
->   	return 0;
->   }
-> @@ -428,6 +432,8 @@ static int dm_test_acpi_cmd_list(struct unit_test_st=
-ate *uts)
->   	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0"=
-,
->   			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
->   	ut_assert_console_end();
-> +	unmap_sysmem(buf);
-> +	free(buf);
+>   	dmar->host_address_width =3D info.address_width - 1;
+>   	dmar->flags =3D flags;
+> +	header->checksum =3D table_compute_checksum(dmar, header->length);
+
+table_compute_checksum is used for ACPI and SMBIOS.
+
+In the ACPI case header->length and header->checksum are always at the
+same offset to the table start. Shouldn't we introduce a new function to
+avoid repeating ourselves:
+
+/**
+  * acpi_update_checksum() - update ACPI table checksum
+  *
+  * @header - header of an ACPI table
+  */
+void acpi_update_checksum(struct acpi_table_header *header)
+{
+	header->checksum =3D table_compute_checksum(header, header->length);
+}
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 >
 >   	return 0;
 >   }
-> @@ -458,6 +464,8 @@ static int dm_test_acpi_cmd_dump(struct unit_test_st=
-ate *uts)
->   	ut_assert_nextline("DMAR @ %16lx", addr);
->   	ut_assert_nextlines_are_dump(0x30);
->   	ut_assert_console_end();
-> +	unmap_sysmem(buf);
-> +	free(buf);
->
->   	return 0;
->   }
-> @@ -642,6 +650,8 @@ static int dm_test_acpi_cmd_items(struct unit_test_s=
-tate *uts)
->   	ut_assert_nextlines_are_dump(2);
->   	ut_assert_nextline("%s", "");
->   	ut_assert_console_end();
-> +	unmap_sysmem(buf);
-> +	free(buf);
->
->   	return 0;
->   }
-> @@ -679,6 +689,8 @@ static int dm_test_acpi_cmd_set(struct unit_test_sta=
-te *uts)
->   	ut_asserteq(addr, gd_acpi_start());
->
->   	ut_assert_console_end();
-> +	unmap_sysmem(buf);
-> +	free(buf);
->
->   	return 0;
->   }
-> @@ -774,6 +786,7 @@ static int dm_test_acpi_find_table(struct unit_test_=
-state *uts)
->
->   	/* Restore previous ACPI tables */
->   	gd_set_acpi_start(acpi_start);
-> +	unmap_sysmem(buf);
->   	free(buf);
->
->   	return 0;
 
