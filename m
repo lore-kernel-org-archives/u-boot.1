@@ -4,89 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11455C35FFF
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 11:47:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4323C35FFF
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 12:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 619CC808A2;
-	Fri, 21 Mar 2025 12:47:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BECA1803DF;
+	Fri, 21 Mar 2025 13:10:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EOPOoUvC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qonpd1iI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E479081219; Fri, 21 Mar 2025 12:47:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 185DF805C8; Fri, 21 Mar 2025 13:10:21 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F184E807D7
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 12:47:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA6938001F
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 13:10:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1742557657; x=1743162457; i=xypron.glpk@gmx.de;
- bh=d/4ua8Bk/jvZR8JBQ3NRqpySk1JdIHbkpKiHde/lPI8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=EOPOoUvC62Ujv8ZHJI1pNbuLg4VitgwXdrd242pZLvZwRqXp8RGFQGJ/UlOoH/ig
- Nk5DH3gvUwF0Yz2ARHHqozoFCbQpzLwNRmyvUcwbPcHp5U908OHJcLq/kzsytJ9vp
- tnfgGeCwTmozdyqZMtUNq4xHYg4FFiKimMXjiRBI8xoR+zgBKGSIF1RU0RdAjGFh3
- GC/5PigVm0dW586BkouxwGqPd1jUNickA7MylqJkG2ZKCjftud9uKmhtPWL8x9fGM
- GhPcNRehyg6YnrS0y9KcYwh2iIFzEMP8vLKpRTwxvMpkwt0/ZcBAEKhG+qyVb9i8O
- rCCousm/AyWsr9sI6A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N63VY-1t75f62cQa-00uRVO; Fri, 21
- Mar 2025 12:47:36 +0100
-Message-ID: <d308b128-5a3c-4d77-ad04-0aa5c8e87006@gmx.de>
-Date: Fri, 21 Mar 2025 12:47:35 +0100
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5499d2134e8so2455915e87.0
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 05:10:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742559017; x=1743163817; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Azs0WjsUX14x4+AaGLrJDg2AxfcAqxb83kEQYt5t3gg=;
+ b=Qonpd1iI3M0Fvxd7IMzer9UVL0I4lbvM6FO3iAvkl95hSuIYZVarCwtkPSWyQxcDaX
+ WyIOjZygCWSy0om6WEw3W2sgBQ6zvgpJRqxlRvT43XFXZmXa6BdIgyrGNplx0dma3Imt
+ PkK1BFHWsUbEza5SdqsPTPIEgFeKSpLwCITityzxY3K8OGRxYR7hRnwGJFykvyD/lm7B
+ 2z3nyMZFJcaPk0dtGSWQ+EPyoEfHelPemcF+mpBeFZ7LoKqCaM07T16oaIDfzXy+ooB3
+ RgaVqQZLYhvimB6wnzLqLdZAfvVaM537koWB32As6tyWCJApc1kqzALT42KNwRjEbnNV
+ 75EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742559017; x=1743163817;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Azs0WjsUX14x4+AaGLrJDg2AxfcAqxb83kEQYt5t3gg=;
+ b=CDg0g4A5LmYZTC0pdOLpCCp4q0L/Zoz/gXBg1OetKh9LORh9kzgjOVwBOW6uIEZwYD
+ CuqVQP8xws/MXG8TtwAolH3X+nbVIexu/SwArS1TyqYI7uXaGzSaBRjdTu05fr64Ag/K
+ bwHLBAHVzFQXRmY3n1v1k0Hs9e4pya/zLKtFD/59AKRNrauG3CgQqttpvDRbndTN6XKc
+ MQPMdyVYwN0Eowhalh7zuQwZOT5isK+IvofnUuDONt8XZqo8ABSnAu6vyx5FM6zJ0XSj
+ kTDoAzAbXyLvXzEkfyAE+rl7gY8zUQ6jz+QBybmNLp4ZFFLjzopYnAEvgUL94SPoTKbh
+ zc+A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEP3h2plBmaWmE3VnlOfI0q9BQho5N7UYZ6tZKq23WMzXDL8M83bf0mbLupF60i7KT9HBLH/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIpgDRkP4zv4xumhEUwgwYrF10w0zxJNRe+hv/3eJ42lQ3D6zW
+ 505Tknz1f2hOBNmyMJvdJvj9HGpeZzrfykWeXPyD4/MW/AHAHFLstttOsAcEdnYyhZCRzSmwEXs
+ RLXK7BY7zM+wo+khiqSNV34fHfHw=
+X-Gm-Gg: ASbGncvR704zTmSu/3BxBI9U7Z2kEMw03cWoHkPVBP29XVcru8Hd7kG7cF9qgA6jUye
+ pJs8dMXN7Vne1YWA5ObFHK3fmeg1mJx/mFsVr9NAWrcjDX3GE8SeW9oOTv+BJ1Npf8aVjj2BhZ5
+ m+RlOC+x9El7PHFIxBvlikRx38NpRtMBIDxvm/kQZ/IeepICH/0AryR2VI1Q==
+X-Google-Smtp-Source: AGHT+IFxRtrN4pqnhHHhdVkl+lvdDLQVTqgYwacj65Legf3OtuKkNrG7FvHG0I+dTWaSb+qTOsIRXKYSFJ868eyhADo=
+X-Received: by 2002:a05:6512:31c7:b0:545:d35:6be2 with SMTP id
+ 2adb3069b0e04-54ad64ef3fdmr1083070e87.34.1742559016577; Fri, 21 Mar 2025
+ 05:10:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 43/46] acpi: Add a checksum to the DMAR table
-To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-44-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250315142643.2600605-44-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20250321013109.709431-1-aford173@gmail.com>
+ <20250321013109.709431-3-aford173@gmail.com>
+ <7592b048-da30-4512-b6a3-f435b6f3bc3d@mailbox.org>
+ <CAHCN7xKStps4Cyr8=WaCU5bUY_doeh4jcUHv4XFUm7CLjq2JWg@mail.gmail.com>
+ <2d30bdbe-ff01-42e8-bdfd-0748e0546240@mailbox.org>
+In-Reply-To: <2d30bdbe-ff01-42e8-bdfd-0748e0546240@mailbox.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 21 Mar 2025 09:10:04 -0300
+X-Gm-Features: AQ5f1Jo4aqBQPEbDTPcFASheZpXGo7OXFLKeucirVGtrA2vz9IFzftwOrCHStxE
+Message-ID: <CAOMZO5DqTbRdeL=h69wSNoMfCFLT9KGUGz7S4R67hoaB4nOZ1g@mail.gmail.com>
+Subject: Re: [PATCH V2 3/5] arm64: imx: imx8mm-beacon: Enable CPU_IMX
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de,
+ aford@beaconembedded.com, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Wadim Egorov <w.egorov@phytec.de>, 
+ Christoph Stoidner <c.stoidner@phytec.de>, Yannic Moog <y.moog@phytec.de>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sumit Garg <sumit.garg@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nc31ig0KDDEj3wpvgV0ISHKOvrfjprlNgbD7rMwWMDGGGMWf5+Y
- pv4TeddEGe8ga/oLsFWF0Q/MiQ950bj3aRB+QtOufWFWPPbc1TZfhY7BAxbz251PpFKhZ1k
- wNks8er48fq6OIoToe9Tv2YDoYqbNZ9Pn/vODx6GLsfv7aeEbJM9Il90FAfa9P75Ob+NK/y
- /Hrk4G3kNPQL7bG09jtiA==
-UI-OutboundReport: notjunk:1;M01:P0:umg4Vy/TE8M=;+Kvij/51RUHFTKhp70JW6yEyKTQ
- kIKC/O0a6jgSHqCqoWUauk9naM1WMvAq9tS21iPOmue6MZJrBxe9yhuFWJdhLpeVH43VYP0tm
- gDd/mni+EChuzfgMWCZ1k7uSYegXehfTr9miKZwzkqAWk80G7RrUfzI2MbIWdxec97Jf51hK6
- 6ut8KWwhUk+bawhP10FRcksHOE+9ibiNzyBrrxnuWk4J7DVc4oS4YSYYDVEAKefVQcUrFoZt0
- S2Y61qB0+5y7RCpMhyQodTt7oSKjlqvyjseZ1H7Qv8u6pSBWTkjBwbpPxy/TuEzQmeIjnbEkb
- t0acQVxiYOin00xmVw7zpwtp1zMtbXaqE+3KFNnLIQgsKffUQFrkSg5HOOK2YY4y9tp6i96Ed
- UOVQlj3HFdIobtipDLmNUfv+AdT1SOuQV09IpOgp2gERacj/MHW+zftAruAj6yUsp4EPgWQtF
- hY1LT2/RmBSxgOZUEkdY817Mtkk3gBJi2YpZyiz30GyVD/loIVugyhZEzm/zyUh1eocgPgKgA
- nJON5c+736ZvktKD3GTXc9S1jAs6i03XyRRoyKgCqQjVxDY9Mdc+j5UXs9ODKqodYvMcaswPB
- w1AIU10qDLUIah5rkg/gPn+b934f4jB1ZwdajLAup+1cysQI0eVO4mB/7RgI6/Cb8WGCGap1o
- 16GzEZy5krkxOsqpxLMmXAzxYOJQ749tyTgGxEx9mnZ0+Mw77A9NZPfzzwBhs5uIOd76CLQ3Z
- 70+PqrZ0xi87Uu0QG1Y3QsjZmXKaxZvPl01ZUevNOxfm2zbhGhnZ7tY/W7Bcylv2sSS+chWws
- HPNaW1Trpc6rMGqjvGHB/yi7OCoymHGm630AoCEWa5a37M83PhEPrR/gJwS3VMSNyrDQfpQ++
- xdulQtdQfgWsYZZqjEpSQsswDtpFNSKNY9Y9cFHD+8kdrw40zVTfUXaDik90UBwmcKFduLnRt
- vzmzDVJnITRliqEb1q57jEeIsyhlsn1NBYpgG3+PE1xFz88etnO8WVYaU4jwZDST6WFYll/XY
- iJScPlHjGjDggyzDZ9tK0vUm5+7wlBhrfHi4tU8/JPxMrMkm7q7N60sFMFZFQwZNI7bR1ClFn
- RYrx92JRcL9AzX21I+NBml0XoZtptCoAjqv4GXXcDje9OCMihiYiU/a/zBf6AbQiaVOKDzjdM
- 58LmLtppv/Q/hNLtkJCzEPEkvAyFf8UVNK8Bu3ksTgpGRUCt7jxw1cWT1p/ZbEqsS1K8RngyC
- oNac1YlamS5+zX8/A4uqjVEJMjQnpOPVPUUcjoiKlMQDgtZI0jLzedN7HcIS9NXJloLOThX/2
- 3pRhhDBctYgNCbpY5CS0MhypEGdAHw21uXJNenIQiEEZAgty55Z3rXhwFByGd15aHx3brC1Rb
- L5sbR7/u9PD81+i/9oFls53HOUFD8cg0mlEN4g4pUW9ETv+MJFn6BICUMieMPP6VlMFQPjtXF
- lmIqvdRmO/ObDPnI3TqK+Iu2dMrk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,50 +107,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15.03.25 15:26, Simon Glass wrote:
-> This table lacks a correct checksum at present, so fix it.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> (no changes since v3)
->
-> Changes in v3:
-> - Add new patch to add a checksum to the DMAR table
->
->   lib/acpi/acpi_table.c | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-> index 3805b61159e..4044a64d688 100644
-> --- a/lib/acpi/acpi_table.c
-> +++ b/lib/acpi/acpi_table.c
-> @@ -66,6 +66,7 @@ int acpi_create_dmar(struct acpi_dmar *dmar, enum dmar=
-_flags flags)
->
->   	dmar->host_address_width =3D info.address_width - 1;
->   	dmar->flags =3D flags;
-> +	header->checksum =3D table_compute_checksum(dmar, header->length);
+On Thu, Mar 20, 2025 at 11:27=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.o=
+rg> wrote:
 
-table_compute_checksum is used for ACPI and SMBIOS.
+> Yes, I know. But then, I can safely say it is desired on hardware I
+> maintain, I think we could try and run a quick poll and see if others
+> see it the same way ?
 
-In the ACPI case header->length and header->checksum are always at the
-same offset to the table start. Shouldn't we introduce a new function to
-avoid repeating ourselves:
+I think it is a good idea to imply the thermal driver at the SoC level
+instead of per board.
 
-/**
-  * acpi_update_checksum() - update ACPI table checksum
-  *
-  * @header - header of an ACPI table
-  */
-void acpi_update_checksum(struct acpi_table_header *header)
-{
-	header->checksum =3D table_compute_checksum(header, header->length);
-}
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
->
->   	return 0;
->   }
-
+Thanks
