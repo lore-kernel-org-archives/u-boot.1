@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0CEC36000
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 16:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6034AC36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 17:32:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BD75809A4;
-	Fri, 21 Mar 2025 17:59:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A73EB806D8;
+	Fri, 21 Mar 2025 18:32:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fnlGke5V";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="deE+864d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A58F9803DF; Fri, 21 Mar 2025 17:59:29 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id BEE40807D7; Fri, 21 Mar 2025 18:32:25 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BC4D809A4
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 17:59:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 756A2803DF
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 18:32:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-549b159c84cso2496228e87.3
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 09:59:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-223fb0f619dso49604995ad.1
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 10:32:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742576367; x=1743181167; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1742578341; x=1743183141; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BVzgu/YmvIezHkCBGWL9gYZorifQSwA+98U7CYX9XDY=;
- b=fnlGke5VjOA/ul+0mbL9tuMJ4vKtlGSx8ptqrytXlBWlL/jRYFC9siZ+ykDpyDwLQ4
- +dtRgPfiWeZTNMztiKb/Plo3BsxpWcsnMCWUE1N1wOU8yMokCsWHi0AmDaxJoUk8U6w7
- piGy9mXhtZ1xPoSqF5AXj3+2sjbMTuGJLbPTY5KhN75gnxUi1VPIvjZc5A1aIwxHcgVm
- AGxgdlbIRekb0tAFCALi88BnoHxI6qJFDPvMOdX1SPIcS8FB7AhM8TQGbQjbglMuvnbd
- IUHLO2NzVAzqjBuHBSEUJxIFFQ4XX5lSDX21NGKevrUA7154EnHASLVVOrcEuHnglY1m
- 15ZQ==
+ bh=zUz8VECFz5GU23/xIqeabzYfRcCy2AEiOsDmCFV1mUc=;
+ b=deE+864dCGECgYWZcNuJHEfyILAHga51o/b+CoFc6vVBxjEv5C9eaOG4nb0ON0guA6
+ d4Us5pGJ1aX+CCEmsw4muZMOk/yEy/sSg0XAl9VgSALpLOM8LBK3JVDnnkWmdJETE2Bu
+ o4PaXjj0sOj18DriAoVvtTIF0kvwPWQYAgJsE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742576367; x=1743181167;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1742578341; x=1743183141;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BVzgu/YmvIezHkCBGWL9gYZorifQSwA+98U7CYX9XDY=;
- b=q9CdP7D7FIzwih3N3zLmr9aybD9VEL5xLxZFAhQ+Y6xrYZFyejj2hNpawqOr9X5uIe
- VuZqr5lo1IkUslzXukaN18NQw6jdTxaKk6lon9xzuU3T2Bp3CP2TiAx57OovAYWlSZi/
- VE+xrjvpzz8OIMB3vKUk6dTJRa4/ONxu4OiTdSqQ+GtxnoNyxXmdiOeAHTutqPX1hejH
- CJy6h0WOfHKw3sfLIHAYtrtcAzUMT/LJO0EmMlDy45sptMY6+3wiT4g77hiAyatytu7B
- oytuJtCbzBgmrUg9MskHyCcaYUa8AO96EPXvXJktKDzmC9bzD+yVR8HF28BvADksnQGk
- cFAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/Y5qR3uvzhI3D8g8v070QsRqcGVORi452jMEisjetnyssctQT7UVVqkbM8jPc2fqjfpSmiDY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyl6Qukg+stPG6jD2ihAbrm0baFi/jPRkXdqP1QnaBFg+TrJFc8
- VqYXR34r/2GO5XvEcHNfpHVFEEgOikwpQj6xVct2PWj4/k9iDE3S
-X-Gm-Gg: ASbGncs0w9W+JSWWzZ1PzF0KRm83sQboJsTm+ogRe9JVRhoeKklD/2UsuUC/lm016BS
- cPK9FzFoMybKPGJ75Ma/SEKkb4dXGvo5rnGJEAzPuZNLz6yOh4JaNeRVuAO83AHj2ItrFnRb9DQ
- RGHoem6vGlBMj9DADXxvnBvXnSZPI5pnQqzuf2dakScl8EHbB7cNKnpel2Sb+wMSRMRaFJtyCVk
- 2WrdAFUyh9Vaq3tPNNq97bLC9SpCNmPmXAlun74yWrgtejgfBgfda2QH6XrfsPu8X0LaBMz306/
- ANQEw/5B+CBHOEDEec5blBD76tL11C2448KAfQO2KTkR7w+sJycEX68KtL7SX7WfjXkC03I=
-X-Google-Smtp-Source: AGHT+IHCMAKZRqDP6Uo4pgT/ufXhtBnHss6DOtJXU5CJfWhG1g7yqVK/JdY1gQAbqlktrmAw4Z6G4A==
-X-Received: by 2002:a05:6512:b22:b0:549:8d16:7267 with SMTP id
- 2adb3069b0e04-54ad647995cmr1420752e87.10.1742576366761; 
- Fri, 21 Mar 2025 09:59:26 -0700 (PDT)
-Received: from wpc.lan (host-93-124-32-178.dsl.sura.ru. [93.124.32.178])
+ bh=zUz8VECFz5GU23/xIqeabzYfRcCy2AEiOsDmCFV1mUc=;
+ b=AADTtyoyldJGzlUnghWJ+HrkGcseRYIAHnkMXxTrVmcUj3pUA5+h+V/ZyK7sU/PEWE
+ MiGnlIgFfUeXhNiet6Be9AyLWNlnwreUVCJTfpMZmY4LgcZ9ihArlLCHyCgR/hFvcE1H
+ DFhWTyYzcv7WZtOii0Iioi9xNbfw3aIoiWVB8hlM3WbeAZ7DbXIS+NPkeODuO5xlSReM
+ OpdxStklwyVnosSS5LWhNQyPH1znosfXXaagEiX8HLdatdODLeAIW8ZMVP18vh0oZ5oO
+ oC67co/0b1I6WVKKQmHPv5QvoFhAvD42dmzhIbmybTwon8//O+QiSUK9E8n1bjKi3nEc
+ XyXA==
+X-Gm-Message-State: AOJu0Yy6elxKYKBHODyjLlx03XwSYKS4/Httat2qg57h4sv4LUuYjOXA
+ 2Bp+fHMGkTucoIbEDH5Fjj+WVur3ZV3zJoHfTAVb4vZ+S5X9C0TlPWA8NNJalit9HgCXVmK0LJE
+ t
+X-Gm-Gg: ASbGncuEsZgRN7VivpzaqXZqXcg5ev61dqcbNV6QulnJkv8w4Z5saC8lAXnJrmFBJ9k
+ txWypODXleB/87SLl3mAPTQVpShmHNsFIl+l7lRTMBlHEgyDLGqB7MznVpTCj4iiPzHtON09QE9
+ Gj5bXCwzz7G222zUn1a5AoPDSfZ9Xeg2rxv62iliM8kxUbqPhSaxZl7iigFwC8lDL/VhJoRZZ8R
+ TdR6/rUTsxIUiriAw53BZuPWBHN7wbX4doXy9w+qrgj0c8JRuwrcUWjTsIcUl/Chk6U0wXje3SS
+ +DH9clzygcm+J90oAXbDonYPi8BdlutBscIAEhiDZAUP
+X-Google-Smtp-Source: AGHT+IHnUggU8xyMp+H7I946WEN7CFWUo05khDkv7/lzRAyBJQO2FGAjCudf8l5eUR+mCdTVsyxS1w==
+X-Received: by 2002:a05:6a00:23c2:b0:736:a82a:58ad with SMTP id
+ d2e1a72fcca58-739059ffb47mr6109788b3a.15.1742578341314; 
+ Fri, 21 Mar 2025 10:32:21 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.138.125])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-54ad64806dcsm217907e87.96.2025.03.21.09.59.25
+ d2e1a72fcca58-73905fab7c0sm2232869b3a.7.2025.03.21.10.32.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Mar 2025 09:59:26 -0700 (PDT)
-From: bigunclemax@gmail.com
-To: 
-Cc: bigunclemax@gmail.com, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Neal Gompa <neal@gompa.dev>, Janne Grunau <j@jannau.net>,
- Hector Martin <marcan@marcan.st>, Godfrey Mwangi <godmwan@microsoft.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] usb: xhci: fix calculation of act_len in case of using
- multipe TRB
-Date: Fri, 21 Mar 2025 19:58:50 +0300
-Message-ID: <20250321165853.742837-2-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250321165853.742837-1-bigunclemax@gmail.com>
-References: <20250321165853.742837-1-bigunclemax@gmail.com>
+ Fri, 21 Mar 2025 10:32:20 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250321122947.26401-1-festevam@gmail.com>
+References: <20250321122947.26401-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250321
+Message-Id: <174257833977.2184847.5845976662902855833.b4-ty@konsulko.com>
+Date: Fri, 21 Mar 2025 11:32:19 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,53 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maksim Kiselev <bigunclemax@gmail.com>
+On Fri, 21 Mar 2025 09:29:47 -0300, Fabio Estevam wrote:
 
-In the case when the transfer buffer spans 64KB boundary, one trb is
-divided into several. In this case, the size of the first trb buffer
-sets equal to the size of truncated to 64K boundary.
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit 8bc3542384e3a1219e5ffb62b79d16dddc1b1fb9:
+> 
+>   Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE" (2025-03-18 13:12:51 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-However, this is not taken into account when calculating the actual
-length.
+Merged into u-boot/next, thanks!
 
-To fix this need to subtract the trimmed size of first TRB buff
-from the available_length.
-
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
- drivers/usb/host/xhci-ring.c | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index 34eb4536f0e..89d2e54f20a 100644
---- a/drivers/usb/host/xhci-ring.c
-+++ b/drivers/usb/host/xhci-ring.c
-@@ -659,6 +659,7 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
- 	u64 buf_64 = xhci_dma_map(ctrl, buffer, length);
- 	dma_addr_t last_transfer_trb_addr;
- 	int available_length;
-+	int first_trb_trimmed_sz = 0;
- 
- 	debug("dev=%p, pipe=%lx, buffer=%p, length=%d\n",
- 		udev, pipe, buffer, length);
-@@ -740,6 +741,8 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
- 
- 	if (trb_buff_len > length)
- 		trb_buff_len = length;
-+	else
-+		first_trb_trimmed_sz = length - trb_buff_len;
- 
- 	first_trb = true;
- 
-@@ -825,6 +828,8 @@ again:
- 	BUG_ON(TRB_TO_SLOT_ID(field) != slot_id);
- 	BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
- 
-+	available_length -= first_trb_trimmed_sz;
-+
- 	record_transfer_result(udev, event, available_length);
- 	xhci_acknowledge_event(ctrl);
- 	xhci_inval_cache((uintptr_t)buffer, length);
 -- 
-2.45.2
+Tom
+
 
