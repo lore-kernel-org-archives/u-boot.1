@@ -4,69 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D39C35FFF
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 03:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BEDC35FF3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 05:39:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 161B1805C8;
-	Fri, 21 Mar 2025 04:58:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 813E4807D7;
+	Fri, 21 Mar 2025 06:39:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742529511;
-	bh=WctdROsQbKj/RzM/fwJ5LBLNoKnI539MeDT1tEZn4oU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=k1zJyptZTbEMr/uza+TIRr3MNCD9cufuzhb71qOqFzeIVtGC4lBQZHgDpgjO7zPE2
-	 RL2hYELSK6CHOHzF4TcqfKfHYs301jPqOWkOnAI4/528T7EyYzfqKA3mFUIv3HaFVk
-	 w/MsZvvjmj77wuQoJGv7Gke+/UIasP/HgA2eNEHdmj0oJ78QtymjvSQTyJsH2G+ZN2
-	 jHrNPBk4FZQz4jj72l/Bqho0NQ+FSCola6ohsBFOHQzI1FgSbuYp1VAWJPPBblC8/Z
-	 2YxWUKANy/03qUjzePVygtvZWnmaLukGlOUW2JdWu2K7ZQnNck8e5dBassllbv2/dQ
-	 uPRxQ6NGWj3IQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B4CCD805C8; Fri, 21 Mar 2025 04:58:30 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 754D9803CC
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 04:58:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Mqfvn/hT"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 724B1101E9152; Fri, 21 Mar 2025 04:58:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742529507; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=WctdROsQbKj/RzM/fwJ5LBLNoKnI539MeDT1tEZn4oU=;
- b=Mqfvn/hTzLTulcSvvgsFSpN2C76wLCtL9vBwtff/U0xyD94D+KRvgGbZAteiOQL4vSm3tO
- Oc0BSA4hG1jKyhwbwiRcYA/a5WKHIgivPYKH2akqHQDSoAgt4FSVUd9o3Y62wyHxJlUa1S
- lW+Iamsz3ginV7G0+u3XYTA1QUtD9Jy09HLnslrEZhIKn0cAfQ3CZYKRQCBmOAoInWEUry
- SlOqac2u+aRuhsiA0CED94yFaK9m8oe1ydMDkgZxahdnwuyLHIwgF1yvyF/zmiPaLhYEI6
- Kp8fMezwxXfivyFNnx6BP1c0JU45Ljgre2Xduv5oELULOHG72YINZfmhkWDnkg==
-Message-ID: <1fb4a575-b9c5-4c20-9479-d0bffc6e6945@denx.de>
-Date: Fri, 21 Mar 2025 04:57:17 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TvyE5OM4";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0B888808A2; Fri, 21 Mar 2025 06:39:41 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 867878001F
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 06:39:38 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e3978c00a5aso1330724276.1
+ for <u-boot@lists.denx.de>; Thu, 20 Mar 2025 22:39:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742535577; x=1743140377; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IbEmcH4cOdQWESQBXpC1CwLeCCCkZWRuCKoBfwuPHRM=;
+ b=TvyE5OM4nxVIiEZSKY93T5TgsSzit7OCcHmGLOOcoNnvQDKG5So7KeM+JZ7YtiKUnJ
+ QdEQQJqomat2MlP0VGdXW1zUX1yn6deQijyUImnSqDemZHH1WMXF+1lt/a/PlETwQYY3
+ joiErghbEs+QaDqZO3H9l412qPGg89H74SKwW1SJ3iTz3lyVbgPz2SpHbZ5zpuqbBfHg
+ 63isXk/4XTgnzhr5YbRi7RpnUN7Ps5Wfa2sRqLgPkx1KDmfQq0FQkbwDnfW81HGrw9cj
+ 8+db13V2sGkhbdaiNeV0hz0EWHqYJ67+iWSxvdXMsY0Ztkye6RvSTJvACKWMdKC4NpG/
+ QWjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742535577; x=1743140377;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IbEmcH4cOdQWESQBXpC1CwLeCCCkZWRuCKoBfwuPHRM=;
+ b=drCF1eJb6Zu/0DHatXSz4p9pjuzyMoDfV65CfIt9YmmSNakzTtApSuh4w97gTSZA6W
+ cdGujQ6qGnmXfXEGxrmqDf9dkgJYF9iIX+6zMlpHDz37xOWNp3fQrMdeH/xXseKpJe8x
+ KqZICETDVxsnBJUC/42qm6RHAlhO95MuQFiBybbUSHxoLeBfltCThSORkjcKJpgjB+ZM
+ av5XMVdU6sAiD5UzdGHYG1IUpL/Pvpq6sxGfHqAt/D2xG3chtFZRVMmnyiuuHPsJ4N1r
+ 1bEhfviZ+5sYf4zWq4vmMkQPXUmE1WckxBUB/tpOEszbzrXOk1qytsyEerC7A8WOHlIo
+ ARBg==
+X-Gm-Message-State: AOJu0Yxyl4iSOEDqihPOhiyTPSVvJXeoEgcRIWq0xh0Tv8/iFbS7M8Ta
+ TnzkMECeUJ/dj+8mdWuN58iqrueRTlmX1BsfQHs1yXzs1OTNtT4eUAqg
+X-Gm-Gg: ASbGnctsq5bg3ZgPbh1HBq8qPFf9wupSeCG3Rmi45Ar8Gk8B+d9Br/RvJPaXfePg1ui
+ N/tUf71NaJgTLsZF6O0njnBU8HcAvQpdvnVC3CkOb9oEbVTWbkptOAy94r2DTWRCh/zRKZ8F9An
+ fGeJB+Hg66e0jLmvZ17ftYafACe0dnjcAGF02d2SmhRGvEoWya2G2reAlN4nJmiLY61+INnvM51
+ ooqM11Xygwy717T5qV5lkbMr6FSv0aUipax/L8HioNdLJL1Kp0jU4QbxQ4+2Eb0/hyth9lyej97
+ AanuzHJ9O9YBaM7AYMSXog+MhZ4Rpugxqra//g95uvQaYJPQLQoeMGf1eequ
+X-Google-Smtp-Source: AGHT+IF2LZfMAih1GtV+xuaielPuvofU1HQDu1gvWjB1U8aW6PRsEClN05p0KeZ2Nn+mAUh60OA2uA==
+X-Received: by 2002:a05:6902:1687:b0:e60:a3c1:6ed3 with SMTP id
+ 3f1490d57ef6-e66a4dafe00mr2668463276.21.1742535576734; 
+ Thu, 20 Mar 2025 22:39:36 -0700 (PDT)
+Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
+ by smtp.gmail.com with ESMTPSA id
+ 3f1490d57ef6-e66a4469a89sm206504276.47.2025.03.20.22.39.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Mar 2025 22:39:35 -0700 (PDT)
+From: Greg Malysa <malysagreg@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Greg Malysa <malysagreg@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [RFC PATCH] docker: add ADI build-related tools to docker image
+Date: Fri, 21 Mar 2025 01:37:42 -0400
+Message-ID: <20250321053854.12959-1-malysagreg@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] MAINTAINERS: Add USB driver file to visionfive2
- maintain files.
-To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Hal Feng <hal.feng@starfivetech.com>
-References: <20250317113627.84885-1-minda.chen@starfivetech.com>
- <0867604d-b857-46c1-a148-8d10a1cb55b6@denx.de>
- <SHXPR01MB086382C94AD9C7988302D1B0E6DE2@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SHXPR01MB086382C94AD9C7988302D1B0E6DE2@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,34 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/18/25 2:02 AM, Minda Chen wrote:
-> 
-> 
->>
->> On 3/17/25 12:36 PM, Minda Chen wrote:
->>> Add USB related file to Starfive visionfive2 MAINTAINERS.
->>> The N: pattern can override this.
->>>
->>> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
->>> ---
->>>    board/starfive/visionfive2/MAINTAINERS | 1 +
->>>    1 file changed, 1 insertion(+)
->>>
->>> diff --git a/board/starfive/visionfive2/MAINTAINERS
->>> b/board/starfive/visionfive2/MAINTAINERS
->>> index 898e284ce2c..f1d2deb9f5c 100644
->>> --- a/board/starfive/visionfive2/MAINTAINERS
->>> +++ b/board/starfive/visionfive2/MAINTAINERS
->>> @@ -3,5 +3,6 @@ M:	Minda Chen <minda.chen@starfivetech.com>
->>>    M:	Hal Feng <hal.feng@starfivetech.com>
->>>    S:	Maintained
->>>    F:	drivers/ram/starfive/
->>> +F:	drivers/usb/cdns3/cdns3-starfive.c
->>
->> What about using 'N: starfive' instead to match on all files which include the
->> string 'starfive' ?
->>
-> Maybe other IC code will be upstreamed. It is not me to maintain
-OK, in that case please put this USB controller maintainer line into the 
-top level MAINTAINERS file, since this is a generic driver, not a 
-board-specific one.
+ADI processors require packaging with the ldr utility for bootrom
+compatibility. Normally this is available as part of our yocto-derived
+toolchain but it is not a part of any other premade toolchain, so it is
+otherwise unavailable in the docker image for CI. This patch adds a
+source build from the ADI maintained github repository. The same ldr
+tool is used for arm and arm64 for all of our boards with names adjusted
+to match the expected $(CROSS_COMPILE) for these boards.
+
+Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+
+---
+Hi Tom, I'm not sure exactly how changes to the docker image for uboot
+testing work so I wanted to get feedback on my approach here before
+including it in a larger series that will include the ADI boards. I
+think that maybe 10 years ago the ldr tool was available as part of some
+toolchain tarballs at least, but it is gone from everywhere except the
+ADI forks now. So in order to build the sc5xx boards in CI, we need to
+add the ldr tool. I've built an image based on the resulting docker file
+and -next and then hooked it up to my gitlab runner to test things out
+and this is compatible with our upcoming patches as well for a full
+clean CI run. Please let me know if I've made some mistakes or if this
+isn't the right way to submit changes for the docker image.
+
+
+---
+ tools/docker/Dockerfile | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 569912303fc..f444accf326 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -299,6 +299,15 @@ RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp
+     sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/ && \
+     rm -rf /tmp/coreboot-24.08
+ 
++# Build ldr tool for ADI boards and install to match expected abi name
++RUN git clone https://github.com/analogdevicesinc/lnxdsp-arm-poky-linux-gnueabi-ldr.git /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr && \
++	cd /tmp/lnxdsp-arm-poky-linux-gnueabi-ldr/src/ldr && \
++	ls && \
++	./configure && \
++	make -j $(nproc) && \
++	cp ldr /usr/bin/arm-linux-gnueabi-ldr && \
++	cp ldr /usr/bin/aarch64-linux-ldr
++
+ # Create our user/group
+ RUN echo uboot ALL=NOPASSWD: ALL > /etc/sudoers.d/uboot
+ RUN useradd -m -U uboot
+-- 
+2.45.2
+
