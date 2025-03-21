@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F333C35FFF
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 07:16:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E4DC35FFF
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 07:16:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8249C807D7;
-	Fri, 21 Mar 2025 08:15:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7D9CF8129F;
+	Fri, 21 Mar 2025 08:16:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="QWDrXlI+";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="NAzXNBZZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550CF808A2; Fri, 21 Mar 2025 08:15:57 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id C635A8197D; Fri, 21 Mar 2025 08:16:01 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07977805C8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 08:15:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C20D8129F
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 08:15:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JczL5WU72s9Sj6Tk+N0P9qY7cgspB+o/ejaNVyCBIWNCQSN9aHHm9zWDBH4Nbrj028Zmu6k6MedutT/tlBOtyL4xDDi+xgQdWPONzuFF6WpShda6qLEBSQ18PV2PqfvqkdDXFQVkY/M88Ra6DOG1EgCrTZr3+luzkzM9Z88YswAs4fZPWMeSsFbU7gZPuR1aoKxzz9vwpVi69j/OG0DlJXIKDJQWUFXQwFEB+MFBUEql0d2yGWynmB5W+6EVtQl6+j6I6UvgPDvCJfGirv6Cb91kiK16BE02EJDOkpY4MUf9YtGQwWL2uY6Slq/qLhoQloS+Y6r+cOiR28CvThHrTg==
+ b=kEGzxaEp5esgxKArTdpL39EhZYL8yPwXmhLER9pMwinGh+0nphYrRfrLvpW5jgjWyftJZb52jhcyOk7SE0Qi+ssbGghON9Zb4Pi5YD7a6l1/uEChIFnMOvsUA28xSoN5RtNfDaGhSNIfqKJlids28BHg66ET8y39Yg9BiZIQiK2VgghkqVLp+gfUN6tQtYMqmiX7hOutH9Ihcj7n1T2ZIWpYO+QKxRv3ASFnMt5stozRQgcw2trm6SGcRZlK9e1OFMIOfwZNHCkDv+YCr6hcsSEUQruLIQTsG7ZANqU2oh3w/UMm7epwizSy2W9KoDIN8iK9ZB/ZLvtRSx5dwWhoyw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4KHvTkK4dbhqWWB2Ybwautmv6bxkhU6lEuoR7fpAGdQ=;
- b=vNmY3Z2x6wFcLSotNIPvEfRxi8FJ9F1NCAXIaWjFNTR3gScICGAhtC4/+X6VMpJz7F35vtQzCi58AqkOH8ZlcowRnj/R5QDU/nf4ATA04pl013bRfyMFymf3qXlAguDQhlyMq1M3rnmUFOQNWGRokw/58pyRM6giodOPF++YDClUiEaFD8e0o92mkCOzZWn6gGSKnNMYkBlAttfC9RJK6Wj+O/JTSl9gH3cHg72Na5ZbMAHOui4RqYvJhv2ZZS1zzJwfS5hNaanx69NRqpMSYLlFVLPsER5b+5XrLU6rfPHcp2b/hQgspZIF57FpypYKAtovxn+rxMmJR79jpm+sPA==
+ bh=3J2W4Vexkt7LQu6eHMxROhcDDZEvNtdaVJxIJlhGG4A=;
+ b=uOBm+xKHnxlqNlH757ojss1gj1wsCTt9X9a6sS6jZ1mSN/rHAaW2kQsILCj7ungKjwEPhOoXqSS0QIvA0HZpmI23NDJICtvirHqwV3zQs1X2z/Ml3JWUJzqLvOMcbsKLlh+8SXri7GcYKjhHzF1KwBKQVigHufg5VOxNsgksNFyIaVG+1EFM2BM38YRPoCdBa7rR68x0Lwhz2zrOYlw0ZuFSuGygPG+DiTj4fDVGekBUr+b+Zvhg+jWRgDbG+patNw/Vos4lxAvzv+yPEEIKL7JN3yb74L3zIioYpfMSwRK8Ysv4FqByVpAEQc1gSUYnXbq2wWsARnhZLvHziAU1lw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4KHvTkK4dbhqWWB2Ybwautmv6bxkhU6lEuoR7fpAGdQ=;
- b=QWDrXlI+4/4ZrYV6uJ03OofcsXFHPaPzPqCC9dU5x5Qr8w02hinQxncLBns6gBBbynork/Hiz1LYv2oEqODjpltuiC9yxBY06LtYl+ZnbDWuxCnr2N6edj32s8qniSBdSzf4mRv6C+9vmPRD04jkOidDZzxwDpsk6BgoXr5ZeRI3ATiiWnUfK4jztaSyLiNElnMV2zCY3rUaL+Pc6xe/X2Ym1RdpE563LVCKsoSYT0dK2mo8YxK08v01RQFsmxBmvMMCrvtVL3HPr5gGJzlBjxaTZwECqBVjDrl96ZE+PfTtZALHByaB1LaBf7GJKpG5Eco7JtDFpUdMWimhAvQsnA==
+ bh=3J2W4Vexkt7LQu6eHMxROhcDDZEvNtdaVJxIJlhGG4A=;
+ b=NAzXNBZZsuZYUsgns5hyZmwVfoDHa5NrKMW8nULEGLjpYO1yBtX2XFsY5KX+oq1qVELv7WJubBgbgvgI+ZwBBWDxlnwr+OmUwUxaBWs3wpsEBPd0iTOCd2R0JIbBACPtF1ZK2r+oMn0NGZGmdygaiVCviFNa9Uae9WbL4Wy/f7FvCH/23Jfl5Pe6mD8bYJJ6TB9ra2NSYn1VZkjqWm81lEC9Vui0lmvJ77NVQYyyoyC8oPx2iphG1K4A7eM1lDATpq+iHS7EeRpZNnlAyI9aJp7aRbwF6ApW5gDeYz72IegZCjpRQdlgvP5ovHMWcZ3VeDHp3HS4mghpkwKGSdx+RQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by AM0PR04MB6836.eurprd04.prod.outlook.com (2603:10a6:208:187::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.37; Fri, 21 Mar
- 2025 07:15:52 +0000
+ 2025 07:15:57 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8534.034; Fri, 21 Mar 2025
- 07:15:52 +0000
+ 07:15:57 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Subject: [PATCH v8 00/19] imx: add i.MX95 support
-Date: Fri, 21 Mar 2025 15:15:14 +0800
-Message-Id: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
+Date: Fri, 21 Mar 2025 15:15:15 +0800
+Subject: [PATCH v8 01/19] firmware: scmi: smt: Interrupt communication enable
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAIS3WcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDYyND3czcCktT3cTUZANDSwsDs8QkMyWg2oKi1LTMCrA50UplFkqxtbU
- AKce2TlsAAAA=
+Message-Id: <20250321-imx95-v1-1-f2c8ba815f89@oss.nxp.com>
+References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
+In-Reply-To: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
@@ -70,10 +69,7 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, 
  =?utf-8?q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
 Cc: u-boot@lists.denx.de, Viorel Suman <viorel.suman@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>, 
- Peng Fan <peng.fan@nxp.com>, Frank Li <Frank.Li@nxp.com>, 
- Ji Luo <ji.luo@nxp.com>, Jindong Yue <jindong.yue@nxp.com>, 
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>
+ Ye Li <ye.li@nxp.com>
 X-Mailer: b4 0.13.0
 X-ClientProxiedBy: SI1PR02CA0007.apcprd02.prod.outlook.com
  (2603:1096:4:1f7::6) To PAXPR04MB9644.eurprd04.prod.outlook.com
@@ -82,96 +78,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AM0PR04MB6836:EE_
-X-MS-Office365-Filtering-Correlation-Id: 796815e8-7866-474a-effa-08dd684836b0
+X-MS-Office365-Filtering-Correlation-Id: 9be5eb26-f8c6-4169-4f31-08dd684839a3
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|52116014|376014|7416014|1800799024|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M2xKaWwxU05vbVRTV2JmZWtwYUl1VnU0SUFQamRoZUZIZFpNSi9TS2drK0RW?=
- =?utf-8?B?cER4OUszQStnTzFhelFQL3dnMGxNb1Vna3dmamJrSk1UYk9YdTkxY3Vjb082?=
- =?utf-8?B?TXh2ZEFzcVdtL0l5dGFXYUU3azR4emE2N2VOTktDc0hrUkExNnVmU1hvVktV?=
- =?utf-8?B?alhlZklhRldvY2U0K29sTXZabDQrTC9zMDVTUWVYUmI2MXI5MU5jeXBQWThm?=
- =?utf-8?B?L1VMaWxBdDZIbTgyd0hXL3JGdVYxa2hCT0NlTElBUU9SZk9mR3ZJRjB0QVk1?=
- =?utf-8?B?K2NTMER0U2NFK2NMNTV4Z0FycUQycHQ0Q0FYZ0x6WloxQkdVWHV6ekFnT2F0?=
- =?utf-8?B?Tm1WWGxPcmtPKy8yenFIN0t3TUZjNTEvQmlhTGhUL0h3R1dZMStjeUlrSzcr?=
- =?utf-8?B?MVRkVFc5VEtVMlRmR0tKVHNkR2VBTUd1bm5BdTQ5VDlPb2lnYUNMbGg2ZjJT?=
- =?utf-8?B?WVJlVWRHU0JXMXliR0hhbUVUcDlwU2E2ZmxqbXVKeStHT2U3UGVGSWFiV25m?=
- =?utf-8?B?d0NETjVyL0F1UXJ3azVEaW1qWDZySjN2cEp5T3lSRUV3NTFhMHE4eTdDd2c1?=
- =?utf-8?B?TUlIVFozVGw3dnNVUHh1Q0VhVElZZFBJelBROXFiQVNmWXVsazFmSml4eUxu?=
- =?utf-8?B?L1R4NnNsQ21lY1BNOTgzMU83RkF2WnY5MFhzRXRhZkZGcDB5NlR4RjdhVWJI?=
- =?utf-8?B?Z09Ua3N0L3huMitYeCsxbVZ6Q01naVlwQmxCU1FsUGFIQXdIaHh0L1RzcEd4?=
- =?utf-8?B?WUpSaDZqZzZVUXF5RjZUZW1FbWEzQmJUVHF0cG9reG82M2FWdUF4c1BadHRk?=
- =?utf-8?B?RFJiY2gzWlFJSCtDM01YcUVQSlZqK3hWeGxJZUR0dzhkdXdUWFlSTjVlL0Np?=
- =?utf-8?B?eVZTOHQyWXdiYVdaZ2Z3NURFRnBsYlJ5MVhiOXQyZ3ZoNm9VdzBQZnFMUEF0?=
- =?utf-8?B?Z0FpNE1PZGNKWkIrbjVTeWd1L25xenV1YWpFTWJrUWdVb2NOdUxzY21lUklo?=
- =?utf-8?B?cm83SElqTFFicDYrM3d0K21TVUdVanlNckcwMVgrQkFPamRMNkpDUGg2VUtP?=
- =?utf-8?B?ZEpMY1hwR09TZmtkTWZNV01PdkZwdEVvME1YNWhkNVdWUXdBTjE5dGZnNmNv?=
- =?utf-8?B?YWJBZ3lDT0RZOXYxbGpBZmpTcklFT21DU0FyanlaNjlMenRQbG1MVnJuSXpR?=
- =?utf-8?B?TXArWVlEQTBQWGZzSUxoT0JQdXl0TWxHUlZnVWdiZW4wWUIwNmpXMXRkRDVW?=
- =?utf-8?B?UTAyR053NlBYei9rY1BwdDZQdHpFR1IwV1MxNDVoYUhDaWJ6WWo2NmpZK1F0?=
- =?utf-8?B?WDRIMmtVS3FtQTJnT0JHTmdLWC9IM2dtbWp4NVVCRTNESXVXVmprYUR4cllp?=
- =?utf-8?B?RTBGcWgvTUVvUGg3d1dLeXo3d2dTU0UvaldTeXVlQVcycjlMNVhINkhNN2Ni?=
- =?utf-8?B?UlMwbXlHWFdEMnlFM0l3TVlzcmlNdmdLYVM1T2xjZ0dUazV4ZUhZcnJ4QS8r?=
- =?utf-8?B?UFZPcDhUWUgxWFp6SXREM0wzSFdUNDBUc2FpM0pEZWRVZFAwVENUMDE3YXVR?=
- =?utf-8?B?cEJjR1I1bzRjeStuSXJ2aTJJMnkxMTFnai80cXZPcjVjZ0dlK3RuN2xMQ2sv?=
- =?utf-8?B?VytncmNrR2hnS29oZVVDcjNqYkw1SHMxOUJybDQyQ3I3dC84RWxZbDY5THJF?=
- =?utf-8?B?c0FQU3BWSU5ST2p6dVR0cEZEOXM5ZDFxQzdsZDJpR1ZBY3BQMG9XWFFnNVc2?=
- =?utf-8?B?eEtsVFhHQ29WVlprd3NQb004RFZXTGp1OHlmYUs4Y3dld3dzQm5DQ1hORmJx?=
- =?utf-8?B?aElBR2kyR1F0OFV3U1Y0VHBXZ1lacG5hZXRBeFU5RmxvK3piQUxITGVnQ3NL?=
- =?utf-8?B?K1dSc1JQTFFVd2xudWRUZm9hU3JtcnhJZVVsUGhKUjAzM0R2Ui8zQVdDUk9m?=
- =?utf-8?B?Rmd3M29lRzFtNE9QbmtvZkpKcVkySEFzSVd4RkJmaExUS292UGV0cmRFTkFk?=
- =?utf-8?B?SWVVWHM2SXBnPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?K2xXWDZPWEZRdU1Oa3I1NTQvZTh6Q3VXUHF6YVBMS3gxc2V3WkdRcDRidldQ?=
+ =?utf-8?B?MmlRR2IzV1pTOEdBT3lVbTVYRTgyYkRtcFk1NUlNUDU0eFlPeVJhdjFLRTk4?=
+ =?utf-8?B?QXM5QUp0YlNzVENwS29zTXIyK0Y3Z2J0djVtQlVOOS9mZGlsczhDSHJlNUI2?=
+ =?utf-8?B?cXQzZFFkMEpXTGd4VWFsMncxaXIwQ2dMZ0NRV1F3OXAwamxFU2VoNXlrUTFE?=
+ =?utf-8?B?RE0wNmFCZGUvdzVlVytYK2NIazIyc2FEWWxBdEJPMkpIVmYvcGtPd3R0L0lX?=
+ =?utf-8?B?N291VFV1ak5ZU0tpSGxZUVZTOUt6Yk44cXNtR2JMdXVVSENCNWpFQlRIL3ZI?=
+ =?utf-8?B?QVQ3djIxd0hrN25jSjZXeFFaZ2dGMVltVWpkandvZlhpbWRRU2paSHVBSS9N?=
+ =?utf-8?B?amlkWDRTbmxHMnhoSUU4ZjJhbzhDM1NmLytnd3h5RTdPaTZVbDhIMDFxUDkw?=
+ =?utf-8?B?Qm9UUzBrbC9IbzduSDAzR21oQ3I5VFpRQWRHR1hsSHRVRnhlNnJmY0ZKUnZ2?=
+ =?utf-8?B?WUQ3ckVDWittNFBSdGJQQVN1ODhoOHpNeXdMSFBqSXpMTXduOWxFNVFEUThu?=
+ =?utf-8?B?ZmNLQkZnZDF6QWh0aEZ5WlB6eWZhUEpQUzYvNTJwbEtBUVVhbHFnQWhDOVIx?=
+ =?utf-8?B?UE9pUDRzMVI5bkFoRS9CUmRmd2tFTE5hVjQreFVCWjVoOXFnanhaR2xnV2dS?=
+ =?utf-8?B?cXBTdWJmU2g4NDBpNEUvV3JqaEQwa1ZmdHo1em1DdVJVdlVlWS81b3FhVDRm?=
+ =?utf-8?B?aWNTV3poelJsT1M3NDM3cjhiZ1U3akRuRnhVY0JBNm9jQnVSQnA2aStDVU4r?=
+ =?utf-8?B?L1pSYWF1YnR1cDYrZFBuTG45UkI1U1ViazBuTXlCeVRSWWtQMGlPL2RTcWQ3?=
+ =?utf-8?B?bDNzNjg0ZWEzTHd0RXZCRjZVVkxUQmhuaU14MUtpODQxeHZPTVBtUHFnVE5J?=
+ =?utf-8?B?M0FQWEx4Wnc1LzkwVnl5bU1XN2QzTUt1aTNTaHhmbzJ2RE9hanU3UVVGT0ZT?=
+ =?utf-8?B?K01uZHo2Q2xOQUlnd3pxQmR2eUNLYUF0Qmc2WG0yWFhwMW9uTDVKY1ZTeWlI?=
+ =?utf-8?B?cGU0b3cxOUNOWFZabWZmNkNLZ1pQUElRWXVxQnBsZC9NQk44ZnpGUlhTaHFZ?=
+ =?utf-8?B?eHZwVDBua3krOEVBM0s5YkFzWldzWHQ2bWg3Tjk5eFJaQ0VLeXNyRnRHU2lX?=
+ =?utf-8?B?OVRVSXMyY3FGOVFIZU1xNmV2dENMN212cjg4LzZZdVZiWTJrcXlVY1BQU2Qy?=
+ =?utf-8?B?SStlN3crcDdaM3ptNElFSk52Wm4yeWs1RzMvdXN5U2V4Rzk0NVNmeFoxQU5u?=
+ =?utf-8?B?UmZCaWxYditNTHhkeHpwVVFmdWZiRDBNaTIycGowWE5kM1hKR1p4ZmhmZ2Zr?=
+ =?utf-8?B?akRnSHBjZGtmWC9IeHhMRE9LYm1TU0dlY29CRVRjVm41MGZYKzZYdjU1UzJF?=
+ =?utf-8?B?N0NTTVIweklOM1FSVTVGNGk4OW40VUZPYmx3aDA2ZUNCWVlSYkI2M3V5TkZn?=
+ =?utf-8?B?Ly9sZEtIVk4zbzRBLzQ0VFIyeStUR1gzTzNmZWxpa1FNVkNBRGQxZVJCSjN5?=
+ =?utf-8?B?aFZKYm1vbGZ2Zmc0Z3pxd0tlb2U3RDZBZy9LM3NMOFNLMmhsWUFHVzZtOVNo?=
+ =?utf-8?B?WVVYRW1tUmgwMHF1M2xPeGlQaEZUcll2UUtHRnIxb283U1BlNHZHZHhwUlJs?=
+ =?utf-8?B?M0lQanZKczZxemZMZGgrWUtXQ0owOGdYeXlCTHFLNjh1bDg2UWFVcm9YZ2Y5?=
+ =?utf-8?B?cHJWTUliaUtycmxNREJJMzhNVlExUFZyWkFXVkt0UVE3THRySVJ5RjY1ZVNl?=
+ =?utf-8?B?WjdSRVdpMFlBMDdsNEgxWkhOQkFzSzZ6Smd0S0YrZk1RcmRYd2pxdy9BcStt?=
+ =?utf-8?B?VHQ0ckVUU1pmWUlBdHZxTDhzZFY0NGZaUm9pNTZwd1pkOTUrRWVZY0hRMkEz?=
+ =?utf-8?B?Qld5em9RN2RLUlRqdXVFRmlGbS9IL0JmbmhhaUZOQkkxUnc4dStkZlNDYk5C?=
+ =?utf-8?B?cXVicWxJMDJnPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(52116014)(376014)(7416014)(1800799024)(38350700014)(921020);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K0ZhcjJhMUxCbjFEd2p4ZGNaNWJuUFJMK1BaV2RQbk9QTlZad1diazd0REFY?=
- =?utf-8?B?ejQvVzl6NzFnbEQzV0l5d0RUU3VYaWJacndTTkF6WFNsdGxuN3FJakd5RS92?=
- =?utf-8?B?Q0xqbC9rQURXc1VHbWxhMVpFMnJrTFk5cnUyOHh6UHhTOFMvTFVVSTIvSUZm?=
- =?utf-8?B?cGd5WEJFRW5rNCtxeGErN0ZibjY2cWNjODJNMWlYT1lNZXRoUmxsRjdYMzhV?=
- =?utf-8?B?c2lua0JnYnRKcTZTKzFTTVJ0VzYrWXNhczVHNkpnUnRXRU05NWtTUzFhdTZG?=
- =?utf-8?B?SzM5OU55akhoSXIvWkVBQ2NrWXVlckcxRE5mQUZKV2lLS2RiazZUSWJEYTdF?=
- =?utf-8?B?Q3JPVVpYbWVZVWNMVEgrOVh0eXNuMXJGVXg5SXhJNi96cWd1ZSt1RitUbzUr?=
- =?utf-8?B?YjlCTHNkZUhZT0E2QXdzcWNiWHJwWDRJcDVtck03T2N2b0NRa3BjZ0F3K1Bh?=
- =?utf-8?B?QmxMNEIrWGphcTRlY09PSEV1Q0s2WWRvMXJDajN3bkhXWW5nMmtNbVNuWERl?=
- =?utf-8?B?ZUljM2NwTVAweW9XNTV6QWVQa0p4YTV6OVZwWjZXeVQ0akNvYjF0WldxWi9U?=
- =?utf-8?B?S0xubjFEU2NTVFpUSVd6Rk1tVENqVDY3VDBPNWpqYVdEMm5lb0hZT1I4ODZR?=
- =?utf-8?B?OFhtbTNvdjE5Nmp2K1lOaFFqVnBmNExGaFNtdmExSzZkOHhSVmtqb1Q1WVQ5?=
- =?utf-8?B?L3hkalZWUVM5ajZSNmxZQW16R05jcUJyVG9HZHBhckN1WmtVVDZvQndsRHdP?=
- =?utf-8?B?dGhQQ29GYlYxUXR5OGVkY2gxcTRsMWcramJ1M0U0WnN3SWQ1cjJRVHdqbUt3?=
- =?utf-8?B?K25vZnNwK2I5VHFrci9oMDNmTlJQMmhaSlZUU0s2Y2lFNXpaZkp5bFpoUUtl?=
- =?utf-8?B?aTlIRTFjZ0RTblhyTlU2T2FkOTdXT3ZKcC8yMmVoMmJPejR3VG9ncXg4UnNV?=
- =?utf-8?B?bk9rNzB6UUszM2NvYmM2a29wZmc3N3hQS3Zld2Z6UXN6QStmOVRLN096VG5O?=
- =?utf-8?B?Qzl3dzZHWE1XVk1IaHdYdERvdVFEeVBySlQ1ckdUQTVlVkY0aWVqa2VZRWlo?=
- =?utf-8?B?S3JsdWNHdmJYRnN2aytaUnBsSjhsQy9yYUEwM3dQT2VIU3FlNHVrNVdoSnRU?=
- =?utf-8?B?REcvV21uZ3Y4a3pySEprbUkxcmRhNUdBZG1DV3Y3cEg1Qi9uNHVEL21zUkgz?=
- =?utf-8?B?OWp2enA2LzBEZ2QxUitzbTRVZmF5RkhnUlFrdnpzUkdmb3cwc0VxODU5bHRT?=
- =?utf-8?B?Q2tnRUdOUDFabmNFSlJYQ1V3UHNaMktrNUsvUGVuQnpPRStuK1NmR3JOT2t5?=
- =?utf-8?B?NkIvb2JyYlZQYk5pVVZ2K1A1Z3hiTXZTelFIZ08zLy9tSE9ma053Z281MVpI?=
- =?utf-8?B?d3RlUjR3ODVDWm9sNWlybjc0dFVUTytKdyt2RUJlVmh2enJSL0NBaHZBRnNF?=
- =?utf-8?B?UjhMREovTWxkMGtvK20yUEtxTDdBZnhtMG5HKy9wR2dsUkRmVlpkRnRqZlpL?=
- =?utf-8?B?ZXR4SHhZcXBhZGF6eHljM1UrbkNTSkNXVm5DQ1N6N0FzTUllb2xpb2dYRW9j?=
- =?utf-8?B?T0tILzdXUnorUGNnMTZBbGZCbHc3WHgyS1JTNFpqUVNUTklHZnh4THhWeFdl?=
- =?utf-8?B?RTZMSko4eGMrNVc4YmFNcENZS3lKdWw2eEY4Rkl5L0dNWVVPcUdGaEpKTHFt?=
- =?utf-8?B?clVDdjUvUHNrSVZUMFlLZTAyTnUrdWhrcW1nRFVUdm13NjJ4cU95eHc4Vm1w?=
- =?utf-8?B?L2hoTGc0U0RpYjdyN0hDa3o4MEFMTmZXREUvWm01eW9FVWoyL1VZRCtFalMz?=
- =?utf-8?B?L3VEQWUvQVBFOXJZY25LNGVXRW1ZeFdtS3Q5Y1lFZVlqYkJHT3FQbkpXRzBJ?=
- =?utf-8?B?Q2JpUXI5L21Jb3lWMUdEakdGSlhRS09OV1F2T01qNGhsb2h4dTk5KzZWdngx?=
- =?utf-8?B?MVlHSWdmbDRtR3F3SDI0blUwVzd2d3RzWUtYQi8vVlBDSzBWTWExT2QwMWZw?=
- =?utf-8?B?eHB4RXB0MWN5ZmNFWWRQWXlPb3UrTElzcHJ0bzlkNFRuY1NFQ0pPVElEUGhm?=
- =?utf-8?B?MEJSeU1kMGFCbXk1bTR6TjRicDVOVGFFRUI1bXBYZmdmWW9rZnN0ZFN0K1BI?=
- =?utf-8?Q?NeD5LyR+NYOSa+GUEmclbQO2M?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RVg1Y1FIam04Q0NkMnovdWY0S0FpUTlZejl5V0N5WFovVG9uY2ZxVStRUWV0?=
+ =?utf-8?B?bXN5MmtINE1sMnVOVDMxdFVKc253OXRia1ErMWErUFBoNUVSdG9VeU42Z2J1?=
+ =?utf-8?B?TFd4UmdQSnVUdVVLRDFkVnMyaFN5VlBPUGlocUZSV0hTa2RQTTI0dmFqcnZI?=
+ =?utf-8?B?WjRFdzVRSGRRMWYvMStVYmdpK1FpbFpUWEJFWHdBRlMyT1hGemduS3E3RGhp?=
+ =?utf-8?B?V3pGN2N6MElnU1ErTzYyS3QyK3lSZTJobmdTcGtZM2JCZE1aNTRMLzBRbHdh?=
+ =?utf-8?B?dE0rbHFJRGF1d2xiQllCVXM1SDBDYWl1b0VtL3lTZ3pUWnpWTTNKYVc2b3hn?=
+ =?utf-8?B?ZmdHU0VTdk84Y2ZqRmdiNmFUZWlsMk11NDlRbkZsVHowOXJYbUZCUTVKNTY4?=
+ =?utf-8?B?WWxkekNrcko4S1FtaEFnNU5jcWMvL1pibmRKYXNCcG1lMTFCbytiUWlVUG9G?=
+ =?utf-8?B?aXBDU1YvM05yZ283R0haSXVTcEpweUpHSGJBQnJFRkJuWUE0YUhCbEFDL0or?=
+ =?utf-8?B?SUtMZG5FeExRbjdnTFNSa1hZY3Z5Tmh3TEo0eC9wL1kvVjFlTWtKaTlNTjBJ?=
+ =?utf-8?B?dE1DZEprZGwxaU5sZW9INmEzSEo3cXcxeG5JNVVqTzNrSXJnVm9GY2s4NmxP?=
+ =?utf-8?B?SGR6aStwWHl3UTR1SmxpU2ZPOWJBOFJpQXpaeHNoMTF6NE5mK1YzSFpZYmR2?=
+ =?utf-8?B?aUZZb1hoblQxOVlzOVpUbm0vbUsxTnpraVZqUG1mTXZ1bitiT3lXbmtWTG5p?=
+ =?utf-8?B?ZytDYUxHdDJMbEcrMmxtYmxKcldLTWpBU2E3QmhvY1lnbnFXM0lSMldKbVhy?=
+ =?utf-8?B?cjErbDBKdGFpOXFTVC9kTkxJRm9abmtCSGhBNUp0Q1czQWFOSi9ucWFZcnZw?=
+ =?utf-8?B?SWZtaFNDZ3EwUFNoQytKOUJSZTQ0a0tXZHl3bGErVW5kRTlFUWxrSlJYYnhp?=
+ =?utf-8?B?QW5wQzhkUlRZbFZmNkUwV3pobzdTbVlCZ2F1bW1RYWYxVldrZjZBekExMVBD?=
+ =?utf-8?B?TzlBNFNPVGM5eExKeWJ1QlVOQ3F0WDJlS1luWjBpaHpoZmZDZ1J2R01BbVRR?=
+ =?utf-8?B?R0c5R2JxTFlTdTQydFpSc3hDNjhBNTlXaHVYUzM1YjhqUEYxdFl1L1c2c3Bm?=
+ =?utf-8?B?RVp0S0hFdVBVN0ozbnlSMlFlY1Nudkx5YnhPRGQ3RFkzTkt5dW5nLzA1OWxV?=
+ =?utf-8?B?eGhxRkJiYUJGSDM3WTE1RTQ5eDc5Z3NsSHdNVkJYYlJocUQ0K2lSNHFBVi9u?=
+ =?utf-8?B?UHoyd1JzSHJRYmoxdTh2bWFZby8xa1doOUE4Q1lVb0pDYmpjdFVQZ3JHRmUv?=
+ =?utf-8?B?RlhTMUplK21FWGlHWDhXb0s2dGVZVWJtemkwOG5uNjdabW5zOXlrdU95Q3Av?=
+ =?utf-8?B?dTZ1SzFHb2Y2aGVsNk55bUsyTmxob0JNZEtuY25UZFFnb2I3dlpudlVMRDNh?=
+ =?utf-8?B?dVR1bnpCZE15T1c0eVRJbXhnNmZNejRoQVk2aGw5K0F4L2lQSTd2cldIQVky?=
+ =?utf-8?B?bS8rNzQwci9rL0tmU0VNZW01WldOU3dqRHRmd1ZYb1VnM1d0dHQ5cVlqS0dE?=
+ =?utf-8?B?amphNUg3d0kvcjNRQmpRb0Uvdmh3N1cwMkhyZTlCUjdKRzhkL2lXVVl0Nlc4?=
+ =?utf-8?B?c3plVFpScDFOakEzMFB4MHZrSVdXQ2ZTcy83OUdja0NyakdISytPcWRqUXor?=
+ =?utf-8?B?blM4TFg0V0lRNHdLTmxXck5wNENqWllOdnJoQUdoVkMvZ2o1SW1vS3RyS2VK?=
+ =?utf-8?B?Y1BCTk8yalV2S21KNFFaMnR6ckVvdG1JT2JEZ0x5dGttamEyL3Zza1laalRM?=
+ =?utf-8?B?eWQrWS9KdDFEQVI1d0dXc0lZYWxLU09zLzhKWnJ6cUk4cGFxaTlHM2FRRzdp?=
+ =?utf-8?B?YkJRUlhnU0ZRSlBHeGFpWU9Dbi9aM3FVV3hRREVFSE5kQm9PczdHZE5TOEQz?=
+ =?utf-8?B?aXNlbWVURytnaHFNb0xkRnVqd01FQk80dVRQRjBGbW5YQ3FubFNPOVVYU3Z0?=
+ =?utf-8?B?Z3JobjZkd1BtZjUzYVNuQzFLTmpZVFlpbWhLMEJwWjhrVGw5ZXNKUjNBaG9L?=
+ =?utf-8?B?NXhOU24yTS9XOUN1QzVSdzBQTWhJYk9qTi9qZEZlMTVzNC9vbm5OWVVzNisz?=
+ =?utf-8?Q?jIkxm5qTFODfNDyIoS5wZySJF?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 796815e8-7866-474a-effa-08dd684836b0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9be5eb26-f8c6-4169-4f31-08dd684839a3
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2025 07:15:52.3780 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2025 07:15:57.2023 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WOGP+f3iKBCj+LJ/Xw6TAq72KwLVLqbBUpKrzptnjqBAnrvXhCRd/64Lxictdpx1ShqzKn8QBiHuTtgnvVl7mQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9iUpSAwMFiCOLV4/8YSbEpH4o0+LooetrPAaLr+vnECHkBCuEJnXSgVKu3U9jL+QzEaurNpvHlODfb+7sTD9IQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6836
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -189,107 +185,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Changes for v7:
- - separate i.MX Messaging Unit driver patch from this patch set
- - add U_BOOT_SCMI_PROTO_DRIVER() to avoid putting i.MX related code in scmi_agent-uclass.c.
- - update drivers/clk/clk_scmi.c according to comment
- - dynamically allocate the size of struct scmi_base_discover_list_protocols_out
+From: Viorel Suman <viorel.suman@nxp.com>
 
-Changes for v8:
- - add a comma to enum scmi_clock_message_id
- - use readl_poll_timeout instead of while to avoid to silent hang in
-   disable_wdog()
- - use the format "%pM" to print a MAC address
- - use "%u" to match the data type u32
- - add a comma enum imx8image_cmd, enum imx8image_core_type and so on
- - add a line at end of container.cfg, imximage.cfg and imx95_19x19_evk.env
- - update arch/arm/mach-imx/imx9/scmi/soc.c
+i.MX95 System Manager uses interrupt driven communication which requires
+the caller to set Bit[0] of channel flags to 1. When transmission
+completes and the previous general purpose interrupt has been processed
+by the other core, i.MX95 System Manager will set General Purpose
+Interrupt Control Register (GCR). U-Boot polls General-purpose Status
+(GSR) to check if the operation is finished.
 
+Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Ye Li <ye.li@nxp.com>
 ---
-Alice Guo (9):
-      pinctrl: nxp: add a pin controller driver based on SCMI pin control protocol
-      firmware: scmi_agent: add SCMI pin control protocol support
-      clk: scmi: check the clock state/parent/rate control permissions
-      sandbox: add SCMI clock control permissions to sandbox
-      imx: Kconfig: IMX8_ROMAPI is not configured for i.MX95
-      binman: add a new entry type for packing DDR PHY firmware images
-      tools: imx8image: add i.MX95 support
-      doc: imx: add document for i.MX95 Image Container Format
-      Makefile: add some files to CLEAN_FILES
+ drivers/firmware/scmi/Kconfig |  6 ++++++
+ drivers/firmware/scmi/smt.c   | 13 +++++++++++++
+ 2 files changed, 19 insertions(+)
 
-Peng Fan (4):
-      scmi_protocols: add SCMI misc protocol protocol_id and message_id for getting the ROM passover data
-      scmi_protocols: add SCMI Performance domain management protocol message IDs
-      clk: scmi: add the command CLOCK_PARENT_SET
-      imx9: scmi: add i.MX95 SoC and clock related code
+diff --git a/drivers/firmware/scmi/Kconfig b/drivers/firmware/scmi/Kconfig
+index 8cf85f0d7a1..eb62b88615b 100644
+--- a/drivers/firmware/scmi/Kconfig
++++ b/drivers/firmware/scmi/Kconfig
+@@ -41,3 +41,9 @@ config SCMI_AGENT_OPTEE
+ 	help
+ 	  Enable the SCMI communication channel based on OP-TEE transport
+ 	  for compatible "linaro,scmi-optee".
++
++config SCMI_TRANSPORT_SMT_INTR
++	bool
++	depends on SCMI_FIRMWARE
++	help
++	  Enable interrupt communication of shared memory based transport.
+diff --git a/drivers/firmware/scmi/smt.c b/drivers/firmware/scmi/smt.c
+index 67d2f450024..a0489f9718a 100644
+--- a/drivers/firmware/scmi/smt.c
++++ b/drivers/firmware/scmi/smt.c
+@@ -20,6 +20,16 @@
+ 
+ #include "smt.h"
+ 
++static void scmi_smt_enable_intr(struct scmi_smt *smt, bool enable)
++{
++	struct scmi_smt_header *hdr = (void *)smt->buf;
++
++	if (enable)
++		hdr->flags |= SCMI_SHMEM_FLAG_INTR_ENABLED;
++	else
++		hdr->flags &= ~SCMI_SHMEM_FLAG_INTR_ENABLED;
++}
++
+ /**
+  * Get shared memory configuration defined by the referred DT phandle
+  * Return with a errno compliant value.
+@@ -48,6 +58,9 @@ int scmi_dt_get_smt_buffer(struct udevice *dev, struct scmi_smt *smt)
+ 	if (!smt->buf)
+ 		return -ENOMEM;
+ 
++	if (IS_ENABLED(CONFIG_SCMI_TRANSPORT_SMT_INTR))
++		scmi_smt_enable_intr(smt, true);
++
+ #ifdef CONFIG_ARM
+ 	if (dcache_status())
+ 		mmu_set_region_dcache_behaviour(ALIGN_DOWN((uintptr_t)smt->buf, MMU_SECTION_SIZE),
 
-Viorel Suman (1):
-      firmware: scmi: smt: Interrupt communication enable
-
-Ye Li (5):
-      scmi_protocols: update struct scmi_base_discover_list_protocols_out
-      spl: imx: use trampoline buffer to load images to secure region
-      imx9: add i.MX95 Kconfig and Makefile
-      imx: container: add V2X container support for i.MX95
-      imx95_evk: add i.MX95 19x19 EVK board basic support
-
- Makefile                                      |   3 +-
- arch/arm/dts/imx95-19x19-evk-u-boot.dtsi      |  62 ++
- arch/arm/dts/imx95-u-boot.dtsi                | 157 +++++
- arch/arm/include/asm/arch-imx/cpu.h           |   2 +
- arch/arm/include/asm/arch-imx9/clock.h        |  10 +
- arch/arm/include/asm/arch-imx9/imx-regs.h     |   6 +
- arch/arm/include/asm/arch-imx9/sys_proto.h    |   1 +
- arch/arm/include/asm/mach-imx/sys_proto.h     |  39 ++
- arch/arm/mach-imx/Kconfig                     |   2 +-
- arch/arm/mach-imx/image-container.c           | 119 +++-
- arch/arm/mach-imx/imx9/Kconfig                |  16 +
- arch/arm/mach-imx/imx9/Makefile               |   9 +-
- arch/arm/mach-imx/imx9/scmi/Makefile          |   6 +
- arch/arm/mach-imx/imx9/scmi/clock.c           |  70 +++
- arch/arm/mach-imx/imx9/scmi/clock_scmi.c      | 133 +++++
- arch/arm/mach-imx/imx9/scmi/container.cfg     |  10 +
- arch/arm/mach-imx/imx9/scmi/imximage.cfg      |  15 +
- arch/arm/mach-imx/imx9/scmi/soc.c             | 793 ++++++++++++++++++++++++++
- arch/sandbox/include/asm/scmi_test.h          |   4 +-
- board/freescale/imx95_evk/Kconfig             |  12 +
- board/freescale/imx95_evk/MAINTAINERS         |   6 +
- board/freescale/imx95_evk/Makefile            |  11 +
- board/freescale/imx95_evk/imx95_19x19_evk.env |  91 +++
- board/freescale/imx95_evk/imx95_evk.c         |  36 ++
- board/freescale/imx95_evk/spl.c               |  69 +++
- common/spl/Kconfig                            |   6 +
- common/spl/spl_imx_container.c                |  41 +-
- configs/imx95_19x19_evk_defconfig             | 152 +++++
- doc/board/nxp/imx95_evk.rst                   | 114 ++++
- doc/board/nxp/index.rst                       |   1 +
- doc/imx/imx95_container.txt                   | 136 +++++
- drivers/clk/clk_scmi.c                        | 191 ++++++-
- drivers/firmware/scmi/Kconfig                 |   6 +
- drivers/firmware/scmi/base.c                  |  24 +-
- drivers/firmware/scmi/sandbox-scmi_agent.c    |  56 +-
- drivers/firmware/scmi/scmi_agent-uclass.c     |  25 +
- drivers/firmware/scmi/smt.c                   |  13 +
- drivers/pinctrl/nxp/Kconfig                   |  13 +
- drivers/pinctrl/nxp/Makefile                  |   1 +
- drivers/pinctrl/nxp/pinctrl-imx-scmi.c        | 159 ++++++
- include/configs/imx95_evk.h                   |  24 +
- include/imx8image.h                           |  19 +-
- include/scmi_agent-uclass.h                   |  17 +
- include/scmi_protocols.h                      | 104 +++-
- tools/binman/entries.rst                      |  10 +
- tools/binman/etype/nxp_header_ddrfw.py        |  29 +
- tools/binman/ftest.py                         |  11 +
- tools/binman/test/346_nxp_ddrfw_imx95.dts     |  24 +
- tools/imx8image.c                             | 147 ++++-
- tools/imx9_image.sh                           |   8 +
- 50 files changed, 2937 insertions(+), 76 deletions(-)
----
-base-commit: 8543664bffdbc49d9fbd600131c21a7c4b5ca935
-change-id: 20250321-imx95-aec019806ab6
-
-Best regards,
 -- 
-Alice Guo <alice.guo@oss.nxp.com>
+2.43.0
 
