@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 954E6C36000
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 14:47:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973D7C36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 16:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B97805C8;
-	Fri, 21 Mar 2025 15:47:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 82857806D8;
+	Fri, 21 Mar 2025 17:59:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cAvYSwnd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dayJeltp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CDBD807D7; Fri, 21 Mar 2025 15:47:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C2EF5807D7; Fri, 21 Mar 2025 17:59:24 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61CAE803DF
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 15:47:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44572803DF
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 17:59:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1742568451; x=1743173251; i=xypron.glpk@gmx.de;
- bh=LDGrmnThbf2mnkvNd00KOXSxy9qOt/Iqw/+6lzGVO3w=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=cAvYSwndl1jcHcHjr6JbIz8GdlGjzjOYJNrp0EZ77RmiLqb2CVexjK5FwnDdqXiN
- umDIHDtk2o4RBwQJuGiHHvZAydXtpOlRyvVlr+Dbmlw5MhKPolzi+IvSO1mxM6FuD
- 2Sa+7apfwN+00jeSC182sLDJmbDwhGNVwfTBOM4ZKiS0ghlB32X5Ref3utf1bm+OO
- xd8UC5pPMOw/e+M6vEPzybFi1qEZ3ydz7YqZugEPuLPfVUpz2FBeIifd/483pmXQd
- fWDNIq6+bptoEF/HKacdhzLzO43A+UrhNh2q3+CeSb9PA8seCREcla23pGGSsgAD/
- 3Xz3ORcunK1H6TOOVA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MCsQ4-1u4P6A3oQa-003gVQ; Fri, 21
- Mar 2025 15:47:30 +0100
-Message-ID: <dcdecded-ac22-4300-9b41-29257ebf9e5e@gmx.de>
-Date: Fri, 21 Mar 2025 15:47:30 +0100
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5499c8fa0f3so2622843e87.2
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 09:59:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742576361; x=1743181161; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zSFqRQ87hagrLVBUNZlsgTNeM+Q7GGQtaBYc7zkIFVU=;
+ b=dayJeltpS1M7bKfIVF5CNARDUx8alIFvTes6UQbF4XwfY2PEBcKJFUu0BMbUCQdXKZ
+ l3R1JqdLB+AGyK20VnZRdqzUUm51WpZVQmLAcim77Ug3p2Y20zfm8XW4E2762qIb2PCj
+ 9HSF61anptmmIO02LVVFH60/b2I696IDYqofyvp2vP408EnCg5HYfMRwJooVrTOcLOrW
+ PclOZ3TlJaX+rEO6z75sltyrfJJLhWv3w1DevD1yzW9PjKHQEBqhu4mdaAAX7O1j0WHY
+ Mdx2LHWRKAtssE+2+BBeYTwfn5OtIsuIp7YT6ohqX5co0710OVQVgtguk9qkZIObOsE8
+ cseg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742576361; x=1743181161;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zSFqRQ87hagrLVBUNZlsgTNeM+Q7GGQtaBYc7zkIFVU=;
+ b=jo4scLIbUg3P1ZYJZ07SjRnU9XWuYIJSRtOg5HLNkLJv6bYHhJPSFR+f+afppd6+xN
+ 133j8xaDXABWN90Z1k+NWTwHsfUEkuSYxD0YspMNwidVCwb5Kv1xhLxmBsNWXY2HX7vr
+ cHSlz3u2/9oCG3pC+tZCrZTAUYrScGFoHUn6JS9xPqGiwuwa3BnG42JNTo4dC6B9g6MB
+ B3srn2eDnIa1rA6x/+X+Jp9UcxhL19SvRf4/SZT+U0uBUnFXlzspoCZ7O8qn2G/b0oMq
+ 8kSr/vsefEjzjaOVp+FnBNuuzH/BMCPU3HzZgUANMVnD/yKSLLMqEkJaMxqf1JuQtABl
+ EPWw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4ubPxvHElh4IyDzh5RR2uWT/PuksyzOVOCifQlRhagqHD/2z6O11xLREhIgPQeszNaenxx/Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YyD//fRaO9RXbDci9J37B43b8Hft0QSRxULethxYFovMJwropV5
+ cvAd9DE3GdlQ4XIyXJIXiYE4+Y/Mi+xc3pPKNFpkljsocFmSWp7q
+X-Gm-Gg: ASbGnctfSnTcdPC7c9h8cE0YZgS5QFB44t2UMX9+VJqqQeRD6oNB8+f9ktwaMbLYoTE
+ +Zms+nhG3f+96Zu+Hi+MU0AFP/BJT1SyKeVJ3m2jkQrKtmrppIeLUaAY/x4dVrWn7TXNYvjyGbA
+ 6ZrpznAAR5et87q+dfkO46gkiTB/1GOs6qWTHcspwXi9CnyoySt2WyNjWVhTKpib7n0R58m9qG6
+ Nq8VLcI8bHgI0YxrVmDHHdbF3iGu6yjoQFog6C624JNwfUStuyI+Vyt09oOzguFbcTo5jaV/uu/
+ jt8zYsrKIHLuYpRS66UhC+7bomCaFL9S25ZkXQMteqspeY6oZ4+q/CRseKl2FD9dKIu/Bj0=
+X-Google-Smtp-Source: AGHT+IGSVu4+FqGLAHzlHevIPNBlr0NjwCU/+B2q/lB9To8zx5agnuUc9HvwdvND0uou+mP29oF2NA==
+X-Received: by 2002:a05:6512:ea8:b0:549:b0f3:439b with SMTP id
+ 2adb3069b0e04-54ad6494351mr1710236e87.16.1742576361154; 
+ Fri, 21 Mar 2025 09:59:21 -0700 (PDT)
+Received: from wpc.lan (host-93-124-32-178.dsl.sura.ru. [93.124.32.178])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-54ad64806dcsm217907e87.96.2025.03.21.09.59.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Mar 2025 09:59:20 -0700 (PDT)
+From: bigunclemax@gmail.com
+To: 
+Cc: bigunclemax@gmail.com, Bin Meng <bmeng.cn@gmail.com>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Godfrey Mwangi <godmwan@microsoft.com>, Janne Grunau <j@jannau.net>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Hector Martin <marcan@marcan.st>, u-boot@lists.denx.de
+Subject: [PATCH v1 0/1] USB xHCI wrong act_len calculation in case of using
+ multipe TRB
+Date: Fri, 21 Mar 2025 19:58:49 +0300
+Message-ID: <20250321165853.742837-1-bigunclemax@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: remove commented out line
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
- <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20250321124216.1268147-1-jerome.forissier@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250321124216.1268147-1-jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:P7dUYVXmhNhSkdfyrhyoyGFX3/4Bl82uO0psCyGQAoA4D5+Io+x
- TqZwiOvizKQ+eF19geqFP3rKBlj8aEyEKPMaXreJ6n9ExHUvNX3vcZYTYw7oXjaVNyvUctj
- GKcxku7g7JbWrbYnHf6Y/dAAt3gmMYSiGRuxHNHwgLJvHpN7x2Vipnx1K+ZFzGOUmxV0xJY
- cLeFKXunyA02a/XI338+A==
-UI-OutboundReport: notjunk:1;M01:P0:5BWUi8lAdPk=;ASGbPpR/L2RQoejP/DI+7xagYgV
- +rq519hQGXfCPykwegYS59mEjjdyGaLPp/+3ctfCCB+XMrSVCnPJHVStyIU4zc8vh+LqsWB7X
- 8Na7YFDOI/fyHstPIKb4N/SqYio2qB9o9nTD0skxrivDmeNjFcDfyCiRwzHUEE+5WVdVE1oR1
- hDEtJZ1Mds2OmnhVvmzU1nvaQDkOnXAfJ7zkH00FcrGyQcezbKYkGCHM4UATj/2Zs4EKGxujS
- H9Ai/4JWhGmV1BeG5+Jh/brK8NWVBUjjqWTf9KbU8ikyXLlgG4/jV3gwyFB21nJ2We+Z8t4+P
- FafH0mmhyj11OlP6bu5ag52bEvcWDHjIoZ5HjtsfpP4UJRvn4g8QVEbwQDl9reEOK4bR4qGAq
- i3CsxiXRuyOCcGW0fztbO2VxOkJYCLaWa//IuaKM+DB44yp/TSx9PxVMjp77bR3EZFZicAhXx
- /1U2YWs+DcyCx72IGTAfODlHwfcJ2Qu3mn8wUVf8w/gbEH6nNgdXCfhzMXkrsd1sWT1wd6G/l
- HZYGchWUHLhRoSUr04cjNB1a0gpSGBc3GDgCdRIcufSXVjzKaNDJ7zQlewVsfUKzwtjWCnfAN
- oexTTnM8OVKzuILWYipyv3cT2/XG6iiv1XLaXJXLpYzYqsVuRu+UdynLOw8PZkU1hc8gImOYK
- PDqOI0coYzvki3QLghPOK4xqVqrxfYo0x1XQpIUSOtzSPchymoshyA3AlvdNof3P+33XcgiqJ
- daR8e/OakGieFcPbgms/ZLLTuZhR5+4lN6Q38DWLE+tbLA3/PMrMPgqzIvDOlAbb7pahK/WCi
- 6Dtj40lHxW7zbWfDmbY/ZCEaA51e+vKSKBe3mHhdhmPxN3QvkpzcnOdRGA638SQSmkdo2lZ3t
- F1gNbf4BQa6N4WXkQgUgI15i+ZgnhweN9o6vZ1LTCNVvqU1doFt9WeFgX+PKKlrOrbV3cZxe9
- O69yj9PnyRWr8+3sK3nh/1MK0jx2GoFUyjwG1SwnzXfKpkYGRytWcIpEprEKzsJ77/4Fxo14S
- mRZucTur4s1UH82lcmFqZ7+RGWXruPfO7DwJUWa3Wmm8jYY1ysPWvi0KjNgKLDw3fKFQcEfcJ
- xTM9WuXzr3IQ3Mp0rs372Wk0D4pfgs6wuoAvxltcp0PRI/D6aWlOLAb9Dh9JVi51ws6LOPrNZ
- hPb76fpMoTjvBUdTjoIKP8rvOidNJhluLL75Om8HMuJtEvUBL8XeKgaX61/wq4R5mq/m+KKMN
- cCfJVxMTeCsi3iB3uJYDm5Lz4ajxhn0HDRlzkrQWiEngsYZPDJyjRhQ5CGvF0oKIdcrwAi8W+
- b86VlQeNO88YV5BHLMICrPazNyaiipAf7LL0ktoxPdICBFqZuoX39/eI4oHYxdydSpRzYYTI/
- Kse1ZQ2VqvDGZPU6tcPaePaK8m2DsiFprX0dfbP9zZ7steFOa5TNoi4QWiEI6U6dcCuCc3Qn9
- i3eSSONXIZEOmpqe6JpsZjbWzhPM=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,32 +100,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 21.03.25 13:42, Jerome Forissier wrote:
-> Commit 1d5d292b7941 ("net: split net into net{,-common,-legacy,-lwip}")
-> inadvertendly left a commented out declaration for do_wget() in
-> net-common.h. Remove it.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+From: Maksim Kiselev <bigunclemax@gmail.com>
 
-The definition was moved to include/net-lwip.h.
+Hello everyone!
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+I've encountered an issue where the actual length of received data is
+calculated incorrectly in the case of a multiple TRB request.
 
-> ---
->   include/net-common.h | 1 -
->   1 file changed, 1 deletion(-)
->
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 29d31f37263..89679e20860 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -518,7 +518,6 @@ int wget_do_request(ulong dst_addr, char *uri);
->    * Return:	true if uri is valid, false if uri is invalid
->    */
->   bool wget_validate_uri(char *uri);
-> -//int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const a=
-rgv[]);
->
->   /**
->    * enum wget_http_method - http method
+Below, I'll try to describe the essence of the problem:
+
+A USB-ethernet adapter ASIX ax88179 is connected to my board Li4pi,
+and I'm sending a DHCP request to the server via dhpc command.
+
+The response from the DHCP server always has the same length (0x168).
+However, in some cases, I noticed that the received response had
+an incorrect length and network subsystem is completely ingnore
+incoming packets.
+
+The problem turned out to be in the xhci_bulk_tx() function.
+I added some debugging[1] to better understand what's happening.
+
+Here's the log from a working case:
+```
+    dev=000000057f786b90, pipe=c0010283, buffer=000000057f787540, length=20480
+    PUSH. trb_len: 0x5000
+    POP. trb_len: 0x4e98, comp_code: 0xd
+    udev->act_len: 0x168
+```
+
+And here's the log from a non-working case:
+```
+    dev=000000057f78b610, pipe=c0010283, buffer=000000057f78bfc0, length=20480
+    PUSH. trb_len: 0x4040
+    PUSH. trb_len: 0xfc0
+    POP. trb_len: 0x3ed8, comp_code: 0xd
+    POP. trb_len: 0x0, comp_code: 0x1
+    udev->act_len: 0x1128
+```
+As you can see, in the second case, the buffer spans a 64KB boundary
+(buffer=000000057f78bfc0 + 0x5000).
+Therefore, it is split into two TRBs with lengths 0x4040 and 0xfc0.
+
+Then, act_len is calculated as the difference between length and
+trans_event.transfer_len:
+```
+0x5000 - 0x3ed8 = 0x1128
+```
+
+However, it seems that this is not entirely correct,
+and act_len should be calculated as:
+
+```
+trb_buff_len - trans_event.transfer_len
+(0x4040 - 0x3ed8 = 0x168)
+```
+
+0x168 is the correct length, which is the same as the length
+obtained in the first case where network rx works fine.
+
+Also I looked at the Linux xhci-ring code where urb->actual_length
+calculated as:
+[2]
+```
+    requested = td->urb->transfer_buffer_length;
+    remaining = EVENT_TRB_LEN(le32_to_cpu(event->transfer_len));
+```
+[3]
+```
+    td->urb->actual_length = requested - remaining;
+```
+
+Perhaps I missed something or misunderstood, so I would appreciate any help.
+
+---
+
+[1] Patch for debug output
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index 89d2e54f20a..b1433a16a99 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -791,6 +791,8 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
+                trb_fields[2] = length_field;
+                trb_fields[3] = field | TRB_TYPE(TRB_NORMAL);
+ 
++               debug("PUSH. trb_len: 0x%x\n", trb_buff_len);
++
+                last_transfer_trb_addr = queue_trb(ctrl, ring, (num_trbs > 1), trb_fields);
+ 
+                --num_trbs;
+@@ -816,6 +818,10 @@ again:
+                return -ETIMEDOUT;
+        }
+ 
++       debug("POP. trb_len: 0x%x, comp_code: 0x%x\n",
++             (int)EVENT_TRB_LEN(le32_to_cpu(event->trans_event.transfer_len)),
++             GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len)));
++
+        if ((uintptr_t)(le64_to_cpu(event->trans_event.buffer)) !=
+            (uintptr_t)last_transfer_trb_addr) {
+                available_length -=
+@@ -831,6 +837,7 @@ again:
+        available_length -= first_trb_trimmed_sz;
+ 
+        record_transfer_result(udev, event, available_length);
++       debug("udev->act_len: 0x%x\n", udev->act_len);
+        xhci_acknowledge_event(ctrl);
+        xhci_inval_cache((uintptr_t)buffer, length);
+        xhci_dma_unmap(ctrl, buf_64, length);
+
+
+[2] https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/usb/host/xhci-ring.c?h=v6.14-rc7#n2346
+[3] https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/usb/host/xhci-ring.c?h=v6.14-rc7#n2413
+
+Maksim Kiselev (1):
+  usb: xhci: fix calculation of act_len in case of using multipe TRB
+
+ drivers/usb/host/xhci-ring.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+-- 
+2.45.2
 
