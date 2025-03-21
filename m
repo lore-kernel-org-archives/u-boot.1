@@ -4,91 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD442C36000
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 18:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D29C36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 18:45:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72846809A4;
-	Fri, 21 Mar 2025 19:39:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3579F808A2;
+	Fri, 21 Mar 2025 19:45:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oRUqlSpL";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="Z4/Vj4OL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F188809A4; Fri, 21 Mar 2025 19:39:00 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 388B1803DF
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 19:38:57 +0100 (CET)
+ id 3DAE1809A4; Fri, 21 Mar 2025 19:45:37 +0100 (CET)
+Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
+ by phobos.denx.de (Postfix) with ESMTP id ECF4B806D8
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 19:45:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac3eb3fdd2eso244986866b.0
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 11:38:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1742582337; x=1743187137; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6K3vYSQcdYZOTFTW2Ar+H23qBH11H7aXOkwjvJifgJA=;
- b=oRUqlSpLbABirTxxQ3isRX/fpKk5uWtIOOgYeqmIEkhXPwNxJOIpgHoRGSUySoObAs
- iP3wINmjcNNk++YKaIQxWmoKVE9pb/IR2eWkbzq5wVGrUP3mYheHcs24prjwHvI2LpQk
- IPZeuSIbTYgJ/FomdlP6+HOHGQGbAKGhMwbSs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742582337; x=1743187137;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6K3vYSQcdYZOTFTW2Ar+H23qBH11H7aXOkwjvJifgJA=;
- b=YCdzNmQyFGij97sZuXDwGTaopKHB9XQjjBsrU83Xi5/L7a+iawxUDD7G+czKNLYyyJ
- Q6vfk54lOZnL4hP5YSAjG1tYmfsylHbC/CTvKBgxS5hB14cViv2TIsi8zeLd2r4jvVBl
- r6c41ckTsEVekIvzbnpAfsAV1I5NmIyQZxZ3uT9glIV1znfQVQmWfy91/wrGAzL0xH8v
- r8qAW4Lv7MvlAa9+MPmIdCtBb8igECL6stDKNRAkGGVXa4ZnZ5LJpSMJ/3NrNN/Bwahq
- M6ghzP40BI2XNDycPHJ/08il3GYGNx+NVPYOuWCN+V/jX3A4jD35x33SV09I0bul2Ouw
- 7naQ==
-X-Gm-Message-State: AOJu0Yzxg8edQJheutTedGFDA3b3KVEySemTlhU1QjwPEqXgyeYiIf5M
- 0145nbTrMEAFA6OfNQQWLXYiNabZgW5o8YbQWqihxcmhE65MNkan8YEL9SeSA/7CeUL0uWg7EXt
- AWDpV1NWG30eHDI0ovJ4tQHo+7pK3F1RAJMhb
-X-Gm-Gg: ASbGnctl7ZckRwZRzVwzS/4ezgPITNsBZ5EdpCFmnQwPj7jFET/ifE+Cf+vdCGfePl6
- M3G4M+NRb9QBzNbX9Yj5iaFCoe9ZpUfJwD6JYzFx9IIVsLrQwrWpPiOrNkaP8UWdbA0yBC0TZw9
- yrtkFzEsW+IWc8+hPRbu5msiDW8M1rSXz7sJo=
-X-Google-Smtp-Source: AGHT+IGaYl0j09rsicbY8aPwfTFO1UjRXjSX+rZ2KC1lidn0GERmWL93kAxfKULffNFGyCp9L9rbAPtWg9CS+w21LsI=
-X-Received: by 2002:a17:907:7d8f:b0:ac2:2ba5:5471 with SMTP id
- a640c23a62f3a-ac3f22b4064mr446895166b.24.1742582336524; Fri, 21 Mar 2025
- 11:38:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1742582723;
+ bh=JNAkx9LtRQhxqcZGysmAl82e7tRYE3FogoFY517688w=;
+ h=From:To:CC:Subject:Date:From;
+ b=Z4/Vj4OLQLpKr4YwH2MW1qjmrKlXKZ2ECDj0hq76AlVku870aegCxYqBzu11iXCto
+ 2BtxdjIFJ1dpCIFDbRzxY3ShcZtqWZvrB0ppfCxB4tzGh1MBF7wTreqdMgDnXDcOSb
+ J51wz3EUUSYK6akOlwATMb8OX5bUXp1NBU7sqA5MHStLrih2T12BnwbHUW4NKORYMl
+ U4w8i7BiptIjnIj92pB6BkIob0z2SBk8tmLe1urK1AskR1RzOlverNuKI9btxGAoDU
+ CxqaezFOSGSk1+UH0rskLdRowijzodDuOitDzw9oNIcq6TftWiagyW0GmbjXme6afa
+ BBivuhmXQpr9A==
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Marek Vasut
+ <marex@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Joe
+ Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH V2] cmd: env: select: Add output for available evironment
+ targets
+Date: Fri, 21 Mar 2025 19:43:57 +0100
+Message-ID: <20250321184357.4079845-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
-References: <20250319145512.2391122-1-sjg@chromium.org>
- <20250319145742.GI2640854@bill-the-cat>
- <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
- <20250320142121.GQ2640854@bill-the-cat>
-In-Reply-To: <20250320142121.GQ2640854@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 21 Mar 2025 19:38:45 +0100
-X-Gm-Features: AQ5f1JpTTc6VFUHI7CA4IabYJAqLAyu0v1NB7QTCzaO3j8A0xM4Rb0YQvM31y_g
-Message-ID: <CAFLszTgsMu1ZtK1Z-u6cmH6k__0Qhn+G2SPh8w_NdrihLkQ7jA@mail.gmail.com>
-Subject: Re: [PATCH 00/52] expo: Various features and improvements
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
- Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,73 +62,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Add parameter "-l" for printing available environment targets. The
+active target is marked with an asterisk. This is done by adding
+the function env_select_print_list().
 
-On Thu, 20 Mar 2025 at 15:21, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
-> > >
-> > > > This series collects together some new features for expo to make it more
-> > > > useful for boot menus:
-> > > >
-> > > > - measurement and display of multi-line text objects
-> > > > - internal alignment for objects (e.g. centred text)
-> > > > - editable strings in text fields
-> > > > - new 'box' object to draw a rectangle
-> > > > - highlighting of menu items, rather than just relying on a pointer
-> > > >
-> > > > Expo's boot menu is restructured so that it is possible to iterate
-> > > > through various bootdevs and update the menu as new ones are found. This
-> > > > is more in keeping with how bootstd works.
-> > > >
-> > > > A new textedit object is added, intended to provide a simple text
-> > > > editor. Future work will complete this.
-> > > >
-> > > > With this series the boot menu has a better layout and appearance.
-> > > >
-> > > >
-> > > > Simon Glass (52):
-> > >
-> > > I see you haven't internalized the "don't post massive series" feedback
-> > > yet. Please, stop posting massive patch series. Figure out how to
-> > > logically break things down in to smaller chunks that can be
-> > > meaningfully reviewed.
-> >
-> > I could split this into two series of ~25 patches, perhaps. Would that be OK?
-> >
-> > I believe no one else is using expo yet, apart from postmarketOS,
-> > except the trivial case of 'bootflow scan -m' but I'm hoping that will
-> > change in the future. I believe that Linaro is mostly encouraging EFI
-> > bootmgr and the text-based menu. That could be converted to use expo
-> > but I doubt anyone has looked into that, particularly as grub is being
-> > pushed as well. I did look at converting the existing menu code a year
-> > or two ago, but it seemed better to eventually deprecate it.
-> >
-> > Also, there is a following series which I split out and will post
-> > separately, but not for a while as I have a lot outstanding.
-> >
->
-> It would make sense to split expo out to its own series as there's not
-> likely to be any feedback there. All of the other parts of the series
-> already have something else in their subject and that would be logical
-> places to split this up more and then assign to the appropriate
-> custodian. Thanks.
+If "env select" is called without a target parameter the result is
+"Select Environment on <NULL>: driver not found". Replace this not
+so useful output by showing the env usage message instead.
 
-This is the expo series and it only has expo patches, so I believe we
-are OK there.
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+---
+Cc: Marek Vasut <marex@denx.de>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Tom Rini <trini@konsulko.com>
+---
+V2: - Showing available environment targets by parameter "-l"
+    - Showing env usage message if env select is called without a target
+---
+ cmd/nvedit.c  | 19 ++++++++++++++++++-
+ env/env.c     | 16 ++++++++++++++++
+ include/env.h |  7 +++++++
+ 3 files changed, 41 insertions(+), 1 deletion(-)
 
-The bootstd series is small and its own thing.
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 1f259801293..de64094db4d 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -499,6 +499,23 @@ static int do_env_load(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int do_env_select(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 char *const argv[])
+ {
++	if (!argv[1])
++		return CMD_RET_USAGE;
++
++	while (argc > 1 && **(argv + 1) == '-') {
++		char *arg = *++argv;
++
++		--argc;
++		while (*++arg) {
++			switch (*arg) {
++			case 'l': /* list */
++				return env_select_print_list() ? 1 : 0;
++			default:
++				return CMD_RET_USAGE;
++			}
++		}
++	}
++
+ 	return env_select(argv[1]) ? 1 : 0;
+ }
+ #endif
+@@ -1189,7 +1206,7 @@ U_BOOT_LONGHELP(env,
+ 	"env load - load environment\n"
+ #endif
+ #if defined(CONFIG_CMD_NVEDIT_SELECT)
+-	"env select [target] - select environment target\n"
++	"env select [-l] [target] - list/select environment target(s)\n"
+ #endif
+ #if defined(CONFIG_CMD_NVEDIT_EFI)
+ 	"env set -e [-nv][-bs][-rt][-at][-a][-i addr:size][-v] name [arg ...]\n"
+diff --git a/env/env.c b/env/env.c
+index bcc189e14db..c73b53a2c62 100644
+--- a/env/env.c
++++ b/env/env.c
+@@ -347,6 +347,22 @@ int env_init(void)
+ 	return ret;
+ }
+ 
++int env_select_print_list(void)
++{
++	struct env_driver *drv;
++	int prio;
++
++	printf("Available Environment targets:\n");
++	for (prio = 0; (drv = env_driver_lookup(ENVOP_INIT, prio)); prio++) {
++		if (gd->env_load_prio == prio)
++			printf("* ");
++		else
++			printf("  ");
++		printf("%s\n", drv->name);
++	}
++	return 0;
++}
++
+ int env_select(const char *name)
+ {
+ 	struct env_driver *drv;
+diff --git a/include/env.h b/include/env.h
+index 01c3eeae7e2..4553c7bc109 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -286,6 +286,13 @@ int env_save(void);
+  */
+ int env_erase(void);
+ 
++/**
++ * env_select_print_list() - Print available environment targets
++ *
++ * Return: 0 if OK, -ve on error
++ */
++int env_select_print_list(void);
++
+ /**
+  * env_select() - Select the environment storage
+  *
+-- 
+2.30.2
 
-I can split up the strim() / test series, but I'm still unsure what
-you are asking for with respect to code which is not yet used. I can't
-reasonably do all of a) send code only when it is needed by later
-patches in the series and b) keep series sizes small and c) keep
-series related to a single topic.
-
-Regards,
-Simon
