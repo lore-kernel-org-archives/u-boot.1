@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 557F0C36002
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 12:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA920C36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 13:17:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81385807D7;
-	Fri, 21 Mar 2025 13:42:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 095DB803DF;
+	Fri, 21 Mar 2025 14:17:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wLuMcziI";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sqB+1J6S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45E8B8082A; Fri, 21 Mar 2025 13:42:38 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 271DF806D8; Fri, 21 Mar 2025 14:16:58 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45E2A805C8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 13:42:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7469C8001F
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 14:16:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43d04dc73b7so20249525e9.3
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 05:42:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cfe63c592so19092035e9.2
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 06:16:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742560955; x=1743165755; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Yexs34rw7J3UHqOi/mnaaCfOnnEs2lIC9xJL2HkfSoE=;
- b=wLuMcziIb0ZAA7IcYdKA7IsXFhJWPgjyReIPkfUR5mVoCznNxdbVCiDe+FGBLEEyg6
- OBdmsaNu614fWKeU79QqcdAhZA5dRjgOAL6hKE2SR6AfnLrh0dnFhQADmz16T6ztU/G+
- f/YWI7jpDN5xGSje4DLx/S8JVAovdv5jl9YMIDAFFIBL3woZ+7YpSCsoKCZC8DvXJ/Dx
- m7pxBa4WASnHvPZ9m1wPPimjxokwESiy6cldiRKZh4aUT9IOXx2XVSGs0K9PJ12JOX0+
- dbOYqPeUSM/xOzRLgXd3TjgOr7zkt040EUsyY0c8Jq0Wwo+tnK9FXJr9vwvFbhDPSA/o
- 1U4g==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742563012; x=1743167812;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=3n9JGL7k33s5bE+2UJ83UeoR9PHPuZ4R4vorfRQJDM4=;
+ b=sqB+1J6SImzHQz02aWd1f9/QLlFZyk5+0tmH4WSBOOdni8LOjJRw0bzTN/v6lFJSD2
+ eLhdvLt933G7fON+dbmNAcnnaC8w5LRmRxCXZlqdgnjTajVLlLJdj9V04/61pJ/F8+KB
+ Isj4r5v+YKp14HI3zimrWQ+Ac0g4p1hivNC/kPISpvBhzzcJba39soA0PdBHt6zeI8/e
+ O7rWzJoEevqQQGM9OhKp1T+jtYzIlHBvgdAtQ2THpnGb3mg+be1kWjiR2S9rGQFTMCyw
+ v7/1XrHsdOvwb6eHqYQ6rgYq4ErNMM1JeaAj+/trrkib972Hkdfc7E4DIw83HFb6Yzvg
+ Ldng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742560955; x=1743165755;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Yexs34rw7J3UHqOi/mnaaCfOnnEs2lIC9xJL2HkfSoE=;
- b=AH7G0Ok9/oftlNdidslTH6Cm8oFf7OlWSlmNbw/l/+ws6g85AL0KKIuucmsPPLOO2x
- JlqWiIw6YJpFCddcWy+/4VNUkucoqsoKNoX/Gl7VQBv5c2T8ErATxqXQWJOJ2K42MQJq
- Li5/e33ih3FaTLo5C3MI0PSlIqldRLzn7h2cCeroiWdEMwyT7GfywUL0Wam0a3MAraQ9
- LeCi1GZI4E2PTDtI9E6gPJSfYds6EQC10FqGv+5AwqUVhJjb/BS9qjJKKowxh6OzPUFp
- P/39FFI9GX6F46D1scJQ6Lzvc64YNnihWNNpVOnM8gNumSN9YIg0gMbSgtMnKx9rUUzK
- cMpw==
-X-Gm-Message-State: AOJu0YzsVTL544jZGmFNH6lrDSOenyaNQO/Fne0Mr5PAWHJpAvS8PYdg
- TMF2PE/13IXLheFyJlCEaSFi+FEgSLtqct07yYWGXCTA5o2iwF/5o7jwo32JTphSN6AN7+vtH27
- Jfms=
-X-Gm-Gg: ASbGncs2ZG5wBH9+6XS7yKNkhH7wwcNblbLyzwn9eC6OuOqz62EocZhomeQCFwIkFAD
- 8oW7Lx8cx7qwzZ6toAlaLMildNmKKy0U1ghv3uqmxsV7Loh9vE5eaxCfFBUCHZQu01EZliQnUtc
- IlRGwcZXCnwcRY5dXi/+/gbMjWO9umEFrZjCFK2G4yoAwRCcj5nEARIPfYk5KiA1vhgLM4eN1K3
- B7FAURg/60xGZotuTZpBHHlEfZdEDHR29kPxSNvI3hxvVQ/v47bwcURKj2ecmmMkKP5OKVB0mTJ
- vakY2s35tDylqnjraDowzk89kR7tLOGfFlD/5xGvKkt9iWi9fGn4vvaC9hUd6OrU
-X-Google-Smtp-Source: AGHT+IGmL7EhRvCdhwigHRESNHBkZIJUyvWafAcfwm94iRUEeDm9SYAONhU3FdmXQZMk84GDohut/w==
-X-Received: by 2002:a05:600c:a00e:b0:43c:fdbe:43be with SMTP id
- 5b1f17b1804b1-43d50a3a2cemr22300245e9.27.1742560955439; 
- Fri, 21 Mar 2025 05:42:35 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
+ d=1e100.net; s=20230601; t=1742563012; x=1743167812;
+ h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3n9JGL7k33s5bE+2UJ83UeoR9PHPuZ4R4vorfRQJDM4=;
+ b=IVd6EHFv31DzXL8z2BmoOnjLmwdD3p/tTMGoF2J89HlWEkuPs7nEsNWJviUbRI87ix
+ aRw0Q/+IfCTlNlvhM2SUXnQEW82SyPLJgxJJzxE0TNmShU6yR6etETnQKQFZ853M/qax
+ YT+BOyI3lZP1NSTINACUvffPPRjTFzxZf7pCF187eMP4vA1WAgujbrxt3KO0w393Htm1
+ FnEIhKOjIFQyqVt8Tee87LUpWs83yYrwtjEFgegoMsoec3J7WTXweOZacj1pIy30L/Qt
+ gsqYI5EB+SIsKKfvmdAicf/Nm9m7/7nxvJJvQyy+IxJS2kR0Vx5B0TF2DQFULU8sZbKa
+ +b2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWw49iCLyuE+a4U4BfJmen5p4fwHmaDnMUgb1lj21jre8rOH1Gp73JNXxLBiEBC+fFHkEDRL4g=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzacAZMo2RSvLpOph9kJBBuwmam6HKCq+WXp+JtBne54gHnXnI
+ C8NLukeTxfyleTMn+QaLfMh5flaHbY3CuxVkDfMdZh0QbL5YmGRUkSpUYnuXSy0=
+X-Gm-Gg: ASbGncssLwc/bj2NqBQI9EJ4DI0/RTkfLb3UkBYTyvqQ78LLirhWUwEntwn5BF+gOuB
+ YaI5Z1BIEY5WpKtnzqwD/AFWz302YBRDtr+P4XmcFZQmu6stahxjdjv8EtWPPuR55U5wzW6e77O
+ zuE2NZmg+UZUfJfOSx+6xQYXbfGCRaN3bZOI85MSptvmZMgIJiczJaBAg5KYEFNcv3xz3iMybsh
+ xDx8frAl7wPb0/0fpXJBZpFlqeikN5T0WQbqHAmlqFddNR7qr2J91EXa3w5yv1CZSfUMJfq5Urp
+ nc4Q8x0zdTF0Ef4TUQRDTeI2HlKOPMGED/17s7TFpT1by8SBh9XMgxE=
+X-Google-Smtp-Source: AGHT+IFKRQyLRvrlVDBj4VziCdRBVkMfF1jc5z34Owc2b6QtQPfwM0hWVb6Yt8JUZ9by/08pwkT4qg==
+X-Received: by 2002:a5d:64a7:0:b0:385:fc70:7f6 with SMTP id
+ ffacd0b85a97d-3997f8f832cmr2380613f8f.7.1742563012049; 
+ Fri, 21 Mar 2025 06:16:52 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d4fd9e960sm25773975e9.29.2025.03.21.05.42.34
+ ffacd0b85a97d-3997f9a345fsm2338128f8f.24.2025.03.21.06.16.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Mar 2025 05:42:35 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] net: remove commented out line
-Date: Fri, 21 Mar 2025 13:42:14 +0100
-Message-ID: <20250321124216.1268147-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ Fri, 21 Mar 2025 06:16:51 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
+Subject: [GIT PULL] Please pull u-boot-dfu-20250321
+Date: Fri, 21 Mar 2025 14:16:48 +0100
+Message-ID: <875xk2frr3.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,27 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 1d5d292b7941 ("net: split net into net{,-common,-legacy,-lwip}")
-inadvertendly left a commented out declaration for do_wget() in
-net-common.h. Remove it.
+Hi Tom,
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- include/net-common.h | 1 -
- 1 file changed, 1 deletion(-)
+Please find the following fix for master:
 
-diff --git a/include/net-common.h b/include/net-common.h
-index 29d31f37263..89679e20860 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -518,7 +518,6 @@ int wget_do_request(ulong dst_addr, char *uri);
-  * Return:	true if uri is valid, false if uri is invalid
-  */
- bool wget_validate_uri(char *uri);
--//int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
- 
- /**
-  * enum wget_http_method - http method
--- 
-2.43.0
+Usb gadget:
+- Fix NXP UUU tool compatibility regression with dwc3 gadget
+
+CI Job:
+- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/25275
+
+Thanks,
+Mattijs
+
+The following changes since commit 7ad543619463e8817b3044041ac74749a217bbe0:
+
+  board: verdin-am62: remove spl_perform_fixups (2025-03-20 08:02:12 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20250321
+
+for you to fetch changes up to 0916053ebc566245b06d0a179533f6622b6ad392:
+
+  usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool (2025-03-21 09:37:40 +0100)
+
+----------------------------------------------------------------
+u-boot-dfu-20250321
+
+Usb gadget:
+- Fix NXP UUU tool compatibility regression with dwc3 gadget
+
+----------------------------------------------------------------
+Marek Vasut (1):
+      usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
+
+ drivers/usb/dwc3/gadget.c | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
 
