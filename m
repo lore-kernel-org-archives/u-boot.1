@@ -4,141 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16C41C35FFF
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 10:26:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6966DC35FFF
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 10:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C824808A2;
-	Fri, 21 Mar 2025 11:26:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A4D3D808A2;
+	Fri, 21 Mar 2025 11:49:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gcQpdZqP";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="R5mZPCQr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12B80810FE; Fri, 21 Mar 2025 11:26:09 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::62e])
+ id 7C4FE805C8; Fri, 21 Mar 2025 11:49:34 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D143805C8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 11:26:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6E6E810FE
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 11:49:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z+Ta/hCNsAtAw62kW8srOsR/GN7gS27X/3QPYBjOES3zVp3Q4MLPwQMF1YWFEKQYz4CbO/nNuq3hSCT+WI9KHIgB9NJs/xh1WMyb7NeCuVWRgIC9CjvvO1F/q+Xex3ycKUy8tOa+D03ghdD1zgxXQmuOrVoamDTYckMMog+Fzlxka0qiP73lCMRin0tJVUxOpHdLrVw+Iiu2qTK5EEv6aZHhoRszMrtJLYTa4PmITFWRHhfveu2qE6h0mcUNR1e4SQv7QTCZMj5XEluNAmS7KyNSTOm5nfxK7sqr28yMKNjV6QA0KQqKsKnOBrfVQyQGsHCJ3j3+QYv9OWnqRpSbIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0UK0aojsaO7Hfk9/5+/EiQ2rbqmdpFvnfPwlqwVtfcA=;
- b=AkLSZEVDh9OjzIurLjTek8t1F2OYpf2xolxY6HJ0FRVa3EwzM9qYUX0h7LEYdV4HXKWbF9HS/JPrnq2mvQEZKHKyAsfvSB0zfCCJXO+cjVsBtAZADiF1yJ8Y6blaOrl2FoCN3SsuVzU2HL8BU9XmPnMd7B5RBg9JTb/6m/ZVn8/AZ1Ea0I9KHwYXTbkKiBBYa9poXIplg1LDPA7qo2mhXDuuvjgEOohkM/XyezggKrrYZjrogl79HbR6wrYhxJkUDrMQXlE2pYIOKbGJ9Vkb9RXw1ncje0ycwCUd/qpRPwi/q/HMgFtk3CgE2x7JTXqp9l/x5yFK5lcEqNFUj5+cgg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0UK0aojsaO7Hfk9/5+/EiQ2rbqmdpFvnfPwlqwVtfcA=;
- b=gcQpdZqPcu9/vbq828vA7t4AAXIHUQ4ke3G5k4yUHJ3bYFuv7pL21OlfsmNFR/kYJTbNct8fwa9UWadJAYsjiFxMkcR3yEzOG9XLjTXS49wFg52JDflZ3xdl6/3+kA0UGJr4BYGET9/7iuz3O3Gi7rlAfcRwGoRtqVyv1KAfBRA=
-Received: from CY5PR13CA0065.namprd13.prod.outlook.com (2603:10b6:930:a::18)
- by SN7PR12MB8772.namprd12.prod.outlook.com (2603:10b6:806:341::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Fri, 21 Mar
- 2025 10:26:01 +0000
-Received: from CY4PEPF0000E9CE.namprd03.prod.outlook.com
- (2603:10b6:930:a:cafe::b2) by CY5PR13CA0065.outlook.office365.com
- (2603:10b6:930:a::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.34 via Frontend Transport; Fri,
- 21 Mar 2025 10:26:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000E9CE.mail.protection.outlook.com (10.167.241.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8534.20 via Frontend Transport; Fri, 21 Mar 2025 10:26:00 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 21 Mar
- 2025 05:25:56 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH v2] cmd: fwu: Dump custom fields from mdata structure
-Date: Fri, 21 Mar 2025 11:25:48 +0100
-Message-ID: <1254c3c538facb1a124865aede861f399cf524df.1742552744.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1742554170; x=1743158970; i=xypron.glpk@gmx.de;
+ bh=D68O4gE4ovgw47h/keLF+bp5eh8TKMjn3zctuIq/LxI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=R5mZPCQrqinUfSXfb/tFtojxBAJh2S64qfzY/PVow6h02eO3sweFe4JzSB68G8p+
+ kORJz9LHZu8QjWeBdnRecwSuauTb1srjzMx/V2KR7llorKo71N3Si29BCKNfuUCYt
+ MPEoaAiCc6PjVUaRK50Bq/CsDBeekV/RcRWrLp2IcQrlSC2uzV5KRWjTwp+i/KGYA
+ egMd/woZ5FQOrb7prvR77ScYHqaad7S9bxUvKvdig1wU5R/gIj9+u5AdAU9hpFQRd
+ i9Nr0t3pxvXeHkpTDr7yXhNIFZjIC18sgqpFIW/2Bc1gMFmefAFjD4wA+FgL3GLxX
+ eCTxvj+7MZaPQXaC1Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MKKYx-1tatUc05c7-00QxTN; Fri, 21
+ Mar 2025 11:49:29 +0100
+Message-ID: <0fd6b834-9e74-4919-9d62-19ec6cdcba69@gmx.de>
+Date: Fri, 21 Mar 2025 11:49:28 +0100
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2288; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=l0pYB8mlT7u2gOV4HoKb59yND1K7A6oJUlp7h9it4Ps=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvS7dmv3Mb79uZX/Tu3fFzavuSRfXWpnt+j+vfCu3uNJp
- 55llRU1dMSyMAgyMciKKbJI21w5s7dyxhThi4flYOawMoEMYeDiFICJ9N5nmKc/+e6BPeViN3bO
- 9Fgobf5mS+AnnSMM8+sdeRrvtaZaeRjIRC7Onrv1wwqJSwA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CE:EE_|SN7PR12MB8772:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d08e3f7-c5da-4969-7a2d-08dd6862c6b3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1z1vtmoR+Vlk8duxnlVkhDAtv//g3qc/VqlHvmJiWFnyQeNkM4yn9lcImMRF?=
- =?us-ascii?Q?NpTfwMVUjjIyaXx1ZeJb43SooR2lXqC8B3HnoSjyxhHxvzA1ZbXZDBmzU8V9?=
- =?us-ascii?Q?NCLojSD7fVJiR8pxuLg6ySCHMW4tey3o/06JjPpuXaH9R0YEmuPxahr9Hcwl?=
- =?us-ascii?Q?puAjcxvFdmFshJO/ekHB1b6zo5MO6w5bTDEoiy8kPnRTH6NB/DXdtR2AY0os?=
- =?us-ascii?Q?TT2ELIjzJfhv+jKu0GiCj5dKdT0hFV/i6n31DuUCsHMTMJ9D4LH8nHila9hY?=
- =?us-ascii?Q?IWgPLgIV1SUrKju6zHsWoO8UpByde6D1bZmWAxFsXN+4/4SC1wc4YxTNbVSp?=
- =?us-ascii?Q?2pyrehxjJtFBSjDUlI5MCtgK8Z9D1uY0xcfmomHgBAk5pH+MWCQmyA1Z+cPl?=
- =?us-ascii?Q?EaNHggsV5h89Lwq78NXyF2hUd2TfMUxkW1UKKdOiRnVCkJk9m9x6GQlpO+Qw?=
- =?us-ascii?Q?rZekzXoj4PS6n2em0E0n9ZzIxZm/T8NIjVJKlUdj/wQZDxHvrGoBOl1gyVMG?=
- =?us-ascii?Q?D1xyJnmEi87/BXZWzDPQMPTLvg5qg/wcYt7kBoUg/2HuygXtUG6t44zgVQW3?=
- =?us-ascii?Q?7r6e7tceNRM/MvgLQqlnuGDqMmJ3ig9vQ45vG1UMzPzGCWMVN0vS1WwRfCj5?=
- =?us-ascii?Q?o23INCb6Fn0mu2LGn/4MkVRTvEA9i9lAZ5o2o7iDx/iCP3lA8Hi5LBeJ9bB8?=
- =?us-ascii?Q?OB2T1OXDIUs43r+MOr3k55fE1BSP3J21bw602OTH/S9wRdV+Xluo5S0J71gv?=
- =?us-ascii?Q?cW/rUrdSuruIjmaP1skGS66LpKOBFyYIdyn5P9wyAk44UmuVgLsSW1USP/8U?=
- =?us-ascii?Q?R7NUczLZgZxM1v3dZiPKDOAqN9zxo+FB5ulaMbHaah1gH1RJh3gVE+EbbQVv?=
- =?us-ascii?Q?9SVooMbOz1fbJcJz3Tt9NZ15hAvcvLuZse9qNJPDiiURIcmGAi+ZArxBv/aR?=
- =?us-ascii?Q?WVLlMCeNeHxVmCv5nAtvzRkgteMb6SyZ95n9WYBauOEYji4LeJO5S6L8eAtp?=
- =?us-ascii?Q?u7QXBCjYFwKoD3dL4zh/2XG1YqCO9fA8l2XvONnRa2FIGmSDuXkkOP5VAPHv?=
- =?us-ascii?Q?utTTghOKDqZZdgq0LSyvhr3svQUfy4XPGcTvCYNnBbyXUuCaM07PG23Wqxh8?=
- =?us-ascii?Q?tZgRCjyK1Qf9iIBqh4t4V7WmLnW7HDASxGR149VjtD7ot7qBa/TNEdhAh9sj?=
- =?us-ascii?Q?UjB33tm3QH8/m8Ih4M2DuOKVWdjCQKWCDnS67Iu0td7BwSTN3RYmnpit/wkf?=
- =?us-ascii?Q?Tjqzaqp8zYGmQy2WgtlL/UcaN0e9eonhdcjoCBvprZQAB/jb3a+lGwzTHKRm?=
- =?us-ascii?Q?ZPh8X2FITc9kIzGfniAuKyDblwS1CjwoLR88GtliDdT8DsEza8n3rWBxTfjm?=
- =?us-ascii?Q?pwLz/BZVIJBj24Fis0sMpwMCupHkiTHbkVdh03vrDXzEDiwGJxdMS3UtURv+?=
- =?us-ascii?Q?sgszszyWR9/+uNyi2slEekCe+6rsvWCdlWolsdcGoA2WHsHUGVmCUE2U9jyN?=
- =?us-ascii?Q?uE9Oy0lTOxVjzH0=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2025 10:26:00.4806 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d08e3f7-c5da-4969-7a2d-08dd6862c6b3
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CE.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8772
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 45/46] acpi: Support checking checksums
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-46-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250315142643.2600605-46-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:vr1KPRmbj6nLIAxtTg6XX1pb714tzDoZzzF1rNMRLmL67IBYllr
+ YI0S3TEs0S64KxkjVsRJY81ri/s1K75omp6PqwIz4UfBq137taoWbSvbMWYX9xBKUi7HVdq
+ ie2dfxbY7+7I9oCwqUdImMjx39GBLFQS0t290FfSxhAMDqcseaMklzFrqW3wZ2oUtQ+kF+5
+ vhRib0RYgocj2UA6IEOhw==
+UI-OutboundReport: notjunk:1;M01:P0:on5/x6QMDa0=;2mSAmhIKhEOm92hBw3MCyME70Al
+ btj8PdudhZBoakhBG4VFkwHMOMRg5LSQ1t2DgeUXksrcJ4Zoy92E7VrgfVtk4DD4jlzxL+4bY
+ yvRyJOLi6LQXWFFlJiH0R8VgcfKE0HaJk0Tfy+mmxjJzlo/rFzBrvQvF4PEJk8FZBtQ7k+2DX
+ FNV8LLtX65lfTarf/TD5SfItrRJLb/uK1wEkboGMztdjP9twiRUSUEopXIrbutfg+/xE2eH4a
+ OOHl0/9stJGNSVacD+ukiTaLXslQINi09C4/JKrsjxilp66ZujM6Iz2Q+b13uRJh06bkm3nOH
+ aTsU+8Jb4T9XWuytJ3gKWQ+6cbI6aMG2cvbmGr7ffpFLdZblUeXT4n3gTp0n2Fy3AtWgmmRoB
+ 4JccFQwokdNmDzMVmiqYebAF2R5FRflXGDNSNv9Mt7GNixMJg341AENoot/cdHu1VO7MTE0bZ
+ aqVUIjfGnb1AD23w4TjrwhYqesnkx4boT3nvGahqz34/MjrdbOvTLNJLmUhiUZIBLabtfGPJV
+ SnQUbN4hctBt7HCAHQtV31h3YuBxTbo2CXll6jwIWxYjk6UcnhrV3f5tBhihjK4Z/DguUaBG2
+ gYsBQ64mddD3zTaLY6rDpTVhoRjCgWELt4CYE26q7hga6iqq38AfsbcRxRR0+4OhKXzH8v5iK
+ GyZiij8icQhP1zfCEITgh6+DlsmSSfPBbLF9sIm4Xk3EE46GxETCn2aE7vlmFbcO51X03rlcC
+ Zi8LMSLMsyH4fl3vb8V0P45FF5naz0brLQvauFWSuORHUFBPRit96Bw9UgujdCEeLZkEP1ZdT
+ 6X91OTS8VsIz508IW3XGpzc4UciBep3oA8CdJhkdBcDSFa4bYI+40nkIf2mSdgLEl14lD5dEo
+ bixrH5biEOZOuUJVUP2AtIuvv8Fit6GYz2gIKN1SPYdSKB9id7/ChO9uyewjXRgShob+KDe56
+ U8J9Lw1VsPODCxal5hMNaXlgmokQj5ce5bsleQi38Ob+6xtpOYYZTQqjencumRoFob4cwqiBv
+ m+F4nXOcxk5bcuILB24Xz7arVEgoiqirHM/Bxqh1ZUK8KWGwbPoSGg+AtclcoHofXl+6ZZFSB
+ YNK7dFFbSYJLhQ2fLODaRjlKVeTWWL0i4etDzXOpAjaYmDng6qmFfYz1p4DqmAfD/KvdHeerH
+ T5gfF4jvmDvR1DUkScC9xG8Ahl/6QIW8LookQ5pvnt2soMmrYc4D8Sjns13Q8sm2q9hONsuNW
+ aDTOSugH1cmbFy1nw+xpemNop6u14CMHhl/6n4F838xxlCnRNXWY7LIH1v+8mPOrNfzP9smrm
+ MFFQkxv5qvDk97LtzAUInwfdA0iMlcTK08jYgbDtS+E+GhDYT89HUfBii7tFMWLh+7Xhx4HJC
+ 9mwtGcyEmR9xxQzdZk5M2BsRa0y486uC27ntV7A+EkIytc4+VGIUf/LF/GCr1RkAnObijHf6W
+ BDf1ljNwrRyeUOCx274zB5E8Nm78=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,83 +101,305 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit cb9ae40a16f0 ("tools: mkfwumdata: add logic to append vendor
-data to the FWU metadata") added support for adding vendor data to mdata
-structure but it is not visible anywhere that's why extend fwu command to
-dump it.
+On 15.03.25 15:26, Simon Glass wrote:
+> When the ACPI tables come from an earlier bootloader it is helpful to
+> see whether the checksums are correct or not. Add a -c flag to the
+> 'acpi list' command to support that.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v3)
+>
+> Changes in v3:
+> - Add new patch to support checking checksums with ACPI command
+>
+>   cmd/acpi.c             | 57 +++++++++++++++++++++++++++---------------
+>   doc/usage/cmd/acpi.rst | 20 ++++++++++++++-
+>   test/dm/acpi.c         | 46 ++++++++++++++++++++++++++++++++++
+>   3 files changed, 102 insertions(+), 21 deletions(-)
+>
+> diff --git a/cmd/acpi.c b/cmd/acpi.c
+> index 2273176f106..bb243202009 100644
+> --- a/cmd/acpi.c
+> +++ b/cmd/acpi.c
+> @@ -7,6 +7,7 @@
+>   #include <display_options.h>
+>   #include <log.h>
+>   #include <mapmem.h>
+> +#include <tables_csum.h>
+>   #include <acpi/acpi_table.h>
+>   #include <asm/acpi_table.h>
+>   #include <asm/global_data.h>
+> @@ -15,6 +16,17 @@
+>
+>   DECLARE_GLOBAL_DATA_PTR;
+>
+> +static const char *show_checksum(void *ptr, uint size, bool chksums)
+> +{
+> +	uint checksum;
+> +
+> +	if (!chksums)
+> +		return "";
+> +	checksum =3D table_compute_checksum(ptr, size);
+> +
+> +	return checksum ? "  bad" : "  OK";
 
-Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Please, move the leading spaces to the printf statements below.
 
-Changes in v2:
-- Extend print message
-- Cover hexdump dependencies
+> +}
+> +
+>   /**
+>    * dump_hdr() - Dump an ACPI header
+>    *
+> @@ -23,16 +35,17 @@ DECLARE_GLOBAL_DATA_PTR;
+>    *
+>    * @hdr: ACPI header to dump
+>    */
+> -static void dump_hdr(struct acpi_table_header *hdr)
+> +static void dump_hdr(struct acpi_table_header *hdr, bool chksums)
+>   {
+>   	bool has_hdr =3D memcmp(hdr->signature, "FACS", ACPI_NAME_LEN);
+>
+>   	printf("%.*s  %16lx  %5x", ACPI_NAME_LEN, hdr->signature,
+>   	       (ulong)map_to_sysmem(hdr), hdr->length);
+>   	if (has_hdr) {
+> -		printf("  v%02d %.6s %.8s %x %.4s %x\n", hdr->revision,
+> +		printf("  v%02d %.6s %.8s %x %.4s %x%s\n", hdr->revision,
 
-RFC:
-https://lore.kernel.org/r/75c697a4f819bb5e8649ed658c5a559fb8cd1fd9.1717599342.git.michal.simek@amd.com
+%x results in variable length output. To avoid ragged layout, please,
+define the output length.
 
----
- cmd/Kconfig     |  1 +
- cmd/fwu_mdata.c | 25 +++++++++++++++++++++++++
- 2 files changed, 26 insertions(+)
+Best regards
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 642cc1116e87..1f8aa2521a8e 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -185,6 +185,7 @@ config CMD_UFETCH
- config CMD_FWU_METADATA
- 	bool "fwu metadata read"
- 	depends on FWU_MULTI_BANK_UPDATE
-+	imply HEXDUMP if FWU_MDATA_V2
- 	help
- 	  Command to read the metadata and dump it's contents
- 
-diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
-index 9c048d69a131..5b5a2e4d1cda 100644
---- a/cmd/fwu_mdata.c
-+++ b/cmd/fwu_mdata.c
-@@ -7,6 +7,7 @@
- #include <dm.h>
- #include <fwu.h>
- #include <fwu_mdata.h>
-+#include <hexdump.h>
- #include <log.h>
- #include <stdio.h>
- #include <stdlib.h>
-@@ -45,6 +46,30 @@ static void print_mdata(struct fwu_data *data)
- 			       img_info->accepted == 0x1 ? "yes" : "no");
- 		}
- 	}
-+
-+	if (data->version == 2) {
-+		struct fwu_mdata *mdata = data->fwu_mdata;
-+		struct fwu_fw_store_desc *desc;
-+		void *end;
-+		u32 diff;
-+
-+		/*
-+		 * fwu_mdata defines only header that's why taking it as array
-+		 * which exactly point to image description location
-+		 */
-+		desc = (struct fwu_fw_store_desc *)&mdata[1];
-+
-+		/* Number of entries is taken from for loop - variable i */
-+		end = &desc->img_entry[i];
-+		debug("mdata %p, desc %p, end %p\n", mdata, desc, end);
-+
-+		diff = data->metadata_size - ((void *)end - (void *)mdata);
-+		if (diff) {
-+			printf("Custom fields covered by CRC len: 0x%x\n", diff);
-+			print_hex_dump_bytes("CUSTOM ", DUMP_PREFIX_OFFSET,
-+					     end, diff);
-+		}
-+	}
- }
- 
- int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
--- 
-2.43.0
+Heinrich
+
+>   		       hdr->oem_id, hdr->oem_table_id, hdr->oem_revision,
+> -		       hdr->creator_id, hdr->creator_revision);
+> +		       hdr->creator_id, hdr->creator_revision,
+> +		       show_checksum(hdr, hdr->length, chksums));
+>   	} else {
+>   		printf("\n");
+>   	}
+> @@ -52,22 +65,22 @@ static int dump_table_name(const char *sig)
+>   	return 0;
+>   }
+>
+> -static void list_fadt(struct acpi_fadt *fadt)
+> +static void list_fadt(struct acpi_fadt *fadt, bool chksums)
+>   {
+>   	if (fadt->header.revision >=3D 3 && fadt->x_dsdt)
+> -		dump_hdr(nomap_sysmem(fadt->x_dsdt, 0));
+> +		dump_hdr(nomap_sysmem(fadt->x_dsdt, 0), chksums);
+>   	else if (fadt->dsdt)
+> -		dump_hdr(nomap_sysmem(fadt->dsdt, 0));
+> +		dump_hdr(nomap_sysmem(fadt->dsdt, 0), chksums);
+>   	if (!IS_ENABLED(CONFIG_X86) && !IS_ENABLED(CONFIG_SANDBOX) &&
+>   	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
+>   		log_err("FADT not ACPI-hardware-reduced-compliant\n");
+>   	if (fadt->header.revision >=3D 3 && fadt->x_firmware_ctrl)
+> -		dump_hdr(nomap_sysmem(fadt->x_firmware_ctrl, 0));
+> +		dump_hdr(nomap_sysmem(fadt->x_firmware_ctrl, 0), chksums);
+>   	else if (fadt->firmware_ctrl)
+> -		dump_hdr(nomap_sysmem(fadt->firmware_ctrl, 0));
+> +		dump_hdr(nomap_sysmem(fadt->firmware_ctrl, 0), chksums);
+>   }
+>
+> -static void list_rsdt(struct acpi_rsdp *rsdp)
+> +static void list_rsdt(struct acpi_rsdp *rsdp, bool chksums)
+>   {
+>   	int len, i, count;
+>   	struct acpi_rsdt *rsdt;
+> @@ -75,11 +88,11 @@ static void list_rsdt(struct acpi_rsdp *rsdp)
+>
+>   	if (rsdp->rsdt_address) {
+>   		rsdt =3D nomap_sysmem(rsdp->rsdt_address, 0);
+> -		dump_hdr(&rsdt->header);
+> +		dump_hdr(&rsdt->header, chksums);
+>   	}
+>   	if (rsdp->xsdt_address) {
+>   		xsdt =3D nomap_sysmem(rsdp->xsdt_address, 0);
+> -		dump_hdr(&xsdt->header);
+> +		dump_hdr(&xsdt->header, chksums);
+>   		len =3D xsdt->header.length - sizeof(xsdt->header);
+>   		count =3D len / sizeof(u64);
+>   	} else if (rsdp->rsdt_address) {
+> @@ -100,24 +113,28 @@ static void list_rsdt(struct acpi_rsdp *rsdp)
+>   		if (!entry)
+>   			break;
+>   		hdr =3D nomap_sysmem(entry, 0);
+> -		dump_hdr(hdr);
+> +		dump_hdr(hdr, chksums);
+>   		if (!memcmp(hdr->signature, "FACP", ACPI_NAME_LEN))
+> -			list_fadt((struct acpi_fadt *)hdr);
+> +			list_fadt((struct acpi_fadt *)hdr, chksums);
+>   	}
+>   }
+>
+> -static void list_rsdp(struct acpi_rsdp *rsdp)
+> +static void list_rsdp(struct acpi_rsdp *rsdp, bool chksums)
+>   {
+> -	printf("RSDP  %16lx  %5x  v%02d %.6s\n", (ulong)map_to_sysmem(rsdp),
+> -	       rsdp->length, rsdp->revision, rsdp->oem_id);
+> -	list_rsdt(rsdp);
+> +	printf("RSDP  %16lx  %5x  v%02d %.6s%s%s\n",
+> +	       (ulong)map_to_sysmem(rsdp), rsdp->length, rsdp->revision,
+> +	       rsdp->oem_id, show_checksum(rsdp, 0x14, chksums),
+> +	       show_checksum(rsdp, rsdp->length, chksums));
+> +	list_rsdt(rsdp, chksums);
+>   }
+>
+>   static int do_acpi_list(struct cmd_tbl *cmdtp, int flag, int argc,
+>   			char *const argv[])
+>   {
+>   	struct acpi_rsdp *rsdp;
+> +	bool chksums;
+>
+> +	chksums =3D argc >=3D 2 && !strcmp("-c", argv[1]);
+>   	rsdp =3D map_sysmem(gd_acpi_start(), 0);
+>   	if (!rsdp) {
+>   		printf("No ACPI tables present\n");
+> @@ -125,7 +142,7 @@ static int do_acpi_list(struct cmd_tbl *cmdtp, int f=
+lag, int argc,
+>   	}
+>   	printf("Name              Base   Size  Detail\n"
+>   	       "----  ----------------  -----  ----------------------------\n=
+");
+> -	list_rsdp(rsdp);
+> +	list_rsdp(rsdp, chksums);
+>
+>   	return 0;
+>   }
+> @@ -187,13 +204,13 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp, int=
+ flag, int argc,
+>   }
+>
+>   U_BOOT_LONGHELP(acpi,
+> -	"list  - list ACPI tables\n"
+> +	"list [-c] - list ACPI tables [check checksums]\n"
+>   	"acpi items [-d]   - List/dump each piece of ACPI data from devices\n=
+"
+>   	"acpi set [<addr>] - Set or show address of ACPI tables\n"
+>   	"acpi dump <name>  - Dump ACPI table");
+>
+>   U_BOOT_CMD_WITH_SUBCMDS(acpi, "ACPI tables", acpi_help_text,
+> -	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_acpi_list),
+> +	U_BOOT_SUBCMD_MKENT(list, 2, 1, do_acpi_list),
+>   	U_BOOT_SUBCMD_MKENT(items, 2, 1, do_acpi_items),
+>   	U_BOOT_SUBCMD_MKENT(set, 2, 1, do_acpi_set),
+>   	U_BOOT_SUBCMD_MKENT(dump, 2, 1, do_acpi_dump));
+> diff --git a/doc/usage/cmd/acpi.rst b/doc/usage/cmd/acpi.rst
+> index 9f30972fe53..e652968d584 100644
+> --- a/doc/usage/cmd/acpi.rst
+> +++ b/doc/usage/cmd/acpi.rst
+> @@ -11,7 +11,7 @@ Synopsis
+>
+>   ::
+>
+> -    acpi list
+> +    acpi list [-c]
+>       acpi items [-d]
+>       acpi dump <name>
+>       acpi set <address>
+> @@ -38,6 +38,9 @@ List the ACPI tables that have been generated. Each ta=
+ble has a 4-character
+>   table name (e.g. SSDT, FACS) and has a format defined by the
+>   `ACPI specification`_.
+>
+> +The `-c` flag tells U-Boot to verify the checksums and print 'OK' or 'B=
+AD' next
+> +to each table.
+> +
+>   U-Boot does not currently support decoding the tables. Unlike devicetr=
+ee, ACPI
+>   tables have no regular schema and also some include bytecode, so decod=
+ing the
+>   tables requires a lot of code.
+> @@ -259,5 +262,20 @@ pointer::
+>       WAET  bff76a3b     28  v01 BOCHS  BXPC     1 BXPC 1
+>       SSDT  bff95040     c5  v02 COREv4 COREBOOT 2a CORE 20221020
+>
+> +This shows checking that the checksums are correct for each table::
+> +
+> +    =3D> acpi list -c
+> +    Name              Base   Size  Detail
+> +    ----  ----------------  -----  ----------------------------
+> +    RSDP          bec9a000     24  v00 BOCHS   OK OK
+> +    RSDT          bec9bd4a     38  v01 BOCHS  BXPC     1 BXPC 1  OK
+> +    FACP          bec9bb46     74  v01 BOCHS  BXPC     1 BXPC 1  OK
+> +    DSDT          bec9a080   1ac6  v01 BOCHS  BXPC     1 BXPC 1  OK
+> +    FACS          bec9a040     40
+> +    APIC          bec9bbba     78  v03 BOCHS  BXPC     1 BXPC 1  OK
+> +    HPET          bec9bc32     38  v01 BOCHS  BXPC     1 BXPC 1  OK
+> +    SRAT          bec9bc6a     b8  v01 BOCHS  BXPC     1 BXPC 1  OK
+> +    WAET          bec9bd22     28  v01 BOCHS  BXPC     1 BXPC 1  OK
+> +
+>
+>   .. _`ACPI specification`: https://uefi.org/sites/default/files/resourc=
+es/ACPI_6_3_final_Jan30.pdf
+> diff --git a/test/dm/acpi.c b/test/dm/acpi.c
+> index f98f9d1e74b..db012b6d2f1 100644
+> --- a/test/dm/acpi.c
+> +++ b/test/dm/acpi.c
+> @@ -439,6 +439,52 @@ static int dm_test_acpi_cmd_list(struct unit_test_s=
+tate *uts)
+>   }
+>   DM_TEST(dm_test_acpi_cmd_list, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CON=
+SOLE);
+>
+> +/* Test 'acpi list -c' command */
+> +static int dm_test_acpi_cmd_list_chksum(struct unit_test_state *uts)
+> +{
+> +	struct acpi_ctx ctx;
+> +	ulong addr;
+> +	void *buf;
+> +
+> +	buf =3D memalign(16, BUF_SIZE);
+> +	ut_assertnonnull(buf);
+> +	addr =3D map_to_sysmem(buf);
+> +	ut_assertok(setup_ctx_and_base_tables(uts, &ctx, addr));
+> +
+> +	ut_assertok(acpi_write_dev_tables(&ctx));
+> +
+> +	run_command("acpi list -c", 0);
+> +	ut_assert_nextline("Name              Base   Size  Detail");
+> +	ut_assert_nextline("----  ----------------  -----  -------------------=
+---------");
+> +	ut_assert_nextline("RSDP  %16lx  %5zx  v02 U-BOOT  OK  OK", addr,
+> +			   sizeof(struct acpi_rsdp));
+> +	addr =3D ALIGN(addr + sizeof(struct acpi_rsdp), 16);
+> +	ut_assert_nextline("RSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  =
+OK",
+> +			   addr, sizeof(struct acpi_table_header) +
+> +			   3 * sizeof(u32), OEM_REVISION);
+> +	addr =3D ALIGN(addr + sizeof(struct acpi_rsdt), 16);
+> +	ut_assert_nextline("XSDT  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  =
+OK",
+> +			   addr, sizeof(struct acpi_table_header) +
+> +			   3 * sizeof(u64), OEM_REVISION);
+> +	addr =3D ALIGN(addr + sizeof(struct acpi_xsdt), 64);
+> +	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  =
+OK",
+> +			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
+> +	addr =3D ALIGN(addr + sizeof(struct acpi_dmar), 16);
+> +	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  =
+OK",
+> +			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
+> +	addr =3D ALIGN(addr + sizeof(struct acpi_dmar), 16);
+> +	ut_assert_nextline("DMAR  %16lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0  =
+OK",
+> +			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
+> +	ut_assert_console_end();
+> +	ut_assert_console_end();
+> +	unmap_sysmem(buf);
+> +	free(buf);
+> +
+> +	return 0;
+> +}
+> +DM_TEST(dm_test_acpi_cmd_list_chksum,
+> +	UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
+> +
+>   /* Test 'acpi dump' command */
+>   static int dm_test_acpi_cmd_dump(struct unit_test_state *uts)
+>   {
 
