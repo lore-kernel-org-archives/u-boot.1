@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62BC8C36000
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 12:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5138C36000
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 12:32:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9264803DF;
-	Fri, 21 Mar 2025 13:31:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65019803DF;
+	Fri, 21 Mar 2025 13:32:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eYKeoV+n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KWsRajDV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F302805C8; Fri, 21 Mar 2025 13:31:57 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 9668B805C8; Fri, 21 Mar 2025 13:32:37 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DF878001F
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 13:31:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95F0F8001F
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 13:32:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-543e4bbcd86so2112608e87.1
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 05:31:55 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5497e7bf2e0so2123881e87.3
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 05:32:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742560314; x=1743165114; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742560355; x=1743165155; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2719QJrOzWUYYAY0suqbO3jHLrfmQvFHiMbH82Epxag=;
- b=eYKeoV+nfgj+6Ui1VtDBruSUTyOLOyaM1e6tOj+lbKO01YeC0a2I98JVJY7W4M+++U
- 29JcRS/+INfVn5+WQeNEdRsBEtRVsZaddvhjiOKEGlpW3ZVqDiT4rEjaNxRVJhYr8puM
- Zn+mVmm3qMZHsKO5XhWlGcY++Yl2zbE2W23HFthQoSkxTGiMyzlg5ntjgGhGQ7MWaXfj
- I+WX34iY9YM8P9+elVULcottTp6SUa3BT3r2n0WEOt17AYK/KfKvW1Ukjb/5ZiUGZZOa
- DJZEBLLTp/ZZUfElVKJqpu9Du1BOMat7cd58oYn+k/PzI2Jb1XMRYcgomXeGYtBuRzqM
- gsZA==
+ bh=OyXj5cJ/XMHlG0+9WTetSyIgUhapKnd2Z2gbGMnSCdc=;
+ b=KWsRajDVdv95gQ7xo2qh7KiqkmWpsjIjY/p6uwWn9ISdbiBxlNRPVcpjhipKxR7qi0
+ pjg5exBVN/5dY4HszBBj/bQ75LFmeYAaYuLTLBnGBskyGOzIsclS/772fqaGrJjL8TaF
+ 0CmA/E6071e1gY00I4ZHuFqmk4JI5MUXvsXX30lqVxMEfUxInCSTmu9qVTDaaeVv4LQh
+ oAF0M+g0w+9G+WTrwcEJ6GEi8R/wLOWCnLXUewTlalx99fP4dqDjZOCt0Dzj8G8tcxQw
+ BB9+YkekH4UtDyxXeSE2Mg3yCq889lUgo1n5CjUo2xMh0WlEsl+9XnL/xhd2GnNT8U9z
+ 6GjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742560314; x=1743165114;
+ d=1e100.net; s=20230601; t=1742560355; x=1743165155;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2719QJrOzWUYYAY0suqbO3jHLrfmQvFHiMbH82Epxag=;
- b=qPBoi/A6ohkIG3NMxLSaJ4aMq6LbutFMiRo2bKGwUoswRg9AcJpBcJsWBvoiEXvnkH
- YPnLulc5kLTMxCBn5FXtgsN4eJ43OuLtz2+7XczTDtSeLaZG7E3VL3jAGK7n4QgrPqbV
- dx3tfWM+lIcMh+u2VutiUjZ66p+C6EuWW0mpSO00fD9tLQgksUTQ/Pehkd+l4tXCpJnz
- jLpKUM14+xOvhfBTK5WPSsPCtwuDa0b9EvTdRJjw+LYz4iSAgLKWETLXs6EJrpu00r4S
- 4fuROx0r2U3kalCtx100YyHv8+i2cVhWL+2DpS6GoBO3L4ciOXEAKkw/tTkuQUqLehUt
- QAOg==
-X-Gm-Message-State: AOJu0Ywn/wACL/uRygDJy4Dedkzu4WkoD8VNBqA+G6U2A9I57R+4bHDX
- dflDrWbBCqc7KBs4QqjgCD2rrDUx7tfNdONW9TkZ6U43kUw7QRTRRo9fXa9/5ubdqN9dS6cP3R5
- KVj4YkEojozWONIVYqQCaEKr+HHM=
-X-Gm-Gg: ASbGnctFSEssHStgZsMQX8DZH0dNJn7aBdQjR/ikuSxvf5Zb3vg7LigmKaaY0xKI8UL
- MdS29Zrtg3E+dvreZkiSyRGTEnbMoSE8zX84MygshcO8e+PHKBLi/jgFE1D5l6OQW/ifl+d7WOR
- Ub0M7PnkqOweMcxrNrU0+c7B4EpggXIlv2XHx+LUDdow3jAysc6lw9Nu8rvg==
-X-Google-Smtp-Source: AGHT+IFHVZfVF0ZamttRhkBKfuEUWO/BaEWJcMydHe3rQ+EkytoXvUUJL9I7fZVSfouT8OEBYn9dnA/Fo6e1531jWEM=
-X-Received: by 2002:a05:6512:4006:b0:549:31e4:9ea with SMTP id
- 2adb3069b0e04-54ad64facaemr1221805e87.52.1742560314034; Fri, 21 Mar 2025
- 05:31:54 -0700 (PDT)
+ bh=OyXj5cJ/XMHlG0+9WTetSyIgUhapKnd2Z2gbGMnSCdc=;
+ b=MhUOfvnZT1p/+WPwFSl7PYbxzQlU9Oe1MwxLTpC9XQJj7L+KxDLiQwu5krRrfbCHLw
+ 07t9eIBW/owJryNXfDcN+bPpIeQI/J6H5NFwEpMcWD9+ZgcyYaq/YBnrmGdYucuJDXxS
+ eGWgN6Kp7CkeOxymq5+RMKJGYkvnTxflMM08cooHhjJfl/4UDaJOmnFsURfg+kqd0NaD
+ X1p89XKLH4NFHYcxASNpXilB94D0lbqM0uTT4naLDEilBh0v8AAQmtyauw6xqjFlFf9E
+ 5tGxG5Wp0qAboGGYdaUvkN0LTb9BOdCt2bZDtRLg+64zc6TUagYXs3fThrCHciTW0yKH
+ f1jw==
+X-Gm-Message-State: AOJu0YxqFhq8Ypud/Gbs039EEC4Y8wSMbRU2e9l01Zzbfn9g2YF/Vx4+
+ +b50jXhkr0cXtOuNUZtZ6tM43K+GYMzN6FErrQDn8sByh6J8XgDYrTkOX4cEAmy2nxG9k965LJj
+ pLfU/7dCXH98cDHoVmWLVE++EPw0=
+X-Gm-Gg: ASbGnctxbwPMNBAR1ytQk/tpWFgDM4x7qQGr3lyIuxh4fuyqN4h3DDHT4zGOa78jJeE
+ IW6Tn2L6r7Z8QK0BAzwcsss9SkolFjAl6AhvsncsoRojKiwysPXVV5yIrjj3IkKFpivEsOpUVip
+ Cdl2aJiCDYdBNySWimtK/BZZqZf2ZW98uStTNyQCAJEeL9n41XuG0UkRFTpg==
+X-Google-Smtp-Source: AGHT+IG6zpWZgqt+rm6DcKFSzCPna8eA5/lNY4I2rqBRMrExPwJ4ddL8d4lXvsOEZzcmOPypzFXNoKbW/kB7KLSyeio=
+X-Received: by 2002:a05:6512:1152:b0:545:2f9f:5f6a with SMTP id
+ 2adb3069b0e04-54ad647e35cmr1021693e87.14.1742560354583; Fri, 21 Mar 2025
+ 05:32:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319072520.100555-1-aristo.chen@canonical.com>
-In-Reply-To: <20250319072520.100555-1-aristo.chen@canonical.com>
+References: <20250315012916.399442-1-trini@konsulko.com>
+In-Reply-To: <20250315012916.399442-1-trini@konsulko.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 21 Mar 2025 09:31:42 -0300
-X-Gm-Features: AQ5f1JruWIaEdXS2gh69tTPvR6f8py69j8O_omxRWpkL6Jh3xOW0rV3S6tmpbR4
-Message-ID: <CAOMZO5CUqgCpeggXQFBh9+TQ75LRJxCRXrW2uv8UFTtncFJD9w@mail.gmail.com>
-Subject: Re: [PATCH] configs: Remove duplicated bootcmd 'mmc dev ${mmcdev}'
-To: Aristo Chen <jj251510319013@gmail.com>
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, trini@konsulko.com, 
- aristo.chen@canonical.com, festevam@denx.de, marex@denx.de, 
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org
+Date: Fri, 21 Mar 2025 09:32:23 -0300
+X-Gm-Features: AQ5f1JoXKq_KnLUdUDsX0NZHvYor3xr8DRY3BI9hRrxq296-gFZele9TRK8ka-8
+Message-ID: <CAOMZO5BbeQUexJ2o92yaxqSK84U8t7RM3+tH6D7LhYRavqSzvw@mail.gmail.com>
+Subject: Re: [PATCH] phycore_imx8mp: Rework some of the RAM related Kconfig
+ symbols
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Teresa Remmet <t.remmet@phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,11 +92,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 19, 2025 at 9:40=E2=80=AFAM Aristo Chen <jj251510319013@gmail.c=
-om> wrote:
+On Fri, Mar 14, 2025 at 10:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
 >
-> The 'mmc dev ${mmcdev}' is defined twice, so remove the duplicated one
+> As the code is today, we get a warning about "select" statements on
+> "choice" options not doing anything. In this case we can easily fix this
+> by dropping the select line as the following choice statement handles
+> things correctly. We also drop the "default false" line as false / n is
+> the default.
 >
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Teresa Remmet <t.remmet@phytec.de>
 
 Applied to u-boot-imx/next, thanks.
