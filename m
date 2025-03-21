@@ -4,80 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA76C35FFF
-	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 09:53:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16C41C35FFF
+	for <u-boot@archiver.kernel.org>; Fri, 21 Mar 2025 10:26:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B189C807D7;
-	Fri, 21 Mar 2025 10:53:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C824808A2;
+	Fri, 21 Mar 2025 11:26:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ok/Jjx8a";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gcQpdZqP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDC19808A2; Fri, 21 Mar 2025 10:53:01 +0100 (CET)
-Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
- [IPv6:2607:f8b0:4864:20::a33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 12B80810FE; Fri, 21 Mar 2025 11:26:09 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::62e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB593805C8
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 10:52:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D143805C8
+ for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 11:26:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-51eb1823a8eso831126e0c.3
- for <u-boot@lists.denx.de>; Fri, 21 Mar 2025 02:52:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742550778; x=1743155578; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NDoaHmdyZVehc2Dg3/xIFE4jG64+lac+3i7hX0WXhFk=;
- b=Ok/Jjx8aul9FIcBPNZE8j81nakVYbkKFiHmmXNFbdsXBMY5n36S/tZGhhzQYZcjjLD
- gFyO1lZV0KxQU4uoDR4il2iQ1kFHsrVGRZV2I2fRldPlY50kjOS5MsT4SK/1DN79ADDq
- FR6M7hMGtzRMuS2+vfNeYlRN4AMP0oPtaEAMCqN2oqWI+7YBoBXmboq6c5UPeuBt8AQF
- GN3qc7xUrXtrMGZKRU3C82/uDuG8Ur/kM+rpTbSJQR0CGZ450QMN7CL62oNRQFEp8nhw
- zgMA97Vz9TogKIx2xpc+CITBz7PSEnkHXUBIDuIqf9nXAbbLYnGcZ19owd6FG9HVBFzV
- +giw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742550778; x=1743155578;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NDoaHmdyZVehc2Dg3/xIFE4jG64+lac+3i7hX0WXhFk=;
- b=mNhPJOerXAALIe4l3WolaoLwq/VbAnvtz+LHvYSkXP6FUsw3+0g/FZg1yiT9U5C7W8
- q/6n5KlKUaC20X4EqXEHWyHYzRe071t55iEvh6VCs2dN5s5yXoyRu5HaP3707eqSEMOU
- nvCz8J2Vr8l1Xr0hPlyhRsZQhCUQiYtJDkPK0KDJ4jx45lGaACp5Q560qBUVbvqqeYiI
- U1XxgXlRosYuxKSaQScgr5vFbqUJtrx3dJp9q37WC34RBhrrZS4zrbW7c/8Qo5UY/tqW
- zRD8I2FfNyWqMlcqsRU3MEtinay8XC1GJE0V451wJIyCMtWoslqAmBy+aDI+2I1t1E0A
- I2iQ==
-X-Gm-Message-State: AOJu0YyEiE1Q2XH65zS9HSbBkLYEHsOTo9s23hPN9o6KG+4vx5C20DzL
- kBQtm00eHklCe0BUVaw6PmUjH+pO1tsnvqUV39XJjWijr32zL/NCX9yblNHlpJ2jZkiFNo3jE0l
- l59pWhB9dKZ0LQPotNregIUPG5bQjgoZXhzXc1A==
-X-Gm-Gg: ASbGnctfDseBIox2t6MeOjHuf/NYcuXQ6Qfe71revcJALH27XK7C1Mvgl7tGmcgvzXY
- BIp05vEy52p9BgHEap0+AvONSidYnSVNR072kz6BGXiYyewji057gfu7aoYJ3yfmODodqkeNgd7
- gob3yJgWfi6Q7kGcNNI7LYCKR7dwQ=
-X-Google-Smtp-Source: AGHT+IEiGZ5zAAlMh596rBnslBcG6Fp8dyouVP55ytXR9me1qI7D4jpJwUk2omZnxiX1CXdE+HWsmjZNj/fO3mC3cSo=
-X-Received: by 2002:a05:6122:1989:b0:520:5a87:66fa with SMTP id
- 71dfb90a1353d-525a834239cmr2262782e0c.3.1742550777561; Fri, 21 Mar 2025
- 02:52:57 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z+Ta/hCNsAtAw62kW8srOsR/GN7gS27X/3QPYBjOES3zVp3Q4MLPwQMF1YWFEKQYz4CbO/nNuq3hSCT+WI9KHIgB9NJs/xh1WMyb7NeCuVWRgIC9CjvvO1F/q+Xex3ycKUy8tOa+D03ghdD1zgxXQmuOrVoamDTYckMMog+Fzlxka0qiP73lCMRin0tJVUxOpHdLrVw+Iiu2qTK5EEv6aZHhoRszMrtJLYTa4PmITFWRHhfveu2qE6h0mcUNR1e4SQv7QTCZMj5XEluNAmS7KyNSTOm5nfxK7sqr28yMKNjV6QA0KQqKsKnOBrfVQyQGsHCJ3j3+QYv9OWnqRpSbIQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0UK0aojsaO7Hfk9/5+/EiQ2rbqmdpFvnfPwlqwVtfcA=;
+ b=AkLSZEVDh9OjzIurLjTek8t1F2OYpf2xolxY6HJ0FRVa3EwzM9qYUX0h7LEYdV4HXKWbF9HS/JPrnq2mvQEZKHKyAsfvSB0zfCCJXO+cjVsBtAZADiF1yJ8Y6blaOrl2FoCN3SsuVzU2HL8BU9XmPnMd7B5RBg9JTb/6m/ZVn8/AZ1Ea0I9KHwYXTbkKiBBYa9poXIplg1LDPA7qo2mhXDuuvjgEOohkM/XyezggKrrYZjrogl79HbR6wrYhxJkUDrMQXlE2pYIOKbGJ9Vkb9RXw1ncje0ycwCUd/qpRPwi/q/HMgFtk3CgE2x7JTXqp9l/x5yFK5lcEqNFUj5+cgg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0UK0aojsaO7Hfk9/5+/EiQ2rbqmdpFvnfPwlqwVtfcA=;
+ b=gcQpdZqPcu9/vbq828vA7t4AAXIHUQ4ke3G5k4yUHJ3bYFuv7pL21OlfsmNFR/kYJTbNct8fwa9UWadJAYsjiFxMkcR3yEzOG9XLjTXS49wFg52JDflZ3xdl6/3+kA0UGJr4BYGET9/7iuz3O3Gi7rlAfcRwGoRtqVyv1KAfBRA=
+Received: from CY5PR13CA0065.namprd13.prod.outlook.com (2603:10b6:930:a::18)
+ by SN7PR12MB8772.namprd12.prod.outlook.com (2603:10b6:806:341::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.33; Fri, 21 Mar
+ 2025 10:26:01 +0000
+Received: from CY4PEPF0000E9CE.namprd03.prod.outlook.com
+ (2603:10b6:930:a:cafe::b2) by CY5PR13CA0065.outlook.office365.com
+ (2603:10b6:930:a::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.34 via Frontend Transport; Fri,
+ 21 Mar 2025 10:26:01 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000E9CE.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8534.20 via Frontend Transport; Fri, 21 Mar 2025 10:26:00 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 21 Mar
+ 2025 05:25:56 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH v2] cmd: fwu: Dump custom fields from mdata structure
+Date: Fri, 21 Mar 2025 11:25:48 +0100
+Message-ID: <1254c3c538facb1a124865aede861f399cf524df.1742552744.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <75c697a4f819bb5e8649ed658c5a559fb8cd1fd9.1717599342.git.michal.simek@amd.com>
- <CADg8p96oba52R=nSKFg8hprE-BYNNtSuOkswLNi4raW1W770dQ@mail.gmail.com>
- <fbad5d5b-2b69-4004-bc13-9bd0e73d3278@amd.com>
-In-Reply-To: <fbad5d5b-2b69-4004-bc13-9bd0e73d3278@amd.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 21 Mar 2025 15:22:45 +0530
-X-Gm-Features: AQ5f1JrNxygePvb_6ivA8hnmfCAv0FWZ8qu3J1qWt7-aJ2Lkgy4bEfPdoIkf9Xo
-Message-ID: <CADg8p95ETeJnz0xa+4UXyqwciWOJ3un8geEn1_3A6PbPEA_pUA@mail.gmail.com>
-Subject: Re: [RFC PATCH] cmd: fwu: Dump custom fields from mdata structure
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, 
- Etienne Carriere <etienne.carriere@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2288; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=l0pYB8mlT7u2gOV4HoKb59yND1K7A6oJUlp7h9it4Ps=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvS7dmv3Mb79uZX/Tu3fFzavuSRfXWpnt+j+vfCu3uNJp
+ 55llRU1dMSyMAgyMciKKbJI21w5s7dyxhThi4flYOawMoEMYeDiFICJ9N5nmKc/+e6BPeViN3bO
+ 9Fgobf5mS+AnnSMM8+sdeRrvtaZaeRjIRC7Onrv1wwqJSwA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CE:EE_|SN7PR12MB8772:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6d08e3f7-c5da-4969-7a2d-08dd6862c6b3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?1z1vtmoR+Vlk8duxnlVkhDAtv//g3qc/VqlHvmJiWFnyQeNkM4yn9lcImMRF?=
+ =?us-ascii?Q?NpTfwMVUjjIyaXx1ZeJb43SooR2lXqC8B3HnoSjyxhHxvzA1ZbXZDBmzU8V9?=
+ =?us-ascii?Q?NCLojSD7fVJiR8pxuLg6ySCHMW4tey3o/06JjPpuXaH9R0YEmuPxahr9Hcwl?=
+ =?us-ascii?Q?puAjcxvFdmFshJO/ekHB1b6zo5MO6w5bTDEoiy8kPnRTH6NB/DXdtR2AY0os?=
+ =?us-ascii?Q?TT2ELIjzJfhv+jKu0GiCj5dKdT0hFV/i6n31DuUCsHMTMJ9D4LH8nHila9hY?=
+ =?us-ascii?Q?IWgPLgIV1SUrKju6zHsWoO8UpByde6D1bZmWAxFsXN+4/4SC1wc4YxTNbVSp?=
+ =?us-ascii?Q?2pyrehxjJtFBSjDUlI5MCtgK8Z9D1uY0xcfmomHgBAk5pH+MWCQmyA1Z+cPl?=
+ =?us-ascii?Q?EaNHggsV5h89Lwq78NXyF2hUd2TfMUxkW1UKKdOiRnVCkJk9m9x6GQlpO+Qw?=
+ =?us-ascii?Q?rZekzXoj4PS6n2em0E0n9ZzIxZm/T8NIjVJKlUdj/wQZDxHvrGoBOl1gyVMG?=
+ =?us-ascii?Q?D1xyJnmEi87/BXZWzDPQMPTLvg5qg/wcYt7kBoUg/2HuygXtUG6t44zgVQW3?=
+ =?us-ascii?Q?7r6e7tceNRM/MvgLQqlnuGDqMmJ3ig9vQ45vG1UMzPzGCWMVN0vS1WwRfCj5?=
+ =?us-ascii?Q?o23INCb6Fn0mu2LGn/4MkVRTvEA9i9lAZ5o2o7iDx/iCP3lA8Hi5LBeJ9bB8?=
+ =?us-ascii?Q?OB2T1OXDIUs43r+MOr3k55fE1BSP3J21bw602OTH/S9wRdV+Xluo5S0J71gv?=
+ =?us-ascii?Q?cW/rUrdSuruIjmaP1skGS66LpKOBFyYIdyn5P9wyAk44UmuVgLsSW1USP/8U?=
+ =?us-ascii?Q?R7NUczLZgZxM1v3dZiPKDOAqN9zxo+FB5ulaMbHaah1gH1RJh3gVE+EbbQVv?=
+ =?us-ascii?Q?9SVooMbOz1fbJcJz3Tt9NZ15hAvcvLuZse9qNJPDiiURIcmGAi+ZArxBv/aR?=
+ =?us-ascii?Q?WVLlMCeNeHxVmCv5nAtvzRkgteMb6SyZ95n9WYBauOEYji4LeJO5S6L8eAtp?=
+ =?us-ascii?Q?u7QXBCjYFwKoD3dL4zh/2XG1YqCO9fA8l2XvONnRa2FIGmSDuXkkOP5VAPHv?=
+ =?us-ascii?Q?utTTghOKDqZZdgq0LSyvhr3svQUfy4XPGcTvCYNnBbyXUuCaM07PG23Wqxh8?=
+ =?us-ascii?Q?tZgRCjyK1Qf9iIBqh4t4V7WmLnW7HDASxGR149VjtD7ot7qBa/TNEdhAh9sj?=
+ =?us-ascii?Q?UjB33tm3QH8/m8Ih4M2DuOKVWdjCQKWCDnS67Iu0td7BwSTN3RYmnpit/wkf?=
+ =?us-ascii?Q?Tjqzaqp8zYGmQy2WgtlL/UcaN0e9eonhdcjoCBvprZQAB/jb3a+lGwzTHKRm?=
+ =?us-ascii?Q?ZPh8X2FITc9kIzGfniAuKyDblwS1CjwoLR88GtliDdT8DsEza8n3rWBxTfjm?=
+ =?us-ascii?Q?pwLz/BZVIJBj24Fis0sMpwMCupHkiTHbkVdh03vrDXzEDiwGJxdMS3UtURv+?=
+ =?us-ascii?Q?sgszszyWR9/+uNyi2slEekCe+6rsvWCdlWolsdcGoA2WHsHUGVmCUE2U9jyN?=
+ =?us-ascii?Q?uE9Oy0lTOxVjzH0=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2025 10:26:00.4806 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6d08e3f7-c5da-4969-7a2d-08dd6862c6b3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8772
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,87 +155,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Mar 2025 at 14:09, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 3/21/25 08:40, Sughosh Ganu wrote:
-> > On Wed, 5 Jun 2024 at 20:25, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >> The commit cb9ae40a16f0 ("tools: mkfwumdata: add logic to append vendor
-> >> data to the FWU metadata") added support for adding vendor data to mdata
-> >> structure but it is not visible anywhere that's why extend fwu command to
-> >> dump it.
-> >>
-> >> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >> ---
-> >
-> > Looks good. Just a couple of nits.
-> >
-> >>
-> >> I am using this for some time to check various configurations that's why it
-> >> can be useful for others too.
-> >> Sughosh: Maybe there is better way how to dump it.
-> >> ---
-> >>   cmd/fwu_mdata.c | 25 +++++++++++++++++++++++++
-> >>   1 file changed, 25 insertions(+)
-> >>
-> >> diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
-> >> index 9c048d69a131..ff6435505167 100644
-> >> --- a/cmd/fwu_mdata.c
-> >> +++ b/cmd/fwu_mdata.c
-> >> @@ -7,6 +7,7 @@
-> >>   #include <dm.h>
-> >>   #include <fwu.h>
-> >>   #include <fwu_mdata.h>
-> >> +#include <hexdump.h>
-> >>   #include <log.h>
-> >>   #include <stdio.h>
-> >>   #include <stdlib.h>
-> >> @@ -45,6 +46,30 @@ static void print_mdata(struct fwu_data *data)
-> >>                                 img_info->accepted == 0x1 ? "yes" : "no");
-> >>                  }
-> >>          }
-> >> +
-> >> +       if (data->version == 2) {
-> >> +               struct fwu_mdata *mdata = data->fwu_mdata;
-> >> +               struct fwu_fw_store_desc *desc;
-> >> +               void *end;
-> >> +               u32 diff;
-> >> +
-> >> +               /*
-> >> +                * fwu_mdata defines only header that's why taking it as array
-> >> +                * which exactly point to image description location
-> >> +                */
-> >> +               desc = (struct fwu_fw_store_desc *)&mdata[1];
-> >> +
-> >> +               /* Number of entries is taken from for loop - variable i */
-> >> +               end = &desc->img_entry[i];
-> >> +               debug("mdata %p, desc %p, end %p\n", mdata, desc, end);
-> >> +
-> >> +               diff = data->metadata_size - ((void *)end - (void *)mdata);
-> >> +               if (diff) {
-> >> +                       printf("Custom fields covered by CRC 0x%x\n", diff);
-> >
-> > It would be better to mention that the value being printed is the
-> > length of the vendor data. Or not print the value.
->
->
-> printf("Custom fields covered by CRC len: 0x%x\n", diff);
->
-> >
-> >> +                       print_hex_dump_bytes("CUSTOM ", DUMP_PREFIX_OFFSET,
-> >> +                                            end, diff);
-> >> +               }
-> >
-> > Would be better to do a 'select HEXDUMP if FWU_MDATA_V2' under the
-> > CMD_FWU_METADATA config.
->
-> I think select is too hard here because hexdump is implementing empty function
-> if HEXDUMP is not enabled.
->
-> imply HEXDUMP if FWU_MDATA_V2
+The commit cb9ae40a16f0 ("tools: mkfwumdata: add logic to append vendor
+data to the FWU metadata") added support for adding vendor data to mdata
+structure but it is not visible anywhere that's why extend fwu command to
+dump it.
 
-Fine with me.
+Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
--sughosh
+Changes in v2:
+- Extend print message
+- Cover hexdump dependencies
+
+RFC:
+https://lore.kernel.org/r/75c697a4f819bb5e8649ed658c5a559fb8cd1fd9.1717599342.git.michal.simek@amd.com
+
+---
+ cmd/Kconfig     |  1 +
+ cmd/fwu_mdata.c | 25 +++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 642cc1116e87..1f8aa2521a8e 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -185,6 +185,7 @@ config CMD_UFETCH
+ config CMD_FWU_METADATA
+ 	bool "fwu metadata read"
+ 	depends on FWU_MULTI_BANK_UPDATE
++	imply HEXDUMP if FWU_MDATA_V2
+ 	help
+ 	  Command to read the metadata and dump it's contents
+ 
+diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+index 9c048d69a131..5b5a2e4d1cda 100644
+--- a/cmd/fwu_mdata.c
++++ b/cmd/fwu_mdata.c
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <fwu.h>
+ #include <fwu_mdata.h>
++#include <hexdump.h>
+ #include <log.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -45,6 +46,30 @@ static void print_mdata(struct fwu_data *data)
+ 			       img_info->accepted == 0x1 ? "yes" : "no");
+ 		}
+ 	}
++
++	if (data->version == 2) {
++		struct fwu_mdata *mdata = data->fwu_mdata;
++		struct fwu_fw_store_desc *desc;
++		void *end;
++		u32 diff;
++
++		/*
++		 * fwu_mdata defines only header that's why taking it as array
++		 * which exactly point to image description location
++		 */
++		desc = (struct fwu_fw_store_desc *)&mdata[1];
++
++		/* Number of entries is taken from for loop - variable i */
++		end = &desc->img_entry[i];
++		debug("mdata %p, desc %p, end %p\n", mdata, desc, end);
++
++		diff = data->metadata_size - ((void *)end - (void *)mdata);
++		if (diff) {
++			printf("Custom fields covered by CRC len: 0x%x\n", diff);
++			print_hex_dump_bytes("CUSTOM ", DUMP_PREFIX_OFFSET,
++					     end, diff);
++		}
++	}
+ }
+ 
+ int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
+-- 
+2.43.0
+
