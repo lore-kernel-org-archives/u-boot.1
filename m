@@ -4,72 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1561C36005
-	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 02:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B56C35FFC
+	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 18:26:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80E4C81219;
-	Sat, 22 Mar 2025 03:50:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 05F7881219;
+	Sat, 22 Mar 2025 19:26:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742611816;
-	bh=KjtzITaJ7rLivSrlVmWnvAOUTCCVqG1i6chFBLmO3ak=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KHGszmepOPLfNasxCoCrJZlctFMU4oRDSEqwQ4UUhVXK4Es9S1JvFXWgETBwgjCKU
-	 hjd4usL4V9pTiMuD59s/fQlZG2MKqd10ibHkxt6nlzzFJrjNZDeQ4uPw0ogGRRPdi3
-	 HSLcwlM0hPRFG6krl0QULbw2FDaBkTRhAEg45DRt1u3kSGjd6FQtDBfG0KlRRT6Ya/
-	 QwCpm7IALYwhfasy07MFNiwZw0/9e0EnbaqTAZwPHvIMHx0Y4DmT/alC5cpafkUMFA
-	 E5xZaWwjTJrYc3oHpgIPywuiJNaA/bJ63PMuWpL7BrmcDVuR1Xfc6wehRFV82T3t5/
-	 es7OMwBIPQEOw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 83DDA81E51; Sat, 22 Mar 2025 03:50:12 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57A9C81D3B
- for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 03:50:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Oq5DQOSr"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5603A101E8F54; Sat, 22 Mar 2025 03:50:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742611808; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=KjtzITaJ7rLivSrlVmWnvAOUTCCVqG1i6chFBLmO3ak=;
- b=Oq5DQOSrDhrCr+lPr0T/4d5ZkOZ4RroQdgrZqYgJoafAk2X1+F81ge410yA1vSNQfimOHM
- HgdjDfSROMtKWFR74khtU2DSgKzh3B8R3aRPaGozOUXS/unFmMO7efMHM344+jXlCQZ0HI
- T1wOb7cMngpzumPQIKc+SFH1Gi9dRCEs+m6v0vaafO2hMszBQ2vwft64FX5Z3YuY8MNryg
- JUsa7Kx7JoegXJtLYLI6y0imM4pRlVayOXXDXbPy9EdMxjMhIuP2pxKI3d4aBPzB1EV/Ws
- Luv+0IhdtZZT7Ky+uKDdyGw22zYps3MMmIz81K26N+/huOUIyHcqGou1pUq7Kw==
-Message-ID: <865fb821-9e59-4bad-8b95-cfe3c5bf35d3@denx.de>
-Date: Sat, 22 Mar 2025 03:20:43 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a1rGOS6b";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 59D9D8197D; Sat, 22 Mar 2025 19:26:40 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1896E810FE
+ for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 19:26:38 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5497e7bf2e0so3489427e87.3
+ for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 11:26:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742667997; x=1743272797; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZhNWdVH7rGKEYdfMNYUC9R3f5vDCvXycghR+pyY/AlU=;
+ b=a1rGOS6b2m7iFDEA5YhhzO2rENUy7fwL8Zy1v24FrgoVlzoRQxi2oaIHFeu8gT8V5f
+ lw2nYeE2we/qFQGcB63E506XUcEu8cmmXm8HNyzalyKbDNb9VLuQa83gfB5mgR4Zx0rW
+ UyseQ8v+gpOvj+xgDvr723kRwOt5Y40SuROfefUQ+hz0/kHivtf40n4nckeTqcwdSLBo
+ uIDv4+024LHZAETiRNDS8bKH6E+CMBwNio+k/zOZquK7JJripe/deo9VUz97DUlgbkOC
+ k6Yc0WsH4FnR9jZXjEJsh1HQ/+f7jZWfhplxQCU/3PYwotXaHCrWMQd8gXBQXRIL5Clm
+ 3a5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742667997; x=1743272797;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZhNWdVH7rGKEYdfMNYUC9R3f5vDCvXycghR+pyY/AlU=;
+ b=luPyTXSgJTbBXWD11bF6/mdmnPU4cajcsa3hAKBDq4Sky063bONEK3Y/RRNTK9Fffa
+ iMANkasGkZ9+1XYQwOkfVxMYRCgAwZD/dmaJat03G8UHkRO1mkezzjPSu+uE2tw7F0rN
+ KLsfwz9U0+DI3vq4FTeS2UBbKjClNJ+TP3nSWN4zY0X1XDhCRn06jca8kJjphVeK9og3
+ i/9P81RU7t2jwGFIv9G6fqfclM84B+0R4+MUQgXRd0PJZw9QpxcvBfwx1l+jBoXkiNUX
+ NB/6wp2y+cQ0nQsu4G12zXn0GwD2IabGTqNMVq/4RaD5P20k/HUG3C+e31zjoAH7kvRD
+ TrKg==
+X-Gm-Message-State: AOJu0YywzsoIgI6pAf/LoCth7swyUdKBkUNPQ4oDMHgssKEcW5ptT5KX
+ 0cQBIFQaSd//zxdkq71d/dhGV1kwmAW57LynjHTA2QuomYshfcTPQkKEYZW3jZQe5iyn7gb9h9b
+ sgRMUBf3KGt6OArjkHULyvxFdN6I=
+X-Gm-Gg: ASbGncv6FAUe9xyc9KyVZCekkCCwOmk1DX79WyEioL3LF0ZJVVh59Uc+Pf/FBRYVRYm
+ fQ6tMFLu0yPGy0kIZwQig+uh39mf8Sw/ERNVHL+dsA7jm39/v3u0zzunH1HsV8Xt2S7QpsRkxmC
+ vFFpN5VmkOuH7zaIPbQ8roXRPtG4QfmT9Na0BBKj7gPdmy7VFzmCidorBy
+X-Google-Smtp-Source: AGHT+IEsLB2NmSCIwyax/OMQgI/QmU3Vfuywkpc0e+RsagLfLHt8urWurP5Zn3pbB8N0RDVu5RAm2fAfdWJ6Z1e/qKw=
+X-Received: by 2002:a05:6512:1152:b0:545:2f9f:5f6a with SMTP id
+ 2adb3069b0e04-54ad647e35cmr2568629e87.14.1742667996925; Sat, 22 Mar 2025
+ 11:26:36 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/19] imx: add i.MX95 support
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, =?UTF-8?Q?Lothar_Wa=C3=9Fmann?=
- <LW@KARO-electronics.de>
-Cc: u-boot@lists.denx.de, Viorel Suman <viorel.suman@nxp.com>,
- Ye Li <ye.li@nxp.com>, Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Frank Li <Frank.Li@nxp.com>,
- Ji Luo <ji.luo@nxp.com>, Jindong Yue <jindong.yue@nxp.com>
-References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250319031852.233537-1-marex@denx.de>
+In-Reply-To: <20250319031852.233537-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 22 Mar 2025 15:26:25 -0300
+X-Gm-Features: AQ5f1JoSINfB3pySdVndn71IKCfPolFeaSn_H6OYJvGSCFKdlwwhNyBDxmh6VOc
+Message-ID: <CAOMZO5D+nigasmFrQEsLQ6cGgbJr_LcxXAiQoDP2U1hDdBO05g@mail.gmail.com>
+Subject: Re: [PATCH 00/24] clk: Add clk_resolve_parent_clk() and fix up iMX
+ clock drivers
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Peng Fan <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,43 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/21/25 8:15 AM, Alice Guo (OSS) wrote:
-> Changes for v7:
->   - separate i.MX Messaging Unit driver patch from this patch set
->   - add U_BOOT_SCMI_PROTO_DRIVER() to avoid putting i.MX related code in scmi_agent-uclass.c.
->   - update drivers/clk/clk_scmi.c according to comment
->   - dynamically allocate the size of struct scmi_base_discover_list_protocols_out
-> 
-> Changes for v8:
->   - add a comma to enum scmi_clock_message_id
->   - use readl_poll_timeout instead of while to avoid to silent hang in
->     disable_wdog()
->   - use the format "%pM" to print a MAC address
->   - use "%u" to match the data type u32
->   - add a comma enum imx8image_cmd, enum imx8image_core_type and so on
->   - add a line at end of container.cfg, imximage.cfg and imx95_19x19_evk.env
->   - update arch/arm/mach-imx/imx9/scmi/soc.c
-I added a couple of comments , I'm sorry this took so long.
+Hi Marek,
 
-I think the SCMI part is starting to be pretty good.
+On Wed, Mar 19, 2025 at 12:19=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+>
+> Add clk_resolve_parent_clk() to resolve parent clock udevice name
+> based on clock-names DT property. This is used in SoC clock drivers
+> to look up the clock name in clock tables, which matches a clock
+> name in DT clock-names property, and convert it into udevice name
+> which is used by U-Boot clock framework to look up parent clock in
+> e.g. clk_register() using uclass_get_device_by_name(UCLASS_CLK,
+> parent_name, &parent);
+>
+> Pass struct udevice pointer through the various iMX clock drivers.
 
-It might make sense to split off the SCMI parts and get that in first, 
-this way:
+This series conflicts with the recent i.MX UART clock work from Adam.
 
-Separate patch:
-[PATCH v8 01/19] firmware: scmi: smt: Interrupt communication enable
-
-Separate patch:
-[PATCH v8 09/19] scmi_protocols: update struct 
-scmi_base_discover_list_protocols_out
-
-Separate patchset:
-[PATCH v8 03/19] firmware: scmi_agent: add SCMI pin control protocol support
-...
-[PATCH v8 08/19] sandbox: add SCMI clock control permissions to sandbox
-
-And then the rest as a follow up series.
-
-This will allow you to reduce the size of the series and get the pieces 
-which are good in quickly, without having to resend them repeatedly as a 
-part of larger series. (and yes, it also makes reviewing easier)
+Please rebase and resend, thanks.
