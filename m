@@ -4,73 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAC74C36008
-	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 21:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13BCC35FFC
+	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 23:27:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C2B081E0F;
-	Sat, 22 Mar 2025 22:56:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E5401810FE;
+	Sun, 23 Mar 2025 00:27:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MHCPDhyX";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pCEPs3tz";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742686069;
+	bh=U/YFMLHztChrHKt1ifDHc0UZrHVwxfkguOB2QbHw0WM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=GV6+dG38DrPHHSaVnyxNDroDpBM02GPFd684kp84Y1x381Ezynd6urQiSATwvX1qx
+	 81CQrHK/VSQ8CbJQY78jf/Q0IMfkvuC/501NTBeSCFP03Vx4WnCvtfjkJwO7WRMzNJ
+	 IoO0B8fXkf8KV5+F8qVSbvMib+j1EyVnvUkaye9yVbPXqIXEZLXH/TXxZldSB0xCKT
+	 uLCRZV1nnQ7dhVOs2bQhSjWnHsiDsmPnLHrKnKPqsFLJp8OrSljuO4olXEGx3FvvYx
+	 S/5x+k7GLw2cBGqxQ/fwDRpRH6+lc8ZsorWH09OxTVh6g1+GpbUJZzoKqt1xMm7WYg
+	 mtqSLZgNbfHqA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DB1981219; Sat, 22 Mar 2025 22:56:55 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id B280D8197D; Sun, 23 Mar 2025 00:27:48 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6731381219
- for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 22:56:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BA2E80C93
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 00:27:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZKtSj0j6Nz9sdP;
- Sat, 22 Mar 2025 22:56:53 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742680613;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RgTIM8SEPbglHaaH+9iYiMDmXPoCEQgXByIQFLJjWt0=;
- b=MHCPDhyXgKhuvA4qHn8oVnOlU/tln+RUyYdQjrVLY3hoc/bZOjPFoQQCPsFZpZ4q+Bmbjs
- ZRRcI7CvCAHDvFnvAitP7k6RhJpZ7eB4PiLrg7UFRtNvBpFCngPLDOHpxe2Nm3NdJ34R8N
- P4ZUjMExDtcHVTj/nIDHxIkY06LxlEROhuOiU0KzTY1/SCHAyba0/gQEpX2bT37wd/pSZS
- 0xtEw67a1pxmRG9ORLFvJjmCGVFV2MdYBgDlxYx6BPszxXw7XLyyh2tOrGw+9eg6+jdp2M
- Zz37T8VLsIfFopkm1FNglbtemMsLVDwcEMUKuzDcURstoZehQq7/DEqEhVJkMA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742680610;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RgTIM8SEPbglHaaH+9iYiMDmXPoCEQgXByIQFLJjWt0=;
- b=pCEPs3tzPtW21/fRvcse1jl9wgCuBM5i9+QO/a5jF2Q0QNLArsOBi+pKtQooOsjD9YAIKX
- u3/c4tOIsVV0q1P5A621fPXiIwCEeFflnpHA7f19oJEeH7OOB0HO+rHLgixHX/EZ/86Hd1
- 0HTvhCsj1levYDQ6tD5TDnS939N07zZhhCf30/aDz3dyEbKxU1re9EU2uSZ1ecD5gnNgCL
- vHcN7IiCPm7tiiRV1RfPbow9J9UohMOtO74qdAkkBU0Lk94SgImEncWuAUMp54mdjOq6Sn
- PyfPhZB2CduDu0azyZzOHyNiPjST3yif1yKE1ohvQGt/LzfsI6Q13lGh6rVgFg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 8/8] env: Drop DELAY_ENVIRONMENT
-Date: Sat, 22 Mar 2025 22:55:28 +0100
-Message-ID: <20250322215624.18994-8-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
-References: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="VH9MJFjf"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 58A1E102E64C6; Sun, 23 Mar 2025 00:27:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742686065; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=U/YFMLHztChrHKt1ifDHc0UZrHVwxfkguOB2QbHw0WM=;
+ b=VH9MJFjfnYtkkW0jBxfJvTmzHJ/3aMTP/4ABRWGA28a5wMt3fHKoZamQzuxt68NMAWB4n5
+ i/Ndl7lfVW+UsHSDbjV1Cum7G5XI+FVbx/wdiqJ5U3q2N57vJAEMNyAvd0aOGo4yJ0Pw+P
+ 5mSZlqDzSArK5L4ZqPeKWBixrQVrwuHTKwTKnVNXxG7bp9OkV5fGEGrN3+zGFMz3NOT9Fp
+ uVYlYONHIrf5d+h1MbDDUJn8w0LLnKH4/73j0KT3k4E0EJJVAdQJCYxe+de/e1mjgZj1Hd
+ 8UUCGQOzVsgcPUP57mwRpy3xL9APjNv4hhvoJb3ti7+ABW3PFZdcZLptEuBh3Q==
+Message-ID: <f5ae3cd8-cf24-4620-81ff-10cf8d946c27@denx.de>
+Date: Sat, 22 Mar 2025 23:59:53 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 43b71b040677d250d00
-X-MBO-RS-META: wimi3o13e1uuppw3sgea9mwthgh8pzam
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: gadget: atmel: Add SAM9X60 support
+To: Zixun LI <admin@hifiphile.com>, Eugen Hristev <eugen.hristev@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de
+References: <20250322205625.1330306-1-admin@hifiphile.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250322205625.1330306-1-admin@hifiphile.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,80 +79,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are no users of DELAY_ENVIRONMENT and the same effect can
-be achieved either using DT /config/load-environment property,
-or by using ENV_IS_NOWHERE . Remove this configuration option
-and matching functionality.
+On 3/22/25 9:56 PM, Zixun LI wrote:
+> Add compatible "microchip,sam9x60-udc" and device tree binding.
+> Compared to SAM9X5 the only difference is the DPRAM memory from the
+> USB High Speed Device Port (UDPHS) hardware block was increased,
+> so we can reuse the same endpoint data.
+> 
+> Tested on SAM9X60-Curiosity board with nfs and ums commands.
+> 
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+Reviewed-by: Marek Vasut <marex@denx.de>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
----
- README           |  9 ---------
- common/board_r.c |  3 ---
- env/Kconfig      | 12 ------------
- 3 files changed, 24 deletions(-)
-
-diff --git a/README b/README
-index 334bbcf0dd1..bada9beef7f 100644
---- a/README
-+++ b/README
-@@ -962,15 +962,6 @@ The following options need to be configured:
- 		the environment like the "source" command or the
- 		boot command first.
- 
--		CONFIG_DELAY_ENVIRONMENT
--
--		Normally the environment is loaded when the board is
--		initialised so that it is available to U-Boot. This inhibits
--		that so that the environment is not available until
--		explicitly loaded later by U-Boot code. With CONFIG_OF_CONTROL
--		this is instead controlled by the value of
--		/config/load-environment.
--
- - Automatic software updates via TFTP server
- 		CONFIG_UPDATE_TFTP
- 		CONFIG_UPDATE_TFTP_CNT_MAX
-diff --git a/common/board_r.c b/common/board_r.c
-index 3e2916db8c7..37259ddac36 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -442,9 +442,6 @@ static int should_load_env(void)
- 	if (IS_ENABLED(CONFIG_OF_CONTROL))
- 		return ofnode_conf_read_int("load-environment", 1);
- 
--	if (IS_ENABLED(CONFIG_DELAY_ENVIRONMENT))
--		return 0;
--
- 	return 1;
- }
- 
-diff --git a/env/Kconfig b/env/Kconfig
-index d951ec190f7..092070ab01c 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -736,18 +736,6 @@ config ENV_VARS_UBOOT_RUNTIME_CONFIG
- 	  run-time determined information about the hardware to the
- 	  environment.  These will be named board_name, board_rev.
- 
--config DELAY_ENVIRONMENT
--	bool "Delay environment loading"
--	depends on !OF_CONTROL
--	help
--	  Enable this to inhibit loading the environment during board
--	  initialization. This can address the security risk of untrusted data
--	  being used during boot. Normally the environment is loaded when the
--	  board is initialised so that it is available to U-Boot. This inhibits
--	  that so that the environment is not available until explicitly loaded
--	  later by U-Boot code. With CONFIG_OF_CONTROL this is instead
--	  controlled by the value of /config/load-environment.
--
- config ENV_IMPORT_FDT
- 	bool "Amend environment by FDT properties"
- 	depends on OF_CONTROL
--- 
-2.47.2
-
+Thanks !
