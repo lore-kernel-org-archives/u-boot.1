@@ -4,60 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4160C36001
-	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 01:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36F0AC36001
+	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 02:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8ACD8082A;
-	Sat, 22 Mar 2025 02:45:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 436388197D;
+	Sat, 22 Mar 2025 03:49:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742607901;
-	bh=4XhCGRoxHOezEvb26Ot165gcQtetIlM79uWPEDJauMs=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=IJbWcWxBAR1zdXVbT1AM80uyJnxnoL+RyZ3Yz8WlO98KKLLniteEGoAJ0lLnDH3kJ
-	 NBcv65DRXfN/h5UQcMJ0eTvZTTKwZOByi7h1qTtM2ivxqATHXeqTLhajjjY3NrG99P
-	 kEgVUmpH0p7dhjjHui+kj7wLLE291bZKJQIO3gNgw+szyRnvFRzheBn1rN3++VHOXt
-	 RuzdDQ2igicgVduQcddjW4HnvZDNn4c8bplsBUKzhTwX1g9AWfQM6uwDzrXsMOM68K
-	 SpWUg9ucZFAEemY2KPeeoGIK3OVGsoDWf+9fuoDo8AUqpW8NNo5DCfyrpjeL3yWaYQ
-	 mRqsKjtDzkKkw==
+	s=phobos-20191101; t=1742611792;
+	bh=p8nHAA8L9EU8DkIHE1DVMt/YUVTmWqT0W1o2rWwyJTw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=fNmU/2i372g39tDddYOQJdivhHmQHrB1Si51R3kmZzmXEBSOFeVmLIY2Limb2XC4a
+	 YAGv8RJXax/8F33mfNsVFYProAPN23Xq+jaLh2MyDoy1sZTXRzaW44gOAx2JO/0REy
+	 btd/h9lSMm2mPE6+9HpkBw9tK3Y4PIwfE8Ao1D4IHaOpE4tFPNj76Er9t36ZhXyzuO
+	 K3M1BpR64XR20N+wFjF2je0PSmdL0IQRnJuug0XzW+kjHNu6M3pkVDYb5jWumRPYw2
+	 /KUWaI8kt/TBzU+0SLx4JA1fiHmm5EPoiFRxYcxwqA+2VbWJ0GG0wmU4GTZqSNUNXM
+	 i2VdMv/jo2AHw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE52D808A2; Sat, 22 Mar 2025 02:45:00 +0100 (CET)
+ id D5A9F811AC; Sat, 22 Mar 2025 03:49:49 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85B67806FC
- for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 02:44:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96EE6806FC
+ for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 03:49:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="BrdYIjnc"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="ct10CpdR"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8E657101E8F43; Sat, 22 Mar 2025 02:44:54 +0100 (CET)
+ with ESMTPSA id 27936101E90A4; Sat, 22 Mar 2025 03:49:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742607896; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=4XhCGRoxHOezEvb26Ot165gcQtetIlM79uWPEDJauMs=;
- b=BrdYIjncbf8nbUW3sKb14Npx5ZuGIO1xQ/zfoPkz6xJfbZHIFfnkANj7N2cZ9zuUOd9gS5
- 8ofAp5HypbzBF5Mm+6NyTtS0IWlW5T4E0p9rPpWy+5mvzanLGoxTeIuzVlNpORdBULKj+K
- /rFBl+21460ysy1+WA1jfIzRynxTEagznHLmSUgFJPw/8mGeTL9E6dqzQ5x19YWH7wNnhg
- VB5/Rv2PnDYp1zYFOobp2Nk9KMD0E2z7+VG27d25/d8lpZyzXqT91uy/12MZJ6iZulmN7k
- A5/FQpxVyJjTtdPRYuq50zTM30pmI06uBIY+VgoY6N65/xEv6zgopW7+MTgxgw==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] power: regulator: scmi: Move regulator subnode hack to
- scmi_regulator
-Date: Sat, 22 Mar 2025 02:44:40 +0100
-Message-ID: <20250322014444.174796-1-marex@denx.de>
-X-Mailer: git-send-email 2.47.2
+ t=1742611786; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=p8nHAA8L9EU8DkIHE1DVMt/YUVTmWqT0W1o2rWwyJTw=;
+ b=ct10CpdRwhw5lLaVWrWaBZ0H9a756L88le6AoKicVihsPP/GXEVUl3GsN/i3jCE4On10DR
+ KVvG13dA5xEKoDzPPf1+/79qW8OwrOwzuDq5gyz0NYr85wTMM1wAjDvD+Y0XYcbONA1yGN
+ aLGHb0gCp8KNTnSp03W/FSA9IB1u34bqACMSpywIgkViewC8LbNWSHb34SvsoYB+VHeJCt
+ 6UXiK7r2/hOTFppIjtb5ohVGzwiFQZ46myiK4FTr6FX93aJiZAiCyMWEHijAVcPjqeOiqf
+ bzVaLD571u4uhv/5zAQa4RiTCdwgzNMNg6+PrAhnQX0xcoo2akZX88zknHZrog==
+Message-ID: <f7f99759-abd7-410f-a03b-62edc9e2c22f@denx.de>
+Date: Sat, 22 Mar 2025 01:34:50 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW1BBVENIIHY3IDEwLzE5XSBpbXg5OiBzY21pOiBh?=
+ =?UTF-8?Q?dd_i=2EMX95_SoC_and_clock_related_code?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+References: <20250305-imx95-v1-0-286d15acbb8a@oss.nxp.com>
+ <20250305-imx95-v1-10-286d15acbb8a@oss.nxp.com>
+ <20250306064158.4d7d708b@karo-electronics.de>
+ <PAXPR04MB9644314215ECF61DAFA6E14AE2DB2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <PAXPR04MB9644314215ECF61DAFA6E14AE2DB2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,62 +89,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current code attempts to bind scmi_voltage_domain to regulator subnode
-of the SCMI protocol node, so scmi_voltage_domain can then bind regulators
-directly to subnodes of its node. This kind of behavior should not be in
-core code, move it into scmi_voltage_domain driver code. Let the driver
-descend into regulator node and bind regulators to its subnodes.
+On 3/21/25 8:17 AM, Alice Guo (OSS) wrote:
 
-Fixes: 1f213ee4dbf2 ("firmware: scmi: voltage regulator")
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/firmware/scmi/scmi_agent-uclass.c | 8 +-------
- drivers/power/regulator/scmi_regulator.c  | 6 ++++++
- 2 files changed, 7 insertions(+), 7 deletions(-)
+[...]
 
-diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index 8c907c3b032..e6e43ae936a 100644
---- a/drivers/firmware/scmi/scmi_agent-uclass.c
-+++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -427,14 +427,8 @@ static int scmi_bind_protocols(struct udevice *dev)
- 			break;
- 		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
- 			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI) &&
--			    scmi_protocol_is_supported(dev, protocol_id)) {
--				node = ofnode_find_subnode(node, "regulators");
--				if (!ofnode_valid(node)) {
--					dev_err(dev, "no regulators node\n");
--					return -ENXIO;
--				}
-+			    scmi_protocol_is_supported(dev, protocol_id))
- 				drv = DM_DRIVER_GET(scmi_voltage_domain);
--			}
- 			break;
- 		default:
- 			break;
-diff --git a/drivers/power/regulator/scmi_regulator.c b/drivers/power/regulator/scmi_regulator.c
-index 99f6506f162..2550b27246f 100644
---- a/drivers/power/regulator/scmi_regulator.c
-+++ b/drivers/power/regulator/scmi_regulator.c
-@@ -178,6 +178,12 @@ static int scmi_regulator_bind(struct udevice *dev)
- 	ofnode node;
- 	int ret;
- 
-+	node = ofnode_find_subnode(node, "regulators");
-+	if (!ofnode_valid(node)) {
-+		dev_err(dev, "no regulators node\n");
-+		return -ENXIO;
-+	}
-+
- 	drv = DM_DRIVER_GET(scmi_regulator);
- 
- 	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
--- 
-2.47.2
-
+>>> diff --git a/arch/arm/mach-imx/imx9/scmi/clock.c
+>> b/arch/arm/mach-imx/imx9/scmi/clock.c
+>>> new file mode 100644
+>>> index 0000000000..9ebd380976
+>>> --- /dev/null
+>>> +++ b/arch/arm/mach-imx/imx9/scmi/clock.c
+>>> @@ -0,0 +1,105 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * Copyright 2025 NXP
+>>> + */
+>>> +
+>>> +#include <asm/arch/clock.h>
+>>> +#include <dm/uclass.h>
+>>> +#include <scmi_agent.h>
+>>> +#include "../../../../../dts/upstream/src/arm64/freescale/imx95-clock.h"
+>>>
+>> "Interesting" include path...
+>> Shouldn't this file be located under dts/upstream/include/dt-bindings/ like all the
+>> other imx*-clock.h files?
+>> Then the file should be picked up via
+>> #include <dt-bindings/imx95-clock.h>
+> 
+> Hi,
+> 
+> imx95-clock.h is not in this directory dts/upstream/include/dt-bindings/.
+I noticed this odd location of imx95-clock.h in Linux too , it is not in 
+the include/dt-bindings directory . Why is that ?
