@@ -4,65 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13BCC35FFC
-	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 23:27:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26044C35FFC
+	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 23:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5401810FE;
-	Sun, 23 Mar 2025 00:27:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4B50881A0C;
+	Sun, 23 Mar 2025 00:31:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742686069;
-	bh=U/YFMLHztChrHKt1ifDHc0UZrHVwxfkguOB2QbHw0WM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=GV6+dG38DrPHHSaVnyxNDroDpBM02GPFd684kp84Y1x381Ezynd6urQiSATwvX1qx
-	 81CQrHK/VSQ8CbJQY78jf/Q0IMfkvuC/501NTBeSCFP03Vx4WnCvtfjkJwO7WRMzNJ
-	 IoO0B8fXkf8KV5+F8qVSbvMib+j1EyVnvUkaye9yVbPXqIXEZLXH/TXxZldSB0xCKT
-	 uLCRZV1nnQ7dhVOs2bQhSjWnHsiDsmPnLHrKnKPqsFLJp8OrSljuO4olXEGx3FvvYx
-	 S/5x+k7GLw2cBGqxQ/fwDRpRH6+lc8ZsorWH09OxTVh6g1+GpbUJZzoKqt1xMm7WYg
-	 mtqSLZgNbfHqA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HPJIe78w";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B280D8197D; Sun, 23 Mar 2025 00:27:48 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 4AF728197D; Sun, 23 Mar 2025 00:31:14 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BA2E80C93
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 00:27:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 36D3880C93
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 00:31:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="VH9MJFjf"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 58A1E102E64C6; Sun, 23 Mar 2025 00:27:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742686065; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=U/YFMLHztChrHKt1ifDHc0UZrHVwxfkguOB2QbHw0WM=;
- b=VH9MJFjfnYtkkW0jBxfJvTmzHJ/3aMTP/4ABRWGA28a5wMt3fHKoZamQzuxt68NMAWB4n5
- i/Ndl7lfVW+UsHSDbjV1Cum7G5XI+FVbx/wdiqJ5U3q2N57vJAEMNyAvd0aOGo4yJ0Pw+P
- 5mSZlqDzSArK5L4ZqPeKWBixrQVrwuHTKwTKnVNXxG7bp9OkV5fGEGrN3+zGFMz3NOT9Fp
- uVYlYONHIrf5d+h1MbDDUJn8w0LLnKH4/73j0KT3k4E0EJJVAdQJCYxe+de/e1mjgZj1Hd
- 8UUCGQOzVsgcPUP57mwRpy3xL9APjNv4hhvoJb3ti7+ABW3PFZdcZLptEuBh3Q==
-Message-ID: <f5ae3cd8-cf24-4620-81ff-10cf8d946c27@denx.de>
-Date: Sat, 22 Mar 2025 23:59:53 +0100
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ZKwYV0sYQz9scX;
+ Sun, 23 Mar 2025 00:31:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1742686270;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/TDdX+Ps695FCI6W9KP+ayHGfW0DF/Y6aLV4WBt9J8Y=;
+ b=HPJIe78wLdpibeaMkX3a0HRvnyfPhCN0ZKiq0rnoU0HgYmnFEIEfksikH4RndxbfL+mI+I
+ r1k86sf/UKn5+JbC36we5r3jTZN53T8LHXDQRBr+onUqGgq5SqxZDlsG6lCtFWNUIfdxBL
+ /57KFPAGPmMaQZPM1xaoUtUu/n94Izt7J/lMoPIcEe6m/4as9JcqQyp+SyFL5hyFHvlicF
+ LIuM3fBPUEa9MGiFVhOHC9aBCyQIhDdMI8QczdueV8gLuA+XgmwRKpf7xorSX6EFMHE6/x
+ 10k8EWpeHLGFVRyWruR8HnqLXE63lDcPmMJeJHBHfWOGqneYS9g18G7fDmib7g==
+Message-ID: <94f1042d-df9e-4864-bae2-e69a257df88d@mailbox.org>
+Date: Sun, 23 Mar 2025 00:29:34 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: gadget: atmel: Add SAM9X60 support
-To: Zixun LI <admin@hifiphile.com>, Eugen Hristev <eugen.hristev@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de
-References: <20250322205625.1330306-1-admin@hifiphile.com>
+Subject: Re: [PATCH V3 1/6] imx: imx9: Imply IMX_TMU
+To: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de
+Cc: aford@beaconembedded.com, festevam@gmail.com,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
+ Peng Fan <peng.fan@nxp.com>, Yannic Moog <y.moog@phytec.de>,
+ Sumit Garg <sumit.garg@kernel.org>, Gilles Talis <gilles.talis@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Christoph Stoidner
+ <c.stoidner@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20250322183812.784676-1-aford173@gmail.com>
+ <20250322183812.784676-2-aford173@gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250322205625.1330306-1-admin@hifiphile.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250322183812.784676-2-aford173@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-META: oy9rroueprpnsi9q9xumc3w78obh64pr
+X-MBO-RS-ID: 6ecd832d9f860095620
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,15 +84,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/22/25 9:56 PM, Zixun LI wrote:
-> Add compatible "microchip,sam9x60-udc" and device tree binding.
-> Compared to SAM9X5 the only difference is the DPRAM memory from the
-> USB High Speed Device Port (UDPHS) hardware block was increased,
-> so we can reuse the same endpoint data.
+On 3/22/25 7:38 PM, Adam Ford wrote:
+> If the CPU Information is displayed from imx8_cpu, it displays
+> the cpu temperature grade and operating temperature if
+> CONFIG_IMX9 is defined. This behavior is similar to what
+> happens arch/arm/mach-imx/cpu.c except that the latter
+> checks for CONFIG_IMX_THERMAL or CONFIG_IMX_TMU.
+> In preparation to make imx8_cpu act like the previous
+> implementation for any CPU, make IMX9 imply IMX_TMU, so
+> it will be always displayed unless a user decides to
+> disable it.
 > 
-> Tested on SAM9X60-Curiosity board with nfs and ums commands.
-> 
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
-
-Thanks !
+> Signed-off-by: Adam Ford <aford173@gmail.com>
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
