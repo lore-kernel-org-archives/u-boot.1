@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20EFFC36001
-	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 02:50:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D45C36001
+	for <u-boot@archiver.kernel.org>; Sat, 22 Mar 2025 02:50:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD95C81D6A;
-	Sat, 22 Mar 2025 03:49:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F8BE80ECC;
+	Sat, 22 Mar 2025 03:50:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742611797;
-	bh=J52vn6Y/CrtIoX5LVCw7hD5f9gsIrNAttRna9CH1klo=;
+	s=phobos-20191101; t=1742611801;
+	bh=KRi6biwGbmz/xx918GDoIf4ekkXaoRHU77EgDcQkhpE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZLOWMnymNgO+jQ/NVj3Y9l/Po4RE+r+zEZiaZ1M/EMg59vgRbFMakQs7H4TobBSeA
-	 bWHGGrxh1xmBuLpD1eBTZN8paYY1QtcaTPDfpyd8iWiZsxEZhb3QNg/C0RwZP/LryU
-	 jDRYrl5GylJB4GtyWk/SMgpwwfEggRMxT+WFAexEIDQNNZuTKmbVapWlMbLbo4TPGn
-	 MXIRipmFlSbwOKRA5vNY+scfIBhHjh+Hy+CYMBjf/uPjdHBL0q3XkVfOkvFxJ/BVyu
-	 vsvYIii0gEDYQQF04EJ9gn/FlUwlBgwkGr/uLRHsloqAdZH0nfz/W66R0B+dpV29fQ
-	 Ar2Axt0KkHRgA==
+	b=PnbvhzIS3hxdxrd/QONxW2m9bYWyBMkARgOy7/okAdddCgUjmPCi1ioRIV1c1uAQl
+	 KWjONmZ6FJhWvtMVpFZ2uelsZltySJG6hKCo7kOijIH1ZdBXz3YxbI2lsEv9h+wjgZ
+	 isnsLBg9NP/58DYVd3ysn4ROEJuF/qfdRucFNmeTmmpLMXdCplHIXMO6xuUAQ7ykdQ
+	 m0lC6QrznPD+3fXVEmfmby7GCiA2EILUTNA01JIDrTPGYDLgom5WCnpxj88VysKhjN
+	 O7OD0WR8BAtadC3NrV9pLbGrgNvpvGz55PLJlXMKncbB12/yHzNbGAagFLSjFJRYHs
+	 CSwWxLoi3et/A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B10F281219; Sat, 22 Mar 2025 03:49:56 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 2224581DCC; Sat, 22 Mar 2025 03:49:58 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B8E5806FC
- for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 03:49:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3170E81CA8
+ for <u-boot@lists.denx.de>; Sat, 22 Mar 2025 03:49:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="EXjlWu4U"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="RiuxInM8"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1E5FD101E8F4B; Sat, 22 Mar 2025 03:49:52 +0100 (CET)
+ with ESMTPSA id 5B996101E8F4C; Sat, 22 Mar 2025 03:49:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742611793; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1742611795; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=J52vn6Y/CrtIoX5LVCw7hD5f9gsIrNAttRna9CH1klo=;
- b=EXjlWu4UrS/7gZj0HCkm7XuGTJJF3tRABPbFxiHk6x7JxBRDvXPfdDYkvv9ATOLvy/7rjj
- NIYmIQLpT7lg1jvTEREG9hsGyGmlkE4uE+OOZJlokp386UI/vDrdxGYi7kXvh76G98kpin
- ZBOXgeNVEmi8s0nF//5tsSefB+l5ea2yhUCXZP1rBb4S9CDMZu1lrDg6b9ZVjAUOk24RmQ
- wYMdnXn6iIsakcn0J/4fis5fwKVMhXn2cfI8v+i+czEqt1EIzGa1JfX5jiZwklR7blLsdf
- kHtRC0zxWFPpsuEPd5ZIQoohEwgBl0bA275HCl5W6wFStpImoOQPZ5J4Ae51rQ==
-Message-ID: <1fc6938f-d132-4227-9198-45a581f00a84@denx.de>
-Date: Sat, 22 Mar 2025 02:55:31 +0100
+ bh=KRi6biwGbmz/xx918GDoIf4ekkXaoRHU77EgDcQkhpE=;
+ b=RiuxInM8LIN7eew9JfykuYovoOeyxK5kOiJiCfEOYt6UlbM2vdExUI7RmEb02l/y+sbviI
+ D5zn+qxAI8QjnwLhqaxrTPQiB4R4YICf1/5t4pVDDK+Wma7unGhJMCBnp8K2nC4tbXqnhr
+ nOdNL84mhsNqByv+PIYuBXU4ilOUwfsjyrPrWygJWNSX9vKdd/NQJ3iA+CRZrcfQvIQ1mg
+ oVZ8LScrrqEqWQMZLMfv3txSKxUv7+OvCs44eRABz6PtV5DfnSFxFKC8FjSUI7WTbONw0l
+ wFZyphf8FgbaYj1/FAqISEhOZBS+jFxBr/5aXSuZo2noAbLZEcIqd/GVMiRCPg==
+Message-ID: <766ea9e3-3ef0-4763-8e8d-c6341db08958@denx.de>
+Date: Sat, 22 Mar 2025 02:55:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 04/19] scmi_protocols: add SCMI misc protocol
- protocol_id and message_id for getting the ROM passover data
+Subject: Re: [PATCH v8 05/19] scmi_protocols: add SCMI Performance domain
+ management protocol message IDs
 To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
@@ -62,10 +63,10 @@ To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
  <LW@KARO-electronics.de>
 Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
 References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
- <20250321-imx95-v1-4-f2c8ba815f89@oss.nxp.com>
+ <20250321-imx95-v1-5-f2c8ba815f89@oss.nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250321-imx95-v1-4-f2c8ba815f89@oss.nxp.com>
+In-Reply-To: <20250321-imx95-v1-5-f2c8ba815f89@oss.nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -88,8 +89,8 @@ X-Virus-Status: Clean
 On 3/21/25 8:15 AM, Alice Guo (OSS) wrote:
 > From: Peng Fan <peng.fan@nxp.com>
 > 
-> SCMI misc protocol is intended for miscellaneous functions which are
-> device specific and are usually defined to access bit fields. It is i.MX
-> specific. This patch adds SCMI misc protocol protocol_id and message_id
-> for getting the ROM passover data.
+> SCMI Performance domain management protocol is intended for performance
+> management of groups of devices or APs that run in the same performance
+> domain. The functionality provided by the callee-side can be used by
+> passing the corresponding message_id.
 Reviewed-by: Marek Vasut <marex@denx.de>
