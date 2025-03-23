@@ -4,91 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC16EC28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 22:52:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE4BC28B30
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 23:51:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC2DB81DAB;
-	Sun, 23 Mar 2025 23:51:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B21DD8192A;
+	Mon, 24 Mar 2025 00:51:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nQfYqPbE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC8A681D6A; Sun, 23 Mar 2025 23:51:49 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1033581D6A
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 23:51:47 +0100 (CET)
+ id 74D1C8192A; Mon, 24 Mar 2025 00:51:08 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id D39068186D
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 00:51:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=anarsoul@gmail.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-224341bbc1dso67406325ad.3
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 15:51:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742770305; x=1743375105; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H2sXulyxPB3N4fjpa93jo8vCrrmK5e0u/suSilYXl8E=;
- b=nQfYqPbEkcamttL6Jt09IbUkaklpmS5/r3AStkPHRnPYwXbMYll2pT7KpewbtK2GTK
- JZ7u8L+sI+OaFSPeBZb++a4dAyc7nSpIw+Hjc7iFNA36cLfuNpH5w+Efj0kj4cZ3g59Q
- g30b/55FfSkhRqOg0kkXsOAW7u5u+yhhp3T3KTmwioj/WM+/xnFpjmAOKRxqppXs2ypE
- MhdYNX5EJm8vOOXvpR9CqTYSxbqXFc68vj/cfeoVEvmflN0mTdfVr+FxfuiPuxrL+2/c
- PuCBnjq/NFyqKSYnfrvqC8wksHJEaXlP/hUUwDqX4B4W3yTHEmT72PO6ldLF6RkZ8scC
- 6ZdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742770305; x=1743375105;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H2sXulyxPB3N4fjpa93jo8vCrrmK5e0u/suSilYXl8E=;
- b=ZfM/iUE/ejiW3bSCqalU68KRwmSWPf1SOJ+L2djlkfEGB9DWJsKAiZC67TQEa5VQ0g
- I6O26ldTonKwctfBwbcZpbI4u7+wSy4NO3tBEzC60DClVkAh69CdUZPdfqrXCOKKQFij
- SjmgjqZUT6I7rh9/qUrEQEPiWs1bEjhKWgrf/cLhkfUl1VcC01DCCyYDemtwwAUfZM2Z
- +L43AbH+TWZliC6bAczwEzEHMqxv+mXhybMXCbhG+lFTGR6aZHTJiQx2FTzQcWFhR/fk
- 1Z2BKPVlMl6PCwNOSIOU+rYFXS40Q7C8r8E7XJX+kHA4r8Sojg7a6TR7qnliSW+2XQnn
- YwTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUuVYkKL8ZCuvS1vI6tNN77XZVbx4cd6khGqRGMQkVod8liVuWTc8iNISQZhMbWhRTWBh75d6U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcKeSEQ+bwGDbbUxjjAxvkXwEZD/zLUaLvDjToT5fPbIRCaFty
- M/YfWOV+dxFk9Iile7+TZq3A4srZlvF+TL3DRZiC4V/kXTC2nYbn
-X-Gm-Gg: ASbGncuGqMi/NvZnKaVyU3pbBujl1eZ3lv/AesdF1BjIZCfEC35Y1o6yb21kSHtkogo
- 1t9WTCeF3CvZhNuLDK955cqQhrsiosbs7FZrUA4Cj5y+VCkNeni/UIdEBRPFPw4a4VvW1B+USX8
- jYU+jTCAg8GmHixCYv0pfOj+Fmc7kCpiX8GE5q1isfJE1D/FXkyRiUo2P7MNbi8PockUoWEKtVd
- cNyScb0hJ8z26VXuMakxMN5lUkwfEHipsXnrXJeACe+/A2dBYu2j2cFqKrZakKWlyNGklpD1lnP
- /3OniJi3ihVQXXucR7+Z+MnI9ZJEliQz7JIQ
-X-Google-Smtp-Source: AGHT+IHNGY/jGOnCM9U6iP7bWBkgu+/gAr7yHkBpAl2gosQSGMJWf3NUwZ0VQK0CpRyAzxIZN2vSVg==
-X-Received: by 2002:aa7:8883:0:b0:736:3be3:3d77 with SMTP id
- d2e1a72fcca58-73905a276a9mr16719082b3a.16.1742770305487; 
- Sun, 23 Mar 2025 15:51:45 -0700 (PDT)
-Received: from anarsoul-xps15.lan ([2001:569:7d4f:2900::398])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73905fab628sm6368536b3a.6.2025.03.23.15.51.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Mar 2025 15:51:44 -0700 (PDT)
-From: Vasily Khoruzhick <anarsoul@gmail.com>
-To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Anatolij Gustschin <agust@denx.de>,
- Jagan Teki <jagan@edgeble.ai>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de
-Cc: Vasily Khoruzhick <anarsoul@gmail.com>
-Subject: [PATCH v2 3/3] rockchip: rock64-rk3328_defconfig: enable HDMI output
- and USB keyboard
-Date: Sun, 23 Mar 2025 15:50:58 -0700
-Message-ID: <20250323225134.2369473-3-anarsoul@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250323225134.2369473-1-anarsoul@gmail.com>
-References: <20250323225134.2369473-1-anarsoul@gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 99E8C106F;
+ Sun, 23 Mar 2025 16:51:11 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3207B3F58B;
+ Sun, 23 Mar 2025 16:51:04 -0700 (PDT)
+Date: Sun, 23 Mar 2025 23:50:27 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Mikhail
+ Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 01/34] sunxi: clock: H6: drop usage of struct sunxi_ccm_reg
+Message-ID: <20250323235027.5d0f34d3@minigeek.lan>
+In-Reply-To: <4995090.31r3eYUQgx@jernej-laptop>
+References: <20250323113544.7933-1-andre.przywara@arm.com>
+ <20250323113544.7933-2-andre.przywara@arm.com>
+ <4995090.31r3eYUQgx@jernej-laptop>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,58 +59,262 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable HDMI output and USB keyboard on Rock64 board
+On Sun, 23 Mar 2025 12:56:55 +0100
+Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
----
-v2: no change
+Hi Jernej,
 
- configs/rock64-rk3328_defconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+thanks for having a look!
 
-diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
-index 6d00b52e62f..ae3512625cf 100644
---- a/configs/rock64-rk3328_defconfig
-+++ b/configs/rock64-rk3328_defconfig
-@@ -21,7 +21,9 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
-@@ -72,6 +74,7 @@ CONFIG_DM_ETH_PHY=y
- CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
-@@ -80,6 +83,8 @@ CONFIG_PMIC_RK8XX=y
- CONFIG_SPL_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_SPL_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_SPL_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
-@@ -104,6 +109,11 @@ CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_VIDEO=y
-+CONFIG_DISPLAY=y
-+CONFIG_VIDEO_ROCKCHIP=y
-+CONFIG_DISPLAY_ROCKCHIP_HDMI=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
--- 
-2.49.0
+> Dne nedelja, 23. marec 2025 ob 12:35:11 Srednjeevropski standardni =C4=8D=
+as je Andre Przywara napisal(a):
+> > U-Boot drivers often revert to using C structures for modelling hardware
+> > register frames. This creates some problems:
+> > - A "struct" is a C language construct to group several variables
+> >   together. The details of the layout of this struct are partly subject
+> >   to the compiler's discretion (padding and alignment).
+> > - The "packed" attribute would force a certain layout, but we are not
+> >   using it.
+> > - The actual source of information from the data sheet is the register
+> >   offset. Here we create an artificial struct, carefully tuning the
+> >   layout (with a lot of reserved members) to match that offset. To help
+> >   with correctness, we put the desired information as a *comment*,
+> >   though this is purely for the human reader, and has no effect on the
+> >   generated layout. This sounds all very backwards.
+> > - Using a struct suggests we can assign a pointer and then access the
+> >   register content via the members. But this is not the case, instead
+> >   every MMIO register access must go through specific accessor function=
+s,
+> >   to meet the ordering and access size guarantees the hardware requires.
+> > - We share those structs in code shared across multiple SoC families,
+> >   though most SoCs define their own version of the struct. Members must
+> >   match in their name, across every SoC, otherwise compilation will fai=
+l.
+> >   We work around this with even more #ifdefs in the shared code.
+> > - Some SoCs have an *almost* identical layout, but differ in a few
+> >   registers. This requires hard to maintain #ifdef's in the struct
+> >   definition.
+> > - Some of the register frames are huge: the H6 CCU device defines 127
+> >   registers. We use 15 of them. Still the whole frame would need to be
+> >   described, which is very tedious, but for no reason.
+> > - Adding a new SoC often forces people to decide whether to share an
+> >   existing struct, or to create a new copy. For some cases (say like 80%
+> >   similarity) this works out badly either way.
+> >=20
+> > The Linux kernel heavily frowns upon those register structs, and instead
+> > uses a much simpler solution: #define REG_NAME	<offset>
+> > This easily maps to the actual information from the data sheet, and can
+> > much simpler be shared across multiple SoCs, as it allows to have all
+> > SoC versions visible, so we can use C "if" statements instead of #ifdef=
+'s.
+> > Also it requires to just define the registers we need, and we can use
+> > alternative locations for some registers much more easily.
+> >=20
+> > Drop the usage of "struct sunxi_ccm_reg" in the H6 SPL clock code, by
+> > defining the respective register names and their offsets, then adding
+> > them to the base pointer.
+> > We cannot drop the struct definition quite yet, as it's also used in
+> > other drivers, still.
+> >=20
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > ---
+> >  .../include/asm/arch-sunxi/clock_sun50i_h6.h  | 12 +++++
+> >  arch/arm/mach-sunxi/clock_sun50i_h6.c         | 52 +++++++++----------
+> >  2 files changed, 36 insertions(+), 28 deletions(-)
+> >=20
+> > diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/a=
+rm/include/asm/arch-sunxi/clock_sun50i_h6.h
+> > index 76dd33c9477..a485e00f1f3 100644
+> > --- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+> > +++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+> > @@ -13,6 +13,18 @@
+> >  #include <linux/bitops.h>
+> >  #endif
+> > =20
+> > +#define CCU_H6_PLL1_CFG			0x000
+> > +#define CCU_H6_PLL5_CFG			0x010
+> > +#define CCU_H6_PLL6_CFG			0x020
+> > +#define CCU_H6_CPU_AXI_CFG		0x500
+> > +#define CCU_H6_PSI_AHB1_AHB2_CFG	0x510
+> > +#define CCU_H6_AHB3_CFG			0x51c
+> > +#define CCU_H6_APB1_CFG			0x520
+> > +#define CCU_H6_APB2_CFG			0x524
+> > +#define CCU_H6_MBUS_CFG			0x540
+> > +#define CCU_H6_UART_GATE_RESET		0x90c
+> > +#define CCU_H6_I2C_GATE_RESET		0x91c =20
+>=20
+> I appreciate this work very much and thanks for doing it!
+
+Ah, great, I was hoping for this kind of feedback. I voiced my concern
+about this many years ago, but this was met with some reservations back
+then.
+
+> However, I
+> have just one more request - PLL1, PLL5, PLL6 and similar names are
+> relics of very old Allwinner SoC drivers. IMO it would be better to follow
+> names from user manual. This would lower confusion what are they to
+> uninitiated people.
+
+I agree, and that's literally patch 37/34 of that branch I took this
+series from ;-), so stay tuned for that. The reason this is not in here
+or before is that it affects all SoCs, and I wanted to keep that
+separate and not blocking the A523 series.
+
+Cheers,
+Andre
+
+>=20
+> Best regards.
+> Jernej
+>=20
+> > +
+> >  struct sunxi_ccm_reg {
+> >  	u32 pll1_cfg;		/* 0x000 pll1 (cpux) control */
+> >  	u8 reserved_0x004[12];
+> > diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunx=
+i/clock_sun50i_h6.c
+> > index b424a7893ea..482d9e0c695 100644
+> > --- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
+> > +++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+> > @@ -6,8 +6,7 @@
+> >  #ifdef CONFIG_XPL_BUILD
+> >  void clock_init_safe(void)
+> >  {
+> > -	struct sunxi_ccm_reg *const ccm =3D
+> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
+> >  	struct sunxi_prcm_reg *const prcm =3D
+> >  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> > =20
+> > @@ -32,60 +31,59 @@ void clock_init_safe(void)
+> > =20
+> >  	clock_set_pll1(408000000);
+> > =20
+> > -	writel(CCM_PLL6_DEFAULT, &ccm->pll6_cfg);
+> > -	while (!(readl(&ccm->pll6_cfg) & CCM_PLL6_LOCK))
+> > +	writel(CCM_PLL6_DEFAULT, ccm + CCU_H6_PLL6_CFG);
+> > +	while (!(readl(ccm + CCU_H6_PLL6_CFG) & CCM_PLL6_LOCK))
+> >  		;
+> > =20
+> > -	clrsetbits_le32(&ccm->cpu_axi_cfg, CCM_CPU_AXI_APB_MASK | CCM_CPU_AXI=
+_AXI_MASK,
+> > +	clrsetbits_le32(ccm + CCU_H6_CPU_AXI_CFG,
+> > +			CCM_CPU_AXI_APB_MASK | CCM_CPU_AXI_AXI_MASK,
+> >  			CCM_CPU_AXI_DEFAULT_FACTORS);
+> > =20
+> > -	writel(CCM_PSI_AHB1_AHB2_DEFAULT, &ccm->psi_ahb1_ahb2_cfg);
+> > +	writel(CCM_PSI_AHB1_AHB2_DEFAULT, ccm + CCU_H6_PSI_AHB1_AHB2_CFG);
+> >  #ifdef CCM_AHB3_DEFAULT
+> > -	writel(CCM_AHB3_DEFAULT, &ccm->ahb3_cfg);
+> > +	writel(CCM_AHB3_DEFAULT, ccm + CCU_H6_AHB3_CFG);
+> >  #endif
+> > -	writel(CCM_APB1_DEFAULT, &ccm->apb1_cfg);
+> > +	writel(CCM_APB1_DEFAULT, ccm + CCU_H6_APB1_CFG);
+> > =20
+> >  	/*
+> >  	 * The mux and factor are set, but the clock will be enabled in
+> >  	 * DRAM initialization code.
+> >  	 */
+> > -	writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3), &ccm->mbus_cfg);
+> > +	writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3), ccm + CCU_H6_MBUS_CFG);
+> >  }
+> > =20
+> >  void clock_init_uart(void)
+> >  {
+> > -	struct sunxi_ccm_reg *const ccm =3D
+> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
+> > =20
+> >  	/* uart clock source is apb2 */
+> >  	writel(APB2_CLK_SRC_OSC24M|
+> >  	       APB2_CLK_RATE_N_1|
+> >  	       APB2_CLK_RATE_M(1),
+> > -	       &ccm->apb2_cfg);
+> > +	       ccm + CCU_H6_APB2_CFG);
+> > =20
+> >  	/* open the clock for uart */
+> > -	setbits_le32(&ccm->uart_gate_reset,
+> > +	setbits_le32(ccm + CCU_H6_UART_GATE_RESET,
+> >  		     1 << (CONFIG_CONS_INDEX - 1));
+> > =20
+> >  	/* deassert uart reset */
+> > -	setbits_le32(&ccm->uart_gate_reset,
+> > +	setbits_le32(ccm + CCU_H6_UART_GATE_RESET,
+> >  		     1 << (RESET_SHIFT + CONFIG_CONS_INDEX - 1));
+> >  }
+> > =20
+> >  void clock_set_pll1(unsigned int clk)
+> >  {
+> > -	struct sunxi_ccm_reg * const ccm =3D
+> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
+> >  	u32 val;
+> > =20
+> >  	/* Do not support clocks < 288MHz as they need factor P */
+> >  	if (clk < 288000000) clk =3D 288000000;
+> > =20
+> >  	/* Switch to 24MHz clock while changing PLL1 */
+> > -	val =3D readl(&ccm->cpu_axi_cfg);
+> > +	val =3D readl(ccm + CCU_H6_CPU_AXI_CFG);
+> >  	val &=3D ~CCM_CPU_AXI_MUX_MASK;
+> >  	val |=3D CCM_CPU_AXI_MUX_OSC24M;
+> > -	writel(val, &ccm->cpu_axi_cfg);
+> > +	writel(val, ccm + CCU_H6_CPU_AXI_CFG);
+> > =20
+> >  	/* clk =3D 24*n/p, p is ignored if clock is >288MHz */
+> >  	val =3D CCM_PLL1_CTRL_EN | CCM_PLL1_LOCK_EN | CCM_PLL1_CLOCK_TIME_2;
+> > @@ -94,20 +92,19 @@ void clock_set_pll1(unsigned int clk)
+> >  	       val |=3D CCM_PLL1_OUT_EN;
+> >  	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> >  	       val |=3D CCM_PLL1_OUT_EN | CCM_PLL1_LDO_EN;
+> > -	writel(val, &ccm->pll1_cfg);
+> > -	while (!(readl(&ccm->pll1_cfg) & CCM_PLL1_LOCK)) {}
+> > +	writel(val, ccm + CCU_H6_PLL1_CFG);
+> > +	while (!(readl(ccm + CCU_H6_PLL1_CFG) & CCM_PLL1_LOCK)) {}
+> > =20
+> >  	/* Switch CPU to PLL1 */
+> > -	val =3D readl(&ccm->cpu_axi_cfg);
+> > +	val =3D readl(ccm + CCU_H6_CPU_AXI_CFG);
+> >  	val &=3D ~CCM_CPU_AXI_MUX_MASK;
+> >  	val |=3D CCM_CPU_AXI_MUX_PLL_CPUX;
+> > -	writel(val, &ccm->cpu_axi_cfg);
+> > +	writel(val, ccm + CCU_H6_CPU_AXI_CFG);
+> >  }
+> > =20
+> >  int clock_twi_onoff(int port, int state)
+> >  {
+> > -	struct sunxi_ccm_reg *const ccm =3D
+> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
+> >  	struct sunxi_prcm_reg *const prcm =3D
+> >  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> >  	u32 value, *ptr;
+> > @@ -120,7 +117,7 @@ int clock_twi_onoff(int port, int state)
+> >  		ptr =3D &prcm->twi_gate_reset;
+> >  	} else {
+> >  		shift =3D port;
+> > -		ptr =3D &ccm->twi_gate_reset;
+> > +		ptr =3D ccm + CCU_H6_I2C_GATE_RESET;
+> >  	}
+> > =20
+> >  	/* set the apb clock gate and reset for twi */
+> > @@ -136,9 +133,8 @@ int clock_twi_onoff(int port, int state)
+> >  /* PLL_PERIPH0 clock, used by the MMC driver */
+> >  unsigned int clock_get_pll6(void)
+> >  {
+> > -	struct sunxi_ccm_reg *const ccm =3D
+> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> > -	uint32_t rval =3D readl(&ccm->pll6_cfg);
+> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
+> > +	uint32_t rval =3D readl(ccm + CCU_H6_PLL6_CFG);
+> >  	int n =3D ((rval & CCM_PLL6_CTRL_N_MASK) >> CCM_PLL6_CTRL_N_SHIFT) + =
+1;
+> >  	int div2 =3D ((rval & CCM_PLL6_CTRL_DIV2_MASK) >>
+> >  		    CCM_PLL6_CTRL_DIV2_SHIFT) + 1;
+> >  =20
+>=20
+>=20
+>=20
+>=20
+>=20
 
