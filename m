@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D8FC28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 11:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8C8EC36005
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 11:37:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62D4C81D6C;
+	by phobos.denx.de (Postfix) with ESMTP id ABC9381E1C;
 	Sun, 23 Mar 2025 12:36:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08DFB81D6C; Sun, 23 Mar 2025 12:36:20 +0100 (CET)
+ id 2012A819B1; Sun, 23 Mar 2025 12:36:21 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8DE1C81D25
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 12:36:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id CD5D3819B1
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 12:36:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B524A169C;
- Sun, 23 Mar 2025 04:36:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 009BD339;
+ Sun, 23 Mar 2025 04:36:25 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 07C253F694;
- Sun, 23 Mar 2025 04:36:15 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4143C3F694;
+ Sun, 23 Mar 2025 04:36:17 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
  Mikhail Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: [PATCH 05/34] sunxi: clock: H6: remove struct sunxi_ccm_reg
-Date: Sun, 23 Mar 2025 11:35:15 +0000
-Message-ID: <20250323113544.7933-6-andre.przywara@arm.com>
+Subject: [PATCH 06/34] sunxi: clock: H6: drop usage of struct sunxi_prcm_reg
+Date: Sun, 23 Mar 2025 11:35:16 +0000
+Message-ID: <20250323113544.7933-7-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
 In-Reply-To: <20250323113544.7933-1-andre.przywara@arm.com>
 References: <20250323113544.7933-1-andre.przywara@arm.com>
@@ -56,244 +56,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the SPL clock code, the MMC driver, and the DRAM init routine we
-converted all users of the H6 class "struct sunxi_ccm_reg" over to use
- #define'd register offsets now.
+U-Boot drivers often revert to using C structures for modelling hardware
+register frames. This creates some problems:
+- A "struct" is a C language construct to group several variables
+  together. The details of the layout of this struct are partly subject
+  to the compiler's discretion (padding and alignment).
+- The "packed" attribute would force a certain layout, but we are not
+  using it.
+- The actual source of information from the data sheet is the register
+  offset. Here we create an artificial struct, carefully tuning the
+  layout (with a lot of reserved members) to match that offset. To help
+  with correctness, we put the desired information as a *comment*,
+  though this is purely for the human reader, and has no effect on the
+  generated layout. This sounds all very backwards.
+- Using a struct suggests we can assign a pointer and then access the
+  register content via the members. But this is not the case, instead
+  every MMIO register access must go through specific accessor functions,
+  to meet the ordering and access size guarantees the hardware requires.
+- We share those structs in code shared across multiple SoC families,
+  though most SoCs define their own version of the struct. Members must
+  match in their name, across every SoC, otherwise compilation will fail.
+  We work around this with even more #ifdefs in the shared code.
+- Some SoCs have an *almost* identical layout, but differ in a few
+  registers. This requires hard to maintain #ifdef's in the struct
+  definition.
+- Some of the register frames are huge: the H6 CCU device defines 127
+  registers. We use 15 of them. Still the whole frame would need to be
+  described, which is very tedious, but for no reason.
+- Adding a new SoC often forces people to decide whether to share an
+  existing struct, or to create a new copy. For some cases (say like 80%
+  similarity) this works out badly either way.
 
-Drop the whole definition of this struct now, since it's not needed
-anymore, for all H6 and H616 boards.
-This removes the entire fragile and questionable definition, and allows
-new SoCs to share the code more easily.
+The Linux kernel heavily frowns upon those register structs, and instead
+uses a much simpler solution: #define REG_NAME  <offset>
+This easily maps to the actual information from the data sheet, and can
+much simpler be shared across multiple SoCs, as it allows to have all
+SoC versions visible, so we can use C "if" statements instead of #ifdef's.
+Also it requires to just define the registers we need, and we can use
+alternative locations for some registers much more easily.
+
+Drop the usage of "struct sunxi_prcm_reg" in the H6 SPL clock code, by
+defining the respective register names and their offsets, then adding
+them to the base pointer.
+We cannot drop the struct definition quite yet, as it's also used in
+other drivers, still.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- .../include/asm/arch-sunxi/clock_sun50i_h6.h  | 213 ------------------
- 1 file changed, 213 deletions(-)
+ arch/arm/include/asm/arch-sunxi/prcm_sun50i.h |  5 +++++
+ arch/arm/mach-sunxi/clock_sun50i_h6.c         | 20 +++++++++----------
+ 2 files changed, 14 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-index 0a5f9342308..ccacc99d018 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-@@ -31,219 +31,6 @@
- #define CCU_H6_UART_GATE_RESET		0x90c
- #define CCU_H6_I2C_GATE_RESET		0x91c
+diff --git a/arch/arm/include/asm/arch-sunxi/prcm_sun50i.h b/arch/arm/include/asm/arch-sunxi/prcm_sun50i.h
+index fd63d3aad83..8ed78dccf10 100644
+--- a/arch/arm/include/asm/arch-sunxi/prcm_sun50i.h
++++ b/arch/arm/include/asm/arch-sunxi/prcm_sun50i.h
+@@ -11,6 +11,11 @@
+ #ifndef __ASSEMBLY__
+ #include <linux/compiler.h>
  
--struct sunxi_ccm_reg {
--	u32 pll1_cfg;		/* 0x000 pll1 (cpux) control */
--	u8 reserved_0x004[12];
--	u32 pll5_cfg;		/* 0x010 pll5 (ddr) control */
--	u8 reserved_0x014[12];
--	u32 pll6_cfg;		/* 0x020 pll6 (periph0) control */
--	u8 reserved_0x020[4];
--	u32 pll_periph1_cfg;	/* 0x028 pll periph1 control */
--	u8 reserved_0x028[4];
--	u32 pll7_cfg;		/* 0x030 pll7 (gpu) control */
--	u8 reserved_0x034[12];
--	u32 pll3_cfg;		/* 0x040 pll3 (video0) control */
--	u8 reserved_0x044[4];
--	u32 pll_video1_cfg;	/* 0x048 pll video1 control */
--	u8 reserved_0x04c[12];
--	u32 pll4_cfg;		/* 0x058 pll4 (ve) control */
--	u8 reserved_0x05c[4];
--	u32 pll10_cfg;		/* 0x060 pll10 (de) control */
--	u8 reserved_0x064[12];
--	u32 pll9_cfg;		/* 0x070 pll9 (hsic) control */
--	u8 reserved_0x074[4];
--	u32 pll2_cfg;		/* 0x078 pll2 (audio) control */
--	u8 reserved_0x07c[148];
--	u32 pll5_pat;		/* 0x110 pll5 (ddr) pattern */
--	u8 reserved_0x114[20];
--	u32 pll_periph1_pat0;	/* 0x128 pll periph1 pattern0 */
--	u32 pll_periph1_pat1;	/* 0x12c pll periph1 pattern1 */
--	u32 pll7_pat0;		/* 0x130 pll7 (gpu) pattern0 */
--	u32 pll7_pat1;		/* 0x134 pll7 (gpu) pattern1 */
--	u8 reserved_0x138[8];
--	u32 pll3_pat0;		/* 0x140 pll3 (video0) pattern0 */
--	u32 pll3_pat1;		/* 0x144 pll3 (video0) pattern1 */
--	u32 pll_video1_pat0;	/* 0x148 pll video1 pattern0 */
--	u32 pll_video1_pat1;	/* 0x14c pll video1 pattern1 */
--	u8 reserved_0x150[8];
--	u32 pll4_pat0;		/* 0x158 pll4 (ve) pattern0 */
--	u32 pll4_pat1;		/* 0x15c pll4 (ve) pattern1 */
--	u32 pll10_pat0;		/* 0x160 pll10 (de) pattern0 */
--	u32 pll10_pat1;		/* 0x164 pll10 (de) pattern1 */
--	u8 reserved_0x168[8];
--	u32 pll9_pat0;		/* 0x170 pll9 (hsic) pattern0 */
--	u32 pll9_pat1;		/* 0x174 pll9 (hsic) pattern1 */
--	u32 pll2_pat0;		/* 0x178 pll2 (audio) pattern0 */
--	u32 pll2_pat1;		/* 0x17c pll2 (audio) pattern1 */
--	u8 reserved_0x180[384];
--	u32 pll1_bias;		/* 0x300 pll1 (cpux) bias */
--	u8 reserved_0x304[12];
--	u32 pll5_bias;		/* 0x310 pll5 (ddr) bias */
--	u8 reserved_0x314[12];
--	u32 pll6_bias;		/* 0x320 pll6 (periph0) bias */
--	u8 reserved_0x324[4];
--	u32 pll_periph1_bias;	/* 0x328 pll periph1 bias */
--	u8 reserved_0x32c[4];
--	u32 pll7_bias;		/* 0x330 pll7 (gpu) bias */
--	u8 reserved_0x334[12];
--	u32 pll3_bias;		/* 0x340 pll3 (video0) bias */
--	u8 reserved_0x344[4];
--	u32 pll_video1_bias;	/* 0x348 pll video1 bias */
--	u8 reserved_0x34c[12];
--	u32 pll4_bias;		/* 0x358 pll4 (ve) bias */
--	u8 reserved_0x35c[4];
--	u32 pll10_bias;		/* 0x360 pll10 (de) bias */
--	u8 reserved_0x364[12];
--	u32 pll9_bias;		/* 0x370 pll9 (hsic) bias */
--	u8 reserved_0x374[4];
--	u32 pll2_bias;		/* 0x378 pll2 (audio) bias */
--	u8 reserved_0x37c[132];
--	u32 pll1_tun;		/* 0x400 pll1 (cpux) tunning */
--	u8 reserved_0x404[252];
--	u32 cpu_axi_cfg;	/* 0x500 CPUX/AXI clock control*/
--	u8 reserved_0x504[12];
--	u32 psi_ahb1_ahb2_cfg;	/* 0x510 PSI/AHB1/AHB2 clock control */
--	u8 reserved_0x514[8];
--	u32 ahb3_cfg;		/* 0x51c AHB3 clock control */
--	u32 apb1_cfg;		/* 0x520 APB1 clock control */
--	u32 apb2_cfg;		/* 0x524 APB2 clock control */
--	u8 reserved_0x528[24];
--	u32 mbus_cfg;		/* 0x540 MBUS clock control */
--	u8 reserved_0x544[188];
--	u32 de_clk_cfg;		/* 0x600 DE clock control */
--	u8 reserved_0x604[8];
--	u32 de_gate_reset;	/* 0x60c DE gate/reset control */
--	u8 reserved_0x610[16];
--	u32 di_clk_cfg;		/* 0x620 DI clock control */
--	u8 reserved_0x024[8];
--	u32 di_gate_reset;	/* 0x62c DI gate/reset control */
--	u8 reserved_0x630[64];
--	u32 gpu_clk_cfg;	/* 0x670 GPU clock control */
--	u8 reserved_0x674[8];
--	u32 gpu_gate_reset;	/* 0x67c GPU gate/reset control */
--	u32 ce_clk_cfg;		/* 0x680 CE clock control */
--	u8 reserved_0x684[8];
--	u32 ce_gate_reset;	/* 0x68c CE gate/reset control */
--	u32 ve_clk_cfg;		/* 0x690 VE clock control */
--	u8 reserved_0x694[8];
--	u32 ve_gate_reset;	/* 0x69c VE gate/reset control */
--	u8 reserved_0x6a0[16];
--	u32 emce_clk_cfg;	/* 0x6b0 EMCE clock control */
--	u8 reserved_0x6b4[8];
--	u32 emce_gate_reset;	/* 0x6bc EMCE gate/reset control */
--	u32 vp9_clk_cfg;	/* 0x6c0 VP9 clock control */
--	u8 reserved_0x6c4[8];
--	u32 vp9_gate_reset;	/* 0x6cc VP9 gate/reset control */
--	u8 reserved_0x6d0[60];
--	u32 dma_gate_reset;	/* 0x70c DMA gate/reset control */
--	u8 reserved_0x710[12];
--	u32 msgbox_gate_reset;	/* 0x71c Message Box gate/reset control */
--	u8 reserved_0x720[12];
--	u32 spinlock_gate_reset;/* 0x72c Spinlock gate/reset control */
--	u8 reserved_0x730[12];
--	u32 hstimer_gate_reset;	/* 0x73c HS Timer gate/reset control */
--	u32 avs_gate_reset;	/* 0x740 AVS gate/reset control */
--	u8 reserved_0x744[72];
--	u32 dbgsys_gate_reset;	/* 0x78c Debugging system gate/reset control */
--	u8 reserved_0x790[12];
--	u32 psi_gate_reset;	/* 0x79c PSI gate/reset control */
--	u8 reserved_0x7a0[12];
--	u32 pwm_gate_reset;	/* 0x7ac PWM gate/reset control */
--	u8 reserved_0x7b0[12];
--	u32 iommu_gate_reset;	/* 0x7bc IOMMU gate/reset control */
--	u8 reserved_0x7c0[64];
--	u32 dram_clk_cfg;		/* 0x800 DRAM clock control */
--	u32 mbus_gate;		/* 0x804 MBUS gate control */
--	u8 reserved_0x808[4];
--	u32 dram_gate_reset;	/* 0x80c DRAM gate/reset control */
--	u32 nand0_clk_cfg;	/* 0x810 NAND0 clock control */
--	u32 nand1_clk_cfg;	/* 0x814 NAND1 clock control */
--	u8 reserved_0x818[20];
--	u32 nand_gate_reset;	/* 0x82c NAND gate/reset control */
--	u32 sd0_clk_cfg;	/* 0x830 MMC0 clock control */
--	u32 sd1_clk_cfg;	/* 0x834 MMC1 clock control */
--	u32 sd2_clk_cfg;	/* 0x838 MMC2 clock control */
--	u8 reserved_0x83c[16];
--	u32 sd_gate_reset;	/* 0x84c MMC gate/reset control */
--	u8 reserved_0x850[188];
--	u32 uart_gate_reset;	/* 0x90c UART gate/reset control */
--	u8 reserved_0x910[12];
--	u32 twi_gate_reset;	/* 0x91c I2C gate/reset control */
--	u8 reserved_0x920[28];
--	u32 scr_gate_reset;	/* 0x93c SCR gate/reset control */
--	u32 spi0_clk_cfg;	/* 0x940 SPI0 clock control */
--	u32 spi1_clk_cfg;	/* 0x944 SPI1 clock control */
--	u8 reserved_0x948[36];
--	u32 spi_gate_reset;	/* 0x96c SPI gate/reset control */
--	u8 reserved_0x970[12];
--	u32 emac_gate_reset;	/* 0x97c EMAC gate/reset control */
--	u8 reserved_0x980[48];
--	u32 ts_clk_cfg;		/* 0x9b0 TS clock control */
--	u8 reserved_0x9b4[8];
--	u32 ts_gate_reset;	/* 0x9bc TS gate/reset control */
--	u32 irtx_clk_cfg;	/* 0x9c0 IR TX clock control */
--	u8 reserved_0x9c4[8];
--	u32 irtx_gate_reset;	/* 0x9cc IR TX gate/reset control */
--	u8 reserved_0x9d0[44];
--	u32 ths_gate_reset;	/* 0x9fc THS gate/reset control */
--	u8 reserved_0xa00[12];
--	u32 i2s3_clk_cfg;	/* 0xa0c I2S3 clock control */
--	u32 i2s0_clk_cfg;	/* 0xa10 I2S0 clock control */
--	u32 i2s1_clk_cfg;	/* 0xa14 I2S1 clock control */
--	u32 i2s2_clk_cfg;	/* 0xa18 I2S2 clock control */
--	u32 i2s_gate_reset;	/* 0xa1c I2S gate/reset control */
--	u32 spdif_clk_cfg;	/* 0xa20 SPDIF clock control */
--	u8 reserved_0xa24[8];
--	u32 spdif_gate_reset;	/* 0xa2c SPDIF gate/reset control */
--	u8 reserved_0xa30[16];
--	u32 dmic_clk_cfg;	/* 0xa40 DMIC clock control */
--	u8 reserved_0xa44[8];
--	u32 dmic_gate_reset;	/* 0xa4c DMIC gate/reset control */
--	u8 reserved_0xa50[16];
--	u32 ahub_clk_cfg;	/* 0xa60 Audio HUB clock control */
--	u8 reserved_0xa64[8];
--	u32 ahub_gate_reset;	/* 0xa6c Audio HUB gate/reset control */
--	u32 usb0_clk_cfg;	/* 0xa70 USB0(OTG) clock control */
--	u32 usb1_clk_cfg;	/* 0xa74 USB1(XHCI) clock control */
--	u8 reserved_0xa78[4];
--	u32 usb3_clk_cfg;	/* 0xa78 USB3 clock control */
--	u8 reserved_0xa80[12];
--	u32 usb_gate_reset;	/* 0xa8c USB gate/reset control */
--	u8 reserved_0xa90[32];
--	u32 pcie_ref_clk_cfg;	/* 0xab0 PCIE REF clock control */
--	u32 pcie_axi_clk_cfg;	/* 0xab4 PCIE AXI clock control */
--	u32 pcie_aux_clk_cfg;	/* 0xab8 PCIE AUX clock control */
--	u32 pcie_gate_reset;	/* 0xabc PCIE gate/reset control */
--	u8 reserved_0xac0[64];
--	u32 hdmi_clk_cfg;	/* 0xb00 HDMI clock control */
--	u32 hdmi_slow_clk_cfg;	/* 0xb04 HDMI slow clock control */
--	u8 reserved_0xb08[8];
--	u32 hdmi_cec_clk_cfg;	/* 0xb10 HDMI CEC clock control */
--	u8 reserved_0xb14[8];
--	u32 hdmi_gate_reset;	/* 0xb1c HDMI gate/reset control */
--	u8 reserved_0xb20[60];
--	u32 tcon_top_gate_reset;/* 0xb5c TCON TOP gate/reset control */
--	u32 tcon_lcd0_clk_cfg;	/* 0xb60 TCON LCD0 clock control */
--	u8 reserved_0xb64[24];
--	u32 tcon_lcd_gate_reset;/* 0xb7c TCON LCD gate/reset control */
--	u32 tcon_tv0_clk_cfg;	/* 0xb80 TCON TV0 clock control */
--	u8 reserved_0xb84[24];
--	u32 tcon_tv_gate_reset;	/* 0xb9c TCON TV gate/reset control */
--	u8 reserved_0xba0[96];
--	u32 csi_misc_clk_cfg;	/* 0xc00 CSI MISC clock control */
--	u32 csi_top_clk_cfg;	/* 0xc04 CSI TOP clock control */
--	u32 csi_mclk_cfg;	/* 0xc08 CSI Master clock control */
--	u8 reserved_0xc0c[32];
--	u32 csi_gate_reset;	/* 0xc2c CSI gate/reset control */
--	u8 reserved_0xc30[16];
--	u32 hdcp_clk_cfg;	/* 0xc40 HDCP clock control */
--	u8 reserved_0xc44[8];
--	u32 hdcp_gate_reset;	/* 0xc4c HDCP gate/reset control */
--	u8 reserved_0xc50[688];
--	u32 ccu_sec_switch;	/* 0xf00 CCU security switch */
--	u32 pll_lock_dbg_ctrl;	/* 0xf04 PLL lock debugging control */
--};
--
- /* pll1 bit field */
- #define CCM_PLL1_CTRL_EN		BIT(31)
- #define CCM_PLL1_LDO_EN			BIT(30)
++#define CCU_PRCM_I2C_GATE_RESET		0x19c
++#define CCU_PRCM_PLL_LDO_CFG		0x244
++#define CCU_PRCM_SYS_PWROFF_GATING	0x250
++#define CCU_PRCM_RES_CAL_CTRL		0x310
++
+ struct sunxi_prcm_reg {
+ 	u32 cpus_cfg;		/* 0x000 */
+ 	u8 res0[0x8];		/* 0x004 */
+diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+index 482d9e0c695..615c13b5da0 100644
+--- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
++++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+@@ -7,26 +7,25 @@
+ void clock_init_safe(void)
+ {
+ 	void *const ccm = (void *)SUNXI_CCM_BASE;
+-	struct sunxi_prcm_reg *const prcm =
+-		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
++	void *const prcm = (void *)SUNXI_PRCM_BASE;
+ 
+ 	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616)) {
+ 		/* this seems to enable PLLs on H616 */
+-		setbits_le32(&prcm->sys_pwroff_gating, 0x10);
+-		setbits_le32(&prcm->res_cal_ctrl, 2);
++		setbits_le32(prcm + CCU_PRCM_SYS_PWROFF_GATING, 0x10);
++		setbits_le32(prcm + CCU_PRCM_RES_CAL_CTRL, 2);
+ 	}
+ 
+ 	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) ||
+ 	    IS_ENABLED(CONFIG_MACH_SUN50I_H6)) {
+-		clrbits_le32(&prcm->res_cal_ctrl, 1);
+-		setbits_le32(&prcm->res_cal_ctrl, 1);
++		clrbits_le32(prcm + CCU_PRCM_RES_CAL_CTRL, 1);
++		setbits_le32(prcm + CCU_PRCM_RES_CAL_CTRL, 1);
+ 	}
+ 
+ 	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6)) {
+ 		/* set key field for ldo enable */
+-		setbits_le32(&prcm->pll_ldo_cfg, 0xA7000000);
++		setbits_le32(prcm + CCU_PRCM_PLL_LDO_CFG, 0xA7000000);
+ 		/* set PLL VDD LDO output to 1.14 V */
+-		setbits_le32(&prcm->pll_ldo_cfg, 0x60000);
++		setbits_le32(prcm + CCU_PRCM_PLL_LDO_CFG, 0x60000);
+ 	}
+ 
+ 	clock_set_pll1(408000000);
+@@ -105,8 +104,7 @@ void clock_set_pll1(unsigned int clk)
+ int clock_twi_onoff(int port, int state)
+ {
+ 	void *const ccm = (void *)SUNXI_CCM_BASE;
+-	struct sunxi_prcm_reg *const prcm =
+-		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
++	void *const prcm = (void *)SUNXI_PRCM_BASE;
+ 	u32 value, *ptr;
+ 	int shift;
+ 
+@@ -114,7 +112,7 @@ int clock_twi_onoff(int port, int state)
+ 
+ 	if (port == 5) {
+ 		shift = 0;
+-		ptr = &prcm->twi_gate_reset;
++		ptr = prcm + CCU_PRCM_I2C_GATE_RESET;
+ 	} else {
+ 		shift = port;
+ 		ptr = ccm + CCU_H6_I2C_GATE_RESET;
 -- 
 2.46.3
 
