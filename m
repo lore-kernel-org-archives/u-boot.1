@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32ACFC28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 12:24:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D43AC28B30
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 12:25:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B701B82006;
-	Sun, 23 Mar 2025 13:24:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1126B82051;
+	Sun, 23 Mar 2025 13:25:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cc+IKVII";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lznR8V4e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3061582033; Sun, 23 Mar 2025 13:24:34 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 51E6082051; Sun, 23 Mar 2025 13:25:18 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31BB281F6B
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 13:24:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54F0881D5D
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 13:25:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cf034d4abso38042275e9.3
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 05:24:32 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cfe574976so19502135e9.1
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 05:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742732672; x=1743337472; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742732716; x=1743337516; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7WKedpt+nbSJdiAUIIEItsLaY/TMOfqYHyNYzHlG8xw=;
- b=Cc+IKVIIC9uvRqm2GoZTR2Pe8rrvvgpk3mprepQuybf+lNjUn58hTZI70CthH1N6xD
- kv4+D8VeIni1/pHOveCezxrfr2anrxTlf38Qfh7WqxHfa8asVZpJIC+kQPsz0CWf822q
- iYmZWv/YG4FZsAo1p+yn1bM4ecFZUvJvdbjB5rEmWIfLAjblXbI9mRSHZj2x+kGBAZ1+
- AyM/lTvzOx+wCU/gC5DBGfjFw8KyQTLi+zoMsYM+bZpo7k90JqlyY7jNIHxPr2N8WZWP
- +R0j9KzfvPFzWdrOzwIXyzFYaPGkAFFoxVjczlhUZNFCCT/KasV3fP4jgbvdZZTQAVN8
- jQVw==
+ bh=ee+sGWgGTK7JKIeN/br5tXXgdVIdA7ECbLey1lC1x3Y=;
+ b=lznR8V4eaHTd/zzTWkWQ70F0GzkZpQ9zlkTXfoq3TTWPhpAugJJZIPrS2Lt8+3bpSB
+ fGAaoGd9GFugw/hU5vWEIND90rX4OLhtjJNpMnTWmeIPuzaTJuLf3jrKUHnxbpr6QpW1
+ TkmXmNhxqRvV6xKSkOSvBwJQAtYmPIOH0bSdzdcvZ3/7GB5RWmOWjuWDUIt3xoWlE4GG
+ 6LeVw9EXNZddbh3pDTUXf1URCSc7uMFMQVdO0H4LWrLcSxMeyl+vykNHw0lRoaJDzMZ8
+ vluYlZllIjHV56p5lWqbt4KvUWYBL3FYhfKAE6waC9xjEfPDlb5XVUDxzPz/dGXVrX2x
+ d3FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742732672; x=1743337472;
+ d=1e100.net; s=20230601; t=1742732716; x=1743337516;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7WKedpt+nbSJdiAUIIEItsLaY/TMOfqYHyNYzHlG8xw=;
- b=cRaeVIrqS5DzQzzKj1Yr2lLQ0VfIDJA7ZT220KDlMi4tF55pgcmxNjYt3LwMr92C7p
- ueSMH6HsCajspv6qSUtfiW5c43gCFFKHvsQnqPsi7Q3Q0KZORRG6R08BqrcJkRS/AFIE
- FqzZYhzpm8MMjLp3EUMiultVXObCnHO+15tm9WQSr+SUjszb9eE37UawrrMTeVuSgkZq
- d2hxWgBDT6GGjubtB0eAiTwu2siddxrRY+tBtgASI14IYuKXEZHuLq6hwm3B8M+O2b5S
- evG55CbCJPyU7BD6TZWOOMvFL6KCAJP/nwAezMtO2oJbOkVi/7VO4e1xXfQ4yepXix/3
- f2qg==
+ bh=ee+sGWgGTK7JKIeN/br5tXXgdVIdA7ECbLey1lC1x3Y=;
+ b=VPhuAmKGRXLPmCDZprLZ7QVVECLkwrunZn9rcvJw5ns1ovoUukXPinEFa5diq+eGsi
+ s+xXnsPJmRDyASidkqhpmD9/zlmjCaO7gTqh48KchsnFaJHvIWa543SyZKeRwP1oBMlp
+ pi22UKDrK7h7dA4dBU45VNZVMJbDvWs5GXZ8GXA4IRUVFXImCI0ILNr2OzC9pxVa8Omg
+ n/eD3sxpg78fEq6gSkEzhem9syfmBKhxhjKqyRe+6UGUtr6Rx5HqEwEfncuQh7gjiWy4
+ 2aqwVQ5dOZooL+SLqrDQDl4JE5X+BZnNwVq/rLxXI46nndaW+jvycs73DLLWIR5IVkzG
+ C7Xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU7eFLg1ONyDDF+d6G8v5r6rVdqdx5N7xhDpadvIkmYXLjsVjTUawHBHJyIfhcpDv+hbwR22Nw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyc8bUlTUE0CISCJxNwv+zC6c3rr1fx3MW3m2DL/BvHnTQefwuS
- oiLqggC+FL9TEe0jgM8mdePkVAzTTKfHt/CoBs322NxXCx5OdxAh
-X-Gm-Gg: ASbGnctUYlmjO+vxL5f1pLle3gEMkwqWzfpiRpc3j52UiKGS8cicctr1swoH72q2EjU
- 9QI71Sw4+/VBd4H3bqiHGmbwxhhtUWHhIpIpVKr8C4XPl/aJufRJsDyfq777nioK2NXidS/66RE
- YEVl1I8q52Lyn9qYIOvKxfmLExTVznTgP/DhHj3VbWgsBu1g37ji1B0ImWGOjVYGDt8xpfqtDlz
- Lb8ScJjqb3ITb3q1wHvJzV+5VkCF9S0Nk/NYQGHS95efd/zyEx0X76TozLHadEjEH83cc/pFL3b
- Ie7dI7m4Wu6yD183y93utV2SHbDPD/UH0cQ6PVZDaxZbX2JS2aCPYU78xodJbQKUQvthZPnGdKH
- eR0LI4IfkkaC/l+p5NiES
-X-Google-Smtp-Source: AGHT+IHUeBCLlLJMZAjq3aT9ayZR4JRvWJHk95k8mdakfG6ANtmZvQ4VWGbUZQZ6UEoVwjXgloRp+w==
-X-Received: by 2002:a5d:584b:0:b0:390:f9a5:bd79 with SMTP id
- ffacd0b85a97d-3997f90ab9emr8989878f8f.26.1742732671471; 
- Sun, 23 Mar 2025 05:24:31 -0700 (PDT)
+ AJvYcCULe2l87rqjnI9e/97693jH8sJDhtk3UBZzJdapLxMXG8JAKtPNiW/yr/y0i0f5bbEwld30nFA=@lists.denx.de
+X-Gm-Message-State: AOJu0YznawniYQ3JKL72LcI4s1b0KSBPusXgi0XwZXFtkyKfN1/UqBLC
+ zeQy6O2Gd2x50fPB+c3DJQM5tJLK5bn/bKaEaR6Ev5gc2X9vztic
+X-Gm-Gg: ASbGnctrZS4Om/kCo0jhy2V8w5VtBfh8Qun3yKCMm1q5esWs6x7nT2SqR3iUxxgxzl1
+ ORjeYJh0rZQXDM2Kwas9sgPkya893j2y0grXuoW0SjQ6b2HR6ngpGgIOldXZgEn/e2nTigdFIzk
+ 8z54PfnZodlBBLy10x+8OV/bCw1ydZ5xjiSNjpv3brfnBd4aOlAX2hKtk884EK5AU6RmhofnH2R
+ /vfsgoZ2+KRk882anSpUolxVi1ZSK4MlOIUBMrm2A4MMmMqOGeddvefrHbLSSkyOhAHj8yYVelV
+ j4ofw+xDqMZRw4cH6NAMws/0af4PY9Ncaf+4Asy5G6Um9kstpP9aJSn8Bmxw3Yyd3Y7Fp939gH7
+ s+5URA7c2U6TL5xicKiDj
+X-Google-Smtp-Source: AGHT+IE8uyJWuvj8ibJEaxSDHGEIIeq1BaxjiAW9tr5cjvFVuAror1tC1awnTH/fVMkGKUYtHSzqbQ==
+X-Received: by 2002:a05:600c:4584:b0:43b:cc42:c54f with SMTP id
+ 5b1f17b1804b1-43d509f433amr82317005e9.14.1742732715641; 
+ Sun, 23 Mar 2025 05:25:15 -0700 (PDT)
 Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
  [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9e65e0sm7774811f8f.61.2025.03.23.05.24.30
+ 5b1f17b1804b1-43d43f3328bsm135495875e9.1.2025.03.23.05.25.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Mar 2025 05:24:31 -0700 (PDT)
+ Sun, 23 Mar 2025 05:25:15 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>
 Cc: Simon Glass <sjg@chromium.org>, Mikhail Kalashnikov <iuncuim@gmail.com>,
  u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 26/34] sunxi: update rmr_switch.S source code
-Date: Sun, 23 Mar 2025 13:24:30 +0100
-Message-ID: <9421768.CDJkKcVGEf@jernej-laptop>
-In-Reply-To: <20250323113544.7933-27-andre.przywara@arm.com>
+Subject: Re: [PATCH 27/34] sunxi: armv8: FEL: save and restore GICv3 registers
+Date: Sun, 23 Mar 2025 13:25:14 +0100
+Message-ID: <6031809.MhkbZ0Pkbq@jernej-laptop>
+In-Reply-To: <20250323113544.7933-28-andre.przywara@arm.com>
 References: <20250323113544.7933-1-andre.przywara@arm.com>
- <20250323113544.7933-27-andre.przywara@arm.com>
+ <20250323113544.7933-28-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -101,30 +101,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne nedelja, 23. marec 2025 ob 12:35:36 Srednjeevropski standardni =C4=8Das=
+Dne nedelja, 23. marec 2025 ob 12:35:37 Srednjeevropski standardni =C4=8Das=
  je Andre Przywara napisal(a):
-> Because the Allwinner BootROM always runs in AArch32, even on ARMv8 SoCs,
-> we need to switch to AArch64 first, but also need to save the CPU state,
-> when we later may need to return to the BootROM, for continuing with the
-> FEL USB protocol. This is done in 32-bit code, which we include into the
-> AArch64 boot assembly file as a series of .word directives, containing
-> the encoded AArch32 instructions. To be able to change and verify that
-> code, we also kept an assembly file with the respective 32-bit code, but
-> just for reference.
+> To be able to return to the BootROM FEL USB debug code, we must restore
+> the core's state as accurately as possible after the SPL has been run.
+> Since the BootROM runs in AArch32, but the SPL uses AArch64, this requires
+> a core reset, which clears the core's state.
+> So far we were saving and restoring the required registers like SCTLR
+> and VBAR, but could ignore the interrupt controller's state (GICC), since
+> that lives in MMIO registers, unaffected by a core reset.
+> Newer Allwinner SoCs now feature a GICv3 interrupt controller, which keeps
+> some GIC state in architected system registers, and those are cleared
+> when we switch back to AArch32.
 >=20
-> As this code is never compiled or assembled - it's just for
-> documentation - it became stale over time: we didn't really update this
-> along with the changes we made to the boot code. In particular the FEL
-> save code was completely missing.
+> To enable FEL operation on the Allwinner A523 SoC,
+> Add AArch32 assembly code to save and restore the ICC_PMR and ICC_IGRPEN1
+> system registers. The other GICv3 sysregs are either not relevant for the
+> BROM operation, or haven't been changed from their reset defaults by the
+> BROM anyway.
 >=20
-> Update that 32-bit assembly file, to match the current version used in
-> boot0.h, including the FEL save routine. Also update the build
-> instructions in the comments, to give people an actual chance to
-> assemble this code.
+> This enables FEL operation on the Allwinner A523 family of SoCs.
 >=20
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
-Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
 Best regards,
 Jernej
