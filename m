@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FAD5C28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 16:03:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1188C36005
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 16:03:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06AED8212A;
+	by phobos.denx.de (Postfix) with ESMTP id 59F4F82132;
 	Sun, 23 Mar 2025 17:02:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1742745728;
-	bh=97ZOzlN6JGAw73Luaiu6fRsktV1qiYkN+4sRUmbs2hI=;
+	bh=RkHPKNTKYToOjNFg/9QWlZmYHhGzzxd8QYt8FE5TDZU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KGRp+lBmSdLcM5USFi57ykPSH1UqVcGaw4j3cA0SS3hA89MpHafa2i3SF1nGwpHOL
-	 54jIIQKZ5IQaDbdc1bp4kDO5VmyQnVvGarpy6QnsaA1qqrusmDcMwZ/D1imHzjaQIX
-	 3hjlyUfmwbgzx8vae4R80CX+S2suXHex93cLpSmt3gMTSWxnKhvIVb265sRERUOgWV
-	 Qw/+3JFVxHruH2sK2dvFFqUceu6BKgoLi2Z1XabFzLpuFnV/sUedO29QaaklWghZAG
-	 URYKWhCyZxIE/dyqDhI2BLFMXlrYwnUXucFGmC8N641VOUHlMDVa3qfrvA1eHNFWPv
-	 om4ODkyK1oxIw==
+	b=TyMW0RtHMRdf2I3YAjS4eEMgApdH6ic3+xz7haR2w8J7nvDG+/xhwBLrA3WxBJvF1
+	 2kAKFsI+j1a1WuUYEjJOV2NSEYnWqZdFWnYZCahh2jFE3Ky+gqOYSVf/E5JMN7CvHt
+	 it3WyvPk9lwteq1RebShSRuA/loOzwUFyvdaNvDsN4CJaZCF1BV6VENo70B1hGbRFd
+	 JIWJuuFRE9yCpSHcV+CC+2WyQSPmtAmIzXGd9sQlfYod3H7gsEMtlmGZKgBCWsMGeE
+	 22YKmaoYKYjYq9PgOsVfli9tt3NDQH1stjTy7Px+pqWHk5EXE6PXGo982H+8EqILCz
+	 HvsbP1Jhfjy+A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685C3820F0; Sun, 23 Mar 2025 17:02:03 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id ADB7C81EDD; Sun, 23 Mar 2025 17:02:04 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6156981CFD
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 17:02:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B9C0820B0
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 17:02:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="bIaJh/71"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="YzSw+qwh"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 167B710290255; Sun, 23 Mar 2025 17:02:00 +0100 (CET)
+ with ESMTPSA id 1573E10290256; Sun, 23 Mar 2025 17:02:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742745720; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1742745721; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=97ZOzlN6JGAw73Luaiu6fRsktV1qiYkN+4sRUmbs2hI=;
- b=bIaJh/71689Q+sy+0aGe9lr8kZZ0O3lZm1bACTCOAr5CmxwtSJC61qX5hzFc1nO+3Iqfq2
- Fp71f5GtQ/DJXfTAtcQLkZF4YVrmKeXiBrzGC2F/Q69PWynPsCOQragNY/VKfvXM7J1yAM
- +v36ySrA8TSSallREwX148/m/s6P5duig/GiYdCxliX7XlXhMrpHxK4L+zZVnYq+JXmmQI
- z1u2sPsxmYEuN/D14q8qowzjuRMtKOgzCOnWWG4qec5c3duxSvhidnfcUEcHqyxu3Njha2
- eC28eovGIOC787eBZPkZY2vlSuiFLyr+wVAFzILTzzTQ3itx+LyIK7yhVGHKzQ==
+ bh=RkHPKNTKYToOjNFg/9QWlZmYHhGzzxd8QYt8FE5TDZU=;
+ b=YzSw+qwhk04nqkO+nnVkjjADQk7ECAwsZccMjfbZuZqVryBx9pQ/MXQnrw9gXS0as7kBHq
+ WE/nBAwgmcPKiXsAtDZEhvksq+APJb5aIGD40dpuBQy8wXgYFFU/EBw4Zp4NMTRXcRM/tz
+ ozsE1Q1rf4Uy7Bv8GB2TfA7/EL6QfeE8drIn/goKNy4nIOs/g+6uS7r7XRwnJwS7DdrCeK
+ GkpE/3NEOmKHxuul4ti9XQh/58xHSg/Lzz9JvBIQ/LpjJy4it3EUGxWvgr3g04CMak3niR
+ gF3l5QIZ7rbNjdry9UfJQIQFQ8/6oqgaGgB8DBTG6O6Z+xDgr1XckEQp4J+ZEQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>,
@@ -56,10 +57,9 @@ Cc: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Peng Fan <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
-Subject: [PATCH v2 09/24] clk: imx: gate2: Use struct udevice instead of
- struct device
-Date: Sun, 23 Mar 2025 16:58:38 +0100
-Message-ID: <20250323160107.145749-10-marex@denx.de>
+Subject: [PATCH v2 10/24] clk: imx: gate2: Resolve parent clock by name
+Date: Sun, 23 Mar 2025 16:58:39 +0100
+Message-ID: <20250323160107.145749-11-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250323160107.145749-1-marex@denx.de>
 References: <20250323160107.145749-1-marex@denx.de>
@@ -82,8 +82,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use U-Boot specific struct udevice instead of Linux compatibility
-struct device in gate2 clock registration.
+Use clock-names property which is accessible via parent clock OF node
+to look up the parent clock by name instead of depending on unreliable
+global clock name to perform look up.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -101,36 +102,23 @@ Cc: uboot-imx@nxp.com
 ---
 V2: Rebase on u-boot/next with additional clock patches
 ---
- drivers/clk/imx/clk-gate2.c | 2 +-
- drivers/clk/imx/clk.h       | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/clk/imx/clk-gate2.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/clk/imx/clk-gate2.c b/drivers/clk/imx/clk-gate2.c
-index 65fa6b5b139..400121a8ae1 100644
+index 400121a8ae1..fa07b13249b 100644
 --- a/drivers/clk/imx/clk-gate2.c
 +++ b/drivers/clk/imx/clk-gate2.c
-@@ -90,7 +90,7 @@ static const struct clk_ops clk_gate2_ops = {
- 	.get_rate = clk_generic_get_rate,
- };
+@@ -111,7 +111,8 @@ struct clk *clk_register_gate2(struct udevice *dev, const char *name,
  
--struct clk *clk_register_gate2(struct device *dev, const char *name,
-+struct clk *clk_register_gate2(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		void __iomem *reg, u8 bit_idx, u8 cgr_val,
- 		u8 clk_gate2_flags, unsigned int *share_count)
-diff --git a/drivers/clk/imx/clk.h b/drivers/clk/imx/clk.h
-index 6f0ae86f612..6f964f2679f 100644
---- a/drivers/clk/imx/clk.h
-+++ b/drivers/clk/imx/clk.h
-@@ -78,7 +78,7 @@ struct clk *imx_clk_pll14xx(const char *name, const char *parent_name,
- 			    void __iomem *base,
- 			    const struct imx_pll14xx_clk *pll_clk);
+ 	clk = &gate->clk;
  
--struct clk *clk_register_gate2(struct device *dev, const char *name,
-+struct clk *clk_register_gate2(struct udevice *dev, const char *name,
- 		const char *parent_name, unsigned long flags,
- 		void __iomem *reg, u8 bit_idx, u8 cgr_val,
- 		u8 clk_gate_flags, unsigned int *share_count);
+-	ret = clk_register(clk, UBOOT_DM_CLK_IMX_GATE2, name, parent_name);
++	ret = clk_register(clk, UBOOT_DM_CLK_IMX_GATE2, name,
++		clk_resolve_parent_clk(dev, parent_name));
+ 	if (ret) {
+ 		kfree(gate);
+ 		return ERR_PTR(ret);
 -- 
 2.47.2
 
