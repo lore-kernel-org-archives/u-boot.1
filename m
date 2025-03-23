@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C298C28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 11:38:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98EF0C36005
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 11:39:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E87C881F69;
-	Sun, 23 Mar 2025 12:36:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49A9B81EBB;
+	Sun, 23 Mar 2025 12:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0988881F45; Sun, 23 Mar 2025 12:36:34 +0100 (CET)
+ id 1253381F71; Sun, 23 Mar 2025 12:36:36 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BAA2981219
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 12:36:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 010EB81F0B
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 12:36:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E0A75106F;
- Sun, 23 Mar 2025 04:36:37 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 266781595;
+ Sun, 23 Mar 2025 04:36:39 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F05853F694;
- Sun, 23 Mar 2025 04:36:29 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6CAC93F694;
+ Sun, 23 Mar 2025 04:36:31 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
  Mikhail Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 16/34] clk: sunxi: Add support for the A523 -R CCU
-Date: Sun, 23 Mar 2025 11:35:26 +0000
-Message-ID: <20250323113544.7933-17-andre.przywara@arm.com>
+ linux-sunxi@lists.linux.dev
+Subject: [PATCH 17/34] pinctrl: sunxi: add Allwinner A523 pinctrl description
+Date: Sun, 23 Mar 2025 11:35:27 +0000
+Message-ID: <20250323113544.7933-18-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
 In-Reply-To: <20250323113544.7933-1-andre.przywara@arm.com>
 References: <20250323113544.7933-1-andre.przywara@arm.com>
@@ -57,117 +56,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a clock driver for the PRCM clock controller on the Allwinner A523
-family of SoCs, often also used with an "r" prefix or suffix.
-This just describes the clock gates and reset lines for the few devices
-that we would need, most prominently the R_I2C device for the PMIC.
+The new DT pinctrl binding would allow us to read the pinmux values from
+the DT, but it is actually easier to just continue with hardcoding the
+mux values in the driver, and matching them against the "function" name.
+
+Add the values for the primary and secondary pin controller on the A523.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- drivers/clk/sunxi/Kconfig      |  7 ++++++
- drivers/clk/sunxi/Makefile     |  1 +
- drivers/clk/sunxi/clk_a523_r.c | 44 ++++++++++++++++++++++++++++++++++
- drivers/clk/sunxi/clk_sunxi.c  |  5 ++++
- 4 files changed, 57 insertions(+)
- create mode 100644 drivers/clk/sunxi/clk_a523_r.c
+ drivers/pinctrl/sunxi/Kconfig         | 10 ++++++
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c | 49 +++++++++++++++++++++++++++
+ 2 files changed, 59 insertions(+)
 
-diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
-index 74e89b86301..1c1cc82719c 100644
---- a/drivers/clk/sunxi/Kconfig
-+++ b/drivers/clk/sunxi/Kconfig
-@@ -136,4 +136,11 @@ config CLK_SUN55I_A523
- 	  This enables common clock driver support for platforms based
- 	  on Allwinner A523/T527 SoC.
+diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
+index 65e8192a99a..54314992299 100644
+--- a/drivers/pinctrl/sunxi/Kconfig
++++ b/drivers/pinctrl/sunxi/Kconfig
+@@ -139,4 +139,14 @@ config PINCTRL_SUN20I_D1
+ 	default MACH_SUN8I_R528
+ 	select PINCTRL_SUNXI
  
-+config CLK_SUN55I_A523_R
-+	bool "Clock driver for Allwinner A523 generation PRCM"
++config PINCTRL_SUN55I_A523
++	bool "Support for the Allwinner A523 PIO"
 +	default MACH_SUN55I_A523
-+	help
-+	  This enables common clock driver support for the PRCM
-+	  in Allwinner A523/T527 SoCs.
++	select PINCTRL_SUNXI
 +
- endif # CLK_SUNXI
-diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
-index dd33eabe2ed..93b542cebcd 100644
---- a/drivers/clk/sunxi/Makefile
-+++ b/drivers/clk/sunxi/Makefile
-@@ -26,3 +26,4 @@ obj-$(CONFIG_CLK_SUN50I_H616) += clk_h616.o
- obj-$(CONFIG_CLK_SUN50I_A64) += clk_a64.o
- obj-$(CONFIG_CLK_SUN50I_A100) += clk_a100.o
- obj-$(CONFIG_CLK_SUN55I_A523) += clk_a523.o
-+obj-$(CONFIG_CLK_SUN55I_A523_R) += clk_a523_r.o
-diff --git a/drivers/clk/sunxi/clk_a523_r.c b/drivers/clk/sunxi/clk_a523_r.c
-new file mode 100644
-index 00000000000..e864ce16199
---- /dev/null
-+++ b/drivers/clk/sunxi/clk_a523_r.c
-@@ -0,0 +1,44 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2024 Arm Ltd.
-+ */
++config PINCTRL_SUN55I_A523_R
++	bool "Support for the Allwinner A523 R-PIO"
++	default MACH_SUN55I_A523
++	select PINCTRL_SUNXI
 +
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <clk/sunxi.h>
-+#include <dt-bindings/clock/sun55i-a523-r-ccu.h>
-+#include <dt-bindings/reset/sun55i-a523-r-ccu.h>
-+#include <linux/bitops.h>
-+
-+static struct ccu_clk_gate a523_r_gates[] = {
-+	[CLK_R_AHB]             = GATE_DUMMY,
-+	[CLK_R_APB0]            = GATE_DUMMY,
-+	[CLK_R_APB1]            = GATE_DUMMY,
-+	[CLK_BUS_R_TWD]         = GATE(0x12c, BIT(0)),
-+	[CLK_BUS_R_I2C0]        = GATE(0x19c, BIT(0)),
-+	[CLK_BUS_R_I2C1]        = GATE(0x19c, BIT(1)),
-+	[CLK_BUS_R_I2C2]        = GATE(0x19c, BIT(2)),
-+	[CLK_BUS_R_RTC]         = GATE(0x20c, BIT(0)),
-+};
-+
-+static struct ccu_reset a523_r_resets[] = {
-+//	[RST_BUS_R_TIMER]       = RESET(0x11c, BIT(16)),
-+	[RST_BUS_R_TWD]         = RESET(0x12c, BIT(16)),
-+//	[RST_BUS_R_PWMCTRL]     = RESET(0x13c, BIT(16)),
-+//	[RST_BUS_R_SPI]         = RESET(0x15c, BIT(16)),
-+//	[RST_BUS_R_UART0]       = RESET(0x18c, BIT(16)),
-+//	[RST_BUS_R_UART1]       = RESET(0x18c, BIT(17)),
-+	[RST_BUS_R_I2C0]        = RESET(0x19c, BIT(16)),
-+	[RST_BUS_R_I2C1]        = RESET(0x19c, BIT(17)),
-+	[RST_BUS_R_I2C2]        = RESET(0x19c, BIT(18)),
-+//	[RST_BUS_R_PPU1]        = RESET(0x1ac, BIT(17)),
-+	[RST_BUS_R_RTC]         = RESET(0x20c, BIT(16)),
-+//	[RST_BUS_R_CPUCFG]      = RESET(0x22c, BIT(16)),
-+};
-+
-+const struct ccu_desc a523_r_ccu_desc = {
-+	.gates = a523_r_gates,
-+	.resets = a523_r_resets,
-+	.num_gates = ARRAY_SIZE(a523_r_gates),
-+	.num_resets = ARRAY_SIZE(a523_r_resets),
-+};
-diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
-index 30baabaafcd..842a0541bd6 100644
---- a/drivers/clk/sunxi/clk_sunxi.c
-+++ b/drivers/clk/sunxi/clk_sunxi.c
-@@ -127,6 +127,7 @@ extern const struct ccu_desc h6_r_ccu_desc;
- extern const struct ccu_desc r40_ccu_desc;
- extern const struct ccu_desc v3s_ccu_desc;
- extern const struct ccu_desc a523_ccu_desc;
-+extern const struct ccu_desc a523_r_ccu_desc;
+ endif
+diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+index c38edf7d4f5..46b266a3a1d 100644
+--- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
++++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+@@ -759,6 +759,29 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun50i_h616_pinctrl_desc =
+ 	.num_banks	= 9,
+ };
  
- static const struct udevice_id sunxi_clk_ids[] = {
- #ifdef CONFIG_CLK_SUN4I_A10
-@@ -228,6 +229,10 @@ static const struct udevice_id sunxi_clk_ids[] = {
- #ifdef CONFIG_CLK_SUN55I_A523
- 	{ .compatible = "allwinner,sun55i-a523-ccu",
- 	  .data = (ulong)&a523_ccu_desc },
++static const struct sunxi_pinctrl_function sun55i_a523_pinctrl_functions[] = {
++	{ "emac0",	5 },	/* PI0-PI16 */
++	{ "gpio_in",	0 },
++	{ "gpio_out",	1 },
++	{ "mmc0",	2 },	/* PF0-PF5 */
++	{ "mmc1",	2 },	/* PG0-PG5 */
++	{ "mmc2",	3 },	/* PC0-PC16 */
++	{ "spi0",	4 },	/* PC0-PC7, PC15-PC16 */
++#if IS_ENABLED(CONFIG_UART0_PORT_F)
++	{ "uart0",	3 },	/* PF2-PF4 */
++#else
++	{ "uart0",	2 },	/* PH0-PH1 */
 +#endif
-+#ifdef CONFIG_CLK_SUN55I_A523_R
-+	{ .compatible = "allwinner,sun55i-a523-r-ccu",
-+	  .data = (ulong)&a523_r_ccu_desc },
++	{ "uart1",	2 },	/* PG6-PG7 */
++};
++
++static const struct sunxi_pinctrl_desc __maybe_unused sun55i_a523_pinctrl_desc = {
++	.functions	= sun55i_a523_pinctrl_functions,
++	.num_functions	= ARRAY_SIZE(sun55i_a523_pinctrl_functions),
++	.first_bank	= SUNXI_GPIO_A,
++	.num_banks	= 11,
++};
++
+ static const struct sunxi_pinctrl_function sun50i_h616_r_pinctrl_functions[] = {
+ 	{ "gpio_in",	0 },
+ 	{ "gpio_out",	1 },
+@@ -809,6 +832,20 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun50i_a100_r_pinctrl_desc
+ 	.num_banks	= 1,
+ };
+ 
++static const struct sunxi_pinctrl_function sun55i_a523_r_pinctrl_functions[] = {
++	{ "gpio_in",	0 },
++	{ "gpio_out",	1 },
++	{ "s_i2c",	2 },	/* PL0-PL1 */
++	{ "s_uart",	2 },	/* PL2-PL3 */
++};
++
++static const struct sunxi_pinctrl_desc __maybe_unused sun55i_a523_r_pinctrl_desc = {
++	.functions	= sun55i_a523_r_pinctrl_functions,
++	.num_functions	= ARRAY_SIZE(sun55i_a523_r_pinctrl_functions),
++	.first_bank	= SUNXI_GPIO_L,
++	.num_banks	= 2,
++};
++
+ static const struct udevice_id sunxi_pinctrl_ids[] = {
+ #ifdef CONFIG_PINCTRL_SUNIV_F1C100S
+ 	{
+@@ -983,6 +1020,18 @@ static const struct udevice_id sunxi_pinctrl_ids[] = {
+ 		.compatible = "allwinner,sun50i-a100-r-pinctrl",
+ 		.data = (ulong)&sun50i_a100_r_pinctrl_desc,
+ 	},
++#endif
++#ifdef CONFIG_PINCTRL_SUN55I_A523
++	{
++		.compatible = "allwinner,sun55i-a523-pinctrl",
++		.data = (ulong)&sun55i_a523_pinctrl_desc,
++	},
++#endif
++#ifdef CONFIG_PINCTRL_SUN55I_A523_R
++	{
++		.compatible = "allwinner,sun55i-a523-r-pinctrl",
++		.data = (ulong)&sun55i_a523_r_pinctrl_desc,
++	},
  #endif
- 	{ }
+ 	{}
  };
 -- 
 2.46.3
