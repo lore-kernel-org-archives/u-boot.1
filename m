@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE4BC28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 23:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B13C28B30
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 23:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B21DD8192A;
-	Mon, 24 Mar 2025 00:51:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DEB82819B1;
+	Mon, 24 Mar 2025 00:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D1C8192A; Mon, 24 Mar 2025 00:51:08 +0100 (CET)
+ id 1FB6681D3B; Mon, 24 Mar 2025 00:53:02 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D39068186D
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 00:51:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 13C7D8186D
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 00:53:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 99E8C106F;
- Sun, 23 Mar 2025 16:51:11 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 02399106F;
+ Sun, 23 Mar 2025 16:53:06 -0700 (PDT)
 Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3207B3F58B;
- Sun, 23 Mar 2025 16:51:04 -0700 (PDT)
-Date: Sun, 23 Mar 2025 23:50:27 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6E0AC3F58B;
+ Sun, 23 Mar 2025 16:52:58 -0700 (PDT)
+Date: Sun, 23 Mar 2025 23:52:35 +0000
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Mikhail
  Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 01/34] sunxi: clock: H6: drop usage of struct sunxi_ccm_reg
-Message-ID: <20250323235027.5d0f34d3@minigeek.lan>
-In-Reply-To: <4995090.31r3eYUQgx@jernej-laptop>
+Subject: Re: [PATCH 28/34] sunxi: armv8: FEL: save and restore SP_IRQ
+Message-ID: <20250323235235.62fde853@minigeek.lan>
+In-Reply-To: <8544399.NyiUUSuA9g@jernej-laptop>
 References: <20250323113544.7933-1-andre.przywara@arm.com>
- <20250323113544.7933-2-andre.przywara@arm.com>
- <4995090.31r3eYUQgx@jernej-laptop>
+ <20250323113544.7933-29-andre.przywara@arm.com>
+ <8544399.NyiUUSuA9g@jernej-laptop>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -59,261 +59,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 23 Mar 2025 12:56:55 +0100
+On Sun, 23 Mar 2025 13:26:34 +0100
 Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
-Hi Jernej,
-
-thanks for having a look!
-
-> Dne nedelja, 23. marec 2025 ob 12:35:11 Srednjeevropski standardni =C4=8D=
+> Dne nedelja, 23. marec 2025 ob 12:35:38 Srednjeevropski standardni =C4=8D=
 as je Andre Przywara napisal(a):
-> > U-Boot drivers often revert to using C structures for modelling hardware
-> > register frames. This creates some problems:
-> > - A "struct" is a C language construct to group several variables
-> >   together. The details of the layout of this struct are partly subject
-> >   to the compiler's discretion (padding and alignment).
-> > - The "packed" attribute would force a certain layout, but we are not
-> >   using it.
-> > - The actual source of information from the data sheet is the register
-> >   offset. Here we create an artificial struct, carefully tuning the
-> >   layout (with a lot of reserved members) to match that offset. To help
-> >   with correctness, we put the desired information as a *comment*,
-> >   though this is purely for the human reader, and has no effect on the
-> >   generated layout. This sounds all very backwards.
-> > - Using a struct suggests we can assign a pointer and then access the
-> >   register content via the members. But this is not the case, instead
-> >   every MMIO register access must go through specific accessor function=
-s,
-> >   to meet the ordering and access size guarantees the hardware requires.
-> > - We share those structs in code shared across multiple SoC families,
-> >   though most SoCs define their own version of the struct. Members must
-> >   match in their name, across every SoC, otherwise compilation will fai=
-l.
-> >   We work around this with even more #ifdefs in the shared code.
-> > - Some SoCs have an *almost* identical layout, but differ in a few
-> >   registers. This requires hard to maintain #ifdef's in the struct
-> >   definition.
-> > - Some of the register frames are huge: the H6 CCU device defines 127
-> >   registers. We use 15 of them. Still the whole frame would need to be
-> >   described, which is very tedious, but for no reason.
-> > - Adding a new SoC often forces people to decide whether to share an
-> >   existing struct, or to create a new copy. For some cases (say like 80%
-> >   similarity) this works out badly either way.
+> > Thanks for Jernej's JTAG debugging effort, it turns out that the BROM
+> > expects SP_IRQ to be saved and restored, when we want to enter back into
+> > FEL after the SPL's AArch64 stint.
+> > Save and restore SP_IRQ as part of the FEL state handling. The banked
+> > MRS/MSR access to SP_IRQ, without actually being in IRQ mode, was
+> > introduced with the ARMv7 virtualisation extensions. The Arm Cortex-A8
+> > cores used in the A10/A13s or older F1C100s SoCs would not support that,
+> > but this code here is purely in the ARMv8/AArch64 code path, so it's
+> > safe to use unconditionally.
 > >=20
-> > The Linux kernel heavily frowns upon those register structs, and instead
-> > uses a much simpler solution: #define REG_NAME	<offset>
-> > This easily maps to the actual information from the data sheet, and can
-> > much simpler be shared across multiple SoCs, as it allows to have all
-> > SoC versions visible, so we can use C "if" statements instead of #ifdef=
-'s.
-> > Also it requires to just define the registers we need, and we can use
-> > alternative locations for some registers much more easily.
-> >=20
-> > Drop the usage of "struct sunxi_ccm_reg" in the H6 SPL clock code, by
-> > defining the respective register names and their offsets, then adding
-> > them to the base pointer.
-> > We cannot drop the struct definition quite yet, as it's also used in
-> > other drivers, still.
-> >=20
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >  .../include/asm/arch-sunxi/clock_sun50i_h6.h  | 12 +++++
-> >  arch/arm/mach-sunxi/clock_sun50i_h6.c         | 52 +++++++++----------
-> >  2 files changed, 36 insertions(+), 28 deletions(-)
-> >=20
-> > diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/a=
-rm/include/asm/arch-sunxi/clock_sun50i_h6.h
-> > index 76dd33c9477..a485e00f1f3 100644
-> > --- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-> > +++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-> > @@ -13,6 +13,18 @@
-> >  #include <linux/bitops.h>
-> >  #endif
-> > =20
-> > +#define CCU_H6_PLL1_CFG			0x000
-> > +#define CCU_H6_PLL5_CFG			0x010
-> > +#define CCU_H6_PLL6_CFG			0x020
-> > +#define CCU_H6_CPU_AXI_CFG		0x500
-> > +#define CCU_H6_PSI_AHB1_AHB2_CFG	0x510
-> > +#define CCU_H6_AHB3_CFG			0x51c
-> > +#define CCU_H6_APB1_CFG			0x520
-> > +#define CCU_H6_APB2_CFG			0x524
-> > +#define CCU_H6_MBUS_CFG			0x540
-> > +#define CCU_H6_UART_GATE_RESET		0x90c
-> > +#define CCU_H6_I2C_GATE_RESET		0x91c =20
+> > Reported-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com> =20
 >=20
-> I appreciate this work very much and thanks for doing it!
+> I have sneaky suspicion that this is already the issue on H616, but I
+> haven't yet confirmed.
 
-Ah, great, I was hoping for this kind of feedback. I voiced my concern
-about this many years ago, but this was met with some reservations back
-then.
+That's actually a very good point: if we reset the core, SP_IRQ should
+be reset as well - on all 64-bit SoCs, so also A64, H5, H6 and H616. We
+are surely not in an IRQ handler when entering the SPL, so the stack
+*content* is not relevant, but it should still point to some writable
+memory. So I keep scratching my head how this worked so far. If I find
+some time, I will try to dump the SP_IRQ content after reset, on those
+SoCs.
 
-> However, I
-> have just one more request - PLL1, PLL5, PLL6 and similar names are
-> relics of very old Allwinner SoC drivers. IMO it would be better to follow
-> names from user manual. This would lower confusion what are they to
-> uninitiated people.
+> FWIW:
+> Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-I agree, and that's literally patch 37/34 of that branch I took this
-series from ;-), so stay tuned for that. The reason this is not in here
-or before is that it affects all SoCs, and I wanted to keep that
-separate and not blocking the A523 series.
+Thanks for that!
 
 Cheers,
 Andre
 
 >=20
-> Best regards.
+> Best regards,
 > Jernej
->=20
-> > +
-> >  struct sunxi_ccm_reg {
-> >  	u32 pll1_cfg;		/* 0x000 pll1 (cpux) control */
-> >  	u8 reserved_0x004[12];
-> > diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunx=
-i/clock_sun50i_h6.c
-> > index b424a7893ea..482d9e0c695 100644
-> > --- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-> > +++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-> > @@ -6,8 +6,7 @@
-> >  #ifdef CONFIG_XPL_BUILD
-> >  void clock_init_safe(void)
-> >  {
-> > -	struct sunxi_ccm_reg *const ccm =3D
-> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
-> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
-> >  	struct sunxi_prcm_reg *const prcm =3D
-> >  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
-> > =20
-> > @@ -32,60 +31,59 @@ void clock_init_safe(void)
-> > =20
-> >  	clock_set_pll1(408000000);
-> > =20
-> > -	writel(CCM_PLL6_DEFAULT, &ccm->pll6_cfg);
-> > -	while (!(readl(&ccm->pll6_cfg) & CCM_PLL6_LOCK))
-> > +	writel(CCM_PLL6_DEFAULT, ccm + CCU_H6_PLL6_CFG);
-> > +	while (!(readl(ccm + CCU_H6_PLL6_CFG) & CCM_PLL6_LOCK))
-> >  		;
-> > =20
-> > -	clrsetbits_le32(&ccm->cpu_axi_cfg, CCM_CPU_AXI_APB_MASK | CCM_CPU_AXI=
-_AXI_MASK,
-> > +	clrsetbits_le32(ccm + CCU_H6_CPU_AXI_CFG,
-> > +			CCM_CPU_AXI_APB_MASK | CCM_CPU_AXI_AXI_MASK,
-> >  			CCM_CPU_AXI_DEFAULT_FACTORS);
-> > =20
-> > -	writel(CCM_PSI_AHB1_AHB2_DEFAULT, &ccm->psi_ahb1_ahb2_cfg);
-> > +	writel(CCM_PSI_AHB1_AHB2_DEFAULT, ccm + CCU_H6_PSI_AHB1_AHB2_CFG);
-> >  #ifdef CCM_AHB3_DEFAULT
-> > -	writel(CCM_AHB3_DEFAULT, &ccm->ahb3_cfg);
-> > +	writel(CCM_AHB3_DEFAULT, ccm + CCU_H6_AHB3_CFG);
-> >  #endif
-> > -	writel(CCM_APB1_DEFAULT, &ccm->apb1_cfg);
-> > +	writel(CCM_APB1_DEFAULT, ccm + CCU_H6_APB1_CFG);
-> > =20
-> >  	/*
-> >  	 * The mux and factor are set, but the clock will be enabled in
-> >  	 * DRAM initialization code.
-> >  	 */
-> > -	writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3), &ccm->mbus_cfg);
-> > +	writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3), ccm + CCU_H6_MBUS_CFG);
-> >  }
-> > =20
-> >  void clock_init_uart(void)
-> >  {
-> > -	struct sunxi_ccm_reg *const ccm =3D
-> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
-> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
-> > =20
-> >  	/* uart clock source is apb2 */
-> >  	writel(APB2_CLK_SRC_OSC24M|
-> >  	       APB2_CLK_RATE_N_1|
-> >  	       APB2_CLK_RATE_M(1),
-> > -	       &ccm->apb2_cfg);
-> > +	       ccm + CCU_H6_APB2_CFG);
-> > =20
-> >  	/* open the clock for uart */
-> > -	setbits_le32(&ccm->uart_gate_reset,
-> > +	setbits_le32(ccm + CCU_H6_UART_GATE_RESET,
-> >  		     1 << (CONFIG_CONS_INDEX - 1));
-> > =20
-> >  	/* deassert uart reset */
-> > -	setbits_le32(&ccm->uart_gate_reset,
-> > +	setbits_le32(ccm + CCU_H6_UART_GATE_RESET,
-> >  		     1 << (RESET_SHIFT + CONFIG_CONS_INDEX - 1));
-> >  }
-> > =20
-> >  void clock_set_pll1(unsigned int clk)
-> >  {
-> > -	struct sunxi_ccm_reg * const ccm =3D
-> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
-> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
-> >  	u32 val;
-> > =20
-> >  	/* Do not support clocks < 288MHz as they need factor P */
-> >  	if (clk < 288000000) clk =3D 288000000;
-> > =20
-> >  	/* Switch to 24MHz clock while changing PLL1 */
-> > -	val =3D readl(&ccm->cpu_axi_cfg);
-> > +	val =3D readl(ccm + CCU_H6_CPU_AXI_CFG);
-> >  	val &=3D ~CCM_CPU_AXI_MUX_MASK;
-> >  	val |=3D CCM_CPU_AXI_MUX_OSC24M;
-> > -	writel(val, &ccm->cpu_axi_cfg);
-> > +	writel(val, ccm + CCU_H6_CPU_AXI_CFG);
-> > =20
-> >  	/* clk =3D 24*n/p, p is ignored if clock is >288MHz */
-> >  	val =3D CCM_PLL1_CTRL_EN | CCM_PLL1_LOCK_EN | CCM_PLL1_CLOCK_TIME_2;
-> > @@ -94,20 +92,19 @@ void clock_set_pll1(unsigned int clk)
-> >  	       val |=3D CCM_PLL1_OUT_EN;
-> >  	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
-> >  	       val |=3D CCM_PLL1_OUT_EN | CCM_PLL1_LDO_EN;
-> > -	writel(val, &ccm->pll1_cfg);
-> > -	while (!(readl(&ccm->pll1_cfg) & CCM_PLL1_LOCK)) {}
-> > +	writel(val, ccm + CCU_H6_PLL1_CFG);
-> > +	while (!(readl(ccm + CCU_H6_PLL1_CFG) & CCM_PLL1_LOCK)) {}
-> > =20
-> >  	/* Switch CPU to PLL1 */
-> > -	val =3D readl(&ccm->cpu_axi_cfg);
-> > +	val =3D readl(ccm + CCU_H6_CPU_AXI_CFG);
-> >  	val &=3D ~CCM_CPU_AXI_MUX_MASK;
-> >  	val |=3D CCM_CPU_AXI_MUX_PLL_CPUX;
-> > -	writel(val, &ccm->cpu_axi_cfg);
-> > +	writel(val, ccm + CCU_H6_CPU_AXI_CFG);
-> >  }
-> > =20
-> >  int clock_twi_onoff(int port, int state)
-> >  {
-> > -	struct sunxi_ccm_reg *const ccm =3D
-> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
-> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
-> >  	struct sunxi_prcm_reg *const prcm =3D
-> >  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
-> >  	u32 value, *ptr;
-> > @@ -120,7 +117,7 @@ int clock_twi_onoff(int port, int state)
-> >  		ptr =3D &prcm->twi_gate_reset;
-> >  	} else {
-> >  		shift =3D port;
-> > -		ptr =3D &ccm->twi_gate_reset;
-> > +		ptr =3D ccm + CCU_H6_I2C_GATE_RESET;
-> >  	}
-> > =20
-> >  	/* set the apb clock gate and reset for twi */
-> > @@ -136,9 +133,8 @@ int clock_twi_onoff(int port, int state)
-> >  /* PLL_PERIPH0 clock, used by the MMC driver */
-> >  unsigned int clock_get_pll6(void)
-> >  {
-> > -	struct sunxi_ccm_reg *const ccm =3D
-> > -		(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
-> > -	uint32_t rval =3D readl(&ccm->pll6_cfg);
-> > +	void *const ccm =3D (void *)SUNXI_CCM_BASE;
-> > +	uint32_t rval =3D readl(ccm + CCU_H6_PLL6_CFG);
-> >  	int n =3D ((rval & CCM_PLL6_CTRL_N_MASK) >> CCM_PLL6_CTRL_N_SHIFT) + =
-1;
-> >  	int div2 =3D ((rval & CCM_PLL6_CTRL_DIV2_MASK) >>
-> >  		    CCM_PLL6_CTRL_DIV2_SHIFT) + 1;
-> >  =20
->=20
->=20
 >=20
 >=20
 >=20
