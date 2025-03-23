@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD00C28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 16:02:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B07EC36005
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 16:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4E2982064;
-	Sun, 23 Mar 2025 17:01:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F1E3B820A1;
+	Sun, 23 Mar 2025 17:01:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742745716;
-	bh=ilL2tlpxvvjHwfGuF6tUH6gxP41enJoVazHaBfpvFjE=;
+	s=phobos-20191101; t=1742745720;
+	bh=I0Um1WymYy+U6Iiv6wRh8ji0n5sKvh65djX5C+LOFZ0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vggmdVXA2fGaqSH4lmOINh0ShThCGL0A4AZx/xqh9gcFGjEYdJXm/xSyh2dyKDCCf
-	 SlV9V3c+z/JJXzdASgGUoQt4OhVxuGUJwN7DQkMaKknB7I0C2lqgifokucb+ymK4DA
-	 hGRhZR8BDK1Rz97XSx17V87o7y28hmqn9nppo2j0/k+Xcybm58nFrYcH7yzJklGPQc
-	 cVT1zxzaMG5WaySxSxL16/qVPowBl+e8dmuf5xHMUv3yU0EKTEsFSL7kGR+ETsN5xT
-	 jo46RkJrG5gm83ybtDScHmmVJhdPO15YyZnyKzPcBMy1nhC+x1mnLFJkq6zaBK1Sd9
-	 1ESKhnbZ3yDEA==
+	b=krntCo1673TsmxtYyxb1O4YVrn9Vhw8x5HXTizO/fN0YDPQun/bKRIo6oY5fmoQeq
+	 eAxnip68QCifKFmxWxtRj4pwhRul9r2PHJgHMCoUSxpxDdPm3O6rwd+U0hHCEWEYsx
+	 AGAJ3RT8ApShiz5YQpPdFYFOUP4QegbTSNJaRUwZXy8BSsbV7oeGg2/X04er9+77jz
+	 qGlXump5ZtLDcLMqhP9ic7Sc4N8gJ7/NSdTePQXj4KmOY0aRm+6gdzTACE6OV8+1Cl
+	 LjdOyiF/Z/aKzJAwkc/1BEstm1GS6Qbc3vn3zHPz/dP2dILaA9xaV9E12719OppK7g
+	 ORbiIE9GRwQoQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8E6681F71; Sun, 23 Mar 2025 17:01:55 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 47EF8820A1; Sun, 23 Mar 2025 17:01:57 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C030C81DD6
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 17:01:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C87481E3E
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 17:01:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="GUgqekGV"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="HLyLQAUD"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 582ED102A4AFB; Sun, 23 Mar 2025 17:01:52 +0100 (CET)
+ with ESMTPSA id 611A91029024A; Sun, 23 Mar 2025 17:01:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742745713; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1742745714; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=ilL2tlpxvvjHwfGuF6tUH6gxP41enJoVazHaBfpvFjE=;
- b=GUgqekGVTeKxJMnPfBaRQ50g5SFglOsY2AQRFEQMv56p0lR9J49rjaFoFbFTv7NaeJpjm2
- U8rcC0xFYD8aTQi4h2hjybjMPN0TJDA9D3/Xl7GxEJ9ANOOo7llYf420ekISUb5RweE+qn
- oujOQ+FuMuAV29pWTPLs/Dp3cozR5cerl8DS55Bmq2ZzhsodxYF+MjEbhqv7fP7Zk1NOKl
- sKlmGL56ZPlHtLvhqjqnjJGTavc9oB4JjxmZl7/pXnuONx30ohI5HEA5l9NdYe+nsB9jid
- jtnXPRuLMQqdXcgcF+JqkYM2tquyaNFXXpUQJUImhaimDLZGjaHcllB5VXgbSg==
+ bh=I0Um1WymYy+U6Iiv6wRh8ji0n5sKvh65djX5C+LOFZ0=;
+ b=HLyLQAUDOpKA2682ZQLlEi1fprXjP/TW4zIAhkinmFul/v5w9OxVGYJmlBFJ1a1OHBxNHu
+ o6JON2xNpHErTbo8DKKcTH/bQCNvalgLhnrRG8L09xwOjtrp6wma7QhqBIezhzprnAys9t
+ 8zcaiKPuzmAwLi16iY/AjMxizKLCKEowqsu3rvcS2KyYmbbbglutW1n0jDk7sa/PrzWjjt
+ iUrylv3dvzb4XAflAhylFNQH5NHadqU3OG+Lf5CC4lQkL7P047rnHmflMwv88uEQNFkb6x
+ 2/kn+OdAMOc7wzsyv2ba3Pt3cCb1AOqnnBLgec0KbiNf3hyJaoROm+GsLQmlqg==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>,
@@ -57,9 +56,9 @@ Cc: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Peng Fan <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
-Subject: [PATCH v2 01/24] clk: Add clk_resolve_parent_clk()
-Date: Sun, 23 Mar 2025 16:58:30 +0100
-Message-ID: <20250323160107.145749-2-marex@denx.de>
+Subject: [PATCH v2 02/24] clk: clk-mux: Fold clk_register_mux()
+Date: Sun, 23 Mar 2025 16:58:31 +0100
+Message-ID: <20250323160107.145749-3-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250323160107.145749-1-marex@denx.de>
 References: <20250323160107.145749-1-marex@denx.de>
@@ -82,13 +81,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add clk_resolve_parent_clk() to resolve parent clock udevice name
-based on clock-names DT property. This is used in SoC clock drivers
-to look up the clock name in clock tables, which matches a clock
-name in DT clock-names property, and convert it into udevice name
-which is used by U-Boot clock framework to look up parent clock in
-e.g. clk_register() using uclass_get_device_by_name(UCLASS_CLK,
-parent_name, &parent);
+Neither clk_register_mux_table() nor clk_hw_register_mux_table()
+are called outside of clk-mux.c , fold both into clk_register_mux().
+No functional change.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -106,59 +101,78 @@ Cc: uboot-imx@nxp.com
 ---
 V2: Rebase on u-boot/next with additional clock patches
 ---
- drivers/clk/clk-uclass.c | 18 ++++++++++++++++++
- include/clk.h            |  9 +++++++++
- 2 files changed, 27 insertions(+)
+ drivers/clk/clk-mux.c | 39 +++++----------------------------------
+ 1 file changed, 5 insertions(+), 34 deletions(-)
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 353ae476068..90b70529a47 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -420,6 +420,24 @@ int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
- 	return clk_get_by_index_nodev(node, index, clk);
- }
+diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
+index 62477e15d27..9507a779525 100644
+--- a/drivers/clk/clk-mux.c
++++ b/drivers/clk/clk-mux.c
+@@ -159,15 +159,15 @@ const struct clk_ops clk_mux_ops = {
+ 	.set_parent = clk_mux_set_parent,
+ };
  
-+const char *
-+clk_resolve_parent_clk(struct udevice *dev, const char *name)
-+{
-+	struct udevice *parent;
-+	struct clk clk;
-+	int ret;
-+
-+	ret = uclass_get_device_by_name(UCLASS_CLK, name, &parent);
-+	if (!ret)
-+		return name;
-+
-+	ret = clk_get_by_name(dev, name, &clk);
-+	if (!clk.dev)
-+		return name;
-+
-+	return clk.dev->name;
-+}
-+
- int clk_release_all(struct clk *clk, unsigned int count)
+-struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
++struct clk *clk_register_mux(struct device *dev, const char *name,
+ 		const char * const *parent_names, u8 num_parents,
+ 		unsigned long flags,
+-		void __iomem *reg, u8 shift, u32 mask,
+-		u8 clk_mux_flags, u32 *table)
++		void __iomem *reg, u8 shift, u8 width,
++		u8 clk_mux_flags)
  {
- 	unsigned int i;
-diff --git a/include/clk.h b/include/clk.h
-index 045e923a529..a6ef4e02692 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -350,6 +350,15 @@ static inline int clk_get_by_name_nodev_optional(ofnode node, const char *name,
- 	return ret;
++	u32 mask = BIT(width) - 1;
+ 	struct clk_mux *mux;
+ 	struct clk *clk;
+-	u8 width = 0;
+ 	int ret;
+ 
+ 	if (clk_mux_flags & CLK_MUX_HIWORD_MASK) {
+@@ -192,7 +192,7 @@ struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
+ 	mux->shift = shift;
+ 	mux->mask = mask;
+ 	mux->flags = clk_mux_flags;
+-	mux->table = table;
++	mux->table = NULL;
+ #if IS_ENABLED(CONFIG_SANDBOX_CLK_CCF)
+ 	mux->io_mux_val = *(u32 *)reg;
+ #endif
+@@ -216,35 +216,6 @@ struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
+ 	return clk;
  }
  
-+/**
-+ * clk_resolve_parent_clk - Determine name of clock udevice based on clock-names
-+ * @dev:	The client udevice.
-+ * @name:	The name of the clock to look up.
-+ *
-+ * Return name of the clock udevice which represents clock with clock-names name.
-+ */
-+const char *clk_resolve_parent_clk(struct udevice *dev, const char *name);
-+
- /**
-  * enum clk_defaults_stage - What stage clk_set_defaults() is called at
-  * @CLK_DEFAULTS_PRE: Called before probe. Setting of defaults for clocks owned
+-struct clk *clk_register_mux_table(struct device *dev, const char *name,
+-		const char * const *parent_names, u8 num_parents,
+-		unsigned long flags,
+-		void __iomem *reg, u8 shift, u32 mask,
+-		u8 clk_mux_flags, u32 *table)
+-{
+-	struct clk *clk;
+-
+-	clk = clk_hw_register_mux_table(dev, name, parent_names, num_parents,
+-				       flags, reg, shift, mask, clk_mux_flags,
+-				       table);
+-	if (IS_ERR(clk))
+-		return ERR_CAST(clk);
+-	return clk;
+-}
+-
+-struct clk *clk_register_mux(struct device *dev, const char *name,
+-		const char * const *parent_names, u8 num_parents,
+-		unsigned long flags,
+-		void __iomem *reg, u8 shift, u8 width,
+-		u8 clk_mux_flags)
+-{
+-	u32 mask = BIT(width) - 1;
+-
+-	return clk_register_mux_table(dev, name, parent_names, num_parents,
+-				      flags, reg, shift, mask, clk_mux_flags,
+-				      NULL);
+-}
+-
+ U_BOOT_DRIVER(ccf_clk_mux) = {
+ 	.name	= UBOOT_DM_CLK_CCF_MUX,
+ 	.id	= UCLASS_CLK,
 -- 
 2.47.2
 
