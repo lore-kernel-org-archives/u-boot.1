@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7AE2C36005
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 11:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8E8AC28B30
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 11:40:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26BA881FE8;
+	by phobos.denx.de (Postfix) with ESMTP id 76B8581FFC;
 	Sun, 23 Mar 2025 12:36:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B03F81DD6; Sun, 23 Mar 2025 12:36:47 +0100 (CET)
+ id 3D31B81DD6; Sun, 23 Mar 2025 12:36:48 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6FDDD82008
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 12:36:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id AB03181FC8
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 12:36:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 95DC2106F;
- Sun, 23 Mar 2025 04:36:50 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CF369339;
+ Sun, 23 Mar 2025 04:36:51 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DCF103F694;
- Sun, 23 Mar 2025 04:36:42 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 21EC93F694;
+ Sun, 23 Mar 2025 04:36:44 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
  Mikhail Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: [PATCH 26/34] sunxi: update rmr_switch.S source code
-Date: Sun, 23 Mar 2025 11:35:36 +0000
-Message-ID: <20250323113544.7933-27-andre.przywara@arm.com>
+Subject: [PATCH 27/34] sunxi: armv8: FEL: save and restore GICv3 registers
+Date: Sun, 23 Mar 2025 11:35:37 +0000
+Message-ID: <20250323113544.7933-28-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
 In-Reply-To: <20250323113544.7933-1-andre.przywara@arm.com>
 References: <20250323113544.7933-1-andre.przywara@arm.com>
@@ -56,91 +56,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Because the Allwinner BootROM always runs in AArch32, even on ARMv8 SoCs,
-we need to switch to AArch64 first, but also need to save the CPU state,
-when we later may need to return to the BootROM, for continuing with the
-FEL USB protocol. This is done in 32-bit code, which we include into the
-AArch64 boot assembly file as a series of .word directives, containing
-the encoded AArch32 instructions. To be able to change and verify that
-code, we also kept an assembly file with the respective 32-bit code, but
-just for reference.
+To be able to return to the BootROM FEL USB debug code, we must restore
+the core's state as accurately as possible after the SPL has been run.
+Since the BootROM runs in AArch32, but the SPL uses AArch64, this requires
+a core reset, which clears the core's state.
+So far we were saving and restoring the required registers like SCTLR
+and VBAR, but could ignore the interrupt controller's state (GICC), since
+that lives in MMIO registers, unaffected by a core reset.
+Newer Allwinner SoCs now feature a GICv3 interrupt controller, which keeps
+some GIC state in architected system registers, and those are cleared
+when we switch back to AArch32.
 
-As this code is never compiled or assembled - it's just for
-documentation - it became stale over time: we didn't really update this
-along with the changes we made to the boot code. In particular the FEL
-save code was completely missing.
+To enable FEL operation on the Allwinner A523 SoC,
+Add AArch32 assembly code to save and restore the ICC_PMR and ICC_IGRPEN1
+system registers. The other GICv3 sysregs are either not relevant for the
+BROM operation, or haven't been changed from their reset defaults by the
+BROM anyway.
 
-Update that 32-bit assembly file, to match the current version used in
-boot0.h, including the FEL save routine. Also update the build
-instructions in the comments, to give people an actual chance to
-assemble this code.
+This enables FEL operation on the Allwinner A523 family of SoCs.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- arch/arm/mach-sunxi/rmr_switch.S | 40 +++++++++++++++++++++++++++-----
- 1 file changed, 34 insertions(+), 6 deletions(-)
+ arch/arm/cpu/armv8/fel_utils.S          |  7 +++++++
+ arch/arm/include/asm/arch-sunxi/boot0.h | 10 +++++++++-
+ arch/arm/mach-sunxi/board.c             |  2 ++
+ arch/arm/mach-sunxi/rmr_switch.S        | 10 ++++++++++
+ 4 files changed, 28 insertions(+), 1 deletion(-)
 
+diff --git a/arch/arm/cpu/armv8/fel_utils.S b/arch/arm/cpu/armv8/fel_utils.S
+index f7707acdf1a..f9d0c9e1d0a 100644
+--- a/arch/arm/cpu/armv8/fel_utils.S
++++ b/arch/arm/cpu/armv8/fel_utils.S
+@@ -79,5 +79,12 @@ back_in_32:
+ 	.word	0xe590100c	// ldr	r1, [r0, #12]
+ 	.word	0xee011f10	// mcr	15, 0, r1, cr1, cr0, {0}  ; SCTLR
+ 	.word	0xf57ff06f	// isb
++#ifdef CONFIG_MACH_SUN55I_A523
++	.word	0xe5901014	// ldr  r1, [r0, #20]
++	.word	0xee041f16	// mcr  15, 0, r1, cr4, cr6, {0}; ICC_PMR
++	.word	0xe5901018	// ldr  r1, [r0, #24]
++	.word	0xee0c1ffc	// mcr  15, 0, r1, cr12, cr12, {7}; ICC_IGRPEN1
++#endif
++
+ 	.word	0xe12fff1e	// bx	lr		; return to FEL
+ ENDPROC(return_to_fel)
+diff --git a/arch/arm/include/asm/arch-sunxi/boot0.h b/arch/arm/include/asm/arch-sunxi/boot0.h
+index 24c81391d58..9baedc2e9af 100644
+--- a/arch/arm/include/asm/arch-sunxi/boot0.h
++++ b/arch/arm/include/asm/arch-sunxi/boot0.h
+@@ -30,7 +30,15 @@
+ 	.word	0xe580e00c	// str     lr, [r0, #12]
+ 	.word	0xee1cef10	// mrc     15, 0, lr, cr12, cr0, {0}
+ 	.word	0xe580e010	// str     lr, [r0, #16]
+-
++#ifdef CONFIG_MACH_SUN55I_A523
++	.word	0xee1cefbc	// mrc     15, 0, lr, cr12, cr12, {5}
++	.word	0xe31e0001	// tst     lr, #1
++	.word	0x0a000003	// beq     cc <start32+0x48>
++	.word	0xee14ef16	// mrc     15, 0, lr, cr4, cr6, {0}
++	.word	0xe580e014	// str     lr, [r0, #20]
++	.word	0xee1ceffc	// mrc     15, 0, lr, cr12, cr12, {7}
++	.word	0xe580e018	// str     lr, [r0, #24]
++#endif
+ 	.word	0xe59f1034	// ldr     r1, [pc, #52] ; RVBAR_ADDRESS
+ 	.word	0xe59f0034	// ldr     r0, [pc, #52] ; SUNXI_SRAMC_BASE
+ 	.word	0xe5900024	// ldr     r0, [r0, #36] ; SRAM_VER_REG
+diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+index 89aea61e8e8..195c40d00c6 100644
+--- a/arch/arm/mach-sunxi/board.c
++++ b/arch/arm/mach-sunxi/board.c
+@@ -35,6 +35,8 @@ struct fel_stash {
+ 	uint32_t cpsr;
+ 	uint32_t sctlr;
+ 	uint32_t vbar;
++	uint32_t icc_pmr;
++	uint32_t icc_igrpen1;
+ };
+ 
+ struct fel_stash fel_stash __section(".data");
 diff --git a/arch/arm/mach-sunxi/rmr_switch.S b/arch/arm/mach-sunxi/rmr_switch.S
-index 33e55d49686..422007c985b 100644
+index 422007c985b..de284c16b0b 100644
 --- a/arch/arm/mach-sunxi/rmr_switch.S
 +++ b/arch/arm/mach-sunxi/rmr_switch.S
-@@ -16,7 +16,9 @@
- @ the machine code must be inserted as verbatim .word statements into the
- @ beginning of the AArch64 U-Boot code.
- @ To get the encoded bytes, use:
--@ ${CROSS_COMPILE}gcc -c -o rmr_switch.o rmr_switch.S
-+@ ${CROSS_COMPILE}gcc -c -Iinclude -Iarch/arm/include	\
-+@   -D__ASSEMBLY__ -DCONFIG_ARM64			\
-+@   -o rmr_switch.o arch/arm/mach-sunxi/rmr_switch.S
- @ ${CROSS_COMPILE}objdump -d rmr_switch.o
- @
- @ The resulting words should be inserted into the U-Boot file at
-@@ -29,14 +31,40 @@
- #include <config.h>
+@@ -53,6 +53,16 @@ start32:
+ 	str	lr, [r0, #12]
+ 	mrc	p15, 0, lr, cr12, cr0, 0	// VBAR
+ 	str	lr, [r0, #16]
++//#ifdef CONFIG_MACH_SUN55I_A523
++	mrc	p15, 0, lr, cr12, cr12, 5	// ICC_SRE
++	tst	lr, #1
++	beq	1f
++	mrc	p15, 0, lr, c4, c6, 0		// ICC_PMR
++	str	lr, [r0, #20]
++	mrc	p15, 0, lr, c12, c12, 7		// ICC_IGRPEN1
++	str	lr, [r0, #24]
++1:
++//#endif
  
- .text
-+	b	start32			// this is "tst x0, x0" in AArch64
-+	.word	0x14000047		// this is "b   reset"  in AArch64
- 
--#ifndef CONFIG_SUN50I_GEN_H6
--	ldr	r1, =0x017000a0		@ MMIO mapped RVBAR[0] register
-+	.space  0x78			// gap distance set by the common
-+					// encoding of the first instruction
-+fel_stash_addr:
-+	.word	fel_stash - .		// distance to fel_stash buffer
-+
-+start32:
-+	adr	r0, fel_stash_addr	// absolute location of fel_stash_addr
-+	ldr	r1, fel_stash_addr	// distance to actual fel_stash
-+	add	r0, r0, r1		// real address of fel_stash
-+
-+	/* save the current state as needed by the BROM for a later return */
-+	str	sp, [r0]
-+	str	lr, [r0, #4]
-+	mrs	lr, CPSR
-+	str	lr, [r0, #8]
-+	mrc	p15, 0, lr, cr1, cr0, 0		// SCTLR
-+	str	lr, [r0, #12]
-+	mrc	p15, 0, lr, cr12, cr0, 0	// VBAR
-+	str	lr, [r0, #16]
-+
-+	ldr	r1, =CONFIG_SUNXI_RVBAR_ADDRESS
-+	ldr	r0, =SUNXI_SRAMC_BASE
-+	ldr	r0, [r0, #36]			// SRAM_VER_REG
-+	ands	r0, r0, #0xff
-+	ldrne	r1, =CONFIG_SUNXI_RVBAR_ALTERNATIVE
-+#ifdef CONFIG_XPL_BUILD
-+	ldr	r0, =CONFIG_SPL_TEXT_BASE
- #else
--	ldr	r1, =0x09010040		@ MMIO mapped RVBAR[0] register
-+	ldr	r0, =CONFIG_TEXT_BASE
- #endif
--	ldr	r0, =0x57aA7add		@ start address, to be replaced
--	str	r0, [r1]
-+	str	r0, [r1]			// store start address in RVBAR
- 	dsb	sy
- 	isb	sy
- 	mrc	15, 0, r0, cr12, cr0, 2	@ read RMR register
+ 	ldr	r1, =CONFIG_SUNXI_RVBAR_ADDRESS
+ 	ldr	r0, =SUNXI_SRAMC_BASE
 -- 
 2.46.3
 
