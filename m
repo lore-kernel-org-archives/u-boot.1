@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DEFC28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 16:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E66C28B30
+	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 16:03:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5653E820F6;
+	by phobos.denx.de (Postfix) with ESMTP id A458E8210A;
 	Sun, 23 Mar 2025 17:02:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1742745726;
-	bh=UkglkOunDsgisd3TfxcdvaqbxZXoLw4RaY2kZmR3Dfo=;
+	bh=9i8tpLu3yNY/HP+8J2pdogBB7bnw21GzFa25yhTtxOM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=dInGJegZ7ef4uT3deF+1HU3QLsQ+N0UaHdgAl7t6ytfw060PiGIi3I5ADUM0Shdc3
-	 1IgV6sASb9yqtBZzMlsWGVtkeSSU8RhdCg23VpC1YdwKet3sGSsffK0juIBqUj+FAF
-	 6wKVT8jbRsrmYgFUkCMw3+hlDnijsu5mT+sf3qmfwmFOqwEjuFQQSd3XG+SWjdzOqz
-	 tEf0S+OLF6WVD4JWR9pgw6572f4w1GNtIr3rIKPvFZg1+if8g0RcjAh+Wyf0UMzeXj
-	 M8feWFoxoDoxLgzdulyF0WHGPXmjsX426XHEP2iC8PaazaiANKwzXIBSAOJuYKsetB
-	 xAK2CvB7lCP1w==
+	b=vEwl9T4us+epUr9otB5h/lNbuPytdFhhtwDrsp0E85a1TeR81pwoZoADbGUs4r5LR
+	 U7hUMncAUkuHfu6pseRl4EJ9II0jvXktdGBWx/uNKl6RoZrBIfBbT1cTozMT+8lONl
+	 yrSvXQHtXGh+4TJqjJgp1XMw06GW/zZIKA94Y6mm5nYGOeCiJSyc0azz5JAUrsunPJ
+	 RXQ4zNCNt1GxPH0YffY9KnTtX6Zdw8/BFhw94YQzMHl/S7qcvurQ86r48VxD5g97Jj
+	 PZgcgHdVFT1wee05i+Ojp9v47ldTatPwLM18+SWDlkAV5HLi6s+C+jkNE4HKAF5PE2
+	 rFpDyWbnd5y1Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8463F820E3; Sun, 23 Mar 2025 17:02:00 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 4373481CFD; Sun, 23 Mar 2025 17:02:01 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 712C381DAB
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 17:01:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F0DC81EDD
+ for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 17:01:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="diMXuFXe"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="JtK/9GBc"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0467C10290252; Sun, 23 Mar 2025 17:01:56 +0100 (CET)
+ with ESMTPSA id 287BA10290253; Sun, 23 Mar 2025 17:01:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742745717; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1742745718; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=UkglkOunDsgisd3TfxcdvaqbxZXoLw4RaY2kZmR3Dfo=;
- b=diMXuFXem/LcsB3WfH73XqaCcczlKGBLx8Tf1iPU2MtRD2ZziCb+ZG8by9ZfIi1BsuIxQy
- hGFgxVBQP4crbC4sC9r3sX8oPDFTheqCy4yNX/fxOHmk/2vnM4KJNLss83PRUtNaafbEMs
- UICrygUGcWdqnq9m4Lv7GI49e0B7amMFLQNypTzIONr1ACJOALuM+yypk6n4dgW+nvbU4V
- rupV9noMaV9GFgT6PnVC36rNh8Mj+SZ9Vx2q/8r9Kh8btnoLZZ3hupQ63QsV4sgLvz1B9t
- kgtvXLTI5nokoY1KsXGRAK+E/+SorpWA+wIr1vXecIdOWWjdz+O061D7nzvP0g==
+ bh=9i8tpLu3yNY/HP+8J2pdogBB7bnw21GzFa25yhTtxOM=;
+ b=JtK/9GBcxiysQ6qAem5zzGH1Qx4fyU2X6bOrZUY1oDHrZtPX5p50Zw9SLMbN0tlTXbL4M2
+ o/dnt0vk3irG3dTmKuPvjHn9UWblLG6M0jEA4J6RkvlD5GtMdsAhAf7MTtZeOhw7Qdt+7H
+ MgTz2A6qokk/btmelxtIiFK/bZ/TlV+7UazN7Yxyr/EzHf+LIAX6OPmyPbrjLoFjMeN0MC
+ MwaBwqB+esz8ll2pHMPZ+PiQdqLTDLDrj8nCU9ZPnKebn6tjOzm3o4zMrU4GWlbTnK4cYt
+ 6sRwBiJpQhkLKqdlwBueNi5Xa+6VKUpykqnzgvxk9NxemCb/fm0C/FfPJbElRQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>,
@@ -57,9 +56,10 @@ Cc: Marek Vasut <marex@denx.de>, Adam Ford <aford173@gmail.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Peng Fan <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com
-Subject: [PATCH v2 06/24] clk: imx: Pass struct udevice to clk_register_mux()
-Date: Sun, 23 Mar 2025 16:58:35 +0100
-Message-ID: <20250323160107.145749-7-marex@denx.de>
+Subject: [PATCH v2 07/24] clk: clk-gate: Use struct udevice instead of struct
+ device
+Date: Sun, 23 Mar 2025 16:58:36 +0100
+Message-ID: <20250323160107.145749-8-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250323160107.145749-1-marex@denx.de>
 References: <20250323160107.145749-1-marex@denx.de>
@@ -82,9 +82,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass U-Boot specific struct udevice pointer to clock parent device
-to clk_register_mux(), so clk_register_mux() can access the parent
-udevice.
+Use U-Boot specific struct udevice instead of Linux compatibility
+struct device in clk-gate registration.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -102,58 +101,36 @@ Cc: uboot-imx@nxp.com
 ---
 V2: Rebase on u-boot/next with additional clock patches
 ---
- drivers/clk/imx/clk.h | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/clk/clk-gate.c       | 2 +-
+ include/linux/clk-provider.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/clk/imx/clk.h b/drivers/clk/imx/clk.h
-index f18249ee8a8..6f0ae86f612 100644
---- a/drivers/clk/imx/clk.h
-+++ b/drivers/clk/imx/clk.h
-@@ -172,7 +172,7 @@ static inline struct clk *imx_clk_mux_flags(struct udevice *dev, const char *nam
- 			const char * const *parents, int num_parents,
- 			unsigned long flags)
- {
--	return clk_register_mux(NULL, name, parents, num_parents,
-+	return clk_register_mux(dev, name, parents, num_parents,
- 				flags | CLK_SET_RATE_NO_REPARENT, reg, shift,
- 				width, 0);
- }
-@@ -182,7 +182,7 @@ static inline struct clk *imx_clk_mux2_flags(struct udevice *dev, const char *na
- 		const char * const *parents,
- 		int num_parents, unsigned long flags)
- {
--	return clk_register_mux(NULL, name, parents, num_parents,
-+	return clk_register_mux(dev, name, parents, num_parents,
- 			flags | CLK_SET_RATE_NO_REPARENT | CLK_OPS_PARENT_ENABLE,
- 			reg, shift, width, 0);
- }
-@@ -191,7 +191,7 @@ static inline struct clk *imx_clk_mux(struct udevice *dev, const char *name,
- 			void __iomem *reg, u8 shift, u8 width, const char * const *parents,
- 			int num_parents)
- {
--	return clk_register_mux(NULL, name, parents, num_parents,
-+	return clk_register_mux(dev, name, parents, num_parents,
- 			CLK_SET_RATE_NO_REPARENT, reg, shift,
- 			width, 0);
- }
-@@ -201,7 +201,7 @@ imx_clk_busy_mux(struct udevice *dev, const char *name, void __iomem *reg, u8 sh
- 		 void __iomem *busy_reg, u8 busy_shift,
- 		 const char * const *parents, int num_parents)
- {
--	return clk_register_mux(NULL, name, parents, num_parents,
-+	return clk_register_mux(dev, name, parents, num_parents,
- 			CLK_SET_RATE_NO_REPARENT, reg, shift,
- 			width, 0);
- }
-@@ -210,7 +210,7 @@ static inline struct clk *imx_clk_mux2(struct udevice *dev, const char *name, vo
- 			u8 shift, u8 width, const char * const *parents,
- 			int num_parents)
- {
--	return clk_register_mux(NULL, name, parents, num_parents,
-+	return clk_register_mux(dev, name, parents, num_parents,
- 			CLK_SET_RATE_NO_REPARENT | CLK_OPS_PARENT_ENABLE,
- 			reg, shift, width, 0);
- }
+diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
+index bf1c6a93b46..cef98720b69 100644
+--- a/drivers/clk/clk-gate.c
++++ b/drivers/clk/clk-gate.c
+@@ -117,7 +117,7 @@ const struct clk_ops clk_gate_ops = {
+ 	.get_rate = clk_generic_get_rate,
+ };
+ 
+-struct clk *clk_register_gate(struct device *dev, const char *name,
++struct clk *clk_register_gate(struct udevice *dev, const char *name,
+ 			      const char *parent_name, unsigned long flags,
+ 			      void __iomem *reg, u8 bit_idx,
+ 			      u8 clk_gate_flags, spinlock_t *lock)
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index f27878ae6fa..e282be12897 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -105,7 +105,7 @@ struct clk_gate {
+ #define CLK_GATE_HIWORD_MASK		BIT(1)
+ 
+ extern const struct clk_ops clk_gate_ops;
+-struct clk *clk_register_gate(struct device *dev, const char *name,
++struct clk *clk_register_gate(struct udevice *dev, const char *name,
+ 			      const char *parent_name, unsigned long flags,
+ 			      void __iomem *reg, u8 bit_idx,
+ 			      u8 clk_gate_flags, spinlock_t *lock);
 -- 
 2.47.2
 
