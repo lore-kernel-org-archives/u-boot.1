@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22E0C36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 17:20:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44C88C3600C
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 17:21:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4914805C3;
-	Mon, 24 Mar 2025 18:20:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A3D0B805C3;
+	Mon, 24 Mar 2025 18:21:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dOFoHais";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bVjvsHQG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81D1B81026; Mon, 24 Mar 2025 18:20:15 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 3ACF0810E8; Mon, 24 Mar 2025 18:21:06 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DF80800C1
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 18:20:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2609F800C1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 18:21:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3feaedb39e9so1564660b6e.1
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:20:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso50304805e9.3
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742836812; x=1743441612; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Bi/gtRd16GqEp+MuU+DR7Pva9indRDjDT+fiwA+rZlA=;
- b=dOFoHaisTwe4fBYWDSZgqxk+h2kWbPV6uxFg663LMXdaEuBr1RzSnqUHmmbmQjrEsK
- +2eJXjPzLwop+SOMSj1SsydX0UGhmijHebyeO+rc9nw11qtP/ji7Us4sgDfAviVkauvV
- uR7tovO7XDFpHQMgeRvU+c2QJ5f9VZdH691vI=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742836862; x=1743441662;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ziH7egsmUVwb4bGMppR+yAvGTk3X0TR6pk27g8ocg8Q=;
+ b=bVjvsHQGz6b1UyLcRWd39bcGwnQercgwAUqjG8X76VORAAVQ2910QKxC495QviQbf0
+ CXORFAX5nfIY2jW0wTX//aOsGfOWfjNlsVK+TadN7l36os/LQOUmS+xlAkC041iQkpRr
+ ReDlfB9K12PcZtU4fE1v/Ho0DZgdk9of1MLfYH2/czKKJ1p0+jlQQROyJruSaW0XgexR
+ BRdP1URCinL4R8QMHdB4/1TM3tFUuMTpCrFkez9QJsKpOczRIzDJQH41KX8bZ+MytQvw
+ tSGFvjRIuDFqQyYujxMet09LF8zXK9XEJw35QLfAgPz1PexeBodDtoh7Uza+oNVsoqRz
+ Uv8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742836812; x=1743441612;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bi/gtRd16GqEp+MuU+DR7Pva9indRDjDT+fiwA+rZlA=;
- b=jrsXCK1YMGKq6vl7MXfa4syXeMpI1hlkYipQBihTTkVQW+JcSaHFpO3q6zVi9UAGyX
- fa71Q1hiradW4Gg0r9c58Ee7oLvHCA1KSUcvvHsqJKoLWWqcljX9ktRkJdibriDpBUly
- Ud2Z2kNLYYJ7KfulsxybSaPC4VfLAqLk60OvkJEb1zyuu0ER00ZPznrdN2S2V/blBKGD
- hYmlhr8YHy/ypU+YKcal13pIKgL1DE7DXyGZgM+2wU8c6hVMH8nj/sH3E+KFfALpulUJ
- 3SY/LbDGll4VDH1tCmuyOeKhFzSKtZDl9T2Q0dpmNADIwacmevX2KFmvNDcsufVr4HBl
- x5iw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV9bTBBmT0yS+1M17DOpEC8rvlhUyXbMsZJ/Nq7lkRFLMnL+/I12tvY+Zqvb6VbOvSaggseU9g=@lists.denx.de
-X-Gm-Message-State: AOJu0YyunLkl7pLnXsOe5IJBlt7kEPrwO3Vpg3aX7K9Y5oIDqcgeZDst
- vVKVEs2qfSet/FNoOlQZsM92dy3srdKNzkNnqrumPBbXuEtUi31K3fQ4gQaYuac=
-X-Gm-Gg: ASbGnctwLxgzF0y8b/PSeBgLwt4NVoX/wMO2El3xnimvR9SGy56yzrWJOIwaOOly6ns
- MuaCe+ANfu531FvEUaVlRbPYNCWvAyJAgMaJeHXorR1nlvtS/FSh+5arRZe1n0dbIUluxdAOpyc
- suRtPIjWtdbJxZVmjPhlkW15XI2Scycof9oJzEBI/FmO9VqkHSfpT0MQc4Ks9cVqqNjXjmxOBlJ
- UCoDKd46MXZ9gMkUZ08tHxkRsLUt63JyP/sC5+AG5KZYRr4pAwD0gQFVofO3JAuSuEDnjNYkvPf
- aOLnKeT9+VHjDc6sgRMW3ZaB4heDRAbNv5D0V6Xr5b8=
-X-Google-Smtp-Source: AGHT+IF+1xZYoksP5ZrDxwt+a41btPLyiVElBV8+xqU9uIv1q/s1+I7xPSi8PCRX7lKm0et2fk+mNA==
-X-Received: by 2002:a05:6808:10d3:b0:3f6:a889:59c6 with SMTP id
- 5614622812f47-3febf783065mr8359515b6e.26.1742836811699; 
- Mon, 24 Mar 2025 10:20:11 -0700 (PDT)
-Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
+ d=1e100.net; s=20230601; t=1742836862; x=1743441662;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ziH7egsmUVwb4bGMppR+yAvGTk3X0TR6pk27g8ocg8Q=;
+ b=eHZnosGuKYUPasAa1yyAC6cpdDK/UO1QoEXYuIeD7a+OW9MECCI0Cx6CVp6Bk6vL95
+ avxzmLeGy9KabYVeIdL+FpNMrZkth/jjI5yeLGB5Xo1PSdtxnj0nj+ILtgJ1Uo76mvnZ
+ lHOxm80yAvvQbJCIvDTRWQmJGataSklMymzYa6X6KqIFVmCh8Ht6GJYNcesfIrpIPmYQ
+ p3RMsPXAqr9aPOiujnNCyexA6uSFvAK3iwfgucfiarkj7+DIFh/9bIG5OciH10MFYS+r
+ rK98S9sMFURDMYzDsJYFD+jwyvBALugyf/ssre/N6YvMwvWWDvZOUir3fobI2H58w7L0
+ 34Qg==
+X-Gm-Message-State: AOJu0YwJanVpECfPf7jQx249ItZNqW84/w75q5RvPU4wC2mfdlx2CziG
+ gp30QtJQOhNnJ5/A4N8dVNBmAvfnyf1wOgJFerUXWFlbvXX3tzlxfG9oUSt0vgwxKG/bzm0nrMo
+ 9
+X-Gm-Gg: ASbGncvNBd1w4oILesabSKZakI0d3FlqH2k4qgSurFcBohr16tZR/xG6LhhgJga2a5+
+ GAsYNI8iIPHU40orAaU8aN25yNZgwP9w7QhJosVdvAiTpLgUpHv5kqyffgwiwBD8PED5keFGZwF
+ tIVJvXa3O/mbU5tryLUbJ34heTgDQk9/2My58qLWM9YuspxQMNu9psRGpZ37Vx/pnYM6TSrQP4y
+ Q0ptriwseOsIHKp/PDEpYsNJRF2th2U26OmANmK+3dt2eHs2EmV/p4OsmrHGQHxAIvCSkl0e3uF
+ D6RGwiKU5Uu9VI7lxqpj/RBD90NHguX/OU80EG/W788oUwGmuaFxCA==
+X-Google-Smtp-Source: AGHT+IGdJNLjp0nN24FJvsOwQAMnKC6tCBzYvYqjtf9u+tEA7o5xj+ZitbcnAp/dWfYUcT3P6NtlrA==
+X-Received: by 2002:a05:600c:3c82:b0:43d:45a:8fbb with SMTP id
+ 5b1f17b1804b1-43d50a1d1ebmr110576385e9.22.1742836862435; 
+ Mon, 24 Mar 2025 10:21:02 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3febf71117dsm1650576b6e.29.2025.03.24.10.20.10
+ 5b1f17b1804b1-43d4fd9e96bsm129023315e9.25.2025.03.24.10.21.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Mar 2025 10:20:11 -0700 (PDT)
-Date: Mon, 24 Mar 2025 11:20:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sukrut Bellary <sbellary@baylibre.com>
-Cc: Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>,
- Raghavendra Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] arm: dts: am335x: Add nodes for lcdc, panel and
- backlight
-Message-ID: <20250324172009.GB93000@bill-the-cat>
-References: <20250319202516.3300444-1-sbellary@baylibre.com>
- <20250319202516.3300444-4-sbellary@baylibre.com>
+ Mon, 24 Mar 2025 10:21:01 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, Zixun LI <admin@hifiphile.com>, Lukasz
+ Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: usb:composite: data abort on second ums launch
+In-Reply-To: <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de>
+References: <CA+GyqebHib_N7szGKkR0Ejac1rmoDQp+0a8t7ROng=PE3g9pGA@mail.gmail.com>
+ <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de>
+Date: Mon, 24 Mar 2025 18:21:01 +0100
+Message-ID: <87v7rypcoy.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+i+fLAxKEMU3ZP6j"
-Content-Disposition: inline
-In-Reply-To: <20250319202516.3300444-4-sbellary@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,46 +97,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---+i+fLAxKEMU3ZP6j
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you for the report.
 
-On Wed, Mar 19, 2025 at 01:25:16PM -0700, Sukrut Bellary wrote:
+On lun., mars 24, 2025 at 15:03, Marek Vasut <marex@denx.de> wrote:
 
-> For AM335x EVM[1], enable nodes required to enable the support for LCD
-> and PWM backlight.
-> This is required for the splash screen support.
->=20
-> [1] AM335x EVM - https://www.ti.com/tool/TMDXEVM3358
->=20
-> Signed-off-by: Sukrut Bellary <sbellary@baylibre.com>
-> ---
->  arch/arm/dts/am335x-evm.dts | 15 ++++++++++++++-
->  1 file changed, 14 insertions(+), 1 deletion(-)
+> On 3/24/25 11:42 AM, Zixun LI wrote:
+>> Hi,
+>> 
+>> I encountered a data abort on the 2nd "ums 0 mmc 0" command on
+>> u-boot-at91 2024.07 with sam9x60-curiosity board.
+>> 
+>> U-Boot> ums 0 mmc 0
+>> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1d29000
+>> CTRL+C - Operation aborted
+>> U-Boot> ums 0 mmc 0
+>> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1d29000
+>> data abort
+>> pc : [<27f93428>]          lr : [<27ef7e80>]
+>> reloc pc : [<23f16428>]    lr : [<23e7ae80>]
+>> sp : 27ef4cf0  ip : a5200000     fp : 23f6915c
+>> r10: deadbeef  r9 : 27ef7e80     r8 : 27f7d2a0
+>> r7 : a5200000  r6 : 00000000     r5 : 00000000  r4 : 27f01668
+>> r3 : 00000000  r2 : 00000000     r1 : 27fe1d88  r0 : 27f01668
+>> Flags: nzCV  IRQs off  FIQs off  Mode SVC_32 (T)
+>> Code: 45ac d017 68c5 4667 (60fd) 60af
+>> 
+>>  From backtrace the abort happened in fREe_impl(), with some debugging
+>> I've localized the abort in fact happened in fsg buffer allocation in
+>> fsg_common_init() [1]
+>> 
+>> It looks like the buffer is not freed on driver unregister since
+>> fsg_common_release() is only called if fsg_common_init() met an error.
+> Can you reproduce this on u-boot/master too ?
 
-Can you see how hard moving to OF_UPSTREAM here is first please? Thanks.
+I've tried to reproduce this on master (2025.04-rc4-g244e61fbb7f5) and I
+don't reproduce this with the VIM3 board using khadas-vim3_android_ab_defconfig:
 
---=20
-Tom
+U-Boot 2025.04-rc4-g244e61fbb7f5 (Mar 24 2025 - 18:15:36 +0100) khadas-vim3
 
---+i+fLAxKEMU3ZP6j
-Content-Type: application/pgp-signature; name="signature.asc"
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (effective 3.8 GiB)
+Core:  407 devices, 36 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... MMC Device -1 not found
+*** Warning - No MMC card found, using default environment
 
------BEGIN PGP SIGNATURE-----
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfhlEkACgkQFHw5/5Y0
-tyz5kwv/e6jSsQ1Tetme0sAHCP+/nvBV75me2yQ3HjccCKtEEQGmquUN1VHddh2q
-N9rb4tvpGBQbdd/YOMCbc4y2YRao6Mpw/NQ/XQuaTu98Rzxvdb4Tyl/Z98ueVkx/
-betPnse7b7ahLDtyQtuZyBLPwOZXXimPfdDFLwCo9DHnUm1M73ZWbMeKZmvae5VR
-1W+O9EI+IhRWZqF7iKZwBQi/YJUtN71iXFL/La3pQV329tRDi1Al+9wOwnqOJFcC
-ghf4/vYgj8ia8dnA/gt2f3salZNylLq1igo/+KRu3TRUdXL9Cg9wffu8Ak6kx/Ne
-336MNcRpgTxAw1tgJkKcn+o9nChjOOK9sqzgan1G2UH7QwIXV72lGV2MScrOK8tC
-ZazEtzVZ9OhjzDVYI3d3Dy7ku4ac2NUDBvWV3AUQD0MQksVzYF/8/EaUB0Q4gQT7
-oSLuWjyFikb8h0pb3UzVr/RrgivYJ1PgDfBdietX5DFnrVHEX/BO1AKx/XH5/XMJ
-Q8O359BQ
-=6Yoh
------END PGP SIGNATURE-----
+Hit any key to stop autoboot:  0
+=> ums 0 mmc 2
+UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
+|crq->brequest:0x0
+CTRL+C - Operation aborted
+=> ums 0 mmc 2
+UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
+CTRL+C - Operation aborted
+=>
 
---+i+fLAxKEMU3ZP6j--
+I'll try to understand why it's behaving differently between the
+sam9x60-curiosity and the vim3.
+
+Thanks,
+Mattijs
