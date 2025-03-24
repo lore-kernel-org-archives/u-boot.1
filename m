@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6238C36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D726C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 19:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ECC2806FC;
-	Mon, 24 Mar 2025 19:37:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 61DA4805D7;
+	Mon, 24 Mar 2025 20:48:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="baZm/Xbx";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kaqT7F9B";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZnUdWeDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8506808AF; Mon, 24 Mar 2025 19:37:21 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83A12806FC; Mon, 24 Mar 2025 20:48:44 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E05780548
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:37:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B088280548
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 20:48:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-2a01bcd0143so6465163fac.2
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:37:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742841438; x=1743446238; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MBLPs0gVXN/tXllyc7XSzG9XDDUG2Kjz8nIZvA5U4jM=;
- b=baZm/XbxAiJv7x8lwZonhgonBEPf0jOpnypFE8Cqub5SSr3WGaccv0r/cgBd5JO+mz
- DuuDicYxvqzyvJMFEILA6/EZQ3sGo4f9uLzaeHJ5zBFRiUJ4VTIua3tgZsv2d1umDf6D
- qtVxZFwSJp/0BBpdBhsyIympJUsVMvFM1bJ2c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742841438; x=1743446238;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MBLPs0gVXN/tXllyc7XSzG9XDDUG2Kjz8nIZvA5U4jM=;
- b=eFhNUjVdc2pRzZhNYGsZeNTtAlVIMryHY6RV8D+otbET4+8WdqC0rvkvQnbX+VQemK
- 0DM31iIWq0gcvlMdckXthUr84IEE1UUJM6fLmQ2mvhUkUpUEKUdLlPBgxuh74tnxQOZa
- sF+44WHhDkSm66rd3Q3cK1k8HfNsPPXAE6JIGhjGMVayG5uVnnfzSN1KtIuGM6toFU14
- i1sV4NoRNpWwt0l8whudqn+aBWnhyFJmi3LKL+2U1Knbt2HwBGG4lc+CiU121bHeqvkq
- EE+30oy3g1nnNjLZvnyZcUsvt1nlf7MuUfoGzYDZepbDZs2R0hzJh4kl4fufHT0sC1oc
- ngsw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUgu8ibzHrBLbSQF44Uz0MdHr5CkibluoNuqBux4XUmEmTZOWTBD7TVxiYkpahjlSs+lKZmj2U=@lists.denx.de
-X-Gm-Message-State: AOJu0YwsTuhFKCsID7f9SFuwO/Si/9X0GDCT+5DzgA/lgIY7kFukN5oC
- tudd8oz7jj/BGVQsh9NS3X34y4DnKKR+BCDT3HvIim8xdphIfShR5pQHwzktZd4=
-X-Gm-Gg: ASbGncsfLMaOyByke2EHBgTVeXrBWNdl8l9/vi/3l9yefoMVymMHZWGJQLO70R0GoI7
- 3TSfzkbpIPnRZqs8RH1poPn6hMvindtdWV3DpWagJBy8NerIVogwy/SIOtJGvzxB5Evotx5HHLi
- sGznaeZsm7XBP7ay+1pQsMGAPTyniCXFldEvi3zvE9+57LhununxtZojO5FJe80Ei4b4L3BxM1Q
- REDV21igqKTaxqyeS83JrAJnBpepoI2bsZQKDFO78Fv/VyAdGfhnQ/bx5ao8hQEIupZE+19rZBC
- 3RnA3K0zpPL6D3M9zWFxMP4FysjvUK9sd4TyZwHIbg==
-X-Google-Smtp-Source: AGHT+IH/BPvr0Eo7CCu2/QleBsdi1nQT6gtSpV51+oI4q4GkzhfykM4RCErTGyLH6PjZvG68e+09wA==
-X-Received: by 2002:a05:6870:8194:b0:2c2:cd87:7521 with SMTP id
- 586e51a60fabf-2c780246312mr9255017fac.4.1742841437672; 
- Mon, 24 Mar 2025 11:37:17 -0700 (PDT)
-Received: from [127.0.1.1] ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c77f05de8asm2175559fac.36.2025.03.24.11.37.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Mar 2025 11:37:17 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: ardb@kernel.org, Ben Schneider <ben@bens.haus>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Nam Cao <namcao@linutronix.de>, Baruch Siach <baruch@tkos.co.il>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
-References: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] lmb: change the return code on lmb_alloc_addr()
-Message-Id: <174284143630.113610.5861951971425665672.b4-ty@konsulko.com>
-Date: Mon, 24 Mar 2025 12:37:16 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ZM3Ws3D21z9t7d;
+ Mon, 24 Mar 2025 20:48:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1742845721;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Fd8gEJCcWTiqCz3/DQR61krWy+3QuvaJ4VuhNBo0LlU=;
+ b=kaqT7F9BhQ1MIATSz4VWeDQgqVIabay/qT5DiTn9/ozc6UkGE2O2xyCHXhVlIpXfuLeFIr
+ KmYpaSn24o20TF3XH4Kq3qTJaX90j+cUff1v7BiuRpShQheHd76iAUUlrO3IEj41R56ufL
+ 2PGAr0BT/0AOFCph7x3HsMMAWUZVUsbNGNy9qGN6GPWRxr907aUdrlRnpNYU8OYJhxqs0a
+ R/irMRdJr8PHvT925MNmAW7kE8TTTiMDUeTTmf8I3CK9xgsxA2/Nd6ZqRRGcStrvUxKPRr
+ zWyyzbqFyXwKih7VLJ0gCTgqtuKsKSR/CQug4UrkWvyql/7pCZ9jTVd5gznxPg==
+Message-ID: <55870d86-cee8-4628-844b-57a340fac4b3@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1742845719;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Fd8gEJCcWTiqCz3/DQR61krWy+3QuvaJ4VuhNBo0LlU=;
+ b=ZnUdWeDsE4toGw1lr1MuTbdCZbkgpHVspxfPjlRa/tlxiI9tJj1BIwUnq+vCk+UVQbZKoy
+ svLOmxdDaawVyHQfD0ToDkVhEIq/o4pS0H9iBFzXrHUAxD4KCWawU8r2rewu6opMnGIryM
+ 3/F4jrThNa9CiZ5Tjqk0GwuXdZ2CmC3SLrFS6Gvon4uELbpEyRf47d/6v1V0f/CRu7H3rA
+ gIKcMba3s3KNNxpQFDT5FQTpbmLFVRibrCjZNza9VzhnGmrREJfjLG2RUdDMnUiD/fP8Sf
+ 1uVvV5xl1JBl1gjdd8qdYL0tAx836H6dHgib+e6evIM6c6+h21VfWEEo5qwS4Q==
+Date: Mon, 24 Mar 2025 20:48:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v2 2/4] net: ravb: Add optional reset deassertion
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250319120401.8297-1-paul.barker.ct@bp.renesas.com>
+ <20250319120401.8297-3-paul.barker.ct@bp.renesas.com>
+ <fa596092-ac67-48c0-8178-1c78b86c9306@mailbox.org>
+ <a299da4d-50d9-412f-8b89-70d82c68787b@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <a299da4d-50d9-412f-8b89-70d82c68787b@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-MBO-RS-META: 9z6cry1ie5yshw8iuepzpe89sipt9pd1
+X-MBO-RS-ID: 6d3b6678f8784da19e1
+X-Rspamd-Queue-Id: 4ZM3Ws3D21z9t7d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,23 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 14 Mar 2025 12:57:02 +0200, Ilias Apalodimas wrote:
-
-> Ben reports a failure to boot the kernel on hardware that starts its
-> physical memory from 0x0.
-> The reason is that lmb_alloc_addr(), which is supposed to reserve a
-> specific address, takes the address as the first argument, but then also
-> returns the address for success or failure and treats 0 as a failure.
+On 3/24/25 10:57 AM, Paul Barker wrote:
+> On 24/03/2025 01:08, Marek Vasut wrote:
+>> On 3/19/25 1:03 PM, Paul Barker wrote:
+>>
+>> [...]
+>>
+>>>    static int ravb_probe(struct udevice *dev)
+>>>    {
+>>> +	struct ravb_device_ops *device_ops =
+>>> +		(struct ravb_device_ops *)dev_get_driver_data(dev);
+>>>    	struct eth_pdata *pdata = dev_get_plat(dev);
+>>>    	struct ravb_priv *eth = dev_get_priv(dev);
+>>>    	struct mii_dev *mdiodev;
+>>> @@ -648,16 +653,32 @@ static int ravb_probe(struct udevice *dev)
+>>>    	if (ret)
+>>>    		goto err_clk_enable;
+>>>    
+>>> +	if (device_ops->has_reset) {
+>>> +		ret = reset_get_by_index(dev, 0, &eth->rst);
+>>
+>> Can devm_reset_control_get_optional() maybe be used here instead of the
+>> flag ?
 > 
-> Since we already know the address change the prototype to return an int.
-> 
-> [...]
-
-Applied to u-boot/master, thanks!
-
-[1/1] lmb: change the return code on lmb_alloc_addr()
-      commit: 67be24906feb6efecce70cd5bfdc2ba8f06d3d5b
--- 
-Tom
-
-
+> The Ethernet device tree nodes for RZ/G2{H,M,N,E} also contain a reset,
+> so we can't use the _optional() function here to perform the reset only
+> for RZ/G2L.
+Does it pose a problem if we trigger a reset on RZ/G2(non-L) ?
