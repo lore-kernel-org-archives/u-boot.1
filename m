@@ -4,44 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 295E3C3600C
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 11:14:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01DCC36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 11:30:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F1E781FE6;
-	Mon, 24 Mar 2025 12:14:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E19D781D65;
+	Mon, 24 Mar 2025 12:30:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="VRbpiek7";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6E1682033; Mon, 24 Mar 2025 12:14:45 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7426B81F6B
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 12:14:43 +0100 (CET)
+ id B104A81E1F; Mon, 24 Mar 2025 12:30:56 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F75181CAF
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 12:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ED64D1C14;
- Mon, 24 Mar 2025 04:14:48 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 766503F58B;
- Mon, 24 Mar 2025 04:14:41 -0700 (PDT)
-Date: Mon, 24 Mar 2025 11:14:38 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Vincent =?UTF-8?B?U3RlaGzDqQ==?= <vincent.stehle@arm.com>
-Cc: <u-boot@lists.denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Adriano Cordova
- <adrianox@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] efi_loader: fix ipv4 device path node conversion
-Message-ID: <20250324111438.247fcba5@donnerap.manchester.arm.com>
-In-Reply-To: <20250324083443.1537006-1-vincent.stehle@arm.com>
-References: <20250324083443.1537006-1-vincent.stehle@arm.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52O9PnJ4019771;
+ Mon, 24 Mar 2025 11:30:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=zDFw7+XevXmdBkareq0KDc
+ XA1aoys9qaMsSOCiis/tc=; b=VRbpiek7HTqaIPh8K1++iqWxLrRBlM4lG9NCCf
+ OcwGZ2yaIvlTxmw5rmRjvWnzmEPmoIeAiLyKJiApZERUQtVCma+DPjDA0veyyfhB
+ bH9aNLZ+JjNOfEJSt0q81IogJ498UjukR3LkILfn57bflTJKYo6UVf7QDuPnpAqS
+ J1htoD1IJI8EgtpUw7TgX44ib7zd21YDGbbEm11Hq1bv3nI47flycPMd+b00PTcM
+ hMSdu/gedHP27mr4AwHcvDn33US7Qfn7JhsXgx4Tw2ZrEGVYXR1MDbF4xEHfhLLH
+ jt+gfsRKBpAwHxXZ5CYZFgAo8F+s5/HDrvDV1FbFWb7+y5cg==
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45hm5uvaya-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 24 Mar 2025 11:30:47 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 52OBUkV7023921
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 24 Mar 2025 11:30:46 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 24 Mar 2025 04:30:44 -0700
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <jh80.chung@samsung.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <sumit.garg@kernel.org>,
+ <trini@konsulko.com>, <quic_varada@quicinc.com>,
+ <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
+Subject: [PATCH v1] regulator: qcom-rpmh-regulator: add support for pmm8654
+ regulators
+Date: Mon, 24 Mar 2025 17:00:30 +0530
+Message-ID: <20250324113030.2597986-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: IAVQtRrPSOZ_MgRvDLb5Y1acRSiUZCwl
+X-Proofpoint-GUID: IAVQtRrPSOZ_MgRvDLb5Y1acRSiUZCwl
+X-Authority-Analysis: v=2.4 cv=AJKH5mlP c=1 sm=1 tr=0 ts=67e14267 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=Vs1iUdzkB0EA:10 a=COk6AnOGAAAA:8 a=YvFFRESny2HicERVFeUA:9
+ a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-24_04,2025-03-21_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0
+ clxscore=1015 impostorscore=0 suspectscore=0 lowpriorityscore=0 mlxscore=0
+ mlxlogscore=996 adultscore=0 phishscore=0 bulkscore=0 priorityscore=1501
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2503240082
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,67 +103,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 24 Mar 2025 09:34:43 +0100
-Vincent Stehl=C3=A9 <vincent.stehle@arm.com> wrote:
+Add the PMC8380 regulator data found on the Qualcomm SA8775P platform.
+The tables are imported from the Linux driver.
 
-Hi,
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+ drivers/power/regulator/qcom-rpmh-regulator.c | 45 +++++++++++++++++++
+ 1 file changed, 45 insertions(+)
 
-Tom: I think this is v2025.04 material, as this code was introduced in
-this cycle.
+diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
+index cd2b1a654c1..954deca5ed7 100644
+--- a/drivers/power/regulator/qcom-rpmh-regulator.c
++++ b/drivers/power/regulator/qcom-rpmh-regulator.c
+@@ -466,6 +466,25 @@ static const struct rpmh_vreg_hw_data pmic5_nldo515 = {
+ 	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
+ };
+ 
++static const struct rpmh_vreg_hw_data pmic5_ftsmps527 = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(320000, 0, 215, 8000),
++	.n_voltages = 215,
++	.pmic_mode_map = pmic_mode_map_pmic5_smps,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_smps),
++};
++
++static const struct rpmh_vreg_hw_data pmic5_pldo515_mv = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(1800000, 0, 187, 8000),
++	.n_voltages = 188,
++	.hpm_min_load_uA = 10000,
++	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
++};
++
+ #define RPMH_VREG(_name, _resource_name, _hw_data, _supply_name) \
+ { \
+ 	.name		= _name, \
+@@ -558,6 +577,28 @@ static const struct rpmh_vreg_init_data pmc8380_vreg_data[] = {
+ 	{}
+ };
+ 
++static const struct rpmh_vreg_init_data pmm8654au_vreg_data[] = {
++	RPMH_VREG("smps1",  "smp%s1",  &pmic5_ftsmps527,  "vdd-s1"),
++	RPMH_VREG("smps2",  "smp%s2",  &pmic5_ftsmps527,  "vdd-s2"),
++	RPMH_VREG("smps3",  "smp%s3",  &pmic5_ftsmps527,  "vdd-s3"),
++	RPMH_VREG("smps4",  "smp%s4",  &pmic5_ftsmps527,  "vdd-s4"),
++	RPMH_VREG("smps5",  "smp%s5",  &pmic5_ftsmps527,  "vdd-s5"),
++	RPMH_VREG("smps6",  "smp%s6",  &pmic5_ftsmps527,  "vdd-s6"),
++	RPMH_VREG("smps7",  "smp%s7",  &pmic5_ftsmps527,  "vdd-s7"),
++	RPMH_VREG("smps8",  "smp%s8",  &pmic5_ftsmps527,  "vdd-s8"),
++	RPMH_VREG("smps9",  "smp%s9",  &pmic5_ftsmps527,  "vdd-s9"),
++	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_nldo515,    "vdd-s9"),
++	RPMH_VREG("ldo2",   "ldo%s2",  &pmic5_nldo515,    "vdd-l2-l3"),
++	RPMH_VREG("ldo3",   "ldo%s3",  &pmic5_nldo515,    "vdd-l2-l3"),
++	RPMH_VREG("ldo4",   "ldo%s4",  &pmic5_nldo515,    "vdd-s9"),
++	RPMH_VREG("ldo5",   "ldo%s5",  &pmic5_nldo515,    "vdd-s9"),
++	RPMH_VREG("ldo6",   "ldo%s6",  &pmic5_nldo515,    "vdd-l6-l7"),
++	RPMH_VREG("ldo7",   "ldo%s7",  &pmic5_nldo515,    "vdd-l6-l7"),
++	RPMH_VREG("ldo8",   "ldo%s8",  &pmic5_pldo515_mv, "vdd-l8-l9"),
++	RPMH_VREG("ldo9",   "ldo%s9",  &pmic5_pldo,       "vdd-l8-l9"),
++	{}
++};
++
+ /* probe an individual regulator */
+ static int rpmh_regulator_probe(struct udevice *dev)
+ {
+@@ -688,6 +729,10 @@ static const struct udevice_id rpmh_regulator_ids[] = {
+ 		.compatible = "qcom,pmc8380-rpmh-regulators",
+ 		.data = (ulong)pmc8380_vreg_data,
+ 	},
++	{
++		.compatible = "qcom,pmm8654au-rpmh-regulators",
++		.data = (ulong)pmm8654au_vreg_data,
++	},
+ 	{ /* sentinal */ },
+ };
+ 
 
-> When converting an IPv4 device path node to text, the
-> EFI_DEVICE_PATH_TO_TEXT_PROTOCOL will produce the following string:
->=20
->   IPv4(5.6.7.8,TCP,UDP,0x6,DHCP,1.2.3.4,9.10.11.12,255.255.255.0)
->=20
-> This string erroneously contains multiple protocols: TCP, UDP and 0x6.
->=20
-> Add the missing `break' statements in the dp_msging() function to fix this
-> and obtain the following expected string instead:
->=20
->   IPv4(5.6.7.8,TCP,DHCP,1.2.3.4,9.10.11.12,255.255.255.0)
-
-Nice catch! Being spoiled by the picky kernel, I wondered how this could
-slip through, only to realise that we don't use -Wimplicit-fallthrough.
-
-So I enabled that, and somewhat expectedly found some issues, and fixed
-them for the one build that I tried for now. Will send a series later.
-
-> Fixes: aaf63429a112 ("efi_loader: add IPv4() to device path to text proto=
-col")
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-Cheers,
-Andre
-
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Adriano Cordova <adrianox@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  lib/efi_loader/efi_device_path_to_text.c | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/ef=
-i_device_path_to_text.c
-> index f6889cb7399..452ec1b2e8b 100644
-> --- a/lib/efi_loader/efi_device_path_to_text.c
-> +++ b/lib/efi_loader/efi_device_path_to_text.c
-> @@ -181,10 +181,13 @@ static char *dp_msging(char *s, struct efi_device_p=
-ath *dp)
->  		switch (idp->protocol) {
->  		case IPPROTO_TCP:
->  			s +=3D sprintf(s, "TCP,");
-> +			break;
->  		case IPPROTO_UDP:
->  			s +=3D sprintf(s, "UDP,");
-> +			break;
->  		default:
->  			s +=3D sprintf(s, "0x%x,", idp->protocol);
-> +			break;
->  		}
->  		s +=3D sprintf(s, idp->static_ip_address ? "Static" : "DHCP");
->  		s +=3D sprintf(s, ",%pI4", &idp->local_ip_address);
+base-commit: 244e61fbb7f5045e4e187024f7ae80434c952145
+-- 
+2.34.1
 
