@@ -4,116 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F149CC36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 09:20:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A7A2C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 09:23:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10AEB81F28;
-	Mon, 24 Mar 2025 10:20:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2410D81EDD;
+	Mon, 24 Mar 2025 10:23:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w74Kuwno";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sVvTp2Wj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9381981F45; Mon, 24 Mar 2025 10:20:25 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id D075D81F45; Mon, 24 Mar 2025 10:23:20 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA46881EA2
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:20:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A49FE81EA2
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:23:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43cfba466b2so38067435e9.3
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 02:20:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43d2d952eb1so30657575e9.1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 02:23:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742808022; x=1743412822; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=eHifDTGzPuLasuczuhpe596n5XbXeIyWtaFwKBuLDoQ=;
- b=w74KuwnomKs5KbcCnkQioBqcisEwzfFcwU2Utg7ytM5p9KkU4aejYaDNH+Igw7Q1hJ
- 4m85qC2aqn7Sm6l2PvAvULJ2R+E0IBXldaH/79T2tm5KVag42bKtiP644KEE6IsA+7T2
- e8O7BBPpTt9sY0TvTbzjP0K9QZrT838a0XKALxd+G6j27F8XCdjX2u11xu0ppxtTjyhi
- u8zdJ1M8dBIH5sc6Dyjh4qJmat6fPRJbUSQ/U/jj5zcT03s+IY/IL5I/OjXBIjY2rv7U
- afIw+qEJSse8kY1fCceNtgEUvDFHAg6edkXK6V1vegsprbQwD9FrW/Dzb/ghWjTHRJ/p
- e+nQ==
+ d=linaro.org; s=google; t=1742808198; x=1743412998; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uhtQTQ/ILQlchTbkDkLcCo0qbkgY00aSh8UwJMQtnOQ=;
+ b=sVvTp2Wj5v1ds3YtSK6KlWG/Ziara07gExpItEilB5vaQoc1VNaNGWA9kKpLNnOWU/
+ PxgsdQUp/0NerTT51biyNA4KKGpY1erWBn5+yk7txoAoNl9Qo+eu4ssR5Wblgnw/yP9s
+ sGjdQTvgcG05peHZS9xoSmWiI1HV5Y/katSXGo5CyZfQHNGXlVwD8fAe3t0BBeH40dA5
+ LYU6dSbhE+TOFs3yczz1MO9gKwnSRWibYBLcIYQBPLS/WvvS+GfY1TDTeV0cFc2avr2Y
+ 4B/CQnm/kjt9Yb1+OgLcREzEwJodCbU2qJRcHsm+XMSEibRq2O9vBmiIKDUrmnTid3Ro
+ 9djQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742808022; x=1743412822;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=eHifDTGzPuLasuczuhpe596n5XbXeIyWtaFwKBuLDoQ=;
- b=hjr214wjPpT8XE5yX4xqPBkCI74eYixpcWWjZxwx32CZ1slAL0oJbpcD1jKBmXcKdl
- j707BfztRwcJ7+t6I08Qtq2qBfR/wCVYMFnxeKc4BRK6B2Ku43QFW+s7cF2OjP0smw4d
- dJcRhZ8uUZzFFtm19quN3LJsDqRRyCLnL6l/NFnNC90rCC+eY+SXC5d4rmI+WXSwPBsQ
- azL+/A82X7YH2I9HY8FbR/mgrq7rbLri1j+PujsCzBmxr0glnR0cjsZmR4Ns3fL62AEY
- iKYO6YwmlIOi3QMEC4uV8NBc1JOot1zCSQ3MUZPh1fQQtanbFvhUMQNCtp0rRftmH7f8
- Xmvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUh7W5Qoc/HoOpdCRzXSaVjQ24Delkc+wywFotj2AkO3mOuQ3GPcaKT4T09FurVutDSr/FKzxo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbabDhHPEwOxeiS/4SVU3RWCo++t/E+rZun4cczk234TTi2j/p
- wEQg4LlPDIpSR+aYw1iaiiiCmG1BItOUf7/A1s+IiXaR4+cqfI1t6J+F/+cnA/E=
-X-Gm-Gg: ASbGncs3YmoNsxFnqAa3QzzFXyv7JRUU0os2tYZx21Gl80TKlMAsJwWZqwF8RCePb9w
- CN/3UvXhfUBRk2GOX7WcDhHHUO8Y2L/xSYpvEsg6sMpffDX3XsHWcsJtISzCRgpDHokWIiZtLha
- hhlV6n4ujU8+8sUVBz37GHckP8OZwK6MBOiU97n6UIoEBDOsbPo1X9+Y3QRsbEpuqOw2zv7D9cH
- fGzSiFIg6q+0BqEq6VWffSxI1V2yfnUJt8UVUL9nUMuHKA6VQifUAcqZmgLv8qbH7c6MRzOZvbk
- cjI+nhD2ncYza32zefvo/2qvec88BeyEmpHDSWXZ6eVuDEXTc2T2APpcequpjzsxfz+TBZvuOQF
- nHzWzLpzsqs7S6PY9
-X-Google-Smtp-Source: AGHT+IFxi+KRpnlNf4TywFNWJaRZmGezzk8mocOy9J17NHCtYfya96DPu6Y20Qh0ar7gSQPHMBZJlQ==
-X-Received: by 2002:a5d:5989:0:b0:391:2e31:c7e5 with SMTP id
- ffacd0b85a97d-3997f8f8b0dmr9294910f8f.6.1742808022286; 
- Mon, 24 Mar 2025 02:20:22 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:a356:8d0:d4d:bb5f?
- ([2a01:e0a:3d9:2080:a356:8d0:d4d:bb5f])
+ d=1e100.net; s=20230601; t=1742808198; x=1743412998;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=uhtQTQ/ILQlchTbkDkLcCo0qbkgY00aSh8UwJMQtnOQ=;
+ b=i7Y94ccRv/xMgTz3C0Hc8Etks7AL3pS31Y/YzlwQlrTNiDrZL7DmCUUBHlfo/CJRQH
+ tlKHLx/b8IK9ZtgDaMUde8Eu/JexANCo9mJ0bNr+/2zopo8aTXrlwRR1d6YUAm3ytxfb
+ kbp7v0muFbZYgh6/nKbrRwWyGfoIaGRL0E9MniLXUUXtKLEKdS0WEw1LoWOfmr0u6xpX
+ YAPZ5uESe9mCaTSiyWZp4VQgfOI3XqSS2QRYoHE7Bxgw+IvEzi3tOL3WlaS/3FA7wx+x
+ W8z9wAPtzhMbTzaxwlGa/vgdD90l2Z6X8F7lXK8wnXPkKaYhR3VbTJ4z1dVpKDKFRX5U
+ LgKw==
+X-Gm-Message-State: AOJu0YzLQ5XQN+8qwdkLmsuOeRqRqCpZPLw0/Zd067MRLym/22HP29P0
+ U1Jocnxts+qYbbvqFYfZDLeNjwzOrMddRZdjZ8l8Zr/QoA9EwjMIKJ1VVDON0Ns=
+X-Gm-Gg: ASbGncuZUnCBjb/Mxedrz5mqcER7jcLMNCBV/WVoorJ6hzyiJHW+qQ9qqZ5QvOaIcf0
+ kpaKUcHbL4q1D+2GRR3kBpYv8E6ZZ6q7j0YtNamyHbz6jfRIVblvn6qEUohQkzeAgtxi/U2HzpV
+ U251MqPRrpzF+Fb+YUXBOkBDDfRzkHtw3/hJz7i/LxXeTBZ5I3raflbKETwLRfjcDyHTpSx073B
+ xjURLtWAww4FInS91d1cNT+4E8vPbh9XfB6NcuKSYKmQA1ySXV4bXm835NvEiGEcRZVDkXFh/Q7
+ wNvqIPtu32LGoN4lJ9TcctRnICXJ+gCYrxbCHwIx50NPcFo5zXij
+X-Google-Smtp-Source: AGHT+IFKQtcvt4CPV7wbLNhw13FlrSsoNRJL5dwg0oKNAeZ32UPRYC7qieVjgHEK2C5f1+IVYILgag==
+X-Received: by 2002:a05:600c:4d1f:b0:43d:609:b305 with SMTP id
+ 5b1f17b1804b1-43d5100ba49mr81032465e9.17.1742808198030; 
+ Mon, 24 Mar 2025 02:23:18 -0700 (PDT)
+Received: from [192.168.0.24] ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d3ae040f9sm145117615e9.0.2025.03.24.02.20.21
+ 5b1f17b1804b1-43d4fcea6ecsm115185735e9.5.2025.03.24.02.23.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Mar 2025 02:20:21 -0700 (PDT)
-Message-ID: <8214b374-b268-489c-b80e-61b0780f72e5@linaro.org>
-Date: Mon, 24 Mar 2025 10:20:21 +0100
+ Mon, 24 Mar 2025 02:23:17 -0700 (PDT)
+Message-ID: <68c868ea-33eb-4239-9598-f3d80943a959@linaro.org>
+Date: Mon, 24 Mar 2025 11:23:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Felipe Balbi <felipe.balbi@linux.intel.com>, Lukasz Majewski
- <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-References: <20250319220805.219001-1-marex@denx.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250319220805.219001-1-marex@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH] usb: gadget: atmel: Add SAM9X60 support
+To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+References: <20250322205625.1330306-1-admin@hifiphile.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250322205625.1330306-1-admin@hifiphile.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,72 +95,86 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19/03/2025 23:07, Marek Vasut wrote:
-> The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
-> it crashes. This is a result of the previous hard-coded EP setup in
-> drivers/usb/gadget/epautoconf.c which did special-case EP allocation
-> for SPL builds, and which was since converted to this callback, but
-> without the special-case EP allocation in SPL part.
-> 
-> This reinstates the SPL part in an isolated manner, only for NXP iMX
-> SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
-> 
-> Fixes: 1918b8010c32 ("usb: dwc3: gadget: Convert epautoconf workaround to match_ep callback")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> NOTE: This should go into master as a bugfix.
-> ---
->   drivers/usb/dwc3/gadget.c | 19 ++++++++++++++++++-
->   1 file changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> index e5a383407a2..477ecd02098 100644
-> --- a/drivers/usb/dwc3/gadget.c
-> +++ b/drivers/usb/dwc3/gadget.c
-> @@ -1631,8 +1631,25 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
->   		return dwc3_find_ep(gadget, "ep1in");
->   	if (usb_endpoint_is_bulk_out(desc))
->   		return dwc3_find_ep(gadget, "ep2out");
-> -	if (usb_endpoint_is_int_in(desc))
-> +	if (usb_endpoint_is_int_in(desc)) {
-> +		/*
-> +		 * Special workaround for NXP UUU tool in SPL.
-> +		 *
-> +		 * The tool excepts the interrupt-in endpoint to be ep1in,
 
-Small nit: expects
 
-> +		 * otherwise it crashes. This is a result of the previous
-> +		 * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
-> +		 * which did special-case EP allocation for SPL builds,
-> +		 * and which was since converted to this callback, but
-> +		 * without the special-case EP allocation in SPL part.
-> +		 *
-> +		 * This reinstates the SPL part in an isolated manner,
-> +		 * only for NXP iMX SoCs, only for SPL builds, and only
-> +		 * for the ep1in interrupt-in endpoint.
-> +		 */
-> +		if (IS_ENABLED(CONFIG_MACH_IMX) && IS_ENABLED(CONFIG_XPL_BUILD))
-> +			return dwc3_find_ep(gadget, "ep1in");
->   		return dwc3_find_ep(gadget, "ep3in");
-> +	}
->   
->   	return NULL;
->   }
+On 3/22/25 22:56, Zixun LI wrote:
+> Add compatible "microchip,sam9x60-udc" and device tree binding.
+> Compared to SAM9X5 the only difference is the DPRAM memory from the
+> USB High Speed Device Port (UDPHS) hardware block was increased,
+> so we can reuse the same endpoint data.
+> 
+> Tested on SAM9X60-Curiosity board with nfs and ums commands.
+
+Why no patch to enable it on the board as well then ?
+
+> 
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+> ---
+>  arch/arm/dts/sam9x60.dtsi                        | 14 ++++++++++++++
+>  arch/arm/mach-at91/include/mach/atmel_usba_udc.h |  2 +-
+>  drivers/usb/gadget/atmel_usba_udc.c              |  1 +
+
+Device tree and driver changes should be separate commits.
+
+
+>  3 files changed, 16 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+> index 3b684fc63d5..96a8faf09b3 100644
+> --- a/arch/arm/dts/sam9x60.dtsi
+> +++ b/arch/arm/dts/sam9x60.dtsi
+> @@ -69,6 +69,20 @@
+>  		#size-cells = <1>;
+>  		ranges;
+>  
+> +		usb0: gadget@500000 {
+> +			compatible = "microchip,sam9x60-udc";
+> +			reg = <0x500000 0x100000>,
+> +				<0xf803c000 0x400>;
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+Can you please reorder these to have them in the same order as in Linux
+DTS ? (easier to diff...)
+
+> +			interrupts = <23 IRQ_TYPE_LEVEL_HIGH 2>;
+> +			clocks = <&pmc PMC_TYPE_PERIPHERAL 23>, <&pmc PMC_TYPE_CORE 8>;
+> +			clock-names = "pclk", "hclk";
+> +			assigned-clocks = <&pmc PMC_TYPE_CORE 8>;
+> +			assigned-clock-rates = <480000000>;
+> +			status = "disabled";
+> +		};
+> +
+>  		usb1: usb@600000 {
+>  			compatible = "atmel,at91rm9200-ohci", "usb-ohci";
+>  			reg = <0x00600000 0x100000>;
+> diff --git a/arch/arm/mach-at91/include/mach/atmel_usba_udc.h b/arch/arm/mach-at91/include/mach/atmel_usba_udc.h
+> index 835b47d91ba..23c71985c90 100644
+> --- a/arch/arm/mach-at91/include/mach/atmel_usba_udc.h
+> +++ b/arch/arm/mach-at91/include/mach/atmel_usba_udc.h
+> @@ -20,7 +20,7 @@
+>  	}
+>  
+>  #if defined(CONFIG_AT91SAM9G45) || defined(CONFIG_AT91SAM9M10G45) || \
+> -	defined(CONFIG_AT91SAM9X5)
+> +	defined(CONFIG_AT91SAM9X5) || defined(CONFIG_SAM9X60)
+>  static struct usba_ep_data usba_udc_ep[] = {
+>  	EP("ep0", 0, 64, 1, 0, 0),
+>  	EP("ep1", 1, 1024, 2, 1, 1),
+> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+> index a77037a7094..f9326f0a7e7 100644
+> --- a/drivers/usb/gadget/atmel_usba_udc.c
+> +++ b/drivers/usb/gadget/atmel_usba_udc.c
+> @@ -1443,6 +1443,7 @@ static const struct udevice_id usba_udc_ids[] = {
+>  	{ .compatible = "atmel,at91sam9rl-udc" },
+>  	{ .compatible = "atmel,at91sam9g45-udc" },
+>  	{ .compatible = "atmel,sama5d3-udc" },
+> +	{ .compatible = "microchip,sam9x60-udc" },
+>  	{}
+>  };
+>  
 
