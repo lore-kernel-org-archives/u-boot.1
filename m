@@ -4,91 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E10CC36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:12:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B947C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DBA7808AF;
-	Mon, 24 Mar 2025 19:12:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 91532808AF;
+	Mon, 24 Mar 2025 19:17:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P33VQJUD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qQ0AS39v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD320809D0; Mon, 24 Mar 2025 19:12:02 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id ACFD081026; Mon, 24 Mar 2025 19:17:50 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03ACB806FC
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:11:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13347801CF
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:17:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso30609645e9.3
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:11:59 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-39ac56756f6so945449f8f.2
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742839919; x=1743444719; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GWe9gOO4hsur8rwZsEvhtvlPyJ9AlguH/C3nmSnxmjU=;
- b=P33VQJUDir7Bs7xum4Ug0RzayRm98AuvCgO9xxjhXLhgoZLkO5UEVz3/KBQJm+Px/C
- vY7m8lQjXbyG8hSaangkUmUrkipP2kE4K3XmwzQDYmjST4pmk/4iI8KH/qv7o+REtPIg
- LVi0LKzf/mKjgQIrt5WQ1WkW4AqFqQPPAXarA51BSoPeBwPPHTAlAhBPgFnzSY3g2Ew4
- equFIP3SZtt7gpLEzDqLGKw2zpDByguq6/g/XSktbgia62o8EpS0uESY13DpYExF+KMT
- uMlqiHHFknbONRBm4kJ69yQ+h6e33Alt9GTNhkiNpg13gt9orJrQTZ73tWk6lDqiMM0/
- GMXA==
+ d=linaro.org; s=google; t=1742840266; x=1743445066; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yL72CGN3JzWuts0RW7eGrRAarooDEBH8BQJWlqFFM+A=;
+ b=qQ0AS39v1SfyW+0NBqjA91lE+o452zx9eMHQH1jvJi0wiCo8zGMfwXB1gEhBsagxFm
+ BTfzpft5DO0DhL/zXoehXrs0PezuIUPhksqc6RiLdT/9OJ17ZWXgDQ9rsOZ8t6wr/59C
+ e0WVSF4v2F1+A0nTwocsJwJn4gvPvPe9sM06z711lZ8wy0VRXN+sc5v8imRPEakiKScx
+ 0JtvxRV2Iv3sBsRAzK0QTLaxpkCsjwpADBUs9wYNW/J8CiDn2pXWRPFefSo7jGv/FRRk
+ n9b4G9SNfIlDncyyGD3xelY7EfPfpX/grjDtt1EyUV30ilt0dJDJHuQPth5Gx3FP1EqH
+ vNTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742839919; x=1743444719;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GWe9gOO4hsur8rwZsEvhtvlPyJ9AlguH/C3nmSnxmjU=;
- b=YbNmPr4pqKsXZYPtAr5pGBiF1Bn1PgXGVclA8l5u+V9gv+C80WVFrwZuCpRvmpjb9V
- c+pOmYFEeQdwdMUJA03G9F/UUUORqSzLRdGyIVE+KIqumPxy6Z/ESb4W3ZPvuGeMMVuG
- I0f1AUfRYbrUEGgBH0O0HJm4wlFGwIXgVSs28EwOVSzJoNT7HptImF/aBx+q7Qh7yDDm
- zVztcn9i+hutM4fKc43h7rrs00Pev/PQ5mhqUK63UUc58U3wvqcHRyUm+QFR8PooVhy2
- jwXHX1ejUQX5ycahjH2HaWcgD4fDBJkCsHpeypLFEaTdbzwq0iRR/k3DP4ctPCevAq68
- EqRw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUvYkppl+cF5BEN7rK9gGdSkj1i1aim2n5zihyrrfswFc631i3tmlos2vuLwlidSuZXLU+PAzI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzlEXWCpumKX+amzJOSlFj0s8SmHYZ6+0jo89Yngd0L8WrnOu1f
- wMAX1gXW4qYSwzkz77By8KXyKfaKhKUprWgvdSCijDn3RUFCJAqBNzUvRnzLlhI=
-X-Gm-Gg: ASbGncuMNLZz6C2zeVXnXLMWLzttGR3CTFNII0jhZjzwyh6NFUkvhMXOCGm9GROGzf/
- OSPLpLr1fX70LlS6HdKDhfcldMc4pS69h0Z5ooXB0BSAMkgqfQ+hytfbQbFmkd4wIUhy3BGEh8M
- r8/Icl4hQbXIiYk7h1SEiiDe4+1o9rTY4SuC3oPiZJ2LYeXxP8XvYjUjB1IAod0lAv+JX9jq0Rz
- 0yR5GjOytpz6ofxMmI7pN3eiaW5TjfhD6QH/QwNmsE9grnJbwSJaQG+3oRz2I3w4Xsb/shuDYtT
- yT5q5xRE9OL7xHx1df+Z5esHmMrx6x8G/qqPHvg3S6w1773Uf0MqZOdkmn8qTRTIa9ZQp+oByXY
- =
-X-Google-Smtp-Source: AGHT+IG4RSDDexYymZ3cxRjpC0xyIZ1UfyGZPOEBnPn/xLWZ0WNB4swTaWecCKFOPQw15s5Fk6h2iQ==
-X-Received: by 2002:a05:600c:4584:b0:43d:94:2d1e with SMTP id
- 5b1f17b1804b1-43d509f3bffmr112466525e9.13.1742839918601; 
- Mon, 24 Mar 2025 11:11:58 -0700 (PDT)
-Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d4fceafacsm130082085e9.6.2025.03.24.11.11.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Mar 2025 11:11:57 -0700 (PDT)
-Message-ID: <2b334751-0899-4ba9-a5d9-5093426e2db6@linaro.org>
-Date: Mon, 24 Mar 2025 19:11:56 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] mach-snapdragon: of_fixup: fix property length at
- writing
-To: Rui Miguel Silva <rui.silva@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250227094911.497219-1-rui.silva@linaro.org>
- <20250227094911.497219-2-rui.silva@linaro.org>
-Content-Language: en-US
+ d=1e100.net; s=20230601; t=1742840266; x=1743445066;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yL72CGN3JzWuts0RW7eGrRAarooDEBH8BQJWlqFFM+A=;
+ b=gOA2wCudKdf4Qc0zjrPVKvJKD9LM5hXx06xVcWS8zxEoW3VYZ8T+hvjP+SsaKiwm+B
+ ePoSqSe5GXO9kksIhqFnZ5nm84e/7vaj3lsPqMgc2CCQ1zGurHpt8Cpp5lLAoFaATQ6z
+ 1Sv/EZK4WRgsWkR/QKMN6b3YANdHZdjX5Q75CUFMUucNgxtEv+X0XHV5EKEVIEyHS1xf
+ DTpFCQqCJQ+RcyrmF/YB4ufH8E/ZnWYR8M4kyKEUDsZaVX3/64eBPqHGrN0Ymgj5hIIQ
+ FUZ07CJDaaHYFN7BJyOMqP1xmTiZKwt32f3db/hejquVBWbxEq5eYUIZScPqsVYujdJf
+ Tqwg==
+X-Gm-Message-State: AOJu0Yz3U3enfMxTcpamNFqCTanPtODKj+tvzmGwsBWNySCUQH90CLKR
+ 4Q9m/CehcEt6M2m8OJIuAmzalIhnPZ5KBXlgpmjT+Yy2ZevrTZ9z794OVmP7zuk=
+X-Gm-Gg: ASbGncvx5j3xzrV42zhrWHGV4gf67DlSmhh0arZyTpXxXnxlZq+joX7ubseEM/aOfY2
+ YFg3HLUURhPDsQ/BsdPb1DPKlBUt5UvFjXeWXkoB9VnYubgNPuzyrlE4IB6uysHgE//vDYJk5Cc
+ ob6LkJBnX3qX50qcpL+a1zyVrREWYxhlMbInQBxvA8gF5v16VVbWcR2hUbkPGTQaIjBY5LttUPO
+ +l3GuWiVySYwvKNfimBfHSB/AR7OkV8WGtawJdqboUS4fr3LrfQNK9cHb9DqwWqljpRwDmtWZNA
+ KHgZpqK9mx+cp0yLvGvZMXt6F4rNf2hTcwtqS3j8IKapcetY8iDrlWAYzaHuigGFIiG8J/TqbPJ
+ Z4LPmnSd/fmqq
+X-Google-Smtp-Source: AGHT+IHXEjCjKZ0hx1om+3ChUJ6vbbzcTOPr1tgUU1aWJC1kvKu9NVE9Ryr13oFNqfhVuq01n7sncw==
+X-Received: by 2002:a5d:588e:0:b0:38d:dfb8:3679 with SMTP id
+ ffacd0b85a97d-3997f901202mr11066723f8f.17.1742840266433; 
+ Mon, 24 Mar 2025 11:17:46 -0700 (PDT)
+Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
+ [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3997f9e6450sm11690651f8f.70.2025.03.24.11.17.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Mar 2025 11:17:45 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250227094911.497219-2-rui.silva@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: [PATCH 0/4] Qualcomm: fix sdm845 clocks and enable fastboot
+Date: Mon, 24 Mar 2025 19:17:36 +0100
+Message-Id: <20250324-sdm845-fixes-fastboot-v1-0-d177a10f336d@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMCh4WcC/2XNS27DMAwE0KsYWpeG9fNvlXsUWcgSlQq1rFS0j
+ QRB7l4lRlddzoDz+GCEOSCxsXqwjHugkJYS+EfF7JdZLgjBlcxEI3QjhQJysVcafLghgTe0Tim
+ tgEL2WkvZS/SsbK8Z3xdl+nk+csafrfDrUbKIRObNj9WB8+EP32gCOyf7TbBz4OAcml4r3wq0J
+ zLROnOvbYqvT/8cIbpmUAPntRo6UVABeQs1hXk3pzksJqc65ctrOxlCKE4M61g5O7VGY9dq7tn
+ 5+fwF903EVRsBAAA=
+X-Change-ID: 20250324-sdm845-fixes-fastboot-e238553383ef
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1056;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=n9r3Eyw74M3VaVCh9CXpfsd+NtTRuwDosD6ZmQ+pFUY=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn4aHHzaKZYJEFWrAhW0PEeXICcb9DEj+MnEXsx
+ WGSwu45jbaJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ+GhxwAKCRAFgzErGV9k
+ tpA4D/0ZDuM+Iuo32m+H17BA/SZDjh2ysb/4CuRAyJgD399nrYAwLK89J7GawCeAYr0Zi6hnRLt
+ yF2EEkA3ZilbgSz2wZ+bn3ClpHK7Ii/2MWsM1/MHTZfPFlkj8zNPJkkxQtcFWfvqLBmbabdE5gK
+ zG1c4PMjr7br+unUtG95BCAj1BD7+TvH0evgz3EYtgHnbs1hV16UwkFG/E+KT9oSNPKkE8y2hFa
+ 7OtSTHvrsgUKNGGdkyb4nI7kortYCR1uVYEvQxD9POjn6m9813EsbAeZQ/L6iooUk3t0MFve8rQ
+ 0moeeQ1wCEFeDVAhkF5Al4Onrhi9vAgxP6h0tr+uLcAsefAD/f09ouuGPjlc9DJH47QjezV6VJ5
+ MX+ns5SnRzG5qzrndKUyzL/W1IydBoM7eq/2sfqaJ/Cbo1nksM3DtbzYPoIWMlk7UnetgoRwCIS
+ gIX1p2t6E3e3ganuV4OPX1A9p772EOxmc78MKWXbJYg9NV/DKx0CuSiK1U1oyRjqUGwmzA89Uov
+ +cyWwEiyZ+DYyuj9iF0kbJ76rQZs8caw03NJp9Buia9X8p6OzC6croyjno4kDy7rWpYIONNLHtp
+ hhNPc0fUfkbgqBhk0ZJ/6Q1gTHpzGtgujNwZtJRFT0eBkjYf4k/e65syryK0l2/CG26tiTJT5C3
+ yIIR9Q+ny2mXUkA==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,43 +123,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Fix clock init failures for USB and UFS on SDM845 devices, stub the RPMh
+clock controller, enable DM_USB_GADGET and fastboot support for all
+Qualcomm platforms supported by qcom_defconfig.
 
+Fastboot isn't super useful yet, but can be used for flashing MMC
+(either internal or sdcard).
 
-On 2/27/25 10:45, Rui Miguel Silva wrote:
-> The length of a property includes '\0' in a string type one, so
-> the length passed by needs to have that in account, if not,
-> when getting the property value it will fail because it
-> has the wrong size.
-> 
-> Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+Depends on https://lore.kernel.org/u-boot/20250319-sdm845-usb-clocks-v1-1-ddea854f62ec@samcday.com
+Depends on https://lore.kernel.org/u-boot/20250227094911.497219-2-rui.silva@linaro.org/
 
-Tested-by: <caleb.connolly@linaro.org> # db845c
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   arch/arm/mach-snapdragon/of_fixup.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 55368dd43b66..ea956a4791d0 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -86,13 +86,13 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
->   	}
->   
->   	/* Overwrite "phy-names" to only contain a single entry */
-> -	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy"), "usb2-phy");
-> +	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy") + 1, "usb2-phy");
->   	if (ret) {
->   		log_err("Failed to overwrite 'phy-names' property: %d\n", ret);
->   		return ret;
->   	}
->   
-> -	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed"), "high-speed");
-> +	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed") + 1, "high-speed");
->   	if (ret) {
->   		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
->   		return ret;
+---
+Caleb Connolly (4):
+      clk/stub: add sdm845 rpmh clock
+      clk/qcom: sdm845: add GCC_AGGRE_UFS_PHY_AXI_CLK
+      mach-snapdragon: enable DM_USB_GADGET by default
+      qcom_defconfig: enable fastboot
 
--- 
-Caleb (they/them)
+ arch/arm/Kconfig                  | 1 +
+ configs/dragonboard410c_defconfig | 1 +
+ configs/qcom_defconfig            | 5 +++++
+ drivers/clk/clk-stub.c            | 1 +
+ drivers/clk/qcom/clock-sdm845.c   | 1 +
+ 5 files changed, 9 insertions(+)
+---
+base-commit: dcb6a5e7651f4a6cebfad4389119407e2a852783
+
+Caleb Connolly <caleb.connolly@linaro.org>
 
