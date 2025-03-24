@@ -4,80 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 909DCC28B30
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 01:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17774C28B30
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 01:19:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B5C081E47;
-	Mon, 24 Mar 2025 02:15:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5701481E3E;
+	Mon, 24 Mar 2025 02:19:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mM126Ndy";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gAswop9G";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 682C181EC5; Mon, 24 Mar 2025 02:15:32 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4956681E3E
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 02:15:29 +0100 (CET)
+ id C519081E72; Mon, 24 Mar 2025 02:19:21 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 55FA181DED
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 02:19:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZLZqN71Nfz9scX;
- Mon, 24 Mar 2025 02:15:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742778929;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b2Zb/NlCEAvSqquVbPHnCJnjx9mIYUvQW72ckl8e+Z8=;
- b=mM126Ndy7OXf2mI3A74RaYG/SG2vS9wReDzAg1aJHTpFfBhaUHwRLJbrdigs4JeeTO0TbG
- Nn4CDFznyZjftg3ZPKcMOY1RAy5dh/y+NdF5SMYKIOH3CyVAGvmGFRY7c0QX93Efu30P4e
- AkwMOWMUEyH2C8xOozlIHYCvuCQTMdQOTw7Lswhmb0ly0CahiAHi1WZmM55bkNyBcVBWMC
- Rw6so2f3XAcbngVvXNn61PMNHrEk0UAUuzYKmAHz+N1e3Wl4t0nBxnxgwknAOP+F8rlUSO
- f2BANhjIi4hcXmZfOB+vpVyHyC+3tLM4JDjz5uCLkQu9yUgfHpzdquMG/xfMIA==
-Message-ID: <e075602c-3a08-424b-adbc-88dcafb6c1d6@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742778927;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b2Zb/NlCEAvSqquVbPHnCJnjx9mIYUvQW72ckl8e+Z8=;
- b=gAswop9Gg2dPIc+PNgUL9zomoNVpSSrOpgKXfawjd5DArfazDVNzm4D9awSOvqc2lDGQcm
- /q/Lb3t9A4eS83vpQGMZQ5jEFtvNGoAcOuHXM9aGickH3mpW3PkloHJy1PFFIn7vuVlbjQ
- zzQpEUo2gSMZppBkJpZPSTfkdiiNxVqJdAokBJmBYSxiWNBPHkCQFS/PRdOfogjhdCLU4Z
- OlTDVHyteziiX/C/J9vn4svpD0Pa3U1v+MA8LxI1BPT+YwQLBTBLy0MH/pPX5O1GUbwG2c
- PJHgjkJGol9eTug5GIeQpK3iOg024dMRDpHhzxxNqrV+WGJ4hA0DIOJR5LiPrg==
-Date: Mon, 24 Mar 2025 02:11:59 +0100
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 29FD5106F;
+ Sun, 23 Mar 2025 18:19:25 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B661C3F694;
+ Sun, 23 Mar 2025 18:19:17 -0700 (PDT)
+Date: Mon, 24 Mar 2025 01:18:54 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, macromorgan@hotmail.com,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 1/2] sunxi: h616: dram: Rework size detection
+Message-ID: <20250324011854.0a05d29b@minigeek.lan>
+In-Reply-To: <20250309063143.62859-2-jernej.skrabec@gmail.com>
+References: <20250309063143.62859-1-jernej.skrabec@gmail.com>
+ <20250309063143.62859-2-jernej.skrabec@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 3/4] net: ravb: Add RZ/G2L Support
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250319120401.8297-1-paul.barker.ct@bp.renesas.com>
- <20250319120401.8297-4-paul.barker.ct@bp.renesas.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250319120401.8297-4-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: kshmicxa7d3n7qj464xdhuygtotbn85z
-X-MBO-RS-ID: 90559e4b495dcdf6f48
-X-Rspamd-Queue-Id: 4ZLZqN71Nfz9scX
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,127 +57,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/19/25 1:03 PM, Paul Barker wrote:
+On Sun,  9 Mar 2025 07:31:42 +0100
+Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
 
-[...]
+Hi Jernej,
 
-> +++ b/drivers/net/Kconfig
-> @@ -864,7 +864,7 @@ config RENESAS_RAVB
->   	select PHY_ETHERNET_ID
->   	help
->   	  This driver implements support for the Ethernet AVB block in
-> -	  Renesas M3 and H3 SoCs.
-> +	  several Renesas R-Car and RZ SoCs.
+thanks for keeping digging into this long-standing problem!
 
-RZ/G instead of RZ , right ?
+> Since there is quite a few possible DRAM configurations in terms of bus
+> width, rank and rows and columns count, size detection algorithm must be
+> very careful not to test combination which would be bigger than H616 is
+> actually capable of handling.
+> 
+> Ideally, we should always detect memory aliasing, even for 4 GB memory
+> size, which is the maximum amount of memory that H616 is capable of
+> handling. For this reason, we have to configure minimum amount of
+> supported rows when testing for columns and vice versa. This way test
+> code will never step out of 4 GB boundary.
+> 
+> While at it, check for 17 rows maximum. This aligns code with BSP DRAM
+> driver. There is probably no such configuration which would make sense
+> with 4 GB memory.
+> 
+> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
->   
->   config MPC8XX_FEC
->   	bool "Fast Ethernet Controller on MPC8XX"
-> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-> index ecf6e05f47eb..86aa5cd5835c 100644
-> --- a/drivers/net/ravb.c
-> +++ b/drivers/net/ravb.c
-> @@ -31,6 +31,7 @@
->   #define RAVB_REG_CSR		0x00C
->   #define RAVB_REG_APSR		0x08C
->   #define RAVB_REG_RCR		0x090
-> +#define RAVB_REG_RTC		0x0B4
->   #define RAVB_REG_TGC		0x300
->   #define RAVB_REG_TCCR		0x304
->   #define RAVB_REG_RIC0		0x360
-> @@ -44,6 +45,7 @@
->   #define RAVB_REG_GECMR		0x5b0
->   #define RAVB_REG_MAHR		0x5c0
->   #define RAVB_REG_MALR		0x5c8
-> +#define RAVB_REG_CSR0		0x800
->   
->   #define CCC_OPC_CONFIG		BIT(0)
->   #define CCC_OPC_OPERATION	BIT(1)
-> @@ -65,14 +67,24 @@
->   #define PIR_MDC			BIT(0)
->   
->   #define ECMR_TRCCM		BIT(26)
-> +#define ECMR_RCPT		BIT(25)
->   #define ECMR_RZPF		BIT(20)
->   #define ECMR_PFR		BIT(18)
->   #define ECMR_RXF		BIT(17)
-> +#define ECMR_TXF		BIT(16)
->   #define ECMR_RE			BIT(6)
->   #define ECMR_TE			BIT(5)
->   #define ECMR_DM			BIT(1)
-> +#define ECMR_PRM		BIT(0)
->   #define ECMR_CHG_DM		(ECMR_TRCCM | ECMR_RZPF | ECMR_PFR | ECMR_RXF)
->   
-> +#define CSR0_RPE		BIT(5)
-> +#define CSR0_TPE		BIT(4)
+The change itself looks good to me, I have not done enough tests myself
+to confirm its reliability, but I trust the reports from others who
+were more affected by this.
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+
+> ---
+>  arch/arm/mach-sunxi/dram_sun50i_h616.c | 20 ++++++++++++--------
+>  1 file changed, 12 insertions(+), 8 deletions(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> index b3554cc64bf5..6f84e59e39cd 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> @@ -1363,7 +1363,7 @@ static void mctl_auto_detect_rank_width(const struct dram_para *para,
+>  static void mctl_auto_detect_dram_size(const struct dram_para *para,
+>  				       struct dram_config *config)
+>  {
+> -	unsigned int shift;
+> +	unsigned int shift, cols, rows;
+>  
+>  	/* max. config for columns, but not rows */
+>  	config->cols = 11;
+> @@ -1373,23 +1373,27 @@ static void mctl_auto_detect_dram_size(const struct dram_para *para,
+>  	shift = config->bus_full_width + 1;
+>  
+>  	/* detect column address bits */
+> -	for (config->cols = 8; config->cols < 11; config->cols++) {
+> -		if (mctl_mem_matches(1ULL << (config->cols + shift)))
+> +	for (cols = 8; cols < 11; cols++) {
+> +		if (mctl_mem_matches(1ULL << (cols + shift)))
+>  			break;
+>  	}
+> -	debug("detected %u columns\n", config->cols);
+> +	debug("detected %u columns\n", cols);
+>  
+>  	/* reconfigure to make sure that all active rows are accessible */
+> -	config->rows = 18;
+> +	config->cols = 8;
+> +	config->rows = 17;
+>  	mctl_core_init(para, config);
+>  
+>  	/* detect row address bits */
+>  	shift = config->bus_full_width + 4 + config->cols;
+> -	for (config->rows = 13; config->rows < 18; config->rows++) {
+> -		if (mctl_mem_matches(1ULL << (config->rows + shift)))
+> +	for (rows = 13; rows < 17; rows++) {
+> +		if (mctl_mem_matches(1ULL << (rows + shift)))
+>  			break;
+>  	}
+> -	debug("detected %u rows\n", config->rows);
+> +	debug("detected %u rows\n", rows);
 > +
-> +#define GECMR_SPEED_10M		(0 << 4)
-> +#define GECMR_SPEED_100M	(1 << 4)
-> +#define GECMR_SPEED_1G		(2 << 4)
-> +
->   /* DMA Descriptors */
->   #define RAVB_NUM_BASE_DESC		16
->   #define RAVB_NUM_TX_DESC		8
-> @@ -385,6 +397,16 @@ static void ravb_mac_init_rcar(struct udevice *dev)
->   	writel(0, eth->iobase + RAVB_REG_ECSIPR);
->   }
->   
-> +static void ravb_mac_init_rzg2l(struct udevice *dev)
-> +{
-> +	struct ravb_priv *eth = dev_get_priv(dev);
-> +
-> +	setbits_32(eth->iobase + RAVB_REG_ECMR,
-> +		   ECMR_PRM | ECMR_RXF | ECMR_TXF | ECMR_RCPT |
-> +		   ECMR_TE | ECMR_RE | ECMR_RZPF |
-> +		   (eth->phydev->duplex ? ECMR_DM : 0));
+> +	config->cols = cols;
+> +	config->rows = rows;
+>  }
+>  
+>  static unsigned long mctl_calc_size(const struct dram_config *config)
 
-Can you configure the ECMR extras in ravb_config() just before 
-writel(mask, eth->iobase + RAVB_REG_ECMR); based on some private data 
-flag, like '.is_rzg2l' , instead ?
-
-> +}
-> +
->   /* AVB-DMAC init function */
->   static int ravb_dmac_init(struct udevice *dev)
->   {
-> @@ -459,6 +481,14 @@ static void ravb_dmac_init_rcar(struct udevice *dev)
->   	writel(mode, eth->iobase + RAVB_REG_APSR);
->   }
->   
-> +static void ravb_dmac_init_rzg2l(struct udevice *dev)
-> +{
-> +	struct ravb_priv *eth = dev_get_priv(dev);
-> +
-> +	/* Set Max Frame Length (RTC) */
-> +	writel(0x7ffc0000 | RFLR_RFL_MIN, eth->iobase + RAVB_REG_RTC);
-
-I assume this register is actually RZ/G2L specific ?
-
-> +}
-> +
->   static int ravb_config(struct udevice *dev)
->   {
->   	struct ravb_device_ops *device_ops =
-> @@ -501,6 +531,22 @@ static void ravb_config_rcar(struct udevice *dev)
->   	writel(mask, eth->iobase + RAVB_REG_ECMR);
->   }
->   
-> +static void ravb_config_rzg2l(struct udevice *dev)
-> +{
-> +	struct ravb_priv *eth = dev_get_priv(dev);
-> +	struct phy_device *phy = eth->phydev;
-> +
-> +	writel(CSR0_TPE | CSR0_RPE, eth->iobase + RAVB_REG_CSR0);
-> +
-> +	/* Set the transfer speed */
-> +	if (phy->speed == 10)
-> +		writel(GECMR_SPEED_10M, eth->iobase + RAVB_REG_GECMR);
-
-Since this patch adds .has_reset flag, wouldn't it be possible to add 
-another flag called something like .has_10 flag and simply do:
-
-if (eth->has_10 && phy->speed == 10)
-   writel(GECMR_SPEED_10M, eth->iobase + RAVB_REG_GECMR);
-
-?
