@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC89C36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6238C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:37:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8B70806FC;
-	Mon, 24 Mar 2025 19:36:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6ECC2806FC;
+	Mon, 24 Mar 2025 19:37:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hWwLNfPP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="baZm/Xbx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA092808AF; Mon, 24 Mar 2025 19:35:58 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id C8506808AF; Mon, 24 Mar 2025 19:37:21 +0100 (CET)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D81A80548
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:35:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E05780548
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:37:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-2c2b7111bb1so2195553fac.3
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:35:56 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2a01bcd0143so6465163fac.2
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:37:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742841355; x=1743446155; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lcZRspa2rPCEH5pqJ/ryUuLdn3Uj36OAH/Csi5t8HGE=;
- b=hWwLNfPPn7P16Wo5EP0GShlzya9qS0x45KvpyZ9Bx4mtacZPmOBGSmqziJjgDBpZRO
- 8RPtAqFXXzhQ+dCbTY+boqvHVThRvqHjMiy0GLstBj8yk5bv9IhkRE4ie5QN4on4Zds+
- PPdElG4aQ9QEwni+GJi5rJhXvSB/dzcK3s8KM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742841355; x=1743446155;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1742841438; x=1743446238; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lcZRspa2rPCEH5pqJ/ryUuLdn3Uj36OAH/Csi5t8HGE=;
- b=lDbUZU3MB3kilBykN5+vkcyGrZs7spvwcMpy2MiYJq+cZ/sElUHy7B+SbauZQNP39Z
- 30OTqXw5ARXLq4aDwphj9NgTD4WBKv6obN/nNq0oKOxFOE1giYYo7hg8r+iPmSUZX1E6
- KuYAzCJGtKLO5w334KgCRKZHNYkb2gyhnSxx7HP06cv0rIjSJXMkaeJ37dShhkPy9l0+
- y7OGAKPGJOrxQVKqLbuITME0KUEWL7jTYWK6OLtdcr0PRjydCe8VWSLj22lOfjkEDVfU
- EZ6Ky0r8Yj4ipGtz5irZRlv56HIDTBoLZjoF9ox2R4cydWYCq/tjn+2i08igzFG/2bjB
- BFKQ==
-X-Gm-Message-State: AOJu0Yzc33mbuGcGZRtELdYRvgwCKo3O0eKbEuQF7L2/Jw23PUNwNrCE
- +0JzfZIXFuAMPyjqvnPsry5ZO+9S9R0yh+V3sOey7UfuG4qNxcWIkLPYZfcLJcljeyxMNonwJR5
- H
-X-Gm-Gg: ASbGncuF+uUChRc6rxuILpypAyjrCgP1rFnlrd9gwamdRsH/8QO0ZF5YeJAfCM7x14g
- YFAoI9bmfvxbTYt9+xS74kcWb9rh0LXq4z6j+Buhwe18QQhMTSeTKWDHp+NmgUZFoPVFsR4R6Fp
- 3ffgqm13Kq0DtNy1H/c8c2zjRYWKe8KMumaIGtd0y5rHL/XkdwX1lwgv7F3MITQTT3Q5elF8n3F
- S9jy0rSbQOnLftb2M5a5b7Iyf7+8BMljzqtON8vA+ESzGvlefnNb1lGaqHAB6Mq8gMM+anXTQBc
- Tewu96YxnthT8KJaJcnj4ddejdCLs4Mr0FE1V8DkvwPkUaeIJFwF6g==
-X-Google-Smtp-Source: AGHT+IGszgXZzzhjgDH8Nua3veYv8DzJEyBCCVxY4B4gA5eTO+mk+HYE8eJV6YA4oMIY3+jZbNS0Zg==
-X-Received: by 2002:a05:6870:e8d:b0:2b8:3c87:f36 with SMTP id
- 586e51a60fabf-2c7802cf1a8mr8595450fac.13.1742841354845; 
- Mon, 24 Mar 2025 11:35:54 -0700 (PDT)
-Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
+ bh=MBLPs0gVXN/tXllyc7XSzG9XDDUG2Kjz8nIZvA5U4jM=;
+ b=baZm/XbxAiJv7x8lwZonhgonBEPf0jOpnypFE8Cqub5SSr3WGaccv0r/cgBd5JO+mz
+ DuuDicYxvqzyvJMFEILA6/EZQ3sGo4f9uLzaeHJ5zBFRiUJ4VTIua3tgZsv2d1umDf6D
+ qtVxZFwSJp/0BBpdBhsyIympJUsVMvFM1bJ2c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742841438; x=1743446238;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MBLPs0gVXN/tXllyc7XSzG9XDDUG2Kjz8nIZvA5U4jM=;
+ b=eFhNUjVdc2pRzZhNYGsZeNTtAlVIMryHY6RV8D+otbET4+8WdqC0rvkvQnbX+VQemK
+ 0DM31iIWq0gcvlMdckXthUr84IEE1UUJM6fLmQ2mvhUkUpUEKUdLlPBgxuh74tnxQOZa
+ sF+44WHhDkSm66rd3Q3cK1k8HfNsPPXAE6JIGhjGMVayG5uVnnfzSN1KtIuGM6toFU14
+ i1sV4NoRNpWwt0l8whudqn+aBWnhyFJmi3LKL+2U1Knbt2HwBGG4lc+CiU121bHeqvkq
+ EE+30oy3g1nnNjLZvnyZcUsvt1nlf7MuUfoGzYDZepbDZs2R0hzJh4kl4fufHT0sC1oc
+ ngsw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgu8ibzHrBLbSQF44Uz0MdHr5CkibluoNuqBux4XUmEmTZOWTBD7TVxiYkpahjlSs+lKZmj2U=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsTuhFKCsID7f9SFuwO/Si/9X0GDCT+5DzgA/lgIY7kFukN5oC
+ tudd8oz7jj/BGVQsh9NS3X34y4DnKKR+BCDT3HvIim8xdphIfShR5pQHwzktZd4=
+X-Gm-Gg: ASbGncsfLMaOyByke2EHBgTVeXrBWNdl8l9/vi/3l9yefoMVymMHZWGJQLO70R0GoI7
+ 3TSfzkbpIPnRZqs8RH1poPn6hMvindtdWV3DpWagJBy8NerIVogwy/SIOtJGvzxB5Evotx5HHLi
+ sGznaeZsm7XBP7ay+1pQsMGAPTyniCXFldEvi3zvE9+57LhununxtZojO5FJe80Ei4b4L3BxM1Q
+ REDV21igqKTaxqyeS83JrAJnBpepoI2bsZQKDFO78Fv/VyAdGfhnQ/bx5ao8hQEIupZE+19rZBC
+ 3RnA3K0zpPL6D3M9zWFxMP4FysjvUK9sd4TyZwHIbg==
+X-Google-Smtp-Source: AGHT+IH/BPvr0Eo7CCu2/QleBsdi1nQT6gtSpV51+oI4q4GkzhfykM4RCErTGyLH6PjZvG68e+09wA==
+X-Received: by 2002:a05:6870:8194:b0:2c2:cd87:7521 with SMTP id
+ 586e51a60fabf-2c780246312mr9255017fac.4.1742841437672; 
+ Mon, 24 Mar 2025 11:37:17 -0700 (PDT)
+Received: from [127.0.1.1] ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c0ac887e6sm1605815a34.67.2025.03.24.11.35.53
+ 586e51a60fabf-2c77f05de8asm2175559fac.36.2025.03.24.11.37.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Mar 2025 11:35:54 -0700 (PDT)
-Date: Mon, 24 Mar 2025 12:35:52 -0600
+ Mon, 24 Mar 2025 11:37:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] cmd: pmic: add fall through comment
-Message-ID: <20250324183552.GD93000@bill-the-cat>
-References: <20250324175253.579368-1-heinrich.schuchardt@canonical.com>
+To: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: ardb@kernel.org, Ben Schneider <ben@bens.haus>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Nam Cao <namcao@linutronix.de>, Baruch Siach <baruch@tkos.co.il>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
+References: <20250314105703.277315-1-ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH] lmb: change the return code on lmb_alloc_addr()
+Message-Id: <174284143630.113610.5861951971425665672.b4-ty@konsulko.com>
+Date: Mon, 24 Mar 2025 12:37:16 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3JjXRBHQuRyxy79i"
-Content-Disposition: inline
-In-Reply-To: <20250324175253.579368-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,40 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 14 Mar 2025 12:57:02 +0200, Ilias Apalodimas wrote:
 
---3JjXRBHQuRyxy79i
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Ben reports a failure to boot the kernel on hardware that starts its
+> physical memory from 0x0.
+> The reason is that lmb_alloc_addr(), which is supposed to reserve a
+> specific address, takes the address as the first argument, but then also
+> returns the address for success or failure and treats 0 as a failure.
+> 
+> Since we already know the address change the prototype to return an int.
+> 
+> [...]
 
-On Mon, Mar 24, 2025 at 06:52:53PM +0100, Heinrich Schuchardt wrote:
+Applied to u-boot/master, thanks!
 
-> Make fall through explicit via a fallthrough statement to allow building
-> with -Wimplicit-fallthrough.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+[1/1] lmb: change the return code on lmb_alloc_addr()
+      commit: 67be24906feb6efecce70cd5bfdc2ba8f06d3d5b
+-- 
 Tom
 
---3JjXRBHQuRyxy79i
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfhpgQACgkQFHw5/5Y0
-tywi9wv/cUgwjOakxt7/MYNAcofELK6jUSpIg9iEhIbm47l18mjfHTRmc3bQ2UMC
-ucEZdhcFGPFu5wWLjWjKbmdnm0aRndXyp33EYmww/OT5vWBAs2B+82VCcOi9dpC0
-AqJ9GQJYVq++97rISdOIo+ltAPXjXkxfLSomPFpGu+QBTbPdz+NMmkSOn7Sz88oa
-tjFFdaYUNz9VfirLwAt1GcOh0M0BC/x6GgfDlJh1BTSKoHnSnmzmTH8jwFfgtgYK
-pS7BuM4e8XDHf9AEq2v/WCASZRxXOSB6MgnAAXaSP/imATonloGSMtMwoZlMrFob
-+qFCNtq1mfRWVq5c7ul7cxdTr+T8zGjc8f4vy2yKaZXqMYGlk7Vy9Rw99Grnufd7
-sDBIbcAfMOWO2bUe6BTNwxxp3yTFG5/IZXXy59p811v/8AjTEH+yDAes/lQ856eM
-4dLKaPmkUOsJ2y1ZDkBVFrr+JW4LX3ZcUBL516cWtKLH/w3xN7kGIb8eMDFTBJ46
-b21wGyUX
-=//TI
------END PGP SIGNATURE-----
-
---3JjXRBHQuRyxy79i--
