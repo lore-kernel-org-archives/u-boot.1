@@ -4,50 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFBFC36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 09:58:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFAE2C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 10:01:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5D0081EE5;
-	Mon, 24 Mar 2025 10:58:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id DF4EC81F66;
+	Mon, 24 Mar 2025 11:01:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 79C2F81F66; Mon, 24 Mar 2025 10:58:04 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id A982C81D65
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:58:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: XN6MxqHsR3iuvKR6ePVESQ==
-X-CSE-MsgGUID: frncbUJ/SXWEau2Suk9T7g==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 24 Mar 2025 18:57:58 +0900
-Received: from [10.226.93.161] (unknown [10.226.93.161])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id BF953400C0A2;
- Mon, 24 Mar 2025 18:57:55 +0900 (JST)
-Message-ID: <a299da4d-50d9-412f-8b89-70d82c68787b@bp.renesas.com>
-Date: Mon, 24 Mar 2025 09:57:54 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="U0jbpdJr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B38E881FC0; Mon, 24 Mar 2025 11:01:50 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AADC381D65
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:01:47 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52O9PLlu004138;
+ Mon, 24 Mar 2025 10:01:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=dnvPOrLkoZbUClhPUsIj3Y
+ baw1HL7iPzWyfXNRTN4kM=; b=U0jbpdJri19q2XKXDt6CJFA5Wui3mXsobFsEtA
+ 1FHjgUwjEQUcdN4qFl5lsGRI8B46KbZBuLu50wXlfslmfyHuwO73GWDPngl9bki1
+ YyMOT8uKPTBTP4UOZ37ZIrwHm+YND78Nq58w2aWMoY8xcrWTSyGRLFMQ10UrSKBA
+ l1j92vYQ0Cnci7eTSD8eUOc13eyL+LEn4NXaw/yaWo219/nBBW1Jt80+h4eLUfik
+ ZDz+VOBmPzRV/x+gsBI0qoNwG1Reoc55GGJyE14rOzqLH2VAmQ6drcatRP69p/Ev
+ Bb9zFYV/dsfiHzuI8gaAEyRH1rDWlFSwEkGQkDQqtSOdKNMA==
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45hnk8kxq9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 24 Mar 2025 10:01:41 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 52OA1enr031287
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 24 Mar 2025 10:01:41 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 24 Mar 2025 03:01:38 -0700
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <caleb.connolly@linaro.org>, <trini@konsulko.com>,
+ <quic_varada@quicinc.com>, <marek.vasut+renesas@mailbox.org>,
+ <neil.armstrong@linaro.org>, <lehmanju@devpi.de>, <u-boot@lists.denx.de>
+Subject: [PATCH v1 1/2] dm: blk: Add 'erase' generic block device commands
+Date: Mon, 24 Mar 2025 15:31:20 +0530
+Message-ID: <20250324100121.2490314-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] net: ravb: Add optional reset deassertion
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250319120401.8297-1-paul.barker.ct@bp.renesas.com>
- <20250319120401.8297-3-paul.barker.ct@bp.renesas.com>
- <fa596092-ac67-48c0-8178-1c78b86c9306@mailbox.org>
-Content-Language: en-GB
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <fa596092-ac67-48c0-8178-1c78b86c9306@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------mno0y0WjP0qpPEEhxoztGiA7"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: BTSfo6OWJu_SR4Cr71Lu_Nc4q7FQFCFO
+X-Authority-Analysis: v=2.4 cv=KMlaDEFo c=1 sm=1 tr=0 ts=67e12d86 cx=c_pps
+ a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=GEpy-HfZoHoA:10 a=Vs1iUdzkB0EA:10 a=COk6AnOGAAAA:8 a=io0mJjz8_dNIwVIYenAA:9
+ a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-GUID: BTSfo6OWJu_SR4Cr71Lu_Nc4q7FQFCFO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-24_04,2025-03-21_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 mlxlogscore=999
+ bulkscore=0 clxscore=1015 lowpriorityscore=0 mlxscore=0 priorityscore=1501
+ adultscore=0 impostorscore=0 malwarescore=0 spamscore=0 suspectscore=0
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2503240073
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,141 +101,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------mno0y0WjP0qpPEEhxoztGiA7
-Content-Type: multipart/mixed; boundary="------------cFMXTFJs4NaUstrc0k04nZFv";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Message-ID: <a299da4d-50d9-412f-8b89-70d82c68787b@bp.renesas.com>
-Subject: Re: [PATCH v2 2/4] net: ravb: Add optional reset deassertion
-References: <20250319120401.8297-1-paul.barker.ct@bp.renesas.com>
- <20250319120401.8297-3-paul.barker.ct@bp.renesas.com>
- <fa596092-ac67-48c0-8178-1c78b86c9306@mailbox.org>
-In-Reply-To: <fa596092-ac67-48c0-8178-1c78b86c9306@mailbox.org>
+Add support for doing 'erase' using the generic block commands
+framework.
 
---------------cFMXTFJs4NaUstrc0k04nZFv
-Content-Type: multipart/mixed; boundary="------------Kx91ARZrAATi0aWx0DJGj1au"
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+ cmd/blk_common.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
---------------Kx91ARZrAATi0aWx0DJGj1au
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+diff --git a/cmd/blk_common.c b/cmd/blk_common.c
+index 4c05a4e0610..56529702a47 100644
+--- a/cmd/blk_common.c
++++ b/cmd/blk_common.c
+@@ -107,6 +107,23 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 			printf("%ld blocks written: %s\n", n,
+ 			       n == cnt ? "OK" : "ERROR");
+ 			return n == cnt ? CMD_RET_SUCCESS : CMD_RET_FAILURE;
++		} else if (strcmp(argv[1], "erase") == 0) {
++			lbaint_t blk = hextoul(argv[2], NULL);
++			ulong cnt = hextoul(argv[3], NULL);
++			struct blk_desc *desc;
++			ulong n;
++
++			printf("\n%s erase: device %d block # "LBAFU", count %lu ... ",
++			       if_name, *cur_devnump, blk, cnt);
++
++			if (blk_get_desc(uclass_id, *cur_devnump, &desc))
++				return CMD_RET_FAILURE;
++
++			n = blk_derase(desc, blk, cnt);
++
++			printf("%ld blocks erased: %s\n", n,
++			       n == cnt ? "OK" : "ERROR");
++			return n == cnt ? CMD_RET_SUCCESS : CMD_RET_FAILURE;
+ 		} else {
+ 			return CMD_RET_USAGE;
+ 		}
 
-On 24/03/2025 01:08, Marek Vasut wrote:
-> On 3/19/25 1:03 PM, Paul Barker wrote:
->=20
-> [...]
->=20
->>   static int ravb_probe(struct udevice *dev)
->>   {
->> +	struct ravb_device_ops *device_ops =3D
->> +		(struct ravb_device_ops *)dev_get_driver_data(dev);
->>   	struct eth_pdata *pdata =3D dev_get_plat(dev);
->>   	struct ravb_priv *eth =3D dev_get_priv(dev);
->>   	struct mii_dev *mdiodev;
->> @@ -648,16 +653,32 @@ static int ravb_probe(struct udevice *dev)
->>   	if (ret)
->>   		goto err_clk_enable;
->>  =20
->> +	if (device_ops->has_reset) {
->> +		ret =3D reset_get_by_index(dev, 0, &eth->rst);
->=20
-> Can devm_reset_control_get_optional() maybe be used here instead of the=
-=20
-> flag ?
+base-commit: 244e61fbb7f5045e4e187024f7ae80434c952145
+-- 
+2.34.1
 
-The Ethernet device tree nodes for RZ/G2{H,M,N,E} also contain a reset,
-so we can't use the _optional() function here to perform the reset only
-for RZ/G2L.
-
-Thanks,
-
---=20
-Paul Barker
---------------Kx91ARZrAATi0aWx0DJGj1au
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------Kx91ARZrAATi0aWx0DJGj1au--
-
---------------cFMXTFJs4NaUstrc0k04nZFv--
-
---------------mno0y0WjP0qpPEEhxoztGiA7
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ+EsogUDAAAAAAAKCRDbaV4Vf/JGvdX/
-AQCjHLgjZxrIWUBxTC6wy8ZtJ9qUdN+D4DRc7pkvbgei4AD/cMB6EeuY+xMMX70JtpTrulcBNPWZ
-+Q2/cfOWM8nxCAg=
-=6Eiw
------END PGP SIGNATURE-----
-
---------------mno0y0WjP0qpPEEhxoztGiA7--
