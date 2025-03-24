@@ -4,77 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D9EAC36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 14:11:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F75C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 14:12:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8FF080548;
-	Mon, 24 Mar 2025 15:11:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3368580548;
+	Mon, 24 Mar 2025 15:12:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YsIO+xr7";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mzvS8G7s";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742825534;
+	bh=p22+M3kv519HXqtxif8xuIBgNBRc5Lsrh3BLan9/Aac=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xZkB5vWKm/581iL9E9z4uTe1Ho0qEda8oO1GlE4Wesm5QsYIO8JnV5SmwDtnl7XZZ
+	 fPxeyh3WpzixWYTALoW8KN6aNoBAXXmmw9Dr2wLxxG2sMTmPjczJnn+nh4ta4a1xx+
+	 As/tVrT8yD0iVSXU0P+BwpnIbY3UmteUcU6PbgsD7nExaYBC8/Zi6zEWkc88ZoTdhM
+	 FNk0lL0OPaVDo/at9UFIic8YF8dh29+Aoz62uSRpxt7UrKubjRM8CtKwLMc6Vd2gTD
+	 rgZa17svz9piz+h/us3g0u/t65L22Rx6omw6szVF+pPpPKhwyntz+gyBkHfKjgE4Gd
+	 CNWKL2zu1JQ6w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3AB0805C3; Mon, 24 Mar 2025 15:11:15 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 91321810FE; Mon, 24 Mar 2025 15:12:13 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C6D580107
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 15:11:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CCAF805C3
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 15:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZLw2R1nk7z9t0n;
- Mon, 24 Mar 2025 15:11:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742825471;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Gvc5ZCvtlE0as0pWaKSPAh4j2SIZUB7++DB+pykn3w8=;
- b=YsIO+xr7leGywzPnJ96D3hE+dXewNh0/VMFSOrobUUs7D1+/OT6npNTpGcibMOTEl9BqnD
- Sxoh+LxIp3qJDHrLf+08LeqclTn2svT6/v9CniZ2taYMFhee/OMoPLPt5N5FbhMjmsnXEy
- g5cLBX5/kLCIvLEY/uxZ1nVl0yqRGGb5fnhqiA25T3xjB8Lm+32di1Bt+vuC5RG7HmEstJ
- KXz18HZaLIRzhXVNW9niEwh9Zbk8Sl3w2QdVA5xxAzqncS7e3Gt65LloHx6MsSu+u+TO/0
- JF43zru65n5IXiCAKgxDn4nvxhL6RDlvFhczHZrV4WaQSmbf4TuJjPZ52nD24g==
-Message-ID: <b4044271-2502-4b78-a0df-3ab164e2d196@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742825469;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Gvc5ZCvtlE0as0pWaKSPAh4j2SIZUB7++DB+pykn3w8=;
- b=mzvS8G7sqViO0tNPI67i/E4ww76zRDCm0Msd5j5d85zDnq4oTgzgN96MDOVOw/B7KmW+kD
- Gr+wvI4asp1cTvBBMQA69xVpoVK5u2TdAZflA7rFK71GED30WXlOlPsditvadvASEcmZHO
- yIUNRMOsAU/sJlqAPHB3S3gsFWcR0VlHKEhozFHRiaNOs3qGOEcrRyJFNcpkQ9wXw2OjDB
- 5m8KcUnEVz/95n/kVfNP77tE+5FTdoLmkk9jlgIybUmUTterE77IO8yX81wnyWELmHQXzq
- 6jpzqPRcaCdzqpyhHs/yEUzxcJHMMwCrhsjiaB+vnW7wcyfvpR9UzAhN4O3dHg==
-Date: Mon, 24 Mar 2025 15:11:06 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="ISJ6ywMp"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 695D41029025A; Mon, 24 Mar 2025 15:12:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742825529; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=p22+M3kv519HXqtxif8xuIBgNBRc5Lsrh3BLan9/Aac=;
+ b=ISJ6ywMpCLyLQJv1AZD2xzAtI7hzq3tJYK8Q/AkJToWiQaZysHCx05roF+iKfP1Le2FaZL
+ lC5utKfgYL5scoK7c2E/EyICu4dkLIrWjWzDYibQHDiiXGNYtmjAH+fXeJyrQ25rabTDbs
+ RR7/WAi9jUBeeR+ItHZNABO1MhMJoTcX4AODKmCJM+5cLyTl4EXYtGL/CUvvUkLDQYt+K0
+ Sakd7iLztVqEc3pGwvRw12o3MXmYLdSlLFEAMbUDhhYeiGeymkKh0iqHtqBvCeNl4b2g2u
+ eA/Wo8OQ6YUrB4CpGjcQJ180XEtXOyQwrwHg69iyMCi8slWu0UIqusHNnmlA3g==
+Message-ID: <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de>
+Date: Mon, 24 Mar 2025 15:03:44 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] mmc: mmc_boot: support sandisk and micron emmc
- boot/rpmb partition resizing
-To: ziniu.wang_1@nxp.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- trini@konsulko.com
-Cc: pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org,
- tharvey@gateworks.com, jonas@kwiboo.se, sjg@chromium.org,
- u-boot@lists.denx.de
-References: <20250317084649.1059257-1-ziniu.wang_1@nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: usb:composite: data abort on second ums launch
+To: Zixun LI <admin@hifiphile.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <CA+GyqebHib_N7szGKkR0Ejac1rmoDQp+0a8t7ROng=PE3g9pGA@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250317084649.1059257-1-ziniu.wang_1@nxp.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CA+GyqebHib_N7szGKkR0Ejac1rmoDQp+0a8t7ROng=PE3g9pGA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: j5stom8kum6fte6szk1w55af1acdo98b
-X-MBO-RS-ID: 3ef38a1c82e24455293
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,46 +80,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/25 9:46 AM, ziniu.wang_1@nxp.com wrote:
-> From: Luke Wang <ziniu.wang_1@nxp.com>
+On 3/24/25 11:42 AM, Zixun LI wrote:
+> Hi,
 > 
-> Current mmc 
-
-MMC
-
-> bootpart-resize cmd
-
-command
-
-> only support samsung emmc boot/rpmb
-
-Samsung eMMC BOOT/RPMB hardware
-
-> partition resizing. Add sandisk and micron emmc boot/rpmb
-
-Sandisk and Micron eMMC BOOT/RPMB hardware
-
-Please fix capital letters and upper case abbreviations globally.
-
-> partition
-> resizing support. The commands and parameters for resizing partitions
-> are different for each manufacturer. Select the corresponding function
-> according to cid.
-
-[...]
-
-> +/*
-> + * This function changes the size of boot partition and the size of rpmb
-> + * partition present on EMMC devices.
-
-eMMC
-
-> + * Input Parameters:
-> + * struct *mmc: pointer for the mmc device strcuture
-> + * bootsize: size of boot partition
-> + * rpmbsize: size of rpmb partition
-> + *
-> + * Returns 0 on success.
-> + */
-> +
-Thanks !
+> I encountered a data abort on the 2nd "ums 0 mmc 0" command on
+> u-boot-at91 2024.07 with sam9x60-curiosity board.
+> 
+> U-Boot> ums 0 mmc 0
+> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1d29000
+> CTRL+C - Operation aborted
+> U-Boot> ums 0 mmc 0
+> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1d29000
+> data abort
+> pc : [<27f93428>]          lr : [<27ef7e80>]
+> reloc pc : [<23f16428>]    lr : [<23e7ae80>]
+> sp : 27ef4cf0  ip : a5200000     fp : 23f6915c
+> r10: deadbeef  r9 : 27ef7e80     r8 : 27f7d2a0
+> r7 : a5200000  r6 : 00000000     r5 : 00000000  r4 : 27f01668
+> r3 : 00000000  r2 : 00000000     r1 : 27fe1d88  r0 : 27f01668
+> Flags: nzCV  IRQs off  FIQs off  Mode SVC_32 (T)
+> Code: 45ac d017 68c5 4667 (60fd) 60af
+> 
+>  From backtrace the abort happened in fREe_impl(), with some debugging
+> I've localized the abort in fact happened in fsg buffer allocation in
+> fsg_common_init() [1]
+> 
+> It looks like the buffer is not freed on driver unregister since
+> fsg_common_release() is only called if fsg_common_init() met an error.
+Can you reproduce this on u-boot/master too ?
