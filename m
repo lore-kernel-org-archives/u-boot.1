@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920A1C36002
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 00:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A6D5C36005
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 00:35:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94DE980EEF;
+	by phobos.denx.de (Postfix) with ESMTP id DCE948122F;
 	Tue, 25 Mar 2025 01:35:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="SZjfdwEF";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="NNmXmTh5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3839E80EEF; Mon, 24 Mar 2025 16:19:03 +0100 (CET)
+ id B35A7806FC; Mon, 24 Mar 2025 18:33:43 +0100 (CET)
 Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
  [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AC48805D7
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 16:19:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45DA7800C1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 18:33:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
 Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-30bae572157so43845401fa.3
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 08:19:00 -0700 (PDT)
+ 38308e7fff4ca-3061513d353so50963251fa.2
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:33:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1742829540; x=1743434340;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1742837620; x=1743442420;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dW3stUKm6C+4iTbQ0F48pAB7nlcb5Xnfgm5+xA987Gk=;
- b=SZjfdwEFjhQN/ZPujh0hL2hs4Qy1ZGrVr9Y2hf4IDLxLXYKzhuJhjT3HJdSR0X3nSJ
- VB6zifQN18JCkLuuN+O3LLs57t4W+Jt8glUnkyv9N8zVpiTtlGImtZigZkgC3JYGFwSp
- nCG01rAnwdJ9QSskprg0D9idClwlrr/9a2o/YydTTqRVZXdJ0uQ7qF7UeNqowvs0AH+5
- jrwJjH3IGbY/QqwSdPSYzn8q1ig3z0QFdcIAAh9A0CzDqMV01CKNf8WHwqFp/vCDqHl7
- 92LqdYKSaelI2jMUh80EMR6MTbVzI/h55r7h7IFDf8ed7ts+83TwXi+GuNelcW3cclcr
- z7DQ==
+ bh=j8Yc/dhSE0ffsz72PLz0Y9k0WgG7syZhZW08fMlCfjA=;
+ b=NNmXmTh5NdCq4oS3giEa4Wgr4kjhrUpgb8ODGTj3uFLjXawO+x5BQYroZ7tC2bLdCB
+ qfTi6IQkLozrEe17EX3dESpiV9CuI9bSqibEb5fZbUYG28IuYMR/5RwXaAj36KTePWbb
+ c/gmmzzainBgYpntWix53ilGCN5EQsoAFKzh+9FXeLiPFC+evZdVz0GBEwy6NxdloqJR
+ EACsE9CiV6QCurKhgyEhDpNEfg4dB2t+M479FbZ4b7dEeWUjUudCo5gtN6fcQj2c9gN6
+ a9WmNd8LQKez4PmDVywLFrNLpAjvjlDxE5hAjTl6GBcjvfkPnuD9MzJ+ohyMvegImfqP
+ 092A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742829540; x=1743434340;
+ d=1e100.net; s=20230601; t=1742837620; x=1743442420;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dW3stUKm6C+4iTbQ0F48pAB7nlcb5Xnfgm5+xA987Gk=;
- b=t40g+2OHsqnbNh6Kwgy+FxyGN4JVbmHv/rKSpXP+1umLOpQiWpXusHtlsYeiOGgneh
- tj/D0tzPCEITCd5byzkv1sBBAON6g6ICOMA5HmmlLrhtz5qMjMNPp/g6UzdwvsIFXqLY
- bCttLUUsnGs+3SjwpNhGWKADfm7ZlU/1H5+crt2IMbWzIaE90ZyP3n9nwmP86q0eUQDV
- ELQuoCT/A/msbRo6FGJHxAocb+fuJkrOikDj390b/+JbUNtUAZQzyKNvXfcp7IvG4WAu
- tDrT9yq3bz/0JEW8511Nrtsw4ACQ+CFsGSyMqRwbaA5wu+w6Xuns5x1SRPbKOiaOR7v5
- zfTQ==
+ bh=j8Yc/dhSE0ffsz72PLz0Y9k0WgG7syZhZW08fMlCfjA=;
+ b=uHaKzn9SRBVMHAHx97TdtJvPXB3ISBjHtNy5hxqRs61lq5CknJTRfSe1iEqm+GXynz
+ XcQUz36MWeZMBJsBlcU8h3fyOU+lEo0k2lU/LhXtxdJKoXTZ0ipLkTxKMTmAFHZjDo2a
+ luKGJdhqtVJRWFJGjN3be+DZjU3zW7pJq7K19nblokP3WfzLbRK1FNfeacGuD5DiRJ3t
+ ZWoDyOflJnrjjwvIl9f8IQFEUEAQFcW1tfmSl0Z4D92scGg+Bw0NFD426C4BCHZnhRFy
+ qchD9gBfX3mBCA4mSQ2x0DNaQ4G5fLN0m803+yRVmntGULzSsOLO/rd2EElT1HWx92SZ
+ tfFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIOAS1fEB39MiQi9ILqBo7ZSn3QwRdU61g51Ql/SzkTl5Dc9J8UaOCUIVhMLmXBTQ7VoPS4RE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvMdT5aYoCBdiSRZ3kr9Vf3MeB8jZUWmnRcMu9zLETZ2m7sqMV
- 1a4RKYCnx1gwvrX0rUHUW/aJiwBqOQI8uKkIlQS50cjQlC3QuQzzaw9xKUfdTBA/4uR4hIcRH6A
- MqscPKQktxC2lNTNH0eTgwEp1qT9q3xrlhGmafr1UCLurm1XKKu4=
-X-Gm-Gg: ASbGncsx06SlGEHUdSEnLQSUUu1wzWpRdVFac+ESkrQagStoO2iY/YWzu+oAbvASPg0
- dTGSuJNojVpucO7M5VhzWFy1/M73IGDI0GQtkCG06vw8DrNs2FaoNEvUMOovHlMCR4s2eczqno8
- YynxBjhLe4ISnasXE7bQUYL1rpGnKdkhulKU0l
-X-Google-Smtp-Source: AGHT+IFQHyId+WV9acYtDBh4xNLDC4X/DpLdjmKdZO4zLLwwXTmIAeJ/9q29akmhNzRsbskLMn2OrC0in7Osho7hw7Q=
-X-Received: by 2002:a2e:bc0f:0:b0:30b:ecfc:78bf with SMTP id
- 38308e7fff4ca-30d7e206777mr45791481fa.5.1742829539839; Mon, 24 Mar 2025
- 08:18:59 -0700 (PDT)
+ AJvYcCX6UQvMDP5rzP9uh4IcB09vpbi88XH2OOgCMAIGLfJ842efJ0DSERdnkRwzSKDpdCzTVLOqYe0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyN+KY2n8qK+DocYbCravkEjz9qaxZp37CBc/Rr+eFwTxHKa/nu
+ v4e1Klnc2s+2gOpOKVcztIOwduseHIIT4kWixXuCtKTotOqjrrYlFLI4rgO+92Vmb7HOvv9nUeN
+ X066+1uXplkr2IivCv/ZQjLWN1sdJfWbI9aZ7qQ==
+X-Gm-Gg: ASbGnctRcP8FXH4ajJzmRM/hmIEN62EojA0mW0nZwozXTDtvUWut/GDnwqUKJbAMShN
+ lODO0aKJL2HhiaV5Czcl2oPfem7D4oTEFEr+ta4LVIn7MESRZ/z1/ofYqjOLIr1V4W0AU6lB7Pc
+ bPl+55Ixn3sFEmG/EQMiemMyvhUQ==
+X-Google-Smtp-Source: AGHT+IFVniUgjC7UtEBFc6k6jDQqKbuGC7rMYrIXhUBFONlz+WWQL54WeIpjMtdsw4WnMnwzq748LJ/yU9Vy0ZFmvU0=
+X-Received: by 2002:a05:651c:210c:b0:30b:c980:c5b5 with SMTP id
+ 38308e7fff4ca-30d7e1ff66cmr53492991fa.5.1742837620260; Mon, 24 Mar 2025
+ 10:33:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <CA+GyqebHib_N7szGKkR0Ejac1rmoDQp+0a8t7ROng=PE3g9pGA@mail.gmail.com>
- <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de>
-In-Reply-To: <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de>
+ <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de> <87v7rypcoy.fsf@baylibre.com>
+In-Reply-To: <87v7rypcoy.fsf@baylibre.com>
 From: Zixun LI <admin@hifiphile.com>
-Date: Mon, 24 Mar 2025 16:18:54 +0100
-X-Gm-Features: AQ5f1Jp7KdsFJSJef-TcrZmdTOufGiq3pUeA3-VCY4n9cTe7L6Hy4sSrVp4KWeM
-Message-ID: <CA+Gyqebv+Cuz0ectGciihU+G5uY2_bHRceH7nWASrxPMUh5Muw@mail.gmail.com>
+Date: Mon, 24 Mar 2025 18:33:35 +0100
+X-Gm-Features: AQ5f1JoqggvKL5D8M-ex3KGYdVOIovcVVoHjI4I4yZWf0uAu9QFATFcxgL96Y_c
+Message-ID: <CA+GyqeaFbV3BM-1YFW4iJ3nYSL5jXfRS+_Gg7AEUg9d1yxjSjA@mail.gmail.com>
 Subject: Re: usb:composite: data abort on second ums launch
-To: Marek Vasut <marex@denx.de>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,9 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 24, 2025 at 3:12=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
-> Can you reproduce this on u-boot/master too ?
+On Mon, Mar 24, 2025 at 6:21=E2=80=AFPM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+> I've tried to reproduce this on master (2025.04-rc4-g244e61fbb7f5) and I
+> don't reproduce this with the VIM3 board using khadas-vim3_android_ab_def=
+config:
+>
+> I'll try to understand why it's behaving differently between the
+> sam9x60-curiosity and the vim3.
 
-Yes I can reproduce it on master 2025.04-244e61f, since fsg init/deinit cod=
-e
-are the same.
+Thank you for your test, I think it's because VIM3 is a large SoC with
+plenty of RAM
+(SYS_MALLOC_LEN=3D0x08000000) while SAM9X60 is much smaller
+(SYS_MALLOC_LEN=3D0x81000).
+
+Each time when ums is called 2*FSG_BUFLEN, 256kB buffer is allocated
+and it seems not
+freed as fsg_common_release() is not called.
+
+Zixun
