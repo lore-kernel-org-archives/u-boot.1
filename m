@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44356C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 16:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D15FC36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 17:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A64F2805D7;
-	Mon, 24 Mar 2025 17:10:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9C77C805C3;
+	Mon, 24 Mar 2025 18:12:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tiksVZwl";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hh66fHul";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C11DF806FC; Mon, 24 Mar 2025 17:10:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 88211805D7; Mon, 24 Mar 2025 18:12:57 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4695680548
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 17:10:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70AA5800C1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 18:12:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1742832639; x=1743437439; i=xypron.glpk@gmx.de;
- bh=Ua0yGuX9IOt5ERji6nzychv9Js3oG1uLpq25RfHapRs=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=tiksVZwlSi5Ut1NHdWT00XJJYj97dUJXoy2S16KL15StgUOZNs1qVXcvG9pQgboF
- IO+K4C5KnmKTBbH6VsU3ppth7rA2DPH9lZ4OQrW4SGOhWqQ1ZEJ5Ur8aSb9ZZYaVd
- FicAMNZzuL0guMzzjT4ilnL2PB+w+SvgMZrYqswllRppB09ObISkxn7UeFYQDYGaB
- a4MCYbJzgxc1x5Si+9Y6CAoCk9oSOyTpVxpTedbyvyMUCXjZLFQUt+F6u2CboKcwr
- BruuCm/wMPOH5vhph1a9UoGuXqeqSpZS2E+AdLsElj87swkRAmtEX775Nx8YUEw0t
- KJXSQ0JamjCkTB+rzQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEFzx-1tooHq18w1-002JE1; Mon, 24
- Mar 2025 17:10:39 +0100
-Message-ID: <8ed61628-28a7-40ed-a733-224bf9531834@gmx.de>
-Date: Mon, 24 Mar 2025 17:10:35 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 32A783F6B0
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 17:12:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1742836373;
+ bh=V5ze4rOHbcw+cGXBzDyTaHeJ2oeFuoN+6UChuM6+DCs=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=hh66fHulkb84n3ch0eA0esJ3D7t3K4nGzFkefnWbkTuub7e5ZAfDoWmE7JyN7iI1O
+ Pbp5mYJ1zvhUqewEAoRR/neXQPqkPllP3V+81T+Z8QNH6036tyxUT5be2ILVAfkLGt
+ jhGnpWMke7k5WAEIO5xPQ6h0vHp0h3STkHto+sv949U5ImUrFp0U6Ovh1p9CibCnnz
+ vtM6MS6prrEg1p9900M1rPXU5EJsiupNyMNBqsTBRM9jKsDDe5VGzoBfyxtcKXFTUT
+ W65rVeq0w8Iq9iIf7BhfaMxY3cBzaABUHJBA3P0EdEQvfUTVLQX43mxFIe0VVjgIo+
+ o+jZN6ajrAQnQ==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-43935e09897so29863495e9.1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 10:12:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742836372; x=1743441172;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=V5ze4rOHbcw+cGXBzDyTaHeJ2oeFuoN+6UChuM6+DCs=;
+ b=JJP8cGI/iPipGN2HvJlSgwBkjpgmNF6YALAGhXN11goX8mNPbPlfoghYksB9ZmjezH
+ ICvtbUXJvRfKQgQrQx4je8YrotFfLR7uxxImmz+mPyIGM7r5WWq5PuTlaoCeGFcM+Y4y
+ arZ5pLDO4U0ku3C9gH6O/OG+t8k+NVRBREa6EtYhjfYGtMc/iYdFdK386E3CtKz3JZDg
+ M84ZDCaA84XkTxbRfxTI1fFFrZLkLtRsRfQZqCCFxc46gngHIxoFwpaf+JPMj63T21ev
+ 910jR7R7Tm3moIgTqisdJJxe3bypkhrC6BY4ItZ2bWgqPD1yNoj7NOvAFJE8En2e37VW
+ aUAA==
+X-Gm-Message-State: AOJu0YynA5ZZoI0fWVKIelg00C2QnTRlmQbbyw5FgyKCtUfXcTYpGSk9
+ rRa1KCs7+7kDd0AaD/QWcxUoaKNz5mkbD1/mribkvBvVBk5E2L+ubvlkRhYwnFi4qyhnvit+ZiU
+ bdHZfdb+ewK+xUEBFHM9GzCuLmMoK7QbdHJ1lkHFRqLdPnp0d+GJCRLeZjNLCcUU9+S0=
+X-Gm-Gg: ASbGncse1wRz2twX5e6RKWj2d4Zh+OJGbrWIuE8qdocYqBTD47NbfD5yW3smRufUtDC
+ LZL0YrzR0hWBHY/95VQgipV4AGtOUHE4keBegpmPgRNONLv4zJ8meP923egZCBKqQsySeVPk69Z
+ a042rGpACTJglxAP5jtnydM57B34czTHcq1w6Z14+l77JqEjVdNnzIbeMsPevIS4mGQggiEj8JM
+ LDWAi/qkXCNM9xkFCL809HhtHhvpCYEnQRQSt+ONavFMXW0MUE9ZB02FSm7VDQlEGdv/7zV0tta
+ 8Y6c+g2zLEnOvwv2P5KsLgGBVgTWmFq9mSno1Uloqe742mWVImZ9sP/pdx/EDn6UesoAC7PBE8D
+ MyNKLcjggD8EgMA4BHQ==
+X-Received: by 2002:a05:600c:4e45:b0:43c:ee3f:2c3 with SMTP id
+ 5b1f17b1804b1-43d509eb3d4mr140046915e9.7.1742836372429; 
+ Mon, 24 Mar 2025 10:12:52 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGx+IttovI1yecWZK+16XWTy156mdpCHdWtXHYZzfS5cGG2ZfU+BZ/fudT1hd2X/gFzzWQdaQ==
+X-Received: by 2002:a05:600c:4e45:b0:43c:ee3f:2c3 with SMTP id
+ 5b1f17b1804b1-43d509eb3d4mr140046635e9.7.1742836372064; 
+ Mon, 24 Mar 2025 10:12:52 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3997f9efdedsm11600126f8f.96.2025.03.24.10.12.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Mar 2025 10:12:51 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] cmd: pmic: add fall through comment
+Date: Mon, 24 Mar 2025 18:12:43 +0100
+Message-ID: <20250324171243.576862-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: fix ipv4 device path node conversion
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250324083443.1537006-1-vincent.stehle@arm.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250324083443.1537006-1-vincent.stehle@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HzUVPi+UxWpvipYD+XfwqblEUoBJ9KHFP+r0nHQ5yWJ5s+6rVKQ
- /wRqIE7rh6COG8BZ5ZdStumIAec3yXeA5zHL+DMUPBQvrWIpH1SZYkM7xbv3pMqqGKfvKtV
- 4UztEQTCLGehMpCrHWLh0EqkG5zeYYlODosPFLxNMehOH346KvMdLKg8UzbqqWKa4cY7ovp
- fsfYYvag6cLZMsKmtWtXQ==
-UI-OutboundReport: notjunk:1;M01:P0:9Hv63cfg4yg=;F6dn6bytztb4TNkO6mG8bREq880
- J47eK4cw/9xJm5QUNKH4Q4P8WzEVb5MJRVV/bHVptuR20XtIjsm7VwNNoQIP2qFGwCqMhiUpW
- Iroi+CUyNRB6btPdYepi72S6Jys9lU6ax/gQpIkrMYwM7rnhLVABumZlkBQMcJYNWgy0wh5zH
- 5K1I9wL5BoIgasrb8TmDzWWSxl/BHE+0VVoM+DSKqiPfEcajvC895SDW4N0d1gHf0VSjif9vt
- 5L2fTPEpEF57KATPk8IMfMZCOCmzGyOLXwKzWg8g1X61tr5B/4d8FvXw2EN3TKyZ29dpUgCTV
- XgZS1xXGi/HboF5mZjpFzPafK3WnFdjTYEhaCjMjhlxyY2/9uuk63ZTIkPLFi0amdvOUyih3H
- qqxQTeLQM6+vOV2+pwG+DxRqm0df1tR++HX5jUEKgkjmm5xsoyXkLhsR2XnOh//SHBM9YJxrr
- LwOOGhUkEh32/Jm8AiZufe8pVXsUlwKk0dLrFzuJMamk9uAYahdlFYTTZn3RiQgCvQG1Swb+X
- 2egRdTKYKBVbar6adgg+w/mLL0JWyjUIr527sHgBld6LXKZeC0Yl0OyASgMKHEenauLecQv1d
- 7GM1SmZGVULRMyqUpj5Aj3SlPG3zksMFFqO4phC+D7ShsS8xN4gNMY1KCQQSmNHbQGyPkyDhT
- RrR4m5Q+HxUXk70s7Gpg/b0D2hS9t+RtBZwzm1wqVDrpxq0WgBCCIB1E5j+ylT3eTmAJcrV0a
- YJ2STi50cffjlAp4HfZ+H38S/E4nf3ALDBAN+yeJABrwUmP7emMDjs1x1c2V6KjPApcvpwSDR
- hGLLfB90ZIbUpSRlkk4iMeOi0BeNiRuSrDZpoqsMu1ELSerOJzy7FqKj56fjSHcVN0cI0AZu1
- f5Qat6RFJJnghqtijO3ROjlDvhnuD0e3xfB7ltAW9fUzOOXvDfW08pJXNYFXEeq+dhtWp6yA0
- 2pZAC5l+/+EGdPP9PuCyY4J4x85FXYKQggIwmB/nwdzBFBUJgLD1500C1gf2Wi2LF/FCvZI2L
- E5UBLFhw6MLBcY6RQXsCPNFcJPxGLR2bPjXfnE9360qkkqzl9+2WbNKrFZ1S+3BlYVOKJBRfz
- fnuAZv2wel5EdwCo4A64B90xewRbU+mFmXX7zEdwgvqo1EaqIEd8BJfxKf4ez45HgRtTIWYSe
- Q5aLcoMV/1QRJ7u0Zz0eWvflJcpHfz2kUbAVm+ZU0sRwXNGa24yqcB7QnXd63R66DWzOeDotC
- nqFsTGEg1gTJ68p0ERAKqIZDkC8d9d6QutWqfNlIzrg3jgR6unW3MpHGQLjbNJvDFPaVAQXnw
- kHeCaI5vCfTNgrQPpYXa2xRW2SGf3zbKXgEijhY2CoYp4qqSDtnOeJpgyxKD4mwDwWGooCMAV
- 697ua/RZ1csOhBedoeOj7FWSQ8QU7zUP5cijtB2A1Y6JcJ1+pR/toHq8VWjpizMQMnXz2rbu7
- c0LuCKX9oIFpA0OaGeibHdfH9DWA=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,52 +106,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24.03.25 09:34, Vincent Stehl=C3=A9 wrote:
-> When converting an IPv4 device path node to text, the
-> EFI_DEVICE_PATH_TO_TEXT_PROTOCOL will produce the following string:
->
->    IPv4(5.6.7.8,TCP,UDP,0x6,DHCP,1.2.3.4,9.10.11.12,255.255.255.0)
->
-> This string erroneously contains multiple protocols: TCP, UDP and 0x6.
->
-> Add the missing `break' statements in the dp_msging() function to fix th=
-is
-> and obtain the following expected string instead:
->
->    IPv4(5.6.7.8,TCP,DHCP,1.2.3.4,9.10.11.12,255.255.255.0)
->
-> Fixes: aaf63429a112 ("efi_loader: add IPv4() to device path to text prot=
-ocol")
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Adriano Cordova <adrianox@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
+Make fall through explicit via comment to allow building with
+-Wimplicit-fallthrough.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/pmic.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> ---
->   lib/efi_loader/efi_device_path_to_text.c | 3 +++
->   1 file changed, 3 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/e=
-fi_device_path_to_text.c
-> index f6889cb7399..452ec1b2e8b 100644
-> --- a/lib/efi_loader/efi_device_path_to_text.c
-> +++ b/lib/efi_loader/efi_device_path_to_text.c
-> @@ -181,10 +181,13 @@ static char *dp_msging(char *s, struct efi_device_=
-path *dp)
->   		switch (idp->protocol) {
->   		case IPPROTO_TCP:
->   			s +=3D sprintf(s, "TCP,");
-> +			break;
->   		case IPPROTO_UDP:
->   			s +=3D sprintf(s, "UDP,");
-> +			break;
->   		default:
->   			s +=3D sprintf(s, "0x%x,", idp->protocol);
-> +			break;
->   		}
->   		s +=3D sprintf(s, idp->static_ip_address ? "Static" : "DHCP");
->   		s +=3D sprintf(s, ",%pI4", &idp->local_ip_address);
+diff --git a/cmd/pmic.c b/cmd/pmic.c
+index 3ad1b8aa375..c5eea766a31 100644
+--- a/cmd/pmic.c
++++ b/cmd/pmic.c
+@@ -34,6 +34,7 @@ static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 			printf("Can't get PMIC: %s!\n", name);
+ 			return failure(ret);
+ 		}
++	fallthrough;
+ 	case 1:
+ 		if (!currdev) {
+ 			printf("PMIC device is not set!\n\n");
+-- 
+2.48.1
 
