@@ -4,41 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B548C36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 08:35:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D73CC3600C
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 08:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E57EA81F4E;
-	Mon, 24 Mar 2025 09:35:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6080381F4D;
+	Mon, 24 Mar 2025 09:38:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742805492;
+	bh=KhVo67wOUL+ExdHhcw2WZa11clmQmZmwL4MTo4iwIEM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=D9SComD0jekJrScPDN4nJjsZrDIp2163QpxD1dMTd/wFR0DYJlUJOWN+A9zj0fxO1
+	 92a1j3UiECZC01dXqAplJ0lR3HkPeqjeyOJWb2HpIacpJh/eSG1ZUjC4f5F80IKDs/
+	 FY5NncpZmwF+fVtx86PG9gXudngUPaYL4Lh1CSSKS2ZC4xlwIsmiXpmJp9CKvHMem8
+	 TGMk4Dyy6rwWEj95Ry0SYZ7lydNRxo2baxc+OOSThQ0GdDW/jerGZDn8/1dfFplYRW
+	 oT4JGFy4vAL2XYErQ6s7KuSmIBlLL01Ci1GBBwXnlwsvCRhZ9yNZm1M7P10SfOIPGl
+	 GOJt12XUje8Cw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 692EF81F71; Mon, 24 Mar 2025 09:35:05 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9DA0981EDD
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 09:35:02 +0100 (CET)
+ id BE18981F6B; Mon, 24 Mar 2025 09:38:10 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C8A3481F28
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 09:38:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1F4ED1A2D;
- Mon, 24 Mar 2025 01:35:08 -0700 (PDT)
-Received: from localhost.localdomain (unknown [10.34.124.28])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 5F2B23F58B;
- Mon, 24 Mar 2025 01:35:00 -0700 (PDT)
-From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] efi_loader: fix ipv4 device path node conversion
-Date: Mon, 24 Mar 2025 09:34:43 +0100
-Message-ID: <20250324083443.1537006-1-vincent.stehle@arm.com>
-X-Mailer: git-send-email 2.47.2
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4ZLmf63XwTz9t1R;
+ Mon, 24 Mar 2025 09:38:06 +0100 (CET)
+Message-ID: <db53fe94-669e-49d0-a1b5-5a77a280ab9a@denx.de>
+Date: Mon, 24 Mar 2025 09:38:04 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH 19/34] watchdog: sunxi: add A523 support
+To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Mikhail Kalashnikov <iuncuim@gmail.com>,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+References: <20250323113544.7933-1-andre.przywara@arm.com>
+ <20250323113544.7933-20-andre.przywara@arm.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250323113544.7933-20-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -56,46 +70,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When converting an IPv4 device path node to text, the
-EFI_DEVICE_PATH_TO_TEXT_PROTOCOL will produce the following string:
+On 23.03.25 12:35, Andre Przywara wrote:
+> The Allwinner A523 SoC moved the watchdog into a separate MMIO frame,
+> and also shifted the registers a bit: the control, config, and mode
+> register are located four bytes earlier.
+> 
+> Add the new compatible string, and connect it to the new struct
+> describing the new register layout.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
-  IPv4(5.6.7.8,TCP,UDP,0x6,DHCP,1.2.3.4,9.10.11.12,255.255.255.0)
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-This string erroneously contains multiple protocols: TCP, UDP and 0x6.
+Thanks,
+Stefan
 
-Add the missing `break' statements in the dp_msging() function to fix this
-and obtain the following expected string instead:
+> ---
+>   drivers/watchdog/sunxi_wdt.c | 11 +++++++++++
+>   1 file changed, 11 insertions(+)
+> 
+> diff --git a/drivers/watchdog/sunxi_wdt.c b/drivers/watchdog/sunxi_wdt.c
+> index 8eeac935760..467db5fe9bf 100644
+> --- a/drivers/watchdog/sunxi_wdt.c
+> +++ b/drivers/watchdog/sunxi_wdt.c
+> @@ -153,10 +153,21 @@ static const struct sunxi_wdt_reg sun20i_wdt_reg = {
+>   	.wdt_key_val		= 0x16aa0000,
+>   };
+>   
+> +static const struct sunxi_wdt_reg sun55i_wdt_reg = {
+> +	.wdt_ctrl		= 0x0c,
+> +	.wdt_cfg		= 0x10,
+> +	.wdt_mode		= 0x14,
+> +	.wdt_timeout_shift	= 4,
+> +	.wdt_reset_mask		= 0x03,
+> +	.wdt_reset_val		= 0x01,
+> +	.wdt_key_val		= 0x16aa0000,
+> +};
+> +
+>   static const struct udevice_id sunxi_wdt_ids[] = {
+>   	{ .compatible = "allwinner,sun4i-a10-wdt", .data = (ulong)&sun4i_wdt_reg },
+>   	{ .compatible = "allwinner,sun6i-a31-wdt", .data = (ulong)&sun6i_wdt_reg },
+>   	{ .compatible = "allwinner,sun20i-d1-wdt", .data = (ulong)&sun20i_wdt_reg },
+> +	{ .compatible = "allwinner,sun55i-a523-wdt", .data = (ulong)&sun55i_wdt_reg },
+>   	{ /* sentinel */ }
+>   };
+>   
 
-  IPv4(5.6.7.8,TCP,DHCP,1.2.3.4,9.10.11.12,255.255.255.0)
+Viele Grüße,
+Stefan Roese
 
-Fixes: aaf63429a112 ("efi_loader: add IPv4() to device path to text protocol")
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Adriano Cordova <adrianox@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
----
- lib/efi_loader/efi_device_path_to_text.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
-index f6889cb7399..452ec1b2e8b 100644
---- a/lib/efi_loader/efi_device_path_to_text.c
-+++ b/lib/efi_loader/efi_device_path_to_text.c
-@@ -181,10 +181,13 @@ static char *dp_msging(char *s, struct efi_device_path *dp)
- 		switch (idp->protocol) {
- 		case IPPROTO_TCP:
- 			s += sprintf(s, "TCP,");
-+			break;
- 		case IPPROTO_UDP:
- 			s += sprintf(s, "UDP,");
-+			break;
- 		default:
- 			s += sprintf(s, "0x%x,", idp->protocol);
-+			break;
- 		}
- 		s += sprintf(s, idp->static_ip_address ? "Static" : "DHCP");
- 		s += sprintf(s, ",%pI4", &idp->local_ip_address);
 -- 
-2.47.2
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
