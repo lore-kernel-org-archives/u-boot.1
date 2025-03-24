@@ -4,78 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76C9C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 15:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B20B8C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 15:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FFB081E3E;
-	Mon, 24 Mar 2025 16:10:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id D5B66806FC;
+	Mon, 24 Mar 2025 16:46:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=3mdeb.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="XCfG+C13";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=3mdeb.com header.i=@3mdeb.com header.b="DCXSSnAH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8EC481D3B; Sun, 23 Mar 2025 22:51:33 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ id B7305806FC; Mon, 24 Mar 2025 16:46:18 +0100 (CET)
+Received: from 12.mo550.mail-out.ovh.net (12.mo550.mail-out.ovh.net
+ [87.98.162.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AAB781B5B
- for <u-boot@lists.denx.de>; Sun, 23 Mar 2025 22:51:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 36C36805D7
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 16:46:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=none (p=none dis=none) header.from=3mdeb.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: faa2e0b2-0830-11f0-8ec8-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id faa2e0b2-0830-11f0-8ec8-005056994fde;
- Sun, 23 Mar 2025 22:51:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=Hgfb62HFuvVbWNgEORCU8n3h0bJ8E7cKnMA21OOpri8=;
- b=XCfG+C13A0fYj02Y+1vtrQcDqfFSKh73gp3dRzYctvxr/KGk5F2kXX0+pISPALvMl43kLAYQInySR
- A3va9RY5dRexa1TBLvoDPvyg38ZGutt3a10oZwBXvPj8mWrXX55ECUPPk3zmHIs1NzJJ+1YlAMwweR
- BO7NbUAyn4BSBeJAxwo0Df6kGB4RgrTpg2zOz4cosf7Nc9/f2Oa100aI/bb6Vlfv+5rcCuqGT8jLWc
- lfab+DBS1Goxc5aaQEXTaIUneVoWNLFqHMMsZ9f4UM45Is9nLEH40Be4TzrTH9OQ5bhY5ObbcBrU2F
- YqrekxYZSygp9qyUXC0G4tHQGQtbHuA==
-X-KPN-MID: 33|c+HniJUQD91CZmCH8YqnbAKJS8DTecii5hzmmev6nofmlbNKWsXbN4CoVNat1Mt
- 4ONu+LPbBU73dc71ZExXgOOh+Cs42ZGOClvmHLuqIkMQ=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|2pGf20q+Tldu5dqL2jYuCilqO0GXcjfrZFQfYrzz30psHhGmqAY7DZ3G5VMJ3xJ
- OkmvpikC0RQ6EJXuQDERCTQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id f9d1be83-0830-11f0-97b7-00505699d6e5;
- Sun, 23 Mar 2025 22:51:30 +0100 (CET)
-Date: Sun, 23 Mar 2025 22:51:29 +0100
-Message-Id: <87pli776vy.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, e@freeshell.de,
- rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- andy.tang@nxp.com, mingkai.hu@nxp.com, Ashish.Kumar@nxp.com,
- priyanka.jain@nxp.com, wasim.khan@nxp.com,
- udit.agarwal@nxp.com, meenakshi.aggarwal@nxp.com,
- patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com,
- Manish.Tomar@nxp.com, matt@traverse.com.au,
- caleb.connolly@linaro.org, tien.fong.chee@altera.com,
- michal.simek@amd.com, sumit.garg@kernel.org,
- patrick.rudolph@9elements.com, alif.zakuan.yuslaimi@intel.com,
- Oliver.Gaskell@analog.com, duje.mihanovic@skole.hr,
- robert.marko@sartura.hr, lukas.funke@weidmueller.com,
- peng.fan@nxp.com, jj251510319013@gmail.com,
- adrianox@gmail.com, sjg@chromium.org, sughosh.ganu@linaro.org,
- vincent.stehle@arm.com, raymond.mao@linaro.org,
- maks.mishinfz@gmail.com, semen.protsenko@linaro.org,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
-In-Reply-To: <CAC_iWjLY6vytm6UB=Fc3kKpMWQ3=nc19eAi+KjjbwHb9Dfw=VQ@mail.gmail.com>
- (message from Ilias Apalodimas on Mon, 17 Mar 2025 21:06:26 +0200)
-Subject: Re: [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
-References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
- <875xk78wba.fsf@bloch.sibelius.xs4all.nl>
- <CAC_iWjLY6vytm6UB=Fc3kKpMWQ3=nc19eAi+KjjbwHb9Dfw=VQ@mail.gmail.com>
-X-Mailman-Approved-At: Mon, 24 Mar 2025 16:10:20 +0100
+ spf=pass smtp.mailfrom=maciej.pijanowski@3mdeb.com
+Received: from director7.ghost.mail-out.ovh.net (unknown [10.108.9.253])
+ by mo550.mail-out.ovh.net (Postfix) with ESMTP id 4ZLy863ybdz1bkG
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 15:46:14 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-cfcv8 (unknown [10.108.42.79])
+ by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 2CE601FDDA;
+ Mon, 24 Mar 2025 15:46:13 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.108])
+ by ghost-submission-5b5ff79f4f-cfcv8 with ESMTPSA
+ id 7dmOJ0V+4Wf9VQAAIzSkvg
+ (envelope-from <maciej.pijanowski@3mdeb.com>); Mon, 24 Mar 2025 15:46:13 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-108S002c41b25a6-ad29-4113-afd4-2d895e736d64,
+ 5546B6D7EA01F948F6BD0E207D16FD70EFEE0835)
+ smtp.auth=maciej.pijanowski@3mdeb.com
+X-OVh-ClientIp: 213.192.77.249
+Message-ID: <b8f68653-1d3a-4198-9c75-c8e0405e553c@3mdeb.com>
+Date: Mon, 24 Mar 2025 16:46:12 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: danct12@riseup.net, u-boot@lists.denx.de
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Subject: Re: [PATCH v2 00/11] Rockchip VOP2 support
+Autocrypt: addr=maciej.pijanowski@3mdeb.com; keydata=
+ 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
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------WUkI6R0FqCMs9g0VVvg8qLVC"
+X-Ovh-Tracer-Id: 9098960101352024233
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduiedtudejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefkffggfgfvhffutgesghdtreertddvjeenucfhrhhomhepofgrtghivghjucfrihhjrghnohifshhkihcuoehmrggtihgvjhdrphhijhgrnhhofihskhhiseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpedvvdevfedvjeeukeeuledufeektdeijefggeekfeekvddugeeghfdthefhueelvdenucffohhmrghinhepfehmuggvsgdrtghomhenucfkphepuddvjedrtddrtddruddpvddufedrudelvddrjeejrddvgeelpdefjedrheelrddugedvrddutdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehmrggtihgvjhdrphhijhgrnhhofihskhhiseefmhguvggsrdgtohhmpdhnsggprhgtphhtthhopedupdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdfovfetjfhoshhtpehmohehhedtmgdpmhhouggvpehsmhhtphhouhht
+DKIM-Signature: a=rsa-sha256; bh=trUV2+RkuCKul1nGqbrKBRT92lCVJt+lWHtsEsKx2Zs=; 
+ c=relaxed/relaxed; d=3mdeb.com; h=From;
+ s=ovhmo3617313-selector1; t=1742831174; v=1;
+ b=DCXSSnAHxzoiPy/fmbl6zzqZcHCV0W6LGPVsfd++YMMe5w/h4abEkI/D00kI4ZHz1GwBOli0
+ 4b4hyHnU1UT3jv1AZZXmTHmrroyPqW/XWETq/pl0EhEjBulu2iszhj8S3BG8jGlKuffdP6fLAw7
+ mm8tOGeCeRGeAtWK7AEGeNT/I4gT30kIp1JoXUF1gLsVPK/JcNmgl+vFe+23nvf5BPUi70WTKls
+ 0YcLYJBjuWntG0PBV1XC/G6A9abwezsuhIlu5JNcHhTcfO49veOccRef+gVelSTT5OFvet+ACab
+ Stia/8O5BLBlrur6bYUEYbVjmAHpUhl/Jwzo+HF3nErqw==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,153 +124,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Date: Mon, 17 Mar 2025 21:06:26 +0200
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------WUkI6R0FqCMs9g0VVvg8qLVC
+Content-Type: multipart/mixed; boundary="------------ZrFp0wqpD4n5oKEHClAydDG5";
+ protected-headers="v1"
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+To: danct12@riseup.net, u-boot@lists.denx.de
+Message-ID: <b8f68653-1d3a-4198-9c75-c8e0405e553c@3mdeb.com>
+Subject: Re: [PATCH v2 00/11] Rockchip VOP2 support
 
-Hi Ilias,
+--------------ZrFp0wqpD4n5oKEHClAydDG5
+Content-Type: multipart/mixed; boundary="------------zU0LBpMTpDdDn7Aih8VBLCd1"
 
-> Hi Mark,
-> Thanks for taking a look
-> 
-> On Mon, 17 Mar 2025 at 18:18, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > Date: Mon, 17 Mar 2025 15:38:36 +0200
-> > >
-> > > The EFI subsystem defines its own bounce buffer for devices that
-> > > can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
-> > > which can be reused instead of defining another symbol.
-> > > The only limitation for EFI is that we don't know how big the file a user
-> > > chooses to transfer is and as a result we can't depend on allocating the
-> > > memory from the malloc area, which can prove too small.
-> > >
-> > > So allocate an EFI buffer of the correct size and pass it to the DM,
-> > > which already supports bounce buffering via bounce_buffer_start_extalign()
-> >
-> > The existing bounce buffer code servers a completely different purpose
-> > though.  It exists to make sure that hardware with cache-incoherent
-> > DMA can safely do the required cache flushes.
-> >
-> > This means that:
-> >
-> > * SoCs with cache-coherent DMA don't necessarily set BOUNCE_BUFFER.
-> >   Looks like you added that option to all the SoCs where you remove
-> >   EFI_LOADER_BOUNCE_BUFFER.
-> 
-> Yes, and that has a side effect I should have probably added to the
-> commit message. Using the existing bounce buffer will flush caches
-> even if it's pointless.
-> 
-> >
-> > * SoCs that (now) set BOUNCE_BUFFER may double bounce if the buffers
-> >   aren't properly aligned.  I suppose that this won't happen since
-> >   efi_disk_add_dev() sets medio.io_align to the device block size
-> >   which is typically larger than the cache line size.
-> 
-> I think it won't happen indeed but for a different reason. The EFI
-> memory we allocate and pass to bounce_buffer_start_extalign() is
-> page-aligned.
-> The DM subsystem will call that function with either
-> blk_buffer_aligned() which always returns 1 or whatever the device has
-> defined. The strictest one I found was the virtio one which requires
-> page alignment.
-> 
-> Allocating memory from EFI is needed, simply because the current
-> bounce buffer API will use the malloc area, which might not be enough.
-> Do you think the extra cache flush is a no-go and we should leave the
-> code as-is?
+--------------zU0LBpMTpDdDn7Aih8VBLCd1
+Content-Type: multipart/alternative;
+ boundary="------------P0D97VRjqULkuTjfjvNmrL1G"
 
-I think it is undesirable.  I believe it will measurably slow down
-loading large files.
+--------------P0D97VRjqULkuTjfjvNmrL1G
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-So probably best to leave the code as-is.  If somebody really cares,
-they should probably separate out the cache flushing code from
-CONFIG_BOUNCE_BUFFER first.  And maybe fix the DM bounce buffer code
-such that it supports large buffers.
+SGVsbG8sDQoNCkZpcnN0IG9mIGFsbCwgdGhhbmtzIGZvciB5b3VyIHdvcmsgb24gdGhpcyBS
+b2NrY2hpcCB1cHN0cmVhbSBjb2RlLiBXZSBoYXZlDQp0ZXN0ZWQgeW91ciBwYXRjaGVzIG9u
+IFJLMzU2NiBib2FyZCAoUmFkeGEgQ00zIElPKSBhbmQgSERNSSBvdXRwdXQgaW4NClUtQm9v
+dCB3b3JrcyBncmVhdC4gV2UgZGlkbid0IGhhdmUgc3VjY2VzcyB3aXRoIE1JUEkgeWV0IHNv
+IGZhciwgdGhvdWdoLg0KDQogPiBIRE1JIHNob3VsZCB3b3JrIGZsYXdsZXNzbHkgYnV0IHRo
+ZXJlJ3Mgc3RpbGwgc29tZSB0aW1pbmdzIGlzc3VlIHdpdGgNCiA+IERXIE1JUEkgRFNJLCBw
+ZXJoYXBzIHRoYXQncyBzb21ldGhpbmcgdG8gbG9vayBpbnRvIGxhdGVyLg0KDQpJIHdhbnRl
+ZCB0byBjb25maXJtIHdoZXRoZXIgeW91IGhhdmUgaGFkIHN1Y2Nlc3Mgd2l0aCB0aGUgTUlQ
+SSBhcyB3ZWxsLA0KYW5kIHdoYXQgZXhhY3RseSBkbyB5b3UgbWVhbiBieSB0aGVzZSBpc3N1
+ZXM/DQoNClRoYW5rcywNCg0KLS0gDQpNYWNpZWogUGlqYW5vd3NraQ0KRW5naW5lZXJpbmcg
+TWFuYWdlcg0KR1BHOiA5OTYzQzM2QUFDM0IyQjQ2DQpodHRwczovLzNtZGViLmNvbSB8IEAz
+bWRlYl9jb20NCg0K
+--------------P0D97VRjqULkuTjfjvNmrL1G--
 
-> > Still the commit message is somewhat misleading; this code doesn't
-> > really make us use the DM bounce buffering code.
-> >
-> > I also spotted a few bugs in the implementation.  See below.
-> 
-> [...]
-> 
-> > > +++ b/lib/efi_loader/efi_disk.c
-> > > @@ -105,6 +105,8 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
-> > >       int blksz;
-> > >       int blocks;
-> > >       unsigned long n;
-> > > +     u64 bb = 0xffffffff;
-> > > +     void *bb_ptr = buffer;
-> > >
-> > >       diskobj = container_of(this, struct efi_disk_obj, ops);
-> > >       blksz = diskobj->media.block_size;
-> > > @@ -113,27 +115,35 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
-> > >       EFI_PRINT("blocks=%x lba=%llx blksz=%x dir=%d\n",
-> > >                 blocks, lba, blksz, direction);
-> > >
-> > > +     if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && (uintptr_t)buffer >= SZ_4G + buffer_size - 1) {
-> >
-> > Shouldn't that check be
-> >
-> >         if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && (uintptr_t)buffer + buffer_size - 1 >= SZ_4G) {
-> >
-> > ?
-> 
-> Yes...
-> I originally had (uintptr_t)buffer > SZ_4G - buffer_size - 1 and avoid
-> potential overflows, but then I started to think what happens if
-> buffer_size is 4GB and completely messed this up ...
-> I think it's (uintptr_t)buffer + buffer_size + 1 >= SZ_4G though,
-> because SZ_4G is 0x100000000. Anyway yes, you are right, I'll fix it
-> in v2, but using subtractions.
-> 
-> >
-> > > +             if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
-> > > +                                    buffer_size >> EFI_PAGE_SHIFT, &bb) != EFI_SUCCESS)
-> > > +                     return EFI_OUT_OF_RESOURCES;
-> > > +
-> > > +             bb_ptr = (void *)(uintptr_t)bb;
-> > > +     }
-> > >       /* We only support full block access */
-> > > -     if (buffer_size & (blksz - 1))
-> > > +     if (buffer_size & (blksz - 1)) {
-> > > +             if (buffer != bb_ptr)
-> > > +                     efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
-> > >               return EFI_BAD_BUFFER_SIZE;
-> > > +     }
-> >
-> > Any reason why you don't check the buffer_size check before allocating
-> > the bounce buffer?  That way you don't have to worry about freeing it
-> > here.
-> 
-> Nop, that code was already there and I  didn't move it. I'll move it around.
-> 
-> >
-> > You're missing a memcpy() here in the case direction == EFI_DISK_WRITE.
-> 
-> ah thanks
-> 
-> >
-> > >       if (CONFIG_IS_ENABLED(PARTITIONS) &&
-> > >           device_get_uclass_id(diskobj->header.dev) == UCLASS_PARTITION) {
-> > >               if (direction == EFI_DISK_READ)
-> 
-> [...]
-> 
-> > > +                     efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
-> > >               return EFI_DEVICE_ERROR;
-> > > +     }
-> > > +
-> > > +     if (buffer != bb_ptr) {
-> > > +             memcpy(buffer, bb_ptr, buffer_size);
-> >
-> > This memcpy() is only necessary if direction == EFI_DISK_READ.
-> 
-> Ok
-> 
-> [...]
-> 
-> Thanks
-> /Ilias
-> 
+--------------zU0LBpMTpDdDn7Aih8VBLCd1
+Content-Type: application/pgp-keys; name="OpenPGP_0x9963C36AAC3B2B46.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x9963C36AAC3B2B46.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+wMDsCZKkPKx8jYw=3D
+=3D0QS1
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------zU0LBpMTpDdDn7Aih8VBLCd1--
+
+--------------ZrFp0wqpD4n5oKEHClAydDG5--
+
+--------------WUkI6R0FqCMs9g0VVvg8qLVC
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEEp2bIlWmJXAuG1ZjQmWPDaqw7K0YFAmfhfkQFAwAAAAAACgkQmWPDaqw7K0bg
+yBAAqj/X8q5hY01JnrySEoqnuqTIC8HsynotKbk9/nWaslqEZGd5IDrECuRZIS17tM3bydFhCiYJ
+bjU8WXN1fVzRwaR4OGeTRdTjPKeEIlUf2s5HXF45eTOj7YeTlUvOExIdnG48UbQObCmPejpYhn1J
+yr/4ErFzmeZsn02rXzSs5G9ustM9FO5jrqhQo3WxvwiYf8qmef91V8ZzeqVFeCVW5PbhBfbrlc3e
+RoSOZML70EGb2uwffbJlpf1GXFHVsvLCeXBa9zYKSG0bKS2XZw+04UqoP8AfGjjYGOFY3kKL8fFC
+wPC5NswRYhXGb/L5D+bsS8kYhs9gjDbiOiJIPIVpvNAkX4z4JYyBkl5mpz6EetYyl+9EPu3j25pv
+cx4IA0XA+G+1J0eYMFrEBxNY8Hz9P1mfYAXrs+BCLklS4pkOEvMqI8CxYzADJkkJeocFvPo5aGTZ
+zfRF+h0VtULLcrQsoB7SIofhd7WUyE7XvD0UjEnAfM0sRKgYKXeXV4UYe7cPwsz36BsGY58OLA9M
+g1y3oFPfNyZ+SuFdosSYHxzDDfXDtzviR+Dvxw/682Ci9YAOEDm1umud5dGdyvsdwDFPHNYhJgLg
+vJx2M9H8ZesoGKxI+NCwdg7Sbqy4zTNdpFfbJFRJ4jvFo82e0x/kbEh5j/HA0P+WjA/hsxqFRIoi
++UI=
+=HGy4
+-----END PGP SIGNATURE-----
+
+--------------WUkI6R0FqCMs9g0VVvg8qLVC--
