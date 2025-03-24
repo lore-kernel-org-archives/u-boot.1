@@ -4,117 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB3E3C36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 14:51:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30BAC36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 15:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D50480548;
-	Mon, 24 Mar 2025 15:51:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 12FB280548;
+	Mon, 24 Mar 2025 16:09:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tS0bmmWt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="ZtOUUjAQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A664805C3; Mon, 24 Mar 2025 15:51:27 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 12B8F81E5A; Mon, 24 Mar 2025 04:06:03 +0100 (CET)
+Received: from MEUPR01CU001.outbound.protection.outlook.com
+ (mail-australiasoutheastazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d40e::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16F6A801CF
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 15:51:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F28881E14
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 04:06:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-39141ffa9fcso3898757f8f.0
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 07:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742827884; x=1743432684; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=7ODRbwag9XIZye79H3dGt+Xy6g2JKhNBQbqpJ0Yvjeo=;
- b=tS0bmmWtvWYlPlFQqxYtsR1LV4CUq4BeV3zrulc0Gg/85FlEScJnAv1UpSZOrTxH7w
- sZXwSqrlS50jeOfdTlN+Da9Njv5ZzXCXs89HrwIbBPi6LR57IJGTL/cT1fpncw2BYZKe
- 7b1F/K6ewAQ9oHgpOciUZPnXeQmRWpzgG9kFYkODVZTh6I64qulyMmuvoumKzXmCeQi4
- 7vO8Fk/ZfS708/puZjLWoDxeR6jGWuWB0BuZ9WhmdTk8F4Y1j6YC/gA+jzrvssVtVX80
- cJ/oSRJKz2LiVqrqVXk/b7DfTh4SNe0cnZVZAalBFtP8Cg6oAT2ZhD2hJRyVEmm6+GrF
- zaOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742827884; x=1743432684;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=7ODRbwag9XIZye79H3dGt+Xy6g2JKhNBQbqpJ0Yvjeo=;
- b=cBoNq0KwpLMzOo6u5l76CuDqbAa+3GNSmg5rO2nV2vZ0yorNOxEApz2QZhzjktUEo9
- tJxKq3xFQwjreP3CZWwF6yrji3ItyXG6XrW/t0OcvNGuqE+fiCZU7z808xLy/P3sIJa/
- F+ReZXlKdYXhSCdNjmUKyRS/9eiSkSu1PQoV+H4pHMLAiflSqHTji7WLUlXJ6Wx14td8
- 1gHMKyCppcA0hTOZxNThVcZgv3CVFf3j8peUtepzYhOKblhgx6DAGLtI76iEb30mWjC0
- ZhhNTYYS+hwfQde+qi0DvgM10dQMit2dJY/uZwYZ7ACsTVFep2xJerMuPazvgDUseahS
- +FQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUm01vgYAp7iSS/AzcEl0uxdKy115XW2NXU/PlBUUcJzkt7JJ4SERO4Wo7m/aZ2hrWziQEfLsU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGYrveID66yICSoVj12XDPsjtJNW3BOTOxdCprOxgrOkv8fC+F
- vlZZh/gQib9u3QxO2WqosngiZ2mMsoV97Es71W2qak9e7bS5F/GMU/Ze86aghKU=
-X-Gm-Gg: ASbGncvUQhmRdceSVLeqhszAQm2+V4i4G2g6BiGg/uirFtmy1EIehP2y37srONJd/nJ
- lmxRGJE+i+vwT/8XApgtdlo7NBCCzCCwRZnou9/GDqEh9uHG/b36UZKpKSnD22eY7CCuIShazkW
- 2g5EEQu5kvR0zZhuaHs87O+k5Vc+JZp6hfVt8R+2/PQGQAhoAv8H6W3SXOjGsYy0xccOomokjyR
- mSJQgg+LNL1zC70B0am6vX10vdyyqQ+dEK8RNOfoYl492eMS/IjnIAmsTbEOSyEP4Sy8vx4saV2
- yGxx8+aa1dsQjcUpLagkB3A5o6aD2WKXtlgFIL2o0lpvA9DOsFHxLoOerbLK7xWqZU5WvOCK6rZ
- abRr8k7GMu9grIStL
-X-Google-Smtp-Source: AGHT+IEJFpyLuviJRNaAlh8rDlp5XAfRat+MSK6GL+pnfzqrPwub4PedF+pAPfQsM8tRrApY0F4AKQ==
-X-Received: by 2002:a5d:6485:0:b0:391:4231:414 with SMTP id
- ffacd0b85a97d-3997f9397e6mr13776885f8f.40.1742827884320; 
- Mon, 24 Mar 2025 07:51:24 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:a356:8d0:d4d:bb5f?
- ([2a01:e0a:3d9:2080:a356:8d0:d4d:bb5f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9957c3sm11445701f8f.18.2025.03.24.07.51.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Mar 2025 07:51:23 -0700 (PDT)
-Message-ID: <a4d1d382-5bcc-4efd-b8cf-376ae3945b26@linaro.org>
-Date: Mon, 24 Mar 2025 15:51:23 +0100
+ spf=pass smtp.mailfrom=Zone.Niuzh@hotmail.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dRLai+rybNXZ3i07JLX9rWabAXKCWblMwPBcaWKs0Nkj3bNDQYW3gnNwl9HS01a4suZr1zYd4x7ib0mqj0Jfbs67403nigivU+1j70GuEJG0Fpo7qRHG2j5Z5Iia1x2uQfxLTcHnmvFYqXWqkqekGbekqRf/d6QwsvRw/42zGseY0OlQ9PrLriCfSd/k5XcpgxRg4Fx3KACDyQZ0I47dlSjltE80JVB6R2s79+2XDNN+Yb3QvmDqilhA4govkVMySNL1C4FWSuwCCfPOWgvksu/TbdvPW5jz6L29SQQX0ABj9zxymZy3qVBkBTwHvA/klgwI/hGKlBbpOQ+NnHYOJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lIUU4Q1aPdE1evWk88zLR14X0MMgi1Z5OBD4MMKiuh4=;
+ b=w4KG2REm1QcSI0JUJVLrUFdgUnt6dvq85AeXUShJNnq7WrFy/+Ej/PELaOE2t2KySi10I+uHg4q5s+DX+jnd6PAxPaYiAj1JRR2qpchV7c5nvrM4sVt3adnLTHpN08+hGlp7ZBrzXvfQafsLaFDQZ0RBB+gGqB6VIozbCTtqYTm1dREIgN45NYWMGx4dYuao8+6F+y/Dl6m7aIo/lqUBtOiBZR4/s2NAX9ffhm4/XaqGxn/DT24oV7trbGsf8GIBHlCimasQ2RZcHMjHY2nai4bEcYDte+vyKTX2M55Mpr6Yq2nZEToDjCJZoV/iyJKc4oBze5NKrQgATf+/hh4qLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lIUU4Q1aPdE1evWk88zLR14X0MMgi1Z5OBD4MMKiuh4=;
+ b=ZtOUUjAQFKL3EOsOQESTfh+w2wlmVESGhqzIaLgdfifmk7HRa5LJwjeHHvcKImk4Atecv3q9uS09SIwR1+oi8YkYJfw8BQy+k5v8HvKBKLqzVhRRlkce2ZAFmv4tv8Nh7pK2b9kQRn4WrAwe8dGmNblx0nggHBzuraPLHfWy72u7EzIssfLjLbCds+dguI+PPdVMpqinBI+Fob/Kh4VDwB+8EOO5O9aEVU9adV20eslWKupVTTsDvOY650C8Sfrsp/YqumNJaxB35uledP0Qif6t7stSJ9QndxLybUTyaLEnjVK1WTSXJRA/NANiiN0DHWISJkSQumBwhh+nc5p00g==
+Received: from ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM (2603:10c6:220:241::8)
+ by MEUP300MB0047.AUSP300.PROD.OUTLOOK.COM (2603:10c6:220:21a::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.42; Mon, 24 Mar
+ 2025 03:05:56 +0000
+Received: from ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM
+ ([fe80::b19a:4f0c:b8c2:555b]) by ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM
+ ([fe80::b19a:4f0c:b8c2:555b%3]) with mapi id 15.20.8534.040; Mon, 24 Mar 2025
+ 03:05:56 +0000
+From: =?gb2312?B?xaMg1r666g==?= <Zone.Niuzh@hotmail.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: [PATCH] bootm: Add support for passing arguments to elf app
+Thread-Topic: [PATCH] bootm: Add support for passing arguments to elf app
+Thread-Index: AQHbmjpw74hnnpx4jU+sx5+6JouhN7OBnrib
+Date: Mon, 24 Mar 2025 03:05:56 +0000
+Message-ID: <ME0P300MB130971571336A7F169047BED9FA42@ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM>
+References: <20250321082242.59565-1-zone.niuzh@hotmail.com>
+In-Reply-To: <20250321082242.59565-1-zone.niuzh@hotmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ME0P300MB1309:EE_|MEUP300MB0047:EE_
+x-ms-office365-filtering-correlation-id: 833343c6-28c8-47fd-5b24-08dd6a80cb9b
+x-microsoft-antispam: BCL:0;
+ ARA:14566002|8060799006|15030799003|19110799003|8062599003|15080799006|461199028|7092599003|440099028|3412199025|19061999003|41001999003|102099032;
+x-microsoft-antispam-message-info: =?gb2312?B?cm1idDR1ay9FZ0RIUUtBNXg5bnljUkdaQmZTTmVGWEc2VElIVEtZNmNubzhp?=
+ =?gb2312?B?KzQ0aHl3eG5RM3o4MXdvYksrY01Zdi9nV1AvTTgrcHJHMEdPN1lNY29HWDFo?=
+ =?gb2312?B?ankvckk4U0RZZTRNUmJORFhibnU1MkhXV1dIV01WVjhEYUlaNnFQL0tyNlRR?=
+ =?gb2312?B?cTU3RVVWMy8yZXdsU0FybTFBTzUyam8wR1RLaTR6VFJ6KzhGTk5SOXZhb3RB?=
+ =?gb2312?B?ZFJzT3MzK0Y5UkNsalRnZGpWak5KMjNSelVQOUZnT1NYVzFGQS83aFBaZ0k0?=
+ =?gb2312?B?ZWlDLytGRy9vWmIxOE9ocFZGOXdzT0RiYzh1L21kbzdqR1AraHBwcEZiYXlK?=
+ =?gb2312?B?cEFVaGpnTkpvc0hBSjVFZklHZUxQZm1nVlorN1FkSU5zZzJFNE1EcTN4Y2c3?=
+ =?gb2312?B?WXJCQUF2c1RaWkl1Mkx3QitoNitZaWQ0N2dOWGtoOTlLb3JyVzJYWTZtalo4?=
+ =?gb2312?B?cWRScXkrNTZiSUhzR3lQdXd5cVdhQWpsWHA2NlBPTFlXM2dKdmdweHlwWXVt?=
+ =?gb2312?B?ODc2MVRkdEc3Y1VRdTVYS1dJTEQwY1kxMlVmNGErWjFrTEk0V1Y3Z1NuNmFV?=
+ =?gb2312?B?K2MvVlJMUTRkVE4rNnZqdyt5WHlSWHpDRzArbTkxYUcxT2JhUXlSazYzemJj?=
+ =?gb2312?B?b2k5SFlSRlpLWDNWcW1sa0thSnlWY1hLdFFHY3RVZSs2NzI2alpnQTJXQVBy?=
+ =?gb2312?B?bnB2azc5cG5LUDUyYlg5alFnNHRKcEt1bHlZWjZ3MGNPMCtyUEJQNU44dmxw?=
+ =?gb2312?B?RmJQeStOSVI2ZThXODRPeWtMQW1SbFhQUGc3R0xNLzcvSHMrdjY3TDYwdjBj?=
+ =?gb2312?B?cmp1dmU3bnN4WHpSem5WUGxWanl4L2h0bnpocjhtNTVQSXFMR2M3VEthQ3gy?=
+ =?gb2312?B?bS9EbCtsOUJwSHBucnlDT1F2Qlpvdy9CejV3UVZXNkVyU1EwU04wVnB6KzhG?=
+ =?gb2312?B?aDJZRFdmSEtxSDRNL0xmVWM3Y3pmRXZDSU1MVGZyZkRnNnNBazU0alh6TFBX?=
+ =?gb2312?B?UUdnb0tHNEdGTHRFVWwyRXZzS3NWN2JRNndUdE9SUG9PcVdMbS9xdkVEcUJq?=
+ =?gb2312?B?eVg5Qkt0SWlSalhpVEJtSVhkeXhYNlB3VlNzYVNiV0F4Tmw0VkNaMnNWdnRR?=
+ =?gb2312?B?eXF4dWU2Y1ZrQkVlOCtWYk5ERlhmeU8wL1lFUVZVelY2RVNvaHBJK1VUZDQ1?=
+ =?gb2312?B?Ulp5SUVjZzZrTWE3TXFWOEtKTGVhSjhBSjVyVkFHZkZXempJT1JIRHBPOUpQ?=
+ =?gb2312?B?V3NsV08rWjMyZFFiaS9sQmJxdFBtSUxUR2Vkd2tHay9BMXlzcnU3MFVIR3Bh?=
+ =?gb2312?B?SmlIeFU4d2F3NHpFd3NsYUpoRXBxMUxkZW9RQkwyT29TOVdiajZxK0ZpeDIr?=
+ =?gb2312?B?a0Y5S2tDNnIwUmtDenlVelloSi9HdFJZMTd0QW5VOVRRY0dhUC9nVksvV09V?=
+ =?gb2312?B?Y1VVUndhWlpza2ZLMVJhbm1scTNLenN3VUVjS1pUSU1CaUpVZmVvck9TVjVh?=
+ =?gb2312?B?bFB5ZDlxMjdOaXNZVjdnRm9UaG1QVy9STnl5VU1SdkdpUVNWV3pOTnBJUDR4?=
+ =?gb2312?B?a2xrMG85aWp3M2xIczhwUDRnTFhRcXc4VWlzZncwUmhGaTNoaFdHNVVmOW41?=
+ =?gb2312?B?QkZKelRuN0hTUVFKSWc3SkFmTHVCK0E9PQ==?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?gb2312?B?d0cvVmZQT3Q4MjFOMTljWlhXZkwxNjRhZHdVeGczam5VTW9IVFhTM3E2alNu?=
+ =?gb2312?B?Qm1uaC9vK2xXUEhPRERkVnZmbXZmSWlsdy9sMDFBWk5yalRaVnBaTGNxQmwx?=
+ =?gb2312?B?SmZrN05mNWkwUTJXekJFbkNJK2tuU2JLNXNGYXJxMHFRMHdCdkU1UFVUL2Ju?=
+ =?gb2312?B?NXlvYUFGZk90M29wRVZjTjRsOGN6cFlPeVZScG5xbU95YitmRVF4Q1h1eHAy?=
+ =?gb2312?B?UDhVZHg3ZWFmcHA4WTdoMnkyVjdvRG0rVHdJbG1kVmt0TDQ0ajFYTm52L1R2?=
+ =?gb2312?B?bjlMNTMxcDVCeXFNSmxWQ3ZVc1p5TWNGc2RPNitsTGxUMjNoOTVEdTFqOFFE?=
+ =?gb2312?B?aUxYaDZadUpRN09TT2R4SmR5L0owRU12YmhsMTlGTUZ6VGtlRmdVL1NGbHg2?=
+ =?gb2312?B?SmJWcTBJV2ZaS0N5aDQxNE5hUEc3ZFZUclNISWpKUDk5Z3FsT0Fvd1J5UjdO?=
+ =?gb2312?B?TkR2Sjk1bGgyb0VWODBQSlVBTFZLckc2Qy9yM3Z2bG5tcmFuNDNDcG5OMGtz?=
+ =?gb2312?B?QzVIdHVyMEV5WHVGUjYzUERXeFBSWEZhR3lrT1lOaFptb0FoaElMcGZ3d0hF?=
+ =?gb2312?B?MkRHaUJnSWp2TEtGRVNNNHlJdnJiTzlTSm9sUXNIcDVZNlh5QitUWnZxNVlw?=
+ =?gb2312?B?Sy92NWpoTUUzK0pPV1dJTlBUemNhc3RMZ2NOM1A2dVBzb2thczdRUHhBVEhr?=
+ =?gb2312?B?NlA3UGJTS09peXAzU0s1d0N5UklDRVBwT09vOGc4OFIzdm80d0MvUXZ2WVV5?=
+ =?gb2312?B?UlpsK1dhZENnclNwK1ZYWHg5eDlMamVMNXJHM1dTTUUyOHUyNDN3QjhUdXhC?=
+ =?gb2312?B?OHZpWFc0L0pQYWlzM1ovQWxHbW12WkdWcnB0VGUxYWpBY0x5b3hDUGNrTGxr?=
+ =?gb2312?B?RmRnQ05OTWtYdVp3bmVpdUFnZ1lhNkFwRTA0dmViSER1UVVBN3VXSjI2amEr?=
+ =?gb2312?B?dzJnVi9QQVJmTVhTR2hURHloYVJQSnFVQnNMajdxLy9QOWhsaXBhdFBQbzha?=
+ =?gb2312?B?QWJRWTFNVDc2SEpZMzFtaUs1eVlCaDZFQThlN2lKa0Y2a1lXalNVK2xCUGxL?=
+ =?gb2312?B?TStGcVptcHJ3bklnUk85ZmkxQmh2cHFldThrajlGUnlocW9KTHdaL2RaVnNz?=
+ =?gb2312?B?ODRMcHNhZWFFVkxveDVvazVEL0ZIZ3NUSFpDRnlKRFdMU3hKV3JUbXJUMzFF?=
+ =?gb2312?B?d09FQVRnVzNqdGpndmlidExDdmFxM05PbklxdkZFa1Jod2d4L0J2RkNhcWRs?=
+ =?gb2312?B?K0NKdHBSTklzV0ZBbFZUUTRYRnhnSHl2bjUwNEpiQ2FwZFlQYXpNWE1HU3J0?=
+ =?gb2312?B?emFqTExPUDRtWmJxUnRiL3BWQlJDMG81OTJIWXJKUVljWWJhUktQMWV5cEk0?=
+ =?gb2312?B?UkxBVGJSYUQxVFI1VWdRRy9pYkgrTGRBN3pkYkxuN0xqaWh5bTVUVVRyWmdI?=
+ =?gb2312?B?ZXYyemJlUTNpYkQxb2JnKzVvZ3p5ZEE5TW55V2IvK0MrZ2lVTVlPNE9FWDQ3?=
+ =?gb2312?B?MGYwTnEyeUR2bGM1NTBMTkllTmVpNXVxY3dGSUdnNnF4czJTUTJ4c2c4NW1j?=
+ =?gb2312?B?SUprcWVHRGRzTFZZUVJJbnIzL1VFS0J5NDZ0dkowanlTN2tMeUZzejZ6UGRq?=
+ =?gb2312?Q?ORTUFbWWK2Dbo9dChVdnkKeobaFALPbhi0v1tWvbjjV8=3D?=
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] usb: dwc3: gadget: Fix excepts/expects typo
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Felipe Balbi <felipe.balbi@linux.intel.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
-References: <20250324143956.91791-1-marex@denx.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250324143956.91791-1-marex@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-448bf.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ME0P300MB1309.AUSP300.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 833343c6-28c8-47fd-5b24-08dd6a80cb9b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Mar 2025 03:05:56.0756 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MEUP300MB0047
+X-Mailman-Approved-At: Mon, 24 Mar 2025 16:09:23 +0100
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,41 +152,20 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24/03/2025 15:39, Marek Vasut wrote:
-> Fix the excepts typo to expects , no functional change.
-> 
-> Fixes: 0916053ebc56 ("usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> Cc: Felipe Balbi <felipe.balbi@linux.intel.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   drivers/usb/dwc3/gadget.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> index 477ecd02098..2b01113d54c 100644
-> --- a/drivers/usb/dwc3/gadget.c
-> +++ b/drivers/usb/dwc3/gadget.c
-> @@ -1635,7 +1635,7 @@ usb_ep *dwc3_gadget_match_ep(struct usb_gadget *gadget,
->   		/*
->   		 * Special workaround for NXP UUU tool in SPL.
->   		 *
-> -		 * The tool excepts the interrupt-in endpoint to be ep1in,
-> +		 * The tool expects the interrupt-in endpoint to be ep1in,
->   		 * otherwise it crashes. This is a result of the previous
->   		 * hard-coded EP setup in drivers/usb/gadget/epautoconf.c
->   		 * which did special-case EP allocation for SPL builds,
-
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+VGhpcyBleHRlbmRzIHRoZSBib290bSBjb21tYW5kIHRvIGFsbG93IHBhc3NpbmcgYXJndW1lbnRz
+IHRvIHN0YW5kYWxvbmUNCkVMRiBhcHBsaWNhdGlvbnMuDQoNClNpZ25lZC1vZmYtYnk6IE5pdSBa
+aGlob25nIDx6b25lLm5pdXpoQGhvdG1haWwuY29tPg0KLS0tDQogYm9vdC9ib290bV9vcy5jIHwg
+MiArLQ0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KDQpk
+aWZmIC0tZ2l0IGEvYm9vdC9ib290bV9vcy5jIGIvYm9vdC9ib290bV9vcy5jDQppbmRleCBlOTUy
+MmNkMzI5OS4uN2U0MWUxZjYxNDEgMTAwNjQ0DQotLS0gYS9ib290L2Jvb3RtX29zLmMNCisrKyBi
+L2Jvb3QvYm9vdG1fb3MuYw0KQEAgLTQwMiw3ICs0MDIsNyBAQCBzdGF0aWMgaW50IGRvX2Jvb3Rt
+X2VsZihpbnQgZmxhZywgc3RydWN0IGJvb3RtX2luZm8gKmJtaSkNCiAgICAgICAgIGlmIChmbGFn
+ICE9IEJPT1RNX1NUQVRFX09TX0dPKQ0KICAgICAgICAgICAgICAgICByZXR1cm4gMDsNCg0KLSAg
+ICAgICBib290ZWxmKGJtaS0+aW1hZ2VzLT5lcCwgZmxhZ3MsIDAsIE5VTEwpOw0KKyAgICAgICBi
+b290ZWxmKGJtaS0+aW1hZ2VzLT5lcCwgZmxhZ3MsIGJtaS0+YXJnYywgYm1pLT5hcmd2KTsNCg0K
+ICAgICAgICAgcmV0dXJuIDE7DQogfQ0KLS0NCjIuMzkuNSAoQXBwbGUgR2l0LTE1NCkNCg0K
