@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62C5CC36008
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:18:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 933CDC36008
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 18:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4063181BC0;
-	Mon, 24 Mar 2025 19:17:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8ED5281D27;
+	Mon, 24 Mar 2025 19:17:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yL5vqqEi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v2/Uz5M9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE28A817EC; Mon, 24 Mar 2025 19:17:52 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 8E65081CAF; Mon, 24 Mar 2025 19:17:54 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C2D1810E8
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:17:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83CB480F70
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:17:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4394036c0efso29759145e9.2
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:17:50 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3913fdd0120so2595817f8f.0
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:17:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742840270; x=1743445070; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742840272; x=1743445072; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DMPevC71NClrbba6eH6wmonogr1KKU7Fggc7bXV9A20=;
- b=yL5vqqEiyB6CRxWlLhp9FAEefec8Hccpk2QWmlhYybSL5dW/7/nU9TkoT+Jc1T0z4S
- oShEJbfaLKhPSaSiHzG+QJsi7eKhPyPOkF7nCVmr/DxPEICcY3B4wTZer8Ml/mIOXvRH
- QIFvHv8TIaVSnNEGF5VAW4b4pZJ+sRvp2IfFnLFoEyKuACSbdeNBRJd2eXq8/3Jol2zT
- UQESD7cX/2+z98OOfXztNl7ant1fdAw2ySwdWhAVYjeNB+XhkYfLUZWmRYO5IEyJtJ6U
- Xpafij54e3lnRiqls3PFyzSvlQvjyGhqMNeu7o3Vb7Md81swC76kOptOJuePbES9pEs7
- oSIw==
+ :reply-to; bh=wgeQlzf2UMeRgVquXBFZM4RClD8XUzadcxu7FOTANmc=;
+ b=v2/Uz5M9Lz0Xn+C3OEz2Xd0sqYVAxYVHq2nCI/zRSkCmkysU900bUa/8/7H4pjO/4U
+ rVOwA6ARH4DNDywKhmKoLyJ/qwje7QxTulQu7grtXloiZXxChH9bFXCi0QoVY6GQ9Mmp
+ u5xtfUZVkQwwz3U4sbe8JBzmSMWJLoeLRwB6nRkX92SI1pviR00XzfpT4R6PlFJw42Th
+ ncmbXoKGx8xvhfGGqxSQxmhUTPLOkcXxoKUbh2gz13tPO11Lhn1RXlNFUkAYRx82lKIt
+ /iHbUd/JTQPEfjgf7vSlrEwRztFM4Da+K8OUrW4hknf437bNlLU2l5wo0FbJ+zd/wnW7
+ 7grg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742840270; x=1743445070;
+ d=1e100.net; s=20230601; t=1742840272; x=1743445072;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DMPevC71NClrbba6eH6wmonogr1KKU7Fggc7bXV9A20=;
- b=cAnkUe89UVI2Vv1uvDRYXXPmYTumiknRH/PHJAnuUGtAqhBOp1/YAWXRVNUHpncsUs
- C8/5UL5Xt+5YwGLuNkqBc0hewld4/Gy//iNUa+k0BNvKRqQmTSmKqA26ImcRZ05bnZmr
- c+S9m7sqvy/6oZlHs58VJeVJiEgHjYRHmx2OFLC0mailSPVTz52CNxNZYCKVmup/m8ZS
- JIvhq7F9YcMhVBjEvx2zHoIHE00Wc1CujKx9DT/X8g0XQ38yyh/ZPP3tdNCqtvmI9tff
- tDKsYfQEzMHUQlzKuKlldj3nwcHZlVxyDYO9fTgB/pZNJGRCRGVtBZWdfDlOqpG77J3z
- rtsQ==
-X-Gm-Message-State: AOJu0YyGfly2CsQe955vi+2n2+2Y+Og03JE5tfkUuWvT3K8mDscppSMp
- fBbT3S/7UDw7P8XjO550VS4Fzc/JJLmRpmzPxU+ljxW4Y/Gi9k7RMieWmFapS4k=
-X-Gm-Gg: ASbGncvzdXwks5URoadrh/o8qqiwO4vsrZt5ZG2AZM6NFtCiN5PJWIgAA98YKy++Kyv
- DxzXA5hGLk5WUYM5WMVm6AuIVvLPM0+e5v0LtsVHnvWXgR+E2X1ZIY4SeK2GG1aUmntkH7u5Dxo
- /7BPaRLZdcqfjnNayZIvm4a8BruwtRyKIzSNjRLlzMw/HVMdgdgvh4hWcLogwIsXJo7YLM4Df2P
- y2F7n+JQWu7cG9w74gmyJhOdgcP6Wc4lF2tojBji59C2XNK0E6zcyfqZUHSw7BDldi+0FhWNYb8
- cVGGWp1Zh6IDepk85xAx5DAxikZH/QUkpalyhAJBNYAUFnzz3dRpQ08xFd/LbPBPo3b4zD0s4je
- tT23FOSBlOuq9
-X-Google-Smtp-Source: AGHT+IGdfqFQMdQTQNuMsLUOVxmdfJMHohMalPCiSB9edgb59wqsT4Z8nC9n/TDkmO5tx5dA7+nkng==
-X-Received: by 2002:a05:600c:b88:b0:43d:54a:221c with SMTP id
- 5b1f17b1804b1-43d509f6eb5mr137428315e9.18.1742840269901; 
- Mon, 24 Mar 2025 11:17:49 -0700 (PDT)
+ bh=wgeQlzf2UMeRgVquXBFZM4RClD8XUzadcxu7FOTANmc=;
+ b=dLINSBZJpXcCCEZx0h6B74wUPMbO7N+BMu99LhJ6yxKU1pyPDnnZJoOCQ846GGwQ0D
+ ZU+5UVCOQnOiHl/E9EzTjX/oMGP0MgO6p0RtcecUrVHvYhopLyOfZLxeNKPJOUGtXl/V
+ pUS6P8gWpZatzJU+cH3yOS4c52wsyBajge0BCl0HJmSeGllVpOhYXXoff4kbVhehT1P7
+ 416X+nD7A6Nvoe4rysbuGVmA5JCsuQDqAV5Lngqsu8Blav5yu1ArYKmmMY89x4IUQMSQ
+ tWNTVWjWRQXhmnmXKfnSiHCFMSPx09yJbRlBKGC2hfIkC2QwHJzaxuGvVCR9SKMq+W7L
+ D9Eg==
+X-Gm-Message-State: AOJu0YyH70l/eK+uzhPkysvmtrHhiif+f3Sr5Bj6RtTIv9d/boB+oWZw
+ mm8q9B+AzcWScGLalbey7wSif0KQQlJsFq8mPtSZeIL/VN8USbhXVsFdaXwG9+E=
+X-Gm-Gg: ASbGnct3QbbQRkWdLQT0hr5N8HC0Sw4T+qQZO0+SsQ0uAzaWbV+GblliBjzMuc6mR+y
+ qEXy4gvccO2WM4poJzcNbXZdMGTAXJl3YUsKETpjtkPOkTbTbOvP3fBLZuBE97Jbn3+rlkf7M1l
+ j2ywU40RD1r8iQC1QymUGKB7HfGJhZabdUrK4OVDgMHZ0AtgXE9sbSJiZ27ljIgJrK1ijK79tu8
+ JfRhpH06JoTByXRjhx4UpQKPi6cO9ya+CjN/b4DxirZwYssXVq8RqHgIQ3FC7aWRA4GOxl3NjI5
+ 5j3YwfgKkmAXNWro8LO6ge9tBVNiHBUXK4NuDtHMXsscmcCS8s/WXV2NlOUl+L8bpkUvVvVpITC
+ t1VcmfXcV4nyZ
+X-Google-Smtp-Source: AGHT+IEiBTWYuK6l4vgyPekpnK5ww4Gd4B0ZVaowNaRnV5swK7uig4Wm+Z3m35pauQ7Me/ePr0TShA==
+X-Received: by 2002:a5d:47ca:0:b0:391:39bd:a361 with SMTP id
+ ffacd0b85a97d-3997f8fed43mr12843031f8f.18.1742840271948; 
+ Mon, 24 Mar 2025 11:17:51 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
  [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9e6450sm11690651f8f.70.2025.03.24.11.17.48
+ ffacd0b85a97d-3997f9e6450sm11690651f8f.70.2025.03.24.11.17.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Mar 2025 11:17:49 -0700 (PDT)
+ Mon, 24 Mar 2025 11:17:50 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 24 Mar 2025 19:17:38 +0100
-Subject: [PATCH 2/4] clk/qcom: sdm845: add GCC_AGGRE_UFS_PHY_AXI_CLK
+Date: Mon, 24 Mar 2025 19:17:39 +0100
+Subject: [PATCH 3/4] mach-snapdragon: enable DM_USB_GADGET by default
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250324-sdm845-fixes-fastboot-v1-2-d177a10f336d@linaro.org>
+Message-Id: <20250324-sdm845-fixes-fastboot-v1-3-d177a10f336d@linaro.org>
 References: <20250324-sdm845-fixes-fastboot-v1-0-d177a10f336d@linaro.org>
 In-Reply-To: <20250324-sdm845-fixes-fastboot-v1-0-d177a10f336d@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
@@ -86,21 +86,21 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1048;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1347;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=/f7z7vl7fH327abmHyR9X7FCg+qJI2o+GlDfCnqiY/0=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn4aHIPSNgZ4xxZ2wgtcwW5MJi1gJrqgSm5eGAx
- kiih2BvYyaJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ+GhyAAKCRAFgzErGV9k
- ttFeEACcZAMIkFLrKTLSq7f3Zg1LCLGKh0pXpE7jEQ802y0e+7PK5HPl06xlruNkcZKgzv+BFom
- Ev4sNK3drjjN9OtMdY+IJcSu17O+324Buxse8Qo1VxmyXMCjqQXEW4X8fjYhIvNZbIiv41qNE7H
- B141mz8Zv5d6Qxjnx1pTC5NoPQ5TzVQk8yHEHcgq1C+AD5p1i8z+YVky4W0u6UISyoJtYgVfNDH
- FTtsu0zBNSkgHZId/jlRiASF1V1q/zC6mKqrvfHxq0urYXo6y1o+R9sOyiRMvQYfaPxAPwWCGzG
- jt756QKKKwXRa5KTjkckYeFM8j86dcBgpfcjZvfdT2yxlW1vUP+QbY4SIOKjZLxNdDoov9mHPB3
- xShmNb/VLplA+XTaWjFaX242hNVUz43nnXVjqvqpAn3Fuca7M0E5gL+GoTmOqzpoQwr79zymjsd
- UjOTKm7e2LnYQ1sAR7nFMD7jP1hXIxBQG2iRvro2SbX19ejpz9Zxs5bTJvim5MAbnAXHsXjAA13
- O3voU6+Yg3shiFNW3vphPIwKVYI1k3pfjGyJyMKBx3HoyEyo8Cph8yIA2W5bNNugZxTko+7CNbO
- I2BUSGsupojAkNfKI59so1MKAxJQ3gMn2CqiicHl1dI/6rOyc0RsI1D9Zt7DmZIgI7S+51vpRsD
- I0H+b5XTia0QZgA==
+ bh=vnPWnise6vpMPcwWHuiMP1a+zy41QpwJzJS0YP5Ac3E=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn4aHIMb9HnlqO4VhqfMeFks+buVXAuEDk37Sma
+ qZo8ox364aJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ+GhyAAKCRAFgzErGV9k
+ thZ9D/sGBIdfj72u20gl5nmheHB+K7hTKoJQplODE2PTtDPo4gdE2Uzwn++WVa1Qm67FA2jDqLu
+ tg8hn3OyPZt/iug7cw1CuC73rwZm3+FHVzPfF3ZAjJv+W3JF4nvn7iEGSifP92712HPmdZixp7Y
+ 5PgcRVpeqysiXtIFqtczEvGFRFmkfgwQsYzG95MwxRmgEELAEBPuVWo4F3rJULJpPwJEF2BPdoC
+ JiamEhtN++Bw5hcldbmKhjN+E224W7RLbxkJqlpW2afLsfKVgKc2nHO8jx59ZjHN9q8aW5fZyMt
+ RKlwy73m5Z+Kuqk+G46ED2fhPF1W1UNyGfKxb1HMHTxhkY1mYT52P4NHot3UWEysr3gebnsw/yn
+ R5qYnLfi3ddhXJ5sc1k9rsUrGoOV8dH8Zrh5A0bxy3YMkcr3x8yW5oGbpsDwI/j4uhFur0vb8/q
+ K6L/NfFPmwv7GnMVpH9xpiVBOstSzXm4a64/vJDq0cSDutIraJaXQu+DFoJUTOfqlTauTVP0Syt
+ trly0MiyoiHzLlpwRm5XbZNRQDA9wfzg3L1akI1qly/CYuZqpr7WxYFcHdXF0toNBDs0pEHgPLM
+ 8u0vFG92/d2q40NfopaPpoOUMgEaygm7JkcM4+CEGxJD62EqYJmDT/vRBpP2fBA38caLlK2/AKr
+ n3EDcm69kgfj11Q==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -119,27 +119,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Missing for UFS.
+This is required for gadget modes to work on most platforms. It must be
+disabled for dragonboard410c since that doesn't use dwc3. USB on other
+MSM8916 platforms isn't supported by qcom_defconfig anyway.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/clk/qcom/clock-sdm845.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/Kconfig                  | 1 +
+ configs/dragonboard410c_defconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-index 7fd875e55d5443f170801172a373e0405041e1d1..5c8702ef2fe00a46a30dbdfddd6e649d20465006 100644
---- a/drivers/clk/qcom/clock-sdm845.c
-+++ b/drivers/clk/qcom/clock-sdm845.c
-@@ -113,8 +113,9 @@ static const struct gate_clk sdm845_clks[] = {
- 	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_1_CLK,		0x750a8, 0x00000001),
- 	GATE_CLK(GCC_UFS_CARD_TX_SYMBOL_0_CLK,		0x75014, 0x00000001),
- 	GATE_CLK(GCC_UFS_CARD_UNIPRO_CORE_CLK,		0x75054, 0x00000001),
- 	GATE_CLK(GCC_UFS_MEM_CLKREF_CLK,		0x8c000, 0x00000001),
-+	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x82024, 0x00000001),
- 	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77010, 0x00000001),
- 	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x7700c, 0x00000001),
- 	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,		0x77058, 0x00000001),
- 	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,		0x7708c, 0x00000001),
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 32b80da9869a1647b7b295d3070964fa11f4fc65..63aefeda9575fec8fc57194358df0819397d088e 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1120,8 +1120,9 @@ config ARCH_SNAPDRAGON
+ 	select SYSRESET
+ 	select SYSRESET_PSCI
+ 	imply OF_UPSTREAM
+ 	imply CMD_DM
++	imply DM_USB_GADGET
+ 
+ config ARCH_SOCFPGA
+ 	bool "Altera SOCFPGA family"
+ 	select ARCH_EARLY_INIT_R
+diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
+index 967817f4f58e901fc827b4ed991ddd61d1167efa..5870aae83b4fc8d6897eb0f18cc4eb153d299c11 100644
+--- a/configs/dragonboard410c_defconfig
++++ b/configs/dragonboard410c_defconfig
+@@ -59,8 +59,9 @@ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_QCOM=y
+ CONFIG_MSM_SERIAL=y
+ CONFIG_SPMI_MSM=y
+ CONFIG_USB=y
++# CONFIG_DM_USB_GADGET is not set
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_MSM=y
+ CONFIG_USB_ULPI_VIEWPORT=y
+ CONFIG_USB_ULPI=y
 
 -- 
 2.49.0
