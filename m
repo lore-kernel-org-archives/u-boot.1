@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD9ECC28B30
-	for <u-boot@archiver.kernel.org>; Sun, 23 Mar 2025 23:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED858C28B30
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 00:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E02B81D3B;
-	Mon, 24 Mar 2025 00:58:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2362F81B5B;
+	Mon, 24 Mar 2025 01:37:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DDBD81DED; Mon, 24 Mar 2025 00:58:00 +0100 (CET)
+ id 9432D81BC0; Mon, 24 Mar 2025 01:37:54 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 10CC38186D
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 00:57:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 637248198B
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 01:37:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E93F8106F;
- Sun, 23 Mar 2025 16:58:03 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 95C3E106F;
+ Sun, 23 Mar 2025 17:37:56 -0700 (PDT)
 Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4E1D83F58B;
- Sun, 23 Mar 2025 16:57:56 -0700 (PDT)
-Date: Sun, 23 Mar 2025 23:57:32 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EF66D3F58B;
+ Sun, 23 Mar 2025 17:37:48 -0700 (PDT)
+Date: Mon, 24 Mar 2025 00:37:25 +0000
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Mikhail
  Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 13/34] sunxi: spl: add support for Allwinner A523 watchdog
-Message-ID: <20250323235732.22a203eb@minigeek.lan>
-In-Reply-To: <13723892.uLZWGnKmhe@jernej-laptop>
+ linux-sunxi@lists.linux.dev, Lukasz Majewski <lukma@denx.de>, Sean Anderson
+ <seanga2@gmail.com>
+Subject: Re: [PATCH 16/34] clk: sunxi: Add support for the A523 -R CCU
+Message-ID: <20250324003725.5963c8bb@minigeek.lan>
+In-Reply-To: <3340159.aeNJFYEL58@jernej-laptop>
 References: <20250323113544.7933-1-andre.przywara@arm.com>
- <20250323113544.7933-14-andre.przywara@arm.com>
- <13723892.uLZWGnKmhe@jernej-laptop>
+ <20250323113544.7933-17-andre.przywara@arm.com>
+ <3340159.aeNJFYEL58@jernej-laptop>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -59,64 +60,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 23 Mar 2025 13:15:46 +0100
+On Sun, 23 Mar 2025 13:18:17 +0100
 Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
 Hi,
 
-> Dne nedelja, 23. marec 2025 ob 12:35:23 Srednjeevropski standardni =C4=8D=
+> Dne nedelja, 23. marec 2025 ob 12:35:26 Srednjeevropski standardni =C4=8D=
 as je Andre Przywara napisal(a):
-> > From: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > Add a clock driver for the PRCM clock controller on the Allwinner A523
+> > family of SoCs, often also used with an "r" prefix or suffix.
+> > This just describes the clock gates and reset lines for the few devices
+> > that we would need, most prominently the R_I2C device for the PMIC.
 > >=20
-> > The watchdog in the Allwinner A523 SoC differs a bit from the one in the
-> > previous SoCs: it lives in a separate register frame, so no longer
-> > inside some timer device, and it manages to shuffle around some
-> > registers a bit.
-> >=20
-> > Provide a new struct describing the register layout, and adjust the
-> > address calculation in the SPL code accoringly. This is guarded by the
-> > MACH_SUN55I_A523 Kconfig variable. =20
->=20
-> This one is missing SoB, apparently by me :)
-
-Yes, I don't think it's appropriate to add your Signed-off-by, so if
-you could give it here.
-
->=20
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > > ---
-> >  arch/arm/include/asm/arch-sunxi/watchdog.h | 12 ++++++++++++
-> >  arch/arm/mach-sunxi/board.c                |  6 ++++++
-> >  2 files changed, 18 insertions(+)
+> >  drivers/clk/sunxi/Kconfig      |  7 ++++++
+> >  drivers/clk/sunxi/Makefile     |  1 +
+> >  drivers/clk/sunxi/clk_a523_r.c | 44 ++++++++++++++++++++++++++++++++++
+> >  drivers/clk/sunxi/clk_sunxi.c  |  5 ++++
+> >  4 files changed, 57 insertions(+)
+> >  create mode 100644 drivers/clk/sunxi/clk_a523_r.c
 > >=20
-> > diff --git a/arch/arm/include/asm/arch-sunxi/watchdog.h b/arch/arm/incl=
-ude/asm/arch-sunxi/watchdog.h
-> > index 38e2ef2aca3..96d5725141e 100644
-> > --- a/arch/arm/include/asm/arch-sunxi/watchdog.h
-> > +++ b/arch/arm/include/asm/arch-sunxi/watchdog.h
-> > @@ -26,6 +26,18 @@ struct sunxi_wdog {
-> >  	u32 res[2];
-> >  };
+> > diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
+> > index 74e89b86301..1c1cc82719c 100644
+> > --- a/drivers/clk/sunxi/Kconfig
+> > +++ b/drivers/clk/sunxi/Kconfig
+> > @@ -136,4 +136,11 @@ config CLK_SUN55I_A523
+> >  	  This enables common clock driver support for platforms based
+> >  	  on Allwinner A523/T527 SoC.
 > > =20
-> > +#elif defined(CONFIG_MACH_SUN55I_A523)
+> > +config CLK_SUN55I_A523_R
+> > +	bool "Clock driver for Allwinner A523 generation PRCM"
+> > +	default MACH_SUN55I_A523
+> > +	help
+> > +	  This enables common clock driver support for the PRCM
+> > +	  in Allwinner A523/T527 SoCs.
 > > +
-> > +struct sunxi_wdog {
-> > +	u32 irq_en;		/* 0x00 */
-> > +	u32 irq_sta;		/* 0x04 */
-> > +	u32 srst;		/* 0x08 */
-> > +	u32 ctl;		/* 0x0c */
-> > +	u32 cfg;		/* 0x10 */
-> > +	u32 mode;		/* 0x14 */
-> > +	u32 ocfg;		/* 0x18 */
-> > +}; =20
+> >  endif # CLK_SUNXI
+> > diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
+> > index dd33eabe2ed..93b542cebcd 100644
+> > --- a/drivers/clk/sunxi/Makefile
+> > +++ b/drivers/clk/sunxi/Makefile
+> > @@ -26,3 +26,4 @@ obj-$(CONFIG_CLK_SUN50I_H616) +=3D clk_h616.o
+> >  obj-$(CONFIG_CLK_SUN50I_A64) +=3D clk_a64.o
+> >  obj-$(CONFIG_CLK_SUN50I_A100) +=3D clk_a100.o
+> >  obj-$(CONFIG_CLK_SUN55I_A523) +=3D clk_a523.o
+> > +obj-$(CONFIG_CLK_SUN55I_A523_R) +=3D clk_a523_r.o
+> > diff --git a/drivers/clk/sunxi/clk_a523_r.c b/drivers/clk/sunxi/clk_a52=
+3_r.c
+> > new file mode 100644
+> > index 00000000000..e864ce16199
+> > --- /dev/null
+> > +++ b/drivers/clk/sunxi/clk_a523_r.c
+> > @@ -0,0 +1,44 @@
+> > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> > +/*
+> > + * Copyright (C) 2024 Arm Ltd.
+> > + */
+> > +
+> > +#include <clk-uclass.h>
+> > +#include <dm.h>
+> > +#include <clk/sunxi.h>
+> > +#include <dt-bindings/clock/sun55i-a523-r-ccu.h>
+> > +#include <dt-bindings/reset/sun55i-a523-r-ccu.h>
+> > +#include <linux/bitops.h>
+> > +
+> > +static struct ccu_clk_gate a523_r_gates[] =3D {
+> > +	[CLK_R_AHB]             =3D GATE_DUMMY,
+> > +	[CLK_R_APB0]            =3D GATE_DUMMY,
+> > +	[CLK_R_APB1]            =3D GATE_DUMMY,
+> > +	[CLK_BUS_R_TWD]         =3D GATE(0x12c, BIT(0)),
+> > +	[CLK_BUS_R_I2C0]        =3D GATE(0x19c, BIT(0)),
+> > +	[CLK_BUS_R_I2C1]        =3D GATE(0x19c, BIT(1)),
+> > +	[CLK_BUS_R_I2C2]        =3D GATE(0x19c, BIT(2)),
+> > +	[CLK_BUS_R_RTC]         =3D GATE(0x20c, BIT(0)),
+> > +};
+> > +
+> > +static struct ccu_reset a523_r_resets[] =3D {
+> > +//	[RST_BUS_R_TIMER]       =3D RESET(0x11c, BIT(16)),
+> > +	[RST_BUS_R_TWD]         =3D RESET(0x12c, BIT(16)),
+> > +//	[RST_BUS_R_PWMCTRL]     =3D RESET(0x13c, BIT(16)),
+> > +//	[RST_BUS_R_SPI]         =3D RESET(0x15c, BIT(16)),
+> > +//	[RST_BUS_R_UART0]       =3D RESET(0x18c, BIT(16)),
+> > +//	[RST_BUS_R_UART1]       =3D RESET(0x18c, BIT(17)),
+> > +	[RST_BUS_R_I2C0]        =3D RESET(0x19c, BIT(16)),
+> > +	[RST_BUS_R_I2C1]        =3D RESET(0x19c, BIT(17)),
+> > +	[RST_BUS_R_I2C2]        =3D RESET(0x19c, BIT(18)),
+> > +//	[RST_BUS_R_PPU1]        =3D RESET(0x1ac, BIT(17)),
+> > +	[RST_BUS_R_RTC]         =3D RESET(0x20c, BIT(16)),
+> > +//	[RST_BUS_R_CPUCFG]      =3D RESET(0x22c, BIT(16)), =20
 >=20
-> Anyway, since you announced battle against C structures for register
-> layout, it seems contraproductive to add it here. What do you think?
+> Any specific reason that you commented out some reset lines?
 
-Well, I am all for it, but I guess that's another refactor patch first,
-so please be my guest. I didn't deem this important enough to address
-this now (it's not blocking as for the clocks), and this series is
-already long enough, so I was just happy to take this working patch.
-For development I really like having a working "reset" command ;-)
+Ah yeah, looks like a leftover from development, more for documentation
+purposes. In general we just mention lines that we actually need, and
+that's not much from the PRCM CCU. I will just remove those lines,
+shall we need, it's easy to bring them back.
 
 Cheers,
 Andre
@@ -125,30 +164,40 @@ Andre
 > Best regards,
 > Jernej
 >=20
+> > +};
 > > +
-> >  #else
+> > +const struct ccu_desc a523_r_ccu_desc =3D {
+> > +	.gates =3D a523_r_gates,
+> > +	.resets =3D a523_r_resets,
+> > +	.num_gates =3D ARRAY_SIZE(a523_r_gates),
+> > +	.num_resets =3D ARRAY_SIZE(a523_r_resets),
+> > +};
+> > diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunx=
+i.c
+> > index 30baabaafcd..842a0541bd6 100644
+> > --- a/drivers/clk/sunxi/clk_sunxi.c
+> > +++ b/drivers/clk/sunxi/clk_sunxi.c
+> > @@ -127,6 +127,7 @@ extern const struct ccu_desc h6_r_ccu_desc;
+> >  extern const struct ccu_desc r40_ccu_desc;
+> >  extern const struct ccu_desc v3s_ccu_desc;
+> >  extern const struct ccu_desc a523_ccu_desc;
+> > +extern const struct ccu_desc a523_r_ccu_desc;
 > > =20
-> >  #define WDT_CFG_RESET		(0x1)
-> > diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-> > index 701899ee4b2..89aea61e8e8 100644
-> > --- a/arch/arm/mach-sunxi/board.c
-> > +++ b/arch/arm/mach-sunxi/board.c
-> > @@ -495,6 +495,12 @@ void reset_cpu(void)
-> >  		/* sun5i sometimes gets stuck without this */
-> >  		writel(WDT_MODE_RESET_EN | WDT_MODE_EN, &wdog->mode);
-> >  	}
-> > +#elif defined(CONFIG_MACH_SUN55I_A523)
-> > +	static const struct sunxi_wdog *wdog =3D
-> > +		(struct sunxi_wdog *)SUNXI_TIMER_BASE;
-> > +
-> > +	writel(WDT_CTRL_KEY | WDT_CTRL_RESTART, &wdog->srst);
-> > +	while (1) { }
-> >  #elif defined(CONFIG_SUNXI_GEN_SUN6I) || defined(CONFIG_SUN50I_GEN_H6)=
- || defined(CONFIG_SUNXI_GEN_NCAT2)
-> >  #if defined(CONFIG_MACH_SUN50I_H6)
-> >  	/* WDOG is broken for some H6 rev. use the R_WDOG instead */
+> >  static const struct udevice_id sunxi_clk_ids[] =3D {
+> >  #ifdef CONFIG_CLK_SUN4I_A10
+> > @@ -228,6 +229,10 @@ static const struct udevice_id sunxi_clk_ids[] =3D=
+ {
+> >  #ifdef CONFIG_CLK_SUN55I_A523
+> >  	{ .compatible =3D "allwinner,sun55i-a523-ccu",
+> >  	  .data =3D (ulong)&a523_ccu_desc },
+> > +#endif
+> > +#ifdef CONFIG_CLK_SUN55I_A523_R
+> > +	{ .compatible =3D "allwinner,sun55i-a523-r-ccu",
+> > +	  .data =3D (ulong)&a523_r_ccu_desc },
+> >  #endif
+> >  	{ }
+> >  };
 > >  =20
->=20
 >=20
 >=20
 >=20
