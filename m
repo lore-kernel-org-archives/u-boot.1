@@ -4,90 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2125AC36002
-	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 10:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653F2C36002
+	for <u-boot@archiver.kernel.org>; Mon, 24 Mar 2025 10:12:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3747781FC0;
-	Mon, 24 Mar 2025 11:01:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E3B681FAA;
+	Mon, 24 Mar 2025 11:12:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="kN/nRSBg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0185C81FC0; Mon, 24 Mar 2025 11:01:53 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AEA081FAA
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:01:50 +0100 (CET)
+ id 4FCF881FBC; Mon, 24 Mar 2025 11:12:52 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id AA76281F6B
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 11:12:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52O9PLN8025897;
- Mon, 24 Mar 2025 10:01:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- gdSstsF7xCr0Ba0A3SYX9QKRapx1tFvIiaevmaOe9OE=; b=kN/nRSBgZ+mRjq5y
- zULKmBTtTP/qHXxWxpURDEm8iLmJKOE68w9rxOyx3O70iGRDEBDORqwT34PkX6l+
- 0vKyDFTlMAz/+FosU1zUMqymhdJxkuv60OlBP+ZBwipNjRYAd1AYF28ECYq2bq2a
- /9lbL4AsDS3XBEVsf6IFwSFJJigJGGfYBEgcSvNHMqTaU5z43KO/2BbeWtkQZ1W6
- OWk7Qd9oO/pVQkXY6hkAuiM8oSSA9vRT6XWGnSZpupyPEY24C5JssGTZYxgCGrQT
- vyyrwTH7JbGq60zCL3e2SnoYdqDEniP1qXVZoYKZ33vsSo2Jf0R0h1lt8N6cP09c
- Wht0YQ==
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45hjjnm5k9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 24 Mar 2025 10:01:44 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 52OA1h8s006576
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 24 Mar 2025 10:01:43 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 24 Mar 2025 03:01:41 -0700
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <caleb.connolly@linaro.org>, <trini@konsulko.com>,
- <quic_varada@quicinc.com>, <marek.vasut+renesas@mailbox.org>,
- <neil.armstrong@linaro.org>, <lehmanju@devpi.de>, <u-boot@lists.denx.de>
-Subject: [PATCH v1 2/2] drivers: scsi: Add 'erase' support
-Date: Mon, 24 Mar 2025 15:31:21 +0530
-Message-ID: <20250324100121.2490314-2-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250324100121.2490314-1-quic_varada@quicinc.com>
-References: <20250324100121.2490314-1-quic_varada@quicinc.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: 69IYp1pkQ0eOZ7Dd7NtH+A==
+X-CSE-MsgGUID: IcSWvV9mSVKwQkT7wZu4IA==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 24 Mar 2025 19:12:46 +0900
+Received: from [10.226.93.161] (unknown [10.226.93.161])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id C26334015FB8;
+ Mon, 24 Mar 2025 19:12:43 +0900 (JST)
+Message-ID: <b812bb48-8534-4164-a5ed-19764c38656c@bp.renesas.com>
+Date: Mon, 24 Mar 2025 10:12:41 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Authority-Analysis: v=2.4 cv=fNc53Yae c=1 sm=1 tr=0 ts=67e12d88 cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=Vs1iUdzkB0EA:10 a=COk6AnOGAAAA:8 a=SvCO5ObyoP72JHIIDYoA:9
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: DcKiWB4Kws1dim3IjYzZXN0yRePfwOD2
-X-Proofpoint-GUID: DcKiWB4Kws1dim3IjYzZXN0yRePfwOD2
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-24_04,2025-03-21_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0
- lowpriorityscore=0 mlxlogscore=999 priorityscore=1501 mlxscore=0
- adultscore=0 spamscore=0 bulkscore=0 suspectscore=0 phishscore=0
- malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2503240073
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/4] net: ravb: Add RZ/G2L Support
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250319120401.8297-1-paul.barker.ct@bp.renesas.com>
+ <20250319120401.8297-4-paul.barker.ct@bp.renesas.com>
+ <e075602c-3a08-424b-adbc-88dcafb6c1d6@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <e075602c-3a08-424b-adbc-88dcafb6c1d6@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------FynwukstrfVGtXnP042eNvyP"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,192 +64,260 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UFS devices uses the block and scsi frameworks. Enable UFS erase
-support by adding erase support to SCSI.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------FynwukstrfVGtXnP042eNvyP
+Content-Type: multipart/mixed; boundary="------------QR8Gk9BIErFGAd3hkiQnqIik";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Message-ID: <b812bb48-8534-4164-a5ed-19764c38656c@bp.renesas.com>
+Subject: Re: [PATCH v2 3/4] net: ravb: Add RZ/G2L Support
+References: <20250319120401.8297-1-paul.barker.ct@bp.renesas.com>
+ <20250319120401.8297-4-paul.barker.ct@bp.renesas.com>
+ <e075602c-3a08-424b-adbc-88dcafb6c1d6@mailbox.org>
+In-Reply-To: <e075602c-3a08-424b-adbc-88dcafb6c1d6@mailbox.org>
 
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- cmd/scsi.c          |  3 +-
- drivers/scsi/scsi.c | 92 +++++++++++++++++++++++++++++++++++++++++++++
- include/scsi.h      | 13 +++++++
- 3 files changed, 107 insertions(+), 1 deletion(-)
+--------------QR8Gk9BIErFGAd3hkiQnqIik
+Content-Type: multipart/mixed; boundary="------------OrXvczy3lpuDog70YYdZDhWI"
 
-diff --git a/cmd/scsi.c b/cmd/scsi.c
-index c286bdc0726..9f7613424e5 100644
---- a/cmd/scsi.c
-+++ b/cmd/scsi.c
-@@ -60,7 +60,8 @@ U_BOOT_CMD(
- 	"scsi read addr blk# cnt - read `cnt' blocks starting at block `blk#'\n"
- 	"     to memory address `addr'\n"
- 	"scsi write addr blk# cnt - write `cnt' blocks starting at block\n"
--	"     `blk#' from memory address `addr'"
-+	"     `blk#' from memory address `addr'\n"
-+	"scsi erase blk# cnt - erase `cnt' blocks starting at block `blk#'"
- );
- 
- U_BOOT_CMD(
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index cd0b84c0622..dc93392642d 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -28,6 +28,10 @@ DEFINE_CACHE_ALIGN_BUFFER(u8, tempbuff, 512);	/* temporary data buffer */
- #define SCSI_MAX_BLK 0xFFFF
- #define SCSI_LBA48_READ	0xFFFFFFF
- 
-+#define SCSI_UNMAP_PARAM_RESERVED 0
-+#define SCSI_UNMAP_PARAM_LEN 22
-+#define SCSI_UNMAP_PARAM_DATA_LEN 16
-+
- static void scsi_print_error(struct scsi_cmd *pccb)
- {
- 	/* Dummy function that could print an error for debugging */
-@@ -121,6 +125,51 @@ static void scsi_setup_write_ext(struct scsi_cmd *pccb, lbaint_t start,
- 	      pccb->cmd[7], pccb->cmd[8]);
- }
- 
-+static void scsi_setup_erase_ext(struct scsi_cmd *pccb, lbaint_t start,
-+				 unsigned short blocks)
-+{
-+	u8 *param = tempbuff;
-+	const u8 param_size = 24;
-+
-+	memset(param, 0, param_size);
-+	param[0] = SCSI_UNMAP_PARAM_RESERVED;
-+	param[1] = SCSI_UNMAP_PARAM_LEN;
-+	param[2] = SCSI_UNMAP_PARAM_RESERVED;
-+	param[3] = SCSI_UNMAP_PARAM_DATA_LEN;
-+
-+	param[8]  = 0x0;
-+	param[9]  = 0x0;
-+	param[10] = 0x0;
-+	param[11] = 0x0;
-+	param[12] = (start >> 24) & 0xff;
-+	param[13] = (start >> 16) & 0xff;
-+	param[14] = (start >> 8) & 0xff;
-+	param[15] = (start) & 0xff;
-+	param[16] = (blocks >> 24) & 0xff;
-+	param[17] = (blocks >> 16) & 0xff;
-+	param[18] = (blocks >> 8) & 0xff;
-+	param[19] = (blocks) & 0xff;
-+
-+	memset(pccb->cmd, 0, sizeof(pccb->cmd));
-+	pccb->cmd[0] = SCSI_UNMAP;
-+	pccb->cmd[1] = 0;
-+	pccb->cmd[6] = 0;
-+	pccb->cmd[7] = 0;
-+	pccb->cmd[8] = param_size;
-+	pccb->cmd[9] = 0;
-+	pccb->cmdlen = 10;
-+
-+	pccb->pdata = param;
-+	pccb->datalen = param_size;
-+	pccb->dma_dir = DMA_TO_DEVICE;
-+
-+	debug("%s: cmd: %02X %02X startblk %02X%02X%02X%02X blccnt %02X%02X\n",
-+	      __func__,
-+	      pccb->cmd[0], pccb->cmd[1],
-+	      pccb->cmd[2], pccb->cmd[3], pccb->cmd[4], pccb->cmd[5],
-+	      pccb->cmd[7], pccb->cmd[8]);
-+}
-+
- static ulong scsi_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 		       void *buffer)
- {
-@@ -245,6 +294,48 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 	return blkcnt;
- }
- 
-+/*******************************************************************************
-+ * scsi_erase
-+ */
-+static ulong scsi_erase(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt)
-+{
-+	struct blk_desc *block_dev = dev_get_uclass_plat(dev);
-+	struct udevice *bdev = dev->parent;
-+	struct scsi_plat *uc_plat = dev_get_uclass_plat(bdev);
-+	lbaint_t start, blks, max_blks;
-+	struct scsi_cmd *pccb = (struct scsi_cmd *)&tempccb;
-+
-+	/* Setup device */
-+	pccb->target = block_dev->target;
-+	pccb->lun = block_dev->lun;
-+	start = blknr;
-+	blks = blkcnt;
-+	if (uc_plat->max_bytes_per_req)
-+		max_blks = uc_plat->max_bytes_per_req / block_dev->blksz;
-+	else
-+		max_blks = SCSI_MAX_BLK;
-+
-+	debug("\n%s: dev %d startblk " LBAF ", blccnt " LBAF "\n",
-+	      __func__, block_dev->devnum, start, blks);
-+	do {
-+		if (blks > max_blks) {
-+			scsi_setup_erase_ext(pccb, start, max_blks);
-+			start += max_blks;
-+			blks -= max_blks;
-+		} else {
-+			scsi_setup_erase_ext(pccb, start, blks);
-+			start += blks;
-+			blks = 0;
-+		}
-+		if (scsi_exec(bdev, pccb)) {
-+			scsi_print_error(pccb);
-+			blkcnt -= blks;
-+			break;
-+		}
-+	} while (blks != 0);
-+	return blkcnt;
-+}
-+
- #if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
- static int scsi_buffer_aligned(struct udevice *dev, struct bounce_buffer *state)
- {
-@@ -592,6 +683,7 @@ int scsi_scan(bool verbose)
- static const struct blk_ops scsi_blk_ops = {
- 	.read	= scsi_read,
- 	.write	= scsi_write,
-+	.erase  = scsi_erase,
- #if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
- 	.buffer_aligned	= scsi_buffer_aligned,
- #endif	/* CONFIG_BOUNCE_BUFFER */
-diff --git a/include/scsi.h b/include/scsi.h
-index b18ae37b861..d6b6e6b665f 100644
---- a/include/scsi.h
-+++ b/include/scsi.h
-@@ -9,6 +9,7 @@
- #include <asm/cache.h>
- #include <bouncebuf.h>
- #include <linux/dma-direction.h>
-+#include <part.h>
- 
- struct udevice;
- 
-@@ -181,6 +182,7 @@ struct scsi_cmd {
- #define SCSI_WRT_VERIFY	0x2E		/* Write and Verify (O) */
- #define SCSI_WRITE_LONG	0x3F		/* Write Long (O) */
- #define SCSI_WRITE_SAME	0x41		/* Write Same (O) */
-+#define SCSI_UNMAP	0x42		/* Write 10-Byte (MANDATORY) */
- 
- /**
-  * enum scsi_cmd_phase - current phase of the SCSI protocol
-@@ -349,6 +351,17 @@ int scsi_scan(bool verbose);
-  */
- int scsi_scan_dev(struct udevice *dev, bool verbose);
- 
-+/**
-+ * scsi_get_blk() - Provides SCSI partition information.
-+ *
-+ * @partition_name: Partition name for fetching its info
-+ * @blk_desc_ptr:   Provides the blk descriptor
-+ * @part_info_ptr:  Provides partition info
-+ */
-+int scsi_get_blk(const char *partition_name,
-+		 struct blk_desc **blk_desc_ptr,
-+		 struct disk_partition *part_info_ptr);
-+
- #define SCSI_IDENTIFY					0xC0  /* not used */
- 
- /* Hardware errors  */
--- 
-2.34.1
+--------------OrXvczy3lpuDog70YYdZDhWI
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On 24/03/2025 01:11, Marek Vasut wrote:
+> On 3/19/25 1:03 PM, Paul Barker wrote:
+>=20
+> [...]
+>=20
+>> +++ b/drivers/net/Kconfig
+>> @@ -864,7 +864,7 @@ config RENESAS_RAVB
+>>   	select PHY_ETHERNET_ID
+>>   	help
+>>   	  This driver implements support for the Ethernet AVB block in
+>> -	  Renesas M3 and H3 SoCs.
+>> +	  several Renesas R-Car and RZ SoCs.
+>=20
+> RZ/G instead of RZ , right ?
+
+This will also be used for RZ/V2L.
+
+>=20
+>>  =20
+>>   config MPC8XX_FEC
+>>   	bool "Fast Ethernet Controller on MPC8XX"
+>> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+>> index ecf6e05f47eb..86aa5cd5835c 100644
+>> --- a/drivers/net/ravb.c
+>> +++ b/drivers/net/ravb.c
+>> @@ -31,6 +31,7 @@
+>>   #define RAVB_REG_CSR		0x00C
+>>   #define RAVB_REG_APSR		0x08C
+>>   #define RAVB_REG_RCR		0x090
+>> +#define RAVB_REG_RTC		0x0B4
+>>   #define RAVB_REG_TGC		0x300
+>>   #define RAVB_REG_TCCR		0x304
+>>   #define RAVB_REG_RIC0		0x360
+>> @@ -44,6 +45,7 @@
+>>   #define RAVB_REG_GECMR		0x5b0
+>>   #define RAVB_REG_MAHR		0x5c0
+>>   #define RAVB_REG_MALR		0x5c8
+>> +#define RAVB_REG_CSR0		0x800
+>>  =20
+>>   #define CCC_OPC_CONFIG		BIT(0)
+>>   #define CCC_OPC_OPERATION	BIT(1)
+>> @@ -65,14 +67,24 @@
+>>   #define PIR_MDC			BIT(0)
+>>  =20
+>>   #define ECMR_TRCCM		BIT(26)
+>> +#define ECMR_RCPT		BIT(25)
+>>   #define ECMR_RZPF		BIT(20)
+>>   #define ECMR_PFR		BIT(18)
+>>   #define ECMR_RXF		BIT(17)
+>> +#define ECMR_TXF		BIT(16)
+>>   #define ECMR_RE			BIT(6)
+>>   #define ECMR_TE			BIT(5)
+>>   #define ECMR_DM			BIT(1)
+>> +#define ECMR_PRM		BIT(0)
+>>   #define ECMR_CHG_DM		(ECMR_TRCCM | ECMR_RZPF | ECMR_PFR | ECMR_RXF)
+>>  =20
+>> +#define CSR0_RPE		BIT(5)
+>> +#define CSR0_TPE		BIT(4)
+>> +
+>> +#define GECMR_SPEED_10M		(0 << 4)
+>> +#define GECMR_SPEED_100M	(1 << 4)
+>> +#define GECMR_SPEED_1G		(2 << 4)
+>> +
+>>   /* DMA Descriptors */
+>>   #define RAVB_NUM_BASE_DESC		16
+>>   #define RAVB_NUM_TX_DESC		8
+>> @@ -385,6 +397,16 @@ static void ravb_mac_init_rcar(struct udevice *de=
+v)
+>>   	writel(0, eth->iobase + RAVB_REG_ECSIPR);
+>>   }
+>>  =20
+>> +static void ravb_mac_init_rzg2l(struct udevice *dev)
+>> +{
+>> +	struct ravb_priv *eth =3D dev_get_priv(dev);
+>> +
+>> +	setbits_32(eth->iobase + RAVB_REG_ECMR,
+>> +		   ECMR_PRM | ECMR_RXF | ECMR_TXF | ECMR_RCPT |
+>> +		   ECMR_TE | ECMR_RE | ECMR_RZPF |
+>> +		   (eth->phydev->duplex ? ECMR_DM : 0));
+>=20
+> Can you configure the ECMR extras in ravb_config() just before=20
+> writel(mask, eth->iobase + RAVB_REG_ECMR); based on some private data=20
+> flag, like '.is_rzg2l' , instead ?
+
+ravb_config() has been split into ravb_config_rcar() &
+ravb_config_rzg2l() by this patch series. So there is no longer a common
+write to RAVB_REG_ECMR.
+
+>=20
+>> +}
+>> +
+>>   /* AVB-DMAC init function */
+>>   static int ravb_dmac_init(struct udevice *dev)
+>>   {
+>> @@ -459,6 +481,14 @@ static void ravb_dmac_init_rcar(struct udevice *d=
+ev)
+>>   	writel(mode, eth->iobase + RAVB_REG_APSR);
+>>   }
+>>  =20
+>> +static void ravb_dmac_init_rzg2l(struct udevice *dev)
+>> +{
+>> +	struct ravb_priv *eth =3D dev_get_priv(dev);
+>> +
+>> +	/* Set Max Frame Length (RTC) */
+>> +	writel(0x7ffc0000 | RFLR_RFL_MIN, eth->iobase + RAVB_REG_RTC);
+>=20
+> I assume this register is actually RZ/G2L specific ?
+
+This register also exists on RZ/G2{H,M,N,E}, but in the Linux kernel
+ravb driver it is only modified for RZ/G2L.
+
+>=20
+>> +}
+>> +
+>>   static int ravb_config(struct udevice *dev)
+>>   {
+>>   	struct ravb_device_ops *device_ops =3D
+>> @@ -501,6 +531,22 @@ static void ravb_config_rcar(struct udevice *dev)=
+
+>>   	writel(mask, eth->iobase + RAVB_REG_ECMR);
+>>   }
+>>  =20
+>> +static void ravb_config_rzg2l(struct udevice *dev)
+>> +{
+>> +	struct ravb_priv *eth =3D dev_get_priv(dev);
+>> +	struct phy_device *phy =3D eth->phydev;
+>> +
+>> +	writel(CSR0_TPE | CSR0_RPE, eth->iobase + RAVB_REG_CSR0);
+>> +
+>> +	/* Set the transfer speed */
+>> +	if (phy->speed =3D=3D 10)
+>> +		writel(GECMR_SPEED_10M, eth->iobase + RAVB_REG_GECMR);
+>=20
+> Since this patch adds .has_reset flag, wouldn't it be possible to add=20
+> another flag called something like .has_10 flag and simply do:
+>=20
+> if (eth->has_10 && phy->speed =3D=3D 10)
+>    writel(GECMR_SPEED_10M, eth->iobase + RAVB_REG_GECMR);
+>=20
+> ?
+
+The layout of RAVB_REG_GECMR differs between RZ/G2L and RZ/G2{H,M,N,E},
+so we can't use the same constants for all platforms. We also need the
+additional write to RAVB_REG_CSR0 for RZ/G2L so it's worth having the
+ravb_config_rzg2l() function instead of a couple of flags.
+
+Thanks,
+
+--=20
+Paul Barker
+--------------OrXvczy3lpuDog70YYdZDhWI
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------OrXvczy3lpuDog70YYdZDhWI--
+
+--------------QR8Gk9BIErFGAd3hkiQnqIik--
+
+--------------FynwukstrfVGtXnP042eNvyP
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ+EwGgUDAAAAAAAKCRDbaV4Vf/JGvW43
+AQCRMHNlVyij9Tp+c+/oa8cZ1g6NkLD8BMx+lP9Upj+XNgEAn849MaVSLIRxyBnU1NZqzTgaMIez
+WYdW6ekBzKMx3gI=
+=iLGe
+-----END PGP SIGNATURE-----
+
+--------------FynwukstrfVGtXnP042eNvyP--
