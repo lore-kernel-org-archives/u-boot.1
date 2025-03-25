@@ -4,70 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B71C1C36002
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 03:37:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F33C36002
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 03:44:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE14380EEF;
-	Tue, 25 Mar 2025 04:37:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EE70B80EEF;
+	Tue, 25 Mar 2025 04:44:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mts+eH3j";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E84B80F70; Tue, 25 Mar 2025 04:37:50 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id E442580F70; Tue, 25 Mar 2025 04:44:08 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E952806FC
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 04:37:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB305806FC
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 04:44:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZMFx60rPXz9smm;
- Tue, 25 Mar 2025 04:37:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742873866;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eYzhvzBaa7FJ6t3z2fxN8iiZC21A6YYuhh8heWMqr/E=;
- b=mts+eH3jj4MXrK+CgYJqGAPICAEj4OTNwPj7XdXQMwG/B4SEKRbmjljGXt1BeRBwiKqFZb
- SUxkJSlA5G8KcWxz9JtzRjUrXImHto4Mtyhp4MseQkgMc0fH4TL84/+JNdFeHsOMdz1Hea
- vLYUbJEL4h2bxyLEJJSgwfq2N/iRBXD5hfT+L53vrqe7V8mBa4yjdtgFOTxpZnFjg189T7
- 791Ejsg7Ik+3o3d/Hpl9DfzrEs79fmqc1y19lqKzhd975CGMqoDpWVQUDOS9PTlrx2zWrh
- 7/MzIIDJuMdT7nwYNKvoTPtjzBr/ncVOciHDM8My1aIElOgE1UWCxmd6fBiOeA==
-Message-ID: <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
-Date: Tue, 25 Mar 2025 04:37:42 +0100
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 52P3h6Kk021100
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Tue, 25 Mar 2025 11:43:06 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 25 Mar
+ 2025 11:43:06 +0800
+Date: Tue, 25 Mar 2025 11:43:03 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Yao Zi <ziyao@disroot.org>
+CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Bin Meng
+ <bmeng.cn@gmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, "Palmer
+ Dabbelt" <palmer@dabbelt.com>,
+ Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>,
+ Green Wan <green.wan@sifive.com>, Minda Chen <minda.chen@starfivetech.com>,
+ Simon Glass <sjg@chromium.org>, "Angelo
+ Dureghello" <angelo@kernel-space.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 1/4] riscv: lib: Add a default implementation of
+ board_fdt_blob_setup
+Message-ID: <Z-ImRxrqs2ejBnhQ@swlinux02>
+References: <20250307131344.43762-1-ziyao@disroot.org>
+ <20250307131344.43762-2-ziyao@disroot.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
-To: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de
-Cc: aford@beaconembedded.com, festevam@gmail.com,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
- Peng Fan <peng.fan@nxp.com>, Yannic Moog <y.moog@phytec.de>,
- Gilles Talis <gilles.talis@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>,
- Christoph Stoidner <c.stoidner@phytec.de>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20250325025452.950303-1-aford173@gmail.com>
- <20250325025452.950303-5-aford173@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250325025452.950303-5-aford173@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: e46484cf6feb8cb6c55
-X-MBO-RS-META: uahgzjifehrdtwx74jdcw37mzfhdme3g
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250307131344.43762-2-ziyao@disroot.org>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 52P3h6Kk021100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,31 +76,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/25/25 3:54 AM, Adam Ford wrote:
-> Much of the data that is display by imx8_cpu.c is also displayed from
-> arch/arm/mach-imx/cpu.c, except the temperature grade and active
-> temperature are only displayed when SoC is an i.MX9. Since IMX9 now
-> implies IMX_TMU, change this to check for IMX_TMU in the same way
-> it's done in mach-imx/cpu.c to enable displaying this information
-> for any SoC with either of this config enabled.
-> Since additional text may appear due to this commit, remove
-> the extra space in the message displaying the temperature
-> grade.
+On Fri, Mar 07, 2025 at 01:13:41PM +0000, Yao Zi wrote:
+> It's common for S-Mode proper U-Boot to retrieve a FDT blob along with
+> taking control from SBI firmware. Add a weak version of
+> board_fdt_blob_setup to make use of it by default, avoiding copy-pasting
+> similar functions among boards.
 > 
-> Before:
-> CPU:   NXP i.MX8MP Rev1.1 A53 at 1200 MHz
-> Model: Beacon EmbeddedWorks i.MX8MPlus Development kit
-> 
-> After:
-> CPU:   NXP i.MX8MP Rev1.1 A53 at 1200 MHz
-> CPU:   Industrial temperature grade (-40C to 105C) at 28C
-> Model: Beacon EmbeddedWorks i.MX8MPlus Development kit
-> 
-> Signed-off-by: Adam Ford <aford173@gmail.com>
-Please drop the fullstop at the end of Subject and then add
+> Signed-off-by: Yao Zi <ziyao@disroot.org>
+> ---
+>  arch/riscv/lib/Makefile |  1 +
+>  arch/riscv/lib/board.c  | 19 +++++++++++++++++++
+>  2 files changed, 20 insertions(+)
+>  create mode 100644 arch/riscv/lib/board.c
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-To the whole series.
-
-Thanks !
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
