@@ -4,67 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012A2C28B30
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:01:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED110C28B30
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:01:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A751808B6;
+	by phobos.denx.de (Postfix) with ESMTP id 8AA1681CA8;
 	Wed, 26 Mar 2025 06:01:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="yG3+VQ5d";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="gwyu1mGW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F6028192A; Tue, 25 Mar 2025 16:37:32 +0100 (CET)
-Received: from out162-62-58-69.mail.qq.com (out162-62-58-69.mail.qq.com
- [162.62.58.69])
+ id 06B918186D; Tue, 25 Mar 2025 20:14:45 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73C75810E8
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 16:37:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40A1481026
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 20:14:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=423756212@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1742917046; bh=l23Eh6DiYzu9HoDvZbmwH/45ZKAZC1QxzIgnTM0gHrE=;
- h=From:To:Cc:Subject:Date:References:In-Reply-To;
- b=yG3+VQ5dL2gXlxWJlnfhwT49tgnsRVnnkbry1IveRN8vztcUwLASAMeTjvOqrsSxr
- DOEZe7sdNFQDGkAJT4Ds9gOC6QCdK+UKrDr7swtO5bViS9/QRRzF8nRJgFfZbBMCbG
- 1e2cpmIUkTNoZ/kY7dT0Rm8NWegsPMiyAhBR7JV4=
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
-X-QQ-XMAILINFO: NnA3IMNPwBd+P8GWekO8oHlQMsAbXCMDz2/TdcmYqxna8ZSzFmDVh8KIoT0hJV
- F4KLzqS5g0hQXt6iEEvY4sxzz0qFg1BYa2cKf3KNnT+4RKFfL2TB1tmIaQ2km0xB2vgLt6lbp3CnS
- oizJuBZLY+ZN9GbCmiju/d47tzHrI0RfqrdKGp7ifpCkqY32oRTPKKS7cNkV2qsSBH9JJgp4iY7dI
- D3Z3aQV66zzyJe1Yj67HSP3aKpaZM2KOVbKMCWHeK9+1exrO9Jl/W8wJbDJGTQJXl52kroNV5inAU
- fR7XvKec8F5zDpMjhGlXzWXI1R1AITH2+ZLQiv+5W9be08ihUmXsUpDgYJIwB3wXfh5IUEGrzPahF
- WonmB/5DNnZh+V3DTyPeNuEINXVxqjLhN7rdkNofHYnDd7tBU5wN86HtLCsudT5MtPLXf4Na2GnUN
- FciU9Wv9vifWnS6UkOyMgpMe/kpnUd7Rvj1dYmKrzMnc66MEnjP/1i9ZQFQX5F1V81FCQsTDBuN+Q
- Eo7q3psEiIUHVhPNI5Zl+EpQii8hPa3qMKB865omjZZ0ODL1XkulPaq1SfKMRUvN7Lk8QoR6VBGS2
- pz0HtAFoCfDgPi3ax0kUfEe4NCRXXEKBKekTdz7k1mlc5MclIM7XO7blsNJG18j1FgBaNxX/ryE2B
- fWBakVhM/8SaJaEf6C8ZFIxqyZDySuf7S/VQe4aZdSinmw1ECrpQb8yt47KqBuJgvmGqzk/uQhIWd
- IAl4GVGACRHAzk/+5oph0qC1u7UpUrGOTUSpgvglFW+/UOLCxK+BdYBARjOMiQZeLMOQx4aBA22Lm
- u6sXS3KK5C8bysp25M/YJlfuzhVJVpj0hqpTaZeHAQzedVSIs2rd3kydacl1VOwTp3h89zutSvkmo
- RXs/mj4+hkhCtfN2qM8b/klIkGpYLdKdmJiYToMPG4UP0JopYnop5PpCAU1J/kHe7hAFAJJwMFdEd
- TB5YvKGaL1W0A/cRLftdsNjqL3DJ0o8U+j5BpP/AsLwxWPcMeoBEkumMK+tLE=
-From: "=?utf-8?B?MC4w?=" <423756212@qq.com>
-To: "=?utf-8?B?dS1ib290?=" <u-boot@lists.denx.de>
-Cc: "=?utf-8?B?UGF0cmljayBSdWRvbHBo?=" <patrick.rudolph@9elements.com>,
- "=?utf-8?B?U2ltb24gR2xhc3M=?=" <sjg@chromium.org>,
- "=?utf-8?B?VG9tIFJpbmk=?=" <trini@konsulko.com>
-Subject: [PATCH] armv8: start.S: Subordinate CPUs psci setup vector
-Mime-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
-Date: Tue, 25 Mar 2025 23:37:25 +0800
-X-Priority: 3
-Message-ID: <tencent_AF9EB8E8B7E27ECFACE1C930F11E1424CA09@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-References: <tencent_2E204F13F4367132679AF08898030F6E1208@qq.com>
-In-Reply-To: <tencent_2E204F13F4367132679AF08898030F6E1208@qq.com>
-X-QQ-mid: xmsezb20-1t1742917045tzjdk561q
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 74188120008;
+ Tue, 25 Mar 2025 22:14:41 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 74188120008
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1742930081;
+ bh=/1BW82OOZYVNsx+y2MaAhTrT7ChRszvu4Sz4FYRTgo0=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=gwyu1mGW+nEULuga4Ho17/8otJpLuPJjiZ1GwBTx1coNvh7RqbO8/6HobMjZw4A3w
+ GLCve0iEBPqx9FqLKXuWtZ86so4jBfSncVQzwxmI+3O2sybF5Dj7r7yBNgqsOufyMd
+ gDHDJp8a1AVDmjpSHLp8zXP5cCJnx8NFZ/Ch6P1ArAKQJfYxSqJNT3ySCvvud3nvX8
+ L9bberEL/q0AJqyNKXsDZMnQyhYdPo/+ozl0LTV0UWGDLb8PEGj4drDWRAoZceak5J
+ B99qgVYlca9rVElGTiNMc724ZdpzeLsdfC2tUDAtvTLnGdrChFlGFzxozdrZSo5idH
+ JuOhSvWui8f0A==
+Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
+ [172.24.201.216])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 25 Mar 2025 22:14:41 +0300 (MSK)
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <onilsson@rums.se>
+CC: <avromanov@salutedevices.com>, <hs@denx.de>, <kmpark@infradead.org>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH] ubi: fix bug creating partitions for non-existent volumes
+Date: Tue, 25 Mar 2025 22:14:10 +0300
+Message-ID: <20250325174708.426459-1-onilsson@rums.se> (raw)
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250325174708.426459-1-onilsson@rums.se>
+References: <20250325174708.426459-1-onilsson@rums.se>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.28.160.9]
+X-ClientProxiedBy: p-exch-cas-a-m1.sberdevices.ru (172.24.201.216) To
+ p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 192098 [Mar 25 2025]
+X-KSMG-AntiSpam-Version: 6.1.1.11
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 51 0.3.51
+ 68896fb0083a027476849bf400a331a2d5d94398,
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2025/03/25 17:48:00 #27843404
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-Mailman-Approved-At: Wed, 26 Mar 2025 06:01:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,29 +98,18 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
+Message-ID: <20250325191410.iELNoINY0MhJCy-z3HaaIIdl36zZn73AKsplgcT5Wec@z>
 
-QXMmbmJzcDtjdXJyZW50Jm5ic3A7ZGVzaWduLCZuYnNwO29ubHkmbmJzcDtNYW5hZ2VyJm5i
-c3A7Q1BVJm5ic3A7Y2FsbGVkJm5ic3A7YXJtdjhfc2V0dXBfcHNjaSgpJm5ic3A7YmVmb3Jl
-PGJyLz5qdW1wJm5ic3A7dG8mbmJzcDtuZXh0Jm5ic3A7c3RhZ2Uoc3VjaCZuYnNwO2FzJm5i
-c3A7TGludXgmbmJzcDtLZXJuZWwpLCZuYnNwO1N1Ym9yZGluYXRlJm5ic3A7Q1BVcyZuYnNw
-O2Fsc28mbmJzcDtuZWVkPGJyLz5zZXR1cCZuYnNwO3BzY2kmbmJzcDt2ZWN0b3ImbmJzcDt0
-byZuYnNwO2hhbmRsZSZuYnNwO3RyYXAmbmJzcDtyZXF1ZXN0Jm5ic3A7d2hpY2gmbmJzcDtj
-b21lcyZuYnNwO2Zyb20mbmJzcDtoaWdoZXImbmJzcDtFTDxici8+bGV2ZWwuPGJyLz48YnIv
-PlNpZ25lZC1vZmYtYnk6Jm5ic3A7eHhmb3JlJm5ic3A7Jmx0OzQyMzc1NjIxMkBxcS5jb20m
-Z3Q7PGJyLz4tLS08YnIvPjxici8+YXJjaC9hcm0vY3B1L2FybXY4L3N0YXJ0LlMmbmJzcDt8
-Jm5ic3A7MyZuYnNwOysrKzxici8+MSZuYnNwO2ZpbGUmbmJzcDtjaGFuZ2VkLCZuYnNwOzMm
-bmJzcDtpbnNlcnRpb25zKCspPGJyLz48YnIvPmRpZmYmbmJzcDstLWdpdCZuYnNwO2EvYXJj
-aC9hcm0vY3B1L2FybXY4L3N0YXJ0LlMmbmJzcDtiL2FyY2gvYXJtL2NwdS9hcm12OC9zdGFy
-dC5TPGJyLz5pbmRleCZuYnNwO2QzYThhN2M0Nzg3Li5jNzg3MmU5MzVlOSZuYnNwOzEwMDY0
-NDxici8+LS0tJm5ic3A7YS9hcmNoL2FybS9jcHUvYXJtdjgvc3RhcnQuUzxici8+KysrJm5i
-c3A7Yi9hcmNoL2FybS9jcHUvYXJtdjgvc3RhcnQuUzxici8+QEAmbmJzcDstMzM0LDYmbmJz
-cDsrMzM0LDkmbmJzcDtAQCZuYnNwO1dFQUsobG93bGV2ZWxfaW5pdCk8YnIvPgkvKjxici8+
-CSZuYnNwOyombmJzcDtBbGwmbmJzcDtzbGF2ZXMmbmJzcDt3aWxsJm5ic3A7ZW50ZXImbmJz
-cDtFTDImbmJzcDthbmQmbmJzcDtvcHRpb25hbGx5Jm5ic3A7RUwxLjxici8+CSZuYnNwOyov
-PGJyLz4rI2lmJm5ic3A7ZGVmaW5lZChDT05GSUdfQVJNVjhfUFNDSSk8YnIvPismbmJzcDsm
-bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtibCZuYnNwOyZuYnNw
-OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO3BzY2lfc2V0dXBfdmVjdG9yczxici8+KyNlbmRp
-Zjxici8+CWFkcgl4NCwmbmJzcDtsb3dsZXZlbF9pbl9lbDI8YnIvPglsZHIJeDUsJm5ic3A7
-PUVTX1RPX0FBUkNINjQ8YnIvPglibAlhcm12OF9zd2l0Y2hfdG9fZWwyPGJyLz4tLTxici8+
-Mi4yMC4xPGJyLz48YnIvPjxici8+
+> The part_get_info_ubi() function was incorrectly returning 0 (success)
+> when a UBI volume was not found for a given partition index. This caused
+> the part_create_block_devices() function in blk-uclass.c to continue
+> creating devices for non-existent partitions up to MAX_SEARCH_PARTITIONS
 
+> Fix the issue by returning -1 when a volume is not found, signaling to
+> the part_create_block_devices() function that no more valid volumes
+> exist.
+
+Hello, Oskar!
+Thanks for your fix. It is correct.
+
+Reviewed-by: Alexey Romanov <avromanov@salutedevices.com>
