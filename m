@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94317C35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE2FC35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DB928192A;
-	Tue, 25 Mar 2025 13:56:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 852438192A;
+	Tue, 25 Mar 2025 13:57:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bTrzT6hE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QBR67QdJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F01B981B42; Tue, 25 Mar 2025 13:56:52 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 8A03D81B42; Tue, 25 Mar 2025 13:57:41 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB36C80EEF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:56:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A9E480EEF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:57:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-549644ae382so6962281e87.1
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:56:50 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-54298ec925bso8174524e87.3
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:57:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742907410; x=1743512210; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742907459; x=1743512259; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lY146X1+7dfD7Q0ravjmLOL86e98qJYAGJ19M4s9Zno=;
- b=bTrzT6hEjw5KsC0cneWtNKILVVUI89ALpdOQFO41DGD9vgjzFYSKTzevO0uUPLtssG
- SDowsQ+/IF2AnhPRh/CH7vDLOsMqM9y0Iqvg1vQ/QPkvZhyCaOaA5D7/K1/sRaCem7Us
- WlpC0w2cThehqGgR/vCJvTOadP9YInK2xazL8Uh9SyZHGQuPQEK2hl64SdcSIa81mWnU
- V/epa2OdTrYqhAm9nwE/cjYBz/6Eo1AqBWo5veNJxuIAYfTaXIA47ydBuO34GxmZ0gjN
- WXsGHKciAAUyT9l1t32Zg1nsHOoZyO+zwT8Xmax9yAiPBN4jMcORuhYIGLCE0aSdSRiu
- NXMA==
+ bh=ay41XjYzUA/U3FBXtG3anwTha8NZ29UyaFPng/qFDH0=;
+ b=QBR67QdJU5mtj1nzms0G7hn4fxzmb15d9SPdd93nFnDa17RK5gUlKipXouI2aW/8Wl
+ 5E1aI67Pn0d4n2u8eNzQyN3JxedBIY+z6NCkDehFxul1u17HDj+pIQE8VS6ePsCsa0ni
+ SJIgeJXAhEiI5xWf6r4If6TC+Urn4aUhXAazK5EanUrrXjS7co3DnRmh7wVLUWPB9+GW
+ FmJxRSOG1WKHLvsTnzLpzFUB8GTUMB7LK9WzNgg39JtgQnPrxtSP2tQlrLPuiO3/1OdR
+ 6EJLglkqRoGHa2/XJRvQlAv9+yXeNmv4ziTNwFvywHNviO99QIKJVlgpwrdh7VKJCGab
+ OXKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742907410; x=1743512210;
+ d=1e100.net; s=20230601; t=1742907459; x=1743512259;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lY146X1+7dfD7Q0ravjmLOL86e98qJYAGJ19M4s9Zno=;
- b=OD1S1SDgUvwefbXHrE/U80A2U1jKzdhnhEYBZLE/RIVn/ljVNhLuhsdxD5E5W9kIKv
- +eqaBZNz5+LOznGuSz3oVy99Wpa2gf/8cFLqccCYjFDWwupmULxpDz7IoFs53eXQiLMD
- RQ42U6A544DEndiJeJXdSmaxUv8yB4MwW4zf9lxyeAFaBFrS4N0B22c/nZPCnDSBWiRG
- sNc5siBuOK3+2kaXQ2SmRMUjUjph9fLNcROFhhr9u2SS588AMhkerAvDCPrr6prA9GhQ
- HogQIlqHNMgMrTsbY1Di+g2fNekjtP7PTMUHk3qSZjw+qQQcc+3GKQhANzCgW6vyiApF
- hW+g==
-X-Gm-Message-State: AOJu0YxOlXb851IJRy6DeRTWeKhcuL5TC/J+z1pjqAw5zeLXw0zTxeuK
- 8YEEKmITrv8X18j+xhrMSTkmqBNtHB0Pk+po1583lZVgp6EQltCH4DPYWCRpOW+L3huSJUsGHIb
- 50suwXERiCePf3puj6+tfkVg6gac=
-X-Gm-Gg: ASbGnctwTNJhQO0huVC/3LRWAD4hImnnDXaqQmeQLGZGUMzqUZf+i2ZZ5o49wWU46I/
- q3J1Qi9LaG9KRx8GJzhBaYdhf25Hu4tS07qyr6vURJheGFSK0KLs87YZ2u6x9utbTBKAVeZs/Rb
- FL6ukY/bmGhvOw2IEydofqGrVGaO6zA241wphA/Rh+QRfzIj4EIklBIyeu
-X-Google-Smtp-Source: AGHT+IHKUOR787HeEzNxvi10wi0TTQc/3Xhk4LCuwJOhGRo2y5tar3zeZzfI78piFtGknUlhyLubIolrcqsFx1VNPjA=
-X-Received: by 2002:a05:6512:1325:b0:545:cc2:accd with SMTP id
- 2adb3069b0e04-54ad648549bmr6292989e87.20.1742907409934; Tue, 25 Mar 2025
- 05:56:49 -0700 (PDT)
+ bh=ay41XjYzUA/U3FBXtG3anwTha8NZ29UyaFPng/qFDH0=;
+ b=NnSCBX4Gae04HQxFCZCPVjdPD6dhoqhIk3DJxZF50EwL61OHvq1/X97etg1iOWMIhZ
+ wdsprlxkqHZA+UHetzo2or1CX7Hu0WNsiimtFka5yRaeydTRga4F6GefKmaV/2RCqDVx
+ 8ZimJt6un9k67etRbqz1TZHtrgPdhDNQ9Qbl6hRXnw4+IyumMGI/pQ0Ey2lfi5JNx1mF
+ y2w1dtlYGC3KAdca3sO9renlvqMIJ5QYKwpvoD+Zad9VA0xJAiFFG3mO4bX3mwBB+thE
+ VGSuhoxmVYLgbfBSONeDtj0sryZeu/2rxy2inzZ03F8kk8YsY/+CNIUtkrmshdY6n5xN
+ g+yQ==
+X-Gm-Message-State: AOJu0YzdSmNvQx1aZo3ZUAR8ANTwKqB0rxIgFvIBNxCvhX3/O38ruXLj
+ 3mQX8RSBXBCkBgW0nKLaR+hqxTbQACyOFGGD6XCaFEU5XsSfJAW5AauJ4AvOUYpjo5Bb7i1+H8I
+ 5wVs9AyxqlvkEntl1ywoUsSENmy4=
+X-Gm-Gg: ASbGnctIU0d2Xoackiee4ZuCvQ2Wj5kkryRxybGTs0cfeb7Vpxp4vG2i+yNAqgAghtc
+ QHaJpU2gL+1V8iZNSujiaJLmL+225msGwUCO9H5aJyni3sh+W03/jcn/tyzro0fhwqHb+7/6r+C
+ r1sfVr5fEE9Mt2kC2nJaQVVtCMUx7wYcpz79DMEnG3XKQ3Po2Mn6O9VGUw
+X-Google-Smtp-Source: AGHT+IG8m9Oyv84n8fv6EAMUd48m5/uI2yOCUwt0fvkgHpAcIJnEl+XOu1lcw1+K9hoFkg9kGyz0Y2ppqFUodLj1GlQ=
+X-Received: by 2002:a05:6512:104f:b0:549:86c8:1147 with SMTP id
+ 2adb3069b0e04-54ad6502b8emr6134397e87.39.1742907458689; Tue, 25 Mar 2025
+ 05:57:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250325025452.950303-1-aford173@gmail.com>
-In-Reply-To: <20250325025452.950303-1-aford173@gmail.com>
+References: <20250319032828.249156-1-marex@denx.de>
+In-Reply-To: <20250319032828.249156-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 25 Mar 2025 09:56:38 -0300
-X-Gm-Features: AQ5f1JqNsaATbuUrKGn0D7KL_iTVlXUNpbwQliStpjTZ2t3oMtm_tbj2XPmFNtY
-Message-ID: <CAOMZO5Bcg8aryJ02tiAAcpmtMg1PttAvB5bPoST67PrY90oMjw@mail.gmail.com>
-Subject: Re: [PATCH V4 0/7] Migrate IMX8, IMX8M and IMX9 to use imx8_cpu
-To: Adam Ford <aford173@gmail.com>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com, marek.vasut@mailbox.org, 
- Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Peng Fan <peng.fan@nxp.com>, 
- Yannic Moog <y.moog@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
- Gilles Talis <gilles.talis@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Ye Li <ye.li@nxp.com>, Christoph Stoidner <c.stoidner@phytec.de>,
- Wadim Egorov <w.egorov@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
+Date: Tue, 25 Mar 2025 09:57:26 -0300
+X-Gm-Features: AQ5f1Jppc_DZ0KPSDq8JkD5Je6z7PqQK24q0col0zQjDBrzMrsjSMZZmsbUZ0Ok
+Message-ID: <CAOMZO5CXgR=y5M7g2px=DE9TjaLduL+XN-YqSpUh0ejTzTpJ6A@mail.gmail.com>
+Subject: Re: [PATCH] arm64: imx8mp: Gracefully handle disabled
+ ENV_IS_IN_SPI_FLASH
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, 
+ u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -101,27 +95,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 24, 2025 at 11:55=E2=80=AFPM Adam Ford <aford173@gmail.com> wro=
-te:
+On Wed, Mar 19, 2025 at 12:28=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> The imx8_cpu driver uses the driver model to represent the processor
-> cores in the dm tree as well as display the processor type and speed
-> on boot.  Currently, the imx8_cpu driver only displays the temperature
-> grade of the processor if the processor is IMX9, so in order to display
-> that info, the check in imx8_cpu is changed to check for IMX_TMU
-> and IMX_TMU is implied for IMX8, IMX8M and IMX9 SoC familes.  If
-> users want to fall back to the older method to display the SoC type
-> or remove the temperature grade information, they can.  Doing this
-> at the SoC family level reduces the number of duplicated config options
-> for each board, and was done at the request of the IMX U-Boot custodian.
+> In case ENV_IS_IN_SPI_FLASH is disabled, returning ENVL_SPI_FLASH
+> leads to failure to find environment driver on start up. Fix this
+> by testing whether ENV_IS_IN_SPI_FLASH is enabled and if not, then
+> return ENVL_NOWHERE instead.
 >
-> V4:  Make IMX9 select CPU_IMX instead of imply since it appears to be
->      required for all in the platform.
->      Fixed some whitespace in imx8_cpu around the temperature grade messa=
-ge.
->      Re-ordered some items in Kconfig to keep them alphabetical
->      Added more CPU items to the list inside imx8_cpu to match what was d=
-one
->      from arch/arm/mach-imx/cpu.c.
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
 Applied to u-boot-imx/next, thanks.
