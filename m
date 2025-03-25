@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE15FC35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 15:01:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58CF6C3600B
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 15:03:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AE36810E8;
-	Tue, 25 Mar 2025 16:01:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B5B7D810E8;
+	Tue, 25 Mar 2025 16:03:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="CQft8LSL";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="D702z3nW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B81E81951; Tue, 25 Mar 2025 16:01:21 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 039D981026; Tue, 25 Mar 2025 16:03:13 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73AD381026
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 16:01:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65AA081026
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 16:03:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=suse.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4394036c0efso36691275e9.2
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 08:01:19 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3913fdd003bso2922585f8f.1
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 08:03:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1742914879; x=1743519679; darn=lists.denx.de;
+ d=suse.com; s=google; t=1742914990; x=1743519790; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:autocrypt:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=fCamRPugi6KEfxe5irVIxQb+lsZgn9pHAi00rHuSTkY=;
- b=CQft8LSLoe7octSCDqC+sxv9zfImRoDYDITaeP+5g/Nnc109u0fUhLvWYRCLyl3BfM
- j46Ldp5qpkCRnWPvEAC29QV8ElWE773uFzGP2jHveaElHJfhgMwNGnd7Cgpw9lRXosoY
- ntpjWWpRbmzgmIKssYcwQa2XvToRlZp4FNifBrlh02ID9Ex57jbaittB+CG6uXNVVRvE
- R+bI3L4LEHZbIk3mJeBRTpOPjj02MRiyCnpK+e1ZWeBg+AMyFt3Y76QQBxcgFCbP1foe
- 3X7ll5lvTTtfevLNvO7nEcmJJniIOOLmijcre026hmlQJtQ8gWiZGeCiIH75XxNSAihD
- 95jg==
+ bh=Nyb65gLikmAtUIUWVqy10fERI0k/rBq77aDUQ5hB45Y=;
+ b=D702z3nWU2ZZ3s6TOHdKNswsaGXpbtZgd8Aeqz1R+Ark64kze848iMMWPTkoABMTYu
+ wgYR3RNGj9hF1ITTEGI9wulRrwEfrLAkjzFkU6ZtjOea8W49i0KwEsDRUCawNDlOZwDc
+ HDWl0Nu6/Zb67IJ/B988FbSdLoarxj3nhXXh1k+O95maNJG4ael1mRnd4tB+Gmx98qhX
+ rLKb2rQ3jPOvOVm8dbNipGATMKSB4UOhqc8Th+Q8aWxjOY/E5t/8Qr9O1a3hLWjTt+f1
+ 6jELwegeK+7/aMbrEB36La0qgpTukuDDJJEfoVW6P/BZbuXYS+dkjMPqNK2u25MwocQH
+ oYOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742914879; x=1743519679;
+ d=1e100.net; s=20230601; t=1742914990; x=1743519790;
  h=content-transfer-encoding:in-reply-to:autocrypt:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fCamRPugi6KEfxe5irVIxQb+lsZgn9pHAi00rHuSTkY=;
- b=RJbmnY52pue+WjVt9vc7sqXoYTDwULtHgjUPqRf8ljOM827wy/JVHn5XB24SE34AmO
- 4n8B+qFnQwAMK9JOV97gjtjTTNARvjZlSTCnci/FDOatoD34mnhVJFbndhUPm7XmYdOW
- Jkbm06zD4i4qI1wBGpE/mH8SG50JxMJ0T8WzQsV+A25i+wUObxQT7cbTZ8yy/kg4NWjX
- yGWQiLGSRr0/xSwB5INLYNqillTIKAE9dnyTavFcxiOJnHhJtBW7wTAE+jyiZd+BkY4J
- INcusA5cdUGfWxKDcvfpcUxUNL1CUrIPKN0qElBi9iGxHWjv62QN2DEFmZg818EFo2G5
- ibtw==
+ bh=Nyb65gLikmAtUIUWVqy10fERI0k/rBq77aDUQ5hB45Y=;
+ b=p74dcR63AbP1Zps/AoSo8H9e/00zBrs77uqy5ViLf3nIcz3D7zKr09YSzd/4WvYfWn
+ VvnsHZOBy5/zCmaAc5C7mpB/9+C0e4cko1cYNNWgAT3R15lp69WSLxh75zwU2/CHaHje
+ fPtK5iF2lPYMizTS04SBhOpH8hmVcnisarPzwW9GgkErtpcKXyj2M97JUhiUqZJDsjbd
+ h6ZZycqnU7ZSsrPkHXwCBnc5uio/BqVrMupEVBzleOQ/ICeGR4eakuTl3azgblaxsp3l
+ qIZk5CvYYxZgSHSafuQHsmU7PwbB9NQiJaIj6WpXtZ9CvAb+8MSSTdIUsVitQ+vnLxvZ
+ FtGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+U/yMxmofQ7jiGuMiGbP25+ycfw6CROTFol1rVorQSkFIzJGWZLK6MpBw9xc5xxpyD8PlHQs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJXPD0YkzVCRHKgkQRhPh2P/KSM6/HPLzDO0945GO6E5gDEd9D
- 5ZDBnAUG2UunywQO/GQW5eSnK5qYMn6VxwYcyxkg48IUPXhPenzJef7TUYMX1mE=
-X-Gm-Gg: ASbGncub1mYvlVAsHWRKk2dehMo/YyqQCCbEwpAoqQXJwXwWOyvdfAYJR9g2cgk8KVP
- 6Key96ZxKC7Nyc/UgkPxKhi1KeC4dkATD7T6RtQz58lXqOx8lms7KK/deB0kK9AkkuHWoWtUoG2
- nGdiC+fHj3j1LXRZBnAo/UMV8o7NrpVk+dA/IARoJ1YlZh+pddvFxDQXSfDyWN1LWtvbUoNa9DI
- KPbw6x7kC1tv39lVQYnw37r77Ae4nPhzMbUSjgUosCMXSziSrNGwBzRWeApeGhRmmHZI6W8dbBO
- /UIYGO28ZGmS5fADkUvJpsHm+fs4zhkzzQwUfqDwpg==
-X-Google-Smtp-Source: AGHT+IF07rhglLABWvM98Aw2YsFuYL88qrhIW5Ql5nm0y4Q9N5nHhO5zwNcbIRUWrlBsQTjTJAGrng==
-X-Received: by 2002:a05:600c:5890:b0:43a:ed4d:716c with SMTP id
- 5b1f17b1804b1-43d510f851amr118225325e9.22.1742914878488; 
- Tue, 25 Mar 2025 08:01:18 -0700 (PDT)
+ AJvYcCX2m8YxULzfEXaHKHXH5CamMt1S7B8JF9AjYuYHcxTY6O9jSwRc8WZZuw9/dQ1MXj4Gmku+ZO0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxauOqwwX5Ex5aJCeMl/h2dHzu3k+Eogd5Vn29Yge8yiZSV96vS
+ +UJA8KkiGz11os8S/eR6p9PV7kArQpAO+9jwMk0GjdBdkYXzqa5gjPiG6u2No2w=
+X-Gm-Gg: ASbGncv+dGn0qxy5CseFxafLoTE+mOBOe3mEzKxH1Imo4SpVVkNc5BaB1yCCq6AcA9W
+ 35R3YXYeFktjuU13ww6Hy6bNlaqaSm5n+S90hRDqdLAUPYnrbxeJ7+7YD6AObFzUDfZ/upIGLQa
+ UmKk+E9kbPYGVtZjLKTBD4jZkPSd2VLX3VYvprvCD6sOHkydENwbOBgcCYoPfz8/Qx1KPsgtDCH
+ +dVGDR6uAMRtWfMFAa8LucDdWRK3vhe/4cVpzEQ6uF2pq2ZrBsEjC+XbJWB8b0Q2/G9032qfRoh
+ a8ybTfKoZtCax+l+SEYSbKNGyyAfb8Clzuj/q88OBgkoE0eGaJWb
+X-Google-Smtp-Source: AGHT+IG/k5/htPM6Ir/qZ3vxJGasEFgL+1ADOs1nNBJKrGE+Py0+SIInJA4dFZm+neV0mS1cwLBKpg==
+X-Received: by 2002:a05:6000:1fae:b0:38d:e3da:8b4f with SMTP id
+ ffacd0b85a97d-39acc3e1cc3mr109479f8f.0.1742914989268; 
+ Tue, 25 Mar 2025 08:03:09 -0700 (PDT)
 Received: from [192.168.2.177] ([81.0.8.231]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9efdedsm14086054f8f.96.2025.03.25.08.01.17
+ ffacd0b85a97d-3997f9e674fsm13751182f8f.80.2025.03.25.08.03.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Mar 2025 08:01:18 -0700 (PDT)
-Message-ID: <736163d2-ef55-4793-aeab-fce6b55f0366@suse.com>
-Date: Tue, 25 Mar 2025 16:01:16 +0100
+ Tue, 25 Mar 2025 08:03:08 -0700 (PDT)
+Message-ID: <77ee8208-b25a-4072-94c3-e8f68e3be352@suse.com>
+Date: Tue, 25 Mar 2025 16:03:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] qemu-sbsa: simplify updating ACPI table header
- checksum
+Subject: Re: [PATCH 5/5] arm: simplify updating ACPI table header checksum
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Simon Glass <sjg@chromium.org>
 Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
@@ -88,7 +87,7 @@ Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
 References: <20250321232121.251800-1-heinrich.schuchardt@canonical.com>
- <20250321232121.251800-5-heinrich.schuchardt@canonical.com>
+ <20250321232121.251800-6-heinrich.schuchardt@canonical.com>
 Content-Language: en-US, ca-ES, es-ES
 From: Matthias Brugger <mbrugger@suse.com>
 Autocrypt: addr=mbrugger@suse.com; keydata=
@@ -134,7 +133,7 @@ Autocrypt: addr=mbrugger@suse.com; keydata=
  LV6nybxdRG/jp8ZQdQQixPA9azZDzuTu+NjKtzIA5qtfZfmm8xC+kAwAMZ/ZnfCsKwN0bbnD
  YfO3B5Q131ASmu0kbwY03Mw4PhxDzZNrt4a89Y95dq5YkMtVH2Me1ZP063cFCCYCkvEAK/C8
  PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20250321232121.251800-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250321232121.251800-6-heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -163,23 +162,15 @@ On 22/03/2025 00:21, Heinrich Schuchardt wrote:
 Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
 > ---
->   board/emulation/qemu-sbsa/acpi.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   arch/arm/mach-bcm283x/bcm2711_acpi.c | 4 ++--
+>   board/raspberrypi/rpi/rpi.c          | 2 +-
+>   2 files changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/board/emulation/qemu-sbsa/acpi.c b/board/emulation/qemu-sbsa/acpi.c
-> index ba85e08fc7d..7e4c55cc818 100644
-> --- a/board/emulation/qemu-sbsa/acpi.c
-> +++ b/board/emulation/qemu-sbsa/acpi.c
-> @@ -133,7 +133,7 @@ static int sbsa_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry
->   	gtdt->cnt_read_base = 0xffffffffffffffff;
->   
->   	// FIXME: VirtualPL2Timer
-> -	header->checksum = table_compute_checksum(header, header->length);
-> +	acpi_update_checksum(header);
->   
->   	acpi_add_table(ctx, gtdt);
->   
-> @@ -181,7 +181,7 @@ static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry
+> diff --git a/arch/arm/mach-bcm283x/bcm2711_acpi.c b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> index 79b283353cf..58f8ee232b9 100644
+> --- a/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> +++ b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> @@ -81,7 +81,7 @@ static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry
 >   	}
 >   
 >   	header->length = ctx->current - ctx->tab_start;
@@ -188,4 +179,26 @@ Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 >   
 >   	acpi_inc(ctx, header->length);
 >   	acpi_add_table(ctx, header);
+> @@ -116,7 +116,7 @@ static int rpi_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>   	gtdt->el2_flags = GTDT_FLAG_INT_ACTIVE_LOW;
+>   	gtdt->cnt_read_base = 0xffffffffffffffff;
+>   
+> -	header->checksum = table_compute_checksum(header, header->length);
+> +	acpi_update_checksum(header);
+>   
+>   	acpi_add_table(ctx, gtdt);
+>   
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index 70d3c35499b..6ecd3eb120f 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -791,7 +791,7 @@ static int rpi_acpi_write_ssdt(struct acpi_ctx *ctx, const struct acpi_writer *e
+>   
+>   	/* (Re)calculate length and checksum */
+>   	ssdt->length = ctx->current - (void *)ssdt;
+> -	ssdt->checksum = table_compute_checksum((void *)ssdt, ssdt->length);
+> +	acpi_update_checksum(ssdt);
+>   	log_debug("SSDT at %p, length %x\n", ssdt, ssdt->length);
+>   
+>   	/* Drop the table if it is empty */
 
