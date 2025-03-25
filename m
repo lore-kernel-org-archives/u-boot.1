@@ -4,92 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE4EC36005
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 00:36:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EEEC36002
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 01:14:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F6D381B5B;
-	Tue, 25 Mar 2025 01:35:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E06BC80EEF;
+	Tue, 25 Mar 2025 02:14:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Onx9nSiH";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4CF880EEF; Mon, 24 Mar 2025 21:01:36 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C9BB805D7
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 21:01:33 +0100 (CET)
+ id E5331806FC; Tue, 25 Mar 2025 02:14:03 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id B411D806FC
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 02:13:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=arturkow2000@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ac34257295dso998419766b.2
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 13:01:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742846493; x=1743451293; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2oxl4SJQVG/W9oX9k2Br/v8kLACRAlPJY/L12t6MY/g=;
- b=Onx9nSiHTVmqsWfIOfsXiwZii/ZOGRHm5mwGqFYNtkcQRH/xjgVOHzs5qtf3Pf2LuS
- R5o+C4Ltf8N/H34/e6QkEhw58NE0gVkC5zEjhr606I6RR0t3q6LiAHQTrClihoRsmsFv
- Sbr8Vn8Opc0ZCUlSQBxnX64FIkrmZZi+gjysWAq/P9x5asPlSyRWJWdWXRm59eCa3tZV
- mmGQJWmosH3U0Z8vn++TkPSOAZw58qE4uj7Y5SPEaZsA9NUjeaagjKMFLP5qhg/jBcU4
- g0bxew/rZAxtpLZvzLsllBybisLncZ9rSjZ7bQt2BAYFsN/jDOKMWD3ZRbLTkNoOeKWx
- K4eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742846493; x=1743451293;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2oxl4SJQVG/W9oX9k2Br/v8kLACRAlPJY/L12t6MY/g=;
- b=X5vxBnt2V9IimSALV6KSfmf1CZl0UKRVcQ9IEuXPxEfEjTsGahQnfxed/eTtCzdboJ
- 3mfRztfVFdtWo033MCAf8qsLsvY/vyyWP+e5YBTLWv4GhqRIn6BcSzuGgdI92RoOBrBw
- kRnc/ucmMw2PU1XIjyn3niAQza8SCNOylnOk90LLTCGfciapAvie+EImFgb0oMQekSvd
- BtcZgHLyQVSuhY330sDEgFqqK15cXjfQRoeXT+9YSDJAMb52jGBZfTWNVIxKbxWuhhhw
- WkELKQGx271OGoPoX5vYeToWu9oRDB+ApMD78y0zWbaeLirOfZQPf+mKWPmH12/bFFGq
- s9gQ==
-X-Gm-Message-State: AOJu0Yy0cK9FZuZEyFsMFeMaV1XxY5QhHLHLdh8sz5ADCzMg4UdBat5K
- lGgGwDftopO01PzCWqrmpBfNOiIZExM9wHhmu4v4oGz2gdQvxM41
-X-Gm-Gg: ASbGncsA7GJ7mPXBsM2GeVJheAlJ33Mhznyg0gFs7XqOSXByEjjOEXNV21i3ywv7ipw
- bi638EeL7LOyduttIyYx8UJzhulzPISYtr+KZbCbJXxvcf9id4K5qj627sV1gnt3+5g2Wd5jIxM
- 5HmbBCRpUafp/ZpqaRqy0PivOsL2q2JNobVHpNxaQVWOoxyHS4mF4hajNlkVeAnumBkgw/CQMgg
- YWjn0HvNISsqZb+xRYvIR9vj0aO7XubhtAni6lmYNSSi4oxyFtf+XE06shlBhGjmc+RzTLdyXaf
- Rm88djsljYXZ4SHd7nDqJE9yWkFPPhVr/7QmV2rnKDg60EyFf8nWobqN3l0vCWAscETsGqiHQQh
- 5ckmeUXvxhw57/N41eiidpfRUhGKHx7Y=
-X-Google-Smtp-Source: AGHT+IGbZDGZETUJB2nUhua2okIWRohLX0EHAbpvxurTD9s4GgUylFldAxauW/m42xSGTaHHznGDvg==
-X-Received: by 2002:a17:907:86a1:b0:ac3:b372:6d02 with SMTP id
- a640c23a62f3a-ac3f2268a6fmr1244291466b.19.1742846492461; 
- Mon, 24 Mar 2025 13:01:32 -0700 (PDT)
-Received: from [192.168.0.15] (89-64-21-122.dynamic.chello.pl. [89.64.21.122])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac3ef869f9fsm740394866b.10.2025.03.24.13.01.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Mar 2025 13:01:32 -0700 (PDT)
-Message-ID: <af1c79f6-cfd1-45d2-8382-f68ad84276ea@gmail.com>
-Date: Mon, 24 Mar 2025 21:01:31 +0100
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B3391596;
+ Mon, 24 Mar 2025 18:14:05 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E37953F58B;
+ Mon, 24 Mar 2025 18:13:57 -0700 (PDT)
+Date: Tue, 25 Mar 2025 01:13:29 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, macromorgan@hotmail.com,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 2/2] sunxi: H616: dram: Improve address wrapping detection
+Message-ID: <20250325011329.51176143@minigeek.lan>
+In-Reply-To: <20250309063143.62859-3-jernej.skrabec@gmail.com>
+References: <20250309063143.62859-1-jernej.skrabec@gmail.com>
+ <20250309063143.62859-3-jernej.skrabec@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Support UART over MicroSD slot on Transformer T20
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Francesco Dolcini <francesco.dolcini@toradex.com>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stephen Warren <swarren@nvidia.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Tom Warren <twarren@nvidia.com>
-References: <20250318083103.63250-1-arturkow2000@gmail.com>
- <CAPVz0n3JF78RQYbckMcwN6JZC+adUG+oHNzof7Wkxd+EqeBkJA@mail.gmail.com>
-Content-Language: pl
-From: Artur Kowalski <arturkow2000@gmail.com>
-In-Reply-To: <CAPVz0n3JF78RQYbckMcwN6JZC+adUG+oHNzof7Wkxd+EqeBkJA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 25 Mar 2025 01:35:45 +0100
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,79 +57,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello
+On Sun,  9 Mar 2025 07:31:43 +0100
+Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
 
-Thanks for quick response. I know UARTD is the dedicated UART for 
-debugging on TF101, but exposing UART over microSD
-is a handy trick useful for development. As I'm doing development on 
-this tablet (bringing U-Boot's UEFI support and latest
-Linux), and also still using the device on old OS I'd like to avoid 
-disassembling and reassembling it over and over again.
-Others too may find the feature useful e. g. to avoid having to solder 
-which requires specialized equipment, skills and
-is potentially dangerous for the board. Also, there already seems to be 
-support for that on Sunxi platforms through
-CONFIG_UART0_PORT_F.
+Hi,
 
-Apart from pinmux changes, would it be acceptable to include an option 
-to allow switching UARTA mux to
-SDB/SDD (currently this has to be selected from board's Kconfig file). 
-Doing so would allow to enable UART
-over microSD without patching U-Boot's source without changing any 
-existing configuration. Then I would
-keep DTS overlays and config changes local.
+> It turns out that checking just one write is not enough. Due to
+> unexplained reasons scan procedure detected double the size. By making
+> 16 dword writes and comparisons that never happens.
+> 
+> New procedure is also inverted. Instead of writing two different values
+> to base address and some offset and then reading both and comparing
+> values, simplify this by writing pattern at the base address and then
+> search for this pattern at some offset.
+> 
+> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-Also, today, after running U-Boot with debug enabled, I discovered some 
-failed assertions in pinmux code probably
-caused by my changes, I will get that fixed before sending v2.
+Thanks for improving this, I guess we want to eventually move this to
+more generic code, and use this for more SoCs?
 
-Best regards
-Artur Kowalski
+Anyway:
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
-W dniu 18.03.2025 o 09:54, Svyatoslav Ryhel pisze:
-> вт, 18 бер. 2025 р. о 10:31 Artur Kowalski <arturkow2000@gmail.com> пише:
->>
->> The first patch in the series brings general pinmux support for exposing
->> UART over SDB/SDD pins on T20. The following patches bring support
->> Transformer T20 allowing to enable UART over uSD by setting
->>
->> CONFIG_TEGRA_ENABLE_UARTA=y
->> CONFIG_DEVICE_TREE_INCLUDES="tegra20-asus-transformer-uart-usd.dtsi"
->>
->> Similarily, support for UART over uSD could be brought to Ventana which
->> has uSD on the same pins as TF101, and other Ventana-based boards.
->>
-> Hey there, thank you for looking into U-Boot for Tegra. If something I
-> will say hurts or offends you, I am sorry it was not intentional.
->
-> Anyway, apart funcmux changes, all other changes you propose are
-> redundant. Asus dedicated uart for logging and console is UARTD any
-> other uart configuration must not be added since it will disrupt
-> existing configuration. If you need uart and cannot resolve an issue
-> without it you can always solder to uart-d or locally mux sd to uart
-> console fix your issue and remove it. Uart is not intended way to
-> interact with Asus TF101 and doesn't need to be exposed, panel and
-> fastboot console are and can be used to resolve most of issues.
->
-> Best regards,
-> Svyatoslav R.
->
->> Artur Kowalski (4):
->>    tegra: add funcmux for exposing UART over uSD slot on Tegra 20
->>    tegra: respect CONFIG_TEGRA_ENABLE_UART* options on Transformer T20
->>    ARM: tegra: expose UART-A over uSD on Transformer T20
->>    board: asus: transformer: add DTSI file for enabling UART over uSD
->>      slot
->>
->>   .../tegra20-asus-transformer-uart-usd.dtsi    | 31 +++++++++++++++++++
->>   arch/arm/include/asm/arch-tegra20/funcmux.h   |  1 +
->>   arch/arm/mach-tegra/board.c                   |  4 ++-
->>   arch/arm/mach-tegra/tegra20/Kconfig           |  4 +++
->>   drivers/pinctrl/tegra/funcmux-tegra20.c       |  9 +++++-
->>   include/configs/transformer-t20.h             | 10 ++++++
->>   6 files changed, 57 insertions(+), 2 deletions(-)
->>   create mode 100644 arch/arm/dts/tegra20-asus-transformer-uart-usd.dtsi
->>
->> --
->> 2.48.1
->>
+Cheers,
+Andre
+
+> ---
+>  arch/arm/mach-sunxi/dram_sun50i_h616.c | 58 +++++++++++++++++++++++++-
+>  1 file changed, 56 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> index 6f84e59e39cd..1e21f5dd451f 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> @@ -1360,38 +1360,92 @@ static void mctl_auto_detect_rank_width(const struct dram_para *para,
+>  	panic("This DRAM setup is currently not supported.\n");
+>  }
+>  
+> +static void mctl_write_pattern(void)
+> +{
+> +	unsigned int i;
+> +	u32 *ptr, val;
+> +
+> +	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
+> +	for (i = 0; i < 16; ptr++, i++) {
+> +		if (i & 1)
+> +			val = ~(ulong)ptr;
+> +		else
+> +			val = (ulong)ptr;
+> +		writel(val, ptr);
+> +	}
+> +}
+> +
+> +static bool mctl_check_pattern(ulong offset)
+> +{
+> +	unsigned int i;
+> +	u32 *ptr, val;
+> +
+> +	ptr = (u32 *)CFG_SYS_SDRAM_BASE;
+> +	for (i = 0; i < 16; ptr++, i++) {
+> +		if (i & 1)
+> +			val = ~(ulong)ptr;
+> +		else
+> +			val = (ulong)ptr;
+> +		if (val != *(ptr + offset / 4))
+> +			return false;
+> +	}
+> +
+> +	return true;
+> +}
+> +
+>  static void mctl_auto_detect_dram_size(const struct dram_para *para,
+>  				       struct dram_config *config)
+>  {
+>  	unsigned int shift, cols, rows;
+> +	u32 buffer[16];
+>  
+>  	/* max. config for columns, but not rows */
+>  	config->cols = 11;
+>  	config->rows = 13;
+>  	mctl_core_init(para, config);
+>  
+> +	/*
+> +	 * Store content so it can be restored later. This is important
+> +	 * if controller was already initialized and holds any data
+> +	 * which is important for restoring system.
+> +	 */
+> +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> +
+> +	mctl_write_pattern();
+> +
+>  	shift = config->bus_full_width + 1;
+>  
+>  	/* detect column address bits */
+>  	for (cols = 8; cols < 11; cols++) {
+> -		if (mctl_mem_matches(1ULL << (cols + shift)))
+> +		if (mctl_check_pattern(1ULL << (cols + shift)))
+>  			break;
+>  	}
+>  	debug("detected %u columns\n", cols);
+>  
+> +	/* restore data */
+> +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> +
+>  	/* reconfigure to make sure that all active rows are accessible */
+>  	config->cols = 8;
+>  	config->rows = 17;
+>  	mctl_core_init(para, config);
+>  
+> +	/* store data again as it might be moved */
+> +	memcpy(buffer, (u32 *)CFG_SYS_SDRAM_BASE, sizeof(buffer));
+> +
+> +	mctl_write_pattern();
+> +
+>  	/* detect row address bits */
+>  	shift = config->bus_full_width + 4 + config->cols;
+>  	for (rows = 13; rows < 17; rows++) {
+> -		if (mctl_mem_matches(1ULL << (rows + shift)))
+> +		if (mctl_check_pattern(1ULL << (rows + shift)))
+>  			break;
+>  	}
+>  	debug("detected %u rows\n", rows);
+>  
+> +	/* restore data again */
+> +	memcpy((u32 *)CFG_SYS_SDRAM_BASE, buffer, sizeof(buffer));
+> +
+>  	config->cols = cols;
+>  	config->rows = rows;
+>  }
+
