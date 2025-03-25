@@ -4,105 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6188C36012
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 13:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C15C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 13:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A6F281D3B;
-	Tue, 25 Mar 2025 14:03:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA1B680EEF;
+	Tue, 25 Mar 2025 14:07:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ulFwX3Y7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f4eHmVfj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41DE581DDF; Tue, 25 Mar 2025 14:03:04 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id BB8B48186D; Tue, 25 Mar 2025 14:07:44 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31FE381D27
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 14:03:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 613E4808AF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 14:07:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4394a823036so56126885e9.0
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 06:03:02 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43cf257158fso37501115e9.2
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 06:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742907781; x=1743512581; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=55RcLJ+tquhWLa3l8UWa3Wt1h/0nWm7MQB6yx01lSY4=;
- b=ulFwX3Y7/0acRNUT24oA9kQqHJGkEn004Lyiw8CMCDbEcvY2Th3o8eeRhSOscfAMcq
- c2mdDArKaT4TZkiVwaskMoVuagzbAFlDIZh30eqdP53WHtemmT7dojsXqUl5OEvaP1nO
- Q/F6iyX8rk2fs+yUjCPcNvtK5CJ54sxewra5zjtI6PE8MladjA7GSWEwLJ/J1WGshOY/
- rLfR+muBOcVP/r1WtBpuS4Gh92oPPazOMWvmV/dpC8JwxLuKiWAwG/zsk1w+eaaAh/BJ
- F5zdBh6n1w9Yy3n48yKl6GWeYSe7J/XXsC7SqPMsBf/WVfzQpxVFE7Qv4rtFuBRA9NSB
- B8SA==
+ d=linaro.org; s=google; t=1742908062; x=1743512862; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xR/LsPLBprlbbFeyMm+UPxcowxoKRVuQ6bDEEabgZ9E=;
+ b=f4eHmVfjvuSLPyUhOPBzPAloMxXXpheLIAG0ddbeTJOXJECCcaShQaSwtlt2GmxVWH
+ FqTO+eMrhbGnXh5t0Fil9K0VcT1aCC4KazAx2lS8A0c3K35brw0s6GR2e/efEcw5Gmp7
+ ojzleU0+KSnxsgGrHz9wubRtQBwRhNBo69rjpUi4iFwDCdd8nkO7M4QG6Y0iUuCpHC/j
+ rletxnOq4PITtsCtfl0KbWJSoGXyduGk8uR1Bx2KN5/6QxHuPS6Z3jNR0gIDz6j2oWDa
+ wxztAA3h40s7XsVW0Kl03hdGMwTePkzLp+S+MuciE33Qc63oQt251aT9weObO+IYzR5J
+ s7IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742907781; x=1743512581;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=55RcLJ+tquhWLa3l8UWa3Wt1h/0nWm7MQB6yx01lSY4=;
- b=ropx5WGIK2e0Ku09Xh/NXllegDtgWq+q9DV8PnTgHYDqBKEpfOFwPFg/ku8gug06Np
- TNYRB79+mNF5wsTbydxVWSUqCvHWaRpJOGEaEYbGlAcChMYt8vT2AR1vZmn5clJDAXKu
- 7y7vdHI6NRDvwkEZUrBu23I9A+wvtIQtt1HZpCOYnoXlg84E/0P2+6gACzKyq5uepkSD
- Vc9xcDfPnSgZKv3MDaYDYlw6EUN4F1gn+F7wBrex2Tvn9vCCzdwdy49/0t/OFVOIKy9F
- Qpiikij1gHQ0ZXrIIJq3HpFkfxeL9/6h5iFegRpC1O2Qgiq2qsswNJPL8lT4mVz3MMjK
- Jdfg==
+ d=1e100.net; s=20230601; t=1742908062; x=1743512862;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xR/LsPLBprlbbFeyMm+UPxcowxoKRVuQ6bDEEabgZ9E=;
+ b=S/B3UU3J8rZKslqssP3OBCjui0Cc1/anK04TUySozwdyglnjaRwAo8wzXu+0LBYmNZ
+ 7qgSyfkHNnjkK3K/TuVQBYu9s/3KAuVEXYx4Hzuxj9RSMxJdRZDebaQKhed91Tt37w0J
+ s0g/FLAaimMeQaT1ya+kdbV6ioX3Va6PaUFCA8K/30ctl8Ol0NSRAYkEgqSM/WkbE+T3
+ yXh8Vw2j0ABUFjokL/Izmg0tfWGIDBJhpQRaUeuEuiSyTdvjqzbBE7HZp81w4lRlNBx8
+ 7xPe4YdsiV+2Ht305JVlqIgWTqJK8CG5SYS4RHdxB8frzPh80YSPWQ/6h9CUIukXEury
+ 3skQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4jXxYXqeiMhNc1lmKLmutV+p0CdMzvb8HvWPLRowrw+BeLkZzLvGJHsSxDkM5X6/W8dK81xQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1ZOOch14L2KxWAXxpuL4x7mO5S+TAY8Q4rKBafBUzp+3gLwF/
- EkOzpHSiGR18qoECRB2h9mAn3Z9pG20h4taw3eO74Ia8kzNhgqF4x0UUNwiJsD4=
-X-Gm-Gg: ASbGncvDg1uYXLYs6D1VeRL9fPo/SFS3b9Mj6IRATShG/a/f2lUw9nY2oHBboGHIvan
- LHW1zKczAF+/yvfEGoacOMm7+CTVjyHoC7jh5lvNpgEwIek+5G16QfGU+i1+3qjmZOONjG+pyD6
- wBhI/4LPuHZrO0Hn5cmzTRMRukv3lWId/y8jZ40DB4rlOOm3gNP54soTOd0Ez9J7Ex56qVvsSl2
- 7+T3wJHPS9YbSXEdOtDO1vgfxoMvoIo69vCb+IEEmKMseX/YQJm2DYrUw8wetN//HUjgAVzhWE2
- ij/qaiAmlDsYCVNRQeCQS06N6tdDcqA1cq8FWqqNvpGLh4y3TdvqSdSbXyIe6vnvTnTaMNDOnRx
- jUKODV+n/92r3
-X-Google-Smtp-Source: AGHT+IE6dZfx4QekYYiF72M2LiLEFQc9u4jvVEkqsPCYxfeeWetkRiD7mgq6FvYwWpKafYqzsmobSg==
-X-Received: by 2002:a05:600c:1547:b0:43c:f64c:44a4 with SMTP id
- 5b1f17b1804b1-43d509ec734mr149775245e9.8.1742907781330; 
- Tue, 25 Mar 2025 06:03:01 -0700 (PDT)
-Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
- [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d440ed793sm204706095e9.39.2025.03.25.06.02.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Mar 2025 06:03:00 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 25 Mar 2025 14:02:54 +0100
-Subject: [PATCH 3/3] scsi: sync cache on write
+ AJvYcCWksUTUF0/8QgaydQ33GQkWi0PtfQX18++fSslOpOqMV40uflfGUzKBYsmo2KyKJwqj8P8a3LQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkeCXXEojGx9eNXvdssaL3SWw6xUzraJ4CgF3ph/5MoyJ726+w
+ JAuXGWy+ci3r8OVDVLOXTBA/6YzcD7eR5P0+ElB86lRt28rtDkHuU141xf950f4=
+X-Gm-Gg: ASbGncsHLQZaMOA8KTWBECzf0H3waum9k9f03snT39H7k/KDTSsutTxJd1ilbmLWoKL
+ +0CYQbuy7tBRM/h2Z7A8dZ6NmaL11qGrvcXKbKg+OmmgIR/Hrb35UepBD5AZ2QqzeFvCrBPqoxU
+ JcsWCBb1wslvDqBW2+v2LycOSU7T8NuISXt1Swi3EuEo2NfjFL4MtKW3ipSRzOs0+j1vycBC/5+
+ dkNAIhOzc/MKyL9g1bTUA0T6B09Egi6zosswphk8li0ADgi+63mipPVoHd4dkiJD53F6Uv+Kdq/
+ zqHCi+DDhOSqdubPE+M5RTqS2QFNIvK0X73ruohprj0MVfUQf57RJNBYacVADZsjCu4R4Yu8uuM
+ =
+X-Google-Smtp-Source: AGHT+IHF05Zo4kXW80dWPJ0FOZxWtnfYQwVOEf1jGpS4xHZGkGZgvNMBdd92f5fkG4O0+xmL2ZycHA==
+X-Received: by 2002:a05:600c:1c19:b0:43d:db5:7b1a with SMTP id
+ 5b1f17b1804b1-43d509efb48mr141065645e9.12.1742908061732; 
+ Tue, 25 Mar 2025 06:07:41 -0700 (PDT)
+Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d4fd9e960sm149488685e9.29.2025.03.25.06.07.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Mar 2025 06:07:40 -0700 (PDT)
+Message-ID: <f8e4106c-5f48-4677-9571-deb5abbddf5e@linaro.org>
+Date: Tue, 25 Mar 2025 14:07:39 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250325-scsi-sync-on-write-v1-3-3575aa1342e0@linaro.org>
-References: <20250325-scsi-sync-on-write-v1-0-3575aa1342e0@linaro.org>
-In-Reply-To: <20250325-scsi-sync-on-write-v1-0-3575aa1342e0@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PULL] Please pull qcom-next-20250324
 To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io, Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2275;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HNK+WBkpcnM1HsMromVRzxLwtuqyPHRwebTQUASR8p4=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn4ql/FdAQqMGTxtTZwGZvzdX90d7MP2RB2jxNp
- txeGjmxwHKJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ+KpfwAKCRAFgzErGV9k
- tr7KEACbHKe9lCp50Mtcel4sd80hqoy3dBcsOjV302MjAxCAVwiAjuvwM0WF3hBXhHWhcxwQhPq
- /ALCTqN+z6HQPJ6Op9zyYXYmtWbkP/fE2mKKXnkbKbRltIy+rc00AI9mneyC1UJ5xF17qu2djTK
- FkMpeCMgKgScVl3a1eoCcLQ8M46GNBNqu7uh9BnRB0z6qMxvQUJ+uQGH+tDjeS3HXES4kO4NRlM
- mfqw45OJj7nOEfcJQDBm9azB72RxQwGs628pmiIc2KluzpFiXqvSxxhTZ4MM4QC2aFn96PMCRJs
- JfVXGYXlkW9ejAkQYPKS0ql0RO0Yai/2poodJPiBZXlEe5p3Lxt9AoUN7+Tl/CO1izuq87MrbOT
- atTLHRFrTldX2JZvv27vwb1maZj81IUda+JhqXJV44473c5bVa7oBW/EZqlKESfiU+R0baJBXLH
- CilDcAZmBdCDx0okfI5zXZEUy+7K67JhApjF7ZBMQM6NhtPQQQDcX4yR5E/5Bx03EzqwEDln1cW
- fwtlTkDDhUkczzSgh0jPzfRVP29X8FWN0dyXzBrfUU7hPNnk1Y9ArLnKy5aqq0N8KSpOU+oUaT8
- yJIAlnMAzm7ZtQRBLa93JOytIHo48ZhnH0UtHEvbKtBPy0dhgC0T70pUEOO6mLUUrKVABxv4O/i
- Lf7ZC/N4AyvdTpw==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Sam Day <me@samcday.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+References: <20250324181903.499245-1-caleb.connolly@linaro.org>
+ <20250325020117.GE93000@bill-the-cat>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250325020117.GE93000@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,73 +104,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't have a mechanism to safely shutdown block devices prior to a
-baord reset or driver removal. Prevent data loss by synchronizing the
-SCSI cache after every write.
 
-In particular this solves the issue of capsule updates looping on some
-devices because the board resets immediately after deleting the capsule
-file and this write wouldn't be flushed in time.
 
-This may impact NAND wear, but should be negligible given the usecases
-for disk write in U-Boot.
+On 3/25/25 03:01, Tom Rini wrote:
+> On Mon, Mar 24, 2025 at 07:18:12PM +0100, Caleb Connolly wrote:
+> 
+>> Take 2, this includes that build failure fix, sorry about that.
+>>
+>> CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/25297
+>>
+>> The following changes since commit 0e1fc465fea62ebae91f2f56cb823e8b37ee1077:
+>>
+>>    Merge tag 'dm-pull-15mar25' of git://git.denx.de/u-boot-dm into next (2025-03-15 08:19:31 -0600)
+>>
+>> are available in the Git repository at:
+>>
+>>    git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git tags/qcom-next-20250324
+>>
+>> for you to fetch changes up to dcb6a5e7651f4a6cebfad4389119407e2a852783:
+>>
+>>    mach-snapdragon: always select SYSRESET_PSCI for ARCH_SNAPDRAGON (2025-03-18 11:55:14 +0000)
+>>
+> 
+> I pulled the merge commit message out of v1 as that looked right. And
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- drivers/scsi/scsi.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+Oh thank you, yes that's right. I thought I had copied it in :/
+> please note that b4 doesn't support the "git@.." protocol. Which on the
 
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 1aa7fbdbb5278e387de72a3c3e73d19ea0342fff..1b71e580b89b100395ea132a4976366a713cba8a 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -77,8 +77,25 @@ static void scsi_setup_inquiry(struct scsi_cmd *pccb)
- 	pccb->cmdlen = 6;
- 	pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
- }
- 
-+static void scsi_setup_sync_cache(struct scsi_cmd *pccb, lbaint_t start,
-+				  unsigned short blocks)
-+{
-+	pccb->cmd[0] = SCSI_SYNC_CACHE;
-+	pccb->cmd[1] = 0;
-+	pccb->cmd[2] = (unsigned char)(start >> 24) & 0xff;
-+	pccb->cmd[3] = (unsigned char)(start >> 16) & 0xff;
-+	pccb->cmd[4] = (unsigned char)(start >> 8) & 0xff;
-+	pccb->cmd[5] = (unsigned char)start & 0xff;
-+	pccb->cmd[6] = 0;
-+	pccb->cmd[7] = (unsigned char)(blocks >> 8) & 0xff;
-+	pccb->cmd[8] = (unsigned char)blocks & 0xff;
-+	pccb->cmd[9] = 0;
-+	pccb->cmdlen = 10;
-+	pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
-+}
-+
- static void scsi_setup_read_ext(struct scsi_cmd *pccb, lbaint_t start,
- 				unsigned short blocks)
- {
- 	pccb->cmd[0] = SCSI_READ10;
-@@ -235,8 +252,19 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 			blkcnt -= blks;
- 			break;
- 		}
- 
-+		/*
-+		 * Ensure the writes are flushed to disk so we don't lose data
-+		 * on board reset.
-+		 * FIXME: this ought to be in a SCSI shutdown path instead
-+		 */
-+		scsi_setup_sync_cache(pccb, start, smallblks);
-+		if (scsi_exec(bdev, pccb)) {
-+			scsi_print_error(pccb);
-+			break;
-+		}
-+
- 		if (blks > max_blks) {
- 			start += max_blks;
- 			blks -= max_blks;
- 		} else {
+ack, I'll update that for next time.
+> other hand is useful when I have more to say than just applied ;)
+> 
+> Applied to u-boot/next, thanks!
+
+Thanks, and thanks for bearing with me :)
+> 
 
 -- 
-2.49.0
+Caleb (they/them)
 
