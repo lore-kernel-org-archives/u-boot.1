@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18D38C36005
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 22:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB08DC36008
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 22:45:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 593F781E14;
-	Tue, 25 Mar 2025 23:45:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9AF4D81C84;
+	Tue, 25 Mar 2025 23:45:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Uxgsl3lZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="H+QRW6E5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EbcBUipq";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="neXUAiFC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12E6281DCA; Tue, 25 Mar 2025 23:45:05 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 4489C81DCC; Tue, 25 Mar 2025 23:45:08 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1E081CFD
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 23:44:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B68E481C64
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 23:44:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,47 +32,46 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZMlNp4G4bz9v55;
- Tue, 25 Mar 2025 23:44:58 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZMlNn2Wfgz9tY2;
+ Tue, 25 Mar 2025 23:44:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742942698;
+ s=mail20150812; t=1742942697;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GgjilZV9FN1E6A5gF3EJm+Y3BD+kKFf1sxMzio/RqQk=;
- b=Uxgsl3lZMw/AzTUVbAIEjGxfHohK7zjRVz6bSFjZfNvk12ATyHmSKZwrZvkDpm/SYRNM5J
- cRfixnyEUYa7zctH+SGgJNgaqJH4wnW4wWwUYnm4DKJWfMvB0OA0V/8RkjvzjTnUk7+3/m
- VBjwFJwa331+VC/vWyw0+JsldtxZyX8w8+G7SMZhqifuCHk3Kd9LOcrym89r1dvPzGP3t6
- ekvSNJSp8cuSHCspXVth6ROb9yhryDFicGN0fnI0eF8yoLOcrltgy1MW5GbZmFO2qK4IZ7
- CQf72WLpEOFXvtUrVftomQgjoUigCLeUFQOdwYLnkYn44++S9qDbYdoiAZS5rw==
+ bh=BnGkShDFwAc7n0GsiNtfDGVOD0z/tO96q8fdaMNDILE=;
+ b=EbcBUipqMQgRIvYi0V8gYylO0Vf01kL7hwkfapdYhk8xb2T4i8V8hIvIaxpl7gLggCzHCS
+ /q7GuGRpo8QT8H2oJgKt55REspPfOJ6GXR6luYe5A8LPov0muaWWE2pNylE9pTSsPd3WjM
+ nV+bl6ZiUP/RJXszLqOVISD702so3C9QRAqbszhhJ0MQU/kWnjEUTq69wQavxcofqfx6Eq
+ CmnJTNkfCM0Lm4kJwElQgvIlmJEVHg0UMb18H2fJkE0XP+Dm/fkUxaU+jahFWhNxt3IonD
+ y1kjMLdvl9pDcOBv1XzSQc0zm4wm2ff1jVGaqAZYU/fxO8itD2HmM/mKdTtiaQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742942696;
+ s=mail20150812; t=1742942695;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GgjilZV9FN1E6A5gF3EJm+Y3BD+kKFf1sxMzio/RqQk=;
- b=H+QRW6E5B+QI2xViBFI4MR8gVdSFy3GakCZDugtb40k+ThKgSmAlrK/lQq91QJQ+KVvQ+2
- 2D46dlUmQenQ1VBOAtFx73hQFzKGtQNFpRjHBEWi74S1LoTG5UJdiuq4jMKpS5J49bqUAt
- kjGRo79eSpmBHk+vTV8+qW01C2F5oVv+9FZpoqQRup2bf9YDtp6HFa5+36d4LMZ0J1D3k0
- EGVSqRfzoTkRCv1782+0DQxL3drmIwQWf+jXbPeeWqG6eU73BAxjndbzLI++/GQnjMilE5
- S759D9yEa3/DAQYyE9m10M6Kw0OM6vHqfgpOfSdhVWt+0Ip3S41vpjBKw79Vhw==
+ bh=BnGkShDFwAc7n0GsiNtfDGVOD0z/tO96q8fdaMNDILE=;
+ b=neXUAiFCnFgQg6lANEXrsu1iXchj6h/4aBwfQKSENJ132ox6Tl+csKmQE125744yNmVzdw
+ 0aCVdF2xqgJxeVgTU/1bgNJW2GwIR3uQkZVGIZ6PdZwBXKvv+AbV2ccl9/sAaZc5opjmEj
+ CLNeDclE784lzBkYKzoR1tpgUZbTqYiAHNsks0JFM7R+EK4uUFOfZ//wUkF16eJNDF+omV
+ 6737w8s4/j97UvGvwZ0hPE+SnQGcSC0hAs65BlUrBEoeyRR2QSK+kHRMfq+UW0muOSCM5f
+ 5pxjp8Rtih4LcAqU4w+EksH/6uSLPWzmzk+yVc0Jv9qcmT0ODnGW7MX9ZLlpjw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/5] ram: renesas: dbsc5: Pass udevice and MODEMR0 to
- dbsc5_get_board_data()
-Date: Tue, 25 Mar 2025 23:43:33 +0100
-Message-ID: <20250325224433.39090-5-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/5] ram: renesas: dbsc5: Improve dbsc5_send_dbcmd2() signature
+Date: Tue, 25 Mar 2025 23:43:31 +0100
+Message-ID: <20250325224433.39090-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250325224433.39090-1-marek.vasut+renesas@mailbox.org>
 References: <20250325224433.39090-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: d85ecdea5acd004e849
-X-MBO-RS-META: uhqchdej9qtpisw17ko9otydcu6bewdu
-X-Rspamd-Queue-Id: 4ZMlNp4G4bz9v55
+X-MBO-RS-META: 66njhz1iefyc6m63bt76koynhifyggfo
+X-MBO-RS-ID: b1bea59d1251ea513b0
+X-Rspamd-Queue-Id: 4ZMlNn2Wfgz9tY2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,11 +88,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass DBSC5 udevice and MODEMR0 register values to board specific
-function dbsc5_get_board_data(). The board specific implementation
-of dbsc5_get_board_data() can return struct renesas_dbsc5_board_config
-which matches the board based on the content of MODEMR0 or content
-of DT accessible via the udevice.
+Update dbsc5_send_dbcmd2() such that it takes multiple parameters
+instead of one magic register content value. These parameters are
+used to form the same resulting register value internally in the
+dbsc5_send_dbcmd2() function, but from well defined input constants.
+The new input constants are the operation code, channel, rank, and
+operation argument. The argument is operation code specific, therefore
+it is still a 16-bit magic number, but the rest of the arguments are
+now split up. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -100,37 +103,105 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/ram/renesas/dbsc5/dram.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ drivers/ram/renesas/dbsc5/dram.c | 41 ++++++++++++++++++++++++--------
+ 1 file changed, 31 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/ram/renesas/dbsc5/dram.c b/drivers/ram/renesas/dbsc5/dram.c
-index ce04dd58180..ca8a7fb4783 100644
+index 730ce79605b..461c862ea27 100644
 --- a/drivers/ram/renesas/dbsc5/dram.c
 +++ b/drivers/ram/renesas/dbsc5/dram.c
-@@ -4333,10 +4333,13 @@ static u32 dbsc5_init_ddr(struct udevice *dev)
+@@ -1325,6 +1325,11 @@ static const u32 PI_DARRAY3_1_CSx_Fx[CS_CNT][3] = {
+ #define DBSC_DBACEN			0x200
+ #define DBSC_DBRFEN			0x204
+ #define DBSC_DBCMD			0x208
++#define DBSC_DBCMD_CMD_OPCODE_PD	0x8
++#define DBSC_DBCMD_CMD_OPCODE_MRW	0xe
++#define DBSC_DBCMD_CMD_OPCODE_MRR	0xf
++#define DBSC_DBCMD_CMD_CHANNEL_ALL	0x8
++#define DBSC_DBCMD_CMD_RANK_ALL		0x4
+ #define DBSC_DBWAIT			0x210
+ #define DBSC_DBBL			0x400
+ #define DBSC_DBBLA			0x400
+@@ -1736,16 +1741,22 @@ static void dbsc5_reg_write(void __iomem *addr, u32 data)
+ }
  
  /**
-  * dbsc5_get_board_data() - Obtain board specific DRAM configuration
-+ * @dev: DBSC5 device
-+ * @modemr0: MODEMR0 register content
+- * dbsc5_reg_write() - DRAM Command Write Access
++ * dbsc5_send_dbcmd2() - DRAM Command Write Access
+  * @dev: DBSC5 device
+- * @cmd DRAM command.
++ * @opcode DRAM controller opcode
++ * @channel DRAM controller channel (0..3)
++ * @rank DRAM controller rank (0..1)
++ * @arg Command and argument bits (command specific encoding)
   *
-  * Return board specific DRAM configuration structure pointer.
+  * First, execute the dummy read to DBSC_DBCMD.
+  * Confirm that no DBSC command operation is in progress 0.
+  * Write the contents of the command to be sent to DRAM.
   */
--__weak const struct renesas_dbsc5_board_config *dbsc5_get_board_data(void)
-+__weak const struct renesas_dbsc5_board_config *
-+dbsc5_get_board_data(struct udevice *dev, const u32 modemr0)
+-static void dbsc5_send_dbcmd2(struct udevice *dev, u32 cmd)
++static void dbsc5_send_dbcmd2(struct udevice *dev, const u8 opcode,
++			      const u8 channel, const u8 rank,
++			      const u16 arg)
  {
- 	return &renesas_v4h_dbsc5_board_config;
- }
-@@ -4372,7 +4375,7 @@ static int renesas_dbsc5_dram_probe(struct udevice *dev)
- 	u32 ch, cs;
++	const u32 cmd = (opcode << 24) | (channel << 20) | (rank << 16) | arg;
+ 	struct renesas_dbsc5_dram_priv *priv = dev_get_priv(dev);
+ 	void __iomem *regs_dbsc_d = priv->regs + DBSC5_DBSC_D_OFFSET;
+ 	u32 val;
+@@ -2950,10 +2961,14 @@ static u32 dbsc5_pi_training(struct udevice *dev)
+ 		writel(0x21, regs_dbsc_d + DBSC_DBDFICNT(ch));
  
- 	/* Get board data */
--	priv->dbsc5_board_config = dbsc5_get_board_data();
-+	priv->dbsc5_board_config = dbsc5_get_board_data(dev, modemr0);
- 	priv->ddr_phyvalid = (u32)(priv->dbsc5_board_config->bdcfg_phyvalid);
- 	priv->max_density = 0;
- 	priv->cpg_regs = (void __iomem *)ofnode_get_addr(cnode);
+ 	/* Dummy PDE */
+-	dbsc5_send_dbcmd2(dev, 0x8840000);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_PD,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL,
++			  DBSC_DBCMD_CMD_RANK_ALL, 0);
+ 
+ 	/* PDX */
+-	dbsc5_send_dbcmd2(dev, 0x8840001);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_PD,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL,
++			  DBSC_DBCMD_CMD_RANK_ALL, 1);
+ 
+ 	/* Wait init_complete */
+ 	for (retry = 0; retry < retry_max; retry++) {
+@@ -4094,7 +4109,9 @@ static u32 dbsc5_read_training(struct udevice *dev)
+  */
+ static void dbsc5_ddr_register_mr28_set(struct udevice *dev)
+ {
+-	dbsc5_send_dbcmd2(dev, 0xE841C24);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_MRW,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL,
++			  DBSC_DBCMD_CMD_RANK_ALL, (28 << 8) | 0x24);
+ }
+ 
+ /**
+@@ -4111,17 +4128,21 @@ static void dbsc5_ddr_register_mr27_mr57_read(struct udevice *dev)
+ 		return;
+ 
+ 	/* MR27 rank0 */
+-	dbsc5_send_dbcmd2(dev, 0xF801B00);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_MRR,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL, 0, 27 << 8);
+ 	/* MR57 rank0 */
+-	dbsc5_send_dbcmd2(dev, 0xF803900);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_MRR,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL, 0, 57 << 8);
+ 
+ 	if (!priv->ch_have_this_cs[1])
+ 		return;
+ 
+ 	/* MR27 rank1 */
+-	dbsc5_send_dbcmd2(dev, 0xF811B00);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_MRR,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL, 1, 27 << 8);
+ 	/* MR57 rank1 */
+-	dbsc5_send_dbcmd2(dev, 0xF813900);
++	dbsc5_send_dbcmd2(dev, DBSC_DBCMD_CMD_OPCODE_MRR,
++			  DBSC_DBCMD_CMD_CHANNEL_ALL, 1, 57 << 8);
+ }
+ 
+ /**
 -- 
 2.47.2
 
