@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A788C36002
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 02:55:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C811AC36002
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 02:55:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 301248122F;
-	Tue, 25 Mar 2025 03:55:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 484B081B42;
+	Tue, 25 Mar 2025 03:55:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EpUkY6LI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dI9YITKy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFD3B81A0C; Tue, 25 Mar 2025 03:55:10 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 68C2081B42; Tue, 25 Mar 2025 03:55:12 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1533E8186D
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 03:55:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37920819B1
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 03:55:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-47690a4ec97so52597931cf.2
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:55:08 -0700 (PDT)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-476b89782c3so57300871cf.1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:55:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742871306; x=1743476106; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742871309; x=1743476109; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GqaTMnhpC7O0Qxjh+9lA4E17zCk14IMJECx3LfqMZJc=;
- b=EpUkY6LIC2RJIC4W2D2bThTY5SBs4La87OZnwYQ7h5B/54jnuIXoE1Miutc0dZBzkG
- tFhTWmR+USIOVz0EdyZoigOxNKLCNxGijel5TjTLs0U7rweenQzNI2R+VcWb0G/nY/oF
- xw0D0N3sMfOJ/BPRtUEnhfzfx6MhG3/O7o5h/ngrWx9tqWpHRQB05L459L5uU/5THehG
- qAge1tXkM8RjV2qmxvUy5Lpie26zBbv+4iu/R7cqe+qaAHXCvLCArKzo8Uvb1Hdm4wup
- dF6HuEyGC2DZ4Dv1sVjdy34CLcOFlNReJcBpEjjtog8I84IM5gSUQxLfzSec+oeXax+6
- 0/HQ==
+ bh=vA4GPWA2BIg20TrBYfvZG8H59E6aHn5tThtJ5Xz77ow=;
+ b=dI9YITKyo+5FuRoMSTNQSUwavEnv3JBSkNeoxsOCXf2sApK74lxHojlgmFuGKrVzgH
+ 5fyJGZk4DJIjXylbAa2wwYD3zGTLOd1ECpcIgAhUniKEAbzTRxMIOK3rEsPCZ+u/byrS
+ iBz/eS49MiRB8s7rGnmuUtabxfo3ke8X88S6ghNNHuVm5H2yx4/jU/YELfwrftvPa5Jv
+ HzDXrLrwY/0wHvr2deJDzJRjjrofLK8boMHjlyy76V74CyOHDWJSn6/BjLUYZdrBoKTs
+ yvdxSE2acSbPHwnSkRCXDqbnoHCAFlSST+kkmyN184r9z/Ct2wGL39a4HNmrmx58bG2/
+ kQEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742871306; x=1743476106;
+ d=1e100.net; s=20230601; t=1742871309; x=1743476109;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GqaTMnhpC7O0Qxjh+9lA4E17zCk14IMJECx3LfqMZJc=;
- b=j8hKoXSXXf6HRnyDSjehSgscF9C9Vv26X7ZqMe0lThftMh/OuNf+2somgarMdIjSbd
- 7lSRr491mAvRHOQFtZ1Ul2ZYhK3f+HQXH83RpX3Udd3UqQtvD79KbZ/HrJWVg9adcF1i
- yhgDuyRbGgr2UYayIVLQ3IAVRySPRv0rQvdCd5EmLeN2OfXvFQtJ9tSZU8W6y1n2TUhf
- kYq3Tr0IMoJJBRyb9Br0iRc5UXOooAJ7+1tmzv5hkPW2nEWeuARK5VzzPjSQGrhC8a0E
- k9eBL2UnWYTWOqKupRXkrivmPF/ylpz+MoSoAtmFyxD0jbTxZMY3dNZo7mE5uLFtqLTm
- R7eg==
-X-Gm-Message-State: AOJu0Ywq8LY/NcPAkQxqA3RtXyXrPd3/56YsyZH0Jjab2vNc0fUxGADE
- lKKlnnPx5B6MVeFudrw729zxAiPQP6UYnmxFfJ4VKbX85mqGiB8DGmknvQ==
-X-Gm-Gg: ASbGnctTPWHZFfjdpyMo6Yk0rjoZ5NVD8guMpQl/mOHA8/GELfyzIYwCWyoGdeVIAGi
- D1iRDN1vZ4Zf5OKQUSj09rLlu3F+PooAdox9NVnKQpG0hMLavSvZ1tIxueXZdtrJenG/ZXrU5OI
- egRqo1icE88Ute8TKpaVxCDHnHDbAqiKMNZgoAAhADSdIrvDRxd5QX7VuorNFqlpWQg1Y5ULzvv
- 5M75akbaOB5pC1bYpY+WXGGNVDaDGebycw59bIzLgVeAqG0Ul3fZl7LiFAAkyjxBDn8xyPfIRVj
- RJEulF2T9kWLQGmBfJ/imYFsjhWZGTIgWJyt0qmGqsC5UDlfG9J6wA/TzC7dGzrb6adUvibdilg
- CwtbhdxU6/NyzTgM6o70=
-X-Google-Smtp-Source: AGHT+IF1C3+Sz3Es6dSNTADptyLEwL40jsxQHvkPKm8wqvAF8AJr1XRFhm7t/h/n8HT2X39p1T64Dg==
-X-Received: by 2002:a05:622a:5193:b0:472:1225:bd98 with SMTP id
- d75a77b69052e-4771de8fa0amr267391231cf.50.1742871306213; 
- Mon, 24 Mar 2025 19:55:06 -0700 (PDT)
+ bh=vA4GPWA2BIg20TrBYfvZG8H59E6aHn5tThtJ5Xz77ow=;
+ b=EqZt0pA72cr/T26dFNCQHPC+iAP/U2/rAla2XfTgY2g2+srndJObhPOFCpKwwAWap2
+ dbj0ReiumLG2ojGeze6bAEgLJ+OVxzhW0Jx1gwLsT0ymD5g1sOZiuJCkcSiSScyLkqJe
+ XF57aFdBx15YCoxyE/HIMizDkvU+zItJzB7X3Cpa4x5Fk1UskDWzvZZsy8XbflwHw1vK
+ 5CYFZ0nvUMZHMmuoZwM4Xf5fS1G1QslTJz2aBJiIFBftJba7MClMpm3y+BEvuYI2fv5f
+ hMsONLcE6tE/db7c9LeGm1ytDszDnCv+VpKpB3uoHHc/syRyCDg+4LhSa0/yJDZzHnHL
+ s9TQ==
+X-Gm-Message-State: AOJu0Yw5NrJleWBujvl3DOMqE6DK4C2g7PS/haVCyyRg1dTPe3YshDIF
+ ZdFHZMFv4Oaz5gNywxkwEZwNB9LylUJ5QmN8loWkms/qXrjNpJ7fvbpNng==
+X-Gm-Gg: ASbGncu8Mm1HFQmXvORsxquxB+76yx0XNYk9RkSMIrkIJKY3vrFpDpJIICMe1cjsLRN
+ zZMr4YpRueLHEBQ2nFkBeqv1lfdt51zeNayI36O9QKP3r7+nW8JesksLeGH3GyR8ZI9wPOe5baD
+ jDAjix7rA84GRhjYhjZlNt/OmTSlGeuI3NL7hEhx9MzBHzyEcCCj7qNAuqpLTq05kCAB6/R5mbD
+ xy1QAvAJbfYxncub5Az5Epe3v4OWkuzJEGOayxpGZR048WcB/9u99DqkLH0Sws/JjIGMGLWL4qv
+ 9a0N+Hf/5j+T23BAFOAhRuBLpF0zD1X/XPIps2IwT53koxrLe3BuEDaYDJ5x+Zrx09LLnev4wxR
+ PUn5wtR+5ttcjDocujzM=
+X-Google-Smtp-Source: AGHT+IEWCyzi0xd0pb85oDC7pQXUSCwVnkV5wsrnlqDrFYK42T048mjFcZrLy28uuJkHv+mSAIgnOw==
+X-Received: by 2002:a05:622a:260b:b0:477:c89:3813 with SMTP id
+ d75a77b69052e-4771dd62403mr195035681cf.9.1742871308673; 
+ Mon, 24 Mar 2025 19:55:08 -0700 (PDT)
 Received: from aford-System-Version.. (c-75-72-162-184.hsd1.mn.comcast.net.
  [75.72.162.184]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4771d176113sm54712021cf.17.2025.03.24.19.55.04
+ d75a77b69052e-4771d176113sm54712021cf.17.2025.03.24.19.55.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Mar 2025 19:55:05 -0700 (PDT)
+ Mon, 24 Mar 2025 19:55:07 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: aford@beaconembedded.com, festevam@gmail.com, marek.vasut@mailbox.org,
  Adam Ford <aford173@gmail.com>, Stefano Babic <sbabic@denx.de>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
+ Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
  Peng Fan <peng.fan@nxp.com>, Yannic Moog <y.moog@phytec.de>,
- Gilles Talis <gilles.talis@gmail.com>,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Christoph Stoidner <c.stoidner@phytec.de>,
+ Teresa Remmet <t.remmet@phytec.de>, Gilles Talis <gilles.talis@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
  Wadim Egorov <w.egorov@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH V4 1/7] imx: imx9: Imply IMX_TMU
-Date: Mon, 24 Mar 2025 21:54:42 -0500
-Message-ID: <20250325025452.950303-2-aford173@gmail.com>
+Subject: [PATCH V4 2/7] cpu: imx8_cpu: Expand get_imx_type_str list of
+ supported CPUs
+Date: Mon, 24 Mar 2025 21:54:43 -0500
+Message-ID: <20250325025452.950303-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250325025452.950303-1-aford173@gmail.com>
 References: <20250325025452.950303-1-aford173@gmail.com>
@@ -106,33 +107,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the CPU Information is displayed from imx8_cpu, it displays
-the cpu temperature grade and operating temperature if
-CONFIG_IMX9 is defined. This behavior is similar to what
-happens arch/arm/mach-imx/cpu.c except that the latter
-checks for CONFIG_IMX_THERMAL or CONFIG_IMX_TMU.
-In preparation to make imx8_cpu act like the previous
-implementation for any CPU, make IMX9 imply IMX_TMU, so
-it will be always displayed unless a user decides to
-disable it.
+The imx8_cpu is capable of running on IMX8, IMX8M, and IMX9
+families, but the CPU list is limited on the 8M variants.  Expand
+this list to show more variants and their respective names.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- arch/arm/mach-imx/imx9/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/cpu/imx8_cpu.c | 44 +++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 41 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-index 49220c0955e..c3e758e103a 100644
---- a/arch/arm/mach-imx/imx9/Kconfig
-+++ b/arch/arm/mach-imx/imx9/Kconfig
-@@ -10,6 +10,7 @@ config IMX9
- 	select BINMAN
- 	select HAS_CAAM
- 	select ROM_UNIFIED_SECTIONS
-+	imply IMX_TMU
- 
- config IMX93
- 	bool
+diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
+index 53d31b3c0bf..39b3c194131 100644
+--- a/drivers/cpu/imx8_cpu.c
++++ b/drivers/cpu/imx8_cpu.c
+@@ -35,11 +35,49 @@ static const char *get_imx_type_str(u32 imxtype)
+ {
+ 	switch (imxtype) {
+ 	case MXC_CPU_IMX8MM:
+-		return "8MM";
++		return "8MMQ";	/* Quad-core version of the imx8mm */
++	case MXC_CPU_IMX8MML:
++		return "8MMQL";	/* Quad-core Lite version of the imx8mm */
++	case MXC_CPU_IMX8MMD:
++		return "8MMD";	/* Dual-core version of the imx8mm */
++	case MXC_CPU_IMX8MMDL:
++		return "8MMDL";	/* Dual-core Lite version of the imx8mm */
++	case MXC_CPU_IMX8MMS:
++		return "8MMS";	/* Single-core version of the imx8mm */
++	case MXC_CPU_IMX8MMSL:
++		return "8MMSL";	/* Single-core Lite version of the imx8mm */
+ 	case MXC_CPU_IMX8MN:
+-		return "8MN";
++		return "8MNano Quad"; /* Quad-core version */
++	case MXC_CPU_IMX8MND:
++		return "8MNano Dual"; /* Dual-core version */
++	case MXC_CPU_IMX8MNS:
++		return "8MNano Solo"; /* Single-core version */
++	case MXC_CPU_IMX8MNL:
++		return "8MNano QuadLite"; /* Quad-core Lite version */
++	case MXC_CPU_IMX8MNDL:
++		return "8MNano DualLite"; /* Dual-core Lite version */
++	case MXC_CPU_IMX8MNSL:
++		return "8MNano SoloLite";/* Single-core Lite version of the imx8mn */
++	case MXC_CPU_IMX8MNUQ:
++		return "8MNano UltraLite Quad";/* Quad-core UltraLite version of the imx8mn */
++	case MXC_CPU_IMX8MNUD:
++		return "8MNano UltraLite Dual";/* Dual-core UltraLite version of the imx8mn */
++	case MXC_CPU_IMX8MNUS:
++		return "8MNano UltraLite Solo";/* Single-core UltraLite version of the imx8mn */
+ 	case MXC_CPU_IMX8MP:
+-		return "8MP";
++		return "8MP[8]";	/* Quad-core version of the imx8mp */
++	case MXC_CPU_IMX8MPD:
++		return "8MP Dual[3]";	/* Dual-core version of the imx8mp */
++	case MXC_CPU_IMX8MPL:
++		return "8MP Lite[4]";	/* Quad-core Lite version of the imx8mp */
++	case MXC_CPU_IMX8MP6:
++		return "8MP[6]";	/* Quad-core version of the imx8mp, NPU fused */
++	case MXC_CPU_IMX8MQ:
++		return "8MQ";	/* Quad-core version of the imx8mq */
++	case MXC_CPU_IMX8MQL:
++		return "8MQLite";	/* Quad-core Lite version of the imx8mq */
++	case MXC_CPU_IMX8MD:
++		return "8MD";	/* Dual-core version of the imx8mq */
+ 	case MXC_CPU_IMX8QXP:
+ 	case MXC_CPU_IMX8QXP_A0:
+ 		return "8QXP";
 -- 
 2.45.2
 
