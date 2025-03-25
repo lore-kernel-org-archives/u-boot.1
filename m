@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F6DC35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 11:36:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7EA3C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:37:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB3C180EEF;
-	Tue, 25 Mar 2025 12:36:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0615680EEF;
+	Tue, 25 Mar 2025 13:37:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="itQtFQCd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e3cB4MLA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 255DC810E8; Tue, 25 Mar 2025 12:36:33 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 46C0781026; Tue, 25 Mar 2025 13:37:24 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AE73808AF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 12:36:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05C3E808AF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:37:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-30c461a45f8so54723421fa.1
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 04:36:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-30332dfc821so4090363a91.3
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:37:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742902590; x=1743507390; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742906240; x=1743511040; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Aknk1IW/4l5gM9vwdmNxW+3sP6/X/LZAau4cQVnxCt4=;
- b=itQtFQCdTGd2DtvwOaRM57cnSwoJZJwCjKA9tCVsJokyQqDnkyzvbC8EN3eW0Tz3tZ
- rzs3BStvhlDFZTIOKJyZWfguxjIY8Xa/TXZ5lXKFY3V3+1e06YmHwIFEWbA11Z/u6d6J
- tvQyxC9oYpM7UONlski8hEuh9JtzEvsjzLLaV7LBchKwk0soEopOxIs1wpA13DvdGCEe
- VVf80Gfcj55d4Ew+4bOHL6cHiopobOdwmpbrJD7h3BtEoGZmJVhVGlP9X3jXWT5IKvDw
- pwX3tWZJrymOO2a0ShZLC2LVeA/uUHIKG75zx3+V5NMOIqqv97JhSnZ0A3PNK/yyAKxA
- hdhA==
+ bh=5C9l/ZcF1zUfz/ikHinsvbNrkFxUV0h1Kx3NxZv33Gk=;
+ b=e3cB4MLAbtJfUvXSGzXHrn2FPq81DWlGIJn0rOwN9Z1U/F8/eDbHx6akRle/ofv0ux
+ MmHfUQLJSPJ3rHS5xDOI6Cb3M9JbRM+2v82gowC4+xwft+9cLBW1i1MQLKoXjZRLQj6A
+ XV7OchR2gMj9CGQLkrYecgNl1eFrVCAh8BfPCoJyLR8CyOIZuRiyd4se2rpIv6AqvMOM
+ m1LUG4r1bBGvt4E6gcJ4qilUsXbXcY+sKo768Fx85mdivtivE/bSZoDQ9HFYcXZKhQbk
+ mfcuXzql80amOHbUdn9N7HNQ2+xczF6L3eh94+8Lz4OcUS97xN5BLPZXhSbmxYLXCEk+
+ W8mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742902590; x=1743507390;
+ d=1e100.net; s=20230601; t=1742906240; x=1743511040;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Aknk1IW/4l5gM9vwdmNxW+3sP6/X/LZAau4cQVnxCt4=;
- b=kw70g/Z2XOMKo9xbJ5zY2njeTIjNoBNQudPAxlrFrTilGUOyVfP/jM/G+iMY6JdJu9
- AwpIR0zlooJYkArIQefXGLPnqiV2q2h4pNU7R/ONgl8Vrm9lEOTVC8QE74jJGAxDVBUZ
- L+WgarsgCtWyAEfECY1onhnBQrTnsHMMMwmrJYADWIxFaCrrppt0NCXIzlFoWAza+YKq
- K0u/P0f8pD/Far3A91CxOibCYbDYjWmUEmlJ56WE4x2H/frYbj/QaazYnEuoGORNmkZB
- DQfSMhGNah5sZSUda9ySCGdEpYdCaDxqEzrbY/FfGz5U0UZwerhFzfVXEOwrCmMqbOfI
- q//w==
+ bh=5C9l/ZcF1zUfz/ikHinsvbNrkFxUV0h1Kx3NxZv33Gk=;
+ b=vu5jqyX4cNYmo9+0HM/isYpyhHDwwZzwVWr5lSIXfO6xGrN9Pfy2xGGTnrDu6N9lk9
+ vjQYCMk8TFGj/hFaVlbZYN5mA8NNR33Hwh1IoXG4kJsdaglbQ3XCuWm9xRLKBWj4z1nO
+ doFfwZz+d3jczBfLIzY6BhWRu73EEtMF0G4OcN+vjnl9svYBn5JgjHOHk4qpu1EhXKiz
+ 0ETeoy1lfQmWhNOeMcZnBxal6zYkOo9QlxrW5FQ+R1jWagGeq+AYVcY5bN+dXX/Ccaro
+ EKGlaDZZ60Zz39BzVNmmEfUHhmb/lFCGg9MvIaNqYld6VgAKBewtW5mZIKwCc35Fgm4S
+ E6jQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEgDyTIY9Dz3gxmIQKylXCrT1nCPU84fytqmcOPimoycFs8EllFo42QYKhiB73T46qb5YEQ8U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzHEi5n6aFzjCze8HwPPW6CCBjh1g95YVKuxAcSuQgf/ZP8fEBt
- LRzOYVh566OmytktY8aZWzuHZbhe5evWtgZvDDaiQcGIRglvvfZeaW/eV7p+19gRN1p6jHWFIYt
- Qsng/EJsGlaUFh5E29eGibns1xOQ=
-X-Gm-Gg: ASbGnctBeZXnPooS41z8S0j7FZFDPIN6elIZIcgLlEP/3uRJxoVcb86n85AADXgBdZr
- zQO6H7+kPSeQHisuvVD9GYBc8ygTYJpbvKO5pTFZnVcjtX2lhk8EI/8N9NCL5iK+8gVDxD70MrY
- Wt9G0svndjjgzn/3o8NG2v+kj4kz4viYqYVDMSb3SnjOVm10ABTY95TVRSJEVAm3aoPFw=
-X-Google-Smtp-Source: AGHT+IFe+WjqtKtiWYOVqxJ3UBVS6s0n5CuJhmUowTW53kx/rOsl+dexH9V5RmwSoJHIgVmHshpdNb6Zdfo3yZI7sFE=
-X-Received: by 2002:a2e:be1d:0:b0:30d:62c1:3c0a with SMTP id
- 38308e7fff4ca-30d7e2aa82cmr69093801fa.25.1742902590034; Tue, 25 Mar 2025
- 04:36:30 -0700 (PDT)
+ AJvYcCWRBe+7coI8+A7T58azfux1S2IVkTC5SKNZsJ9I9zRPEvVkqMnTNtmJFreW0b40nSJkF0kxous=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0HC1yyXjdOuAC+MNULnzfbjkoWTo68SIpHjoZN/a6wvsRTI6Q
+ dwx31Sr+2rdHkfIAtg/nwD1oINTqrU2j9csCXRHSGXzboBVKz7p1g0qoN7oeyQw4jF0WyNxwQHd
+ U+Z0otHnZ8DE2zace99cc1kNgiWQ=
+X-Gm-Gg: ASbGncuG+tvoTxOLCvfG5wucJQlWM3hqJBTWGeuxXCDleev7VpEXf2VWfCiGvOjEDx3
+ CrAMRiYC3eF8uJVIpW7ysVouYVdUYuAUahZk8g3axjChT9ihPk14P6FEl4na4QyllypVNBi5CgW
+ iIFNzG88HIDRGmamPa+XPSHrWzwg==
+X-Google-Smtp-Source: AGHT+IEJ6TuovB7+Rv9W41PZJb/JkIvPEdkp5UGEiPrVLHh6I/mg/d9883Au36eibCDsVwO1Xac4UV4A0wCUMj8oO8Q=
+X-Received: by 2002:a17:90b:3e87:b0:2ee:f677:aa14 with SMTP id
+ 98e67ed59e1d1-3030fea69f2mr25011623a91.13.1742906240274; Tue, 25 Mar 2025
+ 05:37:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250325025452.950303-1-aford173@gmail.com>
  <20250325025452.950303-5-aford173@gmail.com>
  <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
-In-Reply-To: <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 25 Mar 2025 08:36:18 -0300
-X-Gm-Features: AQ5f1Jo1KX6j7WIm57L6F1mKmhUG6s0RLuJKfvzbgDXO1krgLQsydWQUab8b2ew
-Message-ID: <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
+ <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Tue, 25 Mar 2025 07:37:08 -0500
+X-Gm-Features: AQ5f1JpwD0mcDp6I5CdvSCiVy8e_lzfjXo5LGZSnc-uu_-BSDq2rroIxO5q7HYw
+Message-ID: <CAHCN7xJoJYmZCG7e+zv3cJc8B460kqWpz8v-KibsVsHJzbpjUA@mail.gmail.com>
 Subject: Re: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de,
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  aford@beaconembedded.com, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@denx.de>, 
@@ -103,13 +104,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 25, 2025 at 12:37=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.o=
-rg> wrote:
-
-> Please drop the fullstop at the end of Subject and then add
+On Tue, Mar 25, 2025 at 6:36=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> On Tue, Mar 25, 2025 at 12:37=E2=80=AFAM Marek Vasut <marek.vasut@mailbox=
+.org> wrote:
 >
-> To the whole series.
+> > Please drop the fullstop at the end of Subject and then add
+> >
+> > Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >
+> > To the whole series.
+>
+> Adam, no need to resend. I will take care of it, thanks.
 
-Adam, no need to resend. I will take care of it, thanks.
+Sorry about that...again.  Thanks.
+
+Once this is complete, I'll have a smaller patch series which shrinks
+my 8MP SPL code by around 4k by #ifdef'ing out dead code.  Hopefully
+it's not too cluttered, but that smaller series depends on both the
+UART clock and the CPU_IMX updates.
+
+adam
