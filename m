@@ -4,41 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD9FC35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD41C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:48:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A365B81951;
-	Tue, 25 Mar 2025 15:27:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id D5BC0812BC;
+	Tue, 25 Mar 2025 15:48:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="DwG+XVMM";
+	dkim=pass (1024-bit key; unprotected) header.d=amazonses.com header.i=@amazonses.com header.b="ZMS5TP8a";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EBCF81C84; Tue, 25 Mar 2025 15:27:46 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0146B80EEF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 15:27:42 +0100 (CET)
+ id 90B528186D; Tue, 25 Mar 2025 15:48:41 +0100 (CET)
+Received: from a7-45.smtp-out.eu-west-1.amazonses.com
+ (a7-45.smtp-out.eu-west-1.amazonses.com [54.240.7.45])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D92BE80EEF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 15:48:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F27D31756;
- Tue, 25 Mar 2025 07:27:47 -0700 (PDT)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.21])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 277F63F694;
- Tue, 25 Mar 2025 07:27:41 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	linux-sunxi@lists.linux.dev
-Subject: FIXUP! sunxi: mmc: Improve reset procedure
-Date: Tue, 25 Mar 2025 14:27:37 +0000
-Message-Id: <20250325142737.1702796-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250325133953.1dab37c8@donnerap.manchester.arm.com>
-References: <20250325133953.1dab37c8@donnerap.manchester.arm.com>
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=01020195cdc6e188-48dacf9c-cfa6-421c-aab3-61d989bc7c78-000000@amazonses.collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=bc7lryepznv65m6r2ewkpoafjt4fiq42; d=collabora.com; t=1742914118;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding;
+ bh=lEKOGoQXEiIUoyxAFJFAZ2Yj/VZib+N4Lq9ePEU1BHQ=;
+ b=DwG+XVMMI722aLeDu4rgxQIymDprkbijavSBB95+cHY970AKE2AMuZMNz72KHc28
+ PWzWTHvhPp0y3wB941gxXVbTAGWCGABCsptJlRm4YEkFXbZRtD2UP9AdtKL5qUYzi9/
+ oEro0iQeMhPQGwV9/8oyMy6U1107hbLI8Pv4obYjlTABP8rbVwGbI6yrXfOXbWvH758
+ y1OYn6108LCuuHYVt3cit8nyQiGD+8Z12R9jkaBwi1ZJIagVUkIKnGOFZpF//o+OFcd
+ PNzzInZhd/EQpKgAmWnrjYBV0eAH5T2gwCFj8oHdYdZoz5Rk1Q4mSebvxvddSEGJnAc
+ 5p9TYDzgSg==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=ihchhvubuqgjsxyuhssfvqohv7z3u4hn; d=amazonses.com; t=1742914118;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding:Feedback-ID;
+ bh=lEKOGoQXEiIUoyxAFJFAZ2Yj/VZib+N4Lq9ePEU1BHQ=;
+ b=ZMS5TP8abkvKMCZAftTmetYawhWiMsOHhic4v4r6Z7e1KwYr9aQwDkuV7Y3xA6dZ
+ bAStDrUjR6OfQ+BxSchqpu4n7rB9adgoqYMRh64FU2ztxuGvnAnraDM4WYOTpAY40VA
+ daCF1z0DrgoQP28reJo/dDA1dc8QKyAkpxpvAwaI=
+From: Arnaud Patard <arnaud.patard@collabora.com>
+To: u-boot@lists.denx.de
+Cc: Arnaud Patard <arnaud.patard@collabora.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ FUKAUMI Naoki <naoki@radxa.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] rockchip: Enable usb gadget on Radxa ROCK 5C
+Date: Tue, 25 Mar 2025 14:48:38 +0000
+Message-ID: <01020195cdc6e188-48dacf9c-cfa6-421c-aab3-61d989bc7c78-000000@eu-west-1.amazonses.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Feedback-ID: ::1.eu-west-1.YpP9ZbxnARFfy3Cb5pfsLd/pdsXBCNK0KEM7HforL4k=:AmazonSES
+X-SES-Outgoing: 2025.03.25-54.240.7.45
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,72 +75,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jernej,
+I was testing DFU and SPL DFU [1] on my rock 5c. To get it working,
+I had to set the usb_host0_xhci node to peripheral and maximum speed
+to high speed, as done for other rk3588 devices.
 
-what do you think about this solution the A10 compilation problem?
-That looks like a simple change, somewhat half of the way to the proper
-solution.
-If you agree, I'd squash that into your patch, then push it for U-Boot
-next.
+For DFU (and not SPL DFU), I had to set the "maximum-speed" property on the
+usbdp_phy0 node, otherwise it's failing:
+=> dfu 0 ram 0
+rockchip_udphy phy@fed80000: cmn ana lcpll lock timeout
+rockchip_udphy phy@fed80000: failed to init usbdp combophy
+rockchip_udphy phy@fed80000: PHY: Failed to init phy@fed80000: -110.
+rockchip_udphy phy@fed80000: cmn ana lcpll lock timeout
+rockchip_udphy phy@fed80000: failed to init usbdp combophy
+rockchip_udphy phy@fed80000: PHY: Failed to init phy@fed80000: -110.
+No USB device found
+udc_device_get_by_index failed
 
-Cheers,
-Andre
+The issue is that it's trying to configure the usb3 phy, which is not
+the one used for peripheral mode. I've not checked on other rk3588 devices
+if they would need a similar change.
 
+[1] for SPL DFU, I've used the serie https://patchwork.ozlabs.org/project/uboot/list/?series=443761
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Signed-off-by: Arnaud Patard <arnaud.patard@collabora.com>
 ---
- drivers/mmc/sunxi_mmc.c | 10 +++++-----
- drivers/mmc/sunxi_mmc.h |  4 ++++
- 2 files changed, 9 insertions(+), 5 deletions(-)
+ arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-index 31dbfb10c59..951e6acd34d 100644
---- a/drivers/mmc/sunxi_mmc.c
-+++ b/drivers/mmc/sunxi_mmc.c
-@@ -449,23 +449,23 @@ out:
- 	return error;
- }
- 
--static void sunxi_mmc_reset(struct sunxi_mmc *regs)
-+static void sunxi_mmc_reset(void *regs)
- {
- 	/* Reset controller */
--	writel(SUNXI_MMC_GCTRL_RESET, &regs->gctrl);
-+	writel(SUNXI_MMC_GCTRL_RESET, regs + SUNXI_MMC_GCTRL);
- 	udelay(1000);
- 
- 	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
- 		/* Reset card */
--		writel(SUNXI_MMC_HWRST_ASSERT, &regs->hwrst);
-+		writel(SUNXI_MMC_HWRST_ASSERT, regs + SUNXI_MMC_HWRST);
- 		udelay(10);
--		writel(SUNXI_MMC_HWRST_DEASSERT, &regs->hwrst);
-+		writel(SUNXI_MMC_HWRST_DEASSERT, regs + SUNXI_MMC_HWRST);
- 		udelay(300);
- 
- 		/* Setup FIFO R/W threshold. Needed on H616. */
- 		writel(SUNXI_MMC_THLDC_READ_THLD(512) |
- 		       SUNXI_MMC_THLDC_WRITE_EN |
--		       SUNXI_MMC_THLDC_READ_EN, &regs->thldc);
-+		       SUNXI_MMC_THLDC_READ_EN, regs + SUNXI_MMC_THLDC);
- 	}
- }
- 
-diff --git a/drivers/mmc/sunxi_mmc.h b/drivers/mmc/sunxi_mmc.h
-index 9d55904c213..bc313dcabe0 100644
---- a/drivers/mmc/sunxi_mmc.h
-+++ b/drivers/mmc/sunxi_mmc.h
-@@ -12,6 +12,10 @@
- 
- #include <linux/types.h>
- 
-+#define SUNXI_MMC_GCTRL		0x000
-+#define SUNXI_MMC_HWRST		0x078
-+#define SUNXI_MMC_THLDC		0x100
+diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+index 1dc574c2f21..54b0f914010 100644
+--- a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
++++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+@@ -9,3 +9,15 @@
+ 	cap-mmc-highspeed;
+ 	mmc-hs200-1_8v;
+ };
 +
- struct sunxi_mmc {
- 	u32 gctrl;		/* 0x00 global control */
- 	u32 clkcr;		/* 0x04 clock control */
++&usb_host0_xhci {
++	bootph-pre-ram;
++	bootph-some-ram;
++	dr_mode = "peripheral";
++	maximum-speed = "high-speed";
++};
++
++&usbdp_phy0 {
++	bootph-all;
++	maximum-speed = "high-speed";
++};
 -- 
-2.25.1
+2.39.5
 
