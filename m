@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7EA3C35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:37:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EB3CC35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:51:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0615680EEF;
-	Tue, 25 Mar 2025 13:37:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C2D8380EEF;
+	Tue, 25 Mar 2025 13:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e3cB4MLA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UTBUykap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C0781026; Tue, 25 Mar 2025 13:37:24 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 7AE5F81026; Tue, 25 Mar 2025 13:51:34 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05C3E808AF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:37:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF3D3808AF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:51:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-30332dfc821so4090363a91.3
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:37:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-301918a4e3bso10131875a91.3
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:51:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742906240; x=1743511040; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5C9l/ZcF1zUfz/ikHinsvbNrkFxUV0h1Kx3NxZv33Gk=;
- b=e3cB4MLAbtJfUvXSGzXHrn2FPq81DWlGIJn0rOwN9Z1U/F8/eDbHx6akRle/ofv0ux
- MmHfUQLJSPJ3rHS5xDOI6Cb3M9JbRM+2v82gowC4+xwft+9cLBW1i1MQLKoXjZRLQj6A
- XV7OchR2gMj9CGQLkrYecgNl1eFrVCAh8BfPCoJyLR8CyOIZuRiyd4se2rpIv6AqvMOM
- m1LUG4r1bBGvt4E6gcJ4qilUsXbXcY+sKo768Fx85mdivtivE/bSZoDQ9HFYcXZKhQbk
- mfcuXzql80amOHbUdn9N7HNQ2+xczF6L3eh94+8Lz4OcUS97xN5BLPZXhSbmxYLXCEk+
- W8mQ==
+ d=gmail.com; s=20230601; t=1742907090; x=1743511890; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=d589mvMFWRrlFPyVYTwDIlfolqKybPC6sioUz827GQ0=;
+ b=UTBUykapNCkyWqMXjI8DeDiqcU1yz24wNHTuQ7i28x+NdbfZQZrdsArGKYTwe6GV2j
+ jYwO//y0E35uEqUzbHMjmexbLgHp2T+RSAaqydK0q2xJ2rqaMAK+VBuSWnowEFrTeGa1
+ Ls6as13RkhUSzJOkXhSl8K7zr5r92wByfzAzlD9vMZBNGZNiler4DAEarz3UZfGCVkeo
+ vAnYhr3Vh7aROZS3bPvab7lNq2uGRmCWqCVJJjhstl2bZE6mnYU3sh1nIH8NWQkevpHT
+ npzTI4XqCFVVf2yt1nMSodvOIumChq5LDdoDGaBd4qTh+Xc98L9NI/gI8oa2QkHcrQn+
+ CTLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742906240; x=1743511040;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5C9l/ZcF1zUfz/ikHinsvbNrkFxUV0h1Kx3NxZv33Gk=;
- b=vu5jqyX4cNYmo9+0HM/isYpyhHDwwZzwVWr5lSIXfO6xGrN9Pfy2xGGTnrDu6N9lk9
- vjQYCMk8TFGj/hFaVlbZYN5mA8NNR33Hwh1IoXG4kJsdaglbQ3XCuWm9xRLKBWj4z1nO
- doFfwZz+d3jczBfLIzY6BhWRu73EEtMF0G4OcN+vjnl9svYBn5JgjHOHk4qpu1EhXKiz
- 0ETeoy1lfQmWhNOeMcZnBxal6zYkOo9QlxrW5FQ+R1jWagGeq+AYVcY5bN+dXX/Ccaro
- EKGlaDZZ60Zz39BzVNmmEfUHhmb/lFCGg9MvIaNqYld6VgAKBewtW5mZIKwCc35Fgm4S
- E6jQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWRBe+7coI8+A7T58azfux1S2IVkTC5SKNZsJ9I9zRPEvVkqMnTNtmJFreW0b40nSJkF0kxous=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0HC1yyXjdOuAC+MNULnzfbjkoWTo68SIpHjoZN/a6wvsRTI6Q
- dwx31Sr+2rdHkfIAtg/nwD1oINTqrU2j9csCXRHSGXzboBVKz7p1g0qoN7oeyQw4jF0WyNxwQHd
- U+Z0otHnZ8DE2zace99cc1kNgiWQ=
-X-Gm-Gg: ASbGncuG+tvoTxOLCvfG5wucJQlWM3hqJBTWGeuxXCDleev7VpEXf2VWfCiGvOjEDx3
- CrAMRiYC3eF8uJVIpW7ysVouYVdUYuAUahZk8g3axjChT9ihPk14P6FEl4na4QyllypVNBi5CgW
- iIFNzG88HIDRGmamPa+XPSHrWzwg==
-X-Google-Smtp-Source: AGHT+IEJ6TuovB7+Rv9W41PZJb/JkIvPEdkp5UGEiPrVLHh6I/mg/d9883Au36eibCDsVwO1Xac4UV4A0wCUMj8oO8Q=
-X-Received: by 2002:a17:90b:3e87:b0:2ee:f677:aa14 with SMTP id
- 98e67ed59e1d1-3030fea69f2mr25011623a91.13.1742906240274; Tue, 25 Mar 2025
- 05:37:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1742907090; x=1743511890;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=d589mvMFWRrlFPyVYTwDIlfolqKybPC6sioUz827GQ0=;
+ b=U+4uOakCWZNXCtqPmzE5WtEstVjaiOF2s1Iw/44iyCho4je1OfxDiczyY74RxWusve
+ FQTaDVcBlZRqLeEOP9YLt6RL+TY4HMmpjaG5YnGPBjKjTe2UyAHS6OGWPtJk+qdJE63o
+ fC/zRCWne0+QVT/L7n+SHdCxR6gtTC/Ri4A8lZWfQDPE7/imdiB2/JCDLs2DzIJSDFbY
+ Sy8aw+a8NtQjePrUuABOf+9xYlQsRjQXztOKmrldIzDZQDGmOgtl/JfhefFlYJ6SpZkx
+ 6RxEQNuEz5nHxt2C/cOg6ne+vDWvAtMm8TD9vwrAbESiDdRIgz3zurgDAgLHsQNJYlf0
+ iEPw==
+X-Gm-Message-State: AOJu0YzHL8CMwVgbTPxWMB+8qWy9V7fD/o3zedzdpTtDzTXCTDbYoIod
+ LoflBTBS0/XhQKSKzCqEyKHOO7EtmO/DCT865+xbteeV6hQ9OlcD299brA==
+X-Gm-Gg: ASbGncvNPCPUFQXS9/OxmF1D146ZT55KfkMDmR1EiKuEPMGNQuNNAKu36PWiXTQR+GM
+ dKig8IFxgcSThZ1r880ZhpxkacYwTn7WACuPteviRTxSQ4Csbn1mWJE+aAow1OdKQLSaC4Rbw1z
+ GSNiRQDrXln32gI491DBRQ/jcc7ol1VuZ7n2V7d3WrM5bxaqRbfaKSKcoXqcO7xLWvQIFuh6vsd
+ b6CQdXYy6+UVK5rbbpL0K4UN2AMmZcjmPs3Wy7wGdq0J6lF265/boyu1JXyEEiJzivarH74b0p7
+ /k3DgWwx33NgIImh6qC2AhvNAnl+E+XWCDw9who6YVhwJoP6Ct7K9xngVA==
+X-Google-Smtp-Source: AGHT+IFl2azTA5o14rT9Y+hzeacOOG2OFQ37KzV+4xmWdNmSAFCkLumkC/qW8GrcCrDaiahrdq90qw==
+X-Received: by 2002:a17:90b:3b8c:b0:2f6:be57:49d2 with SMTP id
+ 98e67ed59e1d1-3030fe9e9famr26686761a91.17.1742907090169; 
+ Tue, 25 Mar 2025 05:51:30 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:ea2:dde8:5d21:f750])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-301bf636122sm14246785a91.45.2025.03.25.05.51.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Mar 2025 05:51:29 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20250325
+Date: Tue, 25 Mar 2025 09:51:26 -0300
+Message-Id: <20250325125126.612733-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250325025452.950303-1-aford173@gmail.com>
- <20250325025452.950303-5-aford173@gmail.com>
- <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
- <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Tue, 25 Mar 2025 07:37:08 -0500
-X-Gm-Features: AQ5f1JpwD0mcDp6I5CdvSCiVy8e_lzfjXo5LGZSnc-uu_-BSDq2rroIxO5q7HYw
-Message-ID: <CAHCN7xJoJYmZCG7e+zv3cJc8B460kqWpz8v-KibsVsHJzbpjUA@mail.gmail.com>
-Subject: Re: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- aford@beaconembedded.com, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Heiko Schocher <hs@denx.de>, 
- Enrico Leto <enrico.leto@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
- Yannic Moog <y.moog@phytec.de>, Gilles Talis <gilles.talis@gmail.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>, 
- Christoph Stoidner <c.stoidner@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,25 +93,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 25, 2025 at 6:36=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> On Tue, Mar 25, 2025 at 12:37=E2=80=AFAM Marek Vasut <marek.vasut@mailbox=
-.org> wrote:
->
-> > Please drop the fullstop at the end of Subject and then add
-> >
-> > Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >
-> > To the whole series.
->
-> Adam, no need to resend. I will take care of it, thanks.
+Hi Tom,
 
-Sorry about that...again.  Thanks.
+Please pull from u-boot-imx/next, thanks.
 
-Once this is complete, I'll have a smaller patch series which shrinks
-my 8MP SPL code by around 4k by #ifdef'ing out dead code.  Hopefully
-it's not too cluttered, but that smaller series depends on both the
-UART clock and the CPU_IMX updates.
+The following changes since commit cc9dcba9cce185d8bca2dc5c4b55b21f4505cbe8:
 
-adam
+  configs: Remove duplicated bootcmd 'mmc dev ${mmcdev}' (2025-03-20 08:18:35 -0300)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20250325
+
+for you to fetch changes up to 6bd1b740dd09f852ed3f313bd05f31c2324a916a:
+
+  imx: imx9: Imply CPU_IMX by default (2025-03-25 08:32:16 -0300)
+
+u-boot-imx-next-20250325
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25324
+
+- Imply the i.MX thermal driver by default on imx8, imx9, imx8m.
+- Add clk_resolve_parent_clk() and fix up iMX clock drivers.
+----------------------------------------------------------------
+Adam Ford (8):
+      board: beacon: imx8mp: Fix GIC clock for Overdrive mode
+      imx: imx9: Imply IMX_TMU
+      cpu: imx8_cpu: Expand get_imx_type_str list of supported CPUs
+      imx: imx8m: Imply IMX_TMU
+      cpu: imx8_cpu: Print Speed grade if IMX_TMU
+      imx: imx8m: Imply CPU_IMX by default
+      imx: imx8: Imply CPU_IMX by default
+      imx: imx9: Imply CPU_IMX by default
+
+Marek Vasut (25):
+      clk: Add clk_resolve_parent_clk()
+      clk: clk-mux: Fold clk_register_mux()
+      clk: clk-mux: Use struct udevice instead of struct device
+      clk: clk-mux: Resolve parent clock by name
+      clk: imx: Pass struct udevice into imx_clk_mux*()
+      clk: imx: Pass struct udevice to clk_register_mux()
+      clk: clk-gate: Use struct udevice instead of struct device
+      clk: clk-gate: Resolve parent clock by name
+      clk: imx: gate2: Use struct udevice instead of struct device
+      clk: imx: gate2: Resolve parent clock by name
+      clk: imx: Pass struct udevice into imx_clk_gate*()
+      clk: imx: Pass struct udevice to clk_register_gate*()
+      clk: clk-composite: Use struct udevice instead of struct device
+      clk: clk-composite: Resolve parent clock by name
+      clk: imx: Pass struct udevice into imx_clk_composite*()
+      clk: imx: Convert clock-osc-* back to osc_*
+      clk: imx: Pass struct udevice into imx_clk_pllv3*()
+      clk: imx: pllv3: Resolve parent clock by name
+      clk: clk-divider: Use struct udevice instead of struct device
+      clk: imx: Pass struct udevice into imx_clk_divider*()
+      clk: clk-divider: Resolve parent clock by name
+      clk: clk-fixed-factor: Use struct udevice instead of struct device
+      clk: clk-fixed-factor: Resolve parent clock by name
+      clk: imx: Pass struct udevice into imx_clk_fixed_factor*()
+      arm64: imx8mp: Gracefully handle disabled ENV_IS_IN_SPI_FLASH
+
+ arch/arm/mach-imx/imx8/Kconfig                    |   2 +
+ arch/arm/mach-imx/imx8m/Kconfig                   |   3 +
+ arch/arm/mach-imx/imx9/Kconfig                    |   3 +
+ board/beacon/imx8mp/spl.c                         |   2 +-
+ board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c |   4 +-
+ drivers/clk/clk-composite.c                       |   4 +-
+ drivers/clk/clk-divider.c                         |   7 +-
+ drivers/clk/clk-fixed-factor.c                    |   6 +-
+ drivers/clk/clk-gate.c                            |   5 +-
+ drivers/clk/clk-mux.c                             |  47 +--
+ drivers/clk/clk-uclass.c                          |  18 ++
+ drivers/clk/imx/clk-composite-8m.c                |   4 +-
+ drivers/clk/imx/clk-gate2.c                       |   5 +-
+ drivers/clk/imx/clk-imx6q.c                       |  80 ++---
+ drivers/clk/imx/clk-imx8mm.c                      | 254 ++++++++--------
+ drivers/clk/imx/clk-imx8mn.c                      | 246 +++++++--------
+ drivers/clk/imx/clk-imx8mp.c                      | 348 +++++++++++-----------
+ drivers/clk/imx/clk-imx8mq.c                      | 226 +++++++-------
+ drivers/clk/imx/clk-imx93.c                       |   8 +-
+ drivers/clk/imx/clk-imxrt1020.c                   |  42 +--
+ drivers/clk/imx/clk-imxrt1050.c                   |  78 ++---
+ drivers/clk/imx/clk-imxrt1170.c                   |  30 +-
+ drivers/clk/imx/clk-pllv3.c                       |   9 +-
+ drivers/clk/imx/clk.h                             | 116 ++++----
+ drivers/cpu/imx8_cpu.c                            |  54 +++-
+ include/clk.h                                     |   9 +
+ include/linux/clk-provider.h                      |  10 +-
+ 27 files changed, 841 insertions(+), 779 deletions(-)
