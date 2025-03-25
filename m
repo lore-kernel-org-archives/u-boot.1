@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47AF3C36008
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 17:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4FB4C36008
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 17:02:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6BF98192A;
-	Tue, 25 Mar 2025 18:02:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13EC281CA8;
+	Tue, 25 Mar 2025 18:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tyEHgnEY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bGdrMuJE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5902A81B42; Tue, 25 Mar 2025 18:02:13 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 0484581CAF; Tue, 25 Mar 2025 18:02:18 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDABF81026
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 18:02:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9994681C84
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 18:02:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-22622ddcc35so8056945ad.2
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 10:02:09 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2ff69365e1dso8153449a91.3
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 10:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742922128; x=1743526928; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1742922134; x=1743526934; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D9xfHmifK1wDh+BqOhu8Fj17rqB8uYkz+JQxtDXevfo=;
- b=tyEHgnEYNQxMrIXYZiXk2sgez9bTdPnw5MfX4Uqfh7b5jTPC3CT0APVVjatMsxXJko
- c5sTi5ZROo/CFyvoKJBodSQQY3km8S17LPjPBNUF8TaubUwVtmN08wOmGiBlHJTkvD5B
- MHxoD7pL5EHSSVMh9GJ2w7JRrinFwsvRwhFko=
+ bh=JUgju+bGJWjPpR099pPAMhAoIEEUWZp2cWfgmlRVvGg=;
+ b=bGdrMuJEvy/NZJzCWuM7zVaWkIp47vwaTe/THlZY8eEX2Ztd5t11No5H5DuUyvyTIa
+ GwrapL9xXXBXcsW0EPwojKjvTrQToCP/MedyZHYJMl9caxjO6WJAAteG2UFcJb9JgUfi
+ g7E9p7QXdmEqHvmkfchiCyALXu1VE1o8LOfD4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742922128; x=1743526928;
+ d=1e100.net; s=20230601; t=1742922134; x=1743526934;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D9xfHmifK1wDh+BqOhu8Fj17rqB8uYkz+JQxtDXevfo=;
- b=S5Xi4QBMxLnz/atN1C/06+905A+sw5rmyQAh297EVB5YETqT5gDEtdsVMrW7dLpTwg
- Lm4GjBulSR89vB5d8NuUuQJIdGr8vbDZNtd4Aqgnfq220A15tvANK4aC6l/0/SZLyj6I
- e+g8AFe0nPWlK9VOUgzFPvcUmtnFD41Uh5M9NuHvUxGscY+RATEMdnAMH7tbDzsQLiQq
- RSro8mAz/KcX2NdHUB7Bzk3W77PhMcPsUvaXuhX8GZsvXs3/JyZlKVUOzsQkMPU+u/hn
- Cyuo1dV1A1tzIhh7f+x3mIIdhoJwXn18v5vSZE/puVBx9D1GhEw+F9FizPp/We5wh2y4
- uvRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUaZPbjIXUhsFUGVjcPdHqZ8XpNPcWK9pJDNmTXPhjiHvACeWSy3ttmtjxaHOpiV4/19LHHV8w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwVtN9yKHVTs/5uGP1W3l4cWKrU73+Qtk4SG8wxTiGHxARzhm09
- NViMJTLPMT7YPLyLC/jpPfuXhBUGzhM1AVX9DyJO1HHG32DwbyRXRhGI3XYEa+Y=
-X-Gm-Gg: ASbGncsaLzl+G2AiEqa9DWbqR/Znv7PptbR8HtuMxpUEIODvb6AtF5QLagM5Sz3xEG+
- 2Zk0veoj7yn0uoBqJK/RFwT1O7V/W8vGvd7HVPgXCqW1UrrtMHzMfI9VA3JlFNnGIVWhNFFBIlB
- LN5cQ+J2bYcz+rCtvzSB4pzMtn83SWlH2a0mLXDyVIvSml9aL8ealgB8TEcRoJNcZEpe4k+LLaQ
- jIesLejYxnzmgC3XlY7SE2y+/wslwKZEOCVnxHri3/8DXs9u65ys3KcbvZcvEecQYst8zJiYgy1
- pz3Pz6CxdhUo8eujcRpoXaxW4Pr9yxi6dWeFAROxz0k=
-X-Google-Smtp-Source: AGHT+IFemOUcygTDuBFziLalyjBISB6x0yKbPlGaQ8BjUR0QPLKMA5kQthrsMA67mItd60lbxHQO6g==
-X-Received: by 2002:a05:6a21:b90:b0:1f5:7c6f:6c96 with SMTP id
- adf61e73a8af0-1fe42f996e7mr29589008637.22.1742922128248; 
- Tue, 25 Mar 2025 10:02:08 -0700 (PDT)
+ bh=JUgju+bGJWjPpR099pPAMhAoIEEUWZp2cWfgmlRVvGg=;
+ b=gpciwEmDzCKrxVt02bD3KOdeS2V7Rj+kDQ7d1GO2zNiR/MehIx7Z4xkWrT/LPiaYHY
+ biDt+8UxKXSPBxDXibuEALWcx2ny4QVBZwHq29IAf3YkLMjqmjJFLpOMCHZgkvatKXLl
+ 4rTBYJLKMaOEzvuxXowkCeA6mrPmMfmWk0Hxv5Pe77OyQAuFG4ypx37xejBbo2l07Ol6
+ +Y/UyJrbAhTOa+vZ85C6SYgGxYQfGNRcd1Esmhr2Dz7g9etoyzKAHeHl804GrATahvh2
+ upQAnw+lWpwsODkBGro2JjO1FZLevtIIOvud4xLS2vBkCSTquqjJaKUDfnTm0NdBi4Dr
+ F8NA==
+X-Gm-Message-State: AOJu0YwYN7Dztmfmb+DRc1tF8zJXVg0SzQ6L2Dtsgnh5JkprG/RFw/cs
+ 09wxS4KkJgFeu0S7Nj975asZVBQ5P2aS5RJTfZDTU/nDyXa0wD4/1EG/pdMYGC8=
+X-Gm-Gg: ASbGncsVCh554uMwNQi9f1Dv/kKgSwhBMn00V2E7ghHKyphGNFgqU2Y/k4nUqdcldl6
+ G1P5JIuRJveHaA57lyOkve/YM6OM87NyS5DrY0HCXCewYodgQ20c9NJLDHebV5fsoDpwT1HUnVp
+ YfKAVydCvVS6/0QTIttTkfAlWNzuRPdW3hKABI1vNSWUyKDFQBvGyxA0oY7nV01K2scpS68i8ZU
+ jHflXaddp8sMBw12hOtkFKQ7ucQbQVz5vIwA0u4F63m6Rx62CiKU2653FBY/JyUuBUFtVbrpdnh
+ Gz/Jkghw0PqEFMwcMFroaMIfobU8ofwyiRM4cP40rrU=
+X-Google-Smtp-Source: AGHT+IH8++ok+nNrBMheEtlJ9G3EoYUVIrP7cWHOyPKtJ4QU6+jDxPEc0Rkt1f3Mqkw3zwkVSjJ9/w==
+X-Received: by 2002:a17:90b:5407:b0:2f9:cf97:56ac with SMTP id
+ 98e67ed59e1d1-3030fb219f6mr33459637a91.0.1742922133813; 
+ Tue, 25 Mar 2025 10:02:13 -0700 (PDT)
 Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af8a2a29177sm9342214a12.62.2025.03.25.10.02.06
+ 98e67ed59e1d1-301bf589bccsm14731168a91.11.2025.03.25.10.02.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Mar 2025 10:02:07 -0700 (PDT)
-Date: Tue, 25 Mar 2025 11:02:05 -0600
+ Tue, 25 Mar 2025 10:02:13 -0700 (PDT)
+Date: Tue, 25 Mar 2025 11:02:10 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 2/8] env: Rename SYS_REDUNDAND_ENVIRONMENT to
- ENV_REDUNDAND_ENVIRONMENT
-Message-ID: <20250325170205.GK93000@bill-the-cat>
+Cc: u-boot@lists.denx.de, Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 3/8] env: Rename SYS_RELOC_GD_ENV_ADDR to
+ ENV_RELOC_GD_ENV_ADDR
+Message-ID: <20250325170210.GL93000@bill-the-cat>
 References: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
- <20250322215624.18994-2-marek.vasut+renesas@mailbox.org>
- <de961532-3565-49f1-b205-556684105a11@cherry.de>
- <bffe08af-3151-4064-bfd9-8a660a70599a@mailbox.org>
- <cc0f556c-e9ed-458d-83d3-0f459f6e6c25@cherry.de>
+ <20250322215624.18994-3-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vWf8hqUBmWpJE9cF"
+ protocol="application/pgp-signature"; boundary="IZHPrcQJH90T+0ze"
 Content-Disposition: inline
-In-Reply-To: <cc0f556c-e9ed-458d-83d3-0f459f6e6c25@cherry.de>
+In-Reply-To: <20250322215624.18994-3-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,70 +98,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---vWf8hqUBmWpJE9cF
-Content-Type: text/plain; charset=iso-8859-1
+--IZHPrcQJH90T+0ze
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 25, 2025 at 10:02:46AM +0100, Quentin Schulz wrote:
-> Hi Marek,
->=20
-> On 3/24/25 11:52 PM, Marek Vasut wrote:
-> > On 3/24/25 1:33 PM, Quentin Schulz wrote:
-> > > Hi Marek,
-> > >=20
-> > > On 3/22/25 10:55 PM, Marek Vasut wrote:
-> > > > Rename the variable and add ENV_ prefix, so that all configuration
-> > > > options which are related to environment would have an CONFIG_ENV_
-> > > > prefix. No functional change.
-> > > >=20
-> > > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > > ---
-> > > [...]
-> > > > diff --git a/env/Kconfig b/env/Kconfig
-> > > > index a177a354c8b..9ef45a7e3fe 100644
-> > > > --- a/env/Kconfig
-> > > > +++ b/env/Kconfig
-> > > > @@ -463,7 +463,7 @@ config ENV_IS_IN_UBI
-> > > > =A0=A0=A0=A0=A0=A0=A0 the environment in.=A0 This will enable redun=
-dant
-> > > > environments in UBI.
-> > > > =A0=A0=A0=A0=A0=A0=A0 It is assumed that both volumes are in the sa=
-me MTD partition.
-> > > > -config SYS_REDUNDAND_ENVIRONMENT
-> > > > +config ENV_REDUNDAND_ENVIRONMENT
-> > >=20
-> > > Do either of the following:
-> > >=20
-> > > 1) fix typo: s/REDUNDAND/REDUNDANT/
-> > > 2) shorten name to be consistent with other symbols and avoid
-> > > "env[...]environment" redundancy: config ENV_REDUND
-> > CONFIG_ENV_REDUNDANT works for you ?
->=20
-> Fine with me!
+On Sat, Mar 22, 2025 at 10:55:23PM +0100, Marek Vasut wrote:
 
-Me as well, thanks! And for v2, please make a cover letter for when I
-merge this in.
+> Rename the variable and add ENV_ prefix, so that all configuration
+> options which are related to environment would have an CONFIG_ENV_
+> prefix. No functional change.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---vWf8hqUBmWpJE9cF
+--IZHPrcQJH90T+0ze
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfi4Y0ACgkQFHw5/5Y0
-tywsBAwAsRrXekZmwUzG/+mhkMJgtwD45ftt8BCOOR36dAZgk05GNv200/SFsEKA
-MJFc6/udulQla2lD94to1ebeQqfH2mwX6JXLApWuyHmgzP0+8ie/aNfbJPo4jk1K
-mGAb+TAEebPrXCrCROAo/IcKuURCY9WDBL+ZgTLBDACkvP1ggF8LwcwIiNbNtwGu
-NtnLEZmuqX4L78WRpdBOWfx6q7OwHF0IcFZxvsDk1gqSc4SNVDR+5Buaus/Sbt1o
-2cXX8TrB0N4AHzBasK8aediRw3TexzPO5IbpOxUT73Cb5H26DXGBB8S7XZfzOi1i
-xjg3BzMW6QJaONd2Aao2JJ6nLQ8uEV48ShAIRs7rmpV4WR8oNoqAcLnH7rxq6vsq
-Pkhw4J/o2i6OaQ8by6cNe9MgzeWE4hDQdPLNWVUzWXEsDvVA4s1/yaJIG8+3G5Y0
-P/6Q48BGb0RRa0Nxv0pj5yPGW5hvjGV51hSNMt6tEXmYsNJ7SvqoIXhoi1JLy5N2
-CEGzoAw0
-=X5Xt
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfi4ZIACgkQFHw5/5Y0
+tyykogv/fvxyY5QVUhYoM2bV83EcOIuyrI1q685627XfiBRcusjSewHxHB7grCDr
+W99/f8jTMjpjKD/xfxJPKMCYN29AW1w+p6p9Qvaz70yivPdx3Tr3223TxtqFPV4x
+K6R+ipKYy0uiRBcuLUy+Vilveqa+GEMejxz81wJLar8PbkMtGGwm+GfeWyI0uXaj
+OKzK8Rc+o1EuD7FhKgjcwniHZsu4jctJfRmeQcPzTNKCskKvvu8oo1ogc0emyf3v
+yO/iNVVnx9VTl/50rezqh2dpLC2mKW3Th/8MLEIN6znx1Gl16IRkPJHrtEO19WFX
+iGLfLPFu+3MqWcnfjbNOB42KlCLhfWwmh3ae1TQkYx3S4UAU+oGPisBgFClPAyL+
+1oJOfN8QSwP6pdvCUg58GI7xlqdbWO2id9l/LOP2OW+Kt1iTX2LtThKXIP0EBfr9
+YOSQIvsVvCbMThuSAzKnR/OSrKBpkrRnnN8Fs5W1C+e41JQdqMJiUapHB4d73bT/
+nEGCUURY
+=oWXw
 -----END PGP SIGNATURE-----
 
---vWf8hqUBmWpJE9cF--
+--IZHPrcQJH90T+0ze--
