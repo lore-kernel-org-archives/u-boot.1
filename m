@@ -4,61 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB18C35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:56:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D4AC3600B
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3068B81C84;
+	by phobos.denx.de (Postfix) with ESMTP id 9B73881D27;
 	Tue, 25 Mar 2025 15:56:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=rums.se
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=rums.se header.i=@rums.se header.b="LdLxGSxs";
-	dkim=permerror (0-bit key) header.d=rums.se header.i=@rums.se header.b="Q23P1hIC";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="XN/Mjmk6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58B2180F70; Tue, 25 Mar 2025 09:00:08 +0100 (CET)
-Received: from mailrelay4-2.pub.mailoutpod3-cph3.one.com
- (mailrelay4-2.pub.mailoutpod3-cph3.one.com [IPv6:2a02:2350:5:429::1])
+ id 7846880F70; Tue, 25 Mar 2025 09:18:54 +0100 (CET)
+Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::ae])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF416808B6
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 09:00:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBEFA808B6
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 09:18:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=rums.se
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=onilsson@rums.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1742889604;
- x=1743494404; d=rums.se; s=rsa2;
- h=content-type:subject:reply-to:from:to:message-id:mime-version:date:from;
- bh=PD3uyIdXaR2w3hhopKjkFbr2jJ6nzMgvDKiXbg31f4Y=;
- b=LdLxGSxsZrozjOTzt/nPi9LeWMWAl037s1FCl+zvPON5kFD/CIRmVLdmZKtASEnR8j16FnYkI04uz
- 2VrDCxv/7wYXLQjt5x8cbXdF2uTn8csGywuv58Ksio0HNPVfJQfbrzDHxk6Uu16KaobcE1U8iUoZjv
- aXQd3GFXWgxTqqglUKnHQsGPGvoFHcOzxF+kOKgbsqflJJFGhsRjwnm0rG+9mXjJtDkddLWlDVNJ6W
- KwAlGwtdPXossGnub7MCkG6G5SCbzfVAfs7YbWTVq8vw7mWZp/8Y6z3Z+SF318YFetY+M1CsbCbDat
- Z6Urjx7NsE2WcvliByAT4pqFTvVJIcg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1742889604;
- x=1743494404; d=rums.se; s=ed2;
- h=content-type:subject:reply-to:from:to:message-id:mime-version:date:from;
- bh=PD3uyIdXaR2w3hhopKjkFbr2jJ6nzMgvDKiXbg31f4Y=;
- b=Q23P1hICtfBG8jsM/0l0TO2yOaa3YU8KBEpRlZ5YA4Irm4AGRZNU3+lxPbY1rSVbxSyByDvmDz+qy
- 7sqsdkWAQ==
-X-HalOne-ID: 282484ad-094f-11f0-86f8-29b2d794c87d
-Received: from onecom-webmail-backend-production-5f8dbfcff-wctzm
- (service.pub.live1-k8s-cph3.one.com [46.30.212.67])
- by mailrelay4.pub.mailoutpod3-cph3.one.com (Halon) with ESMTPSA
- id 282484ad-094f-11f0-86f8-29b2d794c87d;
- Tue, 25 Mar 2025 08:00:04 +0000 (UTC)
-X-Originating-IP: 85.226.134.249
-User-Agent: One.com webmail 47.0.61
-Date: Tue, 25 Mar 2025 09:00:03 +0100
+ spf=pass smtp.mailfrom=alexeymin@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1742890731;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ffTLikK7h4GmDHEki/WYz18sGAJWE4G8IYHvTAcwams=;
+ b=XN/Mjmk6VYM51ycyuEXj3UeYgor9D89T90m+1BaIuO1/7azMOheNVX1L9mOJHQAX/9Z0dN
+ L1MOYl582ZFhYfHkU0FKtFHefvjnhIhZ7u/85R+TMQcWH13VGLDy51Fidf5ehJ2SKBmUdC
+ z4BgsEaOenS+sr0jc9Vwa6RYnQZCj3B33oMxmnpQcYTKpX3dCamkbPzjMo58FwUq/LIRK9
+ r9se3St9QL7AKRSzT2mSU9eNLGSars+Tj9YhWBsuelgnE4MeMxRn5/C49bPy7YU4TNyiCO
+ cF4BFlisudYX6/dxTOPFjk+3DxHF5FgyVu1+5iYmjX22KgVjaQ1chxRFThF+gQ==
+From: Alexey Minnekhanov <alexeymin@postmarketos.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Alexey Minnekhanov <alexeymin@postmarketos.org>
+Subject: [PATCH] drivers: pinctrl: Add Qualcomm SDM630/660 TLMM driver
+Date: Tue, 25 Mar 2025 11:18:08 +0300
+Message-ID: <20250325081808.2421857-1-alexeymin@postmarketos.org>
 MIME-Version: 1.0
-Message-ID: <1742889603533.7.1744@webmail-backend-production-5f8dbfcff-mztks>
-To: <u-boot@lists.denx.de>
-From: "Oskar Nilsson" <onilsson@rums.se>
-Subject: block devices on MTD and UBI
+Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 X-Mailman-Approved-At: Tue, 25 Mar 2025 15:56:16 +0100
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,178 +63,287 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: onilsson@rums.se
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
->On 20-03-2025 17:03, Mike Looijmans wrote:
->> On 19-03-2025 15:06, Heiko Schocher wrote:
->>> Hello Mike,
->>>
->>> On 18.03.25 10:04, Mike Looijmans wrote:
->>>> I think I have everything set up to access MTD (and UBI) devices as
->>>> "block", however, lsblk always ignores them, and refuses to list
->>>> anything but the mmc. I can read ubifs and boot from it though, and
->>>> since UBI runs on top of MTD block devices, MTD block device should
->>>> be working, right?
->>>
->>> Yes. I must admit, I have no device on which I have such a setup...
->>>
->>> added Alexey (who introduced ubi block support), may he can give some
->>> hints.
->>>
->>>> I also have UBI_BLOCK enabled, so I would expect UBI volumes to
->>>> appear in the "lsblk" as well.
->>>
->>> good, that would have been my first question, if you have enabled
->>> "UBI_BLOCK"
->>>
->>>> Example U-boot session:
->>>>
->>>> Zynq> mtd list
->>>> SF: Detected n25q256ax1 with page size 256 Bytes, erase size 64 KiB,
->>>> total 32 MiB
->>>> List of MTD devices:
->>>> * nor0
->>>> - device: flash at 0
->>>> - parent: spi at e000d000
->>>> - driver: jedec_spi_nor
->>>> - path: /axi/spi at e000d000/flash at 0
->>>> - type: NOR flash
->>>> - block size: 0x10000 bytes
->>>> - min I/O: 0x1 bytes
->>>> - 0x000000000000-0x000002000000 : "nor0"
->>>> - 0x000000000000-0x000000100000 : "qspi-boot-bin"
->>>> - 0x000000100000-0x000002000000 : "qspi-rootfs"
->>>
->>> Aha, SPI NOR. I fear this is not supported yet.
->>>
->>> Do you have somehow called ubi_part() ?
->>>
->>> Can you try "ubi part...." and look if this helps?
->>
->> See below I guess...
->>
->>> It seems to me, that you have to implement this like it is done for
->>> spi nand:
->>>
->>> drivers/mtd/nand/spi/core.c
->>> 1180 static int spinand_bind(struct udevice *dev)
->>> 1181 {
->>> 1182 if (blk_enabled()) {
->>> 1183 struct spinand_plat *plat =3D dev_get_plat(dev);
->>> 1184 int ret;
->>> 1185
->>> 1186 if (CONFIG_IS_ENABLED(MTD_BLOCK)) {
->>> 1187 ret =3D mtd_bind(dev, &plat->mtd);
->>> 1188 if (ret)
->>> 1189 return ret;
->>> 1190 }
->>> 1191
->>> 1192 if (CONFIG_IS_ENABLED(UBI_BLOCK))
->>> 1193 return ubi_bind(dev);
->>> 1194 }
->>> 1195
->>> 1196 return 0;
->>> 1197 }
->>>
->> I guess that shouldn't be to hard to implement... I'll send a patch if
->> that fixes the MTD missing...
->
->Not as simple as one would think. The spi flash struct has its own "mtd"
->member which isn't a pointer but was already filled in. So I cannot
->simply call mtd_bind().
->
->I tried calling ubi_bind anyway, which had some effect:
->
->Zynq> lsblk
->Block Driver Devices
->-----------------------------
->efi_blk : <none>
->mmc_blk : mmc 0
->mtd_blk : <none>
->ubi_blk : mtd 0
->usb_storage_blk : <none>
->
->But that didn't get me any further. I'm quite puzzled by UBI block
->support...
->
+Add support for TLMM pin controller block (Top Level Mode
+Multiplexer) on SDM630/660 SoCs, with support for special pins.
 
-I have been looking at the same issue, but haven't made much progress eithe=
-r.
+Correct pin configuration is required for working debug UART
+and eMMC/SD cards.
 
-From my understanding, when enabling UBI_BLOCK the .bind function will add =
-a
-block device on top of the UBI device. It should then be usable by commands=
+SDM630 and SDM660 TLMM blocks are the same.
 
-that expect a blk device like sqfsls.
+Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+---
+ drivers/pinctrl/qcom/Kconfig          |   7 +
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sdm660.c | 224 ++++++++++++++++++++++++++
+ 3 files changed, 232 insertions(+)
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sdm660.c
 
-Note that I'm on u-boot-imx 2024.04 and have back ported the ubi and mtd bl=
-ock
-patches, so there may be differences to latest.
-
-Looking at the driver model, a .blk has been added:
-=3D> dm tree
-Class Index Probed Driver Name
------------------------------------------------------------
-root 0 [ + ] root_driver root_driver
-thermal 0 [ ] imx_thermal |-- imx_thermal
-simple_bus 0 [ + ] simple_bus |-- soc
-mtd 0 [ + ] mxs-nand-dt | |-- nand-controller@1806000
-blk 0 [ ] ubi_blk | | `-- <nand-controller@1806000.blk>
-...
-
-Calling sqfsls, seems to find the right volume (rootfs0):
-=3D> sqfsls mtd 0 /
-FS: Setting up block device: ifname=3D'mtd', dev_part_str=3D'0', fstype=3D6=
-
-Read 512 bytes from volume rootfs0 to 9ef2cb80
-Disk <nand-controller@1806000.blk> not ready
-** Bad device specification mtd 0 **
-Couldn't find partition mtd 0
-FS: Failed to get partition info (err=3D-19)
-
-Interestingly after each command that uses a blk device, I get 128 blk_part=
-itions
-=3D> dm tree
-Class Index Probed Driver Name
------------------------------------------------------------
-root 0 [ + ] root_driver root_driver
-thermal 0 [ ] imx_thermal |-- imx_thermal
-simple_bus 0 [ + ] simple_bus |-- soc
-mtd 0 [ + ] mxs-nand-dt | |-- nand-controller@1806000
-blk 0 [ ] ubi_blk | | `-- <nand-controller@1806000.blk>
-partition 0 [ ] blk_partition | | |-- <nand-controller@1806000.blk>:1
-partition 1 [ ] blk_partition | | |-- <nand-controller@1806000.blk>:2
-partition 2 [ ] blk_partition | | |-- <nand-controller@1806000.blk>:3
-partition 3 [ ] blk_partition | | |-- <nand-controller@1806000.blk>:4
-partition 4 [ ] blk_partition | | |-- <nand-controller@1806000.blk>:5
-...
-
-At first I also got the error "UBIFS not mounted, use ubifsmount to mount v=
-olume first!"
-To fix that I added this small patch:
-
-diff --git a/disk/part.c b/disk/part.c
-index 8982ef3bae..f168311e9a 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -524,7 +524,7 @@ int blk_get_device_part_str(const char *ifname, const c=
-har *dev_part_str,
-}
-#endif
-
--#if IS_ENABLED(CONFIG_CMD_UBIFS) && !IS_ENABLED(CONFIG_SPL_BUILD)
-+#if IS_ENABLED(CONFIG_CMD_UBIFS) && !IS_ENABLED(CONFIG_SPL_BUILD) && !IS_E=
-NABLED(CONFIG_UBI_BLOCK)
-/*
-* Special-case ubi, ubi goes through a mtd, rather than through
-* a regular block device.
-
-
-Reagrds,
-Oskar Nilsson
-
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index d3eb6998551..29105301c74 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -41,6 +41,13 @@ config PINCTRL_QCOM_QCS404
+ 	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
+ 	  as well as the associated GPIO driver.
+ 
++config PINCTRL_QCOM_SDM660
++	bool "Qualcomm SDM630/660 Pinctrl"
++	select PINCTRL_QCOM
++	help
++	  Say Y here to enable support for pinctrl on the Snapdragon 630/636/660
++	  SoCs, as well as the associated GPIO driver.
++
+ config PINCTRL_QCOM_SDM845
+ 	bool "Qualcomm SDM845 GCC"
+ 	select PINCTRL_QCOM
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index 06d3c95f93a..c814e9dec0b 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
++obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
+ obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+ obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+ obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-sdm660.c b/drivers/pinctrl/qcom/pinctrl-sdm660.c
+new file mode 100644
+index 00000000000..c31c1f0b637
+--- /dev/null
++++ b/drivers/pinctrl/qcom/pinctrl-sdm660.c
+@@ -0,0 +1,224 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Qualcomm SDM630/660 TLMM pinctrl
++ *
++ */
++
++#include <dm.h>
++#include "pinctrl-qcom.h"
++
++#define TLMM_BASE  0x03100000
++#define SOUTH  (0x03100000 - TLMM_BASE)  /* 0x0 */
++#define CENTER (0x03500000 - TLMM_BASE)  /* 0x400000 */
++#define NORTH  (0x03900000 - TLMM_BASE)  /* 0x800000 */
++
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++
++static const struct pinctrl_function sdm660_pinctrl_functions[] = {
++	{ "gpio", 0 },
++	{ "blsp_uart2", 3 }, /* gpio 4 and 5, used for debug uart */
++};
++
++static const unsigned int sdm660_pin_offsets[] = {
++	[0] = SOUTH,
++	[1] = SOUTH,
++	[2] = SOUTH,
++	[3] = SOUTH,
++	[4] = NORTH,
++	[5] = SOUTH,
++	[6] = SOUTH,
++	[7] = SOUTH,
++	[8] = NORTH,
++	[9] = NORTH,
++	[10] = NORTH,
++	[11] = NORTH,
++	[12] = NORTH,
++	[13] = NORTH,
++	[14] = NORTH,
++	[15] = NORTH,
++	[16] = CENTER,
++	[17] = CENTER,
++	[18] = CENTER,
++	[19] = CENTER,
++	[20] = SOUTH,
++	[21] = SOUTH,
++	[22] = CENTER,
++	[23] = CENTER,
++	[24] = NORTH,
++	[25] = NORTH,
++	[26] = NORTH,
++	[27] = NORTH,
++	[28] = CENTER,
++	[29] = CENTER,
++	[30] = CENTER,
++	[31] = CENTER,
++	[32] = SOUTH,
++	[33] = SOUTH,
++	[34] = SOUTH,
++	[35] = SOUTH,
++	[36] = SOUTH,
++	[37] = SOUTH,
++	[38] = SOUTH,
++	[39] = SOUTH,
++	[40] = SOUTH,
++	[41] = SOUTH,
++	[42] = SOUTH,
++	[43] = SOUTH,
++	[44] = SOUTH,
++	[45] = SOUTH,
++	[46] = SOUTH,
++	[47] = SOUTH,
++	[48] = SOUTH,
++	[49] = SOUTH,
++	[50] = SOUTH,
++	[51] = SOUTH,
++	[52] = SOUTH,
++	[53] = NORTH,
++	[54] = NORTH,
++	[55] = SOUTH,
++	[56] = SOUTH,
++	[57] = SOUTH,
++	[58] = SOUTH,
++	[59] = NORTH,
++	[60] = NORTH,
++	[61] = NORTH,
++	[62] = NORTH,
++	[63] = NORTH,
++	[64] = SOUTH,
++	[65] = SOUTH,
++	[66] = NORTH,
++	[67] = NORTH,
++	[68] = NORTH,
++	[69] = NORTH,
++	[70] = NORTH,
++	[71] = NORTH,
++	[72] = NORTH,
++	[73] = NORTH,
++	[74] = NORTH,
++	[75] = NORTH,
++	[76] = NORTH,
++	[77] = NORTH,
++	[78] = NORTH,
++	[79] = SOUTH,
++	[80] = SOUTH,
++	[81] = CENTER,
++	[82] = CENTER,
++	[83] = SOUTH,
++	[84] = SOUTH,
++	[85] = SOUTH,
++	[86] = SOUTH,
++	[87] = SOUTH,
++	[88] = SOUTH,
++	[89] = SOUTH,
++	[90] = SOUTH,
++	[91] = SOUTH,
++	[92] = SOUTH,
++	[93] = SOUTH,
++	[94] = SOUTH,
++	[95] = SOUTH,
++	[96] = SOUTH,
++	[97] = SOUTH,
++	[98] = SOUTH,
++	[99] = SOUTH,
++	[100] = SOUTH,
++	[101] = SOUTH,
++	[102] = SOUTH,
++	[103] = SOUTH,
++	[104] = SOUTH,
++	[105] = SOUTH,
++	[106] = SOUTH,
++	[107] = SOUTH,
++	[108] = SOUTH,
++	[109] = SOUTH,
++	[110] = SOUTH,
++	[111] = SOUTH,
++	[112] = SOUTH,
++	[113] = SOUTH,
++};
++
++/*
++ * Special pins - eMMC/SD related: [114..120], in total 7 special pins
++ */
++
++#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
++	{						\
++		.name = pg_name,			\
++		.ctl_reg = ctl,				\
++		.io_reg = 0,				\
++		.pull_bit = pull,			\
++		.drv_bit = drv,				\
++		.oe_bit = -1,				\
++		.in_bit = -1,				\
++		.out_bit = -1,				\
++	}
++
++/* All SDC pins are in the NORTH tile */
++static const struct msm_special_pin_data sdm660_special_pins_data[] = {
++	SDC_QDSD_PINGROUP("sdc1_clk",  NORTH + 0x9a000, 13, 6),
++	SDC_QDSD_PINGROUP("sdc1_cmd",  NORTH + 0x9a000, 11, 3),
++	SDC_QDSD_PINGROUP("sdc1_data", NORTH + 0x9a000, 9,  0),
++	SDC_QDSD_PINGROUP("sdc2_clk",  NORTH + 0x9b000, 14, 6),
++	SDC_QDSD_PINGROUP("sdc2_cmd",  NORTH + 0x9b000, 11, 3),
++	SDC_QDSD_PINGROUP("sdc2_data", NORTH + 0x9b000, 9,  0),
++	SDC_QDSD_PINGROUP("sdc1_rclk", NORTH + 0x9a000, 15, 0),
++};
++
++static const char *sdm660_get_function_name(struct udevice *dev, unsigned int selector)
++{
++	return sdm660_pinctrl_functions[selector].name;
++}
++
++static const char *sdm660_get_pin_name(struct udevice *dev, unsigned int selector)
++{
++	static const char * const special_pins_names[] = {
++		"sdc1_clk", "sdc1_cmd", "sdc1_data",
++		"sdc2_clk", "sdc2_cmd", "sdc2_data",
++		"sdc1_rclk"
++	};
++
++	if (selector >= 114 && selector <= 120)
++		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 114]);
++	else
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++
++	return pin_name;
++}
++
++static unsigned int sdm660_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
++{
++	return sdm660_pinctrl_functions[selector].val;
++}
++
++struct msm_pinctrl_data sdm660_data = {
++	.pin_data = {
++		.pin_offsets = sdm660_pin_offsets,
++		.pin_count = ARRAY_SIZE(sdm660_pin_offsets) + ARRAY_SIZE(sdm660_special_pins_data),
++		.special_pins_start = 114,
++		.special_pins_data = sdm660_special_pins_data,
++	},
++	.functions_count = ARRAY_SIZE(sdm660_pinctrl_functions),
++	.get_function_name = sdm660_get_function_name,
++	.get_function_mux = sdm660_get_function_mux,
++	.get_pin_name = sdm660_get_pin_name,
++};
++
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{
++		.compatible = "qcom,sdm630-pinctrl",
++		.data = (ulong)&sdm660_data
++	},
++	{
++		.compatible = "qcom,sdm660-pinctrl",
++		.data = (ulong)&sdm660_data
++	},
++	{ /* Sentinel */ }
++};
++
++U_BOOT_DRIVER(pinctrl_ssdm660) = {
++	.name = "pinctrl_sdm660",
++	.id = UCLASS_NOP,
++	.of_match = msm_pinctrl_ids,
++	.ops = &msm_pinctrl_ops,
++	.bind = msm_pinctrl_bind,
++};
+-- 
+2.48.1
 
