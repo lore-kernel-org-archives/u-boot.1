@@ -4,91 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A9DC36008
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 22:00:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61528C36005
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 22:45:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BABD8192A;
-	Tue, 25 Mar 2025 23:00:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C7BE8192A;
+	Tue, 25 Mar 2025 23:45:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ewQQRLQu";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZlWAx+4o";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="C3W7NbMy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F9B381951; Tue, 25 Mar 2025 23:00:16 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3BE5981D27; Tue, 25 Mar 2025 23:44:59 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 569BD8186D
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 23:00:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95CD98186D
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 23:44:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-54afb5fcebaso301603e87.3
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 15:00:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742940014; x=1743544814; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rmewDLTBA2bhpxkRC+JrVj0aQUGe0XClBmSTxdkpvTM=;
- b=ewQQRLQuagnRk94hILAtK+xjC1/oHSO04UX71pDyfIQ4quLzMhz0QqpXDFs304R/fV
- CZ/49KiwMAmcwUw1T1vwp5TLD/ouG1IR0R6MfgSzZ0ZSAFCMEZ3M3TYE/XA1KFPr/Qa+
- S7EV3tHbqJuKoGpBSNkAORX9z6vlYzH0Z6VeGfvJ2/nQwhq33/7AFtIxg2zFJ9+sFaqe
- tbok/SaNlAMfBSgTutd7xa0y+i0kRF5lck852m9kQYO4YFVby36589/h+VtTE9Vw34Yf
- KGHcUsa1hbCDvov1bqjRSCPdruc6br/G6/EPqC3TLFf9MQS1n1b86OmMtj6MhdZ7qGJL
- ocvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742940014; x=1743544814;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rmewDLTBA2bhpxkRC+JrVj0aQUGe0XClBmSTxdkpvTM=;
- b=JHn81I3CSrapKO00iv5STQTJFPzfIteeQvamLof+ISOnm/WjNCimINdO7uSWkBdiyp
- F4tKTDzr67GX1XRlhRx1HHSHOSydTSQshkpgnU712S4JNSZCGKcuXvoIDoxZAJDnoao6
- Z/dO+FeDZxmM1ua0mJMWfp793sUh2x6tsjua87m4ZL9dWu6pE4GpH8PsDX1oRdJ8NTDg
- ATg58JEq+KFdz0r+6JM+mXuoPUvRfdp1tAyw4kOFymLTXPVo11wpnVWzQ1WdpqcGUoRW
- KOgnKDBoNAHO+LyZi0+hBop2FwRX55LOgyM4MaXlDtLSbyw9BKdlOayCow/Oa8Jkvm7h
- 699Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWz9hulg4iGRoAZQ+SRSK/q37hqtRq1oRJI3pokChYNcJCD4PMUB9vvVFE8Pt801g6aCB7EpB4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEDCCvFu9OUdys4YylV6WSRczfrIsIqlsg8rxue1o4X13sRf8U
- laDkQIlZm4BMsM8xXmBaCixJ9O8HMaUNNKmhYR2LC/rXphdool+DAMlDb0/IlCMT8wNErenmBx0
- ODLaYDuD7IVPbGVzG1zrZjp0pOcI=
-X-Gm-Gg: ASbGncvuOja1S/Xl8PjSkaUEGWRhHA7koTKsK1a3Rv+Am6qApRjfgP4u/Qdt12vHk+T
- 4pxqYkvbM8BnBjQqUJhYlh8vYTAtXr0yY3S+oKBMA6xfER299QoGOUFjg0gZtgv+jO3IlfkpOGi
- X14iWRjD4ROea8NRnbPQdQdJt7ENEDIc+ghiozDNLG1s5F2LsR5cZIcKjW0w==
-X-Google-Smtp-Source: AGHT+IHK4Oj5lwpJXxLMxJJkNQCmZfXMBa7CKiZ3C5kk+feZ37amus5yqsZ0YBmRxbVdaFVBHr8AvfUTsC2BoHTU/5Q=
-X-Received: by 2002:a05:6512:3d23:b0:540:2da2:f282 with SMTP id
- 2adb3069b0e04-54ad64f4ef6mr5966615e87.42.1742940013307; Tue, 25 Mar 2025
- 15:00:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ZMlNm1DDcz9tHg;
+ Tue, 25 Mar 2025 23:44:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1742942696;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LM7got+xDhfgYRBJnCJ6efVHCf078DZt5Hb4zxm9u90=;
+ b=ZlWAx+4okWKQIbZQ8kMV0NMwWE69/lYXuppCKtObBbOvEPUpYbLdGEdpbhVA/zVaRfJt/j
+ uhuUwoiePI+maXcJ+VjZZP4VCwLvSF6i6LQwVZA31bQe7Y6FH+LDxF7pz2eKRPQjQdDIis
+ BiqDTmyTpO04Nip3gJ8FigRL/seeWDEpvYIWBtgNMZ3DPQX6RUxqC+qw5BMw2jjhvCOMyr
+ 7rfOjJ9E0L3RMtzb375nLQ49jw5Bus/RljMW93uFgdwRQXEdIcfjLRmcX+WxAjiGCcog4F
+ 5COx7AoMBiTdQ3qjRlN2p6mhFpSYhM1xOiYuyNq11CIC6OobACnTbBxNllJGaw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1742942694;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LM7got+xDhfgYRBJnCJ6efVHCf078DZt5Hb4zxm9u90=;
+ b=C3W7NbMybaBuoT+O4wST7jV794XSIcAabRmAD2OBXUW93BPSiZgpWs2LUzllZUOfatK1TW
+ R6jAWHaGpVsJkM9GahYVqDAQULtcnQ9u5Pp3Sff2uLEVYoiYCc47gvViimw5E+3inYbZdL
+ SY4ugCBZznc+wuEV4BxiJeT7oMEkIZeFdJsOiVDON9CbLq36QSgrdR1haq8KTlG5vajyjy
+ ceA1fRlC3Myt0XM1GIsMEk98wuTIprFy7KRrbv3k1hhiPRQ4E7u7J+YpGhRqSKEPKH3pKY
+ 3S6mPuD7g02UUS89h/4Pd73p4XlmyxJ6UFu8B33v+8TZdN8YsiJKCAgCU2s9TA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/5] ram: renesas: dbsc5: Clarify MR27/MR28/MR57 register
+ operations
+Date: Tue, 25 Mar 2025 23:43:29 +0100
+Message-ID: <20250325224433.39090-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20250325025452.950303-1-aford173@gmail.com>
- <20250325025452.950303-5-aford173@gmail.com>
- <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
- <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
- <CAHCN7xJoJYmZCG7e+zv3cJc8B460kqWpz8v-KibsVsHJzbpjUA@mail.gmail.com>
-In-Reply-To: <CAHCN7xJoJYmZCG7e+zv3cJc8B460kqWpz8v-KibsVsHJzbpjUA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 25 Mar 2025 19:00:01 -0300
-X-Gm-Features: AQ5f1Jr3_hDKymtFtBEuEng_uLm3GuDhOoQd0p0JjAObzYvM6kVXj1keJ0alLQI
-Message-ID: <CAOMZO5DxKOF4qD7zknYxz=UihHSQrH=OBX3ZqUO6-vsdZoNGmQ@mail.gmail.com>
-Subject: Re: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
-To: Adam Ford <aford173@gmail.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- aford@beaconembedded.com, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Heiko Schocher <hs@denx.de>, 
- Enrico Leto <enrico.leto@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
- Yannic Moog <y.moog@phytec.de>, Gilles Talis <gilles.talis@gmail.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>, 
- Christoph Stoidner <c.stoidner@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: stmf3x91mabm9cppq86m4ydtpejb8e6o
+X-MBO-RS-ID: ede37d9bc839db7c1d6
+X-Rspamd-Queue-Id: 4ZMlNm1DDcz9tHg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,16 +85,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adam,
+Rename dbsc5_ddr_register_read() to dbsc5_ddr_register_mr27_mr57_read()
+and dbsc5_ddr_register_set() to dbsc5_ddr_register_mr28_set() to make
+it clear what those functions really do. No functional change.
 
-On Tue, Mar 25, 2025 at 9:37=E2=80=AFAM Adam Ford <aford173@gmail.com> wrot=
-e:
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/ram/renesas/dbsc5/dram.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-> Once this is complete, I'll have a smaller patch series which shrinks
-> my 8MP SPL code by around 4k by #ifdef'ing out dead code.  Hopefully
-> it's not too cluttered, but that smaller series depends on both the
-> UART clock and the CPU_IMX updates.
+diff --git a/drivers/ram/renesas/dbsc5/dram.c b/drivers/ram/renesas/dbsc5/dram.c
+index 6f78afb0ab5..e0c4e5fe6c0 100644
+--- a/drivers/ram/renesas/dbsc5/dram.c
++++ b/drivers/ram/renesas/dbsc5/dram.c
+@@ -4085,25 +4085,25 @@ static u32 dbsc5_read_training(struct udevice *dev)
+ }
+ 
+ /**
+- * dbsc5_ddr_register_set() - DDR mode register setting
++ * dbsc5_ddr_register_mr28_set() - DDR mode register MR28 set
+  * @dev: DBSC5 device
+  *
+  * Set the mode register 28 of the SDRAM.
+  * ZQ Mode: Command-Based ZQ Calibration
+  * ZQ interval: Background Cal Interval < 64ms
+  */
+-static void dbsc5_ddr_register_set(struct udevice *dev)
++static void dbsc5_ddr_register_mr28_set(struct udevice *dev)
+ {
+ 	dbsc5_send_dbcmd2(dev, 0xE841C24);
+ }
+ 
+ /**
+- * dbsc5_ddr_register_read() - DDR mode register read
++ * dbsc5_ddr_register_mr27_mr57_read() - DDR mode register MR27/MR57 read
+  * @dev: DBSC5 device
+  *
+  * Set the mode register 27 and 57 of the SDRAM.
+  */
+-static void dbsc5_ddr_register_read(struct udevice *dev)
++static void dbsc5_ddr_register_mr27_mr57_read(struct udevice *dev)
+ {
+ 	struct renesas_dbsc5_dram_priv *priv = dev_get_priv(dev);
+ 
+@@ -4278,10 +4278,10 @@ static u32 dbsc5_init_ddr(struct udevice *dev)
+ 
+ 	/* setup DDR mode registers */
+ 	/* MRS */
+-	dbsc5_ddr_register_set(dev);
++	dbsc5_ddr_register_mr28_set(dev);
+ 
+ 	/* MRR */
+-	dbsc5_ddr_register_read(dev);
++	dbsc5_ddr_register_mr27_mr57_read(dev);
+ 
+ 	/* training complete, setup DBSC */
+ 	dbsc5_dbsc_regset_post(dev);
+-- 
+2.47.2
 
-The two series are present in the next branch now.
-
-Feel free to post the additional improvements.
