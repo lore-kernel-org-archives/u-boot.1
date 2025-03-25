@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B372C35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 07:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D5DC36008
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 07:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCEFE80EEF;
-	Tue, 25 Mar 2025 08:27:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41A5580EEF;
+	Tue, 25 Mar 2025 08:28:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Js3h1MOr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xW5gOtwg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73C7580F70; Tue, 25 Mar 2025 08:27:56 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 71A0E80F70; Tue, 25 Mar 2025 08:28:29 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78E90808B6
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 08:27:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A416808B6
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 08:28:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43cf05f0c3eso33523195e9.0
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 00:27:54 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-39129fc51f8so4247799f8f.0
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 00:28:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742887674; x=1743492474; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742887707; x=1743492507; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=3mz4KMNbIlrCK46OQBgl6XPyZTFJTIQP8ZcmFbmRNrA=;
- b=Js3h1MOrOoSrjAUFMlJiTL9r3L8MPAdFPHiJYAHTi/nwhyUmVzg2myf7C9/M36XUiK
- zBK+j2+miNwN8zckBXJqRB6JLa8t7rnI93+hC01wGyy56uKaN0s8zWrHaHsaToKmN3od
- cWzMTrjDdEKPjGXhK4M2Yu6d38VF6bUbb0nNnhizSgH48Vx0rvi1pOEwZIV+3Ia2pGa1
- U6gzmYw9hvckUNGhaSo1MvcBcsH2SlddTUH8pBy2XfK5nhmOrTzEwvQXvUH6I1d7sxyI
- cLbOriUVZcFsY3bRsiheQ7lm0CNwekc9rVfowEmUCmfN6wJdbunZH8WCmgENOWiIFvOj
- LcEA==
+ :reply-to; bh=OIXnPgIIdC8OybT9ohPr1ryumELYJnDq3mp9gwDcCyM=;
+ b=xW5gOtwguexyTMXeY2QcbzUFUqULtcAORkm4ComrdZ0HNa1WNf8ikpRfymNdMTHDkE
+ lIXg0sdL5vEdBS3anfpvTCBEEz+GLpmXeG4VTSRcPmRcP1Wb4mVTz8oJqiEp8TtjIlIv
+ 6lKOLJwW+ywpdZeb7/89f6X20jd3IhgWUmbNaytT2qxmLjpTzTA37ytpZE/4l54A7Fuj
+ ayiOYy6kQbgz38YWiTR1cKu7lk77c9YHWLWBL19Np9W6Cdgu4JP7dhHF5QoktB/+ytcw
+ 0pDGjd9JEzqNJJMnA13Tz4AKaODlx3MUbiuvH1voWicJCmDu3hqWN3bciKhH0pd/I2FC
+ D3wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742887674; x=1743492474;
+ d=1e100.net; s=20230601; t=1742887707; x=1743492507;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=3mz4KMNbIlrCK46OQBgl6XPyZTFJTIQP8ZcmFbmRNrA=;
- b=gFROObrddqozaqKOAECREKSgWcAqVXqcPxkFa3ktnZkMFuuygKxX70nLRdRdTh1lf3
- BRc23wg+qb0+kgGQi+75SpoHm7Sm443tKbA08848Hjyx7FCKQywNIelfhSrI6EUAHUke
- VA3SEp5GFyPqr+pmaR9PHKVs/9kEpUaLYqmCpv/ZEz9kZUnWomSV1VWDWWbLBUiBmLe3
- gfSn2euScKl2MIJxHVBVVgEvAuEo/BszYxYLHbNhOqXpbi5ObLox/SYPHrbu4t8DNjuh
- 27szwS56ZK5XlTPStZNdQgqgZJVpaZBu2MWVK0bkOG46/r8wdG6QbK3ta/ovBBrcv5xO
- ZRjA==
-X-Gm-Message-State: AOJu0YwICqcR2lVo0jx9PD5Z3YEHYAhTvetscGhCWREifS2Af1dN5C2F
- sPCiekeedqDanIm9lgm3XWLl02u4LyOepmq1nvrwdrgBSXVKNiCYWQF275gXMNo=
-X-Gm-Gg: ASbGnctpnFB+epPZOpZYoSYmK/DTwkcMTzlj4brEwPAqudMFkN/fgIhzv2j6yDbs4Ji
- thEFSPA9+82LGD2QHhA4LpgRiML1thxGYy/fyAutVoQWcJPGZX2iTJ1OgbZaeqqK5gaF9Wl8CE7
- 8qrBgzycac7p6X7ti9wXvqDiD6ZAnIkclNMTyUAbH2EXGBO7/H0VpCUUl179bmBG8veT/Ykqj8E
- a7eP7Q6WgH2B6Si5o+31MFMHdXRlaMDJbKQBZrQDpEQWuLZKMuqrrPZFTSSJ3SGTPqj4nLprFsC
- ij1Bzht8Ycls2A9XUlJC/oWY+5Ccr+5y+oaq4FCpstwtb0ehbyXgdBbnrxRVx7QIm/vjLIhc0er
- I5sTf42S5q2j+QRSm
-X-Google-Smtp-Source: AGHT+IGSPR5zpDex40CzHRun1+xGrVvsTodXzb+Xtb0pwXTLTzpz7U1ZSDoAbT3Af1ZHinMFuQjknw==
-X-Received: by 2002:a5d:64cc:0:b0:390:f0ff:2bf8 with SMTP id
- ffacd0b85a97d-3997f8f6555mr15136129f8f.10.1742887673911; 
- Tue, 25 Mar 2025 00:27:53 -0700 (PDT)
+ bh=OIXnPgIIdC8OybT9ohPr1ryumELYJnDq3mp9gwDcCyM=;
+ b=oAD5vNw9NuUfas4K0bCfocoTcBQQV1ciGN6UyIDkqZsXQ6+kljeCLmkCbomu+bwQYl
+ xQuhUwVoDbXEPW1ugxjtZpnd012Bf8Gh/dSQ/Q86JSQgGtfHxpp1PdfZhFADUhA4Y4ge
+ kICMddmWrUKQIu6sE5bduNdE9ThPWdzGWy7blrNjPJTsYe2I2dySw4YdJEY2qcDfiCtQ
+ WGbc4NNaUWMnQk8s09ooPGP3lTLndsNvIH7cFQAxhURt5+DZh7upQD7u6hB9Cnl5Hh1K
+ PrL23xYd2y6Q0f4ZeGwozKYbeRpTwVtcFqOJ0hr+jrg7SEWRyHl6Z1sdcUR2v5YCP3O2
+ T6Xg==
+X-Gm-Message-State: AOJu0YyWIS9N+UBwQsUj9RB2xqX31mHrfYVvjj41wGXOglJ8Num0sPZ4
+ kuF7EbBqujakLyzHFfKcf+kH6yeUrXjtw/Zz60OMCnLr7MIEQvYlRWQO9J+L4gE=
+X-Gm-Gg: ASbGnct03uNXyFeqlqPRkHc2LW3qwFu+PTYKj/HdJ980Elqkjm1TWnmM0pQ3ccSQ2ep
+ V1TIvmGHZ13InIjBRW42qRze5wNDC+3xzJlaQ42CS8sQc2mtEw7Q2jZMs8h1YaSoLZYris4tPIo
+ V2Htg0fRNOEgrbntyUfyN1bRXyWjXJPgcIL1kIuOMg28yONNVlT5gVKLhx8c/9AgeTLHXU8lr2T
+ 2qqguBDmKYbu//8hKjJdznTt7/BaGZaE2IX5DiNyGJI3txnJIK9qTXAueM3+qnqoNEGT+/M6UxZ
+ W4BB18c49ZNiLBuuSyxoByzV19LfT2Yn4HLSGNaKnl7KszI5boVvK6VoHDvzhIzm6RCawR7jJlY
+ oLACQGLbeq89Kg8mF
+X-Google-Smtp-Source: AGHT+IHkwuRQCdyUfgXlSHY5A6zcfQacrcuEDzBaTd44UuFlcMgZIETSZJ3/n9XUOi8e4gohyczLcw==
+X-Received: by 2002:a05:6000:178c:b0:391:47f2:8d90 with SMTP id
+ ffacd0b85a97d-3997f9017e3mr12756791f8f.20.1742887706891; 
+ Tue, 25 Mar 2025 00:28:26 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:7a:6952:5850:1802?
  ([2a01:e0a:3d9:2080:7a:6952:5850:1802])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9efc9bsm12715651f8f.87.2025.03.25.00.27.53
+ ffacd0b85a97d-3997f9b3ff7sm12760513f8f.48.2025.03.25.00.28.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Mar 2025 00:27:53 -0700 (PDT)
-Message-ID: <ec187f34-d409-42c0-866d-91d405a46fe1@linaro.org>
-Date: Tue, 25 Mar 2025 08:27:53 +0100
+ Tue, 25 Mar 2025 00:28:26 -0700 (PDT)
+Message-ID: <a68f36e8-a875-485e-a9e2-e9495e7012ff@linaro.org>
+Date: Tue, 25 Mar 2025 08:28:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/4] clk/stub: add sdm845 rpmh clock
+Subject: Re: [PATCH 4/4] qcom_defconfig: enable fastboot
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
@@ -85,7 +85,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250324-sdm845-fixes-fastboot-v1-0-d177a10f336d@linaro.org>
- <20250324-sdm845-fixes-fastboot-v1-1-d177a10f336d@linaro.org>
+ <20250324-sdm845-fixes-fastboot-v1-4-d177a10f336d@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250324-sdm845-fixes-fastboot-v1-1-d177a10f336d@linaro.org>
+In-Reply-To: <20250324-sdm845-fixes-fastboot-v1-4-d177a10f336d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,27 +133,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 24/03/2025 19:17, Caleb Connolly wrote:
-> Necessary for UFS to successfully probe all clocks.
+> Enable fastboot support over USB, using MMC as the backend. This will be
+> the internal eMMC on devices that have it, or the sdcard slot on devices
+> with UFS (if available).
+> 
+> We don't use a fixed address for the fastboot buffer because it's
+> allocated at runtime per-board. Entering fastboot mode should be done by
+> executing "run fastboot" or manually running:
+> 
+> fastboot -l $fastboot_addr_r usb 0
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/clk/clk-stub.c | 1 +
->   1 file changed, 1 insertion(+)
+>   configs/qcom_defconfig | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-> index 343fa5cd3fe1704c6bb15a8c9852b9b4e4990351..521ecfc5917b45f8ffaf2f25aabcc5abb4863cea 100644
-> --- a/drivers/clk/clk-stub.c
-> +++ b/drivers/clk/clk-stub.c
-> @@ -49,8 +49,9 @@ static struct clk_ops stub_clk_ops = {
->   };
->   
->   static const struct udevice_id stub_clk_ids[] = {
->   	{ .compatible = "qcom,rpmcc" },
-> +	{ .compatible = "qcom,sdm845-rpmh-clk" },
->   	{ .compatible = "qcom,sc7280-rpmh-clk" },
->   	{ .compatible = "qcom,sm8150-rpmh-clk" },
->   	{ .compatible = "qcom,sm8250-rpmh-clk" },
->   	{ .compatible = "qcom,sm8550-rpmh-clk" },
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index ba4d38d100e053e3708ee2623bf3530787b6b94f..f5c005d9c4093e4902b05213ab2f54c8ca70208a 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -61,8 +61,13 @@ CONFIG_CLK_QCOM_SC7280=y
+>   CONFIG_CLK_QCOM_X1E80100=y
+>   CONFIG_DFU_MMC=y
+>   CONFIG_DFU_SCSI=y
+>   CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
+> +CONFIG_USB_FUNCTION_FASTBOOT=y
+> +CONFIG_FASTBOOT_BUF_ADDR=0x0
+> +CONFIG_FASTBOOT_FLASH=y
+> +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> +CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
+>   CONFIG_MSM_GPIO=y
+>   CONFIG_QCOM_PMIC_GPIO=y
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_QUP=y
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
