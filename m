@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87AB1C36002
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 02:55:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EB2C36005
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 02:55:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ABF381D4F;
-	Tue, 25 Mar 2025 03:55:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 278BE81B4B;
+	Tue, 25 Mar 2025 03:55:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hiZ1ppiP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lAunnZYj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AF6D81D4F; Tue, 25 Mar 2025 03:55:16 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 3CE3D81D27; Tue, 25 Mar 2025 03:55:18 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB0D0819B1
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 03:55:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAFA081D3B
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 03:55:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-477282401b3so33474751cf.1
- for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:55:13 -0700 (PDT)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-477296dce76so27015401cf.3
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:55:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742871312; x=1743476112; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742871314; x=1743476114; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=N0UsQxRZcaybRAIz+9S6YfYF2DHjN3m1SOrqmWPzXtM=;
- b=hiZ1ppiPajzay5NN7ZgKMwtPLDJCjeza/gC3jit2o1fTZfYO2/uR+4sU0QmHTHE+bD
- ei1zkahEZI8Kxaz8rcWMLj6YtyEKlqnqRsmfCo+9SLZfBpScm0rYbhCa9Vwpk/NZlvse
- gRyde2XeFiUqZZNPUZNCzus4tt4vd4E+N6wbkXrYS3ugpVh8GMiWsNMQAmFt/Btr4H9o
- Zf1JDHR7XtVppTI6S5ErjZqz7rDD9zYbjFrb96bN3NJa/2y2WWhINEpn8SH20nXj8DTK
- si0k2fbiSrdeGw9scul6/ZB8/Gu9obVf7OX6EXw/LDGOZFs3RjFKWu4OWgDpR73Npj92
- kHVg==
+ bh=SMREPpYmE8Pjtt6QNGzBXe9b0L3CCVDfSinQQW3Rq4Y=;
+ b=lAunnZYjsCk4+z3wbKnGMsAjDiOMGXZIIjj9RYZ5KLpKlQsZiOx6SjAnA2+r6jUdIU
+ eidTGHN6XhaKJmdgv2nAetJS9BwCVlHpzHtl8s8c/nICZKcwdJy9J04hfy3HEYyjMcTj
+ IuLKkhYzkB6TdB/hiso8nlqBN3yFusfMivNnUU9nGSMXZHgwsC+jeLrFft74cftoG5SC
+ JsamHYR7c9s1NV+apBSgCeuUaxedoHwXlZ3KHm2uMSGEr+Wuaye1kb9W2dFzzWHQvVnG
+ KVnSDMLbFD7yw4IxWsXzQ1IfjX8kV2C06mTANl+tnaZUvLfDddoYTOxU7uZUtkCaIe9T
+ nYDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742871312; x=1743476112;
+ d=1e100.net; s=20230601; t=1742871314; x=1743476114;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N0UsQxRZcaybRAIz+9S6YfYF2DHjN3m1SOrqmWPzXtM=;
- b=njrQsBlsTqSkgCJ9GyA1c5T6+CvKW2US8zxU7pA55JJztbVS8ykXFiW9Em3IbQdReT
- 7abEvQ7s5/qQ859aRaGNg7NtMvHOS5EGRhyqbdMjXd4j4l3yCSJjnYy11es1I66Vo9jH
- 1IDT0ZT3UlHEgtVrVztKb/joPQKmQSj1iIqDr7jtNpcjCnAd7lwKLOvSbMl4fot/iKzd
- 9pf3ziwHMAHkgRi/layZkkY+5ze3AfpB7EF2F9S+DbfVdLGsCO0WaFSctD7N6J3d3bUy
- n9+1Pyc7VvBcTKyEdmwvwZJanNiQq83gYM62UW2oHjVsm6osdi1HBVoRocaMwJKOkiob
- hgLw==
-X-Gm-Message-State: AOJu0YwlASVYdfVQZtN+8wN2CrSzLmUUH9ilA+VHXOUMreUCi1Kc1z7h
- /OLMcO59p9onnjFZLz7meA+LvVFnK8tVjyKKWFFssTijgfLg5FtkJxeSEw==
-X-Gm-Gg: ASbGncvJUGH4zzi+ii1ypJxP7vbd0sQT0EPREkEJSBM0GR8lMItAPTbdy53+/1ecKLB
- pvNBluIKF/9u+EewCRr5vL6HRt5/4nqlUcoaN0Q77cPHTg2qpfJ0cAzMRT7pIbyaf+io2UMSgwi
- MeYghtGJBkKNHVXW1Xi0NZQFW5JhuPTVoQx+B81aQNCyLN0u03gEP/YarvW6v9Xk+mN21fTd8W4
- yTxA8rHvGceeNJaVtdeAJ/ASMCRLU3AriO7NEYCljLXc8oQ7h96/Vn2NvAkIbJV3F/DYZdk6Zep
- ocg6MRINQZADyKugU92evgnaCWnv0cOvKZWqGZyXBSJVVd6zHF2QAd98omCn3ashjkTl5DgVyX6
- GH1HoK525CeIjB/SM6VQ=
-X-Google-Smtp-Source: AGHT+IFMS0gdVtJS2mHd+sJRSwlIcaWc7NInuxL4m6hgHACuZP8mWSY8l6Uy0oLMIORFdbO/epW72g==
-X-Received: by 2002:a05:622a:5511:b0:476:8595:fa09 with SMTP id
- d75a77b69052e-4771de1584fmr239010611cf.40.1742871311662; 
- Mon, 24 Mar 2025 19:55:11 -0700 (PDT)
+ bh=SMREPpYmE8Pjtt6QNGzBXe9b0L3CCVDfSinQQW3Rq4Y=;
+ b=bjjbMwjwiQrgNcIBGf1chR9B+VplCyKHEFboJp2ejSBguhH4LbZR/epZ5t6Y7kfRz/
+ BVj/2z4iODGq1rwZSfdZm6GnKeL6TzzNERTH5ZDigRjC0HN6otITIA0kb3JwrtC2sqAt
+ KW3OFp0mbsCwjxseORT6nSIgaQ/6MOT6h09s92SxUV0UQIxCeLjity0xWp/z/4tTvCOg
+ yvQi/nPLHryBZIHokH6poIeF/JCvi6HW6Wpvz3/Ln6UCNG1VPbtLsOZp7ahvslKS6epW
+ Jc3+vzm2EqmxvMWZTW7WRlWtJ5Hy/jHwduCP78CAr0sHslrzVTVt1xpw2VO259VXki+n
+ RFRg==
+X-Gm-Message-State: AOJu0YynhnB6lmkkZwMZNVtCV+DqD6yymk4X0bzbtihaPcvcSzJ2r0g4
+ 0LWrvr5k/QACAb3txdbDwxlYfvxDkk6yRtC8OmCBeafDHMSjZCLpzbjYEg==
+X-Gm-Gg: ASbGnctQbQseTafPjQGkPWCG/lZAVY2dxO93eHn5yVR/0DBS0a46noqUhOCUpfKeSlo
+ b0sCoVex6/GNQIqUMojSaEXX1Sm1KpIojIofJdnMK9gx1OPKXd14h2Xpqee7Gn4WG9jH74vxH3+
+ tB+MXjUfhOSujRB/i/uNGfESorGjaF5P/zTrd22sO1fzCXCgUnMcOrVcQwQQiFbb8JeheyE8iyA
+ uY6/NpsuSlN4uQKKkIawuuB6XFSsI6XsFn4twdc6d4qu6yxxs4oeDs5h0fCgniqQlbfuMT60FCY
+ sGLTjk5gZaAVa6bA6PrNJXO0FqI4C9AqhWChj5II279+GMKOlyDxp89WvSEFETwyqIyxY0ZlQuu
+ 5X66Rp9uSR0H29iHkpBw=
+X-Google-Smtp-Source: AGHT+IHHlQ2sIHoV1aNFPB1Mn6yI5N1oFtdChd7/myc7cIQrUVuezhQNC35p1Eog26nKur/u70egdg==
+X-Received: by 2002:a05:622a:1144:b0:476:9847:7c73 with SMTP id
+ d75a77b69052e-4771dd9430cmr231745711cf.26.1742871313828; 
+ Mon, 24 Mar 2025 19:55:13 -0700 (PDT)
 Received: from aford-System-Version.. (c-75-72-162-184.hsd1.mn.comcast.net.
  [75.72.162.184]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4771d176113sm54712021cf.17.2025.03.24.19.55.09
+ d75a77b69052e-4771d176113sm54712021cf.17.2025.03.24.19.55.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Mar 2025 19:55:10 -0700 (PDT)
+ Mon, 24 Mar 2025 19:55:13 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: aford@beaconembedded.com, festevam@gmail.com, marek.vasut@mailbox.org,
@@ -78,13 +78,13 @@ Cc: aford@beaconembedded.com, festevam@gmail.com, marek.vasut@mailbox.org,
  Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
  Peng Fan <peng.fan@nxp.com>, Yannic Moog <y.moog@phytec.de>,
  Gilles Talis <gilles.talis@gmail.com>,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Christoph Stoidner <c.stoidner@phytec.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
  Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH V4 3/7] imx: imx8m: Imply IMX_TMU
-Date: Mon, 24 Mar 2025 21:54:44 -0500
-Message-ID: <20250325025452.950303-4-aford173@gmail.com>
+Subject: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
+Date: Mon, 24 Mar 2025 21:54:45 -0500
+Message-ID: <20250325025452.950303-5-aford173@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250325025452.950303-1-aford173@gmail.com>
 References: <20250325025452.950303-1-aford173@gmail.com>
@@ -106,32 +106,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the CPU Information is displayed from imx8_cpu, it displays the
-cpu temperature grade and operating temperature if CONFIG_IMX9 is
-defined. This behavior is similar to what happens mach-imx/cpu.c,
-except that the latter checks for IMX_THERMAL or IMX_TMU.
+Much of the data that is display by imx8_cpu.c is also displayed from
+arch/arm/mach-imx/cpu.c, except the temperature grade and active
+temperature are only displayed when SoC is an i.MX9. Since IMX9 now
+implies IMX_TMU, change this to check for IMX_TMU in the same way
+it's done in mach-imx/cpu.c to enable displaying this information
+for any SoC with either of this config enabled.
+Since additional text may appear due to this commit, remove
+the extra space in the message displaying the temperature
+grade.
 
-In preparation to make imx8_cpu act like the previous implementation
-for any CPU, make IMX8M imply IMX_TMU so it will be always displayed
-unless a user decides to disable it.
+Before:
+CPU:   NXP i.MX8MP Rev1.1 A53 at 1200 MHz
+Model: Beacon EmbeddedWorks i.MX8MPlus Development kit
+
+After:
+CPU:   NXP i.MX8MP Rev1.1 A53 at 1200 MHz
+CPU:   Industrial temperature grade (-40C to 105C) at 28C
+Model: Beacon EmbeddedWorks i.MX8MPlus Development kit
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- arch/arm/mach-imx/imx8m/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/cpu/imx8_cpu.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
-index 89f2b50c8a2..8ee699a343c 100644
---- a/arch/arm/mach-imx/imx8m/Kconfig
-+++ b/arch/arm/mach-imx/imx8m/Kconfig
-@@ -8,6 +8,7 @@ config IMX8M
- 	select LTO
- 	select ROM_UNIFIED_SECTIONS
- 	select ARMV8_CRYPTO
-+	imply IMX_TMU
+diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
+index 39b3c194131..4e1eccaa5b0 100644
+--- a/drivers/cpu/imx8_cpu.c
++++ b/drivers/cpu/imx8_cpu.c
+@@ -215,19 +215,19 @@ static int cpu_imx_get_desc(const struct udevice *dev, char *buf, int size)
+ 	ret = snprintf(buf, size, "NXP i.MX%s Rev%s %s at %u MHz",
+ 		       plat->type, plat->rev, plat->name, plat->freq_mhz);
  
- config IMX8MQ
- 	bool
+-	if (IS_ENABLED(CONFIG_IMX9)) {
++	if (IS_ENABLED(CONFIG_IMX_TMU)) {
+ 		switch (get_cpu_temp_grade(&minc, &maxc)) {
+ 		case TEMP_AUTOMOTIVE:
+-			grade = "Automotive temperature grade ";
++			grade = "Automotive temperature grade";
+ 			break;
+ 		case TEMP_INDUSTRIAL:
+-			grade = "Industrial temperature grade ";
++			grade = "Industrial temperature grade";
+ 			break;
+ 		case TEMP_EXTCOMMERCIAL:
+-			grade = "Extended Consumer temperature grade ";
++			grade = "Extended Consumer temperature grade";
+ 			break;
+ 		default:
+-			grade = "Consumer temperature grade ";
++			grade = "Consumer temperature grade";
+ 			break;
+ 		}
+ 
 -- 
 2.45.2
 
