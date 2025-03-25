@@ -4,42 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 610BCC36005
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 01:17:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63B72C36002
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 02:01:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A256F80EEF;
-	Tue, 25 Mar 2025 02:17:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 87FB580F70;
+	Tue, 25 Mar 2025 03:01:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JjgZz1oC";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB25E80F70; Tue, 25 Mar 2025 02:17:09 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 77B6B808AF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 02:17:07 +0100 (CET)
+ id 7750F81026; Tue, 25 Mar 2025 03:01:25 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D8F8A80EEF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 03:01:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E38C51596;
- Mon, 24 Mar 2025 18:17:12 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A4C233F58B;
- Mon, 24 Mar 2025 18:17:05 -0700 (PDT)
-Date: Tue, 25 Mar 2025 01:16:41 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jernej Skrabec <jernej.skrabec@gmail.com>
-Cc: eng.fan@nxp.com, jh80.chung@samsung.com, trini@konsulko.com,
- u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH] sunxi: mmc: Improve reset procedure
-Message-ID: <20250325011641.19b7d7e1@minigeek.lan>
-In-Reply-To: <20250309061241.62170-1-jernej.skrabec@gmail.com>
-References: <20250309061241.62170-1-jernej.skrabec@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-223f4c06e9fso83656995ad.1
+ for <u-boot@lists.denx.de>; Mon, 24 Mar 2025 19:01:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1742868081; x=1743472881; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x+gRoxy6/wxgAxAVKG2ynDNtCGYfSlZVo6pCkL1GuxI=;
+ b=JjgZz1oCc0zhYtD/g9wTRPbdVTpQoDS7emhgm+UtYWFMiRGIQNAK9QI5tvX0hf0dke
+ wW6A+BiggGwW3AtdZKiBGSf96LKsDQnEvu87FKqJqOy5VYlJo50yd2r9BnZNnrHcTg3d
+ yKD2+7oyNIhwceyVgumiLU3USU4Va1Qfn5aYs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742868081; x=1743472881;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x+gRoxy6/wxgAxAVKG2ynDNtCGYfSlZVo6pCkL1GuxI=;
+ b=qcAAaiWLuCZAiXL1iYnQl51iPg/4o8GFWAd23Z7M6NmGPqRxk97MGNUJwlWWvN+4Ds
+ Q4BIVSbJQkdpvZWYsZjMkZZKoJNfWFQJnKPt+tvdguJCTnYS2yK6vM2sGrU7qniuv/De
+ EuzIDPE1Lrv2leKvYCyuLBn7YJHyeBpw3CqaXGaluGqraU8JAojfMvLCEX0C6aLeG2SD
+ zrrIcFMlGgmxwA0qWSKk35wH/emY7UxCzFMX+mO+0vN2y75K+gVTfM6RuASKN8jJ0LhC
+ whE9fUWWz5bH8pJd7Fe+U/gWduJUde0eG4krDUdc/SsrrqDoZZ4uzN9ar7xXe3DXhqo3
+ Nlgg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXNSat0T84vQ8QSZkif8DqZbV7UE3DfjRwk0E6Obb1gEBFDDzSVhhQsBneV4y2ufaGOs/tABo4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdCpWCJtmdRvBOvxjK9nrSQX0cMKn49lvJqfT6tq6JMO4W9YS1
+ scvDrFnZlkWdlj/iNmU+AHqhvhKrtLWDfFeW9NkZKzy9CXS6SKPUpIj7VOZsG0A=
+X-Gm-Gg: ASbGnctLyRM3g3S8YNAJ/pjBH4VXibab9LsPhnn1Rjp/tHF8by71DfZeqvakwUltA56
+ RzgNOmWQQf+0cFU7S9vNOkW89ncfnJb5UbmZCRfgA7cDH102FwxadL8HRqg34NNY5htf5reSA0x
+ MFhWhzbP0XTOAjpfYu7RgVOHu3c0nJph2p/rV5A2k7MjOJUFtCoQKXkTS9c+Fc1OaieENS9Wkud
+ WyrAenQlM2U9ftxvl5JMBrgTu8VoZfM2ofrhyeUn5mQYtloPg5uhFvx2wu3RknhRxNdp2tKpfAu
+ NYNTCbx+SP9FOcO1qlv1Px6hyaYZnWKnyPRcbF48nx4=
+X-Google-Smtp-Source: AGHT+IE8bQlIIAOlhnZsYMIyzNUlfnUvAE4lTtkLunxoaECNqShrTRRumY6pgU2X6zYlZyMa5rhY2g==
+X-Received: by 2002:a17:902:f685:b0:215:a303:24e9 with SMTP id
+ d9443c01a7336-2278067c27dmr212003495ad.3.1742868081108; 
+ Mon, 24 Mar 2025 19:01:21 -0700 (PDT)
+Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-227811f1462sm78012575ad.210.2025.03.24.19.01.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Mar 2025 19:01:20 -0700 (PDT)
+Date: Mon, 24 Mar 2025 20:01:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Sam Day <me@samcday.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Subject: Re: [PULL] Please pull qcom-next-20250324
+Message-ID: <20250325020117.GE93000@bill-the-cat>
+References: <20250324181903.499245-1-caleb.connolly@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4tFGvQ2z6Cm5xilK"
+Content-Disposition: inline
+In-Reply-To: <20250324181903.499245-1-caleb.connolly@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,129 +98,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun,  9 Mar 2025 07:12:41 +0100
-Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
 
-Hi Jernej,
+--4tFGvQ2z6Cm5xilK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-many thanks for your investigation and this fix here! Not having
-working eMMC access was a major annoyance for those TV boxes, and this
-indeed seems to be fixed now, judging by my experiments. Also checked
-boot partition access, works fine (though data partitions seem to take
-precedence on most devices).
+On Mon, Mar 24, 2025 at 07:18:12PM +0100, Caleb Connolly wrote:
 
-> Cards should always be reset and threshold set. This fixes eMMC on H616.
-> 
-> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> Take 2, this includes that build failure fix, sorry about that.
+>=20
+> CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipeline=
+s/25297
+>=20
+> The following changes since commit 0e1fc465fea62ebae91f2f56cb823e8b37ee10=
+77:
+>=20
+>   Merge tag 'dm-pull-15mar25' of git://git.denx.de/u-boot-dm into next (2=
+025-03-15 08:19:31 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git tags/qcom-ne=
+xt-20250324
+>=20
+> for you to fetch changes up to dcb6a5e7651f4a6cebfad4389119407e2a852783:
+>=20
+>   mach-snapdragon: always select SYSRESET_PSCI for ARCH_SNAPDRAGON (2025-=
+03-18 11:55:14 +0000)
+>=20
 
-Acked-by: Andre Przywara <andre.przywara@arm.com>
+I pulled the merge commit message out of v1 as that looked right. And
+please note that b4 doesn't support the "git@.." protocol. Which on the
+other hand is useful when I have more to say than just applied ;)
 
-Cheers,
-Andre
+Applied to u-boot/next, thanks!
 
-> ---
->  drivers/mmc/sunxi_mmc.c | 28 ++++++++++++++++++++++------
->  drivers/mmc/sunxi_mmc.h | 15 +++++++++++++--
->  2 files changed, 35 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-> index 0b56d1405bee..335def4b9738 100644
-> --- a/drivers/mmc/sunxi_mmc.c
-> +++ b/drivers/mmc/sunxi_mmc.c
-> @@ -442,6 +442,26 @@ out:
->  	return error;
->  }
->  
-> +static void sunxi_mmc_reset(struct sunxi_mmc *regs)
-> +{
-> +	/* Reset controller */
-> +	writel(SUNXI_MMC_GCTRL_RESET, &regs->gctrl);
-> +	udelay(1000);
-> +
-> +	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
-> +		/* Reset card */
-> +		writel(SUNXI_MMC_HWRST_ASSERT, &regs->hwrst);
-> +		udelay(10);
-> +		writel(SUNXI_MMC_HWRST_DEASSERT, &regs->hwrst);
-> +		udelay(300);
-> +
-> +		/* Setup FIFO R/W threshold. Needed on H616. */
-> +		writel(SUNXI_MMC_THLDC_READ_THLD(512) |
-> +		       SUNXI_MMC_THLDC_WRITE_EN |
-> +		       SUNXI_MMC_THLDC_READ_EN, &regs->thldc);
-> +	}
-> +}
-> +
->  /* non-DM code here is used by the (ARM) SPL only */
->  
->  #if !CONFIG_IS_ENABLED(DM_MMC)
-> @@ -489,9 +509,7 @@ static int sunxi_mmc_core_init(struct mmc *mmc)
->  {
->  	struct sunxi_mmc_priv *priv = mmc->priv;
->  
-> -	/* Reset controller */
-> -	writel(SUNXI_MMC_GCTRL_RESET, &priv->reg->gctrl);
-> -	udelay(1000);
-> +	sunxi_mmc_reset(priv->reg);
->  
->  	return 0;
->  }
-> @@ -684,9 +702,7 @@ static int sunxi_mmc_probe(struct udevice *dev)
->  
->  	upriv->mmc = &plat->mmc;
->  
-> -	/* Reset controller */
-> -	writel(SUNXI_MMC_GCTRL_RESET, &priv->reg->gctrl);
-> -	udelay(1000);
-> +	sunxi_mmc_reset(priv->reg);
->  
->  	return 0;
->  }
-> diff --git a/drivers/mmc/sunxi_mmc.h b/drivers/mmc/sunxi_mmc.h
-> index f4ae5a790c87..9d55904c213c 100644
-> --- a/drivers/mmc/sunxi_mmc.h
-> +++ b/drivers/mmc/sunxi_mmc.h
-> @@ -37,7 +37,9 @@ struct sunxi_mmc {
->  	u32 res0;		/* 0x54 reserved */
->  	u32 a12a;		/* 0x58 Auto command 12 argument */
->  	u32 ntsr;		/* 0x5c	New timing set register */
-> -	u32 res1[8];
-> +	u32 res1[6];
-> +	u32 hwrst;		/* 0x78 Hardware Reset */
-> +	u32 res5;
->  	u32 dmac;		/* 0x80 internal DMA control */
->  	u32 dlba;		/* 0x84 internal DMA descr list base address */
->  	u32 idst;		/* 0x88 internal DMA status */
-> @@ -46,7 +48,8 @@ struct sunxi_mmc {
->  	u32 cbda;		/* 0x94 */
->  	u32 res2[26];
->  #if defined(CONFIG_SUNXI_GEN_SUN6I) || defined(CONFIG_SUN50I_GEN_H6) || defined(CONFIG_SUNXI_GEN_NCAT2)
-> -	u32 res3[17];
-> +	u32 thldc;		/* 0x100 Threshold control */
-> +	u32 res3[16];
->  	u32 samp_dl;
->  	u32 res4[46];
->  #endif
-> @@ -123,6 +126,9 @@ struct sunxi_mmc {
->  
->  #define SUNXI_MMC_NTSR_MODE_SEL_NEW		(0x1 << 31)
->  
-> +#define SUNXI_MMC_HWRST_ASSERT		(0x0 << 0)
-> +#define SUNXI_MMC_HWRST_DEASSERT	(0x1 << 0)
-> +
->  #define SUNXI_MMC_IDMAC_RESET		(0x1 << 0)
->  #define SUNXI_MMC_IDMAC_FIXBURST	(0x1 << 1)
->  #define SUNXI_MMC_IDMAC_ENABLE		(0x1 << 7)
-> @@ -133,6 +139,11 @@ struct sunxi_mmc {
->  #define SUNXI_MMC_COMMON_CLK_GATE		(1 << 16)
->  #define SUNXI_MMC_COMMON_RESET			(1 << 18)
->  
-> +#define SUNXI_MMC_THLDC_READ_EN		(0x1 << 0)
-> +#define SUNXI_MMC_THLDC_BSY_CLR_INT_EN	(0x1 << 1)
-> +#define SUNXI_MMC_THLDC_WRITE_EN	(0x1 << 2)
-> +#define SUNXI_MMC_THLDC_READ_THLD(x)	(((x) & 0xfff) << 16)
-> +
->  #define SUNXI_MMC_CAL_DL_SW_EN		(0x1 << 7)
->  
->  #endif /* _SUNXI_MMC_H */
+--=20
+Tom
 
+--4tFGvQ2z6Cm5xilK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfiDm0ACgkQFHw5/5Y0
+tyy4iAv+MnNp84tGdXsb0TKphvrmQ6omQ1HNc6sq8HsOaYOaevO7RAQqaiGQTmWb
+Znv6aUkssDpZgVSdblEnQ81icmk1pp9PRRTRsQLVVSrmNRJdekM8hP1BKOgy9XXd
+xDleqz7KAv0jA6FUiLoV57pgGrh4tb74ryf1zouLgWviTj9Vo8drsV0p/ng6fNLp
+Jm3qsTabkpJnJg2HWz71ZuNMwqvhmIy3SZ/lWfdevFvcorOo9pTjNVa2ugPK1yR2
+FLTjogwTubBq3PHau+h8Fr2MJMrbDQXmkU57xLO63SLfXIL/Br9DW6WlPY08+M/K
+VMC7Gu5MGgx7o1n0UuIBsCvSF58Oq/LEhZIg9ijcOYgf7TSM5dQ+g1o+3JsSZBF/
+NYbptHFB6/2XuHwqMVY5wPE3YKxDLoExIUitjek6f5js8aMP02V7KPQTgGfg1xLP
+/mRl0yLeQJdzNbPQoCGZLmzw9EYqcdchIDRnF66cgA96DBCfKENDgDHV4AP4Qsyl
+FaIgGBxY
+=yKk3
+-----END PGP SIGNATURE-----
+
+--4tFGvQ2z6Cm5xilK--
