@@ -4,50 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56D28C35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 10:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F6DC35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 11:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EAE480EEF;
-	Tue, 25 Mar 2025 11:55:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id BB3C180EEF;
+	Tue, 25 Mar 2025 12:36:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E81F2810E8; Tue, 25 Mar 2025 11:55:52 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99EDC808AF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 11:55:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 52PAtd3e093242
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 25 Mar 2025 18:55:39 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 25 Mar
- 2025 18:55:38 +0800
-Date: Tue, 25 Mar 2025 18:55:35 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/next
-Message-ID: <Z-KLp1zWkAXvvmRU@swlinux02>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="itQtFQCd";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 255DC810E8; Tue, 25 Mar 2025 12:36:33 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AE73808AF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 12:36:31 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-30c461a45f8so54723421fa.1
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 04:36:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1742902590; x=1743507390; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Aknk1IW/4l5gM9vwdmNxW+3sP6/X/LZAau4cQVnxCt4=;
+ b=itQtFQCdTGd2DtvwOaRM57cnSwoJZJwCjKA9tCVsJokyQqDnkyzvbC8EN3eW0Tz3tZ
+ rzs3BStvhlDFZTIOKJyZWfguxjIY8Xa/TXZ5lXKFY3V3+1e06YmHwIFEWbA11Z/u6d6J
+ tvQyxC9oYpM7UONlski8hEuh9JtzEvsjzLLaV7LBchKwk0soEopOxIs1wpA13DvdGCEe
+ VVf80Gfcj55d4Ew+4bOHL6cHiopobOdwmpbrJD7h3BtEoGZmJVhVGlP9X3jXWT5IKvDw
+ pwX3tWZJrymOO2a0ShZLC2LVeA/uUHIKG75zx3+V5NMOIqqv97JhSnZ0A3PNK/yyAKxA
+ hdhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742902590; x=1743507390;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Aknk1IW/4l5gM9vwdmNxW+3sP6/X/LZAau4cQVnxCt4=;
+ b=kw70g/Z2XOMKo9xbJ5zY2njeTIjNoBNQudPAxlrFrTilGUOyVfP/jM/G+iMY6JdJu9
+ AwpIR0zlooJYkArIQefXGLPnqiV2q2h4pNU7R/ONgl8Vrm9lEOTVC8QE74jJGAxDVBUZ
+ L+WgarsgCtWyAEfECY1onhnBQrTnsHMMMwmrJYADWIxFaCrrppt0NCXIzlFoWAza+YKq
+ K0u/P0f8pD/Far3A91CxOibCYbDYjWmUEmlJ56WE4x2H/frYbj/QaazYnEuoGORNmkZB
+ DQfSMhGNah5sZSUda9ySCGdEpYdCaDxqEzrbY/FfGz5U0UZwerhFzfVXEOwrCmMqbOfI
+ q//w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEgDyTIY9Dz3gxmIQKylXCrT1nCPU84fytqmcOPimoycFs8EllFo42QYKhiB73T46qb5YEQ8U=@lists.denx.de
+X-Gm-Message-State: AOJu0YzHEi5n6aFzjCze8HwPPW6CCBjh1g95YVKuxAcSuQgf/ZP8fEBt
+ LRzOYVh566OmytktY8aZWzuHZbhe5evWtgZvDDaiQcGIRglvvfZeaW/eV7p+19gRN1p6jHWFIYt
+ Qsng/EJsGlaUFh5E29eGibns1xOQ=
+X-Gm-Gg: ASbGnctBeZXnPooS41z8S0j7FZFDPIN6elIZIcgLlEP/3uRJxoVcb86n85AADXgBdZr
+ zQO6H7+kPSeQHisuvVD9GYBc8ygTYJpbvKO5pTFZnVcjtX2lhk8EI/8N9NCL5iK+8gVDxD70MrY
+ Wt9G0svndjjgzn/3o8NG2v+kj4kz4viYqYVDMSb3SnjOVm10ABTY95TVRSJEVAm3aoPFw=
+X-Google-Smtp-Source: AGHT+IFe+WjqtKtiWYOVqxJ3UBVS6s0n5CuJhmUowTW53kx/rOsl+dexH9V5RmwSoJHIgVmHshpdNb6Zdfo3yZI7sFE=
+X-Received: by 2002:a2e:be1d:0:b0:30d:62c1:3c0a with SMTP id
+ 38308e7fff4ca-30d7e2aa82cmr69093801fa.25.1742902590034; Tue, 25 Mar 2025
+ 04:36:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 52PAtd3e093242
+References: <20250325025452.950303-1-aford173@gmail.com>
+ <20250325025452.950303-5-aford173@gmail.com>
+ <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
+In-Reply-To: <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 25 Mar 2025 08:36:18 -0300
+X-Gm-Features: AQ5f1Jo1KX6j7WIm57L6F1mKmhUG6s0RLuJKfvzbgDXO1krgLQsydWQUab8b2ew
+Message-ID: <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
+Subject: Re: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de,
+ aford@beaconembedded.com, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@denx.de>, 
+ Enrico Leto <enrico.leto@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
+ Yannic Moog <y.moog@phytec.de>, Gilles Talis <gilles.talis@gmail.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>, 
+ Christoph Stoidner <c.stoidner@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,67 +103,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, Mar 25, 2025 at 12:37=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.o=
+rg> wrote:
 
-The following changes since commit d574229880378081691dc06c430424015be0740c:
+> Please drop the fullstop at the end of Subject and then add
+>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>
+> To the whole series.
 
-  Merge tag 'qcom-next-20250324' of https://gitlab.denx.de/u-boot/custodians/u-boot-snapdragon into next (2025-03-24 12:38:48 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
-
-for you to fetch changes up to 9c40d92305db53f71ae31431b99f73ced11f334e:
-
-  Add reset config options for k1 (2025-03-25 16:34:50 +0800)
-
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/25323
-----------------------------------------------------------------
-- board: k1: Add reset driver
-- board: starfive: Simplify binman config
-- Some modifications on DTS and configs
-----------------------------------------------------------------
-Heinrich Schuchardt (6):
-      configs: SiFive Unmatched: add 'nvme scan' to preboot
-      riscv: qemu: imply CONFIG_RNG_RISCV_ZKR
-      riscv: dts: add OF_LIST handling to binman.dtsi
-      riscv: dts: no default configuration for MULTI_DTB_FIT
-      board: starfive: spl: strip off 'starfive/' prefix
-      riscv: dts: starfive: remove duplicate itb entries
-
-Huan Zhou (4):
-      riscv: dt-binding: k1: Add reset driver binding definition
-      riscv: reset: k1: Add reset driver
-      riscv: dts: k1: add reset controller node in device tree
-      Add reset config options for k1
-
-Jimmy Ho (1):
-      RISCV: config: Remove CFG_SYS_SDRAM_BASE
-
-Junhui Liu (1):
-      riscv: dts: spacemit: Update UART compatible for k1
-
-Yao Zi (1):
-      riscv: dts: cv18xx: Drop unused dummy clocks
-
- arch/riscv/cpu/k1/Kconfig                       |   1 +
- arch/riscv/dts/binman.dtsi                      |  10 +-
- arch/riscv/dts/cv18xx.dtsi                      |  14 -
- arch/riscv/dts/k1.dtsi                          |  35 +-
- arch/riscv/dts/starfive-visionfive2-binman.dtsi |  76 ----
- board/emulation/qemu-riscv/Kconfig              |   1 +
- board/starfive/visionfive2/spl.c                |   4 +
- configs/bananapi-f3_defconfig                   |   1 +
- configs/sifive_unmatched_defconfig              |   2 +-
- drivers/reset/Kconfig                           |   6 +
- drivers/reset/Makefile                          |   1 +
- drivers/reset/reset-spacemit-k1.c               | 548 ++++++++++++++++++++++++
- include/configs/sifive-unleashed.h              |   1 -
- include/configs/sifive-unmatched.h              |   1 -
- include/dt-bindings/reset/spacemit-k1-reset.h   | 118 +++++
- 15 files changed, 713 insertions(+), 106 deletions(-)
- create mode 100644 drivers/reset/reset-spacemit-k1.c
- create mode 100644 include/dt-bindings/reset/spacemit-k1-reset.h
-
-Best regards,
-Leo
+Adam, no need to resend. I will take care of it, thanks.
