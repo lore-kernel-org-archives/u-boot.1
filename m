@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D30FC36005
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 13:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB1D1C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 13:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9463B8192A;
-	Tue, 25 Mar 2025 14:45:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B6F081B42;
+	Tue, 25 Mar 2025 14:49:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BzdFnYpn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AD6QPczG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B062681B42; Tue, 25 Mar 2025 14:45:48 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 70B1D81CA8; Tue, 25 Mar 2025 14:49:38 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8802B808AF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 14:45:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 518798192A
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 14:49:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43cf06eabdaso51929235e9.2
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 06:45:46 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cfba466b2so52362805e9.3
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 06:49:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742910346; x=1743515146; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742910576; x=1743515376; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=HEWiR5X+o9OmqK8h6F+NQwAnOI/aP5xH8VG7NcKxOLw=;
- b=BzdFnYpnLvGQbW7G5MDtCMUOOoFryG/ZodHgM0RDmXW4AEcG90jGeVFRxPH7kt6CPc
- ix3/3WPXT8ITS8W3XZUqaCez65Jp38H39s317edlO4eIBcpJhTh12Ds34nHtGxI++s/U
- lEM44ZUP5lg05otdG43gTXDWkYe0lh4pl6jl/018qHD+HPVDULiMbDIBAJXHjLgn62uI
- +LEYG8x6Me0kokIPSEImf/+57+gql70P4qRwog7hJn+SbDUiSPtWPlFkVw9UbRmFYLNt
- iK/vNpGk8z0/fJDGOwhuBecXGL2xsfY6iqSsWZXV1e9Tvt7DhcXSKVUNcb5gG3xPaZDv
- dxbg==
+ bh=oZIIDpTpA7xiZ3T3M4vY53YkejTE+I4eKp3Sg29iRvc=;
+ b=AD6QPczG09O32ATMIvuqhto6KIeL5sVvNg40JMuqPBvT8VHlWS/wTyIWABxiWciVbP
+ RW32v1noHA/H9Obbfh2Biruph4VyBo3F7j5rsu0V10tu0tr56aCXNDfu5F+5ScsIV8kc
+ /UAtb4eSettvt7iLBxQu2kihiBaN/QBvEybZeui4ege/SwecY7TDJGdzlw8sKsMfj91u
+ S+5vhszypQwAXkiJ4DpbzTkV5unzZ/8dpRT8hXRU3ZsuRwqagD+VclabBFm3EcM0noTH
+ kNPrXaTxiNtAgrjkqNxqYL2w98fGlQ2MtaWH91FkkH+JmVDoDJG7V4jetuAwPYzhQ3sH
+ pD0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742910346; x=1743515146;
+ d=1e100.net; s=20230601; t=1742910576; x=1743515376;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HEWiR5X+o9OmqK8h6F+NQwAnOI/aP5xH8VG7NcKxOLw=;
- b=RBVdR99VuqgOmfNGTv+qpaxuuwFEkV0okLC5ZFnbNXMfNFbdB1/nGE3wFk7jSfphWx
- /uX3PaaC4643/9oGLXC51BP6Zo1zcZualROaVSuxdNvPps+b8TLUGM3Obs+50994HlKH
- VL8LGvHHByYvY80LfEuBJrYQOQnAUTAjH4Cq/srD4EG8tXlcgCLsrG9rfXzHR2NdY5Da
- PWy/xSnUPk0WguzUmrQ4lsmXKBvIIq7ZAlxXQ8+EkXnsqesr4UYQdsvGdACacxfXC+Zp
- Ufs34Lnv88tJX/1uE0Bnbzc9176SFnnMdF4YBT58hahsdnclxM7hGO9fyx7GrJg3Zdo/
- JKVw==
+ bh=oZIIDpTpA7xiZ3T3M4vY53YkejTE+I4eKp3Sg29iRvc=;
+ b=B+17CFRWeVjaa20yfqrjzgq5a3vN1ieNij8X3XgN1MZesP/Doasz71GNlSzbzP3SSk
+ Va9BT0uVh5PkW8B5a/lynNTa8vkcY5cXSTZHre/gW0M3fXZ2ZTl4h+AYXziB3rT51f3O
+ IGAqsgpNTHOK1PjQp7+90JQrLDBmw+GAPzbPZ32RvEggx1n6mBXuan3GbGkE2qg83WcO
+ 2LwS5ZzyuSPva26xWz1QpBZIXE9qknggy7g/e6+OfrBUNs5CY+OlQCHVni+BBWw7pjSI
+ +8RhVnrDNN5NC40IOoHr9+rDCXAwCy3bm0E/eKA/X7n8U4HmALAx1dl0j6WrL3ifeP07
+ TJFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVcP2TM7eP/NzwJ4EtlBjBlCLrrSYKwS8Dg0ZAkDHC+jLbPnYA+YlOrG+A2srQCCDvthXwY/r8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz36q8ExRJX7TnVN8a9ejfErj6ehq6eGzgohOWsyVV7Ryoe3RQ5
- zGR0aj5ztHW1m+rxml6sSP7HSOHn0t+zpw6vSFqukHIs/OPu8lAL9EtHyydEeDQ=
-X-Gm-Gg: ASbGncvpxz0Yy6frnEB3xlYta4SKsIpR05X2Wxc9FGv+pn6LgmAXVv3gO+ffuKDU0L6
- mnx0EK0KW5WvbK0dvyU6ZXqLpnKyMOyk1xSv650pxCkpDDQO+A1ZR8sF/TSuOAlVDxQTXvL85TW
- fLzi1//aZyWltsAnM+jg8RJq8PalyMlIfAnMoJcS5cwAFhWxpCXnfiMv8SaTx/JffR9If6HowwV
- IvHclXQVBUZoJOfa8p6gyXA9B5WAWFb1LB7kQzzh6BQrjs1oxl5MOmmpSpEvmTIWhq3TPd+823P
- Hz5fy8iwCW/RmC7DVJzc/87HUHx/KK0EkUwERyZkoJybpLRfqVv6TekuSz7oh3yAtf7edp/NONk
+ AJvYcCWNyBQcdWz5HyeKcXdVIV+wXKMni5wZtCr1muXBUj0g2maWsaDp0hUWR92INnkVul12Y6JdLoY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxSUjDbrBYqan3MN9KJd+GV/h271gtcgcmI9bAdpLz5eGhD4aPx
+ F8nZSubMhj05KH0U6cD8BnCClygbQFgBMRZd+ru1H/ija4V6Pu/Oxk8Tf7fcA10=
+X-Gm-Gg: ASbGncvM2KVCa4o4+tiVsmPcOqy9CQbPHi5SxvOZgiokCbuXn9ktW6QvDF2CcDL9bZ5
+ RcCtyv2oxmZ7yun9efA8iicsOap0IbaiqEYtkQ5AsscK56mrGXo7OQqawJjqtQ3rTgjrLq26/wn
+ Gh0gYBTly0AspWw+1xkHxsFcwcMxyUbmU57O7R9ptzWuwp5MQ4jZv3EB/eOXDogRGEvjFJeV9M0
+ DgWs/SNklRNZI6vfKC6ExURcWh9ECzWmUyAk7+XiossP5vDYUtXnJOGWPODWz35dJgvUbjrCM/2
+ rAcp23TW6jaBVnl8Ae4IRyWCGoPkspimlHL+Jy2SNKuUC6AOb82tMN3uzrDahW8Oj1zncTdSS1A
  =
-X-Google-Smtp-Source: AGHT+IH4cC7eqZ9kDWLIgpCmuqxr+GwjHG71QQn4EcpcQNkSnugUqD0OzlFGGV6CmTvXaQiBMiR4Kw==
-X-Received: by 2002:a05:600c:4512:b0:43c:fcbc:968c with SMTP id
- 5b1f17b1804b1-43d509ed7d2mr175699515e9.7.1742910345877; 
- Tue, 25 Mar 2025 06:45:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHSOIttQ3sPIWQ1F8tMsDqeEz96/NmJB6MW6nia247r0jNDzdH5skdhIOsXrpYBZDXbvV8Uog==
+X-Received: by 2002:a05:600c:1d88:b0:43d:23fe:e8a6 with SMTP id
+ 5b1f17b1804b1-43d509e4658mr184762645e9.5.1742910575680; 
+ Tue, 25 Mar 2025 06:49:35 -0700 (PDT)
 Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9a3af8sm13968970f8f.31.2025.03.25.06.45.44
+ 5b1f17b1804b1-43d43d7c6a5sm203616595e9.0.2025.03.25.06.49.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Mar 2025 06:45:45 -0700 (PDT)
-Message-ID: <572e6b40-679e-4ce2-bdde-6b825285a02f@linaro.org>
-Date: Tue, 25 Mar 2025 14:45:44 +0100
+ Tue, 25 Mar 2025 06:49:35 -0700 (PDT)
+Message-ID: <b10dbf6c-c30f-44b7-950b-f7fb16afcf73@linaro.org>
+Date: Tue, 25 Mar 2025 14:49:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] scsi: de-dup calls to scsi_setup_write_ext()
+Subject: Re: [PATCH 3/3] scsi: sync cache on write
 To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 References: <20250325-scsi-sync-on-write-v1-0-3575aa1342e0@linaro.org>
- <20250325-scsi-sync-on-write-v1-2-3575aa1342e0@linaro.org>
- <10359646-6c8e-4872-8017-29d83e5d0f7e@linaro.org>
+ <20250325-scsi-sync-on-write-v1-3-3575aa1342e0@linaro.org>
+ <b737a955-36fc-4816-8169-2a27270d9fce@linaro.org>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <10359646-6c8e-4872-8017-29d83e5d0f7e@linaro.org>
+In-Reply-To: <b737a955-36fc-4816-8169-2a27270d9fce@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,71 +107,89 @@ X-Virus-Status: Clean
 
 
 
-On 3/25/25 14:38, Neil Armstrong wrote:
+On 3/25/25 14:33, Neil Armstrong wrote:
 > On 25/03/2025 14:02, Caleb Connolly wrote:
->> This gets called with the same parameter in two paths in scsi_write(),
->> de-dup them to prepare for additional logic after the write.
+>> We don't have a mechanism to safely shutdown block devices prior to a
+>> baord reset or driver removal. Prevent data loss by synchronizing the
+>> SCSI cache after every write.
+>>
+>> In particular this solves the issue of capsule updates looping on some
+>> devices because the board resets immediately after deleting the capsule
+>> file and this write wouldn't be flushed in time.
+>>
+>> This may impact NAND wear, but should be negligible given the usecases
+>> for disk write in U-Boot.
 >>
 >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 >> ---
->>   drivers/scsi/scsi.c | 17 +++++++++++------
->>   1 file changed, 11 insertions(+), 6 deletions(-)
+>>   drivers/scsi/scsi.c | 28 ++++++++++++++++++++++++++++
+>>   1 file changed, 28 insertions(+)
 >>
 >> diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
 >> index 
->> 34ac47c03ab397ca999abf130d84ccbd3be4c419..1aa7fbdbb5278e387de72a3c3e73d19ea0342fff 100644
+>> 1aa7fbdbb5278e387de72a3c3e73d19ea0342fff..1b71e580b89b100395ea132a4976366a713cba8a 100644
 >> --- a/drivers/scsi/scsi.c
 >> +++ b/drivers/scsi/scsi.c
->> @@ -220,25 +220,30 @@ static ulong scsi_write(struct udevice *dev, 
+>> @@ -77,8 +77,25 @@ static void scsi_setup_inquiry(struct scsi_cmd *pccb)
+>>       pccb->cmdlen = 6;
+>>       pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
+>>   }
+>> +static void scsi_setup_sync_cache(struct scsi_cmd *pccb, lbaint_t start,
+>> +                  unsigned short blocks)
+>> +{
+>> +    pccb->cmd[0] = SCSI_SYNC_CACHE;
+>> +    pccb->cmd[1] = 0;
+>> +    pccb->cmd[2] = (unsigned char)(start >> 24) & 0xff;
+>> +    pccb->cmd[3] = (unsigned char)(start >> 16) & 0xff;
+>> +    pccb->cmd[4] = (unsigned char)(start >> 8) & 0xff;
+>> +    pccb->cmd[5] = (unsigned char)start & 0xff;
+>> +    pccb->cmd[6] = 0;
+>> +    pccb->cmd[7] = (unsigned char)(blocks >> 8) & 0xff;
+>> +    pccb->cmd[8] = (unsigned char)blocks & 0xff;
+>> +    pccb->cmd[9] = 0;
+>> +    pccb->cmdlen = 10;
+>> +    pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
+>> +}
+>> +
+>>   static void scsi_setup_read_ext(struct scsi_cmd *pccb, lbaint_t start,
+>>                   unsigned short blocks)
+>>   {
+>>       pccb->cmd[0] = SCSI_READ10;
+>> @@ -235,8 +252,19 @@ static ulong scsi_write(struct udevice *dev, 
 >> lbaint_t blknr, lbaint_t blkcnt,
->>           pccb->dma_dir = DMA_TO_DEVICE;
->>           if (blks > max_blks) {
->>               pccb->datalen = block_dev->blksz * max_blks;
->>               smallblks = max_blks;
->> -            scsi_setup_write_ext(pccb, start, smallblks);
->> -            start += max_blks;
->> -            blks -= max_blks;
->>           } else {
->>               pccb->datalen = block_dev->blksz * blks;
->>               smallblks = (unsigned short)blks;
->> -            scsi_setup_write_ext(pccb, start, smallblks);
->> -            start += blks;
->> -            blks = 0;
->>           }
->> +
->>           debug("%s: startblk " LBAF ", blccnt %x buffer %lx\n",
->>                 __func__, start, smallblks, buf_addr);
->> +        scsi_setup_write_ext(pccb, start, smallblks);
->> +
->>           if (scsi_exec(bdev, pccb)) {
->>               scsi_print_error(pccb);
 >>               blkcnt -= blks;
 >>               break;
 >>           }
->> +
->> +        if (blks > max_blks) {
->> +            start += max_blks;
->> +            blks -= max_blks;
->> +        } else {
->> +            start += blks;
->> +            blks = 0;
+>> +        /*
+>> +         * Ensure the writes are flushed to disk so we don't lose data
+>> +         * on board reset.
+>> +         * FIXME: this ought to be in a SCSI shutdown path instead
+>> +         */
+>> +        scsi_setup_sync_cache(pccb, start, smallblks);
+> 
+> Why can't this be done at the end of scsi_write() ?
+
+We have the same limitation that we can only flush SCSI_MAX_BLK blocks 
+at once. It could be done in a second loop at the end but I figured it's 
+more sensible to just interleave them.
+> 
+>> +        if (scsi_exec(bdev, pccb)) {
+>> +            scsi_print_error(pccb);
+>> +            break;
 >> +        }
-> 
-> Ok this changes the logic and the result of blkcnt on error, before
-> is accounted the current command in the blkcnt but now it doesn't.
-
-Ooh good point, will fix that in v2.
-> 
-> Weird we do not return any errors
-
-Yeahh and scsi_print_error() is just a stub... This is probably 
-something worth looking at in the future.
-> 
->>           buf_addr += pccb->datalen;
->>       } while (blks != 0);
->>       debug("%s: end startblk " LBAF ", blccnt %x buffer %lX\n",
->>             __func__, start, smallblks, buf_addr);
+>> +
+>>           if (blks > max_blks) {
+>>               start += max_blks;
+>>               blks -= max_blks;
+>>           } else {
 >>
+> 
+> And perhaps a sync subcommand of the scsi command would be nice to have !
+
+Good idea, that would tie in nicely if/when we get a .sync() op for 
+block devices and call it prior to board reset.
+> 
+> Neil
 > 
 
 -- 
