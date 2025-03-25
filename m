@@ -4,53 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D4AC3600B
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5A1C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:56:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B73881D27;
+	by phobos.denx.de (Postfix) with ESMTP id EF3D481DCA;
 	Tue, 25 Mar 2025 15:56:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="XN/Mjmk6";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="DE6gRAVO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7846880F70; Tue, 25 Mar 2025 09:18:54 +0100 (CET)
-Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::ae])
+ id 951C080F70; Tue, 25 Mar 2025 09:28:29 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBEFA808B6
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 09:18:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3A56A808B6
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 09:28:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexeymin@postmarketos.org
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1742890731;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ffTLikK7h4GmDHEki/WYz18sGAJWE4G8IYHvTAcwams=;
- b=XN/Mjmk6VYM51ycyuEXj3UeYgor9D89T90m+1BaIuO1/7azMOheNVX1L9mOJHQAX/9Z0dN
- L1MOYl582ZFhYfHkU0FKtFHefvjnhIhZ7u/85R+TMQcWH13VGLDy51Fidf5ehJ2SKBmUdC
- z4BgsEaOenS+sr0jc9Vwa6RYnQZCj3B33oMxmnpQcYTKpX3dCamkbPzjMo58FwUq/LIRK9
- r9se3St9QL7AKRSzT2mSU9eNLGSars+Tj9YhWBsuelgnE4MeMxRn5/C49bPy7YU4TNyiCO
- cF4BFlisudYX6/dxTOPFjk+3DxHF5FgyVu1+5iYmjX22KgVjaQ1chxRFThF+gQ==
-From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Alexey Minnekhanov <alexeymin@postmarketos.org>
-Subject: [PATCH] drivers: pinctrl: Add Qualcomm SDM630/660 TLMM driver
-Date: Tue, 25 Mar 2025 11:18:08 +0300
-Message-ID: <20250325081808.2421857-1-alexeymin@postmarketos.org>
-MIME-Version: 1.0
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziniu.wang_1@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mZufibf6VgT5IHYcndYHgfkNqDS8aq7IHN5KnVvE+6s6Detp01fOLm9QPsYZoianenCsiAvjLtLI2OmJqVRqs1a82Ec95yY9RQia59T6AxC6JemOmSYficpn4yXPLP/ZfaA/8dEjYB7fmjJcdD1hcYvWdcJ4FOO0CSZjV7/q8wmcgRY3rvTvkkUr4D/btnaF16E+jGj/eGnA0raHKDmFhy2tBwUBSpUw5wh8EFJR8rBjX425bxGMPZTCzM2clJBWdx3M1eLJ7smY3LrthRaB774VSzaQDgNyB2drqghy9IYfuji4S7e8e8hkaHvihQhY3bx3UVwUD6vTmMsiyebJgQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RBP71YlP6dAvrZi6vn0A8C8OD33E0++5/1lTyXy6nPY=;
+ b=DG/dIkqx3CR2dFoXXHJjmYd4mZu6kmQekjzYisvq1DImkRx+tBM3ZxVRmqIoB7wkCK3/xiADXejMYPiUaHb1aP5OImnUU6XeWfV+TdyDnGYm3OvKJ52ViosxWXVCcreQELrgeBlq15ZbkQ5TA9cWznYeXNaa0L0mLrC6gEw49Gi7HLFL4r7PaMGC8z0dRRECRJlMXjwJq7WU8f7rGJwbV5woMqPooPgaL6ZUZyd/CjJDSm7ya6oFVEls25u+TSB1TorOq6U+GBOPiFGr3tsckaIxC8EkcEgU8Wq1Btbfu+8gwBA78uGZ5F43RBjGB7k/26La5ryODXMa3l+lDG5htg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RBP71YlP6dAvrZi6vn0A8C8OD33E0++5/1lTyXy6nPY=;
+ b=DE6gRAVOZNM50fpUjaOeFqZqweW7piDQvfhjfV3wDanwec45dT4RNVJ48vPi5Po3mscssJyWtFADSu84q3RUv/jqVEs4+6WJvg1mq3TNq44FYN6hjZ2Tjyw1YNfPqZsHgTSkmxGIOpqGi8w2otqEGO4ExwqhpBXy/uszn9GXyEhF+edi5+y/ePuTA8QArKYdyC4uNlFe3RcF44rXEzxk/eHqy7N8k3/XtDM9P4j1cKGA/g85WPFRh1pBhAvjLwd99gUZKpSZfY5riFxuR2Hg60VH8tuPqjQCW+LSebFIR5dm/1e4zi5LQj/l9jBsf4R77GqkKlQovn9HnBGRki0nMA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from DU2PR04MB8567.eurprd04.prod.outlook.com (2603:10a6:10:2d6::21)
+ by AS5PR04MB9771.eurprd04.prod.outlook.com (2603:10a6:20b:650::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.42; Tue, 25 Mar
+ 2025 08:28:25 +0000
+Received: from DU2PR04MB8567.eurprd04.prod.outlook.com
+ ([fe80::4db:3dc0:c292:493a]) by DU2PR04MB8567.eurprd04.prod.outlook.com
+ ([fe80::4db:3dc0:c292:493a%6]) with mapi id 15.20.8534.040; Tue, 25 Mar 2025
+ 08:28:25 +0000
+From: ziniu.wang_1@nxp.com
+To: peng.fan@nxp.com,
+	jh80.chung@samsung.com,
+	trini@konsulko.com
+Cc: pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org,
+ tharvey@gateworks.com, jonas@kwiboo.se, sjg@chromium.org,
+ u-boot@lists.denx.de
+Subject: [PATCH v3] mmc: mmc_boot: Support Sandisk and Micron eMMC BOOT/RPMB
+ hardware partition resizing
+Date: Tue, 25 Mar 2025 16:29:14 +0800
+Message-Id: <20250325082914.2240470-1-ziniu.wang_1@nxp.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR02CA0060.apcprd02.prod.outlook.com
+ (2603:1096:4:54::24) To DU2PR04MB8567.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d6::21)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8567:EE_|AS5PR04MB9771:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6974f019-f8ca-4cf1-0158-08dd6b7702b1
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?XAvGkFWfCspO+WVVU5dt1Hm9roZDDMqLL1D46KOEf4ETzD+YLM+efV6LjWxX?=
+ =?us-ascii?Q?S8sR6Jv/oWyZNXmFf6LwwD+OjqY5SHn7+OMcOBXuE2TSTd34TL1wcGthWaq9?=
+ =?us-ascii?Q?C8Mogtoclq+pVGmmnElAFKC/69Sr9d6BtLJvIKorNDti2lVFIpB3zuqVq20Y?=
+ =?us-ascii?Q?/oQKU32WsnVxBVmgTBvXMftwv8QG0ok7RElm36Cn1NvOZHFTcl9N1jx87M9F?=
+ =?us-ascii?Q?Swm7trxvIcJJ1tAUWT2bRKL/BtRuSUnmaA7Yt3W3HYWJE1EKg2iUamVlbUJY?=
+ =?us-ascii?Q?DGgLcyHp2Vp1w7+7JO9RWWca0b42ULg+quOA0lwRjS5CxSplZhQhiJgcUOy6?=
+ =?us-ascii?Q?Mqtv+JtIgSdfwBlKeHUORJbJqjDrXChujM4mjfejAzImOjsPTYDmcFd12ao6?=
+ =?us-ascii?Q?D6Dd4XPWRxoYrbD6w/pIhbYZHEuRA7r7qwiE9Yo5l3KahggwaOfg4d+VPcjX?=
+ =?us-ascii?Q?LoKZLQ9fc9OzmyIMVnSEvODTgFZ1b5ypXx7p0XaZKkPaIP9nB94wRH9LzstU?=
+ =?us-ascii?Q?S4P5IznL5CD02ddUwkZVeUgubb/Y1k3WNaKK5m73srN/Y+4hBUeDy9Yz5oGd?=
+ =?us-ascii?Q?gYkD7/56Mf/pcpcGr8DEOM/tBJp4D8CxXhlCpb2rSgYO1rap37oTQD6iPZH+?=
+ =?us-ascii?Q?agZEz1Ip0X23BcXURTSRb+BBG1rbm0Yw8FB2cFFh1j8wg+xSlIQe/tXjTHao?=
+ =?us-ascii?Q?r0HarpevYmGQ+iSUjwT17ta1WRs0AB8RJ6+66CffYWIkfNFjo8bLixxBMaAe?=
+ =?us-ascii?Q?FVqEA+ipJQgkF5H7oUBKR9aGAMU+9S1efIK9IK515Hr6rsDnAdTIHlkU+O3C?=
+ =?us-ascii?Q?KNQ/fM0+2Q8ijZcS7kT+XXUx9FaTaTIEwbpAfDCUE2xKilFKNLGaOuIfmJkA?=
+ =?us-ascii?Q?upgtBvE/IBQb1E1hNTMCHejb8HH6jAGl7diWsfUmqPiqv1VuOCAOs615yL5K?=
+ =?us-ascii?Q?3ySej/u3mEYRLpYdaAC1sb+VzoVj7zcVmayV3EvX+Jw29zhtb9N+Cb3Uey+T?=
+ =?us-ascii?Q?MZYmVTkglXp/pNZ4H8lMRMI3HDD46Ev6sflclk2OJElmaTDyuDfBuaIfcbCv?=
+ =?us-ascii?Q?klifYY4abKfTr60YuprjCliEpKm9DJFMvoEdz2VEMYfPdQ8soqjhiVSrhiBi?=
+ =?us-ascii?Q?+lBUpl4mXCj99dS5RWoHO2HA1AnfOCUtAP9MR3PcfTwAqGrNl8l0rgT1NV+c?=
+ =?us-ascii?Q?VOpXTzU+Cg7Q3Q2Sa3l/uxTiHusmHl/5IMnnR9tKp/aWlQYO9N/ebeEWd0B2?=
+ =?us-ascii?Q?vqO1tC/Eod+KI8gjoXFmMsszNCICNT/bwHDuLmaKAcIrFYELQWuJ6a2awAIR?=
+ =?us-ascii?Q?tcBZZ7+4TIz/FYSM1MbTbWPKJ1T49Bd/icRe2zW8l4FDc3Cbqt0gAgIn7m2+?=
+ =?us-ascii?Q?7acVz+QQIAD3hnNZ3l7jeOvunImj7Jomn6R1MbyZxpx1RfUF9KXMxuxpxJDo?=
+ =?us-ascii?Q?+5zpPgoeT4ns0hZXMr+TXT/2Q/Jc8bop?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8567.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dGTXbWtRF0X71C7HOPqavstt5Kv61c7VXBdG088UlMcRYuctWF7I6/AdKOIS?=
+ =?us-ascii?Q?cgaxkPcfqFCClyJi1bi3X3t9fYQlHocbjp29SKlVsiVTkEIZvPkkUiqcIEYB?=
+ =?us-ascii?Q?ae3E7Z5LQoQHaxD0NCxQ06Sj38x3wtpjkv0trTCD1t0gt3IlC1KD0zU1biUf?=
+ =?us-ascii?Q?hzO3BUxDAlFB6dsyPCIaw/KpmQaRg38urM5RiZRdIATGGW3MZAxPP0IvQHQL?=
+ =?us-ascii?Q?EjWRajZe2oRj+fXPwpD/Mi+gZsS3vFskl1DVnUPK/tRWUhDhSjgkS+ar1Z7t?=
+ =?us-ascii?Q?941SX/HAj/WEZcqWn6XBPaMoho2540Z9e/hSUk+RjY8PcgYAltmSoxqZGbzM?=
+ =?us-ascii?Q?+72s+32A0gDw9TzAGbAcAzAhcaLtPcdaGq2aI67nqBHae4pjwon8jPEpMKd0?=
+ =?us-ascii?Q?AFu6q3G1xcaqvrluQlyTf8gJao3Kpx76kP4vxbK6lz+45/cAyhT2ZPHae8jz?=
+ =?us-ascii?Q?c41q/o8MFwlSV7BZ3W6xmmYWMhJEAAnLGzFYN57ee0+xt4UK3TRZDl8/MCYu?=
+ =?us-ascii?Q?14Ox/lhYbTQlcdHtV2HiBYRWqpUWLDdCwG5bYj/99jQwCaRGGlPLa6NtawzF?=
+ =?us-ascii?Q?b1DgSizsvgU+DyxB/7OF3OOpya0zjOPoTdMH5V/ZhLUS4KASuuRzwHZ0com2?=
+ =?us-ascii?Q?0KB8xkOhUXUYOTMAYT+oWMk6403h1/IYfr1EFwZIZlRigRmN50eB0AXt/cLF?=
+ =?us-ascii?Q?doIHxoaC9YiheqmxUfSEzeHBDe+2P6FMNBJ6FcYPmEoLu9wSYs+F6Uutd9UR?=
+ =?us-ascii?Q?x0lW5JQ8QoY76ZkEDMbdrsBUBOekZeHDlLEt3tyt/CXvTXyiPT/LqleWGuUi?=
+ =?us-ascii?Q?kNyRGMOIQGD3CC1OAJi8PEsdeVcz3NpZn+4I39wsj8SoaAOi3DENVq9VfudI?=
+ =?us-ascii?Q?bUHFgkW6Kjo0nk4sobBDruXfs2ohxpO3MpS9sMLZTvkxgJaD0tcNnaAKPmqn?=
+ =?us-ascii?Q?E8ZpWs3NyChBR++HZQXeU6Wd1dGqls0WSF5jPfZtrotaBZR4DuQchkiY+auz?=
+ =?us-ascii?Q?j7LkFIDhfWodxqUlOkTPVyGTuwey3i26lFqNJKlC+Qa8Ot3UCGb3OEq0qOpD?=
+ =?us-ascii?Q?p/GwMylq9hhGxJRl6nlsx8vpPTEp7qHPPNudfjFsxDs3EQ3YMPENLNyuS7Kq?=
+ =?us-ascii?Q?MuEW7KauIw7Wxrc4z+7/08JAN8qRwnNdcbnlIq+0lQ93Mi1qnCp6l/X6+lK3?=
+ =?us-ascii?Q?u516WyPl/Fsc2Gmr1X6oOeduSjyPJxlgknhrZ+V/ZpnZSjGDHG9IkeccK90L?=
+ =?us-ascii?Q?mjaH3ISNEUvonCmCLe4+WhT7h4pBMg133cDPmTvjtNpkbBtbpQ6jBq50waiH?=
+ =?us-ascii?Q?yL7J6RseXHR6axxfiE7uD/GZxeElTKIcaFkN/LV96dxxZq9mV1VG4W9MPdeC?=
+ =?us-ascii?Q?NVrrbVp+qRJ2amNuFkUMwN73uX9WoJ8a7FMV3wl6Ql5Qoj/9Bb++UsJhY4xU?=
+ =?us-ascii?Q?TxWYC+Vu5ofZSNCx3muAoPvFSjO/z+iMnwBZm8/k+AhXTRHutQe1W7K/Ibsv?=
+ =?us-ascii?Q?Tw7EuGtSbENxPVn45gLgsukSAGITpokQnPQNpiB6B/vhwozzpJwCu7Jrecs+?=
+ =?us-ascii?Q?C8PjXMjrIoVdXdT2ACi5o3D3JNJi+JUQFab5Cmqm?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6974f019-f8ca-4cf1-0158-08dd6b7702b1
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8567.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2025 08:28:24.9484 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: n57eayqyWwF5KY0UBumNLmHJwv8gVnb3reE4hG399/9QSs/Tug9ObqNke7fBdmXVjIJMz8ZsK88Zp2mtLI5/sg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9771
 X-Mailman-Approved-At: Tue, 25 Mar 2025 15:56:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,282 +162,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for TLMM pin controller block (Top Level Mode
-Multiplexer) on SDM630/660 SoCs, with support for special pins.
+From: Luke Wang <ziniu.wang_1@nxp.com>
 
-Correct pin configuration is required for working debug UART
-and eMMC/SD cards.
+Current mmc bootpart-resize command only support Samsung eMMC BOOT/RPMB
+hardware partition resizing. Add Sandisk and Micron eMMC BOOT/RPMB hardware
+partition resizing support. The commands and parameters for resizing
+partitions are different for each manufacturer. Select the corresponding
+function according to CID.
 
-SDM630 and SDM660 TLMM blocks are the same.
-
-Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+Signed-off-by: Luke Wang <ziniu.wang_1@nxp.com>
 ---
- drivers/pinctrl/qcom/Kconfig          |   7 +
- drivers/pinctrl/qcom/Makefile         |   1 +
- drivers/pinctrl/qcom/pinctrl-sdm660.c | 224 ++++++++++++++++++++++++++
- 3 files changed, 232 insertions(+)
- create mode 100644 drivers/pinctrl/qcom/pinctrl-sdm660.c
+Changed in v3:
+- fix capital letters according to Marek's comment
+Changed in v2:
+- define some macros according to Tom's comment
+- correct emmc manufacturer id
+---
+ drivers/mmc/mmc_boot.c | 173 ++++++++++++++++++++++++++++++++++-------
+ include/mmc.h          |   6 ++
+ 2 files changed, 150 insertions(+), 29 deletions(-)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index d3eb6998551..29105301c74 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -41,6 +41,13 @@ config PINCTRL_QCOM_QCS404
- 	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
- 	  as well as the associated GPIO driver.
+diff --git a/drivers/mmc/mmc_boot.c b/drivers/mmc/mmc_boot.c
+index 367c957b518..986e6c500b1 100644
+--- a/drivers/mmc/mmc_boot.c
++++ b/drivers/mmc/mmc_boot.c
+@@ -8,20 +8,107 @@
+ #include <mmc.h>
+ #include "mmc_private.h"
  
-+config PINCTRL_QCOM_SDM660
-+	bool "Qualcomm SDM630/660 Pinctrl"
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon 630/636/660
-+	  SoCs, as well as the associated GPIO driver.
+-/*
+- * This function changes the size of boot partition and the size of rpmb
+- * partition present on EMMC devices.
+- *
+- * Input Parameters:
+- * struct *mmc: pointer for the mmc device strcuture
+- * bootsize: size of boot partition
+- * rpmbsize: size of rpmb partition
+- *
+- * Returns 0 on success.
+- */
++static int mmc_resize_boot_micron(struct mmc *mmc, unsigned long bootsize,
++				  unsigned long rpmbsize)
++{
++	int err;
+ 
+-int mmc_boot_partition_size_change(struct mmc *mmc, unsigned long bootsize,
+-				unsigned long rpmbsize)
++	/* Micron eMMC doesn't support resizing RPMB partition */
++	(void)rpmbsize;
 +
- config PINCTRL_QCOM_SDM845
- 	bool "Qualcomm SDM845 GCC"
- 	select PINCTRL_QCOM
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 06d3c95f93a..c814e9dec0b 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
- obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
-+obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
- obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
- obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
- obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-sdm660.c b/drivers/pinctrl/qcom/pinctrl-sdm660.c
-new file mode 100644
-index 00000000000..c31c1f0b637
---- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-sdm660.c
-@@ -0,0 +1,224 @@
-+// SPDX-License-Identifier: GPL-2.0+
++	/* BOOT partition size is multiple of 128KB */
++	bootsize = (bootsize * 1024) / 128;
++
++	if (bootsize > 0xff)
++		bootsize = 0xff;
++
++	/* Set EXT_CSD[175] ERASE_GROUP_DEF to 0x01 */
++	err = mmc_switch(mmc, EXT_CSD_CMD_SET_NORMAL,
++			 EXT_CSD_ERASE_GROUP_DEF, 0x01);
++	if (err)
++		goto error;
++
++	/* Set EXT_CSD[127:125] for BOOT partition size, [125] is low byte */
++	err = mmc_switch(mmc, EXT_CSD_CMD_SET_NORMAL,
++			 EXT_CSD_BOOT_SIZE_MULT_MICRON, bootsize);
++	if (err)
++		goto error;
++
++	err = mmc_switch(mmc, EXT_CSD_CMD_SET_NORMAL,
++			 EXT_CSD_BOOT_SIZE_MULT_MICRON + 1, 0x00);
++	if (err)
++		goto error;
++
++	err = mmc_switch(mmc, EXT_CSD_CMD_SET_NORMAL,
++			 EXT_CSD_BOOT_SIZE_MULT_MICRON + 2, 0x00);
++	if (err)
++		goto error;
++
++	/* Set EXT_CSD[155] PARTITION_SETTING_COMPLETE to 0x01 */
++	err = mmc_switch(mmc, EXT_CSD_CMD_SET_NORMAL,
++			 EXT_CSD_PARTITION_SETTING, 0x01);
++	if (err)
++		goto error;
++
++	return 0;
++
++error:
++	debug("%s: Error = %d\n", __func__, err);
++	return err;
++}
++
++static int mmc_resize_boot_sandisk(struct mmc *mmc, unsigned long bootsize,
++				   unsigned long rpmbsize)
++{
++	int err;
++	struct mmc_cmd cmd;
++
++	/* BOOT/RPMB partition size is multiple of 128KB */
++	bootsize = (bootsize * 1024) / 128;
++	rpmbsize = (rpmbsize * 1024) / 128;
++
++	if (bootsize > 0xff)
++		bootsize = 0xff;
++
++	if (rpmbsize > 0xff)
++		rpmbsize = 0xff;
++
++	/* Send BOOT/RPMB resize op code */
++	cmd.cmdidx = MMC_CMD_RES_MAN;
++	cmd.resp_type = MMC_RSP_R1b;
++	cmd.cmdarg = MMC_CMD62_ARG_SANDISK;
++
++	err = mmc_send_cmd(mmc, &cmd, NULL);
++	if (err)
++		goto error;
++
++	/* Arg: BOOT partition size */
++	cmd.cmdidx = MMC_CMD_RES_MAN;
++	cmd.resp_type = MMC_RSP_R1b;
++	cmd.cmdarg = bootsize;
++
++	err = mmc_send_cmd(mmc, &cmd, NULL);
++	if (err)
++		goto error;
++
++	/* Arg: RPMB partition size */
++	cmd.cmdidx = MMC_CMD_RES_MAN;
++	cmd.resp_type = MMC_RSP_R1b;
++	cmd.cmdarg = rpmbsize;
++
++	err = mmc_send_cmd(mmc, &cmd, NULL);
++	if (err)
++		goto error;
++
++	return 0;
++
++error:
++	debug("%s: Error = %d\n", __func__, err);
++	return err;
++}
++
++static int mmc_resize_boot_samsung(struct mmc *mmc, unsigned long bootsize,
++				   unsigned long rpmbsize)
+ {
+ 	int err;
+ 	struct mmc_cmd cmd;
+@@ -32,10 +119,8 @@ int mmc_boot_partition_size_change(struct mmc *mmc, unsigned long bootsize,
+ 	cmd.cmdarg = MMC_CMD62_ARG1;
+ 
+ 	err = mmc_send_cmd(mmc, &cmd, NULL);
+-	if (err) {
+-		debug("mmc_boot_partition_size_change: Error1 = %d\n", err);
+-		return err;
+-	}
++	if (err)
++		goto error;
+ 
+ 	/* Boot partition changing mode */
+ 	cmd.cmdidx = MMC_CMD_RES_MAN;
+@@ -43,10 +128,9 @@ int mmc_boot_partition_size_change(struct mmc *mmc, unsigned long bootsize,
+ 	cmd.cmdarg = MMC_CMD62_ARG2;
+ 
+ 	err = mmc_send_cmd(mmc, &cmd, NULL);
+-	if (err) {
+-		debug("mmc_boot_partition_size_change: Error2 = %d\n", err);
+-		return err;
+-	}
++	if (err)
++		goto error;
++
+ 	/* boot partition size is multiple of 128KB */
+ 	bootsize = (bootsize * 1024) / 128;
+ 
+@@ -56,10 +140,9 @@ int mmc_boot_partition_size_change(struct mmc *mmc, unsigned long bootsize,
+ 	cmd.cmdarg = bootsize;
+ 
+ 	err = mmc_send_cmd(mmc, &cmd, NULL);
+-	if (err) {
+-		debug("mmc_boot_partition_size_change: Error3 = %d\n", err);
+-		return err;
+-	}
++	if (err)
++		goto error;
++
+ 	/* RPMB partition size is multiple of 128KB */
+ 	rpmbsize = (rpmbsize * 1024) / 128;
+ 	/* Arg: RPMB partition size */
+@@ -68,11 +151,43 @@ int mmc_boot_partition_size_change(struct mmc *mmc, unsigned long bootsize,
+ 	cmd.cmdarg = rpmbsize;
+ 
+ 	err = mmc_send_cmd(mmc, &cmd, NULL);
+-	if (err) {
+-		debug("mmc_boot_partition_size_change: Error4 = %d\n", err);
+-		return err;
+-	}
++	if (err)
++		goto error;
++
+ 	return 0;
++
++error:
++	debug("%s: Error = %d\n", __func__, err);
++	return err;
++}
++
 +/*
-+ * Qualcomm SDM630/660 TLMM pinctrl
++ * This function changes the size of BOOT partition and the size of RPMB
++ * partition present on eMMC devices.
 + *
++ * Input Parameters:
++ * struct *mmc: pointer for the mmc device strcuture
++ * bootsize: size of BOOT partition
++ * rpmbsize: size of RPMB partition
++ *
++ * Returns 0 on success.
 + */
 +
-+#include <dm.h>
-+#include "pinctrl-qcom.h"
-+
-+#define TLMM_BASE  0x03100000
-+#define SOUTH  (0x03100000 - TLMM_BASE)  /* 0x0 */
-+#define CENTER (0x03500000 - TLMM_BASE)  /* 0x400000 */
-+#define NORTH  (0x03900000 - TLMM_BASE)  /* 0x800000 */
-+
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-+
-+static const struct pinctrl_function sdm660_pinctrl_functions[] = {
-+	{ "gpio", 0 },
-+	{ "blsp_uart2", 3 }, /* gpio 4 and 5, used for debug uart */
-+};
-+
-+static const unsigned int sdm660_pin_offsets[] = {
-+	[0] = SOUTH,
-+	[1] = SOUTH,
-+	[2] = SOUTH,
-+	[3] = SOUTH,
-+	[4] = NORTH,
-+	[5] = SOUTH,
-+	[6] = SOUTH,
-+	[7] = SOUTH,
-+	[8] = NORTH,
-+	[9] = NORTH,
-+	[10] = NORTH,
-+	[11] = NORTH,
-+	[12] = NORTH,
-+	[13] = NORTH,
-+	[14] = NORTH,
-+	[15] = NORTH,
-+	[16] = CENTER,
-+	[17] = CENTER,
-+	[18] = CENTER,
-+	[19] = CENTER,
-+	[20] = SOUTH,
-+	[21] = SOUTH,
-+	[22] = CENTER,
-+	[23] = CENTER,
-+	[24] = NORTH,
-+	[25] = NORTH,
-+	[26] = NORTH,
-+	[27] = NORTH,
-+	[28] = CENTER,
-+	[29] = CENTER,
-+	[30] = CENTER,
-+	[31] = CENTER,
-+	[32] = SOUTH,
-+	[33] = SOUTH,
-+	[34] = SOUTH,
-+	[35] = SOUTH,
-+	[36] = SOUTH,
-+	[37] = SOUTH,
-+	[38] = SOUTH,
-+	[39] = SOUTH,
-+	[40] = SOUTH,
-+	[41] = SOUTH,
-+	[42] = SOUTH,
-+	[43] = SOUTH,
-+	[44] = SOUTH,
-+	[45] = SOUTH,
-+	[46] = SOUTH,
-+	[47] = SOUTH,
-+	[48] = SOUTH,
-+	[49] = SOUTH,
-+	[50] = SOUTH,
-+	[51] = SOUTH,
-+	[52] = SOUTH,
-+	[53] = NORTH,
-+	[54] = NORTH,
-+	[55] = SOUTH,
-+	[56] = SOUTH,
-+	[57] = SOUTH,
-+	[58] = SOUTH,
-+	[59] = NORTH,
-+	[60] = NORTH,
-+	[61] = NORTH,
-+	[62] = NORTH,
-+	[63] = NORTH,
-+	[64] = SOUTH,
-+	[65] = SOUTH,
-+	[66] = NORTH,
-+	[67] = NORTH,
-+	[68] = NORTH,
-+	[69] = NORTH,
-+	[70] = NORTH,
-+	[71] = NORTH,
-+	[72] = NORTH,
-+	[73] = NORTH,
-+	[74] = NORTH,
-+	[75] = NORTH,
-+	[76] = NORTH,
-+	[77] = NORTH,
-+	[78] = NORTH,
-+	[79] = SOUTH,
-+	[80] = SOUTH,
-+	[81] = CENTER,
-+	[82] = CENTER,
-+	[83] = SOUTH,
-+	[84] = SOUTH,
-+	[85] = SOUTH,
-+	[86] = SOUTH,
-+	[87] = SOUTH,
-+	[88] = SOUTH,
-+	[89] = SOUTH,
-+	[90] = SOUTH,
-+	[91] = SOUTH,
-+	[92] = SOUTH,
-+	[93] = SOUTH,
-+	[94] = SOUTH,
-+	[95] = SOUTH,
-+	[96] = SOUTH,
-+	[97] = SOUTH,
-+	[98] = SOUTH,
-+	[99] = SOUTH,
-+	[100] = SOUTH,
-+	[101] = SOUTH,
-+	[102] = SOUTH,
-+	[103] = SOUTH,
-+	[104] = SOUTH,
-+	[105] = SOUTH,
-+	[106] = SOUTH,
-+	[107] = SOUTH,
-+	[108] = SOUTH,
-+	[109] = SOUTH,
-+	[110] = SOUTH,
-+	[111] = SOUTH,
-+	[112] = SOUTH,
-+	[113] = SOUTH,
-+};
-+
-+/*
-+ * Special pins - eMMC/SD related: [114..120], in total 7 special pins
-+ */
-+
-+#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-+	{						\
-+		.name = pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = 0,				\
-+		.pull_bit = pull,			\
-+		.drv_bit = drv,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = -1,				\
++int mmc_boot_partition_size_change(struct mmc *mmc, unsigned long bootsize,
++				   unsigned long rpmbsize)
++{
++	switch (mmc->cid[0] >> 24) {
++	case CID_MANFID_MICRON:
++		return mmc_resize_boot_micron(mmc, bootsize, rpmbsize);
++	case CID_MANFID_SAMSUNG:
++		return mmc_resize_boot_samsung(mmc, bootsize, rpmbsize);
++	case CID_MANFID_SANDISK:
++		return mmc_resize_boot_sandisk(mmc, bootsize, rpmbsize);
++	default:
++		printf("Unsupported manufacturer id 0x%02x\n",
++		       mmc->cid[0] >> 24);
++		return -EPERM;
 +	}
+ }
+ 
+ /*
+diff --git a/include/mmc.h b/include/mmc.h
+index 81bccb4cf12..11e95e7a716 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -79,6 +79,10 @@ struct bd_info;
+ #define IS_SD(x)	((x)->version & SD_VERSION_SD)
+ #define IS_MMC(x)	((x)->version & MMC_VERSION_MMC)
+ 
++#define CID_MANFID_MICRON       0x13
++#define CID_MANFID_SAMSUNG      0x15
++#define CID_MANFID_SANDISK      0x45
 +
-+/* All SDC pins are in the NORTH tile */
-+static const struct msm_special_pin_data sdm660_special_pins_data[] = {
-+	SDC_QDSD_PINGROUP("sdc1_clk",  NORTH + 0x9a000, 13, 6),
-+	SDC_QDSD_PINGROUP("sdc1_cmd",  NORTH + 0x9a000, 11, 3),
-+	SDC_QDSD_PINGROUP("sdc1_data", NORTH + 0x9a000, 9,  0),
-+	SDC_QDSD_PINGROUP("sdc2_clk",  NORTH + 0x9b000, 14, 6),
-+	SDC_QDSD_PINGROUP("sdc2_cmd",  NORTH + 0x9b000, 11, 3),
-+	SDC_QDSD_PINGROUP("sdc2_data", NORTH + 0x9b000, 9,  0),
-+	SDC_QDSD_PINGROUP("sdc1_rclk", NORTH + 0x9a000, 15, 0),
-+};
-+
-+static const char *sdm660_get_function_name(struct udevice *dev, unsigned int selector)
-+{
-+	return sdm660_pinctrl_functions[selector].name;
-+}
-+
-+static const char *sdm660_get_pin_name(struct udevice *dev, unsigned int selector)
-+{
-+	static const char * const special_pins_names[] = {
-+		"sdc1_clk", "sdc1_cmd", "sdc1_data",
-+		"sdc2_clk", "sdc2_cmd", "sdc2_data",
-+		"sdc1_rclk"
-+	};
-+
-+	if (selector >= 114 && selector <= 120)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 114]);
-+	else
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+
-+	return pin_name;
-+}
-+
-+static unsigned int sdm660_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+{
-+	return sdm660_pinctrl_functions[selector].val;
-+}
-+
-+struct msm_pinctrl_data sdm660_data = {
-+	.pin_data = {
-+		.pin_offsets = sdm660_pin_offsets,
-+		.pin_count = ARRAY_SIZE(sdm660_pin_offsets) + ARRAY_SIZE(sdm660_special_pins_data),
-+		.special_pins_start = 114,
-+		.special_pins_data = sdm660_special_pins_data,
-+	},
-+	.functions_count = ARRAY_SIZE(sdm660_pinctrl_functions),
-+	.get_function_name = sdm660_get_function_name,
-+	.get_function_mux = sdm660_get_function_mux,
-+	.get_pin_name = sdm660_get_pin_name,
-+};
-+
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{
-+		.compatible = "qcom,sdm630-pinctrl",
-+		.data = (ulong)&sdm660_data
-+	},
-+	{
-+		.compatible = "qcom,sdm660-pinctrl",
-+		.data = (ulong)&sdm660_data
-+	},
-+	{ /* Sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(pinctrl_ssdm660) = {
-+	.name = "pinctrl_sdm660",
-+	.id = UCLASS_NOP,
-+	.of_match = msm_pinctrl_ids,
-+	.ops = &msm_pinctrl_ops,
-+	.bind = msm_pinctrl_bind,
-+};
+ #define MMC_DATA_READ		1
+ #define MMC_DATA_WRITE		2
+ 
+@@ -112,6 +116,7 @@ struct bd_info;
+ 
+ #define MMC_CMD62_ARG1			0xefac62ec
+ #define MMC_CMD62_ARG2			0xcbaea7
++#define MMC_CMD62_ARG_SANDISK		0x254ddec4
+ 
+ #define SD_CMD_SEND_RELATIVE_ADDR	3
+ #define SD_CMD_SWITCH_FUNC		6
+@@ -205,6 +210,7 @@ static inline bool mmc_is_tuning_cmd(uint cmdidx)
+ /*
+  * EXT_CSD fields
+  */
++#define EXT_CSD_BOOT_SIZE_MULT_MICRON	125	/* R/W, vendor specific field */
+ #define EXT_CSD_ENH_START_ADDR		136	/* R/W */
+ #define EXT_CSD_ENH_SIZE_MULT		140	/* R/W */
+ #define EXT_CSD_GP_SIZE_MULT		143	/* R/W */
 -- 
-2.48.1
+2.34.1
 
