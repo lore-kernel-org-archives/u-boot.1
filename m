@@ -4,81 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A415DC35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 696D0C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 14:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4F428186D;
-	Tue, 25 Mar 2025 15:51:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CF1A381026;
+	Tue, 25 Mar 2025 15:55:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rCPJ1DEf";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="BikzqbT5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E2DD81951; Tue, 25 Mar 2025 15:51:40 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id A0445812BC; Tue, 25 Mar 2025 15:55:20 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8338380EEF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 15:51:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EEED80EEF
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 15:55:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3fa6c54cdb2so4891817b6e.3
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 07:51:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3912e96c8e8so3254510f8f.2
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 07:55:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742914296; x=1743519096; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VuhZ+B5vEGVc97NBu7zSaBiKTGUL0lZOF25OHbANPk4=;
- b=rCPJ1DEfX1BbnUqRAt8EHQtvwRsqvzun8HvTobleI8pM2LaoZOafJVQHwIlchtDEJy
- FSbIUNmIEqz0nxc0x/ffaRD5HV9bl7TUa3HvQMxU13zSMzSk1/zJ8m5mEby3GdnEa4mG
- a+jpH+WSY8n7qONasqK7Zu3K4vRuAdkHwHV8w=
+ d=suse.com; s=google; t=1742914518; x=1743519318; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=pOboUCTJoLM5QwIJ9VHWXu85oejuezuFN8mueblLMV4=;
+ b=BikzqbT5oLx8I0r7K8aOCIh9pcm7L+W5AvCZUh2QY5J2aNqfy/AMmsD8wlX27ugFrY
+ hbSs1rk3BEkAxA0b325aFZ2b70tRYMfa/AXp7dhFNq1e2kcOsu8uT6G8YH8vL6CDoWI4
+ 8cLatiKaRugyA5gbeYbXvqS1tCIm3q6lKkfML1aGzYdm70BrquNCvr7B0TkTqk8WhOvH
+ r+LEE3a7QQaUDton5eXhucD9iA1VPXfIVC2+Ep9nOnn986gbhyvmOYjhl1S76jwTZUGh
+ 4VfyDryJXrGG96YyXGtBuJQZum+SkCqCx8w9MYnRY+r2xwXGFSHNA1udlBRX/jwOJXgS
+ 7SvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742914296; x=1743519096;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1742914518; x=1743519318;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VuhZ+B5vEGVc97NBu7zSaBiKTGUL0lZOF25OHbANPk4=;
- b=dL1zvjWAwriHKpOxc9SQW3dzL3h14NjxFu5VGErVzidB9BvHUN0tpaJ91ezxiAdXAh
- ybMis0kQTtOFHMRYYQwaeio1nY2UJDM+EFmd5x+G81vFlP5avglNn+P+j/OGDM9EkzMu
- bC5+ca0tZC8HUzEqKDNwnvU25pm3wY1+h8ZwaJFP8a8sOwmkcpVMeZ7yXCs9AKVIEr/g
- MQzFKnF+Su9vNMAopEu3svWpdvEBBXBUzssu2b8k4Z8xaSxeSLPx/gQ/H7e22FQC8FY6
- E7NOSgXuNZKHAsFby/cz6t6QWYCz2S2Q7m7t9v5Qg6+Kiff/laF2/Rz73g+Jc9kcG2vN
- WiJw==
-X-Gm-Message-State: AOJu0YxoTThqcR9BXKZ4TE6MgBaxPrzxRblq3rLRBkoP8CszPNzgS0sO
- 3pyYOhGbRlCgQoWcUZyoADfFjtPN59m7sPqijUV7jViTLjY++Y00DhADWUrYh54=
-X-Gm-Gg: ASbGnctA/q/+cGuk92kTw9mrEssoxqWiOP7/hMS2cVfraEQ8SzuWmBZELpsmGS2v3eY
- T5jwhLQapQaAFF0E2m9bcIGK1lTv3k5k3wcPHCuC9MJ4pD4A+Za6lmznykJy/F1GuRHVw4o2YXt
- c5vOXQXIPbbH8KX6JEwwUvb5FyyyDy0jw1mzlYxLCxkfqUDe+JcpHy4o7XoD0X7AVuFyNjhQ4pb
- 5GWljdWmFJWZF/qnVTMtsiGRPYrH56BvHzL7Ae1To+cowLiwZpfs4XVxTZ6k9Fd/dEQhPJkz4xZ
- Vva4i0+CL7EzhZjWvE6mJiBqc8cho+U4DFvicwaQuek=
-X-Google-Smtp-Source: AGHT+IF1Evtglh1RV9eBgGDzaWTTQTRxPqCnEVqVqteNt7dtHMhatahqKjmWkRNkNBnkfj+A6h7ToA==
-X-Received: by 2002:a05:6808:7003:b0:3f7:d16c:e283 with SMTP id
- 5614622812f47-3febf72361bmr11777844b6e.11.1742914296113; 
- Tue, 25 Mar 2025 07:51:36 -0700 (PDT)
-Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3febf6bd815sm1964613b6e.9.2025.03.25.07.51.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Mar 2025 07:51:35 -0700 (PDT)
-Date: Tue, 25 Mar 2025 08:51:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
- u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2025.04-rc5 released
-Message-ID: <20250325145132.GG93000@bill-the-cat>
-References: <20250325020130.GF93000@bill-the-cat> <87msd9o4f4.fsf@baylibre.com>
+ bh=pOboUCTJoLM5QwIJ9VHWXu85oejuezuFN8mueblLMV4=;
+ b=HU3AM07dBACG31pt9cnttumGvFwXSL6Y8xyo2pQGidvN3DdUGeT09xP916A131x/Ck
+ hGO7TT1OrJpuRRvxfRLQi8g9txSNPoc7PdiimKvW8I/YdlOpc1X1Pp7qQlHz3EdHUv0/
+ 6SPPDQtoX81uh5+wme5Y0GT+sDNClIg/U4Nhx1O8ajglWXTUFgOuq/XRgXsjsXylacO6
+ Zvzpp/T14KAymQ8EDclgTcGEl3J9Kc9GSbacFM3Pjk20Fnr3E22iYwbGuq6djyeSkWkQ
+ csSQD1XrQitgQ8CqNJQPLNCJ4vzk6hradlkTCH85PEniGeldfGBXdqf8xc91peMiRvci
+ 4sSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5x03ivU9bFNYZ04Dq0N/PHeUDE9Gkq6v3r0ct4XmhURDMNtD1oOMiIa3irsaQS9F/9fyTteE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw5HFn9AhacOA1aw/IurlyJwpsml9ebsaDj2l4IMcDr2mAdViRm
+ jeo+kVt0oN0ifO2VsHG8JImlBQKCeC6Rjq8+LLHcVTkgvwgXmWXs580vkVBTYB8=
+X-Gm-Gg: ASbGncshA8J7nYs4pvxpRrJbv2vwKMSWJiSmoEMFmQemwWEEH2JoUVZldvqTFd+bu1d
+ QPVjqpvPqMebaY8nYoQsC3NnpUDw//0vDgCv5l3IHjAFo8yVG/RNs+3XHV3nLo9Elq9Gap9dBcF
+ ++k+DxTAmzaGtfdlqaCHp9BvCbQyDBWMKW1pogW2gLOgB+WPKao3zYZ5jjEMs38mj0deEHchCpu
+ KAQlMNiCnOPECKkY9Wxzj2q2BIrzyIt7S53xohzoVbRrZRalr7WNU6wUDOV4EFs00wxhinO1PC1
+ 3VVMwtjsATwI6oIanl099j17LmcyEqOmXsToYwhB8IjG7XYbUwva
+X-Google-Smtp-Source: AGHT+IGP8x6pnkoaSSsz1eSwns0NNPKZLSU9Di9DXFYLu4+jdPsw2h+/oFrYyNuKlu5f8OTAzMhP0A==
+X-Received: by 2002:a05:6000:1faf:b0:391:2f2f:836 with SMTP id
+ ffacd0b85a97d-3997f8fa7f6mr13986044f8f.17.1742914517536; 
+ Tue, 25 Mar 2025 07:55:17 -0700 (PDT)
+Received: from [192.168.2.177] ([81.0.8.231]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d43f332adsm204830025e9.3.2025.03.25.07.55.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Mar 2025 07:55:17 -0700 (PDT)
+Message-ID: <dd76531a-ef74-47e5-a4bd-ce139a4bd86c@suse.com>
+Date: Tue, 25 Mar 2025 15:55:15 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BYyz9I596DpDyBEt"
-Content-Disposition: inline
-In-Reply-To: <87msd9o4f4.fsf@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] acpi: simplify updating header checksum
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Fiona Klute <fiona.klute@gmx.de>, Martin Stolpe <martinstolpe@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
+References: <20250321232121.251800-1-heinrich.schuchardt@canonical.com>
+ <20250321232121.251800-3-heinrich.schuchardt@canonical.com>
+Content-Language: en-US, ca-ES, es-ES
+From: Matthias Brugger <mbrugger@suse.com>
+Autocrypt: addr=mbrugger@suse.com; keydata=
+ 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
+ PVrr2NoUqi/bxI8fFQJD1jVj8K0=
+In-Reply-To: <20250321232121.251800-3-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,56 +153,154 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BYyz9I596DpDyBEt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 25, 2025 at 10:17:19AM +0100, Mattijs Korpershoek wrote:
-> Hi Tom,
->=20
-> On lun., mars 24, 2025 at 20:01, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > Hey all,
-> >
-> > So it's release day and I have tagged and pushed things out. This will
-> > be merged to -next shortly.
-> >
-> > One thing to note is that just today a bug was reported due to a missing
-> > 'fallthrough;' line and in turn we need to fix that in a number of
-> > places and ensure it doesn't return. This will happen between now and
-> > the release as I think it's clear enough.
-> >
-> > While we have been having regular meetings after an -rc release, I have
-> > assorted personal appointments this week and need to reschedule for next
-> > week instead.
->=20
-> The calendar invite on https://www.u-boot.org/ still has an event for
-> today (25 march).
->=20
-> To avoid any confusion, could you update to Tuesday 1st of April?
+On 22/03/2025 00:21, Heinrich Schuchardt wrote:
+> Use acpi_update_checksum() for updating ACPI table header checksum.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Ah right, thanks!
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
---=20
-Tom
+> ---
+>   lib/acpi/acpi_table.c | 18 +++++++-----------
+>   lib/acpi/base.c       |  6 ++----
+>   lib/acpi/csrt.c       |  2 +-
+>   lib/acpi/mcfg.c       |  2 +-
+>   lib/acpi/ssdt.c       |  2 +-
+>   5 files changed, 12 insertions(+), 18 deletions(-)
+> 
+> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+> index c0ed24984af..b5495d48a46 100644
+> --- a/lib/acpi/acpi_table.c
+> +++ b/lib/acpi/acpi_table.c
+> @@ -195,9 +195,7 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
+>   					(sizeof(u32) * (i + 1));
+>   
+>   		/* Re-calculate checksum */
+> -		rsdt->header.checksum = 0;
+> -		rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
+> -							       rsdt->header.length);
+> +		acpi_update_checksum(&rsdt->header);
+>   	}
+>   
+>   	if (ctx->xsdt) {
+> @@ -228,9 +226,7 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
+>   					(sizeof(u64) * (i + 1));
+>   
+>   		/* Re-calculate checksum */
+> -		xsdt->header.checksum = 0;
+> -		xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
+> -							       xsdt->header.length);
+> +		acpi_update_checksum(&xsdt->header);
+>   	}
+>   
+>   	return 0;
+> @@ -268,7 +264,7 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>   
+>   	acpi_fill_fadt(fadt);
+>   
+> -	header->checksum = table_compute_checksum(fadt, header->length);
+> +	acpi_update_checksum(header);
+>   
+>   	return acpi_add_fadt(ctx, fadt);
+>   }
+> @@ -303,7 +299,7 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>   	if (IS_ENABLED(CONFIG_ACPI_PARKING_PROTOCOL))
+>   		acpi_write_park(madt);
+>   
+> -	header->checksum = table_compute_checksum((void *)madt, header->length);
+> +	acpi_update_checksum(header);
+>   	acpi_add_table(ctx, madt);
+>   	ctx->current = (void *)madt + madt->header.length;
+>   
+> @@ -374,7 +370,7 @@ void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
+>   	/* Update structure lengths and checksum */
+>   	device->length = current - (uintptr_t)device;
+>   	header->length = current - (uintptr_t)dbg2;
+> -	header->checksum = table_compute_checksum(dbg2, header->length);
+> +	acpi_update_checksum(header);
+>   }
+>   
+>   int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
+> @@ -549,7 +545,7 @@ static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry
+>   		spcr->baud_rate = 0;
+>   
+>   	/* Fix checksum */
+> -	header->checksum = table_compute_checksum((void *)spcr, header->length);
+> +	acpi_update_checksum(header);
+>   
+>   	acpi_add_table(ctx, spcr);
+>   	acpi_inc(ctx, spcr->header.length);
+> @@ -759,7 +755,7 @@ static int acpi_write_iort(struct acpi_ctx *ctx, const struct acpi_writer *entry
+>   
+>   	/* (Re)calculate length and checksum */
+>   	iort->header.length = ctx->current - (void *)iort;
+> -	iort->header.checksum = table_compute_checksum((void *)iort, iort->header.length);
+> +	acpi_update_checksum(&iort->header);
+>   	log_debug("IORT at %p, length %x\n", iort, iort->header.length);
+>   
+>   	/* Drop the table if it is empty */
+> diff --git a/lib/acpi/base.c b/lib/acpi/base.c
+> index 8b6af2bc43a..5c755b14c16 100644
+> --- a/lib/acpi/base.c
+> +++ b/lib/acpi/base.c
+> @@ -50,8 +50,7 @@ static void acpi_write_rsdt(struct acpi_rsdt *rsdt)
+>   	/* Entries are filled in later, we come with an empty set */
+>   
+>   	/* Fix checksum */
+> -	header->checksum = table_compute_checksum(rsdt,
+> -						  sizeof(struct acpi_rsdt));
+> +	acpi_update_checksum(header);
+>   }
+>   
+>   static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
+> @@ -66,8 +65,7 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
+>   	/* Entries are filled in later, we come with an empty set */
+>   
+>   	/* Fix checksum */
+> -	header->checksum = table_compute_checksum(xsdt,
+> -						  sizeof(struct acpi_xsdt));
+> +	acpi_update_checksum(header);
+>   }
+>   
+>   static int acpi_write_base(struct acpi_ctx *ctx,
+> diff --git a/lib/acpi/csrt.c b/lib/acpi/csrt.c
+> index 00927e53406..b863c644c07 100644
+> --- a/lib/acpi/csrt.c
+> +++ b/lib/acpi/csrt.c
+> @@ -40,7 +40,7 @@ int acpi_write_csrt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>   
+>   	/* (Re)calculate length and checksum */
+>   	header->length = (ulong)ctx->current - (ulong)csrt;
+> -	header->checksum = table_compute_checksum(csrt, header->length);
+> +	acpi_update_checksum(header);
+>   
+>   	acpi_add_table(ctx, csrt);
+>   
+> diff --git a/lib/acpi/mcfg.c b/lib/acpi/mcfg.c
+> index 8b8a5bfafae..e21fe7ce123 100644
+> --- a/lib/acpi/mcfg.c
+> +++ b/lib/acpi/mcfg.c
+> @@ -57,7 +57,7 @@ int acpi_write_mcfg(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>   
+>   	/* (Re)calculate length and checksum */
+>   	header->length = (ulong)ctx->current - (ulong)mcfg;
+> -	header->checksum = table_compute_checksum(mcfg, header->length);
+> +	acpi_update_checksum(header);
+>   
+>   	acpi_add_table(ctx, mcfg);
+>   
+> diff --git a/lib/acpi/ssdt.c b/lib/acpi/ssdt.c
+> index df1d739d117..41e2d3c2f6c 100644
+> --- a/lib/acpi/ssdt.c
+> +++ b/lib/acpi/ssdt.c
+> @@ -35,7 +35,7 @@ int acpi_write_ssdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>   
+>   	/* (Re)calculate length and checksum */
+>   	ssdt->length = ctx->current - (void *)ssdt;
+> -	ssdt->checksum = table_compute_checksum((void *)ssdt, ssdt->length);
+> +	acpi_update_checksum(ssdt);
+>   	log_debug("SSDT at %p, length %x\n", ssdt, ssdt->length);
+>   
+>   	/* Drop the table if it is empty */
 
---BYyz9I596DpDyBEt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfiwvAACgkQFHw5/5Y0
-tywCdAwAuWO73jTtlyM9ie7qo4UnrU7y6SlqC85GJz5F8zqhTCYCIo+JtLxq+bxD
-G9BkTKOx+fdwB1SprYvfyhxY+yf0viV+yJ+YtXSXS8XEIgWvmTnf/HH2LlMDn9D9
-yqvhthibwAi9ckalqA2RkTppFPmOefUBqElYVbbWAczegiI3wgAOClR1ioPgVVe7
-M5/6iuugachgrxOkUGzXrwJ/c+9A13qZbqr6m2dPScWQ6GaUvf60HCLmnf7ewwcZ
-/kOYu2JTOFeIKwiCffZdzw0ryfmUrAyaKVkD5pUB2vB4kUHtP+SnCKpPhPn45yh+
-EH++P2J9Lk7WNRmozS8orSoo0BP9Le7g/7cvz+YOzagnIebEA7nyBYRixa2CE0Yk
-78wVYvTiRS1dPeHbl0XYqIfd/yt379IUAQb91kD0tUZ+1IbPH2ujO+ieA4MuZCno
-FXDxTIgVy43mu95odWUvGltg1NI11W/jU9n7doSUEaMcykbB31Vw7NgT/R6IvMgU
-uYR1gpZ7
-=OsJj
------END PGP SIGNATURE-----
-
---BYyz9I596DpDyBEt--
