@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D97DC36005
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 03:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012A2C28B30
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:01:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B339810E8;
-	Wed, 26 Mar 2025 04:00:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1A751808B6;
+	Wed, 26 Mar 2025 06:01:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1742958038;
-	bh=3Gkz0zbCUEeMX6TmwCAt5nCzLJLeRQsEaxXMK8iF9UY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Q7vuMpoJ9Lmz1CaqrtQ7MiZAcj78y+wapKpcEEUDpbNRAc3Yw2Wa9bsJ2Vtkw+Kcp
-	 YPtU3eXFj4QtvLtNrH2cU1ViFUdswhYLWZmgi4dzcpRAOyCCuoNwvY5E461cgnixrK
-	 F2KGT9PxmD3ZXY27UZot5NiEYL49mUQ8+ZQ8qX6qjncB4OErz6wpd+26tQ/N3K+RX8
-	 mqtQEXm6ZcERnDvs96ycSNrlyiERi6NlyrVLLfgfN43VRa4GuScq2fggrDlX2qymmh
-	 YasUgconAczRsWHghHxNOkz41Ra8heWXFunBNPbfvBS1Cqq0irPuZ0tyiJrKOkVMSP
-	 /69iGT3brm/mQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 70FAA8186D; Wed, 26 Mar 2025 04:00:37 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74449806FC
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 04:00:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="HSuWqZtL"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C6D6910382D3C; Wed, 26 Mar 2025 04:00:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1742958034; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=3Gkz0zbCUEeMX6TmwCAt5nCzLJLeRQsEaxXMK8iF9UY=;
- b=HSuWqZtL6Qc01C5f43m92b1++DIIH1+cWcvn08sxj+WHinwDiXLrTxr48K0Dn5hGu861fC
- TuyKHA8Uag3ydxxqPZNZlw0YZRC57VVphP69Btv4RaoKI+1xFj7XgUHmSC4WOndhrNWSsO
- WqyXfKFNSbUrW3HtpnBaKC18NAzVKRcIIbGNkeBJhCs/1RejzIKrFJPfCtdu2xQNSWUQxT
- J+GaOZOi4fDWqo3kwEra/TWJlBUJtAmtbDFNHTlfIHNPEz0VoXWw2u3qrMu0DfUbwvfIAO
- M0FoPzeWkE2ezok2/cX73uAbcGOQcj11uxhgkinTZ1iilmTvbRvwYi88DnbDkw==
-Message-ID: <bc232085-3efb-43fb-b176-eaf43e52f1f8@denx.de>
-Date: Wed, 26 Mar 2025 04:00:31 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 02/19] pinctrl: nxp: add a pin controller driver based
- on SCMI pin control protocol
-To: Peng Fan <peng.fan@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@karo-electronics.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>, Ye Li <ye.li@nxp.com>
-References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
- <20250321-imx95-v1-2-f2c8ba815f89@oss.nxp.com>
- <a180b7e6-6978-4814-97ff-05e34223938f@denx.de>
- <20250325080614.GC27303@nxa18884-linux>
- <a84f63fb-61c2-4f0e-89ed-8046e8eeed85@denx.de>
- <PAXPR04MB8459808C7CC6C16DB43B973388A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB8459808C7CC6C16DB43B973388A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="yG3+VQ5d";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2F6028192A; Tue, 25 Mar 2025 16:37:32 +0100 (CET)
+Received: from out162-62-58-69.mail.qq.com (out162-62-58-69.mail.qq.com
+ [162.62.58.69])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 73C75810E8
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 16:37:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=423756212@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1742917046; bh=l23Eh6DiYzu9HoDvZbmwH/45ZKAZC1QxzIgnTM0gHrE=;
+ h=From:To:Cc:Subject:Date:References:In-Reply-To;
+ b=yG3+VQ5dL2gXlxWJlnfhwT49tgnsRVnnkbry1IveRN8vztcUwLASAMeTjvOqrsSxr
+ DOEZe7sdNFQDGkAJT4Ds9gOC6QCdK+UKrDr7swtO5bViS9/QRRzF8nRJgFfZbBMCbG
+ 1e2cpmIUkTNoZ/kY7dT0Rm8NWegsPMiyAhBR7JV4=
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+X-QQ-XMAILINFO: NnA3IMNPwBd+P8GWekO8oHlQMsAbXCMDz2/TdcmYqxna8ZSzFmDVh8KIoT0hJV
+ F4KLzqS5g0hQXt6iEEvY4sxzz0qFg1BYa2cKf3KNnT+4RKFfL2TB1tmIaQ2km0xB2vgLt6lbp3CnS
+ oizJuBZLY+ZN9GbCmiju/d47tzHrI0RfqrdKGp7ifpCkqY32oRTPKKS7cNkV2qsSBH9JJgp4iY7dI
+ D3Z3aQV66zzyJe1Yj67HSP3aKpaZM2KOVbKMCWHeK9+1exrO9Jl/W8wJbDJGTQJXl52kroNV5inAU
+ fR7XvKec8F5zDpMjhGlXzWXI1R1AITH2+ZLQiv+5W9be08ihUmXsUpDgYJIwB3wXfh5IUEGrzPahF
+ WonmB/5DNnZh+V3DTyPeNuEINXVxqjLhN7rdkNofHYnDd7tBU5wN86HtLCsudT5MtPLXf4Na2GnUN
+ FciU9Wv9vifWnS6UkOyMgpMe/kpnUd7Rvj1dYmKrzMnc66MEnjP/1i9ZQFQX5F1V81FCQsTDBuN+Q
+ Eo7q3psEiIUHVhPNI5Zl+EpQii8hPa3qMKB865omjZZ0ODL1XkulPaq1SfKMRUvN7Lk8QoR6VBGS2
+ pz0HtAFoCfDgPi3ax0kUfEe4NCRXXEKBKekTdz7k1mlc5MclIM7XO7blsNJG18j1FgBaNxX/ryE2B
+ fWBakVhM/8SaJaEf6C8ZFIxqyZDySuf7S/VQe4aZdSinmw1ECrpQb8yt47KqBuJgvmGqzk/uQhIWd
+ IAl4GVGACRHAzk/+5oph0qC1u7UpUrGOTUSpgvglFW+/UOLCxK+BdYBARjOMiQZeLMOQx4aBA22Lm
+ u6sXS3KK5C8bysp25M/YJlfuzhVJVpj0hqpTaZeHAQzedVSIs2rd3kydacl1VOwTp3h89zutSvkmo
+ RXs/mj4+hkhCtfN2qM8b/klIkGpYLdKdmJiYToMPG4UP0JopYnop5PpCAU1J/kHe7hAFAJJwMFdEd
+ TB5YvKGaL1W0A/cRLftdsNjqL3DJ0o8U+j5BpP/AsLwxWPcMeoBEkumMK+tLE=
+From: "=?utf-8?B?MC4w?=" <423756212@qq.com>
+To: "=?utf-8?B?dS1ib290?=" <u-boot@lists.denx.de>
+Cc: "=?utf-8?B?UGF0cmljayBSdWRvbHBo?=" <patrick.rudolph@9elements.com>,
+ "=?utf-8?B?U2ltb24gR2xhc3M=?=" <sjg@chromium.org>,
+ "=?utf-8?B?VG9tIFJpbmk=?=" <trini@konsulko.com>
+Subject: [PATCH] armv8: start.S: Subordinate CPUs psci setup vector
+Mime-Version: 1.0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+Date: Tue, 25 Mar 2025 23:37:25 +0800
+X-Priority: 3
+Message-ID: <tencent_AF9EB8E8B7E27ECFACE1C930F11E1424CA09@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+References: <tencent_2E204F13F4367132679AF08898030F6E1208@qq.com>
+In-Reply-To: <tencent_2E204F13F4367132679AF08898030F6E1208@qq.com>
+X-QQ-mid: xmsezb20-1t1742917045tzjdk561q
+X-Mailman-Approved-At: Wed, 26 Mar 2025 06:01:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,50 +82,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/26/25 2:52 AM, Peng Fan wrote:
->> Subject: Re: [PATCH v8 02/19] pinctrl: nxp: add a pin controller driver
->> based on SCMI pin control protocol
->>
->> On 3/25/25 9:06 AM, Peng Fan wrote:
->>
->> [...]
->>
->>>>> diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
->>>>> index 7abb2a6f36b..279ebbad440 100644
->>>>> --- a/include/scmi_protocols.h
->>>>> +++ b/include/scmi_protocols.h
->>>>> @@ -24,6 +24,7 @@ enum scmi_std_protocol {
->>>>>     	SCMI_PROTOCOL_ID_SENSOR = 0x15,
->>>>>     	SCMI_PROTOCOL_ID_RESET_DOMAIN = 0x16,
->>>>>     	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN = 0x17,
->>>>> +	SCMI_PROTOCOL_ID_PINCTRL = 0x19,
->>>> If this is the IMX specific pinctrl protocol, please make sure to
->>>> name it accordingly , SCMI_PROTOCOL_ID_PINCTRL_IMX or
->> something .
->>>
->>> This ID is generic ID, not i.MX specific.
->>>
->>> i.MX SCMI pinctrl follows ARM SCMI spec, but i.MX pinctrl bindings
->> are
->>> different compared with ARM SCMI generic pinconf bindings, so we
->> need
->>> a separate driver for i.MX.
->> But then, why is it using the same protocol ID ?
-> 
-> i.MX System Manager FW pinctrl follows ARM SCMI spec,
-> the ID value is 0x19.
-> 
-> 
-> If you look at linux kernel driver
-> 
-> drivers/pinctrl/pinctrl-scmi.c
-> drivers/pinctrl/freescale/pinctrl-scmi-imx.c
+QXMmbmJzcDtjdXJyZW50Jm5ic3A7ZGVzaWduLCZuYnNwO29ubHkmbmJzcDtNYW5hZ2VyJm5i
+c3A7Q1BVJm5ic3A7Y2FsbGVkJm5ic3A7YXJtdjhfc2V0dXBfcHNjaSgpJm5ic3A7YmVmb3Jl
+PGJyLz5qdW1wJm5ic3A7dG8mbmJzcDtuZXh0Jm5ic3A7c3RhZ2Uoc3VjaCZuYnNwO2FzJm5i
+c3A7TGludXgmbmJzcDtLZXJuZWwpLCZuYnNwO1N1Ym9yZGluYXRlJm5ic3A7Q1BVcyZuYnNw
+O2Fsc28mbmJzcDtuZWVkPGJyLz5zZXR1cCZuYnNwO3BzY2kmbmJzcDt2ZWN0b3ImbmJzcDt0
+byZuYnNwO2hhbmRsZSZuYnNwO3RyYXAmbmJzcDtyZXF1ZXN0Jm5ic3A7d2hpY2gmbmJzcDtj
+b21lcyZuYnNwO2Zyb20mbmJzcDtoaWdoZXImbmJzcDtFTDxici8+bGV2ZWwuPGJyLz48YnIv
+PlNpZ25lZC1vZmYtYnk6Jm5ic3A7eHhmb3JlJm5ic3A7Jmx0OzQyMzc1NjIxMkBxcS5jb20m
+Z3Q7PGJyLz4tLS08YnIvPjxici8+YXJjaC9hcm0vY3B1L2FybXY4L3N0YXJ0LlMmbmJzcDt8
+Jm5ic3A7MyZuYnNwOysrKzxici8+MSZuYnNwO2ZpbGUmbmJzcDtjaGFuZ2VkLCZuYnNwOzMm
+bmJzcDtpbnNlcnRpb25zKCspPGJyLz48YnIvPmRpZmYmbmJzcDstLWdpdCZuYnNwO2EvYXJj
+aC9hcm0vY3B1L2FybXY4L3N0YXJ0LlMmbmJzcDtiL2FyY2gvYXJtL2NwdS9hcm12OC9zdGFy
+dC5TPGJyLz5pbmRleCZuYnNwO2QzYThhN2M0Nzg3Li5jNzg3MmU5MzVlOSZuYnNwOzEwMDY0
+NDxici8+LS0tJm5ic3A7YS9hcmNoL2FybS9jcHUvYXJtdjgvc3RhcnQuUzxici8+KysrJm5i
+c3A7Yi9hcmNoL2FybS9jcHUvYXJtdjgvc3RhcnQuUzxici8+QEAmbmJzcDstMzM0LDYmbmJz
+cDsrMzM0LDkmbmJzcDtAQCZuYnNwO1dFQUsobG93bGV2ZWxfaW5pdCk8YnIvPgkvKjxici8+
+CSZuYnNwOyombmJzcDtBbGwmbmJzcDtzbGF2ZXMmbmJzcDt3aWxsJm5ic3A7ZW50ZXImbmJz
+cDtFTDImbmJzcDthbmQmbmJzcDtvcHRpb25hbGx5Jm5ic3A7RUwxLjxici8+CSZuYnNwOyov
+PGJyLz4rI2lmJm5ic3A7ZGVmaW5lZChDT05GSUdfQVJNVjhfUFNDSSk8YnIvPismbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtibCZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO3BzY2lfc2V0dXBfdmVjdG9yczxici8+KyNlbmRp
+Zjxici8+CWFkcgl4NCwmbmJzcDtsb3dsZXZlbF9pbl9lbDI8YnIvPglsZHIJeDUsJm5ic3A7
+PUVTX1RPX0FBUkNINjQ8YnIvPglibAlhcm12OF9zd2l0Y2hfdG9fZWwyPGJyLz4tLTxici8+
+Mi4yMC4xPGJyLz48YnIvPjxici8+
 
-Is the second driver upstream at all ? I don't see it in linux-next ?
-
-> Both use same ID 0x19.
-> 
-> It is fine to use below, if it is fine to you.
-> SCMI_PROTOCOL_ID_PINCTRL_IMX = 0x19.
-How does the kernel discern which driver it should use to communicate 
-with the SCMI provider if both drivers are compiled into the kernel ?
