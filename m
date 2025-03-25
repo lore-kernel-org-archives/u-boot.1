@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F490C35FFC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504F2C35FFC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Mar 2025 12:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FC04808B6;
-	Tue, 25 Mar 2025 13:55:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6CC480EEF;
+	Tue, 25 Mar 2025 13:56:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TzvTpqxm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gNFiL2AA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B3E580EEF; Tue, 25 Mar 2025 13:55:18 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id A64378192A; Tue, 25 Mar 2025 13:56:05 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D19F808AF
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:55:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7730808B6
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 13:55:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-54996d30bfbso5168443e87.2
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:55:16 -0700 (PDT)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-30c091b54aaso56254861fa.3
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 05:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742907315; x=1743512115; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1742907358; x=1743512158; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6Y42awx/wcSRJQ2bP/WQYpo7bEUFNCnyhwCCPxpt/jY=;
- b=TzvTpqxmQ73vV4OmlvsPwAM8poTHvHbuKZTCUYtPuD/NpfUu1S2XwDWIeXWnwVFLIF
- PTSt55L/1sN40KfwnySoUOvnABM9U2Mjg76eTO+c2JGrpbuQe5TsfXyp32CqioyJpXd7
- kNb0kfbkLXDNc68CL48xhBPiWN0C4IWUUWKCUtE5CX4AxX8Z51yFkifIbvQGDDSB2ubj
- UR3rN2QzimWIDaUU2YKyR3SFpuzc5EEAb+OsPlg4zPEYScb+dM4NyRzOkUh8SaTjpJeR
- kJdv1NLY7X6LGkbDTXn+hNlEs+90yAzjRhSQ2BznhqCp79/Uqlt7Lb0KqntT9qnxbq8a
- Jh/g==
+ bh=Ox+bi6nQIIeFX56lUjitMQLdH/KzNsuCAbERueIgnh8=;
+ b=gNFiL2AAADwnZ8Go8VvWwR+V9oNx92pBsYuIDZ9RwVHfTlWJRXZOIdL/bL/cNGNERz
+ SNgUronGwxDYhPAiML9Ezig0jjQbYjhqUJFSdVcoxEUZpxPZ/EAcCzc/EbbYThALUIak
+ xgCFvRE6kGDarCImHA8qdzlbgh5ikpVuUuaszxzQXDMHsYk06ffNnV4pnwt5i6Y+GXqq
+ sszNQXa74jcmrvBUS9vC1Q0fjbQ2bsORscEzOiFbOserIM/xgY1XkjR1KzyfR/jgc6Jk
+ fc8e3Ksue6E2JJPDfbq/oWKak21mZMJ8g7GR4xk/kXBqrIzNi3JNZFlevb6eknPixsWq
+ j4ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742907315; x=1743512115;
+ d=1e100.net; s=20230601; t=1742907358; x=1743512158;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6Y42awx/wcSRJQ2bP/WQYpo7bEUFNCnyhwCCPxpt/jY=;
- b=Siq0seZnw7t5/P3/mKlg8VloSHwXXonw50TSplMysJq8gglBTBv1q2X20BhJuQSaVQ
- pJ2I9HP5Lp2FFwefpi51Wf9CtNRXWmwQyGiLXbMOfopmuliEIVegYBEAZUa9dPYL9hLX
- zL1/lBeQrPsiodDH2flThDW34e9wP0U1prDd5LJwd7ZgJBdjts6DlIVANgQoszOBPeEY
- JyDiYFGtmhnG7aRXM89AFrHU8wBhMz6WW2WUaNzFUsperF4QGfObebB+ngiXetlaSRF2
- 1nuVYc6GlAHuX4/PIBBAlH5pLEJXXLJ/TXl7ENyzOLcbNMmsGUaCdra7cI2ArmtPZr8P
- AynA==
-X-Gm-Message-State: AOJu0YzoeOGQtH7RWUUNJL6ZZTx4637aWjEN8PEJsUD+Wbl7nfaSuiPV
- 0KWfV5EB5jr8or94UUX2OsINs8V1E0A4LAK8BwBVTv6WtvjjZ8SZ9IxnqkZu3LF/p89hF7jQw17
- 7RQUo3PQoxQWgTWBSfnfsqOvOi2Os+Q==
-X-Gm-Gg: ASbGncu320sMgsrDyaxWNi4lFn/3zk2ztcQwk/mpfAzvgBC8oiydLk4CZUNLjZFmxAj
- A2ImmG/04F5H/funQqd/7JIXiIiFGFDFdZ89HXTDje4o64pR4a4+JTWbEm51sO3BoK1mZj/zQZe
- /ofx+MRRw5qKaOVpNT4+x3UHExbVZiSxL50o7YfEtfjs2MkkV1EmUMrh1q
-X-Google-Smtp-Source: AGHT+IG5PmlLMQ9soYGcKX/f58U9MNxGWK0NWevkgyo+jmlBHK7HZskSlEBvRQ8xRil5UWDp96k+6tG2TSSLGRvSHug=
-X-Received: by 2002:a05:6512:3e21:b0:549:903a:1bf with SMTP id
- 2adb3069b0e04-54ad650363bmr6717229e87.48.1742907315114; Tue, 25 Mar 2025
- 05:55:15 -0700 (PDT)
+ bh=Ox+bi6nQIIeFX56lUjitMQLdH/KzNsuCAbERueIgnh8=;
+ b=SSvIt9wGYCs+nXMNuK/xd3+lTcGZROYUppNlxVlWgedGE1kF+1LWlLrb1GYHl2l/Z7
+ uzUkpounuy7DNHQhVf+RCDEKoyjgVxm8T7R3M3j5GRF29ZV4Bn6Olrz4XEwxGCJeIXOV
+ GH/ZNL6qYSlgfxkXRUWfH4nS6Bl1lke+sBMJdiQcGfmcPNVCfzdWeTwkXcLRn8AbqIgm
+ INZ/PUaWbyr8CBtRdefoVH49Tw7uaHg+3kYe2uPkwJR54vyEQD2mjHfmrf8IrPXcf7sO
+ IuUpduJbQzN8QWcVkq0rWSpYZWzFlOEf2ElGs9d6JeoiPQUBIVEhr19IVgTKhIq3ToC5
+ CZig==
+X-Gm-Message-State: AOJu0YwHG2Wo56cF7vyFsgWU5KCF0hIfNWwG7AcbIfCpvndAdlCuUcdD
+ 8iJOcOlg9MQ7DhOmHyKHVX3jPWr+fmh3RWyKuXtezXdNe95K94X/WsQfHIElzr8mE56G3PsNxCt
+ D/1GeuDu5c+HYSVWoD3qCkMuT3Rg=
+X-Gm-Gg: ASbGnctpcT0/WedZORdLjtG2gVm8SPJK00NIf6XW6B1m1j5i3cyxeXQJ+HTUeQ0mswX
+ LeQ2l9O4OaE7j2X9ZOvHcWO7SPXcZdnzK11Gn75JPB1xJIdelbv9pkCkSW5+6XyY0U6byUcryA7
+ J8103LzWMD1qgfTB5YkaOucjrzrg+BmUMSIRZpZZH/+0JXU2Zj2BX8gfar
+X-Google-Smtp-Source: AGHT+IE/BzrXV/rIeTJ2zmO+oyta5Tr10xWY1Ugp8XjG8d/22XAJiCI33DuD6asWgjE1/F94y+rkRyuRXHnt1BUUVGA=
+X-Received: by 2002:a05:651c:50a:b0:30c:40d6:5cdb with SMTP id
+ 38308e7fff4ca-30d7e21a675mr65360761fa.11.1742907357819; Tue, 25 Mar 2025
+ 05:55:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250323160107.145749-1-marex@denx.de>
-In-Reply-To: <20250323160107.145749-1-marex@denx.de>
+References: <20250324232725.859935-1-aford173@gmail.com>
+In-Reply-To: <20250324232725.859935-1-aford173@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 25 Mar 2025 09:55:03 -0300
-X-Gm-Features: AQ5f1JpgyfcGPs70_NprRJ18RJjlj4bdYdv3urK4i1w7_BatIx5E3dR5FtM6s5o
-Message-ID: <CAOMZO5ChkkCbxOUZcUh6O_brmXHqvA4rHgjNR7vVxXmAbXO8iA@mail.gmail.com>
-Subject: Re: [PATCH v2 00/24] clk: Add clk_resolve_parent_clk() and fix up iMX
- clock drivers
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Adam Ford <aford173@gmail.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Dong Aisheng <aisheng.dong@nxp.com>, 
- Fabio Estevam <festevam@denx.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- uboot-imx@nxp.com
+Date: Tue, 25 Mar 2025 09:55:46 -0300
+X-Gm-Features: AQ5f1JpuYPTHeWwHuEV5SlyYU7gXjGGvn7PpXOxLD--D-LI7HDlLGWe6ew2LNq0
+Message-ID: <CAOMZO5BSTcNKHcXrvBuLV1L+Pc-_sj7AXTMa8PGdT9HGpL55xg@mail.gmail.com>
+Subject: Re: [PATCH] board: beacon: imx8mp: Fix GIC clock for Overdrive mode
+To: Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,16 +92,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 23, 2025 at 1:02=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Mon, Mar 24, 2025 at 8:27=E2=80=AFPM Adam Ford <aford173@gmail.com> wrot=
+e:
 >
-> Add clk_resolve_parent_clk() to resolve parent clock udevice name
-> based on clock-names DT property. This is used in SoC clock drivers
-> to look up the clock name in clock tables, which matches a clock
-> name in DT clock-names property, and convert it into udevice name
-> which is used by U-Boot clock framework to look up parent clock in
-> e.g. clk_register() using uclass_get_device_by_name(UCLASS_CLK,
-> parent_name, &parent);
+> There is a config option to run the PMIC at nominal voltages
+> which is not enabled on the i.MX8MP Beacon kit, so it the PMIC
+> runs at overdrive voltages.   Unfortuately, the check for this
+> condition to set the GIC clock parent and rate is backwards from
+> what it should be, and accidentally sets the GIC clock to nominal
+> if the PMIC is in overdrive, and sets the GIC clock to overdrive
+> if the PMIC is in nominal.  Fix this by inverting the logic on the
+> check.
 >
-> Pass struct udevice pointer through the various iMX clock drivers.
+> Fixes: ab53bd43dbde ("arm64: imx: Add support for imx8mp-beacon-kit")
+> Signed-off-by: Adam Ford <aford173@gmail.com>
 
 Applied to u-boot-imx/next, thanks.
