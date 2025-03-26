@@ -4,117 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6061C36008
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 12:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCF3C36008
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 14:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BABF080BAA;
-	Wed, 26 Mar 2025 13:33:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DAFBC8070C;
+	Wed, 26 Mar 2025 15:59:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WOqYpY8A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wGOkyb5n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5D0981B4B; Wed, 26 Mar 2025 13:33:12 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 6B74781951; Wed, 26 Mar 2025 15:59:01 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFE238083E
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 13:33:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D19FE803CC
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 15:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43d04ea9d9aso31045305e9.3
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 05:33:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac6ed4ab410so103654166b.1
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 07:58:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742992390; x=1743597190; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=NCAcxStaRQO5gueC9/NHoUWZmohkEoFVw9sy5T49T/A=;
- b=WOqYpY8A6XW3ItVqvunYA3wmHcUesJLuTDV/CEMvO9X9So0JomuppFNZwttPb2zB8t
- Ubsty4HgMT1AJpdzWAyIafnd3z+ZSAJUgeOcdBxZcnaq6JwLVHsqYbvAyn2b/vsMQWu9
- TUj+Bae/397giH2uLZWRTQCzwezAxFXolFwkL071Fb15Bz7G0RPewpRnMrFqS62yWnNA
- 68pdgHqmIxBp81aYpEMgIDc/MVvMQX0tZml+gx2NZB7z1GXIr4UIyv/0RXmzZWLKv7Ju
- TGJuEIPa7wTzm8zOM1q472FA3jQMjx8OViPwg7mbPGQ/iha3AKUEwuh8Cfrl4BcKk3yy
- lhzg==
+ d=linaro.org; s=google; t=1743001138; x=1743605938; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pnQNr09dzRQp2cCy9CJ+3Fb9HsrTZd2ceATT5JUGgOk=;
+ b=wGOkyb5niVwHEbsFDkV+o1iZMPkYH540PxERWC+2eqepRHBWeJUWb9fwSFZdao3lg7
+ vu5/f7DN/82UFRCIMxqTW4DfrFHHfz3umG7ZlRgy1185Y91gBOqmLwYucUUjARU0dEoJ
+ GHAFCwScYT1bIXm0yNOd1Wvvn/ul5VXAXWlFoFFbGvawTYlLWtddYhi63S8l4NbUAr+O
+ nH5zKbGWEhUF3wRWYpJyA1VAA2FGRouNhJ/6Xjm78eKJLcsJztdqblsNRAMa9l+JDBYF
+ gk3NeILTaz2X0u00EtYRzgy4au4u9FWgdCMx+h2mJorpI27rnKW0Z7AMEBVdKuxqLEDr
+ DoUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742992390; x=1743597190;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=NCAcxStaRQO5gueC9/NHoUWZmohkEoFVw9sy5T49T/A=;
- b=eHA9Albk8CQV9TQ/CzlTWTW6E4i5eeSFpP7avwekxyEb4/yg3SpmmvEOC00VHUSCay
- W3CXoXjWW83DYOIoNZ0G5d/pVL/VkJwnkvtYQNLtakkhJO6odkF2ljknjMCYWX+NBmdR
- dVVlBotk7TFcaVCGJTtyLXU5AVNGpjOgBREV6wHw4Yxo/zFlVivwHXZ2FaCpfakXQIeM
- n306bcTgO8kyBwP10zjICtwGCOZKk62tX6TYEB8eeX0l7gSeV4encz3SfHC7oTzHEOqt
- 3Q6eNkNJR2cEGqybY+G/JqIGxvqlS3Dopa1Th0DYsYZqMCA6Q89iwDfzlpgGholxH82U
- gZuA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIgHT5L+BC3wFA4S3SNMAF1qF+UOUoTwfciw+xK26QCOs3O/nXoEn5XL+3TJxiFopaRWyL0CM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDfU0FXLJUO6PnbZrEtRB2AuLp7J7lPvOdpY4kbutfEvKr2t06
- kS2XBK/8L7qlcRdMBcigap1/mk9/DFr69MvwlbUvT51pezZvm2aB2cz6Z7vMhxj1IWhMucRjoB/
- e
-X-Gm-Gg: ASbGnctPnNd5I7BbrrL9zaNCc7ooVKfGWpnizGSA548QM5SUaxXd8jmr+tYb30Gs5Wu
- 9umHUy9nEAGFV5IVVIihKAUeujvvI7cRD0YNB9OHb3omBdCwMHNBtDceM7XVnaXwGRtpOVLQMIj
- yeHFeVAZFfoZo4qXRbmxJJxNTt5Q6ymTqm1yzbyTHs/0jzusZH48+v3AA1X8eEugD4QylsRVMPF
- VA0nrVBC+sMU2ektYy1d1T3wTOx0s8oqK6bHUK7bgnohxGFLzgx394U3EM+0t/BswhxObs+p7we
- dfxD/Im+frE8X9IQEIodXAs013axCo4lIrehhIKuLaLqMrpImIitBfi5d5dnmPR9rureZgAVOPT
- YcumFCEBhxYgMSTZJeGKkag==
-X-Google-Smtp-Source: AGHT+IFsldOO84JpDixMplu96YB4WGIpyxz2z+lkpS6tz8UsyRlvACjY9e/5ql1EYbhymJRGiuKQmg==
-X-Received: by 2002:a05:600c:3547:b0:439:91dd:cf9c with SMTP id
- 5b1f17b1804b1-43d7894c000mr30346925e9.10.1742992390036; 
- Wed, 26 Mar 2025 05:33:10 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:a11f:a03e:c86d:c567?
- ([2a01:e0a:3d9:2080:a11f:a03e:c86d:c567])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82dedd03sm739275e9.3.2025.03.26.05.33.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Mar 2025 05:33:09 -0700 (PDT)
-Message-ID: <ffde5a2b-9b36-4cf0-ad0a-ede384112463@linaro.org>
-Date: Wed, 26 Mar 2025 13:33:09 +0100
+ d=1e100.net; s=20230601; t=1743001138; x=1743605938;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pnQNr09dzRQp2cCy9CJ+3Fb9HsrTZd2ceATT5JUGgOk=;
+ b=CLYJqcL/BbJdp8FsUlYh4SqJHuDZ5KSQBf6ngpXW7DS+8whcZ9zWOnk5/V7+GO99A0
+ YXUz3BraRNIXQB57Anqdk51adeE4cOB6Ra28bLbTmZHXdvXx9Z4+/clsMlNfglQuhUA8
+ SZVop030zofQXF+ysietLmV8IEp3su6C6KUv/9EV2Bziw8TT5Ad2A0b/2tkmeRCPHZ+B
+ Ew3d58r0tNwkvqZ5SNeMgZqst86DywhuylC5WORleomGuSDKqMe7hDanbPib6sM7/NRT
+ oyGd3orml7sv/WOUXhSgcnQPwOkt4+TwfQM8VeRAVIakGnPEGKb3azb4ySlLKxpH7bH9
+ MNNA==
+X-Gm-Message-State: AOJu0YznJwfjUBp1KtFWlCoPx6MirggVsB1lwbjmBh7JhkxkHuGBs0RZ
+ SFNIUWM7UPvQ64qU6LSkeXBljfmD+SuqOs4q+Ejjj4SKL3PrZMgSwmxjcv6oKBsyJi4NHvCwXem
+ o
+X-Gm-Gg: ASbGnctyWRxlymocXIz0xOzdHnhagoU1/Y2SgXZyAnN4FYozyMQseHL79IMS7jnDuek
+ X2E33VGTOiCgXwr5QxW1r3ah5+qzxQx3ahrzzkvQoVmJIdeQZ2IWROMBYs9AR9QBucelGizYl4l
+ FRo86Iv0xr2u5z5H9k9h97SRtc8dvpaTAA91kVnsC+wz5+ead4UGANTVOifyWdgnvXt0w+b8IG0
+ LGLrDeutRTLWpCKL8TMZDIMHBD4BZwZp0Y9aD3wUb4nph2F5JB82FDqDCIIHfQyKNtg8Hf7XOWV
+ LAmouo1ZPwRO2+GcUSF6GjpwIP12Aq+F299W8smCIjdgyix2MVLW1rXPlLy0C0CWyuNNEJA0Ucn
+ MZU9xNsE72oCILf8oUw4I2X8=
+X-Google-Smtp-Source: AGHT+IEmuN1aHXKx3TxIv0SKGpRhkj9wend9vKLWagvAF9LfGDEvSTtmTcYVuvK0HQ7orfRuNIJVrQ==
+X-Received: by 2002:a17:907:3da9:b0:ac2:29c7:8622 with SMTP id
+ a640c23a62f3a-ac3f252f862mr2099464066b.54.1743001138084; 
+ Wed, 26 Mar 2025 07:58:58 -0700 (PDT)
+Received: from localhost.localdomain (ppp089210242125.access.hol.gr.
+ [89.210.242.125]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac3efd3aa21sm1057137366b.158.2025.03.26.07.58.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Mar 2025 07:58:57 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: xypron.glpk@gmx.de, Anton.Antonov@arm.com, sughosh.ganu@linaro.org,
+ tobias@waldekranz.com, pbrobinson@gmail.com
+Subject: Pull request for efi-next-26032025
+Date: Wed, 26 Mar 2025 16:58:50 +0200
+Message-ID: <20250326145850.918186-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 3/3] ata: ahci: implement SCSI_SYNC_CACHE
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20250326-scsi-sync-on-write-v2-0-12ab05bd464b@linaro.org>
- <20250326-scsi-sync-on-write-v2-3-12ab05bd464b@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250326-scsi-sync-on-write-v2-3-12ab05bd464b@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,76 +92,99 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26/03/2025 13:24, Caleb Connolly wrote:
-> The SCSI layer now issues a SYNC_CACHE command after every write to
-> ensure there is no data loss due to a board reset after write.
-> 
-> Implement support for this command and remove the same logic from the
-> ATA write path to be consistent with other SCSI backends.
-> 
-> Ranges are not supported and the whole cache will be flushed in all
-> cases.
-> 
-> This was done per iteration in ata_scsiop_read_write(), but it's not
-> clear why this was the case, calling it once for the entire write ought
-> to achieve the same result.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/ata/ahci.c | 14 +++-----------
->   1 file changed, 3 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
-> index 8058d5ff1c37f92914f250fa9cc78498a3f27331..deb91efd6d2666016f375feabb16ebc8f68fb697 100644
-> --- a/drivers/ata/ahci.c
-> +++ b/drivers/ata/ahci.c
-> @@ -735,19 +735,8 @@ static int ata_scsiop_read_write(struct ahci_uc_priv *uc_priv,
->   			debug("scsi_ahci: SCSI %s10 command failure.\n",
->   			      is_write ? "WRITE" : "READ");
->   			return -EIO;
->   		}
-> -
-> -		/* If this transaction is a write, do a following flush.
-> -		 * Writes in u-boot are so rare, and the logic to know when is
-> -		 * the last write and do a flush only there is sufficiently
-> -		 * difficult. Just do a flush after every write. This incurs,
-> -		 * usually, one extra flush when the rare writes do happen.
-> -		 */
-> -		if (is_write) {
-> -			if (-EIO == ata_io_flush(uc_priv, pccb->target))
-> -				return -EIO;
-> -		}
->   		user_buffer += transfer_size;
->   		user_buffer_size -= transfer_size;
->   		blocks -= now_blocks;
->   		lba += now_blocks;
-> @@ -845,8 +834,11 @@ static int ahci_scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
->   		break;
->   	case SCSI_INQUIRY:
->   		ret = ata_scsiop_inquiry(uc_priv, pccb);
->   		break;
-> +	case SCSI_SYNC_CACHE:
-> +		ret = ata_io_flush(uc_priv, pccb->target);
-> +		break;
->   	default:
->   		printf("Unsupport SCSI command 0x%02x\n", pccb->cmd[0]);
->   		return -ENOTSUPP;
->   	}
-> 
+Hi Tom,
 
-Good catch, much simpler to move it in the scsi layer !
+An interesting series that allows us to boot installers and live images from EFI, without any
+distro-specific quirks.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+The following changes since commit 042c8f0cb1ea5f6988e8633799f7b550876f0ae6:
 
-Can someone test on a SATA enabled device ?
+  Merge tag 'u-boot-imx-next-20250325' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next (2025-03-25 08:57:38 -0600)
 
-I can have a test run on the Odroid-HC4 with a PCIe-SATA controller.
+are available in the Git repository at:
 
-Thanks,
-Neil
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/efi-next-26032025
+
+for you to fetch changes up to 61e0a20aecf4af6cdc223bd8cd1bd82fe5e3d9f6:
+
+  blkmap: pass information on ISO image to the OS (2025-03-26 13:28:08 +0200)
+
+The CI https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/25336
+suffers from the lmb issue but the same patches on top master work fine
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/25338
+
+Please pull
+/Ilias
+
+----------------------------------------------------------------
+When trying to boot an OS installer or a live image via EFI HTTP the
+following happens
+- U-Boot downloads the image and mounts it in memory
+- The EFI subsystem is invoked and the image is started
+- The OS calls ExitBootServices and the memory that holds the mounted
+  image might get overwritten
+
+This results in installers complaining that they can't find installer
+medium or live images complaining they can't find the root filesystem.
+
+ACPI already deals with it by having NFIT and NVDIMM to provide ramdisks
+that need to be preserved by the OS. Linux and device trees have support
+for persistent memory devices (pmem).
+
+We can use them and inject a pmem node in the DT to preserve memory across the
+entire boot sequence. Linux will just create a block device over the reserved
+memory and installers/images can re-discover it.
+
+This is what it looks like from the OS perspective:
+
+nd_pmem namespace0.0: unable to guarantee persistence of writes
+pmem0: p1 p2 p3
+EXT4-fs (pmem0p3): mounted filesystem f40f64a4-5b41-4828-856e-caaae2c1c2a0 r/w with ordered data mode. Quota mode: disabled.
+EXT4-fs (pmem0p3): re-mounted f40f64a4-5b41-4828-856e-caaae2c1c2a0 r/w. Quota mode: disabled.
+Adding 45052k swap on /dev/pmem0p2.  Priority:-2 extents:1 across:45052k SS
+root@genericarm64:~# mount | grep pmem
+/dev/pmem0p3 on / type ext4 (rw,relatime)
+/dev/pmem0p1 on /boot type vfat (rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro)
+
+It's worth noting that Linux behaves differently with reserved memory
+(at least on arm64) and that depends on kernel config options.
+CONFIG_ZONE_DEVICES and CONFIG_ARM64_PMEM are such options. It boils down to
+how the kernel tries to map pages. If devm_memremap_pages() gets called instead
+of devm_memremap() mapping the memory fails.
+
+The only safe way is to remove the memory from the EFI memory map,
+rather than defining it as /reserved no-map;/ in the DT.
+
+----------------------------------------------------------------
+Ilias Apalodimas (2):
+      efi_loader: allow for removal of memory from the EFI map
+      efi_loader: remove memory occupied by a ramdisk from EFI memory map
+
+Masahisa Kojima (1):
+      fdt: add support for adding pmem nodes
+
+Sughosh Ganu (5):
+      efi_loader: remove unused code from copy_fdt()
+      efi_loader: install device-tree on configuration table on every invocation
+      blkmap: store type of blkmap slice in corresponding structure
+      blkmap: add an attribute to preserve the mem mapping
+      blkmap: pass information on ISO image to the OS
+
+ boot/fdt_support.c            | 39 +++++++++++++++++++-
+ boot/image-fdt.c              |  7 ++++
+ cmd/blkmap.c                  |  9 ++++-
+ drivers/block/blkmap.c        | 82 +++++++++++++++++++++++++++++++++++++++--
+ drivers/block/blkmap_helper.c |  2 +-
+ include/blkmap.h              | 33 ++++++++++++++++-
+ include/efi.h                 | 13 +++++++
+ include/efi_loader.h          | 15 ++++++++
+ include/fdt_support.h         | 14 +++++++
+ lib/efi_loader/efi_bootmgr.c  | 25 ++++++++++---
+ lib/efi_loader/efi_helper.c   | 85 ++++++++++++++++++++++++++++++++++---------
+ lib/efi_loader/efi_memory.c   | 34 +++++++++--------
+ 12 files changed, 310 insertions(+), 48 deletions(-)
