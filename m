@@ -4,87 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F8CC36005
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 00:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30BC2C36005
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 01:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 658768186D;
-	Wed, 26 Mar 2025 01:15:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E8F2810E8;
+	Wed, 26 Mar 2025 02:26:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="px6M7cp1";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0716B8186D; Wed, 26 Mar 2025 01:15:29 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 770048186D; Wed, 26 Mar 2025 02:26:12 +0100 (CET)
+Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5013810E8
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 01:15:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22C658083E
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:26:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72b0626c785so4363771a34.2
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 17:15:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1742948125; x=1743552925; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ki15pqjHVnhp73rOZPEcgmm1aqYQv9zowX0+f5GLW9Y=;
- b=px6M7cp1vSJCdcRuURuMeyqtO0jYwEnUwE4R8TnEtGz9YEhHkWgFWwahAUBiGxTsHK
- d35tBUqoEe5DgLaKVajEaQKAF1Gsq8jUXmNhM9f1tIlhLM5MFNQpTyoqpFMpxUc0Hvys
- yFTqbVi70L7an2Q8xvBd4Gawa6zDXmJz4Ubz0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742948125; x=1743552925;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ki15pqjHVnhp73rOZPEcgmm1aqYQv9zowX0+f5GLW9Y=;
- b=oztKCs1eayUclU057PYrAEp9mxfhaW8H5S6y6QDAJcvMZHKEVWBygN6M9g0myA3xYL
- +9lXfThK6A6y2OHMBvQ0ZwX2E64KD2jE4F55MnaIHMdQZt8Tobc1kkShInQR4fVCtxDq
- AMmnLO/o4BTtudsgOqgUoGKmzPxYq0+PkXotGDb8xdgGPYe7NGVZqgrSq44Nyb2cI19q
- Pj9tbKHQkb0DVPVrPnEG8+3lzt/+VaW6A5asaaUyHomHbHkkGm5pR5wkPsyU4aUzg0L7
- pAo0kk52O+yAvXpJzA+6eGyhGuMuQsD64YNyfDk0dc1+yX5QENBcyb3IaKKHGPltRzDy
- Fzhw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXqVuGap/qawZebu7nOZctQKniuCts2ivlfpXjczpcTJ9J+HlmyaJYM+W0ollZ7zKT48Um8jvA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAwUZ1l3wkkkasmIMUMHJeMoYMgM7MhmqvttzTVBBjKNqavd8q
- OZ4W+vJqWVM3QAy0spZP0mQtLIYVrNQBzQKXeOp+ygrSYPnZj3BCJZmJBx0FCrg=
-X-Gm-Gg: ASbGnctiiXHIWO98IdmxIYSAO621NULd5QM0gNE52vRu0UGw29hA7cFo9TemBhhFXHB
- UAPuc1tKmJKuTnjHEeEHEqWXh6jC8aj9OWLLLxkEAZPNSbhPue0Z6p33jPyZbr+X5qs0KtywLEv
- wRvlXscE40V1DYcapKeosO3WV/cQflEZCcs9K4Y2qFzSbUKEDuQJZdcT/Dxu+Lkyaw9dme/dojH
- 3RoV+R5XVW5sgNeB1uqTYJ0PI1umusA41kh5s5hXhLMrS51zM2zRCpWh3f0Av3yz/CMUSX3lw1/
- F2gMe2dc9jT9uIRXQhZ159FKv4d1Y3mzin8nerCv18Q=
-X-Google-Smtp-Source: AGHT+IGdCyn0TbGJ3PzdMHMw0hGPFx4wj7JOAKclmW4MrHxA54y1lc2mH9/t4NvFufQV4kdI125STg==
-X-Received: by 2002:a05:6830:44ac:b0:72b:9c34:1361 with SMTP id
- 46e09a7af769-72c0ae9701amr15045566a34.15.1742948125251; 
- Tue, 25 Mar 2025 17:15:25 -0700 (PDT)
-Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60234851526sm1634498eaf.25.2025.03.25.17.15.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Mar 2025 17:15:24 -0700 (PDT)
-Date: Tue, 25 Mar 2025 18:15:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 4/8] env: Rename SYS_MMC_ENV_DEV to ENV_SDMMC_DEVICE_INDEX
-Message-ID: <20250326001521.GN93000@bill-the-cat>
-References: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
- <20250322215624.18994-4-marek.vasut+renesas@mailbox.org>
- <90254a96-5d67-4d34-afe6-772af42ee557@cherry.de>
- <e385568e-59b1-4adf-9fb7-d87b4254eae9@mailbox.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpip3t1742952338ts970h8
+X-QQ-Originating-IP: 9pR4GzsEk8Q49/BG5vXDmgiCtbnBxSInKN80KheQ9J8=
+Received: from [IPV6:240f:10b:7440:1:9157:8105 ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Wed, 26 Mar 2025 09:25:35 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 16227297490792217465
+Message-ID: <03D6E89096614725+95fe243a-7bc6-46f6-87cb-7dab45145985@radxa.com>
+Date: Wed, 26 Mar 2025 10:25:35 +0900
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jiklPNYCcPvzmXlQ"
-Content-Disposition: inline
-In-Reply-To: <e385568e-59b1-4adf-9fb7-d87b4254eae9@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: Enable usb gadget on Radxa ROCK 5C
+To: Arnaud Patard <arnaud.patard@collabora.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>
+References: <01020195cdc6e188-48dacf9c-cfa6-421c-aab3-61d989bc7c78-000000@eu-west-1.amazonses.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <01020195cdc6e188-48dacf9c-cfa6-421c-aab3-61d989bc7c78-000000@eu-west-1.amazonses.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: NN51gi9eLBwa1uuct4QDpLjEEB6o8VM3xRIMUX82LtZYQUcDQWj5RaXi
+ P3M6VxIB16bemlcIRzl/Kf8uD8Ry9iLplNGbs35ZGQc4W1rYraDMVLGDFow47YxjeDpAZqZ
+ Zt5zJn5ZS2h+lixn6pnhWMINx9JFpTpS1HWGCdYysJqjhbQ+qEzpaD6lQgqD6wOFkcZb9O+
+ o8WaOjGiATZfv9MArOEXNba0lq/iXLJ/oNIhO7bICPqAgJ4ypNpdak4EWDJ2TwdYz6ESbK+
+ I1szrS8qzontT74YavQKASCus9gtBolEKkiFXCMGB0rWEXsX3wQIWB2Q6lGMnIyuXrgVuMx
+ UaQ5XuVGzfDEydIo2wpiUkYOcHqHBFpnTM47rUhXeG15oa51t4A+GLvYjwTpHqpTjy5AAdw
+ NqyOPO5sWFHFoZo/wMMoAvc03GUpaSpdVOIIh9znGaX08D7Th2qr+HnB2rf5dj3JQmRTUxf
+ veVqrYvlqLig5PiK8fkkQlaEhroPENC/sy4DLBZFh+zLoxJvwZ3gSH6SxotWRZape0zrTlO
+ /QYOYd/1IbVG+Z0tasWQm3Beh4pGjSdSHpRY0aFGu6hsD2SNG85VI4PDdKSS8oRHEtbvtam
+ MFSNyvdCvjYsJ75xU6K32HlyGxZ/7OYDgGvAaVNBgrBBvRXSf344Gb/+YD/7evbOzoOblIX
+ js1A9vBU9CMnUQ9Ssxe9KQTOzCETcGPL48HZIBmlPMHw3CvyC+HHJH3w/9waaM/er7SFcv8
+ e7R1H6cXY/1A0ulPzK+rGaFL8SFnqFq8ub1m0HyXCatGw+c+LCQ6hdhIBWd0CyoHeJJQV6c
+ 53tayLTTcIZEVpP3Y4CGprysP3L4fPvDxeBzchZIqUS9p3/LVye1nzjvhYS22JCEjYauXuL
+ h+7dZYwCUjOX/7GWrt56UF3rOvwp9jL398+k0pWa1+Q=
+X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,61 +78,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Arnaud,
 
---jiklPNYCcPvzmXlQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Basically, the Type-A OTG port of the Radxa ROCK series is intended to 
+be used in HOST mode (unless there is a HOST/DEVICE switch).
 
-On Wed, Mar 26, 2025 at 12:02:08AM +0100, Marek Vasut wrote:
-> On 3/24/25 1:39 PM, Quentin Schulz wrote:
-> > Hi Marek,
->=20
-> Hi,
->=20
-> > On 3/22/25 10:55 PM, Marek Vasut wrote:
-> > > Rename the variable and add ENV_ prefix, so that all configuration
-> > > options which are related to environment would have an CONFIG_ENV_
-> > > prefix. No functional change.
-> > >=20
-> > > Use ENV_SDMMC_DEVICE_INDEX to clarify this is the SD/MMC device
-> > > index, a number, as enumerated by U-Boot. Update the help text
-> > > accordingly.
-> > >=20
-> >=20
-> > I disagree with this part of the rename (MMC->SDMMC), our drivers all
-> > are using mmc (env/mmc.*, drivers/mmc/*, cmd/mmc.c, ...) for both SD and
-> > MMC. We also have ENV_IS_IN_MMC which is for both. I don't think it's
-> > worth the confusion.
->=20
-> My main problem is, that it is confusing to call everything _mmc_ even if
-> most of it also applies to SD . There is no way to discern parts which are
-> MMC specific from parts which are common to SD and MMC now.
+That is why the following patch series does not include Radxa ROCK 4, 
+5A, and 5C.
 
-Do we have support for anything using the MMC part of the standard that
-is not storage? I certainly agree it's confusingly named atm, but I
-think changing some parts but not other parts will make it worse, not
-better.
+https://patchwork.ozlabs.org/project/uboot/list/?series=443764
 
---=20
-Tom
+Best regards,
 
---jiklPNYCcPvzmXlQ
-Content-Type: application/pgp-signature; name="signature.asc"
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
 
------BEGIN PGP SIGNATURE-----
+On 3/25/25 23:48, Arnaud Patard wrote:
+> I was testing DFU and SPL DFU [1] on my rock 5c. To get it working,
+> I had to set the usb_host0_xhci node to peripheral and maximum speed
+> to high speed, as done for other rk3588 devices.
+> 
+> For DFU (and not SPL DFU), I had to set the "maximum-speed" property on the
+> usbdp_phy0 node, otherwise it's failing:
+> => dfu 0 ram 0
+> rockchip_udphy phy@fed80000: cmn ana lcpll lock timeout
+> rockchip_udphy phy@fed80000: failed to init usbdp combophy
+> rockchip_udphy phy@fed80000: PHY: Failed to init phy@fed80000: -110.
+> rockchip_udphy phy@fed80000: cmn ana lcpll lock timeout
+> rockchip_udphy phy@fed80000: failed to init usbdp combophy
+> rockchip_udphy phy@fed80000: PHY: Failed to init phy@fed80000: -110.
+> No USB device found
+> udc_device_get_by_index failed
+> 
+> The issue is that it's trying to configure the usb3 phy, which is not
+> the one used for peripheral mode. I've not checked on other rk3588 devices
+> if they would need a similar change.
+> 
+> [1] for SPL DFU, I've used the serie https://patchwork.ozlabs.org/project/uboot/list/?series=443761
+> 
+> Signed-off-by: Arnaud Patard <arnaud.patard@collabora.com>
+> ---
+>   arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+> index 1dc574c2f21..54b0f914010 100644
+> --- a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+> @@ -9,3 +9,15 @@
+>   	cap-mmc-highspeed;
+>   	mmc-hs200-1_8v;
+>   };
+> +
+> +&usb_host0_xhci {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +	dr_mode = "peripheral";
+> +	maximum-speed = "high-speed";
+> +};
+> +
+> +&usbdp_phy0 {
+> +	bootph-all;
+> +	maximum-speed = "high-speed";
+> +};
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfjRxUACgkQFHw5/5Y0
-tyxu0gv+MLFDcFhsRrB/xmYaJVKN+6KiRE1YrYMyI1/lpEuhPUhLmpzQobUDCW02
-onJhSd9iUZvRiI4Mg6uLw3/0zkiZ1wDTdOanG5CVCUg9WSxDdhlDqDapI5SPNawZ
-DGP5X9SrwM5s4GgXvpdx6R/h51+qVnimoaOoe1BV14tMLOIUcnzinAZZuSCDevjn
-ZiLcjwePTNHpdzPN9LYIO6kqADSdfOWG0CgOCmISVN4IEMN4tof7r9sSB4JALkMB
-K7KvqfGHB/pzt5p4TzX2MdF6LiEyhMITizM29sDKdWOhSwSK6KzC+Vqrvri0LMS8
-9sUeCX729/QWjUv7q9FeFvTXh1bq1ZmUppzqoRAoeSZociBNYxqdzGsQOIqDSpV5
-cWwKkSsw5vZ5kJ08cP/aBw6BPG9rR1McmIQN1i43SEBs7mfkXVwkuONfPHlX40Uo
-nDrfsOEfdSPneyMQdRyaRjtUbqVC6bZCgai1n9wLi5nN12Kcw9NQphdWRqcBt5kk
-GXRFhRfW
-=0052
------END PGP SIGNATURE-----
-
---jiklPNYCcPvzmXlQ--
