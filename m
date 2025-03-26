@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E67C3600E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 04:26:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9A9AC36010
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 04:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 849C881F0D;
-	Thu, 27 Mar 2025 05:24:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F22781F4D;
+	Thu, 27 Mar 2025 05:24:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="EqL08CpF";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Ou/sl9x/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F706803CC; Wed, 26 Mar 2025 16:01:43 +0100 (CET)
+ id 09A0B8070C; Wed, 26 Mar 2025 16:01:44 +0100 (CET)
 Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
- [217.70.183.199])
+ [IPv6:2001:4b98:dc4:8::229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DDB881951
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 16:01:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B59FF81D6C
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 16:01:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id CFDB9442B8;
- Wed, 26 Mar 2025 15:01:36 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 923C5442BB;
+ Wed, 26 Mar 2025 15:01:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1743001297;
+ t=1743001301;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CKQo5J/L2BuaNnCJP+anpJSykkpEvPmjCVJ2YyNDsWg=;
- b=EqL08CpFohxlmzhwN+htzABftwN1Oyb9QUVhBxa32QMH6hgu5ShEd6cfiUtvle0VhvFMHQ
- ZUeWgxCsvMBIvIChlaqtCgWIXT8YH71axy4WBTw5NomcHOEesgAnOL74h5t0r3k+OXSl+e
- DL7UNF9sQvbIQ6J0/cpLPLUktETB3IVyabxRIZmh8jkQTAtnbaUYnQ6mPr6e2640xJ4hCZ
- zdOBEAVDEVgwoLwHEzUOhHdoMnjbl7HjRPPktRaLGJOlofVSHWkKoRrlggWh9cliS51TNW
- LPiRueLle684nUsXZUu+UNlTzBd6B6rRh0vdlueVinzPCDv79qaF6DIMbUUaNw==
+ bh=Q5JWsyEecrKXdoBpncvpn/1gKVBjl6f11ewIdPRy92g=;
+ b=Ou/sl9x/dxskCivBdqymB9ZaXbrrPpIwT4Q9uSlgldYYW/e1tgGk8S0zgf4OjSWEnb15Qr
+ IQ9+kOxypaf4gexq4QA6Q2O7Fo1b0KRG80Q9Ivh83no+BTLTKGLHuHz+J32hfo+6CbG3RX
+ CJYtlfnhRvWkwnd0+R2P9c5pml2mtZjdNw9WoJe84Z7SVikZmdTjW310Jh/XT9XK3va1jA
+ 9+3TwFE1C6IpzzkWdFv+hXEI0CXMs+lqyS1f9XJ6E3cG6dUarHrBTRcZQ/raPigAZP4IuL
+ VSp1UYQK4DNt5Kte3thQqYv+mr+qvth9/buV0ulzTYaXSPQUFehkQe0quemTPg==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Wed, 26 Mar 2025 16:00:52 +0100
-Subject: [PATCH v5 08/12] imx: power-domain: Describe the i.MX8 MEDIAMIX domain
+Date: Wed, 26 Mar 2025 16:00:56 +0100
+Subject: [PATCH v5 12/12] video: imx: Add LCDIF driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250326-ge-mainline-display-support-v5-8-ea4bc3fc9bca@bootlin.com>
+Message-Id: <20250326-ge-mainline-display-support-v5-12-ea4bc3fc9bca@bootlin.com>
 References: <20250326-ge-mainline-display-support-v5-0-ea4bc3fc9bca@bootlin.com>
 In-Reply-To: <20250326-ge-mainline-display-support-v5-0-ea4bc3fc9bca@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -84,71 +84,366 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the i.MX8 MEDIAMIX domain which is driving the power
-over the whole display/rendering pipeline.
+Add support for the LCD interfaces (LCDIF1/2). When probed, these
+interfaces request numerous clocks and power domains, attach the bridge
+and look for a panel in order to retrieve its capabilities and
+properties.
+
+There is a similar existing driver in the upper folder for other i.MX
+targets, I discovered this driver a bit late. It is not targeting the
+i.MX8MP and I have no idea how different can the LCDIF be on this SoC,
+but I did not manage to get it work, especially because it is not fully
+compliant with the device-model, especially on the clocks/power
+management side which is all ad-hoc. This is normal though, it was
+contributed more than ten years ago.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
 ---
- drivers/power/domain/imx8m-power-domain.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ drivers/video/imx/Kconfig  |   3 +
+ drivers/video/imx/Makefile |   1 +
+ drivers/video/imx/lcdif.c  | 314 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 318 insertions(+)
 
-diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
-index c22fbe60675e96a628f205d10a71b66c7b33ef00..e54ba5d9a5476f678fb48fb16e7217b031acd78a 100644
---- a/drivers/power/domain/imx8m-power-domain.c
-+++ b/drivers/power/domain/imx8m-power-domain.c
-@@ -40,6 +40,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MN_MIPI_A53_DOMAIN			BIT(2)
- 
- #define IMX8MP_HSIOMIX_A53_DOMAIN		BIT(19)
-+#define IMX8MP_MEDIAMIX_A53_DOMAIN		BIT(12)
- #define IMX8MP_USB2_PHY_A53_DOMAIN		BIT(5)
- #define IMX8MP_USB1_PHY_A53_DOMAIN		BIT(4)
- #define IMX8MP_PCIE_PHY_A53_DOMAIN		BIT(3)
-@@ -63,6 +64,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MN_MIPI_SW_Pxx_REQ			BIT(0)
- 
- #define IMX8MP_HSIOMIX_Pxx_REQ			BIT(17)
-+#define IMX8MP_MEDIAMIX_Pxx_REQ                 BIT(10)
- #define IMX8MP_USB2_PHY_Pxx_REQ			BIT(3)
- #define IMX8MP_USB1_PHY_Pxx_REQ			BIT(2)
- #define IMX8MP_PCIE_PHY_SW_Pxx_REQ		BIT(1)
-@@ -81,6 +83,9 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MP_HSIOMIX_PWRDNACKN		BIT(28)
- #define IMX8MP_HSIOMIX_PWRDNREQN		BIT(12)
- 
-+#define IMX8MP_MEDIAMIX_PWRDNACKN		BIT(30)
-+#define IMX8MP_MEDIAMIX_PWRDNREQN		BIT(14)
+diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
+index c5cd2fecf780b62c0264b9627137517388aae1ab..12f11c2eea8c98cc341448923c80919afbceed46 100644
+--- a/drivers/video/imx/Kconfig
++++ b/drivers/video/imx/Kconfig
+@@ -19,3 +19,6 @@ config IMX_LDB
+ 	depends on VIDEO_BRIDGE
+ 	help
+ 	  Support for i.MX8MP DPI-to-LVDS on-SoC encoder.
 +
- /*
-  * The PGC offset values in Reference Manual
-  * (Rev. 1, 01/2018 and the older ones) GPC chapter's
-@@ -101,6 +106,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MP_PGC_PCIE			13
- #define IMX8MP_PGC_USB1			14
- #define IMX8MP_PGC_USB2			15
-+#define IMX8MP_PGC_MEDIAMIX		22
- #define IMX8MP_PGC_HSIOMIX		29
++config IMX_LCDIF
++	bool "i.MX LCDIFv3 LCD controller"
+diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
+index 8d106589b7544ef9694613a2284e2fbfb564cf63..1edf5a6bdf0c3afb218fbcd81384c7c277ca6b28 100644
+--- a/drivers/video/imx/Makefile
++++ b/drivers/video/imx/Makefile
+@@ -5,3 +5,4 @@
  
- #define GPC_PGC_CTRL(n)			(0x800 + (n) * 0x40)
-@@ -303,6 +309,17 @@ static const struct imx_pgc_domain imx8mp_pgc_domains[] = {
- 		.pgc = BIT(IMX8MP_PGC_HSIOMIX),
- 		.keep_clocks = true,
- 	},
+ obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
+ obj-$(CONFIG_IMX_LDB) += ldb.o
++obj-$(CONFIG_IMX_LCDIF) += lcdif.o
+diff --git a/drivers/video/imx/lcdif.c b/drivers/video/imx/lcdif.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..9f4fc7f51524449ecf8e155550e0fb3b641870d9
+--- /dev/null
++++ b/drivers/video/imx/lcdif.c
+@@ -0,0 +1,314 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * i.MX8 LCD interface driver inspired from the Linux driver
++ * Copyright 2019 NXP
++ * Copyright 2024 Bootlin
++ * Adapted by Miquel Raynal <miquel.raynal@bootlin.com>
++ */
 +
-+	[IMX8MP_POWER_DOMAIN_MEDIAMIX] = {
-+		.bits = {
-+			.pxx = IMX8MP_MEDIAMIX_Pxx_REQ,
-+			.map = IMX8MP_MEDIAMIX_A53_DOMAIN,
-+			.hskreq = IMX8MP_MEDIAMIX_PWRDNREQN,
-+			.hskack = IMX8MP_MEDIAMIX_PWRDNACKN,
-+		},
-+		.pgc = BIT(IMX8MP_PGC_MEDIAMIX),
-+		.keep_clocks = true,
-+	},
- };
- 
- static const struct imx_pgc_regs imx8mp_pgc_regs = {
++#include <asm/io.h>
++#include <asm/mach-imx/dma.h>
++#include <clk.h>
++#include <dm.h>
++#include <panel.h>
++#include <power-domain.h>
++#include <video.h>
++#include <video_bridge.h>
++#include <linux/delay.h>
++
++#include "../videomodes.h"
++
++#define LCDIFV3_CTRL 0x0
++#define LCDIFV3_CTRL_SET 0x4
++#define LCDIFV3_CTRL_CLR 0x8
++#define   CTRL_INV_HS BIT(0)
++#define   CTRL_INV_VS BIT(1)
++#define   CTRL_INV_DE BIT(2)
++#define   CTRL_INV_PXCK BIT(3)
++#define   CTRL_CLK_GATE BIT(30)
++#define   CTRL_SW_RESET BIT(31)
++
++#define LCDIFV3_DISP_PARA 0x10
++#define   DISP_PARA_DISP_MODE_NORMAL 0
++#define   DISP_PARA_LINE_PATTERN_RGB_YUV 0
++#define   DISP_PARA_DISP_ON BIT(31)
++
++#define LCDIFV3_DISP_SIZE 0x14
++#define   DISP_SIZE_DELTA_X(x) ((x) & 0xffff)
++#define   DISP_SIZE_DELTA_Y(x) ((x) << 16)
++
++#define LCDIFV3_HSYN_PARA 0x18
++#define   HSYN_PARA_FP_H(x) ((x) & 0xffff)
++#define   HSYN_PARA_BP_H(x) ((x) << 16)
++
++#define LCDIFV3_VSYN_PARA 0x1C
++#define   VSYN_PARA_FP_V(x) ((x) & 0xffff)
++#define   VSYN_PARA_BP_V(x) ((x) << 16)
++
++#define LCDIFV3_VSYN_HSYN_WIDTH 0x20
++#define   VSYN_HSYN_PW_H(x) ((x) & 0xffff)
++#define   VSYN_HSYN_PW_V(x) ((x) << 16)
++
++#define LCDIFV3_CTRLDESCL0_1 0x200
++#define   CTRLDESCL0_1_WIDTH(x) ((x) & 0xffff)
++#define   CTRLDESCL0_1_HEIGHT(x) ((x) << 16)
++
++#define LCDIFV3_CTRLDESCL0_3 0x208
++#define   CTRLDESCL0_3_PITCH(x) ((x) & 0xFFFF)
++
++#define LCDIFV3_CTRLDESCL_LOW0_4 0x20C
++#define LCDIFV3_CTRLDESCL_HIGH0_4 0x210
++
++#define LCDIFV3_CTRLDESCL0_5 0x214
++#define   CTRLDESCL0_5_YUV_FORMAT(x) (((x) & 0x3) << 14)
++#define   CTRLDESCL0_5_BPP(x) (((x) & 0xf) << 24)
++#define     BPP32_ARGB8888 0x9
++#define   CTRLDESCL0_5_SHADOW_LOAD_EN BIT(30)
++#define   CTRLDESCL0_5_EN BIT(31)
++
++struct lcdifv3_priv {
++	void __iomem *base;
++	struct clk pix_clk;
++	struct power_domain pd;
++	struct udevice *panel;
++	struct udevice *bridge;
++};
++
++static void lcdifv3_set_mode(struct lcdifv3_priv *priv,
++			     struct display_timing *timings)
++{
++	u32 reg;
++
++	writel(DISP_SIZE_DELTA_X(timings->hactive.typ) |
++	       DISP_SIZE_DELTA_Y(timings->vactive.typ),
++	       priv->base + LCDIFV3_DISP_SIZE);
++
++	writel(HSYN_PARA_FP_H(timings->hfront_porch.typ) |
++	       HSYN_PARA_BP_H(timings->hback_porch.typ),
++	       priv->base + LCDIFV3_HSYN_PARA);
++
++	writel(VSYN_PARA_BP_V(timings->vback_porch.typ) |
++	       VSYN_PARA_FP_V(timings->vfront_porch.typ),
++	       priv->base + LCDIFV3_VSYN_PARA);
++
++	writel(VSYN_HSYN_PW_H(timings->hsync_len.typ) |
++	       VSYN_HSYN_PW_V(timings->vsync_len.typ),
++	       priv->base + LCDIFV3_VSYN_HSYN_WIDTH);
++
++	writel(CTRLDESCL0_1_WIDTH(timings->hactive.typ) |
++	       CTRLDESCL0_1_HEIGHT(timings->vactive.typ),
++	       priv->base + LCDIFV3_CTRLDESCL0_1);
++
++	if (timings->flags & DISPLAY_FLAGS_HSYNC_LOW)
++		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_VSYNC_LOW)
++		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_DE_LOW)
++		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_PIXDATA_POSEDGE)
++		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_CLR);
++
++	writel(0, priv->base + LCDIFV3_DISP_PARA);
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg &= ~(CTRLDESCL0_5_BPP(0xf) | CTRLDESCL0_5_YUV_FORMAT(0x3));
++	reg |= CTRLDESCL0_5_BPP(BPP32_ARGB8888);
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++}
++
++static void lcdifv3_enable_controller(struct lcdifv3_priv *priv)
++{
++	u32 reg;
++
++	reg = readl(priv->base + LCDIFV3_DISP_PARA);
++	reg |= DISP_PARA_DISP_ON;
++	writel(reg, priv->base + LCDIFV3_DISP_PARA);
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg |= CTRLDESCL0_5_EN;
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++}
++
++static int lcdifv3_video_sync(struct udevice *dev)
++{
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++	u32 reg;
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg |= CTRLDESCL0_5_SHADOW_LOAD_EN;
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++
++	return 0;
++}
++
++static void lcdifv3_init(struct udevice *dev, struct display_timing *timings)
++{
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++
++	clk_set_rate(&priv->pix_clk, timings->pixelclock.typ);
++
++	writel(CTRL_SW_RESET | CTRL_CLK_GATE, priv->base + LCDIFV3_CTRL_CLR);
++	udelay(10);
++
++	lcdifv3_set_mode(priv, timings);
++
++	writel(plat->base & 0xFFFFFFFF, priv->base + LCDIFV3_CTRLDESCL_LOW0_4);
++	writel(plat->base >> 32, priv->base + LCDIFV3_CTRLDESCL_HIGH0_4);
++
++	writel(CTRLDESCL0_3_PITCH(timings->hactive.typ * 4), /* 32bpp */
++	       priv->base + LCDIFV3_CTRLDESCL0_3);
++
++	lcdifv3_enable_controller(priv);
++}
++
++static int lcdifv3_video_probe(struct udevice *dev)
++{
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++	struct clk axi_clk, disp_axi_clk;
++	struct display_timing timings;
++	u32 fb_start, fb_end;
++	int ret;
++
++	ret = power_domain_get(dev, &priv->pd);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "pix", &priv->pix_clk);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "axi", &axi_clk);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "disp_axi", &disp_axi_clk);
++	if (ret < 0)
++		return ret;
++
++	ret = power_domain_on(&priv->pd);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&priv->pix_clk);
++	if (ret)
++		goto dis_pd;
++
++	ret = clk_enable(&axi_clk);
++	if (ret)
++		goto dis_pix_clk;
++
++	ret = clk_enable(&disp_axi_clk);
++	if (ret)
++		goto dis_axi_clk;
++
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base) {
++		ret = -EINVAL;
++		goto dis_clks;
++	}
++
++	/* Attach bridge */
++	ret = uclass_get_device_by_endpoint(UCLASS_VIDEO_BRIDGE, dev,
++					    -1, -1, &priv->bridge);
++	if (ret)
++		goto dis_clks;
++
++	ret = video_bridge_attach(priv->bridge);
++	if (ret)
++		goto dis_clks;
++
++	ret = video_bridge_set_backlight(priv->bridge, 80);
++	if (ret)
++		goto dis_clks;
++
++	/* Attach panels */
++	ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
++					    1, -1, &priv->panel);
++	if (ret) {
++		ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
++						    2, -1, &priv->panel);
++		if (ret)
++			goto dis_clks;
++	}
++
++	ret = panel_get_display_timing(priv->panel, &timings);
++	if (ret) {
++		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
++						   0, &timings);
++		if (ret) {
++			printf("Cannot decode panel timings (%d)\n", ret);
++			goto dis_clks;
++		}
++	}
++
++	lcdifv3_init(dev, &timings);
++
++	/* Only support 32bpp for now */
++	uc_priv->bpix = VIDEO_BPP32;
++	uc_priv->xsize = timings.hactive.typ;
++	uc_priv->ysize = timings.vactive.typ;
++
++	/* Enable dcache for the frame buffer */
++	fb_start = plat->base & ~(MMU_SECTION_SIZE - 1);
++	fb_end = ALIGN(plat->base + plat->size, 1 << MMU_SECTION_SHIFT);
++	mmu_set_region_dcache_behaviour(fb_start, fb_end - fb_start,
++					DCACHE_WRITEBACK);
++	video_set_flush_dcache(dev, true);
++
++	return 0;
++
++dis_clks:
++	clk_disable(&disp_axi_clk);
++dis_axi_clk:
++	clk_disable(&axi_clk);
++dis_pix_clk:
++	clk_disable(&priv->pix_clk);
++dis_pd:
++	power_domain_off(&priv->pd);
++
++	return ret;
++}
++
++static int lcdifv3_video_bind(struct udevice *dev)
++{
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++
++	/* Max size supported by LCDIF */
++	plat->size = 1920 * 1080 * VNBYTES(VIDEO_BPP32);
++
++	return 0;
++}
++
++static const struct udevice_id lcdifv3_video_ids[] = {
++	{ .compatible = "fsl,imx8mp-lcdif" },
++	{ }
++};
++
++static struct video_ops lcdifv3_video_ops = {
++	.video_sync = lcdifv3_video_sync,
++};
++
++U_BOOT_DRIVER(lcdifv3_video) = {
++	.name = "lcdif",
++	.id = UCLASS_VIDEO,
++	.of_match = lcdifv3_video_ids,
++	.bind = lcdifv3_video_bind,
++	.ops = &lcdifv3_video_ops,
++	.probe = lcdifv3_video_probe,
++	.priv_auto = sizeof(struct lcdifv3_priv),
++	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
++};
 
 -- 
 2.48.1
