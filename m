@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DA9C36005
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 00:08:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F8CC36005
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 00:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCCE78186D;
-	Wed, 26 Mar 2025 01:08:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 658768186D;
+	Wed, 26 Mar 2025 01:15:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XNXTc+zb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="px6M7cp1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 088AC8192A; Wed, 26 Mar 2025 01:08:45 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 0716B8186D; Wed, 26 Mar 2025 01:15:29 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B651F810E8
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 01:08:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5013810E8
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 01:15:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-30155bbbed9so8219803a91.1
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 17:08:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-72b0626c785so4363771a34.2
+ for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 17:15:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742947721; x=1743552521; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Dk1xxVZe7pKhSWpNEJ9MX7OcDw47+WXQn6Xju6k0LtU=;
- b=XNXTc+zbtS+nf+twYssWsK++Y8M15CGKJjKXnP+WzWVx6r7X59UPJizDLotgWN1f1M
- m2dl1eORG6HNCAm9y0CrDH4q+F7LctfkgqOd6P6PubjN/6enwKFQxnpAYS7sJPdqlPVb
- wa2G/trcclJpMQvnTGbB9qwmXonBPqNQtK+WGcpP69F6cpkFiLGUgxDSmW/WSoqAHKX2
- D3qNKEhW9BX5AjJXcPxrKmIU7xHee8limjx6vi0V5Ee7NG6uDRF2pf4wuiC7JQOCW4kb
- VVdNSUg9UWM56dW0yJQ+tkDJr4ZkZlSyJBFJMH9Zy6VnJsydyQgDYPf1Hc+JlwWxRi3O
- ZVbQ==
+ d=konsulko.com; s=google; t=1742948125; x=1743552925; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ki15pqjHVnhp73rOZPEcgmm1aqYQv9zowX0+f5GLW9Y=;
+ b=px6M7cp1vSJCdcRuURuMeyqtO0jYwEnUwE4R8TnEtGz9YEhHkWgFWwahAUBiGxTsHK
+ d35tBUqoEe5DgLaKVajEaQKAF1Gsq8jUXmNhM9f1tIlhLM5MFNQpTyoqpFMpxUc0Hvys
+ yFTqbVi70L7an2Q8xvBd4Gawa6zDXmJz4Ubz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742947721; x=1743552521;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Dk1xxVZe7pKhSWpNEJ9MX7OcDw47+WXQn6Xju6k0LtU=;
- b=TvEZunzed1DNtVc/pc9gZ3hoUi9q7bBBIYmldQnJz+aqjTWKUyyPu7XC0gW6CdUEjo
- 96ViliknnxcqpqSRI7O4ktzt2C/K+XLnd+5NCQjPeR0jqPNl1k9XJHXts1e7pQtjzvoZ
- LWOyJQluLn6PY4YT+vazYPrjM1zOYB+0OW2AENok1Cwe93YQwY034iI3dOsU5b9y7MwB
- wSumTsl+lODTdqHkus6cvm6Z0s59d/cE7Lllo9fHLzxDU/5jXnYmMrCOO8imfZLTXcj2
- K0hcIntnOTiagvcQZdPoW++qrO+juy6DVHQcKmnKYisR4Cx18yWXMt8cymeN830mcRHi
- q7Dw==
+ d=1e100.net; s=20230601; t=1742948125; x=1743552925;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ki15pqjHVnhp73rOZPEcgmm1aqYQv9zowX0+f5GLW9Y=;
+ b=oztKCs1eayUclU057PYrAEp9mxfhaW8H5S6y6QDAJcvMZHKEVWBygN6M9g0myA3xYL
+ +9lXfThK6A6y2OHMBvQ0ZwX2E64KD2jE4F55MnaIHMdQZt8Tobc1kkShInQR4fVCtxDq
+ AMmnLO/o4BTtudsgOqgUoGKmzPxYq0+PkXotGDb8xdgGPYe7NGVZqgrSq44Nyb2cI19q
+ Pj9tbKHQkb0DVPVrPnEG8+3lzt/+VaW6A5asaaUyHomHbHkkGm5pR5wkPsyU4aUzg0L7
+ pAo0kk52O+yAvXpJzA+6eGyhGuMuQsD64YNyfDk0dc1+yX5QENBcyb3IaKKHGPltRzDy
+ Fzhw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUeb6UXFmYqpKQCEwOTmO24fVUFsQdVifoPeDH+Xwr8uHYfGmGiXfgB2OdTg3YWgXXsGc+ayc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJI7zdu/H1gkvkEkVFRN4s2rZWfpWAL9ROyX6dhlG7fZemjPtn
- YmITfymecbzhNu06bSmOa7v5SZa8Bp6JOkMU2dHm1X+QlhXQ9WQZwWfkKi8LI1NqVmxPgkOFt3X
- wVDyiD34t+OtiNUFBXKfaO9h+PHA=
-X-Gm-Gg: ASbGncsUomYlwjnHWUlzR4KwrzQkiNX2dfvMykFYUhHQOQZ0R8zmS8c/woaZPOrdeIB
- fiUIgHf6xwSeM+uXitWNdGVpf6rmK9AIfTzAWBn6IvRoHsNYbuA+ze9fcIsWgsGn5PBCl0QAwcN
- KTp6DQQ5tbGmg8nFfTOkyANObNnQ==
-X-Google-Smtp-Source: AGHT+IHF1yI70rJx3OS+ToaWS03WUH5/cA6RluwTaC2Obu2QAYtSQ0ueE1BYuJajXMIqpLhI9YqX/hRdPaAD/yETa3c=
-X-Received: by 2002:a17:90b:554e:b0:2fa:228d:5af2 with SMTP id
- 98e67ed59e1d1-3030fea0d35mr32799668a91.15.1742947721057; Tue, 25 Mar 2025
- 17:08:41 -0700 (PDT)
+ AJvYcCXqVuGap/qawZebu7nOZctQKniuCts2ivlfpXjczpcTJ9J+HlmyaJYM+W0ollZ7zKT48Um8jvA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwAwUZ1l3wkkkasmIMUMHJeMoYMgM7MhmqvttzTVBBjKNqavd8q
+ OZ4W+vJqWVM3QAy0spZP0mQtLIYVrNQBzQKXeOp+ygrSYPnZj3BCJZmJBx0FCrg=
+X-Gm-Gg: ASbGnctiiXHIWO98IdmxIYSAO621NULd5QM0gNE52vRu0UGw29hA7cFo9TemBhhFXHB
+ UAPuc1tKmJKuTnjHEeEHEqWXh6jC8aj9OWLLLxkEAZPNSbhPue0Z6p33jPyZbr+X5qs0KtywLEv
+ wRvlXscE40V1DYcapKeosO3WV/cQflEZCcs9K4Y2qFzSbUKEDuQJZdcT/Dxu+Lkyaw9dme/dojH
+ 3RoV+R5XVW5sgNeB1uqTYJ0PI1umusA41kh5s5hXhLMrS51zM2zRCpWh3f0Av3yz/CMUSX3lw1/
+ F2gMe2dc9jT9uIRXQhZ159FKv4d1Y3mzin8nerCv18Q=
+X-Google-Smtp-Source: AGHT+IGdCyn0TbGJ3PzdMHMw0hGPFx4wj7JOAKclmW4MrHxA54y1lc2mH9/t4NvFufQV4kdI125STg==
+X-Received: by 2002:a05:6830:44ac:b0:72b:9c34:1361 with SMTP id
+ 46e09a7af769-72c0ae9701amr15045566a34.15.1742948125251; 
+ Tue, 25 Mar 2025 17:15:25 -0700 (PDT)
+Received: from bill-the-cat ([2806:2f0:5140:4ba6:9e6b:ff:fe16:a05f])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-60234851526sm1634498eaf.25.2025.03.25.17.15.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Mar 2025 17:15:24 -0700 (PDT)
+Date: Tue, 25 Mar 2025 18:15:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 4/8] env: Rename SYS_MMC_ENV_DEV to ENV_SDMMC_DEVICE_INDEX
+Message-ID: <20250326001521.GN93000@bill-the-cat>
+References: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
+ <20250322215624.18994-4-marek.vasut+renesas@mailbox.org>
+ <90254a96-5d67-4d34-afe6-772af42ee557@cherry.de>
+ <e385568e-59b1-4adf-9fb7-d87b4254eae9@mailbox.org>
 MIME-Version: 1.0
-References: <20250325025452.950303-1-aford173@gmail.com>
- <20250325025452.950303-5-aford173@gmail.com>
- <6f58a557-d5b4-4bc7-87b0-6ed626ec534a@mailbox.org>
- <CAOMZO5CT0uevQaPWPAHM0qVULy+f6rsbwE72Kkph48ghpOSKkQ@mail.gmail.com>
- <CAHCN7xJoJYmZCG7e+zv3cJc8B460kqWpz8v-KibsVsHJzbpjUA@mail.gmail.com>
- <CAOMZO5DxKOF4qD7zknYxz=UihHSQrH=OBX3ZqUO6-vsdZoNGmQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5DxKOF4qD7zknYxz=UihHSQrH=OBX3ZqUO6-vsdZoNGmQ@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Tue, 25 Mar 2025 19:08:29 -0500
-X-Gm-Features: AQ5f1Jr7-JijRr0ldxee_s3SZXUdQ_J8evFJD6yfDjHE_zr5X-1VRun6hhHF-7s
-Message-ID: <CAHCN7xKsqPDEb_zkF-dTWRRJPre6Q+=FNHFuWmGBE6g0e6F=iQ@mail.gmail.com>
-Subject: Re: [PATCH V4 4/7] cpu: imx8_cpu: Print Speed grade if IMX_TMU.
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- aford@beaconembedded.com, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Heiko Schocher <hs@denx.de>, 
- Enrico Leto <enrico.leto@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
- Yannic Moog <y.moog@phytec.de>, Gilles Talis <gilles.talis@gmail.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ye Li <ye.li@nxp.com>, 
- Christoph Stoidner <c.stoidner@phytec.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jiklPNYCcPvzmXlQ"
+Content-Disposition: inline
+In-Reply-To: <e385568e-59b1-4adf-9fb7-d87b4254eae9@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,27 +101,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 25, 2025 at 5:00=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi Adam,
->
-> On Tue, Mar 25, 2025 at 9:37=E2=80=AFAM Adam Ford <aford173@gmail.com> wr=
-ote:
->
-> > Once this is complete, I'll have a smaller patch series which shrinks
-> > my 8MP SPL code by around 4k by #ifdef'ing out dead code.  Hopefully
-> > it's not too cluttered, but that smaller series depends on both the
-> > UART clock and the CPU_IMX updates.
->
-> The two series are present in the next branch now.
->
-> Feel free to post the additional improvements.
 
-Well, I am not sure if it's good news or bad, but after rebasing my
-changes on top of U-Boot-Next,  the SPL size delta goes away, so I am
-not sure if I even have anything to push, since it makes no difference
-anymore.  :-(  Part of me wants to bisect it to see what made the
-difference.
+--jiklPNYCcPvzmXlQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-adam
+On Wed, Mar 26, 2025 at 12:02:08AM +0100, Marek Vasut wrote:
+> On 3/24/25 1:39 PM, Quentin Schulz wrote:
+> > Hi Marek,
+>=20
+> Hi,
+>=20
+> > On 3/22/25 10:55 PM, Marek Vasut wrote:
+> > > Rename the variable and add ENV_ prefix, so that all configuration
+> > > options which are related to environment would have an CONFIG_ENV_
+> > > prefix. No functional change.
+> > >=20
+> > > Use ENV_SDMMC_DEVICE_INDEX to clarify this is the SD/MMC device
+> > > index, a number, as enumerated by U-Boot. Update the help text
+> > > accordingly.
+> > >=20
+> >=20
+> > I disagree with this part of the rename (MMC->SDMMC), our drivers all
+> > are using mmc (env/mmc.*, drivers/mmc/*, cmd/mmc.c, ...) for both SD and
+> > MMC. We also have ENV_IS_IN_MMC which is for both. I don't think it's
+> > worth the confusion.
+>=20
+> My main problem is, that it is confusing to call everything _mmc_ even if
+> most of it also applies to SD . There is no way to discern parts which are
+> MMC specific from parts which are common to SD and MMC now.
+
+Do we have support for anything using the MMC part of the standard that
+is not storage? I certainly agree it's confusingly named atm, but I
+think changing some parts but not other parts will make it worse, not
+better.
+
+--=20
+Tom
+
+--jiklPNYCcPvzmXlQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfjRxUACgkQFHw5/5Y0
+tyxu0gv+MLFDcFhsRrB/xmYaJVKN+6KiRE1YrYMyI1/lpEuhPUhLmpzQobUDCW02
+onJhSd9iUZvRiI4Mg6uLw3/0zkiZ1wDTdOanG5CVCUg9WSxDdhlDqDapI5SPNawZ
+DGP5X9SrwM5s4GgXvpdx6R/h51+qVnimoaOoe1BV14tMLOIUcnzinAZZuSCDevjn
+ZiLcjwePTNHpdzPN9LYIO6kqADSdfOWG0CgOCmISVN4IEMN4tof7r9sSB4JALkMB
+K7KvqfGHB/pzt5p4TzX2MdF6LiEyhMITizM29sDKdWOhSwSK6KzC+Vqrvri0LMS8
+9sUeCX729/QWjUv7q9FeFvTXh1bq1ZmUppzqoRAoeSZociBNYxqdzGsQOIqDSpV5
+cWwKkSsw5vZ5kJ08cP/aBw6BPG9rR1McmIQN1i43SEBs7mfkXVwkuONfPHlX40Uo
+nDrfsOEfdSPneyMQdRyaRjtUbqVC6bZCgai1n9wLi5nN12Kcw9NQphdWRqcBt5kk
+GXRFhRfW
+=0052
+-----END PGP SIGNATURE-----
+
+--jiklPNYCcPvzmXlQ--
