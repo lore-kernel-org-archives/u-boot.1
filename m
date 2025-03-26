@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF78C36008
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 07:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44DF7C3600D
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 07:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AB17808B6;
-	Wed, 26 Mar 2025 08:28:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C84E8808B6;
+	Wed, 26 Mar 2025 08:29:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WWzH0Qjn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IplbCds4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FD13809D0; Wed, 26 Mar 2025 08:28:43 +0100 (CET)
+ id C19A1809D0; Wed, 26 Mar 2025 08:29:42 +0100 (CET)
 Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
  [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 283C98083E
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 08:28:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97E5A8083E
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 08:29:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so5120694276.2
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 00:28:41 -0700 (PDT)
+ 3f1490d57ef6-e60aef2711fso4463883276.2
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 00:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742974120; x=1743578920; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742974179; x=1743578979; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ivQ4jYQrp+XcwtaZlCFDtARkEOPELtGQMqe/IEl5R4k=;
- b=WWzH0QjnTmFI1aLwg8l2uGndF09a81VELudNezau/S9/8JbznMHlg3e4pOvpdYL5Qa
- wk8p9jUY0m82GX0xAS3DyKkyADsfbwRDqcrePQOO1d+dRG9nRe4lNSAROR9rFfRWiwy2
- yq61meOibPiHgDPEm90k1FuMN53XUiprXlbS/fHbPSjLGeCdeHX4u2qTu/3Q3a7IqetG
- X6iPEtlWwKh7iIhgHqSyVgZ29Ec5/sE5G5jx2i3Hiscsv1MTyq7RGbNdqHsOt1+DVKEF
- yV6qFslceECrluBhskQLJ2k8ZksuUPCPvc1lqcZgJ0htIjaiOA0B3pUcMqGxeujK07ln
- YOcw==
+ bh=ZZ2vu9jYCdalws2pkegrUFqXzNEyNnS0VHHzJu4eG24=;
+ b=IplbCds4wyuhKq0Z4MC1BhZESWjK2UXSxrm6w2IR4DFQqu8dATgZx7gK7Vl5/DU3k4
+ E/dom7E8SAO9xeihFy5V4QggOeMQh5omAxlWzB3hOyhYsRTZZC5Xh/Z+Oe17Ityne2ZW
+ 4KgF82QdHkNYGesp1opGtQeg9lD42O8FCUjhqJDTqqFgz5tnHyKwfAR5VclcyRh6pFid
+ u6LkvrtKp2+li9qIwOGO+6vMSBQWrKeyEUYfwa9VAOlUVGZZ8fpqCBlPqlXc/eVM/TaU
+ xzKQT7yrKMifJ0f8qeNY5m7FXNBI15Jhzy5h0UmqEneZ48eOZ2tSqLGtZmN8GGyDG25F
+ f0Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742974120; x=1743578920;
+ d=1e100.net; s=20230601; t=1742974179; x=1743578979;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ivQ4jYQrp+XcwtaZlCFDtARkEOPELtGQMqe/IEl5R4k=;
- b=Z7kqvDNxg6dS5oeIAwBgnlQuI7fN+uIvHV8B+bYuv3qG2nScPTZPuY9FkjzOjX7cnB
- 86TaibjOamf9bVd12v9UXafvsaNTGFmaKmNs2OwVGjhk8Hz7xy5QtfOh/p2IN2nlL4ID
- bvUEYqok8c2XjP4Sr6MDunz3BKoXpXSR6ESwWwOpVkLqAvh36dtYJ5zzSDkYsCdSyYHJ
- Ibdtq3MJ9fHMf/U5rrKmfpTs1GKPUdR1ivxxIGafzzb7fddj+ffkS970EwHLBSAqksek
- XzhbqTtVZZtfvDW15PP9q9QzMPw3ObCuliLnMfVd3DOASzlQY7f9EGKBGWI6G6qBgjSH
- ZqtA==
+ bh=ZZ2vu9jYCdalws2pkegrUFqXzNEyNnS0VHHzJu4eG24=;
+ b=T9RTnzSJr6cuWTFzOkxJ3EAvNQQs7nTyMxB+9HqYEWaJRLdEjk3hCNykYm2ldklKaR
+ +NjN4aZhqQSE43qt7lQiNncwGrtKsyGTh+aK1ORMPy7YhPxbpuZvy+2YvQTICFZyI0qX
+ hGqKsc+aZunAFWgPwzMHAV3a1qXgZhbcgM+kALaIeAI1HJhCPbC/LOVaJ5oTrkJgpBOS
+ Kk66OT76zs/rHayS/E6jEwlFPr1pu1pVAQlVHA5WcXNm11TnLdQ9L1Gm9PwUnAa+UiJU
+ B/tWilUhI7gMS5nlsGzKdY0og3KeInguJDQ6oQNGFYhuLXygYtIUfKiyh7oQvftaLoaw
+ Hj2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyf356N7QZeCOyRrKlU8LgqaH2q7uC7o2foyqCJ/0+1WA+UA5YZHq1xUCbVBeShVKmY8Oho1A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3sGQo7+I6Q+KwJyaeedg72LHGvffUi8j54XCiKBKb56ay63hK
- ApmQ0awFwnsgozzBbeobIg+CitfNzRGdEg+m8m61wkGeANGeCc80fapMvM6qUjBGSyRtPqx1lMN
- 4hihdTfWSaQLFnaXKycaEBsx8yfE+PLxwcDQhHw==
-X-Gm-Gg: ASbGnctbbwhSdQdsw4p138fJTSmEK5dTAe4MwSPOGiDyOoNwVjlnoMZwCJhYjNgGNSG
- fcuw9xnsQslUk3+xGAaSYXLfU338J3NhdpyGiQGia6m4eAbBnYwaQcOxXoukJX5WyvxbmWF915N
- ncBWsB1MBjNod2OJ/++O/2eYirtajFQlF/QCOH5w==
-X-Google-Smtp-Source: AGHT+IGoM6kiD/gpNMqJM73Bh987kXc7uifJkWO49P+G1mnzBibVBt2D6vgHw7ONZ1+XQqjmKC90QzL+YmCg9BTAk9k=
-X-Received: by 2002:a05:6902:2781:b0:e5d:c5f3:13e1 with SMTP id
- 3f1490d57ef6-e66a4faa663mr20672394276.35.1742974119817; Wed, 26 Mar 2025
- 00:28:39 -0700 (PDT)
+ AJvYcCU6mCkqmtQC0Zbxe4panAwtsl+z3MhrlDXqaE7RniQo7T9wtcNF5paIgLhn+0zedrkdVEfAwgE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaAZQJ5no4TZy4QlGXG6FTpzP2BihA5h1kCfuidshKks1FNJGy
+ fNmur4DLogIfPdtLrPnAhNX0zhp40L4x4ZCfNb1AOke4f0vFhYoWMcnGwWc9gHKabtU/Jl5At+q
+ +1BrYEe2isErRGKTBrqFdU557KTRxekU9/850uA==
+X-Gm-Gg: ASbGncsQw6BIPu3RlyPaC+EpEqZHfE6BLadUdWLZsqHoIfSw4umy3Fk6/YUXIUD8tbR
+ xHdkncYcaNNkXyQTEmqr0xATNdGGqTdL/VjXIydNADWYrJQEUyAE0ktH2lDoZVKAOx7g5fYIDQf
+ XL7NbM4AIvdD0Uhk+E3UWxzndwDh6sRzrxEN61Ng==
+X-Google-Smtp-Source: AGHT+IEInQXp8LU+0yJRzLrUJ2CCVLtmitgVickgf0IdiIMNi8p5B1KvCjkf1P8gnIrtbfLk18ry3tQmpoI7hJBCGxw=
+X-Received: by 2002:a05:6902:e0b:b0:e60:8a06:1ddd with SMTP id
+ 3f1490d57ef6-e66a4fa4ff7mr22598897276.36.1742974179337; Wed, 26 Mar 2025
+ 00:29:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250326054653.273906-1-quic_varada@quicinc.com>
-In-Reply-To: <20250326054653.273906-1-quic_varada@quicinc.com>
+References: <20250321232121.251800-1-heinrich.schuchardt@canonical.com>
+ <20250321232121.251800-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250321232121.251800-2-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Mar 2025 09:28:04 +0200
-X-Gm-Features: AQ5f1JrINPgQ2_olLh8yGa81r08cwgKH6CwQ7PmHteBEF5YSjD5CMbUkR5DC1HI
-Message-ID: <CAC_iWj+MPcOcuhM1vcHyXYUF7O7U_y8+KKMZJszTK2aqfgfHZg@mail.gmail.com>
-Subject: Re: [PATCH v1] efi_loader: Handle GD_FLG_SKIP_RELOC
-To: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: trini@konsulko.com, sjg@chromium.org, EABachinin@salutedevices.com, 
- jerome.forissier@linaro.org, rasmus.villemoes@prevas.dk, ansuelsmth@gmail.com, 
- sughosh.ganu@linaro.org, michal.simek@amd.com, u-boot@lists.denx.de
+Date: Wed, 26 Mar 2025 09:29:03 +0200
+X-Gm-Features: AQ5f1JqyskSubidRQYEluj8S5F0i_7cZs9YeePCrwuDBEdH5G_7AF2FiwT8RfC4
+Message-ID: <CAC_iWjJJeqJ5k3GHx4aDRroMgDg6EeNEWgiEcGz1WZcmHU5JDw@mail.gmail.com>
+Subject: Re: [PATCH 1/5] acpi: new function acpi_update_checksum()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Fiona Klute <fiona.klute@gmx.de>, Martin Stolpe <martinstolpe@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,51 +99,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan
-
-On Wed, 26 Mar 2025 at 07:47, Varadarajan Narayanan
-<quic_varada@quicinc.com> wrote:
+On Sat, 22 Mar 2025 at 01:21, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> If the EFI runtime services pointers are relocated even though
-> relocation is skipped, it corrupts some other data resulting in some
-> unexpected behaviour.
+> Introduce a new function to update ACPI table headers.
+> This allows to simplify the existing code.
 >
-> In this specific case, it overwrote some page table entries resulting in
-> the device memory address range's mappings getting removed. Eventually,
-> after the completion of efi_runtime_relocate(), when a driver tries to
-> access its device's registers it crashes since the mappings are absent.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-How were those page table entries added? The runtime service
-relocation might have overwritten those now, but since they are not in
-protected memory this can happen arbitrarily.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 > ---
->  common/board_r.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  include/acpi/acpi_table.h | 7 +++++++
+>  lib/acpi/acpi.c           | 7 +++++++
+>  2 files changed, 14 insertions(+)
 >
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 179259b00de..1dd3b96c2de 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -169,7 +169,8 @@ static int initr_reloc_global_data(void)
->          */
->         efi_save_gd();
+> diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+> index b8b1f1338c6..f8e5f552ab1 100644
+> --- a/include/acpi/acpi_table.h
+> +++ b/include/acpi/acpi_table.h
+> @@ -1274,6 +1274,13 @@ ulong write_acpi_tables(ulong start);
+>   */
+>  struct acpi_table_header *acpi_find_table(const char *sig);
 >
-> -       efi_runtime_relocate(gd->relocaddr, NULL);
-> +       if (!(gd->flags & GD_FLG_SKIP_RELOC))
-> +               efi_runtime_relocate(gd->relocaddr, NULL);
-
-Have you tested booting with EFI with this change?
-
-Thanks
-/Ilias
->  #endif
+> +/**
+> + * acpi_update_checksum() - update ACPI table checksum
+> + *
+> + * @header - header of an ACPI table
+> + */
+> +void acpi_update_checksum(struct acpi_table_header *header);
+> +
+>  #endif /* !__ACPI__*/
 >
->         return 0;
+>  #include <asm/acpi_table.h>
+> diff --git a/lib/acpi/acpi.c b/lib/acpi/acpi.c
+> index f4d5c1e25d0..596301a43fe 100644
+> --- a/lib/acpi/acpi.c
+> +++ b/lib/acpi/acpi.c
+> @@ -6,11 +6,18 @@
+>   */
 >
-> base-commit: 244e61fbb7f5045e4e187024f7ae80434c952145
+>  #include <mapmem.h>
+> +#include <tables_csum.h>
+>  #include <acpi/acpi_table.h>
+>  #include <asm/global_data.h>
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+> +void acpi_update_checksum(struct acpi_table_header *header)
+> +{
+> +       header->checksum = 0;
+> +       header->checksum = table_compute_checksum(header, header->length);
+> +}
+> +
+>  struct acpi_table_header *acpi_find_table(const char *sig)
+>  {
+>         struct acpi_rsdp *rsdp;
 > --
-> 2.34.1
+> 2.48.1
 >
