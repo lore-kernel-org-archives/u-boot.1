@@ -4,62 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C550C36008
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 16:24:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5336BC36008
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 16:31:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADBBB81253;
-	Wed, 26 Mar 2025 17:24:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id B126B81253;
+	Wed, 26 Mar 2025 17:31:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="oxDuRUJf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C6tWdlLV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51A4781B42; Wed, 26 Mar 2025 17:24:33 +0100 (CET)
-Received: from mx2.securetransport.de (mx2.securetransport.de
- [IPv6:2a03:4000:13:6c7::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A3A1981951; Wed, 26 Mar 2025 17:31:16 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F408F810E8
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 17:24:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3F1E9810E8
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 17:31:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1743005005;
- bh=Aiwe7utK1TweQeFtJF7FgkwcVQtoNB5JptvOTEWWy40=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=oxDuRUJfCzDnuJ1YDSLiHoGsJUDA9AQ0yEJm3t/K2p1Sf4gYaSMtmPd+pMQZLHd2E
- DxDxdlLHTTp+0nJT9T6Ix+FmUrc1iDNKBr0yVoAQb0R2YCDXTzcIFrcveSB9NaotmE
- C/KZ2CA+P19JjvjBquJAfo2RAMDzqL4btKxvfuyaihmWWCGGM2MRl+ICJN5l7r4XPU
- 3s+mkHtg7mOIQns9gElhqOAhnTjBZb5BZ+MG542hK1QL9mmRFhlMGLXwEN/naANd+1
- JSsC6vqtmGZ3Dza0k//KKU5f5OKtHHbMbrkq8YKl0whPPL7C8EozmUxnfEBYKOD7Jd
- o3QrQelpShxUg==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>
-Subject: RE: [PATCH V2] cmd: env: select: Add output for available evironment
- targets
-Thread-Topic: [PATCH V2] cmd: env: select: Add output for available evironment
- targets
-Thread-Index: AQHbmpFivIZenhQ1FkO4CJlGJQedFLN952SAgAey9QA=
-Date: Wed, 26 Mar 2025 16:02:54 +0000
-Message-ID: <8a6f66eb182744a3b6d53dfb62623ed8@dh-electronics.com>
-References: <20250321184357.4079845-1-cniedermaier@dh-electronics.com>
- <1fac6372-b251-4778-b3fe-7f7eda3aac8f@denx.de>
-In-Reply-To: <1fac6372-b251-4778-b3fe-7f7eda3aac8f@denx.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-394780e98easo4078098f8f.1
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 09:31:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1743006674; x=1743611474; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JC/HPDa35fq3srdVlGJUqSCVNkMJmwwC7pBrmc4iuG0=;
+ b=C6tWdlLV06Re7AvXLGcAGKr9G2Lobj/mQ1TK5WmeuwQJA/8UnZFXmcKRIc7fzBGv6n
+ ukLu7gZ1UfcxAVjacWw1JhM9/EzQXbdUQjZQoTZYQJSTVugOkdQ1qQg5ipbOovr51yZR
+ +wMDRz0xrWx4kj+PZi2MsaYRw1pw4ywZ2oox2Pf/05VDvmeo8LlsE05MdV+r9iea+Adh
+ sJympRwCFLmWQfYwWp+9SaSoyif+Wgg7laZ5v97GAbmgtjqoVT7HAASSPyIlHRWE7YIe
+ v3QcAa5Qhu16d8Fu1O7yoivi8Tv5Julw5g9+VeHoEc9BtkzTMF7ytK4MZH4av9MBH4ya
+ ZQnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743006674; x=1743611474;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JC/HPDa35fq3srdVlGJUqSCVNkMJmwwC7pBrmc4iuG0=;
+ b=JHn4ILMSGsuRfvR9o9PujAYABOghPYjswRHDrDHeDL7/V2sHqqSIIKTLhlbiT4XXGQ
+ l/w7DIjLBcfyaoZmhQsbsj1+MwYLc84QBffNP4YiMvwQgV1eqy3tSZamGzz9Prs9iJfF
+ PQQwdL74APlTH5h/tf6LUvRBpniSxRn7pQsyy0JfvIrehYviEGj95u8UAi+A7DqEApLr
+ DWt13QhmriQwquNmgUgob99do0y67u+/8wl3w295jh9YtrwbI+6/8lG2kmtlXRDqOKFU
+ ZSenKnUZshA6e649vBXOZv+m4lbitU1P8lM0DZp90nxHR6JGvNNIO+X1l1CAkAvGofAf
+ 8lBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzzRaTLdogkBAXEiLErQfkQoampBpEYyTrBbW8SV11GCoFbI+FN0gjHlGgfxFEWr4Ei2cAE+c=@lists.denx.de
+X-Gm-Message-State: AOJu0YyldqPl/JtcyF2pfXBYdHkHEhjJGh5xTcAt68e8fBPSckiHx0F+
+ /40iKd6yXd5uGQmUoJobkF+OHSJCpjMAV66WzllqxjYSdUF6ySmZYtT/Rq2q+Q76Uv7wXmjCzAq
+ /dVxauP/6So1ctT1pCe2UqvT5rxE=
+X-Gm-Gg: ASbGncuo2qy5cvRgoMmMe/ZXHcacRLYfw97+z37IBrq/HIktZk5rmBDp73INPCMH0d+
+ +GH8o5vTiaSwiQrvlQ0hXYnFaVXjzpS4vbWox0hm28wUWkRWjVnXm54dVtYPpWh87T7gFbuxRBo
+ 7mB3zwrgUSgFHW8N6OSxlxB0rUOFU=
+X-Google-Smtp-Source: AGHT+IEt2NqC+VeYu1Nu4bNAjHWjpwh002a7blEmenU/6gdsUbo6jHtuVVbGiEjUh9+VWOTt36uNRdnfK95hFSGsMu8=
+X-Received: by 2002:a5d:6487:0:b0:390:e9ea:59a with SMTP id
+ ffacd0b85a97d-39ad1740264mr57094f8f.5.1743006673406; Wed, 26 Mar 2025
+ 09:31:13 -0700 (PDT)
 MIME-Version: 1.0
+References: <20250326-ge-mainline-display-support-v5-0-ea4bc3fc9bca@bootlin.com>
+ <20250326-ge-mainline-display-support-v5-1-ea4bc3fc9bca@bootlin.com>
+In-Reply-To: <20250326-ge-mainline-display-support-v5-1-ea4bc3fc9bca@bootlin.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Wed, 26 Mar 2025 18:31:02 +0200
+X-Gm-Features: AQ5f1JoiyhZJpETRfNx3E6XlKY6QxG2g1ESQZ5zUeo5MJO3_fRx0jvQvjeXjkm4
+Message-ID: <CAPVz0n0hZCXEEwrE=22SV_c-L9=7GfL1B=sCrY-6cddEQuTESg@mail.gmail.com>
+Subject: Re: [PATCH v5 01/12] core: ofnode: Fix a comment
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Fabio Estevm <festevam@gmail.com>, 
+ Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,38 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBGcmlkYXksIE1hcmNoIDIx
-LCAyMDI1IDg6MjMgUE0NCj4gT24gMy8yMS8yNSA3OjQzIFBNLCBDaHJpc3RvcGggTmllZGVybWFp
-ZXIgd3JvdGU6DQo+PiBBZGQgcGFyYW1ldGVyICItbCIgZm9yIHByaW50aW5nIGF2YWlsYWJsZSBl
-bnZpcm9ubWVudCB0YXJnZXRzLiBUaGUNCj4+IGFjdGl2ZSB0YXJnZXQgaXMgbWFya2VkIHdpdGgg
-YW4gYXN0ZXJpc2suIFRoaXMgaXMgZG9uZSBieSBhZGRpbmcNCj4+IHRoZSBmdW5jdGlvbiBlbnZf
-c2VsZWN0X3ByaW50X2xpc3QoKS4NCj4+DQo+PiBJZiAiZW52IHNlbGVjdCIgaXMgY2FsbGVkIHdp
-dGhvdXQgYSB0YXJnZXQgcGFyYW1ldGVyIHRoZSByZXN1bHQgaXMNCj4+ICJTZWxlY3QgRW52aXJv
-bm1lbnQgb24gPE5VTEw+OiBkcml2ZXIgbm90IGZvdW5kIi4gUmVwbGFjZSB0aGlzIG5vdA0KPj4g
-c28gdXNlZnVsIG91dHB1dCBieSBzaG93aW5nIHRoZSBlbnYgdXNhZ2UgbWVzc2FnZSBpbnN0ZWFk
-Lg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waCBOaWVkZXJtYWllciA8Y25pZWRlcm1h
-aWVyQGRoLWVsZWN0cm9uaWNzLmNvbT4NCj4+IC0tLQ0KPj4gQ2M6IE1hcmVrIFZhc3V0IDxtYXJl
-eEBkZW54LmRlPg0KPj4gQ2M6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9z
-cy5zdC5jb20+DQo+PiBDYzogSm9lIEhlcnNoYmVyZ2VyIDxqb2UuaGVyc2hiZXJnZXJAbmkuY29t
-Pg0KPj4gQ2M6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+DQo+PiAtLS0NCj4+IFYyOiAt
-IFNob3dpbmcgYXZhaWxhYmxlIGVudmlyb25tZW50IHRhcmdldHMgYnkgcGFyYW1ldGVyICItbCIN
-Cj4+ICAgICAgLSBTaG93aW5nIGVudiB1c2FnZSBtZXNzYWdlIGlmIGVudiBzZWxlY3QgaXMgY2Fs
-bGVkIHdpdGhvdXQgYSB0YXJnZXQNCj4+IC0tLQ0KPj4gICBjbWQvbnZlZGl0LmMgIHwgMTkgKysr
-KysrKysrKysrKysrKysrLQ0KPj4gICBlbnYvZW52LmMgICAgIHwgMTYgKysrKysrKysrKysrKysr
-Kw0KPj4gICBpbmNsdWRlL2Vudi5oIHwgIDcgKysrKysrKw0KPj4gICAzIGZpbGVzIGNoYW5nZWQs
-IDQxIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvY21k
-L252ZWRpdC5jIGIvY21kL252ZWRpdC5jDQo+PiBpbmRleCAxZjI1OTgwMTI5My4uZGU2NDA5NGRi
-NGQgMTAwNjQ0DQo+PiAtLS0gYS9jbWQvbnZlZGl0LmMNCj4+ICsrKyBiL2NtZC9udmVkaXQuYw0K
-Pj4gQEAgLTQ5OSw2ICs0OTksMjMgQEAgc3RhdGljIGludCBkb19lbnZfbG9hZChzdHJ1Y3QgY21k
-X3RibCAqY21kdHAsIGludCBmbGFnLCBpbnQgYXJnYywNCj4+ICAgc3RhdGljIGludCBkb19lbnZf
-c2VsZWN0KHN0cnVjdCBjbWRfdGJsICpjbWR0cCwgaW50IGZsYWcsIGludCBhcmdjLA0KPj4gICAJ
-CQkgY2hhciAqY29uc3QgYXJndltdKQ0KPj4gICB7DQo+PiArCWlmICghYXJndlsxXSkNCj4+ICsJ
-CXJldHVybiBDTURfUkVUX1VTQUdFOw0KPj4gKw0KPj4gKwl3aGlsZSAoYXJnYyA+IDEgJiYgKioo
-YXJndiArIDEpID09ICctJykgew0KPiBUd28gaGlnaGVyIGxldmVsIHRoaW5nczoNCj4gDQo+IC0g
-Q2FuIHlvdSBmaXJzdCBjb252ZXJ0IGNtZC9udmVkaXQuaCB0byB1c2UgaW5jbHVkZS9nZXRvcHQu
-aCBhbmQgdGhlbg0KPiAgICB1c2UgZ2V0b3B0KCkgaGVyZSB0b28gPyBUaGlzIGhhbmQgcm9sbGVk
-IGFyZyBwYXJzaW5nIGlzIHJlcHVsc2l2ZSwNCj4gICAgdGhlIG11bHRpcGxlIGFkLWhvYyBjb3Bp
-ZXMgb2YgdGhhdCBhcmUgZXZlbiB3b3JzZS4NCg0KSSB3aWxsIHRyeS4NCg0KPiAtIFBsZWFzZSB3
-cml0ZSBhIHRlc3QgZm9yIHRoaXMsIHNlZSB0ZXN0L2NtZC8gLCBtYXliZSBTaW1vbiBjYW4gaGVs
-cA0KPiAgICB3aXRoIGRldGFpbHMgb2YgdGhpcyAuLi4gPw0KDQpJIHdpbGwgdHJ5Lg0KDQoNClJl
-Z2FyZHMNCkNocmlzdG9waA0K
+=D1=81=D1=80, 26 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 17:01 Miqu=
+el Raynal <miquel.raynal@bootlin.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Naming between the parameter list, the prototype and the main comment do
+> not match. Fix the comment which seems the be the one that is incorrect.
+>
+> Fixes: 9057077cf4e1 ("core: ofnode: add of_graph parsing helpers")
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+>  drivers/core/ofnode_graph.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+
+If you will be rebasing it once more, adjust please commit title to
+"core: ofnode_graph: ..." since this commit targets existing
+ofnode_graph.c file. Thank you.
+
+That is not mandatory if the rest of your patches are accepted.
+
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
