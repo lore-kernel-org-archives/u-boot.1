@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B42C36008
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 17:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE833C36008
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 17:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8531C81DB4;
-	Wed, 26 Mar 2025 18:40:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D4FEF81CFD;
+	Wed, 26 Mar 2025 18:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l7RtNyOq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SIeKdj40";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FA3181CFD; Wed, 26 Mar 2025 18:40:50 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id BEC1581DCD; Wed, 26 Mar 2025 18:40:51 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D56D481951
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 18:40:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 710F08070C
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 18:40:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3912baafc58so30995f8f.1
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 10:40:47 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43cef035a3bso1030255e9.1
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 10:40:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743010847; x=1743615647; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743010849; x=1743615649; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=RmqA50PCDppqH6GiGKSG3+l+ZThH5KEwpsHaK/l2KQM=;
- b=l7RtNyOq3+K2ssMkwSDjv2nUreWq3fffPmK5TBOllz8rgwJ6WuE3C3VkWNA4r27FpI
- HM0Cl3whYzaWxAsL4bzxopOde095XYPPwPMgsjB+CJYiCx3PNZuWsi/CaRQQ/yS0Txqk
- B4kmjwPqH3tC1Cymv5VtOjKlj6MCki2Dh9UGzYVJfCGJvqDtxZxKLQv4ued5v0H1by9z
- nqfh+LvzMHgfmP66Rjfz0XsHaYKYCIY7nRmda4gE9V55Thr/qcEg/UbM431Dixmxcy85
- 0ZhJ1wq5DQjsqDXgCLNUIe3iVR0DKmDLILmvWmOMnS/sqcSlmJ51+T1Wnzj/+A+Jgva4
- 4r1w==
+ :reply-to; bh=ikSL2AAWUyJTbVR3jVZtuurYvhIfIe7xlH7DI1JMgb0=;
+ b=SIeKdj404+kza9fQ0ozGculmhgun3lNrRxMXsRJ34ZUS0vlVJqQyieTDTwupqpBGA6
+ M0CsfijJqn+GRDPhJ7tmTC5NpD49gqoVewMbctMEoPzf5+ZJlnfqgjgUrSXm5Ryq57Ds
+ JscZX5wDpDxCEhu/VOOJbD6qdrEEJL09a4/+O51KzZM/FDp8TVuEjz/Ok1TdVzDwsRr/
+ CnrTVXpXDgR5EzmaHVT4avR/Ui0Zy/OWwjuTJ76Sfn4ouAFj9wrBuEq2e8iYxwjfrL09
+ 3dqkY1FKTgdN6bZS8G7hxwYjjrU50n5qhUnzoNumCv+6NU8DVSOCqBt5ig2QVw6kTKie
+ 9BFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743010847; x=1743615647;
+ d=1e100.net; s=20230601; t=1743010849; x=1743615649;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RmqA50PCDppqH6GiGKSG3+l+ZThH5KEwpsHaK/l2KQM=;
- b=albWMkcpKsrqPWv2qZIrtS3VWPBUQZQidQAeunGGkqlc/T7UwKn8ggU9y5v6wOR18+
- hCsuo1uTyOfEpg2R5vtpe4wa5D91qpW9FRMJI4qy/WvfwIOWfOkhNT3W4XWWoETfS2D6
- WCwq9A333ZzFB4r7omKAu9b4ln4WYtJSHvPUqaVXJPYWEHjbtGIz+PPGa3Sc7woELMOM
- 7+EvLaalf1HIZXnKjT2Bjx7ndguwMjQnCk53cinqoXfVoo7Id1ltwXqdGV01OvtVGayZ
- EwsiKZMQrJeywyMv4S+Vt4LL/jCsaHUtzzyXFLaZWRo6KqKndQZfvtjIgPX1Kza4qTwo
- 4mvw==
-X-Gm-Message-State: AOJu0YzbbB2qqYZefizWCqLDUQZ4IRlzuiXcdsEdqlVjaPy+oGZiJI37
- mO0r0x6IFy31Y/aGobhZmBtdgqkgDecrOJcnxjx+jt3tzZU9mV2Cbs8H69KNwuY=
-X-Gm-Gg: ASbGncsW5S4Ma3BnauDG9v7t2SXy5uMOHKiFoHFRJnyNPkdrx2s10w7csjNcZWI6rZ2
- nxGDPEgiYwrscAbekGMHp1dJcoY7UpN/G2M4qka9aCRw/wBGGFTxkZokSC2gRGnHEObIAnuK2C6
- Q+duflbBW6W6tu9DGuZzn3Yzm40Wpe7Au3Xmi5H36VzC1V1SGPmaUA7qLonStxKobo6hiPeittS
- W+MDDM9qhlJa4l2oO0Ll+nrmpvY8vd7DCI1kizgJsQ0ymILb+4nbkRpPlU5oFzjtCF8vYKNuYbv
- sTYbkqp+sHgTMufBOCUAfPT54kZ9YtDQoxZzSzjz4wKzDJyUbyodNyus1OjIKChXlEaBfUaS9es
- IEYxyVpMPQxu4
-X-Google-Smtp-Source: AGHT+IEdk8O2qXsUxXEYtU6OElkV168vPovRTPMNwFFoKsv9uea9Ucs2/Zjb6uNf+JzoMtzrwnz/5g==
-X-Received: by 2002:a05:6000:1fa1:b0:391:3406:b4e2 with SMTP id
- ffacd0b85a97d-39ad17979e2mr245855f8f.49.1743010847187; 
- Wed, 26 Mar 2025 10:40:47 -0700 (PDT)
+ bh=ikSL2AAWUyJTbVR3jVZtuurYvhIfIe7xlH7DI1JMgb0=;
+ b=lN4tyo9oLFS6exhhxNNiVLHm0z/o/d8AcWst459Wi5kasbwv02rPxj4yLgkHPfgwD9
+ KXTjuw8gTZ3KRRMYfQOZgtcJNUzT8SP8gXtW7fGHE9Law9HNmT+yZfDUge9P8B+tCwn+
+ 00QG6bMyNYNlwnX1rEVLsZoex4P01nTxbG8jWZTlkDCLjKY3tn4qs/Klg5lr7Xau5aUJ
+ J6YQjJtCaQ0Wng4+Qlu1JQtV4nK7SBpTGghNgySq7h4lAdW9LiWEf6V8ghh6s/u5vxUD
+ Yq5WwgSPowCSAG4dvlVVGebcG5jaeMFw0TMV4aeZkMen5p03CvbSeIGOlBoohUNl9kPa
+ tu/w==
+X-Gm-Message-State: AOJu0Yye46RZVYRMCZlW18+6A//VybQ1CUsroYtcw7SQg+5di7NbfNig
+ IkRxViGpyHzQ9Dm5vIIx1hbyhjSTS0LTVrSD1s3ahC0J8/MjZGKVD1+QPd/TlSM=
+X-Gm-Gg: ASbGncs2BOmUBMOrQmH0lslWb1pE7iW0PFaXBOrDsmwFU5HT6QNFigf8+FdQCOQigyz
+ iuYn/spPBKxf0ShoRPJkHQ+GUIB84D6+jcW6DZRqdsoLWdTX1XyO7fODQd2wZjVWnni2U+r19KL
+ K4ZMUBnKnlSqFajze66HtCmE4Lg0/m1yOU12F7ApQbSFjlRgup2UqqPfeiPwWalws/nY8dyNu/I
+ 6yZiyUN44n9Aa6xPKCQ77+DbrhQK3mRYZGO0y+QyJc706xhe7lU8kIXiNAeuYaM4lMohgbIS5Ft
+ dOM/BGoUaMkuobYHcEVdE4YYrTw7bFtBql5BN7zJ/7/VXdPgN6YFrcJ4FwDeo3+pM9gXPW3EkOZ
+ qiuAJ8mZr5djo
+X-Google-Smtp-Source: AGHT+IHUUiMJy4lwM5QzklYCWILfaSH+3rUDjHBOz86+8d2kS/Mf2iTl9Q/a1nA4UObuHmVBB8JzPQ==
+X-Received: by 2002:a05:600c:4f94:b0:43c:eea9:f45d with SMTP id
+ 5b1f17b1804b1-43d850fd6aemr3635095e9.18.1743010848755; 
+ Wed, 26 Mar 2025 10:40:48 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
  [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3997f9957d9sm17397321f8f.9.2025.03.26.10.40.45
+ ffacd0b85a97d-3997f9957d9sm17397321f8f.9.2025.03.26.10.40.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Mar 2025 10:40:46 -0700 (PDT)
+ Wed, 26 Mar 2025 10:40:47 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 26 Mar 2025 18:40:34 +0100
-Subject: [PATCH 1/4] mach-snapdragon: track boot source
+Date: Wed, 26 Mar 2025 18:40:35 +0100
+Subject: [PATCH 2/4] mach-snapdragon: CapsuleUpdate: support all boot methods
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250326-b4-qcom-capsule-update-improvements-v1-1-afe2e3696675@linaro.org>
+Message-Id: <20250326-b4-qcom-capsule-update-improvements-v1-2-afe2e3696675@linaro.org>
 References: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
 In-Reply-To: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, 
@@ -85,21 +85,21 @@ To: Lukasz Majewski <lukma@denx.de>,
  Sumit Garg <sumit.garg@kernel.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3143;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11118;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=9/IPLkaPm9HY3mq3N3ogOIhYVqL1ygq2C0t1I6Hslso=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn5DwbJ7jRYBL0lCUT9jZRImfJukNXMDsXipTlc
- tVOfqx4w3eJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ+Q8GwAKCRAFgzErGV9k
- toXgD/9C5ycwn/GOzmQGe5faV0JBiDQyDfPhh9ZrOjhfj+JNUbs06iq2n4wHKWzchc8HStKdCiA
- ybg8nVciSAEMi8Khi3zqM1UKdkpb6eabqpU03uCOOnj/lRtstPnXNDYdT+Pv/6liGX2hj/O4CFZ
- SxpS4ytBSnVUwFEv4y+0LzA71gmNwtHc7S711UIBVHrUq9VRS8AeX8lNh3H+3TnXNmUIy8mmXPQ
- BuJ/+0XW1yq9YOCLRnxx+eKmHyd+FzCug+OyOLngEO44YlL8FeBtBtgc+RXKlrcgpvMBAhrs0z+
- 8FhG7p9Ozn9IPurQ7R1CAQjpmIpUvmVYsTBQ2MoEPC6emNq7ObYY35XOzAGbm++YMomGNKbX9Fr
- sqfcum4O7Q/jX+4ahIQuQul3Qk9PryWTE8XQDpK82i1zkpYze78reQk9K+jV7ecS6bqRgW+K3/L
- aBwjBQcabJf1WxUX3dBGKZZeFwRoS19X2Xf2s+//muNfuE3LjhIE7pwNZVVNaLtdaCYGTAYd75h
- 0nK+mJkIQEn5CN1r+Mas2QUHjxP9G6Gp4e4bdnoVWzhNrvlikUezYRWzRkjJ8kXA5tJD4A7YY+D
- +5LsUgMPoz8Kmmz3aFVvbnP1FaiLcRa0xZv7M4vrnOifDQwEOI1VXLAJlm61rFaAQ22ClAmjt2T
- zV4InzU55IrwCNg==
+ bh=25UcTZsX0d7vrPgsCaRXzdbGe525CzEDJNtuEx8Pw4s=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn5DwbJ2jGe1ZyoltuUfj4c/f6wTvJjrQjgRU/6
+ jY0RQkDu8OJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ+Q8GwAKCRAFgzErGV9k
+ tkWoD/9+IhtYF8f7fxWDdGn6W1clCtwl5C+m/LnuHHEXLa6HiXAy2Uu/xQ5MywrSD/tBl8R6dfT
+ HOq2JSGzimRJiXP1TuBAuVjlshoLgFKJCiZRqljSWFEZ3WQCCfs0LfB9UW9zbp+PEalGg1q3fp/
+ dsaGsfUu+gK4YUWBsFrqMmPIF7UHgU3X50F8/JCQRNJM3Ybn+pvIr6aMb8XsHenUUmwO3LBeOE9
+ 2CD3f/1xj56+7TfKS1PiBxYXJeRiOjxu9aM45tnGx49lHvk0wsF0nVNPH8dTlTokcyIfBl7xsfu
+ od3cZzA2U271CksvpfQrn0ZMwfmuZk17ikGfCDjJM/qPdSsthai31cIQ2twnAz1OpGGDRoGz7ra
+ f7A+DDm2ywXWGFz7li12xb5ceHl9sdiQ04ZukFUE7XLq6HWF8uoF9h4wMFCNVS6luJgScr2x5mI
+ RzC5cSYDpvpKIO7MBHdEiMroEFQf38/8J6MLeRflrGJmSXmotDXZBrZtz7bTF3uLR41b/bLEf1G
+ geobndTKBMzhAQN872xhwdVdcHgteCEI3328oDt8wk/S/ifnDX9/vuSIHgG3cPf1EtcfQrt3qN/
+ rHSCLl9oWbSjO3FWyGU63Um9/IMH5X6Ewm9uvb4LQO/nT9/v3jGyaeJG61PU92Z67PlhNhlJdWh
+ AywVTxIQoJg/v1g==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -118,114 +118,357 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Keep track of whether we were loaded via ABL or if U-Boot is running as
-a first-stage bootloader.
+Expand capsule update support to correctly identify which partition
+U-Boot is flashed to (between xbl, uefi, and boot including A/B
+variants).
 
-For now we set this based on if we have a valid external FDT or not,
-since it isn't possible to chainload U-Boot from ABL without there being
-an external FDT.
+Use qcom_boot_source to determine if we were chainloaded from ABL,
+meaning U-Boot is on the boot partition, otherwise we assume uefi if
+it's available, finally leaving the xbl partition.
 
-This will be used to inform the capsule update logic which partition
-U-Boot is flashed to.
+Set a different fw_name based on the target partition to prevent GUID
+collisions, since a board may support U-Boot flashed to boot or XBL we
+need to differentiate them since the U-Boot binary must be built
+differently.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c     | 25 +++++++++++++++++++++++++
- arch/arm/mach-snapdragon/qcom-priv.h | 14 ++++++++++++++
- 2 files changed, 39 insertions(+)
+ arch/arm/mach-snapdragon/capsule_update.c | 256 +++++++++++++++++++++++-------
+ 1 file changed, 203 insertions(+), 53 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index deae4d323789eab75d5fe735159b4cd820c02c45..245a963f5321bda3030d3809e1b108f280b3c2b5 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -36,8 +36,10 @@
+diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/mach-snapdragon/capsule_update.c
+index bf75a9a1b24c714792bae3712b83b96353b1df8f..eedfc40004c06aa6271c685aaca32ccab8f5c491 100644
+--- a/arch/arm/mach-snapdragon/capsule_update.c
++++ b/arch/arm/mach-snapdragon/capsule_update.c
+@@ -19,24 +19,21 @@
+ 
  #include "qcom-priv.h"
  
- DECLARE_GLOBAL_DATA_PTR;
+ /*
+- * NOTE: for now this implementation only supports the rb3gen2. Supporting other
+- * boards that boot in different ways (e.g. chainloaded from ABL) will require
+- * additional complexity to properly create the dfu string and fw_images array.
+- */
+-
+-/*
+- * To handle different variants like chainloaded U-Boot here we'll need to
+- * build the fw_images array dynamically at runtime. It looks like
+- * mach-rockchip is a good example for how to do this.
+- * Detecting which image types a board uses is TBD, hence for now we only
+- * support the one new board that runs U-Boot as its primary bootloader.
++ * To handle different variants like chainloaded U-Boot here we need to
++ * build the fw_images array dynamically at runtime. These are the possible
++ * implementations:
++ *
++ * - Devices with U-Boot on the uefi_a/b partition
++ * - Devices with U-Boot on the boot (a/b) partition
++ * - Devices with U-Boot on the xbl (a/b) partition
++ *
++ * Which partition actually has U-Boot on it is determined based on the
++ * qcom_boot_source variable and additional logic in find_target_partition().
+  */
+ struct efi_fw_image fw_images[] = {
+ 	{
+-		/* U-Boot flashed to the uefi_X partition (e.g. rb3gen2) */
+-		.fw_name = u"UBOOT_UEFI_PARTITION",
+ 		.image_index = 1,
+ 	},
+ };
  
-+enum qcom_boot_source qcom_boot_source __section(".data") = 0;
+@@ -46,8 +43,14 @@ struct efi_capsule_update_info update_info = {
+ 	.num_images = ARRAY_SIZE(fw_images),
+ 	.images = fw_images,
+ };
+ 
++enum target_part_type {
++	TARGET_PART_UEFI = 1,
++	TARGET_PART_XBL,
++	TARGET_PART_BOOT,
++};
 +
- static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
+ /* LSB first */
+ struct part_slot_status {
+ 	u16: 2;
+ 	u16 active : 1;
+@@ -56,37 +59,182 @@ struct part_slot_status {
+ 	u16 unbootable : 1;
+ 	u16 tries_remaining : 4;
+ };
  
- struct mm_region *mem_map = rbx_mem_map;
- 
-@@ -237,8 +239,14 @@ int board_fdt_blob_setup(void **fdtp)
- 
- 	if (ret < 0)
- 		panic("No valid memory ranges found!\n");
- 
-+	/* If we have an external FDT, it can only have come from the Android bootloader. */
-+	if (external_valid)
-+		qcom_boot_source = QCOM_BOOT_SOURCE_ANDROID;
-+	else
-+		qcom_boot_source = QCOM_BOOT_SOURCE_XBL;
+-static int find_boot_partition(const char *partname, struct blk_desc *blk_dev, char *name)
++enum ab_slot {
++	SLOT_NONE,
++	SLOT_A,
++	SLOT_B,
++};
 +
- 	debug("ram_base = %#011lx, ram_size = %#011llx\n",
- 	      gd->ram_base, gd->ram_size);
++static enum ab_slot get_part_slot(const char *partname)
++{
++	int len = strlen(partname);
++
++	if (partname[len - 2] != '_')
++		return SLOT_NONE;
++	if (partname[len - 1] == 'a')
++		return SLOT_A;
++	if (partname[len - 1] == 'b')
++		return SLOT_B;
++
++	return SLOT_NONE;
++}
++
++/*
++ * Determine which partition U-Boot is flashed to based on the boot source (ABL/XBL),
++ * the slot status, and prioritising the uefi partition over xbl if found.
++ */
++static int find_target_partition(int *devnum, enum uclass_id *uclass,
++				 enum target_part_type *target_part_type)
+ {
+ 	int ret;
+-	int partnum;
++	int partnum, uefi_partnum = -1, xbl_partnum = -1;
+ 	struct disk_partition info;
+ 	struct part_slot_status *slot_status;
++	struct udevice *dev = NULL;
++	struct blk_desc *desc = NULL, *xbl_desc = NULL;
++	uchar ptn_name[32] = { 0 };
  
- 	if (internal_valid) {
-@@ -472,8 +480,24 @@ static void configure_env(void)
+-	for (partnum = 1;; partnum++) {
+-		ret = part_get_info(blk_dev, partnum, &info);
+-		if (ret)
+-			return ret;
++	uclass_foreach_dev_probe(UCLASS_BLK, dev) {
++		if (device_get_uclass_id(dev) != UCLASS_BLK)
++			continue;
  
- 	qcom_set_serialno();
+-		slot_status = (struct part_slot_status *)&info.type_flags;
+-		log_io("%16s: Active: %1d, Successful: %1d, Unbootable: %1d, Tries left: %1d\n",
+-		       info.name, slot_status->active,
+-		       slot_status->successful, slot_status->unbootable,
+-		       slot_status->tries_remaining);
+-		/*
+-		 * FIXME: eventually we'll want to find the active/inactive variant of the partition
+-		 * but on the rb3gen2 these values might all be 0
+-		 */
+-		if (!strncmp(info.name, partname, strlen(partname))) {
+-			log_debug("Found active %s partition: '%s'!\n", partname, info.name);
+-			strlcpy(name, info.name, sizeof(info.name));
+-			return partnum;
++		desc = dev_get_uclass_plat(dev);
++		if (!desc || desc->part_type == PART_TYPE_UNKNOWN)
++			continue;
++		for (partnum = 1;; partnum++) {
++			ret = part_get_info(desc, partnum, &info);
++			if (ret)
++				break;
++
++			slot_status = (struct part_slot_status *)&info.type_flags;
++
++			/*
++			 * Qualcomm Linux devices have a "uefi" partition, it's A/B but the
++			 * flags might not be set so we assume the A partition unless the B
++			 * partition is active.
++			 */
++			if (!strncmp(info.name, "uefi", strlen("uefi"))) {
++				/*
++				 * If U-Boot was chainloaded somehow we can't be flashed to
++				 * the uefi partition
++				 */
++				if (qcom_boot_source != QCOM_BOOT_SOURCE_XBL)
++					continue;
++
++				*target_part_type = TARGET_PART_UEFI;
++				/*
++				 * Found an active UEFI partition, this is where U-Boot is
++				 * flashed.
++				 */
++				if (slot_status->active)
++					goto found;
++
++				/* Prefer A slot if it's not marked active */
++				if (get_part_slot(info.name) == SLOT_A) {
++					/*
++					 * If we found the A slot after the B slot (both
++					 * inactive) then we assume U-Boot is on the A slot.
++					 */
++					if (uefi_partnum >= 0)
++						goto found;
++
++					/* Didn't find the B slot yet */
++					uefi_partnum = partnum;
++					strlcpy(ptn_name, info.name, 32);
++				} else {
++					/*
++					 * Found inactive B slot after inactive A slot, return
++					 * the A slot
++					 */
++					if (uefi_partnum >= 0) {
++						partnum = uefi_partnum;
++						goto found;
++					}
++
++					/*
++					 * Didn't find the A slot yet. Record that we found the
++					 * B slot
++					 */
++					uefi_partnum = partnum;
++					strlcpy(ptn_name, info.name, 32);
++				}
++				/* xbl and aboot are effectively the same */
++			} else if ((!strncmp(info.name, "xbl", strlen("xbl")) &&
++				    strlen(info.name) == 5) ||
++				    !strncmp(info.name, "aboot", strlen("aboot"))) {
++				/*
++				 * If U-Boot was booted via ABL, we can't be flashed to the
++				 * XBL partition
++				 */
++				if (qcom_boot_source != QCOM_BOOT_SOURCE_XBL)
++					continue;
++
++				/*
++				 * ignore xbl partition if we have uefi partitions, U-Boot will
++				 * always be on the UEFI partition in this case.
++				 */
++				if (*target_part_type == TARGET_PART_UEFI)
++					continue;
++
++				/* Either non-A/B or find the active XBL partition */
++				if (slot_status->active || !get_part_slot(info.name)) {
++					/*
++					 * No quick return since we might find a uefi partition
++					 * later
++					 */
++					xbl_partnum = partnum;
++					*target_part_type = TARGET_PART_XBL;
++					xbl_desc = desc;
++					strlcpy(ptn_name, info.name, 32);
++				}
++
++				/*
++				 * No fast return since we might also have a uefi partition which
++				 * will take priority.
++				 */
++			} else if (!strncmp(info.name, "boot", strlen("boot"))) {
++				/* We can only be flashed to boot if we were chainloaded */
++				if (qcom_boot_source != QCOM_BOOT_SOURCE_ANDROID)
++					continue;
++
++				/*
++				 * Either non-A/B or find the active partition. We can return
++				 * immediately here since we've narrowed it down to a single option
++				 */
++				if (slot_status->active || !get_part_slot(info.name)) {
++					*target_part_type = TARGET_PART_BOOT;
++					goto found;
++				}
++			}
+ 		}
+ 	}
+ 
++	/*
++	 * Now we've exhausted all options, if we didn't find a uefi partition
++	 * then we are indeed flashed to the xbl partition.
++	 */
++	if (*target_part_type == TARGET_PART_XBL) {
++		partnum = xbl_partnum;
++		desc = xbl_desc;
++		goto found;
++	}
++
++	/* Found no candidate partitions */
+ 	return -1;
++
++found:
++	if (desc) {
++		*devnum = desc->devnum;
++		*uclass = desc->uclass_id;
++	}
++
++	/* info won't match for XBL hence the copy. */
++	log_info("Capsule update target: %s (disk %d:%d)\n",
++		 *target_part_type == TARGET_PART_BOOT ? info.name : ptn_name,
++		 *devnum, partnum);
++	return partnum;
  }
  
-+void qcom_show_boot_source(void)
-+{
-+	const char *name = "UNKNOWN";
-+
-+	switch (qcom_boot_source) {
-+	case QCOM_BOOT_SOURCE_ANDROID:
-+		name = "ABL";
+ /**
+  * qcom_configure_capsule_updates() - Configure the DFU string for capsule updates
+@@ -100,14 +248,12 @@ static int find_boot_partition(const char *partname, struct blk_desc *blk_dev, c
+  * in the GPT partition vendor attribute bits.
+  */
+ void qcom_configure_capsule_updates(void)
+ {
+-	struct blk_desc *desc;
+ 	int ret = 0, partnum = -1, devnum;
+ 	static char dfu_string[32] = { 0 };
+-	char name[32]; /* GPT partition name */
+-	char *partname = "uefi_a";
+-	struct udevice *dev = NULL;
++	enum target_part_type target_part_type = 0;
++	enum uclass_id dev_uclass;
+ 
+ 	if (IS_ENABLED(CONFIG_SCSI)) {
+ 		/* Scan for SCSI devices */
+ 		ret = scsi_scan(false);
+@@ -116,38 +262,42 @@ void qcom_configure_capsule_updates(void)
+ 			return;
+ 		}
+ 	}
+ 
+-	uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+-		if (device_get_uclass_id(dev) != UCLASS_BLK)
+-			continue;
+-
+-		desc = dev_get_uclass_plat(dev);
+-		if (!desc || desc->part_type == PART_TYPE_UNKNOWN)
+-			continue;
+-		devnum = desc->devnum;
+-		partnum = find_boot_partition(partname, desc,
+-					      name);
+-		if (partnum >= 0)
+-			break;
+-	}
+-
++	partnum = find_target_partition(&devnum, &dev_uclass, &target_part_type);
+ 	if (partnum < 0) {
+ 		log_err("Failed to find boot partition\n");
+ 		return;
+ 	}
+ 
+-	switch (desc->uclass_id) {
++	/*
++	 * Set the fw_name based on the partition type. This causes the GUID to be different
++	 * so we will never accidentally flash a U-Boot image intended for XBL to the boot
++	 * partition.
++	 */
++	switch (target_part_type) {
++	case TARGET_PART_UEFI:
++		fw_images[0].fw_name = u"UBOOT_UEFI_PARTITION";
 +		break;
-+	case QCOM_BOOT_SOURCE_XBL:
-+		name = "XBL";
++	case TARGET_PART_XBL:
++		fw_images[0].fw_name = u"UBOOT_XBL_PARTITION";
++		break;
++	case TARGET_PART_BOOT:
++		fw_images[0].fw_name = u"UBOOT_BOOT_PARTITION";
 +		break;
 +	}
 +
-+	log_info("U-Boot loaded from %s\n", name);
-+}
-+
- void __weak qcom_late_init(void)
- {
++	switch (dev_uclass) {
+ 	case UCLASS_SCSI:
+ 		snprintf(dfu_string, 32, "scsi %d=u-boot.bin part %d", devnum, partnum);
+ 		break;
+ 	case UCLASS_MMC:
+ 		snprintf(dfu_string, 32, "mmc 0=u-boot.bin part %d %d", devnum, partnum);
+ 		break;
+ 	default:
+-		debug("Unsupported storage uclass: %d\n", desc->uclass_id);
++		debug("Unsupported storage uclass: %d\n", dev_uclass);
+ 		return;
+ 	}
+-	log_debug("boot partition is %s, DFU string: '%s'\n", name, dfu_string);
++	log_debug("DFU string: '%s'\n", dfu_string);
+ 
+ 	update_info.dfu_string = dfu_string;
  }
- 
-@@ -515,8 +539,9 @@ int board_late_init(void)
- 
- 	configure_env();
- 	qcom_late_init();
- 
-+	qcom_show_boot_source();
- 	/* Configure the dfu_string for capsule updates */
- 	qcom_configure_capsule_updates();
- 
- 	return 0;
-diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-index 74d39197b89f4e769299b06214c26ee829ecdce0..e5eb4cfbc2b752de799b1407ede69683c81474c1 100644
---- a/arch/arm/mach-snapdragon/qcom-priv.h
-+++ b/arch/arm/mach-snapdragon/qcom-priv.h
-@@ -2,8 +2,22 @@
- 
- #ifndef __QCOM_PRIV_H__
- #define __QCOM_PRIV_H__
- 
-+/**
-+ * enum qcom_boot_source - Track where we got loaded from.
-+ * Used for capsule update logic.
-+ *
-+ * @QCOM_BOOT_SOURCE_ANDROID: chainloaded (typically from ABL)
-+ * @QCOM_BOOT_SOURCE_XBL: flashed to the XBL or UEFI partition
-+ */
-+enum qcom_boot_source {
-+	QCOM_BOOT_SOURCE_ANDROID = 1,
-+	QCOM_BOOT_SOURCE_XBL,
-+};
-+
-+extern enum qcom_boot_source qcom_boot_source;
-+
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- void qcom_configure_capsule_updates(void);
- #else
- void qcom_configure_capsule_updates(void) {}
 
 -- 
 2.49.0
