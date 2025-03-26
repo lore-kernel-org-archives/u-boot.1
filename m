@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56ADFC3600E
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 17:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4149C36008
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 20:06:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98422810E8;
-	Wed, 26 Mar 2025 18:44:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 21270810E8;
+	Wed, 26 Mar 2025 21:06:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DVa1gprq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gbMk5pZM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0500781951; Wed, 26 Mar 2025 18:44:25 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id A7A4D81A0C; Wed, 26 Mar 2025 21:06:13 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD2DD8070C
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 18:44:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E7238070C
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 21:06:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43948021a45so1354355e9.1
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 10:44:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-72c09f8369cso84975a34.3
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 13:06:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743011062; x=1743615862; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wH1nJx0y+ojq9QNP75ZKu7KaEFHLz/eB4dUAIORRR3c=;
- b=DVa1gprqf5+IE61xiXy4PLHWtsZbF4iaY+86/fqvpgZuQ96bTX4RcA3cwvZQe2nBhG
- JSMGONwlDMd+r9u5iLfQqPQ66zYEkz6ArHXIfZMiXiUFQd/0kjxXe1V76Rk38TsgJIwe
- 1Z2ScrkQEBxt1gYUcOirQ2AkBppIm0ZtkQX+Jg69W7EkMgd/s01t78IIZ8V51akWbn/i
- +NGO3esuYYTnPrfuKDK2T5B+ibwe7zPUbGUjaTbVKHaD8b/Dpm0Vrr0HLSrzMyTZKmp9
- /c0Mz2Z2+y+xxl+9fqrtNGtlUMW7Jip8MJtqbpDq1Qkvkc9doYNzq8ll13dCP2BGBjJQ
- 2cKg==
+ d=konsulko.com; s=google; t=1743019570; x=1743624370; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nS4C8yzqG4fA5XLVi7Vl5oXvaFTKdx6DQGZ5yQDkizE=;
+ b=gbMk5pZMvhKfX++E91bCRNfRQMyV04KzB7gX1xl+JtPC2JRA+fv/NgH/xUKg9rW4CN
+ nbu2saga2TQ0WhOTaHBOdaYa9EZKKgUGjF2OnsJk+E/RVFXPBxBCUu9QaMDxmUlRwX6f
+ FVx+kgKaq6YIcLcAyxDPga0NvOmNRVxjVVhaQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743011062; x=1743615862;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wH1nJx0y+ojq9QNP75ZKu7KaEFHLz/eB4dUAIORRR3c=;
- b=emGaMFShvCvNwDH3AcOBpBaPEs4Q6g4OWaPHgqLi/WYMduq/+d7jp6mPjKUeHwt8mx
- 4j9o8OXMmm8ToHKmHN7lVqd35R8hYliqtFCe82bpvvdC0vCry1n+GU4PFwAG17bBJMT4
- j19wsCTTtzj1TdJNzYSIWhOo4DXEVRlbxJpjSokRO+uXkBJu2gYRAsqNM9QnzdBfbcV2
- AAHs+Ja8hlm2N1bEzp4V4cC3tLTU9PQw5Zbuqc4KwHbyjWiFpdlEXbdXvzre8EFHyKWc
- zU+uazYpnAqSJf0CMMjzqOWvs1nSb7r5n0MiZArdA3LxEmgGyRsFCgcktJfDReCmbrF+
- Tuwg==
-X-Gm-Message-State: AOJu0YyH5MLZBwYzFh1J+0z1DdSCSBJSKRxshv4HcKVPgT9u0FTyTpBK
- YKL+s3tpXGKj06oCIU4epQPS0V7UyklysPpuQXX3l/0VnqXlhzb2CqnxD8+beFU=
-X-Gm-Gg: ASbGncuTcAHBaswJ+03FT1sbsbDD//wZC2n1O7zw9PwGZAd0VzuVDOPmMJi+46KiwUR
- W49kqMBDY3xNpKiNw5YD4tVUCihTnOYBvzZLhoMrNLI88q3aJ9OR3LFS2V7aX/zw3e+qh9+Ork1
- Y9iWsY8s20vDpStxNpYykBhyvagFwLNoFiRYH9IPcP9YEOgfZNAh/MSm0yN8tAQ69Ao9+D5UFL7
- vslouy8zIojDdqz4nT0v00VRx8o4WVZG9w9Gsln/YxILQtoEQatKlYs5eH9ZQcwcjL6fqsoaGYk
- LG+oLGmvVS3ZJOPs6QFqVM9/4UVSqrWbM+FF7cdVbRJIHtWrOOXBMRDGXvOctsB9vvF3u9A2ZGc
- =
-X-Google-Smtp-Source: AGHT+IH7Srg/1JQAw0Vn6J/XUDhOlnmprTQYXRDvltYRyscA+4drVssSXnvzyx1NJP2R9klFrZN8sQ==
-X-Received: by 2002:a05:600c:4509:b0:43c:fda5:41e9 with SMTP id
- 5b1f17b1804b1-43d850c99e8mr2993905e9.31.1743011062150; 
- Wed, 26 Mar 2025 10:44:22 -0700 (PDT)
-Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82efe3fasm10160675e9.17.2025.03.26.10.44.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Mar 2025 10:44:21 -0700 (PDT)
-Message-ID: <5f80a5cf-f8c5-4cbb-a80b-fc2aeab2308e@linaro.org>
-Date: Wed, 26 Mar 2025 18:44:19 +0100
+ d=1e100.net; s=20230601; t=1743019570; x=1743624370;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nS4C8yzqG4fA5XLVi7Vl5oXvaFTKdx6DQGZ5yQDkizE=;
+ b=t7NQ62GV//9QXoWgWuiNZYEVZh+Ksj/tr4QI3HLZJ0DVPSGP4pdanOl0BG/v57dqTw
+ RUJ8OpGHugQzM8kz2E0WG5EKnyXuzuupP9mCKRd1MMNzCdQZjgG6D/suYiirc2i4hGvX
+ z3PHszrloNzlETIgFllysRJXbfAvV8nkE6MmclPMVTj7yUla9uBFWegWRAOnrD0SYxq2
+ qFZQSZuvNfcGTRuxpFHhY/Pt34ety0nZSdSqg9l24pis4gyAWqjdNJm3vlUvtsWTMP9R
+ zaOTm9byiM30nKNqSGiDl7QrTJjuWqi5kONZaL/tznmaFuUV2lpfl7OQBS6IzKK1KjI6
+ ga4g==
+X-Gm-Message-State: AOJu0Yy9Xw2l5aZxYh0Tn9uoY83gqq2xg65RHYEwnXfYOFaO1zw2lorj
+ j/AfAYBDXq1TI3zo1c00ltiob+RLRT1V/HRVBwtqlkSzdMbdbj/qd0ZEkTJhpDU=
+X-Gm-Gg: ASbGncsTwFWbpvxiRok+4lI9br8eXl6uPjYZMRddPewf8Ci1i96nZJ29E9SnwBDgsTo
+ J048/6Z4LAvg/SifpDXD1sfID0OV1y7E3EtMTE3OmoVEBkN1moZ3eonw3+g3cjcCoajW2FUtx/g
+ IT45+RMqXPcmqCay+MkWq+fsA00eB67AjcqY3boWOCMxEKvGXqn1UTKL3A7zGygwjcQCGy7ASOq
+ 05RLAodMNGrO23d2Qtv2iOxooo8DZ6k+0/6DFwil1CR/Pw8mFtgSvMOU7AHtSdK6aO2wWAbawds
+ mWBikCk7NTM0IPovbXoHTuCqB30RCgrXjiinLWIbwkPEtZVu599kC4la+Vr8eNZ99UyXviwSev3
+ OW0qP
+X-Google-Smtp-Source: AGHT+IHfXDqYvx1eT7hUX0j9ZfCoIJ8o2/6Qt5qPqom2uz1SvbdfTA0H4DgXc4hBEVRddQPf0sfG8w==
+X-Received: by 2002:a05:6830:488e:b0:72b:938e:31cb with SMTP id
+ 46e09a7af769-72c4c96a06bmr630848a34.7.1743019569915; 
+ Wed, 26 Mar 2025 13:06:09 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72c0ac7b8aasm2431300a34.62.2025.03.26.13.06.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Mar 2025 13:06:09 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20250326165336.547689-1-sughosh.ganu@linaro.org>
+References: <20250326165336.547689-1-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH] test: lmb: fix the lmb_alloc_addr() based test cases
+Message-Id: <174301956860.548118.5380481679425281659.b4-ty@konsulko.com>
+Date: Wed, 26 Mar 2025 14:06:08 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Qualcomm: expand capsule update support
-To: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,63 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 26 Mar 2025 22:23:36 +0530, Sughosh Ganu wrote:
 
+> Commit 56f186a68b3 ("lmb: check if a region can be reserved by
+> lmb_reserve()") fixed the lmb_reserve() and lmb_alloc_addr() API's for
+> some corner case scenarios, and also added corresonding test cases for
+> these corner cases. These tests were checking, among other things, the
+> lmb_alloc_addr() API. The above commit was applied to the next branch.
+> 
+> Subsequently, there was commit 67be24906fe
+> ("lmb: change the return code on lmb_alloc_addr()") which was first
+> applied on the master branch, and subsequently got merged to next as
+> part of the rebase. The second commit changes the return value of the
+> lmb_alloc_addr() API, which now results in some of the tests added as
+> part of the first commit to fail. Fix those test cases.
+> 
+> [...]
 
-On 3/26/25 18:40, Caleb Connolly wrote:
-> The initial capsule update support only worked on the RB3 Gen 2 and made
-> a lot of assumptions specific to that board.
-> 
-> Implement the logic necessary to update U-Boot no matter where it was
-> flashed to, independent of any particular board.
-> 
-> First, we keep track of how U-Boot was loaded, specifically if we had a
-> valid external FDT (even if we didn't use it) this indicates that we
-> were booted via the Android bootloader, in this case the target for
-> capsule updates is the boot partition. Otherwise, we target the uefi
-> partition (if it exists) or the xbl partition. We handle A/B support for
-> all 3 (currently we always flash to the currently active partition with
-> a minor exception for the uefi partition).
-> 
-> We introduce two new fw_name strings to differentiate the GUIDs based on
-> the target partition, this means one board can support multiple boot
-> methods with capsule update support for all of them (typically this
-> would be chainloading OR flashing U-Boot to XBL).
-> 
-> Lastly, the call to scsi_scan() in dfu_scsi.c is removed. Since
-> scsi_scan() unbinds all scsi devices it breaks device handles maintained
-> in the EFI layer for the duration of the capsule update process and
-> causes the EFI filesystem access to delete the capsule file after the
-> update to fail.
-> 
-> Boards should instead be responsible for calling scsi_scan() before
-> initiating DFU.
+Applied to u-boot/next, thanks!
 
-Forgot to mention: this has been tested on the OnePlus 6 (with U-Boot in 
-the boot partition - chainloaded), the rb3 (with U-Boot flashed to xbl), 
-and the rb3gen2 (With u-boot flashed to uefi).
-
-More testing is very welcome!
-> 
-> ---
-> Caleb Connolly (4):
->        mach-snapdragon: track boot source
->        mach-snapdragon: CapsuleUpdate: support all boot methods
->        dfu: scsi: don't call scsi_scan()
->        qcom_defconfig: enable capsule update support
-> 
->   arch/arm/mach-snapdragon/board.c          |  25 +++
->   arch/arm/mach-snapdragon/capsule_update.c | 256 +++++++++++++++++++++++-------
->   arch/arm/mach-snapdragon/qcom-priv.h      |  14 ++
->   configs/qcm6490_defconfig                 |   6 -
->   configs/qcom_defconfig                    |   3 +
->   drivers/dfu/dfu_scsi.c                    |   5 -
->   6 files changed, 245 insertions(+), 64 deletions(-)
-> ---
-> base-commit: 68ac813c70d991ec518d0fd815efdb10a05958c0
-> 
-> Caleb Connolly <caleb.connolly@linaro.org>
-> 
-
+[1/1] test: lmb: fix the lmb_alloc_addr() based test cases
+      commit: b052de94fa14577cb5d9e724edeb09fee674d582
 -- 
-Caleb (they/them)
+Tom
+
 
