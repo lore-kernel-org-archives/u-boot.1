@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E756BC36005
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 01:37:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202BDC36005
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 01:47:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 299C0810E8;
-	Wed, 26 Mar 2025 02:37:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7845A8186D;
+	Wed, 26 Mar 2025 02:47:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jAz3UPRF";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1742953651;
+	bh=qeA+bjGNo9qf63UPdl6lxB7uZMmHV643cqWKQIwVAIU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Sb7D2pYwX5zfS8UgzcCJzz9PIg16QdAhHwl7EkoasdR3MB+aTyxd+/B7rhQQpn03g
+	 iaeoKrdCD+yMbLiWkgBgKJF64K/GBLUUKtvuRnaeXjOftrAdR0TitkTrbMHcEbAW9L
+	 oXgiecAzBwTDRfCJENpa9LHpCRCuvDdP4Zd8/+AgWpWonzWSIfU7nayYtQAvsVGXUr
+	 CNAAjskqS5fNYoC8YTr1E4fsHMS+85NMPtAFlvVo+mDRfkc3Uom885XKFHs9haknXv
+	 5gHq2e9cuzeXRiXBD3o9Xaag7biGEFD+ENm4vKfpRb95HxzQudSGhHYpeCLAs6q59c
+	 glE92vAgAv92w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56FD18186D; Wed, 26 Mar 2025 02:37:09 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id B6AED8083E; Wed, 26 Mar 2025 02:47:29 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A528083E
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:37:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA6C08192A
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:47:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ZMqCP0qSpz9sWN;
- Wed, 26 Mar 2025 02:37:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1742953025;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6imv3macZbWQ0xzLbu9HW9i2YMD7z/f2SB5gxCu82bM=;
- b=jAz3UPRF0h3XtzuGpdA9XrJ/g4RTebaeVN3D8Pkw5rAC8cqQws44hGto9tdtPeWwFJgpzR
- 3h0ZGLiYtk2s6U4U7l/pITruae5hfLbSb8f+Ks5S4dRq5qRjuXH9XjT502/aWimFaJjj4S
- gofIQqyEg6v2YvJZjVAeNpNVmgS740VMyT8ca0SF95wTkny8wGx0WfAlGey2A2olgDwhIL
- 68IzRUNDTWIqQ0X3VZXZZW/Gnf+t374KEdKgZd24kAak96VNYqQaGjMR72D+hla37arjfG
- 0SC9tsNcpss4Cp8VQp+L6wAP7gDR1uI56jyOejguSeMafhmTFwX8EKSE4Q7HvA==
-Message-ID: <d576535e-f8d0-4ae7-b8b7-f4316535a6ee@mailbox.org>
-Date: Wed, 26 Mar 2025 02:37:03 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="dOqYdhjk"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2B60C1026C8B9; Wed, 26 Mar 2025 02:47:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1742953646; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=qeA+bjGNo9qf63UPdl6lxB7uZMmHV643cqWKQIwVAIU=;
+ b=dOqYdhjkIAigBCN3jPisX3EUFMxtaed3uGYsdlB7qaIIcjBOKgyJibKehvkWs6Bien1Qpc
+ RaH3uv7/riOgd4j3lrezEQdV2ocSZY0rBAJSfYP9GJ4ThEpTtQIniOzS7tLowEHTKTLDaL
+ 343K4CPSfeFda7HM0slgwMbZpggXsn9/oeHjWLytvvyW+txE9UtkJ7cBj9kz5hrg1bHtj5
+ L6j3kwH2+DXArhHXe3D3ptqFwRyScRbP2WliVT/m1H1Cit0p+c4lQYUiADf4n4rIl3xsBb
+ v4z6fYJ/jfUOerlBDwzirUt6O4k8YhH9fVJin6h9g4rXzJrqpIdU/vKuwn06Bw==
+Message-ID: <a84f63fb-61c2-4f0e-89ed-8046e8eeed85@denx.de>
+Date: Wed, 26 Mar 2025 02:24:08 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 4/8] env: Rename SYS_MMC_ENV_DEV to ENV_SDMMC_DEVICE_INDEX
-To: Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>
-References: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
- <20250322215624.18994-4-marek.vasut+renesas@mailbox.org>
- <90254a96-5d67-4d34-afe6-772af42ee557@cherry.de>
- <e385568e-59b1-4adf-9fb7-d87b4254eae9@mailbox.org>
- <20250326001521.GN93000@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 02/19] pinctrl: nxp: add a pin controller driver based
+ on SCMI pin control protocol
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alice Guo <alice.guo@nxp.com>, =?UTF-8?Q?Lothar_Wa=C3=9Fmann?=
+ <LW@karo-electronics.de>, u-boot@lists.denx.de,
+ Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
+ <20250321-imx95-v1-2-f2c8ba815f89@oss.nxp.com>
+ <a180b7e6-6978-4814-97ff-05e34223938f@denx.de>
+ <20250325080614.GC27303@nxa18884-linux>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250326001521.GN93000@bill-the-cat>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250325080614.GC27303@nxa18884-linux>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: e6d6c3417d78332ed00
-X-MBO-RS-META: yqk883z48skujfpey9un3aid478tcqek
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,40 +90,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/26/25 1:15 AM, Tom Rini wrote:
-> On Wed, Mar 26, 2025 at 12:02:08AM +0100, Marek Vasut wrote:
->> On 3/24/25 1:39 PM, Quentin Schulz wrote:
->>> Hi Marek,
->>
->> Hi,
->>
->>> On 3/22/25 10:55 PM, Marek Vasut wrote:
->>>> Rename the variable and add ENV_ prefix, so that all configuration
->>>> options which are related to environment would have an CONFIG_ENV_
->>>> prefix. No functional change.
->>>>
->>>> Use ENV_SDMMC_DEVICE_INDEX to clarify this is the SD/MMC device
->>>> index, a number, as enumerated by U-Boot. Update the help text
->>>> accordingly.
->>>>
->>>
->>> I disagree with this part of the rename (MMC->SDMMC), our drivers all
->>> are using mmc (env/mmc.*, drivers/mmc/*, cmd/mmc.c, ...) for both SD and
->>> MMC. We also have ENV_IS_IN_MMC which is for both. I don't think it's
->>> worth the confusion.
->>
->> My main problem is, that it is confusing to call everything _mmc_ even if
->> most of it also applies to SD . There is no way to discern parts which are
->> MMC specific from parts which are common to SD and MMC now.
+On 3/25/25 9:06 AM, Peng Fan wrote:
+
+[...]
+
+>>> diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+>>> index 7abb2a6f36b..279ebbad440 100644
+>>> --- a/include/scmi_protocols.h
+>>> +++ b/include/scmi_protocols.h
+>>> @@ -24,6 +24,7 @@ enum scmi_std_protocol {
+>>>    	SCMI_PROTOCOL_ID_SENSOR = 0x15,
+>>>    	SCMI_PROTOCOL_ID_RESET_DOMAIN = 0x16,
+>>>    	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN = 0x17,
+>>> +	SCMI_PROTOCOL_ID_PINCTRL = 0x19,
+>> If this is the IMX specific pinctrl protocol, please make sure to name it
+>> accordingly , SCMI_PROTOCOL_ID_PINCTRL_IMX or something .
 > 
-> Do we have support for anything using the MMC part of the standard that
-> is not storage? I certainly agree it's confusingly named atm, but I
-> think changing some parts but not other parts will make it worse, not
-> better.
-That's not what I am concerned about. What I am concerned about is that 
-we are talking about partitions, and only eMMC supports HW partitions, 
-but both SD and MMC support SW partitions . So we should refer to 
-CONFIG_..._SDMMC_..._SW_PARTITION here when talking about SW partitions 
-, but CONFIG_..._MMC_..._HW_PARTITION when talking about eMMC HW 
-partitions. Currently we are missing the two and it yields a horrid 
-confusion. That is in fact what prompted this series.
+> This ID is generic ID, not i.MX specific.
+> 
+> i.MX SCMI pinctrl follows ARM SCMI spec, but i.MX pinctrl bindings
+> are different compared with ARM SCMI generic pinconf bindings, so we
+> need a separate driver for i.MX.
+But then, why is it using the same protocol ID ?
+
+And I feel I asked this question multiple times now, please do include 
+this information in the commit message .
