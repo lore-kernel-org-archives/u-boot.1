@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82E5EC36008
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 07:31:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4966C36008
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 07:31:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16EF08083E;
-	Wed, 26 Mar 2025 08:31:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7069B808B6;
+	Wed, 26 Mar 2025 08:31:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kEWCFhpu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pwc77D5e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0801280756; Wed, 26 Mar 2025 08:31:29 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 643E681B4B; Wed, 26 Mar 2025 08:31:46 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6090E8083E
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 08:31:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32A0980756
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 08:31:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e5ad75ca787so600407276.0
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 00:31:25 -0700 (PDT)
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e461015fbd4so4836304276.2
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 00:31:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742974284; x=1743579084; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1742974303; x=1743579103; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O4umWOq6im1Y2+qxehxcV0IsQM1GSWK7dlLe9m/j69Y=;
- b=kEWCFhpu5mGCALTUQtVerIjthZkcWrhh9KZ6pBLXWS9VjIKsVRg0nFSnRxR94I4SLn
- MlNsm3z2H5YZPVnkGjAVcvwWtsWIBAjMvafxjajMTzxMvULl1bnx0mcKsCtcOkokLoeF
- 9vdrVAOg40vJImZpoPK0Z4O0zim60emG3DmxxXUrlQOZcb+hOrncSTf9b4OrwNojI9MF
- Sm9ZlZZo8Q0YbrYnlJ7cKUiBQS+fqpfP7T+FqymH2ioqQecvsrU1/WJNYC0LxeOLIqzH
- Ui0oIasYwrjIpEnXqZUEJHKMECfDivWNKoVtPkEd9JnKwf0xuqknN5WfklTQDBEX4foN
- fGEg==
+ bh=QhOO5crtjeYB+adY7JmnlDKjNxr65bqD5LVjyfecDAU=;
+ b=pwc77D5eQoHrWQzNmjC6zXCUP22ukZ0KKMMoXNs510vsjq3+viZ2flXJAO1nvi7r1h
+ i6nXkKHk8XZDbKi2s3pXUm1/6heUAQM1MYnFshE/4JMKgRqkUo459MG/akCKwIlVb5wn
+ HC9c9zde//743P1BYSGU3lGf6x6a10A9wTQhjFfFmq+oucYEtE8y1hIunVibmb7GB3MY
+ 3rJzwn1MmXyXImU+L0nK+8IYe3b0ctdNtaw9ayXTnwmxSf0hskjtpi0HJbcPMhFIZZan
+ 5bnFo4ioPZK/Qg3wNgxggFhLJe7Nd+trAZRnnLEZ9jHg/pisQ5NoEJsyX2KOfEdka29f
+ fXig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742974284; x=1743579084;
+ d=1e100.net; s=20230601; t=1742974303; x=1743579103;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=O4umWOq6im1Y2+qxehxcV0IsQM1GSWK7dlLe9m/j69Y=;
- b=g640K8zIwUJgV/DCsQZvAUPTgnBwUjdeZjoy3UfHZahvNOgiDDWDDSEYPFooYul8te
- i12u8OrOlfW2Qh4X8foRtFjqjruM3rnD9oBqjeCEuBdYFBV4LJiTPqCtEaobcQhkN9jf
- S88H17fT/+QCCvzNRuNGe4BTblJGRIWSHR0/RMyJ/DavEqYtDcWGHNO6RX1ZBBTXBgjc
- OTje6wWZoKVB5P6fBSztqs7g07h1rtTeIg6arQQwOqomQgHa4lB/wi2Loz4Xl7v1zmkn
- 6aUMPENks0cdr0L/W3Lvavn3ugdXNoEpriiHROn4A3pWZ2sLKBda1nDb6Qsm4uQydxTZ
- x9vQ==
+ bh=QhOO5crtjeYB+adY7JmnlDKjNxr65bqD5LVjyfecDAU=;
+ b=XFOfOhWeUgOsP6+49/qkLlPub1uemJ1LCm12aY7XPfs0eUs3BzEPmQuf7wPYvA7gRq
+ 8qQU6V0B4RC7zE2G79X6IOnsK5zy3wYiqeKVyhqC2FpliA4i+Cm0rJDpg7aFCvEyo/bm
+ KaH9FrKhf/X62RwNiXHt4XYRZTa1gIIxK/GnqWJYq22N1yeHDNWPL2De0c9ODEjWwcAs
+ rI188YIdpK1BaX0Nt69Y63bkF4QnYBSpd0EbPhoc6MKdxZK8c+B+l1sdmrDVzxrA69JP
+ gofIOnDAmI0409CTXc5zs78wqYHcEr32auXTSH0a/zJISiSSTM0Xb0lLOVxb5TVicuMa
+ wzbA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWpY4cqkj+zqmh8NKkzNyJznKSWXGhu5LbFiZsuqkY5rEzmekC/1U0ucnushdDtpJToCWR3exg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZQdyH4Jy232mysDEDim5fJkiVMCkGwF4I8teeJDmX6vw7YCp5
- 13m54TT23v38PIS8NLob/GGIqGVHjtAgFu2pu+eE6RdyeYK1hA94UDYzo7bJ02zLNNywzDdzueH
- iBMvam7sEZbv0qsG380lp9eW+aDYpJQ7jfahkpQ==
-X-Gm-Gg: ASbGncs5GP33VBGD8VUVy04MPOvzVLkS/k9ImpUUQ7X3xmxwd9HnAdMrEoxZaHEYCmM
- ZGd14nZmKKXNyD0/1VKZOZvq0IiqzjDqMUSTuSZ3mZA9aQRoyvKAQVNJnhDxEaY6ahsWBUPpzOG
- bqbtYW8uXER7AVpXYL5MxjYTFrw4A=
-X-Google-Smtp-Source: AGHT+IHVJgZkaETp/+qNZVLo7ywH52raIO8q3AR6adNMJ0Ff+UFQ/+xfq8fnMzIUpVvEXaiIxtceMEmOK5yAonNEZEY=
-X-Received: by 2002:a05:6902:114e:b0:e63:41cf:b600 with SMTP id
- 3f1490d57ef6-e692ef12233mr4346125276.24.1742974284148; Wed, 26 Mar 2025
- 00:31:24 -0700 (PDT)
+ AJvYcCWQfP4NHRTxCtvl70ZH5HA9LtQSIyDGi7WkqAeGX4rlc8Ti6Do1C26CDE9T9jl56HhAgfM17Ik=@lists.denx.de
+X-Gm-Message-State: AOJu0YzPdr4+2PvU1LUuPjYUN8heMD+Lw0pC/41V1KdC3R2z8oTgU/3C
+ IpGC8AHdc6K1uppQcqpJ+dJ9LS3kn2HJ8K5urF24mxQKlbtIUZ4obFdegvREMkFLO8t10ejhH8I
+ C7y9lutEZps8jZmbQnYjFGp+913Ex+qvEdxQMLA==
+X-Gm-Gg: ASbGncuw9lLk3x9w1wTk4erpLzIcWAFRue82XoUQpRQZoj9HrhjzmFl8wWhyxblbmEz
+ kOEVrBwcn2UPmC7oR+DvIp62N3GZ1l/+i20jmPT9kLx/u4uS45yA6mEYcPFKxT6O7cvkvwO4J1Y
+ 26/6dcyDuZ5wPpgoYrpx9XRAy1k4w=
+X-Google-Smtp-Source: AGHT+IEZFofbFNa4IF785xtk6koKqyooeV+yZlYDS5p/FsY0/ZsglDZ9Olf4iGeka1KOv+ntpmxpDuxD1ZNEgxnJCBg=
+X-Received: by 2002:a05:6902:15c4:b0:e63:ef84:1098 with SMTP id
+ 3f1490d57ef6-e66a4f82ebamr27433525276.34.1742974302906; Wed, 26 Mar 2025
+ 00:31:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250321232121.251800-1-heinrich.schuchardt@canonical.com>
- <20250321232121.251800-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250321232121.251800-5-heinrich.schuchardt@canonical.com>
+ <20250321232121.251800-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250321232121.251800-6-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Mar 2025 09:30:48 +0200
-X-Gm-Features: AQ5f1JpNBngBsXZLWnw59JU9JV-6Z6k24Isy0J8DBxH6I-5smFP4l0YqYQ93rx0
-Message-ID: <CAC_iWjKzOVQQqKJ5LsUxu9_G9JqYPJpdWh_-Tp4rXCeKZsuBoQ@mail.gmail.com>
-Subject: Re: [PATCH 4/5] qemu-sbsa: simplify updating ACPI table header
- checksum
+Date: Wed, 26 Mar 2025 09:31:06 +0200
+X-Gm-Features: AQ5f1Jq8bgnAIXAG1C8BlDA_CbiOxflh6OH-Y2eMMlv_YnZK10I2ZraRMU52rV8
+Message-ID: <CAC_iWjLPeSzACGTq9L7BxbiAfJ5kQsWmZv63UUxzrp-vmVsJaw@mail.gmail.com>
+Subject: Re: [PATCH 5/5] arm: simplify updating ACPI table header checksum
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>, Matthias Brugger <mbrugger@suse.com>, 
  Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
@@ -110,23 +109,15 @@ On Sat, 22 Mar 2025 at 01:21, Heinrich Schuchardt
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
->  board/emulation/qemu-sbsa/acpi.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  arch/arm/mach-bcm283x/bcm2711_acpi.c | 4 ++--
+>  board/raspberrypi/rpi/rpi.c          | 2 +-
+>  2 files changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/board/emulation/qemu-sbsa/acpi.c b/board/emulation/qemu-sbsa/acpi.c
-> index ba85e08fc7d..7e4c55cc818 100644
-> --- a/board/emulation/qemu-sbsa/acpi.c
-> +++ b/board/emulation/qemu-sbsa/acpi.c
-> @@ -133,7 +133,7 @@ static int sbsa_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry
->         gtdt->cnt_read_base = 0xffffffffffffffff;
->
->         // FIXME: VirtualPL2Timer
-> -       header->checksum = table_compute_checksum(header, header->length);
-> +       acpi_update_checksum(header);
->
->         acpi_add_table(ctx, gtdt);
->
-> @@ -181,7 +181,7 @@ static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry
+> diff --git a/arch/arm/mach-bcm283x/bcm2711_acpi.c b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> index 79b283353cf..58f8ee232b9 100644
+> --- a/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> +++ b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> @@ -81,7 +81,7 @@ static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry
 >         }
 >
 >         header->length = ctx->current - ctx->tab_start;
@@ -135,6 +126,28 @@ Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
 >         acpi_inc(ctx, header->length);
 >         acpi_add_table(ctx, header);
+> @@ -116,7 +116,7 @@ static int rpi_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+>         gtdt->el2_flags = GTDT_FLAG_INT_ACTIVE_LOW;
+>         gtdt->cnt_read_base = 0xffffffffffffffff;
+>
+> -       header->checksum = table_compute_checksum(header, header->length);
+> +       acpi_update_checksum(header);
+>
+>         acpi_add_table(ctx, gtdt);
+>
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index 70d3c35499b..6ecd3eb120f 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -791,7 +791,7 @@ static int rpi_acpi_write_ssdt(struct acpi_ctx *ctx, const struct acpi_writer *e
+>
+>         /* (Re)calculate length and checksum */
+>         ssdt->length = ctx->current - (void *)ssdt;
+> -       ssdt->checksum = table_compute_checksum((void *)ssdt, ssdt->length);
+> +       acpi_update_checksum(ssdt);
+>         log_debug("SSDT at %p, length %x\n", ssdt, ssdt->length);
+>
+>         /* Drop the table if it is empty */
 > --
 > 2.48.1
 >
