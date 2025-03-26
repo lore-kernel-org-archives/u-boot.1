@@ -4,84 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED110C28B30
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6D92C28B30
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AA1681CA8;
+	by phobos.denx.de (Postfix) with ESMTP id D415D81D3B;
 	Wed, 26 Mar 2025 06:01:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="gwyu1mGW";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="PdzCPGST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06B918186D; Tue, 25 Mar 2025 20:14:45 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 545E08186D; Wed, 26 Mar 2025 02:44:26 +0100 (CET)
+Received: from out203-205-221-242.mail.qq.com (out203-205-221-242.mail.qq.com
+ [203.205.221.242])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40A1481026
- for <u-boot@lists.denx.de>; Tue, 25 Mar 2025 20:14:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9FC938083E
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:44:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 74188120008;
- Tue, 25 Mar 2025 22:14:41 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 74188120008
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1742930081;
- bh=/1BW82OOZYVNsx+y2MaAhTrT7ChRszvu4Sz4FYRTgo0=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=gwyu1mGW+nEULuga4Ho17/8otJpLuPJjiZ1GwBTx1coNvh7RqbO8/6HobMjZw4A3w
- GLCve0iEBPqx9FqLKXuWtZ86so4jBfSncVQzwxmI+3O2sybF5Dj7r7yBNgqsOufyMd
- gDHDJp8a1AVDmjpSHLp8zXP5cCJnx8NFZ/Ch6P1ArAKQJfYxSqJNT3ySCvvud3nvX8
- L9bberEL/q0AJqyNKXsDZMnQyhYdPo/+ozl0LTV0UWGDLb8PEGj4drDWRAoZceak5J
- B99qgVYlca9rVElGTiNMc724ZdpzeLsdfC2tUDAtvTLnGdrChFlGFzxozdrZSo5idH
- JuOhSvWui8f0A==
-Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
- [172.24.201.216])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 25 Mar 2025 22:14:41 +0300 (MSK)
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <onilsson@rums.se>
-CC: <avromanov@salutedevices.com>, <hs@denx.de>, <kmpark@infradead.org>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] ubi: fix bug creating partitions for non-existent volumes
-Date: Tue, 25 Mar 2025 22:14:10 +0300
-Message-ID: <20250325174708.426459-1-onilsson@rums.se> (raw)
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250325174708.426459-1-onilsson@rums.se>
-References: <20250325174708.426459-1-onilsson@rums.se>
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=423756212@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1742953457; bh=/xNmSrvz0i8UBrUYBXIQ2cL87WBd97VeDILvhZNWH+g=;
+ h=From:To:Cc:Subject:Date;
+ b=PdzCPGSTX9jjrjD1YOAIJbRMxOKCzGWLnzPq/9O5OtWQSXxKPzNTBpBbVnURYNQjO
+ 4x2rG4bx4ZpcxyfC1Mm7oAlvFE8OmAvF1jNfX+8N/Q+wFYmAK1vvAziMTrXcTxFKm4
+ +iu25BOuvt5RphrlmqJmZimrMxk6BfeF+BlILkEE=
+Received: from server-204.smartlogictech.com ([103.90.178.122])
+ by newxmesmtplogicsvrszb20-0.qq.com (NewEsmtp) with SMTP
+ id B0F19A06; Wed, 26 Mar 2025 09:44:15 +0800
+X-QQ-mid: xmsmtpt1742953455ts0slwhlq
+Message-ID: <tencent_1860C63CA04A383E29D25FC5C59DC5C2EB0A@qq.com>
+X-QQ-XMAILINFO: NOfX9IN/+ZyZOM1YRst9qfpKb5J7+t7SbBJIDbFUY0c2OWCFsazKGRCuHAgsjg
+ rt4bc1jLBWxXCN+s8AsIbpNTzFm+rn7sBvABqO2wouIfPS06unEHHblq8Bh8rrSty7EsIorB3gKg
+ E43z8/mXBfgnKDttOtDynjOAo82FnGkDn/ZetIzHinKcCAALwGVxC0BQFqwVfuA5gqDuBwpJENtj
+ fZRaHIBSoBSf38xZYJoMvVKng5+1zcsMknFVY2TyCNhpWCNj9NgsgvAfOwJGqTcdJXLj4Lpi4TKn
+ U16Kbxptod7XU2pQC6M7pZz02ezZ9YnZURngMSIoF9lng+vNFgMemgL4PAOIqy+sU222OhaQcnX0
+ JFMN909JtptwGZTDTRh9ltPT/NLC29pRSXyL49G0gXBDS1kSx4NTWIimlycYxkrB5rSPY+gv6abK
+ yr2F+RHgqQ2GU7c1VBQdcOe4GHMqVlpzg136SDN/RqUzZFGV+RCLdz7sLePgGOtN7xUmZlXFqLre
+ ETIc0XuRUu5YI0zg77CASdqADQHolLw9WJQUCtUoVP+Y40jN6JQMx4Eanu0Mr2qfvVmNO+c6IN8L
+ ex5cF3te/OFAGfCC96+vL5tlteGHuOv0UNFWv3hTOL58IVosSqPUo2PWV8rwU2KalRcUEPS3Fho+
+ Q7xy8PmsrEjnyqFvM9LhrteCKDSB4Qq4SDw1pT4F2RJ5BEfLoB7JXvXOH/cIykjmyOP3H2cg+/vr
+ RDDm6lYvllQtVsBfMdDbn0MtgKpidLuHJaEcxOocrNlGh7WhuppnpX2ZuBH++EtbZ/RButu0x+vH
+ AvMVanyYOuYJVAzGzqnxm7D8y2jqjzSFAKzm0AQ3OwiqB8T5I8EaTbhVZKJzGgYh3q7y+pYarkQE
+ Cu0lJX43BLwhlb+XBttSwzHxa5KkX7K26oY6TRvUsXdYqMlUozBbT5EcJiFLLhXL5fmUzPLBlz
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
+From: Xu Zhang <423756212@qq.com>
+To: u-boot@lists.denx.de
+Cc: Xu Zhang <423756212@qq.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] armv8: start.S: Subordinate CPUs psci setup vector
+Date: Wed, 26 Mar 2025 09:44:12 +0800
+X-OQ-MSGID: <20250326014412.15422-1-423756212@qq.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.28.160.9]
-X-ClientProxiedBy: p-exch-cas-a-m1.sberdevices.ru (172.24.201.216) To
- p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 192098 [Mar 25 2025]
-X-KSMG-AntiSpam-Version: 6.1.1.11
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 51 0.3.51
- 68896fb0083a027476849bf400a331a2d5d94398,
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2025/03/25 17:48:00 #27843404
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-Mailman-Approved-At: Wed, 26 Mar 2025 06:01:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,18 +77,32 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-Message-ID: <20250325191410.iELNoINY0MhJCy-z3HaaIIdl36zZn73AKsplgcT5Wec@z>
 
-> The part_get_info_ubi() function was incorrectly returning 0 (success)
-> when a UBI volume was not found for a given partition index. This caused
-> the part_create_block_devices() function in blk-uclass.c to continue
-> creating devices for non-existent partitions up to MAX_SEARCH_PARTITIONS
+As current design, only Manager CPU called armv8_setup_psci() before
+jump to next stage(such as Linux Kernel), Subordinate CPUs also need
+setup psci vector to handle trap request which comes from higher EL
+level.
 
-> Fix the issue by returning -1 when a volume is not found, signaling to
-> the part_create_block_devices() function that no more valid volumes
-> exist.
+Signed-off-by: Xu Zhang <423756212@qq.com>
+---
 
-Hello, Oskar!
-Thanks for your fix. It is correct.
+ arch/arm/cpu/armv8/start.S | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Reviewed-by: Alexey Romanov <avromanov@salutedevices.com>
+diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
+index d3a8a7c4787..c7872e935e9 100644
+--- a/arch/arm/cpu/armv8/start.S
++++ b/arch/arm/cpu/armv8/start.S
+@@ -334,6 +334,9 @@ WEAK(lowlevel_init)
+ 	/*
+ 	 * All slaves will enter EL2 and optionally EL1.
+ 	 */
++#if defined(CONFIG_ARMV8_PSCI)
++        bl      psci_setup_vectors
++#endif
+ 	adr	x4, lowlevel_in_el2
+ 	ldr	x5, =ES_TO_AARCH64
+ 	bl	armv8_switch_to_el2
+-- 
+2.20.1
+
