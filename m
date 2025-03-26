@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC00AC3600E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 04:26:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5892EC36012
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 04:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51DC281B42;
+	by phobos.denx.de (Postfix) with ESMTP id ECDE381EC5;
 	Thu, 27 Mar 2025 05:24:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="CD063De2";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="n/EW8GXJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9951B81DCA; Wed, 26 Mar 2025 16:01:39 +0100 (CET)
+ id 514E981CAF; Wed, 26 Mar 2025 16:01:41 +0100 (CET)
 Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 136BF8070C
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 16:01:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEB6E81CFD
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 16:01:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id EC7CC442BB;
- Wed, 26 Mar 2025 15:01:35 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id BCD844428F;
+ Wed, 26 Mar 2025 15:01:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1743001296;
+ t=1743001298;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Xrcjw2JLzKtvEuJ/ONrI3tVf5zWcgo/BnI+BPd/8+hE=;
- b=CD063De2CbVqrNQGHOP5n2kiz5DdZ7R5b49cdydEBhQte7LLZsXol0ZXNrwumdmPpA7sjx
- DBCYtKYz3ucL2Nn5XkvrEVKv/tqbjpcM6KO92xx92VH6qiNMsxM4BfWdEpYgTDbTWZWahR
- BkeH2GDSKP4YaVf+Ow/5QW62b95YiDXKjnN5rXo2c6+DalEuRFeVwGy83QeDEIXK6u6GuT
- m5YyiHi8StwVeGurSWfwHhSe6iXthgjyhS+6WqbjONy9R/0mYsDZKMP8bHQvTpQ9S/D+61
- rmSWP+W4bOVkeb+Q7i/YBb9dBUsvmQQU5DxqETk64GdhJnzoYCDcofulgWggWA==
+ bh=ZZcZSzJh2l8LIapNhzFD35TlEI/vKwAorHjxoaRGfWA=;
+ b=n/EW8GXJtV0Qh8+7Eirn7cYkOeRD0vnOCUqEJyuEJt8AaOME2yE8QPjAyJJIbFg8el8B9Z
+ 9elYy9AUkayZbWFWRzmaPFtYID8ems5g2Gt7ikq2DTqOJWIFxSGMNz3BUbLzM0umrvDqWZ
+ yOG7BtmRyQuQOs/a5UvioqJZavGj2q6+7zdbjfSn0e0yPZzDrbcriYRptWUkSqOwGB37xH
+ FnMQeAXYATPkSHggncibHjJK2M9MYrtTbb51hkHR8z64i20jV4hXhfqfjiTZ5ucVaXlAYE
+ Z2S/Ea9wwlmM5esIjVDAPm9JXwi6iHvNscBdQFFAg74YMuTpvLmJG5OM6D4QXQ==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Wed, 26 Mar 2025 16:00:51 +0100
-Subject: [PATCH v5 07/12] clk: imx8mp: Add media related clocks
+Date: Wed, 26 Mar 2025 16:00:53 +0100
+Subject: [PATCH v5 09/12] imx: power-domain: Add support for the MEDIAMIX
+ control block
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250326-ge-mainline-display-support-v5-7-ea4bc3fc9bca@bootlin.com>
+Message-Id: <20250326-ge-mainline-display-support-v5-9-ea4bc3fc9bca@bootlin.com>
 References: <20250326-ge-mainline-display-support-v5-0-ea4bc3fc9bca@bootlin.com>
 In-Reply-To: <20250326-ge-mainline-display-support-v5-0-ea4bc3fc9bca@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -84,171 +85,260 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are all the clocks needed to get an LCD panel working, going
-through one of the LCDIF and the LDB. The media AXI and APB clocks are
-also described.
+This block delivers power and clocks to the whole display and rendering
+pipeline.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/clk/imx/clk-imx8mp.c | 69 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 69 insertions(+)
+ drivers/power/domain/Kconfig           |   7 ++
+ drivers/power/domain/Makefile          |   1 +
+ drivers/power/domain/imx8mp-mediamix.c | 208 +++++++++++++++++++++++++++++++++
+ 3 files changed, 216 insertions(+)
 
-diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
-index bad579f8d5e47fcf078c6ca25e651ddc00fcb30f..f3c8ecf3a2080e74e6a108b995fbdd3ea2aa7b91 100644
---- a/drivers/clk/imx/clk-imx8mp.c
-+++ b/drivers/clk/imx/clk-imx8mp.c
-@@ -14,7 +14,14 @@
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index bd82d2f7044b3c3f8c88dea27c39193efedb4c84..5f5218bd8b5f4bed8283e91da61ac7c8c3eb97ae 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -47,6 +47,13 @@ config IMX8MP_HSIOMIX_BLKCTRL
+ 	help
+ 	  Enable support for manipulating NXP i.MX8MP on-SoC HSIOMIX block controller.
  
- #include "clk.h"
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+static u32 share_count_media;
-+#endif
++config IMX8MP_MEDIAMIX_BLKCTRL
++	bool "Enable i.MX8MP MEDIAMIX domain driver"
++	depends on POWER_DOMAIN && IMX8MP
++	select CLK
++	help
++	  Enable support for manipulating NXP i.MX8MP on-SoC MEDIAMIX block controller.
 +
- static const char * const pll_ref_sels[] = { "osc_24m", "dummy", "dummy", "dummy", };
-+#if CONFIG_IS_ENABLED(VIDEO)
-+static const char * const video_pll1_bypass_sels[] = {"video_pll1", "video_pll1_ref_sel", };
-+#endif
- static const char * const dram_pll_bypass_sels[] = {"dram_pll", "dram_pll_ref_sel", };
- static const char * const arm_pll_bypass_sels[] = {"arm_pll", "arm_pll_ref_sel", };
- static const char * const sys_pll1_bypass_sels[] = {"sys_pll1", "sys_pll1_ref_sel", };
-@@ -31,6 +38,12 @@ static const char * const imx8mp_hsio_axi_sels[] = {"osc_24m", "sys_pll2_500m",
- 						    "sys_pll2_100m", "sys_pll2_200m", "clk_ext2",
- 						    "clk_ext4", "audio_pll2_out", };
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+static const char * const imx8mp_media_isp_sels[] = {"clock-osc-24m", "sys_pll2_1000m", "sys_pll1_800m",
-+						     "sys_pll3_out", "sys_pll1_400m", "audio_pll2_out",
-+						     "clk_ext1", "sys_pll2_500m", };
-+#endif
+ config MTK_POWER_DOMAIN
+ 	bool "Enable the MediaTek power domain driver"
+ 	depends on POWER_DOMAIN && ARCH_MEDIATEK
+diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+index 110646c503ab97941a2bb86caf53f94542008219..356ec07163fd299f00e81a629ffc06c663a26c25 100644
+--- a/drivers/power/domain/Makefile
++++ b/drivers/power/domain/Makefile
+@@ -9,6 +9,7 @@ obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
+ obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
+ obj-$(CONFIG_IMX8M_POWER_DOMAIN) += imx8m-power-domain.o
+ obj-$(CONFIG_IMX8MP_HSIOMIX_BLKCTRL) += imx8mp-hsiomix.o
++obj-$(CONFIG_IMX8MP_MEDIAMIX_BLKCTRL) += imx8mp-mediamix.o
+ obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
+ obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+ obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
+diff --git a/drivers/power/domain/imx8mp-mediamix.c b/drivers/power/domain/imx8mp-mediamix.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..78c32ca3d3a87febdefd5d128d39d817674b8d32
+--- /dev/null
++++ b/drivers/power/domain/imx8mp-mediamix.c
+@@ -0,0 +1,208 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * i.MX8 MEDIAMIX control block driver
++ * Copyright (C) 2024 Miquel Raynal <miquel.raynal@bootlin.com>
++ * Inspired from Marek Vasut <marex@denx.de> work on the hsiomix driver.
++ */
 +
- static const char * const imx8mp_main_axi_sels[] = {"osc_24m", "sys_pll2_333m", "sys_pll1_800m",
- 						    "sys_pll2_250m", "sys_pll2_1000m", "audio_pll1_out",
- 						    "video_pll1_out", "sys_pll1_100m",};
-@@ -43,6 +56,16 @@ static const char * const imx8mp_nand_usdhc_sels[] = {"osc_24m", "sys_pll1_266m"
- 						      "sys_pll2_200m", "sys_pll1_133m", "sys_pll3_out",
- 						      "sys_pll2_250m", "audio_pll1_out", };
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+static const char * const imx8mp_media_axi_sels[] = {"clock-osc-24m", "sys_pll2_1000m", "sys_pll1_800m",
-+						     "sys_pll3_out", "sys_pll1_40m", "audio_pll2_out",
-+						     "clk_ext1", "sys_pll2_500m", };
++#include <asm/io.h>
++#include <clk.h>
++#include <dm.h>
++#include <power-domain-uclass.h>
++#include <linux/delay.h>
 +
-+static const char * const imx8mp_media_apb_sels[] = {"clock-osc-24m", "sys_pll2_125m", "sys_pll1_800m",
-+					      "sys_pll3_out", "sys_pll1_40m", "audio_pll2_out",
-+					      "clk_ext1", "sys_pll1_133m", };
-+#endif
++#include <dt-bindings/power/imx8mp-power.h>
 +
- static const char * const imx8mp_noc_sels[] = {"osc_24m", "sys_pll1_800m", "sys_pll3_out",
- 					       "sys_pll2_1000m", "sys_pll2_500m", "audio_pll1_out",
- 					       "video_pll1_out", "audio_pll2_out", };
-@@ -175,6 +198,17 @@ static const char * const imx8mp_usdhc3_sels[] = {"osc_24m", "sys_pll1_400m", "s
- 						  "sys_pll2_500m", "sys_pll3_out", "sys_pll1_266m",
- 						  "audio_pll2_out", "sys_pll1_100m", };
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+static const char * const imx8mp_media_disp_pix_sels[] = {"clock-osc-24m", "video_pll1_out", "audio_pll2_out",
-+							  "audio_pll1_out", "sys_pll1_800m",
-+							  "sys_pll2_1000m", "sys_pll3_out", "clk_ext4", };
++#define BLK_SFT_RSTN		0x0
++#define BLK_CLK_EN		0x4
 +
-+static const char * const imx8mp_media_ldb_sels[] = {"clock-osc-24m", "sys_pll2_333m", "sys_pll2_100m",
-+						     "sys_pll1_800m", "sys_pll2_1000m",
-+						     "clk_ext2", "audio_pll2_out",
-+						     "video_pll1_out", };
-+#endif
++struct imx8mp_mediamix_priv {
++	void __iomem *base;
++	struct clk clk_apb;
++	struct clk clk_axi;
++	struct clk clk_disp2;
++	struct power_domain pd_bus;
++	struct power_domain pd_lcdif2;
++};
 +
- static const char * const imx8mp_enet_ref_sels[] = {"osc_24m", "sys_pll2_125m", "sys_pll2_50m",
- 						    "sys_pll2_100m", "sys_pll1_160m", "audio_pll1_out",
- 						    "video_pll1_out", "clk_ext4", };
-@@ -199,12 +233,19 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 
- 	clk_dm(IMX8MP_CLK_DUMMY, clk_register_fixed_rate(NULL, "dummy", 0));
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_VIDEO_PLL1_REF_SEL, imx_clk_mux(dev, "video_pll1_ref_sel", base + 0x28, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
-+#endif
- 	clk_dm(IMX8MP_DRAM_PLL_REF_SEL, imx_clk_mux(dev, "dram_pll_ref_sel", base + 0x50, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MP_ARM_PLL_REF_SEL, imx_clk_mux(dev, "arm_pll_ref_sel", base + 0x84, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MP_SYS_PLL1_REF_SEL, imx_clk_mux(dev, "sys_pll1_ref_sel", base + 0x94, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MP_SYS_PLL2_REF_SEL, imx_clk_mux(dev, "sys_pll2_ref_sel", base + 0x104, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 	clk_dm(IMX8MP_SYS_PLL3_REF_SEL, imx_clk_mux(dev, "sys_pll3_ref_sel", base + 0x114, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_VIDEO_PLL1, imx_clk_pll14xx("video_pll1", "video_pll1_ref_sel", base + 0x28,
-+						  &imx_1443x_pll));
-+#endif
- 	clk_dm(IMX8MP_DRAM_PLL, imx_clk_pll14xx("dram_pll", "dram_pll_ref_sel", base + 0x50,
- 						&imx_1443x_dram_pll));
- 	clk_dm(IMX8MP_ARM_PLL, imx_clk_pll14xx("arm_pll", "arm_pll_ref_sel", base + 0x84,
-@@ -216,12 +257,18 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MP_SYS_PLL3, imx_clk_pll14xx("sys_pll3", "sys_pll3_ref_sel", base + 0x114,
- 						&imx_1416x_pll));
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_VIDEO_PLL1_BYPASS, imx_clk_mux_flags(dev, "video_pll1_bypass", base + 0x28, 16, 1, video_pll1_bypass_sels, ARRAY_SIZE(video_pll1_bypass_sels), CLK_SET_RATE_PARENT));
-+#endif
- 	clk_dm(IMX8MP_DRAM_PLL_BYPASS, imx_clk_mux_flags(dev, "dram_pll_bypass", base + 0x50, 4, 1, dram_pll_bypass_sels, ARRAY_SIZE(dram_pll_bypass_sels), CLK_SET_RATE_PARENT));
- 	clk_dm(IMX8MP_ARM_PLL_BYPASS, imx_clk_mux_flags(dev, "arm_pll_bypass", base + 0x84, 4, 1, arm_pll_bypass_sels, ARRAY_SIZE(arm_pll_bypass_sels), CLK_SET_RATE_PARENT));
- 	clk_dm(IMX8MP_SYS_PLL1_BYPASS, imx_clk_mux_flags(dev, "sys_pll1_bypass", base + 0x94, 4, 1, sys_pll1_bypass_sels, ARRAY_SIZE(sys_pll1_bypass_sels), CLK_SET_RATE_PARENT));
- 	clk_dm(IMX8MP_SYS_PLL2_BYPASS, imx_clk_mux_flags(dev, "sys_pll2_bypass", base + 0x104, 4, 1, sys_pll2_bypass_sels, ARRAY_SIZE(sys_pll2_bypass_sels), CLK_SET_RATE_PARENT));
- 	clk_dm(IMX8MP_SYS_PLL3_BYPASS, imx_clk_mux_flags(dev, "sys_pll3_bypass", base + 0x114, 4, 1, sys_pll3_bypass_sels, ARRAY_SIZE(sys_pll3_bypass_sels), CLK_SET_RATE_PARENT));
- 
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_VIDEO_PLL1_OUT, imx_clk_gate(dev, "video_pll1_out", "video_pll1_bypass", base + 0x28, 13));
-+#endif
- 	clk_dm(IMX8MP_DRAM_PLL_OUT, imx_clk_gate(dev, "dram_pll_out", "dram_pll_bypass", base + 0x50, 13));
- 	clk_dm(IMX8MP_ARM_PLL_OUT, imx_clk_gate(dev, "arm_pll_out", "arm_pll_bypass", base + 0x84, 11));
- 	clk_dm(IMX8MP_SYS_PLL1_OUT, imx_clk_gate(dev, "sys_pll1_out", "sys_pll1_bypass", base + 0x94, 11));
-@@ -267,13 +314,23 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MP_CLK_A53_DIV, imx_clk_divider2(dev, "arm_a53_div", "arm_a53_cg", base + 0x8000, 0, 3));
- 
- 	clk_dm(IMX8MP_CLK_HSIO_AXI, imx8m_clk_composite(dev, "hsio_axi", imx8mp_hsio_axi_sels, base + 0x8380));
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_CLK_MEDIA_ISP, imx8m_clk_composite(dev, "media_isp", imx8mp_media_isp_sels, base + 0x8400));
-+#endif
- 	clk_dm(IMX8MP_CLK_MAIN_AXI, imx8m_clk_composite_critical(dev, "main_axi", imx8mp_main_axi_sels, base + 0x8800));
- 	clk_dm(IMX8MP_CLK_ENET_AXI, imx8m_clk_composite_critical(dev, "enet_axi", imx8mp_enet_axi_sels, base + 0x8880));
- 	clk_dm(IMX8MP_CLK_NAND_USDHC_BUS, imx8m_clk_composite_critical(dev, "nand_usdhc_bus", imx8mp_nand_usdhc_sels, base + 0x8900));
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_CLK_MEDIA_AXI, imx8m_clk_composite(dev, "media_axi", imx8mp_media_axi_sels, base + 0x8a00));
-+	clk_dm(IMX8MP_CLK_MEDIA_APB, imx8m_clk_composite(dev, "media_apb", imx8mp_media_apb_sels, base + 0x8a80));
-+#endif
- 	clk_dm(IMX8MP_CLK_NOC, imx8m_clk_composite_critical(dev, "noc", imx8mp_noc_sels, base + 0x8d00));
- 	clk_dm(IMX8MP_CLK_NOC_IO, imx8m_clk_composite_critical(dev, "noc_io", imx8mp_noc_io_sels, base + 0x8d80));
- 
- 	clk_dm(IMX8MP_CLK_AHB, imx8m_clk_composite_critical(dev, "ahb_root", imx8mp_ahb_sels, base + 0x9000));
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_CLK_MEDIA_DISP2_PIX, imx8m_clk_composite(dev, "media_disp2_pix", imx8mp_media_disp_pix_sels, base + 0x9300));
-+#endif
- 
- 	clk_dm(IMX8MP_CLK_IPG_ROOT, imx_clk_divider2(dev, "ipg_root", "ahb_root", base + 0x9080, 0, 1));
- 
-@@ -312,6 +369,10 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 
- 	clk_dm(IMX8MP_CLK_WDOG, imx8m_clk_composite(dev, "wdog", imx8mp_wdog_sels, base + 0xb900));
- 	clk_dm(IMX8MP_CLK_USDHC3, imx8m_clk_composite(dev, "usdhc3", imx8mp_usdhc3_sels, base + 0xbc80));
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_CLK_MEDIA_DISP1_PIX, imx8m_clk_composite(dev, "media_disp1_pix", imx8mp_media_disp_pix_sels, base + 0xbe00));
-+	clk_dm(IMX8MP_CLK_MEDIA_LDB, imx8m_clk_composite(dev, "media_ldb", imx8mp_media_ldb_sels, base + 0xbf00));
-+#endif
- 
- 	clk_dm(IMX8MP_CLK_DRAM_ALT_ROOT, imx_clk_fixed_factor(dev, "dram_alt_root", "dram_alt", 1, 4));
- 	clk_dm(IMX8MP_CLK_DRAM_CORE, imx_clk_mux2_flags(dev, "dram_core_clk", base + 0x9800, 24, 1, imx8mp_dram_core_sels, ARRAY_SIZE(imx8mp_dram_core_sels), CLK_IS_CRITICAL));
-@@ -355,6 +416,14 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MP_CLK_WDOG2_ROOT, imx_clk_gate4(dev, "wdog2_root_clk", "wdog", base + 0x4540, 0));
- 	clk_dm(IMX8MP_CLK_WDOG3_ROOT, imx_clk_gate4(dev, "wdog3_root_clk", "wdog", base + 0x4550, 0));
- 	clk_dm(IMX8MP_CLK_HSIO_ROOT, imx_clk_gate4(dev, "hsio_root_clk", "ipg_root", base + 0x45c0, 0));
-+#if CONFIG_IS_ENABLED(VIDEO)
-+	clk_dm(IMX8MP_CLK_MEDIA_APB_ROOT, imx_clk_gate2_shared2(dev, "media_apb_root_clk", "media_apb", base + 0x45d0, 0, &share_count_media));
-+	clk_dm(IMX8MP_CLK_MEDIA_AXI_ROOT, imx_clk_gate2_shared2(dev, "media_axi_root_clk", "media_axi", base + 0x45d0, 0, &share_count_media));
-+	clk_dm(IMX8MP_CLK_MEDIA_DISP1_PIX_ROOT, imx_clk_gate2_shared2(dev, "media_disp1_pix_root_clk", "media_disp1_pix", base + 0x45d0, 0, &share_count_media));
-+	clk_dm(IMX8MP_CLK_MEDIA_DISP2_PIX_ROOT, imx_clk_gate2_shared2(dev, "media_disp2_pix_root_clk", "media_disp2_pix", base + 0x45d0, 0, &share_count_media));
-+	clk_dm(IMX8MP_CLK_MEDIA_LDB_ROOT, imx_clk_gate2_shared2(dev, "media_ldb_root_clk", "media_ldb", base + 0x45d0, 0, &share_count_media));
-+	clk_dm(IMX8MP_CLK_MEDIA_ISP_ROOT, imx_clk_gate2_shared2(dev, "media_isp_root_clk", "media_isp", base + 0x45d0, 0, &share_count_media));
-+#endif
- 
- 	clk_dm(IMX8MP_CLK_USDHC3_ROOT, imx_clk_gate4(dev, "usdhc3_root_clk", "usdhc3", base + 0x45e0, 0));
- 
++static int imx8mp_mediamix_on(struct power_domain *power_domain)
++{
++	struct udevice *dev = power_domain->dev;
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	struct power_domain *domain;
++	struct clk *clk;
++	u32 reset;
++	int ret;
++
++	switch (power_domain->id) {
++	case IMX8MP_MEDIABLK_PD_LCDIF_2:
++		domain = &priv->pd_lcdif2;
++		clk = &priv->clk_disp2;
++		reset = BIT(11) | BIT(12) | BIT(24);
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	/* Make sure bus domain is awake */
++	ret = power_domain_on(&priv->pd_bus);
++	if (ret)
++		return ret;
++
++	/* Put devices into reset */
++	clrbits_le32(priv->base + BLK_SFT_RSTN, reset);
++
++	/* Enable upstream clocks */
++	ret = clk_enable(&priv->clk_apb);
++	if (ret)
++		goto dis_bus_pd;
++
++	ret = clk_enable(&priv->clk_axi);
++	if (ret)
++		goto dis_apb_clk;
++
++	/* Enable blk-ctrl clock to allow reset to propagate */
++	ret = clk_enable(clk);
++	if (ret)
++		goto dis_axi_clk;
++	setbits_le32(priv->base + BLK_CLK_EN, reset);
++
++	/* Power up upstream GPC domain */
++	ret = power_domain_on(domain);
++	if (ret)
++		goto dis_lcdif_clk;
++
++	/* Wait for reset to propagate */
++	udelay(5);
++
++	/* Release reset */
++	setbits_le32(priv->base + BLK_SFT_RSTN, reset);
++
++	return 0;
++
++dis_lcdif_clk:
++	clk_disable(clk);
++dis_axi_clk:
++	clk_disable(&priv->clk_axi);
++dis_apb_clk:
++	clk_disable(&priv->clk_apb);
++dis_bus_pd:
++	power_domain_off(&priv->pd_bus);
++
++	return ret;
++}
++
++static int imx8mp_mediamix_off(struct power_domain *power_domain)
++{
++	struct udevice *dev = power_domain->dev;
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	struct power_domain *domain;
++	struct clk *clk;
++	u32 reset;
++
++	switch (power_domain->id) {
++	case IMX8MP_MEDIABLK_PD_LCDIF_2:
++		domain = &priv->pd_lcdif2;
++		clk = &priv->clk_disp2;
++		reset = BIT(11) | BIT(12) | BIT(24);
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	/* Put devices into reset and disable clocks */
++	clrbits_le32(priv->base + BLK_SFT_RSTN, reset);
++	clrbits_le32(priv->base + BLK_CLK_EN, reset);
++
++	/* Power down upstream GPC domain */
++	power_domain_off(domain);
++
++	clk_disable(clk);
++	clk_disable(&priv->clk_axi);
++	clk_disable(&priv->clk_apb);
++
++	/* Allow bus domain to suspend */
++	power_domain_off(&priv->pd_bus);
++
++	return 0;
++}
++
++static int imx8mp_mediamix_of_xlate(struct power_domain *power_domain,
++				    struct ofnode_phandle_args *args)
++{
++	power_domain->id = args->args[0];
++
++	return 0;
++}
++
++static int imx8mp_mediamix_bind(struct udevice *dev)
++{
++	/* Bind child lcdif */
++	return dm_scan_fdt_dev(dev);
++}
++
++static int imx8mp_mediamix_probe(struct udevice *dev)
++{
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->base = dev_read_addr_ptr(dev);
++
++	ret = clk_get_by_name(dev, "apb", &priv->clk_apb);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "axi", &priv->clk_axi);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "disp2", &priv->clk_disp2);
++	if (ret < 0)
++		return ret;
++
++	ret = power_domain_get_by_name(dev, &priv->pd_bus, "bus");
++	if (ret < 0)
++		return ret;
++
++	ret = power_domain_get_by_name(dev, &priv->pd_lcdif2, "lcdif2");
++	if (ret < 0)
++		goto free_bus_pd;
++
++	return 0;
++
++free_bus_pd:
++	power_domain_free(&priv->pd_bus);
++	return ret;
++}
++
++static int imx8mp_mediamix_remove(struct udevice *dev)
++{
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++
++	power_domain_free(&priv->pd_lcdif2);
++	power_domain_free(&priv->pd_bus);
++
++	return 0;
++}
++
++static const struct udevice_id imx8mp_mediamix_ids[] = {
++	{ .compatible = "fsl,imx8mp-media-blk-ctrl" },
++	{ }
++};
++
++struct power_domain_ops imx8mp_mediamix_ops = {
++	.on = imx8mp_mediamix_on,
++	.off = imx8mp_mediamix_off,
++	.of_xlate = imx8mp_mediamix_of_xlate,
++};
++
++U_BOOT_DRIVER(imx8mp_mediamix) = {
++	.name		= "imx8mp_mediamix",
++	.id		= UCLASS_POWER_DOMAIN,
++	.of_match	= imx8mp_mediamix_ids,
++	.bind		= imx8mp_mediamix_bind,
++	.probe		= imx8mp_mediamix_probe,
++	.remove		= imx8mp_mediamix_remove,
++	.priv_auto	= sizeof(struct imx8mp_mediamix_priv),
++	.ops		= &imx8mp_mediamix_ops,
++};
 
 -- 
 2.48.1
