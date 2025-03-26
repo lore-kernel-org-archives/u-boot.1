@@ -4,63 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6D92C28B30
-	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:01:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB3FC28B30
+	for <u-boot@archiver.kernel.org>; Wed, 26 Mar 2025 05:02:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D415D81D3B;
-	Wed, 26 Mar 2025 06:01:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DE1181DCA;
+	Wed, 26 Mar 2025 06:01:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="PdzCPGST";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 545E08186D; Wed, 26 Mar 2025 02:44:26 +0100 (CET)
-Received: from out203-205-221-242.mail.qq.com (out203-205-221-242.mail.qq.com
- [203.205.221.242])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EEA388186D; Wed, 26 Mar 2025 02:46:43 +0100 (CET)
+Received: from mail.wgdd.de (mail.wgdd.de [5.39.82.225])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FC938083E
- for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:44:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D23CD8083E
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:46:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=423756212@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1742953457; bh=/xNmSrvz0i8UBrUYBXIQ2cL87WBd97VeDILvhZNWH+g=;
- h=From:To:Cc:Subject:Date;
- b=PdzCPGSTX9jjrjD1YOAIJbRMxOKCzGWLnzPq/9O5OtWQSXxKPzNTBpBbVnURYNQjO
- 4x2rG4bx4ZpcxyfC1Mm7oAlvFE8OmAvF1jNfX+8N/Q+wFYmAK1vvAziMTrXcTxFKm4
- +iu25BOuvt5RphrlmqJmZimrMxk6BfeF+BlILkEE=
-Received: from server-204.smartlogictech.com ([103.90.178.122])
- by newxmesmtplogicsvrszb20-0.qq.com (NewEsmtp) with SMTP
- id B0F19A06; Wed, 26 Mar 2025 09:44:15 +0800
-X-QQ-mid: xmsmtpt1742953455ts0slwhlq
-Message-ID: <tencent_1860C63CA04A383E29D25FC5C59DC5C2EB0A@qq.com>
-X-QQ-XMAILINFO: NOfX9IN/+ZyZOM1YRst9qfpKb5J7+t7SbBJIDbFUY0c2OWCFsazKGRCuHAgsjg
- rt4bc1jLBWxXCN+s8AsIbpNTzFm+rn7sBvABqO2wouIfPS06unEHHblq8Bh8rrSty7EsIorB3gKg
- E43z8/mXBfgnKDttOtDynjOAo82FnGkDn/ZetIzHinKcCAALwGVxC0BQFqwVfuA5gqDuBwpJENtj
- fZRaHIBSoBSf38xZYJoMvVKng5+1zcsMknFVY2TyCNhpWCNj9NgsgvAfOwJGqTcdJXLj4Lpi4TKn
- U16Kbxptod7XU2pQC6M7pZz02ezZ9YnZURngMSIoF9lng+vNFgMemgL4PAOIqy+sU222OhaQcnX0
- JFMN909JtptwGZTDTRh9ltPT/NLC29pRSXyL49G0gXBDS1kSx4NTWIimlycYxkrB5rSPY+gv6abK
- yr2F+RHgqQ2GU7c1VBQdcOe4GHMqVlpzg136SDN/RqUzZFGV+RCLdz7sLePgGOtN7xUmZlXFqLre
- ETIc0XuRUu5YI0zg77CASdqADQHolLw9WJQUCtUoVP+Y40jN6JQMx4Eanu0Mr2qfvVmNO+c6IN8L
- ex5cF3te/OFAGfCC96+vL5tlteGHuOv0UNFWv3hTOL58IVosSqPUo2PWV8rwU2KalRcUEPS3Fho+
- Q7xy8PmsrEjnyqFvM9LhrteCKDSB4Qq4SDw1pT4F2RJ5BEfLoB7JXvXOH/cIykjmyOP3H2cg+/vr
- RDDm6lYvllQtVsBfMdDbn0MtgKpidLuHJaEcxOocrNlGh7WhuppnpX2ZuBH++EtbZ/RButu0x+vH
- AvMVanyYOuYJVAzGzqnxm7D8y2jqjzSFAKzm0AQ3OwiqB8T5I8EaTbhVZKJzGgYh3q7y+pYarkQE
- Cu0lJX43BLwhlb+XBttSwzHxa5KkX7K26oY6TRvUsXdYqMlUozBbT5EcJiFLLhXL5fmUzPLBlz
-X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
-From: Xu Zhang <423756212@qq.com>
+ dmarc=none (p=none dis=none) header.from=debian.org
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=dleidert@debian.org
+Received: from [192.168.199.109] (ip-109-091-155-077.um37.pools.vodafone-ip.de
+ [109.91.155.77])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1)
+ server-digest SHA256) (No client certificate requested)
+ (Authenticated sender: dleidert)
+ by mail.wgdd.de (Postfix) with ESMTPSA id D56C38012B
+ for <u-boot@lists.denx.de>; Wed, 26 Mar 2025 02:46:40 +0100 (CET)
+Message-ID: <1f48a22cb1376fb09e6efcaa696e0602831a2f3e.camel@debian.org>
+Subject: Has CVE-2024-42040 ever been addressed?
+From: Daniel Leidert <dleidert@debian.org>
 To: u-boot@lists.denx.de
-Cc: Xu Zhang <423756212@qq.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] armv8: start.S: Subordinate CPUs psci setup vector
-Date: Wed, 26 Mar 2025 09:44:12 +0800
-X-OQ-MSGID: <20250326014412.15422-1-423756212@qq.com>
-X-Mailer: git-send-email 2.20.1
+Date: Wed, 26 Mar 2025 02:46:39 +0100
+Content-Type: multipart/signed; micalg="pgp-sha512";
+ protocol="application/pgp-signature"; boundary="=-6AocDJRsVRVci6B02VQ5"
+User-Agent: Evolution 3.56.0-1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 26 Mar 2025 06:01:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,31 +56,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As current design, only Manager CPU called armv8_setup_psci() before
-jump to next stage(such as Linux Kernel), Subordinate CPUs also need
-setup psci vector to handle trap request which comes from higher EL
-level.
 
-Signed-off-by: Xu Zhang <423756212@qq.com>
----
+--=-6AocDJRsVRVci6B02VQ5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
- arch/arm/cpu/armv8/start.S | 3 +++
- 1 file changed, 3 insertions(+)
+Hello,
 
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index d3a8a7c4787..c7872e935e9 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -334,6 +334,9 @@ WEAK(lowlevel_init)
- 	/*
- 	 * All slaves will enter EL2 and optionally EL1.
- 	 */
-+#if defined(CONFIG_ARMV8_PSCI)
-+        bl      psci_setup_vectors
-+#endif
- 	adr	x4, lowlevel_in_el2
- 	ldr	x5, =ES_TO_AARCH64
- 	bl	armv8_switch_to_el2
--- 
-2.20.1
+CVE-2024-42040 was published last year. But I cannot find any response
+to it, nor does it seem that it has been addressed yet. Has it been
+missed? Will it be addressed in the future?
 
+Regards, Daniel
+
+--=-6AocDJRsVRVci6B02VQ5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEvu1N7VVEpMA+KD3HS80FZ8KW0F0FAmfjXH8ACgkQS80FZ8KW
+0F22ehAAsfv6xqHE4Gl1vSo6SDJFgs4jjxYHmSS8jeUgOLA0oOInOO6sMCs7oSkN
+Z9OlSuMdNsCU/ZtvKfFl8cxuIYhyW1BmOxo4YTwmWbnonSimFTNogxmXEARWyivg
+lCKDU7iZ4VMYejJ90ExJjuhtH3PIoYM/68Y8hPvlHoL0rE2yl3TmG3QAuJAjzEQ8
+VXiVpILjx+SbdUbewXXhEHB+GaXSnLJ7qdjsYAYa4k8mGlKV6pzv0twZU1pOhyr+
+aT6WQArNIe1WaueEQBq+SObJamh64auvvs0S8GP30OHnTbeN1GbWkdgi8JrJuXF/
+Rv+p+Luv7Dr2EZZG5FNfvWsf/k6/i7YrzBypCsax4onlYONj+82sbz/wiiR01qb6
+WxDfBw/reIGFSS5FSMaPK6c2gGKd/RM95jxrvQVCvz1y38N+FBjMdHao5p3c7o9a
+DzV8etChR7ZyncDJoy2nJiKWQXB0wTJlTbomw4eghSGR9FsloLrscqyoOfc+pEkV
+/0/0RRWJvrJLHpcmNW1ThwdiZbIQ8QYUo+wFNVEEKy65KNHu4/02hzbtq0VaFmtT
+j/S9v77k179+7nSPMTPuw+dDn6bAOpEC19viQQ8TapxlM9DCuBNuB4yaJ+bz6TOL
+cujZb6EWTI6Jeq5MEPx57311b0ND1wunsCx7oBFzKAEgEd0Z2Tw=
+=2rZP
+-----END PGP SIGNATURE-----
+
+--=-6AocDJRsVRVci6B02VQ5--
