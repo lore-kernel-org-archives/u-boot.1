@@ -4,92 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 084E6C3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 06:12:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9142AC3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 06:59:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEE9C8070C;
-	Thu, 27 Mar 2025 07:12:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id C5D1B8070C;
+	Thu, 27 Mar 2025 07:58:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="AJyF7sT9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MCUVEhjC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E2A1807D7; Thu, 27 Mar 2025 07:12:13 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F41A4806D8
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:12:10 +0100 (CET)
+ id 97C84807D7; Thu, 27 Mar 2025 07:58:58 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B8360806FC
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52R5jG8a022979;
- Thu, 27 Mar 2025 06:12:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=9+bZS6N/JkESFQqvYYU5GNwt
- k+6SSS+l0UZ0UBGYQ/U=; b=AJyF7sT9bOdcqOlBz/tup113QZmbzjn10AdcsS6V
- w02xNgBKURVbaKRYGlzoYeYdCM6iltEmmJgAY/trJPcAUpRF76QCORIC8dwA4lnp
- e6bXCvWo0ve/gR2ypf+5VhDqAbjOqaALXgm+9o0ZwdWiwOml84uI8pSE0rjKh1aO
- tc54hX+taDwDYOOqOqjlyudMGqqsyayhbZ9K7du0Va0FsQuOXVN17LkddZ/dKj+a
- /+gZrGLVZjSYcTWpn614PSXPcdzyGvrfIBETvRY1BxuJJ8x9K5pzmvanAFuq1vCa
- ZzdlvHfI7103jb+DSnomzqim9ZBGgPRsKWqdUvWEGSUPBg==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45mb9muq0x-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 27 Mar 2025 06:12:06 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 52R6C5xj012573
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 27 Mar 2025 06:12:05 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 26 Mar 2025 23:12:02 -0700
-Date: Thu, 27 Mar 2025 11:41:58 +0530
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <EABachinin@salutedevices.com>, 
- <jerome.forissier@linaro.org>, <rasmus.villemoes@prevas.dk>,
- <ansuelsmth@gmail.com>, <sughosh.ganu@linaro.org>,
- <michal.simek@amd.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v1] efi_loader: Handle GD_FLG_SKIP_RELOC
-Message-ID: <Z+TsLpAGAIezgPZS@hu-varada-blr.qualcomm.com>
-References: <20250326054653.273906-1-quic_varada@quicinc.com>
- <CAC_iWj+MPcOcuhM1vcHyXYUF7O7U_y8+KKMZJszTK2aqfgfHZg@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52R6wrHs1775623
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 27 Mar 2025 01:58:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1743058733;
+ bh=eb93PDNXb6ExeYd7k5lZwf6oO+SwpM2Ty+X6G299EHs=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=MCUVEhjCI6v4U/3ATL9GPgmKWsvuzacgMlcWMZKt7QszzHrU+7Z9Y6addG+egR/da
+ wh2PU39q9XFfT7GwYvsP/W9mkCyEPa2QKa4GkLXeH3T0iLZBdoxkafIrLv9hwYY/uX
+ n+NgArugRDwGw5P6KiyARFOl/JE+oYag20wRgQGw=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52R6wr5e001052
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 27 Mar 2025 01:58:53 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
+ Mar 2025 01:58:52 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 27 Mar 2025 01:58:52 -0500
+Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
+ [172.24.227.136])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52R6wns1083154;
+ Thu, 27 Mar 2025 01:58:50 -0500
+Message-ID: <de6090ed-2a2d-43e1-8a87-0da736bb2506@ti.com>
+Date: Thu, 27 Mar 2025 12:28:49 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWj+MPcOcuhM1vcHyXYUF7O7U_y8+KKMZJszTK2aqfgfHZg@mail.gmail.com>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Authority-Analysis: v=2.4 cv=cs+bk04i c=1 sm=1 tr=0 ts=67e4ec36 cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=kj9zAlcOel0A:10 a=Vs1iUdzkB0EA:10 a=COk6AnOGAAAA:8
- a=B7lkYa6swIx8ZzCZhPsA:9 a=CjuIK1q_8ugA:10
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: dKkmRgrlbTGDQa-B49DBqvvruxGdtJE0
-X-Proofpoint-ORIG-GUID: dKkmRgrlbTGDQa-B49DBqvvruxGdtJE0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-26_09,2025-03-26_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0
- bulkscore=0 mlxlogscore=480 malwarescore=0 lowpriorityscore=0
- clxscore=1015 adultscore=0 priorityscore=1501 phishscore=0 suspectscore=0
- mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2503270038
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] Re: [RFC PATCH 1/2 v1] arch: arm: Kconfig: Add config
+ to use subnode's bootph property for binding drivers
+From: Moteen Shah <m-shah@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-chavda@ti.com>
+References: <20250212091820.213895-1-m-shah@ti.com>
+ <20250212091820.213895-2-m-shah@ti.com>
+ <CAFLszTjCT7ubR=k0Gd5AAt+m9cH7qgQzT1S8z5LCVHSrgAnCow@mail.gmail.com>
+ <dd69f417-c6ef-4595-8d60-56f9dc6e2b8c@ti.com>
+ <CAFLszTjS3SoyGzaFsdbjTxP7rUfc71roNzvtgixPaJ6G2YZ7ww@mail.gmail.com>
+ <67398051-7282-4cfd-a805-45268f41e84c@ti.com>
+Content-Language: en-US
+In-Reply-To: <67398051-7282-4cfd-a805-45268f41e84c@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,56 +88,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 26, 2025 at 09:28:04AM +0200, Ilias Apalodimas wrote:
-> Hi Varadarajan
+Hello Simon,
+
+On 07/03/25 10:25, Moteen Shah wrote:
 >
-> On Wed, 26 Mar 2025 at 07:47, Varadarajan Narayanan
-> <quic_varada@quicinc.com> wrote:
-> >
-> > If the EFI runtime services pointers are relocated even though
-> > relocation is skipped, it corrupts some other data resulting in some
-> > unexpected behaviour.
-> >
-> > In this specific case, it overwrote some page table entries resulting in
-> > the device memory address range's mappings getting removed. Eventually,
-> > after the completion of efi_runtime_relocate(), when a driver tries to
-> > access its device's registers it crashes since the mappings are absent.
+> On 26/02/25 02:57, Simon Glass wrote:
+>> Hi Moteen, On Thu, 13 Feb 2025 at 22: 05, Moteen Shah 
+>> <m-shah@ ti. com> wrote: > > > On 13/02/25 19: 31, Simon Glass wrote: 
+>> > > Hi Moteen, On Wed, 12 Feb 2025 at 02: 18, Moteen Shah > > 
+>> <m-shah@ ti. com> wrote: >
+>> ZjQcmQRYFpfptBannerStart
+>> This message was sent from outside of Texas Instruments.
+>> Do not click links or open attachments unless you recognize the 
+>> source of this email and know the content is safe.
+>> Report Suspicious
+>> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!tDdkczlA_gRXoUoEULhq8lPl3ziRhLj9IlA3ZXDoziTij0dPBpn6-DgWRD6rC1BVPnBWST9bilaw10uU17sjumdmw40nkGdzZUT48cV7qkEDIlAys_tcmpU$> 
+>>
+>> ZjQcmQRYFpfptBannerEnd
+>> Hi Moteen,
+>>
+>> On Thu, 13 Feb 2025 at 22:05, Moteen Shah <m-shah@ti.com> wrote:
+>> >
+>> >
+>> > On 13/02/25 19:31, Simon Glass wrote:
+>> > > Hi Moteen, On Wed, 12 Feb 2025 at 02: 18, Moteen Shah
+>> > > <m-shah@ ti. com> wrote: > > Add a new config when set will traverse
+>> > > through all the subnodes of > a given node scanning for bootph-all
+>> > > property and propagate it to > all of
+>> > > ZjQcmQRYFpfptBannerStart
+>> > > This message was sent from outside of Texas Instruments.
+>> > > Do not click links or open attachments unless you recognize the 
+>> source
+>> > > of this email and know the content is safe.
+>> > > Report Suspicious
+>> > > 
+>> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!tDdkczlA_gRXoUgIvDspkOY_N58UTgTbK8UGS8zfYNsuu6kFHonhYC9p6QDyxO6fEM-jwDoJbz7g9IYZuow6CShwWbGJRkE39jUS3OLaz9G1-q9eGLvRc6M$>
+>> > >
+>> > > ZjQcmQRYFpfptBannerEnd
+>> > > Hi Moteen,
+>> > >
+>> > > On Wed, 12 Feb 2025 at 02:18, Moteen Shah <m-shah@ti.com> wrote:
+>> > > >
+>> > > > Add a new config when set will traverse through all the 
+>> subnodes of
+>> > > > a given node scanning for bootph-all property and propagate it to
+>> > > > all of its parent node up the hierarchy.
+>> > > >
+>> > > > Signed-off-by: Moteen Shah <m-shah@ti.com>
+>> > > > ---
+>> > > >  arch/arm/Kconfig | 11 +++++++++++
+>> > > >  1 file changed, 11 insertions(+)
+>> > > >
+>> > > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> > > > index 314916527c9..51fc952b0db 100644
+>> > > > --- a/arch/arm/Kconfig
+>> > > > +++ b/arch/arm/Kconfig
+>> > > > @@ -805,6 +805,7 @@ config ARCH_K3
+>> > > >         select FIT
+>> > > >         select REGEX
+>> > > >         select FIT_SIGNATURE if ARM64
+>> > > > +       imply BIND_FROM_CHILD_BOOTPH
+>> > > >         imply TI_SECURE_DEVICE
+>> > > >
+>> > > >  config ARCH_OMAP2PLUS
+>> > > > @@ -2232,6 +2233,16 @@ config SYS_KWD_CONFIG
+>> > > >           Path within the source directory to the kwbimage.cfg 
+>> file to use
+>> > > >           when packaging the U-Boot image for use.
+>> > > >
+>> > > > +
+>> > > > +config BIND_FROM_CHILD_BOOTPH
+>> > >
+>> > > How about DM_F_STRICT_BOOTPH ?  or DM_F_CHILD_BOOTPH ?
+>> >
+>> > Yes, this should be more descriptive, will include this in v2.
+>> >
+>> > >
+>> > > It indicates that it relates to driver model before relocation.
+>> > >
+>> > > This behaviour is actually required by the schema. I agree it should
+>> > > be optional, but only due to its performance issues.
+>> > >
+>> > > A Binman solution would not have any performance issues.
+>> >
+>> > Will explore on this more, if you have some more pointers on this,
+>> > then do let me know.
+>>
+>> As you requested on the call today:
+>>
+>> PrepareImagesAndDtbs() fiddles with the dtb so you can add some code 
+>> there.
+>>
+>> My suggestion is to insert something after this chunk:
+>>
+>>      # Get the device tree ready by compiling it and copying the 
+>> compiled
+>>      # output into a file in our output directly. Then scan it for use
+>>      # in binman.
+>>      dtb_fname = fdt_util.EnsureCompiled(dtb_fname)
+>>      fname = tools.get_output_filename('u-boot.dtb.out')
+>>
+>> here you can read in the file and modify it, e.g.:
+>>
+>> dtb = fdt.FdtScan(dtb_fname)
+>> add_bootph_nodes(dtb)
+>> dtb.Sync(True)
+>> tools.write_file(fname, dtb.GetContents())
+>>
+>>      tools.write_file(fname, tools.read_file(dtb_fname))   # delete 
+>> this line
+>>      dtb = fdt.FdtScan(fname)
+>>
+>> It might need some tweaking. It will need some sort of test, see
+>> ftest.py for that. As an example, testCompressSectionSize() reads back
+>> the dtb to check it., so you can follow that You need to create a .dts
+>> file in tools/binman/test, containing nodes other than 'binman'.
 >
-> How were those page table entries added?
-
-initr_caches ->
-	enable_caches ->
-		setup_pgtables (arch/arm/mach-snapdragon/board.c)
-
-> The runtime service relocation might have overwritten those now, but
-> since they are not in protected memory this can happen arbitrarily.
-
-To avoid relocating U-Boot, I had OR'ed GD_FLG_SKIP_RELOC to gd->flags
-in init_sequence_f -> mach_cpu_init(). Hope that is the right place and
-way to do it.
-
-> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> > ---
-> >  common/board_r.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/common/board_r.c b/common/board_r.c
-> > index 179259b00de..1dd3b96c2de 100644
-> > --- a/common/board_r.c
-> > +++ b/common/board_r.c
-> > @@ -169,7 +169,8 @@ static int initr_reloc_global_data(void)
-> >          */
-> >         efi_save_gd();
-> >
-> > -       efi_runtime_relocate(gd->relocaddr, NULL);
-> > +       if (!(gd->flags & GD_FLG_SKIP_RELOC))
-> > +               efi_runtime_relocate(gd->relocaddr, NULL);
 >
-> Have you tested booting with EFI with this change?
+> Thanks for the pointers Simon. I'll start with the implementation soon 
+> after checking the time delta
+> we get with this patch but with direct binding rather than propagating 
+> bootph-* properties.
+>
 
-Yes, tested this with both GD_FLG_SKIP_RELOC set and not set.
+I checked the time delta with the above mentioned approach, here are the 
+results:
 
-Used the command 'bootefi bootmgr' and Linux is able to boot.
+Board         Baseline   Previous delay  New delay
+J7200-evm       2.2s       ~100 ms         ~60ms
+J784s4-evm     2.7s        ~350 ms     300ms-350ms
 
-Thanks
-Varada
+The time delta is still significant, a binman solution should be the 
+right approach to this, a binman based approach should be the right step 
+I think. Will send a v2 based on it.
+
+
+>
+>> >
+>> >
+>> > Regards,
+>> > Moteen
+>> >
+>> > >
+>> > > > +       bool "Bind drivers from bootph* in subnode"
+>> > > > +       depends on ARCH_K3
+>> > > > +       help
+>> > > > +        This config must be set to bind drivers in pre reloc 
+>> stage whose
+>> > > > +        compatible parent nodes are implicitly declared to be 
+>> bound to
+>> > > > +        their respective drivers by having bootph* property in 
+>> one of
+>> > > > +        their subnodes.
+>> > > > +
+>> > > >  source "arch/arm/mach-apple/Kconfig"
+>> > > >
+>> > > >  source "arch/arm/mach-aspeed/Kconfig"
+>> > > > --
+>> > > > 2.34.1
+>> > > >
+>> > >
+>> > > Regards,
+>> > > Simon
+>>
+>> Regards,
+>> Simon
+>
+>
+> Regards,
+> Moteen
+
+
+Regards,
+Moteen
+
