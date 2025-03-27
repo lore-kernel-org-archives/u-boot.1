@@ -4,52 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544B8C3600B
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 02:21:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B542FC3600B
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 02:21:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E802B81DCC;
-	Fri, 28 Mar 2025 03:20:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 481A881E06;
+	Fri, 28 Mar 2025 03:20:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="jv2GBS7i";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=nicolas.frattaroli@collabora.com header.b="lP2GnU7Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6DA681879; Thu, 27 Mar 2025 15:39:47 +0100 (CET)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
- by phobos.denx.de (Postfix) with ESMTP id 8A0E08003E
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:39:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ id 6D1C4806FC; Thu, 27 Mar 2025 18:08:35 +0100 (CET)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 45345805C8
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 18:08:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pzimmermann@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1743086361;
- bh=ryNOVqpTNu93VBGteovgRdMyZTJpLMjaxdzjFOAuSco=;
- h=From:To:CC:Subject:Date:In-Reply-To:References:From;
- b=jv2GBS7iO4kw99RM+3DCx1FRpjGbUWV5LnzkBNrk+oJtXyZYvgNTF4Sofq0RsRXBp
- VLQWb2CfOtRZrjN4c7/QwDABPannBnfM3/AaAse9Wfgznv4gsKZoON8TgMVz8arSFZ
- 5uGfCOf4mXwzGcGHPhQuJe43NCu4qdo/UNcxe5d5jx1N/SKXW7M4n2hKnGalFRTb3R
- IGsn/DASV6Ldl8XWC+zAlhL1lbV2Pw5YKclHMRxXLmfdSYFrQkPQPFcfz3zYciBbrn
- cGPlcrvT2icJQDLzzgrZY04Lr4Nn5QvP/m0wk6IXFcb2BsqCg2J9mwWkzntLP0XWx7
- EOuhWlVFm+alw==
-From: Pascal Zimmermann <pzimmermann@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Pascal Zimmermann <pzimmermann@dh-electronics.com>, Marek Vasut
- <marex@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice
- Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, Simon
- Glass <sjg@chromium.org>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [RESEND PATCH 2/2] ARM: stm32: env: Enable scan and start for AB
- schema on STM32MP15 DHSOM
-Date: Thu, 27 Mar 2025 15:38:43 +0100
-Message-ID: <20250327143843.19358-3-pzimmermann@dh-electronics.com>
-X-klartext: yes
-In-Reply-To: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
-References: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=nicolas.frattaroli@collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1743095307; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=Jt41UppwR8uWc2YJjCNAw5dUqrdOd6rTCk5IgBxJSZilS9YlahOwQRoPr3DmRssjOyFSfp12ZdEnDSR/5Wnrfnvl5jqJ7iyuDqKvvR92yX1XiHAOqtWEG36USs2r9dfv6kxP0MfEdScBTJwoZ7egrRJNLEtk/41m+Rjj/Bddt3M=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1743095307;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=lWGgzm3fUwyMCf03ElkuQQACQVIutsvC0g3ceZVrQ+A=; 
+ b=Rr1Hjg6oxYKzIdS7VfHJmmlkxN0kwisDfnLIyV3P1RpWT6fPPzhJq4tt6/QNb3jcQDx9Lnl+Q9F0A31TwdYDVwGH5Q1cUy4HcXGmQ0l1dLmLqHyql3mtAJVyTmlanjfFOf/zKBRpHzGugY/QhHZIgSj4zwsSUFwLrZJ7OjpKuwQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=nicolas.frattaroli@collabora.com;
+ dmarc=pass header.from=<nicolas.frattaroli@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1743095306; 
+ s=zohomail; d=collabora.com; i=nicolas.frattaroli@collabora.com;
+ h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
+ bh=lWGgzm3fUwyMCf03ElkuQQACQVIutsvC0g3ceZVrQ+A=;
+ b=lP2GnU7Q5UDAtvYx850Nzna6j7kcVvh4VDOQkhqXS045QlZzkk3ijxj7VxBHmnOE
+ bDbVN1cywnZeSuHVYzjsWnPTMvEQECkW5cnQYdpFxHpouOfdDli7BkO4HRpb+QQVaFd
+ 3I6KzKBVrClAWrVMw3uBRqhKdKpqceQeYJGSRFxI=
+Received: by mx.zohomail.com with SMTPS id 1743095304831295.29546845665504;
+ Thu, 27 Mar 2025 10:08:24 -0700 (PDT)
+From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Tim Harvey <tharvey@gateworks.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Anand Moon <linux.amoon@gmail.com>, Maxim Kiselev <bigunclemax@gmail.com>
+Subject: Re: [PATCH v2 0/4] USB-PD TCPM improvements
+Date: Thu, 27 Mar 2025 18:08:20 +0100
+Message-ID: <13345767.O9o76ZdvQC@workhorse>
+In-Reply-To: <20250226184506.64114-1-sebastian.reichel@collabora.com>
+References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-Mailman-Approved-At: Fri, 28 Mar 2025 03:20:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -67,95 +79,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For the STM32MP15 DHSOM, change the default environment so an AB schema
-on a device can be detected.
+On Wednesday, 26 February 2025 19:44:43 Central European Standard Time 
+Sebastian Reichel wrote:
+> Hi,
+> 
+> I have a couple of fixes/improvements for the TCPM code. Three are fixing
+> actual problems I noticed on the Rock 5B, which prevented booting up the
+> system. One of them simply adds an error print before potentially committing
+> hara-kiri by triggering a hard reset, which helps people understanding why
+> their boards reset themself in case there are more problems. I've recently
+> added the same print to the kernel TCPM code.
+> 
+> Changes since PATCHv1:
+>  *
+> https://lore.kernel.org/u-boot/20241031175404.114773-5-sebastian.reichel@co
+> llabora.com/ * rebased to v2025.04-rc3 (no changes needed)
+> 
+> Greetings,
+> 
+> -- Sebastian
+> 
+> Sebastian Reichel (4):
+>   usb: tcpm: improve handling of some power-supplies
+>   usb: tcpm: avoid resets for missing source capability messages
+>   usb: tcpm: print error on hard reset
+>   usb: tcpm: improve data role mismatch error recovery
+> 
+>  drivers/usb/tcpm/tcpm-internal.h |  1 +
+>  drivers/usb/tcpm/tcpm.c          | 95 ++++++++++++++++++++++++++++----
+>  2 files changed, 85 insertions(+), 11 deletions(-)
 
-For this the define "SCAN_DEV_FOR_BOOT_PARTS" is overwritten and
-appended.
+Tested-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
-The detection works by looking for the partitions with specific lables.
-The name of those partitions are in the variables and its defaults:
-* dh_ab_partname_primary=rootfs-a
-* dh_ab_partname_secondary=rootfs-b
+Used this series on our 2025.04-rc2-based Sige5 tree. Resolves a problem I've 
+observed with PD supplies where the board may bootloop within u-boot. Tested 
+with various USB-C PD sources and cables, all of which worked.
 
-To prevent being hanging at bootcmd, enable "CONFIG_BOOT_RETRY" and
-"CONFIG_RESET_TO_RETRY", but the timer will only be activated, if the AB
-partitions are detected.
+Thanks,
+Nicolas Frattaroli
 
-Signed-off-by: Pascal Zimmermann <pzimmermann@dh-electronics.com>
----
-Cc: Marek Vasut <marex@denx.de>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
-Cc: u-boot@lists.denx.de
----
- configs/stm32mp15_dhsom.config       |  3 +++
- include/configs/stm32mp15_dh_dhsom.h | 33 ++++++++++++++++++++++++++++
- 2 files changed, 36 insertions(+)
-
-diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-index 7e5b5aa67ef..c84116482f6 100644
---- a/configs/stm32mp15_dhsom.config
-+++ b/configs/stm32mp15_dhsom.config
-@@ -10,6 +10,9 @@ CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_BOARD_SIZE_LIMIT=1441792
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
- CONFIG_BOOTDELAY=1
-+CONFIG_BOOTRETRY=y
-+CONFIG_RESET_TO_RETRY=y
-+CONFIG_BOOT_RETRY_TIME=-1
- CONFIG_CMD_ADC=y
- CONFIG_CMD_REMOTEPROC=y
- CONFIG_CMD_STBOARD=y
-diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
-index c004a8cec82..267e3446779 100644
---- a/include/configs/stm32mp15_dh_dhsom.h
-+++ b/include/configs/stm32mp15_dh_dhsom.h
-@@ -17,7 +17,40 @@
- 			" 0x800000\0"
- #endif
- 
-+/* Add the search for AB partitons */
-+#define SCAN_DEV_FOR_BOOT_PARTS						\
-+	"run dh_check_if_ab; "						\
-+	"if test -z \"${devplist}\"; "					\
-+		"then "							\
-+		"part list ${devtype} ${devnum} -bootable devplist; "	\
-+	"fi; "
-+
- #define STM32MP_BOARD_EXTRA_ENV						\
-+	"altbootcmd= "							\
-+	"setenv dh_ab_get_partnames "					\
-+		"'setenv dh_ab_partnames ${dh_ab_partname_secondary} "	\
-+			"${dh_ab_partname_primary}' && "		\
-+		"run bootcmd\0"						\
-+	"dh_check_if_ab= " /* Sets devplist if AB partitions*/		\
-+		"echo test for AB on ${devtype} ${devnum} && "		\
-+		"run dh_ab_get_partnames && "				\
-+		"setenv devplist && "					\
-+		"for partname in ${dh_ab_partnames}; do "		\
-+			"setenv partnum && "				\
-+			"if part number ${devtype} ${devnum} ${partname} partnum; "\
-+				"then "					\
-+				"setenv devplist \"${devplist} ${partnum}\" && "\
-+				"setenv bootretry 60 ;"			\
-+			"fi; "						\
-+		"done ; "						\
-+		"if test -n \"${devplist}\"; "				\
-+			"then echo AB partitions found! ; "		\
-+		"fi\0"							\
-+	"dh_ab_get_partnames= " /* Sets dh_ab_partnames */		\
-+		"setenv dh_ab_partnames ${dh_ab_partname_primary} "	\
-+			"${dh_ab_partname_secondary}\0"			\
-+	"dh_ab_partname_primary=rootfs-a\0" /* Names of AB partitions */\
-+	"dh_ab_partname_secondary=rootfs-b\0"				\
- 	"dh_preboot="							\
- 		"run dh_testbench_backward_compat\0"			\
- 	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
--- 
-2.30.2
 
