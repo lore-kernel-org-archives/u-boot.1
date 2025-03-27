@@ -4,98 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C716C3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 14:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D45C36010
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 14:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FB6281879;
-	Thu, 27 Mar 2025 15:14:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E62A81273;
+	Thu, 27 Mar 2025 15:17:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W9BeTdDn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FJfpKH4A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB34781B42; Thu, 27 Mar 2025 15:14:50 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 0F52681879; Thu, 27 Mar 2025 15:17:51 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3DF081273
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:14:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADDAF806FC
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:17:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3f9832f798aso595300b6e.2
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:14:47 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2c2b7111bb1so500193fac.3
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:17:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743084886; x=1743689686; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743085067; x=1743689867; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cpMQMCDTXB3IrXYmWm2v5ubLPsZ1HB4rg6XSAy66u6A=;
- b=W9BeTdDnc74HvRlzw4hxs/GUScDxzXBjfik7kUJzOuqnbaFUkr+Rvne8sXCkIuSLqG
- g4L1uxGI9QPCu7iewoleBWzUf3BxpWws27z7zgo6bESqiV/+p6Tjp2OIYclXhXQuyIVz
- m1HGAJKUUu0xV7FngZFINWebZMQ2F+VVGF1kc=
+ bh=DaAQliI8gnBzMAAkCV1bBS5xeTZPD/pSYA9F61S8iF8=;
+ b=FJfpKH4Az1kFrj+gv3kFUsTZgXCtAB8qB7pKBf5eBGXxPGRx48VNteNx4Bw346AdN8
+ Mb+V8ZHsUD6nRM+mXjSHawi10WR9b9EvJ62zqLGvTXPzUWzS2I4kFffNaHXFMWPhE2fJ
+ CEPSsmIHqjjlE8VS5HroOGohn7CYQfFyOSTn4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743084886; x=1743689686;
+ d=1e100.net; s=20230601; t=1743085067; x=1743689867;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cpMQMCDTXB3IrXYmWm2v5ubLPsZ1HB4rg6XSAy66u6A=;
- b=A+4wzDzoWuYqABD+eGeH2LdH/vXt99coM2t1X/XcpRpADzX/SlhSiUinxSCWhs0J1p
- 9Cw9hVBuNiIK5Teumpr400BW0e4mX0vbrOXswIhNlROSD4hI4bA+N74xT6S75Fw/4Z3f
- XhyOgPCtdJ05n+GSEbi9OkecpPovOZda7IpzH3ZZ9THY+GDQYp/UIxE+IMbm4msRGHVg
- iWb7LwSqMzbz4Irlfd/nqpwdYGr7pXjYAcMsdm6oKnRXHlo4ngMMEHSomcB318Q8u73p
- e74K8v0SwNqsbzKYgk9b43qSp7GDbdjlPtNwGDyVNK9omqMXYhs7I6GCoxg7gUEdaoqD
- lSIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWohuwomCQd7oo2i5Cnp577qUXqrASVS28SvF5B6NbRD/7/ko/E2V9RxRUi0qNbjnOqDOYQK5I=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyjc1UMRl+PiqP1ZLt1yZ1zIl46OsFi6Ns28J+Bbm6K6Jt6GxWw
- 6mP+UUqJr5PB7GeRlBsJMJ0KpbEqUxptjQQ3b+W6Q3vtRxRoBvjiuhlES7EyfGo=
-X-Gm-Gg: ASbGnctwppjKnX2ILKev6E/j2CtdxAQtVAYNw4cy08T1gCCzZI/PYzWmCiqaEbnjFnh
- itQtZqb8V4nGcJhO3/ijzBtWfcbKjEJ25qLLbtJB86WKHSyZlqFgpRxbBmwBVqCVA4SXvNPMbVc
- 8baInWPj05vMYUJ/5nuK3cGMKpyvKUtNJcKkK3uhTTP5bbTVWVXeUX5L1uE9vhMoKQl05YQzZ8K
- YMVafU3EX+BrtoG2D81SeWQ1kyR5B0ikL3vDlxA++UCtJthmZoPnML1oH2IYvyoIYMK5Rqc7zU/
- C1DdGwD/fwFxTCqvIo1eW3Y+EeP9vaTEUNQnyBl9J20QU8i8mIPiYDhujSQSN/6hxGAiirjF/O6
- ppKoq2Q==
-X-Google-Smtp-Source: AGHT+IFKhYBExtZ1lkiEXxoyS3NpzIg4RqJFXIFPDXMLMrwQ0XsVVhY9dGfAcF9wzaX7AAJ7k9HAFA==
-X-Received: by 2002:a05:6808:1b89:b0:3f6:76f6:b5ca with SMTP id
- 5614622812f47-3fefa53f512mr2601747b6e.18.1743084886478; 
- Thu, 27 Mar 2025 07:14:46 -0700 (PDT)
+ bh=DaAQliI8gnBzMAAkCV1bBS5xeTZPD/pSYA9F61S8iF8=;
+ b=wLCjHflMDwftRbEft8M5HzoShDqtaR/bTwPv1xhhGMGx3xc1qlSrbu5ASd/Ma1xZ5J
+ iWNciqntGisRH9Lw1kYBODCpxjKFlp7pOI+vX7EmupzRXWxAdQ0FxunOFCdhjmRPuA/I
+ U0n6a/vk6SFe18IJNyAJ/OU/odJWDZLuaYMnE+o0YLpf1Vqzp3md9zEExiKdrE1x1w8R
+ ej4ElPJ8gYBJfja9grKx1W96E67ijvdgUALW7Zy7iCkJYwMxtbXbuMsvSWHq0KU/T3BY
+ dgoZJU28EZSi5YphJmnSm+/Jp3s3M+Ryo53e6zSSHNTsX78X5sU+ru3dwKDnNZx5+IWs
+ RUoA==
+X-Gm-Message-State: AOJu0Ywy99kBnCiYi9qpjMMI3KufAyHGcZTtioQnn49pHPpO5xm+9h/v
+ Up3p5q3HRSila/n13JS4lyo6ohrzCg2Mp5nFU2F7RjhciUzhAABpYrRjqeb3Wms=
+X-Gm-Gg: ASbGnctQ8cF8opPXIxS3GFEhkFj6oh6i+dIuau6VbEdJ/C+985eAeG4gv2NAj8yauoQ
+ tJQr5k5j0JJMDhtkEAuw4V4hUGNh0UoUqOLPHxvURjzg6ckbJHOaVoKEJXIB0JNaUoBJKZX4xMn
+ gUprVwp3hc3NqXWV2TVvPR0Td8MCoFYyneDxXzM390cmGCkr2pNCfq7J0JjZ9rGOmy1wy8vNx6X
+ bjnUqJsD8H0EvNnGC8tC3fWtnLlB0LuxsYvJ84bLqd40INU+JbSJm1n5Qi1xI5vq3O9mqyBpkNH
+ 3peeDV1EGC83GucZdRtxZqzmSaiorF68K71c5mvPQUGBf8/Le+XBJV1dDTMqw3A0m7Ql963Amo6
+ ZB9leBg==
+X-Google-Smtp-Source: AGHT+IHIOAApC03GVRZaCQPEXJ6URetVC64jxw6OVsPK8OosJjXDE0KFl3AEb6xDs6271xnPU10SPA==
+X-Received: by 2002:a05:6870:459a:b0:2c8:3620:f595 with SMTP id
+ 586e51a60fabf-2c847ef922fmr2439879fac.6.1743085067046; 
+ Thu, 27 Mar 2025 07:17:47 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3febf6bd788sm2798540b6e.4.2025.03.27.07.14.44
+ 586e51a60fabf-2c7fc2821c2sm1626303fac.20.2025.03.27.07.17.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Mar 2025 07:14:45 -0700 (PDT)
-Date: Thu, 27 Mar 2025 08:14:42 -0600
+ Thu, 27 Mar 2025 07:17:45 -0700 (PDT)
+Date: Thu, 27 Mar 2025 08:17:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Mario Six <mario.six@gdsys.cc>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v4 00/12] Add imx8mp video support
-Message-ID: <20250327141442.GO93000@bill-the-cat>
-References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
- <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
- <20250303170640.GS2640854@bill-the-cat>
- <CAPVz0n01g9JghOb1JCPg1sCwOf-w0AcjMZRngGZbAK_C_VhGcA@mail.gmail.com>
- <CAOMZO5BMZi3adJCcxVq3-04YY8yAAVqkdcy8Q1tMzMsK+W0rEA@mail.gmail.com>
- <87pli3q1j9.fsf@bootlin.com>
- <CAOMZO5DnfOSGg0wCZpoqw9EsyLWL-ezDshGZT1s8WuBu-K_CrQ@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/52] expo: Various features and improvements
+Message-ID: <20250327141742.GP93000@bill-the-cat>
+References: <20250319145512.2391122-1-sjg@chromium.org>
+ <20250319145742.GI2640854@bill-the-cat>
+ <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
+ <20250320142121.GQ2640854@bill-the-cat>
+ <CAFLszTgsMu1ZtK1Z-u6cmH6k__0Qhn+G2SPh8w_NdrihLkQ7jA@mail.gmail.com>
+ <20250325162420.GI93000@bill-the-cat>
+ <CAFLszTj49W-Vk_4xpmvtyFH6AH1QAZTLRM7x1k-Bhz7a3uEuBQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="I6g65dlD8/1lPAdz"
+ protocol="application/pgp-signature"; boundary="bCwGPP+C/gUPfjMu"
 Content-Disposition: inline
-In-Reply-To: <CAOMZO5DnfOSGg0wCZpoqw9EsyLWL-ezDshGZT1s8WuBu-K_CrQ@mail.gmail.com>
+In-Reply-To: <CAFLszTj49W-Vk_4xpmvtyFH6AH1QAZTLRM7x1k-Bhz7a3uEuBQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,75 +123,150 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---I6g65dlD8/1lPAdz
-Content-Type: text/plain; charset=utf-8
+--bCwGPP+C/gUPfjMu
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 27, 2025 at 10:31:18AM -0300, Fabio Estevam wrote:
-> Hi Miquel,
+On Thu, Mar 27, 2025 at 07:36:02AM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
-> On Wed, Mar 26, 2025 at 12:01=E2=80=AFPM Miquel Raynal
-> <miquel.raynal@bootlin.com> wrote:
->=20
-> > I rebased this work on the latest next, fixed the conflicts, adapted my
-> > changes to use Svyatoslav's work, fixed the CI.
->=20
-> v5 still fails in CI:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25364
-
-And the exact failure is:
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1078073#L259
-
-Which looks like a series conflict or test needing to be updated, rather
-than a "what the heck???" kind of failure like before.
-
-> > Then I pushed a PR to trigger azure tests and figured out you applied m=
-ore
-> > patches (imx8 clock related) which conflicted. So I rebased again and
-> > fixed the conflicts.
+> On Tue, 25 Mar 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Azure testing is failing though. I just pushed an empty branch with just
-> > today's 'next' and it is already failing, my series does not produce
-> > additional warnings as far as I can see.
+> > On Fri, Mar 21, 2025 at 07:38:45PM +0100, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 20 Mar 2025 at 15:21, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
+> > > > > >
+> > > > > > > This series collects together some new features for expo to m=
+ake it more
+> > > > > > > useful for boot menus:
+> > > > > > >
+> > > > > > > - measurement and display of multi-line text objects
+> > > > > > > - internal alignment for objects (e.g. centred text)
+> > > > > > > - editable strings in text fields
+> > > > > > > - new 'box' object to draw a rectangle
+> > > > > > > - highlighting of menu items, rather than just relying on a p=
+ointer
+> > > > > > >
+> > > > > > > Expo's boot menu is restructured so that it is possible to it=
+erate
+> > > > > > > through various bootdevs and update the menu as new ones are =
+found. This
+> > > > > > > is more in keeping with how bootstd works.
+> > > > > > >
+> > > > > > > A new textedit object is added, intended to provide a simple =
+text
+> > > > > > > editor. Future work will complete this.
+> > > > > > >
+> > > > > > > With this series the boot menu has a better layout and appear=
+ance.
+> > > > > > >
+> > > > > > >
+> > > > > > > Simon Glass (52):
+> > > > > >
+> > > > > > I see you haven't internalized the "don't post massive series" =
+feedback
+> > > > > > yet. Please, stop posting massive patch series. Figure out how =
+to
+> > > > > > logically break things down in to smaller chunks that can be
+> > > > > > meaningfully reviewed.
+> > > > >
+> > > > > I could split this into two series of ~25 patches, perhaps. Would=
+ that be OK?
+> > > > >
+> > > > > I believe no one else is using expo yet, apart from postmarketOS,
+> > > > > except the trivial case of 'bootflow scan -m' but I'm hoping that=
+ will
+> > > > > change in the future. I believe that Linaro is mostly encouraging=
+ EFI
+> > > > > bootmgr and the text-based menu. That could be converted to use e=
+xpo
+> > > > > but I doubt anyone has looked into that, particularly as grub is =
+being
+> > > > > pushed as well. I did look at converting the existing menu code a=
+ year
+> > > > > or two ago, but it seemed better to eventually deprecate it.
+> > > > >
+> > > > > Also, there is a following series which I split out and will post
+> > > > > separately, but not for a while as I have a lot outstanding.
+> > > > >
+> > > >
+> > > > It would make sense to split expo out to its own series as there's =
+not
+> > > > likely to be any feedback there. All of the other parts of the seri=
+es
+> > > > already have something else in their subject and that would be logi=
+cal
+> > > > places to split this up more and then assign to the appropriate
+> > > > custodian. Thanks.
+> > >
+> > > This is the expo series and it only has expo patches, so I believe we
+> > > are OK there.
+> > >
+> > > The bootstd series is small and its own thing.
 > >
-> > So I am sending a series that has been tested locally. dm unit tests
-> > pass, v5 is on its way.
+> > OK.
+> >
+> > > I can split up the strim() / test series,
+> >
+> > OK.
+> >
+> > > but I'm still unsure what
+> > > you are asking for with respect to code which is not yet used. I can't
+> > > reasonably do all of a) send code only when it is needed by later
+> > > patches in the series and b) keep series sizes small and c) keep
+> > > series related to a single topic.
+> >
+> > I don't see why you can't do that. It is in fact really hard to review
+> > how useful some library functions you write without seeing how they're
+> > used and if in turn we should be doing something different. You might
+> > need to defer or break out as it's own some refactoring changes in order
+> > to meet 'b' above. However "here is a thing" and "here's using a thing"
+> > are still a single topic.
 >=20
-> If I remove your series, I don't see any test failure:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25365
->=20
-> I don't know about the Azure failure. Please work with the team and
-> make sure v6 passes in CI.
+> You could just review the code itself, perhaps, rather than worrying
+> whether it will never be used? For me, creating and maintaining a
+> series through acceptance into your tree is still a lot of effort,
+> unfortunately.
 
-I see that the Azure failure is:
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10824&view=3Dr=
-esults
-which was the unfortunate "next is broken because master has a fix and
-next has a test that needed updating now" that happened this week with
--rc5 being merged. Sorry about that, it's fixed now.
+No, that's a no-go. Reviewing a library without knowing how it's going
+to be used is not effective.
+
+> While on that topic, it seems that the sunxi and rpi series have still
+> not been applied to your tree. It would really help to see some
+> movement on those after all these months.
+
+I provided a detailed explanation of what's still wrong with the sunxi
+series. The Pi maintainers are still actively working their way through
+things.
 
 --=20
 Tom
 
---I6g65dlD8/1lPAdz
+--bCwGPP+C/gUPfjMu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmflXUsACgkQFHw5/5Y0
-tywjLgv9Ff9oeSrUUpf1oeWoDZr2qc5y1TaUD5AcoxAlSFLUXf1pHxK7YVOg5knD
-7fsyybvuGAao+7tc8UhVGGRk/1cQSCCkl2PqISXEcnn+X7YRFZWfm89SA69TYssL
-i8s6jCC8QKLrSO6f32PL3TbTF7E1fq0eWC+9741V8Yxhwb6wvm+i53DgC9RvnA3y
-+/2LUu+SP3ZqUssRu9tl54CZPU/5k6Jp1PTzxR2xA0zyqUf0TWJu1ElN9E6czZFw
-4rLhkTFJV3OpUzYbgcYIdTizEnBe1VG1Hz68ZWb6+/ms3Hcm+iks+q43zT1fAtfQ
-0mVB9Dl4b0JU7DgVzcl/6VwQbBAA49m28DItEbMZJ2pcTXwm2PJj1K/xD0Nyb11U
-PIvtVW584rnsYtmIq9LwRw70F1ixfR8GvHGIc+0xNgDo+QWbvwpTYfuGTX7jZuh9
-CdfhVo6WANdWrnZnxhhGu9KuZFscaHjQwzic3Ado22Uk+ynrnPQrnpBPTuxwjUWn
-pUr/4daS
-=2XGX
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmflXgYACgkQFHw5/5Y0
+tyyBhAv9HqTTKiPwtxIkLsOFvMM08PAdOfv3e+Qbiate4NxqXRJ5iX4iTviEENOg
+BRsjmfwQqwr1LQLkS2IyRGDSNxGMlcoooZfqbCb5P4VR2vAW/lCPfeYjze73MxHm
+3OyXb75GWai+TG66IcA/as+2ZLPHWX2qaDPc2CmIOLXeCdSnrpXrpU/lFbDKkZfs
+GtZ7MS2YBrMMV5ntLwwXqbbPklyjk1t+3ru22yf1AJkAtv9ftktPNtFB77Uwa7/1
+d0W0A6T6u63G+FeRcIqYvbAre9nnN2lTeF79DNMjWkFLMHXyJAYgS2v+nZV70XYa
++sBjTA4MRD4aYD09epY40RjLCFuS0jVNB+vnC/yuEb6XD7lXCYLNslDz07EPkpvO
+6qDJvJF3pLO/V5HKivs0yIZfP//wJ2lT2BWkP7hapPpw7fSwKKzNu34sFdh6GBs4
+dSVV9tv1AvniTZWNByUb2grbzBoA+3QR6Q/N7L7pGSWfiT/4sx1EjJvd00hSQev5
+TU8X2jOT
+=sodK
 -----END PGP SIGNATURE-----
 
---I6g65dlD8/1lPAdz--
+--bCwGPP+C/gUPfjMu--
