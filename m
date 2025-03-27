@@ -4,96 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD2E7C3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 23:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DEAFC3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 23:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 644A481D65;
-	Fri, 28 Mar 2025 00:13:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3EA37810EA;
+	Fri, 28 Mar 2025 00:50:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jfKrITD0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mLSSx2y1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 231E68129B; Fri, 28 Mar 2025 00:13:41 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 0FA66810F4; Fri, 28 Mar 2025 00:50:06 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F32558070C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 00:13:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98F628070C
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 00:50:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-476af5479feso14161171cf.2
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 16:13:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-72c09f8369cso423368a34.3
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 16:50:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743117217; x=1743722017; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MQu9gkzttx5o3D6UrhD+56vx8IoJyPL+7EcStdv6gNI=;
- b=jfKrITD0dWM99KsDpUa23mcZvq2U3b3oDPzL0ENzkXCr3V8uCOgraFaokjreV3uot5
- UBBlSX6YQ/ld+2vQ+Th4B9rIcZCumAc3slYBZ+PkGe8yEMtaco6Q//CKKFeXTzyAVD16
- i2YOzUrxlHS9zkeATYi1hMlih6u5z2bZry0U4la4zXeHY/0KTl0qYwRp3SQsSs4EhTce
- W+wgXBdXwPQfMZBShN5wqAOyYo9ion6thRH/1DMoo9neZEMwOHCpFb5xcRaUrYuDN3Lx
- jEA+GzFVoTbNrLH8g3y4jbvoIaKXGuAFlI5x8HqR4pp7CyTqqkVbUMk13zdp6LTcOvNl
- piDQ==
+ d=konsulko.com; s=google; t=1743119402; x=1743724202; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=u3aPukSGvY5k3yWCWv63F60dWWx/8dTzOrF/pWbS790=;
+ b=mLSSx2y1JgMXJP1JTuZQXq1fOfachflOiSpYvK2tDjssThKRXmiHN+Y+r1kA+xArkA
+ r0WHI5y6wEe7mxhCfw0XdCh2l1n7lFQl5OYF5VOp4Zm3qZfj/o7DDAY+4uzaU5APMzuk
+ NrLVGR47Kx7mBnqgQGLsBAmT80BO91GQoz0dg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743117217; x=1743722017;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MQu9gkzttx5o3D6UrhD+56vx8IoJyPL+7EcStdv6gNI=;
- b=EJPOWCuhqXRCqGuHvFGZVRnKaq9zrwRwawz/WMcDhuGds/vRACPacAlZv6BxZPdaKj
- sWsgohQZTPKqC95D2tFpUensvd6ca5gMpRPA9OWaY377UiwAoRTFSUSf93MNemHhYcyG
- 33r2LnTwcqtNKdYzxxUY+xYUzvWHCQ2Ohk2obE0V+R5fl4eQ+A3GkCRQ3GCe5F7GumQK
- gW1jNnoiZYtBgiHrpiLHQaF9/fI0QMsDQxI8NX/EnKGv+Fow635rMXmi5amL+XoWgq6x
- Vn1o7UCvyTtQH3Od83TmwRdELduQFT14Q4u5lSt/MkveOC/Wn7lD9V14fTti3PRiugdH
- /s4Q==
-X-Gm-Message-State: AOJu0Yz6UYl7LsccGYry3gqL8sXJKYlvRhf5e/lvM9ZCFFcxDP+nLlM7
- 1CbUE0tAEux9bix3mPSIq0lRROrDhmWdRGDfQfnGtqysGDMc1Ia9eE15xjHL739af2ZkqFb15mo
- 7
-X-Gm-Gg: ASbGnctfWtgOK0X4hFgLMjqTsWEPLr2pwt2PRbkgZcqdycGc/YrZl59e9sXPVpyUCmW
- r+cq9I+siS023b2VpzqPZX3GQSB5mdpJhrSd3b6SBrcnpU8KUw8s/flk6gAxdRh3dM9vxKliAKs
- DW4/FPbrEsIYWkAGZNUSpnkQeTI308j+dG4MUYu3IWuxPrROV4lXsJ7TdlwyW9h+HAW+cN1KWJB
- fL0Fi57QLbygT3rm56x7tq7H5nvXabInDfDQ3zhTsKXFRrZ4XjxYpQu+iuyY4deeeDCnW7hSK0+
- IJF0kspF2BIdIj72D9ZDfOUf5uKOst2qEOUywTvRvZlrF8UlwgNklYDLyBi7kem/hjyewg==
-X-Google-Smtp-Source: AGHT+IHbE+sFE9v2cSCIrNQsV+twSs6n128RxpsecWyn/MiDUH1fU78+A3i2xoLcEnLuLxfK8ch5gA==
-X-Received: by 2002:ac8:7f88:0:b0:477:6f6d:10fc with SMTP id
- d75a77b69052e-4776f6d1158mr66128111cf.5.1743117217402; 
- Thu, 27 Mar 2025 16:13:37 -0700 (PDT)
-Received: from ubuntu.localdomain ([209.227.153.148])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-47782a7fa50sm3283761cf.45.2025.03.27.16.13.35
+ d=1e100.net; s=20230601; t=1743119402; x=1743724202;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u3aPukSGvY5k3yWCWv63F60dWWx/8dTzOrF/pWbS790=;
+ b=Y6HHsozT/YC5N7meDaIxUrLz1pFwWxrWBLPJrEXfnDy/LZ+fNeSQ8AgRouYRqJfrn6
+ 1jByGRClaIdd2D+6PCvEEaESMo9BVVMwLJPVADBi4pNrJdmGkEka8ELYfSbOJgcSJzYW
+ v7Ms73ektGXtNcPEQ1Pn649YDf04nBh686jdAAq8zkmUupFfTGEco64DV3C25Tb2XGnD
+ 7ikM5JXHowoK/Jk+mAyomh0VNr1dfQyQB64tC/KeueYMB/7yJy9/WQJHB0kzc30gpoFw
+ VAPT3tFKieNXkY6b8CYkJ5o2ZkOqJmMeJ79LipTytKVhqn/uP27Ug9+EKyeYEuVvtPih
+ UoQg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUVfI7vSHRgkb9Al5nhuo+0p+OrKzBbHLu01v796Zu3G5nzjNMwXAljUIaFOv/natQiM15poe8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyPjM8FCjqse9wlWQduaEq9fM2u4fzK5jSQlFbH31lIj49h9sN
+ AMdNZWSJ92iBgGewmeIn3/wOUIQ0GWXKDDNE/LWphWFC0rx3ZSDgWn4RhYMeJlA=
+X-Gm-Gg: ASbGnctcZbYPell3NcUmcOlft5+iem/DpIoqtAzDCN9T4kBHCTyqK3dWhtnM0uvMzee
+ rI3CfQ67aH4VpmftWb1Dhvjp10R+MtmBO5UreIGQbCs6Yn4H7O3Uu0J1ErWcxtnx5m+lmX9Qt0H
+ PnyR6WlZpfGrNELFHE39BU+CnaA5vgqoKBMDbcPv8B6Qd88fyEbWAnMtPtD75Aiys8vaK7k57iX
+ axsEOJXNploq/aMGxB9lu2K/wKAiFZzFk4XKK764P5/WjR/FnR39qtPqiGZ5rvOTLqL+G4GoRuk
+ j4WkvYODNUwPVupwev16LiQBE/BkTpG/LI9PO96T2xeqw46ilyn2LHPV/dG2JVeYrhQoe2on8AI
+ ADDpeKA==
+X-Google-Smtp-Source: AGHT+IGjLQ/3Y8bL+epbyCnzKMSw25s9rCDcDumlLIEpCbZ1kheI5Nj306A0Pwn4CHd3HU3KjzLp6g==
+X-Received: by 2002:a05:6830:6c0e:b0:727:3439:5bec with SMTP id
+ 46e09a7af769-72c4c9f1998mr4202757a34.15.1743119401935; 
+ Thu, 27 Mar 2025 16:50:01 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72c580fa72fsm173811a34.41.2025.03.27.16.50.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Mar 2025 16:13:36 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ravi Minnikanti <rminnikanti@marvell.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 2/2] env: point fdt address to the fdt in a bloblist
-Date: Thu, 27 Mar 2025 16:13:17 -0700
-Message-Id: <20250327231318.2713201-2-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250327231318.2713201-1-raymond.mao@linaro.org>
-References: <20250327231318.2713201-1-raymond.mao@linaro.org>
+ Thu, 27 Mar 2025 16:50:01 -0700 (PDT)
+Date: Thu, 27 Mar 2025 17:49:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
+Message-ID: <20250327234959.GS93000@bill-the-cat>
+References: <20250319114947.2188805-1-sjg@chromium.org>
+ <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
+ <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
+ <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
+ <CAFLszTic6gt4fT4pVVthd-3rRy6JZ_28QLXWOYPak=ZJqYH5QQ@mail.gmail.com>
+ <ef183d5a-48d3-4068-be11-04edd55febf5@cherry.de>
+ <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nh3HXs3fPXyo8zyo"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,57 +104,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Point fdt_addr to the fdt embedded in the bloblist since fdt_addr
-is a default address for bootefi, bootm and booti to look for the
-device tree when launching the kernel.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- env/common.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+--nh3HXs3fPXyo8zyo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/env/common.c b/env/common.c
-index a58955a4f42..a38e5d107a8 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -16,6 +16,7 @@
- #include <asm/global_data.h>
- #include <linux/printk.h>
- #include <linux/stddef.h>
-+#include <mapmem.h>
- #include <search.h>
- #include <errno.h>
- #include <malloc.h>
-@@ -368,6 +369,18 @@ int env_get_default_into(const char *name, char *buf, unsigned int len)
- 	return env_get_from_linear(default_environment, name, buf, len);
- }
- 
-+static int env_update_fdt_addr_from_bloblist(void)
-+{
-+	/*
-+	 * fdt_addr is by default used by booti, bootm and bootefi,
-+	 * thus set it to point to the fdt embedded in a bloblist if it exists.
-+	 */
-+	if (!CONFIG_IS_ENABLED(BLOBLIST) || gd->fdt_src != FDTSRC_BLOBLIST)
-+		return 0;
-+
-+	return env_set_hex("fdt_addr", (uintptr_t)map_to_sysmem(gd->fdt_blob));
-+}
-+
- void env_set_default(const char *s, int flags)
- {
- 	if (s) {
-@@ -392,6 +405,10 @@ void env_set_default(const char *s, int flags)
- 
- 	gd->flags |= GD_FLG_ENV_READY;
- 	gd->flags |= GD_FLG_ENV_DEFAULT;
-+
-+	/* This has to be done after GD_FLG_ENV_READY is set */
-+	if (env_update_fdt_addr_from_bloblist())
-+		pr_err("Failed to set fdt_addr to point at DTB\n");
- }
- 
- /* [re]set individual variables to their value in the default environment */
--- 
-2.25.1
+On Wed, Mar 26, 2025 at 10:46:57AM -0600, Simon Glass wrote:
+> Hi Quentin,
+>=20
+> On Tue, 25 Mar 2025 at 04:20, Quentin Schulz <quentin.schulz@cherry.de> w=
+rote:
+> >
+> > Hi Simon,
+> >
+> > On 3/20/25 4:26 AM, Simon Glass wrote:
+> > > Hi Quentin,
+> > >
+> > > On Wed, 19 Mar 2025 at 16:31, Quentin Schulz <quentin.schulz@cherry.d=
+e> wrote:
+> > >>
+> > >> Hi Simon
+> > >>
+> > >> On 3/19/25 4:03 PM, Simon Glass wrote:
+> > >>> Hi Quentin,
+> > >>>
+> > >>> On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schulz@cherry=
+=2Ede> wrote:
+> > >>>>
+> > >>>> Hi Simon,
+> > >>>>
+> > >>>> On 3/19/25 12:49 PM, Simon Glass wrote:
+> > >>>>> Logging of function return-values is used very frequently in U-Bo=
+ot now.
+> > >>>>> Add a few helper macros to make it less verbose to use.
+> > >>>>>
+> > >>>>> It turns out that the log_ret() variants are not so useful, since=
+ it is
+> > >>>>> not obviously where the error is coming from. So only the log_msg=
+_ret()
+> > >>>>> variants are worthy of these macros.
+> > >>>>>
+> > >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >>>>> ---
+> > >>>>>
+> > >>>>>     include/log.h | 26 ++++++++++++++++++++++++++
+> > >>>>>     1 file changed, 26 insertions(+)
+> > >>>>>
+> > >>>>> diff --git a/include/log.h b/include/log.h
+> > >>>>> index 4f6d6a2c2cf..bdda7af570c 100644
+> > >>>>> --- a/include/log.h
+> > >>>>> +++ b/include/log.h
+> > >>>>> @@ -380,6 +380,32 @@ void __assert_fail(const char *assertion, co=
+nst char *file, unsigned int line,
+> > >>>>>     #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
+> > >>>>>     #endif
+> > >>>>>
+> > >>>>> +/*
+> > >>>>> + * LOGR() - helper macro for calling a function and logging erro=
+r returns
+> > >>>>> + *
+> > >>>>> + * Logs if the function returns a negative value
+> > >>>>> + *
+> > >>>>> + * Usage:   LOGR("abc", my_function(...));
+> > >>>>> + */
+> > >>>>> +#define LOGR(_msg, _expr)    do {            \
+> > >>>>> +     int _ret =3D _expr;                       \
+> > >>>>> +     if (_ret < 0)                           \
+> > >>>>> +             return log_msg_ret(_msg, _ret); \
+> > >>>>> +     } while (0)
+> > >>>>> +
+> > >>>>> +/*
+> > >>>>> + * LOGZ() - helper macro for calling a function and logging erro=
+r returns
+> > >>>>> + *
+> > >>>>> + * Logs if the function returns a non-zero value
+> > >>>>> + *
+> > >>>>> + * Usage:   LOGZ("abc", my_function(...));
+> > >>>>> + */
+> > >>>>> +#define LOGZ(_msg, _expr)    do {            \
+> > >>>>> +     int _ret =3D _expr;                       \
+> > >>>>> +     if (_ret)                               \
+> > >>>>> +             return log_msg_retz(_msg, _ret);        \
+> > >>>>> +     } while (0)
+> > >>>>> +
+> > >>>>
+> > >>>> Mmmm not sure this forced return call is a good idea, this would f=
+orbid
+> > >>>> us from performing some unwinding for example.
+> > >>>
+> > >>> Yes, it is really only for simple cases. Without the return, there
+> > >>> isn't much value and you may as well not use this macro.
+> > >>>
+> > >>>>
+> > >>>> I don't really see how that is better than simply calling
+> > >>>>
+> > >>>> return log_msg_retz("abc", my_function());
+> > >>>
+> > >>> That's not the intention. It actually replaces:
+> > >>>
+> > >>> ret =3D my_function();
+> > >>> if (ret)
+> > >>>       return_log_msg_ret("abc", ret);
+> > >>>
+> > >>> I use this a lot in my code. You can't always just return, since th=
+ere
+> > >>> may not be an error.
+> > >>>
+> > >>
+> > >> I see, I read too fast again. Only return if it's an error.
+> > >>
+> > >>>>
+> > >>>> ?
+> > >>>>
+> > >>>> If we were to keep this, I would recommend to rename the macro and=
+ fix
+> > >>>> the docstring because it does not only log if the function returns=
+ a
+> > >>>> non-zero value. It does actually return.
+> > >>>>
+> > >>>> So something like
+> > >>>>
+> > >>>> LOGZ_AND_RETURN(_msg, _expr)
+> > >>>>
+> > >>>> maybe?
+> > >>>
+> > >>> Sure, longer names are easier to learn, but then it is so long I do=
+ubt
+> > >>> anyone would use it.
+> > >>>
+> > >>> Perhaps LOG_RET() and LOG_RETZ() ? But they might get confused with
+> > >>> log_ret() and log_retz(), which I am actually thinking of deleting.
+> > >>>
+> > >>> I would like the shortest possible name to avoid spilling functions
+> > >>> onto the next line all the time.
+> > >>>
+> > >>
+> > >> It should be absolutely obvious from the macro name that this can in
+> > >> fact return because missing to unwind code is among the things
+> > >> developers typically easily miss already, so with this macro it'll be
+> > >> even easier to forget about undoing things.
+> > >>
+> > >
+> > > Yes that's true. We don't have a huge amount of tests for this 'undo'
+> > > code either. I would bet that a code-coverage map would show that.
+> > >
+> >
+> > Yeah but that's not a reason to make it even harder to spot issues in
+> > the undo code :)
+>=20
+> I suspect people will just have to learn the macros, as they have with
 
+I would ask "What kernel construct have people already learned and we
+can adapt inside the macro?".
+
+--=20
+Tom
+
+--nh3HXs3fPXyo8zyo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfl5BsACgkQFHw5/5Y0
+tywbBgv/Yio18p88z81/0VY8OS0rocTsHB1+RjR1QtJyo0EgBAXt9oXsscuw7dNx
+icpEAYuI2HosATi7sYl9s2kJX6gLe2iCr0NnTe0vn5k+pYINc6pDyUjuCGS6ONBb
+SpGcB+zGfPonV14tmVu4fsLC4+9IdTK5V9ylkEbe/dqYnY1CNSAtbXt+8xQR/qJX
+X6lC3c6q3oxfwTQCP30wE0CIGM4XDTxmwc0blficOh1v9o7RCEEW2ZQFg31AjRd3
+jQMq7o5a8MpCAx75q84EydGD2G6CFB/Uh3/jZRzZD/Uc1VMAHewn5hI7gWBwFgkV
+gX8Eg5xPw1wavlmFfKWvW4SOBD4tPMFnWWhcb7y1DD009w1iIMNGBzkjOvJB6xRH
+oJ1GFFfhoRB2x0/gOf2Tpf6TOSw2qELaAmBFCvh7eGLSAp/Ab2uAGXLQY9qJXVgU
+Bf+6TIOwaumWEvtq0j2deGXc8JSKj9xc3sHFSzrl07CHeIkEyuURgnkP9oWBRhxZ
+iJRrKHQ9
+=N8Sv
+-----END PGP SIGNATURE-----
+
+--nh3HXs3fPXyo8zyo--
