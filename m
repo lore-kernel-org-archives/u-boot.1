@@ -4,78 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71517C3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 13:18:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9605AC36010
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 13:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B48781273;
-	Thu, 27 Mar 2025 14:18:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CA78E81951;
+	Thu, 27 Mar 2025 14:31:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1743081523;
-	bh=5A48R2CmUgxeRRk52i46YPZ8dXtyCUo5Qq2LNnbjKnI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=BHMidR4rH8wCs/2UmM2KfYpH8XkrNtzPk9kl6cnSIjKLdDjnNMhhLVvfmc7eGS36t
-	 FVptoaNrnKcr6x6s83MFUfxdWX/uC3cIJvRhZ+RO3mHlIgQtwXXj3H5DFHn3+hRvYe
-	 j6pxMo/6xam7J64SLll/r87GyO4sCVXUJ6LD/5uQJQrWNjSPBbRKIAWIqAOXPTIkdQ
-	 i2ixGgF7Z9S/mh9GnMytDBCS/JopmXTH5O7BINbZ0wQHZzf/f/btXLXgVH+R1J7B19
-	 fuCts98tonl7tJ6tCtpmu+5GLACa8sJpnwvf6+YZ/oknCQkT6O1qF/sOVsu2lK1HNC
-	 D4EBvCeRmj1sw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A987481951; Thu, 27 Mar 2025 14:18:41 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AA0C806FC
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 14:18:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="SROCpYJd"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 64831102512FF; Thu, 27 Mar 2025 14:18:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1743081518; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=5A48R2CmUgxeRRk52i46YPZ8dXtyCUo5Qq2LNnbjKnI=;
- b=SROCpYJdGz9gSxwpK8kjiBHUPVkzqDK4LlIbIJeogCTlnk1aZQK/wYw3uzEhdRxK9LN5/o
- MO0YVWcGlxBtUBxG+iKlNp8fd5ZnQv4KLfnjDuDJ6T5GBG4TH0E6K/evnFnZ17o6WyPECD
- 9ysc8RVxq+98+wr/dH3RZNkWGHp1ueP9uvX+iUt2kWmKlC12SZOdkpgrvtF1ysJ5F/pySm
- 8EE8kpwiJiMCHyP/6+niCNDZEWh8wj0ZF/a0WEdxJDuxe7bxrvcY0TEOt+YeMDHEodHDx7
- jFZPIwUIsemX0D9k08cUMvcdKIs71J9/DFlxYRBDqecwjdDK1HGUq2o916xXNQ==
-Message-ID: <bbb8ecca-789d-40cc-93a8-e7284e1af840@denx.de>
-Date: Thu, 27 Mar 2025 14:18:34 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G9ITttNR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6C92381A0C; Thu, 27 Mar 2025 14:31:34 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 09CFF806FC
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 14:31:32 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5499d2134e8so1091752e87.0
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 06:31:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1743082291; x=1743687091; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=02/F1o9kQqLWiRaJ7aGgU0aLWdPYtvdclntzWKkWyOI=;
+ b=G9ITttNRDiMmXIebWJx+WApLkV9pt8slimiM6lrZhvWHD9RlNOPjReqDIzL8V0en0r
+ TGewmeHecJorOnIuNhIIIl1Ik6u1BCVasoBleXLhjI7/yO+2RbDVNuyfyz75M/dphv9y
+ p27gro2KKOgWaKV9Y5P4w099DFBU7K7KM7uXqWJ3HeD9J1Mj2CZ4QHOJRKgloVYFfhal
+ EROQQLWn1uP5UazKGVoOwI5qfd8mFaygh5hHrDC9R0Zj8iipcPnjGoUtlwklMNbOj0RF
+ wfwvtV34kWcb12h97GuDV1m6a0tcp1btiCEDr0dtboD+wMOcUMoHG9HVR+zVxCrczA2K
+ OFxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743082291; x=1743687091;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=02/F1o9kQqLWiRaJ7aGgU0aLWdPYtvdclntzWKkWyOI=;
+ b=L43MXQfEX8m+WlGBRB8iXtqOqsG3oaBBnHBNXqMq8cBBxhN7f31HsuM8kN3BOv2RbW
+ 4O3bgOe6GMTg3h6B9AJTtmOJSLX4J+dT6peCdmDYY5w/4gXEZKnFtZ0HSQz89x7ER2/j
+ /shoaLiUIouht/zsrW4YKH7uPDfgFJLXKIfgyTEsmKpznmKsPoTpTA0JwjYht0V4tj3l
+ YuJgcSotJ4F/nEHQ0ZCWFOF0bPdOomPWpHVUpbsfen+f5P6yjbmedTbEefPygYBXs6TH
+ t07pa1nZm0R7k+PuId6k6RL9gtHK6vi+RPpRlSgZPJb56AfFDFc3Qma+iAxhjbTUz2Pq
+ zfpQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpkQPz0PMdWWf+URG5lj7f5DXVlh3dw8+dHTjHe5qbGlUZUBHibcktd6YMeM/W/K8uvHnxMtk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7COBEHNSRJi219mwouSq1S6wUBAsHZs3n0s8Nhs1QfDLj7lIi
+ aDY2IlAlA7ipDFL/gFq0z6ZyW0x1z40CLvareNNLaxyzdt9xfJGTAi/30CDH1b18ri6XtzW9ZnH
+ 1fCVrlKkyur+gT0oknj3fQkP1nOg=
+X-Gm-Gg: ASbGncttUGHADHqaHzU7wqzUJhGTpzFpbrl3gWtlFgxPQ1cNPKR+EErytTM9woV13Vj
+ BhE9GKQp7bsUUlrA7eZwumzL7LMyv29L10DoDNcD1sT4+4WYsb1suJA1o/+JgzjDzEFeR3xZMlA
+ kWZpfzz1WsnHgDtgEH0yLKldWd9ZFvHjxvbFFwR4ZT6VQJkjegDQZEsNOn
+X-Google-Smtp-Source: AGHT+IHYg/RXfmzBEgFdin5PLHs/IrgPA6jf5hPfOWXENpGKlCgBvkSnTvQe/q8PlW+lh8s9L5EFMPSbG2qlUvPIhDc=
+X-Received: by 2002:a05:6512:3b06:b0:549:43f2:8e53 with SMTP id
+ 2adb3069b0e04-54b011d7e08mr1401605e87.20.1743082290936; Thu, 27 Mar 2025
+ 06:31:30 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 02/19] pinctrl: nxp: add a pin controller driver based
- on SCMI pin control protocol
-To: Peng Fan <peng.fan@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
+References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
+ <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
+ <20250303170640.GS2640854@bill-the-cat>
+ <CAPVz0n01g9JghOb1JCPg1sCwOf-w0AcjMZRngGZbAK_C_VhGcA@mail.gmail.com>
+ <CAOMZO5BMZi3adJCcxVq3-04YY8yAAVqkdcy8Q1tMzMsK+W0rEA@mail.gmail.com>
+ <87pli3q1j9.fsf@bootlin.com>
+In-Reply-To: <87pli3q1j9.fsf@bootlin.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 27 Mar 2025 10:31:18 -0300
+X-Gm-Features: AQ5f1JqOGRimjsjf6s9kG5Kp73FSW3V3ZbORblShtVTYSin9G5cLxdx5TpYzNhU
+Message-ID: <CAOMZO5DnfOSGg0wCZpoqw9EsyLWL-ezDshGZT1s8WuBu-K_CrQ@mail.gmail.com>
+Subject: Re: [PATCH v4 00/12] Add imx8mp video support
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@karo-electronics.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>, Ye Li <ye.li@nxp.com>
-References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
- <20250321-imx95-v1-2-f2c8ba815f89@oss.nxp.com>
- <a180b7e6-6978-4814-97ff-05e34223938f@denx.de>
- <20250325080614.GC27303@nxa18884-linux>
- <a84f63fb-61c2-4f0e-89ed-8046e8eeed85@denx.de>
- <PAXPR04MB8459808C7CC6C16DB43B973388A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <bc232085-3efb-43fb-b176-eaf43e52f1f8@denx.de>
- <PAXPR04MB8459F46041C7EFF7191F8EFD88A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB8459F46041C7EFF7191F8EFD88A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+ Anatolij Gustschin <agust@denx.de>, 
+ Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,72 +107,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/26/25 7:42 AM, Peng Fan wrote:
->> Subject: Re: [PATCH v8 02/19] pinctrl: nxp: add a pin controller driver
->> based on SCMI pin control protocol
->>
->> On 3/26/25 2:52 AM, Peng Fan wrote:
->>>> Subject: Re: [PATCH v8 02/19] pinctrl: nxp: add a pin controller
->>>> driver based on SCMI pin control protocol
->>>>
->>>> On 3/25/25 9:06 AM, Peng Fan wrote:
->>>>
->>>> [...]
->>>>
->>>>>>> diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
->>>>>>> index 7abb2a6f36b..279ebbad440 100644
->>>>>>> --- a/include/scmi_protocols.h
->>>>>>> +++ b/include/scmi_protocols.h
->>>>>>> @@ -24,6 +24,7 @@ enum scmi_std_protocol {
->>>>>>>      	SCMI_PROTOCOL_ID_SENSOR = 0x15,
->>>>>>>      	SCMI_PROTOCOL_ID_RESET_DOMAIN = 0x16,
->>>>>>>      	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN = 0x17,
->>>>>>> +	SCMI_PROTOCOL_ID_PINCTRL = 0x19,
->>>>>> If this is the IMX specific pinctrl protocol, please make sure to
->>>>>> name it accordingly , SCMI_PROTOCOL_ID_PINCTRL_IMX or
->>>> something .
->>>>>
->>>>> This ID is generic ID, not i.MX specific.
->>>>>
->>>>> i.MX SCMI pinctrl follows ARM SCMI spec, but i.MX pinctrl bindings
->>>> are
->>>>> different compared with ARM SCMI generic pinconf bindings, so we
->>>> need
->>>>> a separate driver for i.MX.
->>>> But then, why is it using the same protocol ID ?
->>>
->>> i.MX System Manager FW pinctrl follows ARM SCMI spec, the ID
->> value is
->>> 0x19.
->>>
->>>
->>> If you look at linux kernel driver
->>>
->>> drivers/pinctrl/pinctrl-scmi.c
->>> drivers/pinctrl/freescale/pinctrl-scmi-imx.c
->>
->> Is the second driver upstream at all ? I don't see it in linux-next ?
-> 
-> Typo: drivers/pinctrl/freescale/pinctrl-imx-scmi.c
+Hi Miquel,
 
-Ah, thank you for clarifying.
+On Wed, Mar 26, 2025 at 12:01=E2=80=AFPM Miquel Raynal
+<miquel.raynal@bootlin.com> wrote:
 
->>> Both use same ID 0x19.
->>>
->>> It is fine to use below, if it is fine to you.
->>> SCMI_PROTOCOL_ID_PINCTRL_IMX = 0x19.
->> How does the kernel discern which driver it should use to
->> communicate with the SCMI provider if both drivers are compiled into
->> the kernel ?
-> 
-> There is a check in drivers probe. Only one will succeed.
+> I rebased this work on the latest next, fixed the conflicts, adapted my
+> changes to use Svyatoslav's work, fixed the CI.
 
-I have to admit, this is just ... uhhh :(
+v5 still fails in CI:
 
-But I think now, we should also have a driver-side check and two 
-separate drivers, similar to this patch:
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25364
 
-[PATCH] power: regulator: scmi: Move regulator subnode hack to 
-scmi_regulator
+> Then I pushed a PR to trigger azure tests and figured out you applied mor=
+e
+> patches (imx8 clock related) which conflicted. So I rebased again and
+> fixed the conflicts.
+>
+> Azure testing is failing though. I just pushed an empty branch with just
+> today's 'next' and it is already failing, my series does not produce
+> additional warnings as far as I can see.
+>
+> So I am sending a series that has been tested locally. dm unit tests
+> pass, v5 is on its way.
 
-right ?
+If I remove your series, I don't see any test failure:
+
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25365
+
+I don't know about the Azure failure. Please work with the team and
+make sure v6 passes in CI.
