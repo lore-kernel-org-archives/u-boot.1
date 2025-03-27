@@ -4,93 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66074C3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 16:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B52FC3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 16:30:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9FA6806D8;
-	Thu, 27 Mar 2025 17:29:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C5D3806D8;
+	Thu, 27 Mar 2025 17:30:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="peKY2gqj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e055Reml";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9036806FC; Thu, 27 Mar 2025 17:29:31 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 63E8B806FC; Thu, 27 Mar 2025 17:30:14 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C990805C8
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 17:29:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A808805C8
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 17:30:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43cf034d4abso13297215e9.3
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 09:29:28 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-391342fc1f6so1004510f8f.1
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 09:30:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743092968; x=1743697768; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743093010; x=1743697810; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=pl7f6Y3VDyVvmsy7qH37h/EtiuAwEDzSwBvAolAGwvs=;
- b=peKY2gqji56uIQ7Prah8d/i2GcFoqzbbsgVohBP9zskSuZh0ZTbHNIfhBkKdh+UEbl
- QcGAMUpqIn1bJ3nOtR1nrcYOs7H6x44buR8KhUtaBcrxtpElkll7hCgqD2sVJ7Hseg7s
- SlptMQTaMShorNw0SABxqthMQUHUaQ8BrFqWP8hsGdsPAuokqFKn8kJGaJ65TGz+8uSF
- 9KvCaw2LHZsCXbclCBGSR1a1Tyf1SeXr3NfAwacrLFUki9YOiTmz7hX+wbJFdrWR3BnD
- k8sVv8/MFxB/F2OPMOz2UPulL3WKgO73E7TwRtuNt+6IrDRPdxcHpOsktzkfqZT9hm20
- iDHg==
+ bh=ylaEU9QVTbD+hsZ+5QtGzyO/y5IS1tRHeIBkxtgJFmE=;
+ b=e055Reml66Me43q4JIr0xZEB3Y9tIKLZ+qR005xpItQ5JChQ8In8xM8M0YRLx4TBX9
+ 1lTdG2y0v1l5A59Av6pnDUEwF1wVUa/d0rPGFXJAGroXRO4NuPRFhJdcmIlC4KFTn9kA
+ TlPLcBA4TT8Zb5swlMx8qOb+z+wS+XgQrcj/niPIctBrd2NWIwPrU5UVkGU5Y1i2jOIo
+ UYspUpw44p+O2lwjk5bklgP4+bPpMUYWhm9cNzFUlTXbttizBWXA4N4SnEO+9qjVzGqs
+ oSoJJoOL5Doq5kNdtGhASsboBIl6ax2qLZR2eG0nIOMZzlQfBJtwLA96iHO4JrOpfwNT
+ HX2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743092968; x=1743697768;
+ d=1e100.net; s=20230601; t=1743093010; x=1743697810;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pl7f6Y3VDyVvmsy7qH37h/EtiuAwEDzSwBvAolAGwvs=;
- b=JaL3wRXnvQx7zazt9A+1tCbb2mPqIfzCHXegnUpmxC+CVNY4yY0mELZJcgCtAnsYC3
- jb/K1qi6AVDI0TTmFyrpqe8UeA10iXKgURb03QHgQ1Ko9DOYHwRVGvojQsRdgxXFg08f
- dJ/wJ8Nb6J8LViQFNB6NI9Mv2FIKozF9qsEqpcdkWUm5tmfcbq6gmc3bkMravljJuaO4
- zJl+Y8CND4wHO311NLQ3HZ0zXZiS+iWhs1tUOsayTZV1xCUD8yfIBHewSQg8EhXCYJ75
- TZKbLdBBA81Nahg1O9a/gAtWNg/0P4sYKl5aN7odBkgb35QTczHe8lyFt3fFSxbqkD3D
- 9Jtg==
+ bh=ylaEU9QVTbD+hsZ+5QtGzyO/y5IS1tRHeIBkxtgJFmE=;
+ b=MqvNNS1un4LYcClUbV7J+oGydLW+Xi9SsGD0+BhRCfYhWtwgHNRhukbeRlBAXfrFGK
+ 9M8h/xtczPkGUCNeQ1TV6sNOV/qTNnHu0XZSvzi5MPnCA1OKK3AMZl8qBlwWvO3cjzWg
+ zA6yZheKEqQi1phsTO7hrNmsaY1jMm/8NHUMVJejuhDaOvsiGOoEqN2z45abFh/Ck11R
+ qumE5burZ8OahenV4GmkRQxyiJXCEOV5rjFm9mQTSacTDZJRXO6DeAnzaZlUpP1pp82d
+ a2f0AVbXX8znB2qI67j3wMpOVh0WBAt5MLKsTiDKV1ZotObSV/kEY8ETH4XCzwM2EIhJ
+ 9CGA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtUJxlnoG0IBhtkqoGAWq6ZLFYECBWhVeQQVN2mYOhRSxEcJ5E58GgjAHQo8TGGDykLs6/b7A=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCQ/I+Z4nApmjtagm5DLzLlU1mWCMlNjVpAfZzEpz/+k575752
- 9SKHrDDn8VeJ5YkSsc/5AkTHRoX58fRQRRvI0zCeC7C23QowKBhhD8Zdf+cwsPA=
-X-Gm-Gg: ASbGncv115p3XnKBrWQFfeVZhx+SGUH5+TxYa9WE8q3scnB6SUzzU53Pj6Y/ImR688O
- XxjJaFMsUXph6WM4959r7yflRKqrCsWAekWEV/J1Rl9Vfr7JhsB2+0tvOXbidF3jwK3iC8lQD4f
- FDWN4LBSZ7YV+eHDV0xKlWcV1+TSSMOpHMCUulnscx5Mfeus6aKyqxOd21QdtuuEgUv3Xlvn8mi
- 4qUnwTMPswCYXwqCnDqm2MGbyssLyxaTmYo/RHQk9d8z+n8KUQ3qr11TgSDjbXbh/yJTHuZ0Ngb
- uXTniTCEBZ8h6kYhz1JCgzwuG89Ev7bNpvh5FrNsjGzjMDe39xzzkieufOG4NFWkdoa5j+xYGGU
+ AJvYcCWI3sKSYRW/xUCHUKfgKG2MOvuxhXodz4JMx+JIEC5stsNcDu8w+mRx2hF2bMdr/HgcWZXCdEI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxea0+1/Lk8sfQnKrvIgU+oA0rhF0PsfmaZE2NnkxzuF2cAY0/x
+ 7Gz6vvNOrhQ2iThuGaAW24ChZTMQ5ECWTr5bL9gXQGM41yPrEL10Ra7EDkoRQfQ=
+X-Gm-Gg: ASbGncsKZIWe2mP4My/2aqU4kUGdaHgtjKt2/nEWoiUoOO+eG/vYQFidrLGKo0zsHlQ
+ GpNEavMEIkSHjHygKnV+/ySqHe+1jcQTRAgO0aJk9kpz4hY+gTYAWIy9PDHS9NNkA6Tv8Vp7RTO
+ aCXQ7aSbVQteBQwtAF23lBkPeVkVBHfdX+MyFoZKc04eU0ew6tIG+fWcRFYT8ITnmNSVhV+dvVd
+ SPlrnwOYvWYu01g2BmpzZM4nqTCAmbezwRhJIHG3ess+YfrN79TMdDSfyulSZZhzr9WQ4Uunm4x
+ E57Y/ZJ42WsoLRB0PeJ3FhOmGXhn5s8C80gFQz4lbo2QHLg/nYtL+AaxUWYQcvHlZPjV4+PfRms
  =
-X-Google-Smtp-Source: AGHT+IFtuTl3P8DsX63ekVe9lrHI+GmQh8iC1Q8OC6ErlqF7f7pMTlDoUYH5pnJH5WBEJ7EtL+1r5A==
-X-Received: by 2002:a05:600c:4693:b0:43c:e305:6d50 with SMTP id
- 5b1f17b1804b1-43d8506c88cmr32607495e9.24.1743092967965; 
- Thu, 27 Mar 2025 09:29:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHYAQAAAoLnyLe0OKb7Vym/5qDISvU7TwwLe0nnl3pK8nqc9BK9XwRi/wGBOZRMZi/XN05Krg==
+X-Received: by 2002:a5d:584b:0:b0:391:1218:d5f7 with SMTP id
+ ffacd0b85a97d-39ad175c0f4mr4104329f8f.40.1743093008622; 
+ Thu, 27 Mar 2025 09:30:08 -0700 (PDT)
 Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82f32573sm41921385e9.32.2025.03.27.09.29.26
+ ffacd0b85a97d-39c0b66d0dbsm112f8f.58.2025.03.27.09.30.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Mar 2025 09:29:27 -0700 (PDT)
-Message-ID: <2723a871-b7fe-4a4b-b898-b93b750167f2@linaro.org>
-Date: Thu, 27 Mar 2025 17:29:26 +0100
+ Thu, 27 Mar 2025 09:30:07 -0700 (PDT)
+Message-ID: <391711e2-8a46-4c0d-a7bc-8a53a1da39fa@linaro.org>
+Date: Thu, 27 Mar 2025 17:30:06 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 16/29] efi: arm: Avoid enabling caches when running
- under EFI
+Subject: Re: [PATCH v4 17/29] efi: arm: Implement access to global_data for EFI
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>
 References: <20250215032254.4121030-1-sjg@chromium.org>
- <20250215032254.4121030-17-sjg@chromium.org>
+ <20250215032254.4121030-18-sjg@chromium.org>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250215032254.4121030-17-sjg@chromium.org>
+In-Reply-To: <20250215032254.4121030-18-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,37 +106,55 @@ X-Virus-Status: Clean
 
 
 On 2/15/25 04:22, Simon Glass wrote:
-> The previous bootloader has already set up the cache, so don't try to do
-> it again.
-> 
-> This fixes a crash in QEMU when booting from EDK2
+> The EFI app likes to use a simple variable for global data. Implement
+> this for ARM (for use only with 64-bit ARM at present).
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > 
-> (no changes since v1)
+> (no changes since v2)
 > 
->   common/board_r.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+> Changes in v2:
+> - Mention '64-bit ARM' here, rather than just 'ARM'
 > 
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 81715397544..e7d9a3b312d 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -110,8 +110,9 @@ static int initr_reloc(void)
->    */
->   static int initr_caches(void)
->   {
-> -	/* Enable caches */
-> -	enable_caches();
-> +	if (ll_boot_init())
-> +		enable_caches();
-
-For the sake of consistency I think this check should be inverted.
+>   arch/arm/include/asm/global_data.h | 14 ++++++++++++--
+>   1 file changed, 12 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+> index 6e4471662a3..8d51111f095 100644
+> --- a/arch/arm/include/asm/global_data.h
+> +++ b/arch/arm/include/asm/global_data.h
+> @@ -115,7 +115,13 @@ struct arch_global_data {
+>   
+>   #include <asm-generic/global_data.h>
+>   
+> -#if defined(__clang__) || defined(LTO_ENABLE)
+> +#ifdef CONFIG_EFI_APP
 > +
->   	return 0;
->   }
->   #endif
+> +#define DECLARE_GLOBAL_DATA_PTR   extern struct global_data *global_data_ptr
+> +
+> +#define gd global_data_ptr
+> +
+> +#elif defined(__clang__) || defined(LTO_ENABLE)
+>   
+>   #define DECLARE_GLOBAL_DATA_PTR
+>   #define gd	get_gd()
+> @@ -144,7 +150,11 @@ static inline gd_t *get_gd(void)
+>   
+>   static inline void set_gd(volatile gd_t *gd_ptr)
+>   {
+> -#ifdef CONFIG_ARM64
+> +#ifdef CONFIG_EFI_APP
+> +	extern struct global_data *global_data_ptr;
+> +
+> +	global_data_ptr = (void *)gd_ptr;
+> +#elif defined CONFIG_ARM64
+>   	__asm__ volatile("ldr x18, %0\n" : : "m"(gd_ptr));
+>   #elif __ARM_ARCH >= 7
+>   	__asm__ volatile("ldr r9, %0\n" : : "m"(gd_ptr));
 
 -- 
 Caleb (they/them)
