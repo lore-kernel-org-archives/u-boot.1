@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDF08C3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 14:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59CB0C36010
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 14:36:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F191481273;
-	Thu, 27 Mar 2025 15:21:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BF11E805C8;
+	Thu, 27 Mar 2025 15:36:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kwnzhQgy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CaVXV1Wf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 093B981CFD; Thu, 27 Mar 2025 15:21:00 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 09A1A806FC; Thu, 27 Mar 2025 15:36:16 +0100 (CET)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09822806FC
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:20:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53B0E8003E
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:36:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac289147833so194530266b.2
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:20:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-600038877ebso600441eaf.0
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:36:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743085257; x=1743690057; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=wmgQvEpmwFyQxNzFTVVaK+BWyWBf2w2uAouCQE0fa3I=;
- b=kwnzhQgymcd0NyIysSt4RcRzveVfzKpngdyXk+bHbayXp/gvGdf+cIWbb3CtKeHkwF
- cZtyq2KUNbd+sWk5soAp03q8KvNuSocv/w1nixAB+W3mSLTuzvNIAyRScwqFns4OqMOW
- BwAddpyvUhaZVG631vTzr+SAe8Dufb5Bqyi+Yk54XMTzeNQv17g1en+nqi2tS8ImFl3Q
- q71d33y9bYhYDbvPAIod+2KDV+9fpOGN93+w4E3X1MkMQZadnmL6f7Zd2DTxJPxJBd3l
- msBwOG7RWEDuebMAn0P5O63TPDElGL/vKmy0iKvtd+0/PAzw1EeSxmsQlQN4/zeHqN3u
- eH2w==
+ d=konsulko.com; s=google; t=1743086172; x=1743690972; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1iEjdALe+6gQ9wHKFxseRImzOkEn0elrr9Lru+QpVV0=;
+ b=CaVXV1Wf/QMmIbi/OIvw+2a9PMkcu+MJ1tD2mNIwtRDr1aYpcuEn+09U/KCi7JF2os
+ Y9hr3WgLy6UipQuB4+VwXrRvlpzOzg/e4ZDWhSG7LuSCRPPOKTc8CA21NfmBUR5wPbJX
+ 2DLhJJhUB9jgccuAyDGlyv9PXKNcs+PztB2wg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743085257; x=1743690057;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1743086172; x=1743690972;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wmgQvEpmwFyQxNzFTVVaK+BWyWBf2w2uAouCQE0fa3I=;
- b=sLLS1Qsn9q4AckpKimr+9dJQDbVC2BbsWLxWdYsnaxeN5DyrrHdBnqFZw1TdFBGqzh
- jlt/m8v7kqmuGVanDAYwBnkxZ2mSHt64l8y/Pj1LwlUw/b44PH6NCXdP52nxgrdPWnpE
- ehKQpahVa28X7sLG0u18WH2KVbPbMve8mSQj6tBC1TTLB7UPP2d2NfsXXcqAtvaeybE3
- AlQ8LGOIURVRjYcDwdPINSXsk8DN7pqXGa8q9uUcwNHVPbCfXttSopKAxh+jMIBRzCIX
- JW6iSi5J/fa5Z1yVe58MmZ6cU1FC0xBb2uF5tcIBbIgtwAOg+gzwUgjX0Q6DNaeXtHHD
- euMg==
+ bh=1iEjdALe+6gQ9wHKFxseRImzOkEn0elrr9Lru+QpVV0=;
+ b=AtvN+kmRWv/cYNK0q2GK0zj6vxlxc0paNLWXvLBKW6QifhpU99m1EJyb7CI+ydWCZG
+ kOmJpUlUcdK1mFcK0XsQZ/U9MLqjvJbrOCNJSNOyAqoJREtLcvh78OaKXz2Ap7QSNeWU
+ +44JYuY/c4m0qyjK1l4xi6ydvXswYBYIyxLgHbFfAKznfCbxAUXnerLdPvC361OMvIrO
+ CEqTY2ZzgEXxrdnUjebV6HVKqNX3RI5bjProlB38twXkvaeIAgVWKfDW8HACl6H2l0yD
+ sewgTgDxanHyJjmSzo+z0eLxHRjtVkszkSkBO362YuyrTLh1Jwdc1DgpJYxOtS0kFIsP
+ BQgQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjiM4BFMLqF6wf0YrvNf+PqG2jKINewm5eXEdl/Ru0z1WKW7qFZprJRR4WxPhA+zU1sbVsGKA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZ/MEga8azCIMrddri+zoPzW06/MPBmwz5gUhjoP42D3lEQnc5
- Y7qqRfiFaSNIFlAVksy/BwZPI3HsZ64Lzy5yQcIoeuwfR1zjVPSR
-X-Gm-Gg: ASbGncveDEr/NlvqpjwVyOn7TG5UH1k+Z+YlwH1knvAHYrLK1IDejgyATf8ofiErovz
- iD54MXd/NRup7g8fB8w5eveb/SBf/ToTqJ0JFcs3x/E/TEcclwEXW1N/c8XXy3/+YabPXwSe5dV
- 3EjgGHa7ev2FE9jyNMtVvIc3/yKiXOYEife73omqpOp688oJjZcsQU2vSUiNwrBz6SI2NIWr3Lx
- /tk0xQtAr0gWiFe5K8ZAmZa0rOTfPNG9kkmz3WPZijb/G9ZMR4YAaYufvOj3446U78xFpksxHxi
- JZHaQU+wS3oslDO/piPzm8FfLZpIhZYHxnql+fjYfEXrnHDZvPadyhUgoHSQ3C/TzZYnFe271vr
- ZL38Hspgwiv4=
-X-Google-Smtp-Source: AGHT+IGqg+UMKFFwbNIiu/3hKBSf6gh3HsZn17jf/OfMcT+eT55PG4/LNZ78TP9KufLPov59qIX45g==
-X-Received: by 2002:a17:906:f59d:b0:ac3:bbc8:ecab with SMTP id
- a640c23a62f3a-ac6fae415famr380380466b.11.1743085256969; 
- Thu, 27 Mar 2025 07:20:56 -0700 (PDT)
-Received: from Ansuel-XPS. (93-34-88-225.ip49.fastwebnet.it. [93.34.88.225])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac3ef86e56dsm1227173766b.37.2025.03.27.07.20.55
+ AJvYcCXXscOI95ewXNUJagRF1UE82sQ99sfal+J/2A1Q0u8KzF5GUCMqX178uaXJT7dhzrOHeDkA7jI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxAvxAk+mEYxz8I1wkzwaoYSMik2uWNagTLEYkvseFuoEpXL+2w
+ aTIfsiItyh6r8HVSH7qfVfkJP7Hj94SA+QFQQy2sjphs3XwaX243w/RO9WCThQo=
+X-Gm-Gg: ASbGnctiCoq79oYGsgbSaw0tSSMX2IuTLPYVIyFcM/8pPjH1TEONgjfvXXLDkEZiQul
+ TwrgvFCXpeBSlBoLQy0L3GR2sXv+KUyMFMzTC/EdY80ETYFhqi+CoLod/F8z8pJihtGt2Le/D1n
+ 5J3mbI7w4j0t0fS82qQnzK+xquZ8QBXeYn4KHEAgSeqhpPiFlsF/UIGhLB6AqgmKwkOj2tGD7kq
+ qPIBywBIIuAM3Eu0uouBWR9NUj8RM1/ci/+qLr6eJ3rknNBvS4BUNrE7LunDt0qxptXh1sOeEIP
+ i2c1ig+A/J9zksG9LWFr2IMAKtVW93JgLgphQj/vNSigGkgMMQG5JuKjf/OKAucuxtf2SaRO98q
+ qRQ3WJw==
+X-Google-Smtp-Source: AGHT+IETgmtMuPOBwrW1hrUJovkXX+CaqcZheOcrL+6rQYEWxvDVReMftbPlSTbRwSe19NghHK9PuA==
+X-Received: by 2002:a05:6870:5b9b:b0:2c1:3d93:c192 with SMTP id
+ 586e51a60fabf-2c848221302mr1846075fac.37.1743086171804; 
+ Thu, 27 Mar 2025 07:36:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2c77f05de8asm3615277fac.36.2025.03.27.07.36.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Mar 2025 07:20:56 -0700 (PDT)
-Message-ID: <67e55ec8.170a0220.20f0c6.7d4c@mx.google.com>
-X-Google-Original-Message-ID: <Z-VexrdXWOfDf2ot@Ansuel-XPS.>
-Date: Thu, 27 Mar 2025 15:20:54 +0100
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stephen Boyd <sboyd@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/6] airoha: Add initial support AN7581
-References: <20250314185941.27834-1-ansuelsmth@gmail.com>
- <20250314202611.GF2640854@bill-the-cat>
+ Thu, 27 Mar 2025 07:36:10 -0700 (PDT)
+Date: Thu, 27 Mar 2025 08:36:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 4/8] env: Rename SYS_MMC_ENV_DEV to ENV_SDMMC_DEVICE_INDEX
+Message-ID: <20250327143608.GR93000@bill-the-cat>
+References: <20250322215624.18994-1-marek.vasut+renesas@mailbox.org>
+ <20250322215624.18994-4-marek.vasut+renesas@mailbox.org>
+ <90254a96-5d67-4d34-afe6-772af42ee557@cherry.de>
+ <e385568e-59b1-4adf-9fb7-d87b4254eae9@mailbox.org>
+ <20250326001521.GN93000@bill-the-cat>
+ <d576535e-f8d0-4ae7-b8b7-f4316535a6ee@mailbox.org>
+ <d9382933-70f2-4c3c-abf2-4fd711fbfc4f@cherry.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bIGI5h5wmTu644R1"
 Content-Disposition: inline
-In-Reply-To: <20250314202611.GF2640854@bill-the-cat>
+In-Reply-To: <d9382933-70f2-4c3c-abf2-4fd711fbfc4f@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,38 +104,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 14, 2025 at 02:26:11PM -0600, Tom Rini wrote:
-> On Fri, Mar 14, 2025 at 07:59:20PM +0100, Christian Marangi wrote:
-> `
-> > This little series adds initial support for Airoha AN7581 SoC.
-> > 
-> > With the help of some backport patch, this use OF_UPSTREAM
-> > directly.
-> > 
-> > Posting this to have the targer and the very basic driver.
-> > 
-> > Ethernet, SNAND and eMMC support is already ready downstream
-> > and will be posted shortly after this gets approved.
-> > 
-> > Having the first driver ready permits to separately push
-> > dedicate series for SNAND, eMMC and Ethrnet as they all depends
-> > on basic support of clock and reset and nothing else.
-> > 
-> > Changes v2:
-> > - Use OF_UPSTREAM directly
-> > - Backport some patch for OF_UPSTREAM
-> > - Make use of u-boot.dtsi files
-> > - Fix defconfig
-> > - Use pattern for MAINTAINERS file
-> > - Correctly handle SYS_BOARD/SYS_CONFIG_NAME
-> > - Drop config for header file
-> 
-> This generally looks good, thanks.
-> 
 
-Hi Tom, may I ask status of this? I would like to continue with posting
-follow-up driver like mmc nand ethernet for this. Is it ok if I say this
-series is a dependency so I can start the review process for it?
+--bIGI5h5wmTu644R1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
--- 
-	Ansuel
+On Wed, Mar 26, 2025 at 10:22:34AM +0100, Quentin Schulz wrote:
+> Hi Marek,
+>=20
+> On 3/26/25 2:37 AM, Marek Vasut wrote:
+> > On 3/26/25 1:15 AM, Tom Rini wrote:
+> > > On Wed, Mar 26, 2025 at 12:02:08AM +0100, Marek Vasut wrote:
+> > > > On 3/24/25 1:39 PM, Quentin Schulz wrote:
+> > > > > Hi Marek,
+> > > >=20
+> > > > Hi,
+> > > >=20
+> > > > > On 3/22/25 10:55 PM, Marek Vasut wrote:
+> > > > > > Rename the variable and add ENV_ prefix, so that all configurat=
+ion
+> > > > > > options which are related to environment would have an CONFIG_E=
+NV_
+> > > > > > prefix. No functional change.
+> > > > > >=20
+> > > > > > Use ENV_SDMMC_DEVICE_INDEX to clarify this is the SD/MMC device
+> > > > > > index, a number, as enumerated by U-Boot. Update the help text
+> > > > > > accordingly.
+> > > > > >=20
+> > > > >=20
+> > > > > I disagree with this part of the rename (MMC->SDMMC), our drivers=
+ all
+> > > > > are using mmc (env/mmc.*, drivers/mmc/*, cmd/mmc.c, ...) for
+> > > > > both SD and
+> > > > > MMC. We also have ENV_IS_IN_MMC which is for both. I don't think =
+it's
+> > > > > worth the confusion.
+> > > >=20
+> > > > My main problem is, that it is confusing to call everything
+> > > > _mmc_ even if
+> > > > most of it also applies to SD . There is no way to discern parts
+> > > > which are
+> > > > MMC specific from parts which are common to SD and MMC now.
+> > >=20
+> > > Do we have support for anything using the MMC part of the standard th=
+at
+> > > is not storage? I certainly agree it's confusingly named atm, but I
+> > > think changing some parts but not other parts will make it worse, not
+> > > better.
+> > That's not what I am concerned about. What I am concerned about is that
+> > we are talking about partitions, and only eMMC supports HW partitions,
+> > but both SD and MMC support SW partitions . So we should refer to
+> > CONFIG_..._SDMMC_..._SW_PARTITION here when talking about SW partitions
+> > , but CONFIG_..._MMC_..._HW_PARTITION when talking about eMMC HW
+> > partitions. Currently we are missing the two and it yields a horrid
+> > confusion. That is in fact what prompted this series.
+>=20
+> But the controllers handling SD cards or eMMC are both called mmc in devi=
+ce
+> tree and in U-Boot (see mmc command). So for me, MMC covers both. As a
+> matter of fact, the mmc command also handles the boot partition that is
+> specific to eMMC.
+>=20
+> Quite interestingly, the MMC (MultiMediaCard) Wikipedia page starts with
+>=20
+> "Not to be confused with SD card or eMMC" and then the first sentence in =
+the
+> history section is "The latest version of the eMMC standard", c.f.
+> https://en.wikipedia.org/wiki/MultiMediaCard
+>=20
+> So essentially, I'm wondering:
+> - if boot partitions are specific to eMMC and not simpy MMC (and are not
+> part of SD card). I know eMMC has a separate standard than MMC.
+> - if there are other things than eMMC (and SD cards) that are supported by
+> the MMC subsystem (outside of the embedded world). It seems like this is
+> taking the MMC =3D eMMC shortcut that I'm not sure is correct?
+>=20
+> To add to the confusion, Rockchip often has MMC controllers named SDMMC (=
+and
+> their use varies depending on the SoC, sometimes for SD, sometimes for eM=
+MC,
+> sometimes for SDIO).
+
+This I think is part of the problem (and re Rockchip, my recollection is
+that at least some TI parts and manuals have similar naming issues).
+It's a terribly confusing area to start without and outside of U-Boot
+itself.
+
+My suggestions in general would be:
+- Don't rename files / commands (and this series was not doing so
+  either).
+- Whenever possible take things out of CONFIG_SYS / CFG_SYS and instead
+  rename them at least partially for CONFIG_ENV_... or CONFIG_MMC_... or
+  CONFIG_SPL_...
+- We only have two "SDMMC" symbols so lets not add more
+- Use "MMC_" as the namespace and help text (and where useful, doc/
+  documentation) to further explain to humans what is being implemented.
+
+--=20
+Tom
+
+--bIGI5h5wmTu644R1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmflYlEACgkQFHw5/5Y0
+tyzxQQv7BgG77sXbhDUHTvT1f2OdmfAnpkwmvNMMC4TlVKl/wSCRmt7wHbP1WbZR
+QwRkSqH8pwH/EbzwfZeNWMA8IdN9u45hH7+8jh5W0J5TaJ9TIoeMcfMLmre+LbtR
+M+aALfru9aqwfANAAwrEz4Ksd8j57QC3Vrq2QqXNzPRdMJwSUWmVKq+kN2kC03PW
+s6ymVbWR6Za17ndntLLhnJn2v5aS/INOkiqYCTxf44XRHxeskY3jAkNikLng23d2
+kjqvUbHrfHvWC5syBXrleMztGfiMgGjhl7t9gNlI6BCteqmt8TvuL+TQw8ARyK+J
+UzcHECEHBsdTxVB9hBY5s6rQ4iKWCl34FFpFtbbT3vaqZNSCHj5XagcBHCbPwhRO
+oyycmzHfXcqss8OV4+eKXCaS0jv79KfKR8BxqklYIlmmfLrP+d4SKV2EbRxGwnz0
+HiCCLr2J7BxhR943BFtQXSangtd8aAG4eqPuLcCnq+iP7nIFdUgeTZSdR9TXni5f
+9YNaaRD6
+=ruht
+-----END PGP SIGNATURE-----
+
+--bIGI5h5wmTu644R1--
