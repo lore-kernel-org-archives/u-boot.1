@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A511C3600C
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 07:07:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E37D6C3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 07:07:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F54781B4B;
+	by phobos.denx.de (Postfix) with ESMTP id 8647381D3B;
 	Thu, 27 Mar 2025 08:07:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="aj8G5Ohm";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="u4gjxwBo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DC528003E; Thu, 27 Mar 2025 08:07:04 +0100 (CET)
+ id C4A6581D27; Thu, 27 Mar 2025 08:07:05 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 239E28070C
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 08:07:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B13E881B4B
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 08:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,16 +31,16 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  t=1743059222; x=1774595222;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=hF3L594yGNZjmZPto+rxNQCklZPNL7f4PynacImV7vA=;
- b=aj8G5Ohm/RC1j4Fp6DoCCygtyGP14W7fWuyREZq4BewAH/8IlrnoocB/
- TAfIap9QpIc77cdEycjEOuQa2RQG3KzZIDELVhDt/JNCPpxf70lG1H2Dd
- I2I7bG13yyesVCm0F9u7yWdtX7ZZV6LMODRtg7PoNkVnxBJNRLbH376sC
- 4e5/E3JCUg8cFdy0Uh5FBCpqb9bbo5rTGwyBZQYHe3hYcVVnRtZi/Lc0n
- XV88X6J4e14pqI4HBdpTOWsT2RyuTqFGF3zv2CavD2D3MTEhmVBVfuxEu
- wnnJsaxurq2arRbsldZ2KRyu/qMbfEshbg/Qj82EfFesLG9LvTydPloX5 Q==;
+ bh=e6h3HBK/Z0eq8U5knHp8+29ylNguOwIOBMGSB5giDFw=;
+ b=u4gjxwBomqLuEd5AAtOMfxaeEMgdCQ2A4U7o2VnuWLmzkcSsnVK5qAM7
+ GJ4HjEK0HIMFMQN38uuXsCw0HZU1OQIaKSur+UqkQ9Na4GM+OBNv2FgpC
+ hcRZbqloL6zYBNYIZsgibgHMo0XdhoEAO1Z4SR8yy3MhcqjqavtOL0LRd
+ JHAGnRI2PVDgAlCWfBcR8BdDNJDxE9ktcouCK5p3Eh/SD5dGilrhefohS
+ z9cueYqJ5A0hinze9MJnH5LNWt2ZbInz4uEGmyVTQ5WERsfXirN6JUEP7
+ UMHqnT1QRsl4ahZkKH7oDhtm4Y2Dg/gpzoUSw9w4ExidZgqQdAhpqaFvf g==;
 X-CSE-ConnectionGUID: hKcK+CcVRse6cfoq3OL+Lg==
-X-CSE-MsgGUID: B5VR/6+fSGuksL9znOKgwQ==
-X-IronPort-AV: E=Sophos;i="6.14,279,1736838000"; d="scan'208";a="44135952"
+X-CSE-MsgGUID: rRZSIl9/RqGKZEPeRhd0Qg==
+X-IronPort-AV: E=Sophos;i="6.14,279,1736838000"; d="scan'208";a="44135953"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
@@ -48,10 +48,10 @@ Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
 Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
  chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Thu, 27 Mar 2025 00:06:42 -0700
+ 15.1.2507.44; Thu, 27 Mar 2025 00:06:50 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Thu, 27 Mar 2025 00:06:36 -0700
+ 15.1.2507.44 via Frontend Transport; Thu, 27 Mar 2025 00:06:43 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
@@ -63,10 +63,10 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <u-boot@lists.denx.de>
 CC: <manikandan.m@microchip.com>, Varshini Rajendran
  <varshini.rajendran@microchip.com>
-Subject: [PATCH v5 2/8] clk: at91: sam9x60-pll: add support for core clock
- frequency inputs
-Date: Thu, 27 Mar 2025 12:36:09 +0530
-Message-ID: <20250327070615.334551-3-manikandan.m@microchip.com>
+Subject: [PATCH v5 3/8] clk: at91: sam9x60-pll: add support for HW PLL freq
+ dividers
+Date: Thu, 27 Mar 2025 12:36:10 +0530
+Message-ID: <20250327070615.334551-4-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250327070615.334551-1-manikandan.m@microchip.com>
 References: <20250327070615.334551-1-manikandan.m@microchip.com>
@@ -91,143 +91,124 @@ X-Virus-Status: Clean
 
 From: Varshini Rajendran <varshini.rajendran@microchip.com>
 
-Add support for different core clock frequency input ranges
-for different PLL IDs in the PLL driver and align sam9x60, sama7g5 SOC
-platforms.
+Add support for hardware dividers for PLL IDs.In sam9x7 SoC,
+PLL_ID_PLLA and PLL_ID_PLLA_DIV2 has /2 hardware dividers
+each.
+
+fcorepllack -----> HW Div = 2 -+--> fpllack
+                               |
+                               +--> HW Div = 2 ---> fplladiv2ck
 
 Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
 ---
- drivers/clk/at91/clk-sam9x60-pll.c | 17 ++++++++---------
+ drivers/clk/at91/clk-sam9x60-pll.c | 38 +++++++++++++++++++++++++++++-
  drivers/clk/at91/pmc.h             |  1 +
- drivers/clk/at91/sam9x60.c         |  7 +++++++
- drivers/clk/at91/sama7g5.c         |  6 ++++++
- 4 files changed, 22 insertions(+), 9 deletions(-)
+ 2 files changed, 38 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
-index a30035eb8ce..676ad8294a6 100644
+index 676ad8294a6..df8172bccac 100644
 --- a/drivers/clk/at91/clk-sam9x60-pll.c
 +++ b/drivers/clk/at91/clk-sam9x60-pll.c
-@@ -31,9 +31,6 @@
- #define UPLL_DIV		2
- #define PLL_MUL_MAX		(FIELD_GET(PMC_PLL_CTRL1_MUL_MSK, UINT_MAX) + 1)
+@@ -22,6 +22,7 @@
  
--#define FCORE_MIN		(600000000)
--#define FCORE_MAX		(1200000000)
--
- #define PLL_MAX_ID		7
+ #define UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL	"at91-sam9x60-div-pll-clk"
+ #define UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL	"at91-sam9x60-frac-pll-clk"
++#define UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL	"at91-sam9x60-fixed-div-pll-clk"
  
- struct sam9x60_pll {
-@@ -55,14 +52,15 @@ static inline bool sam9x60_pll_ready(void __iomem *base, int id)
- 	return !!(status & BIT(id));
- }
+ #define	PMC_PLL_CTRL0_DIV_MSK	GENMASK(7, 0)
+ #define	PMC_PLL_CTRL1_MUL_MSK	GENMASK(31, 24)
+@@ -140,6 +141,7 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
+ 	void __iomem *base = pll->base;
+ 	ulong parent_rate = clk_get_parent_rate(clk);
+ 	u32 mul, frac, val;
++	ulong pll_rate;
  
--static long sam9x60_frac_pll_compute_mul_frac(u32 *mul, u32 *frac, ulong rate,
-+static long sam9x60_frac_pll_compute_mul_frac(const struct clk_range *core_clk,
-+					      u32 *mul, u32 *frac, ulong rate,
- 					      ulong parent_rate)
- {
- 	unsigned long tmprate, remainder;
- 	unsigned long nmul = 0;
- 	unsigned long nfrac = 0;
- 
--	if (rate < FCORE_MIN || rate > FCORE_MAX)
-+	if (rate < core_clk->min || rate > core_clk->max)
- 		return -ERANGE;
- 
- 	/*
-@@ -82,7 +80,7 @@ static long sam9x60_frac_pll_compute_mul_frac(u32 *mul, u32 *frac, ulong rate,
- 	}
- 
- 	/* Check if resulted rate is valid.  */
--	if (tmprate < FCORE_MIN || tmprate > FCORE_MAX)
-+	if (tmprate < core_clk[0].min || tmprate > core_clk[0].max)
- 		return -ERANGE;
- 
- 	*mul = nmul - 1;
-@@ -103,8 +101,8 @@ static ulong sam9x60_frac_pll_set_rate(struct clk *clk, ulong rate)
  	if (!parent_rate)
  		return 0;
+@@ -149,8 +151,12 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
+ 	pmc_read(base, AT91_PMC_PLL_CTRL1, &val);
+ 	mul = (val & pll->layout->mul_mask) >> pll->layout->mul_shift;
+ 	frac = (val & pll->layout->frac_mask) >> pll->layout->frac_shift;
++	pll_rate = (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
  
--	ret = sam9x60_frac_pll_compute_mul_frac(&nmul, &nfrac, rate,
--						parent_rate);
-+	ret = sam9x60_frac_pll_compute_mul_frac(pll->characteristics->core_output,
-+						&nmul, &nfrac, rate, parent_rate);
- 	if (ret < 0)
- 		return 0;
+-	return (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
++	if (pll->layout->div2)
++		pll_rate >>= 1;
++
++	return pll_rate;
+ }
  
-@@ -163,7 +161,8 @@ static int sam9x60_frac_pll_enable(struct clk *clk)
- 	ulong crate;
+ static int sam9x60_frac_pll_enable(struct clk *clk)
+@@ -359,6 +365,16 @@ static ulong sam9x60_div_pll_get_rate(struct clk *clk)
+ 	return parent_rate / (div + 1);
+ }
  
- 	crate = sam9x60_frac_pll_get_rate(clk);
--	if (crate < FCORE_MIN || crate > FCORE_MAX)
-+	if (crate < pll->characteristics->core_output[0].min ||
-+	    crate > pll->characteristics->core_output[0].max)
- 		return -ERANGE;
++static ulong sam9x60_fixed_div_pll_get_rate(struct clk *clk)
++{
++	ulong parent_rate = clk_get_parent_rate(clk);
++
++	if (!parent_rate)
++		return 0;
++
++	return parent_rate >> 1;
++}
++
+ static const struct clk_ops sam9x60_div_pll_ops = {
+ 	.enable = sam9x60_div_pll_enable,
+ 	.disable = sam9x60_div_pll_disable,
+@@ -366,6 +382,12 @@ static const struct clk_ops sam9x60_div_pll_ops = {
+ 	.get_rate = sam9x60_div_pll_get_rate,
+ };
  
- 	pmc_update_bits(base, AT91_PMC_PLL_UPDT, AT91_PMC_PLL_UPDT_ID_MSK,
++static const struct clk_ops sam9x60_fixed_div_pll_ops = {
++	.enable = sam9x60_div_pll_enable,
++	.disable = sam9x60_div_pll_disable,
++	.get_rate = sam9x60_fixed_div_pll_get_rate,
++};
++
+ static struct clk *
+ sam9x60_clk_register_pll(void __iomem *base, const char *type,
+ 			 const char *name, const char *parent_name, u8 id,
+@@ -406,6 +428,13 @@ sam9x60_clk_register_div_pll(void __iomem *base, const char *name,
+ 			     const struct clk_pll_characteristics *characteristics,
+ 			     const struct clk_pll_layout *layout, bool critical)
+ {
++	if (layout->div2) {
++		return sam9x60_clk_register_pll(base,
++			UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL, name, parent_name,
++			id, characteristics, layout,
++			CLK_GET_RATE_NOCACHE | (critical ? CLK_IS_CRITICAL : 0));
++	}
++
+ 	return sam9x60_clk_register_pll(base,
+ 		UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL, name, parent_name, id,
+ 		characteristics, layout,
+@@ -431,6 +460,13 @@ U_BOOT_DRIVER(at91_sam9x60_div_pll_clk) = {
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
+ 
++U_BOOT_DRIVER(at91_sam9x60_fixed_div_pll_clk) = {
++	.name = UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL,
++	.id = UCLASS_CLK,
++	.ops = &sam9x60_fixed_div_pll_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
++
+ U_BOOT_DRIVER(at91_sam9x60_frac_pll_clk) = {
+ 	.name = UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL,
+ 	.id = UCLASS_CLK,
 diff --git a/drivers/clk/at91/pmc.h b/drivers/clk/at91/pmc.h
-index ff464522aa0..49134531564 100644
+index 49134531564..580c9964ff4 100644
 --- a/drivers/clk/at91/pmc.h
 +++ b/drivers/clk/at91/pmc.h
-@@ -38,6 +38,7 @@ struct clk_pll_characteristics {
- 	struct clk_range input;
- 	int num_output;
- 	const struct clk_range *output;
-+	const struct clk_range *core_output;
- 	u16 *icpll;
- 	u8 *out;
- 	u8 upll : 1;
-diff --git a/drivers/clk/at91/sam9x60.c b/drivers/clk/at91/sam9x60.c
-index b7d64bdbb3d..e04266a2be2 100644
---- a/drivers/clk/at91/sam9x60.c
-+++ b/drivers/clk/at91/sam9x60.c
-@@ -112,17 +112,24 @@ static const struct clk_range upll_outputs[] = {
- 	{ .min = 300000000, .max = 500000000 },
+@@ -54,6 +54,7 @@ struct clk_pll_layout {
+ 	u8 frac_shift;
+ 	u8 div_shift;
+ 	u8 endiv_shift;
++	u8 div2;
  };
  
-+/* Fractional PLL core output range. */
-+static const struct clk_range core_outputs[] = {
-+	{ .min = 600000000, .max = 1200000000 },
-+};
-+
- /* PLL characteristics. */
- static const struct clk_pll_characteristics apll_characteristics = {
- 	.input = { .min = 12000000, .max = 48000000 },
- 	.num_output = ARRAY_SIZE(plla_outputs),
- 	.output = plla_outputs,
-+	.core_output = core_outputs,
- };
- 
- static const struct clk_pll_characteristics upll_characteristics = {
- 	.input = { .min = 12000000, .max = 48000000 },
- 	.num_output = ARRAY_SIZE(upll_outputs),
- 	.output = upll_outputs,
-+	.core_output = core_outputs,
- 	.upll = true,
- };
- 
-diff --git a/drivers/clk/at91/sama7g5.c b/drivers/clk/at91/sama7g5.c
-index 63b2c647467..c0e27828b1a 100644
---- a/drivers/clk/at91/sama7g5.c
-+++ b/drivers/clk/at91/sama7g5.c
-@@ -158,11 +158,17 @@ static const struct clk_range pll_outputs[] = {
- 	{ .min = 2343750, .max = 1200000000 },
- };
- 
-+/* Fractional PLL core output range. */
-+static const struct clk_range core_outputs[] = {
-+	{ .min = 600000000, .max = 1200000000 },
-+};
-+
- /* PLL characteristics. */
- static const struct clk_pll_characteristics pll_characteristics = {
- 	.input = { .min = 12000000, .max = 50000000 },
- 	.num_output = ARRAY_SIZE(pll_outputs),
- 	.output = pll_outputs,
-+	.core_output = core_outputs,
- };
- 
- /* Layout for fractional PLLs. */
+ struct clk_programmable_layout {
 -- 
 2.25.1
 
