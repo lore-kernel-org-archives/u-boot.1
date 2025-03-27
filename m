@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 384A4C36010
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 16:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B6E5C3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 16:28:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A10A0806D8;
-	Thu, 27 Mar 2025 17:28:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D0C0806D8;
+	Thu, 27 Mar 2025 17:28:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SQ+dDQN1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mVg5mDOs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4787E8070C; Thu, 27 Mar 2025 17:28:25 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 3D59D8070C; Thu, 27 Mar 2025 17:28:54 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F79D805C8
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 17:28:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DB25805C8
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 17:28:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43cf3192f3bso13191425e9.1
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 09:28:23 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso11691345e9.3
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 09:28:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743092902; x=1743697702; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743092932; x=1743697732; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ea4k6Ydw38CIvo1ItjzoMFp5RYHiwRDRIb55Ltz4Z8A=;
- b=SQ+dDQN1cgtKDNK7KE28zaMXMFDAusfoB+WEXPcYkt+AA7uEbxoj6mh9Nd7IFP8UNp
- tkfVaFhr4r+8QTBmgcmnFdYt8kaENDwazOLl/7T9GI5JJ+onYGY1HsdXo+t9t7TocDeC
- s+Il2fmlbABuQ433JDLOGm2qekR+L135zAV3H8/+qJckOlP9S/ipAUvAO+JnGhYuJftU
- qZCeMx0zatb8AfaDuycPiuVZoprDMtj8YjR/uHC8j39lwyG2wHD39sD17uHwX+YjmOAw
- EzxtMbPkDy/+axPp+QQ+REjRcKnG2HIpUKdA2UMG4cVZ2Mihi/ahtB9ZWm5UDpnKpXWA
- iaoQ==
+ bh=Wf//nq19qpRJWK0wwIu+4epzr3aQEFzHM4jlBScR9sA=;
+ b=mVg5mDOsNc0A0Yphan9jBk0jneKtHsUbkmgszobR72RzPKz/XuiNAphH7RyhgM6CYl
+ cCABlvw5CGNVe7hSaenyjGFTOulGhVW7sgBdDuVPiDe2Tvz9isG+RMlEXuV/P6Jzut+o
+ 3MH6isG3Z9MFBhKgZkyWjPeIu4WGb/WZonQwmpKTMXdBP7qda0D1xj4M3OvejkeXa3NF
+ RbsKHGQ9hXkJUUUCZN0u6HOqcslGTzDW8kFdPffF8ushED5h2Hvb0zxqWU1LTLirzuMG
+ tbqaMW7UK0rogsSk5oJc0q2wcnILhVLoN0QzRPT84pd8JudvOlwOIN7jlrwRCNgmXJpk
+ nZjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743092902; x=1743697702;
+ d=1e100.net; s=20230601; t=1743092932; x=1743697732;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ea4k6Ydw38CIvo1ItjzoMFp5RYHiwRDRIb55Ltz4Z8A=;
- b=F4BJ1bS1sheBsAOydgeEgjRGSeihPU37kuixiNIRCMw/zD+xEYdrFbrq9LDOJfPTjI
- maWuX5HkfWbUm+1HwML+kKEXkUZZlq3eoCWFrU9QNLdRls6DWDdjC911qqucmOO67/7x
- 7lkwEBpFsRHq/UQaLBkMSkypFzAoplmJMtY0bs7n4XJayYDtIuDnWGBWLk6rwCsDkjL9
- xQLMw5YBXg7zUW3ECgQKfKlvVbp/Mt2AoRZaujD4ng9njpVA9loLa00BC1i+2LUC/OfD
- Fnr2z1OStxwuWsoGWepnRl/thOfTOFT7haC5JCXJii4+9msqamrWZImUMPm4OTG/z8qK
- PsSg==
+ bh=Wf//nq19qpRJWK0wwIu+4epzr3aQEFzHM4jlBScR9sA=;
+ b=spZMW6jYX0dzJHE5R9d8GAMmKovuWpZHlbcLKxvQz8n3UZYDJHYfAplriyn4TvpAbr
+ W1BvzIadZuxqKsfJdSEaAFNWrpvj/+/7K9UXjGzgbuySJWey/hB3csodFcCypKAEmduY
+ otSTtc+/uckHwXzsba4dUoCBOf668CWTbiF61jhY3XPFzQwLVW37dGDahpzWPPCjuhar
+ zJVZVvSo6cAulqH2M0L+5jcfxRdCVqzNvajTaYijuS8k9Xa+uc6Yf9SfdvKaK4uZ/klp
+ sXewogAYxTHcUAXab61TTuhyPRt1YuSqAgcVwp/64wQyo9I2xO7it3AABGaBrAj4DR3z
+ Snqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0EpUPbisXBBMi83fvVPoBdijxAXc6DFB2MsOi7wWCrp2YPMb0+4YZc19HYMGn/FSKtrhGBxg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6s7L1Jbimq/NcyIIVHCZxBmRUzf1itvfXhTqkDrLqZ+8iltzg
- DtlcOaIDam4rkl2Ju4cpks0/tmx9azdTM4x33J+BhSdbYF6Hq/FF1osMG5lqOwk=
-X-Gm-Gg: ASbGncsVsHO5Z9auVtLoMaRTpcJVK4Xwxz0fphB1bCdy/6aw5zIsjgVQ1+zaNfEnZGc
- +boq0XTnFHW58TV0a81lkHPr3fz0d/zVlFQRwczEnmFy6H1UryIpW63naCneU7LXxuw8tn385kL
- WkdB7Fy4miGPri/E80AZLVRoKspxvU78IaR81weFzhPBLhfmLV/diJyvdH8bRBR3ntbcahjZjGK
- bC1rBaGDTR0TUSStMxmtIoLwm4zqFFK8ewGUc2ncuZ+Fv2I4AU8JLNJcTD1MYsZKtG7Ewiw49Fg
- 15zvTKkWXKi0FtfVtttybBkBHoGpK166Gjqw1GOUwoJJlh+gB9V6niT7bENIvIb0VDw0j5krS1Y
+ AJvYcCVKNSdb8Xd79bqspjSTYCveCiOdznDIWqhCOT5ZXaPjSgTXSWYNeZDHPBp8Sgrk9jsPjk/eYLc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQWiiFwPG3mUbeDRWo1XUURZ7MqP3YllQVaPB7E60ilNt+8WlH
+ b4z3+x4jqSSHTzKBmGVDAgdpE0TaFFfvaJO+VaBJ1MYZnS+5p88d3RZgFzU9f3A=
+X-Gm-Gg: ASbGncsuA4+dN2YD4Dj4d9IW4M7smYe9AiPE+jXmtZ4jDwzcAy++8DVpubMRwSFgEse
+ OjHfno+NkSFzLTuMrntcjrRRZZyvTfbvoYWodASNbWb5M0qRGM2GNzgf8LPXKUY7aKC3uumdEY4
+ N98RfimXUui80dPWMemafpgfbGpVIrO4F789uMgnxP9HNTE3J1GlSGiwG0OLQDd+Mg3mlE8fkcW
+ jOKhfmC7WlT+hJpFSzgcTVnAOwH2ZS34zUU8quP+0wFVKLM1wpC5R8z2D05FaoQh9R9BrejIn7b
+ F67z9qj5oXFP03FKdwLZFMxQRbIMHmkUeyyRRjMRJjN/Yg5PDSMr8UM87CK/0Wi16uQc9GmxhgE
  =
-X-Google-Smtp-Source: AGHT+IEaaBHPVUI/wQ+6FiBIrO0cM/dtEJxrQgiQT6xv87TGP15pA1r65Q0Hl6u7wTrCxn7sfQYkYw==
-X-Received: by 2002:a05:600c:4fd4:b0:43c:f44c:72a6 with SMTP id
- 5b1f17b1804b1-43d8d5b0106mr14254315e9.2.1743092902416; 
- Thu, 27 Mar 2025 09:28:22 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGuQULHRJM2QTLdXdsTW9jvv7+P3+OGYu95pwK/t43yPhCXVQcWUd3Dhop7aiQJDQWTl+YGhw==
+X-Received: by 2002:a05:6000:1786:b0:38f:4acd:975c with SMTP id
+ ffacd0b85a97d-39ad174916emr4066724f8f.27.1743092931610; 
+ Thu, 27 Mar 2025 09:28:51 -0700 (PDT)
 Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82e83477sm44033915e9.16.2025.03.27.09.28.20
+ 5b1f17b1804b1-43d7bfcad9esm43280305e9.1.2025.03.27.09.28.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Mar 2025 09:28:21 -0700 (PDT)
-Message-ID: <63f9cecc-4889-4fbf-b0ca-9db28c356a6c@linaro.org>
-Date: Thu, 27 Mar 2025 17:28:20 +0100
+ Thu, 27 Mar 2025 09:28:50 -0700 (PDT)
+Message-ID: <a13e5210-b666-467d-8b9c-da0b8d35c3e6@linaro.org>
+Date: Thu, 27 Mar 2025 17:28:50 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 14/29] efi: arm: Don't do the EL2 switch when running
- under EFI
+Subject: Re: [PATCH v4 15/29] efi: arm: Avoid allocating page tables when
+ running under EFI
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Albert Aribaud <albert.u.boot@aribaud.net>, Janne Grunau <j@jannau.net>,
- Tom Rini <trini@konsulko.com>
+ Albert Aribaud <albert.u.boot@aribaud.net>, Tom Rini <trini@konsulko.com>
 References: <20250215032254.4121030-1-sjg@chromium.org>
- <20250215032254.4121030-15-sjg@chromium.org>
+ <20250215032254.4121030-16-sjg@chromium.org>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250215032254.4121030-15-sjg@chromium.org>
+In-Reply-To: <20250215032254.4121030-16-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,49 +107,42 @@ X-Virus-Status: Clean
 
 
 On 2/15/25 04:22, Simon Glass wrote:
-> The previous bootloader has likely done this already, so avoid trying to
-> do it again. This fixes a crash in QEMU when booting from EDK2
+> The previous bootloader has already set up the page tables, so don't try
+> to do it again.
+> 
+> This fixes a crash in QEMU when booting from EDK2
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-
-ll_boot_init is a pretty unintuitive name tbh. skip_lowlevel_init() 
-might be clearer?
-
-off-topic, but how is EBS called?
 
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > 
 > (no changes since v1)
 > 
->   arch/arm/lib/bootm.c | 7 +++++--
->   1 file changed, 5 insertions(+), 2 deletions(-)
+>   arch/arm/lib/cache.c | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
-> index 974cbfe8400..688c2f3f29b 100644
-> --- a/arch/arm/lib/bootm.c
-> +++ b/arch/arm/lib/bootm.c
-> @@ -16,6 +16,7 @@
->   #include <command.h>
+> diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
+> index 516754caeaf..bdd0f202bf9 100644
+> --- a/arch/arm/lib/cache.c
+> +++ b/arch/arm/lib/cache.c
+> @@ -6,6 +6,7 @@
+>   
+>   #include <config.h>
 >   #include <cpu_func.h>
->   #include <dm.h>
 > +#include <init.h>
 >   #include <log.h>
->   #include <asm/global_data.h>
->   #include <dm/root.h>
-> @@ -186,8 +187,10 @@ __weak void setup_board_tags(struct tag **in_params) {}
->   #ifdef CONFIG_ARM64
->   static void do_nonsec_virt_switch(void)
->   {
-> -	smp_kick_all_cpus();
-> -	dcache_disable();	/* flush cache before swtiching to EL2 */
-> +	if (ll_boot_init()) {
-> +		smp_kick_all_cpus();
-> +		dcache_disable();	/* flush cache before swtiching to EL2 */
-> +	}
->   }
->   #endif
+>   #include <malloc.h>
+>   #include <asm/cache.h>
+> @@ -138,6 +139,8 @@ int arch_reserve_mmu(void)
 >   
+>   __weak int arm_reserve_mmu(void)
+>   {
+> +	if (!ll_boot_init())
+> +		return 0;
+>   #if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+>   	/* reserve TLB table */
+>   	gd->arch.tlb_size = PGTABLE_SIZE;
 
 -- 
 Caleb (they/them)
