@@ -4,90 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DEAFC3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 23:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1CAEC3600B
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 02:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EA37810EA;
-	Fri, 28 Mar 2025 00:50:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6EAA809A4;
+	Fri, 28 Mar 2025 03:20:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mLSSx2y1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cy5gmiZB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FA66810F4; Fri, 28 Mar 2025 00:50:06 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id CB56281D3B; Thu, 27 Mar 2025 15:19:13 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98F628070C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 00:50:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B4D1806FC
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:19:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-72c09f8369cso423368a34.3
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 16:50:03 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-60208b7a6d6so344388eaf.1
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 07:19:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743119402; x=1743724202; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743085150; x=1743689950; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=u3aPukSGvY5k3yWCWv63F60dWWx/8dTzOrF/pWbS790=;
- b=mLSSx2y1JgMXJP1JTuZQXq1fOfachflOiSpYvK2tDjssThKRXmiHN+Y+r1kA+xArkA
- r0WHI5y6wEe7mxhCfw0XdCh2l1n7lFQl5OYF5VOp4Zm3qZfj/o7DDAY+4uzaU5APMzuk
- NrLVGR47Kx7mBnqgQGLsBAmT80BO91GQoz0dg=
+ bh=EBnewPaYcukbRF7XMl9WnaDPlYbVM07ET31mo9lOzog=;
+ b=cy5gmiZB3PivjKxj9njSeDwDfOanzjoYLjagIHnP/+QGd35mCjPGpNQIrdYRHOGueK
+ 9DxyVwr5qLzgxo9WL1780vxSft1ptQh/Y9qVRmhraTPMiNLTvKDuR9coKv/SLmXKnwh+
+ Tv+M0K+sDxchAuxC5ZojH6NADcW0bf128gR+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743119402; x=1743724202;
+ d=1e100.net; s=20230601; t=1743085150; x=1743689950;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u3aPukSGvY5k3yWCWv63F60dWWx/8dTzOrF/pWbS790=;
- b=Y6HHsozT/YC5N7meDaIxUrLz1pFwWxrWBLPJrEXfnDy/LZ+fNeSQ8AgRouYRqJfrn6
- 1jByGRClaIdd2D+6PCvEEaESMo9BVVMwLJPVADBi4pNrJdmGkEka8ELYfSbOJgcSJzYW
- v7Ms73ektGXtNcPEQ1Pn649YDf04nBh686jdAAq8zkmUupFfTGEco64DV3C25Tb2XGnD
- 7ikM5JXHowoK/Jk+mAyomh0VNr1dfQyQB64tC/KeueYMB/7yJy9/WQJHB0kzc30gpoFw
- VAPT3tFKieNXkY6b8CYkJ5o2ZkOqJmMeJ79LipTytKVhqn/uP27Ug9+EKyeYEuVvtPih
- UoQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUVfI7vSHRgkb9Al5nhuo+0p+OrKzBbHLu01v796Zu3G5nzjNMwXAljUIaFOv/natQiM15poe8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyPjM8FCjqse9wlWQduaEq9fM2u4fzK5jSQlFbH31lIj49h9sN
- AMdNZWSJ92iBgGewmeIn3/wOUIQ0GWXKDDNE/LWphWFC0rx3ZSDgWn4RhYMeJlA=
-X-Gm-Gg: ASbGnctcZbYPell3NcUmcOlft5+iem/DpIoqtAzDCN9T4kBHCTyqK3dWhtnM0uvMzee
- rI3CfQ67aH4VpmftWb1Dhvjp10R+MtmBO5UreIGQbCs6Yn4H7O3Uu0J1ErWcxtnx5m+lmX9Qt0H
- PnyR6WlZpfGrNELFHE39BU+CnaA5vgqoKBMDbcPv8B6Qd88fyEbWAnMtPtD75Aiys8vaK7k57iX
- axsEOJXNploq/aMGxB9lu2K/wKAiFZzFk4XKK764P5/WjR/FnR39qtPqiGZ5rvOTLqL+G4GoRuk
- j4WkvYODNUwPVupwev16LiQBE/BkTpG/LI9PO96T2xeqw46ilyn2LHPV/dG2JVeYrhQoe2on8AI
- ADDpeKA==
-X-Google-Smtp-Source: AGHT+IGjLQ/3Y8bL+epbyCnzKMSw25s9rCDcDumlLIEpCbZ1kheI5Nj306A0Pwn4CHd3HU3KjzLp6g==
-X-Received: by 2002:a05:6830:6c0e:b0:727:3439:5bec with SMTP id
- 46e09a7af769-72c4c9f1998mr4202757a34.15.1743119401935; 
- Thu, 27 Mar 2025 16:50:01 -0700 (PDT)
+ bh=EBnewPaYcukbRF7XMl9WnaDPlYbVM07ET31mo9lOzog=;
+ b=eEzEsJRlVfs0lW3GjrEghpgrBBD4SpaoV5wNKTRKiGJCTz8zPbri+QaV5QKggxqTsH
+ VcU1ogXZWnjzzM6HO9h6XKGxmBmLjsSB1JIcQHkLI8Y9WD//+ZWWTmv7sa7I7N7a8hB2
+ +4WdJBOHPorb8Xt9hVeZ7Zq03IsShNIyr/bt5z74bsbkUQqOnMQXwe/yYzuJIh/E7YvA
+ 8I19jp3KQDaHsOMPIUgj781DsJ3wjD1Q3ZGRuDvsWkolWOKkH2whhXJM5A17W8BuDRmV
+ gqUi1C1/b+TtOsDUxWTENL0czenOmGj0Mrxu99iYQHGguqIOb/tBIrYjukTEOJ4Tie0h
+ 12iQ==
+X-Gm-Message-State: AOJu0YxW7B20rZMXvL3dmvS1U1WaVA54iAVpp8Cm8BBDMr3VE0Hp0Q9O
+ KptAC7vpk9N0+Sm3JSvPjQCjgPf+o0DKwtTzXPOSJq5zL1DZpMqSJQl7VKaoR4A=
+X-Gm-Gg: ASbGncsHARL/du4XGFIsJv9yQKN/Xec8PFHeCLnW/JQH1pD8tESgbD96qjf+PgksN/E
+ OnPGvrTTKpU5qdiDI/EWwWs2dlWL2c8SiQw1qRgmiZWm6ond9+e+CUkMjP0l1KiNTKObBeF2/3A
+ gzsxVhfS8M5KKK6PoJ+vZqobD3htpGcvOVgeNIx/J8xj7EpvwBplNfrRAj/DvtnoLuLUlexaZdr
+ CJHaZzx0/edsG0bHVlNJBZvVC4FJADmnUk9VQZg7A0XvaezKHk+jn0Vh+dwXbi49yQfo0xEBium
+ ya1N4IBCE4hV4aGIfkjhIfLsF/fZL8cw4s6XX9JcFdNrQtzAPu5+/vod9ghEPzPTfkraN5swasi
+ KCCId5sZa2h/mgAf3
+X-Google-Smtp-Source: AGHT+IFNYoOHrLXEnnGykEdB8krqK5tM8ALfFOuxajwB12SGed2rhjYJuiIRO20MH6/5AgqHhgQ4bA==
+X-Received: by 2002:a05:6820:4586:b0:5fd:b60:ce94 with SMTP id
+ 006d021491bc7-602785699b7mr1833899eaf.2.1743085150066; 
+ Thu, 27 Mar 2025 07:19:10 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580fa72fsm173811a34.41.2025.03.27.16.50.00
+ 006d021491bc7-60273571f99sm453209eaf.30.2025.03.27.07.19.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Mar 2025 16:50:01 -0700 (PDT)
-Date: Thu, 27 Mar 2025 17:49:59 -0600
+ Thu, 27 Mar 2025 07:19:09 -0700 (PDT)
+Date: Thu, 27 Mar 2025 08:19:05 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
-Message-ID: <20250327234959.GS93000@bill-the-cat>
-References: <20250319114947.2188805-1-sjg@chromium.org>
- <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
- <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
- <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
- <CAFLszTic6gt4fT4pVVthd-3rRy6JZ_28QLXWOYPak=ZJqYH5QQ@mail.gmail.com>
- <ef183d5a-48d3-4068-be11-04edd55febf5@cherry.de>
- <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anatolij Gustschin <agust@denx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Anton Bambura <jenneron@protonmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>, Janne Grunau <j@jannau.net>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Masahiro Yamada <masahiroy@kernel.org>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Richard Weinberger <richard@nod.at>, Rick Chen <rick@andestech.com>,
+ Sam Edwards <CFSworks@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Trevor Woerner <twoerner@gmail.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH v4 00/29] arm: Support building as an EFI app
+Message-ID: <20250327141905.GQ93000@bill-the-cat>
+References: <20250215032254.4121030-1-sjg@chromium.org>
+ <20250221204531.GS1233568@bill-the-cat>
+ <CAFLszTj3kyGwC-EY+s5g5T0dBN+7Bg3i8crySiqzGirTAFX-nA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nh3HXs3fPXyo8zyo"
+ protocol="application/pgp-signature"; boundary="78KdKppTO8F+DxXd"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
+In-Reply-To: <CAFLszTj3kyGwC-EY+s5g5T0dBN+7Bg3i8crySiqzGirTAFX-nA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Fri, 28 Mar 2025 03:20:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,178 +131,83 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---nh3HXs3fPXyo8zyo
+--78KdKppTO8F+DxXd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 26, 2025 at 10:46:57AM -0600, Simon Glass wrote:
-> Hi Quentin,
+On Thu, Mar 27, 2025 at 07:36:06AM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
-> On Tue, 25 Mar 2025 at 04:20, Quentin Schulz <quentin.schulz@cherry.de> w=
-rote:
+> On Fri, 21 Feb 2025 at 13:45, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Hi Simon,
+> > On Fri, Feb 14, 2025 at 08:22:21PM -0700, Simon Glass wrote:
 > >
-> > On 3/20/25 4:26 AM, Simon Glass wrote:
-> > > Hi Quentin,
+> > > The original x86 EFI-app was written back in 2015, about a year before
+> > > the EFI-loader was introduced. At that point, ARM mostly used U-Boot =
+and
+> > > FIT (Flat Image Tree).
 > > >
-> > > On Wed, 19 Mar 2025 at 16:31, Quentin Schulz <quentin.schulz@cherry.d=
-e> wrote:
-> > >>
-> > >> Hi Simon
-> > >>
-> > >> On 3/19/25 4:03 PM, Simon Glass wrote:
-> > >>> Hi Quentin,
-> > >>>
-> > >>> On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schulz@cherry=
-=2Ede> wrote:
-> > >>>>
-> > >>>> Hi Simon,
-> > >>>>
-> > >>>> On 3/19/25 12:49 PM, Simon Glass wrote:
-> > >>>>> Logging of function return-values is used very frequently in U-Bo=
-ot now.
-> > >>>>> Add a few helper macros to make it less verbose to use.
-> > >>>>>
-> > >>>>> It turns out that the log_ret() variants are not so useful, since=
- it is
-> > >>>>> not obviously where the error is coming from. So only the log_msg=
-_ret()
-> > >>>>> variants are worthy of these macros.
-> > >>>>>
-> > >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >>>>> ---
-> > >>>>>
-> > >>>>>     include/log.h | 26 ++++++++++++++++++++++++++
-> > >>>>>     1 file changed, 26 insertions(+)
-> > >>>>>
-> > >>>>> diff --git a/include/log.h b/include/log.h
-> > >>>>> index 4f6d6a2c2cf..bdda7af570c 100644
-> > >>>>> --- a/include/log.h
-> > >>>>> +++ b/include/log.h
-> > >>>>> @@ -380,6 +380,32 @@ void __assert_fail(const char *assertion, co=
-nst char *file, unsigned int line,
-> > >>>>>     #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
-> > >>>>>     #endif
-> > >>>>>
-> > >>>>> +/*
-> > >>>>> + * LOGR() - helper macro for calling a function and logging erro=
-r returns
-> > >>>>> + *
-> > >>>>> + * Logs if the function returns a negative value
-> > >>>>> + *
-> > >>>>> + * Usage:   LOGR("abc", my_function(...));
-> > >>>>> + */
-> > >>>>> +#define LOGR(_msg, _expr)    do {            \
-> > >>>>> +     int _ret =3D _expr;                       \
-> > >>>>> +     if (_ret < 0)                           \
-> > >>>>> +             return log_msg_ret(_msg, _ret); \
-> > >>>>> +     } while (0)
-> > >>>>> +
-> > >>>>> +/*
-> > >>>>> + * LOGZ() - helper macro for calling a function and logging erro=
-r returns
-> > >>>>> + *
-> > >>>>> + * Logs if the function returns a non-zero value
-> > >>>>> + *
-> > >>>>> + * Usage:   LOGZ("abc", my_function(...));
-> > >>>>> + */
-> > >>>>> +#define LOGZ(_msg, _expr)    do {            \
-> > >>>>> +     int _ret =3D _expr;                       \
-> > >>>>> +     if (_ret)                               \
-> > >>>>> +             return log_msg_retz(_msg, _ret);        \
-> > >>>>> +     } while (0)
-> > >>>>> +
-> > >>>>
-> > >>>> Mmmm not sure this forced return call is a good idea, this would f=
-orbid
-> > >>>> us from performing some unwinding for example.
-> > >>>
-> > >>> Yes, it is really only for simple cases. Without the return, there
-> > >>> isn't much value and you may as well not use this macro.
-> > >>>
-> > >>>>
-> > >>>> I don't really see how that is better than simply calling
-> > >>>>
-> > >>>> return log_msg_retz("abc", my_function());
-> > >>>
-> > >>> That's not the intention. It actually replaces:
-> > >>>
-> > >>> ret =3D my_function();
-> > >>> if (ret)
-> > >>>       return_log_msg_ret("abc", ret);
-> > >>>
-> > >>> I use this a lot in my code. You can't always just return, since th=
-ere
-> > >>> may not be an error.
-> > >>>
-> > >>
-> > >> I see, I read too fast again. Only return if it's an error.
-> > >>
-> > >>>>
-> > >>>> ?
-> > >>>>
-> > >>>> If we were to keep this, I would recommend to rename the macro and=
- fix
-> > >>>> the docstring because it does not only log if the function returns=
- a
-> > >>>> non-zero value. It does actually return.
-> > >>>>
-> > >>>> So something like
-> > >>>>
-> > >>>> LOGZ_AND_RETURN(_msg, _expr)
-> > >>>>
-> > >>>> maybe?
-> > >>>
-> > >>> Sure, longer names are easier to learn, but then it is so long I do=
-ubt
-> > >>> anyone would use it.
-> > >>>
-> > >>> Perhaps LOG_RET() and LOG_RETZ() ? But they might get confused with
-> > >>> log_ret() and log_retz(), which I am actually thinking of deleting.
-> > >>>
-> > >>> I would like the shortest possible name to avoid spilling functions
-> > >>> onto the next line all the time.
-> > >>>
-> > >>
-> > >> It should be absolutely obvious from the macro name that this can in
-> > >> fact return because missing to unwind code is among the things
-> > >> developers typically easily miss already, so with this macro it'll be
-> > >> even easier to forget about undoing things.
-> > >>
+> > > Today, sadly, there are a few efforts to re-invent FIT poorly, to cat=
+er
+> > > to more primitive boot-environments than U-Boot. One justification for
+> > > this re-invetion has been that EDK2 did not support FIT.
 > > >
-> > > Yes that's true. We don't have a huge amount of tests for this 'undo'
-> > > code either. I would bet that a code-coverage map would show that.
+> > > EDK2 does now support FIT but only for the firmware stage. Even then,
+> > > vendors tend to use their own forks, so any new features are slow to
+> > > make it into the market.
 > > >
+> > > EDK2 also supports the ext4 filesystem, but many devices don't include
+> > > that feature, so most distros make use of FAT for storing their boot
+> > > files. Since FAT is not journalled, it is not particularly reliable in
+> > > the face of reset, power failure, etc.
+> > >
+> > > As an interim measure, we can use U-Boot as an EFI app running on top=
+ of
+> > > whatever EDK2 fork is in use. This allows use of modern features such=
+ as
+> > > FIT and filesystems other than FAT. So far this only supports x86, but
+> > > recent ARM laptops are making use of EFI too.
+> > >
+> > > So this series adds an EFI app for 64-bit ARM.
+> > >
+> > > Note: Since U-Boot does not support EFI's GOP 'blt-only' mode, the
+> > > vidconsole does not operate, but it can still be used, since EDK2
+> > > handles drawing instead of U-Boot. As a result, the U-Boot logo is not
+> > > shown.
 > >
-> > Yeah but that's not a reason to make it even harder to spot issues in
-> > the undo code :)
+> > You did miss some of the tags I provided against v3, fwiw.
 >=20
-> I suspect people will just have to learn the macros, as they have with
+> I see this is marked as 'deferred' in patchwork. I'm going to apply it
+> to my tree.
+>=20
+> If you like, I could do a pull request against -next with the EFI-app upd=
+ates.
 
-I would ask "What kernel construct have people already learned and we
-can adapt inside the macro?".
+Yes, I marked it as deferred as this was not based on next to start
+with. If you would like to see progress on this, please start by
+rebasing, addressing the outstanding feedback on and posting the
+pre-requisite patches you applied to your own tree.
 
 --=20
 Tom
 
---nh3HXs3fPXyo8zyo
+--78KdKppTO8F+DxXd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfl5BsACgkQFHw5/5Y0
-tywbBgv/Yio18p88z81/0VY8OS0rocTsHB1+RjR1QtJyo0EgBAXt9oXsscuw7dNx
-icpEAYuI2HosATi7sYl9s2kJX6gLe2iCr0NnTe0vn5k+pYINc6pDyUjuCGS6ONBb
-SpGcB+zGfPonV14tmVu4fsLC4+9IdTK5V9ylkEbe/dqYnY1CNSAtbXt+8xQR/qJX
-X6lC3c6q3oxfwTQCP30wE0CIGM4XDTxmwc0blficOh1v9o7RCEEW2ZQFg31AjRd3
-jQMq7o5a8MpCAx75q84EydGD2G6CFB/Uh3/jZRzZD/Uc1VMAHewn5hI7gWBwFgkV
-gX8Eg5xPw1wavlmFfKWvW4SOBD4tPMFnWWhcb7y1DD009w1iIMNGBzkjOvJB6xRH
-oJ1GFFfhoRB2x0/gOf2Tpf6TOSw2qELaAmBFCvh7eGLSAp/Ab2uAGXLQY9qJXVgU
-Bf+6TIOwaumWEvtq0j2deGXc8JSKj9xc3sHFSzrl07CHeIkEyuURgnkP9oWBRhxZ
-iJRrKHQ9
-=N8Sv
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmflXlkACgkQFHw5/5Y0
+tyxXpwwAsnnMGNOHwp/0R5UIKpghRyR5Ni7VR3b+p4U4CbHgYXVx81h3UetjxPlN
+RDTr8gAz95DvT79tV21XCTlzxEV8QCYA0hS+pbbHyHe/FRaVm2SLlKebe+4UFLcI
+fNtQavu+pDFPPzJbXab8WM1ikWAOE2cbgWscLzhfedEyvEK4aAdCZEMLR+z4UuFX
+rYLDlCDYnpmkHlj6FOTEE3T7lfSrWo+3nGvwNK6py5STQesZX3sZIs33WQxS9dsa
+7gwVlxO5+adgqPs5A8yaiZcRhwYh8hzyzBy8oAjAKOwTK0OscP3Di0SHvUfUi3WD
+zvU39XcxRZl1bpTencSj0l9pDtexPgjhgT1fyEfo5OiPCKn45KI8hnKVmUialXLN
+wOuJvJ0kKYlRrk3K2UO+ndc3ucln5xrysmmJDD54YnyxYM0SQAeJ2KguOMGQsNBj
+abWCt9HI/+gPv9WzL7v2ffSTJ9IXan/sETEWgKm1AhJ9gBQaIZpSf83OdSsAn0bn
+zx0n6vAs
+=gFct
 -----END PGP SIGNATURE-----
 
---nh3HXs3fPXyo8zyo--
+--78KdKppTO8F+DxXd--
