@@ -4,74 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB62C3600C
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 07:08:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63615C3600C
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 07:38:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58FB881DEC;
-	Thu, 27 Mar 2025 08:08:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 60EF28070C;
+	Thu, 27 Mar 2025 08:38:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="qKbLBhhP";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="FJN+VmzH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BDFF81DEC; Thu, 27 Mar 2025 08:08:02 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
+ id 6E1B081273; Thu, 27 Mar 2025 08:38:05 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::62e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACCED81E13
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 08:07:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=174f6da1a=Manikandan.M@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1743059279; x=1774595279;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=gItp/JYH6NFA5bJ4OAgeKFwZ47VFJEP5banvA+Ekhkk=;
- b=qKbLBhhPfyMzH+WfS0Jdmlo3UcNXWr0cmuvS3/r6DPT29/FP52dLpWVp
- neZy2hH0aBfCC87Vu16L4yV3l0UQscNdyKw1mml0gBLt+p7n5l6HkAaRS
- dIkTs3wUdYHCaoiypEmWAzxrWPDaixWyRtVYk62wH9u/4bMXW5uVbTvWZ
- 5dKg19hQoGBRzH4XJ5PSeKp+ipAAf2RVC7fMI8x5B+L9wx7IZco0lA3XA
- FeCBfaarzx5a/Nda59krU790ProyHaqVYgZKBHHeAg29oIQRbUxUNmdNw
- Uq/KMYLaFCq/1hLMznuDcnCQvp40uXaRZ0VrcQAoqrckepRVxMVcQ4OlX Q==;
-X-CSE-ConnectionGUID: 9ZibUNzKTtqByUg53LDiRQ==
-X-CSE-MsgGUID: 4Jso0evARim1A5Fgf5qz3Q==
-X-IronPort-AV: E=Sophos;i="6.14,279,1736838000"; d="scan'208";a="39784745"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 27 Mar 2025 00:07:57 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Thu, 27 Mar 2025 00:07:27 -0700
-Received: from che-lt-i67131.microchip.com (10.10.85.11) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Thu, 27 Mar 2025 00:07:21 -0700
-From: Manikandan Muralidharan <manikandan.m@microchip.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- <seanga2@gmail.com>, <sjg@chromium.org>, <mkorpershoek@baylibre.com>,
- <nathan.morrison@timesys.com>, <ilias.apalodimas@linaro.org>,
- <greg.malysa@timesys.com>, <caleb.connolly@linaro.org>,
- <Oliver.Gaskell@analog.com>, <robert.marko@sartura.hr>,
- <igor.opaniuk@gmail.com>, <semen.protsenko@linaro.org>,
- <william.zhang@broadcom.com>, <nicolas.ferre@microchip.com>,
- <u-boot@lists.denx.de>
-CC: <manikandan.m@microchip.com>
-Subject: [PATCH v5 8/8] configs: sam9x75_curiosity: Add initial mmc default
- config
-Date: Thu, 27 Mar 2025 12:36:15 +0530
-Message-ID: <20250327070615.334551-9-manikandan.m@microchip.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250327070615.334551-1-manikandan.m@microchip.com>
-References: <20250327070615.334551-1-manikandan.m@microchip.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 3AE82806FC
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 08:38:03 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OdJRbXkBN8n9qyNuGZ0rKiq/2FGTTYuvpsCpZWA48f5J9EDTAjKOMWIFXqZa1iPyk7Q1dH1ThmhOFvMgFoS4jfF0b8CUQKR80BRDuoRxk8H6szdrdt3La+bqd5PdsxojuUCNtV3CYKN1RloxuqO5VyBBCrlXaR403WACnW4w1GcQAnqEWjnh1emoQyBmoMs8KV3VcQYyNKodwo3WG2/OkUwUODdbdcO8rN/XEmLvb16p3p6SfWVfANWyzvxfbWlNB1B8MVudqelBiPR0FQjlE5c+h2sTPqlh+0dWsjXX6zm9kTgvBGkJiLSSqlvsQ1xK4XnJz6zFiFMZztDklhfung==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oXtRuHCUGSCAvfZv/0m0ev1JgX21aclbkRFflGvWjrw=;
+ b=HJRSAujyk/Ogw1GACC46zGIzSNkjEOnqbZgNoZtbsFIfTpRBQToJo5Gv1KkxINZJU5nJnCfwjPZwTGb2kcmtiRKetIxMz/wlxB/PfXTzUM0RMNA4cM6Hi+O43iEUNfxXUjM61UJXXKda8kquPAnHcGsf9jqlnzIN6ZVLS86m6GK36t03672SkhP9p3EGNiiV9BWfuatdLyUBas3guCfbWG1GnrwCz0HonAJRenNCzc7EVVvbjZ2ye9tNx5MqEUbMggqGy/Zcvnb5ygCVhpL3n2jpV1T3HJ8vDlQBQri/DnWHLsUnThk/AXDawI4Bzo2votYbB5iwEKmzJEA8+YHS4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oXtRuHCUGSCAvfZv/0m0ev1JgX21aclbkRFflGvWjrw=;
+ b=FJN+VmzHOQqd7G6VEX8bqaCJ5LWxjPjVwCWZHbudvcW+yiMmNEr9MHIzqqFw0CQshKo95b9s7PnZuZ8NQtBfyQzmQLjDN66pGjh6+pDjj4Dv3Ijph6uCX1Ie6E/sdl02ksTe0XujLMGZiKRXYNi6mlMtwGS/rDzXV1IrO2xEVn7/3mvWWP7M2RBWZ/Sr8hdMYwTNSZqsGcO7/XjL0MVLhZ+HzwIBCJ8LHddkszqjh7xYmU+tAsEnMLsa0DV83BPaLt51NwaVbwWtnHYRo2oLwEC8O5K/9NHFhAlwoulVM3RBC9WZTyIbofqtlo7WT/X/YWNnCE2AFyJj0c+nqa6jlw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by PAXPR04MB8847.eurprd04.prod.outlook.com (2603:10a6:102:20e::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 27 Mar
+ 2025 07:38:01 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8534.040; Thu, 27 Mar 2025
+ 07:38:01 +0000
+Date: Thu, 27 Mar 2025 16:46:04 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: Re: [PATCH 4/4] qcom_defconfig: enable capsule update support
+Message-ID: <20250327084603.GA5432@nxa18884-linux>
+References: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
+ <20250326-b4-qcom-capsule-update-improvements-v1-4-afe2e3696675@linaro.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250326-b4-qcom-capsule-update-improvements-v1-4-afe2e3696675@linaro.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SG2P153CA0005.APCP153.PROD.OUTLOOK.COM (2603:1096::15) To
+ PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PAXPR04MB8847:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45e658e8-aae3-4083-0698-08dd6d024d0b
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|52116014|38350700014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Xiswcnj7Tlmpg6El2ijLpxqLw4wQ8o5HAQDib/EpXJKoj9kMhtJ5azFjBCZp?=
+ =?us-ascii?Q?v4RC/+yzPnLfQIuw/amVs+SI7CT7/ltE2/aijMNQ+7ScchKJepf1282VPThO?=
+ =?us-ascii?Q?5kNlPSYBuWrQBaC6oLDoPGsFLrYh+9DWyiJm6ySpEwC6SnKTLEqL9KmUOSTF?=
+ =?us-ascii?Q?+RGj9hBFGCobv84G2PE1PQg1Gy8QDXPWubQoi1Vlav+us3zHmZf4pyZGU83G?=
+ =?us-ascii?Q?UVurijvyZwI14co6Fd5859PXXyDSQAXbsP7wPOiX2JKbKBbQ6qL/H38r720w?=
+ =?us-ascii?Q?fchJe9hJy4XrHxhWgjJZAwnMA80+fpnbDhKfEWBeKzrwIHtYxmdNLugGwaWa?=
+ =?us-ascii?Q?hXhCO1/V5bOrQuj52oTAIAoGyn93GILpI1ak9cDLs8baMwqQJ34nFcwL/7oW?=
+ =?us-ascii?Q?FdySQj85rYoysQKHGR6BSCwCxS4kASZ0g60qZdFIIqRQE3uphTZ6TTp39jTW?=
+ =?us-ascii?Q?6hgN0CW1b52xuCONkfQmwt8ixTvx5iFVUjkaAeeQ4j11/XSVfw0BCv7XwEql?=
+ =?us-ascii?Q?BMGgEPu0Aw69R/wBmg1+76K/DSuqcQnib5FcO5aRzz/43DY8mFNJgJnUxtZC?=
+ =?us-ascii?Q?HLm95hp5m4X5UdhtglYNIIUctbNAIcAvgisIvcdLsoMt1Ego5TjbGoCMCLOO?=
+ =?us-ascii?Q?e1HQqMvyHsCTtZX6HgkiW9U3Ryn9aaaso4410ZuYpXzgiRZKyw26ENXXuqYq?=
+ =?us-ascii?Q?JaErjN8OON4Po8/pyet3QuIpJGLLDGXC4xFkS80JR3gpNulWZAOFI2wIg0hf?=
+ =?us-ascii?Q?dZXrLZEw0dMfX4mU6KaOa/+QUOhooDY53EvRBWpgwL6vX1aZVbgJQjx/NmGt?=
+ =?us-ascii?Q?6P8CoEJ/G04pDqPUt4j/9Kg0oceGKe5+cbwFxcw7M90MN6ZsVYM1tXn3R93W?=
+ =?us-ascii?Q?QUm8oII7kJNgOOYEs2TTm0TXfnH+xFQDE+ar2uLhTCMualWxDAEgzA0JXJsc?=
+ =?us-ascii?Q?WRvCrUM9k0oMcez6x3S2Q+9ivUtHU19dMBIT/BmfYqkXywLINvECeykEMyvi?=
+ =?us-ascii?Q?KXAIWQqo/Dbh6AX1qhr6YvG6KPdSTNSBhr5Mf8PkpU0jKGaAEbw4L8fkecWG?=
+ =?us-ascii?Q?y+jl1LS0Ppw60YTMaJGbIFjhoa6iGUKDdrkLpIhLvEWy0Op5N8tEox/BuYOt?=
+ =?us-ascii?Q?p5/nRsTk4WeHaoA7bksZ1NmpUywKVWDejtofoYEZ8+dUG4QtLECV0VlL8rD6?=
+ =?us-ascii?Q?2oaytMZoo4VAQe3GOmhm1Y9GA7kcMw/45LOVVriO9ZBdClRwsc3qPWnYRGO1?=
+ =?us-ascii?Q?CW0gtrXMDfMcCbUWLLBgcE0/Pr8mJHbNFJyOsQF9hAqivzApUusry5+/juZ7?=
+ =?us-ascii?Q?aBn6Y71F70WepahqBWBifAb+osv4rBKd1YigohSm908K2AXcsFygGUupoFQi?=
+ =?us-ascii?Q?oGvRVqH8o6vLS9KDzBGWtQrS5+MhW4cl+/qXF+je0OI6Z8JbaPVf4tAjCmHT?=
+ =?us-ascii?Q?9CKGHPpqGWGTWAUqpDydRAzV5lRAc6jO?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EtZ7oJduxIv4alBuUEqXj24ig+qTC16PSl/bINexh2DoAFiaw6/3muVWIJzl?=
+ =?us-ascii?Q?hcA9EBULyHI1DIWaiNJmMiRmQuzeIPKeX1ev0Ymz0Lsy3Kwv/7GNEqwwb20J?=
+ =?us-ascii?Q?8ku/YOcaQB7quEL7BzBD+S7EP8/M34k+8YNJwfZVRpMtSfg4zK8ZgRWd9EXP?=
+ =?us-ascii?Q?PiNn4sXG1Kz9YBuvgH7HfqBQr2ctaeCgZCylI9solfurk+YLFoFlFTMzXrSH?=
+ =?us-ascii?Q?l9PWZ7Cuah/6LH/WSff7DLjAAwfvloGR4G3lNBnIolSTdkacDqRKjeLm6Ixz?=
+ =?us-ascii?Q?/GR+oD1W7702TSBbL3eo1gF7DdtoOsjCmN4+YL+YbNV5Mhkfh2PHIz+kxBnP?=
+ =?us-ascii?Q?QAAX4tEkGdwH6yt0S9UTI4bYuyXIOFaLAs1g/JVcuEXggG0wo0YkeBqxbiP7?=
+ =?us-ascii?Q?wjdomaZBbAs3okT3JAnbjh4N84vpSdXfuMwSpmDFhQtyRZTzwLKT0mxh8Wqj?=
+ =?us-ascii?Q?DY6Q5zuh4w2tucgMET9LNLD0DwlLBzIdTPYHZeAvpEE8f/eqdaNRvNn6S0JF?=
+ =?us-ascii?Q?irNPZI7qITNDBzmSgNQv3QnsQvb04GLZYMuEeMXjskP6fTQv3xmV94PuR26t?=
+ =?us-ascii?Q?BXp+mZqo07PqC97e6z+Texs8wDab/UGNLCCFwb+kvd8MYexfr6Xco7xYCrlA?=
+ =?us-ascii?Q?u+0nCJ/YGD1lK6gt2oFY6agvEm8ggRtam2JoRtxIEKKqmM1DO8fI7xmaKGTP?=
+ =?us-ascii?Q?IaKURrzAxVKlsRK29sY5uQ8Gs+gFke+G95JJ/n287MIMLDTjVmyF2wOqjeHf?=
+ =?us-ascii?Q?TNO+O6V22Uhh2PHo1FhzBBMRoJZmcQY+d00CZpmQbSXOVDdv9clPBW98trtm?=
+ =?us-ascii?Q?cVJl1yzLUkprwI74f8C0giq5A8ZPmF2oSeuZdNSEkXmR4Y5cTXbQOKLr4Td1?=
+ =?us-ascii?Q?Y9Dbp1Tm2Ns+jOYq8LCzGDscGK5sA905Iq+T6LqVckf6cft1+dlEACoazIO+?=
+ =?us-ascii?Q?dX0DTqrMdu/SW5T3cpWtp9UKhVKwsyuu55qP8eOgy2YZY4NjFm5xLd3pu7Xs?=
+ =?us-ascii?Q?x7+QWqfwM11Y4TaQB4+BqL3Dzsa2xA9bu5lZ1MI+vj2l7RcCvTKBqBOBu6to?=
+ =?us-ascii?Q?JHmQLDlQyOKmTkg0hHpcWTOEDS2hJdaiADGFJym7bB85HmJbsD3OB8QAt4br?=
+ =?us-ascii?Q?VkUaiz2R+eCk/4jq27dzPCTsOmnPgGDuh73q8frstM6pnS8TMDHtyKWhZoiy?=
+ =?us-ascii?Q?Y+EIXlQc/Uq0nrFGoP8NareVAXZgVO0DUR4DbrodZlpnKWdjOyY85Y/1tIIc?=
+ =?us-ascii?Q?4odmMpRMWiSDhix5C82tQhza7+ccgVxEGvpAfTl34kxnWL96Ir8owiVC6cs+?=
+ =?us-ascii?Q?kxitFRDKYlnmIPB/SPT86FybhWLl2JECXIIRh9wzFlPFgvVOaZb3hmMH/Vzz?=
+ =?us-ascii?Q?uklX0OE3W4Nig1aVbZmV4YVevwCM23YJ54qCAmMCuuNXyrNAxJlhc+i0MLd6?=
+ =?us-ascii?Q?GRitoj6LjCmBwSHPFDtR8yy1ZSMCJUZMEeFr5WYemf+W7dR82Jy0ap+92ERb?=
+ =?us-ascii?Q?bhSy5w0f26fV3SBtTxxSMWiBdyZPEEloEBsojbasv+wRpga04XpCaXEAXNuR?=
+ =?us-ascii?Q?Cx+y2ow/iiOu8v5IMAENRW4EWwFsNXWy4ysYPwUn?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45e658e8-aae3-4083-0698-08dd6d024d0b
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2025 07:38:01.0927 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: GzBLxbr/7qx/w8uiVSXfHJbZoipr7KBbkyls7hYfqJBx/w7I5G8qF668XRR7LkQp8DaZ0tSSh30dp3PjUnOuFw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8847
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,103 +164,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add default configuration for sd-card to boot the linux kernel.
+On Wed, Mar 26, 2025 at 06:40:37PM +0100, Caleb Connolly wrote:
+>We can now correctly identify which partition U-Boot is flashed to
+>between uefi, xbl, and boot (including A/B support) so enable capsule
+>update support for all boards.
+>
+>Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>---
+> configs/qcm6490_defconfig | 6 ------
+> configs/qcom_defconfig    | 3 +++
+> 2 files changed, 3 insertions(+), 6 deletions(-)
+>
+>diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+>index ba26924da161b1c4b5378955185f314b05cb1006..5ddc5ab3ef8cfe8f9cc09eb573c1a8130b394b43 100644
+>--- a/configs/qcm6490_defconfig
+>+++ b/configs/qcm6490_defconfig
+>@@ -18,10 +18,4 @@ CONFIG_DEBUG_UART_CLOCK=14745600
+> CONFIG_TEXT_BASE=0x9fc00000
+> CONFIG_REMAKE_ELF=y
+> 
+> CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+>-
+>-# Enable capsule updates
+>-CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>-CONFIG_EFI_CAPSULE_ON_DISK=y
+>-CONFIG_EFI_IGNORE_OSINDICATIONS=y
+>-CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+>diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+>index ba4d38d100e053e3708ee2623bf3530787b6b94f..d69185f3c2f0452e6757b785a023cf612bfa3839 100644
+>--- a/configs/qcom_defconfig
+>+++ b/configs/qcom_defconfig
+>@@ -5,8 +5,11 @@ CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
+> CONFIG_ARCH_SNAPDRAGON=y
+> CONFIG_NR_DRAM_BANKS=24
+> CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
+> CONFIG_SYS_LOAD_ADDR=0xA0000000
+>+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>+CONFIG_EFI_CAPSULE_ON_DISK=y
+>+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> CONFIG_BUTTON_CMD=y
+> CONFIG_FIT=y
+> CONFIG_FIT_VERBOSE=y
+> CONFIG_BOOTSTD_FULL=y
 
-Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
----
- board/atmel/sam9x75_curiosity/MAINTAINERS |  1 +
- configs/sam9x75_curiosity_mmc_defconfig   | 73 +++++++++++++++++++++++
- 2 files changed, 74 insertions(+)
- create mode 100644 configs/sam9x75_curiosity_mmc_defconfig
+For capsule update, CONFIG_EFI_MM_COMM_TEE is not needed?
 
-diff --git a/board/atmel/sam9x75_curiosity/MAINTAINERS b/board/atmel/sam9x75_curiosity/MAINTAINERS
-index a175053418f..f0dfdbe8d5c 100644
---- a/board/atmel/sam9x75_curiosity/MAINTAINERS
-+++ b/board/atmel/sam9x75_curiosity/MAINTAINERS
-@@ -4,3 +4,4 @@ S:	Maintained
- F:	board/atmel/sam9x75_curiosity/
- F:	include/configs/sam9x75_curiosity.h
- F:	arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
-+F:	configs/sam9x75_curiosity_mmc_defconfig
-diff --git a/configs/sam9x75_curiosity_mmc_defconfig b/configs/sam9x75_curiosity_mmc_defconfig
-new file mode 100644
-index 00000000000..76b85448285
---- /dev/null
-+++ b/configs/sam9x75_curiosity_mmc_defconfig
-@@ -0,0 +1,73 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_ARCH_AT91=y
-+CONFIG_TEXT_BASE=0x23f00000
-+CONFIG_SYS_MALLOC_LEN=0x81000
-+CONFIG_SYS_MALLOC_F_LEN=0x12000
-+CONFIG_TARGET_SAM9X75_CURIOSITY=y
-+CONFIG_ATMEL_LEGACY=y
-+CONFIG_NR_DRAM_BANKS=8
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20015f00
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="microchip/at91-sam9x75_curiosity"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SYS_LOAD_ADDR=0x22000000
-+CONFIG_DEBUG_UART_BASE=0xfffff200
-+CONFIG_DEBUG_UART_CLOCK=266666666
-+CONFIG_DEBUG_UART_BOARD_INIT=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_SD_BOOT=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="mem=256M console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="fatload mmc 0:1 0x21000000 at91-sam9x75_curiosity.dtb; fatload mmc 0:1 0x22000000 zImage; bootz 0x22000000 - 0x21000000"
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_PBSIZE=281
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_BOOTP_BOOTFILESIZE=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_HASH=y
-+CONFIG_HASH_VERIFY=y
-+CONFIG_CMD_FAT=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_AT91=y
-+CONFIG_AT91_GENERIC_CLK=y
-+CONFIG_AT91_SAM9X60_PLL=y
-+CONFIG_CPU=y
-+CONFIG_AT91_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_AT91=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MICROCHIP_FLEXCOM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ATMEL=y
-+CONFIG_MTD=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_AT91=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_ATMEL_USART=y
-+CONFIG_TIMER=y
-+CONFIG_MCHP_PIT64B_TIMER=y
-+CONFIG_PHANDLE_CHECK_SEQ=y
--- 
-2.25.1
-
+Regards,
+Peng
+>
+>-- 
+>2.49.0
+>
