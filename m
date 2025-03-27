@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41BBAC3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 10:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F27EC3600C
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 10:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A32B81273;
-	Thu, 27 Mar 2025 11:52:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6AAF681E14;
+	Thu, 27 Mar 2025 11:52:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="nLS4fpD/";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tYw/46UQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E295481D65; Thu, 27 Mar 2025 11:52:44 +0100 (CET)
+ id BFC9A81DB4; Thu, 27 Mar 2025 11:52:48 +0100 (CET)
 Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::608])
+ (mail-dm6nam12on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::618])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FACD8070C
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 11:52:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 498F381DB4
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 11:52:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UpR935utWcVRhZzLWlrkX7qGikUMZXyrf9lWm+wGhsipQkWTR3mfxeyQ/BraDVZwypqAzPhPO6OAxuucZ6gTn+HmZjnBwnRoMZWs4GxrUhjVkBzY3JlzbNCJoVBCQYu9J3MdQO0XDCOWYoJo6QoMCBb9GRCYskPdMbFJCj+VDeDydRonFDuKaMLcPnIxW2AGeIMG1p/VaXcaAwuGY7avKRb5u75CVpLMrZLMKKS+C7VTt6k3gFeSxWJyceTcERN/UCApiuf6VvUHV9sFKax71ZvVUaFd3TKa1AIRY1sVODetRsFBRzmqs665gnuSyOX9FWzqR7O8ERnrYZel9R6E3g==
+ b=RJmnzxfWu0ippEkwIbVtEWjW5w85O0YCp9dW79O6V1zuaH2Nms4SH0Bpz6tm77zPf0D+AyCZQ2pXM+SDDaphMi0NlAimwjtxvnrQ6Jo4A//OZmWDmDYQdU88nHPlWo7yFwcG48sdAayoC1U5lOUUlfCOWNyxye1d1EaQy097KTre4sJWXTW4+2+GK0e1e2BksQq+gUi6Zo3ti5gv6ijonvEfKm8RfYkGeCXOw42gNQQMy0zdUEHU6erejB9s/sJKD2radLSLfjwXEtk9Is1uf+sT4E6nI6UYeq3rcpfBaMuBcP1H+FVh2TkZfLIssP7rJc84/wTR/DhBcWzmD2zBBg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QAE1it5m/lttbRqmNOd3Co77jxBvZbOaegdztWQjxBM=;
- b=jNFAz9Ck4jKXXPs0RED6w8dNu3DYO8kb469OsfBd97NU1s2ybS1POpiP73IsqpPSXtj7n3f2NuiZuFkmE2gsK6ccyUzLkpvazrkXJCmapc86DYw6L1gkBay2kKgeLiZcrpdFAS/sttHuNUaVyj/3z37Hal9diYFuj+vzgW0TmCdYzQc4ywwLip58PcI5zguOZpDiZ75Hr+jZIgK98Lp9HwPaFbPbfkYq5LlrWCkSQJ7tqvtXlHjbYH0/mMrKjTFmoqtEOdIF8zyxeaBxGRUEINTIIc1BmVy7cufg15LSNmbsmWeOzH3TK7HitUxw/BpSn2SywbT+A6xZsShM1+NwKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=Y2qPQP3OZOks4Jl8u4XAYc/duCLJFCfJr1vMS3ic0NI=;
+ b=Ywal4UJvBQv4dTDZRgjONc7Hr0QYyBaEoIHlADPAkB2CD/oOSLfDCnv6VGgrscKp5Z8tPJ6S4jhqASotgre8ahuw2f0CmlrDViBS2hO8qXdRljTog6/J1igCB2Pz0BK+8mgqrAf0sHIKUhI+q8tCaphS0oYtO8yjCjWONmj8+ybfvN1+sRuUThCXYCo4Mr0oPlCPLn2Bz2YcouELXcI4/tmDi3U3AI5BtngiEHeJAqmr5EhyRSOcC2Q0Akc3GHgY4P3vEEtDwz1nBUHACF8xK2f33eVoTjUPv8+EQ6nPvuUcFacIXIpWQon7iuDAemB6x8oI/a+k4X9PDn8RbGuNxw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
+ is 165.204.84.17) smtp.rcpttodomain=lists.denx.de
+ smtp.mailfrom=amd.com; 
+ dmarc=temperror action=none header.from=amd.com; dkim=none (message not
+ signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QAE1it5m/lttbRqmNOd3Co77jxBvZbOaegdztWQjxBM=;
- b=nLS4fpD/2dnouQDSUQbMKYJtTUR55C3wM8dlHRNR+4f6WFRxLXmghgsAvoxLr8O3g0s+4hzhDeLJJsKk8cGHlTlRJxcpRvJZBE8D/woxcUKx9DxLI71P9yGvY24cju5iS8/8VkCUuipV+6ftCX7tF2CpcW3iNhc9vkuWU9tJZe0=
-Received: from CH0P223CA0026.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:116::27)
- by SJ1PR12MB6243.namprd12.prod.outlook.com (2603:10b6:a03:456::13)
+ bh=Y2qPQP3OZOks4Jl8u4XAYc/duCLJFCfJr1vMS3ic0NI=;
+ b=tYw/46UQ7W4694pgqxwyY5gj0aoXHyXKe4cjFdBdEsUnUqWS2Js0x7gTYCQoCQ4N/U5BoYtciCiKtncfWW+ojcJdav2YwPZOjPltRBc5eJfs1rT+ms7HB8VUseQw8wkDn7Cu/hRzzhjhQ0GUtkpVY1d5tsZJqRbaRA7pjvW8qk4=
+Received: from SA1P222CA0169.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c3::12)
+ by IA0PR12MB8713.namprd12.prod.outlook.com (2603:10b6:208:48e::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 27 Mar
- 2025 10:52:37 +0000
-Received: from CH3PEPF00000011.namprd21.prod.outlook.com
- (2603:10b6:610:116:cafe::b8) by CH0P223CA0026.outlook.office365.com
- (2603:10b6:610:116::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.44 via Frontend Transport; Thu,
- 27 Mar 2025 10:52:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH3PEPF00000011.mail.protection.outlook.com (10.167.244.116) with Microsoft
+ 2025 10:52:41 +0000
+Received: from SN1PEPF00026368.namprd02.prod.outlook.com
+ (2603:10b6:806:3c3:cafe::7) by SA1P222CA0169.outlook.office365.com
+ (2603:10b6:806:3c3::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.43 via Frontend Transport; Thu,
+ 27 Mar 2025 10:52:41 +0000
+X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
+ 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=temperror action=none header.from=amd.com;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+ lookup of amd.com: DNS Timeout)
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF00026368.mail.protection.outlook.com (10.167.241.133) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8606.2 via Frontend Transport; Thu, 27 Mar 2025 10:52:37 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8534.20 via Frontend Transport; Thu, 27 Mar 2025 10:52:40 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 27 Mar
- 2025 05:52:36 -0500
+ 2025 05:52:39 -0500
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
  (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 27 Mar
- 2025 05:52:35 -0500
+ 2025 05:52:38 -0500
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 27 Mar 2025 05:52:32 -0500
+ Transport; Thu, 27 Mar 2025 05:52:35 -0500
 From: Prasad Kummari <prasad.kummari@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
 CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
  <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
  <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH 1/3] arm64: versal-net: Add PL bit stream load support
-Date: Thu, 27 Mar 2025 16:21:58 +0530
-Message-ID: <20250327105200.1262615-2-prasad.kummari@amd.com>
+Subject: [PATCH 2/3] arm64: versal2: Add PL bit stream load support
+Date: Thu, 27 Mar 2025 16:21:59 +0530
+Message-ID: <20250327105200.1262615-3-prasad.kummari@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250327105200.1262615-1-prasad.kummari@amd.com>
 References: <20250327105200.1262615-1-prasad.kummari@amd.com>
@@ -90,52 +90,52 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF00000011:EE_|SJ1PR12MB6243:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3f30482d-c96b-47da-fd19-08dd6d1d7cbe
+X-MS-TrafficTypeDiagnostic: SN1PEPF00026368:EE_|IA0PR12MB8713:EE_
+X-MS-Office365-Filtering-Correlation-Id: b3edc799-d3e9-4306-d58b-08dd6d1d7ed7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?OPQjbbzikE6DixrC7+2Qe05K6Xg1szs7p5SceB1SOhrZMSZDN1xFD4YZs7Qf?=
- =?us-ascii?Q?4CJUlfcsmTtbGxML14UGKVp/05FMAOFY0gM++JPlo4s+MCAwDDyz3/kxXPcx?=
- =?us-ascii?Q?CxJrb+jfPSEwNeyqCOtpewQh0v6Csw8yYFUW+A4b/rpNNfGIRn+7liFEBRkV?=
- =?us-ascii?Q?/OgDcL3dhLYu9Q1krL6IwSzDOfbLwnum+ESX8yoGcE8OiL/OQ7ei1Rf0z10W?=
- =?us-ascii?Q?CdtJW8gkqQHxppWt+vbBPGDTdLXHBVEhINlJDto5W5gsEeB8de9bJ2Bx/UwY?=
- =?us-ascii?Q?30EcwKQkm97RbJt9oCTzNV9wX0qrTr2VAtGOFG+nSUvgtg7dgXxJd4lXtjWb?=
- =?us-ascii?Q?vaSVfhv7LY5I2sLuz2oYTwdg6GlOI/VW7WqbKCJQOxee9A1TCZIoQF4gFdEf?=
- =?us-ascii?Q?X8bMOTrkibw19XJmT9DmR9CQQsbuHsfQ2dFXI6R8xVlFta3zsDbHoLJ5dF2o?=
- =?us-ascii?Q?ELiq+mXnJM69MAIjaOS5Ar7nXn23//oeoViIqa92TUlShrJrTJirJVjrkxcd?=
- =?us-ascii?Q?eH/vGi1uz3SxWxXCrPdyljE2xLd8lnLWPCldEF+zGkb+DkN3cwZCoKFS+cdK?=
- =?us-ascii?Q?d9aqoNyoYK0peOz0ctRlywXb4TLuxAPeDuBeIgAKWt5xP9+P0iCcEf5v9cgq?=
- =?us-ascii?Q?CBo8X7lfVaflOPFXuaqtV+HBXFUAKA4ZjKUKJHmZfI4vUAGD9NyocA5d1Oxr?=
- =?us-ascii?Q?6GnGDcaWekBtG9p9MrNyEmAijSwhCubdNV7JFWb92Z1NUjq9WTE5gqfB2VV+?=
- =?us-ascii?Q?oX2E4PKrOYBh7Q1OtRy2gCUK3pXRqph7UMfQ70QMWhEDQeAjPoe4tvS1kFHp?=
- =?us-ascii?Q?a7aSg348Q/+bpQMdx6cbOOH+aQ7PsBL/CHJVAcO25jpVoKtw/GQcxOXai7aZ?=
- =?us-ascii?Q?ujpiv9l/n/tJVYlfGuf81ixwiQwNcChAwkRl/jldljlSx6xOhyOe6IA+EGjm?=
- =?us-ascii?Q?Jq+QDpETOQw/sEDpUYMsvQbbZ5x2VoFrtdODmRiaz6R6lUlOLdydRBe9E64+?=
- =?us-ascii?Q?l3EhiazJ9RuW4jb3E3peeRAIWyYjJNpMxKXcX2zxWMvH0eQdqzabhvy5A9So?=
- =?us-ascii?Q?Q1nOZzEFNH6hEVhPXMEH2nmAOQUJDhE0KcuhzqNiYty8T4JgC/kS7627VpzY?=
- =?us-ascii?Q?xGpGv/9itaBJM9hBCg3+zd6ANzsQR4AMpfLRChaI35KHHAci4v7vblv8V3Lo?=
- =?us-ascii?Q?Pa0+DdZoZmJ3VDX32H2Dz+noWZg3mW2WihnA6Uy+begt3d9YbXGQWTu9colY?=
- =?us-ascii?Q?cR+X3Jct1+0dC2v0rcw7gQpLhaCXz0zOa2w2iqdikP8Y/7FMGTSS0xsoVEWt?=
- =?us-ascii?Q?YTuuNDed8hGS3yr1OEjSDukmRL6d08glQYypZ4V8TsqfFMu8+FTsLWnpwB0j?=
- =?us-ascii?Q?9A5+H8UBdSlk71rfuDrfoWU7Pf/1bfiZG+st/cmGxO8QmY89aZJO7n3ztNV9?=
- =?us-ascii?Q?BZVVbnw9t6aKErvgkAChvEcMKJ6LIFyzX8o+GOVxPvkfYvJg331p5+aTlA5O?=
- =?us-ascii?Q?rO7V0OiP8td8fBU=3D?=
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wDqOdmRe2XgWZ4qGwW9uaWwpN8bmJB/tuxY3IygzsVEbxpNA1ZDQozKqV0ff?=
+ =?us-ascii?Q?+WEzygmbYa/e/Li3ykeVLtUP5T7rKVBUFwqnwpYIAPr7kk7lGc0C1VMSX5Q/?=
+ =?us-ascii?Q?JOMrFZj+RbIEo/5brd4gvImE7ZyVRsZIDVIkFYq9ETnEmEA+hOwMgdNYpxJl?=
+ =?us-ascii?Q?vYtHer2xBfncRXpIN84Rv5TBeVt0FHk5sTZz4T0KnCdIPvEtrndwmmQAHZHJ?=
+ =?us-ascii?Q?QgC8mCSfqwLH0mVAFTf8UuQ2pwdHdzFBTpTKKUMqClLEMzK3vWV2CIgGSJk6?=
+ =?us-ascii?Q?7Av07PAjgVICvrzrV9kNrKiytFk7NoWHVrYleSZkc/6FbgJv6ARcMa+PKhf2?=
+ =?us-ascii?Q?LjJ8eDdD0Ec+8XXpxsuHkFvUNmxzIYnjW59+aeLgpll8KpUpruz9uOKRzfZc?=
+ =?us-ascii?Q?G2++GnXi6Rxf869W/6Zb9qhMReTkSccGg2A5jJkDxX5p6JlmEOzH5YqtcTBI?=
+ =?us-ascii?Q?/39DFnAl/RxaFtiX4uZJuhdHpor0x53jGribhOvUADLsPT7isFov0eV6CQZ2?=
+ =?us-ascii?Q?dIO7hExoRuy2IgUxzWOkUbnOZWDhJWoR3euqBS5sAm6SKoIxxSnqPjYRf1ub?=
+ =?us-ascii?Q?qjWFWUVDNep0OBSCY9wGZAFcXYbaubPBdb5FAmolM3Rwrr3lSPtyHfuQjjyY?=
+ =?us-ascii?Q?PDwFW2wITN+wlG7/yhJ16ukEqKvg3oqacXf/VdOpEwwbGXvQsAJHGz1AeVrm?=
+ =?us-ascii?Q?JzmDxMMkDKcylOI8h+nw0VroH/aTk54mR2s3Tb+70OlkO4X6t3+8JKVeIC8n?=
+ =?us-ascii?Q?rFRseCX0CN+PnZxmOOhEzRfkjpJxOjH8hZ1xo0UD6HotZFE77XJAywVPfYyv?=
+ =?us-ascii?Q?olcmq2ACtOleQPZaig5BOW1zN4xCa6o0up0jUUukMEEerk2aGVv1NECcQvLO?=
+ =?us-ascii?Q?PnMjEAtvCOpr2vvIbKSG7hhpzGgcchzQGzxEiutdnKKsSYm1Jya45RmIo3sU?=
+ =?us-ascii?Q?Rqc2w4tseQki3VT0kjuYZ/nTAPIxSBZV4+qpthONpjbgNvheSKKSCszybhpm?=
+ =?us-ascii?Q?t1hkxJudKDg4P8vsiLiUdONnPd6E+pkoqa/VOloZhRmFI4kjnd7/VG7ANd2g?=
+ =?us-ascii?Q?jB6x9HGZ9FgrlqvlDDlMp9L2dxlVakIUPa4QUda2eYU6VUaMnDY6zMsYdqgJ?=
+ =?us-ascii?Q?0zzH3uyYDh3kJPcc6KMnG4V1w3WiY+OxwGrw37WLaiDqeIaUImqltTbkZcRN?=
+ =?us-ascii?Q?gs0si5f90e56qVoU1AOcp7DODbwqw7NZO9rWS1SmwkFeuzKqkJ8k7ICZT2iF?=
+ =?us-ascii?Q?S7BE7eoHohpwNDkAGhfO1VR2E4I4qPzyVXW9ToOQUDRRqh7jOJozK2oXfnqI?=
+ =?us-ascii?Q?OIfoji99QT95Y2NTmMfM8lF3Wryf27M3iZIb36zadJuJmkHp51g7ljT1g/3H?=
+ =?us-ascii?Q?YgHOfgAYLURyUZsOkZb37X0y1+l/iUYGmKZC/z6pAoHW7iyPZK22lzVUdIbc?=
+ =?us-ascii?Q?/3vqh/Nq+OdWM/BnTe0v8eWNW8ODnDLe2WMVnfxDOdwjV1faljk7LDeTZZmm?=
+ =?us-ascii?Q?oH5IUIVbodvm338=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2025 10:52:37.0195 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3f30482d-c96b-47da-fd19-08dd6d1d7cbe
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2025 10:52:40.5250 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3edc799-d3e9-4306-d58b-08dd6d1d7ed7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000011.namprd21.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00026368.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6243
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8713
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,93 +152,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for loading the secure & non-secure pdi images and
-PL bitstream on the Versal NET platform. The FPGA driver is enabled
-to load the bitstream in PDI format on the AMD Versal NET device.
-PDI is the new programmable device image format for Versal NET,
-and the bitstream for the Versal NET platform is generated exclusively
+Add support for loading the secure & non-secure pdi images and PL
+bitstream on the Versal Gen2 platform. The FPGA driver is enabled
+to load the bitstream in PDI format on the AMD Versal Gen2 device.
+PDI is the new programmable device image format for Versal Gen2,
+and the bitstream for the Versal Gen2 platform is generated exclusively
 in this format.
 
-The source code for the versalnet loadpdi command and the
-CONFIG_CMD_VERSAL_NET configuration has been removed. It now utilizes
+With the enhanced SMC format in TF-A ensuring transparent payload
+forwarding for Versal Gen2, the u-boot driver must now handle the
+word swapping of PDI address that was previously done in TF-A for
+this API. The source code for the Versal2 loadpdi command and the
+CONFIG_CMD_VERSAL2 configuration has been removed. It now utilizes
 the fpga load <dev> <address> <length> command to load secure &
 non-secure pdi images.
 
 Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
 ---
- arch/arm/mach-versal-net/Kconfig         |  1 -
- board/xilinx/versal-net/Kconfig          | 17 -----
- board/xilinx/versal-net/Makefile         |  1 -
- board/xilinx/versal-net/board.c          | 12 ++++
- board/xilinx/versal-net/cmds.c           | 80 ------------------------
- configs/xilinx_versal_net_virt_defconfig |  2 +
- include/xilinx.h                         |  1 +
- 7 files changed, 15 insertions(+), 99 deletions(-)
- delete mode 100644 board/xilinx/versal-net/Kconfig
- delete mode 100644 board/xilinx/versal-net/cmds.c
+ arch/arm/mach-versal2/Kconfig      |  1 -
+ board/amd/versal2/Kconfig          | 16 ------
+ board/amd/versal2/Makefile         |  1 -
+ board/amd/versal2/board.c          | 13 +++++
+ board/amd/versal2/cmds.c           | 80 ------------------------------
+ configs/amd_versal2_virt_defconfig |  2 +
+ drivers/fpga/versalpl.c            | 11 +++-
+ include/xilinx.h                   |  1 +
+ 8 files changed, 25 insertions(+), 100 deletions(-)
+ delete mode 100644 board/amd/versal2/Kconfig
+ delete mode 100644 board/amd/versal2/cmds.c
 
-diff --git a/arch/arm/mach-versal-net/Kconfig b/arch/arm/mach-versal-net/Kconfig
-index 54fb93aeb53..7def7b9139a 100644
---- a/arch/arm/mach-versal-net/Kconfig
-+++ b/arch/arm/mach-versal-net/Kconfig
-@@ -45,6 +45,5 @@ config ZYNQ_SDHCI_MAX_FREQ
+diff --git a/arch/arm/mach-versal2/Kconfig b/arch/arm/mach-versal2/Kconfig
+index 3f18e3351aa..2a595151d6f 100644
+--- a/arch/arm/mach-versal2/Kconfig
++++ b/arch/arm/mach-versal2/Kconfig
+@@ -50,6 +50,5 @@ config ZYNQ_SDHCI_MAX_FREQ
  	default 200000000
  
  source "board/xilinx/Kconfig"
--source "board/xilinx/versal-net/Kconfig"
+-source "board/amd/versal2/Kconfig"
  
  endif
-diff --git a/board/xilinx/versal-net/Kconfig b/board/xilinx/versal-net/Kconfig
+diff --git a/board/amd/versal2/Kconfig b/board/amd/versal2/Kconfig
 deleted file mode 100644
-index 2484429d3cb..00000000000
---- a/board/xilinx/versal-net/Kconfig
+index ab46af6935e..00000000000
+--- a/board/amd/versal2/Kconfig
 +++ /dev/null
-@@ -1,17 +0,0 @@
+@@ -1,16 +0,0 @@
 -# SPDX-License-Identifier: GPL-2.0
 -#
 -# Copyright (C) 2020 - 2022, Xilinx, Inc.
--# Copyright (C) 2022, Advanced Micro Devices, Inc.
+-# Copyright (C) 2022 - 2024, Advanced Micro Devices, Inc.
 -#
+-if ARCH_VERSAL2
 -
--if ARCH_VERSAL_NET
--
--config CMD_VERSAL_NET
--	bool "Enable Versal NET specific commands"
+-config CMD_VERSAL2
+-	bool "Enable Versal Gen 2 specific commands"
 -	default y
 -	depends on ZYNQMP_FIRMWARE
 -	help
--	  Select this to enable Versal NET specific commands.
--	  Commands like versalnet loadpdi are enabled by this.
+-	  Select this to enable AMD Versal Gen 2 specific commands.
+-	  Commands like versal2 loadpdi are enabled by this.
 -
 -endif
-diff --git a/board/xilinx/versal-net/Makefile b/board/xilinx/versal-net/Makefile
-index f9ff07c11c6..2008d4e231c 100644
---- a/board/xilinx/versal-net/Makefile
-+++ b/board/xilinx/versal-net/Makefile
-@@ -7,4 +7,3 @@
- #
+diff --git a/board/amd/versal2/Makefile b/board/amd/versal2/Makefile
+index 3a044517f0c..1673be4a6df 100644
+--- a/board/amd/versal2/Makefile
++++ b/board/amd/versal2/Makefile
+@@ -8,4 +8,3 @@
  
  obj-y	:= board.o
--obj-$(CONFIG_CMD_VERSAL_NET)	+= cmds.o
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index 4d5913cff1d..870877fb4a8 100644
---- a/board/xilinx/versal-net/board.c
-+++ b/board/xilinx/versal-net/board.c
-@@ -21,6 +21,7 @@
+ 
+-obj-$(CONFIG_CMD_VERSAL2)   += cmds.o
+diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
+index 5651d516a9e..150792b6494 100644
+--- a/board/amd/versal2/board.c
++++ b/board/amd/versal2/board.c
+@@ -20,6 +20,7 @@
  #include <asm/arch/sys_proto.h>
  #include <dm/device.h>
  #include <dm/uclass.h>
 +#include <versalpl.h>
- #include "../common/board.h"
+ #include "../../xilinx/common/board.h"
  
  #include <linux/bitfield.h>
-@@ -29,10 +30,21 @@
+@@ -28,10 +29,22 @@
  
  DECLARE_GLOBAL_DATA_PTR;
  
 +#if defined(CONFIG_FPGA_VERSALPL)
 +static xilinx_desc versalpl = {
-+	xilinx_versal_net, csu_dma, 1, &versal_op, 0, &versal_op, NULL,
++	xilinx_versal2, csu_dma, 1, &versal_op, 0, &versal_op, NULL,
 +	FPGA_LEGACY
 +};
 +#endif
@@ -251,18 +254,19 @@ index 4d5913cff1d..870877fb4a8 100644
 +	fpga_init();
 +	fpga_add(fpga_xilinx, &versalpl);
 +#endif
++
  	return 0;
  }
  
-diff --git a/board/xilinx/versal-net/cmds.c b/board/xilinx/versal-net/cmds.c
+diff --git a/board/amd/versal2/cmds.c b/board/amd/versal2/cmds.c
 deleted file mode 100644
-index e8b669f0fd4..00000000000
---- a/board/xilinx/versal-net/cmds.c
+index 56ae39bc6a1..00000000000
+--- a/board/amd/versal2/cmds.c
 +++ /dev/null
 @@ -1,80 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0
 -/*
-- * Copyright (C) 2023, Advanced Micro Devices, Inc.
+- * Copyright (C) 2024, Advanced Micro Devices, Inc.
 - *
 - * Michal Simek <michal.simek@amd.com>
 - */
@@ -276,19 +280,19 @@ index e8b669f0fd4..00000000000
 -#include <zynqmp_firmware.h>
 -
 -/**
-- * do_versalnet_load_pdi - Handle the "versalnet load pdi" command-line command
+- * do_versal2_load_pdi - Handle the "versal2 load pdi" command-line command
 - * @cmdtp:      Command data struct pointer
 - * @flag:       Command flag
 - * @argc:       Command-line argument count
 - * @argv:       Array of command-line arguments
 - *
-- * Processes the Versal NET load pdi command
+- * Processes the versal2 load pdi command
 - *
 - * Return: return 0 on success, Error value if command fails.
 - * CMD_RET_USAGE incase of incorrect/missing parameters.
 - */
--static int do_versalnet_load_pdi(struct cmd_tbl *cmdtp, int flag, int argc,
--				 char * const argv[])
+-static int do_versal2_load_pdi(struct cmd_tbl *cmdtp, int flag, int argc,
+-			       char * const argv[])
 -{
 -	u32 buf_lo, buf_hi;
 -	u32 ret_payload[PAYLOAD_ARG_CNT];
@@ -333,35 +337,57 @@ index e8b669f0fd4..00000000000
 -	return cmd_process_error(cmdtp, ret);
 -}
 -
--U_BOOT_LONGHELP(versalnet,
+-U_BOOT_LONGHELP(versal2,
 -	"loadpdi addr len - Load pdi image\n"
 -	"load pdi image at ddr address 'addr' with pdi image size 'len'\n");
 -
--U_BOOT_CMD_WITH_SUBCMDS(versalnet, "Versal NET sub-system", versalnet_help_text,
+-U_BOOT_CMD_WITH_SUBCMDS(versal2, "Versal Gen 2 sub-system", versal2_help_text,
 -			U_BOOT_SUBCMD_MKENT(loadpdi, 3, 1,
--					    do_versalnet_load_pdi));
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index 1604b5915db..4da31b5c119 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -73,6 +73,8 @@ CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SIMPLE_PM_BUS=y
- CONFIG_CLK_VERSAL=y
+-					    do_versal2_load_pdi));
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index 9911caa0e46..0694207a835 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -74,6 +74,8 @@ CONFIG_SIMPLE_PM_BUS=y
+ CONFIG_CLK_CCF=y
+ CONFIG_CLK_SCMI=y
  CONFIG_DFU_RAM=y
 +CONFIG_FPGA_XILINX=y
 +CONFIG_FPGA_VERSALPL=y
  CONFIG_ARM_FFA_TRANSPORT=y
- CONFIG_ZYNQ_GPIO=y
  CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_CADENCE=y
+diff --git a/drivers/fpga/versalpl.c b/drivers/fpga/versalpl.c
+index 1957e8dcaca..d691f135e89 100644
+--- a/drivers/fpga/versalpl.c
++++ b/drivers/fpga/versalpl.c
+@@ -41,8 +41,15 @@ static int versal_load(xilinx_desc *desc, const void *buf, size_t bsize,
+ 	buf_lo = lower_32_bits(bin_buf);
+ 	buf_hi = upper_32_bits(bin_buf);
+ 
+-	ret = xilinx_pm_request(VERSAL_PM_LOAD_PDI, VERSAL_PM_PDI_TYPE, buf_lo,
+-				buf_hi, 0, ret_payload);
++
++	if (desc->family == xilinx_versal2) {
++		ret = xilinx_pm_request(VERSAL_PM_LOAD_PDI, VERSAL_PM_PDI_TYPE, buf_hi,
++					buf_lo, 0, ret_payload);
++	} else {
++		ret = xilinx_pm_request(VERSAL_PM_LOAD_PDI, VERSAL_PM_PDI_TYPE, buf_lo,
++					buf_hi, 0, ret_payload);
++	}
++
+ 	if (ret)
+ 		printf("PL FPGA LOAD failed with err: 0x%08x\n", ret);
+ 
 diff --git a/include/xilinx.h b/include/xilinx.h
-index e4e29797988..2b4d6c9bb06 100644
+index 2b4d6c9bb06..c54d6dc1453 100644
 --- a/include/xilinx.h
 +++ b/include/xilinx.h
-@@ -34,6 +34,7 @@ typedef enum {			/* typedef xilinx_family */
- 	xilinx_zynq,		/* Zynq Family */
+@@ -35,6 +35,7 @@ typedef enum {			/* typedef xilinx_family */
  	xilinx_zynqmp,		/* ZynqMP Family */
  	xilinx_versal,		/* Versal Family */
-+	xilinx_versal_net,	/* Versal NET Family */
+ 	xilinx_versal_net,	/* Versal NET Family */
++	xilinx_versal2,		/* Versal Gen 2 Family */
  	max_xilinx_type		/* insert all new types before this */
  } xilinx_family;		/* end, typedef xilinx_family */
  
