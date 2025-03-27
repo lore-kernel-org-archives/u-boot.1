@@ -4,206 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7067CC3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 09:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA06C3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 10:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFDDB81273;
-	Thu, 27 Mar 2025 10:12:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id B7CD481273;
+	Thu, 27 Mar 2025 11:03:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="paZuWivZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FIX4he6F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7331581273; Thu, 27 Mar 2025 10:12:06 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::62d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4B89281273; Thu, 27 Mar 2025 11:03:00 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4817800C1
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 10:12:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FE4C8070C
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 11:02:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IhRse+GEr61BPzZRM+WCY6+hvzGVnxPKXIoLMOgtILeTyloaMBAUKZuYbVXEctHGg1nvLfxzlhoejqaJTwa5aVs0RSaNa5AAN4JIoIA2M/rMUSelkklRgwv1GLfjTPCayvbuFXNwNav45y8U9PqybtkJKzNdys/0ubxzWNX3k2XrxrnuLcptmfXifw354KnhkRZ0ZATy8AtCwA4eaAMX408xw1wELTRpXUBKqC/44Wzutr4TvsjIJeuK81t8paQvn3lDauhbcg3O8mc7xKuYQkGNV4YF+DPU/CJWKMBPS0TzWxXH3A4dLqwoBDzSS7jQ0HkaMp7P4njXjmqvNNFPcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wSXPD2z68HiPE2cYl9ri5egmB5Tj91zvJleEwsuXTDs=;
- b=OPgr5L9ZarINnLiOTw2GYwsIzBP52oj/EAKxhY9wT0hvqqpm/1LUgAosSUP7iLnbXtZPiQHRmdGYHJ0AFWpkszEtbTtRYERtL2VliPyZQjlmsll6OUj6GC9PhrnZkyu7GyQdkTsW5+uLeu38EoB0ZgLeiVRmvD6x9qj2F4P8S0AXznUH0+UEirQsLYR94YErnZYas8EXkMC4Zo2rj8NG5spSag3IovGiUwnYmbWrU8UZ4w2BXNzJjJnLWEeXQwaT4cB5n45SgdcBfSbMCWWyV99iPS2uVgHKsRRomc6pa7f+4x96SYn7JG9TUTZKwS5FiRWNZ/rHZwdZaj268Yo+Ig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wSXPD2z68HiPE2cYl9ri5egmB5Tj91zvJleEwsuXTDs=;
- b=paZuWivZtNo/0UEdPYYvs5uiekmExLAPnRGIeDLb4L+NVdUcng1GWcq316vgkdjTAeMnei4GgmdUZZBWUzfLgS6skFYAtzGFXpnXi2qHgU0YoauHsexXOKxJwBidgfPGBTE3jPBdYxk/pgzwsRVKbs13IIuONf3eNg9zUqLgiXc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by PH7PR12MB5975.namprd12.prod.outlook.com (2603:10b6:510:1da::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Thu, 27 Mar
- 2025 09:12:01 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.8534.040; Thu, 27 Mar 2025
- 09:12:00 +0000
-Message-ID: <7359fd8c-8235-4530-abae-b97c80cb3c79@amd.com>
-Date: Thu, 27 Mar 2025 10:11:56 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Use CONFIG_SPL_FS_LOAD_PAYLOAD_NAME in
- binman
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- git@xilinx.com
-Cc: Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>
-References: <022449eaa99ce8b96bd1c0af9bece2241180be6d.1742389724.git.michal.simek@amd.com>
- <421afd11-7a50-415d-b43b-9db62e416dd9@cherry.de>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
- howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
- svSoH4WcApYNqvB3rcMtJIna+HUhx8xOk+XCfyKJDnrSuKgx0Svj446qgM5fe7RyFOlGX/wF
- Ae63Hs0RkFo3I/+hLLJP6kwPnOEo3lkvzm3FMMy0D9VxT9e6Y3afe1UTQuhkg8PbABxhowzj
- SEnl0ICoqpBqqROV/w1fOlPrm4WSNlZJunYV4gTEustZf8j9FWncn3QzRhnQOSuzTPFbsbH5
- WVxwDvgHLRTmBuMw1sqvCc7CofjsD1XM9bP3HOBwCxKaTyOxbPJh3D4AdD1u+cF/lj9Fj255
- Es9aATHPvoDQmOzyyRNTQzupN8UtZ+/tB4mhgxWzorpbdItaSXWgdDPDtssJIC+d5+hskys8
- B3jbv86lyM+4jh2URpnL1gqOPwnaf1zm/7sqoN3r64cml94q68jfY4lNTwjA/SnaS1DE9XXa
- XQlkhHgjSLyRjjsMsz+2A4otRLrBbumEUtSMlPfhTi8xUsj9ZfPIUz3fji8vmxZG/Da6jx/c
- a0UQdFFCL4Ay/EMSoGbQouzhC69OQLWNH3rMQbBvrRbiMJbEZwARAQABzSlNaWNoYWwgU2lt
- ZWsgKEFNRCkgPG1pY2hhbC5zaW1la0BhbWQuY29tPsLBlAQTAQgAPgIbAwULCQgHAgYVCgkI
- CwIEFgIDAQIeAQIXgBYhBGc1DJv1zO6bU2Q1ajd8fyH+PR+RBQJkK9VOBQkWf4AXAAoJEDd8
- fyH+PR+ROzEP/1IFM7J4Y58SKuvdWDddIvc7JXcal5DpUtMdpuV+ZiHSOgBQRqvwH4CVBK7p
- ktDCWQAoWCg0KhdGyBjfyVVpm+Gw4DkZovcvMGUlvY5p5w8XxTE5Xx+cj/iDnj83+gy+0Oyz
- VFU9pew9rnT5YjSRFNOmL2dsorxoT1DWuasDUyitGy9iBegj7vtyAsvEObbGiFcKYSjvurkm
- MaJ/AwuJehZouKVfWPY/i4UNsDVbQP6iwO8jgPy3pwjt4ztZrl3qs1gV1F4Zrak1k6qoDP5h
- 19Q5XBVtq4VSS4uLKjofVxrw0J+sHHeTNa3Qgk9nXJEvH2s2JpX82an7U6ccJSdNLYbogQAS
- BW60bxq6hWEY/afbT+tepEsXepa0y04NjFccFsbECQ4DA3cdA34sFGupUy5h5la/eEf3/8Kd
- BYcDd+aoxWliMVmL3DudM0Fuj9Hqt7JJAaA0Kt3pwJYwzecl/noK7kFhWiKcJULXEbi3Yf/Y
- pwCf691kBfrbbP9uDmgm4ZbWIT5WUptt3ziYOWx9SSvaZP5MExlXF4z+/KfZAeJBpZ95Gwm+
- FD8WKYjJChMtTfd1VjC4oyFLDUMTvYq77ABkPeKB/WmiAoqMbGx+xQWxW113wZikDy+6WoCS
- MPXfgMPWpkIUnvTIpF+m1Nyerqf71fiA1W8l0oFmtCF5oTMkzsFNBFFuvDEBEACXqiX5h4IA
- 03fJOwh+82aQWeHVAEDpjDzK5hSSJZDE55KP8br1FZrgrjvQ9Ma7thSu1mbr+ydeIqoO1/iM
- fZA+DDPpvo6kscjep11bNhVa0JpHhwnMfHNTSHDMq9OXL9ZZpku/+OXtapISzIH336p4ZUUB
- 5asad8Ux70g4gmI92eLWBzFFdlyR4g1Vis511Nn481lsDO9LZhKyWelbif7FKKv4p3FRPSbB
- vEgh71V3NDCPlJJoiHiYaS8IN3uasV/S1+cxVbwz2WcUEZCpeHcY2qsQAEqp4GM7PF2G6gtz
- IOBUMk7fjku1mzlx4zP7uj87LGJTOAxQUJ1HHlx3Li+xu2oF9Vv101/fsCmptAAUMo7KiJgP
- Lu8TsP1migoOoSbGUMR0jQpUcKF2L2jaNVS6updvNjbRmFojK2y6A/Bc6WAKhtdv8/e0/Zby
- iVA7/EN5phZ1GugMJxOLHJ1eqw7DQ5CHcSQ5bOx0Yjmhg4PT6pbW3mB1w+ClAnxhAbyMsfBn
- XxvvcjWIPnBVlB2Z0YH/gizMDdM0Sa/HIz+q7JR7XkGL4MYeAM15m6O7hkCJcoFV7LMzkNKk
- OiCZ3E0JYDsMXvmh3S4EVWAG+buA+9beElCmXDcXPI4PinMPqpwmLNcEhPVMQfvAYRqQp2fg
- 1vTEyK58Ms+0a9L1k5MvvbFg9QARAQABwsF8BBgBCAAmAhsMFiEEZzUMm/XM7ptTZDVqN3x/
- If49H5EFAmQr1YsFCRZ/gFoACgkQN3x/If49H5H6BQ//TqDpfCh7Fa5v227mDISwU1VgOPFK
- eo/+4fF/KNtAtU/VYmBrwT/N6clBxjJYY1i60ekFfAEsCb+vAr1W9geYYpuA+lgR3/BOkHlJ
- eHf4Ez3D71GnqROIXsObFSFfZWGEgBtHBZ694hKwFmIVCg+lqeMV9nPQKlvfx2n+/lDkspGi
- epDwFUdfJLHOYxFZMQsFtKJX4fBiY85/U4X2xSp02DxQZj/N2lc9OFrKmFJHXJi9vQCkJdIj
- S6nuJlvWj/MZKud5QhlfZQsixT9wCeOa6Vgcd4vCzZuptx8gY9FDgb27RQxh/b1ZHalO1h3z
- kXyouA6Kf54Tv6ab7M/fhNqznnmSvWvQ4EWeh8gddpzHKk8ixw9INBWkGXzqSPOztlJbFiQ3
- YPi6o9Pw/IxdQJ9UZ8eCjvIMpXb4q9cZpRLT/BkD4ttpNxma1CUVljkF4DuGydxbQNvJFBK8
- ywyA0qgv+Mu+4r/Z2iQzoOgE1SymrNSDyC7u0RzmSnyqaQnZ3uj7OzRkq0fMmMbbrIvQYDS/
- y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
- l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
- 3i3l5DA=
-In-Reply-To: <421afd11-7a50-415d-b43b-9db62e416dd9@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MW4PR04CA0163.namprd04.prod.outlook.com
- (2603:10b6:303:85::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43cebe06e9eso5520985e9.3
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 03:02:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743069777; x=1743674577; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9l709vhBdQgq4QbeZu8X4MQ6CY7Ugf7pjlASjYZi/nk=;
+ b=FIX4he6FZI7qBwr8tAZ9JojyUHD7nQPLH+8S8LCYbP+TTrXhEW8M4J2LoApLl/wJ31
+ VtHcrctzulLyX7/sR8yV7T7H6O8zZ9pQM4GqioeeaAzeh3sFPwzCXsCrITSY7xQyjHDZ
+ 53C2m5VJaZftKTGZeepwwfRKhRUL5W3B4JIIhqPhZ5RCLdE7xcxvRMDbvnIyOWCJGSmo
+ P1XppgSJ+rWec7LnCVndl8bhu9hWoixFoHmtmJjwd8J7BQaq02AWJ62MdqS8E8doKDoZ
+ xYJUPU0pioZlAVN6NeH+ClPh2st09AotVb1wiWgym5a8LCO3UxfAkuLi4OzBA5YaNxp/
+ X3IA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743069777; x=1743674577;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9l709vhBdQgq4QbeZu8X4MQ6CY7Ugf7pjlASjYZi/nk=;
+ b=Q9HTZEHEEu0S9wWBIVIJ5tvqZR2wdXT4s6rBbej5nxPxJzNK8rlunZAiSJcC5r8MmP
+ XOkgZs8fEPMKWJZWyLBjQCwlVQkPmkefm1q8FSTgiteqHxMHUTYbuyT8kb4pcC0N96b8
+ /EvWOrZODr4btjruDZgcJYpWg5l7o8ahcYB9++2HSCMKZ3DOmqjmCVac05M0gLcz20Wm
+ tn8VBtjjzwOO+kqTPYvx+2p/VzMog/tb0gxFObWi2CmM0AojhJin2DEtBjMDiiAnqfhD
+ C0TrDAlZHi5hLcdO+GUwpkf1SiG+gOFcBx6EFNEWjCo0kZJVXU8mIcz/8JIwgJAYCT4l
+ JuMQ==
+X-Gm-Message-State: AOJu0YxTWVT0uS+wKK7sd7aZ8MlmGguVKZx+rYX5kiRJLqq23dANdJD+
+ /aZ0pbGHnWN7aR1/Cq9bKfkNW1PkdE3U5j4yyD4HKwj2K448IFCpKXzBMaDffQ4=
+X-Gm-Gg: ASbGncsFO4gjpEgr+g0A3t3nCaAwwDdpYrhun7DwXOr1Aw17oj/P9AZbpWL9irdX/6z
+ PU/9MU6z7cO4A4N3jRDhDcx6u/k30fiuQqAtxpkcbdf9bisqb0WU4pGj6T1u+oS/T4LMNx4uia+
+ +2esgHcACQQqQZsl7Osi7ODcLsv0lr5RbN3KZ7tbzM92n42G7CEbt0k2m0SHWcraEfyZDNRzt7a
+ 8UAY1x2iZduEL1pTSTo6SIZW7vI9+dWfyi6E3DMjxbs8LsL2xAc5jV4NJ/TnqD+pM4dK7qo4H9o
+ ebcbYR0Nb/DCjjrFFV3yIGEuWZYhspAUUC+OxrAw5TupbIpSyUlkntShuutcZu1d+A==
+X-Google-Smtp-Source: AGHT+IGvSw7KeghZ5sO+F7TSDkeAbTkJJmI4cyLv0RyFqLqTXF66J7yiXb1VJ/z9bE53kwW0gTG6hQ==
+X-Received: by 2002:a05:600c:3d8c:b0:43d:649:4e50 with SMTP id
+ 5b1f17b1804b1-43d871ac058mr17855085e9.13.1743069776808; 
+ Thu, 27 Mar 2025 03:02:56 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d82efeb11sm32263245e9.22.2025.03.27.03.02.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Mar 2025 03:02:56 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Thu, 27 Mar 2025 11:02:55 +0100
+Subject: [PATCH] part_efi: cache last scanned GPT for next partition
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH7PR12MB5975:EE_
-X-MS-Office365-Filtering-Correlation-Id: f2f7c1f0-d9f4-4610-ece0-08dd6d0f6ecc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OWc0NWdhaVVESkMwd2x6M2x4cmFKT090THlNM01FcXg5VDVYdTZ6VnFKc2ZN?=
- =?utf-8?B?Tnp6WXRTM2JEYS9zQ2Z0dHNWRkFPMERzZEZPWkk1c2ZWdTAxM0QwRktaS2tq?=
- =?utf-8?B?WmRYUFgrZXhPTGd3b1F6S2JrZnlqWG9qS1I1Sk9iRm9veklIWGZtVGFpKzhn?=
- =?utf-8?B?L1VsNGdsVmlCTlRSSVBMc2NXSHdBaGhJc0xZM3NMUllYUEVGMm96ampvbjcx?=
- =?utf-8?B?Z2x3MDV5RWpQbTJVeE9QU3JBV0ZTbjQ4STdnK3VSbmxOOVVVU1VScGxZOVNz?=
- =?utf-8?B?MHpHWXREVnUxU0lDdG9qZTVuUGdMQ3pKRUFlT1RPaFV1ZjV4YnptOXhFVlVZ?=
- =?utf-8?B?TUZQdDNrSHpaaWFmN2treHVGcEgxKzVON24vOUhxSU55ZUh0RU9ZSEdYb3dj?=
- =?utf-8?B?c1BCcXRDS0MzV2M3M3ppVGx5dlhTV09RUGtMajBJTjh2aG1KQU9FUHcvNmx4?=
- =?utf-8?B?V3huYnAwbGQ1anJ1WnlHSitXc1piRWlodnVEMVR4eGRBbk9OS2I3NzlVRmFo?=
- =?utf-8?B?d3BUOU4zZE9saFlEREI2UElvNXpLalplNVhWUWNtaWhLMlhxN3M0MmJ4U29o?=
- =?utf-8?B?L0VLZkhPZkEwOEdvWVFNWGJUK3ZVOG5EZkNqTWRYYWlwdXFOcWQzMlNLa1JS?=
- =?utf-8?B?VEs4QjY5Y0ZyU2hzc09id3dPYzgwMzJXbjV5MnY3WExPNEhWUnZQQ2FKelZk?=
- =?utf-8?B?ZmxkR2phVDJNQ28weGZkTWN2UmI4RW5CSDI4WmhEWFYxWm44NTQyMUgwOVRm?=
- =?utf-8?B?eGkxRndKa0RzOHk3b3RNTFh2ZmZoVDJyNzk2Uitha055Smhyc09zQk9JSTZM?=
- =?utf-8?B?Ulk4Z1ZSQlFLNkpaa1ZTUGpIQ1hZeU9PckpMTHBHbDdJb0VYTTF2cURLekR1?=
- =?utf-8?B?alpaZ0Z1Wm9POUs1R2orUE05U3ZsZVoyd2svSFJWWElIbU5sNVhKMkxFNHpy?=
- =?utf-8?B?V0ZzZlU1emhDS0xDOEhNcXdIVi94VDFjeExOazNERXlDQTlTTkNqMjhlMDdp?=
- =?utf-8?B?UEpod0NSSGhMSHU4Y2NiMUdidVRPY2taN2dwbFEybC9HeE5nQk9ZYTlZK2ZK?=
- =?utf-8?B?UDNQNzRZcEFHK2VYYUVZTnRoT0p5Rm9VbGZJSTRhN280TU84Z2pxMUhDTmJX?=
- =?utf-8?B?dXNzNGdKbmNraW9oUStlTTFwcFl6QkpXS3dibWtySlgySzhTL21FWE80Ylcw?=
- =?utf-8?B?L1JJeEEvY0lvSklHZjJBeVZ2VWNHQ1RLUlB5RWFjU1o1M0RsM1BQN1Z5ditu?=
- =?utf-8?B?L01qUkI4VldEMUQ0Zzl0VG1EeS9XUk9NZUc5NDBVaGhKRXFKRS9lc3hOQ1hU?=
- =?utf-8?B?YzlTTGpXSTFYNVM4QmlxaEZoWHo3U2VQcmZIem9jMEJySXVRaGpJaytweHZj?=
- =?utf-8?B?eWoxYU43RVpMWktzV3h4Q2ppVWFoMVNNcEJWRExRYXZNTUJMNlcyS3E2WERP?=
- =?utf-8?B?NnNTV2oyd2w0d2lpWHhlNzB6QkQvK3dqVzZaNk1kc3JKN3dkMWsyVW5tcC8r?=
- =?utf-8?B?RUljaDR1bk9OZGtsWnA5WTV2L2hnYThCUjczTkJJbFZGWFZvenRDdDAvSklu?=
- =?utf-8?B?UzJKRzFkWTg3dEZobkh5clMrUi8ycTBXeGloT1hjSHB1THdHUXhkZ2xBRG9T?=
- =?utf-8?B?NklsWG5MeDlNSzZnKy95NUh6RkErTmhBZWhQZFV4aTNqblpQaHkvZzh3dUVB?=
- =?utf-8?B?am9od0Q2Yi9MclVEczJWc0lSdlB6YkxIaWxITHpxOGZTaExDVHZyMnV5ZzNk?=
- =?utf-8?B?bHBHNzFKblNRdTM3WEJrRDVHNE14VzNlYkpqQ2Z6VElTc0dzWlVnQ1VOamZJ?=
- =?utf-8?B?V0wrTUV6VFlDSjhNSDFXTjJDc1pFbWxaMnNsRW5xTzdTdWFHcmhqNXg5dngw?=
- =?utf-8?B?S3BMUmI2bDV1VWdIL0JGbkowZ2JUZ01VdEZBd3lYdVdBcGcxdnAwVkFFTGVX?=
- =?utf-8?Q?s8Y6iES/6VY=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bWN0Y1ZVUjBhMVNTZWVrT0Q4YnEvR1JQQk9yWmdlMm1TY20zN0prdUw4RGdP?=
- =?utf-8?B?MFY0clV3dHlNaFBWcFVGaWxkZTBsQzErODlQWWIvdXRzdEs4V0MrWHEydHNr?=
- =?utf-8?B?am9OeEdkRzdtb2l3U3d4VXFLY3pKcTVMUnhJdHhPYmNKY0ozU2w3THBKd2hs?=
- =?utf-8?B?NngxMzBUUVE3UWl4aVRMTnBrdlFmaE4rRGF3SEtPemc0aUtEUm14UDVYRWZx?=
- =?utf-8?B?UityYmlraHI3NTZNNFR3LzFUWHE5NHhoZHJMNVd4UlM3V1JYelVSSlNRcVNm?=
- =?utf-8?B?VEl5bnBSc3gwZ0lNM0N1azdBNzAyNUUyN0ZncHdFYy9qUk55MTZtS0lXMTUr?=
- =?utf-8?B?WEpaazJMaC83WlRYZTB4cm5sKzU5Q3d2VUZTV0NXK0NORDk1TWZFUG1EdGdp?=
- =?utf-8?B?WW9JLzBmdUFXWGpXOVVOU1M2SjNvWHlQUUVvcHFHd1ZJbFNtZW9ucVhsRWpE?=
- =?utf-8?B?WVk4K0lnaFFESXRFTWtkQnowUjdWS2tMb3d4c1VsQjNrR3orSGhqSnVZcHNp?=
- =?utf-8?B?UmZJdllZTEpjM2x0MUExUXZWcU8rK05ESUl2Yi90cE1HTnhPa2htcy9KNzdI?=
- =?utf-8?B?c3pFQ1dzTEFBMHBrbFIyNzlaUytlWmlDcGFoV0JrcDdCTmM3OWhyY2pqYkhD?=
- =?utf-8?B?dnFWeEpENVFla2lzM1ZpT2V1a2pxeVQwTDN4U1NiL1hsMFc0ZEtnRFUvYVVv?=
- =?utf-8?B?QXV0OXlJUFExdzZVRXEyWE55QVhZb24wY1p0TkdIZ0o3elRjRVBLT3RCOUFN?=
- =?utf-8?B?TTduWjd4aXh4OUtDb00rWUxiNGRkQUpVcTFXdUt3bm5OU0owMVQxVFVDSFRq?=
- =?utf-8?B?QkhsZEVnUzd0KzV3QWNrYTBrTFRjV3NSMVZZN3pBWENPZTBoQkxiNHVOTEZX?=
- =?utf-8?B?UkMvOW5EN3A1YkFDU0RxTXVVZEwvLzB5UHYyd2lzc2laWGRzSWZ5cVVua1Z3?=
- =?utf-8?B?L1lvUEFtQm1ueW5qODJ2azVqYVBTMFFMcVNJYjNOcTdYNFJqVWxoU2N6SUU3?=
- =?utf-8?B?di9jU2RQMlBBdUpPTWRVWlllK2tNOXhvblByeXR3bzVCbEQrNFI3VnFWMXdH?=
- =?utf-8?B?dmJ5YzlZMVFJLzVuejJMMzN3N1hPeEl6OTJvcTZCTlBQUmEra1NxZ2kxalYw?=
- =?utf-8?B?VXJJWHNDZ1lhT2pZOUFiQmFPRmMyR0QvMElXSGRHaFpCV2NXZUxVK3I4RjlI?=
- =?utf-8?B?VURkQ3JZZTl2NS9xaFRMQWwxUWdDVzRxRDlMdzNYM1NyT3BoU1FKbk9CK0Nx?=
- =?utf-8?B?VEZOaEE2TWFzTjBSQWQ4R3hpRElJMEhOMmRRY1p2dlA2d3p1SEt5VXRTTU1I?=
- =?utf-8?B?ekhLaVRDdzhJRW5FTUF4bzVkZWlkWFNIRVNQaTdUVWlwcEpOYTRxeldjcytG?=
- =?utf-8?B?Q2ZMYit1UGQ2ZVg0UnJOQXF1eHZLNS8zMkJ5NUpHdTVRNXpFS0dLNnJYUkYw?=
- =?utf-8?B?Z0Q1SUFXMVJwcTdQSUlzOVo2QW9DOHVneE5SU2xkaXhWcUhPTGU4c3JNNDZT?=
- =?utf-8?B?YTk5NXRzbjQvU2JqUzhNQytXbDBycTh3WFZuNWMrMVlNcmpnUDJhendSMDNZ?=
- =?utf-8?B?NkVSMk5UaG94NThPVnJhQjh6ejhtVzVmL3NmZmE0WTM4OG0vTStSZ1dJNWEy?=
- =?utf-8?B?YWJYVEJWcnAvTVA5VityWjZaTTlldDZ2blZxWStmSlU3Nk91WlZscVpnMk9t?=
- =?utf-8?B?aUxBdjJDV3Jpek5jZXhQWmI1QkRSRUhKV2poblBLTW4yQXA5cGNwbDBvaHBW?=
- =?utf-8?B?SGtNWW02YW1VR29Wa2ZWMlIrNjFvc1FpL3ljc3lkS2g0WExOb0Qxa3JEN3dS?=
- =?utf-8?B?bzJyY1NPbWd3OXpmcGwwSzgxQU5BMnRlM2pOTk1WSkJ4Mmp2L012WUxJUTBE?=
- =?utf-8?B?L2UvbHNWdFpYVEVGYUJhb3VJZXl6cTRMNU5keENYcmVkeHQwelNaSUR6Wm1X?=
- =?utf-8?B?MlRGeUlxMU9HZzVqZWpuMzc2eE5KcStGei84aExPc0hqZ09zWjBGOFphT2hu?=
- =?utf-8?B?ZnY3OEdSUjVNNTZWMjBERTBGMlNZUDFGRTdnQ3R5MC9VS1Z3Z1ZSUVpBeGp6?=
- =?utf-8?B?NHRwaWhnQ3dJMVRjVnBLbEZKRDBzL01HWncxQXhOWit1R1V3Vzkvb09uMDUy?=
- =?utf-8?Q?QmfWxunB0NxOlT3tRlvAxbJv/?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2f7c1f0-d9f4-4610-ece0-08dd6d0f6ecc
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2025 09:12:00.8536 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zid1AZeqri2WbiuFRdENKA6nQk91raPnOI2lMrkiJIRERXo6FaHqVzFe9Q5i1BPF
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5975
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250327-u-boot-efi-part-cache-v1-1-be6b69c0698b@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAE4i5WcC/x2MywqAIBAAfyX23ILZi/qV6GDrWnvJ0IpA+vek4
+ 8DMJIgchCOMRYLAt0Txe4aqLIA2s6+MYjODVrpVte7xwsX7E9kJHiacSIY2RmupaoaBanYd5PY
+ IWXj+7zS/7wdQztW3ZwAAAA==
+X-Change-ID: 20250327-u-boot-efi-part-cache-ddc1499c3ef6
+To: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8665;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=32aPY6bpjPtAWcCv7N3+dv1Yb9S7qh6HiqylTRQ1PbM=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn5SJPWt/LpRExcGXjltjM9BlbSPy7WqR6BrGf+yeM
+ ckSOqfiJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ+UiTwAKCRB33NvayMhJ0bzBD/
+ 9VJJ6lHlsfAkj48SGHqQSi0PoAgLwYuRErwAj+1UdmayBK1aM4Dw9qyhm65nO3UL7/xkOlznUdeMBw
+ 86MWVSnnKtOvso2YePOsWrXQYN42abUQJxA5w0l3DsBkJOVkXf3ReDrZw6TZdP+e/vxNr0cS9hBYGc
+ XJXwHwy5SXhogtXnp+EItAvduAF1pM2w6F5QxBPF1ypj0B4z7TyMaMCsojZteDwUfj5MXCzW9ZVEKI
+ ERctBhhtbcH2Y625cz8rQVVjtkaRzYSICTouoZKDDxEk9WF6j/ZInisxCivJKGU20QuLZvzXjECZmt
+ 8dhYgTGkqzMPy+MjbxjZ/oK2N56/w7uVSaNaRc/wceQu+JtzJr1CAigqBxifcgGDchMK+bzairs4RS
+ zQmbSkW0Vd2XvE+FUYxFjDaMXq5JW2HXH8w+9a1D19DIjaraI71rmizLMAyeYYMoxTJe7johdWDBNT
+ 1GEORhIkYGmFhVTms5KBrCuhjnaFyhAjUWUlMJdNWgBe+sMz7bsY+qiPvIta1/pfROnt2xANm6pYQI
+ WV8hikyFhwIR4yEOvnGYN9Ld30kk2c4KUdcg3HBqXH7CWyWKLAeCtREBfitYk2eEbhTMdhVKBtIr7J
+ Tm6sltkq1Kkp/hauF6PMSvudaoo2ZSwLEnY6df7BLX8igWESP0QkwE20Uj1Q==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -220,66 +116,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The actual architecture of the EFI part parser means the
+entire GPT partition table needs to be parsed for each
+part_info() callback.
 
-On 3/25/25 10:48, Quentin Schulz wrote:
-> Hi Michal,
-> 
-> On 3/19/25 2:08 PM, Michal Simek wrote:
->> u-boot.itb name is coming via CONFIG_SPL_FS_LOAD_PAYLOAD_NAME and it's
-> 
-> They are unrelated as far as I can tell?
-> 
-> Isn't CONFIG_SPL_FS_LOAD_PAYLOAD_NAME the name of the U-Boot FIT that the SPL is 
-> going to load from some filesystem?
+Since the default part scan code will always scan up to
+128 partitions for a block, and devices with an UFS chip
+with up to 8 LUNs are very common in the field, this means
+a complete GPT parsing and validation will be done
+up to 1024 times instead of 8 on such devices.
 
-yes.
+The GPT parsing can be cached between each part_info()
+call speed up to 3x on the worse condition when the CPU
+i-cache and d-cache are disabled, like in the SPL.
 
-> 
-> u-boot.itb in the binman nodes below is the name of the generated U-Boot FIT on 
-> your disk.
-> 
-> Your disk FS != SPL FS, no?
-> 
-> I can get behind wanting the same name for the file on both FS, but the issue I 
-> have is the additional CONFIG_SPL_FS_LOAD_PAYLOAD_NAME #ifdef will prevent the 
-> generation of this U-Boot FIT image if the symbol isn't defined anymore (which 
-> is possible if SPL has no support for FS (ext4, fat, squashfs, semihosting)). U- 
-> Boot likely work just fine by trying to load u-boot.itb from another source no? 
-> (No experience with AMD, typically only Aarch64 for me, where u-boot.itb is 
-> usually loaded from a specific offset in the storage medium, outside of any FS).
-> 
-> Basically, do we really need to NOT build U-Boot FIT if SPL_FS_LOAD_PAYLOAD_NAME 
-> is not defined?
+The implementation does caching each time a correct GPT
+has been parsed and verified and will match the blk_desc
+and LBA to serve the cached data or force a re-parsing.
 
-There are couple of things here. AMD/Xilinx evaluation boards are capable to 
-boot from multiple devices.
+In order to allow GPT manipulation, some of the calls
+ignores the cache and some will discard the cached data.
 
-On ZynqMP we have one official supported flow which is FSBL or alternative SPL.
+On the SM8650 QRD platform with a KIOXIA THGJFJT1E45BATPC
+configured with 8 LUNs, the scsi scan takes 0.2s with both
+CPU caches enabled, but when disabling both CPU caches it
+goes up to 4s to do the full scan of all 8 LUN partitions.
 
-In FSBL boot mode FIT image is not handled and boot image contains just 
-u-boot.elf and that's it and no matter which boot mode you use.
+With this change the scan takes only 0.18s with both CPU
+caches enabled running 1.1x times faster, and with both CPU
+caches disabled the full scan takes only 1.27s running
+3x faster.
 
-In SPL boot mode boot image (boot.bin) has only SPL and that's it. Then FIT 
-image should be created to be able to start TF-A, U-Boot, etc.
+While 20ms could look negligeable, it's still a 20ms gain
+in the boot flow and a non negligeable reduction in
+calculation and memory allocation since for each scan
+it would allocate and free the gpt_pte table up to
+1024 times, now it would only do 8 allocations, reducing
+memory fragmentation.
 
-Then based on boot device there are in general two options which are raw mode 
-(for example SPI) and then filesystem one (SD or EMMC).
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ disk/part_efi.c | 93 +++++++++++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 77 insertions(+), 16 deletions(-)
 
-In RAW mode qspi image is created (maybe we can rename it because it can be also 
-used for NAND for example) and image is expected at certain offset and name 
-obviously doesn't matter.
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 932d058c184ce6946b7142e7c2d9637b28e4661e..4f02fabe265ce5ca4c8f55e41768a95582022e21 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -55,13 +55,59 @@ static inline u32 efi_crc32(const void *buf, u32 len)
+ static int pmbr_part_valid(struct partition *part);
+ static int is_pmbr_valid(legacy_mbr * mbr);
+ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+-			gpt_entry **pgpt_pte);
++			gpt_entry **pgpt_pte, bool cache);
+ static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
+ 					 gpt_header *pgpt_head);
+ static int is_pte_valid(gpt_entry * pte);
+ static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
+ 			  gpt_entry **pgpt_pte);
+ 
++static struct gpt_pte_cache_data {
++	struct blk_desc *desc;
++	u64 lba;
++	gpt_entry *gpt_pte;
++	gpt_header gpt_head;
++} gpt_pte_cache;
++
++static void clear_gpt_pte_cache(void)
++{
++	if (gpt_pte_cache.desc) {
++		if (gpt_pte_cache.gpt_pte)
++			free(gpt_pte_cache.gpt_pte);
++
++		memset(&gpt_pte_cache, 0, sizeof(gpt_pte_cache));
++	}
++}
++
++static void cache_gpt_pte(struct blk_desc *desc, u64 lba,
++			  gpt_entry *gpt_pte, gpt_header *pgpt_head)
++{
++	if (gpt_pte_cache.gpt_pte)
++		free(gpt_pte_cache.gpt_pte);
++
++	gpt_pte_cache.desc = desc;
++	gpt_pte_cache.lba = lba;
++	gpt_pte_cache.gpt_pte = gpt_pte;
++	if (pgpt_head)
++		memcpy(&gpt_pte_cache.gpt_head, pgpt_head, sizeof(gpt_header));
++}
++
++static gpt_entry *get_cached_gpt_pte(struct blk_desc *desc, u64 lba,
++				     gpt_header *pgpt_head)
++{
++	if (gpt_pte_cache.desc && gpt_pte_cache.gpt_pte) {
++		if (gpt_pte_cache.desc == desc &&
++		    gpt_pte_cache.lba == lba) {
++			memcpy(pgpt_head, &gpt_pte_cache.gpt_head, sizeof(gpt_header));
++			return gpt_pte_cache.gpt_pte;
++		}
++
++		clear_gpt_pte_cache();
++	}
++
++	return NULL;
++}
++
+ static char *print_efiname(gpt_entry *pte)
+ {
+ 	static char name[PARTNAME_SZ + 1];
+@@ -211,8 +257,6 @@ int get_disk_guid(struct blk_desc *desc, char *guid)
+ 	guid_bin = gpt_head->disk_guid.b;
+ 	uuid_bin_to_str(guid_bin, guid, UUID_STR_FORMAT_GUID);
+ 
+-	/* Remember to free pte */
+-	free(gpt_pte);
+ 	return 0;
+ }
+ 
+@@ -252,9 +296,6 @@ static void __maybe_unused part_print_efi(struct blk_desc *desc)
+ 		uuid = (unsigned char *)gpt_pte[i].unique_partition_guid.b;
+ 		printf("\tguid:\t%pUl\n", uuid);
+ 	}
+-
+-	/* Remember to free pte */
+-	free(gpt_pte);
+ 	return;
+ }
+ 
+@@ -277,7 +318,6 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+ 	if (part > le32_to_cpu(gpt_head->num_partition_entries) ||
+ 	    !is_pte_valid(&gpt_pte[part - 1])) {
+ 		log_debug("Invalid partition number %d\n", part);
+-		free(gpt_pte);
+ 		return -EPERM;
+ 	}
+ 
+@@ -307,8 +347,6 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+ 	log_debug("start 0x" LBAF ", size 0x" LBAF ", name %s\n", info->start,
+ 		  info->size, info->name);
+ 
+-	/* Remember to free pte */
+-	free(gpt_pte);
+ 	return 0;
+ }
+ 
+@@ -382,6 +420,9 @@ int write_gpt_table(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
+ 					   * sizeof(gpt_entry)), desc);
+ 	u32 calc_crc32;
+ 
++	/* Clean cache */
++	clear_gpt_pte_cache();
++
+ 	debug("max lba: %x\n", (u32)desc->lba);
+ 	/* Setup the Protective MBR */
+ 	if (set_protective_mbr(desc) < 0)
+@@ -620,6 +661,9 @@ int gpt_restore(struct blk_desc *desc, char *str_disk_guid,
+ 	gpt_entry *gpt_e;
+ 	int ret, size;
+ 
++	/* Clean cache */
++	clear_gpt_pte_cache();
++
+ 	size = PAD_TO_BLOCKSIZE(sizeof(gpt_header), desc);
+ 	gpt_h = malloc_cache_aligned(size);
+ 	if (gpt_h == NULL) {
+@@ -689,7 +733,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
+ 	 */
+ 	if (is_gpt_valid(desc,
+ 			 GPT_PRIMARY_PARTITION_TABLE_LBA,
+-			 gpt_head, gpt_pte) != 1) {
++			 gpt_head, gpt_pte, false) != 1) {
+ 		log_debug("Invalid GPT\n");
+ 		return -1;
+ 	}
+@@ -706,7 +750,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
+ 	}
+ 
+ 	if (is_gpt_valid(desc, (desc->lba - 1),
+-			 gpt_head, gpt_pte) != 1) {
++			 gpt_head, gpt_pte, false) != 1) {
+ 		log_debug("Invalid Backup GPT\n");
+ 		return -1;
+ 	}
+@@ -764,10 +808,13 @@ int gpt_repair_headers(struct blk_desc *desc)
+ 	int is_gpt1_valid, is_gpt2_valid;
+ 	int ret = -1;
+ 
++	/* Clean cache */
++	clear_gpt_pte_cache();
++
+ 	is_gpt1_valid = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
+-				     gpt_h1, &gpt_e1);
++				     gpt_h1, &gpt_e1, false);
+ 	is_gpt2_valid = is_gpt_valid(desc, desc->lba - 1,
+-				     gpt_h2, &gpt_e2);
++				     gpt_h2, &gpt_e2, false);
+ 
+ 	if (is_gpt1_valid && is_gpt2_valid) {
+ 		ret = 0;
+@@ -906,6 +953,9 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+ 	lbaint_t lba;
+ 	int cnt;
+ 
++	/* Clean cache */
++	clear_gpt_pte_cache();
++
+ 	if (is_valid_gpt_buf(desc, buf))
+ 		return -1;
+ 
+@@ -1023,12 +1073,13 @@ static int is_pmbr_valid(legacy_mbr *mbr)
+  * lba is the logical block address of the GPT header to test
+  * gpt is a GPT header ptr, filled on return.
+  * ptes is a PTEs ptr, filled on return.
++ * cache is a bool, true to use the cached gpt_pte from previous call
+  *
+  * Description: returns 1 if valid,  0 on error, 2 if ignored header
+  * If valid, returns pointers to PTEs.
+  */
+ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+-			gpt_entry **pgpt_pte)
++			gpt_entry **pgpt_pte, bool cache)
+ {
+ 	/* Confirm valid arguments prior to allocation. */
+ 	if (!desc || !pgpt_head) {
+@@ -1036,6 +1087,12 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+ 		return 0;
+ 	}
+ 
++	if (cache) {
++		*pgpt_pte = get_cached_gpt_pte(desc, lba, pgpt_head);
++		if (*pgpt_pte)
++			return 1;
++	}
++
+ 	ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, mbr, 1, desc->blksz);
+ 
+ 	/* Read MBR Header from device */
+@@ -1081,6 +1138,9 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+ 		return 0;
+ 	}
+ 
++	if (cache)
++		cache_gpt_pte(desc, lba, *pgpt_pte, pgpt_head);
++
+ 	/* We're done, all's well */
+ 	return 1;
+ }
+@@ -1100,13 +1160,14 @@ static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
+ 	int r;
+ 
+ 	r = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA, gpt_head,
+-			 pgpt_pte);
++			 pgpt_pte, true);
+ 
+ 	if (r != 1) {
+ 		if (r != 2)
+ 			log_debug("Invalid GPT\n");
+ 
+-		if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte)
++		if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte,
++				 true)
+ 		    != 1) {
+ 			log_debug("Invalid Backup GPT\n");
+ 			return 0;
 
-But in filesystem mode names matter and image should match 
-CONFIG_SPL_FS_LOAD_PAYLOAD_NAME because that's the filename which SPL is looking 
-for that's why these has to match.
+---
+base-commit: 4adbf64ff8d8c730223fd8ae299d770bebb6fe86
+change-id: 20250327-u-boot-efi-part-cache-ddc1499c3ef6
 
-And if I go back when FSBL is used there is no reason to generate raw boot image 
-as qspi.bin or fit image as u-boot.itb because all binaries are the part of 
-boot.bin already.
-
-Please let me know if you have any other question.
-
-Thanks,
-Michal
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
