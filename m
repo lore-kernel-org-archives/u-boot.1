@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4626EC3600B
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 02:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E97DC3600B
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 02:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 483848144A;
+	by phobos.denx.de (Postfix) with ESMTP id 90C0081D3B;
 	Fri, 28 Mar 2025 03:20:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="XznV9uo6";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="pVBvu9XQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5094C806FC; Thu, 27 Mar 2025 15:39:33 +0100 (CET)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
- by phobos.denx.de (Postfix) with ESMTP id CDFFA8003E
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:39:29 +0100 (CET)
+ id D5339805C8; Thu, 27 Mar 2025 15:39:40 +0100 (CET)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
+ by phobos.denx.de (Postfix) with ESMTP id 7EF4D81879
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 15:39:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pzimmermann@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1743086360;
- bh=Gz+f8ldq07zPClYOyakbS/3I33vNC19DZ5Q6s3+jUyg=;
- h=From:To:CC:Subject:Date:From;
- b=XznV9uo6gleD2E+psiOaajFbKjRUKBFeIvsnIVWVj6lrSf3nns8bqrAULgeHggD4w
- 0adSU06nz89kxRWAvd9Xor3++jOr+tvw/73BTJ+997XHz2kcDb0v68SIYmFyTcGdkE
- ANUWtx1e6uAJDryvqb1vHliL+gJXxxzMN3QuURnH/NDXEGBHB2TqCYArXjZlUvYjUZ
- zHWxDNcsDA3SidCpdIUGGsED3AV9LFUjoAdWVd6h+bl1A05Dbam+egpUlIIEIt9VEv
- XLFuPYTVABquoItqa1e8rhxmPfs+70f/3oSiUtMe1FhenJXmb48j8MKB/LuHsMO6VK
- MAWRgBQx3ZR3Q==
+ s=dhelectronicscom; t=1743086361;
+ bh=OfAgSDRGPdnYQ/1PueaPHoBuBbaA89pfaR2gcsvAwCA=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References:From;
+ b=pVBvu9XQsSEClYaD3A3mXiy6JWSOr3BGQyO0doNK7TNl89/zsigGzxACyXigTx4gO
+ xZ4iJd7gmOFtLFLtSrum34z2DWg7TtuBO774wsNsy++fHaJvZj007FWPCv1Ix9rWkf
+ TBtx+NYQlEpbQDGgd81CAkHBxk9Mv5BX4Ejbn5hP59LHIisANT0NEQvkdnOiFmkhHs
+ G2uZMgdX6Ka0LF6ZJ59SdSxD1CO0jgSniM4Cq5S26HPk5tzyO2PsNZxdpALoQof2W4
+ 2L6O9fUQwsr3HE576UsWk45t4MLTVnBPxbZ972HuV5S+rsm7GRo/IAYtHCkBRTqP8o
+ pB94YoXLl2SVg==
 From: Pascal Zimmermann <pzimmermann@dh-electronics.com>
 To: <u-boot@lists.denx.de>
-CC: Pascal Zimmermann <pzimmermann@dh-electronics.com>, Marek Vasut
- <marex@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice
- Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, Simon
- Glass <sjg@chromium.org>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [RESEND PATCH 0/2] ARM: stm32: env: Enable scan and start for AB
- schema on STM32MP15 DHSOM
-Date: Thu, 27 Mar 2025 15:38:41 +0100
-Message-ID: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
+CC: Pascal Zimmermann <pzimmermann@dh-electronics.com>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marex@denx.de>, <u-boot@dh-electronics.com>
+Subject: [RESEND PATCH 1/2] config_distro_bootcmd: make possible to substitute
+ 'part list' in distro_bootcmd
+Date: Thu, 27 Mar 2025 15:38:42 +0100
+Message-ID: <20250327143843.19358-2-pzimmermann@dh-electronics.com>
 X-klartext: yes
+In-Reply-To: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
+References: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -65,48 +66,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For the STM32MP15 DHSOM, change the default environment so an AB schema
-on a device can be detected.
+Make it possible to substitute the 'part list' command inside
+'scan_dev_for_boot_part' with a custom board specific implementation.
 
-The first patch makes possible to substitute the 'part list' command
-inside 'scan_dev_for_boot_part' with a custom board specific
-implementation.
-
-The second patch uses the change of the first patch to plug the board
-specific code for booting from AB into the standard boot of all boot
-targets at the STM32MP15 DHSOM.
-
-The detection works by looking for the partitions with specific lables.
-The name of those partitions are in the variables and its defaults:
-* dh_ab_partname_primary=rootfs-a
-* dh_ab_partname_secondary=rootfs-b
-
-To prevent being hanging at bootcmd, enable "CONFIG_BOOT_RETRY" and
-"CONFIG_RESET_TO_RETRY", but the timer will only be activated, if the AB
-partitions are detected.
-
-Pascal Zimmermann (2):
-  config_distro_bootcmd: make possible to substitute 'part list' in
-    distro_bootcmd
-  ARM: stm32: env: Enable scan and start for AB schema on STM32MP15
-    DHSOM
-
- configs/stm32mp15_dhsom.config       |  3 +++
- include/config_distro_bootcmd.h      |  7 +++++-
- include/configs/stm32mp15_dh_dhsom.h | 33 ++++++++++++++++++++++++++++
- 3 files changed, 42 insertions(+), 1 deletion(-)
+For this the new define 'SCAN_DEV_FOR_BOOT_PARTS' is introduced.
 
 Signed-off-by: Pascal Zimmermann <pzimmermann@dh-electronics.com>
 ---
-Cc: Marek Vasut <marex@denx.de>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
 Cc: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>
+Cc: u-boot@dh-electronics.com
+---
+ include/config_distro_bootcmd.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
+diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+index 0a4e4b8ff85..df0dc8cfdee 100644
+--- a/include/config_distro_bootcmd.h
++++ b/include/config_distro_bootcmd.h
+@@ -194,6 +194,11 @@
+ #define SCAN_DEV_FOR_EFI
+ #endif
+ 
++#ifndef SCAN_DEV_FOR_BOOT_PARTS
++#define SCAN_DEV_FOR_BOOT_PARTS \
++	"part list ${devtype} ${devnum} -bootable devplist; "
++#endif
++
+ #ifdef CONFIG_SATA
+ #define BOOTENV_SHARED_SATA	BOOTENV_SHARED_BLKDEV(sata)
+ #define BOOTENV_DEV_SATA	BOOTENV_DEV_BLKDEV
+@@ -538,7 +543,7 @@
+ 		"\0"                                                      \
+ 	\
+ 	"scan_dev_for_boot_part="                                         \
+-		"part list ${devtype} ${devnum} -bootable devplist; "     \
++		SCAN_DEV_FOR_BOOT_PARTS                                   \
+ 		"env exists devplist || setenv devplist 1; "              \
+ 		"for distro_bootpart in ${devplist}; do "                 \
+ 			"if fstype ${devtype} "                           \
 -- 
 2.30.2
 
