@@ -4,98 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D3BC3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 16:31:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98388C3600B
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 16:32:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3498806D8;
-	Thu, 27 Mar 2025 17:31:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 34F6F806D8;
+	Thu, 27 Mar 2025 17:32:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s5eXmfeI";
+	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="LTDMIR8p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C672E806FC; Thu, 27 Mar 2025 17:31:37 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id E054F806FC; Thu, 27 Mar 2025 17:32:07 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84338805C8
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 17:31:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E24E5805C8
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 17:32:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=sigma-star.at
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4394a0c65fcso12217365e9.1
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 09:31:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=richard@sigma-star.at
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-399744f74e9so834664f8f.1
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 09:32:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743093095; x=1743697895; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Fvx4gexM9QHbY6Gtpe+Facdq12qGap7L78TQQzVUyAY=;
- b=s5eXmfeIEbgYC5l3utRne+IlCqivFb88CHN1+rw9QH87AKV77GuCLpdPH12xHdLLTt
- jLZ4Aa6BMZ2aH6b2PnL2YjJU3uUPRxLykOGY2RvSvEmWR5QIc9QmwHLqmZF8PvE4GxWN
- 6auaADgG6cd2rSR5/xNSgK2Tr5eWulJjtFtkJcKOC++/gDZwakwKpII2opyNx+vCsQFb
- Dr1EZP5wKPwSvONECgvPAdj7gcN3e6owj3qmJCKxh73pZrkJmHCiOf3sDLhXktSKSD4Z
- poJ9gyVgrMzErYm8gP/hwdWcRdPe1VPfulbmbt7ZOzfO4k7Na9EJqDOV1Q0xt4HPkTX8
- JH7g==
+ d=sigma-star.at; s=google; t=1743093120; x=1743697920; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OfdldsNIBAu4x/Nr3UmksKEeBMKX4wcjAcWVvaX7wmU=;
+ b=LTDMIR8p0B1wZkTvFu0woTpNF0ZQEH5W5yMOcuuu4Pk6N3xN7z/cGJ5eElbAOD7Fnc
+ 52XxS337AnT9Fpg7OasmDnM8FWmay6O8srIxdtgVVk7q5JJPDLjDehwOttL2GaZwJhPP
+ 3mtJEf+abo+D9qAKHrH2/oE+Nx6SzsqbMa8RVp+BBZigt9wV6NG2R2v+60pM3vwX1kRh
+ sA4ehdb639aTl8BlhqeSEWZ3ZQzOT5vsK8xICxjxOrXqzJZd4iq/qSZM7hjf5+Ce10mZ
+ CLekb1xd2SL7fUM2TUboLRkavaWXYCUyH8uRNjRZaXdmMfd/TyBZs3nYzwC6ga2cHzSY
+ hb6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743093095; x=1743697895;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Fvx4gexM9QHbY6Gtpe+Facdq12qGap7L78TQQzVUyAY=;
- b=e2V5CQOiBXRfweI3ZZvtjqqv6JZ0pyrQdLelBRQTH+Y7wmGSZ7SYQURMcgzdB0GUxh
- uokKPcrmWMSs6MVDagqQHlqx4N0+4zY3wOvhBKbnnfeioBkWYo7kUHTmuJfwgQI3ZO6y
- 2nAEnoJRFkzeIMeHMYfgGggnx+he1dm/cW90O7zxf9TqMVyv1JYIE+foPAUI3FIj9a0y
- w8sEWcxHVlGrUjsPTSLROSUVKJoZTcU0j/HPcQphm0f+V5xNWWrrRowKAQlHVSNIjSru
- s77xpgjLHIqSwU3GFd2zuze/upzxkDiLume1papb5jtrH2lJLhQjtFNMwqpoOA1ZX/9+
- JxqA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUycptQ1QObDnrl03nVNfy4DgIHuTQIFaTaua9+jzWRFIkuQhkMdno5Ixsa73UzXDr+WA3mfQM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy16obRA2a0bMSH4Dy/3HdeOKnvL39Kw51aJd4nmjTY4pafQalw
- muyO/NA+wMAGzhHU95wo3jfdlz6824NgNWlQBV7CPexWDtgzhP2KVC5ELlXwlU0=
-X-Gm-Gg: ASbGncvkP749boOasLYNTxOY1iOckPBdfbYcfvKZ82B9qZwq7rR6e9EoiHaqow9KfXs
- Ga9lfQeU5GnlfQlZ2Em1XVtsrg4GgdVZsbc4OdiU8JFKNgUR7h1uH7vlLpROZFvO5u0eRNfvrfg
- +nobm053UGlTQnuKWpEoz0Hv/TXOgPQ2wFffWh6qgVDqScL1CB+kNcO60dHnd/X4i0DhF4szfFb
- yf3xuyw468ROPf/u9Xz0tq2zxTbFb6JAbSRkepRFPRnAG0tXfa6Txy9nXdTqUd+smNu+M7EcjGm
- wctSbx4z+DuopYolWLIGzYGzMu01NgOmfZynCBTWCgWRknc45+9iJP1VGSQKjJg7ALD1HSF5L2o
- =
-X-Google-Smtp-Source: AGHT+IFwJz9TDWy5VXfQUGV8oZR8NDbvJTjJ5Lf2PboDSwEnKWrWihKY577y0Q82inynF+RjLXCbfQ==
-X-Received: by 2002:a05:600c:3553:b0:43c:f3e4:d6f7 with SMTP id
- 5b1f17b1804b1-43d850c9bddmr49203325e9.31.1743093094781; 
- Thu, 27 Mar 2025 09:31:34 -0700 (PDT)
-Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82f7c82esm42360305e9.37.2025.03.27.09.31.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Mar 2025 09:31:34 -0700 (PDT)
-Message-ID: <b40c0037-33bb-44b0-bc24-f4cadc9f5d1d@linaro.org>
-Date: Thu, 27 Mar 2025 17:31:32 +0100
+ d=1e100.net; s=20230601; t=1743093120; x=1743697920;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OfdldsNIBAu4x/Nr3UmksKEeBMKX4wcjAcWVvaX7wmU=;
+ b=sNkANmoGMZwhnZvSPQ3ds+roM8z+mu2PnqjBN2KHGXAnwCxl0ECx6WkBMG+YiGZZAx
+ mi5uzm6exXcEZg1DZmZgFUasiP58eyy1CMzMHhzeOYzDFS22EWTXkpuNC4vbOGLk4rjr
+ HR3htG/XUX+sMyylACF9zezge58gMFMg8uNhVVlN2A4u9B8u3huJSe0KG2VU8UtMECgI
+ aK9Xwj4HwEh+Y+Xdz2Bcw+pJy2wJYgKSy5ugBGjzLLlGX2tHbPCmD9/ulFmI3GA4NQ/4
+ H5J9QQBGDOqnxgrd3ZT3m7IRRpksgWFe1KIqxiD/TTT7ZFHdI+1ThzrPX6DEgCDTL+39
+ JbuQ==
+X-Gm-Message-State: AOJu0Ywz2qSqUujNLmvniWsycpYaXLtycDW+yZkdWXH8aUZzYImgWY3s
+ 1KU3ncYDKZJwSlsxpzWPn07O4r8a1TV0Wxe0QMYwrcISL3Pwzv+jivNHVL+Q4p6zyqE4VK4JR/L
+ A
+X-Gm-Gg: ASbGncvLem6cdeb8IFbPIzWO5KbGTYQKVEkq7lKgC6t6MlkkUG8NNnc30CCYMyyf6z4
+ NPc4UYk5L0LJUIgSQZbAlBYX0EyqQon9rIDApwqyR4YmYhh86trVk83CTsDGm3eSCqHWXxtyAWc
+ s2ejefs95GiDxbqKVHFrfofskU7fkI7oB6GxzWIzaCZvcUPHcFP1rYI/EkRDFhjhl2nF5Crs78W
+ thX6enIdHI6i0M3V2cPLISkJk0xVQLs6fAlTahYQBxUo9NzV/2zHlN95i3s61MDSJEoItLeU82B
+ f4oo51Kv5u3E+qBsTN+jU4GxnBsA1UuHT5DmsacDTVechnc9ta3DYNxYEchsK/Kave0+ecl9jWj
+ TUS8bElrUMTv0
+X-Google-Smtp-Source: AGHT+IEXgev3q1oPeBBWbD/RS61kHW2Dy2f6M1Ep6Y0GOzoKCnsk6Bb1MhMABKHxCvPyBov6s9OHBQ==
+X-Received: by 2002:a5d:64c7:0:b0:391:49f6:dad4 with SMTP id
+ ffacd0b85a97d-39ad176b9e5mr4048742f8f.41.1743093120257; 
+ Thu, 27 Mar 2025 09:32:00 -0700 (PDT)
+Received: from somecomputer (84-115-238-41.cable.dynamic.surfer.at.
+ [84.115.238.41]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d8fccfd9bsm7395e9.20.2025.03.27.09.31.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Mar 2025 09:32:00 -0700 (PDT)
+From: Richard Weinberger <richard@sigma-star.at>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mauro Salvini <m.salvini@koansoftware.com>
+Cc: upstream+uboot@sigma-star.at, Simon Graber <simon.graber@sigma-star.at>,
+ mbrugger@suse.com, pbrobinson@gmail.com
+Subject: Re: Unexpected RPi5 Behavior with Saved U-Boot Environment
+Date: Thu, 27 Mar 2025 17:31:59 +0100
+Message-ID: <2017235.OF7RDaNIJX@anvil>
+In-Reply-To: <df93a047-2a97-4028-90b3-510b9c75493c@koansoftware.com>
+References: <3097333.a1USZiQ7eK@anvil>
+ <df93a047-2a97-4028-90b3-510b9c75493c@koansoftware.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 18/29] efi: arm: Omit the ARM start-up code in the EFI
- app
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-References: <20250215032254.4121030-1-sjg@chromium.org>
- <20250215032254.4121030-19-sjg@chromium.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250215032254.4121030-19-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,67 +101,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Donnerstag, 27. M=C3=A4rz 2025 17:24 Mauro Salvini wrote:
+> could be related tho this [1]?
+>=20
+> I sent this patch some years ago but was never accepted in u-boot tree.
+> But meta-rpi uses it in u-boot recipe [2].
 
+Uh, good point!
+In our initial experiments we have used meta-raspberrypi but now we don't.
+This would explain it.
 
-On 2/15/25 04:22, Simon Glass wrote:
-> This code is not used with the EFI app, since it enters through a call
-> to efi_main(). Remove start.S and crt files from the build.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+IMHO this patch needs to be reconsidered.
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
-> 
-> (no changes since v1)
-> 
->   arch/arm/Makefile     | 2 ++
->   arch/arm/lib/Makefile | 6 ++++--
->   2 files changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-> index cb87a684754..2e569b330d0 100644
-> --- a/arch/arm/Makefile
-> +++ b/arch/arm/Makefile
-> @@ -104,7 +104,9 @@ PLATFORM_CPPFLAGS += $(patsubst %,-I$(srctree)/%include,$(machdirs))
->   
->   libs-y += $(machdirs)
->   
-> +ifndef CONFIG_EFI_APP
->   head-y := arch/arm/cpu/$(CPU)/start.o
-> +endif
->   
->   ifeq ($(CONFIG_XPL_BUILD),y)
->   ifeq ($(CONFIG_SYS_SOC)$(CONFIG_SPL_FRAMEWORK),"mxs")
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index 14e3990925a..9500ba6fddc 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -7,19 +7,21 @@ lib-$(CONFIG_USE_PRIVATE_LIBGCC) += ashldi3.o ashrdi3.o lshrdi3.o \
->   				    lib1funcs.o uldivmod.o div0.o \
->   				    div64.o muldi3.o
->   
-> +ifndef CONFIG_EFI_APP
->   ifdef CONFIG_CPU_V7M
->   obj-y	+= vectors_m.o crt0.o
->   else ifdef CONFIG_ARM64
->   obj-y	+= crt0_64.o
->   else
->   obj-y	+= vectors.o crt0.o
-> -endif
-> +endif  #  CPU type
->   
->   ifdef CONFIG_ARM64
->   obj-y   += setjmp_aarch64.o
->   else
->   obj-y   += setjmp.o
-> -endif
-> +endif  # ARM64
-> +endif  # CONFIG_EFI_APP
->   
->   ifndef CONFIG_XPL_BUILD
->   ifdef CONFIG_ARM64
+Thanks,
+//richard
 
--- 
-Caleb (they/them)
+=2D-=20
+=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
+=2DGasse 6, 6020 Innsbruck, AUT UID/VAT Nr:
+ATU 66964118 | FN: 374287y
+
 
