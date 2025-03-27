@@ -4,73 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 407BDC3600B
-	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 14:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D7FC36010
+	for <u-boot@archiver.kernel.org>; Thu, 27 Mar 2025 14:08:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BCD981273;
+	by phobos.denx.de (Postfix) with ESMTP id F3AAD81DB4;
 	Thu, 27 Mar 2025 15:07:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O/9XkME+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kZcg8l/h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E96281951; Thu, 27 Mar 2025 11:06:40 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 08C3681951; Thu, 27 Mar 2025 14:33:16 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCE6E8070C
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 11:06:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F5AC806FC
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 14:33:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilyashpo@gmail.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-6f47ed1f40dso5616697b3.1
- for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 03:06:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac3b12e8518so189356566b.0
+ for <u-boot@lists.denx.de>; Thu, 27 Mar 2025 06:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743069996; x=1743674796; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=++r/KmHo/v1+80NbbWdRxrq50CCdAVsmATSh9XXcV/4=;
- b=O/9XkME+bV7EV+Xdp5HfJjub6Eq9wyQ4cfc4lTVXvoYIbtro7ROGZguzRbbIvrqF8t
- QPzZ+pQqjFdk0rP+sWJRGNYSiWmH+13+Zyndj06YWRnIyP7SAh6rO+DsvOMp/+hWGD4j
- M9A67uAe96MnXFTSVFZww5Ew9Cysl1gLDNhCBJYohdbFMNAQtP0HMam3CQVtkqxOXiXF
- xnKJk1JSzwL3iXwsBQdfpLitm9M/34G7mNG+czT0nENfP7DBYLZfR4N1tV5bIGX6mUtF
- fGLgyyLB8soyBHIsGfZ7hY61TBOjKLx5FvKxCl0rD0pruW6/acxd3vc8WnqrA4V6cYHP
- GKug==
+ d=chromium.org; s=google; t=1743082393; x=1743687193; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=80l8bjMsmRffl6OVXm6A0mXSoLZ2i4gFpN1LMNvuOiU=;
+ b=kZcg8l/hp+OzKNszTfHaI61y4bcOGsfsH4JnCPRGD6oshh1Od66UEBJ58EykoiP9pQ
+ KjNajorJt5Sk+lHw8lXHp95MXhLt69Z10fW/FNUHWO5ZUBHpJHTYT7mURrSspmHhfUM2
+ 6xvh8ATFiwBMwq1H1oc3PpWDrit0CJtVULo0Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743069996; x=1743674796;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=++r/KmHo/v1+80NbbWdRxrq50CCdAVsmATSh9XXcV/4=;
- b=cVUPd6EGQYoUBKHTh2+WCy5J/ZrDwndKiLp4DDqYrIAY7DlMaDAZ9dkSMZ0RwD6wEm
- 1UrdL2xtTN1ys2Wif84KakKs0WOOWGtTojSOdeIIn8LeeXND+fmpvx8cp77ophQMPXos
- 0rsYz2UcmssgHocADtFwpzhziX1kuLVa5smzuMtsCW18kWc+6UmBb613Q5hstvv1DWRI
- GsR0zExMYHPcOBx2sNDW6dGPDz29vrnyXQ05xbdYJQYdWp0yrdgwH7JV+Lc/wV2A1Fc/
- pDDn6Ptx+aUkSFBa4qBlxDymEykM4jWAh+An/LcgQMpgB/3ZCTRrs8dVS0T1lmoejzAr
- qEYA==
-X-Gm-Message-State: AOJu0Yy7h5xiZNl7pXsUjeYdfjSZijB+ihGU0ujj5FPuiTpmdypZilu0
- Wczm3FcZxDrjiiKUjFTpsNhZbPKQAKKR7o5tlfIjV34gF/Gw0gRWPvE0gIF/LGonH7Rml0up1pF
- IS9dva2RQ4TX7RqwTOvaeqezfV8D19hcY
-X-Gm-Gg: ASbGncv0UBUtJDy2w6rRNmqfYUk1UkfmJp9TCxu0lSsBoVaG21UnYKg9nzA0cv+MIX5
- 60aswuYWzrwDLDWsfkIwSyjMsSOw93ao27QIftDa+D3q6szc5OzS0IUpc6IR4NjP10XGb6xb4GY
- lrPbcqNBM34d5nikUFa5TadCtxCHWDbQn3K2Q0PmI=
-X-Google-Smtp-Source: AGHT+IEcvI9JiH80OnzgJVWTWr5xeoVi2ZpJW/yX5Dkl2PrY1gBoMTUXS8YKeo7UPOTUw5flVug7tcnn66Nwy+GEVkI=
-X-Received: by 2002:a05:690c:6ac7:b0:6fb:b7b7:f1e5 with SMTP id
- 00721157ae682-70224fb7efbmr35220637b3.14.1743069996320; Thu, 27 Mar 2025
- 03:06:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743082393; x=1743687193;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=80l8bjMsmRffl6OVXm6A0mXSoLZ2i4gFpN1LMNvuOiU=;
+ b=qky5UZ/Tkcj/wK28BjP4+wJl1dwR20P9JHa1+iu+TaXEgdkl4greu6Rj19zUwKAqHb
+ LURFSmC1dZygXAnJO2A8KyFOBoTGzBHurzhBv8j2ft8Qbw/uet8+ILpSQGInHkZ7VA+3
+ u0VESJpwFvcNolVbA0mDIkflZGyNVgwzOumAf8qzyYabHVF0PjVEQ/4G/FT6GN0kS6f2
+ NXt5uWKuYSCnT9x/YztZyHPax6xu3hem7RcSuoH7KMC8Uf5HRBYrngKNojBTLAbD2yw5
+ ek307oM26IM2MzvKU1Gbs2EKFzVkks1dNV/ULm0yjzAmavLz+4t554s/FdbYmtwoBt6B
+ H8Dw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3JTYs1Kbzr23mFy1DzLvOie2Etm9d0dsfDrvdulquOeCTrykJXSx4Ew9HzWciIyBwuvY+1M8=@lists.denx.de
+X-Gm-Message-State: AOJu0YykiGzPMofpqRGTKHzKQqPMaUhwOdfWt1loWUxyYuP2PNkxoIH9
+ L3wfqgp2m01+yZ6DAgbETBgzH/quKWe4CEZnOBSHwGz+/5ECA53qaElicqsmOysO3iKU2M5bKBY
+ OElt6dZAaYPNNpZAnJofPHrD1X2cgXIONcoMM
+X-Gm-Gg: ASbGncsnosHitAhhNxN9SRPbaRRuE1hV35+jQalMbMw5kfhIncnpYf0XWP1G60GmRo4
+ 8flFBqo9EG5wfiG7Z7rbp7Mw+CZOxAJTgxquFTJ+VaMLmrX/L+QJVU4ESBP7kMHkNsKKEPzBS/n
+ hknfNtNKCXsWt1GUumqtgSBgzb90A=
+X-Google-Smtp-Source: AGHT+IHvZpe8R9Oj977ZPnxHAJEiaw53yrZvBdkYM+CyD3OGIUwHJHMy+qsSqvpXQo+Oemn0vQwOkXhIGfDJwHV6PHI=
+X-Received: by 2002:a17:907:1c0c:b0:ac6:b639:5a1b with SMTP id
+ a640c23a62f3a-ac6fb14ec02mr315007766b.45.1743082392835; Thu, 27 Mar 2025
+ 06:33:12 -0700 (PDT)
 MIME-Version: 1.0
-From: Ilya Shpoliansky <ilyashpo@gmail.com>
-Date: Thu, 27 Mar 2025 12:06:25 +0200
-X-Gm-Features: AQ5f1JruBX41vHIH_15_o7ILdxIH8Sfl4CeZ0OvV1hALXNMCR6XGDcZsv2Wjifc
-Message-ID: <CAEKNh+D0sQCVHiTZgsFv4HX68H4P4xms63er7-BuCiPCWvTfxA@mail.gmail.com>
-Subject: does spl in falcon mode support decompressing the linux kernel?
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Thu, 27 Mar 2025 15:07:52 +0100
+References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
+ <380f1f2c-59cd-4c52-a598-5e6f1ed1dcad@gmx.de>
+ <CAC_iWj+DazCNrMktmwJQxt7bVPbu-qWCfjW4bgcv0cngiH03gw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+DazCNrMktmwJQxt7bVPbu-qWCfjW4bgcv0cngiH03gw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 27 Mar 2025 07:33:01 -0600
+X-Gm-Features: AQ5f1JoIaUtS4OUivQs5fFZmEULB8BgMcajPppp5U1BBcMt9EVq3_10n3wCf_Mw
+Message-ID: <CAFLszTgq25-E-n+UaJ_wRdimCLcAta-fetWpOW++NCOfN_eL5w@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, e@freeshell.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Tang Yuantian <andy.tang@nxp.com>, Mingkai Hu <mingkai.hu@nxp.com>, 
+ Ashish Kumar <Ashish.Kumar@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>, 
+ Wasim Khan <wasim.khan@nxp.com>, Udit Agarwal <udit.agarwal@nxp.com>, 
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Manish Tomar <Manish.Tomar@nxp.com>, 
+ Mathew McBride <matt@traverse.com.au>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Michal Simek <michal.simek@amd.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>, 
+ Robert Marko <robert.marko@sartura.hr>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ Peng Fan <peng.fan@nxp.com>, Wei Ming Chen <jj251510319013@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Maks Mishin <maks.mishinfz@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de, 
+ uboot-stm32@st-md-mailman.stormreply.com, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Mailman-Approved-At: Thu, 27 Mar 2025 15:07:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,22 +116,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello community,
+Hi Ilias,
 
-I'm doing a bring-up to a new SOC based on RISC-V and due to very strict
-boot time constraints we decided to try out the falcon mode.
-I'm using the latest 2025.01 version
-I found a presentation from about 4 years ago that SPL in falcon doesn't
-support kernel decompression
+On Wed, 26 Mar 2025 at 02:37, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Heinrich,
+>
+> On Mon, 24 Mar 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 17.03.25 14:38, Ilias Apalodimas wrote:
+> >
+> > %s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
+> >
+> > > The EFI subsystem defines its own bounce buffer for devices that
+> > > can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
+> > > which can be reused instead of defining another symbol.
+> > > The only limitation for EFI is that we don't know how big the file a user
+> > > chooses to transfer is and as a result we can't depend on allocating the
+> > > memory from the malloc area, which can prove too small.
+> > >
+> > > So allocate an EFI buffer of the correct size and pass it to the DM,
+> > > which already supports bounce buffering via bounce_buffer_start_extalign()
+> >
+> > Looking at
+> >
+> >      if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
+> >
+> > in drivers/block/blk-uclass.c the bounce buffer has to be explicitly
+> > enabled by the device driver. Only the scsi drivers sets bb = true.
+> >
+> > Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag
+> > to blk_desc")
+> >
+> > Which device-drivers of the boards mentioned below do actually need
+> > bounce buffering?
+>
+> Unfortunately, I don't have any of the hardware to test and I havent
+> worked with that platform much.
+> That 'bb' variable and the fact that EFI needs bigger allocations is
+> why I ended up allocationg properly aligned memory from the EFI
+> subsystem. But as Mark pointed out, the cache flush is a no go for
+> now, so I'll drop this and see if I find time to rework the bounce
+> buffer logic overall
 
-Does it support it now?
+There was quite a bit of discussion about all this in the context of
+my attempt to just add a message to warn the user[1]
 
-If not, is there any work in the community that is done to support it? Are
-there any other alternatives?
-If yes, is there any example?
+We might consider adding an event to reserve memory before relocation,
+along with a way to discover (in board_r) where the memory was
+allocated. That would make the solution more generic.
 
-Of course it's important to store the kernel in the flash in a compressed
-form due to size constraints
+For the <4GB case we could perhaps add generic support for that in
+board_f, i.e. the ability to reserve a region for boards that need it.
 
-thanks,
-Ilya
+Regards,
+SImon
+
+[1] https://lore.kernel.org/u-boot/?q=%22Show+the+location+of+the+bounce+buffer+when+debugging%22
