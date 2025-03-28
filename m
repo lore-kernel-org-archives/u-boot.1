@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0805AC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 17:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98568C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 17:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A2B3809A5;
-	Fri, 28 Mar 2025 18:06:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 13E03809A5;
+	Fri, 28 Mar 2025 18:07:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k8GCi0wk";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0vdLcg+A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B4AC810EA; Fri, 28 Mar 2025 18:06:24 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 9673D810EA; Fri, 28 Mar 2025 18:07:32 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBD82805C8
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 18:06:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B629805C8
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 18:07:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5e535e6739bso3923145a12.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 10:06:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-39149bccb69so2154896f8f.2
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 10:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743181581; x=1743786381; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DVQy9pzG7MgsGKk/lOhNN8DYfOQLW28jiVe9Xr570xE=;
- b=k8GCi0wk/HCmA+pdJOXSE2fYvYh/iZ0Cr4N3Ok6JOvGGlbV7PdiZvz9HMv5I3VUWZn
- zGzYMmepT6L8rEZyK+p+1afvE/jmcDLo3UI/QVI63hpBL23DFyoSPtIb1I3rwgAtSMf7
- A36hpEio/Hq+tr1qy5qZObuV1/EjSWQLIkZJB4wB8UKfhkxk/F/B4gHZUp2gdffqJ/IL
- JfVHkqwu9HP9lo4+lSEQXvVJvyKUIuI07p4xy298m+zMIhr9M1x3o8d+9tpi1fBLdzOQ
- y4iER7gTxArNM9g1xEOTlyrGjtfleOTT12j3ABBl/ChKjqC5RCK+4f/KoBAGoRiYmUlT
- wCPg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743181648; x=1743786448;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iEYfkC9TGRSuhs7J4+9vnugJ88CcCsz1BTes0YF9LSU=;
+ b=0vdLcg+AMplUKlXP5GrsI84RR/MsYzTr2qeIud9uzZDC54XZlXm56XFMIeTpKpcjHj
+ gQuvz7hLkkAoQxH4olQd/AEIFp8ewNcmVS3TaIa6EjeX8N9X4VQz2p10LLM/Naf3kMnn
+ ewbZCF1CFN7c4nhHG52AtrWW3TJW/3lvMNBWe9bVGF3R97QChVn8i9IB/+D6r4aNHDLn
+ 7tbWM1ihIf/1YIim8yP48uPPe9GJJq3Qd1ehYwUY6t3QTYh/zjhrh7aNYr7JPRxvLVXG
+ OpyQ7LkAM0hQRp0duZPrGFm4jX/zBTYTXWvt8F21ENOmDhkvoAx9VJQabyKFkv5PVk1O
+ L1VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743181581; x=1743786381;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DVQy9pzG7MgsGKk/lOhNN8DYfOQLW28jiVe9Xr570xE=;
- b=FHUFIRN8CnFH/MrSnVGetrAPxThIz+GGfugx/CEF1WiQpEXDUfLgE1lXCF9E0uQ/X8
- tu7e5IJ4ZEAqlvYNPiIlGBi8yTtXpcz9IY8oVtwumaZPs02ectvis84tpTVLb8ldPRnH
- YrQyfJO8TrE8B9Ptpe8XxeEidu8AtGR7Yfhfj/NkCGhydWetmTOMtfgBhF/nu7KZnMy9
- WOdAnJjs+XswuP1HiWsH3op6z2nVBjxv3O7gQryJGSutaFO/8vI8guQ9YZsK2C/JInbh
- zAqm3HouMQhf1IrlCVNkvPmULfnKAjsBlHbrzvD7HDthKag2rK4Wv5LEDmtJPUyWY/nk
- Gl7g==
-X-Gm-Message-State: AOJu0YwZFm8a3lakd0w/0ee4aRwKQCfxMvM71LK0bZmnJCdirYAymuAC
- dR3ULpCwip+v4FCBwt8A8AQWPoU9LHVhtMBW3GxYXCrTPQc0JLDZigX4V6TVzUsAhZ8lrze47Fn
- uIPGPHVI5NHNSFNhPgZqYvHh7uSI=
-X-Gm-Gg: ASbGnctMCpc+ZnZuVwfgn3vBAcFuT9lO0e7XgOb7I0BqpWPxw43hjhgefXDQhALhsvv
- +EHTB7feaRqvDf6TLUukDZiXyiJM558qvjOi8cDp9M1ZYR27AKcI9nWr47/ljFp9O/0yPZHoyym
- g+3LIkSvNIB1Y0hh9ImCxPag7TYA==
-X-Google-Smtp-Source: AGHT+IEHMNOlMHIWrBKHNdmvityZ+xlj0PMM3dhZ2zrlpSy82ADt+05NYINIb5EoW/Gh4VIGoUfw4f/Jg1YEHrU/YTY=
-X-Received: by 2002:a05:6402:280f:b0:5e5:bbd5:676a with SMTP id
- 4fb4d7f45d1cf-5ed8f3fd169mr7363173a12.22.1743181580940; Fri, 28 Mar 2025
- 10:06:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743181648; x=1743786448;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iEYfkC9TGRSuhs7J4+9vnugJ88CcCsz1BTes0YF9LSU=;
+ b=frl8yldhzCwjZGj64dQ1cMtqfLo/iuRXMNtY90HB/6LSGPQdSXmi4caMJNYwTEzTpP
+ ARsGvejIa8LqMpviltiy3Mboq8cpIVKokBtEOWsvrBkTJtfbW3qRofqFo8hKu/3bysJH
+ jYMBfM5NVVVUF5EKQ1/16YAzxf/uPIAuSd6olOcxJRT9PlIVtnPYUZ/+tIdggBugl6bk
+ fcj/aunoaZkjR01mwHD94S570yNzD20/XGY2vuajzFspD0aZGXJ02/A+/bDjKKluTPQi
+ xwpDX6eBTwhb1mOJY4nM+c1ITD9u5DsSmK4v14BO1gJMrD0zKfATPLR9mtauflEswbtT
+ zqcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWp045B6qv0+EBf119ssbwRHaYNOBHreXl2vc8yl4no/7fK+XZ78Br31kwwgj9/9JB1g8Toj4Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YywO+2fAX7OHu/sL4DH9ohQaxHjayWiOc4dqvxaxicDp+9loksH
+ LfPtwMfzQS0bHQQOjSV3NGYve/efVhhDPMvXLUn63DmpJ3ZMnvm4XCtu2VhZZ0Q=
+X-Gm-Gg: ASbGncsK/qpJJzqUUV0L0Cue3JBou74AzGLKBVz/Uix06Bz3KXNu/qN/EEMGsBYFwH3
+ L1E5aDcLtBWXuhUA+X3XQc0bv+f0vHPpQ84mi9rfNI8ceXYuGmcJjn/AZF+rdALen1wB3Bi3WDG
+ eJu9K7+Wwx6fNcHo8E/ZCJgfUqhtBdXzpDadts8sA0nF92FBTHZh4QUg+Yx8/q+YVStbdRUDVNn
+ 4zHF8HiuaiTcX5LBv8Xou9d0NBonfrk6doQoxQ4Zf8irmmJQsimOf0K2exl3MQ15beZSurz+6UE
+ PBECI0GSjW4ncVyyX/5fB00HUf1zWb8r14Fq5l3QCjWLAiWRNhxNWw==
+X-Google-Smtp-Source: AGHT+IHpUTGcW7ti38qGYDVDRmWtv++wJA70o0RurzexF/ydq/lRW7o+2yKTNJsVVCUORVWfA2ixxg==
+X-Received: by 2002:a05:6000:2b11:b0:390:f9d0:5df with SMTP id
+ ffacd0b85a97d-39ad17751dfmr5372004f8f.52.1743181648314; 
+ Fri, 28 Mar 2025 10:07:28 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c0b60a9ddsm3232834f8f.0.2025.03.28.10.07.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Mar 2025 10:07:27 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, Michael Walle <mwalle@kernel.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] fastboot: lift restrictions on !NET_LWIP for USB
+In-Reply-To: <20250328155941.GW93000@bill-the-cat>
+References: <20250312073655.2281377-1-mwalle@kernel.org>
+ <87cyecdpf8.fsf@baylibre.com> <D8RS34QA63LP.296JEK5L3IREQ@kernel.org>
+ <20250328155941.GW93000@bill-the-cat>
+Date: Fri, 28 Mar 2025 18:07:27 +0100
+Message-ID: <87y0wpqe28.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20250328163115.642347-1-patrice.chotard@foss.st.com>
-In-Reply-To: <20250328163115.642347-1-patrice.chotard@foss.st.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 28 Mar 2025 17:06:09 +0000
-X-Gm-Features: AQ5f1JoX5fVF-zQpNe1IjgBk7NDeEAgxpT8SXnHkO36KBEJZIMnqQUnwiOXHvss
-Message-ID: <CALeDE9NHP6J97A0Zy13TDB66cpcJutT0DYvU=Ts6G4aBN+RwVg@mail.gmail.com>
-Subject: Re: [PATCH] dtc: introduce label relative path references
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,191 +98,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 28 Mar 2025 at 16:52, Patrice Chotard <patrice.chotard@foss.st.com>
-wrote:
+Hi Michael, Tom,
 
-> Since introduction of OF_UPSTREAM flag, U-Boot's dtc must be able
-> to compile Kernel's device tree.
->
-> Since kernel commit 7de129f5389b ("ARM: dts: stm32: stm32mp151a-prtt1l:
-> Fix QSPI configuration"), label relative path references has been
-> introduced. These label relative path references is not supported
-> by current U-Boot dtc version 1.5.0: (see mailing list discussion [1]).
->
-> In order to support such label relative patch references
-> adds following commit from upstream DTC tree:
->
+On ven., mars 28, 2025 at 09:59, Tom Rini <trini@konsulko.com> wrote:
 
-Maybe we need to rebase to the latest upstream dtc, I'm not sure pulling in
-a random set of bits from upstream is the right way to do things as it's
-brings things selectively which may bring along other issues.
+> On Fri, Mar 28, 2025 at 10:06:12AM +0100, Michael Walle wrote:
+>> Hi Mattijs,
+>> 
+>> > > Fastboot works either over TCP, UDP or USB. The latter doesn't have
+>> > > anything to do with networking, thus should work just fine with
+>> > > regardless which network stack is selected. In practice, header symbols
+>> > > are used inside common code paths. Add some ifdeffery to guard against
+>> > > that.
+>> > >
+>> > > This will make fastboot over USB work with the new LWIP stack.
+>> > >
+>> > > Signed-off-by: Michael Walle <mwalle@kernel.org>
+>> >
+>> > checkpatch.pl reports some issues with this:
+>> >
+>> > $ ./scripts/checkpatch.pl --strict --u-boot --git HEAD^..HEAD
+>> >
+>> > <snip>
+>> > WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+>> > <snip>
+>> >
+>> > Some occurences below could be fixed. Could you please have a look?
+>> 
+>> I've seen these. More below.
+>
+> That is also my least favorite checkpatch warning, and it's a warning
+> not an error. Best judgement is needed about making things readable
+> rather than just silencing checkpatch.
 
+I think that using if (IS_ENABLED(CONFIG...) is more readable in this
+case.
+However ...
 
-> commit 651410e54cb9 ("util: introduce xstrndup helper")
-> commit ec7986e682cf ("dtc: introduce label relative path references")
 >
-> [1] https://lore.kernel.org/all/20250115144428.GZ3476@bill-the-cat/T/
+>> 
+>> >
+>> > > ---
+>> > > Alternatively, we could add the defines and stub functions to the lwip
+>> > > header.
+>> 
+>> This is relevant :)
+>> 
+>> > > ---
+>> > >  cmd/fastboot.c               | 4 ++++
+>> > >  drivers/fastboot/Kconfig     | 1 -
+>> > >  drivers/fastboot/fb_common.c | 4 ++++
+>> > >  3 files changed, 8 insertions(+), 1 deletion(-)
+>> > >
+>> > > diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+>> > > index d4cfc0c7a28..be84a482b81 100644
+>> > > --- a/cmd/fastboot.c
+>> > > +++ b/cmd/fastboot.c
+>> > > @@ -16,6 +16,7 @@
+>> > >  #include <linux/printk.h>
+>> > >  #include <linux/stringify.h>
+>> > >  
+>> > > +#if CONFIG_IS_ENABLED(NET)
+>> >
+>> > I think this can be dropped. I hope that since it's a static function,
+>> > -if there are no users in the file- the compiler will optimize it out.
+>> > Note: I have not verified this, so I might be wrong.
+>> >
+>> > If you measure and see size changes between keeping the #if and not
+>> > keeping it, please ignore this comment.
+>> 
+>> No, because net_loop(), net_set_state() and NETLOOP_SUCCESS is only
+>> defined in net-legacy.h. Thus we need this ifdeffery.. Unless of
+>> course, we add the enums and function stubs to the new lwip net
+>> inlcude. I don't know if that's a good idea though.
+
+... my suggestion does not work without adding the defines and stub
+functions to the lwip header.
+Apologies about that :( And thank you for being patient with my remarks.
+
+This patch is fine as-is, and I don't want ifdeffery vs if IS_ENABLED to
+block this contribution.
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
+> Yeah, I'm not sure that's worth it either, or at least as maybe only a
+> future clean-up or investigate more. Perhaps filing an issue on
+> source.denx.de on the -net tree so it's not forgotten?
+
+I'd like to do this future cleanup. I could not file an issue on
+https://source.denx.de/u-boot/custodians/u-boot-net so I have opened one
+in the -dfu tree here:
+
+https://source.denx.de/u-boot/custodians/u-boot-dfu/-/issues/5
+
 >
->  scripts/dtc/dtc-lexer.l  |  2 +-
->  scripts/dtc/dtc-parser.y | 13 +++++++++++++
->  scripts/dtc/livetree.c   | 33 ++++++++++++++++++++++++++++++---
->  scripts/dtc/util.c       | 11 +++++++++++
->  scripts/dtc/util.h       |  1 +
->  5 files changed, 56 insertions(+), 4 deletions(-)
->
-> diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
-> index d3694d6cf20..d34e1b04220 100644
-> --- a/scripts/dtc/dtc-lexer.l
-> +++ b/scripts/dtc/dtc-lexer.l
-> @@ -215,7 +215,7 @@ static void PRINTF(1, 2) lexical_error(const char
-> *fmt, ...);
->                         return DT_REF;
->                 }
->
-> -<*>"&{/"{PATHCHAR}*\}  {       /* new-style path reference */
-> +<*>"&{"{PATHCHAR}*\}   {       /* new-style path reference */
->                         yytext[yyleng-1] = '\0';
->                         DPRINT("Ref: %s\n", yytext+2);
->                         yylval.labelref = xstrdup(yytext+2);
-> diff --git a/scripts/dtc/dtc-parser.y b/scripts/dtc/dtc-parser.y
-> index 011a5b25539..b3b9c83873d 100644
-> --- a/scripts/dtc/dtc-parser.y
-> +++ b/scripts/dtc/dtc-parser.y
-> @@ -34,6 +34,12 @@ extern void yyerror(char const *s);
->
->  extern struct dt_info *parser_output;
->  extern bool treesource_error;
-> +
-> +static bool is_ref_relative(const char *ref)
-> +{
-> +       return ref[0] != '/' && strchr(&ref[1], '/');
-> +}
-> +
->  %}
->
->  %union {
-> @@ -176,12 +182,17 @@ devicetree:
->                          */
->                         if (!($<flags>-1 & DTSF_PLUGIN))
->                                 ERROR(&@2, "Label or path %s not found",
-> $1);
-> +                       else if (is_ref_relative($1))
-> +                               ERROR(&@2, "Label-relative reference %s
-> not supported in plugin", $1);
->                         $$ = add_orphan_node(name_node(build_node(NULL,
-> NULL), ""), $2, $1);
->                 }
->         | devicetree DT_LABEL DT_REF nodedef
->                 {
->                         struct node *target = get_node_by_ref($1, $3);
->
-> +                       if (($<flags>-1 & DTSF_PLUGIN) &&
-> is_ref_relative($3))
-> +                               ERROR(&@2, "Label-relative reference %s
-> not supported in plugin", $3);
-> +
->                         if (target) {
->                                 add_label(&target->labels, $2);
->                                 merge_nodes(target, $4);
-> @@ -197,6 +208,8 @@ devicetree:
->                          * so $-1 is what we want (plugindecl)
->                          */
->                         if ($<flags>-1 & DTSF_PLUGIN) {
-> +                               if (is_ref_relative($2))
-> +                                       ERROR(&@2, "Label-relative
-> reference %s not supported in plugin", $2);
->                                 add_orphan_node($1, $3, $2);
->                         } else {
->                                 struct node *target = get_node_by_ref($1,
-> $2);
-> diff --git a/scripts/dtc/livetree.c b/scripts/dtc/livetree.c
-> index ba06ef348be..4cfc2adccdd 100644
-> --- a/scripts/dtc/livetree.c
-> +++ b/scripts/dtc/livetree.c
-> @@ -583,12 +583,39 @@ struct node *get_node_by_phandle(struct node *tree,
-> cell_t phandle)
->
->  struct node *get_node_by_ref(struct node *tree, const char *ref)
->  {
-> +       struct node *target = tree;
-> +       const char *label = NULL, *path = NULL;
-> +
->         if (streq(ref, "/"))
->                 return tree;
-> -       else if (ref[0] == '/')
-> -               return get_node_by_path(tree, ref);
-> +
-> +       if (ref[0] == '/')
-> +               path = ref;
->         else
-> -               return get_node_by_label(tree, ref);
-> +               label = ref;
-> +
-> +       if (label) {
-> +               const char *slash = strchr(label, '/');
-> +               char *buf = NULL;
-> +
-> +               if (slash) {
-> +                       buf = xstrndup(label, slash - label);
-> +                       label = buf;
-> +                       path = slash + 1;
-> +               }
-> +
-> +               target = get_node_by_label(tree, label);
-> +
-> +               free(buf);
-> +
-> +               if (!target)
-> +                       return NULL;
-> +       }
-> +
-> +       if (path)
-> +               target = get_node_by_path(target, path);
-> +
-> +       return target;
->  }
->
->  cell_t get_node_phandle(struct node *root, struct node *node)
-> diff --git a/scripts/dtc/util.c b/scripts/dtc/util.c
-> index 23334d39bb6..25d4db1e8c2 100644
-> --- a/scripts/dtc/util.c
-> +++ b/scripts/dtc/util.c
-> @@ -46,6 +46,17 @@ char *xstrdup(const char *s)
->         return d;
->  }
->
-> +char *xstrndup(const char *s, size_t n)
-> +{
-> +       size_t len = strnlen(s, n) + 1;
-> +       char *d = xmalloc(len);
-> +
-> +       memcpy(d, s, len - 1);
-> +       d[len - 1] = '\0';
-> +
-> +       return d;
-> +}
-> +
->  /* based in part from (3) vsnprintf */
->  int xasprintf(char **strp, const char *fmt, ...)
->  {
-> diff --git a/scripts/dtc/util.h b/scripts/dtc/util.h
-> index 211d584435d..23e32962385 100644
-> --- a/scripts/dtc/util.h
-> +++ b/scripts/dtc/util.h
-> @@ -70,6 +70,7 @@ static inline void *xrealloc(void *p, size_t len)
->  }
->
->  extern char *xstrdup(const char *s);
-> +extern char *xstrndup(const char *s, size_t len);
->
->  extern int PRINTF(2, 3) xasprintf(char **strp, const char *fmt, ...);
->  extern char *join_path(const char *path, const char *name);
-> --
-> 2.25.1
->
->
+> -- 
+> Tom
