@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14B57C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:51:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95299C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 992E581DCC;
-	Sat, 29 Mar 2025 00:51:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FED481DCC;
+	Sat, 29 Mar 2025 00:54:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KbomhGYr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PsXSpPM1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 426AE81DCD; Sat, 29 Mar 2025 00:51:42 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id F08F181DED; Sat, 29 Mar 2025 00:54:01 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0444E805C8
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:51:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B28518059D
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-2b8e26063e4so1391669fac.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:51:39 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3feb0db95e6so1723780b6e.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:53:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743205899; x=1743810699; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743206038; x=1743810838; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5su5wU5fKs7r4pvUYmiAxuL9BKIXHqcCUyre9m4KsVc=;
- b=KbomhGYreZAi7X04Cw4V4kIzfmYAeNsELrbEjW+ObUX6p6NslifK3/YiZDvSgAey2N
- xNRXWRi907JzEazDWTg8wuqXS+41T0JdxqJc6+oTG4aTNsOkxgtLXKly2FUgbBPvbwbh
- +uSP4+9mQ8glRQfOiJdtsrmsalXVq26woW0H8=
+ bh=KGQtf0CXJHjsl10kuBkeN2VEo/vaYudryyRuWcbXUC8=;
+ b=PsXSpPM1f2mAL5oB/CltVXs72BuXvvSWH1/jGONE3Uq2X0zznWU6UkE5P2g2qZGpxN
+ HLLvWsyPmu10nSR1+IQsvuQd3LiPr8QrhlmRNveOP/cHD2gzqMN8+XRi1HcphlnVFC+a
+ 8Bts6jSWrcRw/LaH+CIoRmXIIg+aEuI3f9u24=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743205899; x=1743810699;
+ d=1e100.net; s=20230601; t=1743206038; x=1743810838;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5su5wU5fKs7r4pvUYmiAxuL9BKIXHqcCUyre9m4KsVc=;
- b=N6nqJ455td3IHN5IRaLzYMFg9VYdkET+RzBdRuo81e6pjI7NWMepdY60TyTHsE+djh
- DkmiIe5M2TzENHfBb0yYF8AhUCL/Eflhj7V2L1wrMcKPtjlbTTsdCW/Jeig5jTUSh5WP
- tTCNAq6vQOgWO8AaDJLUng4XV5QrUEqfDvrHwPAPTgGi0IXX2unGaIbzXvLHvd/S149H
- Hm+K53fP963U2dNqXtBZCxs7Q/R8lqOedI1aM66B36RrFsQaJRQl81Zamyut/gVZl6nP
- LiNdCWL4VWYRzRypqsBMTrYHTFMHMASXVyN5FfvXIl94BUOzNVJxVyc3/GeXlxwP5gZt
- k95Q==
-X-Gm-Message-State: AOJu0Yy5jeYjvjLHTNcfGA55OCNNpcs6pB+wMMipObjIKb8XpsMLonRb
- Sthou5szZTSv5tEZr9qomzI0QW4nxi0ppVbE22oYqPi0nlGjOLbNsxZvida/pGc=
-X-Gm-Gg: ASbGncsQPjuyGNDjABAJnL2Uts3Q2GRrP7hYy4PGEIISGLM2LFImHDtg4YUKUI5sz1Y
- paDWMNU1J2hG+ZbhN7rYymtqza5U88c5UOX0FtCilZRk1rrEZzfJ7S79ibgBQgKSEWoaZFLWPeP
- v78ooHIFJj5hjLG84lzRg54H1kaLMnO8LEusaaETAwDSXVGEqfBg/cDgYCebQKDr30JWwydq2DJ
- GqzqBYPWE1fG1KAw3Z9qLLW4NvrZ7Y7UP8nGFL6jSxIU407KuHZY+uEnGZ9qlSyDpSFhhL1KWvG
- c+9tqlxfBJK77A5m7awtG8Vy6pO/hheCRboOIRMoGXUoNHD2OfDFhhgoTByXhCy+fU8ODwy9YEW
- hhxKFuA==
-X-Google-Smtp-Source: AGHT+IHNgvsWbCOLSYGDDZixrnZfpMZr0dQhWDgKSaUzMrzzKNsvG4adBNPWRWEonh6mv23Q0gjwYg==
-X-Received: by 2002:a05:6870:a44b:b0:2c2:b838:3ef8 with SMTP id
- 586e51a60fabf-2cbcf477b15mr635360fac.2.1743205898541; 
- Fri, 28 Mar 2025 16:51:38 -0700 (PDT)
+ bh=KGQtf0CXJHjsl10kuBkeN2VEo/vaYudryyRuWcbXUC8=;
+ b=PHSRK5UuwN8PFm4mKtiENksrilYMapofp6/cjmu59ubA8vsEf1CMig5AH3lK4Z/KMj
+ qOz9ZMr0/fNbwDIkb4QqQL7QZ0I9LonqRMYJ6SLAzeb+p2ILfYd2WbHEvLuowiXe2gly
+ BHztS55pIH7uBT4SJ39JqHdpnXifxYQrJOF9cN01IaRf6s6je6rjGq6evHIJOTJiu0zL
+ cvLdamiw86aCTzoHE8mQ8rJS3rs519KmTq3qahSK/O4KRsx3siOVMSq8MuQFwXUn0Esv
+ w7Tf70ZYqiXNGGjUj7G7FecOspDYp0CkMyGsSfcmO/hbGsUn/jSfvzxFA+1Q3tYKq967
+ wAKg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUxZIi1JPGAzCMzGpJQv20KRqjRBgXW6izuTnDSarBGLFe5vntSMo1HaujsLqE7oiP6tPsMwd0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyI2BEmmaW5THIa5fKbnFoauPz0aqetJF4IaS3xHx/3zjBuq1H
+ RDixVy/OwOJ15iuNpFZWLc9kcIyN0EM5Rz+PfqrMnCERQ6RRpqtRRFBwdcgkKKY=
+X-Gm-Gg: ASbGnct2TG7edPg7X0+pa08Ex39kEiBek775JbfS1X8WwHogmZLFMm25BGBAZt9P40n
+ BR0PwKKshWfUKgzSSqI4uSByaJJKOUen5v/p2AmAFwu8KJQqAxtHE293g3a1M+IUQGlu+IZyHAW
+ uirPJ12EuJ1ewsGdk0UMmfT0e9c84pCODLwW5jR8vV/hMWruf+6hlM05Us037mq0bff0Ja/Peim
+ Av+gBChw2DS7xfTo4UJwFiWBfpy95dzRXYwlfbTgFXYMZ894K2F05+pKafV9x1/MhNBMtU270UE
+ W5n6R2+wzQKuS88qbVB2gLigDRzzWDEeSgQkc4jyQMDhaNYZIDNbXU06wIH93agFTI0ROytJQwi
+ zgYWutw==
+X-Google-Smtp-Source: AGHT+IG8CpgNHOYkPhynRz7H4dcr6Cp5H3h+zqpL6alolFPp+HRVOBMLbEqlSAAqy7iWm5cLwHESiQ==
+X-Received: by 2002:a05:6808:d4e:b0:3fa:82f6:f768 with SMTP id
+ 5614622812f47-3ff0f5b43b9mr707861b6e.27.1743206038244; 
+ Fri, 28 Mar 2025 16:53:58 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c86a91391esm646645fac.46.2025.03.28.16.51.37
+ 5614622812f47-3ff051aa229sm532076b6e.21.2025.03.28.16.53.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 16:51:37 -0700 (PDT)
-Date: Fri, 28 Mar 2025 17:51:35 -0600
+ Fri, 28 Mar 2025 16:53:57 -0700 (PDT)
+Date: Fri, 28 Mar 2025 17:53:54 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
- Simon Glass <sjg@chromium.org>,
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ravi Minnikanti <rminnikanti@marvell.com>,
  Matthias Brugger <mbrugger@suse.com>,
@@ -83,14 +85,15 @@ Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Subject: Re: [PATCH 2/2] env: point fdt address to the fdt in a bloblist
-Message-ID: <20250328235135.GF93000@bill-the-cat>
+Message-ID: <20250328235354.GG93000@bill-the-cat>
 References: <20250327231318.2713201-1-raymond.mao@linaro.org>
  <20250327231318.2713201-2-raymond.mao@linaro.org>
+ <CAFLszTiATNSdLgJ-PCEFjyTbwsgxTXg06W4Lj3Fv+zYwtKWcEA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fFBnaUJlYjAgaVQE"
+ protocol="application/pgp-signature"; boundary="3JCa8+9mCvvrGABZ"
 Content-Disposition: inline
-In-Reply-To: <20250327231318.2713201-2-raymond.mao@linaro.org>
+In-Reply-To: <CAFLszTiATNSdLgJ-PCEFjyTbwsgxTXg06W4Lj3Fv+zYwtKWcEA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,90 +112,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fFBnaUJlYjAgaVQE
+--3JCa8+9mCvvrGABZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 27, 2025 at 04:13:17PM -0700, Raymond Mao wrote:
-
-> Point fdt_addr to the fdt embedded in the bloblist since fdt_addr
-> is a default address for bootefi, bootm and booti to look for the
-> device tree when launching the kernel.
+On Fri, Mar 28, 2025 at 05:35:04AM -0600, Simon Glass wrote:
+> Hi Raymond,
 >=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  env/common.c | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
+> On Thu, 27 Mar 2025 at 17:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Point fdt_addr to the fdt embedded in the bloblist since fdt_addr
+> > is a default address for bootefi, bootm and booti to look for the
+> > device tree when launching the kernel.
 >=20
-> diff --git a/env/common.c b/env/common.c
-> index a58955a4f42..a38e5d107a8 100644
-> --- a/env/common.c
-> +++ b/env/common.c
-> @@ -16,6 +16,7 @@
->  #include <asm/global_data.h>
->  #include <linux/printk.h>
->  #include <linux/stddef.h>
-> +#include <mapmem.h>
->  #include <search.h>
->  #include <errno.h>
->  #include <malloc.h>
-> @@ -368,6 +369,18 @@ int env_get_default_into(const char *name, char *buf=
-, unsigned int len)
->  	return env_get_from_linear(default_environment, name, buf, len);
->  }
-> =20
-> +static int env_update_fdt_addr_from_bloblist(void)
-> +{
-> +	/*
-> +	 * fdt_addr is by default used by booti, bootm and bootefi,
-> +	 * thus set it to point to the fdt embedded in a bloblist if it exists.
-> +	 */
-> +	if (!CONFIG_IS_ENABLED(BLOBLIST) || gd->fdt_src !=3D FDTSRC_BLOBLIST)
-> +		return 0;
-> +
-> +	return env_set_hex("fdt_addr", (uintptr_t)map_to_sysmem(gd->fdt_blob));
-> +}
+> I wonder if we can drop use of that environment variable at some
+> point? It seems strange to set a variable to gd->fdt_addr only to use
+> it later. Why not just use gd->fdt_addr ?
 
-This part is fine with me and makes enough sense, we can't do this
-immediately so we need some check to know to do it later.
-
->  void env_set_default(const char *s, int flags)
->  {
->  	if (s) {
-> @@ -392,6 +405,10 @@ void env_set_default(const char *s, int flags)
-> =20
->  	gd->flags |=3D GD_FLG_ENV_READY;
->  	gd->flags |=3D GD_FLG_ENV_DEFAULT;
-> +
-> +	/* This has to be done after GD_FLG_ENV_READY is set */
-> +	if (env_update_fdt_addr_from_bloblist())
-> +		pr_err("Failed to set fdt_addr to point at DTB\n");
->  }
-
-I don't know this is the right spot. This won't work when for example
-the environment is valid but stored in a file on FAT (or whatever) will
-it?
+Doubtful. Both fdt_addr and fdt_addr_r are documented with what they are
+for and we'll likely never not have those as valid use cases. While it's
+possible some day that we might be able to allocate valid addresses
+everywhere we would still want to expose that to the user to do as they
+see fit.
 
 --=20
 Tom
 
---fFBnaUJlYjAgaVQE
+--3JCa8+9mCvvrGABZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfnNf8ACgkQFHw5/5Y0
-tyx1aAv9Fny2895DhqqdCGWfRuOoImx+pVx86qfmTUB99gCYHlQ9HmhKfHRby0ky
-445Jo6pBjbMlJj2CTjj+TpJ8938fp0aSGQ5PjCfp0vl4khADB/Kc8hQL2yV9xF4r
-GNynlPJPiPQzfFUZFmnd37BvMnXeZt2iyJf0UfrphxY6WL9d74LMEqg7BpMgLZk7
-wSm1sJmixwCVn6p8x67JtFzspkeuoSBYTxLoIlsrs7HtAcTfo8ub7PHoQFTL3c+D
-ALHao0+KeyyC3nW5TrTa0f8/UcZFITp9lq1u2JIj3/5+3gSxYlStxUlXyLDrCapB
-JyzIN7Fp+GU+z3y055uqDVRw303GGUtieI496eimivFCCk9Vmawzf6F4lX/jBXeB
-yXUY4xghLwKPMXuZEAaCxtQ6cbFYqLolO3pTrPBYMXBJSaAmVDWSfPmFMpzpYBPk
-KKmRFw3IPLpFDqbyO/SC4GQhRiAukJuLMHQsFE2KIc86pnYwtgpGbsycCUgbzg6C
-xERVY8Y8
-=xX93
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfnNpIACgkQFHw5/5Y0
+tyzdhQv/Z2J8ggk+8tuXdsMjBjoe/pfN+qr1sX+aLLkFWehkHri0A6TQpnVjiCDq
+rZUNyUKJpMRf4NZMIWNaEy0VSk3Er2LT+Rict3yD4UDC/ytaYDHuSAJWxndB3z05
+wlIF2vdt0Rvxjyv7Rs0OjSWV7rTztBaw0Qy/QE+Or70WmRGG/YbWDMe3xY8kpFU9
+lHPGEzKdGHOJhtotlb1/K7g4lmBZ8QquZpIutS3Z4v6g5PH0MZ3aQzlCUgsQCqKY
+d9t7iAxO9tuTOxAmgSp6IwK8lYbGeY8f+0I0qDoGc0/Yxewc1/FAue6Mdb4GcwXd
+KgC53xOb1PY0Joef2Wx19ssi/bHEvVZ/vGUsXgDlQ1S0I/wWeW+64895gorWttwv
+/+i3E94pCE48USjEIPcr0sNyHPJ+5Ig+V5TSPY4QwC0th20xuC0+oXdMXjoJHTuV
+LP5rIK9kZYiH+NmHd7YafCVv403liOSOvwzautsBfi+zUPwpIxm1U9fpJ14rag+e
+KQD48ui2
+=gLfA
 -----END PGP SIGNATURE-----
 
---fFBnaUJlYjAgaVQE--
+--3JCa8+9mCvvrGABZ--
