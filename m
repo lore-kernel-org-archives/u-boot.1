@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B95C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 12:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F6B9C3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 12:01:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F085A8082A;
-	Fri, 28 Mar 2025 13:01:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 519AE810EA;
+	Fri, 28 Mar 2025 13:01:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UiegCwcT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C3YSDzZc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5608E810EA; Fri, 28 Mar 2025 13:01:38 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id AC29A810EA; Fri, 28 Mar 2025 13:01:45 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A687F805C8
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 13:01:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2911981DCC
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 13:01:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2255003f4c6so40413035ad.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 05:01:35 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2ff6cf448b8so4624922a91.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 05:01:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743163294; x=1743768094; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743163299; x=1743768099; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Oc4qO7DPX+fi8ZKpD66i9Gv3PH0JKG3hDHI3B5c0K84=;
- b=UiegCwcTGlCZaAh9YbMvrkcC+LELVXbsk9l2Rzx20vYc/gHL7oSLhbNEaXRjieIpIs
- I+jhZOcAtdJ9yknvmmEE0H4H8Fb3WVH0arapWhZf8gxG92dabB023nf4INhpwfE3ZrH8
- j25rR5nPpACGAe8R0KG+EBRkg+pJJiaYGDR34=
+ bh=sRqqneDx+LpyqGcEn6wfDG0baiz9p991YfqFzueuk7I=;
+ b=C3YSDzZcGWU1n8YnPoFBEFMBBmj5XmsSEUniDv8uUgjXFa2LhbmPEHZBry7vLTxW5D
+ xTkJKU54DM8PxlfmGs82DgD6gK+DYg74udFRKorDayXOak1B5mueaGrPa21LvoZq/33o
+ LHnn/JJ5Zi1of1TKiWn3/GpOsEIQb1xNIh02Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743163294; x=1743768094;
+ d=1e100.net; s=20230601; t=1743163299; x=1743768099;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Oc4qO7DPX+fi8ZKpD66i9Gv3PH0JKG3hDHI3B5c0K84=;
- b=H2me6McKEAOn69gtbn0EbMCBpMRFDvKJVSpnFgT6e/xHhQD216HaWbKTF0Wg/QATse
- ywnSaHlHeqENOfJ9kCJljIby0O+SCpFidR/Tlj/wEjrPMBkgDcgE+0WlpcOKJnFwiE28
- B4c2BGbrC9XumR44AeRcpDmV9MrCCmSrzpxvUmFbaAZ4UnEy/hyTZgMZQ0B1J/Gr5m+G
- an9duv1Co1LG0MHm5mbS3XnhBgTZVHPONKmpx/EdCmwwBy7zQ5+wiuUywLx2PUVbhRKy
- Lf+gup9MD4Cnjm2PEvrd6riyualviL5+oj6ecWtect5Xa42JXfqGXpvRDBzqEGCmPc5L
- mDWw==
+ bh=sRqqneDx+LpyqGcEn6wfDG0baiz9p991YfqFzueuk7I=;
+ b=BR5iD7JXXMkJl9pCkDaGUJI5PCfI25BGK8UeBDSxZIxG6mZvmukObSxZzRfZ50qL3E
+ iCzUZ+SVVWslm2EbWj3F9eTmePwOfMfp31WTzXkeEy50f1cf0QLs9canFKma8RNarA0e
+ 7dTn8fQxRlyLXtwEZ0b2pqo4Bb0AvNjil1+NREGlxa5jLjwzpui4oDjuJeYiZuKtwxnb
+ M8C4Jv/HSn5q/oA4xzPaADk910Ppe3k1YrodNmMfLFWkDHI2Y+3dAySF6gjSx+OJfX3B
+ YCKWo8vsnysDFydayY/ex40gflgVBRrd9lSp18QnuBfeJ8lr5WYZzPwLNuLw0lzEkTKj
+ L/6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWA+wu+9rG3VxtZd/qQihTXAPaymSxntIgFQTFlixk+Ug2MCPKaUGVaBiSKXBA6rqEs/DSvWd4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4DkPHi+varWZG+SSrTNpZb6dKp4dkoom5QiYxXwtF1cUoM2cl
- sziXRa7Aux5e79Dr/gSXJL9gW3asn2dbiIw3Lf47eITTj5WlKTs8RWKUFqT6OPUhWjLtzd/y59Y
- xAYUBapofa1fbqy+qo7GAIhevXhWDMfWbG8Jb
-X-Gm-Gg: ASbGncteXfSB/3mVhdr/0w5zE8sk9CRIiXmfpcN/JbwAdWdMXb29HvRfogDYY7E6Din
- /YCQ1aBbN7ewvzuLGe86JRndG1BtjBvhajw7A8PahcnkjWkR/6Cy0i89xvtlu0R2FE70hpTsFYA
- 0Pzfr8FDcLZKWrza4YDbu122Z42Fw=
-X-Google-Smtp-Source: AGHT+IFdE+Ow0SgX9UklyG5qLmoKMPeVaqxipSHbtBAIBg4UZCKTuGPgEB0RjOGB2ci7DpsnygB3QnLfVa0NvUpm8qI=
-X-Received: by 2002:a05:6a00:1784:b0:736:5e28:cfba with SMTP id
- d2e1a72fcca58-739610bde82mr11627441b3a.18.1743163293723; Fri, 28 Mar 2025
- 05:01:33 -0700 (PDT)
+ AJvYcCVsZxeHjqfUjhi5l2X1V+qXheoyJX3IoyGQV6/Nmbpo8LGaobQuaV0IWD1A15jMPx9V8cCYza0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2/yGs5QUXPm4msmEG99mLHQhzuigIwCJCGmDtgPF0nXu4ZpJl
+ udfNfmB72ukbtFHSThvlqb/uxqEzq9xD9eKBNNMyPHhv1lTofaTUOSbiY6n0ZCNloxNfLGNFXPf
+ eOYcrt0s3P2y+NBO19Q0AmDD1STXHH56nBD4Q
+X-Gm-Gg: ASbGncv0IGVdZFCR0EhvI5KdV1MIxgRGW3B6GW+gaCDxekVRsUo5gKPPEtr0yp9bm12
+ Wyqa7H26Uz2tZzLbP5BKZoqZIxnRcMQU4wr1e5gWLDjXpy6xkczU/vyEbCHm0637S+3V/tkZWGH
+ AyeFVtEpHJPnqypacG22CLZDEFTFo=
+X-Google-Smtp-Source: AGHT+IHDAkMSGJdw14ktSqDptPy04nTBSow6AbgzEvgReR3J5GrhoAUUDYhSkSvhLQp9NtKRM+1/Z5TlZgK65Hvrh2A=
+X-Received: by 2002:a17:90b:51c6:b0:2fe:b907:562f with SMTP id
+ 98e67ed59e1d1-303a7d69998mr13001122a91.14.1743163299327; Fri, 28 Mar 2025
+ 05:01:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-46-sjg@chromium.org>
- <0fd6b834-9e74-4919-9d62-19ec6cdcba69@gmx.de>
- <448d550b-1a2b-4fbe-a24a-292ba1037b44@gmx.de>
-In-Reply-To: <448d550b-1a2b-4fbe-a24a-292ba1037b44@gmx.de>
+References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
+ <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
+ <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
+ <87a5s6qwfe.fsf@bloch.sibelius.xs4all.nl>
+ <20231025211354.GZ496310@bill-the-cat>
+ <f5e39630-0065-42e3-95a9-91e608e2c919@canonical.com>
+ <CAPnjgZ1zzWZ48nn2ux7yd1pJ4mWVOt4w2ToBZC6MR2wcxbnMsQ@mail.gmail.com>
+ <db43d704-8f6d-4583-9b86-d1d2709f7bf6@linaro.org>
+In-Reply-To: <db43d704-8f6d-4583-9b86-d1d2709f7bf6@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 06:01:18 -0600
-X-Gm-Features: AQ5f1JqNzIlq_s69JWIOusBZlOEEQ-K3hxCjHD9GQ8mUCPZx6LwJO0QcsBLQtHU
-Message-ID: <CAFLszTiQrbhL1_t-deqd-Afw8Srvi5g7zOuvgaOCBGf1vnodKQ@mail.gmail.com>
-Subject: Re: [PATCH v5 45/46] acpi: Support checking checksums
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri, 28 Mar 2025 06:01:20 -0600
+X-Gm-Features: AQ5f1JrdNPNnMyE3sf5YPanicUDe0l6f8-o5XQYgNp-x379HZbnxQcGpNtB5YBA
+Message-ID: <CAFLszTgaZC6eOdtSV5Ukny3zffiixVep14iSiYzc8RpykmBE9g@mail.gmail.com>
+Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>, 
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,201 +98,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Caleb,
 
-On Fri, 21 Mar 2025 at 06:24, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sun, 23 Mar 2025 at 12:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On 21.03.25 11:49, Heinrich Schuchardt wrote:
-> > On 15.03.25 15:26, Simon Glass wrote:
-> >> When the ACPI tables come from an earlier bootloader it is helpful to
-> >> see whether the checksums are correct or not. Add a -c flag to the
-> >> 'acpi list' command to support that.
-> >>
-> >> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>
-> >> (no changes since v3)
-> >>
-> >> Changes in v3:
-> >> - Add new patch to support checking checksums with ACPI command
-> >>
-> >>   cmd/acpi.c             | 57 +++++++++++++++++++++++++++---------------
-> >>   doc/usage/cmd/acpi.rst | 20 ++++++++++++++-
-> >>   test/dm/acpi.c         | 46 ++++++++++++++++++++++++++++++++++
-> >>   3 files changed, 102 insertions(+), 21 deletions(-)
-> >>
-> >> diff --git a/cmd/acpi.c b/cmd/acpi.c
-> >> index 2273176f106..bb243202009 100644
-> >> --- a/cmd/acpi.c
-> >> +++ b/cmd/acpi.c
-> >> @@ -7,6 +7,7 @@
-> >>   #include <display_options.h>
-> >>   #include <log.h>
-> >>   #include <mapmem.h>
-> >> +#include <tables_csum.h>
-> >>   #include <acpi/acpi_table.h>
-> >>   #include <asm/acpi_table.h>
-> >>   #include <asm/global_data.h>
-> >> @@ -15,6 +16,17 @@
-> >>
-> >>   DECLARE_GLOBAL_DATA_PTR;
-> >>
-> >> +static const char *show_checksum(void *ptr, uint size, bool chksums)
-> >> +{
-> >> +    uint checksum;
-> >> +
-> >> +    if (!chksums)
-> >> +        return "";
-> >> +    checksum = table_compute_checksum(ptr, size);
-> >> +
-> >> +    return checksum ? "  bad" : "  OK";
-> >
-> > Please, move the leading spaces to the printf statements below.
-> >
-> >> +}
-> >> +
-> >>   /**
-> >>    * dump_hdr() - Dump an ACPI header
-> >>    *
-> >> @@ -23,16 +35,17 @@ DECLARE_GLOBAL_DATA_PTR;
-> >>    *
-> >>    * @hdr: ACPI header to dump
-> >>    */
-> >> -static void dump_hdr(struct acpi_table_header *hdr)
-> >> +static void dump_hdr(struct acpi_table_header *hdr, bool chksums)
-> >>   {
-> >>       bool has_hdr = memcmp(hdr->signature, "FACS", ACPI_NAME_LEN);
-> >>
-> >>       printf("%.*s  %16lx  %5x", ACPI_NAME_LEN, hdr->signature,
-> >>              (ulong)map_to_sysmem(hdr), hdr->length);
-> >>       if (has_hdr) {
-> >> -        printf("  v%02d %.6s %.8s %x %.4s %x\n", hdr->revision,
-> >> +        printf("  v%02d %.6s %.8s %x %.4s %x%s\n", hdr->revision,
-> >
-> > %x results in variable length output. To avoid ragged layout, please,
-> > define the output length.
-> >
-> > Best regards
-> >
-> > Heinrich
-> >
-> >>                  hdr->oem_id, hdr->oem_table_id, hdr->oem_revision,
-> >> -               hdr->creator_id, hdr->creator_revision);
-> >> +               hdr->creator_id, hdr->creator_revision,
-> >> +               show_checksum(hdr, hdr->length, chksums));
-> >>       } else {
-> >>           printf("\n");
-> >>       }
-> >> @@ -52,22 +65,22 @@ static int dump_table_name(const char *sig)
-> >>       return 0;
-> >>   }
-> >>
-> >> -static void list_fadt(struct acpi_fadt *fadt)
-> >> +static void list_fadt(struct acpi_fadt *fadt, bool chksums)
-> >>   {
-> >>       if (fadt->header.revision >= 3 && fadt->x_dsdt)
-> >> -        dump_hdr(nomap_sysmem(fadt->x_dsdt, 0));
-> >> +        dump_hdr(nomap_sysmem(fadt->x_dsdt, 0), chksums);
-> >>       else if (fadt->dsdt)
-> >> -        dump_hdr(nomap_sysmem(fadt->dsdt, 0));
-> >> +        dump_hdr(nomap_sysmem(fadt->dsdt, 0), chksums);
-> >>       if (!IS_ENABLED(CONFIG_X86) && !IS_ENABLED(CONFIG_SANDBOX) &&
-> >>           !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
-> >>           log_err("FADT not ACPI-hardware-reduced-compliant\n");
-> >>       if (fadt->header.revision >= 3 && fadt->x_firmware_ctrl)
-> >> -        dump_hdr(nomap_sysmem(fadt->x_firmware_ctrl, 0));
-> >> +        dump_hdr(nomap_sysmem(fadt->x_firmware_ctrl, 0), chksums);
-> >>       else if (fadt->firmware_ctrl)
-> >> -        dump_hdr(nomap_sysmem(fadt->firmware_ctrl, 0));
-> >> +        dump_hdr(nomap_sysmem(fadt->firmware_ctrl, 0), chksums);
-> >>   }
-> >>
-> >> -static void list_rsdt(struct acpi_rsdp *rsdp)
-> >> +static void list_rsdt(struct acpi_rsdp *rsdp, bool chksums)
-> >>   {
-> >>       int len, i, count;
-> >>       struct acpi_rsdt *rsdt;
-> >> @@ -75,11 +88,11 @@ static void list_rsdt(struct acpi_rsdp *rsdp)
-> >>
-> >>       if (rsdp->rsdt_address) {
-> >>           rsdt = nomap_sysmem(rsdp->rsdt_address, 0);
-> >> -        dump_hdr(&rsdt->header);
-> >> +        dump_hdr(&rsdt->header, chksums);
-> >>       }
-> >>       if (rsdp->xsdt_address) {
-> >>           xsdt = nomap_sysmem(rsdp->xsdt_address, 0);
-> >> -        dump_hdr(&xsdt->header);
-> >> +        dump_hdr(&xsdt->header, chksums);
-> >>           len = xsdt->header.length - sizeof(xsdt->header);
-> >>           count = len / sizeof(u64);
-> >>       } else if (rsdp->rsdt_address) {
-> >> @@ -100,24 +113,28 @@ static void list_rsdt(struct acpi_rsdp *rsdp)
-> >>           if (!entry)
-> >>               break;
-> >>           hdr = nomap_sysmem(entry, 0);
-> >> -        dump_hdr(hdr);
-> >> +        dump_hdr(hdr, chksums);
-> >>           if (!memcmp(hdr->signature, "FACP", ACPI_NAME_LEN))
-> >> -            list_fadt((struct acpi_fadt *)hdr);
-> >> +            list_fadt((struct acpi_fadt *)hdr, chksums);
-> >>       }
-> >>   }
-> >>
-> >> -static void list_rsdp(struct acpi_rsdp *rsdp)
-> >> +static void list_rsdp(struct acpi_rsdp *rsdp, bool chksums)
-> >>   {
-> >> -    printf("RSDP  %16lx  %5x  v%02d %.6s\n", (ulong)map_to_sysmem(rsdp),
-> >> -           rsdp->length, rsdp->revision, rsdp->oem_id);
-> >> -    list_rsdt(rsdp);
-> >> +    printf("RSDP  %16lx  %5x  v%02d %.6s%s%s\n",
-> >> +           (ulong)map_to_sysmem(rsdp), rsdp->length, rsdp->revision,
-> >> +           rsdp->oem_id, show_checksum(rsdp, 0x14, chksums),
-> >> +           show_checksum(rsdp, rsdp->length, chksums));
-> >> +    list_rsdt(rsdp, chksums);
-> >>   }
-> >>
-> >>   static int do_acpi_list(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>               char *const argv[])
-> >>   {
-> >>       struct acpi_rsdp *rsdp;
-> >> +    bool chksums;
-> >>
-> >> +    chksums = argc >= 2 && !strcmp("-c", argv[1]);
-> >>       rsdp = map_sysmem(gd_acpi_start(), 0);
-> >>       if (!rsdp) {
-> >>           printf("No ACPI tables present\n");
-> >> @@ -125,7 +142,7 @@ static int do_acpi_list(struct cmd_tbl *cmdtp, int
-> >> flag, int argc,
-> >>       }
-> >>       printf("Name              Base   Size  Detail\n"
-> >>              "----  ----------------  -----
-> >> ----------------------------\n");
-> >> -    list_rsdp(rsdp);
-> >> +    list_rsdp(rsdp, chksums);
-> >>
-> >>       return 0;
-> >>   }
-> >> @@ -187,13 +204,13 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp,
-> >> int flag, int argc,
-> >>   }
-> >>
-> >>   U_BOOT_LONGHELP(acpi,
-> >> -    "list  - list ACPI tables\n"
-> >> +    "list [-c] - list ACPI tables [check checksums]\n"
+> Hi all,
 >
-> Let's keep things simple for the user:
+> Reviving this as it is still very much an issue, and especially relevant
+> for Qualcomm platforms.
 >
-> Always check the checksums.
-> Only print a notice if a checksum is wrong.
+> On 11/3/23 20:44, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Wed, 25 Oct 2023 at 15:22, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> On 10/25/23 23:13, Tom Rini wrote:
+> >>> On Wed, Oct 25, 2023 at 10:28:05PM +0200, Mark Kettenis wrote:
+> >>>>> Date: Wed, 25 Oct 2023 21:57:44 +0200
+> >>>>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>>>>
+> >>>>> On 10/25/23 20:23, Simon Glass wrote:
+> >>>>>> Hi Heinrich,
+> >>>>>>
+> >>>>>> On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
+> >>>>>>>
+> >>>>>>> Hi Heinrich,
+> >>>>>>>
+> >>>>>>> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
+> >>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>>>>>
+> >>>>>>>> Forward and backward compatibility of Linux kernel device-trees is
+> >>>>>>>> sometimes missing. One solution approach is to load a kernel specific
+> >>>>>>>> device-tree. This can either be done via a U-Boot scripts (like the one
+> >>>>>>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> >>>>>>>> The boot loader approach currently requires to know the device-tree name
+> >>>>>>>> before first boot which makes it unusable for generic images.
+> >>>>>>>>
+> >>>>>>>> Expose the device-tree file name as EFI variable FdtFile.
+> >>>>>>>> This will allow bootloaders to load a kernel specific device-tree.
+> >>>>>>>
+> >>>>>>> kernel-specific
+> >>>>>>>
+> >>>>>>>>
+> >>>>>>>> The variable will not be exposed on ACPI based systems or if the
+> >>>>>>>> environment variable fdtfile is not defined.
+> >>>>>>>>
+> >>>>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>>>>>>> ---
+> >>>>>>>> v4:
+> >>>>>>>>            Generalize the description of the content of $fdtfile.
+> >>>>>>>> v3:
+> >>>>>>>>            Add documentation
+> >>>>>>>> v2:
+> >>>>>>>>            Use a unique GUID to enable future U-Boot independent
+> >>>>>>>>            standardization.
+> >>>>>>>>            Do not try to add the variable on ACPI based systems.
+> >>>>>>>> ---
+> >>>>>>>>     doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+> >>>>>>>>     include/efi_loader.h       |  5 +++++
+> >>>>>>>>     lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+> >>>>>>>>     3 files changed, 49 insertions(+)
+> >>>>>>>>
+> >>>>>>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> >>>>>>>> index fb16ac743a..702c490831 100644
+> >>>>>>>> --- a/doc/develop/uefi/uefi.rst
+> >>>>>>>> +++ b/doc/develop/uefi/uefi.rst
+> >>>>>>>> @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
+> >>>>>>>>
+> >>>>>>>>         Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
+> >>>>>>>>
+> >>>>>>>> +EFI variable FdtFile
+> >>>>>>>> +~~~~~~~~~~~~~~~~~~~~
+> >>>>>>>> +
+> >>>>>>>> +Ideally U-Boot would always expose a device-tree that can be used for booting
+> >>>>>>>> +any operating systems. Unfortunately operating systems like Linux sometimes
+> >>>>>>>> +break forward and backward compatibility. In this case there is a need to load
+> >>>>>>>> +an operating system version specific device-tree.
+> >>>>>>>
+> >>>>>>> This seems to be a strong statement. Given the effort that goes into
+> >>>>>>> the DT, changes are supposed to be backwards-compatible. Is this
+> >>>>>>> generally true, or is it just that we want an up-to-date DT for the
+> >>>>>>> kernel to enable new features?
+> >>>>>>
+> >>>>>> Did you see this comment?
+> >>>>>
+> >>>>> It would have been nice to put the person which made that comment on copy.
+> >>>>>
+> >>>>> The truth lies in the world "supposed":
+> >>>>>
+> >>>>> The idea of a device-tree that never needs to change is quite old and
+> >>>>> never became true on ARM devices.
+> >>>>>
+> >>>>> We all know Linux tends to break both forward and backward compatibility
+> >>>>> of device-trees. Here is a nice example:
+> >>>>>
+> >>>>> d0c6707ca423 ("arm64: dts: allwinner: H5: NanoPi Neo Plus2: phy-mode
+> >>>>> rgmii-id")
+> >>>>>
+> >>>>> Driver changes broke forward and backwards compatibility of a lot of
+> >>>>> Allwinner boards.
+> >>>>
+> >>>> Well, that happened in 2020.  Things have gotten better over time.
+>
+> (kinda off-topic context on DT version compat)
+>
+>  From what I've seen, there is not yet very much infrastructure or
+> common practise in place in the kernel to handle parsing DTB in a
+> backwards compatible way. For example there has been efforts to simplify
+> the dwc3 devicetree for Qualcomm platforms with a series dating back
+> about as far as this U-Boot patch!
+>
+> https://lore.kernel.org/linux-arm-msm/20250318-dwc3-refactor-v5-1-90ea6e5b3ba4@oss.qualcomm.com/
+>
+> Earlier versions attempted to convert the older DTS to the newer format
+> internally, but after much discussion it was decided that this wasn't
+> really feasible, instead the new approach is to duplicate the entire
+> dwc3 driver to maintain DT compatibility.
+>
+> It's obviously good to see compatibility taken seriously, since it seems
+> clear that if we ever want to treat DT as firmware, the kernel will need
+> to do this (and eventually vendors could ship laptops with DT out of the
+> box which works with upstream -- crazier things have happened).
+>
+> But I think in the mean time we still want to be able to drive distro
+> adoption, and the way I see it teaching GRUB and systemd-boot about a
+> new FdtFile EFI variable is going to make that way simpler...
 
-I found that one table was wrong so I wanted a positive ack that each
-table is either OK or BAD. I made the check optional though.
+GRUB is unlikely even to handle devicetree properly as it does not
+implement FIT, nor the best-match algorithm in FIT. So everything is a
+workaround.
 
-If you like, we could always check checksums but only print the OK/BAD
-if -c is provided?
+> >>>
+> >>> Well, yes and no.  Given the brief summary here, I bet this was just
+> >>> like when phy-mode and am335x platforms had DT compatibility broken and
+> >>> the answer was that it was OK because the DT was incorrectly describing
+> >>> hardware. So this is the reminder that there are cases of breaking DT
+> >>> compatibility that are allowed. Even if the DT has been out (and wrong)
+> >>> for several years.
+> >>>
+> >>> That's not the main point of this thread and I don't want to derail
+> >>> things further along this point, I just want to note that the details
+> >>> here reminded me of when things are allowed to be incompatible with
+> >>> previous trees.
+> >>>
+> >>
+> >
+> > Unfortunately I was off the list for a week or so, but I see this one
+> > so will reply here.
+> >
+> >> You are conflating things:
+> >>
+> >> The EFI variable is a hint to the GRUB OS to find the correct
+> >> device-tree file without scanning hundreds of device-tree. You can not
+> >> build a compatibility check for it into U-Boot.
+> >
+> > Actually we can...and I think that is what we should do.
+>
+> No, how and where an EFI bootloader app chooses to load the FDT from is
+> entirely implementation dependent. It may be extremely costly to compare
+> compatible strings for every single dtb, and whether or not to do so is
+> the decision of the distro anyways, all we can do in U-Boot is try to
+> promote best practise (which clearly isn't compatible prop comparison
+> for hundreds of DTBs...)
 
-BTW I see you send a cleanup series for ACPI checksums. Is that based
-on top of this series?
+U-Boot promotes best practice, which is to check the compatible
+properties of hundreds of nodes in the FIT to find the right one.
+
+You don't need to look at the actual DTs, as the compatible string is
+available in the configuration node.
+
+See Linux 'make image.fit' for how this works.
+
+>
+> I'll note that systemd-uki does actually do this compatible prop check,
+> but this would not be feasible for regular systemd-boot.
+
+Then it can't work properly, unfortunately.
+
+> >
+> >>
+> >> In distro-boot we are using the same value from environment variable
+> >> $fdtfile. Here you could check the compatible string but this might
+> >> break booting .
+> >
+> > We need to figure that point out. The compatible string is
+> > programmatically is defined to be correct, so it is the filename that
+> > may/may not be useful. What am I missing?
+>
+> Current distro images don't have a way to map from compatible strings to
+> a filename, but they ship DTBs as normal files on the ESP.. They often
+> have multiple kernel versions installed, and therefore multiple DTB
+> directories which are versioned.
+
+This should be handled by compatible strings. See how Chromebooks do
+this, for example.
+
+>
+> U-Boot doesn't know what boot entry is picked (and should not NEED to know).
+
+That's not germain to this discussion, but it is actually one of the
+challenges with having GRUB in the chain. From U-Boot, with 'bootflow
+scan' we may get a choice of booting 3 things, but one of those is
+GRUB which then has another 4 of its own. It's quite messy.
+
+>
+> Providing FdtFile as an EFI variable will make it possible for grub and
+> systemd-boot to support the same kind of "fdtdir" property that extlinux
+> does, this would simply enable versioned DTB loading for distros and
+> make booting wayyyyy easier.
+
+It is perpetuating an incorrect approach, though. It won't lead to
+happiness. Perhaps systemd-boot should support FIT?
+
+As to versions, the compatible string needs to handle that. We cannot
+have a situation where we ship two different devices trees that have
+the same compatible strings but different contents as there is no
+(spec-correct) way to distinguish them.
+
+>
+> With regards to the design, I think a good follow-up patch would set a
+> default value for $fdtfile (and consequently FdtFile) from the
+> DEVICE_TREE build variable as a constant (maybe only if OF_UPSTREAM is
+> enabled).
+
+Please no. We should not continue down this broken path.
+
+>
+> This would be correct in almost all cases (and wayyy better than the
+> hacky fdtfile generating code we have in mach-snapdragon right now).
+
+Yes, but you really should figure out how to remove that code. It is
+present on other boards too. One of the things not on my list (but I
+wish it were) is to clean up how RISC-V does devicetree selection
+within U-Boot.
+
+> >
+> > For distro-boot, do you mean the scripts? We are trying to deprecate
+> > those. Of course we have brought in all the same work-arounds, etc.,
+> > but with bootstd we can start to clean things up, I hope.
+> >
+> > So let's think about how we can have U-Boot choose the right DT to boot with.
+> >
+> > Regards,
+> > Simon
+>
+> Heinrich, since it's been a while, if you aren't super interested in
+> re-sending this patch I'd be happy to address the wording feedback and
+> re-spin it, along with a patch setting the default $fdtfile (else I can
+> send that as a follow-up).
+
+The best thing to do here is to use FIT. You can put all the FDTs in a
+FIT and leave the kernel out, if necessary.
+
+Another idea, which I may have suggested before (can't remember) would
+be to add an EFI service which U-Boot implements, which returns the
+correct FDT to use. U-Boot can then scan the files one by one to
+figure it out, although hopefully that would prompt someone to create
+a FIT (or a text file?) which has this information in it.
+
+But fdtfile is just not the right approach.
+
+>
+> I'll also open an issue for getting support for this added to systemd-boot.
+
+FIT?
 
 Regards,
 Simon
