@@ -4,69 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B6EC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD34C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:32:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19DC081DCD;
+	by phobos.denx.de (Postfix) with ESMTP id 5E35D81E8C;
 	Fri, 28 Mar 2025 17:32:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hUAGYtI2";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="R3f0OmEd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BC3381E13; Fri, 28 Mar 2025 17:29:41 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 37BB881E1C; Fri, 28 Mar 2025 17:31:19 +0100 (CET)
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::221])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A80C08144A
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:29:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id D48158144A
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:31:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E12F7A408EE;
- Fri, 28 Mar 2025 16:24:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19C8BC4CEE4;
- Fri, 28 Mar 2025 16:29:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743179376;
- bh=NBRPIyh3PZYiuoz8caI/jv21mxMf5rIMys4WzdDFGKs=;
- h=From:Date:Subject:To:Cc:From;
- b=hUAGYtI2psdgJCJcU3sYnJ+aqRg7B7DLn7UYUDnXrmP3uNXcxh0ZO0OgezA2WJqDn
- Jsv1qoe1unjQslLqjwHr0n5eJJNCw/0fqiSJTM8AMHuu7O8q5MN9KF80pXU+A/K+2s
- vqK5jnypKXwBI5iP/013+RXOmABtd7HPWw1c/MYQ49AynPuUbFOruqJzy9/JrTg9rf
- 8w+kCGuQzHznvfja4KEhI8ccog+u/peOKeAvRJarOZ63BrLlWNeO6DREwG1H8JXWJW
- c1DPQM1KJir7MjtsseVzBdwj9imoUHvIEBNv7bHHr9qFfBAgul7qh2dhK3FSRK6XJ6
- A63DiY4oyL5gA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Date: Fri, 28 Mar 2025 17:29:27 +0100
-Subject: [PATCH] MAINTAINERS: Update email of Mattijs Korpershoek
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 221D144342;
+ Fri, 28 Mar 2025 16:31:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1743179474;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nm/qE8BPbcDAixFiUPqEiSk/xMoP95VlfIx95J9vtq0=;
+ b=R3f0OmEdo2sdv2tpyIAkWiPV0SoNxzggJyUuk4OPMx+jL+R/U9cv4gLgmCXi5B8BL7Y8rW
+ aXm/o0BR/DxCEMcgxZSjMWHrJUUlpr6gQlJEd8B/ErnYEOzVKdVdIfJOcsH3s6jUc+uT9h
+ X7tA9vI+TREfLssu1fMvY8NlaE+inNEI2s4k5mXnut49KA+t/cDd0O1GWMgOxLAkfGeG7o
+ hkIgUd5hDaMTNA6mNiu5uIJGEh5sVNgh8LGtXaEmya9J3AWGAcDk9C1HJ7sv0X0iDSdoTM
+ Go7FJMgUwc7skNcMXHbUAnTYKm4iOOxmZzC6jfedGYLBQrFgv/AW3yQTBPW/jQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Fabio Estevam <festevam@gmail.com>,  Svyatoslav Ryhel
+ <clamor95@gmail.com>,  Simon Glass <sjg@chromium.org>,  Jaehoon Chung
+ <jh80.chung@samsung.com>,  Lukasz Majewski <lukma@denx.de>,  Sean Anderson
+ <seanga2@gmail.com>,  Anatolij Gustschin <agust@denx.de>,  Peng Fan
+ <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v4 00/12] Add imx8mp video support
+In-Reply-To: <20250328155711.GV93000@bill-the-cat> (Tom Rini's message of
+ "Fri, 28 Mar 2025 09:57:11 -0600")
+References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
+ <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
+ <20250303170640.GS2640854@bill-the-cat>
+ <CAPVz0n01g9JghOb1JCPg1sCwOf-w0AcjMZRngGZbAK_C_VhGcA@mail.gmail.com>
+ <CAOMZO5BMZi3adJCcxVq3-04YY8yAAVqkdcy8Q1tMzMsK+W0rEA@mail.gmail.com>
+ <87pli3q1j9.fsf@bootlin.com>
+ <CAOMZO5DnfOSGg0wCZpoqw9EsyLWL-ezDshGZT1s8WuBu-K_CrQ@mail.gmail.com>
+ <20250327141442.GO93000@bill-the-cat> <87r02hlfb8.fsf@bootlin.com>
+ <20250328155711.GV93000@bill-the-cat>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Fri, 28 Mar 2025 17:31:12 +0100
+Message-ID: <87r02hdsmn.fsf@bootlin.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250328-mattijs-korg-v1-1-e3f61c80d767@kernel.org>
-X-B4-Tracking: v=1; b=H4sIAGbO5mcC/x3MQQ5AMBBA0avIrDVBIylXEQtqMITKTCNEendl+
- Rb/PyDIhAJ18gDjSUJuj8jTBOzc7RMqGqKhyIoy03mlts57WkStjifVG9SmKq1GayAmB+NI179
- r2uiZxDu+v3sI4QXhQaoNbQAAAA==
-X-Change-ID: 20250319-mattijs-korg-b8e3895c3ec8
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-X-Mailer: b4 0.14.3-dev-7b9b9
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2711;
- i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=NBRPIyh3PZYiuoz8caI/jv21mxMf5rIMys4WzdDFGKs=;
- b=owEBbQGS/pANAwAIARkNHbRmThk1AcsmYgBn5s5uz70Pk1oNHeeIWcJUdulNeQ7V4+COpDEQB
- Uv2OvIa4LOJATMEAAEIAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCZ+bObgAKCRAZDR20Zk4Z
- NdGgB/kBtx8j+4adsIfZy5HFz6BB57GM7CG+cxmta717rY8NuSYG08evAGReE+LWHCER+vcDtia
- Ss6S1CDsREFUuh65Xl1aYS183uvOEQGncFol3xGwQz0S9L9550bkjWEbFun81/DesXFAPJUvceY
- sVZS25Gz9hnR2NQ6+dQ9kaukHM+pDAt8ZiF/dYg0I3vAPHcG719JC1GW86enVIQAv23eDohxgFf
- zfXDHNZsDTnrJ1vxr6KhHiHBtxSDkjfiSpsK3rTMMBIaxk0jMUd1u42c4DQx6LHeiJJgnZho+1U
- 70sYSwBtx/k71z0M71zIINkmWBWbafXvvpZFWSilYSazj767
-X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
- fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddujedujeekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeefiedtveetueehkeeuheelhfffleeuudehfedvfeegueeffeehhefgvdelueejteenucffohhmrghinheprgiiuhhrvgdrtghomhenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedujedprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehfvghsthgvvhgrmhesghhmrghilhdrtghomhdprhgtphhtthhopegtlhgrmhhorhelheesghhmrghilhdrtghomhdprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghom
+ hdprhgtphhtthhopehluhhkmhgrseguvghngidruggvpdhrtghpthhtohepshgvrghnghgrvdesghhmrghilhdrtghomhdprhgtphhtthhopegrghhushhtseguvghngidruggv
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-Mailman-Approved-At: Fri, 28 Mar 2025 17:32:08 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,84 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-My preferred email address is mkorpershoek@kernel.org now.
+>> > I see that the Azure failure is:
+>> > https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10824&vie=
+w=3Dresults
+>> > which was the unfortunate "next is broken because master has a fix and
+>> > next has a test that needed updating now" that happened this week with
+>> > -rc5 being merged. Sorry about that, it's fixed now.
+>>=20
+>> Yes, my question got lost somewhere else, so let me ask here as well.
+>>=20
+>> I need the tests to run on the test.dts and not the default sandbox.dts.
+>> The documentation states to use -T for that when doing the checks
+>> locally. Unfortunately, the Azure pipelines do use the default sandbox
+>> DT. I can add few mostly useless nodes to the default DTS for the tests
+>> to pass, but I feel like this is not the correct approach.
+>>=20
+>> Is there a way to tell Azure to run some of the unit tests (especially
+>> the DM ones) only with the test DT?
+>
+> I saw the older email first, sorry. But I think the docs have become
+> disconnected from how things have been done practically.
 
-This updates the MAINTAINERS files and adds an entry in the
-.mailmap file.
+No problem :-) Okay, if using sandbox.dts is the correct way to do, I'll
+finally fix the pipelines with the remaining issues and submit a v6.
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
----
- .mailmap    |  1 +
- MAINTAINERS | 10 +++++-----
- 2 files changed, 6 insertions(+), 5 deletions(-)
+Thanks a lot for clarifying, it is much appreciated.
 
-diff --git a/.mailmap b/.mailmap
-index ff85151702f8..85086602cd50 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -76,6 +76,7 @@ Marek Vasut <marex@denx.de> <marex at denx.de>
- Markus Klotzbuecher <mk@denx.de>
- Masahiro Yamada <masahiroy@kernel.org> <yamada.masahiro@socionext.com>
- Masahiro Yamada <masahiroy@kernel.org> <yamada.m@jp.panasonic.com>
-+Mattijs Korpershoek <mkorpershoek@kernel.org> <mkorpershoek@baylibre.com>
- Michal Simek <michal.simek@amd.com> <Monstr@seznam.cz>
- Michal Simek <michal.simek@amd.com> <michal.simek@xilinx.com>
- Michal Simek <michal.simek@amd.com> <monstr@monstr.eu>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 0315c606744c..042d3f6160ae 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -66,7 +66,7 @@ F:	lib/alist.c
- F:	test/lib/alist.c
- 
- ANDROID AB
--M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-+M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
- R:	Igor Opaniuk <igor.opaniuk@gmail.com>
- R:	Sam Protsenko <semen.protsenko@linaro.org>
- S:	Maintained
-@@ -77,7 +77,7 @@ F:	include/android_ab.h
- F:	test/py/tests/test_android/test_ab.py
- 
- ANDROID AVB
--M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-+M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
- R:	Igor Opaniuk <igor.opaniuk@gmail.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
-@@ -971,7 +971,7 @@ F:	net/eth_bootdevice.c
- F:	test/boot/
- 
- BOOTMETH_ANDROID
--M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-+M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
- F:	boot/bootmeth_android.c
-@@ -1050,7 +1050,7 @@ N:	OF_UPSTREAM
- 
- DFU
- M:	Lukasz Majewski <lukma@denx.de>
--M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-+M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
- F:	cmd/dfu.c
-@@ -1162,7 +1162,7 @@ F:	test/common/event.c
- F:	test/py/tests/test_event_dump.py
- 
- FASTBOOT
--M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-+M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
- F:	cmd/fastboot.c
-
----
-base-commit: 3f9e0349c3e8afe45d5bdb2328a16512cfbc2ef1
-change-id: 20250319-mattijs-korg-b8e3895c3ec8
-
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+Miqu=C3=A8l
