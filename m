@@ -4,79 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE9CBC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:02:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D5D3C3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:05:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 133C181E1C;
-	Fri, 28 Mar 2025 14:02:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F006681DCC;
+	Fri, 28 Mar 2025 14:05:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ec0eO4B+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GtHJVY9V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9473E81DCC; Fri, 28 Mar 2025 14:02:36 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id DD20081E13; Fri, 28 Mar 2025 14:05:50 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F5D881E1C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:02:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8EC281273
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:05:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3d59c8f0979so8993955ab.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:02:33 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6f4b3ebe5so4008958a12.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:05:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743166951; x=1743771751; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XgWFz4vRXEAC8rI3b9hwDW791xM8IyRaWX94UOkdlHQ=;
- b=Ec0eO4B+gOza1BEsQko2b+G7ulsfn1EEhp2BWn8ddt5Wm3b4ppXM+vnkI3olP8us/D
- GfkBlLxqjz60Eg/kSlcEuMro//TsBZ3G55aGsde/OqvOYtfw61D3Bww5tCaskPfbVD5l
- zTDyYl8EpviDG0YjXHKGq1fsXcFKTEOv9ChYI=
+ d=chromium.org; s=google; t=1743167148; x=1743771948; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1H3muQtz9wTvIXmpKcTmIk41vmlCETspWJ5FJyN+2HM=;
+ b=GtHJVY9VO/l5YB0FGwTolzj+YucMTA4QG+ep0R8Ez/Gqbgci3yImZxF9q4nfNjNIAd
+ 3sGzFpog9nEpmkeOo3OZ3Q3zTfXa0yKkHsYsuWWB2n6UD6irci5/dDSDPGLY3NmiOunC
+ RLxQITNX5H9TguHdPorqN2NQp92ia1plkGR2w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743166951; x=1743771751;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1743167148; x=1743771948;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XgWFz4vRXEAC8rI3b9hwDW791xM8IyRaWX94UOkdlHQ=;
- b=M9xCaRwsOI05/XD8O9qo0J1bsnZyQ/LRgGcZtGOtBR+RQg9w3cRQiACTG9YHwKiZwH
- Ljp+eCkYxY57ZV6OCPENiSCfk1X+0Fy1K9sm3dy+k09psucKCTkEo9UDOendiQvPqP7B
- nLrGXOqt3hkuLWrW+9ytxEAzyUud2zPUMmaCIx6viHsNTj/Q/dlXiAD/asmbUYWIoKza
- rU0kPYF8Sxv2XgsXAbaoeT4UVRIrIcpRWvBgiuXfdTC1iOXRjDI5dVHbvHDJW9S3a32a
- v4bGCKTWAwfyBNtgZoqUwwkQbo2dXlyA4t/s6YWswyVDySMi4pDQx4hF+j8K7WIj9bl+
- Bdwg==
-X-Gm-Message-State: AOJu0Yy4/nv3fygooW8BfbVqvUFiXm4gT0bx80vNdaP/nq/cNTM6rn8g
- 2bu+KeuCOIn06bK0zjtKRGiPrV/Q3JsbdFkuku9yTlQO8C4ZT/+QBURnZiUFV7WxqNKEV2wOXlY
- =
-X-Gm-Gg: ASbGncsGRlnM7zqPjBLPWprBs/RiiV3Zjm8ujoCqQctjyeMOoiS25w+FfyHwtG1FPjQ
- sW1bU7uii+kqqoYEoXK2zRw2/asEiLqOPjJKZzRtUoj3erVTfQc1ob0G4iUDc/IlBaDRgUTYhfN
- ZaewL9cG3aHkrPoahGzybFEBzXk6SCh49asUkyXNGMUC+RzQh6gakxA1c73xe0NhPPeNkb57bps
- D4bzMBr+So3NN+XuTGViUEwRJ8LFbYOjoJ7Pi8qbzC2hCibUiBbcSPmj4s4lZI7BEOROnbzIwsP
- +c4s0uelTvuKevhcN7VZyg7zqARgO7vhrx/nB8nPSpp8G8MH8XeHWlUqYaEGAEYEBsk+mgg0l/n
- x1n+x7Q==
-X-Google-Smtp-Source: AGHT+IGFvmH+bvG1KVLSrJ8jFjdQQPChMS2xoZ9Lh/SHj94bAHAzDXwwxgEOSt82EyRWBDnrP/MOgg==
-X-Received: by 2002:a05:6e02:32c6:b0:3d4:6ed4:e0a with SMTP id
- e9e14a558f8ab-3d5d6f42d76mr24316225ab.4.1743166950707; 
- Fri, 28 Mar 2025 06:02:30 -0700 (PDT)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d5d5a630c8sm4547065ab.15.2025.03.28.06.02.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:02:29 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Brian Norris <computersforpeace@gmail.com>,
- Douglas Anderson <dianders@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] patman: Show base commit on each patch when no cover letter
-Date: Fri, 28 Mar 2025 07:02:20 -0600
-Message-ID: <20250328130225.2607974-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ bh=1H3muQtz9wTvIXmpKcTmIk41vmlCETspWJ5FJyN+2HM=;
+ b=qZD+J0ra9rijKv9qkDsQ2LxEfcxhI3JyEGYrSQIvq/dQBHoBDs5wYnS4Y2/ITUHFUD
+ izPUSRXQH801gfBKC9bIiDG9FJYibJmf0KWgJJ2PS0zjJSwdcbx17AqcIUBS03w+2g3I
+ QqdODDgFimF9idte6PJlA9zCyCVGOL+JeGO2vukW/IZIi5e5N+foKF+cX3OHSBvFdOgd
+ 3NUN4bRUUr1ypjKgDP2CQVWifGYXP8hMQYaiJkDwOBrRIow5zkCWs7NI/0inLHOiERYC
+ vFJTfEXH4xBZnkSuOEZP9slwSo939NecoH0yjJc7Ft+sWdM0KQbopK1Wy26yujqBQN2j
+ mi5w==
+X-Gm-Message-State: AOJu0YyT1KHoeMoQRQxjOns6UKe6xEBx/9usNacae0JsGTEMg3xsbzq/
+ HwLFJbW1Mfy/+JR6tJZVW3AkaoI7lAUZey7yxARstUYPAhIbHGU8wOtaAS4VICoUkZ9QrGOfhPo
+ wxPQ26WkEC9Ge/LLuF7rnk+BXK/zOOJNMJGyT
+X-Gm-Gg: ASbGncssX60GkmEPOZRKntpTQNL74F+0+ARwLwk0XTIA550NZwQHrSDdkFh9gShYD7n
+ PWApYsLnpHaGtHIW/2smXyoCpJ4S2hG/n7dkN1nJrt5Ik7Rjpfu3ksR+jyC1qu+7i69BjE/eowd
+ EYGyydbiddve6zQlFKav8YUXwXWqA=
+X-Google-Smtp-Source: AGHT+IEstGQEUyOcJAK86kmoEAg1jsgDNw4uxsNNVn5bIaRn9QGOaA1k7lO6Iys6l9LfY6rgj9PCAaqSGL04Qas+EbE=
+X-Received: by 2002:a17:906:1107:b0:ac7:4f1:65c5 with SMTP id
+ a640c23a62f3a-ac704f1786cmr588023966b.54.1743167147866; Fri, 28 Mar 2025
+ 06:05:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250319145512.2391122-1-sjg@chromium.org>
+ <20250319145742.GI2640854@bill-the-cat>
+ <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
+ <20250320142121.GQ2640854@bill-the-cat>
+ <CAFLszTgsMu1ZtK1Z-u6cmH6k__0Qhn+G2SPh8w_NdrihLkQ7jA@mail.gmail.com>
+ <20250325162420.GI93000@bill-the-cat>
+ <CAFLszTj49W-Vk_4xpmvtyFH6AH1QAZTLRM7x1k-Bhz7a3uEuBQ@mail.gmail.com>
+ <20250327141742.GP93000@bill-the-cat>
+In-Reply-To: <20250327141742.GP93000@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 28 Mar 2025 07:05:35 -0600
+X-Gm-Features: AQ5f1JphyOaUxlOPVrJyWM-4Z3fzmbp3WPsxSRJsIQsEp65x2R8EA7mFT9Hhftk
+Message-ID: <CAFLszThJqyEQLvngTdxwqa-fsox5jjHBMYVryo6vPA7k_6jhUA@mail.gmail.com>
+Subject: Re: [PATCH 00/52] expo: Various features and improvements
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,178 +109,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a series is sent without a cover letter, there is no indication of
-the base commit. Add support for this, since single patches of small
-series may not always have a cover letter.
+Hi Tom,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Thu, 27 Mar 2025 at 08:17, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Mar 27, 2025 at 07:36:02AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 25 Mar 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Mar 21, 2025 at 07:38:45PM +0100, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 20 Mar 2025 at 15:21, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > This series collects together some new features for expo to make it more
+> > > > > > > > useful for boot menus:
+> > > > > > > >
+> > > > > > > > - measurement and display of multi-line text objects
+> > > > > > > > - internal alignment for objects (e.g. centred text)
+> > > > > > > > - editable strings in text fields
+> > > > > > > > - new 'box' object to draw a rectangle
+> > > > > > > > - highlighting of menu items, rather than just relying on a pointer
+> > > > > > > >
+> > > > > > > > Expo's boot menu is restructured so that it is possible to iterate
+> > > > > > > > through various bootdevs and update the menu as new ones are found. This
+> > > > > > > > is more in keeping with how bootstd works.
+> > > > > > > >
+> > > > > > > > A new textedit object is added, intended to provide a simple text
+> > > > > > > > editor. Future work will complete this.
+> > > > > > > >
+> > > > > > > > With this series the boot menu has a better layout and appearance.
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > Simon Glass (52):
+> > > > > > >
+> > > > > > > I see you haven't internalized the "don't post massive series" feedback
+> > > > > > > yet. Please, stop posting massive patch series. Figure out how to
+> > > > > > > logically break things down in to smaller chunks that can be
+> > > > > > > meaningfully reviewed.
+> > > > > >
+> > > > > > I could split this into two series of ~25 patches, perhaps. Would that be OK?
+> > > > > >
+> > > > > > I believe no one else is using expo yet, apart from postmarketOS,
+> > > > > > except the trivial case of 'bootflow scan -m' but I'm hoping that will
+> > > > > > change in the future. I believe that Linaro is mostly encouraging EFI
+> > > > > > bootmgr and the text-based menu. That could be converted to use expo
+> > > > > > but I doubt anyone has looked into that, particularly as grub is being
+> > > > > > pushed as well. I did look at converting the existing menu code a year
+> > > > > > or two ago, but it seemed better to eventually deprecate it.
+> > > > > >
+> > > > > > Also, there is a following series which I split out and will post
+> > > > > > separately, but not for a while as I have a lot outstanding.
+> > > > > >
+> > > > >
+> > > > > It would make sense to split expo out to its own series as there's not
+> > > > > likely to be any feedback there. All of the other parts of the series
+> > > > > already have something else in their subject and that would be logical
+> > > > > places to split this up more and then assign to the appropriate
+> > > > > custodian. Thanks.
+> > > >
+> > > > This is the expo series and it only has expo patches, so I believe we
+> > > > are OK there.
+> > > >
+> > > > The bootstd series is small and its own thing.
+> > >
+> > > OK.
+> > >
+> > > > I can split up the strim() / test series,
+> > >
+> > > OK.
+> > >
+> > > > but I'm still unsure what
+> > > > you are asking for with respect to code which is not yet used. I can't
+> > > > reasonably do all of a) send code only when it is needed by later
+> > > > patches in the series and b) keep series sizes small and c) keep
+> > > > series related to a single topic.
+> > >
+> > > I don't see why you can't do that. It is in fact really hard to review
+> > > how useful some library functions you write without seeing how they're
+> > > used and if in turn we should be doing something different. You might
+> > > need to defer or break out as it's own some refactoring changes in order
+> > > to meet 'b' above. However "here is a thing" and "here's using a thing"
+> > > are still a single topic.
+> >
+> > You could just review the code itself, perhaps, rather than worrying
+> > whether it will never be used? For me, creating and maintaining a
+> > series through acceptance into your tree is still a lot of effort,
+> > unfortunately.
+>
+> No, that's a no-go. Reviewing a library without knowing how it's going
+> to be used is not effective.
+>
+> > While on that topic, it seems that the sunxi and rpi series have still
+> > not been applied to your tree. It would really help to see some
+> > movement on those after all these months.
+>
+> I provided a detailed explanation of what's still wrong with the sunxi
+> series.
 
- tools/patman/control.py     |  3 ++-
- tools/patman/func_test.py   | 30 ++++++++++++++++++++++++++++++
- tools/patman/patchstream.py | 28 +++++++++++++++++++++++-----
- 3 files changed, 55 insertions(+), 6 deletions(-)
+From what I recall this is that you want Heinrich to do a workaround
+with bootmgr and bootstd, but you don't want to disable bootmgr from
+sunxi. In either case, there's nothing I can do here. The series is
+probably getting more and more out of date anyway. Andre might pick it
+up, but I doubt it, given all the arguments about it.
 
-diff --git a/tools/patman/control.py b/tools/patman/control.py
-index fb5a4246ced..b8a45912058 100644
---- a/tools/patman/control.py
-+++ b/tools/patman/control.py
-@@ -63,7 +63,8 @@ def prepare_patches(col, branch, count, start, end, ignore_binary, signoff,
-         branch, start, to_do, ignore_binary, series, signoff)
- 
-     # Fix up the patch files to our liking, and insert the cover letter
--    patchstream.fix_patches(series, patch_files, keep_change_id)
-+    patchstream.fix_patches(series, patch_files, keep_change_id,
-+                            insert_base_commit=not cover_fname)
-     if cover_fname and series.get('cover'):
-         patchstream.insert_cover_letter(cover_fname, series, to_do)
-     return series, cover_fname, patch_files
-diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index 44eba2cdbb7..720746e21f5 100644
---- a/tools/patman/func_test.py
-+++ b/tools/patman/func_test.py
-@@ -357,6 +357,31 @@ Changes in v2:
-                 expected = expected.splitlines()
-                 self.assertEqual(expected, lines[start:(start+len(expected))])
- 
-+    def test_base_commit(self):
-+        """Test adding a base commit with no cover letter"""
-+        orig_text = self._get_text('test01.txt')
-+        pos = orig_text.index('commit 5ab48490f03051875ab13d288a4bf32b507d76fd')
-+        text = orig_text[:pos]
-+        series = patchstream.get_metadata_for_test(text)
-+        series.base_commit = Commit('1a44532')
-+        series.branch = 'mybranch'
-+        cover_fname, args = self._create_patches_for_test(series)
-+        self.assertFalse(cover_fname)
-+        with capture_sys_output() as out:
-+            patchstream.fix_patches(series, args, insert_base_commit=True)
-+        self.assertEqual('Cleaned 1 patch\n', out[0].getvalue())
-+        lines = tools.read_file(args[0], binary=False).splitlines()
-+        pos = lines.index('-- ')
-+
-+        # We expect these lines at the end:
-+        # -- (with trailing space)
-+        # 2.7.4
-+        # (empty)
-+        # base-commit: xxx
-+        # branch: xxx
-+        self.assertEqual('base-commit: 1a44532', lines[pos + 3])
-+        self.assertEqual('branch: mybranch', lines[pos + 4])
-+
-     def make_commit_with_file(self, subject, body, fname, text):
-         """Create a file and add it to the git repo with a new commit
- 
-@@ -527,6 +552,11 @@ complicated as possible''')
-             self.assertEqual(f'base-commit: {base}', lines[0])
-             self.assertEqual('branch: second', lines[1])
- 
-+            # Make sure that the base-commit is not present when it is in the
-+            # cover letter
-+            for fname in patch_files:
-+                self.assertNotIn(b'base-commit:', tools.read_file(fname))
-+
-             # Check that it can skip patches at the end
-             with capture_sys_output() as _:
-                 _, cover_fname, patch_files = control.prepare_patches(
-diff --git a/tools/patman/patchstream.py b/tools/patman/patchstream.py
-index 156c1ad0e32..7a695c37c27 100644
---- a/tools/patman/patchstream.py
-+++ b/tools/patman/patchstream.py
-@@ -76,8 +76,13 @@ class PatchStream:
-     are interested in. We can also process a patch file in order to remove
-     unwanted tags or inject additional ones. These correspond to the two
-     phases of processing.
-+
-+    Args:
-+        keep_change_id (bool): Keep the Change-Id tag
-+        insert_base_commit (bool): True to add the base commit to the end
-     """
--    def __init__(self, series, is_log=False, keep_change_id=False):
-+    def __init__(self, series, is_log=False, keep_change_id=False,
-+                 insert_base_commit=False):
-         self.skip_blank = False          # True to skip a single blank line
-         self.found_test = False          # Found a TEST= line
-         self.lines_after_test = 0        # Number of lines found after TEST=
-@@ -103,6 +108,7 @@ class PatchStream:
-         self.recent_quoted = collections.deque([], 5)
-         self.recent_unquoted = queue.Queue()
-         self.was_quoted = None
-+        self.insert_base_commit = insert_base_commit
- 
-     @staticmethod
-     def process_text(text, is_comment=False):
-@@ -658,6 +664,13 @@ class PatchStream:
-                     outfd.write(line + '\n')
-                     self.blank_count = 0
-         self.finalise()
-+        if self.insert_base_commit:
-+            if self.series.base_commit:
-+                print(f'base-commit: {self.series.base_commit.hash}',
-+                      file=outfd)
-+            if self.series.branch:
-+                print(f'branch: {self.series.branch}', file=outfd)
-+
- 
- def insert_tags(msg, tags_to_emit):
-     """Add extra tags to a commit message
-@@ -778,7 +791,8 @@ def get_metadata_for_test(text):
-     pst.finalise()
-     return series
- 
--def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
-+def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False,
-+              insert_base_commit=False):
-     """Fix up a patch file, by adding/removing as required.
- 
-     We remove our tags from the patch file, insert changes lists, etc.
-@@ -792,6 +806,7 @@ def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
-         series (Series): Series information about this patch set
-         cmt (Commit): Commit object for this patch file
-         keep_change_id (bool): Keep the Change-Id tag.
-+        insert_base_commit (bool): True to add the base commit to the end
- 
-     Return:
-         list: A list of errors, each str, or [] if all ok.
-@@ -799,7 +814,8 @@ def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
-     handle, tmpname = tempfile.mkstemp()
-     outfd = os.fdopen(handle, 'w', encoding='utf-8')
-     infd = open(fname, 'r', encoding='utf-8')
--    pst = PatchStream(series, keep_change_id=keep_change_id)
-+    pst = PatchStream(series, keep_change_id=keep_change_id,
-+                      insert_base_commit=insert_base_commit)
-     pst.commit = cmt
-     pst.process_stream(infd, outfd)
-     infd.close()
-@@ -811,7 +827,7 @@ def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
-     shutil.move(tmpname, fname)
-     return cmt.warn
- 
--def fix_patches(series, fnames, keep_change_id=False):
-+def fix_patches(series, fnames, keep_change_id=False, insert_base_commit=False):
-     """Fix up a list of patches identified by filenames
- 
-     The patch files are processed in place, and overwritten.
-@@ -820,6 +836,7 @@ def fix_patches(series, fnames, keep_change_id=False):
-         series (Series): The Series object
-         fnames (:type: list of str): List of patch files to process
-         keep_change_id (bool): Keep the Change-Id tag.
-+        insert_base_commit (bool): True to add the base commit to the end
-     """
-     # Current workflow creates patches, so we shouldn't need a backup
-     backup_dir = None  #tempfile.mkdtemp('clean-patch')
-@@ -829,7 +846,8 @@ def fix_patches(series, fnames, keep_change_id=False):
-         cmt.patch = fname
-         cmt.count = count
-         result = fix_patch(backup_dir, fname, series, cmt,
--                           keep_change_id=keep_change_id)
-+                           keep_change_id=keep_change_id,
-+                           insert_base_commit=insert_base_commit)
-         if result:
-             print('%d warning%s for %s:' %
-                   (len(result), 's' if len(result) > 1 else '', fname))
--- 
-2.43.0
+> The Pi maintainers are still actively working their way through
+> things.
 
-base-commit: fa90deeb571c463b979f83c52fa9e954044dc1d2
-branch: pat
+Is there any ETA?
+
+I'm sending a v2 of this series as I found some other problems.
+
+Regards,
+Simon
