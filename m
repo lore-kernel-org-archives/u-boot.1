@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53449C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 08:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF8DC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 08:27:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F3781273;
-	Fri, 28 Mar 2025 09:20:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9BBFB81D6C;
+	Fri, 28 Mar 2025 09:27:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MrN2SK9w";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KU3+igOk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAD8781951; Fri, 28 Mar 2025 09:20:41 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 11C7881DCA; Fri, 28 Mar 2025 09:27:12 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0B6D810F4
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:20:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 110CC81951
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:27:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-391342fc0b5so1435726f8f.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 01:20:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2ff85fec403so5983819a91.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 01:27:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743150036; x=1743754836;
+ d=amarulasolutions.com; s=google; t=1743150427; x=1743755227;
  darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=PS58rRCw/9LhuUCAgjpBpEONvhJ8NBpzW6wXM6HFqeo=;
- b=MrN2SK9w+VVVm4f/+yuRrPiv0+WwEMcebUPH8aTdC8QfQoBX/LLb5pvPZ+q4KlRmMU
- o0kflRvyKlEtY8slDO5Ll3LJDjvOcV4r8TwuDGnMF/V9wixTH9akaOy+jb+e3XcGqCR6
- +DPXgGHeCo27/4Is4Us+MUHoITnq5EO2obDIDkpMVjUOgutg+z0l21TPliZpZZCC9VpU
- T1drZeOia5AQJptxYLrgUCgRY1ghzX7euG6JxYiJp3DpTshhplANcSmPSnolIsIfGjaa
- 5h6jrhfH1+zf60RiIWgV3uHPYfPB2rFanXl18BSzY1jw8hcf/X+CqFru8lPCmJmwZaIM
- WGfw==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SaLBilISrwmPgW8Tu0DqNxV7m/nb2GWG9OCjrSHCpzA=;
+ b=KU3+igOkS/eag70YGf1YpCvPXnatQsn71BfpctIoaHufitTd/88GJP/0AjRQ3Oy/oG
+ nea9Izqdk6teRGsU6wi3JsdfHxtycc81eg0kOuROVGNx/n3uHkTlso5XM3e5Pv1SgVjP
+ enWYSyJXQ22tJH/tlgxKgl34ba7jpA4C9CGSY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743150036; x=1743754836;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PS58rRCw/9LhuUCAgjpBpEONvhJ8NBpzW6wXM6HFqeo=;
- b=vJGXoOkmKPJw6fopWO4eanuSdkbW3TgV+/qJgXPuMLuS2z/ffxdXT5u3Thw4/Bjo5W
- TvVAicTUXp6jU2uspV9frZ5t/SFPMaqLGPZMy17iTXU8/0ai7TPyzfxQoAxl22xgSIy9
- 28P/U7SNNK8UojrvtjziWcSp5RAuo73tHhGSrwew7PihG/2yq1aT3Ga1UnQ7TGoYyEmt
- FGx7kjaypL56BKqoCEzAq6RsXe6CPvQCToxg6pWAN1ih9rPHKtquAyHmBTcMmEJLdRoe
- t5ekMVqZlTXwIek3QYGQsFEpl/1k9BPyyz7vcKInYEMG1jdE1J0RmKmXUySl5O9n0XPW
- uIdA==
+ d=1e100.net; s=20230601; t=1743150427; x=1743755227;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SaLBilISrwmPgW8Tu0DqNxV7m/nb2GWG9OCjrSHCpzA=;
+ b=Rap1t5JOjEP/cWV7ER3PLZ3aw6+BXEeuSRHJ2s3s+PZPhQ7+D4LGgRqG7KLi4zJiFZ
+ C41VeUXxbzTl1W01K0fX2ilHi/bk7ukdcPrZ1FFX9munjFlaxKANWus7NOrVHxx6WjsQ
+ F3NPL+mORNyHjldsShb1+qgKxXOa9qnsTASjoj4GBtKq8wyWhor6U25+GLcWGbTUDj1I
+ 0RrDKztemNTdmXhs9DufV4srry+wtr3EhrFYQaR2JHjzd/rSdWZdB8GjR2MLKqzL7i0N
+ VYKj16b5x86bEk9Zg91i0o5h2Llvpzwk4EoUCctSLL0NBe7xTHTpVWMUEnawUcD79OV/
+ zHrg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUR7kXOcMZsGE1+qjVf7u1oGbb4cPJIv3H8ecAKLXgaVNREIUcs6JMEUZKs3l10zk7GkD/SspA=@lists.denx.de
-X-Gm-Message-State: AOJu0YycSszXt6cmQWVy3FqXh1ExMBr4VV4Pfc4jQfHjlT2b+FABlgbj
- U5uCacpNe/bfS163D19lvudZr5orw7ouaJkOV9t221qSQ78+kz6Q607h18/AxEg=
-X-Gm-Gg: ASbGncuaGK74vrQCRJS11rw4J9TdpTcskvac9TGUYiZI5pr0peUdiHeOWz+mY4im4n2
- RwXvGXb404dXfNAixw2uSn0c49zJfkks12NXk68qVts4+2jEQqNDZVpNu/ZB4gt4Id4pDxVxMmW
- +GN8HaBI/vttnFNNJCefKinbDKT2iGrFM5UmNmUKYM+tXhIm5a7wGZtCAZKNAB5iCLFtRVmaWNi
- EH9A9JP9MT+qzgzd38vRSNB5cj4Ht2bmqvkljZG6CFMkfNWFB0IZNXqnVOmObgQSBi4QsPq+GdL
- R3i1C+T1Ycmte7et+7qTGHJmYohEH4n0NeBRq3fqXGsy4kzfJQrl+09tRt0B5o1y
-X-Google-Smtp-Source: AGHT+IG3u0iNX+tBz/VHBpgGi6AM0BpUuMuJ0/TjH3cTZmg7stcY9ckWhfDsnLAm+3Ef1TssT/V6Ww==
-X-Received: by 2002:a05:6000:40e1:b0:391:255a:748b with SMTP id
- ffacd0b85a97d-39ad1784903mr6127186f8f.39.1743150035982; 
- Fri, 28 Mar 2025 01:20:35 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:2b24:7f52:e3f6:e4ef])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b7a448dsm1844715f8f.100.2025.03.28.01.20.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 01:20:35 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Zixun LI <admin@hifiphile.com>
-Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: usb:composite: data abort on second ums launch
-In-Reply-To: <8734eya8no.fsf@baylibre.com>
-References: <CA+GyqebHib_N7szGKkR0Ejac1rmoDQp+0a8t7ROng=PE3g9pGA@mail.gmail.com>
- <72987a42-4e5b-4b53-a5de-2c654e129c43@denx.de>
- <87v7rypcoy.fsf@baylibre.com>
- <CA+GyqeaFbV3BM-1YFW4iJ3nYSL5jXfRS+_Gg7AEUg9d1yxjSjA@mail.gmail.com>
- <87sen2pbsl.fsf@baylibre.com> <8734eya8no.fsf@baylibre.com>
-Date: Fri, 28 Mar 2025 09:20:34 +0100
-Message-ID: <87wmc98t2l.fsf@baylibre.com>
+ AJvYcCUrv9Vd+/vpz4RCS5yj30Uv0il03/STpTKMTd4tP8ttOWAGwFUu/uFnAZVnCvSF0MCh6JMmqhQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxw/S/TOi7P2ACggpaIBWMa+Kwd087T2/MmJWmdsl2TcqRNnQIa
+ tI660Bq96kUKT+885XmKwlw9T+2M8lh/sYDCfarzqkm4r/UCtcXU5TD2yQCCwd1ivRXmq9ECuoP
+ kDA2OshyeIRZiUIVJ7IbXHxqVM/966j3kIVrRlA==
+X-Gm-Gg: ASbGnctCA5Spr+GFb8rOJUaHluN3i52bT4faK7S5N5Vw2FlljLoD+rRsxsH0znE6jU9
+ qKsqpMwwOLCEJGmE7ueObETOTzQn84iiiXN36L/HfbuFJBptlkPir/zOZj2Tfza+z5QVYYNor/U
+ exVVkk8+RJ2Gsf1ciFuu3eBO7P
+X-Google-Smtp-Source: AGHT+IGWgFf9klSS/JIPA2NqdbtIIvWQyV4LUeNWblLz6CN9cUCPxvLFI/ZkrwnulJD65shRxAwJ8ctM9E9amtg3Z6Y=
+X-Received: by 2002:a17:90a:d643:b0:2e2:c2b0:d03e with SMTP id
+ 98e67ed59e1d1-3051cbedbe6mr2966986a91.5.1743150427409; Fri, 28 Mar 2025
+ 01:27:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20250327153313.2105227-1-andre.przywara@arm.com>
+ <20250327153313.2105227-16-andre.przywara@arm.com>
+In-Reply-To: <20250327153313.2105227-16-andre.przywara@arm.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 28 Mar 2025 09:26:55 +0100
+X-Gm-Features: AQ5f1JpJmv1cdXdceyS1D-pvxa5Prbt77KklUcDdTrE2i65zf82eF7WNeDKJ9mI
+Message-ID: <CAOf5uwnuh8u=_AcUovwPtTRmt1K4LNz3ej_-SDb7v-QzUffunA@mail.gmail.com>
+Subject: Re: [PATCH 15/18] mtd: rawnand: nand_base: annotate switch/case
+ fallthrough
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,57 +97,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zixun,
+On Thu, Mar 27, 2025 at 4:33=E2=80=AFPM Andre Przywara <andre.przywara@arm.=
+com>
+wrote:
 
-On jeu., mars 27, 2025 at 14:46, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+> The raw NAND flash code uses an implicit switch/case fallthrough to
+> share code when dealing with different ECC modes, and also when handling
+> some read command.
+>
+> Add our "fallthrough;" statement-like macro before the respective labels
+> in the NAND code, to avoid a warning when GCC's -Wimplicit-fallthrough
+> warning option is enabled.
+>
+> This copies the fallthrough annotations that the original kernel code
+> gained, before this function got refactored there.
+>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  drivers/mtd/nand/raw/nand_base.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/drivers/mtd/nand/raw/nand_base.c
+> b/drivers/mtd/nand/raw/nand_base.c
+> index 1b65c6f6443..daf12807c67 100644
+> --- a/drivers/mtd/nand/raw/nand_base.c
+> +++ b/drivers/mtd/nand/raw/nand_base.c
+> @@ -774,6 +774,7 @@ static void nand_command_lp(struct mtd_info *mtd,
+> unsigned int command,
+>                                NAND_NCE | NAND_CTRL_CHANGE);
+>
+>                 /* This applies to read commands */
+> +               fallthrough;
+>         default:
+>                 /*
+>                  * If we don't have access to the busy pin, we apply the
+> given
+> @@ -4974,6 +4975,7 @@ int nand_scan_tail(struct mtd_info *mtd)
+>                 if (!ecc->read_page)
+>                         ecc->read_page =3D nand_read_page_hwecc_oob_first=
+;
+>
+> +               fallthrough;
+>         case NAND_ECC_HW:
+>                 /* Use standard hwecc read page function? */
+>                 if (!ecc->read_page)
+> @@ -4993,6 +4995,7 @@ int nand_scan_tail(struct mtd_info *mtd)
+>                 if (!ecc->write_subpage && ecc->hwctl && ecc->calculate)
+>                         ecc->write_subpage =3D nand_write_subpage_hwecc;
+>
+> +               fallthrough;
+>         case NAND_ECC_HW_SYNDROME:
+>                 if ((!ecc->calculate || !ecc->correct || !ecc->hwctl) &&
+>                     (!ecc->read_page ||
+> @@ -5027,6 +5030,7 @@ int nand_scan_tail(struct mtd_info *mtd)
+>                         ecc->size, mtd->writesize);
+>                 ecc->mode =3D NAND_ECC_SOFT;
+>
+> +               fallthrough;
+>         case NAND_ECC_SOFT:
+>                 ecc->calculate =3D nand_calculate_ecc;
+>                 ecc->correct =3D nand_correct_data;
+> --
+> 2.25.1
+>
 
-> Hi Zixun, Marek,
->
-> On lun., mars 24, 2025 at 18:40, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
->
->> Hi Zixun,
->>
->> On lun., mars 24, 2025 at 18:33, Zixun LI <admin@hifiphile.com> wrote:
->>
->> resetting ...
->
-> [...]
->
->>
->>>
->>> Each time when ums is called 2*FSG_BUFLEN, 256kB buffer is allocated
->>> and it seems not
->>> freed as fsg_common_release() is not called.
->
-> There are quite a few things that are wrong in
-> drivers/usb/gadget/f_mass_storage.c
->
-> 1. The "Synchronous Abort" exception happens because we call
->    kfree(common->luns); and common->luns is not allocated via
->    malloc/kmalloc.
->
-> 2. We use a kref member that's unused and can be removed
->
-> 3. There is a memory leak (as reported by Zixun) when unbind() is
->    called. We should call fsg_common_release().
->
-> I will send a series to fix this.
+Reviewed-by: Michael Trimrachi <michael@amarulasolutions.com>
 
-Series send out here:
-https://lore.kernel.org/u-boot/20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com
+I think I will apply the relative patches on mtd tree
 
-Available on patchwork:
-https://patchwork.ozlabs.org/project/uboot/patch/20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com/
+Michael
 
-If you could have a look and test it yourself, that would be greatly
-appreciated.
 
-If doing so, you can reply to the above thread with: "Tested-by: Name <email>"
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
->
-> Zixun, thanks again for reporting this and helping me reproduce!
->
-> Mattijs
->
->>>
->>> Zixun
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
