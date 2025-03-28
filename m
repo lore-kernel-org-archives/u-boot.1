@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A648C36013
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:02:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE9CBC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:02:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C09581273;
-	Fri, 28 Mar 2025 14:02:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 133C181E1C;
+	Fri, 28 Mar 2025 14:02:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q1yhjGcb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ec0eO4B+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42F6E81DCC; Fri, 28 Mar 2025 14:02:23 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 9473E81DCC; Fri, 28 Mar 2025 14:02:36 +0100 (CET)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08CB4810EA
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:02:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F5D881E1C
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:02:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-85e1b1f08a5so54508739f.2
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:02:20 -0700 (PDT)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3d59c8f0979so8993955ab.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:02:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743166939; x=1743771739; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743166951; x=1743771751; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LxGaykgy9TMc/GagbFr0VvRPNyZZwTej+GnxQFeSSvw=;
- b=Q1yhjGcbvd1ry9dOZEYaUIgK/2s19zP1yWMjgUiiDLwbYMmRVE1na7YL4eZJzBFSyA
- 8rIfhtcvnBPciH3jbC0T0AMtMdXTGA/i/rCzz3tOWX5c9pXsMEVQIzmIm67syv6LfMvV
- pm9q3mAJVJtaBQwc99U+ovvei2jHKx1qwq8Ag=
+ bh=XgWFz4vRXEAC8rI3b9hwDW791xM8IyRaWX94UOkdlHQ=;
+ b=Ec0eO4B+gOza1BEsQko2b+G7ulsfn1EEhp2BWn8ddt5Wm3b4ppXM+vnkI3olP8us/D
+ GfkBlLxqjz60Eg/kSlcEuMro//TsBZ3G55aGsde/OqvOYtfw61D3Bww5tCaskPfbVD5l
+ zTDyYl8EpviDG0YjXHKGq1fsXcFKTEOv9ChYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743166939; x=1743771739;
+ d=1e100.net; s=20230601; t=1743166951; x=1743771751;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LxGaykgy9TMc/GagbFr0VvRPNyZZwTej+GnxQFeSSvw=;
- b=vgQki/Fv5s2COzIZ6cdzQ1chEyaUemv1z+J7gRhjvp1pngyzbvIxuB8JU1EqcKOKLp
- AW+qN5+zRgNmsil2H0WUwQbGEuELlKYH3JSRjK+oM0giX7bPyjBz25+7Izom10QCEgpm
- W8/uWkKOniX2vV7/rxMt2yxnYb0Ui235MIF9/rg5hK786a9aFVm5/kB6UOEEEThyn3wF
- ZRW5P7loXDX8lNTkxO9sxAyGpXomuNqqEiELyWZQLn0LYpghSPPXpIO7PIXxm4yJIMN0
- 6UqMY9ateZnx8vu5bg4WwEji4hoR4vjFywZ/2uXKZ3idzNzED7FzzVNGsw8nc9mF2s5n
- cH+g==
-X-Gm-Message-State: AOJu0Yz0vl6WXYLikrcl2P63tY5+2ImZYmrmbAASPA5F+XjV1YRGK4hw
- qe/p6uRu1LKpZ90wrkhxJp2OGaOsTk4QvWbv75LNDM5WB/PDvm0x+19wdQv/C9pXpT3RYCCFg44
+ bh=XgWFz4vRXEAC8rI3b9hwDW791xM8IyRaWX94UOkdlHQ=;
+ b=M9xCaRwsOI05/XD8O9qo0J1bsnZyQ/LRgGcZtGOtBR+RQg9w3cRQiACTG9YHwKiZwH
+ Ljp+eCkYxY57ZV6OCPENiSCfk1X+0Fy1K9sm3dy+k09psucKCTkEo9UDOendiQvPqP7B
+ nLrGXOqt3hkuLWrW+9ytxEAzyUud2zPUMmaCIx6viHsNTj/Q/dlXiAD/asmbUYWIoKza
+ rU0kPYF8Sxv2XgsXAbaoeT4UVRIrIcpRWvBgiuXfdTC1iOXRjDI5dVHbvHDJW9S3a32a
+ v4bGCKTWAwfyBNtgZoqUwwkQbo2dXlyA4t/s6YWswyVDySMi4pDQx4hF+j8K7WIj9bl+
+ Bdwg==
+X-Gm-Message-State: AOJu0Yy4/nv3fygooW8BfbVqvUFiXm4gT0bx80vNdaP/nq/cNTM6rn8g
+ 2bu+KeuCOIn06bK0zjtKRGiPrV/Q3JsbdFkuku9yTlQO8C4ZT/+QBURnZiUFV7WxqNKEV2wOXlY
  =
-X-Gm-Gg: ASbGncuzkiH50/XD4ln+fJrQ3hI4b1OmclepoOBnqNfHGT/CArJe1DeWc3cdou8liB3
- WGcYSokYw25qcwN1yM+PyvxRGrJh0zTrdmt9rvznwqwn0Sl5qdIAOMIYSiLNSv6r5+P0WHv08oF
- Wy38qcLVfw4N6Q8MyB7cA9q4AvcnIS/a8JanzspA7twDA4GIZ01KS54bgc+Lcb0ni9jD4nQjJw7
- 4P62uNfNG7IkHPasnq867HmfbpcMl2GF3lSwstSiCzp9RYU63+OMuRynHoqqVAO8fYrEiVMD6XX
- JuVxgNjQi96We3u7RiOdctUb+yDGwbfUSX2TVAKVPEq3vhNCJZmnC6afW1+HuoxgjHaHoNQrMAp
- ARAucDSNd1qzThirV
-X-Google-Smtp-Source: AGHT+IFFhfcdkXsmNzKPr/PTRySauXB9Fcr2lJ29/HCErZX0/a2kdYyR5HUtX6gHUC75QlAiKX4hWA==
-X-Received: by 2002:a05:6602:3a0b:b0:85d:b054:6eb9 with SMTP id
- ca18e2360f4ac-85e8216740emr1051865939f.14.1743166939047; 
- Fri, 28 Mar 2025 06:02:19 -0700 (PDT)
+X-Gm-Gg: ASbGncsGRlnM7zqPjBLPWprBs/RiiV3Zjm8ujoCqQctjyeMOoiS25w+FfyHwtG1FPjQ
+ sW1bU7uii+kqqoYEoXK2zRw2/asEiLqOPjJKZzRtUoj3erVTfQc1ob0G4iUDc/IlBaDRgUTYhfN
+ ZaewL9cG3aHkrPoahGzybFEBzXk6SCh49asUkyXNGMUC+RzQh6gakxA1c73xe0NhPPeNkb57bps
+ D4bzMBr+So3NN+XuTGViUEwRJ8LFbYOjoJ7Pi8qbzC2hCibUiBbcSPmj4s4lZI7BEOROnbzIwsP
+ +c4s0uelTvuKevhcN7VZyg7zqARgO7vhrx/nB8nPSpp8G8MH8XeHWlUqYaEGAEYEBsk+mgg0l/n
+ x1n+x7Q==
+X-Google-Smtp-Source: AGHT+IGFvmH+bvG1KVLSrJ8jFjdQQPChMS2xoZ9Lh/SHj94bAHAzDXwwxgEOSt82EyRWBDnrP/MOgg==
+X-Received: by 2002:a05:6e02:32c6:b0:3d4:6ed4:e0a with SMTP id
+ e9e14a558f8ab-3d5d6f42d76mr24316225ab.4.1743166950707; 
+ Fri, 28 Mar 2025 06:02:30 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85e9027bb90sm35903439f.45.2025.03.28.06.02.16
+ e9e14a558f8ab-3d5d5a630c8sm4547065ab.15.2025.03.28.06.02.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:02:17 -0700 (PDT)
+ Fri, 28 Mar 2025 06:02:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] binman: Fix a typo in elf.py
-Date: Fri, 28 Mar 2025 07:02:08 -0600
-Message-ID: <20250328130214.2607633-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Brian Norris <computersforpeace@gmail.com>,
+ Douglas Anderson <dianders@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] patman: Show base commit on each patch when no cover letter
+Date: Fri, 28 Mar 2025 07:02:20 -0600
+Message-ID: <20250328130225.2607974-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -96,29 +93,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix an 'EFL' typo. It should be 'ELF'.
+If a series is sent without a cover letter, there is no indication of
+the base commit. Add support for this, since single patches of small
+series may not always have a cover letter.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/elf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/patman/control.py     |  3 ++-
+ tools/patman/func_test.py   | 30 ++++++++++++++++++++++++++++++
+ tools/patman/patchstream.py | 28 +++++++++++++++++++++++-----
+ 3 files changed, 55 insertions(+), 6 deletions(-)
 
-diff --git a/tools/binman/elf.py b/tools/binman/elf.py
-index c75f4478813..6ac960e0419 100644
---- a/tools/binman/elf.py
-+++ b/tools/binman/elf.py
-@@ -28,7 +28,7 @@ except:  # pragma: no cover
- # BSYM in little endian, keep in sync with include/binman_sym.h
- BINMAN_SYM_MAGIC_VALUE = 0x4d595342
+diff --git a/tools/patman/control.py b/tools/patman/control.py
+index fb5a4246ced..b8a45912058 100644
+--- a/tools/patman/control.py
++++ b/tools/patman/control.py
+@@ -63,7 +63,8 @@ def prepare_patches(col, branch, count, start, end, ignore_binary, signoff,
+         branch, start, to_do, ignore_binary, series, signoff)
  
--# Information about an EFL symbol:
-+# Information about an ELF symbol:
- # section (str): Name of the section containing this symbol
- # address (int): Address of the symbol (its value)
- # size (int): Size of the symbol in bytes
+     # Fix up the patch files to our liking, and insert the cover letter
+-    patchstream.fix_patches(series, patch_files, keep_change_id)
++    patchstream.fix_patches(series, patch_files, keep_change_id,
++                            insert_base_commit=not cover_fname)
+     if cover_fname and series.get('cover'):
+         patchstream.insert_cover_letter(cover_fname, series, to_do)
+     return series, cover_fname, patch_files
+diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
+index 44eba2cdbb7..720746e21f5 100644
+--- a/tools/patman/func_test.py
++++ b/tools/patman/func_test.py
+@@ -357,6 +357,31 @@ Changes in v2:
+                 expected = expected.splitlines()
+                 self.assertEqual(expected, lines[start:(start+len(expected))])
+ 
++    def test_base_commit(self):
++        """Test adding a base commit with no cover letter"""
++        orig_text = self._get_text('test01.txt')
++        pos = orig_text.index('commit 5ab48490f03051875ab13d288a4bf32b507d76fd')
++        text = orig_text[:pos]
++        series = patchstream.get_metadata_for_test(text)
++        series.base_commit = Commit('1a44532')
++        series.branch = 'mybranch'
++        cover_fname, args = self._create_patches_for_test(series)
++        self.assertFalse(cover_fname)
++        with capture_sys_output() as out:
++            patchstream.fix_patches(series, args, insert_base_commit=True)
++        self.assertEqual('Cleaned 1 patch\n', out[0].getvalue())
++        lines = tools.read_file(args[0], binary=False).splitlines()
++        pos = lines.index('-- ')
++
++        # We expect these lines at the end:
++        # -- (with trailing space)
++        # 2.7.4
++        # (empty)
++        # base-commit: xxx
++        # branch: xxx
++        self.assertEqual('base-commit: 1a44532', lines[pos + 3])
++        self.assertEqual('branch: mybranch', lines[pos + 4])
++
+     def make_commit_with_file(self, subject, body, fname, text):
+         """Create a file and add it to the git repo with a new commit
+ 
+@@ -527,6 +552,11 @@ complicated as possible''')
+             self.assertEqual(f'base-commit: {base}', lines[0])
+             self.assertEqual('branch: second', lines[1])
+ 
++            # Make sure that the base-commit is not present when it is in the
++            # cover letter
++            for fname in patch_files:
++                self.assertNotIn(b'base-commit:', tools.read_file(fname))
++
+             # Check that it can skip patches at the end
+             with capture_sys_output() as _:
+                 _, cover_fname, patch_files = control.prepare_patches(
+diff --git a/tools/patman/patchstream.py b/tools/patman/patchstream.py
+index 156c1ad0e32..7a695c37c27 100644
+--- a/tools/patman/patchstream.py
++++ b/tools/patman/patchstream.py
+@@ -76,8 +76,13 @@ class PatchStream:
+     are interested in. We can also process a patch file in order to remove
+     unwanted tags or inject additional ones. These correspond to the two
+     phases of processing.
++
++    Args:
++        keep_change_id (bool): Keep the Change-Id tag
++        insert_base_commit (bool): True to add the base commit to the end
+     """
+-    def __init__(self, series, is_log=False, keep_change_id=False):
++    def __init__(self, series, is_log=False, keep_change_id=False,
++                 insert_base_commit=False):
+         self.skip_blank = False          # True to skip a single blank line
+         self.found_test = False          # Found a TEST= line
+         self.lines_after_test = 0        # Number of lines found after TEST=
+@@ -103,6 +108,7 @@ class PatchStream:
+         self.recent_quoted = collections.deque([], 5)
+         self.recent_unquoted = queue.Queue()
+         self.was_quoted = None
++        self.insert_base_commit = insert_base_commit
+ 
+     @staticmethod
+     def process_text(text, is_comment=False):
+@@ -658,6 +664,13 @@ class PatchStream:
+                     outfd.write(line + '\n')
+                     self.blank_count = 0
+         self.finalise()
++        if self.insert_base_commit:
++            if self.series.base_commit:
++                print(f'base-commit: {self.series.base_commit.hash}',
++                      file=outfd)
++            if self.series.branch:
++                print(f'branch: {self.series.branch}', file=outfd)
++
+ 
+ def insert_tags(msg, tags_to_emit):
+     """Add extra tags to a commit message
+@@ -778,7 +791,8 @@ def get_metadata_for_test(text):
+     pst.finalise()
+     return series
+ 
+-def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
++def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False,
++              insert_base_commit=False):
+     """Fix up a patch file, by adding/removing as required.
+ 
+     We remove our tags from the patch file, insert changes lists, etc.
+@@ -792,6 +806,7 @@ def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
+         series (Series): Series information about this patch set
+         cmt (Commit): Commit object for this patch file
+         keep_change_id (bool): Keep the Change-Id tag.
++        insert_base_commit (bool): True to add the base commit to the end
+ 
+     Return:
+         list: A list of errors, each str, or [] if all ok.
+@@ -799,7 +814,8 @@ def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
+     handle, tmpname = tempfile.mkstemp()
+     outfd = os.fdopen(handle, 'w', encoding='utf-8')
+     infd = open(fname, 'r', encoding='utf-8')
+-    pst = PatchStream(series, keep_change_id=keep_change_id)
++    pst = PatchStream(series, keep_change_id=keep_change_id,
++                      insert_base_commit=insert_base_commit)
+     pst.commit = cmt
+     pst.process_stream(infd, outfd)
+     infd.close()
+@@ -811,7 +827,7 @@ def fix_patch(backup_dir, fname, series, cmt, keep_change_id=False):
+     shutil.move(tmpname, fname)
+     return cmt.warn
+ 
+-def fix_patches(series, fnames, keep_change_id=False):
++def fix_patches(series, fnames, keep_change_id=False, insert_base_commit=False):
+     """Fix up a list of patches identified by filenames
+ 
+     The patch files are processed in place, and overwritten.
+@@ -820,6 +836,7 @@ def fix_patches(series, fnames, keep_change_id=False):
+         series (Series): The Series object
+         fnames (:type: list of str): List of patch files to process
+         keep_change_id (bool): Keep the Change-Id tag.
++        insert_base_commit (bool): True to add the base commit to the end
+     """
+     # Current workflow creates patches, so we shouldn't need a backup
+     backup_dir = None  #tempfile.mkdtemp('clean-patch')
+@@ -829,7 +846,8 @@ def fix_patches(series, fnames, keep_change_id=False):
+         cmt.patch = fname
+         cmt.count = count
+         result = fix_patch(backup_dir, fname, series, cmt,
+-                           keep_change_id=keep_change_id)
++                           keep_change_id=keep_change_id,
++                           insert_base_commit=insert_base_commit)
+         if result:
+             print('%d warning%s for %s:' %
+                   (len(result), 's' if len(result) > 1 else '', fname))
 -- 
 2.43.0
 
-base-commit: 794124b3258831768a6b8ef069253374b877d59a
+base-commit: fa90deeb571c463b979f83c52fa9e954044dc1d2
 branch: pat
