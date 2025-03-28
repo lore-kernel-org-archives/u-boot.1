@@ -4,74 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26F6AC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:42:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E64DC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:42:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A7118144A;
-	Fri, 28 Mar 2025 17:42:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 2465081951;
+	Fri, 28 Mar 2025 17:42:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="IshAw4yL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fYm1IO/j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7974081951; Fri, 28 Mar 2025 17:41:59 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7518C810EA; Fri, 28 Mar 2025 17:42:15 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DF97810EA
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:41:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACCB881E5B
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:42:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6182c41fd1=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52SEXRld009389;
- Fri, 28 Mar 2025 17:41:53 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=dV49cV/WXt5eqDKn/2Efor
- el9RLENEp9xII5UMhSi3U=; b=IshAw4yLjnvvhs+8Jmh2+m529n+xjXKF+1H9P8
- 2uWmKGgaTJtOsJ4RCN74N4PfX0+s9DNSaBvJsloO7hXPHU16Iq+27zzcmQSkOH5N
- sUFi0EMDp4vvuH9m02pRfaFwYhK6TGXPLCJPwFtOw41Z+Q6cr1TV0b8w+4xIPCb3
- 6QiuFzTOtjKBE8DH8M07sHgoTQMjmRMVlTi4auXqGFOVcvCHACcGuiXBoKsMVb2J
- ji9ruC1VOFaY1Ji6mrQhOxv/A+KgLLaIVffezig2me+yHhrc+GVB0W8hVdG4AyYt
- CDk3Rx8AYT6tRLUCe1J218tVUjKpDZafYjI0g/y4ULXiBLWQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45me34tf17-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 28 Mar 2025 17:41:52 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9A4054007A;
- Fri, 28 Mar 2025 17:40:27 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 823749026BC;
- Fri, 28 Mar 2025 17:31:19 +0100 (CET)
-Received: from localhost (10.252.14.194) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 28 Mar
- 2025 17:31:19 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH] dtc: introduce label relative path references
-Date: Fri, 28 Mar 2025 17:31:15 +0100
-Message-ID: <20250328163115.642347-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3f9a7cbc8f1so702718b6e.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:42:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1743180130; x=1743784930; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=S4yFTMxDVvy62cPI3eLWl4aijzlDObieEoLnsgVUbCs=;
+ b=fYm1IO/jSod+3DjHcItPNbaUw5vPg+15RB5wVhWnnU8atliVlB4sKnTTGKjtowQsvn
+ TmIMzcgQg75QFXbsUuhxUqe49lmIpTmJ6Uzbwn2a8Yq07nc+S4gUjjq3JhszIXa4KM4Q
+ 89wpNM+kZAdhTYV0BvM0Om8ZXdTLHrUjgnmZI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743180130; x=1743784930;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S4yFTMxDVvy62cPI3eLWl4aijzlDObieEoLnsgVUbCs=;
+ b=Dya77cxtIUI2Yg11Iz7rzSEACX0d7KqHrxO51Vq8sBHfJurmVobn90KsIwFPLPecSe
+ Ict+GkO1uxx8ZPZshxfswzHM1FflejONZx/285sJ+plD9VR7KiN+DJxkyZ61oDD7wjwR
+ 0vHtcMVwwR/PiUyP/XtG5J4vBnr98lQIH3HM5fptRdiOsh8tRS9e7ZZcrb+MnwEnN13C
+ egM4QRXJAQQz7w23EU8WXKdpwgeb19DGH5cJykuEYtPAFTPqwcm9Z6xhstXLV5poyN+F
+ yd5frYMxM3z53DflOogNesQXIMlPCexMZqAt45PSkSxHI4kAnicjaFl7Xed0/dLIm7IM
+ Wu7A==
+X-Gm-Message-State: AOJu0YxEONfxibn6RJOnPeswn24nXNauv0kUCu4d0BTQSUF/OIh43ovO
+ ElsIFqn98aPpXUeMReW8Pva+odAmaN5S6aHN0NCVaMcTCMDyKjZudlaVUG+zQ8w=
+X-Gm-Gg: ASbGncsHMPaMLDuLVXcxW1gbIRzC5kducKjZPofzTvnYraC9pj4Wsq8zcmPO0sYdPvz
+ IfzpQaNhsOyQVjwoiwmb9OhcGNw+0wvU8uZhtW+8rbSDqeUnaYyO5UPxt+RRFQFk7/TzA3cIego
+ RXhWZvXN2C9cyvWte2TY9xgteAZVbTmMR2YiPMqg9Mt/UEjAOPGkMpeLrUOpTSUfAvsn1NZpDoW
+ fg7GcIhz+fePP10fLgfP7zZHciCE6KDu3plDU5Cyx8J2ir8S0k1boz/T4eC1Xo6I2UgPvzy/DgJ
+ ADO99l8SphvHUhWs9VWyh1AU5Ub9z7+YYfujsK0KI8wCcY5sSKfxX45EliZyjHgyzoCkIF6CJNv
+ FytLoOw==
+X-Google-Smtp-Source: AGHT+IHKXMJk9uRXgJSm1BijQqN6wnx7jlcwupzolXILLcYIjXX5vwZtsuUknF+IXlJNT6GztBG0GQ==
+X-Received: by 2002:a05:6808:448e:b0:3f6:7fc4:a0b5 with SMTP id
+ 5614622812f47-3fefa54e0ecmr4617599b6e.18.1743180130466; 
+ Fri, 28 Mar 2025 09:42:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6028461b46csm387252eaf.34.2025.03.28.09.42.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Mar 2025 09:42:09 -0700 (PDT)
+Date: Fri, 28 Mar 2025 10:42:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/52] expo: Various features and improvements
+Message-ID: <20250328164206.GE93000@bill-the-cat>
+References: <20250319145512.2391122-1-sjg@chromium.org>
+ <20250319145742.GI2640854@bill-the-cat>
+ <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
+ <20250320142121.GQ2640854@bill-the-cat>
+ <CAFLszTgsMu1ZtK1Z-u6cmH6k__0Qhn+G2SPh8w_NdrihLkQ7jA@mail.gmail.com>
+ <20250325162420.GI93000@bill-the-cat>
+ <CAFLszTj49W-Vk_4xpmvtyFH6AH1QAZTLRM7x1k-Bhz7a3uEuBQ@mail.gmail.com>
+ <20250327141742.GP93000@bill-the-cat>
+ <CAFLszThJqyEQLvngTdxwqa-fsox5jjHBMYVryo6vPA7k_6jhUA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.14.194]
-X-ClientProxiedBy: SAFCAS1NODE2.st.com (10.75.90.13) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-28_08,2025-03-27_02,2024-11-22_01
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="7Jc2ER5Isp4swimH"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThJqyEQLvngTdxwqa-fsox5jjHBMYVryo6vPA7k_6jhUA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,172 +124,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since introduction of OF_UPSTREAM flag, U-Boot's dtc must be able
-to compile Kernel's device tree.
 
-Since kernel commit 7de129f5389b ("ARM: dts: stm32: stm32mp151a-prtt1l:
-Fix QSPI configuration"), label relative path references has been
-introduced. These label relative path references is not supported
-by current U-Boot dtc version 1.5.0: (see mailing list discussion [1]).
+--7Jc2ER5Isp4swimH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-In order to support such label relative patch references
-adds following commit from upstream DTC tree:
+On Fri, Mar 28, 2025 at 07:05:35AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 27 Mar 2025 at 08:17, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Mar 27, 2025 at 07:36:02AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 25 Mar 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Mar 21, 2025 at 07:38:45PM +0100, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Thu, 20 Mar 2025 at 15:21, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
+> > > > > > > >
+> > > > > > > > > This series collects together some new features for expo =
+to make it more
+> > > > > > > > > useful for boot menus:
+> > > > > > > > >
+> > > > > > > > > - measurement and display of multi-line text objects
+> > > > > > > > > - internal alignment for objects (e.g. centred text)
+> > > > > > > > > - editable strings in text fields
+> > > > > > > > > - new 'box' object to draw a rectangle
+> > > > > > > > > - highlighting of menu items, rather than just relying on=
+ a pointer
+> > > > > > > > >
+> > > > > > > > > Expo's boot menu is restructured so that it is possible t=
+o iterate
+> > > > > > > > > through various bootdevs and update the menu as new ones =
+are found. This
+> > > > > > > > > is more in keeping with how bootstd works.
+> > > > > > > > >
+> > > > > > > > > A new textedit object is added, intended to provide a sim=
+ple text
+> > > > > > > > > editor. Future work will complete this.
+> > > > > > > > >
+> > > > > > > > > With this series the boot menu has a better layout and ap=
+pearance.
+> > > > > > > > >
+> > > > > > > > >
+> > > > > > > > > Simon Glass (52):
+> > > > > > > >
+> > > > > > > > I see you haven't internalized the "don't post massive seri=
+es" feedback
+> > > > > > > > yet. Please, stop posting massive patch series. Figure out =
+how to
+> > > > > > > > logically break things down in to smaller chunks that can be
+> > > > > > > > meaningfully reviewed.
+> > > > > > >
+> > > > > > > I could split this into two series of ~25 patches, perhaps. W=
+ould that be OK?
+> > > > > > >
+> > > > > > > I believe no one else is using expo yet, apart from postmarke=
+tOS,
+> > > > > > > except the trivial case of 'bootflow scan -m' but I'm hoping =
+that will
+> > > > > > > change in the future. I believe that Linaro is mostly encoura=
+ging EFI
+> > > > > > > bootmgr and the text-based menu. That could be converted to u=
+se expo
+> > > > > > > but I doubt anyone has looked into that, particularly as grub=
+ is being
+> > > > > > > pushed as well. I did look at converting the existing menu co=
+de a year
+> > > > > > > or two ago, but it seemed better to eventually deprecate it.
+> > > > > > >
+> > > > > > > Also, there is a following series which I split out and will =
+post
+> > > > > > > separately, but not for a while as I have a lot outstanding.
+> > > > > > >
+> > > > > >
+> > > > > > It would make sense to split expo out to its own series as ther=
+e's not
+> > > > > > likely to be any feedback there. All of the other parts of the =
+series
+> > > > > > already have something else in their subject and that would be =
+logical
+> > > > > > places to split this up more and then assign to the appropriate
+> > > > > > custodian. Thanks.
+> > > > >
+> > > > > This is the expo series and it only has expo patches, so I believ=
+e we
+> > > > > are OK there.
+> > > > >
+> > > > > The bootstd series is small and its own thing.
+> > > >
+> > > > OK.
+> > > >
+> > > > > I can split up the strim() / test series,
+> > > >
+> > > > OK.
+> > > >
+> > > > > but I'm still unsure what
+> > > > > you are asking for with respect to code which is not yet used. I =
+can't
+> > > > > reasonably do all of a) send code only when it is needed by later
+> > > > > patches in the series and b) keep series sizes small and c) keep
+> > > > > series related to a single topic.
+> > > >
+> > > > I don't see why you can't do that. It is in fact really hard to rev=
+iew
+> > > > how useful some library functions you write without seeing how they=
+'re
+> > > > used and if in turn we should be doing something different. You mig=
+ht
+> > > > need to defer or break out as it's own some refactoring changes in =
+order
+> > > > to meet 'b' above. However "here is a thing" and "here's using a th=
+ing"
+> > > > are still a single topic.
+> > >
+> > > You could just review the code itself, perhaps, rather than worrying
+> > > whether it will never be used? For me, creating and maintaining a
+> > > series through acceptance into your tree is still a lot of effort,
+> > > unfortunately.
+> >
+> > No, that's a no-go. Reviewing a library without knowing how it's going
+> > to be used is not effective.
+> >
+> > > While on that topic, it seems that the sunxi and rpi series have still
+> > > not been applied to your tree. It would really help to see some
+> > > movement on those after all these months.
+> >
+> > I provided a detailed explanation of what's still wrong with the sunxi
+> > series.
+>=20
+> From what I recall this is that you want Heinrich to do a workaround
 
-commit 651410e54cb9 ("util: introduce xstrndup helper")
-commit ec7986e682cf ("dtc: introduce label relative path references")
+Please don't go with what you recall. Please read:
+https://lore.kernel.org/u-boot/20250310155336.GJ2640854@bill-the-cat/
 
-[1] https://lore.kernel.org/all/20250115144428.GZ3476@bill-the-cat/T/
+Which is what I promised to do.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
----
+> with bootmgr and bootstd, but you don't want to disable bootmgr from
+> sunxi. In either case, there's nothing I can do here. The series is
+> probably getting more and more out of date anyway. Andre might pick it
+> up, but I doubt it, given all the arguments about it.
+>=20
+> > The Pi maintainers are still actively working their way through
+> > things.
+>=20
+> Is there any ETA?
 
- scripts/dtc/dtc-lexer.l  |  2 +-
- scripts/dtc/dtc-parser.y | 13 +++++++++++++
- scripts/dtc/livetree.c   | 33 ++++++++++++++++++++++++++++++---
- scripts/dtc/util.c       | 11 +++++++++++
- scripts/dtc/util.h       |  1 +
- 5 files changed, 56 insertions(+), 4 deletions(-)
+I have pinged them about it.
 
-diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
-index d3694d6cf20..d34e1b04220 100644
---- a/scripts/dtc/dtc-lexer.l
-+++ b/scripts/dtc/dtc-lexer.l
-@@ -215,7 +215,7 @@ static void PRINTF(1, 2) lexical_error(const char *fmt, ...);
- 			return DT_REF;
- 		}
- 
--<*>"&{/"{PATHCHAR}*\}	{	/* new-style path reference */
-+<*>"&{"{PATHCHAR}*\}	{	/* new-style path reference */
- 			yytext[yyleng-1] = '\0';
- 			DPRINT("Ref: %s\n", yytext+2);
- 			yylval.labelref = xstrdup(yytext+2);
-diff --git a/scripts/dtc/dtc-parser.y b/scripts/dtc/dtc-parser.y
-index 011a5b25539..b3b9c83873d 100644
---- a/scripts/dtc/dtc-parser.y
-+++ b/scripts/dtc/dtc-parser.y
-@@ -34,6 +34,12 @@ extern void yyerror(char const *s);
- 
- extern struct dt_info *parser_output;
- extern bool treesource_error;
-+
-+static bool is_ref_relative(const char *ref)
-+{
-+	return ref[0] != '/' && strchr(&ref[1], '/');
-+}
-+
- %}
- 
- %union {
-@@ -176,12 +182,17 @@ devicetree:
- 			 */
- 			if (!($<flags>-1 & DTSF_PLUGIN))
- 				ERROR(&@2, "Label or path %s not found", $1);
-+			else if (is_ref_relative($1))
-+				ERROR(&@2, "Label-relative reference %s not supported in plugin", $1);
- 			$$ = add_orphan_node(name_node(build_node(NULL, NULL), ""), $2, $1);
- 		}
- 	| devicetree DT_LABEL DT_REF nodedef
- 		{
- 			struct node *target = get_node_by_ref($1, $3);
- 
-+			if (($<flags>-1 & DTSF_PLUGIN) && is_ref_relative($3))
-+				ERROR(&@2, "Label-relative reference %s not supported in plugin", $3);
-+
- 			if (target) {
- 				add_label(&target->labels, $2);
- 				merge_nodes(target, $4);
-@@ -197,6 +208,8 @@ devicetree:
- 			 * so $-1 is what we want (plugindecl)
- 			 */
- 			if ($<flags>-1 & DTSF_PLUGIN) {
-+				if (is_ref_relative($2))
-+					ERROR(&@2, "Label-relative reference %s not supported in plugin", $2);
- 				add_orphan_node($1, $3, $2);
- 			} else {
- 				struct node *target = get_node_by_ref($1, $2);
-diff --git a/scripts/dtc/livetree.c b/scripts/dtc/livetree.c
-index ba06ef348be..4cfc2adccdd 100644
---- a/scripts/dtc/livetree.c
-+++ b/scripts/dtc/livetree.c
-@@ -583,12 +583,39 @@ struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
- 
- struct node *get_node_by_ref(struct node *tree, const char *ref)
- {
-+	struct node *target = tree;
-+	const char *label = NULL, *path = NULL;
-+
- 	if (streq(ref, "/"))
- 		return tree;
--	else if (ref[0] == '/')
--		return get_node_by_path(tree, ref);
-+
-+	if (ref[0] == '/')
-+		path = ref;
- 	else
--		return get_node_by_label(tree, ref);
-+		label = ref;
-+
-+	if (label) {
-+		const char *slash = strchr(label, '/');
-+		char *buf = NULL;
-+
-+		if (slash) {
-+			buf = xstrndup(label, slash - label);
-+			label = buf;
-+			path = slash + 1;
-+		}
-+
-+		target = get_node_by_label(tree, label);
-+
-+		free(buf);
-+
-+		if (!target)
-+			return NULL;
-+	}
-+
-+	if (path)
-+		target = get_node_by_path(target, path);
-+
-+	return target;
- }
- 
- cell_t get_node_phandle(struct node *root, struct node *node)
-diff --git a/scripts/dtc/util.c b/scripts/dtc/util.c
-index 23334d39bb6..25d4db1e8c2 100644
---- a/scripts/dtc/util.c
-+++ b/scripts/dtc/util.c
-@@ -46,6 +46,17 @@ char *xstrdup(const char *s)
- 	return d;
- }
- 
-+char *xstrndup(const char *s, size_t n)
-+{
-+	size_t len = strnlen(s, n) + 1;
-+	char *d = xmalloc(len);
-+
-+	memcpy(d, s, len - 1);
-+	d[len - 1] = '\0';
-+
-+	return d;
-+}
-+
- /* based in part from (3) vsnprintf */
- int xasprintf(char **strp, const char *fmt, ...)
- {
-diff --git a/scripts/dtc/util.h b/scripts/dtc/util.h
-index 211d584435d..23e32962385 100644
---- a/scripts/dtc/util.h
-+++ b/scripts/dtc/util.h
-@@ -70,6 +70,7 @@ static inline void *xrealloc(void *p, size_t len)
- }
- 
- extern char *xstrdup(const char *s);
-+extern char *xstrndup(const char *s, size_t len);
- 
- extern int PRINTF(2, 3) xasprintf(char **strp, const char *fmt, ...);
- extern char *join_path(const char *path, const char *name);
--- 
-2.25.1
+--=20
+Tom
 
+--7Jc2ER5Isp4swimH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfm0VoACgkQFHw5/5Y0
+tyzH/gv/aAWMqb+RLzvPN41junMnBSPr7VrFWkPyDBWf4hHVPdjkjFQlyupcHB4x
+nIphWMasCtYgKJ0mJqoHLVx3ijZIXqDlIAHbjsmn+DM70Oa2iYkaK8l0BMR3q4+R
+tDNzKYd+UkHAcNFaeJvFQSymcUwWnSLFG68QrfpvL854x1oBYB8i6F4XD34ycXeL
+LqxUZpf3waJaeO+PixMxr1SI0YVbbsKPXeoY4DuGQptyFLpnlZsJJ4YL0GDB9Hdx
+1HNjIQSNo8uCN00doK9Txyngvf+rkrWUXPR244MAE/ijKfxrx3bHP80TMDAr13zQ
+8Z7TWpcl7qgWMhcpn7AjYrMeJMmMGLDO8YUSJYI+XTLP2v+zCGrP5fdUJ6b044tI
+efRT92Y9A0bnnuDiUD/O+Z5ev4Okotxkz5O9TqUv5E5WsxbjY3drl2Ccn7GGAwDa
+AAccby9PTWfgbQ/YkgSN/eSvtN0DpYmfaMt6sZ7RLeRdJD/ONQXOC/1usGZ8f3fQ
+NZOw7hCI
+=Gpd2
+-----END PGP SIGNATURE-----
+
+--7Jc2ER5Isp4swimH--
