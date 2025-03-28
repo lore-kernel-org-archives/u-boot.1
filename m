@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B03B3C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 775AFC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FD2781951;
-	Fri, 28 Mar 2025 17:13:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0508981DCC;
+	Fri, 28 Mar 2025 17:14:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ADCCQC6u";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ICqEZdos";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D53B81DCC; Fri, 28 Mar 2025 17:13:29 +0100 (CET)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 835EE8129B; Fri, 28 Mar 2025 16:31:32 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EA998144A
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:13:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C4F1810EA
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:31:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-60288fd4169so319012eaf.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:13:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rmfrfs@gmail.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43ce71582e9so17472275e9.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:31:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743178405; x=1743783205; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Xo3a0sW5/My/tUIz8vkWvT0H+Ad6OKfRLlwPygeRPxs=;
- b=ADCCQC6uN4rbKTXXE4JgOleMuyHi7Hqd435gt+1y22LKHKmIMCzLBDURtPX/zAflcc
- 7eZx9AYYlsfBDS7FhSwiVWtWmfFiEApYd46dLVRcPFriIn50+YjQQzgd1KcI6LBbhN42
- fnv4i6VEK4eD4d9xJZwJZwvfipz5z1wslXlO4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743178405; x=1743783205;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1743175890; x=1743780690; darn=lists.denx.de;
+ h=in-reply-to:references:to:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xo3a0sW5/My/tUIz8vkWvT0H+Ad6OKfRLlwPygeRPxs=;
- b=ikleEdpgtKbgW1w1KThUvsUblivIy5Qf1xz4S25C+X6UguWiqgtlXBOxUNMSoNGVkG
- dmnW+R6e5upErFPc1RublVrcHq4XVkgshY2NsFjBYgFoDWfXxFwD1q3TcdYWloaNSmIk
- JuTZhAnX0t98hXFJu2BNP7SZjWxpMFWBmXNCdrL7U/vPPhQmzA/Q3dRFJ4VkIMSP132N
- qxmV/VLS21N9D4X+gsiJjDsUEehPCfQJTiwDUyx2YBv4pzWXfhKmt/pwLyRy1MVO1WLW
- Vt+rK/jRMMXT/r7Ia8G+ml8WaN+FmEhuTvZxEuYG7YJYVc7rQ/5PBANx0+lON9B6wVTp
- wIAg==
-X-Gm-Message-State: AOJu0YzSAWyY5O58nsXAoBPBSQsj0qtsJ0SDGmBSyYHmuTx/pBXSTQHn
- ZfSsI/+IcpOO2Mt2PtYy83iozuS0j6yvH842TfKK2eJcL/aCTEZr7BldcouSnn4=
-X-Gm-Gg: ASbGncu1uDuKXI5OLgcfgs/ff3P7BfzyBeV1FSRvdTg9LdKRjrMpoA0NojjUmjCjw9K
- msssneuuvfJm9DloCJC+B5SZYBD1VlE4cCIPxKdJz0UUzy7hB75ZEInCJwUJwqrZw0Do6oMpemG
- YGnNmHcer+EttXYj3aC624VfKU2B2w93ROMHdPm+xCG/tXr4OXVZmeRAtsDNq/iqLWUpVpsBEtW
- j4hn7yufoYuzG5VoLIQC5ASVkL51N01B+xWhB8MThTtxpPzB7YGzpJwYZMvFRUD4ck6qy6MghJF
- WokJpNOBQlNrAjLAATwg9/Jqch1xXD5QRDT/7bgyjTcKi/P3k1GkWDOy5HlMIxGa2RXMR3aKXJk
- MO27hSw==
-X-Google-Smtp-Source: AGHT+IEHi1n2hQBORRbfGSjTuSe8jMMxWY7MqXd5RIQcLNAvWau+JTFMJg8Gxi3lymAyn42IQ7K3mg==
-X-Received: by 2002:a05:6820:2bc3:b0:602:7989:85a5 with SMTP id
- 006d021491bc7-60279898cf8mr3472810eaf.7.1743178405073; 
- Fri, 28 Mar 2025 09:13:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60284500a04sm382623eaf.14.2025.03.28.09.13.23
+ bh=w0me0/99Xtr8T7DN6FXjlZtwaMo6pRXHbqrNZnREfjM=;
+ b=ICqEZdossbnHrzkeZGWq8DPy/P/n5+TfbjuQBB3JRwXTGi4cLCMvB6PQ/XU6queu37
+ 1Hckip/uR7oME5htUqXUocdhUcoXLzQW9PFDmpw57WVaWRQsm0nU6M9Grcq067+KbwvJ
+ ljGdybaqmvTv++ynY8VLCM7DtCErKz0POgITnSrXGU01ul9QRC1pR9HtPNJZt0DBjqQy
+ EwsPKd8S0fPT0llPtxS/WwopnZJD9Y5mBGjP7iqcLKKfkQNrx/iIIVKRcSAtsWVD5NZt
+ v+85N+9QF0StTL+Bd+7Yh5gicIEQYJ3u5cw+c8Yrn7BsHjPzrQNNWMfqbxN/WmA7N+X4
+ jGwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743175890; x=1743780690;
+ h=in-reply-to:references:to:subject:cc:message-id:date
+ :content-transfer-encoding:mime-version:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=w0me0/99Xtr8T7DN6FXjlZtwaMo6pRXHbqrNZnREfjM=;
+ b=ipwe573c5c8hLC0RLyCZ1zDLJAGB5ryIUMP7Jm/lXt86di1jmw5EYl29pXGAcZ2G3k
+ nBS5K2D84g9p6o+KUq4UtReWtQNeb4MSVL+b7xjz9pKL8bFG/+Lx9lVGWAsf6vVJ/1xB
+ MzmCUsZRDXLUfy0fwIJSBqiQMW1wcfJtNpzTCGzsv3iyQ+H6W4V6VUtn5Cywu8GF16p/
+ a0s4d9RtCU/uYpNlCHnSyzjdxqM4BQFkobnA4MeubmtApcRBRDkx1RNN9QAApEb2j1TK
+ 2blG7X2URuEEN/j6/u23THUjQdWLXLylX1lpcSLIRLe8FaBVYW+bExHsNHSQp8Ntezkh
+ Xf5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKGL5NjkQeeAqjW/4trsMflgwMluJKdMLKfGbS4geqw1U30/bhTY0oDdcw172n1yQm7yb2eIA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMS4J2HOGcaQovmbWaVe3Gc0k3Xf0MIp/ObwLld6o1DoiW87Q7
+ vCFff+RwJIAHwup9K/ACtlPP+eQ6IYKvFQZSDLgAa3NiknpX5X4SkmWlIw==
+X-Gm-Gg: ASbGncsJh2oPMpKXWhVV9KeftFVS/+BchhcbD2F7rRfI2z+a2iwjuXDCY2e9TJpxswj
+ s7afxZ6OgJhEbg0e9D1HTtMh6cSR/Fhrr08MgzCFlMlqCl0LgCDJsxV+I4qHj7TDCMj+VP0CTEA
+ Omad8G/72ZmRLUClr2YDeYLDm8HuEVf9nPfh5Be3JWO7ooo7sy67mKm8ICPW6NF9GNGo509yhUs
+ 8mT7RndrUi/4v0nFlPxypctZRgybQd/K/55BrZztxqqbH75l2y9VLmz4a1QI5pz98YpXzzqe8Xa
+ VX+5h3bnW0lFj7JTFjG3Tp6h3vtCIAzs5mcgZGPZFb0lJ2L+7LQjkhednpWRPlYLm/q0mQ==
+X-Google-Smtp-Source: AGHT+IEkegGQgCaPK84hSWMh6tLT8vkz9dY92V/tEHJ3sqWO5MTxViaRPVK4pQXAsheA91H6z8W+wg==
+X-Received: by 2002:a05:6000:1a8e:b0:391:39bd:a361 with SMTP id
+ ffacd0b85a97d-39ad1746a82mr7012655f8f.18.1743175889392; 
+ Fri, 28 Mar 2025 08:31:29 -0700 (PDT)
+Received: from localhost (a109-49-32-45.cpe.netcabo.pt. [109.49.32.45])
+ by smtp.gmail.com with UTF8SMTPSA id
+ ffacd0b85a97d-39c0b6588e9sm3037038f8f.14.2025.03.28.08.31.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 09:13:24 -0700 (PDT)
-Date: Fri, 28 Mar 2025 10:13:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: Re: [PATCH v3 29/31] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
-Message-ID: <20250328161322.GA93000@bill-the-cat>
-References: <20250328153522.3555472-1-sjg@chromium.org>
- <20250328153522.3555472-30-sjg@chromium.org>
- <CAEfUkUKa-_=zOry+0-EnS=e8tEq7=nooDDt6Yr_M5vx31w+JUA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zIdxKZfd7rzD24xm"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkUKa-_=zOry+0-EnS=e8tEq7=nooDDt6Yr_M5vx31w+JUA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ Fri, 28 Mar 2025 08:31:28 -0700 (PDT)
+From: Rui Miguel Silva <rmfrfs@gmail.com>
+X-Google-Original-From: "Rui Miguel Silva" <rui.silva@linaro.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 28 Mar 2025 15:31:27 +0000
+Message-Id: <D8S0A3LI0X3C.2GMJQCI29FL36@linaro.com>
+Cc: <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>, "Tom Rini"
+ <trini@konsulko.com>
+Subject: Re: [PATCH 2/2] power: regulator: add qcom-usb-vbus
+To: "Caleb Connolly" <caleb.connolly@linaro.org>, "Rui Miguel Silva"
+ <rui.silva@linaro.org>, "Neil Armstrong" <neil.armstrong@linaro.org>,
+ "Jaehoon Chung" <jh80.chung@samsung.com>
+References: <20250227094911.497219-1-rui.silva@linaro.org>
+ <20250227094911.497219-3-rui.silva@linaro.org>
+ <e0744b83-8b93-49d9-bf4c-bf09aeb08294@linaro.org>
+In-Reply-To: <e0744b83-8b93-49d9-bf4c-bf09aeb08294@linaro.org>
+X-Mailman-Approved-At: Fri, 28 Mar 2025 17:14:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,76 +104,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hey Caleb,
+On Thu Mar 20, 2025 at 5:34 PM WET, Caleb Connolly wrote:
 
---zIdxKZfd7rzD24xm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+>
+> Jaehoon: do you mind if I just take these both through the Qualcomm tree?
+>
+> If not then feel free to pick this one up
+>
+> Acked-by: Caleb Connolly <caleb.connolly@linaro.org>
 
-On Fri, Mar 28, 2025 at 11:50:14AM -0400, Raymond Mao wrote:
-> Hi Simon,
->=20
->=20
-> On Fri, 28 Mar 2025 at 11:36, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The logic of this has become too confusing.
-> >
-> > The primary issue with the patch is that U-Boot needs to set up a
-> > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > phases can then use that bloblist.
-> >
-> > But the first phase of U-Boot cannot assume that one exists.
-> >
-> > Reverting this commit seems like a better starting point for getting
-> > things working for all use-cases.
-> >
-> > Note: The work to tidy this up is apparently underway. For this series,
-> > a revert is the easiest path.
-> >
-> > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> >
-> > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=3Df5ZKXNniOfV_-vFryq1Gn7Q=
-Z5hKU8Wjo8igw@mail.gmail.com/
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
->=20
-> Is this same as something we discussed in the thread below?
-> https://lore.kernel.org/u-boot/20250205015606.2686149-29-sjg@chromium.org/
->=20
-> I am a bit confused since I think we had agreed that it should not be rev=
-erted.
+Maybe it is easier/faster for you to pick this ones, one month passed.
+Thanks in advance.
 
-Yes, it is extremely frustrating to have posted both this:
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D450425&state=3D*
-as the first pass at doing what was agreed on the path forward while
-also posting this thread which cannot be against either next nor next
-with the above applied and so isn't worth anyone elses time. I suspect
-this thread also includes various rockchip patches that were requested
-to be broken out and posted by themselves instead.
+Cheers,
+   Rui
 
---=20
-Tom
+>
+> On 2/27/25 09:45, Rui Miguel Silva wrote:
+>> Add regulator driver that allow some Qualcomm PMIC to
+>> feed VBUS output to peripherals that are connected.
+>>=20
+>> Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+>> ---
+>>   drivers/power/regulator/Kconfig               |   7 ++
+>>   drivers/power/regulator/Makefile              |   1 +
+>>   .../power/regulator/qcom_usb_vbus_regulator.c | 111 ++++++++++++++++++
+>>   3 files changed, 119 insertions(+)
+>>   create mode 100644 drivers/power/regulator/qcom_usb_vbus_regulator.c
+>>=20
+>> diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/K=
+config
+>> index 958f337c7e73..558133e09bf8 100644
+>> --- a/drivers/power/regulator/Kconfig
+>> +++ b/drivers/power/regulator/Kconfig
+>> @@ -224,6 +224,13 @@ config DM_REGULATOR_QCOM_RPMH
+>>   	  implements get/set api for a limited set of regulators used
+>>   	  by u-boot.
+>>  =20
+>> +config DM_REGULATOR_QCOM_USB_VBUS
+>> +	bool "Enable driver model for Qualcomm USB vbus regulator"
+>> +	depends on DM_REGULATOR
+>> +	---help---
+>> +	  Enable support for the Qualcomm USB Vbus regulator. The driver
+>> +	  implements get/set api for the regulator to be used by u-boot.
+>> +
+>>   config SPL_DM_REGULATOR_GPIO
+>>   	bool "Enable Driver Model for GPIO REGULATOR in SPL"
+>>   	depends on DM_REGULATOR_GPIO && SPL_GPIO
+>> diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/=
+Makefile
+>> index ca6c89d13b5c..a4191b9302b1 100644
+>> --- a/drivers/power/regulator/Makefile
+>> +++ b/drivers/power/regulator/Makefile
+>> @@ -22,6 +22,7 @@ obj-$(CONFIG_$(XPL_)DM_REGULATOR_COMMON) +=3D regulato=
+r_common.o
+>>   obj-$(CONFIG_$(XPL_)DM_REGULATOR_FIXED) +=3D fixed.o
+>>   obj-$(CONFIG_$(XPL_)DM_REGULATOR_GPIO) +=3D gpio-regulator.o
+>>   obj-$(CONFIG_DM_REGULATOR_QCOM_RPMH) +=3D qcom-rpmh-regulator.o
+>> +obj-$(CONFIG_DM_REGULATOR_QCOM_USB_VBUS) +=3D qcom_usb_vbus_regulator.o
+>>   obj-$(CONFIG_$(PHASE_)REGULATOR_RK8XX) +=3D rk8xx.o
+>>   obj-$(CONFIG_DM_REGULATOR_S2MPS11) +=3D s2mps11_regulator.o
+>>   obj-$(CONFIG_REGULATOR_S5M8767) +=3D s5m8767.o
+>> diff --git a/drivers/power/regulator/qcom_usb_vbus_regulator.c b/drivers=
+/power/regulator/qcom_usb_vbus_regulator.c
+>> new file mode 100644
+>> index 000000000000..2d58ef5e111e
+>> --- /dev/null
+>> +++ b/drivers/power/regulator/qcom_usb_vbus_regulator.c
+>> @@ -0,0 +1,111 @@
+>> +// SPDX-License-Identifier: BSD-3-Clause
+>> +/*
+>> + * Copyright (c) 2025, Linaro Limited
+>> + */
+>> +#define pr_fmt(fmt) "qcom_usb_vbus: " fmt
+>> +
+>> +#include <bitfield.h>
+>> +#include <errno.h>
+>> +#include <dm.h>
+>> +#include <fdtdec.h>
+>> +#include <log.h>
+>> +#include <asm/gpio.h>
+>> +#include <linux/bitops.h>
+>> +#include <linux/printk.h>
+>> +#include <power/pmic.h>
+>> +#include <power/regulator.h>
+>> +
+>> +#define CMD_OTG				0x50
+>> +#define OTG_EN				BIT(0)
+>> +// The 0 bit in this register's bit field is undocumented
+>> +#define OTG_CFG				0x56
+>> +#define OTG_EN_SRC_CFG			BIT(1)
+>> +
+>> +struct qcom_usb_vbus_priv {
+>> +	phys_addr_t base;
+>> +};
+>> +
+>> +static int qcom_usb_vbus_regulator_of_to_plat(struct udevice *dev)
+>> +{
+>> +	struct qcom_usb_vbus_priv *priv =3D dev_get_priv(dev);
+>> +
+>> +	priv->base =3D dev_read_addr(dev);
+>> +	if (priv->base =3D=3D FDT_ADDR_T_NONE)
+>> +		return -EINVAL;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int qcom_usb_vbus_regulator_get_enable(struct udevice *dev)
+>> +{
+>> +	struct qcom_usb_vbus_priv *priv =3D dev_get_priv(dev);
+>> +	int otg_en_reg =3D priv->base + CMD_OTG;
+>> +	int ret;
+>> +
+>> +	ret =3D pmic_reg_read(dev->parent, otg_en_reg);
+>> +	if (ret < 0)
+>> +		log_err("failed to read usb vbus: %d\n", ret);
+>> +	else
+>> +		ret &=3D OTG_EN;
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static int qcom_usb_vbus_regulator_set_enable(struct udevice *dev, bool=
+ enable)
+>> +{
+>> +	struct qcom_usb_vbus_priv *priv =3D dev_get_priv(dev);
+>> +	int otg_en_reg =3D priv->base + CMD_OTG;
+>> +	int ret;
+>> +
+>> +	if (enable) {
+>> +		ret =3D pmic_clrsetbits(dev->parent, otg_en_reg, 0, OTG_EN);
+>> +		if (ret < 0) {
+>> +			log_err("error enabling: %d\n", ret);
+>> +			return ret;
+>> +		}
+>> +	} else {
+>> +		ret =3D pmic_clrsetbits(dev->parent, otg_en_reg, OTG_EN, 0);
+>> +		if (ret < 0) {
+>> +			log_err("error disabling: %d\n", ret);
+>> +			return ret;
+>> +		}
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int qcom_usb_vbus_regulator_probe(struct udevice *dev)
+>> +{
+>> +	struct qcom_usb_vbus_priv *priv =3D dev_get_priv(dev);
+>> +	int otg_cfg_reg =3D priv->base + OTG_CFG;
+>> +	int ret;
+>> +
+>> +	/* Disable HW logic for VBUS enable */
+>> +	ret =3D pmic_clrsetbits(dev->parent, otg_cfg_reg, OTG_EN_SRC_CFG, 0);
+>> +	if (ret < 0) {
+>> +		log_err("error setting EN_SRC_CFG: %d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const struct dm_regulator_ops qcom_usb_vbus_regulator_ops =3D {
+>> +	.get_enable =3D qcom_usb_vbus_regulator_get_enable,
+>> +	.set_enable =3D qcom_usb_vbus_regulator_set_enable,
+>> +};
+>> +
+>> +static const struct udevice_id qcom_usb_vbus_regulator_ids[] =3D {
+>> +	{ .compatible =3D "qcom,pm8150b-vbus-reg"},
+>> +	{ },
+>> +};
+>> +
+>> +U_BOOT_DRIVER(qcom_usb_vbus_regulator) =3D {
+>> +	.name =3D "qcom-usb-vbus-regulator",
+>> +	.id =3D UCLASS_REGULATOR,
+>> +	.of_match =3D qcom_usb_vbus_regulator_ids,
+>> +	.of_to_plat =3D qcom_usb_vbus_regulator_of_to_plat,
+>> +	.ops =3D &qcom_usb_vbus_regulator_ops,
+>> +	.probe =3D qcom_usb_vbus_regulator_probe,
+>> +	.priv_auto =3D sizeof(struct qcom_usb_vbus_priv),
+>> +};
+>
+> --=20
+> Caleb (they/them)
 
---zIdxKZfd7rzD24xm
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmyqIACgkQFHw5/5Y0
-tyx3rgwAlTfhBRf8MZEBjB1WdBGYYjvJKgFuoXmEPNA5gYhNna82WrzjNXEQ7WSx
-2I6K1hbsf03pG3GWS/V6lwXyaekMb2Fzm/VqmcrDb58vCbAACZJbBKMOMS8wYpOC
-pghTiDiCxzlXESZni7n3d1f8RB2DuAzM4qTEY0ix3/2T9Dp8bsxyNU9/+DaCuFT/
-+JHanVG3BHJelYFM0q3mLWAxsj9sZBPKE7ci2Rl9K96Iw3pkZVzcCOpZ1Vw8SLg2
-0vdEmp7/7VcD6DGuej6GjU+6NngfuwruroNkhNaKEcJEoWOPjwmd4U6Y3hzlrPpD
-3/imWG7HGN/MWZiLArpfiFwU6SEXqh13IUG+BvIZ2BtzWxgQ4nlZsx5mGrjKtWIr
-gh5Nqwo8miL6UAOEShwc4TIPeWCgNR4b+9qRLmruvGbCpMF2iNSNZz0OTgYFq2OY
-TCBar4l78gN3Vc3ifMEJ+58ok2YUIv6iEEP/VGOpvDm+1GphWh0vH46Fr9WAQCNq
-/tErBckz
-=+y4q
------END PGP SIGNATURE-----
-
---zIdxKZfd7rzD24xm--
