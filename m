@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12E79C3600C
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E3BC3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:48:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9867381E60;
-	Sat, 29 Mar 2025 00:48:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E77A481E3E;
+	Sat, 29 Mar 2025 00:48:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GpUzyOx7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fQcyXpB2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAB7B81ECD; Sat, 29 Mar 2025 00:48:04 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 1F44981DED; Sat, 29 Mar 2025 00:48:09 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 879DB81DED
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:48:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D3C081F00
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:48:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ab78e6edb99so346874666b.2
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:48:00 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5ec9d24acfbso6912631a12.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:48:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743205680; x=1743810480; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743205684; x=1743810484; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AcgcdD6HvF3YO6QPBLXJpAZJzayVlPWDd9VJYCHtQso=;
- b=GpUzyOx7gTKIHSF1vdiCk2WIJVS72b3Pz9sVOpSbxJ2qy7cuMFFMmxftCxdV/ZOZJZ
- zgOkljdXi9lPt/V6P1n5tJ5SOdHDQbOmy5N/XNurI4QdGKOEtaAtoRFmYSGBoIQEaq0u
- O7kx1+VPq+lu0kfMyutAgr+3qZeiWhF7sr8+8=
+ bh=dK+LGiHwQRiTtK5h8LRn0BKwWpWL215oq0wnFBHaFjg=;
+ b=fQcyXpB2BLVv28+Msf6dkFQa/dX/Rgwu7f5aWy/oSM4MRYMXmT7uO1Ds4okj6TVo6P
+ 5Ipyzlv52TfdJ4jcqaRMitD9tGlK7jiZuCglgtH6JlE6tw3sJwZ3I6Q2lyEVfGed3VUg
+ hRKEZS7O04EUHvcOqopAXLa67BqWThqO2/C60=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743205680; x=1743810480;
+ d=1e100.net; s=20230601; t=1743205684; x=1743810484;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AcgcdD6HvF3YO6QPBLXJpAZJzayVlPWDd9VJYCHtQso=;
- b=Wqy812StI5L9WT47Zz4N5zEAOiGC2DtO5g/pSaXvjjrWN7Zp1F3Wyr4J5ELC1UgXZ9
- YvlVoSnQSCvb5OlDIGp+8goL6x9IFxTT0M8VnO5XBaNPKqypUffvscufvn7fIeh/5vLV
- r9BIuIdIXp/RNIhn9XMWcfPzVBuNgeip8xwOnUgps8wQAgmEiVV2rFPiXDeb/x5KfqHm
- EGofyhwhW8e5dOnr9EJxlkSRdRd/i3eJsnmfVXbCQfiC44d4NEZA22S0n7b9DArbbhS2
- J4ICCZw0MFsQ1+Bmlqp1wXd8HT1oCdcdrt/h5nX9V2I2LP2nb4S1f63qhADiG3+Ej7OK
- 2pYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVQThTN28Yy4mePBZwfpR+nE5+Xh5Z2svXhJ4Y53JAaJF02edrHdUB+O2i9tyymWXRBH+hlyYA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyXc6qTgiDtqlWUDlqPEmz0KZqXDolhexep6YTHOD8FWs1ZJ6Bm
- I1i3NMRvE6cvzwm2VFP1Cp2/vg7bhMneHQcZAcsTQGyHmW46wGKx51zXxj/tcnKNn9nWqos5s3S
- WiU4tRGxwx7EjBXcZSA//rXDkOQad2LrNdTET94a3bDqy2lY=
-X-Gm-Gg: ASbGnctkpgTmuLleGaV82OmFCGizbVYttIlHTHHNFqOerl2vzy9nHp//c5TG+IKEiUw
- BIxOaZYb8BCdFRG2UjOFKS0gyWqHWE/85RivUZF6+DhKEKD6Cr3yMkPbv1GPEROZpa2QC4pHbL/
- ftgGsXP0n7aXqYLycgP07VF7JSLc+YxzlQonk/Pg==
-X-Google-Smtp-Source: AGHT+IHCLFQFOZtd3HCgyPHmvlHebc6SSXWIr4/OI1WzfODgvbeE3XnVr4q9eApFl0LQ8X9zX6/nXwtLEn2Y7M8i9Og=
-X-Received: by 2002:a17:907:3e1d:b0:ac3:8537:903c with SMTP id
- a640c23a62f3a-ac738bc07d7mr77690666b.37.1743205679863; Fri, 28 Mar 2025
- 16:47:59 -0700 (PDT)
+ bh=dK+LGiHwQRiTtK5h8LRn0BKwWpWL215oq0wnFBHaFjg=;
+ b=dCvWP2/pWgKlYOujP8nxfyd9W6oD6yiwvSeqPHvVe79a5Pw5Nwdg265g6cHbBySJ2l
+ GtmOaR+mJyRflu67gfdvddniVj019pwV80yFjAd/meVrsloZZxd/ZWBD+LbUP0sJrdWA
+ ipPD2nArwv0lG3eqB1un7lK7u/EzC04yOx4/XYez5tmrb7g9EMEY/ByYL4j+UYNJxYXB
+ 9JiWibBwMuXCLKQ8ertXIsXbb6d4Tv4wGXXQsFmaSjTnHIC/QAxTGFKsWKvPwjroHOeA
+ jO9htOGTmvyj9JS8BoRwN7iSTe8S9UNQuaGFNRH9DDj87q/qzcfBhmSnWLoVXVm/2rCZ
+ ZVWQ==
+X-Gm-Message-State: AOJu0YzCyoYB6Fg6RslQrSDkaDHZaxuBvJVHN8+IWajkXZqWVattNjZi
+ icTTuJG1pnxJy/T1WMzJXlhcG7ywQYJrKIq8XMMm5U+oP5uho51sWpjRnNqF7TW4DGxwVTcosGq
+ rZYb6/KR2RdL2EsDlFHtCu4S+Dn7J6Kf0UJEbplS/D09Wd4Y=
+X-Gm-Gg: ASbGncsd80VJTe4oECO2Yiw9qU8wJdWL7Ok+Ij/HqSpQfIDFcOXhe3bLGV4WbT0lEKl
+ H44yoYn1oFRzsHqtoF30xrmxNiy4J6vqTAJGzKCRm0fJthL2nGoZU9oMeLiTH7vnhyLgssxwfJX
+ r/8gGNeT9oSR0w6uksIZ4+fOB12ZM=
+X-Google-Smtp-Source: AGHT+IHgPUlNzc6xDTWdIG7SmYx18hNi2oaqtbtuCD0dB1uN5YE0tfvsf6JLQ5gb8RWySMg2qopFgu5avP4waezQSoY=
+X-Received: by 2002:a17:907:948b:b0:ac6:b80b:2331 with SMTP id
+ a640c23a62f3a-ac736709564mr104128766b.4.1743205684441; Fri, 28 Mar 2025
+ 16:48:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250327080642.2269856-1-m-shah@ti.com>
- <20250327080642.2269856-2-m-shah@ti.com>
- <ac62affe-7c37-4f35-915b-79d1acdd8ab8@cherry.de>
-In-Reply-To: <ac62affe-7c37-4f35-915b-79d1acdd8ab8@cherry.de>
+References: <af0f0e52-2891-4b56-a7dd-0804f86770aa@linaro.org>
+In-Reply-To: <af0f0e52-2891-4b56-a7dd-0804f86770aa@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 23:47:47 +0000
-X-Gm-Features: AQ5f1JqoYZsZZrNDRmR5h80UFl8yxwel8UA7MLahexv-krZ4gTm1V7lP0Z2eTk0
-Message-ID: <CAFLszTi-oH2oyNVFiOKp8ciF2FKNtJsx_HiMXs1QHNn41R=eeQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Moteen Shah <m-shah@ti.com>, u-boot@lists.denx.de, trini@konsulko.com, 
- alpernebiyasak@gmail.com, m-chawdhry@ti.com, n-francis@ti.com, 
- vigneshr@ti.com, u-kumar1@ti.com, a-chavda@ti.com
+Date: Fri, 28 Mar 2025 23:47:51 +0000
+X-Gm-Features: AQ5f1JoIwZpu21HJkreoU0q-edC4E6SiZBaM_sqagoKEqnIp3JBeULQfTrIyKEE
+Message-ID: <CAFLszThWxbLGVNy86w9S+kRg637HyEEzaKhqZO5UMrCZGWgHyA@mail.gmail.com>
+Subject: Re: [RFC] memtest
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,75 +85,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Andrew,
 
-On Fri, 28 Mar 2025 at 14:46, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Mon, 17 Mar 2025 at 16:16, Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
 >
-> Hi Moteen,
+> As far as I can tell no one makes any use of
+> test/py/tests/test_memtest.py. At least there is no entry in
+> u-boot-hooks that will enable its use.
 >
-> On 3/27/25 9:06 AM, Moteen Shah wrote:
-> > Add a function to scan through all the nodes in the device-tree
-> > recusively for bootph-* property. If found, propagate it to all
-> > of its parent nodes up the hierarchy.
-> >
-> > Signed-off-by: Moteen Shah <m-shah@ti.com>
-> > ---
-> >   tools/binman/control.py | 35 ++++++++++++++++++++++++++++++++++-
-> >   1 file changed, 34 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/tools/binman/control.py b/tools/binman/control.py
-> > index e73c598298c..e739949d366 100644
-> > --- a/tools/binman/control.py
-> > +++ b/tools/binman/control.py
-> > @@ -526,6 +526,35 @@ def _RemoveTemplates(parent):
-> >           if node.name.startswith('template'):
-> >               node.Delete()
-> >
-> > +def prop_bootph_to_parent(node, prop, dtb):
-> > +    """Propagates bootph-* property to all the parent
-> > +    nodes up the hierarchy
-> > +    """
-> > +    parent = node.parent
-> > +    if parent == None or parent.props.get(prop):
-> > +       return
-> > +
-> > +    while parent:
-> > +        parent.AddEmptyProp(prop, 0)
-> > +        parent = parent.parent
-> > +
-> > +def scan_and_prop_bootph(node, dtb):
-> > +    """Scan the device tree and set the bootph-* property if its present
-> > +    in subnode
-> > +
-> > +    This is used to set the bootph-* property in the parent node if a
-> > +    "bootph-*" property is found in any of the subnodes of the parent
-> > +    node.
-> > +    """
-> > +    bootph_prop = ['bootph-all', 'bootph-some-ram', 'bootph-pre-ram', 'bootph-pre-sram']
-> > +
->
-> This should only be done for U-Boot proper DTB I believe, otherwise
-> it'll cause FDT size increase for TPL/SPL/VPL/whatever where we may be
-> extremely size-constrained. Furthermore, TPL/SPL/VPL should not need
-> this since they get a subset of the actual full DTB (see
-> scripts/Makefile.lib and fdtgrep_props), only containing the DT node
-> that are relevant for the stage in question. The only exception I can
-> think of right now is if we use bloblist or any other mechanism having
-> the full DT passed from stage to stage.
->
-> Maybe the solution is to have it as part of
-> tools/binman/etype/u_boot_dtb.py only?
+> This is not surprising as the code does not actually work correctly. It
+> will construct a command line for the 'mtest' command with some decimal
+> parameters and some in hex. 'mtest' will interpret all parameters as hex
+> and this makes the test fail for almost anything apart from the trivial
+> cases where the affected parameters are 0.
 
-The location of this code is where it is handling the U-Boot device
-tree, so it won't affect xPL versions.
-
-But it is possible to add a check for this into the test.
+Oh dear!
 
 >
-> Also, I imagine we want to support this for systems which do not use
-> binman (yet?)?
+> I looked into this for a while before I found the documentation that
+> describes memory testing which states that 'mtest' is deprecated.
 
-Nope, sorry :-) They can enable binman if they want this.
+There is a mem_test_alt() which seems to work quite well.
+
+>
+> So my question is should I submit a patch to fix the test even though
+> the command itself is deprecated? Should I then enable its use in CI?
+> Alternatively should I submit a patch to remove the test as it is not
+> used and is broken?
+
+I think you should create a C test in test/cmd and make it do a memory
+test e.g. at the start of memory.
+
+>
+> If the test should be removed a follow up question would be should the
+> command itself be removed as well? This will be harder to do as it seems
+> that some boards are using the config default values in their board code.
+
+I think a bootloader should have a useful memory tester.
 
 Regards,
 Simon
