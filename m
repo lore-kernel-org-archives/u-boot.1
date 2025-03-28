@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D5D3C3600C
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F7C8C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:07:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F006681DCC;
-	Fri, 28 Mar 2025 14:05:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF7E081951;
+	Fri, 28 Mar 2025 14:07:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GtHJVY9V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QTA0NnKs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD20081E13; Fri, 28 Mar 2025 14:05:50 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 9F81581E1C; Fri, 28 Mar 2025 14:07:25 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8EC281273
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:05:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32D128003E
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:07:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5e6f4b3ebe5so4008958a12.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:05:48 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-85b4277d0fbso66958139f.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:07:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167148; x=1743771948; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1H3muQtz9wTvIXmpKcTmIk41vmlCETspWJ5FJyN+2HM=;
- b=GtHJVY9VO/l5YB0FGwTolzj+YucMTA4QG+ep0R8Ez/Gqbgci3yImZxF9q4nfNjNIAd
- 3sGzFpog9nEpmkeOo3OZ3Q3zTfXa0yKkHsYsuWWB2n6UD6irci5/dDSDPGLY3NmiOunC
- RLxQITNX5H9TguHdPorqN2NQp92ia1plkGR2w=
+ d=chromium.org; s=google; t=1743167240; x=1743772040; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p8XZtDplWSWbqaZfjIIbyFx5n+8bqXXi295RgRam4Ng=;
+ b=QTA0NnKsSfVz6gdqfdS1m9jLZkLzRPuAMW8xFuwxoagspGZcG5H2KN1fSwSpEtaAvb
+ iBmj+MS036mn+tCT1zeXemCgy9XA3TmOG16c1LTjG7psJC4wKuVsk5H1AfVbw3cinGKF
+ coGYWdlRlwMg4M6ixjs83FNN2MZaxw90DwM7Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167148; x=1743771948;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1743167240; x=1743772040;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1H3muQtz9wTvIXmpKcTmIk41vmlCETspWJ5FJyN+2HM=;
- b=qZD+J0ra9rijKv9qkDsQ2LxEfcxhI3JyEGYrSQIvq/dQBHoBDs5wYnS4Y2/ITUHFUD
- izPUSRXQH801gfBKC9bIiDG9FJYibJmf0KWgJJ2PS0zjJSwdcbx17AqcIUBS03w+2g3I
- QqdODDgFimF9idte6PJlA9zCyCVGOL+JeGO2vukW/IZIi5e5N+foKF+cX3OHSBvFdOgd
- 3NUN4bRUUr1ypjKgDP2CQVWifGYXP8hMQYaiJkDwOBrRIow5zkCWs7NI/0inLHOiERYC
- vFJTfEXH4xBZnkSuOEZP9slwSo939NecoH0yjJc7Ft+sWdM0KQbopK1Wy26yujqBQN2j
- mi5w==
-X-Gm-Message-State: AOJu0YyT1KHoeMoQRQxjOns6UKe6xEBx/9usNacae0JsGTEMg3xsbzq/
- HwLFJbW1Mfy/+JR6tJZVW3AkaoI7lAUZey7yxARstUYPAhIbHGU8wOtaAS4VICoUkZ9QrGOfhPo
- wxPQ26WkEC9Ge/LLuF7rnk+BXK/zOOJNMJGyT
-X-Gm-Gg: ASbGncssX60GkmEPOZRKntpTQNL74F+0+ARwLwk0XTIA550NZwQHrSDdkFh9gShYD7n
- PWApYsLnpHaGtHIW/2smXyoCpJ4S2hG/n7dkN1nJrt5Ik7Rjpfu3ksR+jyC1qu+7i69BjE/eowd
- EYGyydbiddve6zQlFKav8YUXwXWqA=
-X-Google-Smtp-Source: AGHT+IEstGQEUyOcJAK86kmoEAg1jsgDNw4uxsNNVn5bIaRn9QGOaA1k7lO6Iys6l9LfY6rgj9PCAaqSGL04Qas+EbE=
-X-Received: by 2002:a17:906:1107:b0:ac7:4f1:65c5 with SMTP id
- a640c23a62f3a-ac704f1786cmr588023966b.54.1743167147866; Fri, 28 Mar 2025
- 06:05:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250319145512.2391122-1-sjg@chromium.org>
- <20250319145742.GI2640854@bill-the-cat>
- <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
- <20250320142121.GQ2640854@bill-the-cat>
- <CAFLszTgsMu1ZtK1Z-u6cmH6k__0Qhn+G2SPh8w_NdrihLkQ7jA@mail.gmail.com>
- <20250325162420.GI93000@bill-the-cat>
- <CAFLszTj49W-Vk_4xpmvtyFH6AH1QAZTLRM7x1k-Bhz7a3uEuBQ@mail.gmail.com>
- <20250327141742.GP93000@bill-the-cat>
-In-Reply-To: <20250327141742.GP93000@bill-the-cat>
+ bh=p8XZtDplWSWbqaZfjIIbyFx5n+8bqXXi295RgRam4Ng=;
+ b=Wp+76IPIFAyJDMZAzMoJGX7X6F9mONUzs6nIWIGZn564PTsnFSraj/4yv5I89+ytNE
+ 75r/5EDRf+W7R5MKDmnJv633wOthhjYAUdG9R5yp+wSPcfsAZU43ujmkBlRpe7o5ZXlR
+ +bfZ8BKc2R0DnV4ci1uOvWAOJEEf4i3/wvq1YMCcQArMaZLYTSm4tv/ORVqNbQYE9rNb
+ 8rdfFohLXGTxqm9SThySRFCidBolj/1wQt3t5cNDubrWX/YknIchrCp2txX0X5wdoOTS
+ kelJAnMeP5F2mPTSenkaRmw+7uvipiEdrmtnIl7c5KmdtlT+mn+OZ0JrB2q4mhb1SOVv
+ Mohg==
+X-Gm-Message-State: AOJu0Yw3nuUcX/QdPigib57BWnAVUqt+l1Ev0Y5RO02C9n7+/gZeRd/c
+ FaLXNOF16PJZtbS65ZUjQiR+qyL+hWCDsE/DXVYFEEOD5OECdiZn04dFSrxof6ZsYzjf3S7YcCw
+ =
+X-Gm-Gg: ASbGncs1LRALfDOXoMKiB+IQfV469tjuvzL3gH+N+UNS96E2rJ68iZZvNW3u7FhVLhr
+ 9EKUPERXA/1LdX1G1r8uTlHswI9UJj6q94EAxbHC18q3RiiQaGqthxyHfCImGkOOdnCR2sQ9tk4
+ 3j2myvo1I6tK3vamfObZgakpGjnll3PHv0mJILBNrMvE0uXt2kSF0Oea80dAJQqoQgqydJijn62
+ 3+/P91XFIxidorEeZU2bfpokHS41lghPtwNzMlJkK4gnpaQAdJGLAszYHdUDUXwXjHMGWBl+6lm
+ +C+MDO9sYZtqE1+c4xqvCDzGIMiui2X0diGE9zYNmdoEDOyw5pvMoGxAZkT8QS7NNioojTJ1G4+
+ VZAX4kw==
+X-Google-Smtp-Source: AGHT+IEsjHbQjtk/Cm61Lp+5a2TTn1S4BEaWRqS5BYTQffDq3ztx+T6SRXekmQKEmwGx3rBprRciiQ==
+X-Received: by 2002:a05:6602:3a03:b0:85b:601d:dfb3 with SMTP id
+ ca18e2360f4ac-85e8205a3c3mr904053939f.5.1743167239550; 
+ Fri, 28 Mar 2025 06:07:19 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.07.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Mar 2025 06:07:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 07:05:35 -0600
-X-Gm-Features: AQ5f1JphyOaUxlOPVrJyWM-4Z3fzmbp3WPsxSRJsIQsEp65x2R8EA7mFT9Hhftk
-Message-ID: <CAFLszThJqyEQLvngTdxwqa-fsox5jjHBMYVryo6vPA7k_6jhUA@mail.gmail.com>
-Subject: Re: [PATCH 00/52] expo: Various features and improvements
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
- Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
  Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 00/56] expo: Various features and improvements
+Date: Fri, 28 Mar 2025 07:05:47 -0600
+Message-ID: <20250328130713.2612648-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,124 +109,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This series collects together some new features for expo to make it more
+useful for boot menus:
 
-On Thu, 27 Mar 2025 at 08:17, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Mar 27, 2025 at 07:36:02AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 25 Mar 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Mar 21, 2025 at 07:38:45PM +0100, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 20 Mar 2025 at 15:21, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > This series collects together some new features for expo to make it more
-> > > > > > > > useful for boot menus:
-> > > > > > > >
-> > > > > > > > - measurement and display of multi-line text objects
-> > > > > > > > - internal alignment for objects (e.g. centred text)
-> > > > > > > > - editable strings in text fields
-> > > > > > > > - new 'box' object to draw a rectangle
-> > > > > > > > - highlighting of menu items, rather than just relying on a pointer
-> > > > > > > >
-> > > > > > > > Expo's boot menu is restructured so that it is possible to iterate
-> > > > > > > > through various bootdevs and update the menu as new ones are found. This
-> > > > > > > > is more in keeping with how bootstd works.
-> > > > > > > >
-> > > > > > > > A new textedit object is added, intended to provide a simple text
-> > > > > > > > editor. Future work will complete this.
-> > > > > > > >
-> > > > > > > > With this series the boot menu has a better layout and appearance.
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Simon Glass (52):
-> > > > > > >
-> > > > > > > I see you haven't internalized the "don't post massive series" feedback
-> > > > > > > yet. Please, stop posting massive patch series. Figure out how to
-> > > > > > > logically break things down in to smaller chunks that can be
-> > > > > > > meaningfully reviewed.
-> > > > > >
-> > > > > > I could split this into two series of ~25 patches, perhaps. Would that be OK?
-> > > > > >
-> > > > > > I believe no one else is using expo yet, apart from postmarketOS,
-> > > > > > except the trivial case of 'bootflow scan -m' but I'm hoping that will
-> > > > > > change in the future. I believe that Linaro is mostly encouraging EFI
-> > > > > > bootmgr and the text-based menu. That could be converted to use expo
-> > > > > > but I doubt anyone has looked into that, particularly as grub is being
-> > > > > > pushed as well. I did look at converting the existing menu code a year
-> > > > > > or two ago, but it seemed better to eventually deprecate it.
-> > > > > >
-> > > > > > Also, there is a following series which I split out and will post
-> > > > > > separately, but not for a while as I have a lot outstanding.
-> > > > > >
-> > > > >
-> > > > > It would make sense to split expo out to its own series as there's not
-> > > > > likely to be any feedback there. All of the other parts of the series
-> > > > > already have something else in their subject and that would be logical
-> > > > > places to split this up more and then assign to the appropriate
-> > > > > custodian. Thanks.
-> > > >
-> > > > This is the expo series and it only has expo patches, so I believe we
-> > > > are OK there.
-> > > >
-> > > > The bootstd series is small and its own thing.
-> > >
-> > > OK.
-> > >
-> > > > I can split up the strim() / test series,
-> > >
-> > > OK.
-> > >
-> > > > but I'm still unsure what
-> > > > you are asking for with respect to code which is not yet used. I can't
-> > > > reasonably do all of a) send code only when it is needed by later
-> > > > patches in the series and b) keep series sizes small and c) keep
-> > > > series related to a single topic.
-> > >
-> > > I don't see why you can't do that. It is in fact really hard to review
-> > > how useful some library functions you write without seeing how they're
-> > > used and if in turn we should be doing something different. You might
-> > > need to defer or break out as it's own some refactoring changes in order
-> > > to meet 'b' above. However "here is a thing" and "here's using a thing"
-> > > are still a single topic.
-> >
-> > You could just review the code itself, perhaps, rather than worrying
-> > whether it will never be used? For me, creating and maintaining a
-> > series through acceptance into your tree is still a lot of effort,
-> > unfortunately.
->
-> No, that's a no-go. Reviewing a library without knowing how it's going
-> to be used is not effective.
->
-> > While on that topic, it seems that the sunxi and rpi series have still
-> > not been applied to your tree. It would really help to see some
-> > movement on those after all these months.
->
-> I provided a detailed explanation of what's still wrong with the sunxi
-> series.
+- measurement and display of multi-line text objects
+- internal alignment for objects (e.g. centred text)
+- editable strings in text fields
+- new 'box' object to draw a rectangle
+- highlighting of menu items, rather than just relying on a pointer
 
-From what I recall this is that you want Heinrich to do a workaround
-with bootmgr and bootstd, but you don't want to disable bootmgr from
-sunxi. In either case, there's nothing I can do here. The series is
-probably getting more and more out of date anyway. Andre might pick it
-up, but I doubt it, given all the arguments about it.
+Expo's boot menu is restructured so that it is possible to iterate
+through various bootdevs and update the menu as new ones are found. This
+is more in keeping with how bootstd works.
 
-> The Pi maintainers are still actively working their way through
-> things.
+A new textedit object is added, intended to provide a simple text
+editor. Future work will complete this.
 
-Is there any ETA?
+With this series the boot menu has a better layout and appearance.
 
-I'm sending a v2 of this series as I found some other problems.
+Changes in v2:
+- Add new patch to pass in the video device for cedit_prepare()
+- Add new patch to test rendering a lineedit
+- Add new patch to test editing a lineedit
+- Handle the case of an initially empty string
+- Only check the text objects used by the bootmenu, for now
 
-Regards,
-Simon
+Simon Glass (56):
+  video: Make white-on-black a video-device property
+  sandbox: Select white-on-black
+  video: Add a test for font measurement
+  video: Begin support for measuring multiple lines of text
+  video: truetype: Fill in the measured line
+  video: truetype: Support newlines in the measured string
+  video: truetype: Support a limit on the width of a line
+  video: Add a way to write a partial string to the console
+  console: Support a format string for stderr output
+  test: video: Export the video-checking functions
+  video: Allow console output to be silenced
+  video: Add a function to draw a rectangle
+  expo: Add CLI context to the expo
+  expo: Add a function to poll for input
+  expo: Destroy the cedit expo when done
+  vidconsole: Avoid kerning against an unrelated character
+  expo: Create a rendering test for cedit
+  expo: Move cedit-state fields into expo
+  expo: Test some cedit actions
+  expo: Pass in the video device for cedit_prepare()
+  expo: Test rendering a lineedit
+  expo: Provide access to the current menu item
+  expo: Adjust how menu items are highlighted
+  expo: Test editing a lineedit
+  expo: Split bootflow_menu_run() into two pieces
+  expo: Split bootflow_menu_new() into two pieces
+  expo: Allow adding a single bootflow to a menu
+  expo: Rename scene_dim to scene_obj_bbox
+  expo: Rename x and y in struct scene_obj_bbox
+  expo: Use an abuf to hold strings
+  expo: Separate dimensions from the bounding box
+  expo: Make bounding-box calculation more flexible
+  expo: Support setting the size and bounds of an object
+  expo: Line up all menu objects
+  expo: Create a struct for generic text attributes
+  expo: Move text-rendering into its own function
+  expo: Tidy up scene_txt_render()
+  expo: Allow strings to be editable
+  expo: Check the screen contents after rendering
+  expo: Support rendering multiple lines of text
+  expo: Support white-on-black in the theme
+  expo: Implement a box
+  expo: Support object alignment
+  expo: Begin implementation of a text editor
+  expo: Use a simpler name for USB media
+  expo: Drop the gap between groups of menu items
+  expo: Add forward declarations to scene_internal.h
+  expo: Support highlighting menu items
+  expo: Adjust expo_poll() to avoid looping forever
+  expo: Drop the render from expo_poll()
+  expo: Provide a way to position things relative to display
+  expo: Improve the visual appearance of the menu
+  expo: Update bootflow_menu_poll() to return a sequence ID
+  expo: Split setting up the menu from adding items
+  expo: Set up menu fully in bootflow_menu_start()
+  expo: Drop the special theme code for bootflow_menu
+
+ arch/sandbox/dts/test.dts         |   1 +
+ boot/Makefile                     |   2 +-
+ boot/bootflow_internal.h          |  11 +-
+ boot/bootflow_menu.c              | 371 ++++++++++++-----------
+ boot/cedit.c                      | 156 +++++-----
+ boot/expo.c                       |  70 ++++-
+ boot/scene.c                      | 476 ++++++++++++++++++++++++------
+ boot/scene_internal.h             |  71 ++++-
+ boot/scene_menu.c                 | 154 +++++++---
+ boot/scene_textedit.c             |  60 ++++
+ boot/scene_textline.c             |  44 +--
+ cmd/bootflow.c                    |  40 ++-
+ cmd/cedit.c                       |   2 +
+ common/console.c                  |  18 ++
+ doc/develop/expo.rst              |  34 +++
+ drivers/video/console_truetype.c  |  90 +++++-
+ drivers/video/vidconsole-uclass.c |  36 ++-
+ drivers/video/video-uclass.c      |  52 +++-
+ include/bootflow.h                |  77 ++++-
+ include/cedit.h                   |  17 +-
+ include/console.h                 |  15 +
+ include/expo.h                    | 293 ++++++++++++++++--
+ include/test/video.h              |  45 +++
+ include/video.h                   |  31 +-
+ include/video_console.h           |  83 +++++-
+ test/boot/bootflow.c              |   9 +-
+ test/boot/cedit.c                 | 217 +++++++++++++-
+ test/boot/expo.c                  | 214 +++++++++++---
+ test/dm/video.c                   | 352 +++++++++++++++-------
+ 29 files changed, 2376 insertions(+), 665 deletions(-)
+ create mode 100644 boot/scene_textedit.c
+ create mode 100644 include/test/video.h
+
+-- 
+2.43.0
+
+base-commit: 37ef92a972663c6de1b81d24d2ca5cfd664fc6df
+branch: schd2
