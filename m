@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD87C36016
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 10:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A1C1C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 10:44:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6352981E1C;
-	Fri, 28 Mar 2025 11:40:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9721881DED;
+	Fri, 28 Mar 2025 11:44:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X7m8+3nm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g1w9BM6m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77A4981E92; Fri, 28 Mar 2025 11:40:34 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 4C54C81DDF; Fri, 28 Mar 2025 11:44:47 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56C2781CFD
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 11:40:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E467F805C8
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 11:44:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43948f77f1aso14213685e9.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 03:40:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso398032166b.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 03:44:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743158432; x=1743763232; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=w4BEsl4FVrt07LGFq9U5rhMZA9nltq/XZfwsuD5HU20=;
- b=X7m8+3nmiiD04vI8JF6qdBWUvTcItrLVPSdwhcGn0GvFSYqHYcv7bWXhumrXOwwp9f
- Ql+FpO4az1PveJe6vyPIgisrZNJOotBiM1vl0XPbxjgNTjgCtbUgMUSHpmbQcrIJteMv
- 5FgqTnDn+wKl2CNaVAWm+/BXFohA2fHRQsf7i12qG7QI4aWpjRx0q4y0xG3FI8brA35H
- UPWBEXZZSw7+k2JlOxAwpHJkEuxdv0FLuBaSwJTrkpHbTS3IR7I7MlWwxRRnonxspswB
- yg68EwlikFWrzKMkVtCgVaoFyLAP9J5eROZy0rjTSJAG3MdscYuW1VBagnKSiiJvX3k0
- 8BIA==
+ d=chromium.org; s=google; t=1743158684; x=1743763484; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yg97Y7a1huV4MYgGozVfIlYJAh5PQv1FFkx0Fs4vafM=;
+ b=g1w9BM6mK0zRtSXIQO/FrYUVSTH/UXM2RolkwXQF72W2uCSdzQP0iTPCh6XmYOBtf2
+ YyQDL0TJhBDIH5vwVZL6Ko9BbK6GJDWiVTHzI9P9dGikI0I+8dZItk+rOXY28m1bN490
+ wKTXDxtfxvrZXsFB+joLN3VFkNvGdWQR8hayc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743158432; x=1743763232;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=w4BEsl4FVrt07LGFq9U5rhMZA9nltq/XZfwsuD5HU20=;
- b=fXy2V3TOo0AjmKp6oDERCY+u39mZuMzDb4zWrGmCBGoyU/RwAx08usYT0MUCjJ45k4
- 5Q7iPI0NTvTENox2emqfoHnWVH4SZUlTVq2dn8izdt3uOCb0U4yqSIqqYE327QDjGisI
- kyJg+AaVVF9OSBIpF+rlnVuHw0x9+hoOdqfbePyusm2pqPQBVDJMW42O92sHnhLGmMbS
- 6YwCePDa0KQTfR/uMTcGAPpqhlqSB75V2eAbzQqIjO8coqUAzY0YfeDITL3qB+szQ0Qy
- fZzA77/v65oYaJu3ozbrMbAf6y2GC8A++2kNMpjxEEY/Kl1m3F7kMV3zITPsU2y0cOvj
- VmXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWK6NMmlzWc4Zj/+dQkHks9zhv6gYC/PODwH/WNJ9BkqbU2J2yGbGIFWiw95zr3xy3SGH3AUaw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvJrcyiXzV4usnWSTXQrqUDHtR8AJ8vTzx2QrYFN/EzrlIZq8c
- 7PBYi7Li1cWL69+HE7AHvoZOdX/Y3jq9Pg77RBa9dQOBmRF269Fz1Kn9R5bZRGU=
-X-Gm-Gg: ASbGncvLwp9kJ9rgEN7J84twd7Y16jxa9erNc3foys6GAH2FaIi2o9SvkquZLxUqCoJ
- KXLaLTpAlFVuWjw2zQxm1aEcgpZNJ0FbCXgNgepHaREYznZod+n+LzL3+YM43iYTk/la+WqS7QB
- EA4ogB2vUqLjoajiZd2NYC+ZR658HKF3LmrzmvS3vORWWylVokxauyv/rJ25HJTrtbW0TEKsJ4c
- UUvDg5VV50Popu0oz3FonoLmu6IVSLcrGjTD0VHOWDWctLp/HBM5fZPkkoJPkoPuOL3QL1ZBxCM
- C2VM5V2i90yAEMETlNMLgu340ZBh9edN/EHAUnYXkNPs9CgoZIuLGLxTokC1UAynevMX+hhU+Cc
- MpmVatIAixdzbwSO2xRvu/JE=
-X-Google-Smtp-Source: AGHT+IFmLmaqxJjbBAUiWy4N7tvd0DOic+OhVSj2Kim3vRY6CoPBdJXwPXPLl2NG5yUlZXOUt6Jwzw==
-X-Received: by 2002:a05:600c:3c8e:b0:43c:f85d:1245 with SMTP id
- 5b1f17b1804b1-43d84fbfeb8mr64570095e9.17.1743158431663; 
- Fri, 28 Mar 2025 03:40:31 -0700 (PDT)
-Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
- [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d8314bbf1sm64757915e9.38.2025.03.28.03.40.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 03:40:30 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io,
-	u-boot@lists.denx.de
-Subject: [PATCH] qcom_defconfig: enable OF_UPSTREAM_BUILD_VENDOR
-Date: Fri, 28 Mar 2025 11:40:07 +0100
-Message-ID: <20250328104011.1837872-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.49.0
+ d=1e100.net; s=20230601; t=1743158684; x=1743763484;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yg97Y7a1huV4MYgGozVfIlYJAh5PQv1FFkx0Fs4vafM=;
+ b=aPedfGbXjGqvFCDA45NMmBGQGvaJfWPaxk0TCatmd5ITuM1ivAU1Ftx+9H4hI/NiaI
+ G9QeTTbpAEUM7TEFMGyUYEr+aywPUTz2ym99TxRd1fjAKvSIwdVcLnKhCD5WnlbxF0Ss
+ FXV/u+5gcJaA27M1U51BTjpEJA2kc9kZ4oE4RibEsAFG/8okFrZAvj6+AHOiAVJlFkAS
+ s2WAQuXYbCOHbCFVEeD1bBwpjYZckCPFicvCRbPz7u1NNNzVi6atjCm1z8x4AbraqumI
+ rRy5ZzZvayXzDsw+Y0/fXoFOei2r+O+eVJGu7L7OkQzxkCEFIHDKv77pOL9a28tD9yqQ
+ udVw==
+X-Gm-Message-State: AOJu0YysV0JWP1KpA9+zzxoxjYNjIEcJMJYC9GUbd4kmKU1Cc91qLItc
+ Mm2FnstWvUUK5rfCPo5hCJMflT65w8RQDCwY6cXp9avlKCiFea9Uoqa9xEzssqPwXdGO3E0dGtc
+ PatnQqhkI1Nxyy7GiCfDqd8DJKMTIJuEYXmx7
+X-Gm-Gg: ASbGncvlmL6K6bX+KcvjokCqtD81XKuFrpkZtvFOhOBbRSTFc4lRJQ2nrnRseeeTOEI
+ B4APpYWe1igOSObAyGzsfeMHI6vSLKY7CemzMBuGrP3rG+kI5aIbH3AYgDH/VVWmy7LmLfxmPDe
+ sJ5+AoK1XRS+jNiNTWfJIh9cRBVl0=
+X-Google-Smtp-Source: AGHT+IG5hjwBncc1VhxQ0GItwWpeuiPBOiGgi/Ntl+wiSE1+SBZpbJT/EFXjEMmUfaYNd4DYGiJPBNPpwzot8axjyCg=
+X-Received: by 2002:a17:907:9490:b0:ac1:f002:d85d with SMTP id
+ a640c23a62f3a-ac6fae6c9e2mr665734166b.6.1743158684234; Fri, 28 Mar 2025
+ 03:44:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <3097333.a1USZiQ7eK@anvil>
+ <df93a047-2a97-4028-90b3-510b9c75493c@koansoftware.com>
+ <2017235.OF7RDaNIJX@anvil>
+In-Reply-To: <2017235.OF7RDaNIJX@anvil>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 28 Mar 2025 04:44:32 -0600
+X-Gm-Features: AQ5f1JqvE2QV2FNirdIcCBC7e63XATd09w7XtX29vTv1PpczWGy9NvKmIsWy96I
+Message-ID: <CAFLszTiMKXMzP8+b4iTWFiiHSmCSZiLctYZLMp-TfuW-AFHPcw@mail.gmail.com>
+Subject: Re: Unexpected RPi5 Behavior with Saved U-Boot Environment
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mauro Salvini <m.salvini@koansoftware.com>, 
+ upstream+uboot@sigma-star.at, Simon Graber <simon.graber@sigma-star.at>, 
+ mbrugger@suse.com, pbrobinson@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,31 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A single U-Boot binary can be run on many different Qualcomm boards just
-by booting with a different DTB.
+Hi,
 
-Simplify the build process for this by enabling OF_UPSTREAM_BUILD_VENDOR
-so that all the DTBs will be available after building U-Boot once.
+On Thu, 27 Mar 2025 at 10:32, Richard Weinberger <richard@sigma-star.at> wr=
+ote:
+>
+> On Donnerstag, 27. M=C3=A4rz 2025 17:24 Mauro Salvini wrote:
+> > could be related tho this [1]?
+> >
+> > I sent this patch some years ago but was never accepted in u-boot tree.
+> > But meta-rpi uses it in u-boot recipe [2].
+>
+> Uh, good point!
+> In our initial experiments we have used meta-raspberrypi but now we don't=
+.
+> This would explain it.
+>
+> IMHO this patch needs to be reconsidered.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+It seems i hit the same problem when I sent this series:
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index ba4d38d100e0..a12a5d17b406 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -40,8 +40,9 @@ CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_RNG=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_LOG=y
- CONFIG_OF_LIVE=y
-+CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
- CONFIG_USE_DEFAULT_ENV_FILE=y
- CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
--- 
-2.49.0
+https://lore.kernel.org/u-boot/20241220003447.2913443-1-sjg@chromium.org/
 
+>
+> Thanks,
+> //richard
+>
+> --
+> sigma star gmbh | Eduard-Bodem-Gasse 6, 6020 Innsbruck, AUT UID/VAT Nr:
+> ATU 66964118 | FN: 374287y
+>
+>
+
+Regards,
+Simon
