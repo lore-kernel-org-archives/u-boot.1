@@ -4,98 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 053FDC36011
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:49:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF78FC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:50:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A02788144A;
-	Fri, 28 Mar 2025 14:49:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 574B18144A;
+	Fri, 28 Mar 2025 14:50:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YRk+4SI3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wJCEUnjf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1BF481951; Fri, 28 Mar 2025 14:49:54 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id AB11C81DCC; Fri, 28 Mar 2025 14:50:54 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79C658070C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:49:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ECEF8070C
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:50:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2c1c4e364c8so787299fac.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:49:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3914aba1ce4so1753251f8f.2
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:50:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743169791; x=1743774591; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jnK9QzJaiZbDojIznCizEZj9O1Hmg77gCjvuP4IFk2U=;
- b=YRk+4SI3wqhrmZtFin/+JlYcq71LNxCLjMbcBgH9AwYHYvU5b+WTLc+0hyuyk4M7H0
- JwyVZ16ZgrpFuQkSCeGSUePKYk+8hp8DJ5QcLhAlOCEHXACUXOOPbPq1vptgiRF/v58F
- f3ARjFJlvruaYU+tuyo8JqDEbqzcOV2f3gqgU=
+ d=linaro.org; s=google; t=1743169852; x=1743774652; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=3FbXWOjImTIHNfKd2Yu0YRpiPfxpxV4rZTLule6ybiA=;
+ b=wJCEUnjfJi5d88ke5tviWVnrNEqOM/BBJ6rcnHeCflIm+gY5KYa37mUP2kKuaILOpF
+ A4pcxQ4WUhx3MOcXCiGMrA9ogSe9s11BItEB96arGqbbAjommZh344jDRvMYKY5ZfxxA
+ Dv0znKPE6AFCsZTD5+N9NwZMpAblr/UM8fAeS141enJKf99b6DznlaLm/hyoxs1kGT9I
+ tp5PPrx4cUNbBOQiX6hYacVIqkBh2V+ljMzRAUmoT8FH2mnftThPVPpIqtJDO4tccNj3
+ tGtZZulcWIObee23iVe2MQcMQrjXPAaSwPYZD/NKOrKRU4NWJxqVE6EYhChpXDklaFQ2
+ SZuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743169791; x=1743774591;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jnK9QzJaiZbDojIznCizEZj9O1Hmg77gCjvuP4IFk2U=;
- b=ORplrHlDUN7VN4nCDAQgoTYS/l0IxWqVpUAdn6QNYj6+nXOVPL39YZ15JFL/6els66
- 7y5Wd0LcsWVhIj4VgnTplh0+HXzl+wYwbG1IOS+krfnk3bY/IxC5vca+5uRwjin7PHXW
- 50BelgprF2zeoTBWbt2UttVeOFuvQb/OMV/jWG9P0PxxeRnA2aXPf2VH5nQRDKDIPLMM
- MbENyY5fsPm5Gajd65y5swd4xIWofJ7yVtudvjeo90Ya5BdYeMCtOxVTn63qeeaapELW
- igtpqdWs0428/1ZeOdQHPr3xa3MqKWHI8m3sSAUAvcJBDVEsOD7e5y89u9vmc30r4ALR
- Z5GA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4bIDIFWmlfX0bs0NSOuFKfxs4jI/3uQ+Z0IQZwW4V0jXixeSc1qn19AiKBZyrq8QP0QHoUHg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxkPsy382zMpxFbmT8DIbE0M61h9wHQ83sp9D/RTxu59cNAxJCh
- /lzAz/EE30PBNQSYH07z3LxNv77U80VOuVTrIVOodSxWe6b0N2NgoItdVf3BzZg=
-X-Gm-Gg: ASbGncuXu6X8aUnuE/nOvkUQEJ3PciRlam2PSmRNh5E+4mffokm/E3ZyZV+EI+kaJUy
- 6fJF/MCFBUdmezqOtYgNJqMAa1Y0xbqZCkW7Oua36Cui1VNSSnue3/Dokzv/IrXu0RRhxVFJ2sF
- E7i5A4uzbr0ID1Ozd4gJv0wnwmBhgyoZnMSPO/H5jShb8jEJcXYY8u8ZYutSHnEBJ3FDpCnVyyN
- 1DTteeMr09vvqsy3r8viE9avxzu/ki69+VvRiHB+i1HVqf4MJZQ7x3cFseTlvQzjL5OQ6uFOLQm
- siV7RuKk1olIKQu6b1NPY7cZ7pQvg2Imbf8T5GeOLX6Ta9u52v8vd5JcaHzEm6oqWJ9ZMBINIkh
- gSQbITA==
-X-Google-Smtp-Source: AGHT+IE8PSbE45imwYg0exUg5dzEIyjFyhjlIcGPqHHoaS9qGbwlkRCMZR9gaRGas/0SqxK3dpVlzA==
-X-Received: by 2002:a05:6870:d88f:b0:29e:3d2a:a4a9 with SMTP id
- 586e51a60fabf-2c870c00ef1mr1759606fac.5.1743169791024; 
- Fri, 28 Mar 2025 06:49:51 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c86a90e132sm419421fac.45.2025.03.28.06.49.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:49:50 -0700 (PDT)
-Date: Fri, 28 Mar 2025 07:49:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Kyungmin Park <kmpark@infradead.org>, Heiko Schocher <hs@denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH 00/18] Annotate switch/case fallthrough cases
-Message-ID: <20250328134947.GT93000@bill-the-cat>
-References: <20250327153313.2105227-1-andre.przywara@arm.com>
- <734a1243-53d5-42da-8d51-bec687f83c5b@gmx.de>
- <20250328103959.3980025b@donnerap.manchester.arm.com>
- <20250328134554.496fb357@donnerap.manchester.arm.com>
+ d=1e100.net; s=20230601; t=1743169852; x=1743774652;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=3FbXWOjImTIHNfKd2Yu0YRpiPfxpxV4rZTLule6ybiA=;
+ b=evCMBu17HkHSKuDBYjbodxVDalLaEpeb3cWSs2E8nnzG/FoEeNA2rJ48TSLu39lU+H
+ gFHZVdmfA9MK4IQ+JUb+ZWUkH9kHxiXv3MpwhRb45Fe45D/YUQXUCe3wxHaTYj5FWAxD
+ lKIJCOhBfqejVAbJx33fl9hGQalt3dRQcrsB453kJGxRvDy+KQvGd31XP6Rkzb/9Hpea
+ Xdw+hwUrkvgwSCCASVgOEdHB2CmP+rlwNlmZ0E3ab6OXEtWoh2viTn1xMPkwKZ/4nvwv
+ 1ZoDJRG+PDUTVMlkLmeE1xo63YVAJq+bViy4c3BS4Yt/At0U1Am9ISJqVh2M7lEdF8mA
+ pKeg==
+X-Gm-Message-State: AOJu0YwHfhDuBDaW3w+tYpP3P2Dg3u01nhRyRZ0S/TfJOW+PbUoX3LjT
+ etU2VLkkvALywvnmnNTGw+abF2IQoPAstQ2J1WkRRLuMMslXaLRyDYVQR5Ll3Cs=
+X-Gm-Gg: ASbGncv62Q4cAfKOzuD8t0MSJkRa/Zb7/mVJUAaJu9pa8EykaUacxkACvA+l7kKgsmm
+ tkPO/RAnRG0Ggelej6LgLpTUutXTPJpGikGXTs2jTJXWXwQlaRxeUn7ytkFv6AtW1HAdUAIprQE
+ KIWZSZJKZR5zx5EUMESzHfyIFiDTpB26LFxOOe1fGtm287aaattglIfE3p3Vt4QCo1r01U22aIZ
+ 5h3dzKI028om2HcxtU+0NyF2eQADcXvIcM1IXo2iLHfQbTNn8V7AxB+OvFnGBOnaatRreuni/wo
+ LzUKCWC2zdMkiXVmWr4SR/18E1K2vozMNJbu6Akhy6sWyZ1evpQpQK+EvyzIYzVotrGkssxo/JY
+ anBj9dxinwzuCJl/j+BAErg==
+X-Google-Smtp-Source: AGHT+IEgmrMhQUK2HdMzHr5ghL2QGohzYP3oGJJZWzkrM/EZ0YPT8O65OM2bNTUWvIY0ORb6+Cj2Lg==
+X-Received: by 2002:adf:9dcd:0:b0:39c:dfa:ca71 with SMTP id
+ ffacd0b85a97d-39c0dfacd5cmr1356274f8f.49.1743169851518; 
+ Fri, 28 Mar 2025 06:50:51 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:20e7:3609:7781:1686?
+ ([2a01:e0a:3d9:2080:20e7:3609:7781:1686])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d914f1561sm16967085e9.1.2025.03.28.06.50.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Mar 2025 06:50:51 -0700 (PDT)
+Message-ID: <0b673689-0383-4ae4-9029-e11ecb0a136b@linaro.org>
+Date: Fri, 28 Mar 2025 14:50:50 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tdUDubTwLzcuM8Ew"
-Content-Disposition: inline
-In-Reply-To: <20250328134554.496fb357@donnerap.manchester.arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] part_efi: cache last scanned GPT for next partition
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20250327-u-boot-efi-part-cache-v1-1-be6b69c0698b@linaro.org>
+ <53E9363D-6499-4512-B204-83729DF88BD7@gmx.de>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <53E9363D-6499-4512-B204-83729DF88BD7@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,104 +123,319 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 27/03/2025 20:01, Heinrich Schuchardt wrote:
+> Am 27. März 2025 11:02:55 MEZ schrieb Neil Armstrong <neil.armstrong@linaro.org>:
+>> The actual architecture of the EFI part parser means the
+>> entire GPT partition table needs to be parsed for each
+>> part_info() callback.
+>>
+>> Since the default part scan code will always scan up to
+>> 128 partitions for a block, and devices with an UFS chip
+>> with up to 8 LUNs are very common in the field, this means
+>> a complete GPT parsing and validation will be done
+>> up to 1024 times instead of 8 on such devices.
+>>
+>> The GPT parsing can be cached between each part_info()
+>> call speed up to 3x on the worse condition when the CPU
+>> i-cache and d-cache are disabled, like in the SPL.
+>>
+>> The implementation does caching each time a correct GPT
+>> has been parsed and verified and will match the blk_desc
+>> and LBA to serve the cached data or force a re-parsing.
+>>
+>> In order to allow GPT manipulation, some of the calls
+>> ignores the cache and some will discard the cached data.
+>>
+>> On the SM8650 QRD platform with a KIOXIA THGJFJT1E45BATPC
+>> configured with 8 LUNs, the scsi scan takes 0.2s with both
+>> CPU caches enabled, but when disabling both CPU caches it
+>> goes up to 4s to do the full scan of all 8 LUN partitions.
+>>
+>> With this change the scan takes only 0.18s with both CPU
+>> caches enabled running 1.1x times faster, and with both CPU
+>> caches disabled the full scan takes only 1.27s running
+>> 3x faster.
+>>
+>> While 20ms could look negligeable, it's still a 20ms gain
+>> in the boot flow and a non negligeable reduction in
+>> calculation and memory allocation since for each scan
+>> it would allocate and free the gpt_pte table up to
+>> 1024 times, now it would only do 8 allocations, reducing
+>> memory fragmentation.
+> 
+> Could you, please, describe when you clear the cache. I would think of:
+> 
+> * Media change
+> * Updating partition table (mbr and gpt commands)
+> * Any raw write to sector < 35
+> 
+> I cannot see any of this implemented.
 
---tdUDubTwLzcuM8Ew
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The partition update cache clear is implemented, but not the others
+because it would need some invasive hooks from the blk layer.
 
-On Fri, Mar 28, 2025 at 01:45:54PM +0000, Andre Przywara wrote:
-> On Fri, 28 Mar 2025 10:39:59 +0000
-> Andre Przywara <andre.przywara@arm.com> wrote:
->=20
-> Hi,
->=20
-> > On Fri, 28 Mar 2025 11:28:05 +0100
-> > Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >=20
-> > Hi,
-> >=20
-> > > On 27.03.25 16:32, Andre Przywara wrote: =20
-> > > > C's implicit fallthrough behaviour in switch/case statements can le=
-ad to
-> > > > subtle bugs. Quite some while ago many compilers introduced warning=
-s in
-> > > > those cases, requiring intentional fallthrough's to be annotated.
-> > > >
-> > > > So far we were not enabling that compiler option, so many ambiguiti=
-es
-> > > > and some bugs in the code went unnoticed.
-> > > >
-> > > > This series adds the required annotations in code paths that the fi=
-rst
-> > > > stage of the U-Boot CI covers. There is a large number of cases left
-> > > > in the libbz2 code. The usage of switch/case is borderline insane t=
-here,
-> > > > labels are hidden in macros, and there are no breaks, but just goto=
-'s.
-> > > > Upstream still uses very similar code, without any annotations. I s=
-till
-> > > > am not 100% sure those are meant to fall through or not, and plan t=
-o do
-> > > > further investigations, but didn't want to hold the rest of the pat=
-ches
-> > > > back. You can see for yourself by applying patch 18/18 and building=
- for
-> > > > sandbox64, for instance.   =20
-> > >=20
-> > > Can we use something like
-> > >=20
-> > > CFLAGS_REMOVE_bzlib.o =3D -Wimplicit-fallthrough =20
-> >=20
-> > Ah, didn't know we have that in U-Boot as well! Sounds promising, and
-> > fixes the sandbox build for me (when using bzlib_decompress.o). I will =
-add
-> > this to the last patch and will check what the CI has to say about this.
->=20
-> So for the records: silencing the libbzip2 warnings uncovered a whole new
-> bunch of warnings, in stage 1 still. Some compilers used in the CI (clang=
-?)
-> seem to be more picky about how to annotate, so a pure comment (/* fall
-> through */) would not cut it, it has to be the attribute - provided by our
-> "statement macro".
-> So I fixed those quickly, stuffed them into some patch, and now the first
-> CI stage (test.py) passes - but only to uncover a large number of new
-> warnings in the world build.
-> So I will keep on patching, as some kind of procrastination project ;-)
+This caching is really only needed from part_create_block_devices(),
+for the other get_info calls we could re-scan the GPT since we
+really want to speed-up the nomimal use-case, i.e. booting,
+we can disable caching for all the other operations.
 
-So, for the flag, what I would like is to borrow the
-CONFIG_CC_IMPLICIT_FALLTHROUGH logic from the kernel. Then we should be
-able to do:
-CFLAGS_REMOVE_bzlib.o +=3D $(CONFIG_CC_IMPLICIT_FALLTHROUGH)
-I think.
+So perhaps adding a part_info() callback bool to allow
+using cached data ?
 
-Then as follow-up convert any of our just /* fallthrough */ to
-'fallthrough;'.
+Neil
 
---=20
-Tom
+> 
+>>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>> disk/part_efi.c | 93 +++++++++++++++++++++++++++++++++++++++++++++++----------
+>> 1 file changed, 77 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/disk/part_efi.c b/disk/part_efi.c
+>> index 932d058c184ce6946b7142e7c2d9637b28e4661e..4f02fabe265ce5ca4c8f55e41768a95582022e21 100644
+>> --- a/disk/part_efi.c
+>> +++ b/disk/part_efi.c
+>> @@ -55,13 +55,59 @@ static inline u32 efi_crc32(const void *buf, u32 len)
+>> static int pmbr_part_valid(struct partition *part);
+>> static int is_pmbr_valid(legacy_mbr * mbr);
+>> static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>> -			gpt_entry **pgpt_pte);
+>> +			gpt_entry **pgpt_pte, bool cache);
+> 
+> Please, provide Sphinx style function documentation describing all parameters.
+> 
+>> static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
+>> 					 gpt_header *pgpt_head);
+>> static int is_pte_valid(gpt_entry * pte);
+>> static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
+>> 			  gpt_entry **pgpt_pte);
+>>
+>> +static struct gpt_pte_cache_data {
+> 
+> Please, provide Sphinx style documentation for the structure and its elements.
+> 
+> 
+>> +	struct blk_desc *desc;
+>> +	u64 lba;
+>> +	gpt_entry *gpt_pte;
+>> +	gpt_header gpt_head;
+>> +} gpt_pte_cache;
+>> +
+>> +static void clear_gpt_pte_cache(void)
+>> +{
+> 
+> Add function documentation for all changed function interfaces.
+> 
+> Besr regards
+> 
+> Heinrich
+> 
+>> +	if (gpt_pte_cache.desc) {
+>> +		if (gpt_pte_cache.gpt_pte)
+>> +			free(gpt_pte_cache.gpt_pte);
+>> +
+>> +		memset(&gpt_pte_cache, 0, sizeof(gpt_pte_cache));
+>> +	}
+>> +}
+>> +
+>> +static void cache_gpt_pte(struct blk_desc *desc, u64 lba,
+>> +			  gpt_entry *gpt_pte, gpt_header *pgpt_head)
+>> +{
+>> +	if (gpt_pte_cache.gpt_pte)
+>> +		free(gpt_pte_cache.gpt_pte);
+>> +
+>> +	gpt_pte_cache.desc = desc;
+>> +	gpt_pte_cache.lba = lba;
+>> +	gpt_pte_cache.gpt_pte = gpt_pte;
+>> +	if (pgpt_head)
+>> +		memcpy(&gpt_pte_cache.gpt_head, pgpt_head, sizeof(gpt_header));
+>> +}
+>> +
+>> +static gpt_entry *get_cached_gpt_pte(struct blk_desc *desc, u64 lba,
+>> +				     gpt_header *pgpt_head)
+>> +{
+>> +	if (gpt_pte_cache.desc && gpt_pte_cache.gpt_pte) {
+>> +		if (gpt_pte_cache.desc == desc &&
+>> +		    gpt_pte_cache.lba == lba) {
+>> +			memcpy(pgpt_head, &gpt_pte_cache.gpt_head, sizeof(gpt_header));
+>> +			return gpt_pte_cache.gpt_pte;
+>> +		}
+>> +
+>> +		clear_gpt_pte_cache();
+>> +	}
+>> +
+>> +	return NULL;
+>> +}
+>> +
+>> static char *print_efiname(gpt_entry *pte)
+>> {
+>> 	static char name[PARTNAME_SZ + 1];
+>> @@ -211,8 +257,6 @@ int get_disk_guid(struct blk_desc *desc, char *guid)
+>> 	guid_bin = gpt_head->disk_guid.b;
+>> 	uuid_bin_to_str(guid_bin, guid, UUID_STR_FORMAT_GUID);
+>>
+>> -	/* Remember to free pte */
+>> -	free(gpt_pte);
+>> 	return 0;
+>> }
+>>
+>> @@ -252,9 +296,6 @@ static void __maybe_unused part_print_efi(struct blk_desc *desc)
+>> 		uuid = (unsigned char *)gpt_pte[i].unique_partition_guid.b;
+>> 		printf("\tguid:\t%pUl\n", uuid);
+>> 	}
+>> -
+>> -	/* Remember to free pte */
+>> -	free(gpt_pte);
+>> 	return;
+>> }
+>>
+>> @@ -277,7 +318,6 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+>> 	if (part > le32_to_cpu(gpt_head->num_partition_entries) ||
+>> 	    !is_pte_valid(&gpt_pte[part - 1])) {
+>> 		log_debug("Invalid partition number %d\n", part);
+>> -		free(gpt_pte);
+>> 		return -EPERM;
+>> 	}
+>>
+>> @@ -307,8 +347,6 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+>> 	log_debug("start 0x" LBAF ", size 0x" LBAF ", name %s\n", info->start,
+>> 		  info->size, info->name);
+>>
+>> -	/* Remember to free pte */
+>> -	free(gpt_pte);
+>> 	return 0;
+>> }
+>>
+>> @@ -382,6 +420,9 @@ int write_gpt_table(struct blk_desc *desc, gpt_header *gpt_h, gpt_entry *gpt_e)
+>> 					   * sizeof(gpt_entry)), desc);
+>> 	u32 calc_crc32;
+>>
+>> +	/* Clean cache */
+>> +	clear_gpt_pte_cache();
+>> +
+>> 	debug("max lba: %x\n", (u32)desc->lba);
+>> 	/* Setup the Protective MBR */
+>> 	if (set_protective_mbr(desc) < 0)
+>> @@ -620,6 +661,9 @@ int gpt_restore(struct blk_desc *desc, char *str_disk_guid,
+>> 	gpt_entry *gpt_e;
+>> 	int ret, size;
+>>
+>> +	/* Clean cache */
+>> +	clear_gpt_pte_cache();
+>> +
+>> 	size = PAD_TO_BLOCKSIZE(sizeof(gpt_header), desc);
+>> 	gpt_h = malloc_cache_aligned(size);
+>> 	if (gpt_h == NULL) {
+>> @@ -689,7 +733,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
+>> 	 */
+>> 	if (is_gpt_valid(desc,
+>> 			 GPT_PRIMARY_PARTITION_TABLE_LBA,
+>> -			 gpt_head, gpt_pte) != 1) {
+>> +			 gpt_head, gpt_pte, false) != 1) {
+>> 		log_debug("Invalid GPT\n");
+>> 		return -1;
+>> 	}
+>> @@ -706,7 +750,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
+>> 	}
+>>
+>> 	if (is_gpt_valid(desc, (desc->lba - 1),
+>> -			 gpt_head, gpt_pte) != 1) {
+>> +			 gpt_head, gpt_pte, false) != 1) {
+>> 		log_debug("Invalid Backup GPT\n");
+>> 		return -1;
+>> 	}
+>> @@ -764,10 +808,13 @@ int gpt_repair_headers(struct blk_desc *desc)
+>> 	int is_gpt1_valid, is_gpt2_valid;
+>> 	int ret = -1;
+>>
+>> +	/* Clean cache */
+>> +	clear_gpt_pte_cache();
+>> +
+>> 	is_gpt1_valid = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
+>> -				     gpt_h1, &gpt_e1);
+>> +				     gpt_h1, &gpt_e1, false);
+>> 	is_gpt2_valid = is_gpt_valid(desc, desc->lba - 1,
+>> -				     gpt_h2, &gpt_e2);
+>> +				     gpt_h2, &gpt_e2, false);
+>>
+>> 	if (is_gpt1_valid && is_gpt2_valid) {
+>> 		ret = 0;
+>> @@ -906,6 +953,9 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
+>> 	lbaint_t lba;
+>> 	int cnt;
+>>
+>> +	/* Clean cache */
+>> +	clear_gpt_pte_cache();
+>> +
+>> 	if (is_valid_gpt_buf(desc, buf))
+>> 		return -1;
+>>
+>> @@ -1023,12 +1073,13 @@ static int is_pmbr_valid(legacy_mbr *mbr)
+>>   * lba is the logical block address of the GPT header to test
+>>   * gpt is a GPT header ptr, filled on return.
+>>   * ptes is a PTEs ptr, filled on return.
+>> + * cache is a bool, true to use the cached gpt_pte from previous call
+>>   *
+>>   * Description: returns 1 if valid,  0 on error, 2 if ignored header
+>>   * If valid, returns pointers to PTEs.
+>>   */
+>> static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>> -			gpt_entry **pgpt_pte)
+>> +			gpt_entry **pgpt_pte, bool cache)
+>> {
+>> 	/* Confirm valid arguments prior to allocation. */
+>> 	if (!desc || !pgpt_head) {
+>> @@ -1036,6 +1087,12 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>> 		return 0;
+>> 	}
+>>
+>> +	if (cache) {
+>> +		*pgpt_pte = get_cached_gpt_pte(desc, lba, pgpt_head);
+>> +		if (*pgpt_pte)
+>> +			return 1;
+>> +	}
+>> +
+>> 	ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, mbr, 1, desc->blksz);
+>>
+>> 	/* Read MBR Header from device */
+>> @@ -1081,6 +1138,9 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>> 		return 0;
+>> 	}
+>>
+>> +	if (cache)
+>> +		cache_gpt_pte(desc, lba, *pgpt_pte, pgpt_head);
+>> +
+>> 	/* We're done, all's well */
+>> 	return 1;
+>> }
+>> @@ -1100,13 +1160,14 @@ static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
+>> 	int r;
+>>
+>> 	r = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA, gpt_head,
+>> -			 pgpt_pte);
+>> +			 pgpt_pte, true);
+>>
+>> 	if (r != 1) {
+>> 		if (r != 2)
+>> 			log_debug("Invalid GPT\n");
+>>
+>> -		if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte)
+>> +		if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte,
+>> +				 true)
+>> 		    != 1) {
+>> 			log_debug("Invalid Backup GPT\n");
+>> 			return 0;
+>>
+>> ---
+>> base-commit: 4adbf64ff8d8c730223fd8ae299d770bebb6fe86
+>> change-id: 20250327-u-boot-efi-part-cache-ddc1499c3ef6
+>>
+>> Best regards,
+> 
 
---tdUDubTwLzcuM8Ew
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmqPcACgkQFHw5/5Y0
-tyyz8Qv/eEhlWh9wIE3DZpfmEV2q5CcWIKID4iw5TUn9TwUtZZ7DN9BegLDPXt0P
-qY0Vz0cQb+8H6p4KRccxmvNSR1OmoTS4FEhKVb1xX6H44oNQR4Ht32pMhLZoo+xq
-dezLUnMat608ccpi2vSOwz/OBaxefkxVzHMUjkPLIfE/d+JxPBDFcBqApzbmvUf+
-eHSKErqRPX+C64XoEESN5LEcF4uWnDl7r1iF6VD6XeBVMFxE6sznbAsojh3P5uQ3
-AJj+LOZQvurnRtvMk/greWqND0GHNPWpzlu+zNAzLn4unJNktKFIywR2vC9dFwk5
-uCPVBJEG/xtZoMK5gU+cH5p5Z0/OyAJP4V5+GaT/kP/OERJ22UYKGjTAlrXtMHFK
-iItHuHI1QPRqinkmSwRvhLFYwSWNzUavAaobhF5i5MDZcfgp2hdqnxt1R8ayptj8
-RdGxmKC9OAc/qR8Ojoic4BHmRzaQ+u8lLwMghLHmzIqx5wWhvHYd40OKf480vFZM
-RHFcee9r
-=fLG+
------END PGP SIGNATURE-----
-
---tdUDubTwLzcuM8Ew--
