@@ -4,97 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920AFC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 12:27:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DFAC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 12:31:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 087398070C;
-	Fri, 28 Mar 2025 13:27:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F0858070C;
+	Fri, 28 Mar 2025 13:31:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OewTgRhv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RioRk+WU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 567A7810EA; Fri, 28 Mar 2025 13:27:48 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 32127810EA; Fri, 28 Mar 2025 13:31:12 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47AD380079
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 13:27:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14D5C80079
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 13:31:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-394780e98easo1206793f8f.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 05:27:46 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43d0782d787so14676375e9.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 05:31:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743164866; x=1743769666; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=mxUwqnorOe8jEQ91JVf3i1bxoaLcG97CH2keoK4U7/0=;
- b=OewTgRhvDRZP755BOKe8vbtUCFnLfz1aJc1xss4ETWaWTYElLRiI10k+zacvEXpuww
- XuXTZL4d48pTEqf8PibLURXrrb6XxLd15Uyl7g0Zrz0w8pJeXP2rjeb8S3bGZaIyN2XY
- RyirIeCzfKV04P2jNagmwMe15eX0z8iE9Vt7pXLUFWUIBHAHAZjIIWrqOxvqAWvlZ+iv
- Z564QffZQkcOPGcSbglF10Iu/iKAgiOsiefUHUClVWzug41aEovAGJDYND0CREDuToOd
- QJBa/zb25nsjxM3k9H6wKh8T3zbl01r5JkPtpvExmV00KD7M+XZ6uS8fUxWz0oSkwgvY
- aGxQ==
+ d=linaro.org; s=google; t=1743165069; x=1743769869; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4UyAXo2RJukZj0TtZlNUhoMRreDzrfA4L1mAV0/NfUw=;
+ b=RioRk+WUwihxSOn88jlrZuv5hgEX3lmEi4bpjK0hjxPpy3MbVp+XervHYVKtj8eo7M
+ RTx+7GEiZzsftCRCO1ZOxYRLgilxknwm4DMU/IimJatFczkVI6IPEHnSbxsrf/o4i3CD
+ ozY17R7Sn0OQkZLL97lIOPqQUdIB3FLSV+H+W4jeg+NZyL0TBQDVkoaXU7YQ4pIy37kK
+ H3xRFQrVylVG15gi/UiODlKKiETZF4Nlmc1xYeo1p6jUT2WunSngJ1KjYsAwaxIACsNw
+ fx/37Dsu8/XneiTn6wlYTCoC9C4oHzSWBVvuaQ4L3RgAJxnHYcWtfTYs8T3DTEa1vUwn
+ TYRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743164866; x=1743769666;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1743165069; x=1743769869;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mxUwqnorOe8jEQ91JVf3i1bxoaLcG97CH2keoK4U7/0=;
- b=GrSi0B27muqEDF21nldFfAwtihE8qvj0F2xp5UFm8t4D500PwgfP42QrLLeXz3DAxU
- nFVD9yYfgiEgJviREASdFS2b2np8VlSCOwnHKHz5oLBDWjR/82BGv60S1g05LwQnyuEW
- R3Ov/3mlZ6Hrx4X+6lmImMQUNdC/czfJliioU/ncMkmjq4/aPgBaCFAo2cUirzJY4gMX
- rEPg9bO/jaVhvCc8wA7WUaTvcbj2gioTYioA2Y7Ao+aSW9wE1zooKjnx3y285fzmvVpV
- Tcjmyc6hTHz5YeezMui1UMQ884G5+9LX+QyBOTFI2MfpGjq+5O24Chhwg2mWQ6nBAAtj
- Ez6A==
+ bh=4UyAXo2RJukZj0TtZlNUhoMRreDzrfA4L1mAV0/NfUw=;
+ b=Io6HTt3U4iIaI3PpUEhdd+E5bXKYGlIOtVHcbZR8GFOAmDyV66udFbj4SRAp/kibfM
+ tkK2HDagApdhbHzBrxNhNEeCm4nBZSEAX3IhNYn2+RNQ/Pn1ZQAU2AumF6Ee/n7mE2Fl
+ 9/hvqKt7UOi3UUOm2hYSjO9SQxL8iDVAfxGJDwxiz1JefBkerZclodBbaEgGiK7uQk2T
+ m5y5jhFPSMtmzUBYC6xaYjVHGTtc/IPqigguMyj4xAXEzgXeFhOyS3RrMPRVes7RnzFp
+ S0867blN7/FoTNSEqpQrv0bAPnmz5KDc7RDYoU7Gfp63nltxFYVxym6aL67vGMbeMJq+
+ 2Ssw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXur4AFavXZE27Fivba1yFP0MDQCFUe6Dq2pIiJmnn6S5E7cJm7nfoLvp84+/kmjRNEjbzLL7M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdrQldexewnM+6MZYlyz/fgaVzGztTaZTQPLjyQ4II4FdYFI1q
- Y+NnsYG6Wv6UpO6Yzy+tFOSNe1ZMwsYHARYtiJx31v9ut4wNQ/U+wyPcfbnO13Y=
-X-Gm-Gg: ASbGncuvLVcmaYpntLRvfQa2NPW4Zxy3G5yDJZ1XYkmoKHqTYXA5fbqMthWjqOOPDZr
- k6xj/q7BVho8pT2Pucu+KdKLOrkKP0FlhenjbJzxCeJR7/uBz0PLvnMlgLMl+W9aUq6iCh3n0DH
- TFKkEaW5JM+c6oc1ncs0B2D/YpXYEyoSD7GoHGDuLfKto/b5i1tOo1SnPNBY/mQuKxmLs29j6Wp
- BcVRfN527DWBU20LKVIxB/DwTtgY3mRy28ny4e5cobFd/BLk+xNev9asTM8eWcLdB4d7R8EF5h8
- nczNVNzWvzxF3nkw6qCIEQvjs9W3UzKdTSkUP+jkdXgNqiG0booJ9oe5dxgt2YWVPMAPOjXtK70
+ AJvYcCUvw0+rIzV6RKYu/hnweR7o5nEf3VKmYbSSvzUviAlysEujZztwgsO80x2EJ5y/K0q1Pag11Uc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyuIgbb7wjbnQXQqU3gaBiLGgSCgB6kL/oSdcs0Iw68EHncy9KV
+ VVoPjttRHQiZpq/6+Hgnq7UDZOPUSd48+fDiA+LB7Wds7kqpI1R2/G6cYuWkd7w=
+X-Gm-Gg: ASbGnctfj4s3HKnbmqgUPRuxbuCvN2H2MUDJ0nNfeNTBiqBrWndtNKIow8drAla9GBV
+ zfWp9NcVPd5SQbPUwh0kkdyuEI4rgWBFfkCnsCQ7QhxgmUS3yovSB4SyIW2j/8uDVjm/YLLCPNl
+ L/u/HTnuiuCSvWYcHP7Sr9UTDVka40JJ9OK5g9ttC6f9rVoPxM+gt5QxRF4txUs9GqaDJNTjem0
+ 02dBg70e/raxDwraEpdbFOUMAnkqecPJTS6C/fPDz2Q9qXunIgegN9gno0RZuZ9b7biClDoiXVa
+ Nv4od20yKb5yRSDo2jDxK5QpvG+2tZa1vy5WXaHJauSK7YgPGCLqDMsJ8TBkow74OBuZp/p5J6c
  =
-X-Google-Smtp-Source: AGHT+IFKZ70hG1cED6Sjm34G+YongP3rkKa1KDlXUlIZrAnXCCiIBtSLbepAl2eX2FXrkp9w9MnYtg==
-X-Received: by 2002:a05:6000:4009:b0:391:4743:6dc2 with SMTP id
- ffacd0b85a97d-39ad1750844mr7220308f8f.25.1743164865613; 
- Fri, 28 Mar 2025 05:27:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGZF3MFNOQUHHGGH7hr2itWDc+Jn+hsD9AjwWAXXfMutlDW8M+uNzLqud0Pk3PQ+FFfraiXcQ==
+X-Received: by 2002:a05:600c:1d87:b0:43c:fe15:41c9 with SMTP id
+ 5b1f17b1804b1-43d9182abf3mr23310885e9.9.1743165069359; 
+ Fri, 28 Mar 2025 05:31:09 -0700 (PDT)
 Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d900013afsm26128445e9.36.2025.03.28.05.27.44
+ 5b1f17b1804b1-43d8fba4b4fsm26838365e9.1.2025.03.28.05.31.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Mar 2025 05:27:45 -0700 (PDT)
-Message-ID: <8857623f-e6d6-4da4-b9e1-f56b352279f9@linaro.org>
-Date: Fri, 28 Mar 2025 13:27:43 +0100
+ Fri, 28 Mar 2025 05:31:08 -0700 (PDT)
+Message-ID: <bd6c671f-a0bb-41b0-92bf-6c02d146a9e0@linaro.org>
+Date: Fri, 28 Mar 2025 13:31:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] bloblist: fix the overriding of fdt from bloblist
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Ravi Minnikanti <rminnikanti@marvell.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthias Brugger <mbrugger@suse.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250327231318.2713201-1-raymond.mao@linaro.org>
- <714a1d3d-7578-4fed-bc8a-c93eff3809c6@linaro.org>
+Subject: Re: [PATCH 0/4] spmi: msm: fix pid mapping for v5 & v7 controllers
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250328-topic-sm8x50-spmi-fix-v1-0-a7548d3aef0d@linaro.org>
 Content-Language: en-US
-In-Reply-To: <714a1d3d-7578-4fed-bc8a-c93eff3809c6@linaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250328-topic-sm8x50-spmi-fix-v1-0-a7548d3aef0d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,51 +106,41 @@ X-Virus-Status: Clean
 
 
 
-On 3/28/25 11:44, Caleb Connolly wrote:
-> Hi Raymond,
+On 3/28/25 09:53, Neil Armstrong wrote:
+> The v5 & v7 controllers has complex mapping for
+> different Execution Environment, and v7 supports
+> two busses within the same controller so it needs
+> some special care when parsing the hardware map
+> table to get the proper read & write channels.
 > 
-> On 3/28/25 00:13, Raymond Mao wrote:
->> When a bloblist is valid and contains fdt, it explicitly means
->> a previous boot stage is passing transfer list compliant with
->> Firmware Handoff specification, thus the fdt from bloblist should
->> not be overridden with the ones from board or env variables.
+> Test are welcome, especially for v5 controllers.
+> 
+> Tested on HDK8550, QRD8550 & QRD8650.
 
-Actually, I'm a little confused here. Can you point to the documentation 
-that says an FDT from a bloblist should always take priority?
+Buttons still work for me at least :D
 
-I can see why this makes sense to lock down, but clarification would be 
-good regardless.
+Tested-by: <caleb.connolly@linaro.org> # sdm845
+
+Not sure I'm familiar enough with SPMI to leave an R-b, but the patches 
+look good!
 
 Kind regards,
->>
->> Fixes: 70fe23859437 ("fdt: Allow the devicetree to come from a bloblist")
->> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > 
-> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   lib/fdtdec.c | 3 ++-
->>   1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
->> index f09c9926a7a..c38738b48c7 100644
->> --- a/lib/fdtdec.c
->> +++ b/lib/fdtdec.c
->> @@ -1708,7 +1708,7 @@ int fdtdec_setup(void)
->>                   gd->fdt_src = FDTSRC_BLOBLIST;
->>                   log_debug("Devicetree is in bloblist at %p\n",
->>                         gd->fdt_blob);
->> -                ret = 0;
->> +                goto setup_fdt;
->>               } else {
->>                   log_debug("No FDT found in bloblist\n");
->>                   ret = -ENOENT;
->> @@ -1752,6 +1752,7 @@ int fdtdec_setup(void)
->>           }
->>       }
->> +setup_fdt:
->>       if (CONFIG_IS_ENABLED(MULTI_DTB_FIT))
->>           setup_multi_dtb_fit();
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+> Neil Armstrong (4):
+>        spmi: msm: use real number of channels for v5 & v7
+>        spmi: msm: factor out channel mapping for v5 & v7
+>        spmi: msm: introduce SPMI_CHANNEL_VALID flag
+>        spmi: msm: correctly handle multiple mapping entries
 > 
+>   drivers/spmi/spmi-msm.c | 59 ++++++++++++++++++++++++++++++++++++++++---------
+>   1 file changed, 49 insertions(+), 10 deletions(-)
+> ---
+> base-commit: 4adbf64ff8d8c730223fd8ae299d770bebb6fe86
+> change-id: 20250328-topic-sm8x50-spmi-fix-1e2b433a6ffd
+> 
+> Best regards,
 
 -- 
 Caleb (they/them)
