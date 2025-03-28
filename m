@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 779A5C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D3B6C3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:15:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7546C81273;
+	by phobos.denx.de (Postfix) with ESMTP id CD5F58219D;
 	Fri, 28 Mar 2025 14:08:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TtQqV9ak";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gNPaPGHg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E9DE82149; Fri, 28 Mar 2025 14:08:48 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id BE02D81ED8; Fri, 28 Mar 2025 14:08:49 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB8BA8219D
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 938A18210A
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-85b40a5120eso61495339f.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:45 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3cfc8772469so7350885ab.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167324; x=1743772124; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743167326; x=1743772126; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zEW5KFwxPTgg9S8AXpCDNBTBs8qIZhWI3UpCQ/si2Sw=;
- b=TtQqV9akez4stYY/FCKUAUELOiz/JA/5hyHdEQpxAmho+NIhtvfIPQjyLoZHpVldH4
- CSmdJTDapHPx4XESfSKgDDtfqAjHxtaXuXwf4Gd7ZC9TV+dy3b6RfYqVgkUwLAhPV2Kt
- jxA3MibsGcY0D0VU7hkiuhnHt36gHTA6p9CX0=
+ bh=CVGc4Uv7gV6eYbqeXyRG/lEjAEqCWRxYvrsAb3aQhg8=;
+ b=gNPaPGHg4mXJ9d08dFaDw5Vr6xuvXxHWt88+fVGLPPulTaAOvoT2J/mN6b5gsqFlR4
+ xsET4/NlFQp1UVRF7/T1XYoahmynCBKxEbseghrIMwIzNhEud4C1ka2tmCjEZB/kw751
+ CVr1H5Jk9NJPU+Dte6DMg6uuP2iCoRIwVkDxE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167324; x=1743772124;
+ d=1e100.net; s=20230601; t=1743167326; x=1743772126;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zEW5KFwxPTgg9S8AXpCDNBTBs8qIZhWI3UpCQ/si2Sw=;
- b=BuBqK4nl97Ilq0yTeTl283FE2QE7uZtJxU8l+l2LLVyj6CpNm/0kZ/OUecW0dqAASW
- 8jx8nlnU7/+MAkH+pswwMMd8vo0FpGcOSecX81/7TbLqIbqXxJQUC1jur8lfRFUWKZQh
- DUJ8e1rPlSWmr5ot07GDruX/E8+Tsnm3u7tu0ixrZ9mVxK1heClLwDUVQnDIAHQm2fpz
- hMIZQGWYWA5BDMjHwqCM1ie+xui88YyQD6S7L6Sc638WkmtfGdXgQriFeATY9pRV9Ho7
- E458ihM25ncHTc5S4fTDPYvt4YGelHH0PJrfJNzCcvO8QAuoGSOMEID75hCGQqdxCye/
- 9DAQ==
-X-Gm-Message-State: AOJu0YzSVVFhKOVMQhGsKHp3EylTTkoY/dnpQTITXKMn9EBpH1w0zE+0
- P9wYZGdQy+QKgZ0c1+bd0xQ6pMxDZwlB9vC2B+rtqpj1q7ZwZWK90Tq7cld9cJmrMocHWv4OTE0
+ bh=CVGc4Uv7gV6eYbqeXyRG/lEjAEqCWRxYvrsAb3aQhg8=;
+ b=kn7+8FAnSsqSgNCWfS27cbho8MCkEc7t5h8u2IjFjVRkMPmlC9Y24cgt+0ux6rUWXJ
+ X8jOjS+8YwMS4vNK8Dx7Lvm8f6RPPux7U4hl8/kObVc1AsC//x3kHvumkv6+uUzweMKB
+ FHOxb6Q7ZGhFmnc5DY9jDv/jSrKoJZSkUChdDdYWWRUUlsG89gOSgsvr/0po0nO4sisa
+ J0BUPJeh04H+CUUpqjUMbsPoL7ZzdLRo+rjBezKEMt5Mjii5asQKoZuuZpYV0YSHWT9T
+ SeimwOJMQ7a+Vr8rZHpLiF7twYGBGflOK0EhLQ00q7ayW8alNGvxO7TMYthktzieqyEZ
+ lwzg==
+X-Gm-Message-State: AOJu0Yy9GdzE3j4QpeBtKjr0TMNQhcrvD0dbLZnO/Ey+XrUwqcbe5mFS
+ 1Vw3zmWo4ZaYKwaYGWHSSE/HihYkQIoKk1hF18bLK/c/lJeKRrs5ypx8FT7wSC2s5XWY9oS1iKI
  =
-X-Gm-Gg: ASbGncvBrz0n7WQU+sfVgcgQxJELRzyUklMoMayJ7BfJgg/lTvERqcftNLhM07VUEMN
- gtmaWwV2JlO2+e4ZhNKM0F5HTtLIiPJHHdxbEa2Y0Eh7ySMcjL2c80u+D6sT8XhhjE0UbBwm1iJ
- GUElYzOfSoWaDlojcothrYTUDUDKkK+WXNNH+rOoTXSfnBpRshy2W46s2iP1/if8nEJ4TvxbtFh
- tEcg1Fsa4lMhf2GiEWNuinHj8z0/Tmp0tnNTRWpFea5mpH4OvVzQFO0HMXS9CR85CVZSamrM5G/
- BRSiIEv96HE5c1v9t3BwXovlW95qgdlXjsaEkesFgWts9NTwuCya3SdhbP3XJu57LJDmMc7NnN8
- FEZvbow==
-X-Google-Smtp-Source: AGHT+IFxT4uxlYrDRmF+JUJj+tQslOId7sIqKQRwl/6Je1eLPjpMpHn2q22RamZaxlQ5BdHJcO4dUg==
-X-Received: by 2002:a05:6602:408c:b0:85e:181e:1bd3 with SMTP id
- ca18e2360f4ac-85e8203bbf1mr959597739f.1.1743167323983; 
- Fri, 28 Mar 2025 06:08:43 -0700 (PDT)
+X-Gm-Gg: ASbGncuurxkaz4/4r/CpaKgqRt3zwk5zezmiedHiK7T/PzgLemvKpnkZqT2kpedwAk0
+ ITBNCoP6MrTLTwnosFx5Jl3rAJpG+kC2UFZaO4bkKHsHGZrzOYaan7GMZy9isbYcoTDeVcvbTHK
+ vpb1XJk1/w0qTg9X5tWQ4tyQDkhDSbfH2j6Uuvt8Y3AJS+kIfX7v88l3rXbdLcbVlsICJ4XCPbG
+ P0oNlCrDYAtq16xW3hJzPOKqliDAS9DaaN5vS1FAuGs9yB7b6INfL2dyi52gT4RNhAN7IDDzuCZ
+ ejYrS322BkUdQa8pcZA/0Z2hAQ5JJHXHwVbQDVkQs8F2v8SdUjCTjPncI7UAWkgLFZ+/3dqz5Jg
+ JDqJJDA==
+X-Google-Smtp-Source: AGHT+IHhLcsCxXgXqwvUQWZd01QWpB5bBvOzzHHLLnk86VW/UX0i2fgU/IaqsyYvJ+2ka+5XJh1k2g==
+X-Received: by 2002:a05:6e02:188d:b0:3d2:aa73:7b7a with SMTP id
+ e9e14a558f8ab-3d5ccdd53b3mr85717475ab.12.1743167325686; 
+ Fri, 28 Mar 2025 06:08:45 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.42
+ 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:08:43 -0700 (PDT)
+ Fri, 28 Mar 2025 06:08:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 45/56] expo: Use a simpler name for USB media
-Date: Fri, 28 Mar 2025 07:06:32 -0600
-Message-ID: <20250328130713.2612648-46-sjg@chromium.org>
+Subject: [PATCH v2 46/56] expo: Drop the gap between groups of menu items
+Date: Fri, 28 Mar 2025 07:06:33 -0600
+Message-ID: <20250328130713.2612648-47-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
 References: <20250328130713.2612648-1-sjg@chromium.org>
@@ -95,47 +95,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For USB devices we use the string 'usb_mass_storage' which is a bit
-verbose. Use 'USB' instead.
+The gap is intended to separate options which are on different bootdevs,
+but most of the time there is only one. So drop this gap.
+
+Keep the code around in case it becomes useful to have it in the style,
+or based on some other mechanism.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootflow_menu.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ boot/bootflow_menu.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index cadffcf259a..986334e95e2 100644
+index 986334e95e2..ace89545fa9 100644
 --- a/boot/bootflow_menu.c
 +++ b/boot/bootflow_menu.c
-@@ -84,7 +84,9 @@ int bootflow_menu_add(struct expo *exp, struct bootflow *bflow, int seq,
- {
- 	struct menu_priv *priv = exp->priv;
- 	char str[2], *label, *key;
-+	struct udevice *media;
- 	struct scene *scn;
-+	const char *name;
- 	uint preview_id;
- 	uint scene_id;
- 	bool add_gap;
-@@ -101,7 +103,14 @@ int bootflow_menu_add(struct expo *exp, struct bootflow *bflow, int seq,
- 	key = strdup(str);
- 	if (!key)
- 		return log_msg_ret("key", -ENOMEM);
--	label = strdup(dev_get_parent(bflow->dev)->name);
+@@ -117,6 +117,9 @@ int bootflow_menu_add(struct expo *exp, struct bootflow *bflow, int seq,
+ 	}
+ 
+ 	add_gap = priv->last_bootdev != bflow->dev;
 +
-+	media = dev_get_parent(bflow->dev);
-+	if (device_get_uclass_id(media) == UCLASS_MASS_STORAGE)
-+		name = "usb";
-+	else
-+		name = media->name;
-+	label = strdup(name);
-+
- 	if (!label) {
- 		free(key);
- 		return log_msg_ret("nam", -ENOMEM);
++	/* disable this gap for now, since it looks a little ugly */
++	add_gap = false;
+ 	priv->last_bootdev = bflow->dev;
+ 
+ 	ret = expo_str(exp, "prompt", STR_POINTER, ">");
 -- 
 2.43.0
 
