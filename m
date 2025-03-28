@@ -4,96 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C7C7C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 11:42:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B95C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 12:01:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E3138082A;
-	Fri, 28 Mar 2025 12:42:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F085A8082A;
+	Fri, 28 Mar 2025 13:01:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jNT1uBBh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UiegCwcT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E6A0810EA; Fri, 28 Mar 2025 12:42:28 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 5608E810EA; Fri, 28 Mar 2025 13:01:38 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A56F805C8
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 12:42:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A687F805C8
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 13:01:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-3015001f862so2457975a91.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 04:42:25 -0700 (PDT)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2255003f4c6so40413035ad.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 05:01:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743162144; x=1743766944; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ruu4lRwQOo+28vlXNpLRO26zKf/SMLQgG/svadefDPM=;
- b=jNT1uBBhBdG7IZRHJznLK2h0YtlXu0ZSfjEYCDhD/9sX7/CoXcHvYn7/Im9B07Fgu2
- OzuoR/cTy3mf2lrzzG/P84192oU7qk7ipNn4KZfIoIQpE3BlC69ks2HRb0OLTNlbXzbe
- HjYM0DTQ1LerPNklgGsHDLP5ClDB6nMwHKT+E=
+ d=chromium.org; s=google; t=1743163294; x=1743768094; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Oc4qO7DPX+fi8ZKpD66i9Gv3PH0JKG3hDHI3B5c0K84=;
+ b=UiegCwcTGlCZaAh9YbMvrkcC+LELVXbsk9l2Rzx20vYc/gHL7oSLhbNEaXRjieIpIs
+ I+jhZOcAtdJ9yknvmmEE0H4H8Fb3WVH0arapWhZf8gxG92dabB023nf4INhpwfE3ZrH8
+ j25rR5nPpACGAe8R0KG+EBRkg+pJJiaYGDR34=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743162144; x=1743766944;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ruu4lRwQOo+28vlXNpLRO26zKf/SMLQgG/svadefDPM=;
- b=c/85baUcIeQWq70g2++f/uITgo/XCDCnJQ3pB61KQPKOcKGeqehOVK7S4CA7b2SSOz
- QDJioniD5JumZuQvn7smOgo+3UfSGSfVDJ6mvMOuhKlSowkkbfjKoRXS3KLKP0uQ+niz
- 1jj4VOEAbka/VR6QJAYMjfiFAqWQs7n4lwXkDmeidmzVn/CidppB3lyMAB578QPhXmPd
- iKsawby77j9w3QcnoYleyGvLaJpyR+RCYJ0eHhiD5t40fxUCJQPj1G/RSt4xufGBw72z
- pizD2jfUcC8V7rmTAaF5T5gZ0HPfGWaP6oZ0764gE5fIek9IMdmEU/SGO1T3HaapGaxO
- VcrA==
+ d=1e100.net; s=20230601; t=1743163294; x=1743768094;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Oc4qO7DPX+fi8ZKpD66i9Gv3PH0JKG3hDHI3B5c0K84=;
+ b=H2me6McKEAOn69gtbn0EbMCBpMRFDvKJVSpnFgT6e/xHhQD216HaWbKTF0Wg/QATse
+ ywnSaHlHeqENOfJ9kCJljIby0O+SCpFidR/Tlj/wEjrPMBkgDcgE+0WlpcOKJnFwiE28
+ B4c2BGbrC9XumR44AeRcpDmV9MrCCmSrzpxvUmFbaAZ4UnEy/hyTZgMZQ0B1J/Gr5m+G
+ an9duv1Co1LG0MHm5mbS3XnhBgTZVHPONKmpx/EdCmwwBy7zQ5+wiuUywLx2PUVbhRKy
+ Lf+gup9MD4Cnjm2PEvrd6riyualviL5+oj6ecWtect5Xa42JXfqGXpvRDBzqEGCmPc5L
+ mDWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+RbZaW0hBuB5qz1VOn0f2+ZzO7iXhvwrDwUBgxGBEMf4Uxy2EKfQ/RNXn53hDxRQ9/fxvotg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJI7BhaXqR5FDyiHDBb48nJh2EDgFQ030kS4CcnB5GeGMpyhF9
- qisSSJUI3itZ99OfJkydv01t8az8Dfnp0/BFPejzKlgJvg8Q+0Ofu0RIgn8kwtt8pa0AJiO9/3R
- 2PJQNNpeHzSiMpFwi9UYjVf/ecAqEmTD6VN/4
-X-Gm-Gg: ASbGncuZSDmttgrDcOpp3pRZI8tcsi7VnkUygdJdtSa+6eYOfOM/r+SBDSmlDdb5MZM
- dmwe3Vy57l0e5df0M/Bv3rCFn2CHpLt9Iqy8iB6W+IsNNZUcbd8M1h4ItNbwM6zH5Ixg6jP6eRl
- Mw0Zf1o5nAEAHQy27HMe/nIPGarb1uYOEXpifvSQ==
-X-Google-Smtp-Source: AGHT+IGipoAA5IdvNzL0+c4kF2VGaiiMxQFtiiOP9cIcvt7q5ZWl+rHD3DOase+PEVze+YyIds8K18xdWolnq45PNY4=
-X-Received: by 2002:a17:90b:1c03:b0:2fe:8902:9ecd with SMTP id
- 98e67ed59e1d1-303a7c54aacmr8001033a91.1.1743162143826; Fri, 28 Mar 2025
- 04:42:23 -0700 (PDT)
+ AJvYcCWA+wu+9rG3VxtZd/qQihTXAPaymSxntIgFQTFlixk+Ug2MCPKaUGVaBiSKXBA6rqEs/DSvWd4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4DkPHi+varWZG+SSrTNpZb6dKp4dkoom5QiYxXwtF1cUoM2cl
+ sziXRa7Aux5e79Dr/gSXJL9gW3asn2dbiIw3Lf47eITTj5WlKTs8RWKUFqT6OPUhWjLtzd/y59Y
+ xAYUBapofa1fbqy+qo7GAIhevXhWDMfWbG8Jb
+X-Gm-Gg: ASbGncteXfSB/3mVhdr/0w5zE8sk9CRIiXmfpcN/JbwAdWdMXb29HvRfogDYY7E6Din
+ /YCQ1aBbN7ewvzuLGe86JRndG1BtjBvhajw7A8PahcnkjWkR/6Cy0i89xvtlu0R2FE70hpTsFYA
+ 0Pzfr8FDcLZKWrza4YDbu122Z42Fw=
+X-Google-Smtp-Source: AGHT+IFdE+Ow0SgX9UklyG5qLmoKMPeVaqxipSHbtBAIBg4UZCKTuGPgEB0RjOGB2ci7DpsnygB3QnLfVa0NvUpm8qI=
+X-Received: by 2002:a05:6a00:1784:b0:736:5e28:cfba with SMTP id
+ d2e1a72fcca58-739610bde82mr11627441b3a.18.1743163293723; Fri, 28 Mar 2025
+ 05:01:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250105203714.158480-1-marex@denx.de>
- <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
- <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
- <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
- <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
- <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
- <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
- <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
- <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
- <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
- <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
- <a05cf63b-820d-4b27-8f66-37a6e6c7b372@denx.de>
- <CAFLszTgF+g2OXz=L=r7rOQcNkk19GfdCrwixG8ZAsR=1rh9Fqw@mail.gmail.com>
- <f1e4014e-658b-4a47-af8d-72ef76c1b134@denx.de>
- <CAOMZO5B7cxEftN0TeTF--pKXqOmbmaFLc9mEPO4=8odrLBeypQ@mail.gmail.com>
- <f71762e5-ba15-43ec-91a3-dbdc8f8e1437@denx.de>
- <CAFLszTj69OUZj9ZBcmnsiLLvxCB+Y-rJYEW_Ep8V6WFtvXP2Nw@mail.gmail.com>
- <5bec35cc-99b9-468e-bc01-1de5dc39825c@denx.de>
-In-Reply-To: <5bec35cc-99b9-468e-bc01-1de5dc39825c@denx.de>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-46-sjg@chromium.org>
+ <0fd6b834-9e74-4919-9d62-19ec6cdcba69@gmx.de>
+ <448d550b-1a2b-4fbe-a24a-292ba1037b44@gmx.de>
+In-Reply-To: <448d550b-1a2b-4fbe-a24a-292ba1037b44@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 05:42:09 -0600
-X-Gm-Features: AQ5f1JrN7Ih_t6vlP91tO5msSlpu2bOnhMBvxDnBV4vn9MaFVw-JIn1ZM9x4dqo
-Message-ID: <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
-Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
-To: Marek Vasut <marex@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Brian Ruley <brian.ruley@gehealthcare.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 28 Mar 2025 06:01:18 -0600
+X-Gm-Features: AQ5f1JqNzIlq_s69JWIOusBZlOEEQ-K3hxCjHD9GQ8mUCPZx6LwJO0QcsBLQtHU
+Message-ID: <CAFLszTiQrbhL1_t-deqd-Afw8Srvi5g7zOuvgaOCBGf1vnodKQ@mail.gmail.com>
+Subject: Re: [PATCH v5 45/46] acpi: Support checking checksums
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,42 +92,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Heinrich,
 
-On Wed, 19 Mar 2025 at 22:05, Marek Vasut <marex@denx.de> wrote:
+On Fri, 21 Mar 2025 at 06:24, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On 3/20/25 4:40 AM, Simon Glass wrote:
-> > Hi Marek,
-> >
-> > On Thu, 20 Mar 2025 at 00:54, Marek Vasut <marex@denx.de> wrote:
+> On 21.03.25 11:49, Heinrich Schuchardt wrote:
+> > On 15.03.25 15:26, Simon Glass wrote:
+> >> When the ACPI tables come from an earlier bootloader it is helpful to
+> >> see whether the checksums are correct or not. Add a -c flag to the
+> >> 'acpi list' command to support that.
 > >>
-> >> On 3/12/25 1:41 AM, Fabio Estevam wrote:
-> >>> Hi Marek,
-> >>>
-> >>> On Fri, Mar 7, 2025 at 2:42=E2=80=AFAM Marek Vasut <marex@denx.de> wr=
-ote:
-> >>>
-> >>>> So what should we do about this particular patch ?
-> >>>>
-> >>>> Should this be applied ? Rebased ? Updated somehow ?
-> >>>
-> >>> This patch causes a CI error:
-> >>>
-> >>> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1057151
+> >> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >> ---
 > >>
-> >> I think this might be what Simon was pointing out, but I never got any
-> >> suggestion how to solve that.
+> >> (no changes since v3)
+> >>
+> >> Changes in v3:
+> >> - Add new patch to support checking checksums with ACPI command
+> >>
+> >>   cmd/acpi.c             | 57 +++++++++++++++++++++++++++---------------
+> >>   doc/usage/cmd/acpi.rst | 20 ++++++++++++++-
+> >>   test/dm/acpi.c         | 46 ++++++++++++++++++++++++++++++++++
+> >>   3 files changed, 102 insertions(+), 21 deletions(-)
+> >>
+> >> diff --git a/cmd/acpi.c b/cmd/acpi.c
+> >> index 2273176f106..bb243202009 100644
+> >> --- a/cmd/acpi.c
+> >> +++ b/cmd/acpi.c
+> >> @@ -7,6 +7,7 @@
+> >>   #include <display_options.h>
+> >>   #include <log.h>
+> >>   #include <mapmem.h>
+> >> +#include <tables_csum.h>
+> >>   #include <acpi/acpi_table.h>
+> >>   #include <asm/acpi_table.h>
+> >>   #include <asm/global_data.h>
+> >> @@ -15,6 +16,17 @@
+> >>
+> >>   DECLARE_GLOBAL_DATA_PTR;
+> >>
+> >> +static const char *show_checksum(void *ptr, uint size, bool chksums)
+> >> +{
+> >> +    uint checksum;
+> >> +
+> >> +    if (!chksums)
+> >> +        return "";
+> >> +    checksum = table_compute_checksum(ptr, size);
+> >> +
+> >> +    return checksum ? "  bad" : "  OK";
 > >
-> > There was a patch for this...and it looks like Tom has applied it:
+> > Please, move the leading spaces to the printf statements below.
 > >
-> > 19a342f9122 Merge patch series "binman: build_from_git: Add argument
-> > specifying branch"
-> It is in u-boot/next , but it does not seem to help ?
+> >> +}
+> >> +
+> >>   /**
+> >>    * dump_hdr() - Dump an ACPI header
+> >>    *
+> >> @@ -23,16 +35,17 @@ DECLARE_GLOBAL_DATA_PTR;
+> >>    *
+> >>    * @hdr: ACPI header to dump
+> >>    */
+> >> -static void dump_hdr(struct acpi_table_header *hdr)
+> >> +static void dump_hdr(struct acpi_table_header *hdr, bool chksums)
+> >>   {
+> >>       bool has_hdr = memcmp(hdr->signature, "FACS", ACPI_NAME_LEN);
+> >>
+> >>       printf("%.*s  %16lx  %5x", ACPI_NAME_LEN, hdr->signature,
+> >>              (ulong)map_to_sysmem(hdr), hdr->length);
+> >>       if (has_hdr) {
+> >> -        printf("  v%02d %.6s %.8s %x %.4s %x\n", hdr->revision,
+> >> +        printf("  v%02d %.6s %.8s %x %.4s %x%s\n", hdr->revision,
+> >
+> > %x results in variable length output. To avoid ragged layout, please,
+> > define the output length.
+> >
+> > Best regards
+> >
+> > Heinrich
+> >
+> >>                  hdr->oem_id, hdr->oem_table_id, hdr->oem_revision,
+> >> -               hdr->creator_id, hdr->creator_revision);
+> >> +               hdr->creator_id, hdr->creator_revision,
+> >> +               show_checksum(hdr, hdr->length, chksums));
+> >>       } else {
+> >>           printf("\n");
+> >>       }
+> >> @@ -52,22 +65,22 @@ static int dump_table_name(const char *sig)
+> >>       return 0;
+> >>   }
+> >>
+> >> -static void list_fadt(struct acpi_fadt *fadt)
+> >> +static void list_fadt(struct acpi_fadt *fadt, bool chksums)
+> >>   {
+> >>       if (fadt->header.revision >= 3 && fadt->x_dsdt)
+> >> -        dump_hdr(nomap_sysmem(fadt->x_dsdt, 0));
+> >> +        dump_hdr(nomap_sysmem(fadt->x_dsdt, 0), chksums);
+> >>       else if (fadt->dsdt)
+> >> -        dump_hdr(nomap_sysmem(fadt->dsdt, 0));
+> >> +        dump_hdr(nomap_sysmem(fadt->dsdt, 0), chksums);
+> >>       if (!IS_ENABLED(CONFIG_X86) && !IS_ENABLED(CONFIG_SANDBOX) &&
+> >>           !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
+> >>           log_err("FADT not ACPI-hardware-reduced-compliant\n");
+> >>       if (fadt->header.revision >= 3 && fadt->x_firmware_ctrl)
+> >> -        dump_hdr(nomap_sysmem(fadt->x_firmware_ctrl, 0));
+> >> +        dump_hdr(nomap_sysmem(fadt->x_firmware_ctrl, 0), chksums);
+> >>       else if (fadt->firmware_ctrl)
+> >> -        dump_hdr(nomap_sysmem(fadt->firmware_ctrl, 0));
+> >> +        dump_hdr(nomap_sysmem(fadt->firmware_ctrl, 0), chksums);
+> >>   }
+> >>
+> >> -static void list_rsdt(struct acpi_rsdp *rsdp)
+> >> +static void list_rsdt(struct acpi_rsdp *rsdp, bool chksums)
+> >>   {
+> >>       int len, i, count;
+> >>       struct acpi_rsdt *rsdt;
+> >> @@ -75,11 +88,11 @@ static void list_rsdt(struct acpi_rsdp *rsdp)
+> >>
+> >>       if (rsdp->rsdt_address) {
+> >>           rsdt = nomap_sysmem(rsdp->rsdt_address, 0);
+> >> -        dump_hdr(&rsdt->header);
+> >> +        dump_hdr(&rsdt->header, chksums);
+> >>       }
+> >>       if (rsdp->xsdt_address) {
+> >>           xsdt = nomap_sysmem(rsdp->xsdt_address, 0);
+> >> -        dump_hdr(&xsdt->header);
+> >> +        dump_hdr(&xsdt->header, chksums);
+> >>           len = xsdt->header.length - sizeof(xsdt->header);
+> >>           count = len / sizeof(u64);
+> >>       } else if (rsdp->rsdt_address) {
+> >> @@ -100,24 +113,28 @@ static void list_rsdt(struct acpi_rsdp *rsdp)
+> >>           if (!entry)
+> >>               break;
+> >>           hdr = nomap_sysmem(entry, 0);
+> >> -        dump_hdr(hdr);
+> >> +        dump_hdr(hdr, chksums);
+> >>           if (!memcmp(hdr->signature, "FACP", ACPI_NAME_LEN))
+> >> -            list_fadt((struct acpi_fadt *)hdr);
+> >> +            list_fadt((struct acpi_fadt *)hdr, chksums);
+> >>       }
+> >>   }
+> >>
+> >> -static void list_rsdp(struct acpi_rsdp *rsdp)
+> >> +static void list_rsdp(struct acpi_rsdp *rsdp, bool chksums)
+> >>   {
+> >> -    printf("RSDP  %16lx  %5x  v%02d %.6s\n", (ulong)map_to_sysmem(rsdp),
+> >> -           rsdp->length, rsdp->revision, rsdp->oem_id);
+> >> -    list_rsdt(rsdp);
+> >> +    printf("RSDP  %16lx  %5x  v%02d %.6s%s%s\n",
+> >> +           (ulong)map_to_sysmem(rsdp), rsdp->length, rsdp->revision,
+> >> +           rsdp->oem_id, show_checksum(rsdp, 0x14, chksums),
+> >> +           show_checksum(rsdp, rsdp->length, chksums));
+> >> +    list_rsdt(rsdp, chksums);
+> >>   }
+> >>
+> >>   static int do_acpi_list(struct cmd_tbl *cmdtp, int flag, int argc,
+> >>               char *const argv[])
+> >>   {
+> >>       struct acpi_rsdp *rsdp;
+> >> +    bool chksums;
+> >>
+> >> +    chksums = argc >= 2 && !strcmp("-c", argv[1]);
+> >>       rsdp = map_sysmem(gd_acpi_start(), 0);
+> >>       if (!rsdp) {
+> >>           printf("No ACPI tables present\n");
+> >> @@ -125,7 +142,7 @@ static int do_acpi_list(struct cmd_tbl *cmdtp, int
+> >> flag, int argc,
+> >>       }
+> >>       printf("Name              Base   Size  Detail\n"
+> >>              "----  ----------------  -----
+> >> ----------------------------\n");
+> >> -    list_rsdp(rsdp);
+> >> +    list_rsdp(rsdp, chksums);
+> >>
+> >>       return 0;
+> >>   }
+> >> @@ -187,13 +204,13 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp,
+> >> int flag, int argc,
+> >>   }
+> >>
+> >>   U_BOOT_LONGHELP(acpi,
+> >> -    "list  - list ACPI tables\n"
+> >> +    "list [-c] - list ACPI tables [check checksums]\n"
+>
+> Let's keep things simple for the user:
+>
+> Always check the checksums.
+> Only print a notice if a checksum is wrong.
 
-Did you figure it out?
+I found that one table was wrong so I wanted a positive ack that each
+table is either OK or BAD. I made the check optional though.
 
-I'm not really sure. It works fine in my tree and I just tested it
-now. Perhaps there are some other patches missing from Tom's tree?
+If you like, we could always check checksums but only print the OK/BAD
+if -c is provided?
+
+BTW I see you send a cleanup series for ACPI checksums. Is that based
+on top of this series?
 
 Regards,
-SImon
+Simon
