@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA72C3600C
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:39:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF377C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2053681D3B;
-	Sat, 29 Mar 2025 00:39:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5CE5780ECC;
+	Sat, 29 Mar 2025 00:40:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hvGQQhym";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X8LZMLxM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B633281D3B; Sat, 29 Mar 2025 00:39:42 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 78830810F4; Sat, 29 Mar 2025 00:40:18 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6629681DCC
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:39:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE852805C8
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:40:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5e686d39ba2so649073a12.2
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:39:40 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5dc89df7eccso5074240a12.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:40:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743205180; x=1743809980; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743205215; x=1743810015; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4gOnA/xeexjmqtl7hKiH9adWaFIeYtrQPtKssWT+ejE=;
- b=hvGQQhymDsbLruNC5wRFHaJ7vy+kPh7gPdM6pGCzYU5QnxtKr/KHwPYekHRRmHJwac
- 2rwg6htDyRA0nQvKCFIwnjt0lOHLcT8DJbicfH/yScTMASctz77ELBX9hf15euD+tozH
- 2YzejsoNUludcZItqZ5feaeBCPxc+uw0DF7js=
+ bh=5ls6rxl2bBFdmhEfJq5sX9jSPKu5B9RuLoZ8PUtQNlY=;
+ b=X8LZMLxMdlhDgZcFPmjg9FaYOfHSYEZi4DB1LphNGhmsajkbMhIdZSk31xZ5DDVNek
+ HG9loiox4ZYjjjjJx7TlxGv8CxSpk78D5Ue0e3FNVjtFxdATVnQIFzOORpxe5p1C/0ko
+ dXeCK6KAhrxgbSFfvNm35IrmVZMrIY6JANOQ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743205180; x=1743809980;
+ d=1e100.net; s=20230601; t=1743205215; x=1743810015;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4gOnA/xeexjmqtl7hKiH9adWaFIeYtrQPtKssWT+ejE=;
- b=LONDjNdUMsTGtlSR0cHGHzt/Wc4WSJcghearq//xsQjs/RG6+QonbhEcSLy+BQkHkZ
- lXm9qBrTp1FCYDM2nr2BMsMjNvx5g/5IgnVC8bpMtlYS77qKwKM2Ac0Ms5BhGE8TkbBX
- iYClJzIJlkfw3dDqkpjTPxuDpltOz2yR9YggAswFZjdbzTNRYG6sq+phTTzRsqlN88Yq
- Jyaphyey+sZHzJW5Clgr/SqXZWIt6qB/gHAZrXAkgXyG3dDJe67m4aIk+NeAyXWGaSpl
- SjMyEKboXCfS8L7harYxrTlnHFNAGG7kbvzV/bZPAxyJLn4vD2srl1KSHD0TilIUHMSC
- R3iQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXqF0qjedv15oE/HyXsg57Ra1Ct3IHi6PrGn1TMBkofRAwX9m4VW+4nzuwEAgUHSUGd1L0Gkp0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdRKwj7PyaBx049Om5PvjMhRBFq0YODGPt2E28+DQflQWHWk/R
- PQSSudzy48+ZX3HK6IerBSE4xvqLSxPRZdZtfz+FQP7hT+F1R0/H9Ybbec/lN7i+5z9gYuZlRzs
- 1uetlo4RO3c2ep0OKo6S8ZGy3Zu8ZTIgDR5Hn
-X-Gm-Gg: ASbGncttHkapSjeVbeUj5jhoAMuGcQZNCyd3+CRzH8keyv2CBADsgkOSuzGE7FAgzYQ
- ZQAHmy/qyNtGc4K3DN/E/r/GAm68lxQuNMrGSCJgXqvDtlPkzuIX+V8JlR5q14ahEYixc4sEAjx
- zRi8pxF79LxpZiOZ6TT9RAGo7fXeg=
-X-Google-Smtp-Source: AGHT+IE+9jmAJGWhcJcZx9he5t+LX2r9exT6C7ZSKiC6e+itWn6hXAdyh2uD1geDDssnTZTiYurP/faU6eDvOjP3QCA=
-X-Received: by 2002:a17:906:c148:b0:ac6:eaea:c0e3 with SMTP id
- a640c23a62f3a-ac738c6f017mr78608966b.49.1743205179741; Fri, 28 Mar 2025
- 16:39:39 -0700 (PDT)
+ bh=5ls6rxl2bBFdmhEfJq5sX9jSPKu5B9RuLoZ8PUtQNlY=;
+ b=nXCI1bnTJSV4Q8YItApmE0hiiYxFkf8TU+mYEtliXAtjX9D+AwUy2Kv7XW+lwiaAdo
+ px4InOoPWCwzybpUyb8pEZ11sY6EnsNoH0LhpRU0e61hkPXt2BHtwyr2m7vyJkmIIyps
+ 2ybzOgVubmfW1Ce3Llgcil9P/oAhjMM1pC30Ns7w4mDTRBH6sR1l/W6X5htZBODftkcr
+ ZvpIlefVb3amqQh/qil98/KWGA5YV26apnhWUpppWq0wfkha2ulRxrMbfy2P8RDyhqIa
+ AE9w84yxxMOOWZtvXZLUpTr14zEeM5E9LfoAUtZ62IsLekjGvdEyuKf7BBqmIYOyfvUh
+ VtUg==
+X-Gm-Message-State: AOJu0YwEp45HC3L52h6VtjTlD5G2wk1WKTdivtm9Ox/+x/glXDq+PG4U
+ xK8SENdyi+NajFIv2FD3hR13VTGsj0qZ7JtdvudU+qDWQ8OsQMlaSBz+wMi4mr7p8CqT8SYe4IP
+ iaIidf91RjhhfQ2/iPfhveZiMmJtamyXWgJGl
+X-Gm-Gg: ASbGncuT+Of72J1pmn+8ZPTwPPoegzyWa7g3eowW2ENeGJ7MSWYWQraADXCnOj3J+As
+ xZDPGdqGYKGVJxCNgY6HlOztKOjzpVB3LQ1TyMSKlF41XYUgjKF8335mzmKXNdcPN4n8uFmdOny
+ LTqLA/B9OZUc2GfgFlX1FQer++r1I=
+X-Google-Smtp-Source: AGHT+IEAnFigGrbqzNKPHvRe0GE4v7tyoGZlmyhrjHwrAST0gb1DyGXZHjcrBb3Vw9oSQHimZ0TtK9pWPh22CnIcHbs=
+X-Received: by 2002:a17:907:9706:b0:abf:6cc9:7ef2 with SMTP id
+ a640c23a62f3a-ac738bae78bmr65791266b.42.1743205215227; Fri, 28 Mar 2025
+ 16:40:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250328163115.642347-1-patrice.chotard@foss.st.com>
- <CALeDE9NHP6J97A0Zy13TDB66cpcJutT0DYvU=Ts6G4aBN+RwVg@mail.gmail.com>
- <355ebc65-18fc-4b1a-b1e0-a1d0d7b5e9cf@foss.st.com>
-In-Reply-To: <355ebc65-18fc-4b1a-b1e0-a1d0d7b5e9cf@foss.st.com>
+References: <20250328153522.3555472-1-sjg@chromium.org>
+ <20250328153522.3555472-20-sjg@chromium.org>
+ <6721d34c-83eb-44d9-9be5-a4f8346481e3@kwiboo.se>
+In-Reply-To: <6721d34c-83eb-44d9-9be5-a4f8346481e3@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 23:39:24 +0000
-X-Gm-Features: AQ5f1Jo89H-CxNXpN8AY8XPAuSY7vrt_kxSXXRnH8Di58Pci8RSEZ_cutW0PGzc
-Message-ID: <CAFLszTg9PCwGD43sOD_anAhY412+J_qLgw=XrNOw2wJJPu+33Q@mail.gmail.com>
-Subject: Re: [PATCH] dtc: introduce label relative path references
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+Date: Fri, 28 Mar 2025 23:40:01 +0000
+X-Gm-Features: AQ5f1Jqxe5YtBQ1dACcMXmRBkbmY6dMsdptVi0_o_4JqlrIRBW9Eu95iFsu9lIY
+Message-ID: <CAFLszTiEwMqyhwJ6NvkhpE3cOw7z+VHmhqMdHcPVGyr6rK4yEA@mail.gmail.com>
+Subject: Re: [PATCH v3 19/31] rockchip: Provide a VPL phase on rk3399
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Dragan Simic <dsimic@manjaro.org>, 
+ Greg Malysa <greg.malysa@timesys.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
+ huang lin <hl@rock-chips.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,71 +100,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
+Hi Tom,
 
-On Fri, 28 Mar 2025 at 11:35, Patrice CHOTARD
-<patrice.chotard@foss.st.com> wrote:
+On Fri, 28 Mar 2025 at 10:16, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
+> Hi Simon,
 >
->
-> On 3/28/25 18:06, Peter Robinson wrote:
-> > On Fri, 28 Mar 2025 at 16:52, Patrice Chotard <patrice.chotard@foss.st.com>
-> > wrote:
+> On 2025-03-28 16:34, Simon Glass wrote:
+> > Add support for this new phase, which runs after TPL. It determines the
+> > state of the machine, then selects which SPL image to use. SDRAM init is
+> > then done in SPL, so that it is updatable.
 > >
-> >> Since introduction of OF_UPSTREAM flag, U-Boot's dtc must be able
-> >> to compile Kernel's device tree.
-> >>
-> >> Since kernel commit 7de129f5389b ("ARM: dts: stm32: stm32mp151a-prtt1l:
-> >> Fix QSPI configuration"), label relative path references has been
-> >> introduced. These label relative path references is not supported
-> >> by current U-Boot dtc version 1.5.0: (see mailing list discussion [1]).
-> >>
-> >> In order to support such label relative patch references
-> >> adds following commit from upstream DTC tree:
-> >>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > Maybe we need to rebase to the latest upstream dtc, I'm not sure pulling in
-> > a random set of bits from upstream is the right way to do things as it's
-> > brings things selectively which may bring along other issues.
+> > (no changes since v2)
+> >
+> > Changes in v2:
+> > - Rewrite help for VPL_ROCKCHIP_COMMON_BOARD
+> > - Skip spl-boot-order.c for VPL (rather than modifying it)
+> >
+> >  arch/arm/include/asm/spl.h               |   1 +
+> >  arch/arm/mach-rockchip/Kconfig           |  25 +++++-
+> >  arch/arm/mach-rockchip/Makefile          |  11 ++-
+> >  arch/arm/mach-rockchip/rk3399/Kconfig    |   9 ++
+> >  arch/arm/mach-rockchip/spl.c             |   3 +
+> >  arch/arm/mach-rockchip/tpl.c             |   2 +-
+> >  arch/arm/mach-rockchip/u-boot-vpl-v8.lds | 107 +++++++++++++++++++++++
+> >  arch/arm/mach-rockchip/vpl.c             |  53 +++++++++++
+> >  common/spl/Kconfig                       |   1 +
+> >  9 files changed, 205 insertions(+), 7 deletions(-)
+> >  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
+> >  create mode 100644 arch/arm/mach-rockchip/vpl.c
+> >
 >
-> Hi Peter
+> This patch and therefore this series does not apply to the next branch.
 >
-> Initially it was expected to migrate to dtc 1.7.1 as proposed by Tom,
-> but as explained here [1] it has huge impacts on several U-Boot components
-> mainly due to DT header alignment on 8 bytes (even if some DT check can
-> be bypassed using FDT_ASSUME_MASK, i am not sure it's a good option).
->
-> I have spent time to investigate some issue raised by U-Boot CI-Build and
-> it's a huge time consuming task, more than expected.
+> Are there any depends that are missing or are you only testing based on
+> your own fork?
 
-I'm fine with this change and I'm not likely to try to figure out this
-mess either.
+Until we are ready to apply things, yes I am using the sjg tree. See
+the tags in the cover letters of patches I send. For this one it is:
 
->
-> Thanks
-> Patrice
->
-> >
-> >
-> >> commit 651410e54cb9 ("util: introduce xstrndup helper")
-> >> commit ec7986e682cf ("dtc: introduce label relative path references")
-> >>
-> >> [1] https://lore.kernel.org/all/20250115144428.GZ3476@bill-the-cat/T/
-> >>
-> >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> >> Cc: Tom Rini <trini@konsulko.com>
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>
-> >>  scripts/dtc/dtc-lexer.l  |  2 +-
-> >>  scripts/dtc/dtc-parser.y | 13 +++++++++++++
-> >>  scripts/dtc/livetree.c   | 33 ++++++++++++++++++++++++++++++---
-> >>  scripts/dtc/util.c       | 11 +++++++++++
-> >>  scripts/dtc/util.h       |  1 +
-> >>  5 files changed, 56 insertions(+), 4 deletions(-)
-> >>
+base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
+branch: vbi3
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+So no, there is nothing else that this series depends on and if you
+can review it I can send a PR for Tom for -next one all necessary
+changes are made.
 
 Regards,
-SImon
+Simon
