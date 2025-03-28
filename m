@@ -4,83 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6BD2C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E34C3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:17:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A98D8281E;
-	Fri, 28 Mar 2025 14:09:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 96D1C81F45;
+	Fri, 28 Mar 2025 14:11:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JBgRAgnP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kg2hlS5R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7E4E82849; Fri, 28 Mar 2025 14:09:07 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C4BE8272A
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:09:05 +0100 (CET)
+ id B05A381F6B; Fri, 28 Mar 2025 14:11:07 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FFD581F44
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:11:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3d445a722b9so9256885ab.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:09:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167343; x=1743772143; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m2TaNZlIZIi0NmRyPxDEBstmr8zCiV10e6t3B3xXrSM=;
- b=JBgRAgnP0+g6DpmDzW14HIarRilVv0rE+2v5nqq0tBkE/7+qbnuYIkcEEQKhEl+mXw
- wzlj9JDS4XIPZgm/kRBfISvTUe2LEnh3pt/sb99LM2CGmzWmtSiszO3ehA5QmsT5ho+m
- ujL+Qga0K9qksPaKGD9utWuJGmFD0YZRot45o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167343; x=1743772143;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m2TaNZlIZIi0NmRyPxDEBstmr8zCiV10e6t3B3xXrSM=;
- b=kY3WHzzxCh8vlQys6l+aDs07bBLxdYjYhh6Vo9JesqrglKkPv2abERK+quRCl6a2wK
- MFCEiCn5B1mhcwoiw9+q23DaGhd6cjb+29/g22kyBqk+ovQlJ410UYXmsU6ghVpLBoPz
- 52uLHZgD7ZTSo5hmieoN8itGo/icOZdNjRkYA+sn7qyhk8PTBhT8R9IquQdt9/E7CQ/H
- K2kLSIozEU5ip4eJ4DJ7r27kJAz/4heievSiPjSWiJhNESZe7BjNX2jFdLEc5+rpAFzd
- Q8Gb2K5uffLoDUTZGk7aXxl2C9dM1a6g4uDxzDvckYTezrb7qkikA/ej9q7ZHMZc7iRE
- BJnA==
-X-Gm-Message-State: AOJu0YxyuiSltFDMT12dMfDUmZJYiIj4WwqJIV+PaWH/wG0KwgA7ms0n
- liMP7MHbmXxylllPV6t1ozKMud4MyDq7l4o4cl1MXWToZLfX1Vv3IFHbxBQCb7Cxj+4b6KHGB50
- =
-X-Gm-Gg: ASbGnctmE2SZVx8KjPQHMXD6rUZHIbr0zu7MooHHcYtsoDuHeAkAWFr76+7J288nhbh
- T5wLqtQ6CzWpuyEShYdRAF//IKBAu06uX2+fJlL9LSH0kZqsF+wq7EdzD9msy9f9FhsoWmVCk5P
- L68/e3CLUfoKv7g5bWRyO1ezDm5BKo8gIFuVafEsxGvdd/gEop8lYL8APuDEH48VG9VpEQpc0CH
- MyOeGHGbQs4wUMccKmj8i/g/i79e7eusf5rtPjdjmNoMoNrx8yBU1jaq0R3T9g9m/TEhVk291A6
- ++Ov9bi5cp9fHRrTTIhKESx1H1zu+61eOYyaTB3G2Xt15Yhe1nDJGd/Wa5fouOA0g7o6E/0wXsY
- LJoFE7A==
-X-Google-Smtp-Source: AGHT+IF/eje3yEymSahOOEi5U1F6344xxAAFZRgWazIIKtFzYkVLCmAplORmgQZpegX8QRNkYfi9ig==
-X-Received: by 2002:a05:6e02:240e:b0:3d4:6dd2:3989 with SMTP id
- e9e14a558f8ab-3d5cce33db4mr86483305ab.20.1743167343275; 
- Fri, 28 Mar 2025 06:09:03 -0700 (PDT)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.09.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:09:02 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 56/56] expo: Drop the special theme code for bootflow_menu
-Date: Fri, 28 Mar 2025 07:06:43 -0600
-Message-ID: <20250328130713.2612648-57-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
-References: <20250328130713.2612648-1-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52SDB1RG2125595
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 28 Mar 2025 08:11:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1743167461;
+ bh=ZbXhgr4GUk1r9G5K4PgiF/kgdmu7UNuBEG9QSUmU2z8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=kg2hlS5R7QEyXHePwjl3qL3/eo2wScKRbt3smlmBsFmR6hFIRG4b2qp2AzVwDMJ6P
+ tKgOWe0QVfx+LCk7Nd61xMJ+5njJEVnFXjfQweptuYmQqghHHKHENfS6wtb6plmw2l
+ E1GCDjCFzKMtGX2MoUYDb4qWarbTWx+QR+12CK9A=
+Received: from DFLE20.ent.ti.com ([10.64.6.57])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52SDB1QG066112;
+ Fri, 28 Mar 2025 08:11:01 -0500
+Received: from flwvowa02.ent.ti.com (10.64.41.53) by DFLE20.ent.ti.com
+ (10.64.6.57) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Fri, 28 Mar
+ 2025 08:11:01 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by flwvowa02.ent.ti.com
+ (10.64.41.53) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Fri, 28 Mar
+ 2025 08:11:00 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 28 Mar 2025 08:11:00 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52SDAwgF068669;
+ Fri, 28 Mar 2025 08:10:58 -0500
+Message-ID: <b80b75b7-c1bf-43f9-b005-1731ee7edfe8@ti.com>
+Date: Fri, 28 Mar 2025 18:40:57 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: Fix a typo in elf.py
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, Stefan Herbrechtsmeier
+ <stefan.herbrechtsmeier@weidmueller.com>, Tom Rini <trini@konsulko.com>
+References: <20250328130214.2607633-1-sjg@chromium.org>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250328130214.2607633-1-sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,104 +87,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The expo now has all that is needed to apply a suitable theme, so drop
-this unnecessary code. Any further tweaks can be added to the generic
-expo code.
+On 28/03/25 18:32, Simon Glass wrote:
+> Fix an 'EFL' typo. It should be 'ELF'.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>  tools/binman/elf.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/tools/binman/elf.py b/tools/binman/elf.py
+> index c75f4478813..6ac960e0419 100644
+> --- a/tools/binman/elf.py
+> +++ b/tools/binman/elf.py
+> @@ -28,7 +28,7 @@ except:  # pragma: no cover
+>  # BSYM in little endian, keep in sync with include/binman_sym.h
+>  BINMAN_SYM_MAGIC_VALUE = 0x4d595342
+>  
+> -# Information about an EFL symbol:
+> +# Information about an ELF symbol:
+>  # section (str): Name of the section containing this symbol
+>  # address (int): Address of the symbol (its value)
+>  # size (int): Size of the symbol in bytes
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-(no changes since v1)
-
- boot/bootflow_menu.c | 43 -------------------------------------------
- test/boot/bootflow.c |  6 +++---
- 2 files changed, 3 insertions(+), 46 deletions(-)
-
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index 03ea24f4778..6cd378f8d39 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -211,43 +211,6 @@ int bootflow_menu_add_all(struct expo *exp)
- 	return 0;
- }
- 
--int bootflow_menu_apply_theme(struct expo *exp, ofnode node)
--{
--	struct menu_priv *priv = exp->priv;
--	struct scene *scn;
--	u32 font_size;
--	int ret;
--
--	log_debug("Applying theme %s\n", ofnode_get_name(node));
--	scn = expo_lookup_scene_id(exp, MAIN);
--	if (!scn)
--		return log_msg_ret("scn", -ENOENT);
--
--	/* Avoid error-checking optional items */
--	if (!ofnode_read_u32(node, "font-size", &font_size)) {
--		int i;
--
--		log_debug("font size %d\n", font_size);
--		scene_txt_set_font(scn, OBJ_PROMPT1A, NULL, font_size);
--		scene_txt_set_font(scn, OBJ_POINTER, NULL, font_size);
--		for (i = 0; i < priv->num_bootflows; i++) {
--			ret = scene_txt_set_font(scn, ITEM_DESC + i, NULL,
--						 font_size);
--			if (ret)
--				return log_msg_ret("des", ret);
--			scene_txt_set_font(scn, ITEM_KEY + i, NULL, font_size);
--			scene_txt_set_font(scn, ITEM_LABEL + i, NULL,
--					   font_size);
--		}
--	}
--
--	ret = scene_arrange(scn);
--	if (ret)
--		return log_msg_ret("arr", ret);
--
--	return 0;
--}
--
- int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
- 			struct expo **expp)
- {
-@@ -257,12 +220,6 @@ int bootflow_menu_setup(struct bootstd_priv *std, bool text_mode,
- 
- 	LOGR("bmn", bootflow_menu_new(&exp));
- 
--	if (ofnode_valid(std->theme)) {
--		ret = bootflow_menu_apply_theme(exp, std->theme);
--		if (ret)
--			return log_msg_ret("thm", ret);
--	}
--
- 	/* For now we only support a video console */
- 	ret = uclass_first_device_err(UCLASS_VIDEO, &dev);
- 	if (ret)
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 06fd2dbb20a..670e73c265b 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -884,7 +884,7 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
- 	ut_assertok(bootflow_menu_add_all(exp));
- 	node = ofnode_path("/bootstd/theme");
- 	ut_assert(ofnode_valid(node));
--	ut_assertok(bootflow_menu_apply_theme(exp, node));
-+	ut_assertok(expo_apply_theme(exp, node));
- 
- 	scn = expo_lookup_scene_id(exp, MAIN);
- 	ut_assertnonnull(scn);
-@@ -895,8 +895,8 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
- 	 *
- 	 * Check both menu items, since there are two bootflows
- 	 */
--	ut_assertok(check_font(uts, scn, OBJ_PROMPT1A, font_size));
--	ut_assertok(check_font(uts, scn, OBJ_POINTER, font_size));
-+	for (i = OBJ_PROMPT1A; i <= OBJ_AUTOBOOT; i++)
-+		ut_assertok(check_font(uts, scn, i, font_size));
- 	for (i = 0; i < 2; i++) {
- 		ut_assertok(check_font(uts, scn, ITEM_DESC + i, font_size));
- 		ut_assertok(check_font(uts, scn, ITEM_KEY + i, font_size));
 -- 
-2.43.0
-
+Thanking You
+Neha Malcom Francis
