@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB88C36011
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:27:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71351C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61D938144A;
-	Fri, 28 Mar 2025 17:27:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B511D81951;
+	Fri, 28 Mar 2025 17:29:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LFe7KTUg";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ou35mXrk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B7B58144A; Fri, 28 Mar 2025 17:27:04 +0100 (CET)
+ id E6E2081E13; Fri, 28 Mar 2025 17:29:12 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8815E810EA
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:27:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 767638144A
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:29:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,14 +28,14 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1743179219;
- bh=/s6dj6DDoQR7VRKQ61lgPzC9IDoU/sPOQ2Cytpc3220=;
- b=LFe7KTUgHhC4qWRpptxjVzKlIemUxXPUH8zj8tkLd+PvG20duiEUPvhafTJj/209TRYZNnS4u
- P6ZqkesILlfgac0xqm1Od3PT5R7J82ZJ52GFcuWyl0R3vb51rTvCEvZtJl4rXsBFWB69bGJ2FAy
- B512RPxjpxwEiJyiiHTm0tI7px3hoyLq228wrTW+pumfOa1ot5OHSZbc5zTfjsZE/A/tOw45rGA
- e9Caqg2we7aeDeg497dv1wru6nz+cnOzsigVZ/Z1eUm1lD2udLNDkB6rdS6+wEPAV6fndagh1BG
- 5epqnfqU1yj/mbWeJW3leeEYQP8iZJfUkXKNl7ITXMvg==
-X-Forward-Email-ID: 67e6cdcf37e81528de2ba4c6
+ s=fe-e1b5cab7be; t=1743179348;
+ bh=oloJ4qauf6Ks8RrMc1uCCDAks5px9OVwXRoaQuIh6hg=;
+ b=ou35mXrkH5UMmao4s2A9e7KtlzqKQl16MvqR5FHV9HOk94/AO4fTWvyB4x01BOOVxALAJFb10
+ FBj6lbPKVCkUdk3q1j2WeAHnRYX4acgbLZove1nW7yzJGGtuN4HOQMgl75sIsDW2L1ZQBkN4PQk
+ Axa0wPZbgNtZhVw6twk7ltw2HRqNggMb2JtDv41lHrF1qeacVLdsSy1f2/vhvp8KzUoShONHoDl
+ ushTtxNJMtzhmg0/7wZfUEenzHUXe9H5GlEAqORlu+fjzNk7Bs2DyJrxrWcFR9SqWa0uWZ9utk3
+ bUg5fom6RgZSXjhqavpVtQg4LbNBcl0ZlVitOr+pPSCg==
+X-Forward-Email-ID: 67e6ce5337e81528de2ba574
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.0
@@ -43,22 +43,23 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d18f2a43-9a08-49d6-abf6-ff1b71cab890@kwiboo.se>
-Date: Fri, 28 Mar 2025 17:26:52 +0100
+Message-ID: <ae3b68a5-95b7-4d45-a86f-ecad460b104a@kwiboo.se>
+Date: Fri, 28 Mar 2025 17:29:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/31] rockchip: dts: Create a template for the FIT
+Subject: Re: [PATCH v3 20/31] rockchip: Add symbols for spl_reloc
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Jeffy Chen <jeffy.chen@rock-chips.com>,
  Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
 References: <20250328153522.3555472-1-sjg@chromium.org>
- <20250328153522.3555472-9-sjg@chromium.org>
+ <20250328153522.3555472-21-sjg@chromium.org>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250328153522.3555472-9-sjg@chromium.org>
+In-Reply-To: <20250328153522.3555472-21-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -79,135 +80,70 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-On 2025-03-28 16:34, Simon Glass wrote:
-> Move the FIT description into a template so that it can (later) be used
-> in multiple places in the image.
+On 2025-03-28 16:35, Simon Glass wrote:
+> Add various symbols so that this feature works as intended. This allows
+> xPL to copy the relocating-jump code up to the top of memory, then use
+> it to decompress and start the next phase.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
 > 
-> Changes in v3:
-> - Use HAS_FIT for the SPI node also
-> - Leave fit { node open within #ifdef HAS_FIT
-> - Move placement of CONFIG_SPL_PAD_TO
-> - Keep the FIT filename
+> (no changes since v1)
 > 
->  arch/arm/dts/rockchip-u-boot.dtsi | 61 ++++++++++++++++++-------------
->  1 file changed, 35 insertions(+), 26 deletions(-)
+>  arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 > 
-> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> index 8aea2e6f571..460bf15e003 100644
-> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> @@ -19,6 +19,10 @@
->  #define COMP	"none"
->  #endif
->  
-> +#if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
-> +#define HAS_FIT
-> +#endif
-> +
->  / {
->  	binman: binman {
->  		multiple-images;
-> @@ -27,28 +31,9 @@
->  
->  #ifdef CONFIG_SPL
->  &binman {
-> -	simple-bin {
-> -		filename = "u-boot-rockchip.bin";
-> -		pad-byte = <0xff>;
-> -
-> -		mkimage {
-> -			filename = "idbloader.img";
-> -			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> -			multiple-data-files;
-> -
-> -#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> -			rockchip-tpl {
-> -			};
-> -#elif defined(CONFIG_TPL)
-> -			u-boot-tpl {
-> -			};
-> -#endif
-> -			u-boot-spl {
-> -			};
-> -		};
-> -
-> -#if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
-> -		fit: fit {
-> +#ifdef HAS_FIT
-> +	common_part: template-1 {
+> diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> index 958a1b70aef..842bd4eb07f 100644
+> --- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> +++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> @@ -25,10 +25,21 @@ SECTIONS
+>  	__image_copy_start = ADDR(.text);
+>  	.text : {
+>  		. = ALIGN(8);
+> +		__image_copy_start = .;
 
-This name may be a little bit too generic, maybe fit_template could be
-more specific and matches closer to your later added spl_template.
+__image_copy_start is defined a few lines above,
+why is this duplication needed?
+
+>  		CPUDIR/start.o (.text*)
+> +
+> +		/* put relocation code all together */
+> +		//. = . + 0xc0;
+> +		_rcode_start = .;
+> +		*(.text.rcode)
+> +		*(.text.rdata)
+> +		_rcode_end = .;
+> +
+>  		*(.text*)
+>  	}
+>  
+> +	_rcode_size = _rcode_end - _rcode_start;
+> +
+>  	.rodata : {
+>  		. = ALIGN(8);
+>  		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+> @@ -48,6 +59,7 @@ SECTIONS
+>  	__image_copy_end = .;
+>  	_end = .;
+>  	_image_binary_end = .;
+> +	__image_copy_end = .;
+
+__image_copy_end is defined a few lines above,
+why is this duplication needed?
 
 Regards,
 Jonas
 
-> +			type = "fit";
->  #ifdef CONFIG_ARM64
->  			description = "FIT image for U-Boot with bl31 (TF-A)";
->  #else
-> @@ -56,10 +41,8 @@
->  #endif
->  			#address-cells = <1>;
->  			fit,fdt-list = "of-list";
-> -			filename = "u-boot.itb";
->  			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
->  			fit,align = <512>;
-> -			offset = <CONFIG_SPL_PAD_TO>;
->  			images {
->  				u-boot {
->  					description = "U-Boot";
-> @@ -164,12 +147,38 @@
->  					fit,loadables;
->  				};
->  			};
-> +	};
-> +#endif /* HAS_FIT */
-> +
-> +	simple-bin {
-> +		filename = "u-boot-rockchip.bin";
-> +		pad-byte = <0xff>;
-> +
-> +		mkimage {
-> +			filename = "idbloader.img";
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> +			multiple-data-files;
-> +
-> +#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> +			rockchip-tpl {
-> +			};
-> +#elif defined(CONFIG_TPL)
-> +			u-boot-tpl {
-> +			};
-> +#endif
-> +			u-boot-spl {
-> +			};
->  		};
-> +
-> +#ifdef HAS_FIT
-> +		fit {
-> +			filename = "u-boot.itb";
-> +			insert-template = <&common_part>;
->  #else
->  		u-boot-img {
-> +#endif
->  			offset = <CONFIG_SPL_PAD_TO>;
->  		};
-> -#endif
 >  
->  		fdtmap {
->  		};
-> @@ -196,7 +205,7 @@
->  			};
->  		};
+>  	.bss ALIGN(8) : {
+>  		__bss_start = .;
+> @@ -55,6 +67,7 @@ SECTIONS
+>  		. = ALIGN(8);
+>  		__bss_end = .;
+>  	}
+> +	__bss_size = __bss_end - __bss_start;
 >  
-> -#if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
-> +#ifdef HAS_FIT
->  		fit {
->  			type = "blob";
->  			filename = "u-boot.itb";
+>  	/DISCARD/ : { *(.dynsym) }
+>  	/DISCARD/ : { *(.dynstr*) }
 
