@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15385C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EAEC3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7EC381F7B;
-	Fri, 28 Mar 2025 14:08:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 712EB8209D;
+	Fri, 28 Mar 2025 14:08:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KpTP+F9e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OwP+TrX9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32DD581DCC; Fri, 28 Mar 2025 14:08:06 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 9C18C81EC5; Fri, 28 Mar 2025 14:08:07 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 228A582006
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 096DE820B3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-85e1b1f08a5so54690939f.2
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:03 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-855bd88ee2cso57702139f.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167281; x=1743772081; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743167283; x=1743772083; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=taw/T3vQje+nDvvJpAXLp1MIi39D4l+Eh26u8xTpNIk=;
- b=KpTP+F9ebYvnoK5omLTarLbC8aRNYaqTLBdIz4qRIDucW00MMfpQI77tOMuCeQnzj6
- MCuBAxltbNN9hxiY/KnHcDwfxOy+W4Eo9BgFEcKVmDpVwcZFYWg4JxYLf80G2gG+CbrT
- uN7acyFKYEjqjUgaihZPivyg6x5tBvgr0PwMo=
+ bh=MDtaTbAX0Px31/CpjhEoFK6XTCTQP6SpU47Th8Z/Ccw=;
+ b=OwP+TrX9NfTueUURC96Ar4mldhSj6Yqjhshqq65xipCrvRDgSa+hA06/IsIJTi3YfZ
+ NaVAnLV/YIoPsS9V97zCaEbvMw0ivK2mBk62FFoNxnWg9Q0gkm49ZD4KAKeJ1mlYtWx4
+ /9Ibl1uDPC3qelM3dyVbyzgcYGL4++HRyg/g8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167281; x=1743772081;
+ d=1e100.net; s=20230601; t=1743167283; x=1743772083;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=taw/T3vQje+nDvvJpAXLp1MIi39D4l+Eh26u8xTpNIk=;
- b=TvtBisopVZD95E7EsXqGuHl1apu+N9HV7LkIszlX7hSWa8m81jegSrG25wdpnduq2y
- afl8ePzwLsqyhl/9pB7vCVfDH9o/FExJMohFU1sMHSgzRezrokt9JUQp/dV8uApRyS3u
- 9ShBkwDM17zmibspwNj5R9N+FoL4sFQ/CnrRltnOFtenlsn9O/cvUF+h/XXp7XXFhPtC
- 4XrJ7o+NRrwKr9QySk6HK93QfSVj0/GsFxlopfasASzpAHrh1G5lm9vM8xoo4qNenRkK
- w+RFbxybEdhI7VFVADO9jpXEMdhXwzGCGcBdm76kjGobUyhbHIv7xxgmMHSTbx8DIe90
- qXJA==
-X-Gm-Message-State: AOJu0YwacSMdK9Zut9vr8xv4RPJbvgwNiGqizxaeIFvIsXGjO/pjGTMR
- GZ9I42mBbxEp2bmfYylsweBqPhaaj7hGxP3RH3JfRBWnbM9lC3MTtqYoX/yJuk4MoiIBW9sQ7cU
+ bh=MDtaTbAX0Px31/CpjhEoFK6XTCTQP6SpU47Th8Z/Ccw=;
+ b=iz5/OBga8WPeBrDx45SBUP+UGyZGUAZae4GMtmxUmKX1WISgWdOJo5k1AJdNXxrAJu
+ VnkGGtm0UEe5fC62lN53VNB8Xn2Au7N/1YYZ93wfK6p0S9EJTqUlh+PLQiQS7MUXiJMC
+ Onr/LKqzwfGPG7qBLfZzCRcsu0H6ZUh59fDjPay7Wv8zAEmQRZLqRTTNpr98Dj7L5ec0
+ fKXpY1Gc+T98hmKG7JW+TsdIGUKB+j620oiQajyhj9IzULi6VJY9lFK74AM4T5Zcy+Be
+ 7sq/4HeobmkUrhy9rRwjFaL7p/IEVsynerATMO80D2xw5hgbB9TOITNsbA2ajCwGuhDk
+ tW5A==
+X-Gm-Message-State: AOJu0YzvHKU3/HooEBWy0ye7SdtQgSZfbqfJ4kGV0vqCkYSEAVA9otbp
+ WBLqGMe4kwnm025Eb40fjWq0T8A/MF+f1jFxehp7+FVLmWsc+kJTaPzpWmMml3GlVKEFc/xLWRI
  =
-X-Gm-Gg: ASbGncsvQ4R1KvMy79ys1EYhEPpzzGIs9hKmOYQnqnRIcyKmXUsd0chKW8ZpkfE/rWA
- wFRrl7vqDVN0609n1sWZORmnkdx2w3z3XJELiLXTKe1rmNiYXe1g5OnmjaCYIXwsFEp75jyQ2Cn
- rB3pwI/7BHZUalOFkoqxCa88wowMKZs48TFJFFVro9yKFAPKERxtumbefigmO6TEv6fb+Udxc01
- VJgatiIbGPChYdavbxlQLx8CxGaq0gy3sGYgktlB+Vgoc8Rtbwf57WQRX8HnTRGZo/eUjUPmbKZ
- vSnTdDwM/+IF07UcrlazuUN/0nzXHTPV4xDIZgC+1VmGz76JCZhcWDw1n6igjDZlhskUEoN5bTB
- Jj/oL4Q==
-X-Google-Smtp-Source: AGHT+IFlqUQVCAa6lL/89BzeldLdGqM3W3M0vlFcEahbFNizpftZ/Wnwcm7WgT+fFTbomQ7T/tkQ9g==
-X-Received: by 2002:a05:6602:3798:b0:85d:f74b:f8a8 with SMTP id
- ca18e2360f4ac-85e820551afmr872501339f.2.1743167281117; 
- Fri, 28 Mar 2025 06:08:01 -0700 (PDT)
+X-Gm-Gg: ASbGnctwD4zRIppE7yx1qENH6m77Oflcf9GZEski6WccYJkDlZvtcyOYeXkrwPUbqZf
+ fcl1Q75620zeF+GsmMSHOM723tK4Pg2AHbz8TneoKSj8bPjE8dpGZunRnVFbaQZSH2ybQrIDgei
+ zGMh0p984rxKKAMfUOXh11TpyTtoKmsKZD9YvxruEd7Jzf9IXpOzxA+yaod82e5N4ts/84Efdz8
+ buuoSODfQCvVfGmkwuLwz52ubQtCrgOA1rW2yHsf8Lqog5O2VMmriUF2iQNlMonl0CFWn9MwhPD
+ 564r2PjF/3cHk07KsQswvNCCQ01meFDkGrdv+nQlRjFr+HGS38jkYxJzyOReof/L5B8vH72DGa4
+ /l6BcqQ==
+X-Google-Smtp-Source: AGHT+IHnF/35JyEsE+bKwitueM3tIr6a2NQJEzKtvD5L/iAfQ5FjKOh97aVPII92iaYtL+/lLibbcg==
+X-Received: by 2002:a05:6602:3897:b0:85e:1ee9:1c18 with SMTP id
+ ca18e2360f4ac-85e82134c67mr820655539f.9.1743167282918; 
+ Fri, 28 Mar 2025 06:08:02 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.07.59
+ 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:08:00 -0700 (PDT)
+ Fri, 28 Mar 2025 06:08:01 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 23/56] expo: Adjust how menu items are highlighted
-Date: Fri, 28 Mar 2025 07:06:10 -0600
-Message-ID: <20250328130713.2612648-24-sjg@chromium.org>
+Subject: [PATCH v2 24/56] expo: Test editing a lineedit
+Date: Fri, 28 Mar 2025 07:06:11 -0600
+Message-ID: <20250328130713.2612648-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
 References: <20250328130713.2612648-1-sjg@chromium.org>
@@ -96,6 +96,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Open the lineedit and add a few characters, to check that things look
+right.
+
 At present when the user moves to a new menu item, the menu code
 handles this immediately. This means it is not possible to use an expo
 action to effect the same change.
@@ -107,106 +110,68 @@ Expand the test to cover this.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Add new patch to test editing a lineedit
 
- boot/bootflow_menu.c | 8 ++++++++
- boot/cedit.c         | 5 ++++-
- boot/scene_menu.c    | 2 --
- test/boot/expo.c     | 4 ++++
- 4 files changed, 16 insertions(+), 3 deletions(-)
+ test/boot/cedit.c | 27 ++++++++++++++++++++++++---
+ 1 file changed, 24 insertions(+), 3 deletions(-)
 
-diff --git a/boot/bootflow_menu.c b/boot/bootflow_menu.c
-index e3a27f16daa..d20d0be4734 100644
---- a/boot/bootflow_menu.c
-+++ b/boot/bootflow_menu.c
-@@ -180,6 +180,7 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
- {
- 	struct bootflow *sel_bflow;
- 	struct udevice *dev;
-+	struct scene *scn;
- 	struct expo *exp;
- 	uint sel_id;
- 	bool done;
-@@ -209,6 +210,9 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
- 	ret = expo_set_scene_id(exp, MAIN);
- 	if (ret)
- 		return log_msg_ret("scn", ret);
-+	scn = expo_lookup_scene_id(exp, MAIN);
-+	if (!scn)
-+		return log_msg_ret("scn", -ENOENT);
- 
- 	if (text_mode)
- 		expo_set_text_mode(exp, text_mode);
-@@ -224,6 +228,10 @@ int bootflow_menu_run(struct bootstd_priv *std, bool text_mode,
- 				sel_id = act.select.id;
- 				done = true;
- 				break;
-+			case EXPOACT_POINT_ITEM:
-+				LOGR("bmp", scene_menu_select_item(scn,
-+					OBJ_MENU, act.select.id));
-+				break;
- 			case EXPOACT_QUIT:
- 				return -EPIPE;
- 			default:
-diff --git a/boot/cedit.c b/boot/cedit.c
-index 3fde6928f90..eabbf07a8a0 100644
---- a/boot/cedit.c
-+++ b/boot/cedit.c
-@@ -150,8 +150,11 @@ int cedit_do_action(struct expo *exp, struct scene *scn,
- {
- 	switch (act->type) {
- 	case EXPOACT_NONE:
--	case EXPOACT_POINT_ITEM:
- 		return -EAGAIN;
-+	case EXPOACT_POINT_ITEM:
-+		LOGR("cdp", scene_menu_select_item(scn, scn->highlight_id,
-+						   act->select.id));
-+		break;
- 	case EXPOACT_POINT_OBJ:
- 		scene_set_highlight_id(scn, act->select.id);
- 		cedit_arange(exp, vid_priv, scn->id);
-diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-index 48905d3e2b6..df14a6c0409 100644
---- a/boot/scene_menu.c
-+++ b/boot/scene_menu.c
-@@ -399,8 +399,6 @@ int scene_menu_send_key(struct scene *scn, struct scene_obj_menu *menu, int key,
- 		break;
- 	}
- 
--	menu_point_to_item(menu, item->id);
--
- 	return 0;
- }
- 
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 616071ead48..b32a4596e85 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -588,6 +588,8 @@ static int expo_render_image(struct unit_test_state *uts)
- 	expo_set_scene_id(exp, SCENE1);
+diff --git a/test/boot/cedit.c b/test/boot/cedit.c
+index 97ca63b3082..0c34d4b3df0 100644
+--- a/test/boot/cedit.c
++++ b/test/boot/cedit.c
+@@ -302,19 +302,40 @@ static int cedit_render(struct unit_test_state *uts)
  	ut_assertok(expo_render(exp));
+ 	ut_asserteq(4986, video_compress_fb(uts, dev, false));
  
-+	ut_asserteq(0, scn->highlight_id);
-+	ut_assertok(scene_arrange(scn));
- 	ut_asserteq(0, scn->highlight_id);
- 
- 	/* move down */
-@@ -599,6 +601,7 @@ static int expo_render_image(struct unit_test_state *uts)
- 	ut_asserteq(ITEM2, act.select.id);
- 	ut_assertok(scene_menu_select_item(scn, OBJ_MENU, act.select.id));
- 	ut_asserteq(ITEM2, scene_menu_get_cur_item(scn, OBJ_MENU));
-+	ut_assertok(scene_arrange(scn));
++	act.type = EXPOACT_OPEN;
++	act.select.id = ID_POWER_LOSS;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5393, video_compress_fb(uts, dev, false));
++
++	act.type = EXPOACT_POINT_ITEM;
++	act.select.id = ID_AC_ON;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(5365, video_compress_fb(uts, dev, false));
++
++	/* select it */
++	act.type = EXPOACT_SELECT;
++	act.select.id = ID_AC_ON;
++	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(4980, video_compress_fb(uts, dev, false));
++
++	ut_asserteq(ID_AC_ON, menu->cur_item_id);
++
+ 	/* move to the line-edit field */
+ 	act.type = EXPOACT_POINT_OBJ;
+ 	act.select.id = ID_MACHINE_NAME;
+ 	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
  	ut_assertok(expo_render(exp));
+-	ut_asserteq(4872, video_compress_fb(uts, dev, false));
++	ut_asserteq(4862, video_compress_fb(uts, dev, false));
  
- 	/* make sure only the preview for the second item is shown */
-@@ -639,6 +642,7 @@ static int expo_render_image(struct unit_test_state *uts)
- 
- 	ut_asserteq(EXPOACT_POINT_ITEM, act.type);
- 	ut_asserteq(ITEM1, act.select.id);
-+	ut_assertok(scene_menu_select_item(scn, OBJ_MENU, act.select.id));
- 
+ 	/* open it */
+ 	act.type = EXPOACT_OPEN;
+ 	act.select.id = ID_MACHINE_NAME;
+ 	ut_assertok(cedit_do_action(exp, scn, vid_priv, &act));
  	ut_assertok(expo_render(exp));
- 	ut_assert_nextline("U-Boot    :    Boot Menu");
+-	ut_asserteq(4841, video_compress_fb(uts, dev, false));
++	ut_asserteq(4851, video_compress_fb(uts, dev, false));
+ 
+ 	/*
+ 	 * Send some keypresses. Note that the console must be enabled so that
+@@ -330,7 +351,7 @@ static int cedit_render(struct unit_test_state *uts)
+ 	ut_silence_console(uts);
+ 	ut_assertok(cedit_arange(exp, vid_priv, scn->id));
+ 	ut_assertok(expo_render(exp));
+-	ut_asserteq(5009, video_compress_fb(uts, dev, false));
++	ut_asserteq(4996, video_compress_fb(uts, dev, false));
+ 
+ 	expo_destroy(exp);
+ 	cur_exp = NULL;
 -- 
 2.43.0
 
