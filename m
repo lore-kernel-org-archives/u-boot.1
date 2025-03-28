@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 097C6C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 11:34:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0D3C36010
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 11:34:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37A3881273;
-	Fri, 28 Mar 2025 12:34:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8993181E8C;
+	Fri, 28 Mar 2025 12:34:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PVuM+eaQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eQdKQUms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62D2F805C8; Fri, 28 Mar 2025 12:34:29 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 75418805C8; Fri, 28 Mar 2025 12:34:32 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B8E581E60
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 12:34:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B10981E06
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 12:34:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ac339f53df9so372904066b.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 04:34:26 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so266275366b.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 04:34:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743161666; x=1743766466; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743161670; x=1743766470; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NHV1K0oGOCUhrxGutZHxWOpXylYd7JE/qlz5Y8t6raM=;
- b=PVuM+eaQa1sepI1yiWQu6QcK8wEjtmlrJ8scWmvLwL9nvS5oKG5vQLlqsz4BMFmVBU
- M+IU2YzXen8/0qmG4/zhMy3yU7Jo3QN9JLXBG3TTpzbJNM4snt7uz0UUBcBu0ZcFtMxf
- 1OwZn5WebnjWgnairkprqCvWtPxDtgRClukik=
+ bh=fXIt0zmYICAu9eikf6V4qbVRXjIUUpVeY1nW9T/3tNE=;
+ b=eQdKQUmsss1kq+FwCRcUzz1y5I49AxUGtr//PhY3UR+6DeP9qg8TtyiAYbqsAeaozL
+ D0dVx78xbLuMWpetL/W3ELGdGsNkeZAPL+q6Sya6MawkEkTtUKNv1FMhh39ZbLCi5wiV
+ SZ5t+cZfHAGdkXf2UEPhO2+Eb46N4RjG5/EjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743161666; x=1743766466;
+ d=1e100.net; s=20230601; t=1743161670; x=1743766470;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NHV1K0oGOCUhrxGutZHxWOpXylYd7JE/qlz5Y8t6raM=;
- b=ZksEwRbI5DibK+UzVbbqK5jaE+WTdvFoblzHLW/oeD0NeMiJTfnRPyciwUI9i9t6t0
- 8X01PYIl+kBj2aMuO4kuqgMnBYKi/zAwbLv/+dZziaSRJwLx0CzKPvS83PDZDETOqHj+
- FBIOYKqwNa0TBeee7NP+b8/srNiFSkfCx0eVSAbaovwwCd7dcbyrrmIDETrPay9aaT2R
- P1MoYqGF1ycNgCnNgvxfTWZuA2o5PaUsiwC+DmKznyn8O9lBjpySMchGiwxrK/r1cPJw
- 6aAH/OY7QL8Cn260vkrS+RPBh6+vIPh6HTjyqZbMzIj4bBe7fjeTEWxBcKd0O55Vg4nU
- mSGA==
-X-Gm-Message-State: AOJu0Yx5eZOY/dCBZVZ6yvQSGduS1CkK9T0cxmnnJALkt9K7TKRFnT3I
- Fl2gMUBGT0Sj0b4mil765RX5WqUbVh/rZCwbWiBdSOGgiVzXIH7lXOWWWjo8stayg3WPMywLD0T
- +67r49Eanq+B4ZMRjC5RdfjT4A/HgiuAHqf7kLeQEY0bJZUE=
-X-Gm-Gg: ASbGncuE5pWvIDgHAUadQBeAvVqhM8BOjjp1rFwUZV4nMgmnLVKRtSaAdBGOTJXdrPd
- CuSgXiNtEspSHJy6SUUkaOMcL8eCq1wCShYzDdCrrXAJ046rQBWn74ifvLrjNbpBLlbHGAym3pX
- xwmRp8Cwu1nFLOfCvEFZMvdwxe2L4=
-X-Google-Smtp-Source: AGHT+IHU+wdsHiAPmGRfsGnyB6/2yTUD7+GGTwvgVY/uTJaVho66YOUQ6Pmvb2jPDTfOhMOJLoMdGCOy/gOkX3F//u4=
-X-Received: by 2002:a17:907:805:b0:ac2:c75d:f30a with SMTP id
- a640c23a62f3a-ac6fb1570ecmr696813366b.37.1743161665536; Fri, 28 Mar 2025
- 04:34:25 -0700 (PDT)
+ bh=fXIt0zmYICAu9eikf6V4qbVRXjIUUpVeY1nW9T/3tNE=;
+ b=FSI3J+7Qoc5UycgldRDkMtexUatjuGMC0VsMJ9raCRdi/EbnnS09RhRRdLUNnjpfKr
+ ccFLiYknx8vXQxqwnbAfT9EjOH2MEU3Nq+i+QBOfSW8Fx9w4wjo57SgAAHbKxHlPS38D
+ vK1i3bHMdWqDgg9K03/BluUB5zgwnIOnz149qZtTLZxY9NIi7Wz0SLztKKiQa5L/H+74
+ rL4uSaoqON/A8+TPZl+Xm/D88f91QS9BUgqA5IM1YzqkiUJiFwAcEOZga9JvWe9g4iQV
+ TD59Ufo+jcAlt6wENAWIsx0wrnXg+H/tJqbNXvEKsa2GAPxq5BlxPavdy4QobxGU7pG4
+ jeYA==
+X-Gm-Message-State: AOJu0Yyh+mscmmYNn9kOYW1XqyX1Kax8x5gsIxtDuNfolwlcxBFbp1mO
+ lzgEj1MPV60E6XrX7Q5ZsGhrjRtjfo1ADkdw5UxMcB1XlDGFKe23yLJ82fZUKIepL3VeULMKgS6
+ KnL+k5YnFynHK5aZyZYyE5Xn70Sev2vAQ7QXq
+X-Gm-Gg: ASbGncvJvuICZbYvf+1sYUGDogMDr7S6MZR6ohjLopalJzdsRr7XqOXUlK2EI9I+iNN
+ 4vcTggEaLxHUCuo2YpHnOrOMPRTaVNgzOUFnMzpKjn7jM6Qm+FlXNtHkyWraiPa5CoDDoN09okX
+ Dz9WLQw8vWevghmpcJRJM0nVGQLOk=
+X-Google-Smtp-Source: AGHT+IFXxW0PGfChDwby+87/yxudoxXDZ7GasB1tgTMJah1q8afzc4wZELvk8ozkJgydjPJ+M1K4tSSBEq+bxpXU+Ic=
+X-Received: by 2002:a17:907:c1f:b0:ac6:ed4a:b271 with SMTP id
+ a640c23a62f3a-ac6faf03c04mr639806766b.24.1743161669892; Fri, 28 Mar 2025
+ 04:34:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250215032254.4121030-1-sjg@chromium.org>
- <20250215032254.4121030-14-sjg@chromium.org>
- <07df3ff7-65ed-47d5-928b-0c901ec5448e@linaro.org>
-In-Reply-To: <07df3ff7-65ed-47d5-928b-0c901ec5448e@linaro.org>
+ <20250215032254.4121030-23-sjg@chromium.org>
+ <a9ac4bc4-5732-4c14-a11d-dc3c9e0ae4e5@linaro.org>
+In-Reply-To: <a9ac4bc4-5732-4c14-a11d-dc3c9e0ae4e5@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 05:34:12 -0600
-X-Gm-Features: AQ5f1Jo_cZreTweQULcRhUWg1Wver6bYKpD85yuhsUfmv3ed8mvGFMMNGVCAUQ4
-Message-ID: <CAFLszTh6f2NRKWvEq=RDM4fKG-fboRR_LBHuty7H1eJ11myieQ@mail.gmail.com>
-Subject: Re: [PATCH v4 13/29] efi: lmb: Avoid access to _start
+Date: Fri, 28 Mar 2025 05:34:16 -0600
+X-Gm-Features: AQ5f1Jrwpbmdj1734Vd0S1O6I34xiI7-Fzn9bueRU47CjG2QuZzyHHHeqpEQbZQ
+Message-ID: <CAFLszTjppAyOHqa8Nrqt=tm2BvEm6CP3QANSf2se_tivso=v5w@mail.gmail.com>
+Subject: Re: [PATCH v4 22/29] efi: arm: Drop startup code from the app
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Janne Grunau <j@jannau.net>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Tom Rini <trini@konsulko.com>, Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Raymond Mao <raymond.mao@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,63 +94,30 @@ X-Virus-Status: Clean
 
 Hi Caleb,
 
-On Thu, 27 Mar 2025 at 10:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Thu, 27 Mar 2025 at 10:33, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
 >
 >
 > On 2/15/25 04:22, Simon Glass wrote:
-> > The app does not have this symbol. Also the memory where the app is
-> > loaded is not under U-Boot's control.
-> >
-> > There is no sense in relocating from one alloced region to another.
-> > U-Boot is not able to relocate to the top of memory, nor decide what
-> > other parts of memory are used for.
-> >
-> > For these reasons, the EFI app skips relocation. It is not running at
-> > the address pointed to by the _start symbol.
+> > The EFI app uses different startup and relocation code and the existing
+> > code uses symbols not present in the app. Drop it.
 >
-> is there a symbol or not? If there is could we have some "relocate in
-> place" mechanism so that it's valid? When I (finally...) get around to
-> re-sending the symbol lookup support it would be nice if it worked for
-> the EFI app, and it relies on _start.
+> Shouldn't this be squashed into patch 18 ("efi: arm: Omit the ARM
+> start-up code in the EFI app")?
 
-Can I leave you to do that clean-up/investigation in your series,
-then? Tom has already reviewed this patch and it has been sitting here
-for 6 weeks. I applied it yesterday.
+Why is that?
 
-> >
-> > So disable this reservation for the EFI app.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > Reviewed-by: Tom Rini <trini@konsulko.com>
 > > ---
 > >
-> > (no changes since v2)
+> > (no changes since v1)
 > >
-> > Changes in v2:
-> > - Expand commit message to explains that EFI_APP skips relocation
+> >   arch/arm/cpu/armv8/Makefile | 2 ++
+> >   arch/arm/lib/Makefile       | 4 +++-
+> >   2 files changed, 5 insertions(+), 1 deletion(-)
 > >
-> >   lib/lmb.c | 3 ++-
-> >   1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 588787d2a90..420eae4d0b8 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -560,7 +560,8 @@ static void lmb_reserve_uboot_region(void)
-> >               lmb_reserve_flags(rsv_start, bank_end - rsv_start + 1,
-> >                                 LMB_NOOVERWRITE);
-> >
-> > -             if (gd->flags & GD_FLG_SKIP_RELOC)
-> > +             if (!IS_ENABLED(CONFIG_EFI_APP) &&
-> > +                 (gd->flags & GD_FLG_SKIP_RELOC))
-> >                       lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
-> >                                         gd->mon_len, LMB_NOOVERWRITE);
-> >
->
-> --
-> Caleb (they/them)
->
 
 Regards,
-Simon
+SImon
