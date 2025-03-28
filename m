@@ -4,178 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BEF4C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 10:26:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5B2C36010
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 10:28:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A63D981E1C;
-	Fri, 28 Mar 2025 11:26:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id D74A381E6C;
+	Fri, 28 Mar 2025 11:28:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="mB3buOEY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NX64q9lM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EF2B81E1F; Fri, 28 Mar 2025 11:26:54 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 619C281E8C; Fri, 28 Mar 2025 11:28:52 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1276881CFD
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 11:26:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A3CD81E1F
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 11:28:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HdAL7phAhI9IjjWpP3jnKWEpL1DfdI+jAmUFsvRu4s28nuWZtaqiUW4fNUSMaV6CE5WEIHXMadDTjzTcL8ZHWQwDyzNnQjaw3B8C/N87MDnS0M9N1koVoIK6H4ahAyViZ1m/MLGjqqCSSO4MumUkuKYn2tGDG0jFUL+Xtol0Xl1/LOQ7w23K5wnPx186bEW5EpRidBV5ofXlUGgL1XHTtJh+pMNVA0m+bHGSpatOeC46o7BLEi2pRstV+munGVWwL+Yp1QPo7GezJA8UKHUuQeXk98/O9J3RVBMgc+Xfeh/+T4TqcI3b9/5pc7+INYHTUPf8RE5ViLSnZjwLM7dUgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dqikprEyV869zuuXG24mdl5Xl4ZLekDM5W1kt8BANWw=;
- b=AAIACDNC1stiZiyExUYq/Et/Ov2Z1f/PDve+B5//10IFDafyIVVFAR/RGYKR+T+Dbo37bvunzUcqOY6VF8ZPrUxYKXqc+vjTjthU0Kpot/bDNL7hxekWbg9bng8nwX+BMc7o48rHlWVS8ocRX4+WanU3i/U2zz6KNmVZZjEiJTOs1lQwhXo8BkUreiw/4LWR+1dA2LOy5lvAZJbeGtfYVmVN0Bz943elpRaIX6qyPsDYu/vM/nRJsGceqgNnJ4waZ+VshgRZ++XTG1VmB2pKbmaKmbxtpEOFHZUO7vEVctBymUuQF191Q4v27myCuqxFyWcjenYowQYikqr/t7wJPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dqikprEyV869zuuXG24mdl5Xl4ZLekDM5W1kt8BANWw=;
- b=mB3buOEY0A76UUunQIikCgaQ9PE+lp3hlOx52orDtJtoBqdwjNgkfg+7YivV+PSLvBvtbwt3wg+SnglIvlQHEi/82D8vxamBo9zwzYKS89wnHMTYiK38IkYbdsXcuVtpPZiGZC1pCIa90qNKHLUpFYXAss0tmmwfmld2GoAmaxPXdnT+iPi2Q3+aRQqQcoUgdh8jChQSbMj40J6avRLRcsjqOcdNPgv8j8GmrP4znBiJby1oCrf1Jf/S6L37o9RFE5EM383KAZJh3YAXWIe4swUZeNnwL7eI/GvRJjZ+wf/gABMFqewQ7hVFufw/KXmbwxGtV7/AuPn/qwcKRTKVmQ==
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by AM9PR04MB8570.eurprd04.prod.outlook.com (2603:10a6:20b:435::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.44; Fri, 28 Mar
- 2025 10:26:48 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8534.043; Fri, 28 Mar 2025
- 10:26:48 +0000
-From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-To: Marek Vasut <marex@denx.de>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Stefano Babic
- <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, dl-uboot-imx
- <uboot-imx@nxp.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo
- <alice.guo@nxp.com>, =?utf-8?B?TG90aGFyIFdhw59tYW5u?=
- <LW@KARO-electronics.de>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ye Li <ye.li@nxp.com>, Peng
- Fan <peng.fan@nxp.com>
-Subject: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjggMDcvMTldIGNsazogc2NtaTogY2hlY2sgdGhl?=
- =?utf-8?Q?_clock_state/parent/rate_control_permissions?=
-Thread-Topic: [PATCH v8 07/19] clk: scmi: check the clock state/parent/rate
- control permissions
-Thread-Index: AQHbmjEmwIgKs59o90GSL+fsqCmt37N+aHoAgAn6hNA=
-Date: Fri, 28 Mar 2025 10:26:48 +0000
-Message-ID: <PAXPR04MB9644F826CFC88160CF9CF2EBE2A02@PAXPR04MB9644.eurprd04.prod.outlook.com>
-References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
- <20250321-imx95-v1-7-f2c8ba815f89@oss.nxp.com>
- <78f7d9f2-6226-49bb-8568-41e7ca0cdaba@denx.de>
-In-Reply-To: <78f7d9f2-6226-49bb-8568-41e7ca0cdaba@denx.de>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|AM9PR04MB8570:EE_
-x-ms-office365-filtering-correlation-id: a8db03b1-7ebc-43c6-63b3-08dd6de30c35
-x-ms-exchange-sharedmailbox-routingagent-processed: True
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|7416014|1800799024|38070700018|921020; 
-x-microsoft-antispam-message-info: =?utf-8?B?QVQ0UjJxZTJzMjBFRzBwUFNPN05oWi92OUlSOWR6N1c5aDl0NWMrQXcrbmhQ?=
- =?utf-8?B?K1RiczRsekpxU0xWdVVkNEhaSEpsWFA0SXlBR2tXMFY5bFcwOHBsOUNrVHkv?=
- =?utf-8?B?TlN1LzVGQUhvR1FoaHdSLzJaU0hjLzloSlhVdGk4cnBRamVLdUNBdGlkTVNC?=
- =?utf-8?B?ZnFqS2VRa0pFRGpRSnJBUVVoWklQdHNmSjNydVdoWW5oRkpxd0hwd0NNTDRo?=
- =?utf-8?B?R1BzeGNyK2NZekRNWkRMK29Yc0pQdThQNk8vdGwxZFRoYTdxN1ljSngzV1JF?=
- =?utf-8?B?YkxBL3g1cHlMYUNWMzZvb2pPNU5ONWhsdUxvdlo1amlBUDhKN0xQa052ZGdH?=
- =?utf-8?B?aG9UekJZNGlaWXVzLys5TTRpZjNoS25DQmFDaWZXTzJqbVduRjlaL2xUbkJJ?=
- =?utf-8?B?enVGLzV3MnJzK0tqeUdUK29ZcEVjK0J0YkxRV0JhWVQ0NG9yVmR5MVZ5K0tC?=
- =?utf-8?B?ME1FY0Nha2o4aTlhdmZvRTA0WllFWlE0WFFhanRSZnpZVHplQThrVHZycWtu?=
- =?utf-8?B?VG9zT29MTzQrck81c0VyenNCcXpWS0VNYW82S0JiaGhmaGpUQ1M0SDRTcFd4?=
- =?utf-8?B?MmJ1ZVNiSWZkbnh4UTJHUWg3WFVVZlhJUCtlTTRORjVEL3pMZ2U5K1dZcjVQ?=
- =?utf-8?B?SXhCb20ybWErRXIvRElyaG93c2pQaVlxbW11dld5MEFpdFZDcWZ6RUpKQ2xs?=
- =?utf-8?B?RHgvZjUrNFcxeXlmM04rWXlnM0w2SWE5a1ZibkN3bWpWdk5Wb1JvWE5xUlZ1?=
- =?utf-8?B?TVpQcmI0WkhlbkdJbVdaa0plYWFEc0VhM3RmOGMvL2djZi9CSktjOFBBZ2Jr?=
- =?utf-8?B?cTh3Z05NZkszb2l3OXdTN0ZCWmlKbFNzQW01cjN0NHZBSXZ4MnlCUVgzOWY2?=
- =?utf-8?B?QjIwWGQ4KzkvMGhmWjRSWkhqN2Z6T3pFTjBtejh5Ykc1aExnS2dWdDBSN20z?=
- =?utf-8?B?K2RESEgrbC9lRWRDbnFNY09zSFo1VHcrR3ZDeU1XSEd1ZXFWZ3pHZmo0L1hH?=
- =?utf-8?B?d0dxZ1R6OVZsLzBJbk5WUmQyZDAwQVRFRlBBUGJvcnRBYjZmYW9ucmNmVjEz?=
- =?utf-8?B?M0QrK1lzbFl6NnpERTIvTEdILzdnSlBGRkRLOXduVGRQVWFOMmx6eXpwcTI3?=
- =?utf-8?B?Ly8wL1RraW5yZEZ1TURrYktyNkpKUTgvc1l5SDJIVEpOR0FOb2hDSGdzd0hU?=
- =?utf-8?B?SkxFUmczLzkxcERDRDcvQUxTN1k5RUdVb3UxblFyZmNJWE1VdFJRVXBVYVRI?=
- =?utf-8?B?SjZvTDZhYytJaDUwSm1vWFArVjYrV25jbzd6clJaMi9QSDBTdmlIWHREYW9Y?=
- =?utf-8?B?dFpDSHF0amk1RnoycTJoU0xiUFNCTEtZcFdPZzQ2TUtwUkh4WlZjbEZzVGJO?=
- =?utf-8?B?d1ROUGlZNDBGWVFhbUFJYVE2SGh5NGF6aW16NW1MUDRudzIxTzlCOU1JMmJ3?=
- =?utf-8?B?ZlZNWFhZZEhmNExRa0tuNmRzUkhzSm9lZGdSWTdZRWNYai84ZmVMUXBpTEtZ?=
- =?utf-8?B?bW9zcEFnbk13SHAza3dHMXV3TWlOYnB6VmliSGN2M25ycmRmNlBCZXJ5YzN2?=
- =?utf-8?B?OUxhWGFWeDZYWXZsa2QrM3J4VU1pMXBBeFFEeGU0TVJXWnpFMDZSMnVmTmNI?=
- =?utf-8?B?alJSbGZxcER0UklFL09aZHRUeGZrdUErbzF5UC9vRzdzVitwcGhHaWVId3dt?=
- =?utf-8?B?WkZVSGI3QVlHWnBDQUc3Y2RlUUlDenpaWGp1SHIyV21NVmFlbjA4ZDFYbGw0?=
- =?utf-8?B?aDFQQnZKa1pUM1ZUU1hZVVduYldmUmhlMU9FYTZYclNxd1ZBRnBjZmlVYVdP?=
- =?utf-8?B?MWE2clhEd2twL01GU1B2SU1WWXl2b3RKaVlYNkJPUTBERG0rUUJSOThhdFRL?=
- =?utf-8?B?UENKZk5YTmkrQVJIV3JxZlh6RDU4TTNBRVJpL3BpWHU2ZUZpRWJ4VlJtdytY?=
- =?utf-8?B?ZG5NMGFvbXVKUFZSZ1U0YnJIdW5rUXIvV0Z0ZWhrWDVsbWMwYU15L0VKMlIz?=
- =?utf-8?B?eDl4V3R1ekJ3PT0=?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024)(38070700018)(921020);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?anNzOThWaGkrNngvdXBncVNIN3dUK0JRUkI3M2FiekZBZmV2TmxxQlpScUpD?=
- =?utf-8?B?enFIazBEWUJCYWMxY1Mvb3hrdUhLYVlhM08zNmNHaVVGQ2VrQWoybVlPQUhV?=
- =?utf-8?B?TkRaNEJtNE1pVWgydlVCSzBDOGpCTENGRStZL0xtOUxFUU5sd1doS0d2QUtN?=
- =?utf-8?B?M2V5Z0hDSS8yU1lseldyM05zcFN1M3J3R04vSndQWGtKaFNnNDAwblJHdWVZ?=
- =?utf-8?B?ekVSNU02Y3dIMUpQbTdNVHEzNWErMlVUcHN0ak5ZNlVDZS8xbDZpVHQrSHVs?=
- =?utf-8?B?YmtLd1JyRU5LQ2x5R2JKZmdrcDYwaVlaTVd6Z25SODlXSm1SWnlwaWUxTEsx?=
- =?utf-8?B?VXFCamFtRklHTWVDdmduMVF6TTlPTW5RNWZJQzUrUmxFYmJqelFlWUMwUkl0?=
- =?utf-8?B?TlpPSzdyS2pWTjgxdFdXRFVLQmt2Um45MFBDOThpTlZlOGxEOWZoYXI3Yk5q?=
- =?utf-8?B?bVlEc2NXTTJkejRZbFloYStSZ0hKTXVEcEU1R29SN0lCRWxIZGdCS0FYL0c0?=
- =?utf-8?B?bWc3d1Q0OXdiTi8wbmRwazhxckR4OVBZaG1oNWkycnF5YzZkaFJpcHVVSW9l?=
- =?utf-8?B?Znd2ZXk2MFJWZkt4UDl4OFBWbDFRRUVkR2pDMjJpLzR6QlJkY1hlT0xBWm1w?=
- =?utf-8?B?Z2ZxUW1QZmpQdlRQTkxNa2tQWk9YMG1MejMwUTJHWFRhRHcxN0FiSjVVdjZP?=
- =?utf-8?B?SGRzSk9taHJ4ZmZFc0x2RzVQVHdoZjhPK0pmazFtQ05rTFIzai9qemFhLzd5?=
- =?utf-8?B?M1dSVVFxNlc3UVN0V1ZRNzdIRFRybTlZOGdqbXZ4T2pGL0VGNHRtQTFJK1lU?=
- =?utf-8?B?SmJzV2ZUVS8vSWl3NFN6NmNXSDhINmE4bFhPZEx5OXgzL0J6Tk9Ia01tNDRk?=
- =?utf-8?B?R2xMWlJwUU5JdDN1bG0zWWFsVmxVQ0Fwby9nbjBNTVM5aXFhbU1WTGxwdUhj?=
- =?utf-8?B?Nnc4ZXRCdXpuNlZEcWRlUFpoU1doSzRQRXI3VFh1dnZHOHh2VUsrZFlkQWxR?=
- =?utf-8?B?YUU1dlFPMmc5YS91Ylk2aVAyL1N1VWJubTd2UFJxL3c5bEhjb080SERTVnRi?=
- =?utf-8?B?QkpPOU4vellndC9wcExMUHJzaElrUEZOR0lEUS9BZkcweFcvcUNRZGRWVVFx?=
- =?utf-8?B?UEMzcEVWTUVKYW52OFN3VitZNmtOQWZVSFJnNVJRK3ExNkRIano5Q3dKWnN0?=
- =?utf-8?B?RjBkL0lkTDNxRXJadVFYZ3dWODR6Z0RlQ0o2RE1rdkRobmpFcVprR0dnYUxQ?=
- =?utf-8?B?VTVzWTBZN3BDSEJ3eWI2UkIvV09xWGg3YkdUZit3c2IyazJ1T04vaE5GeFBP?=
- =?utf-8?B?SldBbXQyT2c2cXBoMkJidVJRelhLQVd3dzF4RU05UGh6WXVxdTFYamxLNnVx?=
- =?utf-8?B?UzdFNVMvRXBmdFZsWU1nR25VYllWY3ZCSlB3bnRlRDRYcjJGRjF0bGY2STh4?=
- =?utf-8?B?QzJKVDdoMDFYcWwyaStGTEg0WHRkY3hkS1ZtNEU2L0JPdGNlRm52V29FVEo3?=
- =?utf-8?B?Umd1ZG9qMmdxMHFmem05UGhQeVhtVHEyWnBOdit2endsNklubEZNZFp1aUkv?=
- =?utf-8?B?d3Z3OG5yQ3Q1Ylh5WnlRNW5kNFJhakhIVzZXMnB3dzdDYVVOdW1FbElMZm1M?=
- =?utf-8?B?dkVqemxaandiWWNFTlNuQmdZMFZISUNIY3ByQ2lpS0FFN0pHVDRkeW5oc1U0?=
- =?utf-8?B?VCtCeGhkTG9QdlYxTGdhQnVBdGh1STVzVDNsQmJJZDMzRE90a05JdWN4c0ZD?=
- =?utf-8?B?eHpWTlVrZ0QwOUx3R1BzUW9kME91WEw2Nk9HZUtGc0JQdE52THV5L2gydXpC?=
- =?utf-8?B?N245NVN1TDl4RmF5Vk5CODJNNGFtQmVmUGZFMkVLU0oxSVFBaXg0a2xGTXVn?=
- =?utf-8?B?b2RZSWc4cWN5MGlUdE5xcEd6aWhVTFRNQ0M5TEg5Yk1mRnFab2RjNnZ5dVJa?=
- =?utf-8?B?aWpvZXNBeGYxajVwOE1wV0c1blBzVWl2cE5aOExHdSswQm5MUG9abzg3NlZy?=
- =?utf-8?B?NVdIVFVkdWswZmNUT1hSQUU5cGRKYk41RSs2UmJKNWpGbHpOOGVOa0ZCdzlz?=
- =?utf-8?B?ODYwRXlNdS9JT0ZQTUs2SWFlUHA0ekhpU3J3MTVTdGZ2dHdqR2FQRklXZDRY?=
- =?utf-8?Q?9kL4=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1743157722; x=1743762522; i=xypron.glpk@gmx.de;
+ bh=AlVzTVLgBppSmLKwQ2+uFd6LbcbvohuSioTnz/Q0/bw=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=NX64q9lMw+3p7U7IKafY6mvUSKJ3QMnj96wmbbl9Y09lmCfmgDeTf+TiNubsgMLc
+ gVUatUV/eMi8owAe26KY/03Qr+0BAwZ/7GSme+eohCmUVZ8ewO7/bGaMyibNqXIFj
+ dj3y1quvqAcVAnyeIHVfVqTWkq4K6+dZWtSJ2a1k7/mLhHiEBLKtRTEAASjH98Nu9
+ TLFxA1xzkVlGCGvH2jsiv4Moy3O5uynDoiQYJBCfNIR7L5mjoznipUpvX6bWPvd1u
+ Ty5LFKNReW5m16Duy2WotR3i3tlypnhZ4d4J/T3Q5eW4HxvZQgVDl1fE7XloEfgcF
+ V37/IkaoGh5b0tElFA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLQxN-1tgAYr1h2Z-00Pwbp; Fri, 28
+ Mar 2025 11:28:42 +0100
+Message-ID: <734a1243-53d5-42da-8d51-bec687f83c5b@gmx.de>
+Date: Fri, 28 Mar 2025 11:28:05 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8db03b1-7ebc-43c6-63b3-08dd6de30c35
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Mar 2025 10:26:48.6122 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: t6nZ7TltfE0PWK4baXePS3NjDXtl/YueXRQjeF56+DeEMWieTHanlDnACTI2siZL+Yyd85zAtvE3TAnJMVGxfg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8570
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/18] Annotate switch/case fallthrough cases
+To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Kyungmin Park <kmpark@infradead.org>, Heiko Schocher <hs@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20250327153313.2105227-1-andre.przywara@arm.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250327153313.2105227-1-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LiNqn2tkdFZcVdY2wmBCnY0d8rPi5b8RNxMLf4kS8LfW9q2r/zL
+ Rm1JUzyfIczLwa37WsPghp+/rnRoPF32hDv4VCzF4iWYWy6n1mYjZysqRf0QR5JWjOgBMBL
+ tZm374t5cAoTgiCHsFZZadQcxvvXNcmFtiv2FuLvDw230+VDQVz/Duin7AYb9UfF9zbD4Gz
+ i/357MREYCbNJhmGv4c3w==
+UI-OutboundReport: notjunk:1;M01:P0:c1DeQN7+Bt4=;QwsnNtm8Ol1pWaGhtdDPP7y+fix
+ Gpe9I2ZU83dWpZsuCo9zf9RwDRY1o1SJpf2KVUhUbo5mul83F8YeJ7Wqk9flwCwnvpJPqOWHC
+ Vfydxhry9E32B9M1lXjvDOrHWwnvOFliJKZJ8dI5IgoMph+RRjLIynWEspX0/tzpyv/8gVidx
+ jzDB1XtaV2c1bQni6dPawFoDOKXcgR/1szBPYD0C/5rnbhgfnYt2smjlCFT6YQq4X0NDSiJrM
+ j2mRlJhbwXRRFvdDP+aiYpoWRLIiyx8/AbN7uj9RodihV9cxOb14Jq2h2bULf0Zn7QvQ0AIi0
+ bw+0h3y3coCs2SwlqWZ4feW/d5i6oJRKLWTpXAWeBECrN/J55LJgLCCYUxfyqSWYjQI6ZeIFJ
+ bBKds494Vz2TjJGDoYu0JPriYe6Xw3fg1rhtmaeq6dpjBUayw+oDcUkLN2hE5WlZ53QA6+d1S
+ +MikQLiU5ZZi2Ck5jTSiapk1xj7f1OnjdN/TLpm6Q5xIgtx7rKZExMxiAgKO2vinvPqBCGQWJ
+ KJiJVkDSS03I1xXlTiojjcr11L7SqQkxmgXHGz/cOIORHoFS7b/39O/lkvyVR4WMKxkHSOko+
+ WikBGdNjY7RvRKwT+DG2CEUf9mLC5rLpqlECNCI2umN3mDIloE2T5j0p648ZXIIRS2ua9nAZ5
+ PVInXaTsDdVfkeWtVQFb8xXI3YXbLXh6vt5NtNGXGWBo4IL07ciIRT2Fz9hUynf5YJyqrWkzZ
+ OURJEPNTcXpScp2oLWWyD04GdeRb5pHT3Tw1wRaNuIgqO38FRcMLZ2N4Sml+1nENAizmziRdO
+ ZIPNA3OTb01jCY+0izUfuV3Dr3gd4wF9vyBZIySlvqlUkDOZNkALmCTR5x5+Ca4rIpubQzlX+
+ dvObPzlUvqXhnH1c/A4O2MW+ruGhFWvc3JzqJaClGUxj0Q+j4JxXRfAEGBeIM8cZba3B0MWZG
+ cnTjHZ7LNv4DZZG29ZvIBDeMawhNc3OM20Q7e4301nO9AC6tmUs4Wf1IHZ7lRF99kUbuCFZV1
+ FwMsJ0nXWm1h4s9jIjG8LOij8Kga2ZSrlZBI/+cjsxEOwZjOgNT0YZuMzr6oJ+1NptMy2u20n
+ 8ggh1CvtZxz7Zd0wMusx0E5QhGxEbDDDWc1++Ls4TODnsIYbjvKxsMscgLXKtioljNN2TymgU
+ JtAmzNpqHVbLHH7U/rCRkSgLbO6fXEe4hrS+FXdRw0Zdess7JHV31pWTvsgxzEUy//kAisxmR
+ kkb8L8tr8klhVrxtDAe0Dyy/vEOuE/+hnxFZUK4jDf+YFSC4MsqvNWVui0ZP+1pfMkVFMM6+n
+ N2D7Kq7gBwZVROWKLGidhgaSRw5pcWbPGzXf8hKoa8rEyK+hz8l6wQxc7q6siwp6SfPGDqrQl
+ SoRO6bX4Pw17e0bb2jZeY2l6WdZHBF8CJEVmMh94N+6GjDvSFtaBAVUhAzX8W0fE9YOdsg06Q
+ jVR3XzUmRU1r4skwhAmw5/jgesSI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -192,80 +108,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiAtLS0tLemCruS7tuWOn+S7ti0tLS0tDQo+IOWPkeS7tuS6ujogTWFyZWsgVmFzdXQgPG1hcmV4
-QGRlbnguZGU+DQo+IOWPkemAgeaXtumXtDogMjAyNeW5tDPmnIgyMuaXpSAxMDowMg0KPiDmlLbk
-u7bkuro6IEFsaWNlIEd1byAoT1NTKSA8YWxpY2UuZ3VvQG9zcy5ueHAuY29tPjsgVG9tIFJpbmkN
-Cj4gPHRyaW5pQGtvbnN1bGtvLmNvbT47IEx1a2FzeiBNYWpld3NraSA8bHVrbWFAZGVueC5kZT47
-IFNlYW4gQW5kZXJzb24NCj4gPHNlYW5nYTJAZ21haWwuY29tPjsgU2ltb24gR2xhc3MgPHNqZ0Bj
-aHJvbWl1bS5vcmc+OyBTdGVmYW5vIEJhYmljDQo+IDxzYmFiaWNAZGVueC5kZT47IEZhYmlvIEVz
-dGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT47IGRsLXVib290LWlteA0KPiA8dWJvb3QtaW14QG54
-cC5jb20+OyBBbHBlciBOZWJpIFlhc2FrIDxhbHBlcm5lYml5YXNha0BnbWFpbC5jb20+OyBBbGlj
-ZQ0KPiBHdW8gPGFsaWNlLmd1b0BueHAuY29tPjsgTG90aGFyIFdhw59tYW5uIDxMV0BLQVJPLWVs
-ZWN0cm9uaWNzLmRlPg0KPiDmioTpgIE6IHUtYm9vdEBsaXN0cy5kZW54LmRlOyBZZSBMaSA8eWUu
-bGlAbnhwLmNvbT47IFBlbmcgRmFuDQo+IDxwZW5nLmZhbkBueHAuY29tPg0KPiDkuLvpopg6IFJl
-OiBbUEFUQ0ggdjggMDcvMTldIGNsazogc2NtaTogY2hlY2sgdGhlIGNsb2NrIHN0YXRlL3BhcmVu
-dC9yYXRlIGNvbnRyb2wNCj4gcGVybWlzc2lvbnMNCj4gDQo+IE9uIDMvMjEvMjUgODoxNSBBTSwg
-QWxpY2UgR3VvIChPU1MpIHdyb3RlOg0KPiANCj4gWy4uLl0NCj4gDQo+ID4gK3N0YXRpYyBpbnQg
-c2NtaV9jbGtfZ2V0X3Blcm1pc3Npb25zKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGludCBjbGtpZCwN
-Cj4gPiArdTMyICpwZXJtKSB7DQo+ID4gKwl1MzIgdmVyc2lvbjsNCj4gPiArCWludCByZXQ7DQo+
-ID4gKw0KPiA+ICsJc3RydWN0IHNjbWlfY2xrX2dldF9wZXJtaXNzaW9uc19pbiBpbiA9IHsNCj4g
-PiArCQkuY2xvY2tfaWQgPSBjbGtpZCwNCj4gPiArCX07DQo+ID4gKwlzdHJ1Y3Qgc2NtaV9jbGtf
-Z2V0X3Blcm1pc3Npb25zX291dCBvdXQ7DQo+ID4gKwlzdHJ1Y3Qgc2NtaV9tc2cgbXNnID0gew0K
-PiA+ICsJCS5wcm90b2NvbF9pZCA9IFNDTUlfUFJPVE9DT0xfSURfQ0xPQ0ssDQo+ID4gKwkJLm1l
-c3NhZ2VfaWQgPSBTQ01JX0NMT0NLX0dFVF9QRVJNSVNTSU9OUywNCj4gPiArCQkuaW5fbXNnID0g
-KHU4ICopJmluLA0KPiA+ICsJCS5pbl9tc2dfc3ogPSBzaXplb2YoaW4pLA0KPiA+ICsJCS5vdXRf
-bXNnID0gKHU4ICopJm91dCwNCj4gPiArCQkub3V0X21zZ19zeiA9IHNpemVvZihvdXQpLA0KPiA+
-ICsJfTsNCj4gPiArDQo+ID4gKwlyZXQgPSBzY21pX2dlbmVyaWNfcHJvdG9jb2xfdmVyc2lvbihk
-ZXYsIFNDTUlfUFJPVE9DT0xfSURfQ0xPQ0ssDQo+ID4gKyZ2ZXJzaW9uKTsNCj4gDQo+IFdvdWxk
-IGl0IGJlIHBvc3NpYmxlIHRvIHF1ZXJ5IHRoZSB2ZXJzaW9uIGluIC5wcm9iZSgpIG9uY2UgYW5k
-IGNhY2hlIHRoZSB2YWx1ZSBpbg0KPiBwcml2YXRlIGRhdGEgPw0KPiANCj4gPiArCWlmIChyZXQp
-IHsNCj4gPiArCQlsb2dfZGVidWcoIiVzOiBnZXQgU0NNSSBjbG9jayBtYW5hZ2VtZW50IHByb3Rv
-Y29sIHZlcnNpb24NCj4gZmFpbGVkXG4iLCBfX2Z1bmNfXyk7DQo+ID4gKwkJcmV0dXJuIHJldDsN
-Cj4gPiArCX0NCj4gPiArDQo+ID4gKwlpZiAodmVyc2lvbiA8IENMT0NLX1BST1RPQ09MX1ZFUlNJ
-T05fM18wKSB7DQo+ID4gKwkJbG9nX2RlYnVnKCIlczogU0NNSSBjbG9jayBtYW5hZ2VtZW50IHBy
-b3RvY29sIHZlcnNpb24gaXMgbGVzcyB0aGFuDQo+IDMuMC5cbiIsIF9fZnVuY19fKTsNCj4gPiAr
-CQlyZXR1cm4gLUVJTlZBTDsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwlyZXQgPSBkZXZtX3NjbWlf
-cHJvY2Vzc19tc2coZGV2LCAmbXNnKTsNCj4gPiArCWlmIChyZXQpIHsNCj4gPiArCQlsb2dfZGVi
-dWcoIiVzOiBnZXQgU0NNSSBjbG9jayBtYW5hZ2VtZW50IHByb3RvY29sIHBlcm1pc3Npb25zDQo+
-IGZhaWxlZFxuIiwgX19mdW5jX18pOw0KPiA+ICsJCXJldHVybiByZXQ7DQo+ID4gKwl9DQo+ID4g
-Kw0KPiA+ICsJcmV0ID0gc2NtaV90b19saW51eF9lcnJubyhvdXQuc3RhdHVzKTsNCj4gPiArCWlm
-IChyZXQgPCAwKSB7DQo+ID4gKwkJbG9nX2RlYnVnKCIlczogdGhlIHN0YXR1cyBjb2RlIG9mIGdl
-dHRpbmcgcGVybWlzc2lvbnM6ICVkXG4iLA0KPiBfX2Z1bmNfXywgcmV0KTsNCj4gPiArCQlyZXR1
-cm4gcmV0Ow0KPiA+ICsJfQ0KPiA+ICsNCj4gPiArCSpwZXJtID0gb3V0LnBlcm1pc3Npb25zOw0K
-PiA+ICsJcmV0dXJuIDA7DQo+ID4gK30NCj4gDQo+IFsuLi5dDQo+IA0KPiA+IEBAIC0xNTYsMjkg
-KzI2Nyw0NCBAQCBzdGF0aWMgaW50IHNjbWlfY2xrX3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYp
-DQo+ID4NCj4gPiAgIAlmb3IgKGkgPSAwOyBpIDwgbnVtX2Nsb2NrczsgaSsrKSB7DQo+ID4gICAJ
-CWNoYXIgKmNsb2NrX25hbWU7DQo+ID4gKwkJdTMyIGF0dHJpYnV0ZXM7DQo+ID4NCj4gPiAtCQlp
-ZiAoIXNjbWlfY2xrX2dldF9hdHRpYnV0ZShkZXYsIGksICZjbG9ja19uYW1lKSkgew0KPiA+IC0J
-CQljbGsgPSBremFsbG9jKHNpemVvZigqY2xrKSwgR0ZQX0tFUk5FTCk7DQo+ID4gLQkJCWlmICgh
-Y2xrIHx8ICFjbG9ja19uYW1lKQ0KPiA+ICsJCWlmICghc2NtaV9jbGtfZ2V0X2F0dGlidXRlKGRl
-diwgaSwgJmNsb2NrX25hbWUsICZhdHRyaWJ1dGVzKSkgew0KPiA+ICsJCQljbGtfc2NtaSA9IGt6
-YWxsb2Moc2l6ZW9mKCpjbGtfc2NtaSksIEdGUF9LRVJORUwpOw0KPiA+ICsJCQlpZiAoIWNsa19z
-Y21pIHx8ICFjbG9ja19uYW1lKQ0KPiA+ICAgCQkJCXJldCA9IC1FTk9NRU07DQo+ID4gICAJCQll
-bHNlDQo+ID4gLQkJCQlyZXQgPSBjbGtfcmVnaXN0ZXIoY2xrLCBkZXYtPmRyaXZlci0+bmFtZSwN
-Cj4gPiArCQkJCXJldCA9IGNsa19yZWdpc3RlcigmY2xrX3NjbWktPmNsaywgZGV2LT5kcml2ZXIt
-Pm5hbWUsDQo+ID4gICAJCQkJCQkgICBjbG9ja19uYW1lLCBkZXYtPm5hbWUpOw0KPiA+DQo+ID4g
-ICAJCQlpZiAocmV0KSB7DQo+ID4gLQkJCQlmcmVlKGNsayk7DQo+ID4gKwkJCQlmcmVlKGNsa19z
-Y21pKTsNCj4gPiAgIAkJCQlmcmVlKGNsb2NrX25hbWUpOw0KPiA+ICsJCQkJZnJlZSgmYXR0cmli
-dXRlcyk7DQo+IA0KPiBEbyB5b3UgcmVhbGx5IG5lZWQgdG8gZnJlZSgpIGFuIHUzMiBhdHRyaWJ1
-dGVzIGhlcmUgPw0KPiANCj4gPiAgIAkJCQlyZXR1cm4gcmV0Ow0KPiA+ICAgCQkJfQ0KPiA+DQo+
-ID4gLQkJCWNsa19kbShpLCBjbGspOw0KPiA+ICsJCQljbGtfZG0oaSwgJmNsa19zY21pLT5jbGsp
-Ow0KPiA+ICsNCj4gPiArCQkJaWYgKENMS19IQVNfUkVTVFJJQ1RJT05TKGF0dHJpYnV0ZXMpKSB7
-DQo+ID4gKwkJCQl1MzIgcGVybTsNCj4gPiArDQo+ID4gKwkJCQlyZXQgPSBzY21pX2Nsa19nZXRf
-cGVybWlzc2lvbnMoZGV2LCBpLCAmcGVybSk7DQo+ID4gKwkJCQlpZiAocmV0IDwgMCkNCj4gPiAr
-CQkJCQljbGtfc2NtaS0+Y3RybF9mbGFncyA9IDA7DQo+ID4gKwkJCQllbHNlDQo+ID4gKwkJCQkJ
-Y2xrX3NjbWktPmN0cmxfZmxhZ3MgPSBwZXJtOw0KPiA+ICsJCQl9IGVsc2Ugew0KPiA+ICsJCQkJ
-Y2xrX3NjbWktPmN0cmxfZmxhZ3MgPSBTVVBQT1JUX0NMS19TVEFUX0NPTlRST0wgfA0KPiBTVVBQ
-T1JUX0NMS19QQVJFTlRfQ09OVFJPTCB8DQo+ID4gKwkJCQkJCSAgICAgICBTVVBQT1JUX0NMS19S
-QVRFX0NPTlRST0w7DQo+ID4gKwkJCX0NCj4gPiAgIAkJfQ0KPiA+ICAgCX0NCj4gPg0KPiA+ICAg
-CXJldHVybiAwOw0KPiA+ICAgfQ0KPiANCj4gWy4uLl0NCj4gDQo+ID4gICBlbnVtIHNjbWlfY2xv
-Y2tfbWVzc2FnZV9pZCB7DQo+ID4gICAJU0NNSV9DTE9DS19BVFRSSUJVVEVTID0gMHgzLA0KPiA+
-IEBAIC03MzgsNiArNzM5LDcgQEAgZW51bSBzY21pX2Nsb2NrX21lc3NhZ2VfaWQgew0KPiA+ICAg
-CVNDTUlfQ0xPQ0tfUkFURV9HRVQgPSAweDYsDQo+ID4gICAJU0NNSV9DTE9DS19DT05GSUdfU0VU
-ID0gMHg3LA0KPiA+ICAgCVNDTUlfQ0xPQ0tfUEFSRU5UX1NFVCA9IDB4RCwNCj4gPiArCVNDTUlf
-Q0xPQ0tfR0VUX1BFUk1JU1NJT05TID0gMHhGLA0KPiANCj4gQmV0dGVyIGNhbGwgaXQgU0NNSV9D
-TE9DS19QRVJNSVNTSU9OU19HRVQgdG8gYmUgY29uc2lzdGVudCB3aXRoIHRoZSByZXN0IG9mDQo+
-IHRoZXNlIGZpZWxkcyAsIHVubGVzcyB0aGlzIGlzIHNvbWUgU0NNSSBzcGVjaWZpY2F0aW9uIG5h
-bWUgPw0KDQpDTE9DS19HRVRfUEVSTUlTU0lPTlMgaXMgZnJvbSBBcm0gU3lzdGVtIENvbnRyb2wg
-YW5kIE1hbmFnZW1lbnQgSW50ZXJmYWNlIFBsYXRmb3JtIERlc2lnbiBEb2N1bWVudCAzLjIuDQoN
-CkJlc3QgUmVnYXJkcywNCkFsaWNlIEd1bw0K
+On 27.03.25 16:32, Andre Przywara wrote:
+> C's implicit fallthrough behaviour in switch/case statements can lead to
+> subtle bugs. Quite some while ago many compilers introduced warnings in
+> those cases, requiring intentional fallthrough's to be annotated.
+>
+> So far we were not enabling that compiler option, so many ambiguities
+> and some bugs in the code went unnoticed.
+>
+> This series adds the required annotations in code paths that the first
+> stage of the U-Boot CI covers. There is a large number of cases left
+> in the libbz2 code. The usage of switch/case is borderline insane there,
+> labels are hidden in macros, and there are no breaks, but just goto's.
+> Upstream still uses very similar code, without any annotations. I still
+> am not 100% sure those are meant to fall through or not, and plan to do
+> further investigations, but didn't want to hold the rest of the patches
+> back. You can see for yourself by applying patch 18/18 and building for
+> sandbox64, for instance.
+
+Can we use something like
+
+CFLAGS_REMOVE_bzlib.o =3D -Wimplicit-fallthrough
+
+in the Makefile if that module is too hard to fix?
+
+Best regards
+
+Heinrich
+
+>
+> Because of this we cannot quite enable the warning in the Makefile yet,
+> but those fixes are worth regardless, and be it to increase readability.
+>
+> Please not that those patches do not fix anything, really, they just add
+> those fallthrough annotations, so the series is not really critical.
+>
+> Cheers,
+> Andre
+>
+> Andre Przywara (18):
+>    spl: mmc: properly annotate fallthrough
+>    zlib: annotate switch/case fallthrough cases
+>    gadget: f_thor: annotate switch/case fallthrough
+>    use proper fallthrough annotations
+>    net/net: fix switch/case fallthrough annotations
+>    fastboot: annotate switch/case fallthrough case
+>    net: sun8i-emac: annotate fallthrough
+>    usb: ohci-hcd: annotate switch/case fallthrough
+>    usb: xhci: annotate switch/case fallthrough properly (TBF)
+>    video: annotate switch/case fall-through
+>    net: e1000: annotate switch/case fallthrough
+>    mtd: ubi: annotate fallthrough (TBF)
+>    arm: mach-k3: am62p: annotate switch/case fallthrough
+>    mtd: spi-nor-tiny: annotate switch/case fallthrough
+>    mtd: rawnand: nand_base: annotate switch/case fallthrough
+>    cmd: pmic: annotate switch/case fallthrough
+>    cmd: spl: annotate switch/case fallthrough
+>    [DO NOT MERGE] Makefile: enable switch/case fallthrough warnings
+>
+>   Makefile                              |  1 +
+>   arch/arm/mach-k3/am62px/am62p5_init.c |  1 +
+>   cmd/pmic.c                            |  1 +
+>   cmd/spl.c                             |  2 ++
+>   common/command.c                      |  2 +-
+>   common/spl/spl_mmc.c                  |  1 +
+>   drivers/fastboot/fb_command.c         |  1 +
+>   drivers/mtd/nand/raw/nand_base.c      |  4 ++++
+>   drivers/mtd/spi/spi-nor-tiny.c        |  1 +
+>   drivers/mtd/ubi/attach.c              |  1 +
+>   drivers/mtd/ubi/build.c               |  3 +++
+>   drivers/net/e1000.c                   |  2 ++
+>   drivers/net/sun8i_emac.c              |  1 +
+>   drivers/usb/gadget/f_thor.c           |  1 +
+>   drivers/usb/host/ohci-hcd.c           |  3 ++-
+>   drivers/usb/host/xhci.c               |  2 +-
+>   drivers/video/video-uclass.c          |  2 ++
+>   lib/tiny-printf.c                     |  2 +-
+>   lib/zlib/inflate.c                    | 21 +++++++++++++++++++++
+>   net/net.c                             |  5 ++---
+>   20 files changed, 50 insertions(+), 7 deletions(-)
+>
+
