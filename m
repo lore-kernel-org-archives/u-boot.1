@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C64DDC36011
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E28DC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:37:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0179781F59;
+	by phobos.denx.de (Postfix) with ESMTP id 549A481FC0;
 	Fri, 28 Mar 2025 16:36:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bwZfRHCo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cx3uxDX+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A319E81E47; Fri, 28 Mar 2025 16:36:06 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 60A9781F0B; Fri, 28 Mar 2025 16:36:07 +0100 (CET)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484C881F7B
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:36:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F36081EC0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:36:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-85b515e4521so62751439f.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:36:01 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3d03d2bd7d2so24033095ab.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:36:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743176159; x=1743780959; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743176161; x=1743780961; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9BVarEozOsdJGNj2eZWr8TeZn+6zMn7dYMguFnD/DxE=;
- b=bwZfRHCoAIJKwERsZsjor4O3rD/f8U6ps4HvszVDWjpg12ml+hTyWVGckWYIbDW3C2
- dDwGAep0ELxSNwuaDnnb16ugoM/vcCz+Rxs/Xs8aw+5z/TZOMCHkPlTFm1rJDq0rS+Ff
- NZFp3n9l3hhwfg9K2Ko667lMJbSwnRhptUTFA=
+ bh=cDPrq9Kq/Wz4GyoNWgrbCKU9ENo7H4aSflocEL8+QXk=;
+ b=Cx3uxDX+5nmXRKsdWf/xfwIlniHmiMEf3g4X6BV9Qa+rypCe9T+NuSEG9g89YRgidD
+ j0EHrCLVK4PqyJmQhypOrS8DMI4WNYJNjLaVtIAFTJz6mXbkbeo64WFNfi10Kchxr9pb
+ ckoERTy5PVuMcYJ1nq/a+t3F/n0v85Rh3DJrE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743176159; x=1743780959;
+ d=1e100.net; s=20230601; t=1743176161; x=1743780961;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9BVarEozOsdJGNj2eZWr8TeZn+6zMn7dYMguFnD/DxE=;
- b=odzxU69LaqRZ7HQdr+PX5yds5CAqtmdUnZVvoPttQ+2SIHkOIn9BLYlHk+mp1XyaAF
- wudCBAvl/FF93yXceW9lmKrWLGXCTi39ihfY8YMJZ6vpQvkqECR/sAc+bnrXYeozeUw1
- sD1jqZpBooKiMOYcKKNJ4YA50l1d2Mi8JoS+f3ZFk92kXYkyk+yLskAoh+KtKyaF8TnO
- DdO6v8GiWYMtdfxsiftluvBhKDOx4Z9Vr5u1G9svc8E5e9ZK6XnMSZFMp4wOnDWJBN+L
- 005WYiIMB/+a3tXg4GClpZO4xgQm52uqk5l4VLG2LD8rr8nirNqESswbl4B5SQD2LoLX
- x4NA==
-X-Gm-Message-State: AOJu0Yy30JxdpRn7hla4pUvd6V/zycnenffFZcR/wPtYqdqBBvM4Y4xS
- peiZPdNpXrE/4jcDq8bFydf5Ebjl6cRXn3sWygAkq5UepSn4KQfsjxgViGNmnpBEHtMNb1ok0C0
+ bh=cDPrq9Kq/Wz4GyoNWgrbCKU9ENo7H4aSflocEL8+QXk=;
+ b=JGjciTk4d8IhtdL+D/zXqc53F3KRV3jsITmo+oPpfgMWX0bR5fBCaU1kPpq1QBFeL2
+ i/xIPwwUKdRY//5d3+cu/LhWRgHwK53wBnDBxC0cLuvnP4zTYSp2GkB1+kr4/zpvmPei
+ 2yHvRVXtpdS3C6D3huuTBbQ6orqFvm7tjENTCaVWV9xWXY0PVh7BVA28wBoQNcpSUWxI
+ uMbTTRxCSo7VbTZArRAFttfBUiYMz/C8GmfRiRlKcUBW+f+msaUeVwuWwnXkI9ZoGBmC
+ lAEfAd0MWtawNNx5SYtc5+i9MSM50X7lctbQCQFC12i59FqaoqkaGFN1ozWn5SmY7GEK
+ Ap+A==
+X-Gm-Message-State: AOJu0YwmUxipBXq6gEOC+YJvzm/q1QfKk/e3dD3vvkJTz1ds48NvN0ps
+ 12Ib1XsJ63HH3ButXqAQEFsD2URg7cJP6hA/cfBsOImmnp6+7A4TIZy81o2Rw3VbOYUlm4BJSwQ
  =
-X-Gm-Gg: ASbGncsPDjIttJ32rqzPnXtLctS7Ac/0d7EYWTO//M8fKwnxSgvC1t/HNbMNGizBAR4
- J9LtIsYZEUpqsm0Z+stkirs0Jm7t8wMHedO363L1LGtcaGtQBd8M6l94QHj8F69FZwgkmvYzGw7
- fVNbqelJLbkuXpqyiAfmrxUughUpNVGc6N3JeEEwKTUxf7Z2/Rx3PdCKJOJ97Kavkyi2bc+AozJ
- jAxxbguAC70tOQjDa+mOxZruH+XLGRcGwiL3HVCSNsfrNXeYWLkQ7Aq0PCbSVBgyTSwcF16aFpl
- j+u0wjbzxPAwZy1haL4TK9cPUdNELXkGpFLrgGiWOPQ83UDZYV1MLu+rtkT+IaU1I4UaYK77FvX
- dkaH99w==
-X-Google-Smtp-Source: AGHT+IHSQ6dq2RUUAREuWyNwd5hdMdebtfg+bYHUxoiRldlsqK2DXD1mXxglWxzCj722Tw7ccl/fMw==
-X-Received: by 2002:a05:6602:c85:b0:85b:46d7:1892 with SMTP id
- ca18e2360f4ac-85e82007a46mr804840539f.2.1743176159351; 
- Fri, 28 Mar 2025 08:35:59 -0700 (PDT)
+X-Gm-Gg: ASbGncs9M/mmAvjcHX6mYvgO9mIwr4yyyaZFxyE1FxdZWD6fWEt8EacO8uChFCawUkZ
+ 4o1r2RZOQCmATKtqU/KYGZ1xxozc8Q997xVxgcw79VvhLHC2iwa1Enu8BgPtqkxLpNCYhBETo8s
+ nCAgKdzLw8claDJNAcAprNsMwZS0gG+CkHKQts1PB0XJu6bxJDjJ8V5Y9ERCcykaOU8jIfxpgyA
+ CzEeHVtyqpwkneBkj/OpW3T5t4uWkrcCElLMZ4yAdkxl93FF35Cc4Hv1mHBFi2oRX2nvRWR6ih6
+ W/8tR7Wh3GytleVdAtYM9rrh9ffIOaeRXh7ooxopZqxOGp6c2UCUV+/iei+M0V1Ml08QFIWmn2+
+ a20AfIg==
+X-Google-Smtp-Source: AGHT+IElYVviiE1oE6rFS05EtxvQ90H/P1n6MyFYeQcgcGUBKy4Zl9jPagg07bvUu5ip234NyeThMQ==
+X-Received: by 2002:a05:6e02:1d83:b0:3d0:237e:c29c with SMTP id
+ e9e14a558f8ab-3d5ccddfa31mr96395035ab.12.1743176161087; 
+ Fri, 28 Mar 2025 08:36:01 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f4648714b4sm484922173.87.2025.03.28.08.35.57
+ 8926c6da1cb9f-4f4648714b4sm484922173.87.2025.03.28.08.35.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 08:35:58 -0700 (PDT)
+ Fri, 28 Mar 2025 08:36:00 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
@@ -74,9 +74,10 @@ Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
  Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v3 09/31] rockchip: dts: Un-indent the FIT template
-Date: Fri, 28 Mar 2025 09:34:49 -0600
-Message-ID: <20250328153522.3555472-10-sjg@chromium.org>
+Subject: [PATCH v3 10/31] rockchip: dts: Use the new binman template for the
+ SPI image too
+Date: Fri, 28 Mar 2025 09:34:50 -0600
+Message-ID: <20250328153522.3555472-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328153522.3555472-1-sjg@chromium.org>
 References: <20250328153522.3555472-1-sjg@chromium.org>
@@ -98,231 +99,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the indentation on the template. This is done in a separate patch
-so that it is easier to review.
+At present simple-bin-spi relies on the u-boot.itb file created by the
+simple-bin image. Use the template to avoid this, since Binman may
+change to process images in parallel in the future.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Suggested-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Keep the filename for the SPI FIT
 
- arch/arm/dts/rockchip-u-boot.dtsi | 176 +++++++++++++++---------------
- 1 file changed, 88 insertions(+), 88 deletions(-)
+ arch/arm/dts/rockchip-u-boot.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 460bf15e003..1e4d6f71123 100644
+index 1e4d6f71123..fb304540787 100644
 --- a/arch/arm/dts/rockchip-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -33,120 +33,120 @@
- &binman {
+@@ -207,8 +207,8 @@
+ 
  #ifdef HAS_FIT
- 	common_part: template-1 {
--			type = "fit";
-+		type = "fit";
- #ifdef CONFIG_ARM64
--			description = "FIT image for U-Boot with bl31 (TF-A)";
-+		description = "FIT image for U-Boot with bl31 (TF-A)";
+ 		fit {
+-			type = "blob";
+ 			filename = "u-boot.itb";
++			insert-template = <&common_part>;
  #else
--			description = "FIT image with OP-TEE";
-+		description = "FIT image with OP-TEE";
+ 		u-boot-img {
  #endif
--			#address-cells = <1>;
--			fit,fdt-list = "of-list";
--			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
--			fit,align = <512>;
--			images {
--				u-boot {
--					description = "U-Boot";
--					type = "standalone";
--					os = "u-boot";
--					arch = ARCH;
--					compression = COMP;
--					load = <CONFIG_TEXT_BASE>;
--					entry = <CONFIG_TEXT_BASE>;
--					u-boot-nodtb {
-+		#address-cells = <1>;
-+		fit,fdt-list = "of-list";
-+		fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-+		fit,align = <512>;
-+		images {
-+			u-boot {
-+				description = "U-Boot";
-+				type = "standalone";
-+				os = "u-boot";
-+				arch = ARCH;
-+				compression = COMP;
-+				load = <CONFIG_TEXT_BASE>;
-+				entry = <CONFIG_TEXT_BASE>;
-+				u-boot-nodtb {
- 					compress = COMP;
--					};
-+				};
- #ifdef CONFIG_SPL_FIT_SIGNATURE
--					hash {
--						algo = "sha256";
--					};
--#endif
-+				hash {
-+					algo = "sha256";
- 				};
-+#endif
-+			};
- 
- #ifdef CONFIG_ARM64
--				@atf-SEQ {
--					fit,operation = "split-elf";
--					description = "ARM Trusted Firmware";
--					type = "firmware";
--					arch = ARCH;
--					os = "arm-trusted-firmware";
--					compression = "none";
--					fit,load;
--					fit,entry;
--					fit,data;
--
--					atf-bl31 {
--					};
-+			@atf-SEQ {
-+				fit,operation = "split-elf";
-+				description = "ARM Trusted Firmware";
-+				type = "firmware";
-+				arch = ARCH;
-+				os = "arm-trusted-firmware";
-+				compression = "none";
-+				fit,load;
-+				fit,entry;
-+				fit,data;
-+
-+				atf-bl31 {
-+				};
- #ifdef CONFIG_SPL_FIT_SIGNATURE
--					hash {
--						algo = "sha256";
--					};
-+				hash {
-+					algo = "sha256";
-+				};
- #endif
-+			};
-+			@tee-SEQ {
-+				fit,operation = "split-elf";
-+				description = "TEE";
-+				type = "tee";
-+				arch = ARCH;
-+				os = "tee";
-+				compression = "none";
-+				fit,load;
-+				fit,entry;
-+				fit,data;
-+
-+				tee-os {
-+					optional;
- 				};
--				@tee-SEQ {
--					fit,operation = "split-elf";
--					description = "TEE";
--					type = "tee";
--					arch = ARCH;
--					os = "tee";
--					compression = "none";
--					fit,load;
--					fit,entry;
--					fit,data;
--
--					tee-os {
--						optional;
--					};
- #ifdef CONFIG_SPL_FIT_SIGNATURE
--					hash {
--						algo = "sha256";
--					};
--#endif
-+				hash {
-+					algo = "sha256";
- 				};
-+#endif
-+			};
- #else /* !CONFIG_ARM64 */
--				op-tee {
--					description = "OP-TEE";
--					type = "tee";
--					arch = ARCH;
--					os = "tee";
--					compression = "none";
--					load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
--					entry = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
--
--					tee-os {
--					};
-+			op-tee {
-+				description = "OP-TEE";
-+				type = "tee";
-+				arch = ARCH;
-+				os = "tee";
-+				compression = "none";
-+				load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
-+				entry = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
-+
-+				tee-os {
-+				};
- #ifdef CONFIG_SPL_FIT_SIGNATURE
--					hash {
--						algo = "sha256";
--					};
--#endif
-+				hash {
-+					algo = "sha256";
- 				};
-+#endif
-+			};
- #endif /* CONFIG_ARM64 */
- 
--				@fdt-SEQ {
--					description = "fdt-NAME";
--					compression = "none";
--					type = "flat_dt";
-+			@fdt-SEQ {
-+				description = "fdt-NAME";
-+				compression = "none";
-+				type = "flat_dt";
- #ifdef CONFIG_SPL_FIT_SIGNATURE
--					hash {
--						algo = "sha256";
--					};
--#endif
-+				hash {
-+					algo = "sha256";
- 				};
-+#endif
- 			};
-+		};
- 
--			configurations {
--				default = "@config-DEFAULT-SEQ";
--				@config-SEQ {
--					description = "NAME.dtb";
--					fdt = "fdt-SEQ";
-+		configurations {
-+			default = "@config-DEFAULT-SEQ";
-+			@config-SEQ {
-+				description = "NAME.dtb";
-+				fdt = "fdt-SEQ";
- #ifdef CONFIG_ARM64
--					fit,firmware = "atf-1", "u-boot";
-+				fit,firmware = "atf-1", "u-boot";
- #else
--					fit,firmware = "op-tee", "u-boot";
-+				fit,firmware = "op-tee", "u-boot";
- #endif
--					fit,loadables;
--				};
-+				fit,loadables;
- 			};
-+		};
- 	};
- #endif /* HAS_FIT */
- 
 -- 
 2.43.0
 
