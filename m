@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13FEEC3600C
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01B35C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA1AF82155;
-	Fri, 28 Mar 2025 14:08:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C7AA82116;
+	Fri, 28 Mar 2025 14:08:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UBNC50IJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K0dV0T9q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3595A81273; Fri, 28 Mar 2025 14:08:31 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id F03E182166; Fri, 28 Mar 2025 14:08:33 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB7E98211B
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A017781273
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-85b5e49615aso181666239f.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:28 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-85da5a3667bso63383639f.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167307; x=1743772107; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743167309; x=1743772109; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8kHpi+s/ed+oSyY0uWbDXteDelTUKtSEHMMC+tIhaeE=;
- b=UBNC50IJWL3Ocb+HKBEvdQUMTKpuA776LiP4g7rG2WikFGqnRbXTOreVUHVAZcC/JQ
- /Uqr96258N+k3rGnTyE/HxP59pcuhnmozXdlZhOhAmb2mvaBzqe4ddLNPMDJQaiBKPZn
- 0hpnhxplVyC5OE4lMEpdQyBKDKMNQ8maiFOYw=
+ bh=jAO+5Ne6QrXhXzGf51vtzwD/+Uyix4H/uccqu+AEpIk=;
+ b=K0dV0T9qvx/gWgHBmoMFx3axRVJFanfk69umRZR6a8tqUvK6SBNOPpBXMl4r8BLkxO
+ sxZpg7vR5pUi8d4Nj07F10f2ckncHqvLjtfxbC3JrF1j0brbgR7va8ugW+wvi/1z+RqL
+ Zj220S6tpgFN2xG2sk4ieRyuz5hBwi6tOLY2U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167307; x=1743772107;
+ d=1e100.net; s=20230601; t=1743167309; x=1743772109;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8kHpi+s/ed+oSyY0uWbDXteDelTUKtSEHMMC+tIhaeE=;
- b=vUMJTu6rAqdTE1C2T4cPw2Y5Eq9Si55UDOalpxr30DDXh/axyzV/CI6Y0akqa1A55Q
- UL5LBogGXEvKp4yPACcOFReNXNC+FQQ/MFa//92kthP1AG3xMYB06hjUK7QLoFeXUJZz
- c5G3bqj6tbQsAElR9IVQusBaoeUvNRIJMa7pB5nfi5O0hIodZ4q7Sn1qti72XqE6rPCN
- rbOuMBq0mzzm+y2D405LNvm5+7Hf8ZCC9ZJ1E57WKzu+kuoDmFgWYCBMEh1M87dKSYaP
- cYZNLhXca+KDuyPzFkSvlWXSpZ1cIEFZh48xdnt+qL42kBW/CU/9Cror9bszNyHhbbOY
- BGsg==
-X-Gm-Message-State: AOJu0YyksyLJxA8Uz7BonqtDE8p+ObtcRMic8dm5eb0WTd/svWblpBRr
- sWdN65nVLJeks8LnwLgO2M056//zrolcCcNCIbVnDbAyd3+dwIg9Ue7dRGKz2kzYpkrexcPWPAM
+ bh=jAO+5Ne6QrXhXzGf51vtzwD/+Uyix4H/uccqu+AEpIk=;
+ b=fyLCpSg29u695j5LO8Qn34jvhaygnkZypaYd+X6FaRu26fWfVgdPvkPvxWga3qc6mt
+ Cs5qSubIh31iBFsskYjXpbbSB/pIB40fCpScPNDeZVMCeK3zFF1YOtElFe4WYE6zXq0s
+ arp0/wEKvXcRSxI6qDx2ScMuXKsSK9zxClsUto4i8T2d7yNxOOpuJAunNL++SBiZyUSt
+ JB+kQGvNZIb4sH+HkM9TaNU4EYSGYsVsSwgzeKlU0Qno0PPsCyxOBc9cJG0KcPoJAOdh
+ 8Jn9N5NkpbIeRdg2upUw1uwyukZoANgqBcZ3Pum8yJoH5CCS8ME6LQpCGlFUgOIbOxe3
+ 3f6w==
+X-Gm-Message-State: AOJu0Yxk+NGKKleXRqqFnGoIkN/q/HOnfHlKZeTc3RpdTv/68TNcrn46
+ 07rHjHIN3WvZuYIZ2UStgCj6jfuOPd22ErI6UpMQo33Fb6WJKJ0j4m0f93xnHH3yyDlaT+Rkjio
  =
-X-Gm-Gg: ASbGncvP8VaTKbH5gUx8AJ/E1t3v+cFwusKPo+mLwo7V6zr+GHrs/WZwfYa+goDXNEC
- JlP2L6isR4DsOwfnyvi0sSIGK0eWjUCCZbkDDA56C15syFFbtfRozAcA5ll6uebGOZR8MPdNyBs
- qxK41kxaUeDrgZjirgnTziMhRCnojH7BG1Gbe/9UKFXlNbF3Git7JHpWobdd21SQFSDVYC9fTD3
- A+HBOxraJPpugv7f6lPxBvST6ptHsrLX8bd324EzNfIMyCzGcXpOoEnAvXynCu0uDzL6bJeWLwD
- ZIgLGXH86FdSKhX3lmQOxNmbEaQH6AqlwzA715gLRrmCSgIAj2kMKca/0gvpYaZz6+G3dN9x0pj
- Jov2WXQ==
-X-Google-Smtp-Source: AGHT+IFWMIhfQikeFTEUWytXd3F3m8Dt7+CXxhw+QlCI/sNEf7j4d1VwTZdxqz1zdtAZI9WUWYYFoQ==
-X-Received: by 2002:a05:6602:6a8a:b0:85b:46d7:1899 with SMTP id
- ca18e2360f4ac-85e82139690mr786939339f.9.1743167305189; 
- Fri, 28 Mar 2025 06:08:25 -0700 (PDT)
+X-Gm-Gg: ASbGnctAuU0jvLu+zyQh53xH2Yg7sJiPYaBm7kv86pBKigsjCaqmp3SexPJXzYFrlUt
+ RkIWWr6JfXpDnwhom9zKh91CpxzwaJPAVANQt3nQygBF2eLVJE2XGf2hh95zFe8M9urFgzFgeyW
+ q4YXq7oP84zf5JvjBjsSXmN4CpSPwzBhu6tXLm6xw18n4qYvIKBjGhojYE5j/YF6gI2a9Ma2T1L
+ uvoTtmS3ZfXMCoJyT7UJmsR7ZwCQH2W4mFtMC6X1p5VquizPZRxZLgS5EENQcevH4ZJ6cEzNC+Q
+ O/IlQg8ozRY5QfCuEhuFKhZIkHyGwNsEKWQ2d3eF1M41xBFG27UKse4Ip8//foj2NkG0xjvE3gD
+ iJxQWmg==
+X-Google-Smtp-Source: AGHT+IFKWL00UuDOm3uD5Bq3JoYYKoC8nRl7ty0YbRhnVmghWTY1lQB/9S6ymjD7wdrl8Oxv4C/2oA==
+X-Received: by 2002:a05:6602:3719:b0:85b:3791:b2ed with SMTP id
+ ca18e2360f4ac-85e820a0c8emr889063539f.8.1743167308721; 
+ Fri, 28 Mar 2025 06:08:28 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.23
+ 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:08:23 -0700 (PDT)
+ Fri, 28 Mar 2025 06:08:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 36/56] expo: Move text-rendering into its own function
-Date: Fri, 28 Mar 2025 07:06:23 -0600
-Message-ID: <20250328130713.2612648-37-sjg@chromium.org>
+Subject: [PATCH v2 38/56] expo: Allow strings to be editable
+Date: Fri, 28 Mar 2025 07:06:25 -0600
+Message-ID: <20250328130713.2612648-39-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
 References: <20250328130713.2612648-1-sjg@chromium.org>
@@ -95,130 +95,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The code to render text is quite long, so put it in its own function.
+In some cases dynamic text is needed, e.g. for a menu countdown. Add a
+function which handles this, allowing the caller to take control of the
+text that is shown on each render.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/scene.c | 95 +++++++++++++++++++++++++++++-----------------------
- 1 file changed, 53 insertions(+), 42 deletions(-)
+ boot/expo.c      | 21 +++++++++++++++++++++
+ include/expo.h   | 17 +++++++++++++++++
+ test/boot/expo.c | 11 +++++++++++
+ 3 files changed, 49 insertions(+)
 
-diff --git a/boot/scene.c b/boot/scene.c
-index bf56f4341aa..1e68c17c386 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -412,6 +412,56 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
- 	}
+diff --git a/boot/expo.c b/boot/expo.c
+index ee635116abc..a0be1404f1c 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -104,6 +104,27 @@ const char *expo_get_str(struct expo *exp, uint id)
+ 	return NULL;
  }
  
-+static int scene_txt_render(struct expo *exp, struct udevice *dev,
-+			    struct udevice *cons, struct scene_obj *obj,
-+			    struct scene_txt_generic *gen, int x, int y,
-+			    int menu_inset)
++int expo_edit_str(struct expo *exp, uint id, struct abuf *orig,
++		  struct abuf **copyp)
 +{
-+	const char *str;
-+	int ret;
++	struct expo_string *estr;
++	struct abuf old;
 +
-+	if (!cons)
-+		return -ENOTSUPP;
-+
-+	if (gen->font_name || gen->font_size) {
-+		ret = vidconsole_select_font(cons, gen->font_name,
-+					     gen->font_size);
-+	} else {
-+		ret = vidconsole_select_font(cons, NULL, 0);
-+	}
-+	if (ret && ret != -ENOSYS)
-+		return log_msg_ret("font", ret);
-+	str = expo_get_str(exp, gen->str_id);
-+	if (str) {
-+		struct video_priv *vid_priv;
-+		struct vidconsole_colour old;
-+		enum colour_idx fore, back;
-+
-+		vid_priv = dev_get_uclass_priv(dev);
-+		if (vid_priv->white_on_black) {
-+			fore = VID_BLACK;
-+			back = VID_WHITE;
-+		} else {
-+			fore = VID_LIGHT_GRAY;
-+			back = VID_BLACK;
++	list_for_each_entry(estr, &exp->str_head, sibling) {
++		if (estr->id == id) {
++			old = estr->buf;
++			if (!abuf_copy(&old, &estr->buf))
++				return -ENOMEM;
++			*copyp = &estr->buf;
++			if (orig)
++				*orig = old;
++			return 0;
 +		}
-+
-+		if (obj->flags & SCENEOF_POINT) {
-+			vidconsole_push_colour(cons, fore, back, &old);
-+			video_fill_part(dev, x - menu_inset, y,
-+					obj->bbox.x1,
-+					obj->bbox.y1,
-+					vid_priv->colour_bg);
-+		}
-+		vidconsole_set_cursor_pos(cons, x, y);
-+		vidconsole_put_string(cons, str);
-+		if (obj->flags & SCENEOF_POINT)
-+			vidconsole_pop_colour(cons, &old);
 +	}
 +
-+	return 0;
++	return -ENOENT;
 +}
 +
- /**
-  * scene_obj_render() - Render an object
-  *
-@@ -443,49 +493,10 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
- 		break;
- 	}
- 	case SCENEOBJT_TEXT: {
--		struct scene_txt_generic *gen =
--				&((struct scene_obj_txt *)obj)->gen;
--		const char *str;
-+		struct scene_obj_txt *txt = (struct scene_obj_txt *)obj;
+ int expo_set_display(struct expo *exp, struct udevice *dev)
+ {
+ 	struct udevice *cons;
+diff --git a/include/expo.h b/include/expo.h
+index 32d69f269a7..7c6ab4bf630 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -469,6 +469,23 @@ int expo_str(struct expo *exp, const char *name, uint id, const char *str);
+  */
+ const char *expo_get_str(struct expo *exp, uint id);
  
--		if (!cons)
--			return -ENOTSUPP;
--
--		if (gen->font_name || gen->font_size) {
--			ret = vidconsole_select_font(cons,
--						     gen->font_name,
--						     gen->font_size);
--		} else {
--			ret = vidconsole_select_font(cons, NULL, 0);
--		}
--		if (ret && ret != -ENOSYS)
--			return log_msg_ret("font", ret);
--		str = expo_get_str(exp, gen->str_id);
--		if (str) {
--			struct video_priv *vid_priv;
--			struct vidconsole_colour old;
--			enum colour_idx fore, back;
--
--			vid_priv = dev_get_uclass_priv(dev);
--			if (vid_priv->white_on_black) {
--				fore = VID_BLACK;
--				back = VID_WHITE;
--			} else {
--				fore = VID_LIGHT_GRAY;
--				back = VID_BLACK;
--			}
--
--			if (obj->flags & SCENEOF_POINT) {
--				vidconsole_push_colour(cons, fore, back, &old);
--				video_fill_part(dev, x - theme->menu_inset, y,
--						obj->bbox.x1,
--						obj->bbox.y1,
--						vid_priv->colour_bg);
--			}
--			vidconsole_set_cursor_pos(cons, x, y);
--			vidconsole_put_string(cons, str);
--			if (obj->flags & SCENEOF_POINT)
--				vidconsole_pop_colour(cons, &old);
--		}
-+		ret = scene_txt_render(exp, dev, cons, obj, &txt->gen, x, y,
-+				       theme->menu_inset);
- 		break;
- 	}
- 	case SCENEOBJT_MENU: {
++/**
++ * expo_edit_str() - Make a string writeable
++ *
++ * This allows a string to be updated under the control of the caller. The
++ * buffer must remain valid while the expo is active.
++ *
++ * @exp: Expo to use
++ * @id: String ID to look up
++ * @orig: If non-NULL, returns the original buffer, which can be used by the
++ *	caller. It is no-longer used by expo so must be uninited by the caller.
++ *	It contains a snapshot of the string contents
++ * @copyp: Returns a pointer to the new, writeable buffer
++ * Return: 0 if OK, -ENOENT if the id was not found, -ENOMEM if out of memory
++ */
++int expo_edit_str(struct expo *exp, uint id, struct abuf *orig,
++		  struct abuf **copyp);
++
+ /**
+  * expo_set_display() - set the display to use for a expo
+  *
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index 96c5943f394..a50e9f721de 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -707,6 +707,7 @@ static int expo_test_build(struct unit_test_state *uts)
+ 	struct scene_obj_menu *menu;
+ 	struct scene_menitem *item;
+ 	struct scene_obj_txt *txt;
++	struct abuf orig, *copy;
+ 	struct scene_obj *obj;
+ 	struct scene *scn;
+ 	struct expo *exp;
+@@ -774,6 +775,16 @@ static int expo_test_build(struct unit_test_state *uts)
+ 	count = list_count_nodes(&menu->item_head);
+ 	ut_asserteq(3, count);
+ 
++	/* try editing some text */
++	ut_assertok(expo_edit_str(exp, txt->gen.str_id, &orig, &copy));
++	ut_asserteq_str("2 GHz", orig.data);
++	ut_asserteq_str("2 GHz", copy->data);
++
++	/* change it and check that things look right */
++	abuf_printf(copy, "atlantic %d", 123);
++	ut_asserteq_str("2 GHz", orig.data);
++	ut_asserteq_str("atlantic 123", copy->data);
++
+ 	expo_destroy(exp);
+ 
+ 	return 0;
 -- 
 2.43.0
 
