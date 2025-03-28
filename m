@@ -4,72 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC060C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 18:35:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92684C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02AD6810EA;
-	Fri, 28 Mar 2025 19:35:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id AE2F780ECC;
+	Sat, 29 Mar 2025 00:38:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LYRDjYUA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FC8n2kA1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65713810F4; Fri, 28 Mar 2025 19:35:38 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1114180F0E; Sat, 29 Mar 2025 00:38:32 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB07F80F0E
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 19:35:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64B3B805C8
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=72be=WQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1743186935;
- bh=Unv1E/Rqg4qxrUcPBo+3uH6YXBeAwiVjj6oeksfagTw=;
- b=LYRDjYUAe4kKKrQYSqGToCPIXF5rkmjJGW6Y1DD3xWNd+7fByKhABiuJXHvTzMDqTfcXglQeV
- t3jqXijNWFW4733fs7KrkIaWEt64eg3evqnnGu+6Aekg+aZhhX0HwVmzphhqWS1lHajaa030C+G
- yHuoagYyjsTmvgzDXeEM1Lmd+wS0fQ1m4Cyhx0LNbdyuf/ZfAEr6IPEdBVbdVgsEMCzIcS0OJrh
- n9Q7qgXIevNVivIOK2zr2ob39WZO5MzBVVNdhS4zfynduGT0tBPQaOMHtgyU31oHScviwsVXDAP
- aTZhKRIpJto30WyRA9NWsoFMhuUd1ejg34QPa6UMJ5sA==
-X-Forward-Email-ID: 67e6ebf399a280edf51ecee9
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.0.0
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <7fe942a6-ea52-4705-a837-25be56db7724@kwiboo.se>
-Date: Fri, 28 Mar 2025 19:35:25 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5dc89df7eccso5072690a12.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:38:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1743205109; x=1743809909; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uHBEax4lBfew5jeFBU5GP3NYpiBRW+0cIPgVFddmZrU=;
+ b=FC8n2kA1s6/P8DG67TvAo+0m4j+njYxrnJ4xPrH7P3MBVZEhD4xOcktSCTaE2uq7xK
+ O0aUNm0iUYvrh4QYNU+m0JYVTzWuJHbDJhUSxuHToA4JUcJKI6sBG1tpGBGhNcVVMhi9
+ OgMavlRl3tJzOtUv1SFC0JDnEx3sKgidOLBr8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743205109; x=1743809909;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uHBEax4lBfew5jeFBU5GP3NYpiBRW+0cIPgVFddmZrU=;
+ b=CqZnf4MXuhSMTABgZEmtNSYF/mP0N9iK8nCzipDBv8LcKUbUZ5pJYmfvYkuMqFCQQw
+ 78M71NY0zS6uBh41LAhOQ7X6BQ41XZRz8k2aYzNQK8yHJ307II3FYAUGD5v02gmHBTha
+ XRaj2vGoGyUpXPXULJFhqu2ty9qvesPOiKqCL6CgG1yeNMlZTUgMvx5RO7Q/85JB/qtx
+ m29hHHCJJytZ+zWPxBbkVaEKKpj+czNjY0PToVe/p0j1xklIKoCbkh2BlV/HACPrHSz/
+ IZI6zsLC/i8+LK2z8X3DJ8f/QJJXz8MQ42xJFh2ZE0elEvrYll3GxZYajuzt4Sh4Ju+Y
+ MCkQ==
+X-Gm-Message-State: AOJu0YwHWVoMOh67uPUgVRaxoDbjt7ikSX2Ascy7uEvyVzzzEIVqvRDb
+ YZWMH4/PFW3RpZvLQoDHTmX2wJDDtcMyOYCW33D3JmQ5Ip4wu6lFy3w21aUJYneo+mf0vkHW6ON
+ VbS/eCMOxp/3I/HIqGKf0fh9/s6XzT05X5VOu
+X-Gm-Gg: ASbGnctdGYRc2ug8dKaHw2srcSwt3CGsQ10m/M/8MQ1pnhIso66UYQp8biFHgBuhtxT
+ E93FVpNNbU0Qp3mEPImwsc4FlnqdORwlUEIsU5AcKyoTMJyA7u2+Q5OWkAOPSKU21Yzg5lA7Jvm
+ FfXHwem7VYcVnzZmFAnZFTohYUyjY=
+X-Google-Smtp-Source: AGHT+IEmKiNlly8m2SExgmcCL22RfZIsJyc+/9cg83RCDy7DzW6pYHv/DKmGdkNMR2ss9G+KdXBWYqLLSyJAHvnp5tw=
+X-Received: by 2002:a17:907:3f26:b0:ac3:154e:1391 with SMTP id
+ a640c23a62f3a-ac73897af75mr83339666b.10.1743205108641; Fri, 28 Mar 2025
+ 16:38:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 19/31] rockchip: Provide a VPL phase on rk3399
-To: Simon Glass <sjg@chromium.org>
+References: <20250328154401.3563921-1-sjg@chromium.org>
+ <20250328161845.GB93000@bill-the-cat>
+In-Reply-To: <20250328161845.GB93000@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 28 Mar 2025 23:38:14 +0000
+X-Gm-Features: AQ5f1JrzxBWXRGiNWrBUrT5E4yPYJmx0aU2bBDkbt1gLCdKb2E7KIUzpiuOGnyM
+Message-ID: <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Dragan Simic <dsimic@manjaro.org>, Greg Malysa <greg.malysa@timesys.com>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <paulk@sys-base.io>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Henderson <richard.henderson@linaro.org>,
- Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
- huang lin <hl@rock-chips.com>
-References: <20250328153522.3555472-1-sjg@chromium.org>
- <20250328153522.3555472-20-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250328153522.3555472-20-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Harrison Mutai <harrison.mutai@arm.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
+ Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,88 +102,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Tom,
 
-On 2025-03-28 16:34, Simon Glass wrote:
-> Add support for this new phase, which runs after TPL. It determines the
-> state of the machine, then selects which SPL image to use. SDRAM init is
-> then done in SPL, so that it is updatable.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v2)
-> 
-> Changes in v2:
-> - Rewrite help for VPL_ROCKCHIP_COMMON_BOARD
-> - Skip spl-boot-order.c for VPL (rather than modifying it)
+On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
+>
+> > The bloblist code took what I consider to be a wrong turn a year or so
+> > ago. As discussed with Tom, this series proposes a way to arrange things
+> > so that it is simpler to understand and manage.
+> >
+> > - Unwind some of the nesting in bloblist_init()
+> > - Avoid needing to init the bloblist just to get the FDT
+> > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> >
+> > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
+> > CI at some point. In the meantime, the standard passage series[1] could
+> > be resurrected to give some coverage.
+> >
+> > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+>
+> Based on how it's documented to be run in
+> doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
+> that platforms using the handoff spec still work?
 
-[snip]
-
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 4c515593718..58ba0e0468f 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -252,13 +252,15 @@ config ROCKCHIP_RK3399
->  	select SPL_ATF
->  	select SPL_BOARD_INIT if SPL
->  	select SPL_LOAD_FIT
-> -	select SPL_CLK if SPL
-> +	select SPL_CLK if SPL && !VPL
->  	select SPL_PINCTRL if SPL
->  	select SPL_RAM if SPL
->  	select SPL_REGMAP if SPL
->  	select SPL_SYSCON if SPL
->  	select TPL_HAVE_INIT_STACK if TPL
-> -	select SPL_SEPARATE_BSS
-> +	select VPL_HAVE_INIT_STACK if VPL
-> +	select SPL_SEPARATE_BSS if !VPL
-
-SPL_SEPARATE_BSS is already implied by ARM64, so we could probably just
-drop the select SPL_SEPARATE_BSS here.
-
-> +	select SPL_RAW_IMAGE_SUPPORT if VPL
-
-We have this disabled in all RK3399 defconfigs so this can probably be
-dropped. We really do not want this accidentally enabled for !VPL.
-
->  	select CLK
->  	select FIT
->  	select PINCTRL
-> @@ -268,6 +270,7 @@ config ROCKCHIP_RK3399
->  	select DM_PMIC
->  	select DM_REGULATOR_FIXED
->  	select BOARD_LATE_INIT
-> +	select SUPPORT_VPL
-
-Probably better to keep this next to the other SUPPORT_xPL.
-
->  	imply ARMV8_CRYPTO
->  	imply ARMV8_SET_SMPEN
->  	imply BOOTSTD_FULL
-> @@ -296,13 +299,14 @@ config ROCKCHIP_RK3399
->  	imply TPL_LIBCOMMON_SUPPORT
->  	imply TPL_LIBGENERIC_SUPPORT
->  	imply TPL_OF_CONTROL
-> -	imply TPL_RAM
-> +	imply TPL_RAM if !VPL
->  	imply TPL_REGMAP
->  	imply TPL_ROCKCHIP_COMMON_BOARD
->  	imply TPL_SERIAL
->  	imply TPL_SYS_MALLOC_SIMPLE
->  	imply TPL_SYSCON
->  	imply TPL_TINY_MEMSET
-> +	imply TPL_DM_MMC if VPL
-
-Please try to keep the imply statements in alphabetical order after the
-commit d8ff591d9263 ("rockchip: rk3399: Sort imply statements
-alphabetically").
+I believe so, yes. I don't have that board to test it though. Raymond
+may be able to test this series on QEMU?
 
 Regards,
-Jonas
-
->  	help
->  	  The Rockchip RK3399 is a ARM-based SoC with a dual-core Cortex-A72
->  	  and quad-core Cortex-A53.
-
-[snip]
+Simon
