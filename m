@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15483C36010
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 08:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0A4EC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 08:16:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54E3281DED;
-	Fri, 28 Mar 2025 09:15:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D29881DDF;
+	Fri, 28 Mar 2025 09:15:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qKK1Alfk";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jKBE2k+m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4908581273; Fri, 28 Mar 2025 09:15:52 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 51FC581E1F; Fri, 28 Mar 2025 09:15:54 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 459EB81951
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:15:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA88D81DCA
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:15:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43948f77f1aso13239015e9.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 01:15:50 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-39ac56756f6so1427773f8f.2
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 01:15:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743149750; x=1743754550;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743149751; x=1743754551;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oVJIwXVg4Fn6wXUhB8kxZaZwvsZrZ1vTceLF7ivv+zY=;
- b=qKK1AlfkqRFsbPWwXq045iILmH90HkJ29kh5DllZSuIJ7Py1/1/ABDMOpvoIFGV5Nq
- /CJGk2WRUw+uufYA0mwv0NT5R1ad1AIl8JyP4pUSN9asZeTtMxFBQvTGVsz2ieH8SSGm
- 9Ra/tR6mASEXAkxRXesCKkqu6o6ScLJb3UWwp60a/Z6G2MuCpWk9WTAbCbDBnkEyzAu/
- 0/PhoUWv8Ihqz04WLF5g1hrBK7U6sHt/dA2/rvKggPQZOOQzg19ZiGUjMiv9YjESPryF
- UgbH8aQDHnCaQmhTDFyAwEMMMfghikDEa2h3uiYBoJndDdKX/MCKFM9yrq2KdOyVdG4p
- 71MA==
+ :reply-to; bh=9OSAmp2HS40XlqPC6pOCuwPtLRl7yp/KYMM0DlusApE=;
+ b=jKBE2k+mtv79CK3lUnvf87eafZRf05OMLavmcVzSAIqQp1co7BBBE3zLdTIESOjLpl
+ 4w0lzEaTr/GtEXc1nXhWN3g5s77b/EsMYaglhU8jNQimxpJIHkJJrXmCibKzTZer9MeZ
+ l79+XJbIhZ8B+vJhLitFaPBL7ZoIBnaSlbfgzCyBXy8Vag0UAxrIVOey929pBFGgHU5Y
+ vqJCH0fzoEn2ykcyATpJZ8bdovr2K/6FcOKTPUBwt8muETWGJoIaS/zvCF6RjeM79IS4
+ 4saAqu04jsxYB29Jrcdw86vrSywH2tTgdU4P2bwUwnnrVvkmd/H+1iIWbH0oE7upsDKw
+ bIjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743149750; x=1743754550;
+ d=1e100.net; s=20230601; t=1743149751; x=1743754551;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oVJIwXVg4Fn6wXUhB8kxZaZwvsZrZ1vTceLF7ivv+zY=;
- b=dwcB/y2Lv121JJx0eL8bhwTavOtxDWDxneWAuxNttGsndpCqE67m0Ju1ku31OCVepR
- 3ye9tkxBS4t6uQpFm2SYwb3+UboM49beDhDvlOPznvgUgPKoIIqKdc60oUlwXas0OT9z
- xV3SlbYhxrWY3L3CSpbr5Sompp0AjAVk0lTZHPzipQr+UsYOFWhcSLhzr6OgT+t7s+jo
- vL9xoT5JSBrdgIYJmX8WK2mXJ+z7CkYKcVHmXkaSrayW6TORseFqFnrgc4QyUgE3ba2c
- Q0J4nRRTYsEq+Cm2awzEY93QBxf75QldoH/38uORa4oCpfaYm0VPOUHnW1MTfZi0mDmW
- tjZA==
+ bh=9OSAmp2HS40XlqPC6pOCuwPtLRl7yp/KYMM0DlusApE=;
+ b=XGKitAgSHk1LvADx3eOCK8BKVoiIcjOQ9bhHElAOzoSoomxdTabZkIn+lbiv1sYeeZ
+ 4OSPTgo4KH6eGdpJjtxJyVgMj7Mx6c/JlZCnW/LiRovshLnG6q2RRoi3cM0pRZLAGPo3
+ d8rStoP2a8DblIwrIM0AMJvw7wM8uLnjzO+IvUR67kbs+EuiRtYP3mxsQyMkKlbJrklU
+ ORsrZU6PTqkJ+xbolfJJ6vv6C3mp/45Qv5TKRXyePsQrFMA16qw5bhgK/TAveuTbZ2XY
+ diaUt9sV5HA6u8b4qiVoyPYAAlvGh9uZOSG9kZ+9id1UFAiZb5gdwtMsON+u5LA9kEcs
+ r66Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUA0oXP7VVUcnxz4/5MqeRdtEnuCSTwYG6qE7hyAnCCkPwT8KvHdYyMEYqRYAp8hhjaUKt7K4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPT/Fiys1fzmZhlwmHzWYthM9vhdXMsqokeGAei4Qlwj05ePCa
- ghrjs2Ewc6zbs/6i7NYwPh7qmuWxIOz7Bhl6GbKDOT5IAjMevGxiKIVk9KLSgto=
-X-Gm-Gg: ASbGncsoQ0/cygJ9G5cfshQzFvDncaxv9GmMK0djdVl40pZVqTLRSbvEyLbPhHUCq3Q
- mMXqNvYRoDn7viXFVQSU98MfK0IzPv7nSI9VmFSXWot9k1AD9+YioH/Peq3uKUQYyLegye54SyI
- 6USsbBkMZXkGT8v72vXfXQjWoiTqjnydVW4kSKHV6jEwr9Mbtdab2qlVPe49bYMix/ysdRvZACa
- 9Wm92NM1xd1X31pxHFVXbM/Mn7NzJwpIgXhqedAxgrFwVpnTRpakYG9JP3QwLjreJLQmyNk8i77
- 0UhEUaFzGaeAE0Dzzp6qq6Utj1QBrJM19pcDStSGmqWT3ahqQSBZUDC8/QIc7ls=
-X-Google-Smtp-Source: AGHT+IFl01J3AJtMN6G15FMTMF0DtBG6x5bzEAN/BvN+DQZKX1NlmwqNMMDIEcZp4beJAYi8pP3cTw==
-X-Received: by 2002:a05:600c:4e05:b0:43d:26e3:f2f6 with SMTP id
- 5b1f17b1804b1-43d84f5e5bcmr75979185e9.5.1743149749641; 
- Fri, 28 Mar 2025 01:15:49 -0700 (PDT)
+ AJvYcCWFOm5faWwKikIGP0aVLX0Xac9Kk+Sps1m0izVWv55Nyi7xfXc01L9ULfTi3+uFacVfiaHBzUo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3z/q0UMzlEY56amTjPl3BIBWX6PRDZfLi6GafZv6m82HRQgBT
+ oIKmKj8UTGLUx5QdkWX2CFcRG3zDOUjHtg+10K5H7HuQJPiTG/g6xP1teCI/DIo=
+X-Gm-Gg: ASbGncs48dLAsMuwJECCx6karDe2LUBPIaYzSveEtXQsH56YxIFsMQv6RjamHE0lsYw
+ 3Iyz44DFG21fPfcLwMf5YofhvirlgGcEjN4GRF05K9w5vUJZ1j+cdrHllXhR6c2q1fmLcWZJ1CH
+ /Ugdcqth8rG21En7Zw1L3QxJxDpeCHIR35W5m7Yb6XovUMeZu7fg8qV7zLD5CkhMDLdomDp+6MC
+ OnjzQ3dbSiz2jtSLHygCLeZ1UdiHtU51d4HILoOcOe5WrJn7TJ7ot+srEWPzYNRSoz1ncNhLzFM
+ HeiekfeeGMwEuUZjVQwyEzmYWZ/bNW5KNmrVlDpaTri4cuA39VwD99naVfQJ7LkjIbeXCnA/iA=
+ =
+X-Google-Smtp-Source: AGHT+IEAwIKTaeqtE/8ArobG/sryzHyIBrWppkV52oC98q9GLo1swIkUf7YYKVl3awchSYVfRHjWEQ==
+X-Received: by 2002:a5d:6c66:0:b0:39a:c832:4f46 with SMTP id
+ ffacd0b85a97d-39ad17583e2mr5665774f8f.26.1743149751307; 
+ Fri, 28 Mar 2025 01:15:51 -0700 (PDT)
 Received: from [192.168.1.116] ([2a01:cb19:95ba:5000:2b24:7f52:e3f6:e4ef])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d8fba4c29sm20352065e9.5.2025.03.28.01.15.48
+ 5b1f17b1804b1-43d8fba4c29sm20352065e9.5.2025.03.28.01.15.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 01:15:49 -0700 (PDT)
+ Fri, 28 Mar 2025 01:15:50 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Fri, 28 Mar 2025 09:15:41 +0100
-Subject: [PATCH 1/4] usb: gadget: f_mass_storage: Remove kref structure use
+Date: Fri, 28 Mar 2025 09:15:43 +0100
+Subject: [PATCH 3/4] usb: gadget: f_mass_storage: Fix NULL dereference in
+ fsg_add()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250328-ums-gadget-leak-v1-1-3b677db99bde@baylibre.com>
+Message-Id: <20250328-ums-gadget-leak-v1-3-3b677db99bde@baylibre.com>
 References: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
 In-Reply-To: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, 
@@ -101,67 +103,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The kref structure is locally to f_mass_storage and is not used
-anywhere beside in fsg_common_release().
+fsg_common_init() can fail when memory is low. In that case, it returns
+PTR_ERR().
+fsg_add() does not check for failure, and thus dereferences an invalid
+fsg_common later, which crashes.
 
-Remove it and use struct fsg_common* instead.
+Verify if we receive an error from fsg_common_init() and handle it
+gracefully.
 
-No functional change.
-
+Reported-by: Zixun LI <admin@hifiphile.com>
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- drivers/usb/gadget/f_mass_storage.c | 13 +++----------
- 1 file changed, 3 insertions(+), 10 deletions(-)
+ drivers/usb/gadget/f_mass_storage.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index d3fc4acb401a..bd749c033f9a 100644
+index 6f464185bd39..fcce6d12f56b 100644
 --- a/drivers/usb/gadget/f_mass_storage.c
 +++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -284,7 +284,6 @@ static const char fsg_string_interface[] = "Mass Storage";
- #define kthread_create(...)	__builtin_return_address(0)
- #define wait_for_completion(...) do {} while (0)
+@@ -2742,6 +2742,8 @@ int fsg_add(struct usb_configuration *c)
+ 	struct fsg_common *fsg_common;
  
--struct kref {int x; };
- struct completion {int x; };
+ 	fsg_common = fsg_common_init(NULL, c->cdev);
++	if (IS_ERR(fsg_common))
++		return PTR_ERR(fsg_common);
  
- struct fsg_dev;
-@@ -345,8 +344,6 @@ struct fsg_common {
- 	/* Vendor (8 chars), product (16 chars), release (4
- 	 * hexadecimal digits) and NUL byte */
- 	char inquiry_string[8 + 16 + 4 + 1];
--
--	struct kref		ref;
- };
- 
- struct fsg_config {
-@@ -2436,7 +2433,7 @@ int fsg_main_thread(void *common_)
- 	return 0;
- }
- 
--static void fsg_common_release(struct kref *ref);
-+static void fsg_common_release(struct fsg_common *common);
- 
- static struct fsg_common *fsg_common_init(struct fsg_common *common,
- 					  struct usb_composite_dev *cdev)
-@@ -2548,16 +2545,12 @@ error_luns:
- 	common->nluns = i + 1;
- error_release:
- 	common->state = FSG_STATE_TERMINATED;	/* The thread is dead */
--	/* Call fsg_common_release() directly, ref might be not
--	 * initialised */
--	fsg_common_release(&common->ref);
-+	fsg_common_release(common);
- 	return ERR_PTR(rc);
- }
- 
--static void fsg_common_release(struct kref *ref)
-+static void fsg_common_release(struct fsg_common *common)
- {
--	struct fsg_common *common = container_of(ref, struct fsg_common, ref);
--
- 	/* If the thread isn't already dead, tell it to exit now */
- 	if (common->state != FSG_STATE_TERMINATED) {
- 		raise_exception(common, FSG_STATE_EXIT);
+ 	fsg_common->vendor_name = 0;
+ 	fsg_common->product_name = 0;
 
 -- 
 2.49.0
