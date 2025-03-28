@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7511AC36011
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 14:18:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B1A2C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 14:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6649B81E8C;
-	Fri, 28 Mar 2025 15:18:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B6178144A;
+	Fri, 28 Mar 2025 15:26:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qHj9sF9i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lN+6fsE+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB19F81E1C; Fri, 28 Mar 2025 15:18:52 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A039F8070C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 15:18:49 +0100 (CET)
+ id 1123481DB4; Fri, 28 Mar 2025 15:26:48 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id ED1898129B
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 15:26:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52SEIlCB2730433
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 28 Mar 2025 09:18:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743171528;
- bh=yZ59Cqjou+qsrN7tLiRJH97ccpg136G1uvzuva5y+jc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=qHj9sF9iMFuQyXsoaftDkftoIwdu/mfCJ/o6RYHefquEjyEpORl4/35x75fIMTMaX
- fCVQskVAbbPtu93C82UtVX3hoq/6ODA2oCeD2Xwu/M/CzpEBcKQUoeAopAWyXfV+Iu
- EcCSMXdO4IBn+GjV6bV8TrNk+dh4zw6khK1ttZsk=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 52SEIlW6027357
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 28 Mar 2025 09:18:47 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 28
- Mar 2025 09:18:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 28 Mar 2025 09:18:47 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52SEIluj121113;
- Fri, 28 Mar 2025 09:18:47 -0500
-Date: Fri, 28 Mar 2025 09:18:47 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, 
- <hnagalla@ti.com>, <j-choudhary@ti.com>, <bb@ti.com>,
- <vigneshr@ti.com>, <j-keerthy@ti.com>, <u-kumar1@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 3/3] DONOTMERGE: arm: dts: k3-j784s4-main: Add
- PBIST_14 node
-Message-ID: <20250328141847.s333bjjqmzfi5dkj@remarry>
-References: <20250328123127.497971-1-n-francis@ti.com>
- <20250328123127.497971-4-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6c18e2c7dso4080841a12.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 07:26:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1743172004; x=1743776804; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/3MUHwyEi3eABzw0uCtS95j8vuukIq0agSbifGvJtsQ=;
+ b=lN+6fsE+rmvyTRIq1XSyrEXF9+7fWqXWXa6jFu0tLnqCXPtgmk2Fh+iYEIWnPkNNE1
+ Mbh9DWgdZE+zgShFyYlWaykBPW4Psxnqap9OLDTKdmlGCjOX6dsI6gGfsQxv+G3kI/0z
+ E0TfxG9n8FAfdERkp7jHF8fVqq+D/LUUfOTf8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743172004; x=1743776804;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/3MUHwyEi3eABzw0uCtS95j8vuukIq0agSbifGvJtsQ=;
+ b=xM0qs2QzNR3kHokPKQzyRcWoDSjCYNxqQE9Y5gikYRWxDnJlh0AICPQ6Wn7E0Rb052
+ Zx78OrBlYOZNpss797D4TfJOKQTHqVsEuvgXEekfKtRx/QtjmR+iMnxIxcufad9OZrWl
+ 0RREDWQOm34Px0sR4/8XZ+fU9DpEPJ2Z7ZscujOlG+00m7wj3TG/bLpu0Fr+gvf8Pfh2
+ jz+K8C65harjUJrJsRX81fU/7agNIG5GgmY1OirUB61U1uiejHWNmSXoeUzK3hAFDM10
+ ikxWG85BIW3x+iOp7d0bQhMeM64Swk9SQBKieF3mSXEN/FE3ToeECND7/yASys34cyVx
+ xqkg==
+X-Gm-Message-State: AOJu0YxKKxiSS1qkutALJcb1TKPRyLOXlFnV7tMFrcz+b/PVq/ko9scg
+ 4R/Y2Bzqk26/nkea+gJntepNqw60f0ERBomsQvqra2fgT2ltikxluQ84a28lAg29xw96zovybDy
+ 4FpLmyEfWfpKTfwEYnXqdOhzudmSnbmPfRzRY
+X-Gm-Gg: ASbGncsImVG1MA8+IvpamKxsjvm0TrcN+tmGj7SR3AxAZIH5gXJr/872G/lnqboXi77
+ NVgMQjxnrwKjiZi9CtFuXfHeLYIilSZIonwhkXZmuysz76v4Ona4T5Fgtmd8c0JOItoiLZYt/6A
+ zkUwodQjBqzsFXfL+jOhTVvMuOb/k=
+X-Google-Smtp-Source: AGHT+IEHSFK9/SfnneG9E3oNQzyJqgQnhGxD5WG0Y8KFJC3kPVueCIoQUHyrhjq2+3khOYsCJXLCNlH3HBY9Ifmobmw=
+X-Received: by 2002:a17:907:3f26:b0:ac4:2ad:44d9 with SMTP id
+ a640c23a62f3a-ac6faef2150mr747870466b.24.1743172004035; Fri, 28 Mar 2025
+ 07:26:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250328123127.497971-4-n-francis@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250327231318.2713201-1-raymond.mao@linaro.org>
+ <CAFLszTjpbxH6_LEuv5mAyOjt812hXvTKL1nDpP42HMJXwMryWA@mail.gmail.com>
+ <CAEfUkU+tYjjNQAmwv2=FWkPYxLZriAd3FdAVQQrdt7PTXK_xiQ@mail.gmail.com>
+In-Reply-To: <CAEfUkU+tYjjNQAmwv2=FWkPYxLZriAd3FdAVQQrdt7PTXK_xiQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 28 Mar 2025 08:26:32 -0600
+X-Gm-Features: AQ5f1JpzdBmLusy2LC4kdp7MyvnSp_-7vunV8duKhhiToP-gdjytMCHnJLUcP6A
+Message-ID: <CAFLszTiwNM3=ZgFRU+rJN=nmQ9YuS8gkUf_jRNqhSJpuELi09g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bloblist: fix the overriding of fdt from bloblist
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Tom Rini <trini@konsulko.com>, Ravi Minnikanti <rminnikanti@marvell.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,51 +97,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18:01-20250328, Neha Malcom Francis wrote:
-> Add DT node for PBIST_14 that is responsible for triggering the PBIST
-> self-tests for the MAIN_R5_2_x cores.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
-> Linux dt-binding patch
-> https://lore.kernel.org/all/20250328111439.374748-1-n-francis@ti.com/
+Hi Raymond,
 
-Please hold off till the binding is closed out with Krystoff.
+On Fri, 28 Mar 2025 at 08:17, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Fri, 28 Mar 2025 at 07:34, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Raymond,
+> >
+> > On Thu, 27 Mar 2025 at 17:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > >
+> > > When a bloblist is valid and contains fdt, it explicitly means
+> > > a previous boot stage is passing transfer list compliant with
+> > > Firmware Handoff specification, thus the fdt from bloblist should
+> > > not be overridden with the ones from board or env variables.
+> >
+> > Why is that? The board can choose to override it, if it wishes, but in
+> > general, if gd->fdt_blob is already set up, it should return -EEXIST
+> > from board_fdt_blob_setup().
+> >
+> First, if a board is running in a "stand-alone" mode, there should not
+> be a transfer list passed from the previous boot stage.
+> Secondly, overriding the transfer list with the env variables does not
+> make sense, since booti, bootm and bootefi are actually using the env
+> variables to get the fdt when launching to the kernel.
+> We need to do the opposite way - override the env variable with the
+> one pointing to the bloblist fdt (See my patch [2/2]), then all boot
+> commands can work with the transfer list.
 
-> 
-> Changes since v2:
-> - s/ti,bist-instance/ti,bist-under-test
-> 
->  dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
-> index 0160fe0da98..1a26f5e4ace 100644
-> --- a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
-> +++ b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
-> @@ -113,6 +113,17 @@
->  			status = "disabled";
->  		};
->  	};
-> +
-> +	bist_main14: bist@33c0000 {
-> +		compatible = "ti,j784s4-bist";
-> +		reg = <0x00 0x033c0000 0x00 0x400>,
-> +		      <0x00 0x0010c1a0 0x00 0x01c>;
-> +		reg-names = "cfg", "ctrl_mmr";
-> +		clocks = <&k3_clks 237 7>;
-> +		power-domains = <&k3_pds 237 TI_SCI_PD_EXCLUSIVE>;
-> +		bootph-pre-ram;
-> +		ti,bist-under-test = <343>, <344>, <365>, <366>;
-> +	};
->  };
->  
->  &scm_conf {
-> -- 
-> 2.34.1
-> 
+OK, but now we are going back to the OF_BLOBLIST thing that I did 18
+months ago and ended up being the major reason I had to create my own
+U-Boot tree just to get my boards working.
 
--- 
+Anyway, Tom has agreed to let me maintain bloblist (and maybe fdt?)
+again, so I am going to send a series to 'clean this up' as Ilias
+would say. Let's see if that passes muster, because I do agree with
+you that if the devicetree is in the bloblist, it should be
+definitive.
+
+Re your second point, do you know why we have fdt_addr? Is it just for
+the distro scripts? I'm wondering if we could restrict the use of
+fdt_addr to just the places that actually need to use environment
+variables.
+
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+SImon
