@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4227DC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D296C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:10:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CCC18205A;
+	by phobos.denx.de (Postfix) with ESMTP id C6DEF82072;
 	Fri, 28 Mar 2025 14:07:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BBcO1Feh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K945IfGT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAFC981EC5; Fri, 28 Mar 2025 14:07:53 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id BA1F28203F; Fri, 28 Mar 2025 14:07:54 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A354981E5A
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:07:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 182B081E1F
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:07:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-85b3f92c866so35160339f.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:07:50 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-85b41281b50so61086839f.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:07:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167268; x=1743772068; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743167270; x=1743772070; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4ypoRIDd8JyfcfOWXR2uwl6yHuinv0JUpedZx2EP4Po=;
- b=BBcO1FehX/eF2EC8O4UYWoq/xZSgxvdFNWmpR+pmFT2MHnLCJO7v9crkqJtj0+QMBl
- eh5PWVPRbmQxmuK2ut3LCcep0r99xLxoaj9pzpddvBn19q5YG8zG93COS22ZXFJm5crP
- Pz0x0PbOMLAY2EppJ0O2cvLV0SOHNYbVU5hWc=
+ bh=kgoY3nQ7oMbTxRggdSngwTiQCWVzkVxE+Xo+8X3KC9c=;
+ b=K945IfGTQM3hw7dKah1Xyjr9iFqL5/QEcJZiCVU11F60y1wRnd+oJyiHEtEMAQ9e/x
+ e+7HT+pT8xxhJhJmnWLjTYtJHHhdFNRLQNf0HYnV+cIKYph0dmmhsPqFEn8zfGZ/QlbJ
+ L+4HPrblOBiwCE5yEhVAbSBkKH2vS4iRSJGlQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167268; x=1743772068;
+ d=1e100.net; s=20230601; t=1743167270; x=1743772070;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4ypoRIDd8JyfcfOWXR2uwl6yHuinv0JUpedZx2EP4Po=;
- b=US1Q1JHHxlvNUGxvkP5pmWug+6bc+s7PU7VXEzL7tBSTWJT/SfmphyESi3nVrVJuBI
- ztbAT+hJ52YdFVqDxj5cHIM6d8YJ/qX5VKNF1NC8MgkAkFMbVqqrxJ/51s8ncEq5SOhx
- +uyFLVw5+sP34B0Z18KEiTNu7q3tFnAX1vFMS2B4Q1OA//dJP/JA3Q75O9JCWPbnVpNk
- IUf2rTCHFYVn7Oxb9B3cm5BdTzpLgIqfsdpodb++9DUSY2aFuMRlZSTO41r3TfRzV/i8
- tRji6EwYrrOZWWi2/zvOxoil75l5P3lDJd/rrkBqsmrOYNMgpGw10xwkFrRgz3V8hMpK
- po5w==
-X-Gm-Message-State: AOJu0YyQ025isJ60hCZpRAsrxtwycwwpLx8qRgykIC1Oq0d8vXuh1F+O
- qn2jkUv65i0k+HThGKIRFMVdnGviZAafCnmbKdCrO18OoqDh8E8DbfpiDvQdIy2xDQGTIMd4pgg
+ bh=kgoY3nQ7oMbTxRggdSngwTiQCWVzkVxE+Xo+8X3KC9c=;
+ b=vrSD5bCvZlqveordbSWJy7SPoHlS34SRSIIRI+XheUjmTj4ItUHM+q1v1L0GvEfOHi
+ 2Kdq++R4t9xF+CIh9w63JiAMyFDQWOKerlCl7i6De96fqj+roD14A7CRQQgktDk+XVcH
+ qSFYhin48MgvMPUWfySEBWmBlVgJbxPA7rcVxES/Kils4ikQH0eV7CAOXSeOb0hGEsxk
+ KBFmVRN4Vj2DHPkd3yzCAmARGP/Kjd7JeL7XnZqHcTCmi4G5aU/KUx8+CAoUd1w235j6
+ 519MGK2hRHM3BQnrqFnNpu/r6VL8X4EXPJSeQTb+aH8UmYupxtEErF4+IkBjU0k1DQB8
+ deNg==
+X-Gm-Message-State: AOJu0Yzf4/ARgpGkdwE9n6XdHAxBb+STK1v13gqkqLuX9LrluxvcCQf4
+ eqZbTv0UGimcmylvRa2WV1bI+9mt9aU+5SWBLmkYonvdpVHLiBo1Qs90u4wXdB3ehBG7OIO+G40
  =
-X-Gm-Gg: ASbGncsTF8hgNGuHnUQcYEno1sM2L8WQTJTedU2+S7Dkc0SktL/vzDoXC5Xp1kYO5I7
- 9ZKOQFCr+2BGBjxddxWvg05OJ5DPuhjIc+cQY+Lcqbm5+he/y1/tru7uEmo6VcZ/gQ575+XwHFc
- qTAkIrQVteg6ULGhc1N4cQARRrt7osGRou+hHOWWymMIUPfetS7b+0r/sAUYrp+5EZoQ2CzgpOc
- t+qJ7+NmVAIIGsfTDfCgmGjaS4ofwwPOQSvp13BE0KrxCTlVlvgw/q/zx9cE4vFtjqVxN8930Hy
- PguttU020+XthdRP670+YfDtjlgPJvSRFWJw2C9NmJX0FdtCL4xmGVJjBiTJ3P04EPcmObckn9N
- 8Xo+q0alc3U+v4xi9
-X-Google-Smtp-Source: AGHT+IHzojHh6Mi83IfYmS2HlyYeTjIMVz+MYQVnjAEuJQRkhJ+HWTBuJfUwBOJ6fawm2Nr4lhKBYQ==
-X-Received: by 2002:a5d:9856:0:b0:85e:8c1b:1bec with SMTP id
- ca18e2360f4ac-85e8c1b1c78mr437003539f.0.1743167268384; 
- Fri, 28 Mar 2025 06:07:48 -0700 (PDT)
+X-Gm-Gg: ASbGncszfN2TJokS87QR+zEG1Xv5q8bkCKWw9j3aqpH+6ku+buAktrvrk/a68c9d4uu
+ tRSZLy47z7tBLO2tnSnPolZMmDtCAtyup8jJSd87vUQfUsWP7PkBmpHJOTzjRbDvNzMwRfjuTLd
+ nC3kD7gjx0iSTXNVRhhRtVwOD+9Z0yS1CB91eysbavoXmNnt5Ftik+cO3VOeJHt3kHn/8Q7sbQU
+ 817/YMSG/fqKbFzhCXItLSNA4b4IKgwUFaNudeG7bz0DASnuqq+eO/jTTsYYJW9mzY7K3Cvcf1X
+ cCcXMoOuHilrXk0SGvQCtESuxlH0IasabYt9dXYc7UW0ObliONzObtkNYBEzi13ZF/y5RSz17AC
+ wH9qF7A==
+X-Google-Smtp-Source: AGHT+IHkSqFBRteu5gIPr9tWMf2M6886Yt7l8W7kdBDcaU20wFBX7aEUQLxO0XbT9ckV7U+Hl3uSXA==
+X-Received: by 2002:a05:6602:3719:b0:85b:3791:b2ed with SMTP id
+ ca18e2360f4ac-85e820a0c8emr888732939f.8.1743167270050; 
+ Fri, 28 Mar 2025 06:07:50 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.07.47
+ 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.07.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:07:47 -0700 (PDT)
+ Fri, 28 Mar 2025 06:07:49 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 16/56] vidconsole: Avoid kerning against an unrelated
- character
-Date: Fri, 28 Mar 2025 07:06:03 -0600
-Message-ID: <20250328130713.2612648-17-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 17/56] expo: Create a rendering test for cedit
+Date: Fri, 28 Mar 2025 07:06:04 -0600
+Message-ID: <20250328130713.2612648-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
 References: <20250328130713.2612648-1-sjg@chromium.org>
@@ -98,52 +96,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the cursor position changes, kerning should not be used for the
-next character, since it can make the first displayed character shuffle
-left or right a bit.
-
-Clear the kern character when setting the position.
+Add a test to check that the cedit renders as expected.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/video/console_truetype.c  | 2 ++
- drivers/video/vidconsole-uclass.c | 3 +++
- 2 files changed, 5 insertions(+)
+ test/boot/cedit.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
-index 2e3e6f07112..6d2c2c2e177 100644
---- a/drivers/video/console_truetype.c
-+++ b/drivers/video/console_truetype.c
-@@ -490,10 +490,12 @@ static int console_truetype_backspace(struct udevice *dev)
+diff --git a/test/boot/cedit.c b/test/boot/cedit.c
+index 4d1b99bc2ea..df191a09f89 100644
+--- a/test/boot/cedit.c
++++ b/test/boot/cedit.c
+@@ -5,11 +5,13 @@
+  */
  
- static int console_truetype_entry_start(struct udevice *dev)
- {
-+	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
- 	struct console_tt_priv *priv = dev_get_priv(dev);
- 
- 	/* A new input line has start, so clear our history */
- 	priv->pos_ptr = 0;
-+	vc_priv->last_ch = 0;
- 
+ #include <cedit.h>
++#include <dm.h>
+ #include <env.h>
+ #include <expo.h>
+ #include <mapmem.h>
+ #include <dm/ofnode.h>
+ #include <test/ut.h>
++#include <test/video.h>
+ #include "bootstd_common.h"
+ #include <test/cedit-test.h>
+ #include "../../boot/scene_internal.h"
+@@ -220,3 +222,27 @@ static int cedit_cmos(struct unit_test_state *uts)
  	return 0;
  }
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index 6ba62ec348e..f1b2d61bd8f 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -127,6 +127,9 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
- 	priv->xcur_frac = VID_TO_POS(x);
- 	priv->xstart_frac = priv->xcur_frac;
- 	priv->ycur = y;
+ BOOTSTD_TEST(cedit_cmos, UTF_CONSOLE);
 +
-+	/* make sure not to kern against the previous character */
-+	priv->last_ch = 0;
- 	vidconsole_entry_start(dev);
- }
- 
++/* Check the cedit displays correctely */
++static int cedit_render(struct unit_test_state *uts)
++{
++	struct video_priv *vid_priv;
++	extern struct expo *cur_exp;
++	struct udevice *dev;
++	struct scene *scn;
++	struct expo *exp;
++
++	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
++
++	exp = cur_exp;
++	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
++	ut_asserteq(ID_SCENE1, cedit_prepare(exp, &vid_priv, &scn));
++	ut_assertok(expo_render(exp));
++	ut_asserteq(4929, video_compress_fb(uts, dev, false));
++	ut_assertok(video_check_copy_fb(uts, dev));
++	expo_destroy(exp);
++	cur_exp = NULL;
++
++	return 0;
++}
++BOOTSTD_TEST(cedit_render, UTF_DM | UTF_SCAN_FDT);
 -- 
 2.43.0
 
