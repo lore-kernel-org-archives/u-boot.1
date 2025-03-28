@@ -4,73 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E34C3600C
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:17:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A58C3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96D1C81F45;
-	Fri, 28 Mar 2025 14:11:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DE6D781DF6;
+	Fri, 28 Mar 2025 14:24:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kg2hlS5R";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IFFc0mVh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B05A381F6B; Fri, 28 Mar 2025 14:11:07 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FFD581F44
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:11:05 +0100 (CET)
+ id 69E2881E1C; Fri, 28 Mar 2025 14:24:09 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DF3781DCC
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:24:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 52SDB1RG2125595
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 28 Mar 2025 08:11:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743167461;
- bh=ZbXhgr4GUk1r9G5K4PgiF/kgdmu7UNuBEG9QSUmU2z8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=kg2hlS5R7QEyXHePwjl3qL3/eo2wScKRbt3smlmBsFmR6hFIRG4b2qp2AzVwDMJ6P
- tKgOWe0QVfx+LCk7Nd61xMJ+5njJEVnFXjfQweptuYmQqghHHKHENfS6wtb6plmw2l
- E1GCDjCFzKMtGX2MoUYDb4qWarbTWx+QR+12CK9A=
-Received: from DFLE20.ent.ti.com ([10.64.6.57])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52SDB1QG066112;
- Fri, 28 Mar 2025 08:11:01 -0500
-Received: from flwvowa02.ent.ti.com (10.64.41.53) by DFLE20.ent.ti.com
- (10.64.6.57) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.10; Fri, 28 Mar
- 2025 08:11:01 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by flwvowa02.ent.ti.com
- (10.64.41.53) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Fri, 28 Mar
- 2025 08:11:00 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 28 Mar 2025 08:11:00 -0500
-Received: from [10.24.69.37]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 52SDAwgF068669;
- Fri, 28 Mar 2025 08:10:58 -0500
-Message-ID: <b80b75b7-c1bf-43f9-b005-1731ee7edfe8@ti.com>
-Date: Fri, 28 Mar 2025 18:40:57 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-54b0d638e86so417324e87.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:24:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1743168246; x=1743773046; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ae9itmRdH7RFl1rCEPsG8Mkk9xYXXbiayQ0AIAczchc=;
+ b=IFFc0mVhzMLgOLvRVqG+25F76mOX2KY/ahr0oqELMkCbdBW8lDjN8jI0c+VP5N7blp
+ 1gpGy2rDRtq7Mq+rzLrEZ0dO5iAQur1/+w8FDjAvAxxMBFNS1d6evvzSByETprJjPg6X
+ Jm9+nMNFzfj/r1+qJb3iAfMDAtdIjYniv4Dw4GPp/JpzFKgtZ5lXI4aAznOSxfNAybVv
+ LTnGPJ1tpqR+cb9eYv8U2fsYBT4dw5Y5L0lfFOSBOEPwtHdMLwx08DnFW93RDqaDCPGy
+ MEHWoWv+kBoGkCxcIR8PJ6MQhNtJMm8syyyIWqUe1OgWRPYJhSkqCSuS057gK0+ELWbS
+ x4EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743168246; x=1743773046;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ae9itmRdH7RFl1rCEPsG8Mkk9xYXXbiayQ0AIAczchc=;
+ b=K8msxg30dEZhVvdD7qsrJA+uGQ/G9clCMz7YsNysOIPW/XKR7spqZSc36qjyCZ9vd6
+ J0+u107Lbuhuz/pKkSaCAhfn07YvDmV41R02B3mlcXYxEHyHSSUSJiE9dsZNT8rq9NBc
+ J+zKFCIPaEOi4mJ+xJUqwhvU8cx35BO6UKAStQakhgoD2MsNJzwDtHTYVA04vfo7GLFX
+ pP1Y396jqH/KAHqi+pygnIObm4PsMyMNP5iyTn979vAKJp/zufEwzXjifV6aihIX2wjX
+ oQezKxiBQ6dnndLFwPGkLWM610s6whYVCAYJ7cHzLd0rSxH8MRNLfVLsrSXxMKGmG3N6
+ 9tgw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWlHE+YCitYHXpynca/vlwRpmU1sAwe5ZZKf7BYiUXvWMmPGAceeFtw+uugD0RtTb27CKo7hI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwujoTEOJ/XeMvYl/yBxqbpkC65KJqCPe1VimB3cREzhwIb0v1A
+ HRMZHE5bJECpxuMW8p7GlvCqMlQcpFnxrdyDKOwhQX4h5P0HrYVp/kWDszpv6RVFGVuOMO+LJQ/
+ aqtU3b3lB4oz0Sjwv8IqjfLGRRt8=
+X-Gm-Gg: ASbGncsXP9zK2MgVt5cBrJDkD4wpqZwCvKBNV8uJb/c39JGCOzdM5U+yXpcJZ6HbNLy
+ rFg/kV10ORbyy+cs7iMdYQ6ifexP/gafEvxmtP/MGpSTSxEplEvUdO+LnUNPyRNE4rdFSKsHSpS
+ ShWAYCf9C/Ba8vDWKBJnCRrWQotksYXekN2I6d3vixDP7mAB9Vk50Fg5abwRjcW9+XTxXU
+X-Google-Smtp-Source: AGHT+IEjL17NBVJO16tFJvu82tu9lsbV0RkAfleXpx85SJpk5ElHejGNa0cWlB6j7TJ8J0AJ4shfQal3VcvoWARuJYI=
+X-Received: by 2002:a05:6512:4010:b0:545:ea9:1a24 with SMTP id
+ 2adb3069b0e04-54b011d6331mr2775833e87.14.1743168245926; Fri, 28 Mar 2025
+ 06:24:05 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: Fix a typo in elf.py
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, Stefan Herbrechtsmeier
- <stefan.herbrechtsmeier@weidmueller.com>, Tom Rini <trini@konsulko.com>
-References: <20250328130214.2607633-1-sjg@chromium.org>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250328130214.2607633-1-sjg@chromium.org>
+References: <20250105203714.158480-1-marex@denx.de>
+ <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
+ <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
+ <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
+ <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
+ <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
+ <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
+ <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
+ <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
+ <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
+ <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
+ <a05cf63b-820d-4b27-8f66-37a6e6c7b372@denx.de>
+ <CAFLszTgF+g2OXz=L=r7rOQcNkk19GfdCrwixG8ZAsR=1rh9Fqw@mail.gmail.com>
+ <f1e4014e-658b-4a47-af8d-72ef76c1b134@denx.de>
+ <CAOMZO5B7cxEftN0TeTF--pKXqOmbmaFLc9mEPO4=8odrLBeypQ@mail.gmail.com>
+ <f71762e5-ba15-43ec-91a3-dbdc8f8e1437@denx.de>
+ <CAFLszTj69OUZj9ZBcmnsiLLvxCB+Y-rJYEW_Ep8V6WFtvXP2Nw@mail.gmail.com>
+ <5bec35cc-99b9-468e-bc01-1de5dc39825c@denx.de>
+ <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
+In-Reply-To: <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 28 Mar 2025 10:23:54 -0300
+X-Gm-Features: AQ5f1JoRgS99xZZqpccC89wDB7dKTTvBBkD8nExrSKQYdNNeU_zuID-Vfwm5BEA
+Message-ID: <CAOMZO5ARze74UsOqUbMLfsyjfFcpBQ38hgqTZnrP4ZkqNOZiTQ@mail.gmail.com>
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brian Ruley <brian.ruley@gehealthcare.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Tim Harvey <tharvey@gateworks.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,31 +115,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28/03/25 18:32, Simon Glass wrote:
-> Fix an 'EFL' typo. It should be 'ELF'.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  tools/binman/elf.py | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/tools/binman/elf.py b/tools/binman/elf.py
-> index c75f4478813..6ac960e0419 100644
-> --- a/tools/binman/elf.py
-> +++ b/tools/binman/elf.py
-> @@ -28,7 +28,7 @@ except:  # pragma: no cover
->  # BSYM in little endian, keep in sync with include/binman_sym.h
->  BINMAN_SYM_MAGIC_VALUE = 0x4d595342
->  
-> -# Information about an EFL symbol:
-> +# Information about an ELF symbol:
->  # section (str): Name of the section containing this symbol
->  # address (int): Address of the symbol (its value)
->  # size (int): Size of the symbol in bytes
+Hi Simon,
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+On Fri, Mar 28, 2025 at 8:42=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 
--- 
-Thanking You
-Neha Malcom Francis
+> Did you figure it out?
+>
+> I'm not really sure. It works fine in my tree and I just tested it
+> now. Perhaps there are some other patches missing from Tom's tree?
+
+Applying this patch causes the following CI error:
+
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1079236
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Ru=
+nning binman tests =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+142........................................................................=
+...........................................................................=
+...........................................................................=
+...........................................Image
+'image' has missing bintools and is non-functional: cst
+143Some images are invalid
+144......................................Image 'image' has missing
+bintools and is non-functional: cst
+145Some images are invalid
+146.........................................E..............................=
+...........................................................................=
+...........................................................................=
+............s...........................................
+147=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+148ERROR: binman.ftest.TestFunctional.testNxpImx8MCSTMkimageMissing
+(subunit.RemotedTestCase)
+149binman.ftest.TestFunctional.testNxpImx8MCSTMkimageMissing
+150----------------------------------------------------------------------
+151testtools.testresult.real._StringException: struct.error: unpack
+requires a buffer of 4 bytes
+152=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+153SKIP: binman.cbfs_util_test.TestCbfs.test_cbfstool_failure
+(subunit.RemotedTestCase)
+154binman.cbfs_util_test.TestCbfs.test_cbfstool_failure
+155----------------------------------------------------------------------
+156No cbfstool available
+157----------------------------------------------------------------------
+158Ran 581 tests in 5.012s
+159FAILED (errors=3D1, skipped=3D1)
+
+What needs to be done to fix this error?
