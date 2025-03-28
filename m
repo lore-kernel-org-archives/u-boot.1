@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA25FC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19907C3600C
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 13:16:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21964826F3;
+	by phobos.denx.de (Postfix) with ESMTP id 8CE1482786;
 	Fri, 28 Mar 2025 14:09:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHiu2Bzu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fW6ux2+0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB9D082845; Fri, 28 Mar 2025 14:08:56 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 8021B82169; Fri, 28 Mar 2025 14:08:58 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B4BF82824
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54FCF827A6
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 14:08:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-85dac9729c3so160146739f.2
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:54 -0700 (PDT)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-85dac9729c3so160150039f.2
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 06:08:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743167332; x=1743772132; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743167334; x=1743772134; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6dnP8/u/vaNlvPmDmEN2VVLbi5JujBJyqjEdwraHw98=;
- b=EHiu2BzuMuzsuv6kBdrMtm0nLrd1hjBMA7ziSWJ3StFFrnnTbFR4Ur9PI864Zqkxxv
- UOabyaa0jWOORizsbFUtV519ygl44d0bc3WNkO0Szx/7lYivCl8Jzu4rvNOTjQOOFBvI
- iFJ8BXHKQgVOh8x07+aFjSBp4ckGMylUSaWS0=
+ bh=vrPE5XTL5ZXpPOqknaoJpZtckGEFgl051uI7qQDaZKk=;
+ b=fW6ux2+0zSM1/ClsPD2pPUeuC81+YEmfX9835P+UXPfSPYB4LxaZ1mez2XK6QGYonh
+ WdQ2e4m+nViCsg7sAcnJwRubHJWfuD5DcBsM9Chh2DWq4d3Ou8AZEKAweSqY5DOeo1ze
+ P65hf0QAMmyVBkzMA8Pefj/zRDvtcRTtLCYyQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743167332; x=1743772132;
+ d=1e100.net; s=20230601; t=1743167334; x=1743772134;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6dnP8/u/vaNlvPmDmEN2VVLbi5JujBJyqjEdwraHw98=;
- b=kaplMWLpC18fdQwCQCl177gzKA5Llk1ZZXsnnmOMaeP8R3vOnJkYjbFO5wQM0AO0Hl
- 3Vg1owhmjRgjc3aJFfvtIBoztjx/S+f58F0/GFa+Bu8jCsG/reuoAB4NyH9yPZxFK9SY
- uyIY6UbZffn/bebqVg2kc9rIPQasW/2YSz99cfXVh+P9tChrpvYnrzdrrOUmRINXSiGC
- 4S7OaMOidRnDLBqZWaDSd0UQa9nOrB0zcsHrT1rWlF/ctngdaOX+hIUiZjpylmm3ya30
- AHxYdgZP8XyJZBd1K5H2CKWCpU33bnsPlK4S3Gy7IBNgFbVnzVO/lKhf//bZ0xsHE9Ks
- mH4g==
-X-Gm-Message-State: AOJu0YxnTvh5AguSKZ5uDX8afkVBkB/FjDJAOHPadX+YAmRW14uyRXiL
- 9uN9V3q+j5stMaLSfVj/Oy70XZ4mLpkDa1mZ/kUkzL07opmzpd/gvd/+zu6KpfScS87k1ufJkOw
+ bh=vrPE5XTL5ZXpPOqknaoJpZtckGEFgl051uI7qQDaZKk=;
+ b=ibnLM6toh0mZnP5FanRdIyzpZPUnBP11d477lJGXwU2+D8gdVnNO8aMhgV8F7gAKEh
+ c65GWRmszSD4x2YMt3EdjGtDobMrgtMgnHUH6QxGtHv553+fIHhsu1nCJp9bAF/IVE3o
+ 8O9i9A9k60euVdFd+WBCzGcPak8oB5QpIgZJIsLAn1O/aNu6/w3e7iY1VxM14TNgys72
+ eUOU+vJGfdSplGkNAF9XuVE3seNog014G3b51Z8A6uT3qtoRTBlDHncENrUJTBY4j15S
+ qBxTneLy+G+37/8ejEyIGX39H6cne0liuq9S2wlElFNrl4JyX0vA2S8cQ1vuiOGti4m4
+ /Weg==
+X-Gm-Message-State: AOJu0YzajqPIY2DmH5zdMH5hNOLib/GPpyhAunuPp2382+eKP0FPw1ET
+ d5IvNzEh58Oe7kfoCXQS8DTFzaJmxbdzKBVyygVFGbTQUhiNFoAeHTpr52UAiseru0WaH99o6wQ
  =
-X-Gm-Gg: ASbGncv3Lg/FgbsYs4wPIwFjcsBTslN9uS4ByaQYB+O2JWCTyRubt0v2dPcIynJCaf+
- MjRl48lEAsTrsZi4JVKM99Bnx8IY2R/pFk4uvtZDiSToXuhJhEujSokSBTNA+nK/qcOHrO3WRAl
- Tvzio4kikgteCiPgTIpYb8/rcWYMNGtMR23/QrcIohjA9NvathoI3M4ad+bwvzdHBGI4b86vZtn
- zcZB9+aFsLCm18lelsJYStAIRTlGKm0Mz9kns0OgYJRfEcRsUQkjdf/681snWmcBwYwXBG82qJo
- zE6ckpR1LQ+dWFo5kujEwdl+HYKbpvLQn446dPghOdGVRwqxeJ1VCYc4OHBTZ4jZbPuiEVsstfE
- ajxWxRg==
-X-Google-Smtp-Source: AGHT+IHGDoKj44ywvEDD4/oqbo1O7nC49qC4DF+cQ8F0L8d4bFdUaGTlNDkBWig6OeNqn7Kl8ICGyA==
-X-Received: by 2002:a05:6602:398c:b0:85b:43a3:66b2 with SMTP id
- ca18e2360f4ac-85e820ba808mr899716939f.7.1743167332343; 
- Fri, 28 Mar 2025 06:08:52 -0700 (PDT)
+X-Gm-Gg: ASbGncv3dLOfqV2uSyLF+M7jUY6bX05WBdhXn2yYfl8JEXRCWjhFW0lYvE/4OxNHjpM
+ L+JTx/SHMbmebpj5mU/3TcGKtCl55aoyx/QyEwCeuQztyqOL/Bx53kF9fI0DafRIiaphIlpT/Ft
+ ccUZiZqhcvo4wJl96xclJL1uyZE+46/UhhZCqLy2lHmEoKdT5gPfxpDFjF0N5kn65DPIEurhVOS
+ 1S/9C+VZzNAW0bpa8RlPgoWLyb1Vu2Ypbh5Gcv36KV5A9KBEv6bgHdC1+4mZjCPCCEBBYvMCm9i
+ AERasqSPFMbyMsyrA1PSQRzWluenJdkbDRVJ5e96V7adrj7ewBE4d+vn8G3l4cFFz+JtqjlR9V9
+ IM1v0hXVSZYq/VBig
+X-Google-Smtp-Source: AGHT+IHJd5h/7Vhc+cgliL78eIjYi/qxVl/QiLF/2pcZIQBgmEOjqVoiJ1zMYh21t5H3AL+DYRzf7w==
+X-Received: by 2002:a05:6602:4c83:b0:85c:c7f9:9a1c with SMTP id
+ ca18e2360f4ac-85e82170983mr899531439f.13.1743167334028; 
+ Fri, 28 Mar 2025 06:08:54 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.51
+ 8926c6da1cb9f-4f46477dd4dsm430526173.69.2025.03.28.06.08.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 06:08:51 -0700 (PDT)
+ Fri, 28 Mar 2025 06:08:52 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 50/56] expo: Drop the render from expo_poll()
-Date: Fri, 28 Mar 2025 07:06:37 -0600
-Message-ID: <20250328130713.2612648-51-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 51/56] expo: Provide a way to position things relative to
+ display
+Date: Fri, 28 Mar 2025 07:06:38 -0600
+Message-ID: <20250328130713.2612648-52-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
 References: <20250328130713.2612648-1-sjg@chromium.org>
@@ -96,79 +96,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Within tests it is useful to be able to control rendering of the expo.
-Drop the automatic call to expo_render() within expo_poll() and adjust
-its callers to handle this instead.
+It is often necessary to centre objects within the display area. Add a
+special position value to indicate this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/cedit.c   | 1 +
- boot/expo.c    | 2 --
- cmd/bootflow.c | 1 +
- include/expo.h | 9 ++++++---
- 4 files changed, 8 insertions(+), 5 deletions(-)
+ boot/scene.c   | 5 +++++
+ include/expo.h | 6 ++++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/boot/cedit.c b/boot/cedit.c
-index dbb2750c9f2..63392d97459 100644
---- a/boot/cedit.c
-+++ b/boot/cedit.c
-@@ -215,6 +215,7 @@ int cedit_run(struct expo *exp)
- 	do {
- 		struct expo_action act;
- 
-+		LOGR("cer", expo_render(exp));
- 		ret = expo_poll(exp, &act);
- 		if (!ret) {
- 			cedit_do_action(exp, scn, vid_priv, &act);
-diff --git a/boot/expo.c b/boot/expo.c
-index bf2f1dfc68a..4f96b5ee973 100644
---- a/boot/expo.c
-+++ b/boot/expo.c
-@@ -320,8 +320,6 @@ int expo_poll(struct expo *exp, struct expo_action *act)
+diff --git a/boot/scene.c b/boot/scene.c
+index 15f85c39359..a6f264cceca 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -363,6 +363,11 @@ static void handle_alignment(enum scene_obj_align horiz,
  {
- 	int ichar, key;
+ 	int width, height;
  
--	LOGR("ere", expo_render(exp));
--
- 	ichar = cli_ch_process(&exp->cch, 0);
- 	if (!ichar) {
- 		int i;
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 456f51760f1..1ccd473b267 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -114,6 +114,7 @@ __maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
- 	LOGR("bhs", bootflow_menu_start(std, text_mode, &exp));
- 
- 	do {
-+		LOGR("bhr", expo_render(exp));
- 		ret = bootflow_menu_poll(exp, &bflow);
- 	} while (ret == -EAGAIN);
++	if (bbox->x1 == SCENEOB_DISPLAY_MAX)
++		bbox->x1 = xsize ?: 1280;
++	if (bbox->y1 == SCENEOB_DISPLAY_MAX)
++		bbox->y1 = ysize ?: 1024;
++
+ 	width = bbox->x1 - bbox->x0;
+ 	height = bbox->y1 - bbox->y0;
  
 diff --git a/include/expo.h b/include/expo.h
-index dfecd6ed239..2addddd5012 100644
+index 2addddd5012..4dee479e9a0 100644
 --- a/include/expo.h
 +++ b/include/expo.h
-@@ -1006,10 +1006,13 @@ int expo_build(ofnode root, struct expo **expp);
- int cb_expo_build(struct expo **expp);
+@@ -242,6 +242,12 @@ struct scene_obj_dims {
+ 	int y;
+ };
  
++/* special values for dimensions */
++enum {
++	/* width/height of the display */
++	SCENEOB_DISPLAY_MAX	= 0x7f000000,
++};
++
  /**
-- * expo_poll() - render an expo and see if the user takes an action
-+ * expo_poll() - see if the user takes an action
+  * enum scene_obj_halign - Horizontal alignment of objects
   *
-- * Thsi calls expo_render() and then checks for a keypress. If there is one, it
-- * is processed and the resulting action returned, if any
-+ * This checks for a keypress. If there is one, it is processed and the
-+ * resulting action returned, if any.
-+ *
-+ * Note that expo_render() should normally be called immediately before this
-+ * function so that the user can see the latest state.
-  *
-  * @exp: Expo to poll
-  * @act: Returns action on success
 -- 
 2.43.0
 
