@@ -4,97 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00128C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB88C36011
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 780808144A;
-	Fri, 28 Mar 2025 17:18:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 61D938144A;
+	Fri, 28 Mar 2025 17:27:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t9vE3HtU";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LFe7KTUg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 298D681951; Fri, 28 Mar 2025 17:18:53 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2B7B58144A; Fri, 28 Mar 2025 17:27:04 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C48A810EA
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:18:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8815E810EA
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:27:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72c0b4a038fso1567746a34.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:18:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743178729; x=1743783529; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MrTNOVqmXCFRiugJpVHkHN3nMupNOL+VQffvMEPLhuM=;
- b=t9vE3HtUbu+6TXkFrbgIgfF/5pGs9wIdscBaKZBNpZldj6PO4bJyv6NgB4AnTZUxuy
- zswyADccjEVUcpmO52LhHWdojlAFkPSs6LJbN1piN132MwXYVWTD0P93ezilMp+nFffh
- yEGrXfJ5ThwHSH/bSWH5jmc3h4WM9HFdZKRWk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743178729; x=1743783529;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MrTNOVqmXCFRiugJpVHkHN3nMupNOL+VQffvMEPLhuM=;
- b=URYw5JYTrMbI0yh3r9ngNBwelhb7D0gvnjls9INTR0ipL9IVcz8vIqdhNu7SiB1O+9
- w6E1hJ04HT3WZIqiNT3ll67KsiSkWhC6ITcBNHjZ41tCpNKWNdNIkpNzci6GtUoLn30e
- fZdDfcErbfoQZu5bQBbdzVMB6Qe+TFEC0CRXLr1qY/AQiMpTzjtz+pqSGLtgFjBTS6xb
- pKTTy6Ht83uwigM2qcV06gXe7PdPqn9E01XPlPhFFsCmdks690tHCsOJIx0Qnkf7qbu4
- UpSeQ0nSVCSW+x/3U2cRa4I3KiKFTkvnKiKRMleQBnC8MVveqanr5US+XcKjuXq7ovbr
- pU5Q==
-X-Gm-Message-State: AOJu0Yw/xQmZM9oADGJGzQE2fG5IMPfEybxzQjjUjCLh/OGPT0UgRVou
- 0bzfWMlQE2cEB0qsvVurxr7x2i92XW/50JUp6WfTNFbh06MScVQjEgvlzuZzwto=
-X-Gm-Gg: ASbGnctzwTAqZ54rJGL0Zn0DYKy3obJDL1qpz3k5YGd2v2gtElCeYQShC+sw787xJFa
- QBvRRcc8D7kMvG7mLQBGFHX7VzL68EWlKqtLpOPERr+gAybmTPlVAE7gY1sGoGlx+uKHency/E9
- yNmSJhW3uTFlfCwQXf88DG5qNElbaOZ0EFDjcrb0awbudCEKk7/y+Feb8NlgfhwNwp6abUbpNP8
- UWM0WVMnm9rv7R/5IkVLOJS9bE99wj8ifqDcDDq+GotdBS3S63ljW0kcBOrFqC+qUlA7eMN+Trh
- aH1Ceycn3ffVMEPBzIE9gKj9NrGLBB9XdsqxmnqFJT35GLx0Oe5Rfl2hjbfT9ReuN/Cw50KxeGa
- opjzHtiXsRe5WXhLx
-X-Google-Smtp-Source: AGHT+IGmwUbgaisle9TCAHUanF/kVEFXeTPBXvVEJyVjHkPMht0NQnqh13zsXGlC/50jCEDQac2OJQ==
-X-Received: by 2002:a05:6830:6997:b0:727:39d7:b0d5 with SMTP id
- 46e09a7af769-72c4c989332mr6743708a34.15.1743178729130; 
- Fri, 28 Mar 2025 09:18:49 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580915b1sm421795a34.9.2025.03.28.09.18.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 09:18:48 -0700 (PDT)
-Date: Fri, 28 Mar 2025 10:18:45 -0600
-From: Tom Rini <trini@konsulko.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=72be=WQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1743179219;
+ bh=/s6dj6DDoQR7VRKQ61lgPzC9IDoU/sPOQ2Cytpc3220=;
+ b=LFe7KTUgHhC4qWRpptxjVzKlIemUxXPUH8zj8tkLd+PvG20duiEUPvhafTJj/209TRYZNnS4u
+ P6ZqkesILlfgac0xqm1Od3PT5R7J82ZJ52GFcuWyl0R3vb51rTvCEvZtJl4rXsBFWB69bGJ2FAy
+ B512RPxjpxwEiJyiiHTm0tI7px3hoyLq228wrTW+pumfOa1ot5OHSZbc5zTfjsZE/A/tOw45rGA
+ e9Caqg2we7aeDeg497dv1wru6nz+cnOzsigVZ/Z1eUm1lD2udLNDkB6rdS6+wEPAV6fndagh1BG
+ 5epqnfqU1yj/mbWeJW3leeEYQP8iZJfUkXKNl7ITXMvg==
+X-Forward-Email-ID: 67e6cdcf37e81528de2ba4c6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <d18f2a43-9a08-49d6-abf6-ff1b71cab890@kwiboo.se>
+Date: Fri, 28 Mar 2025 17:26:52 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 08/31] rockchip: dts: Create a template for the FIT
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-Message-ID: <20250328161845.GB93000@bill-the-cat>
-References: <20250328154401.3563921-1-sjg@chromium.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NE78sIRqP/iLyYqO"
-Content-Disposition: inline
-In-Reply-To: <20250328154401.3563921-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+References: <20250328153522.3555472-1-sjg@chromium.org>
+ <20250328153522.3555472-9-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250328153522.3555472-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,52 +77,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---NE78sIRqP/iLyYqO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-03-28 16:34, Simon Glass wrote:
+> Move the FIT description into a template so that it can (later) be used
+> in multiple places in the image.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> 
+> Changes in v3:
+> - Use HAS_FIT for the SPI node also
+> - Leave fit { node open within #ifdef HAS_FIT
+> - Move placement of CONFIG_SPL_PAD_TO
+> - Keep the FIT filename
+> 
+>  arch/arm/dts/rockchip-u-boot.dtsi | 61 ++++++++++++++++++-------------
+>  1 file changed, 35 insertions(+), 26 deletions(-)
+> 
+> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> index 8aea2e6f571..460bf15e003 100644
+> --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> @@ -19,6 +19,10 @@
+>  #define COMP	"none"
+>  #endif
+>  
+> +#if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
+> +#define HAS_FIT
+> +#endif
+> +
+>  / {
+>  	binman: binman {
+>  		multiple-images;
+> @@ -27,28 +31,9 @@
+>  
+>  #ifdef CONFIG_SPL
+>  &binman {
+> -	simple-bin {
+> -		filename = "u-boot-rockchip.bin";
+> -		pad-byte = <0xff>;
+> -
+> -		mkimage {
+> -			filename = "idbloader.img";
+> -			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
+> -			multiple-data-files;
+> -
+> -#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
+> -			rockchip-tpl {
+> -			};
+> -#elif defined(CONFIG_TPL)
+> -			u-boot-tpl {
+> -			};
+> -#endif
+> -			u-boot-spl {
+> -			};
+> -		};
+> -
+> -#if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
+> -		fit: fit {
+> +#ifdef HAS_FIT
+> +	common_part: template-1 {
 
-On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
+This name may be a little bit too generic, maybe fit_template could be
+more specific and matches closer to your later added spl_template.
 
-> The bloblist code took what I consider to be a wrong turn a year or so
-> ago. As discussed with Tom, this series proposes a way to arrange things
-> so that it is simpler to understand and manage.
->=20
-> - Unwind some of the nesting in bloblist_init()
-> - Avoid needing to init the bloblist just to get the FDT
-> - Create a deterministic OF_BLOBLIST option rather than using guesswork
->=20
-> It is to be hoped that we can get a platform which uses OF_BLOBLIST into
-> CI at some point. In the meantime, the standard passage series[1] could
-> be resurrected to give some coverage.
->=20
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D281465&stat=
-e=3D*
+Regards,
+Jonas
 
-Based on how it's documented to be run in
-doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
-that platforms using the handoff spec still work?
+> +			type = "fit";
+>  #ifdef CONFIG_ARM64
+>  			description = "FIT image for U-Boot with bl31 (TF-A)";
+>  #else
+> @@ -56,10 +41,8 @@
+>  #endif
+>  			#address-cells = <1>;
+>  			fit,fdt-list = "of-list";
+> -			filename = "u-boot.itb";
+>  			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+>  			fit,align = <512>;
+> -			offset = <CONFIG_SPL_PAD_TO>;
+>  			images {
+>  				u-boot {
+>  					description = "U-Boot";
+> @@ -164,12 +147,38 @@
+>  					fit,loadables;
+>  				};
+>  			};
+> +	};
+> +#endif /* HAS_FIT */
+> +
+> +	simple-bin {
+> +		filename = "u-boot-rockchip.bin";
+> +		pad-byte = <0xff>;
+> +
+> +		mkimage {
+> +			filename = "idbloader.img";
+> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
+> +			multiple-data-files;
+> +
+> +#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
+> +			rockchip-tpl {
+> +			};
+> +#elif defined(CONFIG_TPL)
+> +			u-boot-tpl {
+> +			};
+> +#endif
+> +			u-boot-spl {
+> +			};
+>  		};
+> +
+> +#ifdef HAS_FIT
+> +		fit {
+> +			filename = "u-boot.itb";
+> +			insert-template = <&common_part>;
+>  #else
+>  		u-boot-img {
+> +#endif
+>  			offset = <CONFIG_SPL_PAD_TO>;
+>  		};
+> -#endif
+>  
+>  		fdtmap {
+>  		};
+> @@ -196,7 +205,7 @@
+>  			};
+>  		};
+>  
+> -#if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
+> +#ifdef HAS_FIT
+>  		fit {
+>  			type = "blob";
+>  			filename = "u-boot.itb";
 
---=20
-Tom
-
---NE78sIRqP/iLyYqO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmy+UACgkQFHw5/5Y0
-tyxPHQv9GkC1tSMMqrwXWM8UwzKF3NoYwotBtXBJlZ5ybyMWb67jIvBJ0r/oPCPB
-Or33XJiB2WpUxTVvxl67FLhG+d8LAbnDj3cqXgCLi3rmfyWEErxgLLG2Ht35ogzq
-jcbTFufJ1jIpUdoS89AKY+BphXLWSZZr06+aqOqUxUl54RtIEhARpzliJCrH3p82
-9ZKhrIec7dls9BoCPdJn33HeH6yTdtK7vuFxJ9dVjNWJ9UqjO89x4npimBZ7KOXh
-Hxswf2CNGuxbQvTAxsQj9+EYFpTjO+txckPaBvpxa/QSZA10vKo/USqAXykth9+G
-5pwWK2oVwS29UO3bxLQWN+pEVtkUTFidIVdYj7FOtPj3AJjvwnZR0wWJyx+KxEjw
-1CYq7OJzKj11iCOqU4qugqljoHSvxy9lsU+6vL3JxhyDz//j1wLbSLngWK4p0+Dz
-J41zFj39FDIMo0kYrP0ZLXs4y16tYTxe627Q/tYc3gwhxa5lzjJeYabBcn5jHKOz
-c1jqEo9R
-=owHK
------END PGP SIGNATURE-----
-
---NE78sIRqP/iLyYqO--
