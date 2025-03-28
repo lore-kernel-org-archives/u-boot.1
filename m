@@ -4,78 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B1E2C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:50:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB5AEC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:57:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C45AC8144A;
-	Fri, 28 Mar 2025 16:50:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 28CB081951;
+	Fri, 28 Mar 2025 16:57:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JRMfuD74";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OBD4MTAa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4C5881DB4; Fri, 28 Mar 2025 16:50:31 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id E376481A0C; Fri, 28 Mar 2025 16:57:18 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27863810EA
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:50:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C2738144A
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:57:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2240b4de12bso9808175ad.2
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:50:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2c873231e7bso535158fac.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:57:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743177027; x=1743781827; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DTvKKoncqDeN763jNpoYyp2MD5g5hJ1RTgmshfqWhVk=;
- b=JRMfuD74w178ZaAmPi7AH8yeWv96CkiYxwK5f/I5yaRGsGKnt/dwSEDKQNHXj8BcKn
- kznbsyH6Tqq5fGJTsSaNwAffaqN7UjMHWzJNGOAuLo/1z7eVQYfVvNKSbSjwuLRCE3iZ
- Hre7uwaOQ77c/CjY1Rrk6/PnwpYAeqsJKzwc70TH13wzqw21oG+QS+/ma998d8Dixuql
- z72HuWjUirghvJGLc1qM0D+3d7Cetd4vb2QL0umRRXGxJ/sbIpr1s/6nOP+XF/C9C8/4
- ZRg5G38Z581eGzcOPTMEv3eQUzg6E+SblmABGmgeawouP/GS9pp6hWu2/D4QxsaN/zqq
- Xcbg==
+ d=konsulko.com; s=google; t=1743177434; x=1743782234; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6EVTH8eZaj21gUo8EXqMxp+4uLuPfmYQhVZJJ+gUius=;
+ b=OBD4MTAaJYLC16b1MTIl/Q2HfZcWDl4+mm9fu9JtwozmxWcrUdX63xYdWRoGRJr0hT
+ U27lqw5bxoI3nMOMK/ebS8jqvoacU50sUdxIFePzUl7YsVa1UQ+lh4O95c/yvEjx6f41
+ JTp7pTDPywBMm4PnLpeCJbU08JgaWU+PNPQco=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743177027; x=1743781827;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DTvKKoncqDeN763jNpoYyp2MD5g5hJ1RTgmshfqWhVk=;
- b=PvBafyG4vnB68fwkddQE5AxuH0urv2oimozBYSvLQwJcTjZxWbkabO122R6P50P4P0
- QQf9Z6tFtvthu0nPjyzdOfPMnMtKzs41s58pxbfnXc9tlG66uGeoyYbvoHCO3YiaPZf+
- ksj6HwQJTphTrDw7wYwYh8mJee9JN4J3r6vk513yHczpQxvUMdu5x3wljxV0Jj9XfH0e
- fWWlIpBRS58fBJIR+Px1bDAk4ZQphp79BOmqT9zgNjNHWbb5hooKSsBx9THt52EqgfTl
- o+JgOU8A6gJ61T+hxID9YcCYolZV/5Ya6fEHjyX6Tvns6gobYCDda4+EXKsME68oS30D
- pXFw==
-X-Gm-Message-State: AOJu0YyIes2dKjBA8mnTq6KWLbuxcDwGKgMiItmEwtNx3qj/kr+ELAFb
- iYGSYZfy+1A2qGVDLGKLyR/Kmk9tgFg+cPrfX2KLMTLax5xO7M1Vzs33Ywxkw9UpQZakHk9Ih5E
- tyWl4gr3dKpJKuTcJDU0nnmdZAv8d2X0D2zmPeQ==
-X-Gm-Gg: ASbGncutYIvgG+95sFwCC0RqwCwiUh2J52wYdLKjpS3Cuu/JzPs/U0mknyjJV6DVM7F
- dRuAbsd1H+ZnrSCywpgqdV7IekN/FmFhlR1lYtaAYOLMLhjzxhs5y4f+XYu/vOpIEB5kj2Tl4WB
- OWECJRGF9VZku0AAC86Z0v0iVTbV7/
-X-Google-Smtp-Source: AGHT+IED8G9Gq2jh8bGfX6bbUt7Pq5f2PSoGOBgWiZ+9stLASc6JEz8XatqiCBJ3cg3lrLrvIm3A2Z4URs9W2SZR/MQ=
-X-Received: by 2002:a17:902:f709:b0:21f:1202:f2f5 with SMTP id
- d9443c01a7336-2280481cc49mr121023215ad.8.1743177027396; Fri, 28 Mar 2025
- 08:50:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743177434; x=1743782234;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6EVTH8eZaj21gUo8EXqMxp+4uLuPfmYQhVZJJ+gUius=;
+ b=w6CAYPtEZeCOv/6z2J+jwN/d8AvdqL4vchNFnjR85LDEetR3190WzSQBsw6qNvKD30
+ kgwOd0T2soKc40TlJ1f+Ox5GzG6dfrp6OfywBtuCja6EPSoTPjQBw27nuw8leCOe+0Fx
+ Z9GE/YmW6OGOF5i/mMX3jvzqQPsk4k4Iv2vKpKd1+Ow8OrFQFjjAI/RdOinYHYIfPs+k
+ QzMp/4eqJMIqpMr1tTGoUOxNzF5iq4FEkWu++arL7RW0rGnx2na6LKMjdytii/MC41kl
+ IopDyh62/G27Y7dO3sPYgnFlKja800YNXbe/FkGgHwjhKS1KrTDB5udH9KowV9f4xiA+
+ o9yA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXnBHckZHUat7KzRyuM1w8+rUE/A9APEOwhNzYpco9jx40lr4vdfmo3sT33Za74cXddrqDJuhM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/YL0zouLIFV5aWPglzBupe+XMcdwKvDHtVxc7yUdjhOd7d2WG
+ aU/tEBePgjf4KDAimwBiogmiuq/arnpNMuT+vALKqCN1XNxVla7SfDUr+HI47GY=
+X-Gm-Gg: ASbGncsSDo8XgVL7d5KAJ9rGuguLt3c2eDHxiStjrkpp6h0OJqs5rn6mCtzOweheRC0
+ 4bhD8C3lFIDPAQDARLYzYOu8gCfKXhmmdtOBJsaVTqvjpCP7LLDOkB4WLNM/YuoPB49GDXKPX+V
+ dDTC/iny2fv+rIkhyw09pRJpU8sotLczPW6r882rWFuwDQ+Wkk/TOcT7cnhK02T/F/q8pM+Esxm
+ T1MhhslwqY3R4FXpd2bFE7EJz4AdQ9qP7aNNOBhkW5EZQLpRVAo6CDBcV1PgarJ9K73jKRkZtnh
+ nS06VrX+NYMcXxInyzeqeN7Zv+9L//CiHjWLQlulbul2EC7oiE4E+4vRnw3cylY/vs1NuIC4YsC
+ NTtEoHQ==
+X-Google-Smtp-Source: AGHT+IECmzZXJmqUY5iKHIChyRjESHlnlD79cC1RVyRftQRODuo8oozrZ2MmUx7Df1b5YPO1JQ6ALA==
+X-Received: by 2002:a05:6870:798c:b0:2c1:b58c:c0c with SMTP id
+ 586e51a60fabf-2c848228571mr5823171fac.34.1743177434517; 
+ Fri, 28 Mar 2025 08:57:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2c86a856de7sm476599fac.39.2025.03.28.08.57.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Mar 2025 08:57:13 -0700 (PDT)
+Date: Fri, 28 Mar 2025 09:57:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v4 00/12] Add imx8mp video support
+Message-ID: <20250328155711.GV93000@bill-the-cat>
+References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
+ <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
+ <20250303170640.GS2640854@bill-the-cat>
+ <CAPVz0n01g9JghOb1JCPg1sCwOf-w0AcjMZRngGZbAK_C_VhGcA@mail.gmail.com>
+ <CAOMZO5BMZi3adJCcxVq3-04YY8yAAVqkdcy8Q1tMzMsK+W0rEA@mail.gmail.com>
+ <87pli3q1j9.fsf@bootlin.com>
+ <CAOMZO5DnfOSGg0wCZpoqw9EsyLWL-ezDshGZT1s8WuBu-K_CrQ@mail.gmail.com>
+ <20250327141442.GO93000@bill-the-cat> <87r02hlfb8.fsf@bootlin.com>
 MIME-Version: 1.0
-References: <20250328153522.3555472-1-sjg@chromium.org>
- <20250328153522.3555472-30-sjg@chromium.org>
-In-Reply-To: <20250328153522.3555472-30-sjg@chromium.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 28 Mar 2025 11:50:14 -0400
-X-Gm-Features: AQ5f1Jri9W2EBCdij450aBGbxUzPLumqnrgLqcn1o7G_xZyC-4nXS4VPiwJc4Bc
-Message-ID: <CAEfUkUKa-_=zOry+0-EnS=e8tEq7=nooDDt6Yr_M5vx31w+JUA@mail.gmail.com>
-Subject: Re: [PATCH v3 29/31] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9be4kxZZn0lPjDMQ"
+Content-Disposition: inline
+In-Reply-To: <87r02hlfb8.fsf@bootlin.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,169 +113,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
+--9be4kxZZn0lPjDMQ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 28 Mar 2025 at 11:36, Simon Glass <sjg@chromium.org> wrote:
->
-> The logic of this has become too confusing.
->
-> The primary issue with the patch is that U-Boot needs to set up a
-> bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> phases can then use that bloblist.
->
-> But the first phase of U-Boot cannot assume that one exists.
->
-> Reverting this commit seems like a better starting point for getting
-> things working for all use-cases.
->
-> Note: The work to tidy this up is apparently underway. For this series,
-> a revert is the easiest path.
->
-> This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
->
-> https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> (no changes since v1)
->
+On Fri, Mar 28, 2025 at 09:39:23AM +0100, Miquel Raynal wrote:
+> On 27/03/2025 at 08:14:42 -06, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > On Thu, Mar 27, 2025 at 10:31:18AM -0300, Fabio Estevam wrote:
+> >> Hi Miquel,
+> >>=20
+> >> On Wed, Mar 26, 2025 at 12:01=E2=80=AFPM Miquel Raynal
+> >> <miquel.raynal@bootlin.com> wrote:
+> >>=20
+> >> > I rebased this work on the latest next, fixed the conflicts, adapted=
+ my
+> >> > changes to use Svyatoslav's work, fixed the CI.
+> >>=20
+> >> v5 still fails in CI:
+> >>=20
+> >> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25364
+> >
+> > And the exact failure is:
+> > https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1078073#L259
+> >
+> > Which looks like a series conflict or test needing to be updated, rather
+> > than a "what the heck???" kind of failure like before.
+> >
+> >> > Then I pushed a PR to trigger azure tests and figured out you applie=
+d more
+> >> > patches (imx8 clock related) which conflicted. So I rebased again and
+> >> > fixed the conflicts.
+> >> >
+> >> > Azure testing is failing though. I just pushed an empty branch with =
+just
+> >> > today's 'next' and it is already failing, my series does not produce
+> >> > additional warnings as far as I can see.
+> >> >
+> >> > So I am sending a series that has been tested locally. dm unit tests
+> >> > pass, v5 is on its way.
+> >>=20
+> >> If I remove your series, I don't see any test failure:
+> >>=20
+> >> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25365
+> >>=20
+> >> I don't know about the Azure failure. Please work with the team and
+> >> make sure v6 passes in CI.
+> >
+> > I see that the Azure failure is:
+> > https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10824&view=
+=3Dresults
+> > which was the unfortunate "next is broken because master has a fix and
+> > next has a test that needed updating now" that happened this week with
+> > -rc5 being merged. Sorry about that, it's fixed now.
+>=20
+> Yes, my question got lost somewhere else, so let me ask here as well.
+>=20
+> I need the tests to run on the test.dts and not the default sandbox.dts.
+> The documentation states to use -T for that when doing the checks
+> locally. Unfortunately, the Azure pipelines do use the default sandbox
+> DT. I can add few mostly useless nodes to the default DTS for the tests
+> to pass, but I feel like this is not the correct approach.
+>=20
+> Is there a way to tell Azure to run some of the unit tests (especially
+> the DM ones) only with the test DT?
 
-Is this same as something we discussed in the thread below?
-https://lore.kernel.org/u-boot/20250205015606.2686149-29-sjg@chromium.org/
+I saw the older email first, sorry. But I think the docs have become
+disconnected from how things have been done practically.
 
-I am a bit confused since I think we had agreed that it should not be reverted.
+--=20
+Tom
 
-Regards,
-Raymond
+--9be4kxZZn0lPjDMQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
->  common/bloblist.c  | 64 ++++++++++++++--------------------------------
->  include/bloblist.h | 10 --------
->  2 files changed, 19 insertions(+), 55 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index bc752b5fdf5..3f8c7f669a7 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -500,57 +500,37 @@ int bloblist_reloc(void *to, uint to_size)
->         return 0;
->  }
->
-> -/*
-> - * Weak default function for getting bloblist from boot args.
-> - */
-> -int __weak xferlist_from_boot_arg(ulong __always_unused addr,
-> -                                 ulong __always_unused size)
-> -{
-> -       return -ENOENT;
-> -}
-> -
->  int bloblist_init(void)
->  {
->         bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
->         int ret = -ENOENT;
-> -       ulong addr = 0, size;
-> -       /*
-> -        * If U-Boot is not in the first phase, an existing bloblist must be
-> -        * at a fixed address.
-> -        */
-> -       bool from_addr = fixed && !xpl_is_first_phase();
-> -       /*
-> -        * If U-Boot is in the first phase that an arch custom routine should
-> -        * install the bloblist passed from previous loader to this fixed
-> +       ulong addr, size;
-> +       bool expected;
-> +
-> +       /**
-> +        * We don't expect to find an existing bloblist in the first phase of
-> +        * U-Boot that runs. Also we have no way to receive the address of an
-> +        * allocated bloblist from a previous stage, so it must be at a fixed
->          * address.
->          */
-> -       bool from_boot_arg = fixed && xpl_is_first_phase();
-> -
-> +       expected = fixed && !xpl_is_first_phase();
->         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-> -               from_addr = false;
-> +               expected = false;
->         if (fixed)
->                 addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
->                                       CONFIG_BLOBLIST_ADDR);
->         size = CONFIG_BLOBLIST_SIZE;
-> -
-> -       if (from_boot_arg)
-> -               ret = xferlist_from_boot_arg(addr, size);
-> -       else if (from_addr)
-> +       if (expected) {
->                 ret = bloblist_check(addr, size);
-> -
-> -       if (ret)
-> -               log_warning("Bloblist at %lx not found (err=%d)\n",
-> -                           addr, ret);
-> -       else
-> -               /* Get the real size */
-> -               size = gd->bloblist->total_size;
-> -
-> +               if (ret) {
-> +                       log_warning("Expected bloblist at %lx not found (err=%d)\n",
-> +                                   addr, ret);
-> +               } else {
-> +                       /* Get the real size, if it is not what we expected */
-> +                       size = gd->bloblist->total_size;
-> +               }
-> +       }
->         if (ret) {
-> -               /*
-> -                * If we don't have a bloblist from a fixed address, or the one
-> -                * in the fixed address is not valid. we must allocate the
-> -                * memory for it now.
-> -                */
->                 if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
->                         void *ptr = memalign(BLOBLIST_ALIGN, size);
->
-> @@ -558,8 +538,7 @@ int bloblist_init(void)
->                                 return log_msg_ret("alloc", -ENOMEM);
->                         addr = map_to_sysmem(ptr);
->                 } else if (!fixed) {
-> -                       return log_msg_ret("BLOBLIST_FIXED is not enabled",
-> -                                          ret);
-> +                       return log_msg_ret("!fixed", ret);
->                 }
->                 log_debug("Creating new bloblist size %lx at %lx\n", size,
->                           addr);
-> @@ -572,11 +551,6 @@ int bloblist_init(void)
->                 return log_msg_ret("ini", ret);
->         gd->flags |= GD_FLG_BLOBLIST_READY;
->
-> -#ifdef DEBUG
-> -       bloblist_show_stats();
-> -       bloblist_show_list();
-> -#endif
-> -
->         return 0;
->  }
->
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index dfe6a700e5e..191b9aa1d54 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -500,14 +500,4 @@ static inline int bloblist_maybe_init(void)
->   */
->  int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
->
-> -/**
-> - * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
-> - *                           to the specified address.
-> - *
-> - * @addr: Address for the bloblist
-> - * @size: Size of space reserved for the bloblist
-> - * Return: 0 if OK, else on error
-> - */
-> -int xferlist_from_boot_arg(ulong addr, ulong size);
-> -
->  #endif /* __BLOBLIST_H */
-> --
-> 2.43.0
->
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmxtMACgkQFHw5/5Y0
+tyyoUwwAjWRSj3MncSihfOO3UOuRmi9CSpFi7IvnAgzdSN2U/r4xWY7xnt6gVPvR
+SqKCo7sLb6sNCWv3YN7jGYBMtiNV14rv1aXQ0z6PZFEna5sFqoRw4yyGHE5krh6Y
+ScnqpXCDygu/aIO1ZOoWwA3/oDgGfaH4Yh3dFFEiFgLQr4KcAldFC73SkUKBss+V
+I1TU8aIIXrPDhalnxyOacFzXlR1VL0z9plouIXeB2qVLmYXQdyB0+srWtqHgqur5
+fNlWFLsWXaBhIr8sMGtrRqER6fZSszwCCCtQVPmWBylD8m68oRLcThtjf99sWLZT
+IT9M5N6cenIlseELq3yttgXY7hMyyzHOnh93RN/5ZFQVVYQ/dPc8BDJBkgOPys9F
+nHKP4wqX6tsQ+wwYbhwN1IP8Ub9hMS+ooeTTv5VYitrhP4heVBdy5Milrud9dneb
+GjRtF/+CZcMvF97hSNeEp10wVQ6rfJDXCZzapiVpwmsIDSdBSYnhFsWQq8Fvp5jp
+1KyvEGbk
+=Xbvg
+-----END PGP SIGNATURE-----
+
+--9be4kxZZn0lPjDMQ--
