@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0A4EC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 08:16:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8ACC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 08:16:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D29881DDF;
+	by phobos.denx.de (Postfix) with ESMTP id AEF0581E60;
 	Fri, 28 Mar 2025 09:15:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jKBE2k+m";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="R97Udu5A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51FC581E1F; Fri, 28 Mar 2025 09:15:54 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 29B4481DCA; Fri, 28 Mar 2025 09:15:55 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA88D81DCA
+ by phobos.denx.de (Postfix) with ESMTPS id 250AA81CFD
  for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:15:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-39ac56756f6so1427773f8f.2
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cf680d351so16860735e9.0
  for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 01:15:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743149751; x=1743754551;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743149750; x=1743754550;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9OSAmp2HS40XlqPC6pOCuwPtLRl7yp/KYMM0DlusApE=;
- b=jKBE2k+mtv79CK3lUnvf87eafZRf05OMLavmcVzSAIqQp1co7BBBE3zLdTIESOjLpl
- 4w0lzEaTr/GtEXc1nXhWN3g5s77b/EsMYaglhU8jNQimxpJIHkJJrXmCibKzTZer9MeZ
- l79+XJbIhZ8B+vJhLitFaPBL7ZoIBnaSlbfgzCyBXy8Vag0UAxrIVOey929pBFGgHU5Y
- vqJCH0fzoEn2ykcyATpJZ8bdovr2K/6FcOKTPUBwt8muETWGJoIaS/zvCF6RjeM79IS4
- 4saAqu04jsxYB29Jrcdw86vrSywH2tTgdU4P2bwUwnnrVvkmd/H+1iIWbH0oE7upsDKw
- bIjg==
+ :reply-to; bh=sg9kUD09T9KdcxtRqU4uQ2VKlx21kbtALqKbMAtMwCY=;
+ b=R97Udu5AJnQ9WXjPYAMV8gUpRYBeVTxH1UpBNkIYu0BoFkYTgKoCp1rxLVw6w4niNu
+ 2f2MkPcFSwhIVAAUl+ZNvkADsXPkporHsekvDmFWbdzHRyc0TQ0LJLN47LhPz04W0aB8
+ hWkmPfdBFPVOsNzrhHbz8jEEyKEcmg/jJ3KnxscF7/uslrGzeDIW+5TtYL/5wXaueeYB
+ Ucd2HAwaSrzn05T/td4+cOkPGP8mgdwWb8EbmRmE0wyWfLNO3LojT2YL1eiS6btL/6SX
+ AvHJ7ZJtcp8Vyx3GXnlNS9IYZOx22NF+zbDBqI+hhj+zUL9R0tBrUpbreawzGQk7+CLm
+ MiCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743149751; x=1743754551;
+ d=1e100.net; s=20230601; t=1743149750; x=1743754550;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9OSAmp2HS40XlqPC6pOCuwPtLRl7yp/KYMM0DlusApE=;
- b=XGKitAgSHk1LvADx3eOCK8BKVoiIcjOQ9bhHElAOzoSoomxdTabZkIn+lbiv1sYeeZ
- 4OSPTgo4KH6eGdpJjtxJyVgMj7Mx6c/JlZCnW/LiRovshLnG6q2RRoi3cM0pRZLAGPo3
- d8rStoP2a8DblIwrIM0AMJvw7wM8uLnjzO+IvUR67kbs+EuiRtYP3mxsQyMkKlbJrklU
- ORsrZU6PTqkJ+xbolfJJ6vv6C3mp/45Qv5TKRXyePsQrFMA16qw5bhgK/TAveuTbZ2XY
- diaUt9sV5HA6u8b4qiVoyPYAAlvGh9uZOSG9kZ+9id1UFAiZb5gdwtMsON+u5LA9kEcs
- r66Q==
+ bh=sg9kUD09T9KdcxtRqU4uQ2VKlx21kbtALqKbMAtMwCY=;
+ b=TOgJKJkQCJkvttSeNxWt2fREGbhqw/I1nueUQmjfP3NqhrEOgPvK7wO+D5G0rzpkqS
+ 4UOHkkMvTmwbjwDaBKjT65jklqkwS61hamKUyhueMeKlY/Tuen945nRn+1EH4wnUmSO4
+ mHVBpy8nd7bPDQ722jQwsOdXrsdWYZ/86hZJMIV0h/zdrRXCaxdD7jPL3qJeR0mYo1Iu
+ xe6fBIrOoiLCPgP0m0BF5t+HdP14O9BzZjiGORb/+h6Cd13zJxuMu4oSml7AP1KRnEyX
+ Gx7DhiM2wShSQ48uskkUCkR6U9Ri+/dgCM9Yd5SoTL5vgwmdzb7Rum/HAx9Tmg3FC7HF
+ z9hg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFOm5faWwKikIGP0aVLX0Xac9Kk+Sps1m0izVWv55Nyi7xfXc01L9ULfTi3+uFacVfiaHBzUo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3z/q0UMzlEY56amTjPl3BIBWX6PRDZfLi6GafZv6m82HRQgBT
- oIKmKj8UTGLUx5QdkWX2CFcRG3zDOUjHtg+10K5H7HuQJPiTG/g6xP1teCI/DIo=
-X-Gm-Gg: ASbGncs48dLAsMuwJECCx6karDe2LUBPIaYzSveEtXQsH56YxIFsMQv6RjamHE0lsYw
- 3Iyz44DFG21fPfcLwMf5YofhvirlgGcEjN4GRF05K9w5vUJZ1j+cdrHllXhR6c2q1fmLcWZJ1CH
- /Ugdcqth8rG21En7Zw1L3QxJxDpeCHIR35W5m7Yb6XovUMeZu7fg8qV7zLD5CkhMDLdomDp+6MC
- OnjzQ3dbSiz2jtSLHygCLeZ1UdiHtU51d4HILoOcOe5WrJn7TJ7ot+srEWPzYNRSoz1ncNhLzFM
- HeiekfeeGMwEuUZjVQwyEzmYWZ/bNW5KNmrVlDpaTri4cuA39VwD99naVfQJ7LkjIbeXCnA/iA=
- =
-X-Google-Smtp-Source: AGHT+IEAwIKTaeqtE/8ArobG/sryzHyIBrWppkV52oC98q9GLo1swIkUf7YYKVl3awchSYVfRHjWEQ==
-X-Received: by 2002:a5d:6c66:0:b0:39a:c832:4f46 with SMTP id
- ffacd0b85a97d-39ad17583e2mr5665774f8f.26.1743149751307; 
- Fri, 28 Mar 2025 01:15:51 -0700 (PDT)
+ AJvYcCU+YZFW3GMvIVrOYpXgI7gTgMYut1zsC7nIJkEWy98oWlABF8ND5lBSo4Hw/07p2SAQKs/nUuM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTVgNfrtvE765PJlXj5OqUPnQKg7Q45nkjUDtX4+tikEoPrPC5
+ OtK0GhIuPPEtiBFoDkDEJ0RF8S3zdnmP/UgkAhMZyCZN8FBHNtIRHVoEMyFm5Fg7rgQpDrZcLDI
+ p
+X-Gm-Gg: ASbGnctfR34/DRdhdlXPvM9VLUEZqxDBVeTDZl5XCVFvXx1rUc1VHPCT5FLgJjUA7la
+ XrVIHyWU2nEkJNK1QNFJ6f2NBA4MOt8ngIDa2pPzTuXMwK1tkJCggXlk3G1gz4lDyThdVXN2FGa
+ 7dOHP2347FMAEXIeL1T+Kc5CjPHwek2jGACK/u/zgM8w3QlgyJ7WBraNsuWrGZV58QTcLWPF6Db
+ LejNc7M0REpSeXm+r7ZJj3tNgh1u6rMQXe8qlFkVy66FFHW5y4to/Qf85TLko3fUloGnGkahtpv
+ N655I4SNWpIF9TY6fqeYYBJ8LLlz0sO5Fi4yG3cmETl2ralGDovEUjE0pN+v5N0=
+X-Google-Smtp-Source: AGHT+IFX8H7Smf0FAVCG+7p8MO3cxJmcGDUtnwrLc5bUTfpH1duxt4LoHeTKOU+ypCII8jOtrvs3SA==
+X-Received: by 2002:a05:600c:3b9e:b0:43b:c6a7:ac60 with SMTP id
+ 5b1f17b1804b1-43d9147bca9mr13907845e9.10.1743149750488; 
+ Fri, 28 Mar 2025 01:15:50 -0700 (PDT)
 Received: from [192.168.1.116] ([2a01:cb19:95ba:5000:2b24:7f52:e3f6:e4ef])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d8fba4c29sm20352065e9.5.2025.03.28.01.15.50
+ 5b1f17b1804b1-43d8fba4c29sm20352065e9.5.2025.03.28.01.15.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 28 Mar 2025 01:15:50 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Fri, 28 Mar 2025 09:15:43 +0100
-Subject: [PATCH 3/4] usb: gadget: f_mass_storage: Fix NULL dereference in
- fsg_add()
+Date: Fri, 28 Mar 2025 09:15:42 +0100
+Subject: [PATCH 2/4] usb: gadget: f_mass_storage: Drop invalid kfree() in
+ fsg_common_release()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250328-ums-gadget-leak-v1-3-3b677db99bde@baylibre.com>
+Message-Id: <20250328-ums-gadget-leak-v1-2-3b677db99bde@baylibre.com>
 References: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
 In-Reply-To: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, 
@@ -103,33 +103,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fsg_common_init() can fail when memory is low. In that case, it returns
-PTR_ERR().
-fsg_add() does not check for failure, and thus dereferences an invalid
-fsg_common later, which crashes.
+Boards with low memory (CONFIG_SYS_MALLOC_LEN=0x81000), can be crashed
+using the => ums command twice in row:
 
-Verify if we receive an error from fsg_common_init() and handle it
-gracefully.
+=> ums 0 mmc 2
+UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
+|crq->brequest:0x0
+CTRL+C - Operation aborted
+=> ums 0 mmc 2
+UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
+"Synchronous Abort" handler, esr 0x96000004, far 0xfffffffff2ea20f0
+elr: 000000000102ea78 lr : 000000000105e028 (reloc)
+elr: 00000000f2f33a78 lr : 00000000f2f63028
+x0 : 0000000100000000 x1 : 0000000100000000
+x2 : 0000000000000000 x3 : fffffffff2ea20e0
+x4 : 00000000f2fc9720 x5 : 00000000f2ea20e0
+x6 : 00000000f2fc9730 x7 : 00000000f2ee4780
+x8 : 000000000000003f x9 : 0000000000000004
+x10: 0000000000000058 x11: 00000000000058c4
+x12: 0000000000000000 x13: 00000000f2e60800
+x14: 00000000f4ec0040 x15: 0000000000000000
+x16: 00000000f2f62f2c x17: 0000000000c0c0c0
+x18: 00000000f2e73e00 x19: 00000000f2ea2010
+x20: 00000000fffffff4 x21: 00000000f2e9b500
+x22: 00000000f2ea20f0 x23: 00000000f2ea2050
+x24: 00000000f2f61eec x25: 00000000f2fcf000
+x26: 00000000f2e9fcd0 x27: 0000000000000000
+x28: 0000000000000000 x29: 00000000f2e60290
+
+Code: d00004a6 911cc0c6 cb000063 8b000021 (f9400860)
+Resetting CPU ...
+
+This happens when fsg_common_init() fails to allocate memory and calls
+fsg_common_release().
+fsg_common_release() then calls kfree() which frees common->luns.
+However, common->luns was never allocated via kmalloc/calloc(),
+resulting in a crash.
+
+Drop the invalid kfree. The memory from common->luns will be
+reclaimed when we kfree(common) later in fgs_common_release().
 
 Reported-by: Zixun LI <admin@hifiphile.com>
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- drivers/usb/gadget/f_mass_storage.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/usb/gadget/f_mass_storage.c | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index 6f464185bd39..fcce6d12f56b 100644
+index bd749c033f9a..6f464185bd39 100644
 --- a/drivers/usb/gadget/f_mass_storage.c
 +++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -2742,6 +2742,8 @@ int fsg_add(struct usb_configuration *c)
- 	struct fsg_common *fsg_common;
+@@ -2564,8 +2564,6 @@ static void fsg_common_release(struct fsg_common *common)
+ 		/* In error recovery common->nluns may be zero. */
+ 		for (; i; --i, ++lun)
+ 			fsg_lun_close(lun);
+-
+-		kfree(common->luns);
+ 	}
  
- 	fsg_common = fsg_common_init(NULL, c->cdev);
-+	if (IS_ERR(fsg_common))
-+		return PTR_ERR(fsg_common);
- 
- 	fsg_common->vendor_name = 0;
- 	fsg_common->product_name = 0;
+ 	{
 
 -- 
 2.49.0
