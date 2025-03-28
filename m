@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E02DC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 18:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0D28C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 18:13:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57BBF80F0E;
+	by phobos.denx.de (Postfix) with ESMTP id A001E81A0C;
 	Fri, 28 Mar 2025 19:13:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="mFgJj5VK";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="VS70hwWv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E580810EA; Fri, 28 Mar 2025 18:15:32 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C07AA810F4; Fri, 28 Mar 2025 18:38:35 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8C568070C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 18:15:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6AFB80F0E
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 18:38:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 4054062e-0bf8-11f0-8ec8-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 4054062e-0bf8-11f0-8ec8-005056994fde;
- Fri, 28 Mar 2025 18:15:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=K07dj9Xx91hkVvGsk8cWy6gBfKqa5bFQpE+aVuD86LE=;
- b=mFgJj5VK6uEGn56J89jCt215lWS4PhdW8DcWN8GjjHrk7Y9qbk179eNdmKaHz4e6KE3NVunst+NJM
- XPWHiPpCklrKnruOLOFiLxYYtmzMt4XsMsAaSWZI9otHJshb9RD2l/qcZm8kIaZX1KJt6uIF0x3ke9
- ImmkEolTft2ShOsUPEwj/blj4suZsNN1jM8J3I5qRpVA11vj5ZPwuzQN0lPl1SoqdltUoDQq9OEV4e
- e5v5KvrLMywbZ6vD7mj0NpoLL2dQMZMLZA+ilmfHwA5TlFi8H9y5kUAVfj5xGoA907xKS2CiJ8O1q1
- YU5uu4GT0dUXLPBtcx6+jduQyDYlp8g==
-X-KPN-MID: 33|d/wfbBmXKaISssM75zcAVTXHpm5D6Us9LK8txokjAULPOMzPR2TAUU7Z5M8WxMX
- tD2l+HJJ6K6QFYg7V0tX40HMbE8zk+2+X0TAw4+JvOAs=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|2UqczDH6PMFp9tVwjR9fNx6LBjBJI1dXXN18e+fkYU3MuXtrNMgtu2Ow9R+mE6Y
- vVtpEWDHjoGQPqooGvO4ZMw==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 3e3e2756-0bf8-11f0-99e4-00505699772e;
- Fri, 28 Mar 2025 18:15:28 +0100 (CET)
-Date: Fri, 28 Mar 2025 18:15:27 +0100
-Message-Id: <87wmc95b68.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Tom Rini <trini@konsulko.com>
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
- e@freeshell.de, rayagonda.kokatanur@broadcom.com,
- andy.tang@nxp.com, mingkai.hu@nxp.com, Ashish.Kumar@nxp.com,
- priyanka.jain@nxp.com, wasim.khan@nxp.com,
- udit.agarwal@nxp.com, meenakshi.aggarwal@nxp.com,
- patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com,
- Manish.Tomar@nxp.com, matt@traverse.com.au,
- caleb.connolly@linaro.org, tien.fong.chee@altera.com,
- michal.simek@amd.com, sumit.garg@kernel.org,
- patrick.rudolph@9elements.com, alif.zakuan.yuslaimi@intel.com,
- Oliver.Gaskell@analog.com, duje.mihanovic@skole.hr,
- robert.marko@sartura.hr, lukas.funke@weidmueller.com,
- peng.fan@nxp.com, jj251510319013@gmail.com,
- adrianox@gmail.com, sughosh.ganu@linaro.org,
- vincent.stehle@arm.com, raymond.mao@linaro.org,
- maks.mishinfz@gmail.com, semen.protsenko@linaro.org,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
-In-Reply-To: <20250328160419.GX93000@bill-the-cat> (message from Tom Rini on
- Fri, 28 Mar 2025 10:04:19 -0600)
-Subject: Re: [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
-References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
- <380f1f2c-59cd-4c52-a598-5e6f1ed1dcad@gmx.de>
- <CAC_iWj+DazCNrMktmwJQxt7bVPbu-qWCfjW4bgcv0cngiH03gw@mail.gmail.com>
- <CAFLszTgq25-E-n+UaJ_wRdimCLcAta-fetWpOW++NCOfN_eL5w@mail.gmail.com>
- <CAC_iWjLS_yNPCMY2RhGZ0390ZysH=N5x5JZ-qOnNjX7nofPS4Q@mail.gmail.com>
- <CAFLszThhK4-+Qh_eQLD0fuJZVodBkwit4rw5mOcGU58m6=5knw@mail.gmail.com>
- <CAC_iWj+2EsRUBT5ThAR7+wwxVkFSzrApCNDbTEEHQ-W658LwCw@mail.gmail.com>
- <20250328160419.GX93000@bill-the-cat>
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-30761be8fcfso23621321fa.0
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 10:38:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1743183513; x=1743788313;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dnQql1KtPDR4GH0YTg8iK0k82gVtGsW+ld1QhZXiWDQ=;
+ b=VS70hwWvnITUBtI8N/bhv0aG00ftqSuXsfaKeMdQLv3jhhzwfSDR8pvwyel6jPE6yy
+ QPcfalyhXIoqXHPs2s+nJB4lv5XzZstZmTGXTdfkfavy59fja2t2pNIEMowTpjZ1ZqDA
+ 6Vu6atqTNNfvpEvSWtypUjigreSDySVNTfzwwnQ8taIgiZ0TrY5kwVnRZsw9R8viC6bZ
+ XUaxqmaMfBblmsbkNDADGihXSXYQSt/bKNsNT1JkDjwhPtZN+yKtsXR2cBytcxD8hFEO
+ Y3WzoM4UFEk/77JFo17cqnC15FOc6EPgs7vydhXNFEXO9eK1D4zvgjx5Mcp1WWOJs4nX
+ n4Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743183513; x=1743788313;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dnQql1KtPDR4GH0YTg8iK0k82gVtGsW+ld1QhZXiWDQ=;
+ b=CQbHOdFv78La1wnX7sxboiI00Ex7AvT2ZyHqKB+hJjeGNpfE5fIJKyJ9y5KLjCXmWR
+ vQTp5cFClVEtl9UU6i6Sf4qrcS7xsKFLUpEglMRg6kNDIsP2QcOuUaw4ef6n8imR4DTj
+ /cmmAJauHQpXcQgUB9RcxahCagMEB9w+o6/+fv9CoqVYvR374aaXUYwd2u44FDd9YjZq
+ sSpht3Eevho68IMS2Ni7yQTYDYbTynMW+nWW4rqJTDGUptw7B07XRWE4OvltnUpJx+/K
+ lyvelzJC8A3ah6vYYjTWPKd0VJEUPfnbf3jINi+MbVB65FvX6y2XUkClkFuNE2/qVj1B
+ AUXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlTB0GKL+KINBMV+btDqJFxV9nAz8qqm5uSVGFzJd+n62HffZDnrPxNdW2Fzo93WAtivmboJs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwY9jtO8vOSMPHNNJpOKyAOVmsRHPF2ALglUqAud/OeBgAe/Uf6
+ Z6G5R8YhDKkarfHnXuCOCUET/TyrgGdgWEsN8VZyiQv3kxc0GNRHi2QmuFVZCQdw5U6EDMeFO7T
+ Fy9aBUS75A1/4wRz/W7o0rW6EStVECMtEMzrmew==
+X-Gm-Gg: ASbGnctdz95+jsIUJ5J6wgRNh46YToW8XwDuC72kaYaUhbDWrZTG4ZC8XVzB4HPNwt2
+ itoENY0IQHpca1vi/24yk3yPhdebmEnKuHEJxb+ZQcLwBCJI57S9RcUzxg3Cd/+fN5jdW9LAd8K
+ bU6ZbOxwmriVcUjoLicPB/5oiQ6g==
+X-Google-Smtp-Source: AGHT+IGSG72TnswLiYFC6Rq6Io5Un4zplBMa/GlcbnPG3v3F7vkP1TasER1q7lLskjFTkSd63eE3KByzMVAcefIitII=
+X-Received: by 2002:a2e:bcc4:0:b0:307:e0c3:5293 with SMTP id
+ 38308e7fff4ca-30de0302347mr883611fa.36.1743183512665; Fri, 28 Mar 2025
+ 10:38:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
+In-Reply-To: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
+From: Zixun LI <admin@hifiphile.com>
+Date: Fri, 28 Mar 2025 18:38:32 +0100
+X-Gm-Features: AQ5f1JqGtg_eFAuzsQdQnCRWdnOuD153B37B-PWQvNZEiEatKwZ8H4_o4TlHxpY
+Message-ID: <CA+GyqeZwrAaQ_7DcvY6VgnVo0WTsMBiZsKZBmWVzQu2CAL6_xQ@mail.gmail.com>
+Subject: Re: [PATCH 0/4] usb: gadget: f_mass_storage: Fix crashes on low
+ memory devices
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 28 Mar 2025 19:13:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,112 +97,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Fri, 28 Mar 2025 10:04:19 -0600
-> From: Tom Rini <trini@konsulko.com>
-> 
-> On Fri, Mar 28, 2025 at 02:26:39PM +0200, Ilias Apalodimas wrote:
-> > On Fri, 28 Mar 2025 at 13:34, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Ilias,
-> > >
-> > > On Thu, 27 Mar 2025 at 15:19, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Simon
-> > > >
-> > > > On Thu, 27 Mar 2025 at 15:33, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Ilias,
-> > > > >
-> > > > > On Wed, 26 Mar 2025 at 02:37, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > Hi Heinrich,
-> > > > > >
-> > > > > > On Mon, 24 Mar 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > >
-> > > > > > > On 17.03.25 14:38, Ilias Apalodimas wrote:
-> > > > > > >
-> > > > > > > %s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
-> > > > > > >
-> > > > > > > > The EFI subsystem defines its own bounce buffer for devices that
-> > > > > > > > can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
-> > > > > > > > which can be reused instead of defining another symbol.
-> > > > > > > > The only limitation for EFI is that we don't know how big the file a user
-> > > > > > > > chooses to transfer is and as a result we can't depend on allocating the
-> > > > > > > > memory from the malloc area, which can prove too small.
-> > > > > > > >
-> > > > > > > > So allocate an EFI buffer of the correct size and pass it to the DM,
-> > > > > > > > which already supports bounce buffering via bounce_buffer_start_extalign()
-> > > > > > >
-> > > > > > > Looking at
-> > > > > > >
-> > > > > > >      if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
-> > > > > > >
-> > > > > > > in drivers/block/blk-uclass.c the bounce buffer has to be explicitly
-> > > > > > > enabled by the device driver. Only the scsi drivers sets bb = true.
-> > > > > > >
-> > > > > > > Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag
-> > > > > > > to blk_desc")
-> > > > > > >
-> > > > > > > Which device-drivers of the boards mentioned below do actually need
-> > > > > > > bounce buffering?
-> > > > > >
-> > > > > > Unfortunately, I don't have any of the hardware to test and I havent
-> > > > > > worked with that platform much.
-> > > > > > That 'bb' variable and the fact that EFI needs bigger allocations is
-> > > > > > why I ended up allocationg properly aligned memory from the EFI
-> > > > > > subsystem. But as Mark pointed out, the cache flush is a no go for
-> > > > > > now, so I'll drop this and see if I find time to rework the bounce
-> > > > > > buffer logic overall
-> > > > >
-> > > > > There was quite a bit of discussion about all this in the context of
-> > > > > my attempt to just add a message to warn the user[1]
-> > > > >
-> > > > > We might consider adding an event to reserve memory before relocation,
-> > > > > along with a way to discover (in board_r) where the memory was
-> > > > > allocated. That would make the solution more generic.
-> > > >
-> > > > I am not sure what you are trying to solve here. The EFI bounce buffer
-> > > > after the LMB patches can't overwrite memory, nor can it be
-> > > > overwritten.
-> > >
-> > > I am thinking of we can create a single implementation of the
-> > > bouncebuf logic which also works for EFI.
-> > >
-> > > I think the two sane things to do are:
-> > > - restrict U-Boot to using memory below 4GB for platforms which have
-> > > the DMA limitation
-> > 
-> > You don't need that. The bounce buf code has a callback you can use to
-> > define the limitations
-> > 
-> > > - create (in board_f) a special region below 4GB for use with the
-> > > bouncebuf logic
-> > 
-> > The only problem with EFI is that you don't know how much memory it
-> > needs and we can't use the existing memalign calls. So if we replace
-> > that memalign in the bounce buffer code, with an lmb reservation we
-> > have everything we need.
-> 
-> It's not even an EFI problem is it?
+On Fri, Mar 28, 2025 at 9:15=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+> This series fixes the above mentioned crash by introducing proper error
+> handling and freeing the buffers in the unbind callback.
 
-Fundamentall, yes, this isn't an EFI problem.
+Hi Mattijs,
 
-> You could hit the same problem reading a file from a filesystem
-> outside of EFI too.
+Thank you for the quick fix, I've tested on SAM9X60 with multiple ums
+commands and it works.
 
-Yes, but we tend to choose the addresses in the env variables that are
-used in the more traditional boot methods to prevent this.
-
-> These specific SoCs just aren't heavily exercised is one of the
-> challenges I think and so it's possible that we have a few things to
-> yet improve in the bounce buffer code (which was added for other
-> SoCs and done as generic enough starting point for others).
-
-The existing bounce buffer code was written to solve a completely
-different problem.  But it could indeed be generalized to solve this
-problem as well.  That requires somebody willing to work on a larger
-set of actual hardware that includes SoC with cache-coherency
-challanges (which is what the current bounce buffer implementation is
-there for) and SoCs with DMA addressing challenges.
+Zixun
