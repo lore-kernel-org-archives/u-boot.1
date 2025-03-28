@@ -4,98 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB5AEC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B7DC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:59:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28CB081951;
-	Fri, 28 Mar 2025 16:57:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 985A881951;
+	Fri, 28 Mar 2025 16:59:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OBD4MTAa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JMSxP84s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E376481A0C; Fri, 28 Mar 2025 16:57:18 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 9877481DED; Fri, 28 Mar 2025 16:59:47 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C2738144A
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:57:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 543BC8144A
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:59:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-2c873231e7bso535158fac.3
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:57:15 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3feaedb6670so1361143b6e.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:59:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743177434; x=1743782234; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743177584; x=1743782384; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6EVTH8eZaj21gUo8EXqMxp+4uLuPfmYQhVZJJ+gUius=;
- b=OBD4MTAaJYLC16b1MTIl/Q2HfZcWDl4+mm9fu9JtwozmxWcrUdX63xYdWRoGRJr0hT
- U27lqw5bxoI3nMOMK/ebS8jqvoacU50sUdxIFePzUl7YsVa1UQ+lh4O95c/yvEjx6f41
- JTp7pTDPywBMm4PnLpeCJbU08JgaWU+PNPQco=
+ bh=pkbQjURxNSpSnQEXagz3Npc1lEHptof+73nZmzBBcNQ=;
+ b=JMSxP84s+tMRZXGzTcOJeSquPuSw1E64/KUvc/pQLSXdpAsz6WiBfhLDbC4B+5g6Y2
+ x0XttvUlGOpzBeJKMAxq4u2gdMhfCa4xUFBm8GbA2ezWxjcpEe8NuFjyQcApsp598Vvn
+ w3Z58eteYjtfc19bUpazRFbXBKN62Fahnv+Kk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743177434; x=1743782234;
+ d=1e100.net; s=20230601; t=1743177584; x=1743782384;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6EVTH8eZaj21gUo8EXqMxp+4uLuPfmYQhVZJJ+gUius=;
- b=w6CAYPtEZeCOv/6z2J+jwN/d8AvdqL4vchNFnjR85LDEetR3190WzSQBsw6qNvKD30
- kgwOd0T2soKc40TlJ1f+Ox5GzG6dfrp6OfywBtuCja6EPSoTPjQBw27nuw8leCOe+0Fx
- Z9GE/YmW6OGOF5i/mMX3jvzqQPsk4k4Iv2vKpKd1+Ow8OrFQFjjAI/RdOinYHYIfPs+k
- QzMp/4eqJMIqpMr1tTGoUOxNzF5iq4FEkWu++arL7RW0rGnx2na6LKMjdytii/MC41kl
- IopDyh62/G27Y7dO3sPYgnFlKja800YNXbe/FkGgHwjhKS1KrTDB5udH9KowV9f4xiA+
- o9yA==
+ bh=pkbQjURxNSpSnQEXagz3Npc1lEHptof+73nZmzBBcNQ=;
+ b=KBu1z42IBWUpkJL03B2QSXbOftm5dYr0q9rL0FwJKN6k3pCJ2iKTJkBkbZ5UCHSRfV
+ yEFGQ/yvci21RbUuirakP5SSKkeVfNrwmKIIHLMNiShM8ey9XNM5U1dOsKjn0AC48+U4
+ OhWceZ43yvCflb2BMdjN/3zwUmb0T+KM0wrB2PsJ7BqKhMdNxHvyzWntCwqcpyMri+KG
+ XytVYkstJPLYP+9/fRev4xRzIPvrLXjnMBQ6Dp9A67YJ17TguQfw/6Fq6pDBANNJjZiY
+ rITWxTR48REm42XeeeYKm9KTy6j1+hV6Hm9c2K6Lqn/i4qrdMNSK1z6y9Re0Lcs0M4Gd
+ r89Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXnBHckZHUat7KzRyuM1w8+rUE/A9APEOwhNzYpco9jx40lr4vdfmo3sT33Za74cXddrqDJuhM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/YL0zouLIFV5aWPglzBupe+XMcdwKvDHtVxc7yUdjhOd7d2WG
- aU/tEBePgjf4KDAimwBiogmiuq/arnpNMuT+vALKqCN1XNxVla7SfDUr+HI47GY=
-X-Gm-Gg: ASbGncsSDo8XgVL7d5KAJ9rGuguLt3c2eDHxiStjrkpp6h0OJqs5rn6mCtzOweheRC0
- 4bhD8C3lFIDPAQDARLYzYOu8gCfKXhmmdtOBJsaVTqvjpCP7LLDOkB4WLNM/YuoPB49GDXKPX+V
- dDTC/iny2fv+rIkhyw09pRJpU8sotLczPW6r882rWFuwDQ+Wkk/TOcT7cnhK02T/F/q8pM+Esxm
- T1MhhslwqY3R4FXpd2bFE7EJz4AdQ9qP7aNNOBhkW5EZQLpRVAo6CDBcV1PgarJ9K73jKRkZtnh
- nS06VrX+NYMcXxInyzeqeN7Zv+9L//CiHjWLQlulbul2EC7oiE4E+4vRnw3cylY/vs1NuIC4YsC
- NTtEoHQ==
-X-Google-Smtp-Source: AGHT+IECmzZXJmqUY5iKHIChyRjESHlnlD79cC1RVyRftQRODuo8oozrZ2MmUx7Df1b5YPO1JQ6ALA==
-X-Received: by 2002:a05:6870:798c:b0:2c1:b58c:c0c with SMTP id
- 586e51a60fabf-2c848228571mr5823171fac.34.1743177434517; 
- Fri, 28 Mar 2025 08:57:14 -0700 (PDT)
+ AJvYcCXN1qNL8wnF10KOClyNwKgb/XJeuKEPC21qhNXgEVj///rIBA65SuIZ+gONl0lQgR5dtplty7A=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQoxf3PEG+RlnMWXr553HqVQfCFVToQswzMqZNjea05ODAALw+
+ 7DKdsRYIx4D+M5y06r8VxX55vpZex4/pVdudyoiUd21DScfrlOMsbn0rU9VF20k=
+X-Gm-Gg: ASbGnctrvW+zagDupi4JWbwuWOFVJ2tMsC+lxVxqsudpQPx8KtT32yGeJpzBsHItVOW
+ XaUYT/XL+a/CHtcJPLMENjgeoX3Pp1/V/l+NbEsKAvvm7F0iVZDOTQJuA1tO6ljEiAEXQpMkA50
+ Sg+CbagnSq2cQMhmPRfaWdBJwN4QDjOS0w/9hvGK4TtiuZZMZVB7VqyiB0d9hyOonadW/+Uc24E
+ 0ShlvFY58UUc4zbI1Fyi8gXuEaljYxSYoylyHatGtnM+w4KDn06xydoLm7Ac78fm3z6mMzSdHMa
+ 9v41P42Xjsu3tro52oeKPsr3dBYlHRbIOFmfKDhZt+fJ993vbU/y/wpMi3JXmgMq0ahYciFeei7
+ GIS5KFg==
+X-Google-Smtp-Source: AGHT+IHce1GH7mTDzQyQi4IoqAW3oIMClrWBHN6XCxfn7sf4p8DfQRlBbCrEimJUjW8NZaju3e+pzQ==
+X-Received: by 2002:a05:6808:1184:b0:3f6:7e4e:96fb with SMTP id
+ 5614622812f47-3fefa53efaemr5720767b6e.17.1743177583764; 
+ Fri, 28 Mar 2025 08:59:43 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c86a856de7sm476599fac.39.2025.03.28.08.57.12
+ 5614622812f47-3ff05278de3sm372965b6e.36.2025.03.28.08.59.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 08:57:13 -0700 (PDT)
-Date: Fri, 28 Mar 2025 09:57:11 -0600
+ Fri, 28 Mar 2025 08:59:43 -0700 (PDT)
+Date: Fri, 28 Mar 2025 09:59:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Fabio Estevam <festevam@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Mario Six <mario.six@gdsys.cc>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v4 00/12] Add imx8mp video support
-Message-ID: <20250328155711.GV93000@bill-the-cat>
-References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
- <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
- <20250303170640.GS2640854@bill-the-cat>
- <CAPVz0n01g9JghOb1JCPg1sCwOf-w0AcjMZRngGZbAK_C_VhGcA@mail.gmail.com>
- <CAOMZO5BMZi3adJCcxVq3-04YY8yAAVqkdcy8Q1tMzMsK+W0rEA@mail.gmail.com>
- <87pli3q1j9.fsf@bootlin.com>
- <CAOMZO5DnfOSGg0wCZpoqw9EsyLWL-ezDshGZT1s8WuBu-K_CrQ@mail.gmail.com>
- <20250327141442.GO93000@bill-the-cat> <87r02hlfb8.fsf@bootlin.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] fastboot: lift restrictions on !NET_LWIP for USB
+Message-ID: <20250328155941.GW93000@bill-the-cat>
+References: <20250312073655.2281377-1-mwalle@kernel.org>
+ <87cyecdpf8.fsf@baylibre.com>
+ <D8RS34QA63LP.296JEK5L3IREQ@kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9be4kxZZn0lPjDMQ"
+ protocol="application/pgp-signature"; boundary="9xq9DCCrcEFNLG6k"
 Content-Disposition: inline
-In-Reply-To: <87r02hlfb8.fsf@bootlin.com>
+In-Reply-To: <D8RS34QA63LP.296JEK5L3IREQ@kernel.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,94 +101,101 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9be4kxZZn0lPjDMQ
-Content-Type: text/plain; charset=utf-8
+--9xq9DCCrcEFNLG6k
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 28, 2025 at 09:39:23AM +0100, Miquel Raynal wrote:
-> On 27/03/2025 at 08:14:42 -06, Tom Rini <trini@konsulko.com> wrote:
+On Fri, Mar 28, 2025 at 10:06:12AM +0100, Michael Walle wrote:
+> Hi Mattijs,
 >=20
-> > On Thu, Mar 27, 2025 at 10:31:18AM -0300, Fabio Estevam wrote:
-> >> Hi Miquel,
-> >>=20
-> >> On Wed, Mar 26, 2025 at 12:01=E2=80=AFPM Miquel Raynal
-> >> <miquel.raynal@bootlin.com> wrote:
-> >>=20
-> >> > I rebased this work on the latest next, fixed the conflicts, adapted=
- my
-> >> > changes to use Svyatoslav's work, fixed the CI.
-> >>=20
-> >> v5 still fails in CI:
-> >>=20
-> >> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25364
+> > > Fastboot works either over TCP, UDP or USB. The latter doesn't have
+> > > anything to do with networking, thus should work just fine with
+> > > regardless which network stack is selected. In practice, header symbo=
+ls
+> > > are used inside common code paths. Add some ifdeffery to guard against
+> > > that.
+> > >
+> > > This will make fastboot over USB work with the new LWIP stack.
+> > >
+> > > Signed-off-by: Michael Walle <mwalle@kernel.org>
 > >
-> > And the exact failure is:
-> > https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1078073#L259
+> > checkpatch.pl reports some issues with this:
 > >
-> > Which looks like a series conflict or test needing to be updated, rather
-> > than a "what the heck???" kind of failure like before.
+> > $ ./scripts/checkpatch.pl --strict --u-boot --git HEAD^..HEAD
 > >
-> >> > Then I pushed a PR to trigger azure tests and figured out you applie=
-d more
-> >> > patches (imx8 clock related) which conflicted. So I rebased again and
-> >> > fixed the conflicts.
-> >> >
-> >> > Azure testing is failing though. I just pushed an empty branch with =
-just
-> >> > today's 'next' and it is already failing, my series does not produce
-> >> > additional warnings as far as I can see.
-> >> >
-> >> > So I am sending a series that has been tested locally. dm unit tests
-> >> > pass, v5 is on its way.
-> >>=20
-> >> If I remove your series, I don't see any test failure:
-> >>=20
-> >> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/25365
-> >>=20
-> >> I don't know about the Azure failure. Please work with the team and
-> >> make sure v6 passes in CI.
+> > <snip>
+> > WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' wh=
+ere possible
+> > <snip>
 > >
-> > I see that the Azure failure is:
-> > https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10824&view=
-=3Dresults
-> > which was the unfortunate "next is broken because master has a fix and
-> > next has a test that needed updating now" that happened this week with
-> > -rc5 being merged. Sorry about that, it's fixed now.
+> > Some occurences below could be fixed. Could you please have a look?
 >=20
-> Yes, my question got lost somewhere else, so let me ask here as well.
->=20
-> I need the tests to run on the test.dts and not the default sandbox.dts.
-> The documentation states to use -T for that when doing the checks
-> locally. Unfortunately, the Azure pipelines do use the default sandbox
-> DT. I can add few mostly useless nodes to the default DTS for the tests
-> to pass, but I feel like this is not the correct approach.
->=20
-> Is there a way to tell Azure to run some of the unit tests (especially
-> the DM ones) only with the test DT?
+> I've seen these. More below.
 
-I saw the older email first, sorry. But I think the docs have become
-disconnected from how things have been done practically.
+That is also my least favorite checkpatch warning, and it's a warning
+not an error. Best judgement is needed about making things readable
+rather than just silencing checkpatch.
+
+>=20
+> >
+> > > ---
+> > > Alternatively, we could add the defines and stub functions to the lwip
+> > > header.
+>=20
+> This is relevant :)
+>=20
+> > > ---
+> > >  cmd/fastboot.c               | 4 ++++
+> > >  drivers/fastboot/Kconfig     | 1 -
+> > >  drivers/fastboot/fb_common.c | 4 ++++
+> > >  3 files changed, 8 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+> > > index d4cfc0c7a28..be84a482b81 100644
+> > > --- a/cmd/fastboot.c
+> > > +++ b/cmd/fastboot.c
+> > > @@ -16,6 +16,7 @@
+> > >  #include <linux/printk.h>
+> > >  #include <linux/stringify.h>
+> > > =20
+> > > +#if CONFIG_IS_ENABLED(NET)
+> >
+> > I think this can be dropped. I hope that since it's a static function,
+> > -if there are no users in the file- the compiler will optimize it out.
+> > Note: I have not verified this, so I might be wrong.
+> >
+> > If you measure and see size changes between keeping the #if and not
+> > keeping it, please ignore this comment.
+>=20
+> No, because net_loop(), net_set_state() and NETLOOP_SUCCESS is only
+> defined in net-legacy.h. Thus we need this ifdeffery.. Unless of
+> course, we add the enums and function stubs to the new lwip net
+> inlcude. I don't know if that's a good idea though.
+
+Yeah, I'm not sure that's worth it either, or at least as maybe only a
+future clean-up or investigate more. Perhaps filing an issue on
+source.denx.de on the -net tree so it's not forgotten?
 
 --=20
 Tom
 
---9be4kxZZn0lPjDMQ
+--9xq9DCCrcEFNLG6k
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmxtMACgkQFHw5/5Y0
-tyyoUwwAjWRSj3MncSihfOO3UOuRmi9CSpFi7IvnAgzdSN2U/r4xWY7xnt6gVPvR
-SqKCo7sLb6sNCWv3YN7jGYBMtiNV14rv1aXQ0z6PZFEna5sFqoRw4yyGHE5krh6Y
-ScnqpXCDygu/aIO1ZOoWwA3/oDgGfaH4Yh3dFFEiFgLQr4KcAldFC73SkUKBss+V
-I1TU8aIIXrPDhalnxyOacFzXlR1VL0z9plouIXeB2qVLmYXQdyB0+srWtqHgqur5
-fNlWFLsWXaBhIr8sMGtrRqER6fZSszwCCCtQVPmWBylD8m68oRLcThtjf99sWLZT
-IT9M5N6cenIlseELq3yttgXY7hMyyzHOnh93RN/5ZFQVVYQ/dPc8BDJBkgOPys9F
-nHKP4wqX6tsQ+wwYbhwN1IP8Ub9hMS+ooeTTv5VYitrhP4heVBdy5Milrud9dneb
-GjRtF/+CZcMvF97hSNeEp10wVQ6rfJDXCZzapiVpwmsIDSdBSYnhFsWQq8Fvp5jp
-1KyvEGbk
-=Xbvg
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmx20ACgkQFHw5/5Y0
+tyzxlwv/VUxBlN5ipwPnhOD2weec55YfANkRkn5HXqW7AfCyHrxiToFYGft+0ZE+
+nbDU+T64UJnRGks5PB62RyGwZ0wH0HC1nt7JFLaFhNxaSGnhUkY6G2MkEy3kF0jf
+7ShOGPHG21WzV4MidrfIvzS56lG1p0/NXw11LbdWBBvRJUTG0IG/Y/P06q+bkDeV
+Rc5x3cAMmnxDVgZWBuCDkEhCgHD030GCUvvRsUsBTRvjG6qOEd5csF5+onuEyAT9
+tOatZuve/VYrgZgQEmehs+rCwNUhyB2FTl5cT6dr41BTiRQ7+xevCpaw+wL8eRdk
+xSQa6cl5dCSiERXUpqUmIz5AoJHvvJR6d0iUyXMJMn1sKqzXSHYPqgxsALXlnrEm
+qQ750MaEU5B7sGrEMjtiOk3Jt8N6nWkvp14fu6oCyFAI/pzSHoLLnqQYcqbXBujs
+V71Lqashieir0bcv9uGVC6MrI0Dyccgou+euxGEG++p16l8GXGzt5wCKTW1Ref3k
+TUoE9I6B
+=KfGf
 -----END PGP SIGNATURE-----
 
---9be4kxZZn0lPjDMQ--
+--9xq9DCCrcEFNLG6k--
