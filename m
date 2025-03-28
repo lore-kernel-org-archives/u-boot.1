@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2460EC36011
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33628C36011
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 15:40:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AED9B81EBB;
-	Fri, 28 Mar 2025 16:36:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F3778210F;
+	Fri, 28 Mar 2025 16:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JrsTTHZZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V0YYs+TG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67F65820A1; Fri, 28 Mar 2025 16:36:45 +0100 (CET)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 2D41B820F5; Fri, 28 Mar 2025 16:36:48 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3226281E6C
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:36:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78CC681E6C
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:36:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3d03d2bd7d2so24040445ab.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:36:43 -0700 (PDT)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3d571ac3d7eso5855725ab.2
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 08:36:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743176201; x=1743781001; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743176203; x=1743781003; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jlX8KjIZBaugKwayXuUQ0te0SThDsZ/r9HtxNm+9r2k=;
- b=JrsTTHZZnEL4n6V3Tk5mCXkU7zsBWnPeMMW9kJlHOMIxMLoCaYlM2st9OJVBOqpKkz
- 2GQjhbxtIOE6mjmZz/zxRPiS3VPPnwrcxQ50kH/ksviKC1Rol7s9fNdUekQ3q4p8ytol
- HLo/eztXKDqhQ17yodloZumddeuWlD6DQ8chI=
+ bh=AovJrIAVSpaMdizp4XUID8D/2RzhqmG3jCRcIjSSwxM=;
+ b=V0YYs+TGNuCxNv6UOKZnQSSZ7BBqa0TYHcEmEV1XiIq5hlLPYkdACwoNs7BczNO98+
+ 9EKIhMKnUqNX/5qOpcAcUAbPdMoULwx2GZyc9bQXYOZs/+bqpdB1xrdcIF7dbrDjYxlL
+ 5s1sMnfhsVKdwkHwi707fbV3man6OjIFYjoZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743176201; x=1743781001;
+ d=1e100.net; s=20230601; t=1743176203; x=1743781003;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jlX8KjIZBaugKwayXuUQ0te0SThDsZ/r9HtxNm+9r2k=;
- b=eMs0E7Ewt8f7vRWaRXb9QoITAr5xDapO/NtjSqCMaNfLEsEe+M+b0A7d0PTiVe/fhx
- 2HziX5I/2hjfpIwu/aepsuZP1fXTb1dRifGYO6zTWWWnjXstT4XPBViKGIb3eQvzr4Ti
- mZSFWX5HjY1PmYVqBaHku+69lT8s3nwZ4tkY1gIxBNV2SFjuYQQkvoVmRxveka2DtT/6
- wwot/ULfslZ8bNl2jF8oyI5MU4yIyyIcPw6yI/3wB9qskN5chUYGzrpPEHj3oTLGO89/
- n5kDAL3TejE+wkYFYrdjFiiBoVZVhAH6OaLhYXvwaGMLT2WL7R2rp/tkGqBy0h/4ZIa0
- ctug==
-X-Gm-Message-State: AOJu0YyjML6ZWGy2DWakPlcxpVrjX36b5PIkB39U8nNIX55BjcmH7+f3
- dERztkUHDR+l3kgLgw85igB/mWck2kCDzgQ02LWbMRVWJlWZewRXMrrvCvJ6oXd8z1WHXIaKeRA
+ bh=AovJrIAVSpaMdizp4XUID8D/2RzhqmG3jCRcIjSSwxM=;
+ b=CLqA4Wee3ks0pDPMqarqeXKzit2U6nZOybJKT9HJvXg7yAH2ksQ+CqiLaG/gFR2JIJ
+ Wq32w3NFAK0ohaakCjKOgwe50Q60wL+98UHyCQMx1YMJ5sfkdsoRuUeRd+3D0ehr2Zdb
+ GOCesH9o+ncCScTxfJaLsBveytI+s/Q/LRO8VEZQZxydqWelzPUaBQxqL7xAscGivKYe
+ CAJb963xxbpFnzsRneMo1I5gXiKgVp00mtaDdg1A9CbnK8mxQaGzPhMV5kD7R7XSFHeB
+ odmRvlN6EKzrxrAGcWWf12sFe+328KThFcoc5DU1Z7P8sBNAzXPogAul1ATa9lnWQZBS
+ 3kFA==
+X-Gm-Message-State: AOJu0YwU7Uke1qA92wotXwk8biCufug53UJ7b8M13ObOfraDjWujsfDV
+ xSejF8PF1VJ4mVOGR0snPmqntd71goVPpixzWP0/aKHaE7rL0OJuUIWalxiZGNmznye2y/wQErk
  =
-X-Gm-Gg: ASbGnctI5Ruwj8EffeT5O8T8WKjH1I9N2EhpDz5+Lq1Ppp9dLKBxbN4J2xxYJsJc981
- gjGodrviU8rFPNxHN9QFZPYntvJQtHt6AAZBtas05KaR7//3JuzWPhZd7cMntffwDd4CLHpkRgk
- 8stY3WFBwMKHVIJKm8mx4J+rbVClQnhiX1jEO20leqT31OFfvX4vf9dNXbwUf3E7Y82PYdy8WIH
- A4FiaCuY9IMWPDptyzzxtvoMvSsMPEK4hjzeqt2L11qGgTs99M3UrXHgiI5qG0zYGtqR95jnr2s
- HJ61PPETR8SlZw2XNi8jwr2vVCKBqaQ0UhpC5fvttaAtnPEri/FvM25zGj25wOJpjKEyvBUsIoL
- zogkmPFIgc6KGOECs
-X-Google-Smtp-Source: AGHT+IG36L6sSM5dnqp/Fy3z4U1IJnDD1FlC9hax4F01LrGjb5xJazCjL/ZgjaO8zVRbTjZG5p6FyA==
-X-Received: by 2002:a05:6e02:1889:b0:3d4:4114:1003 with SMTP id
- e9e14a558f8ab-3d5cce1d67cmr71217645ab.17.1743176201120; 
- Fri, 28 Mar 2025 08:36:41 -0700 (PDT)
+X-Gm-Gg: ASbGnct5fXUNu36/GNiWNm56D/N3mULiZs8Nz9nFhxQy8LDdtatbEWw9ZMwQo2cLzsB
+ EzqIwCQrvNG+q0jW6l/KhjRE58u6rJVRYe+e+l5/k9kTVsn2X0wiXFtdzllyZwQaZ/oJgEDUerA
+ j2X5bVJmJjDi/Qe6GJxDah0aUUrPqW/277LJW41JZDk548exDON4+afhVBeMIQK9YhsU6uBX86W
+ KEYd1ynive0ax/GebaNS0W4gjL1180pocGk10L8BxElt/kh1Gbg7O+QNtZ3sqzLciuV0lt5jD1v
+ 5B9mLYgvSx7wvUvACr+RH/NO/nUVWYh0dUwFex2u4HAR8nzivqwmvcaFlznf+PK9WSyPnEQfddh
+ HeXtunQ==
+X-Google-Smtp-Source: AGHT+IFTSEMQI32mxV+hYGw2lxx5fWo1SqCW165mdWc8jVMwwCTcWuaFcx0Xo8bcC3V+GnM1XQyfew==
+X-Received: by 2002:a05:6e02:32c3:b0:3d5:890b:8db with SMTP id
+ e9e14a558f8ab-3d5ccdca72amr100596315ab.8.1743176203485; 
+ Fri, 28 Mar 2025 08:36:43 -0700 (PDT)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f4648714b4sm484922173.87.2025.03.28.08.36.39
+ 8926c6da1cb9f-4f4648714b4sm484922173.87.2025.03.28.08.36.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 08:36:40 -0700 (PDT)
+ Fri, 28 Mar 2025 08:36:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-Subject: [PATCH v3 28/31] rockchip: Update binman image for new skip-at-start
- setup
-Date: Fri, 28 Mar 2025 09:35:08 -0600
-Message-ID: <20250328153522.3555472-29-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 29/31] RFC: Revert "bloblist: Load the bloblist from the
+ previous loader"
+Date: Fri, 28 Mar 2025 09:35:09 -0600
+Message-ID: <20250328153522.3555472-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250328153522.3555472-1-sjg@chromium.org>
 References: <20250328153522.3555472-1-sjg@chromium.org>
@@ -98,59 +97,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the skip-at-start feature is properly used in Binman, drop the
-various workarounds in the image.
+The logic of this has become too confusing.
+
+The primary issue with the patch is that U-Boot needs to set up a
+bloblist in the first phase where BLOBLIST is enabled. Subsequent
+phases can then use that bloblist.
+
+But the first phase of U-Boot cannot assume that one exists.
+
+Reverting this commit seems like a better starting point for getting
+things working for all use-cases.
+
+Note: The work to tidy this up is apparently underway. For this series,
+a revert is the easiest path.
+
+This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
+
+https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Split out the fixes for skip-at-start into a new patch
+ common/bloblist.c  | 64 ++++++++++++++--------------------------------
+ include/bloblist.h | 10 --------
+ 2 files changed, 19 insertions(+), 55 deletions(-)
 
- arch/arm/dts/rockchip-vpl-u-boot.dtsi | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
-
-diff --git a/arch/arm/dts/rockchip-vpl-u-boot.dtsi b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-index 5367a40c543..0ac1bf0a09b 100644
---- a/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-@@ -28,7 +28,6 @@
- 			bootph-verify;
- 			compatible = "fwupd,vbe-abrec";
- 			storage = "mmc0";
--			skip-offset = <0x8000>;
- 			area-start = <0x7f8000>;
- 			area-size = <0x800000>;
- 			state-offset = <(0x7f8000 - 0x400)>;
-@@ -129,7 +128,7 @@
+diff --git a/common/bloblist.c b/common/bloblist.c
+index bc752b5fdf5..3f8c7f669a7 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -500,57 +500,37 @@ int bloblist_reloc(void *to, uint to_size)
+ 	return 0;
+ }
  
- 		vpl {
- 			type = "fit";
--			offset = <(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 0x200 + 0x8000)>;
-+			offset = <(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 0x200)>;
- 			description = "FIT image for U-Boot TPL";
- 			#address-cells = <1>;
- 			fit,fdt-list = "of-list";
-@@ -174,7 +173,7 @@
- # ifdef CONFIG_BOOTMETH_VBE_ABREC
- 		vbe-a {
- 			type = "section";
--			offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
-+			offset = <CONFIG_SPL_PAD_TO>;
- 			spl-a {
- 				insert-template = <&spl_template>;
- 				size = <0x100000>;
-@@ -211,7 +210,7 @@
- # else /* CONFIG_BOOTMETH_VBE_SIMPLE */
- 		vbe {
- 			type = "fit";
--			offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
-+			offset = <CONFIG_SPL_PAD_TO>;
- 			insert-template = <&common_part>;
- 		};
- # endif /* VBE method */
+-/*
+- * Weak default function for getting bloblist from boot args.
+- */
+-int __weak xferlist_from_boot_arg(ulong __always_unused addr,
+-				  ulong __always_unused size)
+-{
+-	return -ENOENT;
+-}
+-
+ int bloblist_init(void)
+ {
+ 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+ 	int ret = -ENOENT;
+-	ulong addr = 0, size;
+-	/*
+-	 * If U-Boot is not in the first phase, an existing bloblist must be
+-	 * at a fixed address.
+-	 */
+-	bool from_addr = fixed && !xpl_is_first_phase();
+-	/*
+-	 * If U-Boot is in the first phase that an arch custom routine should
+-	 * install the bloblist passed from previous loader to this fixed
++	ulong addr, size;
++	bool expected;
++
++	/**
++	 * We don't expect to find an existing bloblist in the first phase of
++	 * U-Boot that runs. Also we have no way to receive the address of an
++	 * allocated bloblist from a previous stage, so it must be at a fixed
+ 	 * address.
+ 	 */
+-	bool from_boot_arg = fixed && xpl_is_first_phase();
+-
++	expected = fixed && !xpl_is_first_phase();
+ 	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+-		from_addr = false;
++		expected = false;
+ 	if (fixed)
+ 		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+ 				      CONFIG_BLOBLIST_ADDR);
+ 	size = CONFIG_BLOBLIST_SIZE;
+-
+-	if (from_boot_arg)
+-		ret = xferlist_from_boot_arg(addr, size);
+-	else if (from_addr)
++	if (expected) {
+ 		ret = bloblist_check(addr, size);
+-
+-	if (ret)
+-		log_warning("Bloblist at %lx not found (err=%d)\n",
+-			    addr, ret);
+-	else
+-		/* Get the real size */
+-		size = gd->bloblist->total_size;
+-
++		if (ret) {
++			log_warning("Expected bloblist at %lx not found (err=%d)\n",
++				    addr, ret);
++		} else {
++			/* Get the real size, if it is not what we expected */
++			size = gd->bloblist->total_size;
++		}
++	}
+ 	if (ret) {
+-		/*
+-		 * If we don't have a bloblist from a fixed address, or the one
+-		 * in the fixed address is not valid. we must allocate the
+-		 * memory for it now.
+-		 */
+ 		if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+ 			void *ptr = memalign(BLOBLIST_ALIGN, size);
+ 
+@@ -558,8 +538,7 @@ int bloblist_init(void)
+ 				return log_msg_ret("alloc", -ENOMEM);
+ 			addr = map_to_sysmem(ptr);
+ 		} else if (!fixed) {
+-			return log_msg_ret("BLOBLIST_FIXED is not enabled",
+-					   ret);
++			return log_msg_ret("!fixed", ret);
+ 		}
+ 		log_debug("Creating new bloblist size %lx at %lx\n", size,
+ 			  addr);
+@@ -572,11 +551,6 @@ int bloblist_init(void)
+ 		return log_msg_ret("ini", ret);
+ 	gd->flags |= GD_FLG_BLOBLIST_READY;
+ 
+-#ifdef DEBUG
+-	bloblist_show_stats();
+-	bloblist_show_list();
+-#endif
+-
+ 	return 0;
+ }
+ 
+diff --git a/include/bloblist.h b/include/bloblist.h
+index dfe6a700e5e..191b9aa1d54 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -500,14 +500,4 @@ static inline int bloblist_maybe_init(void)
+  */
+ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
+ 
+-/**
+- * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
+- *			      to the specified address.
+- *
+- * @addr: Address for the bloblist
+- * @size: Size of space reserved for the bloblist
+- * Return: 0 if OK, else on error
+- */
+-int xferlist_from_boot_arg(ulong addr, ulong size);
+-
+ #endif /* __BLOBLIST_H */
 -- 
 2.43.0
 
