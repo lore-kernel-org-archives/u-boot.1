@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C976CC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A2FC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 23:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04A4680F0E;
-	Sat, 29 Mar 2025 00:38:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE37680ECC;
+	Sat, 29 Mar 2025 00:39:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T2Z07nP8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z8APcoSF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0023E805C8; Sat, 29 Mar 2025 00:38:44 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 9526380F0E; Sat, 29 Mar 2025 00:39:29 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CF6B81D3B
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:38:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADCE9805C8
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 00:39:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ac2af2f15d1so352616366b.1
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:38:42 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-abf3d64849dso413184866b.3
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 16:39:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743205122; x=1743809922; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743205166; x=1743809966; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yr0gzf7WphpLPMXIP+09RLAFSNa9hLLbqlN9iXMcIO8=;
- b=T2Z07nP8EY5gwaVGfWeKpGP+b94qi2islDi6ViwDVmnhN5u9Q19MMBBQvVDWG52jpk
- hpJg/7s3xRzz168CU5hlYygqG56FdRv8lmDMgpTZei6PiCbfsEXFInl99Ler39TuKCj1
- a99iRvsYOXIkrX5rQe/r48f7YMBp9wEscbTNI=
+ bh=pF5NDvMA355PIQdKfl1zDR8g5TBbBrahxE9uprtvYDk=;
+ b=Z8APcoSFbYrdDLJtSEsAjoL86EBaaa8e6tttCEQkDV7+5kzRsed6JGzr0Y+QzpvlKn
+ /yPl47RyXHprrp25SN5GQEF5TSOM1PfybwjeH2DEib81OAPK6qhVpEfsL/QKZqFsCjeh
+ IwWJDHhSCa4woTVoIXflsaD2wu7M/LwnI7AIc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743205122; x=1743809922;
+ d=1e100.net; s=20230601; t=1743205166; x=1743809966;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Yr0gzf7WphpLPMXIP+09RLAFSNa9hLLbqlN9iXMcIO8=;
- b=LxcgOismgfLa/yjzUP+pc9fdOD7UeeWUa19faPCsnPejz95p7w8viKJ+m++IJly84+
- vSFw91EYOSuKPTWVxLEGwa0XUj7qn9qzJb5z+Jhzdm50M0ikxeH7ZMkdJ4L+vVWsEYZA
- Wvxj7rn90wlaYZibU/FJHPAc6O4O6H8ZqX6w7dgRMs15L9OiQnIzAu4pYw0eK0j9CL96
- lfkDFf0r2ANFLPaujYzHwRmuZCp66NwAgRl/L7beAMy0hDPEPX6OuVl1B/mjyOkNBZmN
- EHla4+HTGTzJC7XKHGdMrhUIbfCJ0zCS/hFvWEVW/+Ptlh36hip3kBi8AF1Qq+zJQckq
- gqRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXwUd+ZQOVZdgp7Y0gIYtxSeQDrDQZVsSZLrFbg9XzR7Kf/n6KhA7qVqITkSWW3BrlefteiFVs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgOKvd0gKwqEzes/5T3wCf83q2HB8RmlkzezAHjchgi20ylq51
- M+4ag8UKpzXLwZBWw8SkvPnKdFuCw6T90F/kfelseuMrkR461D80yCbWalVn9Vot8aThnPcFt9F
- BT8dz5eWQeHrk49PAKh72jsfL7zne56gKmLEP
-X-Gm-Gg: ASbGnctnMI5PvCspMqSAVq5bCVSh4odiBNqdCfLOiq0YqZZZnPcskJQB/uqTBSGJp9B
- 3NIi3KwcXjWz2rVwLRasHiafnuQg++CLiKKBXXNLvjkaeDyjFE1hAVIkiz3+3ghFKeEs3VNu61C
- rr/tpnOUmJDcZd85rf9BJ+Ze5P3io=
-X-Google-Smtp-Source: AGHT+IG797JgUo/w28C26e9gYpE4l8LTelbSqQRXPmQarq5ApVDXoNDOEriEsqQote4E/pgwd05InJtuT6wZyizP20I=
-X-Received: by 2002:a17:906:7955:b0:ac3:3f84:4055 with SMTP id
- a640c23a62f3a-ac738975ff9mr110394166b.4.1743205121985; Fri, 28 Mar 2025
- 16:38:41 -0700 (PDT)
+ bh=pF5NDvMA355PIQdKfl1zDR8g5TBbBrahxE9uprtvYDk=;
+ b=uarBhtAT95Vse9t6HnI5KCCu+mTkkJB+OD8zhFQAq+BHJSXWaT0QnuP/hQNjv5RcpO
+ Zvhj7esZL2m3aCik2Hrm8B3Tsag8bKPFQ8n0KvLN//bWMrJTrfs6M82iyuCi984A7o1Z
+ I8Zx3EcnSNLp/HJBPo1GUjMVFTkTJ9l/yM7WZzWXDUSLyDVrqRiApTVEX8otpstvmj2V
+ kijBoiGf3gUDH1Ufl/yv+jxdTecqcQRdnukJEgMVDa2oT3nRY1EM0NiFav0oOE+9ebMa
+ OM+D+MHi9JtLj7AXaurHcPuyCURgfZqUdwk14x6n2m/aKES8lDzC/1jISunk/f3ym03K
+ 9YgQ==
+X-Gm-Message-State: AOJu0Yy/3t1U2H7Yed7ECIKtlhOfa/bQGpG9vGFg9fbBmQdHnbPVaYxA
+ fts20IWRA246C3T4IdaQORObsWXr+fJG3OzzbDWLHixPwHhBKHjbnzJhUXX3crUF9ukQ1CbqidT
+ yRt3G326RnKiubsQG5g1Wv4j3LEvF35BMpvAo4XIGABFnC8I=
+X-Gm-Gg: ASbGncsCVVg71PImvyYK4wO/HdwS2NOp2WYtw71ScJuaF7KHbbOjF6wFh5bAZobKlQS
+ ea6vXV+bDLMQVmrVclf5srfL4w3RjOltEx0mjIufDFWZARzweqnYu27LOnR3lYlQ041aeU0Hfq5
+ hzTgj8h3Xzk56UaWTmW1OG4bjO4ko=
+X-Google-Smtp-Source: AGHT+IGJXM4VZLc0shC0u3IF4IyY+Y73Gqjv/B+Q21pe2zTHR0ACywYPaX2JyTPnub6j5BziWT9QCbwAK2duaXtWTNA=
+X-Received: by 2002:a17:907:d90:b0:ac4:169:3664 with SMTP id
+ a640c23a62f3a-ac738a5ac83mr71710966b.33.1743205165738; Fri, 28 Mar 2025
+ 16:39:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250328153522.3555472-1-sjg@chromium.org>
- <20250328153522.3555472-30-sjg@chromium.org>
- <CAEfUkUKa-_=zOry+0-EnS=e8tEq7=nooDDt6Yr_M5vx31w+JUA@mail.gmail.com>
- <20250328161322.GA93000@bill-the-cat>
-In-Reply-To: <20250328161322.GA93000@bill-the-cat>
+References: <20250327231318.2713201-1-raymond.mao@linaro.org>
+ <20250327231318.2713201-2-raymond.mao@linaro.org>
+ <CAFLszTiATNSdLgJ-PCEFjyTbwsgxTXg06W4Lj3Fv+zYwtKWcEA@mail.gmail.com>
+ <CAEfUkULhW6fi9119WwTuUq__77Ga_ORcDpXsDzh+vs73QZmbkQ@mail.gmail.com>
+In-Reply-To: <CAEfUkULhW6fi9119WwTuUq__77Ga_ORcDpXsDzh+vs73QZmbkQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 28 Mar 2025 23:38:26 +0000
-X-Gm-Features: AQ5f1Jq3vA6tfr_4ep-wpiIjhBhfXDm7Gou-wT0uQc7PaDw4e5QzWykf4bYlSd0
-Message-ID: <CAFLszTh79kX40mb=UGUbxRsFhK+r2smmM3sOL33d1EAS0mL3xg@mail.gmail.com>
-Subject: Re: [PATCH v3 29/31] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Levi Yun <yeoreum.yun@arm.com>, Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Fri, 28 Mar 2025 23:39:13 +0000
+X-Gm-Features: AQ5f1JoWGNG26BzUn36aI7JNWophcw6-f4Du7jQ0MFN349M25Z6Ht28mDHyyjAw
+Message-ID: <CAFLszTiXypPhg1RXng7P6CV9xLAEuSMg4B+gjr0c53a0SvS3sQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] env: point fdt address to the fdt in a bloblist
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ravi Minnikanti <rminnikanti@marvell.com>, Matthias Brugger <mbrugger@suse.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,59 +98,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Raymond,
+Hi Raymond,
 
-On Fri, 28 Mar 2025 at 10:13, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 28 Mar 2025 at 09:06, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> On Fri, Mar 28, 2025 at 11:50:14AM -0400, Raymond Mao wrote:
-> > Hi Simon,
+> Hi Simon,
+>
+> On Fri, 28 Mar 2025 at 07:35, Simon Glass <sjg@chromium.org> wrote:
 > >
+> > Hi Raymond,
 > >
-> > On Fri, 28 Mar 2025 at 11:36, Simon Glass <sjg@chromium.org> wrote:
+> > On Thu, 27 Mar 2025 at 17:13, Raymond Mao <raymond.mao@linaro.org> wrote:
 > > >
-> > > The logic of this has become too confusing.
+> > > Point fdt_addr to the fdt embedded in the bloblist since fdt_addr
+> > > is a default address for bootefi, bootm and booti to look for the
+> > > device tree when launching the kernel.
+> >
+> > I wonder if we can drop use of that environment variable at some
+> > point? It seems strange to set a variable to gd->fdt_addr only to use
+> > it later. Why not just use gd->fdt_addr ?
+> >
+>
+> First, the fdtdec happens in an early stage and it is not able to set
+> the env variable at that time.
+
+No, I mean actually drop use of the environment var, so we wouldn't
+set it at all.
+
+> Secondly, the fdt_addr is commonly used to boot the kernel by booti,
+> bootm and bootefi, if it is not pointed to gd->fdt_addr when
+> gd->fdt_src is FDTSRC_BLOBLIST, it will need a big refactoring on all
+> boot commands to observe where it should get the correct fdt.
+
+Sure, but I already did most of that refactoring. The variable is only
+accessed in pxe_utils and efi_helper.
+
+For efi it can just use the control FDT. It uses that as a fallback
+anyway in efi_install_fdt(), so just remove the var access.
+
+For pxe_utils I've done most of the work there, but perhaps there are
+boards which use one FDT for U-Boot and a different one for booting,
+both of which come from a prior stage? I'm not sure.
+
+rpi was using it but I sent a series to fix that about 6 months ago.
+
+>
+> I don't agree with the idea that the board or env can override a valid
+> fdt handed off from the previous boot stage, it just messes up without
+> any benefits.
+
+Fair enough, I agree. But then you probably shouldn't look at the rpi code.
+
+>
+> > I hit this in the bootstd conversion but wasn't sure what to do. So
+> > much confusion.
+> >
+> > I see quite a few boards setting this variable in their environment.
+> > So this patch would override that setting, wouldn't it? It's just not
+> > clear what any of this means.
+> >
+>
+> This will be only active when "gd->fdt_src is FDTSRC_BLOBLIST" - It
+> explicitly indicates a previous boot stage is passing a valid fdt.
+> What is the purpose of dropping it?
+
+The env var is there for the distro scripts, I believe. If we ever
+restart bootstd migrations these will go away. We should not be adding
+new code to use this old mechanism.
+
+>
+> > So I think at this point we should update the code to use the internal
+> > control FDT directly.
+> >
 > > >
-> > > The primary issue with the patch is that U-Boot needs to set up a
-> > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > > phases can then use that bloblist.
-> > >
-> > > But the first phase of U-Boot cannot assume that one exists.
-> > >
-> > > Reverting this commit seems like a better starting point for getting
-> > > things working for all use-cases.
-> > >
-> > > Note: The work to tidy this up is apparently underway. For this series,
-> > > a revert is the easiest path.
-> > >
-> > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> > >
-> > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > > > ---
+> > >  env/common.c | 17 +++++++++++++++++
+> > >  1 file changed, 17 insertions(+)
 > > >
-> > > (no changes since v1)
+> > > diff --git a/env/common.c b/env/common.c
+> > > index a58955a4f42..a38e5d107a8 100644
+> > > --- a/env/common.c
+> > > +++ b/env/common.c
+> > > @@ -16,6 +16,7 @@
+> > >  #include <asm/global_data.h>
+> > >  #include <linux/printk.h>
+> > >  #include <linux/stddef.h>
+> > > +#include <mapmem.h>
+> > >  #include <search.h>
+> > >  #include <errno.h>
+> > >  #include <malloc.h>
+> > > @@ -368,6 +369,18 @@ int env_get_default_into(const char *name, char *buf, unsigned int len)
+> > >         return env_get_from_linear(default_environment, name, buf, len);
+> > >  }
 > > >
+> > > +static int env_update_fdt_addr_from_bloblist(void)
+> > > +{
+> > > +       /*
+> > > +        * fdt_addr is by default used by booti, bootm and bootefi,
+> > > +        * thus set it to point to the fdt embedded in a bloblist if it exists.
+> > > +        */
+> > > +       if (!CONFIG_IS_ENABLED(BLOBLIST) || gd->fdt_src != FDTSRC_BLOBLIST)
+> > > +               return 0;
 > >
-> > Is this same as something we discussed in the thread below?
-> > https://lore.kernel.org/u-boot/20250205015606.2686149-29-sjg@chromium.org/
-> >
-> > I am a bit confused since I think we had agreed that it should not be reverted.
+> > This is just too messy, sorry.
 >
-> Yes, it is extremely frustrating to have posted both this:
-> https://patchwork.ozlabs.org/project/uboot/list/?series=450425&state=*
-> as the first pass at doing what was agreed on the path forward while
-> also posting this thread which cannot be against either next nor next
-> with the above applied and so isn't worth anyone elses time. I suspect
-> this thread also includes various rockchip patches that were requested
-> to be broken out and posted by themselves instead.
+> This means we update the variable only when the bloblist is being used
+> and a valid fdt is in the bloblist which is already saved in the gd.
+> In other cases, the transfer list is not being used and the value from
+> the user will not be replaced.
+> Not sure why you feel messy.
 
-Please check the cover letter where I have covered that. If the
-bloblist series I sent lands, then yes, I can drop these final
-patches.
+I understand what the code does, but here you only sometimes set the
+env var, which we likely don't need anyway. You are making a
+complicated mess worse with this patch, because the poor sod who comes
+along after you will have an even harder time figuring out what to do.
 
-Let's not talk about frustration where bloblist is concerned, given
-that my boards were broken for a *year* because of all this.
+I'm not saying you created this mess, far from it, but try to
+implement your feature without going near that environment variable,
+if you can.
 
 Regards,
 Simon
