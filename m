@@ -4,110 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E64DC28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:42:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95C75C28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2465081951;
-	Fri, 28 Mar 2025 17:42:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E1D158144A;
+	Fri, 28 Mar 2025 17:50:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fYm1IO/j";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="mngjoj5L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7518C810EA; Fri, 28 Mar 2025 17:42:15 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AB05C81951; Fri, 28 Mar 2025 17:50:35 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACCB881E5B
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:42:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21223810EA
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:50:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3f9a7cbc8f1so702718b6e.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:42:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743180130; x=1743784930; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S4yFTMxDVvy62cPI3eLWl4aijzlDObieEoLnsgVUbCs=;
- b=fYm1IO/jSod+3DjHcItPNbaUw5vPg+15RB5wVhWnnU8atliVlB4sKnTTGKjtowQsvn
- TmIMzcgQg75QFXbsUuhxUqe49lmIpTmJ6Uzbwn2a8Yq07nc+S4gUjjq3JhszIXa4KM4Q
- 89wpNM+kZAdhTYV0BvM0Om8ZXdTLHrUjgnmZI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743180130; x=1743784930;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S4yFTMxDVvy62cPI3eLWl4aijzlDObieEoLnsgVUbCs=;
- b=Dya77cxtIUI2Yg11Iz7rzSEACX0d7KqHrxO51Vq8sBHfJurmVobn90KsIwFPLPecSe
- Ict+GkO1uxx8ZPZshxfswzHM1FflejONZx/285sJ+plD9VR7KiN+DJxkyZ61oDD7wjwR
- 0vHtcMVwwR/PiUyP/XtG5J4vBnr98lQIH3HM5fptRdiOsh8tRS9e7ZZcrb+MnwEnN13C
- egM4QRXJAQQz7w23EU8WXKdpwgeb19DGH5cJykuEYtPAFTPqwcm9Z6xhstXLV5poyN+F
- yd5frYMxM3z53DflOogNesQXIMlPCexMZqAt45PSkSxHI4kAnicjaFl7Xed0/dLIm7IM
- Wu7A==
-X-Gm-Message-State: AOJu0YxEONfxibn6RJOnPeswn24nXNauv0kUCu4d0BTQSUF/OIh43ovO
- ElsIFqn98aPpXUeMReW8Pva+odAmaN5S6aHN0NCVaMcTCMDyKjZudlaVUG+zQ8w=
-X-Gm-Gg: ASbGncsHMPaMLDuLVXcxW1gbIRzC5kducKjZPofzTvnYraC9pj4Wsq8zcmPO0sYdPvz
- IfzpQaNhsOyQVjwoiwmb9OhcGNw+0wvU8uZhtW+8rbSDqeUnaYyO5UPxt+RRFQFk7/TzA3cIego
- RXhWZvXN2C9cyvWte2TY9xgteAZVbTmMR2YiPMqg9Mt/UEjAOPGkMpeLrUOpTSUfAvsn1NZpDoW
- fg7GcIhz+fePP10fLgfP7zZHciCE6KDu3plDU5Cyx8J2ir8S0k1boz/T4eC1Xo6I2UgPvzy/DgJ
- ADO99l8SphvHUhWs9VWyh1AU5Ub9z7+YYfujsK0KI8wCcY5sSKfxX45EliZyjHgyzoCkIF6CJNv
- FytLoOw==
-X-Google-Smtp-Source: AGHT+IHKXMJk9uRXgJSm1BijQqN6wnx7jlcwupzolXILLcYIjXX5vwZtsuUknF+IXlJNT6GztBG0GQ==
-X-Received: by 2002:a05:6808:448e:b0:3f6:7fc4:a0b5 with SMTP id
- 5614622812f47-3fefa54e0ecmr4617599b6e.18.1743180130466; 
- Fri, 28 Mar 2025 09:42:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6028461b46csm387252eaf.34.2025.03.28.09.42.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Mar 2025 09:42:09 -0700 (PDT)
-Date: Fri, 28 Mar 2025 10:42:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 00/52] expo: Various features and improvements
-Message-ID: <20250328164206.GE93000@bill-the-cat>
-References: <20250319145512.2391122-1-sjg@chromium.org>
- <20250319145742.GI2640854@bill-the-cat>
- <CAFLszTig0NG2vDZsJkzm7oVRjpQhLxdh3g2Xn59AX=Ri=k_zrw@mail.gmail.com>
- <20250320142121.GQ2640854@bill-the-cat>
- <CAFLszTgsMu1ZtK1Z-u6cmH6k__0Qhn+G2SPh8w_NdrihLkQ7jA@mail.gmail.com>
- <20250325162420.GI93000@bill-the-cat>
- <CAFLszTj49W-Vk_4xpmvtyFH6AH1QAZTLRM7x1k-Bhz7a3uEuBQ@mail.gmail.com>
- <20250327141742.GP93000@bill-the-cat>
- <CAFLszThJqyEQLvngTdxwqa-fsox5jjHBMYVryo6vPA7k_6jhUA@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6182c41fd1=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52SEZIBH015778;
+ Fri, 28 Mar 2025 17:50:28 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ LZdfmwmHGBVgr5HCA0J9Cee8doV7XVt6rf8LTT6yWWY=; b=mngjoj5LISoombTl
+ Pd5qWJIyz8oIBY+rsMy56Hqm9cYHbXKyc/G1GREd/1s9d8EmQkAmLNhLnoBoEG6A
+ N16awaaH5Lf6SzJep4ldSuJOxYiLQ4uaZ1DuOPiGE31hs15U1WfruumeHHqkgsHJ
+ u5RuLeOuNFV5TFLCKe2uOWqJeaQTBHFbpF1P+r+yzEyvFaLmkxTHEFzPEZQW/NKB
+ x5xtSrjsmX+XbRBKzxEuV+IVxAG2iO9oLC5v7fP4TKyrwuBnGWrv72cmvqSQK3WM
+ dEPv8hLkdOuCRMPxm1fu6coAoesRIfPXWT23Tk6dqfaLLLN4rEhtJK7RWR/9US/Z
+ p0Hcmw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45nq0b2j3m-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 28 Mar 2025 17:50:28 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CA23940075;
+ Fri, 28 Mar 2025 17:49:24 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 67D9993B824;
+ Fri, 28 Mar 2025 17:42:43 +0100 (CET)
+Received: from [10.252.14.194] (10.252.14.194) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 28 Mar
+ 2025 17:42:42 +0100
+Message-ID: <40f9804d-0887-40a2-81cf-6df8ddeb49da@foss.st.com>
+Date: Fri, 28 Mar 2025 17:42:42 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7Jc2ER5Isp4swimH"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThJqyEQLvngTdxwqa-fsox5jjHBMYVryo6vPA7k_6jhUA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: dtc: "syntax error" linked to &{label/subnode} syntax
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>
+References: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
+ <CAFLszTj3O64xvA9buAfMf2RRRjwF5SjoOje+_1pWCT3QgV4Akg@mail.gmail.com>
+ <62ed68c3-a029-4bf9-8918-39d5aa5d8b6b@foss.st.com>
+ <95ab524e-c532-4eb5-a65f-a1d1c1b190a2@foss.st.com>
+ <20250115144428.GZ3476@bill-the-cat>
+ <329ceffc-c5b6-4f3e-81dd-03b1d4b7b9a7@foss.st.com>
+ <20250128140456.GJ1233568@bill-the-cat>
+ <20250128150426.GP1233568@bill-the-cat>
+ <20250129220127.GW1233568@bill-the-cat>
+ <2858f505-d64d-4583-bca2-30f9a83a9ef6@foss.st.com>
+ <20250131160140.GQ1233568@bill-the-cat>
+ <1fedad9f-8283-487b-91ae-fb734aa15aea@foss.st.com>
+ <81da40dc-73dd-4297-a2b0-316b4160b1f2@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <81da40dc-73dd-4297-a2b0-316b4160b1f2@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.14.194]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-28_08,2025-03-27_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,183 +102,227 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7Jc2ER5Isp4swimH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 28, 2025 at 07:05:35AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 27 Mar 2025 at 08:17, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Mar 27, 2025 at 07:36:02AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 25 Mar 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Mar 21, 2025 at 07:38:45PM +0100, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Thu, 20 Mar 2025 at 15:21, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Mar 20, 2025 at 03:39:26AM +0000, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Wed, 19 Mar 2025 at 15:57, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Wed, Mar 19, 2025 at 03:54:05PM +0100, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > This series collects together some new features for expo =
-to make it more
-> > > > > > > > > useful for boot menus:
-> > > > > > > > >
-> > > > > > > > > - measurement and display of multi-line text objects
-> > > > > > > > > - internal alignment for objects (e.g. centred text)
-> > > > > > > > > - editable strings in text fields
-> > > > > > > > > - new 'box' object to draw a rectangle
-> > > > > > > > > - highlighting of menu items, rather than just relying on=
- a pointer
-> > > > > > > > >
-> > > > > > > > > Expo's boot menu is restructured so that it is possible t=
-o iterate
-> > > > > > > > > through various bootdevs and update the menu as new ones =
-are found. This
-> > > > > > > > > is more in keeping with how bootstd works.
-> > > > > > > > >
-> > > > > > > > > A new textedit object is added, intended to provide a sim=
-ple text
-> > > > > > > > > editor. Future work will complete this.
-> > > > > > > > >
-> > > > > > > > > With this series the boot menu has a better layout and ap=
-pearance.
-> > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Simon Glass (52):
-> > > > > > > >
-> > > > > > > > I see you haven't internalized the "don't post massive seri=
-es" feedback
-> > > > > > > > yet. Please, stop posting massive patch series. Figure out =
-how to
-> > > > > > > > logically break things down in to smaller chunks that can be
-> > > > > > > > meaningfully reviewed.
-> > > > > > >
-> > > > > > > I could split this into two series of ~25 patches, perhaps. W=
-ould that be OK?
-> > > > > > >
-> > > > > > > I believe no one else is using expo yet, apart from postmarke=
-tOS,
-> > > > > > > except the trivial case of 'bootflow scan -m' but I'm hoping =
-that will
-> > > > > > > change in the future. I believe that Linaro is mostly encoura=
-ging EFI
-> > > > > > > bootmgr and the text-based menu. That could be converted to u=
-se expo
-> > > > > > > but I doubt anyone has looked into that, particularly as grub=
- is being
-> > > > > > > pushed as well. I did look at converting the existing menu co=
-de a year
-> > > > > > > or two ago, but it seemed better to eventually deprecate it.
-> > > > > > >
-> > > > > > > Also, there is a following series which I split out and will =
-post
-> > > > > > > separately, but not for a while as I have a lot outstanding.
-> > > > > > >
-> > > > > >
-> > > > > > It would make sense to split expo out to its own series as ther=
-e's not
-> > > > > > likely to be any feedback there. All of the other parts of the =
-series
-> > > > > > already have something else in their subject and that would be =
-logical
-> > > > > > places to split this up more and then assign to the appropriate
-> > > > > > custodian. Thanks.
-> > > > >
-> > > > > This is the expo series and it only has expo patches, so I believ=
-e we
-> > > > > are OK there.
-> > > > >
-> > > > > The bootstd series is small and its own thing.
-> > > >
-> > > > OK.
-> > > >
-> > > > > I can split up the strim() / test series,
-> > > >
-> > > > OK.
-> > > >
-> > > > > but I'm still unsure what
-> > > > > you are asking for with respect to code which is not yet used. I =
-can't
-> > > > > reasonably do all of a) send code only when it is needed by later
-> > > > > patches in the series and b) keep series sizes small and c) keep
-> > > > > series related to a single topic.
-> > > >
-> > > > I don't see why you can't do that. It is in fact really hard to rev=
-iew
-> > > > how useful some library functions you write without seeing how they=
-'re
-> > > > used and if in turn we should be doing something different. You mig=
-ht
-> > > > need to defer or break out as it's own some refactoring changes in =
-order
-> > > > to meet 'b' above. However "here is a thing" and "here's using a th=
-ing"
-> > > > are still a single topic.
-> > >
-> > > You could just review the code itself, perhaps, rather than worrying
-> > > whether it will never be used? For me, creating and maintaining a
-> > > series through acceptance into your tree is still a lot of effort,
-> > > unfortunately.
-> >
-> > No, that's a no-go. Reviewing a library without knowing how it's going
-> > to be used is not effective.
-> >
-> > > While on that topic, it seems that the sunxi and rpi series have still
-> > > not been applied to your tree. It would really help to see some
-> > > movement on those after all these months.
-> >
-> > I provided a detailed explanation of what's still wrong with the sunxi
-> > series.
->=20
-> From what I recall this is that you want Heinrich to do a workaround
+On 2/24/25 15:58, Patrice CHOTARD wrote:
+> 
+> 
+> On 2/3/25 08:23, Patrice CHOTARD wrote:
+>>
+>>
+>> On 1/31/25 17:01, Tom Rini wrote:
+>>> On Fri, Jan 31, 2025 at 03:41:37PM +0100, Patrice CHOTARD wrote:
+>>>>
+>>>>
+>>>> On 1/29/25 23:01, Tom Rini wrote:
+>>>>> On Tue, Jan 28, 2025 at 09:04:26AM -0600, Tom Rini wrote:
+>>>>>> On Tue, Jan 28, 2025 at 08:04:56AM -0600, Tom Rini wrote:
+>>>>>>> On Tue, Jan 28, 2025 at 08:47:37AM +0100, Patrice CHOTARD wrote:
+>>>>>>>>
+>>>>>>>>
+>>>>>>>> On 1/15/25 15:44, Tom Rini wrote:
+>>>>>>>>> On Wed, Jan 15, 2025 at 03:39:20PM +0100, Patrice CHOTARD wrote:
+>>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>> On 1/15/25 15:24, Patrice CHOTARD wrote:
+>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> On 1/15/25 14:19, Simon Glass wrote:
+>>>>>>>>>>>> Hi Patrice,
+>>>>>>>>>>>>
+>>>>>>>>>>>> On Wed, 15 Jan 2025 at 03:19, Patrice CHOTARD
+>>>>>>>>>>>> <patrice.chotard@foss.st.com> wrote:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Hi
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> I am currently converting STM32MP platforms to OF_UPSTREAM.
+>>>>>>>>>>>>> As we use same binary for several boards, flags CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+>>>>>>>>>>>>> and CONFIG_OF_UPSTREAM_VENDOR="st" are set.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> So all dts/upstream/src/arm/st/* dts files are compiled.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> I am facing an issue with dts/upstream/src/arm/st/stm32mp151a-prtt1* and
+>>>>>>>>>>>>> dts/upstream/src/arm/st/stm32mp15*-mec*.* files.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> To be more precise, these files are using a syntax which follows this
+>>>>>>>>>>>>> format &{label/subnode} to override some nodes.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> This leads to DTC error:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>  AR      drivers/usb/gadget/built-in.o
+>>>>>>>>>>>>>   LD      u-boot
+>>>>>>>>>>>>>   OBJCOPY u-boot.srec
+>>>>>>>>>>>>>   OBJCOPY u-boot-nodtb.bin
+>>>>>>>>>>>>>   SYM     u-boot.sym
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32h750i-art-pi.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-iot-box.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32746g-eval.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp151c-mecio1r0.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.dtb
+>>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/ste-nomadik-s8815.dtb
+>>>>>>>>>>>>> Error: ../dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi:338.1-2 syntax error
+>>>>>>>>>>>>> FATAL ERROR: Unable to parse input tree
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> At line 338 in dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi we got :
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> &{qspi_bk1_pins_a/pins} {
+>>>>>>>>>>>>>         pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+>>>>>>>>>>>>>                  <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+>>>>>>>>>>>>>                  <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+>>>>>>>>>>>>>                  <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+>>>>>>>>>>>>>         /delete-property/ bias-disable;
+>>>>>>>>>>>>>         bias-pull-up;
+>>>>>>>>>>>>> };
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> If i update it as following , the DTC compilation is OK :
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> &qspi_bk1_pins_a {
+>>>>>>>>>>>>>         pins {
+>>>>>>>>>>>>>                 pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+>>>>>>>>>>>>>                          <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+>>>>>>>>>>>>>                          <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+>>>>>>>>>>>>>                          <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+>>>>>>>>>>>>>                 /delete-property/ bias-disable;
+>>>>>>>>>>>>>                 bias-pull-up;
+>>>>>>>>>>>>>         };
+>>>>>>>>>>>>> };
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> On kernel side, the DTC compilation is ok, but not on U-Boot side. I am not able to understand the difference.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>>> Could it be that the kernel dtc is newer?
+>>>>>>>>>>>
+>>>>>>>>>>> I have tested with dtc Version: DTC 1.7.0-gbcd02b52 which is the same dtc version than kernel tag next-20250114
+>>>>>>>>>>
+>>>>>>>>>> I mean, it's ok with newer version of dtc : DTC 1.7.0-gbcd02b52.
+>>>>>>>>>
+>>>>>>>>> Ah, so, sigh, we need to update DTC. I stopped my last upgrade there
+>>>>>>>>> because other changes it made grew the binary size for everyone and
+>>>>>>>>> didn't get back to it. I guess another attempt is in order.
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>> Hi Tom
+>>>>>>>>
+>>>>>>>> Do you know when you will be able to provide a DTC update in master or next branch ?
+>>>>>>>
+>>>>>>> Unfortunately trying to update resync-dtc-v1.6.0-31-gcbca977ea121-v5 to
+>>>>>>> be on top of current (the first step to moving to 1.7.0 or 1.7.1)
+>>>>>>> produced some test failures that don't exist when using the host dtc.
+>>>>>>> Can you confirm if dtc 1.7.0 is new enough for this syntax? We might
+>>>>>>> just need to change to building pylibfdt and not dtc as well (as having
+>>>>>>> pylibfdt come via system python or pipx is differently tricky it seems).
+>>>>>>
+>>>>>> The pipeline is at
+>>>>>> https://source.denx.de/u-boot/u-boot/-/pipelines/24243 and that's just
+>>>>>> the v5 branch currently under WIP/ rebased to then-current master.
+>>>>>
+>>>>> To push this as far as I can at least, there's now also
+>>>>> WIP/resync-dtc-v1.7.1-v1 which brings us to dtc-1.7.1 (good!) but also
+>>>>> some silent failure to boot on a least one of the TI K3 platforms I
+>>>>> have, and some other failures in CI too.
+>>>>>
+>>>> Hi Tom
+>>>>
+>>>> I rebase my "STM32 OF_UPSTREAM" series on top of your branch WIP/resync-dtc-v1.7.1-v1,
+>>>> that fixes the issue i described in my initial mail.
+>>>>
+>>>> Thanks for this update
+>>>
+>>> Well, please note that branch is a problem. I have no idea why some
+>>> tests, and then some platforms fail. I also don't have the time to look
+>>> in to it. I posted this so that at least the groundwork is done for
+>>> someone else with motivation / need to finish fixing things.
+>>>
+>>
+>> OK i will try to have a look at it.
+> 
+> Hi
+> 
+> I found that most of the issue are due to these 2 following DTC patches : 
+> 
+> 5e735860c478 libfdt: Check for 8-byte address alignment in fdt_ro_probe_()
+> b07b62ee3342 libfdt: Add FDT alignment check to fdt_check_header()
+> 
+> If i reverted these 2 patches, there are 4 tests which are still remaining fail:
+> (see CI tests : https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/24800)
+>   _ "sandbox test.py" and "sandbox with clang test.py"
+> 
+> 	=> test/py/tests/test_sandbox_opts.py => fixed see commit 8a8aa1e30b02 "fixup! sandbox: Update dts files again"
+> 
+>   _ "sandbox_noinst test.py" and "sandbox_noinst with LOAD_FIT_FULL test.py"
+> 
+> 	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_clk] - OSErr...
+> 	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_dev] - OSErr...
+> 	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_gpio] - OSEr...
+> 	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_parent] - OS...
+> 	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_phandle] - O...
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_blk_FIT_EXTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_blk_FIT_INTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_mmc_FIT_EXTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_mmc_FIT_INTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_nand_FIT_INTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_net_FIT_EXTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_net_FIT_INTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_nor_FIT_INTERNAL]
+> 	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_spi_FIT_INTERNAL]
+> 
+>         I didn't start to look at these tests.
+> 
+> 
+> So i checked which tests are impacted by the 2 above DTC patches on "sandbox test.py" :
+> 
+> 1) fix arch/sandbox/dts/sandbox.dtsi which generate warnings and made buildman fail 
+>    => commit 8a8aa1e30b02 "fixup! sandbox: Update dts files again"
+> 
+> 2) ./test/py/tests/test_extension.py 
+>    => commit 27c909792ef4 ("fix test_extension.py")
+> 
+> 3) ./test/py/tests/test_vboot.py : 
+>    => First analysis: If FIT embeds a DTB, currently nothing ensure that this embedded DTB is
+>      located at an offset 8 bytes aligned from the FIT beginning during the FIT generation.
+>    
+> 4) ./test/py/tests/test_android/test_abootimg.py: 
+>    => same issue as FIT generation, reading the way to generate boot.img or vendor_boot.img 
+>       at the beginning of test_abootimg.py, the 2 embbed DTBs must be all located at an offset
+>       8 bytes aligned from the start of the image.
+> 
+>       I didn't find a way to ensure that both embedded DTBs are 8 bytes aligned with mkbootimg.
+> 
+> PS: the 2 fixes mentioned are available on STM32_U-boot_custodian tree.
+>     
+> I will continue to investigate, but if someone can help it would be great ;-)
 
-Please don't go with what you recall. Please read:
-https://lore.kernel.org/u-boot/20250310155336.GJ2640854@bill-the-cat/
 
-Which is what I promised to do.
+Hi Tom, Simon
 
-> with bootmgr and bootstd, but you don't want to disable bootmgr from
-> sunxi. In either case, there's nothing I can do here. The series is
-> probably getting more and more out of date anyway. Andre might pick it
-> up, but I doubt it, given all the arguments about it.
->=20
-> > The Pi maintainers are still actively working their way through
-> > things.
->=20
-> Is there any ETA?
+I have spent some time to investigate on the above issues due to DTC 1.7.1 migration.
+I have fixed some "visible" failure highlighted by U-Boot CI Build.
 
-I have pinged them about it.
+Most of issue are linked to the constraints to have DT header aligned to 8 bytes.
+To ensure that DT header is always 8 bytes aligned imposes update in a lot of part of U-Boot
+and honestly it's touchy.
 
---=20
-Tom
+The more i digged, the more i discovered impact in a lot of components of U-Boot's tools 
+(mkimage, binman) or the way binaries are generated (Makefile ..). 
 
---7Jc2ER5Isp4swimH
-Content-Type: application/pgp-signature; name="signature.asc"
+So i will not go further. Instead i will simply backport some DTC patches needed to solve the inital issue
+i saw, that means adding label relative path references to DTC.
 
------BEGIN PGP SIGNATURE-----
+See submitted patch : https://patchwork.ozlabs.org/project/uboot/patch/20250328163115.642347-1-patrice.chotard@foss.st.com/
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfm0VoACgkQFHw5/5Y0
-tyzH/gv/aAWMqb+RLzvPN41junMnBSPr7VrFWkPyDBWf4hHVPdjkjFQlyupcHB4x
-nIphWMasCtYgKJ0mJqoHLVx3ijZIXqDlIAHbjsmn+DM70Oa2iYkaK8l0BMR3q4+R
-tDNzKYd+UkHAcNFaeJvFQSymcUwWnSLFG68QrfpvL854x1oBYB8i6F4XD34ycXeL
-LqxUZpf3waJaeO+PixMxr1SI0YVbbsKPXeoY4DuGQptyFLpnlZsJJ4YL0GDB9Hdx
-1HNjIQSNo8uCN00doK9Txyngvf+rkrWUXPR244MAE/ijKfxrx3bHP80TMDAr13zQ
-8Z7TWpcl7qgWMhcpn7AjYrMeJMmMGLDO8YUSJYI+XTLP2v+zCGrP5fdUJ6b044tI
-efRT92Y9A0bnnuDiUD/O+Z5ev4Okotxkz5O9TqUv5E5WsxbjY3drl2Ccn7GGAwDa
-AAccby9PTWfgbQ/YkgSN/eSvtN0DpYmfaMt6sZ7RLeRdJD/ONQXOC/1usGZ8f3fQ
-NZOw7hCI
-=Gpd2
------END PGP SIGNATURE-----
+I applied this patch over WIP/27Mar2025-next, run CI-Build with no regression: 
+https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/25384
 
---7Jc2ER5Isp4swimH--
+Thanks
+Patrice
+
+
+
+> 
+> Thanks
+> Patrice
+>>
+>> Thanks
+>> Patrice
