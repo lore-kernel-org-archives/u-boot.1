@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A28C28B20
-	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 16:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0805AC28B20
+	for <u-boot@archiver.kernel.org>; Fri, 28 Mar 2025 17:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C2F78144A;
-	Fri, 28 Mar 2025 17:51:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A2B3809A5;
+	Fri, 28 Mar 2025 18:06:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aRjoUxRy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k8GCi0wk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3499281951; Fri, 28 Mar 2025 17:51:34 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 7B4AC810EA; Fri, 28 Mar 2025 18:06:24 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94697810EA
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 17:51:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBD82805C8
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 18:06:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e5cded3e2eso3705065a12.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 09:51:30 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5e535e6739bso3923145a12.1
+ for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 10:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743180690; x=1743785490; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743181581; x=1743786381; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=54xQp1rSkgfTP916ub30kgqFDkwF75EFVt8Vnv95+eM=;
- b=aRjoUxRyV7xw2MLREszw9In2Dsdoc7loKSmJ93UuWBMw/P2RF1NCSwl2sqjHw+0tOV
- LglcGC+vAhjPpfRz6UDAeR2/bnm2U643pYq8iXD4EQ6U8BU4HdVSqFZuCCADKhaF6VFx
- W8anMqkTn2lA6eFX0UCkjhh4JlnczWLN5HBqvPdDzC+CFMRrV7xr+tLjjouVbZSI9+C2
- 8Y81Z/t4v6Pnas4f4gZ828t5OgloeBQrIWnfCrLmI2SA4XO6en46y6ms/GTSgHRSOzVz
- mGl14Yc77PXXKtC9bC+SXErthsDsbm7Bd8xzftelSftOTBGhEh8yXQ4df/WraWXbDu0Q
- VE+Q==
+ bh=DVQy9pzG7MgsGKk/lOhNN8DYfOQLW28jiVe9Xr570xE=;
+ b=k8GCi0wk/HCmA+pdJOXSE2fYvYh/iZ0Cr4N3Ok6JOvGGlbV7PdiZvz9HMv5I3VUWZn
+ zGzYMmepT6L8rEZyK+p+1afvE/jmcDLo3UI/QVI63hpBL23DFyoSPtIb1I3rwgAtSMf7
+ A36hpEio/Hq+tr1qy5qZObuV1/EjSWQLIkZJB4wB8UKfhkxk/F/B4gHZUp2gdffqJ/IL
+ JfVHkqwu9HP9lo4+lSEQXvVJvyKUIuI07p4xy298m+zMIhr9M1x3o8d+9tpi1fBLdzOQ
+ y4iER7gTxArNM9g1xEOTlyrGjtfleOTT12j3ABBl/ChKjqC5RCK+4f/KoBAGoRiYmUlT
+ wCPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743180690; x=1743785490;
+ d=1e100.net; s=20230601; t=1743181581; x=1743786381;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=54xQp1rSkgfTP916ub30kgqFDkwF75EFVt8Vnv95+eM=;
- b=LuM4+wlBDGRRYwRgeUs6ewNHdRlZtJEQc4CYjDmeYcdTFVlWFiOxyMjjurtam8s5Fk
- Hafd3EI1qq3AAgoCV/fOsvRGn3PPorVGGMUWO9XBJm4BRyEP+l1+D9aWHSZCP5reXr2D
- KMiGA570/COXkcpBxCuy3HuFu9ZdeqN6voxqDsvsnEnfl5iVfo+gjtdDgtSGarP6+W4d
- l30G9m+p/7s/7C2HxqbsvhH1PPSDeYygyIRKohOaiZWeFqMfntj2eePmUnOzc8IqUewD
- qaWGFFoUg0UVxFXLFpryElj8aoDC/+OuxNgGsDhO14ZJ5MCPjYzPW2fN03WVoFr5gG2J
- 3YJQ==
-X-Gm-Message-State: AOJu0YzLywHY81EO0OwqoLgXfZ/kOjCpZRkqpd30XOixDQpldg/gcvan
- 6fBRqF+oiJukf4hBJPdGcmdnpi+HiDsuWUilLy8Su/yOGwSuE452MilE35H0uC2eAVZM1HP0MdZ
- MKrGXXPmd/1kp1jHZGxgQXjypOdI=
-X-Gm-Gg: ASbGncsuON4O7vDnde30/WNSKauh2425he0yLQ9HgrduAlYszc088GwZTBxCJqT8L2Y
- CB4j0oEhpbqeDfl8ehWuNDkdXZjTx3RAJXYVsqtRBFFO21eNc+Z7tBUrtnNIe27BKMC0lKXF9dD
- Tp3PBNWUHjF8amEtPEd7gcEgrWyA==
-X-Google-Smtp-Source: AGHT+IG4TEiN3qOkTUzBiTbE9y7Q2s6q3ibK2Al6frABlpdf9zmNCni6EwKeSHYjWf7qZP+c302TIZYAsLuzQiRViZY=
-X-Received: by 2002:a05:6402:2711:b0:5ed:5fa2:98d9 with SMTP id
- 4fb4d7f45d1cf-5ed8f90b345mr9458272a12.28.1743180689500; Fri, 28 Mar 2025
- 09:51:29 -0700 (PDT)
+ bh=DVQy9pzG7MgsGKk/lOhNN8DYfOQLW28jiVe9Xr570xE=;
+ b=FHUFIRN8CnFH/MrSnVGetrAPxThIz+GGfugx/CEF1WiQpEXDUfLgE1lXCF9E0uQ/X8
+ tu7e5IJ4ZEAqlvYNPiIlGBi8yTtXpcz9IY8oVtwumaZPs02ectvis84tpTVLb8ldPRnH
+ YrQyfJO8TrE8B9Ptpe8XxeEidu8AtGR7Yfhfj/NkCGhydWetmTOMtfgBhF/nu7KZnMy9
+ WOdAnJjs+XswuP1HiWsH3op6z2nVBjxv3O7gQryJGSutaFO/8vI8guQ9YZsK2C/JInbh
+ zAqm3HouMQhf1IrlCVNkvPmULfnKAjsBlHbrzvD7HDthKag2rK4Wv5LEDmtJPUyWY/nk
+ Gl7g==
+X-Gm-Message-State: AOJu0YwZFm8a3lakd0w/0ee4aRwKQCfxMvM71LK0bZmnJCdirYAymuAC
+ dR3ULpCwip+v4FCBwt8A8AQWPoU9LHVhtMBW3GxYXCrTPQc0JLDZigX4V6TVzUsAhZ8lrze47Fn
+ uIPGPHVI5NHNSFNhPgZqYvHh7uSI=
+X-Gm-Gg: ASbGnctMCpc+ZnZuVwfgn3vBAcFuT9lO0e7XgOb7I0BqpWPxw43hjhgefXDQhALhsvv
+ +EHTB7feaRqvDf6TLUukDZiXyiJM558qvjOi8cDp9M1ZYR27AKcI9nWr47/ljFp9O/0yPZHoyym
+ g+3LIkSvNIB1Y0hh9ImCxPag7TYA==
+X-Google-Smtp-Source: AGHT+IEHMNOlMHIWrBKHNdmvityZ+xlj0PMM3dhZ2zrlpSy82ADt+05NYINIb5EoW/Gh4VIGoUfw4f/Jg1YEHrU/YTY=
+X-Received: by 2002:a05:6402:280f:b0:5e5:bbd5:676a with SMTP id
+ 4fb4d7f45d1cf-5ed8f3fd169mr7363173a12.22.1743181580940; Fri, 28 Mar 2025
+ 10:06:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250328153522.3555472-1-sjg@chromium.org>
- <20250328153522.3555472-20-sjg@chromium.org>
-In-Reply-To: <20250328153522.3555472-20-sjg@chromium.org>
+References: <20250328163115.642347-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20250328163115.642347-1-patrice.chotard@foss.st.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 28 Mar 2025 16:51:18 +0000
-X-Gm-Features: AQ5f1Jq7qgzjnDQIBMKzdUzJspXHCq1nI2WIHrOn2otaVUFT8UnfzZpQrgPDBGw
-Message-ID: <CALeDE9N0CirXGSJe=Tunj5LdV6pJ=MRrdVdCZfb6-E=mGOvraw@mail.gmail.com>
-Subject: Re: [PATCH v3 19/31] rockchip: Provide a VPL phase on rk3399
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Dragan Simic <dsimic@manjaro.org>, 
- Greg Malysa <greg.malysa@timesys.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <paulk@sys-base.io>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Richard Henderson <richard.henderson@linaro.org>, Tom Rini <trini@konsulko.com>,
- Trevor Woerner <twoerner@gmail.com>, huang lin <hl@rock-chips.com>
+Date: Fri, 28 Mar 2025 17:06:09 +0000
+X-Gm-Features: AQ5f1JoX5fVF-zQpNe1IjgBk7NDeEAgxpT8SXnHkO36KBEJZIMnqQUnwiOXHvss
+Message-ID: <CALeDE9NHP6J97A0Zy13TDB66cpcJutT0DYvU=Ts6G4aBN+RwVg@mail.gmail.com>
+Subject: Re: [PATCH] dtc: introduce label relative path references
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -103,414 +93,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, 28 Mar 2025 at 16:52, Patrice Chotard <patrice.chotard@foss.st.com>
+wrote:
 
-On Fri, 28 Mar 2025 at 15:38, Simon Glass <sjg@chromium.org> wrote:
-
-> Add support for this new phase, which runs after TPL. It determines the
-> state of the machine, then selects which SPL image to use. SDRAM init is
-> then done in SPL, so that it is updatable.
+> Since introduction of OF_UPSTREAM flag, U-Boot's dtc must be able
+> to compile Kernel's device tree.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Since kernel commit 7de129f5389b ("ARM: dts: stm32: stm32mp151a-prtt1l:
+> Fix QSPI configuration"), label relative path references has been
+> introduced. These label relative path references is not supported
+> by current U-Boot dtc version 1.5.0: (see mailing list discussion [1]).
+>
+> In order to support such label relative patch references
+> adds following commit from upstream DTC tree:
+>
+
+Maybe we need to rebase to the latest upstream dtc, I'm not sure pulling in
+a random set of bits from upstream is the right way to do things as it's
+brings things selectively which may bring along other issues.
+
+
+> commit 651410e54cb9 ("util: introduce xstrndup helper")
+> commit ec7986e682cf ("dtc: introduce label relative path references")
+>
+> [1] https://lore.kernel.org/all/20250115144428.GZ3476@bill-the-cat/T/
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
 > ---
 >
-> (no changes since v2)
+>  scripts/dtc/dtc-lexer.l  |  2 +-
+>  scripts/dtc/dtc-parser.y | 13 +++++++++++++
+>  scripts/dtc/livetree.c   | 33 ++++++++++++++++++++++++++++++---
+>  scripts/dtc/util.c       | 11 +++++++++++
+>  scripts/dtc/util.h       |  1 +
+>  5 files changed, 56 insertions(+), 4 deletions(-)
 >
-> Changes in v2:
-> - Rewrite help for VPL_ROCKCHIP_COMMON_BOARD
-> - Skip spl-boot-order.c for VPL (rather than modifying it)
+> diff --git a/scripts/dtc/dtc-lexer.l b/scripts/dtc/dtc-lexer.l
+> index d3694d6cf20..d34e1b04220 100644
+> --- a/scripts/dtc/dtc-lexer.l
+> +++ b/scripts/dtc/dtc-lexer.l
+> @@ -215,7 +215,7 @@ static void PRINTF(1, 2) lexical_error(const char
+> *fmt, ...);
+>                         return DT_REF;
+>                 }
 >
->  arch/arm/include/asm/spl.h               |   1 +
->  arch/arm/mach-rockchip/Kconfig           |  25 +++++-
->  arch/arm/mach-rockchip/Makefile          |  11 ++-
->  arch/arm/mach-rockchip/rk3399/Kconfig    |   9 ++
->  arch/arm/mach-rockchip/spl.c             |   3 +
->  arch/arm/mach-rockchip/tpl.c             |   2 +-
->  arch/arm/mach-rockchip/u-boot-vpl-v8.lds | 107 +++++++++++++++++++++++
->  arch/arm/mach-rockchip/vpl.c             |  53 +++++++++++
->  common/spl/Kconfig                       |   1 +
->  9 files changed, 205 insertions(+), 7 deletions(-)
->  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
->  create mode 100644 arch/arm/mach-rockchip/vpl.c
+> -<*>"&{/"{PATHCHAR}*\}  {       /* new-style path reference */
+> +<*>"&{"{PATHCHAR}*\}   {       /* new-style path reference */
+>                         yytext[yyleng-1] = '\0';
+>                         DPRINT("Ref: %s\n", yytext+2);
+>                         yylval.labelref = xstrdup(yytext+2);
+> diff --git a/scripts/dtc/dtc-parser.y b/scripts/dtc/dtc-parser.y
+> index 011a5b25539..b3b9c83873d 100644
+> --- a/scripts/dtc/dtc-parser.y
+> +++ b/scripts/dtc/dtc-parser.y
+> @@ -34,6 +34,12 @@ extern void yyerror(char const *s);
 >
-> diff --git a/arch/arm/include/asm/spl.h b/arch/arm/include/asm/spl.h
-> index ee79a19c05c..62844d64cab 100644
-> --- a/arch/arm/include/asm/spl.h
-> +++ b/arch/arm/include/asm/spl.h
-> @@ -30,6 +30,7 @@ enum {
->         BOOT_DEVICE_XIP,
->         BOOT_DEVICE_BOOTROM,
->         BOOT_DEVICE_SMH,
-> +       BOOT_DEVICE_VBE,
->         BOOT_DEVICE_NONE
->  };
->  #endif
-> diff --git a/arch/arm/mach-rockchip/Kconfig
-> b/arch/arm/mach-rockchip/Kconfig
-> index 4c515593718..58ba0e0468f 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -252,13 +252,15 @@ config ROCKCHIP_RK3399
->         select SPL_ATF
->         select SPL_BOARD_INIT if SPL
->         select SPL_LOAD_FIT
-> -       select SPL_CLK if SPL
-> +       select SPL_CLK if SPL && !VPL
->         select SPL_PINCTRL if SPL
->         select SPL_RAM if SPL
->         select SPL_REGMAP if SPL
->         select SPL_SYSCON if SPL
->         select TPL_HAVE_INIT_STACK if TPL
-> -       select SPL_SEPARATE_BSS
-> +       select VPL_HAVE_INIT_STACK if VPL
-> +       select SPL_SEPARATE_BSS if !VPL
-> +       select SPL_RAW_IMAGE_SUPPORT if VPL
->         select CLK
->         select FIT
->         select PINCTRL
-> @@ -268,6 +270,7 @@ config ROCKCHIP_RK3399
->         select DM_PMIC
->         select DM_REGULATOR_FIXED
->         select BOARD_LATE_INIT
-> +       select SUPPORT_VPL
->         imply ARMV8_CRYPTO
->         imply ARMV8_SET_SMPEN
->         imply BOOTSTD_FULL
-> @@ -296,13 +299,14 @@ config ROCKCHIP_RK3399
->         imply TPL_LIBCOMMON_SUPPORT
->         imply TPL_LIBGENERIC_SUPPORT
->         imply TPL_OF_CONTROL
-> -       imply TPL_RAM
-> +       imply TPL_RAM if !VPL
->         imply TPL_REGMAP
->         imply TPL_ROCKCHIP_COMMON_BOARD
->         imply TPL_SERIAL
->         imply TPL_SYS_MALLOC_SIMPLE
->         imply TPL_SYSCON
->         imply TPL_TINY_MEMSET
-> +       imply TPL_DM_MMC if VPL
->         help
->           The Rockchip RK3399 is a ARM-based SoC with a dual-core
-> Cortex-A72
->           and quad-core Cortex-A53.
-> @@ -457,7 +461,7 @@ config SPL_ROCKCHIP_BACK_TO_BROM
->
->  config TPL_ROCKCHIP_BACK_TO_BROM
->         bool "TPL returns to bootrom"
-> -       default y
-> +       default y if !VPL
->         select ROCKCHIP_BROM_HELPER if !ROCKCHIP_RK3066
->         select TPL_BOOTROM_SUPPORT
->         depends on TPL
-> @@ -498,6 +502,16 @@ config ROCKCHIP_EXTERNAL_TPL
->           Enable this option and build with ROCKCHIP_TPL=/path/to/ddr.bin
-> to
->           include the external TPL in the image built by binman.
->
-> +config VPL_ROCKCHIP_COMMON_BOARD
-> +       bool "Rockchip VPL common board file"
-> +       depends on VPL
-> +       default y
->
-
-This should be optional and opt in, at least to begin with. I honestly
-don't see what value VBE provides, and I've not seen you describe your
-vision for it anyway.
-
-
-> +       help
-> +         Enable the VPL phase for rockchip, which selects which SPL/U-Boot
-> +         will be used on each boot. With this flow, used by Verified Boot
-> for
-> +         Embedded (VBE), TPL is loaded by the boot ROM. Then TPL loads
-> VPL,
-> +         VPL loads SPL and SPL loads U-Boot.
+>  extern struct dt_info *parser_output;
+>  extern bool treesource_error;
 > +
->  config ROCKCHIP_BOOT_MODE_REG
->         hex "Rockchip boot mode flag register address"
->         help
-> @@ -589,6 +603,9 @@ config TPL_ROCKCHIP_EARLYRETURN_TO_BROM
->  config SPL_MMC
->         default y if !SPL_ROCKCHIP_BACK_TO_BROM
->
-> +config TPL_MMC
-> +       default y if !TPL_ROCKCHIP_BACK_TO_BROM
+> +static bool is_ref_relative(const char *ref)
+> +{
+> +       return ref[0] != '/' && strchr(&ref[1], '/');
+> +}
 > +
->  config ROCKCHIP_SPI_IMAGE
->         bool "Build a SPI image for rockchip"
->         help
-> diff --git a/arch/arm/mach-rockchip/Makefile
-> b/arch/arm/mach-rockchip/Makefile
-> index 5e7edc99cdc..c39de1f78bb 100644
-> --- a/arch/arm/mach-rockchip/Makefile
-> +++ b/arch/arm/mach-rockchip/Makefile
-> @@ -8,11 +8,16 @@
->  # inaccessible/protected memory (and the bootrom-helper assumes that
->  # the stack-pointer is valid before switching to the U-Boot stack).
->  obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
-> -obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o
-> spl_common.o
-> +obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl_common.o
-> +ifndef CONFIG_VPL
-> +obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl-boot-order.o
-> +endif
->  obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
->  obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o spl_common.o
->  obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
+>  %}
 >
-> +obj-vpl-$(CONFIG_VPL_ROCKCHIP_COMMON_BOARD) += vpl.o
+>  %union {
+> @@ -176,12 +182,17 @@ devicetree:
+>                          */
+>                         if (!($<flags>-1 & DTSF_PLUGIN))
+>                                 ERROR(&@2, "Label or path %s not found",
+> $1);
+> +                       else if (is_ref_relative($1))
+> +                               ERROR(&@2, "Label-relative reference %s
+> not supported in plugin", $1);
+>                         $$ = add_orphan_node(name_node(build_node(NULL,
+> NULL), ""), $2, $1);
+>                 }
+>         | devicetree DT_LABEL DT_REF nodedef
+>                 {
+>                         struct node *target = get_node_by_ref($1, $3);
+>
+> +                       if (($<flags>-1 & DTSF_PLUGIN) &&
+> is_ref_relative($3))
+> +                               ERROR(&@2, "Label-relative reference %s
+> not supported in plugin", $3);
 > +
->  obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
+>                         if (target) {
+>                                 add_label(&target->labels, $2);
+>                                 merge_nodes(target, $4);
+> @@ -197,6 +208,8 @@ devicetree:
+>                          * so $-1 is what we want (plugindecl)
+>                          */
+>                         if ($<flags>-1 & DTSF_PLUGIN) {
+> +                               if (is_ref_relative($2))
+> +                                       ERROR(&@2, "Label-relative
+> reference %s not supported in plugin", $2);
+>                                 add_orphan_node($1, $3, $2);
+>                         } else {
+>                                 struct node *target = get_node_by_ref($1,
+> $2);
+> diff --git a/scripts/dtc/livetree.c b/scripts/dtc/livetree.c
+> index ba06ef348be..4cfc2adccdd 100644
+> --- a/scripts/dtc/livetree.c
+> +++ b/scripts/dtc/livetree.c
+> @@ -583,12 +583,39 @@ struct node *get_node_by_phandle(struct node *tree,
+> cell_t phandle)
 >
->  ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
-> @@ -47,9 +52,11 @@ obj-$(CONFIG_ROCKCHIP_RK3588) += rk3588/
->  obj-$(CONFIG_ROCKCHIP_RV1108) += rv1108/
->  obj-$(CONFIG_ROCKCHIP_RV1126) += rv1126/
->
-> -# Clear out SPL objects, in case this is a TPL build
-> +# Clear out SPL objects, in case this is a TPL or VPL build
->  obj-spl-$(CONFIG_TPL_BUILD) =
-> +obj-spl-$(CONFIG_VPL_BUILD) =
->
->  # Now add SPL/TPL objects back into the main build
->  obj-$(CONFIG_XPL_BUILD) += $(obj-spl-y)
->  obj-$(CONFIG_TPL_BUILD) += $(obj-tpl-y)
-> +obj-$(CONFIG_VPL_BUILD) += $(obj-vpl-y)
-> diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig
-> b/arch/arm/mach-rockchip/rk3399/Kconfig
-> index 04a84e2f6a0..fc55b498111 100644
-> --- a/arch/arm/mach-rockchip/rk3399/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3399/Kconfig
-> @@ -164,6 +164,15 @@ config TPL_STACK
->  config TPL_TEXT_BASE
->          default 0xff8c2000
->
-> +config VPL_STACK
-> +        default 0xff8eff00
-> +
-> +config VPL_TEXT_BASE
-> +        default 0xff8c2000
-> +
-> +config VPL_LDSCRIPT
-> +       default "arch/arm/mach-rockchip/u-boot-vpl-v8.lds"
-> +
->  config SPL_STACK_R_ADDR
->         default 0x04000000 if !SPL_SHARES_INIT_SP_ADDR
->
-> diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-> index f4d29bbdd17..305373a161c 100644
-> --- a/arch/arm/mach-rockchip/spl.c
-> +++ b/arch/arm/mach-rockchip/spl.c
-> @@ -61,6 +61,9 @@ u32 spl_boot_device(void)
+>  struct node *get_node_by_ref(struct node *tree, const char *ref)
 >  {
->         u32 boot_device = BOOT_DEVICE_MMC1;
->
-> +       if (IS_ENABLED(CONFIG_VPL))
-> +               return BOOT_DEVICE_VBE;
+> +       struct node *target = tree;
+> +       const char *label = NULL, *path = NULL;
 > +
->  #if defined(CONFIG_TARGET_CHROMEBOOK_JERRY) || \
->                 defined(CONFIG_TARGET_CHROMEBIT_MICKEY) || \
->                 defined(CONFIG_TARGET_CHROMEBOOK_MINNIE) || \
-> diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
-> index 6b880f19f84..cc794a7dca2 100644
-> --- a/arch/arm/mach-rockchip/tpl.c
-> +++ b/arch/arm/mach-rockchip/tpl.c
-> @@ -84,5 +84,5 @@ int board_return_to_bootrom(struct spl_image_info
-> *spl_image,
->
->  u32 spl_boot_device(void)
->  {
-> -       return BOOT_DEVICE_BOOTROM;
-> +       return IS_ENABLED(CONFIG_VPL) ? BOOT_DEVICE_VBE :
-> BOOT_DEVICE_BOOTROM;
+>         if (streq(ref, "/"))
+>                 return tree;
+> -       else if (ref[0] == '/')
+> -               return get_node_by_path(tree, ref);
+> +
+> +       if (ref[0] == '/')
+> +               path = ref;
+>         else
+> -               return get_node_by_label(tree, ref);
+> +               label = ref;
+> +
+> +       if (label) {
+> +               const char *slash = strchr(label, '/');
+> +               char *buf = NULL;
+> +
+> +               if (slash) {
+> +                       buf = xstrndup(label, slash - label);
+> +                       label = buf;
+> +                       path = slash + 1;
+> +               }
+> +
+> +               target = get_node_by_label(tree, label);
+> +
+> +               free(buf);
+> +
+> +               if (!target)
+> +                       return NULL;
+> +       }
+> +
+> +       if (path)
+> +               target = get_node_by_path(target, path);
+> +
+> +       return target;
 >  }
-> diff --git a/arch/arm/mach-rockchip/u-boot-vpl-v8.lds
-> b/arch/arm/mach-rockchip/u-boot-vpl-v8.lds
-> new file mode 100644
-> index 00000000000..d2a5cf61581
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/u-boot-vpl-v8.lds
-> @@ -0,0 +1,107 @@
-> +// SPDX-License-Identifier:    GPL-2.0+
-> +/*
-> + * (C) Copyright 2019
-> + * Rockchip Electronics Co., Ltd
-> + * Kever Yang<kever.yang@rock-chips.com>
-> + *
-> + * (C) Copyright 2013
-> + * David Feng <fenghua@phytium.com.cn>
-> + *
-> + * (C) Copyright 2002
-> + * Gary Jennejohn, DENX Software Engineering, <garyj@denx.de>
-> + *
-> + * (C) Copyright 2010
-> + * Texas Instruments, <www.ti.com>
-> + *     Aneesh V <aneesh@ti.com>
-> + */
-> +
-> +OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64",
-> "elf64-littleaarch64")
-> +OUTPUT_ARCH(aarch64)
-> +ENTRY(_start)
-> +SECTIONS
+>
+>  cell_t get_node_phandle(struct node *root, struct node *node)
+> diff --git a/scripts/dtc/util.c b/scripts/dtc/util.c
+> index 23334d39bb6..25d4db1e8c2 100644
+> --- a/scripts/dtc/util.c
+> +++ b/scripts/dtc/util.c
+> @@ -46,6 +46,17 @@ char *xstrdup(const char *s)
+>         return d;
+>  }
+>
+> +char *xstrndup(const char *s, size_t n)
 > +{
-> +       . = 0x00000000;
+> +       size_t len = strnlen(s, n) + 1;
+> +       char *d = xmalloc(len);
 > +
-> +       .text : {
-> +               . = ALIGN(8);
-> +               __image_copy_start = .;
-> +               CPUDIR/start.o (.text*)
+> +       memcpy(d, s, len - 1);
+> +       d[len - 1] = '\0';
 > +
-> +               /* put relocation code all together */
-> +               //. = . + 0xc0;
-> +               _rcode_start = .;
-> +               *(.text.rcode)
-> +               *(.text.rdata)
-> +               _rcode_end = .;
-> +
-> +               *(.text*)
-> +       }
-> +
-> +       .rodata : {
-> +               . = ALIGN(8);
-> +               *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-> +       }
-> +
-> +       .data : {
-> +               . = ALIGN(8);
-> +               *(.data*)
-> +       }
-> +
-> +       __u_boot_list : {
-> +               . = ALIGN(8);
-> +               KEEP(*(SORT(__u_boot_list*)));
-> +       }
-> +
-> +       .image_copy_end : {
-> +               . = ALIGN(8);
-> +               *(.__image_copy_end)
-> +       }
-> +
-> +       .end : {
-> +               . = ALIGN(8);
-> +               *(.__end)
-> +       }
-> +
-> +       _image_binary_end = .;
-> +       _end = .;
-> +       __image_copy_end = .;
-> +
-> +       __bss_start = .;
-> +       .bss_start (NOLOAD) : {
-> +               . = ALIGN(8);
-> +               KEEP(*(.__bss_start));
-> +       }
-> +
-> +       .bss (NOLOAD) : {
-> +               *(.bss*)
-> +                . = ALIGN(8);
-> +       }
-> +
-> +       .bss_end (NOLOAD) : {
-> +               KEEP(*(.__bss_end));
-> +       }
-> +       __bss_end = .;
-> +       __bss_size = __bss_end - __bss_start;
-> +
-> +       /DISCARD/ : { *(.dynsym) }
-> +       /DISCARD/ : { *(.dynstr*) }
-> +       /DISCARD/ : { *(.dynamic*) }
-> +       /DISCARD/ : { *(.plt*) }
-> +       /DISCARD/ : { *(.interp*) }
-> +       /DISCARD/ : { *(.gnu*) }
+> +       return d;
 > +}
 > +
-> +#if defined(CONFIG_TPL_MAX_SIZE)
-> +ASSERT(__image_copy_end - __image_copy_start < (CONFIG_TPL_MAX_SIZE), \
-> +       "TPL image too big");
-> +#endif
-> +
-> +#if defined(CONFIG_TPL_BSS_MAX_SIZE)
-> +ASSERT(__bss_end - __bss_start < (CONFIG_TPL_BSS_MAX_SIZE), \
-> +       "TPL image BSS too big");
-> +#endif
-> +
-> +#if defined(CONFIG_TPL_MAX_FOOTPRINT)
-> +ASSERT(__bss_end - _start < (CONFIG_TPL_MAX_FOOTPRINT), \
-> +       "TPL image plus BSS too big");
-> +#endif
-> diff --git a/arch/arm/mach-rockchip/vpl.c b/arch/arm/mach-rockchip/vpl.c
-> new file mode 100644
-> index 00000000000..55a8dabc2da
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/vpl.c
-> @@ -0,0 +1,53 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2019 Rockchip Electronics Co., Ltd
-> + */
-> +
-> +#include <bootstage.h>
-> +#include <debug_uart.h>
-> +#include <dm.h>
-> +#include <hang.h>
-> +#include <init.h>
-> +#include <log.h>
-> +#include <ram.h>
-> +#include <spl.h>
-> +#include <version.h>
-> +#include <asm/io.h>
-> +#include <asm/arch-rockchip/bootrom.h>
-> +#include <linux/bitops.h>
-> +
-> +#if CONFIG_IS_ENABLED(BANNER_PRINT)
-> +#include <timestamp.h>
-> +#endif
-> +
-> +void board_init_f(ulong dummy)
-> +{
-> +       int ret;
-> +
-> +#if defined(CONFIG_DEBUG_UART) && defined(CONFIG_VPL_SERIAL)
-> +       /*
-> +        * Debug UART can be used from here if required:
-> +        *
-> +        * debug_uart_init();
-> +        * printch('a');
-> +        * printhex8(0x1234);
-> +        * printascii("string");
-> +        */
-> +       debug_uart_init();
-> +#ifdef CONFIG_VPL_BANNER_PRINT
-> +       printascii("\nU-Boot VPL " PLAIN_VERSION " (" U_BOOT_DATE " - "
-> +                  U_BOOT_TIME ")\n");
-> +#endif
-> +#endif
-> +
-> +       ret = spl_early_init();
-> +       if (ret) {
-> +               debug("spl_early_init() failed: %d\n", ret);
-> +               hang();
-> +       }
-> +}
-> +
-> +u32 spl_boot_device(void)
-> +{
-> +       return BOOT_DEVICE_VBE;
-> +}
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 85566385c21..4e89b17815d 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -572,6 +572,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
->         default 0x200 if ARCH_SOCFPGA || ARCH_AT91
->         default 0x300 if ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
->                          OMAP54XX || AM33XX || AM43XX || ARCH_K3
-> +       default 0x800 if ARCH_ROCKCHIP && VPL
->         default 0x4000 if ARCH_ROCKCHIP
->         default 0x822 if TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
->         help
+>  /* based in part from (3) vsnprintf */
+>  int xasprintf(char **strp, const char *fmt, ...)
+>  {
+> diff --git a/scripts/dtc/util.h b/scripts/dtc/util.h
+> index 211d584435d..23e32962385 100644
+> --- a/scripts/dtc/util.h
+> +++ b/scripts/dtc/util.h
+> @@ -70,6 +70,7 @@ static inline void *xrealloc(void *p, size_t len)
+>  }
+>
+>  extern char *xstrdup(const char *s);
+> +extern char *xstrndup(const char *s, size_t len);
+>
+>  extern int PRINTF(2, 3) xasprintf(char **strp, const char *fmt, ...);
+>  extern char *join_path(const char *path, const char *name);
 > --
-> 2.43.0
+> 2.25.1
 >
 >
