@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33093C36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB165C3600C
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B11381F6B;
-	Sat, 29 Mar 2025 16:07:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 642F08198B;
+	Sat, 29 Mar 2025 16:07:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="x0Rw0VSY";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="mz3tXNii";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07E9E805C8; Sat, 29 Mar 2025 16:07:10 +0100 (CET)
+ id 1BEF281ECA; Sat, 29 Mar 2025 16:07:15 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91B7881F0D
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:07:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87DC581F95
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743260826; bh=YuMKu2Ohfum+SybodP0MnevaG46fdjlxatSMn5VmTdA=;
- b=x0Rw0VSYH5rf6qpVe//q+cuxYFg9Qy58D4T3doehrTKJGPJ0tqNjDJA142Xgkv/X8Jqory6qX
- 0XJShJFZIiZgm7YqM+CsxhcNq6tBtjO5Sy+p4uvmduySXKxkUCN431nPzqCT0Di8COV8kyQPzY0
- 0kCxVUUxRfjuDQvcunwlL1h6Dd2mobYLfSVcoKpF3vsdf0gZ8Lnfii8AtLFYH/eZAco8MR5xNcY
- lCTpyEzmx4YBMf1ffpm6PCRgn5FaGz3S965h/LEte8PYMTwL0311iTJVIpwH00oJ0Tc9kz0fqfZ
- 5XpBvKNppnCZlPn/I/6Cs1ImFzQ6BLWuK0BB1IWJ9Ruw==
-X-Forward-Email-ID: 67e80c9721787eb134711fb6
+ t=1743260831; bh=od1y7kTay5O5A+ow9Y8ryk43jf+28WbhN3Sd/iOx/zk=;
+ b=mz3tXNiiZ56hruWtJNL0OFMM0d2ZljWRFPR40X+6xxgBhs1h6eGK5MMt+yUcITQ6awG1uFDqW
+ ldKJhAaCMqhG4SKyC40GhO5qgqj1ZCD6IiF+BdBGSCbxGAxxggCyP74L1H21S/qcTAl6yMIUHVk
+ I67kBesVUYnd2d2ZPCh1cwMTEP8zCMLDLTnpGWov0oVVDEzb1y02M7712CpunK7PaVSxXMs3ppY
+ ym6vJAnd8gXTctFroCd/iGyt/b+oIeJz6QHjRnnMiHmR3XJgKbv0JiAMfftXsjAkh26XFN2tnlh
+ GYfoA/b8+EjWItVG8l1BRC+b9m52K83CG2u5vWjXri4w==
+X-Forward-Email-ID: 67e80c9b21787eb134711fd4
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.0
@@ -47,10 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v4 09/10] rockchip: binman: Support use of crc32 for
- SPL_FIT_SIGNATURE
-Date: Sat, 29 Mar 2025 15:06:12 +0000
-Message-ID: <20250329150626.2879942-10-jonas@kwiboo.se>
+Subject: [PATCH v4 10/10] rockchip: Add SPL_PAD_TO Kconfig default value
+Date: Sat, 29 Mar 2025 15:06:13 +0000
+Message-ID: <20250329150626.2879942-11-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250329150626.2879942-1-jonas@kwiboo.se>
 References: <20250329150626.2879942-1-jonas@kwiboo.se>
@@ -72,106 +71,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use of SHA256 checksum validation on ARMv7 SoCs can be very time
-consuming compared to ARMv8 SoCs with Crypto Extensions.
+Almost all Rockchip boards use the same Kconfig value for SPL_PAD_TO,
+0x7f8000.
 
-Add support for use of the crc32 hash algo when SHA256 is not supported.
-Also use a HAS_HASH to simplify the ifdefs when no known hash algo is
-compiled.
+Add this value as a default value for ARCH_ROCKCHIP.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 Changes in v4:
 - New patch
----
- arch/arm/dts/rockchip-u-boot.dtsi | 30 ++++++++++++++++++++----------
- 1 file changed, 20 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 65b81bf58626..0dfd45bb9bed 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -19,10 +19,20 @@
- #define COMP	"none"
- #endif
+This patch does not drop SPL_PAD_TO from existing defconfigs that would
+be affected by this change, something that can wait until next "configs:
+Resync with savedefconfig".
+
+Following boards does not set a SPL_PAD_TO due to not using SPL:
+- elgin-rv1108_defconfig
+- evb-rk3128_defconfig
+- evb-rv1108_defconfig
+- geekbox_defconfig
+- sheep-rk3368_defconfig
+---
+ common/spl/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 97f542fcc8a5..322fc3cbdced 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -97,6 +97,7 @@ config SPL_MAX_SIZE
  
-+#if defined(CONFIG_SPL_SHA256)
-+#define HASH	"sha256"
-+#elif defined(CONFIG_SPL_CRC32)
-+#define HASH	"crc32"
-+#endif
-+
- #if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
- #define HAS_FIT
- #endif
- 
-+#if defined(CONFIG_SPL_FIT_SIGNATURE) && defined(HASH)
-+#define HAS_HASH
-+#endif
-+
- / {
- 	binman: binman {
- 		multiple-images;
-@@ -55,9 +65,9 @@
- 				u-boot-nodtb {
- 					compress = COMP;
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_HASH
- 				hash {
--					algo = "sha256";
-+					algo = HASH;
- 				};
- #endif
- 			};
-@@ -76,9 +86,9 @@
- 
- 				atf-bl31 {
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_HASH
- 				hash {
--					algo = "sha256";
-+					algo = HASH;
- 				};
- #endif
- 			};
-@@ -96,9 +106,9 @@
- 				tee-os {
- 					optional;
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_HASH
- 				hash {
--					algo = "sha256";
-+					algo = HASH;
- 				};
- #endif
- 			};
-@@ -114,9 +124,9 @@
- 
- 				tee-os {
- 				};
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_HASH
- 				hash {
--					algo = "sha256";
-+					algo = HASH;
- 				};
- #endif
- 			};
-@@ -126,9 +136,9 @@
- 				description = "fdt-NAME";
- 				compression = "none";
- 				type = "flat_dt";
--#ifdef CONFIG_SPL_FIT_SIGNATURE
-+#ifdef HAS_HASH
- 				hash {
--					algo = "sha256";
-+					algo = HASH;
- 				};
- #endif
- 			};
+ config SPL_PAD_TO
+ 	hex "Offset to which the SPL should be padded before appending the SPL payload"
++	default 0x7f8000 if ARCH_ROCKCHIP
+ 	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
+ 	default 0x11000 if ARCH_MX7 || (ARCH_MX6 && !MX6_OCRAM_256KB)
+ 	default 0x10000 if ARCH_KEYSTONE
 -- 
 2.49.0
 
