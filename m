@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C841C36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA6BC36008
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D1DD80F0E;
+	by phobos.denx.de (Postfix) with ESMTP id B5D0E81E06;
 	Sat, 29 Mar 2025 16:06:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hzU6YG5q";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="B7JDZyB+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC5BA81DCC; Sat, 29 Mar 2025 16:06:44 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id EF59380F0E; Sat, 29 Mar 2025 16:06:44 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CED780F0E
+ by phobos.denx.de (Postfix) with ESMTPS id 8B602810EA
  for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:06:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743260801; bh=DiPL602+OMb2ficq1Ein9zquT28v2n3Rc8WxoW1r11k=;
- b=hzU6YG5qqOvziBI1Gc5Lv7wZ2Ouc3L97CDLTkFVsCRRPCgvkwzOOT7XW4RqZXoxJwnew+lNa6
- Fag7EjZlnsblXKpq+ppv+OnKE78Xr1zjXr9TUe/s68e7J9xvmWG/MgCvPlfoobzOSIh2UWVQ7xt
- EcDZ5j+pLjekzcjvmafnOUa7OaMXHsGtBX7U49gxzynifQtD29ZCCDGLqMVJbZGTCwWwr8uXIJ4
- nS9s6aByCvZWDLyjc9YQtvZ7NSviPhtCTsf6Tk20LyEODMSMErVslEz6BiLIOTtjKk9SIXjbS0/
- Y2F1idB+UAYwU+28PVWfqnoAAllsdz5shN3sJZGsRQDA==
-X-Forward-Email-ID: 67e80c7f21787eb134711f07
+ t=1743260801; bh=+WbOPwdPvB1n2KjzOt/ng2yLC8OHAJOWoH03xzFt3tU=;
+ b=B7JDZyB+ujGap9QkcHl6ZFf+AheZw9UMuw2ZvFjfT4SKIawOqWAFqwNOVqrplOeJBqnhed3fi
+ AGUJ1m+8qoB/HaBmEn42V0Zjdnpf8I5mPWaGCSlM0rFLQY+1j82eexSfkcCX/G+qCF3eKt34Ybh
+ IDUyOv4iiolKyDMUpX4/u+rX1btuylBATqT1LRJkKd13eqqDPAcEJe3eCHDmp50A+q66fRJ0fgG
+ C9ameKKVyD0Ro3UJzfx8w2UaLRIUBrjMpm3sDVEyn3282xGfq5ygs1ShMcx86uNrWPmWIoAvwv+
+ V1fVbXbzXYTyh3Qmr8zu0brUUfPyNxCapLMxfVpqH9WA==
+X-Forward-Email-ID: 67e80c7c21787eb134711ef2
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 1.0.0
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -47,9 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v4 02/10] rockchip: binman: Factor out arch and compression
-Date: Sat, 29 Mar 2025 15:06:05 +0000
-Message-ID: <20250329150626.2879942-3-jonas@kwiboo.se>
+Subject: [PATCH v4 01/10] rockchip: binman: Correct the OS prop for U-Boot
+Date: Sat, 29 Mar 2025 15:06:04 +0000
+Message-ID: <20250329150626.2879942-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250329150626.2879942-1-jonas@kwiboo.se>
 References: <20250329150626.2879942-1-jonas@kwiboo.se>
@@ -73,116 +73,35 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Declare arch and compression at the top of the file to avoid needing
-ifdefs in every usage.
+The U-Boot image is currently being identified as an invalid OS in
+spl_fit_image_get_os() due to case sensitive compare.
 
-Add a few comments to help with the remaining #ifdefs.
+Use the correct lower-case value to fix this.
 
+Fixes: e0c0efff2a02 ("rockchip: Support building the all output files in binman")
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 Changes in v4:
+- Update commit message
 - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
 ---
- arch/arm/dts/rockchip-u-boot.dtsi | 44 +++++++++++++++----------------
- 1 file changed, 22 insertions(+), 22 deletions(-)
+ arch/arm/dts/rockchip-u-boot.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index e9ed1d4b5738..2b01dc660562 100644
+index c8c928c7e508..e9ed1d4b5738 100644
 --- a/arch/arm/dts/rockchip-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -5,6 +5,20 @@
- 
- #include <config.h>
- 
-+#ifdef CONFIG_ARM64
-+#define ARCH	"arm64"
-+#else
-+#define ARCH	"arm"
-+#endif
-+
-+#if defined(CONFIG_SPL_GZIP)
-+#define COMP	"gzip"
-+#elif defined(CONFIG_SPL_LZMA)
-+#define COMP	"lzma"
-+#else
-+#define COMP	"none"
-+#endif
-+
- / {
- 	binman: binman {
- 		multiple-images;
-@@ -51,26 +65,12 @@
+@@ -50,7 +50,7 @@
+ 				u-boot {
  					description = "U-Boot";
  					type = "standalone";
- 					os = "u-boot";
--#ifdef CONFIG_ARM64
--					arch = "arm64";
--#else
--					arch = "arm";
--#endif
--#if defined(CONFIG_SPL_GZIP)
--					compression = "gzip";
--#elif defined(CONFIG_SPL_LZMA)
--					compression = "lzma";
--#else
--					compression = "none";
--#endif
-+					arch = ARCH;
-+					compression = COMP;
- 					load = <CONFIG_TEXT_BASE>;
- 					entry = <CONFIG_TEXT_BASE>;
- 					u-boot-nodtb {
--#if defined(CONFIG_SPL_GZIP)
--					compress = "gzip";
--#elif defined(CONFIG_SPL_LZMA)
--					compress = "lzma";
--#endif
-+					compress = COMP;
- 					};
- #ifdef CONFIG_SPL_FIT_SIGNATURE
- 					hash {
-@@ -84,7 +84,7 @@
- 					fit,operation = "split-elf";
- 					description = "ARM Trusted Firmware";
- 					type = "firmware";
--					arch = "arm64";
-+					arch = ARCH;
- 					os = "arm-trusted-firmware";
- 					compression = "none";
- 					fit,load;
-@@ -103,7 +103,7 @@
- 					fit,operation = "split-elf";
- 					description = "TEE";
- 					type = "tee";
--					arch = "arm64";
-+					arch = ARCH;
- 					os = "tee";
- 					compression = "none";
- 					fit,load;
-@@ -119,11 +119,11 @@
- 					};
- #endif
- 				};
--#else
-+#else /* !CONFIG_ARM64 */
- 				op-tee {
- 					description = "OP-TEE";
- 					type = "tee";
--					arch = "arm";
-+					arch = ARCH;
- 					os = "tee";
- 					compression = "none";
- 					load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
-@@ -137,7 +137,7 @@
- 					};
- #endif
- 				};
--#endif
-+#endif /* CONFIG_ARM64 */
- 
- 				@fdt-SEQ {
- 					description = "fdt-NAME";
+-					os = "U-Boot";
++					os = "u-boot";
+ #ifdef CONFIG_ARM64
+ 					arch = "arm64";
+ #else
 -- 
 2.49.0
 
