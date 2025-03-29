@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF884C36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 16:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15F5C36008
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 16:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F24A780F0E;
-	Sat, 29 Mar 2025 17:37:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 589AB81D3B;
+	Sat, 29 Mar 2025 17:37:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mTPmavmx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pQ68XXsa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CF2C81DCD; Sat, 29 Mar 2025 17:37:02 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id EE0E081E3E; Sat, 29 Mar 2025 17:37:03 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 182E3805C8
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 17:37:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B650881951
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 17:37:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c173211feso1118985a34.1
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 09:37:00 -0700 (PDT)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3feaedb39e9so928697b6e.1
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 09:37:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743266219; x=1743871019; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743266220; x=1743871020; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W1LwFm2CpROIJ0P2/9d1YxEFvAZEP/SeXhErzu8/8S8=;
- b=mTPmavmxnH8IXFrTTQENl8sXZMRwZxc4zlBZJZ0ziDXnpfCxm/9eSEue0uJJ48pZTi
- +n1/mu3N8KH53MqYgL0iJOIlbuB8M2A/xD4hw4vq/XWQi3n07mTEnmzCYMwTvKsW5oCX
- ejKWUP73MvyeUfhPDom4Gu41lVSuewWpPpEaQ=
+ bh=5jMRvSEEr7/opDVURUKBoGAN/IysYxFI65UUpcOWtFQ=;
+ b=pQ68XXsadwBfaRSh7AOyPrGuedP96asoHr/h0UBhc5q15Z0RAtD6FrGHUzdfw0DZz0
+ ebkZdUoW8y6QDhjFmEM9CIyhpseHdPIWZUjZ1o4c8dovkqP+Is9jg83XsqD2Xx/tT5PL
+ IK5c+ngUKw5EhozsxXh76c4Hxm3AyHAG1TAtg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743266219; x=1743871019;
+ d=1e100.net; s=20230601; t=1743266220; x=1743871020;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W1LwFm2CpROIJ0P2/9d1YxEFvAZEP/SeXhErzu8/8S8=;
- b=Jl/oZrR1LmOnQdQMwXN8iS3aoYS60hfPMpnv+Bh6CzIV3SVyIK58LFFN0Vw+YYRxth
- P81BcCXUCrEfLERkSFX3iIws4m7yz74ybItEOaNyP9Z71QIb2X1V8mfkt5KnD38PUsOm
- CZUxng9wyoxC9e87Z2vuXtQoJEgk6RyM/ltBjHWQgYWq7VRINa1XXHRZrABX2/ZSTz+J
- hFW2wz8MTUZT/fnhVMjTvmClYfc/0GwJY0V4sLNM19hLuB/bjgPHzeBbdeH3bC1l0DvQ
- 6tCNHn54Dq+sYJg2U7A8Z9pSD0+5g5ZVtH9PnNLky34iEjqKMfUedzNCsDVdTqePvrlR
- kJ8w==
-X-Gm-Message-State: AOJu0Yymt2Hen6l2AkAGWiKDBlG6Z7oxkG9asgEdAWTrFI48WAZPJsZm
- xJ4hxrkhJNPwMa7+ivmKh8vm0ADHQmUFeKhQDT7lC8zYrSiLTwUPkut2JHKSm3c=
-X-Gm-Gg: ASbGncuUFGjoDAE98nl5p6Gd65okevYPzFDI8ldUuIhYskT+KI+fxGS1vbA+fkgNmun
- igNvCwX+O5by3+n9opVzWcHGRX7HWvtEwCbHJkabRnK0It35WmYcA6gcICZM5Lnbz/JtFLqjc8X
- OWzJax2wHc0RgmOHjwMldivsJwuuRsnskDibf6rajPK/yQnTab0FDdfJY5zyCxuPrXnF02N2K3I
- ETU9IHFagE+5wCT1qzqjqXj2X8dm123hPBRzGRGGHjxMw59q4gqQ7oACP4w/NtRpjCd7aikivUa
- qnq35DhB5a7zoGoTr79TCyYUllY6OR5RgpeOH+446PZdA270HO0Sv9qBr72aSCn0HCPErIBVy4F
- d7qm1
-X-Google-Smtp-Source: AGHT+IGjnHyte+zWUfxi1QcSyOdBVWqFt81JFIaRlHkzzPH0gL6PaqASMysag4kl8HA6+2tVQWfRtA==
-X-Received: by 2002:a05:6830:4903:b0:72b:9de0:891 with SMTP id
- 46e09a7af769-72c637c49d1mr2391182a34.13.1743266218788; 
- Sat, 29 Mar 2025 09:36:58 -0700 (PDT)
+ bh=5jMRvSEEr7/opDVURUKBoGAN/IysYxFI65UUpcOWtFQ=;
+ b=vrXBCZt0OKUFLiy8N/QMRSJKl8p6jDp1DFKVaLDt5EinuoT9KYg1cGeU9ucasOslRj
+ S13/N/gUsndu2B0bO0MyXNUVkXHLTC6mz/RqonTVm0SON+TtGsBJh/HgqnFnkr3jqADi
+ NvCn6JqtgJdO+76eidBrSAOczzAs3yBTePWJnMeuYM1YUboOO5MgKiAUyyGxnr5atWoy
+ 3LKikTsi4ZqzmF4OQEfqWd6H3MLebpGlXayazy9RDTouloH1VQlr34xfceRg713FBtQS
+ IRv1k4CKysEfsHaDF+vxv9vW1MbA3JmZJj+k/x/hPLw4RhBeF0b+tfeyJexQwdOMdnbL
+ CLFA==
+X-Gm-Message-State: AOJu0YxcSANWYn2F118H0+Rhw9nHRqXgXwv/HwdwfDsf2CgkX9tD5xt+
+ V5Mu9DB/+jstHqVezsp7WC+ukAN5myadBtNHcgJoDUOvvVVbSPgub74FoMCjZ//4IPxaA84vRIr
+ p
+X-Gm-Gg: ASbGncs7RuoUWiiyFglQ6bjmuvFZLc+CTycAwBtopfopJUpRy7nlzSPvVfqjt0UJtR4
+ JLTGmLmfE6CsXjK9/lylyMfc4tByGWvf4jbYPKQMNZ6l2bh4Bvi6hBRhGqyEVi+ah/ws4dJ0EOB
+ XwbZsXe+FHBf+V1h6cTRkdqs9JP6m2FXvyDWb+kPiQLcP9wo2+GlXHiqjhfSsrigPYjJXVk19RR
+ uupRXhBR+gvXu6Z0U1xBucp2h2kJCiBobRmF14hHeucvrCtQsbcnT2zuDCS93zr5iUd135ljzw0
+ 7Gaexf6gzlar9VO0y6mH4Se3sjbzxan/N+fnzzA+SfJjZ57MwnFdhpdaQ4fo6CGYEgn6THREx+W
+ gkg49
+X-Google-Smtp-Source: AGHT+IFas674u4BxyyjGqfZ6BsYNLNPNMzHJ37Lzpk/LQL64YkxjFx6pP1BobH2wjyK0FMMbRRqDmw==
+X-Received: by 2002:a05:6808:2187:b0:3fa:1ed7:f7c3 with SMTP id
+ 5614622812f47-3ff0f610f86mr1686211b6e.29.1743266220451; 
+ Sat, 29 Mar 2025 09:37:00 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c86a91391esm925094fac.46.2025.03.29.09.36.57
+ 586e51a60fabf-2c86a91391esm925094fac.46.2025.03.29.09.36.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Mar 2025 09:36:57 -0700 (PDT)
+ Sat, 29 Mar 2025 09:36:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Kory Maincent <kory.maincent@bootlin.com>
-Cc: Robert Nelson <robertcnelson@gmail.com>, thomas.petazzoni@bootlin.com, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250327103113.417015-1-kory.maincent@bootlin.com>
-References: <20250327103113.417015-1-kory.maincent@bootlin.com>
-Subject: Re: [PATCH] board: ti: am335x: Fix selection of BeagleBone Green
-Message-Id: <174326621704.1009412.12296748919725068750.b4-ty@konsulko.com>
-Date: Sat, 29 Mar 2025 10:36:57 -0600
+To: Minda Chen <minda.chen@starfivetech.com>, 
+ Hal Feng <hal.feng@starfivetech.com>, E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250327175550.529248-1-e@freeshell.de>
+References: <20250327175550.529248-1-e@freeshell.de>
+Subject: Re: [PATCH v1] board: starfive: Remove compatible boards Milk-V
+ Mars CM and Mars CM Lite
+Message-Id: <174326621894.1009412.13633750639742736500.b4-ty@konsulko.com>
+Date: Sat, 29 Mar 2025 10:36:58 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,22 +98,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Mar 2025 11:31:12 +0100, Kory Maincent wrote:
+On Thu, 27 Mar 2025 10:55:08 -0700, E Shattow wrote:
 
-> The BeagleBone Green board is a revision of the BoneBlack board.
-> Having BeagleBone Black devicetree listed before BeagleBone Green will
-> select always the BeagleBone Black devicetree following the functioning of
-> board_fit_config_name_match().
+> Remove leftover code from Milk-V Mars CM and Mars CM Lite boards that do
+> not exist in upstream Linux Kernel devicetree-rebasing. These will be re-
+> introduced when submitted upstream for a future U-Boot release. Users of
+> these boards should use the previous stable release of U-Boot until then.
 > 
-> Fix it by changing the test condition and selecting BoneBlack board only
-> if it is not a revision of this board.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] board: ti: am335x: Fix selection of BeagleBone Green
-      commit: f364ea8c2571540c10ecc9fab456760936eb7fc6
+[1/1] board: starfive: Remove compatible boards Milk-V Mars CM and Mars CM Lite
+      commit: 870c4d105a634c140328a405b6ffd1c7b1630978
 -- 
 Tom
 
