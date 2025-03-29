@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090EFC36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:07:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 696E1C3600C
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:07:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B02AD81F0B;
-	Sat, 29 Mar 2025 16:07:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20214809A5;
+	Sat, 29 Mar 2025 16:07:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oazmWBEy";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KdyiwMSL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35DD681F00; Sat, 29 Mar 2025 16:07:00 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 2A762809A5; Sat, 29 Mar 2025 16:07:05 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71DCB805C8
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:06:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B71BD805C8
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743260815; bh=9NwLhSfLqZaud9ukDQG/kH6wOv2hlNwmthVyZ7LEplw=;
- b=oazmWBEythCFxiwlBPOu1SxLEkH4evXkG5D8+sgjIaq/lH81DOij1IC/Qs0WLfwdnGywgfCqF
- lNKngAJZsg+meABnuJQnAVVGRJERtyEcYH+g1cIFmhVT1sWHZd8p0kgNREL9tlOnXCUG7Uok67c
- rjLK+OCccwa75BqUbis+NtYj7YWj4ZtnC+GNEa0vE5yI1qP6N9ivQGhcjIsKS0KKSAX+nDunSKR
- eNPGBsNAc/0t6F4m9CFXTA+FECq1GeHswMizLzQ2PN4P9LUBKjdCaLgOH/n00HtnsmzvwuCJsZs
- 9iFrQ+9MAIij/L5fZ4FxLOSJOEgl3EGG5RfsOgaK157w==
-X-Forward-Email-ID: 67e80c8d21787eb134711f77
+ t=1743260821; bh=laBcCxVL/q2PEylrEChY8jEOgr2VM+36I787y/8VsXw=;
+ b=KdyiwMSLeInVg9O3VHERBUIJNAuwqD1obKtLCqQQeRjEd2UVeQyOPighwpMc3pvSqUpjy8KAU
+ 0uVvh01h8NVtYu28fi/IEavkIG/3RGRMcVSLvtuJYE3RYvCohI0AqGbXgebi2zJfyDN4VgGY8a+
+ Jo8FlM0FG1ZorwZhXTKN53Qu2nXgXhmLt3i5OtYGO/FIkWhd4+6TP+J1zPHVmfXcDn3hH36gkTZ
+ KNuHsqKvuL30hGEucO+hsc0Ek2UwBtTOR8Lv/Rhs5LuHJ/tdE29D57dGJ3MemlgDkI5PXnkfoFT
+ f4zrmM0HmtskdmKOqpDEgk5NlbRF+SMFr0dcaDSguoFg==
+X-Forward-Email-ID: 67e80c9421787eb134711fa1
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.0.0
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -47,10 +47,10 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v4 06/10] rockchip: binman: Use the FIT template in the SPI
- image
-Date: Sat, 29 Mar 2025 15:06:09 +0000
-Message-ID: <20250329150626.2879942-7-jonas@kwiboo.se>
+Subject: [PATCH v4 08/10] rockchip: binman: Use the skip-at-start prop in
+ simple-bin image
+Date: Sat, 29 Mar 2025 15:06:11 +0000
+Message-ID: <20250329150626.2879942-9-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250329150626.2879942-1-jonas@kwiboo.se>
 References: <20250329150626.2879942-1-jonas@kwiboo.se>
@@ -74,42 +74,48 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-At present simple-bin-spi relies on the u-boot.itb file created by the
-simple-bin image. Use the template to avoid this, since Binman may
-change to process images in parallel in the future.
+The simple-bin image is normally written to MMC media at block 64, which
+is a 32K offset from start of storage media.
+
+Set the skip-at-start property to 0x8000 (32 KiB) so that fdtmap and
+other embedded binman symbols in the output binary is referencing image
+offsets correctly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 Changes in v4:
-- Drop filename for the SPI FIT
+- Drop defconfig changes
 - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
 
-Changes in v3:
-- Keep the filename for the SPI FIT
-
-This is an alternative for the issue reported and fixed in [1] and [2].
-
-[1] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
-[2] https://lore.kernel.org/u-boot/20250220-has_rom-u-boot-rockchip-spi-bin-v2-3-d1768ee87808@cherry.de/
+Changes in v2:
+- Move this patch to the end of the series
+- Drop 0x8000 offset for SPI
 ---
- arch/arm/dts/rockchip-u-boot.dtsi | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ arch/arm/dts/rockchip-u-boot.dtsi | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index f860bfc1ba72..73149b2d8bdd 100644
+index fb38b7b80c43..65b81bf58626 100644
 --- a/arch/arm/dts/rockchip-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -207,8 +207,7 @@
+@@ -154,6 +154,7 @@
+ 	simple-bin {
+ 		filename = "u-boot-rockchip.bin";
+ 		pad-byte = <0xff>;
++		skip-at-start = <0x8000>;
  
- #ifdef HAS_FIT
- 		fit {
--			type = "blob";
--			filename = "u-boot.itb";
-+			insert-template = <&fit_template>;
+ 		mkimage {
+ 			filename = "idbloader.img";
+@@ -178,7 +179,7 @@
  #else
  		u-boot-img {
  #endif
+-			offset = <CONFIG_SPL_PAD_TO>;
++			offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
+ 		};
+ 
+ 		fdtmap {
 -- 
 2.49.0
 
