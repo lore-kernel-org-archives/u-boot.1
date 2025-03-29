@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F5FC36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 12:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE57C36008
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 12:48:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52F25809A5;
-	Sat, 29 Mar 2025 13:48:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6E02805C8;
+	Sat, 29 Mar 2025 13:48:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="P7ob0OQ2";
+	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="RZFWLGHc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A2D2809A5; Sat, 29 Mar 2025 13:48:10 +0100 (CET)
-Received: from mail.per1cycle.org (unknown [IPv6:2a01:4f8:c013:8d4e::1])
+ id 06EAD81951; Sat, 29 Mar 2025 13:48:15 +0100 (CET)
+Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDAE58059D
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 13:48:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A3008059D
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 13:48:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 676B93F840; Sat, 29 Mar 2025 12:47:58 +0000 (UTC)
+ with ESMTPSA id 7DF9A3FAF8; Sat, 29 Mar 2025 12:48:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
- s=dkim; t=1743252485;
+ s=dkim; t=1743252489;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=KxN6gxjPl2REsWmk52pMutqWdkQpeuEjncWCF/NUGNg=;
- b=P7ob0OQ2TpeTv4AbjJzJVgBAtYEG1+P93NhCsmGonHSYZhxU7HmYUn5lPPX9J/b3edRelv
- jAGmIEma/WqoeszEUjHmnb+hsGcjRdrKA3C/NL1k2kydRc778QqLWCdeuCPlBo8fxc5U/Z
- WQA5UZ2qleuFUNKr7yXtxcHx+sLW+142B5g+qLmZptXtLCHZFfeDtVONW83po4BFm2pAfO
- OicQGPT46qlmnkSyyMdbhOPPwuCtcYvip1OFVGZ/9+8OKFRdIqvlG1rGGf5XXil+bRrk5p
- w+9huVeMVo9vCiX3Z1lvIUG2jx2ihHNrpiZZJ/YpdPAAkXi4LYpfM+yqLGa4hw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=sJzxQCqJU6MBD0w+BWJXcms0XH9yC+AOulprQAesu6c=;
+ b=RZFWLGHc90PTIwjqgW3G12mG8KKe6t8SQ3mjUx+3oaDGrg8M/KekreByNAWiF3PGCevVms
+ cUzpygKjVfMd9EDbS/jcLp1APE/2La2/+Bhj+sXQy1V4HH3PYV026lGOyKd8q74avXg/n8
+ PUR/mUo7Ikd7yZnL1oAqND7R2xDVv19APpRrAFJZn++hkwrj1UaPWL9WwT+6+E9j/Htt/g
+ gjRKqckVbCT8OixexyUpPzfROZYUR809AcgivxBMkTXlob6NRDhVyfznU9uyqCSk916EVz
+ WnEj4wl80jXxsRfBBlcHDlY00wDziMv9e3Ndw6k9+RDRzNaT8aCYReQ/Hf3h1Q==
 From: Huan Zhou <me@per1cycle.org>
-Subject: [PATCH 0/2] riscv: pinctrl: k1: Add pinctrl support for bannanapi-f3
-Date: Sat, 29 Mar 2025 20:47:58 +0800
-Message-Id: <20250329-pinctrl-k1-v1-0-3083d7057989@per1cycle.org>
+Date: Sat, 29 Mar 2025 20:47:59 +0800
+Subject: [PATCH 1/2] riscv: dts: k1: add pinctrl property in dts.
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAP7r52cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDI0NT3YLMvOSSohzdbEPdRHMDE9OkpBTL1CQzJaCGgqLUtMwKsGHRsbW
- 1AKIiCJxcAAAA
-X-Change-ID: 20250215-pinctrl-k1-a7045bbd9eb6
+Message-Id: <20250329-pinctrl-k1-v1-1-3083d7057989@per1cycle.org>
+References: <20250329-pinctrl-k1-v1-0-3083d7057989@per1cycle.org>
+In-Reply-To: <20250329-pinctrl-k1-v1-0-3083d7057989@per1cycle.org>
 To: u-boot <u-boot@lists.denx.de>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Tom Rini <trini@konsulko.com>, Yixun Lan <dlan@gentoo.org>, 
  Huan Zhou <me@per1cycle.org>, Huan Zhou <pericycle.cc@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1743252484; l=757;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1743252484; l=2081;
  i=me@per1cycle.org; s=20241231; h=from:subject:message-id;
- bh=YKrPXvs0hZT2yGlV6LF3rdm218qupubJ/D+Ggoin5Mg=;
- b=QPi0UtUjL3AqPuwgj6ppwXAXaSuE6G1iGLmnW2UOWysektprwoVPQYVKQi9355C0qxcLfbKyc
- OTITSoZGh47BzT/CQhFltes7stsGWpZ8S1wE5K2Idse5V5CQoRgpMaE
+ bh=bEAuLnpu5S1BO39Kqkim+uMbKSfPHs3/8y2vKQ8u7pA=;
+ b=++jmFPVC84fvwxOAXU1rqyB+6JiLQvcKKwjZBvTtmndKoQOP9HES+iOnNzPvPo36oRKU0O/bo
+ aE6vhBXtDjtC2DMGG4CTgB1Naq+xpw4C/9K5O+hT0l0VbFP+JfBedde
 X-Developer-Key: i=me@per1cycle.org; a=ed25519;
  pk=LfN2kXe1uCRoaEzAJ8quXuPIH4MiEnZHOCRZwGytJwE=
 X-Last-TLS-Session-Version: TLSv1.3
@@ -77,28 +76,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The series add basic support for pinctrl for bananapi-f3
-which reuse pinctrl-single as its driver.
-
-boot log:
-https://gist.github.com/per1cycle/27aa0d4de732e96eeeb842e75168e0c8
+Add pinctrl node in device tree and update
+in bananapi f3 dts.
 
 Signed-off-by: Huan Zhou <me@per1cycle.org>
 ---
-Huan Zhou (2):
-      riscv: dts: k1: add pinctrl property in dts.
-      config: Enable pinctrl in bananapi-f3
-
  arch/riscv/dts/k1-bananapi-f3.dts |  3 +++
  arch/riscv/dts/k1-pinctrl.dtsi    | 19 +++++++++++++++++++
  arch/riscv/dts/k1.dtsi            |  8 +++++++-
- configs/bananapi-f3_defconfig     |  2 ++
- 4 files changed, 31 insertions(+), 1 deletion(-)
----
-base-commit: 482aaebcabab35d2867e040d08fbdca6bbbe7a0c
-change-id: 20250215-pinctrl-k1-a7045bbd9eb6
+ 3 files changed, 29 insertions(+), 1 deletion(-)
 
-Best regards,
+diff --git a/arch/riscv/dts/k1-bananapi-f3.dts b/arch/riscv/dts/k1-bananapi-f3.dts
+index d2486f70906143ad1f2bde753f12dea5bab2e5ab..6b5b83bcdb9ae4553c5fb63a7a9684f5d47a456e 100644
+--- a/arch/riscv/dts/k1-bananapi-f3.dts
++++ b/arch/riscv/dts/k1-bananapi-f3.dts
+@@ -5,6 +5,7 @@
+ 
+ #include "k1.dtsi"
+ #include "binman.dtsi"
++#include "k1-pinctrl.dtsi"
+ 
+ / {
+ 	model = "Banana Pi BPI-F3";
+@@ -21,5 +22,7 @@
+ };
+ 
+ &uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_2_cfg>;
+ 	status = "okay";
+ };
+diff --git a/arch/riscv/dts/k1-pinctrl.dtsi b/arch/riscv/dts/k1-pinctrl.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..14e7096fbcfdc88a9f9989993fdd2aca6de7462e
+--- /dev/null
++++ b/arch/riscv/dts/k1-pinctrl.dtsi
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++/*
++ * Copyright (C) 2022 Spacemit Inc.
++ * Copyright (C) 2025 Yixun Lan <dlan@gentoo.org>
++ */
++
++#define K1_PADCONF(pin, func) (((pin) << 16) | (func))
++
++&pinctrl {
++	uart0_2_cfg: uart0-2-cfg {
++		uart0-2-pins {
++			pinmux = <K1_PADCONF(68, 2)>,
++				 <K1_PADCONF(69, 2)>;
++
++			bias-pull-up = <0>;
++			drive-strength = <32>;
++		};
++	};
++};
+diff --git a/arch/riscv/dts/k1.dtsi b/arch/riscv/dts/k1.dtsi
+index 514be453dbaf6713cdf4ad5a5d653488297ebb83..4626bdd48b2a5dfc3a29ffcdbcec608b4a2573ac 100644
+--- a/arch/riscv/dts/k1.dtsi
++++ b/arch/riscv/dts/k1.dtsi
+@@ -455,5 +455,11 @@
+ 			reg-io-width = <4>;
+ 			status = "reserved"; /* for TEE usage */
+ 		};
++
++		pinctrl: pinctrl@d401e000 {
++			compatible = "spacemit,k1-pinctrl", "pinctrl-single";
++			reg = <0x0 0xd401e000 0x0 0x400>;
++			pinctrl-single,register-width = <32>;
++		};
+ 	};
+-};
+\ No newline at end of file
++};
+
 -- 
-Huan Zhou <me@per1cycle.org>
+2.39.5
 
