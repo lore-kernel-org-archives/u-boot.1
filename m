@@ -4,62 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81B8C36011
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 12:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7C6C36008
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 180A181E5A;
-	Sat, 29 Mar 2025 13:48:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
+	by phobos.denx.de (Postfix) with ESMTP id 154228171B;
+	Sat, 29 Mar 2025 16:06:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="G2OLnU+q";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IampmW5X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1822381DCD; Sat, 29 Mar 2025 13:48:17 +0100 (CET)
-Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
+ id EA6DF8171B; Sat, 29 Mar 2025 16:06:42 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E24C8059D
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 13:48:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15EDF805C8
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:06:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=per1cycle.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 603AF3FB33; Sat, 29 Mar 2025 12:48:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
- s=dkim; t=1743252494;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xqsLQpnIN3vVdy1eHsDOvk6k9CtY/YJWIDI2BiI1dzQ=;
- b=G2OLnU+qqoo0UvSxoX3T/54DtO6AKSOYzgCjzmtBe6pQlbDSif5z8Ds15WJlBF9VTOuh5T
- CftjFuCPY2VC4dL3HC0L3UE+OH+lyaSh+YTtecWzjmo3OOJhjjCXD9Y9T3HCP2Uydlzb1k
- nFZ8DAbK9xTnd7fragBbv871AWHRL/yZe7QDTh8JTZLNocY7foQhzryEPWaZyDX6RRzm4l
- kRBmUeF1LFfC/l1nxIcmfgxEx1SAyz6+QuieS2RfCyIobZ8cal/QjZBqNt4DvcPF3CZGz7
- UNpdvhJ0ZPQA9UfEMWzLgKPWTWlZEEpvisW+SnQy9iZo+IMdju/yMvEdZwZ1HQ==
-From: Huan Zhou <me@per1cycle.org>
-Date: Sat, 29 Mar 2025 20:48:00 +0800
-Subject: [PATCH 2/2] config: Enable pinctrl in bananapi-f3
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=1dca=WR=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1743260798;
+ bh=p8lkc5uAE5Etyx8C8YSqvw+/bafBDTFN8I82kbL6CAw=;
+ b=IampmW5XODegcHI3co0kYRTwhw1BobwfhOnmco1ltBwLTtDhu3tX9oA78GLC1BUnrmux3i8pE
+ AfrpaxCz37GlRsop9i8QHJlEBj+RX0+1+pyW+cuxFdszICQKJl1SjA6RR5Omd8YmErcDR0OWPvl
+ 2gbA1OECxHZLI3FXbd+OsDItc3GckVVGgbVo5xi1UlXMDS1kukV95SyI1qIxuPdzJRNNkAVBAvq
+ R+vblPQfcJkfX3WVRQmJfY0PAMwLkhaN+g4Pioj/h3p7JDFkvGVtQwa0a3kBJ7Mewgd5Oii+azd
+ M7nYqz4ciwa40G07rpnKK6TFubeA/K4l/uTwP9s5I0Xg==
+X-Forward-Email-ID: 67e80c7821787eb134711edd
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v4 00/10] rockchip: binman: Use a template for FIT and other
+ improvements
+Date: Sat, 29 Mar 2025 15:06:03 +0000
+Message-ID: <20250329150626.2879942-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250329-pinctrl-k1-v1-2-3083d7057989@per1cycle.org>
-References: <20250329-pinctrl-k1-v1-0-3083d7057989@per1cycle.org>
-In-Reply-To: <20250329-pinctrl-k1-v1-0-3083d7057989@per1cycle.org>
-To: u-boot <u-boot@lists.denx.de>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Yixun Lan <dlan@gentoo.org>, 
- Huan Zhou <me@per1cycle.org>, Huan Zhou <pericycle.cc@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1743252484; l=625;
- i=me@per1cycle.org; s=20241231; h=from:subject:message-id;
- bh=YNeTY80ecGx2zxEHAw9/7mScc39LE+REIPNiyHBip4Y=;
- b=lB9l7/QndxtuRDkkaQMA2EoimQDgKSXm2uChofzpGwCRP3mt8+1SYQpCFOaPi+fO6XwkMeda7
- xywDPz7eu2/C/q3tC+uWJsWKGYN9VHxfRiLicWdmUvjZJJLi9Cppaah
-X-Developer-Key: i=me@per1cycle.org; a=ed25519;
- pk=LfN2kXe1uCRoaEzAJ8quXuPIH4MiEnZHOCRZwGytJwE=
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,25 +70,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add pinctrl support in bananapi-f3 platform
+This series split out generic Rockchip binman image related commits from
+Simons "VBE serial part H: Implement VBE on Rockchip RK3399" [1] series.
 
-Signed-off-by: Huan Zhou <me@per1cycle.org>
----
- configs/bananapi-f3_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+These are generic binman image patches fixing an existing issue [2][3]
+and that other series [4] already depends on.
 
-diff --git a/configs/bananapi-f3_defconfig b/configs/bananapi-f3_defconfig
-index 0f12db3db848badda1fc7192aeb0190ac22a269d..12aa67d4f0de580736c21fc3764125ce17726d1c 100644
---- a/configs/bananapi-f3_defconfig
-+++ b/configs/bananapi-f3_defconfig
-@@ -18,3 +18,5 @@ CONFIG_HUSH_PARSER=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_NS16550=y
- CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_SINGLE=y
-\ No newline at end of file
+They are being split out to ease continued work for other U-Boot
+developers as the main parts of the VBE series have not yet been tested
+using the mainline U-Boot tree, so cannot yet be seen as ready.
+
+Changes in v4:
+- Patch 1-7 matches corresponding patch in Simons series, possible with
+  minor updates in commit messages.
+- Patch 8 drops changes to defconfig-files.
+- Patch 9 adds support for using crc32 as checksum algo.
+- Patch 10 adds a default value for SPL_PAD_TO.
+
+This series holds off on any defconfig changes to let it be handled by
+next "configs: Resync with savedefconfig". Changing SPL_PAD_TO to be
+storage media relative has also been held off and is something that can
+be picked up in a series for a future release after this has landed in a
+release.
+
+See [5] for a copy of this series on top of patch 1-2 from [3]. This
+series does not depend on those two patches, but are related for a full
+cleanup of use of u-boot.itb in Rockchip binman images.
+
+[1] https://lore.kernel.org/u-boot/20250328153522.3555472-1-sjg@chromium.org/
+[2] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
+[3] https://lore.kernel.org/u-boot/20250220-has_rom-u-boot-rockchip-spi-bin-v2-3-d1768ee87808@cherry.de/
+[4] https://lore.kernel.org/u-boot/20250220231358.432367-1-jonas@kwiboo.se/
+[5] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/binman-image-refactor
+
+Jonas Karlman (2):
+  rockchip: binman: Support use of crc32 for SPL_FIT_SIGNATURE
+  rockchip: Add SPL_PAD_TO Kconfig default value
+
+Simon Glass (8):
+  rockchip: binman: Correct the OS prop for U-Boot
+  rockchip: binman: Factor out arch and compression
+  rockchip: binman: Add an fdtmap
+  rockchip: binman: Create a template for the FIT
+  rockchip: binman: Un-indent the FIT template
+  rockchip: binman: Use the FIT template in the SPI image
+  rockchip: binman: Include a compatible string in each configuration
+  rockchip: binman: Use the skip-at-start prop in simple-bin image
+
+ arch/arm/dts/rockchip-u-boot.dtsi | 296 ++++++++++++++++--------------
+ common/spl/Kconfig                |   1 +
+ 2 files changed, 162 insertions(+), 135 deletions(-)
 
 -- 
-2.39.5
+2.49.0
 
