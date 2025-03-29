@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24489C36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 10:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4FCC36008
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 12:02:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D7158059D;
-	Sat, 29 Mar 2025 11:04:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D5AA1800C1;
+	Sat, 29 Mar 2025 13:02:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="j2dVARzB";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cd5eM+bg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E995E805C8; Sat, 29 Mar 2025 11:04:45 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5753D80079; Sat, 29 Mar 2025 13:02:30 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81B7E800C1
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 11:04:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABCE4800C1
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 13:02:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43ce70f9afbso30472985e9.0
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 03:04:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743242683; x=1743847483;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=570WfIrvyUKK2usJwocQhJlrbZS25/e8Iro4e8NBuIs=;
- b=j2dVARzBHIAbSXQUL7gVoPmxWCNpI2GBfcGlv+LFovk1y2dmRn+t4v+xpCT0GQsXqj
- YyI78SG0tIazefmBOn2S9KUf3M0J15UuyIfEVtKf+F0eKJXUGq/ISQtjxiXKjRC+Z8FR
- hjkg1d8KAa2bpAEUZw9CaVYlwrebdfAgO4hxHe14BGEc27724sq1r+GAGMD8zK+XlQ3M
- rLJYIpvAcKfOAj6IqCZUWxdU2BpvoFLWuRQaUnYsQ6AMLleqNKlp9J+MIPm8eKU+MRYw
- f7UQ4VVPaP0HduPFHU0sdjW3PzSVRYLoFcS/KJmeZ2mBsGrh+X1gIF7BjiOqe428Um9P
- B/mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743242683; x=1743847483;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=570WfIrvyUKK2usJwocQhJlrbZS25/e8Iro4e8NBuIs=;
- b=EFwj+p2d5DzwrfFlPhTblSTDPffz+EmdJSILH/h/epMcGLdvBQ1mRTklb34h3cWJfN
- B2sCcs9SYEnIVyg6r2tVMBssFewZSpJYLqFFq9UEgTXLuOuGkcyzvKnVnlj7dlbRIm7w
- IKyyC+QvoZLD0xMFFnCTziFNj6BsR6bQF6MpFgowX+aIQmVLPl3HEaoL8v7kHFxJq3aU
- Ds2CgxuPdALEKQXy2czCgE5aFg+QUtVY0ZmdZ92mJuWyezXF3l5RtuPA8G4KDGECedxM
- V0iZC0wCq4bhPLIgMLVPxIiKvIERMoix2+zsmQUfj81idpLIBLWbfFPgqXDQYwWSzhOc
- LfYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXLhg+RIcb6XUyu9N8YsgH7//ksbyQZc9M8ZoBlQxTgovmUvdZrnL4/DGUjfEXdnlLTdfT+rWM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzSDERKLAMSAFwBxGMz2nGMPXWwCcQ0sItHzCmUi1mev5wfe4aW
- 8Y4SKLyHsnx2GGWf89Clrvcpp2pAa0kJwzcW86+Ams7RCSfvhq3Prg8wpkvmoQfyOcePiQUPc5E
- E
-X-Gm-Gg: ASbGncsBF17vSUKxf81YKCN3XnCj0NgsPQUm722QOkKmNajIajn5GIBVpx7xdM2AAu3
- Qgn+YLzrvqhFtTBIhQVD9iQ++HjMWUF9GgcNzODC7+wfog3OI/tdL/D/wxU0SQfji2aoSaglr4r
- 7M+uwUL+yAt33Vua4vzomSvoqYVv2jSRpcozdqU8LZQfCQ3qNaa0vCvOmdEvswFCOO9ZL0i+Uxe
- 8ZbzIMYjSKYtsQzg7fSaeCQfv6PXfGIYF+4ptA7S0dAICZ04pRbdky1XQRDion9LoXwPdVU1gZf
- DfnU6DOIebqAY45gLG/TY1AgiCMjFDXBpR/W0X4EfoHaR3wVTRPMJmk=
-X-Google-Smtp-Source: AGHT+IGFutMe8yomQdk3Z5itJwgIXTEMPTlUd13JX/Rgk/uQU9/n/zdTaHw4y6V5msqJy4uds9tDrA==
-X-Received: by 2002:a05:600c:3ca6:b0:43d:98e7:38dc with SMTP id
- 5b1f17b1804b1-43db61d823emr26495515e9.5.1743242682787; 
- Sat, 29 Mar 2025 03:04:42 -0700 (PDT)
-Received: from localhost ([2a01:cb1a:4029:8df0:34ec:162c:f374:eb39])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d9142a5f0sm41706595e9.0.2025.03.29.03.04.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Mar 2025 03:04:41 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Zixun LI <admin@hifiphile.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/4] usb: gadget: f_mass_storage: Fix crashes on low
- memory devices
-In-Reply-To: <CA+GyqeZwrAaQ_7DcvY6VgnVo0WTsMBiZsKZBmWVzQu2CAL6_xQ@mail.gmail.com>
-References: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
- <CA+GyqeZwrAaQ_7DcvY6VgnVo0WTsMBiZsKZBmWVzQu2CAL6_xQ@mail.gmail.com>
-Date: Sat, 29 Mar 2025 11:04:39 +0100
-Message-ID: <87tt7c885k.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1743249734; x=1743854534; i=xypron.glpk@gmx.de;
+ bh=d5qWqhGjd64CefmshIqHVudz89ehmv8CgqVOiRNp56w=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=cd5eM+bgTH0jl5s9+ZdNUIXr1gv2twhb4wAge7rgj+/mbqaeWVl1JGDSJZr4qj99
+ LUqGr26TFSB8mrjYSx7SFz6MRnjwdi6AzoqfgKtv7eGZVCjV1dyKJHUCmir06F2Pm
+ OfMqPqPfCjxS+u98KWafpM53D7h8Pl9MhKdwneNApxBHADCdV7se7tKDNtXRTQ2Vz
+ UlLLEKYUfOCTNv1T69Wlgv6dnnVH2fpyUCx/bf6UZ8ASuzBQ3mnHXFFfohGjhrT8y
+ 9BotXV0hsYIYUm/7WuX1AJLCQj1zhNb06D9StKP/TCY5RVNvJ4sTUs0CtRAN0mHOG
+ CTRRAhgnqKAxQ2yyQA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MpUUw-1tLrIY2Zoa-00Zl0G; Sat, 29
+ Mar 2025 13:02:14 +0100
+Message-ID: <92f8a810-981b-4ad7-9a6b-be013ccf084e@gmx.de>
+Date: Sat, 29 Mar 2025 13:02:08 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] efi_loader: Handle GD_FLG_SKIP_RELOC
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+References: <20250326054653.273906-1-quic_varada@quicinc.com>
+Content-Language: en-US
+Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
+ EABachinin@salutedevices.com, jerome.forissier@linaro.org,
+ rasmus.villemoes@prevas.dk, ansuelsmth@gmail.com, sughosh.ganu@linaro.org,
+ michal.simek@amd.com, u-boot@lists.denx.de
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250326054653.273906-1-quic_varada@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LkU42vv7BLnAKT9dNU0k5yPnayHYbeghCmI2bbsqJN5uoRvI7mE
+ VhIW7LzUszf5LET6n3ECT1BkvtJ60yAKYyvvM2aDoGcow1yIf1n5/n/fv2Y0bHBwXPN3XoJ
+ SHLfREmBNVoT57mrPQdvLEyNMDLuCts30tZeX+5DwyMzybU7yB2/Sqq5W3QPbB3fHdgchbQ
+ RBZfvoZf+Y9F86OW+PMlg==
+UI-OutboundReport: notjunk:1;M01:P0:VH3tGEdUo4w=;VP3eV2M8pZMttY0MATPi/QR4TXo
+ 8y+PxNbaBzACp4hK1uD9z+/GtcyBS0Ct/13Qc5PsGGHmuvDCg4BeMBFnRzGUusHDwUvBHvVRK
+ XvnqBkJa0jSqFaj3yXTgtViPcawvNCBfSz0OzIreh/NIVkn384SOX/9JM72epwrulOiNwJqLE
+ KGt71cSVcqLJRw/x26eIiBiQvpkvbyH+WjSI0SN0iMIhSmxT4MUKzjTVMXDS0P/KwLa2OCbey
+ qnro811zC6WqWCQEIBsRGtdmrsJENTR7bbGSBDZKv0tTp6HIsx/bPgun9b6Ff68mlNl0yV6cL
+ I6OAq/ewAVSgF3bVJcN6Ttr5J7AMOIIwemjGwoeF4WHkxaK1r817PWyOCOKZo8hwr7ljSAA0a
+ l4ZvbdDKlGwzUiKz4HG5ZkigTAchrZme7wnFMZGIxa8IzZBdtSZzvJeENUEQdn6/CGvcUOqQg
+ lugxoVt/vWwM/FHt01Hl6NdiNOHg3DhZYyLsNxqdn7GOeojMOp05cWBDP5dAxrsnV7f5hMZ/m
+ 0/QkwcjxuZ+zQeJev/IsqAmPt/Ku66VbK+LxYsIqWPSxLF4VdJTRYF2JTHubluqwWGGI55lL8
+ jZZGYrkw88nn3WcAn4e+vGQQme8K4X7y06xLVxSlL0x4OSc6GRkYqlNGqqQ3CRqU1caVLqhz4
+ /+aRsjkF5BmNMEYgWOG9AUnMFHxrd3TrHpsF3WqhIQJiyGs6z8F0TM8MQ8TqF/ve7dpkkDZSl
+ /VLifR74/GH34JqOJIsQqrPgf5eIsH7jtWnssn08j1KuskQylmyBMwqvWvTNRgK3w+y7ZkhDK
+ YzNv8ge1eXmRtGS5kCUDb9/WZi+rRVhONcH91RzkuZwuG9gDzE7aJTf4K4F2bhDpuYwyywwPR
+ MdmffRdKbMw8FV0tpLCtuvmMR9hEqDD9XTJminR4pdaefKp6YVN81GKDP7Mm/GNI/8mYIATbB
+ C3SU2glVdulIHKqNOKTdXp8TNc7Y4hpt9qcQZVvMdhuY9WcLiYIlQwbB2BoJSl8/zgpIq4AjP
+ B4Ef+AJlP6iVmgmUAojdVlwRujiPsqIvipnnoTi+wOCQ3h47/T1OO6BFeLVqVqKoqMtwBbVAn
+ tBKksA/HTkuAL0EiU4ZdK2f30K7NTN5c9aZRfVj3tfqQgVUrr8+6sDfR23HYECEi4+CTnGVZ6
+ elFHr7FkwE/6HMZiIQ3RrnAJ5UzNqX2PKMg5vyAWpDrP0pxzZNAnTLJpR4yEsa3+wc0sQTHOL
+ 84gX0ULBqXhfQH2oubLj/2EPrIrH1eDPwIYpJ+SUZrAkQONUPIuJiXzbJsaJBZO53pBoQLumn
+ vy7O12ZPVanIp0lPkCZaI9iKaxIRTQ1h84MIjl0uUehUmJ6OAND0vL8zAhpHe4G6t/D/kUHXM
+ jKyv9qsvStyYRKqUrSYeE27QMySuRXoTXcqGvZu/icqFWtYvBrVZxVZsG9orjfsTy7m6ySRkB
+ G7upl0Jfs/ziLClR3O7/yLbSVkFE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,49 +101,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zixun,
-
-On ven., mars 28, 2025 at 18:38, Zixun LI <admin@hifiphile.com> wrote:
-
-> On Fri, Mar 28, 2025 at 9:15=E2=80=AFAM Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
->> This series fixes the above mentioned crash by introducing proper error
->> handling and freeing the buffers in the unbind callback.
+On 3/26/25 06:46, Varadarajan Narayanan wrote:
+> If the EFI runtime services pointers are relocated even though
+> relocation is skipped, it corrupts some other data resulting in some
+> unexpected behaviour.
 >
-> Hi Mattijs,
->
-> Thank you for the quick fix, I've tested on SAM9X60 with multiple ums
-> commands and it works.
+> In this specific case, it overwrote some page table entries resulting in
+> the device memory address range's mappings getting removed. Eventually,
+> after the completion of efi_runtime_relocate(), when a driver tries to
+> access its device's registers it crashes since the mappings are absent.
 
-Thank you for testing. Testing on hardware is very valuable to the
-U-Boot community.
-It is so valuable that we give credit in the commit history for testing.
+Hello Varadarajan,
 
-In order to give you proper credit for testing, a special email line is
-expected to be found:
+thank you for pointing out this issue.
 
-"""
-Tested-by: Zixun LI <admin@hifiphile.com>
-"""
+I found two places where the flag is set:
 
-You can also specify on which board you've tested:
-"""
-Tested-by: Zixun LI <admin@hifiphile.com> # on SAM9X60
-"""
+lib/efi/efi_app.c:198:  board_init_f(GD_FLG_SKIP_RELOC);
+board/synopsys/iot_devkit/iot_devkit.c:117:     gd->flags |=3D
+GD_FLG_SKIP_RELOC;
 
-This allows tools to automatically pick up your testing efforts and put
-them in the commit log.
+iot_devkit_defconfig does not support UEFI.
 
-See: https://docs.u-boot.org/en/latest/develop/process.html#review-process-=
-git-tags
 
-If you are OK with being mentioned in the commit log, could you please
-answer this email thread with the special "Tested-by:" line.
+lib/efi/efi_app.c:198:  board_init_f(GD_FLG_SKIP_RELOC);
 
-Also, do not hesitate to use that in the future.
+efi-x86_app64_defconfig does not support UEFI either.
 
-Thanks again for contributing to U-Boot!
-Mattijs
+
+For existing boards this seems to be a non-issue.
 
 >
-> Zixun
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
+>   common/board_r.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 179259b00de..1dd3b96c2de 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -169,7 +169,8 @@ static int initr_reloc_global_data(void)
+>   	 */
+>   	efi_save_gd();
+>
+> -	efi_runtime_relocate(gd->relocaddr, NULL);
+> +	if (!(gd->flags & GD_FLG_SKIP_RELOC))
+> +		efi_runtime_relocate(gd->relocaddr, NULL);
+
+efi_runtime_relocate() is called twice:
+
+* when moving U-Boot to high memory (that is here)
+* when the OS call SetVirtualAddressMap()
+
+Removing the call here looks like the right thing to do when main U-Boot
+is not relocated.
+
+Did you test that starting an operating system via UEFI works in your
+use case?
+
+It would be preferable to have a QEMU based defconfig where we could
+test this scenario and add it to the CI.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+
+>   #endif
+>
+>   	return 0;
+>
+> base-commit: 244e61fbb7f5045e4e187024f7ae80434c952145
+
