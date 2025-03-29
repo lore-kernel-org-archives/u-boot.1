@@ -4,90 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE2EC28B20
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 01:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90069C28B20
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 02:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75280805C8;
-	Sat, 29 Mar 2025 02:17:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9BE6A809A5;
+	Sat, 29 Mar 2025 03:40:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tTKdJZDc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yHdWOIzU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dA2kwV23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A120D809A5; Sat, 29 Mar 2025 02:17:21 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B1A4380ECC; Sat, 29 Mar 2025 03:40:53 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 555A18059D
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 02:17:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F24880050
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 03:40:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-30185d00446so3823664a91.0
- for <u-boot@lists.denx.de>; Fri, 28 Mar 2025 18:17:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743211037; x=1743815837; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f8qWFrZ+DsbmVZf3xb9mVmpVW2Sxd4LepFc8cZ7Ag0E=;
- b=tTKdJZDcZXrR04iQkCzf4b7qq3rdxTYogWYIuBCAo1avARdQe9ae7Yt82K8dfz9nQc
- vLY4VkB5pefPxaRArTUnHKuWHCULMiEq88Ncrv5PbbyPYFB3bhF6l1bsMLSU+A9WrxB4
- Px9SgE4dyGHa/yn/PUePTlTJbBaaE2Qw61u17kmHsAClG3S+tBZgLX3Q/wQUJacD15WM
- DFtNUuvFOretw++B7U96R+eI2J9XnWKJQDzvRiJZnYR4P6NWcVY4sDWhx2/JdlJ2lRpy
- AyoDCe3XuiWSDH/h41MXAdKAGhMKd0QSJOziRGhemBbwreJWJLdrOLyAOB6Vbn/ynF9Y
- OkGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743211037; x=1743815837;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=f8qWFrZ+DsbmVZf3xb9mVmpVW2Sxd4LepFc8cZ7Ag0E=;
- b=hb7tPkSe1Ej6M6GRu9Mxvb4jsEaBoabZwkT49S4YDTE2a07u8Qhmg3ptHL7KGQkDoK
- hSCqYSgFEgh+kziasBXRwCoJBpJo6Fr+e/P/MBIrxW/AqP5ZGj3qQuoa65s9rainL0sl
- tH1hSsB6FOR+swFj8+WDtCnhuB2CEQoVMUvKzhhddoJVU5nvLAwOMwKCjHTq1+Vv4YQ5
- 6rGjTAnck7DqZemfQcnnVGikhikh0hNAMrlfezajB5YkBJGA6W43C2k46WVpP1AfrH87
- aoiPD7TBAtSlU+bU1gBLUQIgNCOvvJf4pUWpjcjAaL1D4uTcTSlvZNaL9lqM17FoYjh/
- OC0g==
-X-Gm-Message-State: AOJu0YxJT+Sag8jmKZrO5ELx1LYmN2DcP5YUZaRI731crQqYrziO/2jO
- nubURK1xPrSPu0/F/DpfcFk+kClnChv2eMxuxLUz81Jh3DWbgZrVljjB7skASyUMTD5ymLsx0j5
- nIziDiKT2QIalrXJ6LnTkvgUrBN3eoOdRs/II6w==
-X-Gm-Gg: ASbGnctxV0CDPyraGdc0ssrqaX4zNrwtphWr3bGlUf1C64ZlOlEltRpyoxd790nsIM4
- sRB0GxCkE9yNHSD3Z5xAotDHxLVJc5ulltPV+TEGhqAB7LXn3npuezGJcIMWFzKYSt7UVeDBi37
- ijVDKWGZggqOysZJdxIcR48uJtXO2s
-X-Google-Smtp-Source: AGHT+IF/QroYx8+aoKblf2JkXaOdc2mUinqU0EsyS0H0ELwxGB3F7QDx5z+X2kWD9/CZJdV7RYBAnYqM3eTJ9RjwM3k=
-X-Received: by 2002:a17:90a:d007:b0:2f1:2e10:8160 with SMTP id
- 98e67ed59e1d1-305319e146fmr2826545a91.11.1743211036547; Fri, 28 Mar 2025
- 18:17:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ZPhTZ6Y0Lz9shs;
+ Sat, 29 Mar 2025 03:40:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1743216050;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=caL8T0hU6X4APbUKccE1LXe4UwWI6gTn+rOXEOkRdF8=;
+ b=yHdWOIzU/uxTNsxPnMZJRuoFzi+g6Kze0Y75WMgMz2BrQZqIjcJQoQL7/GbV5vhrYJdyXj
+ V54qT63wOLVeemRB4m9MEzbhR1jtX2eVZe6ZWzwJZWScvQPEPLqc5PFexH9VaXUK2K6OE2
+ jHebkcrJEk0MHGF2+LZWVVYI/rquBu8dKE8MLjhCb9xD8joeKLBGTG+DcMi0oW/UzsBcGy
+ 6tfXuzfReO7PcrcMkrazlL1eno+G8CMzmrxS7J64YQxEOi5nsvdPizLxMAPQgUinUI392B
+ A6jvfC7LZ8Yar8d4z+hcF3/HiqOLSeIQe8VOzUxUb2qX7Wm23ZPkmcG4XCr7Lg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1743216048;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=caL8T0hU6X4APbUKccE1LXe4UwWI6gTn+rOXEOkRdF8=;
+ b=dA2kwV23qsvMX1IdyZARikI+8hSb1+LE9iqLtLqjwgX3lZ9mMyhkGGv18kZ0jhNt8Ysqru
+ l0jyUaEDnxYaPaI6c6Vw7924V9a1dgG8/Jnotzf6V6iOtekNKNPvkexcWXZrpmpbDqyjIp
+ 9fa7DTfcEHzSqRRFofB1VceoamN9nd81vuD9w/83TiXu0zhoHuf/qz5h2Jerrao6palHex
+ Anw8niX23eWZa/zArRwcXMlhWfH8P+sDp1+hgVeJXND8jx+L74rLv1VMvKB1qzBgZoMBDo
+ bImtr0z6zbnWFUnzAhVOHhXhagIUY0iabFZn2x4avou4K5aXYdsRuXrIAXmmBA==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/next
+Date: Sat, 29 Mar 2025 03:39:53 +0100
+Message-ID: <20250329024035.291171-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20250327231318.2713201-1-raymond.mao@linaro.org>
- <CAFLszTjpbxH6_LEuv5mAyOjt812hXvTKL1nDpP42HMJXwMryWA@mail.gmail.com>
- <CAEfUkU+tYjjNQAmwv2=FWkPYxLZriAd3FdAVQQrdt7PTXK_xiQ@mail.gmail.com>
- <CAFLszTiwNM3=ZgFRU+rJN=nmQ9YuS8gkUf_jRNqhSJpuELi09g@mail.gmail.com>
- <CAEfUkU+6O7z_FxuopJ0R8AnqXFPT5jThKn8AkDHLJqrUEi5g4w@mail.gmail.com>
- <CAFLszTiZEsmPaTpD9EZWmQWtURMqTcynmda7K24wFvVoacX8zw@mail.gmail.com>
-In-Reply-To: <CAFLszTiZEsmPaTpD9EZWmQWtURMqTcynmda7K24wFvVoacX8zw@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 28 Mar 2025 21:17:03 -0400
-X-Gm-Features: AQ5f1JrySnJJd1nntSBfOO51xSxMbl0FP5mY0p7sZYnBZxqlOyLIYZLtcnmXM3o
-Message-ID: <CAEfUkUL0ofX9eQfbD0GjaG=kSE3ukAQiKFgfUN4ED4dFJ4c3Mg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bloblist: fix the overriding of fdt from bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
- Tom Rini <trini@konsulko.com>, Ravi Minnikanti <rminnikanti@marvell.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthias Brugger <mbrugger@suse.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: uik4oagbffrdb44y4eyowqwm6pc6pf9x
+X-MBO-RS-ID: 257c7d89fff73754aed
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,96 +82,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+More basic DBSC5 DRAM controller clean ups and improvements.
 
-On Fri, 28 Mar 2025 at 11:13, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Raymond,
->
-> On Fri, 28 Mar 2025 at 08:38, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Fri, 28 Mar 2025 at 10:26, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Raymond,
-> > >
-> > > On Fri, 28 Mar 2025 at 08:17, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > On Fri, 28 Mar 2025 at 07:34, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Raymond,
-> > > > >
-> > > > > On Thu, 27 Mar 2025 at 17:13, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > >
-> > > > > > When a bloblist is valid and contains fdt, it explicitly means
-> > > > > > a previous boot stage is passing transfer list compliant with
-> > > > > > Firmware Handoff specification, thus the fdt from bloblist should
-> > > > > > not be overridden with the ones from board or env variables.
-> > > > >
-> > > > > Why is that? The board can choose to override it, if it wishes, but in
-> > > > > general, if gd->fdt_blob is already set up, it should return -EEXIST
-> > > > > from board_fdt_blob_setup().
-> > > > >
-> > > > First, if a board is running in a "stand-alone" mode, there should not
-> > > > be a transfer list passed from the previous boot stage.
-> > > > Secondly, overriding the transfer list with the env variables does not
-> > > > make sense, since booti, bootm and bootefi are actually using the env
-> > > > variables to get the fdt when launching to the kernel.
-> > > > We need to do the opposite way - override the env variable with the
-> > > > one pointing to the bloblist fdt (See my patch [2/2]), then all boot
-> > > > commands can work with the transfer list.
-> > >
-> > > OK, but now we are going back to the OF_BLOBLIST thing that I did 18
-> > > months ago and ended up being the major reason I had to create my own
-> > > U-Boot tree just to get my boards working.
-> > >
-> > > Anyway, Tom has agreed to let me maintain bloblist (and maybe fdt?)
-> > > again, so I am going to send a series to 'clean this up' as Ilias
-> > > would say. Let's see if that passes muster, because I do agree with
-> > > you that if the devicetree is in the bloblist, it should be
-> > > definitive.
-> > >
-> > > Re your second point, do you know why we have fdt_addr? Is it just for
-> > > the distro scripts? I'm wondering if we could restrict the use of
-> > > fdt_addr to just the places that actually need to use environment
-> > > variables.
-> > >
-> >
-> > I understand that there is a clean-up plan from you, so this time I am
-> > just trying to minimize the changes (as you can see, just a few lines)
-> > to make the transfer list work again.
-> > I am also working on the OP-TEE repo project to enable qemu v8 build
-> > with transfer list enabled, so users can just use a single command to
-> > test the Firmware Handoff feature from TF-A to kernel.
-> > But since 70fe23859437, it is broken in U-Boot due to the overriding
-> > of the fdt, I made this hotfix in order to let us have the feature
-> > work again before the upcoming release.
->
-> Yes I looked up that commit but it was over a year ago so I assumed
-> that something else was going on.
->
+The following changes since commit 4adbf64ff8d8c730223fd8ae299d770bebb6fe86:
 
-I was mainly focused on the transfer list path from TF-A through
-OP-TEE to U-Boot but not much on how U-Boot handles the fdt after it
-is exacted from bloblist.
-I just occasionally observed this issue when I was trying to use xtest
-to run the transfer list unit test I added in OP-TEE a few days ago
-and found that the OP-TEE commands didn't work at all in the kernel
-due to the overriding of fdt by that commit.
+  Merge branch 'staging' of https://source.denx.de/u-boot/custodians/u-boot-tegra into next (2025-03-26 14:07:37 -0600)
 
-Regards,
-Raymond
+are available in the Git repository at:
 
-> Re your project, it would be good to get that running in CI. My old
-> standard passage stuff had such a test and I think it was pretty easy
-> within U-Boot.
->
-> Anyway, this patch doesn't make things any worse.
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Regards,
-> SImon
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git next
+
+for you to fetch changes up to 47dad5cc61dd955cca342bbda8c146548ef3409c:
+
+  ram: renesas: dbsc5: Pass udevice and MODEMR0 to dbsc5_get_board_data() (2025-03-29 02:33:24 +0100)
+
+----------------------------------------------------------------
+Marek Vasut (5):
+      ram: renesas: dbsc5: Clarify MR27/MR28/MR57 register operations
+      ram: renesas: dbsc5: Drop space before dbsc5_ddr_setval_all_ch()
+      ram: renesas: dbsc5: Improve dbsc5_send_dbcmd2() signature
+      ram: renesas: dbsc5: Factor out dbsc5_wait_dbwait()
+      ram: renesas: dbsc5: Pass udevice and MODEMR0 to dbsc5_get_board_data()
+
+ drivers/ram/renesas/dbsc5/dram.c | 92 ++++++++++++++++++++++++++++------------
+ 1 file changed, 66 insertions(+), 26 deletions(-)
