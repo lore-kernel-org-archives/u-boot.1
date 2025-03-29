@@ -4,67 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0994BC28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 12:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1C57C36011
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 12:28:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D83F8144A;
-	Sun, 30 Mar 2025 14:11:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id E404381E60;
+	Sun, 30 Mar 2025 14:28:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BzT4YQ9T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nshg4yRX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A6118171B; Sun, 30 Mar 2025 14:11:42 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 49A6B805C8; Sat, 29 Mar 2025 10:05:54 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A310D80FDA
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 14:11:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5F5A800C1
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 10:05:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c171=WS=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1743336697;
- bh=0p50WQkih7ADiW46Ayph5vJJ1oTGLy/p6d6xesurF6s=;
- b=BzT4YQ9TaHHRgWUupnvRiK1h7PkMBuxBAWzvyQ6A2XtUgn+HbA5n0ddZt0xN9BlQLCyNMpAy+
- tGCvm0OkmHqQNojVvnZ6Lmh+aQQs5xbsdge6opPLNxoz6/ZRKCCfmJHwCLT8a2SZKfZwRw5af9j
- ut1JrPjVtLTjilmMrmg+TVlMyRlR5gACUZubr+KcGQ2pyrPoGHEITCpyQyvq5TRo0CR8kGdm6Ax
- 3vc6jx7/j8adKwOZkG6rj1DzCKlCm2vKB0J3/ucYmdxR6QT8qO0RsF8db3ixzHgY7FMBi0sK/do
- Kri4AaalV03kd4BOUWT5oNbaLNO83lnECCUo3dreWk0Q==
-X-Forward-Email-ID: 67e934f3b53fbafc9c391419
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.0
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a2dea153-33a0-42cd-a094-bfea08587a41@kwiboo.se>
-Date: Sun, 30 Mar 2025 14:11:26 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e46ebe19368so2487951276.0
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 02:05:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743239150; x=1743843950; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=s9GtLCu3gyux9oVcvDMwLhHdah2i3b65TcWN3cFiwwk=;
+ b=nshg4yRX5MD6a7iRM0NUi71dX2qoVra/Ce5eL8/fR8/sdpMGCGYu4CZCunfaAugTmv
+ xhTiGf9uZWEjE2c3oQ4QtfKszE8KqtzD2/bc6l2OArMxhmSgRblA4hodRex4O1ckPQjb
+ o5fFFNnj6EQ5lLd8jetSnI5uwEVfkpoTKIYsqj1fxapjn0LsYxlw0fMcicrag3DxR3dX
+ 3eDc/taYeuSKXeciXq/GFFHJXFZQvyXPUxG3yaE0T+vBNK5QTVnicTn1GIVqOE2ueI+n
+ ZiKMLeAtUIiBk3UgPc9Y5bNqKWFSYuLi0pOXpVY3W7e/XxBGM/IZVaHo5NaavxGDjHMp
+ i9Ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743239150; x=1743843950;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s9GtLCu3gyux9oVcvDMwLhHdah2i3b65TcWN3cFiwwk=;
+ b=oDgoHOJiNoosY3dPsg0/Tc+au/BoR0AbOJKTSBa+5THluZ8cJMjd52pwefSYj9q+Jb
+ 3qa8Qqk0GLwfqH3rYqxepaT9f55g46h2tvT27JrE2FndZJ9TN/svzPvNwa9KsNtGumWA
+ zhYuyBt/9hftJAQBMKkPlonR3dTjgLwsVt62JSCdQ9ChiRrndeBrvbsb6Ba8wV45+lk6
+ Iya3WFlvQJ0lokBbb5a8qOUOjcWK33Pf5j/INsJvaZHVrS2WNeC1qUVGJagP66dDbeXJ
+ PTuAO554OXtOuTXW25AG82Eila02hUJQsJxoQSjSfFOfXXcPYi5WL8THDN6M64qMmh/b
+ 1kMw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVREKRIWBTajg2kWK7S93omIRHRcYHuYwWlAu7f4ItpeuKht423F8yzFHT0UHTWpH8p0JbaGjE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBPlOasuC/+V9EIq0h7NXROkyfYZz9nWq8K3cihMEtEfGkXStY
+ pvQyxZ2xJ729kwcFCNscp3hi0FAT8Is8GyGgj3YcRIWQ3hjEyakPmJNczZCsuv90KbU4dCRXcc+
+ evGG6W7r/0AdoBcUk4ncDthmpmcvzKGDUWwzuiw==
+X-Gm-Gg: ASbGncuP8vm6AU+J+bC2+ZZUi6mCjwwOysWRLsTLLAIiIPH4CEtoIc5ovKiKCKCWzkD
+ HEaca32HiIkhWs5itl6dI9Zh91Sa9+NGQ4DTDtgfbzjJSpwa0ComAXFe42Gdo3VE4qqMQlqlKbO
+ CDlJoV7L/XEiY7gWd2iI57xF6bIBnixXVx3cfo
+X-Google-Smtp-Source: AGHT+IHaWBs7FkRRJNP1+nPos8IY5efB14N3pdEqC2tQGrSYLXCswgEYpA5muddktZyz5kHqSLKQAr66CkxqBk5SSQI=
+X-Received: by 2002:a05:6902:2808:b0:e64:60d:e3cc with SMTP id
+ 3f1490d57ef6-e6b838d4d60mr2529580276.7.1743239150356; Sat, 29 Mar 2025
+ 02:05:50 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] rockchip: rock64-rk3328_defconfig: enable HDMI
- output and USB keyboard
-To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: Vasily Khoruzhick <anarsoul@gmail.com>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Anatolij Gustschin <agust@denx.de>,
- Jagan Teki <jagan@edgeble.ai>, Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.denx.de
-References: <20250323225134.2369473-1-anarsoul@gmail.com>
- <20250323225134.2369473-3-anarsoul@gmail.com>
- <3819cbcb-5fa6-4939-a2b4-643cadcc50ff@kwiboo.se>
- <CAJs94EZR5HZSoQFQH=ByoUeQzOk9VoQD7-td00wvCzpFWR4F=Q@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAJs94EZR5HZSoQFQH=ByoUeQzOk9VoQD7-td00wvCzpFWR4F=Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
+ <380f1f2c-59cd-4c52-a598-5e6f1ed1dcad@gmx.de>
+ <CAC_iWj+DazCNrMktmwJQxt7bVPbu-qWCfjW4bgcv0cngiH03gw@mail.gmail.com>
+ <CAFLszTgq25-E-n+UaJ_wRdimCLcAta-fetWpOW++NCOfN_eL5w@mail.gmail.com>
+ <CAC_iWjLS_yNPCMY2RhGZ0390ZysH=N5x5JZ-qOnNjX7nofPS4Q@mail.gmail.com>
+ <CAFLszThhK4-+Qh_eQLD0fuJZVodBkwit4rw5mOcGU58m6=5knw@mail.gmail.com>
+ <CAC_iWj+2EsRUBT5ThAR7+wwxVkFSzrApCNDbTEEHQ-W658LwCw@mail.gmail.com>
+ <20250328160419.GX93000@bill-the-cat>
+ <87wmc95b68.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87wmc95b68.fsf@bloch.sibelius.xs4all.nl>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 29 Mar 2025 11:05:14 +0200
+X-Gm-Features: AQ5f1JrEJj2iC3Z6CIi7-Ll16Bfz38_3VNV2UJZa6sWDYGlFg_wXcp8jvlzDRIc
+Message-ID: <CAC_iWjLNiNiJL49MbcGZJED=1GK_euoUox0T+dEn5fF8PcrvKQ@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Tom Rini <trini@konsulko.com>, sjg@chromium.org, xypron.glpk@gmx.de, 
+ e@freeshell.de, rayagonda.kokatanur@broadcom.com, andy.tang@nxp.com, 
+ mingkai.hu@nxp.com, Ashish.Kumar@nxp.com, priyanka.jain@nxp.com, 
+ wasim.khan@nxp.com, udit.agarwal@nxp.com, meenakshi.aggarwal@nxp.com, 
+ patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com, 
+ Manish.Tomar@nxp.com, matt@traverse.com.au, caleb.connolly@linaro.org, 
+ tien.fong.chee@altera.com, michal.simek@amd.com, sumit.garg@kernel.org, 
+ patrick.rudolph@9elements.com, alif.zakuan.yuslaimi@intel.com, 
+ Oliver.Gaskell@analog.com, duje.mihanovic@skole.hr, robert.marko@sartura.hr, 
+ lukas.funke@weidmueller.com, peng.fan@nxp.com, jj251510319013@gmail.com, 
+ adrianox@gmail.com, sughosh.ganu@linaro.org, vincent.stehle@arm.com, 
+ raymond.mao@linaro.org, maks.mishinfz@gmail.com, semen.protsenko@linaro.org, 
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sun, 30 Mar 2025 14:28:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,112 +112,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Matwey,
+Thanks all this is helpful
 
-On 2025-03-30 13:52, Matwey V. Kornilov wrote:
-> вс, 30 мар. 2025 г. в 14:45, Jonas Karlman <jonas@kwiboo.se>:
->>
->> Hi Vasily,
->>
->> On 2025-03-23 23:50, Vasily Khoruzhick wrote:
->>> Enable HDMI output and USB keyboard on Rock64 board
->>>
->>> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
->>> ---
->>> v2: no change
->>>
->>>  configs/rock64-rk3328_defconfig | 10 ++++++++++
->>>  1 file changed, 10 insertions(+)
->>>
->>> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
->>> index 6d00b52e62f..ae3512625cf 100644
->>> --- a/configs/rock64-rk3328_defconfig
->>> +++ b/configs/rock64-rk3328_defconfig
->>> @@ -21,7 +21,9 @@ CONFIG_FIT_VERBOSE=y
->>>  CONFIG_SPL_FIT_SIGNATURE=y
->>>  CONFIG_SPL_LOAD_FIT=y
->>>  CONFIG_LEGACY_IMAGE_FORMAT=y
->>> +CONFIG_USE_PREBOOT=y
->>
->> This will add a large delay during boot as it forces a run of the slow
->> "usb start" and is something we want to avoid for normal use, please
->> drop this.
->>
->>>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
->>> +# CONFIG_SYS_DEVICE_NULLDEV is not set
->>>  # CONFIG_DISPLAY_CPUINFO is not set
->>>  CONFIG_DISPLAY_BOARDINFO_LATE=y
->>>  CONFIG_SPL_MAX_SIZE=0x40000
->>> @@ -72,6 +74,7 @@ CONFIG_DM_ETH_PHY=y
->>>  CONFIG_PHY_GIGE=y
->>>  CONFIG_ETH_DESIGNWARE=y
->>>  CONFIG_GMAC_ROCKCHIP=y
->>> +CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
->>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->>>  CONFIG_PINCTRL=y
->>>  CONFIG_SPL_PINCTRL=y
->>> @@ -80,6 +83,8 @@ CONFIG_PMIC_RK8XX=y
->>>  CONFIG_SPL_DM_REGULATOR=y
->>>  CONFIG_DM_REGULATOR_FIXED=y
->>>  CONFIG_SPL_DM_REGULATOR_FIXED=y
->>> +CONFIG_DM_REGULATOR_GPIO=y
->>> +CONFIG_SPL_DM_REGULATOR_GPIO=y
->>
->> The ROCK64 does not use any regulator-gpio, this look unrelated and can
->> be dropped?
->>
->>>  CONFIG_REGULATOR_RK8XX=y
->>>  CONFIG_PWM_ROCKCHIP=y
->>>  CONFIG_RAM=y
->>> @@ -104,6 +109,11 @@ CONFIG_USB_OHCI_GENERIC=y
->>>  CONFIG_USB_DWC2=y
->>>  CONFIG_USB_DWC3=y
->>>  CONFIG_USB_DWC3_GENERIC=y
->>> +CONFIG_USB_KEYBOARD=y
->>> +CONFIG_VIDEO=y
->>> +CONFIG_DISPLAY=y
->>> +CONFIG_VIDEO_ROCKCHIP=y
->>> +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
->>
->> This will force a small delay of at least a 300ms timeout for all users
->> that does not have HDMI connected during boot.
-> 
-> It already takes about 2 sec to initialize Ethernet. I would say that
-> nobody notices another 300ms.
+On Fri, 28 Mar 2025 at 19:15, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > Date: Fri, 28 Mar 2025 10:04:19 -0600
+> > From: Tom Rini <trini@konsulko.com>
+> >
+> > On Fri, Mar 28, 2025 at 02:26:39PM +0200, Ilias Apalodimas wrote:
+> > > On Fri, 28 Mar 2025 at 13:34, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Thu, 27 Mar 2025 at 15:19, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Simon
+> > > > >
+> > > > > On Thu, 27 Mar 2025 at 15:33, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Wed, 26 Mar 2025 at 02:37, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > > On Mon, 24 Mar 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > >
+> > > > > > > > On 17.03.25 14:38, Ilias Apalodimas wrote:
+> > > > > > > >
+> > > > > > > > %s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
+> > > > > > > >
+> > > > > > > > > The EFI subsystem defines its own bounce buffer for devices that
+> > > > > > > > > can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
+> > > > > > > > > which can be reused instead of defining another symbol.
+> > > > > > > > > The only limitation for EFI is that we don't know how big the file a user
+> > > > > > > > > chooses to transfer is and as a result we can't depend on allocating the
+> > > > > > > > > memory from the malloc area, which can prove too small.
+> > > > > > > > >
+> > > > > > > > > So allocate an EFI buffer of the correct size and pass it to the DM,
+> > > > > > > > > which already supports bounce buffering via bounce_buffer_start_extalign()
+> > > > > > > >
+> > > > > > > > Looking at
+> > > > > > > >
+> > > > > > > >      if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
+> > > > > > > >
+> > > > > > > > in drivers/block/blk-uclass.c the bounce buffer has to be explicitly
+> > > > > > > > enabled by the device driver. Only the scsi drivers sets bb = true.
+> > > > > > > >
+> > > > > > > > Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag
+> > > > > > > > to blk_desc")
+> > > > > > > >
+> > > > > > > > Which device-drivers of the boards mentioned below do actually need
+> > > > > > > > bounce buffering?
+> > > > > > >
+> > > > > > > Unfortunately, I don't have any of the hardware to test and I havent
+> > > > > > > worked with that platform much.
+> > > > > > > That 'bb' variable and the fact that EFI needs bigger allocations is
+> > > > > > > why I ended up allocationg properly aligned memory from the EFI
+> > > > > > > subsystem. But as Mark pointed out, the cache flush is a no go for
+> > > > > > > now, so I'll drop this and see if I find time to rework the bounce
+> > > > > > > buffer logic overall
+> > > > > >
+> > > > > > There was quite a bit of discussion about all this in the context of
+> > > > > > my attempt to just add a message to warn the user[1]
+> > > > > >
+> > > > > > We might consider adding an event to reserve memory before relocation,
+> > > > > > along with a way to discover (in board_r) where the memory was
+> > > > > > allocated. That would make the solution more generic.
+> > > > >
+> > > > > I am not sure what you are trying to solve here. The EFI bounce buffer
+> > > > > after the LMB patches can't overwrite memory, nor can it be
+> > > > > overwritten.
+> > > >
+> > > > I am thinking of we can create a single implementation of the
+> > > > bouncebuf logic which also works for EFI.
+> > > >
+> > > > I think the two sane things to do are:
+> > > > - restrict U-Boot to using memory below 4GB for platforms which have
+> > > > the DMA limitation
+> > >
+> > > You don't need that. The bounce buf code has a callback you can use to
+> > > define the limitations
+> > >
+> > > > - create (in board_f) a special region below 4GB for use with the
+> > > > bouncebuf logic
+> > >
+> > > The only problem with EFI is that you don't know how much memory it
+> > > needs and we can't use the existing memalign calls. So if we replace
+> > > that memalign in the bounce buffer code, with an lmb reservation we
+> > > have everything we need.
+> >
+> > It's not even an EFI problem is it?
+>
+> Fundamentall, yes, this isn't an EFI problem.
 
-If it takes 2 seconds then I think you may have something wrong in your
-configuration? Please share a "bootstage report".
++1 it's not. As Heinrich explained EFI just makes it a lot easier to trigger
 
-The Ethernet initialization should be fast, trying to use the Ethernet
-will however be slow. The Ethernet PHY reset should be around 10+50ms.
+>
+> > You could hit the same problem reading a file from a filesystem
+> > outside of EFI too.
+>
+> Yes, but we tend to choose the addresses in the env variables that are
+> used in the more traditional boot methods to prevent this.
+>
+> > These specific SoCs just aren't heavily exercised is one of the
+> > challenges I think and so it's possible that we have a few things to
+> > yet improve in the bounce buffer code (which was added for other
+> > SoCs and done as generic enough starting point for others).
+>
+> The existing bounce buffer code was written to solve a completely
+> different problem.  But it could indeed be generalized to solve this
+> problem as well.  That requires somebody willing to work on a larger
+> set of actual hardware that includes SoC with cache-coherency
+> challanges (which is what the current bounce buffer implementation is
+> there for) and SoCs with DMA addressing challenges.
 
-Reaching eth_common_init may take some time, but eth_initialize should
-be relative fast.
+So, I think if we
+- Use LMB instead of memalign for the buffer allocation
+- Add an explicit flag on the API to cache flush or not. We could add
+this to the existing DM code
+- Revisit the 'bb' variable usage and set it correctly on
+drivers/platforms that need the bounce buffer
 
-Regards,
-Jonas
+We should be covered, no?
 
-> 
->>
->> Maybe this could be extracted to a rockchip-hdmi.config-file to make it
->> more optional?
->>
->> E.g. use "make rock64-rk3328_defconfig rockchip-hdmi.config" to build
->> with something like:
->>
->>   > cat rockchip-hdmi.config
->>   CONFIG_VIDEO=y
->>   CONFIG_DISPLAY=y
->>   CONFIG_VIDEO_ROCKCHIP=y
->>   CONFIG_DISPLAY_ROCKCHIP_HDMI=y
->>
->> Regards,
->> Jonas
->>
->>>  CONFIG_SPL_TINY_MEMSET=y
->>>  CONFIG_TPL_TINY_MEMSET=y
->>>  CONFIG_ERRNO_STR=y
->>
-> 
-> 
-
+Thanks
+/Ilias
