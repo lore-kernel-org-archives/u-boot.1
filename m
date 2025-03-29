@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA6BC36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40E5C36008
+	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 15:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5D0E81E06;
-	Sat, 29 Mar 2025 16:06:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0BEFB81E8C;
+	Sat, 29 Mar 2025 16:06:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="B7JDZyB+";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yHcyaGhd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF59380F0E; Sat, 29 Mar 2025 16:06:44 +0100 (CET)
+ id C800581E6C; Sat, 29 Mar 2025 16:06:50 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B602810EA
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:06:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6E1A81E3E
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 16:06:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743260801; bh=+WbOPwdPvB1n2KjzOt/ng2yLC8OHAJOWoH03xzFt3tU=;
- b=B7JDZyB+ujGap9QkcHl6ZFf+AheZw9UMuw2ZvFjfT4SKIawOqWAFqwNOVqrplOeJBqnhed3fi
- AGUJ1m+8qoB/HaBmEn42V0Zjdnpf8I5mPWaGCSlM0rFLQY+1j82eexSfkcCX/G+qCF3eKt34Ybh
- IDUyOv4iiolKyDMUpX4/u+rX1btuylBATqT1LRJkKd13eqqDPAcEJe3eCHDmp50A+q66fRJ0fgG
- C9ameKKVyD0Ro3UJzfx8w2UaLRIUBrjMpm3sDVEyn3282xGfq5ygs1ShMcx86uNrWPmWIoAvwv+
- V1fVbXbzXYTyh3Qmr8zu0brUUfPyNxCapLMxfVpqH9WA==
-X-Forward-Email-ID: 67e80c7c21787eb134711ef2
+ t=1743260806; bh=5iyXKZ3U4lpExoAOELxbkkZuxD1MRGIVTnVi3v9ybt0=;
+ b=yHcyaGhdwRlAk95TPlM6YvXMdItPmY4Iupg6SiX1Z8RUvbSkGFJGmZ7PGnZdXBvTl9UgYY42P
+ JC9p1p7kQqCEBS+vRJLfI2Rvt1R8lN528cQUkxYlHNwZppdWjI1qfRTwJnmaHeZjwZm4ZIrMePs
+ nvR7FgDbc10H53Ncj6muFJuskKcmDOGTE833nXB9/fAnNGrXKlWr3Q1zgx3pvr4gPUuZ9noqNrA
+ /DPC/eUPVX1qzcz802GwCiBEszeQB4+Th5s8iBfBSxxP3O/+xRT+KjcT9lTh1lTNurZ29rHGsCm
+ vGzbTPODqhhYWdh6ufEarajOwsxxR43T+PEx7MJDX7xg==
+X-Forward-Email-ID: 67e80c8221787eb134711f1e
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.0
@@ -47,9 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v4 01/10] rockchip: binman: Correct the OS prop for U-Boot
-Date: Sat, 29 Mar 2025 15:06:04 +0000
-Message-ID: <20250329150626.2879942-2-jonas@kwiboo.se>
+Subject: [PATCH v4 03/10] rockchip: binman: Add an fdtmap
+Date: Sat, 29 Mar 2025 15:06:06 +0000
+Message-ID: <20250329150626.2879942-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250329150626.2879942-1-jonas@kwiboo.se>
 References: <20250329150626.2879942-1-jonas@kwiboo.se>
@@ -73,35 +73,44 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-The U-Boot image is currently being identified as an invalid OS in
-spl_fit_image_get_os() due to case sensitive compare.
+Add an fdtmap so it is possible to look at the image with 'binman ls'.
 
-Use the correct lower-case value to fix this.
-
-Fixes: e0c0efff2a02 ("rockchip: Support building the all output files in binman")
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 Changes in v4:
-- Update commit message
 - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
+
+Changes in v3:
+- Add blank lines before the node
 ---
- arch/arm/dts/rockchip-u-boot.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/rockchip-u-boot.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index c8c928c7e508..e9ed1d4b5738 100644
+index 2b01dc660562..8aea2e6f5713 100644
 --- a/arch/arm/dts/rockchip-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -50,7 +50,7 @@
- 				u-boot {
- 					description = "U-Boot";
- 					type = "standalone";
--					os = "U-Boot";
-+					os = "u-boot";
- #ifdef CONFIG_ARM64
- 					arch = "arm64";
- #else
+@@ -170,6 +170,9 @@
+ 			offset = <CONFIG_SPL_PAD_TO>;
+ 		};
+ #endif
++
++		fdtmap {
++		};
+ 	};
+ 
+ #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+@@ -203,6 +206,9 @@
+ 			/* Sync with u-boot,spl-payload-offset if present */
+ 			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+ 		};
++
++		fdtmap {
++		};
+ 	};
+ #endif /* CONFIG_ROCKCHIP_SPI_IMAGE */
+ };
 -- 
 2.49.0
 
