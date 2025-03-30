@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38DF1C36011
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 12:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4859C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 12:28:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44FB081EBB;
+	by phobos.denx.de (Postfix) with ESMTP id 9986681EDD;
 	Sun, 30 Mar 2025 14:28:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="xTpSG+/9";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lLMtk+/G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4F69809A5; Sat, 29 Mar 2025 11:54:36 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 781698171B; Sun, 30 Mar 2025 12:52:49 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D0078059D
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 11:54:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCF0080FF7
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 12:52:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-30613802a6bso30606991fa.1
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 03:54:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1743245674; x=1743850474;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3zVMr9mi4OZt8aBmnq4DYfYm44bWrX1d0vc9tHxYyxY=;
- b=xTpSG+/9PxyxhhCnamJyKXv8eURgmMC7Pa/UlnuE+fzi78lSxlfW/Zj4ewxe0q4NO6
- u8nk7iNzXh8mb6ZfJkudvdOU6+GsDQn3RzchsEW3uV+nu8c+IQAjBkHUEH86zBlXygVe
- yOIaS00ftmceFtJuMpWi1VbLt5HxNi4LuwlOFMn0NK7SIV967yZAfvrkfRAweNFop4y2
- D82WnFjmwG7PEFsM1HM3mrLtm0WkTKY5NoxDKWy/Jxr2FZxvLQp7OSKZbYNSrVxrh34h
- oVl6lepoQs/JIYDUtXycL8IxBonMA4YoRBfMvTCJ5lnQ0P3LgZAYVpeud5HWMtcpmVG5
- 4OHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743245674; x=1743850474;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3zVMr9mi4OZt8aBmnq4DYfYm44bWrX1d0vc9tHxYyxY=;
- b=WYTkg7XdR+Ijts8Gm7gBobRB368SKve9p3wdkoIOFV8BnSWrOzkRaHH8kbFtb2gHGc
- AJQgzU+fIlC6DbNqY4YrPiVQ606F1q17Q9y99FzSEai/7JBbrZ1BdwAmcaKHTSr/mVQ5
- 0hD+ttxEOuYntj0A6TUCOSXeHNqj22MpphKuTV/D7SZbHgpnxS2bYGY97o1ztaRbQP/B
- QoqZF0vaGCrZ1s5o0Qdc8PgbSat6vz1Hi70xsloQ6EBOpjOKqAwVqCW5typY31HLDXBN
- DKfd/g6A+RuYzT0Of5ljawvyInSukI4JwDCDiSwOXZ5iHOYNJks7WiR8xyWaSsKcma+4
- NklQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkxEPe06NZN65/SEljf1TJIwgr0xnr9nKGho1QdytX24X9i+0LUbnO0FkC2Knh8V22HekNA8w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEPoS8zLnqPrV33UsZrRZsal5tqP/naL5RXg13zvH9bK3jBbtz
- JkNRon5JgymReyC79E7FovItbqy0gopPE+1YCCydsB4IFT6/uKM57PsSfokiOG9Ad5KK+hxcdU7
- yfBONruh9AG7X8ecoeJ2duRqfFLhEUYACJYJPdg==
-X-Gm-Gg: ASbGncsi8L5nTIqH3QPFb1ykB3LJrQdkseIgNry2uIKoQIytQcMMmqfE6GDCTtcVUrF
- 8F/ZH8UpsUnHiapOS64xWNS7h+gYahz7czysClw7jhcKJfc6zAUAB9PVGyZg2wv2Y52jikLpMhT
- 2dSYJIAWYTIAUbX7JX3KuFEtY=
-X-Google-Smtp-Source: AGHT+IFqLd0Gv1Js48RX4F5N1CDkMmjsvltPkCyhLt+VkYBDLxWG1zAS76myU8kx6IoqkkyAyxVHnYa2pgGq1O1upHU=
-X-Received: by 2002:a2e:a985:0:b0:30c:dbf:519f with SMTP id
- 38308e7fff4ca-30de035b033mr6773051fa.35.1743245673502; Sat, 29 Mar 2025
- 03:54:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=1dca=WR=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1743331965;
+ bh=kFtph2Ue/Nxd7ULDWLxidMPUzbuccIt3Krr2sL7d9vI=;
+ b=lLMtk+/Gi3IDLn809aniGZ7/56CZTjEW0uC+1rBtedWothUD/72f3VgVXaQ7FcpWi5Kad8xRK
+ ltUKWSNuDDhCVwcPUUbekqYbDWTJkbqAF76eJjvMECnwptC36TBW42wkQ5zK3fMx8Fy0G5LsJ9L
+ 1S05nRvOGmL/aJHE+oW6Z9T2oVkM4puQnQr6pa4aHRWnMAE8+n6vKnk27zgmkraS4UbsJXtYn+D
+ YFBXHVu6iY70+IbqjifsH5W1lAjiSXOkdr7J4Xdfz/OLgSQxvPHscg6utDfR4KWm7STQKjWwNTe
+ nPO2pXMlfojB34HMOc4ZnrZgbwJ9GWfjNmEGxnlmq53w==
+X-Forward-Email-ID: 67e922790286204565e943d7
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <2c9fbc74-aa8e-46e0-a73b-26894442c56f@kwiboo.se>
+Date: Sun, 30 Mar 2025 12:52:33 +0200
 MIME-Version: 1.0
-References: <20250328-ums-gadget-leak-v1-0-3b677db99bde@baylibre.com>
- <CA+GyqeZwrAaQ_7DcvY6VgnVo0WTsMBiZsKZBmWVzQu2CAL6_xQ@mail.gmail.com>
- <87tt7c885k.fsf@baylibre.com>
-In-Reply-To: <87tt7c885k.fsf@baylibre.com>
-From: Zixun LI <admin@hifiphile.com>
-Date: Sat, 29 Mar 2025 11:54:23 +0100
-X-Gm-Features: AQ5f1JofEeLEgMpC5zEZ3aYV3vParT7DtbYGSqBLuwkE-oZUnBMPNA1_mpRBwJM
-Message-ID: <CA+GyqeZSSM8dLbWei2SpswCk5pucRw=-eA5mEU1-O87q3xHj4A@mail.gmail.com>
-Subject: Re: [PATCH 0/4] usb: gadget: f_mass_storage: Fix crashes on low
- memory devices
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: io-domain: Enable by default for all supported
+ SoCs
+To: Chen-Yu Tsai <wens@kernel.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Chen-Yu Tsai <wens@csie.org>, Akash Gajjar <gajjar04akash@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ FUKAUMI Naoki <naoki@radxa.com>, Heiko Stuebner <heiko@sntech.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Klaus Goger <klaus.goger@cherry.de>,
+ Levin Du <djw@t-chip.com.cn>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, Nick Xie <nick@khadas.com>,
+ Paul Kocialkowski <paulk@sys-base.io>, Peter Robinson
+ <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Shantur Rathore <i@shantur.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Xiaobo Tian <peterwillcn@gmail.com>
+References: <20250204172319.3361870-1-wens@kernel.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250204172319.3361870-1-wens@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Sun, 30 Mar 2025 14:28:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,19 +95,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Mar 29, 2025 at 11:04=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
->
-> If you are OK with being mentioned in the commit log, could you please
-> answer this email thread with the special "Tested-by:" line.
->
-> Mattijs
+Hi,
 
-Hi Mattijs,
+On 2025-02-04 18:23, Chen-Yu Tsai wrote:
+> From: Chen-Yu Tsai <wens@csie.org>
+> 
+> The IO domain driver controls the I/O voltage for various pins,
+> MMC included.
+> 
+> Enable it by default for all supported Rockchip SoCs.
 
-Yes of course, I searched a bit for tag usage but did end up with the right
-document you linked ;)
+This will also enable the IO domain driver for evb-rk3399_defconfig,
+something we want to avoid as that target has typically also been used
+as a fallback/generic rk3399 target.
 
-Tested-by: Zixun LI <admin@hifiphile.com> # on SAM9X60
+The IO domain driver was excluded from the evb-rk3328_defconfig for that
+specific reason.
 
-Zixun
+I have sent a series that adds generic-rk3328/rk3399 targets that can
+help replace such use of the evb-rk3328/rk3399 targets. However, I
+suggest we keep IO domain driver disabled on the evb targets for one
+more release before enabling it. Will shortly send a v2 of the generic
+series with ROCKCHIP_IODOMAIN=n for the rk3399 target.
+
+> 
+> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
+> ---
+> 
+>  configs/chromebook_bob_defconfig             | 1 -
+>  configs/chromebook_kevin_defconfig           | 1 -
+>  configs/eaidk-610-rk3399_defconfig           | 1 -
+>  configs/ficus-rk3399_defconfig               | 1 -
+>  configs/firefly-rk3399_defconfig             | 1 -
+>  configs/khadas-edge-captain-rk3399_defconfig | 1 -
+>  configs/khadas-edge-rk3399_defconfig         | 1 -
+>  configs/khadas-edge-v-rk3399_defconfig       | 1 -
+>  configs/leez-rk3399_defconfig                | 1 -
+>  configs/nanopc-t4-rk3399_defconfig           | 1 -
+>  configs/nanopi-m4-2gb-rk3399_defconfig       | 1 -
+>  configs/nanopi-m4-rk3399_defconfig           | 1 -
+>  configs/nanopi-m4b-rk3399_defconfig          | 1 -
+>  configs/nanopi-neo4-rk3399_defconfig         | 1 -
+>  configs/nanopi-r4s-rk3399_defconfig          | 1 -
+>  configs/orangepi-rk3399_defconfig            | 1 -
+>  configs/pinebook-pro-rk3399_defconfig        | 1 -
+>  configs/pinephone-pro-rk3399_defconfig       | 1 -
+>  configs/puma-rk3399_defconfig                | 1 -
+>  configs/ringneck-px30_defconfig              | 1 -
+>  configs/roc-pc-mezzanine-rk3399_defconfig    | 1 -
+>  configs/roc-pc-rk3399_defconfig              | 1 -
+>  configs/rock-4c-plus-rk3399_defconfig        | 1 -
+>  configs/rock-4se-rk3399_defconfig            | 1 -
+>  configs/rock-pi-4-rk3399_defconfig           | 1 -
+>  configs/rock-pi-4c-rk3399_defconfig          | 1 -
+>  configs/rock-pi-n10-rk3399pro_defconfig      | 1 -
+>  configs/rock-pi-s-rk3308_defconfig           | 1 -
+>  configs/rock-s0-rk3308_defconfig             | 1 -
+>  configs/rock960-rk3399_defconfig             | 1 -
+>  configs/rockpro64-rk3399_defconfig           | 1 -
+>  drivers/misc/Kconfig                         | 6 +++++-
+>  32 files changed, 5 insertions(+), 32 deletions(-)
+> 
+
+Please add following to evb-rk3399_defconfig in a v2.
+
+  # CONFIG_ROCKCHIP_IODOMAIN is not set
+
+With that fixed, this is:
+
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+
+Regards,
+Jonas
+
+[snip]
