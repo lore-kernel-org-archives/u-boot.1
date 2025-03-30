@@ -4,98 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7638C3600B
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D18C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:47:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87A4A81E5A;
-	Sun, 30 Mar 2025 16:45:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE543800C1;
+	Sun, 30 Mar 2025 16:47:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ozjoDKHq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DuVT04W/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E72D581DE3; Sun, 30 Mar 2025 16:45:49 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id B5FAA81D3B; Sun, 30 Mar 2025 16:47:19 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5E3680050
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:45:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1800280050
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:47:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7272f9b4132so2795089a34.0
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:45:47 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-60208b7a6d6so1089619eaf.1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:47:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743345946; x=1743950746; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743346033; x=1743950833; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CZ8XOby1wEtpEaSiEKXOwHxZbcP2Um00bsR4YWL6IBo=;
- b=ozjoDKHqVMy6z/hlryWzwT73PFwurn5mTS3th7HFXe5WFiKHCZ3iihOOO48RqzYR2M
- UuVhQNGMMICbswbMHUL63QiOzMl/cR8uga+uA6mU9dxPjSKDvuAFCUD9tfRtkl2MDBYK
- lTIf8zP88bAXC14XsSZq115s/Ra/tbnG8cJ2c=
+ bh=zL+JBZfZ6MoWu7nA7USe+UHw4QZgJfbqXYOWC/Sr+7g=;
+ b=DuVT04W/IDvaen+EMeQLahHy6MUCmcCuwiaochRtRwYmYXnySolJjdqyAbedPMthNh
+ SZAXyAysNoX6g9N9n/e4l9Tjs3Nvk3uPXy/dnInDv4PxZ2u5NIgvaZVnUISQrXyJTqj1
+ X8KBcSDxxyEHh3Lq/wTvW1QWYo3pUu536seJk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743345946; x=1743950746;
+ d=1e100.net; s=20230601; t=1743346033; x=1743950833;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CZ8XOby1wEtpEaSiEKXOwHxZbcP2Um00bsR4YWL6IBo=;
- b=ZTHadIOVBih2XPzcVywvu+oaaaa8yjXrGuA9wRTaQoN9AebVIc9mhJHaMvkUUWPZ+u
- 2DBvEXhSEcX3dpajdpgpZJwPfhy4m4mdAHm1SDAXaWyf077dJywA7dPV4zjv5BgV9DIk
- eu4Um4CPXWwfY4LzMlr4gF+5VjeEhEbbkttZXEjwy2YjqdoMqdawz7Rmt5Rx7EqWzDtN
- vuo0ERd0Q1IZStti9JJ+c/vjkiCJHImvcYbByUmU99WbwvKMZz8bjGLSYyzgHX2DRane
- wa7HeYajgY4+25wKwOiEKyZicHAnP4cLHVr2mt/vkpRDUe7OjipA9VFktxGmEXOyrHeC
- 8pag==
-X-Gm-Message-State: AOJu0Yy8NdmC+5RfMuioUku1sw36phUdn7VDKa5vVTr3JxDVBPG1I9QX
- UR7g4cl2FyuGaTa3wwryLSuspG+ju2Av+6lomUDjpE3pc2ItzEVG3zEXdJi9+EQ=
-X-Gm-Gg: ASbGncuLC4kzWVjFl4JbHUNJm2v9rdAgIcII/gLMupAMC7CpMPj8UNJaCv/YSvGYXkJ
- 5F5WzaJT424PsDSr1jzjgeqFvQ53q8xUFe9/WeZgEEoHuIaqgzzM9hOLexEBtUJBgqVqLGSnlXe
- RvP6rjQFDGGtFBw3KpN0/FoB6XInwsWnq8hMxhNonRcuQhmCKY5JF3wuxRPW8SOB6i1XuGIm56C
- lGyjpJXQUNBsQA/sHanzaZhpWtdt4Xl3JP1Xo8tj/gkuC+V2TziFGIzw9pTwRSx4OL/K24LSdXM
- anWOMNgno9gh6gQImreJAVsXc5tPS7c+q/Wih4xNLJ7XKs7xDevu+0AgmJ3x4gnf76bdRSm177e
- kR+zAMg==
-X-Google-Smtp-Source: AGHT+IEtVIWslYFYEolgsWEQXez4lEvOlSoSq+riqDtjmu9ZjsUCrH8W+aH6OdK7rUnYofzJnp9p1A==
-X-Received: by 2002:a05:6808:1811:b0:3fc:7e1:a455 with SMTP id
- 5614622812f47-3ff0f4ea9cdmr3495531b6e.2.1743345946204; 
- Sun, 30 Mar 2025 07:45:46 -0700 (PDT)
+ bh=zL+JBZfZ6MoWu7nA7USe+UHw4QZgJfbqXYOWC/Sr+7g=;
+ b=Vzqw7BWjP8eoJoN108zBObHBEvcYnA5lKRAb5XeaNr8fnNhMhvzFPlAMt7ZqM6bmxr
+ qpa6IGMJQ+rSI3Q3It/idQDGtE6uSmh4HdwW2+n3x48DRUjciSSSXR4zkxqNvYP88TME
+ FpkgGb6faARjPsJ2Vmzd/Rmr59U2gZ4bRoVuMxYyekGpbLgUCpoycZvpsJt/6Ultb2Xq
+ dVwDuC34aJQKMfSqdGZ1BKdqB8cNp5lQASARhdPpCZ/NQb3jY9BCU2RrfLE+kqaHXb+O
+ AinIMVEfitH6a5eh25AL2HzTvcjaWKNxKEvCx96zvpq0VTGOldwhkm/3vWNOb1SfZrcd
+ dqLA==
+X-Gm-Message-State: AOJu0YxWuPgcdHOqvE5CxkULOFJ/tphjM/5PAeoa/t6GV54usoJGJEZy
+ CNQcZT6QL/zOVpI25rWFU14GoDJSkP2KrDdGBs05GxRzvSgakUSxOMnOD61smXw=
+X-Gm-Gg: ASbGncsqUDJeRwUxn/JYijDxeW2po3MOFseoqHGBZNxLjrFcW+k5qLkmVy28uZWUJ0u
+ VwEmYH54WSeQrEfO2Cggl0tptZPhhfQLfJEuGoiuI2+VJSp8EmcZL5+hB+FP59vACPRHoCzs7wo
+ O0a5f4+nFiLZFce/1G4mL2Sg1Mr8VGGm66zoSjhFZBjm1FT5Ks62ZKmbhJlBMgPB3ls5KXhvO0c
+ SdfUi3oEKiYcYBfjs8+PzkXOb+66H87SSNmta+1SZg1AHxc1bwPlOL+8mD2JzMluqt6Egp1Jb0d
+ qaXogggXIlPswWoZ66gPg1M6T64CcPFuJQzjnPrpOqD9aG8RK72IJPEGglYpTMg4nrF8iB0dosC
+ 60zdwLw==
+X-Google-Smtp-Source: AGHT+IHIxz5sX6s8gUOCdT8B2SI7+VY600hYx7RsFo5JZmqhBiRH0gb2FpX9oPn48rJc5wUipCQ75w==
+X-Received: by 2002:a05:6820:c88:b0:602:7744:6815 with SMTP id
+ 006d021491bc7-60290c1161amr3377075eaf.0.1743346033663; 
+ Sun, 30 Mar 2025 07:47:13 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ff05167352sm1155157b6e.5.2025.03.30.07.45.44
+ 006d021491bc7-602844ff89esm1134279eaf.9.2025.03.30.07.47.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 07:45:45 -0700 (PDT)
-Date: Sun, 30 Mar 2025 08:45:42 -0600
+ Sun, 30 Mar 2025 07:47:12 -0700 (PDT)
+Date: Sun, 30 Mar 2025 08:47:09 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
  Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
  Julien Masson <jmasson@baylibre.com>,
- Julius Lehmann <lehmanju@devpi.de>, Marek Vasut <marex@denx.de>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 09/17] test/py: Add a test image for Ubuntu
-Message-ID: <20250330144542.GQ93000@bill-the-cat>
-References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-10-sjg@chromium.org>
- <20250319145218.GG2640854@bill-the-cat>
- <CAFLszTiRm3YEQqU1w75uFp5gFZ1HiPv41vNX7VFy8XS80udVRw@mail.gmail.com>
- <20250319153510.GJ2640854@bill-the-cat>
- <CAFLszTg8a7CCiyyVVQdHDHNJ3MEP-Zxbbao_riy+iTzDt2u-KA@mail.gmail.com>
+Subject: Re: [PATCH v2 00/56] expo: Various features and improvements
+Message-ID: <20250330144709.GR93000@bill-the-cat>
+References: <20250328130713.2612648-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="C0lvtUd7zayyWGxx"
+ protocol="application/pgp-signature"; boundary="U0nIamHe3sGB7e7v"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTg8a7CCiyyVVQdHDHNJ3MEP-Zxbbao_riy+iTzDt2u-KA@mail.gmail.com>
+In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,95 +115,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---C0lvtUd7zayyWGxx
+--U0nIamHe3sGB7e7v
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 20, 2025 at 03:41:33AM +0000, Simon Glass wrote:
-> Hi Tom,
+On Fri, Mar 28, 2025 at 07:05:47AM -0600, Simon Glass wrote:
+
+> This series collects together some new features for expo to make it more
+> useful for boot menus:
 >=20
-> On Wed, 19 Mar 2025 at 16:35, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Mar 19, 2025 at 03:04:28PM +0000, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 19 Mar 2025 at 15:52, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Mar 19, 2025 at 03:38:03PM +0100, Simon Glass wrote:
-> > > >
-> > > > > Add an extlinux image that contains a few Ubuntu entries.
-> > > > >
-> > > > > Increase the number of sandbox-USB-hub ports to permit this.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > I don't understand what this test adds. In neither the current Fedo=
-ra
-> > > > test nor in this new test are we actually booting something, we're =
-just
-> > > > taking a sample extlinux.conf and making sure it doesn't fail. Is it
-> > > > that we're testing in a useful fashion now having two labels?
-> > >
-> > > I didn't think so either, which is why I never did this before. But it
-> > > turns out that there were some bugs, too.
-> >
-> > I don't understand you, sorry. You don't think so either to what?
+> - measurement and display of multi-line text objects
+> - internal alignment for objects (e.g. centred text)
+> - editable strings in text fields
+> - new 'box' object to draw a rectangle
+> - highlighting of menu items, rather than just relying on a pointer
 >=20
-> I didn't think we needed two extlinux examples on different boot
-> devices, but we do.
-
-I'm not sure it's particularly clear what you're doing here then, or
-why, but I'll find some time to read it all more deeply.
-
-> > > > We should probably be clear about what we're doing in the tests and
-> > > > instead of adding seemingly arbitrary distributions add an extlinux=
- test
-> > > > and testcases.
-> > >
-> > > This is not actually a test case. It is simply creating a new image.
-> > > The test cases are in the other patches, so please take a look there.
-> >
-> > Nothing in this series quickly reads as adding tests and fixing problems
-> > with extlinux parsing, it's all bootmeth stuff?
+> Expo's boot menu is restructured so that it is possible to iterate
+> through various bootdevs and update the menu as new ones are found. This
+> is more in keeping with how bootstd works.
 >=20
-> It isn't about the actual parsing of the .conf file, although I would
-> like to add tests there as we have none apart from what I have added
-> in my PXE series. It's more about having multiple devices with
-> bootable OSes on them. This series tidies up and fixes this. We need
-> to have an image available on more than one device to spot these
-> problems.
-
-And the existing tests for pxelinux that we have in mainline already,
-don't forget those.
-
-> Currently we have two accessible to sandbox, one extlinux and one
-> EFI*. I decided to add a third, using extlinux.
+> A new textedit object is added, intended to provide a simple text
+> editor. Future work will complete this.
 >=20
-> Again, this is not a test case, but provides an image for the test
-> cases in this series.
+> With this series the boot menu has a better layout and appearance.
 
-Adding mocked up things for use in sandbox is adding test cases.
+Did I already say this for v2 and forget? It looks like you forgot,
+again, to split the expo stuff out from everything else, which others
+might review.
+
+[snip]
+> base-commit: 37ef92a972663c6de1b81d24d2ca5cfd664fc6df
+> branch: schd2
+
+Of course, not being on top of mainline, no one should spend much time
+on this anyhow.
 
 --=20
 Tom
 
---C0lvtUd7zayyWGxx
+--U0nIamHe3sGB7e7v
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfpWRYACgkQFHw5/5Y0
-tyzKAwv+LMSJ26ol0/1+/lbogszDAp0cLFBSLAasN+Gu3OZ0PUCCQjevBeW495O3
-hrCkD8ztIPMOfCb8vJGg3/zN0b/ti5oU5N6vj5OkPa1qr11DD8SGxcIsg72odL6k
-ZNghpqLc7JUkKCXDEAU/VuKCFwF5T+oJ4LM569x0CBJ1BovFqICxsYLPJVEBVHit
-gcx1GXfgbCP1mreaL1iQzSSijXNMOS4pHjNh2Y1mGaxBjehh6/OuZ/y5pIZZR46p
-tALRmm9wsMcFF03QwMWu9pZntqNqUD07MT2+Yuq65F8DRgdOra3VFS2GIGsavX2i
-I7rawk9NcwCptM/gxWPzOfgCuUWGL5Gn3qktNrwZBlb8Wf1aW9uOFfbuqYZ5xrC1
-zpXc+Oecv+CZokWqSeqEE9cyPJrbgk6AruThGBS2sMq7xW8x0g/XKNS06r+hPHZO
-nlxyoYbUZ3BzgXXhWMUPHlB5BRDTi23O1c3MTFNe5heR3fRluwJf9t/oOfs+FbJc
-8L6w0SqL
-=n55K
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfpWW0ACgkQFHw5/5Y0
+tyzK4wv9Fda+lO+Ccy9GIa+UeOBHNclcg76Pf0z5Rc2IdzdADczaa4zGDoNAcU1H
+jR2igPhysDWRdYzUvUweRoEY96i+wE5eDSSoiSb3yCiBHlQbRKiWjyBQ0m9lYLaO
++zcFQyw0Ss7m4lB4doQkfxu3t9LL1ojg5AI69NKxYjt8lKzAPMJVgkcbj7SZ+tby
+05nKjYRWlzGEW9p/sEIhVe3h1CkpdFEJ1g2FOJNxT3KT3HyaE2OyXZsZAGfRvWME
+6p81Wejmu1q9EpyjiBDByqSF99Mja5mI8NifYAbg+xd705FGJVM3/YXb+npZc5Ej
+f8bHgF7r7MLXNZiUlEIt73PlD+O68ZJq16ePmS8/2xtzokml7iRsS19MZxIqG3gD
+rG5UeFqna/40TXb8U+lMIcgekrtBugMfz7yPGJapUTaVRgjfdToR9EK4Z4hMcmjL
+jXRAgULImm8ea4bGF3W7tz/nHHVOQXhEB2Gpa7+P8UwFucmN1Tyo+DoCq0sWRMk9
+EG3bPDDM
+=/PtW
 -----END PGP SIGNATURE-----
 
---C0lvtUd7zayyWGxx--
+--U0nIamHe3sGB7e7v--
