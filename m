@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665C4C36011
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9010C36011
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:09:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD0CA81E06;
-	Sun, 30 Mar 2025 11:01:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B3A680F9C;
+	Sun, 30 Mar 2025 11:09:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BHDe/Nco";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kx7cWA/m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7190081A0C; Sun, 30 Mar 2025 11:01:45 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 22AAD81879; Sun, 30 Mar 2025 11:09:32 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60B0181879
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:01:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9F2380BA8
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:09:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5e6c18e2c7dso6522439a12.3
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:01:43 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5e61375c108so4548951a12.1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:09:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743325302; x=1743930102; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LW+crjQ+fHQRWWUvN7wI5DOnrUciU39AkoCmAQ40tv4=;
- b=BHDe/Ncox3dfgsOIf5ujnavq2dlvGwsRZPwRV7RvWZ91wSDkydPTHPgAh6NWnAW3wD
- SMPg8eO1Gwmz5LEUcVOjFXJ7PGDccFcIDaX6rN7h4kROp6vFREy/EN8hfW9x4mMvSmT8
- Lb7A63GTmbEIaqaQgiurjhW866j1zreYA0e5HEmhrtqY8QfNhIQChE0rNgjOlfMTgQXP
- d4UOPrztCLRQABdDMiXR5N+ZsjzDPQJOyBgo4Zc9tGapGAVkBfpv3kYu3OKVTUXFtzhJ
- hd+DZLIdMYUHUuO/ZJnkvAs8MmFcPHXDDjKI5g73+Yf3ArpffNdxMve1JlU12Zw7yRZE
- gM6Q==
+ d=gmail.com; s=20230601; t=1743325769; x=1743930569; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LOsvLG/Sgauu7qnysrI/3mcj2q+Ynu7IpaUCO2EiL5E=;
+ b=kx7cWA/mAf4qaWtPFJfDzJTsQoGMtuaFilZ8Gt74cVGW1bzebiOfhUUhaVQzBHy22j
+ gfDPARvM9UnIC5cqngV4w5N5uECDaLq6qU99iYX92OkgfQosPFvfwyTK6yOEe7yJz1wP
+ 5qr63wKzsM045+HwBd/j3G/z90/TtKrdczUzkbFmfzaCr+LWFyj8NJZ62iiX/xmSzhlU
+ pMfkFOmrgQHow413zj0mEyEyi5QK7PxHVBCq/kBVFZ2OHjf8eLPwpN6kOz5FnYtPj6yH
+ nAOcyMoGpAhrRChQKJk/6rNU3YYNRDrXWGwtN5fnKnIXuouV8P944JYFISHYkXcYvH5a
+ +bGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743325302; x=1743930102;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LW+crjQ+fHQRWWUvN7wI5DOnrUciU39AkoCmAQ40tv4=;
- b=CXF3wYgvXzyqqXS1/yq1vn930TvpBG6eaSXGvwcAmvg7kIuhvVlKsgmQXYnx5Jo54/
- J3h7F2ZFuURU4Vmzy/ZlXInfvGCZuzIGvZ7iX5+UqOcWbfKEYD8Au5HwqotQw4NZl7/i
- KdP6Dx6hvVJHMB3aW0HLvF12BzHaHS39zyQQ3+rlsC+MK5tMR17VmZ8MdgEb5p+1eawl
- KnvEdQxzcuA1CZeZcW4IHTNGwZCSzbKU3m9QJbMlmFRFsIxqg4FCR73xw+YzTjeVtAiu
- u2hFgvXFEuy6aFCKzL+xIXzFeFLr9ibCHKUEuBtcud3Uk2Sb+C7McqAzH+J2jc2S8PgL
- OKiQ==
-X-Gm-Message-State: AOJu0YzCRbiYQ68N0iyvElaJzIi3rJ/WNuxoh+J2HO3P+xvrusgTcgvF
- mVmHx9dAabtsbPOYGjAZsfIt0huiXBluDJLR6r+vCXD8Rndhe+si
-X-Gm-Gg: ASbGncv0hJzF0K5wTeRiQduiGs0LNrV/81TuL0Erj5QBBKeHwH470K2r+NDb3OLbQbW
- JYwqUEvsT3tIfGPM1BpG1AZkqcxoGpK96TC7K5llZFh7pvb6Vi++UmWSdst1Drctpslf9ZaAcgG
- JXwqtyJKiR69EKoH6jb78Fr/oWQkYZAVuYxjGi2VJLBtjeSnplPK+IeTb91pxH13a6yeesDpjhe
- aw8VSouTkk1X1bmjaNmiMKix6er+jNrmU5w9zgJb/hHgg5ghT1OSPfXrtkTFW7puEQOFV/jZZ7W
- V5Av05MVMxgThTBZJwIYV38yEj1V+k7aeOmQ
-X-Google-Smtp-Source: AGHT+IEP5uJkhKWtOMxNP0ebGAlU0LYvTvzoO8GcOYR2g1mh6jOieak6akBiajOKd0W1Q8yLWHdlkA==
-X-Received: by 2002:a05:6402:270d:b0:5eb:9673:183f with SMTP id
- 4fb4d7f45d1cf-5edfd7037b2mr4143961a12.20.1743325302346; 
- Sun, 30 Mar 2025 02:01:42 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743325769; x=1743930569;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LOsvLG/Sgauu7qnysrI/3mcj2q+Ynu7IpaUCO2EiL5E=;
+ b=n6fVfElMQJTxtgjozlprCdFcqsZWQy1m/tx0w1pd6jbm4a6t108ecT7Pxx0O24WZW6
+ fcq9mlPfZ0T5/dgIraTv5Uc7KSKc5aj8Om4E7X0zhssEPWjlrRicEi6KVpyDEFarI+V1
+ nQVl9v4TemT9SnsYwmNyChE96smOhKjYSsCrAUFFzBFxNcylxV1JxMatffiFVm32GKxb
+ NKmfz+3eZSpeEG9B6fKGWKxrjohHR4DVCJe+aOQIxrum22yQ3FDKgKY5AJf7bpFJlUTG
+ zEGyQJUJoC6DA6tUQW/Ds+eQCswdLaZoEP7UlZSzUuah4EicXmbXmxkQ8MZ9QsuKHJHY
+ wBPQ==
+X-Gm-Message-State: AOJu0Ywcto64UGayRR3WHs9T+RuEypQmWBGY4SeadhY+7MyhW8Lqo1C+
+ qysM74jqAOy2qKmw0Zdso05CX5Nyn3B3c8S06Wr8DnFUVw27xV4O
+X-Gm-Gg: ASbGncv8IBuqrCt7qEQ31bbf5+tg47pqnCYLdXi1/Om2GgMkEj4ydVwCzwsuFKaZK/k
+ Y/LEHaRLJ2WFEXtpid/XiUKmmTqo6pSRfDlp/xyHz8C/7NzsxcLrKOEkRFQS7FIr2IBRJpioo2a
+ UJP3BMFxs5EerzjdQcqwJS6cgMJ2H6pyDHhKXlXI8Pzh7btVhdrNgX0rXjF43z8oAeyGsKB8tZv
+ cC+90dq49bPPuMHFCtbspwaDFUNw3PIkUHDhxqxq05HUZ7Kh86QFxh4NeM8D3nR/XtbYlPc+vzg
+ cB/YJ4aDnSqcSYOKdB6sD6dAweDzOod1uxqw
+X-Google-Smtp-Source: AGHT+IHLHnHRmGGMFjVHt/NgXduVUoIA51Fajs4hzml2/YtSinkBU13Cyf2i2M2GgKRAHdalzEa9xQ==
+X-Received: by 2002:a17:907:3da3:b0:ac7:1c1a:d0f6 with SMTP id
+ a640c23a62f3a-ac738be3aa2mr405098866b.37.1743325769237; 
+ Sun, 30 Mar 2025 02:09:29 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5edc16aac10sm4172595a12.9.2025.03.30.02.01.41
+ a640c23a62f3a-ac71922ba0fsm453376466b.27.2025.03.30.02.09.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:01:41 -0700 (PDT)
+ Sun, 30 Mar 2025 02:09:28 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/2] configs: mocha: add missing SPL_HAVE_INIT_STACK option
-Date: Sun, 30 Mar 2025 12:01:20 +0300
-Message-ID: <20250330090121.8312-3-clamor95@gmail.com>
+Subject: Please pull u-boot-tegra fixes
+Date: Sun, 30 Mar 2025 12:09:19 +0300
+Message-ID: <20250330090920.9021-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250330090121.8312-1-clamor95@gmail.com>
-References: <20250330090121.8312-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,27 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mocha was added and tested right before this config option was added. Add
-it to restore proper booting.
+Dear Tom,
 
-Fixes: d6a53f52 ("spl: Add an SPL_HAVE_INIT_STACK option")
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
+The following changes since commit 02d95aaee01a2faf53bba8f1417b55cd02b6a743:
+
+  Merge branch 'next' of https://source.denx.de/u-boot/custodians/u-boot-sunxi into next (2025-03-27 08:10:06 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-tegra.git fixes
+
+for you to fetch changes up to 5c0f34a0c9ea2fb34d608a5adb6632230b1c273c:
+
+  configs: mocha: add missing SPL_HAVE_INIT_STACK option (2025-03-30 11:16:47 +0300)
+
+----------------------------------------------------------------
+Svyatoslav Ryhel (2):
+      configs: ouya: add missing SPL_HAVE_INIT_STACK option
+      configs: mocha: add missing SPL_HAVE_INIT_STACK option
+
  configs/mocha_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/ouya_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/configs/mocha_defconfig b/configs/mocha_defconfig
-index 0cbedb21797..dfeb16ac08e 100644
---- a/configs/mocha_defconfig
-+++ b/configs/mocha_defconfig
-@@ -28,6 +28,7 @@ CONFIG_SYS_PBSIZE=2086
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80090000
--- 
-2.43.0
+Ouya and Mocha were added around the same time SPL_HAVE_INIT_STACK was
+introduced by Simon and therefore do not include this config option. It is
+critical to add it before any defconfig resync, since the SPL_STACK option
+will then be removed.
 
+Commits are rebased onto latest u-boot/next. Sorry for inconvenience.
+
+Thanks,
+Svyatoslav Ryhel.
