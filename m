@@ -4,100 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D18C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:47:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D8EC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:49:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE543800C1;
-	Sun, 30 Mar 2025 16:47:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A4E11800C1;
+	Sun, 30 Mar 2025 16:49:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DuVT04W/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iniI6Mjx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5FAA81D3B; Sun, 30 Mar 2025 16:47:19 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 1FD1B81DE3; Sun, 30 Mar 2025 16:49:09 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1800280050
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:47:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F137280050
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:49:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-60208b7a6d6so1089619eaf.1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:47:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43d07ca6a80so19386715e9.1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:49:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743346033; x=1743950833; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zL+JBZfZ6MoWu7nA7USe+UHw4QZgJfbqXYOWC/Sr+7g=;
- b=DuVT04W/IDvaen+EMeQLahHy6MUCmcCuwiaochRtRwYmYXnySolJjdqyAbedPMthNh
- SZAXyAysNoX6g9N9n/e4l9Tjs3Nvk3uPXy/dnInDv4PxZ2u5NIgvaZVnUISQrXyJTqj1
- X8KBcSDxxyEHh3Lq/wTvW1QWYo3pUu536seJk=
+ d=linaro.org; s=google; t=1743346146; x=1743950946; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=EZl4zZItBZvah0CkH4pbCYfvWqD497lhFHlY3MCdU/E=;
+ b=iniI6Mjxeu0CeLFbFvTxzz6F9elc/l2+a83v9TIoPlVSlLZWmZU5C0ylMOsnZSqYEI
+ F+Avy7JSWpgJvNx68BhPTm7feW3LPNx0A1reZm5NSeJm3MSEzc4wknYn9kODrNi7IhqX
+ urHUoLHlb1kg+yAPXM4e+4Iqc8FNZpMQ2to0PIjQsRHJTmoLUihziF857WVcVRxUXcGc
+ K9xeZhZqtywhnb3M7F4T/u5NJxiNsQ5rSAaXCdPfgUlmuX3k3BntxhYlN4xQEVYV7yi2
+ N142gnAqeHFo3JE53FKjrXK9oBepv2BdTew3JLtd34hbSEphJoHKl0DuwT5hJdZWlzGI
+ VyOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743346033; x=1743950833;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zL+JBZfZ6MoWu7nA7USe+UHw4QZgJfbqXYOWC/Sr+7g=;
- b=Vzqw7BWjP8eoJoN108zBObHBEvcYnA5lKRAb5XeaNr8fnNhMhvzFPlAMt7ZqM6bmxr
- qpa6IGMJQ+rSI3Q3It/idQDGtE6uSmh4HdwW2+n3x48DRUjciSSSXR4zkxqNvYP88TME
- FpkgGb6faARjPsJ2Vmzd/Rmr59U2gZ4bRoVuMxYyekGpbLgUCpoycZvpsJt/6Ultb2Xq
- dVwDuC34aJQKMfSqdGZ1BKdqB8cNp5lQASARhdPpCZ/NQb3jY9BCU2RrfLE+kqaHXb+O
- AinIMVEfitH6a5eh25AL2HzTvcjaWKNxKEvCx96zvpq0VTGOldwhkm/3vWNOb1SfZrcd
- dqLA==
-X-Gm-Message-State: AOJu0YxWuPgcdHOqvE5CxkULOFJ/tphjM/5PAeoa/t6GV54usoJGJEZy
- CNQcZT6QL/zOVpI25rWFU14GoDJSkP2KrDdGBs05GxRzvSgakUSxOMnOD61smXw=
-X-Gm-Gg: ASbGncsqUDJeRwUxn/JYijDxeW2po3MOFseoqHGBZNxLjrFcW+k5qLkmVy28uZWUJ0u
- VwEmYH54WSeQrEfO2Cggl0tptZPhhfQLfJEuGoiuI2+VJSp8EmcZL5+hB+FP59vACPRHoCzs7wo
- O0a5f4+nFiLZFce/1G4mL2Sg1Mr8VGGm66zoSjhFZBjm1FT5Ks62ZKmbhJlBMgPB3ls5KXhvO0c
- SdfUi3oEKiYcYBfjs8+PzkXOb+66H87SSNmta+1SZg1AHxc1bwPlOL+8mD2JzMluqt6Egp1Jb0d
- qaXogggXIlPswWoZ66gPg1M6T64CcPFuJQzjnPrpOqD9aG8RK72IJPEGglYpTMg4nrF8iB0dosC
- 60zdwLw==
-X-Google-Smtp-Source: AGHT+IHIxz5sX6s8gUOCdT8B2SI7+VY600hYx7RsFo5JZmqhBiRH0gb2FpX9oPn48rJc5wUipCQ75w==
-X-Received: by 2002:a05:6820:c88:b0:602:7744:6815 with SMTP id
- 006d021491bc7-60290c1161amr3377075eaf.0.1743346033663; 
- Sun, 30 Mar 2025 07:47:13 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-602844ff89esm1134279eaf.9.2025.03.30.07.47.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 07:47:12 -0700 (PDT)
-Date: Sun, 30 Mar 2025 08:47:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v2 00/56] expo: Various features and improvements
-Message-ID: <20250330144709.GR93000@bill-the-cat>
-References: <20250328130713.2612648-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1743346146; x=1743950946;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=EZl4zZItBZvah0CkH4pbCYfvWqD497lhFHlY3MCdU/E=;
+ b=Vc3b+oGib9NorUKBwShQVEz/Eqxs6yA7DhLwoOauaasEdYphcVoiIzMoiI7ijaY+Pa
+ GnzUATxTovXTvYcKcyROY3/JpkaWVSHQc0gzqadKaHYbaiG+5z2NZhHknBrxGLkrdhue
+ yC48ww78csWnJiTeZyLYzKnQLaa4+UvxAMZC0J9dSMrZ7i2mDAJutit/12KH6Elxn3gx
+ HznE4rmfNQ8qg5vmWg/C3DgMdJQnbcmz+95F4TbOF+6hlxFDLluWAGldSPO6Hy6C/MQF
+ jW9jfaiQz3gDhz7t546YEFkdQq6Fx5Dx6wis9mo8pMU5IoKbbUKPDLWIGRFqHSXPB+OI
+ Tm4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU/O9TF3j0uCK8cKgjXoSqole4Pm0llIoJiq21IAzbiMXyrzax8SYFAvb1bpFdoLNQk1nl1DGU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy14mzZRPkZbsZwc1Rm3aCW6AE3aInVnu8APU0yidSqamUGImxJ
+ rBroX/r/2pabkG7o63hTzrDsV9hOE7isFO67bUPw/VCwffhIOtkJeFvS1v7i1d4=
+X-Gm-Gg: ASbGnctuCKox76OG9IpHdGCH6sWE5iOErQKYd+GMAuGMK5R6RO9RDJCYLbr1N9N9npn
+ L1b0SDxoaCVNzD9lJYuzZdrMmyuVY3m+OY7yGXJZjW9AINNi080ORPDoWqAYjL3yfhKS1F6ZcKI
+ Gz6va0NayuuZMkqyDyNesRjh9mpep3Pnyhw/onkKTkK9IztKepmGf3KvaOYJVsqm8XnD3ECigwR
+ N5pOEv8MHgVV7BPL/cHKWguZdi9Fl1Rj0MKWDCERoRxeKa4h4Eg3MzlqUGoyU6FJFZTTnvqoWAy
+ 3P1Xn9S4OPvSQOPkqdx92pfEz7xuVqJzgBJyEmzT/QRQ+klXO5cXcQp6IhQ6nYBUaTbI6ZW1BEc
+ =
+X-Google-Smtp-Source: AGHT+IHIBV7Xjw0NTMtKoadKJVKXBCRK0a/5NcBRlzv3aNhUCbBTJTR/v4MExOBecPiIqHIGJk8h7g==
+X-Received: by 2002:a05:6000:40cd:b0:390:e7c1:59d3 with SMTP id
+ ffacd0b85a97d-39c120cb878mr4074138f8f.2.1743346146414; 
+ Sun, 30 Mar 2025 07:49:06 -0700 (PDT)
+Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c0b6589e4sm8860098f8f.10.2025.03.30.07.49.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 30 Mar 2025 07:49:05 -0700 (PDT)
+Message-ID: <976d3ad7-2b81-4577-aba7-ae72f8a4311a@linaro.org>
+Date: Sun, 30 Mar 2025 16:49:03 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U0nIamHe3sGB7e7v"
-Content-Disposition: inline
-In-Reply-To: <20250328130713.2612648-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] phy: Add SDM660 support to Qualcomm QUSB2 phy
+To: u-boot-qcom@groups.io, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Alexey Minnekhanov <alexeymin@postmarketos.org>
+References: <20250325083713.2425430-1-alexeymin@postmarketos.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250325083713.2425430-1-alexeymin@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,61 +104,104 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---U0nIamHe3sGB7e7v
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 28, 2025 at 07:05:47AM -0600, Simon Glass wrote:
+On 3/25/25 09:37, Alexey Minnekhanov via groups.io wrote:
+> Imported from Linux driver.
+> 
+> Note that already existing but previously unused member of
+> struct qusb2_phy::has_se_clk_scheme is now utilized for it's
+> purpose.
+> 
+> Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
 
-> This series collects together some new features for expo to make it more
-> useful for boot menus:
->=20
-> - measurement and display of multi-line text objects
-> - internal alignment for objects (e.g. centred text)
-> - editable strings in text fields
-> - new 'box' object to draw a rectangle
-> - highlighting of menu items, rather than just relying on a pointer
->=20
-> Expo's boot menu is restructured so that it is possible to iterate
-> through various bootdevs and update the menu as new ones are found. This
-> is more in keeping with how bootstd works.
->=20
-> A new textedit object is added, intended to provide a simple text
-> editor. Future work will complete this.
->=20
-> With this series the boot menu has a better layout and appearance.
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   drivers/phy/qcom/phy-qcom-qusb2.c | 42 ++++++++++++++++++++++++++++++-
+>   1 file changed, 41 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
+> index c91ba18c4ab..cabd05bf5a6 100644
+> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
+> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
+> @@ -122,6 +122,9 @@ struct qusb2_phy_cfg {
+>   
+>   	/* true if PHY has PLL_CORE_INPUT_OVERRIDE register to reset PLL */
+>   	bool has_pll_override;
+> +
+> +	/* true if PHY default clk scheme is single-ended */
+> +	bool se_clk_scheme_default;
+>   };
+>   
+>   /* set of registers with offsets different per-PHY */
+> @@ -173,6 +176,19 @@ static const unsigned int sm6115_regs_layout[] = {
+>   	[QUSB2PHY_PORT_POWERDOWN] = 0xb4, [QUSB2PHY_INTR_CTRL] = 0xbc,
+>   };
+>   
+> +static const struct qusb2_phy_init_tbl msm8996_init_tbl[] = {
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xf8),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0xb3),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0x83),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0xc0),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TUNE, 0x30),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL1, 0x79),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL2, 0x21),
+> +	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TEST2, 0x14),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_AUTOPGM_CTL1, 0x9f),
+> +	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
+> +};
+> +
+>   static const struct qusb2_phy_init_tbl qusb2_v2_init_tbl[] = {
+>   	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_ANALOG_CONTROLS_TWO, 0x03),
+>   	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CLOCK_INVERTERS, 0x7c),
+> @@ -219,6 +235,18 @@ static const struct qusb2_phy_cfg sm6115_phy_cfg = {
+>   	.autoresume_en = BIT(3),
+>   };
+>   
+> +static const struct qusb2_phy_cfg sdm660_phy_cfg = {
+> +	.tbl = msm8996_init_tbl,
+> +	.tbl_num = ARRAY_SIZE(msm8996_init_tbl),
+> +	.regs = sm6115_regs_layout,
+> +
+> +	.has_pll_test = true,
+> +	.se_clk_scheme_default = false,
+> +	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
+> +	.mask_core_ready = PLL_LOCKED,
+> +	.autoresume_en = BIT(3),
+> +};
+> +
+>   static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
+>   	.tbl = qusb2_v2_init_tbl,
+>   	.tbl_num = ARRAY_SIZE(qusb2_v2_init_tbl),
+> @@ -316,8 +344,18 @@ static int qusb2phy_power_on(struct phy *phy)
+>   	/* Required to get phy pll lock successfully */
+>   	udelay(150);
+>   
+> +	/*
+> +	 * Not all the SoCs have got a readable TCSR_PHY_CLK_SCHEME
+> +	 * register in the TCSR so, if there's none, use the default
+> +	 * value hardcoded in the configuration.
+> +	 */
+> +	qphy->has_se_clk_scheme = cfg->se_clk_scheme_default;
+> +
+>   	if (cfg->has_pll_test) {
+> -		val |= CLK_REF_SEL;
+> +		if (!qphy->has_se_clk_scheme)
+> +			val &= ~CLK_REF_SEL;
+> +		else
+> +			val |= CLK_REF_SEL;
+>   
+>   		writel(val, qphy->base + QUSB2PHY_PLL_TEST);
+>   
+> @@ -413,6 +451,8 @@ static const struct udevice_id qusb2phy_ids[] = {
+>   	{ .compatible = "qcom,qusb2-phy" },
+>   	{ .compatible = "qcom,qcm2290-qusb2-phy",
+>   	  .data = (ulong)&sm6115_phy_cfg },
+> +	{ .compatible = "qcom,sdm660-qusb2-phy",
+> +	  .data = (ulong)&sdm660_phy_cfg },
+>   	{ .compatible = "qcom,sm6115-qusb2-phy",
+>   	  .data = (ulong)&sm6115_phy_cfg },
+>   	{ .compatible = "qcom,qusb2-v2-phy", .data = (ulong)&qusb2_v2_phy_cfg },
 
-Did I already say this for v2 and forget? It looks like you forgot,
-again, to split the expo stuff out from everything else, which others
-might review.
+-- 
+Caleb (they/them)
 
-[snip]
-> base-commit: 37ef92a972663c6de1b81d24d2ca5cfd664fc6df
-> branch: schd2
-
-Of course, not being on top of mainline, no one should spend much time
-on this anyhow.
-
---=20
-Tom
-
---U0nIamHe3sGB7e7v
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfpWW0ACgkQFHw5/5Y0
-tyzK4wv9Fda+lO+Ccy9GIa+UeOBHNclcg76Pf0z5Rc2IdzdADczaa4zGDoNAcU1H
-jR2igPhysDWRdYzUvUweRoEY96i+wE5eDSSoiSb3yCiBHlQbRKiWjyBQ0m9lYLaO
-+zcFQyw0Ss7m4lB4doQkfxu3t9LL1ojg5AI69NKxYjt8lKzAPMJVgkcbj7SZ+tby
-05nKjYRWlzGEW9p/sEIhVe3h1CkpdFEJ1g2FOJNxT3KT3HyaE2OyXZsZAGfRvWME
-6p81Wejmu1q9EpyjiBDByqSF99Mja5mI8NifYAbg+xd705FGJVM3/YXb+npZc5Ej
-f8bHgF7r7MLXNZiUlEIt73PlD+O68ZJq16ePmS8/2xtzokml7iRsS19MZxIqG3gD
-rG5UeFqna/40TXb8U+lMIcgekrtBugMfz7yPGJapUTaVRgjfdToR9EK4Z4hMcmjL
-jXRAgULImm8ea4bGF3W7tz/nHHVOQXhEB2Gpa7+P8UwFucmN1Tyo+DoCq0sWRMk9
-EG3bPDDM
-=/PtW
------END PGP SIGNATURE-----
-
---U0nIamHe3sGB7e7v--
