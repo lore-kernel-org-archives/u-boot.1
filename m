@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAA07C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 11:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0994BC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 12:11:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55AC08144A;
-	Sun, 30 Mar 2025 13:57:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D83F8144A;
+	Sun, 30 Mar 2025 14:11:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cNEERIhw";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BzT4YQ9T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 176CD819D2; Sun, 30 Mar 2025 13:57:32 +0200 (CEST)
+ id 2A6118171B; Sun, 30 Mar 2025 14:11:42 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8170880FDA
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 13:57:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A310D80FDA
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 14:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=1dca=WR=kwiboo.se=jonas@fe-bounces.kwiboo.se
+ smtp.mailfrom=SRS0=c171=WS=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
- References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1743335848;
- bh=ok1vS/zi+pharDRYZ/oWXwmT3wMUhW1kNiM7aFjpeSQ=;
- b=cNEERIhw44tShVzUwCOVLS/KwKoDHpU3jktGtcPkHW4CrORyQlZ+oLJDKYEz1GW1ygI3Ghe/N
- CrK3Am1zBPgVUG6F1/drwQzRSaK4R2GrddW97iBNWRW4zWGiNKnY106RXczfNKFruexXhRrVcYF
- EZ+7BTqQzsF3fapgMSsLUAalH1x6m8Y+EMwHLNzJa4Tv7qNnHtGqJMNDPsv/jUhV00WD2Sk/nWG
- GGpQMkKrrX50U3CnH0iT8dmbiMeUdXJ83YdbGyZMJE/QWnKlTAWYLoZBA1MjVLbn888i4PtNzeI
- upfNjblRR5NNrP9u0SxRoEsnENLNC7NWIpBOW9my8r0A==
-X-Forward-Email-ID: 67e9319e0286204565e94f68
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1743336697;
+ bh=0p50WQkih7ADiW46Ayph5vJJ1oTGLy/p6d6xesurF6s=;
+ b=BzT4YQ9TaHHRgWUupnvRiK1h7PkMBuxBAWzvyQ6A2XtUgn+HbA5n0ddZt0xN9BlQLCyNMpAy+
+ tGCvm0OkmHqQNojVvnZ6Lmh+aQQs5xbsdge6opPLNxoz6/ZRKCCfmJHwCLT8a2SZKfZwRw5af9j
+ ut1JrPjVtLTjilmMrmg+TVlMyRlR5gACUZubr+KcGQ2pyrPoGHEITCpyQyvq5TRo0CR8kGdm6Ax
+ 3vc6jx7/j8adKwOZkG6rj1DzCKlCm2vKB0J3/ucYmdxR6QT8qO0RsF8db3ixzHgY7FMBi0sK/do
+ Kri4AaalV03kd4BOUWT5oNbaLNO83lnECCUo3dreWk0Q==
+X-Forward-Email-ID: 67e934f3b53fbafc9c391419
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.0
@@ -43,26 +43,28 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <6f01aadb-9188-48e5-b4d6-2e3e2f69a04e@kwiboo.se>
-Date: Sun, 30 Mar 2025 13:57:13 +0200
+Message-ID: <a2dea153-33a0-42cd-a094-bfea08587a41@kwiboo.se>
+Date: Sun, 30 Mar 2025 14:11:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] video: rockchip: rk3328: filter unsupported modes
-To: Vasily Khoruzhick <anarsoul@gmail.com>
-References: <20250323225134.2369473-1-anarsoul@gmail.com>
- <20250323225134.2369473-2-anarsoul@gmail.com>
-Content-Language: en-US
-Cc: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
+Subject: Re: [PATCH v2 3/3] rockchip: rock64-rk3328_defconfig: enable HDMI
+ output and USB keyboard
+To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Cc: Vasily Khoruzhick <anarsoul@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Anatolij Gustschin <agust@denx.de>,
  Jagan Teki <jagan@edgeble.ai>, Quentin Schulz <quentin.schulz@cherry.de>,
  u-boot@lists.denx.de
+References: <20250323225134.2369473-1-anarsoul@gmail.com>
+ <20250323225134.2369473-3-anarsoul@gmail.com>
+ <3819cbcb-5fa6-4939-a2b4-643cadcc50ff@kwiboo.se>
+ <CAJs94EZR5HZSoQFQH=ByoUeQzOk9VoQD7-td00wvCzpFWR4F=Q@mail.gmail.com>
+Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250323225134.2369473-2-anarsoul@gmail.com>
+In-Reply-To: <CAJs94EZR5HZSoQFQH=ByoUeQzOk9VoQD7-td00wvCzpFWR4F=Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,54 +81,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vasily,
+Hi Matwey,
 
-On 2025-03-23 23:50, Vasily Khoruzhick wrote:
-> While RK3328 is capable of 4K resolutions, dw-hdmi driver in u-boot
-> seems to have some issue with 4K. 1440p or lower works fine.
+On 2025-03-30 13:52, Matwey V. Kornilov wrote:
+> вс, 30 мар. 2025 г. в 14:45, Jonas Karlman <jonas@kwiboo.se>:
+>>
+>> Hi Vasily,
+>>
+>> On 2025-03-23 23:50, Vasily Khoruzhick wrote:
+>>> Enable HDMI output and USB keyboard on Rock64 board
+>>>
+>>> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+>>> ---
+>>> v2: no change
+>>>
+>>>  configs/rock64-rk3328_defconfig | 10 ++++++++++
+>>>  1 file changed, 10 insertions(+)
+>>>
+>>> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+>>> index 6d00b52e62f..ae3512625cf 100644
+>>> --- a/configs/rock64-rk3328_defconfig
+>>> +++ b/configs/rock64-rk3328_defconfig
+>>> @@ -21,7 +21,9 @@ CONFIG_FIT_VERBOSE=y
+>>>  CONFIG_SPL_FIT_SIGNATURE=y
+>>>  CONFIG_SPL_LOAD_FIT=y
+>>>  CONFIG_LEGACY_IMAGE_FORMAT=y
+>>> +CONFIG_USE_PREBOOT=y
+>>
+>> This will add a large delay during boot as it forces a run of the slow
+>> "usb start" and is something we want to avoid for normal use, please
+>> drop this.
+>>
+>>>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
+>>> +# CONFIG_SYS_DEVICE_NULLDEV is not set
+>>>  # CONFIG_DISPLAY_CPUINFO is not set
+>>>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>>  CONFIG_SPL_MAX_SIZE=0x40000
+>>> @@ -72,6 +74,7 @@ CONFIG_DM_ETH_PHY=y
+>>>  CONFIG_PHY_GIGE=y
+>>>  CONFIG_ETH_DESIGNWARE=y
+>>>  CONFIG_GMAC_ROCKCHIP=y
+>>> +CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
+>>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>>>  CONFIG_PINCTRL=y
+>>>  CONFIG_SPL_PINCTRL=y
+>>> @@ -80,6 +83,8 @@ CONFIG_PMIC_RK8XX=y
+>>>  CONFIG_SPL_DM_REGULATOR=y
+>>>  CONFIG_DM_REGULATOR_FIXED=y
+>>>  CONFIG_SPL_DM_REGULATOR_FIXED=y
+>>> +CONFIG_DM_REGULATOR_GPIO=y
+>>> +CONFIG_SPL_DM_REGULATOR_GPIO=y
+>>
+>> The ROCK64 does not use any regulator-gpio, this look unrelated and can
+>> be dropped?
+>>
+>>>  CONFIG_REGULATOR_RK8XX=y
+>>>  CONFIG_PWM_ROCKCHIP=y
+>>>  CONFIG_RAM=y
+>>> @@ -104,6 +109,11 @@ CONFIG_USB_OHCI_GENERIC=y
+>>>  CONFIG_USB_DWC2=y
+>>>  CONFIG_USB_DWC3=y
+>>>  CONFIG_USB_DWC3_GENERIC=y
+>>> +CONFIG_USB_KEYBOARD=y
+>>> +CONFIG_VIDEO=y
+>>> +CONFIG_DISPLAY=y
+>>> +CONFIG_VIDEO_ROCKCHIP=y
+>>> +CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+>>
+>> This will force a small delay of at least a 300ms timeout for all users
+>> that does not have HDMI connected during boot.
 > 
-> Limit max resolutions to 2560x1440x60Hz, by filtering the modes with
-> pixel clock > 297MHz
-> 
-> Fixes: f3ea872970d603 ("video: rockchip: Add rk3328 hdmi support")
-> Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
-> ---
-> v2: add a comment that max pixel clock limit is a workaround
-> 
-> drivers/video/rockchip/rk3328_hdmi.c | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/drivers/video/rockchip/rk3328_hdmi.c b/drivers/video/rockchip/rk3328_hdmi.c
-> index 763669c09be..ff351aaac7c 100644
-> --- a/drivers/video/rockchip/rk3328_hdmi.c
-> +++ b/drivers/video/rockchip/rk3328_hdmi.c
-> @@ -105,9 +105,20 @@ static int rk3328_hdmi_probe(struct udevice *dev)
->  	return 0;
->  }
->  
-> +static bool rk3328_hdmi_mode_valid(struct udevice *dev,
-> +				   const struct display_timing *timing)
-> +{
-> +	/* Limit pixel clock to 297MHz. While RK3328 support higher rates and it
-> +	 * works in Linux, it doesn't seem to work in u-boot. That limits max
-> +	 * resolution to 1440p
-> +	 */
-> +	return timing->pixelclock.typ <= 297000000;
+> It already takes about 2 sec to initialize Ethernet. I would say that
+> nobody notices another 300ms.
 
-I think it make more sense to limit to the HDMI 1.4 max 340 MHz instead
-of arbitrary 297 MHz. Anything above 340 MHz will require scrambling etc
-and will not work in U-Boot unless at least dw-hdmi driver is updated.
+If it takes 2 seconds then I think you may have something wrong in your
+configuration? Please share a "bootstage report".
+
+The Ethernet initialization should be fast, trying to use the Ethernet
+will however be slow. The Ethernet PHY reset should be around 10+50ms.
+
+Reaching eth_common_init may take some time, but eth_initialize should
+be relative fast.
 
 Regards,
 Jonas
 
-> +}
-> +
->  static const struct dm_display_ops rk3328_hdmi_ops = {
->  	.read_edid = rk_hdmi_read_edid,
->  	.enable = rk3328_hdmi_enable,
-> +	.mode_valid = rk3328_hdmi_mode_valid,
->  };
->  
->  static const struct udevice_id rk3328_hdmi_ids[] = {
+> 
+>>
+>> Maybe this could be extracted to a rockchip-hdmi.config-file to make it
+>> more optional?
+>>
+>> E.g. use "make rock64-rk3328_defconfig rockchip-hdmi.config" to build
+>> with something like:
+>>
+>>   > cat rockchip-hdmi.config
+>>   CONFIG_VIDEO=y
+>>   CONFIG_DISPLAY=y
+>>   CONFIG_VIDEO_ROCKCHIP=y
+>>   CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+>>
+>> Regards,
+>> Jonas
+>>
+>>>  CONFIG_SPL_TINY_MEMSET=y
+>>>  CONFIG_TPL_TINY_MEMSET=y
+>>>  CONFIG_ERRNO_STR=y
+>>
+> 
+> 
 
