@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E78A2C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:37:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C47C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:45:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4512481F6B;
-	Sun, 30 Mar 2025 11:36:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2DD7381F00;
+	Sun, 30 Mar 2025 11:45:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BAnhxuWY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e33SCzci";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62FEC817C4; Sun, 30 Mar 2025 11:36:20 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 2FADF81E06; Sun, 30 Mar 2025 11:45:32 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3626481E8C
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:36:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 274F981E06
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:45:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac25520a289so591280366b.3
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:36:18 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5eb5ecf3217so6573355a12.3
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:45:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743327378; x=1743932178; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3rg969Wc06fVpkNp8frlbO/T6tKY3KyJMDU22EdhcOk=;
- b=BAnhxuWY+2SINnBVgXtew9y1blF1ghdur9ZxJ43jdk3EAhcjXk22D6T4z+zJcjjqDA
- ONytPlCUgTHGgf+0zaXs2ZsyTaVDntf9/FLwApU3Vz/jNO2RkOW3na8nwiRua6wUrxsY
- Y/nndUbMNPHcjv+oc02Sorp1yn2oJsrikZRyHrh/DuBqI4Hox1AezJ+i6Yr9gs51950u
- J50TZzysXe8g9QzPDujZKWCrm+egYUykJHHwQDtSANt2UWhcjjJ2GrGW6LjuLikVbptk
- ZM1Cnlv3JJhleiI0ykGr2qqHa+i+IHvlv0P5dgztPB733mWnGiuEEQhn3n5UmVDRdMIk
- RSDg==
+ d=gmail.com; s=20230601; t=1743327929; x=1743932729; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fu63afV8Nz3T3heLmpv3nbaZVR2m9VRMX2Fl6sruOow=;
+ b=e33SCzcihoYja33/CeZQZBpTFDzhnMWdbeZ/Xs7vXEFk4adFBE8CkVZJ3KVc2rDgD7
+ ZdhKtUtu2Z1w1mkeiU8yXrgacksUUQo5g0MOWWdWRhKl2zS6xduUb9T7+7Us2PjqEnws
+ H3lxeANezOu3Qd41TxDvVl5ICg+LMvrnsmozA1GRbimYCf1414iDUjVlxWTUYK64Ho3z
+ KecnQEGDTlgHEBwj3A6tBHlxOzAaoxRuoGdRpZ9j67S2wbDJDDPXxk5iW3Ua5ZnFnsMa
+ r3uf4za3tV2T9mBMrJHlKXUz1P9+vA3xwktJp1BGPZSnmW89wFU+//GOP7l7veBC5ETZ
+ ADBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743327378; x=1743932178;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3rg969Wc06fVpkNp8frlbO/T6tKY3KyJMDU22EdhcOk=;
- b=GkS03Rk9e4HITy7lax9HzxnipwGz0B0y4CFGLsU3tatinzbu9TPIWsm8lmSB7tz/Us
- 3cj1DUIwYX2ad9eFaUo8SwlV/GLGOYNiAhXKiMCbv3JzCOGjrCes1j+f8rdz7MWw8oMR
- RrdbQx64/Jc4d+gd5bG6AXQmAjwJi2XRjYHvbEZgrhgGvC6VSYur6ZM4ApAL+SXKQUu5
- ieeJgJ5Kk1TeSNxHDdU89nc8X8fGD4cqNoTRMDiMant9gqYZMR2Qv2UfrCg0/bHm32fk
- 8e4+98FkJPHuFx3D6W1g/2zZ1aJCnd6AKxg4iPsnRZN66nDf5vOxZRQwOFiolcZ121Es
- ODhg==
-X-Gm-Message-State: AOJu0YyNhDoSeMUBRIKTv3nZXsehQV2s+RbcKNhZQY58SdTfoQwkFC/A
- iHaf3ZSICM2ivrHIYRt62v/J+Xl5j2c2UKn3jQ7jjbDeaoyodYh8
-X-Gm-Gg: ASbGncsFhqqwfuqwyQomKQFBiXmmE3wGVh6wYdlbkaS4XPhzguOFcCWcQBa5A2kxt5d
- IKnZgs1vhHWJ+Wbi8GI5GMQr3iMW/L/a6pnlgIntCzQVk/vMdjFsq0oe/la0Fbxe93Y+2uzBT3k
- hz7ycMdGW78EU54JDlyiprJZ47e9OAN5RpQ6bzf948NlXUf/+zQfflN4cAD+4i3Io2FJvSOv38p
- uYnTbUYmBf5/l8fw8WxnpHdbjTmpehZ9M1n1+GejFi50gCEiyPV5ACSz5/wjfmKXEJWz81OCQSB
- 0q5sIrjNJXRIUzFc+qVR6wnljsv2XtY8chbe
-X-Google-Smtp-Source: AGHT+IFDs9p4QxbirZ6q64lYW4REZ3InI63tYeStEs7S8RhMUlqEzBmCy1aptDVVxDRCCFQ+f6tc+Q==
-X-Received: by 2002:a17:906:6a0e:b0:ac3:3fe8:df61 with SMTP id
- a640c23a62f3a-ac738c16128mr411326266b.57.1743327377501; 
- Sun, 30 Mar 2025 02:36:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743327929; x=1743932729;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fu63afV8Nz3T3heLmpv3nbaZVR2m9VRMX2Fl6sruOow=;
+ b=aR+kUOCkZ+hnha+ch+HngCwR/EpaXTX74ngQqFcuWXrHGgC/kMnud8jjaAE87xEjCy
+ aTChVwkbb06/hw1sd6Gnz8P/noWai5VwFP/yxDTl3/NjEtMFH2WzMkulPDyftw07FySy
+ B/z4ArDJKyVZnklsn9xeLUfjw7+VQ4GfQNK72mAPExkqtlQSijjBOe46x4bDBOGpNIu0
+ HsVxLd8qmDq5iB6RhIZBVsBVRMoQfoytleV9k1+QeruzIUZsvMJZA8jRshmWTAdWVOko
+ JpDtlkExeSxiiSKf/wbcp3mq/RyWHx4iZdFpxsKEVe90sRorlVoQ9GzRcdK8xvECezEn
+ 1mOg==
+X-Gm-Message-State: AOJu0YyK+GfdPYD+WNOFoqPD5vmtaAL1m3Iqo1spPpdN89e6IxdCOVXr
+ JYCUxQmEBIZRYj7hxmhL5s6lVj85Du/Dux3XCnYeZSuf76rvmv/J
+X-Gm-Gg: ASbGncuuCT6rHWbEagKD+ZFWdpsCNCek5Or8VsTSQoipQ5AlP183QC38p1t8F6l/WL8
+ UKI1FF64z1gFVX+dSMEwia5CAbjfyGYZgQGeJDwvGTFkQaKuP47FiMD3TPnNu+QrNcvcBVoHUgo
+ /UWdtdwDzbj7B0cxvHOsPUV6X/fc8HGEUbgMkQUlIS9pjbEPS1Y05yJh/567SL5V/i4CbW4bjic
+ t1uPNHYnJT8gm9l3mVSMq5N2G7/LT8XAE2GshMzliVZ9Oy9iktcOM6TPJzzTuNU8eYDuNyPl45t
+ mlTATwpdp4tLkBEa8awfKoFpLsH0wo+wOYAY
+X-Google-Smtp-Source: AGHT+IHnD0kkQ3XjyG5aijnLsm0KxIyT6/toQVeM6YQ+55kZcNHTiKjEUCfzwhTO22/oH8RF2fkYnA==
+X-Received: by 2002:a17:907:97c9:b0:ac3:3fe7:b254 with SMTP id
+ a640c23a62f3a-ac738a152d0mr478718066b.4.1743327929339; 
+ Sun, 30 Mar 2025 02:45:29 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71971b7cfsm455273866b.183.2025.03.30.02.36.16
+ a640c23a62f3a-ac71927b175sm463235866b.61.2025.03.30.02.45.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:36:17 -0700 (PDT)
+ Sun, 30 Mar 2025 02:45:28 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ Sumit Garg <sumit.garg@kernel.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Fabio Estevam <festevam@denx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Peter Geis <pgwipeout@gmail.com>, Simon Glass <sjg@chromium.org>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Alban Bedel <alban.bedel@avionic-design.de>,
- Anatolij Gustschin <agust@denx.de>, Thierry Reding <treding@nvidia.com>,
- Simon Glass <sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Anton Bambura <jenneron@protonmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 5/5] video: tegra: adjust DC and DSI config names
-Date: Sun, 30 Mar 2025 12:36:00 +0300
-Message-ID: <20250330093600.10871-6-clamor95@gmail.com>
+Subject: [PATCH v1 0/6] tegra20: add Atrix 4G MB860 and Droid X2 MB870 support
+Date: Sun, 30 Mar 2025 12:45:06 +0300
+Message-ID: <20250330094515.11359-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250330093600.10871-1-clamor95@gmail.com>
-References: <20250330093600.10871-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,293 +101,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix DC and DSI config names to reflect more generic nature of existing
-Tegra video drivers.
+The Motorola Atrix 4G (MB860) and Droid X2 (MB870) both featured a
+dual-core NVIDIA Tegra 2 AP20H processor clocked at 1GHz, coupled with 1GB
+of DDR2 RAM. Storage consisted of 16GB of internal flash memory, expandable
+via microSD. The display was a 4.0-inch TFT LCD with a resolution of
+960x540 pixels (qHD). The devices originally ran on Android up to 2.3
+(Gingerbread).
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- board/toradex/colibri_t20/colibri_t20.c |  2 +-
- configs/endeavoru_defconfig             |  2 +-
- configs/grouper_defconfig               |  2 +-
- configs/harmony_defconfig               |  2 +-
- configs/ideapad-yoga-11_defconfig       |  2 +-
- configs/medcom-wide_defconfig           |  2 +-
- configs/mocha_defconfig                 |  2 +-
- configs/paz00_defconfig                 |  2 +-
- configs/picasso_defconfig               |  2 +-
- configs/qc750_defconfig                 |  2 +-
- configs/seaboard_defconfig              |  2 +-
- configs/surface-rt_defconfig            |  2 +-
- configs/tec_defconfig                   |  2 +-
- configs/transformer_t20_defconfig       |  2 +-
- configs/transformer_t30_defconfig       |  2 +-
- configs/ventana_defconfig               |  2 +-
- configs/x3_t30_defconfig                |  2 +-
- drivers/video/tegra/Kconfig             | 39 ++++++++++++++-----------
- drivers/video/tegra/Makefile            |  4 +--
- 19 files changed, 41 insertions(+), 36 deletions(-)
+This patchset brings full support for both devices along with DM drivers
+for special PMIC used in these devices, DSI panel, backlight and many more
+staff already supported by exising U-Boot code.
 
-diff --git a/board/toradex/colibri_t20/colibri_t20.c b/board/toradex/colibri_t20/colibri_t20.c
-index 6425fa881ea..d432fd2b843 100644
---- a/board/toradex/colibri_t20/colibri_t20.c
-+++ b/board/toradex/colibri_t20/colibri_t20.c
-@@ -147,7 +147,7 @@ void pin_mux_usb(void)
- }
- #endif
- 
--#ifdef CONFIG_VIDEO_TEGRA20
-+#ifdef CONFIG_VIDEO_TEGRA
- /*
-  * Routine: pin_mux_display
-  * Description: setup the pin muxes/tristate values for the LCD interface)
-diff --git a/configs/endeavoru_defconfig b/configs/endeavoru_defconfig
-index fb3d7fc6238..c85994b44b8 100644
---- a/configs/endeavoru_defconfig
-+++ b/configs/endeavoru_defconfig
-@@ -83,5 +83,5 @@ CONFIG_VIDEO=y
- CONFIG_VIDEO_BRIDGE=y
- # CONFIG_VIDEO_LOGO is not set
- CONFIG_VIDEO_LCD_ENDEAVORU=y
--CONFIG_VIDEO_DSI_TEGRA30=y
-+CONFIG_VIDEO_DSI_TEGRA=y
- CONFIG_TEGRA_BACKLIGHT_PWM=y
-diff --git a/configs/grouper_defconfig b/configs/grouper_defconfig
-index b98f23a4baf..016fc60b41a 100644
---- a/configs/grouper_defconfig
-+++ b/configs/grouper_defconfig
-@@ -88,4 +88,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x4e41
- CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_LOGO is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/harmony_defconfig b/configs/harmony_defconfig
-index fa8fe24ca38..9fa9c12918b 100644
---- a/configs/harmony_defconfig
-+++ b/configs/harmony_defconfig
-@@ -64,5 +64,5 @@ CONFIG_USB_ETHER_MCS7830=y
- CONFIG_USB_ETHER_SMSC95XX=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
- CONFIG_CONSOLE_SCROLL_LINES=10
-diff --git a/configs/ideapad-yoga-11_defconfig b/configs/ideapad-yoga-11_defconfig
-index bc7f615cdf0..b77110ed840 100644
---- a/configs/ideapad-yoga-11_defconfig
-+++ b/configs/ideapad-yoga-11_defconfig
-@@ -83,4 +83,4 @@ CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_LOGO is not set
- CONFIG_VIDEO_BRIDGE_PARADE_DP501=y
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/medcom-wide_defconfig b/configs/medcom-wide_defconfig
-index 737a0613ce1..d99addadf86 100644
---- a/configs/medcom-wide_defconfig
-+++ b/configs/medcom-wide_defconfig
-@@ -53,4 +53,4 @@ CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_SMSC95XX=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/mocha_defconfig b/configs/mocha_defconfig
-index 0cbedb21797..55a0eb2948e 100644
---- a/configs/mocha_defconfig
-+++ b/configs/mocha_defconfig
-@@ -88,4 +88,4 @@ CONFIG_VIDEO_FONT_16X32=y
- # CONFIG_VIDEO_LOGO is not set
- CONFIG_VIDEO_LCD_SHARP_LQ079L1SX01=y
- CONFIG_BACKLIGHT_LP855x=y
--CONFIG_VIDEO_DSI_TEGRA30=y
-+CONFIG_VIDEO_DSI_TEGRA=y
-diff --git a/configs/paz00_defconfig b/configs/paz00_defconfig
-index b8645d66619..af2cb712e06 100644
---- a/configs/paz00_defconfig
-+++ b/configs/paz00_defconfig
-@@ -53,5 +53,5 @@ CONFIG_USB_ETHER_ASIX=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_BPP8 is not set
- CONFIG_I2C_EDID=y
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
- CONFIG_CONSOLE_SCROLL_LINES=10
-diff --git a/configs/picasso_defconfig b/configs/picasso_defconfig
-index fe1eeb6ed10..6a83df919b5 100644
---- a/configs/picasso_defconfig
-+++ b/configs/picasso_defconfig
-@@ -81,4 +81,4 @@ CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_LOGO is not set
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/qc750_defconfig b/configs/qc750_defconfig
-index a42860dc9ba..9104cc084be 100644
---- a/configs/qc750_defconfig
-+++ b/configs/qc750_defconfig
-@@ -80,4 +80,4 @@ CONFIG_USB_GADGET=y
- CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_LOGO is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/seaboard_defconfig b/configs/seaboard_defconfig
-index eeb911a7805..21375f233f0 100644
---- a/configs/seaboard_defconfig
-+++ b/configs/seaboard_defconfig
-@@ -60,5 +60,5 @@ CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
- CONFIG_CONSOLE_SCROLL_LINES=10
-diff --git a/configs/surface-rt_defconfig b/configs/surface-rt_defconfig
-index 24fca755dc5..da19b34e64a 100644
---- a/configs/surface-rt_defconfig
-+++ b/configs/surface-rt_defconfig
-@@ -79,4 +79,4 @@ CONFIG_USB_GADGET=y
- CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_LOGO is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/tec_defconfig b/configs/tec_defconfig
-index 2f686105700..7cb13f9f5af 100644
---- a/configs/tec_defconfig
-+++ b/configs/tec_defconfig
-@@ -53,4 +53,4 @@ CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_SMSC95XX=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/transformer_t20_defconfig b/configs/transformer_t20_defconfig
-index 50b5885bb09..c934e1a2410 100644
---- a/configs/transformer_t20_defconfig
-+++ b/configs/transformer_t20_defconfig
-@@ -81,4 +81,4 @@ CONFIG_CI_UDC=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_LOGO is not set
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
-index 3e2db0cb7d0..828634dc590 100644
---- a/configs/transformer_t30_defconfig
-+++ b/configs/transformer_t30_defconfig
-@@ -93,5 +93,5 @@ CONFIG_VIDEO=y
- CONFIG_VIDEO_BRIDGE=y
- # CONFIG_VIDEO_LOGO is not set
- CONFIG_VIDEO_BRIDGE_TOSHIBA_TC358768=y
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
- CONFIG_VIDEO_HDMI_TEGRA=y
-diff --git a/configs/ventana_defconfig b/configs/ventana_defconfig
-index c24fdcad533..3afa04dd10a 100644
---- a/configs/ventana_defconfig
-+++ b/configs/ventana_defconfig
-@@ -53,5 +53,5 @@ CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_BPP8 is not set
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
- CONFIG_CONSOLE_SCROLL_LINES=10
-diff --git a/configs/x3_t30_defconfig b/configs/x3_t30_defconfig
-index e738bd232d0..4252526992d 100644
---- a/configs/x3_t30_defconfig
-+++ b/configs/x3_t30_defconfig
-@@ -87,4 +87,4 @@ CONFIG_VIDEO_BRIDGE=y
- # CONFIG_VIDEO_LOGO is not set
- CONFIG_BACKLIGHT_LM3533=y
- CONFIG_VIDEO_BRIDGE_SOLOMON_SSD2825=y
--CONFIG_VIDEO_TEGRA20=y
-+CONFIG_VIDEO_TEGRA=y
-diff --git a/drivers/video/tegra/Kconfig b/drivers/video/tegra/Kconfig
-index 3d610036a1f..d3b8dbb2826 100644
---- a/drivers/video/tegra/Kconfig
-+++ b/drivers/video/tegra/Kconfig
-@@ -2,40 +2,45 @@ config HOST1X_TEGRA
- 	bool "NVIDIA Tegra host1x BUS support"
- 	depends on SIMPLE_BUS
- 
--config VIDEO_TEGRA20
--	bool "Enable Display Controller support on Tegra20 and Tegra 30"
-+config VIDEO_TEGRA
-+	bool "Enable Display Controller support on Tegra devices"
- 	depends on OF_CONTROL
- 	select HOST1X_TEGRA
- 	help
--	   T20/T30 support video output to an attached LCD panel as well as
--	   other options such as HDMI. Only the LCD is supported in U-Boot.
--	   This option enables this support which can be used on devices which
--	   have an LCD display connected.
-+	   Enable support for Display Controller found in Tegra SoC. The
-+	   Display Controller Complex integrates two independent display
-+	   controllers. Each display controller is capable of interfacing
-+	   to an external display device, which can be a parallel interface
-+	   or SPI LCD, DVI, an HDMI HDTV, RGB monitor or a MIPI DSI LCD.
-+	   Direct interface is supported directly to most LCD displays with
-+	   TFT or TFT-like interface.
- 
--config VIDEO_DSI_TEGRA30
--	bool "Enable Tegra 30 DSI support"
-+config VIDEO_DSI_TEGRA
-+	bool "Enable DSI controller support on Tegra devices"
- 	depends on VIDEO_BRIDGE && PANEL && DM_GPIO
--	select VIDEO_TEGRA20
-+	select VIDEO_TEGRA
- 	select VIDEO_MIPI_DSI
- 	help
--	   T30 has native support for DSI panels. This option enables support
--	   for such panels which can be used on endeavoru and tf600t.
-+	   Enable support for the Display Serial Interface (DSI) found in
-+	   Tegra SoC. It is a MIPI standard serial bitstream, intended to
-+	   provide a low pin count interface to a display panel.
- 
- config VIDEO_HDMI_TEGRA
--	bool "Enable Tegra HDMI support"
-+	bool "Enable HDMI support on Tegra devices"
- 	depends on VIDEO_BRIDGE && DM_I2C
- 	select I2C_EDID
--	select VIDEO_TEGRA20
-+	select VIDEO_TEGRA
- 	help
--	   Tegra has native support for HDMI. This option enables support
--	   for such connection and can be used for any supported device.
-+	   Enable support for the High-Definition Multimedia Interface (HDMI)
-+	   found in Tegra SoC.
- 
- config TEGRA_BACKLIGHT_PWM
- 	bool "Enable Tegra DC PWM backlight support"
- 	depends on BACKLIGHT
--	select VIDEO_TEGRA20
-+	select VIDEO_TEGRA
- 	help
--	   Tegra DC dependent backlight.
-+	   Enable support for the Display Controller dependent PWM backlight
-+	   found in the Tegra SoC and usually used with DSI panels.
- 
- config VIDEO_TEGRA124
- 	bool "Enable video support on Tegra124"
-diff --git a/drivers/video/tegra/Makefile b/drivers/video/tegra/Makefile
-index 4602b49ee73..3c50a0ba3c3 100644
---- a/drivers/video/tegra/Makefile
-+++ b/drivers/video/tegra/Makefile
-@@ -1,8 +1,8 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
- obj-$(CONFIG_HOST1X_TEGRA) += host1x.o
--obj-$(CONFIG_VIDEO_TEGRA20) += dc.o
--obj-$(CONFIG_VIDEO_DSI_TEGRA30) += dsi.o mipi.o mipi-phy.o
-+obj-$(CONFIG_VIDEO_TEGRA) += dc.o
-+obj-$(CONFIG_VIDEO_DSI_TEGRA) += dsi.o mipi.o mipi-phy.o
- obj-$(CONFIG_VIDEO_HDMI_TEGRA) += hdmi.o
- obj-$(CONFIG_TEGRA_BACKLIGHT_PWM) += dc-pwm-backlight.o
- 
+Svyatoslav Ryhel (6):
+  power: pmic: add the basic CPCAP PMIC support
+  power: regulator: add regulator support for CPCAP PMIC
+  input: add support for CPCAP power button
+  video: panel: add Motorola Atrix 4G and Droid X2 panel
+  video: backlight: add TI LM3532 led controller
+  board: motorola: add Atrix 4G MB860 and Droid X2 MB870 support
+
+ arch/arm/dts/Makefile                     |   2 +
+ arch/arm/dts/tegra20-motorola-daytona.dts |   9 +
+ arch/arm/dts/tegra20-motorola-mot.dtsi    | 490 ++++++++++++++++++++++
+ arch/arm/dts/tegra20-motorola-olympus.dts |   9 +
+ arch/arm/mach-tegra/tegra20/Kconfig       |   5 +
+ board/motorola/mot/Kconfig                |  12 +
+ board/motorola/mot/MAINTAINERS            |   7 +
+ board/motorola/mot/Makefile               |   9 +
+ board/motorola/mot/configs/daytona.config |   2 +
+ board/motorola/mot/configs/olympus.config |   2 +
+ board/motorola/mot/mot-spl.c              |  58 +++
+ board/motorola/mot/mot.env                |  15 +
+ configs/mot_defconfig                     |  93 ++++
+ doc/board/index.rst                       |   1 +
+ doc/board/motorola/index.rst              |   9 +
+ doc/board/motorola/mot.rst                | 104 +++++
+ drivers/input/Kconfig                     |   6 +
+ drivers/input/Makefile                    |   1 +
+ drivers/input/cpcap_pwrbutton.c           | 134 ++++++
+ drivers/power/pmic/Kconfig                |  10 +
+ drivers/power/pmic/Makefile               |   1 +
+ drivers/power/pmic/cpcap.c                | 125 ++++++
+ drivers/power/regulator/Kconfig           |   9 +
+ drivers/power/regulator/Makefile          |   1 +
+ drivers/power/regulator/cpcap_regulator.c | 275 ++++++++++++
+ drivers/video/Kconfig                     |  19 +
+ drivers/video/Makefile                    |   2 +
+ drivers/video/lm3532_backlight.c          | 380 +++++++++++++++++
+ drivers/video/mot-panel.c                 | 308 ++++++++++++++
+ include/configs/mot.h                     |  25 ++
+ include/power/cpcap.h                     | 373 ++++++++++++++++
+ 31 files changed, 2496 insertions(+)
+ create mode 100644 arch/arm/dts/tegra20-motorola-daytona.dts
+ create mode 100644 arch/arm/dts/tegra20-motorola-mot.dtsi
+ create mode 100644 arch/arm/dts/tegra20-motorola-olympus.dts
+ create mode 100644 board/motorola/mot/Kconfig
+ create mode 100644 board/motorola/mot/MAINTAINERS
+ create mode 100644 board/motorola/mot/Makefile
+ create mode 100644 board/motorola/mot/configs/daytona.config
+ create mode 100644 board/motorola/mot/configs/olympus.config
+ create mode 100644 board/motorola/mot/mot-spl.c
+ create mode 100644 board/motorola/mot/mot.env
+ create mode 100644 configs/mot_defconfig
+ create mode 100644 doc/board/motorola/index.rst
+ create mode 100644 doc/board/motorola/mot.rst
+ create mode 100644 drivers/input/cpcap_pwrbutton.c
+ create mode 100644 drivers/power/pmic/cpcap.c
+ create mode 100644 drivers/power/regulator/cpcap_regulator.c
+ create mode 100644 drivers/video/lm3532_backlight.c
+ create mode 100644 drivers/video/mot-panel.c
+ create mode 100644 include/configs/mot.h
+ create mode 100644 include/power/cpcap.h
+
 -- 
 2.43.0
 
