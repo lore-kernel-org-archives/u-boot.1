@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2900BC28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 10:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 419F8C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 10:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24A288129B;
-	Sun, 30 Mar 2025 12:25:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A782280FF7;
+	Sun, 30 Mar 2025 12:27:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZtVpgIiJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iVyXfKLg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DFFE8144A; Sun, 30 Mar 2025 12:25:22 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 727BF8129B; Sun, 30 Mar 2025 12:27:14 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 331DC80FF7
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 12:25:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCAEF8003E
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 12:27:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e61d91a087so5739262a12.0
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 03:25:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-391342fc1f6so3195455f8f.1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 03:27:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743330319; x=1743935119; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sHwhFPgdbsGQ3grQojNno+NAT7+ds2TJ9BRdRnnmwzY=;
- b=ZtVpgIiJQOtkZVmhoxiUwH25+W4VU9FWDVbIaqYQZLp+/oxdf++EZUbtaGo48vB20d
- F3nzLTrQYlza2cy4h1/TGBWTCBMYJz/R4f5ub6CG7hId6YfC43tPwWFYhXYIMsV8BrNj
- GUKq2+Rc/+Q8M2d4z5mS654nhe5ekIxEepdby+Ny1b1VBelc8OMtevVQuQS3EBjl0kaV
- UKzCkIpU7iNr6QtEkglJM0JR88Rl6XaQX2YB5H3oNXvvtkB0DJvvvWoYFth1SXA8dUG+
- 5NusYKJq2v7uXa1PPNqx12bZ9wanLwZhk9BFNUOl9StRPYzSwIJSB9wvUAAhix3mSQXt
- AI5A==
+ d=gmail.com; s=20230601; t=1743330431; x=1743935231; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZoJIkmSmnSQKLa7ZKzJexn1EfRBvANVmkpjQiKjDLCM=;
+ b=iVyXfKLgj+z1nXB7f3MXeZjas+s0vAAj8+atJ28iQtkqtJsWHg7H9fMABqlGoMVy1r
+ fDAuaN5gzjVnrHouu03TqfJyX5nLME6zYwsUAT+t6ncOxy3TcWDKXe/lLlnkazNanxM/
+ 0KFJwnOX8YnVijZN0FnMA4ZuC1t8JWwgnDQy12dc2ftb9Hfz3EvSxNDtw++/sFoT8xex
+ H4MkUTw69+e6FCt8NrWde8ZoSoj0IRKvwwaZ9IcOw1L6D4xs9414u5k7C+/sAnc+YRiK
+ eKqRwLnfKwC0w9rSuQRJvQ5hkosapozjE/ZcFSAY+y7PqjAJmUCdqgkpWz2mGje0pP2x
+ Uc0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743330319; x=1743935119;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sHwhFPgdbsGQ3grQojNno+NAT7+ds2TJ9BRdRnnmwzY=;
- b=X+Nivg/wDx9F/0/kPQKKg1Wu1rOyM/Z3iTaoatt+sAPmbKtAENzTG9hB/LBvJkVD7E
- F5PA1M5w1f/N2EGGlVcmU2F4zx0f+5iiiMwRXAJrg0m0Q2BAV0uoYcstaTKKRll+F6n7
- NtKrCj70gwaTjK8NWg7Qxqq6xZTSG0Hxap2sVZ0ssKDlaRM9LqK/yotXZwLAh0EmaSAX
- tenIggcD/xJAywJhfBi1MLqr5z7BnOKAUTLV2oMQxTXwuwUXxNYbDHtuPSO6fggHFaiq
- UNv9WomJRUmxkl98UhO7C97av8QqErI/uwG6yVllhu3QZuqn+8U6tVW4Cbp9HZMRJ62R
- mwlQ==
+ d=1e100.net; s=20230601; t=1743330431; x=1743935231;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZoJIkmSmnSQKLa7ZKzJexn1EfRBvANVmkpjQiKjDLCM=;
+ b=XsTc9noOXuBziSbr3s9ryrXNqHHRuvKAOBxRFWuxIz+MMdI5uNBqH7zCS/KXJyf643
+ +2vuJGKVdId/gZA2dcVwswZHBx7FJnh+0RcTdYBE+gEXcmyWyOPs3/xT6CBbMnThDpfC
+ /UcRvFvZIqj+zxEZO4Eh/cd7e5VRqpXNtnDskTDeXff44z/xVsk/CfmlCmudFgAjFL66
+ /UMIZu8E9P7XfMrUAZUwsy+k0sOcF5bzEGSj/3U8Voc03MCabzjEpzEDiNJsyBNi0af7
+ BofWsCi+wI906lWD+1/ZWy5oviEUt3IyEe5vIjJvIQiLUzNGP3KNmweriuIbh/n4L/sL
+ QtGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtt9+K64SuGjbTjDvFudIkiv20sIMxfJhjlXjC5I3qpEx3dmOiWI4UDrId/pm1Id+RJjTQnLw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4LnaWQy5Z0nPMzR+EzNT/KYfsTAk/Ar6/hG511LT7RlJTXOIb
- Q1BnMV5pAdwKnUItc9mxY83V/YHt2tlicYuW8jDtkr2Ay41XmF5XKKnk3Xa8f2a2QB9mJzyvQR4
- KL+urslFvjoNE6dC8nBY2JLnm09w=
-X-Gm-Gg: ASbGncsDyeEW3+AIZlR/9Tc73WUEEdxrgXF69qP5n6D3dN9iC1pL+/1mLq84kkqDoYr
- 8PT+wW3gZZd95FqIbe2awnot6+5th48rqz0fSZszAjQLujhJG/1A7shlmPRsh4gKhG0/rljsDL5
- Ydeqzhw3D3r1i2LUVkjlDRbF/S0dsR7eZviDjH6Xnxjz5lcBlKrI+lISPZIss=
-X-Google-Smtp-Source: AGHT+IE3gh9hvkcworDVKDpMzk1VB0gi59/MY14aUxGkJroCyLB8b1AMlNuIEZnyQyuXkmBkzny0qwXQSgvdQosn8Hg=
-X-Received: by 2002:a05:6402:401e:b0:5ee:486:bf12 with SMTP id
- 4fb4d7f45d1cf-5ee0486c853mr4594505a12.33.1743330319322; Sun, 30 Mar 2025
- 03:25:19 -0700 (PDT)
+ AJvYcCVcLeefG+EvYVDDXwlBET0IQ+RUxXJou+sTtkXccJK5OuFaPBtvIS9v8fka3AeAxFrIYQ5RRmU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyO+eyplkJGTlxJKArm2JW5oTQoAT8p8rnnSJxs5hiQFULCNX3Q
+ pOruEH/E0miOZN+EXwBIrHH73Vvp/BmutZ01G0T5RBaGGVLaJMHmaix8er5JGlxEfLJGskBpbV9
+ W3WY9tqlB5I15F9GIx9tRqTLAO2o=
+X-Gm-Gg: ASbGnctBWij0i6wPOwO/czePxgHKl6fY8RPjE1Pqi0/5AfbqCZfPytDrzQWzrCgvxlN
+ RNZGaYgBc9Jyoph0rAW6Am3ue1LYZCF8YVlOW1VWoT7ra/BZfvtcoao+rIw0/Zmdu/eU5jlCV/w
+ 4fDuyhKsrECHXTYGecTHj7JllOgpIkr0/kzZr5NQ==
+X-Google-Smtp-Source: AGHT+IFSlEj+Gto881PleRSDRb2A1TAYVCEuTxnpHt/UgGOSdZ+VJxTj2IPkUam5MUWboGiubwl2Vjlpq2hgGOU49s0=
+X-Received: by 2002:a5d:584f:0:b0:38f:4acd:975c with SMTP id
+ ffacd0b85a97d-39c120e0a93mr3295901f8f.27.1743330430697; Sun, 30 Mar 2025
+ 03:27:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250330093600.10871-1-clamor95@gmail.com>
  <20250330093600.10871-3-clamor95@gmail.com>
-In-Reply-To: <20250330093600.10871-3-clamor95@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 30 Mar 2025 11:25:08 +0100
-X-Gm-Features: AQ5f1Jo445GOGs8SKESd_uHEsVLo9egNlXWcafuUu809VAHMqp2gwJfbfuVsLL8
-Message-ID: <CALeDE9NMaakSFwgrGFZjqOap2F=7VGG67Nj6u_MqGmeJZFHQpg@mail.gmail.com>
+ <CALeDE9NMaakSFwgrGFZjqOap2F=7VGG67Nj6u_MqGmeJZFHQpg@mail.gmail.com>
+In-Reply-To: <CALeDE9NMaakSFwgrGFZjqOap2F=7VGG67Nj6u_MqGmeJZFHQpg@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sun, 30 Mar 2025 13:26:59 +0300
+X-Gm-Features: AQ5f1JpRsXAV0hWtyT72gASzb0zdJmryrbc98szKarmDryZJkgJISOFEakMKpiw
+Message-ID: <CAPVz0n1SfoFQM-xKDVkc8QPZxzbcr-k_xVs62QWj+6CnvrGEhg@mail.gmail.com>
 Subject: Re: [PATCH v1 2/5] video: rename tegra20 to tegra
-To: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Peter Robinson <pbrobinson@gmail.com>
 Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>, 
  =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
@@ -81,7 +83,7 @@ Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Thierry Reding <treding@nvidia.com>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,144 +100,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
+=D0=BD=D0=B4, 30 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 13:25 Pete=
+r Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Hi Svyatoslav,
+>
+> I started to look at and test your other display patch series in the last=
+ week or so, one thing I noticed is you need to update the Kconfig descript=
+ions as well as this rename.
+>
 
-I started to look at and test your other display patch series in the last
-week or so, one thing I noticed is you need to update the Kconfig
-descriptions as well as this rename.
+This series has Kconfig description adjustments.
 
-Has the other series been merged to next? You should also put a note about
-dependencies etc.
+> Has the other series been merged to next? You should also put a note abou=
+t dependencies etc.
+>
 
-Generally for this the rename makes sense so:
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Yes, prev series is already in the next.
 
-Peter
-
-On Sun, 30 Mar 2025 at 10:47, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
-
-> Since this set of drivers suports four Tegra SoC generations, lets name it
-> just 'tegra'.
+> Generally for this the rename makes sense so:
+> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/video/Kconfig                                  | 2 +-
->  drivers/video/Makefile                                 | 2 +-
->  drivers/video/{tegra20 => tegra}/Kconfig               | 0
->  drivers/video/{tegra20 => tegra}/Makefile              | 0
->  drivers/video/{tegra20 => tegra}/mipi-phy.c            | 0
->  drivers/video/{tegra20 => tegra}/mipi-phy.h            | 0
->  drivers/video/{tegra20 => tegra}/tegra-dc.c            | 0
->  drivers/video/{tegra20 => tegra}/tegra-dc.h            | 0
->  drivers/video/{tegra20 => tegra}/tegra-dsi.c           | 0
->  drivers/video/{tegra20 => tegra}/tegra-dsi.h           | 0
->  drivers/video/{tegra20 => tegra}/tegra-hdmi.c          | 0
->  drivers/video/{tegra20 => tegra}/tegra-hdmi.h          | 0
->  drivers/video/{tegra20 => tegra}/tegra-host1x.c        | 0
->  drivers/video/{tegra20 => tegra}/tegra-mipi.c          | 0
->  drivers/video/{tegra20 => tegra}/tegra-pwm-backlight.c | 0
->  15 files changed, 2 insertions(+), 2 deletions(-)
->  rename drivers/video/{tegra20 => tegra}/Kconfig (100%)
->  rename drivers/video/{tegra20 => tegra}/Makefile (100%)
->  rename drivers/video/{tegra20 => tegra}/mipi-phy.c (100%)
->  rename drivers/video/{tegra20 => tegra}/mipi-phy.h (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-dc.c (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-dc.h (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-dsi.c (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-dsi.h (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-hdmi.c (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-hdmi.h (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-host1x.c (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-mipi.c (100%)
->  rename drivers/video/{tegra20 => tegra}/tegra-pwm-backlight.c (100%)
+> Peter
 >
-> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-> index df607303616..afcdb16c599 100644
-> --- a/drivers/video/Kconfig
-> +++ b/drivers/video/Kconfig
-> @@ -819,7 +819,7 @@ config VIDEO_TEGRA124
->
->  source "drivers/video/bridge/Kconfig"
->
-> -source "drivers/video/tegra20/Kconfig"
-> +source "drivers/video/tegra/Kconfig"
->
->  source "drivers/video/imx/Kconfig"
->
-> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-> index 6073bc5234a..f506f4ba050 100644
-> --- a/drivers/video/Makefile
-> +++ b/drivers/video/Makefile
-> @@ -85,4 +85,4 @@ obj-$(CONFIG_VIDEO_ZYNQMP_DPSUB) += zynqmp/
->
->  obj-y += bridge/
->  obj-y += sunxi/
-> -obj-y += tegra20/
-> +obj-y += tegra/
-> diff --git a/drivers/video/tegra20/Kconfig b/drivers/video/tegra/Kconfig
-> similarity index 100%
-> rename from drivers/video/tegra20/Kconfig
-> rename to drivers/video/tegra/Kconfig
-> diff --git a/drivers/video/tegra20/Makefile b/drivers/video/tegra/Makefile
-> similarity index 100%
-> rename from drivers/video/tegra20/Makefile
-> rename to drivers/video/tegra/Makefile
-> diff --git a/drivers/video/tegra20/mipi-phy.c
-> b/drivers/video/tegra/mipi-phy.c
-> similarity index 100%
-> rename from drivers/video/tegra20/mipi-phy.c
-> rename to drivers/video/tegra/mipi-phy.c
-> diff --git a/drivers/video/tegra20/mipi-phy.h
-> b/drivers/video/tegra/mipi-phy.h
-> similarity index 100%
-> rename from drivers/video/tegra20/mipi-phy.h
-> rename to drivers/video/tegra/mipi-phy.h
-> diff --git a/drivers/video/tegra20/tegra-dc.c
-> b/drivers/video/tegra/tegra-dc.c
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-dc.c
-> rename to drivers/video/tegra/tegra-dc.c
-> diff --git a/drivers/video/tegra20/tegra-dc.h
-> b/drivers/video/tegra/tegra-dc.h
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-dc.h
-> rename to drivers/video/tegra/tegra-dc.h
-> diff --git a/drivers/video/tegra20/tegra-dsi.c
-> b/drivers/video/tegra/tegra-dsi.c
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-dsi.c
-> rename to drivers/video/tegra/tegra-dsi.c
-> diff --git a/drivers/video/tegra20/tegra-dsi.h
-> b/drivers/video/tegra/tegra-dsi.h
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-dsi.h
-> rename to drivers/video/tegra/tegra-dsi.h
-> diff --git a/drivers/video/tegra20/tegra-hdmi.c
-> b/drivers/video/tegra/tegra-hdmi.c
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-hdmi.c
-> rename to drivers/video/tegra/tegra-hdmi.c
-> diff --git a/drivers/video/tegra20/tegra-hdmi.h
-> b/drivers/video/tegra/tegra-hdmi.h
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-hdmi.h
-> rename to drivers/video/tegra/tegra-hdmi.h
-> diff --git a/drivers/video/tegra20/tegra-host1x.c
-> b/drivers/video/tegra/tegra-host1x.c
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-host1x.c
-> rename to drivers/video/tegra/tegra-host1x.c
-> diff --git a/drivers/video/tegra20/tegra-mipi.c
-> b/drivers/video/tegra/tegra-mipi.c
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-mipi.c
-> rename to drivers/video/tegra/tegra-mipi.c
-> diff --git a/drivers/video/tegra20/tegra-pwm-backlight.c
-> b/drivers/video/tegra/tegra-pwm-backlight.c
-> similarity index 100%
-> rename from drivers/video/tegra20/tegra-pwm-backlight.c
-> rename to drivers/video/tegra/tegra-pwm-backlight.c
-> --
-> 2.43.0
->
->
+> On Sun, 30 Mar 2025 at 10:47, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
+:
+>>
+>> Since this set of drivers suports four Tegra SoC generations, lets name =
+it
+>> just 'tegra'.
+>>
+>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>> ---
+>>  drivers/video/Kconfig                                  | 2 +-
+>>  drivers/video/Makefile                                 | 2 +-
+>>  drivers/video/{tegra20 =3D> tegra}/Kconfig               | 0
+>>  drivers/video/{tegra20 =3D> tegra}/Makefile              | 0
+>>  drivers/video/{tegra20 =3D> tegra}/mipi-phy.c            | 0
+>>  drivers/video/{tegra20 =3D> tegra}/mipi-phy.h            | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-dc.c            | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-dc.h            | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-dsi.c           | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-dsi.h           | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-hdmi.c          | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-hdmi.h          | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-host1x.c        | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-mipi.c          | 0
+>>  drivers/video/{tegra20 =3D> tegra}/tegra-pwm-backlight.c | 0
+>>  15 files changed, 2 insertions(+), 2 deletions(-)
+>>  rename drivers/video/{tegra20 =3D> tegra}/Kconfig (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/Makefile (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/mipi-phy.c (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/mipi-phy.h (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-dc.c (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-dc.h (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-dsi.c (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-dsi.h (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-hdmi.c (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-hdmi.h (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-host1x.c (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-mipi.c (100%)
+>>  rename drivers/video/{tegra20 =3D> tegra}/tegra-pwm-backlight.c (100%)
+>>
+>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+>> index df607303616..afcdb16c599 100644
+>> --- a/drivers/video/Kconfig
+>> +++ b/drivers/video/Kconfig
+>> @@ -819,7 +819,7 @@ config VIDEO_TEGRA124
+>>
+>>  source "drivers/video/bridge/Kconfig"
+>>
+>> -source "drivers/video/tegra20/Kconfig"
+>> +source "drivers/video/tegra/Kconfig"
+>>
+>>  source "drivers/video/imx/Kconfig"
+>>
+>> diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+>> index 6073bc5234a..f506f4ba050 100644
+>> --- a/drivers/video/Makefile
+>> +++ b/drivers/video/Makefile
+>> @@ -85,4 +85,4 @@ obj-$(CONFIG_VIDEO_ZYNQMP_DPSUB) +=3D zynqmp/
+>>
+>>  obj-y +=3D bridge/
+>>  obj-y +=3D sunxi/
+>> -obj-y +=3D tegra20/
+>> +obj-y +=3D tegra/
+>> diff --git a/drivers/video/tegra20/Kconfig b/drivers/video/tegra/Kconfig
+>> similarity index 100%
+>> rename from drivers/video/tegra20/Kconfig
+>> rename to drivers/video/tegra/Kconfig
+>> diff --git a/drivers/video/tegra20/Makefile b/drivers/video/tegra/Makefi=
+le
+>> similarity index 100%
+>> rename from drivers/video/tegra20/Makefile
+>> rename to drivers/video/tegra/Makefile
+>> diff --git a/drivers/video/tegra20/mipi-phy.c b/drivers/video/tegra/mipi=
+-phy.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/mipi-phy.c
+>> rename to drivers/video/tegra/mipi-phy.c
+>> diff --git a/drivers/video/tegra20/mipi-phy.h b/drivers/video/tegra/mipi=
+-phy.h
+>> similarity index 100%
+>> rename from drivers/video/tegra20/mipi-phy.h
+>> rename to drivers/video/tegra/mipi-phy.h
+>> diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra/tegr=
+a-dc.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-dc.c
+>> rename to drivers/video/tegra/tegra-dc.c
+>> diff --git a/drivers/video/tegra20/tegra-dc.h b/drivers/video/tegra/tegr=
+a-dc.h
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-dc.h
+>> rename to drivers/video/tegra/tegra-dc.h
+>> diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra/teg=
+ra-dsi.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-dsi.c
+>> rename to drivers/video/tegra/tegra-dsi.c
+>> diff --git a/drivers/video/tegra20/tegra-dsi.h b/drivers/video/tegra/teg=
+ra-dsi.h
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-dsi.h
+>> rename to drivers/video/tegra/tegra-dsi.h
+>> diff --git a/drivers/video/tegra20/tegra-hdmi.c b/drivers/video/tegra/te=
+gra-hdmi.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-hdmi.c
+>> rename to drivers/video/tegra/tegra-hdmi.c
+>> diff --git a/drivers/video/tegra20/tegra-hdmi.h b/drivers/video/tegra/te=
+gra-hdmi.h
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-hdmi.h
+>> rename to drivers/video/tegra/tegra-hdmi.h
+>> diff --git a/drivers/video/tegra20/tegra-host1x.c b/drivers/video/tegra/=
+tegra-host1x.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-host1x.c
+>> rename to drivers/video/tegra/tegra-host1x.c
+>> diff --git a/drivers/video/tegra20/tegra-mipi.c b/drivers/video/tegra/te=
+gra-mipi.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-mipi.c
+>> rename to drivers/video/tegra/tegra-mipi.c
+>> diff --git a/drivers/video/tegra20/tegra-pwm-backlight.c b/drivers/video=
+/tegra/tegra-pwm-backlight.c
+>> similarity index 100%
+>> rename from drivers/video/tegra20/tegra-pwm-backlight.c
+>> rename to drivers/video/tegra/tegra-pwm-backlight.c
+>> --
+>> 2.43.0
+>>
