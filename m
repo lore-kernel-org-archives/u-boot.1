@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A49C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:28:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BDBEC36011
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:36:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CBD681E18;
-	Sun, 30 Mar 2025 11:28:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A45CE81E18;
+	Sun, 30 Mar 2025 11:36:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jOMdd1sB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ggd8EQYo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED38080F9C; Sun, 30 Mar 2025 11:28:35 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 9FD0A81E06; Sun, 30 Mar 2025 11:36:14 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0475E817C4
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:28:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99D628129B
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:36:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aaf0f1adef8so482195966b.3
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:28:34 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac2963dc379so563218066b.2
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:36:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743326913; x=1743931713; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1hlbRdZU8umxiMuhrW/yhR/j+nx5CnT/Z2mXTLTRbfM=;
- b=jOMdd1sBSeio8O+RwhS0Sgnbutaou8FKcvU6wR1R+1smqZfbXmRun9DU/qCm9T9Xbb
- 5s8KiK1mPs8b3FaVOdEUA+UR5hhxXbmiXS7q7FrIQ4XHmkwVY1yqWD0CH3GihFmyWUm6
- s4e1o2wH++Z2QHPVCIEApZJfmp/llDT8deKFfuP5k+6l84QjVAoehA32BAqr3H7kamsD
- qlJjod/9qkK3QZW9+gzDcqy+eDDbh5vS05KB83xgxeSrF3vIqNMeuFgDX1BCqBYtQUV+
- bwVtNqSJcVswPdQhE1KpGpZzblQ5KXO/Lr2dGIrHUZw99qDVcrWHYb1KDv+VeYsMjyNH
- nJnw==
+ d=gmail.com; s=20230601; t=1743327372; x=1743932172; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8x2SdQ3mx6jOEm9o69WcriQwgn1f12+4PqGt/GU1h+g=;
+ b=ggd8EQYoQsIpxNtFHxgU4ZExm+otAo3zOnFmEidQvK4Clwd/K7pSsXzGBKV6/u9oWG
+ wpnIFv9fb0fYKFj5OC6LRyDtzpOx7HihCdxrbkiily4GuucJSNgeFA8jZ2oYY3yUPvOq
+ p1fvmMjUaP1N6Sr/tNEgRDz5LOHNBliGpoGXFJWPYpUhIiUhVwYRbrE7LCXlZbTcVtTf
+ kmutgGXVlo/F9ybSqSSESifDdHbyPrf85vg/G7T5YbEFJnU7xjuo2obbpdh3+DaBR4hc
+ hgRQyr4TPeWb1OU2xMpcsJlUi494t8OHMyFSN7mpa2LPeMiw7/PujZpOs32qDBu+9W/q
+ pvkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743326913; x=1743931713;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1hlbRdZU8umxiMuhrW/yhR/j+nx5CnT/Z2mXTLTRbfM=;
- b=qwWePRoF9aB5Sd4jtMhzWeA5E/rhxzOew4WlSJgqxAQDfz6SrMRxeg1YD5Hhcbag7Y
- mRaX2Ft5gP859s2UjRdGgkPgzPQsOKgwW+kv18xanoXdOw+yVqtwLJBJXCGsbWOTx7pc
- +Fpv1LRlkG1wXwKPtvwWjCcsRlItqh+innjVnCUqjCjF3voO8wFzpPmfJbchSkVv2j8q
- ZIvvy8HqFx/C+HLzHuXhmSeoS1l4y2g0PQ2ZiN5eSjMf+6ERfhzF2hkqW7XrnKbnzD9Y
- cgiwgoQg9vwmkcy2w83uxx7ytAxoqM6Zl08g9ZtHhnqQ64lrgtX0le5qqqNjIxf57Pkn
- Bc4g==
-X-Gm-Message-State: AOJu0YwNG/PWwuAqbV5yJNysJohRLOd6+xpJvuTSNnQYfu2gvczSwphK
- 1Q0aUe9U8seWdTDBa6uajGxyTFTn/d0Osq0OLzpDRIlvOwr/0P7L
-X-Gm-Gg: ASbGncvDNwwUFxcyN1KgZTNA+iSaXDuYoVF/A9T2Xri0Fe4f6xgxEkooou/c7lj3uYk
- vlXmq74Dnet544BIAtXgIzgDWBR+ngPj/KlXi1R6fh1LC1UmUlIs5aNHf6T6JNIBM4Du3ZvYBX9
- 5QZVgiESergFhl6FRSZtQst1jEMEKzSf61csn5J/NE5B458yQ3zeqVZS4aQQXaYxku4pQ1kA9kv
- gCW+Htgn3h1Js/Te5wby77lgAj5VL7EFeFFri3tWjSxBVJuyPa6btnbVsD0jVGDazlEbU14QWbJ
- 6mcTV642Sc9mHo5UbJXaXYKTCH7Z7tTP2eZn
-X-Google-Smtp-Source: AGHT+IEZmepN9lU2w/vMXsu3udGLs2/0K8n91iG6ZY/JyWDZUu3CR/YePPKXyDMXEWjABjktvckB9A==
-X-Received: by 2002:a17:907:9719:b0:abf:d4a9:a096 with SMTP id
- a640c23a62f3a-ac738bacc99mr415433666b.37.1743326913339; 
- Sun, 30 Mar 2025 02:28:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743327372; x=1743932172;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8x2SdQ3mx6jOEm9o69WcriQwgn1f12+4PqGt/GU1h+g=;
+ b=u+gGJYY8C9kBQ1DsdDd+uIGBnHVnAmspy6PxLrGHlcIY/qjLRI+/sGz0anYLyEy05I
+ B+n9MaArkfHD/K6rSy5YZmb2z8H87yEpc6Lv2ZsQYADe+hIQEgvKGkp/JSiVksOKNwnd
+ eA/Aqp6rMLdU8ofb4JQSwGvkr2egVwVI7/tLYhytlHX3X3pUxDTyyiHCIGlGc8LwLEXZ
+ /+dQ9omPjUA5z0a6jXtTYyIx+uepYndtm2Y/74pZrAQhjhwwPrYc1vGl1gPc3W4W5RBl
+ /Jvdn0v6NS7jrW9rI04/99+yJEdPOW47I0dyMMAzsnVb1GMSNNNVIFwGFIj3wcQlZe08
+ EyFw==
+X-Gm-Message-State: AOJu0Yze+7fDkis6KkYZjvBi9pNenercIPXCyDPJURvD0hkQ39y5JJko
+ myEEF1cQx6RedmXU7sQYti7FiAzOzjqlBECtHhVODALMoHhfem4V
+X-Gm-Gg: ASbGncvy9Dhr6DrGBYTiS9E7HBOJZaGEJ36H7JXb/Jkzklu18yAbdUb3MxGrg4MDLaB
+ E1MRCPMBksGqnUQl6HcOAM3q0hj1gflilO5ZOOI+nL8FWYPeDa7CzQsIzWyco937puyOIFq5Awz
+ bAEYdCqFY7MwgV/jGuiv12LrNAXTLQMqU9qjoD69zjXNtnHVYfFCRpgPQGxsLYeCLwvKRlWaTrI
+ /dktL93GdATUWr2bPdl2l6TXloEPNy5tgdBqlyYMAI+hwkoajNWmWgt1EpS9p0f7EyqPMgh9A4J
+ ZmRqKLPuPupdQxjvKHoDMXdYoxS7tLH/NDI7t9cCoExNM68=
+X-Google-Smtp-Source: AGHT+IE2efgPeJBGYLW2LJ0puGnSIey7ZCOc4lfWyBK/sFdBCZuGYNgR34/DeLaxZVlVBz7X45hJIw==
+X-Received: by 2002:a17:906:e28a:b0:ac7:391b:e687 with SMTP id
+ a640c23a62f3a-ac7391be985mr382709466b.61.1743327371873; 
+ Sun, 30 Mar 2025 02:36:11 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71971053csm455653966b.178.2025.03.30.02.28.32
+ a640c23a62f3a-ac71971b7cfsm455273866b.183.2025.03.30.02.36.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:28:33 -0700 (PDT)
+ Sun, 30 Mar 2025 02:36:11 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Kongyang Liu <seashell11234455@gmail.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Robert Marko <robert.marko@sartura.hr>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Alban Bedel <alban.bedel@avionic-design.de>,
+ Anatolij Gustschin <agust@denx.de>, Thierry Reding <treding@nvidia.com>,
+ Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] sysreset: add PHASE_ to GPIO reset and poweroff configs
-Date: Sun, 30 Mar 2025 12:28:15 +0300
-Message-ID: <20250330092815.10350-2-clamor95@gmail.com>
+Subject: [PATCH v1 0/5] video: tegra: adjust namings and paths
+Date: Sun, 30 Mar 2025 12:35:55 +0300
+Message-ID: <20250330093600.10871-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250330092815.10350-1-clamor95@gmail.com>
-References: <20250330092815.10350-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,30 +97,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GPIO reset and power-off functionality depends on device tree data, which
-is often absent in SPL or TPL. To address this, incorporate PHASE_ into the
-config option.
+Adjust driver names, configs and paths to better reflect generic support
+of multiple Tegra SoC generations they provide.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/sysreset/Makefile | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Svyatoslav Ryhel (5):
+  video: tegra20: dsi: add Tegra20 support
+  video: rename tegra20 to tegra
+  video: move tegra124 into common tegra dir
+  video: tegra: drop prefix from file names
+  video: tegra: adjust DC and DSI config names
 
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index 796fc9effa5..ded91a4d325 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -8,8 +8,8 @@ obj-$(CONFIG_ARCH_ROCKCHIP) += sysreset_rockchip.o
- obj-$(CONFIG_ARCH_STI) += sysreset_sti.o
- obj-$(CONFIG_SANDBOX) += sysreset_sandbox.o
- obj-$(CONFIG_SYSRESET_CV1800B) += sysreset_cv1800b.o
--obj-$(CONFIG_POWEROFF_GPIO) += poweroff_gpio.o
--obj-$(CONFIG_SYSRESET_GPIO) += sysreset_gpio.o
-+obj-$(CONFIG_$(PHASE_)POWEROFF_GPIO) += poweroff_gpio.o
-+obj-$(CONFIG_$(PHASE_)SYSRESET_GPIO) += sysreset_gpio.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_MAX77663) += sysreset_max77663.o
- obj-$(CONFIG_SYSRESET_MPC83XX) += sysreset_mpc83xx.o
- obj-$(CONFIG_SYSRESET_MICROBLAZE) += sysreset_microblaze.o
+ board/toradex/colibri_t20/colibri_t20.c       |  2 +-
+ configs/endeavoru_defconfig                   |  2 +-
+ configs/grouper_defconfig                     |  2 +-
+ configs/harmony_defconfig                     |  2 +-
+ configs/ideapad-yoga-11_defconfig             |  2 +-
+ configs/medcom-wide_defconfig                 |  2 +-
+ configs/mocha_defconfig                       |  2 +-
+ configs/paz00_defconfig                       |  2 +-
+ configs/picasso_defconfig                     |  2 +-
+ configs/qc750_defconfig                       |  2 +-
+ configs/seaboard_defconfig                    |  2 +-
+ configs/surface-rt_defconfig                  |  2 +-
+ configs/tec_defconfig                         |  2 +-
+ configs/transformer_t20_defconfig             |  2 +-
+ configs/transformer_t30_defconfig             |  2 +-
+ configs/ventana_defconfig                     |  2 +-
+ configs/x3_t30_defconfig                      |  2 +-
+ drivers/video/Kconfig                         | 10 +---
+ drivers/video/Makefile                        |  3 +-
+ drivers/video/tegra/Kconfig                   | 51 +++++++++++++++++++
+ drivers/video/tegra/Makefile                  |  9 ++++
+ drivers/video/tegra/TODO                      |  5 ++
+ .../dc-pwm-backlight.c}                       |  2 +-
+ .../video/{tegra20/tegra-dc.c => tegra/dc.c}  |  2 +-
+ .../video/{tegra20/tegra-dc.h => tegra/dc.h}  |  0
+ .../{tegra20/tegra-dsi.c => tegra/dsi.c}      |  5 +-
+ .../{tegra20/tegra-dsi.h => tegra/dsi.h}      |  0
+ .../{tegra20/tegra-hdmi.c => tegra/hdmi.c}    |  4 +-
+ .../{tegra20/tegra-hdmi.h => tegra/hdmi.h}    |  0
+ .../tegra-host1x.c => tegra/host1x.c}         |  0
+ drivers/video/{tegra20 => tegra}/mipi-phy.c   |  0
+ drivers/video/{tegra20 => tegra}/mipi-phy.h   |  0
+ .../{tegra20/tegra-mipi.c => tegra/mipi.c}    |  0
+ drivers/video/{ => tegra}/tegra124/Makefile   |  0
+ drivers/video/{ => tegra}/tegra124/display.c  |  0
+ .../video/{ => tegra}/tegra124/displayport.h  |  0
+ drivers/video/{ => tegra}/tegra124/dp.c       |  0
+ drivers/video/{ => tegra}/tegra124/sor.c      |  0
+ drivers/video/{ => tegra}/tegra124/sor.h      |  0
+ drivers/video/tegra20/Kconfig                 | 38 --------------
+ drivers/video/tegra20/Makefile                |  7 ---
+ 41 files changed, 91 insertions(+), 79 deletions(-)
+ create mode 100644 drivers/video/tegra/Kconfig
+ create mode 100644 drivers/video/tegra/Makefile
+ create mode 100644 drivers/video/tegra/TODO
+ rename drivers/video/{tegra20/tegra-pwm-backlight.c => tegra/dc-pwm-backlight.c} (99%)
+ rename drivers/video/{tegra20/tegra-dc.c => tegra/dc.c} (99%)
+ rename drivers/video/{tegra20/tegra-dc.h => tegra/dc.h} (100%)
+ rename drivers/video/{tegra20/tegra-dsi.c => tegra/dsi.c} (99%)
+ rename drivers/video/{tegra20/tegra-dsi.h => tegra/dsi.h} (100%)
+ rename drivers/video/{tegra20/tegra-hdmi.c => tegra/hdmi.c} (99%)
+ rename drivers/video/{tegra20/tegra-hdmi.h => tegra/hdmi.h} (100%)
+ rename drivers/video/{tegra20/tegra-host1x.c => tegra/host1x.c} (100%)
+ rename drivers/video/{tegra20 => tegra}/mipi-phy.c (100%)
+ rename drivers/video/{tegra20 => tegra}/mipi-phy.h (100%)
+ rename drivers/video/{tegra20/tegra-mipi.c => tegra/mipi.c} (100%)
+ rename drivers/video/{ => tegra}/tegra124/Makefile (100%)
+ rename drivers/video/{ => tegra}/tegra124/display.c (100%)
+ rename drivers/video/{ => tegra}/tegra124/displayport.h (100%)
+ rename drivers/video/{ => tegra}/tegra124/dp.c (100%)
+ rename drivers/video/{ => tegra}/tegra124/sor.c (100%)
+ rename drivers/video/{ => tegra}/tegra124/sor.h (100%)
+ delete mode 100644 drivers/video/tegra20/Kconfig
+ delete mode 100644 drivers/video/tegra20/Makefile
+
 -- 
 2.43.0
 
