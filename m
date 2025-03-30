@@ -4,81 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE22EC36011
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DB6C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:36:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B95C81879;
-	Sun, 30 Mar 2025 16:16:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 959ED8171B;
+	Sun, 30 Mar 2025 16:36:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e9cT8j1m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iebFDBXa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BFFA81879; Sun, 30 Mar 2025 16:16:46 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 1719581879; Sun, 30 Mar 2025 15:34:01 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E32C281879
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:16:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE97780F9C
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 15:33:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2c2bb447e5eso2124701fac.0
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:16:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5e61d91a087so5856146a12.0
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 06:33:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743344202; x=1743949002; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VRsx220E39E7Vfgfhi1Bw3YhJepNrtYGqGKq3eCUk2M=;
- b=e9cT8j1m0cnD5A3fYYR8kHXm0JWP35TF2gc+qtKLRTSblr5Ki7Ll2qBn109kJsvgZQ
- lQsrDYuaKviRclQ3EHybfcRq6Yxw4ilKCFAojWhCSMa1TLAJ2ilVsrwTRFjL8n1JRGLz
- lr7rYza5E8SDPdefHb193WT3jQbO95hWvu2vU=
+ d=gmail.com; s=20230601; t=1743341638; x=1743946438; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/TKw7MCto7rphBfO+ircOHXJX3BEfwvPaApctHseQIQ=;
+ b=iebFDBXa4HmPTXURg5ENum3U32tvC6opNbewBdMb+WsCaNHvft3fahXYa6d9bUN3PL
+ Ccuaey7FiWhpBUUVV6sbEeGRt2impZt6XRpDvcppfg+UZNldOOAUUV0iyjAr42YBJ4Dw
+ bYhBtVd2gwDIKnXyFbZTCJufdlpDaFl4STXXjs5dqRZB9KfLTxjyC0d4f0068oAFyJ5r
+ /x4n9f7cv6oiuX9c+kd80daWOrO4f1wITvJLlBE9CEROmtQOJeTbbY2i6zbE/a5f/iwH
+ L0qrS3BgCRLyVKvCK12zAqWLNCQioFFca8C3DftkjUi8ljlonR7OcQ1o0PxlSvvPQerq
+ ezHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743344202; x=1743949002;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VRsx220E39E7Vfgfhi1Bw3YhJepNrtYGqGKq3eCUk2M=;
- b=FvIb9nRV9sXCMuX1cpaN8v5bGBEQ5TUnRMwR5Llzit3uUcZk/QoYna1k0/wAdrmdvu
- ODRmpS1BNcROuLBiNI3BvehaYX3v60ISBajUT1H5wZsAPlNuxhNHFP6PDjdRy+ECHO44
- 1+2oiLjrLso9FpU8Uh4ef3rPjdA9YjyawfbBwrupyoR6Hlm+V5Rogmx7JxKvQBnp7+kV
- jB/xsgcNc1ceM3FfuUpGh0bP54V4d1KteSSYHgjQbpomfzHwehu7bnp4s8b0xB5H8LxQ
- PZr7aib+YA6tX6mDR2YhVMDnbFBxDedHlvlMvnqdgy7LC7AUzZMMR57HTAxeax3/vvwo
- 5ARA==
-X-Gm-Message-State: AOJu0YydH2mx0ww5Rf9MfitiiIn50vsdYnwgWxGkf3cNUg2+vdkEdUqW
- Byq3jVWar1Etadl+r41rdjUgkRuTf4ZOKLgPKMzCLeNi0EV7S5i7BpCtJL3vvQk=
-X-Gm-Gg: ASbGnctLnJun+FVVFfaWmJZ4jXzlc5iL6WkOh5gW2+LlpBLZt8Wmre/g3kOpeLWvGA1
- u4IF+d4jexbaxfjain5XwIdDbh5KTn3BcEplnP5nVejBABlCMtS5yxLXuvWObz1B9HM8qrFrl4k
- gBgchsciSHBf7FTpEryi/khso64fgXg8gTnLW+H0JhwnF1ivhLIS0ZhQr5pFvAfMuxoN+SenXKP
- NJ6bhPHe58xeEWDQZU0wsARClg535Iv1bA2mDt5aIhOyR94wIe4gQ7inFFiUDI6RIV4k/Sv0zny
- a4VKE3dKGOmWaQCHUU7Fh0uvFqACrxDg8gBHIdKN9Qbg2mtW5SqDKxIcIjdzLMei4T6wQVJs5GW
- U72Iw
-X-Google-Smtp-Source: AGHT+IEuEJSe23i+QkIpPw5fVKwP3rJA+goNYGaBqHO/nw/z2c+aphLrj+Q/pmVJdcE3wwYaGZ3uwg==
-X-Received: by 2002:a05:6871:4e95:b0:2c2:5369:f3b with SMTP id
- 586e51a60fabf-2cbcf5152edmr3773842fac.14.1743344202432; 
- Sun, 30 Mar 2025 07:16:42 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c5809260dsm1150216a34.14.2025.03.30.07.16.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 07:16:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250330090920.9021-1-clamor95@gmail.com>
-References: <20250330090920.9021-1-clamor95@gmail.com>
-Subject: Re: Please pull u-boot-tegra fixes
-Message-Id: <174334420118.1157922.14303871853192520307.b4-ty@konsulko.com>
-Date: Sun, 30 Mar 2025 08:16:41 -0600
+ d=1e100.net; s=20230601; t=1743341638; x=1743946438;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/TKw7MCto7rphBfO+ircOHXJX3BEfwvPaApctHseQIQ=;
+ b=AClx+SmE/e99JScfW222/78tLc6beaoXEt8UiUSL2hnZFXuwfhpvecJdEE1LACtpFZ
+ RjqeoaFk9Vw61GCWPuF6n7vZKyIB6bS5kkY0VK4r3azjKzmvnpBW1l1i12AmdhRdz4HI
+ g8as6ucTKkTJJ/qgLsOkQbjDwoh33/lqNynNYa1kkk1J2tnQvnax7Wa/w/YpbI/rA4d+
+ PuqON8tY+uXIVPuoamOXPu9yOeXf1mViCLdRVNYCUpGvX+STNr4KhdY54yqQRx0m3u/Y
+ j4JxxSpbsWWVzReUhRJVbSm8Rz4Sd2of2/aNi5SkoU9rjKLBjtawj3HpkhYG2RF0MKtL
+ H5Bw==
+X-Gm-Message-State: AOJu0YyG3hl+zTfGEXn6TCq/rUaS6AOO6FPgf1IfGrcIfCI4KiTfexK6
+ mHFmFZLLYhWmRhH4AY7jfp9nPMbd6R7HNAfeTzEzjPpcYq3VE7VI2RciTc3572EgsWbwJ9yTkca
+ IjaHBuXHpZUbk10LAJcLtW8KKK+U=
+X-Gm-Gg: ASbGncvym68oYuGnxDUQi8HMfe95Sb0drMw1h5u2qC+a5TKgU8idMRxiVYzo1IJ0VnP
+ tMzUBTYod9BcyOeN32QsNvaTs4gTO77aQ6UFbDdDoTHbXDtJLlGHfgaUaToRYlu29l1G3uGzDeM
+ R9BQzxvUkMU8wx1HZU1Ki1MdmK8QxnHTj0mtx0
+X-Google-Smtp-Source: AGHT+IHo5epE+wWPdEacWKZpd7JDO/tTTXCHCJce944Zn0xy3qMurQRZbb8jjwATMyGxlpQtSlSOLQSsvWPQRYA5NxA=
+X-Received: by 2002:a05:6402:84e:b0:5ec:9e6e:c48f with SMTP id
+ 4fb4d7f45d1cf-5edfdd21b85mr3636914a12.29.1743341637904; Sun, 30 Mar 2025
+ 06:33:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250204172319.3361870-1-wens@kernel.org>
+In-Reply-To: <20250204172319.3361870-1-wens@kernel.org>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Sun, 30 Mar 2025 19:03:40 +0530
+X-Gm-Features: AQ5f1Jru7coeb9GEJy0cq7EtKl3slS8ZsB9zKT4ed_crJn-caKFjBVYrarUvUtc
+Message-ID: <CANAwSgQTMBLW2Y5YHpoAYDtXHyAbD9-s8KpWU1zBTRAB=rsJow@mail.gmail.com>
+Subject: Re: [PATCH] rockchip: io-domain: Enable by default for all supported
+ SoCs
+To: Chen-Yu Tsai <wens@kernel.org>
+Cc: u-boot@lists.denx.de, Chen-Yu Tsai <wens@csie.org>, 
+ Akash Gajjar <gajjar04akash@gmail.com>, Alexandre Vicenzi <linux@alxd.me>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan <andy.yan@rock-chips.com>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Deepak Das <deepakdas.linux@gmail.com>, 
+ Dragan Simic <dsimic@manjaro.org>, FUKAUMI Naoki <naoki@radxa.com>,
+ Heiko Stuebner <heiko@sntech.de>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Klaus Goger <klaus.goger@cherry.de>, 
+ Levin Du <djw@t-chip.com.cn>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Nick Xie <nick@khadas.com>, Paul Kocialkowski <paulk@sys-base.io>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Shantur Rathore <i@shantur.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, 
+ Tom Rini <trini@konsulko.com>, Wan Yee Lau <wan.yee.lau@intel.com>, 
+ Xiaobo Tian <peterwillcn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sun, 30 Mar 2025 16:36:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +111,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 30 Mar 2025 12:09:19 +0300, Svyatoslav Ryhel wrote:
+Hi Chen-Yu
 
-> The following changes since commit 02d95aaee01a2faf53bba8f1417b55cd02b6a743:
-> 
->   Merge branch 'next' of https://source.denx.de/u-boot/custodians/u-boot-sunxi into next (2025-03-27 08:10:06 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-tegra.git fixes
-> 
-> [...]
+On Wed, 5 Feb 2025 at 07:39, Chen-Yu Tsai <wens@kernel.org> wrote:
+>
+> From: Chen-Yu Tsai <wens@csie.org>
+>
+> The IO domain driver controls the I/O voltage for various pins,
+> MMC included.
+>
+> Enable it by default for all supported Rockchip SoCs.
+>
+> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
+Reviewed-by: Anand Moon <linux.amoon@gmail.com>
 
-Merged into u-boot/next, thanks!
+Can we enable following config default for all the boards
 
--- 
-Tom
+CONFIG_MMC_DW=y
+CONFIG_MMC_DW_ROCKCHIP=y
+CONFIG_MMC_SDHCI=y
 
-
+Thanks
+-Anand
