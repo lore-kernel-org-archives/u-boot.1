@@ -4,74 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A5FC28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 21:05:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7524DC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 21:40:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A8DC80F9C;
-	Sun, 30 Mar 2025 23:05:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A0E488144A;
+	Sun, 30 Mar 2025 23:40:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1743368712;
-	bh=C5WRsM6rAmlqwz6O/egLzPyU09i/rDfPrJXaoyu4Nfo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KFpyfOkWePJv0L542yYnrbqqziYoUMmo2+e/nuc4CqVE3x+2++IS/PMR8Xcx80fEm
-	 3VRhI1p9IWlvGlmiDITHhW75NBtIqPfz3b8iJmYnpbLBN1/rAUaop1WtrOKFJU0f5N
-	 9qWM7X6qAM9hkN2+bKbjxfeldt3CajRiYcymjisBRQhKQJDxT3kj1xpr45376/Wl7m
-	 eK9QjQcpVPfQXxkUKGptmNjnCpbu6H5csSzwaiw/k/E9TxIPCrW9WV5DQfoHlCR6L6
-	 X26zY4zVHH3bDeXA92QyEeTOAob2VMqFxiesmhj0wYecoomIQc34g3ltjnu4H9iJXd
-	 qrlexKxmAecyw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nlA5J3WS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D23280FDA; Sun, 30 Mar 2025 23:05:10 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 71229800C1; Sun, 30 Mar 2025 23:40:30 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E799800C1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 23:05:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05D82800C1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 23:40:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="NFLtLT0q"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7ABC5102F66E1; 
- Sun, 30 Mar 2025 23:05:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1743368707; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=C5WRsM6rAmlqwz6O/egLzPyU09i/rDfPrJXaoyu4Nfo=;
- b=NFLtLT0qiCVcbzFvZJcqkf+RqrSduGu9/qf71LkDhciF+6Lwr1q/yS2U/fmfrvQ9QXFYk8
- r8DVNEuXFwswNeVkfEl/HeFhxFpYom/uln88ID6irjWn18gPAp4leTPMHbJTSPn3/B/VVn
- qd5YoW/v2mudJNWEuomgCTZwc+qE0mwFVk/RWP7V6Nj9EepEgfvy41mfki8yXP2jbDhRdY
- AZ0VKzoweslsSQ4R+8Q/b6ANKvz4OE5TBqqeE6EMNs/pzlWItP/7c9sRIoT4CQrvglcM8X
- KwnZeBe+f9FtEgj3DlfFJ3RoaMeYl2oF4Qv/z61vXszyifQtb5F2iJhXz9MgQg==
-Message-ID: <0c95ffa8-b26f-40fb-b4f6-4beabef3fb53@denx.de>
-Date: Sun, 30 Mar 2025 23:05:04 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=c171=WS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1743370826;
+ bh=e9Ifp1DNzgH076aWSlbbseNsbkenRrB/IV4fM9i3AzU=;
+ b=nlA5J3WSnKurNaZlyOmJkRqWeCihgZGmobPoe+ayUKU6Fw+96l9WZH7VezI6kJ9RNWoIKMheW
+ cGgO4sOYnpAJMr17GoN9XJsra+F13/aVozoJV1zT6ept9R+cR7yGbIPlqFBwIOZgk1fT3Fy4toU
+ HWC06/hfS3yCbojFIHTwv2RGFJohmYxREBi/kCxOqRE2/zTTek215gKdctQvDO+8IU3nel1OQUY
+ NiihoO7AMQOMvRtkQPFqOeQjdTSC/m9bFHz7DaIjCwMLBL71ndCe4VNHnWSmjLZdZt22WIGRr8a
+ VDYjQ6Fnp1VQbpOI+SGRcDtk2e4Ccc4dY+oo/cW0H0Uw==
+X-Forward-Email-ID: 67e9ba45f4aa6b41f9be0759
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/2] rockchip: Update rng compatible for RK356x and RK3588
+Date: Sun, 30 Mar 2025 21:40:09 +0000
+Message-ID: <20250330214015.3466802-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW1BBVENIIHY4IDA3LzE5XSBjbGs6IHNjbWk6IGNo?=
- =?UTF-8?Q?eck_the_clock_state/parent/rate_control_permissions?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
- <20250321-imx95-v1-7-f2c8ba815f89@oss.nxp.com>
- <78f7d9f2-6226-49bb-8568-41e7ca0cdaba@denx.de>
- <PAXPR04MB9644F826CFC88160CF9CF2EBE2A02@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB9644F826CFC88160CF9CF2EBE2A02@PAXPR04MB9644.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,22 +70,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/28/25 11:26 AM, Alice Guo (OSS) wrote:
+This series adds support for and updates the random generator compatible
+used for RK356x and RK3588.
 
-Hello Alice,
+The RK356x rng node is already part of dts/upstream so the rng node in
+u-boot.dtsi is dropped, and because it is not enabled for rk3566 it gets
+enabled in u-boot.dtsi to restore its use in U-Boot.
 
->>>    enum scmi_clock_message_id {
->>>    	SCMI_CLOCK_ATTRIBUTES = 0x3,
->>> @@ -738,6 +739,7 @@ enum scmi_clock_message_id {
->>>    	SCMI_CLOCK_RATE_GET = 0x6,
->>>    	SCMI_CLOCK_CONFIG_SET = 0x7,
->>>    	SCMI_CLOCK_PARENT_SET = 0xD,
->>> +	SCMI_CLOCK_GET_PERMISSIONS = 0xF,
->>
->> Better call it SCMI_CLOCK_PERMISSIONS_GET to be consistent with the rest of
->> these fields , unless this is some SCMI specification name ?
-> 
-> CLOCK_GET_PERMISSIONS is from Arm System Control and Management Interface Platform Design Document 3.2.
-Understood, please note it in the commit message .
+The RK3588 dts/upstream rng node will not land in U-Boot until v6.15-dts
+is pulled into U-Boot for a future release, so the compatible is just
+updated to match the compatible used in upstream Linux.
 
-Thank you.
+Jonas Karlman (2):
+  rng: rockchip_rng: Add compatible for RK3568
+  rng: rockchip_rng: Update compatible for RK3588
+
+ arch/arm/dts/rk356x-u-boot.dtsi  | 9 ++++-----
+ arch/arm/dts/rk3588s-u-boot.dtsi | 4 ++--
+ drivers/rng/rockchip_rng.c       | 6 +++++-
+ 3 files changed, 11 insertions(+), 8 deletions(-)
+
+-- 
+2.49.0
+
