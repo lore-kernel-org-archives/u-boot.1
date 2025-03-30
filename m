@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82CD0C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 149B7C36011
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:46:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AEE18205A;
-	Sun, 30 Mar 2025 11:45:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08A5C81F54;
+	Sun, 30 Mar 2025 11:45:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iiOQkJpW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LmRqlbg4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E8A082045; Sun, 30 Mar 2025 11:45:42 +0200 (CEST)
+ id E4B4E8206E; Sun, 30 Mar 2025 11:45:44 +0200 (CEST)
 Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
  [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81DC481F45
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:45:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2569D81FC8
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:45:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
 Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac25520a289so591864866b.3
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:45:36 -0700 (PDT)
+ a640c23a62f3a-aaf0f1adef8so483203866b.3
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:45:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743327936; x=1743932736; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743327937; x=1743932737; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OENr+EEgKxH/l6HDFkNC0KO1U/zWhJWu5xJuqlgW0eg=;
- b=iiOQkJpWBTOW6YxLdn/FCnMb4H5e87jvGArvuJzseok76AjOjLM88kEQbqt6uWtDCb
- 2Z/x2V8XiNMEhwfShqkGl7Us928TBURUvqqabSK8+fyQnjrmSTt+UPQu79+4/IUDEctU
- DOWwsE4+MZwen4U/hZ+GNsaT2YwFaELrKnB0xtRXEWXsDp6Dd8K6dtaQVMmtm1nBg9wm
- 4hgJ8RbY6Wsg1Oe5oeTBOixcP9UlF9gf6wz44nbxfkYGE2apuQaVPl4Th5ZihLOl9pwK
- Br+n0i/P5bqX8tApk4Q1eu+9Vi+PQ8G9NhOgEbiLM0xunBDe51HXPqZBi7stxMVzSY3i
- zACw==
+ bh=aGYOfsYlAL66VzcO0V7t5yBedhUR9qyQzNaphZTbPFk=;
+ b=LmRqlbg4aoZSCVKt1fswImlrqKkktprgsDsCP2P4uneBZENXWGmaezhOvEs8Vve3pD
+ C0aeLLyaetU6SODwEE1d2WPeEKisY1esAwoBh/QjXEf1Uw/1zZNgKbku5CVkTcDCERZI
+ JhWzgnbLHn1tsW8zZWTqW1J9X7FE12d5G5Iz/r5LcutrTtZiazePSSJ8SWjXgclA9rl9
+ /13AMsGdCK/6bZjlpE6OE4JKZeaX01F/WopfD8I0YCQVUFzgxHMrMdpKMxxPAIPsFvz9
+ h6cRRSW6Yy3BRLDf2PTM4rDXhzsRH/Ov62ItkxCLJLgnR/w/q1qHMMDmJbLMcGqrfUod
+ NFdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743327936; x=1743932736;
+ d=1e100.net; s=20230601; t=1743327937; x=1743932737;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OENr+EEgKxH/l6HDFkNC0KO1U/zWhJWu5xJuqlgW0eg=;
- b=DfI54Ejc/JSVyAu83yjyBriPNcXs2IBtx1/8Bv/hV02fAzk4Ix5IASpZ0M1hzoZ4Xj
- VsZI9F6iAV1PL/wFxSLI1qz8RmvIzAPh6h8II7YvdLN3Qoazvy0Rh3S5t0kCZUhqHnVa
- BpEoHX6Q5C2k4l81KVC1w+/JSPvMiMW0s3JubAtK7r6LnIqYWwefXnhTw9tczGKK1xrd
- czVPf8861L6wTwBhv3jLH2C8+zsOFsvXECZQpVg2wWwlDMaxh+CSjFpoI4oDJaOR8Tpu
- Jpws6ENkgsp4IlE42T6tOau4GzWd5RSrnsqYfSZdVMaWOYA0XULHE8mcOmeV1JVsY0in
- z0yA==
-X-Gm-Message-State: AOJu0YyA8BsTOaonEXxZeVuhEhCNYtln0qRCGltJXYrAiCKUh+oPbDJl
- w7wlWteX92bQFE/sgUQ39FGTpfnGNg9T/CC9DG94gbpK4Sx6Zxh+
-X-Gm-Gg: ASbGncvLbcZsY4662mbCqKq9LNjzFC58FgSUUCvaj6Ff8Acaod6x43PfCKbFclkzdIK
- 0i+b8z8chdmfuPpeFlmDdprrUxEjKEXtDWS9Y04xD/0PaxjJMUqeLcdH1F29asmZHYKvP8Gje3y
- dFVlzOOSW6BCv4dBWywoBR7GW9rta9CHytw5xZL5CzHjM3Tm4LyhBzjriL1lU3KwP1fSUigxKM8
- cxxeL1jFHi7UOWJNojFWi9rSMX/vX6fILofx5nL+pUu2PyqeCSoo+piBoFNpqHNNKiMwGYaG0AX
- FN7q5C6h8MqpWZ0h7skWQSNt/EzHBO3uAoNx
-X-Google-Smtp-Source: AGHT+IGXvO39Kc3/OO2tVlPsMBRLj5kBRhstGvfuAmjWe5AEe6Xyn6IRTECzLUBB09xeRCTKorBo9w==
-X-Received: by 2002:a17:907:3f09:b0:ac2:cae8:e153 with SMTP id
- a640c23a62f3a-ac7389687a0mr478471866b.4.1743327935729; 
- Sun, 30 Mar 2025 02:45:35 -0700 (PDT)
+ bh=aGYOfsYlAL66VzcO0V7t5yBedhUR9qyQzNaphZTbPFk=;
+ b=Bbv8Tz10rPu8ftlT1J5Xekdnfm1+LDyVgGeZQxbZi4C+E3JFB9vRbz4SyXMqlpqLlN
+ UkZGHry+TiI5bFT7VpfFwml0y+9b2bow7Nvqun2XO/9dLfR49y/csbEOMqYHz6mc9UDr
+ NCGL516it20jOs6nDfvDyru8dImlqzsMMdCBqF78TQxkZSO+1OLBcjzqz0uzaAnlQ2kI
+ KsHZe3Dlf8wDO5I2x8uzBdrdx2eYzpfN584XXcM7mXOOJTrNihniyhyVmGLcPovjWJRd
+ CvVCHUxVRqwVzGfMJOubaDpsNF9Yye/4ScVc83r00xaAt0JLdaUIhs4nuyLT7clPuhwO
+ 6w9g==
+X-Gm-Message-State: AOJu0YyE0a5yngCXQsT+yfehBhrrOrqOKw++m4xqWUtChjXIxClG8PE6
+ AK6CQTsL4SJ2MTNoir34biiVdIbz6X/AQrbe+x3G/42m5QyCV5d4
+X-Gm-Gg: ASbGncs4Hpl9kknNmM9xBkCp6KjHoO32m044XIm5A5fvjYt4neI5TG6cP+kbuBOI7/i
+ AXKVIsdoXV4Cri4Y1PXpAxSFk8v/fAt3gCRxIzmDGU88RZ94690DoTkqc/5EIbLBjiLRBh3JWE+
+ miYiP6tQlBbsqq/STMrwHd7Lclmq0PubeRxIrPfEZp1H0aJL6WjIlAmj1bOztZ2jRS1iM4pPsZz
+ x/Q1ClOS6opShrw/IlGSOKMbyxa8gQeI/coiBHPienEqNBup8M4y/ZVno6OyvDVj0oDOfSfxIJg
+ kal1gpz48kD3vzLIMeEAQKafZcvwzefXvwZn
+X-Google-Smtp-Source: AGHT+IFYpjWmRbdRxraV9P42QEU+6u8/2hWX5UVAD6gw6py0nyAiSNwwqq0BczI2hrJ9r069hFlfOg==
+X-Received: by 2002:a17:907:7296:b0:ac3:17b6:737 with SMTP id
+ a640c23a62f3a-ac738baca82mr421020966b.45.1743327937325; 
+ Sun, 30 Mar 2025 02:45:37 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71927b175sm463235866b.61.2025.03.30.02.45.34
+ a640c23a62f3a-ac71927b175sm463235866b.61.2025.03.30.02.45.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:45:35 -0700 (PDT)
+ Sun, 30 Mar 2025 02:45:37 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -80,9 +80,9 @@ To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Anton Bambura <jenneron@protonmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 4/6] video: panel: add Motorola Atrix 4G and Droid X2 panel
-Date: Sun, 30 Mar 2025 12:45:10 +0300
-Message-ID: <20250330094515.11359-5-clamor95@gmail.com>
+Subject: [PATCH v1 5/6] video: backlight: add TI LM3532 led controller
+Date: Sun, 30 Mar 2025 12:45:11 +0300
+Message-ID: <20250330094515.11359-6-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250330094515.11359-1-clamor95@gmail.com>
 References: <20250330094515.11359-1-clamor95@gmail.com>
@@ -104,364 +104,436 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the LCD panel module used in Motorola Atrix 4G or Droid X2.
-Exact panel vendor and model are unknown. The panel has a 540x960 (qHD)
-resolution and uses 24 bit RGB per pixel.
+The LM3532 is a 500-kHz fixed frequency asynchronous boost converter which
+provides the power for 3 high-voltage, low-side current sinks. The device
+is programmable over an I2C-compatible interface and has independent
+current control for all three channels.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/Kconfig     |  10 ++
- drivers/video/Makefile    |   1 +
- drivers/video/mot-panel.c | 308 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 319 insertions(+)
- create mode 100644 drivers/video/mot-panel.c
+ drivers/video/Kconfig            |   9 +
+ drivers/video/Makefile           |   1 +
+ drivers/video/lm3532_backlight.c | 380 +++++++++++++++++++++++++++++++
+ 3 files changed, 390 insertions(+)
+ create mode 100644 drivers/video/lm3532_backlight.c
 
 diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index d343dfb061b..6c323be3e32 100644
+index 6c323be3e32..73353944971 100644
 --- a/drivers/video/Kconfig
 +++ b/drivers/video/Kconfig
-@@ -529,6 +529,16 @@ config VIDEO_LCD_HIMAX_HX8394
- 	Say Y here if you want to enable support for Himax HX8394
- 	dsi 4dl panel.
+@@ -738,6 +738,15 @@ config ATMEL_HLCD
+ 	help
+ 	   HLCDC supports video output to an attached LCD panel.
  
-+config VIDEO_LCD_MOT
-+	tristate "Atrix 4G and Droid X2 540x960 DSI video mode panel"
-+	depends on PANEL && BACKLIGHT
-+	select VIDEO_MIPI_DSI
++config BACKLIGHT_LM3532
++	bool "Backlight Driver for LM3532"
++	depends on BACKLIGHT
++	select DM_I2C
 +	help
-+	  Say Y here if you want to enable support for the LCD panel module for
-+	  Motorola Atrix 4G or Droid X2. Exact panel vendor and model are
-+	  unknown. The panel has a 540x960 resolution and uses 24 bit RGB per
-+	  pixel.
++	  Say Y to enable the backlight driver for National Semiconductor / TI
++	  LM3532 Lighting Power chip. Only backlight functions is supported as
++	  for now. Supported backlight level range is from 1 to 255.
 +
- config VIDEO_LCD_ORISETECH_OTM8009A
- 	bool "OTM8009A DSI LCD panel support"
- 	select VIDEO_MIPI_DSI
+ config BACKLIGHT_LM3533
+ 	bool "Backlight Driver for LM3533"
+ 	depends on BACKLIGHT
 diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index fec58bd8283..f6b980c9a47 100644
+index f6b980c9a47..49e42f34653 100644
 --- a/drivers/video/Makefile
 +++ b/drivers/video/Makefile
-@@ -59,6 +59,7 @@ obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
- obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
- obj-$(CONFIG_VIDEO_LCD_HITACHI_TX18D42VM) += hitachi_tx18d42vm_lcd.o
- obj-$(CONFIG_VIDEO_LCD_LG_LD070WX3) += lg-ld070wx3.o
-+obj-$(CONFIG_VIDEO_LCD_MOT) += mot-panel.o
- obj-$(CONFIG_VIDEO_LCD_ORISETECH_OTM8009A) += orisetech_otm8009a.o
- obj-$(CONFIG_VIDEO_LCD_RAYDIUM_RM68200) += raydium-rm68200.o
- obj-$(CONFIG_VIDEO_LCD_RENESAS_R61307) += renesas-r61307.o
-diff --git a/drivers/video/mot-panel.c b/drivers/video/mot-panel.c
+@@ -29,6 +29,7 @@ obj-$(CONFIG_$(PHASE_)BMP) += bmp.o
+ 
+ endif
+ 
++obj-$(CONFIG_BACKLIGHT_LM3532) += lm3532_backlight.o
+ obj-$(CONFIG_BACKLIGHT_LM3533) += lm3533_backlight.o
+ obj-$(CONFIG_BACKLIGHT_LP855x) += lp855x_backlight.o
+ obj-${CONFIG_EXYNOS_FB} += exynos/
+diff --git a/drivers/video/lm3532_backlight.c b/drivers/video/lm3532_backlight.c
 new file mode 100644
-index 00000000000..a9114957867
+index 00000000000..81b3b910196
 --- /dev/null
-+++ b/drivers/video/mot-panel.c
-@@ -0,0 +1,308 @@
++++ b/drivers/video/lm3532_backlight.c
+@@ -0,0 +1,380 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Motorola ATRIX 4G and DROID X2 DSI panel driver
-+ * Exact manufacturer and model unknown
++ * TI LM3532 LED driver
 + *
++ * Copyright (c) 2019 Texas Instruments Incorporated
 + * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
 + */
 +
++#define LOG_CATEGORY UCLASS_PANEL_BACKLIGHT
++
 +#include <backlight.h>
 +#include <dm.h>
-+#include <panel.h>
++#include <dm/ofnode.h>
++#include <i2c.h>
 +#include <log.h>
-+#include <misc.h>
-+#include <mipi_display.h>
-+#include <mipi_dsi.h>
-+#include <asm/gpio.h>
 +#include <linux/delay.h>
 +#include <linux/err.h>
++#include <asm/gpio.h>
 +#include <power/regulator.h>
 +
-+struct mot_panel_priv {
-+	struct udevice *vdd;
-+	struct udevice *vddio;
++#define LM3532_BL_MODE_MANUAL		0x00
++#define LM3532_BL_MODE_ALS		0x01
 +
-+	struct udevice *backlight;
++#define LM3532_REG_OUTPUT_CFG		0x10
++#define LM3532_REG_STARTSHUT_RAMP	0x11
++#define LM3532_REG_RT_RAMP		0x12
++#define LM3532_REG_PWM_A_CFG		0x13
++#define LM3532_REG_PWM_B_CFG		0x14
++#define LM3532_REG_PWM_C_CFG		0x15
++#define LM3532_REG_ZONE_CFG_A		0x16
++#define LM3532_REG_CTRL_A_FS_CURR	0x17
++#define LM3532_REG_ZONE_CFG_B		0x18
++#define LM3532_REG_CTRL_B_FS_CURR	0x19
++#define LM3532_REG_ZONE_CFG_C		0x1a
++#define LM3532_REG_CTRL_C_FS_CURR	0x1b
++#define LM3532_REG_ENABLE		0x1d
++#define LM3532_ALS_CONFIG		0x23
++#define LM3532_REG_ZN_0_HI		0x60
++#define LM3532_REG_ZN_0_LO		0x61
++#define LM3532_REG_ZN_1_HI		0x62
++#define LM3532_REG_ZN_1_LO		0x63
++#define LM3532_REG_ZN_2_HI		0x64
++#define LM3532_REG_ZN_2_LO		0x65
++#define LM3532_REG_ZN_3_HI		0x66
++#define LM3532_REG_ZN_3_LO		0x67
++#define LM3532_REG_ZONE_TRGT_A		0x70
++#define LM3532_REG_ZONE_TRGT_B		0x75
++#define LM3532_REG_ZONE_TRGT_C		0x7a
++#define LM3532_REG_MAX			0x7e
 +
-+	struct gpio_desc reset_gpio;
++/* Control Enable */
++#define LM3532_CTRL_A_ENABLE		BIT(0)
++#define LM3532_CTRL_B_ENABLE		BIT(1)
++#define LM3532_CTRL_C_ENABLE		BIT(2)
++
++/* PWM Zone Control */
++#define LM3532_PWM_ZONE_MASK		0x7c
++#define LM3532_PWM_ZONE_0_EN		BIT(2)
++#define LM3532_PWM_ZONE_1_EN		BIT(3)
++#define LM3532_PWM_ZONE_2_EN		BIT(4)
++#define LM3532_PWM_ZONE_3_EN		BIT(5)
++#define LM3532_PWM_ZONE_4_EN		BIT(6)
++
++/* Brightness Configuration */
++#define LM3532_I2C_CTRL			BIT(0)
++#define LM3532_ALS_CTRL			0
++#define LM3532_LINEAR_MAP		BIT(1)
++#define LM3532_ZONE_MASK		(BIT(2) | BIT(3) | BIT(4))
++#define LM3532_ZONE_0			0
++#define LM3532_ZONE_1			BIT(2)
++#define LM3532_ZONE_2			BIT(3)
++#define LM3532_ZONE_3			(BIT(2) | BIT(3))
++#define LM3532_ZONE_4			BIT(4)
++
++#define LM3532_ENABLE_ALS		BIT(3)
++#define LM3532_ALS_SEL_SHIFT		6
++
++/* Zone Boundary Register */
++#define LM3532_ALS_WINDOW_mV		2000
++#define LM3532_ALS_ZB_MAX		4
++#define LM3532_ALS_OFFSET_mV		2
++
++#define LM3532_CONTROL_A		0
++#define LM3532_CONTROL_B		1
++#define LM3532_CONTROL_C		2
++#define LM3532_MAX_CONTROL_BANKS	3
++#define LM3532_MAX_LED_STRINGS		3
++
++#define LM3532_OUTPUT_CFG_MASK		0x3
++#define LM3532_BRT_VAL_ADJUST		8
++#define LM3532_RAMP_DOWN_SHIFT		3
++
++#define LM3532_NUM_RAMP_VALS		8
++#define LM3532_NUM_AVG_VALS		8
++#define LM3532_NUM_IMP_VALS		32
++
++#define LM3532_FS_CURR_MIN		5000
++#define LM3532_FS_CURR_MAX		29800
++#define LM3532_FS_CURR_STEP		800
++
++struct lm3532_bank_data {
++	int control_bank;
++	int mode;
++	int ctrl_brt_pointer;
++	int num_leds;
++	int full_scale_current;
++	u32 present:1;
++	u32 led_strings[LM3532_MAX_CONTROL_BANKS];
 +};
 +
-+#define dsi_generic_write_seq(dsi, cmd, seq...) do {			\
-+		static const u8 b[] = { cmd, seq };			\
-+		int ret;						\
-+		ret = mipi_dsi_dcs_write_buffer(dsi, b, ARRAY_SIZE(b));	\
-+		if (ret < 0)						\
-+			return ret;					\
-+	} while (0)
++struct lm3532_backlight_priv {
++	struct gpio_desc enable_gpio;
++	struct udevice *regulator;
 +
-+static struct display_timing default_timing = {
-+	.pixelclock.typ		= 38250000,
-+	.hactive.typ		= 540,
-+	.hfront_porch.typ	= 32,
-+	.hback_porch.typ	= 32,
-+	.hsync_len.typ		= 16,
-+	.vactive.typ		= 960,
-+	.vfront_porch.typ	= 12,
-+	.vback_porch.typ	= 12,
-+	.vsync_len.typ		= 8,
++	u32 runtime_ramp_up;
++	u32 runtime_ramp_down;
++
++	struct lm3532_bank_data bank[LM3532_MAX_CONTROL_BANKS];
 +};
 +
-+static int mot_es2(struct mipi_dsi_device *dsi)
++/* This device does not like i2c md so use this instead */
++static void __maybe_unused dump_i2c(struct udevice *dev)
 +{
-+	int ret;
++	int i, c;
 +
-+	dsi_generic_write_seq(dsi, 0x55, 0x01);
-+
-+	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-+	if (ret < 0) {
-+		log_debug("%s: failed to exit sleep mode: %d\n", __func__, ret);
-+		return ret;
++	for (i = 0; i < 0x10; i++) {
++		printf("00%02x: %02x", i * 0x10, dm_i2c_reg_read(dev, i * 0x10));
++		for (c = 1; c < 0xf; c++)
++			printf(" %02x", dm_i2c_reg_read(dev, i * 0x10 + c));
++		printf(" %02x\n", dm_i2c_reg_read(dev, i * 0x10 + 0xf));
 +	}
-+	mdelay(120);
++}
 +
-+	dsi_generic_write_seq(dsi, 0xf4, 0x00, 0xbb, 0x46, 0x53, 0x0c, 0x49,
-+			      0x74, 0x29, 0x12, 0x15, 0x2f, 0x2f, 0x04);
-+	dsi_generic_write_seq(dsi, 0xf8, 0x4b, 0x04, 0x10, 0x1a, 0x2c, 0x2c,
-+			      0x2c, 0x2c, 0x14, 0x12);
++static int lm3532_backlight_enable(struct udevice *dev)
++{
++	struct lm3532_backlight_priv *priv = dev_get_priv(dev);
++	int ret, i;
 +
-+	dsi_generic_write_seq(dsi, 0xb5, 0x03, 0x7f, 0x00, 0x80, 0xc7, 0x00);
-+	dsi_generic_write_seq(dsi, 0xb7, 0x66, 0xf6, 0x46, 0x9f, 0x90, 0x99,
-+			      0xff, 0x80, 0x6d, 0x01);
++	for (i = 0; i < LM3532_MAX_CONTROL_BANKS; i++) {
++		if (priv->bank[i].present) {
++			u32 ctrl_en_val = BIT(priv->bank[i].control_bank);
 +
-+	/* Gamma R */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x04);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x30, 0x12, 0x0e, 0x0c,
-+			      0x22, 0x27, 0x31, 0x2e, 0x07, 0x0f);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x30, 0x12, 0x0e, 0x0c,
-+			      0x22, 0x27, 0x31, 0x2e, 0x07, 0x0f);
++			ret = dm_i2c_reg_clrset(dev, LM3532_REG_ENABLE,
++						ctrl_en_val, ctrl_en_val);
++			if (ret) {
++				log_debug("%s: failed to set ctrl: %d\n",
++					  __func__, ret);
++				return ret;
++			}
++		}
++	}
 +
-+	/* Gamma G */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x02);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x37, 0x15, 0x15, 0x11,
-+			      0x1f, 0x25, 0x2d, 0x2a, 0x05, 0x0f);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x37, 0x15, 0x15, 0x11,
-+			      0x1f, 0x25, 0x2d, 0x2a, 0x05, 0x0f);
-+
-+	/* Gamma B */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x01);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x3f, 0x16, 0x1f, 0x15,
-+			      0x1f, 0x25, 0x2d, 0x2b, 0x06, 0x0b);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x3f, 0x16, 0x1f, 0x15,
-+			      0x1f, 0x25, 0x2d, 0x2b, 0x06, 0x0b);
-+
-+	/* Gamma W */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x20);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x00, 0x2f, 0x34, 0x15, 0x1a, 0x11,
-+			      0x1f, 0x23, 0x2d, 0x29, 0x02, 0x08);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x00, 0x2f, 0x34, 0x15, 0x1a, 0x11,
-+			      0x1f, 0x23, 0x2d, 0x29, 0x02, 0x08);
-+
-+	dsi_generic_write_seq(dsi, 0x53, 0x2c);
-+	dsi_generic_write_seq(dsi, 0x35, 0x00);
++	regulator_set_enable_if_allowed(priv->regulator, 1);
 +
 +	return 0;
 +}
 +
-+static int __maybe_unused mot_es4(struct mipi_dsi_device *dsi)
++static int lm3532_backlight_set_brightness(struct udevice *dev, int percent)
 +{
-+	int ret;
++	struct lm3532_backlight_priv *priv = dev_get_priv(dev);
++	struct lm3532_bank_data *bank;
++	int ret, i;
 +
-+	dsi_generic_write_seq(dsi, 0xd2, 0x04, 0x53);
-+	dsi_generic_write_seq(dsi, 0xd2, 0x05, 0x53);
-+	dsi_generic_write_seq(dsi, 0x55, 0x01);
++	for (i = 0; i < LM3532_MAX_CONTROL_BANKS; i++) {
++		if (priv->bank[i].present) {
++			bank = &priv->bank[i];
++			u32 brightness_reg = LM3532_REG_ZONE_TRGT_A +
++					     bank->control_bank * 5 +
++					     (bank->ctrl_brt_pointer >> 2);
 +
-+	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-+	if (ret < 0) {
-+		log_debug("%s: failed to exit sleep mode: %d\n", __func__, ret);
-+		return ret;
++			ret = dm_i2c_reg_write(dev, brightness_reg, percent);
++			if (ret) {
++				log_debug("%s: failed to set brightness: %d\n",
++					  __func__, ret);
++				return ret;
++			}
++		}
 +	}
-+	mdelay(120);
-+
-+	dsi_generic_write_seq(dsi, 0xb5, 0x03, 0x7f, 0x0a, 0x80, 0xff, 0x00);
-+	dsi_generic_write_seq(dsi, 0xb7, 0x7a, 0xf7, 0x4d, 0x91, 0x90, 0xb3,
-+			      0xff, 0x80, 0x6d, 0x01);
-+	dsi_generic_write_seq(dsi, 0xf4, 0x00, 0xbb, 0x46, 0x53, 0x0c, 0x49,
-+			      0x74, 0x29, 0x12, 0x15, 0x37, 0x37, 0x04);
-+	dsi_generic_write_seq(dsi, 0xf8, 0x0a, 0x04, 0x10, 0x2a, 0x35, 0x35,
-+			      0x35, 0x35, 0x21, 0x1a);
-+
-+	/* Gamma R */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x04);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x08, 0x1c, 0x1b, 0x0f, 0x0f, 0x0a,
-+			      0x1e, 0x22, 0x27, 0x26, 0x07, 0x0d);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x08, 0x3c, 0x27, 0x0f, 0x0f, 0x0a,
-+			      0x1e, 0x26, 0x31, 0x2f, 0x07, 0x0b);
-+
-+	/* Gamma G */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x02);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x30, 0x14, 0x0f, 0x00, 0x06, 0x02,
-+			      0x1e, 0x22, 0x27, 0x27, 0x08, 0x10);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x30, 0x35, 0x0f, 0x00, 0x0a, 0x02,
-+			      0x1c, 0x23, 0x31, 0x2f, 0x08, 0x0e);
-+
-+	/* Gamma B */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x01);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x12, 0x1b, 0x26, 0x0e, 0x12, 0x0b,
-+			      0x1e, 0x22, 0x27, 0x27, 0x06, 0x0c);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x12, 0x3b, 0x2c, 0x12, 0x12, 0x0e,
-+			      0x1e, 0x26, 0x31, 0x2f, 0x06, 0x0d);
-+
-+	/* Gamma W */
-+	dsi_generic_write_seq(dsi, 0xf9, 0x20);
-+	dsi_generic_write_seq(dsi, 0xfa, 0x37, 0x1b, 0x09, 0x01, 0x06, 0x04,
-+			      0x19, 0x19, 0x22, 0x24, 0x04, 0x15);
-+	dsi_generic_write_seq(dsi, 0xfb, 0x37, 0x3b, 0x17, 0x01, 0x0a, 0x04,
-+			      0x19, 0x1d, 0x2c, 0x2c, 0x04, 0x13);
-+
-+	dsi_generic_write_seq(dsi, 0x53, 0x2c);
-+	dsi_generic_write_seq(dsi, 0x35, 0x00);
-+	dsi_generic_write_seq(dsi, 0xc3, 0x01, 0x4e);
 +
 +	return 0;
 +}
 +
-+static int mot_panel_enable_backlight(struct udevice *dev)
++static const int ramp_table[LM3532_NUM_RAMP_VALS] = { 8, 1024, 2048, 4096, 8192,
++						     16384, 32768, 65536 };
++static int lm3532_get_ramp_index(int ramp_time)
 +{
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *dsi = plat->device;
++	int i;
++
++	if (ramp_time <= ramp_table[0])
++		return 0;
++
++	if (ramp_time > ramp_table[LM3532_NUM_RAMP_VALS - 1])
++		return LM3532_NUM_RAMP_VALS - 1;
++
++	for (i = 1; i < LM3532_NUM_RAMP_VALS; i++) {
++		if (ramp_time == ramp_table[i])
++			return i;
++
++		/* Find an approximate index by looking up the table */
++		if (ramp_time > ramp_table[i - 1] &&
++		    ramp_time < ramp_table[i]) {
++			if (ramp_time - ramp_table[i - 1] < ramp_table[i] - ramp_time)
++				return i - 1;
++			else
++				return i;
++		}
++	}
++
++	return 0;
++}
++
++static int lm3532_backlight_of_to_plat(struct udevice *dev)
++{
++	struct lm3532_backlight_priv *priv = dev_get_priv(dev);
++	u32 ramp_time, reg;
++	ofnode child;
 +	int ret;
 +
-+	dsi_generic_write_seq(dsi, 0xf0, 0x5a, 0x5a);
-+	dsi_generic_write_seq(dsi, 0xf1, 0x5a, 0x5a);
-+	dsi_generic_write_seq(dsi, 0xd0, 0x8e);
++	ret = gpio_request_by_name(dev, "enable-gpios", 0,
++				   &priv->enable_gpio, GPIOD_IS_OUT);
++	if (ret) {
++		log_debug("%s: could not decode enable-gpios (%d)\n", __func__, ret);
++		return ret;
++	}
 +
-+	ret = mot_es2(dsi);
++	ret = device_get_supply_regulator(dev, "vin-supply", &priv->regulator);
++	if (ret) {
++		log_debug("%s: vin regulator not defined: %d\n", __func__, ret);
++		if (ret != -ENOENT)
++			return log_ret(ret);
++	}
++
++	ramp_time = dev_read_u32_default(dev, "ramp-up-us", 0);
++	priv->runtime_ramp_up = lm3532_get_ramp_index(ramp_time);
++
++	ramp_time = dev_read_u32_default(dev, "ramp-down-us", 0);
++	priv->runtime_ramp_down = lm3532_get_ramp_index(ramp_time);
++
++	/* Backlight is one of children but has no dedicated driver */
++	ofnode_for_each_subnode(child, dev_ofnode(dev)) {
++		ret = ofnode_read_u32(child, "reg", &reg);
++		if (ret || reg > LM3532_CONTROL_C) {
++			log_debug("%s: control bank invalid %d\n", __func__, reg);
++			continue;
++		}
++
++		struct lm3532_bank_data *bank = &priv->bank[reg];
++
++		bank->control_bank = reg;
++		bank->present = 1;
++		bank->mode = ofnode_read_u32_default(child, "ti,led-mode",
++						     LM3532_BL_MODE_MANUAL);
++		bank->mode = LM3532_BL_MODE_ALS ? LM3532_ALS_CTRL : LM3532_I2C_CTRL;
++
++		if (ofnode_read_bool(child, "ti,linear-mapping-mode"))
++			bank->mode |= LM3532_LINEAR_MAP;
++
++		bank->num_leds = ofnode_read_size(child, "led-sources");
++		bank->num_leds /= sizeof(u32);
++		if (bank->num_leds > LM3532_MAX_LED_STRINGS) {
++			log_debug("%s: too many LED string defined %d\n",
++				  __func__, bank->num_leds);
++			continue;
++		}
++
++		ret = ofnode_read_u32_array(child, "led-sources",
++					    bank->led_strings,
++					    bank->num_leds);
++		if (ret) {
++			log_debug("%s: led-sources property missing %d\n",
++				  __func__, ret);
++			continue;
++		}
++
++		ret = ofnode_read_u32(child, "led-max-microamp",
++				      &bank->full_scale_current);
++		if (ret)
++			log_debug("%s: failed getting led-max-microamp %d\n",
++				  __func__, ret);
++		else
++			bank->full_scale_current = min(bank->full_scale_current,
++						       LM3532_FS_CURR_MAX);
++	}
++
++	return 0;
++}
++
++static int lm3532_backlight_init_registers(struct udevice *dev,
++					   struct lm3532_bank_data *bank)
++{
++	struct lm3532_backlight_priv *priv = dev_get_priv(dev);
++	u32 brightness_config_val, runtime_ramp_val;
++	u32 output_cfg_val = 0, output_cfg_shift = 0, output_cfg_mask = 0;
++	int fs_current_reg, fs_current_val;
++	int ret, i;
++
++	if (!bank->present)
++		return 0;
++
++	u32 brightness_config_reg = LM3532_REG_ZONE_CFG_A + bank->control_bank * 2;
++	/*
++	 * This could be hard coded to the default value but the control
++	 * brightness register may have changed during boot.
++	 */
++	ret = dm_i2c_reg_read(dev, brightness_config_reg);
++	if (ret < 0)
++		return ret;
++
++	bank->ctrl_brt_pointer = ret & ~LM3532_ZONE_MASK;
++	brightness_config_val = bank->ctrl_brt_pointer | bank->mode;
++
++	ret = dm_i2c_reg_write(dev, brightness_config_reg, brightness_config_val);
 +	if (ret)
 +		return ret;
 +
-+	ret = mipi_dsi_dcs_set_display_on(dsi);
-+	if (ret < 0) {
-+		log_debug("%s: failed to set display on: %d\n", __func__, ret);
-+		return ret;
++	if (bank->full_scale_current) {
++		fs_current_reg = LM3532_REG_CTRL_A_FS_CURR + bank->control_bank * 2;
++		fs_current_val = (bank->full_scale_current - LM3532_FS_CURR_MIN) /
++				 LM3532_FS_CURR_STEP;
++
++		ret = dm_i2c_reg_write(dev, fs_current_reg, fs_current_val);
++		if (ret)
++			return ret;
 +	}
-+	mdelay(20);
 +
-+	return 0;
-+}
++	for (i = 0; i < bank->num_leds; i++) {
++		output_cfg_shift = bank->led_strings[i] * 2;
++		output_cfg_val |= (bank->control_bank << output_cfg_shift);
++		output_cfg_mask |= LM3532_OUTPUT_CFG_MASK << output_cfg_shift;
++	}
 +
-+static int mot_panel_set_backlight(struct udevice *dev, int percent)
-+{
-+	struct mot_panel_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = backlight_enable(priv->backlight);
++	ret = dm_i2c_reg_clrset(dev, LM3532_REG_OUTPUT_CFG, output_cfg_mask,
++				output_cfg_val);
 +	if (ret)
 +		return ret;
 +
-+	mdelay(5);
++	runtime_ramp_val = priv->runtime_ramp_up |
++			 (priv->runtime_ramp_down << LM3532_RAMP_DOWN_SHIFT);
 +
-+	return backlight_set_brightness(priv->backlight, percent);
++	return dm_i2c_reg_write(dev, LM3532_REG_RT_RAMP, runtime_ramp_val);
 +}
 +
-+static int mot_panel_timings(struct udevice *dev, struct display_timing *timing)
++static int lm3532_backlight_probe(struct udevice *dev)
 +{
-+	memcpy(timing, &default_timing, sizeof(*timing));
-+	return 0;
-+}
++	struct lm3532_backlight_priv *priv = dev_get_priv(dev);
++	int ret, i;
 +
-+static int mot_panel_of_to_plat(struct udevice *dev)
-+{
-+	struct mot_panel_priv *priv = dev_get_priv(dev);
-+	int ret;
++	if (device_get_uclass_id(dev->parent) != UCLASS_I2C)
++		return -EPROTONOSUPPORT;
 +
-+	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
-+					   "backlight", &priv->backlight);
-+	if (ret) {
-+		log_debug("%s: cannot get backlight: ret = %d\n", __func__, ret);
-+		return ret;
-+	}
++	dm_gpio_set_value(&priv->enable_gpio, 1);
 +
-+	ret = device_get_supply_regulator(dev, "vdd-supply", &priv->vdd);
-+	if (ret) {
-+		log_debug("%s: cannot get vdd-supply: ret = %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = device_get_supply_regulator(dev, "vddio-supply", &priv->vddio);
-+	if (ret) {
-+		log_debug("%s: cannot get vddio-supply: ret = %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = gpio_request_by_name(dev, "reset-gpios", 0,
-+				   &priv->reset_gpio, GPIOD_IS_OUT);
-+	if (ret) {
-+		log_debug("%s: could not decode reser-gpios (%d)\n", __func__, ret);
-+		return ret;
++	for (i = 0; i < LM3532_MAX_CONTROL_BANKS; i++) {
++		ret = lm3532_backlight_init_registers(dev, &priv->bank[i]);
++		if (ret)
++			return ret;
 +	}
 +
 +	return 0;
 +}
 +
-+static int mot_panel_hw_init(struct udevice *dev)
-+{
-+	struct mot_panel_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = regulator_set_enable_if_allowed(priv->vddio, 1);
-+	if (ret) {
-+		log_debug("%s: enabling vddio-supply failed (%d)\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = regulator_set_enable_if_allowed(priv->vdd, 1);
-+	if (ret) {
-+		log_debug("%s: enabling vdd-supply failed (%d)\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
-+	if (ret) {
-+		log_debug("%s: error entering reset (%d)\n", __func__, ret);
-+		return ret;
-+	}
-+	mdelay(50);
-+
-+	ret = dm_gpio_set_value(&priv->reset_gpio, 0);
-+	if (ret) {
-+		log_debug("%s: error exiting reset (%d)\n", __func__, ret);
-+		return ret;
-+	}
-+	mdelay(10);
-+
-+	return 0;
-+}
-+
-+static int mot_panel_probe(struct udevice *dev)
-+{
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+
-+	/* fill characteristics of DSI data link */
-+	plat->lanes = 2;
-+	plat->format = MIPI_DSI_FMT_RGB888;
-+	plat->mode_flags = MIPI_DSI_MODE_LPM;
-+
-+	return mot_panel_hw_init(dev);
-+}
-+
-+static const struct panel_ops mot_panel_ops = {
-+	.enable_backlight	= mot_panel_enable_backlight,
-+	.set_backlight		= mot_panel_set_backlight,
-+	.get_display_timing	= mot_panel_timings,
++static const struct backlight_ops lm3532_backlight_ops = {
++	.enable = lm3532_backlight_enable,
++	.set_brightness = lm3532_backlight_set_brightness,
 +};
 +
-+static const struct udevice_id mot_panel_ids[] = {
-+	{ .compatible = "motorola,mot-panel" },
++static const struct udevice_id lm3532_backlight_ids[] = {
++	{ .compatible = "ti,lm3532" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(mot_panel) = {
-+	.name		= "mot_panel",
-+	.id		= UCLASS_PANEL,
-+	.of_match	= mot_panel_ids,
-+	.ops		= &mot_panel_ops,
-+	.of_to_plat	= mot_panel_of_to_plat,
-+	.probe		= mot_panel_probe,
-+	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
-+	.priv_auto	= sizeof(struct mot_panel_priv),
++U_BOOT_DRIVER(lm3532_backlight) = {
++	.name		= "lm3532_backlight",
++	.id		= UCLASS_PANEL_BACKLIGHT,
++	.of_match	= lm3532_backlight_ids,
++	.of_to_plat	= lm3532_backlight_of_to_plat,
++	.probe		= lm3532_backlight_probe,
++	.ops		= &lm3532_backlight_ops,
++	.priv_auto	= sizeof(struct lm3532_backlight_priv),
 +};
 -- 
 2.43.0
