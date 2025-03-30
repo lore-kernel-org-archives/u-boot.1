@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7524DC28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 21:40:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E95EC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 21:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0E488144A;
-	Sun, 30 Mar 2025 23:40:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A0F680FDA;
+	Sun, 30 Mar 2025 23:40:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nlA5J3WS";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cjepiQKt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71229800C1; Sun, 30 Mar 2025 23:40:30 +0200 (CEST)
+ id 7028081DE3; Sun, 30 Mar 2025 23:40:32 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05D82800C1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 23:40:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 066BF80FDA
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 23:40:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=c171=WS=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1743370826;
- bh=e9Ifp1DNzgH076aWSlbbseNsbkenRrB/IV4fM9i3AzU=;
- b=nlA5J3WSnKurNaZlyOmJkRqWeCihgZGmobPoe+ayUKU6Fw+96l9WZH7VezI6kJ9RNWoIKMheW
- cGgO4sOYnpAJMr17GoN9XJsra+F13/aVozoJV1zT6ept9R+cR7yGbIPlqFBwIOZgk1fT3Fy4toU
- HWC06/hfS3yCbojFIHTwv2RGFJohmYxREBi/kCxOqRE2/zTTek215gKdctQvDO+8IU3nel1OQUY
- NiihoO7AMQOMvRtkQPFqOeQjdTSC/m9bFHz7DaIjCwMLBL71ndCe4VNHnWSmjLZdZt22WIGRr8a
- VDYjQ6Fnp1VQbpOI+SGRcDtk2e4Ccc4dY+oo/cW0H0Uw==
-X-Forward-Email-ID: 67e9ba45f4aa6b41f9be0759
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1743370828; bh=HBKKNInqcxTBTUZcOpolgFzOobn7HbckzD0p6U0c5Pc=;
+ b=cjepiQKtZt/xgE6n6qoV862Hy0qlyXVgPE97Saj6CUVH/yzk5t5N/vDCKVnh8i92aV47MhxNi
+ +ZRONYQBKcUuPxUwgnun7ApCFu5sCFfLx+pZODpZIKKsKiaC9UNBdZ0Co8ip0o8jdpz7oR5zKAf
+ NcqoJAV+TLe7XhxCkXTEsnYO5CDdJM123k2XLehcpv/h/oYIZS5HnO+L77hC7Zal8ipysMzZJNQ
+ yM4cHETchvxCAKgFA9wyguhlX81rmuLXDIDW4VIyDJPui00MK84xnThReFv5TQO9p7Ksk40Mw/e
+ yOI8B1kYpw2j0a+nP1h8I5qugXmBzj50t+hsj59lFOQA==
+X-Forward-Email-ID: 67e9ba48f4aa6b41f9be0770
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.0.0
@@ -45,13 +45,16 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 0/2] rockchip: Update rng compatible for RK356x and RK3588
-Date: Sun, 30 Mar 2025 21:40:09 +0000
-Message-ID: <20250330214015.3466802-1-jonas@kwiboo.se>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 1/2] rng: rockchip_rng: Add compatible for RK3568
+Date: Sun, 30 Mar 2025 21:40:10 +0000
+Message-ID: <20250330214015.3466802-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250330214015.3466802-1-jonas@kwiboo.se>
+References: <20250330214015.3466802-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,26 +73,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for and updates the random generator compatible
-used for RK356x and RK3588.
+Linux commit afeccc408496 ("arm64: dts: rockchip: add DT entry for RNG
+to RK356x") merged for v6.12-rc1 add a proper rng node to the SoC DT.
+The compatible used differs compared to what U-Boot is currently using.
 
-The RK356x rng node is already part of dts/upstream so the rng node in
-u-boot.dtsi is dropped, and because it is not enabled for rk3566 it gets
-enabled in u-boot.dtsi to restore its use in U-Boot.
+Add support for the rk3568-rng used in upstream Linux. Support for the
+cryptov2-rng compatible is still kept because PX30/RK3326 and RK3308 are
+still using it.
 
-The RK3588 dts/upstream rng node will not land in U-Boot until v6.15-dts
-is pulled into U-Boot for a future release, so the compatible is just
-updated to match the compatible used in upstream Linux.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/dts/rk356x-u-boot.dtsi | 9 ++++-----
+ drivers/rng/rockchip_rng.c      | 4 ++++
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-Jonas Karlman (2):
-  rng: rockchip_rng: Add compatible for RK3568
-  rng: rockchip_rng: Update compatible for RK3588
-
- arch/arm/dts/rk356x-u-boot.dtsi  | 9 ++++-----
- arch/arm/dts/rk3588s-u-boot.dtsi | 4 ++--
- drivers/rng/rockchip_rng.c       | 6 +++++-
- 3 files changed, 11 insertions(+), 8 deletions(-)
-
+diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+index 24a976cf7e21..871869739536 100644
+--- a/arch/arm/dts/rk356x-u-boot.dtsi
++++ b/arch/arm/dts/rk356x-u-boot.dtsi
+@@ -21,11 +21,6 @@
+ 		bootph-all;
+ 	};
+ 
+-	rng: rng@fe388000 {
+-		compatible = "rockchip,cryptov2-rng";
+-		reg = <0x0 0xfe388000 0x0 0x2000>;
+-	};
+-
+ 	otp: nvmem@fe38c000 {
+ 		compatible = "rockchip,rk3568-otp";
+ 		reg = <0x0 0xfe38c000 0x0 0x4000>;
+@@ -121,6 +116,10 @@
+ 	bootph-all;
+ };
+ 
++&rng {
++	status = "okay";
++};
++
+ &sdhci {
+ 	bootph-pre-ram;
+ 	bootph-some-ram;
+diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
+index 2426648fbd57..f673e2657c94 100644
+--- a/drivers/rng/rockchip_rng.c
++++ b/drivers/rng/rockchip_rng.c
+@@ -312,6 +312,10 @@ static const struct udevice_id rockchip_rng_match[] = {
+ 		.compatible = "rockchip,rk3399-crypto",
+ 		.data = (ulong)&rk_cryptov1_soc_data,
+ 	},
++	{
++		.compatible = "rockchip,rk3568-rng",
++		.data = (ulong)&rk_cryptov2_soc_data,
++	},
+ 	{
+ 		.compatible = "rockchip,cryptov2-rng",
+ 		.data = (ulong)&rk_cryptov2_soc_data,
 -- 
 2.49.0
 
