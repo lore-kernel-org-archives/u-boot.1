@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E68C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 13:30:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FFBC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 13:35:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D25D80FDA;
-	Sun, 30 Mar 2025 15:30:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA71980FDA;
+	Sun, 30 Mar 2025 15:35:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r1cWslER";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YCXSM+qM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA0BD81879; Sun, 30 Mar 2025 15:30:54 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 4098581879; Sun, 30 Mar 2025 15:35:18 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59F3C80F9C
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 15:30:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 303B080F9C
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 15:35:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-39ac56756f6so3095393f8f.2
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 06:30:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=christopher.obbard@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3913958ebf2so2871457f8f.3
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 06:35:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743341451; x=1743946251; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kVmFKTID/yXVhMylSs7V4Dq8lGE/WIQZU2Ag6B1OoyY=;
- b=r1cWslERvvWoxGVl9C8CiLCEpKgSD4FXoSUDumuXe2TfohyYqewOPrKJrfS4EqGhZh
- t0j4NIdBYi9Kme0AFaWuj2+v8XduNi+JPYSRc2mBqc2Kcn06mcv8VCLETE/NTaoy2WPQ
- E/35pBEUaHzb7ENo4zSgD+5HC+RhAGqiTnyrToBDmMIEHLrYC/x7ZaFK5or9P4V4DcOw
- d6Fp+OlZGtF1UguCU6tUo9KzGjveQh6EN+i7tmTpCOagZdxGX/SUXRhfG3uUVKNRCCoS
- T02xv+0qyXNxPZlOujWI8MiV5iecEv5MWGbl9Fn7MMZPFLRG2Mv9N5vHcD2OMKCohchW
- +uzQ==
+ d=linaro.org; s=google; t=1743341715; x=1743946515; darn=lists.denx.de;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=PYymYZKmddwvZCQYChFYCp+LCg4xonJZdLtsQQv1xMU=;
+ b=YCXSM+qMxTLtnLyEarK5EazvuKRjDnbrPFJejoRJsQD+11C5+MSxRezkj9BErqrKbT
+ zsZSHQRJySOB/D6WEWuoUTOcujOQSs5oyZIvunMHCXzUnUy4g4dM8G7CAtE4Sojp6l/w
+ X+WTDwLzB1B0yna8D7oaSBpmr4lnAnr2thXtZB4wDEaBOTOTV6GUGz0CgaWDzb6ECH9r
+ t29NWdnSBUymNibfGsS96Dwmu4kTvdTg0FypYLCpQVcUgeNUgcZxemRAkqsmf5N9ZBtU
+ JgPF2yMi7eaaESS1L8l1mUY8kISujkz0FpQy0d9KuABDk/PeNLgtvHgTnukQxGvHS8qK
+ 5Yzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743341451; x=1743946251;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kVmFKTID/yXVhMylSs7V4Dq8lGE/WIQZU2Ag6B1OoyY=;
- b=Px14rqNrVSpNnixkMob9Mrs0bleU8GhZ9nyXFIPqABLGJw+QmOvFaeo3svpRtb+bSN
- j6hUQW1ITSeo1UlQPF8p2d0qxo+BHfVC85CcMuoUJnlQKpgSL1r56lKrB3C0rB53EyPd
- Wgl9eZbBy17Gzyayfyp0m4GnrA3D/8jT2TaaImLbvZli0TJFkRdoEEWUZjx6u8LvocGq
- EIJ9+jl9aOhw+W4YFyCGxXOSQktpXDkF8xlH0FRuTzA7N7uW0/ApZsFcdIGpRMmBAnYv
- Rc8pqdVH2U//WvIN8XKx02HaQyrKNvLW4YSYiswKQY6R3aAzfIDrL9XBoPTUDQwsYops
- fWiA==
+ d=1e100.net; s=20230601; t=1743341715; x=1743946515;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PYymYZKmddwvZCQYChFYCp+LCg4xonJZdLtsQQv1xMU=;
+ b=EoDiMM1InLqu5rdYuN+q1Gt7kWexPzax9MVCaOo+PxW1B/YtdQ3D2Bg+t0JqdV69LH
+ ajQLXKgG5INI8xfe0Pug4anUgznI82BrGHIpe5czbQjzyQkh1bd/oypvlZYL/Y9j9buE
+ JJDjZTeCnZZbSP2KueeSQLox4Op4VCgeN/7MXwNyn0lkX7d8YeDqrkBnwI8shZAGrN/+
+ UOZlWnrA1oShWhi0PcZh9EjsmNmWjZVbmdaF6IOi1we7LMs7oNsrFfWvm90/aLLyZcmo
+ 9/Qp1dY3OryPUOaSmDOTexIm14OYBNHtZWf1H95edr3tv8x/38aw2pK1ou9hEQduyQpl
+ MY5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXN4QZ9o6LWBEur+P+Tyoq2xzr2udq1sp44jUu+FqY+eUX9T5HtMvJha+8zT0453XfErGyF6So=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywf8pQzrdPihcstr87xqndCTtPJd6KDZsT7UuCJQCZgikqX+Y26
- GpkK5GcfejA0eVAxduZk47naVa9SgXrATDtFjjy7nNBLmD1zG8S5m6GBkCLVMbc=
-X-Gm-Gg: ASbGnctEtcQTUvZuOREw6Fe2ASuoM8m8Y6mH0Rl41DOek6HqRPQlmiBqDrdI5OmRhbw
- 8ylcqnwxH9aLs2rR6pqfDR4IcOtQQjZTLRlmXAciluxIfA3pifEvnmWelHKV4TvGlBaYhEWTDNt
- V++hIETdABx1kSUTfV5bGdrln/FHWLT4pi4ELAG6fUlDnH6PsjoMy7hfTmXmgGCqjfGB8YVhqN1
- ZfTThjl2Wr2ryT9deeNv9Qp7CK9sN0L6/XB5sPgdrczSUISyuaXenMeZ3xzSN3IDoVSKrKhLQ2b
- CRHH2jMfUtdNiNFAgE5VZFsytUg4PdDyN/r5MJcXpYeW3gnpH0ndzAWBipoW1hgMnSKsBO3VtqY
- =
-X-Google-Smtp-Source: AGHT+IFrxemQjfntBg2aXf06D1AogCTO4toTEp2ncisDQNpxEUfTd9OBuRcYXi3ndYyG8sswMm49XQ==
-X-Received: by 2002:a05:6000:2910:b0:39c:1257:cc25 with SMTP id
- ffacd0b85a97d-39c1257cc6amr4759917f8f.56.1743341451187; 
- Sun, 30 Mar 2025 06:30:51 -0700 (PDT)
-Received: from [192.168.1.38] (i5E863BED.versanet.de. [94.134.59.237])
+ AJvYcCWVe0o32mxsJzqE/Upv+SfXXx6yEws+Rb+GIESwcb/ng7J1uMFj8fAZN04on4XS+GoKXQMKWaY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzeLpg3pJijAl7xzx9HdeAkKlYkcj2obFqu4tbuU2Z9rMpkAbfz
+ qVak09P3SxH5DQpRpEpnWPr7NIhJ4Dna1k/8g6oZOC/Mb5LMUAeul95j3VG7vZ4=
+X-Gm-Gg: ASbGncsoURHW7eksSVYiccCp34JKHlXUaJRRZlNny+cfVPQAXLcKz5DqFTgEAaTD9FE
+ dcRdeAckxzEL/ce05KlJ6nEYVurBQNVrC5WFUpeeGn+lJl+06+He+cC2gtpBNllGwZvmeRJsP3Q
+ UIcUjkH/i95J22rjyyGJfqtZtvekit5QvXWNvimX4mRvXQI9GZZR6IGUeYo77EO4JSMKBFvI3Dz
+ fXEvmkQcDKUCwNZif0Cd+/cDcjvgFyN6u4pEM87LTVC9nqMaT1NWNSaQNE2mlSpBHH0vVwxIFWx
+ d6vF66cFHHc/nWyZNxJGvv2WRIOOkNG5sA5LoxMVdy7Y/990EcsneKlnB+ozj9zUi4ADtJ5Zb6N
+ /ZH7xJfSQhhlHhIMKGJWY9YKwM5Lc
+X-Google-Smtp-Source: AGHT+IEe2S/B+9cP87v9zT5v+5XrK0tmKv4KF1BO/1eYUw4uDJIYBY4bcdqVTshJBbKNfuw7FjweMw==
+X-Received: by 2002:a5d:6d8d:0:b0:391:4835:d888 with SMTP id
+ ffacd0b85a97d-39c12118e1fmr3890678f8f.42.1743341715658; 
+ Sun, 30 Mar 2025 06:35:15 -0700 (PDT)
+Received: from ?IPv6:2a00:23c8:b70a:ae01:9cf7:b69:fc50:980f?
+ ([2a00:23c8:b70a:ae01:9cf7:b69:fc50:980f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b66285bsm8481681f8f.21.2025.03.30.06.30.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 30 Mar 2025 06:30:50 -0700 (PDT)
-Message-ID: <fb7afec5-402e-476d-8bfd-b5cbc27b6f68@linaro.org>
-Date: Sun, 30 Mar 2025 15:30:49 +0200
+ ffacd0b85a97d-39c0b663617sm8665059f8f.34.2025.03.30.06.35.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Mar 2025 06:35:15 -0700 (PDT)
+Message-ID: <57643701688c322895ff829c28fdca3595704f70.camel@linaro.org>
+Subject: Re: [PATCH v4 2/5] rpi: Set bootm_size to 512MB
+From: Christopher Obbard <christopher.obbard@linaro.org>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stephen Warren <swarren@wwwdotorg.org>, Stephen Warren
+ <swarren@nvidia.com>,  Matthias Brugger	 <mbrugger@suse.com>, Tom Rini
+ <trini@konsulko.com>, Peter Robinson	 <pbrobinson@gmail.com>
+Date: Sun, 30 Mar 2025 14:35:01 +0100
+In-Reply-To: <20241220003447.2913443-3-sjg@chromium.org>
+References: <20241220003447.2913443-1-sjg@chromium.org>
+ <20241220003447.2913443-3-sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.0-1 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] board/qualcomm: introduce phone config
-To: Sam Day <me@samcday.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
- <20250311-qcom-phones-v2-1-83dcd88a6a87@linaro.org>
- <D8TGF97ZRSMG.2NFLDZX72HZ9E@samcday.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <D8TGF97ZRSMG.2NFLDZX72HZ9E@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,194 +104,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+Hi Simon,
 
-On 3/30/25 10:23, Sam Day wrote:
-> 'Ello Caleb,
-> 
-> On Tue Mar 11, 2025 at 1:31 PM CET, Caleb Connolly wrote:
->> Phones don't have keyboards! Introduce a phone-specific config fragment
->> and associated environment file to make U-Boot more useful on these
->> devices. This allows for navigating via the buttons and enabling
->> various USB gadget modes or displaying info about U-Boot.
->>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   board/qualcomm/qcom-phone.config | 17 ++++++++++++++
->>   board/qualcomm/qcom-phone.env    | 49 ++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 66 insertions(+)
->>
->> diff --git a/board/qualcomm/qcom-phone.config b/board/qualcomm/qcom-phone.config
->> new file mode 100644
->> index 0000000000000000000000000000000000000000..a2aa882285b61746a243a7a1c7c384f33839f1b2
->> --- /dev/null
->> +++ b/board/qualcomm/qcom-phone.config
->> @@ -0,0 +1,17 @@
->> +# Settings for phones
->> +CONFIG_DEFAULT_ENV_FILE="board/qualcomm/qcom-phone.env"
->> +# Hang on panic so the error message can be read
->> +CONFIG_PANIC_HANG=y
->> +# We use pause in various places to allow text to be read
->> +# before it scrolls off the screen
->> +CONFIG_CMD_PAUSE=y
->> +CONFIG_BOOT_RETRY=y
->> +CONFIG_BOOT_RETRY_TIME=1
->> +CONFIG_BUTTON_REMAP_PHONE_KEYS=y
-> 
-> Maybe also include CONFIG_CMD_UMS_ABORT_KEYED=y here? Then folks can
-> bail out of UMS mode without needing to hard reboot their device.
+On Thu, 2024-12-19 at 17:34 -0700, Simon Glass wrote:
+> Set this option so that all boot images stay within the bottom 512MB
+> of
+> memory. This should allow us to drop the fdt_high and initrd_high
+> options.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Suggested-by: Tom Rini <trini@konsulko.com>
 
-good idea heh
-> 
->> +CONFIG_RETRY_BOOTCMD=y
->> +CONFIG_FASTBOOT_BUF_ADDR=0x1A000000
->> +CONFIG_USB_FUNCTION_FASTBOOT=y
-> 
-> I would propose to also add:
-> 
-> CONFIG_CONSOLE_RECORD=y
-> CONFIG_CONSOLE_RECORD_INIT_F=y
-> CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
-> CONFIG_FASTBOOT_CMD_OEM_CONSOLE=y
-> 
-> This allows folks to pull down the U-Boot logs with `fastboot oem log`
+Reviewed-by: Christopher Obbard <christopher.obbard@linaro.org>
+Tested-by: Christopher Obbard <christopher.obbard@linaro.org> # CM4 1G
 
-Awesome, will add this too
-> 
-> CONFIG_FASTBOOT_FLASH=y
-> CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-> 
-> Allowing to flash to partitions via fastboot (not sure about if/how UFS
-> support works here though, I've only tested it on msm8916 with eMMC)
-
-Unfortunately fastboot doesn't have a UFS backend (and the whole 
-fastboot framework code is a big mess that needs a rewrite tbh).
-> 
-> CONFIG_FASTBOOT_OEM_RUN=y
-> 
-> Allowing to run arbitrary commands (e.g `fastboot oem run:'bdinfo')
-
-
-for sure
-> 
->> +CONFIG_USB_FUNCTION_ACM=y
->> +
->> +# Many phones don't actually define a serial port in their DTS
->> +# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
->> diff --git a/board/qualcomm/qcom-phone.env b/board/qualcomm/qcom-phone.env
->> new file mode 100644
->> index 0000000000000000000000000000000000000000..2a0791c888c62b9f2257448358dd196a02e4b6fb
->> --- /dev/null
->> +++ b/board/qualcomm/qcom-phone.env
->> @@ -0,0 +1,49 @@
->> +bootdelay=0
->> +bootretry=1
->> +stdin=serial,button-kbd
->> +stdout=serial,vidconsole
->> +stderr=serial,vidconsole
->> +
->> +# Fastboot is keen to use the address from kconfig, but we
->> +# allocate its buffer at runtime.
->> +fastboot=fastboot -l $fastboot_addr_r usb 0
->> +
->> +# Shortcut to enable USB serial gadget and disable bootretry
->> +serial_gadget=setenv stdin serial,button-kbd,usbacm; \
->> +	setenv stdout serial,vidconsole,usbacm; \
->> +	setenv stderr serial,vidconsole,usbacm; \
->> +	setenv bootretry -1; \
->> +	echo Enabled U-Boot console serial gadget
->> +
->> +# bootretry will run this command over and over, if we fail once
->> +# then bail out to the boot menu instead (with a pause to read
->> +# the error message)
->> +bootcmd=bootefi bootmgr; pause; run menucmd
->> +
->> +# When entering the menu (either from button press or failed boot)
->> +# remap bootcmd so it will re-open the menu and we won't get stuck
->> +# at the console with no way to type
->> +menucmd=setenv bootcmd run menucmd; bootmenu -1
->> +
->> +# Pause is used so the output can be read on the display
->> +bootmenu_0=Boot=bootefi bootmgr; pause
->> +bootmenu_1=Enable serial console gadget=run serial_gadget
->> +bootmenu_2=Enable USB mass storage=ums 0 scsi 0
-> 
-> This doesn't work on my fajita unless I run `scsi scan` first. I note
-> that this used to be in the preboot= section of default.env, maybe we
-> should bring that across?
-
-ooh yeah, the capsule update series should fix this since it calls 
-scsi_scan() as part of initialising the capsule update into, probably 
-better safe though.
-> 
-> Also, if you choose to include CONFIG_CMD_UMS_ABORT_KEYED=y per my
-> earlier suggestion, it would be worth adding an "echo press any key to
-> exit UMS mode" here or smth, I guess?
-
-Makes sense
-> 
->> +bootmenu_3=Reset device=reset
->> +bootmenu_4=Dump clocks=clk dump; pause
->> +bootmenu_5=Dump environment=printenv; pause
->> +bootmenu_6=Board info=bdinfo; pause
->> +bootmenu_7=Dump bootargs=fdt print /chosen bootargs; pause
-> 
-> I think options 4-7 should be at the bottom of the list since they're
-> less typical/useful than jumping into usbacm/fastboot/ums modes. Reset
-> device should be at the bottom of the list.
-> 
-> I'd maybe also go as far as suggesting that these could be removed
-> entirely? Once you're in serial mode (or fastboot mode with
-> CONFIG_FASTBOOT_OEM_RUN enabled) you can run these commands easily.
-
-yeah i'll revise this
-> 
->> +bootmenu_8=Enable fastboot mode=run fastboot
->> +# Disabling bootretry means we'll just drop the shell
->> +bootmenu_9=Drop to shell=setenv bootretry -1
->> +
->> +# Allow holding the power button while U-Boot loads to enter
->> +# the boot menu
->> +button_cmd_0_name=pwrkey
-> 
-> Two issues with using pwrkey as the boot menu trigger:
-> 
->   * Many devices display a "custom OS" warning screen which can be paused
->     with the power button, which this will conflict with.
->   * When I trigger the boot menu this way, releasing pwrkey when the boot
->     menu shows up causes the first boot option to be selected. I note
->     this doesn't happen in your qcomlt branch so I'm guessing you did
->     something extra there to prevent this undesired behaviour?
-
-ahaha i have a patch that makes buttons trigger on press instead of 
-release, i didn't work up the courage to propose it upstream yet though.
-
-These are very good points. We'll never find a perfect option but a 
-volume button is almost certainly better. Unfortunately not every device 
-names the volume buttons the same so, urgh. I'll see what I can come up with
-> 
->> +button_cmd_0=run menucmd
->> +
->> +# Hold volume down to drop to a shell with the USB serial gadget
->> +# enabled for debugging
->> +button_cmd_1_name=Volume down
->> +button_cmd_1=run serial_gadget
-> 
-> I would propose to simplify this and just have one button_cmd that is
-> used to pop the menu, since the serial gadget option is available there
-> anyway.
-
-Makes sense to me.
-
-Thanks a lot for taking the time to give this feedback.
-
-Kind regards,
-> 
-> -Sam
-> 
-> 
-
--- 
-Caleb (they/them)
-
+> ---
+>=20
+> (no changes since v3)
+>=20
+> Changes in v3:
+> - Add to the existing comment block
+>=20
+> Changes in v2:
+> - Add new patch to set bootm_size
+>=20
+> =C2=A0board/raspberrypi/rpi/rpi.env | 5 +++++
+> =C2=A01 file changed, 5 insertions(+)
+>=20
+> diff --git a/board/raspberrypi/rpi/rpi.env
+> b/board/raspberrypi/rpi/rpi.env
+> index 30228285edd..a327fccc77f 100644
+> --- a/board/raspberrypi/rpi/rpi.env
+> +++ b/board/raspberrypi/rpi/rpi.env
+> @@ -60,7 +60,12 @@ dfu_alt_info+=3DzImage fat 0 1
+> =C2=A0 * Even with the smallest possible CPU-GPU memory split of the CPU
+> getting
+> =C2=A0 * only 64M, the remaining 25M starting at 0x02700000 should allow
+> quite
+> =C2=A0 * large initrds before they start colliding with U-Boot.
+> + *
+> + * Limit bootm_size to 512MB so that all boot images stay within the
+> bottom
+> + * 512MB of memory
+> =C2=A0 */
+> +bootm_size=3D0x20000000
+> +
+> =C2=A0#ifdef CONFIG_ARM64
+> =C2=A0fdt_high=3Dffffffffffffffff
+> =C2=A0initrd_high=3Dffffffffffffffff
