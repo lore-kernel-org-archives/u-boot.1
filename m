@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8FD4C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:36:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C0BC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3A9C81E6C;
-	Sun, 30 Mar 2025 11:36:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C72081ECD;
+	Sun, 30 Mar 2025 11:36:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iIyU4Ds2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q7n1YIkQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9A1B81E06; Sun, 30 Mar 2025 11:36:15 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id D59B981E5B; Sun, 30 Mar 2025 11:36:16 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B293981951
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:36:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C800E8129B
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:36:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ac2af2f15d1so464430366b.1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:36:13 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac339f53df9so642637266b.1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:36:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743327373; x=1743932173; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743327374; x=1743932174; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cilTcFI9J2BfOgiNmr96m38FThE/0U+q4xViFZv3gco=;
- b=iIyU4Ds2DAgjX2ttvEo/7h5SOq81xBvZUkGgtQvO54rhZiIWQDtZ1PKq1H5FWDWsTz
- 69m/Du738+LqtOUCA7xNx0T+30fDUjfX1nN+OWhVh3BvuVj8kjb2FCfxmUHQ/KEFmoI1
- jt6ruwKuoPwu0bVAc9tukH+v1CZFc5JgJpdyFkP0B20c/Ofhf2BIslojKfu1NFz7ABKI
- 60aFxrUhmelOyHDbsbXDK07B5snCoZ/ZOXiPv0td5TBNR6tTunYAr8JljMPCBLSTT/RI
- jfTEBjOfR0RnvGidQa62mm8a21a55Ysv/JO3eg2ebOMKegBQpuyJyRv+QeW8Utua2fIj
- M3Lw==
+ bh=2miUrZ7HY8nzYCdxNGkwlKz5v+P5/7e/iIMoHC9Og28=;
+ b=Q7n1YIkQ5d0BRW0k+y+FNXvatpTvncNBEp/qia4xDnn8TLgG8m0+RLRr7msAeADpiK
+ H+2TQnUEnCt0lY+15Yh7JMGtimgHFSGzqwCQETbYaNHFOQ+HeJiVn/kxooaTek8D8E9R
+ xoEBlc9gqP7BAkuIkgXc8KbaG6EUEeGsWsqsqI4mSaBuEIwrFWEzLUocNPEz6T/t+jKX
+ Pgi9cwYRjZP1TJDbLA4nN3xfvO5uoHnTvmTU1EThTyHrEnq+dS6jjt69HFIApRewJrqW
+ /e4m2KnOJ99L6Akgp2b53akrRop95GIa6XrTJU0xcIApiX7V/3FXsXHexUtJpBvrcY34
+ nfWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743327373; x=1743932173;
+ d=1e100.net; s=20230601; t=1743327374; x=1743932174;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cilTcFI9J2BfOgiNmr96m38FThE/0U+q4xViFZv3gco=;
- b=I6VYrdlOoYTf0UHO1QpP5iZE7qXLxEHTvroMdQACnCfyuHTozdyH6xbOsxLG8rzN42
- YYEadWnerYgf0D2HsOvqx8HruYmKXDkEr8jj7s2qcXicXGXU9LvvE249Wby4RN6nKwBd
- x9d0rXhtJB+RzsZdUrwaq2d1MM3fA4Me5TxbpUe7gAqZTVCOlyozW/kbv2lx7TS7qdA4
- BEmf79XVK39ZZZmeWnP046os4E7QEXyIOjxYZudd1gu4/SyoBn3M8sqa9qDuIyO94wqi
- Ibam0Vi1QdvmOeHfNCXxNx88cGShFAYhuK7uVa+I26P6T7jZ4LUt9Dzg9DZOnAlXDKtt
- X1pw==
-X-Gm-Message-State: AOJu0YwJv6JzXReG1kASU6OS5HyFQtJADCnUcoPaO6xC7lqvWquRWIIX
- T1xBYZmJKB3zZsJ25yZeeaJCdW6h7lHTCEJmfOyAQba1s8vCkxFr
-X-Gm-Gg: ASbGnctyBUQdf8IHaoouib9vwhqnbAc1eyz6RhOTeknCp+AKikUOLS6ggiJ7FTiWbqR
- EV9cOaCfo3MBNV/9T9eYpWN7bp+wkKlEgQIHAFcu5dQHT/SMT0m+63rr/9ft83WQY9hhCdLmJXH
- 4JwbJqodJCnphJih6eVpJg0HwWZBg4hNGr6sHW+BYhP77Uc+5psefEifnqGv2dxlTHP72XtXcOX
- re1h+RZEcsy0Paq11/SbcdHH4Nx3OYmsJaKxghaHwSg+lMoN1sUwau9uc6MSVgNdABX6zsWl7o0
- irqkgYuXUB/FkRI3AvQc2rHjE+Izh4YrxLEAEY3xrINGHdA=
-X-Google-Smtp-Source: AGHT+IGQQasZcw0O135ThGAeZeEGyJIKZc8F/MPnD6FnJgOvXQbaUkbZ2yXnrV0KUgocWe5T0Y9bjQ==
-X-Received: by 2002:a17:907:7f07:b0:ac2:55f2:f939 with SMTP id
- a640c23a62f3a-ac738975e33mr415349066b.6.1743327372954; 
- Sun, 30 Mar 2025 02:36:12 -0700 (PDT)
+ bh=2miUrZ7HY8nzYCdxNGkwlKz5v+P5/7e/iIMoHC9Og28=;
+ b=pNa57U1M9YVBpMdWIsWUndp8ffvBfeoQ7jLYwAeASnQqye1CY0nGQU5yRdEP2G22DX
+ vYsUzGmo5cwkGj5hwSFC15M4OAOjhmca9Wgg6x3C1ZyjLMiau8/JOllxX0q/K8MIk0QX
+ eFv0wC/Ewt6Y5o7IbuVIWqtVlsxeG4zZZ+MUQAzhKolc5Vs3SysZX9pFsPEqQJb7eCDI
+ VNyT2TkF7FD9osr1gfKa4iNNKzqgQCXrquERo7lGbZ+eNhwKh8QYJpLhT7IkdnkTZ7hX
+ JlKjGoFvEisEHOB0r5MBedRfMRVFax+CQX9h6yZ+6Sm25/jgZI70/b2x2bfX5WPOZEup
+ aTzQ==
+X-Gm-Message-State: AOJu0Yxg/3Ve6qBynDHxQqTDaLCgm6K5HVDRW2N8N4NtLSwS+pKqOT3q
+ GxLIqugBX/GFqnZAgJRc5IpX/eip52X/hac9tK5m4dmwZMsZ8kJa
+X-Gm-Gg: ASbGncsY6GJgx0rgctCPbtDQJ+MebSITw1Xc0tUEPxgMI6u+rhBGwtntXaJN+tcEibG
+ /Du8j6HcSM2/0dVehoLbaFys7jIEqpt9dMODAgPAKG5hUAKIY1JNNvw1Aeelvgejior9ZbgWW5o
+ ngwd0+C/gk0f8jqeRm8W4Xice0dauydxw35voMfuav7w/dOCdu6pxe61ITJNTEOa13LGgSVT5PK
+ hpcbRKfee558LB17hhFCCAbephdPeES3gkGEPz+wviw6txqg8OxZ8GiwSaUlhSfZEX2DA0OWgCD
+ fcfVsXPGnyenOcoBaB9Xw0oJ8rmI//QrYEV91nxupnkqmy8=
+X-Google-Smtp-Source: AGHT+IFvWJZoJlqlmyt2OcfAHn3Wnf6AdoyapSlPIO+Kuuxh+qJQpbGGFXwN+eJjI5wck/fZnzUExw==
+X-Received: by 2002:a17:907:2ce4:b0:ac3:afb1:df32 with SMTP id
+ a640c23a62f3a-ac7389762bdmr401830466b.6.1743327374164; 
+ Sun, 30 Mar 2025 02:36:14 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71971b7cfsm455273866b.183.2025.03.30.02.36.12
+ a640c23a62f3a-ac71971b7cfsm455273866b.183.2025.03.30.02.36.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:36:12 -0700 (PDT)
+ Sun, 30 Mar 2025 02:36:13 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -76,9 +76,9 @@ To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Anatolij Gustschin <agust@denx.de>, Thierry Reding <treding@nvidia.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/5] video: tegra20: dsi: add Tegra20 support
-Date: Sun, 30 Mar 2025 12:35:56 +0300
-Message-ID: <20250330093600.10871-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/5] video: rename tegra20 to tegra
+Date: Sun, 30 Mar 2025 12:35:57 +0300
+Message-ID: <20250330093600.10871-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250330093600.10871-1-clamor95@gmail.com>
 References: <20250330093600.10871-1-clamor95@gmail.com>
@@ -100,25 +100,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Existing Tegra30 DSI configuration is fully compatible with Tegra20.
+Since this set of drivers suports four Tegra SoC generations, lets name it
+just 'tegra'.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dsi.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/video/Kconfig                                  | 2 +-
+ drivers/video/Makefile                                 | 2 +-
+ drivers/video/{tegra20 => tegra}/Kconfig               | 0
+ drivers/video/{tegra20 => tegra}/Makefile              | 0
+ drivers/video/{tegra20 => tegra}/mipi-phy.c            | 0
+ drivers/video/{tegra20 => tegra}/mipi-phy.h            | 0
+ drivers/video/{tegra20 => tegra}/tegra-dc.c            | 0
+ drivers/video/{tegra20 => tegra}/tegra-dc.h            | 0
+ drivers/video/{tegra20 => tegra}/tegra-dsi.c           | 0
+ drivers/video/{tegra20 => tegra}/tegra-dsi.h           | 0
+ drivers/video/{tegra20 => tegra}/tegra-hdmi.c          | 0
+ drivers/video/{tegra20 => tegra}/tegra-hdmi.h          | 0
+ drivers/video/{tegra20 => tegra}/tegra-host1x.c        | 0
+ drivers/video/{tegra20 => tegra}/tegra-mipi.c          | 0
+ drivers/video/{tegra20 => tegra}/tegra-pwm-backlight.c | 0
+ 15 files changed, 2 insertions(+), 2 deletions(-)
+ rename drivers/video/{tegra20 => tegra}/Kconfig (100%)
+ rename drivers/video/{tegra20 => tegra}/Makefile (100%)
+ rename drivers/video/{tegra20 => tegra}/mipi-phy.c (100%)
+ rename drivers/video/{tegra20 => tegra}/mipi-phy.h (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-dc.c (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-dc.h (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-dsi.c (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-dsi.h (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-hdmi.c (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-hdmi.h (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-host1x.c (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-mipi.c (100%)
+ rename drivers/video/{tegra20 => tegra}/tegra-pwm-backlight.c (100%)
 
-diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index a2a22fa0fe2..a96fba01ee4 100644
---- a/drivers/video/tegra20/tegra-dsi.c
-+++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -1129,6 +1129,7 @@ static const struct video_bridge_ops tegra_dsi_bridge_ops = {
- };
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index df607303616..afcdb16c599 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -819,7 +819,7 @@ config VIDEO_TEGRA124
  
- static const struct udevice_id tegra_dsi_bridge_ids[] = {
-+	{ .compatible = "nvidia,tegra20-dsi", .data = DSI_V0 },
- 	{ .compatible = "nvidia,tegra30-dsi", .data = DSI_V0 },
- 	{ .compatible = "nvidia,tegra114-dsi", .data = DSI_V1 },
- 	{ .compatible = "nvidia,tegra124-dsi", .data = DSI_V1 },
+ source "drivers/video/bridge/Kconfig"
+ 
+-source "drivers/video/tegra20/Kconfig"
++source "drivers/video/tegra/Kconfig"
+ 
+ source "drivers/video/imx/Kconfig"
+ 
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 6073bc5234a..f506f4ba050 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -85,4 +85,4 @@ obj-$(CONFIG_VIDEO_ZYNQMP_DPSUB) += zynqmp/
+ 
+ obj-y += bridge/
+ obj-y += sunxi/
+-obj-y += tegra20/
++obj-y += tegra/
+diff --git a/drivers/video/tegra20/Kconfig b/drivers/video/tegra/Kconfig
+similarity index 100%
+rename from drivers/video/tegra20/Kconfig
+rename to drivers/video/tegra/Kconfig
+diff --git a/drivers/video/tegra20/Makefile b/drivers/video/tegra/Makefile
+similarity index 100%
+rename from drivers/video/tegra20/Makefile
+rename to drivers/video/tegra/Makefile
+diff --git a/drivers/video/tegra20/mipi-phy.c b/drivers/video/tegra/mipi-phy.c
+similarity index 100%
+rename from drivers/video/tegra20/mipi-phy.c
+rename to drivers/video/tegra/mipi-phy.c
+diff --git a/drivers/video/tegra20/mipi-phy.h b/drivers/video/tegra/mipi-phy.h
+similarity index 100%
+rename from drivers/video/tegra20/mipi-phy.h
+rename to drivers/video/tegra/mipi-phy.h
+diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra/tegra-dc.c
+similarity index 100%
+rename from drivers/video/tegra20/tegra-dc.c
+rename to drivers/video/tegra/tegra-dc.c
+diff --git a/drivers/video/tegra20/tegra-dc.h b/drivers/video/tegra/tegra-dc.h
+similarity index 100%
+rename from drivers/video/tegra20/tegra-dc.h
+rename to drivers/video/tegra/tegra-dc.h
+diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra/tegra-dsi.c
+similarity index 100%
+rename from drivers/video/tegra20/tegra-dsi.c
+rename to drivers/video/tegra/tegra-dsi.c
+diff --git a/drivers/video/tegra20/tegra-dsi.h b/drivers/video/tegra/tegra-dsi.h
+similarity index 100%
+rename from drivers/video/tegra20/tegra-dsi.h
+rename to drivers/video/tegra/tegra-dsi.h
+diff --git a/drivers/video/tegra20/tegra-hdmi.c b/drivers/video/tegra/tegra-hdmi.c
+similarity index 100%
+rename from drivers/video/tegra20/tegra-hdmi.c
+rename to drivers/video/tegra/tegra-hdmi.c
+diff --git a/drivers/video/tegra20/tegra-hdmi.h b/drivers/video/tegra/tegra-hdmi.h
+similarity index 100%
+rename from drivers/video/tegra20/tegra-hdmi.h
+rename to drivers/video/tegra/tegra-hdmi.h
+diff --git a/drivers/video/tegra20/tegra-host1x.c b/drivers/video/tegra/tegra-host1x.c
+similarity index 100%
+rename from drivers/video/tegra20/tegra-host1x.c
+rename to drivers/video/tegra/tegra-host1x.c
+diff --git a/drivers/video/tegra20/tegra-mipi.c b/drivers/video/tegra/tegra-mipi.c
+similarity index 100%
+rename from drivers/video/tegra20/tegra-mipi.c
+rename to drivers/video/tegra/tegra-mipi.c
+diff --git a/drivers/video/tegra20/tegra-pwm-backlight.c b/drivers/video/tegra/tegra-pwm-backlight.c
+similarity index 100%
+rename from drivers/video/tegra20/tegra-pwm-backlight.c
+rename to drivers/video/tegra/tegra-pwm-backlight.c
 -- 
 2.43.0
 
