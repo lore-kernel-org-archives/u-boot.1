@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3CC8C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 19:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6444DC36010
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 19:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 725E281E6C;
+	by phobos.denx.de (Postfix) with ESMTP id C3E8A81F30;
 	Sun, 30 Mar 2025 21:27:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kCqT7JOr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PE2gaIhP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 181B481879; Sun, 30 Mar 2025 21:27:11 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 1C03E81A0C; Sun, 30 Mar 2025 21:27:13 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D33A812BC
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 21:27:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 189B5812BC
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 21:27:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=arturkow2000@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ac3fcf5ab0dso602238666b.3
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 12:27:09 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5e677f59438so5738344a12.2
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 12:27:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743362828; x=1743967628; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743362830; x=1743967630; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Oodi4r5n4jMdoH4V9LG6kkv59sQ2PZ5q9ReQZ6Uk1WE=;
- b=kCqT7JOrMuv4hEemVzo6Lz09ZhO3+7xjWdFQrdnpX8zvLm0uMxkilQAiiaLjvJD0Tx
- 5nw9clOS0g5ng7m7qIIoDbIsmuLF33O7U1HiPU6FJIh2xGte8vcxj0IgZ8lDLG0FeIug
- At3FKP39bCEwq+LyKUjzkT8eGins5NTDeaXKukG5ag8fdeMEQRmNH4FGeRsms9AK78Wk
- C6tqpjuIHCM3qTuJQIzVhFVmKGngc2j2n2UIpD7LUrwZsXM2NxnvZeOLaMi/FXvLFf/I
- j2+LE2o0fZ9SM8HJnsu+XnLmhtpWWsJ3bFyGZHXeJP6hrptODQJi41M2u182VGtwA2Lp
- pTgg==
+ bh=TuIUBhgXMXzIX4RyBDlfrUGqGYG9VKplADMo98c/7g8=;
+ b=PE2gaIhPyqpeuYeOHr3NQKqmiPZomYwOn5vqFXlv8KvXVRqX2sEEsAYfauKL1OxyPM
+ MGh0D8/p48D+SSE6qo3YT/17I421TahYv12opcrXBOjahtx6G5aVjPhZJjMr+9UBBMyh
+ T/9xVJS1pEEjFjxd13iY+GSXNSKcCCOAvEcmNgAObGmuTQEjCj2FJDwAizlaZLeqw/Zj
+ WRO65dKDZPU8XkIwGuvR9R5YoSbF83a8CYklVySxpwFa8Cm3fornEhxEChk/54xQRztM
+ /vmZYkFxrY2bawQ0m7VTRc3OhyVH/ta/rSR0a5la/ZO2p8oaO2/ToMGz+d7EMo9UJoNU
+ px9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743362828; x=1743967628;
+ d=1e100.net; s=20230601; t=1743362830; x=1743967630;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Oodi4r5n4jMdoH4V9LG6kkv59sQ2PZ5q9ReQZ6Uk1WE=;
- b=FhfCSs+A+XWzjRx7tIvVqZDSwixufieRMJnEK3pBw0Gq2aYTlj1IYUZX/Z8oUbc+aa
- c1rjCCa15N9+H8tbZAsnbDRXITVBTM7cYgXV3ZNvcL95+bKVjnJjxpiX5d0U7wqcZ/m+
- nBFhJKERtNYC+TNtLY3LK7FKCfOnvMN1HRPqsIsCXzwM5RWgeXJPhwKvgwPmnxp+l3m9
- nu+7hLINxTTR91dnxQtHUYLFVZhNru/2Xc7+KN7QmLD5Ox7I7ba088R/qh2dIlU7hi6l
- 7bMGjxdEp8ISUCKDrpDUAjSxk9QZ1B5k8S/XOB/gPZ+nV52HqeKYQTg4Xd3UBcqMUIh+
- ALWw==
-X-Gm-Message-State: AOJu0YynRpTMoTMFHyl8ujx2oGseVon5iZCN9S46bYu+TXessrXoyH5/
- mI52BwGQc0d7JdZ8PJXRKS5PbgBRTI69PLAaCD/hyyOn1H5sgZQaU5wObkoU
-X-Gm-Gg: ASbGncu1Y9148iBcjnxzPYznfJWQzs2Q9UZUS3GM0PdZrA3DJb53EJ727eoL5wg9z0o
- DTQLhK7qDloVRTtTU/sSdMeGj97MENSjKIUFH3Uno1CO/Pf2ERmrD9OPu35xyoesjJByYgZGHd9
- Ae3knxpBPontBMRxX7WfWjsB4i8dwGzsUbO+syG/yB9EStiyAUpL2rw0oHKE8F/mNvibK3MfJMy
- TYtYAH1vwtuahrecbRIBAX+RmFn/3VniXRNcR/x5OkfdDdO9aKrRx5b3TAV7G0VPHO12sNJ4zf9
- FAvX0liFPIoFCAUFFUwLXRObmv63MGiY0nJyWQe/aqtJi1HYanA=
-X-Google-Smtp-Source: AGHT+IGfulPc9/qufjhOwDWqxh26iJRyptUYzMVyJSOC4WUk8wMZWNtrmLlQ7l+yf1iEABP3enTmMA==
-X-Received: by 2002:a17:907:86a2:b0:ac3:4139:9346 with SMTP id
- a640c23a62f3a-ac738975c1dmr605977866b.9.1743362828057; 
- Sun, 30 Mar 2025 12:27:08 -0700 (PDT)
+ bh=TuIUBhgXMXzIX4RyBDlfrUGqGYG9VKplADMo98c/7g8=;
+ b=KYWMbDPjx4MSqfvN5Oms1kIxlMq6bmVoZcicFiXSpYxr44WUVrDp80hpNl6Zfo8TZs
+ Urn9Pb3mB34hhyi9pCWWfElieap4AB/kZ+QQpCmM/6v1yOlDL4msQoxcjHAKmBrUYJxJ
+ 422i2TVlSH7PIM0Z+4ZThJ+AempnSwUYRmuMbljEUyeM72oLwwDbm4E4ZpQES/ztdKAn
+ e6WzFFVsAMUy2s5CkItUiaZRjsAP41l0tX1Kk7RLa7MXFq8TF/LW7gkgEwe5oCbSwbTn
+ 2vGMeH1hZ57eyMuLgs0r745kE5IhKqhHTOb6OJVzmwYHjJs8AukKp15vGk1WBou0G78z
+ BHZw==
+X-Gm-Message-State: AOJu0YyUlm0Bhs0ryw7TgP2hT5D4LJn0iFTaaZ2CmTtPZ42e/snMnAdH
+ vXPm7qTeoqfcLOmQWhbU7kcf2n/87gRS5H2U7vqeLNPcfrJeWFs1pMmcFHLH
+X-Gm-Gg: ASbGncsgUXNso04NCYiLHeRobmCgB8Yzecnx+fhqc/Xwc1t82ZNrqNXtu3/NdXgd9SW
+ tMoO/JCchL7iBX3ObzjT3YPdYpLEh4umeFsdIAPi5UNXiJQInOQm7MyR/3BhPpFsckUFkirGTvw
+ CJG6irL9mbAe3rhWC0XueNwJmK7OdX45g76sWRJUtAy4i9nf1mxexRJ/BiwT7B3HNcd4mhEWy6y
+ 68L/5u/jp3CqFAclB2sdbaNcuM3D++Ft3qiiZFTFrhd5YsAZeE9e58KRP6QeL0y+3UfiQL93BbT
+ wN5aEANI2GXuDn7D3b1CIRwqnWdYHbYbPfdYr9vfh6I8hkbLsaI=
+X-Google-Smtp-Source: AGHT+IFbCekIOsJscUDhKWkGExUMCgW3J+K48tOh5my7Ln2wv3jLkcaxOqUY5Vk5bcB4eaEr8SKjzA==
+X-Received: by 2002:a17:907:d25:b0:abf:4708:8644 with SMTP id
+ a640c23a62f3a-ac738bbebedmr536602166b.43.1743362829359; 
+ Sun, 30 Mar 2025 12:27:09 -0700 (PDT)
 Received: from eta.play.pl ([2a02:a312:c49b:a180:1d7c:64d:f4dd:a029])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71922029fsm522118966b.11.2025.03.30.12.27.06
+ a640c23a62f3a-ac71922029fsm522118966b.11.2025.03.30.12.27.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 12:27:07 -0700 (PDT)
+ Sun, 30 Mar 2025 12:27:08 -0700 (PDT)
 From: Artur Kowalski <arturkow2000@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Artur Kowalski <arturkow2000@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Simon Glass <sjg@chromium.org>, Stephen Warren <swarren@nvidia.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+Cc: Artur Kowalski <arturkow2000@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stephen Warren <swarren@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
  Tom Warren <twarren@nvidia.com>
-Subject: [PATCH v2 2/3] tegra: respect CONFIG_TEGRA_ENABLE_UART* options on
- Transformer T20
-Date: Sun, 30 Mar 2025 21:26:40 +0200
-Message-ID: <20250330212638.v2.2.I04194142897633b6272f2f235daed4f3a0b8939b@changeid>
+Subject: [PATCH v2 3/3] tegra: allow to expose UART on microSD slot
+Date: Sun, 30 Mar 2025 21:26:41 +0200
+Message-ID: <20250330212638.v2.3.I45a1ec3470905b1a7313ef907a83999f1163bb3b@changeid>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250330192656.1280403-1-arturkow2000@gmail.com>
 References: <20250330192656.1280403-1-arturkow2000@gmail.com>
@@ -101,40 +99,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If debug UART is set to anything other than UARTD, U-Boot's SPL hangs
-trying to communicate with UARTD which clock won't be ungated. With this
-patch it is possible to boot with UARTA enabled.
+Tegra20 has mux allowing to repurpose microSD as UART on boards which
+use sdmmc3 controller for microSD. Add TEGRA_UARTA_MICROSD to enable
+this feature. It is currently supported on Transformer T20, support for
+other boards may require Device Tree changes.
+
+Update Transformer T20 DTS to select correct pinmux and stdout-path
+based on TEGRA_UARTA_MICROSD.
 
 Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
 ---
 
-(no changes since v1)
+Changes in v2:
+- added TEGRA_UARTA_MICROSD Kconfig option
+- removed .dtsi for enabling UART over microSD
+- modified transformer DT to use UARTA and correct pinmux when
+  TEGRA_UARTA_MICROSD is enabled; it is enough to flip a single
+  switch to enable/disable UART over microSD
 
- include/configs/transformer-t20.h | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/arm/dts/tegra20-asus-transformer.dtsi | 24 ++++++++++++++++++++++
+ arch/arm/mach-tegra/tegra20/Kconfig        | 15 ++++++++++++++
+ 2 files changed, 39 insertions(+)
 
-diff --git a/include/configs/transformer-t20.h b/include/configs/transformer-t20.h
-index 6a3d9b24036..d3a98cc5a70 100644
---- a/include/configs/transformer-t20.h
-+++ b/include/configs/transformer-t20.h
-@@ -16,7 +16,17 @@
- #define CFG_TEGRA_BOARD_STRING		"ASUS Transformer"
+diff --git a/arch/arm/dts/tegra20-asus-transformer.dtsi b/arch/arm/dts/tegra20-asus-transformer.dtsi
+index 49efabbfd92..9ea323c81f3 100644
+--- a/arch/arm/dts/tegra20-asus-transformer.dtsi
++++ b/arch/arm/dts/tegra20-asus-transformer.dtsi
+@@ -5,7 +5,13 @@
  
- /* Board-specific serial config */
-+#if defined(CONFIG_TEGRA_ENABLE_UARTA)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTA_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTB)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTB_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTC)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARCD_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTD)
- #define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTD_BASE
-+#elif defined(CONFIG_TEGRA_ENABLE_UARTE)
-+#define CFG_SYS_NS16550_COM1		NV_PA_APB_UARTE_BASE
+ / {
+ 	chosen {
++#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
++		stdout-path = &uarta;
++#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
+ 		stdout-path = &uartd;
++#else
++#error Unsupported UART
++#endif
+ 	};
+ 
+ 	aliases {
+@@ -195,10 +201,17 @@
+ 				nvidia,function = "i2c1";
+ 			};
+ 
++#if CONFIG_IS_ENABLED(TEGRA_UARTA_SDB_SDD)
++			dbguart {
++				nvidia,pins = "sdb", "sdd";
++				nvidia,function = "uarta";
++			};
++#else
+ 			sdb {
+ 				nvidia,pins = "sdb", "sdc", "sdd", "slxc", "slxk";
+ 				nvidia,function = "sdio3";
+ 			};
 +#endif
  
- #include "tegra-common-post.h"
+ 			sdio1 {
+ 				nvidia,pins = "sdio1";
+@@ -376,7 +389,13 @@
+ 		};
+ 	};
  
++#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
++	uarta: serial@70006000 {
++#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
+ 	uartd: serial@70006300 {
++#else
++#error Unsupported UART
++#endif
+ 		status = "okay";
+ 		clock-frequency = <216000000>;
+ 	};
+@@ -434,7 +453,12 @@
+ 	};
+ 
+ 	sdmmc3: sdhci@c8000400 {
++#if CONFIG_IS_ENABLED(TEGRA_UARTA_MICROSD)
++		/* Can't use both at the same time */
++		status = "disabled";
++#else
+ 		status = "okay";
++#endif
+ 		bus-width = <4>;
+ 
+ 		cd-gpios = <&gpio TEGRA_GPIO(I, 5) GPIO_ACTIVE_LOW>;
+diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra/tegra20/Kconfig
+index 3349f1e2786..c2c51660216 100644
+--- a/arch/arm/mach-tegra/tegra20/Kconfig
++++ b/arch/arm/mach-tegra/tegra20/Kconfig
+@@ -77,6 +77,21 @@ endchoice
+ config SYS_SOC
+ 	default "tegra20"
+ 
++config TEGRA_UARTA_MICROSD
++	bool "UARTA on MicroSD breakout board"
++	default n
++	depends on TEGRA_ENABLE_UARTA && TARGET_TRANSFORMER_T20
++	select TEGRA_UARTA_SDB_SDD
++	help
++	  Repurpose the SD card slot for getting access to the UARTA serial
++	  console. Primarily useful only for low level u-boot debugging on
++	  tablets, where normal UARTD is difficult to access and requires
++	  device disassembly and/or soldering. Enabling this option causes
++	  UARTA TX to become exposed on SDD and RX on SDB pins which correspond
++	  to microSD CLK and CMD pins respectively. Currently this is supported
++	  only on Transformer T20, support for other platforms may require DT
++	  and configs (from include/configs/*) updates.
++
+ source "board/nvidia/harmony/Kconfig"
+ source "board/avionic-design/medcom-wide/Kconfig"
+ source "board/compal/paz00/Kconfig"
 -- 
 2.48.1
 
