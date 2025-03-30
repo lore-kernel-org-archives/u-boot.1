@@ -4,44 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D3DC36008
-	for <u-boot@archiver.kernel.org>; Sat, 29 Mar 2025 23:24:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6960C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 06:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69ED780EE5;
-	Sun, 30 Mar 2025 00:24:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id D7B0780BA8;
+	Sun, 30 Mar 2025 08:47:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 95A128171B; Sun, 30 Mar 2025 00:24:37 +0100 (CET)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B29C80BA8
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 00:24:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.98) (envelope-from <daniel@makrotopia.org>)
- id 1tyfXW-000000005Q1-1ob9; Sat, 29 Mar 2025 23:24:34 +0000
-Date: Sat, 29 Mar 2025 23:24:31 +0000
-From: Daniel Golle <daniel@makrotopia.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Thomas =?iso-8859-1?Q?H=FChn?= <thomas.huehn@hs-nordhausen.de>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] tools/fit_check_sign: make key optional
-Message-ID: <ce89b990d74569dc0eea4b1ff3929b3514436744.1743290511.git.daniel@makrotopia.org>
-References: <bf6a90e864b713db41bf788797554649eeaa0732.1743290511.git.daniel@makrotopia.org>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O08C0jR6";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C8F7380F9C; Sun, 30 Mar 2025 08:47:05 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CAD1F800C1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 08:47:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e6582542952so2395432276.3
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 23:47:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743317221; x=1743922021; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jL+xCBCA60fuGAbpvqmuODDWMlFZ6NBPduwzULnXXCo=;
+ b=O08C0jR6eAFWzw9OMg4s4zwDp7mD+bSYcS2mGKtrT1iOswz9dYLtpgEIJjji13bUFa
+ UMkcA/zEtlrYqKNmz6ebvzynqLZOrR/TQhR3HGvnzjbnNWgSCqYQjR2VdT38jWVdsWYK
+ jMqCfvuUuUO8YbTABwTqskNbbJ5nJHZPN7bClXMSWD8pzSNnOgav3z0mj+9Qcgx+NVnI
+ pFNeuJpAkRRjJBnTeQ/xQT4wUfVylPU2akfOUyhJJ5J2FpF+XDt/W9GHYNrDiVHd2G4R
+ 3oCEKLm/VlXW2n26AlI/GzLqDdrO6QLzv74/QJLY83cPpx17b6rG/pibw/SAjgdYNFoQ
+ j8Zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743317221; x=1743922021;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jL+xCBCA60fuGAbpvqmuODDWMlFZ6NBPduwzULnXXCo=;
+ b=iln4FFWNdXgMUeVBxbdEEQ87iquMlRc4eTNfbsvSQhzlaSe8EYMYdifECRvTspbnDN
+ SToXpTWtBTmJhuR14gMWeDgizTqNEYwqp7PJLnaDV3YArik7Z+XoXIZUtLR+VXQcy8kG
+ zdyBKCnXNdio0iF4DqONC7pArupOhq66wSduU4GcTsdWzMc4MOxl+CXswG3QqYxb9Bl4
+ xvxN0xeEGN/TKtZPsoJfHDois4G05HdFTeBspxtiim3kJykXorUgDEPslraQNU+dCgfG
+ RNd6oH5MqnXN2E7fAcXg820WMA5n0i+zt28a14FTXSVIZQQEeo7UhyXs1GhiMEtiZ64S
+ rTng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUbZl2ZokwamQeCivXFP7bAyxssKjB6y6UjaAwK3mxtI1vktF1qj9C/eyJLFKHUKlVO1G4XLUo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHVbAfbfIAaVQNCSMyoeeovtxMzf3PDuJTpY1voMrslku0qSIQ
+ v9DhnE9iaTxMjA0aZCkuvtHSG5W1m4bKXGvcdmZ5/ORJVjOARQ5RZ/SbaeXZZRwDXcf9j3c0Sq0
+ +XMyMuA3v8yzD1OCuDxPuOYpsxw9u7+XHIN5F/Q==
+X-Gm-Gg: ASbGnctmA3whskaM/B/3kZYEo1LsJa8rEW2o5kXLNjXwtV0OQ2ABLDPeJIhDbS6L+Kk
+ lw2Gy2F5i+lpxZ6q7Rzw/Ty4sbw2S+w1wqivRdNxghWvxYvgHQ/MXeM/EhEt5+xa9eAnswdwIMC
+ Wrfj5WGSI9XGrm/0l2i85nt8Rv9Q==
+X-Google-Smtp-Source: AGHT+IHI/MF7Rqil9OXT2mvcCCJJvkbeDTFjqxI5Ne5FSrW8/R5g4+h1pFh93ATfrAvKd8V1/RelkIRC0yQ6gFXCNdc=
+X-Received: by 2002:a05:6902:1b93:b0:e3c:9fb5:837a with SMTP id
+ 3f1490d57ef6-e6b83a96e19mr6543005276.41.1743317221587; Sat, 29 Mar 2025
+ 23:47:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <bf6a90e864b713db41bf788797554649eeaa0732.1743290511.git.daniel@makrotopia.org>
+References: <20250315221813.1265193-1-CFSworks@gmail.com>
+ <20250315221813.1265193-7-CFSworks@gmail.com>
+In-Reply-To: <20250315221813.1265193-7-CFSworks@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sun, 30 Mar 2025 09:46:25 +0300
+X-Gm-Features: AQ5f1JqVj9sZMFK4W4Q0yqeaHo0mj3Iw9FlQG-n9sWAGgGk_ve3S18WJ7a8cZdU
+Message-ID: <CAC_iWj+WknqSxPE+W_KN1LS3beNZSMxZC7wnKkQ+P0uLfDZhWw@mail.gmail.com>
+Subject: Re: [PATCH v2 06/15] arm: Replace 'adrl' in EFI crt0
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,78 +97,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow invoking fit_check_sig without the key parameter, allowing to
-validate only checksums and hashes for unsigned images.
+On Sun, 16 Mar 2025 at 00:18, Sam Edwards <cfsworks@gmail.com> wrote:
+>
+> LLVM's IAS does not (and cannot easily) support the 'adrl'
+> pseudoinstruction, and ARM developers generally do not consider it
+> portable across assembler implementations either.
+>
+> Instead, expand it into the two subtract instructions it would emit
+> anyway. An explanation of the math follows:
+>
+> The .+8 and .+4 refer to the same memory location; this is because the
+> .+4 expression occurs in a subsequent instruction, 4 bytes after the
+> first. This memory location is the value of the PC register when it is
+> read by the first sub instruction. Thus, both inner parenthesized
+> expressions evaluate to the same result: PC's offset relative to
+> image_base. The subtract instructions then remove one byte each
+> (low, then high) of the total offset, thereby getting the absolute
+> address of image_base loaded in r0.
+>
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 
-Signed-off-by: Daniel Golle <daniel@makrotopia.org>
----
-v2: check key_blob and only call munmap in case it had been mmap'ed before
-
- tools/Makefile         |  3 +--
- tools/fit_check_sign.c | 19 +++++++++----------
- 2 files changed, 10 insertions(+), 12 deletions(-)
-
-diff --git a/tools/Makefile b/tools/Makefile
-index 237fa900a24..8b984eb60dd 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -63,8 +63,7 @@ HOSTCFLAGS_img2srec.o := -pedantic
- hostprogs-y += mkenvimage
- mkenvimage-objs := mkenvimage.o os_support.o generated/lib/crc32.o
- 
--hostprogs-y += dumpimage mkimage
--hostprogs-$(CONFIG_TOOLS_LIBCRYPTO) += fit_info fit_check_sign
-+hostprogs-y += dumpimage mkimage fit_info fit_check_sign
- hostprogs-$(CONFIG_TOOLS_LIBCRYPTO) += fdt_add_pubkey
- 
- ifneq ($(CONFIG_CMD_BOOTEFI_SELFTEST)$(CONFIG_FWU_MDATA_GPT_BLK),)
-diff --git a/tools/fit_check_sign.c b/tools/fit_check_sign.c
-index 3d1d33fdab1..32d0fdb8829 100644
---- a/tools/fit_check_sign.c
-+++ b/tools/fit_check_sign.c
-@@ -45,7 +45,7 @@ int main(int argc, char **argv)
- 	char *config_name = NULL;
- 	char cmdname[256];
- 	int ret;
--	void *key_blob;
-+	void *key_blob = NULL;
- 	int c;
- 
- 	strncpy(cmdname, *argv, sizeof(cmdname) - 1);
-@@ -70,18 +70,15 @@ int main(int argc, char **argv)
- 		fprintf(stderr, "%s: Missing fdt file\n", *argv);
- 		usage(*argv);
- 	}
--	if (!keyfile) {
--		fprintf(stderr, "%s: Missing key file\n", *argv);
--		usage(*argv);
--	}
- 
- 	ffd = mmap_fdt(cmdname, fdtfile, 0, &fit_blob, &fsbuf, false, true);
- 	if (ffd < 0)
- 		return EXIT_FAILURE;
--	kfd = mmap_fdt(cmdname, keyfile, 0, &key_blob, &ksbuf, false, true);
--	if (kfd < 0)
--		return EXIT_FAILURE;
--
-+	if (keyfile) {
-+		kfd = mmap_fdt(cmdname, keyfile, 0, &key_blob, &ksbuf, false, true);
-+		if (kfd < 0)
-+			return EXIT_FAILURE;
-+	}
- 	image_set_host_blob(key_blob);
- 	ret = fit_check_sign(fit_blob, key_blob, config_name);
- 	if (!ret) {
-@@ -93,7 +90,9 @@ int main(int argc, char **argv)
- 	}
- 
- 	(void) munmap((void *)fit_blob, fsbuf.st_size);
--	(void) munmap((void *)key_blob, ksbuf.st_size);
-+
-+	if (key_blob)
-+		(void)munmap((void *)key_blob, ksbuf.st_size);
- 
- 	close(ffd);
- 	close(kfd);
--- 
-2.49.0
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  arch/arm/lib/crt0_arm_efi.S | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
+> index 91b0fe12c51..235b3a0c48f 100644
+> --- a/arch/arm/lib/crt0_arm_efi.S
+> +++ b/arch/arm/lib/crt0_arm_efi.S
+> @@ -149,7 +149,8 @@ _start:
+>         adr             r1, .L_DYNAMIC
+>         ldr             r0, [r1]
+>         add             r1, r0, r1
+> -       adrl            r0, image_base
+> +       sub             r0, pc, #((.+8-image_base) & 0xff)
+> +       sub             r0, r0, #((.+4-image_base) & 0xff00)
+>         bl              _relocate
+>         teq             r0, #0
+>         bne             0f
+> --
+> 2.48.1
+>
