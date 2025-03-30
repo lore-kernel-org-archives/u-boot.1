@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6960C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 06:47:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02AC6C3600B
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 06:47:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7B0780BA8;
-	Sun, 30 Mar 2025 08:47:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6D3F080BA8;
+	Sun, 30 Mar 2025 08:47:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O08C0jR6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VdhLNK6S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8F7380F9C; Sun, 30 Mar 2025 08:47:05 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 37A3880F9C; Sun, 30 Mar 2025 08:47:54 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAD1F800C1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 08:47:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84FA6800C1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 08:47:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e6582542952so2395432276.3
- for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 23:47:02 -0700 (PDT)
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e694601f624so1967433276.1
+ for <u-boot@lists.denx.de>; Sat, 29 Mar 2025 23:47:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743317221; x=1743922021; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743317270; x=1743922070; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jL+xCBCA60fuGAbpvqmuODDWMlFZ6NBPduwzULnXXCo=;
- b=O08C0jR6eAFWzw9OMg4s4zwDp7mD+bSYcS2mGKtrT1iOswz9dYLtpgEIJjji13bUFa
- UMkcA/zEtlrYqKNmz6ebvzynqLZOrR/TQhR3HGvnzjbnNWgSCqYQjR2VdT38jWVdsWYK
- jMqCfvuUuUO8YbTABwTqskNbbJ5nJHZPN7bClXMSWD8pzSNnOgav3z0mj+9Qcgx+NVnI
- pFNeuJpAkRRjJBnTeQ/xQT4wUfVylPU2akfOUyhJJ5J2FpF+XDt/W9GHYNrDiVHd2G4R
- 3oCEKLm/VlXW2n26AlI/GzLqDdrO6QLzv74/QJLY83cPpx17b6rG/pibw/SAjgdYNFoQ
- j8Zw==
+ bh=qJ8YCPECmd8pQMRkHpLaEiSp8XuThlApyryDSOFSE1M=;
+ b=VdhLNK6S8k07qxXVj0EdUSXq3Lf0mltjLSU/aoxFzkAwjZKhkvSOdVcVL8NuZ78j0v
+ UZSE4JfH+/tgYO1VErYq9vfkOaIIvj5oeokhRoBT95623UItfHqijwfDxYkYgFrlhycW
+ NCvyQDRrWoz56iqocqOwk3wVbX4PMRQhm8D+GWhwQhsxitjvbjZMulkkpKgZmLtxDTz0
+ lR+yNi5zKOdD+l6j1AJYxY0MFzGj/gWrpWb50P5F088v2oWox3hMJvj0AlGjTs0lZNa7
+ YOYBvLzJ5NFeUEtma/kNOufVPh5Qw4AKjDZOylTv13IGksPgqNAZFPgh4QN3AF53iDVl
+ 3nmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743317221; x=1743922021;
+ d=1e100.net; s=20230601; t=1743317270; x=1743922070;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jL+xCBCA60fuGAbpvqmuODDWMlFZ6NBPduwzULnXXCo=;
- b=iln4FFWNdXgMUeVBxbdEEQ87iquMlRc4eTNfbsvSQhzlaSe8EYMYdifECRvTspbnDN
- SToXpTWtBTmJhuR14gMWeDgizTqNEYwqp7PJLnaDV3YArik7Z+XoXIZUtLR+VXQcy8kG
- zdyBKCnXNdio0iF4DqONC7pArupOhq66wSduU4GcTsdWzMc4MOxl+CXswG3QqYxb9Bl4
- xvxN0xeEGN/TKtZPsoJfHDois4G05HdFTeBspxtiim3kJykXorUgDEPslraQNU+dCgfG
- RNd6oH5MqnXN2E7fAcXg820WMA5n0i+zt28a14FTXSVIZQQEeo7UhyXs1GhiMEtiZ64S
- rTng==
+ bh=qJ8YCPECmd8pQMRkHpLaEiSp8XuThlApyryDSOFSE1M=;
+ b=dLRSJB3ycxOtovu/pTiBiu0gBbS+jYT5wmFCwUNnQRNqWkxA+EvylH3Qj8aewZWyJE
+ C+J1f1rjmfY/RWsvJ5VtmorHQKk+512ZTM79DWzQ/g3Zjqd/smkuMLVrCkZM8uVz3a8r
+ zW2iIy5OAjJwk8pjWIiEm7Q+jHRfjOj5si19aubzLQT25LCUrdHGdlgj/X//UX6ViTR3
+ +XS5LE9rzpVkRQFrjhfOrcVq65aj48Mdi8p/6MIwubwiG0WKm8DdrtAdoG1SUz0y3t2f
+ 7pih8Nb9WaZZk5JnF88Qf0DGV9n2FyDpCwVPuR0R3B5o8IE+NqH/YT2VRQu1uwqFmH7A
+ cygA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbZl2ZokwamQeCivXFP7bAyxssKjB6y6UjaAwK3mxtI1vktF1qj9C/eyJLFKHUKlVO1G4XLUo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHVbAfbfIAaVQNCSMyoeeovtxMzf3PDuJTpY1voMrslku0qSIQ
- v9DhnE9iaTxMjA0aZCkuvtHSG5W1m4bKXGvcdmZ5/ORJVjOARQ5RZ/SbaeXZZRwDXcf9j3c0Sq0
- +XMyMuA3v8yzD1OCuDxPuOYpsxw9u7+XHIN5F/Q==
-X-Gm-Gg: ASbGnctmA3whskaM/B/3kZYEo1LsJa8rEW2o5kXLNjXwtV0OQ2ABLDPeJIhDbS6L+Kk
- lw2Gy2F5i+lpxZ6q7Rzw/Ty4sbw2S+w1wqivRdNxghWvxYvgHQ/MXeM/EhEt5+xa9eAnswdwIMC
- Wrfj5WGSI9XGrm/0l2i85nt8Rv9Q==
-X-Google-Smtp-Source: AGHT+IHI/MF7Rqil9OXT2mvcCCJJvkbeDTFjqxI5Ne5FSrW8/R5g4+h1pFh93ATfrAvKd8V1/RelkIRC0yQ6gFXCNdc=
-X-Received: by 2002:a05:6902:1b93:b0:e3c:9fb5:837a with SMTP id
- 3f1490d57ef6-e6b83a96e19mr6543005276.41.1743317221587; Sat, 29 Mar 2025
- 23:47:01 -0700 (PDT)
+ AJvYcCV7CRm0s4p8F0ELMH0VTFjFsQguCEiLpDOUqWDhBzRKGJTYrOB0iWh1k29Bgv3Q9Syfjh2QG94=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdkIvc8jFZmufaul/ISEFoS7AGCEUu8R33I8hOH22n3TPPA1pC
+ rthKQe/6c1OWapqSIrwTy6Ot6pbWv/9/tr46PtVEjp7T8AYYsMZkCV1XBGGf+R8L/fvKGYaWYMI
+ /VIYD2Hx+weZTHZzKJNuN2T4mC4Gb4suY27X3LfYvPixlujgLN+Y=
+X-Gm-Gg: ASbGnctoIFXqnRPO35IT4LG6PlVrzP0FrhBI6T/kzuHxCSwZJlb8b5ikwl49Tw/ChgL
+ 9bGfkhuJVVS8v9RwOnOMadaveC0ntBTdRWqtD5+hjItRlOmyh2vjqKH5fIZUBFfmR0XN6nBF9cG
+ LJ95sMXwFJxOHiaD9I5psvxfi/Jw==
+X-Google-Smtp-Source: AGHT+IFdyO8JEhgIMTNWnZXXAfhAL2sImoQujf6EQg0nfuOT7u+7TKjSV/AkwEgDCFtmsaV2dD5JkhsFj341+V3QJ3s=
+X-Received: by 2002:a05:6902:a05:b0:e5b:3de2:ce95 with SMTP id
+ 3f1490d57ef6-e6b838f98d8mr6695119276.9.1743317270418; Sat, 29 Mar 2025
+ 23:47:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250315221813.1265193-1-CFSworks@gmail.com>
- <20250315221813.1265193-7-CFSworks@gmail.com>
-In-Reply-To: <20250315221813.1265193-7-CFSworks@gmail.com>
+ <20250315221813.1265193-9-CFSworks@gmail.com>
+In-Reply-To: <20250315221813.1265193-9-CFSworks@gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 30 Mar 2025 09:46:25 +0300
-X-Gm-Features: AQ5f1JqVj9sZMFK4W4Q0yqeaHo0mj3Iw9FlQG-n9sWAGgGk_ve3S18WJ7a8cZdU
-Message-ID: <CAC_iWj+WknqSxPE+W_KN1LS3beNZSMxZC7wnKkQ+P0uLfDZhWw@mail.gmail.com>
-Subject: Re: [PATCH v2 06/15] arm: Replace 'adrl' in EFI crt0
+Date: Sun, 30 Mar 2025 09:47:14 +0300
+X-Gm-Features: AQ5f1JqAptCGohbdT1i-nBfcBeT940Qfu77NXfAI56JfhzGvUew2r8bJ2GwGyoE
+Message-ID: <CAC_iWj+kVt4s93X269WbZ0UExa17CPXr0Zrzw4ZCFScFgsRAAg@mail.gmail.com>
+Subject: Re: [PATCH v2 08/15] makefile: Avoid objcopy --gap-fill for .hex/.srec
 To: Sam Edwards <cfsworks@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
@@ -99,43 +99,69 @@ X-Virus-Status: Clean
 
 On Sun, 16 Mar 2025 at 00:18, Sam Edwards <cfsworks@gmail.com> wrote:
 >
-> LLVM's IAS does not (and cannot easily) support the 'adrl'
-> pseudoinstruction, and ARM developers generally do not consider it
-> portable across assembler implementations either.
+> This flag only makes sense for `binary` output, because .hex/.srec are
+> sparse formats and represent gaps without filler. While the GNU binutils
+> version of objcopy does not seem to mind the extra flag being passed,
+> llvm-objcopy considers this a fatal error.
 >
-> Instead, expand it into the two subtract instructions it would emit
-> anyway. An explanation of the math follows:
->
-> The .+8 and .+4 refer to the same memory location; this is because the
-> .+4 expression occurs in a subsequent instruction, 4 bytes after the
-> first. This memory location is the value of the PC register when it is
-> read by the first sub instruction. Thus, both inner parenthesized
-> expressions evaluate to the same result: PC's offset relative to
-> image_base. The subtract instructions then remove one byte each
-> (low, then high) of the total offset, thereby getting the absolute
-> address of image_base loaded in r0.
+> There is already a version of the objcopy command template in the
+> Makefile that doesn't use --gap-fill, which is provided for EFI. So use
+> this other version for all .hex/.srec outputs as well.
 >
 > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
 > ---
->  arch/arm/lib/crt0_arm_efi.S | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  Makefile | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 >
-> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-> index 91b0fe12c51..235b3a0c48f 100644
-> --- a/arch/arm/lib/crt0_arm_efi.S
-> +++ b/arch/arm/lib/crt0_arm_efi.S
-> @@ -149,7 +149,8 @@ _start:
->         adr             r1, .L_DYNAMIC
->         ldr             r0, [r1]
->         add             r1, r0, r1
-> -       adrl            r0, image_base
-> +       sub             r0, pc, #((.+8-image_base) & 0xff)
-> +       sub             r0, r0, #((.+4-image_base) & 0xff00)
->         bl              _relocate
->         teq             r0, #0
->         bne             0f
+> diff --git a/Makefile b/Makefile
+> index 0694c425438..9c353af17cd 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1067,7 +1067,7 @@ quiet_cmd_objcopy = OBJCOPY $@
+>  cmd_objcopy = $(OBJCOPY) --gap-fill=0xff $(OBJCOPYFLAGS) \
+>         $(OBJCOPYFLAGS_$(@F)) $< $@
+>
+> -# Provide a version which does not do this, for use by EFI
+> +# Provide a version which does not do this, for use by EFI and hex/srec
+>  quiet_cmd_zobjcopy = OBJCOPY $@
+>  cmd_zobjcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $(OBJCOPYFLAGS_$(@F)) $< $@
+>
+> @@ -1282,7 +1282,7 @@ OBJCOPYFLAGS_u-boot.hex := -O ihex
+>  OBJCOPYFLAGS_u-boot.srec := -O srec
+>
+>  u-boot.hex u-boot.srec: u-boot FORCE
+> -       $(call if_changed,objcopy)
+> +       $(call if_changed,zobjcopy)
+>
+>  OBJCOPYFLAGS_u-boot-elf.srec := $(OBJCOPYFLAGS_u-boot.srec)
+>
+> @@ -1296,12 +1296,12 @@ OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x50000000
+>  endif
+>
+>  u-boot-elf.srec: u-boot.elf FORCE
+> -       $(call if_changed,objcopy)
+> +       $(call if_changed,zobjcopy)
+>
+>  OBJCOPYFLAGS_u-boot-spl.srec = $(OBJCOPYFLAGS_u-boot.srec)
+>
+>  spl/u-boot-spl.srec: spl/u-boot-spl FORCE
+> -       $(call if_changed,objcopy)
+> +       $(call if_changed,zobjcopy)
+>
+>  %.scif: %.srec
+>         $(Q)$(MAKE) $(build)=arch/arm/mach-renesas $@
+> @@ -1436,7 +1436,7 @@ OBJCOPYFLAGS_u-boot.ldr.hex := -I binary -O ihex
+>  OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
+>
+>  u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
+> -       $(call if_changed,objcopy)
+> +       $(call if_changed,zobjcopy)
+>
+>  ifdef CONFIG_SPL_LOAD_FIT
+>  MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
 > --
 > 2.48.1
 >
