@@ -4,55 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E92A9C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 08:23:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08525C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:01:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C60480F9C;
-	Sun, 30 Mar 2025 10:23:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F4BB80BA8;
+	Sun, 30 Mar 2025 11:01:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="PrM3FFAa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K29WNpXQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D84C38129B; Sun, 30 Mar 2025 10:23:23 +0200 (CEST)
-Received: from mail-24421.protonmail.ch (mail-24421.protonmail.ch
- [109.224.244.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 805F08198B; Sun, 30 Mar 2025 11:01:43 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B9F780BA8
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 10:23:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87F8280BA8
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:01:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail; t=1743323000; x=1743582200;
- bh=ca/I5dBc6U87BM8wUer9PbkViy0+tEL4VFf5yb6XGFU=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=PrM3FFAa7IWMavlqatQ7gKvrhyraltGhSHE7aP1GMZNodo8Fo+wQJpgvSR9Hos7R+
- 9AxUa0SUJUJrFC6ZH5icYkEombZGlGsk/BwTig6P1fWfRdNBsgLkMEuXuxdQF8Lt/4
- U407s/W3vfJokQt3DaPM/3iSTROTdHDkC/ihvJUZIWta1/A2L/ZQ3hJpb3c+7W9Ab6
- F6sIZbrFmh9gm6GitKu2eKKap/i3Glm7wOGmQ9nJrjoaW8W68BBFeoXVkWQHXPG+ME
- 2fya75d2C+C+Bf3fGWivPJnTZWDS8S7uLBU+DCGJ88pW69PDMGaQMDuWifKq9okBBS
- 1TgWTIoMGiB/g==
-Date: Sun, 30 Mar 2025 08:23:14 +0000
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
-From: Sam Day <me@samcday.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 1/4] board/qualcomm: introduce phone config
-Message-ID: <D8TGF97ZRSMG.2NFLDZX72HZ9E@samcday.com>
-In-Reply-To: <20250311-qcom-phones-v2-1-83dcd88a6a87@linaro.org>
-References: <20250311-qcom-phones-v2-0-83dcd88a6a87@linaro.org>
- <20250311-qcom-phones-v2-1-83dcd88a6a87@linaro.org>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 9187e8e348298ec7a23fb7b893e823817b4af9db
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6c18e2c7dso6522419a12.3
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:01:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1743325301; x=1743930101; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7tzvSGggDgnFH9vx44kEl6dq3bsm8FdsyLyL4q/RbdU=;
+ b=K29WNpXQEFa1Ln5JrX1pFZfjDglkaqw3UFp4XUDRwjwY0u4tYYkWrB/PiYBLBv6/yZ
+ Tvq8sPAS5bkw+rLPb5DJlHUk2H+rtMi+pSjs+pp9Hw41XGpkGyTTwGVJ397hZZADI/QN
+ 9oMnzhTibmiA9oP5svGof0Caeax2TPruuG/SdjVg9XzkymZKZulkUPHVc+pkJwdkDfvI
+ 2eLTwmGP2Ho2ylO/qOQ5aEOgCBUiV3SdyUZTWwxkueT9ulehISrFuG2e+yiBgiaiwB2O
+ ikS7uCNNXcQb+inj8bCfm+NLbMurn//d+JWXT7/Ymjoz3z0P78leqzml46VwiHcBZUVe
+ tXnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743325301; x=1743930101;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7tzvSGggDgnFH9vx44kEl6dq3bsm8FdsyLyL4q/RbdU=;
+ b=ryQPK9Rj7ltsd19ILDg941uNIimXg6MmKF8m9ZYHohWoNrMIC6tclCShwLxqcRtusL
+ NglEmtcVqo9oGUs0a/fzwrQFTaVdG5DPsv4SXyq/Z0oma7Vx6HK3QG2jWtcG4bl+loTZ
+ z2NZ8U91OgmJhgXkaptI3vCMRs4RH8HVA0slbwkcPZX06c30JhgSZ/yngkJbdxpieA1W
+ 68UsqS3W9SdhC97ivEoHHXV1v+Y6IP5b/a2NYj+FqO90OxF7ZZSm6GIAkEAtZWrcBNWJ
+ fhUr/riOCRJX18nOT/VcdtK7M878wDhEKgr0yK+y7CN4hrlGp9KmddX6+meImicHFeSe
+ tsGw==
+X-Gm-Message-State: AOJu0YyDf6XaXROsQTpPQbmOZq4nu56xqxLP8xiLw91eW4gcprocqhty
+ /uRjOYbok1WJB1uLZ8YZdCM1kuak3YX9uZaa26r/V3+dB3u//rT0
+X-Gm-Gg: ASbGnctTRLTiRowrwTbjQ/HTjwPLuvpXuwdOCz61VcW17fymylHv0noIBIvd5MQ4HK2
+ RZdquMg7AKUCKGxnksflpc1MfZZ+Bg/f55y0tzsbqBE1s7TQ9Rc5AJxq1d+OTtfE/rG8FRv++xp
+ YFuX6FIwDu1jvvmBbeR+Byq0pn6QuQygk9boy4RvCfI1C+FubuQ8X4ysC73LxZ0wYT2cm2TZGZO
+ V4ZVIVx/btPGQIJRetR3SNNHrfRmXy0cptiB/kaYtSEvjtUWsbmgebcYIQyxHKe1XCPI272Ctc3
+ rdyaMGQ+ePcaW73hb4uTidK7vrmkU8APxzgN
+X-Google-Smtp-Source: AGHT+IHDxHjbxKyuqrMxYkdVPs9lDKSoQGIM4x7BKIGpdw4Xrt2NLVm5Smg11RNil4oelB30UH3YFA==
+X-Received: by 2002:a05:6402:1d50:b0:5e0:60ed:f355 with SMTP id
+ 4fb4d7f45d1cf-5edfcfcd029mr4533342a12.18.1743325300464; 
+ Sun, 30 Mar 2025 02:01:40 -0700 (PDT)
+Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5edc16aac10sm4172595a12.9.2025.03.30.02.01.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Mar 2025 02:01:39 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/2] Add missing SPL_HAVE_INIT_STACK for ouya and mocha
+Date: Sun, 30 Mar 2025 12:01:18 +0300
+Message-ID: <20250330090121.8312-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,161 +93,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-'Ello Caleb,
+Ouya and Mocha were added around the same time SPL_HAVE_INIT_STACK was
+introduced by Simon and therefore do not include this config option. It is
+critical to add it before any defconfig resync, since the SPL_STACK option
+will then be removed.
 
-On Tue Mar 11, 2025 at 1:31 PM CET, Caleb Connolly wrote:
-> Phones don't have keyboards! Introduce a phone-specific config fragment
-> and associated environment file to make U-Boot more useful on these
-> devices. This allows for navigating via the buttons and enabling
-> various USB gadget modes or displaying info about U-Boot.
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  board/qualcomm/qcom-phone.config | 17 ++++++++++++++
->  board/qualcomm/qcom-phone.env    | 49 ++++++++++++++++++++++++++++++++++=
-++++++
->  2 files changed, 66 insertions(+)
->
-> diff --git a/board/qualcomm/qcom-phone.config b/board/qualcomm/qcom-phone=
-.config
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..a2aa882285b61746a243a7a1c=
-7c384f33839f1b2
-> --- /dev/null
-> +++ b/board/qualcomm/qcom-phone.config
-> @@ -0,0 +1,17 @@
-> +# Settings for phones
-> +CONFIG_DEFAULT_ENV_FILE=3D"board/qualcomm/qcom-phone.env"
-> +# Hang on panic so the error message can be read
-> +CONFIG_PANIC_HANG=3Dy
-> +# We use pause in various places to allow text to be read
-> +# before it scrolls off the screen
-> +CONFIG_CMD_PAUSE=3Dy
-> +CONFIG_BOOT_RETRY=3Dy
-> +CONFIG_BOOT_RETRY_TIME=3D1
-> +CONFIG_BUTTON_REMAP_PHONE_KEYS=3Dy
+Svyatoslav Ryhel (2):
+  configs: ouya: add missing SPL_HAVE_INIT_STACK option
+  configs: mocha: add missing SPL_HAVE_INIT_STACK option
 
-Maybe also include CONFIG_CMD_UMS_ABORT_KEYED=3Dy here? Then folks can
-bail out of UMS mode without needing to hard reboot their device.
+ configs/mocha_defconfig | 1 +
+ configs/ouya_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
 
-> +CONFIG_RETRY_BOOTCMD=3Dy
-> +CONFIG_FASTBOOT_BUF_ADDR=3D0x1A000000
-> +CONFIG_USB_FUNCTION_FASTBOOT=3Dy
-
-I would propose to also add:
-
-CONFIG_CONSOLE_RECORD=3Dy
-CONFIG_CONSOLE_RECORD_INIT_F=3Dy
-CONFIG_CONSOLE_RECORD_OUT_SIZE=3D0x6000
-CONFIG_FASTBOOT_CMD_OEM_CONSOLE=3Dy
-
-This allows folks to pull down the U-Boot logs with `fastboot oem log`
-
-CONFIG_FASTBOOT_FLASH=3Dy
-CONFIG_FASTBOOT_FLASH_MMC_DEV=3D0
-
-Allowing to flash to partitions via fastboot (not sure about if/how UFS
-support works here though, I've only tested it on msm8916 with eMMC)
-
-CONFIG_FASTBOOT_OEM_RUN=3Dy
-
-Allowing to run arbitrary commands (e.g `fastboot oem run:'bdinfo')
-
-> +CONFIG_USB_FUNCTION_ACM=3Dy
-> +
-> +# Many phones don't actually define a serial port in their DTS
-> +# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-> diff --git a/board/qualcomm/qcom-phone.env b/board/qualcomm/qcom-phone.en=
-v
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..2a0791c888c62b9f225744835=
-8dd196a02e4b6fb
-> --- /dev/null
-> +++ b/board/qualcomm/qcom-phone.env
-> @@ -0,0 +1,49 @@
-> +bootdelay=3D0
-> +bootretry=3D1
-> +stdin=3Dserial,button-kbd
-> +stdout=3Dserial,vidconsole
-> +stderr=3Dserial,vidconsole
-> +
-> +# Fastboot is keen to use the address from kconfig, but we
-> +# allocate its buffer at runtime.
-> +fastboot=3Dfastboot -l $fastboot_addr_r usb 0
-> +
-> +# Shortcut to enable USB serial gadget and disable bootretry
-> +serial_gadget=3Dsetenv stdin serial,button-kbd,usbacm; \
-> +=09setenv stdout serial,vidconsole,usbacm; \
-> +=09setenv stderr serial,vidconsole,usbacm; \
-> +=09setenv bootretry -1; \
-> +=09echo Enabled U-Boot console serial gadget
-> +
-> +# bootretry will run this command over and over, if we fail once
-> +# then bail out to the boot menu instead (with a pause to read
-> +# the error message)
-> +bootcmd=3Dbootefi bootmgr; pause; run menucmd
-> +
-> +# When entering the menu (either from button press or failed boot)
-> +# remap bootcmd so it will re-open the menu and we won't get stuck
-> +# at the console with no way to type
-> +menucmd=3Dsetenv bootcmd run menucmd; bootmenu -1
-> +
-> +# Pause is used so the output can be read on the display
-> +bootmenu_0=3DBoot=3Dbootefi bootmgr; pause
-> +bootmenu_1=3DEnable serial console gadget=3Drun serial_gadget
-> +bootmenu_2=3DEnable USB mass storage=3Dums 0 scsi 0
-
-This doesn't work on my fajita unless I run `scsi scan` first. I note
-that this used to be in the preboot=3D section of default.env, maybe we
-should bring that across?
-
-Also, if you choose to include CONFIG_CMD_UMS_ABORT_KEYED=3Dy per my
-earlier suggestion, it would be worth adding an "echo press any key to
-exit UMS mode" here or smth, I guess?
-
-> +bootmenu_3=3DReset device=3Dreset
-> +bootmenu_4=3DDump clocks=3Dclk dump; pause
-> +bootmenu_5=3DDump environment=3Dprintenv; pause
-> +bootmenu_6=3DBoard info=3Dbdinfo; pause
-> +bootmenu_7=3DDump bootargs=3Dfdt print /chosen bootargs; pause
-
-I think options 4-7 should be at the bottom of the list since they're
-less typical/useful than jumping into usbacm/fastboot/ums modes. Reset
-device should be at the bottom of the list.
-
-I'd maybe also go as far as suggesting that these could be removed
-entirely? Once you're in serial mode (or fastboot mode with
-CONFIG_FASTBOOT_OEM_RUN enabled) you can run these commands easily.
-
-> +bootmenu_8=3DEnable fastboot mode=3Drun fastboot
-> +# Disabling bootretry means we'll just drop the shell
-> +bootmenu_9=3DDrop to shell=3Dsetenv bootretry -1
-> +
-> +# Allow holding the power button while U-Boot loads to enter
-> +# the boot menu
-> +button_cmd_0_name=3Dpwrkey
-
-Two issues with using pwrkey as the boot menu trigger:
-
- * Many devices display a "custom OS" warning screen which can be paused
-   with the power button, which this will conflict with.
- * When I trigger the boot menu this way, releasing pwrkey when the boot
-   menu shows up causes the first boot option to be selected. I note
-   this doesn't happen in your qcomlt branch so I'm guessing you did
-   something extra there to prevent this undesired behaviour?
-
-> +button_cmd_0=3Drun menucmd
-> +
-> +# Hold volume down to drop to a shell with the USB serial gadget
-> +# enabled for debugging
-> +button_cmd_1_name=3DVolume down
-> +button_cmd_1=3Drun serial_gadget
-
-I would propose to simplify this and just have one button_cmd that is
-used to pop the menu, since the serial gadget option is available there
-anyway.
-
--Sam
-
+-- 
+2.43.0
 
