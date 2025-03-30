@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CFFC28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:45:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83978C36011
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E67881E5B;
-	Sun, 30 Mar 2025 11:45:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C536681F59;
+	Sun, 30 Mar 2025 11:45:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hcli38xW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IWfpAB9x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8F1981F44; Sun, 30 Mar 2025 11:45:34 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 203F281E72; Sun, 30 Mar 2025 11:45:40 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C237481E5B
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:45:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E789081E5A
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:45:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5e5c9662131so5477597a12.3
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:45:31 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac28e66c0e1so521246566b.0
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:45:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743327931; x=1743932731; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743327934; x=1743932734; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wnKLaZVg5i7TbAmgK3Gn495TmlRoVuW39a2gKPkGGeA=;
- b=hcli38xWJ38j5Aidk/6mPSQapOCgu+NOMaBJz5Op55wnCiBuu82yFa25o64W6IkYQ2
- /Jtcf/BO8QICI37ROjXuSpT7HPZwhESr+yTSItn3i9RZX4VacV8iBRm+XCrDjFoMNz4a
- ek2bfA2tEc92xtcfs12L1y39w69IUQNjc67NTbryCoMza8mPzHX8mgEUQI+8c5gj5Mlx
- ZGLKE3F1h9PC5IIg5a8kioES0xu5eL90DZCflHIczLz1jxQQR3v6LAAr3uwOHqSCavD8
- HI75bP53OGnE5Eb9wc7gCGGezYkptbYu5LGmop8SeMHxOr7FuhgCzl0nU1FaHAa+P/H3
- pHug==
+ bh=PehGZ7J9XJAbE3BoOdn+WUwzx08M4RWQ+0T8POJkTZY=;
+ b=IWfpAB9x9DujdAf3ycgj+WZv85JbCyw2KjV5u5c69CpyqLIcbuKeZbZeuq7w+RM/zc
+ 7qd49hOjFeJ6RlM6nM9omvc6IEPZfuZll2ke86tLxBxM1LkhVkNeGOpviE7ylFZjMYXu
+ yGOt3/kA8RjmlPKO2w8lTXGimilgA/n9IzKrl/6K8niAJ2LiolQhnd8WX1CK4Tf+4LUF
+ 1Vc8DPTcYjlVYgqZ1STkEWZtGOfjk/jxzjY9gZsjKoIUch80bsKCWYd4O/iAfRtaeI3q
+ 6LmpswAALUWfSPV1+TPjVRgdbBn8enwCMpxwS2SDBPT1B8zNS9rqa1YEw5b4FU1Cv9O9
+ Li/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743327931; x=1743932731;
+ d=1e100.net; s=20230601; t=1743327934; x=1743932734;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wnKLaZVg5i7TbAmgK3Gn495TmlRoVuW39a2gKPkGGeA=;
- b=PCOJWPFkdz2or09dIemx1MHbLdhszRPfpsMcjHZYUIACux4gJjufwgZs4IsGhHENOz
- zQ3NGJ7gkgW2MkpYY2c3h7laFA5c9flI6v8tsSG3+XkAFQYr/5YB8/9MDn/XlbySBfHf
- rgrYVhKtZheP2NPgIBfcYglJbGuqphagR3UNcoE8IRXIGWzEzcXcBT4KOzBpGRfwNfGm
- RlmhZJXLcP2orEhckLoIN9sIdRJBdGN6xeIF+wfnRC4FXYW9c84eQHPMLKFPDzczEjdT
- m2eQ9Wb3zkAZ7WLaXZWcUkaqWRM4GYNTvGNZPWEBQjJBMhxYzL9WwlQ5ZmLkFhWcABLP
- jsIA==
-X-Gm-Message-State: AOJu0Yw3XUZth4H1XvdGVZHYTgXiDeDRWpwK7VBLT1zr0kowETmrZpnu
- HhTVJaKCb54lTKCoUc33yosBmeUStg9F6T+M7AroOs+1Cv8+K2rw
-X-Gm-Gg: ASbGncuFIuVLvPzAzHePaUbM9uGsljfymhyqjmdBhHnZWQ++fWebmTz2K/ZUq3PnnYH
- h1cA/M2NgyQ5lsJtN857Ipw6cansV3iXhZ9Ta1ES/IAAM/+bsipz2TCzBWo4BVVJ6UIm4dBWWWs
- dabvoGh203qp1h4QARHt5XTCCsBuf8TNLdgvrv1Y4e8xS22YUMqMaIhl4J+w2NhHpNPVn7ghoIi
- juXKlgUv3e5eemeDGq6gciqi67BWXydJPxlyMNgvgetBGU3InoT04Yh1TBt9R6O/qFOyshfDe8V
- pk9vley4YfQTeUVIGKUnubnbNO+Rtpz/aYby
-X-Google-Smtp-Source: AGHT+IGno2h0mVryO5UFAwxs1NXFeNXjC78zFNHmPRX7gvqWxcvLMEzgeMzVzjUg4tTM6cQhuQYo2Q==
-X-Received: by 2002:a17:906:c103:b0:ac2:a4c2:604f with SMTP id
- a640c23a62f3a-ac738be3ac9mr441944466b.46.1743327930980; 
- Sun, 30 Mar 2025 02:45:30 -0700 (PDT)
+ bh=PehGZ7J9XJAbE3BoOdn+WUwzx08M4RWQ+0T8POJkTZY=;
+ b=YSfbe062NdW/yTFoj8X2M6lnTW5D5TwL3cQeoxKIJm7LMqeJp6hVAJhH04n44JL6IJ
+ DoRcG+AzS52L37UELANrOQmg6coXHSsqVGOii+PjRC58z5aoDxKTx9U0vXQYbHx6s3tp
+ avL0m7f3U3zPvP5kaqfBGz70gvMYxW0dwKaApUYfiaeywiGdEoienTIQ2RlC8uBMlUgD
+ OCCnbEk/dyxGdP+fsCrrd47hh/e/ndtNuMLQxuG6SLrtQdRm4ysckbh7gnGEadhQyRAe
+ dALdZ+tzhDBXaj2SmKQeRBC9E2CgdG4QrzuMn0Fup96QFy7F0zfYEiSZoEgkc/u+XIFm
+ sz4Q==
+X-Gm-Message-State: AOJu0YxZV5wYB5zs2SbYdh68ncNT8ANdisO4oSvsROztLupOsupsbCl8
+ BC1vNcAFiQN1KhrWkUinPdFGcPnlb3yUZ5xb33ROioFiIQIhP2s9
+X-Gm-Gg: ASbGncsNj9JYzxDHKRBrC9ulZyPVeAmirHRHrOmkF9PHMgumIOJf2a2gm7rZymWZeN4
+ Vr6KU97lboMMLr1xuD6RUl6yjM5513s426P1gvAgNB6V0pDNs9wXF00qpqQ65prZUr75pSn5X3R
+ YjwgrHsj2iqdTPv5l5hufI8m2CpIbS42Jz16+7D1p4wklE3lQQ2pNqPbv4e/FfBwe74VYTrQLIP
+ UNteJHfVughla4/VIeJ8/JU9wbGbSP0vQRG44XhkK0/wCFcdjLD87A0NWJNTX7zf/BZ3+StY7dP
+ ZRHx+vzOJPuwpwhohQwKpwpOOEHFkiyCViUc
+X-Google-Smtp-Source: AGHT+IGAIhN0uYdCM5guqMdxv2JO7OlPSBq6rWpjgML4eziFi4Y01LudOf2oHPgo+51WskkhqED/+g==
+X-Received: by 2002:a17:907:c1b:b0:ac3:48e4:f8bb with SMTP id
+ a640c23a62f3a-ac738be3d13mr430130366b.41.1743327934146; 
+ Sun, 30 Mar 2025 02:45:34 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71927b175sm463235866b.61.2025.03.30.02.45.29
+ a640c23a62f3a-ac71927b175sm463235866b.61.2025.03.30.02.45.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:45:30 -0700 (PDT)
+ Sun, 30 Mar 2025 02:45:33 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -80,9 +80,9 @@ To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Anton Bambura <jenneron@protonmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/6] power: pmic: add the basic CPCAP PMIC support
-Date: Sun, 30 Mar 2025 12:45:07 +0300
-Message-ID: <20250330094515.11359-2-clamor95@gmail.com>
+Subject: [PATCH v1 3/6] input: add support for CPCAP power button
+Date: Sun, 30 Mar 2025 12:45:09 +0300
+Message-ID: <20250330094515.11359-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250330094515.11359-1-clamor95@gmail.com>
 References: <20250330094515.11359-1-clamor95@gmail.com>
@@ -104,394 +104,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CPCAP is a Motorola/ST-Ericsson creation, a multifunctional IC whose
-main purpose was power control. It was used in a wide variety of Motorola
-products, both Tegra and OMAP based. The most notable devices using this
-PMIC are the Motorola Droid 4, Atrix 4G, and Droid X2.
+CPCAP has a dedicated interrupt for power button. Implement this to have
+more input control over the devices.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/power/pmic/Kconfig  |  10 ++
- drivers/power/pmic/Makefile |   1 +
- drivers/power/pmic/cpcap.c  |  90 ++++++++++++++
- include/power/cpcap.h       | 238 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 339 insertions(+)
- create mode 100644 drivers/power/pmic/cpcap.c
- create mode 100644 include/power/cpcap.h
+ drivers/input/Kconfig           |   6 ++
+ drivers/input/Makefile          |   1 +
+ drivers/input/cpcap_pwrbutton.c | 134 ++++++++++++++++++++++++++++++++
+ 3 files changed, 141 insertions(+)
+ create mode 100644 drivers/input/cpcap_pwrbutton.c
 
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index bbcbcee4c35..5a61cd45b8c 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -295,6 +295,16 @@ config DM_PMIC_SANDBOX
+diff --git a/drivers/input/Kconfig b/drivers/input/Kconfig
+index c2b365af11d..c09f0ae795e 100644
+--- a/drivers/input/Kconfig
++++ b/drivers/input/Kconfig
+@@ -55,6 +55,12 @@ config BUTTON_KEYBOARD
+ 	  dt node to define button-event mapping.
+ 	  For example, an arrows and enter may be implemented to navigate boot menu.
  
- 	Driver binding info: doc/device-tree-bindings/pmic/sandbox.txt
- 
-+config DM_PMIC_CPCAP
-+	bool "Enable Driver Model for Motorola CPCAP"
++config CPCAP_POWER_BUTTON
++	bool "Enable power button of CPCAP PMIC support"
++	depends on DM_KEYBOARD && DM_PMIC_CPCAP
 +	help
-+	The CPCAP is a Motorola/ST-Ericsson creation, a multifunctional IC
-+	whose main purpose is power control. It was used in a wide variety of
-+	Motorola products, both Tegra and OMAP based. The most notable devices
-+	using this PMIC are the Motorola Droid 4, Atrix 4G, and Droid X2.
-+	Unlike most PMICs, this one is not I2C based; it uses the SPI bus. The
-+	core driver provides both read and write access to the device registers.
++	  Enable support for a dedicated power button of the CPCAP PMIC.
 +
- config PMIC_S5M8767
- 	bool "Enable Driver Model for the Samsung S5M8767 PMIC"
- 	---help---
-diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-index bc138f563ff..369794d3e1a 100644
---- a/drivers/power/pmic/Makefile
-+++ b/drivers/power/pmic/Makefile
-@@ -37,6 +37,7 @@ obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
- obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
- obj-$(CONFIG_PMIC_RAA215300) += raa215300.o
- obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
-+obj-$(CONFIG_$(XPL_)DM_PMIC_CPCAP) += cpcap.o
+ config CROS_EC_KEYB
+ 	bool "Enable Chrome OS EC keyboard support"
+ 	depends on INPUT
+diff --git a/drivers/input/Makefile b/drivers/input/Makefile
+index 8d4107b8848..1303fcdb0b7 100644
+--- a/drivers/input/Makefile
++++ b/drivers/input/Makefile
+@@ -7,6 +7,7 @@ obj-$(CONFIG_$(PHASE_)CROS_EC_KEYB) += cros_ec_keyb.o
+ obj-$(CONFIG_$(PHASE_)OF_CONTROL) += key_matrix.o
+ obj-$(CONFIG_$(PHASE_)DM_KEYBOARD) += input.o keyboard-uclass.o
+ obj-$(CONFIG_BUTTON_KEYBOARD) += button_kbd.o
++obj-$(CONFIG_CPCAP_POWER_BUTTON) += cpcap_pwrbutton.o
  
- ifeq ($(CONFIG_$(XPL_)POWER_LEGACY),y)
- obj-$(CONFIG_POWER_LTC3676) += pmic_ltc3676.o
-diff --git a/drivers/power/pmic/cpcap.c b/drivers/power/pmic/cpcap.c
+ ifndef CONFIG_XPL_BUILD
+ 
+diff --git a/drivers/input/cpcap_pwrbutton.c b/drivers/input/cpcap_pwrbutton.c
 new file mode 100644
-index 00000000000..4923255f0a7
+index 00000000000..c8ad39d33ca
 --- /dev/null
-+++ b/drivers/power/pmic/cpcap.c
-@@ -0,0 +1,90 @@
++++ b/drivers/input/cpcap_pwrbutton.c
+@@ -0,0 +1,134 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
++ *  Copyright(C) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
 + */
 +
++#include <stdlib.h>
 +#include <dm.h>
-+#include <dm/lists.h>
-+#include <log.h>
++#include <input.h>
++#include <keyboard.h>
 +#include <power/pmic.h>
 +#include <power/cpcap.h>
-+#include <spi.h>
 +#include <linux/delay.h>
 +#include <linux/err.h>
++#include <linux/input.h>
 +
-+static int cpcap_write(struct udevice *dev, uint reg, const uint8_t *buff, int len)
++static const unsigned int cpcpap_to_reg[] = {
++	CPCAP_REG_INT1,
++	CPCAP_REG_INT2,
++	CPCAP_REG_INT3,
++	CPCAP_REG_INT4,
++};
++
++/**
++ * struct cpcap_pwrbutton_priv
++ *
++ * @bank: id of interrupt bank co-responding to an IRQ register
++ * @id: id of interrupt pin co-responding to the bit in IRQ register
++ * @keycode: linux key code
++ * @old_state: holder of last button state
++ * @skip: holder of keycode skip state. This is required since both pressing
++ *        and releasing generate same event and cause key send duplication.
++ */
++struct cpcap_pwrbutton_priv {
++	u32 bank;
++	u32 id;
++
++	u32 keycode;
++
++	bool old_state;
++	bool skip;
++};
++
++static int cpcap_pwrbutton_read_keys(struct input_config *input)
 +{
-+	u8 buf[4];
-+	u16 data = *(u16 *)buff;
-+	int ret;
++	struct udevice *dev = input->dev;
++	struct cpcap_pwrbutton_priv *priv = dev_get_priv(dev);
++	u32 value, state_changed;
++	bool state;
 +
-+	buf[0] = ((reg >> 8) & 0xff) | 0x80;
-+	buf[1] = reg & 0xff;
-+	buf[2] = data >> 8 & 0xff;
-+	buf[3] = data & 0xff;
++	value = pmic_reg_read(dev->parent, cpcpap_to_reg[priv->bank]) &
++			      BIT(priv->id);
 +
-+	ret = dm_spi_xfer(dev, 32, buf, NULL, SPI_XFER_ONCE);
++	/* Interrupt bit is cleared by writing it to interrupt reg */
++	pmic_reg_write(dev->parent, cpcpap_to_reg[priv->bank], BIT(priv->id));
 +
-+	log_debug("%s: reg 0x%x, data 0x%04x, ret %d\n", __func__, reg, data, ret);
++	state = value >> priv->id;
++	state_changed = state != priv->old_state;
 +
-+	return ret;
-+}
-+
-+static int cpcap_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-+{
-+	u8 buf[4];
-+	int ret;
-+
-+	buf[0] = (reg >> 8) & 0xff;
-+	buf[1] = reg & 0xff;
-+	buf[2] = 0;
-+	buf[3] = 0;
-+
-+	ret = dm_spi_xfer(dev, 32, buf, buf, SPI_XFER_ONCE);
-+	*buff = (buf[2] << 8) | buf[3];
-+
-+	log_debug("%s: reg 0x%x, data 0x%04x, ret %d\n", __func__, reg, *buff, ret);
-+	return ret;
-+}
-+
-+static int cpcap_probe(struct udevice *dev)
-+{
-+	struct spi_slave *slave = dev_get_parent_priv(dev);
-+	int ret;
-+
-+	ret = spi_claim_bus(slave);
-+	if (ret) {
-+		log_err("SPI bus allocation failed (%d)\n", ret);
-+		return ret;
++	if (state_changed && !priv->skip) {
++		priv->old_state = state;
++		input_add_keycode(input, priv->keycode, state);
 +	}
 +
-+	u16 id = pmic_reg_read(dev, CPCAP_REG_VERSC1);
++	if (state)
++		priv->skip = !priv->skip;
 +
-+	u16 ven = (id >> 6) & 0x7;
-+	u16 rev = ((id >> 3) & 0x7) | ((id << 3) & 0x38);
-+
-+	log_debug("%s: vendor %s rev: %i.%i (%x)\n", __func__,
-+		  ven == CPCAP_VENDOR_ST ? "ST" : "TI",
-+		  CPCAP_REVISION_MAJOR(rev), CPCAP_REVISION_MINOR(rev),
-+		  rev);
 +	return 0;
 +}
 +
-+static struct dm_pmic_ops cpcap_ops = {
-+	.read = cpcap_read,
-+	.write = cpcap_write,
-+};
++static int cpcap_pwrbutton_of_to_plat(struct udevice *dev)
++{
++	struct cpcap_pwrbutton_priv *priv = dev_get_priv(dev);
++	ofnode irq_parent;
++	u32 irq_desc;
++	int ret;
 +
-+static const struct udevice_id cpcap_ids[] = {
-+	{ .compatible = "motorola,cpcap" },
-+	{ .compatible = "st,6556002" },
++	/* Check interrupt parent, driver supports only CPCAP as parent */
++	irq_parent = ofnode_parse_phandle(dev_ofnode(dev), "interrupt-parent", 0);
++	if (!ofnode_device_is_compatible(irq_parent, "motorola,cpcap"))
++		return -EINVAL;
++
++	ret = dev_read_u32(dev, "interrupts", &irq_desc);
++	if (ret)
++		return ret;
++
++	/* IRQ registers are 16 bit wide */
++	priv->bank = irq_desc / 16;
++	priv->id = irq_desc % 16;
++
++	ret = dev_read_u32(dev, "linux,code", &priv->keycode);
++	if (ret)
++		return ret;
++
++	priv->old_state = false;
++	priv->skip = false;
++	return 0;
++}
++
++static int cpcap_pwrbutton_probe(struct udevice *dev)
++{
++	struct keyboard_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct stdio_dev *sdev = &uc_priv->sdev;
++	struct input_config *input = &uc_priv->input;
++	int ret;
++
++	input_init(input, false);
++	input_add_tables(input, false);
++
++	/* Register the device */
++	input->dev = dev;
++	input->read_keys = cpcap_pwrbutton_read_keys;
++	strcpy(sdev->name, "cpcap-pwrbutton");
++	ret = input_stdio_register(sdev);
++	if (ret) {
++		log_debug("%s: input_stdio_register() failed\n", __func__);
++		return ret;
++	}
++
++	return 0;
++}
++
++static const struct udevice_id cpcap_pwrbutton_ids[] = {
++	{ .compatible = "motorola,cpcap-pwrbutton" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(pmic_cpcap) = {
-+	.name = "cpcap_pmic",
-+	.id = UCLASS_PMIC,
-+	.of_match = cpcap_ids,
-+	.probe = cpcap_probe,
-+	.ops = &cpcap_ops,
++U_BOOT_DRIVER(cpcap_pwrbutton) = {
++	.name		= "cpcap_pwrbutton",
++	.id		= UCLASS_KEYBOARD,
++	.of_match	= cpcap_pwrbutton_ids,
++	.of_to_plat	= cpcap_pwrbutton_of_to_plat,
++	.probe		= cpcap_pwrbutton_probe,
++	.priv_auto	= sizeof(struct cpcap_pwrbutton_priv),
 +};
-diff --git a/include/power/cpcap.h b/include/power/cpcap.h
-new file mode 100644
-index 00000000000..ecc0ece6518
---- /dev/null
-+++ b/include/power/cpcap.h
-@@ -0,0 +1,238 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+#ifndef _CPCAP_H_
-+#define _CPCAP_H_
-+
-+#define CPCAP_VENDOR_ST		0
-+#define CPCAP_VENDOR_TI		1
-+
-+#define CPCAP_REVISION_MAJOR(r)	(((r) >> 4) + 1)
-+#define CPCAP_REVISION_MINOR(r)	((r) & 0xf)
-+
-+#define CPCAP_REVISION_1_0	0x08
-+#define CPCAP_REVISION_1_1	0x09
-+#define CPCAP_REVISION_2_0	0x10
-+#define CPCAP_REVISION_2_1	0x11
-+#define CPCAP_REVISION_3_1	0x19
-+
-+/* CPCAP registers */
-+#define CPCAP_REG_INT1		0x0000	/* Interrupt 1 */
-+#define CPCAP_REG_INT2		0x0004	/* Interrupt 2 */
-+#define CPCAP_REG_INT3		0x0008	/* Interrupt 3 */
-+#define CPCAP_REG_INT4		0x000c	/* Interrupt 4 */
-+#define CPCAP_REG_INTM1		0x0010	/* Interrupt Mask 1 */
-+#define CPCAP_REG_INTM2		0x0014	/* Interrupt Mask 2 */
-+#define CPCAP_REG_INTM3		0x0018	/* Interrupt Mask 3 */
-+#define CPCAP_REG_INTM4		0x001c	/* Interrupt Mask 4 */
-+#define CPCAP_REG_INTS1		0x0020	/* Interrupt Sense 1 */
-+#define CPCAP_REG_INTS2		0x0024	/* Interrupt Sense 2 */
-+#define CPCAP_REG_INTS3		0x0028	/* Interrupt Sense 3 */
-+#define CPCAP_REG_INTS4		0x002c	/* Interrupt Sense 4 */
-+#define CPCAP_REG_ASSIGN1	0x0030	/* Resource Assignment 1 */
-+#define CPCAP_REG_ASSIGN2	0x0034	/* Resource Assignment 2 */
-+#define CPCAP_REG_ASSIGN3	0x0038	/* Resource Assignment 3 */
-+#define CPCAP_REG_ASSIGN4	0x003c	/* Resource Assignment 4 */
-+#define CPCAP_REG_ASSIGN5	0x0040	/* Resource Assignment 5 */
-+#define CPCAP_REG_ASSIGN6	0x0044	/* Resource Assignment 6 */
-+#define CPCAP_REG_VERSC1	0x0048	/* Version Control 1 */
-+#define CPCAP_REG_VERSC2	0x004c	/* Version Control 2 */
-+
-+#define CPCAP_REG_MI1		0x0200	/* Macro Interrupt 1 */
-+#define CPCAP_REG_MIM1		0x0204	/* Macro Interrupt Mask 1 */
-+#define CPCAP_REG_MI2		0x0208	/* Macro Interrupt 2 */
-+#define CPCAP_REG_MIM2		0x020c	/* Macro Interrupt Mask 2 */
-+#define CPCAP_REG_UCC1		0x0210	/* UC Control 1 */
-+#define CPCAP_REG_UCC2		0x0214	/* UC Control 2 */
-+
-+#define CPCAP_REG_PC1		0x021c	/* Power Cut 1 */
-+#define CPCAP_REG_PC2		0x0220	/* Power Cut 2 */
-+#define CPCAP_REG_BPEOL		0x0224	/* BP and EOL */
-+#define CPCAP_REG_PGC		0x0228	/* Power Gate and Control */
-+#define CPCAP_REG_MT1		0x022c	/* Memory Transfer 1 */
-+#define CPCAP_REG_MT2		0x0230	/* Memory Transfer 2 */
-+#define CPCAP_REG_MT3		0x0234	/* Memory Transfer 3 */
-+#define CPCAP_REG_PF		0x0238	/* Print Format */
-+
-+#define CPCAP_REG_SCC		0x0400	/* System Clock Control */
-+#define CPCAP_REG_SW1		0x0404	/* Stop Watch 1 */
-+#define CPCAP_REG_SW2		0x0408	/* Stop Watch 2 */
-+#define CPCAP_REG_UCTM		0x040c	/* UC Turbo Mode */
-+#define CPCAP_REG_TOD1		0x0410	/* Time of Day 1 */
-+#define CPCAP_REG_TOD2		0x0414	/* Time of Day 2 */
-+#define CPCAP_REG_TODA1		0x0418	/* Time of Day Alarm 1 */
-+#define CPCAP_REG_TODA2		0x041c	/* Time of Day Alarm 2 */
-+#define CPCAP_REG_DAY		0x0420	/* Day */
-+#define CPCAP_REG_DAYA		0x0424	/* Day Alarm */
-+#define CPCAP_REG_VAL1		0x0428	/* Validity 1 */
-+#define CPCAP_REG_VAL2		0x042c	/* Validity 2 */
-+
-+#define CPCAP_REG_SDVSPLL	0x0600	/* Switcher DVS and PLL */
-+#define CPCAP_REG_SI2CC1	0x0604	/* Switcher I2C Control 1 */
-+#define CPCAP_REG_Si2CC2	0x0608	/* Switcher I2C Control 2 */
-+#define CPCAP_REG_S1C1		0x060c	/* Switcher 1 Control 1 */
-+#define CPCAP_REG_S1C2		0x0610	/* Switcher 1 Control 2 */
-+#define CPCAP_REG_S2C1		0x0614	/* Switcher 2 Control 1 */
-+#define CPCAP_REG_S2C2		0x0618	/* Switcher 2 Control 2 */
-+#define CPCAP_REG_S3C		0x061c	/* Switcher 3 Control */
-+#define CPCAP_REG_S4C1		0x0620	/* Switcher 4 Control 1 */
-+#define CPCAP_REG_S4C2		0x0624	/* Switcher 4 Control 2 */
-+#define CPCAP_REG_S5C		0x0628	/* Switcher 5 Control */
-+#define CPCAP_REG_S6C		0x062c	/* Switcher 6 Control */
-+#define CPCAP_REG_VCAMC		0x0630	/* VCAM Control */
-+#define CPCAP_REG_VCSIC		0x0634	/* VCSI Control */
-+#define CPCAP_REG_VDACC		0x0638	/* VDAC Control */
-+#define CPCAP_REG_VDIGC		0x063c	/* VDIG Control */
-+#define CPCAP_REG_VFUSEC	0x0640	/* VFUSE Control */
-+#define CPCAP_REG_VHVIOC	0x0644	/* VHVIO Control */
-+#define CPCAP_REG_VSDIOC	0x0648	/* VSDIO Control */
-+#define CPCAP_REG_VPLLC		0x064c	/* VPLL Control */
-+#define CPCAP_REG_VRF1C		0x0650	/* VRF1 Control */
-+#define CPCAP_REG_VRF2C		0x0654	/* VRF2 Control */
-+#define CPCAP_REG_VRFREFC	0x0658	/* VRFREF Control */
-+#define CPCAP_REG_VWLAN1C	0x065c	/* VWLAN1 Control */
-+#define CPCAP_REG_VWLAN2C	0x0660	/* VWLAN2 Control */
-+#define CPCAP_REG_VSIMC		0x0664	/* VSIM Control */
-+#define CPCAP_REG_VVIBC		0x0668	/* VVIB Control */
-+#define CPCAP_REG_VUSBC		0x066c	/* VUSB Control */
-+#define CPCAP_REG_VUSBINT1C	0x0670	/* VUSBINT1 Control */
-+#define CPCAP_REG_VUSBINT2C	0x0674	/* VUSBINT2 Control */
-+#define CPCAP_REG_URT		0x0678	/* Useroff Regulator Trigger */
-+#define CPCAP_REG_URM1		0x067c	/* Useroff Regulator Mask 1 */
-+#define CPCAP_REG_URM2		0x0680	/* Useroff Regulator Mask 2 */
-+
-+#define CPCAP_REG_VAUDIOC	0x0800	/* VAUDIO Control */
-+#define CPCAP_REG_CC		0x0804	/* Codec Control */
-+#define CPCAP_REG_CDI		0x0808	/* Codec Digital Interface */
-+#define CPCAP_REG_SDAC		0x080c	/* Stereo DAC */
-+#define CPCAP_REG_SDACDI	0x0810	/* Stereo DAC Digital Interface */
-+#define CPCAP_REG_TXI		0x0814	/* TX Inputs */
-+#define CPCAP_REG_TXMP		0x0818	/* TX MIC PGA's */
-+#define CPCAP_REG_RXOA		0x081c	/* RX Output Amplifiers */
-+#define CPCAP_REG_RXVC		0x0820	/* RX Volume Control */
-+#define CPCAP_REG_RXCOA		0x0824	/* RX Codec to Output Amps */
-+#define CPCAP_REG_RXSDOA	0x0828	/* RX Stereo DAC to Output Amps */
-+#define CPCAP_REG_RXEPOA	0x082c	/* RX External PGA to Output Amps */
-+#define CPCAP_REG_RXLL		0x0830	/* RX Low Latency */
-+#define CPCAP_REG_A2LA		0x0834	/* A2 Loudspeaker Amplifier */
-+#define CPCAP_REG_MIPIS1	0x0838	/* MIPI Slimbus 1 */
-+#define CPCAP_REG_MIPIS2	0x083c	/* MIPI Slimbus 2 */
-+#define CPCAP_REG_MIPIS3	0x0840	/* MIPI Slimbus 3. */
-+#define CPCAP_REG_LVAB		0x0844	/* LMR Volume and A4 Balanced. */
-+
-+#define CPCAP_REG_CCC1		0x0a00	/* Coulomb Counter Control 1 */
-+#define CPCAP_REG_CRM		0x0a04	/* Charger and Reverse Mode */
-+#define CPCAP_REG_CCCC2		0x0a08	/* Coincell and Coulomb Ctr Ctrl 2 */
-+#define CPCAP_REG_CCS1		0x0a0c	/* Coulomb Counter Sample 1 */
-+#define CPCAP_REG_CCS2		0x0a10	/* Coulomb Counter Sample 2 */
-+#define CPCAP_REG_CCA1		0x0a14	/* Coulomb Counter Accumulator 1 */
-+#define CPCAP_REG_CCA2		0x0a18	/* Coulomb Counter Accumulator 2 */
-+#define CPCAP_REG_CCM		0x0a1c	/* Coulomb Counter Mode */
-+#define CPCAP_REG_CCO		0x0a20	/* Coulomb Counter Offset */
-+#define CPCAP_REG_CCI		0x0a24	/* Coulomb Counter Integrator */
-+
-+#define CPCAP_REG_ADCC1		0x0c00	/* A/D Converter Configuration 1 */
-+#define CPCAP_REG_ADCC2		0x0c04	/* A/D Converter Configuration 2 */
-+#define CPCAP_REG_ADCD0		0x0c08	/* A/D Converter Data 0 */
-+#define CPCAP_REG_ADCD1		0x0c0c	/* A/D Converter Data 1 */
-+#define CPCAP_REG_ADCD2		0x0c10	/* A/D Converter Data 2 */
-+#define CPCAP_REG_ADCD3		0x0c14	/* A/D Converter Data 3 */
-+#define CPCAP_REG_ADCD4		0x0c18	/* A/D Converter Data 4 */
-+#define CPCAP_REG_ADCD5		0x0c1c	/* A/D Converter Data 5 */
-+#define CPCAP_REG_ADCD6		0x0c20	/* A/D Converter Data 6 */
-+#define CPCAP_REG_ADCD7		0x0c24	/* A/D Converter Data 7 */
-+#define CPCAP_REG_ADCAL1	0x0c28	/* A/D Converter Calibration 1 */
-+#define CPCAP_REG_ADCAL2	0x0c2c	/* A/D Converter Calibration 2 */
-+
-+#define CPCAP_REG_USBC1		0x0e00	/* USB Control 1 */
-+#define CPCAP_REG_USBC2		0x0e04	/* USB Control 2 */
-+#define CPCAP_REG_USBC3		0x0e08	/* USB Control 3 */
-+#define CPCAP_REG_UVIDL		0x0e0c	/* ULPI Vendor ID Low */
-+#define CPCAP_REG_UVIDH		0x0e10	/* ULPI Vendor ID High */
-+#define CPCAP_REG_UPIDL		0x0e14	/* ULPI Product ID Low */
-+#define CPCAP_REG_UPIDH		0x0e18	/* ULPI Product ID High */
-+#define CPCAP_REG_UFC1		0x0e1c	/* ULPI Function Control 1 */
-+#define CPCAP_REG_UFC2		0x0e20	/* ULPI Function Control 2 */
-+#define CPCAP_REG_UFC3		0x0e24	/* ULPI Function Control 3 */
-+#define CPCAP_REG_UIC1		0x0e28	/* ULPI Interface Control 1 */
-+#define CPCAP_REG_UIC2		0x0e2c	/* ULPI Interface Control 2 */
-+#define CPCAP_REG_UIC3		0x0e30	/* ULPI Interface Control 3 */
-+#define CPCAP_REG_USBOTG1	0x0e34	/* USB OTG Control 1 */
-+#define CPCAP_REG_USBOTG2	0x0e38	/* USB OTG Control 2 */
-+#define CPCAP_REG_USBOTG3	0x0e3c	/* USB OTG Control 3 */
-+#define CPCAP_REG_UIER1		0x0e40	/* USB Interrupt Enable Rising 1 */
-+#define CPCAP_REG_UIER2		0x0e44	/* USB Interrupt Enable Rising 2 */
-+#define CPCAP_REG_UIER3		0x0e48	/* USB Interrupt Enable Rising 3 */
-+#define CPCAP_REG_UIEF1		0x0e4c	/* USB Interrupt Enable Falling 1 */
-+#define CPCAP_REG_UIEF2		0x0e50	/* USB Interrupt Enable Falling 1 */
-+#define CPCAP_REG_UIEF3		0x0e54	/* USB Interrupt Enable Falling 1 */
-+#define CPCAP_REG_UIS		0x0e58	/* USB Interrupt Status */
-+#define CPCAP_REG_UIL		0x0e5c	/* USB Interrupt Latch */
-+#define CPCAP_REG_USBD		0x0e60	/* USB Debug */
-+#define CPCAP_REG_SCR1		0x0e64	/* Scratch 1 */
-+#define CPCAP_REG_SCR2		0x0e68	/* Scratch 2 */
-+#define CPCAP_REG_SCR3		0x0e6c	/* Scratch 3 */
-+
-+#define CPCAP_REG_VMC		0x0eac	/* Video Mux Control */
-+#define CPCAP_REG_OWDC		0x0eb0	/* One Wire Device Control */
-+#define CPCAP_REG_GPIO0		0x0eb4	/* GPIO 0 Control */
-+
-+#define CPCAP_REG_GPIO1		0x0ebc	/* GPIO 1 Control */
-+
-+#define CPCAP_REG_GPIO2		0x0ec4	/* GPIO 2 Control */
-+
-+#define CPCAP_REG_GPIO3		0x0ecc	/* GPIO 3 Control */
-+
-+#define CPCAP_REG_GPIO4		0x0ed4	/* GPIO 4 Control */
-+
-+#define CPCAP_REG_GPIO5		0x0edc	/* GPIO 5 Control */
-+
-+#define CPCAP_REG_GPIO6		0x0ee4	/* GPIO 6 Control */
-+
-+#define CPCAP_REG_MDLC		0x1000	/* Main Display Lighting Control */
-+#define CPCAP_REG_KLC		0x1004	/* Keypad Lighting Control */
-+#define CPCAP_REG_ADLC		0x1008	/* Aux Display Lighting Control */
-+#define CPCAP_REG_REDC		0x100c	/* Red Triode Control */
-+#define CPCAP_REG_GREENC	0x1010	/* Green Triode Control */
-+#define CPCAP_REG_BLUEC		0x1014	/* Blue Triode Control */
-+#define CPCAP_REG_CFC		0x1018	/* Camera Flash Control */
-+#define CPCAP_REG_ABC		0x101c	/* Adaptive Boost Control */
-+#define CPCAP_REG_BLEDC		0x1020	/* Bluetooth LED Control */
-+#define CPCAP_REG_CLEDC		0x1024	/* Camera Privacy LED Control */
-+
-+#define CPCAP_REG_OW1C		0x1200	/* One Wire 1 Command */
-+#define CPCAP_REG_OW1D		0x1204	/* One Wire 1 Data */
-+#define CPCAP_REG_OW1I		0x1208	/* One Wire 1 Interrupt */
-+#define CPCAP_REG_OW1IE		0x120c	/* One Wire 1 Interrupt Enable */
-+
-+#define CPCAP_REG_OW1		0x1214	/* One Wire 1 Control */
-+
-+#define CPCAP_REG_OW2C		0x1220	/* One Wire 2 Command */
-+#define CPCAP_REG_OW2D		0x1224	/* One Wire 2 Data */
-+#define CPCAP_REG_OW2I		0x1228	/* One Wire 2 Interrupt */
-+#define CPCAP_REG_OW2IE		0x122c	/* One Wire 2 Interrupt Enable */
-+
-+#define CPCAP_REG_OW2		0x1234	/* One Wire 2 Control */
-+
-+#define CPCAP_REG_OW3C		0x1240	/* One Wire 3 Command */
-+#define CPCAP_REG_OW3D		0x1244	/* One Wire 3 Data */
-+#define CPCAP_REG_OW3I		0x1248	/* One Wire 3 Interrupt */
-+#define CPCAP_REG_OW3IE		0x124c	/* One Wire 3 Interrupt Enable */
-+
-+#define CPCAP_REG_OW3		0x1254	/* One Wire 3 Control */
-+#define CPCAP_REG_GCAIC		0x1258	/* GCAI Clock Control */
-+#define CPCAP_REG_GCAIM		0x125c	/* GCAI GPIO Mode */
-+#define CPCAP_REG_LGDIR		0x1260	/* LMR GCAI GPIO Direction */
-+#define CPCAP_REG_LGPU		0x1264	/* LMR GCAI GPIO Pull-up */
-+#define CPCAP_REG_LGPIN		0x1268	/* LMR GCAI GPIO Pin */
-+#define CPCAP_REG_LGMASK	0x126c	/* LMR GCAI GPIO Mask */
-+#define CPCAP_REG_LDEB		0x1270	/* LMR Debounce Settings */
-+#define CPCAP_REG_LGDET		0x1274	/* LMR GCAI Detach Detect */
-+#define CPCAP_REG_LMISC		0x1278	/* LMR Misc Bits */
-+#define CPCAP_REG_LMACE		0x127c	/* LMR Mace IC Support */
-+
-+#define CPCAP_REG_TEST		0x7c00	/* Test */
-+
-+#define CPCAP_REG_ST_TEST1	0x7d08	/* ST Test1 */
-+
-+#define CPCAP_REG_ST_TEST2	0x7d18	/* ST Test2 */
-+
-+#endif /* _CPCAP_H_ */
 -- 
 2.43.0
 
