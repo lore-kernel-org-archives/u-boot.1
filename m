@@ -4,59 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 279BFC3600B
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 21:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61FC2C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 22:11:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 916CD81026;
-	Sun, 30 Mar 2025 23:40:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id BA0C480F9C;
+	Mon, 31 Mar 2025 00:11:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="rpGM9LBz";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1743372671;
+	bh=ZH6PsNKhSoEBBDZ+YF0pacq12xMFu39MpPAwE/ZP4fY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=uA84YmlPfDXb/yzrzkMabc7kN/bpVEibp3BlEXOPD2faI4rkMu3YuCBbsND1tlDkd
+	 M3xHrFUiXXvGc8s7Hy3LAaZWlJXcaaso/DdMOoI/+EyZhKxPfN15t0/h91klje4wpw
+	 kKoZgDGUx3f99vtg3sRVs62YuqBm0rrXIfp5HYS1+OZTgRYOMFy2NbpKdcIUxYGFH9
+	 qJjAbXdpmHPnn0xAZkt0OZUuRJ3aBZNmfVBCTeqjAwkZ/Kjagl6HkberiQwuK8I1wl
+	 B/OWquMnq+3Y3+wk81HEhYQrM9ll86rV3EwiwD/rG+VXy3BQz84yAIPheaGe3A/SQv
+	 ChYYu9Gf13P8A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43C5581E18; Sun, 30 Mar 2025 23:40:34 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id C0A6F80FDA; Mon, 31 Mar 2025 00:11:09 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CBD6800C1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 23:40:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F293E800C1
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 00:11:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c171=WS=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743370829; bh=ODalvzLLej2iS+PfzP5V1+4m6V1I0gWwn01iK4cdx7I=;
- b=rpGM9LBzxmvke7DwCGCj8bY2933ZHzyJHjq0szKoXMWHx9zI1YPTMy9+IU1QZRVaHBgBKpvWJ
- yG39nHe9DqShwFljP0FRFIRrEp7F4PNdORwQL+osambqwDwMYcSCDhVI0cXlwUQS5c+9CiF2g/x
- MoMDMi/iRgRm7nRLyTdNDkwjkBzwS676tnZs2v80ARIivYEKXDZM798GRDuF0XAS7yW1zy0psM4
- p4X5ivhSS1uXwhjiZHKo3Rq3UW//WJULqLTcf4QaUv4mRPztkeSHbB6j4ov+q5TLqq0S+FIo5QD
- kGz9HkEIhyvBjd7ZbqR1S8uUuTY2ou8z3uJ5mTo4jQ6w==
-X-Forward-Email-ID: 67e9ba4bf4aa6b41f9be0785
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.0.0
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 2/2] rng: rockchip_rng: Update compatible for RK3588
-Date: Sun, 30 Mar 2025 21:40:11 +0000
-Message-ID: <20250330214015.3466802-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250330214015.3466802-1-jonas@kwiboo.se>
-References: <20250330214015.3466802-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="PkoCaOvq"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D4EC8102F66E1; 
+ Mon, 31 Mar 2025 00:11:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1743372665; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=ZH6PsNKhSoEBBDZ+YF0pacq12xMFu39MpPAwE/ZP4fY=;
+ b=PkoCaOvqI7gwia1DhwAfDmu7Hlj+RWtQqXKHbn4wTWlISebjgab1E38WJtV9h8SGzoquIp
+ E1yL/1RzXmP335mdAxo+5TSiEXo4BqDIs/r8CAnvkmVVC6hkWk/kw1hi2ARwCdyZR3SzWP
+ R66C5WQvxppHhIO3ABO/Mwild4ynp2lqg5GyI51SYDsnXwBbL6vzQUJUvXdM7cW0lKXvcz
+ w9X/VjEwZECSe1OnGlB99lvTvnkuvAJeESDHpQkCLBu7V3cJN44+hrV2OrLy9O+lBK5VNs
+ 27pgmYFeq1l9+4jrJB3XSg/KKoQyYJoVEWJvGP4XXGiTpx1co02KC9kC7W+xtA==
+Message-ID: <0f4fcc93-9b9d-4fff-8110-70ac3f8bacd9@denx.de>
+Date: Mon, 31 Mar 2025 00:11:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+To: Simon Glass <sjg@chromium.org>
+Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Brian Ruley <brian.ruley@gehealthcare.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>
+References: <20250105203714.158480-1-marex@denx.de>
+ <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
+ <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
+ <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
+ <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
+ <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
+ <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
+ <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
+ <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
+ <a05cf63b-820d-4b27-8f66-37a6e6c7b372@denx.de>
+ <CAFLszTgF+g2OXz=L=r7rOQcNkk19GfdCrwixG8ZAsR=1rh9Fqw@mail.gmail.com>
+ <f1e4014e-658b-4a47-af8d-72ef76c1b134@denx.de>
+ <CAOMZO5B7cxEftN0TeTF--pKXqOmbmaFLc9mEPO4=8odrLBeypQ@mail.gmail.com>
+ <f71762e5-ba15-43ec-91a3-dbdc8f8e1437@denx.de>
+ <CAFLszTj69OUZj9ZBcmnsiLLvxCB+Y-rJYEW_Ep8V6WFtvXP2Nw@mail.gmail.com>
+ <5bec35cc-99b9-468e-bc01-1de5dc39825c@denx.de>
+ <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,51 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux commit 6ee0b9ad3995 ("arm64: dts: rockchip: Add rng node to
-RK3588") merged for v6.15-rc1 add a proper rng node to the device tree.
-The compatible used differs compared to what U-Boot is currently using.
+On 3/28/25 12:42 PM, Simon Glass wrote:
+> Hi Marek,
 
-Replace the old trngv1 compatible with the upstream Linux rk3588-rng
-compatible.
+Hello Simon,
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-This was also tested with a full copy of the rng node, meaning the rng
-node can fully be dropped from u-boot.dtsi in the future when v6.15-dts
-has been merged.
----
- arch/arm/dts/rk3588s-u-boot.dtsi | 4 ++--
- drivers/rng/rockchip_rng.c       | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+>>>>> This patch causes a CI error:
+>>>>>
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1057151
+>>>>
+>>>> I think this might be what Simon was pointing out, but I never got any
+>>>> suggestion how to solve that.
+>>>
+>>> There was a patch for this...and it looks like Tom has applied it:
+>>>
+>>> 19a342f9122 Merge patch series "binman: build_from_git: Add argument
+>>> specifying branch"
+>> It is in u-boot/next , but it does not seem to help ?
+> 
+> Did you figure it out?
 
-diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-index 8880d162b11c..ee44ad271c7f 100644
---- a/arch/arm/dts/rk3588s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-@@ -19,8 +19,8 @@
- 		bootph-all;
- 	};
- 
--	rng: rng@fe378000 {
--		compatible = "rockchip,trngv1";
-+	rng@fe378000 {
-+		compatible = "rockchip,rk3588-rng";
- 		reg = <0x0 0xfe378000 0x0 0x200>;
- 	};
- };
-diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
-index f673e2657c94..6e4e3abf08c8 100644
---- a/drivers/rng/rockchip_rng.c
-+++ b/drivers/rng/rockchip_rng.c
-@@ -321,7 +321,7 @@ static const struct udevice_id rockchip_rng_match[] = {
- 		.data = (ulong)&rk_cryptov2_soc_data,
- 	},
- 	{
--		.compatible = "rockchip,trngv1",
-+		.compatible = "rockchip,rk3588-rng",
- 		.data = (ulong)&rk_trngv1_soc_data,
- 	},
- 	{},
--- 
-2.49.0
+No
 
+> I'm not really sure. It works fine in my tree and I just tested it
+> now. Perhaps there are some other patches missing from Tom's tree?
+Can you push this tree somewhere ?
