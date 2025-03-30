@@ -4,94 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5311C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 19:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A5FC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 21:05:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 343E7812BC;
-	Sun, 30 Mar 2025 21:30:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A8DC80F9C;
+	Sun, 30 Mar 2025 23:05:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TbxkKYOo";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1743368712;
+	bh=C5WRsM6rAmlqwz6O/egLzPyU09i/rDfPrJXaoyu4Nfo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=KFpyfOkWePJv0L542yYnrbqqziYoUMmo2+e/nuc4CqVE3x+2++IS/PMR8Xcx80fEm
+	 3VRhI1p9IWlvGlmiDITHhW75NBtIqPfz3b8iJmYnpbLBN1/rAUaop1WtrOKFJU0f5N
+	 9qWM7X6qAM9hkN2+bKbjxfeldt3CajRiYcymjisBRQhKQJDxT3kj1xpr45376/Wl7m
+	 eK9QjQcpVPfQXxkUKGptmNjnCpbu6H5csSzwaiw/k/E9TxIPCrW9WV5DQfoHlCR6L6
+	 X26zY4zVHH3bDeXA92QyEeTOAob2VMqFxiesmhj0wYecoomIQc34g3ltjnu4H9iJXd
+	 qrlexKxmAecyw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A7968129B; Sun, 30 Mar 2025 21:30:17 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D23280FDA; Sun, 30 Mar 2025 23:05:10 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB8B28129B
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 21:30:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E799800C1
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 23:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=arturkow2000@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ac345bd8e13so643778866b.0
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 12:30:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743363014; x=1743967814; darn=lists.denx.de;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Sf8y5PUwM2WDGGC9jSeGiQhbWED8SUTFS9/912q1t9M=;
- b=TbxkKYOo1rEsFK0GRssjUbuip5V9Pwt/SDHanXRbRP6XZB5WXqlgbrCVzXpYvAZ52z
- jyA66K1Fp+EcdtojedaOWT7Zi4yhckqT0pO+P8v0C4Eg2/LivhUzmw8cyHflqUO1Irfa
- rcdzkXdOLE2AgL8bBfw2X6vbGVZR5zfm6L/9BPVMfaXrd2ctRfLYyK95O2SFH4hAxDKj
- qkX704ejXnp97hosrnGZBIIOOWuikLuL1+1/mpoHRQpD7Yh+rCXfmzTLDqDZQ7SuOaoB
- XIsmgI6OzXKprJZNuNPMCh9+ZyvdXS0Skb7A8ZUo3OOpEKQhXN28Cqt3vo6+f64r6YAH
- 8jLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743363014; x=1743967814;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Sf8y5PUwM2WDGGC9jSeGiQhbWED8SUTFS9/912q1t9M=;
- b=gZPVm40h2xP/G4kLkNhy00Q4fAzidkXYUlHOjoFbgirRoeSiUamztKLh2nOHkDbVE7
- MJRTd5vKVYnpIKFzzEO1pD0BWTL2CIU3PKv6wWhh4muZp+blSx5mkb/dUg/i6rN6dwOC
- 0rvkFNwvq1/CWHgk+gXoO0sbF2X3EUaHOSZz7A2z6y7yAiJN0O5VDJAVAUS9zl7+6BBt
- rPn6pNReHm3aBHCN36j8eWT/qYLAtRuUNzUYTOVEJjvEXgnmG+NdYLJLImeVP5JdEA25
- jbnJ4c5j+XecuNxLMuA8yDRuOWbNllQU+CwGMm+xdmnBdr7XqWN5cRZ47TomwHl9y3no
- auhQ==
-X-Gm-Message-State: AOJu0YwGoVyTc1cGTTqOJPtRG81PRo0KFU4JKFqrKBCT1PfCHMCwCpTb
- dHuDexKjcGA9ic6qF8JBwGNjItQK66k4j6Bf3KUtTt6rYQbMAL3L
-X-Gm-Gg: ASbGncvatMmTTMsz8tSwJQkkQdSODZYMzXuSogXgJzPU/rl0r2xfJ27H1MC8Gil44Y8
- 567f0LlgG06Z0BVGlcqGPNhS4CctTtnZNNhKPayXl/JoeAeXukQ/8SPXPC8jfIwQXni/NVz+Nc3
- o+Z3wxbU3TKe5Kb7LFQClD9pAfBIYidrz7SNKxYaeNJvm3qxG9F/16pFA3/FVj72dI2Lv6ICrLG
- m8qu+F3ol3hpxVKpK3UvvQByfdV6m/o8nAAY6GQUW3OgXB+WnNykW6XzyvYPEG6ZWJJ97OJLtPh
- OcZmwro/mQNgupR3mdzZJJgUK8a7TamsarBvlK5s3FTsGw3HzfEu9+IFexpEPDmAuITabFBxADB
- sISmGY/g+NJAqvOKM7LP6
-X-Google-Smtp-Source: AGHT+IF5f3J9r99y/J1U1A4+wLjCh+/BHYfls1zf0/mOgMdZkJXnbhfq1objSW0ILJxivN/Pvndjmg==
-X-Received: by 2002:a17:907:6d19:b0:ac6:e33a:6a0d with SMTP id
- a640c23a62f3a-ac738bae06cmr527784466b.55.1743363013238; 
- Sun, 30 Mar 2025 12:30:13 -0700 (PDT)
-Received: from [192.168.0.15] (89-64-21-122.dynamic.chello.pl. [89.64.21.122])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7196dcf14sm509962066b.156.2025.03.30.12.30.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 30 Mar 2025 12:30:12 -0700 (PDT)
-Message-ID: <b8601ae3-479f-46fc-aa55-304e44026442@gmail.com>
-Date: Sun, 30 Mar 2025 21:30:12 +0200
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="NFLtLT0q"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7ABC5102F66E1; 
+ Sun, 30 Mar 2025 23:05:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1743368707; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=C5WRsM6rAmlqwz6O/egLzPyU09i/rDfPrJXaoyu4Nfo=;
+ b=NFLtLT0qiCVcbzFvZJcqkf+RqrSduGu9/qf71LkDhciF+6Lwr1q/yS2U/fmfrvQ9QXFYk8
+ r8DVNEuXFwswNeVkfEl/HeFhxFpYom/uln88ID6irjWn18gPAp4leTPMHbJTSPn3/B/VVn
+ qd5YoW/v2mudJNWEuomgCTZwc+qE0mwFVk/RWP7V6Nj9EepEgfvy41mfki8yXP2jbDhRdY
+ AZ0VKzoweslsSQ4R+8Q/b6ANKvz4OE5TBqqeE6EMNs/pzlWItP/7c9sRIoT4CQrvglcM8X
+ KwnZeBe+f9FtEgj3DlfFJ3RoaMeYl2oF4Qv/z61vXszyifQtb5F2iJhXz9MgQg==
+Message-ID: <0c95ffa8-b26f-40fb-b4f6-4beabef3fb53@denx.de>
+Date: Sun, 30 Mar 2025 23:05:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Support UART over MicroSD slot on Transformer T20
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Francesco Dolcini <francesco.dolcini@toradex.com>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stephen Warren <swarren@nvidia.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Tom Warren <twarren@nvidia.com>
-References: <20250318083103.63250-1-arturkow2000@gmail.com>
- <CAPVz0n3JF78RQYbckMcwN6JZC+adUG+oHNzof7Wkxd+EqeBkJA@mail.gmail.com>
- <af1c79f6-cfd1-45d2-8382-f68ad84276ea@gmail.com>
- <CAPVz0n3zveefuPCY8nvcqyeQ_NqZ=woq0ZqLja2AtfBLTVC-3w@mail.gmail.com>
-Content-Language: pl
-From: Artur Kowalski <arturkow2000@gmail.com>
-In-Reply-To: <CAPVz0n3zveefuPCY8nvcqyeQ_NqZ=woq0ZqLja2AtfBLTVC-3w@mail.gmail.com>
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW1BBVENIIHY4IDA3LzE5XSBjbGs6IHNjbWk6IGNo?=
+ =?UTF-8?Q?eck_the_clock_state/parent/rate_control_permissions?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
+ <20250321-imx95-v1-7-f2c8ba815f89@oss.nxp.com>
+ <78f7d9f2-6226-49bb-8568-41e7ca0cdaba@denx.de>
+ <PAXPR04MB9644F826CFC88160CF9CF2EBE2A02@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <PAXPR04MB9644F826CFC88160CF9CF2EBE2A02@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,131 +88,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-W dniu 25.03.2025 o 08:14, Svyatoslav Ryhel pisze:
+On 3/28/25 11:26 AM, Alice Guo (OSS) wrote:
 
-> пн, 24 бер. 2025 р. о 22:01 Artur Kowalski<arturkow2000@gmail.com> пише:
->> Hello
+Hello Alice,
+
+>>>    enum scmi_clock_message_id {
+>>>    	SCMI_CLOCK_ATTRIBUTES = 0x3,
+>>> @@ -738,6 +739,7 @@ enum scmi_clock_message_id {
+>>>    	SCMI_CLOCK_RATE_GET = 0x6,
+>>>    	SCMI_CLOCK_CONFIG_SET = 0x7,
+>>>    	SCMI_CLOCK_PARENT_SET = 0xD,
+>>> +	SCMI_CLOCK_GET_PERMISSIONS = 0xF,
 >>
->> Thanks for quick response. I know UARTD is the dedicated UART for
->> debugging on TF101, but exposing UART over microSD
->> is a handy trick useful for development. As I'm doing development on
-> It is a handy trick indeed, but it is still just a trick and not smth
-> that fits mainline. Maximum I can propose is picking funcmux change
-> along with uart over sd section in transformer t20 documentation.
->
->> this tablet (bringing U-Boot's UEFI support and latest
->> Linux), and also still using the device on old OS I'd like to avoid
->> disassembling and reassembling it over and over again.
-> I am not sure what are you doing but TF101 has full support of U-Boot
-> as primary bootloader along with full mainline support till 6.14
-> including. It uses extlinux boot method and needs no intermediates or
-> chainloading.
->
-> If you wish to use U-Boot for tethered booting that is perfectly fine as well.
-Booting with UEFI didn't work, I have solved that problem locally by 
-forcing LMB allocator
-to not allocate at 0x0, any platform where RAM starts at 0x0 could be 
-affected by it. Soon I
-will send patches. I want to use UEFI so that I can take advantage 
-systemd-boot features such
-as one-time boot for system updates, some other software I plan to use 
-also depends on UEFI.
-Also, with extlinux I can't use verified boot, but, eventually I plan to 
-program PKC and have full
-secure boot with hardware RoT.
+>> Better call it SCMI_CLOCK_PERMISSIONS_GET to be consistent with the rest of
+>> these fields , unless this is some SCMI specification name ?
+> 
+> CLOCK_GET_PERMISSIONS is from Arm System Control and Management Interface Platform Design Document 3.2.
+Understood, please note it in the commit message .
 
-When bringing UEFI support I also made some changes so that U-Boot works 
-with
-CONFIG_OF_UPSTREAM, I also plan to upstream the patches soon.
-
-Linux lacks GPS support and possibly camera, also sorry for my mistake, 
-I meant a complete Linux
-distro rather than the kernel only, which is lacking GPU acceleration. 
-Also, when running preemptible
-kernel I can see multiple "scheduling while atomic" errors and random 
-system freezes under load.
->> Others too may find the feature useful e. g. to avoid having to solder
->> which requires specialized equipment, skills and
->> is potentially dangerous for the board. Also, there already seems to be
->> support for that on Sunxi platforms through
->> CONFIG_UART0_PORT_F.
->>
->> Apart from pinmux changes, would it be acceptable to include an option
->> to allow switching UARTA mux to
->> SDB/SDD (currently this has to be selected from board's Kconfig file).
->> Doing so would allow to enable UART
->> over microSD without patching U-Boot's source without changing any
->> existing configuration. Then I would
->> keep DTS overlays and config changes local.
->>
-> I am fine with any changes which may simplify debugging for you as
-> long as they do not invade into completed device configuration without
-> a valid reason. Device must expose a dedicated UART for debug, not a
-> mux which breaks some device features just because you do not want to
-> contain them locally.
->
-> For example, patches which add UART-E support along with funcmux
-> change which exposes uart-e over usd were accepted, but patch similar
-> to yours which would reconfigure usd to uart for surface rt or p880
-> would be rejected.
-
-I've sent v2, which besides few other fixes, adds dedicated Kconfig 
-option for enabling UART. If disabled, the config is the same.
-
->> Also, today, after running U-Boot with debug enabled, I discovered some
->> failed assertions in pinmux code probably
->> caused by my changes, I will get that fixed before sending v2.
-
-Turns out it was something else. I've sent a patch to fix that:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20250330211153.RFC.1.Iebf436d41ff5f52c0b11aaf9e8f98d6a2d4d56bc@changeid/
-
->> Best regards
->> Artur Kowalski
->>
->> W dniu 18.03.2025 o 09:54, Svyatoslav Ryhel pisze:
->>> вт, 18 бер. 2025 р. о 10:31 Artur Kowalski<arturkow2000@gmail.com> пише:
->>>> The first patch in the series brings general pinmux support for exposing
->>>> UART over SDB/SDD pins on T20. The following patches bring support
->>>> Transformer T20 allowing to enable UART over uSD by setting
->>>>
->>>> CONFIG_TEGRA_ENABLE_UARTA=y
->>>> CONFIG_DEVICE_TREE_INCLUDES="tegra20-asus-transformer-uart-usd.dtsi"
->>>>
->>>> Similarily, support for UART over uSD could be brought to Ventana which
->>>> has uSD on the same pins as TF101, and other Ventana-based boards.
->>>>
->>> Hey there, thank you for looking into U-Boot for Tegra. If something I
->>> will say hurts or offends you, I am sorry it was not intentional.
->>>
->>> Anyway, apart funcmux changes, all other changes you propose are
->>> redundant. Asus dedicated uart for logging and console is UARTD any
->>> other uart configuration must not be added since it will disrupt
->>> existing configuration. If you need uart and cannot resolve an issue
->>> without it you can always solder to uart-d or locally mux sd to uart
->>> console fix your issue and remove it. Uart is not intended way to
->>> interact with Asus TF101 and doesn't need to be exposed, panel and
->>> fastboot console are and can be used to resolve most of issues.
->>>
->>> Best regards,
->>> Svyatoslav R.
->>>
->>>> Artur Kowalski (4):
->>>>     tegra: add funcmux for exposing UART over uSD slot on Tegra 20
->>>>     tegra: respect CONFIG_TEGRA_ENABLE_UART* options on Transformer T20
->>>>     ARM: tegra: expose UART-A over uSD on Transformer T20
->>>>     board: asus: transformer: add DTSI file for enabling UART over uSD
->>>>       slot
->>>>
->>>>    .../tegra20-asus-transformer-uart-usd.dtsi    | 31 +++++++++++++++++++
->>>>    arch/arm/include/asm/arch-tegra20/funcmux.h   |  1 +
->>>>    arch/arm/mach-tegra/board.c                   |  4 ++-
->>>>    arch/arm/mach-tegra/tegra20/Kconfig           |  4 +++
->>>>    drivers/pinctrl/tegra/funcmux-tegra20.c       |  9 +++++-
->>>>    include/configs/transformer-t20.h             | 10 ++++++
->>>>    6 files changed, 57 insertions(+), 2 deletions(-)
->>>>    create mode 100644 arch/arm/dts/tegra20-asus-transformer-uart-usd.dtsi
->>>>
->>>> --
->>>> 2.48.1
->>>>
+Thank you.
