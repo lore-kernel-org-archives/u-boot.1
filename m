@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDC09C36011
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B781DC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 14:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC73E8171B;
-	Sun, 30 Mar 2025 16:07:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 243768171B;
+	Sun, 30 Mar 2025 16:16:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yxqvZMyS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LjNC+jX9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69EF881EC0; Sun, 30 Mar 2025 16:07:36 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id E4AEF81A0C; Sun, 30 Mar 2025 16:16:44 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8012D8171B
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:07:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6525E8144A
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:16:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christopher.obbard@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43ce70f9afbso38359955e9.0
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:07:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-72c7332128eso100134a34.0
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 07:16:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743343650; x=1743948450; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=N76In/0piXS0aeX5p2AMkMjgjcX1rd71d9vP0UWf0Vg=;
- b=yxqvZMyS5fLmfUGZcPMHKNwB8JmHuwOsCvtSs8utNGwf7Nm8LzAeVD2ZxXzOS3V6tG
- 48+WMiCJMc4QW25VPQuz2ZeiTqLqpwSQzL/ijtsk7ZFGNH8JgC6SvnSgGV6jxPQISir0
- 6Fgyv8vWozwaS5qhjue74OpbpugOdHNQqPeXFvgBHWspnipC8Lm7Q0NGlAicErGXGyT5
- Q0tWGPtMhlgZwwvwU+lIDJnDU54ke9V2yWCqY0hL26FrkoVcYwgWUxxOFc+Hp3gcUQ3S
- CyKbcpE627swbUZsULmMG/QyRkP0x2nt68PJlya6Nf9e229ySANFB4UJKeVhAjPTDHW3
- 4KgA==
+ d=konsulko.com; s=google; t=1743344201; x=1743949001; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=dIBLqJLnw7SEEj8UBthQDRqC8pVgHegeEmaFctmlHb4=;
+ b=LjNC+jX92x2nsSwgLfqtV63BUYPdb342gWdFYbW6OQowAdZHtB26xXFBCYAf6qygz8
+ utLBXenY/syzy70EamoekJstXfE++U5h84XWSv0JtqWja1o7VrxKDaa60GG1lTD7VXef
+ 3zp1BrPzNULCuCjz8ulZZEXJoGOaPtN7INZAo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743343650; x=1743948450;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=N76In/0piXS0aeX5p2AMkMjgjcX1rd71d9vP0UWf0Vg=;
- b=NsphfyYIUAe04oEGLBeZ5r69oSdnU/s60NpcwO/d2HX9sgKL4z/Wy1+Kl+diQQjsxO
- aLsDCP3TelUdpAhh/jBSx6JLuHChNOwh2JUOdQnz3CcOQOj4nJv4xvSI+46Rqnm60wVE
- WOkHQcLHTL8yet5apJmnC/0DU2NtESTIciVzarQHoXzOyizU0CaB/3Q6sml0J4UDyu4g
- bQnlhD5mN9UlJLd0V82Xllgr6v3BDRTMMGL8QlqpqKEi9Mz9maK/ETP+dghVgNHcpSBI
- Ov1td4Wn8aL1s7uAY3uz7YbfWicgzuz4iJ59Wot/atWdNWRMe3wmNuYJzIqbyh7y1EnK
- xlaQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5dw8/IxU74cbbLL3DzTIJt8BhI1OG+c02cX8lp4ddRINaxcEwtJOLp31CXN5cRqvm+4kV8Ng=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyy7SndvVlJN3wUEf0PdMfOM5Jf4GyKcuNo1hdUtIOcWEFpKSCd
- LZR6WFmGr5fDKQuqBYxO1WZe5sSbXrphjnh+JviIX2DLWz1YRthIphsz/brqZlw=
-X-Gm-Gg: ASbGnctvUkNFQbQ80jfN8mautxdAgx0TYX3pfc1pjtixa43B71NTQm5th0dKCf84JQz
- z3PrhBEwBDZ5J+VZwII+xZ2mdaG89HD5lONQmQNwmgqzI/WEFw3tGo1L6HZFVphy8xlqCNorUMH
- sVnPUO9klC0aIEZAU/1txQiJkbFdDItjt6XZccVSMrhyR7yhJsPU48GYgipIyc+9XXJge2/pfoK
- aNlKThikpilo0nFbBA9mACKmxje0nL1buBTybdBYS3Rlg6WrByeKklN7IzdN9AvZMyXZYa4FpwC
- XkvE5r/jLz70XlByYXnQRZiOr98LgjbLdEqX7pTHA0XJOpoqs3bkjf1ilKvzplcIO/PyKBD3Mcx
- DTJARlz0Aw0+4pgcf0RaDdMkzY0MO
-X-Google-Smtp-Source: AGHT+IFVx7nSJy3W7hj1pfWAR7B2DUvn1bujE1lu65edciPCaFvNODKtGO2zJi5KDi8hrwMQx85Gag==
-X-Received: by 2002:a05:6000:2181:b0:39c:1257:cd41 with SMTP id
- ffacd0b85a97d-39c1257d4f0mr2833252f8f.59.1743343650572; 
- Sun, 30 Mar 2025 07:07:30 -0700 (PDT)
-Received: from ?IPv6:2a00:23c8:b70a:ae01:9cf7:b69:fc50:980f?
- ([2a00:23c8:b70a:ae01:9cf7:b69:fc50:980f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0ddeecc9sm7488978f8f.83.2025.03.30.07.07.30
+ d=1e100.net; s=20230601; t=1743344201; x=1743949001;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dIBLqJLnw7SEEj8UBthQDRqC8pVgHegeEmaFctmlHb4=;
+ b=BklGFx6gcycB8t7gmhlgncPgaASnHmpStQIBmGNX471FHcD2gAM1rpeUXmF2mGy7wx
+ bTUIxzLzM+tv/ifYAAm8w24UZNjxta6SKHDdf9ITDfsadIUn5VsABVeFm56wiwdwNhug
+ 1bmNu4aSZ5Sn2Id1HHLZHYWWwoLl3uEylT51YFpi6GZdbdN/WXiwizS7wqUFEN2qxxYM
+ fkxagCVZkQ6r3wtfoxn1W9WUNOWZYtUPr3dvPoUD65OjHzXCdNwzdYY/32eQqeoXctz9
+ iuYzRNgwocL4OgviqA/erELjiaSAQZ1QFNVOmt15RxbPin8h8NpUglMaRPhrCfd50Drk
+ yZ1A==
+X-Gm-Message-State: AOJu0YxjZIQr6AE0mhws5EF20aD3QvNlg0Jb0OUk/ab8Dba7khQji2Qx
+ iiXEmaYMJN4x3YyvyADyVBZU69yA/c5677lLtSTtiyGxxQnSyoK3XaQYtVwCtEM=
+X-Gm-Gg: ASbGncvKn7oV1octEqJxJN6aFs9yctB3PRPSg9zb6r4w4/PEyWSJnu6qRoI6ZcTDkTo
+ cdC0F5MvV1UoYtn1qw6qtYF7rDJkmANsQrHicc2pOQenW+X55dIVhR9dV9r52HpES4OmobnfhyB
+ ZeupR/6MUeTxXlbCzRbMeOXYqMVaKsF2E4u8aTFy0j5vG7TlnmuX0tFtmR7ZpUTYppRc4kJAKRV
+ s33e7Vud4vLUZpuDO2BvLkVQTwuwCUQ0D6GJDKQyQqNisAJadbpvgNPNmxrjwUmW3oGUWNJb/9i
+ 3132TnzkTLyBqahGlukp01RtS40LReCLpq9bfXeKU0O6e8wEmtI92hIkcj+z6wQauQs62z0eG3z
+ 65gnl
+X-Google-Smtp-Source: AGHT+IHduQPTaqEYGKD/ppVeNrM85m5jgxfl6Jn0Wzfd8m42y+owo8+655KHdiNDrVYmmxnRU+LNyw==
+X-Received: by 2002:a05:6830:40c5:b0:72b:955a:852c with SMTP id
+ 46e09a7af769-72c63793a19mr3304587a34.11.1743344201096; 
+ Sun, 30 Mar 2025 07:16:41 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72c5809260dsm1150216a34.14.2025.03.30.07.16.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 07:07:30 -0700 (PDT)
-Message-ID: <4e3963dacbbe38af1bba9bc3faedc69c3cf2c9c8.camel@linaro.org>
-Subject: Re: [PATCH v4 3/5] rpi: Drop fdt_high and initrd_high
-From: Christopher Obbard <christopher.obbard@linaro.org>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Stephen Warren <swarren@wwwdotorg.org>, Stephen Warren
- <swarren@nvidia.com>,  Matthias Brugger	 <mbrugger@suse.com>, Tom Rini
- <trini@konsulko.com>, Peter Robinson	 <pbrobinson@gmail.com>
-Date: Sun, 30 Mar 2025 15:07:30 +0100
-In-Reply-To: <20241220003447.2913443-4-sjg@chromium.org>
-References: <20241220003447.2913443-1-sjg@chromium.org>
- <20241220003447.2913443-4-sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.0-1 
+ Sun, 30 Mar 2025 07:16:40 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250329024035.291171-1-marek.vasut+renesas@mailbox.org>
+References: <20250329024035.291171-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/next
+Message-Id: <174334419972.1157922.11332305670855505699.b4-ty@konsulko.com>
+Date: Sun, 30 Mar 2025 08:16:39 -0600
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,50 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Sat, 29 Mar 2025 03:39:53 +0100, Marek Vasut wrote:
 
-[resending as I used the wrong e-mail address which isn't on the list,
-oops]
+> More basic DBSC5 DRAM controller clean ups and improvements.
+> 
+> The following changes since commit 4adbf64ff8d8c730223fd8ae299d770bebb6fe86:
+> 
+>   Merge branch 'staging' of https://source.denx.de/u-boot/custodians/u-boot-tegra into next (2025-03-26 14:07:37 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-On Thu, 2024-12-19 at 17:34 -0700, Simon Glass wrote:
-> These are not needed now since there is a bootm_size setting to keep
-> things within the lower part of memory.
->=20
-> Drop them.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Suggested-by: Tom Rini <trini@konsulko.com>
+Merged into u-boot/next, thanks!
 
-Reviewed-by: Christopher Obbard <christopher.obbard@linaro.org>
-Tested-by: Christopher Obbard <christopher.obbard@linaro.org> # CM4 1G
+-- 
+Tom
 
-> ---
->=20
-> (no changes since v2)
->=20
-> Changes in v2:
-> - Add new patch to drop fdt_high and initrd_high
->=20
-> =C2=A0board/raspberrypi/rpi/rpi.env | 7 -------
-> =C2=A01 file changed, 7 deletions(-)
->=20
-> diff --git a/board/raspberrypi/rpi/rpi.env
-> b/board/raspberrypi/rpi/rpi.env
-> index a327fccc77f..9b9fad82828 100644
-> --- a/board/raspberrypi/rpi/rpi.env
-> +++ b/board/raspberrypi/rpi/rpi.env
-> @@ -66,13 +66,6 @@ dfu_alt_info+=3DzImage fat 0 1
-> =C2=A0 */
-> =C2=A0bootm_size=3D0x20000000
-> =C2=A0
-> -#ifdef CONFIG_ARM64
-> -fdt_high=3Dffffffffffffffff
-> -initrd_high=3Dffffffffffffffff
-> -#else
-> -fdt_high=3Dffffffff
-> -initrd_high=3Dffffffff
-> -#endif
-> =C2=A0kernel_addr_r=3D0x00080000
-> =C2=A0scriptaddr=3D0x02400000
-> =C2=A0pxefile_addr_r=3D0x02500000
+
