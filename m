@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE0EC28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7405EC28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 09:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23D96817C4;
-	Sun, 30 Mar 2025 11:21:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E11798129B;
+	Sun, 30 Mar 2025 11:25:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="amBgrRka";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jx4cCiRD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E38281DCD; Sun, 30 Mar 2025 11:21:31 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 8393081E18; Sun, 30 Mar 2025 11:25:43 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A0058129B
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:21:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D12880F9C
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 11:25:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ac345bd8e13so593123666b.0
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:21:29 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ac2dfdf3c38so641871566b.3
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 02:25:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743326488; x=1743931288; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0YgcrTRGKz8hG4NAPrS5UahxsleBwDxfJXiniVTKy60=;
- b=amBgrRkaPs7RH5nNv31EUmLX3O0zlSuyxmU0SZXg3bsigbWYObvqIbnf8Nz1nJ0Dk2
- UQ2B1RvJunrPv/tk7su8HMxOMbuuwcgYmItKxFne7ReXagvOhjq/tEn8EAFtd/wfEaX0
- xYfHznFkJg1yB6XQVxcLSE7RPXfeQjwcJ2Y0cETyP4N8DyTdA6fWl7j/AJBA+UVBd4/9
- lhuGKESq6KdSI5hwN+qjjiBCK5Wg7EUXi38wwuLvarN4Z+8lvI391h29Y0GfbD8UnTK1
- +aauUeHO/LX5rrxH1teWorVOpRuPWoEgjmdum3i6yzzJBW4TMm1AoJVtCi3BREjU8ldj
- /d1Q==
+ d=gmail.com; s=20230601; t=1743326741; x=1743931541; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t66+wvmhKKUORCcbyNGh3ooQgVmnxS/oKpB6+6ftKs8=;
+ b=Jx4cCiRDvv6luukhTXU/mAG8OVhrpRtqO69b8xYVtzSFrGWGv1KjAPs3ji+GHcgwdy
+ gMX79RWZHnBTNNAbU0ibQLqNXVIm9PEqx20X204nCsEVsYblC6eH9vVCaC4Fjm6Im9BA
+ wE7knmg6UdEoqUHwdggVhE7iuZPI9clBsOtKDuNKvs/U1IXSgV9HA9gKcDLtNkCCZfuW
+ k/M7t55RWKKAtyTrRQE48NV/2piEoLJYxPszUJZGtej8vMXQyH6qSx/BYLjcPPA+070c
+ VU6fUx58Fc00D9T1EQq7vyd2itgzirUDcCQ3u8e/uUeKHobrK1E+0T3dHWzsUqQAjbuf
+ BQhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743326488; x=1743931288;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0YgcrTRGKz8hG4NAPrS5UahxsleBwDxfJXiniVTKy60=;
- b=C21X7v1JdmtXoFmqto2fn2ehETScMfueE5x1hAJnBztJTcRX4Zpykg1HeN0ZF0ZdVx
- iFtkPfCSunpWhtbNjvo8+JCRD61U4zwg1kUE+VVv8SqAkmPe4rj3g7tplbyLCy29uuOQ
- iZU8Fgr1YhDpC9XDHt6qcpIFU4wxlASJkA639dvuHClFB/Mt2VuhTT/LNTxUx01inFpS
- lBZNUgW9xsXh0NBKD7NM5OxCdEa/3Me6zVbzv6uAgf6r2/Am7NYzJzB9L+Tksj8U9X3+
- 14j63TrGVhJnMIvK8sV7LfSSaLSrfwBKCEDkUdy01P2LkMzw/Fdlm6pc3Z6U7bkB6aCq
- p4bg==
-X-Gm-Message-State: AOJu0YyMrCfT+KWFlsqxZa/OBWjKToTmZt7TqJpZ1tr3ehxzMatDYG9J
- 3PFcSiFLO1aviBf2pRVkIU6f08E1paljcCHLoTSxXETGre/Rea66u48dYw==
-X-Gm-Gg: ASbGncshS/D5kHZhhY/hiayH/Ae9cVXjN1ypW3usisknMYlmIMSJduqkSl7QlJWsAx0
- 5kwhaC2zb0o/ofjonoSVmscKq4T+COY+WGuwFgcaeVWaUYzf9pG52vNUrroI/J9yhPgYMi4IoFT
- j1QOjx8EcXCSRlrW6WfzxScZ2LteYd0gX3aJGmrnWfxCPzeN/V74VVRWBEjYbIAyGhbjmSmRmw0
- O12TsshJdE92JjZ6L4ZS6bzVVpQgFvnWsGGOAqZ9GGXM+eFcLPADnxwNABlf4ouNIXxHRJvhns7
- bVFGglb9WJwXcs/i1tMPrZD34gamUMm4yz5g
-X-Google-Smtp-Source: AGHT+IEe0EHemF/R1UUesBfzitBlbzwjH5yfOuarUnO8Rknv/yPp9BlCZZSpmALIbqMi+16VmIECtQ==
-X-Received: by 2002:a17:907:3f26:b0:ac3:446d:142 with SMTP id
- a640c23a62f3a-ac738975d8cmr498104966b.2.1743326487997; 
- Sun, 30 Mar 2025 02:21:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743326741; x=1743931541;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t66+wvmhKKUORCcbyNGh3ooQgVmnxS/oKpB6+6ftKs8=;
+ b=ZR2YQgmeRzFMU4wmBNsg6QdfclD0vsvBc0w1I66mk/mCVeweieuO0txDF7/Q2tOz0C
+ w6bppBLEbu3+YEIBFNlFXjA5uIQNxqtYcDH0vxSTdPBVW3rG7AVONkgxfRevnbt1jF6E
+ mSaYaNPvBXaRkorMHFh4fLXtTxR+08Oo6Pit1jACUL46PKpt/kAEs86Cy9tb4lcjYG9B
+ mU1FvOfK10KcTY+HAyeRUUS37/AYby7sINmn9RMIHYWFpq2f4JtWW5K72my6IUIXutew
+ w+FoG6XyBalssdkYUsaU8+jGgOXQD0bWSF/PN9z8FxLpcMCLoUcdVMZ84WBnFvvNNKDn
+ uaDQ==
+X-Gm-Message-State: AOJu0YwGzre3fvaB5PCjm6bvHnFZMyNnNrkA4HEsMcRMQpo0hPh7bUVx
+ 9oBOgvrJhzYwo1xE3RMvUxR80BRUkCYafNYacXnpMSF1IeMUItz/YUoh+w==
+X-Gm-Gg: ASbGncspWEveELv847CYJeXPDGkbxEIY1Y5yT5MQNJ5mXWGSAzuiqVfmooW9KDMKuKJ
+ vtLhqaPNjhaxBSEzWFe+014IzCEhHyM+HAsn4RLq5NZHwGk2uidD7dnhYIe+O/yQ9qyTeNKE/9U
+ 7tmf/K3LSOaHrAGCQaJ5m+KYgRVYkfwIwF5eomegTElsncOrsisR4gaIgdCUuMgB9EI8x6u+zWc
+ y4Tf3JoxsFVJTnaT4J0AEtJ4O79mtoVEZS7VZhadSpdbDGhLP0yTu8ldw3jlJ4oMkeIXFEW3hqg
+ /5UipqSrxOYaPXADrbkr4KvuIPF6GwA8lzJc
+X-Google-Smtp-Source: AGHT+IH3vaJ74o9iUB3rq3AsMmN0ctgDIcemJflM80dyDi4/Ts0F7Ks0WbtTVTmMqQ/KrkN5Tv9GUg==
+X-Received: by 2002:a17:907:c920:b0:ac3:bbc8:ecab with SMTP id
+ a640c23a62f3a-ac738a151e3mr359801066b.11.1743326740846; 
+ Sun, 30 Mar 2025 02:25:40 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7196f56a9sm461565566b.173.2025.03.30.02.21.27
+ a640c23a62f3a-ac7196cba8esm452202466b.152.2025.03.30.02.25.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 02:21:27 -0700 (PDT)
+ Sun, 30 Mar 2025 02:25:40 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- William Zhang <william.zhang@broadcom.com>
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] spi: tegra20_slink: fix CS polarity setup
-Date: Sun, 30 Mar 2025 12:21:08 +0300
-Message-ID: <20250330092108.9946-2-clamor95@gmail.com>
+Subject: [PATCH v1 0/2] ARM: tegra: fix PLLD/D2 relates configurations
+Date: Sun, 30 Mar 2025 12:25:30 +0300
+Message-ID: <20250330092532.10187-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250330092108.9946-1-clamor95@gmail.com>
-References: <20250330092108.9946-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,59 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing configuration of chip select polarity. Default polarity is LOW,
-which satisfies most cases but some devices require HIGH polarity and will
-not work.
+Fix PLLD2 info table entry on Tegra124 and Tegra210 which unlike on
+Tegra114 and lower does not match PLLD.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/spi/tegra20_slink.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+Take in account PLLD/D2 enable bit on clock_set_rate call. Those two
+seems to be only which have this bit.
 
-diff --git a/drivers/spi/tegra20_slink.c b/drivers/spi/tegra20_slink.c
-index d54a5049205..097d9164175 100644
---- a/drivers/spi/tegra20_slink.c
-+++ b/drivers/spi/tegra20_slink.c
-@@ -29,7 +29,10 @@ DECLARE_GLOBAL_DATA_PTR;
- #define SLINK_CMD_IDLE_SCLK_PULL_LOW	(2 << 24)
- #define SLINK_CMD_IDLE_SCLK_PULL_HIGH	(3 << 24)
- #define SLINK_CMD_IDLE_SCLK_MASK	(3 << 24)
-+#define SLINK_CMD_CS_POL3		BIT(23)
-+#define SLINK_CMD_CS_POL2		BIT(22)
- #define SLINK_CMD_CK_SDA		BIT(21)
-+#define SLINK_CMD_CS_POL1		BIT(20)
- #define SLINK_CMD_CS_POL		BIT(13)
- #define SLINK_CMD_CS_VAL		BIT(12)
- #define SLINK_CMD_CS_SOFT		BIT(11)
-@@ -64,6 +67,13 @@ DECLARE_GLOBAL_DATA_PTR;
- #define SPI_TIMEOUT		1000
- #define TEGRA_SPI_MAX_FREQ	52000000
- 
-+unsigned int cmd_cs_pol_bit[] = {
-+	SLINK_CMD_CS_POL,
-+	SLINK_CMD_CS_POL1,
-+	SLINK_CMD_CS_POL2,
-+	SLINK_CMD_CS_POL3,
-+};
-+
- struct spi_regs {
- 	u32 command;	/* SLINK_COMMAND_0 register  */
- 	u32 command2;	/* SLINK_COMMAND2_0 reg */
-@@ -155,6 +165,14 @@ static int tegra30_spi_claim_bus(struct udevice *dev)
- 	writel(reg, &regs->status);
- 	debug("%s: STATUS = %08x\n", __func__, readl(&regs->status));
- 
-+	/* Update the polarity bits */
-+	if (priv->mode & SPI_CS_HIGH)
-+		setbits_le32(&priv->regs->command,
-+			     cmd_cs_pol_bit[spi_chip_select(dev)]);
-+	else
-+		clrbits_le32(&priv->regs->command,
-+			     cmd_cs_pol_bit[spi_chip_select(dev)]);
-+
- 	/* Set master mode and sw controlled CS */
- 	reg = readl(&regs->command);
- 	reg |= SLINK_CMD_M_S | SLINK_CMD_CS_SOFT;
+Svyatoslav Ryhel (2):
+  ARM: tegra: clock: take in account PLLD/D2 enable bit on
+    clock_set_rate
+  ARM: tegra: clock: fix PLLD2 info table entry on Tegra124 and Tegra210
+
+ arch/arm/mach-tegra/clock.c          | 6 ++++++
+ arch/arm/mach-tegra/tegra124/clock.c | 4 ++--
+ arch/arm/mach-tegra/tegra210/clock.c | 4 ++--
+ 3 files changed, 10 insertions(+), 4 deletions(-)
+
 -- 
 2.43.0
 
