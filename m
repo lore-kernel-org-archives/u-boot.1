@@ -4,95 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D46C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 16:24:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E21C28B20
+	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 17:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A778171B;
-	Sun, 30 Mar 2025 18:24:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id BB79081879;
+	Sun, 30 Mar 2025 19:20:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lximbM4h";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="q7C5Pcbj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E89D081D3B; Sun, 30 Mar 2025 18:24:32 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 56DF78171B; Sun, 30 Mar 2025 19:20:53 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFD0580FDA
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 18:24:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 739E680FDA
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 19:20:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8CD523FE38
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 16:24:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1743351869;
- bh=4WXivJ1JToKzYpvnHsUKR9J8WtmoDUhrUAD8/glakd0=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=lximbM4hypG09gA7e3ZxV4ER/3bvSNIf1ehZ2sNaxzu/IxcBf6zg30bpf1D9wmhUE
- 3PvInokt2EXLU9acKu73q+1XubyQ1QGbAXeto4ON27/yKYrWBOWOG8tOqiWIa+1aMn
- EIA9vva8t5oMjIzJs/VakrmhcewQqTQYMlF4HEo45x7NYQgbatoWTzb8iTC6e1jz8p
- JSasZ9jglLhEUH9r9DQ4D+xyzgV3U01k8ATsT/7Jq+Sgr2VWPrtiV+U3bnvvfCSTqt
- yjyrPaBy7aodhHWANKezuRjiQWsLurwmbJgc578UFFSONtuGBoP1mYjBaD0J0UHiws
- x2xN65Dj4P+/A==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3912fc9861cso1464883f8f.1
- for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 09:24:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743351869; x=1743956669;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4WXivJ1JToKzYpvnHsUKR9J8WtmoDUhrUAD8/glakd0=;
- b=dFy7n4oKBRp4lnczGIr6DISOGd2nqxriQVgIAK64lwwqX3q9y++cOj+IlkzeehccIh
- 3tSHHWOCNLpLZuq4rd2hkxdZ0WCLOapEgRdHWRI72E3Vl2ikCAlzpTYkH1RPmJxrJGAu
- DJ55boYwFwFfEpyWOJFKScsA0HoONkBkswo98eTeWrzDjKS4qq9tjKyTBcdabj2bDUdB
- HoKn26tW0901vPTqTstqqd5RCmS3GJZ6WcDYVY+HEWpY2TufD3FHc4HR/hloQeqi3rtt
- +IVtEHnPHrod6DUiYMAZ9T9vEXvDIR8vBtZVD44QNVKbDrZkqEODeSAnrVGJSLXlH59F
- WHmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUH1/tillBaTdGq0bSbXWoN5e2owPAXH+y+V2iT+TX8Q2U5sOaMT/us8wcyKapWpCvK35bq1P0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3L+JWi5i4Z4MRZU39fCal6Pi5hD8z4NXoXyf6Ej6gW21X7tYt
- LGqdOdvGYcYxdadZXEew94OCfgUlsFcry21VWOG9QURzj1l3j4DyohdMmIR4Ns9MEJUc3IcnAkf
- GwwR5auq74De3ayMP/Xmj4A6zR60bbPr2IYjaFQeQAQdTgM5lyszvm6JMZ+L3PJmwI+4=
-X-Gm-Gg: ASbGnctu1zLYscoykqpO+cq9gwNF3jCC5JG9DotRAKjrlK7GriOAYORi+ZyTgqpgMkA
- JJ/dkXu+8N/1suTSsyrGWUQNMzbax86iJHw2UfEZkJDdi10CwVFBsuCPxrDRI5REX6rI5YsUkkl
- ggFX63OhCCEVoYp6X0WSIbl3LeCTIgyhyj3vhXR05F41fb68SPl4GPt+QWMLXck4BjTfILitGUD
- M7h1vunkQn8gdze1/84wdV1zlNKGsWAiusKYWuhWw6cFG5he2CCcl6PHgqh3fKKH95/zV2/4CIZ
- mfGpu6/vWFR+pkXklSGleQJg/KfVAEBSOnM+kXCriDo7uOrvE5qDu4UW219Vv+D1CEpdTNzHZiu
- QXHLVEHbbu9mmXelkhA==
-X-Received: by 2002:a05:6000:2102:b0:39c:1257:dba9 with SMTP id
- ffacd0b85a97d-39c1257dcbcmr3664432f8f.57.1743351868854; 
- Sun, 30 Mar 2025 09:24:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEG0SJ07DLdJcVjoKwWvKk8yNpSpug0jC5gpVYzfejqLdj/rdWZpZohkEoiNEEW0vA2/KkBDw==
-X-Received: by 2002:a05:6000:2102:b0:39c:1257:dba9 with SMTP id
- ffacd0b85a97d-39c1257dcbcmr3664418f8f.57.1743351868434; 
- Sun, 30 Mar 2025 09:24:28 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6630a3sm8941956f8f.30.2025.03.30.09.24.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Mar 2025 09:24:27 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, E Shattow <lucent@gmail.com>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] riscv: dts: jh7110: add bootph-pre-ram for &pllclk
-Date: Sun, 30 Mar 2025 18:24:21 +0200
-Message-ID: <20250330162421.238483-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ smtp.mailfrom=SRS0=c171=WS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1743355249;
+ bh=5RMHYPccOTJXT/RomCzTUjScDIuUZk8bDlgkVZ5eYKk=;
+ b=q7C5PcbjPvz+317wB5VmsymgxV+Fay3MBkubuO0P20+9sWIysSYLe8ua/hICJ5KWBk5TqHF3Y
+ lTQgcU4jhQKWdVxC9qUhX8eegFDQXjGbP1YI07qdpof7hH1uuDHoRIrFRZc2E+8oKnWdwToEja4
+ uxPaCQj4f2y9KOHL+RR3klSqRlEbZoV9kOD7m2EXYBBa+r5GNQ5oVpVo2tTizYsUD3PXC3QeIhX
+ 1qQf5HDVl/ajPNSjV9xGl5yeMIgYffhNOEkHuMQWfTOygk5tXPF3lKSLe5Y4XsewppzvUggJs2c
+ yn0yVRoz4b8GAc/b+llaQ8CO1S8flEA6IiuNy9PnVHTA==
+X-Forward-Email-ID: 67e97d6e8935e384c291932c
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 0/2] rockchip: Add minimal generic RK3328 and RK3399 boards
+Date: Sun, 30 Mar 2025 17:20:33 +0000
+Message-ID: <20250330172040.3370919-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,42 +69,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit f98cd471f06b ("clk: clk-composite: Resolve parent clock by
-name") the StarFive VisionFive 2 board fails to boot.
+This series adds minimal generic board targets for RK3328 and RK3399,
+like existing minimal generic boards for RK3566/RK3568, RK3588S/RK3588,
+pending RK3528 [1] and upcoming RK3576 targets.
 
-Before that patch the SPL debug UART showed warnings like:
+These generic boards can be used to boot into U-Boot and/or Linux on
+most boards that follow reference board design with the use of Rockchip
+TPL blobs. E.g. to use USB OTG with rockusb or ums to access eMMC,
+SD-card or SPI flash storage.
 
-    clk_register: failed to get pll0_out device (parent of perh_root)
-    clk_register: failed to get pll0_out device (parent of qspi_ref_src)
-    clk_register: failed to get pll0_out device (parent of usb_125m)
-    clk_register: failed to get pll0_out device (parent of gmac_src)
-    clk_register: failed to get pll0_out device (parent of gmac1_gtxclk)
-    clk_register: failed to get pll0_out device (parent of gmac0_gtxclk)
+I have tested several of the different RK3328 and RK3399 boards I have,
+and boards can boot into U-Boot regardless of DRAM type with latest ddr
+init blobs.
 
-The &pllclk clock needs to be enabled early.
+Changes in v2:
+- Rebase on next after TPL_HAVE_INIT_STACK change
+- Add CONFIG_ROCKCHIP_IODOMAIN is not set to generic-rk3399 due to [3]
 
-Fixes: f98cd471f06b ("clk: clk-composite: Resolve parent clock by name")
-Suggested-by: Marek Vasut <marex@denx.de>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- arch/riscv/dts/jh7110-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+This series depends on the series "rockchip: ROCKCHIP_COMMON_STACK_ADDR
+improvements" v2 [2] for a clean apply.
 
-diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi b/arch/riscv/dts/jh7110-u-boot.dtsi
-index ce7d9e16961..a9e318c4a31 100644
---- a/arch/riscv/dts/jh7110-u-boot.dtsi
-+++ b/arch/riscv/dts/jh7110-u-boot.dtsi
-@@ -102,6 +102,10 @@
- 	bootph-pre-ram;
- };
- 
-+&pllclk {
-+	bootph-pre-ram;
-+};
-+
- &syscrg {
- 	bootph-pre-ram;
- };
+[1] https://patchwork.ozlabs.org/patch/2038159/
+[2] https://patchwork.ozlabs.org/cover/2050003/
+[3] https://patchwork.ozlabs.org/patch/2042445/
+
+Jonas Karlman (2):
+  board: rockchip: Add minimal generic RK3328 board
+  board: rockchip: Add minimal generic RK3399 board
+
+ arch/arm/dts/rk3328-generic-u-boot.dtsi | 39 +++++++++++
+ arch/arm/dts/rk3328-generic.dts         | 76 +++++++++++++++++++++
+ arch/arm/dts/rk3399-generic-u-boot.dtsi | 10 +++
+ arch/arm/dts/rk3399-generic.dts         | 83 +++++++++++++++++++++++
+ arch/arm/mach-rockchip/Kconfig          |  2 +-
+ board/rockchip/evb_rk3328/MAINTAINERS   |  6 ++
+ board/rockchip/evb_rk3399/MAINTAINERS   |  6 ++
+ configs/generic-rk3328_defconfig        | 90 +++++++++++++++++++++++++
+ configs/generic-rk3399_defconfig        | 77 +++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst         |  2 +
+ 10 files changed, 390 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/rk3328-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3328-generic.dts
+ create mode 100644 arch/arm/dts/rk3399-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3399-generic.dts
+ create mode 100644 configs/generic-rk3328_defconfig
+ create mode 100644 configs/generic-rk3399_defconfig
+
 -- 
-2.48.1
+2.49.0
 
