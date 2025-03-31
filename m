@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B287C36013
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 07:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 669DEC36017
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 07:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 412F181F00;
-	Mon, 31 Mar 2025 09:24:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E0E781F30;
+	Mon, 31 Mar 2025 09:24:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="t6mDvFOe";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V/7tc4Pr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D38A881EBB; Mon, 31 Mar 2025 09:24:27 +0200 (CEST)
+ id BD37881E18; Mon, 31 Mar 2025 09:24:28 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7CF2817C4
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 09:24:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3B3381E60
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 09:24:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-110-051.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C448B3FFC9; 
- Mon, 31 Mar 2025 07:24:21 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 34B183FFCB; 
+ Mon, 31 Mar 2025 07:24:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1743405862;
- bh=OXo5qVVyfYJSlY7Yftz+LjfJH1eZM+Vo0g0j3e9UmZ4=;
+ s=20210705; t=1743405863;
+ bh=gLhJVdZ9Y9AWplx7vvfHlwZ8HfHMzm63pVyd79VsX+U=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=t6mDvFOej3W1rrv00jP7geddajdQWyepvpeAYlrS9BfiDeb9u3dcE6rMBCD+F8J5c
- fqCOSxyQUAB5Y/slwUlSMk1vJpgctzhHTD00q8ZCCIwxCgUtpJoCqM03qqZ7C+sZYW
- cKDp1ioFLPGiriBOdwPO3GXRK6JPhtaFZdM1t1p+GqCUBlmdtL5geZH+aJk81v+kKA
- FKDYt2d6Dgn7AGMzjGA27HRLb0n7sNOrGMcika+AdJaf/gdi5ts5AsippwioPq8cEG
- lRe9TtuL3oWmmDX8HRa1eBySwTTa6H5TReqWo3H7qgrBK9cpbcPkARoF4LX1Hsq0ht
- 2GSOZ1GYnP89g==
+ b=V/7tc4Prxkh5qNy31kJmqbxYqW4FtKdEGVmiMBQI4ZNtrMvyDY/iL5Gu3XE+d6UKH
+ ny3ngtwToKrazH6O0wLHZop0RqHrO3ExyrPUrZYHYCycJQg4tTsjDkZX/mbyUStTBZ
+ p2Csi5jsQusoz3xClLOteLIBUujC4kYy3X/mqExq6HN2EG0jqXikuygKbAndgeBThP
+ wkr2dHlp9hpmKmcWSwyiGXEDcop2++Bk12vO9fC4glb3sPsNf4C8Zacna0juInnR8k
+ EuRjfTNrWugKip4tp2RnkiELrh5mrOOPig/tf/pwbdsTfK8CHWAl84mcPlw6kPm1Uq
+ GwmhLhODMJJxg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>,
@@ -55,9 +55,9 @@ Cc: E Shattow <e@freeshell.de>, E Shattow <lucent@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 3/8] board: starfive: DeepComputing FML13V01 fdt selection
-Date: Mon, 31 Mar 2025 09:24:05 +0200
-Message-ID: <20250331072410.8662-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 4/8] board: starfive: spl: support DeepComputing FML13V01
+Date: Mon, 31 Mar 2025 09:24:06 +0200
+Message-ID: <20250331072410.8662-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250331072410.8662-1-heinrich.schuchardt@canonical.com>
 References: <20250331072410.8662-1-heinrich.schuchardt@canonical.com>
@@ -79,45 +79,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We support all JH7110 boards with starfive_visionfive2_defconfig.
-The relevant device-tree is selected at runtime based on EEPROM data.
-
-Support setting $fdtfile to the file name of the DeepComputing Framework
-motherboard (FML13V01) device-tree.
+On the DeepComputing Framework motherboard (FML13V01) choose the matching
+FIT configuration.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
 ---
 v2:
-	no change
+	rebased
 ---
- board/starfive/visionfive2/starfive_visionfive2.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ board/starfive/visionfive2/spl.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-index 3940d45b13f..55daf730c81 100644
---- a/board/starfive/visionfive2/starfive_visionfive2.c
-+++ b/board/starfive/visionfive2/starfive_visionfive2.c
-@@ -17,6 +17,8 @@
- DECLARE_GLOBAL_DATA_PTR;
- #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
- #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
-+#define FDTFILE_FML13V01 \
-+	"starfive/jh7110-deepcomputing-fml13v01.dtb"
- #define FDTFILE_MILK_V_MARS \
- 	"starfive/jh7110-milkv-mars.dtb"
- #define FDTFILE_MILK_V_MARS_CM \
-@@ -67,7 +69,9 @@ static void set_fdtfile(void)
- 		log_err("Can't read EEPROM\n");
- 		return;
- 	}
--	if (!strncmp(product_id, "MARC", 4)) {
-+	if (!strncmp(product_id, "FML13V01", 8)) {
-+		fdtfile = FDTFILE_FML13V01;
-+	} else if (!strncmp(product_id, "MARC", 4)) {
- 		if (get_mmc_size_from_eeprom())
- 			fdtfile = FDTFILE_MILK_V_MARS_CM;
- 		else
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index 13a48939c8f..52f75471de5 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -125,7 +125,10 @@ int board_fit_config_name_match(const char *name)
+ 	if (strncmp(name, "starfive/", 9))
+ 		return -EINVAL;
+ 	name += 9;
+-	if (!strncmp(product_id, "VF7110", 6)) {
++	if (!strncmp(product_id, "FML13V01", 8) &&
++	    !strcmp(name, "jh7110-deepcomputing-fml13v01")) {
++		return 0;
++	} else if (!strncmp(product_id, "VF7110", 6)) {
+ 		version = get_pcb_revision_from_eeprom();
+ 		if ((version == 'b' || version == 'B') &&
+ 		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
 -- 
 2.48.1
 
