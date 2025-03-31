@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C84CC36014
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 20:31:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65190C36014
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 20:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8741F8129B;
-	Mon, 31 Mar 2025 22:31:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88D0F81703;
+	Mon, 31 Mar 2025 22:34:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rgjy5qqX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jpqj6PK6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E9C81703; Mon, 31 Mar 2025 22:31:38 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id EDC3081DE3; Mon, 31 Mar 2025 22:34:15 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5B3780584
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 22:31:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADD5480584
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 22:34:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-391342fc1f6so4316232f8f.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 13:31:35 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43cfb6e9031so44310545e9.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 13:34:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743453095; x=1744057895; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743453252; x=1744058052; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YRwJZCMyy4E1l2DXxGW4CahrQWyewIbspZDMXktGJo4=;
- b=Rgjy5qqX4o9rKlyNRQUdXg4ewGJGFZaunMy6z8TWw53vCLowNFzVk+Sld8eNZxaqwZ
- DYzPf2O8TvXb4rhsALZVsDCi8NtVg1RnuIK9r3ic8ifs23U+XwBieiRtA0Y0u43UEhHV
- ZIDOeekkIfonJdZjUlUNJ27KaMqHIZSVjFUlRnosaA4CrsRnaGu2qnGULIexwHpBTNjr
- p8vGtXwmrdmDowmMYeSLvZk+6aOJbptTFDVbXZ+aeKeAjDvVIG+DRoncY8hOVFRlyrVH
- WJNqaYeM1P/r0CsBIb3IhDNi6KbJxXVvRNDRs2p0P/OrJyqfvdFFicDYGIbC1jw6db+m
- Q6rA==
+ bh=Ta55y4trmFqa9J2gSLK6y3b82rOxekysvMikkyHIztE=;
+ b=jpqj6PK60eAxIveV/RWpgjcEZdK0MeOJsrYX/TEYCsMyt6m3rDUAsl2CHkhbayTz3i
+ 5bQterwNGLj993kGAIyygIToClqim9F9RhKEtV+1T7JWCGNtySyMVHum5MCC713eAoOc
+ BEfNBy3qQ4rRlvd82l2f8L0wNDcrr2BR8AUd6J9Fp9PRe8WR6JMXIBOao+JCt4cIgMY8
+ xxV3csdx4VeRqsuSRlUjDXEX7AcsjpCTFWKHU9L29DunpuUHd2Yr/q8gM/D7J7EYpwKr
+ 8TVloUubJVkor41AgB/H7mL1C/G7oC3VyQgadrtIuT1pUh8ciBpI30fvHRYxmXKv5Hvm
+ wpHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743453095; x=1744057895;
+ d=1e100.net; s=20230601; t=1743453252; x=1744058052;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YRwJZCMyy4E1l2DXxGW4CahrQWyewIbspZDMXktGJo4=;
- b=dK0bkO1x0hvYnvVXsxQB9Xizl6J0+CHJeO6CzqWzlsSzqNJ2I0hD16Dh/1zLzDnMfY
- 21JWL8rsHNmOnZ0tOR3dnsyu95vmrlAX9pQc613zlvgZCwzpzLIxzM/r9NcTb1UO1aWN
- hDgMaIerBYJR1gnbV/f2KvoasP4+gVgMEbva6sUUfi+GHE6WofcdRuBrNMcmk7w33waW
- mYnZ7MFfBC+eXM93fkmTBAicK7VMkqQVbNJyzIhHKuL3X6Er1dg1on76a9gretrocDMp
- g/BhJhodcAuiDL4+/cfMqo21M8NBZRsA6HQn8C67xV91nfD9TWDD27nx3ThUluguj48T
- K6ew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUt9J5B/9p75QmanbasEXiaQXX3gajoiJtPSP7Ap76NHRox4ntSTSmQu9nYFPxU2r4k61fJB5A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4/MgVMPw2EGrmo9uRru6vHWBYWzdew3KFVZI0jVyjsd9fAMZ8
- dwnbCuDrgDs1uhaK3OYfBhM2Bis90DGAKdezA1K7k7bEv++FiR08pNhq3CtDtv8=
-X-Gm-Gg: ASbGncvTaR0Xc/LPHcfRXyRN1rkMuArJ2dFRuIbSnLqVSh9a46ANUBGbdT38X0XYrGN
- s+d3xOY6qhCzRAHfshePsLsM8eRJekentet1hpTkMR8vWRD/7OokB2izhAsR/VUBxHhPYCG6G/D
- AA3IQMkODTRyOujjMIfLVyLvBNRdAPUoHiAzfg5ZIE8U7m1Qai2/Yr+xW3vx1JPCeYPLdiaKYv6
- m4LkD99sfXZgeBqW0ZGzNMIlUrlpTDzZcwGFQLFsWo7IV7vKAC2MaCJHnOCq4nLcfzAEcNJbFyV
- OTd+3LpQJVQEQsBMY0Gn9nMkN5kQxAcX1e6oRgm20RQGxY2bJmOH
-X-Google-Smtp-Source: AGHT+IEu5Uuq9u1HTG5t6rEuxDaA1Q7Z+0Hw8+nTLg8KqUpWBy1dUdfICDIgmSciewd8bggV+cDpFw==
-X-Received: by 2002:a05:6000:40cf:b0:399:728f:4673 with SMTP id
- ffacd0b85a97d-39c120e16eemr7208546f8f.33.1743453095070; 
- Mon, 31 Mar 2025 13:31:35 -0700 (PDT)
+ bh=Ta55y4trmFqa9J2gSLK6y3b82rOxekysvMikkyHIztE=;
+ b=IQHetXoxKPppzxISi0SU3ixxo9I+0VJh8Eh/vlgEMSZZiljkBsQDzCCBTW99dPh4eo
+ NZZNLiI9iZlz1IhZ9OMXd7NaM4iEidkNuhDoL+l3b5pzOBz556+Z0T38s4U+u7OWrTiS
+ lhpAfi5HEop7MkJzv/y1OWuxvZWxkmb10TZSxDo0uT5SzAGCMDrmzuZsWPcewyDDq3nu
+ jJnB4GqoPM6H9Z6c+/9qvsY5QjaZh0r8r1EOXycxy3KYazdp4qZQEc6t0sT2T4eRi/fR
+ A5a3UHEdn+QqH/nZZOId4mWzkyyyhW8clDfAXXfIBtWVkRrGli7ZHys9gZRHEGoytHdv
+ Qu7Q==
+X-Gm-Message-State: AOJu0YxJecLKDagVXDPNF0rC8fxOb0rXp/RYdPwCNKq9muY/4uw0FVIm
+ gcwDI9ufkVjgMn3jay/c+4OczfPg7Xj4xD0Kt9u7dzROTK6LR59IcsXimtqkLNHjw7PMqCqgO3o
+ u
+X-Gm-Gg: ASbGncvuNwqv/mEUINze8hGm5vHJM5x5AOs/lx26JFnvIQufkR2heOAB37Gtuw+pN7D
+ jxUa4JfNpJLpA4njSREbf4BMnoMtYSAeoTArIDjuByziJ4WQ9ZEh0nyZ0yqaE/Jtm0F+7STTCbl
+ 5Vlr+mTt0FQ0NoAUKt+Vy2/BXzg2xt/Dc+kEQGSmMdC3VoycRGjGl9emxJWrRbO43JDmK7AYZu4
+ /3Kkh3G/rbyLR9qq+aLxneQgQE7yQ1juvX3I0LxgWllbrzmdY0zGnKq0V27HDAMr3OwdbdY4Y9y
+ kGXTBoDzESqV7qfzDOgLBJ9n5QE7tO9bu0RmTJ/j8IJ5VrPqbev0AnKcIBCvvqE=
+X-Google-Smtp-Source: AGHT+IGErqNQqSWqvT6cN/7To/hiGhEVvxULoFoHL/tcqQ1RKgNQBiJ1HCmmHJK1JdTl7FH+g0op0g==
+X-Received: by 2002:a05:6000:1acd:b0:391:3124:f287 with SMTP id
+ ffacd0b85a97d-39c120de782mr7808925f8f.16.1743453252167; 
+ Mon, 31 Mar 2025 13:34:12 -0700 (PDT)
 Received: from [192.168.0.24] ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b79e31csm12349056f8f.68.2025.03.31.13.31.34
+ ffacd0b85a97d-39c0b658b5dsm12061648f8f.3.2025.03.31.13.34.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Mar 2025 13:31:34 -0700 (PDT)
-Message-ID: <8dfa72b1-b7ba-4173-9354-498b6e09bc45@linaro.org>
-Date: Mon, 31 Mar 2025 23:31:33 +0300
+ Mon, 31 Mar 2025 13:34:11 -0700 (PDT)
+Message-ID: <60ab9c6e-8db8-4054-bf7e-f2352dbeeb9e@linaro.org>
+Date: Mon, 31 Mar 2025 23:34:11 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] sama5d27: Fix the 'reset' command
-To: Fabio Estevam <festevam@gmail.com>
-Cc: nicolas.ferre@microchip.com, trini@konsulko.com, greg@embeddedgreg.com,
- u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-References: <20250331180436.2305205-1-festevam@gmail.com>
+Subject: Re: [PATCH v2 2/3] ARM: dts: sam9x60: Add USB gadget DT node.
+To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250331162611.1557759-1-admin@hifiphile.com>
+ <20250331162611.1557759-3-admin@hifiphile.com>
 Content-Language: en-US
 From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250331180436.2305205-1-festevam@gmail.com>
+In-Reply-To: <20250331162611.1557759-3-admin@hifiphile.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,166 +102,39 @@ X-Virus-Status: Clean
 
 
 
-On 3/31/25 21:04, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@denx.de>
+On 3/31/25 19:26, Zixun LI wrote:
+> Add the USB gadget DT node for the sam9x60 SoC's.
 > 
-> Since commit 61040097a9d1 ("reset: at91: Add reset driver for basic
-> assert/deassert operations") the "atmel,sama5d3-rstc" compatible for
-> the sama5d2 reset controller in sama5d2.dtsi is not handled by
-> CONFIG_SYSRESET_AT91 anymore, but by CONFIG_RESET_AT91 now.
-> 
-> This resulted in the following error, when trying to reset from the U-Boot
-> shell on a sama5d27_wlsom1 board:
->     
->  => reset
->  resetting ...
->  System reset not supported on this platform
->  ### ERROR ### Please RESET the board ###
-> 
-> Fix it by enabling the CONFIG_RESET_AT91 driver in all sama5d27 defconfigs.
-> 
-> Tested on a sama5d27_wlsom1 board.
-> 
-> Based on the fix in commit e1ee52ca56fc ("configs: at91: sam9x60: Switch
-> to new reset driver")
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+
+Reviewed-by: Eugen Hristev <eugen.hristev@linaro.org>
+
 > ---
-> Eugen/Tom,
+>  arch/arm/dts/sam9x60.dtsi | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 > 
-> This is material for 2025.04.
-
-This is something that would happen for a few years now, why the rush ?
-There is still time for a fixes PR though .
-Can you add a fixes tag then ?
-
-> 
->  configs/sama5d27_giantboard_defconfig          | 2 ++
->  configs/sama5d27_som1_ek_mmc1_defconfig        | 2 ++
->  configs/sama5d27_som1_ek_mmc_defconfig         | 2 ++
->  configs/sama5d27_som1_ek_qspiflash_defconfig   | 2 ++
->  configs/sama5d27_wlsom1_ek_mmc_defconfig       | 2 ++
->  configs/sama5d27_wlsom1_ek_qspiflash_defconfig | 2 ++
->  6 files changed, 12 insertions(+)
-> 
-> diff --git a/configs/sama5d27_giantboard_defconfig b/configs/sama5d27_giantboard_defconfig
-> index ad1621a94dd7..0b7940f4fb43 100644
-> --- a/configs/sama5d27_giantboard_defconfig
-> +++ b/configs/sama5d27_giantboard_defconfig
-> @@ -14,6 +14,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_giantboard"
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_DM_RESET=y
->  CONFIG_SYS_MONITOR_LEN=524288
->  CONFIG_SPL_MMC=y
->  CONFIG_SPL_SERIAL=y
-> @@ -84,6 +85,7 @@ CONFIG_DM_SPI_FLASH=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_AT91PIO4=y
-> +CONFIG_RESET_AT91=y
->  CONFIG_DM_SERIAL=y
->  CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_ATMEL_USART=y
-> diff --git a/configs/sama5d27_som1_ek_mmc1_defconfig b/configs/sama5d27_som1_ek_mmc1_defconfig
-> index bb29121bb156..2e5a4acf27d8 100644
-> --- a/configs/sama5d27_som1_ek_mmc1_defconfig
-> +++ b/configs/sama5d27_som1_ek_mmc1_defconfig
-> @@ -14,6 +14,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_DM_RESET=y
->  CONFIG_SYS_MONITOR_LEN=524288
->  CONFIG_SPL_MMC=y
->  CONFIG_SPL_SERIAL=y
-> @@ -93,6 +94,7 @@ CONFIG_MACB=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_AT91PIO4=y
-> +CONFIG_RESET_AT91=y
->  CONFIG_DM_SERIAL=y
->  CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_ATMEL_USART=y
-> diff --git a/configs/sama5d27_som1_ek_mmc_defconfig b/configs/sama5d27_som1_ek_mmc_defconfig
-> index 308aafc7dfe5..11a536d714c3 100644
-> --- a/configs/sama5d27_som1_ek_mmc_defconfig
-> +++ b/configs/sama5d27_som1_ek_mmc_defconfig
-> @@ -15,6 +15,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_DM_RESET=y
->  CONFIG_SYS_MONITOR_LEN=524288
->  CONFIG_SPL_MMC=y
->  CONFIG_SPL_SERIAL=y
-> @@ -93,6 +94,7 @@ CONFIG_MACB=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_AT91PIO4=y
-> +CONFIG_RESET_AT91=y
->  CONFIG_DM_SERIAL=y
->  CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_ATMEL_USART=y
-> diff --git a/configs/sama5d27_som1_ek_qspiflash_defconfig b/configs/sama5d27_som1_ek_qspiflash_defconfig
-> index ac14dd53838d..86cb5c287be1 100644
-> --- a/configs/sama5d27_som1_ek_qspiflash_defconfig
-> +++ b/configs/sama5d27_som1_ek_qspiflash_defconfig
-> @@ -15,6 +15,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
->  CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_DM_RESET=y
->  CONFIG_SYS_MONITOR_LEN=524288
->  CONFIG_SPL_MMC=y
->  CONFIG_SPL_SERIAL=y
-> @@ -92,6 +93,7 @@ CONFIG_MACB=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_AT91PIO4=y
-> +CONFIG_RESET_AT91=y
->  CONFIG_DM_SERIAL=y
->  CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_ATMEL_USART=y
-> diff --git a/configs/sama5d27_wlsom1_ek_mmc_defconfig b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-> index 6db27280f0fa..014f0093eee6 100644
-> --- a/configs/sama5d27_wlsom1_ek_mmc_defconfig
-> +++ b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-> @@ -13,6 +13,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_wlsom1_ek"
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_DM_RESET=y
->  CONFIG_SYS_MONITOR_LEN=524288
->  CONFIG_SPL_MMC=y
->  CONFIG_SPL_SERIAL=y
-> @@ -99,6 +100,7 @@ CONFIG_MACB=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_AT91PIO4=y
-> +CONFIG_RESET_AT91=y
->  CONFIG_DM_SERIAL=y
->  CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_ATMEL_USART=y
-> diff --git a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-> index 765565265165..efe23115f620 100644
-> --- a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-> +++ b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-> @@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
->  CONFIG_SPL_DM_SPI=y
->  CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_wlsom1_ek"
->  CONFIG_OF_LIBFDT_OVERLAY=y
-> +CONFIG_DM_RESET=y
->  CONFIG_SYS_MONITOR_LEN=524288
->  CONFIG_SPL_SERIAL=y
->  CONFIG_SPL_DRIVERS_MISC=y
-> @@ -103,6 +104,7 @@ CONFIG_MACB=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_AT91PIO4=y
-> +CONFIG_RESET_AT91=y
->  CONFIG_DM_SERIAL=y
->  CONFIG_DEBUG_UART_ANNOUNCE=y
->  CONFIG_ATMEL_USART=y
+> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+> index 3b684fc63d5..ea2647e5fc9 100644
+> --- a/arch/arm/dts/sam9x60.dtsi
+> +++ b/arch/arm/dts/sam9x60.dtsi
+> @@ -69,6 +69,19 @@
+>  		#size-cells = <1>;
+>  		ranges;
+>  
+> +		usb0: gadget@500000 {
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+> +			compatible = "microchip,sam9x60-udc";
+> +			reg = <0x500000 0x100000>,
+> +				<0xf803c000 0x400>;
+> +			clocks = <&pmc PMC_TYPE_PERIPHERAL 23>, <&pmc PMC_TYPE_CORE 8>;
+> +			clock-names = "pclk", "hclk";
+> +			assigned-clocks = <&pmc PMC_TYPE_CORE 8>;
+> +			assigned-clock-rates = <480000000>;
+> +			status = "disabled";
+> +		};
+> +
+>  		usb1: usb@600000 {
+>  			compatible = "atmel,at91rm9200-ohci", "usb-ohci";
+>  			reg = <0x00600000 0x100000>;
 
