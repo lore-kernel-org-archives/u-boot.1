@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75FDCC3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F8BC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C68C881F7B;
-	Mon, 31 Mar 2025 15:46:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B45781FDE;
+	Mon, 31 Mar 2025 15:46:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="btOKaFdg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hsKnm8w8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20FFF81ECD; Mon, 31 Mar 2025 15:46:20 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 4529881E60; Mon, 31 Mar 2025 15:46:21 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C31FB8144A
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2491481E47
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72c13802133so1269251a34.3
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:17 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72b7a53ceb6so2408945a34.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743428776; x=1744033576; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743428778; x=1744033578; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YKKBUslwCLHr8fQtdjEiCG5RargjRDag4F3UEmgKpm0=;
- b=btOKaFdgwvmojjnGgOcgQqDNunNQOoBJD2VOpNGPadwmS4eR9Zw4Hb82TLGRxD0JNA
- cXD4E5ocYAS79Y4sexALlyoK6KhtO9UzvJJIHoUMTfKlrIGFSSCXK1/CmqSf+4Ttj8RP
- O0jmMKDN4vTzUFnceSe6fn2lE9DyAudUZgraA=
+ bh=u0vxiwIuUF1a7fPe5RPPR6W77QLvcdWTtk6ecdmXN9M=;
+ b=hsKnm8w8sjTaUGLNhnwIkedbN0UCxA/ZtLRrKSF6EqTFaZpKXFHGCBmri9MmT4QQ/6
+ tzTVdnoGf6H4JyPELArln8dqUBz4WLrkyS2jz299Y5+wstnQA+pYb44QQLXO2uMobqV7
+ FCuZIq3EiH37/5i9aECqIboHCAVAT0VFr+eCI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743428776; x=1744033576;
+ d=1e100.net; s=20230601; t=1743428778; x=1744033578;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YKKBUslwCLHr8fQtdjEiCG5RargjRDag4F3UEmgKpm0=;
- b=JPJD/ri+Owu4aJGFxQgn8dIuc09r1KKTxi7fKbCtQr8OxEBhJo7eo1mWO0rJoTUaTo
- wBKAm+OwX9+OckttpOB/lfVZhBzBzy/GGKttZ6pk/DlpdfMkeBxk2vr9vPHJUtKwv6KC
- dsZdnXTTDslwChHKm0xffUENVo27gy2WRHvhCYbrCWDP3fO3H+P14F18vW/Wdpvq+ptX
- EVjP4G7zKUlLsG+rQfAlpw/hr4c3U75XU+V0fUDVUQ4BdjfjZflUV0Lidp2oB/FDOyuG
- WMOhB7ll38MDhMB7vojFDsx2ztG0K+oOuEeAWvKoX+93MqwNIyeX1DxQFxK8QeQ9Yzsd
- Pddw==
-X-Gm-Message-State: AOJu0YzayS+JzetWtJtSHlzzBR0kAVJw76djjdjpgff9j1hao+zzLReY
- l0g9XOarxzhtp7QbMK7bll+R7L6Ges6i0UvXDXlwwy3CSYXp85wLJNg41yvltBzjD3sweenMlG3
- 3
-X-Gm-Gg: ASbGncuXYaKMxmpG9ptRFtMFyfpbCKV3ryNVzFqjXDif/1V2F7vzRdj3Ac58tTuAz6S
- n6tO3ZiSep2lomlQIdW/QtJs9V9f9M7jHzhSRSxo+Lq6RMjzVpKhC5sZXFe64COde5Sn1dmzEcN
- VlteL8oe37zrarLAdnn8pCVy4RbP9s6VbmSYALe3rgIR5nOZ2YdUjIOgSWzjSKuuOM5tZ3mHxr1
- XKUX/RCk2D5glRjvyZJbJvV5du4+crgO4uKy05NSsKpAB6rMmuvDw59m1+GY89qynE2OagWa2af
- dypKKdJ/p2jo51lkZAcLtqwxQf+8YaneW4eymUNcJOqsSJKDazzOVxRJIQHO52eUeM7QlkrMABv
- Igvgv
-X-Google-Smtp-Source: AGHT+IGrfYB2eHzipejq7vf60X/pGJn4VgUi1TtnUNAl3pgB4oc3E/dGLWA3nkEFU6kFshCaOcCFDA==
-X-Received: by 2002:a05:6830:44ac:b0:727:423c:95d5 with SMTP id
- 46e09a7af769-72c6377db9cmr5811879a34.3.1743428776255; 
- Mon, 31 Mar 2025 06:46:16 -0700 (PDT)
+ bh=u0vxiwIuUF1a7fPe5RPPR6W77QLvcdWTtk6ecdmXN9M=;
+ b=WsU/R7QiWmsJNg7X0Home0RZRVd5si91CrWvs8EbppwnbZjJeofS6t/zX1Au52360c
+ 4MBHK5HCtyu1dEWFpRgc+Gz2gW98PysUHkfvBId1mrgZalpIwiX4vzI1sSpuhq0xSM38
+ wqyamxipVn+ebGOu0QIVmfcdZ8y7AQmc31IZMPppnQeCnkDTtpawVAeK4T00j8QRq93s
+ /v7D/g0/EdeiBXFaxthwt30oEUKsskOT9EA+f38Pu5ga6sncxFK1z4CofiW4Ns8YsVvZ
+ AJWHP+vHGf4Fjgspl7HbMiLfoIMlmnMCABlsr8CFJtDKxCHxZbk3uEFQorj76vCD4e5y
+ GI0Q==
+X-Gm-Message-State: AOJu0YwvXhPVcwaQuq0peRymFKE1HVo//G3Hx9k3A407ZVipqppvVhSA
+ i+g/gM27+w9K4GEDp33eqkSWhjhYDSH2CBy8c3Oypq43ZmT4zxivjNCF/oyTa1QZ8vN8yf2l1Hz
+ r
+X-Gm-Gg: ASbGncur2c7nqbrv/ghv+pWssXWWqFQfXWdmPnOTCSTpN4qghpShCg+75yYBhSb/PBI
+ BNk1mE9S2Iv6cNFsWhG87lC21NdusX98+brN1mEOKonSUVJH6zuQ0e4YL4QC962LMG9jZn2Gokb
+ zYU2jNdp5uJpmz3f0J3ig4GmZrrz8tHly40ZufYKksQzptya2Cx2keApKxgKRIFbVB3fo4TkNZu
+ E9JMcWNTyiLjPMCF7w4Fw97ZsojyQf1hrCU02IeXr2kE3znY4uuBMLXVUUYMH/LWdL/f2LLOHWI
+ K5xPso5eCPCxP+Ex/q2c4i5M7Gh3QumsrfNsRcHN05+5nuzFIf8FI7gvREhBjaXKLfYdnfEXgn3
+ fPE+J
+X-Google-Smtp-Source: AGHT+IFtgn0RtWqTNxI8dHyGPN/0bWNmDa3Hr/t3JHMhKLbWzgZi8xHskCmxKnhtFuwNutmvCfZr+A==
+X-Received: by 2002:a05:6830:699b:b0:72b:7be8:7ef7 with SMTP id
+ 46e09a7af769-72c59a46f1amr8980502a34.9.1743428777752; 
+ Mon, 31 Mar 2025 06:46:17 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.14
+ 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 06:46:15 -0700 (PDT)
+ Mon, 31 Mar 2025 06:46:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-In-Reply-To: <20250307032213.75754-1-weijie.gao@mediatek.com>
-References: <20250307032213.75754-1-weijie.gao@mediatek.com>
-Subject: Re: [PATCH] arm: mediatek: remove wmcpu-reserved@50000000 node
- from mt7987 dts
-Message-Id: <174342877491.1318045.17313521476646873483.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 07:46:14 -0600
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Sam Shih <sam.shih@mediatek.com>
+In-Reply-To: <8ca87e744999373b87ea7dab46b7724e1ae35b88.1741317191.git.weijie.gao@mediatek.com>
+References: <8ca87e744999373b87ea7dab46b7724e1ae35b88.1741317191.git.weijie.gao@mediatek.com>
+Subject: Re: [PATCH 1/2] pwm: mediatek: add pwm support for MediaTek MT7987 SoC
+Message-Id: <174342877640.1318045.10449564178734133090.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 07:46:16 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,18 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 07 Mar 2025 11:22:13 +0800, Weijie Gao wrote:
+On Fri, 07 Mar 2025 11:22:23 +0800, Weijie Gao wrote:
 
-> The reserved-memory node 'wmcpu-reserved@50000000' only applies to
-> linux kernel and is useless in u-boot.
-> Remove it in *-u-boot.dtsi to make this memory region usable.
+> This patch adds pwm support for MediaTek MT7987 SoC.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm: mediatek: remove wmcpu-reserved@50000000 node from mt7987 dts
-      commit: 2d611c2a02683ccee7b085f1f1e7b1b2edc5c773
+[1/2] pwm: mediatek: add pwm support for MediaTek MT7987 SoC
+      commit: f87b959080d95528c93cc7fcae84768aafc75740
+[2/2] arm: dts: mediatek: disable fan node for mt7987
+      commit: bc09d20b51336ab61a5ea9c373275338752f9a9c
 -- 
 Tom
 
