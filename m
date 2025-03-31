@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE70C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 16:50:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E97CC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:00:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B92398171B;
-	Mon, 31 Mar 2025 18:50:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kohlschutter.com
+	by phobos.denx.de (Postfix) with ESMTP id 323B78171B;
+	Mon, 31 Mar 2025 19:00:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kohlschuetter-com.20230601.gappssmtp.com header.i=@kohlschuetter-com.20230601.gappssmtp.com header.b="MW/epclb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ObUZEgSs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A9C781026; Mon, 31 Mar 2025 18:50:06 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 932D48171B; Mon, 31 Mar 2025 17:06:46 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73CC981026
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 18:49:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=kohlschutter.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6359D81026
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 17:06:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian@kohlschuetter.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5e677f59438so7054358a12.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 09:49:58 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j4g8y7@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43d04dc73b7so51966615e9.3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 08:06:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kohlschuetter-com.20230601.gappssmtp.com; s=20230601; t=1743439798;
- x=1744044598; darn=lists.denx.de; 
- h=to:cc:date:message-id:subject:mime-version
- :content-transfer-encoding:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lx2XU/NmERWsYvZ48LwHeM4pRGEkQeb7VVKf3LBnt2A=;
- b=MW/epclbBLmyaeu6LJeW4P3ibZTXhH+iIM7I4ESXs8drk/GiYMNAEHpGsoAQvUlHOl
- qHuZMBPtWSEk34b5UOhVewa0noQJv1WGDotvC0E0Bnw+BWDahEaxbCEr8zhlL+ODhJ2s
- XKaqhuxZ6Xl9cdKnQdqqtPQFBhTocP6Zyd3wQiHbr08kDzwrYvoYq2Wa5gtr/wgw2648
- +jVVO27XRjgpV8q+CqOn5nnCHHLAbH1u2EFai1P3BS84l9sd3LTD+XPNcuLqyCYCxZyb
- GVBAn40DovYLOBvF6KmYBT8DtE6nBoh+VNJJlVGkYcN1yrrF1/QkyNChmJVEdTyoIlsj
- QfMA==
+ d=gmail.com; s=20230601; t=1743433604; x=1744038404; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AXSjo1W52Xy88TwmECCy3b3lXYV8/OkwXK23I4eDv6s=;
+ b=ObUZEgSsLcepwPyUjSxEDEcR0LY+ah5+YCADhTUuYEe8oWqQ7g/PuMBez5KhpEfSFY
+ BfmkNQhAezEnrJhv6zt7TYzXujAnWeW7pHwxV6K4dHdPp/cZU4A8T91lobqNsAZUlkOk
+ GMd0zaIG5VjaG0ta5ideEAJMjBHG09YLbNFFRAcrKQgguDa+z+HG12Bpdg3CgbFUnTcM
+ rJBIczGsAvUo2koN0LGLiLRdOnQlP/Tu0G/9piv0p8ipp/vwYUbEjaNfNjj0N4lOaLA7
+ NOZgWcsW1po8ZRL3HFOu05ouGPd9a0XD2FmokdcLqfAoOjZk/EvLUZTyPkzKKJ47iAg6
+ LWyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743439798; x=1744044598;
- h=to:cc:date:message-id:subject:mime-version
- :content-transfer-encoding:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lx2XU/NmERWsYvZ48LwHeM4pRGEkQeb7VVKf3LBnt2A=;
- b=kzm9kwn+lpnqjWVNARLAVUAZ5DHmAgCcjHKb/JSnz+Qie2T7sPfu8p2fdZvFFPiaXj
- /3vMnYJNIHEudZ4PXvrRTac4NNi1z0t4sfcoTqXfSjXZ4GZBawCiH/JvaUwmEsOldZ5W
- AsiRjAe1kAST57XnI0R0cv2gxGH6nMAv3z8E9NVU4u7wR32QojZpu+CEkMOvPqyFOh0k
- bFWEAxxEuuWgV1/CbR7pMuY7S2YerPnHii35Ww+5JwDaL+VEhz+nVO2hBVLQws+/bmE2
- BFM98SfEn04FDR9e7/8i/gfinTDXbETyRbYPXqtvRaZpMTmxezBOm5uYowQ0LXhON7BH
- N56Q==
-X-Gm-Message-State: AOJu0Yx3cZ17zanQSwl/hpcPPhlnrgu4Uuv012p97vmNvNmnjTB6AnS6
- hhEWjLszH818uTPed+KitCC55aBQk1cJ77Tez7pRwObDcB8ePDJYQATkutw3MAT4VhpQiAf7qXV
- htb4=
-X-Gm-Gg: ASbGncv4mqSOenGtCUEC5m81qtE+Nr96kw6lq7gVQPbqWXBpI5i8MIABvN7trXOJ8Wo
- GuVWs+qAYvwomLIAxe1KZh6lgwa1Mjk8QUYZeNHkvWB0XgakOq7RNPXhUwdGx+MQtLpMiM9P8P/
- 5QSRoa/G13qQ1lHimDpaNdZrypvFfHXsUlNcpvRsmbApW1Hg6IVH1Fq1dg3vldngLoV2/2ECCBA
- a6+W3ND/oX0y08xwXDh6FcptTiiFWBtyhpPjX4TPTooFQ5yzXrpHwzfa2xmlosyycg7c1hJWEVc
- rjAGcMT1iY4d+vO+XA2fX40/crfhu21yal07xwUGE9krN98wFZuEL4QntovgpqBwrsBZ
-X-Google-Smtp-Source: AGHT+IEQLeHlWVnRK+ayUNoWXV7bVFnInMboI+SnvSH/HMdfsjeQUKPjuV/kiUiSgm3d+GxFCYk7bQ==
-X-Received: by 2002:a05:6402:358a:b0:5ec:fd7d:fdd5 with SMTP id
- 4fb4d7f45d1cf-5edfdd25e8fmr7522291a12.29.1743439797445; 
- Mon, 31 Mar 2025 09:49:57 -0700 (PDT)
-Received: from smtpclient.apple ([91.64.76.218])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5edc17b2abesm5833366a12.60.2025.03.31.09.49.56
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 31 Mar 2025 09:49:56 -0700 (PDT)
-From: =?utf-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.400.131.1.6\))
-Subject: =?utf-8?Q?U-Boot_interferes_with_initrd_binary_=E2=80=94_Revert_?=
- =?utf-8?Q?=22efi=3A_Correct_smbios-table_installation=22_=3F?=
-Message-Id: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
-Date: Mon, 31 Mar 2025 18:49:56 +0200
-Cc: Michael Brown <mcb30@ipxe.org>,
- sjg@chromium.org
-To: u-boot@lists.denx.de
-X-Mailer: Apple Mail (2.3826.400.131.1.6)
+ d=1e100.net; s=20230601; t=1743433604; x=1744038404;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AXSjo1W52Xy88TwmECCy3b3lXYV8/OkwXK23I4eDv6s=;
+ b=Sy0nfgKRFrhKstLfoOQSemo0Xjp/2O1ui1Wzxg1Zlk4FCjYejixPNxkfd0nlgp5Dmj
+ BvrWgBJZlsYx0oyd5bx0vxryGTqizxtcuQSbzampGn7JNc3s9TqMptlvEUCxFNpRVewC
+ 4LqTUY+5PPQQQAmVXw/H9QdFmM3gVUkb6eZHRelqJSjBrBdjnBsFGGRaf+TKR6AZUFFk
+ 34y5XOopn2tDGKaH85tK8j+qQKjU/SYWe6Qru9OiHhy0LQhCx8r2JVA9Pnl869d2yHxs
+ N3wuTL2wXMyTv3lGtFSR046H4V5cXdzQq2ZsqCkdu1PD42Z/0n7mTBVuSYYZIG9YrsDI
+ weRQ==
+X-Gm-Message-State: AOJu0Yx8cYdRebhocOeosdFhZoEzqAo9/R6KOGpmS7NMlOlCQZF/ITrH
+ qGfAqpSz3YN/MvatZd8zT4Gl+jP7lPKeyWvUopNNagMa6yZ33Rqy
+X-Gm-Gg: ASbGncucnZ9uMcViIDB8bWKjanvupLZsXm/PmohKy2lVFVDfh5E+Z4uWoKW9J8da5x7
+ kSvnMb/fDb80Fvsb0IFMExm98YvwIFo9Riiwn+mwqTAEiaEp4/9WZ4svmg22Yop5lTI1Ef6Xavu
+ Fu+GQ+6D16c0KYJYAj10knVbrzl1SA+yVjUXPYAPl1Lo2FJoLkpNlw+mNAiY/XSd5iAEVp982UI
+ 5UhQniaJ1uMjOPbzscdHewaKBYfd8Sb476MPhI6dYLkmopGp3KontBElV3ZZrYk1LJ9PqYLidUh
+ PasekmXkHhZT/tg8kw9InRdPj1IqP03EPKydipvLrgTG7c5aht7GkoGzk9XFDgrvT01bz0l9UA=
+ =
+X-Google-Smtp-Source: AGHT+IGcXQrvy9+HJPFdtKKquleNdhn0qhQPtA4fIYxLqFlslFZsGIqQCufQTqrZDE3nXUaSRCWQlw==
+X-Received: by 2002:a05:600c:45c8:b0:43c:f513:9585 with SMTP id
+ 5b1f17b1804b1-43db6247b2cmr81968875e9.13.1743433603288; 
+ Mon, 31 Mar 2025 08:06:43 -0700 (PDT)
+Received: from [192.168.0.253] (5D59A51C.catv.pool.telekom.hu. [93.89.165.28])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-43d8ff02f84sm124324085e9.25.2025.03.31.08.06.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 31 Mar 2025 08:06:42 -0700 (PDT)
+From: Gabor Juhos <j4g8y7@gmail.com>
+Date: Mon, 31 Mar 2025 17:06:32 +0200
+Subject: [PATCH] net: usb: r8152: add device id of Linksys USB3GIGV1
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250331-usb3gigv1-v1-1-04374174fab9@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAHev6mcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDY2ND3dLiJOP0zPQyQ11TAzPDNDMDy8SkZAMloPqCotS0zAqwWdGxtbU
+ AJKCDAlsAAAA=
+X-Change-ID: 20250331-usb3gigv1-5061f609abc0
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Gabor Juhos <j4g8y7@gmail.com>
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Mon, 31 Mar 2025 19:00:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,100 +99,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+The Linksys USB3GIGV1 device is a USB 3.0 Wired Gigabit Adapter
+supporting 10/100/1000 Mbits/sec transfer rates. It is based on
+RTL8153 and it works correctly with the r8152 driver:
 
-After upgrading some rather old U-Boot/IPXE setup on two aarch64 boards =
-(Amlogic S922X-based ODROID N2+ and RK3399-based NanoPi R4S), I noticed =
-strange errors in the initrd phase of my Linux kernel =E2=80=94 usually =
-something like "Illegal instruction" coming from "udhcpc", etc.
+  uDPU>> usb start
+  starting USB...
+  Bus usb@58000: Register 2000104 NbrPorts 2
+  Starting the controller
+  USB XHCI 1.00
+  scanning bus usb@58000 for devices... 2 USB Device(s) found
+         scanning usb for storage devices... 0 Storage Device(s) found
+  uDPU>> usb info 1
+  config for device 1
+  2: Vendor specific,  USB Revision 2.10
+   - Linksys Linksys USB3GIGV1 000001000000
+   - Class: (from Interface) Vendor specific
+   - PacketSize: 64  Configurations: 2
+   - Vendor: 0x13b1  Product 0x0041 Version 48.0
+     Configuration: 1
+     - Interfaces: 1 Bus Powered Remote Wakeup 180mA
+       Interface: 0
+       - Alternate Setting 0, Endpoints: 3
+       - Class Vendor specific
+       - Endpoint 1 In Bulk MaxPacket 512
+       - Endpoint 2 Out Bulk MaxPacket 512
+       - Endpoint 3 In Interrupt MaxPacket 2 Interval 8ms
 
-The setup I have boots iPXE from U-Boot (either stored on SD or SPI), =
-which then loads a Linux kernel, two initrds and a dtb from the local =
-network, and boots Alpine Linux.
+  uDPU>> dm tree usb@58000
+   Class     Seq    Probed  Driver                Name
+  -----------------------------------------------------------
+   usb           0  [ + ]   xhci_mvebu            usb@58000
+   usb_hub       0  [ + ]   usb_hub               `-- usb_hub
+   ethernet      2  [ + ]   r8152_eth                 `-- r8152_eth
+   bootdev       3  [   ]   eth_bootdev                   `-- r8152_eth.bootdev
+  uDPU>> setenv ethact r8152_eth
+  uDPU>> setenv serverip 192.168.1.253
+  uDPU>> setenv ipaddr 192.168.1.1
+  uDPU>> ping 192.168.1.253
+  Using r8152_eth device
+  host 192.168.1.253 is alive
+  uDPU>> tftpboot 0x10000000 random.bin
+  Using r8152_eth device
+  TFTP from server 192.168.1.253; our IP address is 192.168.1.1
+  Filename 'random.bin'.
+  Load address: 0x10000000
+  Loading: #################################################################
+  	 #################################################################
+  	 #################################################################
+  	 #################################################################
+  	 #################################################################
+  	 #################################################################
+  	 #################################################################
+  	 #################################################################
+  	 ####################################################
+  	 6.3 MiB/s
+  done
+  Bytes transferred = 8388608 (800000 hex)
+  uDPU>>
 
-I found that the busybox binary used in my initrd had an md5sum mismatch =
-compared to what was expected. I ruled out network problems since =
-checksums from within iPXE were correct.
-So some code, either U-Boot, iPXE, or the Linux kernel, were interfering =
-with the busybox binary at runtime. Since a single binary is used for =
-many commands, and the changes were not always in the same location, =
-there was wide variety of how things could fail, and =E2=80=94 many =
-times =E2=80=94 fail in way that did not prevent booting.
+Add the USB id of the device to the driver to allow using it
+from U-Boot.
 
-As a workaround, via iPXE, I added a "padding" initrd to be loaded =
-first, containing an 8MB long zero-byte filled file named /.aaaaargh. If =
-there were any modifications, the would hit the padding file, not the =
-busybox binary.
-If there were modifications, the file would remain completely empty upon =
-boot.
+Signed-off-by: Gabor Juhos <j4g8y7@gmail.com>
+---
+Note: checkpatch.pl shows the following warnings:
 
-However, they weren't:
-Example dumps from two runs:
+WARNING: Possible repeated word: 'Linksys'
+   - Linksys Linksys USB3GIGV1 000001000000
 
-# hexdump  /.aaaaargh
-0000000 0000 0000 0000 0000 0000 0000 0000 0000
-*
-0044100 ffff ffff ffff 15dc f9c8 6f16 e188 0000
-0044110 00a0 52b0 a01c 6d59 0000 0000 0000 0000
-0044120 0000 0000 0000 0000 0000 0000 0000 0000
-0044130 0000 0000 0000 0000 0000 0000 e1a8 6097
-0044140 0000 0000 0000 0000 0000 0000 0000 0000
-*
-0155840 0320 0040 0000 0000 0000 0000 0000 0000
-0155850 0000 0000 0000 0000 0000 0000 0000 0000
-*
-0800000
+WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)
+   bootdev       3  [   ]   eth_bootdev                   `-- r8152_eth.bootdev
 
-# hexdump /.aaaaargh
-0000000 0000 0000 0000 0000 0000 0000 0000 0000
-*
-001f800 ffff ffff ffff 15dc f9c8 6f16 e188 0000
-001f810 00a0 52b0 a01c 6d59 0000 0000 0000 0000
-001f820 0000 0000 0000 0000 0000 0000 0000 0000
-001f830 0000 0000 0000 0000 0000 0000 e1a8 6097
-001f840 0000 0000 0000 0000 0000 0000 0000 0000
-*
-0094f40 0320 0040 0000 0000 0000 0000 0000 0000
-0094f50 0000 0000 0000 0000 0000 0000 0000 0000
-*
-0800000
+total: 0 errors, 2 warnings, 0 checks, 9 lines checked
 
-By git-bisect'ing the codebase I found that the following U-Boot commit =
-must have triggered the bug:
+Since both warnings are related to actual lines from an U-Boot console log,
+I have ignored those.
+---
+ drivers/usb/eth/r8152.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> commit 06ef8089f876b6dabf56caba31a05c003f03c629 (HEAD)
-> Author: Simon Glass <sjg@chromium.org>
-> Date:   Sun Dec 31 08:25:55 2023 -0700
->=20
->     efi: Correct smbios-table installation
->         At present this code allocates memory when writing the tables =
-and
->     then unnecessarily adds another memory map when installing it.
->         Adjust the code to allocate the tables using the normal U-Boot
->     mechanism. This avoids doing an EFI memory allocation early in
->     U-Boot, which may use memory that would be overwritten by a
->     'load' command, for example.
->         Signed-off-by: Simon Glass <sjg@chromium.org>
->=20
->  lib/efi_loader/efi_smbios.c | 16 +++++++---------
->  1 file changed, 7 insertions(+), 9 deletions(-)
+diff --git a/drivers/usb/eth/r8152.c b/drivers/usb/eth/r8152.c
+index e3f20e08c33cac4f8520dc670d22a1be6f3f10e7..d8f41dd1eb51cbf09c7da124ca8350e431c2b7fb 100644
+--- a/drivers/usb/eth/r8152.c
++++ b/drivers/usb/eth/r8152.c
+@@ -1599,6 +1599,9 @@ static const struct usb_device_id r8152_eth_id_table[] = {
+ 	/* Samsung */
+ 	{ USB_DEVICE(0x04e8, 0xa101) },
+ 
++	/* Linksys */
++	{ USB_DEVICE(0x13b1, 0x0041) },  /* USB3GIGV1 */
++
+ 	/* Lenovo */
+ 	{ USB_DEVICE(0x17ef, 0x304f) },
+ 	{ USB_DEVICE(0x17ef, 0x3052) },
 
-=46rom what I gather from the code, the use of "memalign" instead of =
-"efi_allocate_pages" could be the reason for the observed memory =
-corruption, but I'm no expert in this codebase.
+---
+base-commit: 3d8be1f5ec30180748259a251efe4f63c8b4b329
+change-id: 20250331-usb3gigv1-5061f609abc0
 
-For what it's worth, the commit can cleanly be reverted from a recent =
-U-Boot HEAD, and indeed, the system boots fine afterwards.
-
-I also once noticed that one time the memory corruption happened after =
-the first few calls within initrd, so maybe it's a "free" corresponding =
-to that memalign that is triggering this bug.
-Or, maybe it's all good from u-boot's side but iPXE needs to do =
-something, I don't know. I'm just the messenger here...
-
-I wonder what can be done other than reverting this change (or using a =
-padding initrd during boot) ?
-
-Thanks,
-Christian
+Best regards,
+-- 
+Gabor Juhos <j4g8y7@gmail.com>
 
