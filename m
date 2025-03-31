@@ -4,90 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E90CC36011
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:31:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA83CC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46D828129B;
-	Mon, 31 Mar 2025 19:31:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kohlschutter.com
+	by phobos.denx.de (Postfix) with ESMTP id 3908A8129B;
+	Mon, 31 Mar 2025 19:40:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kohlschuetter-com.20230601.gappssmtp.com header.i=@kohlschuetter-com.20230601.gappssmtp.com header.b="tp1NBdqQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JR1qd/2A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 376288171B; Mon, 31 Mar 2025 19:31:25 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 94F978171B; Mon, 31 Mar 2025 19:40:18 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED69E81026
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:31:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=kohlschutter.com
+ by phobos.denx.de (Postfix) with ESMTPS id E1F4581026
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian@kohlschuetter.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac2ab99e16eso953313566b.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:31:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-2c2ada8264aso2498770fac.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:40:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kohlschuetter-com.20230601.gappssmtp.com; s=20230601; t=1743442282;
- x=1744047082; darn=lists.denx.de; 
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GmGyVPBpBS8UvNv2a+cmazNybo+GSwNVtE4Qs7Wv1p8=;
- b=tp1NBdqQNlrroNw1q2qKLn7h5pX/+suC4fMzKUfgGJjK8N+2O0bd7wcle0mSA5sz+Q
- Cuc9q1QOAZ2FZNTTBecaIWfVv0aVA0PqRAjOZzvfv2aZJ/O4Glz0xZ8qx56pgzzwJ4n/
- INfY+rKH6ke3ohLcfH+guVAyFa/Umlic6em5ExFaN1HiQRdSSDdTwEgou9VP09eAuWOb
- eo83mEXwGLG5FE6tqvvb+4iDWBCSTGrAGyxqQ4ioZdGvkWgZsCrdwEsyXwad1Li3496T
- D78YiUrZgDAjyUnJIv4jrkDnyzcSoddLXBvr2tjZhIDNcstmC/lumxAIQuDud5QQj3qH
- xPdA==
+ d=konsulko.com; s=google; t=1743442812; x=1744047612; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LDNnBAERrXi1c28sbn5e7NLBujT8Qu4Y134JuKnQ6Kk=;
+ b=JR1qd/2AazmS/nF9s4s+FLkwfYBof0+dKKM8N7mxrqWQIwVJDQGei58A0HlpvBAts7
+ qUUzN7zd/AgT3fJ6sthqjB4SgTZJPETwxO2I7eJ7dxfsk+gENxqZjQBiYtd386V3IIcJ
+ ySrI0ZfdCtX39Z3c0DWD0UTsyFK0crZPxL+44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743442282; x=1744047082;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GmGyVPBpBS8UvNv2a+cmazNybo+GSwNVtE4Qs7Wv1p8=;
- b=NpDuektPp3VyIVMxeCiipa98FxOAtcmUsDZlnLmNuLIMByHxDAHaX4NwsfoJyHJ5/V
- qpK949MQG/0WAEgo+IxSPC8HJkxXVMvTbtHrXGvrcAgCZE5OcX5EBgXrbLl70Y7wy7VJ
- adqcAJkBLpjMnFBCt2bImceypwilQP4iafSnF0VHiuqBf940vTxG/FHZBHCVDN8fOgyE
- KvWXhnMKxyLOTbX9QvoCqmz8Yi6UCVtJO0g5jOVoYeHOg3JrGvxpsyXdGRgk1IcyNbqF
- z7LJH+C99r/hKxiWMt7AxUtmx9/oNIsak/YDf3BEQf5Yk/uQRFwu2qJy9n6XpGy1yr6v
- WW8A==
-X-Gm-Message-State: AOJu0YwT78GTg3KmmvtcA2OOZG0dHof1fjzrb+sTMFdWEvC63RMlzzjD
- HNAtgksqMcVaQ2QTjgg2rSal4ykrSbeuZraGDHWnPYyrHc2BfIRntXtGDGLUb3BVrwLO1TJz1eM
- Y/1E=
-X-Gm-Gg: ASbGncsJcKzqAkxhHXqoEQEMAlq63ftfdxn8+qRrn+v/fmkWF3g8nU8IytGdRv96uIF
- UTJI9Zo5orOBuAqlFYMgheiTj4Y+RdVnqyAkDFaYCAqSzhW7QANC57qNNY+F6SZXOIhcgDOQk4z
- euewEG70lyockfLGs2Tho0Sfb6YEFvTV6w6smro+k2AobtcAZuy/jRegmHq39yL44Gxhf5fQ25e
- TqHRqOkYX6Km4G/fURSwS/zGozwzH1hNpSpiryul5qZhALNxHakG+67arbVyO3za57KsZa2y/u3
- d+ZMqZ175e85rjIipfGtQfSCJWQtcTn+G/fCKqhU9015C72rETDbsh5BETB/OdZihg0KEbnrrnN
- faQE=
-X-Google-Smtp-Source: AGHT+IHCAZmd3mBC/QllddfAhBZx1HmwmYtuAdwgSyb5sFdEcsUF7tGOcCRKZWcoL5CENdtqL97gTQ==
-X-Received: by 2002:a17:907:3d8f:b0:ac6:edd3:e466 with SMTP id
- a640c23a62f3a-ac7389fccd5mr856163466b.19.1743442269280; 
- Mon, 31 Mar 2025 10:31:09 -0700 (PDT)
-Received: from smtpclient.apple ([91.64.76.218])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71961f0cfsm648163766b.116.2025.03.31.10.31.01
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 31 Mar 2025 10:31:01 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.400.131.1.6\))
-Subject: =?utf-8?Q?Re=3A_U-Boot_interferes_with_initrd_binary_=E2=80=94_Re?=
- =?utf-8?Q?vert_=22efi=3A_Correct_smbios-table_installation=22_=3F?=
-From: =?utf-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>
-In-Reply-To: <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
-Date: Mon, 31 Mar 2025 19:31:00 +0200
-Cc: u-boot@lists.denx.de,
- sjg@chromium.org
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
-References: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
- <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
-To: Michael Brown <mcb30@ipxe.org>
-X-Mailer: Apple Mail (2.3826.400.131.1.6)
+ d=1e100.net; s=20230601; t=1743442812; x=1744047612;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LDNnBAERrXi1c28sbn5e7NLBujT8Qu4Y134JuKnQ6Kk=;
+ b=CQSodwFNmSh/E4i/fOfYbTAgdNekTZvECJRn3/SlxHuLbxPN/MxPtuq2kS8w3LLw1I
+ 9G+TQgGagtIVzlvmInFv1Cp7i7U38QafYv796R7NgOgox4gCAhCJ8M7ZX5cRyNXelc79
+ 0VJrP9/G6yViV4V3MLZNzmlxUPaQdU0yT9uSCXMvrqGI0wmbLH5p6L049OmttKJNyyHd
+ wwRmqjLsRWTszA7GvN+MZxh4kcvipCTfhyR4zEz2MkSmnmtN+QZyRAIxPD5scUNaWtpO
+ QFDqtenElhVWH0jz7tNwJ0G0hIjKcZ7sTYmCoYl5D4IVL8rDaO9PKYnwfhObdgudrx9M
+ II0Q==
+X-Gm-Message-State: AOJu0YxrgAvQe+J+UkoGh3YQvgfLNn9SRMtFdsRmgP/ELbw5M3lyW3Fy
+ K+S6rbqIGfOH0A44US24LqDydM1vKVCQFEBxC864c16+pZJvH2TpOMYF+lOiNB8=
+X-Gm-Gg: ASbGncusRBNiEq10HJfjnSgq1n7SDdh2hjBfJBxM+2jyL+NcwVLXZUPFqJkz80mBe74
+ 1wESCVsK/o3sVTSlS1A0jLUy72pq94X6NB/shRcTm8gyXFykNRmPMlY6jIJl0lzX3226V03TQa1
+ FGzNohRbHgsWUVpHNH8GPByCdfPR0roEax9Is7p1+4tPyIElmg/3MYLhXbLQAdYOxfXoLIdpf7n
+ nZruj0h/zblbPssG+T7cvhpDR8xqxXSYX6PbIBSWoIK9Qr1zs2vdqSFEkOqqdLKTg72HfxcfOqB
+ EpTiKSGO323mKPkBpk3BQHV4qztDvOTzbfx2sgsZ2X0pFt3BTn4sAOU4ueiq/w7mnnxKecG+cpU
+ 559axHOZKOQHZKwp1
+X-Google-Smtp-Source: AGHT+IGv8CnHjNT0vVusuKQ2Dv/PTwCwH2X1A5V/7H9Zrx98DU7oZtX2TKJ0xh78Hmz+boMRy4CIZg==
+X-Received: by 2002:a05:6871:ea09:b0:2c1:5fcd:acc5 with SMTP id
+ 586e51a60fabf-2cbcf4cdabbmr6290577fac.10.1743442812591; 
+ Mon, 31 Mar 2025 10:40:12 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2c86a911709sm1920306fac.44.2025.03.31.10.40.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 31 Mar 2025 10:40:11 -0700 (PDT)
+Date: Mon, 31 Mar 2025 11:40:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Baruch Siach <baruch@tkos.co.il>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>, Roger Knecht <rknecht@pm.me>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/17] bootstd: Useability improvements
+Message-ID: <20250331174008.GG93000@bill-the-cat>
+References: <20250319143820.2385092-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Bck87FONNGFXiHpL"
+Content-Disposition: inline
+In-Reply-To: <20250319143820.2385092-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,52 +117,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 31. Mar 2025, at 19:15, Michael Brown <mcb30@ipxe.org> wrote:
->=20
-> On 31/03/2025 17:49, Christian Kohlsch=C3=BCtter wrote:
->> # hexdump  /.aaaaargh
->> 0000000 0000 0000 0000 0000 0000 0000 0000 0000
->> *
->> 0044100 ffff ffff ffff 15dc f9c8 6f16 e188 0000
->> 0044110 00a0 52b0 a01c 6d59 0000 0000 0000 0000
->> 0044120 0000 0000 0000 0000 0000 0000 0000 0000
->> 0044130 0000 0000 0000 0000 0000 0000 e1a8 6097
->=20
-> This looks suspiciously like a broadcast Ethernet packet from a source =
-MAC address of dc:15:c8:f9:16:6f with an ethertype of 0x88e1.  Some =
-quick research suggests that these are HomePlug Management packets =
-generated by a "Fritz!" home router.
->=20
->>> commit 06ef8089f876b6dabf56caba31a05c003f03c629 (HEAD)
->>> Author: Simon Glass <sjg@chromium.org>
->>> Date:   Sun Dec 31 08:25:55 2023 -0700
->>>=20
->>>     efi: Correct smbios-table installation
->>>         At present this code allocates memory when writing the =
-tables and
->>>     then unnecessarily adds another memory map when installing it.
->>>         Adjust the code to allocate the tables using the normal =
-U-Boot
->>>     mechanism. This avoids doing an EFI memory allocation early in
->>>     U-Boot, which may use memory that would be overwritten by a
->>>     'load' command, for example.
->>>         Signed-off-by: Simon Glass <sjg@chromium.org>
->=20
-> No idea how that could relate to the packet you're seeing being =
-written into random memory locations, sorry.  I'll leave it to one of =
-the U-Boot developers to respond.
->=20
-> Thanks,
->=20
-> Michael
->=20
 
-Whoa! Good eyes, Michael!
+--Bck87FONNGFXiHpL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-What is my Fritzbox doing to my initrd, and why does reverting the =
-commit fix it?
+On Wed, Mar 19, 2025 at 03:37:54PM +0100, Simon Glass wrote:
 
-FWIW, I also have a capture with an ethernet frame from another device =
-on my network (ARP, ethertype 0x0806), so this is probably the content =
-of some ethernet receive buffer...
+> This series collects together some bootstd improvements:
+>=20
+> - Improve iteration when there are a lot of devices
+> - Add a test image for Ubuntu (to compliment Fedora)
+> - Improve the naming of USB devices and bootdevs
+> - Add a new command to set the bootdev order
+> - Add a little more debugging
+> - Use an abuf when dealing with allocate files
+> - A few other minor things in bootstd
+>=20
+> Most of these issues were found when adding the new test image and more
+> USB devices to sandbox.
 
+This isn't based on mainline, either:
+> base-commit: 569681e993486b830035064f23ec87bcd70795d1
+> branch: schc
+
+And I don't know why.
+
+--=20
+Tom
+
+--Bck87FONNGFXiHpL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfq03AACgkQFHw5/5Y0
+tyxbMQv/e4401n+aq2t0OHxQaxpTPwMJ49jScij3BE9IuKAQQBKt5d5zBQfNwQ+g
+Zeusazy48JOYf1MqZ6rt6FYFAxai6MegvDykJgYYfkDL+7a46WtsDdNOJDKD/vGF
+xpuMaoIwd25u4teU3CwcbZ07XKCpdKDaWUbyAJZOLBHzg8Lc8qr+QYnbfBtPq6d1
+ixowmCHrYkY3rKrxmUeVlWJXQQPz1eDJ83KN9HY/gQBMwjR5ytVKWfpcHvCtZF9k
+gbK5O3GOaqoNAbGJwgmJ2QrJFb/4yv/19e3N0p7jimWm2wkWh/SyBz2Q9WS1YB6W
+8UObLqHmBVM/njtgB6fsm4EJT+kcddQkH+VgiJyGHRQpW/rHjh9mP/S6/dUMVpo9
+YYIk+1JYOM6D4Hi0V8MGWU5/u70nKH1Tl2O9s6L2RKgTWvkuQ/KaxA+8VsuNvgPw
+N9ONcD+s9pzly5pBtcw7QJcdau6xR3LT9KSDtjlGkD6e9+NGAAPzwAKZRtY+fv67
+WA2uZ74S
+=bAhx
+-----END PGP SIGNATURE-----
+
+--Bck87FONNGFXiHpL--
