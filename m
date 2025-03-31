@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD55C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EDD6C3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:47:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE83381ECD;
-	Mon, 31 Mar 2025 15:46:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 172D581F44;
+	Mon, 31 Mar 2025 15:46:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RxTk2eEJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HIWJklPd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 093D381E47; Mon, 31 Mar 2025 15:46:25 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 96D2C8203B; Mon, 31 Mar 2025 15:46:26 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF67581E47
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB0A881EC0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-72a4793d4e2so2870905a34.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:21 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-72c16e658f4so1230300a34.1
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743428781; x=1744033581; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743428782; x=1744033582; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b6MLC3qbaUwRdRAnnth8VeZUM+w01uIF6wGohx7YLbE=;
- b=RxTk2eEJGYWIyvNqk/6R0vSGu4KJLZMgWKigxdHiNEcnmtji658CM4F1e/sfJgk6nN
- F0VbyuLmZSS55y/WCdos2gab0V592tCbXGaTQbKc0bK+M861PiczXrvN/OErVsKcoFw5
- TB401NQU3MgB9a1l83korVcffk0u+fOCxXEWI=
+ bh=TUxiQkQcGJB5O03pBDWH2HLrBi2/H8Tk7dDkD1bDzA8=;
+ b=HIWJklPdnneQN6ePHnAznxzT1ghHzZQENEDgs5Ee7piBbntldvAubaGYl63qDnMquy
+ 3w5WEiWKQbQqdpJfrphvwQWDyqUQQHVbdIAP4LtfyCXYbdDP9ymTRi49kM1gIRXaT1wM
+ 5KpiXJFSd4Jjse6sKlSSLWID6s2gl/he1h8m8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743428781; x=1744033581;
+ d=1e100.net; s=20230601; t=1743428782; x=1744033582;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b6MLC3qbaUwRdRAnnth8VeZUM+w01uIF6wGohx7YLbE=;
- b=ExIk57P1+nFOIY++xrfYy04j9WW0x8rLUV1wdnHXCKBBdiRkV8ua76GdrJ9BeAT8Ru
- 8zRtNeAk0A3xnZ7sDDCjdTg2pmIkrKBk7ZVNUpkqjQqFAaG0CNh7OLz9fpLnEyGTOXOa
- q8v2IxlS4sfElRgRu0KaWxoxANMYeHMz97FXCdJBe1sBsNXeSTXqdNyeHkYTMUYBVeen
- XwY1Mpqf8AkRt2yhYL983XbIdgaCSQ7Y0Wtju5zU64HC7CjeewiF644t5jK6Y/TxqzCg
- 2Go26AO6EJjVrxxNF3BmiEuemSPuPPT45dw3DHt4+PeYCy4/OQBLWup9DTKZWxWS9E60
- Uopw==
-X-Gm-Message-State: AOJu0Yz7EnVJwNEmo4xLur8+ZKCadP35AdnDcbRORaz9qlT7iBnSUJ4d
- Nh5/L4jeFChlT3wl262huJBu1/XCQAT4OYD8z66OocPMyK/0sBhPjbHD4wcYt8c=
-X-Gm-Gg: ASbGncuWsW9p0CRV9UvyU78RPuTf9aWtqmXOIORzWcaP84wkUymp/fp0R0diFN4JeNt
- jy1hc7K4W6d3UatjanvXPhENWVDmCxNyVQTbbgOEhoL6upcMA0JHipZ7JawCvmsKaA2bmNHDw33
- m0qrHd3MizLmy11dNY7pwSn6FLkq9D/3epzV5EEVb1AAo1k3glWY6NQVKiZm6BrfP1I83/xGst3
- OPe6nVFpk5HxfAFteeyahCYD4/npSxZs4XzH5oPL4cD0tKa93g1fAgcpOVv3mNF6D5GRF3xUO3i
- gyk8uH2EdsFmpMe4cOVnps0izBReZwFcz9CxoI9GYYILlaQcmupEdAgAjBrjatsckmTWSav6hth
- qNN/h
-X-Google-Smtp-Source: AGHT+IEzl660xF3ku1ukYQYULQLgqsWC/ZDc0QQtzMYBPGukrmuECVyC30YDSCedTBSaQgjFTxAlJA==
-X-Received: by 2002:a05:6830:6011:b0:72b:93c9:41a6 with SMTP id
- 46e09a7af769-72c6380e7cemr6210723a34.20.1743428780710; 
- Mon, 31 Mar 2025 06:46:20 -0700 (PDT)
+ bh=TUxiQkQcGJB5O03pBDWH2HLrBi2/H8Tk7dDkD1bDzA8=;
+ b=FzOupwp9MfhjbT36O49pWeHbfLfAP8F+vLTTvMWU/70WB2L1CvnVKWC3S4Trrlbx46
+ xkh/pgY5sMmPYZLBNqRoLOU3QN/0VCrQdtMJ1Mn1RgCgSbRnlKyeoRRdwzGsGhLX0S17
+ Q1P9fMWwbmGtm32kS1g5vxLw0Est41edtl7wxkv/3UpMSuXkJ5BY75G1scBvCGl6j79t
+ 4DtowN0LNmABze74yegdk5HgEoNRMTrC8qf+8ZmJzt72QiORr4+ElR5VMuZKxh44YXLq
+ rOi5hnARwzvTd5762erSp/B4lgxIsgTkSNa9AkpN5kkb2LJfvul00yMxoe40YBg9aCos
+ Uy3A==
+X-Gm-Message-State: AOJu0YxquPFTGmWRsiZopmX4dOmZMUc3GLFfYXcgJV8kZF66m8IZxTHC
+ 1HNIZ+YoIQuU4wiORMpPaXXZGMbGSOzxa6VMiAMTbHExaa7m59IDwSjh7PHL561+8Ie+5MTX5Tk
+ X
+X-Gm-Gg: ASbGncu4N7KOvU9gkR5SHJH88JZQ0X3xC9fOtCDbOci1VhHyAwH1isTqDy/JDTU+Mmp
+ GJ3Vj4w/DkwqfBnTapaOQ9vLJ60zL1I9ywNN1bgldB6cOda8B+CiSb6I5Gu1SFAAHK3dp6gnKH/
+ IzjCeYAw1kGGWIATodXGtqB2K3NuN56RQnawb6KBoZArrP1TS4HY3vKiNnGTbvk3H1VsYA0wtg4
+ T1Pg/QpAEiKD60ICTUb2qbspJURC3bXGhF1jTatKJnWn1IJL4HbbGAv41/b/RHWS30camrQPpAM
+ uxB9Xkwb8h5svPZVEoRb5hG+dA5EWh4VN06TFqrCJxOoU7V12mgHam3H3OMH/t7fZ5YtBC7zAMP
+ X4Xdx
+X-Google-Smtp-Source: AGHT+IF+0um7lvGuNHYSWel1YmIFKmubWfVdiPJRp/ru/KE4CbS8DBNlNtlgOcaPdm1zH8xx1yi6KQ==
+X-Received: by 2002:a05:6830:6b04:b0:727:876:c849 with SMTP id
+ 46e09a7af769-72c6383bc82mr6387523a34.27.1743428782206; 
+ Mon, 31 Mar 2025 06:46:22 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.19
+ 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 06:46:19 -0700 (PDT)
+ Mon, 31 Mar 2025 06:46:21 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, bb@ti.com, vigneshr@ti.com, 
- Vishal Mahaveer <vishalm@ti.com>
-Cc: Sebin Francis <sebin.francis@ti.com>, Sparsh Kumar <sparsh-kumar@ti.com>
-In-Reply-To: <20250310220257.25414-1-vishalm@ti.com>
-References: <20250310220257.25414-1-vishalm@ti.com>
-Subject: Re: [PATCH] board: ti: am62px: rm-cfg: Add support for HC BCDMA
-Message-Id: <174342877954.1318045.1386479206362291752.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 07:46:19 -0600
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
+Cc: vigneshr@ti.com, Fabio Estevam <festevam@gmail.com>
+In-Reply-To: <20250311044414.3155688-1-anshuld@ti.com>
+References: <20250311044414.3155688-1-anshuld@ti.com>
+Subject: Re: [PATCH v2] config: falcon: move CFG_SYS_SPI_* to Kconfig
+Message-Id: <174342878082.1318045.5260857573020502945.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 07:46:20 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,22 +96,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 10 Mar 2025 17:02:56 -0500, Vishal Mahaveer wrote:
+On Tue, 11 Mar 2025 10:14:12 +0530, Anshul Dalal wrote:
 
-> The first 4 block copy channels and rings on AM62P support
-> High Capacity Block Copy. These channels have approximately
-> 3x improvement over the normal Block copy channels when doing
-> DDR-to-DDR copy.
+> CFG_SYS_SPI_* are used in falcon boot to specify the offsets and size of
+> the respective payloads. This patch moves them to Kconfig keeping the
+> values consistent for each of the affected boards.
 > 
-> Currently, during allocation these channels do not have a
-> separate interface and are allocated with normal BCDMA channels.
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] board: ti: am62px: rm-cfg: Add support for HC BCDMA
-      commit: db8bcdb00af59e4a88d72f7ce115200d554c8d2d
+[1/1] config: falcon: move CFG_SYS_SPI_* to Kconfig
+      commit: bcb8cac2d550b6decfbcb2985be276afbec296cf
 -- 
 Tom
 
