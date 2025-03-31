@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD5DBC3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C68AC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:32:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B814381F66;
-	Mon, 31 Mar 2025 14:31:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17477819D2;
+	Mon, 31 Mar 2025 14:31:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J5UPVyiA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bEM4QlRk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A89E781703; Mon, 31 Mar 2025 14:31:40 +0200 (CEST)
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
- [IPv6:2a00:1450:4864:20::444])
+ id B566081F59; Mon, 31 Mar 2025 14:31:41 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1112881E47
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A736181F59
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x444.google.com with SMTP id
- ffacd0b85a97d-3913d129c1aso3238047f8f.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:38 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43cfdc2c8c9so24755555e9.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743424297; x=1744029097; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743424299; x=1744029099; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GERz7uJbPWQNt9gxwTX7plSa3IWAbbNTwGxUI2CBlZg=;
- b=J5UPVyiAMhXJSMsEPpmiXXaCXEwpehvdE22epeJZQQa3W9tFoUrmWA6M1hl0fYTP6z
- bBZzospeCAKHv+xJ5aqwp1eEeIOHrYt6aRCHJYAfjoLpN9Z4TVC5JMlf0g48wMl0GON8
- QpETHeAF+TdGb3boUCmH9BECyylkIEkIgbF0ZZuV/GShM8K5JmWqtphsESNRHm+c0I85
- 9F/jmC+uCUayDJCXGdInptH1mHxf5TaHvFkXseeAp2nbcoXqNFMDY0aLKqOSxE3syCQ+
- 5lWUXjcKBb7OmUXPevrlxek7ZSXmDS5HVYHSXJEq8BhtXY7h9Ntm4prUil6V2juIspAq
- kGUg==
+ bh=9Wr0962nKSa8gzKuTD03RUSdUdB+lmJXD5dXPdk4D/w=;
+ b=bEM4QlRkef45rRMmtLNxmfYKsiqvE2KpI1tIqtseuJ5ArD8bT0hdBXultNk3PVjRPz
+ uUg2BgpDPj0YHAcqWuhBwAHUuqZMVA2pxh2GNA8xjnsxg7ISRG3MatE4ymiD2uOAYDJ3
+ pOiFSowmZhQYm8pzmPbO+NIhMH3pfmArEQXeaaxg+wqlqL8XFAt8vE43P8nkW6yUke1Z
+ hpwKIO/p3dBFBUAE00vjOGJvDWto+FfnfkoOaz+kE8Tm95elbCEnAFmEEF+RYzUDLMbm
+ euxrdLecxC3V6HevHB/zAl5MF9lR+Iyrn11gxzwVDmFXE9wBfM04j5pFG4uEPSgg1Hfg
+ nIYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743424297; x=1744029097;
+ d=1e100.net; s=20230601; t=1743424299; x=1744029099;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GERz7uJbPWQNt9gxwTX7plSa3IWAbbNTwGxUI2CBlZg=;
- b=Os83RJFsZev1mwI1USIHGS3SFtWBv8INcSD9vjhgJjmkq7dTTg347II/ihmxGXdFg0
- TmHjgYBS1/szKJ2kkJyN2CLgzIhDQh72aewftndUL04zELsgY50HFIaUqo0g9c+A/geO
- pCT7nDPFQdMDWm7j6+DkEcOwrkcY+VeWL4MNWQiVlKXS5bSozRwy/o0LKKio8W7Cnsyl
- /rlp9Y8QbIeMm7jreJTC+Omnu6zH1jJmA+rjHfPrY77gO3nL0LVeEKhc0LwhhfpZ4B0n
- bclP4RFoiQOD8sGhS0jBLu/JbS/g2yC7VCmo8VFg+5Br/6ejYL6Ml/rpgvfof2H0B8gZ
- TYmA==
-X-Gm-Message-State: AOJu0YxJ2zNLVaRbs0h1mTa4gm34DwtQchqMNA1yi9plOJFSTZfAUVfl
- DNSBrKn47Nzl61a1NOaMyDtDczQLi7AreIQEDgQvzqNd/9Hh/f1EO70jfzK97bSU38zJdz72f2O
- KEvFZ9n2s
-X-Gm-Gg: ASbGncsvFO8b42G1OsAQtayy+/ieU3PIwMgA1CQHWuMRaa3297KaY90zbx2xxUhHjHF
- hc/2dZs+tjqUvEZkOq3KrKweDApwEa92E6bb2get6N1j+Vr8HBTks8fr+RkZIYMccpf7fnWlGky
- AOdrVxwrLTSirWWnJtuNorknCxyX7xla8xoltDeaDwSZG4A9b0q18GhY7aiyuLySarQG9n+abha
- jqgRKGuqbrygNi1diw9uPi32s+z60SkfANXXHiE9eFD8LKBo0FzFTq15AlvSFKwiDzr/IdHIjs4
- n3EsXHca7hJaNC4H3zsjhF1rnpmiAV5iF+Cs86ycVnhfgmMyA9il
-X-Google-Smtp-Source: AGHT+IG5yXiJ+U/NJQGp1XqAi4aidfCIWduoY27ZY6lWqKxj0TxCIszFKN2QgYRKD85CCo28f7Qndw==
-X-Received: by 2002:a05:6000:1acc:b0:38f:4ffd:c757 with SMTP id
- ffacd0b85a97d-39c11b76660mr7348859f8f.2.1743424297212; 
- Mon, 31 Mar 2025 05:31:37 -0700 (PDT)
+ bh=9Wr0962nKSa8gzKuTD03RUSdUdB+lmJXD5dXPdk4D/w=;
+ b=DVLdNsXOBWpdjbvd8aPOe+y1EzNc5rDUDCJo6uT6CeeuUbPxPwKQgDsAXm0XxLdejL
+ MQP6WcwYY1wkc42Qwee+5SJsdW6kvIbjIP7LbfqV5UkCCSlN5QDPWQfCItLqLDoHFMTM
+ CPW12rB650ERnyT/otJtCXMR561mOWHZbn4PpS+j4CP/uLdWKhy41eJPkzARfq7H+/2M
+ OcQc8ITROwEII4evKqlWtJrKr5Mh6iK+dXTPWbasdmX5vlJeZJcq6zjkJJSBwmES1cgU
+ ElxfiYRFW5uIEfyObRmBiU5y6Smi/W3Nqjc0iUY7XdzmEBxe0Vlf7TxGtX3akEpsRCro
+ luJQ==
+X-Gm-Message-State: AOJu0YzLPNffRtoNmaKcD1Elv1EoWsPFwnOY4jvhitmAYB18op9NK9in
+ J8kMDkKtHeUGs/cO5qLawPFO07PvRpqR7SVQ80BjWlaZWsCupKkAF3CRRp633nJ5CTwWPIrS892
+ XvnStcg==
+X-Gm-Gg: ASbGnctS9c6wuwhqkNQeJcvTXTzUyKW40cD2BiBXnU3c7lirUYiRKivTpOe8d6j2hd9
+ 7/rgp58Ho0EM9jLJVThEfsgbRrsu57ADgZXArD6VXFoCmqDJu5U7yuyWeMlWhLQ/BLa0ZDF9shO
+ 98OpZ8LTjW794KMX/Iu7tY/Ons866y8JzXD7KR7+1sCO7nMTnTtlRJ39aRyXPgj39NwE6yoHFEs
+ QL0ru9LHuRLPrGxYplSG/Eh/R76QB4D/blJr+dJnajXlGVQA0q8Uuc0pLSk74jWLPrbvwtpQvGL
+ 6QGJ+jB5OfkhsaqS716buHj/r4ce3JMc/mronJkiPui8GockYliM
+X-Google-Smtp-Source: AGHT+IG3+EQquY1wsrACysmbTihbLOKXK4mOMwGs+ArGXOZ/UnQzcUyuQAV6mdpJvmtKyDXpg12mNA==
+X-Received: by 2002:a05:600c:c16:b0:43d:24d:bbe2 with SMTP id
+ 5b1f17b1804b1-43db8524b1bmr62436275e9.28.1743424298927; 
+ Mon, 31 Mar 2025 05:31:38 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:f23c:25c9:dc74:be1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.36
+ ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 05:31:36 -0700 (PDT)
+ Mon, 31 Mar 2025 05:31:38 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 04/16] sandbox: add initjmp()
-Date: Mon, 31 Mar 2025 14:30:58 +0200
-Message-ID: <20250331123120.2025062-5-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: [PATCH v5 05/16] test: lib: add initjmp() test
+Date: Mon, 31 Mar 2025 14:30:59 +0200
+Message-ID: <20250331123120.2025062-6-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250331123120.2025062-1-jerome.forissier@linaro.org>
 References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
@@ -99,239 +102,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initjm[() to sandbox, a non-standard extension to setjmp()/
-longjmp() allowing to initialize a jump buffer with a function pointer
-and a stack pointer. This will be useful to later introduce threads.
-With this new function it becomes possible to longjmp() to a particular
-function pointer (rather than to a point previously reached during
-program execution as is the case with setjmp()), and with a custom stack.
-Both things are needed to spin off a new thread. Then the usual
-setjmp()/longjmp() pair is enough to save and restore a context, i.e.,
-switch thread. The implementation is taken verbatim from barebox [1] with
-the exception of the additional stack_sz argument. It is quite complex
-because contrary to U-Boot platform code we don't know how the system's
-C library implements the jump buffer, so we can't just write the function
-and stack pointers into it.
-
-[1] https://github.com/barebox/barebox/blob/b2a15c383ddc/arch/sandbox/os/setjmp.c
+Test the initjmp() function when HAVE_INITJMP is set. Use the test as an
+example in the API documentation.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/sandbox/cpu/Makefile  |  11 ++-
- arch/sandbox/cpu/initjmp.c | 175 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 185 insertions(+), 1 deletion(-)
- create mode 100644 arch/sandbox/cpu/initjmp.c
+ doc/api/setjmp.rst | 10 +++++++
+ test/lib/Makefile  |  1 +
+ test/lib/initjmp.c | 73 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 84 insertions(+)
+ create mode 100644 test/lib/initjmp.c
 
-diff --git a/arch/sandbox/cpu/Makefile b/arch/sandbox/cpu/Makefile
-index bfcdc335d32..038ad78accc 100644
---- a/arch/sandbox/cpu/Makefile
-+++ b/arch/sandbox/cpu/Makefile
-@@ -5,7 +5,7 @@
- # (C) Copyright 2000-2003
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+diff --git a/doc/api/setjmp.rst b/doc/api/setjmp.rst
+index 7718047085c..c48b2e3e096 100644
+--- a/doc/api/setjmp.rst
++++ b/doc/api/setjmp.rst
+@@ -8,3 +8,13 @@ Long jump API
  
--obj-y	:= cache.o cpu.o state.o
-+obj-y	:= cache.o cpu.o state.o initjmp.o
- extra-y	:= start.o os.o
- extra-$(CONFIG_SANDBOX_SDL)    += sdl.o
- obj-$(CONFIG_XPL_BUILD)	+= spl.o
-@@ -29,6 +29,15 @@ cmd_cc_eth-raw-os.o = $(CC) $(filter-out -nostdinc, \
- $(obj)/eth-raw-os.o: $(src)/eth-raw-os.c FORCE
- 	$(call if_changed_dep,cc_eth-raw-os.o)
- 
-+# initjmp.c is build in the system environment, so needs standard includes
-+# CFLAGS_REMOVE_initjmp.o cannot be used to drop header include path
-+quiet_cmd_cc_initjmp.o = CC $(quiet_modtag)  $@
-+cmd_cc_initjmp.o = $(CC) $(filter-out -nostdinc, \
-+	$(patsubst -I%,-idirafter%,$(c_flags))) -c -o $@ $<
+ .. kernel-doc:: include/setjmp.h
+    :internal:
 +
-+$(obj)/initjmp.o: $(src)/initjmp.c FORCE
-+	$(call if_changed_dep,cc_initjmp.o)
++Example
++-------
 +
- # sdl.c fails to build with -fshort-wchar using musl
- cmd_cc_sdl.o = $(CC) $(filter-out -nostdinc -fshort-wchar, \
- 	$(patsubst -I%,-idirafter%,$(c_flags))) -fno-lto -c -o $@ $<
-diff --git a/arch/sandbox/cpu/initjmp.c b/arch/sandbox/cpu/initjmp.c
++Here is an example showing how to use the a long jump functions and 
++initjmp() in particular:
++
++.. literalinclude:: ../../test/lib/initjmp.c
++   :language: c
++   :linenos:
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index 0e4cb8e3dfd..bf04685dae1 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -14,6 +14,7 @@ obj-y += hexdump.o
+ obj-$(CONFIG_SANDBOX) += kconfig.o
+ obj-y += lmb.o
+ obj-$(CONFIG_HAVE_SETJMP) += longjmp.o
++obj-$(CONFIG_HAVE_INITJMP) += initjmp.o
+ obj-$(CONFIG_CONSOLE_RECORD) += test_print.o
+ obj-$(CONFIG_SSCANF) += sscanf.o
+ obj-$(CONFIG_$(PHASE_)STRTO) += str.o
+diff --git a/test/lib/initjmp.c b/test/lib/initjmp.c
 new file mode 100644
-index 00000000000..6e72d32cb4b
+index 00000000000..5b4b50b3f0f
 --- /dev/null
-+++ b/arch/sandbox/cpu/initjmp.c
-@@ -0,0 +1,175 @@
-+// SPDX-License-Identifier: LGPL-2.1-or-later
++++ b/test/lib/initjmp.c
+@@ -0,0 +1,73 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * An implementation of initjmp() in C, that plays well with the system's
-+ * setjmp() and longjmp() functions.
-+ * Taken verbatim from arch/sandbox/os/setjmp.c in the barebox project.
-+ * Modified so that initjmp() accepts a stack_size argument.
++ * Copyright 2025 Linaro Limited
 + *
-+ * Copyright (C) 2006  Anthony Liguori <anthony@codemonkey.ws>
-+ * Copyright (C) 2011  Kevin Wolf <kwolf@redhat.com>
-+ * Copyright (C) 2012  Alex Barcelo <abarcelo@ac.upc.edu>
-+ * Copyright (C) 2021  Ahmad Fatoum, Pengutronix
-+ * Copyright (C) 2025  Linaro Ltd.
-+ * This file is partly based on pth_mctx.c, from the GNU Portable Threads
-+ *  Copyright (c) 1999-2006 Ralf S. Engelschall <rse@engelschall.com>
++ * Unit test for initjmp()
 + */
 +
-+/* XXX Is there a nicer way to disable glibc's stack check for longjmp? */
-+#ifdef _FORTIFY_SOURCE
-+#undef _FORTIFY_SOURCE
-+#endif
-+
-+#include <pthread.h>
-+#include <stdio.h>
-+#include <stdlib.h>
++#include <compiler.h>
 +#include <setjmp.h>
-+#include <signal.h>
++#include <stdbool.h>
++#include <test/lib.h>
++#include <test/ut.h>
++#include <vsprintf.h>
 +
-+typedef sigjmp_buf _jmp_buf __attribute__((aligned((16))));
-+_Static_assert(sizeof(_jmp_buf) <= 512, "sigjmp_buf size exceeds expectation");
++static bool ep_entered;
++static jmp_buf return_buf;
 +
-+/*
-+ * Information for the signal handler (trampoline)
-+ */
-+static struct {
-+	_jmp_buf *reenter;
-+	void (*entry)(void);
-+	volatile sig_atomic_t called;
-+} tr_state;
-+
-+/*
-+ * "boot" function
-+ * This is what starts the coroutine, is called from the trampoline
-+ * (from the signal handler when it is not signal handling, read ahead
-+ * for more information).
-+ */
-+static void __attribute__((noinline, noreturn))
-+coroutine_bootstrap(void (*entry)(void))
++static void __noreturn entrypoint(void)
 +{
-+	for (;;)
-+		entry();
++	ep_entered = true;
++
++	/* Jump back to the main routine */
++	longjmp(return_buf, 1);
++
++	/* Not reached */
++	panic("longjmp failed\n");
 +}
 +
-+/*
-+ * This is used as the signal handler. This is called with the brand new stack
-+ * (thanks to sigaltstack). We have to return, given that this is a signal
-+ * handler and the sigmask and some other things are changed.
-+ */
-+static void coroutine_trampoline(int signal)
++static int lib_initjmp(struct unit_test_state *uts)
 +{
-+	/* Get the thread specific information */
-+	tr_state.called = 1;
++	int ret;
++	void *stack;
++	jmp_buf buf;
++	/* Arbitrary but smaller values (< page size?) fail on SANDBOX */
++	size_t stack_sz = 8192;
++
++	(void)entrypoint;
++
++	ep_entered = false;
++
++	stack = malloc(stack_sz);
++	ut_assertnonnull(stack);
 +
 +	/*
-+	 * Here we have to do a bit of a ping pong between the caller, given that
-+	 * this is a signal handler and we have to do a return "soon". Then the
-+	 * caller can reestablish everything and do a siglongjmp here again.
++	 * Prepare return_buf so that entrypoint may jump back just after the
++	 * if()
 +	 */
-+	if (!sigsetjmp(*tr_state.reenter, 0)) {
-+		return;
++	if (!setjmp(return_buf)) {
++		/* return_buf initialized, entrypoint not yet called */
++
++		/*
++		 * Prepare another jump buffer to jump into entrypoint with the
++		 * given stack
++		 */
++		ret = initjmp(buf, entrypoint, stack, stack_sz);
++		ut_assertok(ret);
++
++		/* Jump into entrypoint */
++		longjmp(buf, 1);
++		/*
++		 * Not reached since entrypoint is expected to branch after
++		 * the if()
++		 */
++		ut_assert(false);
 +	}
 +
-+	/*
-+	 * Ok, the caller has siglongjmp'ed back to us, so now prepare
-+	 * us for the real machine state switching. We have to jump
-+	 * into another function here to get a new stack context for
-+	 * the auto variables (which have to be auto-variables
-+	 * because the start of the thread happens later). Else with
-+	 * PIC (i.e. Position Independent Code which is used when PTH
-+	 * is built as a shared library) most platforms would
-+	 * horrible core dump as experience showed.
-+	 */
-+	coroutine_bootstrap(tr_state.entry);
-+}
++	ut_assert(ep_entered);
 +
-+int __attribute__((weak)) initjmp(_jmp_buf jmp, void (*func)(void),
-+				  void *stack_base, size_t stack_size)
-+{
-+	struct sigaction sa;
-+	struct sigaction osa;
-+	stack_t ss;
-+	stack_t oss;
-+	sigset_t sigs;
-+	sigset_t osigs;
++	free(stack);
 +
-+	/* The way to manipulate stack is with the sigaltstack function. We
-+	 * prepare a stack, with it delivering a signal to ourselves and then
-+	 * put sigsetjmp/siglongjmp where needed.
-+	 * This has been done keeping coroutine-ucontext (from the QEMU project)
-+	 * as a model and with the pth ideas (GNU Portable Threads).
-+	 * See coroutine-ucontext for the basics of the coroutines and see
-+	 * pth_mctx.c (from the pth project) for the
-+	 * sigaltstack way of manipulating stacks.
-+	 */
-+
-+	tr_state.entry = func;
-+	tr_state.reenter = (void *)jmp;
-+
-+	/*
-+	 * Preserve the SIGUSR2 signal state, block SIGUSR2,
-+	 * and establish our signal handler. The signal will
-+	 * later transfer control onto the signal stack.
-+	 */
-+	sigemptyset(&sigs);
-+	sigaddset(&sigs, SIGUSR2);
-+	pthread_sigmask(SIG_BLOCK, &sigs, &osigs);
-+	sa.sa_handler = coroutine_trampoline;
-+	sigfillset(&sa.sa_mask);
-+	sa.sa_flags = SA_ONSTACK;
-+	if (sigaction(SIGUSR2, &sa, &osa) != 0) {
-+		return -1;
-+	}
-+
-+	/*
-+	 * Set the new stack.
-+	 */
-+	ss.ss_sp = stack_base;
-+	ss.ss_size = stack_size;
-+	ss.ss_flags = 0;
-+	if (sigaltstack(&ss, &oss) < 0) {
-+		return -1;
-+	}
-+
-+	/*
-+	 * Now transfer control onto the signal stack and set it up.
-+	 * It will return immediately via "return" after the sigsetjmp()
-+	 * was performed. Be careful here with race conditions.  The
-+	 * signal can be delivered the first time sigsuspend() is
-+	 * called.
-+	 */
-+	tr_state.called = 0;
-+	pthread_kill(pthread_self(), SIGUSR2);
-+	sigfillset(&sigs);
-+	sigdelset(&sigs, SIGUSR2);
-+	while (!tr_state.called) {
-+		sigsuspend(&sigs);
-+	}
-+
-+	/*
-+	 * Inform the system that we are back off the signal stack by
-+	 * removing the alternative signal stack. Be careful here: It
-+	 * first has to be disabled, before it can be removed.
-+	 */
-+	sigaltstack(NULL, &ss);
-+	ss.ss_flags = SS_DISABLE;
-+	if (sigaltstack(&ss, NULL) < 0) {
-+		return -1;
-+	}
-+	sigaltstack(NULL, &ss);
-+	if (!(oss.ss_flags & SS_DISABLE)) {
-+		sigaltstack(&oss, NULL);
-+	}
-+
-+	/*
-+	 * Restore the old SIGUSR2 signal handler and mask
-+	 */
-+	sigaction(SIGUSR2, &osa, NULL);
-+	pthread_sigmask(SIG_SETMASK, &osigs, NULL);
-+
-+	/*
-+	 * jmp can now be used to enter the trampoline again, but not as a
-+	 * signal handler. Instead it's longjmp'd to directly.
-+	 */
 +	return 0;
 +}
-+
++LIB_TEST(lib_initjmp, 0);
 -- 
 2.43.0
 
