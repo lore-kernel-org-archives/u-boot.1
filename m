@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F8BC3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1ECC3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:46:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B45781FDE;
+	by phobos.denx.de (Postfix) with ESMTP id 6B9D982027;
 	Mon, 31 Mar 2025 15:46:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hsKnm8w8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uU9yVXGN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4529881E60; Mon, 31 Mar 2025 15:46:21 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id A190B81EBB; Mon, 31 Mar 2025 15:46:24 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2491481E47
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98C2B81F0B
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72b7a53ceb6so2408945a34.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:18 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-72bd828f18dso1317634a34.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743428778; x=1744033578; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743428779; x=1744033579; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u0vxiwIuUF1a7fPe5RPPR6W77QLvcdWTtk6ecdmXN9M=;
- b=hsKnm8w8sjTaUGLNhnwIkedbN0UCxA/ZtLRrKSF6EqTFaZpKXFHGCBmri9MmT4QQ/6
- tzTVdnoGf6H4JyPELArln8dqUBz4WLrkyS2jz299Y5+wstnQA+pYb44QQLXO2uMobqV7
- FCuZIq3EiH37/5i9aECqIboHCAVAT0VFr+eCI=
+ bh=zcBIattyJKaMBFw4lr4P0Ty/fiq+vg2YVXyvJZ4wKr0=;
+ b=uU9yVXGN9iXKoNXQ/W9DBY7r8/lar1yk+4NGdfKbwIiIJf5l9iU0X1l4E5f4HFXl7u
+ rWy5BFNdH5vejoWoe9bYxaFOPn0kYW8Dgitgm8BnW9pSqIYNIZweIU6h1jXtis6YfAcG
+ QQW4IJQhcEl+unjUQx1uBH55AFz5ZNA9sDdoM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743428778; x=1744033578;
+ d=1e100.net; s=20230601; t=1743428779; x=1744033579;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u0vxiwIuUF1a7fPe5RPPR6W77QLvcdWTtk6ecdmXN9M=;
- b=WsU/R7QiWmsJNg7X0Home0RZRVd5si91CrWvs8EbppwnbZjJeofS6t/zX1Au52360c
- 4MBHK5HCtyu1dEWFpRgc+Gz2gW98PysUHkfvBId1mrgZalpIwiX4vzI1sSpuhq0xSM38
- wqyamxipVn+ebGOu0QIVmfcdZ8y7AQmc31IZMPppnQeCnkDTtpawVAeK4T00j8QRq93s
- /v7D/g0/EdeiBXFaxthwt30oEUKsskOT9EA+f38Pu5ga6sncxFK1z4CofiW4Ns8YsVvZ
- AJWHP+vHGf4Fjgspl7HbMiLfoIMlmnMCABlsr8CFJtDKxCHxZbk3uEFQorj76vCD4e5y
- GI0Q==
-X-Gm-Message-State: AOJu0YwvXhPVcwaQuq0peRymFKE1HVo//G3Hx9k3A407ZVipqppvVhSA
- i+g/gM27+w9K4GEDp33eqkSWhjhYDSH2CBy8c3Oypq43ZmT4zxivjNCF/oyTa1QZ8vN8yf2l1Hz
- r
-X-Gm-Gg: ASbGncur2c7nqbrv/ghv+pWssXWWqFQfXWdmPnOTCSTpN4qghpShCg+75yYBhSb/PBI
- BNk1mE9S2Iv6cNFsWhG87lC21NdusX98+brN1mEOKonSUVJH6zuQ0e4YL4QC962LMG9jZn2Gokb
- zYU2jNdp5uJpmz3f0J3ig4GmZrrz8tHly40ZufYKksQzptya2Cx2keApKxgKRIFbVB3fo4TkNZu
- E9JMcWNTyiLjPMCF7w4Fw97ZsojyQf1hrCU02IeXr2kE3znY4uuBMLXVUUYMH/LWdL/f2LLOHWI
- K5xPso5eCPCxP+Ex/q2c4i5M7Gh3QumsrfNsRcHN05+5nuzFIf8FI7gvREhBjaXKLfYdnfEXgn3
- fPE+J
-X-Google-Smtp-Source: AGHT+IFtgn0RtWqTNxI8dHyGPN/0bWNmDa3Hr/t3JHMhKLbWzgZi8xHskCmxKnhtFuwNutmvCfZr+A==
-X-Received: by 2002:a05:6830:699b:b0:72b:7be8:7ef7 with SMTP id
- 46e09a7af769-72c59a46f1amr8980502a34.9.1743428777752; 
- Mon, 31 Mar 2025 06:46:17 -0700 (PDT)
+ bh=zcBIattyJKaMBFw4lr4P0Ty/fiq+vg2YVXyvJZ4wKr0=;
+ b=hwBDoiqXs8Lz6nmLdHVug4W6Z5q1XGzjb37pnmFM67XMMMxLg1iON5B0W79t05pL6O
+ hvE3eZbPK6P45XXUCCvdaX7RtEeZzEn7OWJMONrrbTCv156BDxf0Zq+0iLao7Tv7/chR
+ QFsq6nJ/xhW8FkPWtPGXSm8Uz0PIkLHoFHnSU+JLwGA5sB1+HvFXSlXtL8Lcd8kHEi/w
+ fLOaVLtNppR54PJrH2eNIICpiAFjqAVoLR2MFL+sbVJ77aL0igXmQl5f5tA4fVrKpRcv
+ h8NKOQSmo17oIt1drGEW2h61+IElLvm2GgR36SKUBdoEubP1680l+JWPAMRUFJAlll2d
+ yi2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVcoWWDotGB6w38PJK6U5bciNjddfc5zR0YQuiwofwGRx8XSZpvlOx/sZJ+Xv25KSh3zOUWcrA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyVb7fZ5IaABuAaoesrm/2BLndzC8SYeoZcu/e5u62m1ZNRIeWU
+ bNFXJOJwLn4iBT4cukmgvr3rAEceCYICoy5BQhs7GJDpNDYe/IEXQ8fuItlKD7c=
+X-Gm-Gg: ASbGncurOJaC3n82Lp90H9+NgpHQFmnNl+rhSNjsn+q6MpVh3M3vGD+ynQv4tvNl2qJ
+ CZgsnf6EWDWWZ5qen6n/SAn9bcjmZfC9A6d31UGFVvSb9CR2ApSh7ikuRtujoEyQ6B1/Z+UhDxL
+ bP2N+4eyYJF5G0T1TYJmRnb/BsU2wWg5pxd0NZvzygbJ9OywK4/5L14xdM1cA0AAZwqQ8jqg5VD
+ Xe4msOaNl8WIbEIZcbcJyJt6bhyAt4s7KVL27U9/pZd+0oB8s/lg93ctvgok9OmPWYijwahatox
+ KbWKHJKrUS7aVKt3Dt3KVV5FcuaGf8BCC5KwQgJnr6xB2VqKbVHVT+zdFsZZw9Xq7NnsHglxQrv
+ jbfOa
+X-Google-Smtp-Source: AGHT+IE4sd0UDG6Mvbmpo7NIk+IIXi4RjqU2x5UyoyFT8txmfMPb5/2xsQ4v12Ee4VPy0kHBEDhjjw==
+X-Received: by 2002:a05:6830:b90:b0:727:3f3e:53bb with SMTP id
+ 46e09a7af769-72c638337e8mr5569381a34.24.1743428779394; 
+ Mon, 31 Mar 2025 06:46:19 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.16
+ 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 06:46:16 -0700 (PDT)
+ Mon, 31 Mar 2025 06:46:18 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Sam Shih <sam.shih@mediatek.com>
-In-Reply-To: <8ca87e744999373b87ea7dab46b7724e1ae35b88.1741317191.git.weijie.gao@mediatek.com>
-References: <8ca87e744999373b87ea7dab46b7724e1ae35b88.1741317191.git.weijie.gao@mediatek.com>
-Subject: Re: [PATCH 1/2] pwm: mediatek: add pwm support for MediaTek MT7987 SoC
-Message-Id: <174342877640.1318045.10449564178734133090.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 07:46:16 -0600
+To: vigneshr@ti.com, j-humphreys@ti.com, jm@ti.com, n-francis@ti.com, 
+ seanga2@gmail.com, afd@ti.com, sjg@chromium.org, rogerq@kernel.org, 
+ danishanwar@ti.com, Hrushikesh Salunke <h-salunke@ti.com>
+Cc: srk@ti.com, s-vadapalli@ti.com, u-boot@lists.denx.de
+In-Reply-To: <20250310120856.603150-1-h-salunke@ti.com>
+References: <20250310120856.603150-1-h-salunke@ti.com>
+Subject: Re: [PATCH] configs: am64x_evm_a53_defconfig: Enable support for UMS
+Message-Id: <174342877793.1318045.3095904471448367106.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 07:46:17 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,18 +99,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 07 Mar 2025 11:22:23 +0800, Weijie Gao wrote:
+On Mon, 10 Mar 2025 17:38:56 +0530, Hrushikesh Salunke wrote:
 
-> This patch adds pwm support for MediaTek MT7987 SoC.
+> Enable support for USB mass storage class (UMS) via USB0 instance of
+> USB on AM64x SoC. UMS allows USB host to access U-Boot block device
+> and enable file transfer.
 > 
+> Example usage of UMS command :
+> 	=> mmc list
+> 	mmc@fa10000: 0 (eMMC)
+> 	mmc@fa00000: 1
+> 	=> ums 0 mmc 1
+> 	UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3b72400
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] pwm: mediatek: add pwm support for MediaTek MT7987 SoC
-      commit: f87b959080d95528c93cc7fcae84768aafc75740
-[2/2] arm: dts: mediatek: disable fan node for mt7987
-      commit: bc09d20b51336ab61a5ea9c373275338752f9a9c
+[1/1] configs: am64x_evm_a53_defconfig: Enable support for UMS
+      commit: c5db8973d7df0573d5e72fa5b9154d3c0856ec3e
 -- 
 Tom
 
