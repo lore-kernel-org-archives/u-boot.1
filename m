@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1ECC3600C
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD55C3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B9D982027;
-	Mon, 31 Mar 2025 15:46:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE83381ECD;
+	Mon, 31 Mar 2025 15:46:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uU9yVXGN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RxTk2eEJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A190B81EBB; Mon, 31 Mar 2025 15:46:24 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 093D381E47; Mon, 31 Mar 2025 15:46:25 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98C2B81F0B
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF67581E47
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:46:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-72bd828f18dso1317634a34.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:20 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-72a4793d4e2so2870905a34.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:46:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743428779; x=1744033579; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743428781; x=1744033581; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zcBIattyJKaMBFw4lr4P0Ty/fiq+vg2YVXyvJZ4wKr0=;
- b=uU9yVXGN9iXKoNXQ/W9DBY7r8/lar1yk+4NGdfKbwIiIJf5l9iU0X1l4E5f4HFXl7u
- rWy5BFNdH5vejoWoe9bYxaFOPn0kYW8Dgitgm8BnW9pSqIYNIZweIU6h1jXtis6YfAcG
- QQW4IJQhcEl+unjUQx1uBH55AFz5ZNA9sDdoM=
+ bh=b6MLC3qbaUwRdRAnnth8VeZUM+w01uIF6wGohx7YLbE=;
+ b=RxTk2eEJGYWIyvNqk/6R0vSGu4KJLZMgWKigxdHiNEcnmtji658CM4F1e/sfJgk6nN
+ F0VbyuLmZSS55y/WCdos2gab0V592tCbXGaTQbKc0bK+M861PiczXrvN/OErVsKcoFw5
+ TB401NQU3MgB9a1l83korVcffk0u+fOCxXEWI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743428779; x=1744033579;
+ d=1e100.net; s=20230601; t=1743428781; x=1744033581;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zcBIattyJKaMBFw4lr4P0Ty/fiq+vg2YVXyvJZ4wKr0=;
- b=hwBDoiqXs8Lz6nmLdHVug4W6Z5q1XGzjb37pnmFM67XMMMxLg1iON5B0W79t05pL6O
- hvE3eZbPK6P45XXUCCvdaX7RtEeZzEn7OWJMONrrbTCv156BDxf0Zq+0iLao7Tv7/chR
- QFsq6nJ/xhW8FkPWtPGXSm8Uz0PIkLHoFHnSU+JLwGA5sB1+HvFXSlXtL8Lcd8kHEi/w
- fLOaVLtNppR54PJrH2eNIICpiAFjqAVoLR2MFL+sbVJ77aL0igXmQl5f5tA4fVrKpRcv
- h8NKOQSmo17oIt1drGEW2h61+IElLvm2GgR36SKUBdoEubP1680l+JWPAMRUFJAlll2d
- yi2Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcoWWDotGB6w38PJK6U5bciNjddfc5zR0YQuiwofwGRx8XSZpvlOx/sZJ+Xv25KSh3zOUWcrA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyVb7fZ5IaABuAaoesrm/2BLndzC8SYeoZcu/e5u62m1ZNRIeWU
- bNFXJOJwLn4iBT4cukmgvr3rAEceCYICoy5BQhs7GJDpNDYe/IEXQ8fuItlKD7c=
-X-Gm-Gg: ASbGncurOJaC3n82Lp90H9+NgpHQFmnNl+rhSNjsn+q6MpVh3M3vGD+ynQv4tvNl2qJ
- CZgsnf6EWDWWZ5qen6n/SAn9bcjmZfC9A6d31UGFVvSb9CR2ApSh7ikuRtujoEyQ6B1/Z+UhDxL
- bP2N+4eyYJF5G0T1TYJmRnb/BsU2wWg5pxd0NZvzygbJ9OywK4/5L14xdM1cA0AAZwqQ8jqg5VD
- Xe4msOaNl8WIbEIZcbcJyJt6bhyAt4s7KVL27U9/pZd+0oB8s/lg93ctvgok9OmPWYijwahatox
- KbWKHJKrUS7aVKt3Dt3KVV5FcuaGf8BCC5KwQgJnr6xB2VqKbVHVT+zdFsZZw9Xq7NnsHglxQrv
- jbfOa
-X-Google-Smtp-Source: AGHT+IE4sd0UDG6Mvbmpo7NIk+IIXi4RjqU2x5UyoyFT8txmfMPb5/2xsQ4v12Ee4VPy0kHBEDhjjw==
-X-Received: by 2002:a05:6830:b90:b0:727:3f3e:53bb with SMTP id
- 46e09a7af769-72c638337e8mr5569381a34.24.1743428779394; 
- Mon, 31 Mar 2025 06:46:19 -0700 (PDT)
+ bh=b6MLC3qbaUwRdRAnnth8VeZUM+w01uIF6wGohx7YLbE=;
+ b=ExIk57P1+nFOIY++xrfYy04j9WW0x8rLUV1wdnHXCKBBdiRkV8ua76GdrJ9BeAT8Ru
+ 8zRtNeAk0A3xnZ7sDDCjdTg2pmIkrKBk7ZVNUpkqjQqFAaG0CNh7OLz9fpLnEyGTOXOa
+ q8v2IxlS4sfElRgRu0KaWxoxANMYeHMz97FXCdJBe1sBsNXeSTXqdNyeHkYTMUYBVeen
+ XwY1Mpqf8AkRt2yhYL983XbIdgaCSQ7Y0Wtju5zU64HC7CjeewiF644t5jK6Y/TxqzCg
+ 2Go26AO6EJjVrxxNF3BmiEuemSPuPPT45dw3DHt4+PeYCy4/OQBLWup9DTKZWxWS9E60
+ Uopw==
+X-Gm-Message-State: AOJu0Yz7EnVJwNEmo4xLur8+ZKCadP35AdnDcbRORaz9qlT7iBnSUJ4d
+ Nh5/L4jeFChlT3wl262huJBu1/XCQAT4OYD8z66OocPMyK/0sBhPjbHD4wcYt8c=
+X-Gm-Gg: ASbGncuWsW9p0CRV9UvyU78RPuTf9aWtqmXOIORzWcaP84wkUymp/fp0R0diFN4JeNt
+ jy1hc7K4W6d3UatjanvXPhENWVDmCxNyVQTbbgOEhoL6upcMA0JHipZ7JawCvmsKaA2bmNHDw33
+ m0qrHd3MizLmy11dNY7pwSn6FLkq9D/3epzV5EEVb1AAo1k3glWY6NQVKiZm6BrfP1I83/xGst3
+ OPe6nVFpk5HxfAFteeyahCYD4/npSxZs4XzH5oPL4cD0tKa93g1fAgcpOVv3mNF6D5GRF3xUO3i
+ gyk8uH2EdsFmpMe4cOVnps0izBReZwFcz9CxoI9GYYILlaQcmupEdAgAjBrjatsckmTWSav6hth
+ qNN/h
+X-Google-Smtp-Source: AGHT+IEzl660xF3ku1ukYQYULQLgqsWC/ZDc0QQtzMYBPGukrmuECVyC30YDSCedTBSaQgjFTxAlJA==
+X-Received: by 2002:a05:6830:6011:b0:72b:93c9:41a6 with SMTP id
+ 46e09a7af769-72c6380e7cemr6210723a34.20.1743428780710; 
+ Mon, 31 Mar 2025 06:46:20 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.17
+ 46e09a7af769-72c5828ae78sm1456331a34.60.2025.03.31.06.46.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 06:46:18 -0700 (PDT)
+ Mon, 31 Mar 2025 06:46:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: vigneshr@ti.com, j-humphreys@ti.com, jm@ti.com, n-francis@ti.com, 
- seanga2@gmail.com, afd@ti.com, sjg@chromium.org, rogerq@kernel.org, 
- danishanwar@ti.com, Hrushikesh Salunke <h-salunke@ti.com>
-Cc: srk@ti.com, s-vadapalli@ti.com, u-boot@lists.denx.de
-In-Reply-To: <20250310120856.603150-1-h-salunke@ti.com>
-References: <20250310120856.603150-1-h-salunke@ti.com>
-Subject: Re: [PATCH] configs: am64x_evm_a53_defconfig: Enable support for UMS
-Message-Id: <174342877793.1318045.3095904471448367106.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 07:46:17 -0600
+To: u-boot@lists.denx.de, bb@ti.com, vigneshr@ti.com, 
+ Vishal Mahaveer <vishalm@ti.com>
+Cc: Sebin Francis <sebin.francis@ti.com>, Sparsh Kumar <sparsh-kumar@ti.com>
+In-Reply-To: <20250310220257.25414-1-vishalm@ti.com>
+References: <20250310220257.25414-1-vishalm@ti.com>
+Subject: Re: [PATCH] board: ti: am62px: rm-cfg: Add support for HC BCDMA
+Message-Id: <174342877954.1318045.1386479206362291752.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 07:46:19 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,25 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 10 Mar 2025 17:38:56 +0530, Hrushikesh Salunke wrote:
+On Mon, 10 Mar 2025 17:02:56 -0500, Vishal Mahaveer wrote:
 
-> Enable support for USB mass storage class (UMS) via USB0 instance of
-> USB on AM64x SoC. UMS allows USB host to access U-Boot block device
-> and enable file transfer.
+> The first 4 block copy channels and rings on AM62P support
+> High Capacity Block Copy. These channels have approximately
+> 3x improvement over the normal Block copy channels when doing
+> DDR-to-DDR copy.
 > 
-> Example usage of UMS command :
-> 	=> mmc list
-> 	mmc@fa10000: 0 (eMMC)
-> 	mmc@fa00000: 1
-> 	=> ums 0 mmc 1
-> 	UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3b72400
+> Currently, during allocation these channels do not have a
+> separate interface and are allocated with normal BCDMA channels.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] configs: am64x_evm_a53_defconfig: Enable support for UMS
-      commit: c5db8973d7df0573d5e72fa5b9154d3c0856ec3e
+[1/1] board: ti: am62px: rm-cfg: Add support for HC BCDMA
+      commit: db8bcdb00af59e4a88d72f7ce115200d554c8d2d
 -- 
 Tom
 
