@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC317C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC92C3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:34:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5BDF81DE3;
-	Mon, 31 Mar 2025 15:34:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 46E218171B;
+	Mon, 31 Mar 2025 15:34:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V535N9uu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G4WM350x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E37C819D2; Mon, 31 Mar 2025 15:34:44 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id B414B81EBB; Mon, 31 Mar 2025 15:34:46 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E386B8144A
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:34:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 642648144A
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:34:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43690d4605dso29717025e9.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:34:41 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43cf680d351so30694705e9.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:34:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743428081; x=1744032881; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743428084; x=1744032884; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3CjVdQdaw0Kcrw9uLGqkSDqYWDMgF8efugNkoiyYBaY=;
- b=V535N9uuHVKNdBZMM0DomwMTNn8NQjK3PjA9pK1Dtmo4Rsc5vvj8g32qEq2lt8aFmY
- e+Y9reZtU+Lz584WHkAd02opHgYeXm5HVqLSENKbUnSdydY3aDNH1wB+ZaTkoc9TPswK
- 3aLoEb/4fT5w5z/1Z0oetaC61NiS3986YYKfwrrJjtJXgcNLeY0W45fNSlDcTRf5+XL4
- Y7UuBGgJ/xkAn0XqJ3GgX/WtX9XMbLnDloTBk+V3P9Kmj9C/Dc50kWS0kNDdcxVz34Ip
- yC+50zW+VXO6cZeZ9Pl7G3XUjgN2tHXwjR54An52NpBbN7nkHQ7r5XBzHD/TJvYSIuzm
- BkMA==
+ bh=bWhXrhx0dMNq18OtsUpGUsFsF/ZpNIC9r2tybnVkLmM=;
+ b=G4WM350xl6ZngZgVtP3aFnpMDRFwed6DGaBRGAHzS240B3sAq5hbhdRlXYjykWatuc
+ y/VtqrnO10R9nGSdI31RP17uzQezbZeK7dmZqK6nCExOWecIZELPgLoqsNAxbwnNneej
+ DUUfu7QB/D/B2KlEGO6YU471cm+IP56NGZ42pOal/yNaNyerEXp+/pSKKjCMuMdVJIs/
+ wnDLBIDVPC3SO4O1ngQvyXEYbQdQP3hLaydesjQ/7/Mmq81ZxxkIiyUe22x0hlztIiyE
+ rVXTNXHBv+tIMTtfvuhcnfMg3prFP9/r4IBJgi/Q4BZ3ROcr3itVFR67TWrQ1c8nU78L
+ E/og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743428081; x=1744032881;
+ d=1e100.net; s=20230601; t=1743428084; x=1744032884;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3CjVdQdaw0Kcrw9uLGqkSDqYWDMgF8efugNkoiyYBaY=;
- b=quYnQMOPJYvgs4ULhX3LwpUPrFljYMQa02i3k4nE15mXizDZqfnTzVPIYujD9DnyyS
- 8NQ00X8lRh6rVsjkSeCWhGuXja/e2qAosfzBmlVS4TbJnSk/WyTZxoPoYhz80Ea84CvE
- SUIdVW4KraGt88kBm2TEnyGVCh4Vg/vf1JKa2+7gzJmcGAq1fzAzi8RGMyjNhDuLDM6x
- twDVZfC6sioeaICKd9BmNmgRpxEBS7i6Nlcr3Hbr0gEtBqRBqYwZIwpzXqdHAWPTfoGU
- /XeQ17BrtuCtgGwXrzMISij2NKiQdWPyNlrqk9f++nUDA/SZcP5Pupr7hqt+kdn650lL
- zxnw==
+ bh=bWhXrhx0dMNq18OtsUpGUsFsF/ZpNIC9r2tybnVkLmM=;
+ b=Zdo9NQo7sGfq1LAt/aDI4MCxa0cYNuvSh/hqaBJv3mGml+4JG2crjGXRDbnqRuVP+F
+ bnf4dTobya65EeQC/EyS2o+IxitWAJUOCD9znhZ3UIWGgJt/GIZrDo3RJzMcY+uiN1bc
+ bshOWE+4aHhBwa0OIsmqv4wl6B4wpB4206rKzznVSiYOOrnEL0xDAVfIAofpwDctyXub
+ 0U3ncUTuK0sfT0UCTvsYIXl30xmkcdk415d8DS4hewc728IJs8v2/f5WtKCohn2iK6YM
+ gOZsZtjzaVIPLmEtbYgwbj2FT72lC0I41/X3jeOxy1VugQKIePQ39UPBB3lD3h4rHuWN
+ R5ug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU7MNDrv66bPCRJOwzdxphRMkTCsyCkXx+ZxLmmFL3afRvjJ3hoSt8EW5rxNaZu6453DYdvaPc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywogq829jkIv2EkB+rM+5d1x088JQupNkxQ+ckCj+W14dhkTlb8
- sHWWCGQ2kBs3HCw+6sesoC8tXfiPq6k6dJQOnq7B9gyWiZ2PJ5+KEOKwQDPKS2Q=
-X-Gm-Gg: ASbGncsb0N6cFHMrkRNKaojIaCwuI8/7dOkAQkjTiqLbahVOlkagmnvH3eBgj0FMbjR
- QduMJ/Tzyl5FSJX3BIRsxXR+QpPprp8tp4eJBl4v13DSMiG8EJ9C9m/6a2D5mDYSrOL4uivFgZT
- dox5hh6/Zpr5VmMi+r0BuFuYb1ug9AlDl8wAGDp/HymAqL0W6z8E1tVqa6ZtHV3yIHvniJ4fjy5
- 0cWaFBj8jzuaTTocB2O0UGQYrwkZNTDCpqPA9za8q47cl/9Y0THDwGPMMgiw4j/idQ6R7CYwoNe
- ohHgoXEHOhSp+hmPWPrjN5qIvycKYT4ZhtwLhv9TbWTUq7UJsfzhLeZ5MLKQfaVbITSDIKBOBHd
- u3QSb3s2EFE8u
-X-Google-Smtp-Source: AGHT+IH/mZu20bi/S6XY/Q5DyLzjvKYzYCRc9+N3JLckzF1dKzdc+a21GJpkw7C/X900sY9OU38uVw==
-X-Received: by 2002:a05:600c:458b:b0:43c:fabf:9146 with SMTP id
- 5b1f17b1804b1-43db6248241mr88563625e9.17.1743428081317; 
- Mon, 31 Mar 2025 06:34:41 -0700 (PDT)
+ AJvYcCW4Y0FwjfhUKI8xxnv4l7w1GXBBg/1hBVzfpQtU7YFMJOlWorBO0KBbKZD1hN1WmrwirIIXmAE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDe6EPhyGQKddwc0k78IixYDF3EPsIDZH/lxU5UZRmEm/GfogI
+ HdVCGJAVQVIG1v2CaPfb7xy19DbL2UQCLSsxD6Pqy3A8IL2pN8EbVb+QcBg9Y/c=
+X-Gm-Gg: ASbGnctDt1FFvsU1pfeK1Svz2HIAeyNkmmSmjCu4g8+2RdtQItg3m55GvoI4A0a2YFa
+ DArKS5CNJW7qP2Cx397+t/i7Ihwo9dkNPnY3H+uXuqBF7hfmXEWZSiiocMs6G2mV9cjnud33CUS
+ IWmpX4OZwNkCdGwDL6SXil5yM2gggXptMwztykIZo6wbzEIStf5xxA6jPy7RoUxy50m9mKUITUX
+ 1FIbWrF1WUyAAm9n3mRxk9/7+zOO8ZOUexWsuMk8vh8jaG/cjnYd9u8QA74La/TZscH0G1N59gf
+ islVWKTvQ0P0QeUrqP01yfQp2ipL6BlvDsGWdStV8nW0XHiqE4hrKtlQqlj+/BZcBOBgsuctzOF
+ lrw1LgpPr90Ps
+X-Google-Smtp-Source: AGHT+IFVCGuv6M9fKviR7X3ByOHLqD1Y+S9oFCvLfQGz2s2/v47TPQMy0HKLGXgcrGFc8rRTecnSjw==
+X-Received: by 2002:a05:600c:378c:b0:43b:bfa7:c7d with SMTP id
+ 5b1f17b1804b1-43d910185a9mr101031105e9.2.1743428083818; 
+ Mon, 31 Mar 2025 06:34:43 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
  [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d82efe389sm164266095e9.19.2025.03.31.06.34.39
+ 5b1f17b1804b1-43d82efe389sm164266095e9.19.2025.03.31.06.34.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 06:34:40 -0700 (PDT)
+ Mon, 31 Mar 2025 06:34:41 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20250328104011.1837872-1-caleb.connolly@linaro.org>
-References: <20250328104011.1837872-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] qcom_defconfig: enable OF_UPSTREAM_BUILD_VENDOR
-Message-Id: <174342807978.411395.16109462789277501817.b4-ty@linaro.org>
-Date: Mon, 31 Mar 2025 15:34:39 +0200
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Alexey Minnekhanov <alexeymin@postmarketos.org>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20250325083713.2425430-1-alexeymin@postmarketos.org>
+References: <20250325083713.2425430-1-alexeymin@postmarketos.org>
+Subject: Re: [PATCH] phy: Add SDM660 support to Qualcomm QUSB2 phy
+Message-Id: <174342808146.411395.14895213242162875515.b4-ty@linaro.org>
+Date: Mon, 31 Mar 2025 15:34:41 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,20 +104,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 28 Mar 2025 11:40:07 +0100, Caleb Connolly wrote:
-> A single U-Boot binary can be run on many different Qualcomm boards just
-> by booting with a different DTB.
+On Tue, 25 Mar 2025 11:37:13 +0300, Alexey Minnekhanov wrote:
+> Imported from Linux driver.
 > 
-> Simplify the build process for this by enabling OF_UPSTREAM_BUILD_VENDOR
-> so that all the DTBs will be available after building U-Boot once.
+> Note that already existing but previously unused member of
+> struct qusb2_phy::has_se_clk_scheme is now utilized for it's
+> purpose.
 > 
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] qcom_defconfig: enable OF_UPSTREAM_BUILD_VENDOR
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/ea169b980cbc
+[1/1] phy: Add SDM660 support to Qualcomm QUSB2 phy
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/bc443ad7d6f3
 
 Best regards,
 -- 
