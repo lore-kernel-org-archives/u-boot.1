@@ -4,59 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC360C3600C
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:34:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC317C3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:34:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5492181EDD;
-	Mon, 31 Mar 2025 14:34:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id E5BDF81DE3;
+	Mon, 31 Mar 2025 15:34:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="OcetryTG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V535N9uu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA7EB81703; Mon, 31 Mar 2025 12:48:01 +0200 (CEST)
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
- [91.218.175.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5E37C819D2; Mon, 31 Mar 2025 15:34:44 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B7898129B
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 12:47:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id E386B8144A
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:34:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexeymin@postmarketos.org
-Message-ID: <178c8189-c47a-4d8a-a4e5-7fa4969d7258@postmarketos.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1743418078;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=97p4MJwujfc73K28ncVRhKndu2Lt4s9XALcScXIiwag=;
- b=OcetryTGPttPbgC9HjiLMw1Fkh8VO92R7cltFY2bhje432opPYlOwtcu9uifx3Iogr4FJJ
- OZ/IQJXYYp78Q4XhDCA/sg7Eyb7Ld1lF8Czr9AOcqP44CUlEFz94FKtdKBPmh43cBnEilt
- NQzNXvNurQboftGNOP5taE5d3L6fhu+HJxhG9NL22hDpFQGgUAesecla7grGZWMrpagcb2
- YBkPHYuAsOmm2th4fyhF9EvMG3uTnH0A3mYsmOZsOoXD1obrf6HszcxwicG82WjsU1HPWl
- dJNfkG/2gorrXpUJRivfet6Xo0Uw/tCmpTPL2zYRbtIzN3vRJNs2zpltM88qjQ==
-Date: Mon, 31 Mar 2025 13:47:55 +0300
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43690d4605dso29717025e9.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:34:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743428081; x=1744032881; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3CjVdQdaw0Kcrw9uLGqkSDqYWDMgF8efugNkoiyYBaY=;
+ b=V535N9uuHVKNdBZMM0DomwMTNn8NQjK3PjA9pK1Dtmo4Rsc5vvj8g32qEq2lt8aFmY
+ e+Y9reZtU+Lz584WHkAd02opHgYeXm5HVqLSENKbUnSdydY3aDNH1wB+ZaTkoc9TPswK
+ 3aLoEb/4fT5w5z/1Z0oetaC61NiS3986YYKfwrrJjtJXgcNLeY0W45fNSlDcTRf5+XL4
+ Y7UuBGgJ/xkAn0XqJ3GgX/WtX9XMbLnDloTBk+V3P9Kmj9C/Dc50kWS0kNDdcxVz34Ip
+ yC+50zW+VXO6cZeZ9Pl7G3XUjgN2tHXwjR54An52NpBbN7nkHQ7r5XBzHD/TJvYSIuzm
+ BkMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743428081; x=1744032881;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3CjVdQdaw0Kcrw9uLGqkSDqYWDMgF8efugNkoiyYBaY=;
+ b=quYnQMOPJYvgs4ULhX3LwpUPrFljYMQa02i3k4nE15mXizDZqfnTzVPIYujD9DnyyS
+ 8NQ00X8lRh6rVsjkSeCWhGuXja/e2qAosfzBmlVS4TbJnSk/WyTZxoPoYhz80Ea84CvE
+ SUIdVW4KraGt88kBm2TEnyGVCh4Vg/vf1JKa2+7gzJmcGAq1fzAzi8RGMyjNhDuLDM6x
+ twDVZfC6sioeaICKd9BmNmgRpxEBS7i6Nlcr3Hbr0gEtBqRBqYwZIwpzXqdHAWPTfoGU
+ /XeQ17BrtuCtgGwXrzMISij2NKiQdWPyNlrqk9f++nUDA/SZcP5Pupr7hqt+kdn650lL
+ zxnw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7MNDrv66bPCRJOwzdxphRMkTCsyCkXx+ZxLmmFL3afRvjJ3hoSt8EW5rxNaZu6453DYdvaPc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywogq829jkIv2EkB+rM+5d1x088JQupNkxQ+ckCj+W14dhkTlb8
+ sHWWCGQ2kBs3HCw+6sesoC8tXfiPq6k6dJQOnq7B9gyWiZ2PJ5+KEOKwQDPKS2Q=
+X-Gm-Gg: ASbGncsb0N6cFHMrkRNKaojIaCwuI8/7dOkAQkjTiqLbahVOlkagmnvH3eBgj0FMbjR
+ QduMJ/Tzyl5FSJX3BIRsxXR+QpPprp8tp4eJBl4v13DSMiG8EJ9C9m/6a2D5mDYSrOL4uivFgZT
+ dox5hh6/Zpr5VmMi+r0BuFuYb1ug9AlDl8wAGDp/HymAqL0W6z8E1tVqa6ZtHV3yIHvniJ4fjy5
+ 0cWaFBj8jzuaTTocB2O0UGQYrwkZNTDCpqPA9za8q47cl/9Y0THDwGPMMgiw4j/idQ6R7CYwoNe
+ ohHgoXEHOhSp+hmPWPrjN5qIvycKYT4ZhtwLhv9TbWTUq7UJsfzhLeZ5MLKQfaVbITSDIKBOBHd
+ u3QSb3s2EFE8u
+X-Google-Smtp-Source: AGHT+IH/mZu20bi/S6XY/Q5DyLzjvKYzYCRc9+N3JLckzF1dKzdc+a21GJpkw7C/X900sY9OU38uVw==
+X-Received: by 2002:a05:600c:458b:b0:43c:fabf:9146 with SMTP id
+ 5b1f17b1804b1-43db6248241mr88563625e9.17.1743428081317; 
+ Mon, 31 Mar 2025 06:34:41 -0700 (PDT)
+Received: from toyger.tail248178.ts.net (i5E863BED.versanet.de.
+ [94.134.59.237]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d82efe389sm164266095e9.19.2025.03.31.06.34.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 31 Mar 2025 06:34:40 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sam Day <me@samcday.com>, 
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20250328104011.1837872-1-caleb.connolly@linaro.org>
+References: <20250328104011.1837872-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH] qcom_defconfig: enable OF_UPSTREAM_BUILD_VENDOR
+Message-Id: <174342807978.411395.16109462789277501817.b4-ty@linaro.org>
+Date: Mon, 31 Mar 2025 15:34:39 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] mach-snapdragon: of_fixup: fix condition check in
- ft_board_setup()
-To: u-boot-qcom@groups.io, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: Sam Day <me@samcday.com>, u-boot@lists.denx.de
-References: <20250331104327.321339-1-caleb.connolly@linaro.org>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-In-Reply-To: <20250331104327.321339-1-caleb.connolly@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Mon, 31 Mar 2025 14:34:12 +0200
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,57 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/31/25 13:43, Caleb Connolly via groups.io wrote:
-> The fdt_node_check_compatible() function returns 0 on success which is
-> pretty confusing, and we were using it wrong!
-> 
-> Invert the condition check and refactor things to be more readable.
-> 
-> Additionally, add the check for the RB1 which needs the same fixup as
-> the RB2.
-> 
-> Reported-by: Sam Day <me@samcday.com>
-> Fixes: e64503f1fcdf ("mach-snapdragon: implement ft_board_setup() for USB role selection")
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   arch/arm/mach-snapdragon/of_fixup.c | 16 ++++++++--------
->   1 file changed, 8 insertions(+), 8 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 55368dd43b66..588c92c5cc91 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -160,16 +160,16 @@ int ft_board_setup(void *blob, struct bd_info __maybe_unused *bd)
->   {
->   	struct fdt_header *fdt = blob;
->   	int node;
->   
-> -	/* We only want to do this fix-up for the RB1 board, quick return for all others */
-> -	if (!fdt_node_check_compatible(fdt, 0, "qcom,qrb4210-rb2"))
-> -		return 0;
-> -
-> -	fdt_for_each_node_by_compatible(node, blob, 0, "snps,dwc3") {
-> -		log_debug("%s: Setting 'dr_mode' to OTG\n", fdt_get_name(blob, node, NULL));
-> -		fdt_setprop_string(fdt, node, "dr_mode", "otg");
-> -		break;
-> +	/* On RB1/2 we need to fix-up the dr_mode */
-> +	if (!fdt_node_check_compatible(fdt, 0, "qcom,qrb4210-rb2") ||
-> +	    !fdt_node_check_compatible(fdt, 0, "qcom,qrb2210-rb1")) {
-> +		fdt_for_each_node_by_compatible(node, blob, 0, "snps,dwc3") {
-> +			log_debug("%s: Setting 'dr_mode' to OTG\n", fdt_get_name(blob, node, NULL));
-> +			fdt_setprop_string(fdt, node, "dr_mode", "otg");
-> +			break;
-> +		}
->   	}
->   
->   	return 0;
->   }
 
-This fixes USB mode on all my sdm660/636 boards that should only use 
-gadget mode.
+On Fri, 28 Mar 2025 11:40:07 +0100, Caleb Connolly wrote:
+> A single U-Boot binary can be run on many different Qualcomm boards just
+> by booting with a different DTB.
+> 
+> Simplify the build process for this by enabling OF_UPSTREAM_BUILD_VENDOR
+> so that all the DTBs will be available after building U-Boot once.
+> 
+> 
+> [...]
 
-Tested-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+Applied, thanks!
 
----
-Regards,
-Alexey Minnekhanov
+[1/1] qcom_defconfig: enable OF_UPSTREAM_BUILD_VENDOR
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/ea169b980cbc
+
+Best regards,
+-- 
+Caleb Connolly <caleb.connolly@linaro.org>
+
