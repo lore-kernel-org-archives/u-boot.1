@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B30C3600C
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 14:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 681C7C3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 14:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07A8981F7B;
-	Mon, 31 Mar 2025 16:11:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5535181F0D;
+	Mon, 31 Mar 2025 16:11:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mfdabw/I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sNPpTtbk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C210B81F54; Mon, 31 Mar 2025 16:11:29 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id D4B8A81F7E; Mon, 31 Mar 2025 16:11:33 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DEA281F7B
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 16:11:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8803781FC8
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 16:11:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-72c14138668so1000655a34.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 07:11:26 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-72c7336ed99so316009a34.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 07:11:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743430285; x=1744035085; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743430290; x=1744035090; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eEofPODxh6K9rXgVaEgca34yMjRY0+wqRliyCvi2l90=;
- b=Mfdabw/IDEqdkx2SNqEQpX6qCf/5dn5Gi6Y+OJq8sdjHxnsm51lxPvpRUWSWDoI2db
- qwQoyelXA0/Uj9Tef8JrYzMUOBxR+taLEcDGAGCccQS8LKjIKjsJ52GCyST/aiLZn+r9
- 74C2idmlaGYEG9ERnR2utpLepKS1dVWs5wQeE=
+ bh=zpeTb0NRt4RRD9+MyX04f5PONoUsHRqguKpLZOT/XU4=;
+ b=sNPpTtbkIhIiq5F4Lcbo0FnXRlXVL4vOxLlXNyy4LooDWgk8YSggDK75iTXU4ay3em
+ reZ1JPQmbb/v342ZQxQb6E2WQ2bbd6ktrhOY+jZGOiU5DXyBmUmxDEdfg+q/w8YDSFlq
+ XtE2YEwoIYLVRGYP6ryVEKoyTEoew4aBrw6S0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743430285; x=1744035085;
+ d=1e100.net; s=20230601; t=1743430290; x=1744035090;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eEofPODxh6K9rXgVaEgca34yMjRY0+wqRliyCvi2l90=;
- b=SZhPnHwspYgEf6Z3KV/dWhJoPtyYgmZhvg+MQoKz9CBd5IMmvlEV2R3wE50uUJSZT1
- DCPiVMlbocWyCbq5oVEJjqj5MOAGmi4YG49/zsVZerWUOIDACTSQ4FpHU7pmmW0/Ognh
- 9doq5ixGqttXl0lUrdj47lvobC30liKFtAmA/+xKW2bUaf0LZsuopDz1cmwvo9BeDIcj
- jkrswwgBjm67hCyqudsX2/uK89OkGHbpYheeccGtBo+oltTC1bEwvmXQJf8oLCE13EwT
- 3o2/S2wJDG+WwFkXwFnvkzE82KE6ervjcQFza5YbXK2dw2KjXoboTNaM+Ip3ldNAa/SD
- No2w==
+ bh=zpeTb0NRt4RRD9+MyX04f5PONoUsHRqguKpLZOT/XU4=;
+ b=tdqU4sTwqWSs2N/uJpuEEl0Dm7AdH/zHI8HGFJP0YKLL9WDV7D97y2pOtcJ6bogFSV
+ K8MNgAOG9MuPdhISQn5ZiGiy/0JpSkC/SlkDAFB5jz3iy1znifsezi7MolRYw+zmOLmU
+ GF+BtixyzHqk3Ifir5QhDE4U60joiqo1jNaPwEFdbfWOXPYOLmIRqtOEY2ddgRr7blCP
+ 9OpbG1EeFiOP5OZqFOqDM4gt43ADBmecZt5ojGeyAMjjjMWICKe46kOEnaVZDIyed4MO
+ QdBJRT6Bqzs4RJ3Fr5o8UfeomO/4do6+ozm+qYF7zvND3nqg4rONw1a1ZTBTHrOM7uQz
+ 162g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzeMCutmJ4mJZifADjFfR+fBknAVQGAjOAuEBBOvyiVdVr8r6lz6c5bQib5rhv4Dl1Z/XE5jE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyuissaC+BNed9ucD/5E+EZ9ZaUU+rPx9emcEHlbCsZc3DPgZ2/
- uqtwnZ9rP9AYc55Bp3zUwYh7vV+KpOSwiyBsH0akvYh5KPUNS8MhhR/uNJVMQk8=
-X-Gm-Gg: ASbGncvWd09FQGn8lZjN2MmYrfcrZAQqgbJ6hp1aqeNFbCr6Kv3AKYDIM48wjpblQN4
- GpWSXSqeavE/wvS49aDgegneP5NGzIs4RgcPAlqtdmerI/brmqDsApCbqGWml2z8AvPcCIAOskZ
- PRooutPopI82sQYTg1yB/A3IX8IVUOEhayCbRg3bxJpuiS47sExpPEh4+VC/3ZGlXPrbXKTzHf1
- PkiERyoEqP/xfGuO6JwKkYG39xCQ02VDAEVrDowq7yl1i+mESoHGnvzt8DythBkLnk/9OPsJTZP
- ych9K5GNuvTW2zudLbrLRq4ywoKt8nYOvM/SvHsN7nZ0CGy0P94dIDHSPcBhlHINIAFZdW8ewli
- 3NF5g6g==
-X-Google-Smtp-Source: AGHT+IFLXTisgEcAUhl+myUwqnyfrfDvE4+NLlR8Z2IN8QStVV2w3DoHvlkntpAFa3dIr7Lti8pDdA==
-X-Received: by 2002:a05:6830:4988:b0:72a:327:eed3 with SMTP id
- 46e09a7af769-72c6376d61dmr5923675a34.5.1743430285043; 
- Mon, 31 Mar 2025 07:11:25 -0700 (PDT)
+ AJvYcCVG5pBcia29avvkF95QZdxe08CNBSd7lQCRhR6NG2B5qgsaGty3dQi7+gYt7c5ofdjRjt6hz7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYbMlBuHMRHK1T25o/kMVrFCMLRQtsZjkH2tpVgJ7sTIf9u/JP
+ BNKAH1ACpE6uY+N4jDjWaW7IMCaTwSV6BkNNvjUDdsqqiEOIy8LJR5F+gcLLkLHgKBbqWPKbJmd
+ x
+X-Gm-Gg: ASbGncsNSUGYCj/6o90yO+t8URzUvrexBmtYaFjZm8RKiWnXW+8ibJyp7wxVF5BLOdL
+ gz+ZoiiCdZDEeH1ByP8CFMQRzWTdyOkWTIm9cTSwAaJ+BYaGD2H2p3RNyaEXbtUnDLrgcKk6/NW
+ gSXkRbOrjkK/wAJ7UAIE/LF/Ti9cHhyk5lFbSftOGXCvpJPzqbNJSN1HSSOmWgp5NUguS0mWSYM
+ wfeTtmc1zcTQCS+bYARkaocmcqJY/5KbqVWdTvw/VHc8i9v2PWf7bPaz+FkdsmALi7lVXsCwazm
+ OZw+dN+7D8aqduAOdC5yuaVdiAw16Zu821SFQwLOFEYv0BnotYSrbYITbn3SySUYF4sDAA/tZJ7
+ XSO9iSg==
+X-Google-Smtp-Source: AGHT+IFj1BahQwc5GqkT6AJ0Jwe5i4dhruTmMkXVk5Ih4ofHNY2oSKB2SKeESe/EI+JUAqG2vy5eEw==
+X-Received: by 2002:a05:6830:44ac:b0:727:423c:95d5 with SMTP id
+ 46e09a7af769-72c6377db9cmr5892592a34.3.1743430290207; 
+ Mon, 31 Mar 2025 07:11:30 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c58267b79sm1493119a34.47.2025.03.31.07.11.23
+ 46e09a7af769-72c580bb530sm1485569a34.19.2025.03.31.07.11.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 07:11:24 -0700 (PDT)
-Date: Mon, 31 Mar 2025 08:11:21 -0600
+ Mon, 31 Mar 2025 07:11:29 -0700 (PDT)
+Date: Mon, 31 Mar 2025 08:11:27 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Andre Przywara <andre.przywara@arm.com>
-Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
  Michal Simek <michal.simek@amd.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 04/18] use proper fallthrough annotations
-Message-ID: <20250331141121.GV93000@bill-the-cat>
+Subject: Re: [PATCH 13/18] arm: mach-k3: am62p: annotate switch/case
+ fallthrough
+Message-ID: <20250331141127.GW93000@bill-the-cat>
 References: <20250327153313.2105227-1-andre.przywara@arm.com>
- <20250327153313.2105227-5-andre.przywara@arm.com>
+ <20250327153313.2105227-14-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fVdfdkzsqjqKf9+G"
+ protocol="application/pgp-signature"; boundary="arrtrk1WxT8KoLvz"
 Content-Disposition: inline
-In-Reply-To: <20250327153313.2105227-5-andre.przywara@arm.com>
+In-Reply-To: <20250327153313.2105227-14-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,21 +104,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fVdfdkzsqjqKf9+G
+--arrtrk1WxT8KoLvz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 27, 2025 at 03:32:59PM +0000, Andre Przywara wrote:
+On Thu, Mar 27, 2025 at 03:33:08PM +0000, Andre Przywara wrote:
 
-> In some cases in the generic code, we were already using switch/case
-> fallthrough annotations comments, though in a way which might not be
-> understood by most compilers.
+> The MMC boot mode selection for the TI AM62P series of SoCs uses an
+> implicit switch/case fallthrough for falling back to some default
+> boot mode.
 >=20
-> Replace two non-standard /* no break */ comments with our fallthrough;
-> statement-like macro, to make this visible to the compiler.
-> Also use this macro in place of an /* Fall through */ comment, to be
-> more consistent.
+> Add our "fallthrough;" statement-like macro before the default branch in
+> the code, to avoid a warning when GCC's -Wimplicit-fallthrough warning
+> option is enabled.
 >=20
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
@@ -126,22 +126,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---fVdfdkzsqjqKf9+G
+--arrtrk1WxT8KoLvz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfqookACgkQFHw5/5Y0
-tyzr3Qv+IBu4yXmv+YPUO8/jxXh/ENOxvD8GeApsIZGJAyWZ2IYezh+UkqQMdcKf
-bWv26pwuLPQKhEtDib76KvwASVBxNxDd0esdcX0xVJjnOn9AbbhBh3wNN55c+pqd
-6jjufVsOAgTAeXhjDF/rclJeBZaFvbDimX0PZrTegbdIr/4zMPc1tXPCihJ8eAKH
-e4XBkSHp35W59ozpwHK5NtDd/PCPKJcrJ2dsDqdboSTdjZift0bioOxUxQnJvH8h
-CbWZnFRaILnU/OHUdc2O+//G4TQEQxdLvn6muEai8qToAoZb6JyzTnmstQfvc1nr
-VleutRZBJdn1Qj8mBVBphUrZNrMUTUDFt26Jg8oGBVlV+YJatx7fqxT9+XbakTui
-CDn3/Jy3x2t3eyVZA5iddCBOkVLw2XJHWWjKQ5tQ+jqqZhirKQx73KRKzN98qM++
-obZtiBB4WO4VSU+atdfs5eUkqb7k9HXXRtvLHPuP8VUfGoJq0bfpuadnRVoi30us
-bJaAcVcT
-=ED/4
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfqoo8ACgkQFHw5/5Y0
+tywJUQv+PjQnWUM5980FIRIkBUzlLeKavoXkWhN/6nGfrM7EoFszqEfPRWDXk6yS
+TBW7wMF8s25y5J37+ibRKno0/6INmUJ05I3APcYPWqemqIeAvwATlP8mSjIcjqZQ
+9hwwBkLQGlN+9noGgYwXZJRN0ctsPK1baEWnWGDuoYHZoZVqoJl/hzizUJRHGHW9
+H7f8eVsQRhjbT3vTtWflyzC7d7QPqYwBivcNryFRLTDHTKCtBBF5NMp/9vjTH16h
+vBVkMPdEa03IqNLFwxS+6uBqifNraDh5BVUPJSxvQ28JB/IZA9J4FFKI8GCUdqMH
+79KWwDUsGxTwcxH/G+VXB4HCiOOxwaDGhk89DDLomY2m6Qsp1RHtFbSynfNrqdfq
+RZlLao8D6xugcHNvXx7eWTX33Niuk9CWdPGetnK/rArjfXnwc632ogYOg0rMHVbo
+4yRpLZsbdWh+U3POSaZu2sAJ4GXawKzbJ73t+JOnidgp/a03GWL9HIAdHwOeOeLv
+JDexh/fr
+=I7gc
 -----END PGP SIGNATURE-----
 
---fVdfdkzsqjqKf9+G--
+--arrtrk1WxT8KoLvz--
