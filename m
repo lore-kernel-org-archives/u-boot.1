@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0D2C36017
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 07:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C8B0C3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 08:01:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 357B2812BC;
-	Mon, 31 Mar 2025 09:54:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 712EF812BC;
+	Mon, 31 Mar 2025 10:01:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KA89AavZ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xRZH2E41";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2E538144A; Mon, 31 Mar 2025 09:54:39 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id A6D998144A; Mon, 31 Mar 2025 10:01:49 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C24D58129B
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 09:54:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 963D78129B
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:01:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-39141ffa9fcso3974593f8f.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 00:54:37 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cfb6e9031so38354635e9.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 01:01:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743407677; x=1744012477;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743408107; x=1744012907;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=CEboYt2lYaUV9zXm4N1B2pF3Qz1HPcMrKq4NPNiG+a8=;
- b=KA89AavZ3cQMXiwjB8s6RHvAWgEZrqC6gD83IX9QMOzgwziEYlCK2CgxMjzenONWkQ
- q04PIo1KOHOl6mfDUyQEcnRTuUg+6teRhacsYnKtwXjDUSxyLArg0fb7hw/GN+Yy2+bH
- QEFOAl5p2L1h/TcRrbzZQYHcdTaHJjkgbfs5oFTWldcitCJpCtvyBillSvnhFucAXYX4
- 33gEc+m44defT26Yvm4NjR6aprwZYQm20HqN+O3UMHvtlJQAkQbAyxGI7Kwy2pNPlBX3
- L38ZVTV3bLquG8vx6pG8sCLwH8/4wjGa/HwIZO4uM+hEUb6Plf3TBd+ygixjrxgUcqRp
- 7Jjg==
+ bh=2NQusOpCR1CNJ9rxWb6YO6KKNn5YsCAaNp9Vg/iPMxI=;
+ b=xRZH2E41yfS/bw+4PNQLjEBWh4Fd2tiqSuOujzznqmA7JBZp8oo0vOpvQN0etF6hcY
+ pHwCGkNSZMXk5Z61GWgv/Zh1l9o25o7M9oW0nXSSXS+xl65SpxOwTNsEXo/iLr5UfTlE
+ XIOKzZqFojhWZN5WEDz1RCYxcGod9PZFfUuxMVzANOElDJoKtI38XRMzl2jejbj7qsfl
+ +W8SOSND5eytvAllG8pGfoz/s/M26uahwiSP7fJiTXfIC5gYb1CVaVbJO8Ibxrk7C/zJ
+ hyAWsPRDIQ6omrNxwhINE8Nkq3c4zI45w9TsK3nMVV0Vn1BrQHxeSYrpgkkYadOQpotw
+ tYkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743407677; x=1744012477;
+ d=1e100.net; s=20230601; t=1743408107; x=1744012907;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CEboYt2lYaUV9zXm4N1B2pF3Qz1HPcMrKq4NPNiG+a8=;
- b=AFBblJAQvcj0jLKWgXb1UxiMmMtndJKqWBW+D5zqNdzKwiQBQBvJ6Gg0cbdOBCkNQz
- mr9iU4OlvH8BbbExo0+brPFsuBbsmh2lhWLOHR5qqzhFRMhV7LggnopPnSHUp04obXCD
- O8irPV9tou0cF4oJpy5PeXhZ5h1uTOpobzwPMWb3NRmAzBP8Xn+gY0RRVsXNTZ4uwtsy
- GbZ3lHCjpir+0WOE3vuRzYAXEGdon3ZKwt/PZgVFLQaxQ6rrwpmAqws7KaekOLmhCOO+
- VHgkIV5j3s3MdnqyAmskNWsNqRwsUhMvwKXtP49AJ50OOQjUU2Z2NExVBRMXNdVm+aIE
- cOSA==
+ bh=2NQusOpCR1CNJ9rxWb6YO6KKNn5YsCAaNp9Vg/iPMxI=;
+ b=IYi+Y57Dh1ymH2NK4hr9dJt0KvVtbJY1WSUS11WdJQPGTQpzN8GrX5nYAFOr/CD9Av
+ mMamTehBpz5/Dvgh0yTnv6fw9jByAo9LOdVBGWZARzighdMFpbipa0MKNil8Si7gLDa3
+ 2Fe+aV6NVOoIGEF/QPWZ5G3vieLZYZ/S+5JBlRzKlAbG3gbgKN7ekKtNgWUM0FZiZsQz
+ yUc4F7lgayX+1341rlWzafvWTsKa5mrOpmQZn9p/h8UOCLtBGMoqZ23NnYC69Cj4tQmb
+ uassn7Z4TELGmCBrKfaGj7bOFFpwA/D3wKkvN0SmS6V9fc72hIUzAdfG9jA2gUNVwJpm
+ ajXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvrxxawUGdVBI9V+LsOkn1ANi+GVYqEtDQgceV8DKW11CbdPyGJNhVVVuaXUV2lExJKNlvspY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMMOiy75AnDyyzWWfuJ4hWh4yo8y6jof1fEb04Yfs0JnR0JAbj
- XDdi3ZwPdxcwQJx2aUBbDdsMIEJu0HCRNuz2+rB9+y+hSO+s0qCyykBPXHcHN6IXtQFxE/It2KB
- 7
-X-Gm-Gg: ASbGnctPyIPd7NWxsqAR+QdCyUFT96MijCDhD/5ZB4FTlWXIiL7EC1AxtEoSUutgoco
- HhkfZ4vJBlbwzeTo4FuiLwrYo/dBbQQfWRf13jQ4HjJyjr03gWawUOmXeY9mrFYWLEqaWX9kLSn
- zmo9MOvYNhSgXMzDHIaSZa27IbiS+UiSdNr85wp4Z/GOVDfYf3LETO3LBpI4kEkU1bVhqSw7VgB
- 8cTonGDIozT/KLjvF3JNR6W2FYcly7M9AK2N7Kl9BKiitjw3nP9jVLR8a7gnHWOnB7dxXk9Z+P/
- F2YLjUKtxKj06bL1/gPLfSkazhTSEOgVB0D/PAbHjKqhos9PRWb8WW0tpp8Zor27elL7qXt+Zeu
- XdNx+ts+JSLqURyMASCu3Paqjn4LD
-X-Google-Smtp-Source: AGHT+IG3cxQROrtKF1+z5esPF753YToEJ480p7lXMNrXFvVwC2tNkaXVjZ9Vna4NOZrWYKdrSjvBJA==
-X-Received: by 2002:a05:6000:2a5:b0:390:e8e4:7e3e with SMTP id
- ffacd0b85a97d-39c120ccb86mr6021776f8f.6.1743407677166; 
- Mon, 31 Mar 2025 00:54:37 -0700 (PDT)
+ AJvYcCW3GEPcMIW6Rgh+vy000mw/KEA6Wk5OTeQBs0WDCXE4d9r/s6AL3ayDa4N+TnKJkgaemhEJyaU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhEsKBGa9kPVGIj3NQ1z87nLLjDBslLS9Pq5odhD6IKEY93dKW
+ qDYOvjZ9Lv+WM7Suzm0ztaAtFqg7XwbDPcAQL//t5oIsw0fbV8o9p+alzd9GYuY=
+X-Gm-Gg: ASbGncvaY3n/jKMpVEfpybilkfaZYf6Hu2VNreQWItG0yYMrmLddZcjRl+8+JvK8A8E
+ 9Ao5hSJmEjw1ZC4BJ5wzaM1ID/fBY5h/3/OxsNO6ORnoAaWTIhPdT1uOC3CtasoBQTwOZGkEEUR
+ FmCJiIUzNFEOmSJAqcfKYXGNpmJ5PQ2ErjdQcXZYmy5GqhXbbCK3p99HjhMrc9KMKWzjNWQ1a/R
+ /vH1AT5IcWgFzFs01roDFoSQjFlSXu2W2BSUPL3wMQ4MXVPQsyhzHIZ6ToWpthzOOZ+86meqSVD
+ bXqTLLZGHQEb88v71EKvyw3jZ4L/oLmhnIWztISqmPlNjLu4px2trxQ7u0CdrvxTd9O+md/FdDb
+ 3oPckvybuVvzLCA4jUg==
+X-Google-Smtp-Source: AGHT+IGiBpn+tUiJ68gn3y/SUkvPTOpK4Ytz9xWrh+I+CICWUUWcqzACXUMq86o9pLwL0jKPJCCC5w==
+X-Received: by 2002:a05:600c:870c:b0:43d:683:8cb2 with SMTP id
+ 5b1f17b1804b1-43db624a3dbmr73854185e9.14.1743408107019; 
+ Mon, 31 Mar 2025 01:01:47 -0700 (PDT)
 Received: from localhost (lfbn-tou-1-752-68.w86-250.abo.wanadoo.fr.
  [86.250.199.68]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b658b5dsm10442911f8f.3.2025.03.31.00.54.36
+ 5b1f17b1804b1-43d82e6adf6sm155434055e9.15.2025.03.31.01.01.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 00:54:36 -0700 (PDT)
+ Mon, 31 Mar 2025 01:01:46 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ibai Erkiaga
- <ibai.erkiaga-elorza@amd.com>, Michal Simek <michal.simek@amd.com>, Caleb
- Connolly <caleb.connolly@linaro.org>, Sebastian Reichel
- <sebastian.reichel@collabora.com>, Dmitry Rokosov
- <ddrokosov@salutedevices.com>
-Subject: Re: [PATCH v4 12/14] cmd: add spawn and wait commands
-In-Reply-To: <20250318104659.1114340-13-jerome.forissier@linaro.org>
-References: <20250318104659.1114340-1-jerome.forissier@linaro.org>
- <20250318104659.1114340-13-jerome.forissier@linaro.org>
-Date: Mon, 31 Mar 2025 09:54:35 +0200
-Message-ID: <87msd1prd0.fsf@baylibre.com>
+To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>
+Cc: Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 03/18] gadget: f_thor: annotate switch/case fallthrough
+In-Reply-To: <20250327153313.2105227-4-andre.przywara@arm.com>
+References: <20250327153313.2105227-1-andre.przywara@arm.com>
+ <20250327153313.2105227-4-andre.przywara@arm.com>
+Date: Mon, 31 Mar 2025 10:01:45 +0200
+Message-ID: <87jz85pr12.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -105,42 +101,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Andre,
 
 Thank you for the patch.
 
-On mar., mars 18, 2025 at 11:46, Jerome Forissier <jerome.forissier@linaro.org> wrote:
+On jeu., mars 27, 2025 at 15:32, Andre Przywara <andre.przywara@arm.com> wrote:
 
-[...]
-
->  
->  obj-$(CONFIG_HUSH_SELECTABLE) += cli.o
->  
-> +obj-$(CONFIG_CMD_SPAWN) += spawn.o
-> +
->  obj-$(CONFIG_ARM) += arm/
->  obj-$(CONFIG_RISCV) += riscv/
->  obj-$(CONFIG_SANDBOX) += sandbox/
-> diff --git a/cmd/spawn.c b/cmd/spawn.c
-> new file mode 100644
-> index 00000000000..f7a9f225f93
-> --- /dev/null
-> +++ b/cmd/spawn.c
-> @@ -0,0 +1,188 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2011 The Chromium OS Authors.
-> + */
-
-Nitpick: Is this the correct copyright? For the test code in the next
-patch you used
-
-  * Copyright 2025, Linaro Ltd.
-
-Besides that:
+> Even though we seem to catch POWEROFF and EFSCLEAR commands in the THOR
+> protocol request handling, we ultimately do not seem to handle them
+> (apart from sending a response), so those commands still print an error
+> message.
+>
+> Annotate the switch/case fallthrough in this case, to make this clear to
+> the compiler.
+>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-[...]
-
-> +
+> ---
+>  drivers/usb/gadget/f_thor.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/usb/gadget/f_thor.c b/drivers/usb/gadget/f_thor.c
+> index 54372118348..540b9f88237 100644
+> --- a/drivers/usb/gadget/f_thor.c
+> +++ b/drivers/usb/gadget/f_thor.c
+> @@ -138,6 +138,7 @@ static int process_rqt_cmd(struct udevice *udc, const struct rqt_box *rqt)
+>  	case RQT_CMD_POWEROFF:
+>  	case RQT_CMD_EFSCLEAR:
+>  		send_rsp(udc, rsp);
+> +		fallthrough;
+>  	default:
+>  		printf("Command not supported -> cmd: %d\n", rqt->rqt_data);
+>  		return -EINVAL;
+> -- 
+> 2.25.1
