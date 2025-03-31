@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 705D2C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B45C3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 927DB81F95;
-	Mon, 31 Mar 2025 14:31:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF6EA820B0;
+	Mon, 31 Mar 2025 14:31:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rjt+g+zf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WxLbw9ts";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15FFE820A1; Mon, 31 Mar 2025 14:31:55 +0200 (CEST)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
+ id 3C77581F0D; Mon, 31 Mar 2025 14:31:56 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15C1C81703
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1678582045
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-43ea40a6e98so2976675e9.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:52 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43cf257158fso31400065e9.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743424311; x=1744029111; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743424313; x=1744029113; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OKeQ8vI7z2gDAzURuQkmVBQJ2YFTvSpxm63yrjDiD9s=;
- b=Rjt+g+zfjPptWis0bqdXQGWJOnTUZQdxe88zk7/FL9EVDgGzfDE4ITA7PCqjGO6hVr
- kutop6kWxXg8++sos+OvVWY8M63Gaeh69KSH5wplQqSq+WNAjbMUbX0vN+L+ZXgwg7ek
- sXbWnP7rFmIviMm/h7jlf3pyfmU3hY+h/Et/A5bOLOvEWJrEa6L9wndU+UP1dGm5b/wR
- VvuX8jKwYJ/52dc3qVr0gzmiel88lFJlz4MeNRZ/keP0u35aPrO1Z/KhFtCVWcL66TbM
- tTRDW3pQVPW3orG7XHbRbiLWihlV+3p2Djiavhbik+yMV4nZIFgb5f4/ynFrFVXF/HtY
- YXiw==
+ bh=2aLrWfKtfqnU92onvG84yCpeMIndD96SJj3KPZDlJ8E=;
+ b=WxLbw9tsm5owP4pxK49oeMIA/Ls9c1/uZM7uXBuDNpXOlGv+kgHlkDyOlPziFyVd1f
+ Oq/vc7BvcsUoVuOE/IyzV1d4uEb9Vkv5zI/3Hp1hlJyEB7Kpe/RJnkrNiM45UElZlBii
+ 0X73H/nVDUgtlmwbAZ9dA4N35xM/LWkBnwNp9QTzGAbfKOR2LUa229sTfAp9RjmQSVFt
+ SkrzPP1W8c/zjFNZAhuFuf26ihQ3Ny6YX42sIDqWIxQqFo9WFHnLSoaDiDIy7Q0R2VJs
+ G3tRYP6jW0A1TpF48UmeTtmYbcqLCjn455HN671gny2VbsBsRG8hjxtt+qCsgbONWFJI
+ aVkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743424311; x=1744029111;
+ d=1e100.net; s=20230601; t=1743424313; x=1744029113;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OKeQ8vI7z2gDAzURuQkmVBQJ2YFTvSpxm63yrjDiD9s=;
- b=sdSglirdbQxwt2RnmuNtuVSFdDFWAwU77KtILj12uiLXOWVET86rnp1jvPScuswOqO
- l6T77Akzm/tHX1Vm0YloSYEqkEmyUktRrgbA5IrJPr7zQJONuN0LVz6t3KqpRXWV16Lq
- OUvtabyX0cnsM4UhnnoCC9AlgPhSzlkNE8pLjcvPBI8PM6ecSXbcKzL6dX+ZBaMpArdF
- 1H6/wnvh8tCOk79I2hHFFeyVepWqwLL335J0Li7D/SSkpBqZ4ak/OcJ0WYINtV7uiE3Y
- iNdG87OTvXFEbEaJQpHIpq7XGa3OU6aIkpIhCX/IvVuU2icI+dGZfSXvDMGzRZxP1X26
- e6Vg==
-X-Gm-Message-State: AOJu0YxoUar6uNZnqYdO0W58/Ufh7z+Aexnagwqp0BWm0qHY7mj+drBj
- 48drtDPHXu/SZhXPcf7/mPLLSK4oeXKFLPtTrE3O8OIUs9HwPAl5Ebj3qb0dvXSGyQzC+HSNqwY
- mNr537spS
-X-Gm-Gg: ASbGnctBFNZAAPBbTP2AwlHLMifgkJt8uLnSeiNYAgI/rHQ3gwDyLvA7+8QXfB4Vaj+
- GX7P7UzRqCv/9EO2dGzzdgxXzzlxQYqrm2Td/zzs/lGR2dsqr7ReZMnr+3laNfAWt0+SkYBqagE
- yhjFLm2rt1ihbfCNldRLT5uG1VXEzUicAqfc1/EdsH6KzijZQ8tFZ4lGm5wZTMTGxG5hyLZzy9n
- 2zbeNo5Srtr0o1P169Y2AeiZ0uqppLtbtUE1C1AEKdOWy0vfaddEnAEzdl/kCD6kpPxIvQimXDp
- 1651CIq7BfQ1Uyqa9JTZbemjGg0e80AqVqG90fgVHEJ32pJR6Na+0VFx9SfS234=
-X-Google-Smtp-Source: AGHT+IEoGHr0v3eDBNoBm/nWLf5mbRIbFbmjKkTjXjAZy2yMSThbLcGJROVP0W/Onlael+IOS9jZLg==
-X-Received: by 2002:a05:6000:2805:b0:391:4052:a232 with SMTP id
- ffacd0b85a97d-39c1211fc2cmr5366124f8f.55.1743424311279; 
- Mon, 31 Mar 2025 05:31:51 -0700 (PDT)
+ bh=2aLrWfKtfqnU92onvG84yCpeMIndD96SJj3KPZDlJ8E=;
+ b=tRGVfY6H9hOkTAzSYtxJFRDyKEDBktHPQziChcd3mCl8CK8seXfMnYyAVf8oowj7I2
+ Ob+oUXQK4vSPNFd1jjKE9sBtaYdxkUFGb/BZpBl8sHjt2C/Pj7a2P+q5/VRoiEYJm2Ze
+ /dFSiAXDvJzYP6c+N2m5vsS8ObUGmuDzDHTlmkAuz6mUHuWLKfy22xC2LXb8OdeFo6Gn
+ da6Z+s05F5GFpHcPEmt6u8F3iFLOtItfsAmatsrAeIpPu2g1km3T+0EzOcWoN9ljIJvQ
+ vUheyi/CUz2RpqtQtFkenU0D8+znEYam09Q6hDwfgZ+dNj8dfoqP2F3haTuD5b6GsD9m
+ S4eA==
+X-Gm-Message-State: AOJu0YyfQH35bHXSOw3ks4wDQD3Hup5pItuTTjwjkumnk146NIz61x5U
+ DXRU5imlwgynFmWk0W1p5HL0gvaNnRFlLwfoUZQdv7tss2cg3cz3GZD4D/dhQMWnfg/rrFkj/ff
+ Baf/+VQ==
+X-Gm-Gg: ASbGncurXZ9d8Tn/qb1X5c/upFHOXdn1xXjMwZsgG3oYLRPxkNMIYgQnfWvr/2oqs/b
+ 9oom93kzcjnxLZqHF2ljKPEdf6/MktyNB8VAt/1W4iofH1UkrwVOg9prAmrTuoUWBBMDQSBTK/3
+ 2aVUn0x6N2iGeUwfHTc3KghwHch0a6N0OWqA0qiCAHP4ZVvm7UXIW5FwmLYgNan4YhQr/A8KDh4
+ o+geV+dEzYeEA10z5nsDA8KraJIG+RG6am5KNn8SMsPIoyKMpwjKhKOT6uIH8AlFfMYp61VqB0O
+ 9guEbagpK7HJMMFDUFI+FOBgGwKsnlqZel+fJVab1XP18qZSyBJj
+X-Google-Smtp-Source: AGHT+IHbcux5/dnjwth6TLmNYUJFHaePIYuRCwSTWN771+EupGz/OvesfSuGSymqoefgqoU+MYTLrw==
+X-Received: by 2002:a05:600c:4eca:b0:43d:abd:ad0e with SMTP id
+ 5b1f17b1804b1-43db6249689mr84364745e9.18.1743424313366; 
+ Mon, 31 Mar 2025 05:31:53 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:f23c:25c9:dc74:be1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.50
+ ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 05:31:50 -0700 (PDT)
+ Mon, 31 Mar 2025 05:31:52 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julius Lehmann <lehmanju@devpi.de>,
- Guillaume La Roque <glaroque@baylibre.com>
-Subject: [PATCH v5 13/16] dm: usb: initialize and scan multiple buses
- simultaneously with uthread
-Date: Mon, 31 Mar 2025 14:31:07 +0200
-Message-ID: <20250331123120.2025062-14-jerome.forissier@linaro.org>
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v5 14/16] cmd: add spawn and wait commands
+Date: Mon, 31 Mar 2025 14:31:08 +0200
+Message-ID: <20250331123120.2025062-15-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250331123120.2025062-1-jerome.forissier@linaro.org>
 References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
@@ -107,386 +105,282 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the uthread framework to initialize and scan USB buses in parallel
-for better performance. The console output is slightly modified with a
-final per-bus report of the number of devices found, common to UTHREAD
-and !UTHREAD. The USB tests are updated accordingly.
+Add a spawn command which runs another command in the background, as
+well as a wait command to suspend the shell until one or more background
+jobs have completed. The job_id environment variable is set by spawn and
+wait accepts optional job ids, so that one can selectively wait on any
+job.
 
-Tested on two platforms:
+Example:
 
-1. arm64 QEMU on a somewhat contrived example (4 USB buses, each with
-one audio device, one keyboard, one mouse and one tablet)
+ => date; spawn sleep 5; spawn sleep 3; date; echo "waiting..."; wait; date
+ Date: 2025-02-21 (Friday)    Time: 17:04:52
+ Date: 2025-02-21 (Friday)    Time: 17:04:52
+ waiting...
+ Date: 2025-02-21 (Friday)    Time: 17:04:57
+ =>
 
- $ make qemu_arm64_defconfig
- $ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
- $ qemu-system-aarch64 -M virt -nographic -cpu max -bios u-boot.bin \
-     $(for i in {1..4}; do echo -device qemu-xhci,id=xhci$i \
-         -device\ usb-{audio,kbd,mouse,tablet},bus=xhci$i.0; \
-     done)
+Another example showing how background jobs can make initlizations
+faster. The board is i.MX93 EVK, with one spinning HDD connected to
+USB1 via a hub, and a network cable plugged into ENET1.
 
-2. i.MX93 EVK (imx93_11x11_evk_defconfig) with two USB hubs, each with
-one webcam and one ethernet adapter, resulting in the following device
-tree:
+ # From power up / reset
+ u-boot=> setenv autoload 0
+ u-boot=> setenv ud "usb start; dhcp"
+ u-boot=> time run ud
+ [...]
+ time: 8.058 seconds
 
- USB device tree:
-   1  Hub (480 Mb/s, 0mA)
-   |  u-boot EHCI Host Controller
-   |
-   +-2  Hub (480 Mb/s, 100mA)
-     |  GenesysLogic USB2.1 Hub
-     |
-     +-3  Vendor specific (480 Mb/s, 350mA)
-     |    Realtek USB 10/100/1000 LAN 001000001
-     |
-     +-4   (480 Mb/s, 500mA)
-           HD Pro Webcam C920 8F7CD51F
-
-   1  Hub (480 Mb/s, 0mA)
-   |  u-boot EHCI Host Controller
-   |
-   +-2  Hub (480 Mb/s, 100mA)
-     |   USB 2.0 Hub
-     |
-     +-3  Vendor specific (480 Mb/s, 200mA)
-     |    Realtek USB 10/100/1000 LAN 000001
-     |
-     +-4   (480 Mb/s, 500mA)
-          Generic OnLan-CS30 201801010008
-
-Note that i.MX was tested on top of the downstream repository [1] since
-USB doesn't work in the upstream master branch.
-
-[1] https://github.com/nxp-imx/uboot-imx/tree/lf-6.6.52-2.2.0
-    commit 6c4545203d12 ("LF-13928 update key for capsule")
-
-The time spent in usb_init() ("usb start" command) is reported on
-the console. Here are the results:
-
-        | CONFIG_UTHREAD=n | CONFIG_UTHREAD=y
---------+------------------+-----------------
-QEMU    |          5628 ms |          2212 ms
-i.MX93  |          4591 ms |          2441 ms
+ # From power up / reset
+ u-boot=> setenv autoload 0
+ u-boot=> setenv ud "spawn usb start; spawn dhcp; wait"
+ u-boot=> time run ud
+ [...]
+ time: 4.475 seconds
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- drivers/usb/host/usb-uclass.c | 119 ++++++++++++++++++++++++++++------
- test/boot/bootdev.c           |  14 ++--
- test/boot/bootflow.c          |   2 +-
- 3 files changed, 108 insertions(+), 27 deletions(-)
+ cmd/Kconfig  |  17 +++++
+ cmd/Makefile |   2 +
+ cmd/spawn.c  | 188 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 207 insertions(+)
+ create mode 100644 cmd/spawn.c
 
-diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-index fa1af8f555a..35684be1207 100644
---- a/drivers/usb/host/usb-uclass.c
-+++ b/drivers/usb/host/usb-uclass.c
-@@ -9,6 +9,7 @@
- #define LOG_CATEGORY UCLASS_USB
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index cd391d422ae..0cbb75edfbe 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -3079,4 +3079,21 @@ config CMD_MESON
+ 	help
+ 	  Enable useful commands for the Meson Soc family developed by Amlogic Inc.
  
- #include <bootdev.h>
++config CMD_SPAWN
++	bool "spawn and wait commands"
++	depends on UTHREAD
++	help
++	  spawn runs a command in the background and sets the job_id environment
++	  variable. wait is used to suspend the shell execution until one or more
++	  jobs are complete.
++
++config CMD_SPAWN_NUM_JOBS
++	int "Maximum number of simultaneous jobs for spawn"
++	default 16
++	help
++	  Job identifiers are in the range 1..CMD_SPAWN_NUM_JOBS. In other words
++	  there can be no more that CMD_SPAWN_NUM_JOBS running simultaneously.
++	  When a jobs exits, its identifier is available to be re-used by the next
++	  spawn command.
++
+ endif
+diff --git a/cmd/Makefile b/cmd/Makefile
+index c1275d466c8..b61f6586157 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -239,6 +239,8 @@ obj-$(CONFIG_CMD_SCP03) += scp03.o
+ 
+ obj-$(CONFIG_HUSH_SELECTABLE) += cli.o
+ 
++obj-$(CONFIG_CMD_SPAWN) += spawn.o
++
+ obj-$(CONFIG_ARM) += arm/
+ obj-$(CONFIG_RISCV) += riscv/
+ obj-$(CONFIG_SANDBOX) += sandbox/
+diff --git a/cmd/spawn.c b/cmd/spawn.c
+new file mode 100644
+index 00000000000..5879fff5bbd
+--- /dev/null
++++ b/cmd/spawn.c
+@@ -0,0 +1,188 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2025, Linaro Ltd.
++ */
++
++#include <command.h>
++#include <console.h>
++#include <malloc.h>
++#include <vsprintf.h>
 +#include <uthread.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-@@ -17,6 +18,7 @@
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dm/uclass-internal.h>
-+#include <time.h>
- 
- static bool asynch_allowed;
- 
-@@ -172,6 +174,10 @@ int usb_get_max_xfer_size(struct usb_device *udev, size_t *size)
- 	return ops->get_max_xfer_size(bus, size);
- }
- 
-+#if CONFIG_IS_ENABLED(UTHREAD)
-+static struct uthread_mutex mutex = UTHREAD_MUTEX_INITIALIZER;
-+#endif
 +
- int usb_stop(void)
- {
- 	struct udevice *bus;
-@@ -180,10 +186,14 @@ int usb_stop(void)
- 	struct usb_uclass_priv *uc_priv;
- 	int err = 0, ret;
- 
-+	uthread_mutex_lock(&mutex);
++/* Spawn arguments and job index  */
++struct spa {
++	int argc;
++	char **argv;
++	unsigned int job_idx;
++};
 +
- 	/* De-activate any devices that have been activated */
- 	ret = uclass_get(UCLASS_USB, &uc);
--	if (ret)
-+	if (ret) {
-+		uthread_mutex_unlock(&mutex);
- 		return ret;
-+	}
- 
- 	uc_priv = uclass_get_priv(uc);
- 
-@@ -218,28 +228,23 @@ int usb_stop(void)
- 	uc_priv->companion_device_count = 0;
- 	usb_started = 0;
- 
-+	uthread_mutex_unlock(&mutex);
++/*
++ * uthread group identifiers for each running job
++ * 0: job slot available, != 0: uthread group id
++ * Note that job[0] is job_id 1, job[1] is job_id 2 etc.
++ */
++static unsigned int job[CONFIG_CMD_SPAWN_NUM_JOBS];
++/*
++ * Return values of the commands run as jobs */
++static enum command_ret_t job_ret[CONFIG_CMD_SPAWN_NUM_JOBS];
 +
- 	return err;
- }
- 
--static void usb_scan_bus(struct udevice *bus, bool recurse)
-+static void _usb_scan_bus(void *arg)
- {
-+	struct udevice *bus = (struct udevice *)arg;
- 	struct usb_bus_priv *priv;
- 	struct udevice *dev;
- 	int ret;
- 
- 	priv = dev_get_uclass_priv(bus);
- 
--	assert(recurse);	/* TODO: Support non-recusive */
--
--	printf("scanning bus %s for devices... ", bus->name);
--	debug("\n");
- 	ret = usb_scan_device(bus, 0, USB_SPEED_FULL, &dev);
- 	if (ret)
--		printf("failed, error %d\n", ret);
--	else if (priv->next_addr == 0)
--		printf("No USB Device found\n");
--	else
--		printf("%d USB Device(s) found\n", priv->next_addr);
-+		printf("Scanning bus %s failed, error %d\n", bus->name, ret);
- }
- 
- static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
-@@ -287,12 +292,12 @@ static int usb_probe_companion(struct udevice *bus)
- 	return 0;
- }
- 
--static void usb_init_bus(struct udevice *bus)
-+static void _usb_init_bus(void *arg)
- {
-+	struct udevice *bus = (struct udevice *)arg;
- 	int ret;
- 
- 	/* init low_level USB */
--	printf("Bus %s: ", bus->name);
- 
- 	/*
- 	 * For Sandbox, we need scan the device tree each time when we
-@@ -307,39 +312,96 @@ static void usb_init_bus(struct udevice *bus)
- 	    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
- 		ret = dm_scan_fdt_dev(bus);
- 		if (ret) {
--			printf("USB device scan from fdt failed (%d)", ret);
-+			printf("Bus %s: USB device scan from fdt failed (%d)\n",
-+			       bus->name, ret);
- 			return;
- 		}
- 	}
- 
- 	ret = device_probe(bus);
- 	if (ret == -ENODEV) {	/* No such device. */
--		puts("Port not available.\n");
-+		printf("Bus %s: Port not available.\n", bus->name);
- 		return;
- 	}
- 
- 	if (ret) {		/* Other error. */
--		printf("probe failed, error %d\n", ret);
-+		printf("Bus %s: probe failed, error %d\n", bus->name, ret);
- 		return;
- 	}
- 
- 	usb_probe_companion(bus);
- }
- 
-+static int nthr;
-+static int grp_id;
-+
-+static void usb_init_bus(struct udevice *bus)
++static void spa_free(struct spa *spa)
 +{
-+	if (!grp_id)
-+		grp_id = uthread_grp_new_id();
-+	if (!uthread_create(NULL, _usb_init_bus, (void *)bus, 0, grp_id))
-+		nthr++;
-+}
++	int i;
 +
-+static void usb_scan_bus(struct udevice *bus, bool recurse)
-+{
-+	if (!grp_id)
-+		grp_id = uthread_grp_new_id();
-+	if (!uthread_create(NULL, _usb_scan_bus, (void *)bus, 0, grp_id))
-+		nthr++;
-+}
-+
-+static void usb_report_devices(struct uclass *uc)
-+{
-+	struct usb_bus_priv *priv;
-+	struct udevice *bus;
-+
-+	uclass_foreach_dev(bus, uc) {
-+		if (!device_active(bus))
-+			continue;
-+		priv = dev_get_uclass_priv(bus);
-+		printf("Bus %s: ", bus->name);
-+		if (priv->next_addr == 0)
-+			printf("No USB Device found\n");
-+		else
-+			printf("%d USB Device(s) found\n", priv->next_addr);
-+	}
-+}
-+
-+static void run_threads(void)
-+{
-+#if CONFIG_IS_ENABLED(UTHREAD)
-+	if (!nthr)
++	if (!spa)
 +		return;
-+	while (!uthread_grp_done(grp_id))
-+		uthread_schedule();
-+	nthr = 0;
-+	grp_id = 0;
-+#endif
++
++	for (i = 0; i < spa->argc; i++)
++		free(spa->argv[i]);
++	free(spa->argv);
++	free(spa);
 +}
 +
- int usb_init(void)
- {
- 	int controllers_initialized = 0;
-+	unsigned long t0 = timer_get_us();
- 	struct usb_uclass_priv *uc_priv;
- 	struct usb_bus_priv *priv;
- 	struct udevice *bus;
- 	struct uclass *uc;
- 	int ret;
- 
-+	uthread_mutex_lock(&mutex);
++static struct spa *spa_create(int argc, char *const argv[])
++{
++	struct spa *spa;
++	int i;
 +
-+	if (usb_started) {
-+		ret = 0;
-+		goto out;
++	spa = calloc(1, sizeof(*spa));
++	if (!spa)
++		return NULL;
++	spa->argc = argc;
++	spa->argv = malloc(argc * sizeof(char *));
++	if (!spa->argv)
++		goto err;
++	for (i = 0; i < argc; i++) {
++		spa->argv[i] = strdup(argv[i]);
++		if (!spa->argv[i])
++			goto err;
++	}
++	return spa;
++err:
++	spa_free(spa);
++	return NULL;
++}
++
++static void spawn_thread(void *arg)
++{
++	struct spa *spa = (struct spa *)arg;
++	ulong cycles = 0;
++	int repeatable = 0;
++
++	job_ret[spa->job_idx] = cmd_process(0, spa->argc, spa->argv,
++					    &repeatable, &cycles);
++	spa_free(spa);
++}
++
++static unsigned int next_job_id(void)
++{
++	int i;
++
++	for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
++		if (!job[i])
++			return i + 1;
++
++	/* No job available */
++	return 0;
++}
++
++static void refresh_jobs(void)
++{
++	int i;
++
++	for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
++		if (job[i] && uthread_grp_done(job[i]))
++			job[i] = 0;
++
++}
++
++static int do_spawn(struct cmd_tbl *cmdtp, int flag, int argc,
++		    char *const argv[])
++{
++	unsigned int id;
++	unsigned int idx;
++	struct spa *spa;
++	int ret;
++
++	if (argc == 1)
++		return CMD_RET_USAGE;
++
++	spa = spa_create(argc - 1, argv + 1);
++	if (!spa)
++		return CMD_RET_FAILURE;
++
++	refresh_jobs();
++
++	id = next_job_id();
++	if (!id)
++		return CMD_RET_FAILURE;
++	idx = id - 1;
++
++	job[idx] = uthread_grp_new_id();
++
++	ret = uthread_create(NULL, spawn_thread, spa, 0, job[idx]);
++	if (ret) {
++		job[idx] = 0;
++		return CMD_RET_FAILURE;
 +	}
 +
- 	asynch_allowed = 1;
- 
- 	ret = uclass_get(UCLASS_USB, &uc);
- 	if (ret)
--		return ret;
-+		goto out;
- 
- 	uc_priv = uclass_get_priv(uc);
- 
-@@ -347,6 +409,9 @@ int usb_init(void)
- 		usb_init_bus(bus);
- 	}
- 
-+	if (CONFIG_IS_ENABLED(UTHREAD))
-+		run_threads();
++	ret = env_set_ulong("job_id", id);
++	if (ret)
++		return CMD_RET_FAILURE;
 +
- 	usb_started = true;
- 
- 	/*
-@@ -364,6 +429,9 @@ int usb_init(void)
- 			usb_scan_bus(bus, true);
- 	}
- 
-+	if (CONFIG_IS_ENABLED(UTHREAD))
-+		run_threads();
++	return CMD_RET_SUCCESS;
++}
 +
- 	/*
- 	 * Now that the primary controllers have been scanned and have handed
- 	 * over any devices they do not understand to their companions, scan
-@@ -380,21 +448,34 @@ int usb_init(void)
- 		}
- 	}
- 
--	debug("scan end\n");
-+	if (CONFIG_IS_ENABLED(UTHREAD))
-+		run_threads();
++U_BOOT_CMD(spawn, CONFIG_SYS_MAXARGS, 0, do_spawn,
++	   "run commands and summarize execution time",
++	   "command [args...]\n");
 +
-+	usb_report_devices(uc);
- 
- 	/* Remove any devices that were not found on this scan */
- 	remove_inactive_children(uc, bus);
- 
- 	ret = uclass_get(UCLASS_USB_HUB, &uc);
- 	if (ret)
--		return ret;
-+		goto out;
++static enum command_ret_t wait_job(unsigned int idx)
++{
++	int prev = disable_ctrlc(false);
 +
- 	remove_inactive_children(uc, bus);
- 
- 	/* if we were not able to find at least one working bus, bail out */
- 	if (controllers_initialized == 0)
- 		printf("No USB controllers found\n");
- 
-+	debug("USB initialized in %ld ms\n",
-+	       (timer_get_us() - t0) / 1000);
++	while (!uthread_grp_done(job[idx])) {
++		if (ctrlc()) {
++			puts("<INTERRUPT>\n");
++			disable_ctrlc(prev);
++			return CMD_RET_FAILURE;
++		}
++		uthread_schedule();
++	}
 +
-+	uthread_mutex_unlock(&mutex);
++	job[idx] = 0;
++	disable_ctrlc(prev);
 +
- 	return usb_started ? 0 : -ENOENT;
-+out:
-+	uthread_mutex_unlock(&mutex);
++	return job_ret[idx];
++}
++
++static int do_wait(struct cmd_tbl *cmdtp, int flag, int argc,
++		   char *const argv[])
++{
++	enum command_ret_t ret = CMD_RET_SUCCESS;
++	unsigned long id;
++	unsigned int idx;
++	int i;
++
++	if (argc == 1) {
++		for (i = 0; i < CONFIG_CMD_SPAWN_NUM_JOBS; i++)
++			if (job[idx])
++				ret = wait_job(i);
++	} else {
++		for (i = 1; i < argc; i++) {
++			id = dectoul(argv[i], NULL);
++			if (id < 0 || id > CONFIG_CMD_SPAWN_NUM_JOBS)
++				return CMD_RET_USAGE;
++			idx = (int)id - 1;
++			ret = wait_job(idx);
++		}
++	}
 +
 +	return ret;
- }
- 
- int usb_setup_ehci_gadget(struct ehci_ctrl **ctlrp)
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index 5f07430714e..70a1d868de8 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -392,8 +392,8 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
- 	ut_assert_console_end();
- 
- 	ut_assertok(bootdev_hunt("usb1", false));
--	ut_assert_nextline(
--		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
-+	ut_assert_skip_to_line(
-+		"Bus usb@1: 5 USB Device(s) found");
- 	ut_assert_console_end();
- 
- 	/* USB is 7th in the list, so bit 8 */
-@@ -448,8 +448,8 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
- 	ut_assert_nextline("scanning bus for devices...");
- 	ut_assert_skip_to_line("Hunting with: spi_flash");
- 	ut_assert_nextline("Hunting with: usb");
--	ut_assert_nextline(
--		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
-+	ut_assert_skip_to_line(
-+		"Bus usb@1: 5 USB Device(s) found");
- 	ut_assert_nextline("Hunting with: virtio");
- 	ut_assert_console_end();
- 
-@@ -550,8 +550,8 @@ static int bootdev_test_hunt_prio(struct unit_test_state *uts)
- 	ut_assertok(bootdev_hunt_prio(BOOTDEVP_5_SCAN_SLOW, true));
- 	ut_assert_nextline("Hunting with: ide");
- 	ut_assert_nextline("Hunting with: usb");
--	ut_assert_nextline(
--		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
-+	ut_assert_skip_to_line(
-+		"Bus usb@1: 5 USB Device(s) found");
- 	ut_assert_console_end();
- 
- 	return 0;
-@@ -603,7 +603,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
- 	ut_assertnonnull(dev);
- 	ut_asserteq_str("usb_mass_storage.lun0.bootdev", dev->name);
- 	ut_asserteq(BOOTFLOW_METHF_SINGLE_UCLASS, mflags);
--	ut_assert_nextlinen("Bus usb@1: scanning bus usb@1");
-+	ut_assert_nextline("Bus usb@1: 5 USB Device(s) found");
- 	ut_assert_console_end();
- 
- 	return 0;
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index eb7f00af39a..699ba0edaaf 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1289,7 +1289,7 @@ static int bootflow_efi(struct unit_test_state *uts)
- 
- 	ut_assertok(run_command("bootflow scan", 0));
- 	ut_assert_skip_to_line(
--		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
-+		"Bus usb@1: 5 USB Device(s) found");
- 
- 	ut_assertok(run_command("bootflow list", 0));
- 
++}
++
++U_BOOT_CMD(wait, CONFIG_SYS_MAXARGS, 0, do_wait,
++	   "wait for one or more jobs to complete",
++	   "[job_id ...]\n"
++	   "    - Wait until all specified jobs have exited and return the\n"
++	   "      exit status of the last job waited for. When no job_id is\n"
++	   "      given, wait for all the background jobs.\n");
 -- 
 2.43.0
 
