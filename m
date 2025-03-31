@@ -4,79 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0833AC3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D625C3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7936D8171B;
-	Mon, 31 Mar 2025 14:31:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C5B9A81EC0;
+	Mon, 31 Mar 2025 14:31:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SBBEe6Ij";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wO7VNb/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6259B81E60; Mon, 31 Mar 2025 14:31:35 +0200 (CEST)
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
- [IPv6:2a00:1450:4864:20::444])
+ id 598FA8171B; Mon, 31 Mar 2025 14:31:36 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DA4481703
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1BE819D2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x444.google.com with SMTP id
- ffacd0b85a97d-3912d2c89ecso3905509f8f.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:32 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4393dc02b78so27519535e9.3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743424292; x=1744029092; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Rru4VkyuErfQgN73Ry0SYP1FFMxA7NgKent1bS7oVTA=;
- b=SBBEe6IjU9MHZs0EFTfYvBlFeOwV1ZodpNZ4v+k0sQ503zUZUe6SQqk0M2bvKuwiSg
- n2sJZa154fuqJgJZQ5v+AGSJmAd/pJHigG6lMwzqioxJk7oCnBB78KfqM/UDTVNj23+x
- o149tsxxVHtroTNCjzJx6FN4AVr1Ox5HJxnu9ibGeU3LZjMZYvrgcUAvHnO8LYTfAALg
- MX9KZrBS/L9yrr/dbvVd0BjuUnSDfPMEntIhE+mJrW4IatqDMv8w+aggDz69MASbtE0s
- VSohp50lLJ75sMzkUQkptEaZ+FpmxbhbaczWk23/exVSbiTsCSTTBa2v3uKtNtDRUl+u
- SSiA==
+ d=linaro.org; s=google; t=1743424293; x=1744029093; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eUVHl6Za6D6pDyge7r7bRk6nRvr2lGPQEthV8hlLudM=;
+ b=wO7VNb/2rAv+poPD/hrvAuxXF4VX5v/7GFc125PrMHqb5URn75YisX7BdFsjEchF0x
+ uuTXomFvo4ajwO8T6EJf8/ZW4lnYxnxEFmCaeMPiPrlaiDcKjUmFMHJ1jjfJMUsBgAik
+ f8baD9d9SMAffXCb1w0gnGCvBlKpxZAy2he8YG54Y/94NAsEGeG7Nls5YUNV2r7bJInO
+ 3506yHG5E8qrJrVM1Ji1lsOhDOL6mhpPziGmnQoxNkzeMofAzM8C1Z/hI5e5WNaMPVjj
+ mECeewL3fPNRLCs/AoCp8xmx6DTYTLxdmMjJXbNAJF59l1olH8Rf9eU3rpK89sl+sU9u
+ exKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743424292; x=1744029092;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Rru4VkyuErfQgN73Ry0SYP1FFMxA7NgKent1bS7oVTA=;
- b=BUDMKw+HEdrKSRqoXQSMDiPk1uidfYr4LayLQIXJpQ3NM8CJJKYdNRDF0SflH5A5p4
- bAX9GxJaEDLOhu8U5WIVpRtlSO9CC+QqBFPIbp4nelog9Br1kGS0Gb/r4oj5kuYKz06q
- 5tzvpaOQlvGlm08NJ0Bpf5UyVFIwb5wkTnJL0XwOuC9dAbQRYeD5lfBrYKW6WHGDAqiT
- gcXRKRz78fmImGQs3VVVTPmlnhCJuOy9eFrvXujZ+se/k/yL1IWAVH32HAtjrwcIC7la
- k25nl7wjBBJqjTwtDzmjZw0DI93ochi2fH//vL/2ybdEK+5nB5+bT5qZbqowOVTvIGBC
- p5OQ==
-X-Gm-Message-State: AOJu0YzFmLJ+wzqhwJrLPaJXpspoI1JqwDTBXqMx3Akg20SidP6RnrlQ
- m/arnu71GjFWFtmcO4yWQTYk0bcL1LYhSxgsbPlbtI42DbYuz0Laqs1KbdvM0FbSvIXqFu6dJsS
- XeozqLzGq
-X-Gm-Gg: ASbGnctflvTuBYEPtjMlDozxJha/kSWf4NJtuPtH83a2vpUE9y+Scz93UcY5zpfr8Ak
- GLg0hGyv7DI3TTzWIs+bpj6SZU4qSh6QBevv0di7WHkmA1+Aynu3Wbp5bK7ctkpjwiFCsimMLFE
- tmxVToYx9rcWy9XQUITohrfItG30rk+t9JcVy/hEeTZ6lz2HnBRnc9vgs1fIHP08G/sAZ+2FVhN
- KBxIIPgpdWYlCfilZsDiPgBNr2zCLFq+duVZ1IfuEiowFEDNQBUdaFaPbb/1ISeGNimCGERSghk
- cbE/EBB4VDXKtcOAxikaIgYV3Rs5j+TCaP7EthrkwGvTR9kpLVYu
-X-Google-Smtp-Source: AGHT+IEe0Pig3MSPYPowtcw2OuTG8ZsMWII8l+niGUbJUllNtqdu0/9syyt9kiwe6wSFl3QzTVgT7w==
-X-Received: by 2002:a05:6000:1446:b0:38d:e6b6:508b with SMTP id
- ffacd0b85a97d-39c120cb5e5mr7117926f8f.9.1743424291730; 
- Mon, 31 Mar 2025 05:31:31 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743424293; x=1744029093;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eUVHl6Za6D6pDyge7r7bRk6nRvr2lGPQEthV8hlLudM=;
+ b=srlovk7QqHT4sEhVMnQBkOBkdlmN0zQ4IanZW0UlVhS7u7kJT0KeJH5Etrb80c08n0
+ nRDBF36/TEspIyzmD5wj/zWZbBHFTMb4OnW7C94MDxuTXHJcRYuvMeEFskRtW+rJl0xo
+ mwMpg/wJBxIGF7l42FY9ZByl0fZ18TMwMr74mLYVc9T78mXe780eyo87iKatN+ZF2IHk
+ b831l+d9Q5xd0eSe1Cfjv3uDAMHpv4qg+8sGvxXWhOBETTdmyrYL/pozeuON5dPuIP+v
+ l178AhgOkDRGq2DE/zdHyZT+YaOKgD+PGb/CaBfLGNUipPx/wEZlB267H1CXB7d4IqCY
+ Bp+Q==
+X-Gm-Message-State: AOJu0Yx6prvUrpNi9W4BbGiqJTB45qfpPxvyPFywCK/v1/YYkeygw+Nr
+ Kt6JPzGfBMFPtcx8bOeF9KTzuM7p+16ev1QGxou3wKJt1u2X40VW6c93bGmUIogHXXpyuU+hTIU
+ +DmA+8g==
+X-Gm-Gg: ASbGncvyikLUpHWIIXvrZRvkGy5eZ+okf2F71qnvIlV/aCO4u09w3o7CwzJXJoM5dRu
+ oQ5ZUswBaScJil2QMP8RNLtFDSLTCTDbU1Y5y81SmqVeGO/mJqHKVr3jD+JWgKwRrzTW7UNlzuM
+ tPT/3J4suTs7mxU2H6PwjjEE6AlRgnyGf9LY6uG/DDAG0zv7vPLyWBu9hyKW+uSJeopgP0kOQvy
+ oaULYIVrzbUSwRUYvfNuZLJ1iI77p1I5pyY7uttnVEInUzN88iLFWgP9ZNLf/AGcAN5w2KROJpI
+ JpcY8/+HFMESMNU/Xqn95OvsvnDbYjgr0owo+1HUUS0XXBx044Cf
+X-Google-Smtp-Source: AGHT+IEiqwawpQsivBeo1sEVdwTTYbEOkko9sPyEmT7pd7F2sqhDNdd16K6KLF9u+kmi1EYjrDR4fA==
+X-Received: by 2002:a5d:598d:0:b0:391:6fd:bb65 with SMTP id
+ ffacd0b85a97d-39c120ca6c1mr7269090f8f.9.1743424293443; 
+ Mon, 31 Mar 2025 05:31:33 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:f23c:25c9:dc74:be1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.31
+ ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 05:31:31 -0700 (PDT)
+ Mon, 31 Mar 2025 05:31:33 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH v5 00/16] Uthreads
-Date: Mon, 31 Mar 2025 14:30:54 +0200
-Message-ID: <20250331123120.2025062-1-jerome.forissier@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>
+Subject: [PATCH v5 01/16] arch: introduce initjmp() and Kconfig symbol
+ HAVE_INITJMP
+Date: Mon, 31 Mar 2025 14:30:55 +0200
+Message-ID: <20250331123120.2025062-2-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250331123120.2025062-1-jerome.forissier@linaro.org>
+References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,174 +106,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series introduces threads and uses them for two things:
-- Improve the performance of the USB bus scanning code (scan multiple
-busses simultaneously),
-- Implement background jobs in the shell via two new commands: 'spawn'
-and 'wait'.
+Add the HAVE_INIJMP symbol to be set by architectures that support
+initjmp(), a non-standard extension to setjmp()/longjmp() allowing to
+initialize a jump buffer with a function pointer and a stack pointer.
+This will be useful to later introduce threads. With this new function
+it becomes possible to longjmp() to a particular function pointer
+(rather than to a point previously reached during program execution as
+is the case with setjmp()), and with a custom stack. Both things are
+needed to spin off a new thread. Then the usual setjmp()/longjmp() pair
+is enough to save and restore a context, i.e., switch thread.
 
-The threading framework is called 'uthread' and is inspired from the
-barebox threads [2]. setjmp() and longjmp() are used to save and
-restore contexts, as well as a non-standard extension called initjmp().
-This new function is added in several patches, one for each
-architecture that supports HAVE_SETJMP. A new symbol is defined:
-HAVE_INITJMP. Two tests, one for initjmp() and one for the uthread
-scheduling, are added to the lib suite.
+Add the initjmp() prototype to <include/setjmp.h> since it is common to
+all architectures.
 
-The schedule() and udelay() function are updated to become thread
-re-scheduling points, and mutex objects are introduced. With that the
-USB stack initialization is modified to benefit from concurrency when
-UTHREAD is enabled, where uthreads are used in usb_init() to initialize
-and scan multiple busses at the same time. The code was tested on arm64
-and arm QEMU with 4 simulated XHCI buses and some devices. On this
-platform the USB scan takes 2.2 s instead of 5.6 s. Tested on i.MX93 EVK
-with two USB hubs, one ethernet adapter and one webcam on each, "usb
-start" takes 2.4 s instead of 4.6 s.
+Add an entry to the API documentation: doc/api/setjmp.rst.
 
-Finally, the spawn and wait commands are introduced, allowing the use of
-threads from the shell. Tested on the i.MX93 EVK with a spinning HDD
-connected to USB1 and the network connected to ENET1. The USB plus DHCP
-init sequence "spawn usb start; spawn dhcp; wait" takes 4.5 seconds
-instead of 8 seconds for "usb start; dhcp".
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=446674
-[2] https://github.com/barebox/barebox/blob/master/common/bthread.c
-
-Changes in v5:
-- Rebase on top of next (at d5742298803 "Merge tag 'qcom-next-20250324'
-of https://gitlab.denx.de/u-boot/custodians/u-boot-snapdragon into next")
-- Apply review tags
-- Explain why initjmp() is introduced for every platform (arm, riscv,
-sandbox).
-- Implement mutexes ("uthread: add uthread_mutex", "test: lib: add
-uthread_mutex test")
-- USB: keep 'controllers_initialized' local to usb_init() and use the DM
-function device_active() to count the controllers initialized successfully.
-Protect the USB devices with a mutex (so usb_init() cannot run concurrently
-with usb_stop()).
-- Fix copyright in cmd/spawn.c
-
-Changes in v4:
-- Rebase on top of next (at 5ca70325b64 "Merge branch 'fixes' of
-https://source.denx.de/u-boot/custodians/u-boot-tegra into next")
-- Add a stack_sz parameter to initjmp(). This is made necessary by the
-sandbox implementation which relies on sigaltstack(), which need both
-the stack base address and its size in its stack_t argument. In any
-case it is cleaner to provide the exact stack boundaries. With that,
-a crash was fixed on sandbox in the lib_initjmp unit test.
-@Ilias: I kept your R-b on the two patches with a trivial change
-(passing one more parameter), but I removed it from "arm: add initjmp()"
-since there's one more line of assembly code and who knows what I might
-have done wrong ;)
-- Remove symbol UTHREAD_GRANULARITY and use a tight scheduling loop in
-delay() instead. Tests on an i.MX93 board have shown that setting
-UTHREAD_GRANULARITY as low as 10 microseconds (or higher) can have a
-negative impact on the console input (some key presses do not register)
-while 0 makes the console fully responsive.  The test consist in running
-"spawn sleep 10" and typing a command. I suspect other platforms may
-behave similarly, therefore do not bother with the added complexity of
-a configurable delay.
-- Apply review tags
-
-Changes in v3:
-- Rebase on top of Heinrich's series "common: cleanup usage of structure
-jmp_buf_data":
-https://patchwork.ozlabs.org/project/uboot/list/?series=446674
-https://lists.denx.de/pipermail/u-boot/2025-March/582221.html
-- HAVE_INITJMP now depends on HAVE_SETJMP. Provide proper Sphinx-like
-documentaion for initjmp().
-- test/lib/initjmp.c: change SPDX license tag from GPL2.0+ to
-GPL-2.0-or-later
-- Add doc/api/setjmp.rst. The initjmp() test is used as an example in the
-documentation.
-- uthread_create() now accepts an optional user-allocated struct uthread
-- Remove the list_empty() test from uthread_schedule() (not needed)
-- Add Sphinx doc to all functions in uthread.h (moved from uthread.c).
-- Add doc/api/uthread.rst. The uthread test is used as an example in the
-documentation.
-- Document struct uthread and its components
-- Provide numbers to justify the scheduling loop in udelay() in commit
-"lib: time: hook uthread_schedule() into udelay()".
-- Do not insert uthread_schedule() in common/console.c:fgetc() since it
-is already in schedule()
-- The wait command can be interrupted with Ctrl-C
-- Switch spawn and wait tests from DM_TEST() to CMD_TEST()
-- Add MAINTAINERS entry
-- Apply review tags
-
-Changes in v2:
-- Rewrite the cover letter, do not mention the older coroutines series
-- Rebased onto next
-- UTHREAD_STACK_SIZE is set to 32768 (32 KiB) instead of 32178
-- Remove uthread_free_all() and let threads be freed as they terminate
-by uthread_schedule()
-- Add function descriptions
-- Add documentation (doc/develop/uthread.rst)
-- Explain initjmp() in the description of "arch: introduce symbol
-HAVE_INITJMP".
-- Add thread groups (uthread_grp_new_id() and uthread_grp_done())
-- Add the spawn and wait commands
-
-Jerome Forissier (16):
-  arch: introduce initjmp() and Kconfig symbol HAVE_INITJMP
-  arm: add initjmp()
-  riscv: add initjmp()
-  sandbox: add initjmp()
-  test: lib: add initjmp() test
-  uthread: add cooperative multi-tasking interface
-  uthread: add uthread_mutex
-  cyclic: invoke uthread_schedule() from schedule()
-  lib: time: hook uthread_schedule() into udelay()
-  test: lib: add uthread test
-  test: lib: add uthread_mutex test
-  dm: usb: move bus initialization into new static function
-    usb_init_bus()
-  dm: usb: initialize and scan multiple buses simultaneously with
-    uthread
-  cmd: add spawn and wait commands
-  test: cmd: add test for spawn and wait commands
-  MAINTAINERS: add UTHREAD
-
- MAINTAINERS                   |   9 ++
- arch/Kconfig                  |   9 ++
- arch/arm/lib/setjmp.S         |  12 +++
- arch/arm/lib/setjmp_aarch64.S |  10 ++
- arch/riscv/lib/setjmp.S       |  11 ++
- arch/sandbox/cpu/Makefile     |  11 +-
- arch/sandbox/cpu/initjmp.c    | 175 +++++++++++++++++++++++++++++++
- cmd/Kconfig                   |  17 +++
- cmd/Makefile                  |   2 +
- cmd/spawn.c                   | 188 +++++++++++++++++++++++++++++++++
- common/cyclic.c               |   3 +
- doc/api/index.rst             |   2 +
- doc/api/setjmp.rst            |  20 ++++
- doc/api/uthread.rst           |  19 ++++
- drivers/usb/host/usb-uclass.c | 192 ++++++++++++++++++++++++----------
- include/setjmp.h              |  32 ++++++
- include/u-boot/schedule.h     |   3 +
- include/uthread.h             | 183 ++++++++++++++++++++++++++++++++
- lib/Kconfig                   |  21 ++++
- lib/Makefile                  |   2 +
- lib/time.c                    |   9 +-
- lib/uthread.c                 | 166 +++++++++++++++++++++++++++++
- test/boot/bootdev.c           |  14 +--
- test/boot/bootflow.c          |   2 +-
- test/cmd/Makefile             |   1 +
- test/cmd/spawn.c              |  32 ++++++
- test/lib/Makefile             |   2 +
- test/lib/initjmp.c            |  73 +++++++++++++
- test/lib/uthread.c            | 146 ++++++++++++++++++++++++++
- 29 files changed, 1303 insertions(+), 63 deletions(-)
- create mode 100644 arch/sandbox/cpu/initjmp.c
- create mode 100644 cmd/spawn.c
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/Kconfig       |  7 +++++++
+ doc/api/index.rst  |  1 +
+ doc/api/setjmp.rst | 10 ++++++++++
+ include/setjmp.h   | 32 ++++++++++++++++++++++++++++++++
+ 4 files changed, 50 insertions(+)
  create mode 100644 doc/api/setjmp.rst
- create mode 100644 doc/api/uthread.rst
- create mode 100644 include/uthread.h
- create mode 100644 lib/uthread.c
- create mode 100644 test/cmd/spawn.c
- create mode 100644 test/lib/initjmp.c
- create mode 100644 test/lib/uthread.c
 
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 35b19f9bfdc..14111ca14fb 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -13,6 +13,13 @@ config HAVE_SETJMP
+ 	help
+ 	 The architecture supports setjmp() and longjmp().
+ 
++config HAVE_INITJMP
++	bool
++	depends on HAVE_SETJMP
++	help
++	 The architecture supports initjmp(), a non-standard companion to
++	 setjmp() and longjmp().
++
+ config SUPPORT_BIG_ENDIAN
+ 	bool
+ 
+diff --git a/doc/api/index.rst b/doc/api/index.rst
+index a108718ea99..0dc9ad45d41 100644
+--- a/doc/api/index.rst
++++ b/doc/api/index.rst
+@@ -25,6 +25,7 @@ U-Boot API documentation
+    rng
+    sandbox
+    serial
++   setjmp
+    sysreset
+    timer
+    unicode
+diff --git a/doc/api/setjmp.rst b/doc/api/setjmp.rst
+new file mode 100644
+index 00000000000..7718047085c
+--- /dev/null
++++ b/doc/api/setjmp.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++Long jump API
++=============
++
++.. kernel-doc:: include/setjmp.h
++   :doc: Overview
++
++.. kernel-doc:: include/setjmp.h
++   :internal:
+diff --git a/include/setjmp.h b/include/setjmp.h
+index 37d3a8af85d..32dd48803e9 100644
+--- a/include/setjmp.h
++++ b/include/setjmp.h
+@@ -3,12 +3,27 @@
+ #ifndef _SETJMP_H_
+ #define _SETJMP_H_ 1
+ 
++/**
++ * DOC: Overview
++ *
++ * The long jump API allows to perform nonlocal gotos, that is jump from one
++ * function to another typically further down in the stack, while properly
++ * restoring the stack's state (unwinding). The two functions needed to do this
++ * are setjmp() and longjmp().
++ *
++ * In addition to these two standard POSIX.1-2001/C89 functions, a third one is
++ * present in U-Boot: initjmp(). It is an extension which allows to implement
++ * user-mode threads.
++ */
++
+ #ifdef CONFIG_HAVE_SETJMP
+ #include <asm/setjmp.h>
+ #else
+ struct jmp_buf_data {
+ };
+ #endif
++#include <linux/compiler_attributes.h>
++#include <stddef.h>
+ 
+ /**
+  * typedef jmp_buf - information needed to restore a calling environment
+@@ -37,4 +52,21 @@ int setjmp(jmp_buf env);
+  */
+ void longjmp(jmp_buf env, int val);
+ 
++/**
++ * initjmp() - prepare for a long jump to a given function with a given stack
++ *
++ * This function sets up a jump buffer for later use with longjmp(). It allows
++ * to branch to a specific function with a specific stack. Please note that
++ * @func MUST NOT return. It shall typically restore the main stack and resume
++ * execution by doing a long jump to a jump buffer initialized by setjmp()
++ * before the long jump. initjmp() allows to implement multithreading.
++ *
++ * @env:	jump buffer
++ * @func:	function to be called on longjmp(), MUST NOT RETURN
++ * @stack_base:	the stack to be used by @func (lower address)
++ * @stack_sz:	the stack size in bytes
++ */
++int initjmp(jmp_buf env, void __noreturn (*func)(void), void *stack_base,
++	    size_t stack_sz);
++
+ #endif /* _SETJMP_H_ */
 -- 
 2.43.0
 
