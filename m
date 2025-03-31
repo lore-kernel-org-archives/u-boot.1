@@ -4,78 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7138CC36011
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 16:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A4FC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 16:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9289E8171B;
-	Mon, 31 Mar 2025 18:30:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C4EC88171B;
+	Mon, 31 Mar 2025 18:39:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JL8ysLo0";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nIJ0byqk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC56481DE3; Mon, 31 Mar 2025 18:30:52 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9930681DE3; Mon, 31 Mar 2025 18:39:48 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE40C81026
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 18:30:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDFD681026
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 18:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72bb97260ceso1035642a34.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 09:30:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743438648; x=1744043448; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SGElBS9snNRTheOko1yVvRsZFZ544lRfiMFQY9Zm8yY=;
- b=JL8ysLo0NV7V6rzDHgbwjoCbe9Nllj/7sL8YqwDjBe13XnMKxukTpjDQbdP5xX/Fyd
- e3nkxgenENyN1rFuewe2+7x/fyodFljixwhCjLW+PFN5KvvLLO57kN7JProJIIxCTG2r
- A5tyetbXFC9kpYHEXNxT0yBD4EbESChwNSwaE=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3AD5E3F5BA
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 16:39:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1743439185;
+ bh=2vXu8lLdXZOYVKA/R9oTSd3ZN0U/4HGlTz3ok5+QIG0=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=nIJ0byqka10tO75MHY0gClXyBjT4fIIr5uSrfn36gBPU7lLhtXd7RIJ24BGZt5qpY
+ lKiV0UaHRgtU8lkSXgpCamsye+k0CTq6dOGUB+eyi2aCbnbkUGAbKPeS9uHzqUJm15
+ T+ayu7VWZ5KPZP39GCDvX0OUgPWtCdjyd5yVEa/zvAt7mPIzN+Os6lb4BgDC25VGPy
+ kWD23HrdWM/BnOnB7cbKIJ3KmYrXismOQmdFIOFbC0/v0Z2V3vz8Z8iygnd6JsKcyD
+ BZrEIgOBqYOU22/RMPwajWaeCOy4zC23TM7AxUc/suxE4vEkibL40YXeds5dx6PpVt
+ tUuh+q0HcecyQ==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-3912d9848a7so2837521f8f.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 09:39:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743438648; x=1744043448;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SGElBS9snNRTheOko1yVvRsZFZ544lRfiMFQY9Zm8yY=;
- b=wut+NvjLg6MMT0yMiK76pTG1sHWcdfo0PkxFR7sPg9reqSeEOJI92Y0wxsbB1ZsRHN
- W0S9b0+u5+ysUhnbh2jsoewSXRoUqRkP+iffFpyc6WvQqbNY94l5k1c68BrhXz+Rjn/t
- 8ZSa7g33bQRsyFhvlblSlveEVOnAQi1sB9kRN+5SZ73u56j2FeOYOZt9WK2krkIVZPfo
- J5rNk7T5ui4IeDvWt4ZOY54otS0GXHmSTykRV+eMg5JI/2fwy7YiqGJQ/tcDuR1AkZCJ
- 2/I9Z5zK8i6Lf/hzYvT2oP2B/tRbE88vejvu1+wMR2YivjfGEQcdE/qRteumIPdW29Rt
- Yb3A==
+ d=1e100.net; s=20230601; t=1743439184; x=1744043984;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2vXu8lLdXZOYVKA/R9oTSd3ZN0U/4HGlTz3ok5+QIG0=;
+ b=DhCQAo87+rRNVVWVLRpD96Ex+CFLYHcubYTtFAQI48dOf7C1AjBBjVgElyajbB8XcA
+ wzhtBjjV4Jd/QPxQ/yV1dxPrU6AuAElz4dGVkO80Yv0YuwV3kfnVaZdyawGrD6+j8diB
+ APG02qKuNy961SbcrhTZFxrcBQfYdEacL8Jjp1r9MFGkZV/5ycGm553TnsNvKb4YGvdy
+ rTdsutoyyvs2fQKVmG7IfMXwotRT/IF1pk5qbvYWIfTkflETqpZMuzJOd9GAHOq9tv1S
+ SB+947rV6DS0E5KPSnIFRIkDcJ1nSTsrw+VgIOvQCLz0O/8LqK0fzbpp0vKz+MtGsGFy
+ oU+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4FFdJHO7QBjgKi0x7eEkJFiHHGrd8PFp2Lx2ZSUTaAh/hS71JI62qJtgaikHVKOuRIjqBNSs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCxafsdpk3VbCUKWaT+Biad5+X6pabA/F2l055BXCezxK9MDI7
- aB4WIMXe2C5f2b6e9QJhcE4QKEJTWTeaGzzpbEoigdgosmQmGMUJqrzLVDqdhsc=
-X-Gm-Gg: ASbGncujIelqaAVVHF4O3tt2cB5b+n7wn2xSq9Wyv0N8PxJxM9lCqHrJUcDCedD4Mag
- P04qPUa6vxDNnb7fX+1WsJ0kO/6FBq3fB7Ld5NgVUp7UcO7nhPPkvt2+UwEIRXllRVYyZlOFKPb
- Z2aLCj32o8sKAsVCGAxPgJbl0re2xnb0V/ii5qZ78z9q6QdEa3zxmNHr+jk9urYW2ZY/F3Vxv1y
- 3f4EFRPnmyopIsDMOcZYOgR8ulQlAu2GgmPdF2b2JpU6P3xXKQFho1hzluSaovCXOA0GfEcxw4x
- RegTvPnonIOI2TzXSwwgU5gDVq4R9ocrFNl25T7yn9g2DZQJdUSD/EF2Bvd5+QBjubXuSmaQ3Vo
- BA9KMviFWuJb0y38J
-X-Google-Smtp-Source: AGHT+IGAY/5ig/OoOty5I3LPKSfbOhbkLvJdNkguCWMpjfswWQx+m5YRy4tUirYFa125bplSaNonyA==
-X-Received: by 2002:a05:6830:698c:b0:727:3664:ca25 with SMTP id
- 46e09a7af769-72c6367d320mr5886011a34.0.1743438648317; 
- Mon, 31 Mar 2025 09:30:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580d30e0sm1524761a34.37.2025.03.31.09.30.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 09:30:47 -0700 (PDT)
-Date: Mon, 31 Mar 2025 10:30:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de, Mark Kettenis <mark.kettenis@xs4all.nl>
+ AJvYcCUm3WLrpLF1yx21DEUO3Smd/Dyh9DoToNwMwcUvxSeRIzZ4P8Vsg4d2L5fqurFya1ZY7pfC9V8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyy75jnIcJaOJQcKxhVpWcghlgkPFdcsblf+8xyWTN1INI8JAxe
+ xV8lmWnNxqDZx4m4bxlJcq6wssKFC69nJZW38Tsr+2LU+eQHcLmqm00Mt+bSAepS+tiQYCpurT7
+ /HkYP+B19JFtwuqp/tFUxBo6JM2vwQDJlyMkZekKGbjbgRkNQJqmetvPuyFBvwxgr9/s=
+X-Gm-Gg: ASbGncu5uJuMPG72/jwppYiwqb/b5Bg6MFkGbZc9NYlYGd0+UFyd+yPcU94HWIdwc4Q
+ szEw9eYLRAc+zfnCo9CA4tfWNJMC1aKABk4TCdSPGQjZ+pnckT9QTG2+ooF9vXYk9shwN22ykCW
+ 4Kr97QAYCHTXK+FmBWByabcb+51U4CiQ0EfaOhDbMZBTz+ItY/Gt3TFsbZnq55cF0MJnsjlbl9A
+ NctOFr8vpXlRgBS8E2WbZr932RHc0N/B0Inw36KOHrGvF8gwD5+Sd1NDsOpyvV02akh7IDYoj4E
+ Rtyb8AzoLw9gKq3MgPW5w0L+9VgFkgSxZM5Dl6GrzrM3UtgDUYoWQdUo4Xq0e/n2bGMRTQVl9kF
+ eNGRsI/3WcOh1
+X-Received: by 2002:a05:6000:4284:b0:39b:32fc:c025 with SMTP id
+ ffacd0b85a97d-39c0bf23245mr11739964f8f.2.1743439184526; 
+ Mon, 31 Mar 2025 09:39:44 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHgUH9Bmt92eSzUdf8RZ9t0WLXFfULa4UHPq5MKyQ/bb7hHOTZL+9WYtKbYxFFZ0F67yRrP4Q==
+X-Received: by 2002:a05:6000:4284:b0:39b:32fc:c025 with SMTP id
+ ffacd0b85a97d-39c0bf23245mr11739939f8f.2.1743439184124; 
+ Mon, 31 Mar 2025 09:39:44 -0700 (PDT)
+Received: from [192.168.103.102]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d8fba3ee4sm129081655e9.8.2025.03.31.09.39.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 31 Mar 2025 09:39:43 -0700 (PDT)
+Message-ID: <51ed9b8a-c69f-4ed8-b611-a0a42c9354d0@canonical.com>
+Date: Mon, 31 Mar 2025 18:39:42 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
-Message-ID: <20250331163045.GF93000@bill-the-cat>
+To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de, Mark Kettenis <mark.kettenis@xs4all.nl>
 References: <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
  <87a5s6qwfe.fsf@bloch.sibelius.xs4all.nl>
  <20231025211354.GZ496310@bill-the-cat>
@@ -86,12 +101,12 @@ References: <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
  <657308f0-bc64-49c3-bd14-c932a88e5ccd@linaro.org>
  <9c6ac5b0-8a4d-47fd-8be3-d9d49f9cb644@canonical.com>
  <98a9629c-a6b4-4e01-8f2b-694ee6ca7c06@linaro.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2BGS5SRpCYd2GZ/f"
-Content-Disposition: inline
-In-Reply-To: <98a9629c-a6b4-4e01-8f2b-694ee6ca7c06@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20250331163045.GF93000@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250331163045.GF93000@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,253 +123,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 31.03.25 18:30, Tom Rini wrote:
+> On Sun, Mar 30, 2025 at 04:38:12PM +0200, Caleb Connolly wrote:
+>> Hi Heinrich,
+>>
+>> On 3/28/25 15:18, Heinrich Schuchardt wrote:
+>>> On 28.03.25 14:00, Caleb Connolly wrote:
+>>>>
+>>>>
+>>>> On 3/28/25 13:01, Simon Glass wrote:
+>>>>> Hi Caleb,
+>>>>>
+>>>>> On Sun, 23 Mar 2025 at 12:39, Caleb Connolly
+>>>>> <caleb.connolly@linaro.org> wrote:
+>>>>>>
+>>>>>> Hi all,
+>>>>>>
+>>>>>> Reviving this as it is still very much an issue, and
+>>>>>> especially relevant
+>>>>>> for Qualcomm platforms.
+>>>>>>
+>>>>>> On 11/3/23 20:44, Simon Glass wrote:
+>>>>>>> Hi Heinrich,
+>>>>>>>
+>>>>>>> On Wed, 25 Oct 2023 at 15:22, Heinrich Schuchardt
+>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>>>>
+>>>>>>>> On 10/25/23 23:13, Tom Rini wrote:
+>>>>>>>>> On Wed, Oct 25, 2023 at 10:28:05PM +0200, Mark Kettenis wrote:
+>>>>>>>>>>> Date: Wed, 25 Oct 2023 21:57:44 +0200
+>>>>>>>>>>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>>>>>>>>
+>>>>>>>>>>> On 10/25/23 20:23, Simon Glass wrote:
+>>>>>>>>>>>> Hi Heinrich,
+>>>>>>>>>>>>
+>>>>>>>>>>>> On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Hi Heinrich,
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
+>>>>>>>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> Forward and backward
+>>>>>>>>>>>>>> compatibility of Linux
+>>>>>>>>>>>>>> kernel device- trees is
+>>>>>>>>>>>>>> sometimes missing. One
+>>>>>>>>>>>>>> solution approach is to load
+>>>>>>>>>>>>>> a kernel specific
+>>>>>>>>>>>>>> device-tree. This can either
+>>>>>>>>>>>>>> be done via a U-Boot scripts
+>>>>>>>>>>>>>> (like the one
+>>>>>>>>>>>>>> generated by Debian package
+>>>>>>>>>>>>>> flash-kernel or by a boot
+>>>>>>>>>>>>>> loader like GRUB.
+>>>>>>>>>>>>>> The boot loader approach
+>>>>>>>>>>>>>> currently requires to know
+>>>>>>>>>>>>>> the device-tree name
+>>>>>>>>>>>>>> before first boot which makes it unusable for generic images.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> Expose the device-tree file name as EFI variable FdtFile.
+>>>>>>>>>>>>>> This will allow bootloaders
+>>>>>>>>>>>>>> to load a kernel specific
+>>>>>>>>>>>>>> device- tree.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> kernel-specific
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> The variable will not be
+>>>>>>>>>>>>>> exposed on ACPI based
+>>>>>>>>>>>>>> systems or if the
+>>>>>>>>>>>>>> environment variable fdtfile is not defined.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> Signed-off-by: Heinrich
+>>>>>>>>>>>>>> Schuchardt
+>>>>>>>>>>>>>> <heinrich.schuchardt@canonical.com>
+>>>>>>>>>>>>>> ---
+>>>>>>>>>>>>>> v4:
+>>>>>>>>>>>>>>              Generalize the
+>>>>>>>>>>>>>> description of the content
+>>>>>>>>>>>>>> of $fdtfile.
+>>>>>>>>>>>>>> v3:
+>>>>>>>>>>>>>>              Add documentation
+>>>>>>>>>>>>>> v2:
+>>>>>>>>>>>>>>              Use a unique
+>>>>>>>>>>>>>> GUID to enable future U-Boot
+>>>>>>>>>>>>>> independent
+>>>>>>>>>>>>>>              standardization.
+>>>>>>>>>>>>>>              Do not try to
+>>>>>>>>>>>>>> add the variable on ACPI
+>>>>>>>>>>>>>> based systems.
+>>>>>>>>>>>>>> ---
+>>>>>>>>>>>>>>       doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+>>>>>>>>>>>>>>       include/efi_loader.h       |  5 +++++
+>>>>>>>>>>>>>>      
+>>>>>>>>>>>>>> lib/efi_loader/efi_setup.c |
+>>>>>>>>>>>>>> 30 +++++++++++++++++++++++ +
+>>>>>>>>>>>>>> ++++++
+>>>>>>>>>>>>>>       3 files changed, 49 insertions(+)
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> diff --git
+>>>>>>>>>>>>>> a/doc/develop/uefi/uefi.rst
+>>>>>>>>>>>>>> b/doc/develop/uefi/ uefi.rst
+>>>>>>>>>>>>>> index fb16ac743a..702c490831 100644
+>>>>>>>>>>>>>> --- a/doc/develop/uefi/uefi.rst
+>>>>>>>>>>>>>> +++ b/doc/develop/uefi/uefi.rst
+>>>>>>>>>>>>>> @@ -916,6 +916,20 @@ So our
+>>>>>>>>>>>>>> final format of the
+>>>>>>>>>>>>>> FilePathList[] is::
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>           Loaded image - end
+>>>>>>>>>>>>>> node (0xff) - VenMedia -
+>>>>>>>>>>>>>> initrd_1 - [end node (0x01)
+>>>>>>>>>>>>>> - initrd_n ...] - end node
+>>>>>>>>>>>>>> (0xff)
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> +EFI variable FdtFile
+>>>>>>>>>>>>>> +~~~~~~~~~~~~~~~~~~~~
+>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>> +Ideally U-Boot would always
+>>>>>>>>>>>>>> expose a device-tree that
+>>>>>>>>>>>>>> can be used for booting
+>>>>>>>>>>>>>> +any operating systems.
+>>>>>>>>>>>>>> Unfortunately operating
+>>>>>>>>>>>>>> systems like Linux sometimes
+>>>>>>>>>>>>>> +break forward and backward
+>>>>>>>>>>>>>> compatibility. In this case
+>>>>>>>>>>>>>> there is a need to load
+>>>>>>>>>>>>>> +an operating system version specific device-tree.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> This seems to be a strong
+>>>>>>>>>>>>> statement. Given the effort that
+>>>>>>>>>>>>> goes into
+>>>>>>>>>>>>> the DT, changes are supposed to be backwards-compatible. Is this
+>>>>>>>>>>>>> generally true, or is it just
+>>>>>>>>>>>>> that we want an up-to-date DT
+>>>>>>>>>>>>> for the
+>>>>>>>>>>>>> kernel to enable new features?
+>>>>>>>>>>>>
+>>>>>>>>>>>> Did you see this comment?
+>>>>>>>>>>>
+>>>>>>>>>>> It would have been nice to put the
+>>>>>>>>>>> person which made that comment on copy.
+>>>>>>>>>>>
+>>>>>>>>>>> The truth lies in the world "supposed":
+>>>>>>>>>>>
+>>>>>>>>>>> The idea of a device-tree that never
+>>>>>>>>>>> needs to change is quite old and
+>>>>>>>>>>> never became true on ARM devices.
+>>>>>>>>>>>
+>>>>>>>>>>> We all know Linux tends to break both
+>>>>>>>>>>> forward and backward compatibility
+>>>>>>>>>>> of device-trees. Here is a nice example:
+>>>>>>>>>>>
+>>>>>>>>>>> d0c6707ca423 ("arm64: dts: allwinner:
+>>>>>>>>>>> H5: NanoPi Neo Plus2: phy- mode
+>>>>>>>>>>> rgmii-id")
+>>>>>>>>>>>
+>>>>>>>>>>> Driver changes broke forward and
+>>>>>>>>>>> backwards compatibility of a lot of
+>>>>>>>>>>> Allwinner boards.
+>>>>>>>>>>
+>>>>>>>>>> Well, that happened in 2020.  Things have gotten better over time.
+>>>>>>
+>>>>>> (kinda off-topic context on DT version compat)
+>>>>>>
+>>>>>>    From what I've seen, there is not yet very much infrastructure or
+>>>>>> common practise in place in the kernel to handle parsing DTB in a
+>>>>>> backwards compatible way. For example there has been efforts
+>>>>>> to simplify
+>>>>>> the dwc3 devicetree for Qualcomm platforms with a series dating back
+>>>>>> about as far as this U-Boot patch!
+>>>>>>
+>>>>>> https://lore.kernel.org/linux-arm-msm/20250318-dwc3-refactor-
+>>>>>> v5-1-90ea6e5b3ba4@oss.qualcomm.com/
+>>>>>>
+>>>>>> Earlier versions attempted to convert the older DTS to the newer format
+>>>>>> internally, but after much discussion it was decided that this wasn't
+>>>>>> really feasible, instead the new approach is to duplicate the entire
+>>>>>> dwc3 driver to maintain DT compatibility.
+>>>>>>
+>>>>>> It's obviously good to see compatibility taken seriously,
+>>>>>> since it seems
+>>>>>> clear that if we ever want to treat DT as firmware, the
+>>>>>> kernel will need
+>>>>>> to do this (and eventually vendors could ship laptops with
+>>>>>> DT out of the
+>>>>>> box which works with upstream -- crazier things have happened).
+>>>>>>
+>>>>>> But I think in the mean time we still want to be able to drive distro
+>>>>>> adoption, and the way I see it teaching GRUB and systemd-boot about a
+>>>>>> new FdtFile EFI variable is going to make that way simpler...
+>>>
+>>> There was a discussion in the context of EBBR if this is the right way
+>>> forward. And the general opinion was that the compatible string should
+>>> be used for matching the dtb files.
+>>
+>> Ideally, the file name should contain the same information as the compatible
+>> string, or more. Currently in upstream there are devices with different
+>> display variants that have identical compatible strings but different dtb
+>> files.
+> 
+> I've asked before for clarification on if that's allowed or a bug and
+> not really gotten an answer. It sure feels wrong and I think the
+> argument is that devices doing things like that aren't likely to be
+> general purpose anyhow.
+> 
 
---2BGS5SRpCYd2GZ/f
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Multiple device-trees in Linux having the same compatible string is a 
+bug as indicated by the device-tree maintainer in earlier discussions. 
+It should be fixed in Linux.
 
-On Sun, Mar 30, 2025 at 04:38:12PM +0200, Caleb Connolly wrote:
-> Hi Heinrich,
->=20
-> On 3/28/25 15:18, Heinrich Schuchardt wrote:
-> > On 28.03.25 14:00, Caleb Connolly wrote:
-> > >=20
-> > >=20
-> > > On 3/28/25 13:01, Simon Glass wrote:
-> > > > Hi Caleb,
-> > > >=20
-> > > > On Sun, 23 Mar 2025 at 12:39, Caleb Connolly
-> > > > <caleb.connolly@linaro.org> wrote:
-> > > > >=20
-> > > > > Hi all,
-> > > > >=20
-> > > > > Reviving this as it is still very much an issue, and
-> > > > > especially relevant
-> > > > > for Qualcomm platforms.
-> > > > >=20
-> > > > > On 11/3/23 20:44, Simon Glass wrote:
-> > > > > > Hi Heinrich,
-> > > > > >=20
-> > > > > > On Wed, 25 Oct 2023 at 15:22, Heinrich Schuchardt
-> > > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > > > >=20
-> > > > > > > On 10/25/23 23:13, Tom Rini wrote:
-> > > > > > > > On Wed, Oct 25, 2023 at 10:28:05PM +0200, Mark Kettenis wro=
-te:
-> > > > > > > > > > Date: Wed, 25 Oct 2023 21:57:44 +0200
-> > > > > > > > > > From: Heinrich Schuchardt <heinrich.schuchardt@canonica=
-l.com>
-> > > > > > > > > >=20
-> > > > > > > > > > On 10/25/23 20:23, Simon Glass wrote:
-> > > > > > > > > > > Hi Heinrich,
-> > > > > > > > > > >=20
-> > > > > > > > > > > On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google=
-=2Ecom> wrote:
-> > > > > > > > > > > >=20
-> > > > > > > > > > > > Hi Heinrich,
-> > > > > > > > > > > >=20
-> > > > > > > > > > > > On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
-> > > > > > > > > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > Forward and backward
-> > > > > > > > > > > > > compatibility of Linux
-> > > > > > > > > > > > > kernel device- trees is
-> > > > > > > > > > > > > sometimes missing. One
-> > > > > > > > > > > > > solution approach is to load
-> > > > > > > > > > > > > a kernel specific
-> > > > > > > > > > > > > device-tree. This can either
-> > > > > > > > > > > > > be done via a U-Boot scripts
-> > > > > > > > > > > > > (like the one
-> > > > > > > > > > > > > generated by Debian package
-> > > > > > > > > > > > > flash-kernel or by a boot
-> > > > > > > > > > > > > loader like GRUB.
-> > > > > > > > > > > > > The boot loader approach
-> > > > > > > > > > > > > currently requires to know
-> > > > > > > > > > > > > the device-tree name
-> > > > > > > > > > > > > before first boot which makes it unusable for gen=
-eric images.
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > Expose the device-tree file name as EFI variable =
-FdtFile.
-> > > > > > > > > > > > > This will allow bootloaders
-> > > > > > > > > > > > > to load a kernel specific
-> > > > > > > > > > > > > device- tree.
-> > > > > > > > > > > >=20
-> > > > > > > > > > > > kernel-specific
-> > > > > > > > > > > >=20
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > The variable will not be
-> > > > > > > > > > > > > exposed on ACPI based
-> > > > > > > > > > > > > systems or if the
-> > > > > > > > > > > > > environment variable fdtfile is not defined.
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > Signed-off-by: Heinrich
-> > > > > > > > > > > > > Schuchardt
-> > > > > > > > > > > > > <heinrich.schuchardt@canonical.com>
-> > > > > > > > > > > > > ---
-> > > > > > > > > > > > > v4:
-> > > > > > > > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 Generalize the
-> > > > > > > > > > > > > description of the content
-> > > > > > > > > > > > > of $fdtfile.
-> > > > > > > > > > > > > v3:
-> > > > > > > > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 Add documentati=
-on
-> > > > > > > > > > > > > v2:
-> > > > > > > > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 Use a unique
-> > > > > > > > > > > > > GUID to enable future U-Boot
-> > > > > > > > > > > > > independent
-> > > > > > > > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 standardization.
-> > > > > > > > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 Do not try to
-> > > > > > > > > > > > > add the variable on ACPI
-> > > > > > > > > > > > > based systems.
-> > > > > > > > > > > > > ---
-> > > > > > > > > > > > > =A0=A0=A0=A0 doc/develop/uefi/uefi.rst=A0 | 14 ++=
-++++++++++++
-> > > > > > > > > > > > > =A0=A0=A0=A0 include/efi_loader.h=A0=A0=A0=A0=A0=
-=A0 |=A0 5 +++++
-> > > > > > > > > > > > > =A0=A0=A0=A0
-> > > > > > > > > > > > > lib/efi_loader/efi_setup.c |
-> > > > > > > > > > > > > 30 +++++++++++++++++++++++ +
-> > > > > > > > > > > > > ++++++
-> > > > > > > > > > > > > =A0=A0=A0=A0 3 files changed, 49 insertions(+)
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > diff --git
-> > > > > > > > > > > > > a/doc/develop/uefi/uefi.rst
-> > > > > > > > > > > > > b/doc/develop/uefi/ uefi.rst
-> > > > > > > > > > > > > index fb16ac743a..702c490831 100644
-> > > > > > > > > > > > > --- a/doc/develop/uefi/uefi.rst
-> > > > > > > > > > > > > +++ b/doc/develop/uefi/uefi.rst
-> > > > > > > > > > > > > @@ -916,6 +916,20 @@ So our
-> > > > > > > > > > > > > final format of the
-> > > > > > > > > > > > > FilePathList[] is::
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > =A0=A0=A0=A0=A0=A0=A0=A0 Loaded image - end
-> > > > > > > > > > > > > node (0xff) - VenMedia -
-> > > > > > > > > > > > > initrd_1 - [end node (0x01)
-> > > > > > > > > > > > > - initrd_n ...] - end node
-> > > > > > > > > > > > > (0xff)
-> > > > > > > > > > > > >=20
-> > > > > > > > > > > > > +EFI variable FdtFile
-> > > > > > > > > > > > > +~~~~~~~~~~~~~~~~~~~~
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +Ideally U-Boot would always
-> > > > > > > > > > > > > expose a device-tree that
-> > > > > > > > > > > > > can be used for booting
-> > > > > > > > > > > > > +any operating systems.
-> > > > > > > > > > > > > Unfortunately operating
-> > > > > > > > > > > > > systems like Linux sometimes
-> > > > > > > > > > > > > +break forward and backward
-> > > > > > > > > > > > > compatibility. In this case
-> > > > > > > > > > > > > there is a need to load
-> > > > > > > > > > > > > +an operating system version specific device-tree.
-> > > > > > > > > > > >=20
-> > > > > > > > > > > > This seems to be a strong
-> > > > > > > > > > > > statement. Given the effort that
-> > > > > > > > > > > > goes into
-> > > > > > > > > > > > the DT, changes are supposed to be backwards-compat=
-ible. Is this
-> > > > > > > > > > > > generally true, or is it just
-> > > > > > > > > > > > that we want an up-to-date DT
-> > > > > > > > > > > > for the
-> > > > > > > > > > > > kernel to enable new features?
-> > > > > > > > > > >=20
-> > > > > > > > > > > Did you see this comment?
-> > > > > > > > > >=20
-> > > > > > > > > > It would have been nice to put the
-> > > > > > > > > > person which made that comment on copy.
-> > > > > > > > > >=20
-> > > > > > > > > > The truth lies in the world "supposed":
-> > > > > > > > > >=20
-> > > > > > > > > > The idea of a device-tree that never
-> > > > > > > > > > needs to change is quite old and
-> > > > > > > > > > never became true on ARM devices.
-> > > > > > > > > >=20
-> > > > > > > > > > We all know Linux tends to break both
-> > > > > > > > > > forward and backward compatibility
-> > > > > > > > > > of device-trees. Here is a nice example:
-> > > > > > > > > >=20
-> > > > > > > > > > d0c6707ca423 ("arm64: dts: allwinner:
-> > > > > > > > > > H5: NanoPi Neo Plus2: phy- mode
-> > > > > > > > > > rgmii-id")
-> > > > > > > > > >=20
-> > > > > > > > > > Driver changes broke forward and
-> > > > > > > > > > backwards compatibility of a lot of
-> > > > > > > > > > Allwinner boards.
-> > > > > > > > >=20
-> > > > > > > > > Well, that happened in 2020.=A0 Things have gotten better=
- over time.
-> > > > >=20
-> > > > > (kinda off-topic context on DT version compat)
-> > > > >=20
-> > > > > =A0 From what I've seen, there is not yet very much infrastructur=
-e or
-> > > > > common practise in place in the kernel to handle parsing DTB in a
-> > > > > backwards compatible way. For example there has been efforts
-> > > > > to simplify
-> > > > > the dwc3 devicetree for Qualcomm platforms with a series dating b=
-ack
-> > > > > about as far as this U-Boot patch!
-> > > > >=20
-> > > > > https://lore.kernel.org/linux-arm-msm/20250318-dwc3-refactor-
-> > > > > v5-1-90ea6e5b3ba4@oss.qualcomm.com/
-> > > > >=20
-> > > > > Earlier versions attempted to convert the older DTS to the newer =
-format
-> > > > > internally, but after much discussion it was decided that this wa=
-sn't
-> > > > > really feasible, instead the new approach is to duplicate the ent=
-ire
-> > > > > dwc3 driver to maintain DT compatibility.
-> > > > >=20
-> > > > > It's obviously good to see compatibility taken seriously,
-> > > > > since it seems
-> > > > > clear that if we ever want to treat DT as firmware, the
-> > > > > kernel will need
-> > > > > to do this (and eventually vendors could ship laptops with
-> > > > > DT out of the
-> > > > > box which works with upstream -- crazier things have happened).
-> > > > >=20
-> > > > > But I think in the mean time we still want to be able to drive di=
-stro
-> > > > > adoption, and the way I see it teaching GRUB and systemd-boot abo=
-ut a
-> > > > > new FdtFile EFI variable is going to make that way simpler...
-> >=20
-> > There was a discussion in the context of EBBR if this is the right way
-> > forward. And the general opinion was that the compatible string should
-> > be used for matching the dtb files.
->=20
-> Ideally, the file name should contain the same information as the compati=
-ble
-> string, or more. Currently in upstream there are devices with different
-> display variants that have identical compatible strings but different dtb
-> files.
+Best regards
 
-I've asked before for clarification on if that's allowed or a bug and
-not really gotten an answer. It sure feels wrong and I think the
-argument is that devices doing things like that aren't likely to be
-general purpose anyhow.
-
---=20
-Tom
-
---2BGS5SRpCYd2GZ/f
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfqwzEACgkQFHw5/5Y0
-tywsawwAj0Fxk57N92INbvV3+zbiNw4JKo/0R85OdSjLHeI6yzbjvJgfzb/yceJa
-LlNxZnB7niXOFEmiNs06DSbu/372cHYLzJmSgojjk5rmBUcSslRXE43RE/Dweu3T
-pud2zVXZi+oRBaSmVVW81hqJSS+RjPLvbRoimdU1SKvC+Kmbu5GHrWMq+dDY6JJj
-yqG7UxPZ45Od6Y4Kh3qbTEiCrVxENKAbGF3vYXKv7GhcFZmGSWbVXWMSSKOTxDA9
-owC26H+wnGPhFfP76U02vCN8kC49LrBFqaS+u8YRZx3dcqWvegiw5mbT3ncS2hy2
-A2oWxhf93d9RWrh+QI9sPU/w+9hxxhNFzxQFoQ6C7BwFUekoYitW8eLtNNYUpxLc
-nZe9J4QaV6p8qyrad71Dtj+gJ0FRdYDsVyuB5Q7xrBINoyWwIBx5sorBIQZJiSEb
-J+td2MBHToLIDJu8pz71JPRJFW62BezO5BAmH7BBj/kVtyy8yhaVW6UjAArVQD/W
-yN60FeTK
-=5MMx
------END PGP SIGNATURE-----
-
---2BGS5SRpCYd2GZ/f--
+Heinrich
