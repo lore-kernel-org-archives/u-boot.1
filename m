@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09607C3600C
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50B4BC3600C
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E9D082027;
+	by phobos.denx.de (Postfix) with ESMTP id EB34282033;
 	Mon, 31 Mar 2025 14:31:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zuf17zPN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TImoIXsq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5094782027; Mon, 31 Mar 2025 14:31:50 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 6D8EE81703; Mon, 31 Mar 2025 14:31:51 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DD5981F0D
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6186A81703
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43ea40a6e98so2975835e9.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:48 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-38a25d4b9d4so2318604f8f.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743424307; x=1744029107; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743424308; x=1744029108; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qkBJkl3WKwaUf5l3xYynOeT0PQynHCpYMM2dqIakoiU=;
- b=zuf17zPNMxy6NUYGMq5b8e81v/T/9zjIzasA3hfQRG6HS4KNyiuIrOOsvWfiHLgeId
- zoMPQBpNquuTLZFTLdhp3muggAPDyLt4RSMG9LNzNgN2ZuQvjCVrbX9X5IiC2Tp3BFdt
- 7UTlE4TaILvxxiwSWAaAjANyf9XuhpU5CFEWVS6ZhhdgwMYfs7HpalSkvVSPgjqU4bfD
- kw25RynHITm2kP38/nepDUUWLB9yckNT/Zg2CQpyytg7DlR8cW5Lbj9KKN9FJUusq4nH
- hhAXwMFiLHvJF0ljy42uKjbCM+IgCJ22/sTwLxK0uKu6WHtgcftQbu6g/m33cAP06d7L
- TgQg==
+ bh=vRaJm7848vfOJLHvrW3owiUGagnHG2yjnxN7am7SWEk=;
+ b=TImoIXsqeXXfOILouqXKqw5nU9DEAtJbvgTL/zrCs1djs6mgkOEWQglHNkCBwV+jM2
+ mZ5wC7pHEoG+VAAN293O5dvD9s8D8+Vk7k/iSB1dZPSKGL2lBXlLfkry5+5qG0Z82iY2
+ aYT4q6K5SVU3cmtrQvSr8clYn1+uMkJJ4cphpT8IA5aKHnGW9wQF13uIMzVc9nEpfVds
+ cyRa/rXgDlACizi7z125/R1hw5+M3hGCFh122Gc9kxAKthoQGqqmvrNF8yeD1uhO4jCR
+ 5tVH34ICXT/XStCTE+3SnVOS7m6yyCn0ax+uZuzGFqdupm/aCj5qSSNsbvHOtENlif9L
+ meGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743424307; x=1744029107;
+ d=1e100.net; s=20230601; t=1743424308; x=1744029108;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qkBJkl3WKwaUf5l3xYynOeT0PQynHCpYMM2dqIakoiU=;
- b=UP7DUzBHLsXWkCFZMobJR3j6EQM6xikQOPXLqisXqSVwkHMhooDan/Xl94DkFw8H2k
- tYBZSOYo+SDD4kVNx/dVZhqO8X2uVjEF7K2+9ovP0BmGAbmMeRCNdBO3mSSvxFQnwmko
- cDo+XoMTyYJv+nykJ/dYHuTzVO3dNr4otsByklj+Vc/I+Gbxpws5SUqieoNRDHEvVFuN
- 5lkk9JM6GxMmD+0cmK/BmAA/F1yyGgwgZ5/ZCK6GxRfebBsGwJL7X9Ao+wlT5yxxiEmh
- kdiMl1Qx42sttfMyrvT9RNb6fDD1AHkpKXrwI9eVDG4Zna2VrasaTHkTClzpjoh/hx/K
- iTaA==
-X-Gm-Message-State: AOJu0YzIhyMORYRnMcdpE8zs9/iwBk18r4KLKl/Lt0h1h7M8/JUoeMz7
- lLYz/wsfGdsES86yFEliGmZgStQAY0Bny04OFopNW9sfQKhdJ0q4VMDpfUcKGAbLzq9io81iUeG
- 7R83Mwg==
-X-Gm-Gg: ASbGncsx+BRKGsYugLQYeUjwTnUpyvZbm2rQDs8/1T4L3SbA7ryAt0QkW5Jc739MYx0
- jtdtF3pdj+7TCLPgDqlbQsJShJPBScVB6APQB+BW0UHUxYcqr0to81KMZIXAFPyoxG9LZ99DJQe
- PdPw6fF4r7od9h8cRg+p3VriZdPhEH3psE+xH/a6I6rIYhX2tl/QPEcx/uME28JVNE86Ul/5QSY
- Ytr62NMC25xkjMUYP6EJInVW6hbA9BnXbVvhm8QKMnPX523xNxk3iWcieoofrsDJXIfRAagsVSw
- TGVjmlKNuOpOHBQayr7PjjkIRvcuxwxgdjEOwDhsWNGYNb6Zq8Ah
-X-Google-Smtp-Source: AGHT+IGFTLiJwfl8tJPN5KCQZ+KlzECltW2OkUYm5rtXlLGLL/BPnOgSVBAroWS2z9x+sRYamUm8zw==
-X-Received: by 2002:a05:6000:420a:b0:391:487f:2828 with SMTP id
- ffacd0b85a97d-39c120cd1d0mr7340258f8f.10.1743424307373; 
- Mon, 31 Mar 2025 05:31:47 -0700 (PDT)
+ bh=vRaJm7848vfOJLHvrW3owiUGagnHG2yjnxN7am7SWEk=;
+ b=j+DjK7bjl2xYknhRMllOnliqhWPRf04h6KTZoZZro0kKefz4/1ZDfeiLIRrfb54Y5W
+ 7f+cislwwUJ1oCfl3M9CD/fyjeIMlkheyqE7yRRFJhpQErPc3AoxXxfCUyGm9tfjJmC8
+ r0NyZOuJ+2z/CR+MLfd8SHHE/xSDqKsn5CVKE1/9s66f/lR2UCA4JrK4qfbvKcY431Hv
+ gJpQnBDJsSaNen/8lDYtYUs/Y5WCXoHKdd0B2HVZtmDSlFWuVSy2XYDiRRFhpGHkXv85
+ fdW1yRtTarg3+0B8gFwvpwNH8n4K9HI/FoWwaFLT62/p49QiLYLhjKxZ5YEoNu1djELR
+ SOiA==
+X-Gm-Message-State: AOJu0YxT/o/eFFW5e29jrWhURN0c7GdFQ1wbKUhk9YDQPE5GRwem4A9o
+ Du9Ot20p1ybGEWR7QFWY8IKJ1h9jCXiusPIgfc8vVrxM4y5DmcuqM6pIMuCLxIQqcwfbe18i3yO
+ y10TIbg==
+X-Gm-Gg: ASbGnctG1IzQXF34jbr+AQK+YDdZruKPuPr4+81ROuyk6pF/cNwztiAtK5KZaP/wf8z
+ W8zwlJtEDn2681qJt8EvubpBxB/caTqtgqON66p/3RNsflLSwhjsi7MYHKk9ukuVV/sAygHeIVM
+ fHfYRUrp4XlAC8Kw78IvuTJ3e957ZThKBDWYLh9HnEsRa/vOHEajRYkQw/HsrHhn6JEI9smrFwI
+ 98aPSnUY3bSUMhMzQOUh+uA2LUcGKtjwwo/pNRytvDH3n1H6XS8gRcVNA1z2O8J/glat4wj/9Px
+ 5orWhleD/DxVRzOQKUM5vgk/VFLBXFCvYmflgAz0nQ+3JkMEBn22
+X-Google-Smtp-Source: AGHT+IHgjOhB+SLniLEtx5WVCPpdnmcvREO0AVm8cUhUCSceCdArMneyD0o2+8XkwrTYBPdLyahFwA==
+X-Received: by 2002:a05:6000:2910:b0:391:4889:503e with SMTP id
+ ffacd0b85a97d-39c120f5923mr6319901f8f.33.1743424308596; 
+ Mon, 31 Mar 2025 05:31:48 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:f23c:25c9:dc74:be1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.46
+ ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 05:31:46 -0700 (PDT)
+ Mon, 31 Mar 2025 05:31:48 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v5 10/16] test: lib: add uthread test
-Date: Mon, 31 Mar 2025 14:31:04 +0200
-Message-ID: <20250331123120.2025062-11-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 11/16] test: lib: add uthread_mutex test
+Date: Mon, 31 Mar 2025 14:31:05 +0200
+Message-ID: <20250331123120.2025062-12-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250331123120.2025062-1-jerome.forissier@linaro.org>
 References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
@@ -101,138 +99,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a thread framework test to the lib tests. Update the API
-documentation to use the test as an example.
+Add a test for uthread mutexes.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- doc/api/uthread.rst | 12 +++++++
- test/lib/Makefile   |  1 +
- test/lib/uthread.c  | 80 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 93 insertions(+)
- create mode 100644 test/lib/uthread.c
+ test/lib/uthread.c | 66 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 66 insertions(+)
 
-diff --git a/doc/api/uthread.rst b/doc/api/uthread.rst
-index 21233ff6b22..8b25cc1ff80 100644
---- a/doc/api/uthread.rst
-+++ b/doc/api/uthread.rst
-@@ -3,5 +3,17 @@
- Uthread API
- ===========
- 
-+.. kernel-doc:: include/uthread.h
-+   :doc: Overview
-+
- .. kernel-doc:: include/uthread.h
-    :internal:
-+
-+Example
-+-------
-+
-+Here is an example of how to use this API:
-+
-+.. literalinclude:: ../../test/lib/uthread.c
-+   :language: c
-+   :linenos:
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index bf04685dae1..c991dff1c63 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -31,6 +31,7 @@ obj-$(CONFIG_CRC8) += test_crc8.o
- obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
- obj-$(CONFIG_UT_TIME) += time.o
- obj-$(CONFIG_$(XPL_)UT_UNICODE) += unicode.o
-+obj-$(CONFIG_UTHREAD) += uthread.o
- obj-$(CONFIG_LIB_UUID) += uuid.o
- else
- obj-$(CONFIG_SANDBOX) += kconfig_spl.o
 diff --git a/test/lib/uthread.c b/test/lib/uthread.c
-new file mode 100644
-index 00000000000..0c0540585e7
---- /dev/null
+index 0c0540585e7..d33daa62f6c 100644
+--- a/test/lib/uthread.c
 +++ b/test/lib/uthread.c
-@@ -0,0 +1,80 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025 Linaro Limited
-+ *
-+ * Unit test for uthread
-+ */
+@@ -78,3 +78,69 @@ static int lib_uthread(struct unit_test_state *uts)
+ 	return 0;
+ }
+ LIB_TEST(lib_uthread, 0);
 +
-+#include <stdbool.h>
-+#include <test/lib.h>
-+#include <test/ut.h>
-+#include <uthread.h>
++struct mw_args {
++	struct unit_test_state *uts;
++	struct uthread_mutex *m;
++	int flag;
++};
 +
-+static int count;
++static int mutex_worker_ret;
 +
-+/* A thread entry point */
-+static void worker(void *arg)
++static int _mutex_worker(struct mw_args *args)
 +{
-+	int loops = (int)(unsigned long)arg;
-+	int i;
++	struct unit_test_state *uts = args->uts;
 +
-+	for (i = 0; i < loops; i++) {
-+		count++;
-+		uthread_schedule();
-+	}
-+}
-+
-+/*
-+ * lib_uthread() - testing the uthread API
-+ *
-+ * This function creates two threads with the same entry point. The first one
-+ * receives 5 as an argument, the second one receives 10. The number indicates
-+ * the number of time the worker thread should loop on uthread_schedule()
-+ * before returning. The workers increment a global counter each time they loop.
-+ * As a result the main thread knows how many times it should call
-+ * uthread_schedule() to let the two threads proceed, and it also knows which
-+ * value the counter should have at any moment.
-+ */
-+static int lib_uthread(struct unit_test_state *uts)
-+{
-+	int i;
-+	int id1, id2;
-+
-+	count = 0;
-+	id1 = uthread_grp_new_id();
-+	ut_assert(id1 != 0);
-+	id2 = uthread_grp_new_id();
-+	ut_assert(id2 != 0);
-+	ut_assert(id1 != id2);
-+	ut_assertok(uthread_create(NULL, worker, (void *)5, 0, id1));
-+	ut_assertok(uthread_create(NULL ,worker, (void *)10, 0, 0));
-+	/*
-+	 * The first call is expected to schedule the first worker, which will
-+	 * schedule the second one, which will schedule back to the main thread
-+	 * (here). Therefore count should be 2.
-+	 */
-+	ut_assert(uthread_schedule());
-+	ut_asserteq(2, count);
-+	ut_assert(!uthread_grp_done(id1));
-+	/* Four more calls should bring the count to 10 */
-+	for (i = 0; i < 4; i++) {
-+		ut_assert(!uthread_grp_done(id1));
-+		ut_assert(uthread_schedule());
-+	}
-+	ut_asserteq(10, count);
-+	/* This one allows the first worker to exit */
-+	ut_assert(uthread_schedule());
-+	/* At this point there should be no runnable thread in group 'id1' */
-+	ut_assert(uthread_grp_done(id1));
-+	/* Five more calls for the second worker to finish incrementing  */
-+	for (i = 0; i < 5; i++)
-+		ut_assert(uthread_schedule());
-+	ut_asserteq(15, count);
-+	/* Plus one call to let the second worker return from its entry point */
-+	ut_assert(uthread_schedule());
-+	/* Now both tasks should be done, schedule should return false */
-+	ut_assert(!uthread_schedule());
++	ut_asserteq(EBUSY, uthread_mutex_trylock(args->m));
++	ut_assertok(uthread_mutex_lock(args->m));
++	args->flag = 1;
++	ut_assertok(uthread_mutex_unlock(args->m));
 +
 +	return 0;
 +}
-+LIB_TEST(lib_uthread, 0);
++
++static void mutex_worker(void *arg)
++{
++	mutex_worker_ret = _mutex_worker((struct mw_args *)arg);
++}
++
++/*
++ * lib_uthread_mutex() - testing uthread mutex operations
++ *
++ */
++static int lib_uthread_mutex(struct unit_test_state *uts)
++{
++	struct uthread_mutex m = UTHREAD_MUTEX_INITIALIZER;
++	struct mw_args args = { .uts = uts, .m = &m, .flag = 0 };
++	int id;
++	int i;
++
++	id = uthread_grp_new_id();
++	ut_assert(id != 0);
++	/* Take the mutex */
++	ut_assertok(uthread_mutex_lock(&m));
++	/* Start a thread */
++	ut_assertok(uthread_create(NULL, mutex_worker, (void *)&args, 0,
++				   id));
++	/* Let the thread run for a bit */
++	for (i = 0; i < 100; i++)
++		ut_assert(uthread_schedule());
++	/* Thread should not have set the flag due to the mutex */
++	ut_asserteq(0, args.flag);
++	/* Release the mutex */
++	ut_assertok(uthread_mutex_unlock(&m));
++	/* Schedule the thread until it is done */
++	while (uthread_schedule())
++		;
++	/* Now the flag should be set */
++	ut_asserteq(1, args.flag);
++	/* And the mutex should be available */
++	ut_assertok(uthread_mutex_trylock(&m));
++	ut_assertok(uthread_mutex_unlock(&m));
++
++	/* Of course no error are expected from the thread routine */
++	ut_assertok(mutex_worker_ret);
++
++	return 0;
++}
++LIB_TEST(lib_uthread_mutex, 0);
 -- 
 2.43.0
 
