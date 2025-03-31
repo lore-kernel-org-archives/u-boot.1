@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04251C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:41:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F27C3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:42:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EC2381EBB;
-	Mon, 31 Mar 2025 19:41:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD54581E6C;
+	Mon, 31 Mar 2025 19:42:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sbT2OaP3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tvBR2euo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68E5C81F0B; Mon, 31 Mar 2025 19:41:51 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 9296881EC0; Mon, 31 Mar 2025 19:42:43 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34FB481E6C
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:41:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A0BF81DE3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:42:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72b7a53ceb6so2530051a34.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:41:49 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5fcd61e9bcdso2102500eaf.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:42:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743442908; x=1744047708; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743442960; x=1744047760; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DyybYXQfGOJyTji+0kjHB1srVW49TtjINfqfV1NOD7s=;
- b=sbT2OaP3wiGJBZAWWRr6PZDuDD8NNCIGEP61o7e4LLnb09JrmUv66XZ+VWmRt3TXaG
- aj7ZWNyMilnww1SavdLmwhQerXsyVcAlkr8ViaQ9WRI/7nVjBROSjyfpIrJhAdT2r3lZ
- 1i4djB/kj24WCrbqje/HfFiJEXWCMwvwEx8/o=
+ bh=mGK9k1+mh20mMmK1sABuEEG8N+k0pZH9+ckUapfaNvA=;
+ b=tvBR2euo1tBBAVIzsIqTqgwiYs4AerfdWPs3+gk52f66xz6mwgicBPYyjyyY9Y+bff
+ cAChdRUZiE5faJpYruuEfSOdh104WwM6PzMdMnHJoSneffbnD+vwVoe1+YEzY/0/1y+3
+ LFaK2YVgUxWBO6FFplHiSb6JylXo+b1f2ySfQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743442908; x=1744047708;
+ d=1e100.net; s=20230601; t=1743442960; x=1744047760;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DyybYXQfGOJyTji+0kjHB1srVW49TtjINfqfV1NOD7s=;
- b=TRQIgIE0IVDJWiFvlEwoBJj4EQoflMqKP+vUrkPrd6vqns9sB8x2uAvax/51uXChua
- FS5CIFz9frBbo6Sx2Oc/Y4qs+mwaeALiHtO9QtQ0ZanMbD4OyB6xadK81o70RJvXh+S4
- TFs6Xqd6hU83DMdvVsoWrEnVuiRxhDiVImnAx5PTeeNxJ2nhqKp9csbDjkkt78eDlmoc
- 2fkbecuI6jCQcWfqUgrLDtEhA+eLkfHNeED7eLFwRrEBWE2OdFAc67eqO3pCq4PzO44z
- 4ASFfKN7UDdPUD1V0m5A2/8wgSYrK/u6Yb93ti4qdo4Gb5ov9yCyC1BRhmkTb0DNTSLK
- 1CMw==
-X-Gm-Message-State: AOJu0YwaQH758ZxzHksq1z4Mgrb6fn6izVo+/TBfbFgy32HEFJOM7R0r
- 02xaJc6fJr7gVJHrkphhxASdHSYUn+N0PL0iL6odiIMcXyR50Q/IHeo+yY+pxMl7kk3g4nU6qOk
- n
-X-Gm-Gg: ASbGncsFGP1hMOkQLhHzuRG3F1kG+HsapXcPpKAyYF/hdk6RDkO/jq/dcMLA1g0xhaG
- lRln+zABc5nyGgZq+P5LyqJqZfIYuBP6TeEiLCpbToG84YyuALLMJfof5qy4663Lj87rQ90lNJT
- u6rYmM7KJ+XyJNVVbow00yDkM9Dtz1TDsT6mCWkPpQ9GRNfLJE5abtxlS5nVCi5adBC5gT579T5
- 3Bdt/xKW7T4+Vnvyeh6sAW2FzWcOnJZXVjZ1pYEhZDO8V1MVVGLTgT3GNoZ3uEtwcW2ENI+mSoA
- 3yH/mxx8tU9UAeIY7Hfj9I9dnVREVkPigd9my9EQ4FwHFnNd0BhFyb5S1CmcS071Zo8Ffnmv7iQ
- h0wnxjg==
-X-Google-Smtp-Source: AGHT+IF4qQ3T5yrx5J7jsEldS9VRCqLgsk8K4gtr4I5ohtXsj4/bKGF+VCezXqM6oCFhghylDBdq4Q==
-X-Received: by 2002:a05:6830:380e:b0:72b:9422:aec with SMTP id
- 46e09a7af769-72c634ad964mr6639221a34.8.1743442907920; 
- Mon, 31 Mar 2025 10:41:47 -0700 (PDT)
+ bh=mGK9k1+mh20mMmK1sABuEEG8N+k0pZH9+ckUapfaNvA=;
+ b=PL8epRsjtJXZMdudu+QEfiEModubjRkLQftmsfQmhn2dOOpEhAqzNULBn16I1oB75H
+ cvZ46bWR1uX9FONfgFfNgsLKZwXpKkn68Vy/g1ikQHIR7PFO0vwgXT0B/CPdLDmEbSYR
+ vEtaxfZn1FObhik90ZFkOklv9F/9mMF0fQYJU+ss+Zgq1lyp/iFNTyWzTdYs6wstFOHy
+ XQWNfBr/lLJGZw9g9brRV0Jj56UNWty7QMBzgoXFnsl5OxZX/rtn+v5x7ht8nMo4qDSS
+ xnAjEIhiIhCM9/VHE8AGh6RGLIWfELdOUSFelms8K2HA/G0lYWXBhordrxoK3l4nyye4
+ QldA==
+X-Gm-Message-State: AOJu0YxeAR9lYA4Qgt6gGO2iSgd3VaQrfRuEfXtkJGE4GQudko1SWYoW
+ 3NeFqxxWNdPAuoML8iZUIiUWEukjVKqpppRcQFXl458oNssYiuQ823saSfQh014=
+X-Gm-Gg: ASbGnctebmbfbiPcFTl6fn4T2zxxJIKlZNwR+oeOE2oqYCHe6LPFTYrxLrCP2wzFbDr
+ 8W8teej2Whh9CAyhSoNVUDkASycFRoaRoub4spFCAuDXuc4gVQ/DuAoJyDQRvvwXQ5uEMMd5iOR
+ m2p6L35gQWFPXXnHjCJgxMg+nHJHhYBNny6Z53oshrXCdbMMPfYMHOG4F2iJDxFOjirS4BFJimO
+ /voVBfSSyEc4GpKST2uK/xHmcAKMkI/qBRHVwAWcXxumo56x8itw3tLDfzc0cZuQ2JApOLJqZ34
+ oKtylMBiLMjJ88Xx8k+tzIVffCuY78n/GXlM0lv/xPireAZsJS8skonyucJbCyYyR5zoTUSnkkM
+ iMD1tQMuQZoiFe75E
+X-Google-Smtp-Source: AGHT+IFu+LEbWDO7r5ljzAQccqZKTnPjawp4rdrxh/y4R+UXstJJu75Xy8vXdHFt8RuVh+COC5Vvvw==
+X-Received: by 2002:a05:6820:98d:b0:602:85a5:90ad with SMTP id
+ 006d021491bc7-60290e77e41mr5609452eaf.2.1743442960017; 
+ Mon, 31 Mar 2025 10:42:40 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580b5401sm1543124a34.18.2025.03.31.10.41.46
+ 006d021491bc7-60284501daasm1533819eaf.12.2025.03.31.10.42.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 10:41:47 -0700 (PDT)
-Date: Mon, 31 Mar 2025 11:41:44 -0600
+ Mon, 31 Mar 2025 10:42:39 -0700 (PDT)
+Date: Mon, 31 Mar 2025 11:42:37 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
+ Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maximilian Brune <maximilian.brune@9elements.com>
-Subject: Re: [PATCH 06/17] bootstd: Try all bootmeths on the final partition
-Message-ID: <20250331174144.GI93000@bill-the-cat>
+ Nam Cao <namcao@linutronix.de>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 01/17] fs: boot: Update fs_read_alloc() to use abuf
+Message-ID: <20250331174237.GJ93000@bill-the-cat>
 References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-7-sjg@chromium.org>
+ <20250319143820.2385092-2-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LaUNp7E1/FkdbXK8"
+ protocol="application/pgp-signature"; boundary="ueHWgIIa3Yu+/ukp"
 Content-Disposition: inline
-In-Reply-To: <20250319143820.2385092-7-sjg@chromium.org>
+In-Reply-To: <20250319143820.2385092-2-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,44 +102,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---LaUNp7E1/FkdbXK8
+--ueHWgIIa3Yu+/ukp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 19, 2025 at 03:38:00PM +0100, Simon Glass wrote:
+On Wed, Mar 19, 2025 at 03:37:55PM +0100, Simon Glass wrote:
 
-> At present when one bootmeth fails on the final partition, the next
-> bootmeth is not tried. Adjust the logic to go to the next bootmeth,
-> which is the more natural behaviour.
+> Using an abuf for this function simplifies returning the size and also
+> makes it easier to free memory afterwards. Update the API and callers.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >=20
->  boot/bootflow.c | 34 ++++++++++++++++------------------
->  1 file changed, 16 insertions(+), 18 deletions(-)
+>  boot/bootmeth-uclass.c | 19 ++++++++++---------
+>  fs/fs.c                | 25 +++++++++++--------------
+>  include/fs.h           |  8 +++++---
+>  3 files changed, 26 insertions(+), 26 deletions(-)
 
-Behavior change should include documentation change.
+So we grow platforms by ~200 bytes:
+            sama7g54_curiosity_nandflash: all +204 text +204
+               u-boot: add: 6/0, grow: 2/0 bytes: 204/0 (204)
+                 function                                   old     new   d=
+elta
+                 abuf_realloc                                 -      76    =
+ +76
+                 abuf_uninit_move                             -      42    =
+ +42
+                 memdup                                       -      28    =
+ +28
+                 abuf_uninit                                  -      24    =
+ +24
+                 fs_read_alloc                               96     106    =
+ +10
+                 fs_load_alloc                              114     124    =
+ +10
+                 abuf_init                                    -      10    =
+ +10
+                 abuf_addr                                    -       4    =
+  +4
+
+To move away from standard buffer usage and unwinding to move to
+something homegrown instead. I am not a fan of growing using abuf here.
+When it was introduced in:
+
+commit 67bc59df05331eaac56cd0a00219d1386130aee2
+Author: Simon Glass <sjg@chromium.org>
+Date:   Sat Sep 25 07:03:07 2021 -0600
+
+    Add support for an owned buffer
+
+It sounded like something for some special cases. Not something to be
+used everywhere to be different.
 
 --=20
 Tom
 
---LaUNp7E1/FkdbXK8
+--ueHWgIIa3Yu+/ukp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfq09gACgkQFHw5/5Y0
-tyzq6gv/bE/Bs8O+QrJsrJ4/79Gbi/rdYz1OWrSKtqSlrgzQM3LOwQc6YDrUcmU5
-DEdZQi9zzEZUZa2fYr9dadKOmBnPbXgVOwNAMKl8+wk6w5xREykXg0JbdCZm7NE7
-CyRftzmmfNMLkBnnV70mV0CKgrqT1YAsab7HEcX4QipaC7oAwdWx5mCb0gjFKQlR
-NdVC7zZ3iNQrgy+ehiqNumYx1OJHzJAy+7ia3xbnYhQmPD71c3s+43RzyMqwjV3p
-Xd7ban18m/6rJuP/JdurQDd+fLlOJfjde+UVOifRnwcyx+YPquFpDuA6WkAsaDOz
-qCXelKUebUzTLhfo25tzhFGsimT9acr9OWxxFcQQm+REewq+aLvXCufgyzueZmaQ
-tgBoj3CvJGu0vOyaCIPTk943fA5nE5BgX/HUa4qwKiTg2rgmSOzTld33DY5HRjmM
-g3qu3C8dlfbVN5RciPQGS9TLkROEx2ps2BjQ7W5WrqPrc0YHLZECsjbCwZnYVxVi
-LZ6GHyRX
-=d8+9
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfq1A0ACgkQFHw5/5Y0
+tyxTUgv8D9v4wvCFFBKljzBdOrN4BSCnvUfOcgv5z8ZYJzGX0QoPvZp0XnUpE/Y8
+v+KHVE3i1TS6lHnDWtC3lFD2TqpH9Jczy4vle9yAcLAfwpJDWjLV9lR35U3Hs9rM
+8ZeNVca4FxX14wgUl43XU7CBXwyWFxFoZn9mxSjG3vrI2yeW1u0tMaFgR8+zgpnR
+x8l/QMEKkRCu2NIzjNi05Z4EoFQ0Dg2Eu6GdegRvFK6qZD15ww1bSl+XX+NNj5I2
+WnHnUUGCjJhfogOE8GJPdnGQdwACnnttpiEBte9jFDMErWVu+CWQzTgL6NI4TP4C
+g3NUiCfS/eHdaJZgpllkmjlClOBwomeQCaQDim6jHrQVWIQnSBuBlPtqrj8xVkSi
+ON9qj+H//wp2xuPuS6/ks85m25xrrIvdwZXQ7dvA1wc+JfVtUvlIJCf93adIUFrJ
+8yS56phdXhxNzDDJYVFFSNYLJ0acl3O5S9iCQjEnGlHDAuGzSHVrqzMVWUesDi7S
+NJ18kFDQ
+=z+FJ
 -----END PGP SIGNATURE-----
 
---LaUNp7E1/FkdbXK8--
+--ueHWgIIa3Yu+/ukp--
