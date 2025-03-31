@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA69C36011
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A28EC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 18:04:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 882CC81E6C;
-	Mon, 31 Mar 2025 19:45:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C0CCE81DE3;
+	Mon, 31 Mar 2025 20:04:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EO0LR/xD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TbP483ZK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7362B81EC0; Mon, 31 Mar 2025 19:45:34 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 2671E81E6C; Mon, 31 Mar 2025 20:04:48 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DA2E81DE3
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A182E8129B
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 20:04:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2c6f27599abso1387407fac.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:45:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2260c915749so65060865ad.3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 11:04:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743443131; x=1744047931; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qKrlCG+orUh6jCgjzSxLf163WJ4hQ3yAo7DVxgW59Ow=;
- b=EO0LR/xDdpWPmHrjhY7LuIXhKSr2srThaAm4Qqe6VasKEDdZOuRAYcHLW6GUqxm+9b
- AZ2BTn5wTfowD4VqNlw+0h44GHfMY4q+NVcm20yegwAtAGsRlcbgnETSJbqvEsCCXHTg
- Pf8sv97pitEM1e/CSz1II7mzfgc1q2gRLOGl0=
+ d=gmail.com; s=20230601; t=1743444284; x=1744049084; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wMlU3s6Q9gQMvNHso7AajicL/XXkK1t1aKKdQEwSJHU=;
+ b=TbP483ZKyWHnnVinXIy2b9Q/QBIWuiAWD2ZL0hyKThGuDrHVIUpuKFQhoZuRuRKOR4
+ uXpU+xHax1OdCZFXCaZXraGmzAsPDXYzZogj+/dWW3Cc1uk7nWfk3I6fjPSBrKUTuPjS
+ UkG2GMXSVf43SXJaqrUmgF5BgGxz2Pb10QsFoY07JFm0FQUSkyPf9PNfeUuD6omvPHG6
+ fk5PbnjnAId+qE9Lz3CUfACw0Gz6dthb9eTOU8vlWwRXuYU2Hbd4mjSissCJkD/dHOMZ
+ 3S9ccyBv+l9ImrvUDBdIxs3CfSLNVeNTnZsMPQi+v5P/RWLuRLJmjj4hKT09vwEP1zge
+ YOdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743443131; x=1744047931;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qKrlCG+orUh6jCgjzSxLf163WJ4hQ3yAo7DVxgW59Ow=;
- b=JxSYm7ea5SUfauHm/oJ0ekVaOZOwQRkTLX6YRaFEOVVX4/gj4C7ZUdc0j6z8t7tIbk
- 12oA74Dp5d3EaUykFd5a6x1TJh/DUIQKydWmkD77dbsObfmCilURml02UdOkuLhz6hr9
- i14axmuEhAcTZ9f1tvZkh9xedSKG5MwPZ3ruS6tJCHSg+LU4tsNf/a7M/mxHIcVJA51f
- yPRrk4N2nItgbZuXXJzTqb/xmoLR2w6Bm8HYHWlDrVfSVko8he86pB6+YaVm11D4ua+u
- S9aqhVMsBQ6qM+s7uziJ5zSZFp82bFS1sUKNxV4DQcf1MYEJxXDMB3CdOyY8rqD3trzm
- SrVw==
-X-Gm-Message-State: AOJu0YxLD488mb9tPVgSNCkWYWRR5ZhAT5C9XRgNI1DINmRQS2MphlYL
- l91LRKrLFXoiZO0UIeYgWPnR5aw5t/xbpeI3XSbGNWLHUGCIvS8ocflve0Mctsk=
-X-Gm-Gg: ASbGncsMw+EdlGfgIXhbfV0r4iyqocLTYHvgianDN6cryO4OhNlo5tZZWEIWfhQzh2W
- lC8QWCNEkamn6CYi1yCEX9f3cJlu51pvD+M5mb3YaSGNBV8r6E7JUW+7HOXUmYfA1STqrc8iDkl
- ioNOeJr5DwYzU2vGeQjSdOEHCKwK/hqPFApiNtfx3LpX5VavGaUzH5fe/8zjwMvV5gECui7ntzt
- obLnIqSJzV2wNuyo8YUgJB3wtBDFvAkeok9IZ/+dsWazRwKrMjIi5oNTDW/93yWsUsT8CadOM9e
- DZL5ZWFYKKYUXabdcZbvq9SIHuM2SZ9nit/RF0cxfb3nbhYcDjHEdsNZyM0ZY73LHcRfwtBz/Jk
- deT7DYw==
-X-Google-Smtp-Source: AGHT+IEbSjIO++gCdD495GW6UOapHi+3JPV4yHROS4mjeySF2wNM2vBMWuu5W4IVyqzfDScGPrXCyg==
-X-Received: by 2002:a05:6870:498c:b0:2c1:b39c:c43a with SMTP id
- 586e51a60fabf-2cbcf5a6770mr6249739fac.22.1743443130818; 
- Mon, 31 Mar 2025 10:45:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c86a8ffb5bsm1935455fac.43.2025.03.31.10.45.29
+ d=1e100.net; s=20230601; t=1743444284; x=1744049084;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wMlU3s6Q9gQMvNHso7AajicL/XXkK1t1aKKdQEwSJHU=;
+ b=iBcXmt97WyWl066Ej6qAkXGhSiP1AdOsnB49OlLvuaFSjfogHJU/Im6vGW3KNRWsQj
+ hpITIexyySitYkntDKEPVrHFSMVuNfnExPRrSEMu8inpaobcUXr+nmvWBxOw/QGGc4bz
+ bILo1BsMxYPLxUrODFxLZRtfduJ9kkURigeGvj8MASyEPX/lg+qbObiQdPLJ6yGgtydI
+ fZcEWg+irunALpwhTUJKGyU13YXDInoDtxkxuhlEaH/QMGx8XVvKwP21o28wb1zs+2yC
+ 1R8u5qmXUgYZuwtfX86Diip2rIH7GJ6TzRRujQ+ukw6HGWhmsTZZuLTKrPYCuM7nIupY
+ CagQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWX0DVOaot5WUgcr9uv0FzAKHTYqKNKAv5paFJRwVfu9bCkbhwV8i6QhSigPccKY5cOc2CxNQ4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXROWl7GQ8PQrc5pVjN8mj2kDqatzY+bWloO+alL2mER88LoSw
+ qMA2YfJassHOjXcbZDfJDi0eZJ8YyqIvNjqWvNH0lfMjT/o7oWd74NC8Lg==
+X-Gm-Gg: ASbGnctVIcO/10XSIHxHDWPbSy3G7RPCMQGLqKpxYIy2nb+r6PUHfUaCo6leuX6KmKT
+ 8vzl0JSSg1sBlemF9d/UjdxM45lRgCYYQlmIOjq0nvn8ScPCkKmyDBA78A7O0kHob6Hy6a9+brX
+ X9eV+p3SdtJ1zoYABTxUiZqR8ClzLrzkiZhzLl4RD+OStw0GiGOc64E2pa2n65h3iTj/91BTAAt
+ 0IBOR5ji3GfrNNkXp0do800p6PU8mmdUDtTDTGjVFVTya/i7ya0Y6dTo3ETfmq0HNTsVAZyG04/
+ 1/wyaAdz195CAM8fGdnPIjYCz2m+17XSh68bdyPRFfx6JFyRsPBBSStpwko=
+X-Google-Smtp-Source: AGHT+IHaI5s7rCGWCtrMnyKo0dOIkZC5wywq9H8HIKebGA3N3v6WmUr8C1Vn7tobiN/VQZQp+C2+Tg==
+X-Received: by 2002:a05:6a20:9e4e:b0:1f5:95a7:8159 with SMTP id
+ adf61e73a8af0-2009f604133mr15909498637.10.1743444284021; 
+ Mon, 31 Mar 2025 11:04:44 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:af57:ab0a:b12e:1ef5])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-af93b6d82f2sm6627096a12.40.2025.03.31.11.04.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 10:45:30 -0700 (PDT)
-Date: Mon, 31 Mar 2025 11:45:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Greg Malysa <malysagreg@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [RFC PATCH] docker: add ADI build-related tools to docker image
-Message-ID: <20250331174528.GK93000@bill-the-cat>
-References: <20250321053854.12959-1-malysagreg@gmail.com>
+ Mon, 31 Mar 2025 11:04:42 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: eugen.hristev@linaro.org
+Cc: nicolas.ferre@microchip.com, trini@konsulko.com, greg@embeddedgreg.com,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] sama5d27: Fix the 'reset' command
+Date: Mon, 31 Mar 2025 15:04:36 -0300
+Message-Id: <20250331180436.2305205-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="t/1FkvF9DQ7ng7e3"
-Content-Disposition: inline
-In-Reply-To: <20250321053854.12959-1-malysagreg@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,61 +96,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Fabio Estevam <festevam@denx.de>
 
---t/1FkvF9DQ7ng7e3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Since commit 61040097a9d1 ("reset: at91: Add reset driver for basic
+assert/deassert operations") the "atmel,sama5d3-rstc" compatible for
+the sama5d2 reset controller in sama5d2.dtsi is not handled by
+CONFIG_SYSRESET_AT91 anymore, but by CONFIG_RESET_AT91 now.
 
-On Fri, Mar 21, 2025 at 01:37:42AM -0400, Greg Malysa wrote:
+This resulted in the following error, when trying to reset from the U-Boot
+shell on a sama5d27_wlsom1 board:
+    
+ => reset
+ resetting ...
+ System reset not supported on this platform
+ ### ERROR ### Please RESET the board ###
 
-> ADI processors require packaging with the ldr utility for bootrom
-> compatibility. Normally this is available as part of our yocto-derived
-> toolchain but it is not a part of any other premade toolchain, so it is
-> otherwise unavailable in the docker image for CI. This patch adds a
-> source build from the ADI maintained github repository. The same ldr
-> tool is used for arm and arm64 for all of our boards with names adjusted
-> to match the expected $(CROSS_COMPILE) for these boards.
->=20
-> Signed-off-by: Greg Malysa <malysagreg@gmail.com>
->=20
-> ---
-> Hi Tom, I'm not sure exactly how changes to the docker image for uboot
-> testing work so I wanted to get feedback on my approach here before
-> including it in a larger series that will include the ADI boards. I
-> think that maybe 10 years ago the ldr tool was available as part of some
-> toolchain tarballs at least, but it is gone from everywhere except the
-> ADI forks now. So in order to build the sc5xx boards in CI, we need to
-> add the ldr tool. I've built an image based on the resulting docker file
-> and -next and then hooked it up to my gitlab runner to test things out
-> and this is compatible with our upcoming patches as well for a full
-> clean CI run. Please let me know if I've made some mistakes or if this
-> isn't the right way to submit changes for the docker image.
+Fix it by enabling the CONFIG_RESET_AT91 driver in all sama5d27 defconfigs.
 
-Since these are new platforms, we should really be using binman for
-manipulating the output images, and then also fetching / building any of
-the custom vendor tooling that's also required. I'm not sure off-hand of
-a good example however.
+Tested on a sama5d27_wlsom1 board.
 
---=20
-Tom
+Based on the fix in commit e1ee52ca56fc ("configs: at91: sam9x60: Switch
+to new reset driver")
 
---t/1FkvF9DQ7ng7e3
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Eugen/Tom,
 
------BEGIN PGP SIGNATURE-----
+This is material for 2025.04.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfq1LgACgkQFHw5/5Y0
-tyyanwv/TAbRlsfPdr3gdPY+czZj0XBDZ9e1yzmdsvT85xCkZKSIflw0H8Gf/MyC
-YF/z3iinJkvtHfD9JlYbkUYEKwQI1XZyc08Jnb5xOyeiIuDM/z3RPpWjIRmAVtF0
-NnUEYUkbAcF+9X3cV0HsotQVfTMaAh5ib9K0QezahSdz/j7vePOh5M2++xrtC5B4
-vHCUnK4v0gjGLFoVGkAR6CBArpuylwP2jUJn0eMJ4l0nF1gdptpUzmvjdQEvg9Zz
-5sdS+KrVCJVp8+9c7ssPvmyNDyDILQzvXu//h9MFHN93W+05v9i81+ZkK4eQYYlS
-Hu4l0EhnZvlRHrRQErre57bBNTkoMSBJT09Oh0/SnCWS/+vC+jloixYnRwO4LU6D
-vUaKyD8EtesWdPYlqWPWyWpQJIZd/MyBL0e/zZ8S9+Nxz8OnrOT0Tn7UWCXVeRVX
-UR162yse8zetUP7sqWFLR6g76Fn6H5UNmtwPCMgETV0CogMO8AJRAfVqioEfgCow
-sIpzql5C
-=ykPh
------END PGP SIGNATURE-----
+ configs/sama5d27_giantboard_defconfig          | 2 ++
+ configs/sama5d27_som1_ek_mmc1_defconfig        | 2 ++
+ configs/sama5d27_som1_ek_mmc_defconfig         | 2 ++
+ configs/sama5d27_som1_ek_qspiflash_defconfig   | 2 ++
+ configs/sama5d27_wlsom1_ek_mmc_defconfig       | 2 ++
+ configs/sama5d27_wlsom1_ek_qspiflash_defconfig | 2 ++
+ 6 files changed, 12 insertions(+)
 
---t/1FkvF9DQ7ng7e3--
+diff --git a/configs/sama5d27_giantboard_defconfig b/configs/sama5d27_giantboard_defconfig
+index ad1621a94dd7..0b7940f4fb43 100644
+--- a/configs/sama5d27_giantboard_defconfig
++++ b/configs/sama5d27_giantboard_defconfig
+@@ -14,6 +14,7 @@ CONFIG_ENV_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_giantboard"
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -84,6 +85,7 @@ CONFIG_DM_SPI_FLASH=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sama5d27_som1_ek_mmc1_defconfig b/configs/sama5d27_som1_ek_mmc1_defconfig
+index bb29121bb156..2e5a4acf27d8 100644
+--- a/configs/sama5d27_som1_ek_mmc1_defconfig
++++ b/configs/sama5d27_som1_ek_mmc1_defconfig
+@@ -14,6 +14,7 @@ CONFIG_ENV_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -93,6 +94,7 @@ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sama5d27_som1_ek_mmc_defconfig b/configs/sama5d27_som1_ek_mmc_defconfig
+index 308aafc7dfe5..11a536d714c3 100644
+--- a/configs/sama5d27_som1_ek_mmc_defconfig
++++ b/configs/sama5d27_som1_ek_mmc_defconfig
+@@ -15,6 +15,7 @@ CONFIG_ENV_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -93,6 +94,7 @@ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sama5d27_som1_ek_qspiflash_defconfig b/configs/sama5d27_som1_ek_qspiflash_defconfig
+index ac14dd53838d..86cb5c287be1 100644
+--- a/configs/sama5d27_som1_ek_qspiflash_defconfig
++++ b/configs/sama5d27_som1_ek_qspiflash_defconfig
+@@ -15,6 +15,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -92,6 +93,7 @@ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sama5d27_wlsom1_ek_mmc_defconfig b/configs/sama5d27_wlsom1_ek_mmc_defconfig
+index 6db27280f0fa..014f0093eee6 100644
+--- a/configs/sama5d27_wlsom1_ek_mmc_defconfig
++++ b/configs/sama5d27_wlsom1_ek_mmc_defconfig
+@@ -13,6 +13,7 @@ CONFIG_ENV_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_wlsom1_ek"
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -99,6 +100,7 @@ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
+index 765565265165..efe23115f620 100644
+--- a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
++++ b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
+@@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_wlsom1_ek"
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+@@ -103,6 +104,7 @@ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_AT91PIO4=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+-- 
+2.34.1
+
