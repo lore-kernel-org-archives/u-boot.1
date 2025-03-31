@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 681C7C3600C
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 14:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEE0C3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 14:14:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5535181F0D;
-	Mon, 31 Mar 2025 16:11:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0832381E1C;
+	Mon, 31 Mar 2025 16:14:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sNPpTtbk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nNIlhH4g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4B8A81F7E; Mon, 31 Mar 2025 16:11:33 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id B8F6281E60; Mon, 31 Mar 2025 16:14:26 +0200 (CEST)
+Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
+ [IPv6:2a00:1450:4864:20::441])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8803781FC8
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 16:11:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 594448129B
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 16:14:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72c7336ed99so316009a34.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 07:11:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x441.google.com with SMTP id
+ ffacd0b85a97d-3912fdddf8fso3435293f8f.1
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 07:14:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743430290; x=1744035090; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zpeTb0NRt4RRD9+MyX04f5PONoUsHRqguKpLZOT/XU4=;
- b=sNPpTtbkIhIiq5F4Lcbo0FnXRlXVL4vOxLlXNyy4LooDWgk8YSggDK75iTXU4ay3em
- reZ1JPQmbb/v342ZQxQb6E2WQ2bbd6ktrhOY+jZGOiU5DXyBmUmxDEdfg+q/w8YDSFlq
- XtE2YEwoIYLVRGYP6ryVEKoyTEoew4aBrw6S0=
+ d=linaro.org; s=google; t=1743430464; x=1744035264; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mEuLWp4cZ4S48xtLz45x8R/XPmajJuca7cM6+Ab5OR8=;
+ b=nNIlhH4gJMRQFyv3GGBNLtnyoD1aCSw7P2mWd3sO8qSTJfgNI699LHXLOvn7W6A9H9
+ /n+MhLQOiNfDTXDdboKrmlLBEdYlHYiqdR0/+guEcvmRNbncHTYJwkdvEIW/Qp7TWLrW
+ Injk4bUyvT5kH0FmQh4v9QjQwBAABVqVpWwnwstrpQV6Im1q+dkpjZNxasKDHoLYiIhV
+ pInU9JFqHD001hJAG2Lh1sKUE4E+s+h0x4bshuoCuUjA2JduL8k2U8alX8n0TXFjsG3o
+ 3csrC/q8drl4uPf/1jNlNWwQZmuJj0S9jw3OkRN9r4Z6mE5LILO5sRDgasaLB6kaexLq
+ ZnTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743430290; x=1744035090;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zpeTb0NRt4RRD9+MyX04f5PONoUsHRqguKpLZOT/XU4=;
- b=tdqU4sTwqWSs2N/uJpuEEl0Dm7AdH/zHI8HGFJP0YKLL9WDV7D97y2pOtcJ6bogFSV
- K8MNgAOG9MuPdhISQn5ZiGiy/0JpSkC/SlkDAFB5jz3iy1znifsezi7MolRYw+zmOLmU
- GF+BtixyzHqk3Ifir5QhDE4U60joiqo1jNaPwEFdbfWOXPYOLmIRqtOEY2ddgRr7blCP
- 9OpbG1EeFiOP5OZqFOqDM4gt43ADBmecZt5ojGeyAMjjjMWICKe46kOEnaVZDIyed4MO
- QdBJRT6Bqzs4RJ3Fr5o8UfeomO/4do6+ozm+qYF7zvND3nqg4rONw1a1ZTBTHrOM7uQz
- 162g==
+ d=1e100.net; s=20230601; t=1743430464; x=1744035264;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mEuLWp4cZ4S48xtLz45x8R/XPmajJuca7cM6+Ab5OR8=;
+ b=DtvBUX1Yym2+ycvYviPpwMXHxfBkNQJvRdwNJC1bzJdi9IYEIndb/4eUahXhBarUVl
+ AxheRXA5xD45Urt5rxUz0CoZzPuk2VvmUJ+HitskAVLn4KAnEB0NsSe0e4xb4PEA9E30
+ VSge3ADFYa3DuxPy3Fyx266tbGn+gXjN9na/Ms6HtMbZJwEKRwUOw5TwmkK5TSN2bd+2
+ KMbFrKnjf2GAKiIj+pNgZHkEAh0zuaMi0WW0ItxCjL4XeK8Bm40SZxswTbPWq6JnGBPW
+ LzWOm4iWd2xH5GiGa3TPW4HaDNd3i+70hM/RrqzXMsBOs2Xw3TEJ263SPIxYZ2P1CN7Y
+ 23WA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVG5pBcia29avvkF95QZdxe08CNBSd7lQCRhR6NG2B5qgsaGty3dQi7+gYt7c5ofdjRjt6hz7o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYbMlBuHMRHK1T25o/kMVrFCMLRQtsZjkH2tpVgJ7sTIf9u/JP
- BNKAH1ACpE6uY+N4jDjWaW7IMCaTwSV6BkNNvjUDdsqqiEOIy8LJR5F+gcLLkLHgKBbqWPKbJmd
- x
-X-Gm-Gg: ASbGncsNSUGYCj/6o90yO+t8URzUvrexBmtYaFjZm8RKiWnXW+8ibJyp7wxVF5BLOdL
- gz+ZoiiCdZDEeH1ByP8CFMQRzWTdyOkWTIm9cTSwAaJ+BYaGD2H2p3RNyaEXbtUnDLrgcKk6/NW
- gSXkRbOrjkK/wAJ7UAIE/LF/Ti9cHhyk5lFbSftOGXCvpJPzqbNJSN1HSSOmWgp5NUguS0mWSYM
- wfeTtmc1zcTQCS+bYARkaocmcqJY/5KbqVWdTvw/VHc8i9v2PWf7bPaz+FkdsmALi7lVXsCwazm
- OZw+dN+7D8aqduAOdC5yuaVdiAw16Zu821SFQwLOFEYv0BnotYSrbYITbn3SySUYF4sDAA/tZJ7
- XSO9iSg==
-X-Google-Smtp-Source: AGHT+IFj1BahQwc5GqkT6AJ0Jwe5i4dhruTmMkXVk5Ih4ofHNY2oSKB2SKeESe/EI+JUAqG2vy5eEw==
-X-Received: by 2002:a05:6830:44ac:b0:727:423c:95d5 with SMTP id
- 46e09a7af769-72c6377db9cmr5892592a34.3.1743430290207; 
- Mon, 31 Mar 2025 07:11:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580bb530sm1485569a34.19.2025.03.31.07.11.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 07:11:29 -0700 (PDT)
-Date: Mon, 31 Mar 2025 08:11:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 13/18] arm: mach-k3: am62p: annotate switch/case
- fallthrough
-Message-ID: <20250331141127.GW93000@bill-the-cat>
-References: <20250327153313.2105227-1-andre.przywara@arm.com>
- <20250327153313.2105227-14-andre.przywara@arm.com>
+ AJvYcCVBOCmq+1E26VTt0rO/AnJPz/wqNvvlZL542lh30Ls0mXSZS8GCPMftRlbcGNvrephXGZ+eP5I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3rPqqYN7QSSRbgUph91OB0piYbi4HfpKCqRSsl+lvHTR9QRG6
+ 7KmfWXRTw+Pgd4S4+tfRsKij9jethKhOK1tH/Gw0XKdTZuxm4al4T55CK1WNrmhXNStV/O+YGAY
+ mnJIUmSO7
+X-Gm-Gg: ASbGncsdmKwQQXwSg+XCjBxvg7HrJ0s3z+jdV2N9DRqDA7aSzE0mNcXbHSdNP7RVZVt
+ UkpTdywz2jdYnOU5efCN86CBDjkgUzCayAJ6rAzN6DxuXKsMuNSvmxwiT5NiUY2DoZKW2XH+Rim
+ Kk0N34P2+Xq3YMDxY8C0KOKnpmoMuBe0RiffAd/2HEDTvBrbfnCqQHq4Iu1+g6EZxr6Sc/QMBG3
+ wrZa6vRTFYIz+IjnmdVuqAZgYhRKtYNk9nh9+VjD3eDcBXNvFg3H5UMUCootHhRUu4YaH8LFT8p
+ 1U1VdIOz51BccmLFVvVRkMonCzwmh8xq3MA8hn0EeyfoDxMO8oXgNAb20XQkdtD24WlwEyKpzDX
+ UmPOT7TiGLzqtiQJcOxARNxDp
+X-Google-Smtp-Source: AGHT+IFjwOkZuwppvTMiArg2mTjymKTntG+tAwcPJuqCf3ibIfhDV5tzpleZiueWqMeOhIiIU3jc5A==
+X-Received: by 2002:a05:6000:2cf:b0:391:2e6a:30fa with SMTP id
+ ffacd0b85a97d-39c0c13b7ecmr10704886f8f.27.1743430463726; 
+ Mon, 31 Mar 2025 07:14:23 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:26ff:1b86:d0f9:9aad?
+ ([2a01:e0a:3cb:7bb0:26ff:1b86:d0f9:9aad])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c0b79e0a3sm11528717f8f.71.2025.03.31.07.14.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 31 Mar 2025 07:14:23 -0700 (PDT)
+Message-ID: <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
+Date: Mon, 31 Mar 2025 16:14:22 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="arrtrk1WxT8KoLvz"
-Content-Disposition: inline
-In-Reply-To: <20250327153313.2105227-14-andre.przywara@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/12] lwIP sandbox tests
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20250314215525.579655-1-jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250314215525.579655-1-jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,45 +103,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---arrtrk1WxT8KoLvz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Any feedback on this series?
 
-On Thu, Mar 27, 2025 at 03:33:08PM +0000, Andre Przywara wrote:
+https://patchwork.ozlabs.org/project/uboot/list/?series=448553
 
-> The MMC boot mode selection for the TI AM62P series of SoCs uses an
-> implicit switch/case fallthrough for falling back to some default
-> boot mode.
->=20
-> Add our "fallthrough;" statement-like macro before the default branch in
-> the code, to avoid a warning when GCC's -Wimplicit-fallthrough warning
-> option is enabled.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Thanks,
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+-- 
+Jerome
 
---=20
-Tom
-
---arrtrk1WxT8KoLvz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfqoo8ACgkQFHw5/5Y0
-tywJUQv+PjQnWUM5980FIRIkBUzlLeKavoXkWhN/6nGfrM7EoFszqEfPRWDXk6yS
-TBW7wMF8s25y5J37+ibRKno0/6INmUJ05I3APcYPWqemqIeAvwATlP8mSjIcjqZQ
-9hwwBkLQGlN+9noGgYwXZJRN0ctsPK1baEWnWGDuoYHZoZVqoJl/hzizUJRHGHW9
-H7f8eVsQRhjbT3vTtWflyzC7d7QPqYwBivcNryFRLTDHTKCtBBF5NMp/9vjTH16h
-vBVkMPdEa03IqNLFwxS+6uBqifNraDh5BVUPJSxvQ28JB/IZA9J4FFKI8GCUdqMH
-79KWwDUsGxTwcxH/G+VXB4HCiOOxwaDGhk89DDLomY2m6Qsp1RHtFbSynfNrqdfq
-RZlLao8D6xugcHNvXx7eWTX33Niuk9CWdPGetnK/rArjfXnwc632ogYOg0rMHVbo
-4yRpLZsbdWh+U3POSaZu2sAJ4GXawKzbJ73t+JOnidgp/a03GWL9HIAdHwOeOeLv
-JDexh/fr
-=I7gc
------END PGP SIGNATURE-----
-
---arrtrk1WxT8KoLvz--
+On 3/14/25 22:55, Jerome Forissier wrote:
+> This series enables most of the driver model tests for network features
+> with NET_LWIP (test/dm/eth.c and test/dm/dsa.c).
+> - Patches 1-5 fix a few bugs (device selection) and add missing features
+> (sandbox timer, restart support) to NET_LWIP
+> - Patch 6 decouples the sandbox ethernet driver from NET
+> - Patch 7 adds missing static IP addresses that NET_LWIP needs
+> - Patches 8 and 9 update the tests to use a common interface to send
+>   ICMP packets (do_ping(...) instead of net_loop(PING))
+> - Patch 10 enables DM_DSA and the associated tests with NET_LWIP
+> - Patch 11 adds a sandbox64 configuration with NET_LWIP=y
+> - Patch 12 adds that configuration to the CI
+> 
+> Jerome Forissier (12):
+>   net: lwip: do_ping() should return CMD_RET_FAILURE when no device
+>   net: lwip: fix initialization sequence before a command
+>   net: lwip: provide net_start_again()
+>   net: lwip: add restart support to ping
+>   net: lwip: use timer_early_get_count() when CONFIG_SANDBOX_TIMER=y
+>   drivers: net: sandbox: add support for NET_LWIP
+>   sandbox: provide static IP addresses for eth{2,3,5,6,7}
+>   net: ping: make do_ping() available via <net.h>
+>   test: dm: eth, dsa: update tests for NET_LWIP
+>   net: lwip: allow DM_DSA=y when NET_LWIP=y
+>   configs: add sandbox64_lwip_defconfig
+>   CI: add sandbox64_lwip
+> 
+>  .azure-pipelines.yml             |   2 +
+>  .gitlab-ci.yml                   |  11 ++
+>  board/sandbox/sandbox.env        |   5 +
+>  cmd/net.c                        |   3 +-
+>  configs/sandbox64_lwip_defconfig |   5 +
+>  drivers/net/Kconfig              |  14 +-
+>  drivers/net/Makefile             |   1 -
+>  drivers/net/sandbox-lwip.c       |  85 -----------
+>  drivers/net/sandbox.c            | 240 ++++++++++++++++++++-----------
+>  include/net-common.h             |  15 ++
+>  include/net-legacy.h             |   3 -
+>  include/net-lwip.h               |  10 +-
+>  net/Makefile                     |   2 +-
+>  net/lwip/dhcp.c                  |   3 +-
+>  net/lwip/dns.c                   |   3 +-
+>  net/lwip/net-lwip.c              |  86 +++++++++--
+>  net/lwip/ping.c                  |  13 +-
+>  net/lwip/tftp.c                  |   5 +-
+>  net/lwip/wget.c                  |   6 +-
+>  test/dm/Makefile                 |   2 -
+>  test/dm/dsa.c                    |   8 +-
+>  test/dm/eth.c                    |  77 +++++-----
+>  22 files changed, 351 insertions(+), 248 deletions(-)
+>  create mode 100644 configs/sandbox64_lwip_defconfig
+>  delete mode 100644 drivers/net/sandbox-lwip.c
+> 
