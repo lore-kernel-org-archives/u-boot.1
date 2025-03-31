@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F27C3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:42:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA69C36011
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 17:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD54581E6C;
-	Mon, 31 Mar 2025 19:42:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 882CC81E6C;
+	Mon, 31 Mar 2025 19:45:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tvBR2euo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EO0LR/xD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9296881EC0; Mon, 31 Mar 2025 19:42:43 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 7362B81EC0; Mon, 31 Mar 2025 19:45:34 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A0BF81DE3
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:42:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DA2E81DE3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:45:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-5fcd61e9bcdso2102500eaf.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:42:41 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-2c6f27599abso1387407fac.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 10:45:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743442960; x=1744047760; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743443131; x=1744047931; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mGK9k1+mh20mMmK1sABuEEG8N+k0pZH9+ckUapfaNvA=;
- b=tvBR2euo1tBBAVIzsIqTqgwiYs4AerfdWPs3+gk52f66xz6mwgicBPYyjyyY9Y+bff
- cAChdRUZiE5faJpYruuEfSOdh104WwM6PzMdMnHJoSneffbnD+vwVoe1+YEzY/0/1y+3
- LFaK2YVgUxWBO6FFplHiSb6JylXo+b1f2ySfQ=
+ bh=qKrlCG+orUh6jCgjzSxLf163WJ4hQ3yAo7DVxgW59Ow=;
+ b=EO0LR/xDdpWPmHrjhY7LuIXhKSr2srThaAm4Qqe6VasKEDdZOuRAYcHLW6GUqxm+9b
+ AZ2BTn5wTfowD4VqNlw+0h44GHfMY4q+NVcm20yegwAtAGsRlcbgnETSJbqvEsCCXHTg
+ Pf8sv97pitEM1e/CSz1II7mzfgc1q2gRLOGl0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743442960; x=1744047760;
+ d=1e100.net; s=20230601; t=1743443131; x=1744047931;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mGK9k1+mh20mMmK1sABuEEG8N+k0pZH9+ckUapfaNvA=;
- b=PL8epRsjtJXZMdudu+QEfiEModubjRkLQftmsfQmhn2dOOpEhAqzNULBn16I1oB75H
- cvZ46bWR1uX9FONfgFfNgsLKZwXpKkn68Vy/g1ikQHIR7PFO0vwgXT0B/CPdLDmEbSYR
- vEtaxfZn1FObhik90ZFkOklv9F/9mMF0fQYJU+ss+Zgq1lyp/iFNTyWzTdYs6wstFOHy
- XQWNfBr/lLJGZw9g9brRV0Jj56UNWty7QMBzgoXFnsl5OxZX/rtn+v5x7ht8nMo4qDSS
- xnAjEIhiIhCM9/VHE8AGh6RGLIWfELdOUSFelms8K2HA/G0lYWXBhordrxoK3l4nyye4
- QldA==
-X-Gm-Message-State: AOJu0YxeAR9lYA4Qgt6gGO2iSgd3VaQrfRuEfXtkJGE4GQudko1SWYoW
- 3NeFqxxWNdPAuoML8iZUIiUWEukjVKqpppRcQFXl458oNssYiuQ823saSfQh014=
-X-Gm-Gg: ASbGnctebmbfbiPcFTl6fn4T2zxxJIKlZNwR+oeOE2oqYCHe6LPFTYrxLrCP2wzFbDr
- 8W8teej2Whh9CAyhSoNVUDkASycFRoaRoub4spFCAuDXuc4gVQ/DuAoJyDQRvvwXQ5uEMMd5iOR
- m2p6L35gQWFPXXnHjCJgxMg+nHJHhYBNny6Z53oshrXCdbMMPfYMHOG4F2iJDxFOjirS4BFJimO
- /voVBfSSyEc4GpKST2uK/xHmcAKMkI/qBRHVwAWcXxumo56x8itw3tLDfzc0cZuQ2JApOLJqZ34
- oKtylMBiLMjJ88Xx8k+tzIVffCuY78n/GXlM0lv/xPireAZsJS8skonyucJbCyYyR5zoTUSnkkM
- iMD1tQMuQZoiFe75E
-X-Google-Smtp-Source: AGHT+IFu+LEbWDO7r5ljzAQccqZKTnPjawp4rdrxh/y4R+UXstJJu75Xy8vXdHFt8RuVh+COC5Vvvw==
-X-Received: by 2002:a05:6820:98d:b0:602:85a5:90ad with SMTP id
- 006d021491bc7-60290e77e41mr5609452eaf.2.1743442960017; 
- Mon, 31 Mar 2025 10:42:40 -0700 (PDT)
+ bh=qKrlCG+orUh6jCgjzSxLf163WJ4hQ3yAo7DVxgW59Ow=;
+ b=JxSYm7ea5SUfauHm/oJ0ekVaOZOwQRkTLX6YRaFEOVVX4/gj4C7ZUdc0j6z8t7tIbk
+ 12oA74Dp5d3EaUykFd5a6x1TJh/DUIQKydWmkD77dbsObfmCilURml02UdOkuLhz6hr9
+ i14axmuEhAcTZ9f1tvZkh9xedSKG5MwPZ3ruS6tJCHSg+LU4tsNf/a7M/mxHIcVJA51f
+ yPRrk4N2nItgbZuXXJzTqb/xmoLR2w6Bm8HYHWlDrVfSVko8he86pB6+YaVm11D4ua+u
+ S9aqhVMsBQ6qM+s7uziJ5zSZFp82bFS1sUKNxV4DQcf1MYEJxXDMB3CdOyY8rqD3trzm
+ SrVw==
+X-Gm-Message-State: AOJu0YxLD488mb9tPVgSNCkWYWRR5ZhAT5C9XRgNI1DINmRQS2MphlYL
+ l91LRKrLFXoiZO0UIeYgWPnR5aw5t/xbpeI3XSbGNWLHUGCIvS8ocflve0Mctsk=
+X-Gm-Gg: ASbGncsMw+EdlGfgIXhbfV0r4iyqocLTYHvgianDN6cryO4OhNlo5tZZWEIWfhQzh2W
+ lC8QWCNEkamn6CYi1yCEX9f3cJlu51pvD+M5mb3YaSGNBV8r6E7JUW+7HOXUmYfA1STqrc8iDkl
+ ioNOeJr5DwYzU2vGeQjSdOEHCKwK/hqPFApiNtfx3LpX5VavGaUzH5fe/8zjwMvV5gECui7ntzt
+ obLnIqSJzV2wNuyo8YUgJB3wtBDFvAkeok9IZ/+dsWazRwKrMjIi5oNTDW/93yWsUsT8CadOM9e
+ DZL5ZWFYKKYUXabdcZbvq9SIHuM2SZ9nit/RF0cxfb3nbhYcDjHEdsNZyM0ZY73LHcRfwtBz/Jk
+ deT7DYw==
+X-Google-Smtp-Source: AGHT+IEbSjIO++gCdD495GW6UOapHi+3JPV4yHROS4mjeySF2wNM2vBMWuu5W4IVyqzfDScGPrXCyg==
+X-Received: by 2002:a05:6870:498c:b0:2c1:b39c:c43a with SMTP id
+ 586e51a60fabf-2cbcf5a6770mr6249739fac.22.1743443130818; 
+ Mon, 31 Mar 2025 10:45:30 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-60284501daasm1533819eaf.12.2025.03.31.10.42.38
+ 586e51a60fabf-2c86a8ffb5bsm1935455fac.43.2025.03.31.10.45.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 10:42:39 -0700 (PDT)
-Date: Mon, 31 Mar 2025 11:42:37 -0600
+ Mon, 31 Mar 2025 10:45:30 -0700 (PDT)
+Date: Mon, 31 Mar 2025 11:45:28 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 01/17] fs: boot: Update fs_read_alloc() to use abuf
-Message-ID: <20250331174237.GJ93000@bill-the-cat>
-References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-2-sjg@chromium.org>
+To: Greg Malysa <malysagreg@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [RFC PATCH] docker: add ADI build-related tools to docker image
+Message-ID: <20250331174528.GK93000@bill-the-cat>
+References: <20250321053854.12959-1-malysagreg@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ueHWgIIa3Yu+/ukp"
+ protocol="application/pgp-signature"; boundary="t/1FkvF9DQ7ng7e3"
 Content-Disposition: inline
-In-Reply-To: <20250319143820.2385092-2-sjg@chromium.org>
+In-Reply-To: <20250321053854.12959-1-malysagreg@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,78 +96,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ueHWgIIa3Yu+/ukp
+--t/1FkvF9DQ7ng7e3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 19, 2025 at 03:37:55PM +0100, Simon Glass wrote:
+On Fri, Mar 21, 2025 at 01:37:42AM -0400, Greg Malysa wrote:
 
-> Using an abuf for this function simplifies returning the size and also
-> makes it easier to free memory afterwards. Update the API and callers.
+> ADI processors require packaging with the ldr utility for bootrom
+> compatibility. Normally this is available as part of our yocto-derived
+> toolchain but it is not a part of any other premade toolchain, so it is
+> otherwise unavailable in the docker image for CI. This patch adds a
+> source build from the ADI maintained github repository. The same ldr
+> tool is used for arm and arm64 for all of our boards with names adjusted
+> to match the expected $(CROSS_COMPILE) for these boards.
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+>=20
 > ---
->=20
->  boot/bootmeth-uclass.c | 19 ++++++++++---------
->  fs/fs.c                | 25 +++++++++++--------------
->  include/fs.h           |  8 +++++---
->  3 files changed, 26 insertions(+), 26 deletions(-)
+> Hi Tom, I'm not sure exactly how changes to the docker image for uboot
+> testing work so I wanted to get feedback on my approach here before
+> including it in a larger series that will include the ADI boards. I
+> think that maybe 10 years ago the ldr tool was available as part of some
+> toolchain tarballs at least, but it is gone from everywhere except the
+> ADI forks now. So in order to build the sc5xx boards in CI, we need to
+> add the ldr tool. I've built an image based on the resulting docker file
+> and -next and then hooked it up to my gitlab runner to test things out
+> and this is compatible with our upcoming patches as well for a full
+> clean CI run. Please let me know if I've made some mistakes or if this
+> isn't the right way to submit changes for the docker image.
 
-So we grow platforms by ~200 bytes:
-            sama7g54_curiosity_nandflash: all +204 text +204
-               u-boot: add: 6/0, grow: 2/0 bytes: 204/0 (204)
-                 function                                   old     new   d=
-elta
-                 abuf_realloc                                 -      76    =
- +76
-                 abuf_uninit_move                             -      42    =
- +42
-                 memdup                                       -      28    =
- +28
-                 abuf_uninit                                  -      24    =
- +24
-                 fs_read_alloc                               96     106    =
- +10
-                 fs_load_alloc                              114     124    =
- +10
-                 abuf_init                                    -      10    =
- +10
-                 abuf_addr                                    -       4    =
-  +4
-
-To move away from standard buffer usage and unwinding to move to
-something homegrown instead. I am not a fan of growing using abuf here.
-When it was introduced in:
-
-commit 67bc59df05331eaac56cd0a00219d1386130aee2
-Author: Simon Glass <sjg@chromium.org>
-Date:   Sat Sep 25 07:03:07 2021 -0600
-
-    Add support for an owned buffer
-
-It sounded like something for some special cases. Not something to be
-used everywhere to be different.
+Since these are new platforms, we should really be using binman for
+manipulating the output images, and then also fetching / building any of
+the custom vendor tooling that's also required. I'm not sure off-hand of
+a good example however.
 
 --=20
 Tom
 
---ueHWgIIa3Yu+/ukp
+--t/1FkvF9DQ7ng7e3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfq1A0ACgkQFHw5/5Y0
-tyxTUgv8D9v4wvCFFBKljzBdOrN4BSCnvUfOcgv5z8ZYJzGX0QoPvZp0XnUpE/Y8
-v+KHVE3i1TS6lHnDWtC3lFD2TqpH9Jczy4vle9yAcLAfwpJDWjLV9lR35U3Hs9rM
-8ZeNVca4FxX14wgUl43XU7CBXwyWFxFoZn9mxSjG3vrI2yeW1u0tMaFgR8+zgpnR
-x8l/QMEKkRCu2NIzjNi05Z4EoFQ0Dg2Eu6GdegRvFK6qZD15ww1bSl+XX+NNj5I2
-WnHnUUGCjJhfogOE8GJPdnGQdwACnnttpiEBte9jFDMErWVu+CWQzTgL6NI4TP4C
-g3NUiCfS/eHdaJZgpllkmjlClOBwomeQCaQDim6jHrQVWIQnSBuBlPtqrj8xVkSi
-ON9qj+H//wp2xuPuS6/ks85m25xrrIvdwZXQ7dvA1wc+JfVtUvlIJCf93adIUFrJ
-8yS56phdXhxNzDDJYVFFSNYLJ0acl3O5S9iCQjEnGlHDAuGzSHVrqzMVWUesDi7S
-NJ18kFDQ
-=z+FJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfq1LgACgkQFHw5/5Y0
+tyyanwv/TAbRlsfPdr3gdPY+czZj0XBDZ9e1yzmdsvT85xCkZKSIflw0H8Gf/MyC
+YF/z3iinJkvtHfD9JlYbkUYEKwQI1XZyc08Jnb5xOyeiIuDM/z3RPpWjIRmAVtF0
+NnUEYUkbAcF+9X3cV0HsotQVfTMaAh5ib9K0QezahSdz/j7vePOh5M2++xrtC5B4
+vHCUnK4v0gjGLFoVGkAR6CBArpuylwP2jUJn0eMJ4l0nF1gdptpUzmvjdQEvg9Zz
+5sdS+KrVCJVp8+9c7ssPvmyNDyDILQzvXu//h9MFHN93W+05v9i81+ZkK4eQYYlS
+Hu4l0EhnZvlRHrRQErre57bBNTkoMSBJT09Oh0/SnCWS/+vC+jloixYnRwO4LU6D
+vUaKyD8EtesWdPYlqWPWyWpQJIZd/MyBL0e/zZ8S9+Nxz8OnrOT0Tn7UWCXVeRVX
+UR162yse8zetUP7sqWFLR6g76Fn6H5UNmtwPCMgETV0CogMO8AJRAfVqioEfgCow
+sIpzql5C
+=ykPh
 -----END PGP SIGNATURE-----
 
---ueHWgIIa3Yu+/ukp--
+--t/1FkvF9DQ7ng7e3--
