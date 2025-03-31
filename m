@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61FC2C28B20
-	for <u-boot@archiver.kernel.org>; Sun, 30 Mar 2025 22:11:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13538C28B20
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 01:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA0C480F9C;
-	Mon, 31 Mar 2025 00:11:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 36AA380F9C;
+	Mon, 31 Mar 2025 03:18:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1743372671;
-	bh=ZH6PsNKhSoEBBDZ+YF0pacq12xMFu39MpPAwE/ZP4fY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uA84YmlPfDXb/yzrzkMabc7kN/bpVEibp3BlEXOPD2faI4rkMu3YuCBbsND1tlDkd
-	 M3xHrFUiXXvGc8s7Hy3LAaZWlJXcaaso/DdMOoI/+EyZhKxPfN15t0/h91klje4wpw
-	 kKoZgDGUx3f99vtg3sRVs62YuqBm0rrXIfp5HYS1+OZTgRYOMFy2NbpKdcIUxYGFH9
-	 qJjAbXdpmHPnn0xAZkt0OZUuRJ3aBZNmfVBCTeqjAwkZ/Kjagl6HkberiQwuK8I1wl
-	 B/OWquMnq+3Y3+wk81HEhYQrM9ll86rV3EwiwD/rG+VXy3BQz84yAIPheaGe3A/SQv
-	 ChYYu9Gf13P8A==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C0A6F80FDA; Mon, 31 Mar 2025 00:11:09 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F293E800C1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 00:11:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="PkoCaOvq"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D4EC8102F66E1; 
- Mon, 31 Mar 2025 00:11:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1743372665; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=ZH6PsNKhSoEBBDZ+YF0pacq12xMFu39MpPAwE/ZP4fY=;
- b=PkoCaOvqI7gwia1DhwAfDmu7Hlj+RWtQqXKHbn4wTWlISebjgab1E38WJtV9h8SGzoquIp
- E1yL/1RzXmP335mdAxo+5TSiEXo4BqDIs/r8CAnvkmVVC6hkWk/kw1hi2ARwCdyZR3SzWP
- R66C5WQvxppHhIO3ABO/Mwild4ynp2lqg5GyI51SYDsnXwBbL6vzQUJUvXdM7cW0lKXvcz
- w9X/VjEwZECSe1OnGlB99lvTvnkuvAJeESDHpQkCLBu7V3cJN44+hrV2OrLy9O+lBK5VNs
- 27pgmYFeq1l9+4jrJB3XSg/KKoQyYJoVEWJvGP4XXGiTpx1co02KC9kC7W+xtA==
-Message-ID: <0f4fcc93-9b9d-4fff-8110-70ac3f8bacd9@denx.de>
-Date: Mon, 31 Mar 2025 00:11:02 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gu/S3nKF";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6D32E81026; Mon, 31 Mar 2025 03:18:40 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5039280584
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 03:18:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ac34257295dso775646266b.2
+ for <u-boot@lists.denx.de>; Sun, 30 Mar 2025 18:18:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1743383918; x=1743988718; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LIvBoRDB0QSVBGJJOYxSV/Lhvy6Y14AaeDhNeqDI+Vs=;
+ b=Gu/S3nKFPe+EqC0MPVMZ/670GuoU6lOkmFuTOGxFgv+L9zWOJmvMzt/8TpckiZKtMF
+ dlSDMvthqD1cAHD3Xrq1/jn2woiIieHOIhXxOwDey2DJL8ZaROxDrvsoDHzCHaMzOGDP
+ +fLs9XWDgQUY1dWB3IIrcwcNIl2BKBKXux4gw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743383918; x=1743988718;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LIvBoRDB0QSVBGJJOYxSV/Lhvy6Y14AaeDhNeqDI+Vs=;
+ b=TNU4/K/yBTcm664MJevzSs6X0Zan5DPe5mgrjPkoTHUUdmKDR1bdoAsz++Mia28bga
+ q4OoWuaXc6UaMDkcg3qiXQNvcbXKEziQO0DL3F+ofLzB/NTlXliVlFGwTqXZJAwnHuyC
+ 6yWMQXseSVnoqzv+dEWeaqkUw8SZmzoFvhba9IoiscjY8MAO1s7DcoadBJ4vx+y+n0mu
+ yf25k+AGKSoPqlj6sjmYx1Rqn7PLHTO2bMl/6FVMtarw6Rf3/+cN2CjLslmj4CT6ik2i
+ T0augWZbRpcq9hX0cCsNJJOkeVJCtu4kXsC9t3UvwHVNqlUdAfsjyRlXVXw4cb6jVy4u
+ MHsg==
+X-Gm-Message-State: AOJu0YwLRsyWuGujnSU6iOjp36cI3X9TslGgIrAykDNKFx2zsV6Aefp/
+ 1JKU9Id4AAiABZ/20OVS+WaXOyI0SeWIZGnFXgD9PrgaLE/TtzATFfIPlH4hEyR0KNeq0o7Yr/Y
+ 73h/K7WxGj+P+I9w5FONCkfVhI15YfwOCTb1x
+X-Gm-Gg: ASbGncuV2z8tqYXLakiv6CtqvSdwFwlsnDv+bEKjDEFkXcShgqro3IMGy5mi5gEZNoH
+ NoFj3kvfEK9rI3oVtjjqoV5ufl0u/F7+TYnX3jvcuOg9nN2E+Zum34RnEn2nldmMxgB7NVu69ic
+ NXytyv9wnal5RxaSy6vb/cFAPaNScv
+X-Google-Smtp-Source: AGHT+IHG8B51DH3oMLRnLOvMnynPga6qposSJa9tUBBUfWSeKF4WIWIY8aIeJiZ8HdJMORXThwGkDyC3DInnUYMRDuk=
+X-Received: by 2002:a17:907:9491:b0:ac6:b639:5a1c with SMTP id
+ a640c23a62f3a-ac738a4bcedmr596619166b.22.1743383917673; Sun, 30 Mar 2025
+ 18:18:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
-To: Simon Glass <sjg@chromium.org>
-Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Brian Ruley <brian.ruley@gehealthcare.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>
-References: <20250105203714.158480-1-marex@denx.de>
- <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
- <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
- <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
- <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
- <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
- <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
- <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
- <CAFLszTiw01KB4ipwqi1b64A4MP3SyU=zFRymV4moiJ_nBtnHRw@mail.gmail.com>
- <a05cf63b-820d-4b27-8f66-37a6e6c7b372@denx.de>
- <CAFLszTgF+g2OXz=L=r7rOQcNkk19GfdCrwixG8ZAsR=1rh9Fqw@mail.gmail.com>
- <f1e4014e-658b-4a47-af8d-72ef76c1b134@denx.de>
- <CAOMZO5B7cxEftN0TeTF--pKXqOmbmaFLc9mEPO4=8odrLBeypQ@mail.gmail.com>
- <f71762e5-ba15-43ec-91a3-dbdc8f8e1437@denx.de>
- <CAFLszTj69OUZj9ZBcmnsiLLvxCB+Y-rJYEW_Ep8V6WFtvXP2Nw@mail.gmail.com>
- <5bec35cc-99b9-468e-bc01-1de5dc39825c@denx.de>
- <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTh3weO+4bFuaRGR9-1zMU57R+Xcn2UVOMY9=JAtpfZgnA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250328130713.2612648-1-sjg@chromium.org>
+ <20250330144709.GR93000@bill-the-cat>
+In-Reply-To: <20250330144709.GR93000@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 31 Mar 2025 01:18:25 +0000
+X-Gm-Features: AQ5f1Jp_Y3Dss59jiL8TFeT9XgZm7Dybqf-DefGh1F49M1qG3QNHXPeyqKQYWQo
+Message-ID: <CAFLszTiykZ4EaLz2oBmUduLm_OsdDxamANf0cbBFaOvzyMwmMg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/56] expo: Various features and improvements
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>,
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,28 +100,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/28/25 12:42 PM, Simon Glass wrote:
-> Hi Marek,
+Hi Tom,
 
-Hello Simon,
+On Mon, 31 Mar 2025 at 03:47, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Mar 28, 2025 at 07:05:47AM -0600, Simon Glass wrote:
+>
+> > This series collects together some new features for expo to make it more
+> > useful for boot menus:
+> >
+> > - measurement and display of multi-line text objects
+> > - internal alignment for objects (e.g. centred text)
+> > - editable strings in text fields
+> > - new 'box' object to draw a rectangle
+> > - highlighting of menu items, rather than just relying on a pointer
+> >
+> > Expo's boot menu is restructured so that it is possible to iterate
+> > through various bootdevs and update the menu as new ones are found. This
+> > is more in keeping with how bootstd works.
+> >
+> > A new textedit object is added, intended to provide a simple text
+> > editor. Future work will complete this.
+> >
+> > With this series the boot menu has a better layout and appearance.
+>
+> Did I already say this for v2 and forget? It looks like you forgot,
+> again, to split the expo stuff out from everything else, which others
+> might review.
 
->>>>> This patch causes a CI error:
->>>>>
->>>>> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1057151
->>>>
->>>> I think this might be what Simon was pointing out, but I never got any
->>>> suggestion how to solve that.
->>>
->>> There was a patch for this...and it looks like Tom has applied it:
->>>
->>> 19a342f9122 Merge patch series "binman: build_from_git: Add argument
->>> specifying branch"
->> It is in u-boot/next , but it does not seem to help ?
-> 
-> Did you figure it out?
+This series is all expo stuff. Can you please explain your objection
+more clearly? I still don't really understand.
 
-No
+>
+> [snip]
+> > base-commit: 37ef92a972663c6de1b81d24d2ca5cfd664fc6df
+> > branch: schd2
+>
+> Of course, not being on top of mainline, no one should spend much time
+> on this anyhow.
 
-> I'm not really sure. It works fine in my tree and I just tested it
-> now. Perhaps there are some other patches missing from Tom's tree?
-Can you push this tree somewhere ?
+As I thought we agreed, it is helpful to review patches so we can keep
+the trees in sync so far as possible. I take your point that few will
+be interested in expo and there may not be many comments, but sending
+it makes it available for review and potentially sending a PR for your
+tree at some point.
+
+Regards,
+Simon
