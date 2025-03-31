@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5ACC36016
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 20:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB702C36014
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 21:28:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 790948129B;
-	Mon, 31 Mar 2025 22:38:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E297B8129B;
+	Mon, 31 Mar 2025 23:28:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SSCOORsr";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="lsN1twqA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE7C181703; Mon, 31 Mar 2025 22:38:11 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6F61E81703; Mon, 31 Mar 2025 23:28:41 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F3C180584
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 22:38:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE62E801FB
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 23:28:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2ff694d2d4dso7792563a91.0
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 13:38:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743453487; x=1744058287; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6AKzZn0WtLwfwicXFzIHnW0p2vHwyn3W1QnB9gsVlsc=;
- b=SSCOORsrhlVCHyBaWZXww61MkBTB5kasM4Wv2vRZ/PAIsRUOSV7FeI1WXOWKwY7/rN
- 6LapR1rZHaWI4tR+uekvpiBipj5x4bK0TjPpDwtVZkLsq7+WXhYNHnrp2reAAYKkis7o
- vhmifR3Ix/RsI8ADiUqtxWv7ALQpGsvJARVFbwlHjEzIpWGtexZmucff1u6Cn8Mtf8oE
- 47hQZjWGbIKjQ6/kQt1vcKhunjDL6Bc7+O0mmCa9UpYyBsWijzEm8iBs/NJeAg6752Go
- NZYwNd2k7JiGWnufwHrQ48egUlkUetfVvKeVEJjPhupM2tGJC9U3+VUrTtLTRhd0/Zxu
- L3iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743453487; x=1744058287;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6AKzZn0WtLwfwicXFzIHnW0p2vHwyn3W1QnB9gsVlsc=;
- b=hj+eSNG9RsJ/lAk00F8zhEMZQ60SnW8lqdhg0CmGQDgVCju3EYFM4X0MSaYPEs1AWL
- 97CiTt41VIWk70KNZL1JFeFE1fk1C0QjYzAhpROOXZcozdoLsPRY4VZHQciBNNBiPfSa
- xg00e/AbWiQNsl9bufKGEfXZ1U9iFLh74idNMxPfwxRAdsohiv0eWYv3tzgbtQ7rzzYr
- NXvYndEomZOO0MsKW8CtgmaQZn0rdSQbrWxUNfws9M14zW5UKFIxDQOGKKuZVkzRjodB
- AbUee4Ip5hQGK3ICi4lxI4/PUtU2zZuHD/57DuYGAOzay3VTFE+ha2MAhp5CEeeO1PLH
- y1eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSElu0bnHFxVeatLYSTetFR+WU3+4cHIaQzI2mpDGJR4r6RWpoy3f+F2PGUQoWsROLR9F0hfc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyR9jFPgXmzGe9Pca+ivn7uluHPQY4C+nMmLaPWXVOBtcvGzSAj
- 3JPtPkW6rApN0Po6qLuKZQJXpwtGCWc1M2Y28UZa+OvRQTyaxZeL
-X-Gm-Gg: ASbGnctLaTZ7axPrlreyxsBl9saPI6nrG7rIaNWGll5uQ9HpkFEkM3yufxLyKYFjutn
- 9Qbobo514dtD+a2Rjp4k/yzTBRpyZUElz/xuayO15aQEJlYhco8X6bX/ZiTW9lYslCYGNHC22zf
- 7BhRKE53aAbdt1D51I9fQc0t6PlWsRkULu8HkyKB0yjUd4IaDQoI6tpkC7n3ZP5j5txCEmwb4bF
- 8Ozi1ke5pMxa88HKTzjpL3zHWHEk2S/dwuedVyMdGXVEG5sEpVBSHO0Tn+TJYCntVZRG05RTqa+
- hMeLIjuCiWEi3g+c9zeZg+icGnBlJXB0UCcRbX+gOdVT/uozCUh8fwOUNLo=
-X-Google-Smtp-Source: AGHT+IEwjgt+jHEHWaAKmW+MgyWk2XdAsgcCoZ0DWq9LdWi6h8WCzjJywgIqY/CqsSZjFozxBvj5MA==
-X-Received: by 2002:a17:90b:4a41:b0:305:2d27:7ba0 with SMTP id
- 98e67ed59e1d1-30531f7bc94mr15647859a91.6.1743453486787; 
- Mon, 31 Mar 2025 13:38:06 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:af57:ab0a:b12e:1ef5])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3039dfd38a6sm10017207a91.10.2025.03.31.13.38.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 13:38:06 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: eugen.hristev@linaro.org
-Cc: nicolas.ferre@microchip.com, trini@konsulko.com, greg@embeddedgreg.com,
- u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2] sama5d27: Fix the 'reset' command
-Date: Mon, 31 Mar 2025 17:37:34 -0300
-Message-Id: <20250331203734.2792684-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
+ s=gloria202408;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:
+ References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=jak6+f6laK0cAqaF7oD+bolLeL0kMcikHKlthpdiQAc=; b=lsN1twqAQTO/nnYiP6BWISEaCn
+ 74km0EWc0r8tgMo0odN5toGs2rdWrHhQFOtlx3Hng/UKJlBXHmvpo3MQkdDqhcNx39r8F6aUTaHrW
+ zWB9+E4n8RT4uh0L0v9JLLzdmuXCk6E12DCll5UEyu1ajQmTwqEsriH8SIeMzC0YGnDzIfracBzgu
+ gjTSmd68LHsb7Joe0hWSnIokvvf7IkegGzN3Bc4bCW/KxHdcl8Ri+o77+FmUYh2Jolr8x1LGWDEdp
+ JNskfAqFYmu6ArIoxwPK3xRal85DKbwN3RT6DVWzqxNpwPjN4n1JMjSHn+uKviBvZ+WFD2il7vttx
+ Sa2AN2Yg==;
+Received: from i53875bf8.versanet.de ([83.135.91.248] helo=diego.localnet)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1tzMgN-0006y3-L7; Mon, 31 Mar 2025 23:28:35 +0200
+From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lothar Rubusch <l.rubusch@gmail.com>,
+ Olivier L'Heureux <olivier.lheureux@mind.be>,
+ Yang Gang <yanggang@byosoft.com.cn>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>
+Subject: Re: Pull request efi-next-20250104
+Date: Mon, 31 Mar 2025 23:28:34 +0200
+Message-ID: <8510745.T7Z3S40VBb@diego>
+In-Reply-To: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
+References: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,162 +73,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+Hi,
 
-Since commit 61040097a9d1 ("reset: at91: Add reset driver for basic
-assert/deassert operations") the "atmel,sama5d3-rstc" compatible for
-the sama5d2 reset controller in sama5d2.dtsi is not handled by
-CONFIG_SYSRESET_AT91 anymore, but by CONFIG_RESET_AT91 now.
+Am Samstag, 4. Januar 2025, 04:19:40 MESZ schrieb Heinrich Schuchardt:
+> Dear Tom,
+> 
+> The following changes since commit ec9263b4f15c4cf82eb6a211c67baa6385065b8e:
+> 
+>    Fix neighbor discovery ethernet address saving (2025-01-01 14:40:04
+> -0600)
+> 
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-next-20250104
+> 
+> for you to fetch changes up to ce190e1b33b8c0e1228f4123759dfa1981c202de:
+> 
+>    efi: Correct ECPT table GUID (2025-01-04 02:17:06 +0100)
+> 
+> Gitlab CI reported no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24075
+> 
+> ----------------------------------------------------------------
+> Pull request efi-next-20250104
+> 
+> Documentation:
+> 
+> * doc: develop: Fix typos and wording in binman/binman.rst
+> * doc: develop: Fix typos and wording in gdb.rst
+> * doc: sandbox: Fix the "sb" command name
+> * doc/develop/distro.rst: Better document upstream definition of
+> extlinux.conf
+> 
+> UEFI:
+> 
+> With this pull request the UEFI sub-system detects all boot devices even
+> if they have not been probed before. If this adds to much boot delay
+> individual bootmeths and bootdevs can be disabled via the customizing.
+> 
+> * efi_loader: avoid writing message in Exit() boot service
+> * efi_loader: run bootdev_hunt() to find ESP
+> * efi_loader: update EFI specification version
+> * cmd: efidebug: update output of memory attributes
+> * efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
+> * cmd: bootmenu: add parameter -e for UEFI boot options
+> * efi_loader: Update startimage_exit self-test to check error
+> * efi: Correct ECPT table GUID
+> 
+> Others:
+> 
+> Building the API demo application for riscv64 is supported.
+> 
+> * API: unify platform_sys_info() implementations
+> * examples: implement _start and syscall for RISC-V
+> * examples: use architecture specific memset() on RISC-V
+> * examples: use QEMU compatible LOAD_ADDR on RISC-V
+> * test: fix test_extension.py
+> * configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+> * CI: xilinx_versal_virt: disable USB_DWC3
+> * net: eth_bootdev_hunt() should not run DHCP
+> 
+> ----------------------------------------------------------------
+> Adriano Cordova (1):
+>        efi_loader: Expose efi_reinstall_protocol_interface in efi_loader.h
+> 
+> Aleksandar Gerasimovski (1):
+>        efi_loader: fix pe reloc pointer overrun
+> 
+> Heinrich Schuchardt (13):
+>        API: unify platform_sys_info() implementations
+>        examples: implement _start and syscall for RISC-V
+>        examples: use architecture specific memset() on RISC-V
+>        examples: use QEMU compatible LOAD_ADDR on RISC-V
+>        efi_loader: avoid writing message in Exit() boot service
+>        test: fix test_extension.py
+>        configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+>        CI: xilinx_versal_virt: disable USB_DWC3
 
-This resulted in the following error, when trying to reset from the U-Boot
-shell on a sama5d27_wlsom1 board:
-    
- => reset
- resetting ...
- System reset not supported on this platform
- ### ERROR ### Please RESET the board ###
 
-Fix it by enabling the CONFIG_RESET_AT91 driver in all sama5d27 defconfigs.
+>        net: eth_bootdev_hunt() should not run DHCP
 
-Tested on a sama5d27_wlsom1 board.
+this change seems to break the "normal" pxe boot from distroboot on
+(at least one, but probably all) Rockchip board(s).
 
-Based on the fix in commit e1ee52ca56fc ("configs: at91: sam9x60: Switch
-to new reset driver")
+Up to u-boot 2025.01 distro-boot on Rockchip boards just worked
+normally, the network came up, dhcp ran (and provided the tftp-server
+address in my setup) and then "pxe" could retrieve the pxelinux.cfg/foo...
+file.
 
-Fixes: 61040097a9d1 ("reset: at91: Add reset driver for basic assert/deassert operations")
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
-Changes since v1:
-- Add Fixes tag. (Eugen)
+Trying the same setup on 2025.04-rc5 does not work anymore, because
+that dhcp is never run, before pxe tries to get its file.
 
- configs/sama5d27_giantboard_defconfig          | 2 ++
- configs/sama5d27_som1_ek_mmc1_defconfig        | 2 ++
- configs/sama5d27_som1_ek_mmc_defconfig         | 2 ++
- configs/sama5d27_som1_ek_qspiflash_defconfig   | 2 ++
- configs/sama5d27_wlsom1_ek_mmc_defconfig       | 2 ++
- configs/sama5d27_wlsom1_ek_qspiflash_defconfig | 2 ++
- 6 files changed, 12 insertions(+)
+Of course running the dhcp manually before handing over to distro-boot
+works, but that needs human interaction. Similarly reverting that patch
+also makes things works again ;-) .
 
-diff --git a/configs/sama5d27_giantboard_defconfig b/configs/sama5d27_giantboard_defconfig
-index ad1621a94dd7..0b7940f4fb43 100644
---- a/configs/sama5d27_giantboard_defconfig
-+++ b/configs/sama5d27_giantboard_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_giantboard"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -84,6 +85,7 @@ CONFIG_DM_SPI_FLASH=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
-diff --git a/configs/sama5d27_som1_ek_mmc1_defconfig b/configs/sama5d27_som1_ek_mmc1_defconfig
-index bb29121bb156..2e5a4acf27d8 100644
---- a/configs/sama5d27_som1_ek_mmc1_defconfig
-+++ b/configs/sama5d27_som1_ek_mmc1_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -93,6 +94,7 @@ CONFIG_MACB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
-diff --git a/configs/sama5d27_som1_ek_mmc_defconfig b/configs/sama5d27_som1_ek_mmc_defconfig
-index 308aafc7dfe5..11a536d714c3 100644
---- a/configs/sama5d27_som1_ek_mmc_defconfig
-+++ b/configs/sama5d27_som1_ek_mmc_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -93,6 +94,7 @@ CONFIG_MACB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
-diff --git a/configs/sama5d27_som1_ek_qspiflash_defconfig b/configs/sama5d27_som1_ek_qspiflash_defconfig
-index ac14dd53838d..86cb5c287be1 100644
---- a/configs/sama5d27_som1_ek_qspiflash_defconfig
-+++ b/configs/sama5d27_som1_ek_qspiflash_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_som1_ek"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -92,6 +93,7 @@ CONFIG_MACB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
-diff --git a/configs/sama5d27_wlsom1_ek_mmc_defconfig b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-index 6db27280f0fa..014f0093eee6 100644
---- a/configs/sama5d27_wlsom1_ek_mmc_defconfig
-+++ b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_wlsom1_ek"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -99,6 +100,7 @@ CONFIG_MACB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
-diff --git a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-index 765565265165..efe23115f620 100644
---- a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-+++ b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-@@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d27_wlsom1_ek"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-@@ -103,6 +104,7 @@ CONFIG_MACB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
--- 
-2.34.1
+
+So while EFI might be faster now, pxe from distroboot is broken and I'm
+wondering, who is supposed to do the dhcp call now?
+
+
+Heiko
+
+
 
