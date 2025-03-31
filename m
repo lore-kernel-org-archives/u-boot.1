@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7236BC3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB4AC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:54:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0876E81DE3;
-	Mon, 31 Mar 2025 15:53:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6462881DE3;
+	Mon, 31 Mar 2025 15:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KojKrOSd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vX7aOlbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D54BE81E5B; Mon, 31 Mar 2025 15:53:32 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id BEECF81E5B; Mon, 31 Mar 2025 15:54:24 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91FAA801FB
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:53:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86147801FB
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:54:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e643f0933afso4336951276.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:53:30 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e573136107bso4228188276.3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:54:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743429209; x=1744034009; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743429261; x=1744034061; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Klr/otqzgFrh3kC9rTKZtAVEnRNzPppsekAGuRmckQk=;
- b=KojKrOSd3SwZGpEuGlKJZb9WaOR6CH8SwPnoP69YWgu6faiBCIsuofVx+s2S/jlK71
- MHRYtwzYma9nWa/yA+ZY0NDuwzSjfWRkX0qAYw7pmNRHxCorfvqSqDsIfImyEtmgUwqB
- gHiXJMGdP8S/TZ9cjWxg/wUEoNYlu43n+ESq3tn/isxgcUdRhmT8dGAErCxZWE5455po
- jesDR8efCHdTrDI4eZUdxX5aJqMq7VKc8W+DqpS0f80rjLEoHQ1RHhNUdySxXYo3vH47
- KdEoDPF/qAIs7bkXsgsqe7wls1g12EmsyVwqDVpw8q9x03Kmm3vKxb4+QLNvvrCN4Ned
- JBiQ==
+ bh=IW7zMh6wmdxAfK+CQwHPZIf8RqPjphnNfjUKhmsBdfM=;
+ b=vX7aOlbFSiE8ukvR1hzk9X7NzILOCiF6el3Q5AUMCHoBmg+tRctrMauAoKfuyYY0PL
+ p17aDz3GgRe6bizTQ+jWo5nRC5s2bicA0tZy9mf67hM2zMpKiWS+omBcVTKcz7IE22zv
+ guE6K699RKrrCKOte2fOeNE9deIPcDuVXrCJkkbtmZoK5EGT4oRmIFER2NHOLPYc+f+O
+ hYc9hqmtp+orMrfEXv68hrAc/XRxjDkllMNsXx3zNrJZGaEn4mol5Ynf12UOSV0i23FJ
+ YfDmEpJ1WV6pTqk80SwHNHfgmZ9CbU6RyJoVLwAvPYnjPpWQ6brMYvtR+pinSU+PO/+i
+ Ii/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743429209; x=1744034009;
+ d=1e100.net; s=20230601; t=1743429261; x=1744034061;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Klr/otqzgFrh3kC9rTKZtAVEnRNzPppsekAGuRmckQk=;
- b=C81PYIVC2QanwykQ9D3d6+Y0rCKRz8Il/mLjHBl4O57pqikWt59w++8GMiRRpGvj3L
- xfGjoNgA8p1eSEkE+Ntg0OH4L8xKa5sr8BkWrrWHzVcQnhDtrm16H2WfiKbbA8shBRim
- BQK9A+WXKV8Cx3vjuMtpCZP1pCtIeM/7F7LOMOv3k+83G6NZTA9wCEvcaN+X+RcqoVW1
- ZxcGqpEAAD/IOiMruCMCwA0Z6ZVrCbsQm33eWWZVeCDDRrnS/mxh6/KBaKDRJ0/svBcq
- 1GdYc+UYntIQa0eNSDDsUOMg6ax/J3X1Tl7eBD9Pouk3CWGyAU8JIS6XbYFoQ+rzWYJ7
- daCg==
+ bh=IW7zMh6wmdxAfK+CQwHPZIf8RqPjphnNfjUKhmsBdfM=;
+ b=Gckgvnmz+3j3y3QaEnXo8LoBrehReEihkXtJZBdVrq/ji0aZTdooT5bEKQfB2me9h6
+ KCBVcEuY+jPSGEiPQWvdk1QV4Ela/siLalV/ZAlrchvWd7SvTq5tKmDYSFZpabTUOe2E
+ RFsJKX2O/Z24Xmv2VL2NUQTHrW/cyWOwRz7qXhViG/93+vb9oy5cRx/uXLQ2viCzJ6QR
+ aLNY2+UiihXSGk/o3TFS8uPJHTo+OgK9guWggeie98aydCI8RZXLAXFdFgCTqq767Wu0
+ zZEMzvM/bDOViIhBn0I+eqTWsq63gJJk7GnCc/taksRHDg7V1jSJ+FqfqTKo1OtdcNga
+ PcuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSL08eGT9bABE1spks4wCTrbpk2lZpc3DHnkL91Xr+MA1+Qw+4WuKwbV4VBQz/1gRGRGOD3ek=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHQ9/+zilRfW83lFcmX/BD+ePwjjknb5EGCszWIgkffghggfjy
- IAWDOtc/cB4yMD1pruvsK3Q2JoZxQTZltR7D4RqxvIet1LLTmpt3VjHpwwKwehjQIECe82T2q8i
- 4QrYwtGB6E5yvUh7de1iAvbhz7QFnJWnA4m2Htg==
-X-Gm-Gg: ASbGncsSbCUipCCpOrEFu8rM/813/Z+UhyzUCUvnRQrZ1t784WdYmuErtWgIiCP59IU
- SfAMfUfwC9DizRgO6KyCDvsv/n1JOpYpwi7BrDN86eb1Ny+PCopviuFLOOLxwbeg0MKDtrmMUsP
- R3fTSAg4WV7I57ceaxe5x3Drnx
-X-Google-Smtp-Source: AGHT+IFWWIVucf4qsgtI/DhltkVunVJeftCwbo7LtJaW28xd6Ua5dFLloi1MjqLy8R8EO6xEMqIKVOQePpbCLOR5GBM=
-X-Received: by 2002:a05:6902:1b0b:b0:e63:3e25:d71a with SMTP id
- 3f1490d57ef6-e6b736c2f35mr15277017276.15.1743429209372; Mon, 31 Mar 2025
- 06:53:29 -0700 (PDT)
+ AJvYcCWLZN1iea0bLmB/scI0rcmDoBFRIrXLoHHwIq7dCXMfE/Rz7PNUX1HBRm0F+hr4FXX1rmknLVE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMbSJmMY5kOob4cvgN7ZpEnOFkc9l6PVTO8e4+hZasp1qvXOBU
+ aIu6Czahx+4szIYkcWZncxrt0rnOEIq7tL2tXohnn50CtVnxFLLr+23FDTcNsHDp+yPwluzoXcf
+ Al8SmgGrAyuuCE3ddL3gQOYaAO4REh3n1GEj2Iw==
+X-Gm-Gg: ASbGncvhB/b40o8OJGPsroNLU3/FcoO69uYu+s/Xj9RxlTMngXEywag7T/CusbP4RqN
+ VODB4X1xGnlCvanDWYPAlc/wOZPSVuE5DZUftTSvQMjDPBKQ3kSQyZ1N/OyF2yrFOWYBD7ogUdv
+ VkE8PuWzIAWxb7U8ipgcCqfBpH
+X-Google-Smtp-Source: AGHT+IEESzG3VVfUr+V2tlZMLX24fhQnfILgUOdT2U7nW9a+1aaVhjP18pme4W4rJEycSUXy9s+oJtXEdISl/naHD+M=
+X-Received: by 2002:a05:6902:1b8b:b0:e6b:75cd:a36b with SMTP id
+ 3f1490d57ef6-e6b8391c052mr10436661276.11.1743429261379; Mon, 31 Mar 2025
+ 06:54:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
- <20250326-b4-qcom-capsule-update-improvements-v1-4-afe2e3696675@linaro.org>
-In-Reply-To: <20250326-b4-qcom-capsule-update-improvements-v1-4-afe2e3696675@linaro.org>
+ <20250326-b4-qcom-capsule-update-improvements-v1-3-afe2e3696675@linaro.org>
+In-Reply-To: <20250326-b4-qcom-capsule-update-improvements-v1-3-afe2e3696675@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 31 Mar 2025 16:52:53 +0300
-X-Gm-Features: AQ5f1JoCyZqxG0x9lo2yK3uCK531csORGbu3DBa0xBYvw_EL-NgzdiYIySiFsUQ
-Message-ID: <CAC_iWjJFj9eXrKtWGhkCytUaRDWT8AnvbqxrX2ynw=HJ4ZpUqA@mail.gmail.com>
-Subject: Re: [PATCH 4/4] qcom_defconfig: enable capsule update support
+Date: Mon, 31 Mar 2025 16:53:45 +0300
+X-Gm-Features: AQ5f1JrIqVmjRdqSpn_64nrW4FOBxlt8TURrsGd3g0LNHmn3jv6cXM_yjR_xhWE
+Message-ID: <CAC_iWjJa-XXqzQsRszzDS6h2v4sGd+0rWr=1piOQrVp-9Ud90w@mail.gmail.com>
+Subject: Re: [PATCH 3/4] dfu: scsi: don't call scsi_scan()
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
@@ -97,47 +97,36 @@ X-Virus-Status: Clean
 
 On Wed, 26 Mar 2025 at 19:41, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> We can now correctly identify which partition U-Boot is flashed to
-> between uefi, xbl, and boot (including A/B support) so enable capsule
-> update support for all boards.
+> Calling scsi_scan() results in all the block devices (and EFI block
+> devices) being destroyed and re-created. This breaks the EFI filesystem
+> drivers during capsule update.
+>
+> Remove the call, since boards really should be calling scsi_scan()
+> themselves during board_init().
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  configs/qcm6490_defconfig | 6 ------
->  configs/qcom_defconfig    | 3 +++
->  2 files changed, 3 insertions(+), 6 deletions(-)
+>  drivers/dfu/dfu_scsi.c | 5 -----
+>  1 file changed, 5 deletions(-)
 >
-> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> index ba26924da161b1c4b5378955185f314b05cb1006..5ddc5ab3ef8cfe8f9cc09eb573c1a8130b394b43 100644
-> --- a/configs/qcm6490_defconfig
-> +++ b/configs/qcm6490_defconfig
-> @@ -18,10 +18,4 @@ CONFIG_DEBUG_UART_CLOCK=14745600
->  CONFIG_TEXT_BASE=0x9fc00000
->  CONFIG_REMAKE_ELF=y
+> diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
+> index 9f95194784c1de00458843276872b1d23d023444..a234548ae46dc2a6ae1ca5770accb58f43782239 100644
+> --- a/drivers/dfu/dfu_scsi.c
+> +++ b/drivers/dfu/dfu_scsi.c
+> @@ -341,13 +341,8 @@ int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr, char **argv, int
+>                 if (*s)
+>                         return -EINVAL;
+>         }
 >
->  CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+> -       if (scsi_scan(false)) {
+> -               pr_err("Couldn't init scsi device.\n");
+> -               return -ENODEV;
+> -       }
 > -
-> -# Enable capsule updates
-> -CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> -CONFIG_EFI_CAPSULE_ON_DISK=y
-> -CONFIG_EFI_IGNORE_OSINDICATIONS=y
-> -CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index ba4d38d100e053e3708ee2623bf3530787b6b94f..d69185f3c2f0452e6757b785a023cf612bfa3839 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -5,8 +5,11 @@ CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
->  CONFIG_ARCH_SNAPDRAGON=y
->  CONFIG_NR_DRAM_BANKS=24
->  CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
->  CONFIG_SYS_LOAD_ADDR=0xA0000000
-> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> +CONFIG_EFI_CAPSULE_ON_DISK=y
-> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
->  CONFIG_BUTTON_CMD=y
->  CONFIG_FIT=y
->  CONFIG_FIT_VERBOSE=y
->  CONFIG_BOOTSTD_FULL=y
+>         ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
+>         if (ret < 0) {
+>                 pr_err("Couldn't find scsi device no. %d.\n", dfu->data.scsi.lun);
+>                 return -ENODEV;
 >
 > --
 > 2.49.0
