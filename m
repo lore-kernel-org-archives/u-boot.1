@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D610C3600C
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:33:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD4FC3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 12:34:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39AD3820E1;
-	Mon, 31 Mar 2025 14:32:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D22A981F59;
+	Mon, 31 Mar 2025 14:32:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zTeAqi7K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oC3RDTlO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE59C8203B; Mon, 31 Mar 2025 14:31:57 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 34DEE81703; Mon, 31 Mar 2025 14:31:59 +0200 (CEST)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C274781703
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9C9282047
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 14:31:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43ce71582e9so30592575e9.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:55 -0700 (PDT)
+Received: by mail-wr1-x443.google.com with SMTP id
+ ffacd0b85a97d-399737f4fa4so2151486f8f.0
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 05:31:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743424315; x=1744029115; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743424316; x=1744029116; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oFltWPALYkQiMDNUmSg+en3vLnxEiJ0+n8F2dvwsl/U=;
- b=zTeAqi7Kpax7rmLx2gvAld06GqvAOI+Fjl2OS70DHYpSXVuXzlByFNTHqyhOKn4/vK
- Eg8eMkHmhxNGETe8wRNB397vJ7PsNJk6Ut5F8AKzpVtWOtW03O20U4Ot3fTQnYeGnk12
- +pjmSUwJOwPcWFzILzgEZs1LoaTIoMolh1UCd2hEJONJeTAoc7YQ4UmsJ/Z4YWv/MmGc
- V4kthj86lFUA7im57fgxK+2+ohPqjEKADvU5Wp7YOXkhAfoHFb637ylVU6pEHqyKQ6Rt
- PBJy6g3qyQM37U/314InvqMVGjfW8Wr2lJ3uBiGeqDAGfJ0HN2OjIUmtagZioVYaCrA7
- oQdw==
+ bh=Iz+pWSRan5RcbHuOAmgsyvPmB2L2wa+fNWwBN2HgjWU=;
+ b=oC3RDTlOsQx5CDiSonf6Xg4x2cIL0Ip5LLVLQjAnudBWdfCQuc2NB6IV+f9apT2si2
+ mf1n4qZGE8fjUoLMYWalABiRFfAZyCQ0bWbzyR47Mdo6hgtFHL4s92kiOumgl19CmeW9
+ 50H/9KWS7v4AIe80pvi+LFjXEUnvhwhtl9tZH1AzL6p+UfbQDi2oXxfhIwbhZV6i1oys
+ b196AKyWxQOVGSklxF0YNBE3PGNUyH5GXrCpFVRXrNxDLW48txuSDA63/+Cp5yJo8P7Z
+ xFOm3zX6FImxoZoUpn+pMRDQpLQQY1VEstTap5nhjy4sa35Z7ONOXCPZy2k++tU/mCqM
+ wvrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743424315; x=1744029115;
+ d=1e100.net; s=20230601; t=1743424316; x=1744029116;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oFltWPALYkQiMDNUmSg+en3vLnxEiJ0+n8F2dvwsl/U=;
- b=ipKuQ5XoA5ZC9E5uKvDRh5WcGZNrcp/q/ortiXsQpMc1bKjvx2rkPV0xk9dQ88SmYr
- blCzkb5FIM/eWwuWkb+EMgOQWYnzkgmSL1ydwM0KdXP83zMhI4FGBqjTxyms48i67X0G
- zvM60KzS5i7aVrnF1/q2qWT0MN47VrdcUQOVmBfOPW+iQ0DmU1EHkQFCKzRU9vyC9Dxl
- H758cMRLWe/O4HxXgnZ7b83gvm/WYz4givkdLSBiCPUbY8ybHVKS2krC66nXKjDT5N3s
- eoIhAcOviSNXoivYQXpBZsm/0cX2IBW5Xl0ik4p3dccKpJofoOQdk8b/O0DNFeJZ1vEk
- EVAg==
-X-Gm-Message-State: AOJu0YxiXREJti71VM+3U7LrrM0+uv1OVO3hR/fuNe7GUZ2mnUtK5X2k
- gXJMSytS9olqvufqW9YVlwLnr9U3T+rNuZMKBTWvCL4j/IzDpkWy/7vFcrShIXpTYtLGOBcqPi9
- eZCgZZw==
-X-Gm-Gg: ASbGncvfxuqC8bHYMOUBo+uoIgeLtxe/vb5JVTMoSPoB8UJ8YDSfbKzoFhBQ3fLpZqP
- vprjgkwFhmgOi1+8EguPt5ggJ6PtqE2LZag/lvGC+KQ/kwO93oh1fBvkFlBlgPyyUU943mG1m9y
- 6VNgy7SpQQJsqxEhmwaKkns7dYZRqnSd64v+Ty39O6jLte7aY6cF/w/SGpHTJKtNk+DEnkiDUdM
- oA9PRqUfRhujz6tKsSDQNrdcuctYKYu0Ci1acnagy1wizRlGsEUe3ohcdjcAM/k1XcH3G7GuG2M
- cXnpUa/At7QOQFGkuJtRBcdkigz12yGfOp6kOq0YTIsAZahUgJqb
-X-Google-Smtp-Source: AGHT+IGu9SGW/sLXDEoIeVuDrCw6pJ/a2+QDNqfHTedqdfjIsAM+6KVb/BAjREJ0hMeSQKBc/EAVEg==
-X-Received: by 2002:a05:600c:4e12:b0:43d:db5:7af8 with SMTP id
- 5b1f17b1804b1-43db628c48bmr71536215e9.21.1743424315078; 
- Mon, 31 Mar 2025 05:31:55 -0700 (PDT)
+ bh=Iz+pWSRan5RcbHuOAmgsyvPmB2L2wa+fNWwBN2HgjWU=;
+ b=DkT0L+n50jzznjhTw3CzlXRGpvDCHdYdxsjQCGWHuKPfwaRymBh7HB5BYzcuVyVRKJ
+ X6IjN1OcJXNKSlWKv/+AWU8HZU5UF+rCBtRIlho8RxHZkRbN7hMk6AFHhYOp2dnRa397
+ uKzWWrXvzQ84QTHC6yQu7jyCDnDyz5KvXj/P/6R1rXjDMbenOpomeO9xtFGUgEX/SkPZ
+ mtI+kDWviEqet0nH9chxvVivxTm7YJ7PVPPih5jSGZpgjMfkFC0sPpdPmhANIuU4ewIS
+ UonaSmEf9JrFmagfUnZrCpEJ4RUxdrdinWHpszOVFwPrHHpCHr7QC4hOBWArajmiXvAa
+ cUoQ==
+X-Gm-Message-State: AOJu0Yxoesp/2wvJqy8ZmqP4HuUN3TAnsN0s58e1G4bSEdevMONZHEFs
+ AAbE/Pb3BkdVnXK4uC9h5CVFQnhS7SjIYUM64TFp7II7zJ+VYZtBm4uFztHfo1lSNkM1T5Ejpl3
+ xzgLfxyTf
+X-Gm-Gg: ASbGnculS88GwobkUcXGkvdyXN6BYJhnI/EQaJP8RvjnzCurw8e3NDksAoVYjj0ikyM
+ 5K/CcpqWzvpWOgaV79pFVGH7x/fV6G1k8qtWDzmsD45TxYPP3d2W6JnaB1awY9rjjho+6MTP+sX
+ 8vrJNvuEdqEskg4gr59PLnFOA93XRy9nYFctp/mDSTokCLA/C3c78AzGr+AAx9d70pwPYxNQUU1
+ L0NOpp+BVxO9FIcQSrPU1Wo2D1Mileq0V+S0m3uQR/ZfYj8Xj0VyT40jCDnZvRnCWub8IoK8LPp
+ FTlswZO9oJO7l452LIUx+iJ901xQmmYUxPjjX391GNG5Jr5n0niC
+X-Google-Smtp-Source: AGHT+IESDASZTP5ptD15HPYja0uQTWV8gQlakW8XxD/o4M1v5RzzHaoXDCvZSJGBaXEi3mGNASqMcg==
+X-Received: by 2002:a5d:47a7:0:b0:391:487f:280b with SMTP id
+ ffacd0b85a97d-39c120cb53amr7228862f8f.10.1743424316108; 
+ Mon, 31 Mar 2025 05:31:56 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:f23c:25c9:dc74:be1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.54
+ ffacd0b85a97d-39c0b6589e4sm11337029f8f.10.2025.03.31.05.31.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 05:31:54 -0700 (PDT)
+ Mon, 31 Mar 2025 05:31:55 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v5 15/16] test: cmd: add test for spawn and wait commands
-Date: Mon, 31 Mar 2025 14:31:09 +0200
-Message-ID: <20250331123120.2025062-16-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Simon Glass <sjg@chromium.org>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>, Sumit Garg <sumit.garg@kernel.org>
+Subject: [PATCH v5 16/16] MAINTAINERS: add UTHREAD
+Date: Mon, 31 Mar 2025 14:31:10 +0200
+Message-ID: <20250331123120.2025062-17-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250331123120.2025062-1-jerome.forissier@linaro.org>
 References: <20250331123120.2025062-1-jerome.forissier@linaro.org>
@@ -100,63 +105,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test the spawn and wait commands.
+Add myself as the maintainer for the UTHREAD framework, the spawn/wait
+commands and the associated tests.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- test/cmd/Makefile |  1 +
- test/cmd/spawn.c  | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 33 insertions(+)
- create mode 100644 test/cmd/spawn.c
+ MAINTAINERS | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index d8a5e77402d..cf47f04851c 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -39,3 +39,4 @@ obj-$(CONFIG_CMD_WGET) += wget.o
- endif
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
- endif
-+obj-$(CONFIG_CMD_SPAWN) += spawn.o
-diff --git a/test/cmd/spawn.c b/test/cmd/spawn.c
-new file mode 100644
-index 00000000000..8f48f5ee25c
---- /dev/null
-+++ b/test/cmd/spawn.c
-@@ -0,0 +1,32 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Tests for spawn and wait commands
-+ *
-+ * Copyright 2025, Linaro Ltd.
-+ */
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 92d4a158fd0..4b6bb7dfcd7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1817,6 +1817,15 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-usb.git topic-xhci
+ F:	drivers/usb/host/xhci*
+ F:	include/usb/xhci.h
+ 
++UTHREAD
++M:	Jerome Forissier <jerome.forissier@linaro.org>
++S:	Maintained
++F:	lib/uthread.c
++F:	include/uthread.h
++F:	test/lib/uthread.c
++F:	cmd/spawn.c
++F:	test/cmd/spawn.c
 +
-+#include <command.h>
-+#include <test/cmd.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+static int test_cmd_spawn(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("wait; spawn sleep 2; setenv j ${job_id}; "
-+				"spawn setenv spawned true; "
-+				"setenv jj ${job_id}; wait; "
-+				"echo ${j} ${jj} ${spawned}", 0));
-+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
-+	ut_asserteq_ptr(uts->actual_str,
-+			strstr(uts->actual_str, "1 2 true"));
-+
-+	ut_assertok(run_command("spawn true; wait; setenv t $?; spawn false; "
-+				"wait; setenv f $?; wait; echo $t $f $?", 0));
-+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
-+	ut_asserteq_ptr(uts->actual_str,
-+			strstr(uts->actual_str, "0 1 0"));
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+CMD_TEST(test_cmd_spawn, UTF_CONSOLE);
+ UUID testing
+ M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+ S:	Maintained
 -- 
 2.43.0
 
