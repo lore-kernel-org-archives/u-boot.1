@@ -4,59 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB702C36014
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 21:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87204C36014
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 22:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E297B8129B;
-	Mon, 31 Mar 2025 23:28:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id B8FA381879;
+	Tue,  1 Apr 2025 00:17:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="lsN1twqA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hrZoIYhq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F61E81703; Mon, 31 Mar 2025 23:28:41 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B12281E5B; Tue,  1 Apr 2025 00:17:24 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE62E801FB
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 23:28:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86C9D80FDA
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 00:17:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID;
- bh=jak6+f6laK0cAqaF7oD+bolLeL0kMcikHKlthpdiQAc=; b=lsN1twqAQTO/nnYiP6BWISEaCn
- 74km0EWc0r8tgMo0odN5toGs2rdWrHhQFOtlx3Hng/UKJlBXHmvpo3MQkdDqhcNx39r8F6aUTaHrW
- zWB9+E4n8RT4uh0L0v9JLLzdmuXCk6E12DCll5UEyu1ajQmTwqEsriH8SIeMzC0YGnDzIfracBzgu
- gjTSmd68LHsb7Joe0hWSnIokvvf7IkegGzN3Bc4bCW/KxHdcl8Ri+o77+FmUYh2Jolr8x1LGWDEdp
- JNskfAqFYmu6ArIoxwPK3xRal85DKbwN3RT6DVWzqxNpwPjN4n1JMjSHn+uKviBvZ+WFD2il7vttx
- Sa2AN2Yg==;
-Received: from i53875bf8.versanet.de ([83.135.91.248] helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1tzMgN-0006y3-L7; Mon, 31 Mar 2025 23:28:35 +0200
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lothar Rubusch <l.rubusch@gmail.com>,
- Olivier L'Heureux <olivier.lheureux@mind.be>,
- Yang Gang <yanggang@byosoft.com.cn>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>
-Subject: Re: Pull request efi-next-20250104
-Date: Mon, 31 Mar 2025 23:28:34 +0200
-Message-ID: <8510745.T7Z3S40VBb@diego>
-In-Reply-To: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
-References: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=anarsoul@gmail.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-601c469cce3so1119642eaf.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:17:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1743459439; x=1744064239; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2jOqveghuNAVeQSg9mv6eNWNNPep5W9URDyOq4KFw2k=;
+ b=hrZoIYhqd/2lHtUQQphtQA3KLSMTbkaDSojEMb7vOwGn3YSz+HQmujxsW1AUxfcian
+ vQkJ4Gihs5w5+Snq0Wmu/619aiuXX/vU3+Ph98uHJsd1lYBdpUjrl+/hBUI4spAr6bBu
+ DMKyWzKwRcrvrsO6n2b9wYLFuZq4Ov/3YiFs64r+YyKTWP0LjTCAyOS9CjsxFmAessoX
+ 3VcL9VhuLEtUSWVy/pdL3VB3Q82GkLX4Iw9y7BJWNZglpx7VTMLbfj33meOR9qbyW5OM
+ 1aK5mV4dMkl8Conc2fwPXdvG7DK3Ryn/McwKSpGYAZ8zy7iSdDSk3I5VBCt46ujkUbgU
+ lKoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743459439; x=1744064239;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2jOqveghuNAVeQSg9mv6eNWNNPep5W9URDyOq4KFw2k=;
+ b=LQY1ZjeRpbGUU+19ngzw+EE8B/VbGnQCPnn7Evd8FxxXgYlRxI4jveL9ryD3QnU2Nx
+ Jy6zIAVl6GeDO2+GFtcYzPnyLn80ZBX5dL1BhiVeBcBzZMt6OPEVTtT7BbbjitUJ8NOS
+ hzm22hi9aLnYakcYoCQolf+3m05TWQL6BeAHm98oasCx48y6vN985L1lM6rQl3WyZHSC
+ Q4YYx/GUUy/oSuXye+xEzlaG8LpAx3mzrus9VWMHN+mW0dsTG3QSE7EFnWgxV/i1iIKY
+ Qi0SOB8EX1lVlyy4N/idfoK3/nbN6fuQ9EvX41AHNjP7ySRIM7PrtuGfuzO4g8WNbGYa
+ wuzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVB816Bk2bviizMssgHyYn0GP7gGi5tjXEzPDatQQ0trL9Oj1Z5aujqL4D07TWJyJABFNDp5rE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6O/GrKCOXYziML9d0tghbAZ9hr0FRZdGpnCp+GZhrOdqjRKWN
+ k/Ug3FRmcqV+x/04g8XXhm8AqyzCTsH6KxDrk6n6tAled4XW/flqMak2wqAo6UpU7pergLzlg5e
+ fbKM/gPLlnFR7PW3On/SLyTGJw1k=
+X-Gm-Gg: ASbGncvLq22e/i0RnduEgVwsFuAUEHyGnZ1MEc4IkL6Ynsnz0JM4xD0ZXmyt3AhSSZK
+ tJB3FVjO2LUsK5ZDgVpyGOcinOGB5DryxHs5KC8RvXBt2mC44Qkath3PPjgj6DGi6CUxR5nYHN3
+ rLn/y/H7Lp6/WCWzCTjeoqEHj0GTtiKz/tEsMz0IXC/s3PFqj8kkrP2+Q3K28=
+X-Google-Smtp-Source: AGHT+IFxls2P6uRfHrmhXOOUlSbA32tnOMZd6zTprrdG6clOmPCJAm/EVfE7/JtC/7KRAUf76pigEpK/ePmN/RHXCEs=
+X-Received: by 2002:a05:6820:168b:b0:602:8be2:b9aa with SMTP id
+ 006d021491bc7-60290f7a7c4mr5279691eaf.7.1743459439068; Mon, 31 Mar 2025
+ 15:17:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
+References: <20250323225134.2369473-1-anarsoul@gmail.com>
+ <20250323225134.2369473-3-anarsoul@gmail.com>
+ <3819cbcb-5fa6-4939-a2b4-643cadcc50ff@kwiboo.se>
+In-Reply-To: <3819cbcb-5fa6-4939-a2b4-643cadcc50ff@kwiboo.se>
+From: Vasily Khoruzhick <anarsoul@gmail.com>
+Date: Mon, 31 Mar 2025 15:16:52 -0700
+X-Gm-Features: AQ5f1JqLIeNF5SZlvij7O7Xjrp4jj9mvcbljjztNhOgLoBf5ltM4wQHmC3rXt1A
+Message-ID: <CA+E=qVdwL2JK7XpUvvwvs8R88Mx9nCpZc1TOf=EFYaNaVzi2JQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] rockchip: rock64-rk3328_defconfig: enable HDMI
+ output and USB keyboard
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Anatolij Gustschin <agust@denx.de>, Jagan Teki <jagan@edgeble.ai>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,108 +103,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Sun, Mar 30, 2025 at 4:45=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wro=
+te:
+>
+> Hi Vasily,
+>
+> On 2025-03-23 23:50, Vasily Khoruzhick wrote:
+> > Enable HDMI output and USB keyboard on Rock64 board
+> >
+> > Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+> > ---
+> > v2: no change
+> >
+> >  configs/rock64-rk3328_defconfig | 10 ++++++++++
+> >  1 file changed, 10 insertions(+)
+> >
+> > diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_de=
+fconfig
+> > index 6d00b52e62f..ae3512625cf 100644
+> > --- a/configs/rock64-rk3328_defconfig
+> > +++ b/configs/rock64-rk3328_defconfig
+> > @@ -21,7 +21,9 @@ CONFIG_FIT_VERBOSE=3Dy
+> >  CONFIG_SPL_FIT_SIGNATURE=3Dy
+> >  CONFIG_SPL_LOAD_FIT=3Dy
+> >  CONFIG_LEGACY_IMAGE_FORMAT=3Dy
+> > +CONFIG_USE_PREBOOT=3Dy
+>
+> This will add a large delay during boot as it forces a run of the slow
+> "usb start" and is something we want to avoid for normal use, please
+> drop this.
 
-Am Samstag, 4. Januar 2025, 04:19:40 MESZ schrieb Heinrich Schuchardt:
-> Dear Tom,
-> 
-> The following changes since commit ec9263b4f15c4cf82eb6a211c67baa6385065b8e:
-> 
->    Fix neighbor discovery ethernet address saving (2025-01-01 14:40:04
-> -0600)
-> 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-next-20250104
-> 
-> for you to fetch changes up to ce190e1b33b8c0e1228f4123759dfa1981c202de:
-> 
->    efi: Correct ECPT table GUID (2025-01-04 02:17:06 +0100)
-> 
-> Gitlab CI reported no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24075
-> 
-> ----------------------------------------------------------------
-> Pull request efi-next-20250104
-> 
-> Documentation:
-> 
-> * doc: develop: Fix typos and wording in binman/binman.rst
-> * doc: develop: Fix typos and wording in gdb.rst
-> * doc: sandbox: Fix the "sb" command name
-> * doc/develop/distro.rst: Better document upstream definition of
-> extlinux.conf
-> 
-> UEFI:
-> 
-> With this pull request the UEFI sub-system detects all boot devices even
-> if they have not been probed before. If this adds to much boot delay
-> individual bootmeths and bootdevs can be disabled via the customizing.
-> 
-> * efi_loader: avoid writing message in Exit() boot service
-> * efi_loader: run bootdev_hunt() to find ESP
-> * efi_loader: update EFI specification version
-> * cmd: efidebug: update output of memory attributes
-> * efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
-> * cmd: bootmenu: add parameter -e for UEFI boot options
-> * efi_loader: Update startimage_exit self-test to check error
-> * efi: Correct ECPT table GUID
-> 
-> Others:
-> 
-> Building the API demo application for riscv64 is supported.
-> 
-> * API: unify platform_sys_info() implementations
-> * examples: implement _start and syscall for RISC-V
-> * examples: use architecture specific memset() on RISC-V
-> * examples: use QEMU compatible LOAD_ADDR on RISC-V
-> * test: fix test_extension.py
-> * configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
-> * CI: xilinx_versal_virt: disable USB_DWC3
-> * net: eth_bootdev_hunt() should not run DHCP
-> 
-> ----------------------------------------------------------------
-> Adriano Cordova (1):
->        efi_loader: Expose efi_reinstall_protocol_interface in efi_loader.h
-> 
-> Aleksandar Gerasimovski (1):
->        efi_loader: fix pe reloc pointer overrun
-> 
-> Heinrich Schuchardt (13):
->        API: unify platform_sys_info() implementations
->        examples: implement _start and syscall for RISC-V
->        examples: use architecture specific memset() on RISC-V
->        examples: use QEMU compatible LOAD_ADDR on RISC-V
->        efi_loader: avoid writing message in Exit() boot service
->        test: fix test_extension.py
->        configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
->        CI: xilinx_versal_virt: disable USB_DWC3
+Well, I can just drop the patch altogether.
 
+Personally, I do need USB and HDMI support, since it allows me to boot
+from a secondary storage in case the OS on main storage doesn't boot.
+Not having USB support defeats the purpose of this patch.
 
->        net: eth_bootdev_hunt() should not run DHCP
-
-this change seems to break the "normal" pxe boot from distroboot on
-(at least one, but probably all) Rockchip board(s).
-
-Up to u-boot 2025.01 distro-boot on Rockchip boards just worked
-normally, the network came up, dhcp ran (and provided the tftp-server
-address in my setup) and then "pxe" could retrieve the pxelinux.cfg/foo...
-file.
-
-Trying the same setup on 2025.04-rc5 does not work anymore, because
-that dhcp is never run, before pxe tries to get its file.
-
-Of course running the dhcp manually before handing over to distro-boot
-works, but that needs human interaction. Similarly reverting that patch
-also makes things works again ;-) .
-
-
-So while EFI might be faster now, pxe from distroboot is broken and I'm
-wondering, who is supposed to do the dhcp call now?
-
-
-Heiko
-
-
-
+> >  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-rock64.dtb"
+> > +# CONFIG_SYS_DEVICE_NULLDEV is not set
+> >  # CONFIG_DISPLAY_CPUINFO is not set
+> >  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> >  CONFIG_SPL_MAX_SIZE=3D0x40000
+> > @@ -72,6 +74,7 @@ CONFIG_DM_ETH_PHY=3Dy
+> >  CONFIG_PHY_GIGE=3Dy
+> >  CONFIG_ETH_DESIGNWARE=3Dy
+> >  CONFIG_GMAC_ROCKCHIP=3Dy
+> > +CONFIG_PHY_ROCKCHIP_INNO_HDMI=3Dy
+> >  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
+> >  CONFIG_PINCTRL=3Dy
+> >  CONFIG_SPL_PINCTRL=3Dy
+> > @@ -80,6 +83,8 @@ CONFIG_PMIC_RK8XX=3Dy
+> >  CONFIG_SPL_DM_REGULATOR=3Dy
+> >  CONFIG_DM_REGULATOR_FIXED=3Dy
+> >  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> > +CONFIG_DM_REGULATOR_GPIO=3Dy
+> > +CONFIG_SPL_DM_REGULATOR_GPIO=3Dy
+>
+> The ROCK64 does not use any regulator-gpio, this look unrelated and can
+> be dropped?
+>
+> >  CONFIG_REGULATOR_RK8XX=3Dy
+> >  CONFIG_PWM_ROCKCHIP=3Dy
+> >  CONFIG_RAM=3Dy
+> > @@ -104,6 +109,11 @@ CONFIG_USB_OHCI_GENERIC=3Dy
+> >  CONFIG_USB_DWC2=3Dy
+> >  CONFIG_USB_DWC3=3Dy
+> >  CONFIG_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_USB_KEYBOARD=3Dy
+> > +CONFIG_VIDEO=3Dy
+> > +CONFIG_DISPLAY=3Dy
+> > +CONFIG_VIDEO_ROCKCHIP=3Dy
+> > +CONFIG_DISPLAY_ROCKCHIP_HDMI=3Dy
+>
+> This will force a small delay of at least a 300ms timeout for all users
+> that does not have HDMI connected during boot.
+>
+> Maybe this could be extracted to a rockchip-hdmi.config-file to make it
+> more optional?
+>
+> E.g. use "make rock64-rk3328_defconfig rockchip-hdmi.config" to build
+> with something like:
+>
+>   > cat rockchip-hdmi.config
+>   CONFIG_VIDEO=3Dy
+>   CONFIG_DISPLAY=3Dy
+>   CONFIG_VIDEO_ROCKCHIP=3Dy
+>   CONFIG_DISPLAY_ROCKCHIP_HDMI=3Dy
+>
+> Regards,
+> Jonas
+>
+> >  CONFIG_SPL_TINY_MEMSET=3Dy
+> >  CONFIG_TPL_TINY_MEMSET=3Dy
+> >  CONFIG_ERRNO_STR=3Dy
+>
