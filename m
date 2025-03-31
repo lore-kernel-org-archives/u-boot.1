@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB4AC3600B
-	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 13:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5574C3600B
+	for <u-boot@archiver.kernel.org>; Mon, 31 Mar 2025 14:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6462881DE3;
-	Mon, 31 Mar 2025 15:54:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12E2781E60;
+	Mon, 31 Mar 2025 16:07:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vX7aOlbF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VjgcilQK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEECF81E5B; Mon, 31 Mar 2025 15:54:24 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 269F481E6C; Mon, 31 Mar 2025 16:07:46 +0200 (CEST)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86147801FB
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 15:54:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F67A81E47
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 16:07:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e573136107bso4228188276.3
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 06:54:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-30549dacd53so1634731a91.1
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 07:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743429261; x=1744034061; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1743430060; x=1744034860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IW7zMh6wmdxAfK+CQwHPZIf8RqPjphnNfjUKhmsBdfM=;
- b=vX7aOlbFSiE8ukvR1hzk9X7NzILOCiF6el3Q5AUMCHoBmg+tRctrMauAoKfuyYY0PL
- p17aDz3GgRe6bizTQ+jWo5nRC5s2bicA0tZy9mf67hM2zMpKiWS+omBcVTKcz7IE22zv
- guE6K699RKrrCKOte2fOeNE9deIPcDuVXrCJkkbtmZoK5EGT4oRmIFER2NHOLPYc+f+O
- hYc9hqmtp+orMrfEXv68hrAc/XRxjDkllMNsXx3zNrJZGaEn4mol5Ynf12UOSV0i23FJ
- YfDmEpJ1WV6pTqk80SwHNHfgmZ9CbU6RyJoVLwAvPYnjPpWQ6brMYvtR+pinSU+PO/+i
- Ii/Q==
+ bh=/1pLH+v9BB2PVyPKTZeNJdMLs9MBdUbL1AsPdTapCAA=;
+ b=VjgcilQKrf/c7dBdZZCLArF781H/IRUrmAXUBcWNtZjWZrFqYZ7iNcIyYhZ3WNUncW
+ BfQP1bkrZjj2TxPEB93EeSC+W51ejU/7j5FTnqU8xi4f7GM460pWwpOXmzJ4fGybbI++
+ FnONkHKcLW2XPTHfcIS9RPZIWdSqYjaE5Y+r3pmUMO+xKij34q+dU6M3EjsY1mv0VM4R
+ UQyXwEuXss0iriAETwliedV+FRc8SI33JHnW/l4HOaWAS8th4bvS4HWwvzkkhh1Ynupa
+ 9F7NoU+lVcnasdyQSLuM+HUKb/7KBteCDQPSTOtaUvLyRXsMeasxELMVI+SQux80OIVw
+ Vlvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743429261; x=1744034061;
+ d=1e100.net; s=20230601; t=1743430060; x=1744034860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IW7zMh6wmdxAfK+CQwHPZIf8RqPjphnNfjUKhmsBdfM=;
- b=Gckgvnmz+3j3y3QaEnXo8LoBrehReEihkXtJZBdVrq/ji0aZTdooT5bEKQfB2me9h6
- KCBVcEuY+jPSGEiPQWvdk1QV4Ela/siLalV/ZAlrchvWd7SvTq5tKmDYSFZpabTUOe2E
- RFsJKX2O/Z24Xmv2VL2NUQTHrW/cyWOwRz7qXhViG/93+vb9oy5cRx/uXLQ2viCzJ6QR
- aLNY2+UiihXSGk/o3TFS8uPJHTo+OgK9guWggeie98aydCI8RZXLAXFdFgCTqq767Wu0
- zZEMzvM/bDOViIhBn0I+eqTWsq63gJJk7GnCc/taksRHDg7V1jSJ+FqfqTKo1OtdcNga
- PcuA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLZN1iea0bLmB/scI0rcmDoBFRIrXLoHHwIq7dCXMfE/Rz7PNUX1HBRm0F+hr4FXX1rmknLVE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMbSJmMY5kOob4cvgN7ZpEnOFkc9l6PVTO8e4+hZasp1qvXOBU
- aIu6Czahx+4szIYkcWZncxrt0rnOEIq7tL2tXohnn50CtVnxFLLr+23FDTcNsHDp+yPwluzoXcf
- Al8SmgGrAyuuCE3ddL3gQOYaAO4REh3n1GEj2Iw==
-X-Gm-Gg: ASbGncvhB/b40o8OJGPsroNLU3/FcoO69uYu+s/Xj9RxlTMngXEywag7T/CusbP4RqN
- VODB4X1xGnlCvanDWYPAlc/wOZPSVuE5DZUftTSvQMjDPBKQ3kSQyZ1N/OyF2yrFOWYBD7ogUdv
- VkE8PuWzIAWxb7U8ipgcCqfBpH
-X-Google-Smtp-Source: AGHT+IEESzG3VVfUr+V2tlZMLX24fhQnfILgUOdT2U7nW9a+1aaVhjP18pme4W4rJEycSUXy9s+oJtXEdISl/naHD+M=
-X-Received: by 2002:a05:6902:1b8b:b0:e6b:75cd:a36b with SMTP id
- 3f1490d57ef6-e6b8391c052mr10436661276.11.1743429261379; Mon, 31 Mar 2025
- 06:54:21 -0700 (PDT)
+ bh=/1pLH+v9BB2PVyPKTZeNJdMLs9MBdUbL1AsPdTapCAA=;
+ b=U6WP1MsSkAqN6xJ6P7G7VcgKvgvZJQXo72DSWi8w3JD2Z+jvfLA+3kfrzWMg6fbcOr
+ je/bL4VSKYBexOCSu4/5UptUoOyEChxonowNGNr2OT30gGIOO7gmavVI7Vd5UInqneY4
+ RAn0fqG+iwkPxBlY+Tj0slbXUJuxaoCbppHouRFJvP2TBaLW09O/ncTvXH6zR7OYoA2x
+ GPY3Iz2UppT4ecWrpwDDjp5oiGDp4LlfpQ/G7ZVgJWPNuFRlEv0b/zn04SXDPYVEY9hO
+ 3n9XhmRxJST6Vas99qp7WiJHqjMJv+l7T6PAe3cxKO1aE3l9tCYv67mZZaytG1GUFR+l
+ JRxQ==
+X-Gm-Message-State: AOJu0YyuXBIKRzIx017OngJgC1epaKFK6GkLptTrml1qH6TTS2TLHHz8
+ PaJ2T7EIJiVria+PfDCcgnS2uqbRtuN9OrsWBU+C5Nhsr1iJ4u2F+7ErZkgeLyltGjAZgOqWcAN
+ mgfeeohrdlGyrpUZRr2ZUAxiZyYRROwkxLjTQuw==
+X-Gm-Gg: ASbGncsnd32OLM54YIQGp+IFfl8bknuhz60g1L0lt/YG8+4gLIkVscoYtGwS3PxFRAV
+ xeK5Ti6N4Zw2FFYn84UIoTFhoNZ3kBbnCUpG2UURppwRNC7cP3jJDrNyrnE5LP5r7LX4iMp/prc
+ G/J7/0pQpFwZM4XDpXOqtNGoYkvW+85PrdvIbgSvo=
+X-Google-Smtp-Source: AGHT+IESXuiGZ9l8yqLUDrRmZxBVmfD5mPVcReSXBVbty90tWEEfu++NlwRa/FqbOyWtp9iZiKNwuayI/PGqhKdVp/s=
+X-Received: by 2002:a17:90b:2750:b0:2f9:d0cd:3403 with SMTP id
+ 98e67ed59e1d1-305319f07admr14107553a91.16.1743430060637; Mon, 31 Mar 2025
+ 07:07:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250326-b4-qcom-capsule-update-improvements-v1-0-afe2e3696675@linaro.org>
- <20250326-b4-qcom-capsule-update-improvements-v1-3-afe2e3696675@linaro.org>
-In-Reply-To: <20250326-b4-qcom-capsule-update-improvements-v1-3-afe2e3696675@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 31 Mar 2025 16:53:45 +0300
-X-Gm-Features: AQ5f1JrIqVmjRdqSpn_64nrW4FOBxlt8TURrsGd3g0LNHmn3jv6cXM_yjR_xhWE
-Message-ID: <CAC_iWjJa-XXqzQsRszzDS6h2v4sGd+0rWr=1piOQrVp-9Ud90w@mail.gmail.com>
-Subject: Re: [PATCH 3/4] dfu: scsi: don't call scsi_scan()
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250327231318.2713201-1-raymond.mao@linaro.org>
+ <20250327231318.2713201-2-raymond.mao@linaro.org>
+ <20250328235135.GF93000@bill-the-cat>
+In-Reply-To: <20250328235135.GF93000@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 31 Mar 2025 10:07:29 -0400
+X-Gm-Features: AQ5f1JpWNYSpte784l1De51r4Z4YsrreaMG0s36W553XIN9UiE4GydK7rKv-DoE
+Message-ID: <CAEfUkU+ECBuGjGrNra0JXq71BtWGJ4uqMfDS9qxxaFrZ9qy9Rw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] env: point fdt address to the fdt in a bloblist
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ravi Minnikanti <rminnikanti@marvell.com>, Matthias Brugger <mbrugger@suse.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,41 +101,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Mar 2025 at 19:41, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+Hi Tom,
+
+On Fri, 28 Mar 2025 at 19:51, Tom Rini <trini@konsulko.com> wrote:
 >
-> Calling scsi_scan() results in all the block devices (and EFI block
-> devices) being destroyed and re-created. This breaks the EFI filesystem
-> drivers during capsule update.
+> On Thu, Mar 27, 2025 at 04:13:17PM -0700, Raymond Mao wrote:
 >
-> Remove the call, since boards really should be calling scsi_scan()
-> themselves during board_init().
+> > Point fdt_addr to the fdt embedded in the bloblist since fdt_addr
+> > is a default address for bootefi, bootm and booti to look for the
+> > device tree when launching the kernel.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> >  env/common.c | 17 +++++++++++++++++
+> >  1 file changed, 17 insertions(+)
+> >
+> > diff --git a/env/common.c b/env/common.c
+> > index a58955a4f42..a38e5d107a8 100644
+> > --- a/env/common.c
+> > +++ b/env/common.c
+> > @@ -16,6 +16,7 @@
+> >  #include <asm/global_data.h>
+> >  #include <linux/printk.h>
+> >  #include <linux/stddef.h>
+> > +#include <mapmem.h>
+> >  #include <search.h>
+> >  #include <errno.h>
+> >  #include <malloc.h>
+> > @@ -368,6 +369,18 @@ int env_get_default_into(const char *name, char *buf, unsigned int len)
+> >       return env_get_from_linear(default_environment, name, buf, len);
+> >  }
+> >
+> > +static int env_update_fdt_addr_from_bloblist(void)
+> > +{
+> > +     /*
+> > +      * fdt_addr is by default used by booti, bootm and bootefi,
+> > +      * thus set it to point to the fdt embedded in a bloblist if it exists.
+> > +      */
+> > +     if (!CONFIG_IS_ENABLED(BLOBLIST) || gd->fdt_src != FDTSRC_BLOBLIST)
+> > +             return 0;
+> > +
+> > +     return env_set_hex("fdt_addr", (uintptr_t)map_to_sysmem(gd->fdt_blob));
+> > +}
 >
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/dfu/dfu_scsi.c | 5 -----
->  1 file changed, 5 deletions(-)
+> This part is fine with me and makes enough sense, we can't do this
+> immediately so we need some check to know to do it later.
 >
-> diff --git a/drivers/dfu/dfu_scsi.c b/drivers/dfu/dfu_scsi.c
-> index 9f95194784c1de00458843276872b1d23d023444..a234548ae46dc2a6ae1ca5770accb58f43782239 100644
-> --- a/drivers/dfu/dfu_scsi.c
-> +++ b/drivers/dfu/dfu_scsi.c
-> @@ -341,13 +341,8 @@ int dfu_fill_entity_scsi(struct dfu_entity *dfu, char *devstr, char **argv, int
->                 if (*s)
->                         return -EINVAL;
->         }
+> >  void env_set_default(const char *s, int flags)
+> >  {
+> >       if (s) {
+> > @@ -392,6 +405,10 @@ void env_set_default(const char *s, int flags)
+> >
+> >       gd->flags |= GD_FLG_ENV_READY;
+> >       gd->flags |= GD_FLG_ENV_DEFAULT;
+> > +
+> > +     /* This has to be done after GD_FLG_ENV_READY is set */
+> > +     if (env_update_fdt_addr_from_bloblist())
+> > +             pr_err("Failed to set fdt_addr to point at DTB\n");
+> >  }
 >
-> -       if (scsi_scan(false)) {
-> -               pr_err("Couldn't init scsi device.\n");
-> -               return -ENODEV;
-> -       }
-> -
->         ret = find_scsi_device(dfu->data.scsi.lun, &scsi);
->         if (ret < 0) {
->                 pr_err("Couldn't find scsi device no. %d.\n", dfu->data.scsi.lun);
->                 return -ENODEV;
->
-> --
-> 2.49.0
+> I don't know this is the right spot. This won't work when for example
+> the environment is valid but stored in a file on FAT (or whatever) will
+> it?
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+I can add invoking 'env_update_fdt_addr_from_bloblist()' inside
+'env_import()'. It should work in all the cases then.
+
+Regards,
+Raymond
+
+> --
+> Tom
