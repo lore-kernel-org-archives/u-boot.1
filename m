@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D23EC36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 13:49:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78F51C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 13:53:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53FA282047;
-	Tue,  1 Apr 2025 15:49:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D6C8A81703;
+	Tue,  1 Apr 2025 15:53:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XtEfj+uH";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JX/iuNA/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4EED82040; Tue,  1 Apr 2025 15:49:05 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 418D282006; Tue,  1 Apr 2025 15:53:07 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 756B280584
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 15:49:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C69C681703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 15:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43cf680d351so37390455e9.0
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 06:49:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743515342; x=1744120142; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PHTboLpAQca7cdWYd36y115pCgMrEmQV9eillq/I8ec=;
- b=XtEfj+uHCzEjKvwlzdXh0GBDK6H9DgYL4tqDnPQj9a8T0g0Bii/XVmf7lviLjPskHF
- xKsIkLq7Ij9dmZBLqh6ijXzei19UkxnLt9BjxgqKsNjTn5m3jbS5zlmo7eDzjkKmYFqU
- LkWcoc8AgaS+rjNAL+gtmBk6atGMgFsYZ2SZdFJBIv0c7AjOjLJq6DPnGHBGkOkYaulH
- J/oMS0Nwa91dNeh/asw8/JVCneTttCUEMoYfam/4ve5jxcscvYt7WaOoLdwuKtW7VUfN
- fFref9YDwbl8k/vgPQ7Lkrjq9nOvHS++o0Bf6Za0jGwN2S104A43YJB4UPmA9L3Koulw
- Tg1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743515342; x=1744120142;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PHTboLpAQca7cdWYd36y115pCgMrEmQV9eillq/I8ec=;
- b=HlEpTrtFDNaEWb3NvArZZqTT6D4qnoZfPxs3u+ErJ3RnqL8rpDimt3Hi8D9fw4JARb
- N+i6X1tIGPxzvXcGfDd9ssS2UvwNfk198Vjd0iVl5eoLlUbwt4nudeA5SlWI3PudC7U6
- /QRXAZzwLqDfxgoowGhV6y3GPnj+lbn5C6OkGMm5MdFXUPseMnV60m/DAohxsQhTl6pS
- WdPHGvhzD1GHnempW/qDcCSb+fLJvnFeeTreEdz7WGeG+wHIVVEUsyVQ0bLmgW1fzedg
- 8URhde31M8+ZHxzGs1BwaxlsH2RzgkqgiQwaTBlBW2RTEzitJAS3RkKRZvwnB607rz4G
- ncsg==
-X-Gm-Message-State: AOJu0YxokT5RciaKNF65Y4runC4OTI0NakhiQJFXrrRIC/Y/aAPUQZdb
- JinV6aNoShdbP2h/jgIoCkgDAEPC98f6hAfXvgXu+rwA1QMWR3R+ax3MNmJqGuccDtzj8t3u77S
- 8cqqyCzN63be085rifVxJ79q6Wr4=
-X-Gm-Gg: ASbGncv29+LWuBpspwoZgEFrv6SiQLgxWNbXZ9GU5Nz/n7ryWZNcBt1viRhZOSGC/0x
- qvaA1fz8CqImBTZB4PUxAGTf5xsYfxXn9Ne854FKcV5gW4e6BxZ2XtYIBkO9AYiZi3XzYsnb3pk
- ln/wHpRUxLX1ZshcKiQ92+pI0t+rQ=
-X-Google-Smtp-Source: AGHT+IE8MlhR1upULTx2pEGBTgopb1y6+KlrM3P5XKDB8EoMEYgh08pmCSdZV3hWXyBft4xkzo+Pp9xSfXXGrorIFYI=
-X-Received: by 2002:a05:6000:18a2:b0:39c:dfa:e86c with SMTP id
- ffacd0b85a97d-39c27efc018mr35067f8f.13.1743515341684; Tue, 01 Apr 2025
- 06:49:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6186c34923=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 531BOqg1010654;
+ Tue, 1 Apr 2025 15:53:02 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ AZL++ezpP6X0dnmCJcAxNUXHHDZalEhQzHTpr83xg9E=; b=JX/iuNA/1qaqIVg6
+ hcAZ870JHVNNm9eJ/QfF1RRwvi73sXmxQ4oL/xPw1z2OxbKmHMcDeHBuEFV/J77U
+ O+lfvE6V35pyJ1IW3YOkGBnUKCV3EG7rbKw0GfzG3BxcOVfkUmfbmtiap5DtFP0M
+ 3fi8WtO0SuNGtraSIGmgJaHRSIRKC+2PNXhjeMPiUDr9IEwYOyEHGMD6Mt3HU8lS
+ 1M2QPT07upUVEQhKyg3PocPf80zup9FoVUl+X9ftZUS1ToBKKyUx+ddiVB1zR1Kd
+ mdp9GFzasiDsqggHbfR72YeFoGw20/n01EUMcN6IJtZ53nObCIp8R28P7NufKFoq
+ yNC5EA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45pua7u7wg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 01 Apr 2025 15:53:02 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id ADE68400AA;
+ Tue,  1 Apr 2025 15:51:41 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6A1468A8ED8;
+ Tue,  1 Apr 2025 15:51:41 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 1 Apr
+ 2025 15:51:41 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/6] configs: stm32f769-disco_spl: Fix console cmdline
+Date: Tue, 1 Apr 2025 15:51:27 +0200
+Message-ID: <20250401135132.395518-2-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250401135132.395518-1-patrice.chotard@foss.st.com>
+References: <20250401135132.395518-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-References: <20250330192656.1280403-1-arturkow2000@gmail.com>
- <20250330212638.v2.3.I45a1ec3470905b1a7313ef907a83999f1163bb3b@changeid>
- <CAPVz0n0fRLgc7aOCpjVVRaX=dPMB9D9UDyNck8gsCJTpfh1pBg@mail.gmail.com>
- <0709393f-51f7-43e9-91b0-18ef5a7c0866@gmail.com>
-In-Reply-To: <0709393f-51f7-43e9-91b0-18ef5a7c0866@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 1 Apr 2025 16:48:50 +0300
-X-Gm-Features: AQ5f1JqUZGY6B5TC9_3i-ZN_2jslUAwGRUgJrRYdgBzhT4Dbo3bjhEz30InQszY
-Message-ID: <CAPVz0n0umNySqe2QoRKknpktV-iRLF=xg4+vASaQApzMKqhY3w@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] tegra: allow to expose UART on microSD slot
-To: Artur Kowalski <arturkow2000@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Stephen Warren <swarren@nvidia.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Tom Warren <twarren@nvidia.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-01_05,2025-03-27_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,156 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 1 =D0=BA=D0=B2=D1=96=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 16:34=
- Artur Kowalski <arturkow2000@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
->
-> W dniu 31.03.2025 o 07:51, Svyatoslav Ryhel pisze:
-> > =D0=BD=D0=B4, 30 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 22:27 =
-Artur Kowalski <arturkow2000@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >> Tegra20 has mux allowing to repurpose microSD as UART on boards which
-> >> use sdmmc3 controller for microSD. Add TEGRA_UARTA_MICROSD to enable
-> >> this feature. It is currently supported on Transformer T20, support fo=
-r
-> >> other boards may require Device Tree changes.
-> >>
-> >> Update Transformer T20 DTS to select correct pinmux and stdout-path
-> >> based on TEGRA_UARTA_MICROSD.
-> >>
-> >> Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
-> >> ---
-> >>
-> >> Changes in v2:
-> >> - added TEGRA_UARTA_MICROSD Kconfig option
-> >> - removed .dtsi for enabling UART over microSD
-> >> - modified transformer DT to use UARTA and correct pinmux when
-> >>    TEGRA_UARTA_MICROSD is enabled; it is enough to flip a single
-> >>    switch to enable/disable UART over microSD
-> >>
-> >>   arch/arm/dts/tegra20-asus-transformer.dtsi | 24 ++++++++++++++++++++=
-++
-> >>   arch/arm/mach-tegra/tegra20/Kconfig        | 15 ++++++++++++++
-> >>   2 files changed, 39 insertions(+)
-> >>
-> >> diff --git a/arch/arm/dts/tegra20-asus-transformer.dtsi b/arch/arm/dts=
-/tegra20-asus-transformer.dtsi
-> >> index 49efabbfd92..9ea323c81f3 100644
-> >> --- a/arch/arm/dts/tegra20-asus-transformer.dtsi
-> >> +++ b/arch/arm/dts/tegra20-asus-transformer.dtsi
-> >> @@ -5,7 +5,13 @@
-> >>
-> >>   / {
-> >>          chosen {
-> >> +#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
-> >> +               stdout-path =3D &uarta;
-> >> +#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
-> >>                  stdout-path =3D &uartd;
-> >> +#else
-> >> +#error Unsupported UART
-> >> +#endif
-> >>          };
-> >>
-> >>          aliases {
-> >> @@ -195,10 +201,17 @@
-> >>                                  nvidia,function =3D "i2c1";
-> >>                          };
-> >>
-> >> +#if CONFIG_IS_ENABLED(TEGRA_UARTA_SDB_SDD)
-> >> +                       dbguart {
-> >> +                               nvidia,pins =3D "sdb", "sdd";
-> >> +                               nvidia,function =3D "uarta";
-> >> +                       };
-> >> +#else
-> >>                          sdb {
-> >>                                  nvidia,pins =3D "sdb", "sdc", "sdd", =
-"slxc", "slxk";
-> >>                                  nvidia,function =3D "sdio3";
-> >>                          };
-> >> +#endif
-> >>
-> >>                          sdio1 {
-> >>                                  nvidia,pins =3D "sdio1";
-> >> @@ -376,7 +389,13 @@
-> >>                  };
-> >>          };
-> >>
-> >> +#if CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTA)
-> >> +       uarta: serial@70006000 {
-> >> +#elif CONFIG_IS_ENABLED(TEGRA_ENABLE_UARTD)
-> >>          uartd: serial@70006300 {
-> >> +#else
-> >> +#error Unsupported UART
-> >> +#endif
-> >>                  status =3D "okay";
-> >>                  clock-frequency =3D <216000000>;
-> >>          };
-> >> @@ -434,7 +453,12 @@
-> >>          };
-> >>
-> >>          sdmmc3: sdhci@c8000400 {
-> >> +#if CONFIG_IS_ENABLED(TEGRA_UARTA_MICROSD)
-> >> +               /* Can't use both at the same time */
-> >> +               status =3D "disabled";
-> >> +#else
-> >>                  status =3D "okay";
-> >> +#endif
-> >>                  bus-width =3D <4>;
-> >>
-> >>                  cd-gpios =3D <&gpio TEGRA_GPIO(I, 5) GPIO_ACTIVE_LOW>=
-;
-> >> diff --git a/arch/arm/mach-tegra/tegra20/Kconfig b/arch/arm/mach-tegra=
-/tegra20/Kconfig
-> >> index 3349f1e2786..c2c51660216 100644
-> >> --- a/arch/arm/mach-tegra/tegra20/Kconfig
-> >> +++ b/arch/arm/mach-tegra/tegra20/Kconfig
-> >> @@ -77,6 +77,21 @@ endchoice
-> >>   config SYS_SOC
-> >>          default "tegra20"
-> >>
-> >> +config TEGRA_UARTA_MICROSD
-> >> +       bool "UARTA on MicroSD breakout board"
-> >> +       default n
-> >> +       depends on TEGRA_ENABLE_UARTA && TARGET_TRANSFORMER_T20
-> >> +       select TEGRA_UARTA_SDB_SDD
-> >> +       help
-> >> +         Repurpose the SD card slot for getting access to the UARTA s=
-erial
-> >> +         console. Primarily useful only for low level u-boot debuggin=
-g on
-> >> +         tablets, where normal UARTD is difficult to access and requi=
-res
-> >> +         device disassembly and/or soldering. Enabling this option ca=
-uses
-> >> +         UARTA TX to become exposed on SDD and RX on SDB pins which c=
-orrespond
-> >> +         to microSD CLK and CMD pins respectively. Currently this is =
-supported
-> >> +         only on Transformer T20, support for other platforms may req=
-uire DT
-> >> +         and configs (from include/configs/*) updates.
-> >> +
-> >>   source "board/nvidia/harmony/Kconfig"
-> >>   source "board/avionic-design/medcom-wide/Kconfig"
-> >>   source "board/compal/paz00/Kconfig"
-> >> --
-> >> 2.48.1
-> >>
-> > This is not applicable since this is a hack by nature, BUT if you
-> > contain this in the transformer t20 board and Kconfig (no dts
-> > changes), this may be applied.
-> Ok, then I'll drop DTS changes. I will add few words about this option
-> in Transformer documentation
-> and a note in Kconfig help to not surprise users with not booting U-Boot
-> as enabling this option without
-> changing DTS causes U-Boot to hang.
+The Linux cmdline encoded in the defconfig is wrong, the
+STM32 USART driver registers as ttySTM0 not ttyS0.
 
-You should remove then Kconfig option as well. Add a new chapter to
-Transformer T20 documentation which describes this method, here[1] you
-may find a similar approach but info is in the commit message of
-tegra30 uart-e funcmux. Additionally, as I have said previously, these
-changes can be contained in the transformer t20 board file by using
-some device tree manipulations from there.
-
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
-1 https://source.denx.de/u-boot/u-boot/-/commit/b515d7ae0de51a26f73b2ddb5ea=
-4db0d95b67d7a
+
+ configs/stm32f769-disco_spl_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
+index 6a3cdd4a0e4..8a20c6af8f8 100644
+--- a/configs/stm32f769-disco_spl_defconfig
++++ b/configs/stm32f769-disco_spl_defconfig
+@@ -27,7 +27,7 @@ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
+ CONFIG_AUTOBOOT_STOP_STR=" "
+ CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
++CONFIG_BOOTARGS="console=ttySTM0,115200 earlyprintk consoleblank=0 ignore_loglevel"
+ CONFIG_DEFAULT_FDT_FILE="stm32f769-disco"
+ CONFIG_SYS_PBSIZE=1050
+ # CONFIG_DISPLAY_CPUINFO is not set
+-- 
+2.25.1
+
