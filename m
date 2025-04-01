@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0402C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D41C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:17:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2593981EDD;
-	Tue,  1 Apr 2025 04:16:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71A0481F44;
+	Tue,  1 Apr 2025 04:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I4XUvWWF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k/o0d2OL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ED9A81EDD; Tue,  1 Apr 2025 04:16:41 +0200 (CEST)
+ id CF4E081F44; Tue,  1 Apr 2025 04:16:42 +0200 (CEST)
 Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
  [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D676817C4
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55CCC80584
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72c16e658f4so1468589a34.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:39 -0700 (PDT)
+ 46e09a7af769-72c1818c394so3002376a34.2
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743473798; x=1744078598; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743473799; x=1744078599; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QCsj5Pwiu2rgD/vgA5gkANbzEYDMfLM5ecdSe3HGE24=;
- b=I4XUvWWFQdRI/nQWda3zk1cnnECdMzWE01qFIOVEg1HkY17jY9sfNTEdNrBOT3DHtC
- O8pB6L9gwN4asP7JtVcS1p2NUvz+Ea4HfgX3ltkPZhU2p1D3kRFBtYpPXduvINKqHVcG
- MjJqpmYtdcF8+loajvJB8ItKOQO/yfKEpGUbQ=
+ bh=9+3tqpOpC7K7xNuNwiv6iOd4GBp7fwCiOXUig38lNKo=;
+ b=k/o0d2OLjynFDJAwuJG9DjekQdvAmu3+F9dkZtqahUrOA9NQqZsiuXNO2M7K1mA1+D
+ lbu/MkuPDoHz/8ZUUZik/QAM6MyYI1h2HmYa21wwdgqQJYl8d9A7/UQfHVT/zfb3UMfc
+ 4q0ffPsUUeMCHrj2q/y5mMJfS4NB2ymQozMCI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743473798; x=1744078598;
+ d=1e100.net; s=20230601; t=1743473799; x=1744078599;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QCsj5Pwiu2rgD/vgA5gkANbzEYDMfLM5ecdSe3HGE24=;
- b=qCOBcUUmfVSAB5pKsDeyEJADdJffM5AB5RjfWHvACDGQKMMVgB1zjoxEmPACnNnctk
- TWiVXSc9RSH0xs4cjxO54BnuLufMsNxQcuytEnA+wUU1X1mgiPQw0kSPG+8IkwYWP0Iz
- jeaaPpXqTtxEmxWxpyhqBqb8UtFfLs70EGUsxxjpoxDzbI/R2XkfJwGxf1EXZZtbybaX
- nwQDZaxHi9rMjfYWzLSIQqzYedsRtCv4p3fw8UsT/ghV6qOoDZ0fL34PKliwN1NZhnhr
- ceicsT/4l2q3MDK8RdDJ+NFDJY2BGnp67zPYlYlUtHLB4wMxPH2gXZTQyCxz1m5j84x4
- Bytg==
-X-Gm-Message-State: AOJu0YyJt+IS3tX0afJalvzmN5b6EIchnoqGGderoPXBn6m1fjTFkmnS
- OiVGPV28Ph4A4zw8UnBGxFaqVNnT4mXc4Qxf7pzg318DtNxxqwxAENqa3J4XYInjlw3yVuS+PsZ
- V
-X-Gm-Gg: ASbGncvTIlzLFofPahAOyaXANnrwKSfBmPnmtTz5Zg8w7IPPrxZnmSFrMKf3Zx0pe6U
- GPCCSbxfiQCA20abcrcyonR2lzb8LgVWCG/Mc23aYDwFG36z4arGFFAy/QCupzpfX8xznnGo85E
- gk0KTMeIwtF1IBu+/Mx+7MRDxRUV+Vxyk4YudnOagYcO0iS/ooB3Yri4kCCwizOwvNiSsB14eql
- XnbwcBDZ7L0GcgddNG0dbEe2UrIIjITuCY3832skqJy9WN/qCPiuZb7znPubXxNSoEin4IVpa/F
- nfQUBpijVHNS4B8e7KRCv/AGRcUtrSNRVB3EsCl3njI065Df1Nzx4VzWVRl4LH5SZssD6R5mrU3
- LxLS5
-X-Google-Smtp-Source: AGHT+IHoi8gHDpSawEjas2IG3MOvTn5Iu2aLWv3R1xMQ8ocTAfmWmGqwnKD7E4pd3mFN4EdG8OuErg==
-X-Received: by 2002:a05:6830:3499:b0:72b:81cd:e123 with SMTP id
- 46e09a7af769-72c637bead3mr5434603a34.16.1743473797665; 
- Mon, 31 Mar 2025 19:16:37 -0700 (PDT)
+ bh=9+3tqpOpC7K7xNuNwiv6iOd4GBp7fwCiOXUig38lNKo=;
+ b=POjtZN41tqOXgOs6eN9wnU9iFHKdWw7g7lbnuhTjXfMnqTC7YwLw3U3GGgUr3/bayz
+ SnNzeIN5AOL8iiFV+3fmVYtYyryxbZM8MYl8iHOEbdrYcb1fzZ39i4MWr85fOEzumGxl
+ 9/jk5xj6aKZhRFvYqyXglIwZLsdp8tfonnF+SN9WUstxObKLB65UsVPaiKYNpJ74jCfc
+ GSB5AgGgFtjUGFHRuVhOE7zy6BZkKc4pGiZI9beKUmddYWVKqziJd+s/RQsZIPtaa+48
+ BDm206GXVBy/lbnv/NZSP7hY4TJjkLEXVp2CM0Bk7Cr6skWsFOVhKA2QZ97GAwQbCiIk
+ cftQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXKfJIQaFMWzI+FVR3mmDCfcqNajuXXlCmLy4XJSOBi4r18Yj8BCzYeNosrcS+asAIFCFeZmdo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzb2KHZYtIlfJ/3WCU3ZFkhF/nrMTw5K1RULDocmQBLa6d5FT1e
+ 9h8ZpALCswT3kydvxEaVwnOgKiwYKS5McfttbG8CcUJIJiQN14ihZJhYeWIM0s4=
+X-Gm-Gg: ASbGncuINSikwy7ZJN6GN+tqIRXMtsh7a59eEQPz/kjZfmV0YHrP8RBmhgaHR8Y1mRG
+ 0OlC2HrSSw26iVbJs7HGf52isueZqUr2opU9YabawoFwcQUXg3WBHGLWwNh8hGBfywn59x52S9P
+ iKthghBIsA9AnT/f9hxqXx2IjvXwTQFPeiepxt/tBD35OilXPdExxNXBghyS0twMESVIKAO1DAw
+ ZqubE7IT0znjnm+yV2iLCzrXkx5AV+X/+j+xzA8uWrlG2SmZWOfh+yzk4O+zG+IfWoMkV+e6eVk
+ 15iTgskqnVdZLfmtX5GQ6y+oEHRDmT3dzkDqnPbHiYRlLiP5OuXigvI6Aj/mV/aRW5fK03f9x+4
+ xrKnr
+X-Google-Smtp-Source: AGHT+IGCS9rOulTjmDg/K+fc5cUOI7r0Sox+juXso0ojQM5yJGIxeMgFhsYM0c6qbh2ceCXHz4/e6w==
+X-Received: by 2002:a05:6830:f87:b0:72b:8ec6:e533 with SMTP id
+ 46e09a7af769-72c63793972mr6706118a34.7.1743473798967; 
+ Mon, 31 Mar 2025 19:16:38 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.36
+ 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 19:16:36 -0700 (PDT)
+ Mon, 31 Mar 2025 19:16:38 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>, 
- Sukrut Bellary <sbellary@baylibre.com>
-Cc: Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>, 
- Andrew Davis <afd@ti.com>
-In-Reply-To: <20250312065709.1434207-1-sbellary@baylibre.com>
-References: <20250312065709.1434207-1-sbellary@baylibre.com>
-Subject: Re: [PATCH] video: ti: am335x: Fix tilcdc clock names.
-Message-Id: <174347379638.47384.728841134785436400.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 20:16:36 -0600
+To: vigneshr@ti.com, u-boot@lists.denx.de, Udit Kumar <u-kumar1@ti.com>
+Cc: n-francis@ti.com, afd@ti.com, nm@ti.com, a-limaye@ti.com
+In-Reply-To: <20250314110411.2781732-1-u-kumar1@ti.com>
+References: <20250314110411.2781732-1-u-kumar1@ti.com>
+Subject: Re: [PATCH 0/2] Add WDT support for J7200 SOC
+Message-Id: <174347379788.47384.10318161994846491636.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 20:16:37 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +97,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Mar 2025 23:57:09 -0700, Sukrut Bellary wrote:
+On Fri, 14 Mar 2025 16:34:09 +0530, Udit Kumar wrote:
 
-> The commit 211b3d726378 ("arm: dts: am3x: Non-functional changes sync
-> with v6.3-rc6") changed the tilcdc clock names.
-> Fix the tilcdc driver to use the new clock names.
+> This enables the ESMs and the associated PMIC.
+> Programming these bits is a requirement to make the watchdog actually reset the board.
 > 
+> After DT sync nodes bucka1 and main_esm has bootph property added in
+> pmic nodes.
 > 
+> RFC was sent
+> https://lore.kernel.org/all/20241126063543.2678052-1-u-kumar1@ti.com/
+> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] video: ti: am335x: Fix tilcdc clock names.
-      commit: b565d7f20193113e01628ef8033103694be4dd46
+[1/2] arm: dts: k3-j7200: Add ESM PMIC support for tps659413
+      commit: 940f2a04f335e17919112402f748d06f2303ad09
+[2/2] configs: j7200_evm_r5: Add ESM related configs for J7200
+      commit: dbe3ea4274b005e05cf1ddaf1d6406e0e452720f
 -- 
 Tom
 
