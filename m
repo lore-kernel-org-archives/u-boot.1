@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA89C36014
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 12:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DDCC36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 12:33:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3D168210A;
-	Tue,  1 Apr 2025 14:32:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 172DE82115;
+	Tue,  1 Apr 2025 14:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="K6pdr3v9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TH3P8A3C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 299F882047; Tue,  1 Apr 2025 12:10:59 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 3750882047; Tue,  1 Apr 2025 12:11:39 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85A6D8006D
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 12:10:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A7048006D
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 12:11:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A00DCA44601;
- Tue,  1 Apr 2025 10:05:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E363C4CEE4;
- Tue,  1 Apr 2025 10:10:54 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0DF665C05E2;
+ Tue,  1 Apr 2025 10:09:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20E9AC4CEE4;
+ Tue,  1 Apr 2025 10:11:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743502255;
- bh=t+fYL2vHnrFdz9VnQaC1DQUO07mQWbHGohW7GtWgil4=;
+ s=k20201202; t=1743502295;
+ bh=LBbqzdSQNFqc3+hb0zmU6d5V/m8e/ekxeuwxZRk3pKU=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=K6pdr3v9oLSNWfThylQu3EwPBL4iLQHkjM67o0GUmGxp2TsUGmOpYncb2W6oOdgT5
- KUrDskg8yv+ST5TC1KpewptzdS6/0OlDh1KGswh98s/7OAJyLWiU8Ks2U6aqTibpp3
- hZ1U9KSVnqN7dAVDtvD9rjrZGaifgCmanKS0xhsy/NL17Y/ichtE9Fq6sx67Av5rtE
- KuhgBhndHbQg82a5WixhY2tj+bHhcLiU5FUCjAgYjBjmALSXZ/dZIw5DvuGwRAFoC2
- 0heMOkykFfndNpnuBvo8QNE4GFR8NVfsVTbBqqS31hKbWozzupOBEdMTjflFGjuN+u
- EcX4NlDAttTQA==
+ b=TH3P8A3CNc0ZxMneOD6HPu63++2vH/xUqxlg4HP/tAHUVFwh1aoVmAJWsBDyz60ty
+ AkvwNvfdVadFUV24PLX1kGE0B3pkqE8nI1L6DrUW9wsYMQUGvbzOILLdHDGnoWgwoC
+ T/6vViNK+04zFmV2WtjX+LmKOMOR5Dd8DZ6nd22VJvzM0B3bb9ifWWmtTpTo4QqSDZ
+ BRbJTTw6wkRFCovuxbLwrRBa2ereMKBmgom5T00Wlx2R8wSdXujRpHaJb6n9uyV022
+ 4x3DVomX+R+cnsQPG1N+HLKO2X9xIxFRKweMmNiDNSq66kuiNfSXSCdfA3crYRXLGz
+ i9tGDvUjLaLew==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Zixun LI <admin@hifiphile.com>, Eugen Hristev
  <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/3] ARM: dts: sam9x60: Add USB gadget DT node.
-In-Reply-To: <20250331162611.1557759-3-admin@hifiphile.com>
+Subject: Re: [PATCH v2 3/3] ARM: dts: at91: sam9x60-curiosity: Enable USB
+ gadget node
+In-Reply-To: <20250331162611.1557759-4-admin@hifiphile.com>
 References: <20250331162611.1557759-1-admin@hifiphile.com>
- <20250331162611.1557759-3-admin@hifiphile.com>
-Date: Tue, 01 Apr 2025 12:10:51 +0200
-Message-ID: <87v7ronqdw.fsf@baylibre.com>
+ <20250331162611.1557759-4-admin@hifiphile.com>
+Date: Tue, 01 Apr 2025 12:11:32 +0200
+Message-ID: <87semsnqcr.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Mailman-Approved-At: Tue, 01 Apr 2025 14:32:32 +0200
@@ -75,48 +77,30 @@ Thank you for the patch.
 
 On lun., mars 31, 2025 at 18:26, Zixun LI <admin@hifiphile.com> wrote:
 
-> Add the USB gadget DT node for the sam9x60 SoC's.
+> Enable USB gadget usb0 node support.
 >
 > Signed-off-by: Zixun LI <admin@hifiphile.com>
-
-Nitpick: title (subject) should not finish with a period (.)
-
-This can be fixed up by the maintainer that will apply the patches.
-
-Eugen, This is assigned to me on patchwork:
-https://patchwork.ozlabs.org/project/uboot/list/?series=450655
-
-Can I pick up all 3 patches or do you prefer to pick up [2/3] and [3/3] ?
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  arch/arm/dts/sam9x60.dtsi | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
+>  arch/arm/dts/at91-sam9x60_curiosity.dts | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
-> index 3b684fc63d5..ea2647e5fc9 100644
-> --- a/arch/arm/dts/sam9x60.dtsi
-> +++ b/arch/arm/dts/sam9x60.dtsi
-> @@ -69,6 +69,19 @@
->  		#size-cells = <1>;
->  		ranges;
+> diff --git a/arch/arm/dts/at91-sam9x60_curiosity.dts b/arch/arm/dts/at91-sam9x60_curiosity.dts
+> index 99867d2bf8e..08480df88c6 100644
+> --- a/arch/arm/dts/at91-sam9x60_curiosity.dts
+> +++ b/arch/arm/dts/at91-sam9x60_curiosity.dts
+> @@ -248,6 +248,10 @@
+>  	};
+>  };
 >  
-> +		usb0: gadget@500000 {
-> +			#address-cells = <1>;
-> +			#size-cells = <0>;
-> +			compatible = "microchip,sam9x60-udc";
-> +			reg = <0x500000 0x100000>,
-> +				<0xf803c000 0x400>;
-> +			clocks = <&pmc PMC_TYPE_PERIPHERAL 23>, <&pmc PMC_TYPE_CORE 8>;
-> +			clock-names = "pclk", "hclk";
-> +			assigned-clocks = <&pmc PMC_TYPE_CORE 8>;
-> +			assigned-clock-rates = <480000000>;
-> +			status = "disabled";
-> +		};
+> +&usb0 {
+> +	status = "okay";
+> +};
 > +
->  		usb1: usb@600000 {
->  			compatible = "atmel,at91rm9200-ohci", "usb-ohci";
->  			reg = <0x00600000 0x100000>;
+>  &usb1 {
+>  	num-ports = <3>;
+>  	atmel,vbus-gpio = <0
 > -- 
 > 2.49.0
