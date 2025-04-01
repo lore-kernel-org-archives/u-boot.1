@@ -4,90 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE3DC36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40A47C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:55:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DDC681703;
-	Tue,  1 Apr 2025 19:55:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE65481E6C;
+	Tue,  1 Apr 2025 19:55:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QPZRSxXY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bzrCgAoD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF61A81F0D; Tue,  1 Apr 2025 19:55:17 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 8C90081E6C; Tue,  1 Apr 2025 19:55:31 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D0B981703
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:55:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B85381F28
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:55:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac41514a734so978110866b.2
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:55:15 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so976941666b.3
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:55:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743530115; x=1744134915; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743530128; x=1744134928; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IosuPiF0IZomvbSE771O3Kzqq6UvHkM3Ok8U8q+OLnc=;
- b=QPZRSxXYzLPR85zK3Cyptwczb7XWlaPwj5lIFv8jTx9pzTBmOMgmWTJsXPv8QIrvAy
- PSPQLCSt5pTA/IxuMvcXqax4+efPO5BgylbNmcP7NR/bPsnG0mTW9xLYah7hYgK0SaDo
- mOQz1RQy0BuzFypCcnAUzCpYliP2ScAcZRWyY=
+ bh=zq18UYnUePpP6LBKLHQOkOfkIonjrWB3/3WJRNXUczM=;
+ b=bzrCgAoDA2yLt9UeS6DBoWAY6SnjK0mA/xsTkOFwKKJlG80paT25tfq/qfjCaiFxqc
+ 7BUJKam4Puhb7pfsdDD0O+wDLFQ1KC4DjpRMqdBTr5EJeXapjpqkU5V5xTc2NNy3tSUe
+ noTLA/UARYjD3s61NHDU+kFffS/9LH9ueRRjo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743530115; x=1744134915;
+ d=1e100.net; s=20230601; t=1743530128; x=1744134928;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IosuPiF0IZomvbSE771O3Kzqq6UvHkM3Ok8U8q+OLnc=;
- b=IJsIljauYowamOgWjFmKfHL4uo7DKtjSXA5GFXi+2XJfHbhDJJ/36aJhPeKVh7wXSl
- eTR03ByUo3pub8ENOGYsKJz8k0XA8GAaJUU8qiC4mFNOkjM8z8Aq1OqRSgndpa+WHhl+
- hMiBv8HfTXdCQoPwRiPD+FDatAa1WQlsuHNLrRJgOQrFCQDXsT5SaJuF4jdxpEEkDqtG
- pM5EhhskUy0Ua+7ZSXr5ijR5TksOIFIKLaQ7LXsJU3N/Ybz67892G7X+hp3We/kBgvBK
- PRFp08Jlt05ffeM0eoE/HmvwKKcEahhcEuVVtN21ku4Bd3O77qSzWqVe5ounWMGc1hyn
- Kilg==
-X-Gm-Message-State: AOJu0YxfB4WhymSzvuDpLw6QljYpwC7OE1vXxTd78zVxSx/bxdWQVrwg
- kmvTfwSqiVOCFt2j4H21YEtPzGu8/Gb+qCuVfaEwy5g2Bj1gSonRYVoP551S8rs7TjCQ6ZjmKww
- PdesDGMEnfvOdLXGwzqn5glQBXB8yFzNUwyfS
-X-Gm-Gg: ASbGncsNgAreKv8oTPtdBZlraNg3vtm08SNynSoi7LWqDnR9tmGUHw7/GH2hXGp7vdC
- /4DxmWPyBLapTinvhrkn+TSVEoxGwDmYyAEFn6u7svXXJ5iEkOgCGEWHf6Mw2LYOdfo1v5Tyukz
- UG3TxZeNyrJJBRV9LAuC3zv5QgQMru
-X-Google-Smtp-Source: AGHT+IGj44/rJkhiCCAjwWOdg3qvTkLN5osXv7vPZBQMNQ/QEUNoNIiROPolj5BbGk6eWQrIq7mok0qjUHZqGOoThl4=
-X-Received: by 2002:a17:907:869e:b0:ac1:ea6e:ad64 with SMTP id
- a640c23a62f3a-ac738a3f376mr1473883266b.28.1743530114728; Tue, 01 Apr 2025
- 10:55:14 -0700 (PDT)
+ bh=zq18UYnUePpP6LBKLHQOkOfkIonjrWB3/3WJRNXUczM=;
+ b=o87t7OxJ34C0G1VAdkWn60o+BDIDCMvKAANrxMkeSOvFfMWjQDNmWEwzi5AyuvpuUH
+ CrFN5cLuVJ6JhdKs1XkgSlt2vaWTN68caJs3egXVNz947M/ZyX7vq2zUGX4d/PSNkQdv
+ DU4f88zRhliBeWi4VazA+jMtEJprWMQuFoioOdP590nzhd9hv59gLt1j4k/OtEOFvkXX
+ Qn2Gkhkh2ZU3r4TJ9y5YdCIqLqlWZvV7nLjZov+lE0iZCACGS+Jx8J8wBjZx2yvvisIH
+ ZW1QjNiAhrof35/9qAiOQKAazljvUKrRDJO0aD9FPQQWv5udx80NL/bTDuh8atsuNxnz
+ TtrA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVQMyWcqnAVQCtfb8PeDlSd89Mw+cj/fTM5dLjzPMO4iLHzvE9ixy//k0LP+kel9PsYDU151W0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjHJlbnZenMg1ZNYag6Y1wQQcg/or4ylxqv+MtDvYfa0Z1i0Js
+ qey7LlW519Xu8GsA+Goo4wzCsc6e+mUCvAHAuEx/2NC4zpGU1VwN6wwdv6wy0AGsffPwPjSIffO
+ GtKYoy17AUGI/fm91bQLuHW3VyCeo29kN52fc
+X-Gm-Gg: ASbGncuATn5nsahEwXoxQtJ8QL1KfAxeIEQhZTJcXARVvx0btZS6n3KyM8PypnZeZO/
+ dqwXBr/nC4N40pfxVwdRiLhsuZVfoQxfJUsCrAAKZvyVGCpBehCwEUvV3AlE0E3+Pb8fDhKSpCt
+ Mhm13bwfxeYpda0WI1DJPmi6rGUlyk
+X-Google-Smtp-Source: AGHT+IFLThxttMwJl8FaCdFl5/w9v0ZUW2i4I7Ou5Qwi0wJ0Xibk6akRsbh8P6RXM0aC4ALSETrQc8I/ngRhut83Gmo=
+X-Received: by 2002:a17:906:26c3:b0:ac7:75b0:67d9 with SMTP id
+ a640c23a62f3a-ac775b0682dmr598216566b.4.1743530128544; Tue, 01 Apr 2025
+ 10:55:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250319143820.2385092-1-sjg@chromium.org>
- <20250319143820.2385092-10-sjg@chromium.org>
- <20250319145218.GG2640854@bill-the-cat>
- <CAFLszTiRm3YEQqU1w75uFp5gFZ1HiPv41vNX7VFy8XS80udVRw@mail.gmail.com>
- <20250319153510.GJ2640854@bill-the-cat>
- <CAFLszTg8a7CCiyyVVQdHDHNJ3MEP-Zxbbao_riy+iTzDt2u-KA@mail.gmail.com>
- <20250330144542.GQ93000@bill-the-cat>
- <CAFLszTiRXB+DpXOgyHiNCF9HoitzYW0EO9fyS2cKKCP8cQaR4A@mail.gmail.com>
- <20250401164856.GH5495@bill-the-cat>
-In-Reply-To: <20250401164856.GH5495@bill-the-cat>
+References: <20250314215525.579655-1-jerome.forissier@linaro.org>
+ <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
+ <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
+ <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
+In-Reply-To: <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 2 Apr 2025 06:55:02 +1300
-X-Gm-Features: AQ5f1Jpc5zCVCZmE3qarWrdxsUuOcn3m52fx-LLmveBZ6k06zsWAESvdUQovYv4
-Message-ID: <CAFLszTiL2=RVf9u96E=0=JKraaeKwFiTf+W1De3bQvFCCnwdGw@mail.gmail.com>
-Subject: Re: [PATCH 09/17] test/py: Add a test image for Ubuntu
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Julius Lehmann <lehmanju@devpi.de>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 2 Apr 2025 06:55:16 +1300
+X-Gm-Features: AQ5f1JpTKpaIJgvYwihyNDIoi_kXaj34mc6k-t8C-vgP_1EH7tUYTLRw_8i3aKw
+Message-ID: <CAFLszThH3a7pLJG+zppu2qr5RwXAOk9Sj+S+RAT0B758hzOsyQ@mail.gmail.com>
+Subject: Re: [PATCH 00/12] lwIP sandbox tests
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,102 +90,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Wed, 2 Apr 2025 at 05:49, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 2 Apr 2025 at 05:33, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, Apr 02, 2025 at 04:49:18AM +1300, Simon Glass wrote:
-> > Hi Tom,
+> Hi Simon
+>
+> On Tue, 1 Apr 2025 at 18:42, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Mon, 31 Mar 2025 at 03:45, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Mar 20, 2025 at 03:41:33AM +0000, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 19 Mar 2025 at 16:35, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Mar 19, 2025 at 03:04:28PM +0000, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 19 Mar 2025 at 15:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Mar 19, 2025 at 03:38:03PM +0100, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > Add an extlinux image that contains a few Ubuntu entries.
-> > > > > > > >
-> > > > > > > > Increase the number of sandbox-USB-hub ports to permit this.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > >
-> > > > > > > I don't understand what this test adds. In neither the current Fedora
-> > > > > > > test nor in this new test are we actually booting something, we're just
-> > > > > > > taking a sample extlinux.conf and making sure it doesn't fail. Is it
-> > > > > > > that we're testing in a useful fashion now having two labels?
-> > > > > >
-> > > > > > I didn't think so either, which is why I never did this before. But it
-> > > > > > turns out that there were some bugs, too.
-> > > > >
-> > > > > I don't understand you, sorry. You don't think so either to what?
-> > > >
-> > > > I didn't think we needed two extlinux examples on different boot
-> > > > devices, but we do.
-> > >
-> > > I'm not sure it's particularly clear what you're doing here then, or
-> > > why, but I'll find some time to read it all more deeply.
+> > Hi Jerome,
 > >
-> > OK. This test case is how I found the bugs/problems in bootstd that
-> > are fixed in this series.
->
-> It should be (a) better explained and likely (b) instead of dropping in
-> a seemingly verbatim installed file a specially crafted bit of content.
-> We aren't testing "Ubuntu". We are testing multiple labels.
->
-> > > > > > > We should probably be clear about what we're doing in the tests and
-> > > > > > > instead of adding seemingly arbitrary distributions add an extlinux test
-> > > > > > > and testcases.
-> > > > > >
-> > > > > > This is not actually a test case. It is simply creating a new image.
-> > > > > > The test cases are in the other patches, so please take a look there.
-> > > > >
-> > > > > Nothing in this series quickly reads as adding tests and fixing problems
-> > > > > with extlinux parsing, it's all bootmeth stuff?
-> > > >
-> > > > It isn't about the actual parsing of the .conf file, although I would
-> > > > like to add tests there as we have none apart from what I have added
-> > > > in my PXE series. It's more about having multiple devices with
-> > > > bootable OSes on them. This series tidies up and fixes this. We need
-> > > > to have an image available on more than one device to spot these
-> > > > problems.
+> > On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
 > > >
-> > > And the existing tests for pxelinux that we have in mainline already,
-> > > don't forget those.
-> >
-> > Yes. But those tests actually don't use bootstd, do they?
->
-> No, they're testing pxelinux, the thing you said we don't have any tests
-> for.
->
-> > > > Currently we have two accessible to sandbox, one extlinux and one
-> > > > EFI*. I decided to add a third, using extlinux.
-> > > >
-> > > > Again, this is not a test case, but provides an image for the test
-> > > > cases in this series.
+> > > Hi Simon,
 > > >
-> > > Adding mocked up things for use in sandbox is adding test cases.
+> > > Any feedback on this series?
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/list/?series=448553
 > >
-> > One is a test image for use by tests; the other is a test. Perhaps you
-> > are just saying that there is no point in having one without the
-> > other? Otherwise, I'm not sure what to do with this feedback.
+> > No, not from me, but thanks for doing it!
 >
-> Maybe I clarified better above now. You're not testing Ubuntu (or Fedora
-> or Armbian or ...) you're seeing if various pxelinux files parse
-> correctly. Making the tests be clearer about what's being tested is
-> what's missing at least in part.
+> Aren't you maintaining the sandbox drivers?
 
-You want me to remove the word 'Ubuntu' from the test files? This is
-what I get when I install u-boot-tools so I am trying to use that,
-rather than invent my own thing. This is the same approach I've taken
-with Fedora and Armbian and I think it makes the most sense.
+Yes, I'm listed as maintainer for lots of things. What sort of
+feedback are you looking for?
 
-Regards,
+Regards.
+
 Simon
