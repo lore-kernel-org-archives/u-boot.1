@@ -4,84 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E93A6C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:17:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA0CC36008
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 04:09:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A888A81F0D;
-	Tue,  1 Apr 2025 04:16:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 25A448171B;
+	Tue,  1 Apr 2025 06:09:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cfxQRCh4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dvoz5gN4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C58980584; Tue,  1 Apr 2025 04:16:45 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E03580584
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:43 +0200 (CEST)
+ id 09190817C4; Tue,  1 Apr 2025 06:09:07 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F3D680FDA
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 06:09:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-72bbead793dso3817659a34.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743473802; x=1744078602; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kHsOGuo/y2X7tDLgqeo2HFgtXO2ltDDUAGY5i0n0CNQ=;
- b=cfxQRCh4XyjmfHwqjet73HG5VV4gbsJTUohbayQsWAHFqD44MprRsYtFBGNXCwFH9L
- dp03mhrEVgoyCkfTfbbzp2+loGGhWV3P2IbrVZ8A+VleGszg2vjQOHlmpCayPcecwpDF
- j6JR2GgwnmtV26NktuA/WEO2Qxj1PvtZ7fYfg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743473802; x=1744078602;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kHsOGuo/y2X7tDLgqeo2HFgtXO2ltDDUAGY5i0n0CNQ=;
- b=uqqnqi1f9B5eoJ9siqwJYKEwLmfGCcSFYUYOK6TIdeRDlS9ZMAIjpPeAhgds8q7ArL
- bkR8p6W6gv0pzPaGHjFR8sB6p8ZWp41CHBKs2nJIL953C0wsQsddnoCzYvHYlkB1veDr
- M04L6UHzgyU56kUWhZPK3hgztUyKBqlLRdSDw2wJ8pTNdZJbcXMYBONRfyvRb3Z44og4
- ORW4SfBt4RlVnFTzjkSgEI66Ygei2LgIx3KxUP4w8SWpkMQlMYjme+UCwSng2sq/sBm6
- 8jtiRAw3nNazYm8GlkS1zLsTZZgj0KEeanY3TVHVYQTDBwIeBa2gJI7fGxeLkesPGo7Y
- Arwg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPHkQfVDwDMI5pYHhJ1ctPPE0GNhYSKg9fqxS+Sw5M8/0q8e/E86Je8eg8UiEurJrlzA60RpQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/ZNmmQQULyPg1tYKM9eBep/544R/7FCRU69ndBsTiimrxWuue
- EkSLFaZ+8x6DQKwLFuC5k7JHyHtqShf/BTtoHaVozxxlXp4AnxcXlLB2OnWrZEU=
-X-Gm-Gg: ASbGnctiitcd4OHAFYDByKLT5KlgkIZRXujuAHO+w4DDdkIZ+2TA6VcoKUCZT56xXd/
- LvxckDR/BQHVr84ETHNhRWkdiYmV/YPv8Kgnx25jyiom6v1+dzMih4+4sh1OyWzz44i5+/kvuMe
- /gOwvDzPtcnT4GCDpriB+MqKnJIQaPahT6RbTgCnkKRgpme0LsoHPNgWtely0nbMo/WmSMy6sA1
- QWU3GLrzwxdBvs8mpGkf1SakH5t3vgaYzFnamsQDRGuxMwaHR3/r7nsX4UHf4wIIri6ecVVF43t
- A1PZFQYq/0M9UvC4DX2rDMint2dus/CrqOxcA8u+QJEnkDPKO0NPyq2De8Sf+/GqfU1DxuIM90Y
- LAcbC
-X-Google-Smtp-Source: AGHT+IHqcPhwebwS8VVHdIITBOKiJY38jT1t2lajuJtbvJK48AXo2/6RDmh7lUGH4hEfyczSD8LSSw==
-X-Received: by 2002:a05:6830:2808:b0:72b:9dc8:7f30 with SMTP id
- 46e09a7af769-72c6382d179mr7488092a34.20.1743473802105; 
- Mon, 31 Mar 2025 19:16:42 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 19:16:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: vigneshr@ti.com, Udit Kumar <u-kumar1@ti.com>
-Cc: n-francis@ti.com, u-boot@lists.denx.de, nm@ti.com, m-chawdhry@ti.com, 
- j-keerthy@ti.com, m-shah@ti.com, a-limaye@ti.com
-In-Reply-To: <20250318184628.3309548-1-u-kumar1@ti.com>
-References: <20250318184628.3309548-1-u-kumar1@ti.com>
-Subject: Re: [PATCH v2] configs: am68_sk_r5: Enable AVS config
-Message-Id: <174347380077.47384.1079392171958740238.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 20:16:40 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 531491GG3500113
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Mon, 31 Mar 2025 23:09:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1743480541;
+ bh=aZoZ1juJXECzez3Gp5UOuAiLCZUEPJhsOCMFGghESS4=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=dvoz5gN43YmEQyoLahD++Cg6ofyd7Bc+O5NEhatkC71sPjn13hIPT3Ex/fkLhDIMx
+ 5sSO2RF2FVIgtnOipw38VPgOXgC69YytBXGIWK/x+TAupdIl1w4G8Vkx8PQ2B4f5VB
+ AeGskPSZW6yiRZ08jNQcP2FncqyUpPIclj93d/x0=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 531491I5093138;
+ Mon, 31 Mar 2025 23:09:01 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 31
+ Mar 2025 23:09:01 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 31 Mar 2025 23:09:01 -0500
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53148v4D105106;
+ Mon, 31 Mar 2025 23:08:58 -0500
+Message-ID: <a79d5a2b-1a19-437e-b181-3d6c3bb7b35c@ti.com>
+Date: Tue, 1 Apr 2025 09:38:57 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] DONOTMERGE: arm: dts: k3-j784s4-main: Add PBIST_14
+ node
+To: Nishanth Menon <nm@ti.com>
+CC: <trini@konsulko.com>, <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, 
+ <hnagalla@ti.com>, <j-choudhary@ti.com>, <bb@ti.com>,
+ <vigneshr@ti.com>, <j-keerthy@ti.com>, <u-kumar1@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20250328123127.497971-1-n-francis@ti.com>
+ <20250328123127.497971-4-n-francis@ti.com>
+ <20250328141847.s333bjjqmzfi5dkj@remarry>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250328141847.s333bjjqmzfi5dkj@remarry>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,17 +87,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Mar 2025 00:16:28 +0530, Udit Kumar wrote:
-
-> Enable AVS config
+On 28/03/25 19:48, Nishanth Menon wrote:
+> On 18:01-20250328, Neha Malcom Francis wrote:
+>> Add DT node for PBIST_14 that is responsible for triggering the PBIST
+>> self-tests for the MAIN_R5_2_x cores.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>> Linux dt-binding patch
+>> https://lore.kernel.org/all/20250328111439.374748-1-n-francis@ti.com/
 > 
+> Please hold off till the binding is closed out with Krystoff.
 > 
 
-Applied to u-boot/next, thanks!
+Yes will do
 
-[1/1] configs: am68_sk_r5: Enable AVS config
-      commit: b0899e4451d839dd8e6240d999b33fe9779b895f
+>>
+>> Changes since v2:
+>> - s/ti,bist-instance/ti,bist-under-test
+>>
+>>  dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi | 11 +++++++++++
+>>  1 file changed, 11 insertions(+)
+>>
+>> diff --git a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+>> index 0160fe0da98..1a26f5e4ace 100644
+>> --- a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+>> +++ b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+>> @@ -113,6 +113,17 @@
+>>  			status = "disabled";
+>>  		};
+>>  	};
+>> +
+>> +	bist_main14: bist@33c0000 {
+>> +		compatible = "ti,j784s4-bist";
+>> +		reg = <0x00 0x033c0000 0x00 0x400>,
+>> +		      <0x00 0x0010c1a0 0x00 0x01c>;
+>> +		reg-names = "cfg", "ctrl_mmr";
+>> +		clocks = <&k3_clks 237 7>;
+>> +		power-domains = <&k3_pds 237 TI_SCI_PD_EXCLUSIVE>;
+>> +		bootph-pre-ram;
+>> +		ti,bist-under-test = <343>, <344>, <365>, <366>;
+>> +	};
+>>  };
+>>  
+>>  &scm_conf {
+>> -- 
+>> 2.34.1
+>>
+> 
+
 -- 
-Tom
-
-
+Thanking You
+Neha Malcom Francis
