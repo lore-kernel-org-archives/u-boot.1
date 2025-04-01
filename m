@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA03C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 15:43:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA099C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 15:45:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C608781E6C;
-	Tue,  1 Apr 2025 17:43:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14D6781E6C;
+	Tue,  1 Apr 2025 17:45:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AJ19sYIr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S7QPhV2D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D9C781EC0; Tue,  1 Apr 2025 17:43:38 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 247E981F59; Tue,  1 Apr 2025 17:45:52 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D89C81DE3
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 17:43:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5A4481DE3
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 17:45:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e0caa151so10773245a12.0
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 08:43:36 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso1054198966b.0
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 08:45:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743522215; x=1744127015; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743522349; x=1744127149; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DAHkFwhWDZqbhlJ/W+AaNLq36hTP/Vb+L6f9aMp0qsU=;
- b=AJ19sYIrZAtMX1wWST3kg0LKj/SyQlfQPJ5EUcc3MUHkOXDOt+Bf2kOn1G9KJsZPHA
- 6GJVhdTRxMTKANnC0wO/f7rxoiQUXIv1/n7JH8QHyycQP+Iv/gXDbfa/vTatsYn9njWc
- seG6hlSpvrMnLj1X/WTnRpd4ORrfFJF1C/yLY=
+ bh=H/ly3g1iIt52yaaQObreCXLqBcc2fUYkPUPujqt6TvI=;
+ b=S7QPhV2DSVcvFt7MXgzyi+2bBNTaDmn9Ug79MYn/TCeyVQgBAPZbdW3cjiv6axutWx
+ BChBUDr9p0QolLRJE0cxtCvR7YL0GZoNE0hsqCuKPLmYKGgpOrLCJYeLmwBCFJKex3MS
+ kWslHRnr4w5En2LqyJN5c/QNOt3n1y9nXwbEM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743522215; x=1744127015;
+ d=1e100.net; s=20230601; t=1743522349; x=1744127149;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DAHkFwhWDZqbhlJ/W+AaNLq36hTP/Vb+L6f9aMp0qsU=;
- b=EIoNGonphFAmekGJihtGvAPE5ecS0rjOvRceMM0gZWM1HNFzH1Kyo4WhNMajmACqQ9
- aV5vO70C98ChfhMROTOtZhgG67+/rtsKqvcHaEX7zLD1S5SzpfUHKznnydff22Bex7/R
- g8xCrFp79QkulbHpbqKUr0/N1MAeQAP2ZAx82w8BxTo6kdlM/X4NalN29uTLfIhRUzWM
- +MV/rPRPQEzbNMieO3UhZPP9JiSYIkElO6zcKo1Od9H+0w3E8Qkob0h3vlgW2o+ioxy9
- tfT2A+VYU0TEU669U1G5++qJ8i7fxrxPo7LjJkcEwmSuqt6qKm4oDzJItbPNUFWhl6UG
- qtLw==
-X-Gm-Message-State: AOJu0Yz8mKOQ5f9OkswupT2ig9ZrAdal4FqUzf86VUVLh4v9eEu6XaDF
- NfLI9FEgAmQUEYTT7wc3bcdQN6Bm2UeI0sIOJr42cKzBpB4jrLIUIqBh53wMsJNORdtx9gZjeFk
- gen0hdeaTkKdYW7ENiD+p7ml8ZnDCuHWch4Wz
-X-Gm-Gg: ASbGncuhJurcE27/MZbwLijTydGMWFyi5oeHg89bSimeVjvn1uDKNoUez+yWOVyJXNU
- B10irGEXz8U0WBy9dex+fKiSqtbOtPB3QUixWlnsWzd1Ay1h7zOiaToJrjw+umRTHDV2HodWu2Y
- ckd3152zhc4h9NaoGqvd8EnxAuhhtY
-X-Google-Smtp-Source: AGHT+IG8DxNpQyrhVl5nM6fMW4v+nXtwK4qGPy0jNiZdU0fUwqcf0BeeikAa/jXVbuESfMDgPCRaozsHARvMdDfImp8=
-X-Received: by 2002:a17:906:d551:b0:ac7:333a:a5bb with SMTP id
- a640c23a62f3a-ac738bac9b1mr1214987666b.39.1743522215549; Tue, 01 Apr 2025
- 08:43:35 -0700 (PDT)
+ bh=H/ly3g1iIt52yaaQObreCXLqBcc2fUYkPUPujqt6TvI=;
+ b=oI1C6qmM8lwSJHH5zF/o6jjRgPAOUMcNHMvIGm6LeMeNCiCP8L+gQ3ObqFem//XhnV
+ 0rYf4MsW4LbCQxenlf5j2SUDVrj5+N6or5zEHFXogrIFTHNvexV09TBaqQ48doSPXjWX
+ nJouttvuhvU4vmt0uNvcQjmdDr36vCYDn+ba9H2wItKaI5BJ7NdmSWedvNU3n4YbpSsa
+ mBrPjQBFCQrhbFpsqDTIhdqpVoUbTqsTbRQzj6/FqcWAC4X7amiMzIscuD0Bvu6D07Zk
+ fwCKFiqkhL0HshF/AM46vFIBQJt3IOEOHsI3AIy4Mcy+MOWzJLLhKdVEEc3JTdbroSin
+ Pz9Q==
+X-Gm-Message-State: AOJu0Yx+lN7jGtLNI6zFlEOZB+RuSQfvlfwfUF1mfb7QrB71sUCQ9iam
+ z2h4UH5hlTVtWfTGCqCu1Tqy4dZio3Q3mYmB1WnKCua7GbYJadHjEEP23gTXDlWymcgJX6wRw1Y
+ 5o+RGJxxGpzBxZywNwX+IJCfJdOx+ybbVcA68
+X-Gm-Gg: ASbGncsTA57EZLBPzLwg9mf5Hz4DZMITh77ApZyfs4jeuG3NOZ5odWqLk84BViaR2qO
+ 0sghSXP3nAdswrLz7Mc+pqKTmQGHdXHVuybHjRu+ASYLWQ1OUrsvbXFdrNXtynFomnczcquOlNX
+ GTWU49ljSDE4ykwyl1vbTWhsYRWW3s
+X-Google-Smtp-Source: AGHT+IHrNnDYxKSPfBZBAufge+GHLlpKz1vDqQ/mg1unLAcYl1WqKvP5TQpEVtY2Z6NUqHzmrLdVP+czk0q+E0ASbuI=
+X-Received: by 2002:a17:907:7d8c:b0:ac3:8896:416f with SMTP id
+ a640c23a62f3a-ac782b63ed1mr338958866b.15.1743522349061; Tue, 01 Apr 2025
+ 08:45:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250328130713.2612648-1-sjg@chromium.org>
- <20250330144709.GR93000@bill-the-cat>
- <CAFLszTiykZ4EaLz2oBmUduLm_OsdDxamANf0cbBFaOvzyMwmMg@mail.gmail.com>
- <20250331134239.GS93000@bill-the-cat>
-In-Reply-To: <20250331134239.GS93000@bill-the-cat>
+References: <CAFLszTgnj+ZFq1vEcSSKCOeYjx0NKesO8Lo3aOJ2Nm-jhuTvig@mail.gmail.com>
+ <20250224232303.GJ1233568@bill-the-cat>
+ <CAFLszTgtdETGCYYtH3ni7Wv0W6Ckv1SoZRG8djQ-3uKBn1YZWQ@mail.gmail.com>
+ <20250304152909.GZ2640854@bill-the-cat>
+ <CAFLszTiNQSs51iE=rcM7qQjipmWCKZiPX+gV2ztb+ZAB8m2MBw@mail.gmail.com>
+ <20250305162236.GT2640854@bill-the-cat>
+ <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
+ <20250307144631.GN2640854@bill-the-cat>
+ <20250310155336.GJ2640854@bill-the-cat>
+ <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
+ <20250331155144.GX93000@bill-the-cat>
+In-Reply-To: <20250331155144.GX93000@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 2 Apr 2025 04:43:22 +1300
-X-Gm-Features: AQ5f1JqxMv4lyySZcWuA-RV8nMvRnt8dLEAI_k9_iwS3zMXEujzTTqvH2Be4a1U
-Message-ID: <CAFLszTgnEkN18sD7oKZpriiWqUNLgQ5_j2_2WpNDtvZo6Pyc1w@mail.gmail.com>
-Subject: Re: [PATCH v2 00/56] expo: Various features and improvements
+Date: Wed, 2 Apr 2025 04:45:37 +1300
+X-Gm-Features: AQ5f1Jp_8jAvislzhrek1w0OwCjKFOdUIMadC69xdu-9so1x1fQcWhxrc7mKKf4
+Message-ID: <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in the
+ project)
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,67 +99,121 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 1 Apr 2025 at 02:42, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Mar 31, 2025 at 01:18:25AM +0000, Simon Glass wrote:
+> On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 31 Mar 2025 at 03:47, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Mar 28, 2025 at 07:05:47AM -0600, Simon Glass wrote:
-> > >
-> > > > This series collects together some new features for expo to make it more
-> > > > useful for boot menus:
-> > > >
-> > > > - measurement and display of multi-line text objects
-> > > > - internal alignment for objects (e.g. centred text)
-> > > > - editable strings in text fields
-> > > > - new 'box' object to draw a rectangle
-> > > > - highlighting of menu items, rather than just relying on a pointer
-> > > >
-> > > > Expo's boot menu is restructured so that it is possible to iterate
-> > > > through various bootdevs and update the menu as new ones are found. This
-> > > > is more in keeping with how bootstd works.
-> > > >
-> > > > A new textedit object is added, intended to provide a simple text
-> > > > editor. Future work will complete this.
-> > > >
-> > > > With this series the boot menu has a better layout and appearance.
-> > >
-> > > Did I already say this for v2 and forget? It looks like you forgot,
-> > > again, to split the expo stuff out from everything else, which others
-> > > might review.
-> >
-> > This series is all expo stuff. Can you please explain your objection
-> > more clearly? I still don't really understand.
->
-> All of those patches that don't start with "expo:" aren't expo changes,
-> they're changes to other parts of the codebase.
-
-Oh I see, you are talking about the video patches at the start. Yes I
-will send them separately.
-
->
+> > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
+> > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
 > > > [snip]
-> > > > base-commit: 37ef92a972663c6de1b81d24d2ca5cfd664fc6df
-> > > > branch: schd2
+> > > > > Again, back to this thread, if you want me to migrate things, consider
+> > > > > applying the sunxi patches as I have described above. I will then look
+> > > > > at the next target for bootstd. But while you hold this up, I cannot
+> > > > > move forward with more bootstd migration. It doesn't seem that much to
+> > > > > ask.
+> > > >
+> > > > I will take another look at what's still relevant. But I believe it's
+> > > > still blocked on the fact that it changes behavior and breaks users.
 > > >
-> > > Of course, not being on top of mainline, no one should spend much time
-> > > on this anyhow.
+> > > In details:
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
+> > >
+> > > Now that the underlying BLK problem is resolved, this can just be
+> > > dropped I believe. Removing the BLK dependency from BOOTSTD can happen
+> > > when you're supporting a flow that lacks a BLK device entirely. This
+> > > would be another reminder as to why putting unrelated changes in a
+> > > series is a problem.
 > >
-> > As I thought we agreed, it is helpful to review patches so we can keep
-> > the trees in sync so far as possible. I take your point that few will
-> > be interested in expo and there may not be many comments, but sending
-> > it makes it available for review and potentially sending a PR for your
-> > tree at some point.
+> > OK, then just don't apply this patch. Problem solved?
 >
-> Yes, said at some point we should try it. And it's been a failure, so
-> I'm saying to stop. If it's not based on top of one of the mainline
-> branches, don't post it. Enough other contributors have expressed their
-> unhappiness at reviewing non-mainline code.
+> Well, for a hypothetical v6 you would not include it, sure.
+>
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-3-sjg@chromium.org/
+> > >
+> > > This is fine.
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4-sjg@chromium.org/
+> > >
+> > > This is not fine. This is also not a sunxi problem. It means that we
+> > > should drop bootmgr from rockchip, where the conversion has already
+> > > taken place, and would need to drop it from future conversion too.
+> > > Neither of which are desirable changes.
+> >
+> > Why do you say that? I don't understand how this relates to rockchip
+> > or why we would need to drop bootmgr from that.
+>
+> Then you don't have enough of a grasp of the details of the area you're
+> trying to solve problems in? Or maybe you need to refresh yourself on
+> the details of the area you're trying to work in.
 
-If you would like me to send patches against your tree, please
-consider applying the various series you have rejected.
+Or perhaps there isn't a problem? The sunxi case is special because we
+have a FEL boothmeth. That isn't present on rockchip, for example.
+
+>
+> > > This patch in particular is
+> > > where we have the note:
+> > >
+> > > "Yes, the introduction of boot standard changed the boot order and
+> > > specifically deprioritizing scripts is unexpected."
+> > >
+> > > Which should have had more attention than it did.
+> >
+> > From memory the scripts are a fallback used when the other things
+> > don't work, so that was the decision I made at the time.
+>
+> The key point being we changed behavior that others depended on, and
+> didn't document it well and didn't make sure the change would work for
+> them either.
+>
+> > > This is the thread that to me spelled out in details where the
+> > > conversions are now blocked. We changed behavior and that in turn breaks
+> > > users that have come to rely on ordering.
+> >
+> > I don't know what action to take on that comment. We cannot have 100%
+> > backwards compatibility with the scripts, which after all weren't even
+> > documented. But it is very close.
+>
+> You need to get feedback from the people you want to migrate from the
+> scripts and ordering and rely on to something else and see what works
+> for them.
+>
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-5-sjg@chromium.org/
+> > >
+> > > Is an alternative to the above which then turned in to a discussion that
+> > > I would very briefly summarize as "no discussions were had between
+> > > stakeholders before integrating efi bootmgr with bootstd".
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-6-sjg@chromium.org/
+> > >
+> > > This is fine, but only relevant once migration happens.
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-7-sjg@chromium.org/
+> > >
+> > > If Andre is fine with this, this is fine.
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-8-sjg@chromium.org/
+> > >
+> > > This is a generic bugfix. I will take this to next today.
+> > >
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-9-sjg@chromium.org/
+> > >
+> > > If Andre is fine with this, this is fine.
+> >
+> > Well, is he? I thought he was. Can you check?
+>
+> You're free to. It's one of the innumerable examples of why when you
+> group multiple things in a series and there's problems with another part
+> of the series, unrelated changes get dropped.
+
+It would be easier for me if you could apply the patches as I've suggested.
+
+But if you are willing to apply these patches and just want me to send
+the series again without the BLK and RFC patches, I can do that.
+Please let me know either way.
 
 Regards,
 Simon
