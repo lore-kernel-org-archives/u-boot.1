@@ -4,86 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C5D2C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 15:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 236FFC36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 15:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C0DE81E6C;
-	Tue,  1 Apr 2025 17:38:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 953708171B;
+	Tue,  1 Apr 2025 17:42:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aOHjuXzJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V4CvFrYD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A150C80584; Tue,  1 Apr 2025 17:38:26 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 7509281DE3; Tue,  1 Apr 2025 17:42:10 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CC318171B
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 17:38:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07E8181703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 17:42:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ac29fd22163so953826266b.3
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 08:38:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so745605566b.1
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 08:42:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743521904; x=1744126704; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=63hxl15TVAnOhFLx1d6QCYyuDDOhaDcUc895SzJw6Rc=;
- b=aOHjuXzJpjCdKaO0ROetnAfKpSlXdECdXu23uWakOUCRngCbMcXKSDlkB4gYsfcpNz
- SzhIbiC1QlTDifz+ZrrtX60AzGyM6LISENylLxAq4f2kZsHWLU2VhSlcrg/bn+N4mS08
- 1JL2sUJJNW5hziVTakSGzeSJYeT3qYcg21R9xYwhIyA+RFYB0YMP4YvQhQtNcPnYFDSU
- kmTC0llgGc3wWp+GErC9VtGrE/9k86Za/mgDdWdUgh9ARcCd/3FMnwtso2GJHqHSDrUa
- Kkn2mqAT4FJSSk0e+GqMd0X9tikr7RDITzPVeRHBJLfoj0VkpxmRNQJAkBhEjcG+jKJR
- c2MA==
+ d=chromium.org; s=google; t=1743522127; x=1744126927; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gIyN8UO7BSTq4gyM5wlDIze5NB85AH+cxCPOYvBAbq0=;
+ b=V4CvFrYDLrfUAFIaRr6hfrnX0/lmkt2kCU4PuyxincrzTOM64JqGKabftqdMclqT4R
+ 0omAMidPerJuuyZA1Bkd9c/7rnRYjDcuJK0rxSpUy0eTtLmBU8RnyO8cdQYb5dTYYVCQ
+ qJSr0uj9ttghvozfRYNYrzc/XLY8ho2PLjD1U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743521904; x=1744126704;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=63hxl15TVAnOhFLx1d6QCYyuDDOhaDcUc895SzJw6Rc=;
- b=iiyDESiGSWCIimCRiIKIoTzgW0BVErZTHS48FNxPvQjfzh0W8RALRU1jUxZyaj456b
- xufETa7d2DXuA65aiyWh3f+ArEoqmFnjzWsMWRT78Zo4CE6AiugkdliZp6cwyhW9hTF1
- 0Yo9rwbRI0NcOIsgNBHqRl1qQuK6GdspTb5k9hOAut37yCtiY8PiJnuPKmbOS55o+GfY
- kyQp8ZehCTozMz6Pi3gIWgDPBBkAt7D1IoIR6UTaEPFdsgRiT1mez05C8QMTbTykJsKS
- +L2urB4AT5Srdk+MXcnhpvAAJqCavospI/8KbZrT2muuPv3lcwiWibf9K1vBz11v+gry
- ek9g==
-X-Gm-Message-State: AOJu0Yx89927n9E0e/mtsWfu3O3uGmneWA1q15qYODTMct5KMKwU4BrD
- IspGLr9/59ylRV0f2eY38kTfzyMmwpVvT8QEBJRbdv72fDTzxtNMWb4ZPLE/
-X-Gm-Gg: ASbGnctl39AGK3p68ziRTkG7rbGT8rZ9b5pfcVBNbPZ5iPbnG/VWAnDCr4qZVXu57nU
- 2UlsBmbztkUwuFBz2cEIgXFYdjavDyr4Wb3rosZfX5SQUIQ5buMr6kbts6OGemKtRA2uPCATFFi
- 5Y3IBwylpqQ2FYl7DC3fOyKFXtGFoAnTwrKSp5UdkBM8zP10nwISbQTT75S0xFwiM3R0YqvHPs6
- cJPUir59xi7n0mW50ZvaNRVpptIjZ2FjKu6CENV0tA4GtQvceoljuAGCU9MLCGN+h1tD6ag6OTS
- ArAO4emktOaydd8f9npxH0qVoCeqWRk1KUlW
-X-Google-Smtp-Source: AGHT+IHLp8120eDa6z0+V5pJXr1R0LW2Wfc9c216WeEG42rXUhnZdD9X1Et5F/otBKrynV758mVP0Q==
-X-Received: by 2002:a17:906:7955:b0:ac2:758f:9814 with SMTP id
- a640c23a62f3a-ac738a50849mr1331562466b.23.1743521903772; 
- Tue, 01 Apr 2025 08:38:23 -0700 (PDT)
-Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac71f9316a1sm732784866b.82.2025.04.01.08.38.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 08:38:23 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Kongyang Liu <seashell11234455@gmail.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] sysreset: diverge GPIO reset and poweroff configs
- per-phase
-Date: Tue,  1 Apr 2025 18:37:58 +0300
-Message-ID: <20250401153758.40088-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250401153758.40088-1-clamor95@gmail.com>
-References: <20250401153758.40088-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1743522127; x=1744126927;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gIyN8UO7BSTq4gyM5wlDIze5NB85AH+cxCPOYvBAbq0=;
+ b=bnxM9VMycPA/YjXC6JOqqDqKapNFCm2TRrWVWRZgJNlTQ891rxZz3Y4QZcwv/ASyf/
+ rJlrp6evLqSBXZ4LHIjqf1f6S5jyGTv6BiW+FxO5WO9U6/eq0v0aFCsSb9JwPsozbhMN
+ VOxaLEAFpLnX4khfCfcnldT5MSS39PoDWQixZ7y31/p5cRWyiBkECctPyngdAKQRfu9l
+ A3ZUrcs7VLUB//UiZs6+doY5fyPkiWa6/FsxqkSroymoT2ZelF783ctJ2ZzALTMZUjsW
+ mH7roIVKvg+QOO4xFTk06qhQwhLpdBXAfV1qzCkunL/IbWG+3tN7mdud9AALnPTPxY/H
+ gHyA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW03aedAPeAkfP8VUBZh0JRBE1x93QPzpubeqkeE6ReqGL9d4cI8sLpVS7BMs2ZrBvs7s5TlIM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpLSIP8wVu9uEbSHSDeEdsQd1QfTdJkpKBy2p4NByv1db9rdkQ
+ frG3qT+yrbENT4XxqIgXNAaHUpiJWD/MjMkLJiHAosl2f5rTudshAY8T6nmqrt1CnC0jsM+0fd6
+ BiNsoWRxUg3vDKn+2T7iHFwjK/DUnHhZA6i6j
+X-Gm-Gg: ASbGncuCxNK7gkBxdyYHnDQ1Oq+cpbgh9NnKhKLu3fjL4nnsXU2ODnSusi/0nbUkAjo
+ HjlIwkhCTzTPAYJk6MqpABidIwP9HUzdCsXiZHoTqu3Qb8dzMbCMZ29VB/QppM4Dn3zQ/e2Vt/s
+ VXh3/oE3bRGONfcuCELTN7VS1eQgeV1p7OuWK9280=
+X-Google-Smtp-Source: AGHT+IFN8665OFuSfUtsxhFShodIS2qshSmvpd/B2ZmZvQ1zuuImdt6XFJCmLiwSO9acsuW8FfgmBcD5H4MPjxl/V0s=
+X-Received: by 2002:a17:907:7e96:b0:ac7:37da:cd46 with SMTP id
+ a640c23a62f3a-ac738ba8055mr1150846066b.49.1743522127407; Tue, 01 Apr 2025
+ 08:42:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250314215525.579655-1-jerome.forissier@linaro.org>
+ <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
+In-Reply-To: <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 2 Apr 2025 04:41:55 +1300
+X-Gm-Features: AQ5f1Jr8r4tB22ZHYP6WpaVolqDLz5p15tfjGBjynjx5BDPluNHecyD9WY71Alw
+Message-ID: <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
+Subject: Re: [PATCH 00/12] lwIP sandbox tests
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,149 +88,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GPIO reset and power-off functionality depends on device tree data, which
-is often absent in SPL or TPL. To address this, incorporate PHASE_ into the
-config and add Kconfig option for each phase.
+Hi Jerome,
 
-Adjust SYSRESET_GPIO and POWEROFF_GPIO uses to address possible
-regressions.
+On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> Any feedback on this series?
+>
+> https://patchwork.ozlabs.org/project/uboot/list/?series=448553
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- board/sifive/unleashed/Kconfig       |  1 +
- board/sifive/unmatched/Kconfig       |  1 +
- configs/ge_b1x5v2_defconfig          |  1 +
- configs/microblaze-generic_defconfig |  1 +
- drivers/sysreset/Kconfig             | 45 ++++++++++++++++++++++++++++
- drivers/sysreset/Makefile            |  4 +--
- 6 files changed, 51 insertions(+), 2 deletions(-)
+No, not from me, but thanks for doing it!
 
-diff --git a/board/sifive/unleashed/Kconfig b/board/sifive/unleashed/Kconfig
-index 5d842c36cfc..bf4a00d6f7f 100644
---- a/board/sifive/unleashed/Kconfig
-+++ b/board/sifive/unleashed/Kconfig
-@@ -49,6 +49,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
- 	imply SPI_FLASH_ISSI
- 	imply SYSRESET
- 	imply SYSRESET_GPIO
-+	imply SPL_SYSRESET_GPIO if SPL
- 	imply CMD_I2C
- 
- endif
-diff --git a/board/sifive/unmatched/Kconfig b/board/sifive/unmatched/Kconfig
-index bc1f33bde30..991dd23f1d4 100644
---- a/board/sifive/unmatched/Kconfig
-+++ b/board/sifive/unmatched/Kconfig
-@@ -48,6 +48,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
- 	imply PHY_MSCC
- 	imply SYSRESET
- 	imply SYSRESET_GPIO
-+	imply SPL_SYSRESET_GPIO if SPL
- 	imply CMD_I2C
- 
- endif
-diff --git a/configs/ge_b1x5v2_defconfig b/configs/ge_b1x5v2_defconfig
-index fec4b67aee2..b8cca3c74df 100644
---- a/configs/ge_b1x5v2_defconfig
-+++ b/configs/ge_b1x5v2_defconfig
-@@ -116,6 +116,7 @@ CONFIG_MXC_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_POWEROFF_GPIO=y
-+CONFIG_SPL_POWEROFF_GPIO=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_IMX_THERMAL=y
- CONFIG_USB=y
-diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
-index 08f8bdb4240..7497d20ee64 100644
---- a/configs/microblaze-generic_defconfig
-+++ b/configs/microblaze-generic_defconfig
-@@ -97,6 +97,7 @@ CONFIG_SYS_NS16550=y
- CONFIG_XILINX_UARTLITE=y
- CONFIG_XILINX_SPI=y
- CONFIG_SYSRESET_GPIO=y
-+CONFIG_SPL_SYSRESET_GPIO=y
- CONFIG_SYSRESET_MICROBLAZE=y
- CONFIG_WDT=y
- CONFIG_XILINX_TB_WATCHDOG=y
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 475540ffac7..4972905482a 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -71,6 +71,27 @@ config POWEROFF_GPIO
- 	  Support for system poweroff using a GPIO pin. This can be used
- 	  for systems having a single GPIO to trigger a system poweroff.
- 
-+config SPL_POWEROFF_GPIO
-+	bool "Enable support for GPIO poweroff driver in SPL"
-+	depends on DM_GPIO && SPL
-+	help
-+	  Support for system poweroff using a GPIO pin in SPL. This can be used
-+	  for systems having a single GPIO to trigger a system poweroff.
-+
-+config TPL_POWEROFF_GPIO
-+	bool "Enable support for GPIO poweroff driver in TPL"
-+	depends on DM_GPIO && TPL
-+	help
-+	  Support for system poweroff using a GPIO pin in TPL. This can be used
-+	  for systems having a single GPIO to trigger a system poweroff.
-+
-+config VPL_POWEROFF_GPIO
-+	bool "Enable support for GPIO poweroff driver in VPL"
-+	depends on DM_GPIO && VPL
-+	help
-+	  Support for system poweroff using a GPIO pin in VPL. This can be used
-+	  for systems having a single GPIO to trigger a system poweroff.
-+
- config SYSRESET_GPIO
- 	bool "Enable support for GPIO reset driver"
- 	depends on DM_GPIO
-@@ -79,6 +100,30 @@ config SYSRESET_GPIO
- 	  example on Microblaze where reset logic can be controlled via GPIO
- 	  pin which triggers cpu reset.
- 
-+config SPL_SYSRESET_GPIO
-+	bool "Enable support for GPIO reset driver in SPL"
-+	depends on DM_GPIO && SPL
-+	help
-+	  Reset support via GPIO pin connected reset logic in SPL. This is used
-+	  for example on Microblaze where reset logic can be controlled via
-+	  GPIO pin which triggers cpu reset.
-+
-+config TPL_SYSRESET_GPIO
-+	bool "Enable support for GPIO reset driver in TPL"
-+	depends on DM_GPIO && TPL
-+	help
-+	  Reset support via GPIO pin connected reset logic in TPL. This is used
-+	  for example on Microblaze where reset logic can be controlled via
-+	  GPIO pin which triggers cpu reset.
-+
-+config VPL_SYSRESET_GPIO
-+	bool "Enable support for GPIO reset driver in VPL"
-+	depends on DM_GPIO && VPL
-+	help
-+	  Reset support via GPIO pin connected reset logic in VPL. This is used
-+	  for example on Microblaze where reset logic can be controlled via
-+	  GPIO pin which triggers cpu reset.
-+
- config SYSRESET_MAX77663
- 	bool "Enable support for MAX77663 PMIC System Reset"
- 	depends on DM_PMIC_MAX77663
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index 796fc9effa5..ded91a4d325 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -8,8 +8,8 @@ obj-$(CONFIG_ARCH_ROCKCHIP) += sysreset_rockchip.o
- obj-$(CONFIG_ARCH_STI) += sysreset_sti.o
- obj-$(CONFIG_SANDBOX) += sysreset_sandbox.o
- obj-$(CONFIG_SYSRESET_CV1800B) += sysreset_cv1800b.o
--obj-$(CONFIG_POWEROFF_GPIO) += poweroff_gpio.o
--obj-$(CONFIG_SYSRESET_GPIO) += sysreset_gpio.o
-+obj-$(CONFIG_$(PHASE_)POWEROFF_GPIO) += poweroff_gpio.o
-+obj-$(CONFIG_$(PHASE_)SYSRESET_GPIO) += sysreset_gpio.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_MAX77663) += sysreset_max77663.o
- obj-$(CONFIG_SYSRESET_MPC83XX) += sysreset_mpc83xx.o
- obj-$(CONFIG_SYSRESET_MICROBLAZE) += sysreset_microblaze.o
--- 
-2.43.0
+Regards,
+SImon
 
+
+>
+> Thanks,
+>
+> --
+> Jerome
+>
+> On 3/14/25 22:55, Jerome Forissier wrote:
+> > This series enables most of the driver model tests for network features
+> > with NET_LWIP (test/dm/eth.c and test/dm/dsa.c).
+> > - Patches 1-5 fix a few bugs (device selection) and add missing features
+> > (sandbox timer, restart support) to NET_LWIP
+> > - Patch 6 decouples the sandbox ethernet driver from NET
+> > - Patch 7 adds missing static IP addresses that NET_LWIP needs
+> > - Patches 8 and 9 update the tests to use a common interface to send
+> >   ICMP packets (do_ping(...) instead of net_loop(PING))
+> > - Patch 10 enables DM_DSA and the associated tests with NET_LWIP
+> > - Patch 11 adds a sandbox64 configuration with NET_LWIP=y
+> > - Patch 12 adds that configuration to the CI
+> >
+> > Jerome Forissier (12):
+> >   net: lwip: do_ping() should return CMD_RET_FAILURE when no device
+> >   net: lwip: fix initialization sequence before a command
+> >   net: lwip: provide net_start_again()
+> >   net: lwip: add restart support to ping
+> >   net: lwip: use timer_early_get_count() when CONFIG_SANDBOX_TIMER=y
+> >   drivers: net: sandbox: add support for NET_LWIP
+> >   sandbox: provide static IP addresses for eth{2,3,5,6,7}
+> >   net: ping: make do_ping() available via <net.h>
+> >   test: dm: eth, dsa: update tests for NET_LWIP
+> >   net: lwip: allow DM_DSA=y when NET_LWIP=y
+> >   configs: add sandbox64_lwip_defconfig
+> >   CI: add sandbox64_lwip
+> >
+> >  .azure-pipelines.yml             |   2 +
+> >  .gitlab-ci.yml                   |  11 ++
+> >  board/sandbox/sandbox.env        |   5 +
+> >  cmd/net.c                        |   3 +-
+> >  configs/sandbox64_lwip_defconfig |   5 +
+> >  drivers/net/Kconfig              |  14 +-
+> >  drivers/net/Makefile             |   1 -
+> >  drivers/net/sandbox-lwip.c       |  85 -----------
+> >  drivers/net/sandbox.c            | 240 ++++++++++++++++++++-----------
+> >  include/net-common.h             |  15 ++
+> >  include/net-legacy.h             |   3 -
+> >  include/net-lwip.h               |  10 +-
+> >  net/Makefile                     |   2 +-
+> >  net/lwip/dhcp.c                  |   3 +-
+> >  net/lwip/dns.c                   |   3 +-
+> >  net/lwip/net-lwip.c              |  86 +++++++++--
+> >  net/lwip/ping.c                  |  13 +-
+> >  net/lwip/tftp.c                  |   5 +-
+> >  net/lwip/wget.c                  |   6 +-
+> >  test/dm/Makefile                 |   2 -
+> >  test/dm/dsa.c                    |   8 +-
+> >  test/dm/eth.c                    |  77 +++++-----
+> >  22 files changed, 351 insertions(+), 248 deletions(-)
+> >  create mode 100644 configs/sandbox64_lwip_defconfig
+> >  delete mode 100644 drivers/net/sandbox-lwip.c
+> >
