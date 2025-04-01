@@ -4,79 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E2CAC36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 16:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A138C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 16:40:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1F2581703;
-	Tue,  1 Apr 2025 18:33:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 04ED380FDA;
+	Tue,  1 Apr 2025 18:40:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hP36BK7j";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ud6hNJO5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 064AC8171B; Tue,  1 Apr 2025 18:33:11 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 088E080FDA; Tue,  1 Apr 2025 18:40:23 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B01F801BE
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 18:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51579801BE
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 18:40:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e589c258663so5311666276.1
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 09:33:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2c873231e7bso2473285fac.3
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 09:40:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743525187; x=1744129987; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I3gMn0REYoT2Hxi2a8DGjG1B45b4JkZSrRrU4eEkC9k=;
- b=hP36BK7jekqaDipXS8re8fiYfDZlW1H+PQqNeKCNyAIapjlgOOGE0Bv5iG4mZ3cRJ2
- J/zU9Hjx6/30zv7scMNhUCpelmk28dBPspcvUpfZseGX/WDjl523/eY3FYcq363tY3D/
- vlHq1m4fPBEiJ7glw+BFLVGCIjqOgekMQHmtChuo5CsDqHb0A74kIeQ14M2abtjQtiND
- rq09PN3SRAeT1XO+HcoW9T2oV8yISSM2YQxTuEXzQSjKg3ouDL47MHQzcEiqELZbAGpN
- kO/P/H8fFBB3wuoNclF78fifDEe2053grDN6EzzH+4xGzy/Oo5pmbwizWsK5YGab8qMD
- 2Cnw==
+ d=konsulko.com; s=google; t=1743525619; x=1744130419; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IV4t0gS25hM4N68vm/O38rs+RhD4L+ZBwAfY/L203oA=;
+ b=Ud6hNJO5B1RFV9V2i92fIXfyALbVhYJjjerWJgd4VHl1dw7ZcE9NECOdfQsS1gC9W2
+ IBJV72bucuqY3/rvZKXsHUPfrWjVXMzMdpnzCAPqRiO1vJuTPoTUIykkUzE2KTOAHEcV
+ aQMrIdDTEAhKQVP5K/7Wh5oT5tFVOF90GnJng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743525187; x=1744129987;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I3gMn0REYoT2Hxi2a8DGjG1B45b4JkZSrRrU4eEkC9k=;
- b=pKtX/pq5hMR5LRLyKADT0jTCQrDIR0EdomKuPJWlJqbPECD40vmRjgGj3KMmwZmgmk
- RIvYEGWW+JjJLkww086sUZOVmTbfFFnHCPtERf4aPtk+c+CwI2j6Sfs3Qbe5kq4qka3X
- w3q600rjVWAc4ed+Jr/8qLBkv/fbPfOpjQyv2GC4cw1vjFn1mPqvB05FHgaLRZhrL00I
- cYHYa9+58FaUzPj6A4go741rGj58qfLZnaXuatQ9hTtq7txQY+sQOZD2Z3pGZx5BiYbi
- c3pr8zOheNbRUtK3F450MA80Bgd+nCGIbzvf5GQYJX9SIzF+xeInHolD2i8KeGa5YFId
- Ydpg==
+ d=1e100.net; s=20230601; t=1743525619; x=1744130419;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IV4t0gS25hM4N68vm/O38rs+RhD4L+ZBwAfY/L203oA=;
+ b=bBNVUfldm3IaY8ezs3PcYJT8KXP69QtdrAvkoG1hHWHvq5zvdn1RQJ92HvIIPa6Uc/
+ 90JYtuQmV34XiGpZr9u8sPniZomp+CGd5cwkuB1Sr/5GOboH5+p4HPBi5Quvu+OEMiQH
+ 1dJ5cC1p8H8xZDU/CMvk3IxjL+lRBc1V3VaIkgohk1QtrWvPpFlktM0xlZlTTDq5Zsvj
+ HSa+Pd2syFh7tmeyykMfCGrZdBjZCd2hJyc5pE8qZ6Y3EAlrxpUGFK1j4ad70MuXhl8O
+ Y4Ez8cQo2ZY0O/MT1vh6A+XE9p6SpWFjbsSIqPFhuhEV6p21YamPb7Z0q8CY5t8Z1wQY
+ 5BTA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXaj4q8MgJwmq5AlSlquDykP55Zidh5y27bxw/Dw0vV/XF3K14cTZbfm/oSIHrSZ9sZA4AWY2w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzsrhbc3fGph68+2LVlmK4sQn9hsWyoB8XBFfnmUTfUZN62Jz89
- W/JPUpibcNuwI90hdiZKC+qUaNyNO1SLGtxUqF9DLvcQ4rQeey0AeYfEN5SCUybOlZxDUGBv5gV
- WsU1Qu8Q1bDufkqgJ+sa40o0aBw03j/rGeeXg3A==
-X-Gm-Gg: ASbGncu9h4lWpQMICpaMR5bKoOmzaaFgSucYb4UIlfDvRnzswuBQSEwyB1djbKjws/w
- IVcIntw1agMREIZW5kAH9wBLX5mnyp779kSKldkSQnKy7f059iaZ7IKpE112KkyRPpUqEfQjZF2
- A/gUJCtBAUWcHefvYnABau+Ove
-X-Google-Smtp-Source: AGHT+IE/6H11k5TlqWhAIQ+GRAbl2GgZk+E/4K1NVVgwLTYoXzoPUIaMsHJcvyMjdxux4ZtAHq+4zc3NPKeU19KBtcE=
-X-Received: by 2002:a05:6902:4812:b0:e6d:deb9:637a with SMTP id
- 3f1490d57ef6-e6ddeb966e8mr3271268276.17.1743525187134; Tue, 01 Apr 2025
- 09:33:07 -0700 (PDT)
+ AJvYcCUCbTzFoIyqUBh22DAfGKtvUWLmQmEcq6/mNatvqwL96udA53mUa0eX9cVoGKGV/XPmZj3kSXg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxuXYMZ4zKAn6XzyuT5E2bE+JJ4B8MWcAaCAxpB0MNt/tO7fkzt
+ yUxxvUSr8i+OkjLA5/TPlup1ctevHS+8MSUK8S+xUjXqvNJlAtzyKVnK4x+25yA=
+X-Gm-Gg: ASbGncuZHayHazXWQoHLuf5RkQFLXIZlUkw3KQ0CU6y8ItNbdF21AGwHlxgCCNtfA6a
+ Ak/0YcbxRPzmD+s0LktfR6iQmL5ZVqSMouYDA+4CBmFXoSmKWbkDpZAuN3NiDP36Re6Y4eq8wHP
+ KbIg0h7oZgcjdK571BN1Ys/Qinn8bn7icqnlMfK5mWAB3z0muEX1ElJUgUSazzlY96STchnt8sB
+ ZGbzpf4kMQv3JRh5/xVOdfjxUKukRnrneyg2F2gS8SyVZbNc7E79v3WANePAcXABCl4ifcixFtN
+ 5k28htjOKaIlxHjlb2O9uaZx52mliGXr59EBWF2OsopQn4bY6uc1gJY4ZlPUg4W++GC+tgP/NCZ
+ yeM8maA==
+X-Google-Smtp-Source: AGHT+IEJB5Vw25EGEo6Sp9xv2n9pmgSM0Cir+1Sh2qkO2Bu7fTob/CHsTMzwsiNxryopX/0LQkDQYQ==
+X-Received: by 2002:a05:6870:5154:b0:2c2:37d2:c1d1 with SMTP id
+ 586e51a60fabf-2cbcf77227fmr8703540fac.26.1743525619047; 
+ Tue, 01 Apr 2025 09:40:19 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72c5826741bsm1926100a34.45.2025.04.01.09.40.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Apr 2025 09:40:18 -0700 (PDT)
+Date: Tue, 1 Apr 2025 10:40:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stephen Boyd <sboyd@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 5/6] dt-bindings: clock: drop NUM_CLOCKS define for
+ EN7581
+Message-ID: <20250401164016.GF5495@bill-the-cat>
+References: <20250314185941.27834-1-ansuelsmth@gmail.com>
+ <20250314185941.27834-6-ansuelsmth@gmail.com>
+ <7923a39a-184c-4774-ad94-4d72563c8b60@linaro.org>
+ <67e5659b.df0a0220.19a25c.f830@mx.google.com>
+ <37c1455f-8d53-4643-b57e-3a888e5dd23d@linaro.org>
+ <20250401144420.GE5495@bill-the-cat>
+ <7b6542f2-0a2b-48ce-aaac-0bdf2f9b2fca@linaro.org>
 MIME-Version: 1.0
-References: <20250314215525.579655-1-jerome.forissier@linaro.org>
- <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
- <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
-In-Reply-To: <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 1 Apr 2025 19:32:31 +0300
-X-Gm-Features: AQ5f1JoP2HhfWvIfksD6q4EvJyLzd0b5K09eLn-CngnJkjh8RG-PYjDo1P6Ey1Y
-Message-ID: <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
-Subject: Re: [PATCH 00/12] lwIP sandbox tests
-To: Simon Glass <sjg@chromium.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RySAL1zPmhEnDM7j"
+Content-Disposition: inline
+In-Reply-To: <7b6542f2-0a2b-48ce-aaac-0bdf2f9b2fca@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,88 +110,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
 
-On Tue, 1 Apr 2025 at 18:42, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Jerome,
->
-> On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > Any feedback on this series?
-> >
-> > https://patchwork.ozlabs.org/project/uboot/list/?series=448553
->
-> No, not from me, but thanks for doing it!
+--RySAL1zPmhEnDM7j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Aren't you maintaining the sandbox drivers?
+On Tue, Apr 01, 2025 at 05:27:30PM +0200, Krzysztof Kozlowski wrote:
+> On 01/04/2025 16:44, Tom Rini wrote:
+> > On Thu, Mar 27, 2025 at 03:58:52PM +0100, Krzysztof Kozlowski wrote:
+> >> On 27/03/2025 15:50, Christian Marangi wrote:
+> >>> On Thu, Mar 27, 2025 at 03:43:47PM +0100, Krzysztof Kozlowski wrote:
+> >>>> On 14/03/2025 19:59, Christian Marangi wrote:
+> >>>>> Drop NUM_CLOCKS define for EN7581 dts/upstream/src/include. This is=
+ not a binding and
+> >>>>> should not be placed here. Value is derived internally in the user
+> >>>>> driver.
+> >>>>>
+> >>>>> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> >>>>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+> >>>> Please drop my Ack. I have never acked such patch for uboot. If I di=
+d,
+> >>>> it was by mistake - probably you CC-ed me for some reason.
+> >>>>
+> >>>
+> >>> Some explaination, uboot introduced the concept of upstream where they
+> >>> "import" linux patch for dts and dt-bindings.
+> >>
+> >> I expected OF_UPSTREAM to be taking the sources, not patches.
+> >>
+> >>>
+> >>> This and the other patch are the exact upstream patch with only the p=
+ath
+> >>> changed so I keep all the patch commit message with tags and added the
+> >>>
+> >>> [ upstream commit ] thing.
+> >>>
+> >>> Hope Tom can better suggest how this should be done. You were CC
+> >>> probably because the git send-email included you as present in the
+> >>> different tags.
+> >>
+> >> Well, Ack is still not valid because I did not Ack exactly that change.
+> >> It does not matter for the ack, but for Reviewed-by it would matter,
+> >> because it is a statement (of oversight...). I cannot control what you
+> >> put into patches taken out of kernel, but at least do not Cc me on tha=
+t.
+> >=20
+> > In specifics, yes, we should update doc/develop/devicetree/control.rst
+> > and maybe doc/develop/sending_patches.rst to use --suppress-cc=3Dall for
+> > dts/upstream.
+> >=20
+> > But in general, what do you expect people to be doing with content from
+> > devicetree-rebasing? We're doing some direct cherry-picks in between
+> > merging of the tags. I think it would be weird to be dropping the tags
+> > and un-attributing peoples work.
+>=20
+>=20
+> I rather expected something like how kernel is importing dtc. You just
+> list the commits you get. If you want the full git history, then I would
+> expect simple git submodule. In both cases there will be no such patches
+> on the lists.
+>=20
+> For the Ack it does not matter, but I would feel uncomfortable if people
+> were sending stripped and modified patches with my Rb tag.
 
-Thanks
-/Ilias
->
-> Regards,
-> SImon
->
->
-> >
-> > Thanks,
-> >
-> > --
-> > Jerome
-> >
-> > On 3/14/25 22:55, Jerome Forissier wrote:
-> > > This series enables most of the driver model tests for network features
-> > > with NET_LWIP (test/dm/eth.c and test/dm/dsa.c).
-> > > - Patches 1-5 fix a few bugs (device selection) and add missing features
-> > > (sandbox timer, restart support) to NET_LWIP
-> > > - Patch 6 decouples the sandbox ethernet driver from NET
-> > > - Patch 7 adds missing static IP addresses that NET_LWIP needs
-> > > - Patches 8 and 9 update the tests to use a common interface to send
-> > >   ICMP packets (do_ping(...) instead of net_loop(PING))
-> > > - Patch 10 enables DM_DSA and the associated tests with NET_LWIP
-> > > - Patch 11 adds a sandbox64 configuration with NET_LWIP=y
-> > > - Patch 12 adds that configuration to the CI
-> > >
-> > > Jerome Forissier (12):
-> > >   net: lwip: do_ping() should return CMD_RET_FAILURE when no device
-> > >   net: lwip: fix initialization sequence before a command
-> > >   net: lwip: provide net_start_again()
-> > >   net: lwip: add restart support to ping
-> > >   net: lwip: use timer_early_get_count() when CONFIG_SANDBOX_TIMER=y
-> > >   drivers: net: sandbox: add support for NET_LWIP
-> > >   sandbox: provide static IP addresses for eth{2,3,5,6,7}
-> > >   net: ping: make do_ping() available via <net.h>
-> > >   test: dm: eth, dsa: update tests for NET_LWIP
-> > >   net: lwip: allow DM_DSA=y when NET_LWIP=y
-> > >   configs: add sandbox64_lwip_defconfig
-> > >   CI: add sandbox64_lwip
-> > >
-> > >  .azure-pipelines.yml             |   2 +
-> > >  .gitlab-ci.yml                   |  11 ++
-> > >  board/sandbox/sandbox.env        |   5 +
-> > >  cmd/net.c                        |   3 +-
-> > >  configs/sandbox64_lwip_defconfig |   5 +
-> > >  drivers/net/Kconfig              |  14 +-
-> > >  drivers/net/Makefile             |   1 -
-> > >  drivers/net/sandbox-lwip.c       |  85 -----------
-> > >  drivers/net/sandbox.c            | 240 ++++++++++++++++++++-----------
-> > >  include/net-common.h             |  15 ++
-> > >  include/net-legacy.h             |   3 -
-> > >  include/net-lwip.h               |  10 +-
-> > >  net/Makefile                     |   2 +-
-> > >  net/lwip/dhcp.c                  |   3 +-
-> > >  net/lwip/dns.c                   |   3 +-
-> > >  net/lwip/net-lwip.c              |  86 +++++++++--
-> > >  net/lwip/ping.c                  |  13 +-
-> > >  net/lwip/tftp.c                  |   5 +-
-> > >  net/lwip/wget.c                  |   6 +-
-> > >  test/dm/Makefile                 |   2 -
-> > >  test/dm/dsa.c                    |   8 +-
-> > >  test/dm/eth.c                    |  77 +++++-----
-> > >  22 files changed, 351 insertions(+), 248 deletions(-)
-> > >  create mode 100644 configs/sandbox64_lwip_defconfig
-> > >  delete mode 100644 drivers/net/sandbox-lwip.c
-> > >
+I guess I'm confused. Looking at
+https://patchwork.ozlabs.org/project/uboot/patch/20250314185941.27834-6-ans=
+uelsmth@gmail.com/
+we're doing the normal thing of havig "[ upstream commit <sha>]" after
+the imported log. When I merge the subtree and tag it indeed gives what
+you're expecting too.
+
+--=20
+Tom
+
+--RySAL1zPmhEnDM7j
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfsFuwACgkQFHw5/5Y0
+tyzXNQwAjKMbfOYbG15L8YATT7yFWHbzoLq2WpxjGBxybqtr44cOuLPeJoeYpNwo
+vk+j8uRpgmPqCWHScELPbIu+t16/eOZwfRPeK4Oxa6/1lQn0zDVof3dxhxnK2PDw
+KsXipccqMJfVzmtnMkCavl6SQt/6IdI2RjnOpVxrc7BmSL6HjMohJRToX9C6wTa7
+qViMCiquvhkmOr3ClPKe85j3cMhMlU5sQBMaPkzSPJBiiyiM7jYuhFOJDjmRitDW
+y/vD5d/Vgw6mevTCXYhZuUESankrNYFJ5Fx5g+tCaPNZA6tl0vxr20RXY0KP/trU
+S9klDXOk9ho55MqUKT3qoBIIap6a0mgS5gN+/fiCVi0CTgrL458/B6nxfyPbxYAv
+zF24CMisHx0yGgOug7VBTQkmm4TeE82kXeGDSqbi9FIjuxzCylcUOdDEFVaUtAmk
+FZfLUSDYaSfG8lvK9Cilb0uCJyjf82l+u00ltP42+7KYLUtFNBh1fX6nyuFSwLbq
+JsOYlzZ6
+=jWmi
+-----END PGP SIGNATURE-----
+
+--RySAL1zPmhEnDM7j--
