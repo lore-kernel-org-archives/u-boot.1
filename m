@@ -4,98 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C930C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 18:02:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11028C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 20:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 703A280FDA;
-	Tue,  1 Apr 2025 20:02:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B80481ECD;
+	Tue,  1 Apr 2025 22:36:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K51J8Zvy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C/ppkBr6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD22381703; Tue,  1 Apr 2025 20:02:25 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id CE8AA81ECD; Tue,  1 Apr 2025 22:36:26 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1983B806D8
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 20:02:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9889181703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 22:36:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3fec2899574so3583802b6e.2
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 11:02:22 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2b2b6019a74so3067025fac.0
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 13:36:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743530541; x=1744135341; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=npj1PcM/YyHcAzYhfQoyePJ6mP1dtIS0Ih2pTjZhffk=;
- b=K51J8ZvyAxLQKWF/Z7KTkpbeiqlZOztcaR795OndebZOvF/tsjncBcg3GS921Ny1Cq
- DkosOMssltVYAnUcG/62XrUyKOsDOqG+jPFlJTcOhlFbaIPPAdPu3285ErsF+I/m8AA7
- vxlJ9GMLSOVRzBDfWO+b6sTiEr6EpOtj03PuY=
+ d=konsulko.com; s=google; t=1743539783; x=1744144583; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=aJ5DHN5x9HZzkx5AMfzzyt3PdQBdJR64nBWiP3f/nFk=;
+ b=C/ppkBr6uaAyz8uD2dkcBNBb6JePzVgu3PKOkQgmhydPCFJ7AbwSARS4yA+sneCR37
+ 2VRTrMlWC8aYkBPsFWnZWiJTQ2SSRB04DLpidpL+Hwi2HW4cSsgg2hUYtRbIDf/lAzfD
+ tmT0d2FARasGfvVa9zut+hBbJjajxP5W/PJ+I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743530541; x=1744135341;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=npj1PcM/YyHcAzYhfQoyePJ6mP1dtIS0Ih2pTjZhffk=;
- b=MPkcZjB9nwOort6QbXYP5+klHmPiYmVQdWLKi1fQLED8jVEQggJVNBhkjNO3ROUYJa
- xEQqqCkXLNDT8pTZ6tGBMlRIdRoPj1ZpbHfWnXyeo23zf/0dRL4du5422ZVkD1nBPvsG
- bvfeDDiJHKUZrAl2YjRKE2wkjteGGXO1EQ5qpIV288jwlLJqE8ImdzN3Va9zJAa1Zxks
- GIX0kApxn0PEHpwD4ZzA8TZhivWp3LDUFeOqvB5/nnP4qQNjaanPqTzhn0yNVViH56gv
- 6hFogd0X6zCCPVmgJ0CHumxsR7SIhimZ/olCqot44Ymstvt1GBuJ/BcX3DL24edOZNcU
- K5rw==
+ d=1e100.net; s=20230601; t=1743539783; x=1744144583;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aJ5DHN5x9HZzkx5AMfzzyt3PdQBdJR64nBWiP3f/nFk=;
+ b=ndlqptdmxGRzxpVECElbgtR/WYY+IOnHc2/b7sc4i9Nm5fKZsFpAtDvuQ/IoC3rOOv
+ 8/F24kNmMz7kE7s77ztVbM4MAis6esLTV74bbYtWmHKQFRG/yUORlfzNkHnyhrse6k2Q
+ qzvmhSAJfPpOo5Q9vCM0fE2tTlIOXnkg/c31ayH6vk6q4KjI+QYrgiqOCjw0XaCblxBE
+ qMdCF85nhZOh30bEhlhRv40YP3G4NVBH5J+bNTGge7snIyAAyLn3aro965W945RSjBb6
+ xu8XNSV5GfdJlDKFQtzPzjgArjlqElojdiNVAeI/BqDpYiKOmKfu+iXKwvocX7UBlsyD
+ GtCA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWE0seX3Tb1THvgL80Rn3tuP07waXb7Val+D8LhjIzgKdHqeoPfHDIIS65Ly7eHnvPgLO8bfSY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyt9q8bDUzrig6bZTqj27mk7D2u8XkulKB6Lvdjlni4WU8GQtEb
- s1oMbgGsX4ZgLWbXGJCb/L2L0yx7HGnyrGVzz1nbmkdlwzAWd5a6jPwbd5TAMyk=
-X-Gm-Gg: ASbGncsVoFZvzV8sULFh8AkMRvKLayGOxU+SeHSEu8N7avC9EbR3xr+z7ggm8anWtBE
- 7iGjy2abQYumAehXo3NElvlWubBJLVTF+YMVyez9HOEz92IoUXjSWcmJW3pUg0arnYGjsUhXo5q
- Gnw+dOkb33vD4pMiR/X5p64W2C0+wP6hGSOgCqGBohXAEIjVqrwFdzNCtDPerIc7yI3bHKbqfSm
- BxA+phXdK737FWHnrUaVa0cF9U3oBSRYxZR8Lk9UodNaLGsT0cE7P6wa9E9BKCFlTGteHaVTjpi
- Kx9RF3IKHdElzRsZiJbeIpx9WD2OWMDvpi0nAOHJCrvyKnqvIxNpvSTXmNS7FDoXMsNmSynmLYC
- jzrLgpA==
-X-Google-Smtp-Source: AGHT+IEbpt4pNajlbTl40grr70rH7oUIcmTJPsCshDB1OC6yEVHb6j7HO7JbMSbiZ/U44epiKheRbg==
-X-Received: by 2002:a05:6808:f8c:b0:3f9:eeca:5dcb with SMTP id
- 5614622812f47-3ff0f66a21dmr8464075b6e.37.1743530540583; 
- Tue, 01 Apr 2025 11:02:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ AJvYcCVH44l5ojGzDGepQEcxglD6Jx3K9SUO9f24YbgX6Ud0fgD3ZcZu44EJoS4EDPG7IyEnlhyCivc=@lists.denx.de
+X-Gm-Message-State: AOJu0YztE9UVDHSuO1c6EajCsEW8rfmcpui8eox0TMPNa4g3fi+DloTj
+ ftjhEo0Xmza/h7w7LQzNueyxGrv8npMnyzpa5ktavSwv9iDlYFqRubf7ievX4JU=
+X-Gm-Gg: ASbGncvayBCVSX1QElNzQzJJkP8efpgBKFFIqPczoDRZIqOqZqgvz1EqxrRtClJSdbe
+ OJTNPs5uL1ZZ5vQsrcb4FESgUpZjOb/ffFOfd46YU+2OzdgKR37QzoVe56fsFqgvt8KNgj6xzqM
+ QGAqqlTFUweb+a6wViCQcxsvaGfY82PMrQrWckxSWZ/6H+S4AJDQpTKdjt3GfJlMKNR9OLalWel
+ Wuos4qlC5cuSU6LUu6elOLdeyFjoz9LWO4W4fRH1AiMcIv4VhxrpUkFIpd/igxmobWEH0TKg2ZJ
+ c+fzeYnOf2eIx/xnf9Pvpy2ICkiptKRPSWGFuPfCAzl6vMIixgcHRU+MbRJT7lZvoK9fz19C9nD
+ Sib7r
+X-Google-Smtp-Source: AGHT+IGmj0alB/PjuvQP3vayZhAfTnRfBsvpN7WtnhrvC9ZeXOitDbb5N7lWB8/zttAaFOymCUEKUg==
+X-Received: by 2002:a05:6871:3b26:b0:2cc:4613:76f0 with SMTP id
+ 586e51a60fabf-2cc46137cd2mr1185404fac.17.1743539783240; 
+ Tue, 01 Apr 2025 13:36:23 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ff05181ecesm2011641b6e.15.2025.04.01.11.02.18
+ 46e09a7af769-72c58266eb4sm1956027a34.51.2025.04.01.13.36.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 11:02:19 -0700 (PDT)
-Date: Tue, 1 Apr 2025 12:02:17 -0600
+ Tue, 01 Apr 2025 13:36:22 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stephen Boyd <sboyd@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 5/6] dt-bindings: clock: drop NUM_CLOCKS define for
- EN7581
-Message-ID: <20250401180217.GO5495@bill-the-cat>
+To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Stephen Boyd <sboyd@kernel.org>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>
+In-Reply-To: <20250314185941.27834-1-ansuelsmth@gmail.com>
 References: <20250314185941.27834-1-ansuelsmth@gmail.com>
- <20250314185941.27834-6-ansuelsmth@gmail.com>
- <7923a39a-184c-4774-ad94-4d72563c8b60@linaro.org>
- <67e5659b.df0a0220.19a25c.f830@mx.google.com>
- <37c1455f-8d53-4643-b57e-3a888e5dd23d@linaro.org>
- <20250401144420.GE5495@bill-the-cat>
- <7b6542f2-0a2b-48ce-aaac-0bdf2f9b2fca@linaro.org>
- <20250401164016.GF5495@bill-the-cat>
- <62fd6270-e6df-472d-b3ee-0023bfce8d27@linaro.org>
+Subject: Re: [PATCH v2 0/6] airoha: Add initial support AN7581
+Message-Id: <174353978195.1112159.319601148390455795.b4-ty@konsulko.com>
+Date: Tue, 01 Apr 2025 14:36:21 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uQx/UlPw+yinUYuV"
-Content-Disposition: inline
-In-Reply-To: <62fd6270-e6df-472d-b3ee-0023bfce8d27@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,116 +102,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 14 Mar 2025 19:59:20 +0100, Christian Marangi wrote:
 
---uQx/UlPw+yinUYuV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This little series adds initial support for Airoha AN7581 SoC.
+> 
+> With the help of some backport patch, this use OF_UPSTREAM
+> directly.
+> 
+> Posting this to have the targer and the very basic driver.
+> 
+> [...]
 
-On Tue, Apr 01, 2025 at 07:28:36PM +0200, Krzysztof Kozlowski wrote:
-> On 01/04/2025 18:40, Tom Rini wrote:
-> > On Tue, Apr 01, 2025 at 05:27:30PM +0200, Krzysztof Kozlowski wrote:
-> >> On 01/04/2025 16:44, Tom Rini wrote:
-> >>> On Thu, Mar 27, 2025 at 03:58:52PM +0100, Krzysztof Kozlowski wrote:
-> >>>> On 27/03/2025 15:50, Christian Marangi wrote:
-> >>>>> On Thu, Mar 27, 2025 at 03:43:47PM +0100, Krzysztof Kozlowski wrote:
-> >>>>>> On 14/03/2025 19:59, Christian Marangi wrote:
-> >>>>>>> Drop NUM_CLOCKS define for EN7581 dts/upstream/src/include. This =
-is not a binding and
-> >>>>>>> should not be placed here. Value is derived internally in the user
-> >>>>>>> driver.
-> >>>>>>>
-> >>>>>>> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> >>>>>>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-> >>>>>> Please drop my Ack. I have never acked such patch for uboot. If I =
-did,
-> >>>>>> it was by mistake - probably you CC-ed me for some reason.
-> >>>>>>
-> >>>>>
-> >>>>> Some explaination, uboot introduced the concept of upstream where t=
-hey
-> >>>>> "import" linux patch for dts and dt-bindings.
-> >>>>
-> >>>> I expected OF_UPSTREAM to be taking the sources, not patches.
-> >>>>
-> >>>>>
-> >>>>> This and the other patch are the exact upstream patch with only the=
- path
-> >>>>> changed so I keep all the patch commit message with tags and added =
-the
-> >>>>>
-> >>>>> [ upstream commit ] thing.
-> >>>>>
-> >>>>> Hope Tom can better suggest how this should be done. You were CC
-> >>>>> probably because the git send-email included you as present in the
-> >>>>> different tags.
-> >>>>
-> >>>> Well, Ack is still not valid because I did not Ack exactly that chan=
-ge.
-> >>>> It does not matter for the ack, but for Reviewed-by it would matter,
-> >>>> because it is a statement (of oversight...). I cannot control what y=
-ou
-> >>>> put into patches taken out of kernel, but at least do not Cc me on t=
-hat.
-> >>>
-> >>> In specifics, yes, we should update doc/develop/devicetree/control.rst
-> >>> and maybe doc/develop/sending_patches.rst to use --suppress-cc=3Dall =
-for
-> >>> dts/upstream.
-> >>>
-> >>> But in general, what do you expect people to be doing with content fr=
-om
-> >>> devicetree-rebasing? We're doing some direct cherry-picks in between
-> >>> merging of the tags. I think it would be weird to be dropping the tags
-> >>> and un-attributing peoples work.
-> >>
-> >>
-> >> I rather expected something like how kernel is importing dtc. You just
-> >> list the commits you get. If you want the full git history, then I wou=
-ld
-> >> expect simple git submodule. In both cases there will be no such patch=
-es
-> >> on the lists.
-> >>
-> >> For the Ack it does not matter, but I would feel uncomfortable if peop=
-le
-> >> were sending stripped and modified patches with my Rb tag.
-> >=20
-> > I guess I'm confused. Looking at
-> > https://patchwork.ozlabs.org/project/uboot/patch/20250314185941.27834-6=
--ansuelsmth@gmail.com/
-> > we're doing the normal thing of havig "[ upstream commit <sha>]" after
-> > the imported log. When I merge the subtree and tag it indeed gives what
-> > you're expecting too.
->=20
-> When you merge subtree, the patch is not modified and it lives in
-> separate repo. No one sends them over lists, no one modifies them.
-> Unlike here (even if modification did not happen, person was touching it
-> so how can anyone be sure? That's not a scripted process).
+Applied to u-boot/next, thanks!
 
-We merge the subtree on tags, and people cherry-pick commits in between
-tags when needed. This is a case of the latter, which is why it says "[
-upstream commit <sha> ]" in the commit message, which is the usual case.
-
---=20
+[1/6] airoha: Add initial support for Airoha AN7581 SoC
+      commit: 793e327e2ca947a293c0eb5beb5eef27744385f0
+[2/6] clk: airoha: Add support for Airoha AN7581 SoC clock
+      commit: d0b81afb5ec9d2d8a3f11bfc827f2f24c32d47ec
+[3/6] reset: airoha: Add driver for controlling reset line of AN7581
+      commit: b02b8b767624a859a2776c11822119392702bbab
+[4/6] arm64: dts: airoha: en7581: Add Clock Controller node
+      commit: 83972387a52712acf98e4827c0d09b72ea970088
+[5/6] dt-bindings: clock: drop NUM_CLOCKS define for EN7581
+      commit: ea0d64adc67d270de27a092d7ff7bfce8780fefb
+[6/6] dt-bindings: clock: add ID for eMMC for EN7581
+      commit: e00a318d64724a8fa1ed1ad56cf54edc1c295f3d
+-- 
 Tom
 
---uQx/UlPw+yinUYuV
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfsKiQACgkQFHw5/5Y0
-tyxrKQv+NEleuc+H8Un6OJQLI16sndCk6sK/F6T85aEwh50dE3UMSfc2f3A/cHqx
-mdRhJNtjbW+UKbul02PzUl6vEA+wo6ic2EW1ATDMvs3XnDyxfQdnOcskn89qVvkW
-Avu69l7pDVf0TS2STriFDWHYp0YvbJYIR+46vsOR0DbY2JtLz65vxfIL2/YLnYFD
-8xjzYmZlkLe/IYkfNyRGIBGoNw3zcCqleV1PjaamvTcRg3CSZDf+y3UxkXazliUD
-3GLt5SQRHSEUWoCRJsk1Ia8q9JghcmwzYYBpuKkWPkqpG70slm5VDNiKHfogYqqP
-uNQEjpwX7/gk1ueUyvWQFwIjEK8D/NtUyos67k/Wag1NIuFzHejE6Tmv7hgpxAPO
-BhKSN7WRRAEY93R39kzJpPFjt8HChestyu+wB/S1CONPHWmO5wp2JPptyKlNXSNa
-Ycts+lwrCJ2Tz0h/gh6MPqZL5U0sq+z5/O9ZecMttxZjI+YgVqvwMyCerEP2Zh/N
-oWBdd5Dy
-=3Qo5
------END PGP SIGNATURE-----
-
---uQx/UlPw+yinUYuV--
