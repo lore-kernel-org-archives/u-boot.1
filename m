@@ -4,98 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D110C36014
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 13:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36C2C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 13:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FD60820DE;
-	Tue,  1 Apr 2025 15:27:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CC2882114;
+	Tue,  1 Apr 2025 15:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GgAMEXZJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jbzr9Dat";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41C4C820F1; Tue,  1 Apr 2025 15:27:42 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 678778212A; Tue,  1 Apr 2025 15:30:31 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB4708209D
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 15:27:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF6008209D
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 15:30:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-30c2d427194so56056661fa.0
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 06:27:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=arturkow2000@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac345bd8e13so940579366b.0
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 06:30:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743514059; x=1744118859; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ko7g6txShFIYBfQ3x2ezAThM0uv+iWyGnLEdyCZoa9g=;
- b=GgAMEXZJNjhxzCSJSqRhDerIRaXK/RnET5SmZodye6B0NTs++GLQjW1sycSjF2yRH2
- ciif/wQwpiO1tTnvZJbNSfhz6nt1uWdnjt1DxMUO0p1IrtCc0AsljIae8JjOXwNDpzsO
- U26WupKQR1W1LxOeEtQjfGsVeJoDvlFDE6nwpeLsZJI119rxEY+rSQBm4pbyJnk8XQNZ
- YtIcLChSLddxpc2fZCyn8E8IhsGSY1uqeLFRsT8dZz0Pk15aK8tL9S29o67to1Wux7Ja
- aPOzmgTL9MyQIexOcAAS3eI+Fjv1/SqZ+RCBGoVcmMaU3Ce18sGQDjycM79or6s2JREq
- K3Ew==
+ d=gmail.com; s=20230601; t=1743514228; x=1744119028; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3DhJUiX/8hSO8+NSGskSs4YW8cpoddwdBS5NGnoanJg=;
+ b=Jbzr9DatLsVJAvV055C1VR9Rc+TIh8xptEvGhX5P9xHb6vij3CPgkIqyETsqR9T1yT
+ trZ2MHdWj+PniyyvkLevox9/EhUZqY709EmiSPt6gUfThv5iIl33an4/am+Qmse8vTH6
+ GAWfVtiVIcl0dUeomA7eKtaaPCXpxjsjLH0qT97EQqueF4QNUmCeIKr/cqMeVv/I9z2H
+ u20Ku3fVXnOPA5cy3voU5h/GdAibnF2aeUT73qhLMjMUd5WBFqoBdwfRSyo+fWHxOhMp
+ JsNLhEOKs4tptZ1bxcoia9frI1Xp0k7zBsu+X75N5pHCJ85laVlscA5oVBU2hlkJBxPf
+ l1GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743514059; x=1744118859;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ko7g6txShFIYBfQ3x2ezAThM0uv+iWyGnLEdyCZoa9g=;
- b=jUEahy7SwZOwPg2Im/ggPG3sVXcXHKzaDEKQHp7SEBOi33OzoUyLtz2NX3k9v5hB48
- 1hltMiKLb776dZD7S6xVhdnS4mdXt/EPQEpzwgxqFeWveKjia239icwMOTo+k5loSUvE
- Ms8wUct4pWpJcELSbKt0+6fVQCsbrnlWhq5abaR2Tq7Bk3gIAI9pWMIznKXDqMGUJIwq
- cpCwF/KifxBsTpwdClr/bOS5QEjAei5XIcxbp8/mCFYce8vjefQ4j1UO7JNxmc5K3CN8
- OelGRTJ23L5XMumWRWlCN18BWAFqleDLR1oOXujtGsJsTXqEwDmVXpJEt40Q7rgbss9s
- 5m7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtKlGnn1OGvqioJ+h81TLVtizixBQBcB9CuyHlz1KuKVAF7iflglGOKONfXjRrmLezcFmluFw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQ70hONrSe0O59fp11eI357XwkUBqkG5ARqt1Z/VdmRjEft/Pl
- mChMSm0XsqG/CSsFwZfaxH5UEvn259d1hxoLoL6I0o2AsQwyLlCCNUqYLdTMXxUcBK4U3sQpx9v
- c/k2V5WYUwgPEcanybx0k908VJH4=
-X-Gm-Gg: ASbGnctrMiE4zXX/W3aL1PyfYJUOgfixoaY8fddn9ma2zuj9QnSS754INIyfq2S8cYa
- BghBsZn1suMWctkxpoO7e4sM7HA9kFVCQfXkNMiOJ3CB3QWI+xpcq/UXcO9C46IGbk1sI5x76nN
- Qy11PtNRbe4zfFPzbTVgjEe8CsIaD3W9siFzjcRwC/NP4URzA6gpAf+ddr
-X-Google-Smtp-Source: AGHT+IHwsJfu+PWDnxPU55Ti/sNMifYuobvE+ApuuAWaz3sjsBe2oOmcAIuM+1BsGrLnRihQIrPpjMnQV0F4VbXdexo=
-X-Received: by 2002:a2e:a593:0:b0:30c:2dbc:6e1c with SMTP id
- 38308e7fff4ca-30eecd8cdf7mr10434121fa.31.1743514058867; Tue, 01 Apr 2025
- 06:27:38 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743514228; x=1744119028;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3DhJUiX/8hSO8+NSGskSs4YW8cpoddwdBS5NGnoanJg=;
+ b=t7XkhanXKsif/9lgUgH0Bhi/JqAQnm7Jrfys8KY1N6WWNT7zHhSzsLVZ78sFSIELoY
+ sRhaduQbIz6uFl+xpmPxIxvfw6zFUZF6Tkt8/7F0Pe5StnzDsL9js5cKTUXEaB8/4jWh
+ wGdHhR/icVKlfskLgePRflfgiiWGXdq958hZtC2sm+UxnDBnPnMHZGYNqHaPoN1vChWV
+ EzcCr6O0WElBjUjiRw7cId0xRsnZZgaKDsW4F4p1zpyO880rLxgDhWOmxRxyJWn2mDJU
+ fRKS5I03xwA8WXgxkpm+gLDFjavn+r2MWp+wYfHvWB3nurZPMFickwSuCE4Qv5l5ix/5
+ v9ug==
+X-Gm-Message-State: AOJu0YxWLoghN0eEburdUJbPAHcCsIzCgKpynBBopRCH3juFtj/JpVci
+ /Mk7lBT3AN0Qn0NwMqQvNKPGNLtHnMkh6y07w+T+ht4nE4CacvhwAWREwg==
+X-Gm-Gg: ASbGncvxP9bVLvfUg0AlkAT0Ps0+o/qWg7EmSf9XWQOAa00rIqBx3YMlPk1Ux5lrHns
+ 9rzbz0P6117hccZ3J6kxaqQesZAgv1lXeASzf8sCUJkEbcbcwUq1THwtZbt8BoL4tNxlqQpfAri
+ LC+Um0rhiHImYPmS/QzB9yy4YJ0tYgWq6nzarREDOs6srOXb1vmO4kEZd7P03Spv4imxPgOfiyf
+ KnaqAN04/vn32uzM0hfaLB2viGF7aeEzXPELxJsuV2whGJbGSydC7+YYP2c9eBb3N67jieuleet
+ t6wy7oZrtkfkI91EuuWHq5EMt8kUKdqNc+fu+ONB55gRqlWkZ2bq86woj8OSZqD2nLjuN3iP7M4
+ 5YnNF9ajrDTsMyMKvSzM0
+X-Google-Smtp-Source: AGHT+IGiuL02HhOzPc55G6I4MGsC0mk0HWduDZ+06e2JnOrCkupauyl7pYUfkbk90VnDUNC9wO8uYg==
+X-Received: by 2002:a17:907:1b27:b0:ac2:49de:3969 with SMTP id
+ a640c23a62f3a-ac738ba8dc9mr905175866b.47.1743514227893; 
+ Tue, 01 Apr 2025 06:30:27 -0700 (PDT)
+Received: from [192.168.0.15] (89-64-20-160.dynamic.chello.pl. [89.64.20.160])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac7196dc370sm758709566b.163.2025.04.01.06.30.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Apr 2025 06:30:27 -0700 (PDT)
+Message-ID: <bae6ce3f-df88-4ddf-b1cc-dcb14bb54ea0@gmail.com>
+Date: Tue, 1 Apr 2025 15:30:27 +0200
 MIME-Version: 1.0
-References: <20250321-imx95-v1-0-f2c8ba815f89@oss.nxp.com>
- <20250321-imx95-v1-2-f2c8ba815f89@oss.nxp.com>
- <a180b7e6-6978-4814-97ff-05e34223938f@denx.de>
- <20250325080614.GC27303@nxa18884-linux>
- <a84f63fb-61c2-4f0e-89ed-8046e8eeed85@denx.de>
- <PAXPR04MB8459808C7CC6C16DB43B973388A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <bc232085-3efb-43fb-b176-eaf43e52f1f8@denx.de>
- <PAXPR04MB8459F46041C7EFF7191F8EFD88A62@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <bbb8ecca-789d-40cc-93a8-e7284e1af840@denx.de>
- <PAXPR04MB96445CAACB6E8413A03CA386E2AC2@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <a3007174-30a8-4dc2-ab7f-da1c1de52440@denx.de>
-In-Reply-To: <a3007174-30a8-4dc2-ab7f-da1c1de52440@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 1 Apr 2025 10:27:27 -0300
-X-Gm-Features: AQ5f1JqPqsT-CFJaT45UAZJsPkBmXrYaP0ORfp6m3nWHfg98m2Ds22Kr10rhjOM
-Message-ID: <CAOMZO5ADxWjgSyYf2MKNodpRbJTRxUKETvqXatB_N510XOy5xw@mail.gmail.com>
-Subject: =?UTF-8?Q?Re=3A_=E5=9B=9E=E5=A4=8D=3A_=5BPATCH_v8_02=2F19=5D_pinctrl=3A_nxp=3A_add_a_pin?=
- =?UTF-8?Q?_controller_driver_based_on_SCMI_pin_control_protocol?=
-To: Marek Vasut <marex@denx.de>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, 
- Peng Fan <peng.fan@nxp.com>, dl-uboot-imx <uboot-imx@nxp.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
- =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@karo-electronics.de>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>, 
- Ye Li <ye.li@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] tegra: respect CONFIG_TEGRA_ENABLE_UART* options
+ on Transformer T20
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Simon Glass <sjg@chromium.org>, Stephen Warren <swarren@nvidia.com>,
+ Tom Rini <trini@konsulko.com>, Tom Warren <twarren@nvidia.com>
+References: <20250330192656.1280403-1-arturkow2000@gmail.com>
+ <20250330212638.v2.2.I04194142897633b6272f2f235daed4f3a0b8939b@changeid>
+ <CAPVz0n2qCOx6dF7DnwEdnptw1hmvbR7ky70zB6ESM7pqeEuVdw@mail.gmail.com>
+Content-Language: pl
+From: Artur Kowalski <arturkow2000@gmail.com>
+In-Reply-To: <CAPVz0n2qCOx6dF7DnwEdnptw1hmvbR7ky70zB6ESM7pqeEuVdw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,13 +104,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 1, 2025 at 9:53=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 
-> > When will this patch "[PATCH] power: regulator: scmi: Move regulator su=
-bnode hack to scmi_regulator" be applied to the uboot next branch? I have a=
-lready made the next version patch set based on this patch.
-> Fabio/Tom ?
-
-This is assigned to Jaehoon in patchwork:
-https://patchwork.ozlabs.org/project/uboot/patch/20250322014444.174796-1-ma=
-rex@denx.de/
+W dniu 31.03.2025 o 07:48, Svyatoslav Ryhel pisze:
+> нд, 30 бер. 2025 р. о 22:27 Artur Kowalski <arturkow2000@gmail.com> пише:
+>> If debug UART is set to anything other than UARTD, U-Boot's SPL hangs
+>> trying to communicate with UARTD which clock won't be ungated. With this
+>> patch it is possible to boot with UARTA enabled.
+>>
+>> Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
+>> ---
+>>
+>> (no changes since v1)
+>>
+>>   include/configs/transformer-t20.h | 10 ++++++++++
+>>   1 file changed, 10 insertions(+)
+>>
+>> diff --git a/include/configs/transformer-t20.h b/include/configs/transformer-t20.h
+>> index 6a3d9b24036..d3a98cc5a70 100644
+>> --- a/include/configs/transformer-t20.h
+>> +++ b/include/configs/transformer-t20.h
+>> @@ -16,7 +16,17 @@
+>>   #define CFG_TEGRA_BOARD_STRING         "ASUS Transformer"
+>>
+>>   /* Board-specific serial config */
+>> +#if defined(CONFIG_TEGRA_ENABLE_UARTA)
+>> +#define CFG_SYS_NS16550_COM1           NV_PA_APB_UARTA_BASE
+>> +#elif defined(CONFIG_TEGRA_ENABLE_UARTB)
+>> +#define CFG_SYS_NS16550_COM1           NV_PA_APB_UARTB_BASE
+>> +#elif defined(CONFIG_TEGRA_ENABLE_UARTC)
+>> +#define CFG_SYS_NS16550_COM1           NV_PA_APB_UARCD_BASE
+>> +#elif defined(CONFIG_TEGRA_ENABLE_UARTD)
+>>   #define CFG_SYS_NS16550_COM1           NV_PA_APB_UARTD_BASE
+>> +#elif defined(CONFIG_TEGRA_ENABLE_UARTE)
+>> +#define CFG_SYS_NS16550_COM1           NV_PA_APB_UARTE_BASE
+>> +#endif
+>>
+> Here you are actually hitting much much deeper thing. You are applying
+> fix to the result, not the cause. Adjustment should be done in the
+> tegra board itself with amending all existing tegra boards. As a
+> maintainer I cannot insist on you doing this unless you willingly
+> agree. You have time to answer till 02.03.25 and if no answer I will
+> apply patch on my own to custodian tegra/staging branch.
+I'd like to do it but unfortunately I won't have enought time this week.
+>>   #include "tegra-common-post.h"
+>>
+>> --
+>> 2.48.1
+>>
