@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE75C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B22DC36017
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:32:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85DC3820F6;
-	Tue,  1 Apr 2025 19:30:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE90C81F4D;
+	Tue,  1 Apr 2025 19:31:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aviEfjO2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iedvARHn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56B6181F4D; Tue,  1 Apr 2025 19:30:58 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id B8E79820F0; Tue,  1 Apr 2025 19:31:03 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3AB5817C4
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:30:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D3E982107
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:31:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3035858c687so8063123a91.2
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:30:55 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-3031354f134so7631424a91.3
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743528654; x=1744133454; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743528659; x=1744133459; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EqVrKTSkqc2xZjMoN9d9B1IccAt67cCOem4D0J0V0+8=;
- b=aviEfjO2j/3dAgPLRYdG2p3XiQg4glQrCxwgBNLszUosNVi14p4lOOYDz5sghbKF7r
- 02ulz0CKY+qXxlfIzsrJgg6SH+r/duzydJsyG7piAgzx511fpp9yPTlWlb6JItgKVBEX
- u+/Bf/ivnGstm+466aPI0HS0v+N1YkzYYNU8g=
+ bh=7eEspsTEAnPtQNdPpmIjYfsiogZtGlLoCRpXzW6Q/Zk=;
+ b=iedvARHnyg1L3rpGebephaPekPzML3pg3AGLuahGgQRWOw2vTgODjJihikoHPoPEEx
+ xNWxsrztIJSbXgCriuiPcE3eUOoAa1MIvB99ADHGolI4YgxRBaNoLuJ7GFMYU6A1LnuA
+ 3Lgb2NMXqMDNVpSinbTnipSQP7b9J2tZwS510=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743528654; x=1744133454;
+ d=1e100.net; s=20230601; t=1743528659; x=1744133459;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EqVrKTSkqc2xZjMoN9d9B1IccAt67cCOem4D0J0V0+8=;
- b=rb9M38k6UgeI2SpcgcWM8047W5mVpD54fi6W6IGA2PUNDbn5Elga+jia0+hR4c6R+9
- znB3sHigApLH4cKbryVnUBt8ow81/RTCzW3aU08N3xlcz8IQr8EoCJlFZqrGfpUmYGN1
- drAXLH7tU4TvmumKsyArfj+xlsAOlKdQAmh3CruPsKSCVLPG5gpVwepw+EYeOZ7jRWRO
- bKp8k06OzJYrV+KZX1+wQ6NHNCW1MZyujG+sPvcsl8zkuuIwKc/WVDTvflulJ6i1vVqy
- RyrDtsgC0NSt1JgzV9R+gzECjLOIIFYptTnAvX0TnXmgktYa9v/O1JvvRhe919xBHZMW
- NRgA==
-X-Gm-Message-State: AOJu0YxbfxP+XybFd+9K0JojO3q+WOCvi/hIyrLFYh4pS95n1cvpfDYH
- QkRbJsEY7bVjoCKyxX4n5z8Ts0Vcdfroi2JNJGx5nGvzdsTAQ3DIF/GyptrR85F1uTiroyrVq/H
- 8ag==
-X-Gm-Gg: ASbGncsPmH8oRZOEFcGTCStI93upD5KgJYFwmJeqcqWutqcxKAvnXPDZo9JixHlvvWe
- BAKmyhcXANuD09WDimP5U2VJbAL5RKKRTbOfhrN/gKTVkUOZsxFo5E0qonb5N+oNN3DUZQuvYsD
- a7KaQD14THT/W0aoVDQnGG4EUdCdhWWU02xwUK4MAGQtAgh1Ug0HpX5L1eTgpkfeMWhrXOV605f
- 4h/l5Mwib77/f3WOjmAOe1MwM9Eja1HSjGC7C8Ul7FHYAyq+MzH6wLHtAusZm+COMA6t1pBWmRW
- yRZZhjmb1yuog0IZQLFu+w/0JfrXjSs961+qnNKeN3GE8dKm157Uzg==
-X-Google-Smtp-Source: AGHT+IFpIEj7pIY7tuBx+Rqqtpxy+TIiTov/70HSyJv5bmqGUeuiNLFMYFxubBgbQxuqr1NaoxVlVg==
-X-Received: by 2002:a17:90b:4fcd:b0:2ee:dd9b:e402 with SMTP id
- 98e67ed59e1d1-30531fa16b0mr23463258a91.12.1743528653872; 
- Tue, 01 Apr 2025 10:30:53 -0700 (PDT)
+ bh=7eEspsTEAnPtQNdPpmIjYfsiogZtGlLoCRpXzW6Q/Zk=;
+ b=pmoeTcaE94eS2S/u/zGrsbzVsSp7zYrBXXTQ8zxHQuI1aA8b0/mzO3WS4Iv7y+LMY0
+ zgiO7o2SaKd45armd1L0FoBg5Ir8rvB5fO/pWZdApDnLgjPvxIMeg2sL0r4XCZlzZr/w
+ 7U/naNOWwFrtMHBzS+wBxxPSDKzbNqD4JqocRLeF6PCCAaeruR4tfJ5hJqGr/JYgKN5v
+ u/Dt7D3wzJ/abEf7ElAqd91oZIqcg9d8ZfMc44QwDXpNKdBfP+dKsGIrcCIkAPXXggk/
+ vLzKnO/HhLNFfQ0632FB66TDGSuYL6tdIPoS0fTs01WTq6WQj1nQv9vqGpn/AhouqHkG
+ S46g==
+X-Gm-Message-State: AOJu0YwwGtcx4wgWz5nYkjBJvQ+nRzcbIqbIGe+haL/GLqJspwmbmYaS
+ hX1MFtDOekpR68XzIiKroO08tt10VvyPtaixM2RetuKe2GRb5WE1wIhacLFwA0EIOKhq6aktkuy
+ W+Q==
+X-Gm-Gg: ASbGncuF594nixTC320bhMf6tG/z09Bujkehto7OBpu4JaLG1SrUfnQCrJRBNQWvCGP
+ WTwV0orza+/X/upi1WAcuk0K4h5OJG98hoJA+simxcogMD7VC0SrH1Z9rH/BHN31/w9q/zG7ySz
+ 35+rL4/ahw8grRpp7/f6ObdFwaFQtGNAfsWFwoRyigJI4WGljq+Lcr+AkHnRhkwaMRwoESjpYK6
+ urL6F2x9K2I6AaCbTl7Go8cFM/ZhBfUYjdnRJWOjmw1pzz0GA/rx4kkXtcQep3DBkE77KaQXFmF
+ BwgNhtp+2RZ3dexRe9J+wXorQ9Jgj+qC6m2UhO8QUOE=
+X-Google-Smtp-Source: AGHT+IEQZAduIVBaMY6nst6njblzw/lFBSRZ3X1u1NvOZ/qq7Q8RoSYzDSSzDl2LRSJKeUkxsyDYfg==
+X-Received: by 2002:a17:90b:3644:b0:305:5f32:d9f5 with SMTP id
+ 98e67ed59e1d1-3055f32da23mr5911896a91.7.1743528658964; 
+ Tue, 01 Apr 2025 10:30:58 -0700 (PDT)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3039dfd48e2sm11958976a91.9.2025.04.01.10.30.50
+ 98e67ed59e1d1-3039dfd48e2sm11958976a91.9.2025.04.01.10.30.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 10:30:53 -0700 (PDT)
+ Tue, 01 Apr 2025 10:30:58 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/13] video: Allow console output to be silenced
-Date: Wed,  2 Apr 2025 06:29:42 +1300
-Message-ID: <20250401172948.1236000-12-sjg@chromium.org>
+Subject: [PATCH 12/13] video: Add a function to draw a rectangle
+Date: Wed,  2 Apr 2025 06:29:43 +1300
+Message-ID: <20250401172948.1236000-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250401172948.1236000-1-sjg@chromium.org>
 References: <20250401172948.1236000-1-sjg@chromium.org>
@@ -96,146 +97,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using expo we want to be able to control the information on the
-display and avoid other messages (such as USB scanning) appearing.
+Provide a way to draw an unfilled box of a certain width. This is useful
+for grouping menu items together.
 
-Add a 'quiet' flag for the console, to help with this.
-
-The test is a little messy since stdio is still using the original
-vidconsole create on start-up. So take care to use the same.
+Add a comment showing how to see the copy-framebuffer, for testing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/video/vidconsole-uclass.c | 13 +++++++++++
- include/video_console.h           | 10 +++++++++
- test/dm/video.c                   | 37 +++++++++++++++++++++++++++++++
- 3 files changed, 60 insertions(+)
+ drivers/video/video-uclass.c | 36 ++++++++++++++++++++++++++++++++++++
+ include/video.h              | 19 ++++++++++++++++++-
+ test/dm/video.c              | 21 +++++++++++++++++++++
+ 3 files changed, 75 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index fa329bd1b37..6ba62ec348e 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -532,8 +532,11 @@ int vidconsole_put_string(struct udevice *dev, const char *str)
- static void vidconsole_putc(struct stdio_dev *sdev, const char ch)
- {
- 	struct udevice *dev = sdev->priv;
-+	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
- 	int ret;
- 
-+	if (priv->quiet)
-+		return;
- 	ret = vidconsole_put_char(dev, ch);
- 	if (ret) {
- #ifdef DEBUG
-@@ -551,8 +554,11 @@ static void vidconsole_putc(struct stdio_dev *sdev, const char ch)
- static void vidconsole_puts(struct stdio_dev *sdev, const char *s)
- {
- 	struct udevice *dev = sdev->priv;
-+	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
- 	int ret;
- 
-+	if (priv->quiet)
-+		return;
- 	ret = vidconsole_put_string(dev, s);
- 	if (ret) {
- #ifdef DEBUG
-@@ -794,3 +800,10 @@ void vidconsole_position_cursor(struct udevice *dev, unsigned col, unsigned row)
- 	y = min_t(short, row * priv->y_charsize, vid_priv->ysize - 1);
- 	vidconsole_set_cursor_pos(dev, x, y);
- }
-+
-+void vidconsole_set_quiet(struct udevice *dev, bool quiet)
-+{
-+	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
-+
-+	priv->quiet = quiet;
-+}
-diff --git a/include/video_console.h b/include/video_console.h
-index e4fc776e2d3..8f3f58f3aa9 100644
---- a/include/video_console.h
-+++ b/include/video_console.h
-@@ -53,6 +53,7 @@ enum {
-  * @row_saved:		Saved Y position in pixels (0=top)
-  * @escape_buf:		Buffer to accumulate escape sequence
-  * @utf8_buf:		Buffer to accumulate UTF-8 byte sequence
-+ * @quiet:		Suppress all output from stdio
-  */
- struct vidconsole_priv {
- 	struct stdio_dev sdev;
-@@ -77,6 +78,7 @@ struct vidconsole_priv {
- 	int col_saved;
- 	char escape_buf[32];
- 	char utf8_buf[5];
-+	bool quiet;
- };
- 
- /**
-@@ -584,4 +586,12 @@ void vidconsole_list_fonts(struct udevice *dev);
-  */
- int vidconsole_get_font_size(struct udevice *dev, const char **name, uint *sizep);
- 
-+/**
-+ * vidconsole_set_quiet() - Select whether the console should output stdio
-+ *
-+ * @dev: vidconsole device
-+ * @quiet: true to suppress stdout/stderr output, false to enable it
-+ */
-+void vidconsole_set_quiet(struct udevice *dev, bool quiet);
-+
- #endif
-diff --git a/test/dm/video.c b/test/dm/video.c
-index 737ab915f41..dd06b2f58e8 100644
---- a/test/dm/video.c
-+++ b/test/dm/video.c
-@@ -17,6 +17,7 @@
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index db40744c196..780b2bc6125 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -26,6 +26,7 @@
+ #ifdef CONFIG_SANDBOX
  #include <asm/sdl.h>
- #include <dm/test.h>
- #include <dm/uclass-internal.h>
-+#include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
- #include <test/video.h>
-@@ -865,3 +866,39 @@ static int dm_test_font_measure(struct unit_test_state *uts)
+ #endif
++#include "vidconsole_internal.h"
+ 
+ /*
+  * Theory of operation:
+@@ -216,6 +217,40 @@ int video_fill_part(struct udevice *dev, int xstart, int ystart, int xend,
  	return 0;
  }
- DM_TEST(dm_test_font_measure, UTF_SCAN_FDT);
-+
-+/* Test silencing the video console */
-+static int dm_test_video_silence(struct unit_test_state *uts)
+ 
++int video_draw_box(struct udevice *dev, int x0, int y0, int x1, int y1,
++		   int width, u32 colour)
 +{
-+	struct udevice *dev, *con;
-+	struct stdio_dev *sdev;
++	struct video_priv *priv = dev_get_uclass_priv(dev);
++	int pbytes = VNBYTES(priv->bpix);
++	void *start, *line;
++	int pixels = x1 - x0;
++	int row;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
++	start = priv->fb + y0 * priv->line_length;
++	start += x0 * pbytes;
++	line = start;
++	for (row = y0; row < y1; row++) {
++		void *ptr = line;
++		int i;
 +
-+	/*
-+	 * use the old console device from before when dm_test_pre_run() was
-+	 * called, since that is what is in stdio / console
-+	 */
-+	sdev = stdio_get_by_name("vidconsole");
-+	ut_assertnonnull(sdev);
-+	con = sdev->priv;
-+	ut_assertok(vidconsole_clear_and_reset(con));
-+	ut_unsilence_console(uts);
++		for (i = 0; i < width; i++)
++			fill_pixel_and_goto_next(&ptr, colour, pbytes, pbytes);
++		if (row < y0 + width || row >= y1 - width) {
++			for (i = 0; i < pixels - width * 2; i++)
++				fill_pixel_and_goto_next(&ptr, colour, pbytes,
++							 pbytes);
++		} else {
++			ptr += (pixels - width * 2) * pbytes;
++		}
++		for (i = 0; i < width; i++)
++			fill_pixel_and_goto_next(&ptr, colour, pbytes, pbytes);
++		line += priv->line_length;
++	}
++	video_damage(dev, x0, y0, x1 - x0, y1 - y0);
 +
-+	printf("message 1: console\n");
-+	vidconsole_put_string(con, "message 1: video\n");
++	return 0;
++}
 +
-+	vidconsole_set_quiet(con, true);
-+	printf("second message: console\n");
-+	vidconsole_put_string(con, "second message: video\n");
+ int video_reserve_from_bloblist(struct video_handoff *ho)
+ {
+ 	if (!ho->fb || ho->size == 0)
+@@ -479,6 +514,7 @@ int video_sync(struct udevice *vid, bool force)
+ 		video_flush_dcache(vid, true);
+ 
+ #if defined(CONFIG_VIDEO_SANDBOX_SDL)
++	/* to see the copy framebuffer, use priv->copy_fb */
+ 	sandbox_sdl_sync(priv->fb);
+ #endif
+ 	priv->last_sync = get_timer(0);
+diff --git a/include/video.h b/include/video.h
+index 0ec6b1ca289..9ea6b676463 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -249,7 +249,7 @@ int video_fill(struct udevice *dev, u32 colour);
+ /**
+  * video_fill_part() - Erase a region
+  *
+- * Erase a rectangle of the display within the given bounds.
++ * Erase a rectangle on the display within the given bounds
+  *
+  * @dev:	Device to update
+  * @xstart:	X start position in pixels from the left
+@@ -262,6 +262,23 @@ int video_fill(struct udevice *dev, u32 colour);
+ int video_fill_part(struct udevice *dev, int xstart, int ystart, int xend,
+ 		    int yend, u32 colour);
+ 
++/**
++ * video_draw_box() - Draw a box
++ *
++ * Draw a rectangle on the display within the given bounds
++ *
++ * @dev:	Device to update
++ * @x0:		X start position in pixels from the left
++ * @y0:		Y start position in pixels from the top
++ * @x1:		X end position in pixels from the left
++ * @y1:		Y end position in pixels from the top
++ * @width:	width in pixels
++ * @colour:	Value to write
++ * Return: 0 if OK, -ENOSYS if the display depth is not supported
++ */
++int video_draw_box(struct udevice *dev, int x0, int y0, int x1, int y1,
++		   int width, u32 colour);
 +
-+	vidconsole_set_quiet(con, false);
-+	printf("final message: console\n");
-+	vidconsole_put_string(con, "final message: video\n");
+ /**
+  * video_sync() - Sync a device's frame buffer with its hardware
+  *
+diff --git a/test/dm/video.c b/test/dm/video.c
+index dd06b2f58e8..ecf74605b5c 100644
+--- a/test/dm/video.c
++++ b/test/dm/video.c
+@@ -902,3 +902,24 @@ static int dm_test_video_silence(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_video_silence, UTF_SCAN_FDT);
 +
-+	ut_asserteq(3892, video_compress_fb(uts, dev, false));
++/* test drawing a box */
++static int dm_test_video_box(struct unit_test_state *uts)
++{
++	struct video_priv *priv;
++	struct udevice *dev;
++
++	ut_assertok(video_get_nologo(uts, &dev));
++	priv = dev_get_uclass_priv(dev);
++	video_draw_box(dev, 100, 100, 200, 200, 3,
++		       video_index_to_colour(priv, VID_LIGHT_BLUE));
++	video_draw_box(dev, 300, 100, 400, 200, 1,
++		       video_index_to_colour(priv, VID_MAGENTA));
++	video_draw_box(dev, 500, 100, 600, 200, 20,
++		       video_index_to_colour(priv, VID_LIGHT_RED));
++	ut_asserteq(133, video_compress_fb(uts, dev, false));
 +	ut_assertok(video_check_copy_fb(uts, dev));
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_video_silence, UTF_SCAN_FDT);
++DM_TEST(dm_test_video_box, UTF_SCAN_FDT);
 -- 
 2.43.0
 
