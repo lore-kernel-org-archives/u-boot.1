@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98461C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 22:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F18C3601A
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 22:54:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 534A1820A0;
+	by phobos.denx.de (Postfix) with ESMTP id 9CF5B820F6;
 	Wed,  2 Apr 2025 00:52:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SJumakoO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lBWA2cuN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD584820E3; Wed,  2 Apr 2025 00:52:54 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 6B91A81FDE; Wed,  2 Apr 2025 00:52:56 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE2FA81F4D
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 00:52:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 690AA80F6B
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 00:52:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cf848528aso52546015e9.2
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 15:52:52 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-39129fc51f8so4518354f8f.0
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 15:52:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743547972; x=1744152772; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743547974; x=1744152774; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6GT2iCEOxGo3chKEWDmYa67Dxy7h4pm0P1Oned8gAaQ=;
- b=SJumakoODh+iV5/7wnahxqSdmqSvCK3MR08dAYv4nU5Gt/L3GgaNcOC4DQk5DQ4KA/
- j6Guu2/z1t95s0X4JT4rl/zcZInIXqxaZkTjkzFNlCAlnKqqnIZvKnoipYtdOvurfOgQ
- XanEpmx1vMz8CTGeOPbNybqYpFVTd9NTjJvNBR/nNuRYFMeR0s2WcpoZHHEAdmLRAi07
- 1hpE2f8i+8QBthr3JRC83/iEvtqxMeYse3G5uFP4363fq1nsPHCN5e6EhEhzt3y7c6Bs
- fYX0Iq4tDACfWdqf1qBGlRG1E6TxtCdIVi0L/khlLohEpAXRQkNI0WsroP0vZB8htI6z
- L80A==
+ :reply-to; bh=vCyZRTYLDfmguNjxIS97kTyRoqTJ0HpdK6Xxma5aFOA=;
+ b=lBWA2cuNDOLQyDuiqaAWxtBeeX8zygagMXfDqpuYwpKTdVOs13GY/Hz7U0aEfMUBkA
+ 6I76j62OP/oggRB9WXbxokTE+mJ1qa7KSiXCDB1s6FDgpIXx2xjlfi6oxmarFJovzUhU
+ uHBNHq9v2UGXqztnRdLhN0uc1vcZNU8nWzbVIBI7N9wcrQVsZGFeeV36cv1HF4qYrlz9
+ rZ+Q0ulTGGT4jOZ3VsiKarsBgUz8+kpCJSLtODpgX+DACQvFf3t0fDFXq1dqftF5LnO9
+ 9ANr3WW3H+ktGcoapNop01OrMO1PHmlpdsnPujDLFzbPt57uMVEoCaYukTFgkA15y0ez
+ WVCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743547972; x=1744152772;
+ d=1e100.net; s=20230601; t=1743547974; x=1744152774;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6GT2iCEOxGo3chKEWDmYa67Dxy7h4pm0P1Oned8gAaQ=;
- b=XIgjJOEmz+tDaPe4FX6zUGFch/GYPN+iOCQcpiA6L0HHGL/9Fdu1yde9ifdpJkGqyR
- pytGWYg2ke9QAIfzRVWbVh3z2529Or8LQAdKdVPWLRIQvbjuiXGfAXAsE8ru0PBP3dWU
- Xi+513b8psAcUyitwNLLcvJYIJ1k4rYidICO2T/EHrbsD2+j4sZU1r6vgQ4QMG/Oyaum
- QYgRa3Y8IZwsexX0q6QiH7JqAQd0f94I9owmU/Z+JlR2uaN8X0BlocVZ7/K0JJi2mURG
- o5Mzc4bM0PnWWUEPz8Oi/nfO/Lf6ifT7uBuFqjZh1TRBBvPad6XZbFM4lXUSbLOjlb3t
- NBWA==
+ bh=vCyZRTYLDfmguNjxIS97kTyRoqTJ0HpdK6Xxma5aFOA=;
+ b=pnu+XF/VEwHBfm3VHJfAzV0VRX0+Z7XS4NHhFlsD/j7l4rO8LMbVuDkhIa6hA54j+9
+ 9aWeRuiFhP1YYy6PHBCecNK8CZiM41pE+F/q64sZzq32hB4H8M+7KlrMO/rFCyerD4ls
+ IIczbnaV3Z+J0DKd6F+Fr4ljl/roo1OcgEl78f1It1Kspc2lU7+iCleOxLWZLosN9F1B
+ 5O9d7ApRAvbY6QM/nvtuZdwHM9oc+UeFAPutPKMhkJeSrBppTOEMfLXr9t3sVNHKLCN9
+ wqH66GpdJN5iBJ7W8uCVSV8Q0PyfEtRQIemAd3QYwjZ/+AlCL2AUVI/y5SRskQA+EjRY
+ FDyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW5Z5fhwVAG6hjBz5PZUJ26xlF0sVWvUi1S9mvLoYEyyk/lE60kP98q4vGpFVrYkhwwU7jxW/E=@lists.denx.de
-X-Gm-Message-State: AOJu0YzoNSVsusbK1uhRYGrSBLC7zHDJGH1AujP6i04gALMW+e1VLbmC
- /WK/Mo4DoRSPpwUrrRKG/0lod/kgJrTsRBuEWKRJ+ZZHFDEDOsZI
-X-Gm-Gg: ASbGncvpAaWPmSviBLrraIfg9BttoqaI2ov1o1TrN/g1FlKDPcG1ZQJSSfPlzYDkMQT
- HlJ3viY+qmzz2oNzhmqOJMib5bfv4nmy4TpnciQVt6t/fKPKGb+ZyKs1V193IyFNyGvK87Tf3Dg
- Wms5IBqqG60i9OToFq1qy7WmaQrptJlMUyF/wC4q+SgXIcqE4gnuMne1ve4VGp3MyxFmnnVkxz6
- NVoiEGJagfNgbe6DeKaURNZBW4840YWUAKVc9wjnnhNQ1s6tYboUIva6gF75rdcZ+u65iQ25y77
- MdeqDZolhlyVQ61ikFpIoxuDxQLxfdSwv6ikJ0/95EzUYe4Ivqx1v5b1Hqwbw+aNKaSnI6GCmbj
- mAvU+T/UPfu4eJA==
-X-Google-Smtp-Source: AGHT+IEoqEjQxwiohoTYXPTsI44DHZqoR3+eOxXv5JXY8S+M8SsKZPwkIQzfCMIELA7bhYlOeINyKA==
-X-Received: by 2002:a05:600c:4f8a:b0:43d:412e:8a81 with SMTP id
- 5b1f17b1804b1-43eb5cd2d2dmr1818555e9.28.1743547972119; 
- Tue, 01 Apr 2025 15:52:52 -0700 (PDT)
+ AJvYcCVgsJ0n3VzcLOXT7Mb3YpADMk08ZrFGSh2KE61ryFSeM2GPCjBkCIFaEBB2qiYnDg53KJF0+1U=@lists.denx.de
+X-Gm-Message-State: AOJu0YzY4YATjIHDVaoj1hDxdwYqP9ymQQbtTJawPq/kR3CY9CA9GXgW
+ 8FXC8IFF182KfQLviKMnazHucC1WZQNSkfbpMckSFMLD2PGklHN2
+X-Gm-Gg: ASbGncvnZZ1lftcGnxF+NLgqg2HB4Ilt2tvPMdlFO0fbVYCCl8inPFAzyV/DwvHNlw6
+ Nm/P12whDW80lu6g2Qaj3zeZ+i+219nFLt2wTxc7refNnS1ih2iBz9DpGU0puzFAytV2XUWr/Pz
+ SHEktCOgGh2JAhV2xPBdmLQbBkpDiANpKDioUG2EObP5FjR6NuRF/+uw/mANX3RA0tR0lnvfUTz
+ ZJ0o3xri3obmNDwCksMjViS2751PG2Z3KAUbU97SEIxYcKcyo1xM1eTQgrBMZVl3BGNEkYaKlXt
+ IMGLEx8ng5Zt380p5yvYjkpgHIqp4DJltddCu6m42iwPYxiSLDWoQqZF1+ohQXjsze24CFm4xB3
+ 0iVlXqP+hrLx9/A==
+X-Google-Smtp-Source: AGHT+IFPZC5caVT0NPy5IonABzspDBarGRQAAJy7oKiKFWxIlNP3mVXTGEyvfv31fh5hx25WZVXMDg==
+X-Received: by 2002:a05:6000:2d10:b0:391:ba6:c069 with SMTP id
+ ffacd0b85a97d-39c1211501fmr8356275f8f.44.1743547973790; 
+ Tue, 01 Apr 2025 15:52:53 -0700 (PDT)
 Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
  [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-43eb60cd77bsm2478625e9.19.2025.04.01.15.52.50
+ 5b1f17b1804b1-43eb60cd77bsm2478625e9.19.2025.04.01.15.52.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 15:52:51 -0700 (PDT)
+ Tue, 01 Apr 2025 15:52:52 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -82,9 +82,10 @@ To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Bruce Suen <bruce_suen@163.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 13/14] arm: dts: an7581: Add SNAND node
-Date: Wed,  2 Apr 2025 00:51:45 +0200
-Message-ID: <20250401225156.25790-14-ansuelsmth@gmail.com>
+Subject: [PATCH 14/14] configs: airoha: an7581_evb: Enable Airoha SNFI SPI
+ config
+Date: Wed,  2 Apr 2025 00:51:46 +0200
+Message-ID: <20250401225156.25790-15-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250401225156.25790-1-ansuelsmth@gmail.com>
 References: <20250401225156.25790-1-ansuelsmth@gmail.com>
@@ -106,45 +107,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SNAND node to Airoha AN7581 EVB DTS to enable support for attached
-SNAND flash.
+Enable Airoha SNFI SPI config to enable support for SNAND flash.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/an7581-u-boot.dtsi | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ configs/an7581_evb_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/an7581-u-boot.dtsi b/arch/arm/dts/an7581-u-boot.dtsi
-index 46526ff0f0f..a9297ca6503 100644
---- a/arch/arm/dts/an7581-u-boot.dtsi
-+++ b/arch/arm/dts/an7581-u-boot.dtsi
-@@ -59,6 +59,26 @@
- 			reg = <0 0x1fb58000 0 0x8000>;
- 		};
- 
-+		snfi: spi@1fa10000 {
-+			compatible = "airoha,en7581-snand";
-+			reg = <0x0 0x1fa10000 0x0 0x140>,
-+			      <0x0 0x1fa11000 0x0 0x600>;
-+
-+			clocks = <&scuclk EN7523_CLK_SPI>;
-+			clock-names = "spi";
-+
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			spi_nand: nand@0 {
-+				compatible = "spi-nand";
-+				reg = <0>;
-+				spi-max-frequency = <50000000>;
-+				spi-tx-bus-width = <1>;
-+				spi-rx-bus-width = <2>;
-+			};
-+		};
-+
- 		mmc0: mmc@1fa0e000 {
- 			compatible = "mediatek,mt7622-mmc";
- 			reg = <0x0 0x1fa0e000 0x0 0x1000>,
+diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
+index fa41a4bca97..c74247e13db 100644
+--- a/configs/an7581_evb_defconfig
++++ b/configs/an7581_evb_defconfig
+@@ -78,3 +78,4 @@ CONFIG_DM_SPI=y
+ CONFIG_SHA512=y
+ CONFIG_AIROHA_ETH=y
+ CONFIG_MMC_MTK=y
++CONFIG_AIROHA_SNFI_SPI=y
 -- 
 2.48.1
 
