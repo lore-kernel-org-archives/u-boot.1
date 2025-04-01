@@ -4,55 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 503C8C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 12:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA89C36014
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 12:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79A79820F8;
+	by phobos.denx.de (Postfix) with ESMTP id C3D168210A;
 	Tue,  1 Apr 2025 14:32:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="W3utb5SW";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="K6pdr3v9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B16A282012; Tue,  1 Apr 2025 12:08:00 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 299F882047; Tue,  1 Apr 2025 12:10:59 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF9E58006D
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 12:07:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85A6D8006D
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 12:10:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 650545C1C03;
- Tue,  1 Apr 2025 10:05:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2ED82C4CEE5;
- Tue,  1 Apr 2025 10:07:54 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id A00DCA44601;
+ Tue,  1 Apr 2025 10:05:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E363C4CEE4;
+ Tue,  1 Apr 2025 10:10:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743502076;
- bh=6mk5ALCe0N+jeTGuNkRhpeYLEN0IaoG8QrEHiq3C8BI=;
+ s=k20201202; t=1743502255;
+ bh=t+fYL2vHnrFdz9VnQaC1DQUO07mQWbHGohW7GtWgil4=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=W3utb5SWpmwU81tY2qjQBn2cJXbbhY3kuLl3qgmrgBtUIhtgmxStUPtYTV6ZWuqVB
- T4D4SRFbbN2jIYgkqTi4aMGeoLL2zy8IHXRDapyPXzrTO2p+4CYc6BZKf14GcBLGfS
- Cgft7xz2eckd4kcreL1zIUV2sv9cMnaluJmQ22RjeqcsVJqEHChdkVMIzVBRS4rvHq
- iMJ+Z1qHLmPbLJUleyxVimDZ1waEJ+u26LP+sU4n2icSoww3BtL3kaM0xSNBaLMlAR
- ZSa1nYb9qh1/m/r0XDiejgIVooMqayFjQUEPi1Df4O6FpL70EGsowRRrNzFL1XUK0k
- dl+07uXWxD4hQ==
+ b=K6pdr3v9oLSNWfThylQu3EwPBL4iLQHkjM67o0GUmGxp2TsUGmOpYncb2W6oOdgT5
+ KUrDskg8yv+ST5TC1KpewptzdS6/0OlDh1KGswh98s/7OAJyLWiU8Ks2U6aqTibpp3
+ hZ1U9KSVnqN7dAVDtvD9rjrZGaifgCmanKS0xhsy/NL17Y/ichtE9Fq6sx67Av5rtE
+ KuhgBhndHbQg82a5WixhY2tj+bHhcLiU5FUCjAgYjBjmALSXZ/dZIw5DvuGwRAFoC2
+ 0heMOkykFfndNpnuBvo8QNE4GFR8NVfsVTbBqqS31hKbWozzupOBEdMTjflFGjuN+u
+ EcX4NlDAttTQA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Zixun LI <admin@hifiphile.com>, Eugen Hristev
- <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
- <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek
- Vasut <marex@denx.de>
+ <eugen.hristev@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] usb: gadget: atmel: Add SAM9X60 support
-In-Reply-To: <20250331162611.1557759-2-admin@hifiphile.com>
+Subject: Re: [PATCH v2 2/3] ARM: dts: sam9x60: Add USB gadget DT node.
+In-Reply-To: <20250331162611.1557759-3-admin@hifiphile.com>
 References: <20250331162611.1557759-1-admin@hifiphile.com>
- <20250331162611.1557759-2-admin@hifiphile.com>
-Date: Tue, 01 Apr 2025 12:07:52 +0200
-Message-ID: <87y0wknqiv.fsf@baylibre.com>
+ <20250331162611.1557759-3-admin@hifiphile.com>
+Date: Tue, 01 Apr 2025 12:10:51 +0200
+Message-ID: <87v7ronqdw.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-Mailman-Approved-At: Tue, 01 Apr 2025 14:32:32 +0200
@@ -78,45 +75,48 @@ Thank you for the patch.
 
 On lun., mars 31, 2025 at 18:26, Zixun LI <admin@hifiphile.com> wrote:
 
-> Compared to SAM9X5 the only difference is the DPRAM memory from the
-> USB High Speed Device Port (UDPHS) hardware block was increased,
-> so we can reuse the same endpoint data.
->
-> Also add compatible "microchip,sam9x60-udc".
+> Add the USB gadget DT node for the sam9x60 SoC's.
 >
 > Signed-off-by: Zixun LI <admin@hifiphile.com>
+
+Nitpick: title (subject) should not finish with a period (.)
+
+This can be fixed up by the maintainer that will apply the patches.
+
+Eugen, This is assigned to me on patchwork:
+https://patchwork.ozlabs.org/project/uboot/list/?series=450655
+
+Can I pick up all 3 patches or do you prefer to pick up [2/3] and [3/3] ?
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  arch/arm/mach-at91/include/mach/atmel_usba_udc.h | 2 +-
->  drivers/usb/gadget/atmel_usba_udc.c              | 1 +
->  2 files changed, 2 insertions(+), 1 deletion(-)
+>  arch/arm/dts/sam9x60.dtsi | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 >
-> diff --git a/arch/arm/mach-at91/include/mach/atmel_usba_udc.h b/arch/arm/mach-at91/include/mach/atmel_usba_udc.h
-> index 835b47d91ba..23c71985c90 100644
-> --- a/arch/arm/mach-at91/include/mach/atmel_usba_udc.h
-> +++ b/arch/arm/mach-at91/include/mach/atmel_usba_udc.h
-> @@ -20,7 +20,7 @@
->  	}
+> diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+> index 3b684fc63d5..ea2647e5fc9 100644
+> --- a/arch/arm/dts/sam9x60.dtsi
+> +++ b/arch/arm/dts/sam9x60.dtsi
+> @@ -69,6 +69,19 @@
+>  		#size-cells = <1>;
+>  		ranges;
 >  
->  #if defined(CONFIG_AT91SAM9G45) || defined(CONFIG_AT91SAM9M10G45) || \
-> -	defined(CONFIG_AT91SAM9X5)
-> +	defined(CONFIG_AT91SAM9X5) || defined(CONFIG_SAM9X60)
->  static struct usba_ep_data usba_udc_ep[] = {
->  	EP("ep0", 0, 64, 1, 0, 0),
->  	EP("ep1", 1, 1024, 2, 1, 1),
-> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
-> index a77037a7094..f9326f0a7e7 100644
-> --- a/drivers/usb/gadget/atmel_usba_udc.c
-> +++ b/drivers/usb/gadget/atmel_usba_udc.c
-> @@ -1443,6 +1443,7 @@ static const struct udevice_id usba_udc_ids[] = {
->  	{ .compatible = "atmel,at91sam9rl-udc" },
->  	{ .compatible = "atmel,at91sam9g45-udc" },
->  	{ .compatible = "atmel,sama5d3-udc" },
-> +	{ .compatible = "microchip,sam9x60-udc" },
->  	{}
->  };
->  
+> +		usb0: gadget@500000 {
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+> +			compatible = "microchip,sam9x60-udc";
+> +			reg = <0x500000 0x100000>,
+> +				<0xf803c000 0x400>;
+> +			clocks = <&pmc PMC_TYPE_PERIPHERAL 23>, <&pmc PMC_TYPE_CORE 8>;
+> +			clock-names = "pclk", "hclk";
+> +			assigned-clocks = <&pmc PMC_TYPE_CORE 8>;
+> +			assigned-clock-rates = <480000000>;
+> +			status = "disabled";
+> +		};
+> +
+>  		usb1: usb@600000 {
+>  			compatible = "atmel,at91rm9200-ohci", "usb-ohci";
+>  			reg = <0x00600000 0x100000>;
 > -- 
 > 2.49.0
