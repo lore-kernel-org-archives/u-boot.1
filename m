@@ -4,90 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E240CC36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 20:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A03C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 20:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A5638171B;
-	Tue,  1 Apr 2025 22:47:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4548D8171B;
+	Tue,  1 Apr 2025 22:55:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gpx0/pwX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ib5xc+iz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97E53817C4; Tue,  1 Apr 2025 22:47:40 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CAA481703
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 22:47:37 +0200 (CEST)
+ id 3F7F8817C4; Tue,  1 Apr 2025 22:55:21 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 64EA381703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 22:55:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-301493f45aeso9799530a91.1
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 13:47:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743540456; x=1744145256; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AZyvHMW8i2Y3E1QoGQN7qXXPWFMnmTSLsAL0rzafiFI=;
- b=gpx0/pwX68dLngW6ZqZEF2ACJcyyyZnOqRIQKRlFR7dQ6emDNrOrsDEPH7Rmggyh5f
- RhhlaPvbMX7otEj74VvHLQx2ttRP+/whKPTIu8g5MlAaSx23Phm+GgLvQSEp7AN+P1VH
- 3kBlb2jodSUH/8IXHOT9ZV8BZcJyGZK9zxgEEd+YMd+MccDRPzGZT17+mS2O1b0q2ZrY
- sKXHCIjfH4G2koCZbPsMWNztCYm3iqXgOLsS25cnYdbq4fDRandcH5JFweGbtnSTlqnC
- 7dO4Xh+9ZVIcKDoVJE2mLa9n62c9oEKBj+53s5WXYcjtha2ksATXWkB5c+xY7Hh2phgH
- TWjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743540456; x=1744145256;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AZyvHMW8i2Y3E1QoGQN7qXXPWFMnmTSLsAL0rzafiFI=;
- b=kivvWbCyGMgJWe3PszXsurSz5LBTi3WMOpo5pWRblctmOqU7lEEXbPjjlzN0MNP/yp
- CMXbhADsxLtJ96PUml6mKTQdze0c4aGcl5YuZmsc6rKmEZuffS/Kp7mG7+ttMx8IKjVQ
- 8Y7Zz743HRmkpv9TaBBAKbU2rmn+my+rAi61lQZsYi+2sALXUgO0KX8nCWG1hgc4+DoC
- eiIppLU3ydYjqENEuK4DT1ygiTK8VbysvuWEtbsccjOJ1MBKO9nPnkt9uz62trXfnUSB
- zdoU6gqKbQfCumoOw69iVuVyyvuLzwhBGYWg1h3A1giwvVA4hWwFX2qJaU08E7u/CkOW
- kTSQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUQoWEk93kgRl6s+0qRLHw5LB1K/HNb2gV7AhxqYm3bK8mCMKdOqnBOkr8OppnZwuxc+eDsDhA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPAK3P+hWL6trK2yGbzSLJt1OolmLLyAYAWf1WYCViphvJ1vFI
- hXo8ObIT7gJCpagmfKrPpRQHpBWroh+V6Mhvszv1puPUXhkWSwkWDdWsIy5lskM0IJxELvr7Xnl
- Jcy3hmNfp32Vg0NFgaXK6UAZxIHJ9Gb/9Fvnx/g==
-X-Gm-Gg: ASbGnctWE8jo94NNx/zkmM4mdEDb8Re6BCaxCXe6PGKBSOD6vsmHQflrwj0BuEX0mEx
- Qn1Mp/sxru3wRdprNoNnck9jA/+Nbn0GREUJJJACtnZeSXBvDIN94mt5KyfdAcPwhJMUz6JmW4m
- zazKIRhD61kJl+5te26DIgeFpxN2Y=
-X-Google-Smtp-Source: AGHT+IHR/duRZ7jJTsqoeNjxtxaMUrDHGRgK+TUgaA6Dpw6jzJKkwFzTxv6846H5KkbLuhspjPeEsAbaqzGJJ9Gh7H0=
-X-Received: by 2002:a17:90a:d643:b0:2ff:6167:e92d with SMTP id
- 98e67ed59e1d1-305321784camr19666836a91.32.1743540455870; Tue, 01 Apr 2025
- 13:47:35 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 531KtGPA3730831
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 1 Apr 2025 15:55:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1743540916;
+ bh=xnjjAZnofVMhCXiKAsoY+J849WSskTNEzUB0FLY0wkk=;
+ h=From:To:CC:Subject:Date;
+ b=Ib5xc+izb+nbBLs+k06LgUsTkmcAyEe4NhabK1tcHfJP7KQLhThVLlBQ9JSwgXtcy
+ /PUJBiljeHiCg2PKiYGLYJgXLzi59vPGnzmNGC4fwe8Aq3aiXl33zaJAco7KndY6eo
+ ApKGnpaVUcszxWPvSUcR2haD6gUqkJHgwWuen0oM=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 531KtGeb022437;
+ Tue, 1 Apr 2025 15:55:16 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 1
+ Apr 2025 15:55:15 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 1 Apr 2025 15:55:16 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 531KtFHU040881;
+ Tue, 1 Apr 2025 15:55:15 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis
+ <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+CC: Andrew Davis <afd@ti.com>, Alexander Sverdlin
+ <alexander.sverdlin@siemens.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Dhruva Gole <d-gole@ti.com>,
+ Jonas Wood <jw@ti.com>, <praneeth@ti.com>, <u-kumar1@ti.com>,
+ <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
+Subject: [PATCH] firmware: ti_sci: Scan all device instances when releasing
+ exclusive devices
+Date: Tue, 1 Apr 2025 15:55:15 -0500
+Message-ID: <20250401205515.4078312-1-nm@ti.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-References: <20250401112729.2181793-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250401112729.2181793-1-ilias.apalodimas@linaro.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 1 Apr 2025 16:47:24 -0400
-X-Gm-Features: AQ5f1JoD8bv2ONxE3cISuNVfYafgcgJ6H9AB_ftivZV-Q2onck5QA94UHw9_J_0
-Message-ID: <CAEfUkUKd=jJEFMXxrgD1ghVKJ4qkkV2_ztZv-iOn3-QtCtKz-A@mail.gmail.com>
-Subject: Re: [PATCH 1/2] efi_loader: Move public cert for capsules to .rodata
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Prasad Kummari <prasad.kummari@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Edwards <cfsworks@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,269 +82,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+When FIT image with multiple dtbs are involved for R5 boot process,
+R5 SPL starts off with the first instance of dtb to probe the
+eeprom, then once we have identified the type of board, invocation
+of setup_multi_dtb_fit will replace the gd->fdt_blob with the proper
+board dtb match. However, when we do this, two things happen:
 
-On Tue, 1 Apr 2025 at 07:27, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> commit ddf67daac39d ("efi_capsule: Move signature from DTB to .rodata")
-> was reverted in
-> commit 47a25e81d35c ("Revert "efi_capsule: Move signature from DTB to .rodata"")
-> because that's what U-Boot was usually doing -- using the DT to store
-> configuration and data. Some of the discussions can be found here [0].
->
-> (Ab)using the device tree to store random data isn't ideal though.
-> On top of that with new features introduced over the years, keeping
-> the certificates in the DT has proven to be problematic.
-> One of the reasons is that platforms might send U-Boot a DTB
-> from the previous stage loader using a transfer list which won't contain
-> the signatures since other loaders are not  aware of internal
-> U-Boot ABIs. On top of that QEMU creates the DTB on the fly, so adding
-> the capsule certificate there does not work and requires users to dump
-> it and re-create it injecting the public keys.
->
-> Now that we have proper memory permissions for arm64, move the certificate
-> to .rodata and read it from there.
->
-> [0] https://lore.kernel.org/u-boot/CAPnjgZ2uM=n8Qo-a=DUkx5VW5Bzp5Xy8=Wgmrw8ESqUBK00YJQ@mail.gmail.com/
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  Makefile                           |  2 +-
->  include/asm-generic/sections.h     |  2 ++
->  lib/efi_loader/Makefile            | 18 +++++++++++++++
->  lib/efi_loader/capsule_esl.dtsi.in | 11 ---------
->  lib/efi_loader/efi_capsule.c       | 37 ++++++++----------------------
->  lib/efi_loader/efi_capsule_key.S   | 17 ++++++++++++++
->  scripts/Makefile.lib               | 27 ----------------------
->  7 files changed, 47 insertions(+), 67 deletions(-)
->  delete mode 100644 lib/efi_loader/capsule_esl.dtsi.in
->  create mode 100644 lib/efi_loader/efi_capsule_key.S
->
-> diff --git a/Makefile b/Makefile
-> index 620996862e6d..7a77948006a1 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -2229,7 +2229,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
->                itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
->                mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
->                idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
-> -              Test* capsule*.*.efi-capsule capsule*.map
-> +              Test* capsule*.*.efi-capsule capsule*.map capsule_esl_file
->
->  # Directories & files removed with 'make mrproper'
->  MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
-> diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-> index 024b1adde270..d59787948fd1 100644
-> --- a/include/asm-generic/sections.h
-> +++ b/include/asm-generic/sections.h
-> @@ -28,6 +28,8 @@ extern char __efi_helloworld_begin[];
->  extern char __efi_helloworld_end[];
->  extern char __efi_var_file_begin[];
->  extern char __efi_var_file_end[];
-> +extern char __efi_capsule_sig_begin[];
-> +extern char __efi_capsule_sig_end[];
->
->  /* Private data used by of-platdata devices/uclasses */
->  extern char __priv_data_start[], __priv_data_end[];
-> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> index 2a0b4172bd7f..dc2912148951 100644
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -29,6 +29,7 @@ obj-y += efi_boottime.o
->  obj-y += efi_helper.o
->  obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += efi_capsule.o
->  obj-$(CONFIG_EFI_CAPSULE_FIRMWARE) += efi_firmware.o
-> +obj-$(CONFIG_EFI_CAPSULE_AUTHENTICATE) += efi_capsule_key.o
->  obj-y += efi_console.o
->  obj-y += efi_device_path.o
->  obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
-> @@ -73,6 +74,23 @@ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
->  EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
->  $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
->
-> +ifeq ($(CONFIG_EFI_CAPSULE_AUTHENTICATE),y)
-> +capsule_crt_path=($(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE)))
-> +capsule_crt_full=$(srctree)/$(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE))
-> +quiet_cmd_capsule_esl_gen = CAPSULE_ESL_GEN $@
-> +cmd_capsule_esl_gen = cert-to-efi-sig-list $(capsule_crt_full) $@
-> +$(srctree)/capsule_esl_file: FORCE
-> +       @if [ ! -e "$(capsule_crt_full)" ]; then \
-> +               echo "ERROR: path $(capsule_crt_full) is invalid." >&2; \
-> +               echo "EFI CONFIG_EFI_CAPSULE_CRT_FILE must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled." >&2; \
-> +               exit 1; \
-> +       fi
-> +       $(call cmd,capsule_esl_gen)
-> +
-> +$(obj)/efi_capsule.o: $(srctree)/capsule_esl_file FORCE
-> +asflags-y += -DCAPSULE_ESL_PATH=\"$(srctree)/capsule_esl_file\"
-> +endif
-> +
->  # Set the C flags to add and remove for each app
->  $(foreach f,$(apps-y),\
->         $(eval CFLAGS_$(f).o := $(CFLAGS_EFI) -Os -ffreestanding)\
-> diff --git a/lib/efi_loader/capsule_esl.dtsi.in b/lib/efi_loader/capsule_esl.dtsi.in
-> deleted file mode 100644
-> index bc7db836faa8..000000000000
-> --- a/lib/efi_loader/capsule_esl.dtsi.in
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * Devicetree file with the public key EFI Signature List(ESL)
-> - * node. This file is used to generate the dtsi file to be
-> - * included into the DTB.
-> - */
-> -/ {
-> -       signature {
-> -               capsule-key = /incbin/("ESL_BIN_FILE");
-> -       };
-> -};
-> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-> index f8a4a7c6ef46..1aa52ac7bb69 100644
-> --- a/lib/efi_loader/efi_capsule.c
-> +++ b/lib/efi_loader/efi_capsule.c
-> @@ -22,6 +22,7 @@
->  #include <asm/global_data.h>
->  #include <u-boot/uuid.h>
->
-> +#include <asm/sections.h>
->  #include <crypto/pkcs7.h>
->  #include <crypto/pkcs7_parser.h>
->  #include <linux/err.h>
-> @@ -284,33 +285,12 @@ out:
->  }
->
->  #if defined(CONFIG_EFI_CAPSULE_AUTHENTICATE)
-> -int efi_get_public_key_data(void **pkey, efi_uintn_t *pkey_len)
-> +static int efi_get_public_key_data(const void **pkey, efi_uintn_t *pkey_len)
->  {
-> -       const void *fdt_blob = gd->fdt_blob;
-> -       const void *blob;
-> -       const char *cnode_name = "capsule-key";
-> -       const char *snode_name = "signature";
-> -       int sig_node;
-> -       int len;
-> -
-> -       sig_node = fdt_subnode_offset(fdt_blob, 0, snode_name);
-> -       if (sig_node < 0) {
-> -               log_err("Unable to get signature node offset\n");
-> -
-> -               return -FDT_ERR_NOTFOUND;
-> -       }
-> -
-> -       blob = fdt_getprop(fdt_blob, sig_node, cnode_name, &len);
-> -
-> -       if (!blob || len < 0) {
-> -               log_err("Unable to get capsule-key value\n");
-> -               *pkey = NULL;
-> -               *pkey_len = 0;
-> -
-> -               return -FDT_ERR_NOTFOUND;
-> -       }
-> +       const void *blob = __efi_capsule_sig_begin;
-> +       const int len = __efi_capsule_sig_end - __efi_capsule_sig_begin;
->
-> -       *pkey = (void *)blob;
-> +       *pkey = blob;
->         *pkey_len = len;
->
->         return 0;
-> @@ -321,7 +301,8 @@ efi_status_t efi_capsule_authenticate(const void *capsule, efi_uintn_t capsule_s
->  {
->         u8 *buf;
->         int ret;
-> -       void *fdt_pkey, *pkey;
-> +       void *pkey;
-> +       const void *stored_pkey;
->         efi_uintn_t pkey_len;
->         uint64_t monotonic_count;
->         struct efi_signature_store *truststore;
-> @@ -373,7 +354,7 @@ efi_status_t efi_capsule_authenticate(const void *capsule, efi_uintn_t capsule_s
->                 goto out;
->         }
->
-> -       ret = efi_get_public_key_data(&fdt_pkey, &pkey_len);
-> +       ret = efi_get_public_key_data(&stored_pkey, &pkey_len);
->         if (ret < 0)
->                 goto out;
->
-> @@ -381,7 +362,7 @@ efi_status_t efi_capsule_authenticate(const void *capsule, efi_uintn_t capsule_s
->         if (!pkey)
->                 goto out;
->
-> -       memcpy(pkey, fdt_pkey, pkey_len);
-> +       memcpy(pkey, stored_pkey, pkey_len);
->         truststore = efi_build_signature_store(pkey, pkey_len);
->         if (!truststore)
->                 goto out;
-> diff --git a/lib/efi_loader/efi_capsule_key.S b/lib/efi_loader/efi_capsule_key.S
-> new file mode 100644
-> index 000000000000..80cefbe16ae0
-> --- /dev/null
-> +++ b/lib/efi_loader/efi_capsule_key.S
-> @@ -0,0 +1,17 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * .esl cert for capsule authentication
-> + *
-> + * Copyright (c) 2021, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> + */
-> +
-> +#include <config.h>
-> +
-> +.section .rodata.capsule_key.init,"a"
-> +.balign 16
-> +.global __efi_capsule_sig_begin
-> +__efi_capsule_sig_begin:
-> +.incbin CAPSULE_ESL_PATH
-> +__efi_capsule_sig_end:
-> +.global __efi_capsule_sig_end
-> +.balign 16
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 275c308154b1..83fd5ff6c31c 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -377,35 +377,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
->                 ; \
->         sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
->
-> -capsule_esl_input_file=$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
-> -capsule_crt_file=$(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE))
-> -capsule_esl_dtsi=.capsule_esl.dtsi
-> -
-> -quiet_cmd_capsule_esl_gen = CAPSULE_ESL_GEN $@
-> -cmd_capsule_esl_gen = cert-to-efi-sig-list $< $@
-> -
-> -$(obj)/capsule_esl_file: $(capsule_crt_file) FORCE
-> -ifeq ($(CONFIG_EFI_CAPSULE_CRT_FILE),"")
-> -       $(error "CONFIG_EFI_CAPSULE_CRT_FILE is empty, EFI capsule authentication \
-> -       public key must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled")
-> -else
-> -       $(call cmd,capsule_esl_gen)
-> -endif
-> -
-> -quiet_cmd_capsule_dtsi_gen = CAPSULE_DTSI_GEN $@
-> -cmd_capsule_dtsi_gen = \
-> -       $(shell sed "s:ESL_BIN_FILE:$(abspath $<):" $(capsule_esl_input_file) > $@)
-> -
-> -$(obj)/$(capsule_esl_dtsi): $(obj)/capsule_esl_file FORCE
-> -       $(call cmd,capsule_dtsi_gen)
-> -
->  dtsi_include_list_deps := $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
->
-> -ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
-> -dtsi_include_list += $(capsule_esl_dtsi)
-> -dtsi_include_list_deps += $(obj)/$(capsule_esl_dtsi)
-> -endif
-> -
->  ifneq ($(CHECK_DTBS),)
->  DT_CHECKER ?= dt-validate
->  DT_CHECKER_FLAGS ?= $(if $(DT_SCHEMA_FILES),-l $(DT_SCHEMA_FILES),-m)
-> --
-> 2.49.0
->
-Tested-by: Raymond Mao <raymond.mao@linaro.org>
+a) Prior to the invocation of setup_multi_dtb_fit, as part of the eeprom
+   discovery process, i2c controller device is already probed and marked
+   as exclusive with the match of the very first tisci match (from the
+   original boot dtb). This list is stored in the info->dev_list of the
+   first probe.
+b) When the second dtb is loaded, tisci is probed again (since this is a
+   new node) and the new info->dev_list is empty.
 
-Regards,
-Raymond
+At this stage, the exclusive devices such as i2c instances used to
+probe the board information is left in the old info->dev_list that is
+no longer used actively by the system using the replaced dtb.
+
+As a result of this, the cleanup we intent to do with
+ti_sci_cmd_release_exclusive_devices is no longer complete and
+leaves the instances such as i2c for eeprom marked used as we scan just
+the new info->dev_list.
+
+This creates a problem when Device Manager(DM) firmware starts up later
+on in the boot process and identifies that this instance of i2c is
+already marked active, so it assumes this can no longer be controlled
+by software and is marked internally as reserved and HLOS can no
+longer control these instances. This defeated the purpose of
+ti_sci_cmd_release_exclusive_devices.
+
+NOTE: This scheme works just fine if the FIT has just a single dtb as
+the info->dev_list is upto date.
+
+To fix this, let us make ti_sci_cmd_release_exclusive_devices scan the
+all registrations of tisci instances and cleanup all exclusive devices
+that have ever been registered.
+
+As part of this, change the prototype of release_exclusive_devices to
+drop the handle since that has no further meaning now.
+
+Fixes: 9566b777ae0a ("firmware: ti_sci: Add a command for releasing all exclusive devices")
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Test logs:
+========
+prior to this patch:
+https://gist.github.com/nmenon/8ce817ac991b6ff898734d15ae5ce623#file-before
+With this patch
+https://gist.github.com/nmenon/8ce817ac991b6ff898734d15ae5ce623#file-after
+Notice that 20000000.i2c is no longer deffered in Linux.
+
+Test of platforms (on c17f03a7e93d  Merge tag 'net-20250314' of https://source.denx.de/u-boot/custodians/u-boot-net)
+
+https://gist.github.com/nmenon/917e15b397e5249dd76664ea62e9e662
+
+Though this was uncovered in automated check in upstream testing, this was also
+independently reported in:
+https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1459509/sk-am64b-deferred-probe-of-i2c-bus-using-sdk-09-and-10
+
+ arch/arm/mach-k3/r5/common.c           |  2 +-
+ drivers/firmware/ti_sci.c              | 23 ++++++++++++++---------
+ include/linux/soc/ti/ti_sci_protocol.h |  2 +-
+ 3 files changed, 16 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+index 0f6c294f1eb2..fd188e7c90e4 100644
+--- a/arch/arm/mach-k3/r5/common.c
++++ b/arch/arm/mach-k3/r5/common.c
+@@ -144,7 +144,7 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+ 	int ret, size = 0, shut_cpu = 0;
+ 
+ 	/* Release all the exclusive devices held by SPL before starting ATF */
+-	ti_sci->ops.dev_ops.release_exclusive_devices(ti_sci);
++	ti_sci->ops.dev_ops.release_exclusive_devices();
+ 
+ 	ret = rproc_init();
+ 	if (ret)
+diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+index 190a1e3f5fc3..54d6689ce783 100644
+--- a/drivers/firmware/ti_sci.c
++++ b/drivers/firmware/ti_sci.c
+@@ -696,20 +696,25 @@ static int ti_sci_cmd_put_device(const struct ti_sci_handle *handle, u32 id)
+ 				       MSG_DEVICE_SW_STATE_AUTO_OFF);
+ }
+ 
+-static
+-int ti_sci_cmd_release_exclusive_devices(const struct ti_sci_handle *handle)
++static int ti_sci_cmd_release_exclusive_devices(void)
+ {
+ 	struct ti_sci_exclusive_dev *dev, *tmp;
+ 	struct ti_sci_info *info;
+ 	int i, cnt;
+ 
+-	info = handle_to_ti_sci_info(handle);
+-
+-	list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
+-		cnt = dev->count;
+-		debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
+-		for (i = 0; i < cnt; i++)
+-			ti_sci_cmd_put_device(handle, dev->id);
++	/*
++	 * Scan all ti_sci_list registrations, since with FIT images, we could
++	 * have started with one device tree registration and switched over
++	 * to a final version. This prevents exclusive devices identified
++	 * during the first probe to be left orphan.
++	 */
++	list_for_each_entry(info, &ti_sci_list, list) {
++		list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
++			cnt = dev->count;
++			debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
++			for (i = 0; i < cnt; i++)
++				ti_sci_cmd_put_device(&info->handle, dev->id);
++		}
+ 	}
+ 
+ 	return 0;
+diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
+index 8e4c43cef311..aa4d105ee988 100644
+--- a/include/linux/soc/ti/ti_sci_protocol.h
++++ b/include/linux/soc/ti/ti_sci_protocol.h
+@@ -143,7 +143,7 @@ struct ti_sci_dev_ops {
+ 				 u32 reset_state);
+ 	int (*get_device_resets)(const struct ti_sci_handle *handle, u32 id,
+ 				 u32 *reset_state);
+-	int (*release_exclusive_devices)(const struct ti_sci_handle *handle);
++	int (*release_exclusive_devices)(void);
+ };
+ 
+ /**
+-- 
+2.47.0
+
