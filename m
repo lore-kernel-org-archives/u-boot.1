@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB8CFC36017
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 22:53:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D433C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 22:53:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D2A581FFC;
+	by phobos.denx.de (Postfix) with ESMTP id C263582072;
 	Wed,  2 Apr 2025 00:52:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lXWxcz3o";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i+sQiQ/j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC1DB8209F; Wed,  2 Apr 2025 00:52:47 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 6B64B8171B; Wed,  2 Apr 2025 00:52:48 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C69C681F0D
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 00:52:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70C0381FFC
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 00:52:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43cef035a3bso44360475e9.1
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 15:52:44 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso42476645e9.2
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 15:52:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743547964; x=1744152764; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743547966; x=1744152766; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=RDImM9a82VA8pWEoRtYbn7Vee5q0ZHM3NBCRt1kRJbE=;
- b=lXWxcz3oALqArcv1++RvcnDMfnn8mcMDnjeiH+gGN0bnfnICGqKMnC1M2RsFa1orwV
- ldjW4qdsZ+f/J0Xl+rQzrt6yp88i6bQKnG+Xg4mN7in/tkSJV4N8yZzKyZ4h9rwsCK4o
- DXOUQ+Iv2MIO7/xxOCMkaEX3ssPTUeu+546DzU8fovanlOeibEJpTHpWoAwES4BU7iFE
- MzIfrB/z6Co8olUmlXeRI1XyVdidiPc9lWBvOKaeZWs1Yk8+nMs2QtyQ3ewQcOC7aQTt
- 570LYn/p6qABZATDtfZSXIugSyczx1DWvXwKgrHItJnDWv+2gcqR3yITkkQnV7RhJiDJ
- XoEg==
+ :reply-to; bh=pA3fr9ZK1HDD76B3sltaSieNwG9WriYbyzvZMSD9JIk=;
+ b=i+sQiQ/jANb3BuCd4bbNNyKbPeiGw8Pa/mn0bw4txxX3HMZLIvp3YQhKPhx/JAOuRj
+ CRpqQ1K0N7NjD1zacQW8hlxFDofQ86gJp5NzJHdKxMPfmyexs4Ba7OgZ3u+/3Z6guSeO
+ QKYjdNTVng4JqJHjx21rMMXmcDs/sLq89P3w7xFlHOCo4fu+2ydRiOtRR8J6L8RsBQvZ
+ YgyyJBLlyPxRFgPtg/rjspCRdV9i8Rooc08SxNlkktcXBKefEfI6tUzw4njtlhHwVZh/
+ GVix0/rorQwmLarPfKOfTLYnbACHUvmxWyE9G8Fwe8GHneEPLUE7qGXNUf4cENqbZh/i
+ p21A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743547964; x=1744152764;
+ d=1e100.net; s=20230601; t=1743547966; x=1744152766;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RDImM9a82VA8pWEoRtYbn7Vee5q0ZHM3NBCRt1kRJbE=;
- b=nZaVCWX+E+UIDJKw0gJoSw2tT4NyRbGWtjLm5HS2/DU7bnoZPO5FMMKvUo2V+Dfx+e
- NgVdPqSrWQG24at4hm2kYTFBNVvga91K6aDJ/Bjuv2NrxZ8ny2/2E3+6dOFuWbBCA4zA
- oh7Lw8r4yKp8EofEoYKV/tSKwDGknDZtfBj6lQTdaLClsUFBjcfxGC3xXxZpFo0X/uuD
- nS5/xLYB2PFnMyUoCNenzgF3DMMe+q7NDdKQ9D6dYO8kynv/mFEPU2B0+3p4zzRxuFtn
- zS8hzxDOJmABFlVnU4Cmp5rJodk555EKnM3jm+fJ889EfNKLDqoCx/ycQIvobqCpD70/
- nY/w==
+ bh=pA3fr9ZK1HDD76B3sltaSieNwG9WriYbyzvZMSD9JIk=;
+ b=UDt1mO9FElkoNo3BYpM0lpJJSXLf1VeO0EN0G+9KETJ+F2dpKT5KayRVARBNf2//Gj
+ yz2vOAzY9Z8k7rQRxgo2d240s4eKVPZJEuHM59Pj4UNpmv4sBxuAFlXAsMfRAfn+YWI4
+ F+QeS96gXVC0okiHyufkCuroqVMLNRjuKvE9oTh2Rc0jz01FdaRZUZ3GhU9ee01Avslk
+ RK3riQg8Vj8ZdC1iLuVleuxfmbN86clPKdJqj48f8naXxmTWsSM9hl27YkvFKqarQTPl
+ Zjz5Dt+J0RqEwj2Yu1sJDE7Yo9mJOps8mJ4HLv95eXR8ons9l9XamDgSUMXaDtHVM1FR
+ s76A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVz+8Ngxt0ZO7nyTv273TbnUEIKgqwbXM1n3lkxJYhuZBIoRR3pDfg1osaQRbo5XH9Ul12pQfQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzvOSt+914wM5+hYrKAOkd1CYfpUtyMbZ3gQFXB3otaO7MDLMv7
- kN9VErctetiHh3UdOyC9U9z81FodyYzp1hzJ/wenao8/ZzqNzqJM
-X-Gm-Gg: ASbGnctmJmKMLsr6zLnBIz93TgqI/3zBrS+Bovuu2r+GBfNLXISZ/NTRCAMAirNs0sg
- rTKWveMDLNzu/f6kGMOBvssFmp8m0mB3caOvT4cFAE5isU8/DSadAn6qUSffyxU99LnXoRFhpgT
- 4Kz+EQ+/fKF60m7Qb7yIc4Q51aTCBZCvFEE5wr+mETspLWlhu0rlRCIW65XUKB9C9K1PmXnFLJl
- T+JkOK7Id9k2eYQK5P/8j5Og19EE9fVLe0Efb0Fig28W1Ge3t20pW957LNGWiDq66PZxB7BU4YE
- cA7+vuzRRDWs3kE1X94z9vOX/WNlDdyYK/0LfVV5WvuD+6WDgFRsS0o08EkSQSZrxZZUpOCYYZF
- YVNEMzrdBzDcGCyjPd5vuv8VD
-X-Google-Smtp-Source: AGHT+IEQx1veiQllc8KeMXCpdYsNHYWJDCK+TzjHOPfvBJul7BKDDGsK91Yfz6dkPeAfL8ZoHHPabw==
-X-Received: by 2002:a05:600c:83c3:b0:43c:ef13:7e5e with SMTP id
- 5b1f17b1804b1-43db62bd98bmr118716985e9.26.1743547964271; 
- Tue, 01 Apr 2025 15:52:44 -0700 (PDT)
+ AJvYcCUyBwPAXm3oQIM1BiJm0INw4jlB5TPqQkFyFW6NUha3POlYZzttFz0Jj5h+tsyLQp1BSQ7ThjM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzzq4dlVd85RghcLwWm1IUV/ebJDV1iu2GF1JCYM9eHUrUITlJ0
+ tnh6lKEneERNOE5c0ZBARfNtYZIdV83J/qGRl57NDlW5dvjpMQ/e
+X-Gm-Gg: ASbGncvKC+CzKm7bxaeauD5pnY9Qo6r5nIZgmCyxCAlax+s+JHAcf1Tqi1DEp58KR+p
+ QL47mYD02xvnveU3BQc8fY09gyXhK6+pIkUVkS361E9jd34Sl8eL4G7U/hD6O7GkaFEc7U6nKLj
+ xdbDNOcflRvCQgP+w4k/0t3aYq0n8LAxjcpqgVcEjyLA5oOwVqTHdL2lBOqlVZ0jr8mJorehD3e
+ HkqJ/+XPR+6jl3wUeP1zgiydDsfk+MW56xF5bUeN1EQPDQoDieo3fWJEbC6GBUc9v0eBzbaoruH
+ N3sBHcQkWQnWMtf8E3PQ5DE1uEvCFR0nA4oH8awTGqvWlEAiHQrcKXDRY2PZUwcghcfsSS43s0m
+ Kk/418Z8RR40T8Q==
+X-Google-Smtp-Source: AGHT+IGT9GhowKX9msuUnx1g0KRKqdnFOgUytYjhJb3zqelEtmCkDFDIpF8bzG5GofCoxDdjaiv77w==
+X-Received: by 2002:a05:600c:8119:b0:43c:f513:958a with SMTP id
+ 5b1f17b1804b1-43e7a5426dbmr118845565e9.13.1743547965871; 
+ Tue, 01 Apr 2025 15:52:45 -0700 (PDT)
 Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
  [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-43eb60cd77bsm2478625e9.19.2025.04.01.15.52.43
+ 5b1f17b1804b1-43eb60cd77bsm2478625e9.19.2025.04.01.15.52.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 15:52:43 -0700 (PDT)
+ Tue, 01 Apr 2025 15:52:45 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -82,9 +82,9 @@ To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Bruce Suen <bruce_suen@163.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 07/14] airoha: Add eMMC config to defconfig
-Date: Wed,  2 Apr 2025 00:51:39 +0200
-Message-ID: <20250401225156.25790-8-ansuelsmth@gmail.com>
+Subject: [PATCH 08/14] regmap: Add regmap_set/clear_bits shorthands
+Date: Wed,  2 Apr 2025 00:51:40 +0200
+Message-ID: <20250401225156.25790-9-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250401225156.25790-1-ansuelsmth@gmail.com>
 References: <20250401225156.25790-1-ansuelsmth@gmail.com>
@@ -106,23 +106,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Mediatek MMC driver in Airoha AN7581 EVB defconfig to add support
-for it in default images.
+Port Linux kernel regmap_set/clear_bits shorthands to set and clear bits
+in a regmap. These are handy if only specific bits needs to be applied
+or cleared and makes it easier to port regmap based driver from kernel
+upstream.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- configs/an7581_evb_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ include/regmap.h | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
-diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
-index f5bd647cb6e..fa41a4bca97 100644
---- a/configs/an7581_evb_defconfig
-+++ b/configs/an7581_evb_defconfig
-@@ -77,3 +77,4 @@ CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_SHA512=y
- CONFIG_AIROHA_ETH=y
-+CONFIG_MMC_MTK=y
+diff --git a/include/regmap.h b/include/regmap.h
+index 22b043408ac..8c6f7c1c9b1 100644
+--- a/include/regmap.h
++++ b/include/regmap.h
+@@ -361,6 +361,34 @@ int regmap_raw_read_range(struct regmap *map, uint range_num, uint offset,
+  */
+ int regmap_update_bits(struct regmap *map, uint offset, uint mask, uint val);
+ 
++/**
++ * regmap_set_bits() - Set bits to a regmap
++ *
++ * @map:	Regmap to write bits to
++ * @offset:	Offset in the regmap to write to
++ * @bits:	Bits to set to the regmap at the specified offset
++ *
++ * Return: 0 if OK, -ve on error
++ */
++static inline int regmap_set_bits(struct regmap *map, uint offset, uint bits)
++{
++	return regmap_update_bits(map, offset, bits, bits);
++}
++
++/**
++ * regmap_clear_bits() - Clear bits to a regmap
++ *
++ * @map:	Regmap to write bits to
++ * @offset:	Offset in the regmap to write to
++ * @bits:	Bits to clear to the regmap at the specified offset
++ *
++ * Return: 0 if OK, -ve on error
++ */
++static inline int regmap_clear_bits(struct regmap *map, uint offset, uint bits)
++{
++	return regmap_update_bits(map, offset, bits, 0);
++}
++
+ /**
+  * regmap_init_mem() - Set up a new register map that uses memory access
+  *
 -- 
 2.48.1
 
