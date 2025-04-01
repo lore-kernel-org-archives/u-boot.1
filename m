@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A313DC36014
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 16:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 777A5C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 16:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B60381F4D;
-	Tue,  1 Apr 2025 18:10:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8807781ECD;
+	Tue,  1 Apr 2025 18:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JvdoWDmo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WsrRgPsa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D89481FC0; Tue,  1 Apr 2025 18:10:07 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 1013682051; Tue,  1 Apr 2025 18:10:09 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20CBB81F4D
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 18:10:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0582A81F7E
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 18:10:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e0caa151so10828948a12.0
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 09:10:04 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5c7d6b96fso10540364a12.3
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 09:10:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743523803; x=1744128603; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1743523805; x=1744128605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p3lhOPtDXv/fa4I/zIoed7lVAkEC9eg8M1S6eOEgTeY=;
- b=JvdoWDmojbYiPLZRrWE4D0UJZ5+SjLNntR+M8e7Gf3sfIhr725Ar+ILJf61c18aJPe
- DvwCa6unhsoxwir7Ra3jrpdeSeX5eUkMJ3faEv+jNiXcy8sudjO6Zjim5iFKbgEoPxZq
- Bp50wM8sZ9lPq8jGWX8KkPJNcZboLnZOaVAejmJDrWypHK8/Y4CsPhQtOyfauTiPrzmd
- rOj3UBwdEyZ+w897EqUJ5vwXSqSkGVXmS/BD2JiAKjuiB2TEf8z+GgLVc9flbRL0p/SH
- WTBUxL/QCQawqUV9mGj4Wr2QhqMnCCJT1R1Caicoje5Tg9qz1C5owQQvq7OfqAdngxpR
- xXDg==
+ bh=SglPCMbJ7vpphWRDV9G+REgbV9Mcf3nAmteVau/tMb0=;
+ b=WsrRgPsakg8uyMdx1ImdPf+Z+dsk51nwVZmFoIgWE30uF+CE3hDVVU4514bm3Cvfxw
+ ieT5DQPYkBn/YhGj4/ajW4wd94J8X/w4RWJfiyJFCGNnhe+Q/1hKh4jPbkndufqBnk8R
+ LVal2OYF3BEAiTvqd6BgBrzBe8M9z6DTHT6H7TTBE+kbhBK6aasZnp4kvVjETIdcWICA
+ hXigEoCyooCJ5hYRmDLzI55X4pPR1Lcz99BndzduY2GN/ypttrGIJfS1QEfrGXoT9bAe
+ PLn54Fvh26UVvB1NDp35EVdzzzhe5kbG+dpOjUdoyihu8LzpzDGmFE7Ue1IzWsuAndaZ
+ /h0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743523803; x=1744128603;
+ d=1e100.net; s=20230601; t=1743523805; x=1744128605;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p3lhOPtDXv/fa4I/zIoed7lVAkEC9eg8M1S6eOEgTeY=;
- b=e12PGMpdrt1P4z4d4xkkUhyCdpW06MdWUjBuVCm+yPG+EOZn4nvx+uhTwFBRpev6A2
- OHPEh0c9OAkKZdxG733exoJSvjrYjjA6C3V69zrH5cyDNFQOWMIFIQfmBJZ/GLRFhCsv
- seKEtejKpAG44H010MaSuaiyfsciUpGv5dxs7CdbLlhPsHlpzJuRYTiDpsp3YnxgzNK7
- clL/HDfpKKMBcKuKl3OBo9tAgQs0W5SnEJs616/bal1ocowBQxhQxfT0jEgeB/HtaDXa
- 896ybdhcSi+x7IDHlcLkJg726lA8sDPjUT6tEeE+OLl2scJkDaNpu+oZrtAcnAXTvU2b
- SkmQ==
-X-Gm-Message-State: AOJu0YwZVHpuEfQJ/aeBd8zr/R1YZDtdS7f69YjKdbtBW0zMSU6HHGFy
- 51jCTEy/dfwaFmI1owgskPpW12p5I/GjAPyLu1sIqGcK2VzoGTXn0YmOqhMH
-X-Gm-Gg: ASbGncsRdnyXXnp+edIaOACdF2eouUTH7Y3DR5T3QScjfASHTpgjDeE+5ZTCdhZD/MS
- WsqGbnLI5tET6LlGos2Dk7jhlfwzBAQ4/qEGFn3LwgDRJtjwstSSpN/AgVkX+LViqSbze6XHnJq
- iJr+BNol4WR6401b+v5gKJZb0GgBtFVOwVJ3902ZTd6ZXyWoKLzxhM0ojCQJ8XT1ygFltrhgtIm
- lU/bnoZZhYAvGm2oj/rAWZpiMyCF+t5tvFFdfkXH6W+aQkdwPgxtyYTQSGW4JssUkk/gcgjb1Fs
- VmiVCMLQrqJ+QqgRMsBg8EllhHAPp5VZ9v2z
-X-Google-Smtp-Source: AGHT+IEZbWhJqCXRjPCmwBok6vqIJIsPSJNUS7bbaHRny5wyF7PXNPEwhdGB47mA57qUcjD1h3eQTQ==
-X-Received: by 2002:a05:6402:51ce:b0:5ec:f769:cfa1 with SMTP id
- 4fb4d7f45d1cf-5edfdd155cfmr9848374a12.29.1743523803181; 
- Tue, 01 Apr 2025 09:10:03 -0700 (PDT)
+ bh=SglPCMbJ7vpphWRDV9G+REgbV9Mcf3nAmteVau/tMb0=;
+ b=wIzZM4U8HbKtAmYl0iQqcmeB3OZ3+vshxcskfnD5HZknz1CUJUmdxsLCrDkPB/64gZ
+ f1SP9/l+UIydHcYfGUEaaG6uG5FgXA1Knt/dr0tPRY1tpg06/Lw6aM7qcgCzHBScmLqS
+ mlnN7BGn0TWVGSeRVkkOEc62JgQfgWDr3aD+gt9ABo31oXT6mFgNGcCOplriOqN4N6I+
+ TjpW0I6+8qp2fyTS3+7i7hZXz8pJ8EfqFV7UgBzyYtmbg+qz4PTJ5i+uh7UpKUmAtTgM
+ dM7kQTJAy0TioHOxPOMZM4wHiCqTpvwzt6ELEwHntnTNX6v5OlYRdPbzN5SuG4YSB2jG
+ EeqA==
+X-Gm-Message-State: AOJu0YxUerZvav7xBfT0FlKbiX0WqHCQxKYP1G26nf+jk/UzMwmVG9mY
+ NY8VsaFtBcNDDlzbhV0IbJyXyN2jH0zR0addmh5iEhoRssWelJbr
+X-Gm-Gg: ASbGncs/r5TUQzEi1QlWSJ6uynzfbQpW7PChCRm76yp34hM0XQSDF5QvrCbeoiKz7TH
+ O9DygZVA02BhiiCuNzyWujkHxq3jbu+K11HkjyAZaLXEqxa3g5hwcwCw3/3jS7+Y0e6q/KaeqYv
+ CEqxQecd58RifR4rneS7/pxssGx0oEbfI38Mv1HVPxpNnpOrMKcA8W1tQAj4AQj8VpuVaX0ITK6
+ oVNMDx55/ESoGG/EMXHsK7sXDecr7srmPHmpy167J+qTcgzU2wmKwsXmJlrw2xhC6pigcdF78Hf
+ cOMy8sp+5tmDxcuZYFWIVROHsP6kfOJgRYGw
+X-Google-Smtp-Source: AGHT+IGdDwJk81cRx3pON3DJxO6ow8GSirf9BStJbS5ulsy+16Q144fsq7P+fZnTxKcmmiwCChiBVg==
+X-Received: by 2002:a05:6402:2709:b0:5e5:ca1b:c425 with SMTP id
+ 4fb4d7f45d1cf-5edfd101725mr11963243a12.17.1743523804756; 
+ Tue, 01 Apr 2025 09:10:04 -0700 (PDT)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5edc17dff0bsm7197965a12.70.2025.04.01.09.10.01
+ 4fb4d7f45d1cf-5edc17dff0bsm7197965a12.70.2025.04.01.09.10.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 09:10:02 -0700 (PDT)
+ Tue, 01 Apr 2025 09:10:04 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>, Alban Bedel <alban.bedel@avionic-design.de>,
@@ -77,15 +77,14 @@ To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Simon Glass <sjg@chromium.org>, Artur Kowalski <arturkow2000@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/3] ARM: tegra: convert CFG_TEGRA_BOARD_STRING into
- Kconfig option
-Date: Tue,  1 Apr 2025 19:09:48 +0300
-Message-ID: <20250401160951.69056-3-clamor95@gmail.com>
+Subject: [PATCH v1 3/3] ARM: tegra: replace per-device config headers with
+ generic Tegra
+Date: Tue,  1 Apr 2025 19:09:49 +0300
+Message-ID: <20250401160951.69056-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250401160951.69056-1-clamor95@gmail.com>
 References: <20250401160951.69056-1-clamor95@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,1067 +102,1371 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert CFG_TEGRA_BOARD_STRING into Kconfig option and move it into device
-board Kconfig.
+Most device headers contain SoC specific part and common Tegra post part.
+Add a generic header which can be used by any Tegra device of one of the
+supported SoC generations (T20, T30, T114, T124 or T210) without need in
+device specific configuration.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/mach-tegra/board2.c             |  2 +-
- board/acer/picasso/Kconfig               |  4 ++++
- board/asus/grouper/Kconfig               |  4 ++++
- board/asus/transformer-t20/Kconfig       |  4 ++++
- board/asus/transformer-t30/Kconfig       |  4 ++++
- board/avionic-design/medcom-wide/Kconfig |  4 ++++
- board/avionic-design/plutux/Kconfig      |  4 ++++
- board/avionic-design/tec-ng/Kconfig      |  4 ++++
- board/avionic-design/tec/Kconfig         |  4 ++++
- board/cei/cei-tk1-som/Kconfig            |  4 ++++
- board/compal/paz00/Kconfig               |  4 ++++
- board/compulab/trimslice/Kconfig         |  4 ++++
- board/htc/endeavoru/Kconfig              |  4 ++++
- board/lenovo/ideapad-yoga-11/Kconfig     |  4 ++++
- board/lg/x3-t30/Kconfig                  |  4 ++++
- board/microsoft/surface-rt/Kconfig       |  4 ++++
- board/motorola/mot/Kconfig               |  4 ++++
- board/nvidia/beaver/Kconfig              |  4 ++++
- board/nvidia/cardhu/Kconfig              |  4 ++++
- board/nvidia/dalmore/Kconfig             |  4 ++++
- board/nvidia/harmony/Kconfig             |  4 ++++
- board/nvidia/jetson-tk1/Kconfig          |  4 ++++
- board/nvidia/nyan-big/Kconfig            |  4 ++++
- board/nvidia/p2371-0000/Kconfig          |  4 ++++
- board/nvidia/p2371-2180/Kconfig          |  4 ++++
- board/nvidia/p2571/Kconfig               |  4 ++++
- board/nvidia/p2771-0000/Kconfig          |  4 ++++
- board/nvidia/p3450-0000/Kconfig          |  4 ++++
- board/nvidia/seaboard/Kconfig            |  4 ++++
- board/nvidia/venice2/Kconfig             |  4 ++++
- board/nvidia/ventana/Kconfig             |  4 ++++
- board/ouya/ouya/Kconfig                  |  4 ++++
- board/wexler/qc750/Kconfig               |  4 ++++
- board/xiaomi/mocha/Kconfig               |  4 ++++
- include/configs/beaver.h                 |  4 ----
- include/configs/cardhu.h                 |  4 ----
- include/configs/cei-tk1-som.h            |  4 ----
- include/configs/dalmore.h                |  6 ------
- include/configs/endeavoru.h              |  4 ----
- include/configs/grouper.h                |  4 ----
- include/configs/harmony.h                |  8 --------
- include/configs/ideapad-yoga-11.h        |  4 ----
- include/configs/jetson-tk1.h             |  4 ----
- include/configs/medcom-wide.h            |  8 --------
- include/configs/mocha.h                  |  3 ---
- include/configs/mot.h                    |  3 ---
- include/configs/nyan-big.h               |  4 ----
- include/configs/ouya.h                   |  4 ----
- include/configs/p2371-0000.h             |  8 --------
- include/configs/p2371-2180.h             |  8 --------
- include/configs/p2571.h                  |  8 --------
- include/configs/p2771-0000.h             |  6 ------
- include/configs/p3450-0000.h             |  7 -------
- include/configs/paz00.h                  |  6 ------
- include/configs/picasso.h                |  4 ----
- include/configs/plutux.h                 |  8 --------
- include/configs/qc750.h                  |  4 ----
- include/configs/seaboard.h               | 10 ----------
- include/configs/surface-rt.h             |  4 ----
- include/configs/tec-ng.h                 |  4 ----
- include/configs/tec.h                    |  8 --------
- include/configs/transformer-t20.h        |  4 ----
- include/configs/transformer-t30.h        |  4 ----
- include/configs/trimslice.h              |  9 ---------
- include/configs/venice2.h                |  6 ------
- include/configs/ventana.h                |  6 ------
- include/configs/x3-t30.h                 |  4 ----
- 67 files changed, 133 insertions(+), 183 deletions(-)
+ board/acer/picasso/Kconfig                |  2 +-
+ board/asus/grouper/Kconfig                |  2 +-
+ board/asus/transformer-t20/Kconfig        |  2 +-
+ board/asus/transformer-t30/Kconfig        |  2 +-
+ board/avionic-design/medcom-wide/Kconfig  |  2 +-
+ board/avionic-design/plutux/Kconfig       |  2 +-
+ board/avionic-design/tec-ng/Kconfig       |  2 +-
+ board/avionic-design/tec/Kconfig          |  2 +-
+ board/cei/cei-tk1-som/Kconfig             |  2 +-
+ board/compal/paz00/Kconfig                |  2 +-
+ board/compulab/trimslice/Kconfig          |  2 +-
+ board/htc/endeavoru/Kconfig               |  2 +-
+ board/lenovo/ideapad-yoga-11/Kconfig      |  2 +-
+ board/lg/x3-t30/Kconfig                   |  2 +-
+ board/microsoft/surface-rt/Kconfig        |  2 +-
+ board/nvidia/beaver/Kconfig               |  2 +-
+ board/nvidia/cardhu/Kconfig               |  2 +-
+ board/nvidia/dalmore/Kconfig              |  2 +-
+ board/nvidia/harmony/Kconfig              |  2 +-
+ board/nvidia/jetson-tk1/Kconfig           |  2 +-
+ board/nvidia/nyan-big/Kconfig             |  2 +-
+ board/nvidia/p2371-0000/Kconfig           |  2 +-
+ board/nvidia/p2371-2180/Kconfig           |  2 +-
+ board/nvidia/p2571/Kconfig                |  2 +-
+ board/nvidia/p2771-0000/Kconfig           |  2 +-
+ board/nvidia/p3450-0000/Kconfig           |  2 +-
+ board/nvidia/seaboard/Kconfig             |  2 +-
+ board/nvidia/venice2/Kconfig              |  2 +-
+ board/nvidia/ventana/Kconfig              |  2 +-
+ board/ouya/ouya/Kconfig                   |  2 +-
+ board/toradex/apalis_t30/Kconfig          |  2 +-
+ board/toradex/apalis_t30/apalis_t30.env   |  9 +++++++
+ board/toradex/colibri_t20/Kconfig         |  2 +-
+ board/toradex/colibri_t30/Kconfig         |  2 +-
+ board/toradex/colibri_t30/colibri_t30.env |  8 ++++++
+ board/wexler/qc750/Kconfig                |  2 +-
+ include/configs/apalis_t30.h              | 26 ------------------
+ include/configs/beaver.h                  | 14 ----------
+ include/configs/cardhu.h                  | 14 ----------
+ include/configs/cei-tk1-som.h             | 19 --------------
+ include/configs/colibri_t20.h             | 14 ----------
+ include/configs/colibri_t30.h             | 27 -------------------
+ include/configs/dalmore.h                 | 14 ----------
+ include/configs/endeavoru.h               | 16 ------------
+ include/configs/grouper.h                 | 12 ---------
+ include/configs/harmony.h                 | 14 ----------
+ include/configs/ideapad-yoga-11.h         | 12 ---------
+ include/configs/jetson-tk1.h              | 15 -----------
+ include/configs/medcom-wide.h             | 15 -----------
+ include/configs/nyan-big.h                | 15 -----------
+ include/configs/ouya.h                    | 16 ------------
+ include/configs/p2371-0000.h              | 15 -----------
+ include/configs/p2371-2180.h              | 15 -----------
+ include/configs/p2571.h                   | 15 -----------
+ include/configs/p2771-0000.h              | 14 ----------
+ include/configs/p3450-0000.h              | 14 ----------
+ include/configs/paz00.h                   | 16 ------------
+ include/configs/picasso.h                 | 16 ------------
+ include/configs/plutux.h                  | 15 -----------
+ include/configs/qc750.h                   | 16 ------------
+ include/configs/seaboard.h                | 15 -----------
+ include/configs/surface-rt.h              | 14 ----------
+ include/configs/tec-ng.h                  | 13 ---------
+ include/configs/tec.h                     | 15 -----------
+ include/configs/tegra.h                   | 32 +++++++++++++++++++++++
+ include/configs/transformer-t20.h         | 16 ------------
+ include/configs/transformer-t30.h         | 16 ------------
+ include/configs/trimslice.h               | 14 ----------
+ include/configs/venice2.h                 | 15 -----------
+ include/configs/ventana.h                 | 14 ----------
+ include/configs/x3-t30.h                  | 16 ------------
+ 71 files changed, 83 insertions(+), 561 deletions(-)
+ delete mode 100644 include/configs/apalis_t30.h
+ delete mode 100644 include/configs/beaver.h
+ delete mode 100644 include/configs/cardhu.h
+ delete mode 100644 include/configs/cei-tk1-som.h
+ delete mode 100644 include/configs/colibri_t20.h
+ delete mode 100644 include/configs/colibri_t30.h
+ delete mode 100644 include/configs/dalmore.h
+ delete mode 100644 include/configs/endeavoru.h
+ delete mode 100644 include/configs/grouper.h
+ delete mode 100644 include/configs/harmony.h
+ delete mode 100644 include/configs/ideapad-yoga-11.h
+ delete mode 100644 include/configs/jetson-tk1.h
+ delete mode 100644 include/configs/medcom-wide.h
+ delete mode 100644 include/configs/nyan-big.h
+ delete mode 100644 include/configs/ouya.h
+ delete mode 100644 include/configs/p2371-0000.h
+ delete mode 100644 include/configs/p2371-2180.h
+ delete mode 100644 include/configs/p2571.h
+ delete mode 100644 include/configs/p2771-0000.h
+ delete mode 100644 include/configs/p3450-0000.h
+ delete mode 100644 include/configs/paz00.h
+ delete mode 100644 include/configs/picasso.h
+ delete mode 100644 include/configs/plutux.h
+ delete mode 100644 include/configs/qc750.h
+ delete mode 100644 include/configs/seaboard.h
+ delete mode 100644 include/configs/surface-rt.h
+ delete mode 100644 include/configs/tec-ng.h
+ delete mode 100644 include/configs/tec.h
+ create mode 100644 include/configs/tegra.h
+ delete mode 100644 include/configs/transformer-t20.h
+ delete mode 100644 include/configs/transformer-t30.h
+ delete mode 100644 include/configs/trimslice.h
+ delete mode 100644 include/configs/venice2.h
+ delete mode 100644 include/configs/ventana.h
+ delete mode 100644 include/configs/x3-t30.h
 
-diff --git a/arch/arm/mach-tegra/board2.c b/arch/arm/mach-tegra/board2.c
-index 6e9ef68caf9..68534dcbb22 100644
---- a/arch/arm/mach-tegra/board2.c
-+++ b/arch/arm/mach-tegra/board2.c
-@@ -96,7 +96,7 @@ int checkboard(void)
- {
- 	int board_id = tegra_board_id();
- 
--	printf("Board: %s", CFG_TEGRA_BOARD_STRING);
-+	printf("Board: %s", CONFIG_TEGRA_BOARD_STRING);
- 	if (board_id != -1)
- 		printf(", ID: %d\n", board_id);
- 	printf("\n");
 diff --git a/board/acer/picasso/Kconfig b/board/acer/picasso/Kconfig
-index 73c0aa08508..c801bd26c7c 100644
+index c801bd26c7c..879b778aa53 100644
 --- a/board/acer/picasso/Kconfig
 +++ b/board/acer/picasso/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "picasso"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "acer"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Acer Iconia Tab A500"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "picasso"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/asus/grouper/Kconfig b/board/asus/grouper/Kconfig
-index f935cce4225..5f25680d916 100644
+index 5f25680d916..3bd712b274c 100644
 --- a/board/asus/grouper/Kconfig
 +++ b/board/asus/grouper/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "grouper"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "asus"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "ASUS Google Nexus 7 (2012)"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "grouper"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/asus/transformer-t20/Kconfig b/board/asus/transformer-t20/Kconfig
-index d5fe4128289..2bf42825270 100644
+index 2bf42825270..3e80d38d590 100644
 --- a/board/asus/transformer-t20/Kconfig
 +++ b/board/asus/transformer-t20/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "transformer-t20"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "asus"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "ASUS Transformer T20"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "transformer-t20"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/asus/transformer-t30/Kconfig b/board/asus/transformer-t30/Kconfig
-index 915436ba6c5..04278f139dc 100644
+index 04278f139dc..34fd6f200f8 100644
 --- a/board/asus/transformer-t30/Kconfig
 +++ b/board/asus/transformer-t30/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "transformer-t30"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "asus"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "ASUS Transformer T30"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "transformer-t30"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/avionic-design/medcom-wide/Kconfig b/board/avionic-design/medcom-wide/Kconfig
-index 267647cb41f..741fc258b3a 100644
+index 741fc258b3a..54474b5061a 100644
 --- a/board/avionic-design/medcom-wide/Kconfig
 +++ b/board/avionic-design/medcom-wide/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "medcom-wide"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "avionic-design"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Avionic Design Medcom-Wide"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "medcom-wide"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/avionic-design/plutux/Kconfig b/board/avionic-design/plutux/Kconfig
-index 09a3ac940da..57324dc19e7 100644
+index 57324dc19e7..35b19dd2ea0 100644
 --- a/board/avionic-design/plutux/Kconfig
 +++ b/board/avionic-design/plutux/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "plutux"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "avionic-design"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Avionic Design Plutux"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "plutux"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/avionic-design/tec-ng/Kconfig b/board/avionic-design/tec-ng/Kconfig
-index 36a0cec1be1..34e2729fd60 100644
+index 34e2729fd60..8782e7a2a67 100644
 --- a/board/avionic-design/tec-ng/Kconfig
 +++ b/board/avionic-design/tec-ng/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "tec-ng"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "avionic-design"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Avionic Design Tamonten™ NG Evaluation Carrier"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "tec-ng"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/avionic-design/tec/Kconfig b/board/avionic-design/tec/Kconfig
-index bc9751b1086..56b417950eb 100644
+index 56b417950eb..12cc4e1f4d0 100644
 --- a/board/avionic-design/tec/Kconfig
 +++ b/board/avionic-design/tec/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "tec"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "avionic-design"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Avionic Design Tamonten Evaluation Carrier"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "tec"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/cei/cei-tk1-som/Kconfig b/board/cei/cei-tk1-som/Kconfig
-index 5fcb51f2f26..32ff61ac44d 100644
+index 32ff61ac44d..9b944730e63 100644
 --- a/board/cei/cei-tk1-som/Kconfig
 +++ b/board/cei/cei-tk1-som/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "cei-tk1-som"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "cei"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "CEI tk1-som"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "cei-tk1-som"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/compal/paz00/Kconfig b/board/compal/paz00/Kconfig
-index 30ba11d360a..0ddac85be12 100644
+index 0ddac85be12..7fa47fc8c77 100644
 --- a/board/compal/paz00/Kconfig
 +++ b/board/compal/paz00/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "paz00"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "compal"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Compal Paz00"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "paz00"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/compulab/trimslice/Kconfig b/board/compulab/trimslice/Kconfig
-index 35769140347..b26c2970fe4 100644
+index b26c2970fe4..226ebc228a8 100644
 --- a/board/compulab/trimslice/Kconfig
 +++ b/board/compulab/trimslice/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "trimslice"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "compulab"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Compulab Trimslice"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "trimslice"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/htc/endeavoru/Kconfig b/board/htc/endeavoru/Kconfig
-index 0b72c4a687d..f0967376647 100644
+index f0967376647..ef50da9be45 100644
 --- a/board/htc/endeavoru/Kconfig
 +++ b/board/htc/endeavoru/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "endeavoru"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "htc"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "HTC One X"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "endeavoru"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/lenovo/ideapad-yoga-11/Kconfig b/board/lenovo/ideapad-yoga-11/Kconfig
-index 67644409fc1..670a5bb700c 100644
+index 670a5bb700c..cd4aa32d86d 100644
 --- a/board/lenovo/ideapad-yoga-11/Kconfig
 +++ b/board/lenovo/ideapad-yoga-11/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "ideapad-yoga-11"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "lenovo"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Lenovo Ideapad Yoga 11"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "ideapad-yoga-11"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/lg/x3-t30/Kconfig b/board/lg/x3-t30/Kconfig
-index 53b6ab3e93c..5a3a67d9f3b 100644
+index 5a3a67d9f3b..d2cdf860db4 100644
 --- a/board/lg/x3-t30/Kconfig
 +++ b/board/lg/x3-t30/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "x3-t30"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "lg"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "LG X3 Board"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "x3-t30"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/microsoft/surface-rt/Kconfig b/board/microsoft/surface-rt/Kconfig
-index 9e66897f6b1..7c8f67f21cb 100644
+index 7c8f67f21cb..6afddb9b363 100644
 --- a/board/microsoft/surface-rt/Kconfig
 +++ b/board/microsoft/surface-rt/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "surface-rt"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "microsoft"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Microsoft Surface RT"
-+
- endif
-diff --git a/board/motorola/mot/Kconfig b/board/motorola/mot/Kconfig
-index 8b76165ade7..3f6f03e95b5 100644
---- a/board/motorola/mot/Kconfig
-+++ b/board/motorola/mot/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
  config SYS_CONFIG_NAME
- 	default "mot"
+-	default "surface-rt"
++	default "tegra"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Motorola Mot"
-+
- endif
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/beaver/Kconfig b/board/nvidia/beaver/Kconfig
-index 23f7c945f57..be461214223 100644
+index be461214223..fe36d475b30 100644
 --- a/board/nvidia/beaver/Kconfig
 +++ b/board/nvidia/beaver/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "beaver"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Beaver"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "beaver"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/cardhu/Kconfig b/board/nvidia/cardhu/Kconfig
-index 63ace66aa78..8a98ace70b5 100644
+index 8a98ace70b5..92de3f2e669 100644
 --- a/board/nvidia/cardhu/Kconfig
 +++ b/board/nvidia/cardhu/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "cardhu"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Cardhu"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "cardhu"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/dalmore/Kconfig b/board/nvidia/dalmore/Kconfig
-index 96eaa01cf87..643e082ec06 100644
+index 643e082ec06..8da3499b9f5 100644
 --- a/board/nvidia/dalmore/Kconfig
 +++ b/board/nvidia/dalmore/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "dalmore"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Dalmore"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "dalmore"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/harmony/Kconfig b/board/nvidia/harmony/Kconfig
-index 328c94677da..1f2bfdfe5d8 100644
+index 1f2bfdfe5d8..eedee71cac9 100644
 --- a/board/nvidia/harmony/Kconfig
 +++ b/board/nvidia/harmony/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "harmony"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Harmony"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "harmony"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/jetson-tk1/Kconfig b/board/nvidia/jetson-tk1/Kconfig
-index d90a74ea382..7a2ffd83c84 100644
+index 7a2ffd83c84..9eeb55f639d 100644
 --- a/board/nvidia/jetson-tk1/Kconfig
 +++ b/board/nvidia/jetson-tk1/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "jetson-tk1"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Jetson TK1"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "jetson-tk1"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/nyan-big/Kconfig b/board/nvidia/nyan-big/Kconfig
-index 341c8d75c21..b239d69f5e5 100644
+index b239d69f5e5..65fef3c063f 100644
 --- a/board/nvidia/nyan-big/Kconfig
 +++ b/board/nvidia/nyan-big/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "nyan-big"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Google/NVIDIA Nyan-big"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "nyan-big"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/p2371-0000/Kconfig b/board/nvidia/p2371-0000/Kconfig
-index f94be12be1a..28e9f39045c 100644
+index 28e9f39045c..e2770781a25 100644
 --- a/board/nvidia/p2371-0000/Kconfig
 +++ b/board/nvidia/p2371-0000/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "p2371-0000"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA P2371-0000"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "p2371-0000"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/p2371-2180/Kconfig b/board/nvidia/p2371-2180/Kconfig
-index 8622bdaa16b..ffb412229c1 100644
+index ffb412229c1..8d97dc354b6 100644
 --- a/board/nvidia/p2371-2180/Kconfig
 +++ b/board/nvidia/p2371-2180/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "p2371-2180"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA P2371-2180"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "p2371-2180"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/p2571/Kconfig b/board/nvidia/p2571/Kconfig
-index 7bc48748408..1fc1978c639 100644
+index 1fc1978c639..1d41e9d68f4 100644
 --- a/board/nvidia/p2571/Kconfig
 +++ b/board/nvidia/p2571/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "p2571"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA P2571"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "p2571"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/p2771-0000/Kconfig b/board/nvidia/p2771-0000/Kconfig
-index 1b1116f0209..52a22b79734 100644
+index 52a22b79734..199e04da07e 100644
 --- a/board/nvidia/p2771-0000/Kconfig
 +++ b/board/nvidia/p2771-0000/Kconfig
-@@ -13,4 +13,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "p2771-0000"
+@@ -11,7 +11,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA P2771-0000"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "p2771-0000"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/p3450-0000/Kconfig b/board/nvidia/p3450-0000/Kconfig
-index 7a08cd88675..48a94e24d54 100644
+index 48a94e24d54..9235c2a0c35 100644
 --- a/board/nvidia/p3450-0000/Kconfig
 +++ b/board/nvidia/p3450-0000/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "p3450-0000"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA P3450-0000"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "p3450-0000"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/seaboard/Kconfig b/board/nvidia/seaboard/Kconfig
-index 0924bde480f..df62519c652 100644
+index df62519c652..a6baeeb7f87 100644
 --- a/board/nvidia/seaboard/Kconfig
 +++ b/board/nvidia/seaboard/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "seaboard"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Seaboard"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "seaboard"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/venice2/Kconfig b/board/nvidia/venice2/Kconfig
-index 6905f0014ea..7bd51c7a278 100644
+index 7bd51c7a278..9ebaa2fa413 100644
 --- a/board/nvidia/venice2/Kconfig
 +++ b/board/nvidia/venice2/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "venice2"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Venice2"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "venice2"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/nvidia/ventana/Kconfig b/board/nvidia/ventana/Kconfig
-index c1ad7b76712..ea1146f75b7 100644
+index ea1146f75b7..b8654c24e0b 100644
 --- a/board/nvidia/ventana/Kconfig
 +++ b/board/nvidia/ventana/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "ventana"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "nvidia"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "NVIDIA Ventana"
-+
- endif
+ config SYS_CONFIG_NAME
+-	default "ventana"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
 diff --git a/board/ouya/ouya/Kconfig b/board/ouya/ouya/Kconfig
-index 6bab40ce933..2db127f3e14 100644
+index 2db127f3e14..c698f730412 100644
 --- a/board/ouya/ouya/Kconfig
 +++ b/board/ouya/ouya/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
+@@ -7,7 +7,7 @@ config SYS_VENDOR
  	default "ouya"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Ouya Game Console"
+ config SYS_CONFIG_NAME
+-	default "ouya"
++	default "tegra"
+ 
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
+diff --git a/board/toradex/apalis_t30/Kconfig b/board/toradex/apalis_t30/Kconfig
+index 9cd497091d6..6260f8eb7f4 100644
+--- a/board/toradex/apalis_t30/Kconfig
++++ b/board/toradex/apalis_t30/Kconfig
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "toradex"
+ 
+ config SYS_CONFIG_NAME
+-	default "apalis_t30"
++	default "tegra"
+ 
+ config TDX_CFG_BLOCK
+ 	default y
+diff --git a/board/toradex/apalis_t30/apalis_t30.env b/board/toradex/apalis_t30/apalis_t30.env
+index a8f2904bcd7..85d0a05d0e1 100644
+--- a/board/toradex/apalis_t30/apalis_t30.env
++++ b/board/toradex/apalis_t30/apalis_t30.env
+@@ -1,6 +1,15 @@
+ uboot_hwpart=1
+ uboot_blk=0
+ 
++/*
++ * Board-specific serial config
++ *
++ * Apalis UART1: NVIDIA UARTA
++ * Apalis UART2: NVIDIA UARTD
++ * Apalis UART3: NVIDIA UARTB
++ * Apalis UART4: NVIDIA UARTC
++ */
 +
- endif
+ set_blkcnt=setexpr blkcnt ${filesize} + 0x1ff &&
+ 	setexpr blkcnt ${blkcnt} / 0x200
+ update_uboot=run set_blkcnt && mmc dev 0 ${uboot_hwpart} &&
+diff --git a/board/toradex/colibri_t20/Kconfig b/board/toradex/colibri_t20/Kconfig
+index a43acddb801..8a7295a41e2 100644
+--- a/board/toradex/colibri_t20/Kconfig
++++ b/board/toradex/colibri_t20/Kconfig
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "toradex"
+ 
+ config SYS_CONFIG_NAME
+-	default "colibri_t20"
++	default "tegra"
+ 
+ config TDX_CFG_BLOCK
+ 	default y
+diff --git a/board/toradex/colibri_t30/Kconfig b/board/toradex/colibri_t30/Kconfig
+index 68ef82b099d..643309fe856 100644
+--- a/board/toradex/colibri_t30/Kconfig
++++ b/board/toradex/colibri_t30/Kconfig
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "toradex"
+ 
+ config SYS_CONFIG_NAME
+-	default "colibri_t30"
++	default "tegra"
+ 
+ config TDX_CFG_BLOCK
+ 	default y
+diff --git a/board/toradex/colibri_t30/colibri_t30.env b/board/toradex/colibri_t30/colibri_t30.env
+index a8f2904bcd7..87919fbf155 100644
+--- a/board/toradex/colibri_t30/colibri_t30.env
++++ b/board/toradex/colibri_t30/colibri_t30.env
+@@ -1,6 +1,14 @@
+ uboot_hwpart=1
+ uboot_blk=0
+ 
++/*
++ * Board-specific serial config
++ *
++ * Colibri UART-A: NVIDIA UARTA
++ * Colibri UART-B: NVIDIA UARTD
++ * Colibri UART-C: NVIDIA UARTB
++ */
++
+ set_blkcnt=setexpr blkcnt ${filesize} + 0x1ff &&
+ 	setexpr blkcnt ${blkcnt} / 0x200
+ update_uboot=run set_blkcnt && mmc dev 0 ${uboot_hwpart} &&
 diff --git a/board/wexler/qc750/Kconfig b/board/wexler/qc750/Kconfig
-index 45a1e5e057b..29943358b84 100644
+index 29943358b84..b449720a8b3 100644
 --- a/board/wexler/qc750/Kconfig
 +++ b/board/wexler/qc750/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "qc750"
+@@ -7,7 +7,7 @@ config SYS_VENDOR
+ 	default "wexler"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Wexler QC750"
-+
- endif
-diff --git a/board/xiaomi/mocha/Kconfig b/board/xiaomi/mocha/Kconfig
-index 25c61d4169e..bb53cc56161 100644
---- a/board/xiaomi/mocha/Kconfig
-+++ b/board/xiaomi/mocha/Kconfig
-@@ -9,4 +9,8 @@ config SYS_VENDOR
  config SYS_CONFIG_NAME
- 	default "mocha"
+-	default "qc750"
++	default "tegra"
  
-+config TEGRA_BOARD_STRING
-+	string "Default Tegra board name"
-+	default "Xiaomi Mocha"
-+
- endif
+ config TEGRA_BOARD_STRING
+ 	string "Default Tegra board name"
+diff --git a/include/configs/apalis_t30.h b/include/configs/apalis_t30.h
+deleted file mode 100644
+index c806ad0d9da..00000000000
+--- a/include/configs/apalis_t30.h
++++ /dev/null
+@@ -1,26 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (c) 2014-2016 Marcel Ziswiler
+- *
+- * Configuration settings for the Toradex Apalis T30 modules.
+- */
+-
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
+-
+-#include <linux/sizes.h>
+-
+-#include "tegra30-common.h"
+-
+-/*
+- * Board-specific serial config
+- *
+- * Apalis UART1: NVIDIA UARTA
+- * Apalis UART2: NVIDIA UARTD
+- * Apalis UART3: NVIDIA UARTB
+- * Apalis UART4: NVIDIA UARTC
+- */
+-
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/beaver.h b/include/configs/beaver.h
-index 229b766eefa..21b37b78a30 100644
+deleted file mode 100644
+index 21b37b78a30..00000000000
 --- a/include/configs/beaver.h
-+++ b/include/configs/beaver.h
-@@ -9,10 +9,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2013, NVIDIA CORPORATION.  All rights reserved.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Beaver"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include <linux/sizes.h>
+-
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/cardhu.h b/include/configs/cardhu.h
-index c33c96a5eb4..7fc2d85f7bd 100644
+deleted file mode 100644
+index 7fc2d85f7bd..00000000000
 --- a/include/configs/cardhu.h
-+++ b/include/configs/cardhu.h
-@@ -9,10 +9,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2010-2012, NVIDIA CORPORATION.  All rights reserved.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Cardhu"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include <linux/sizes.h>
+-
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/cei-tk1-som.h b/include/configs/cei-tk1-som.h
-index 7b09441258c..aa4057d6da0 100644
+deleted file mode 100644
+index aa4057d6da0..00000000000
 --- a/include/configs/cei-tk1-som.h
-+++ b/include/configs/cei-tk1-som.h
-@@ -14,10 +14,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra124-common.h"
++++ /dev/null
+@@ -1,19 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * (c) Copyright 2016, Data61
+- * Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+- *
+- * Based on jetson-tk1.h which is:
+- * (C) Copyright 2013-2014
+- * NVIDIA Corporation <www.nvidia.com>
+- */
+-
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
+-
+-#include <linux/sizes.h>
+-
+-#include "tegra124-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
+diff --git a/include/configs/colibri_t20.h b/include/configs/colibri_t20.h
+deleted file mode 100644
+index d96a87c059e..00000000000
+--- a/include/configs/colibri_t20.h
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2012 Lucas Stach
+- *
+- * Configuration settings for the Toradex Colibri T20 modules.
+- */
+-
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
+-
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
+diff --git a/include/configs/colibri_t30.h b/include/configs/colibri_t30.h
+deleted file mode 100644
+index 0c93f377361..00000000000
+--- a/include/configs/colibri_t30.h
++++ /dev/null
+@@ -1,27 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (c) 2013-2016 Stefan Agner
+- *
+- * Configuration settings for the Toradex Colibri T30 modules.
+- */
+-
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
+-
+-#include <linux/sizes.h>
+-
+-#include "tegra30-common.h"
 -
 -/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"CEI tk1-som"
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-/*
+- * Board-specific serial config
+- *
+- * Colibri UART-A: NVIDIA UARTA
+- * Colibri UART-B: NVIDIA UARTD
+- * Colibri UART-C: NVIDIA UARTB
+- */
+-
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/dalmore.h b/include/configs/dalmore.h
-index 82911eb6165..0946588230d 100644
+deleted file mode 100644
+index 0946588230d..00000000000
 --- a/include/configs/dalmore.h
-+++ b/include/configs/dalmore.h
-@@ -9,12 +9,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra114-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2010-2013, NVIDIA CORPORATION.  All rights reserved.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Dalmore"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include <linux/sizes.h>
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra114-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/endeavoru.h b/include/configs/endeavoru.h
-index 20ffda0d251..8cb3e414af2 100644
+deleted file mode 100644
+index 8cb3e414af2..00000000000
 --- a/include/configs/endeavoru.h
-+++ b/include/configs/endeavoru.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2022
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"HTC One X"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/grouper.h b/include/configs/grouper.h
-index 834e249d148..aacbcf12658 100644
+deleted file mode 100644
+index aacbcf12658..00000000000
 --- a/include/configs/grouper.h
-+++ b/include/configs/grouper.h
-@@ -7,10 +7,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2010-2012, NVIDIA CORPORATION.  All rights reserved.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"ASUS Google Nexus 7 (2012)"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/harmony.h b/include/configs/harmony.h
-index 793fdffb277..beecb70cd0c 100644
+deleted file mode 100644
+index beecb70cd0c..00000000000
 --- a/include/configs/harmony.h
-+++ b/include/configs/harmony.h
-@@ -9,14 +9,6 @@
- 
- #include <linux/sizes.h>
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010-2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Harmony"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* NAND support */
+-#include <linux/sizes.h>
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
--/* Environment in NAND (which is 512M), aligned to start of last sector */
--
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/ideapad-yoga-11.h b/include/configs/ideapad-yoga-11.h
-index 0f98f890ef7..aacbcf12658 100644
+deleted file mode 100644
+index aacbcf12658..00000000000
 --- a/include/configs/ideapad-yoga-11.h
-+++ b/include/configs/ideapad-yoga-11.h
-@@ -7,10 +7,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2010-2012, NVIDIA CORPORATION.  All rights reserved.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Lenovo Ideapad Yoga 11"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/jetson-tk1.h b/include/configs/jetson-tk1.h
-index 2fb1c353ff8..e4ee5ce6be8 100644
+deleted file mode 100644
+index e4ee5ce6be8..00000000000
 --- a/include/configs/jetson-tk1.h
-+++ b/include/configs/jetson-tk1.h
-@@ -10,10 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra124-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * (C) Copyright 2013-2014
+- * NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Jetson TK1"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include <linux/sizes.h>
+-
+-#include "tegra124-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/medcom-wide.h b/include/configs/medcom-wide.h
-index 7694a2fc84c..becff398a56 100644
+deleted file mode 100644
+index becff398a56..00000000000
 --- a/include/configs/medcom-wide.h
-+++ b/include/configs/medcom-wide.h
-@@ -10,14 +10,6 @@
- #define __CONFIG_H
- 
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- *  (C) Copyright 2011-2012
+- *  Avionic Design GmbH <www.avionic-design.de>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Avionic Design Medcom-Wide"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* NAND support */
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
--/* Environment in NAND, aligned to start of last sector */
--
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
-diff --git a/include/configs/mocha.h b/include/configs/mocha.h
-index a84d599ccc9..7255f31baec 100644
---- a/include/configs/mocha.h
-+++ b/include/configs/mocha.h
-@@ -10,9 +10,6 @@
- 
- #include "tegra124-common.h"
- 
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Xiaomi Mocha"
--
- #ifdef CONFIG_TEGRA_SUPPORT_NON_SECURE
-   #define CFG_PRAM                     0x38400 /* 225 MB */
- #endif
-diff --git a/include/configs/mot.h b/include/configs/mot.h
-index 28b8d504769..018672cb28f 100644
---- a/include/configs/mot.h
-+++ b/include/configs/mot.h
-@@ -10,9 +10,6 @@
- #include <linux/sizes.h>
- #include "tegra20-common.h"
- 
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Motorola Mot"
--
- /* Tegra common post configuration overwrites text env in the board */
- #define BOARD_EXTRA_ENV_SETTINGS \
- 	"stdin=serial,tegra-kbc,button-kbd,cpcap-pwrbutton\0"
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/nyan-big.h b/include/configs/nyan-big.h
-index 84db4bc3bca..808cd908972 100644
+deleted file mode 100644
+index 808cd908972..00000000000
 --- a/include/configs/nyan-big.h
-+++ b/include/configs/nyan-big.h
-@@ -10,10 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra124-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2014
+- * NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Google/NVIDIA Nyan-big"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include <linux/sizes.h>
+-
+-#include "tegra124-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/ouya.h b/include/configs/ouya.h
-index a9f05ae5d01..381941760e3 100644
+deleted file mode 100644
+index 381941760e3..00000000000
 --- a/include/configs/ouya.h
-+++ b/include/configs/ouya.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2025
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Ouya Game Console"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/p2371-0000.h b/include/configs/p2371-0000.h
-index a29d7135d0b..79240bd8ed0 100644
+deleted file mode 100644
+index 79240bd8ed0..00000000000
 --- a/include/configs/p2371-0000.h
-+++ b/include/configs/p2371-0000.h
-@@ -10,14 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra210-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2013-2015
+- * NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA P2371-0000"
+-#ifndef _P2371_0000_H
+-#define _P2371_0000_H
 -
--/* Board-specific serial config */
+-#include <linux/sizes.h>
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include "tegra210-common.h"
+-#include "tegra-common-post.h"
 -
- #include "tegra-common-post.h"
- 
- #endif /* _P2371_0000_H */
+-#endif /* _P2371_0000_H */
 diff --git a/include/configs/p2371-2180.h b/include/configs/p2371-2180.h
-index 0b077aba659..24f3a7030e8 100644
+deleted file mode 100644
+index 24f3a7030e8..00000000000
 --- a/include/configs/p2371-2180.h
-+++ b/include/configs/p2371-2180.h
-@@ -10,14 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra210-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2013-2015
+- * NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA P2371-2180"
+-#ifndef _P2371_2180_H
+-#define _P2371_2180_H
 -
--/* Board-specific serial config */
+-#include <linux/sizes.h>
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include "tegra210-common.h"
+-#include "tegra-common-post.h"
 -
- #include "tegra-common-post.h"
- 
- #endif /* _P2371_2180_H */
+-#endif /* _P2371_2180_H */
 diff --git a/include/configs/p2571.h b/include/configs/p2571.h
-index 5155aa7b1dd..0dbb45e7c2a 100644
+deleted file mode 100644
+index 0dbb45e7c2a..00000000000
 --- a/include/configs/p2571.h
-+++ b/include/configs/p2571.h
-@@ -10,14 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra210-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2013-2015
+- * NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA P2571"
+-#ifndef _P2571_H
+-#define _P2571_H
 -
--/* Board-specific serial config */
+-#include <linux/sizes.h>
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include "tegra210-common.h"
+-#include "tegra-common-post.h"
 -
- #include "tegra-common-post.h"
- 
- #endif /* _P2571_H */
+-#endif /* _P2571_H */
 diff --git a/include/configs/p2771-0000.h b/include/configs/p2771-0000.h
-index fc1b7c0302d..914c68ffdf9 100644
+deleted file mode 100644
+index 914c68ffdf9..00000000000
 --- a/include/configs/p2771-0000.h
-+++ b/include/configs/p2771-0000.h
-@@ -9,12 +9,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra186-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2013-2016, NVIDIA CORPORATION.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA P2771-0000"
+-#ifndef _P2771_0000_H
+-#define _P2771_0000_H
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include <linux/sizes.h>
 -
- #include "tegra-common-post.h"
- 
- #endif
+-#include "tegra186-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif
 diff --git a/include/configs/p3450-0000.h b/include/configs/p3450-0000.h
-index 1138c1d306f..c5a74e8f8fe 100644
+deleted file mode 100644
+index c5a74e8f8fe..00000000000
 --- a/include/configs/p3450-0000.h
-+++ b/include/configs/p3450-0000.h
-@@ -9,13 +9,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra210-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2018-2019 NVIDIA Corporation.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA P3450-0000"
+-#ifndef _P3450_0000_H
+-#define _P3450_0000_H
 -
--/* Board-specific serial config */
+-#include <linux/sizes.h>
 -
--/* General networking support */
- #include "tegra-common-post.h"
- 
- #endif /* _P3450_0000_H */
+-#include "tegra210-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* _P3450_0000_H */
 diff --git a/include/configs/paz00.h b/include/configs/paz00.h
-index 2d8d1f652bb..ec123804545 100644
+deleted file mode 100644
+index ec123804545..00000000000
 --- a/include/configs/paz00.h
-+++ b/include/configs/paz00.h
-@@ -11,12 +11,6 @@
- 
- #include <linux/sizes.h>
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2010-2012 NVIDIA CORPORATION.  All rights reserved.
+- *
+- * See file CREDITS for list of people who contributed to this
+- * project.
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Compal Paz00"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include <linux/sizes.h>
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/picasso.h b/include/configs/picasso.h
-index 0b08a562018..4b6837dc000 100644
+deleted file mode 100644
+index 4b6837dc000..00000000000
 --- a/include/configs/picasso.h
-+++ b/include/configs/picasso.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2024
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Acer Iconia Tab A500"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/plutux.h b/include/configs/plutux.h
-index 5d7e85d9284..becff398a56 100644
+deleted file mode 100644
+index becff398a56..00000000000
 --- a/include/configs/plutux.h
-+++ b/include/configs/plutux.h
-@@ -10,14 +10,6 @@
- #define __CONFIG_H
- 
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- *  (C) Copyright 2011-2012
+- *  Avionic Design GmbH <www.avionic-design.de>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Avionic Design Plutux"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* NAND support */
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
--/* Environment in NAND, aligned to start of last sector */
--
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/qc750.h b/include/configs/qc750.h
-index f226d5a4c08..2acafb488b1 100644
+deleted file mode 100644
+index 2acafb488b1..00000000000
 --- a/include/configs/qc750.h
-+++ b/include/configs/qc750.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2023
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Wexler QC750"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/seaboard.h b/include/configs/seaboard.h
-index 79de9f83876..4a2c6623ac1 100644
+deleted file mode 100644
+index 4a2c6623ac1..00000000000
 --- a/include/configs/seaboard.h
-+++ b/include/configs/seaboard.h
-@@ -10,16 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Seaboard"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include <linux/sizes.h>
 -
--/* NAND support */
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
--/* Max number of NAND devices */
--
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/surface-rt.h b/include/configs/surface-rt.h
-index 58be786ca77..39f7dddf3d4 100644
+deleted file mode 100644
+index 39f7dddf3d4..00000000000
 --- a/include/configs/surface-rt.h
-+++ b/include/configs/surface-rt.h
-@@ -9,10 +9,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2010-2012, NVIDIA CORPORATION.  All rights reserved.
+- *
+- * Copyright (c) 2021, Open Surface RT
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"Microsoft Surface RT"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/tec-ng.h b/include/configs/tec-ng.h
-index 4e610164fa3..3d6cb0b5257 100644
+deleted file mode 100644
+index 3d6cb0b5257..00000000000
 --- a/include/configs/tec-ng.h
-+++ b/include/configs/tec-ng.h
-@@ -8,10 +8,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2013
+- * Avionic Design GmbH <www.avionic-design.de>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Avionic Design Tamonten™ NG Evaluation Carrier"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/tec.h b/include/configs/tec.h
-index cb10c0397f9..becff398a56 100644
+deleted file mode 100644
+index becff398a56..00000000000
 --- a/include/configs/tec.h
-+++ b/include/configs/tec.h
-@@ -10,14 +10,6 @@
- #define __CONFIG_H
- 
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- *  (C) Copyright 2011-2012
+- *  Avionic Design GmbH <www.avionic-design.de>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Avionic Design Tamonten Evaluation Carrier"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* NAND support */
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
--/* Environment in NAND, aligned to start of last sector */
--
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
+diff --git a/include/configs/tegra.h b/include/configs/tegra.h
+new file mode 100644
+index 00000000000..0a880fdc1ec
+--- /dev/null
++++ b/include/configs/tegra.h
+@@ -0,0 +1,32 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ *  (C) Copyright 2010,2011
++ *  NVIDIA Corporation <www.nvidia.com>
++ *
++ *  (C) Copyright 2025
++ *  Svyatoslav Ryhel <clamor95@gmail.com>
++ *
++ *  Generic device header which can be used with SYS_CONFIG_NAME
++ *  for any Tegra device (T20, T30, T114, T124 or T210).
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++
++#include <linux/sizes.h>
++
++#ifdef CONFIG_TEGRA20
++#include "tegra20-common.h"
++#elif CONFIG_TEGRA30
++#include "tegra30-common.h"
++#elif CONFIG_TEGRA114
++#include "tegra114-common.h"
++#elif CONFIG_TEGRA124
++#include "tegra124-common.h"
++#elif CONFIG_TEGRA210
++#include "tegra210-common.h"
++#endif
++
++#include "tegra-common-post.h"
++
++#endif /* __CONFIG_H */
 diff --git a/include/configs/transformer-t20.h b/include/configs/transformer-t20.h
-index 1876d2cdc69..b82c6e34c8f 100644
+deleted file mode 100644
+index b82c6e34c8f..00000000000
 --- a/include/configs/transformer-t20.h
-+++ b/include/configs/transformer-t20.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2022
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"ASUS Transformer"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/transformer-t30.h b/include/configs/transformer-t30.h
-index 37828d3a9d9..8cb3e414af2 100644
+deleted file mode 100644
+index 8cb3e414af2..00000000000
 --- a/include/configs/transformer-t30.h
-+++ b/include/configs/transformer-t30.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2022
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"ASUS Transformer"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/trimslice.h b/include/configs/trimslice.h
-index c4f6defddbc..beecb70cd0c 100644
+deleted file mode 100644
+index beecb70cd0c..00000000000
 --- a/include/configs/trimslice.h
-+++ b/include/configs/trimslice.h
-@@ -9,15 +9,6 @@
- 
- #include <linux/sizes.h>
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010-2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"Compulab Trimslice"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* SPI */
+-#include <linux/sizes.h>
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
--/* Environment in SPI */
--/* 1MiB flash, environment located as high as possible */
--
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/venice2.h b/include/configs/venice2.h
-index fa001afdc0f..bbebe53d17e 100644
+deleted file mode 100644
+index bbebe53d17e..00000000000
 --- a/include/configs/venice2.h
-+++ b/include/configs/venice2.h
-@@ -10,12 +10,6 @@
- #include <linux/sizes.h>
- 
- #include "tegra124-common.h"
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2013-2014
+- * NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Venice2"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include <linux/sizes.h>
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra124-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/ventana.h b/include/configs/ventana.h
-index 7a6e0254545..00f9909b122 100644
+deleted file mode 100644
+index 00f9909b122..00000000000
 --- a/include/configs/ventana.h
-+++ b/include/configs/ventana.h
-@@ -9,12 +9,6 @@
- 
- #include <linux/sizes.h>
- #include "tegra20-common.h"
++++ /dev/null
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  (C) Copyright 2010,2011
+- *  NVIDIA Corporation <www.nvidia.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING	"NVIDIA Ventana"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
--/* Environment in eMMC, at the end of 2nd "boot sector" */
+-#include <linux/sizes.h>
+-#include "tegra20-common.h"
+-#include "tegra-common-post.h"
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#endif /* __CONFIG_H */
 diff --git a/include/configs/x3-t30.h b/include/configs/x3-t30.h
-index 286de6a3af4..8cb3e414af2 100644
+deleted file mode 100644
+index 8cb3e414af2..00000000000
 --- a/include/configs/x3-t30.h
-+++ b/include/configs/x3-t30.h
-@@ -11,10 +11,6 @@
- #define __CONFIG_H
- 
- #include "tegra30-common.h"
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- *  (C) Copyright 2010,2012
+- *  NVIDIA Corporation <www.nvidia.com>
+- *
+- *  (C) Copyright 2022
+- *  Svyatoslav Ryhel <clamor95@gmail.com>
+- */
 -
--/* High-level configuration options */
--#define CFG_TEGRA_BOARD_STRING		"LG X3 Board"
+-#ifndef __CONFIG_H
+-#define __CONFIG_H
 -
- #include "tegra-common-post.h"
- 
- #endif /* __CONFIG_H */
+-#include "tegra30-common.h"
+-#include "tegra-common-post.h"
+-
+-#endif /* __CONFIG_H */
 -- 
 2.43.0
 
