@@ -4,94 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AB4C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05ECBC36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:27:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B4C381E5B;
-	Tue,  1 Apr 2025 19:19:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 68AFC81E5B;
+	Tue,  1 Apr 2025 19:27:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FwIaCO0Y";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GNt0bcp5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF51981F59; Tue,  1 Apr 2025 19:19:39 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9602381ECD; Tue,  1 Apr 2025 19:27:21 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5146381703
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:19:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D8EA81703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:27:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72bd78e695dso1859101a34.3
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:19:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743527976; x=1744132776; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UMNhpBlDfFMuxlk/GldUV5lkcGdtOmxvcExynMYn1+E=;
- b=FwIaCO0YWp4FUU7vIThZYn/fi2gs5oRqAzp898Ahdx2a6HcCZNVXpKVWoS9KVOf2yu
- lRlbDl+viPlzBQC7DD1uZ16ZrCbosV25wlJ8P3NFo9hEx9hs+qboMAC7BLWT/5IsZey4
- EqzjeIQnilR8d5GMgOE2IdwtYimfLS6Oq6Ug0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743527976; x=1744132776;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UMNhpBlDfFMuxlk/GldUV5lkcGdtOmxvcExynMYn1+E=;
- b=pmr0YrrpuOiEZfKEbGqR/DnsimufR4+JP+pDi7b5qTbojrVvh3PHrID4MOjHWhlDEr
- c/MFC8QyQd5XDWnN0sfllz0aqxEc5N50hgITpHQJVUCfYdbClx0YMnVhaVdIGJcM5oFh
- LrjFXq+EPtwOdvL94XR3KN41HMDGqv0zYLzXrH2QOGDUNJvhv1EGveEeRjjOEIlHvrv5
- Wo07fc6w0h0YU3nTIeMK5a8B/qRUobQ6O/D19CHOvSthc/ywUUBgUfw4N1arES52DZov
- ScRjiyXvWbDLIDaKTQltShKUu9OyyGErv/4eAZyTJkmN4JGPh1GwAP8vWkcvJJTekRfX
- lQVA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIJ8Csj0uJqRtU1JfRudlyzdra+3LhXEMelRWMUtnszkuPddLYmhLhNJCKYoPqofXc28UKls8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxe1ui39QUeZoqDGK9lg1Gk0CHk7L28Kqp/kGKUNwGDy81YRITw
- ZfVCrIUXdWXRKN2Zcf88ja+5/RPzZ2vpoShJ0WLE2vCI2Uy3M0iHb4UEkf78aH40hLWWddwEWyg
- S
-X-Gm-Gg: ASbGnct5ARs/mVED/RHLaXord48KsG8Fj3KGC9HrGa/75V4JXBYi+JQWtkTE/pxgewm
- 4OsCrReKHdKv31YrKjD6jw2v4lULm3q0fOv1S7sLcDKhVuQReGDq/GYFdUVsbtWT4+OICZ1IEkU
- kHDpqRtjSZGXvWZg1dr11JaqGC0TENK+BlESLgTXHxaDLzAHiCQlId8xzG7OSM2R4QxORecRl51
- qKwmVnjpeV7nqjRpzDph83VARbnFxS95c1Pttbp0V4YW73JQ0mgqrfy8eQZcJBQVk2IFamuri4T
- CtSw29ByKoK9MG3X9NRqofL6yupjwXsgCa/czKFNkmaMx/nXL5mM3oruHrNRaicGZDBr3x/QTNf
- QhieEXueSUKlIp+lU
-X-Google-Smtp-Source: AGHT+IFzzOSCUkH4Fgpc2SufdZWlnUTvmqx0Q/E6CFP2iTx+zGsJACY8oV4DIi5iyMFFwvou85TABg==
-X-Received: by 2002:a05:6830:418a:b0:72b:9965:d997 with SMTP id
- 46e09a7af769-72c6381de0fmr8952276a34.18.1743527975969; 
- Tue, 01 Apr 2025 10:19:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580cc609sm1906856a34.29.2025.04.01.10.19.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 10:19:35 -0700 (PDT)
-Date: Tue, 1 Apr 2025 11:19:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
-Message-ID: <20250401171933.GN5495@bill-the-cat>
-References: <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
- <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
- <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
- <CAFLszTic6gt4fT4pVVthd-3rRy6JZ_28QLXWOYPak=ZJqYH5QQ@mail.gmail.com>
- <ef183d5a-48d3-4068-be11-04edd55febf5@cherry.de>
- <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
- <20250327234959.GS93000@bill-the-cat>
- <CAFLszTgqU_h+212y4GcXHrm+N7mUoZAaz+E2v3483wzTwNEWkA@mail.gmail.com>
- <20250330144526.GO93000@bill-the-cat>
- <CAFLszTjNwtmBqiDUQZPChXYMQei2spTMobZvAu3cQeMfJwNkkw@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=64a0=WU=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1743528437;
+ bh=2mNE+bDo3mPJeH0Yl1bssrLHxTPAqzwa39fw0fLDjGI=;
+ b=GNt0bcp5L5l/lbxcSkVLXWeaTMKivjltgCVBhH76vK+c9HhrfpdiAHGT6GIDaw7KqxSlDwW2A
+ dvTs7+/dE83tKz2gVfW1XnRXKzhYJW8EaKyWSub6VOSak5hT92Q/w22bVNr5Y3eT0lWFAhywZMQ
+ HA0ToTCRRPn4jltuNMBvWBEbTS/rAm2l89IjVlUQFlD2DWmM1526FHp+JBSNOI/9b5swMYl7+hS
+ HTlXEHSwc8Rvb9xlR99CbCoY0AZimdu8sOOmka8tqDwf1ZDFebDn71AL4XlXOdVI2Kc79HAIrAr
+ NDVXAp8aBKdwP/Uh9O5pjmQfAM9HWbPqJJn6pPhoBTug==
+X-Forward-Email-ID: 67ec21f100d8331c283c99e6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <4916425a-8021-4bbc-b24f-a9d780ce0ac6@kwiboo.se>
+Date: Tue, 1 Apr 2025 19:27:01 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NMsEBnaZCArYt5Yt"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjNwtmBqiDUQZPChXYMQei2spTMobZvAu3cQeMfJwNkkw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 19/31] rockchip: Provide a VPL phase on rk3399
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Dragan Simic <dsimic@manjaro.org>, Greg Malysa <greg.malysa@timesys.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
+ huang lin <hl@rock-chips.com>
+References: <20250328153522.3555472-1-sjg@chromium.org>
+ <20250328153522.3555472-20-sjg@chromium.org>
+ <6721d34c-83eb-44d9-9be5-a4f8346481e3@kwiboo.se>
+ <CAFLszTiEwMqyhwJ6NvkhpE3cOw7z+VHmhqMdHcPVGyr6rK4yEA@mail.gmail.com>
+ <99333ff1-f794-410b-aade-fd73450d5a1f@kwiboo.se>
+ <CAFLszTiwdr_E-O=UoVGfTTyjsJ_t9LvSPGD2v2cTKp=fhLgW5Q@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFLszTiwdr_E-O=UoVGfTTyjsJ_t9LvSPGD2v2cTKp=fhLgW5Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,214 +90,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---NMsEBnaZCArYt5Yt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-04-01 17:42, Simon Glass wrote:
+> Hi Jonas,
+> 
+> On Sun, 30 Mar 2025 at 05:46, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 2025-03-29 00:40, Simon Glass wrote:
+>>> Hi Tom,
+>>>
+>>> On Fri, 28 Mar 2025 at 10:16, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> Hi Simon,
+>>>>
+>>>> On 2025-03-28 16:34, Simon Glass wrote:
+>>>>> Add support for this new phase, which runs after TPL. It determines the
+>>>>> state of the machine, then selects which SPL image to use. SDRAM init is
+>>>>> then done in SPL, so that it is updatable.
+>>>>>
+>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>> ---
+>>>>>
+>>>>> (no changes since v2)
+>>>>>
+>>>>> Changes in v2:
+>>>>> - Rewrite help for VPL_ROCKCHIP_COMMON_BOARD
+>>>>> - Skip spl-boot-order.c for VPL (rather than modifying it)
+>>>>>
+>>>>>  arch/arm/include/asm/spl.h               |   1 +
+>>>>>  arch/arm/mach-rockchip/Kconfig           |  25 +++++-
+>>>>>  arch/arm/mach-rockchip/Makefile          |  11 ++-
+>>>>>  arch/arm/mach-rockchip/rk3399/Kconfig    |   9 ++
+>>>>>  arch/arm/mach-rockchip/spl.c             |   3 +
+>>>>>  arch/arm/mach-rockchip/tpl.c             |   2 +-
+>>>>>  arch/arm/mach-rockchip/u-boot-vpl-v8.lds | 107 +++++++++++++++++++++++
+>>>>>  arch/arm/mach-rockchip/vpl.c             |  53 +++++++++++
+>>>>>  common/spl/Kconfig                       |   1 +
+>>>>>  9 files changed, 205 insertions(+), 7 deletions(-)
+>>>>>  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
+>>>>>  create mode 100644 arch/arm/mach-rockchip/vpl.c
+>>>>>
+>>>>
+>>>> This patch and therefore this series does not apply to the next branch.
+>>>>
+>>>> Are there any depends that are missing or are you only testing based on
+>>>> your own fork?
+>>>
+>>> Until we are ready to apply things, yes I am using the sjg tree. See
+>>> the tags in the cover letters of patches I send. For this one it is:
+>>>
+>>> base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
+>>> branch: vbi3
+>>
+>> This base-commit does not even exist in your vbi3 branch :-/
+> 
+> Are you sure? The base commit works fine for me:
+> 
+> $ pe 3f76d803db9b500f43bc534465945a8d2836bb3e
+> 3f76d803db9 (ci/master) Merge branch 'ci' into 'master'
+> d07049b9f28 (el/ci) arm: Support a separate stack for VPL
+> abfff044f26 spl: Use CONFIG_VAL() to obtain the SPL stack
+> 7a032a125f5 spl: Add an SPL_HAVE_INIT_STACK option
+> 8d319b22019 tpl: Rename TPL_NEEDS_SEPARATE_STACK to TPL_HAVE_INIT_STACK
+> 794124b3258 Merge branch 'ci' into 'master'
+> 
+> The branch name is a local branch, not necessarily pushed anywhere. Is
+> there some better terminology that I should use there? Perhaps
+> 'local-branch' ?
 
-On Wed, Apr 02, 2025 at 04:48:35AM +1300, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 31 Mar 2025 at 03:45, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Mar 28, 2025 at 04:44:53AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Thu, 27 Mar 2025 at 17:50, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Mar 26, 2025 at 10:46:57AM -0600, Simon Glass wrote:
-> > > > > Hi Quentin,
-> > > > >
-> > > > > On Tue, 25 Mar 2025 at 04:20, Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
-> > > > > >
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On 3/20/25 4:26 AM, Simon Glass wrote:
-> > > > > > > Hi Quentin,
-> > > > > > >
-> > > > > > > On Wed, 19 Mar 2025 at 16:31, Quentin Schulz <quentin.schulz@=
-cherry.de> wrote:
-> > > > > > >>
-> > > > > > >> Hi Simon
-> > > > > > >>
-> > > > > > >> On 3/19/25 4:03 PM, Simon Glass wrote:
-> > > > > > >>> Hi Quentin,
-> > > > > > >>>
-> > > > > > >>> On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schul=
-z@cherry.de> wrote:
-> > > > > > >>>>
-> > > > > > >>>> Hi Simon,
-> > > > > > >>>>
-> > > > > > >>>> On 3/19/25 12:49 PM, Simon Glass wrote:
-> > > > > > >>>>> Logging of function return-values is used very frequently=
- in U-Boot now.
-> > > > > > >>>>> Add a few helper macros to make it less verbose to use.
-> > > > > > >>>>>
-> > > > > > >>>>> It turns out that the log_ret() variants are not so usefu=
-l, since it is
-> > > > > > >>>>> not obviously where the error is coming from. So only the=
- log_msg_ret()
-> > > > > > >>>>> variants are worthy of these macros.
-> > > > > > >>>>>
-> > > > > > >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > >>>>> ---
-> > > > > > >>>>>
-> > > > > > >>>>>     include/log.h | 26 ++++++++++++++++++++++++++
-> > > > > > >>>>>     1 file changed, 26 insertions(+)
-> > > > > > >>>>>
-> > > > > > >>>>> diff --git a/include/log.h b/include/log.h
-> > > > > > >>>>> index 4f6d6a2c2cf..bdda7af570c 100644
-> > > > > > >>>>> --- a/include/log.h
-> > > > > > >>>>> +++ b/include/log.h
-> > > > > > >>>>> @@ -380,6 +380,32 @@ void __assert_fail(const char *asser=
-tion, const char *file, unsigned int line,
-> > > > > > >>>>>     #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
-> > > > > > >>>>>     #endif
-> > > > > > >>>>>
-> > > > > > >>>>> +/*
-> > > > > > >>>>> + * LOGR() - helper macro for calling a function and logg=
-ing error returns
-> > > > > > >>>>> + *
-> > > > > > >>>>> + * Logs if the function returns a negative value
-> > > > > > >>>>> + *
-> > > > > > >>>>> + * Usage:   LOGR("abc", my_function(...));
-> > > > > > >>>>> + */
-> > > > > > >>>>> +#define LOGR(_msg, _expr)    do {            \
-> > > > > > >>>>> +     int _ret =3D _expr;                       \
-> > > > > > >>>>> +     if (_ret < 0)                           \
-> > > > > > >>>>> +             return log_msg_ret(_msg, _ret); \
-> > > > > > >>>>> +     } while (0)
-> > > > > > >>>>> +
-> > > > > > >>>>> +/*
-> > > > > > >>>>> + * LOGZ() - helper macro for calling a function and logg=
-ing error returns
-> > > > > > >>>>> + *
-> > > > > > >>>>> + * Logs if the function returns a non-zero value
-> > > > > > >>>>> + *
-> > > > > > >>>>> + * Usage:   LOGZ("abc", my_function(...));
-> > > > > > >>>>> + */
-> > > > > > >>>>> +#define LOGZ(_msg, _expr)    do {            \
-> > > > > > >>>>> +     int _ret =3D _expr;                       \
-> > > > > > >>>>> +     if (_ret)                               \
-> > > > > > >>>>> +             return log_msg_retz(_msg, _ret);        \
-> > > > > > >>>>> +     } while (0)
-> > > > > > >>>>> +
-> > > > > > >>>>
-> > > > > > >>>> Mmmm not sure this forced return call is a good idea, this=
- would forbid
-> > > > > > >>>> us from performing some unwinding for example.
-> > > > > > >>>
-> > > > > > >>> Yes, it is really only for simple cases. Without the return=
-, there
-> > > > > > >>> isn't much value and you may as well not use this macro.
-> > > > > > >>>
-> > > > > > >>>>
-> > > > > > >>>> I don't really see how that is better than simply calling
-> > > > > > >>>>
-> > > > > > >>>> return log_msg_retz("abc", my_function());
-> > > > > > >>>
-> > > > > > >>> That's not the intention. It actually replaces:
-> > > > > > >>>
-> > > > > > >>> ret =3D my_function();
-> > > > > > >>> if (ret)
-> > > > > > >>>       return_log_msg_ret("abc", ret);
-> > > > > > >>>
-> > > > > > >>> I use this a lot in my code. You can't always just return, =
-since there
-> > > > > > >>> may not be an error.
-> > > > > > >>>
-> > > > > > >>
-> > > > > > >> I see, I read too fast again. Only return if it's an error.
-> > > > > > >>
-> > > > > > >>>>
-> > > > > > >>>> ?
-> > > > > > >>>>
-> > > > > > >>>> If we were to keep this, I would recommend to rename the m=
-acro and fix
-> > > > > > >>>> the docstring because it does not only log if the function=
- returns a
-> > > > > > >>>> non-zero value. It does actually return.
-> > > > > > >>>>
-> > > > > > >>>> So something like
-> > > > > > >>>>
-> > > > > > >>>> LOGZ_AND_RETURN(_msg, _expr)
-> > > > > > >>>>
-> > > > > > >>>> maybe?
-> > > > > > >>>
-> > > > > > >>> Sure, longer names are easier to learn, but then it is so l=
-ong I doubt
-> > > > > > >>> anyone would use it.
-> > > > > > >>>
-> > > > > > >>> Perhaps LOG_RET() and LOG_RETZ() ? But they might get confu=
-sed with
-> > > > > > >>> log_ret() and log_retz(), which I am actually thinking of d=
-eleting.
-> > > > > > >>>
-> > > > > > >>> I would like the shortest possible name to avoid spilling f=
-unctions
-> > > > > > >>> onto the next line all the time.
-> > > > > > >>>
-> > > > > > >>
-> > > > > > >> It should be absolutely obvious from the macro name that thi=
-s can in
-> > > > > > >> fact return because missing to unwind code is among the thin=
-gs
-> > > > > > >> developers typically easily miss already, so with this macro=
- it'll be
-> > > > > > >> even easier to forget about undoing things.
-> > > > > > >>
-> > > > > > >
-> > > > > > > Yes that's true. We don't have a huge amount of tests for thi=
-s 'undo'
-> > > > > > > code either. I would bet that a code-coverage map would show =
-that.
-> > > > > > >
-> > > > > >
-> > > > > > Yeah but that's not a reason to make it even harder to spot iss=
-ues in
-> > > > > > the undo code :)
-> > > > >
-> > > > > I suspect people will just have to learn the macros, as they have=
- with
-> > > >
-> > > > I would ask "What kernel construct have people already learned and =
-we
-> > > > can adapt inside the macro?".
-> > >
-> > > Is there such a thing?
-> >
-> > Likely so. This isn't some new and novel problem, and it's likely more
-> > people have put thought in to this and come up with something well
-> > reviewed there.
->=20
-> What are you referring to here? I am not seeing anything in Linux
-> related to this.
+Probably, I did a git fetch of you public vbi3 branch:
 
-Then it's probably more pain than help in getting everyone to write code
-that handles wind/unwind/logging consistently and correctly and no we
-shouldn't wrap this up in some macro.
+  git fetch https://sjg.u-boot.org/u-boot/u-boot.git vbi3
 
---=20
-Tom
+And that did not include 3f76d803db9b500f43bc534465945a8d2836bb3e:
 
---NMsEBnaZCArYt5Yt
-Content-Type: application/pgp-signature; name="signature.asc"
+  fatal: bad object 3f76d803db9b500f43bc534465945a8d2836bb3e
 
------BEGIN PGP SIGNATURE-----
+So yes, if you keep a public branch with same name as you say in your
+patches, I would expect it to be somewhat up to date.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfsICUACgkQFHw5/5Y0
-tyzXyAv/V4E0sLjQ26PpsOusc9bbpC8iRhJNi/Fr/R62y0ZyydTw6/vfP9OvBAqC
-KnFl63+dTdzQHAyRV3qHS/4Lvfwg6GXS6NSI3DH1TQo6K2iwcYlOsOIbhV+9eIHW
-/rWv8o8RKxbW/RmC5pZhe+4FS/ejgVe3GCXwznNU+Ri+UVxoE/sCziRT6oplIFFx
-Nng2qtpXBq97EEGfA9Oqwd1/Zs0Opyv0PRKWqswHzKmGODm15OEGXKmwu6Sll63+
-Z2vy936+K/QzW+/M3l/k8ECJ3k1Q0YMSiKPjYduuQ6+3cEvt2jVx8Abf2Gu0lcRX
-1ur5uHxnmvDkIW4yaNeSev3g6JF5CiSWQxJ1qHYwTvHffS//eJHQoDQ3wMe2BOAs
-6bIM3qFoGqVJ+VmSycmDfLxIjHZ2itMcGSMKrpwkNshT2A7Fn2/+ezX+3aNJCo/d
-slullkF3HcKf5EHMj4nZNWBleXXPS4oDP8FkmmYRSAzXDg03hlQBhxD+SrHIu8q2
-BeIh5yIa
-=vwSw
------END PGP SIGNATURE-----
+> 
+>>
+>>>
+>>> So no, there is nothing else that this series depends on and if you
+>>> can review it I can send a PR for Tom for -next one all necessary
+>>> changes are made.
+>>
+>> Sorry, this does not help, my main concern is testing that this does not
+>> break or affect anything for the remaining Rockchip boards. Something
+>> that is hard to test and validate when patches do not even apply to any
+>> of the mainline master or next branches.
+>>
+>> Sending patches based on a tree that has diverged with around 677 files
+>> changed, 20072 insertions(+), 17023 deletions(-), if my git fu is
+>> correct, and then expect us to test based on this diverged tree does not
+>> help with gaining confidence in this series.
+>>
+>> I can understand keeping a personal tree that will diverge at times,
+>> i.e. my personal tree has ~120-150 patches on top of mainline master.
+>> However, I always try to keep my work-in-progress branches rebased on
+>> top of master or next.
+>>
+>> For v4, please send a series based on mainline master or next branch,
+>> as stated in "General Patch Submission Rules" [1] in the U-Boot docs.
+>>
+>> If the series has some depends, I suggest you also publish a branch
+>> to a public repo with any limited depends applied on top of master or
+>> next along with the patches in your series.
+> 
+> For now I am going to wait until you pick up your clean-up of part of
+> my series. Then I can pull that in any try to send the final VBE
+> series again.
 
---NMsEBnaZCArYt5Yt--
+I sent out a "rockchip: binman: Use a template for FIT and other
+improvements" series [2] that picked up some of your rockchip binman
+image related patches.
+
+[2] https://patchwork.ozlabs.org/cover/2066701/
+
+> 
+> I haven't had any rockchip patches rejected, so we should be able to
+> resolve this.
+
+They have not been properly reviewed (or tested) yet, as they have never
+applied cleanly on any mainline tree, with repeated requests to fix that.
+
+For me to review something, I want to be able to run the code, and run it
+on a code base as close as possible to where it intends to be merged.
+
+E.g. v1 was broken and had hidden depends that you had applied to your
+personal tree, and only later was sent out and now merged into mainline.
+
+I have some other concerns to validate, but have waited on a version
+that can be applied before continuing a review. Please consider this a
+NAK until it can properly be tested (i.e. reviewed) using a branch with
+a minimal diff to mainline master or next.
+
+Regards,
+Jonas
+
+> 
+>>
+>> [1] https://docs.u-boot.org/en/latest/develop/sending_patches.html
+> 
+> Regards,
+> Simon
+
