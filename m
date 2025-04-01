@@ -4,102 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97163C36018
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 09:48:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10217C36018
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 09:52:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5637582063;
-	Tue,  1 Apr 2025 11:47:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 656E781703;
+	Tue,  1 Apr 2025 11:52:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MAhPnMMC";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="UxmaM6Yt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C160A81FC8; Tue,  1 Apr 2025 11:47:54 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 64B86818C7; Tue,  1 Apr 2025 11:52:16 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::701])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C5E781FFC
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 11:47:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43BEC80584
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 11:52:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-391342fc0b5so3901352f8f.3
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 02:47:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743500871; x=1744105671; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=z5G4sIRxTG4U1QGiE9u+jy31Ioc4yLM7VXGZrFMXlww=;
- b=MAhPnMMCKbGykDDlazR5QyOquWYtFdWqh00tKZEphT86XTYeI/J+chRrkOQxSa2QSF
- QT4piq51KRtLxth8DMgHDIIrnp9FZna/0rVpGS3VAtbKj0IqkZ5SVgG+8+2g2W1rsE73
- jXd2JDch9BeWXzQSrzsanLMEP9HFuFg5uYdSIRYUzRp3bFqN7fuzv1CYiKphKx3ohxJo
- VbizNzU8J1rEaoQVYVIozIxOB1X/wmNlR4xf+q034PqbJO3ZAJNJjyweAzoRE7svnSVs
- I9Jfqz7R3tugObHnF34Mh+35LkPV4DIp9Xyp6qPECXWJuQ3tNLD43YN1LjM9jVJ02YvN
- vCXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743500871; x=1744105671;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z5G4sIRxTG4U1QGiE9u+jy31Ioc4yLM7VXGZrFMXlww=;
- b=WZRfJlLj/ggs67AAUjvXWfhbHY66CWVPBdofZt1uIyQ8O4l2cwBNJDsuvbOxePV85U
- cW/icCxLOqF+/NCKI/KJ6fVMXy6F9fsKTx8ErgEnJiLT5djuKLP17Etaq2bnQq3jJXxp
- HVcfJXfiF4Z4SriTnVfDipsUTOWX3GiaZIBk3LQ+Hhyo1e8vyfaIuHHaVa4+AkPI4+AE
- cnpk+fF3oiOH+9ZceSe7vdSNY/JWEtwsS1VG2GU0cFVklAWZrSU8z/sU0qHzDOvEkdn0
- JKzRQbW2AH3/iAn7hfzttGPY81y9md6IsA/dUXScoN/bbN8OEWHRK7J3F7xYDwsdZ5Z6
- NHbw==
-X-Gm-Message-State: AOJu0Ywlx7IGAT9zmsaZbrThHneBsm0Mhuv1qqA1WZTRK7aHCyjsKsBD
- SKxQDF9lwLRkyzqrBtt0jnn6FvmwOf+HsS3++ZP2D5ojEb9OiuSlE1DOsV6wIV/Tv8GmczT3UH8
- S
-X-Gm-Gg: ASbGncttFS6NY9vU6hl9V/C4xUPdSre/Qs9JCSkBRxPTWUXPUz6d1HeBrSdNmTmWCRW
- 1Qrzq7Tlwa3pHf5urVtov5yA/2iyNp6Zb9349x4rKcDJ80HEQOg/HJorvGl9PPEDCsoiE9HDAox
- 4kGtCBAzzjGK+S6rpiJLKTDoMMdUcwedkkkjlWzo5ZG3osSz5TM3XFrwx280JxuT+Mg4yXSSB4X
- SalvagOq77wOXEoflpfNdXEVZ5i5K9HIdbUnFiOLgO9Tzm9TK9wp1r2tV2sKpSAtfOegr3+PQ4F
- vgcPkL2tH80HVejrqOoF8iKq2oBWipYelkhCgXjdnE8eGSZRAff8+CAaPKFA9CfU9Q==
-X-Google-Smtp-Source: AGHT+IEyv+Cu6BL+Mvx5SL2T6ehAaA6fTAywrrbSf2UDeFCT3TWs/WY3Lt9/k4OPjNS8Q3RirDu/Xw==
-X-Received: by 2002:a05:6000:1843:b0:391:952:c730 with SMTP id
- ffacd0b85a97d-39c120cca4emr9563672f8f.11.1743500870875; 
- Tue, 01 Apr 2025 02:47:50 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b6656a0sm13733581f8f.37.2025.04.01.02.47.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 02:47:50 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 01 Apr 2025 11:47:48 +0200
-Subject: [PATCH RFC/RFT 2/2] gpio: qcom: move pm8550 gpio to new driver
+ spf=pass smtp.mailfrom=L.Anderweit@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Kv2IzxY6TMwJ34oN2YqE/qKDH3j7FEHBz050GC5CUCfIzPZdcmhyd/5uqTvQ+tZuTJn3iPg6fJiZeMHw8WvdToYEJbzTorom1SsEDthSdjfZBaseHb1BTsemDNnaMIDxv3cU7r98bDpSL0VrhhJGROBOaLMuOTelRccLiptr034WWEjzWKzQYNi6clhCFGT4KBRJzyU4Kq/ciUu3fo7kcnwYeVlJLJ38dlE+xsy30T8lBzPYXuxoOfw8Zoa/dtYMB6jtu5VKVVuRjfwMutu0KPafdHM0SGPh7orjVg5lfJtmbRsiW1ANFt2SwXHPfj/xQ2ihF8UjGMz0DxkO6yWyiw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kP873+FAfIkYQVHRZWSUu1dUEIZLos2Ap3oeTtc1sIY=;
+ b=RJO0EWe7ytQg5kFNws1z7y7jwuAyJJybGG7iyqd6q16AIPiFCCiSk6JELzS8FQXKnh2tj5m6VELWzpKBtIOLypJi/zbnZ3CtEremrGkw/YRxMOrcTyws9wM//6QOLYetdGT7hR+IN0vOWgXMr+Mdg4/6zMSDQvi+2mA3Ynkpvu3o/Ayv5R92B+fWxuQDOm/PXPO9s/voYIjBddT+OYo7GsBqxZNbpVXI2DJDhvVUmXURZF3hRxbHYHGsod24JYemdF9ikpVBpcAhmaCH1vlbBUZq5N7cy9/SWxS/Czk6o9FFUJRx1GSkye1bkHNnU5wTQHrPKKlh3s+eHSzrLyTUKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kP873+FAfIkYQVHRZWSUu1dUEIZLos2Ap3oeTtc1sIY=;
+ b=UxmaM6YtXl1/nWYzywNuAzzfTAtor10caDL3BH5BHjBQntEs/s9xj+vjLbPuscHq2qICZkEC37Lc3x+yyDmRoa3t34yOoGxP1xZ+jTmN6TDSGuatcn9+1qKthR/QiWQz6UYtLjfLjls6UoRwwzq73i+NLlX5AKINGFSiESdg/7VrV42jsBnd3no4OUkq577HNMdYfQnQPPMv1np5KgSylGhqcHFe2iI/yioGlrUOMkHvLhyCQR85O+mq0HIkKgrE4WVrcSHQTx2OQvKISJ1+06ErSyHf4ooqtdcOef6meAX0lfNMCkzdbl9wJVP86QY0RfSIQoQkod6PR+7e+vMAhw==
+Received: from AS4P190CA0062.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:656::23)
+ by PAXP195MB1229.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:1af::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.50; Tue, 1 Apr
+ 2025 09:52:10 +0000
+Received: from AM2PEPF0001C70D.eurprd05.prod.outlook.com
+ (2603:10a6:20b:656:cafe::12) by AS4P190CA0062.outlook.office365.com
+ (2603:10a6:20b:656::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.54 via Frontend Transport; Tue,
+ 1 Apr 2025 09:52:10 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AM2PEPF0001C70D.mail.protection.outlook.com (10.167.16.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8606.22 via Frontend Transport; Tue, 1 Apr 2025 09:52:10 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 1 Apr
+ 2025 11:52:10 +0200
+Received: from llp-anderweit.phytec.de (172.25.32.242) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 1 Apr
+ 2025 11:52:09 +0200
+From: Leonard Anderweit <l.anderweit@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <upstream@lists.phytec.de>
+Subject: [PATCH] doc: build: docker: Fix code-block formatting
+Date: Tue, 1 Apr 2025 11:49:52 +0200
+Message-ID: <20250401094952.8896-1-l.anderweit@phytec.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-2-74077ef0b464@linaro.org>
-References: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
-In-Reply-To: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3218;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=UD4lh7YLCq7xJDrxI+MT78QBezZ8U6s4p08979djvuc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn67ZEllOcEATxxVCz2zMP5ZpuBj3c9gwEKogTVRVw
- to5BiNaJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ+u2RAAKCRB33NvayMhJ0cEGD/
- 9ofGLONnVSTF6I/+vSeRHPlK6TZu7QjYl+r/O8Y8mnnUYh5BlC2nAxHk0c9qZYNw0G0xHisEOuSynP
- ijuT1Vtei8YSnJhSdj+HhkYQVaWiaj2c2KwKeK2XERsnl+tiMnMYQpFwWshAFgbwjdIkxI9JEJdtwV
- 8WypNYWRuEbemKkumqyqrrPE1fExy+YB2DllVIVy5UOmgLnr4NmpW7n+2+VY/lCBMBbW24lOMJpZ5u
- BEtN73Zt+y3qtYnnsQIwbtAVEKKjZcvjE1dAAE1H7zfkXneTtdBcx6DVT+vuDH2pYpIr1PuvQ0Jj5x
- lnr36mRsfrwfk6tNpmelEVVCvL2NSY0UJhdS+Jq1mgkujAYUo5YuA+zaN6XmQYgGJV2p2q7Mqc0B21
- OYHUul6jTM6/jW+MjaPr4y7C+pP2omz4T60vBXr1Vp3UrgkhTsDVoh+kZUIC5n5v42hlIBjtd2uGOj
- CiFO/IH4AqdgdpC38F+0OQOfqWHsJ1nO0jfP9GnFOj59g8uwNE3sdHqW7UjuB0tbpYHZnKu4TKivgM
- g8Ug9pPDzvDZsydwSpspq+dx7qutOkVTl1mxFsKydriFG3F5C0t8SMJY+mDwHE6+NaJl2yzAhTzmxj
- HcazBVC9WHLsngYxVykmFNusjHydhX24zK+RXHoW3hCv5+rqTxxXdVBEg1uQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.32.242]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70D:EE_|PAXP195MB1229:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12791ae0-bad2-4e6f-3eef-08dd7102df3b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?NgUY33YFrtT0rpw2O2xvFCQeDeE/V84b1QYGRXMqXpK3fUr3svkJxKXeTfFp?=
+ =?us-ascii?Q?Nih7rKkvul8sDIeqwG+k0wqMrWnsLLvIf6iFBdSgjpa3aSGaVNAypLwvNOsH?=
+ =?us-ascii?Q?VguXnsOTHPGiFktL/xC63lLNHCmtCrcalhVz4lCHVgUzzhO2uiAPzVKfQGpX?=
+ =?us-ascii?Q?jWF1qOKGmyR5kgxP15fBGpjZ33W3HPknMJ3bdn32hjKfq58M1a8WR5nMK+Ms?=
+ =?us-ascii?Q?hV+Qgyr8Bda6khzO4pa1BdZvhZP8ENF4uazMrp5jyUweffgK4xXfD2iKuUi3?=
+ =?us-ascii?Q?B0leOJf27+a86t1YfGeM0gJlcwCp62iFhZ/nczcXe/IJiq3D2xIy/ErRsUOr?=
+ =?us-ascii?Q?h2FOVrd+gGYna/0TAyEn1PcBeaZh7HCddv+Sy0k9pBfsKrLQQ1KXd2kG2Dgu?=
+ =?us-ascii?Q?nWiUvIwluO1izTJYHqJ1aZ313q5ZfG3dnStQx44HfGIK9wWY9BwpbHGVVgdR?=
+ =?us-ascii?Q?8vNIK45s/oV0RlSkzCdyla9BS7pw7TIQEZ0MKoNBuRvlTUnFoXZyED98ymdH?=
+ =?us-ascii?Q?cSuX5tGoSTGevl/Yrlf2yQapkj0TRnKe5BoSHcx5xdh/PiE7MiqlCIaPKitb?=
+ =?us-ascii?Q?dgc7D5hNGeyovoZ+W9mOwcbhuCDCdYCswK04CTkDhQ44FhcKvGT3gbmF2oi3?=
+ =?us-ascii?Q?rt2CNewr2ZdCsvV02GATc42IOmwFyGh3Hx0n/dnWF46hGmQjb1L6uxOMLoOP?=
+ =?us-ascii?Q?M6h+s/8ebXpttWmJXFWGvdfLNSCZFs9rUFVuQrqyfbojrNhR0Z2ZMjRaIOd8?=
+ =?us-ascii?Q?rkSEtDM6cciNIdpQEqIqhCy45SYMzhEv3aQvnPV5aW7jLBXcNfUESy7ixwqp?=
+ =?us-ascii?Q?uXgcaW/HU7MH8lumkeBhcfeQaWJNC9vxfxP1qkfCWHl/VnVE1k6skNiHWPG6?=
+ =?us-ascii?Q?fAJ/61AEK5nhmB0UIr3k85PgwhsFVmsFGolPUBRlXnqomef1qQyQRljG14zX?=
+ =?us-ascii?Q?jXqHfTZHFTUQIn53vU3cO/aRLtMK9nJh1rAA74hGfXvypolsYUnvrAkwPCEX?=
+ =?us-ascii?Q?KyChPZkKVJf6zKNtegFsQthhhmlYaqStVLGXqs2zLCck6TMIy+hZa5oCB5am?=
+ =?us-ascii?Q?nlqrIfzlQy72KCp3YTqoBL/TeKIOrSMnAZNQ1ZxSPisjRn9PT9FIM4yvKVbw?=
+ =?us-ascii?Q?cJSE7r0jjBi+3gh9BPFxLMYnOjPtCMm1ROYqpVBIpMvYyDB+NdKb1YTJQhAt?=
+ =?us-ascii?Q?NjfLRyWN+5ypiMAJHPvtWT9YcYH/TaZIGkQklMHy9N6N74HsX4MQz9xvyVMs?=
+ =?us-ascii?Q?fKiXHa1lX9BS/aBnbPVMfnDllHuaTRHkapx82temJ2RG9NDoeJ6vvQ4dQrMy?=
+ =?us-ascii?Q?WVZNlL/etvav+ZALx6ewnMNIZB6Zdn1wJPuu3YlvVb9m9WNyvLCvn/TKga68?=
+ =?us-ascii?Q?yfNzMiFyCg/ndMkvKn9XZxS1qRGXgcpx3jKTVFN1G0nNwUQl5u9SC/BKIMR6?=
+ =?us-ascii?Q?X1L5Yoo0AdlOrHFS4cdZRdDhl+8iZCpjE4h24Dt1CTXETbVTuqMjtRpQu5dk?=
+ =?us-ascii?Q?J5LoklG5jb954H8=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2025 09:52:10.5241 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12791ae0-bad2-4e6f-3eef-08dd7102df3b
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM2PEPF0001C70D.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP195MB1229
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,90 +147,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move support of the pm8550 gpios to the newly introduced
-driver and drop the compatible entry and the read-only quirk
-at the same time from the old driver.
+Remove double : before code-block. While at it, use code-block for all
+bash commands.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 20 +-------------------
- drivers/gpio/qcom_spmi_gpio.c |  1 +
- 2 files changed, 2 insertions(+), 19 deletions(-)
+ doc/build/docker.rst | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index cd9f3926ac41d84161b1e5311d9a99bb0b4a68ff..4458c55cd3da4d279b360b701348b50247036198 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -69,17 +69,6 @@
- #define REG_EN_CTL             0x46
- #define REG_EN_CTL_ENABLE      (1 << 7)
+diff --git a/doc/build/docker.rst b/doc/build/docker.rst
+index 01ed35050908..4974a98d4af5 100644
+--- a/doc/build/docker.rst
++++ b/doc/build/docker.rst
+@@ -12,7 +12,9 @@ You will need a multi-platform container, otherwise this error is shown::
+     ERROR: Multi-platform build is not supported for the docker driver.
+     Switch to a different driver, or turn on the containerd image store, and try again.
  
--/**
-- * pmic_gpio_match_data - platform specific configuration
-- *
-- * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to configure them.
-- * This is a workaround for an unknown bug on some platforms where trying to write the
-- * GPIO configuration registers causes the board to hang.
-- */
--enum pmic_gpio_quirks {
--	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
--};
--
- struct qcom_pmic_gpio_data {
- 	uint32_t pid; /* Peripheral ID on SPMI bus */
- 	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
-@@ -128,13 +117,8 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
- {
- 	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
- 	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
--	ulong quirks = dev_get_driver_data(dev);
- 	int ret = 0;
+-You can add a simple one with::
++You can add a simple one with:
++
++.. code-block:: bash
  
--	/* Some PMICs don't like their GPIOs being configured */
--	if (quirks & QCOM_PMIC_QUIRK_READONLY)
--		return 0;
--
- 	/* Disable the GPIO */
- 	ret = pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
- 			      REG_EN_CTL_ENABLE, 0);
-@@ -278,7 +262,6 @@ static int qcom_gpio_bind(struct udevice *dev)
- {
+     sudo docker buildx create --name multiarch --driver docker-container --use
  
- 	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
--	ulong quirks = dev_get_driver_data(dev);
- 	struct udevice *child;
- 	struct driver *drv;
- 	int ret;
-@@ -292,7 +275,7 @@ static int qcom_gpio_bind(struct udevice *dev)
- 	/* Bind the GPIO driver as a child of the PMIC. */
- 	ret = device_bind_with_driver_data(dev, drv,
- 					   dev->name,
--					   quirks, dev_ofnode(dev), &child);
-+					   0, dev_ofnode(dev), &child);
- 	if (ret)
- 		return log_msg_ret("bind", ret);
+@@ -20,7 +22,9 @@ This will result in a builder that will use QEMU for the non-native
+ architectures request in a build.  While both amd64 and arm64 happen in
+ parallel, the non-native part will take considerably longer as it must use QEMU
+ to emulate the foreign code.  An alternative, if you have accesss to reasonably
+-fast amd64 (i.e. 64-bit x86) and arm64 machines is::
++fast amd64 (i.e. 64-bit x86) and arm64 machines is:
++
++.. code-block:: bash
  
-@@ -365,7 +348,6 @@ static const struct udevice_id qcom_gpio_ids[] = {
- 	{ .compatible = "qcom,pms405-gpio" },
- 	{ .compatible = "qcom,pm6125-gpio" },
- 	{ .compatible = "qcom,pm8150-gpio" },
--	{ .compatible = "qcom,pm8550-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
- 	{ }
- };
+     sudo docker buildx create --name multiarch-multinode --node localNode --bootstrap --use
+     sudo docker buildx create --name multiarch-multinode --append --node remoteNode --bootstrap ssh://user@host
+@@ -28,7 +32,7 @@ fast amd64 (i.e. 64-bit x86) and arm64 machines is::
+ And this will result in a builder named multiarch-multinode that will build
+ each platform natively on each node.
  
-diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-index 2bb0f0d10c32ff55d3fd5c61b9bc2999878bfea6..22c8072534e9188445f0aaef5336863fd1da7a75 100644
---- a/drivers/gpio/qcom_spmi_gpio.c
-+++ b/drivers/gpio/qcom_spmi_gpio.c
-@@ -743,6 +743,7 @@ static int qcom_spmi_pmic_gpio_probe(struct udevice *dev)
- }
+-To build the image yourself::
++To build the image yourself:
  
- static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
-+	{ .compatible = "qcom,pm8550-gpio" },
- 	{ .compatible = "qcom,pm8550b-gpio" },
- 	{ .compatible = "qcom,pm8550ve-gpio" },
- 	{ .compatible = "qcom,pm8550vs-gpio" },
-
+ .. code-block:: bash
+ 
 -- 
 2.34.1
 
