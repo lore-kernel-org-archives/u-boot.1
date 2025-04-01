@@ -4,68 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4A03C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 20:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97C2C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 21:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4548D8171B;
-	Tue,  1 Apr 2025 22:55:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EA4FD8171B;
+	Tue,  1 Apr 2025 23:28:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ib5xc+iz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="igj90Tzp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F7F8817C4; Tue,  1 Apr 2025 22:55:21 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64EA381703
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 22:55:18 +0200 (CEST)
+ id BB4A8817C4; Tue,  1 Apr 2025 23:28:41 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 770B381703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 23:28:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 531KtGPA3730831
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 1 Apr 2025 15:55:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743540916;
- bh=xnjjAZnofVMhCXiKAsoY+J849WSskTNEzUB0FLY0wkk=;
- h=From:To:CC:Subject:Date;
- b=Ib5xc+izb+nbBLs+k06LgUsTkmcAyEe4NhabK1tcHfJP7KQLhThVLlBQ9JSwgXtcy
- /PUJBiljeHiCg2PKiYGLYJgXLzi59vPGnzmNGC4fwe8Aq3aiXl33zaJAco7KndY6eo
- ApKGnpaVUcszxWPvSUcR2haD6gUqkJHgwWuen0oM=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 531KtGeb022437;
- Tue, 1 Apr 2025 15:55:16 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 1
- Apr 2025 15:55:15 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 1 Apr 2025 15:55:16 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 531KtFHU040881;
- Tue, 1 Apr 2025 15:55:15 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis
- <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Andrew Davis <afd@ti.com>, Alexander Sverdlin
- <alexander.sverdlin@siemens.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Dhruva Gole <d-gole@ti.com>,
- Jonas Wood <jw@ti.com>, <praneeth@ti.com>, <u-kumar1@ti.com>,
- <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH] firmware: ti_sci: Scan all device instances when releasing
- exclusive devices
-Date: Tue, 1 Apr 2025 15:55:15 -0500
-Message-ID: <20250401205515.4078312-1-nm@ti.com>
-X-Mailer: git-send-email 2.47.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-22423adf751so112834545ad.2
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 14:28:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1743542917; x=1744147717; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=S+jfJeQHZrqPX2druk/cR+3dGL/R0b95xbGl9OmiFYw=;
+ b=igj90Tzp++m9uQU3fz2+TSLHvWf0zdtNXqA3afKANDONvHeY1PgAJ0+Khrxc3dMOjx
+ 42TgAkSmnrCXUYYt6LBDb4uz8TB44NxBJ+Zq/dIjssC1ku0L85j9gWPzfcp1mgBlmabE
+ VihGUlipr8H5/AlOvDLpjAaDLKw3K9j4cOz4c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743542917; x=1744147717;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=S+jfJeQHZrqPX2druk/cR+3dGL/R0b95xbGl9OmiFYw=;
+ b=T+bGAHbb7ufxKDgKDR6Kb1Tz32/QbRrgL0JTR2r7s62RSNebC9JiVdFAGmdOknTSYu
+ mJkT3H8TVTiQdQAspYqAMJdqRLWOGOVPF3fnQmGpW0PhjJTZooP6vpYKidfqA9bxtNku
+ YXXkQFdsJ1r/1waca3mLkXV0qEAYAeigk3nqwnVbXZUHNFXQh+mK0OMAhMtpwr85p/Gi
+ /qob2NEp2Ctxqbr3SJNO6WLInHbEl5GY/PMXDc4i6aN3CfCxvRw1w3dWzZEc6t6RW7wP
+ AWzsReyxgDPvMq6XBD8ZLkpBCSdAqKQIsDwnVmBAbCPcA16+tq70D16fXkAorHz3xGpg
+ Q5YQ==
+X-Gm-Message-State: AOJu0YzF3ZbJirI99zctaEzE6yPyRhKO87znQSwVsfFKUgYQiQO6DxxD
+ 3PltPiTmMmbBzVr8nFp9WBrg2TPSEC7OJg4YYpczlk9SmjwwwYSu3XejLmLxw4uJxCmPx2NDVCh
+ Mzg==
+X-Gm-Gg: ASbGncuXhzjGtG5TwzEF/JNIvl4KGLc0fA/Qx9czjAtfyKYOuByF5NsHi8MPJhlYAaw
+ ++LwtkI/V7jQklhgqZArhto6vWvjbrQ93OVxTDSjX0fq8NkBynGNbeXbBfrrYJ0Wifok3H905rQ
+ zwqllYvk9ZPCcwBBtMo/O5QV+3nsKMU+IejefD8IOrpq9YRJ+b27hzI5U+g9kx3SMejKB1ADKK7
+ 3LrVyixkvXW5cHnxhAXegbwA2lCD29w/jka2tP8jtgngSODd1ZD3hA2/1f+r7gayQAFAVYUUUZR
+ Hq4Krz3a1z/fJubNpDXzZzRN5R4y4JwgRGUk4XsAiPY=
+X-Google-Smtp-Source: AGHT+IEoDfqji0I0+qhZfnuEeHq5RJhqXGjyhHcfDohGGpi8TZJt52lOF1i688JlGES4/U6o8826vQ==
+X-Received: by 2002:a17:902:d486:b0:221:7eae:163b with SMTP id
+ d9443c01a7336-2295c103f2dmr61604175ad.46.1743542917163; 
+ Tue, 01 Apr 2025 14:28:37 -0700 (PDT)
+Received: from chromium.org ([202.144.206.254])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2291f1f7cc2sm93451165ad.258.2025.04.01.14.28.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Apr 2025 14:28:36 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] tpm: cr50: Support opening the TPM multiple times
+Date: Wed,  2 Apr 2025 10:28:10 +1300
+Message-ID: <20250401212821.1363793-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,135 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When FIT image with multiple dtbs are involved for R5 boot process,
-R5 SPL starts off with the first instance of dtb to probe the
-eeprom, then once we have identified the type of board, invocation
-of setup_multi_dtb_fit will replace the gd->fdt_blob with the proper
-board dtb match. However, when we do this, two things happen:
+The tpm_auto_start() function is used in tests and assumes that it can
+open the TPM even if it is already open and a locality claimed. The cr50
+driver does not use the common TPM2 TIS code so lacks a check for the
+is_open field of struct tpm_chip and in fact it doesn't use that struct.
 
-a) Prior to the invocation of setup_multi_dtb_fit, as part of the eeprom
-   discovery process, i2c controller device is already probed and marked
-   as exclusive with the match of the very first tisci match (from the
-   original boot dtb). This list is stored in the info->dev_list of the
-   first probe.
-b) When the second dtb is loaded, tisci is probed again (since this is a
-   new node) and the new info->dev_list is empty.
+Add an equivalent check to cr50_i2c_open().
 
-At this stage, the exclusive devices such as i2c instances used to
-probe the board information is left in the old info->dev_list that is
-no longer used actively by the system using the replaced dtb.
+This fixes tpm_auto_start() on coral.
 
-As a result of this, the cleanup we intent to do with
-ti_sci_cmd_release_exclusive_devices is no longer complete and
-leaves the instances such as i2c for eeprom marked used as we scan just
-the new info->dev_list.
-
-This creates a problem when Device Manager(DM) firmware starts up later
-on in the boot process and identifies that this instance of i2c is
-already marked active, so it assumes this can no longer be controlled
-by software and is marked internally as reserved and HLOS can no
-longer control these instances. This defeated the purpose of
-ti_sci_cmd_release_exclusive_devices.
-
-NOTE: This scheme works just fine if the FIT has just a single dtb as
-the info->dev_list is upto date.
-
-To fix this, let us make ti_sci_cmd_release_exclusive_devices scan the
-all registrations of tisci instances and cleanup all exclusive devices
-that have ever been registered.
-
-As part of this, change the prototype of release_exclusive_devices to
-drop the handle since that has no further meaning now.
-
-Fixes: 9566b777ae0a ("firmware: ti_sci: Add a command for releasing all exclusive devices")
-Signed-off-by: Nishanth Menon <nm@ti.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-Test logs:
-========
-prior to this patch:
-https://gist.github.com/nmenon/8ce817ac991b6ff898734d15ae5ce623#file-before
-With this patch
-https://gist.github.com/nmenon/8ce817ac991b6ff898734d15ae5ce623#file-after
-Notice that 20000000.i2c is no longer deffered in Linux.
 
-Test of platforms (on c17f03a7e93d  Merge tag 'net-20250314' of https://source.denx.de/u-boot/custodians/u-boot-net)
+ drivers/tpm/cr50_i2c.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-https://gist.github.com/nmenon/917e15b397e5249dd76664ea62e9e662
-
-Though this was uncovered in automated check in upstream testing, this was also
-independently reported in:
-https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1459509/sk-am64b-deferred-probe-of-i2c-bus-using-sdk-09-and-10
-
- arch/arm/mach-k3/r5/common.c           |  2 +-
- drivers/firmware/ti_sci.c              | 23 ++++++++++++++---------
- include/linux/soc/ti/ti_sci_protocol.h |  2 +-
- 3 files changed, 16 insertions(+), 11 deletions(-)
-
-diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-index 0f6c294f1eb2..fd188e7c90e4 100644
---- a/arch/arm/mach-k3/r5/common.c
-+++ b/arch/arm/mach-k3/r5/common.c
-@@ -144,7 +144,7 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
- 	int ret, size = 0, shut_cpu = 0;
+diff --git a/drivers/tpm/cr50_i2c.c b/drivers/tpm/cr50_i2c.c
+index 08ec179346e..5b2d5ccb146 100644
+--- a/drivers/tpm/cr50_i2c.c
++++ b/drivers/tpm/cr50_i2c.c
+@@ -737,9 +737,13 @@ static int cr50_i2c_report_state(struct udevice *dev, char *str, int str_max)
  
- 	/* Release all the exclusive devices held by SPL before starting ATF */
--	ti_sci->ops.dev_ops.release_exclusive_devices(ti_sci);
-+	ti_sci->ops.dev_ops.release_exclusive_devices();
- 
- 	ret = rproc_init();
- 	if (ret)
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 190a1e3f5fc3..54d6689ce783 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -696,20 +696,25 @@ static int ti_sci_cmd_put_device(const struct ti_sci_handle *handle, u32 id)
- 				       MSG_DEVICE_SW_STATE_AUTO_OFF);
- }
- 
--static
--int ti_sci_cmd_release_exclusive_devices(const struct ti_sci_handle *handle)
-+static int ti_sci_cmd_release_exclusive_devices(void)
+ static int cr50_i2c_open(struct udevice *dev)
  {
- 	struct ti_sci_exclusive_dev *dev, *tmp;
- 	struct ti_sci_info *info;
- 	int i, cnt;
++	struct cr50_priv *priv = dev_get_priv(dev);
+ 	char buf[80];
+ 	int ret;
  
--	info = handle_to_ti_sci_info(handle);
--
--	list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
--		cnt = dev->count;
--		debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
--		for (i = 0; i < cnt; i++)
--			ti_sci_cmd_put_device(handle, dev->id);
-+	/*
-+	 * Scan all ti_sci_list registrations, since with FIT images, we could
-+	 * have started with one device tree registration and switched over
-+	 * to a final version. This prevents exclusive devices identified
-+	 * during the first probe to be left orphan.
-+	 */
-+	list_for_each_entry(info, &ti_sci_list, list) {
-+		list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
-+			cnt = dev->count;
-+			debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
-+			for (i = 0; i < cnt; i++)
-+				ti_sci_cmd_put_device(&info->handle, dev->id);
-+		}
- 	}
- 
- 	return 0;
-diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-index 8e4c43cef311..aa4d105ee988 100644
---- a/include/linux/soc/ti/ti_sci_protocol.h
-+++ b/include/linux/soc/ti/ti_sci_protocol.h
-@@ -143,7 +143,7 @@ struct ti_sci_dev_ops {
- 				 u32 reset_state);
- 	int (*get_device_resets)(const struct ti_sci_handle *handle, u32 id,
- 				 u32 *reset_state);
--	int (*release_exclusive_devices)(const struct ti_sci_handle *handle);
-+	int (*release_exclusive_devices)(void);
- };
- 
- /**
++	if (priv->locality != -1)
++		return -EBUSY;
++
+ 	ret = process_reset(dev);
+ 	if (ret)
+ 		return log_msg_ret("reset", ret);
 -- 
-2.47.0
+2.43.0
 
+base-commit: e0695b08a71e167bf5ce83ae25acfdebca554b8d
+branch: tpm
