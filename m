@@ -4,87 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6989CC36008
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 07:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78926C36008
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 07:45:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4151817C4;
-	Tue,  1 Apr 2025 09:31:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D32F781E5B;
+	Tue,  1 Apr 2025 09:45:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fyL23vWa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yK2YlaKx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B587E801BE; Tue,  1 Apr 2025 09:31:40 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A489081F4D; Tue,  1 Apr 2025 09:45:24 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B6CC81DE3
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 09:31:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D636744D41
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 07:31:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DAD9C4CEE9
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 07:31:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743492696;
- bh=oLwfho37NDfxsA2LOBp/UHmzVyRne4A1CxMEgCLEBS8=;
- h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc:From;
- b=fyL23vWaNsMS1115aCRxaFkI8GZNRS7OK/V805LbrGoQzZ6a3U3A0zyGke5F/yo0n
- ObkIV9hnhCeSh/pW2b/mZ6M9lInBYFOeO5WoDq/fqEqU6dOrDTzHsd+KA7pCHA5tjS
- Wy1AyZfG/vj1c3vtulbeHclGMdmhaSPbLzI7El2glVjc5SSVJuxwloCE9TbaMPzEfL
- xjmR+Lzzf+LK6UIYudsPi3cwrzOcWWCq6kyrQa/08eySBVwu/ag8rHrd+/+0P6iZtW
- vJJEtFF9enVm5uDfXlwB1deWVs2DNbX0qPhvGicI1YpxuS/8qG6Vq/5dRT+2MMun+0
- Trq8tI8EhM1tA==
-Received: by mail-lj1-f178.google.com with SMTP id
- 38308e7fff4ca-30bee278c2aso65654231fa.0
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 00:31:36 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yy1ySFV80rzzwkyM3DgN5Xdpwe/FWddIyb+hDVFd+wHXLBHLH8N
- GacBdLCbRD/fVtMHAu/Ym03YowEeMBuHVnQLMRQsX8gKwaRWrSneVpoeAxq53Dzdu2p5GZ93Lyx
- w72wXvnnzZMOy/qACVEluKHC8XlY=
-X-Google-Smtp-Source: AGHT+IFHzNTP6bzKIHNMEZPrw76sTEiWDe/483htVcjtpYVdJm96hy0dubQ3Fnzt0CvTPgbi6Oh3Aom0zaYsfpo2h+k=
-X-Received: by 2002:a2e:8698:0:b0:30b:9793:c1f6 with SMTP id
- 38308e7fff4ca-30dd40d91c8mr41327281fa.17.1743492694501; Tue, 01 Apr 2025
- 00:31:34 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 96786801BE
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 09:45:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3913d129c1aso3764602f8f.0
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 00:45:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743493522; x=1744098322; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CzfY7RiiTttBlCJoMJ5fyBTUEP50uBYWCkKQ55b3GJ0=;
+ b=yK2YlaKxHDG4SiZF5BZTCBuQ6X7bBzyJSNZZU1EKTvwhr6C6C6ggZqidHfZOmt8nRT
+ s9T8B8uM1bbpowN7hmGf18M8oIiT0lmVOjvPBVh+VfYjnmRe6CzAjGfpvTeXb1waS0JR
+ AT9S+/aoVkdj4Uus5msE5pKrHPMApAkryOqcwLwc0/myiMj7yzXNgYXP2Odleru51Qo5
+ upyMXzM2E4Qi+OBbbUgCd56MmKVWZ1hgE5mBWhFrQUUDufzxq9pFudjkN8QpTNuiyVK5
+ Nldy2zj9SjZdxPT7u1+AytfEgna+mI9y/30FMoQG3iOn/vh36MN7M44O8Pgv+VHzHgaA
+ uhAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743493522; x=1744098322;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CzfY7RiiTttBlCJoMJ5fyBTUEP50uBYWCkKQ55b3GJ0=;
+ b=bYBokewL7QrA+3o9hXPLiFgxxWQ+17Tsjtqz75jTXjD4uIXeTLO98hPUh4UfJYUAbU
+ vmUD3XoaGCBm52wIHTjzq8pPs5y0tsv8JTIpioGm6XS9YlIO4e6hM3ZiMY8xSXWP+YK0
+ 5fk5CQ8Mekn6z5qpvWVHDcIsm1SmzRDcfyU1uBka2YFtIC7GrcfVfAMP90m+JwDrvpmm
+ epdhkebEajTVxAkMqVtDuAx1IURPxBin+PMRv3Uxoc55RD1uLs18YMmac6kscDy3hxM6
+ lHKQw+4D5aSsebhjipjc6XXOW/u3zJsyLsQWc9RiLc+/fsaaG+M070fenZ2kDSuJ33H4
+ fjzQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVfYL9h4ncxUddx7NQ7xGhjQYzJFgwjpoCLTAwn+Au52Ha+Rz96BNt/hCWbv7Mra/NxbxehO5A=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaYmtXzua7lCltdwD1Kr3jSo4xAiyPkA4PaUGcAqYKzcHZ1E7h
+ KvYFNwOXQ2MYN7tc3PLTbLmLnVNTScqoGgSnWahNRrP/zyaDWD0FKB62psq6X6A=
+X-Gm-Gg: ASbGncs7Dacofz3wmX8rh+z9FKLo8zBM4BgbVvd8ADtFdMUgHcsJHA+YZpkYvf/lekB
+ 4XV+u1+7GLFZ41yqWZjDgeLzwnzP5Kweunmdoe0JJ9kDBvpgmoNylS2x4dRHtBW8/9aoM6BdwOl
+ oWuYZzvVuXeMQivrTt3/HZfMAq6gQHzBG8a+8YfqQ52hilykI5eB5w5Qgm0o8EVgeCP9J0sGgdO
+ q0iut+nB8SfOq8DiT+VxnQzenbZq6ShvTYN6AhPn4A0ci9BhkdivnXF1MfWzyt/655gjtG/lA36
+ pxYgS/dVPx+UDsKZADHTTZ8PZhWbefeVCr8PoYUwv+/qitBt33YVwnVADyJtmC/heA==
+X-Google-Smtp-Source: AGHT+IGVjeSE98hnYww5KbHAeOORTkQGBhj7B7mAeMS2vOIRhk/NH7L4wKXiBtNzCMWoSBhC97MudA==
+X-Received: by 2002:a05:6000:4029:b0:39a:c6d1:c343 with SMTP id
+ ffacd0b85a97d-39c0bf299b6mr13747549f8f.10.1743493522102; 
+ Tue, 01 Apr 2025 00:45:22 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d8ff02f9csm148715295e9.26.2025.04.01.00.45.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Apr 2025 00:45:21 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] gpio: msm: fix special pins handling
+Date: Tue, 01 Apr 2025 09:45:18 +0200
+Message-Id: <20250401-topic-sm8x50-msm-gpio-special-fixes-v1-0-a1148a02bb16@linaro.org>
 MIME-Version: 1.0
-References: <20250204172319.3361870-1-wens@kernel.org>
- <CANAwSgQTMBLW2Y5YHpoAYDtXHyAbD9-s8KpWU1zBTRAB=rsJow@mail.gmail.com>
- <97223c88-8f32-4cfd-8465-dd034f85f3a5@rock-chips.com>
- <CANAwSgQB9ZdsE9vh2jOCGsATsjAUSUZQAfftPp=VsrogazmdOw@mail.gmail.com>
- <CANAwSgQS-ky7TF=k7OMOW4bQCJaozfYBjDS-5wXZ+3+3gU6crw@mail.gmail.com>
-In-Reply-To: <CANAwSgQS-ky7TF=k7OMOW4bQCJaozfYBjDS-5wXZ+3+3gU6crw@mail.gmail.com>
-From: Chen-Yu Tsai <wens@kernel.org>
-Date: Tue, 1 Apr 2025 15:31:21 +0800
-X-Gmail-Original-Message-ID: <CAGb2v679u3aFwgMBA4y_B8sk-bO3OwRrj0py4hXc5anyG=FAKQ@mail.gmail.com>
-X-Gm-Features: AQ5f1JqwN-5kJ7xz7BzRw3ywsPny-umAP4cZUzMHyyL1RgqnW3JESO7daAu9_Mk
-Message-ID: <CAGb2v679u3aFwgMBA4y_B8sk-bO3OwRrj0py4hXc5anyG=FAKQ@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: io-domain: Enable by default for all supported
- SoCs
-To: Anand Moon <linux.amoon@gmail.com>, Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de, Akash Gajjar <gajjar04akash@gmail.com>, 
- Alexandre Vicenzi <linux@alxd.me>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>, 
- Christopher Obbard <christopher.obbard@linaro.org>,
- Deepak Das <deepakdas.linux@gmail.com>, 
- Dragan Simic <dsimic@manjaro.org>, FUKAUMI Naoki <naoki@radxa.com>,
- Heiko Stuebner <heiko@sntech.de>, 
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Klaus Goger <klaus.goger@cherry.de>, Levin Du <djw@t-chip.com.cn>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Nick Xie <nick@khadas.com>, Paul Kocialkowski <paulk@sys-base.io>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Raymond Mao <raymond.mao@linaro.org>, Shantur Rathore <i@shantur.com>,
- Simon Glass <sjg@chromium.org>, 
- Stefan Roese <sr@denx.de>, Suniel Mahesh <sunil@amarulasolutions.com>, 
- Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>, 
- Wan Yee Lau <wan.yee.lau@intel.com>, Xiaobo Tian <peterwillcn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAI6Z62cC/x3MQQqDMBBG4avIrDsQJRbtVUoXY/rXDhgTMqUI4
+ t0NLj8evJ0MRWH0aHYq+KtpWivaW0PhK+sM1nc1da7rnXct/1LWwBaHrXccLfKcNbFlBJWFP7r
+ B+D5OIoOHnwRUT7ngCnX0fB3HCRYDIXB1AAAA
+X-Change-ID: 20250401-topic-sm8x50-msm-gpio-special-fixes-69baa84e4bae
+To: Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=635;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=i668oumj6ubGZQNlBEAiUKNnXueF/JPOlEjXajJgD7w=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn65mQh5TM+f6BZ/+ctTaPTjPvD9l7ziwnIkit026z
+ 1RHClViJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ+uZkAAKCRB33NvayMhJ0cwaEA
+ CLvwZHStu+fR8fNCyg5jx9HP9jWbYgKbb42ftTMhI3Ia8tGtgrDO7kOUGL8H12rRv6rX3GfhDAS3YY
+ ZgwRc82cgs858Rk3NtkdREojrt7cn6x/xouOkE2izeeehZdfcV11y7QqR5W6ReOvx4QcVi7OZEp0oN
+ aacnUyEuqgbR1PJoqfLX3WhTRN4ECtsrfKL3ykuWurwlCIw9UKOnUHo7ROD/D/IGQbvVpzAxPDRx0l
+ TU//3zDADDfwrQPIUAIZoWQzUlImGNRlREo/VM1RIFj1KqMx2EetGhOmdwttflYrd1eKcxWO//lzPn
+ pzFcAdvmz4xCzNBpq0rOEo2r0R5+hzo7+7yk8WpWz4LnNcvvQoE1PNvrEEfoF1FuSBzuAY6dE7RPDu
+ eFcvLXCzRVeZolbgcz/431fjy860CuuAneEygW6ok8F8j2RyIbblvvi3wfHDFkZ169NfPmRIgb16G+
+ 0gnGz6ntTTZuPYjvA+KqYIcctIM2UGHnotQ+7MC09n5gTEkQq6D4nDbkoBD7Wnfw0ZxgRSQ4uuiOey
+ X9QITpbvAvW2go/eRNIy3xyvjRRDkMIIZJ1BcNh+yspBaxBbJn3TpDss6o1/shhXC2ir2O1S4cvxF5
+ gI6d+3W921C9n2p4AcOOaMuO6wTJQpdPMyCqdh5mKkVgauRRqB0V789c0e9A==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,64 +113,27 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: wens@kernel.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 1, 2025 at 3:22=E2=80=AFPM Anand Moon <linux.amoon@gmail.com> w=
-rote:
->
-> Hi Kever,
->
-> On Tue, 1 Apr 2025 at 09:11, Anand Moon <linux.amoon@gmail.com> wrote:
-> >
-> > Hi Kever,
-> >
-> > On Tue, 1 Apr 2025 at 08:30, Kever Yang <kever.yang@rock-chips.com> wro=
-te:
-> > >
-> > > Hi Anand,
-> > >
-> > > On 2025/3/30 21:33, Anand Moon wrote:
-> > > > Hi Chen-Yu
-> > > >
-> > > > On Wed, 5 Feb 2025 at 07:39, Chen-Yu Tsai <wens@kernel.org> wrote:
-> > > >> From: Chen-Yu Tsai <wens@csie.org>
-> > > >>
-> > > >> The IO domain driver controls the I/O voltage for various pins,
-> > > >> MMC included.
-> > > >>
-> > > >> Enable it by default for all supported Rockchip SoCs.
-> > > >>
-> > > >> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
-> > > > Reviewed-by: Anand Moon <linux.amoon@gmail.com>
-> > > >
-> > > > Can we enable following config default for all the boards
-> > > >
-> > > > CONFIG_MMC_DW=3Dy
-> > > > CONFIG_MMC_DW_ROCKCHIP=3Dy
-> > > > CONFIG_MMC_SDHCI=3Dy
-> > > These two driver, SD card and eMMC, are board specific, not all the
-> > > board has enable all these two interface.
-> > >
-> > Ok,I thought it should reduce the configuration options on all the boar=
-ds.
-> But can we implement this for each SoC, such as the RK3399 and RK3588?"
+Fix special pins handling of get_value and get_function
+to show correct state in gpio cmd.
 
-Of all the defconfigs that have ARCH_ROCKCHIP, only three don't have MMC_DW=
-:
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      gpio: msm: fix get_function return for special pins
+      gpio: msm: return correct value return for special output pins
 
-    configs/coolpi-cm5-genbook-rk3588_defconfig
-    configs/evb-rv1108_defconfig
-    configs/geekbox_defconfig
+ drivers/gpio/msm_gpio.c | 45 ++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 40 insertions(+), 5 deletions(-)
+---
+base-commit: 5ca70325b64f760bf4190f206a0e88dda495e3d2
+change-id: 20250401-topic-sm8x50-msm-gpio-special-fixes-69baa84e4bae
 
-So maybe we could have the default by y, and negate the option where
-it makes sense.
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
-For MMC_SDHCI there would be more defconfigs, but only a couple SoCs
-support this controller, and we could narrow it down to those.
-
-
-ChenYu
