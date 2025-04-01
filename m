@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2982C3600C
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:16:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0402C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:16:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA22A81E5B;
-	Tue,  1 Apr 2025 04:16:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2593981EDD;
+	Tue,  1 Apr 2025 04:16:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="peWQl2Iu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I4XUvWWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31DE681DE3; Tue,  1 Apr 2025 04:16:40 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 4ED9A81EDD; Tue,  1 Apr 2025 04:16:41 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B51A280584
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D676817C4
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-72b0626c785so3996619a34.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:37 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-72c16e658f4so1468589a34.1
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743473796; x=1744078596; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743473798; x=1744078598; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qx0ZPKBH7yLlgNu0j17rHJkEywzUkiXeU6B6FeDB5ls=;
- b=peWQl2IuFfJUfKoCE87pHXjvtsqaoC5Wme45Zr6QVjKEsoO5nd0Y0lLZv/8OEpgxMa
- Et01MqTBnXlN9m2r1Y1AofELvt/u5Wlz+DpD/WZ+bWKIEy7qCweduDU1yIxSc0PR66Ln
- r4y0gIKAJw4n1KL2k0n4FKtRor1rAPaDi6s0U=
+ bh=QCsj5Pwiu2rgD/vgA5gkANbzEYDMfLM5ecdSe3HGE24=;
+ b=I4XUvWWFQdRI/nQWda3zk1cnnECdMzWE01qFIOVEg1HkY17jY9sfNTEdNrBOT3DHtC
+ O8pB6L9gwN4asP7JtVcS1p2NUvz+Ea4HfgX3ltkPZhU2p1D3kRFBtYpPXduvINKqHVcG
+ MjJqpmYtdcF8+loajvJB8ItKOQO/yfKEpGUbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743473796; x=1744078596;
+ d=1e100.net; s=20230601; t=1743473798; x=1744078598;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qx0ZPKBH7yLlgNu0j17rHJkEywzUkiXeU6B6FeDB5ls=;
- b=j1OV1BlpOi+yDRgCCUtFgVns/jVTyzWiAu/b7tlRgxaImEcWd4GP/yarYsqwLgNcda
- SAQ0MzOlwSuTDapAecUlg74Q4cXaySfX+Ibp/k70iZ0JLJV0fv9MLeb94QDVly3z+MwR
- uZam7IAjxjJAhh82NYhJFTD9uQwQHGHH6sNKuhF9Bw/UiEk/aa4sqZn98wPfzVpc5mv2
- EZ4vMKPaKirXZzCuU0suWL2aapnAlAn6oRBlhBpIIx2Z2FROUFx/J9yWlJuWfFWl24Mm
- u8e6z1A8taO+rErWwmC68LH3Jcc4CzkiOEr43MGnMJz+/vyeU6nse9F4F1J6OdZ3gHGf
- z8cw==
-X-Gm-Message-State: AOJu0Yx8FRMBYXSvgYJMcCECLnR5Zfug/ke1+TG6TVZCx7R37I5PagGI
- hjLwuCaa6FyA+KeAMctTUV9lYjNLk7pHVqeAuqbk+3HNdoJQ8vtw8VogtwbPVbk=
-X-Gm-Gg: ASbGncs4drT9eIbh0+7rDKZTP9QyTtIrVFLHjntARkrRI6GMvUGrxjjIcEzrFCNwxi1
- 5Wsh97fvDMiMOC/bE30AZ6B4gTF10Dm7l72ls7tj66P6p4X9GCewYU2QmquvYOEz5VC2U3U80bp
- XdZzxutyS7Ey4oMG5pRQh5lYSX9EGqH8XLwdtFSyAXv8iYkgTo1KIw59IkkIQ3jEvrH6aE6DbQp
- 1UMvay85GerxCTQ3NCbSHUfEKdqUuOSWhvYX5OHAXcQ7YLl0ePwnGjTN3AEiB3CvjJubG2F43LR
- /I3S0v17WKSufGxFlJtL/I+OpXT4R7H2mVbhhZkmWgw1QVttUv4cfCTkPCtt3+tpbNbmrXg2kIf
- C1ExQ
-X-Google-Smtp-Source: AGHT+IFgF7F9pZkU5zA2NMrcR9Ox4qMhzmrVCN6n7FvTXK179KZlcskGAT+TjHyvBgSV9Zu9eDo/vw==
-X-Received: by 2002:a05:6830:488e:b0:72a:47ec:12da with SMTP id
- 46e09a7af769-72c637a4b1dmr7917454a34.10.1743473796204; 
- Mon, 31 Mar 2025 19:16:36 -0700 (PDT)
+ bh=QCsj5Pwiu2rgD/vgA5gkANbzEYDMfLM5ecdSe3HGE24=;
+ b=qCOBcUUmfVSAB5pKsDeyEJADdJffM5AB5RjfWHvACDGQKMMVgB1zjoxEmPACnNnctk
+ TWiVXSc9RSH0xs4cjxO54BnuLufMsNxQcuytEnA+wUU1X1mgiPQw0kSPG+8IkwYWP0Iz
+ jeaaPpXqTtxEmxWxpyhqBqb8UtFfLs70EGUsxxjpoxDzbI/R2XkfJwGxf1EXZZtbybaX
+ nwQDZaxHi9rMjfYWzLSIQqzYedsRtCv4p3fw8UsT/ghV6qOoDZ0fL34PKliwN1NZhnhr
+ ceicsT/4l2q3MDK8RdDJ+NFDJY2BGnp67zPYlYlUtHLB4wMxPH2gXZTQyCxz1m5j84x4
+ Bytg==
+X-Gm-Message-State: AOJu0YyJt+IS3tX0afJalvzmN5b6EIchnoqGGderoPXBn6m1fjTFkmnS
+ OiVGPV28Ph4A4zw8UnBGxFaqVNnT4mXc4Qxf7pzg318DtNxxqwxAENqa3J4XYInjlw3yVuS+PsZ
+ V
+X-Gm-Gg: ASbGncvTIlzLFofPahAOyaXANnrwKSfBmPnmtTz5Zg8w7IPPrxZnmSFrMKf3Zx0pe6U
+ GPCCSbxfiQCA20abcrcyonR2lzb8LgVWCG/Mc23aYDwFG36z4arGFFAy/QCupzpfX8xznnGo85E
+ gk0KTMeIwtF1IBu+/Mx+7MRDxRUV+Vxyk4YudnOagYcO0iS/ooB3Yri4kCCwizOwvNiSsB14eql
+ XnbwcBDZ7L0GcgddNG0dbEe2UrIIjITuCY3832skqJy9WN/qCPiuZb7znPubXxNSoEin4IVpa/F
+ nfQUBpijVHNS4B8e7KRCv/AGRcUtrSNRVB3EsCl3njI065Df1Nzx4VzWVRl4LH5SZssD6R5mrU3
+ LxLS5
+X-Google-Smtp-Source: AGHT+IHoi8gHDpSawEjas2IG3MOvTn5Iu2aLWv3R1xMQ8ocTAfmWmGqwnKD7E4pd3mFN4EdG8OuErg==
+X-Received: by 2002:a05:6830:3499:b0:72b:81cd:e123 with SMTP id
+ 46e09a7af769-72c637bead3mr5434603a34.16.1743473797665; 
+ Mon, 31 Mar 2025 19:16:37 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.35
+ 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 19:16:35 -0700 (PDT)
+ Mon, 31 Mar 2025 19:16:36 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Richard Genoud <richard.genoud@bootlin.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-In-Reply-To: <20250311141430.154763-1-richard.genoud@bootlin.com>
-References: <20250311141430.154763-1-richard.genoud@bootlin.com>
-Subject: Re: [PATCH] net: am65-cpsw: cpsw_mdio: fix typo in error message
-Message-Id: <174347379512.47384.1071435305710440787.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 20:16:35 -0600
+To: u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>, 
+ Sukrut Bellary <sbellary@baylibre.com>
+Cc: Kevin Hilman <khilman@baylibre.com>, Bajjuri Praneeth <praneeth@ti.com>, 
+ Andrew Davis <afd@ti.com>
+In-Reply-To: <20250312065709.1434207-1-sbellary@baylibre.com>
+References: <20250312065709.1434207-1-sbellary@baylibre.com>
+Subject: Re: [PATCH] video: ti: am335x: Fix tilcdc clock names.
+Message-Id: <174347379638.47384.728841134785436400.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 20:16:36 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +98,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Mar 2025 15:14:30 +0100, Richard Genoud wrote:
+On Tue, 11 Mar 2025 23:57:09 -0700, Sukrut Bellary wrote:
 
-> Replace "froced" by "forced"
+> The commit 211b3d726378 ("arm: dts: am3x: Non-functional changes sync
+> with v6.3-rc6") changed the tilcdc clock names.
+> Fix the tilcdc driver to use the new clock names.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] net: am65-cpsw: cpsw_mdio: fix typo in error message
-      commit: 2f132281cc7899b74ac6de41500e1c44c8180c53
+[1/1] video: ti: am335x: Fix tilcdc clock names.
+      commit: b565d7f20193113e01628ef8033103694be4dd46
 -- 
 Tom
 
