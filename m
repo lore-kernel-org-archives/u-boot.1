@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9870C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:18:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AB4C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:19:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4747C817C4;
-	Tue,  1 Apr 2025 19:18:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B4C381E5B;
+	Tue,  1 Apr 2025 19:19:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uGaYt9XF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FwIaCO0Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13BEA81F59; Tue,  1 Apr 2025 19:18:29 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id BF51981F59; Tue,  1 Apr 2025 19:19:39 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F438817C4
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:18:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5146381703
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:19:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-72a4793d4e2so3648625a34.2
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:18:26 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-72bd78e695dso1859101a34.3
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:19:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743527905; x=1744132705; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743527976; x=1744132776; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+R2Yx5tXVtF4cn8Fs1+Da5PpazdwXQHQ4Vrpy6OsVDI=;
- b=uGaYt9XFsqNcE9A6Ztrl+idKhiH+sOq1SBtcVV6JeW8s7gCFiYOrmbULEefMKv5+dH
- Vpqac7dnPtOjOy5VddkFvlaUnBlxUgC4XaDLleCRZtX09wAxy6oRrWP38ZOWzTB4mb7O
- evmZjh3wlnRrUXDzVu1P3i82nG94k0mZwhuYg=
+ bh=UMNhpBlDfFMuxlk/GldUV5lkcGdtOmxvcExynMYn1+E=;
+ b=FwIaCO0YWp4FUU7vIThZYn/fi2gs5oRqAzp898Ahdx2a6HcCZNVXpKVWoS9KVOf2yu
+ lRlbDl+viPlzBQC7DD1uZ16ZrCbosV25wlJ8P3NFo9hEx9hs+qboMAC7BLWT/5IsZey4
+ EqzjeIQnilR8d5GMgOE2IdwtYimfLS6Oq6Ug0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743527905; x=1744132705;
+ d=1e100.net; s=20230601; t=1743527976; x=1744132776;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+R2Yx5tXVtF4cn8Fs1+Da5PpazdwXQHQ4Vrpy6OsVDI=;
- b=AXG6ISkJvU6JgLhJ6cbOCS4CzalYoRPU5FFiXpjz1OFJ252YyW+bFS95w3qc6DBGCL
- m+SeD6olsKUi2KNJk9ebTzhYrutwJfWHhmAa5IV/Fm72jSR1fY8mS6yTOwHm9Fvuk3jf
- YhKX8qC3ytLgioHtvmgjeOXhHcvgzEPCxo/GhZpEyBdjWjMInlSeCic9Fwo1butJkqgJ
- 1derTPor+F70f9yc7cQhaR0IuchvtxLVfGIOMatM6HK6Ju3vv0tbT3kS364sGjWxE9lK
- CVPdGG90Z6nob49SafmwyJoWnJBlDGrlkWiX4RtPHLcvfy1+5e4pG/q+JDzGd8TxJ587
- N5Zg==
-X-Gm-Message-State: AOJu0Yz0iHNj24RPz5h929L2MBeD+nNaBgh0+JaykImN7ni9EOz5vZj5
- 8rZlGn61Pc06Pb310jxX69qAQdBcHZjif+XqsFssH+7wTl0KZ5hCGTzvegX67jdpzuNl/3VFnNq
- C
-X-Gm-Gg: ASbGncto2gD3Sxgq4dt9WXcDmzAC/sD9y7AXj6uSbyLj7EYNo+5uckLkYCwAhs06Wmq
- f2268b/d0vWSLPfNN74539PWeNwAsiChrE8gHlgL9SFnHC00aC0ljREzJtYkExsZ7Fw5azlRj+y
- YOV4rPd/Hqmo/E8HqEsEGRc4MjCivnSG7cZT/odimrIrwsKox4KpK0n38znU+pm7rzcObHoXE9H
- nWbLfuPIfz6nVAH1Hghrk/ci8sRtfkjgl31jFhf1PPHwqkfhjgyKi0uBhbWtMJujmb2Tb8+1oZe
- M+wtg3HH3XzKXw0iakemDhhKbgL7JcTE/cJ0t7AJ3rBCqgr7UO+tHaFyAxr5u7Nq2wEc+u5X98t
- BtKRapg==
-X-Google-Smtp-Source: AGHT+IHYFj56bpA+Sq6pGTU1Onqk0Xee3B5dqHQKt20FFH9GS9KbpoOEsI/Ms0iKUeIMjaO51V1dZw==
-X-Received: by 2002:a05:6830:6611:b0:72b:8aec:fbd4 with SMTP id
- 46e09a7af769-72dae59c9ebmr2480796a34.3.1743527904972; 
- Tue, 01 Apr 2025 10:18:24 -0700 (PDT)
+ bh=UMNhpBlDfFMuxlk/GldUV5lkcGdtOmxvcExynMYn1+E=;
+ b=pmr0YrrpuOiEZfKEbGqR/DnsimufR4+JP+pDi7b5qTbojrVvh3PHrID4MOjHWhlDEr
+ c/MFC8QyQd5XDWnN0sfllz0aqxEc5N50hgITpHQJVUCfYdbClx0YMnVhaVdIGJcM5oFh
+ LrjFXq+EPtwOdvL94XR3KN41HMDGqv0zYLzXrH2QOGDUNJvhv1EGveEeRjjOEIlHvrv5
+ Wo07fc6w0h0YU3nTIeMK5a8B/qRUobQ6O/D19CHOvSthc/ywUUBgUfw4N1arES52DZov
+ ScRjiyXvWbDLIDaKTQltShKUu9OyyGErv/4eAZyTJkmN4JGPh1GwAP8vWkcvJJTekRfX
+ lQVA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWIJ8Csj0uJqRtU1JfRudlyzdra+3LhXEMelRWMUtnszkuPddLYmhLhNJCKYoPqofXc28UKls8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxe1ui39QUeZoqDGK9lg1Gk0CHk7L28Kqp/kGKUNwGDy81YRITw
+ ZfVCrIUXdWXRKN2Zcf88ja+5/RPzZ2vpoShJ0WLE2vCI2Uy3M0iHb4UEkf78aH40hLWWddwEWyg
+ S
+X-Gm-Gg: ASbGnct5ARs/mVED/RHLaXord48KsG8Fj3KGC9HrGa/75V4JXBYi+JQWtkTE/pxgewm
+ 4OsCrReKHdKv31YrKjD6jw2v4lULm3q0fOv1S7sLcDKhVuQReGDq/GYFdUVsbtWT4+OICZ1IEkU
+ kHDpqRtjSZGXvWZg1dr11JaqGC0TENK+BlESLgTXHxaDLzAHiCQlId8xzG7OSM2R4QxORecRl51
+ qKwmVnjpeV7nqjRpzDph83VARbnFxS95c1Pttbp0V4YW73JQ0mgqrfy8eQZcJBQVk2IFamuri4T
+ CtSw29ByKoK9MG3X9NRqofL6yupjwXsgCa/czKFNkmaMx/nXL5mM3oruHrNRaicGZDBr3x/QTNf
+ QhieEXueSUKlIp+lU
+X-Google-Smtp-Source: AGHT+IFzzOSCUkH4Fgpc2SufdZWlnUTvmqx0Q/E6CFP2iTx+zGsJACY8oV4DIi5iyMFFwvou85TABg==
+X-Received: by 2002:a05:6830:418a:b0:72b:9965:d997 with SMTP id
+ 46e09a7af769-72c6381de0fmr8952276a34.18.1743527975969; 
+ Tue, 01 Apr 2025 10:19:35 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c5809253csm1945049a34.4.2025.04.01.10.18.23
+ 46e09a7af769-72c580cc609sm1906856a34.29.2025.04.01.10.19.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 10:18:24 -0700 (PDT)
-Date: Tue, 1 Apr 2025 11:18:22 -0600
+ Tue, 01 Apr 2025 10:19:35 -0700 (PDT)
+Date: Tue, 1 Apr 2025 11:19:33 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in
- the project)
-Message-ID: <20250401171822.GM5495@bill-the-cat>
-References: <CAFLszTgtdETGCYYtH3ni7Wv0W6Ckv1SoZRG8djQ-3uKBn1YZWQ@mail.gmail.com>
- <20250304152909.GZ2640854@bill-the-cat>
- <CAFLszTiNQSs51iE=rcM7qQjipmWCKZiPX+gV2ztb+ZAB8m2MBw@mail.gmail.com>
- <20250305162236.GT2640854@bill-the-cat>
- <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
- <20250307144631.GN2640854@bill-the-cat>
- <20250310155336.GJ2640854@bill-the-cat>
- <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
- <20250331155144.GX93000@bill-the-cat>
- <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
+Message-ID: <20250401171933.GN5495@bill-the-cat>
+References: <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
+ <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
+ <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
+ <CAFLszTic6gt4fT4pVVthd-3rRy6JZ_28QLXWOYPak=ZJqYH5QQ@mail.gmail.com>
+ <ef183d5a-48d3-4068-be11-04edd55febf5@cherry.de>
+ <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
+ <20250327234959.GS93000@bill-the-cat>
+ <CAFLszTgqU_h+212y4GcXHrm+N7mUoZAaz+E2v3483wzTwNEWkA@mail.gmail.com>
+ <20250330144526.GO93000@bill-the-cat>
+ <CAFLszTjNwtmBqiDUQZPChXYMQei2spTMobZvAu3cQeMfJwNkkw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cgieTQqlOWE5wjcD"
+ protocol="application/pgp-signature"; boundary="NMsEBnaZCArYt5Yt"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+In-Reply-To: <CAFLszTjNwtmBqiDUQZPChXYMQei2spTMobZvAu3cQeMfJwNkkw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,181 +109,213 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---cgieTQqlOWE5wjcD
+--NMsEBnaZCArYt5Yt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
+On Wed, Apr 02, 2025 at 04:48:35AM +1300, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 31 Mar 2025 at 03:45, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
+> > On Fri, Mar 28, 2025 at 04:44:53AM -0600, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, 27 Mar 2025 at 17:50, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
-> > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
-> > > > [snip]
-> > > > > > Again, back to this thread, if you want me to migrate things, c=
-onsider
-> > > > > > applying the sunxi patches as I have described above. I will th=
-en look
-> > > > > > at the next target for bootstd. But while you hold this up, I c=
-annot
-> > > > > > move forward with more bootstd migration. It doesn't seem that =
-much to
-> > > > > > ask.
+> > > > On Wed, Mar 26, 2025 at 10:46:57AM -0600, Simon Glass wrote:
+> > > > > Hi Quentin,
 > > > > >
-> > > > > I will take another look at what's still relevant. But I believe =
-it's
-> > > > > still blocked on the fact that it changes behavior and breaks use=
-rs.
+> > > > > On Tue, 25 Mar 2025 at 04:20, Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
+> > > > > >
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On 3/20/25 4:26 AM, Simon Glass wrote:
+> > > > > > > Hi Quentin,
+> > > > > > >
+> > > > > > > On Wed, 19 Mar 2025 at 16:31, Quentin Schulz <quentin.schulz@=
+cherry.de> wrote:
+> > > > > > >>
+> > > > > > >> Hi Simon
+> > > > > > >>
+> > > > > > >> On 3/19/25 4:03 PM, Simon Glass wrote:
+> > > > > > >>> Hi Quentin,
+> > > > > > >>>
+> > > > > > >>> On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schul=
+z@cherry.de> wrote:
+> > > > > > >>>>
+> > > > > > >>>> Hi Simon,
+> > > > > > >>>>
+> > > > > > >>>> On 3/19/25 12:49 PM, Simon Glass wrote:
+> > > > > > >>>>> Logging of function return-values is used very frequently=
+ in U-Boot now.
+> > > > > > >>>>> Add a few helper macros to make it less verbose to use.
+> > > > > > >>>>>
+> > > > > > >>>>> It turns out that the log_ret() variants are not so usefu=
+l, since it is
+> > > > > > >>>>> not obviously where the error is coming from. So only the=
+ log_msg_ret()
+> > > > > > >>>>> variants are worthy of these macros.
+> > > > > > >>>>>
+> > > > > > >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > >>>>> ---
+> > > > > > >>>>>
+> > > > > > >>>>>     include/log.h | 26 ++++++++++++++++++++++++++
+> > > > > > >>>>>     1 file changed, 26 insertions(+)
+> > > > > > >>>>>
+> > > > > > >>>>> diff --git a/include/log.h b/include/log.h
+> > > > > > >>>>> index 4f6d6a2c2cf..bdda7af570c 100644
+> > > > > > >>>>> --- a/include/log.h
+> > > > > > >>>>> +++ b/include/log.h
+> > > > > > >>>>> @@ -380,6 +380,32 @@ void __assert_fail(const char *asser=
+tion, const char *file, unsigned int line,
+> > > > > > >>>>>     #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
+> > > > > > >>>>>     #endif
+> > > > > > >>>>>
+> > > > > > >>>>> +/*
+> > > > > > >>>>> + * LOGR() - helper macro for calling a function and logg=
+ing error returns
+> > > > > > >>>>> + *
+> > > > > > >>>>> + * Logs if the function returns a negative value
+> > > > > > >>>>> + *
+> > > > > > >>>>> + * Usage:   LOGR("abc", my_function(...));
+> > > > > > >>>>> + */
+> > > > > > >>>>> +#define LOGR(_msg, _expr)    do {            \
+> > > > > > >>>>> +     int _ret =3D _expr;                       \
+> > > > > > >>>>> +     if (_ret < 0)                           \
+> > > > > > >>>>> +             return log_msg_ret(_msg, _ret); \
+> > > > > > >>>>> +     } while (0)
+> > > > > > >>>>> +
+> > > > > > >>>>> +/*
+> > > > > > >>>>> + * LOGZ() - helper macro for calling a function and logg=
+ing error returns
+> > > > > > >>>>> + *
+> > > > > > >>>>> + * Logs if the function returns a non-zero value
+> > > > > > >>>>> + *
+> > > > > > >>>>> + * Usage:   LOGZ("abc", my_function(...));
+> > > > > > >>>>> + */
+> > > > > > >>>>> +#define LOGZ(_msg, _expr)    do {            \
+> > > > > > >>>>> +     int _ret =3D _expr;                       \
+> > > > > > >>>>> +     if (_ret)                               \
+> > > > > > >>>>> +             return log_msg_retz(_msg, _ret);        \
+> > > > > > >>>>> +     } while (0)
+> > > > > > >>>>> +
+> > > > > > >>>>
+> > > > > > >>>> Mmmm not sure this forced return call is a good idea, this=
+ would forbid
+> > > > > > >>>> us from performing some unwinding for example.
+> > > > > > >>>
+> > > > > > >>> Yes, it is really only for simple cases. Without the return=
+, there
+> > > > > > >>> isn't much value and you may as well not use this macro.
+> > > > > > >>>
+> > > > > > >>>>
+> > > > > > >>>> I don't really see how that is better than simply calling
+> > > > > > >>>>
+> > > > > > >>>> return log_msg_retz("abc", my_function());
+> > > > > > >>>
+> > > > > > >>> That's not the intention. It actually replaces:
+> > > > > > >>>
+> > > > > > >>> ret =3D my_function();
+> > > > > > >>> if (ret)
+> > > > > > >>>       return_log_msg_ret("abc", ret);
+> > > > > > >>>
+> > > > > > >>> I use this a lot in my code. You can't always just return, =
+since there
+> > > > > > >>> may not be an error.
+> > > > > > >>>
+> > > > > > >>
+> > > > > > >> I see, I read too fast again. Only return if it's an error.
+> > > > > > >>
+> > > > > > >>>>
+> > > > > > >>>> ?
+> > > > > > >>>>
+> > > > > > >>>> If we were to keep this, I would recommend to rename the m=
+acro and fix
+> > > > > > >>>> the docstring because it does not only log if the function=
+ returns a
+> > > > > > >>>> non-zero value. It does actually return.
+> > > > > > >>>>
+> > > > > > >>>> So something like
+> > > > > > >>>>
+> > > > > > >>>> LOGZ_AND_RETURN(_msg, _expr)
+> > > > > > >>>>
+> > > > > > >>>> maybe?
+> > > > > > >>>
+> > > > > > >>> Sure, longer names are easier to learn, but then it is so l=
+ong I doubt
+> > > > > > >>> anyone would use it.
+> > > > > > >>>
+> > > > > > >>> Perhaps LOG_RET() and LOG_RETZ() ? But they might get confu=
+sed with
+> > > > > > >>> log_ret() and log_retz(), which I am actually thinking of d=
+eleting.
+> > > > > > >>>
+> > > > > > >>> I would like the shortest possible name to avoid spilling f=
+unctions
+> > > > > > >>> onto the next line all the time.
+> > > > > > >>>
+> > > > > > >>
+> > > > > > >> It should be absolutely obvious from the macro name that thi=
+s can in
+> > > > > > >> fact return because missing to unwind code is among the thin=
+gs
+> > > > > > >> developers typically easily miss already, so with this macro=
+ it'll be
+> > > > > > >> even easier to forget about undoing things.
+> > > > > > >>
+> > > > > > >
+> > > > > > > Yes that's true. We don't have a huge amount of tests for thi=
+s 'undo'
+> > > > > > > code either. I would bet that a code-coverage map would show =
+that.
+> > > > > > >
+> > > > > >
+> > > > > > Yeah but that's not a reason to make it even harder to spot iss=
+ues in
+> > > > > > the undo code :)
+> > > > >
+> > > > > I suspect people will just have to learn the macros, as they have=
+ with
 > > > >
-> > > > In details:
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-2-sjg@chromium.org/
-> > > >
-> > > > Now that the underlying BLK problem is resolved, this can just be
-> > > > dropped I believe. Removing the BLK dependency from BOOTSTD can hap=
-pen
-> > > > when you're supporting a flow that lacks a BLK device entirely. This
-> > > > would be another reminder as to why putting unrelated changes in a
-> > > > series is a problem.
+> > > > I would ask "What kernel construct have people already learned and =
+we
+> > > > can adapt inside the macro?".
 > > >
-> > > OK, then just don't apply this patch. Problem solved?
+> > > Is there such a thing?
 > >
-> > Well, for a hypothetical v6 you would not include it, sure.
-> >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-3-sjg@chromium.org/
-> > > >
-> > > > This is fine.
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-4-sjg@chromium.org/
-> > > >
-> > > > This is not fine. This is also not a sunxi problem. It means that we
-> > > > should drop bootmgr from rockchip, where the conversion has already
-> > > > taken place, and would need to drop it from future conversion too.
-> > > > Neither of which are desirable changes.
-> > >
-> > > Why do you say that? I don't understand how this relates to rockchip
-> > > or why we would need to drop bootmgr from that.
-> >
-> > Then you don't have enough of a grasp of the details of the area you're
-> > trying to solve problems in? Or maybe you need to refresh yourself on
-> > the details of the area you're trying to work in.
+> > Likely so. This isn't some new and novel problem, and it's likely more
+> > people have put thought in to this and come up with something well
+> > reviewed there.
 >=20
-> Or perhaps there isn't a problem? The sunxi case is special because we
-> have a FEL boothmeth. That isn't present on rockchip, for example.
+> What are you referring to here? I am not seeing anything in Linux
+> related to this.
 
-Again, you seem to have forgotten what the problems with the series
-were.
-
-> > > > This patch in particular is
-> > > > where we have the note:
-> > > >
-> > > > "Yes, the introduction of boot standard changed the boot order and
-> > > > specifically deprioritizing scripts is unexpected."
-> > > >
-> > > > Which should have had more attention than it did.
-> > >
-> > > From memory the scripts are a fallback used when the other things
-> > > don't work, so that was the decision I made at the time.
-> >
-> > The key point being we changed behavior that others depended on, and
-> > didn't document it well and didn't make sure the change would work for
-> > them either.
-> >
-> > > > This is the thread that to me spelled out in details where the
-> > > > conversions are now blocked. We changed behavior and that in turn b=
-reaks
-> > > > users that have come to rely on ordering.
-> > >
-> > > I don't know what action to take on that comment. We cannot have 100%
-> > > backwards compatibility with the scripts, which after all weren't even
-> > > documented. But it is very close.
-> >
-> > You need to get feedback from the people you want to migrate from the
-> > scripts and ordering and rely on to something else and see what works
-> > for them.
-> >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-5-sjg@chromium.org/
-> > > >
-> > > > Is an alternative to the above which then turned in to a discussion=
- that
-> > > > I would very briefly summarize as "no discussions were had between
-> > > > stakeholders before integrating efi bootmgr with bootstd".
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-6-sjg@chromium.org/
-> > > >
-> > > > This is fine, but only relevant once migration happens.
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-7-sjg@chromium.org/
-> > > >
-> > > > If Andre is fine with this, this is fine.
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-8-sjg@chromium.org/
-> > > >
-> > > > This is a generic bugfix. I will take this to next today.
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.153=
-4931-9-sjg@chromium.org/
-> > > >
-> > > > If Andre is fine with this, this is fine.
-> > >
-> > > Well, is he? I thought he was. Can you check?
-> >
-> > You're free to. It's one of the innumerable examples of why when you
-> > group multiple things in a series and there's problems with another part
-> > of the series, unrelated changes get dropped.
->=20
-> It would be easier for me if you could apply the patches as I've suggeste=
-d.
->=20
-> But if you are willing to apply these patches and just want me to send
-> the series again without the BLK and RFC patches, I can do that.
-> Please let me know either way.
-
-Again, you should:
-- Take the non-bootstd sunxi enhancements, rebase them to next and post
-  for Andre. By themselves. This way they won't get stuck.
-- You should work with Heinrich to come up with something that handles
-  efi bootmanager and bootstd without breaking how our actual project
-  users use us.
-  There's no reason to migrate *more* platforms until we have this
-  fundamental problem sorted out.
-- You should work with any FOSS distributions to get their feedback on
-  what would make their life easier, from a user of U-Boot perspective.
-  bootstd won't be useful if it's not something our users want to use.
+Then it's probably more pain than help in getting everyone to write code
+that handles wind/unwind/logging consistently and correctly and no we
+shouldn't wrap this up in some macro.
 
 --=20
 Tom
 
---cgieTQqlOWE5wjcD
+--NMsEBnaZCArYt5Yt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfsH94ACgkQFHw5/5Y0
-tyxxWwwAsOSB+QA0uydM9K3kRbsnvuKhslOmgQYcACWJOt6u8y8DTQno9NQLrBEj
-2DlrMYwNGOSuTGYMR7D3AzItdxf8dCKwr8PfUVHJj+KNPH4d1X6lBN6NhcoDHxF9
-fV4FkogRTtNi3+94Q1T0p9WyHKUEtGi4SrKl4AUw/JKFi/S+LGUZhHk+b5eXeH7H
-5y63IpZta/iB/I2jTOzb/Va4ZpzvGUkdLfhEd43tzkDogvqCIVYSV9h5+XabcewL
-QUBUf8yl0jlu2RCpqTfTZUcnGBGr2IE38VEHkOfIW7CSvM4r95M2UAUXBhg4qe6p
-85GiXMJeQJz14N6ri7nrWxH/WQqhBlHA0xX35p5nBTp061abrXLkn7+AE6rqUXbZ
-BA25k2HAb/WUC5qUBEozMgNPW5xJisnvyL4NXdsk88NkEYTza523KovtAG8lFhgj
-41Rpnqbs/rY/XZbXPmXlIxbZL3anudT4a/FmV/NQl0qKPyEmJte0MyoCw0VsdZpi
-XwLk37Ga
-=yONC
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfsICUACgkQFHw5/5Y0
+tyzXyAv/V4E0sLjQ26PpsOusc9bbpC8iRhJNi/Fr/R62y0ZyydTw6/vfP9OvBAqC
+KnFl63+dTdzQHAyRV3qHS/4Lvfwg6GXS6NSI3DH1TQo6K2iwcYlOsOIbhV+9eIHW
+/rWv8o8RKxbW/RmC5pZhe+4FS/ejgVe3GCXwznNU+Ri+UVxoE/sCziRT6oplIFFx
+Nng2qtpXBq97EEGfA9Oqwd1/Zs0Opyv0PRKWqswHzKmGODm15OEGXKmwu6Sll63+
+Z2vy936+K/QzW+/M3l/k8ECJ3k1Q0YMSiKPjYduuQ6+3cEvt2jVx8Abf2Gu0lcRX
+1ur5uHxnmvDkIW4yaNeSev3g6JF5CiSWQxJ1qHYwTvHffS//eJHQoDQ3wMe2BOAs
+6bIM3qFoGqVJ+VmSycmDfLxIjHZ2itMcGSMKrpwkNshT2A7Fn2/+ezX+3aNJCo/d
+slullkF3HcKf5EHMj4nZNWBleXXPS4oDP8FkmmYRSAzXDg03hlQBhxD+SrHIu8q2
+BeIh5yIa
+=vwSw
 -----END PGP SIGNATURE-----
 
---cgieTQqlOWE5wjcD--
+--NMsEBnaZCArYt5Yt--
