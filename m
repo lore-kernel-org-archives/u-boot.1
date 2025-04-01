@@ -4,50 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D01EC36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 12:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD76C36014
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 12:33:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D3F582125;
+	by phobos.denx.de (Postfix) with ESMTP id C79E982132;
 	Tue,  1 Apr 2025 14:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ipxe.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ipxe.org header.i=@ipxe.org header.b="imUhM8xF";
-	dkim=pass (1024-bit key; unprotected) header.d=amazonses.com header.i=@amazonses.com header.b="SkvoyJi9";
+	dkim=pass (2048-bit key; unprotected) header.d=ipxe.org header.i=@ipxe.org header.b="oTfWRFlB";
+	dkim=pass (1024-bit key; unprotected) header.d=amazonses.com header.i=@amazonses.com header.b="Ez/BQAFY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93EA281EDD; Tue,  1 Apr 2025 12:22:07 +0200 (CEST)
-Received: from a7-17.smtp-out.eu-west-1.amazonses.com
- (a7-17.smtp-out.eu-west-1.amazonses.com [54.240.7.17])
+ id 6BBB281FBC; Tue,  1 Apr 2025 12:30:03 +0200 (CEST)
+Received: from a7-18.smtp-out.eu-west-1.amazonses.com
+ (a7-18.smtp-out.eu-west-1.amazonses.com [54.240.7.18])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07FD18006D
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 12:22:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04BBC801FB
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 12:30:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=ipxe.org
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=01020195f0df59d3-851c6ec3-9a49-4fab-b878-e11c6018b827-000000@eu-west-1.amazonses.com
+ smtp.mailfrom=01020195f0e69d3d-62bda5e5-5a41-49e5-9e2b-714265943efa-000000@eu-west-1.amazonses.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=fvumhlyyi2m7uxyrun4agiymlewwagjt; d=ipxe.org; t=1743502924;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ s=fvumhlyyi2m7uxyrun4agiymlewwagjt; d=ipxe.org; t=1743503400;
+ h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding;
  bh=DPiudnVL5k+/5K7yzqUrasd/B9P4AAidcZA6SxruEiU=;
- b=imUhM8xF3AOe7rz/B3z7NSEPOJkqbi7zq8R4TIDvWnk8JwAkQlQgQAVX7if2qTgq
- WMyJtk1OaIj+zXm7+EjESWeUbM+tTBoh4zUk0J2SRRbrzDyAPpsiw115ggy+N70ypSw
- m3xXmneSkHGXm5XfVv1RGX5NwrCqzA/lYw6N3x8UH/0HMSMBfdVKbs4xfLhNWrZ8aeD
- BEq4yu9uA0Vw0Amhs3BGo5uirL/KGsTPYwkvpBQ1hno0rR5j2UxT7Wk56OZyhPbPNMv
- l1NeqSXJjUcaJtiuCKMu4JUiWl+caPLytlRUX70VylaytoWcszt4W+tf/6YI9Kupynk
- 1fehGg4Wtg==
+ b=oTfWRFlBuiJWtkGAdXzVrHVvqVzyVLNhAI/T1oyk5G3tKPk2SKFR/7fhuDhUE1l4
+ SCUcHuSAzzSxxoKCWacWebKdUvBoeJRjptCzjIgels/ZjFcC3S0n39Hxa8wYB7wP/Sx
+ qsAn6QzvVCuMGj+9ABNNwtF1MSgQQ/8FFFDKNDx/43NJyRQcrkZ/dFNifBhzJYOgrww
+ 3SPXyj24pYAOqosNxTy6ksV+PCTHgjYtO4+wUnm4tIBDZE6L4mWka2bUBpTZckb/1ni
+ Uj8KJeRgGKlYElsrFUCjkE+JO3HrZa9BwR8Gr3bGc+OH4vKFXcLdyAyOmpiaBtzFaFI
+ +vC4C+tZmA==
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=ihchhvubuqgjsxyuhssfvqohv7z3u4hn; d=amazonses.com; t=1743502924;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Feedback-ID;
+ s=ihchhvubuqgjsxyuhssfvqohv7z3u4hn; d=amazonses.com; t=1743503400;
+ h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:Feedback-ID;
  bh=DPiudnVL5k+/5K7yzqUrasd/B9P4AAidcZA6SxruEiU=;
- b=SkvoyJi9NKvC1ReelPCWHdjduPMQHPX5Ed9niAshkgXB5LAqyYzmv7gcE3KML9zc
- xwDlikZSz+sYFBM/jiJIyM5uQf0Ay4zy6Vqe+k4G4pwPbxOUxiN/p4JWs7d4w7a7RMs
- VBzYZ3WI4ymvI4hUNIKMqZ4aVucpLiEISwxc82RE=
-Message-ID: <01020195f0df59d3-851c6ec3-9a49-4fab-b878-e11c6018b827-000000@eu-west-1.amazonses.com>
-Date: Tue, 1 Apr 2025 10:22:04 +0000
+ b=Ez/BQAFYE+12BfRtFHiioYCgSvYPXIX7kefmupwf02NMtuT8q1sWSMQAX+9VGS54
+ NsSoBqplD/PBxvAo6e5g0pwAGOjqan0ouX/TphGWCHkVeyiKB482ACk+6Daag9iLAp0
+ pybJ2eracdc9Mjc93o2UApipUDlXUems0gQ82XWQ=
+Message-ID: <01020195f0e69d3d-62bda5e5-5a41-49e5-9e2b-714265943efa-000000@eu-west-1.amazonses.com>
+Date: Tue, 1 Apr 2025 10:30:00 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+From: Michael Brown <mcb30@ipxe.org>
 Subject: =?UTF-8?Q?Re=3A_U-Boot_interferes_with_initrd_binary_=E2=80=94_Reve?=
  =?UTF-8?Q?rt_=22efi=3A_Correct_smbios-table_installation=22_=3F?=
 To: =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>
@@ -56,7 +57,6 @@ References: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
  <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
  <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
 Content-Language: en-US
-From: Michael Brown <mcb30@ipxe.org>
 Autocrypt: addr=mcb30@ipxe.org; keydata=
  xsFNBGPmfF4BEAC3vcU4aLC/9Uy/rTpmYujbqxQNZje9E34jGvLxO3uYwj4BeHj1Nn5T2TDM
  Gkc4ngk+mGPsJsIn69YU5cfVN+ch9O7FVfsn6egZsCNeLy6Qz0o//gBaWJodFBeawuBjXXyV
@@ -104,7 +104,7 @@ In-Reply-To: <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Feedback-ID: ::1.eu-west-1.fspj4M/5bzJ9NLRzJP0PaxRwxrpZqiDQJ1IF94CF2TA=:AmazonSES
-X-SES-Outgoing: 2025.04.01-54.240.7.17
+X-SES-Outgoing: 2025.04.01-54.240.7.18
 X-Mailman-Approved-At: Tue, 01 Apr 2025 14:32:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
