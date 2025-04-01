@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F29BC36017
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:30:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1520C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7FB982027;
-	Tue,  1 Apr 2025 19:30:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81C2981F4D;
+	Tue,  1 Apr 2025 19:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xhg1vNKZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oKC+WDp4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF88281FC8; Tue,  1 Apr 2025 19:30:12 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 36CAD82006; Tue,  1 Apr 2025 19:30:18 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31FFA81F7E
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:30:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 966ED8205A
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:30:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-301302a328bso9983350a91.2
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:30:10 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-3014678689aso8195775a91.0
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:30:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743528608; x=1744133408; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743528613; x=1744133413; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sNblkeO7DtYMaQHnKmjUAZnkA06RZVRs7XxY43jhM4Q=;
- b=Xhg1vNKZU45kSLNsGGPyoVSU1554XSaOi5UnFnHmYUP/EhI+Y9O9CMT0noLtqq07SR
- lUiw0r/+gdGpItXJqHcOjVeW5qZPkaa24yRDiwKYwNAvI6L+d+8b4m57u5ReilwbghLR
- 74Uv5L2Ke7G0V9T7yrhDa5OV+J46eyp6p/hTw=
+ bh=6YbyRgRGIZbHYqo7kqTfLFuOlGgo+1+OfkPr1SpfUPI=;
+ b=oKC+WDp4rMFuRvf2536g5cJ1a7iAN73a4jztkyX5mrlvnD7PuI8T/UMsDWMVmm/HqI
+ kAlUs+2vKi4NztdIhhgeVbHxj9eoC1lzDHe3iz7PfFnCv1+pJ1nnTvL1/OIOvA6A42dB
+ XPOUIBh/QqQ0FK+w6UsEk5AUVba4Yd9ZgSPbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743528608; x=1744133408;
+ d=1e100.net; s=20230601; t=1743528613; x=1744133413;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sNblkeO7DtYMaQHnKmjUAZnkA06RZVRs7XxY43jhM4Q=;
- b=P5OKGoWgPvjbBo1CItAYhNF6e8uIO5sw81AYND0sEIYFWTu6e9Q+iDVww918ZGA48c
- WTf2RKy7bESUkFL6AuOiRdnov4NwaTvWtvIikZghWpbAK6k4ECFR5UyMJoO/H49PGcYX
- rMjFVyuGhMDTHZOj2Rc9wvr4h+tGhlvDZmsqpWaCnZj6nU29kscKdLxvAjtbfM4IAKsa
- +ES/fFYVjhuCZg8LnlurhBA6AbEFauL9G9U5xdIQBeEzIB8JDyYp0nItFqLPswZsE01S
- 3l2uvz8GypMwgcxhd2J0ueEIu6zSoMQXOeB14EvpyLg8rGl5VQoF7Nl1EeqVroeMBmQ+
- 84oA==
-X-Gm-Message-State: AOJu0Yweb6sFu3qESKgEvP1F9nQVEY8cxWQDfDOkgdx6jM0zMk1ho/MJ
- WBv3kyxFghP4iGcVIyOTbQ//SZV9eVOUnaYzyEvVttF5qVjmN6fV54P9NcQ61g2GhKU0WGgMmfq
- G1A==
-X-Gm-Gg: ASbGncsJxCgqfW2PwXRCH43rgSC26yn08aNiXHqwrRfdwCQoMYBQKLQth7zMqs8/7gz
- ARJ2nyOOG0W7qDeOlTM3htV5K/DveF11OUDDsN22mTskb4vFqLCoC/Nh3Xjjb6w6OySY9ybESsS
- Bcx03qigeWAAYJBvu6X/Q1YB0zRWFxPSLUcB+p6Hv3wyYRRMp3pj6QXLmAgsb9/Gr59Gw7OisSu
- AaGCK9OSV9uHrMLSoUkR4fvzmiAzNyUZe3e0OAjENKQmUku1dhswnZTdsbkEwfbfKgs/d33gWYW
- e10e35n5KivZYgPBpBAg6DSyuIYaz6DN/uiXSprdWoo=
-X-Google-Smtp-Source: AGHT+IG9a/CXXQCNlp7Dz+R3nW8lC1aotZv4yw+beJTzmBlGlLIdBNkxII41Br2Be1LhdxI+hjuZmg==
-X-Received: by 2002:a17:90b:2e07:b0:2ee:53b3:3f1c with SMTP id
- 98e67ed59e1d1-30531f7c07cmr20260572a91.5.1743528607774; 
- Tue, 01 Apr 2025 10:30:07 -0700 (PDT)
+ bh=6YbyRgRGIZbHYqo7kqTfLFuOlGgo+1+OfkPr1SpfUPI=;
+ b=lfSRAekjJdmPy949ciGjVPJYJM+W8mTDBjPAXmrO1/2irJ8mB9ElJ8H2wOYt6s81C5
+ bvSpFJmI+BQsAcwV1KSGT7cfo43sX90qMeiJet4dSTGIelKDuMwJ+HvCst0HoUlHlV2M
+ X1f3t1lbKi8MkqB8eiN0P4x+WqfhwvAjVjGlN6QJa4S15ssCmCGBGEVwRSgbGlHPqsg1
+ 8UiPXbpzO3zvikrEyak8Xf+A5deDHD1hjo1LnlfNIc305qUAhdrtsIhWdfBneM2XHdI4
+ YY9uLxF32Aqp6P/0yFdwOa7SdeoGmHF0Q0V97DFaV3My4rmeiS6Id0+gOUONjop/mIbx
+ Sb7g==
+X-Gm-Message-State: AOJu0YzJ9oRu76hvsQ6KyrofsCGr3tkVY4U/+bAkvWG6+JBV+Iv0HWln
+ gcilXXPmkCCSWJcCCSlpUkSNP17yG60/QRND1+6I+tD5IwSDpFxXhQmbqApz/hJZ56+7dfMel/6
+ Hng==
+X-Gm-Gg: ASbGnctHVD/BO/+7X+Ov7IK5jkF241VLTwkxw3j66sKxFFqEdx0m5yBe10cvd5ibDpw
+ yGzjsvH9D31lKlhPqhE1rnGTSoMMr4FBPPBsZleP7WJiCsLY3DFox2KcYKyk7FbwqUk5WockywB
+ gb3vElwQHZ4A4m5sjdQpMJB6wsAIvE3+Wmzx/OEwn8hkEDGp5rPzcO1tbB8M7ROnZUGkSN5stDQ
+ HBqAzO4p3LhUCfi3sinq5W2aYPKGFvKU/V+O7I9QmSOKK3l8IZt6CdWYSymlxGhqUVnCU+UmWlF
+ cosbMPm2E/H11QMf4zltWt/Ed7fVsGSedY1TDqimHyE=
+X-Google-Smtp-Source: AGHT+IFXDqgzRWqww3wTRQvtEI2BV3pNojqjRdQJyeAgbij5IYtkyJNZbITmtB3jhMhKLfTVXtBqWA==
+X-Received: by 2002:a17:90b:1b08:b0:2ee:ed1c:e451 with SMTP id
+ 98e67ed59e1d1-305320af3aamr19621019a91.15.1743528613049; 
+ Tue, 01 Apr 2025 10:30:13 -0700 (PDT)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3039dfd48e2sm11958976a91.9.2025.04.01.10.30.04
+ 98e67ed59e1d1-3039dfd48e2sm11958976a91.9.2025.04.01.10.30.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 10:30:07 -0700 (PDT)
+ Tue, 01 Apr 2025 10:30:12 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 01/13] console: Support a format string for stderr output
-Date: Wed,  2 Apr 2025 06:29:32 +1300
-Message-ID: <20250401172948.1236000-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 02/13] video: Make white-on-black a video-device property
+Date: Wed,  2 Apr 2025 06:29:33 +1300
+Message-ID: <20250401172948.1236000-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250401172948.1236000-1-sjg@chromium.org>
 References: <20250401172948.1236000-1-sjg@chromium.org>
@@ -97,70 +97,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a console_printf_select_stderr() function so that it is not
-necessary for the caller to process the format string.
+The CONFIG_WHITE_ON_BLACK setting is hard-coded at build-time. It is
+useful to be able to control this when showing menus.
+
+Create a property to hold this information, using the CONFIG as the
+initial value.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/console.c  | 18 ++++++++++++++++++
- include/console.h | 15 +++++++++++++++
- 2 files changed, 33 insertions(+)
+ boot/expo.c                  |  2 +-
+ boot/scene.c                 |  8 ++++----
+ drivers/video/video-uclass.c | 16 +++++++++++++++-
+ include/video.h              | 12 ++++++++++++
+ 4 files changed, 32 insertions(+), 6 deletions(-)
 
-diff --git a/common/console.c b/common/console.c
-index 3362a32a7a0..c6dfed6e201 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -359,6 +359,24 @@ void console_puts_select_stderr(bool serial_only, const char *s)
- 		console_puts_select(stderr, serial_only, s);
+diff --git a/boot/expo.c b/boot/expo.c
+index 786f665f53c..8ce645e5a8f 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -194,7 +194,7 @@ int expo_render(struct expo *exp)
+ 	u32 colour;
+ 	int ret;
+ 
+-	back = CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK) ? VID_BLACK : VID_WHITE;
++	back = vid_priv->white_on_black ? VID_BLACK : VID_WHITE;
+ 	colour = video_index_to_colour(vid_priv, back);
+ 	ret = video_fill(dev, colour);
+ 	if (ret)
+diff --git a/boot/scene.c b/boot/scene.c
+index 3290a40222a..15e7a8b3387 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -330,8 +330,9 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
+ 	enum colour_idx fore, back;
+ 	uint inset = theme->menu_inset;
+ 
++	vid_priv = dev_get_uclass_priv(dev);
+ 	/* draw a background for the object */
+-	if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
++	if (vid_priv->white_on_black) {
+ 		fore = VID_DARK_GREY;
+ 		back = VID_WHITE;
+ 	} else {
+@@ -344,7 +345,6 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
+ 		return;
+ 
+ 	vidconsole_push_colour(cons, fore, back, &old);
+-	vid_priv = dev_get_uclass_priv(dev);
+ 	video_fill_part(dev, label_bbox.x0 - inset, label_bbox.y0 - inset,
+ 			label_bbox.x1 + inset, label_bbox.y1 + inset,
+ 			vid_priv->colour_fg);
+@@ -408,7 +408,8 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
+ 			struct vidconsole_colour old;
+ 			enum colour_idx fore, back;
+ 
+-			if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
++			vid_priv = dev_get_uclass_priv(dev);
++			if (vid_priv->white_on_black) {
+ 				fore = VID_BLACK;
+ 				back = VID_WHITE;
+ 			} else {
+@@ -416,7 +417,6 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
+ 				back = VID_BLACK;
+ 			}
+ 
+-			vid_priv = dev_get_uclass_priv(dev);
+ 			if (obj->flags & SCENEOF_POINT) {
+ 				vidconsole_push_colour(cons, fore, back, &old);
+ 				video_fill_part(dev, x - theme->menu_inset, y,
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index 1e385f12f8e..db40744c196 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -343,7 +343,7 @@ void video_set_default_colors(struct udevice *dev, bool invert)
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
+ 	int fore, back;
+ 
+-	if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
++	if (priv->white_on_black) {
+ 		/* White is used when switching to bold, use light gray here */
+ 		fore = VID_LIGHT_GRAY;
+ 		back = VID_BLACK;
+@@ -580,6 +580,18 @@ static void video_idle(struct cyclic_info *cyc)
+ 	video_sync_all();
  }
  
-+int console_printf_select_stderr(bool serial_only, const char *fmt, ...)
++void video_set_white_on_black(struct udevice *dev, bool white_on_black)
 +{
-+	char buf[CONFIG_SYS_PBSIZE];
-+	va_list args;
-+	int ret;
++	struct video_priv *priv = dev_get_uclass_priv(dev);
 +
-+	va_start(args, fmt);
++	if (priv->white_on_black != white_on_black) {
++		priv->white_on_black = white_on_black;
++		video_set_default_colors(dev, false);
 +
-+	/* For this to work, buf must be larger than anything we ever want to
-+	 * print.
-+	 */
-+	ret = vscnprintf(buf, sizeof(buf), fmt, args);
-+	va_end(args);
-+	console_puts_select_stderr(serial_only, buf);
-+
-+	return ret;
++		video_clear(dev);
++	}
 +}
 +
- static void console_puts(int file, const char *s)
+ /* Set up the display ready for use */
+ static int video_post_probe(struct udevice *dev)
  {
- 	int i;
-diff --git a/include/console.h b/include/console.h
-index 57fdb0834c1..8d0d7bb8a4c 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -169,6 +169,21 @@ int console_announce_r(void);
+@@ -622,6 +634,8 @@ static int video_post_probe(struct udevice *dev)
+ 	if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
+ 		priv->copy_fb = map_sysmem(plat->copy_base, plat->size);
+ 
++	priv->white_on_black = CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK);
++
+ 	/* Set up colors  */
+ 	video_set_default_colors(dev, false);
+ 
+diff --git a/include/video.h b/include/video.h
+index 2fe2f73a865..0ec6b1ca289 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -100,6 +100,7 @@ enum video_format {
+  * @fg_col_idx:	Foreground color code (bit 3 = bold, bit 0-2 = color)
+  * @bg_col_idx:	Background color code (bit 3 = bold, bit 0-2 = color)
+  * @last_sync:	Monotonic time of last video sync
++ * @white_on_black: Use a black background
   */
- void console_puts_select_stderr(bool serial_only, const char *s);
+ struct video_priv {
+ 	/* Things set up by the driver: */
+@@ -131,6 +132,7 @@ struct video_priv {
+ 	u8 fg_col_idx;
+ 	u8 bg_col_idx;
+ 	ulong last_sync;
++	bool white_on_black;
+ };
+ 
+ /**
+@@ -346,6 +348,16 @@ void video_set_flush_dcache(struct udevice *dev, bool flush);
+  */
+ void video_set_default_colors(struct udevice *dev, bool invert);
  
 +/**
-+ * console_printf_select_stderr() - Output a formatted string to selected devs
++ * video_set_white_on_black() - Change the setting for white-on-black
 + *
-+ * This writes to stderr only. It is useful for outputting errors. Note that it
-+ * uses its own buffer, separate from the print buffer, to allow printing
-+ * messages within console/stdio code
++ * This does nothing if the setting is already the same.
 + *
-+ * @serial_only: true to output only to serial, false to output to everything
-+ *	else
-+ * @fmt: Printf format string, followed by format arguments
-+ * Return: number of characters written
++ * @dev: video device
++ * @white_on_black: true to use white-on-black, false for black-on-white
 + */
-+int console_printf_select_stderr(bool serial_only, const char *fmt, ...)
-+		__attribute__ ((format (__printf__, 2, 3)));
++void video_set_white_on_black(struct udevice *dev, bool white_on_black);
 +
  /**
-  * console_clear() - Clear the console
+  * video_default_font_height() - Get the default font height
   *
 -- 
 2.43.0
