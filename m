@@ -4,101 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBBDC36008
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 05:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E04E7C36008
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 06:12:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAE9181EC0;
-	Tue,  1 Apr 2025 07:33:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E5FA81DE3;
+	Tue,  1 Apr 2025 08:12:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mlruCj/q";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Ws1KXt6K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCA31817C4; Tue,  1 Apr 2025 05:42:03 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F95B81E5B; Tue,  1 Apr 2025 08:12:34 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E656780FDA
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 05:42:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C0F9817C4
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 08:12:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac6ed4ab410so812353866b.1
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 20:42:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743478920; x=1744083720; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Llm6v0M77o3nrwL95j18ZM2edKTO+ywCJo6q1MJrg+o=;
- b=mlruCj/qaN8mxiPTq81gIbpFV007x8duSxGU72aUgyLSlNxODYt8Mr6MxzW3ooMurc
- jTlkORLfNIBINLSnxEstk0o2PSK6/QQZstnJiLA3AKaPZjH5TtpbzRfwU7emmtPo6IyV
- Qf3u8NBeKd3uU5igLL0AiuFHl0NdefLB702f3a+CCA6uOZlDZxO5EY8Db+LNgNLKrNB5
- noN8AzU6HC3GqEc5jOfrTUlSquvjQXnvntRUXfEb27pdo0tPZQAr5o5KRelaiwYujV9r
- 3G5AZds1EL3W705M+4TlRQcGOTrhUlNlDHK1Z3il2SuGOKNaw+7w+41VqIVI+5WNl7ar
- KpFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743478920; x=1744083720;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Llm6v0M77o3nrwL95j18ZM2edKTO+ywCJo6q1MJrg+o=;
- b=fdgmRn7llqWzprBS2PXK2Flnbpv5s0y2YuFm/Q5RXIngjottALIM/O3nDEJ0+KINc1
- BlhVIM8fPc+cQFA1wfpxCe5D035dzRaolZPDe1JNQdas5RS3BZDs1MQFUS8XeeLYERTs
- fsr7GQXw6EL7Z4lfVAztWhmGsJZj7vYQqMQJkL638tocteQ7b6yLI7uNP5Akc+Y9VrTf
- I4Rh5HANwxG0rXN5FxuWbfibzAGM1AbiAOcyocve7A76/yaULfCUoEqXwVbNdXHulbfD
- OpgliM0loW3p66cKtpIjknbtqe5Hbp1RqAM+0bjmGLi4IZ2LrPhJv/Dz52JtLIxwzb3B
- wqEA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX9DOn8zUj4mKFxqB5VPPetgtqlJclfVbwo09b8SsVBHL5ge7b6S5MEGheAPa+LqRLC2OtM12U=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmQo6F1rfYMMQjQUxTs9SmXwibtYSlCVNuCRgIRaI3dyUnF6Ur
- CiLW6WVAHnc69S8WXFtZuQAtiNqIjx9Ye8S2JgdhYfykszSAt7DcAH2QUrVux+5dHUG/EFayc6v
- 7WqjgIEUogpQcxyZINpDUIUIFHAA=
-X-Gm-Gg: ASbGnctlt7H3NgDqnp/SU+0NlpogC5tAiMXSO/6ujOAErpZZRGgPYavspS1VsDSno/W
- J0FCH5jg/VeGvXbvLJTHGW1qhmk6Ofk+s8MF4q0Mm711m9okgAmo7Zr3dDFIAaA1yZyY/GkLA2d
- 5CgoXxlACOEjWi66KpzwlUNG96NA==
-X-Google-Smtp-Source: AGHT+IFiKt1VygeyiRwkb78DXh+fzyUIR907S3s/xaDgP7zaYQTq4YVenRBsBezw/M+sgQc16AKeUh9WBXrrWb2dmKw=
-X-Received: by 2002:a17:907:7f22:b0:ac7:7f21:a9a4 with SMTP id
- a640c23a62f3a-ac77f21ab69mr177740066b.10.1743478920084; Mon, 31 Mar 2025
- 20:42:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id BB237120004;
+ Tue,  1 Apr 2025 09:12:30 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru BB237120004
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1743487950;
+ bh=H/0h7jJmW3QdGCPa8AeR9DvwwywhC42wltvKTiHTElA=;
+ h=Message-ID:Date:MIME-Version:Subject:From:To:Content-Type:From;
+ b=Ws1KXt6KapBzCvYafYJLyK7dmpcMfRxD4ocqrPIC5HMeRpLL43wT/jpCE26w0QhCD
+ yALqbI2sxthGYPUxseEhTxJaG9yDXZS7H2TobezFb9hf7kMgSRG+i21KTyl2mCJpDk
+ KtJ6Ly0f8m5IUuiIgeOXFdwfC+wh5TQPrAK2Nd0imX/nFp7PicuF4G+p02617t3xje
+ cYIVsCZBV9qRon3+U3ZklPY5fUpwhasyZLD2WgJ7cl1Qxsed5icSzrAS4a0NdTXPIu
+ gZGZVRQpDwg005evrx6KenkFCtk8rd6hd6rGQ4iudWk3YjvgD2bT3KyzQrx06y5sgd
+ hREqN4v3ug9uw==
+Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
+ [172.24.201.216])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue,  1 Apr 2025 09:12:30 +0300 (MSK)
+Message-ID: <c5fcecfc-00b0-a048-8590-0ea8948e320e@salutedevices.com>
+Date: Tue, 1 Apr 2025 09:12:26 +0300
 MIME-Version: 1.0
-References: <20250204172319.3361870-1-wens@kernel.org>
- <CANAwSgQTMBLW2Y5YHpoAYDtXHyAbD9-s8KpWU1zBTRAB=rsJow@mail.gmail.com>
- <97223c88-8f32-4cfd-8465-dd034f85f3a5@rock-chips.com>
-In-Reply-To: <97223c88-8f32-4cfd-8465-dd034f85f3a5@rock-chips.com>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Tue, 1 Apr 2025 09:11:43 +0530
-X-Gm-Features: AQ5f1JoJk60eVDZkFaejgaYXlyMsbQ9QfUhme2rEA6DBQUG8WEJORU6tcCxihiQ
-Message-ID: <CANAwSgQB9ZdsE9vh2jOCGsATsjAUSUZQAfftPp=VsrogazmdOw@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: io-domain: Enable by default for all supported
- SoCs
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Chen-Yu Tsai <wens@kernel.org>, u-boot@lists.denx.de,
- Chen-Yu Tsai <wens@csie.org>, 
- Akash Gajjar <gajjar04akash@gmail.com>, Alexandre Vicenzi <linux@alxd.me>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan <andy.yan@rock-chips.com>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Deepak Das <deepakdas.linux@gmail.com>, 
- Dragan Simic <dsimic@manjaro.org>, FUKAUMI Naoki <naoki@radxa.com>,
- Heiko Stuebner <heiko@sntech.de>, 
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Klaus Goger <klaus.goger@cherry.de>, Levin Du <djw@t-chip.com.cn>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Nick Xie <nick@khadas.com>, Paul Kocialkowski <paulk@sys-base.io>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
- Shantur Rathore <i@shantur.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Suniel Mahesh <sunil@amarulasolutions.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>, 
- Tom Rini <trini@konsulko.com>, Wan Yee Lau <wan.yee.lau@intel.com>, 
- Xiaobo Tian <peterwillcn@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH RESEND] drivers: usb: gadget: composite: add checking for
+ interface number
+Content-Language: en-US
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+To: Vladimir Mitrofanov <vvmitrofanov@salutedevices.com>, <lukma@denx.de>,
+ <mkorpershoek@baylibre.com>, <marex@denx.de>, <trini@konsulko.com>,
+ <l.majewski@samsung.com>, <kyungmin.park@samsung.com>
+CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>
+References: <20250203155505.3298965-1-vvmitrofanov@salutedevices.com>
+ <b163f4f1-455d-465d-6fc4-3b9d32642c94@salutedevices.com>
+In-Reply-To: <b163f4f1-455d-465d-6fc4-3b9d32642c94@salutedevices.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 01 Apr 2025 07:33:17 +0200
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.28.224.222]
+X-ClientProxiedBy: p-exch-cas-a-m1.sberdevices.ru (172.24.201.216) To
+ p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 192258 [Apr 01 2025]
+X-KSMG-AntiSpam-Version: 6.1.1.11
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 51 0.3.51
+ 68896fb0083a027476849bf400a331a2d5d94398, 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2025/04/01 00:40:00 #27845942
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,36 +102,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+Hi, sorry, pls ping
 
-On Tue, 1 Apr 2025 at 08:30, Kever Yang <kever.yang@rock-chips.com> wrote:
->
-> Hi Anand,
->
-> On 2025/3/30 21:33, Anand Moon wrote:
-> > Hi Chen-Yu
-> >
-> > On Wed, 5 Feb 2025 at 07:39, Chen-Yu Tsai <wens@kernel.org> wrote:
-> >> From: Chen-Yu Tsai <wens@csie.org>
-> >>
-> >> The IO domain driver controls the I/O voltage for various pins,
-> >> MMC included.
-> >>
-> >> Enable it by default for all supported Rockchip SoCs.
-> >>
-> >> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
-> > Reviewed-by: Anand Moon <linux.amoon@gmail.com>
-> >
-> > Can we enable following config default for all the boards
-> >
-> > CONFIG_MMC_DW=y
-> > CONFIG_MMC_DW_ROCKCHIP=y
-> > CONFIG_MMC_SDHCI=y
-> These two driver, SD card and eMMC, are board specific, not all the
-> board has enable all these two interface.
->
-Ok,I thought it should reduce the configuration options on all the boards.
-> Thanks,
-> - Kever
-Thanks
--Anand
+
+On 12.03.2025 10:53, Arseniy Krasnov wrote:
+> Hi, sorry, pls ping
+> 
+> On 03.02.2025 18:55, Vladimir Mitrofanov wrote:
+>> Some proprietary protocols uses "w_index" field not by the rules.
+>> When we set "intf = w_index & 0xFF" variable without check it may
+>> exceed maximum number of interfaces. Not all code cases below check
+>> the range of this variable. In some protocols it is usefull to
+>> guaranty that "intf" not exceed MAX_CONFIG_INTERFACES.
+>>
+>> Fixes: 7010f5b94fa3 ("usb:gadget:composite USB composite gadget support")
+>> Signed-off-by: Vladimir Mitrofanov <vvmitrofanov@salutedevices.com>
+>> ---
+>>  drivers/usb/gadget/composite.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/usb/gadget/composite.c b/drivers/usb/gadget/composite.c
+>> index 04b8541993..4bb2afa833 100644
+>> --- a/drivers/usb/gadget/composite.c
+>> +++ b/drivers/usb/gadget/composite.c
+>> @@ -1011,7 +1011,7 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
+>>  	u16				w_index = le16_to_cpu(ctrl->wIndex);
+>>  	u16				w_value = le16_to_cpu(ctrl->wValue);
+>>  	struct usb_composite_dev	*cdev = get_gadget_data(gadget);
+>> -	u8				intf = w_index & 0xFF;
+>> +	u8				intf = min_t(u8, w_index & 0xFF, MAX_CONFIG_INTERFACES - 1);
+>>  	int				value = -EOPNOTSUPP;
+>>  	struct usb_request		*req = cdev->req;
+>>  	struct usb_function		*f = NULL;
