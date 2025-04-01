@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 286C0C3601A
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 08:01:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DCD7C36014
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 08:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1430D81F6B;
-	Tue,  1 Apr 2025 10:01:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04F7E82054;
+	Tue,  1 Apr 2025 10:01:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="O7UhFqvu";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="ZNfAUWIe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2FB881F7B; Tue,  1 Apr 2025 10:01:06 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 18A0982045; Tue,  1 Apr 2025 10:01:16 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E9681F44
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 10:01:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1526781F44
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 10:01:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5315oIbd031690;
- Tue, 1 Apr 2025 08:00:41 GMT
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5315oMWX026709;
+ Tue, 1 Apr 2025 08:00:50 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=jvSTqc2cwyNSS+iVcEfItO
- mF0mW8SyVEjNPAsP7Ogog=; b=O7UhFqvu4T0fuckEnEZwQ5YtMdR6nmU1gVHkaG
- 15sKfFC4sUG3scGlRfQEaH1DeP8V+JK1RBgn/X7XlkBnBYnz73PE8XitcfykxWmK
- f572Bug1cCrKBxwaCuvNfxzs8URzOyG+HVcCwfRU5U5vAJW8hkdjQQy0goMYhNfm
- QBkYip79uu8d2IrY/dUM/yXsco3+MXYGTvcxwvaP9UOrkELKgiyPv3ZZpQFqRxcX
- 4u6Mn0Es6qVwmnrTg4HgYvo39wAsBYwbxR1UiUdXt73wVZ+hUGwO+piB1glP/wYi
- agsBDIM434J/ovc8D1Hi+E7AjluRLBdDoNVu6e4AXiqo9JNQ==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ VqL9K/0JWl8p90iWyOjp0073KBl5us+8ZK9WWQujtQ4=; b=ZNfAUWIe0zG4kLvT
+ u/XmB9pupN9lzVDO/f8mVoBZaN+kzq+kYRZ68VM1SkHX3qoC7Tnc6ZDr5+kTn6KO
+ wl9J3/MGON4WGjgd7b39YZAIr/WGXfbXjTPrVsWx0wyVEyQtPzoIinYMoeBgem+d
+ vRES0vtJLiw5IKabqZJHXDLOux2oojGNWidfxZ96mQMBC9rrH2XNXpIzqmi2WK7r
+ mEQSv2cvOzKlHDl9ryVHczTA1Lxw0kPFoA035NWOhthoAd3HvwmpiHuj9MfK+GW1
+ 6YyyepjNNa6Z18h4x7MalPhF5XiKba2NiVEGly/jeyUuGmGFNtTjqKQzTi+ZCcsi
+ iUFcdg==
+Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45qxa7t2aa-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45p7v8f4hf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 01 Apr 2025 08:00:41 +0000 (GMT)
+ Tue, 01 Apr 2025 08:00:49 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 53180f49007798
+ by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 53180mpu017766
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 1 Apr 2025 08:00:41 GMT
+ Tue, 1 Apr 2025 08:00:48 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 1 Apr 2025 01:00:37 -0700
+ 15.2.1544.9; Tue, 1 Apr 2025 01:00:45 -0700
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <caleb.connolly@linaro.org>, <neil.armstrong@linaro.org>,
  <sumit.garg@kernel.org>, <trini@konsulko.com>,
@@ -59,10 +60,12 @@ To: <caleb.connolly@linaro.org>, <neil.armstrong@linaro.org>,
  <michal.simek@amd.com>, <marek.vasut+renesas@mailbox.org>,
  <cniedermaier@dh-electronics.com>, <xypron.glpk@gmx.de>,
  <sjg@chromium.org>, <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
-Subject: [PATCH v1 0/3] Enable env in UFS
-Date: Tue, 1 Apr 2025 13:30:12 +0530
-Message-ID: <20250401080015.1470999-1-quic_varada@quicinc.com>
+Subject: [PATCH v1 2/3] env: Add support for storing env variables in UFS
+Date: Tue, 1 Apr 2025 13:30:14 +0530
+Message-ID: <20250401080015.1470999-3-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250401080015.1470999-1-quic_varada@quicinc.com>
+References: <20250401080015.1470999-1-quic_varada@quicinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -72,21 +75,22 @@ X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-ORIG-GUID: 0eiPQUeaiKnzflzcZEgjADtJIcVF6LR8
-X-Proofpoint-GUID: 0eiPQUeaiKnzflzcZEgjADtJIcVF6LR8
-X-Authority-Analysis: v=2.4 cv=J9Oq7BnS c=1 sm=1 tr=0 ts=67eb9d29 cx=c_pps
+X-Proofpoint-ORIG-GUID: 3XVh1d3zDueN-TvJOVu_11ApzXDzQe7L
+X-Authority-Analysis: v=2.4 cv=fdaty1QF c=1 sm=1 tr=0 ts=67eb9d31 cx=c_pps
  a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=XR8D0OoHHMoA:10 a=mQL1Am-uhmc7ytFfhkwA:9
+ a=GEpy-HfZoHoA:10 a=XR8D0OoHHMoA:10 a=COk6AnOGAAAA:8 a=RrAhlm_WmiKcpbq5iYYA:9
+ a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-GUID: 3XVh1d3zDueN-TvJOVu_11ApzXDzQe7L
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-04-01_03,2025-03-27_02,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011
- priorityscore=1501 phishscore=0 lowpriorityscore=0 bulkscore=0
- malwarescore=0 mlxscore=0 mlxlogscore=684 adultscore=0 spamscore=0
- suspectscore=0 impostorscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2502280000 definitions=main-2504010052
+ phishscore=0 bulkscore=0
+ malwarescore=0 suspectscore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 mlxscore=0 mlxlogscore=999 clxscore=1015 adultscore=0
+ lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504010051
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,34 +107,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The qcs9100 based Ride platforms have UFS as their primary storage.
-Hence add support to U-Boot env framework to be able to save and
-retrieve the environment from UFS. The environment will be
-saved/retrieved from the partition specified in the config option
-CONFIG_SYS_UFS_ENV_PART.
+Allow UFS to be able to store environment variables.
 
-Also add an API to convert partition name string to block device
-descriptor for UFS. This API will be used to get the block device
-descriptor for the partition specified in CONFIG_SYS_UFS_ENV_PART.
-
-Varadarajan Narayanan (3):
-  scsi: Implement get_blk() function
-  env: Add support for storing env variables in UFS
-  configs: qcs9100: Enable env in UFS
-
- configs/qcs9100_defconfig  |   4 ++
- drivers/scsi/scsi-uclass.c |  30 ++++++++++
- env/Kconfig                |  15 ++++-
- env/Makefile               |   1 +
- env/env.c                  |   3 +
- env/ufs.c                  | 115 +++++++++++++++++++++++++++++++++++++
- include/env_internal.h     |   1 +
- include/scsi.h             |  12 ++++
- 8 files changed, 180 insertions(+), 1 deletion(-)
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+ env/Kconfig            |  15 +++++-
+ env/Makefile           |   1 +
+ env/env.c              |   3 ++
+ env/ufs.c              | 115 +++++++++++++++++++++++++++++++++++++++++
+ include/env_internal.h |   1 +
+ 5 files changed, 134 insertions(+), 1 deletion(-)
  create mode 100644 env/ufs.c
 
-
-base-commit: 244e61fbb7f5045e4e187024f7ae80434c952145
+diff --git a/env/Kconfig b/env/Kconfig
+index 4438f0b392c..8ea1f87cb18 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -74,7 +74,7 @@ config ENV_IS_DEFAULT
+ 		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
+ 		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
+ 		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
+-		     !ENV_IS_IN_UBI
++		     !ENV_IS_IN_UBI && !ENV_IS_IN_UFS
+ 	select ENV_IS_NOWHERE
+ 
+ config ENV_IS_NOWHERE
+@@ -297,6 +297,13 @@ config ENV_IS_IN_NAND
+ 	  Currently, CONFIG_ENV_OFFSET_REDUND is not supported when
+ 	  using CONFIG_ENV_OFFSET_OOB.
+ 
++config ENV_IS_IN_UFS
++	bool "Environment in an UFS device"
++	depends on UFS
++	help
++	  Define this if you have an UFS device which you want to use for the
++	  environment.
++
+ config ENV_RANGE
+ 	hex "Length of the region in which the environment can be written"
+ 	depends on ENV_IS_IN_NAND
+@@ -706,6 +713,12 @@ config ENV_MMC_USE_DT
+ 	  The 2 defines CONFIG_ENV_OFFSET, CONFIG_ENV_OFFSET_REDUND
+ 	  are not used as fallback.
+ 
++config SYS_UFS_ENV_PART
++	string "UFS partition name for saving environment"
++	depends on ENV_IS_IN_UFS
++	help
++	  Name of the UFS partition that you want to store the environment in.
++
+ config USE_DEFAULT_ENV_FILE
+ 	bool "Create default environment from file"
+ 	help
+diff --git a/env/Makefile b/env/Makefile
+index a54e924d419..4a5de0dea1d 100644
+--- a/env/Makefile
++++ b/env/Makefile
+@@ -27,5 +27,6 @@ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_EXT4) += ext4.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_NAND) += nand.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SPI_FLASH) += sf.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FLASH) += flash.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_UFS) += ufs.o
+ 
+ CFLAGS_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
+diff --git a/env/env.c b/env/env.c
+index bcc189e14db..4535af92ba9 100644
+--- a/env/env.c
++++ b/env/env.c
+@@ -46,6 +46,9 @@ static enum env_location env_locations[] = {
+ #ifdef CONFIG_ENV_IS_IN_MMC
+ 	ENVL_MMC,
+ #endif
++#ifdef CONFIG_ENV_IS_IN_UFS
++	ENVL_UFS,
++#endif
+ #ifdef CONFIG_ENV_IS_IN_NAND
+ 	ENVL_NAND,
+ #endif
+diff --git a/env/ufs.c b/env/ufs.c
+new file mode 100644
+index 00000000000..d44053d3551
+--- /dev/null
++++ b/env/ufs.c
+@@ -0,0 +1,115 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2008-2011 Freescale Semiconductor, Inc.
++ */
++
++/* #define DEBUG */
++
++#include <asm/global_data.h>
++
++#include <command.h>
++#include <env.h>
++#include <env_internal.h>
++#include <fdtdec.h>
++#include <linux/stddef.h>
++#include <malloc.h>
++#include <memalign.h>
++#include <part.h>
++#include <search.h>
++#include <scsi.h>
++#include <errno.h>
++#include <dm/ofnode.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++static env_t envbuf;
++
++struct env_ufs_info {
++	struct blk_desc *blk;
++	struct disk_partition part;
++	int count;
++};
++
++static struct env_ufs_info env_part;
++
++static inline struct env_ufs_info *env_ufs_get_part(void)
++{
++	struct env_ufs_info *ep = &env_part;
++
++	if (scsi_get_blk(CONFIG_SYS_UFS_ENV_PART, &ep->blk, &ep->part))
++		return NULL;
++
++	ep->count = CONFIG_ENV_SIZE / ep->part.blksz;
++
++	return ep;
++}
++
++static int env_ufs_save(void)
++{
++	struct env_ufs_info *ep = env_ufs_get_part();
++	int ret;
++
++	if (!ep)
++		return -ENOENT;
++
++	ret = env_export(&envbuf);
++	if (ret)
++		return ret;
++
++	if (blk_dwrite(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count)
++		return -EIO;
++
++	return 0;
++}
++
++static int env_ufs_erase(void)
++{
++	struct env_ufs_info *ep = env_ufs_get_part();
++
++	if (!ep)
++		return -ENOENT;
++
++	return (int)blk_derase(ep->blk, ep->part.start, ep->count);
++}
++
++#if defined(ENV_IS_EMBEDDED)
++static int env_ufs_load(void)
++{
++	return 0;
++}
++#else
++static int env_ufs_load(void)
++{
++	struct env_ufs_info *ep = env_ufs_get_part();
++	int ret;
++
++	if (!ep) {
++		env_set_default(CONFIG_SYS_UFS_ENV_PART " partition not found", 0);
++		return -ENOENT;
++	}
++
++	if (blk_dread(ep->blk, ep->part.start, ep->count, &envbuf) != ep->count) {
++		env_set_default(CONFIG_SYS_UFS_ENV_PART " partition read failed", 0);
++		return -EIO;
++	}
++
++	ret = env_import((char *)&envbuf, 1, H_EXTERNAL);
++	if (ret) {
++		debug("ENV import failed\n");
++		env_set_default("Cannot load environment", 0);
++	} else {
++		gd->env_addr = (ulong)envbuf.data;
++	}
++
++	return ret;
++}
++#endif
++
++U_BOOT_ENV_LOCATION(ufs) = {
++	.location	= ENVL_UFS,
++	ENV_NAME("UFS")
++	.load		= env_ufs_load,
++#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_XPL_BUILD)
++	.save		= env_save_ptr(env_ufs_save),
++	.erase		= ENV_ERASE_PTR(env_ufs_erase),
++#endif
++};
+diff --git a/include/env_internal.h b/include/env_internal.h
+index c1c0727e4d0..acc2ba19e86 100644
+--- a/include/env_internal.h
++++ b/include/env_internal.h
+@@ -114,6 +114,7 @@ enum env_location {
+ 	ENVL_REMOTE,
+ 	ENVL_SPI_FLASH,
+ 	ENVL_UBI,
++	ENVL_UFS,
+ 	ENVL_NOWHERE,
+ 
+ 	ENVL_COUNT,
 -- 
 2.34.1
 
