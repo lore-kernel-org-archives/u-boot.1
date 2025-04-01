@@ -4,75 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40A47C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:55:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B915C36010
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 17:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE65481E6C;
-	Tue,  1 Apr 2025 19:55:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97E8280FDA;
+	Tue,  1 Apr 2025 19:57:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bzrCgAoD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lfjgZrl3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C90081E6C; Tue,  1 Apr 2025 19:55:31 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id C6ACC80194; Tue,  1 Apr 2025 19:57:16 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B85381F28
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:55:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E3A780FDA
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 19:57:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ac29fd22163so976941666b.3
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:55:29 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac25d2b2354so956907466b.1
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 10:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743530128; x=1744134928; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743530232; x=1744135032; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zq18UYnUePpP6LBKLHQOkOfkIonjrWB3/3WJRNXUczM=;
- b=bzrCgAoDA2yLt9UeS6DBoWAY6SnjK0mA/xsTkOFwKKJlG80paT25tfq/qfjCaiFxqc
- 7BUJKam4Puhb7pfsdDD0O+wDLFQ1KC4DjpRMqdBTr5EJeXapjpqkU5V5xTc2NNy3tSUe
- noTLA/UARYjD3s61NHDU+kFffS/9LH9ueRRjo=
+ bh=6/jE71Vptk+0CNksoqWDqHzi8OoLyUWyPPC4D6/89Cc=;
+ b=lfjgZrl38c3UFU+QzPeAKqlOjlPV2nCa1MU8nFz5YAMIP2m1SwcCPlJFizcJ666lBM
+ OoLYjW0pENyh6qmbVYsTY3pH6BWaIJiX8k8eaLX8NrPpG0T3mzHplduuKvrfy7gz1R4D
+ JW/cXnoc2uCSljWDvmwGKb9YJZfetjDtuFb8A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743530128; x=1744134928;
+ d=1e100.net; s=20230601; t=1743530232; x=1744135032;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zq18UYnUePpP6LBKLHQOkOfkIonjrWB3/3WJRNXUczM=;
- b=o87t7OxJ34C0G1VAdkWn60o+BDIDCMvKAANrxMkeSOvFfMWjQDNmWEwzi5AyuvpuUH
- CrFN5cLuVJ6JhdKs1XkgSlt2vaWTN68caJs3egXVNz947M/ZyX7vq2zUGX4d/PSNkQdv
- DU4f88zRhliBeWi4VazA+jMtEJprWMQuFoioOdP590nzhd9hv59gLt1j4k/OtEOFvkXX
- Qn2Gkhkh2ZU3r4TJ9y5YdCIqLqlWZvV7nLjZov+lE0iZCACGS+Jx8J8wBjZx2yvvisIH
- ZW1QjNiAhrof35/9qAiOQKAazljvUKrRDJO0aD9FPQQWv5udx80NL/bTDuh8atsuNxnz
- TtrA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVQMyWcqnAVQCtfb8PeDlSd89Mw+cj/fTM5dLjzPMO4iLHzvE9ixy//k0LP+kel9PsYDU151W0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjHJlbnZenMg1ZNYag6Y1wQQcg/or4ylxqv+MtDvYfa0Z1i0Js
- qey7LlW519Xu8GsA+Goo4wzCsc6e+mUCvAHAuEx/2NC4zpGU1VwN6wwdv6wy0AGsffPwPjSIffO
- GtKYoy17AUGI/fm91bQLuHW3VyCeo29kN52fc
-X-Gm-Gg: ASbGncuATn5nsahEwXoxQtJ8QL1KfAxeIEQhZTJcXARVvx0btZS6n3KyM8PypnZeZO/
- dqwXBr/nC4N40pfxVwdRiLhsuZVfoQxfJUsCrAAKZvyVGCpBehCwEUvV3AlE0E3+Pb8fDhKSpCt
- Mhm13bwfxeYpda0WI1DJPmi6rGUlyk
-X-Google-Smtp-Source: AGHT+IFLThxttMwJl8FaCdFl5/w9v0ZUW2i4I7Ou5Qwi0wJ0Xibk6akRsbh8P6RXM0aC4ALSETrQc8I/ngRhut83Gmo=
-X-Received: by 2002:a17:906:26c3:b0:ac7:75b0:67d9 with SMTP id
- a640c23a62f3a-ac775b0682dmr598216566b.4.1743530128544; Tue, 01 Apr 2025
- 10:55:28 -0700 (PDT)
+ bh=6/jE71Vptk+0CNksoqWDqHzi8OoLyUWyPPC4D6/89Cc=;
+ b=aAa3N3r12/gHw9KNiclhv0KF++NOFim4ikGhcDqRLQcXR2RxweHHzhUM2v8GYPy0wP
+ qkmYVuTV1bTguErHgagl2QJrrGpnCpijhv7JUdNg6wWvD2ZFIA/ODlqdHDweHhhP5rsw
+ WRHvXFWHThnB1UsGzSMDklNDPVSVuXKcS1JtYvtM7PQZaBspy9bAMIvlRYckm5eOEARH
+ /Qb7ayA6ZaOFyG9OKojczCjuX+OP8S8CkKBiJxjubw9LWxAUbtHgcfpunM9qpQidGHof
+ tkxGDbaqbGe4eBsEMsgb3hZxyWvuwoY63Scedbcoh92cmhc9+0xGKn1mOCIRK59d1gmV
+ mMQw==
+X-Gm-Message-State: AOJu0YwdSf9rBadpCGXCYkVKsu9wIMZ/Fs5W6hLjtz3NF5YTBJeduwvC
+ NTaQyoGwQcrDOhuJVLnyqFCFwJ/ZbQP4Zjd7hnsE/TcRJAF419trNobaawds0rnPUbSlx+AiDea
+ 6sGeDSUJ/h1hyhflOe0ki0cx7/GtpUlfH+IEP
+X-Gm-Gg: ASbGnct6JBDkbRTaMQoPUSPkM7IAWckqz3dfaOgUyM24Z/IIHB9EyVFTm57Qe1k+c2t
+ xKxIB6qxDB16/NenaPNBdicmOpXfBazTDs4+Wjkgk9WW0iNhGstOQKt0CxxNjloRm7LnSk9zYtU
+ zqGLkVsNoafa+KIxPwKd4hIx7z639p
+X-Google-Smtp-Source: AGHT+IHAS1pCXz6jd40u5OgYTjetF94BeRo3Pis+R0723pErG9gaH64/oPhfP4GVdG8KT0QkZaFf1JaZI6UrAIOwIa0=
+X-Received: by 2002:a17:907:72d1:b0:ac2:b9c8:b7ba with SMTP id
+ a640c23a62f3a-ac73895fbbemr1235330466b.10.1743530232449; Tue, 01 Apr 2025
+ 10:57:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250314215525.579655-1-jerome.forissier@linaro.org>
- <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
- <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
- <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
-In-Reply-To: <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
+References: <20250328153522.3555472-1-sjg@chromium.org>
+ <20250328153522.3555472-20-sjg@chromium.org>
+ <6721d34c-83eb-44d9-9be5-a4f8346481e3@kwiboo.se>
+ <CAFLszTiEwMqyhwJ6NvkhpE3cOw7z+VHmhqMdHcPVGyr6rK4yEA@mail.gmail.com>
+ <99333ff1-f794-410b-aade-fd73450d5a1f@kwiboo.se>
+ <CAFLszTiwdr_E-O=UoVGfTTyjsJ_t9LvSPGD2v2cTKp=fhLgW5Q@mail.gmail.com>
+ <4916425a-8021-4bbc-b24f-a9d780ce0ac6@kwiboo.se>
+In-Reply-To: <4916425a-8021-4bbc-b24f-a9d780ce0ac6@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 2 Apr 2025 06:55:16 +1300
-X-Gm-Features: AQ5f1JpTKpaIJgvYwihyNDIoi_kXaj34mc6k-t8C-vgP_1EH7tUYTLRw_8i3aKw
-Message-ID: <CAFLszThH3a7pLJG+zppu2qr5RwXAOk9Sj+S+RAT0B758hzOsyQ@mail.gmail.com>
-Subject: Re: [PATCH 00/12] lwIP sandbox tests
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Date: Wed, 2 Apr 2025 06:56:59 +1300
+X-Gm-Features: AQ5f1JoB9HW6u6dWUbxAmOGy1-NiSQvzFh2FxVeesu8epw0pmvY9oUS6qopvcjU
+Message-ID: <CAFLszTik7zbLSGs13-saEn5w7TqN823goU+9R_C=Ot+uRJmxhg@mail.gmail.com>
+Subject: Re: [PATCH v3 19/31] rockchip: Provide a VPL phase on rk3399
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Dragan Simic <dsimic@manjaro.org>, 
+ Greg Malysa <greg.malysa@timesys.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
+ huang lin <hl@rock-chips.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,33 +104,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Jonas,
 
-On Wed, 2 Apr 2025 at 05:33, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Wed, 2 Apr 2025 at 06:27, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> Hi Simon
+> Hi Simon,
 >
-> On Tue, 1 Apr 2025 at 18:42, Simon Glass <sjg@chromium.org> wrote:
+> On 2025-04-01 17:42, Simon Glass wrote:
+> > Hi Jonas,
 > >
-> > Hi Jerome,
+> > On Sun, 30 Mar 2025 at 05:46, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On 2025-03-29 00:40, Simon Glass wrote:
+> >>> Hi Tom,
+> >>>
+> >>> On Fri, 28 Mar 2025 at 10:16, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>>>
+> >>>> Hi Simon,
+> >>>>
+> >>>> On 2025-03-28 16:34, Simon Glass wrote:
+> >>>>> Add support for this new phase, which runs after TPL. It determines the
+> >>>>> state of the machine, then selects which SPL image to use. SDRAM init is
+> >>>>> then done in SPL, so that it is updatable.
+> >>>>>
+> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>>>> ---
+> >>>>>
+> >>>>> (no changes since v2)
+> >>>>>
+> >>>>> Changes in v2:
+> >>>>> - Rewrite help for VPL_ROCKCHIP_COMMON_BOARD
+> >>>>> - Skip spl-boot-order.c for VPL (rather than modifying it)
+> >>>>>
+> >>>>>  arch/arm/include/asm/spl.h               |   1 +
+> >>>>>  arch/arm/mach-rockchip/Kconfig           |  25 +++++-
+> >>>>>  arch/arm/mach-rockchip/Makefile          |  11 ++-
+> >>>>>  arch/arm/mach-rockchip/rk3399/Kconfig    |   9 ++
+> >>>>>  arch/arm/mach-rockchip/spl.c             |   3 +
+> >>>>>  arch/arm/mach-rockchip/tpl.c             |   2 +-
+> >>>>>  arch/arm/mach-rockchip/u-boot-vpl-v8.lds | 107 +++++++++++++++++++++++
+> >>>>>  arch/arm/mach-rockchip/vpl.c             |  53 +++++++++++
+> >>>>>  common/spl/Kconfig                       |   1 +
+> >>>>>  9 files changed, 205 insertions(+), 7 deletions(-)
+> >>>>>  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
+> >>>>>  create mode 100644 arch/arm/mach-rockchip/vpl.c
+> >>>>>
+> >>>>
+> >>>> This patch and therefore this series does not apply to the next branch.
+> >>>>
+> >>>> Are there any depends that are missing or are you only testing based on
+> >>>> your own fork?
+> >>>
+> >>> Until we are ready to apply things, yes I am using the sjg tree. See
+> >>> the tags in the cover letters of patches I send. For this one it is:
+> >>>
+> >>> base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
+> >>> branch: vbi3
+> >>
+> >> This base-commit does not even exist in your vbi3 branch :-/
 > >
-> > On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > Any feedback on this series?
-> > >
-> > > https://patchwork.ozlabs.org/project/uboot/list/?series=448553
+> > Are you sure? The base commit works fine for me:
 > >
-> > No, not from me, but thanks for doing it!
+> > $ pe 3f76d803db9b500f43bc534465945a8d2836bb3e
+> > 3f76d803db9 (ci/master) Merge branch 'ci' into 'master'
+> > d07049b9f28 (el/ci) arm: Support a separate stack for VPL
+> > abfff044f26 spl: Use CONFIG_VAL() to obtain the SPL stack
+> > 7a032a125f5 spl: Add an SPL_HAVE_INIT_STACK option
+> > 8d319b22019 tpl: Rename TPL_NEEDS_SEPARATE_STACK to TPL_HAVE_INIT_STACK
+> > 794124b3258 Merge branch 'ci' into 'master'
+> >
+> > The branch name is a local branch, not necessarily pushed anywhere. Is
+> > there some better terminology that I should use there? Perhaps
+> > 'local-branch' ?
 >
-> Aren't you maintaining the sandbox drivers?
+> Probably, I did a git fetch of you public vbi3 branch:
+>
+>   git fetch https://sjg.u-boot.org/u-boot/u-boot.git vbi3
+>
+> And that did not include 3f76d803db9b500f43bc534465945a8d2836bb3e:
+>
+>   fatal: bad object 3f76d803db9b500f43bc534465945a8d2836bb3e
 
-Yes, I'm listed as maintainer for lots of things. What sort of
-feedback are you looking for?
+Oh I see. You should just use 'git fetch' and get the whole tree.
 
-Regards.
+>
+> So yes, if you keep a public branch with same name as you say in your
+> patches, I would expect it to be somewhat up to date.
 
+OK I'll have to think about how to handle that. I used to name every
+branch with a '-working' suffix, to make it clear that it can change
+at any time. But I got tired of doing that in the end, so I stopped
+for my new tree.
+
+>
+> >
+> >>
+> >>>
+> >>> So no, there is nothing else that this series depends on and if you
+> >>> can review it I can send a PR for Tom for -next one all necessary
+> >>> changes are made.
+> >>
+> >> Sorry, this does not help, my main concern is testing that this does not
+> >> break or affect anything for the remaining Rockchip boards. Something
+> >> that is hard to test and validate when patches do not even apply to any
+> >> of the mainline master or next branches.
+> >>
+> >> Sending patches based on a tree that has diverged with around 677 files
+> >> changed, 20072 insertions(+), 17023 deletions(-), if my git fu is
+> >> correct, and then expect us to test based on this diverged tree does not
+> >> help with gaining confidence in this series.
+> >>
+> >> I can understand keeping a personal tree that will diverge at times,
+> >> i.e. my personal tree has ~120-150 patches on top of mainline master.
+> >> However, I always try to keep my work-in-progress branches rebased on
+> >> top of master or next.
+> >>
+> >> For v4, please send a series based on mainline master or next branch,
+> >> as stated in "General Patch Submission Rules" [1] in the U-Boot docs.
+> >>
+> >> If the series has some depends, I suggest you also publish a branch
+> >> to a public repo with any limited depends applied on top of master or
+> >> next along with the patches in your series.
+> >
+> > For now I am going to wait until you pick up your clean-up of part of
+> > my series. Then I can pull that in any try to send the final VBE
+> > series again.
+>
+> I sent out a "rockchip: binman: Use a template for FIT and other
+> improvements" series [2] that picked up some of your rockchip binman
+> image related patches.
+>
+> [2] https://patchwork.ozlabs.org/cover/2066701/
+>
+> >
+> > I haven't had any rockchip patches rejected, so we should be able to
+> > resolve this.
+>
+> They have not been properly reviewed (or tested) yet, as they have never
+> applied cleanly on any mainline tree, with repeated requests to fix that.
+>
+> For me to review something, I want to be able to run the code, and run it
+> on a code base as close as possible to where it intends to be merged.
+>
+> E.g. v1 was broken and had hidden depends that you had applied to your
+> personal tree, and only later was sent out and now merged into mainline.
+>
+> I have some other concerns to validate, but have waited on a version
+> that can be applied before continuing a review. Please consider this a
+> NAK until it can properly be tested (i.e. reviewed) using a branch with
+> a minimal diff to mainline master or next.
+
+That's fine, but how about I hold off sending it until you pull in your series?
+
+Regards,
 Simon
+
+
+>
+> Regards,
+> Jonas
+>
+> >
+> >>
+> >> [1] https://docs.u-boot.org/en/latest/develop/sending_patches.html
