@@ -4,60 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6721C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 21:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F078C36017
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 21:41:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF10F81703;
-	Tue,  1 Apr 2025 23:37:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=seoulsaram.org
+	by phobos.denx.de (Postfix) with ESMTP id E050581703;
+	Tue,  1 Apr 2025 23:41:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=seoulsaram.org header.i=@seoulsaram.org header.b="caLf5Gxa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZSm3F2ap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FCA382051; Tue,  1 Apr 2025 15:41:49 +0200 (CEST)
-Received: from mail-108-mta79.mxroute.com (mail-108-mta79.mxroute.com
- [136.175.108.79])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2972B8171B; Tue,  1 Apr 2025 23:41:20 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 646C880584
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 15:41:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=seoulsaram.org
+ by phobos.denx.de (Postfix) with ESMTPS id E5FE780F6B
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 23:41:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumoon@seoulsaram.org
-Received: from filter006.mxroute.com ([136.175.111.3] filter006.mxroute.com)
- (Authenticated sender: mN4UYu2MZsgR)
- by mail-108-mta79.mxroute.com (ZoneMTA) with ESMTPSA id 195f196244c00067b0.001
- for <u-boot@lists.denx.de>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 01 Apr 2025 13:41:43 +0000
-X-Zone-Loop: 24373b5a8e5b47f67877a6387f8f1521c86089de04bf
-X-Originating-IP: [136.175.111.3]
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=seoulsaram.org; s=x; h=Content-Transfer-Encoding:Content-Type:Subject:From:
- To:MIME-Version:Date:Sender:Reply-To:Cc:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1m5YI8Z7Zh+FjmX7OFLbHGlcMLc2AdIaLSfYKV2qw/0=; b=caLf5GxaqMXiM0H0tMKStwAp8w
- 9LqP0G4UohIcSOkAR4z6NLwFpubCCSCRKTTZnlgbnq2VzgPcUZiagZ4TMhwoEOWhA3Hff2fMgXaAs
- HzjvdJD37d4t9KCwxdycsEqUrykwGCwFy6Y3fOuUC78MpfG6O1qUrLSioL2a+k244+vT6qtLkQ4Oy
- zEqwQmEaF+Oq8K5FoqfSrD8uVGoJGVGIJYJ9y3Nkb9s2j0WN/bKGAZVm/7H+6NxIQTDpL5G5dHM7D
- Bd0zgwqumOI0oQQ0S4/gpnfEgAsFeoRDYHxmN6ZfTBDYnsoR8BAEuYRr8v4WIHtHIfdFVQC1n2t0a
- yM4hTCvw==;
-Message-ID: <09c3ffd2-3933-4a3b-b64f-5cc10a1942fd@seoulsaram.org>
-Date: Tue, 1 Apr 2025 22:41:38 +0900
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-72bc3987a05so138926a34.1
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 14:41:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1743543676; x=1744148476; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xLe4hwxc2KpIMG9Mjum24K5EdFl+cJyCj4wfPW3zyO0=;
+ b=ZSm3F2ap8DJC3Tg3LHyteP/rL4m2a0QaPMSn9S4unctvYrN4v5yHkKHMhaDJ+PsaSe
+ iNzIalVUBVrBMsLlO8oijQrUa3t7oU9JviW76iVoEX5VEGwbb3oyINE8OyJt/+r/F25R
+ uvsHjZP07vpyQKYqtltXAvlBqAKyvXCDD/hzE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743543676; x=1744148476;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xLe4hwxc2KpIMG9Mjum24K5EdFl+cJyCj4wfPW3zyO0=;
+ b=iPB9LMLxJUXdmzXflYIuWbmYG53OFRSLtHt5Do/wfofdUr5WMjiDc2GxpAXKWwI5Sx
+ c8AoHXDxsYKgVPVUizJbMxWpDko6VX+jP4IVCKtSrKVCTBc8GKPHAwB4JjNNeXB2xGE2
+ DxvMszESyCjz0qeY/1rEUG2PnaHoI+6/e/kVfz9mw+uJhc0Exo3kNqgKzfR8K+ZY9nme
+ ZxLbMRWRAfGSmUdqM0h0mFEpH34WnulVTMVIUAh84KK313TOJle9bOAjK+MBuANDh9EA
+ j/wNAXs7fQpKcU1mpvehBEgMtsJsabtAT9D3n1pPe5UngALx5oXtK20acrcotwyqaGHW
+ 9Muw==
+X-Gm-Message-State: AOJu0YwaJRhUdb7H+muwCaYVxd+VXcaqmt2oFhiLcEfX8LRHul6TloBV
+ yXsEP9Zxriw2TgndQ0VblkidxWanhJOb8FhPvyBxbVUdE8/ORAkXn6qP+vUzMTs=
+X-Gm-Gg: ASbGncv8E+Yt5fmGxFIDCRw1zetooid0M0EvIPg2H7DhLVdhFHddDOcQONZTnoudu9n
+ sYoa7MMm8PbeQ8JSIW+1gPQ0b3wuEydItdWLRrLe+NxOpNzm4O7gbu19IKO15ncYCOou9gfIKD9
+ hvsopkaaRkxVJM4odjCmM7y+we8erROoFeVW0pzJwVoXs74NwXR6CNBDrboTsQdJ4K4LYiypOxj
+ KuZu4I5wAYd0WH7XDXPG/XJxiKX0Y0WJvPj/N7/Ph5MBmGbg0qOFOJ/wZE7WfQ1wyhr3q6bSWI9
+ Yh8+nCQAdzff9nvzrr7k5Nj2u6YkGZJZGlfpJCnN7qoPJTq3CwRj1TknRoBZzOym+4uyqptVUmL
+ LSYqYpg==
+X-Google-Smtp-Source: AGHT+IHDCZtaBK+LkvjEyfGwK7Y+GRsB0/7mA/RD4ECl+538tzYTBfqfJKYpcVPGMLT9TVrildOQcQ==
+X-Received: by 2002:a05:6830:1c62:b0:72b:7dbb:e39d with SMTP id
+ 46e09a7af769-72e2257ce0cmr866964a34.1.1743543676604; 
+ Tue, 01 Apr 2025 14:41:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72c5828ae93sm2013561a34.63.2025.04.01.14.41.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Apr 2025 14:41:15 -0700 (PDT)
+Date: Tue, 1 Apr 2025 15:41:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/13] video: Enhancements related to truetype and console
+Message-ID: <20250401214113.GP5495@bill-the-cat>
+References: <20250401172948.1236000-1-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: ko-KR, en-US
-To: u-boot@lists.denx.de
-From: Sungjoon Moon <sumoon@seoulsaram.org>
-Subject: [RFC] Upstreaming Orange Pi RV2 vendor patches - Seeking guidance
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authenticated-Id: sumoon@seoulsaram.org
-X-Mailman-Approved-At: Tue, 01 Apr 2025 23:37:36 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rk13/MrT3b6HGzVC"
+Content-Disposition: inline
+In-Reply-To: <20250401172948.1236000-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,16 +109,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm working on upstreaming vendor patches for the Orange Pi RV2 board, currently available at:
-https://github.com/OctopusET/u-boot-orangepi/pull/1/commits
 
-I'm rebasing these patches onto the latest U-Boot branch (v2025.04-rc5).
-To ensure the patches meet upstream standards, I have a few questions:
-  1. What specific steps should I take after rebasing to prepare these patches for upstream submission?
-  2. The current patch set is quite large. Should I split it into smaller, more focused patches? If so, what would be the recommended approach for splitting?
-  3. Are there any particular coding style or documentation requirements I should be aware of for the Orange Pi RV2 board support?
-  4. How should I handle any vendor-specific code that may not be suitable for upstream?
-  5. Are there any maintainers or subsystem-specific mailing lists I should include when submitting these patches?
+--rk13/MrT3b6HGzVC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Any guidance or best practices for upstreaming vendor patches would be greatly appreciated. Thank you for your time and assistance.
+On Wed, Apr 02, 2025 at 06:29:31AM +1300, Simon Glass wrote:
 
+> This series includes some precursor patches needed for forthcoming expo
+> enhancements.
+>=20
+> - truetype support for multiple lines
+> - make white-on-black a runtime option
+> - support drawing a rectangle
+>=20
+> This series was split out from schd2
+[snip]
+> base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
+> branch: schg
+
+I get as far as patch 4 before it doesn't apply to -next.
+
+--=20
+Tom
+
+--rk13/MrT3b6HGzVC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfsXXIACgkQFHw5/5Y0
+tyyU7wv/dS7YOhXgnzcaHMFKkbU3zAsoJZHWAAlAKFRdjDdEQKpGM00w2DsZ88RX
+jl6zO4K+dY3o+Ph6CrmVPHcMTdWgQeeT3knqp5jx5Y0kL2lWyoVQv06f5UqgNPeN
+FCUl3JdhlPNbwdjYHjNQMhtQDqxkHz8+sr3j/tjdl+ss4Opm4nswOzeV3cFBwE+o
+xJMVMW7lcS3yqVzIFF1a9U+1YTL67+fy947kYC5xDa2ECO+Qg4/SlrQvx6MCNMA1
+U5UgqJ0pjQ6QOK7G4slNA6XCN1coO1/Rf5m40kQtfa6iOG6Dap55UXgMOemg24oE
+Kp37DJeLDydbCSZgxTe4oSHCTOXhyDvFoQoQ/fFAeWq5rItUKdnH3jRJyOjCgYl4
+fRgaiWEWydBnwDa9NbnBch5Wpepyka0bFYSiAQ/e2i6cnFFb4DFkuAo8HmH+PAVc
+YAOEuMk7Bq1gYqn4MsYdedjtZuP1fchm4+/8SUlMoYniVPif3cS8AQdUVx3K5NTi
+vyjFm7M8
+=jWZ+
+-----END PGP SIGNATURE-----
+
+--rk13/MrT3b6HGzVC--
