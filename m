@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D41C36010
-	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72390C3600C
+	for <u-boot@archiver.kernel.org>; Tue,  1 Apr 2025 02:17:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71A0481F44;
-	Tue,  1 Apr 2025 04:16:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C558B80FDA;
+	Tue,  1 Apr 2025 04:16:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k/o0d2OL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BRQpXXyv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF4E081F44; Tue,  1 Apr 2025 04:16:42 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 147E981F59; Tue,  1 Apr 2025 04:16:44 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55CCC80584
- for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DECC9817C4
+ for <u-boot@lists.denx.de>; Tue,  1 Apr 2025 04:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72c1818c394so3002376a34.2
- for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:40 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-2c7e5f7f0e3so1425400fac.3
+ for <u-boot@lists.denx.de>; Mon, 31 Mar 2025 19:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743473799; x=1744078599; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743473800; x=1744078600; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9+3tqpOpC7K7xNuNwiv6iOd4GBp7fwCiOXUig38lNKo=;
- b=k/o0d2OLjynFDJAwuJG9DjekQdvAmu3+F9dkZtqahUrOA9NQqZsiuXNO2M7K1mA1+D
- lbu/MkuPDoHz/8ZUUZik/QAM6MyYI1h2HmYa21wwdgqQJYl8d9A7/UQfHVT/zfb3UMfc
- 4q0ffPsUUeMCHrj2q/y5mMJfS4NB2ymQozMCI=
+ bh=q6kwZjQoApzqgSwhP/yWYArSA70s9UcuUIWnkerIneM=;
+ b=BRQpXXyvXIYGrlSLVP5ySTQZHndSrE40Dh2TYcvxcoxzHwZHCAhVaSyk1Wd7pqPrSJ
+ X1U+vlAnQiD6ayZE6wtqtHSceMOTxh8qfLCSQGCoZHeLjC0heHOTB2bs/ziWuyjyF9xz
+ 9MT6m9Jx4It3wCeqdbKNoufEzRPNH06K8+GZI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743473799; x=1744078599;
+ d=1e100.net; s=20230601; t=1743473800; x=1744078600;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9+3tqpOpC7K7xNuNwiv6iOd4GBp7fwCiOXUig38lNKo=;
- b=POjtZN41tqOXgOs6eN9wnU9iFHKdWw7g7lbnuhTjXfMnqTC7YwLw3U3GGgUr3/bayz
- SnNzeIN5AOL8iiFV+3fmVYtYyryxbZM8MYl8iHOEbdrYcb1fzZ39i4MWr85fOEzumGxl
- 9/jk5xj6aKZhRFvYqyXglIwZLsdp8tfonnF+SN9WUstxObKLB65UsVPaiKYNpJ74jCfc
- GSB5AgGgFtjUGFHRuVhOE7zy6BZkKc4pGiZI9beKUmddYWVKqziJd+s/RQsZIPtaa+48
- BDm206GXVBy/lbnv/NZSP7hY4TJjkLEXVp2CM0Bk7Cr6skWsFOVhKA2QZ97GAwQbCiIk
- cftQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKfJIQaFMWzI+FVR3mmDCfcqNajuXXlCmLy4XJSOBi4r18Yj8BCzYeNosrcS+asAIFCFeZmdo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzb2KHZYtIlfJ/3WCU3ZFkhF/nrMTw5K1RULDocmQBLa6d5FT1e
- 9h8ZpALCswT3kydvxEaVwnOgKiwYKS5McfttbG8CcUJIJiQN14ihZJhYeWIM0s4=
-X-Gm-Gg: ASbGncuINSikwy7ZJN6GN+tqIRXMtsh7a59eEQPz/kjZfmV0YHrP8RBmhgaHR8Y1mRG
- 0OlC2HrSSw26iVbJs7HGf52isueZqUr2opU9YabawoFwcQUXg3WBHGLWwNh8hGBfywn59x52S9P
- iKthghBIsA9AnT/f9hxqXx2IjvXwTQFPeiepxt/tBD35OilXPdExxNXBghyS0twMESVIKAO1DAw
- ZqubE7IT0znjnm+yV2iLCzrXkx5AV+X/+j+xzA8uWrlG2SmZWOfh+yzk4O+zG+IfWoMkV+e6eVk
- 15iTgskqnVdZLfmtX5GQ6y+oEHRDmT3dzkDqnPbHiYRlLiP5OuXigvI6Aj/mV/aRW5fK03f9x+4
- xrKnr
-X-Google-Smtp-Source: AGHT+IGCS9rOulTjmDg/K+fc5cUOI7r0Sox+juXso0ojQM5yJGIxeMgFhsYM0c6qbh2ceCXHz4/e6w==
-X-Received: by 2002:a05:6830:f87:b0:72b:8ec6:e533 with SMTP id
- 46e09a7af769-72c63793972mr6706118a34.7.1743473798967; 
- Mon, 31 Mar 2025 19:16:38 -0700 (PDT)
+ bh=q6kwZjQoApzqgSwhP/yWYArSA70s9UcuUIWnkerIneM=;
+ b=a7BEJIwqLf36LdwtpIJSjDNDtis86+0Mj8WcKfqDcn9OctCvpimFw8VFqxHTcq75kL
+ uLyG3qYpAuhI9rICxm49gDwuzcH31UxB0DKJrczy8opQCFpYHXkMl5oqSfwO2elFs0VN
+ 7jdTdjyG02B4EJaIOZNG7EUwxvKf6JBgP6vVFSkdf5YSTKkXS95uXd14RddexLVitcGB
+ d3DDh7mePufWeJrT5iHkSAXUV82TuKzbOUQIscsW7sa2mHPm6WqZ6Y2pDqqWdDpc0JFB
+ cyj0mCEslepC82JQORkJp66Qm/k7H9Hq7KhWwAVDwkka/52a0ZcYY8jdqhRSWBzPRYLu
+ uQtg==
+X-Gm-Message-State: AOJu0Yyx56ZgETJWfmmcBG5rm+oqiQHrvB/cDs8dRxrHegZln+5B8J4N
+ 6XCYOLmWLNMtQWMNxkLqExEzzUtTJLN8zgVFqZ+oIcbsT3X2Ip425DZqMyZaYi8=
+X-Gm-Gg: ASbGncsukhieCWNQOP8QOTPu0ZYkIaPFc4y9fkwu/0RFYUeR4TkzdD+nvKvOD8I0Hxl
+ 1Cu+44Pojakw6mpodAdrxkKUoKEuNiwOPgs3EdGqV1zZk4DAQy9aAvO+yim9G7/vsLA5Fcz3Uki
+ E3XksJOoF750nXAxsL7d8ITbzaxj804OVmfmBkaRLr+CFDBhRwVsjw7Subhr0V3d2/Uo4h3IhuL
+ rwgrskNczkgrWGv55j8bhW+mxcvRXGTPLlQEBFv0S4UtPugDz0vcNp060NUc9ujPkSU56+W3Otp
+ yVN2/vywu6xjXaKXwviuuyLlom5rO/6ZW08lzQRg4BlbMbhQf2tU/m4BCyFpExygsh/SLyp+Gfb
+ GRmbc61/oKccXMhA=
+X-Google-Smtp-Source: AGHT+IF+nyvx2h4k/YgVR1RQl6oTqWndZSPCuB8nIVbVnxOjdpCunoVva9k8hN1DrCezb+NQT/LvlA==
+X-Received: by 2002:a05:6871:58d:b0:29f:b09d:d93a with SMTP id
+ 586e51a60fabf-2cbcf504c75mr6592340fac.16.1743473800637; 
+ Mon, 31 Mar 2025 19:16:40 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.37
+ 46e09a7af769-72c580b5401sm1704892a34.18.2025.03.31.19.16.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 31 Mar 2025 19:16:38 -0700 (PDT)
+ Mon, 31 Mar 2025 19:16:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: vigneshr@ti.com, u-boot@lists.denx.de, Udit Kumar <u-kumar1@ti.com>
-Cc: n-francis@ti.com, afd@ti.com, nm@ti.com, a-limaye@ti.com
-In-Reply-To: <20250314110411.2781732-1-u-kumar1@ti.com>
-References: <20250314110411.2781732-1-u-kumar1@ti.com>
-Subject: Re: [PATCH 0/2] Add WDT support for J7200 SOC
-Message-Id: <174347379788.47384.10318161994846491636.b4-ty@konsulko.com>
-Date: Mon, 31 Mar 2025 20:16:37 -0600
+To: jm@ti.com, afd@ti.com, a-shenai@ti.com, kamlesh@ti.com, 
+ n-francis@ti.com, Hrushikesh Salunke <h-salunke@ti.com>
+Cc: u-boot@lists.denx.de, danishanwar@ti.com, srk@ti.com, s-vadapalli@ti.com
+In-Reply-To: <20250314063113.1095793-1-h-salunke@ti.com>
+References: <20250314063113.1095793-1-h-salunke@ti.com>
+Subject: Re: [PATCH v3] configs: am65x_evm_r5_usbdfu_defconfig: Fix USB DFU
+ boot
+Message-Id: <174347379910.47384.18347840311328934673.b4-ty@konsulko.com>
+Date: Mon, 31 Mar 2025 20:16:39 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,25 +97,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 14 Mar 2025 16:34:09 +0530, Udit Kumar wrote:
+On Fri, 14 Mar 2025 12:01:13 +0530, Hrushikesh Salunke wrote:
 
-> This enables the ESMs and the associated PMIC.
-> Programming these bits is a requirement to make the watchdog actually reset the board.
+> Increase the size of malloc region allocated before relocation, as
+> current size is insufficient for DFU boot causing it to overflow and
+> corrupt the stack.
 > 
-> After DT sync nodes bucka1 and main_esm has bootph property added in
-> pmic nodes.
-> 
-> RFC was sent
-> https://lore.kernel.org/all/20241126063543.2678052-1-u-kumar1@ti.com/
+> Fixed regulator configs are required by vtt_supply which is used by
+> "am654_ddrss" driver. Without it during DFU boot DDRSS initialization
+> is failing. These configs are enabled in "am65x_evm_r5_defconfig" but
+> are missing from "am65x_evm_r5_usbdfu_defconfig". Fix that by updating
+> "am65x_evm_r5_usbdfu_defconfig" to include "am65x_evm_r5_defconfig".
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] arm: dts: k3-j7200: Add ESM PMIC support for tps659413
-      commit: 940f2a04f335e17919112402f748d06f2303ad09
-[2/2] configs: j7200_evm_r5: Add ESM related configs for J7200
-      commit: dbe3ea4274b005e05cf1ddaf1d6406e0e452720f
+[1/1] configs: am65x_evm_r5_usbdfu_defconfig: Fix USB DFU boot
+      commit: e2d9b3aa2ea664083bdebfd838cd83f42caa5c09
 -- 
 Tom
 
