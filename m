@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19EBC36017
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64079C28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F2DB81703;
-	Wed,  2 Apr 2025 17:19:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CE69481703;
+	Wed,  2 Apr 2025 17:21:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X8Cevexe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kDafCNae";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21BEF81E6C; Wed,  2 Apr 2025 17:19:58 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id 4D0D981E1F; Wed,  2 Apr 2025 17:21:55 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4F658035B
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:19:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D8758035B
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:21:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-60219d9812bso1740534eaf.0
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 08:19:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-39c1efc4577so1548472f8f.0
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 08:21:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743607194; x=1744211994; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3juWxCv6WdQr+xI3/DXfpbaEwoo3/hf2mZzdyiBnpQc=;
- b=X8CevexeRO7Hhq9+/SC8s6KVr53w4E4GqvXGKHKCiZw5kPfygE9K3gNMXT61yJV68P
- biuyKZXDxOjgHek326+XxH+warQluBoT3UeKxIZDfGKUgpl3lroQtB876HYoJGWUiy3q
- NJXxXspAF6t+SvV+llbfcBzBANiWitv5F4Tpo=
+ d=gmail.com; s=20230601; t=1743607313; x=1744212113; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=XQS83v0QolzKLIFx+Gaxlz/bqhqQqudAFMMrTb6X5Vk=;
+ b=kDafCNae7tkyIf4k7uaYej3UGnQxC8GUFQpXWrdg4GQJ92qvEbmDdcwJVt1Zq8N7sR
+ U7qR8In//N0Mo4DjfLHiuL7a37w7nRyL+Uge6nnhiyyUIhtsF73pcer0FWl+9/KNCRnY
+ jKmpOmw1vtLS1gWjKou0dsnggM92Bk9d9Md7kTctKCCuNjMkZ4ukhOmHjIrsLSap0EyA
+ RWjIb/hyk5GA0WHgk986Qx0foHtSEfj+DdWqDJw7ZUY0HR4VpUrNwoJnEQFuSj+/eewe
+ mYWO0FrQ6EjjKLNwlJN1cuKivhbq276VjhV6oglk+0gG3r0ZfOlWAn267LB37VjM5u/Q
+ Xj5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743607194; x=1744211994;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1743607313; x=1744212113;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3juWxCv6WdQr+xI3/DXfpbaEwoo3/hf2mZzdyiBnpQc=;
- b=K7Srhmx7Es94wPgZCu8C2wp4v5RiDY7R1UniBtnS28vs5gJnYlQHLstnkV/WamxxND
- JSSAajwnpiLBQw4QDSWDlUliZmlM2hJdBNtTr1O8UQfntkBgKNU6gRMoMyRGpkdRT7ki
- epqr2EwvY4eMYQTewn8XDe7D5fjCQWeAwHFfXxbSjpkcJKLfwiiNqSzRzOMlF5x/MITa
- 5SWBme18BE7ILywJA9yg5/ZXiBQPt68n9Rjuny5o71G4Yg3k7lVRgY262yoEPJU9Jthy
- j07neEZ/vvb2nbeEsDsNmh+hUrpm2OqymzcN7TNO+rXl9UF2hXDH7tlLsN8325fLTzLd
- A5RQ==
+ bh=XQS83v0QolzKLIFx+Gaxlz/bqhqQqudAFMMrTb6X5Vk=;
+ b=hcmQUHfmMp7y+wHgfeIaVba0sYXn9QPqRHQFSS4saSv2EHp+l+XZtHu5g4PmxMAkBj
+ rwJtWliK/ClOx5Qa03Gw8yUaX5g7E+8JIK+0Ycrpz5ZaoLG8NRgkfARHKG1fszD7bZSq
+ j+5nMxmQbdryRmwTp3pu8QUYWnRx2oeqV557Nm4cDbnEBiKWDaMXCUy6rAC0sZNBguV+
+ /XXz9IUaTq8ZrL9OOi7vICr0ZIy4GP1wfEckraJzX7ZuwQEZ4yWSnV6LMaR+JmVWkA3T
+ /1D3jM1NlSfWuueAUVj1iAtutbm6toXhbyCqQPsmoBsV0k/NmY4FfhbKG0a1kPyefhob
+ bk6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWevrb6kdOFrNdZszurL+OQrGRvainLYEAMmdcj24nA5/OMdjaUcbixc6x/YKzyzatIsHfK70Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy6P5Lg3DwL/RdgPNzUCdyB3FGansBC3CXhWDRFJ8NaylyzvX+v
- 2DpFK0q4xh4hgTOgG6e/nGtdqN0Y0fyuiF711cJohSAUVqW8iCjzytKBABMhrzw=
-X-Gm-Gg: ASbGncuy0880TE7fBdtwagb+cqEX+ajOJeohIKV9QX94BDZZOj+gfJQ2KtCk1SsyTwp
- dGb3NOFd6aiVYVvbKiFkaAz5GjKrn3Tbsj/avbLvfhw8v2VvxzWzn8dkf7E+CPK643/t4XhMdQT
- zneKqhBGCkLj7pw3UgTIfhj9Gjc/BDoF+pqgbGXn1kM15V94CNd4T36VKE4E4mU7yNDYQdTCni8
- SyfpCoOloC+xeFokWljTwHNfn4Ad66kzOZmwNjZ5ACOGGIJf3B857dxjl3bZ0VM4GAwSXOSrg9U
- qmyJRuozdYTprU//pV3+EWZMLZiKm4gxV+kbG3PHmhlv7oXKFSh3j7tlhJKC/M4ccQAflNzkURw
- JvxhDFw==
-X-Google-Smtp-Source: AGHT+IG3C84QG9Vi8fBjWfKHZ1QTiJ3kOehG/8iRLBrSIFQfaoLMcMrQtTLp3qHFkdPoxSkfxSLQCQ==
-X-Received: by 2002:a05:6820:61e:b0:601:af0a:20c0 with SMTP id
- 006d021491bc7-60400245648mr1314418eaf.3.1743607194490; 
- Wed, 02 Apr 2025 08:19:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-602845027b6sm2231753eaf.16.2025.04.02.08.19.52
+ AJvYcCXD9WMl2n0gqEiNPDj6qPGkoPxwBDdsUURqZUVfnAZB4Pq3qnYye8lDQ7gfWeJoYi7DD+mlPMM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdBvEbXdtGBGVZ+gFk/ERWl+PP4n6gi9chLe3VuoVSG/JsBeD3
+ lLj3aFqxV9U68eyTmLwdnuFk/6ySRkxohQHgyGT+NiQDte3PBN15
+X-Gm-Gg: ASbGnctxdz7wuIK6k5xWTRYMdQYZpEyWmB3v+LW0otHMnSZNG6H1kcWLrP7YkBP5lNl
+ yYI4jurJKFjrHvTGo7Je8SBNawMp5W2QtthIwLZ7gm/JS7d7KPGsqbusFBNY6Pn0bu2QZ32tjLk
+ LpZYjzSgD7ZB9SQPINEgGLe+2MmvfmanBaH7XPGEvh28XRL2sWig5gbG08hr3qwvHqgrg0wvjRi
+ 3z0lrBGN094oQvWSEKTQvhpb01ava5odXY150HIgZD0+9vjMJ9+wwimjBfz7QWpej2YGz/l50VK
+ o31gARdL58QdOwTmAhPfQfXf2Tb65slc8tOyNTBV95LMj/7gZM5kxmRHMIxyCMI8kAQ5jdGh0N/
+ C
+X-Google-Smtp-Source: AGHT+IGYc7EbMJbWmRLCK7etibwiY6QNGU5T9QwdfGRpZAucLMoMfLAZzRPe1rguvgx4bx7+R6Ufqg==
+X-Received: by 2002:a05:6000:420f:b0:39a:c9cb:819f with SMTP id
+ ffacd0b85a97d-39c2366b034mr6404672f8f.37.1743607312600; 
+ Wed, 02 Apr 2025 08:21:52 -0700 (PDT)
+Received: from Ansuel-XPS. (93-34-88-225.ip49.fastwebnet.it. [93.34.88.225])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43eb60cd74dsm23867485e9.20.2025.04.02.08.21.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 08:19:53 -0700 (PDT)
-Date: Wed, 2 Apr 2025 09:19:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Christian Marangi <ansuelsmth@gmail.com>
+ Wed, 02 Apr 2025 08:21:52 -0700 (PDT)
+Message-ID: <67ed5610.050a0220.1c650.ac73@mx.google.com>
+X-Google-Original-Message-ID: <Z-1WDRM8nPogBMtF@Ansuel-XPS.>
+Date: Wed, 2 Apr 2025 17:21:49 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
@@ -80,15 +85,13 @@ Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Bruce Suen <bruce_suen@163.com>, u-boot@lists.denx.de
 Subject: Re: [PATCH 02/14] net: airoha: Add Airoha Ethernet driver
-Message-ID: <20250402151951.GY5495@bill-the-cat>
 References: <20250401225156.25790-1-ansuelsmth@gmail.com>
  <20250401225156.25790-3-ansuelsmth@gmail.com>
+ <20250402151951.GY5495@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tLs7ixuVKqBbOThl"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250401225156.25790-3-ansuelsmth@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20250402151951.GY5495@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,59 +108,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Apr 02, 2025 at 09:19:51AM -0600, Tom Rini wrote:
+> On Wed, Apr 02, 2025 at 12:51:34AM +0200, Christian Marangi wrote:
+> 
+> > Add airoha Ethernet driver for Airoha AN7581 SoC. This is a majorly
+> > rewritten and simplified version of the Linux airoha_eth.c driver.
+> > 
+> > It's has been modified to support a single RX/TX ring to reflect U-Boot
+> > implementation with recv and send API.
+> > 
+> > The struct and the define are kept as similar as possible to upstream
+> > one to not diverge too much.
+> > 
+> > The AN7581 SoC include an Ethernet Switch based on the Mediatek MT753x
+> > but doesn't require any modification aside from setting the CPU port and
+> > applying the Flood configuration hence it can be handled entirely in the
+> > Ethernet driver.
+> > 
+> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > ---
+> >  drivers/net/Kconfig      |    8 +
+> >  drivers/net/Makefile     |    1 +
+> >  drivers/net/airoha_eth.c | 1448 ++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 1457 insertions(+)
+> >  create mode 100644 drivers/net/airoha_eth.c
+> 
+> checkpatch.pl has some macro warnings and it looks like some
+> inconsistent spacing around '#define FOO' vs '#define<tab>FOO' ? And are
+> all of those defines needed?
+> 
 
---tLs7ixuVKqBbOThl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+No they are not all needed, I defined them for consistency with the
+original driver. Should I drop them?
 
-On Wed, Apr 02, 2025 at 12:51:34AM +0200, Christian Marangi wrote:
+For the checkpatch check, also comes from the original driver.
 
-> Add airoha Ethernet driver for Airoha AN7581 SoC. This is a majorly
-> rewritten and simplified version of the Linux airoha_eth.c driver.
->=20
-> It's has been modified to support a single RX/TX ring to reflect U-Boot
-> implementation with recv and send API.
->=20
-> The struct and the define are kept as similar as possible to upstream
-> one to not diverge too much.
->=20
-> The AN7581 SoC include an Ethernet Switch based on the Mediatek MT753x
-> but doesn't require any modification aside from setting the CPU port and
-> applying the Flood configuration hence it can be handled entirely in the
-> Ethernet driver.
->=20
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> ---
->  drivers/net/Kconfig      |    8 +
->  drivers/net/Makefile     |    1 +
->  drivers/net/airoha_eth.c | 1448 ++++++++++++++++++++++++++++++++++++++
->  3 files changed, 1457 insertions(+)
->  create mode 100644 drivers/net/airoha_eth.c
-
-checkpatch.pl has some macro warnings and it looks like some
-inconsistent spacing around '#define FOO' vs '#define<tab>FOO' ? And are
-all of those defines needed?
-
---=20
-Tom
-
---tLs7ixuVKqBbOThl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmftVZcACgkQFHw5/5Y0
-tyxuagv/VFL4sxhPVGKefhtsonIK8nRfiUcn0VQIEGVX3n37QkMB23Fyg8QKVmN0
-p3tWr/mVyHIqHixmvGMl+kt1jtHSdaOyS+OGSHW3t2eWliCPCFZxjJq4QBE4Aj8e
-TTJtv8DdHApnx7FFMdSBrN26m+tdjHoui1R5MREjpiI4w0y3nPKc4Y8iLu46omBW
-H0ms/2q/LeX9Vye+p1B7S3rMK24s2gvdx4OY2Qm2NXwaPp0t2VYAxdPuRdOfTDPU
-ITiCbV7xQEiAsf5zlzctDYw4BZyOQu3a6lqS0EiepZ7DFAendUgR13FoM4xszO1V
-p8r0nCVkAw7HFabxJRdz2PszjIE+WSqCsemi+EC3uhCs8yy1va3wAU1TKrFnKXcW
-eoHA2NN+BnbwinwjAcuJ0AS4W4di6114fIFT2adXJElmNebOYHfT5LY9hdZG7hTL
-EuzaHJtGUszzE6gTsscWLGYtdYSPcNxVCGxnLfF7yvaOALg2ZI2hUiPj2oU3+Skj
-4wLagX3P
-=PZpJ
------END PGP SIGNATURE-----
-
---tLs7ixuVKqBbOThl--
+-- 
+	Ansuel
