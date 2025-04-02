@@ -4,69 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84907C28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 06:27:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E384FC28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 07:01:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1973B81F54;
-	Wed,  2 Apr 2025 08:27:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A4B38171B;
+	Wed,  2 Apr 2025 09:01:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MtJq8niH";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Pfzorl7g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B2FA80584; Wed,  2 Apr 2025 08:27:40 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A205781FE8
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 08:27:34 +0200 (CEST)
+ id 35C5581F0D; Wed,  2 Apr 2025 09:01:46 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6286080584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 09:01:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5326RWse3160640
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 2 Apr 2025 01:27:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743575252;
- bh=hO+EitWtZlxZ/g9VICfSNkuAAFYbysYVdY8SBEYJwZ4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=MtJq8niH+jsstT4lsRBBJPJE0EcNpVk6ygBSLkqLUI3u4MzTNdXUYlbTGHLxHI6Bu
- zE/oPfr1fBLg5eKp0NrYvE7hrDuqwukAbFNm4FsCd+axI6zBOsygHsImOW1cTsFJQv
- NAKOP7tIgFegOnazLpNJ5II3lSiq4JpQXJ5H4AiQ=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5326RWZv043525;
- Wed, 2 Apr 2025 01:27:32 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 2
- Apr 2025 01:27:31 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 2 Apr 2025 01:27:31 -0500
-Received: from localhost (lcpd911.dhcp.ti.com [172.24.227.226])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5326RVcD032636;
- Wed, 2 Apr 2025 01:27:31 -0500
-Date: Wed, 2 Apr 2025 11:57:30 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis
- <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
- Andrew Davis <afd@ti.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Jonas Wood <jw@ti.com>,
- <praneeth@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] firmware: ti_sci: Scan all device instances when
- releasing exclusive devices
-Message-ID: <20250402062730.vgmqbxczm2aee67z@lcpd911>
-References: <20250401205515.4078312-1-nm@ti.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250401205515.4078312-1-nm@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 3335661145;
+ Wed,  2 Apr 2025 07:01:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E856C4CEDD;
+ Wed,  2 Apr 2025 07:01:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1743577301;
+ bh=1HYCeGAORCIVQ5EOYYUJ62BAxKdvULkm+7tGC85HUeA=;
+ h=Date:Cc:From:To:Subject:References:In-Reply-To:From;
+ b=Pfzorl7gXFm/FErfmBMwYMUfcYFDwnuoJ8XzWlNWuTgiMWejnNlJNFYqXIWQX3rHp
+ kRIgaqVvl9QBUoGYvIqc26jEfX+u2R/shz1jRtvp7WEMDap95xxuS6KYiG3oCCzGsi
+ DNGymwU5U9DqGu7WckHGoL1bDsYYUPYfJReS5qUgbC+GSU526dDrBteg4koBKhI/kG
+ dndUka9wUKWQn8ZbfjL/omP/6aUU149sRm7FDwPbMvpzDQOmoEisZHkMOeUO6UBYYM
+ i0WpZ6uDMZX/tZbguFE2bxemUyWyJnLOREirD2YRvSnJbtMGIs2/Vx/az/un4Am857
+ IABDzSNWfFM6w==
+Content-Type: multipart/signed;
+ boundary=e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Wed, 02 Apr 2025 09:01:36 +0200
+Message-Id: <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
+Cc: "Tom Rini" <trini@konsulko.com>, "Benedikt Spranger"
+ <b.spranger@linutronix.de>, "Simon Glass" <sjg@chromium.org>, "John Ogness"
+ <john.ogness@linutronix.de>, "Jerome Forissier"
+ <jerome.forissier@linaro.org>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Christoph Niedermaier" <cniedermaier@dh-electronics.com>, "Quentin
+ Schulz" <quentin.schulz@cherry.de>, "Marek Vasut" <marex@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] tiny-printf: Add support for upper case hex values
+X-Mailer: aerc 0.16.0
+References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
+ <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
+ <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
+ <D8V6D9S6CBRH.3LRHNU4XCVF14@kernel.org>
+ <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
+In-Reply-To: <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,177 +79,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nishanth,
+--e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On Apr 01, 2025 at 15:55:15 -0500, Nishanth Menon wrote:
-> When FIT image with multiple dtbs are involved for R5 boot process,
-> R5 SPL starts off with the first instance of dtb to probe the
-> eeprom, then once we have identified the type of board, invocation
-> of setup_multi_dtb_fit will replace the gd->fdt_blob with the proper
-> board dtb match. However, when we do this, two things happen:
-> 
-> a) Prior to the invocation of setup_multi_dtb_fit, as part of the eeprom
->    discovery process, i2c controller device is already probed and marked
->    as exclusive with the match of the very first tisci match (from the
->    original boot dtb). This list is stored in the info->dev_list of the
->    first probe.
-> b) When the second dtb is loaded, tisci is probed again (since this is a
->    new node) and the new info->dev_list is empty.
-> 
-> At this stage, the exclusive devices such as i2c instances used to
-> probe the board information is left in the old info->dev_list that is
-> no longer used actively by the system using the replaced dtb.
-> 
-> As a result of this, the cleanup we intent to do with
+Hi,
 
-s/intent/intend
+> >> The issue is that disabling TINY_PRINTF may not be possible (size
+> >> constraints) and some code is compiled for different stages and people
+> >> typically don't check whether the format used in printf is valid with
+> >> tiny_printf. I've had this issue already in the past, I vaguely recall
+> >> "complaining" about it on IRC.
+> >=20
+> > Yes, I've stumbled on "%pa" with tiny printf (i.e. in
+> > drivers/pinctrl/pinctrl-single.c) which is printing the very wrong
+> > value, actually :) So printing anything unknown as '?' would really
+> > help here.
+>
+> Something like that would help:
+> diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+> index 48db7b1f78f..b918d6d7386 100644
+> --- a/lib/tiny-printf.c
+> +++ b/lib/tiny-printf.c
+> @@ -280,6 +280,12 @@ static int _vprintf(struct printf_info *info, const =
+char *fmt, va_list va)
+>                                         while (isalnum(fmt[0]))
+>                                                 fmt++;
+>                                         break;
+> +                               } else {
+> +                                       if (fmt[0] !=3D '\0' && (fmt[0] =
+=3D=3D 'a' || fmt[0] =3D=3D 'm' ||
+> +                                                              fmt[0] =3D=
+=3D 'M' || fmt[0] =3D=3D 'I')) {
+> +                                               fmt++;
+> +                                               goto unsupported;
+> +                                       }
 
-> ti_sci_cmd_release_exclusive_devices is no longer complete and
-> leaves the instances such as i2c for eeprom marked used as we scan just
-> the new info->dev_list.
-> 
-> This creates a problem when Device Manager(DM) firmware starts up later
-> on in the boot process and identifies that this instance of i2c is
-> already marked active, so it assumes this can no longer be controlled
-> by software and is marked internally as reserved and HLOS can no
-> longer control these instances. This defeated the purpose of
-> ti_sci_cmd_release_exclusive_devices.
-> 
-> NOTE: This scheme works just fine if the FIT has just a single dtb as
-> the info->dev_list is upto date.
-> 
-> To fix this, let us make ti_sci_cmd_release_exclusive_devices scan the
-> all registrations of tisci instances and cleanup all exclusive devices
-> that have ever been registered.
+I wouldn't mind printing the pointer for %p[mMI], but %pa prints the
+*content* of the pointer which is really confusing. I.e. in
+pinctrl-single.c the reg value pairs are printed like
 
-Firstly, it seems to me like this issue is mostly specific to the
-AM64/ DM+TIFS combined core arch K3 devices? So it would be good if the
-commit message can specify that for better context. People who are more
-used to the R5 core running DM architecture may find this description
-slightly confusing as there's no TI SCI calls that the R5 SPL can make
-to DM since DM isn't up yet on those devices...
+  dev_dbg(dev, "reg/val %pa/0x%08x\n", &reg, val);
 
-> 
-> As part of this, change the prototype of release_exclusive_devices to
-> drop the handle since that has no further meaning now.
-> 
-> Fixes: 9566b777ae0a ("firmware: ti_sci: Add a command for releasing all exclusive devices")
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
-> Test logs:
-> ========
-> prior to this patch:
-> https://gist.github.com/nmenon/8ce817ac991b6ff898734d15ae5ce623#file-before
-> With this patch
-> https://gist.github.com/nmenon/8ce817ac991b6ff898734d15ae5ce623#file-after
-> Notice that 20000000.i2c is no longer deffered in Linux.
-> 
-> Test of platforms (on c17f03a7e93d  Merge tag 'net-20250314' of https://source.denx.de/u-boot/custodians/u-boot-net)
-> 
-> https://gist.github.com/nmenon/917e15b397e5249dd76664ea62e9e662
-> 
-> Though this was uncovered in automated check in upstream testing, this was also
-> independently reported in:
-> https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1459509/sk-am64b-deferred-probe-of-i2c-bus-using-sdk-09-and-10
-> 
->  arch/arm/mach-k3/r5/common.c           |  2 +-
->  drivers/firmware/ti_sci.c              | 23 ++++++++++++++---------
->  include/linux/soc/ti/ti_sci_protocol.h |  2 +-
->  3 files changed, 16 insertions(+), 11 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-> index 0f6c294f1eb2..fd188e7c90e4 100644
-> --- a/arch/arm/mach-k3/r5/common.c
-> +++ b/arch/arm/mach-k3/r5/common.c
-> @@ -144,7 +144,7 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->  	int ret, size = 0, shut_cpu = 0;
->  
->  	/* Release all the exclusive devices held by SPL before starting ATF */
-> -	ti_sci->ops.dev_ops.release_exclusive_devices(ti_sci);
-> +	ti_sci->ops.dev_ops.release_exclusive_devices();
->  
->  	ret = rproc_init();
->  	if (ret)
-> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-> index 190a1e3f5fc3..54d6689ce783 100644
-> --- a/drivers/firmware/ti_sci.c
-> +++ b/drivers/firmware/ti_sci.c
-> @@ -696,20 +696,25 @@ static int ti_sci_cmd_put_device(const struct ti_sci_handle *handle, u32 id)
->  				       MSG_DEVICE_SW_STATE_AUTO_OFF);
->  }
->  
-> -static
-> -int ti_sci_cmd_release_exclusive_devices(const struct ti_sci_handle *handle)
-> +static int ti_sci_cmd_release_exclusive_devices(void)
->  {
->  	struct ti_sci_exclusive_dev *dev, *tmp;
->  	struct ti_sci_info *info;
->  	int i, cnt;
->  
-> -	info = handle_to_ti_sci_info(handle);
-> -
-> -	list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
-> -		cnt = dev->count;
-> -		debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
-> -		for (i = 0; i < cnt; i++)
-> -			ti_sci_cmd_put_device(handle, dev->id);
-> +	/*
-> +	 * Scan all ti_sci_list registrations, since with FIT images, we could
-> +	 * have started with one device tree registration and switched over
-> +	 * to a final version. This prevents exclusive devices identified
-> +	 * during the first probe to be left orphan.
-> +	 */
-> +	list_for_each_entry(info, &ti_sci_list, list) {
-> +		list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
-> +			cnt = dev->count;
-> +			debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
-> +			for (i = 0; i < cnt; i++)
-> +				ti_sci_cmd_put_device(&info->handle, dev->id);
-> +		}
+with reg being a pointer to a physical address. So with tiny_printf
+the address of reg (which is a pointer to the stack) is printed in
+this case.
 
-The other thing I am slightly not comfortable with is this.
-The release_exclusive call is going to be common to every K3 device.
-With your changes, will it result in any sort of increased boot time
-penalty? I feel like it might, unless I maybe mistaken.
+I don't think we can print %p without putting more logic into the
+decoding. I think the culprit here is the fallthrough to %x, which
+then leads to the confusing behavior shown above. IMHO if we want to
+avoid that, we'd have to make %p entirely unsupported.
 
-Also, to fix just AM64 style devices, we're touching a K3 common piece
-of code like TI SCI. The issue that you described about the TI SCI
-probing the second time causing issues seems more fundamental than the
-fix being offered here.
-Quoting the commit message,
+diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+index faf55d7f327..8147ffa2c1b 100644
+--- a/lib/tiny-printf.c
++++ b/lib/tiny-printf.c
+@@ -269,21 +269,18 @@ static int _vprintf(struct printf_info *info, const c=
+har *fmt, va_list va)
+ 						div_out(info, &num, div);
+ 				}
+ 				break;
++#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG
+ 			case 'p':
+-				if (CONFIG_IS_ENABLED(NET) ||
+-				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
+-					pointer(info, fmt, va_arg(va, void *));
+-					/*
+-					 * Skip this because it pulls in _ctype which is
+-					 * 256 bytes, and we don't generally implement
+-					 * pointer anyway
+-					 */
+-					while (isalnum(fmt[0]))
+-						fmt++;
+-					break;
+-				}
+-				islong =3D true;
+-				/* no break */
++				pointer(info, fmt, va_arg(va, void *));
++				/*
++				 * Skip this because it pulls in _ctype which is
++				 * 256 bytes, and we don't generally implement
++				 * pointer anyway
++				 */
++				while (isalnum(fmt[0]))
++					fmt++;
++				break;
++#endif
+ 			case 'x':
+ 				if (islong) {
+ 					num =3D va_arg(va, unsigned long);
+@@ -310,6 +307,8 @@ static int _vprintf(struct printf_info *info, const cha=
+r *fmt, va_list va)
+ 			case '%':
+ 				out(info, '%');
+ 			default:
++				out(info, '?');
+ 				break;
+ 			}
 
-> At this stage, the exclusive devices such as i2c instances used to
-> probe the board information is left in the old info->dev_list that is
-> no longer used actively by the system using the replaced dtb.
+-michael
 
-Can we instead try and fix the TI SCI driver behaviour from the first time?
-Like is it possible to implement a .remove for the TI SCI driver such
-that when the old dtb is now out of context, the driver gets cleanly
-removed, and with that calls the release_exclusive of all devices that
-it requested? 
-That way the new instance of TI SCI driver doesn't need to worry about
-doing cleanups from any of it's previous instances right?
+--e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0
+Content-Type: application/pgp-signature; name="signature.asc"
 
-To me that sounds like the right root cause to try and fix. Let me know
-what are your thoughts on this.
+-----BEGIN PGP SIGNATURE-----
 
->  	}
->  
->  	return 0;
-> diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-> index 8e4c43cef311..aa4d105ee988 100644
-> --- a/include/linux/soc/ti/ti_sci_protocol.h
-> +++ b/include/linux/soc/ti/ti_sci_protocol.h
-> @@ -143,7 +143,7 @@ struct ti_sci_dev_ops {
->  				 u32 reset_state);
->  	int (*get_device_resets)(const struct ti_sci_handle *handle, u32 id,
->  				 u32 *reset_state);
-> -	int (*release_exclusive_devices)(const struct ti_sci_handle *handle);
-> +	int (*release_exclusive_devices)(void);
+iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZ+zg0RIcbXdhbGxlQGtl
+cm5lbC5vcmcACgkQEic87j4CH/i4/gGA3sF04LHCKEneTK7z3ELDuGcZQxYxefd/
+oIx5wjMiTLhrvpeLZf6u49HSp0aoggMoAYDuhz8/VOBvCdHV1Dh8IJzNOrIhjUnG
+8rgX6WI43MvZ/3/X+ThwNk0l7Vi1V7ulHDk=
+=F221
+-----END PGP SIGNATURE-----
 
-Nit: Just update the copyright dates of the files you're touching...
-
--- 
-Best regards,
-Dhruva Gole
-Texas Instruments Incorporated
+--e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0--
