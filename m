@@ -4,65 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2ABC28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 251AAC36014
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:39:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6084180FDA;
-	Wed,  2 Apr 2025 11:32:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 097C180FDA;
+	Wed,  2 Apr 2025 11:39:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DkwImkQg";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="V0JxNvD2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D97C81E6C; Wed,  2 Apr 2025 11:32:16 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 8F7D881CF0; Wed,  2 Apr 2025 11:39:07 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on2060d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::60d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B567580584;
- Wed,  2 Apr 2025 11:32:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E95D880584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 11:39:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5E4B75C6173;
- Wed,  2 Apr 2025 09:29:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3456C4CEDD;
- Wed,  2 Apr 2025 09:32:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743586331;
- bh=w4HoQfgwIGV5WRRxIH0AhBqRVbJ10thihbO0tXBPqjk=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=DkwImkQgNaFxXId75wNa1RQgyRqV1cipPhqPv9HSHS6GXdbeJWY+NrYoT0wrkaMyn
- mKb2gGWYpIqJUWlQUjMdHJjDB+fox8XyxNaAOxk3+3MpVqwCwDqtjCGjui3oJmeJ2I
- V4jRyQNOk0e5456W0g5Qf5G6xgbpWzlj8hatCjarGk8AfxhFM9R2JRtwkZDAd4TG9u
- QsBONCiZqhtrAtc7dVCQGZvsFlmuhd2EvM+F10q5PxW+2vdtuAttqzZw/Hu1d9kTIU
- Imr9Rr0PeglSsoxx2Pt5qUpCtnsEKPGQtG+Yq+QLrg8G0MN0zBQsrFU7pmpbypnFwI
- TTim5HvOEkSnw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, U-Boot Custodians
- <u-boot-custodians@lists.denx.de>
-Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in
- the project)
-In-Reply-To: <20250401171822.GM5495@bill-the-cat>
-References: <CAFLszTgtdETGCYYtH3ni7Wv0W6Ckv1SoZRG8djQ-3uKBn1YZWQ@mail.gmail.com>
- <20250304152909.GZ2640854@bill-the-cat>
- <CAFLszTiNQSs51iE=rcM7qQjipmWCKZiPX+gV2ztb+ZAB8m2MBw@mail.gmail.com>
- <20250305162236.GT2640854@bill-the-cat>
- <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
- <20250307144631.GN2640854@bill-the-cat>
- <20250310155336.GJ2640854@bill-the-cat>
- <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
- <20250331155144.GX93000@bill-the-cat>
- <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
- <20250401171822.GM5495@bill-the-cat>
-Date: Wed, 02 Apr 2025 11:32:08 +0200
-Message-ID: <8734equcx3.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tw8ipfjAo6ffaPGJ6aRjacrvcQGSHobC1IO0foCuQNgfaJ5l/AfG8o1/ZEbxz18AcQFsmm3/ZUnmtBasBhkYNCbOgCJW4DfrHemyKudVLryJ36U4JMFhlMyohTS7cAo0aXi+wXM9GvtAPf+fIq72yDxj2azyk1ARQAu/WwpLlpz5UjKNsVFlYUyjdM30873lXl1eO5/OJ1D7/KqIMRW5qhVGlI5mafWjBIJdpZfmsWJ1PKLpua70Vi+XTrscIAjb2bfaxNMdMaev3dmMmys9ek+vDiSeK72og84xcIQHRBWB6fhKmhZy4cVb0OYv/aB5FBlTrdjrHAHqQslK37ht4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UVkUctjAzj9JUNAhnTaDHWqoi+pn7dLRZM7R8CU9zSk=;
+ b=x/jrWcoaIeJ3sDJGjTroXt4HZJ69uA6uZfPqhATPFud9m0taxzsCnHMUCDxjTJbu4YSCgv2hu2Ph5zs/pxezM+wDKIXcCqKjElzgJQJX9cYrboWvVt6hqjhzpxLf1PRAfygwC+qbW0uPcAlJcdMtrnap3ZWbMsYxJuiWr7HdCnvyvz/5QZhkxSaD74jHa6eZ3X2397jMJlDuyRG5M0esgA/qi/kfs3CVwOMZQY3+XjK+PbVt70ROomWsdvc6O5QzhymmXrnyLO9+nB+2fHPOC/Xr44qXXG7YkvTlWsDh3OqQl3L7TBYmQ9cLcUesSBelfSN+OFCqZktbCEt6bAccXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UVkUctjAzj9JUNAhnTaDHWqoi+pn7dLRZM7R8CU9zSk=;
+ b=V0JxNvD2+88WBSyN86E2lzclssPuq16Vgt1kusC7AEm+pv9aL2f6YcfkuFOoB7n6oMk5QCzulqgQiF45A5ZAGhaRmTyijxXfkp9WFgiNV0EiGoC9dPiCHernKI3iAL1YxLwQYHt6FoxcsFfSsOqrhrVOq/IbfzOsKkM/42ToF+c=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
+ by PA1PR04MB10416.eurprd04.prod.outlook.com (2603:10a6:102:446::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.54; Wed, 2 Apr
+ 2025 09:39:02 +0000
+Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
+ ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
+ ([fe80::d379:5378:b1:cea%3]) with mapi id 15.20.8534.048; Wed, 2 Apr 2025
+ 09:38:59 +0000
+Message-ID: <653ba504-a94a-4569-9c4e-016fe6ff4771@cherry.de>
+Date: Wed, 2 Apr 2025 11:38:45 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC] Upstreaming Orange Pi RV2 vendor patches - Seeking guidance
+To: Sungjoon Moon <sumoon@seoulsaram.org>, u-boot@lists.denx.de
+References: <09c3ffd2-3933-4a3b-b64f-5cc10a1942fd@seoulsaram.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <09c3ffd2-3933-4a3b-b64f-5cc10a1942fd@seoulsaram.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR3P281CA0191.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a4::9) To AM9PR04MB8906.eurprd04.prod.outlook.com
+ (2603:10a6:20b:409::9)
 MIME-Version: 1.0
-Content-Type: text/plain
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|PA1PR04MB10416:EE_
+X-MS-Office365-Filtering-Correlation-Id: d850b32f-7bf5-4209-2aed-08dd71ca2a67
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TmE3YTdxWUxTWDRtNWVDdWJuQkZROEU0SU1MYkZjYXpFdHJtdlhyeEY4c0JI?=
+ =?utf-8?B?OWlYeDlUY3lEeXpKbHd4eDFWc25FeXk2UCtWWDNWYXlEL0RsdG1CeWlRQ1B4?=
+ =?utf-8?B?RkhXNnlKRGNYaGtwWDRqSkJZZ3gxSXF5Y2pueUF6THBpZ1ZUbDQ0dkpiVEpC?=
+ =?utf-8?B?OVhTc28vbDc1Yk1kSzdVRzgweTcvSGpJelhFRGFlamFKenY0NFkvZ3BoOTV6?=
+ =?utf-8?B?akxIVjJmb2FlYlRoZGlnQWR6TWl0Y0lTT1RQK0JOQlUxdTF6MVQvcnRPMVZ2?=
+ =?utf-8?B?c1NhZHVLWWYvWmlGVjVENEdBSWxJOTBWejBMaFdmUWZkaTMxd0oyUkczTDBy?=
+ =?utf-8?B?S2NBbHdZOWMxTGZ6WVE5Y1pVQTc0RzNVZldacDBoTGhmWDhEdFhYcDgxZHh1?=
+ =?utf-8?B?dmlZdUJ5cENCeVRPdk55Uzh2OThGSXB4R3duS3AyNWVCdGJIR0ZvYU9NemJx?=
+ =?utf-8?B?b3FibVRzMW5NRndIN2JZSUdpS01odTFORkxLQ2lnVStKRUVyMHJSei85RUtp?=
+ =?utf-8?B?WnVMNHRCNlhjMGxIcVNpRWF3RmhIQU5jV3pINjlDTis3YzVyU3FLaXFxNkJq?=
+ =?utf-8?B?NGpHMG1sKzFFZ01ZbEY5TE4xRDUyQWNKT2luNHNxQXZyV1pabVQxVUQvRExW?=
+ =?utf-8?B?d1lWbUcwMy9TdmU3WSt1K0tFTmtOaUp0WmQ0WXZURmdNd01aSURsdkc0OUl1?=
+ =?utf-8?B?eEZET1ZnVUJSVjZoOVR0NlZTbU1UQ3dVYnpsbWVTV1RjVzFGT1d5M2R3V3FP?=
+ =?utf-8?B?NWF1eW5uek1ZN3hJS3JsbGxLUnh0QUZFVFNMMHcrYWdRWERjU3ZBUDNVRDNx?=
+ =?utf-8?B?YTZvekdxaGp6bU96a3dWNjk1SmVIbFlMcWJPK1BOQWlqU3VzRUc3RWwzUW1n?=
+ =?utf-8?B?bFR4RGs0ZHBGOWx3Z0hpbkMxUnNoU3VEQ3JhM0N2QWh5amFCanQvbk04cWlk?=
+ =?utf-8?B?Uk9mS25ZUXRYKzYzL3BTYklxOGFJalRlTmlWVnh3TXVaVzdKOTYwaDMzWFl6?=
+ =?utf-8?B?OVppaE5BenVScldxRmNUdHBmaXpRWHpscW1MZEpxd090Ym9tTkFyOVEyZmpF?=
+ =?utf-8?B?MytNTm5BRjRqVTBsMVBUQThBbUVxTnFJdXJHbG1oc0JjUkxtWkZTNWRkZC9M?=
+ =?utf-8?B?UDh1SVlEL09VUlozMXJMOC9BbDAzbythcFVUcHZSZGk4cEViakMzQXcyM3V5?=
+ =?utf-8?B?b3BNOEJyeXhyMkhzQTkxRVZ2TVFVS0F5QmYwVE1NZGs2WTJEK0tDWlNkekpB?=
+ =?utf-8?B?UEtLTGs1VThFSEsrU2VDN0UwWFZKa3lQZDN4bDV2RVR3a3RVYWhZUnJUd2Fm?=
+ =?utf-8?B?WEwweSsxWlN5N2pBTkZuY0pNdHBUOGQxS3pSTG16c1FwWmV1aWd6REJFNy95?=
+ =?utf-8?B?LytzckxnS2FkUHFFUU96dmZnOHc3dTlVSC9zZXZucUZld3RjcnZpcGRyRkVY?=
+ =?utf-8?B?SStYUk42VFc5NVFqcGJXTzNlVC9BR24rS204K3pFWGpaQ3BkeHJMUGlBN0pr?=
+ =?utf-8?B?eTdMb01CaXNVeEZ5azM3VmpabWpWaE1LUldjeFV6NytZR1Y5NWtxb041ZFZr?=
+ =?utf-8?B?NEFSRjdnaXkrcFhxUHlNaVBSa3NRdysyYzNjSTVFOVVPcFpFQm5LaHljMjFC?=
+ =?utf-8?B?c1VUQlNvTnhjakZVMHcyVlhOUjlhdVlFM2hxb2o1ZFp0K2o4V01NRFJUZE1z?=
+ =?utf-8?B?OVBHU2w5K1g5UHJaRUdNVHdHT2ZqRmhrNDEzUlBHNW5SU3l0TUJIRDdCN3o0?=
+ =?utf-8?Q?tLIN9X0shl1T1kc6Wbdmx3L+5NnTA8swmywAm5j?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WEE3TytKSkdTT1BvdkFHMGZVYVMvQjFybFZrKzN0SmNTajk1MXZmVlN6RUZH?=
+ =?utf-8?B?Vmo0alVLNTh6MzRJZHFkZkNCbDhzMWttOGovNjNPZ1hxbStnNkhZTkZSMUky?=
+ =?utf-8?B?bFpRU2J5N1BUaHJTUUJGcUFyVVluNGFtV1RyVUpQQnRjTndJTG84Y3pjV3ZQ?=
+ =?utf-8?B?bU1EUmNLd2hQTVNQNGJKTEpBUVV0MytzamlSRlFqRGNsYk5HVi9RSXNReHZp?=
+ =?utf-8?B?SENIR1ZnS1NaK0N5ZCsyK3BOa1pBS2ZCUTBQZ2JkeGFGaTBDUjNlSWJGU3lJ?=
+ =?utf-8?B?dWRENjRxV2ZyZHFmeStnMWkxUTBRRklqcmoya2ZPQm53ckE1QWVUa2JYVVps?=
+ =?utf-8?B?aERrN012TlRpUjMxQ2FCSXF2N0JtTUl4YkRXVUMvang4K2U3ODBiT2h3R1Zs?=
+ =?utf-8?B?dzJpRlFLQkREcHRrZTREQ0ZLRk5uNHg0VUt1N0wwdVRYTlEyRHpUTjQ1WWg4?=
+ =?utf-8?B?dzhLVU1HYVA5SU5FcDhxZ3lGVGNLUlN6OUtUcnRXbUxndTRkTVlwY0FzRWVX?=
+ =?utf-8?B?aUdnS1FqelFVN0ZDWFdSRzhRUk5DMnk3clIxM0kxWkJoUWlwQ2RDaG1ZanNP?=
+ =?utf-8?B?aVZ2Y3pFc1gweHk3enBjK2dLSDhxQzlkYVdQVGtTZmNMQWpQN0ZUdDFhQUk3?=
+ =?utf-8?B?Z3BxWEl1T2oyc1BZSzlrV2NMQWlFazdLK0t1NCtuWk5tUW43WUt3RGtCSm1W?=
+ =?utf-8?B?d1A0MHRORHRZcHk2Ym9MMXdraUFCR1lWU0VvNkljeHArVEJZZTBWRkJSS3pS?=
+ =?utf-8?B?ejc0UlQ4ekxzdWdqWm5NWndTZWdwRUlwS2hmZ0JLcUF0QUpCQTNodU9uanlM?=
+ =?utf-8?B?T1BId2dwTlNIRDkvc3JJQ1l2cUNGZGdqZUlLaURLWEE1WE9mdkUzQmMxTWJC?=
+ =?utf-8?B?SnlzOFNWajJza0UvSjhVU2ZsSWNLSmtMWVhHQUh5R01DRDJ6WnlEdFpocGZh?=
+ =?utf-8?B?VHRyR0lIREdYTnNmcWV3OHRJNVlvNHhiQVpzdEtWeThoYTN4N3FwRFlVMXpz?=
+ =?utf-8?B?MVNnbHlaNjFvSzRDQXBUajhicFFxTDhWa1QrY3lFMXl2SXBYdFZ4TWZDalBF?=
+ =?utf-8?B?a3JwZXQrb2RMLytvT1ZpNFVSdzJXYXBjZWMrWnc1azl4QmFFM1ZLKzRZMUVO?=
+ =?utf-8?B?cjYrVnlRa1J4ODJzQ1NSZ1ZGbUU3a2V4c0NMQUNXdUFHWmZtdUVhV2tRRERo?=
+ =?utf-8?B?Y3p3bDYydGEyTjVVTWNZVDFSc3pNSnhJaHBYc1VaNDJiNlYvYnAya25Ua3Jk?=
+ =?utf-8?B?OGNVb04yNUVrVHFzV3d4UUZFcVVhY2ZTa1NnckFHaUp2UnhCSGJnWVFRZExu?=
+ =?utf-8?B?YnZiMDJGRU1RbUU3WDBCY3hUZXUwWE1EdG1PYkd1L2NsTmhWMzNVaFR1c2xu?=
+ =?utf-8?B?Yll3VlY1WTk1aC81VGxzZ2pHM21PMXp2cld0NGFYTi9lSkQ3dHJld0RtMHdD?=
+ =?utf-8?B?VnFKMUJheTM4OHphTm1ISkxmc1piV3V5enhBUklnR2NHdkVyZHo3c3B6blB3?=
+ =?utf-8?B?MHJ5UW0zQXZaa3F0amdWR0NxZVlDOUdNSTVneUZOM1U4MUdLeWFwNkR0RFRk?=
+ =?utf-8?B?d3ptZldGSmhIMkl1MFJ1ajNzUDV6aGI5UExwSElSVm02UFIxTlowRnI1STZG?=
+ =?utf-8?B?RkJUbk5OdEFvSmVGR2ErWm00SXBWSDd5aU5xNEJpbkhnWkUyM1VvMjVIN3E3?=
+ =?utf-8?B?djRtVk01dEVtWE9SVUdDQm9mWG02Y2VOQ2lzZkNDU1JrYXFjYkVtWkY0dFhH?=
+ =?utf-8?B?RjZMMU9RaitpWlJGSUhnOUN1NEVFSDNMWkh3TVFPWkZxMmhkSFhDM1o1dmFk?=
+ =?utf-8?B?MXA0Mk5NbzhNbm85YUo0M205UGtGcEJESlJFRUxKM3F4Rk9EUGkzV0hUVDgx?=
+ =?utf-8?B?VFFzMUJDVVpTTVVZYVRqSzMyQk5QU3NIVjlsaTBGakF4aEhEa1FQQmNhNk5a?=
+ =?utf-8?B?RWRMaFJXcGVsckRINitSZzlBUEoreFJBTXdpVG5uTTBJVS9pMEhvRlVCSElt?=
+ =?utf-8?B?N0xPeThsSWt5NnJldHBGQkxxdFhJRGk4NEd5UFl3RlRPS2srLzVGL1ZoM1hO?=
+ =?utf-8?B?WTNzN1kvcU9yM3RJQVdZa2lyK3ZPRG9OZlIxS056TWUrNldranJBVzFiaEc5?=
+ =?utf-8?B?dWJyVUFRb201Q2JIYVk3dXJrWm9uWEw0ai9sYXEwcXd1ajZTNG9iZC9zSmxB?=
+ =?utf-8?B?WWc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d850b32f-7bf5-4209-2aed-08dd71ca2a67
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2025 09:38:59.5397 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eqQEdthJILl5Jd0Ch5p4HFyEqjY1wz5EQhO7YJvHsQjlHnPG2I4kQqijkNbh88+zmuLwo+SrhJ0Za4JhaszhiJ1kfJOsgOTV5J9aTj+5NHk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10416
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,151 +170,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mar., avril 01, 2025 at 11:18, Tom Rini <trini@konsulko.com> wrote:
+Hi Sungjoon Moon,
 
-> On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
->> Hi Tom,
->> 
->> On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
->> >
->> > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
->> > > Hi Tom,
->> > >
->> > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
->> > > >
->> > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
->> > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
->> > > > [snip]
->> > > > > > Again, back to this thread, if you want me to migrate things, consider
->> > > > > > applying the sunxi patches as I have described above. I will then look
->> > > > > > at the next target for bootstd. But while you hold this up, I cannot
->> > > > > > move forward with more bootstd migration. It doesn't seem that much to
->> > > > > > ask.
->> > > > >
->> > > > > I will take another look at what's still relevant. But I believe it's
->> > > > > still blocked on the fact that it changes behavior and breaks users.
->> > > >
->> > > > In details:
->> > > >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
->> > > >
->> > > > Now that the underlying BLK problem is resolved, this can just be
->> > > > dropped I believe. Removing the BLK dependency from BOOTSTD can happen
->> > > > when you're supporting a flow that lacks a BLK device entirely. This
->> > > > would be another reminder as to why putting unrelated changes in a
->> > > > series is a problem.
->> > >
->> > > OK, then just don't apply this patch. Problem solved?
->> >
->> > Well, for a hypothetical v6 you would not include it, sure.
->> >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-3-sjg@chromium.org/
->> > > >
->> > > > This is fine.
->> > > >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4-sjg@chromium.org/
->> > > >
->> > > > This is not fine. This is also not a sunxi problem. It means that we
->> > > > should drop bootmgr from rockchip, where the conversion has already
->> > > > taken place, and would need to drop it from future conversion too.
->> > > > Neither of which are desirable changes.
->> > >
->> > > Why do you say that? I don't understand how this relates to rockchip
->> > > or why we would need to drop bootmgr from that.
->> >
->> > Then you don't have enough of a grasp of the details of the area you're
->> > trying to solve problems in? Or maybe you need to refresh yourself on
->> > the details of the area you're trying to work in.
->> 
->> Or perhaps there isn't a problem? The sunxi case is special because we
->> have a FEL boothmeth. That isn't present on rockchip, for example.
->
-> Again, you seem to have forgotten what the problems with the series
-> were.
->
->> > > > This patch in particular is
->> > > > where we have the note:
->> > > >
->> > > > "Yes, the introduction of boot standard changed the boot order and
->> > > > specifically deprioritizing scripts is unexpected."
->> > > >
->> > > > Which should have had more attention than it did.
->> > >
->> > > From memory the scripts are a fallback used when the other things
->> > > don't work, so that was the decision I made at the time.
->> >
->> > The key point being we changed behavior that others depended on, and
->> > didn't document it well and didn't make sure the change would work for
->> > them either.
->> >
->> > > > This is the thread that to me spelled out in details where the
->> > > > conversions are now blocked. We changed behavior and that in turn breaks
->> > > > users that have come to rely on ordering.
->> > >
->> > > I don't know what action to take on that comment. We cannot have 100%
->> > > backwards compatibility with the scripts, which after all weren't even
->> > > documented. But it is very close.
->> >
->> > You need to get feedback from the people you want to migrate from the
->> > scripts and ordering and rely on to something else and see what works
->> > for them.
->> >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-5-sjg@chromium.org/
->> > > >
->> > > > Is an alternative to the above which then turned in to a discussion that
->> > > > I would very briefly summarize as "no discussions were had between
->> > > > stakeholders before integrating efi bootmgr with bootstd".
->> > > >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-6-sjg@chromium.org/
->> > > >
->> > > > This is fine, but only relevant once migration happens.
->> > > >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-7-sjg@chromium.org/
->> > > >
->> > > > If Andre is fine with this, this is fine.
->> > > >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-8-sjg@chromium.org/
->> > > >
->> > > > This is a generic bugfix. I will take this to next today.
->> > > >
->> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-9-sjg@chromium.org/
->> > > >
->> > > > If Andre is fine with this, this is fine.
->> > >
->> > > Well, is he? I thought he was. Can you check?
->> >
->> > You're free to. It's one of the innumerable examples of why when you
->> > group multiple things in a series and there's problems with another part
->> > of the series, unrelated changes get dropped.
->> 
->> It would be easier for me if you could apply the patches as I've suggested.
->> 
->> But if you are willing to apply these patches and just want me to send
->> the series again without the BLK and RFC patches, I can do that.
->> Please let me know either way.
->
-> Again, you should:
-> - Take the non-bootstd sunxi enhancements, rebase them to next and post
->   for Andre. By themselves. This way they won't get stuck.
-> - You should work with Heinrich to come up with something that handles
->   efi bootmanager and bootstd without breaking how our actual project
->   users use us.
->   There's no reason to migrate *more* platforms until we have this
->   fundamental problem sorted out.
-> - You should work with any FOSS distributions to get their feedback on
->   what would make their life easier, from a user of U-Boot perspective.
->   bootstd won't be useful if it's not something our users want to use.
+On 4/1/25 3:41 PM, Sungjoon Moon wrote:
+> [You don't often get email from sumoon@seoulsaram.org. Learn why this is 
+> important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> I'm working on upstreaming vendor patches for the Orange Pi RV2 board, 
+> currently available at:
+> https://eur02.safelinks.protection.outlook.com/? 
+> url=https%3A%2F%2Fgithub.com%2FOctopusET%2Fu-boot- 
+> orangepi%2Fpull%2F1%2Fcommits&data=05%7C02%7Cquentin.schulz%40cherry.de%7C32ac8a27848840e80f4f08dd71657036%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C638791402679712024%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=VhrD%2BgKD0cCW5pZIKhy7BoiGtj5fyTKukkdVj116jIY%3D&reserved=0
+> 
+> I'm rebasing these patches onto the latest U-Boot branch (v2025.04-rc5).
+> To ensure the patches meet upstream standards, I have a few questions:
+>   1. What specific steps should I take after rebasing to prepare these 
+> patches for upstream submission?
 
-I can't speak for other distributions but for Android, it seems that the
-direction is to use EFI boot via an excutable that implements the Android
-bootflow. This is named GBL, and here are some pointers about it:
-- https://android.googlesource.com/platform/bootable/libbootloader/+/refs/heads/main/gbl/README.md
-- https://lpc.events/event/18/contributions/1704/attachments/1550/3231/Android%20Generic%20Boot%20Loader.pdf
-- https://baylibre.com/android-bootflow-experiments-with-u-boot-and-gbl/
+Not sure what exactly you're after here.
 
-So in my opinion, at least for Android, bootmeth_android (bootstd) will
-be deprecated in favor of EFI boot + GBL.
+You need at the very least to run scripts/checkpatch.pl on all your 
+patches and have them pass successfully. Some warnings may be ignored in 
+some corner cases so ask if some warnings are odd or difficult to fix.
 
->
-> -- 
-> Tom
+This can be run automatically if you're using b4[1] with `b4 prep --check`.
+
+Your patches shouldn't break other boards, be it build time or runtime. 
+For build time, you could build everything and check that it still 
+compiles. I vaguely remember buildman tool is supposed to be able to do 
+that but I've used it maybe once.
+
+>   2. The current patch set is quite large. Should I split it into 
+> smaller, more focused patches? If so, what would be the recommended 
+> approach for splitting?
+
+https://docs.u-boot.org/en/latest/develop/sending_patches.html the whole 
+page is worth reading but to answer this question specifically:
+
+"""
+- Patches should always contain exactly one complete logical change, i.e.
+   - Changes that contain different, unrelated modifications shall be 
+submitted as separate patches, one patch per changeset.
+   - If one logical set of modifications affects or creates several 
+files, all these changes shall be submitted in a single patch.
+
+- Non-functional changes, i.e. whitespace and reformatting changes, 
+should be done in separate patches marked as cosmetic. This separation 
+of functional and cosmetic changes greatly facilitates the review process.
+"""
+
+I'm of the opinion that it's easier to start with too many commits and 
+squash them on request than splitting commits.
+
+If there are patches that the project could benefit from that would 
+impact more boards than the upcoming OrangePi RV2, you may consider 
+sending them in a separate series in advance. In short, series are 
+rarely partially merged, so if there are controversial patches in a 
+series, it could be beneficial to split into multiple, easier to review 
+and merge, series.
+
+>   3. Are there any particular coding style or documentation requirements 
+> I should be aware of for the Orange Pi RV2 board support?
+
+https://docs.u-boot.org/en/latest/develop/designprinciples.html
+https://docs.u-boot.org/en/latest/develop/codingstyle.html
+https://docs.u-boot.org/en/latest/develop/board_best_practices.html
+
+Add tests when adding code.
+
+Add documentation for your board to 
+https://docs.u-boot.org/en/latest/board/index.html
+
+>   4. How should I handle any vendor-specific code that may not be 
+> suitable for upstream?
+
+We all have different opinion on what may or may not be suitable for 
+upstream. Anything not sent upstream, we don't care, that's your problem 
+to handle. If you send patches that are unacceptable, we'll tell you and 
+we'll try to figure out ways to deal with them (easier by outright 
+rejecting them, or by suggesting ways to modify the changes so they are 
+acceptable).
+
+What specifically do you have in mind as being not suitable for upstream?
+
+>   5. Are there any maintainers or subsystem-specific mailing lists I 
+> should include when submitting these patches?
+> 
+
+Use scripts/get_maintainer.pl on your patches, and Cc/To most/all people 
+and mailing list listed there.
+
+This is done automatically by b4[1] with `b4 prep --auto-to-cc`.
+
+[1] https://b4.docs.kernel.org/en/latest/contributor/overview.html
+
+> Any guidance or best practices for upstreaming vendor patches would be 
+> greatly appreciated. Thank you for your time and assistance.
+> 
+
+Good luck, have fun and looking forward to seeing patches on the mailing 
+list.
+
+Cheers,
+Quentin
