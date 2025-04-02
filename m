@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025BBC36018
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 23:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E68C36018
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 23:55:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6185881F4D;
-	Thu,  3 Apr 2025 01:53:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B3092810E8;
+	Thu,  3 Apr 2025 01:54:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qo4kp2JW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZZAeYyu1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13626810E8; Thu,  3 Apr 2025 01:53:47 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 8A26181DE3; Thu,  3 Apr 2025 01:54:58 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A54FC8035B
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 01:53:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E2D18035B
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 01:54:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2c1c9b7bd9aso160329fac.0
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 16:53:44 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so50129566b.3
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 16:54:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743638023; x=1744242823; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cQxPBDETowQMNHVcUax8qN3HP9CQj544TEhclZoXSe0=;
- b=qo4kp2JW1Um64PqIDDk790RZY2wENly6OQBFtcMHNrrpe9QwvY2w8QD4Rv4Rvreed6
- QKTzuPLaqBiJJpREqZr9nB4dperD7wLmXQucqP22m/DRc0+HM6KZsEYZhwUTw45cmCCJ
- KKktxAW08QgEgCjoG+iFVirURFC+q8WVzW+SM=
+ d=chromium.org; s=google; t=1743638095; x=1744242895; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=M/dTrQKIiuAR3Ey4C2ZvN2zohdTulmlRrobiGMdbWgA=;
+ b=ZZAeYyu1KThirq1Qs6RT4QflzmS8SJkHlBiipl3megOxoxInNmeSP2yi9fqRIozsxE
+ R86PNzE0+KvOFPGvgir5jNafwIftVHuuN4/Z7h50JSrGZDAmBW54p1vvXUKJ4PADvo0r
+ kPlfKCkItpt+UsfF9I0SddZzDBKwuxekidZ+o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743638023; x=1744242823;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cQxPBDETowQMNHVcUax8qN3HP9CQj544TEhclZoXSe0=;
- b=GcP2a211zEI0rNoyZP7/BTwZjvA7nkTjsPN7oLyn1fgHaU1iWCD74EUpwrgZe3QwUH
- EstmlRXS/Y8Aqv5YSu8wl6pqMoecukwWBfdgJPAu5xd1k6fJraE3xTpOe7FqlAXpIpBZ
- zEBtjYMij7DK7yLxYn2bHq9jL4x3+NyjuR4brGiyx3rTI4l+CXAIN8S1tAOxKEzzV+bW
- iF/LOkMVA1fdA89ryXKRv4r7JRftJequbTkZFZzyXyxXzIOThRElQvGO4u+QXfVimdiQ
- XXZP4Lxy41ZYANdPPYjeyBmR8untXvKSluKgeYA54qO5wKfTwU1ru1eZ9O59DEkRNSBR
- yfsg==
-X-Gm-Message-State: AOJu0YzCv09E1amHmp2kcy8gOOE60L95c6V3GmMccpH9PduY0PsApoCB
- R1snNbaOsT/xErisWsYk6vVAcMv22J1DB6vzCiaiCDgzeYMOmhYDRIGCKFckAc6i2SjHdtk8pCP
- c
-X-Gm-Gg: ASbGnctakwRsDJW4EH7dkILc70fbeI3S5zLaEI+3xH6rWYDPnMGAMWTOgg5Q6SbmecU
- ttYM3ciZ3SlwNW0wnRXjNYdebZ4dj+c58eng4U1M65F8a1OFYVjeBDsGmdoc+CDFffgvl2ilbRG
- jZ8/WyxNZhaiR78U+PmxZGD3wA4w1bN7ZhFvvfmXhpB5zHEzK29OpR6F11vzsNO7cQIQ2upypcZ
- QZiCoAcsA28slUmQ7H7GXwSDhR2ZnRVHksTrlydNKwIPdhR5fPdM5bwuuBT3/9UBQi0E4lfGMOM
- zoiwSs+G9qfRecWWGkwgfbUK0lriMkaAvqbjC41hFO6ch8vW0cRHOVpqUx8drvZ+DMr82ULdEjf
- JBFdfdA==
-X-Google-Smtp-Source: AGHT+IHPP4Yoju8lwonSnyQjP8lBbyyJrqhaTu9vriEl8biq6pDxjEA/W/+gdfCRtnv13e1ksK0KJg==
-X-Received: by 2002:a05:6870:9e45:b0:29e:2bbd:51ba with SMTP id
- 586e51a60fabf-2cbcf515fcamr11787043fac.9.1743638023311; 
- Wed, 02 Apr 2025 16:53:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc845469c1sm31993fac.8.2025.04.02.16.53.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 16:53:42 -0700 (PDT)
-Date: Wed, 2 Apr 2025 17:53:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2025.04-rc5 released
-Message-ID: <20250402235340.GF5495@bill-the-cat>
-References: <20250325020130.GF93000@bill-the-cat>
+ d=1e100.net; s=20230601; t=1743638095; x=1744242895;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=M/dTrQKIiuAR3Ey4C2ZvN2zohdTulmlRrobiGMdbWgA=;
+ b=h2HclT+XVRWrVMKKLLOVbTk/K+eOWcF9E1xDeiOmgKpb4R+/E+eHSp0Yj3fUx+rN+F
+ IWj6K2f25U0H9KRgE6bFEjDsB/67buEZdyryeaGuwMbtpaBSocftHJSBp7EhfXBKOW/+
+ iO8JLcNHM5gIGPmF+z4JdfPN3Vgg+OAvtZDT1oVXoyCc8k8O6cekr70e5R+XavkpEHO6
+ nCDVS5ipIV9D172CfUqjsE8TA8Qh5eHbIg2A4eYJYoECpPHjuTeePbti8okQvM2asSEh
+ sfcIEd7aSKixyBAbSTR2HDr90djoBAg8LEMjJA2IKST6l/Yg20ZGRhyESCLqBwV4UQEJ
+ ja3A==
+X-Gm-Message-State: AOJu0YxG6NMTyMPkb7ekGowpHIX8oyspdWg8HZne9ETXmhKkbN/ZILFY
+ g5AtuFsBirhhfMG0ExOaurjTYE8w4EsKvsLPBSOlSr8O84rXDsnTtHfEeS6mxtObrAC0a6bp5DC
+ g+iLPmz4nJnpodOR7+75UXrDcMZT6DFRHp9rQ
+X-Gm-Gg: ASbGncudT9W9jnwRP2PjdtT9/q8+DjS1TOBFbPOyv5u/ZOjMRzeD6lALjDkbM1lbddt
+ 3JwM3oOv36jVgmdHSMHuBFYS3/I4aYeKAiSo0Zhv6Soc3T1AWUHbyN82DlMMDRtsSlHeQb0Ww5f
+ jO6jw+7rjvBbpwS/KhStmIk+T6Bhv8
+X-Google-Smtp-Source: AGHT+IHGqyCVl023NkZAD52R6hfj8S2cmP02xDkmvWmhiLaQPZymq7LsKQjEaM6mGOQVkhuC27kzHoK7aMiiz6KmGRE=
+X-Received: by 2002:a17:907:1b10:b0:ac2:7a6d:c927 with SMTP id
+ a640c23a62f3a-ac738c23ea2mr1742607266b.50.1743638095436; Wed, 02 Apr 2025
+ 16:54:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sIjy5s/AvnnKCwK6"
-Content-Disposition: inline
-In-Reply-To: <20250325020130.GF93000@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-41-sjg@chromium.org>
+ <20250402142858.GT5495@bill-the-cat>
+ <CAFLszTiCgq6XqK7mVY9YWD6bjod3bWPtp_s2k7_WVgn8gVf5QQ@mail.gmail.com>
+ <20250402195033.GB5495@bill-the-cat> <20250402195656.GC5495@bill-the-cat>
+In-Reply-To: <20250402195656.GC5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 3 Apr 2025 12:54:42 +1300
+X-Gm-Features: AQ5f1JqrdYdkyoX3dHMzf9yn6ecqxGyd-AsP9s6vTv7_H27Am5OJ0S7hYvgy954
+Message-ID: <CAFLszTjPi5=ro_4n8oF+ZX_OtzvKxWZvz=ipmXCnEhysVZb9-w@mail.gmail.com>
+Subject: Re: [PATCH v5 40/46] boot: Support IO UARTs for earlycon and console
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,110 +92,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---sIjy5s/AvnnKCwK6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 3 Apr 2025 at 08:57, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Apr 02, 2025 at 01:50:33PM -0600, Tom Rini wrote:
+> > On Thu, Apr 03, 2025 at 08:22:44AM +1300, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 3 Apr 2025 at 03:29, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Sat, Mar 15, 2025 at 02:26:00PM +0000, Simon Glass wrote:
+> > > > > Update the string to take account of UARTs which are connected on I/O
+> > > > > ports, as on x86.
+> > > > >
+> > > > > Fix a typo in an error message in the same command, while we are here.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v3)
+> > > > >
+> > > > > Changes in v3:
+> > > > > - Add new patch to support IO UARTs for earlycon and console
+> > > > >
+> > > > >  boot/bootflow.c | 7 ++++---
+> > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
+> > > > >
+> > > > > diff --git a/boot/bootflow.c b/boot/bootflow.c
+> > > > > index 58a1afa7a75..4054a966af8 100644
+> > > > > --- a/boot/bootflow.c
+> > > > > +++ b/boot/bootflow.c
+> > > > > @@ -942,8 +942,9 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
+> > > > >       *buf = '\0';
+> > > > >       if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
+> > > > >               snprintf(buf, sizeof(buf),
+> > > > > -                      "uart8250,mmio32,%#lx,%dn8", info.addr,
+> > > > > -                      info.baudrate);
+> > > > > +                      "uart8250,%s,%#lx,%dn8",
+> > > > > +                      info.addr_space == SERIAL_ADDRESS_SPACE_IO ? "io" :
+> > > > > +                      "mmio", info.addr, info.baudrate);
+> > > > >       } else if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_PL01X) {
+> > > > >               snprintf(buf, sizeof(buf),
+> > > > >                        "pl011,mmio32,%#lx,%dn8", info.addr,
+> > > >
+> > > > I suppose we're well past the point where we can delete
+> > > > bootflow_cmdline_auto() itself because that's just going to lead us to
+> > > > trouble down the line (5 years from now when the kernel adopts a new
+> > > > preferred way to pass this info) and grows every platform by some amount
+> > > > of space every time we add something new here.
+> > >
+> > > Well firstly, why would you want to delete this command? It is very
+> > > useful to be able to change the cmdline.
+> > >
+> > > This command is only available with BOOTSTD_FULL, which is less than
+> > > 10% of boards.
+> >
+> > Because it's automatic non-obvious stuff. We should not be modifying the
+> > command line at all. Is it even documented that we're doing this?
 
-On Mon, Mar 24, 2025 at 08:01:30PM -0600, Tom Rini wrote:
+Yes, the command is documented. It only happens when you run the
+command. Otherwise the command line is not modified.
 
-> Hey all,
->=20
-> So it's release day and I have tagged and pushed things out. This will
-> be merged to -next shortly.
->=20
-> One thing to note is that just today a bug was reported due to a missing
-> 'fallthrough;' line and in turn we need to fix that in a number of
-> places and ensure it doesn't return. This will happen between now and
-> the release as I think it's clear enough.
->=20
-> While we have been having regular meetings after an -rc release, I have
-> assorted personal appointments this week and need to reschedule for next
-> week instead.
+As you know U-Boot has bootargs but that doesn't work with extlinux
+and the like, so we have this command, which does.
 
-The community meeting was Tuesday, sorry for the delay, and what follows
-are my notes from it.
+>
+> To be clearer, the more I review your changes, the more I see a blurred
+> line that I do not this is good between "I found this handy while
+> doing something" and "This is a good generic design / feature".
+>
+> That it can be annoying at times to add the debug uart information is
+> not a new unique problem. It's something that's generally normally
+> solved. I assume you hit this on x86 where it's more annoying than most.
+> But a generic feature it should not have been.
 
-- I gave the general status of the -rc5 release and noted the "DHCP
-  bootdev hunt" regression that was reported and would be handled for
-  the release.
-  - Ilias noted that capsule update + mbedTLS doesn't work, but it was
-    unclear what exactly the root cause was. However, that capsule tests
-    aren't running in CI is another part of the problem, and we need to
-    get those running again. I noted that we also need to get some of
-    the pytest changes that modify how / which filesystem images we make
-    (along with exFAT support) need to get merged before we touch some
-    of that code more.
-- I also noted that given a recent thread from a dts/upstream change, we
-  need to be clear that it's expected to call git send-email with
-  --suppress-cc=3Dall for those patches as to not spam the kernel people.
-- I mentioned we now have social media accounts, asked if Jesse T would
-  do the Instagram account that we now have as they're active there. I also
-  noted that we have an account on X, and that both Instagram and X are
-  linked from the website. Jesse noted that these exist because they
-  asked about the broken links on IRC and so Simon made accounts. We
-  discussed if maybe it would be best to just remove these accounts, or
-  to have someone actively use them. After asking Simon for some
-  feedback on this as he owns the website, we agreed to drop the X link
-  and work with Jesse for access to the Instagram account. Karen noted
-  SFC is on Mastodon and that works for SFC.
-- Andre brought up series to fix missing "fallthrough" issues. The first
-  part is now posted and reviewed, and wondered if the next part (as CI
-  now gets farther and fails more) should be done in the same way. I
-  said yes, especially since this next batch will have more
-  platform-specific issues that need to be reviewed by the appropriate
-  custodian.
-- Ilias brought up the MMU patch series again. It turns out that a bunch
-  of platforms have copy/pasted seemingly some wrong code around MMU
-  setup and so we need to do something about fixing that up. It's an
-  invalid, reserved but currently non-problematic flag. Adding a print
-  warning may get people to address them. Will have a warning patch for
-  -rc1.
-- Ilias wants to get more tests running, including capsule updates.
-  Everyone agrees in general with running more tests.
-  - Specifically, Ilias wants to get more TPM tests written and running,
-    but doesn't think extending sandbox TPM is the effort when we have a
-    specification-validated TPM we can use in QEMU and that validation
-    is extremely important. As a long term goal, he would like to move
-    to having the ACS (architecture compliance suite) tests run, when
-    possible. But it's extremely slow (8 hours was mentioned) and not
-    quite ready from ARM either. I noted we can do things on a tag only,
-    and this test would be a good candidate. For the TPM side, Simon
-    disagrees about it not being worth the effort for sandbox, but won't
-    NAK, He noted that the Chromebook Coral TPM tests don't work. Ilias
-    agreed to work with him off-call on these problems as a challenge is
-    that the CR50 in Chromebooks is not a 100% specification valid TPMv2
-    device. Andre noted TF-A has added TPM support to Pi, and Ilias
-    clarified it's something about an event log and is a bit different,
-    but does give some measurement. Ilias wants more TPM tests to be
-    able to verify some of these new potential security features that
-    are coming, ie bigger eventlog.
-- Jesse asked about setting some GD flags and how to set them, and is
-  arch_cpu_init/etc where it's best done today but, but sometimes they
-  need to set some earlier than that. Would it be better to do this via
-  Kconfig or no? I noted that we have added more hooks as needed. Would
-  arch_cpu_init be ok? I said yes. Jesse will post a patch.
+I'm not even sure why you wrote this email, then.
 
---=20
-Tom
+U-Boot has all the information needed to set up the UART correctly and
+it is extremely tedious to do otherwise. This is a bootloader, so it
+needs to support kernel development. I actually think this is a really
+cool feature.
 
---sIjy5s/AvnnKCwK6
-Content-Type: application/pgp-signature; name="signature.asc"
+At this point, I really would encourage you to look at what you are
+trying to achieve with all these 'no' emails. Collected together they
+create a substantial corpus of negativity. Why not just start saying
+'yes' instead of 'no' for a while and see how things go?
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmftzf8ACgkQFHw5/5Y0
-tyxVSQv/bGFckbNqHRWZKOHuyjkwtRGhqEQ9t5PLfcCt1HDTpsZS17xj3WjKpm2M
-AQPJWDjdycMZ2t5DMoc8foOCFJxQHdX4oCqdSADabkiSjemj59EdlV8idvFhp4QC
-F5nT/y/lPcNENESimIRsUItqOCOwxi55Azi8CRQyOt9I54FNC2ZVdQvnegP8aDcY
-Ez331pfMYB4sKp6dmUFekYPEvL2ojkCcuncWzTwD6yfmAAIgqMXggyL8fZSN9qgQ
-BfaOh/XFKWLVzT9PnqMTubtXl0kmCxOL6ohfUtyxVMCt6fi2EDNYj/HmnwF7yFP7
-utHF4BmfuML4dHQ/GhT+hEjIywiVlg2itescYFyChtQEFWP1sQalXIuntCeeaeWk
-/wuPf2Ntn4uBcsp13t5hB6TP+Eqa6NgPCwOUqqbA1do706O1AJiKdbtbcqJgYgOD
-KQjY2SyrF8jodctSSovhrc/yigGGaMVyv6ogO4agSKmFhYlxR3oYGV7dugDfsVys
-UrYAaXM4
-=Jp/n
------END PGP SIGNATURE-----
-
---sIjy5s/AvnnKCwK6--
+Regards,
+Simon
