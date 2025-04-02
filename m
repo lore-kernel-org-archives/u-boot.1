@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B2CC36014
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2ABC28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6758481703;
-	Wed,  2 Apr 2025 11:04:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 6084180FDA;
+	Wed,  2 Apr 2025 11:32:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="RMl9vrfr";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DkwImkQg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F174781CF0; Wed,  2 Apr 2025 11:04:31 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ id 5D97C81E6C; Wed,  2 Apr 2025 11:32:16 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C8CE80584
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 11:04:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id B567580584;
+ Wed,  2 Apr 2025 11:32:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1743584634;
- bh=6MhLua3spISVM2VVka5eJ5uQCaNuua1QGylDhZs7vKY=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=RMl9vrfre7dWojjoh2QTshbyECeozpMDRrK2jeLc+frAg4OQkZaPei6MP7dU4S+jM
- Dbt0rny88MrlpIqNaLgKfMdaUv3fTNUV8Caf8QqExqRXFI8XJ070C2XFQlY8zMua3b
- CJm6I6K2BUU5QFWql/rg4Mlza94vEMr7lJMNXnnULclGnlPlFZDljViNTSrYUOZOlA
- GQWSgog3KgxkmCiGsnOUUMn+bcTIrSUE6tLpUo922xJy91t5oV0WuQvOCpUfOJXNtc
- 6+Siqz3vODxuJkN5BXgOn5vSej+24ABLfE67RQa5W6o8PFQRT6O7L1eLHVykWi50ZF
- JPoXKh0WxZ00Q==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Michael Walle <mwalle@kernel.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Marek Vasut <marex@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Benedikt Spranger
- <b.spranger@linutronix.de>, Simon Glass <sjg@chromium.org>, John Ogness
- <john.ogness@linutronix.de>, Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: RE: [PATCH] tiny-printf: Add support for upper case hex values
-Thread-Topic: [PATCH] tiny-printf: Add support for upper case hex values
-Thread-Index: AQHbmYJXS9LfVQSOoEantzWfxGK4yLN72G+AgAAkmwCAEnYcAIAAcb5ggAEAtgCAAD/j0A==
-Date: Wed, 2 Apr 2025 09:03:53 +0000
-Message-ID: <de267e9022f844cf83bfd3e284c67955@dh-electronics.com>
-References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
- <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
- <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
- <D8V6D9S6CBRH.3LRHNU4XCVF14@kernel.org>
- <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
- <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
-In-Reply-To: <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5E4B75C6173;
+ Wed,  2 Apr 2025 09:29:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3456C4CEDD;
+ Wed,  2 Apr 2025 09:32:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1743586331;
+ bh=w4HoQfgwIGV5WRRxIH0AhBqRVbJ10thihbO0tXBPqjk=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=DkwImkQgNaFxXId75wNa1RQgyRqV1cipPhqPv9HSHS6GXdbeJWY+NrYoT0wrkaMyn
+ mKb2gGWYpIqJUWlQUjMdHJjDB+fox8XyxNaAOxk3+3MpVqwCwDqtjCGjui3oJmeJ2I
+ V4jRyQNOk0e5456W0g5Qf5G6xgbpWzlj8hatCjarGk8AfxhFM9R2JRtwkZDAd4TG9u
+ QsBONCiZqhtrAtc7dVCQGZvsFlmuhd2EvM+F10q5PxW+2vdtuAttqzZw/Hu1d9kTIU
+ Imr9Rr0PeglSsoxx2Pt5qUpCtnsEKPGQtG+Yq+QLrg8G0MN0zBQsrFU7pmpbypnFwI
+ TTim5HvOEkSnw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, U-Boot Custodians
+ <u-boot-custodians@lists.denx.de>
+Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in
+ the project)
+In-Reply-To: <20250401171822.GM5495@bill-the-cat>
+References: <CAFLszTgtdETGCYYtH3ni7Wv0W6Ckv1SoZRG8djQ-3uKBn1YZWQ@mail.gmail.com>
+ <20250304152909.GZ2640854@bill-the-cat>
+ <CAFLszTiNQSs51iE=rcM7qQjipmWCKZiPX+gV2ztb+ZAB8m2MBw@mail.gmail.com>
+ <20250305162236.GT2640854@bill-the-cat>
+ <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
+ <20250307144631.GN2640854@bill-the-cat>
+ <20250310155336.GJ2640854@bill-the-cat>
+ <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
+ <20250331155144.GX93000@bill-the-cat>
+ <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+ <20250401171822.GM5495@bill-the-cat>
+Date: Wed, 02 Apr 2025 11:32:08 +0200
+Message-ID: <8734equcx3.fsf@baylibre.com>
 MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,72 +79,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWljaGFlbCBXYWxsZSA8bXdhbGxlQGtlcm5lbC5vcmc+DQpTZW50OiBXZWRuZXNkYXks
-IEFwcmlsIDIsIDIwMjUgOTowMiBBTQ0KPj4+PiBUaGUgaXNzdWUgaXMgdGhhdCBkaXNhYmxpbmcg
-VElOWV9QUklOVEYgbWF5IG5vdCBiZSBwb3NzaWJsZSAoc2l6ZQ0KPj4+PiBjb25zdHJhaW50cykg
-YW5kIHNvbWUgY29kZSBpcyBjb21waWxlZCBmb3IgZGlmZmVyZW50IHN0YWdlcyBhbmQgcGVvcGxl
-DQo+Pj4+IHR5cGljYWxseSBkb24ndCBjaGVjayB3aGV0aGVyIHRoZSBmb3JtYXQgdXNlZCBpbiBw
-cmludGYgaXMgdmFsaWQgd2l0aA0KPj4+PiB0aW55X3ByaW50Zi4gSSd2ZSBoYWQgdGhpcyBpc3N1
-ZSBhbHJlYWR5IGluIHRoZSBwYXN0LCBJIHZhZ3VlbHkgcmVjYWxsDQo+Pj4+ICJjb21wbGFpbmlu
-ZyIgYWJvdXQgaXQgb24gSVJDLg0KPj4+DQo+Pj4gWWVzLCBJJ3ZlIHN0dW1ibGVkIG9uICIlcGEi
-IHdpdGggdGlueSBwcmludGYgKGkuZS4gaW4NCj4+PiBkcml2ZXJzL3BpbmN0cmwvcGluY3RybC1z
-aW5nbGUuYykgd2hpY2ggaXMgcHJpbnRpbmcgdGhlIHZlcnkgd3JvbmcNCj4+PiB2YWx1ZSwgYWN0
-dWFsbHkgOikgU28gcHJpbnRpbmcgYW55dGhpbmcgdW5rbm93biBhcyAnPycgd291bGQgcmVhbGx5
-DQo+Pj4gaGVscCBoZXJlLg0KPj4NCj4+IFNvbWV0aGluZyBsaWtlIHRoYXQgd291bGQgaGVscDoN
-Cj4+IGRpZmYgLS1naXQgYS9saWIvdGlueS1wcmludGYuYyBiL2xpYi90aW55LXByaW50Zi5jDQo+
-PiBpbmRleCA0OGRiN2IxZjc4Zi4uYjkxOGQ2ZDczODYgMTAwNjQ0DQo+PiAtLS0gYS9saWIvdGlu
-eS1wcmludGYuYw0KPj4gKysrIGIvbGliL3RpbnktcHJpbnRmLmMNCj4+IEBAIC0yODAsNiArMjgw
-LDEyIEBAIHN0YXRpYyBpbnQgX3ZwcmludGYoc3RydWN0IHByaW50Zl9pbmZvICppbmZvLCBjb25z
-dCBjaGFyICpmbXQsIHZhX2xpc3QgdmEpDQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgd2hpbGUgKGlzYWxudW0oZm10WzBdKSkNCj4+ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZtdCsrOw0KPj4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOw0KPj4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICB9IGVsc2Ugew0KPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGlmIChmbXRbMF0gIT0gJ1wwJyAmJiAoZm10WzBdID09ICdhJyB8fCBmbXRbMF0gPT0g
-J20nIHx8DQo+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmbXRbMF0gPT0gJ00nIHx8IGZtdFswXSA9PSAnSScpKSB7DQo+PiAr
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmbXQrKzsNCj4+
-ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdvdG8gdW5z
-dXBwb3J0ZWQ7DQo+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfQ0K
-PiANCj4gSSB3b3VsZG4ndCBtaW5kIHByaW50aW5nIHRoZSBwb2ludGVyIGZvciAlcFttTUldLCBi
-dXQgJXBhIHByaW50cyB0aGUNCj4gKmNvbnRlbnQqIG9mIHRoZSBwb2ludGVyIHdoaWNoIGlzIHJl
-YWxseSBjb25mdXNpbmcuIEkuZS4gaW4NCj4gcGluY3RybC1zaW5nbGUuYyB0aGUgcmVnIHZhbHVl
-IHBhaXJzIGFyZSBwcmludGVkIGxpa2UNCj4gDQo+ICAgZGV2X2RiZyhkZXYsICJyZWcvdmFsICVw
-YS8weCUwOHhcbiIsICZyZWcsIHZhbCk7DQo+IA0KPiB3aXRoIHJlZyBiZWluZyBhIHBvaW50ZXIg
-dG8gYSBwaHlzaWNhbCBhZGRyZXNzLiBTbyB3aXRoIHRpbnlfcHJpbnRmDQo+IHRoZSBhZGRyZXNz
-IG9mIHJlZyAod2hpY2ggaXMgYSBwb2ludGVyIHRvIHRoZSBzdGFjaykgaXMgcHJpbnRlZCBpbg0K
-PiB0aGlzIGNhc2UuDQo+IA0KPiBJIGRvbid0IHRoaW5rIHdlIGNhbiBwcmludCAlcCB3aXRob3V0
-IHB1dHRpbmcgbW9yZSBsb2dpYyBpbnRvIHRoZQ0KPiBkZWNvZGluZy4gSSB0aGluayB0aGUgY3Vs
-cHJpdCBoZXJlIGlzIHRoZSBmYWxsdGhyb3VnaCB0byAleCwgd2hpY2gNCj4gdGhlbiBsZWFkcyB0
-byB0aGUgY29uZnVzaW5nIGJlaGF2aW9yIHNob3duIGFib3ZlLiBJTUhPIGlmIHdlIHdhbnQgdG8N
-Cj4gYXZvaWQgdGhhdCwgd2UnZCBoYXZlIHRvIG1ha2UgJXAgZW50aXJlbHkgdW5zdXBwb3J0ZWQu
-DQo+IA0KPiBkaWZmIC0tZ2l0IGEvbGliL3RpbnktcHJpbnRmLmMgYi9saWIvdGlueS1wcmludGYu
-Yw0KPiBpbmRleCBmYWY1NWQ3ZjMyNy4uODE0N2ZmYTJjMWIgMTAwNjQ0DQo+IC0tLSBhL2xpYi90
-aW55LXByaW50Zi5jDQo+ICsrKyBiL2xpYi90aW55LXByaW50Zi5jDQo+IEBAIC0yNjksMjEgKzI2
-OSwxOCBAQCBzdGF0aWMgaW50IF92cHJpbnRmKHN0cnVjdCBwcmludGZfaW5mbyAqaW5mbywgY29u
-c3QgY2hhciAqZm10LA0KPiB2YV9saXN0IHZhKQ0KPiAgCQkJCQkJZGl2X291dChpbmZvLCAmbnVt
-LCBkaXYpOw0KPiAgCQkJCX0NCj4gIAkJCQlicmVhazsNCj4gKyNpZiBDT05GSUdfSVNfRU5BQkxF
-RChORVQpIHx8IENPTkZJR19JU19FTkFCTEVEKE5FVF9MV0lQKSB8fCBfREVCVUcNCg0KV2hhdCBp
-ZiB3ZSBmaW5lLXR1bmUgdGlueXByaW5mIHZpYSBjb25maWcgaGVyZT8NCkZvciBleGFtcGxlIFNQ
-TF9VU0VfVElOWV9QUklOVEZfUE9JTlRFUl9TVVBQT1JUIGFuZA0Kc2VsZWN0IGl0IGJ5IE5FVCBv
-ciBORVRfTFdJUC4gSWYgc29tZW9uZSBuZWVkcyBpdCwNCnRoZSBwb2ludGVyIG91dHB1dCBjYW4g
-YmUgZW5hYmxlZCwgb3RoZXJ3aXNlICc/JyBmb3INCnVuc3VwcG9ydGVkIGlzIG91dHB1dC4NCg0K
-PiAgCQkJY2FzZSAncCc6DQo+IC0JCQkJaWYgKENPTkZJR19JU19FTkFCTEVEKE5FVCkgfHwNCj4g
-LQkJCQkgICAgQ09ORklHX0lTX0VOQUJMRUQoTkVUX0xXSVApIHx8IF9ERUJVRykgew0KPiAtCQkJ
-CQlwb2ludGVyKGluZm8sIGZtdCwgdmFfYXJnKHZhLCB2b2lkICopKTsNCj4gLQkJCQkJLyoNCj4g
-LQkJCQkJICogU2tpcCB0aGlzIGJlY2F1c2UgaXQgcHVsbHMgaW4gX2N0eXBlIHdoaWNoIGlzDQo+
-IC0JCQkJCSAqIDI1NiBieXRlcywgYW5kIHdlIGRvbid0IGdlbmVyYWxseSBpbXBsZW1lbnQNCj4g
-LQkJCQkJICogcG9pbnRlciBhbnl3YXkNCj4gLQkJCQkJICovDQo+IC0JCQkJCXdoaWxlIChpc2Fs
-bnVtKGZtdFswXSkpDQo+IC0JCQkJCQlmbXQrKzsNCj4gLQkJCQkJYnJlYWs7DQo+IC0JCQkJfQ0K
-PiAtCQkJCWlzbG9uZyA9IHRydWU7DQo+IC0JCQkJLyogbm8gYnJlYWsgKi8NCj4gKwkJCQlwb2lu
-dGVyKGluZm8sIGZtdCwgdmFfYXJnKHZhLCB2b2lkICopKTsNCj4gKwkJCQkvKg0KPiArCQkJCSAq
-IFNraXAgdGhpcyBiZWNhdXNlIGl0IHB1bGxzIGluIF9jdHlwZSB3aGljaCBpcw0KPiArCQkJCSAq
-IDI1NiBieXRlcywgYW5kIHdlIGRvbid0IGdlbmVyYWxseSBpbXBsZW1lbnQNCj4gKwkJCQkgKiBw
-b2ludGVyIGFueXdheQ0KPiArCQkJCSAqLw0KPiArCQkJCXdoaWxlIChpc2FsbnVtKGZtdFswXSkp
-DQo+ICsJCQkJCWZtdCsrOw0KPiArCQkJCWJyZWFrOw0KPiArI2VuZGlmDQo+ICAJCQljYXNlICd4
-JzoNCj4gIAkJCQlpZiAoaXNsb25nKSB7DQo+ICAJCQkJCW51bSA9IHZhX2FyZyh2YSwgdW5zaWdu
-ZWQgbG9uZyk7DQo+IEBAIC0zMTAsNiArMzA3LDggQEAgc3RhdGljIGludCBfdnByaW50ZihzdHJ1
-Y3QgcHJpbnRmX2luZm8gKmluZm8sIGNvbnN0IGNoYXIgKmZtdCwgdmFfbGlzdCB2YSkNCj4gIAkJ
-CWNhc2UgJyUnOg0KPiAgCQkJCW91dChpbmZvLCAnJScpOw0KPiAgCQkJZGVmYXVsdDoNCj4gKwkJ
-CQlvdXQoaW5mbywgJz8nKTsNCj4gIAkJCQlicmVhazsNCj4gIAkJCX0NCg0KUmVnYXJkcw0KQ2hy
-aXN0b3BoDQo=
+On mar., avril 01, 2025 at 11:18, Tom Rini <trini@konsulko.com> wrote:
+
+> On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
+>> Hi Tom,
+>> 
+>> On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
+>> >
+>> > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
+>> > > Hi Tom,
+>> > >
+>> > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
+>> > > >
+>> > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
+>> > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
+>> > > > [snip]
+>> > > > > > Again, back to this thread, if you want me to migrate things, consider
+>> > > > > > applying the sunxi patches as I have described above. I will then look
+>> > > > > > at the next target for bootstd. But while you hold this up, I cannot
+>> > > > > > move forward with more bootstd migration. It doesn't seem that much to
+>> > > > > > ask.
+>> > > > >
+>> > > > > I will take another look at what's still relevant. But I believe it's
+>> > > > > still blocked on the fact that it changes behavior and breaks users.
+>> > > >
+>> > > > In details:
+>> > > >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
+>> > > >
+>> > > > Now that the underlying BLK problem is resolved, this can just be
+>> > > > dropped I believe. Removing the BLK dependency from BOOTSTD can happen
+>> > > > when you're supporting a flow that lacks a BLK device entirely. This
+>> > > > would be another reminder as to why putting unrelated changes in a
+>> > > > series is a problem.
+>> > >
+>> > > OK, then just don't apply this patch. Problem solved?
+>> >
+>> > Well, for a hypothetical v6 you would not include it, sure.
+>> >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-3-sjg@chromium.org/
+>> > > >
+>> > > > This is fine.
+>> > > >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4-sjg@chromium.org/
+>> > > >
+>> > > > This is not fine. This is also not a sunxi problem. It means that we
+>> > > > should drop bootmgr from rockchip, where the conversion has already
+>> > > > taken place, and would need to drop it from future conversion too.
+>> > > > Neither of which are desirable changes.
+>> > >
+>> > > Why do you say that? I don't understand how this relates to rockchip
+>> > > or why we would need to drop bootmgr from that.
+>> >
+>> > Then you don't have enough of a grasp of the details of the area you're
+>> > trying to solve problems in? Or maybe you need to refresh yourself on
+>> > the details of the area you're trying to work in.
+>> 
+>> Or perhaps there isn't a problem? The sunxi case is special because we
+>> have a FEL boothmeth. That isn't present on rockchip, for example.
+>
+> Again, you seem to have forgotten what the problems with the series
+> were.
+>
+>> > > > This patch in particular is
+>> > > > where we have the note:
+>> > > >
+>> > > > "Yes, the introduction of boot standard changed the boot order and
+>> > > > specifically deprioritizing scripts is unexpected."
+>> > > >
+>> > > > Which should have had more attention than it did.
+>> > >
+>> > > From memory the scripts are a fallback used when the other things
+>> > > don't work, so that was the decision I made at the time.
+>> >
+>> > The key point being we changed behavior that others depended on, and
+>> > didn't document it well and didn't make sure the change would work for
+>> > them either.
+>> >
+>> > > > This is the thread that to me spelled out in details where the
+>> > > > conversions are now blocked. We changed behavior and that in turn breaks
+>> > > > users that have come to rely on ordering.
+>> > >
+>> > > I don't know what action to take on that comment. We cannot have 100%
+>> > > backwards compatibility with the scripts, which after all weren't even
+>> > > documented. But it is very close.
+>> >
+>> > You need to get feedback from the people you want to migrate from the
+>> > scripts and ordering and rely on to something else and see what works
+>> > for them.
+>> >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-5-sjg@chromium.org/
+>> > > >
+>> > > > Is an alternative to the above which then turned in to a discussion that
+>> > > > I would very briefly summarize as "no discussions were had between
+>> > > > stakeholders before integrating efi bootmgr with bootstd".
+>> > > >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-6-sjg@chromium.org/
+>> > > >
+>> > > > This is fine, but only relevant once migration happens.
+>> > > >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-7-sjg@chromium.org/
+>> > > >
+>> > > > If Andre is fine with this, this is fine.
+>> > > >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-8-sjg@chromium.org/
+>> > > >
+>> > > > This is a generic bugfix. I will take this to next today.
+>> > > >
+>> > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-9-sjg@chromium.org/
+>> > > >
+>> > > > If Andre is fine with this, this is fine.
+>> > >
+>> > > Well, is he? I thought he was. Can you check?
+>> >
+>> > You're free to. It's one of the innumerable examples of why when you
+>> > group multiple things in a series and there's problems with another part
+>> > of the series, unrelated changes get dropped.
+>> 
+>> It would be easier for me if you could apply the patches as I've suggested.
+>> 
+>> But if you are willing to apply these patches and just want me to send
+>> the series again without the BLK and RFC patches, I can do that.
+>> Please let me know either way.
+>
+> Again, you should:
+> - Take the non-bootstd sunxi enhancements, rebase them to next and post
+>   for Andre. By themselves. This way they won't get stuck.
+> - You should work with Heinrich to come up with something that handles
+>   efi bootmanager and bootstd without breaking how our actual project
+>   users use us.
+>   There's no reason to migrate *more* platforms until we have this
+>   fundamental problem sorted out.
+> - You should work with any FOSS distributions to get their feedback on
+>   what would make their life easier, from a user of U-Boot perspective.
+>   bootstd won't be useful if it's not something our users want to use.
+
+I can't speak for other distributions but for Android, it seems that the
+direction is to use EFI boot via an excutable that implements the Android
+bootflow. This is named GBL, and here are some pointers about it:
+- https://android.googlesource.com/platform/bootable/libbootloader/+/refs/heads/main/gbl/README.md
+- https://lpc.events/event/18/contributions/1704/attachments/1550/3231/Android%20Generic%20Boot%20Loader.pdf
+- https://baylibre.com/android-bootflow-experiments-with-u-boot-and-gbl/
+
+So in my opinion, at least for Android, bootmeth_android (bootstd) will
+be deprecated in favor of EFI boot + GBL.
+
+>
+> -- 
+> Tom
