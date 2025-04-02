@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757FAC36018
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 19:22:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD62C3601B
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 19:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2605982063;
-	Wed,  2 Apr 2025 21:22:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D580820B0;
+	Wed,  2 Apr 2025 21:23:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RN6WXnMf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lsl+OCYn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0C088205A; Wed,  2 Apr 2025 21:22:54 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 8CA938206E; Wed,  2 Apr 2025 21:23:05 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5401B81F44
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 21:22:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5391381F66
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 21:22:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ac3fcf5ab0dso19642666b.3
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 12:22:52 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac345bd8e13so20483366b.0
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 12:22:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743621772; x=1744226572; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743621779; x=1744226579; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pvmtak8AcYEiqqcKYPGHVpxZ/BVY2Gr5xublHlPJN20=;
- b=RN6WXnMfwUqejEP50RrJ1d6IJBU8m0ZfNu6mAoiZPy/3mvG9PzSAdwIGqOGY8a2Uzs
- bzCNMT0q4q5oHJj5Fw4H8ifH+V8eJhtUCC2MIyvT0bbIGIYq+YpUaja96nhqOtITPVN+
- euFDpedM/QmU+1vwMIhzbiZkB+WeoEhhCVDCE=
+ bh=O4Q/mBkp/zByKNlY6hwmGMG/aOlqmbz/JBNEho5LNjs=;
+ b=lsl+OCYn8s0f4vgT+1n+TVi9gfBC1z5r4hOo5d4aw/iIibGAnBgBqF/lTrDrljVNXV
+ Mmf8MZ52Ar+1KyJR1t48oroUuJ8Go3AOTAWKsdQP6e2sPjSHtjMOdelDmGnZsZg4iSlW
+ 6EOc9oWo+3HxRnBoPpbHhRSuCCyK80nqY6Ndc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743621772; x=1744226572;
+ d=1e100.net; s=20230601; t=1743621779; x=1744226579;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Pvmtak8AcYEiqqcKYPGHVpxZ/BVY2Gr5xublHlPJN20=;
- b=rSFyfXVW2J/s+lZnuy/Jckb+Urb8GOj8z7L/2liabXM4vQ0+IssiSFX8Z2YHhBgJDK
- MHD9RKn+XRmdPAn0Rft5AUdlet3GGLkNSuUinTXxnRtDwUZl8TNCU/F98XA2pjYMurF/
- WyLFc4bXFXY+xXOHikdTsaopcgefMvjFgC04XCkLtnDbQNuG017bUQZdf0N7U5WV4Amv
- 6ip+UT2FtyZ5fTUZvcPCzpR5TX6n7uXxbfeJ0t5hgBlj0p5k/qSvjiHZkJ2uMibCCgwv
- CW/GsXGp8KMLqScuIkwyn05FGDuoPd9jT76OEBxbK1sjiehl/IAUoGe80i+t2ozenOxr
- CPtw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXMulekPs3qtvA92O0xoQw34t+X2KUQDQIBrBTCzcAOwnUZCdiLYC9xXKScZIOVz+5sinUjA4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1r/clCJ5xbZ0Chc8k4TeD+S4Oompc7XWwA2Or/NIbiRV1oVWa
- qWWWrK0LP1p34rWEo0jxXK+ZBr34TPQz8yfxLkUmkM/bk8Et0Uaq36lSDjDgAE5DH0NIoHTHHi8
- ogMH+rLENieleFKZp74FNZvE+jxPlUIpDpIfNxqnTy72u0FvZtA==
-X-Gm-Gg: ASbGncvge6/C8FUvuMgWl6NlZDhJNcPZqeV4OKVsp2rEIe0pHj8c4RaBDT0R/0muKQl
- ENev3/8JlNXreSTlCPB5JLzlfsnHGRpdbOPxDuUtujPQPcMNBhV0+hbrTeTx77YKSYO9h2H7N5X
- oiSYU4uNujcQN0mYK33vipS1ruL7g+
-X-Google-Smtp-Source: AGHT+IFsVYO+Ye6TPKAnCp+8X8MAGHkE+psy3EOj2G74sLCEsqiNnCjapDaJkgh0cQQSLm2rEfIhrFDdzZCfcKySsRs=
-X-Received: by 2002:a17:907:6e88:b0:ac4:5f1:a129 with SMTP id
- a640c23a62f3a-ac7a16c1307mr290043966b.15.1743621771491; Wed, 02 Apr 2025
- 12:22:51 -0700 (PDT)
+ bh=O4Q/mBkp/zByKNlY6hwmGMG/aOlqmbz/JBNEho5LNjs=;
+ b=FlScmMEZBcii98uG/9lDXhvX94MZYK0JfemqE6DL6KZCxrXFdxcpUk60nd+CtRWKvF
+ 9tEPGI6ZnVRCfbnRiKD3JqfkYzUZqV7gWNa1Bue4Kpf2vXkVNVgseDvaeRB4YitTlD+9
+ DgbQe1W6x3sW78AHYt8NN3c+r7AbBzj8DoTqEiAZL9rdaLULmVshF4oPKV7MZNUlaA5K
+ PKE8tEWNDqNSWGrK2rNoJEdEI1peGYYL2R/onidfNp7GZQGVOonmlMPMW1kKZpNLyjBI
+ AhuRO7EYLtQ2h8WjJuFKYKwcfZVM8V0S4KEu6bqG+UBHuxVb8pmzTA59fYznGdw6Zv0N
+ GQcw==
+X-Gm-Message-State: AOJu0YywOAcILyDrCdeAqRc7horH3Ccpr5Y/XlkRchg8v+IL3U5N34wO
+ cQmQc4FNnH4TUTj2ZpVxKkiawdceLywMGPjP6jb0Y+xFKFkKNHLGwfg85O59ikX0Zuq+FfHlV6F
+ HFhFkThW875qkGFCeGFsIRTxEV3yiritSjCDg
+X-Gm-Gg: ASbGncuq6hb1vhu/G+TBmdFK8IxXynXmF2L3zezTj9SfHfHzbRzcxHPg364SnCqrmKi
+ n5gsaJj1QZ485PG3D7G3gObvvlSGdkPF4aa9ZvMCmgCR6Zpz6tLnUrOkjjxqqxqxNcvnu1el66i
+ Ecc5wizuZK9UasdqMk6D7VvnAXJyaQ
+X-Google-Smtp-Source: AGHT+IGYcrOsl+LGd0jy9uM2n9EkKs4X8eahCpxaEf0VHVvFl6IYQdVv64IPWxkcHCckQptiMr3kewnwGN2paeDSqQE=
+X-Received: by 2002:a17:907:3d91:b0:ac7:970d:4341 with SMTP id
+ a640c23a62f3a-ac7a16c32acmr324101266b.19.1743621778503; Wed, 02 Apr 2025
+ 12:22:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250314215525.579655-1-jerome.forissier@linaro.org>
- <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
- <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
- <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
- <CAFLszThH3a7pLJG+zppu2qr5RwXAOk9Sj+S+RAT0B758hzOsyQ@mail.gmail.com>
- <9869b70e-0fec-4682-8ba0-c679df9c4603@linaro.org>
-In-Reply-To: <9869b70e-0fec-4682-8ba0-c679df9c4603@linaro.org>
+References: <20250315142643.2600605-1-sjg@chromium.org>
+ <20250315142643.2600605-41-sjg@chromium.org>
+ <20250402142858.GT5495@bill-the-cat>
+In-Reply-To: <20250402142858.GT5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 3 Apr 2025 08:22:37 +1300
-X-Gm-Features: AQ5f1Jo2wGjjRXhAeGe6uFM-t0DSgJqhnVMy6FD5tgwAAhfAZnhJSIqr_6s04z4
-Message-ID: <CAFLszTiAUh3O_8i1-zF2V4p2AW+0kmZsz2ft5phPcE0LzhQu4w@mail.gmail.com>
-Subject: Re: [PATCH 00/12] lwIP sandbox tests
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Date: Thu, 3 Apr 2025 08:22:44 +1300
+X-Gm-Features: AQ5f1Jp2VjST78XL5JLn25NyENsdSVX28kmcDRGED2QS_Vxm9DV7ulMSa1cZjZA
+Message-ID: <CAFLszTiCgq6XqK7mVY9YWD6bjod3bWPtp_s2k7_WVgn8gVf5QQ@mail.gmail.com>
+Subject: Re: [PATCH v5 40/46] boot: Support IO UARTs for earlycon and console
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,58 +90,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Tom,
 
-On Wed, 2 Apr 2025 at 20:48, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Thu, 3 Apr 2025 at 03:29, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On 4/1/25 19:55, Simon Glass wrote:
-> > Hi Ilias,
+> On Sat, Mar 15, 2025 at 02:26:00PM +0000, Simon Glass wrote:
+> > Update the string to take account of UARTs which are connected on I/O
+> > ports, as on x86.
 > >
-> > On Wed, 2 Apr 2025 at 05:33, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> >>
-> >> Hi Simon
-> >>
-> >> On Tue, 1 Apr 2025 at 18:42, Simon Glass <sjg@chromium.org> wrote:
-> >>>
-> >>> Hi Jerome,
-> >>>
-> >>> On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
-> >>> <jerome.forissier@linaro.org> wrote:
-> >>>>
-> >>>> Hi Simon,
-> >>>>
-> >>>> Any feedback on this series?
-> >>>>
-> >>>> https://patchwork.ozlabs.org/project/uboot/list/?series=448553
-> >>>
-> >>> No, not from me, but thanks for doing it!
-> >>
-> >> Aren't you maintaining the sandbox drivers?
+> > Fix a typo in an error message in the same command, while we are here.
 > >
-> > Yes, I'm listed as maintainer for lots of things. What sort of
-> > feedback are you looking for?
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v3)
+> >
+> > Changes in v3:
+> > - Add new patch to support IO UARTs for earlycon and console
+> >
+> >  boot/bootflow.c | 7 ++++---
+> >  1 file changed, 4 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/boot/bootflow.c b/boot/bootflow.c
+> > index 58a1afa7a75..4054a966af8 100644
+> > --- a/boot/bootflow.c
+> > +++ b/boot/bootflow.c
+> > @@ -942,8 +942,9 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
+> >       *buf = '\0';
+> >       if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
+> >               snprintf(buf, sizeof(buf),
+> > -                      "uart8250,mmio32,%#lx,%dn8", info.addr,
+> > -                      info.baudrate);
+> > +                      "uart8250,%s,%#lx,%dn8",
+> > +                      info.addr_space == SERIAL_ADDRESS_SPACE_IO ? "io" :
+> > +                      "mmio", info.addr, info.baudrate);
+> >       } else if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_PL01X) {
+> >               snprintf(buf, sizeof(buf),
+> >                        "pl011,mmio32,%#lx,%dn8", info.addr,
 >
-> Well, you were pretty explicit that those tests were important to
-> you ([1], [2] and especially [3]), so I was expecting some kind of
-> review/ack on your part. The series is currently assigned to me in
-> patchwork and I got zero comments, so I'm not sure what to do with
-> it. Unless someone objects I will probably add it to my next PR to
-> Tom for -next.
+> I suppose we're well past the point where we can delete
+> bootflow_cmdline_auto() itself because that's just going to lead us to
+> trouble down the line (5 years from now when the kernel adopts a new
+> preferred way to pass this info) and grows every platform by some amount
+> of space every time we add something new here.
 
-OK, good. Yes you can add my review tag to the series:
+Well firstly, why would you want to delete this command? It is very
+useful to be able to change the cmdline.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Thanks again for doing this.
-
->
-> [1] https://lists.denx.de/pipermail/u-boot/2025-February/581988.html
-> [2] https://lists.denx.de/pipermail/u-boot/2025-March/582435.html
-> [3] https://lists.denx.de/pipermail/u-boot/2025-March/583362.html
+This command is only available with BOOTSTD_FULL, which is less than
+10% of boards.
 
 Regards,
 Simon
