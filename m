@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA811C36018
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 23:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01B21C36018
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 23:55:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14CD681DE3;
-	Thu,  3 Apr 2025 01:55:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F9DE81FC0;
+	Thu,  3 Apr 2025 01:55:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GNTbYv2w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S663rpgz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 581A981F4D; Thu,  3 Apr 2025 01:55:12 +0200 (CEST)
+ id 6F94D81FE8; Thu,  3 Apr 2025 01:55:54 +0200 (CEST)
 Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
  [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B244E8035B
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 01:55:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCCAD8035B
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 01:55:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac2902f7c2aso48115566b.1
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 16:55:09 -0700 (PDT)
+ a640c23a62f3a-ac3fcf5ab0dso50396966b.3
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 16:55:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743638109; x=1744242909; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743638151; x=1744242951; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=q8yvcoxwtalbgXgnO9hYki3pRUkmOSYRRTp/hWWqpnw=;
- b=GNTbYv2wdBBvL29XdaMNZnKT3TP/P7jnep0PRPlKiBr8JKfkfhA6AzFzB0UvbkwG4u
- FQ1u7x5vSmVur+GWmkWsYZHMVclwRllLU0KAkjdkg9S/RgsQzyOGMAvaZxk103YzlK43
- b7mYWEpmC187IVWldjKiDvtreJTJauqBNe4sM=
+ bh=OaF+w/JX6DfomidbKhDHUYfI0nXIHvgY8BR4e6EQIKs=;
+ b=S663rpgz6iqw8ekTE5/PROlT0ZxKcErE7esGTNG9gFeQLjU2aqLJ6YaEwOiZJWEdJ2
+ /iGNPZ4yjIWkLtUrYkotRrlEkXmXiT6szxjBoS3wiknF8PToFLj9Knpoq7BoqEavpoMV
+ P1kY7k4lLNTdWG0BOQfWESbArgCYPwW3MvAvI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743638109; x=1744242909;
+ d=1e100.net; s=20230601; t=1743638151; x=1744242951;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=q8yvcoxwtalbgXgnO9hYki3pRUkmOSYRRTp/hWWqpnw=;
- b=qQ6GxEg0yWhbl+Y9jTsn1Dwmbk5FL6UlRHRmpzC8bmpqczQKf/dAqgeSi59IbeFH10
- O/aoBui14Uymaonlp0ehabd4N1+cuaJ/OgaIe1vmAoeBwHuYXFeHRHo6fZZL/e2/Klnv
- 2gq1Q90hZc/Z3uoolrjk0v7HQBP4KMf2lQJstgs6BMQTtyuHHbBqOcfray6jY9TNF5ve
- r2hNYoK5Ozt6fhqkswIACu6MprGFsElvA6ohtbWs9s9FTPpxpyfSAv1ZBxPpYL00EMZw
- 0oRz4Fx7IZgZ1r2NRZ0270SGUtQ4prnwcbQutmC6sp60iyKAYLWd5rv8eRSvmS2+dRRw
- /9Qw==
-X-Gm-Message-State: AOJu0YxqstrCNF5rBYEKkeySsFjLxPBAMs6G4xkankHDwAxlXdYTdaf+
- sKP6f4yhFx4xzQAiZ57FxzQYBdGr61Iz9aeR7aCbB7S4gtGxBr2FSGDgFI4oTktbZpJhquJsWvy
- A7L++CGZzQON6PYIw814Inb81rHBKF9xdhW6r
-X-Gm-Gg: ASbGnctNfWY6/MX3vxSrI3nHeKWrwB+VXo6sB97ypZzHj7D7/komRwkWOMZ82VsuQbz
- n5NVJhbSZPI+qoWHANb0lG72Ee0ZxMYnLf6QT1oMEUYmgPbWaSZrqm8mpZheUPbZg0vhjjWzXvB
- KhuHZuP2T/fvqStd+ZECewxkETRaws
-X-Google-Smtp-Source: AGHT+IE9zaLtM7HApl6wF/PmmGptO1zgQ8ap1WiFrlEqK7ZC6pdxOIjA8qzY/5/veWzFksjeFZlsNQl3ghT7W+qSh8Y=
-X-Received: by 2002:a17:907:3f07:b0:ac2:9093:6856 with SMTP id
- a640c23a62f3a-ac738bf65d7mr1706964066b.54.1743638108946; Wed, 02 Apr 2025
- 16:55:08 -0700 (PDT)
+ bh=OaF+w/JX6DfomidbKhDHUYfI0nXIHvgY8BR4e6EQIKs=;
+ b=xCdqKbCKxsGqPaRcEeKXLVgNzx4ymyWXxHuJ8FHaNuEXr67R1/aDjeG6f7Tkiz1wj9
+ 0n+TT+JLuP2tv3SFzBWVvIoSRbM7w0wFWRisi06xq69cINHvCYYSVixil4HiK/NQbTY8
+ FIR9OaT3bNakZ0gVkbVHUPP3KRq4n2S0HJFa/HlALwYT1tf7o2kkDwJpJniq+WeAvQjS
+ xJ4iNKQ+L8UeZG2Go/DO3WrHVYVssrTZqhdKoNoiRvw0Jc6gVtfFS0EXi9t83vCeXwzJ
+ RhXqc0iJz+GMWpp5RDimVQVVfrPkJlXjEmhjVpRGtY8XBGS8lcUcs8Ml1fGA6sStmbey
+ U/SQ==
+X-Gm-Message-State: AOJu0Ywuk5HpsjIf4/d7HA1X65G7MteumYylEMYd3Hz9OhmVQHXWX6UX
+ DcmSMw1eVKPnIJdntkFVjxf32bQY2afpdTm3I9uEqzLi5F85dRZ5zPIOklT5lG2DCX7UjQETUMO
+ PazgDwUuP8z60VBaWHW7Z3CR/dXTOA3eMWnW/
+X-Gm-Gg: ASbGncvTInd2K4xX1EHrBnlkCgnvTgKUI0sntqmFmkpYdYcSE5rJ8sHQaRCS2SxPaUU
+ QxS1ihdRXS8ZsjmA3/WpSSg3DUfiMoHlAFhQRrqbxfXfQsAozJRC8qV4OQWd62myr8wI2UnQ/6o
+ RQl4q+7mnDUqqHPMuiU2M4XfGQ8gHw
+X-Google-Smtp-Source: AGHT+IFW27Y7G//WFLf2s/cRiD2HnulY2zRg7r38njGVejoElzoF6QwmLUCA9bhpClqM8M0/UoVaX3rEw74r/9dbSBo=
+X-Received: by 2002:a17:907:6e88:b0:ac4:5f1:a129 with SMTP id
+ a640c23a62f3a-ac7a16c1307mr342060766b.15.1743638150989; Wed, 02 Apr 2025
+ 16:55:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250401172948.1236000-1-sjg@chromium.org>
- <20250401214113.GP5495@bill-the-cat>
- <CAFLszTjJuY9pQDerNuFcmkRuZbJU+EfPSBTrDyhjFMZg+usPnA@mail.gmail.com>
- <20250402150024.GU5495@bill-the-cat>
- <CAFLszTh-N2PSKPV_OHa63mEi1ar6Y9+p+A4UTfTbf329wOiN9w@mail.gmail.com>
- <20250402211100.GD5495@bill-the-cat>
-In-Reply-To: <20250402211100.GD5495@bill-the-cat>
+References: <CAFLszTiNQSs51iE=rcM7qQjipmWCKZiPX+gV2ztb+ZAB8m2MBw@mail.gmail.com>
+ <20250305162236.GT2640854@bill-the-cat>
+ <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
+ <20250307144631.GN2640854@bill-the-cat>
+ <20250310155336.GJ2640854@bill-the-cat>
+ <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
+ <20250331155144.GX93000@bill-the-cat>
+ <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+ <20250401171822.GM5495@bill-the-cat>
+ <CAFLszTjzxXW_SdDMbjPKitgQ6HSv3Vse6ANrr5QEr85A1byyHg@mail.gmail.com>
+ <20250402223534.GE5495@bill-the-cat>
+In-Reply-To: <20250402223534.GE5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 3 Apr 2025 12:54:55 +1300
-X-Gm-Features: AQ5f1Jo4oze4OCEFhWczxBwE_TOAI-IsqhotK_ZcdFkQxlLw5Pu_pB6EMnZ70e4
-Message-ID: <CAFLszThRQi2o5g5S+=eciOS8+XC8TV9AyBpYf9LQKmH-2kkmvw@mail.gmail.com>
-Subject: Re: [PATCH 00/13] video: Enhancements related to truetype and console
+Date: Thu, 3 Apr 2025 12:55:38 +1300
+X-Gm-Features: AQ5f1Jr5yY0huFW9lCJN_Ya91UP5soW7p4csvk47_-a6s-W1D2RvwKYF7_NAhPU
+Message-ID: <CAFLszTiftx2RpeNdBmms8e=HZm2YqH_sjea7Ot1gyaSWAScivw@mail.gmail.com>
+Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in the
+ project)
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,53 +99,217 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 3 Apr 2025 at 10:11, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 3 Apr 2025 at 11:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Apr 03, 2025 at 08:19:03AM +1300, Simon Glass wrote:
+> On Thu, Apr 03, 2025 at 08:22:13AM +1300, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Thu, 3 Apr 2025 at 04:00, Tom Rini <trini@konsulko.com> wrote:
+> > On Wed, 2 Apr 2025 at 06:18, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Wed, Apr 02, 2025 at 01:08:56PM +1300, Simon Glass wrote:
+> > > On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Wed, 2 Apr 2025 at 10:41, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Wed, Apr 02, 2025 at 06:29:31AM +1300, Simon Glass wrote:
-> > > > >
-> > > > > > This series includes some precursor patches needed for forthcoming expo
-> > > > > > enhancements.
+> > > > > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
+> > > > > > Hi Tom,
 > > > > > >
-> > > > > > - truetype support for multiple lines
-> > > > > > - make white-on-black a runtime option
-> > > > > > - support drawing a rectangle
+> > > > > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
+> > > > > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
+> > > > > > > [snip]
+> > > > > > > > > Again, back to this thread, if you want me to migrate things, consider
+> > > > > > > > > applying the sunxi patches as I have described above. I will then look
+> > > > > > > > > at the next target for bootstd. But while you hold this up, I cannot
+> > > > > > > > > move forward with more bootstd migration. It doesn't seem that much to
+> > > > > > > > > ask.
+> > > > > > > >
+> > > > > > > > I will take another look at what's still relevant. But I believe it's
+> > > > > > > > still blocked on the fact that it changes behavior and breaks users.
+> > > > > > >
+> > > > > > > In details:
+> > > > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
+> > > > > > >
+> > > > > > > Now that the underlying BLK problem is resolved, this can just be
+> > > > > > > dropped I believe. Removing the BLK dependency from BOOTSTD can happen
+> > > > > > > when you're supporting a flow that lacks a BLK device entirely. This
+> > > > > > > would be another reminder as to why putting unrelated changes in a
+> > > > > > > series is a problem.
 > > > > > >
-> > > > > > This series was split out from schd2
-> > > > > [snip]
-> > > > > > base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
-> > > > > > branch: schg
+> > > > > > OK, then just don't apply this patch. Problem solved?
 > > > > >
-> > > > > I get as far as patch 4 before it doesn't apply to -next.
+> > > > > Well, for a hypothetical v6 you would not include it, sure.
+> > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-3-sjg@chromium.org/
+> > > > > > >
+> > > > > > > This is fine.
+> > > > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4-sjg@chromium.org/
+> > > > > > >
+> > > > > > > This is not fine. This is also not a sunxi problem. It means that we
+> > > > > > > should drop bootmgr from rockchip, where the conversion has already
+> > > > > > > taken place, and would need to drop it from future conversion too.
+> > > > > > > Neither of which are desirable changes.
+> > > > > >
+> > > > > > Why do you say that? I don't understand how this relates to rockchip
+> > > > > > or why we would need to drop bootmgr from that.
+> > > > >
+> > > > > Then you don't have enough of a grasp of the details of the area you're
+> > > > > trying to solve problems in? Or maybe you need to refresh yourself on
+> > > > > the details of the area you're trying to work in.
 > > > >
-> > > > Your tree is missing the video-damage series which adds some more
-> > > > tests. It is here if you want to pick it up:
-> > > >
-> > > > https://patchwork.ozlabs.org/project/uboot/list/?series=369663&state=*
-> > > >
-> > > > I can rebase and send a PR if you prefer.
+> > > > Or perhaps there isn't a problem? The sunxi case is special because we
+> > > > have a FEL boothmeth. That isn't present on rockchip, for example.
 > > >
-> > > Reading the cover letter again, that doesn't seem ready to merge either.
+> > > Again, you seem to have forgotten what the problems with the series
+> > > were.
 > >
-> > It seems OK to me. What are your concerns?
+> > No, it's just that we disagree on the path forward.
 >
-> The cover letter read to me like it should be further reworked to
-> address some of the problems it still has / exposed. That's likely why I
-> marked it as Changes Requested a year and a half ago.
+> Then why did you bring up FEL? That's the part of the migration which is
+> NOT a problem, I keep being reminded when I ask.
 
-Which bit of it? Are you talking about my conversation with Alex, or
-the actual cover letter?
+FEL needs to get priority, that's all. It was a problem until I
+adjusted the priority.
 
-Anyway, if you are willing to pick it up I could send a PR.
+>
+> > > > > > > This patch in particular is
+> > > > > > > where we have the note:
+> > > > > > >
+> > > > > > > "Yes, the introduction of boot standard changed the boot order and
+> > > > > > > specifically deprioritizing scripts is unexpected."
+> > > > > > >
+> > > > > > > Which should have had more attention than it did.
+> > > > > >
+> > > > > > From memory the scripts are a fallback used when the other things
+> > > > > > don't work, so that was the decision I made at the time.
+> > > > >
+> > > > > The key point being we changed behavior that others depended on, and
+> > > > > didn't document it well and didn't make sure the change would work for
+> > > > > them either.
+> > > > >
+> > > > > > > This is the thread that to me spelled out in details where the
+> > > > > > > conversions are now blocked. We changed behavior and that in turn breaks
+> > > > > > > users that have come to rely on ordering.
+> > > > > >
+> > > > > > I don't know what action to take on that comment. We cannot have 100%
+> > > > > > backwards compatibility with the scripts, which after all weren't even
+> > > > > > documented. But it is very close.
+> > > > >
+> > > > > You need to get feedback from the people you want to migrate from the
+> > > > > scripts and ordering and rely on to something else and see what works
+> > > > > for them.
+> > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-5-sjg@chromium.org/
+> > > > > > >
+> > > > > > > Is an alternative to the above which then turned in to a discussion that
+> > > > > > > I would very briefly summarize as "no discussions were had between
+> > > > > > > stakeholders before integrating efi bootmgr with bootstd".
+> > > > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-6-sjg@chromium.org/
+> > > > > > >
+> > > > > > > This is fine, but only relevant once migration happens.
+> > > > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-7-sjg@chromium.org/
+> > > > > > >
+> > > > > > > If Andre is fine with this, this is fine.
+> > > > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-8-sjg@chromium.org/
+> > > > > > >
+> > > > > > > This is a generic bugfix. I will take this to next today.
+> > > > > > >
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-9-sjg@chromium.org/
+> > > > > > >
+> > > > > > > If Andre is fine with this, this is fine.
+> > > > > >
+> > > > > > Well, is he? I thought he was. Can you check?
+> > > > >
+> > > > > You're free to. It's one of the innumerable examples of why when you
+> > > > > group multiple things in a series and there's problems with another part
+> > > > > of the series, unrelated changes get dropped.
+> > > >
+> > > > It would be easier for me if you could apply the patches as I've suggested.
+> > > >
+> > > > But if you are willing to apply these patches and just want me to send
+> > > > the series again without the BLK and RFC patches, I can do that.
+> > > > Please let me know either way.
+> > >
+> > > Again, you should:
+> > > - Take the non-bootstd sunxi enhancements, rebase them to next and post
+> > >   for Andre. By themselves. This way they won't get stuck.
+> >
+> > There's no point, though, since it doesn't provide the bootstd migration.
+>
+> Are you saying there's no point in generally improving things if it
+> doesn't also involve one of your particular projects?
+
+The series is called 'bootstd: sunxi: Migrate to standard boot'. If
+you'd like to apply just the patches from that series which don't
+migrate sunxi to standard boot, please go ahead.
+
+>
+> > > - You should work with Heinrich to come up with something that handles
+> > >   efi bootmanager and bootstd without breaking how our actual project
+> > >   users use us.
+> > >   There's no reason to migrate *more* platforms until we have this
+> > >   fundamental problem sorted out.
+> >
+> > It isn't actually a fundamental problem at all. We shouldn't even be
+> > discussing this and it is really unfortunate that you continue to
+> > block this effort.
+> >
+> > As to bootmgr, I would be willing to implement a solution here, but it
+> > would involve changes to how bootmgr works under the hood, i.e. to
+> > have it be iterative instead of doing everything at the start. My firm
+> > understanding is that such changes would not be acceptable to
+> > Ilias/Heinrich and anyway I am unable to get patches into the EFI
+> > subsystem.
+> >
+> > So the fallback is the work-around which Heinrich proposed. He is free
+> > to implement that if he likes, but I am not planning to do this myself
+> > as I see it as a short-term measure and it may cause problems for
+> > bootstd, as did f2bfa0cb1 which I bitterly regret allowing in (but I
+> > suppose they were happier days before everything froze up).
+> >
+> > > - You should work with any FOSS distributions to get their feedback on
+> > >   what would make their life easier, from a user of U-Boot perspective.
+> > >   bootstd won't be useful if it's not something our users want to use.
+> >
+> > Bootstd is designed to replace the distro scripts and the feedback I
+> > have received is that it is good at that. If you have any other
+> > feedback, or any suggestions on people I should contact, I'm happy to
+> > approach them, or they can email the list and cc me.
+> >
+> > But really, it would be a lot easier if you could just apply this
+> > series so we can move on. If I can see even just a glimmer of
+> > compromise here it will help my confidence.
+>
+> Your sunxi series is broken as posted. I am not interested in applying
+> or encouraging more bootstd usage until there's actual work being done
+> to move forward wit bootstd (a thing you want) and EFI (a thing most
+> distributions want). That would be some of the general feedback you've
+> been given and missed or forgotten.
+>
+> This is even setting aside that I can't recall now if you ever started
+> on making non-BOOTSTD_FULL more useful / usable in general because it's
+> so minimal that every conversion ends up also enabling BOOTSTD_FULL in
+> order to be flexible enough for users to decide SD vs eMMC and so on.
+
+You can hold this up for as long as you like, it's your tree.
+
+I'm always happy and willing to discuss and commit to future
+improvements. The pattern I see, well-established now, is that you
+block my current improvements until some other things are done (this
+series, PXE and many others). Or sometimes you see my series, come up
+with a clean-up and block my series until it is based on top of that.
+If you could move away from that pattern and operate in a more
+cooperative manner, we could definitely get a lot more done in your
+tree.
+
+But again, you can hold this up as long as you like. I just feel it
+would be better for the project if you didn't.
 
 Regards,
 Simon
