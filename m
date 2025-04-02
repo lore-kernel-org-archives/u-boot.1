@@ -4,83 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A42C0C28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:01:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE5FFC28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:02:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09CE980FDA;
-	Wed,  2 Apr 2025 16:01:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F57780FDA;
+	Wed,  2 Apr 2025 16:02:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lSG43R/S";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xtDBkl/W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29A7A81703; Wed,  2 Apr 2025 16:01:06 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 1D5FF81703; Wed,  2 Apr 2025 16:02:24 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E883980584
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:01:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 090C780584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:02:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-603f54a6cb5so676576eaf.0
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:01:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-39129fc51f8so5094461f8f.0
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:02:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743602461; x=1744207261; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gd5aex1bo4b5cFmqQH2yULbr36zCn3sJoMIRtkpPeKc=;
- b=lSG43R/SVgAFqXUFnhUvuAEyzIaxSqZggiqb49wRVbjwaqr7GQ352mG24tavuNW5Le
- IWrIBx+tYskny6qtfkALaSxWj0VbI5pB2lQobE3O5eiCocDYLzMluLI4Jx9PE/KPESPs
- QiQ6dvYFynSeRjSvR1wd9Xg2YkE9Kxhr8AOQU=
+ d=linaro.org; s=google; t=1743602541; x=1744207341; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=C2EjKF2FSfjqM7rTlder4uNpxU0vv4gA7MKpUhxpTVE=;
+ b=xtDBkl/W3BvGCEwJ+8dnGXXllc2aV8auCPTJphD9aQX9V4ArVxggs+9l5xE36HDxiP
+ pQmnRrYMB4Pxo/EGndsv1WlkIq6htrJyVkzD9LsRQoB7aZIzG8Efburdc8RdlVZYPq9X
+ 5NEvN3FpVyP3K8J1ISXaUKQCSNQfjDcx5ntPGwKyfJTe3i0TB2imli0w+HG3PLoDiAIy
+ fqJteT25r1XUvNMO4pVpnFTFd9HC4gpOhiaJhKP2Zo+S4+ZCc9OZ9qL/LDI46RDoidTH
+ DGsvxvjhmLbvRr8N74zq4HufkoWjLFDN/NbfaAuq+o0gdGVjcql0wde48Tl+g7upnhOL
+ TkzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743602461; x=1744207261;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gd5aex1bo4b5cFmqQH2yULbr36zCn3sJoMIRtkpPeKc=;
- b=XO9lPnhBwEzjPMFWK/GXA7p+jYiTSu4RfYjou+YR6SaO56M7Zs6P7tMp72CyCqI3x+
- ppQxKHB7rzI/2W1PtRBc2BWkHr9QUwGnMm/b+/WwyM0r5nF0WEjNEBb+cIDyL1rnFh8T
- WE5Pff86srMno6/ka5f6/crTWRsvvf4i3gMoMxc1RQOsdDt85deWdDW20J779dMPIKMx
- klk/0B1gDMi+cOV906EUlu+tJdiAH5HNjtDgXE8uaCAf/eUlWmyKe9WLZW6fyzpa9wgG
- g6ZnzkM/fTgX/PLXPu1jyq2S5HqyfmfOvJlUORZIRikJbwcKSqyXKVX56hJdd0T85tIO
- OdzA==
-X-Gm-Message-State: AOJu0Yy1dFFrWhSxvC5M9F0rxS9xQA4OIX6PUQv/hqj4zizXGClF68kJ
- BCzG9QhpSI0O3cfUGMvk+GEXNwe70/V/4Erc/MJwtjrKplbTRcwh8uxIHv2V5qY=
-X-Gm-Gg: ASbGncsOOl7I6P5A53e87la6UBTzu9+D7B3gSKwBEpezDeBOLeotij1psaMS0erjEbs
- l+2vLc9kwNULl4AiVqh0CkLUZEqsoVmGVYRR2WYbMHhk7Sg//FOzSf6WMfk5ECdnvxwgzMGakw9
- wvlD1p6PvWSoEmjs5IW5Fy8p+S9TBaeLFNz75dkrHusRCEWKScBe9sNIqpAR0zg4Ew0pfB5eD1I
- 6h0KlfFLodsQgaIN7fVLskhBhrQ6BLWddjSo46EUaZ0Bw1o9pjS8jlxEcKaTK98xQ/rgGssRhYT
- /0ny158xAuBF5KrzmV8TFp3YgFfMqWv5YrUsqPsj38C9HUKrcggsce3178Ht6svHMcrGrftWjxA
- SYkH+6agFkbA73mjH
-X-Google-Smtp-Source: AGHT+IFDSkSGd3MYEVoyY7MRZjIqy+C+WSPqbxE6YOfQGlZNNMpr6ekAGNVzDh2iFHByz0hvgc4L/Q==
-X-Received: by 2002:a05:6870:7182:b0:29e:290f:7af4 with SMTP id
- 586e51a60fabf-2cc382d2af9mr4197846fac.34.1743602460845; 
- Wed, 02 Apr 2025 07:01:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2c86a855cdcsm2863555fac.33.2025.04.02.07.00.59
+ d=1e100.net; s=20230601; t=1743602541; x=1744207341;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=C2EjKF2FSfjqM7rTlder4uNpxU0vv4gA7MKpUhxpTVE=;
+ b=jDGZY91w7kwjMVoXfWljxa4VuBDJZ5DOsDlolJWdgFf1zYT4xRJk1nMHsVfwLymeNv
+ oTlF4QAh4G3p1v3sDHOmmR/Ur6y1XD+f1lQXgyIBber0IaUdgePhssS5KzLs/0aunwGr
+ WY4vrzmsnkqqpeorY8Cfr2mJvpZmMo+T4oQ/TL/3PRFHXWJxRSA4BJzomzAHl51n8O3h
+ SnuIKlA5Mkp9Vecd01RzHi6YMMSbnNDAvWIjghAW9xmKBrFBES9CIkXK8JTPCkcH402a
+ p5QP+rkwQAsMTYCXS00lEA0vfe8WcPvQ3rOwV7sV0VjXd2xJ7vruhczciBur8OUamFYl
+ 0kfw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX6Up4pD/Hb/p/RUW0kb37GmpjW2URLNKZrMPFjascZJrKZPyR2WN/PzR38sJb97j+nXY6C/ug=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7+zsPPI8+yxb/MkWGErcg1PNOUAfn8mhby9CzAx0ewUQUaiSV
+ t6LoVyu2YHnXtuZs73YgERBIUuhr3ZbKN3cF485s6hFM7g7yKr6ojB5D3nqJmCNpKwiuk3sGeJ3
+ j
+X-Gm-Gg: ASbGncvgSRdOezJhRCWuMHya+xG14xi/HzAoEQxHqpewaraI8v9yMyAZ9ek7K9L+Lbv
+ 13MgRcLlF38Zk8LJF8Oef8bOXPebhsgn13eK/6kDryPZsLmLwE0HHJFD9GCmoc+ap3jcLtVHG8B
+ I6pONSYWjg+Ljg6JuNg358RAE+odp92EcW5Rwe7HFCtob/HA7zFzZSQMf3KYEDslAie/zdwxAhv
+ 1jp6WlLjCfWgcoUV6mbYuaBd0c5y/GphCu4y/v8+Pv9anrd7EBkCxRhGK686lwzA/JM8U0j5Ko3
+ sNdpbyAGGRQw/ystTRu1KB6DRpzZ4GHwgwQCm2UShcyZvKIGQNImN/kYuufDa2tq3w==
+X-Google-Smtp-Source: AGHT+IGRXNX6Za2BH6BWwg3DvdIGeQMcaxGt9AwZc/PfTjwQxtC+HqPIcr1JvtECJbY7Z/xPiRFtcw==
+X-Received: by 2002:a5d:5983:0:b0:390:ebae:6c18 with SMTP id
+ ffacd0b85a97d-39c120db794mr13270429f8f.12.1743602539985; 
+ Wed, 02 Apr 2025 07:02:19 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c0b7a433bsm17283130f8f.97.2025.04.02.07.02.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 07:00:59 -0700 (PDT)
-Date: Wed, 2 Apr 2025 08:00:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com
-Subject: Re: [PATCH v5] spl: remove usage of CMD_BOOT[IZ] from image parsing
-Message-ID: <20250402140057.GQ5495@bill-the-cat>
-References: <20250314035505.4029331-1-anshuld@ti.com>
- <20250331230301.GA30101@bill-the-cat>
- <D8W300ZGJI6M.1COATVFQ1OTPT@ti.com>
+ Wed, 02 Apr 2025 07:02:19 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 02 Apr 2025 16:02:17 +0200
+Subject: [PATCH] configs: meson64: move DFU step at the end to give the
+ board a chance to boot something on storage
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4n4OYk7nhbyCd1f5"
-Content-Disposition: inline
-In-Reply-To: <D8W300ZGJI6M.1COATVFQ1OTPT@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250402-u-boot-meson64-move-dfu-end-v1-1-68399499ee29@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAGhD7WcC/x3MQQqDMBAF0KvIrB1Ig5G2VxEX2vzYWZgpiQZBv
+ HuDy7d5J2UkQaZ3c1JCkSwaKx5tQ5/vFBew+GqyxjrTGcs7z6obr8ga+45XLWAfdkb0jPkVXIB
+ zvXlSHX4JQY57H8br+gOqRAzvbQAAAA==
+X-Change-ID: 20250402-u-boot-meson64-move-dfu-end-eb9f5fe55608
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1279;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=Tzbr/3SfSeAjPtjhGcXeNaM7p5oxwBH000vypFtPQSg=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn7UNrlWXYnX4O0ePETy71q2VHSlGRs9xyCTY8dOBf
+ PrxU+TaJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ+1DawAKCRB33NvayMhJ0eaqD/
+ 9ZA41PwRMKJj0xMNcZtF7NonClsSc+Efp8TiWioyWeXAooIdNkXIObvHPsa3YyBjsPNuBXtT7z3eqQ
+ 7h4HDks3Eb5psbnTKqwUg0gWxcHfrSuk3brknmEQ182Qq9iN59txG5yXmtu1fB6G2xXLvm6TQI//Hm
+ k8Wm8je3qVfL50pYe3kRG6xfYXA189xeIiLx27PIEID7KvLc3qi+rzPQh9mGjMxQLF6A9HfTququ6F
+ LWxGiUud6zudVkKgADHnvbbpWb2QuLbqMsYQkS160Kb20qcr4Bda19DVbMX5d9nnl8qQheSA2y6REs
+ I0j4BiNBNvOPnHmdILb94eeMb12h0hGbF4iVQ/LIvUrbyjJtcNnTzIEdfcgxYJ+V00Rt7SpqDikUAV
+ GBMTWz+pw+xnPDe8AKnHfukRGnkOubCz6qgDM2mhb5CMRh4thCuuYIP0JNJqUoWoU01LueuvA98/sK
+ L++P5UuBj90ShUOZvY7zKYekRLjjVD06tAdxI7aVSSd/KxvqJFL7s7AxrT8PXnvxQZTGcgrEXA/uAF
+ jgFIqy5ckPzuuixnqkaRgfE++gABHCuGOyZMFs96/1sMKw0IFsrpZbhrmMpFzdL0wbqxj9tRJE3/N9
+ tKBQ2SBKPDGyHTirdQzBtW0zhT19y+A+QpnCG4cJhFqchiO5lAjn60UOXKJA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,99 +119,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The DFU was set to run at the beginning, but we may want to
+boot something over USB, MMC or Ethernet even if booted over
+USB, so move the DFU as the final fallback.
 
---4n4OYk7nhbyCd1f5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This keeps the current Amlogic U-Boot CI working and makes
+the default config more generic.
 
-On Wed, Apr 02, 2025 at 04:00:01PM +0530, Anshul Dalal wrote:
-> On Tue Apr 1, 2025 at 4:33 AM IST, Tom Rini wrote:
-> > On Fri, Mar 14, 2025 at 09:25:04AM +0530, Anshul Dalal wrote:
-> >
-> >> Using CMD_* configs from spl doesn't make logical sense. Therefore this
-> >> patch replaces the checks for CMD_BOOT[IZ] with newly added configs
-> >> SPL_HAS_BOOT[IZ].
-> >>=20
-> >> SPL_HAS_BOOTZ is enabled by default for 32-bit ARM systems and
-> >> SPL_HAS_BOOTI is enabled by default for 64-bit ARM and RISCV. This
-> >> ensures configs relying on CMD_BOOT[IZ] in falcon boot still work.
-> >>=20
-> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> >
-> > OK, so this needs to be introducing some library symbol which then both
-> > CMD_BOOTx and SPL_...something select.
->=20
-> I was thinking of chaning the Makefile with the following diff:
->=20
-> -obj-$(CONFIG_CMD_BOOTI) +=3D bootm.o image.o
-> +obj-$(CONFIG_LIB_BOOTI) +=3D image.o
->  obj-$(CONFIG_CMD_BOOTM) +=3D bootm.o
-> -obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o zimage.o
-> +obj-$(CONFIG_LIB_BOOTZ) +=3D zimage.o
->  else
->  obj-$(CONFIG_$(PHASE_)FRAMEWORK) +=3D spl.o
-> -obj-$(CONFIG_SPL_HAS_BOOTI) +=3D image.o
-> -obj-$(CONFIG_SPL_HAS_BOOTZ) +=3D zimage.o
->  obj-$(CONFIG_OF_LIBFDT) +=3D bootm-fdt.o
->  endif
->=20
-> This would simplify the Makefile by not having duplicated configs for
-> image/zimage and the removed bootm.o for non-spl builds should be fine
-> since except for colibri_vf, all defconfigs with CMD_BOOTx already have
-> CMD_BOOTM enabled. And for colibri_vf, we can safely enable CMD_BOOTM?
->=20
->=20
-> > What we have here introduces
-> > failure to build on some imx8 platforms such as=20
-> > mx8mp_evk and then size growth on others such as imx28_xea.
->=20
-> The imx8mp_evk build should not fail since the patch should only effect
-> falcon mode. Only difference this patch makes is now image.o would not
-> be compiled for the spl which is not used in non falcon boot anyways.
->=20
-> For the imx28_xea and 3 other (imx6qdl_icore_mipi|mmc|rqs) defconfigs
-> that use falcon mode but don't make use of CMD_BOOTx. Their size growth
-> is expected since SPL_HAS_BOOTx is default y in falcon boot. To keep the
-> same size, the SPL_HAS_BOOTx can be explicitly disabled for those 4
-> configs.
->=20
-> For future reference is there any CI tests I can run to detect any
-> regressions before posting patches upstream?
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ include/configs/meson64.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-To run CI please see
-https://docs.u-boot.org/en/latest/develop/ci_testing.html
+diff --git a/include/configs/meson64.h b/include/configs/meson64.h
+index f3275b37a516da6befd41324ddb2a3fe1f36fc83..675df623311f361f3a55971c3894ffbe1d07fee6 100644
+--- a/include/configs/meson64.h
++++ b/include/configs/meson64.h
+@@ -118,13 +118,13 @@
+ #ifndef BOOT_TARGET_DEVICES
+ #define BOOT_TARGET_DEVICES(func) \
+ 	func(ROMUSB, romusb, na)  \
+-	func(USB_DFU, usbdfu, na)  \
+ 	BOOT_TARGET_MMC(func) \
+ 	BOOT_TARGET_DEVICES_USB(func) \
+ 	BOOT_TARGET_NVME(func) \
+ 	BOOT_TARGET_SCSI(func) \
+ 	BOOT_TARGET_PXE(func) \
+-	BOOT_TARGET_DHCP(func)
++	BOOT_TARGET_DHCP(func) \
++	func(USB_DFU, usbdfu, na)
+ #endif
+ 
+ #define BOOTM_SIZE		__stringify(0x1700000)
 
-And yes, please re-work the symbols and logic so there's no size growth
-until the K3 R5 platforms enable things, as the default should not
-change behavior. Using
-https://source.denx.de/u-boot/u-boot-extras/-/blob/master/contrib/trini/u-b=
-oot-size-test.sh?ref_type=3Dheads
-might make it easier to compare various platforms before/after.
+---
+base-commit: c17f03a7e93dfbbe5d32f5738274187065d9493f
+change-id: 20250402-u-boot-meson64-move-dfu-end-eb9f5fe55608
 
->=20
-> Regards,
-> Anshul
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
---=20
-Tom
-
---4n4OYk7nhbyCd1f5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmftQw0ACgkQFHw5/5Y0
-tywRKgv/We0TQgM8O8gdr8qAi9xnbBPimjWZl0WYR6TloUqJER7qMg22g2mt3RrW
-c1uRMnaa72AUfJhMeiH2lleJObqOAUbx0b9G7ERy24msVbg2qVeEwbe2O/i6yFcm
-3BTEw8ZU5mK3cnaFRC0xlzmPvECFuP1x1utJV2057OqFu2BaZHVyV8wEtZ6T1zE6
-ZGJZqa0rGhsYpVEpfEy+U38MTLw+5BwbQ4vQPEUUjwAZsLmgJNdWi6/WtTJaMB2e
-Waf8+m8D3zG9UcsMEcX8q3PN5CyCB5C6b//PkQtPynJ/bfzH3GaPNoNo5iIZoFZA
-Hlp0U/ctBsMeIxkRzS1IzoIq1qvrAtYVKVCY1saIYafaZVk8Tt2qFXiLTu9jJPJ3
-JuBKoZBGn7B/yH0ueS35J2kl30i+Qls7+GxZ9CZ65Y7vZktFTo0QVASyIldx1b6n
-W3swK8pJ8kf/QonBuWLFMOwpWFLxp4tQ1A6oXs6uL09x0mchFMrdTHTlzmmz3+NJ
-vqLnsOjM
-=wFmp
------END PGP SIGNATURE-----
-
---4n4OYk7nhbyCd1f5--
