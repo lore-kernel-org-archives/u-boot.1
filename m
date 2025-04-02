@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E416FC28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D15C36017
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:28:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DC5581F28;
-	Wed,  2 Apr 2025 16:27:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C324181703;
+	Wed,  2 Apr 2025 16:28:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HglVEq44";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wOc+TiUL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8616381F44; Wed,  2 Apr 2025 16:27:10 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id 05A0B81F28; Wed,  2 Apr 2025 16:28:23 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77BFD80050
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:27:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1B3380FDA
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:28:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e46ebe19368so5713571276.0
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:27:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43cf848528aso58310755e9.2
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:28:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743604025; x=1744208825; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PckDDbIguJZUy3nav+i4FCjq2Yg61xXDd+bxoD4HBXU=;
- b=HglVEq44AmyckZxYh8LXic/pU+aX7HY/ZQclqmar+XYBfIR68DnYguMRF7DSiNrzMG
- 6vAgw4GNC0aXVpY1+KlmSKVWE9kh/ucHB/qQarSlw3uPYkUXEJDpn5Wv2PRGrKHwB5Bg
- 3eA3a7ryNJtUyZFX6f2W3NY8Xaf0qleFrsL8mKhISrqaTxggq9H7YI4TsVSz5zT1c5tb
- Tdk4bmruyhz6CWk77bkMpAggZpwszVsjxZMCCe1W04JTbPwcwMOFe7FC8S7WSn61PgOy
- OuapqpRUsAraZyauFgmilfxVulo7gu2Z8ScRAz6+9c7cVuOxeSsylPHLpHjutKqT7r4T
- bBCA==
+ d=linaro.org; s=google; t=1743604100; x=1744208900; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NQtJoYTY6LKlcnOYNQA2I5xrhPk6JQU8CVPlDVh3F+0=;
+ b=wOc+TiUL6SrVVgDduHN6ZRANNH/WQG0e3X8I71NOZVG3r+c3k6VxzXI/GB+5iPLACA
+ T1uNyl1KJGXh1A0HzgghaJB3DqT04cxZlVZwfPUk2lKbOS14DFtzF8GJmsSf6XESz+dg
+ pWlpDPPeIpP4dSIkC6cPGY2wBZYDtO/kVDx4XnvCLrp1oABeLR5aXH5VeAZ3U1vgX61N
+ pGCz0SICQavRUKw09pRrMQowt/RBIFCMVZwV+YfnwaBVgl6L1kvKQffCx8Cht/9p6QwX
+ pbHSj4fE/W0RNyhwRj1aco1fwtPlVUMwJbAqpFxIb22mbJxUlybb7taWcKPTF6LgWqPk
+ u3AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743604025; x=1744208825;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PckDDbIguJZUy3nav+i4FCjq2Yg61xXDd+bxoD4HBXU=;
- b=N2NnZgcEQl/OfSp5pJBzeC5W8OdnXIhlpbDgGYts8Eyj+JjH/u2B8bNPACQkOFTMln
- dlNTQtJBuRn7Xmymw694oWtRfiYXbjN7yFU6kHb+PL6s9E1e2UKBdI0ayyRWZC7EbJn4
- EzL6g8gq/PZelG1eL8IDrC9OM+PWaSEAXpJ+qsewNGeFyx47+9FGRZZ/wWMc9T0EpFz4
- 1NftHxBiBy9RiDjmRhWjq6E4yv+xuGwdQGZDg+RmuynNrJ9/xpc3Ui8OOuQ0BgVWUqTz
- e96pKvLRf2PjegPhjEHaB5nR6LD+8p4F5TSk5yP8f53FmONXSXEEDGmKIyot38sxXkCt
- BD2Q==
-X-Gm-Message-State: AOJu0YwIo14+00rdRAevIU+5YfER9hHBGnfUquQAq2Ejzg06+YZdjE5C
- Uczoz+e2WrVvSKqjSeDOGXF2F2QAg8iSQUQOMIIIIU7KisRlsrNdNU4gZDuih3qSkPHhtQPRjHy
- SoF6MVvmfWzK/Kt6bKXb2RYz/ihkUX02rxgq00A==
-X-Gm-Gg: ASbGnctHGbxR7zfxQiv4qaExOsS+XkIFjPub85Fx4ZdU5p9cxr3eW2HXxRv6bysANHX
- PHKNlGmcjjOEAVreIHAv91vJk53OkmBI3pucnEE43Lxr/mcxiNaFWu7lL2HO/taKeWz/nr/qDMw
- K+sHA4/50zy0Vxd3Z1SXONpkUc
-X-Google-Smtp-Source: AGHT+IGvKurnW2QwQ7mdYTaa96aTYgTBNrDgDWUuE2RXMb0r7nRVzf07EQapzDHWZ3WnygAwMaiBlA7jeXvPx1sbesk=
-X-Received: by 2002:a05:6902:2189:b0:e63:d10e:edc4 with SMTP id
- 3f1490d57ef6-e6df449c41cmr4917376276.10.1743604025169; Wed, 02 Apr 2025
- 07:27:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743604100; x=1744208900;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NQtJoYTY6LKlcnOYNQA2I5xrhPk6JQU8CVPlDVh3F+0=;
+ b=WSkYiuquKND23Skgy6KgQ17iZ4LzpN0bC0DYrPhAnKxP26xVxbg2wwPKehSvOrKq9B
+ XhpP2yUJmNAvwII/1n6SRThccewRji9N3FeZEuiG7HlEVCTkhdUcTHRrn/m9Jmo5zwOe
+ WUa1XlxnlZ6o9XZPACVPeYPUk84JNrKYQ1LKCFDs6sQ31/r+y7LolfXdseU/xLRS/HKn
+ m0HxUlRAzd2e71xCP3atkWpqYk5IjEKmZr2UPg3ck1O1epJoxsjLIMjl+fNCy1hlJjH3
+ rBhBJrXW//WztaZ5GquvpdETKKH+APGFvEaIn2sTkM39XHPxdyynky14hgBxcPgUb4pA
+ nCUw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWP0iuDLCu3Bp3MTC5Ac44ju+EDi6mo7F/SfUWaHxQb18Xj7r0BTdIvbtTWFO0pNqFsc8XU/zk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzlIix/wb5I1l+4xLZZOuYlM+FTSyXCFF3QXjk9uHbNsye9aGVh
+ xA6F7dtkVYF1h5Bm7r2Z/WPQf3pGZ+EAEJNARHCvRZj7DNCkepAR5FmAqzXmCwM=
+X-Gm-Gg: ASbGncsO3+nTGRbeUc4JYaWc0EVIkyvL1XDYkwOm0utv21mSd1JCEvgMccSvM1Q0sDp
+ ev3b5Ng5DZjyefPXhL1sHyuaSrsS8UoCOq17xFHcK9ThBPfiF3azRgWlzJ1bkJVtSlYY5P5DjLt
+ ++vsKrzDATTM2Rb/nYvwU7eNF1YqbazuouG6X24fXdnCQRvBrC+PulO/lyXZSev0rIoOXgQxzic
+ EXD+GbdSW5/jKaAFx5qXH5gBUL2fbhjpXo6Wc6DAHre6wHsdXNvT5GkbMzHO/nVjxS7mOHbblyr
+ ZNjKbtW64lCCct2E4uRJPlaEyFnRG3XPaU8OjqKQ2qZh0Nv60z23nSpjuixWBgZJDnZHa7launE
+ bRn6sYV3qy8FrprQaRpQ1Ww==
+X-Google-Smtp-Source: AGHT+IEP6/01LF42eiQfsTeAaM5kZWX+fgMuaXSXkVLCz3tzwn7zEM2r4rUCXUwhvxf72MvjuGz9iA==
+X-Received: by 2002:a05:6000:1acf:b0:38f:6287:6474 with SMTP id
+ ffacd0b85a97d-39c29752f9cmr2495891f8f.15.1743604100297; 
+ Wed, 02 Apr 2025 07:28:20 -0700 (PDT)
+Received: from lion.tail248178.ts.net (163-60-142-46.pool.kielnet.net.
+ [46.142.60.163]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c266c132fsm4371694f8f.13.2025.04.02.07.28.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Apr 2025 07:28:19 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io,
+	u-boot@lists.denx.de
+Subject: [PATCH] hmibsc_defconfig: disable DM_USB_GADGET
+Date: Wed,  2 Apr 2025 16:28:03 +0200
+Message-ID: <20250402142812.368168-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <CAJ+HfNj+B-LmZx7tVXWPqvK6fZ9V_iHsJ19e9MUFGF=JTVu6Xg@mail.gmail.com>
-In-Reply-To: <CAJ+HfNj+B-LmZx7tVXWPqvK6fZ9V_iHsJ19e9MUFGF=JTVu6Xg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 2 Apr 2025 17:26:28 +0300
-X-Gm-Features: AQ5f1JqI1AbyTFX4MOzGij3vY6Bq7KtEKlmNMWDo5r6Jrtps2grIJGzrhyk_aBg
-Message-ID: <CAC_iWjJyBjGnK6Wv0qXvZ-ujnZ9anc+bw_q-0qCRk-3XAGC4bw@mail.gmail.com>
-Subject: Re: RISC-V UEFI/ACPI on QEMU regression?
-To: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,93 +100,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Bjorn
+As with the db410c this breaks linking as it conflicts with the USB
+controller used by these platforms.
 
-Long time, hope all is well!
+This fixes building after DM_USB_GADGET was enabled by default for
+mach-snapdragon.
 
-On Wed, 2 Apr 2025 at 16:22, Bj=C3=B6rn T=C3=B6pel <bjorn@kernel.org> wrote=
-:
->
-> Hi,
->
-> I think I got a regression from commit 53d5a221632e ("emulation: Use
-> bloblist to hold tables"), and v2024.10 for
-> qemu-riscv64_smode_defconfig + acpi.config booting Linux with UEFI.
->
-> TL;DR: It seems like the RSDP is placed in the wrong EFI memory map
-> type (it should be "ACPI Reclaim").
->
-> I might also be misunderstanding what config fragments should be
-> used -- I'm out in the weeds here! ;-)
->
-> When I was using v2024.10, ACPI RSDP was in ACPI Reclaim memory. All
-> good, and e.g. a kexec would properly work. However, when using u-boot
-> with commit 53d5a221632e ("emulation: Use bloblist to hold tables") I
-> get the following when booting, and then kexec:
->
-> First kernel:
-> [    0.000000] ACPI: Early table checksum verification disabled
->                                                   [    0.000000] ACPI:
-> RSDP 0x000000047EED3000 000024 (v02 BOCHS )
-> Kexec kernel:
-> [    0.000000] ACPI: Early table checksum verification disabled
-> [    0.000000] ACPI:      0x000000047EED3000 000000 (v00
->   00000000      00000000)
-> [    0.000000] Oops - load access fault [#1]
->
-> RSDP reside in:
-> [    0.000000] efi:   0x00047ded1000-0x00047eee3fff [Boot Code   |   |
->  |  |  |  |  |  |  |  |  |   |WB|  |  |  ]
->
-> (Boot Code vs ACPI Reclaimed)
->
-> Now to get qemu-riscv64_smode_defconfig + acpi.config to build
-> post-2024.10, I needed to add the following fragments:
->
->   CONFIG_BLOBLIST=3Dy
->   CONFIG_BLOBLIST_ALLOC=3Dy
->   CONFIG_BLOBLIST_SIZE_RELOC=3D0x20000
->
-> which is really just a "make the build not complain", guessing game
-> from my side.
->
-> My guess would be that it's related to the change in
-> evt_write_acpi_tables(), where:
->
-> -    ptr =3D memalign(SZ_4K, SZ_64K);
-> +    ptr =3D bloblist_add(BLOBLISTT_ACPI_TABLES, SZ_64K, 12);
->
-> is done.
->
-> Is my config fragment broken, or is this a proper regression?
+Fixes: 7235dbedfce3 (mach-snapdragon: enable DM_USB_GADGET by default)
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ configs/hmibsc_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-I think it's a regression and I think what breaks it is commit cfb4aa2a754e=
-d1
+diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
+index 88c9c70a6399..4550eba71ab2 100644
+--- a/configs/hmibsc_defconfig
++++ b/configs/hmibsc_defconfig
+@@ -69,8 +69,9 @@ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_QCOM=y
+ CONFIG_MSM_SERIAL=y
+ CONFIG_SPMI_MSM=y
+ CONFIG_USB=y
++# CONFIG_DM_USB_GADGET is not set
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_MSM=y
+ CONFIG_USB_ULPI_VIEWPORT=y
+ CONFIG_USB_ULPI=y
+-- 
+2.48.1
 
-Can you apply the diff below and see if it fixes it for you?
-
-diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-index 4422b31ac6a7..afa5eee85484 100644
---- a/lib/efi_loader/efi_acpi.c
-+++ b/lib/efi_loader/efi_acpi.c
-@@ -34,8 +34,8 @@ efi_status_t efi_acpi_register(void)
-         * add_u_boot_and_runtime(). At some point that function could crea=
-te a
-         * more detailed map.
-         */
--       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
--               return EFI_SUCCESS;
-+       //if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
-+               ////return EFI_SUCCESS;
-
-        /* Mark space used for tables */
-        start =3D ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
-
-Simon, why that PR got sent with no ACKs from any of the EFI maintainers?
-
-Thanks
-/Ilias
->
->
-> Thanks!
-> Bj=C3=B6rn
