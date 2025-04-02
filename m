@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06B4C28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A56C28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:42:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D8C181703;
-	Wed,  2 Apr 2025 16:36:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E31DF81703;
+	Wed,  2 Apr 2025 16:42:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x/2bWGzr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T2/2yUIm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D818781F28; Wed,  2 Apr 2025 16:36:24 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id C5A1C81E1F; Wed,  2 Apr 2025 16:42:25 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ECB180FDA
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:36:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC37580FDA
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:42:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-7023843e467so53952737b3.2
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:36:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=bisson.gary@gmail.com
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-391342fc0b5so4951750f8f.3
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:42:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743604581; x=1744209381; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7PjgFYM0uOB6RrKHkou6uAGhSbLFq7tpKUPcnEpglEc=;
- b=x/2bWGzr499S8QkOtr4PeloXri4lpIPcq+Pd3ELAdyQPdum6wt+TLIkLYjqjZY0oMT
- 8xfo6GCLTeFFvwbr0473fWJr+cZICDLxrWT4QyAM4/tpyiKfL1RMbDB0myt66Qbpgl45
- dzY2r2gpC6VpipFLEIAlYPd3cJOR0HJ1mX2TL/tGCuHmJoRKRQi2Ld0f8CE475fFUbxP
- AR2mZTgKObZ4xvSYGYi9nMAk6aqnZ0G790fIIbwlcZhAsT2SmZp1JLC1YuEwKEahq/nC
- 8BcUaOC9PA4QJ7r8q/ctSDarg4CqqbJmm4zwzy3ztxWwIRYyNKp4upbDkC9OYziGCLyf
- hp6A==
+ d=gmail.com; s=20230601; t=1743604943; x=1744209743; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Po/hB/GKfrXJ8vHAZdYaQxwbo9u0HG8vwpGt0NXy++c=;
+ b=T2/2yUImRTlBc58FbW4tAiusfqIogHb+C3p/xbUPDMS7DukKbwa7J8SsiLw+D1zdIQ
+ 3ypaQvCb2xux2jERQVcRRGRiyE1A/ROV3m5JWpYbS09K9eSMaXJuZbdoyd0DVAMkwJ+K
+ y4QiesUUNHmn1pppC6y8FoltgLGwe6ubyGDlSYz3PbJwZWXdWuPg+lhNRfvTIpm1uztg
+ FXqSB4nnKEtCSTGHmt3eE6m7prpSQAQS9ncbuDi/reTS7EVHsDqRMrGuFwcXB/Fyufwz
+ HjTh473npXf7AQbGt+5JeJB5wubjC5yuM6KcXseuoz3N1vWMspl70W+Q71Qf9ELLZgxl
+ 6bwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743604581; x=1744209381;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7PjgFYM0uOB6RrKHkou6uAGhSbLFq7tpKUPcnEpglEc=;
- b=OrLPFxGNtOGyu5tY0/l6VHRsa7+zKMxkZlETBzo9yahKeQs5rwc5ETto/nwtWDBgo1
- NHRMZ6S/c5HQ+XLsj0GAEMD9P+k82EAKwj4WHoOeIbLpSy2nLZAv0MtGs1pT5yhsUf11
- p1cn9VWnEkYoYAI/jqjqd3qEkyw+YDeFHkSebpojtrweQoxkVFX3Fv4jtxBEUZYBEhYz
- Kf8qJ7Hq4f1b8QUiSJg4uAEK5fRprzBPsPPnkXhyoXBnUqKaM95HCa57q4df3OelhJYo
- 1DJdbvbvmmuA9G0Tk1CSKkQSjAhv9zWDxzikHC/+odjowyzCMSDPR5Q7AjLJHvLbPioj
- E1oQ==
-X-Gm-Message-State: AOJu0YzSloQ4P7cXExZDH3B/6OX1K6bUBcBEgzDZ1N1xYYdxBjRFoYxB
- kUlvKICbMQkL6QPda1ZTqjwA/5T61OKeWnyO/d1ZegxRrv7sdBbWz3bMXRvF+NPC0zmpjtJayMr
- HNnjBjkvDjWQw0b/ZG4ZzPJtS/HHmHo8K3Kl7Fg==
-X-Gm-Gg: ASbGncvDpRbIFvYvv08Nj/+ncuxleu6jB75tR5RqElmEYobOBrrepiconTF0YTh6gPX
- U7s2aJ0YFfDnyHKTncZk5BSyaynKgtkFtm1iDFxflmIU2+T/qjtB5sSt1GzqIxqenVVoVdfAlwo
- cJyp+aIxnSdown4AKpLHpebZ5M
-X-Google-Smtp-Source: AGHT+IH0Rn+SujLWxizPi4jXJvIgJs9aFXR9YCdjNICBr9K0ctFlsqp1GHST9yX/MH3vQwkOfzHMJQLIvO3WI4QurGc=
-X-Received: by 2002:a05:690c:680e:b0:6fe:c021:624 with SMTP id
- 00721157ae682-702570e6851mr231328387b3.8.1743604580925; Wed, 02 Apr 2025
- 07:36:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743604943; x=1744209743;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Po/hB/GKfrXJ8vHAZdYaQxwbo9u0HG8vwpGt0NXy++c=;
+ b=jQuugijKs1DhX2qC/IDIHSbey7ihX7wmenlgt6kXXmHu7pDmdmhzGmTrdGASfVKl+8
+ YfVAycpypJTLa+Bued6fbcqQYCiLxpyXfn63RNeHIunl1KCg0+pikVevXrcMgJcHN7Oy
+ xshsLN+73BTH6FelAvZVDStNkwVc+goiAbE1r0TpkP+7I8Ohx12sn5MQHME9fvDrt1EY
+ wC2Tq9qClkuPW+nZ4KJCuM4E+47y0Zg9W64jBE/XA41QgaaAauqOW9jjl2VJ5SvyrDad
+ dumg8oT3xc22uSjCmFdW02CfquRT3rgQsa9eSvyGoRpzNV2eTwsHyHKEC0gXjqE4SXhJ
+ u8lg==
+X-Gm-Message-State: AOJu0YwBtMwUkWWXzKe85cVP3Hhofstm11JUP6pflwA6n8m72QpRpfeE
+ lJ9LCLrAxk2Yy9lvNMH4LIckoTf7ZXE9kQaEijLD/dDaVIRgsCMz
+X-Gm-Gg: ASbGncumLnY1YZCqicRoGqjXRzLRcWQ2B6Fqyn6GokxUl56yHam1xPK7Q/zzqYpBCmW
+ OiavUg68+g607rmhSa2WJ52ROXkv15io7Fal/Aq4M0AuIvWstqz6fqr0MDNZthsA84RpQWqXXg0
+ Cu2lUrV05x9/kqyQe5diDo1iJ2Pz54pDzEjWN2EFgQoOy2goF/uPqXYjuhbzqSG8TgiPibZ5uZJ
+ QvFBTpXw7WtsOfG3q1fccpV9SUkpqGUmcZFj6hbKi9ikU9ES8yGfuHwkplPgrMG+9MSLh4wngg9
+ alxz+QZvubOZqXP0+H9rmC0sQSsd4PFqvXcHirRGViUTgnZxE/4zMDJzl5PC0iXi36Rq9+dLOYv
+ Sng==
+X-Google-Smtp-Source: AGHT+IHQssaBfGm3QzuWw3DP70ga0tHqLraprM8ahYLGW1qxUNM3Lm+9WSsJz+yCArVsX0Z6YYDeTA==
+X-Received: by 2002:a05:6000:420a:b0:39c:1f02:44ae with SMTP id
+ ffacd0b85a97d-39c1f024503mr8945298f8f.27.1743604943056; 
+ Wed, 02 Apr 2025 07:42:23 -0700 (PDT)
+Received: from p1g2.lan (128-78-204-97.abo.bbox.fr. [128.78.204.97])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c0b7a8e0asm17018739f8f.101.2025.04.02.07.42.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Apr 2025 07:42:22 -0700 (PDT)
+From: Gary Bisson <bisson.gary@gmail.com>
+To: sjg@chromium.org,
+	mkorpershoek@kernel.org
+Cc: u-boot@lists.denx.de,
+	Gary Bisson <bisson.gary@gmail.com>
+Subject: [PATCH] bootstd: android:  avoid possible null pointer dereference
+Date: Wed,  2 Apr 2025 16:42:19 +0200
+Message-ID: <20250402144219.1875067-1-bisson.gary@gmail.com>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-References: <CAJ+HfNj+B-LmZx7tVXWPqvK6fZ9V_iHsJ19e9MUFGF=JTVu6Xg@mail.gmail.com>
- <CAC_iWjJyBjGnK6Wv0qXvZ-ujnZ9anc+bw_q-0qCRk-3XAGC4bw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJyBjGnK6Wv0qXvZ-ujnZ9anc+bw_q-0qCRk-3XAGC4bw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 2 Apr 2025 17:35:44 +0300
-X-Gm-Features: AQ5f1JqfB47VHTZwOmQsVyQw_gafpHtmUpgLprroGuXJu4v-y9ZhfniotBzLIRk
-Message-ID: <CAC_iWj+3cc5LxL-Xrh=gO0hHgj60Qs5DsZxfZheQC8QywdMYbA@mail.gmail.com>
-Subject: Re: RISC-V UEFI/ACPI on QEMU regression?
-To: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,103 +96,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2 Apr 2025 at 17:26, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hey Bjorn
->
-> Long time, hope all is well!
->
-> On Wed, 2 Apr 2025 at 16:22, Bj=C3=B6rn T=C3=B6pel <bjorn@kernel.org> wro=
-te:
-> >
-> > Hi,
-> >
-> > I think I got a regression from commit 53d5a221632e ("emulation: Use
-> > bloblist to hold tables"), and v2024.10 for
-> > qemu-riscv64_smode_defconfig + acpi.config booting Linux with UEFI.
-> >
-> > TL;DR: It seems like the RSDP is placed in the wrong EFI memory map
-> > type (it should be "ACPI Reclaim").
-> >
-> > I might also be misunderstanding what config fragments should be
-> > used -- I'm out in the weeds here! ;-)
-> >
-> > When I was using v2024.10, ACPI RSDP was in ACPI Reclaim memory. All
-> > good, and e.g. a kexec would properly work. However, when using u-boot
-> > with commit 53d5a221632e ("emulation: Use bloblist to hold tables") I
-> > get the following when booting, and then kexec:
-> >
-> > First kernel:
-> > [    0.000000] ACPI: Early table checksum verification disabled
-> >                                                   [    0.000000] ACPI:
-> > RSDP 0x000000047EED3000 000024 (v02 BOCHS )
-> > Kexec kernel:
-> > [    0.000000] ACPI: Early table checksum verification disabled
-> > [    0.000000] ACPI:      0x000000047EED3000 000000 (v00
-> >   00000000      00000000)
-> > [    0.000000] Oops - load access fault [#1]
-> >
-> > RSDP reside in:
-> > [    0.000000] efi:   0x00047ded1000-0x00047eee3fff [Boot Code   |   |
-> >  |  |  |  |  |  |  |  |  |   |WB|  |  |  ]
-> >
-> > (Boot Code vs ACPI Reclaimed)
-> >
-> > Now to get qemu-riscv64_smode_defconfig + acpi.config to build
-> > post-2024.10, I needed to add the following fragments:
-> >
-> >   CONFIG_BLOBLIST=3Dy
-> >   CONFIG_BLOBLIST_ALLOC=3Dy
-> >   CONFIG_BLOBLIST_SIZE_RELOC=3D0x20000
-> >
-> > which is really just a "make the build not complain", guessing game
-> > from my side.
-> >
-> > My guess would be that it's related to the change in
-> > evt_write_acpi_tables(), where:
-> >
-> > -    ptr =3D memalign(SZ_4K, SZ_64K);
-> > +    ptr =3D bloblist_add(BLOBLISTT_ACPI_TABLES, SZ_64K, 12);
-> >
-> > is done.
-> >
-> > Is my config fragment broken, or is this a proper regression?
->
-> I think it's a regression and I think what breaks it is commit cfb4aa2a75=
-4ed1
->
-> Can you apply the diff below and see if it fixes it for you?
->
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> index 4422b31ac6a7..afa5eee85484 100644
-> --- a/lib/efi_loader/efi_acpi.c
-> +++ b/lib/efi_loader/efi_acpi.c
-> @@ -34,8 +34,8 @@ efi_status_t efi_acpi_register(void)
->          * add_u_boot_and_runtime(). At some point that function could cr=
-eate a
->          * more detailed map.
->          */
-> -       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
-> -               return EFI_SUCCESS;
-> +       //if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
-> +               ////return EFI_SUCCESS;
->
->         /* Mark space used for tables */
->         start =3D ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
->
-> Simon, why that PR got sent with no ACKs from any of the EFI maintainers?
+- avb_slot_verify_data_free() doesn't check its data parameter
+- out_data can be null if avb_slot_verify() fails to allocate memory
 
-And please fix whatever tooling you use to CC the proper maintainers
-next time [0] as I don't see my name in the CC list
+Signed-off-by: Gary Bisson <bisson.gary@gmail.com>
+---
+Another approach would be to fix avb_slot_verify_data_free() to check
+its paramter but I believe the goal is not to touch libavb to be closer
+to upstream.
+---
+ boot/bootmeth_android.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-[0] https://lore.kernel.org/u-boot/20250111000029.245022-27-sjg@chromium.or=
-g/
+diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+index 3a59a4e3f6..f431b6ae58 100644
+--- a/boot/bootmeth_android.c
++++ b/boot/bootmeth_android.c
+@@ -481,7 +481,8 @@ static int run_avb_verification(struct bootflow *bflow)
+ 		if (result != AVB_SLOT_VERIFY_RESULT_OK) {
+ 			printf("Verification failed, reason: %s\n",
+ 			       str_avb_slot_error(result));
+-			avb_slot_verify_data_free(out_data);
++			if (out_data)
++				avb_slot_verify_data_free(out_data);
+ 			return log_msg_ret("avb verify", -EIO);
+ 		}
+ 		boot_state = AVB_GREEN;
+@@ -491,7 +492,8 @@ static int run_avb_verification(struct bootflow *bflow)
+ 		    result != AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION) {
+ 			printf("Unlocked verification failed, reason: %s\n",
+ 			       str_avb_slot_error(result));
+-			avb_slot_verify_data_free(out_data);
++			if (out_data)
++				avb_slot_verify_data_free(out_data);
+ 			return log_msg_ret("avb verify unlocked", -EIO);
+ 		}
+ 		boot_state = AVB_ORANGE;
+-- 
+2.47.2
 
->
-> Thanks
-> /Ilias
-> >
-> >
-> > Thanks!
-> > Bj=C3=B6rn
