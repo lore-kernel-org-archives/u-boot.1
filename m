@@ -4,71 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7062C28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:23:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB5FC28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:31:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6416D81CF0;
-	Wed,  2 Apr 2025 17:22:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ED02C8035B;
+	Wed,  2 Apr 2025 17:31:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N3gcx2HW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SMiI8pBW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9347F8006D; Wed,  2 Apr 2025 17:22:57 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A8F181F4D
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:22:53 +0200 (CEST)
+ id 6474D81703; Wed,  2 Apr 2025 17:31:13 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B3C98006D
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:31:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 532FMpal3272444
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 2 Apr 2025 10:22:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743607371;
- bh=eXP52E7yrGa9YZPeHWI2TpX7THM05cpyHPpt/eQRlxs=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=N3gcx2HWUfvVHKbbin8STbVKJ523fjbNSB+ODwy2q45NOt9Klz1J0VP8u3TiA8hds
- bmg0G+gJUbOlP1CSY+FsgXupOr65G/4GTjhfhHMyXMyw2waoDb2oG7GN/vU5l1Chf/
- 8wJTNpY7hrd3ZO6aOpcjdTjmWJCkwNoqNky/Ml2s=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 532FMpjB111882
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 2 Apr 2025 10:22:51 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 2
- Apr 2025 10:22:50 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 2 Apr 2025 10:22:51 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 532FMpdN048234;
- Wed, 2 Apr 2025 10:22:51 -0500
-Date: Wed, 2 Apr 2025 10:22:51 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Dhruva Gole <d-gole@ti.com>
-CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis
- <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
- Andrew Davis <afd@ti.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Jonas Wood <jw@ti.com>,
- <praneeth@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] firmware: ti_sci: Scan all device instances when
- releasing exclusive devices
-Message-ID: <20250402152251.omjw3qrwf6ldad6a@obedience>
-References: <20250401205515.4078312-1-nm@ti.com>
- <20250402062730.vgmqbxczm2aee67z@lcpd911>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72bb9725de1so1830954a34.2
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 08:31:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1743607869; x=1744212669; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CjTLR92p9agQJd0SKg+EscPhEx+WKnLQ7W2gP9PLjgE=;
+ b=SMiI8pBW4BWWR4OZ/DheAmIM/U+y4HDJW2unhwMFwLEPBFZvBKuhZn32QrTeHf3HoB
+ c+fuSRkEWYGFV2/fW9FQboFc36lV80Eh48+qQ+0vvYZCu/To+DuHiYA2qkQIX+BoYx3e
+ O9T/6w/aKeaeasVyM6UjuM6lSJrTpDuruj/5Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743607869; x=1744212669;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CjTLR92p9agQJd0SKg+EscPhEx+WKnLQ7W2gP9PLjgE=;
+ b=vDdeTfJFYWJQ8ERqvgmmI7UpBpPa1sXhNk0OUShKUf/wdsuKRuW+EqD9WJvUxbS9l1
+ CAKlpQyZKVn0hNAMgIgPLNpFKRrpkd/e/1JyYinpNr1ygWS6h0gCKZJ40d78jUq6hCwQ
+ KrPvAkLsKqrIANd/2+zlZXp6rOEI5u8beXMX2Z6/dl15yvHEv9ntcpEYXf2J8eQqgXS5
+ vfUzoF7jj3ze9bywvmmZDjTAkLkTIOln7yT+jd1jfpUC5e4EW51KQK1iVoimwaM8Iihd
+ xEBnI2Zter/TrsDaFXngSmO3BHPg7mnJDV2FcLA9HID1uTdsAnlqZ2fZbYh42svqDU9Q
+ lkWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWMAnAEoNyro+hW7TroBy5JDixHpsexyaaeZsfOXZiHbwSV2TV3CErU8wXuQkFCs0FEVmXYIHY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyF+OuPtFnZK8Mz4B6OVaRdNq+UX3QJ3gQHPiD0lxji5z8Uaw8a
+ wf+zcyuqKxU5/rGF5N+zk2l7JEGYQc9LiIOy42aVusM2C2EVuxxqHQV1tpinfck=
+X-Gm-Gg: ASbGnctWIMnTegwC/DViINF1407Yxb4iVasAh6A5IUE0x026Jub/KNKRDu29P0A3WcL
+ QNjiIO+BAN50+pJ6/UwphfmZNWgcxFlQcV9zu8XTaBRMP6/iOBijS4JptqKZ3E+vxMI+5HSy6Ny
+ qZZ6RmPoXAW3IybF7CfXPX/3hHmTd8Or6xD45j+RAkw6g+iobdplsJJwoP4n+Q/m4IGBy2tIBRJ
+ avT3Sokn5plv0zJthKAY4d1xG1kobRnMqkM2l4wc8pdpnmk4Y6/GyBHH6fcVlJRLfIr9bzpG4vW
+ eYBZTJUqC/qzSenP3Ui22OyYp6ehPSBE3OCHp/NM1IZkbQE6opXrkThCkVrcSnWbr0w67QmqX7g
+ 9FlZ8Lg==
+X-Google-Smtp-Source: AGHT+IEpBNwXt0zFQuTUzHSZVG3t1AKxjgstxws4q4tSSrfe/U/4DIjJJa1NXLxxvRiSJX35TJoygw==
+X-Received: by 2002:a05:6830:3c05:b0:72b:943f:dda8 with SMTP id
+ 46e09a7af769-72c6384d65amr12497272a34.26.1743607869571; 
+ Wed, 02 Apr 2025 08:31:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72c58267b6esm2318480a34.53.2025.04.02.08.31.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Apr 2025 08:31:08 -0700 (PDT)
+Date: Wed, 2 Apr 2025 09:31:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Bruce Suen <bruce_suen@163.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 02/14] net: airoha: Add Airoha Ethernet driver
+Message-ID: <20250402153104.GZ5495@bill-the-cat>
+References: <20250401225156.25790-1-ansuelsmth@gmail.com>
+ <20250401225156.25790-3-ansuelsmth@gmail.com>
+ <20250402151951.GY5495@bill-the-cat>
+ <67ed5610.050a0220.1c650.ac73@mx.google.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CnLLSXH77Dbhicom"
 Content-Disposition: inline
-In-Reply-To: <20250402062730.vgmqbxczm2aee67z@lcpd911>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <67ed5610.050a0220.1c650.ac73@mx.google.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,135 +107,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11:57-20250402, Dhruva Gole wrote:
-[...]
-> > 
-> > As a result of this, the cleanup we intent to do with
-> 
-> s/intent/intend
 
-Thanks. will pick it up in a respin.
+--CnLLSXH77Dbhicom
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> 
-[...]
+On Wed, Apr 02, 2025 at 05:21:49PM +0200, Christian Marangi wrote:
+> On Wed, Apr 02, 2025 at 09:19:51AM -0600, Tom Rini wrote:
+> > On Wed, Apr 02, 2025 at 12:51:34AM +0200, Christian Marangi wrote:
+> >=20
+> > > Add airoha Ethernet driver for Airoha AN7581 SoC. This is a majorly
+> > > rewritten and simplified version of the Linux airoha_eth.c driver.
+> > >=20
+> > > It's has been modified to support a single RX/TX ring to reflect U-Bo=
+ot
+> > > implementation with recv and send API.
+> > >=20
+> > > The struct and the define are kept as similar as possible to upstream
+> > > one to not diverge too much.
+> > >=20
+> > > The AN7581 SoC include an Ethernet Switch based on the Mediatek MT753x
+> > > but doesn't require any modification aside from setting the CPU port =
+and
+> > > applying the Flood configuration hence it can be handled entirely in =
+the
+> > > Ethernet driver.
+> > >=20
+> > > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > > ---
+> > >  drivers/net/Kconfig      |    8 +
+> > >  drivers/net/Makefile     |    1 +
+> > >  drivers/net/airoha_eth.c | 1448 ++++++++++++++++++++++++++++++++++++=
+++
+> > >  3 files changed, 1457 insertions(+)
+> > >  create mode 100644 drivers/net/airoha_eth.c
+> >=20
+> > checkpatch.pl has some macro warnings and it looks like some
+> > inconsistent spacing around '#define FOO' vs '#define<tab>FOO' ? And are
+> > all of those defines needed?
+> >=20
+>=20
+> No they are not all needed, I defined them for consistency with the
+> original driver. Should I drop them?
+>=20
+> For the checkpatch check, also comes from the original driver.
 
-> > To fix this, let us make ti_sci_cmd_release_exclusive_devices scan the
-> > all registrations of tisci instances and cleanup all exclusive devices
-> > that have ever been registered.
-> 
-> Firstly, it seems to me like this issue is mostly specific to the
-> AM64/ DM+TIFS combined core arch K3 devices? So it would be good if the
-> commit message can specify that for better context. People who are more
-> used to the R5 core running DM architecture may find this description
-> slightly confusing as there's no TI SCI calls that the R5 SPL can make
-> to DM since DM isn't up yet on those devices...
+I guess if it will make long term re-syncs easier, we can ignore them.
+But the macro thing should likely be addressed upstream too?
 
-This is not related to TI_SCI. As described in commit message, it is just
-the multi_fit_dtb handling challenges. Combined DMSC or split DM arch
-devices are probably both susceptible to this. That said, i have tested
-this on am64x.
+--=20
+Tom
 
-[...]
-> > index 190a1e3f5fc3..54d6689ce783 100644
-> > --- a/drivers/firmware/ti_sci.c
-> > +++ b/drivers/firmware/ti_sci.c
-> > @@ -696,20 +696,25 @@ static int ti_sci_cmd_put_device(const struct ti_sci_handle *handle, u32 id)
-> >  				       MSG_DEVICE_SW_STATE_AUTO_OFF);
-> >  }
-> >  
-> > -static
-> > -int ti_sci_cmd_release_exclusive_devices(const struct ti_sci_handle *handle)
-> > +static int ti_sci_cmd_release_exclusive_devices(void)
-> >  {
-> >  	struct ti_sci_exclusive_dev *dev, *tmp;
-> >  	struct ti_sci_info *info;
-> >  	int i, cnt;
-> >  
-> > -	info = handle_to_ti_sci_info(handle);
-> > -
-> > -	list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
-> > -		cnt = dev->count;
-> > -		debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
-> > -		for (i = 0; i < cnt; i++)
-> > -			ti_sci_cmd_put_device(handle, dev->id);
-> > +	/*
-> > +	 * Scan all ti_sci_list registrations, since with FIT images, we could
-> > +	 * have started with one device tree registration and switched over
-> > +	 * to a final version. This prevents exclusive devices identified
-> > +	 * during the first probe to be left orphan.
-> > +	 */
-> > +	list_for_each_entry(info, &ti_sci_list, list) {
-> > +		list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
-> > +			cnt = dev->count;
-> > +			debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
-> > +			for (i = 0; i < cnt; i++)
-> > +				ti_sci_cmd_put_device(&info->handle, dev->id);
-> > +		}
-> 
-> The other thing I am slightly not comfortable with is this.
-> The release_exclusive call is going to be common to every K3 device.
-> With your changes, will it result in any sort of increased boot time
-> penalty? I feel like it might, unless I maybe mistaken.
+--CnLLSXH77Dbhicom
+Content-Type: application/pgp-signature; name="signature.asc"
 
-It should not. for non-multi-dtb FIT, this logic just flows only 1 list
-which is all that is present. for multi-dtb FIT images, it fixes a real
-problem.
+-----BEGIN PGP SIGNATURE-----
 
-> 
-> Also, to fix just AM64 style devices, we're touching a K3 common piece
-> of code like TI SCI. The issue that you described about the TI SCI
-> probing the second time causing issues seems more fundamental than the
-> fix being offered here.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmftWDEACgkQFHw5/5Y0
+tyzvdwv/V81tgPXotvStViLomht9dBrfNigaCTpiwn/gG+d99/b3DD1WCFOb3c/o
+lssXZi2Df5vS63OtvK0PS2sJGknQC5AZHi1OiSjOIVbDS2UqDkmyj0mceOFogiC6
+llZ+cOCFg5C9IFaiuLpYG9DBur8QW2lOGrpUoxy1cVtA3WaaQaAILFngIVROKBBB
+3IUHQ7WoZGOPCu2bW9X4P5irkpfL+P9xGmjKIFlcPFRtgXw84AdbgSrP5THhYXio
+ErcSJpO0jqBD375+VSVDJBciLSho2orDJNXTB9FO0Z/pnnUdz2rUx8ETrmtZjpO5
+vEO9yjXWUE3QsCcoaUGZkNBsDR9QC4zxl0w382W5EMOluEV6zE35VwygN5zUdQvY
+VnQPZTXlEyHrGlmdLKiVE3LPEclFqk6MAMMQIS1plSMF9C0nfItN9Ztb3xy+P90G
+E1cJ0ZPE0IXdRugM+/zjZlkNbuH1BzNOfuijCy9sH/+1zf0x3SwEu9cv5FH5WbLD
+X36hKV7C
+=hPo6
+-----END PGP SIGNATURE-----
 
-As described in commit message, calling probe twice is Normal since
-there are two dtbs involved in the FIT image (one with which we
-identify what is the board and use the information to pick the correct
-dtb).
-
-> Quoting the commit message,
-> 
-> > At this stage, the exclusive devices such as i2c instances used to
-> > probe the board information is left in the old info->dev_list that is
-> > no longer used actively by the system using the replaced dtb.
-> 
-> Can we instead try and fix the TI SCI driver behaviour from the first time?
-> Like is it possible to implement a .remove for the TI SCI driver such
-> that when the old dtb is now out of context, the driver gets cleanly
-> removed, and with that calls the release_exclusive of all devices that
-> it requested? 
-
-Tried .remove and .unbind and enabling CONFIG_SPL_DM_DEVICE_REMOVE but
-then we run into all kind of other dependency issues on dm_uninit
-
-> That way the new instance of TI SCI driver doesn't need to worry about
-> doing cleanups from any of it's previous instances right?
-> 
-> To me that sounds like the right root cause to try and fix. Let me know
-> what are your thoughts on this.
-
-I am open to any approach :) - just dont seem to find one that works
-other than what I posted.
-
-> 
-> >  	}
-> >  
-> >  	return 0;
-> > diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
-> > index 8e4c43cef311..aa4d105ee988 100644
-> > --- a/include/linux/soc/ti/ti_sci_protocol.h
-> > +++ b/include/linux/soc/ti/ti_sci_protocol.h
-> > @@ -143,7 +143,7 @@ struct ti_sci_dev_ops {
-> >  				 u32 reset_state);
-> >  	int (*get_device_resets)(const struct ti_sci_handle *handle, u32 id,
-> >  				 u32 *reset_state);
-> > -	int (*release_exclusive_devices)(const struct ti_sci_handle *handle);
-> > +	int (*release_exclusive_devices)(void);
-> 
-> Nit: Just update the copyright dates of the files you're touching...
-
-not for minor changes such as these.. not worth the diff.
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+--CnLLSXH77Dbhicom--
