@@ -4,94 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD7FC28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E61BEC28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 16:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A424981CF0;
-	Wed,  2 Apr 2025 17:56:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D90F81E1F;
+	Wed,  2 Apr 2025 18:17:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="dvQCD1tG";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="C1pItY2Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15FA281E1F; Wed,  2 Apr 2025 17:56:53 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D4B5C81703; Wed,  2 Apr 2025 17:26:52 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7219580FDA
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:56:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 532ATYQf014402;
- Wed, 2 Apr 2025 15:56:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=VMxQMDM1n2yPA88YMMaxuXFS
- CMwaaKqyL8xHBsH1Vdk=; b=dvQCD1tG++SFeuzMHFKTtynkRjLSz5SrKeoElR+0
- mx+LlLwrRJqTLtInOsBRmC7gqxsDYM7mb/U6Sfyam6BUOAmynf6pLRrrVICeaVmi
- Ofejr9SGZQNVHt/f1+9m6OzODajqn3ttyFWvHUDpysy0uqJ+VCtNriYJx59oi51I
- XXQEcuIll+P/jwjO50lJWFv04enVcZRRWboMx0i2f1vZ55iwi2CLyQkRHSbMy3EK
- BVrPsqJWb/DtNvLPYln8JEUNw8ciymmwNPCuiSxPt4cqA4/Q3NjJ+Mc5jz8kY2Hg
- vHacE46S7FeN0gpj9eGZaSF+FNQHYJ6nkgHFVhJb4DMXFQ==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45p7tvkyxc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 02 Apr 2025 15:56:28 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 532FuSML019594
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 2 Apr 2025 15:56:28 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 2 Apr 2025 08:56:24 -0700
-Date: Wed, 2 Apr 2025 21:26:21 +0530
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: <caleb.connolly@linaro.org>, <neil.armstrong@linaro.org>,
- <sumit.garg@kernel.org>, <trini@konsulko.com>,
- <joe.hershberger@ni.com>, <michal.simek@amd.com>,
- <marek.vasut+renesas@mailbox.org>, <cniedermaier@dh-electronics.com>,
- <sjg@chromium.org>, <u-boot-qcom@groups.io>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v1 1/3] scsi: Implement get_blk() function
-Message-ID: <Z+1eJULkwOWl6ZCB@hu-varada-blr.qualcomm.com>
-References: <20250401080015.1470999-1-quic_varada@quicinc.com>
- <20250401080015.1470999-2-quic_varada@quicinc.com>
- <7e90eee8-990d-4f80-b918-a53f1ef30e22@gmx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id BF8A58006D
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:26:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bjorn@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id A54D6614AC
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 15:26:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DCBAC4CEEA
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 15:26:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1743607609;
+ bh=/txMtPZcQYMeDN0+OnIPAiIOOi/M6qU5DMRUyXOXn5s=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=C1pItY2ZZa53dOiHgR0F89EXlX1EGWE6a7p4bu86MjK7SSgOcYQjsEFXlZ5+dhJqx
+ VGiHXqLNNB2z5ZZMTS/3TTEB0Gdr0C1u44CENQa99IwIfADAVsjVTEdJpb7EpX+KQG
+ AoVsQOP7IRIZQ7be5mOGy2/Iktdih2InRLNYDtXwtm45nETXk7qXwu55lmy8QtPFj3
+ wK+Z9phSkbPHQ6GXxiOferxUcO67MRblOUKgcw8b8dh5JO/useOWTqm2M+2Ge4r7VG
+ Oo1iskUIExY7eVV+NIL94/dGUJC2/3ek3FeNutmafA95p2t2Xxxcisn0OPLVFndErL
+ GU04EZnOBvfFg==
+Received: by mail-qv1-f47.google.com with SMTP id
+ 6a1803df08f44-6e904f53151so58172086d6.3
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 08:26:49 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuqibx9foeqCqPHAxDRXeHkYuLlzMfnC26LpT083q5ktxePOcVZ7wodgYdAms0s+eEOR3oe2E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0kjZEsVVV9VvHVHJmFyFvagKuK+DGXP5UBwugxZlXRZgDTgfT
+ nscv4MdEV7PWwe/HSw5za12bAihMT07j1lC0Gyi38qJCTrbDxwEP1gOvxm2luO8Evp01bENgonK
+ HOBvA/V5tCV4GmBMGGtn2V4rAiCY=
+X-Google-Smtp-Source: AGHT+IEMAl18WcMx+sY3qECHI183rPkmXA6tCv+g4z55Isg1hzEXeIC20oy2o8aG0zbyu+e3eMEMrBYkO3qYPZG9/0o=
+X-Received: by 2002:a05:6214:262f:b0:6e8:fbb7:675b with SMTP id
+ 6a1803df08f44-6eed6213166mr254724776d6.32.1743607608357; Wed, 02 Apr 2025
+ 08:26:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <7e90eee8-990d-4f80-b918-a53f1ef30e22@gmx.de>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Authority-Analysis: v=2.4 cv=OIon3TaB c=1 sm=1 tr=0 ts=67ed5e2d cx=c_pps
- a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=COk6AnOGAAAA:8
- a=-loAjjW0pCZ9fMcQaYcA:9 a=CjuIK1q_8ugA:10
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: OeBF9Hv-x6C160k1Xh_jprHBDQDOA1_z
-X-Proofpoint-GUID: OeBF9Hv-x6C160k1Xh_jprHBDQDOA1_z
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-02_06,2025-04-02_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- mlxlogscore=999 lowpriorityscore=0 malwarescore=0 mlxscore=0 clxscore=1015
- adultscore=0 bulkscore=0 phishscore=0 suspectscore=0 impostorscore=0
- spamscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2504020101
+References: <CAJ+HfNj+B-LmZx7tVXWPqvK6fZ9V_iHsJ19e9MUFGF=JTVu6Xg@mail.gmail.com>
+ <CAC_iWjJyBjGnK6Wv0qXvZ-ujnZ9anc+bw_q-0qCRk-3XAGC4bw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJyBjGnK6Wv0qXvZ-ujnZ9anc+bw_q-0qCRk-3XAGC4bw@mail.gmail.com>
+From: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
+Date: Wed, 2 Apr 2025 17:26:37 +0200
+X-Gmail-Original-Message-ID: <CAJ+HfNjOfy5FVBhPV52gpPV1O_=F9KWDoYVeZVBjSOoCUACacw@mail.gmail.com>
+X-Gm-Features: AQ5f1JpqWHvGFu8m-GijsEc4IWxpBuTxhtJea2qxQxavcxGujAq_3SpgpoSrwVM
+Message-ID: <CAJ+HfNjOfy5FVBhPV52gpPV1O_=F9KWDoYVeZVBjSOoCUACacw@mail.gmail.com>
+Subject: Re: RISC-V UEFI/ACPI on QEMU regression?
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 02 Apr 2025 18:17:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,90 +84,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 01, 2025 at 06:29:31PM +0200, Heinrich Schuchardt wrote:
-> On 01.04.25 10:00, Varadarajan Narayanan wrote:
-> > Add a function to obtain the block device for SCSI.
-> >
-> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> > ---
-> >   drivers/scsi/scsi-uclass.c | 30 ++++++++++++++++++++++++++++++
-> >   include/scsi.h             | 12 ++++++++++++
-> >   2 files changed, 42 insertions(+)
-> >
-> > diff --git a/drivers/scsi/scsi-uclass.c b/drivers/scsi/scsi-uclass.c
-> > index 1ee8236c05c..c2e34082bce 100644
-> > --- a/drivers/scsi/scsi-uclass.c
-> > +++ b/drivers/scsi/scsi-uclass.c
-> > @@ -10,7 +10,9 @@
-> >
-> >   #define LOG_CATEGORY UCLASS_SCSI
-> >
-> > +#include <blk.h>
-> >   #include <dm.h>
-> > +#include <part.h>
-> >   #include <scsi.h>
-> >
-> >   int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
-> > @@ -23,6 +25,34 @@ int scsi_exec(struct udevice *dev, struct scsi_cmd *pccb)
-> >   	return ops->exec(dev, pccb);
-> >   }
-> >
-> > +int scsi_get_blk(const char *partition_name,
-> > +		 struct blk_desc **blk_desc_ptr,
-> > +		 struct disk_partition *part_info_ptr)
-> > +{
-> > +	static int is_scsi_scanned;
-> > +	struct blk_desc *blk;
-> > +	int i, ret;
-> > +
-> > +	if (!is_scsi_scanned) {
-> > +		scsi_scan(false /* no verbose */);
-> > +		is_scsi_scanned = 1;
-> > +	}
-> > +
-> > +	for (i = 0; i < blk_find_max_devnum(UCLASS_SCSI) + 1; i++) {
-> > +		ret = blk_get_desc(UCLASS_SCSI, i, &blk);
-> > +		if (ret)
-> > +			continue;
-> > +
-> > +		ret = part_get_info_by_name(blk, partition_name, part_info_ptr);
-> > +		if (ret > 0) {
-> > +			*blk_desc_ptr = blk;
-> > +			return 0;
-> > +		}
-> > +	}
-> > +
-> > +	return -1;
-> > +}
-> > +
-> >   int scsi_bus_reset(struct udevice *dev)
-> >   {
-> >   	struct scsi_ops *ops = scsi_get_ops(dev);
-> > diff --git a/include/scsi.h b/include/scsi.h
-> > index b18ae37b861..1ba55516588 100644
-> > --- a/include/scsi.h
-> > +++ b/include/scsi.h
-> > @@ -9,6 +9,7 @@
-> >   #include <asm/cache.h>
-> >   #include <bouncebuf.h>
-> >   #include <linux/dma-direction.h>
-> > +#include <part.h>
-> >
-> >   struct udevice;
-> >
-> > @@ -349,6 +350,17 @@ int scsi_scan(bool verbose);
-> >    */
-> >   int scsi_scan_dev(struct udevice *dev, bool verbose);
-> >
-> > +/**
-> > + * scsi_get_blk() - Provides SCSI partition information.
-> > + *
-> > + * @partition_name: Partition name for fetching its info
+Hey!
+
+On Wed, 2 Apr 2025 at 16:27, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Partition names cannot be expected to be unique.
-> UUIDs should be.
+> Hey Bjorn
+>
+> Long time, hope all is well!
 
-Will change to UUID and post a new version.
+Too long! Maybe next Plumbers? ;-)
 
-Thanks
-Varada
+> I think it's a regression and I think what breaks it is commit cfb4aa2a75=
+4ed1
+>
+> Can you apply the diff below and see if it fixes it for you?
+>
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> index 4422b31ac6a7..afa5eee85484 100644
+> --- a/lib/efi_loader/efi_acpi.c
+> +++ b/lib/efi_loader/efi_acpi.c
+> @@ -34,8 +34,8 @@ efi_status_t efi_acpi_register(void)
+>          * add_u_boot_and_runtime(). At some point that function could cr=
+eate a
+>          * more detailed map.
+>          */
+> -       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
+> -               return EFI_SUCCESS;
+> +       //if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
+> +               ////return EFI_SUCCESS;
+>
+>         /* Mark space used for tables */
+>         start =3D ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+
+Unfortunately, still the same with this patch:
+
+[    0.000000] efi:   0x00047eee3000-0x00047ef19fff [Boot Code   |   |
+ |  |  |  |  |  |  |  |  |   |WB|  |  |  ]
+[    0.000000] efi:   0x00047ef1a000-0x00047ef49fff [ACPI Reclaim|   |
+ |  |  |  |  |  |  |  |  |   |WB|  |  |  ]
+[    0.000000] ACPI: RSDP 0x000000047EED1000 000024 (v02 BOCHS )
+
+(RSDP resides in Boot Code)
+
+
+Bj=C3=B6rn
