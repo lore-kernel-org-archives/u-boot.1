@@ -4,72 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700C9C28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B2CC36014
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:04:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0062E81703;
-	Wed,  2 Apr 2025 11:02:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6758481703;
+	Wed,  2 Apr 2025 11:04:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cKRi/F3K";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="RMl9vrfr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C9638171B; Wed,  2 Apr 2025 11:02:02 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4221780584
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 11:01:59 +0200 (CEST)
+ id F174781CF0; Wed,  2 Apr 2025 11:04:31 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C8CE80584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 11:04:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53291pPa3878895
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 2 Apr 2025 04:01:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743584511;
- bh=SagchhTJR0J/gk8vSJTd7wKrk2tF3jNWlo2AisMNRDE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=cKRi/F3KJj+CYRGnt6cznSEs/NrukZEhO7X2xLj/RcU7QT+1FK/Q16XTbyzEX/Aai
- QbqY0+G6seIJ3aWeUyNptSBqT4BvwRat4W4T13G6nYO28aeQVwVl/guPYvZtjdEad1
- gHnpXAnus4L6I0hlJ9J3d7vKJ5NRmvh0WA8V7FfY=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53291puE016122
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 2 Apr 2025 04:01:51 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 2
- Apr 2025 04:01:51 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 2 Apr 2025 04:01:51 -0500
-Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
- [172.24.227.136])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53291lQW127981;
- Wed, 2 Apr 2025 04:01:48 -0500
-Message-ID: <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
-Date: Wed, 2 Apr 2025 14:31:47 +0530
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1743584634;
+ bh=6MhLua3spISVM2VVka5eJ5uQCaNuua1QGylDhZs7vKY=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=RMl9vrfre7dWojjoh2QTshbyECeozpMDRrK2jeLc+frAg4OQkZaPei6MP7dU4S+jM
+ Dbt0rny88MrlpIqNaLgKfMdaUv3fTNUV8Caf8QqExqRXFI8XJ070C2XFQlY8zMua3b
+ CJm6I6K2BUU5QFWql/rg4Mlza94vEMr7lJMNXnnULclGnlPlFZDljViNTSrYUOZOlA
+ GQWSgog3KgxkmCiGsnOUUMn+bcTIrSUE6tLpUo922xJy91t5oV0WuQvOCpUfOJXNtc
+ 6+Siqz3vODxuJkN5BXgOn5vSej+24ABLfE67RQa5W6o8PFQRT6O7L1eLHVykWi50ZF
+ JPoXKh0WxZ00Q==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Michael Walle <mwalle@kernel.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Marek Vasut <marex@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Benedikt Spranger
+ <b.spranger@linutronix.de>, Simon Glass <sjg@chromium.org>, John Ogness
+ <john.ogness@linutronix.de>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: RE: [PATCH] tiny-printf: Add support for upper case hex values
+Thread-Topic: [PATCH] tiny-printf: Add support for upper case hex values
+Thread-Index: AQHbmYJXS9LfVQSOoEantzWfxGK4yLN72G+AgAAkmwCAEnYcAIAAcb5ggAEAtgCAAD/j0A==
+Date: Wed, 2 Apr 2025 09:03:53 +0000
+Message-ID: <de267e9022f844cf83bfd3e284c67955@dh-electronics.com>
+References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
+ <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
+ <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
+ <D8V6D9S6CBRH.3LRHNU4XCVF14@kernel.org>
+ <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
+ <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
+In-Reply-To: <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
- properties to supernodes
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <alpernebiyasak@gmail.com>, 
- <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
- <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-chavda@ti.com>
-References: <20250327080642.2269856-1-m-shah@ti.com>
- <20250327080642.2269856-2-m-shah@ti.com>
- <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
-Content-Language: en-US
-From: Moteen Shah <m-shah@ti.com>
-In-Reply-To: <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,146 +80,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Simon,
-
-On 29/03/25 05:17, Simon Glass wrote:
-> Hi Moteen,
->
-> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
->> Add a function to scan through all the nodes in the device-tree
->> recusively for bootph-* property. If found, propagate it to all
->> of its parent nodes up the hierarchy.
->>
->> Signed-off-by: Moteen Shah <m-shah@ti.com>
->> ---
->>   tools/binman/control.py | 35 ++++++++++++++++++++++++++++++++++-
->>   1 file changed, 34 insertions(+), 1 deletion(-)
->>
->> diff --git a/tools/binman/control.py b/tools/binman/control.py
->> index e73c598298c..e739949d366 100644
->> --- a/tools/binman/control.py
->> +++ b/tools/binman/control.py
->> @@ -526,6 +526,35 @@ def _RemoveTemplates(parent):
->>           if node.name.startswith('template'):
->>               node.Delete()
->>
->> +def prop_bootph_to_parent(node, prop, dtb):
-> I think the 'prop_' is a bit confusing, since you are dealing with
-> properties! How about 'add_' as the prefix?
-
-'add_' should be more descriptive, will add that in v3.
-
->
->> +    """Propagates bootph-* property to all the parent
->> +    nodes up the hierarchy
-> First line should be a summary
->
-> then blank line
->
-> then describe the args...you can see this if you look at a few other functions.
-
-
-Noted, will rectify in v3.
-
->> +    """
->> +    parent = node.parent
->> +    if parent == None or parent.props.get(prop):
-> if not parent or ...
-
-
-Noted.
-
-
->
->> +       return
->> +
->> +    while parent:
->> +        parent.AddEmptyProp(prop, 0)
->> +        parent = parent.parent
->> +
->> +def scan_and_prop_bootph(node, dtb):
->> +    """Scan the device tree and set the bootph-* property if its present
->> +    in subnode
->> +
->> +    This is used to set the bootph-* property in the parent node if a
->> +    "bootph-*" property is found in any of the subnodes of the parent
->> +    node.
-> comment style again
->
->> +    """
->> +    bootph_prop = ['bootph-all', 'bootph-some-ram', 'bootph-pre-ram', 'bootph-pre-sram']
->  From my understanding the only ones that matter are bootph-all and
-> bootph-some-ram, since the SPL ones are handled by fdtgrep.
-
-
-Noted.
-
-
->
->> +
->> +    for props in bootph_prop:
-> for prop
->
-> (since it is just one)
->
->> +        if node.props.get(props):
->> +            prop_bootph_to_parent(node, props, dtb)
->> +
->> +    for subnode in node.subnodes:
->> +       scan_and_prop_bootph(subnode, dtb)
->> +
->>   def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, indir):
->>       """Prepare the images to be processed and select the device tree
->>
->> @@ -563,7 +592,11 @@ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, ind
->>           indir = []
->>       dtb_fname = fdt_util.EnsureCompiled(dtb_fname, indir=indir)
->>       fname = tools.get_output_filename('u-boot.dtb.out')
->> -    tools.write_file(fname, tools.read_file(dtb_fname))
->> +    dtb = fdt.FdtScan(dtb_fname)
->> +    scan_and_prop_bootph(dtb.GetRoot(), dtb)
->> +    dtb.Sync(True)
->> +    tools.write_file(dtb_fname, dtb.GetContents())
->> +    tools.write_file(fname, dtb.GetContents())
-> You shouldn't write back to the file created by the build. Do you need this?
-
-
-Had the same thought, but the build fails in non clean builds[0]. Did a 
-workaround[1] but then some essential template nodes ends up getting 
-deleted from u-boot.dtb. Finally, had to write back to the file
-to resolve the issue.
-
->>       dtb = fdt.FdtScan(fname)
->>
->>       node = _FindBinmanNode(dtb)
->> --
->> 2.34.1
->>
-> The code looks fine to me apart from the nits.
->
-> This addition needs a test - see ftest.py for some examples there. But
-> basically just create a dts that has some props in it, then check that
-> they got added.
-
-
-Included a test as well in the patchset[3]. Do let me know if there are 
-some changes required in it.
-
->
-> I think testSimpleFitEncryptedData() could be a good example?
->
-> Regards,
-> Simon
-
-References:
-[0] 
-https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-non-clean-build
-[1] 
-https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-patch-tools-dtdoc-fdt-py
-[3] https://lore.kernel.org/u-boot/20250327080642.2269856-3-m-shah@ti.com/
-
-Thanks for the review.
-
-Regards,
-Moteen
-
+RnJvbTogTWljaGFlbCBXYWxsZSA8bXdhbGxlQGtlcm5lbC5vcmc+DQpTZW50OiBXZWRuZXNkYXks
+IEFwcmlsIDIsIDIwMjUgOTowMiBBTQ0KPj4+PiBUaGUgaXNzdWUgaXMgdGhhdCBkaXNhYmxpbmcg
+VElOWV9QUklOVEYgbWF5IG5vdCBiZSBwb3NzaWJsZSAoc2l6ZQ0KPj4+PiBjb25zdHJhaW50cykg
+YW5kIHNvbWUgY29kZSBpcyBjb21waWxlZCBmb3IgZGlmZmVyZW50IHN0YWdlcyBhbmQgcGVvcGxl
+DQo+Pj4+IHR5cGljYWxseSBkb24ndCBjaGVjayB3aGV0aGVyIHRoZSBmb3JtYXQgdXNlZCBpbiBw
+cmludGYgaXMgdmFsaWQgd2l0aA0KPj4+PiB0aW55X3ByaW50Zi4gSSd2ZSBoYWQgdGhpcyBpc3N1
+ZSBhbHJlYWR5IGluIHRoZSBwYXN0LCBJIHZhZ3VlbHkgcmVjYWxsDQo+Pj4+ICJjb21wbGFpbmlu
+ZyIgYWJvdXQgaXQgb24gSVJDLg0KPj4+DQo+Pj4gWWVzLCBJJ3ZlIHN0dW1ibGVkIG9uICIlcGEi
+IHdpdGggdGlueSBwcmludGYgKGkuZS4gaW4NCj4+PiBkcml2ZXJzL3BpbmN0cmwvcGluY3RybC1z
+aW5nbGUuYykgd2hpY2ggaXMgcHJpbnRpbmcgdGhlIHZlcnkgd3JvbmcNCj4+PiB2YWx1ZSwgYWN0
+dWFsbHkgOikgU28gcHJpbnRpbmcgYW55dGhpbmcgdW5rbm93biBhcyAnPycgd291bGQgcmVhbGx5
+DQo+Pj4gaGVscCBoZXJlLg0KPj4NCj4+IFNvbWV0aGluZyBsaWtlIHRoYXQgd291bGQgaGVscDoN
+Cj4+IGRpZmYgLS1naXQgYS9saWIvdGlueS1wcmludGYuYyBiL2xpYi90aW55LXByaW50Zi5jDQo+
+PiBpbmRleCA0OGRiN2IxZjc4Zi4uYjkxOGQ2ZDczODYgMTAwNjQ0DQo+PiAtLS0gYS9saWIvdGlu
+eS1wcmludGYuYw0KPj4gKysrIGIvbGliL3RpbnktcHJpbnRmLmMNCj4+IEBAIC0yODAsNiArMjgw
+LDEyIEBAIHN0YXRpYyBpbnQgX3ZwcmludGYoc3RydWN0IHByaW50Zl9pbmZvICppbmZvLCBjb25z
+dCBjaGFyICpmbXQsIHZhX2xpc3QgdmEpDQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgd2hpbGUgKGlzYWxudW0oZm10WzBdKSkNCj4+ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZtdCsrOw0KPj4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOw0KPj4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB9IGVsc2Ugew0KPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGlmIChmbXRbMF0gIT0gJ1wwJyAmJiAoZm10WzBdID09ICdhJyB8fCBmbXRbMF0gPT0g
+J20nIHx8DQo+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBmbXRbMF0gPT0gJ00nIHx8IGZtdFswXSA9PSAnSScpKSB7DQo+PiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmbXQrKzsNCj4+
+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdvdG8gdW5z
+dXBwb3J0ZWQ7DQo+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfQ0K
+PiANCj4gSSB3b3VsZG4ndCBtaW5kIHByaW50aW5nIHRoZSBwb2ludGVyIGZvciAlcFttTUldLCBi
+dXQgJXBhIHByaW50cyB0aGUNCj4gKmNvbnRlbnQqIG9mIHRoZSBwb2ludGVyIHdoaWNoIGlzIHJl
+YWxseSBjb25mdXNpbmcuIEkuZS4gaW4NCj4gcGluY3RybC1zaW5nbGUuYyB0aGUgcmVnIHZhbHVl
+IHBhaXJzIGFyZSBwcmludGVkIGxpa2UNCj4gDQo+ICAgZGV2X2RiZyhkZXYsICJyZWcvdmFsICVw
+YS8weCUwOHhcbiIsICZyZWcsIHZhbCk7DQo+IA0KPiB3aXRoIHJlZyBiZWluZyBhIHBvaW50ZXIg
+dG8gYSBwaHlzaWNhbCBhZGRyZXNzLiBTbyB3aXRoIHRpbnlfcHJpbnRmDQo+IHRoZSBhZGRyZXNz
+IG9mIHJlZyAod2hpY2ggaXMgYSBwb2ludGVyIHRvIHRoZSBzdGFjaykgaXMgcHJpbnRlZCBpbg0K
+PiB0aGlzIGNhc2UuDQo+IA0KPiBJIGRvbid0IHRoaW5rIHdlIGNhbiBwcmludCAlcCB3aXRob3V0
+IHB1dHRpbmcgbW9yZSBsb2dpYyBpbnRvIHRoZQ0KPiBkZWNvZGluZy4gSSB0aGluayB0aGUgY3Vs
+cHJpdCBoZXJlIGlzIHRoZSBmYWxsdGhyb3VnaCB0byAleCwgd2hpY2gNCj4gdGhlbiBsZWFkcyB0
+byB0aGUgY29uZnVzaW5nIGJlaGF2aW9yIHNob3duIGFib3ZlLiBJTUhPIGlmIHdlIHdhbnQgdG8N
+Cj4gYXZvaWQgdGhhdCwgd2UnZCBoYXZlIHRvIG1ha2UgJXAgZW50aXJlbHkgdW5zdXBwb3J0ZWQu
+DQo+IA0KPiBkaWZmIC0tZ2l0IGEvbGliL3RpbnktcHJpbnRmLmMgYi9saWIvdGlueS1wcmludGYu
+Yw0KPiBpbmRleCBmYWY1NWQ3ZjMyNy4uODE0N2ZmYTJjMWIgMTAwNjQ0DQo+IC0tLSBhL2xpYi90
+aW55LXByaW50Zi5jDQo+ICsrKyBiL2xpYi90aW55LXByaW50Zi5jDQo+IEBAIC0yNjksMjEgKzI2
+OSwxOCBAQCBzdGF0aWMgaW50IF92cHJpbnRmKHN0cnVjdCBwcmludGZfaW5mbyAqaW5mbywgY29u
+c3QgY2hhciAqZm10LA0KPiB2YV9saXN0IHZhKQ0KPiAgCQkJCQkJZGl2X291dChpbmZvLCAmbnVt
+LCBkaXYpOw0KPiAgCQkJCX0NCj4gIAkJCQlicmVhazsNCj4gKyNpZiBDT05GSUdfSVNfRU5BQkxF
+RChORVQpIHx8IENPTkZJR19JU19FTkFCTEVEKE5FVF9MV0lQKSB8fCBfREVCVUcNCg0KV2hhdCBp
+ZiB3ZSBmaW5lLXR1bmUgdGlueXByaW5mIHZpYSBjb25maWcgaGVyZT8NCkZvciBleGFtcGxlIFNQ
+TF9VU0VfVElOWV9QUklOVEZfUE9JTlRFUl9TVVBQT1JUIGFuZA0Kc2VsZWN0IGl0IGJ5IE5FVCBv
+ciBORVRfTFdJUC4gSWYgc29tZW9uZSBuZWVkcyBpdCwNCnRoZSBwb2ludGVyIG91dHB1dCBjYW4g
+YmUgZW5hYmxlZCwgb3RoZXJ3aXNlICc/JyBmb3INCnVuc3VwcG9ydGVkIGlzIG91dHB1dC4NCg0K
+PiAgCQkJY2FzZSAncCc6DQo+IC0JCQkJaWYgKENPTkZJR19JU19FTkFCTEVEKE5FVCkgfHwNCj4g
+LQkJCQkgICAgQ09ORklHX0lTX0VOQUJMRUQoTkVUX0xXSVApIHx8IF9ERUJVRykgew0KPiAtCQkJ
+CQlwb2ludGVyKGluZm8sIGZtdCwgdmFfYXJnKHZhLCB2b2lkICopKTsNCj4gLQkJCQkJLyoNCj4g
+LQkJCQkJICogU2tpcCB0aGlzIGJlY2F1c2UgaXQgcHVsbHMgaW4gX2N0eXBlIHdoaWNoIGlzDQo+
+IC0JCQkJCSAqIDI1NiBieXRlcywgYW5kIHdlIGRvbid0IGdlbmVyYWxseSBpbXBsZW1lbnQNCj4g
+LQkJCQkJICogcG9pbnRlciBhbnl3YXkNCj4gLQkJCQkJICovDQo+IC0JCQkJCXdoaWxlIChpc2Fs
+bnVtKGZtdFswXSkpDQo+IC0JCQkJCQlmbXQrKzsNCj4gLQkJCQkJYnJlYWs7DQo+IC0JCQkJfQ0K
+PiAtCQkJCWlzbG9uZyA9IHRydWU7DQo+IC0JCQkJLyogbm8gYnJlYWsgKi8NCj4gKwkJCQlwb2lu
+dGVyKGluZm8sIGZtdCwgdmFfYXJnKHZhLCB2b2lkICopKTsNCj4gKwkJCQkvKg0KPiArCQkJCSAq
+IFNraXAgdGhpcyBiZWNhdXNlIGl0IHB1bGxzIGluIF9jdHlwZSB3aGljaCBpcw0KPiArCQkJCSAq
+IDI1NiBieXRlcywgYW5kIHdlIGRvbid0IGdlbmVyYWxseSBpbXBsZW1lbnQNCj4gKwkJCQkgKiBw
+b2ludGVyIGFueXdheQ0KPiArCQkJCSAqLw0KPiArCQkJCXdoaWxlIChpc2FsbnVtKGZtdFswXSkp
+DQo+ICsJCQkJCWZtdCsrOw0KPiArCQkJCWJyZWFrOw0KPiArI2VuZGlmDQo+ICAJCQljYXNlICd4
+JzoNCj4gIAkJCQlpZiAoaXNsb25nKSB7DQo+ICAJCQkJCW51bSA9IHZhX2FyZyh2YSwgdW5zaWdu
+ZWQgbG9uZyk7DQo+IEBAIC0zMTAsNiArMzA3LDggQEAgc3RhdGljIGludCBfdnByaW50ZihzdHJ1
+Y3QgcHJpbnRmX2luZm8gKmluZm8sIGNvbnN0IGNoYXIgKmZtdCwgdmFfbGlzdCB2YSkNCj4gIAkJ
+CWNhc2UgJyUnOg0KPiAgCQkJCW91dChpbmZvLCAnJScpOw0KPiAgCQkJZGVmYXVsdDoNCj4gKwkJ
+CQlvdXQoaW5mbywgJz8nKTsNCj4gIAkJCQlicmVhazsNCj4gIAkJCX0NCg0KUmVnYXJkcw0KQ2hy
+aXN0b3BoDQo=
