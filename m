@@ -4,58 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14D0DC36018
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 21:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3F8BC36018
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 21:50:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43BA881E6C;
-	Wed,  2 Apr 2025 23:36:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0050B81F0B;
+	Wed,  2 Apr 2025 23:50:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="kjFwIWpN";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="pN3UOFix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E6B681F0B; Wed,  2 Apr 2025 23:36:51 +0200 (CEST)
+ id 60B7281F6B; Wed,  2 Apr 2025 23:50:41 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DA7880107
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 23:36:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11DB181E6C
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 23:50:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
  s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID;
- bh=84hib1SFq2EGmVLASXFZ9mc/9iaDEJCQxtKbP2jpVis=; b=kjFwIWpNkZyN+AbOWFfmxsaIck
- atZ4pvmf03TGcnuRx1yWq8CbIL45OwKlDPR9H1o8Vu5C5T4g699MxTY6Oon2aeb+4aKTvB+K02kPp
- mMx8cnD5/IbcmP97bYnxiB+lNioz/kA9/iJRsu1YfbSK/kPAhDUHERoiA1WhL8x14kIWrG/nHzIYK
- lIWTbcR0nC8Zr9/ln5q+Ug1NCoNogNZo2mkDqCRQbn+ZhEmprKi0EXLjYeJ6oPk2C06/Rme6x0z6e
- pAzMJAbemq3Kb5T6g+MqWMlN2eBZbgy23UYf0ZtT8qTGoh3oLZQre/dD1FmMNs9/yY3IIr+/nHFA1
- cPWe2Eqw==;
-Received: from i53875bf8.versanet.de ([83.135.91.248] helo=diego.localnet)
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=h1ygX2N4SIv0dvudp2t9ExI+VD03sabrAPUkqeTvDvs=; b=pN3UOFixXGbOt2iNPm5W9XXNUp
+ /eozekXZNS8hDf/SbIM1M/oAtUUTuvXoMahczk90Hr9UH64ruJOg/j75a+kvU1PqO8fsz9lth18oN
+ j9vt0/mEd1WfOJxo+9E0DEUJIfUv1/adPx5qkv0lm9fh+sSASVMYEQs+alqOlZoHHhvJ1Ke9hPB7j
+ Etciii5KWfx3Bt2P+YJmO7lJRizLj+59R5FPmHBOBlw1J4sCEz7Sx/oHGGPltuRb54ckpKDYBl/c9
+ TcGYzdgjweow/CZ2D3aRoBdW25VY0J6Qey9XuPhJamRvlohZ3oHdTH4Vy0Ajy3x6fBKSO4BfOwaSh
+ Yytgtq0Q==;
+Received: from i53875bf8.versanet.de ([83.135.91.248]
+ helo=localhost.localdomain)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1u05lP-0002jn-0G; Wed, 02 Apr 2025 23:36:47 +0200
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: trini@konsulko.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- u-boot@lists.denx.de, quentin.schulz@cherry.de,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] Revert "net: eth_bootdev_hunt() should not run DHCP"
-Date: Wed, 02 Apr 2025 23:36:46 +0200
-Message-ID: <1824254.VLH7GnMWUR@diego>
-In-Reply-To: <74ce355b-4e2b-4d5d-b6fc-2ad421be7f3d@gmx.de>
-References: <20250401083830.2320479-1-heiko@sntech.de>
- <CAFLszTihxUb8+fsFPztzx0cShG96uXb32pAQ3hyEEFE0Z+JzeA@mail.gmail.com>
- <74ce355b-4e2b-4d5d-b6fc-2ad421be7f3d@gmx.de>
+ id 1u05yl-0002x1-Ft; Wed, 02 Apr 2025 23:50:35 +0200
+From: Heiko Stuebner <heiko@sntech.de>
+To: trini@konsulko.com
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de,
+ sjg@chromium.org, u-boot@lists.denx.de, quentin.schulz@cherry.de,
+ Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH] boot: call dhcp_run in pxe bootmethod
+Date: Wed,  2 Apr 2025 23:50:25 +0200
+Message-ID: <20250402215025.2655384-1-heiko@sntech.de>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,71 +69,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Dienstag, 1. April 2025, 18:13:35 MESZ schrieb Heinrich Schuchardt:
-> On 01.04.25 17:51, Simon Glass wrote:
-> > On Tue, 1 Apr 2025 at 21:38, Heiko Stuebner <heiko@sntech.de> wrote:
-> >>
-> >> This reverts commit 1f68057e03206e6597ca8b2be8bb1c49d4bd47d0.
-> >>
-> >> Commit 1f68057e0320 ("net: eth_bootdev_hunt() should not run DHCP")
-> >> aims to reduce EFI boot times by disabling the dhcp_run when
-> >> checking ethernet bootdevices, by preventing it from running double,
-> >> with the reasoning
-> >>
-> >>      We need to call eth_bootdev_hunt() when setting up the EFI sub-system to
-> >>      supply the simple network protocol. We don't need an IP address set up.
-> >>
-> >> That might by true for EFI, but not for everything else, because when
-> >> running distro-boot and for example the PXE method in it, nothing will
-> >> set up an IP address now.
-> 
-> The removed call was dhcp_run(addr, NULL, true);
-> 
-> We have:
-> 
-> distro_efi_read_bootflow_net():
-> boot/bootmeth_efi.c:205:        ret = dhcp_run(addr, NULL, true);
-> 
-> script_read_bootflow_net():
-> boot/bootmeth_script.c:132:     ret = dhcp_run(addr, fname, true);
-> 
-> extlinux_pxe_read_bootflow() seems to be lacking the call.
-> 
-> So instead of reverting
-> 1f68057e0320 ("net: eth_bootdev_hunt() should not run DHCP")
-> we should add the missing call in extlinux_pxe_read_bootflow().
+A recent change tried to speed up EFI booting by not calling dhcp_run
+from eth_bootdev_hunt() every time. PXE so far relied on that dhcp_run
+call to get an IP address.
 
-doing
+Fix that by adding a dhcp_run call to the pxe bootflow, with autoload
+disabled to only get the ip address and nothing else.
 
------ 8< -----
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Fixes: 1f68057e0320 ("net: eth_bootdev_hunt() should not run DHCP")
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+---
+This also seems to work, to fix the dhcp problem.
+
+So this is the counter-idea to the revert submitted in 
+https://lore.kernel.org/u-boot/20250401083830.2320479-1-heiko@sntech.de/
+
+Only this one or the revert patch should be applied.
+
+ boot/bootmeth_pxe.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
 diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
 index b91e61bcbc4..6e5e0f99ea4 100644
 --- a/boot/bootmeth_pxe.c
 +++ b/boot/bootmeth_pxe.c
 @@ -73,6 +73,10 @@ static int extlinux_pxe_read_bootflow(struct udevice *dev,
-                return log_msg_ret("pxeb", -EPERM);
-        addr = simple_strtoul(addr_str, NULL, 16);
+ 		return log_msg_ret("pxeb", -EPERM);
+ 	addr = simple_strtoul(addr_str, NULL, 16);
  
-+       ret = dhcp_run(addr, NULL, false);
-+       if (ret)
-+               return log_msg_ret("dhc", ret);
++	ret = dhcp_run(addr, NULL, false);
++	if (ret)
++		return log_msg_ret("dhc", ret);
 +
-        log_debug("calling pxe_get()\n");
-        ret = pxe_get(addr, &bootdir, &size, false);
-        log_debug("pxe_get() returned %d\n", ret);
------ 8< -----
-
-does seem to work in _my_ usecase and gets me loading stuff over pxe
-again.
-
-I guess this whole thing now becomes a strategy decision ;-) :
-
-- it's very late in the release, do we revert to the known working state
-  or hope the above fixes all issues
-- Simon's wish of not sprinkling dhcp_run calls in multiple places
-
-I guess I'm fine with both way, as either fixes my use-case ;-)
-
-Heiko
-
+ 	log_debug("calling pxe_get()\n");
+ 	ret = pxe_get(addr, &bootdir, &size, false);
+ 	log_debug("pxe_get() returned %d\n", ret);
+-- 
+2.47.2
 
