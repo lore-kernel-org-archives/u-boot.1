@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F329C36017
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 13:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A42C0C28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 14:01:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89C8B81F66;
-	Wed,  2 Apr 2025 15:36:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 09CE980FDA;
+	Wed,  2 Apr 2025 16:01:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ufh1T2DV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lSG43R/S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C891881E6C; Wed,  2 Apr 2025 15:36:18 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 29A7A81703; Wed,  2 Apr 2025 16:01:06 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE4D780FDA
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 15:36:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E883980584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 16:01:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43ce70f9afbso69871335e9.0
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 06:36:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-603f54a6cb5so676576eaf.0
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 07:01:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743600976; x=1744205776; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gWEisPS6q2fBGe+ElLWhnrxim85hqSZmazy45tx2acE=;
- b=ufh1T2DVkFD3Kd1X/Ttn1VO+0ORZ5giW/HVClq52KZoxNdoLeCRXl46ir7vtd7EbeL
- IlPFhzD4z8Jfzf9zaWhM7Eu0PiZXf5CM33YWwYmMMcLBrKjcykM+UB3lPX4LgYJfWjf7
- c0WP6WN7qspSY4NOPWZ6iRqNJFkw/yQ1TtI6ZFrbGN0GBUJKTKeBtSzA2VJ8LMXNHEF5
- Xy3mdDo3W47OVt5xjoEV2kTBIhpOpdEY7o1p/JsEgeZHSaF7vPmdNftRZUAoo+F/praT
- zE0G5Wc+BMH4EViSEwGnLTSesVA267topWVkIC3US48Hc9UyVpWYPFTl36TjoXJbXfGE
- Td9Q==
+ d=konsulko.com; s=google; t=1743602461; x=1744207261; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gd5aex1bo4b5cFmqQH2yULbr36zCn3sJoMIRtkpPeKc=;
+ b=lSG43R/SVgAFqXUFnhUvuAEyzIaxSqZggiqb49wRVbjwaqr7GQ352mG24tavuNW5Le
+ IWrIBx+tYskny6qtfkALaSxWj0VbI5pB2lQobE3O5eiCocDYLzMluLI4Jx9PE/KPESPs
+ QiQ6dvYFynSeRjSvR1wd9Xg2YkE9Kxhr8AOQU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743600976; x=1744205776;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gWEisPS6q2fBGe+ElLWhnrxim85hqSZmazy45tx2acE=;
- b=WFg6vUB9vfhuOdgFN/A5VbzyL7fy6ufsXfjYOubu1BGcfZheFrLLQq3tKdTPxBvLag
- UugopgVui4tYsfMCiQQ1HblaOTfrNvRMwUxA7ZX5pRjvvadGIqjUKnjEjIet6JRW6oB/
- JTl4ZaUVrSfLKebiRso0yKPV3tDuOeR/B4lVPKP7wBjZmypMnMTV9+KvrsLLBIYu+OpN
- Tk3+pDv2diGEl+FaLVF5DprEp/Sg6vmmxEBfR20P5aU57WKWG2awu1smjhHgI9lWRZqj
- CFmlL/WtJO6viTM20Fw2tOZbF52G7AEV7SbFPDJznCT2ZlyOl5+wREZ1Dp+jRDPX+a/r
- xcBQ==
-X-Gm-Message-State: AOJu0YyB0MVuJUuM1vkmsSACRJsTQz8AVvDEKsoGEVWdhivV6BUeF4Qt
- TTW2CZqD7z4yUnS1CM+x4WLqjNxEScXHKJTGLzYy2qbzFdTCN/5LVC2BLsVUhWQFvefQeXmRSDb
- Po4ypqw==
-X-Gm-Gg: ASbGncvl0QlWS/9mHBZ0sJWJeeACOx0wNq9MiXmXHn4QBBYWVowO/riZWYTNlskqalj
- x8266gKujsYtSvH9myytoO7YCmZAqnpHhNRDz7LAZ+0/e9gC4rwtROLMEIM1Pt/pwurxW/QkKPh
- vsBQOPnPr7ZHOvB7GZwkB3WHA/uEZ8f9uqt1l+7QcNd++2D5tOLuFNmC4V3cBRUqgFArMo+qCQU
- nsg7xAEktvCN+yeKMPmWTFFiLREBaLw/B9xEewC80yVaNCvW0NgZ+WGfbaMdUlSLje5TCYJxbii
- VKEMAlSzkELWMGwPhVHXPxdrdf8i1J6wHHWmI5ofNxC037IwSMPVKQ==
-X-Google-Smtp-Source: AGHT+IFeop0sNgbeNBfJYt2EQfJ5e7gTTSabTW2o2XhLJ2RW3JeAu1qOjhOucegZeGqcRNA3Cbn+Fg==
-X-Received: by 2002:a05:600c:3c93:b0:43c:fdbe:43be with SMTP id
- 5b1f17b1804b1-43db62bf0f2mr153298995e9.27.1743600975991; 
- Wed, 02 Apr 2025 06:36:15 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:1e67:7bcc:e97a:7477])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b66a991sm16928961f8f.49.2025.04.02.06.36.15
+ d=1e100.net; s=20230601; t=1743602461; x=1744207261;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gd5aex1bo4b5cFmqQH2yULbr36zCn3sJoMIRtkpPeKc=;
+ b=XO9lPnhBwEzjPMFWK/GXA7p+jYiTSu4RfYjou+YR6SaO56M7Zs6P7tMp72CyCqI3x+
+ ppQxKHB7rzI/2W1PtRBc2BWkHr9QUwGnMm/b+/WwyM0r5nF0WEjNEBb+cIDyL1rnFh8T
+ WE5Pff86srMno6/ka5f6/crTWRsvvf4i3gMoMxc1RQOsdDt85deWdDW20J779dMPIKMx
+ klk/0B1gDMi+cOV906EUlu+tJdiAH5HNjtDgXE8uaCAf/eUlWmyKe9WLZW6fyzpa9wgG
+ g6ZnzkM/fTgX/PLXPu1jyq2S5HqyfmfOvJlUORZIRikJbwcKSqyXKVX56hJdd0T85tIO
+ OdzA==
+X-Gm-Message-State: AOJu0Yy1dFFrWhSxvC5M9F0rxS9xQA4OIX6PUQv/hqj4zizXGClF68kJ
+ BCzG9QhpSI0O3cfUGMvk+GEXNwe70/V/4Erc/MJwtjrKplbTRcwh8uxIHv2V5qY=
+X-Gm-Gg: ASbGncsOOl7I6P5A53e87la6UBTzu9+D7B3gSKwBEpezDeBOLeotij1psaMS0erjEbs
+ l+2vLc9kwNULl4AiVqh0CkLUZEqsoVmGVYRR2WYbMHhk7Sg//FOzSf6WMfk5ECdnvxwgzMGakw9
+ wvlD1p6PvWSoEmjs5IW5Fy8p+S9TBaeLFNz75dkrHusRCEWKScBe9sNIqpAR0zg4Ew0pfB5eD1I
+ 6h0KlfFLodsQgaIN7fVLskhBhrQ6BLWddjSo46EUaZ0Bw1o9pjS8jlxEcKaTK98xQ/rgGssRhYT
+ /0ny158xAuBF5KrzmV8TFp3YgFfMqWv5YrUsqPsj38C9HUKrcggsce3178Ht6svHMcrGrftWjxA
+ SYkH+6agFkbA73mjH
+X-Google-Smtp-Source: AGHT+IFDSkSGd3MYEVoyY7MRZjIqy+C+WSPqbxE6YOfQGlZNNMpr6ekAGNVzDh2iFHByz0hvgc4L/Q==
+X-Received: by 2002:a05:6870:7182:b0:29e:290f:7af4 with SMTP id
+ 586e51a60fabf-2cc382d2af9mr4197846fac.34.1743602460845; 
+ Wed, 02 Apr 2025 07:01:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2c86a855cdcsm2863555fac.33.2025.04.02.07.00.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 06:36:15 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] net-lwip: tftp: add LMB and buffer checks
-Date: Wed,  2 Apr 2025 15:35:56 +0200
-Message-ID: <20250402133557.2079137-3-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250402133557.2079137-1-jerome.forissier@linaro.org>
-References: <20250402133557.2079137-1-jerome.forissier@linaro.org>
+ Wed, 02 Apr 2025 07:00:59 -0700 (PDT)
+Date: Wed, 2 Apr 2025 08:00:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com
+Subject: Re: [PATCH v5] spl: remove usage of CMD_BOOT[IZ] from image parsing
+Message-ID: <20250402140057.GQ5495@bill-the-cat>
+References: <20250314035505.4029331-1-anshuld@ti.com>
+ <20250331230301.GA30101@bill-the-cat>
+ <D8W300ZGJI6M.1COATVFQ1OTPT@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4n4OYk7nhbyCd1f5"
+Content-Disposition: inline
+In-Reply-To: <D8W300ZGJI6M.1COATVFQ1OTPT@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,85 +97,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Legacy NET tftp invokes a store_block() function which performs buffer
-validation (LMB, address wrapping). Do the same with NET_LWIP.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
- net/lwip/tftp.c | 45 ++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 34 insertions(+), 11 deletions(-)
+--4n4OYk7nhbyCd1f5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 123d66b5dba..38aa647df5c 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -8,6 +8,7 @@
- #include <efi_loader.h>
- #include <image.h>
- #include <linux/delay.h>
-+#include <linux/kconfig.h>
- #include <lwip/apps/tftp_client.h>
- #include <lwip/timeouts.h>
- #include <mapmem.h>
-@@ -31,6 +32,36 @@ struct tftp_ctx {
- 	enum done_state done;
- };
- 
-+static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
-+{
-+	ulong store_addr = ctx->daddr;
-+	void *ptr;
-+
-+	if (CONFIG_IS_ENABLED(LMB)) {
-+		if (store_addr + len < store_addr ||
-+		    lmb_read_check(store_addr, len)) {
-+			puts("\nTFTP error: ");
-+			puts("trying to overwrite reserved memory...\n");
-+			return -1;
-+		}
-+	}
-+
-+	ptr = map_sysmem(store_addr, len);
-+	memcpy(ptr, src, len);
-+	unmap_sysmem(ptr);
-+
-+	ctx->daddr += len;
-+	ctx->size += len;
-+	ctx->block_count++;
-+	if (ctx->block_count % 10 == 0) {
-+		putc('#');
-+		if (ctx->block_count % (65 * 10) == 0)
-+			puts("\n\t ");
-+	}
-+
-+	return 0;
-+}
-+
- static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
- {
- 	return NULL;
-@@ -71,17 +102,9 @@ static int tftp_write(void *handle, struct pbuf *p)
- 	struct tftp_ctx *ctx = handle;
- 	struct pbuf *q;
- 
--	for (q = p; q; q = q->next) {
--		memcpy((void *)ctx->daddr, q->payload, q->len);
--		ctx->daddr += q->len;
--		ctx->size += q->len;
--		ctx->block_count++;
--		if (ctx->block_count % 10 == 0) {
--			putc('#');
--			if (ctx->block_count % (65 * 10) == 0)
--				puts("\n\t ");
--		}
--	}
-+	for (q = p; q; q = q->next)
-+		if (store_block(ctx, q->payload, q->len) < 0)
-+			return -1;
- 
- 	return 0;
- }
--- 
-2.43.0
+On Wed, Apr 02, 2025 at 04:00:01PM +0530, Anshul Dalal wrote:
+> On Tue Apr 1, 2025 at 4:33 AM IST, Tom Rini wrote:
+> > On Fri, Mar 14, 2025 at 09:25:04AM +0530, Anshul Dalal wrote:
+> >
+> >> Using CMD_* configs from spl doesn't make logical sense. Therefore this
+> >> patch replaces the checks for CMD_BOOT[IZ] with newly added configs
+> >> SPL_HAS_BOOT[IZ].
+> >>=20
+> >> SPL_HAS_BOOTZ is enabled by default for 32-bit ARM systems and
+> >> SPL_HAS_BOOTI is enabled by default for 64-bit ARM and RISCV. This
+> >> ensures configs relying on CMD_BOOT[IZ] in falcon boot still work.
+> >>=20
+> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> >
+> > OK, so this needs to be introducing some library symbol which then both
+> > CMD_BOOTx and SPL_...something select.
+>=20
+> I was thinking of chaning the Makefile with the following diff:
+>=20
+> -obj-$(CONFIG_CMD_BOOTI) +=3D bootm.o image.o
+> +obj-$(CONFIG_LIB_BOOTI) +=3D image.o
+>  obj-$(CONFIG_CMD_BOOTM) +=3D bootm.o
+> -obj-$(CONFIG_CMD_BOOTZ) +=3D bootm.o zimage.o
+> +obj-$(CONFIG_LIB_BOOTZ) +=3D zimage.o
+>  else
+>  obj-$(CONFIG_$(PHASE_)FRAMEWORK) +=3D spl.o
+> -obj-$(CONFIG_SPL_HAS_BOOTI) +=3D image.o
+> -obj-$(CONFIG_SPL_HAS_BOOTZ) +=3D zimage.o
+>  obj-$(CONFIG_OF_LIBFDT) +=3D bootm-fdt.o
+>  endif
+>=20
+> This would simplify the Makefile by not having duplicated configs for
+> image/zimage and the removed bootm.o for non-spl builds should be fine
+> since except for colibri_vf, all defconfigs with CMD_BOOTx already have
+> CMD_BOOTM enabled. And for colibri_vf, we can safely enable CMD_BOOTM?
+>=20
+>=20
+> > What we have here introduces
+> > failure to build on some imx8 platforms such as=20
+> > mx8mp_evk and then size growth on others such as imx28_xea.
+>=20
+> The imx8mp_evk build should not fail since the patch should only effect
+> falcon mode. Only difference this patch makes is now image.o would not
+> be compiled for the spl which is not used in non falcon boot anyways.
+>=20
+> For the imx28_xea and 3 other (imx6qdl_icore_mipi|mmc|rqs) defconfigs
+> that use falcon mode but don't make use of CMD_BOOTx. Their size growth
+> is expected since SPL_HAS_BOOTx is default y in falcon boot. To keep the
+> same size, the SPL_HAS_BOOTx can be explicitly disabled for those 4
+> configs.
+>=20
+> For future reference is there any CI tests I can run to detect any
+> regressions before posting patches upstream?
 
+To run CI please see
+https://docs.u-boot.org/en/latest/develop/ci_testing.html
+
+And yes, please re-work the symbols and logic so there's no size growth
+until the K3 R5 platforms enable things, as the default should not
+change behavior. Using
+https://source.denx.de/u-boot/u-boot-extras/-/blob/master/contrib/trini/u-b=
+oot-size-test.sh?ref_type=3Dheads
+might make it easier to compare various platforms before/after.
+
+>=20
+> Regards,
+> Anshul
+
+--=20
+Tom
+
+--4n4OYk7nhbyCd1f5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmftQw0ACgkQFHw5/5Y0
+tywRKgv/We0TQgM8O8gdr8qAi9xnbBPimjWZl0WYR6TloUqJER7qMg22g2mt3RrW
+c1uRMnaa72AUfJhMeiH2lleJObqOAUbx0b9G7ERy24msVbg2qVeEwbe2O/i6yFcm
+3BTEw8ZU5mK3cnaFRC0xlzmPvECFuP1x1utJV2057OqFu2BaZHVyV8wEtZ6T1zE6
+ZGJZqa0rGhsYpVEpfEy+U38MTLw+5BwbQ4vQPEUUjwAZsLmgJNdWi6/WtTJaMB2e
+Waf8+m8D3zG9UcsMEcX8q3PN5CyCB5C6b//PkQtPynJ/bfzH3GaPNoNo5iIZoFZA
+Hlp0U/ctBsMeIxkRzS1IzoIq1qvrAtYVKVCY1saIYafaZVk8Tt2qFXiLTu9jJPJ3
+JuBKoZBGn7B/yH0ueS35J2kl30i+Qls7+GxZ9CZ65Y7vZktFTo0QVASyIldx1b6n
+W3swK8pJ8kf/QonBuWLFMOwpWFLxp4tQ1A6oXs6uL09x0mchFMrdTHTlzmmz3+NJ
+vqLnsOjM
+=wFmp
+-----END PGP SIGNATURE-----
+
+--4n4OYk7nhbyCd1f5--
