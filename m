@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4152C36010
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 00:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF69C36010
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 00:37:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0C8580F6B;
-	Wed,  2 Apr 2025 02:09:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 307A680F6B;
+	Wed,  2 Apr 2025 02:37:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RyW/ejCO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CdYHuhjw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F0B481703; Wed,  2 Apr 2025 02:09:12 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id D282681703; Wed,  2 Apr 2025 02:37:44 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B4180584
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 02:09:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B5C580584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 02:37:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e6f4b3ebe5so11123759a12.0
- for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 17:09:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-47662449055so32204861cf.1
+ for <u-boot@lists.denx.de>; Tue, 01 Apr 2025 17:37:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743552549; x=1744157349; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pZUcEP3xORBKOURYA7gMfqwpsJxkqzlbnxLUunmAzIM=;
- b=RyW/ejCOOlu3aukohIMDJl3lu+FUoskM5xyf4yjVwUdl/i20y5pmI9cUDgD04K5/lZ
- HpaawY8GtFcTMjD6Ipq4OnshCrxPWDNJIcDfb3n+EMZ/yhf+Hjf+g32q659vV2WlH8WS
- WtVMZxb+3Xd6ka15y9xzgZ5nUmxkuoUefdCBc=
+ d=gmail.com; s=20230601; t=1743554261; x=1744159061; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LmJJadXXjOdk2V4GsoMtIBBdB9r09HpTMANIWiRC61w=;
+ b=CdYHuhjwz+wN4dPu1+hKcQJFZl6mKMAK8Y04me5VAZngyHGlsenKcnlv6G5UtBWDHr
+ Dn94oPcUbPpm3CdpLWrdPjnjb/a+WovFChfPrj3HWuWuFuFwMcclIFpKaoCnkk5Bl6z8
+ e6TMoUFKZetf/8N/cPbGoX315DYzPeJkj5E64+P5UMYU1WAoZemhcK25jghq0Eq97IIr
+ 038yUFSG8mkDjosbusGCyH69c3w6YNwgaQR80XiScYCIBCpmJtObvTepPZ26jZ440nR9
+ XLdPNhtFx/EtYKkcPC1SF1SHQGmzDVpLnxvf0aNl6D+6+mlPxUD/pYcSDW8aQ0ZR+zdt
+ Zwuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743552549; x=1744157349;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1743554261; x=1744159061;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pZUcEP3xORBKOURYA7gMfqwpsJxkqzlbnxLUunmAzIM=;
- b=UI8d8dIm5GPepz+W1cShVLTIncKrzM7UOHa37JpIthH5/RhD6IamxypqViAn7dd+1+
- ffXFQaI0zCalUvSwRFBwAoLsTG7iyTuMh+JRe2odfvMdb/piFaiF+T6yGbmNh+carGYr
- rXsnzu1IIf5l14KWpqh4zpRq8dQ1+MYeUWwpFpTFc1YvlTx7LR2p+E1tJ3qr7CEpPkX9
- k7gbgsuxV6tZy+PV5x9j4ZiY/oSshFKHhDxmDf5EIXqY16iVtgBLQ2WeORcnh+Lgth8o
- AU8Gl0XHMVU1MFsYhq1L7394m67p5HLGUw3YknbeG+yyAVz1M/RezESV7K6gsK2xFL1z
- NwWw==
-X-Gm-Message-State: AOJu0YxTlUWRh1DBNpQEYfiTgVVvX6iInZCu2/nBGNLbL5drihfOIpmB
- AA8WivC7P097Du5VgDtaLFqgIIqcWkjuu/0uit39eag+uojnDe78FCmGIvV7KqmvYggpjEBde3m
- BVMUwJjNJNYEKLfsbN2o/bMJUH1rncm3FjrxY
-X-Gm-Gg: ASbGncvL6et8Nz94OxCHdtrjsG9rSiMYSx1iMr4eelld2YsuNtGiJGaJDit/OpPuQ/T
- 5rIM+khqTPMyk7aPOY2qpt9eOFxZWDFTwXimC5umES0RC9wNZ2nEtDDhBYIa+RHjYHC2dCE4ZCw
- ebU7MyWS0VXMLo/PAAByrYg9HZzQoZ
-X-Google-Smtp-Source: AGHT+IGSi4bRHuMUYkX1ECU/4UfFSxmpJqVrtKn2cJwEkXbbUFT7t7ygziJsSLHNZj9uNa41MjzVQngBoU1NwuxkOZo=
-X-Received: by 2002:a17:907:97c9:b0:ac3:3fdf:d46f with SMTP id
- a640c23a62f3a-ac738975de7mr1246811666b.8.1743552548928; Tue, 01 Apr 2025
- 17:09:08 -0700 (PDT)
+ bh=LmJJadXXjOdk2V4GsoMtIBBdB9r09HpTMANIWiRC61w=;
+ b=MbG9wO/upeKma1wyD9H2hMVF7pxAcdKo0Ho5ZBxZD8a4yZqxR7tNXKFrQQHw/p4/nS
+ WgNK3J/2VIt52ZqPhzBPffcyLiwZvEEoMuWqdA5S1m24CQWGwKZSvSL4lY9ezdDxpKnN
+ c7O3Swof2dbqIvWX+FOlhMG1pqXSBmb26KuKlYIVjymt4USREdJOL89IWQSP5rI/3hOJ
+ jdcbN5DHFYnSo+Dav3PKVqWCOkSsTBP/fg04QxOJtsPt9twZYwOj7+dVfl1CIcKWvhEW
+ UQcrNxIKA5bxWaW9FaFyL8oQsW6WG995bJnwt1WGBd/Y6K9tGRUeirA4Y8nPA5gWL/vu
+ x0CA==
+X-Gm-Message-State: AOJu0YyFD/9/lDJ/ntcrgO56V9m4dTURKc3BQCBDgdlUW8+793k2pmGV
+ g5avepC+ik3TGyBbaYp4uYrD4MHtVDt+7voRK3l3r/cWSV9QGnLXF5TPOOqs
+X-Gm-Gg: ASbGncufQq3EJ7jlsXvQkZJdX+wXaJ91jdRzEWx4tYaBxvig5IGLOvczkdvtlb1arR2
+ WHuUzjkheIE+tXj7D6YkKbkXk0g/x/d8TFxXd29/pvXuv9hhzw1ctqrTqXzsHRTQC9FhK+s+L1f
+ eHHOTheh4+vphGlSpg0ueNupKr0fS3RVH3NsW+/0iCLZug8zZqagDy5j0QDVepzUyk43ZVY+Fr6
+ qmXFtc2ufHdFX2xP1x9vZNjGfRqFunRuPdpnDPf2AqoWwDtMLv0TJ6GM3PyTdfu6CPTWeZ1BNJF
+ jkkuAEmHlrk3rrnVbclC4ZqI34CF5lNS9cwfN1uz2rBiKyLVZMDu8ZvCTRCLkynpopLwaewqPD2
+ yZKF3g40EH/PJZ6mFEPuh7IIzeA==
+X-Google-Smtp-Source: AGHT+IHl+++r6NOsvu4DYMks6ug7Z0OibWiOPi5EwdoRKQ+59jhl7S7NNX04vFJ44kMZ3gXiAS1How==
+X-Received: by 2002:a05:6214:1d2f:b0:6ed:12b0:f181 with SMTP id
+ 6a1803df08f44-6eed5f9c369mr185421546d6.14.1743554260831; 
+ Tue, 01 Apr 2025 17:37:40 -0700 (PDT)
+Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
+ [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6eec967136dsm68270726d6.68.2025.04.01.17.37.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Apr 2025 17:37:40 -0700 (PDT)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Paul Kocialkowski <contact@paulk.fr>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Trevor Woerner <twoerner@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>, Jesse Taube <Mr.Bossman075@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Richard Weinberger <richard@nod.at>
+Subject: [PATCH] common: Add CONFIG_SKIP_RELOCATE
+Date: Tue,  1 Apr 2025 20:37:38 -0400
+Message-ID: <20250402003738.1241719-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250401172948.1236000-1-sjg@chromium.org>
- <20250401214113.GP5495@bill-the-cat>
-In-Reply-To: <20250401214113.GP5495@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 2 Apr 2025 13:08:56 +1300
-X-Gm-Features: AQ5f1JoEr5bmbgxWmpLcmgtLFClw7cjsSQFXRzm0fpsSTsXrxE99040_pHixtpc
-Message-ID: <CAFLszTjJuY9pQDerNuFcmkRuZbJU+EfPSBTrDyhjFMZg+usPnA@mail.gmail.com>
-Subject: Re: [PATCH 00/13] video: Enhancements related to truetype and console
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,32 +103,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Add a check for CONFIG_SKIP_RELOCATE in reserve_uboot to skip the
+relocation of the U-Boot image.
+CONFIG_SKIP_RELOCATE skips relocation of U-Boot to the end of RAM
+allowing for systems that have extremely limited ram to run U-Boot.
 
-On Wed, 2 Apr 2025 at 10:41, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Apr 02, 2025 at 06:29:31AM +1300, Simon Glass wrote:
->
-> > This series includes some precursor patches needed for forthcoming expo
-> > enhancements.
-> >
-> > - truetype support for multiple lines
-> > - make white-on-black a runtime option
-> > - support drawing a rectangle
-> >
-> > This series was split out from schd2
-> [snip]
-> > base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
-> > branch: schg
->
-> I get as far as patch 4 before it doesn't apply to -next.
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+---
+ Kconfig          | 7 +++++++
+ common/board_f.c | 7 +++++++
+ 2 files changed, 14 insertions(+)
 
-Your tree is missing the video-damage series which adds some more
-tests. It is here if you want to pick it up:
+diff --git a/Kconfig b/Kconfig
+index 6379a454166..f518768615f 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -443,6 +443,13 @@ config TOOLS_DEBUG
+ 	  it is possible to set breakpoints on particular lines, single-step
+ 	  debug through the source code, etc.
+ 
++config SKIP_RELOCATE
++	bool "Skips relocation of U-Boot to end of RAM"
++	default n
++	help
++	  Skips relocation of U-Boot allowing for systems that have extremely
++	  limited ram to run U-Boot.
++
+ endif # EXPERT
+ 
+ config PHYS_64BIT
+diff --git a/common/board_f.c b/common/board_f.c
+index 99616fdac80..d51696b8eda 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -476,6 +476,13 @@ static int reserve_trace(void)
+ 
+ static int reserve_uboot(void)
+ {
++	/*
++	 * This should be the first place GD_FLG_SKIP_RELOC is read from.
++	 * Set GD_FLG_SKIP_RELOC flag if CONFIG_SKIP_RELOCATE is enabled.
++	 */
++	if (CONFIG_IS_ENABLED(SKIP_RELOCATE))
++		gd->flags |= GD_FLG_SKIP_RELOC;
++
+ 	if (!(gd->flags & GD_FLG_SKIP_RELOC)) {
+ 		/*
+ 		 * reserve memory for U-Boot code, data & bss
+-- 
+2.49.0
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=369663&state=*
-
-I can rebase and send a PR if you prefer.
-
-Regards,
-Simon
