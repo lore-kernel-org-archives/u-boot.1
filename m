@@ -4,65 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E384FC28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 07:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B62F5C28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 07:13:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A4B38171B;
-	Wed,  2 Apr 2025 09:01:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC57781F59;
+	Wed,  2 Apr 2025 09:13:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Pfzorl7g";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tLavq0+5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35C5581F0D; Wed,  2 Apr 2025 09:01:46 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id E028080584; Wed,  2 Apr 2025 09:13:08 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6286080584
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 09:01:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9B7C81F66
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 09:13:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3335661145;
- Wed,  2 Apr 2025 07:01:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E856C4CEDD;
- Wed,  2 Apr 2025 07:01:41 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 839F25C3A71;
+ Wed,  2 Apr 2025 07:10:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D7EDC4CEE5;
+ Wed,  2 Apr 2025 07:12:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743577301;
- bh=1HYCeGAORCIVQ5EOYYUJ62BAxKdvULkm+7tGC85HUeA=;
- h=Date:Cc:From:To:Subject:References:In-Reply-To:From;
- b=Pfzorl7gXFm/FErfmBMwYMUfcYFDwnuoJ8XzWlNWuTgiMWejnNlJNFYqXIWQX3rHp
- kRIgaqVvl9QBUoGYvIqc26jEfX+u2R/shz1jRtvp7WEMDap95xxuS6KYiG3oCCzGsi
- DNGymwU5U9DqGu7WckHGoL1bDsYYUPYfJReS5qUgbC+GSU526dDrBteg4koBKhI/kG
- dndUka9wUKWQn8ZbfjL/omP/6aUU149sRm7FDwPbMvpzDQOmoEisZHkMOeUO6UBYYM
- i0WpZ6uDMZX/tZbguFE2bxemUyWyJnLOREirD2YRvSnJbtMGIs2/Vx/az/un4Am857
- IABDzSNWfFM6w==
-Content-Type: multipart/signed;
- boundary=e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Wed, 02 Apr 2025 09:01:36 +0200
-Message-Id: <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
-Cc: "Tom Rini" <trini@konsulko.com>, "Benedikt Spranger"
- <b.spranger@linutronix.de>, "Simon Glass" <sjg@chromium.org>, "John Ogness"
- <john.ogness@linutronix.de>, "Jerome Forissier"
- <jerome.forissier@linaro.org>, "Ilias Apalodimas"
- <ilias.apalodimas@linaro.org>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Christoph Niedermaier" <cniedermaier@dh-electronics.com>, "Quentin
- Schulz" <quentin.schulz@cherry.de>, "Marek Vasut" <marex@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] tiny-printf: Add support for upper case hex values
-X-Mailer: aerc 0.16.0
-References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
- <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
- <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
- <D8V6D9S6CBRH.3LRHNU4XCVF14@kernel.org>
- <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
-In-Reply-To: <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
+ s=k20201202; t=1743577981;
+ bh=nK6TmYBsb7ckC72nCrFXSYxjvsKRoXt5OHyuYLOQlts=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=tLavq0+5beQWr5t2i5MdoJ/mwQntjWdrZxI6sbPrukvyhsa3+luyCs4pg7huGzLNu
+ P1ByEIubV9BNHggDYQLoVB4tqUrR1GyW6HzTg4ArxtvrMy4ol/YIVKcYt21J//l/7a
+ DEqtAEYWaxOhagSnGHIahuSKCZoIZCG6FGmNEdpwSlZFuBvqFGFoo5t2T/GyEjBgkZ
+ c1LcQyGRyvo4Pqz2WpcWuUvjQa+JRv3C1z0dw5WWNqUb2iL1Njdv5rBOqWBhc54WQJ
+ ie2rL4fGfoBlk6LoC/IxcNCa37nCyN0nnnB9U7upd9vcuK/oq+E+qQAo7nR2cYv0/R
+ 6xuNP8UA7EKcg==
+Date: Wed, 2 Apr 2025 12:42:54 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stephen Boyd <sboyd@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 5/6] dt-bindings: clock: drop NUM_CLOCKS define for
+ EN7581
+Message-ID: <Z-zjdhegA-W23qc9@sumit-X1>
+References: <20250314185941.27834-1-ansuelsmth@gmail.com>
+ <20250314185941.27834-6-ansuelsmth@gmail.com>
+ <7923a39a-184c-4774-ad94-4d72563c8b60@linaro.org>
+ <67e5659b.df0a0220.19a25c.f830@mx.google.com>
+ <37c1455f-8d53-4643-b57e-3a888e5dd23d@linaro.org>
+ <20250401144420.GE5495@bill-the-cat>
+ <7b6542f2-0a2b-48ce-aaac-0bdf2f9b2fca@linaro.org>
+ <20250401164016.GF5495@bill-the-cat>
+ <62fd6270-e6df-472d-b3ee-0023bfce8d27@linaro.org>
+ <20250401180217.GO5495@bill-the-cat>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250401180217.GO5495@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,117 +85,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Sorry for jumping in late in this thread as it is still using my old
+Linaro email ID which should be disabled by now.
 
-Hi,
+On Tue, Apr 01, 2025 at 12:02:17PM -0600, Tom Rini wrote:
+> On Tue, Apr 01, 2025 at 07:28:36PM +0200, Krzysztof Kozlowski wrote:
+> > On 01/04/2025 18:40, Tom Rini wrote:
+> > > On Tue, Apr 01, 2025 at 05:27:30PM +0200, Krzysztof Kozlowski wrote:
+> > >> On 01/04/2025 16:44, Tom Rini wrote:
+> > >>> On Thu, Mar 27, 2025 at 03:58:52PM +0100, Krzysztof Kozlowski wrote:
+> > >>>> On 27/03/2025 15:50, Christian Marangi wrote:
+> > >>>>> On Thu, Mar 27, 2025 at 03:43:47PM +0100, Krzysztof Kozlowski wrote:
+> > >>>>>> On 14/03/2025 19:59, Christian Marangi wrote:
+> > >>>>>>> Drop NUM_CLOCKS define for EN7581 dts/upstream/src/include. This is not a binding and
+> > >>>>>>> should not be placed here. Value is derived internally in the user
+> > >>>>>>> driver.
+> > >>>>>>>
+> > >>>>>>> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > >>>>>>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+> > >>>>>> Please drop my Ack. I have never acked such patch for uboot. If I did,
+> > >>>>>> it was by mistake - probably you CC-ed me for some reason.
+> > >>>>>>
+> > >>>>>
+> > >>>>> Some explaination, uboot introduced the concept of upstream where they
+> > >>>>> "import" linux patch for dts and dt-bindings.
+> > >>>>
+> > >>>> I expected OF_UPSTREAM to be taking the sources, not patches.
+> > >>>>
+> > >>>>>
+> > >>>>> This and the other patch are the exact upstream patch with only the path
+> > >>>>> changed so I keep all the patch commit message with tags and added the
+> > >>>>>
+> > >>>>> [ upstream commit ] thing.
+> > >>>>>
+> > >>>>> Hope Tom can better suggest how this should be done. You were CC
+> > >>>>> probably because the git send-email included you as present in the
+> > >>>>> different tags.
+> > >>>>
+> > >>>> Well, Ack is still not valid because I did not Ack exactly that change.
+> > >>>> It does not matter for the ack, but for Reviewed-by it would matter,
+> > >>>> because it is a statement (of oversight...). I cannot control what you
+> > >>>> put into patches taken out of kernel, but at least do not Cc me on that.
+> > >>>
+> > >>> In specifics, yes, we should update doc/develop/devicetree/control.rst
+> > >>> and maybe doc/develop/sending_patches.rst to use --suppress-cc=all for
+> > >>> dts/upstream.
+> > >>>
+> > >>> But in general, what do you expect people to be doing with content from
+> > >>> devicetree-rebasing? We're doing some direct cherry-picks in between
+> > >>> merging of the tags. I think it would be weird to be dropping the tags
+> > >>> and un-attributing peoples work.
+> > >>
+> > >>
+> > >> I rather expected something like how kernel is importing dtc. You just
+> > >> list the commits you get. If you want the full git history, then I would
+> > >> expect simple git submodule. In both cases there will be no such patches
+> > >> on the lists.
+> > >>
+> > >> For the Ack it does not matter, but I would feel uncomfortable if people
+> > >> were sending stripped and modified patches with my Rb tag.
+> > > 
+> > > I guess I'm confused. Looking at
+> > > https://patchwork.ozlabs.org/project/uboot/patch/20250314185941.27834-6-ansuelsmth@gmail.com/
+> > > we're doing the normal thing of havig "[ upstream commit <sha>]" after
+> > > the imported log. When I merge the subtree and tag it indeed gives what
+> > > you're expecting too.
+> > 
+> > When you merge subtree, the patch is not modified and it lives in
+> > separate repo. No one sends them over lists, no one modifies them.
+> > Unlike here (even if modification did not happen, person was touching it
+> > so how can anyone be sure? That's not a scripted process).
+> 
+> We merge the subtree on tags, and people cherry-pick commits in between
+> tags when needed. This is a case of the latter, which is why it says "[
+> upstream commit <sha> ]" in the commit message, which is the usual case.
 
-> >> The issue is that disabling TINY_PRINTF may not be possible (size
-> >> constraints) and some code is compiled for different stages and people
-> >> typically don't check whether the format used in printf is valid with
-> >> tiny_printf. I've had this issue already in the past, I vaguely recall
-> >> "complaining" about it on IRC.
-> >=20
-> > Yes, I've stumbled on "%pa" with tiny printf (i.e. in
-> > drivers/pinctrl/pinctrl-single.c) which is printing the very wrong
-> > value, actually :) So printing anything unknown as '?' would really
-> > help here.
->
-> Something like that would help:
-> diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
-> index 48db7b1f78f..b918d6d7386 100644
-> --- a/lib/tiny-printf.c
-> +++ b/lib/tiny-printf.c
-> @@ -280,6 +280,12 @@ static int _vprintf(struct printf_info *info, const =
-char *fmt, va_list va)
->                                         while (isalnum(fmt[0]))
->                                                 fmt++;
->                                         break;
-> +                               } else {
-> +                                       if (fmt[0] !=3D '\0' && (fmt[0] =
-=3D=3D 'a' || fmt[0] =3D=3D 'm' ||
-> +                                                              fmt[0] =3D=
-=3D 'M' || fmt[0] =3D=3D 'I')) {
-> +                                               fmt++;
-> +                                               goto unsupported;
-> +                                       }
+Although we have tooling to pick patches from devicetree-rebasing tree
+but I can see Krzysztof's concerns here. We can't be sure if developer
+has touched the cherry picked patch or not but I suppose there would be
+similar concerns for the stable backports for Linux too. So IMHO, it's
+really upto maintainer applying those cherry-picked patches to see if
+there is any difference from upstream.
 
-I wouldn't mind printing the pointer for %p[mMI], but %pa prints the
-*content* of the pointer which is really confusing. I.e. in
-pinctrl-single.c the reg value pairs are printed like
+However, there is an additional process change what we can do here is
+for the developer to list just the commit IDs for the patches to be
+cherry picked in dts/upstream in the cover letter. This way the
+maintainer can just directly use the tooling to cherry pick those
+patches before applying the patch-set.
 
-  dev_dbg(dev, "reg/val %pa/0x%08x\n", &reg, val);
+Tooling already available for cherry-picking subtree commits as:
 
-with reg being a pointer to a physical address. So with tiny_printf
-the address of reg (which is a pointer to the stack) is printed in
-this case.
+$ ./tools/update-subtree.sh pick dts <devicetree-rebasing-commit-id>
 
-I don't think we can print %p without putting more logic into the
-decoding. I think the culprit here is the fallthrough to %x, which
-then leads to the confusing behavior shown above. IMHO if we want to
-avoid that, we'd have to make %p entirely unsupported.
-
-diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
-index faf55d7f327..8147ffa2c1b 100644
---- a/lib/tiny-printf.c
-+++ b/lib/tiny-printf.c
-@@ -269,21 +269,18 @@ static int _vprintf(struct printf_info *info, const c=
-har *fmt, va_list va)
- 						div_out(info, &num, div);
- 				}
- 				break;
-+#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG
- 			case 'p':
--				if (CONFIG_IS_ENABLED(NET) ||
--				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
--					pointer(info, fmt, va_arg(va, void *));
--					/*
--					 * Skip this because it pulls in _ctype which is
--					 * 256 bytes, and we don't generally implement
--					 * pointer anyway
--					 */
--					while (isalnum(fmt[0]))
--						fmt++;
--					break;
--				}
--				islong =3D true;
--				/* no break */
-+				pointer(info, fmt, va_arg(va, void *));
-+				/*
-+				 * Skip this because it pulls in _ctype which is
-+				 * 256 bytes, and we don't generally implement
-+				 * pointer anyway
-+				 */
-+				while (isalnum(fmt[0]))
-+					fmt++;
-+				break;
-+#endif
- 			case 'x':
- 				if (islong) {
- 					num =3D va_arg(va, unsigned long);
-@@ -310,6 +307,8 @@ static int _vprintf(struct printf_info *info, const cha=
-r *fmt, va_list va)
- 			case '%':
- 				out(info, '%');
- 			default:
-+				out(info, '?');
- 				break;
- 			}
-
--michael
-
---e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZ+zg0RIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/i4/gGA3sF04LHCKEneTK7z3ELDuGcZQxYxefd/
-oIx5wjMiTLhrvpeLZf6u49HSp0aoggMoAYDuhz8/VOBvCdHV1Dh8IJzNOrIhjUnG
-8rgX6WI43MvZ/3/X+ThwNk0l7Vi1V7ulHDk=
-=F221
------END PGP SIGNATURE-----
-
---e6ee05f6e2fe5a26e200d4de9e394ca62b09c860a7020402f0ad861cfdc0--
+-Sumit
