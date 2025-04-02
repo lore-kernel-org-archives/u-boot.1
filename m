@@ -4,94 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64079C28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7062C28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 15:23:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE69481703;
-	Wed,  2 Apr 2025 17:21:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6416D81CF0;
+	Wed,  2 Apr 2025 17:22:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kDafCNae";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N3gcx2HW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D0D981E1F; Wed,  2 Apr 2025 17:21:55 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D8758035B
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:21:53 +0200 (CEST)
+ id 9347F8006D; Wed,  2 Apr 2025 17:22:57 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A8F181F4D
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 17:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-39c1efc4577so1548472f8f.0
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 08:21:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743607313; x=1744212113; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=XQS83v0QolzKLIFx+Gaxlz/bqhqQqudAFMMrTb6X5Vk=;
- b=kDafCNae7tkyIf4k7uaYej3UGnQxC8GUFQpXWrdg4GQJ92qvEbmDdcwJVt1Zq8N7sR
- U7qR8In//N0Mo4DjfLHiuL7a37w7nRyL+Uge6nnhiyyUIhtsF73pcer0FWl+9/KNCRnY
- jKmpOmw1vtLS1gWjKou0dsnggM92Bk9d9Md7kTctKCCuNjMkZ4ukhOmHjIrsLSap0EyA
- RWjIb/hyk5GA0WHgk986Qx0foHtSEfj+DdWqDJw7ZUY0HR4VpUrNwoJnEQFuSj+/eewe
- mYWO0FrQ6EjjKLNwlJN1cuKivhbq276VjhV6oglk+0gG3r0ZfOlWAn267LB37VjM5u/Q
- Xj5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743607313; x=1744212113;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XQS83v0QolzKLIFx+Gaxlz/bqhqQqudAFMMrTb6X5Vk=;
- b=hcmQUHfmMp7y+wHgfeIaVba0sYXn9QPqRHQFSS4saSv2EHp+l+XZtHu5g4PmxMAkBj
- rwJtWliK/ClOx5Qa03Gw8yUaX5g7E+8JIK+0Ycrpz5ZaoLG8NRgkfARHKG1fszD7bZSq
- j+5nMxmQbdryRmwTp3pu8QUYWnRx2oeqV557Nm4cDbnEBiKWDaMXCUy6rAC0sZNBguV+
- /XXz9IUaTq8ZrL9OOi7vICr0ZIy4GP1wfEckraJzX7ZuwQEZ4yWSnV6LMaR+JmVWkA3T
- /1D3jM1NlSfWuueAUVj1iAtutbm6toXhbyCqQPsmoBsV0k/NmY4FfhbKG0a1kPyefhob
- bk6w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXD9WMl2n0gqEiNPDj6qPGkoPxwBDdsUURqZUVfnAZB4Pq3qnYye8lDQ7gfWeJoYi7DD+mlPMM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdBvEbXdtGBGVZ+gFk/ERWl+PP4n6gi9chLe3VuoVSG/JsBeD3
- lLj3aFqxV9U68eyTmLwdnuFk/6ySRkxohQHgyGT+NiQDte3PBN15
-X-Gm-Gg: ASbGnctxdz7wuIK6k5xWTRYMdQYZpEyWmB3v+LW0otHMnSZNG6H1kcWLrP7YkBP5lNl
- yYI4jurJKFjrHvTGo7Je8SBNawMp5W2QtthIwLZ7gm/JS7d7KPGsqbusFBNY6Pn0bu2QZ32tjLk
- LpZYjzSgD7ZB9SQPINEgGLe+2MmvfmanBaH7XPGEvh28XRL2sWig5gbG08hr3qwvHqgrg0wvjRi
- 3z0lrBGN094oQvWSEKTQvhpb01ava5odXY150HIgZD0+9vjMJ9+wwimjBfz7QWpej2YGz/l50VK
- o31gARdL58QdOwTmAhPfQfXf2Tb65slc8tOyNTBV95LMj/7gZM5kxmRHMIxyCMI8kAQ5jdGh0N/
- C
-X-Google-Smtp-Source: AGHT+IGYc7EbMJbWmRLCK7etibwiY6QNGU5T9QwdfGRpZAucLMoMfLAZzRPe1rguvgx4bx7+R6Ufqg==
-X-Received: by 2002:a05:6000:420f:b0:39a:c9cb:819f with SMTP id
- ffacd0b85a97d-39c2366b034mr6404672f8f.37.1743607312600; 
- Wed, 02 Apr 2025 08:21:52 -0700 (PDT)
-Received: from Ansuel-XPS. (93-34-88-225.ip49.fastwebnet.it. [93.34.88.225])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43eb60cd74dsm23867485e9.20.2025.04.02.08.21.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 08:21:52 -0700 (PDT)
-Message-ID: <67ed5610.050a0220.1c650.ac73@mx.google.com>
-X-Google-Original-Message-ID: <Z-1WDRM8nPogBMtF@Ansuel-XPS.>
-Date: Wed, 2 Apr 2025 17:21:49 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Bruce Suen <bruce_suen@163.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 02/14] net: airoha: Add Airoha Ethernet driver
-References: <20250401225156.25790-1-ansuelsmth@gmail.com>
- <20250401225156.25790-3-ansuelsmth@gmail.com>
- <20250402151951.GY5495@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 532FMpal3272444
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 2 Apr 2025 10:22:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1743607371;
+ bh=eXP52E7yrGa9YZPeHWI2TpX7THM05cpyHPpt/eQRlxs=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=N3gcx2HWUfvVHKbbin8STbVKJ523fjbNSB+ODwy2q45NOt9Klz1J0VP8u3TiA8hds
+ bmg0G+gJUbOlP1CSY+FsgXupOr65G/4GTjhfhHMyXMyw2waoDb2oG7GN/vU5l1Chf/
+ 8wJTNpY7hrd3ZO6aOpcjdTjmWJCkwNoqNky/Ml2s=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 532FMpjB111882
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 2 Apr 2025 10:22:51 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 2
+ Apr 2025 10:22:50 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 2 Apr 2025 10:22:51 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 532FMpdN048234;
+ Wed, 2 Apr 2025 10:22:51 -0500
+Date: Wed, 2 Apr 2025 10:22:51 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Dhruva Gole <d-gole@ti.com>
+CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis
+ <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Andrew Davis <afd@ti.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Jonas Wood <jw@ti.com>,
+ <praneeth@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] firmware: ti_sci: Scan all device instances when
+ releasing exclusive devices
+Message-ID: <20250402152251.omjw3qrwf6ldad6a@obedience>
+References: <20250401205515.4078312-1-nm@ti.com>
+ <20250402062730.vgmqbxczm2aee67z@lcpd911>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250402151951.GY5495@bill-the-cat>
+In-Reply-To: <20250402062730.vgmqbxczm2aee67z@lcpd911>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,40 +85,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 02, 2025 at 09:19:51AM -0600, Tom Rini wrote:
-> On Wed, Apr 02, 2025 at 12:51:34AM +0200, Christian Marangi wrote:
+On 11:57-20250402, Dhruva Gole wrote:
+[...]
+> > 
+> > As a result of this, the cleanup we intent to do with
 > 
-> > Add airoha Ethernet driver for Airoha AN7581 SoC. This is a majorly
-> > rewritten and simplified version of the Linux airoha_eth.c driver.
-> > 
-> > It's has been modified to support a single RX/TX ring to reflect U-Boot
-> > implementation with recv and send API.
-> > 
-> > The struct and the define are kept as similar as possible to upstream
-> > one to not diverge too much.
-> > 
-> > The AN7581 SoC include an Ethernet Switch based on the Mediatek MT753x
-> > but doesn't require any modification aside from setting the CPU port and
-> > applying the Flood configuration hence it can be handled entirely in the
-> > Ethernet driver.
-> > 
-> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > ---
-> >  drivers/net/Kconfig      |    8 +
-> >  drivers/net/Makefile     |    1 +
-> >  drivers/net/airoha_eth.c | 1448 ++++++++++++++++++++++++++++++++++++++
-> >  3 files changed, 1457 insertions(+)
-> >  create mode 100644 drivers/net/airoha_eth.c
-> 
-> checkpatch.pl has some macro warnings and it looks like some
-> inconsistent spacing around '#define FOO' vs '#define<tab>FOO' ? And are
-> all of those defines needed?
-> 
+> s/intent/intend
 
-No they are not all needed, I defined them for consistency with the
-original driver. Should I drop them?
+Thanks. will pick it up in a respin.
 
-For the checkpatch check, also comes from the original driver.
+> 
+[...]
+
+> > To fix this, let us make ti_sci_cmd_release_exclusive_devices scan the
+> > all registrations of tisci instances and cleanup all exclusive devices
+> > that have ever been registered.
+> 
+> Firstly, it seems to me like this issue is mostly specific to the
+> AM64/ DM+TIFS combined core arch K3 devices? So it would be good if the
+> commit message can specify that for better context. People who are more
+> used to the R5 core running DM architecture may find this description
+> slightly confusing as there's no TI SCI calls that the R5 SPL can make
+> to DM since DM isn't up yet on those devices...
+
+This is not related to TI_SCI. As described in commit message, it is just
+the multi_fit_dtb handling challenges. Combined DMSC or split DM arch
+devices are probably both susceptible to this. That said, i have tested
+this on am64x.
+
+[...]
+> > index 190a1e3f5fc3..54d6689ce783 100644
+> > --- a/drivers/firmware/ti_sci.c
+> > +++ b/drivers/firmware/ti_sci.c
+> > @@ -696,20 +696,25 @@ static int ti_sci_cmd_put_device(const struct ti_sci_handle *handle, u32 id)
+> >  				       MSG_DEVICE_SW_STATE_AUTO_OFF);
+> >  }
+> >  
+> > -static
+> > -int ti_sci_cmd_release_exclusive_devices(const struct ti_sci_handle *handle)
+> > +static int ti_sci_cmd_release_exclusive_devices(void)
+> >  {
+> >  	struct ti_sci_exclusive_dev *dev, *tmp;
+> >  	struct ti_sci_info *info;
+> >  	int i, cnt;
+> >  
+> > -	info = handle_to_ti_sci_info(handle);
+> > -
+> > -	list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
+> > -		cnt = dev->count;
+> > -		debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
+> > -		for (i = 0; i < cnt; i++)
+> > -			ti_sci_cmd_put_device(handle, dev->id);
+> > +	/*
+> > +	 * Scan all ti_sci_list registrations, since with FIT images, we could
+> > +	 * have started with one device tree registration and switched over
+> > +	 * to a final version. This prevents exclusive devices identified
+> > +	 * during the first probe to be left orphan.
+> > +	 */
+> > +	list_for_each_entry(info, &ti_sci_list, list) {
+> > +		list_for_each_entry_safe(dev, tmp, &info->dev_list, list) {
+> > +			cnt = dev->count;
+> > +			debug("%s: id = %d, cnt = %d\n", __func__, dev->id, cnt);
+> > +			for (i = 0; i < cnt; i++)
+> > +				ti_sci_cmd_put_device(&info->handle, dev->id);
+> > +		}
+> 
+> The other thing I am slightly not comfortable with is this.
+> The release_exclusive call is going to be common to every K3 device.
+> With your changes, will it result in any sort of increased boot time
+> penalty? I feel like it might, unless I maybe mistaken.
+
+It should not. for non-multi-dtb FIT, this logic just flows only 1 list
+which is all that is present. for multi-dtb FIT images, it fixes a real
+problem.
+
+> 
+> Also, to fix just AM64 style devices, we're touching a K3 common piece
+> of code like TI SCI. The issue that you described about the TI SCI
+> probing the second time causing issues seems more fundamental than the
+> fix being offered here.
+
+As described in commit message, calling probe twice is Normal since
+there are two dtbs involved in the FIT image (one with which we
+identify what is the board and use the information to pick the correct
+dtb).
+
+> Quoting the commit message,
+> 
+> > At this stage, the exclusive devices such as i2c instances used to
+> > probe the board information is left in the old info->dev_list that is
+> > no longer used actively by the system using the replaced dtb.
+> 
+> Can we instead try and fix the TI SCI driver behaviour from the first time?
+> Like is it possible to implement a .remove for the TI SCI driver such
+> that when the old dtb is now out of context, the driver gets cleanly
+> removed, and with that calls the release_exclusive of all devices that
+> it requested? 
+
+Tried .remove and .unbind and enabling CONFIG_SPL_DM_DEVICE_REMOVE but
+then we run into all kind of other dependency issues on dm_uninit
+
+> That way the new instance of TI SCI driver doesn't need to worry about
+> doing cleanups from any of it's previous instances right?
+> 
+> To me that sounds like the right root cause to try and fix. Let me know
+> what are your thoughts on this.
+
+I am open to any approach :) - just dont seem to find one that works
+other than what I posted.
+
+> 
+> >  	}
+> >  
+> >  	return 0;
+> > diff --git a/include/linux/soc/ti/ti_sci_protocol.h b/include/linux/soc/ti/ti_sci_protocol.h
+> > index 8e4c43cef311..aa4d105ee988 100644
+> > --- a/include/linux/soc/ti/ti_sci_protocol.h
+> > +++ b/include/linux/soc/ti/ti_sci_protocol.h
+> > @@ -143,7 +143,7 @@ struct ti_sci_dev_ops {
+> >  				 u32 reset_state);
+> >  	int (*get_device_resets)(const struct ti_sci_handle *handle, u32 id,
+> >  				 u32 *reset_state);
+> > -	int (*release_exclusive_devices)(const struct ti_sci_handle *handle);
+> > +	int (*release_exclusive_devices)(void);
+> 
+> Nit: Just update the copyright dates of the files you're touching...
+
+not for minor changes such as these.. not worth the diff.
 
 -- 
-	Ansuel
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
