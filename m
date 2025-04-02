@@ -4,91 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0FBC28B20
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 07:48:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700C9C28B20
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 09:02:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5FA980FDA;
-	Wed,  2 Apr 2025 09:48:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0062E81703;
+	Wed,  2 Apr 2025 11:02:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q9OkrWtm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cKRi/F3K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6937C81CF0; Wed,  2 Apr 2025 09:48:12 +0200 (CEST)
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC86480584
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 09:48:09 +0200 (CEST)
+ id 0C9638171B; Wed,  2 Apr 2025 11:02:02 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4221780584
+ for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 11:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x442.google.com with SMTP id
- ffacd0b85a97d-3913958ebf2so4836831f8f.3
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 00:48:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743580089; x=1744184889; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4gBy4GS4FhijBB8XV8X+KA7wZaA9huVUBMw75Qe7VtU=;
- b=Q9OkrWtm8hJ4VmmkJKaPQzBI6pdqcf7Hnpu2EnFKzuw9+rfhITVPBoJgLIIQQfze0I
- uYXoLbWWg6vIdnHr9uUvsXGOeU9Q6sWzjxZFYZ0kYBcnx6qY7A1CtokmMD3DiB0Mhu41
- gOBJ4vkotHWCWpWk5ZHcMB90uKDo5cyHs7rJj8XDfSA2b4jfryZ46hHYV2lNiRjJ6FSK
- wppntBEyQhNdWGWe2fzFbJQbhqCbIeWPEzbFbEAvxDtKbi/8c8y4GgREzk2IwcPnN0HQ
- SoX5kH7FUB5uxU8wRVFlR13DyweYbtXsq6BREHlAyadKpdcllyzRTSl7xb0Owp666pRr
- inPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743580089; x=1744184889;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4gBy4GS4FhijBB8XV8X+KA7wZaA9huVUBMw75Qe7VtU=;
- b=uFaBknqPjeAEpK8nLyKRWpJPZGNbVd/MwhNYtH+8m8C9Jp9rMVvI8156AUrvqosg27
- CVaUWfkCwmdjze45fF4y5Go0xM6O4fuudgMyn5zkvjMF/7Q5Whscka75oQkwVZI+fvT7
- nIN/eFcniBgxT5gldxK2CZDYNw5mcYO1Y20qwb/6K4DkdkLyDJuHOAQAUkDA/pejLs3y
- iA3Hz5Ytg+Te56tqvo/soeJwtWSo6OSblYkWXQDTYOb0++q6TbEqLiNFXBNVGkLWp5JS
- fNu4KwTJi6E/FBpmSfvH1knGeoWGnXQ+wgJ5sXk+ZA4keLmKO2tz/s5iN8ta65KiI9wX
- HesA==
-X-Gm-Message-State: AOJu0YwLKtJM9ge1RplCd2aDCmNeg23RrdrJEKp49TZpThOrs2RKYzTN
- bRYJnBtj3s6XVRWH7WL3GwkgzgKVKEYIXQHZbFtprlacaxaTHl2vUtTbWNFjYBc=
-X-Gm-Gg: ASbGnctp2mf88UL3oWfY/r2MTFiWqiIlBp+jJ7Gnq8beyHRUV9aiT2HCl3zJ+JSs7uM
- /n5LjSxfzVJujVaTtrpd1tZJoIG9tpHUiccbx2XoxgLv8tIQg1EVl65nWVerlrNZMpZ0gb98n7c
- ORjuomCEj8UInmzB+rx2N4uK8VXXQvlDbr58zw0hxiEVjhZO/fl+oD/qpw/BP+LKb7EZNNaflKj
- eYDPO0AmQNob8MJMX51TSVgffuIqIw083NH+yKzDBcYAKlCL51/lHo5JleQ66t7GHP2e9bxppZE
- yv2Anox+HxNgCKef3F1TKKPQGW8D1M0kbp/ukPHu7iT3KUK1K3xFLBYWXP3w4f1rnxBN3U19tOE
- njw9YjUxJCMeXz3AytDSgmmTwsAypeymR
-X-Google-Smtp-Source: AGHT+IGKZNmL1qScUEx9v5pSIKL0uw5xI8wjBFgAJAU79vxuPHDmGx0WkkJLlh0zJFo+KjkWJQoFng==
-X-Received: by 2002:a05:6000:40d9:b0:399:6d53:68d9 with SMTP id
- ffacd0b85a97d-39c297e42a2mr1198214f8f.38.1743580089140; 
- Wed, 02 Apr 2025 00:48:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:98c8:cef1:9997:9a7?
- ([2a01:e0a:3cb:7bb0:98c8:cef1:9997:9a7])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b66285bsm15981329f8f.21.2025.04.02.00.48.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Apr 2025 00:48:08 -0700 (PDT)
-Message-ID: <9869b70e-0fec-4682-8ba0-c679df9c4603@linaro.org>
-Date: Wed, 2 Apr 2025 09:48:07 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53291pPa3878895
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 2 Apr 2025 04:01:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1743584511;
+ bh=SagchhTJR0J/gk8vSJTd7wKrk2tF3jNWlo2AisMNRDE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=cKRi/F3KJj+CYRGnt6cznSEs/NrukZEhO7X2xLj/RcU7QT+1FK/Q16XTbyzEX/Aai
+ QbqY0+G6seIJ3aWeUyNptSBqT4BvwRat4W4T13G6nYO28aeQVwVl/guPYvZtjdEad1
+ gHnpXAnus4L6I0hlJ9J3d7vKJ5NRmvh0WA8V7FfY=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53291puE016122
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 2 Apr 2025 04:01:51 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 2
+ Apr 2025 04:01:51 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 2 Apr 2025 04:01:51 -0500
+Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
+ [172.24.227.136])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53291lQW127981;
+ Wed, 2 Apr 2025 04:01:48 -0500
+Message-ID: <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
+Date: Wed, 2 Apr 2025 14:31:47 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] lwIP sandbox tests
-To: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20250314215525.579655-1-jerome.forissier@linaro.org>
- <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
- <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
- <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
- <CAFLszThH3a7pLJG+zppu2qr5RwXAOk9Sj+S+RAT0B758hzOsyQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
+ properties to supernodes
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <alpernebiyasak@gmail.com>, 
+ <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-chavda@ti.com>
+References: <20250327080642.2269856-1-m-shah@ti.com>
+ <20250327080642.2269856-2-m-shah@ti.com>
+ <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszThH3a7pLJG+zppu2qr5RwXAOk9Sj+S+RAT0B758hzOsyQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Moteen Shah <m-shah@ti.com>
+In-Reply-To: <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,52 +86,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hey Simon,
 
-On 4/1/25 19:55, Simon Glass wrote:
-> Hi Ilias,
-> 
-> On Wed, 2 Apr 2025 at 05:33, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+On 29/03/25 05:17, Simon Glass wrote:
+> Hi Moteen,
+>
+> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
+>> Add a function to scan through all the nodes in the device-tree
+>> recusively for bootph-* property. If found, propagate it to all
+>> of its parent nodes up the hierarchy.
 >>
->> Hi Simon
+>> Signed-off-by: Moteen Shah <m-shah@ti.com>
+>> ---
+>>   tools/binman/control.py | 35 ++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 34 insertions(+), 1 deletion(-)
 >>
->> On Tue, 1 Apr 2025 at 18:42, Simon Glass <sjg@chromium.org> wrote:
->>>
->>> Hi Jerome,
->>>
->>> On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
->>> <jerome.forissier@linaro.org> wrote:
->>>>
->>>> Hi Simon,
->>>>
->>>> Any feedback on this series?
->>>>
->>>> https://patchwork.ozlabs.org/project/uboot/list/?series=448553
->>>
->>> No, not from me, but thanks for doing it!
+>> diff --git a/tools/binman/control.py b/tools/binman/control.py
+>> index e73c598298c..e739949d366 100644
+>> --- a/tools/binman/control.py
+>> +++ b/tools/binman/control.py
+>> @@ -526,6 +526,35 @@ def _RemoveTemplates(parent):
+>>           if node.name.startswith('template'):
+>>               node.Delete()
 >>
->> Aren't you maintaining the sandbox drivers?
-> 
-> Yes, I'm listed as maintainer for lots of things. What sort of
-> feedback are you looking for?
+>> +def prop_bootph_to_parent(node, prop, dtb):
+> I think the 'prop_' is a bit confusing, since you are dealing with
+> properties! How about 'add_' as the prefix?
 
-Well, you were pretty explicit that those tests were important to
-you ([1], [2] and especially [3]), so I was expecting some kind of
-review/ack on your part. The series is currently assigned to me in
-patchwork and I got zero comments, so I'm not sure what to do with
-it. Unless someone objects I will probably add it to my next PR to
-Tom for -next.
+'add_' should be more descriptive, will add that in v3.
 
-[1] https://lists.denx.de/pipermail/u-boot/2025-February/581988.html
-[2] https://lists.denx.de/pipermail/u-boot/2025-March/582435.html
-[3] https://lists.denx.de/pipermail/u-boot/2025-March/583362.html
+>
+>> +    """Propagates bootph-* property to all the parent
+>> +    nodes up the hierarchy
+> First line should be a summary
+>
+> then blank line
+>
+> then describe the args...you can see this if you look at a few other functions.
 
-Thanks,
--- 
-Jerome
 
-> 
-> Regards.
-> 
+Noted, will rectify in v3.
+
+>> +    """
+>> +    parent = node.parent
+>> +    if parent == None or parent.props.get(prop):
+> if not parent or ...
+
+
+Noted.
+
+
+>
+>> +       return
+>> +
+>> +    while parent:
+>> +        parent.AddEmptyProp(prop, 0)
+>> +        parent = parent.parent
+>> +
+>> +def scan_and_prop_bootph(node, dtb):
+>> +    """Scan the device tree and set the bootph-* property if its present
+>> +    in subnode
+>> +
+>> +    This is used to set the bootph-* property in the parent node if a
+>> +    "bootph-*" property is found in any of the subnodes of the parent
+>> +    node.
+> comment style again
+>
+>> +    """
+>> +    bootph_prop = ['bootph-all', 'bootph-some-ram', 'bootph-pre-ram', 'bootph-pre-sram']
+>  From my understanding the only ones that matter are bootph-all and
+> bootph-some-ram, since the SPL ones are handled by fdtgrep.
+
+
+Noted.
+
+
+>
+>> +
+>> +    for props in bootph_prop:
+> for prop
+>
+> (since it is just one)
+>
+>> +        if node.props.get(props):
+>> +            prop_bootph_to_parent(node, props, dtb)
+>> +
+>> +    for subnode in node.subnodes:
+>> +       scan_and_prop_bootph(subnode, dtb)
+>> +
+>>   def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, indir):
+>>       """Prepare the images to be processed and select the device tree
+>>
+>> @@ -563,7 +592,11 @@ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, ind
+>>           indir = []
+>>       dtb_fname = fdt_util.EnsureCompiled(dtb_fname, indir=indir)
+>>       fname = tools.get_output_filename('u-boot.dtb.out')
+>> -    tools.write_file(fname, tools.read_file(dtb_fname))
+>> +    dtb = fdt.FdtScan(dtb_fname)
+>> +    scan_and_prop_bootph(dtb.GetRoot(), dtb)
+>> +    dtb.Sync(True)
+>> +    tools.write_file(dtb_fname, dtb.GetContents())
+>> +    tools.write_file(fname, dtb.GetContents())
+> You shouldn't write back to the file created by the build. Do you need this?
+
+
+Had the same thought, but the build fails in non clean builds[0]. Did a 
+workaround[1] but then some essential template nodes ends up getting 
+deleted from u-boot.dtb. Finally, had to write back to the file
+to resolve the issue.
+
+>>       dtb = fdt.FdtScan(fname)
+>>
+>>       node = _FindBinmanNode(dtb)
+>> --
+>> 2.34.1
+>>
+> The code looks fine to me apart from the nits.
+>
+> This addition needs a test - see ftest.py for some examples there. But
+> basically just create a dts that has some props in it, then check that
+> they got added.
+
+
+Included a test as well in the patchset[3]. Do let me know if there are 
+some changes required in it.
+
+>
+> I think testSimpleFitEncryptedData() could be a good example?
+>
+> Regards,
 > Simon
+
+References:
+[0] 
+https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-non-clean-build
+[1] 
+https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-patch-tools-dtdoc-fdt-py
+[3] https://lore.kernel.org/u-boot/20250327080642.2269856-3-m-shah@ti.com/
+
+Thanks for the review.
+
+Regards,
+Moteen
+
