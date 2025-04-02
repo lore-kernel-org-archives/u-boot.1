@@ -4,57 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA133C36018
-	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 21:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD90C36018
+	for <u-boot@archiver.kernel.org>; Wed,  2 Apr 2025 22:03:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15CA181E6C;
-	Wed,  2 Apr 2025 23:52:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id DB9AA81E6C;
+	Thu,  3 Apr 2025 00:03:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="WbmYNLG7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bCs7+icA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29D9281F0B; Wed,  2 Apr 2025 23:52:46 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 18DA681F0B; Thu,  3 Apr 2025 00:03:23 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA88E8035B
- for <u-boot@lists.denx.de>; Wed,  2 Apr 2025 23:52:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A33578035B
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 00:03:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID;
- bh=aI7IitR+9+Ll69gr004mifuvaDEazRaibFYF9St3k9k=; b=WbmYNLG77i1WBK6RC2+gf1n8cQ
- 1Eb1UT1MmperJb5mdrwo3hsH4DJwXSknVNhOGzBekFdocbC+sTb2oF51Z6Vbc2KSKw76nYdpr0P8a
- 1WlR5cjGYLKe2fAPv1z47fASNVydLLCMc66jpIomzf9JAeCk19ZBKf8fL+PzOiOm59/TYOK1ooM0r
- zwyLlmDJFIxDH0D4maXqDq41hXwLReH7/pj0k4ZSCXyXWZlJJeEW4Vj/AyeKiMm9gSDsB0yy7rhfc
- 51rInfNgm8EzVx2Q03llmGdrU7RhCNTEtWolUuSlOHSTWcJsldiwQFBvqB0IkAhhZDeUjMphJfKky
- fKqxMi4g==;
-Received: from i53875bf8.versanet.de ([83.135.91.248] helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1u060n-0002xb-GM; Wed, 02 Apr 2025 23:52:41 +0200
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: trini@konsulko.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- u-boot@lists.denx.de, quentin.schulz@cherry.de,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] Revert "net: eth_bootdev_hunt() should not run DHCP"
-Date: Wed, 02 Apr 2025 23:52:40 +0200
-Message-ID: <2021838.usQuhbGJ8B@diego>
-In-Reply-To: <1824254.VLH7GnMWUR@diego>
-References: <20250401083830.2320479-1-heiko@sntech.de>
- <74ce355b-4e2b-4d5d-b6fc-2ad421be7f3d@gmx.de> <1824254.VLH7GnMWUR@diego>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-6febf391132so3237607b3.1
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 15:03:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743631399; x=1744236199; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ov8EGziljxx4/Wgy2f8BCkc25sJhdbLSOkvWilf+e2I=;
+ b=bCs7+icAlb1sBCdW4ivyUjImlQASSLOHB/Mg3Vc+x8QJ8UcBTuSu/tgFO+rqB11KVp
+ pCQLr+6nin9eXjoLXeoaz9c05UFZsbpQyn0khMRfJOJF8X+glTwcQTNKUFXtvpjcxUH8
+ 2sHfggJiuTHNX+GyYa+bUAfzs2m64OaSVom3tlkOC6LlHtXiXSwiU3z/Q++8uyut2dkV
+ Ji08XNp2Vj5tL55jeaWDmIkXuPuaS5vTKLZuk4+uEZlGOtmY5eFLe1swmseaARPYCcqF
+ kSfYg6Jp+FR7kx9nSmVPpaOsRVV5R49sb0jVfqaXFyxaziYj6xMfhycP2hbKZCqnVduC
+ aq/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743631399; x=1744236199;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ov8EGziljxx4/Wgy2f8BCkc25sJhdbLSOkvWilf+e2I=;
+ b=LUIateqbXis+FgXFV6A91Yz02isJTqhIk67SBXISEzVW7IPivuBDRLQSbIoGH9m+gv
+ d/0ntqgdnrndmCQ5ygPI38SjPhwLbVmixIktr9YWMJNq++qZvuFhbw7y2pzP8JO5WSgJ
+ ugt+eAJNc1bwLSDi8G/Li1XxdoEcxk8cqm9iGnqGbEf4X5G0tFuTgMX6pKBwJ60OSuPM
+ msdg0kO6uhTg6HSbR19RqwFT6HVyxgkhn5is3bS2lYp6Fmnk/Zvv41CNeUVOaTvVyEvY
+ PRI/uzhMBM/f3HDGrMW935YhMinP2Io3nl/EoWcs7wuosVdKfFd4BpllByMUWYoBldOy
+ 1qIQ==
+X-Gm-Message-State: AOJu0Yz51NSefDDMR7ZBuaZPv+3XF0exseNiLYoZgC2EjnHEgqxY6pHM
+ 5EC//4F/L3v5OgmumrAfVRspPed3qs8v0vWGo4+fKWsRpPGfKr1fFxlDtzxXppIaYTDYGtYwOLH
+ TloNfzHB7esIyCguNZ8ePmagqcZSDULOZGv1Whg==
+X-Gm-Gg: ASbGncsF8Zcwh9AL4h2iIGSVpRrMBLDhim/UFq5kNvzcjcBJZ8VGH/cMrr0uxeQUJ4i
+ lq6qSKo2ksupQN/iOoC6313HKCqJ2z4edEPf6eHM5az9+85/qxHOku/kosZSdgWaYHMRnzcOIvP
+ U5sSnnA/O2GcKpigsiVTwsazZk
+X-Google-Smtp-Source: AGHT+IH5mdLoBDaKGij92kzn7NHSV8ZKh2QIH2McPZF/z3Dem+ZnznpWKylvFxelBlK157hJAlpiNpR25OzxIB7CYaI=
+X-Received: by 2002:a05:690c:640e:b0:6f6:cc1d:a6d with SMTP id
+ 00721157ae682-70257101efemr289291597b3.18.1743631399390; Wed, 02 Apr 2025
+ 15:03:19 -0700 (PDT)
 MIME-Version: 1.0
+References: <CAJ+HfNj+B-LmZx7tVXWPqvK6fZ9V_iHsJ19e9MUFGF=JTVu6Xg@mail.gmail.com>
+ <CAC_iWjJyBjGnK6Wv0qXvZ-ujnZ9anc+bw_q-0qCRk-3XAGC4bw@mail.gmail.com>
+ <CAJ+HfNjOfy5FVBhPV52gpPV1O_=F9KWDoYVeZVBjSOoCUACacw@mail.gmail.com>
+In-Reply-To: <CAJ+HfNjOfy5FVBhPV52gpPV1O_=F9KWDoYVeZVBjSOoCUACacw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 3 Apr 2025 01:02:42 +0300
+X-Gm-Features: AQ5f1JqV_K-8aZ18RKJxEaCZmlesCAXhDlkxIF35SvrvEK32BH-sX638PTQ_hQw
+Message-ID: <CAC_iWjL+TGrH4NuzfFcwwWNeiKNUCOLG-5u8_ou30T6x0A0k6w@mail.gmail.com>
+Subject: Re: RISC-V UEFI/ACPI on QEMU regression?
+To: =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,87 +94,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Mittwoch, 2. April 2025, 23:36:46 MESZ schrieb Heiko St=C3=BCbner:
-> Am Dienstag, 1. April 2025, 18:13:35 MESZ schrieb Heinrich Schuchardt:
-> > On 01.04.25 17:51, Simon Glass wrote:
-> > > On Tue, 1 Apr 2025 at 21:38, Heiko Stuebner <heiko@sntech.de> wrote:
-> > >>
-> > >> This reverts commit 1f68057e03206e6597ca8b2be8bb1c49d4bd47d0.
-> > >>
-> > >> Commit 1f68057e0320 ("net: eth_bootdev_hunt() should not run DHCP")
-> > >> aims to reduce EFI boot times by disabling the dhcp_run when
-> > >> checking ethernet bootdevices, by preventing it from running double,
-> > >> with the reasoning
-> > >>
-> > >>      We need to call eth_bootdev_hunt() when setting up the EFI sub-=
-system to
-> > >>      supply the simple network protocol. We don't need an IP address=
- set up.
-> > >>
-> > >> That might by true for EFI, but not for everything else, because when
-> > >> running distro-boot and for example the PXE method in it, nothing wi=
-ll
-> > >> set up an IP address now.
-> >=20
-> > The removed call was dhcp_run(addr, NULL, true);
-> >=20
-> > We have:
-> >=20
-> > distro_efi_read_bootflow_net():
-> > boot/bootmeth_efi.c:205:        ret =3D dhcp_run(addr, NULL, true);
-> >=20
-> > script_read_bootflow_net():
-> > boot/bootmeth_script.c:132:     ret =3D dhcp_run(addr, fname, true);
-> >=20
-> > extlinux_pxe_read_bootflow() seems to be lacking the call.
-> >=20
-> > So instead of reverting
-> > 1f68057e0320 ("net: eth_bootdev_hunt() should not run DHCP")
-> > we should add the missing call in extlinux_pxe_read_bootflow().
->=20
-> doing
->=20
-> ----- 8< -----
-> diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-> index b91e61bcbc4..6e5e0f99ea4 100644
-> --- a/boot/bootmeth_pxe.c
-> +++ b/boot/bootmeth_pxe.c
-> @@ -73,6 +73,10 @@ static int extlinux_pxe_read_bootflow(struct udevice *=
-dev,
->                 return log_msg_ret("pxeb", -EPERM);
->         addr =3D simple_strtoul(addr_str, NULL, 16);
-> =20
-> +       ret =3D dhcp_run(addr, NULL, false);
-> +       if (ret)
-> +               return log_msg_ret("dhc", ret);
-> +
->         log_debug("calling pxe_get()\n");
->         ret =3D pxe_get(addr, &bootdir, &size, false);
->         log_debug("pxe_get() returned %d\n", ret);
-> ----- 8< -----
->=20
-> does seem to work in _my_ usecase and gets me loading stuff over pxe
-> again.
+On Wed, 2 Apr 2025 at 18:26, Bj=C3=B6rn T=C3=B6pel <bjorn@kernel.org> wrote=
+:
+>
+> Hey!
+>
+> On Wed, 2 Apr 2025 at 16:27, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hey Bjorn
+> >
+> > Long time, hope all is well!
+>
+> Too long! Maybe next Plumbers? ;-)
 
-=46or reference, I implemented that now in
-https://lore.kernel.org/u-boot/20250402215025.2655384-1-heiko@sntech.de/
+One can only hope!
 
-So people can decide which way to go :-)
+>
+> > I think it's a regression and I think what breaks it is commit cfb4aa2a=
+754ed1
+> >
+> > Can you apply the diff below and see if it fixes it for you?
+> >
+> > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> > index 4422b31ac6a7..afa5eee85484 100644
+> > --- a/lib/efi_loader/efi_acpi.c
+> > +++ b/lib/efi_loader/efi_acpi.c
+> > @@ -34,8 +34,8 @@ efi_status_t efi_acpi_register(void)
+> >          * add_u_boot_and_runtime(). At some point that function could =
+create a
+> >          * more detailed map.
+> >          */
+> > -       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
+> > -               return EFI_SUCCESS;
+> > +       //if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
+> > +               ////return EFI_SUCCESS;
+> >
+> >         /* Mark space used for tables */
+> >         start =3D ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+>
+> Unfortunately, still the same with this patch:
 
+Yea, I skimmed that too quickly ...
 
-Heiko
+Can you try this though?
 
+diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
+index 0d0cf7646890..77cebae5e3fd 100644
+--- a/drivers/misc/qfw_acpi.c
++++ b/drivers/misc/qfw_acpi.c
+@@ -305,7 +305,7 @@ static int evt_write_acpi_tables(void)
+        /* Generate ACPI tables */
+        end =3D write_acpi_tables(addr);
+        gd->arch.table_start =3D addr;
+-       gd->arch.table_end =3D addr;
++       gd->arch.table_end =3D end;
 
-> I guess this whole thing now becomes a strategy decision ;-) :
->=20
-> - it's very late in the release, do we revert to the known working state
->   or hope the above fixes all issues
-> - Simon's wish of not sprinkling dhcp_run calls in multiple places
->=20
-> I guess I'm fine with both way, as either fixes my use-case ;-)
->=20
-> Heiko
+        return 0;
+ }
 
-
-
-
+Thanks
+/Ilias
+>
+> [    0.000000] efi:   0x00047eee3000-0x00047ef19fff [Boot Code   |   |
+>  |  |  |  |  |  |  |  |  |   |WB|  |  |  ]
+> [    0.000000] efi:   0x00047ef1a000-0x00047ef49fff [ACPI Reclaim|   |
+>  |  |  |  |  |  |  |  |  |   |WB|  |  |  ]
+> [    0.000000] ACPI: RSDP 0x000000047EED1000 000024 (v02 BOCHS )
+>
+> (RSDP resides in Boot Code)
+>
+>
+> Bj=C3=B6rn
