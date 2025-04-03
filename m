@@ -4,102 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D5ACC3601A
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 16:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B71BC3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 16:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E2C282054;
-	Thu,  3 Apr 2025 18:03:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E0CFE82054;
+	Thu,  3 Apr 2025 18:10:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zeOXHE4g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kYDrlZjr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38A1182075; Thu,  3 Apr 2025 18:03:27 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 4C33582075; Thu,  3 Apr 2025 18:10:49 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A399182006
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 18:03:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC27382006
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 18:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4394345e4d5so7370355e9.0
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 09:03:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-72c7336ed99so379253a34.0
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 09:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743696204; x=1744301004; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xULLmeHarL7Eg3vXiKu+A2SrrgmS1T8pyxRNZ2r5zKY=;
- b=zeOXHE4gOKE3qvIIBqSpglYtED86aJ7f0eulK+Uy/ghEdjhB+ng7eEmWZvBOvuUPwL
- YeO5HCzAWN9qjwQ2YVZNo5lFAfiLJM0+aGTCzj05MDlkM6Qm+TTbhNAqTHxz0Jc25Mh6
- gzRhAA+5huBC2mAovBPb4XTHllFSnsPeVqRbKJsVsJr20nuptMXw5KxNRNlcs7Vci/6A
- wPigNG56IA2b2Fgr7rrH/JOCgcAJ/pBgSBbu36BUUErwFz+n+SkjgKkZn5mrI3JNAG2v
- EXk2Xn9ZQu5Buf41oRk+DZyfiq3gz4ThJkHkb2FLhIWfrQJZ8/JlPeAyjcrt8OMM3xLH
- uZwQ==
+ d=konsulko.com; s=google; t=1743696645; x=1744301445; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=J7vkZ2+62h7/gKbQcNBccxHvpPOk7QXj+nlW43dUgmQ=;
+ b=kYDrlZjr/jzoq39iD8ZovM3NiUJMdTSf9znl1tv+UpW/bpGd1QPmZcT7AR52zhF5Ll
+ heu6vvtlCO82GzJEpzzluxnEFWJUSlQprJ7OKLmjefc7cGaAVfX8UKiQBe2RwrfxR+Qh
+ xdia6/t9pxK3CmNxx4v6jpzZ4nQc3Qzb2/fMc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743696204; x=1744301004;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xULLmeHarL7Eg3vXiKu+A2SrrgmS1T8pyxRNZ2r5zKY=;
- b=akqFcz+UJBKzB75AD7heN8CGk0rn3iej213jAXnyHWipZKDrephjxnuXr4gu3xWV3w
- OfFYeNfCkwQ5z1ElVaHBZF4m3MUXy2rE6bMkkVMKNRwSlo/sTye1s0T0m4WToFhjT7iK
- S0wRiBoGnadF+KkpECkfMCUheRlOVjvFjJ4ZGJuaN00859Yl5tMNCEroaNy1HIcf0A/e
- ZK3940hybVylyaqcrbJeKJPzjsrmLATZm5ZL0nr0Hkp+TSJJqYIPUBFo7nRohtPbilZy
- aylpDquyNzd6MxaHVFx1TYzSmsRMbRqn6hc8pb3p2eM0GGhNWS1KqgfhnifuLECYQz4R
- b3dg==
-X-Gm-Message-State: AOJu0YwZ+EkespE2Ut6oX8lhHXM4vE1Z/SmO34lwMqv+Be2Yr1KTXr+Q
- v0V2y1wrPUiui13L2+QGVw+BS0py4po82T+W//we1KR2i2ZKZ8we1u7ojODBeCo=
-X-Gm-Gg: ASbGncswOG9KbnWpA9xfUSRMOjA4iMJga4vm3fI2G6dO4mheWfA2MJLtPlxmePmzZZJ
- fbDL15UgsqEyLfMVIbvdZc/N0n2t8aLkbaHNg5Ue+jfeQUeBWHRjvSCNPDBWAHgJFLM5pgbv1lV
- o86D7bKzjCwbASfqAIGMR9ajxdep2O2cB5jx5SSpYUV7DicjWwoYRD1LXpRGQA2mGlnSExZyZPa
- S4WnU4qSducs++pKiBs1uQl6L23ddTK4yTYlfHWG5/xfl3Z0uBRdYW0fsH8a/Nlzk7kGO9mQ/gF
- bWxbmZ6q43bSWtfRsd5VkuJvRFmLMw9PF5QrHb2swIndFUZcVUaqWu+o7TgBzWKhOg==
-X-Google-Smtp-Source: AGHT+IG01NcztaIBH7spTnJNvAWDtmtbpMzaDR+WTYB8Hx1WMIauFvEsUV8QCJ6LgOhvdza7eNF2DA==
-X-Received: by 2002:a05:600c:1f96:b0:43c:e7ae:4bcf with SMTP id
- 5b1f17b1804b1-43eb5b80267mr72716385e9.0.1743696203858; 
- Thu, 03 Apr 2025 09:03:23 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec1692ba4sm25213895e9.16.2025.04.03.09.03.23
+ d=1e100.net; s=20230601; t=1743696645; x=1744301445;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=J7vkZ2+62h7/gKbQcNBccxHvpPOk7QXj+nlW43dUgmQ=;
+ b=bVOHO3ZX9SGkFPCGDbcBWCKpTXIQNgu9GivJpBz7azJUbVMBLIpgyZbejmDgyzK2NZ
+ vc71VOSKSkhQ4fca8GabtpzWzv6uthBFSUIS91nMjAPea+F2Bo7i+2F2u0vzLT9qHTG8
+ xbdWbjjevZ6ERJa1TfJpjIrvKcNaTX6vDzdMfoxDXiOVdHhAMIpv9SUWkWPrCOt63Qft
+ sxLzUaAr7Ko4krOuAbih3DlNdNvIopS8SZDQDGQsWgLRZe6Y1HE+cyGkLw2JlRMo2nfK
+ hKhvOGrQJLMBfJQ4ENlb3KMXuf3epdldy6pNntdh4j+/pF8jEWSv61E+6UnrdUZBhf11
+ p8NQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYoWxD/AvhuNj4f2PsuhfowCo8HkrfkRnlk/VtrY3M36LXQ37Ozwitt3wfzp40SaPU6fHFZyU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6nVNZ/hDDsQOHk1A5NtrcdjIvWyH4EM6OIa3Bsky04MDSTBC3
+ yPcZvC7U+m61tevL58nO9Pmfzptf19s1ZlMiYLwoSsYpoRzYxaLHr7WkcTlbBy4=
+X-Gm-Gg: ASbGncuU0S9v9vFFDUNWH8h8pyE/f+ktePdw4dO8cz7WFUQ2EdvXC1YDJUeUeX6bDYL
+ I8tNkif/z6e7kCM7d+bCEXGJdC3IZ15+h/lPlax3tfO6lm3jRMAc8TtvV8OT8UnHBdlf8pV6TY/
+ lQf3a3tRZ0GjbVpmdwLqvCZ3KERppIQKcbkLDRBkQGTYY1uAB+hGFzZ0yffRodjiYlcFa3OFyUF
+ DYlljGVTmW8TRKYTLw8gHj7endARGxxz98SgzEFLGHdpkujkDq15WfiWTCoUJDuzgoCkFpQekfx
+ pBJH9SEORLE+7Wtc8YYVdrVpKoAj7Ev2HvxrNvZAeC12D0Hs8qUlhoMAVQ+B37uRSXWdNoO5Iy/
+ zN2woVzUmT/Ctv4ok
+X-Google-Smtp-Source: AGHT+IGTge+n04M2oKvjQat1qe7x7zAjWviJA1KIHPl0Je2ojk3OuLZJROkY86KlLjwvEm3ZiagOUQ==
+X-Received: by 2002:a05:6830:6418:b0:72b:89ca:5120 with SMTP id
+ 46e09a7af769-72e366cfb40mr122313a34.8.1743696645365; 
+ Thu, 03 Apr 2025 09:10:45 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6040c4ccf84sm316679eaf.13.2025.04.03.09.10.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 09:03:23 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 03 Apr 2025 18:03:21 +0200
-Subject: [PATCH] board: libre-computer: check interface before comparing it
- in set_dfu_alt_info()
+ Thu, 03 Apr 2025 09:10:44 -0700 (PDT)
+Date: Thu, 3 Apr 2025 10:10:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>,
+ Leonard Anderweit <l.anderweit@phytec.de>, u-boot@lists.denx.de
+Subject: Re: Pull request efi-2025-04-rc6
+Message-ID: <20250403161042.GK5495@bill-the-cat>
+References: <983e05cd-e172-4658-b6f8-54a9b55330e5@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250403-u-boot-fix-set-dfu-alt-info-interface-v1-1-1fdd12463186@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAEix7mcC/x2NQQqDMBBFryKz7kBMFWyvIl0k8acdkESSWAri3
- Tu4efAW7/+DKoqg0rM7qOArVXJS6W8dhY9Lb7As6mSNHc1g7ryzz7lxlB9XNF7izm5tLClmRUO
- JLoAfHhPcCOtDT7q1FWhx/cyv8/wDWJFKh3cAAAA=
-X-Change-ID: 20250403-u-boot-fix-set-dfu-alt-info-interface-9be8ea5e2bc1
-To: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3154;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=S56hhxrdZ7b/gS6dg8oNZg3c7/fkO+8IQUki6qRMmP4=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn7rFKteoGKmqTi9XVKqn1pRqMPeDDgHtS7a+B4Z36
- R24BT16JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ+6xSgAKCRB33NvayMhJ0QlpD/
- 9CsnxKzKveDuXXYKO7y/m1rkib4LXYk2he2Xmfni+btneADdyQD0jAVjZPkKprX6HPwgg7cWMck1Tn
- gZrDK8CMDpk/lFiGrPKv4FQOdAIexTCPrSg2557HKs2ZWgJF7Pgn/d0d9PB+twaLtYrFs9QjiWyzgb
- vA6ig24aWly66ej5uYevHLu88D5yiY+rih09TC1qzP9sFShyPMLPMxED3V+/DQ6yw/WdPi9/QsH97e
- fYBA8hBG9skUMr8+tHj5GwmN27ffNzOiNbeTWeBFF3fDuuqOPV3/upGjNU1r1D9ZiP04XSXpm6rsnF
- wVBimWUfLaOSQr+pPAyIKSZA0sZtw3VmbY4yMvNLhNo2qSP1+b9w7ZTtu9AGdzJEquGH39HEE2HtTR
- 5ivc/Yd1zKPYfmkXsCm/I270zvn/cPR4l83yKFlZkGRNyb3GBK8iRWvWMylV7i6A6Nve4IlH+xIupG
- REgkz4BWBffU82PAuT9uxJpMtpOjYL2nEcqXnKLVdzeYj6kJ4Gv2z7ZGVs9fQtwY0o4Pd3/otou3gl
- uOqmbxS7+qAjDruvfrqGVHtCXqbzUWC9m6biC+avoHKogW3DRt+yrJhAiwJnvu3S3p4OqjfMDioMop
- 7C0Xmt9hlVVKa2fx77Nt8aKOT2FPCafZ02g+iwX4AQqFm3Fs8YjlEQ+BJkRA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VMVg7ynvUaNdmecK"
+Content-Disposition: inline
+In-Reply-To: <983e05cd-e172-4658-b6f8-54a9b55330e5@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,64 +98,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When set_dfu_alt_info() is called, interface can be NULL when called for
-the EFI capsule, so check it before calling it with strcmp().
 
-Fixes: 12ea40d29dc ("ARM: meson: add support for Libre Computer aml-s905d3-cc")
-Fixes: 9e6e6b034b1 ("ARM: meson: add support for Libre Computer aml-a311d-cc")
-Fixes: 75c87c6cbc0 ("board: libre-computer: aml-s805x-cc: Enable capsule updates")
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   | 2 +-
- board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   | 2 +-
- board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+--VMVg7ynvUaNdmecK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-index e45cfd5d8a3885683dd6b1d0eea03084dc6dfdb5..294f78858a7848fe8255c9b9b42e2f556a6e05d1 100644
---- a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-+++ b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-@@ -29,7 +29,7 @@ struct efi_capsule_update_info update_info = {
- #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
- void set_dfu_alt_info(char *interface, char *devstr)
- {
--	if (strcmp(interface, "ram") == 0)
-+	if (interface && strcmp(interface, "ram") == 0)
- 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
- 	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
- 		env_set("dfu_alt_info", update_info.dfu_string);
-diff --git a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-index 94cf5b4361fac5003dded2f8dc2bfc9be7630099..1ec9a5b401e210045f1b13720f1e5c16e1f7f86b 100644
---- a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-+++ b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-@@ -36,7 +36,7 @@ struct efi_capsule_update_info update_info = {
- #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
- void set_dfu_alt_info(char *interface, char *devstr)
- {
--	if (strcmp(interface, "ram") == 0)
-+	if (interface && strcmp(interface, "ram") == 0)
- 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
- 	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
- 		env_set("dfu_alt_info", update_info.dfu_string);
-diff --git a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-index f641db5a494f358ed89591fae06e66eb18f85709..b552035ee03a7b848455ae6564688b4a12e02326 100644
---- a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-+++ b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-@@ -29,7 +29,7 @@ struct efi_capsule_update_info update_info = {
- #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
- void set_dfu_alt_info(char *interface, char *devstr)
- {
--	if (strcmp(interface, "ram") == 0)
-+	if (interface && strcmp(interface, "ram") == 0)
- 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
- 	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
- 		env_set("dfu_alt_info", update_info.dfu_string);
+On Thu, Apr 03, 2025 at 10:32:38AM +0200, Heinrich Schuchardt wrote:
 
----
-base-commit: f59fb9846c5a1d129f78b2945a094477388fd346
-change-id: 20250403-u-boot-fix-set-dfu-alt-info-interface-9be8ea5e2bc1
+> Dear Tom,
+>=20
+> These are all documentation fixes except for an obvious bug when passing
+> ACPI tables from QEMU to the operating system as EFI configuration table
+> where the table end was not correctly determined.
+>=20
+> The following changes since commit c17f03a7e93dfbbe5d32f5738274187065d949=
+3f:
+>=20
+>   Merge tag 'net-20250314' of
+> https://source.denx.de/u-boot/custodians/u-boot-net (2025-03-31 07:39:36
+> -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2025-04-rc6
+>=20
+> for you to fetch changes up to 7871285a0a8fb6726ea7537c4f592e117f93768b:
+>=20
+>   doc: Fix typo bootfloe to bootflow (2025-04-03 09:06:51 +0200)
+>=20
+> Gitlab CI showed no issue:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/25491
+>=20
 
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
+
+--VMVg7ynvUaNdmecK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfusv4ACgkQFHw5/5Y0
+tyxAAwv8DT52IxYljnawF5YaouXQRXPBGgKYAji/Ch7wgro9ov0fm+ckZwnC0O06
+owYg7jEB+RuFL6zXbbnAlAzf7XsnvcKX0Ssg8gS+W+5K/H8i+Irlod2scclA6WDR
+/uFkUUVybDm1BQAEkYmb1pq0ZRXUEBOHORzzXu9h7ZKmxr0+v4xvul1RjCHNP/uL
+tbOzeFdxj+nLFp0FRGVatVYyPnnMUUPlsGEUZB6OhWaa6XyjeZe0Eb2J/t6+0wBp
+8opLwfY71uqvWMmQT2JD8Qw6AmQmXOKNS4h0eukjZNwuXf8xreTEDT1F9pqNJbth
+lyAhEhzGeJc4YUHSTdEy1kLRjEdjC4kSdRJi610aI/wjpweyoBgo+c5bCSCslZHV
+BC2p8dcvBkc/80VTGjQ9RN1RKj021ySwZkWitfFGbBXKHHjJmeUpLuTeuhRv2s9v
+CBQW7m+cAj3lKd0w7BqQ6QEKabkwfWEMG/rXvSH04TYemA0WnYUV2cHagHYF7YS/
+MYhQoAnG
+=IfFX
+-----END PGP SIGNATURE-----
+
+--VMVg7ynvUaNdmecK--
