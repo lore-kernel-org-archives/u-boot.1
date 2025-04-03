@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7538FC3601A
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 17:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71680C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 17:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6322E82139;
-	Thu,  3 Apr 2025 19:58:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A6CB582153;
+	Thu,  3 Apr 2025 19:58:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A2X6Bvtq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J5sSgA3/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 507FB82139; Thu,  3 Apr 2025 19:58:03 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 7C51E82724; Thu,  3 Apr 2025 19:58:07 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B2098212F
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 19:58:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FFEE8216C
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 19:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e22e6ed2so1732954a12.3
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 10:58:01 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac25520a289so201668766b.3
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 10:58:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743703081; x=1744307881; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743703085; x=1744307885; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z8hwWWPgLM0OAMohNEGUkc7M5FhXplSGCetqW9ES2g4=;
- b=A2X6BvtqhEEtxRg5bBY5zudH6tepH50qkBGWg7mJua6pPDCbzhQto7MpMh63mEPFtA
- mAFjfpBL0arsHDN9Vg7LMvfIiKLx6EY0OeiE0Nd5Gut96+VjQJn8ScBlAReKBuIZ7lGl
- HGNdd3YM/yFkUjRnwCaVGKwXm/63FS41aeqNY=
+ bh=5Dkfl7GQFgzb+lxmmJsbmGgszIuU3+tn0pChTTjQBKE=;
+ b=J5sSgA3/Qn0VgaZccyXxUUWs0TXYhyezjeokE5DgQRpLix+9VCtP8TPiCYe29y2pyU
+ 3Pt80gPQcz5TnLuVkuJH9p3o4qZpIOMUMDe/c23qeKiOuYAwy2sG5BYEFodaiVTlnURE
+ PtY0MrWXXRw7RPD2G/ZtgVQC4sSJoJerP1ops=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743703081; x=1744307881;
+ d=1e100.net; s=20230601; t=1743703085; x=1744307885;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z8hwWWPgLM0OAMohNEGUkc7M5FhXplSGCetqW9ES2g4=;
- b=DUSCVbCW7WjFhXOabgJ5U8oVUa/WcepyrnIAhSTFkLs2FSAsgmojP9ULGR/pliFgKs
- de9tyAyZRNf5DngC9SrUmFSaOwLn24ZK4aBp5dIgL8cgDwM++SZ2pbfHJcQK7O2rlbhZ
- GP5+N+WhVkZ7okou1yUj6nQelC9xcv8s3wQoeVP/4KFlV0Jnk6+x9j6hrmd6+86x2CM1
- IK2+pIBlq1TTyAFhIXLZBsBaoOxJvJGA7H35ExakCUjBwiA3eDGiX/caBL8LIkTj3oAc
- 6z2I2Pfz/UzZetTnzJrvGl2UZTOM5tB8HvyPOaZ6gSScooqwF++o2iodq0bEdQGtdYp5
- 74Ug==
-X-Gm-Message-State: AOJu0YxdSbL0WyvwyuvnvrQ9BazEvqKIG9HM27WukrPm8ctcgkGrWysg
- npByRmhSJGpkeXv+v0inpshteZLHR8jR/sZOvE8+5ly+t8Xie7f5xXBWD8Z7q6GnLLpgX+bqvzp
- sweTWkNFLLR42e/lFrY6Kr/k8KuLgK9MzCozN
-X-Gm-Gg: ASbGncvG1AAgJiXVYpgQwS0EB81JiTdKQGATSTwXDdc+GLm5I9k11aaEzEZPx5odv0L
- ma2UGdSer3dk17Q2ns7DuoC5pOjhgLxOa6RMTVOZ+hPAagQR9Zem9byj/ug1l9KD46HgXQLQDA3
- Cnp80JLsOVOfvED/ERxBoADepCk7MO
-X-Google-Smtp-Source: AGHT+IGRXR1aUQaP3b7x+j5TxW9pP2u/A6gMR6l9X/hwqIXTbnXAn5zphiFHSAxPrpIkx/acdylBtdJf5Ocuw27b5rs=
-X-Received: by 2002:a05:6402:42d2:b0:5e6:616f:42e4 with SMTP id
- 4fb4d7f45d1cf-5f0b450128bmr70141a12.27.1743703080423; Thu, 03 Apr 2025
- 10:58:00 -0700 (PDT)
+ bh=5Dkfl7GQFgzb+lxmmJsbmGgszIuU3+tn0pChTTjQBKE=;
+ b=CS5f3HPh31YvetzQpyc8RjTVXiWzRiollypxt0v0mBtTCJSopRFMMM2TfrlXuBsYWC
+ oIo8F3ZrkFb39CHtrLSJswYnlYXqiny+pQRhJ0JJY8mm2WznEWoBPadVIQodAETZg2Uw
+ 2+1wlwIdogUi3TSXcDTETml3X6/VA8767YSQWv+l8sqj6Gv39Wf0i0e64OOgSB8ODvhe
+ LOrYkaZRh9L9e8/VeTWUavlI4sizgctF83mSkq5Lw2EYqPDSi5cNJ7/bD+Lu/YLIkI6J
+ F+8aS5yZo6/Cd+PYLB3QEcAtC0PaUPVqBIrm+907DxjBpQbXMNnG5/3tk3lOAwGTiKwv
+ 1Q6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWla4sQ3iUYpm4tFhuzZCFjXmRpKb7utZ4SipPxMv7ZLno8b/l0UTy23g3R6/DVggvdefo22wk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwX9CB8JM1NQw45G8dLdiqDloZc/haZ5M084D1aFGz9jcorEtBf
+ AH8MK3EGxaOo1WOE8Gc2nORyz0i+3FV1NhUwXziJxgrc0+HcTSRal6RP9gCqZs/MHZJIfmA2aHX
+ /j6bxdrJKWz5p4jG1eNAWHBCv8yq/KHaTkaIDkGFINFEY+I49Wg==
+X-Gm-Gg: ASbGncv8h8kjbZUiZv1M7Q8Fchf9juqSSbip5wB16d24tXiQS1EtRAlNytGdDNGWi/K
+ Hw+RTzHYF5eTRqpTQ3qBlWkGbCWypx5WrfO8tLIdCB5Ey8srn0hhV3SIgY5GGQ7hKpS3GeNI0VW
+ ZDlfNOeQq0YmKILTYz2SN4d4YsVnlV
+X-Google-Smtp-Source: AGHT+IEeeJrNQPUIChbIU0qKSANSpN/AmxLRip8jUF2ZlbDmdDgQWBjWJBgcBA1M9WoK62gT5wYAM9QKb5S/vy57Jm8=
+X-Received: by 2002:a17:907:6d0c:b0:abf:63fa:43d4 with SMTP id
+ a640c23a62f3a-ac7d1bef006mr37449166b.44.1743703084487; Thu, 03 Apr 2025
+ 10:58:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-41-sjg@chromium.org>
- <20250402142858.GT5495@bill-the-cat>
- <CAFLszTiCgq6XqK7mVY9YWD6bjod3bWPtp_s2k7_WVgn8gVf5QQ@mail.gmail.com>
- <20250402195033.GB5495@bill-the-cat> <20250402195656.GC5495@bill-the-cat>
- <CAFLszTjPi5=ro_4n8oF+ZX_OtzvKxWZvz=ipmXCnEhysVZb9-w@mail.gmail.com>
- <20250403002643.GG5495@bill-the-cat>
-In-Reply-To: <20250403002643.GG5495@bill-the-cat>
+References: <0bdf2e32-80f3-415f-a3b8-eecf5a4edd5f@cherry.de>
+ <CAFLszThmVOd2G2zSHy8mNHEQ=FW7c+KNTD_XLxiQgbMKM=AxXw@mail.gmail.com>
+ <ad07a506-c7a4-43ed-93c1-24626974a2eb@cherry.de>
+ <CAFLszTic6gt4fT4pVVthd-3rRy6JZ_28QLXWOYPak=ZJqYH5QQ@mail.gmail.com>
+ <ef183d5a-48d3-4068-be11-04edd55febf5@cherry.de>
+ <CAFLszTjSeB9BkrV2fmtxof=jiS6NNJ-y6KD8JLzXXoGD=mp++Q@mail.gmail.com>
+ <20250327234959.GS93000@bill-the-cat>
+ <CAFLszTgqU_h+212y4GcXHrm+N7mUoZAaz+E2v3483wzTwNEWkA@mail.gmail.com>
+ <20250330144526.GO93000@bill-the-cat>
+ <CAFLszTjNwtmBqiDUQZPChXYMQei2spTMobZvAu3cQeMfJwNkkw@mail.gmail.com>
+ <20250401171933.GN5495@bill-the-cat>
+In-Reply-To: <20250401171933.GN5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 4 Apr 2025 06:57:43 +1300
-X-Gm-Features: AQ5f1JrEoM0F9rcjBCqoJmnylCaGNuZUnhals5oz6BCppAIlNYbmAqAVdJQ4i4M
-Message-ID: <CAFLszTj-EKx+0sC9MJOsBuuS5hY9mZjt0PTAUR7cB=PCboLf6A@mail.gmail.com>
-Subject: Re: [PATCH v5 40/46] boot: Support IO UARTs for earlycon and console
+Date: Fri, 4 Apr 2025 06:57:49 +1300
+X-Gm-Features: AQ5f1JrQcwC4HtfF0PhSsPBf4h-GBZ4VZXIjNBS1e-MyV796BXU6aLoMghNG-gc
+Message-ID: <CAFLszTiCYaHC1edV7kHF3rpzmtTvB09U8Z7txP_QAVaHu1=uag@mail.gmail.com>
+Subject: Re: [PATCH] log: Add helpers for calling log_msg_ret() et al
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Maximilian Brune <maximilian.brune@9elements.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,100 +100,169 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 3 Apr 2025 at 13:26, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 2 Apr 2025 at 06:19, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Apr 03, 2025 at 12:54:42PM +1300, Simon Glass wrote:
+> On Wed, Apr 02, 2025 at 04:48:35AM +1300, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Thu, 3 Apr 2025 at 08:57, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 31 Mar 2025 at 03:45, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Wed, Apr 02, 2025 at 01:50:33PM -0600, Tom Rini wrote:
-> > > > On Thu, Apr 03, 2025 at 08:22:44AM +1300, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Thu, 3 Apr 2025 at 03:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, Mar 15, 2025 at 02:26:00PM +0000, Simon Glass wrote:
-> > > > > > > Update the string to take account of UARTs which are connected on I/O
-> > > > > > > ports, as on x86.
-> > > > > > >
-> > > > > > > Fix a typo in an error message in the same command, while we are here.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v3)
-> > > > > > >
-> > > > > > > Changes in v3:
-> > > > > > > - Add new patch to support IO UARTs for earlycon and console
-> > > > > > >
-> > > > > > >  boot/bootflow.c | 7 ++++---
-> > > > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
-> > > > > > >
-> > > > > > > diff --git a/boot/bootflow.c b/boot/bootflow.c
-> > > > > > > index 58a1afa7a75..4054a966af8 100644
-> > > > > > > --- a/boot/bootflow.c
-> > > > > > > +++ b/boot/bootflow.c
-> > > > > > > @@ -942,8 +942,9 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
-> > > > > > >       *buf = '\0';
-> > > > > > >       if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
-> > > > > > >               snprintf(buf, sizeof(buf),
-> > > > > > > -                      "uart8250,mmio32,%#lx,%dn8", info.addr,
-> > > > > > > -                      info.baudrate);
-> > > > > > > +                      "uart8250,%s,%#lx,%dn8",
-> > > > > > > +                      info.addr_space == SERIAL_ADDRESS_SPACE_IO ? "io" :
-> > > > > > > +                      "mmio", info.addr, info.baudrate);
-> > > > > > >       } else if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_PL01X) {
-> > > > > > >               snprintf(buf, sizeof(buf),
-> > > > > > >                        "pl011,mmio32,%#lx,%dn8", info.addr,
-> > > > > >
-> > > > > > I suppose we're well past the point where we can delete
-> > > > > > bootflow_cmdline_auto() itself because that's just going to lead us to
-> > > > > > trouble down the line (5 years from now when the kernel adopts a new
-> > > > > > preferred way to pass this info) and grows every platform by some amount
-> > > > > > of space every time we add something new here.
-> > > > >
-> > > > > Well firstly, why would you want to delete this command? It is very
-> > > > > useful to be able to change the cmdline.
-> > > > >
-> > > > > This command is only available with BOOTSTD_FULL, which is less than
-> > > > > 10% of boards.
+> > > On Fri, Mar 28, 2025 at 04:44:53AM -0600, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > Because it's automatic non-obvious stuff. We should not be modifying the
-> > > > command line at all. Is it even documented that we're doing this?
-> >
-> > Yes, the command is documented. It only happens when you run the
-> > command. Otherwise the command line is not modified.
-> >
-> > As you know U-Boot has bootargs but that doesn't work with extlinux
-> > and the like, so we have this command, which does.
-> >
+> > > > On Thu, 27 Mar 2025 at 17:50, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Mar 26, 2025 at 10:46:57AM -0600, Simon Glass wrote:
+> > > > > > Hi Quentin,
+> > > > > >
+> > > > > > On Tue, 25 Mar 2025 at 04:20, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > > > > > >
+> > > > > > > Hi Simon,
+> > > > > > >
+> > > > > > > On 3/20/25 4:26 AM, Simon Glass wrote:
+> > > > > > > > Hi Quentin,
+> > > > > > > >
+> > > > > > > > On Wed, 19 Mar 2025 at 16:31, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > > > > > > >>
+> > > > > > > >> Hi Simon
+> > > > > > > >>
+> > > > > > > >> On 3/19/25 4:03 PM, Simon Glass wrote:
+> > > > > > > >>> Hi Quentin,
+> > > > > > > >>>
+> > > > > > > >>> On Wed, 19 Mar 2025 at 13:04, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> > > > > > > >>>>
+> > > > > > > >>>> Hi Simon,
+> > > > > > > >>>>
+> > > > > > > >>>> On 3/19/25 12:49 PM, Simon Glass wrote:
+> > > > > > > >>>>> Logging of function return-values is used very frequently in U-Boot now.
+> > > > > > > >>>>> Add a few helper macros to make it less verbose to use.
+> > > > > > > >>>>>
+> > > > > > > >>>>> It turns out that the log_ret() variants are not so useful, since it is
+> > > > > > > >>>>> not obviously where the error is coming from. So only the log_msg_ret()
+> > > > > > > >>>>> variants are worthy of these macros.
+> > > > > > > >>>>>
+> > > > > > > >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > >>>>> ---
+> > > > > > > >>>>>
+> > > > > > > >>>>>     include/log.h | 26 ++++++++++++++++++++++++++
+> > > > > > > >>>>>     1 file changed, 26 insertions(+)
+> > > > > > > >>>>>
+> > > > > > > >>>>> diff --git a/include/log.h b/include/log.h
+> > > > > > > >>>>> index 4f6d6a2c2cf..bdda7af570c 100644
+> > > > > > > >>>>> --- a/include/log.h
+> > > > > > > >>>>> +++ b/include/log.h
+> > > > > > > >>>>> @@ -380,6 +380,32 @@ void __assert_fail(const char *assertion, const char *file, unsigned int line,
+> > > > > > > >>>>>     #define log_msg_retz(_msg, _ret) ((void)(_msg), _ret)
+> > > > > > > >>>>>     #endif
+> > > > > > > >>>>>
+> > > > > > > >>>>> +/*
+> > > > > > > >>>>> + * LOGR() - helper macro for calling a function and logging error returns
+> > > > > > > >>>>> + *
+> > > > > > > >>>>> + * Logs if the function returns a negative value
+> > > > > > > >>>>> + *
+> > > > > > > >>>>> + * Usage:   LOGR("abc", my_function(...));
+> > > > > > > >>>>> + */
+> > > > > > > >>>>> +#define LOGR(_msg, _expr)    do {            \
+> > > > > > > >>>>> +     int _ret = _expr;                       \
+> > > > > > > >>>>> +     if (_ret < 0)                           \
+> > > > > > > >>>>> +             return log_msg_ret(_msg, _ret); \
+> > > > > > > >>>>> +     } while (0)
+> > > > > > > >>>>> +
+> > > > > > > >>>>> +/*
+> > > > > > > >>>>> + * LOGZ() - helper macro for calling a function and logging error returns
+> > > > > > > >>>>> + *
+> > > > > > > >>>>> + * Logs if the function returns a non-zero value
+> > > > > > > >>>>> + *
+> > > > > > > >>>>> + * Usage:   LOGZ("abc", my_function(...));
+> > > > > > > >>>>> + */
+> > > > > > > >>>>> +#define LOGZ(_msg, _expr)    do {            \
+> > > > > > > >>>>> +     int _ret = _expr;                       \
+> > > > > > > >>>>> +     if (_ret)                               \
+> > > > > > > >>>>> +             return log_msg_retz(_msg, _ret);        \
+> > > > > > > >>>>> +     } while (0)
+> > > > > > > >>>>> +
+> > > > > > > >>>>
+> > > > > > > >>>> Mmmm not sure this forced return call is a good idea, this would forbid
+> > > > > > > >>>> us from performing some unwinding for example.
+> > > > > > > >>>
+> > > > > > > >>> Yes, it is really only for simple cases. Without the return, there
+> > > > > > > >>> isn't much value and you may as well not use this macro.
+> > > > > > > >>>
+> > > > > > > >>>>
+> > > > > > > >>>> I don't really see how that is better than simply calling
+> > > > > > > >>>>
+> > > > > > > >>>> return log_msg_retz("abc", my_function());
+> > > > > > > >>>
+> > > > > > > >>> That's not the intention. It actually replaces:
+> > > > > > > >>>
+> > > > > > > >>> ret = my_function();
+> > > > > > > >>> if (ret)
+> > > > > > > >>>       return_log_msg_ret("abc", ret);
+> > > > > > > >>>
+> > > > > > > >>> I use this a lot in my code. You can't always just return, since there
+> > > > > > > >>> may not be an error.
+> > > > > > > >>>
+> > > > > > > >>
+> > > > > > > >> I see, I read too fast again. Only return if it's an error.
+> > > > > > > >>
+> > > > > > > >>>>
+> > > > > > > >>>> ?
+> > > > > > > >>>>
+> > > > > > > >>>> If we were to keep this, I would recommend to rename the macro and fix
+> > > > > > > >>>> the docstring because it does not only log if the function returns a
+> > > > > > > >>>> non-zero value. It does actually return.
+> > > > > > > >>>>
+> > > > > > > >>>> So something like
+> > > > > > > >>>>
+> > > > > > > >>>> LOGZ_AND_RETURN(_msg, _expr)
+> > > > > > > >>>>
+> > > > > > > >>>> maybe?
+> > > > > > > >>>
+> > > > > > > >>> Sure, longer names are easier to learn, but then it is so long I doubt
+> > > > > > > >>> anyone would use it.
+> > > > > > > >>>
+> > > > > > > >>> Perhaps LOG_RET() and LOG_RETZ() ? But they might get confused with
+> > > > > > > >>> log_ret() and log_retz(), which I am actually thinking of deleting.
+> > > > > > > >>>
+> > > > > > > >>> I would like the shortest possible name to avoid spilling functions
+> > > > > > > >>> onto the next line all the time.
+> > > > > > > >>>
+> > > > > > > >>
+> > > > > > > >> It should be absolutely obvious from the macro name that this can in
+> > > > > > > >> fact return because missing to unwind code is among the things
+> > > > > > > >> developers typically easily miss already, so with this macro it'll be
+> > > > > > > >> even easier to forget about undoing things.
+> > > > > > > >>
+> > > > > > > >
+> > > > > > > > Yes that's true. We don't have a huge amount of tests for this 'undo'
+> > > > > > > > code either. I would bet that a code-coverage map would show that.
+> > > > > > > >
+> > > > > > >
+> > > > > > > Yeah but that's not a reason to make it even harder to spot issues in
+> > > > > > > the undo code :)
+> > > > > >
+> > > > > > I suspect people will just have to learn the macros, as they have with
+> > > > >
+> > > > > I would ask "What kernel construct have people already learned and we
+> > > > > can adapt inside the macro?".
+> > > >
+> > > > Is there such a thing?
 > > >
-> > > To be clearer, the more I review your changes, the more I see a blurred
-> > > line that I do not this is good between "I found this handy while
-> > > doing something" and "This is a good generic design / feature".
-> > >
-> > > That it can be annoying at times to add the debug uart information is
-> > > not a new unique problem. It's something that's generally normally
-> > > solved. I assume you hit this on x86 where it's more annoying than most.
-> > > But a generic feature it should not have been.
+> > > Likely so. This isn't some new and novel problem, and it's likely more
+> > > people have put thought in to this and come up with something well
+> > > reviewed there.
 > >
-> > I'm not even sure why you wrote this email, then.
+> > What are you referring to here? I am not seeing anything in Linux
+> > related to this.
 >
-> Because this is another little thing I'm being flexible on and not
-> naking, I just think it's wrong-headed. And you seem to think I'm never
-> being flexible. So I started this by saying I'm not naking it, I just
-> think it's wrong.
->
-> > U-Boot has all the information needed to set up the UART correctly and
-> > it is extremely tedious to do otherwise. This is a bootloader, so it
-> > needs to support kernel development. I actually think this is a really
-> > cool feature.
->
-> It's "cool" until it breaks. And grows platforms for features they
-> can't/won't support.
+> Then it's probably more pain than help in getting everyone to write code
+> that handles wind/unwind/logging consistently and correctly and no we
+> shouldn't wrap this up in some macro.
 
-OK, well let's drop this discussion, since you are not naking it.
+I don't have my heart set on this patch. Having used it in quite a bit
+of code I think it has value, but it has drawbacks too.
+
+Quentin, what do you think?
 
 Regards,
 Simon
