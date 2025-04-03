@@ -4,96 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1F5C36014
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF546C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:41:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3767B826B2;
-	Fri,  4 Apr 2025 00:41:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BBCB828BC;
+	Fri,  4 Apr 2025 00:41:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z3qVmCbe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gaiZubfv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40E0582845; Fri,  4 Apr 2025 00:41:25 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id B5ECF82385; Fri,  4 Apr 2025 00:41:39 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B4CD82385
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 00:41:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 364A082932
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 00:41:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ac2dfdf3c38so268046966b.3
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 15:41:23 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5ec9d24acfbso4611653a12.0
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 15:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743720082; x=1744324882; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743720095; x=1744324895; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tVYT77KMsk/WONYkG3I/kkXaKnT/Ng1SIjyQnnzc+pg=;
- b=Z3qVmCbe345HGTz5Df0mRpL5AAaOPSHH/63cwrQ72J/IapcJhE6W4QlxDTZcdiH1uv
- ja6xnQw2Cvdtd7LFaTYVlKFnU60DDPdaI3xYvX66714/NspxBgQJwsqX8+LYQXDL5TwT
- 2YIfP6yEEDqH+OYEv3t4eRrgzKd2ollq0vgHA=
+ bh=HtzXqFSBpJLHZluRL6lSdT3eh54Mdk7/7ZPGzo2hHq4=;
+ b=gaiZubfv/L+1BbPxdduvEPB/APF8bm8tTPdLuTAgWMuQbZY1NrAJ9Jqr68pprcaCMn
+ 1LryTPDtc+ziTcWe1Q7q0kNeVpomH7isObDSszPIx+b7oDiN6mIxGtI2BKGIBrMNVjdq
+ gGO7mFKMf+oqzxI17oA3OLJ/Lkd+qb3Nwsz60=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743720082; x=1744324882;
+ d=1e100.net; s=20230601; t=1743720095; x=1744324895;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tVYT77KMsk/WONYkG3I/kkXaKnT/Ng1SIjyQnnzc+pg=;
- b=JHA6FhmPPU41ce+leaH+k8N7iEtGNudN3hiJh/xNSF1HkUoOCgNMqxoSc+JdtQAB/T
- FhtOtknlcZPPyKl3oxE6TTms21edYT9401ZlK3gRVEj5NDGV2mJpQxMo/0PCtMS0aZLE
- 8cbZJeKsN8Sih/AJXU9GsNAwcX+HiSAum7C/e3UD0n7Fd5hcgGkrLsJXD80fsJziQsVB
- 1W2dmBiRnEkPiUbRIzVlO63gc+NRmbUneXkdsWrpVPE01uKng/6o2aRc1AjrMCY0NYCh
- MnkUvkUsXgWnSLWHMz/85ltcwUWVNHdNHsY9zSW+S72aIpLNoCL2I/lFUK3sZh9WJ89W
- U7Rg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCURMzUr0PjqQRbV0FaBVeKeWPpQYTZ487WJDbcs9KvGmqJljx4cPjRYVf0C4P5X4I+SfKgNH8U=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDZvgDpQZ8iSl2pSS0/vOJAEnNF6LWh37rL62wSVWhcXjpLONw
- uAZNBvYbC2EVHsQu80Q1PP9fZbfB2k1sg4CqNMANodrA2qYPUSVeT6d/oye3ADL1lm9h3Hem+tM
- TVWsvTTPPEBz4nkGxfmvZzj6sAoWG4mILDCc6
-X-Gm-Gg: ASbGnctw1QA3KcadSKSQCFYTgVJLFpZL1QnatD6y4EFKpfUzie8CmTVTrw3tuox+yrp
- Ru9LG0wB58eDJv+U/IruWq/405ZxakMoyfujeK+Z8NzbMdNFKKpcKZm0uklmSwFKI+e3wvyvXgX
- XJAEQTTTTxFDhIxE3tuvo923dMPI73
-X-Google-Smtp-Source: AGHT+IG60EDr7/JIex2FEkUu78U019s7SZha9TJZJSoq8MKS0U/fTubdZS0XlL/ZH2sU5jiwucKJS4FKkmIBrcP85CM=
-X-Received: by 2002:a17:906:f588:b0:ac7:c7cd:ac39 with SMTP id
- a640c23a62f3a-ac7d18a3ee0mr101423066b.24.1743720082487; Thu, 03 Apr 2025
- 15:41:22 -0700 (PDT)
+ bh=HtzXqFSBpJLHZluRL6lSdT3eh54Mdk7/7ZPGzo2hHq4=;
+ b=owMMZygnsN+WTrjG/kHTrGOr1tWx2czT93voCBiPRB9gm/VAr0J6wjJaPIdct2Pc21
+ IBzVWPbiuiMtWhnm/wsggNRNPrplyPli+vC+lZXnSVWsR/gTol7SYcHE4mwv0VZ10If6
+ 4gT5TZa3wfP3xDxT/Xjk5Zx1aL1QtkfLhgdJIyNSIsrZ/IkzKPxjOVm2nGNaU4U3v2dv
+ YwwT/CjxbHYkeh7ZiN58sN+fHwO926AWzATNoAxCtQZR/Ydc5wK80KFFdl3hHzFr65ST
+ 6GRCGZbypQ0BTsxsdUpwqSUmnqsvvc5gHwR4+Kd4c5y88NSE3j6PJX23uO1j3E2eGjom
+ TrYQ==
+X-Gm-Message-State: AOJu0YxkHuLZfqMqeJmgAn7Fmr04wEwgrkxhiPftwRSfcshWhAXjIVkC
+ 6a4Vg4KItvSoOlkEMq9821HnCiwViLro8z6V2jVTJbL8lsXAfHuy4ZZzgn5BrNsbn30PIRjYo4n
+ bf6w7ugkSxdLlUA9lOcGu+S/ZtclymiiCXNufg6aerylDkt+edA==
+X-Gm-Gg: ASbGncuVdIYpb7R05+TN7QlLZE0Hglg1siSYSXwXwgyQin29+/FluHx2W+8RjJyGY93
+ +DUEX+e3uVGJSva6KS9FATXsb1951GGe6XNTVSVcQZKrz0I7ZBi9ocrSbYCWuHlsvLdp64/E0Qa
+ O0meEyvwg9GULkCDy3AAJhDBR0drtR
+X-Google-Smtp-Source: AGHT+IG2nXzhDR94L+BUpTVOJZEiUmP8pWP0E2DGY/VV1sNNGLPkBb7xGwnuB+5yGPweev6W4LvYUkhr3CdRwRCA18I=
+X-Received: by 2002:a17:907:970c:b0:ac7:3028:6d67 with SMTP id
+ a640c23a62f3a-ac7d2e9734cmr84417466b.16.1743720095386; Thu, 03 Apr 2025
+ 15:41:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250328154401.3563921-1-sjg@chromium.org>
- <CAEfUkU+=bhM_Ba5Eu_FVA0-AoHO7TJBGyaO_w7o9rxTzB7SgGw@mail.gmail.com>
- <CAFLszTjPzP-++P1vf7pFFwU5AHdfr2d3zs5QaQMf95uN4BbO7A@mail.gmail.com>
- <CAEfUkU+OHK3GdqROVFe4J0=OoRsw_u7znef6iLuibY4vsLOBkQ@mail.gmail.com>
- <CAFLszTgjKXK6adB2fa3S4o+AAm1Amyg5WdJ9EuOg4xoXBFLeCg@mail.gmail.com>
- <CAEfUkULg0bzG564_vo43Bta5C4_EirZNt39ncgua0VFjd1C-tw@mail.gmail.com>
- <CAFLszTjGn1JGdpNAZVL6CC+pQLsOrG6gjmo8kRzjbnR_=6CMvw@mail.gmail.com>
- <20250403215239.GO5495@bill-the-cat>
-In-Reply-To: <20250403215239.GO5495@bill-the-cat>
+References: <20250403215522.1284502-1-anshuld@ti.com>
+In-Reply-To: <20250403215522.1284502-1-anshuld@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 4 Apr 2025 11:41:08 +1300
-X-Gm-Features: AQ5f1JqGv6AlzghIFcvR5g37K90gCeYWZ7dkhO8V7UtzpCeJjSSVNZ2kAwl9qNY
-Message-ID: <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
+Date: Fri, 4 Apr 2025 11:41:20 +1300
+X-Gm-Features: AQ5f1JrUqOMwNReK0F5C6W9Eu_d1lVqePDJ7tuearhqr_-tYhNLHVJhv0ZM-1YQ
+Message-ID: <CAFLszThmH69FKgKJSUz4pxCNOrzYO_B5X_CN8hqg5_CVD_TjAw@mail.gmail.com>
+Subject: Re: [PATCH v6 1/4] spl: remove usage of CMD_BOOTx from image parsing
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,85 +85,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Anshul,
 
-On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 4 Apr 2025 at 10:55, Anshul Dalal <anshuld@ti.com> wrote:
 >
-> On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
-> > Hi Raymond,
-> >
-> > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Raymond,
-> > > >
-> > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > Hi Raymond,
-> > > > > >
-> > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > >
-> > > > > > > Hi Simon,
-> > > > > > >
-> > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > >
-> > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > > so that it is simpler to understand and manage.
-> > > > > > > >
-> > > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > > >
-> > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
-> > > > > > > mandatorily use bloblist to hand over everything between boot stages
-> > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
-> > > > > >
-> > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
-> > > > > > there must be a bloblist, not that it must contain a devicetree. So I
-> > > > > > wasn't sure about removing it.
-> > > > > >
-> > > > >
-> > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
-> > > > > selected, we can override any fdt from board or env with the one from
-> > > > > the bloblist.
-> > > >
-> > > > Yes, but we should be explicit about what is going on here. With
-> > > > OF_BLOBLIST we indicate that the devicetree is coming from the
-> > > > bloblist. It becomes one of the sources for devicetree, like
-> > > > OF_SEPARATE and OF_EMBED
-> > > >
-> > >
-> > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
-> > > mandatorily used and override other fdt sources like from the board or
-> > > env variables.
-> >
-> > So long as you are OK with OF_BLOBLIST as well, I have no objection to
-> > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
-> > very much. But I can see why it is called that as my standard passage
-> > series was actually never applied. So I suppose I'll need to have
-> > another try at that.
-> >
-> > So to be clear, I want a separate option for devicetree, called
-> > OF_BLOBLIST, which I can enable/disable as needed, without affecting
-> > your option.
+> Using CMD_* configs from spl doesn't make logical sense. Therefore this
+> patch replaces the checks for CMD_BOOTx with newly added configs
+> SPL_HAS_BOOTx.
 >
-> Sigh. Can I ask what the use case for this will be? And we are going to
-> get rid of BLOBLIST_FIXED at some point, yes?
+> SPL_HAS_BOOTZ is enabled by default for 32-bit ARM systems and
+> SPL_HAS_BOOTI is enabled by default for 64-bit ARM and RISCV.
+>
+> The respective C files (image.c/zimage.c) are compiled based on library
+> symbols LIB_BOOTx instead which are in turn selected by both CMD_BOOTx
+> and SPL_HAS_BOOTx.
+>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+> Tested:
+>  * U-Boot CI: https://github.com/u-boot/u-boot/pull/757
+> Changes in v6:
+>  * Add LIB_BOOTx library symbols
+>  * Update existing configs ensuring no change in size or build failure
+> v5:
+> https://lore.kernel.org/all/20250314035505.4029331-1-anshuld@ti.com/
+> Changes in v5:
+>  * Remove imply clause for CMD_BOOTZ instead add default y for
+> SPL_HAS_BOOTZ
+>  * Update commit message to reflect the changes
+>  * Remove 'More info' link
+> v4:
+> https://lore.kernel.org/u-boot/20250313032842.1189977-1-anshuld@ti.com/
+> Changes in v4:
+>  * Don't set SPL_HAS_BOOTI for sandbox by default
+>  * Updated prompts for SPL_HAS_BOOT[IZ]
+>  * Removed check for SPL_HAS_FRAMEWORK from Makefile
+> v3:
+> https://lore.kernel.org/u-boot/20250312124757.789013-1-anshuld@ti.com/
+> Changes in v3:
+>  * Add imply clause for CMD_BOOTZ to enable SPL_HAS_BOOTZ
+>  * Fix broken check for bootz_setup
+> v2:
+> https://lore.kernel.org/u-boot/20250312094241.629707-1-anshuld@ti.com/
+> Changes in v2:
+>  * Add SPL_HAS_BOOT[IZ] configs
+> v1:
+> https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.com/
+> ---
+>  arch/arm/lib/Makefile |  9 +++------
+>  cmd/Kconfig           |  2 ++
+>  common/spl/Kconfig    | 16 ++++++++++++++++
+>  common/spl/spl.c      |  5 +++--
+>  lib/Kconfig           |  6 ++++++
+>  5 files changed, 30 insertions(+), 8 deletions(-)
+>
 
-I thought we agreed that this was acceptable. We argued the toss for
-months on this point and I would rather not revisit it.
+I'm sorry that I am late to the party.
 
-Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
-pretty sure it can be done. The only tricky bit is coming up with a
-bloblist protocol for x86.
+But you should start by creating BOOTM, BOOTI, etc. and select them
+from CMD_BOOTM, etc.
+
+Then you can create SPL_BOOTM, SPL_BOOTI, etc.
+
+Then we can use CONFIG_IS_ENABLED(BOOTM)
+
+LIB_BOOTx doesn't really make any sense, this the code is in boot/ , not /lib
+
+Also, HAS_BOOTZ doesn't make any sense either. We use HAS_ or HAVE for
+things which could be enabled (with a separate option) if the user
+wants them enabled; they should not be used to actually enable
+something.
+
+Also, please check if this conflicts with my PXE series[1], part of
+which Tom has so far not been willing to apply.
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=435516&state=*
