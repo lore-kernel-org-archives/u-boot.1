@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2748AC36014
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 02:00:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 815E7C3601A
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 05:35:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61EA081FFC;
-	Thu,  3 Apr 2025 04:00:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DD8A81CF0;
+	Thu,  3 Apr 2025 07:35:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HmlSxiMZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sNS62sm0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E78AC8035B; Thu,  3 Apr 2025 04:00:01 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 859A181DE3; Thu,  3 Apr 2025 07:35:06 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DC8881E6C
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 03:59:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7B318043C
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 07:34:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2c7f876b321so119416fac.1
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 18:59:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5c9662131so851695a12.3
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 22:34:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743645598; x=1744250398; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JmWo9CCpqvnIiRmOCy9Y+X1XzARrE5hd9Lwv+7zAF3s=;
- b=HmlSxiMZ/3SthRRwzhXbqQCukfZWxyGOwdhIwso6r23i8XXbCj9UEl02ymtkzzlaPE
- LDeiLiEd+vaIFE4LXclOGdV43AZ+70q7H3sLu/tCdmUo3PcaPmVPDLJWTRd+hgKLill0
- 1oufziX3k7Q9kyxknKCeo1a9lBgb5Sr0oClpo=
+ d=linaro.org; s=google; t=1743658499; x=1744263299; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vaGl9UWGwEkTAt2RUTWoR5c3AxmLEot6O0L3Ut4RO7A=;
+ b=sNS62sm0tupA9c/WTHIIbBgZRGNYI0eYoiwPemo0Q6LbR/Bz9Qo543j+FUfkpWmxl6
+ c0zU9w9nW6bGMJtzAzlc8ltXSFmvxpT00iVlfiGqLl5G46vUsfrszJQ0VDePUm552x3N
+ c53qtrwE4wvojxIssHdjRmVxGL+FikL+ZdP4ILAwuDYnxSnwdXcPiwVU60YPwVvnskXY
+ GYRZlsVJLsolWgCRjY3T5Ll417x7k+0d4rbVm0EucKPg+QsqadrOEXpqjCxA66BA/Dd4
+ QAlYOSqw11LD1g6NTOS28E+PgBAeu/TLf0b6qe+hROkxEjfhnLhNOKcBsNNZv9M7oSbK
+ kNuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743645598; x=1744250398;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JmWo9CCpqvnIiRmOCy9Y+X1XzARrE5hd9Lwv+7zAF3s=;
- b=CWbeikEuE2FGNNYy4FzAmOexRKLH2/zfxGr9BCsTpn3CI7VrOGjG26aYFHjta+Txvg
- 5FxyPw/kf5I4im7b1dV9p8uxsAAzNtWkkA1hicXUYBRatROzVTIaNeOcNJI0HFgFL4/y
- kALwK0w+9Q0blNMIvcg1vr0uIJiSq9iOTVb/12oljZcv8cVs/SdL6RnAvi0LEphpMDd2
- Fa41Rd5/5m1UfdYgi+mKQFLo+OwEgk5MHJprrmAt39VffKmn2QUYCAhiqg+Jb2Wf8KGd
- VZppzIy0IbWHv4lmxPUSr9/wfI97qiQ/xJBZhGxCnvv0nJURH4I2aJ8nSD/k/+/pUdK/
- GU5A==
-X-Gm-Message-State: AOJu0YzPO71ptOLwsNtBc+LcNvM25fRmWe1//9eaoZEuUlKoz4k+A1g7
- pYVoGJLBurhhJ2ftXI6QRstIHJe4rJXlNcuhly20z7ln02MX2wnwXSOcCckltLitvyJiRdUJSuP
- G
-X-Gm-Gg: ASbGnctTSkRWBxw2bnzuLu1me3p32r/DQqBcpE7XKroV1Z+xmY6oUuF4pF61l2Mlm7H
- Wf61IqPCWNCIaGpr4WKDTvutgsPO2rO+7j5196WH7gu3bEe5EvNQ1llw5V402ZR/n8eoCpAznJQ
- snVGSOlNXd6pPy9BMBgbU6ADKxsLGO14PajS5coZikUQZK4CaptZyVF0oG0tYtplXnUsXUCVg0U
- Fff8xl4M1gFgoMEwtSArliOKKtFm6gxPwqT/TjsuVXiIVx3U1TM2U97uz923Qoq0BEpEEuD3+XV
- LyVu90qn7v9a4a0A4ahmvRuDMo6ClWrzfF5lOF2qZBkDb2fiWaRccI7RKuiEtvOyPcFbJhhZKpY
- uicjsQZhK0Z1pKc0=
-X-Google-Smtp-Source: AGHT+IGN5bRVlJo4gDkqw99DZVI6tBqr2UNhrT60J5Gvt8Kc/1li4jEZ6YqUrcpkronXG3ok6J+jsg==
-X-Received: by 2002:a05:6871:a402:b0:297:c04:9191 with SMTP id
- 586e51a60fabf-2cc7f560487mr680190fac.3.1743645598189; 
- Wed, 02 Apr 2025 18:59:58 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc8463aad0sm71775fac.29.2025.04.02.18.59.57
+ d=1e100.net; s=20230601; t=1743658499; x=1744263299;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vaGl9UWGwEkTAt2RUTWoR5c3AxmLEot6O0L3Ut4RO7A=;
+ b=g+b9wOH+h0tJtX9FNbGf8kS2s2SgBNs/AAK3mk/zX83qUqIW0/BSgIdIYZrwcDkkbp
+ iaROyE8lKv01FvqCvgJg/2uDTrtGN+7nhVJGs9v/nt2GQzI2NlrzfQRt5uYv0mx3tSJi
+ H4IVl+HnBMz7TJf2mONEAAvHPtTFfOUpt8+BoB4d6IC7AoWNro0hhHf4jEAkTM1niy7v
+ Y1bmxM9r2xVTxsdq5AUvE90FRj4IzEqAdAuK4ZVpcf6AmoVdrNWgvfMenXpEIUK846mA
+ ZkRlt0H8e2C2moE+m/eaHdgocnGUUBBu7ropCC0z3C5gGo/01Ari/Y+b8+Bpo8Xr4BNu
+ LwGQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVF+gIJFesgiMOB+jMNojGCBB9qx17XSzq1EacWCoVFsjISb+hOZJsCULmtKI5IHsJ5lkyIid8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCLXBnozPKKVnY8HipEonYQ+qsCK0cOkT69wf36jwY3syE4ZdD
+ Qi9n/zD3VuYLGb0OsRsYxlvwbLOFDJh3J5uMAa3AuIz8ORpE0pURUfyTzoxLveU=
+X-Gm-Gg: ASbGncvwJU7YWiHN3C+TIqf+i++J9BqOf0iW7qndXdzwfN5W83HVmefF/b0xj3DU7Uc
+ HixkUgv/F3ywDlmxeFdK0qeka0hnLEa0vsIKsBPrzCZTisjXNhd9ZSa1XVP/5+pf/lj7yYfPNAK
+ WS+WV231BqkiMAk9p3EUvMiXof6LkjYi8qCAaN3wnyG8KwzNXK1wUjkXDq+i/dw4dJj1q7LuI01
+ MkXd/yTKbdds9QIb62LyW/05jXQtKq7hmnvJkgOCKdqmE5kIjwce15YosZRgTxAOZsOQUtTgUUP
+ EYDbm2uAc8mr4xPZ0NdC3JKSES92gUTBAUgVJxg7Lc6BMK5DZc5kN1UNDDysdtxVMoGTejo0y8b
+ I4I0Xt06IjlD68tD96INB
+X-Google-Smtp-Source: AGHT+IGj2Vjvew5Rd+NpeouUud5zaUvTKnnDFjXFX2wIsVIdW4NbqTAiZBwHbMYUWQVx5Ldji7YDPQ==
+X-Received: by 2002:a17:906:6a14:b0:ac2:d5c6:43ad with SMTP id
+ a640c23a62f3a-ac738a997eamr1756042466b.30.1743658499061; 
+ Wed, 02 Apr 2025 22:34:59 -0700 (PDT)
+Received: from localhost.localdomain (ppp089210073071.access.hol.gr.
+ [89.210.73.71]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac7bfee6c0bsm35238066b.81.2025.04.02.22.34.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 18:59:57 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250313171729.2126283-1-trini@konsulko.com>
-References: <20250313171729.2126283-1-trini@konsulko.com>
-Subject: Re: [PATCH] onenand: Remove ONENAND_BOOT option
-Message-Id: <174364559712.1379294.1655186829289565442.b4-ty@konsulko.com>
-Date: Wed, 02 Apr 2025 19:59:57 -0600
+ Wed, 02 Apr 2025 22:34:58 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, bjorn@kernel.org,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH] acpi: Fix table length for QEMU
+Date: Thu,  3 Apr 2025 08:34:44 +0300
+Message-ID: <20250403053444.2551339-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,20 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 13 Mar 2025 11:17:29 -0600, Tom Rini wrote:
+The end of the ACPI table is set to 'addr' instead of 'end'. The ACPI
+code for QEMU relies on those values to mark memory as 'ACPI Reclaim'
+and as a result the ACPI RSDP ends up in Boot services Data.
 
-> The option ONENAND_BOOT is never set, so remove it. The option
-> SYS_ONENAND_BOOT was never migrated to Kconfig and any platforms which
-> supported that have long been removed from the code, so remove the
-> reference there as well.
-> 
-> 
+Reported-by: bjorn@kernel.org
+Fixes: commit 638cc363484b ("acpi: enable writing ACPI tables on QEMU")
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ drivers/misc/qfw_acpi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Applied to u-boot/next, thanks!
+diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
+index 0d0cf7646890..77cebae5e3fd 100644
+--- a/drivers/misc/qfw_acpi.c
++++ b/drivers/misc/qfw_acpi.c
+@@ -305,7 +305,7 @@ static int evt_write_acpi_tables(void)
+ 	/* Generate ACPI tables */
+ 	end = write_acpi_tables(addr);
+ 	gd->arch.table_start = addr;
+-	gd->arch.table_end = addr;
++	gd->arch.table_end = end;
 
-[1/1] onenand: Remove ONENAND_BOOT option
-      commit: 177d73dd17705e77b1830a7354425636f617666d
--- 
-Tom
-
+ 	return 0;
+ }
+--
+2.49.0
 
