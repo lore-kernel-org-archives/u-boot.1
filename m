@@ -4,88 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA6E8C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 15:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D5ACC3601A
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 16:03:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0094D82006;
-	Thu,  3 Apr 2025 17:34:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E2C282054;
+	Thu,  3 Apr 2025 18:03:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MDO9C0Hk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zeOXHE4g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1BA382075; Thu,  3 Apr 2025 17:34:26 +0200 (CEST)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 38A1182075; Thu,  3 Apr 2025 18:03:27 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D5688059D
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 17:34:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A399182006
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 18:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-af5085f7861so816171a12.3
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 08:34:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so7370355e9.0
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 09:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743694462; x=1744299262; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QBClg/Yp/LDOnzE2+4mlbI+kc2+BznQYsVsLGWluJFE=;
- b=MDO9C0Hk4six699nehere0d3ZIY/rC3yaZRMk73gKJytliS8V3xKzCTsw1Ru97zdGf
- N34swSFGHl+qVhtx0LLTBYy7CwVTmAnLbvhEsa40ZwEXwi3dronks1zTHpCkdLrAohOY
- KVE2lfVJmx1i1pDitFaiciD+roGkLPiCRUicHq9VZ3lOk90kpdxO23JJpOB0wJClB9ir
- YTnKEkvfcgrGgWwRNSiI8hS+3EtYBlmG0gY8wgvblbwgxa3Ni9tvwohrGZIA2+DMg2zG
- qbKEk1cNwaY84s7HGmWse3nlYriO7b72wghkTnlz2+CdstHNPOWf7TxYWruV2mNE7DZf
- Nh/g==
+ d=linaro.org; s=google; t=1743696204; x=1744301004; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xULLmeHarL7Eg3vXiKu+A2SrrgmS1T8pyxRNZ2r5zKY=;
+ b=zeOXHE4gOKE3qvIIBqSpglYtED86aJ7f0eulK+Uy/ghEdjhB+ng7eEmWZvBOvuUPwL
+ YeO5HCzAWN9qjwQ2YVZNo5lFAfiLJM0+aGTCzj05MDlkM6Qm+TTbhNAqTHxz0Jc25Mh6
+ gzRhAA+5huBC2mAovBPb4XTHllFSnsPeVqRbKJsVsJr20nuptMXw5KxNRNlcs7Vci/6A
+ wPigNG56IA2b2Fgr7rrH/JOCgcAJ/pBgSBbu36BUUErwFz+n+SkjgKkZn5mrI3JNAG2v
+ EXk2Xn9ZQu5Buf41oRk+DZyfiq3gz4ThJkHkb2FLhIWfrQJZ8/JlPeAyjcrt8OMM3xLH
+ uZwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743694462; x=1744299262;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1743696204; x=1744301004;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QBClg/Yp/LDOnzE2+4mlbI+kc2+BznQYsVsLGWluJFE=;
- b=cRiuhD5k3OwEnEbOnmxD4cF/XOWpQQTQ/0/PaneFELWdvIsOSOOP4mDZKhKih4gC4k
- l2AaZGc/ZTlwKv+BWV2G/2pg26AQhsxmhgAHTTm9xY9lhczPI7g3TJDp/dERIPIwlpPm
- c7TtsiSqPRo+CNLjL7WvdHGzFBo9CTtYzDET+7bcSSCbW6j1lS1SXnZdXUMhP/+R/Jy+
- ON897OCT1r5iDIuCV8/ZbV/zofNlcW07Q4TUf25BvM8gWEhgulVUTudIQQWm9BW86L/H
- VWfDvG48Ff53t/1Kbd/5V93YJK7NVbGJEbH8zHLVWL563a/5Wk75i+Zkj0KQeY8UoX47
- j+IQ==
-X-Gm-Message-State: AOJu0Yy7k0kn4i76SHIx0SAc9ysxx9+9AsiUXgRX76Sh5AXRx0lvHYZA
- n8ouaRv5WCq5/jcHwUkDgPAnFwrRmZWl8P1l30tBgX1zMKTjHmFNU//aiot6CPxjFjxSpXCO07D
- tjkwgP7BmcQtZWGlX+asIhebn2gg7Lf1wYAzF0A==
-X-Gm-Gg: ASbGnctZXNIcR/Qzx4IfYLeuAlMK7nrqWQw5Y9ueonXNqVpWlVNCGincb5yHJCB31Gi
- SmXZ7pZNL1zT5ImQO5s6cb+u5dkhX7KvcfntceUMn7irNx7iB4HnC3/3kkJZerOcGEyJ6+P1NTD
- 5dR6dBTe8WOlUsO8mECU68ytxa/RA=
-X-Google-Smtp-Source: AGHT+IGkE3luKOuTUEESKBFNCXBRgoKNWsfpu8ibtLdNehd/2tcYjcTBhA5UMuwNiKDpW+GvHX2+pngS6/5gje/Y7Y8=
-X-Received: by 2002:a17:90b:53d0:b0:2fa:15ab:4de7 with SMTP id
- 98e67ed59e1d1-306a4865143mr52965a91.12.1743694462540; Thu, 03 Apr 2025
- 08:34:22 -0700 (PDT)
+ bh=xULLmeHarL7Eg3vXiKu+A2SrrgmS1T8pyxRNZ2r5zKY=;
+ b=akqFcz+UJBKzB75AD7heN8CGk0rn3iej213jAXnyHWipZKDrephjxnuXr4gu3xWV3w
+ OfFYeNfCkwQ5z1ElVaHBZF4m3MUXy2rE6bMkkVMKNRwSlo/sTye1s0T0m4WToFhjT7iK
+ S0wRiBoGnadF+KkpECkfMCUheRlOVjvFjJ4ZGJuaN00859Yl5tMNCEroaNy1HIcf0A/e
+ ZK3940hybVylyaqcrbJeKJPzjsrmLATZm5ZL0nr0Hkp+TSJJqYIPUBFo7nRohtPbilZy
+ aylpDquyNzd6MxaHVFx1TYzSmsRMbRqn6hc8pb3p2eM0GGhNWS1KqgfhnifuLECYQz4R
+ b3dg==
+X-Gm-Message-State: AOJu0YwZ+EkespE2Ut6oX8lhHXM4vE1Z/SmO34lwMqv+Be2Yr1KTXr+Q
+ v0V2y1wrPUiui13L2+QGVw+BS0py4po82T+W//we1KR2i2ZKZ8we1u7ojODBeCo=
+X-Gm-Gg: ASbGncswOG9KbnWpA9xfUSRMOjA4iMJga4vm3fI2G6dO4mheWfA2MJLtPlxmePmzZZJ
+ fbDL15UgsqEyLfMVIbvdZc/N0n2t8aLkbaHNg5Ue+jfeQUeBWHRjvSCNPDBWAHgJFLM5pgbv1lV
+ o86D7bKzjCwbASfqAIGMR9ajxdep2O2cB5jx5SSpYUV7DicjWwoYRD1LXpRGQA2mGlnSExZyZPa
+ S4WnU4qSducs++pKiBs1uQl6L23ddTK4yTYlfHWG5/xfl3Z0uBRdYW0fsH8a/Nlzk7kGO9mQ/gF
+ bWxbmZ6q43bSWtfRsd5VkuJvRFmLMw9PF5QrHb2swIndFUZcVUaqWu+o7TgBzWKhOg==
+X-Google-Smtp-Source: AGHT+IG01NcztaIBH7spTnJNvAWDtmtbpMzaDR+WTYB8Hx1WMIauFvEsUV8QCJ6LgOhvdza7eNF2DA==
+X-Received: by 2002:a05:600c:1f96:b0:43c:e7ae:4bcf with SMTP id
+ 5b1f17b1804b1-43eb5b80267mr72716385e9.0.1743696203858; 
+ Thu, 03 Apr 2025 09:03:23 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43ec1692ba4sm25213895e9.16.2025.04.03.09.03.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Apr 2025 09:03:23 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Thu, 03 Apr 2025 18:03:21 +0200
+Subject: [PATCH] board: libre-computer: check interface before comparing it
+ in set_dfu_alt_info()
 MIME-Version: 1.0
-References: <20250328154401.3563921-1-sjg@chromium.org>
- <20250328154401.3563921-3-sjg@chromium.org>
-In-Reply-To: <20250328154401.3563921-3-sjg@chromium.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 3 Apr 2025 11:34:10 -0400
-X-Gm-Features: AQ5f1Jq1ebQiHZK7BD6KO1Y4X3WJ7GTE-1Y7QEjU877qVLhSfcNnsbipCEopbw8
-Message-ID: <CAEfUkU+zzsxR7xwY2E4APG9LWK5XJXToLhG1SyC6LQBL3wvo7w@mail.gmail.com>
-Subject: Re: [PATCH 2/4] fdt: Introduce OF_BLOBLIST
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, 
- Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>, mason1920 <mason1920@use.startmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250403-u-boot-fix-set-dfu-alt-info-interface-v1-1-1fdd12463186@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAEix7mcC/x2NQQqDMBBFryKz7kBMFWyvIl0k8acdkESSWAri3
+ Tu4efAW7/+DKoqg0rM7qOArVXJS6W8dhY9Lb7As6mSNHc1g7ryzz7lxlB9XNF7izm5tLClmRUO
+ JLoAfHhPcCOtDT7q1FWhx/cyv8/wDWJFKh3cAAAA=
+X-Change-ID: 20250403-u-boot-fix-set-dfu-alt-info-interface-9be8ea5e2bc1
+To: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3154;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=S56hhxrdZ7b/gS6dg8oNZg3c7/fkO+8IQUki6qRMmP4=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn7rFKteoGKmqTi9XVKqn1pRqMPeDDgHtS7a+B4Z36
+ R24BT16JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ+6xSgAKCRB33NvayMhJ0QlpD/
+ 9CsnxKzKveDuXXYKO7y/m1rkib4LXYk2he2Xmfni+btneADdyQD0jAVjZPkKprX6HPwgg7cWMck1Tn
+ gZrDK8CMDpk/lFiGrPKv4FQOdAIexTCPrSg2557HKs2ZWgJF7Pgn/d0d9PB+twaLtYrFs9QjiWyzgb
+ vA6ig24aWly66ej5uYevHLu88D5yiY+rih09TC1qzP9sFShyPMLPMxED3V+/DQ6yw/WdPi9/QsH97e
+ fYBA8hBG9skUMr8+tHj5GwmN27ffNzOiNbeTWeBFF3fDuuqOPV3/upGjNU1r1D9ZiP04XSXpm6rsnF
+ wVBimWUfLaOSQr+pPAyIKSZA0sZtw3VmbY4yMvNLhNo2qSP1+b9w7ZTtu9AGdzJEquGH39HEE2HtTR
+ 5ivc/Yd1zKPYfmkXsCm/I270zvn/cPR4l83yKFlZkGRNyb3GBK8iRWvWMylV7i6A6Nve4IlH+xIupG
+ REgkz4BWBffU82PAuT9uxJpMtpOjYL2nEcqXnKLVdzeYj6kJ4Gv2z7ZGVs9fQtwY0o4Pd3/otou3gl
+ uOqmbxS7+qAjDruvfrqGVHtCXqbzUWC9m6biC+avoHKogW3DRt+yrJhAiwJnvu3S3p4OqjfMDioMop
+ 7C0Xmt9hlVVKa2fx77Nt8aKOT2FPCafZ02g+iwX4AQqFm3Fs8YjlEQ+BJkRA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,171 +116,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+When set_dfu_alt_info() is called, interface can be NULL when called for
+the EFI capsule, so check it before calling it with strcmp().
 
-On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
->
-> Add an option which indicates that the devicetree comes from the
-> bloblist.
->
-> After discussions with Tom, it seems we are comfortable with introducing
-> this option, ensuring of course that the transfer list is properly
-> supported.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->  doc/develop/devicetree/control.rst |  3 ++
->  dts/Kconfig                        |  8 ++++
->  lib/fdtdec.c                       | 66 ++++++++++++------------------
->  3 files changed, 38 insertions(+), 39 deletions(-)
->
-> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-> index 0233945f8b6..d80f4d420a9 100644
-> --- a/doc/develop/devicetree/control.rst
-> +++ b/doc/develop/devicetree/control.rst
-> @@ -137,6 +137,9 @@ If `OF_BOARD` is selected by Kconfig, a board-specific routine will provide the
->  devicetree at runtime, for example if an earlier bootloader stage creates
->  it and passes it to U-Boot.
->
-> +If `OF_BLOBLIST` is defined, the devicetree comes from a bloblist passed
-> +from a previous stage.
-> +
->  If `BLOBLIST` is selected by Kconfig, the devicetree may come from a bloblist
->  passed from a previous stage, if present.
->
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 6a5141b56e9..04359a4d7b2 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -167,6 +167,14 @@ config OF_INITIAL_DTB_READONLY
->           If initial DTB for DT control is read-only (e.g. points to
->           memory-mapped flash memory), then set this option.
->
-> +config OF_BLOBLIST
-> +       bool "DTB is provided by a bloblist"
-> +       help
-> +         Select this to read the devicetree from the bloblist. This allows
-> +         using a bloblist to transfer the devicetree between U-Boot phases.
-> +         The devicetree is stored in the bloblist by an earlier phase so that
-> +         U-Boot can read it.
-> +
->  config OF_BOARD
->         bool "Provided by the board (e.g a previous loader) at runtime"
->         default y if SANDBOX || OF_HAS_PRIOR_STAGE
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index f09c9926a7a..833f8aca3ce 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1689,55 +1689,43 @@ void fdtdec_setup_embed(void)
->
->  int fdtdec_setup(void)
+Fixes: 12ea40d29dc ("ARM: meson: add support for Libre Computer aml-s905d3-cc")
+Fixes: 9e6e6b034b1 ("ARM: meson: add support for Libre Computer aml-a311d-cc")
+Fixes: 75c87c6cbc0 ("board: libre-computer: aml-s805x-cc: Enable capsule updates")
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   | 2 +-
+ board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   | 2 +-
+ board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-I think a better idea is to use BLOBLIST_PASSAGE_MANDATORY, see below
-pseudo code:
+diff --git a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
+index e45cfd5d8a3885683dd6b1d0eea03084dc6dfdb5..294f78858a7848fe8255c9b9b42e2f556a6e05d1 100644
+--- a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
++++ b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
+@@ -29,7 +29,7 @@ struct efi_capsule_update_info update_info = {
+ #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+ void set_dfu_alt_info(char *interface, char *devstr)
+ {
+-	if (strcmp(interface, "ram") == 0)
++	if (interface && strcmp(interface, "ram") == 0)
+ 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
+ 	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+ 		env_set("dfu_alt_info", update_info.dfu_string);
+diff --git a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
+index 94cf5b4361fac5003dded2f8dc2bfc9be7630099..1ec9a5b401e210045f1b13720f1e5c16e1f7f86b 100644
+--- a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
++++ b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
+@@ -36,7 +36,7 @@ struct efi_capsule_update_info update_info = {
+ #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+ void set_dfu_alt_info(char *interface, char *devstr)
+ {
+-	if (strcmp(interface, "ram") == 0)
++	if (interface && strcmp(interface, "ram") == 0)
+ 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
+ 	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+ 		env_set("dfu_alt_info", update_info.dfu_string);
+diff --git a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
+index f641db5a494f358ed89591fae06e66eb18f85709..b552035ee03a7b848455ae6564688b4a12e02326 100644
+--- a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
++++ b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
+@@ -29,7 +29,7 @@ struct efi_capsule_update_info update_info = {
+ #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+ void set_dfu_alt_info(char *interface, char *devstr)
+ {
+-	if (strcmp(interface, "ram") == 0)
++	if (interface && strcmp(interface, "ram") == 0)
+ 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
+ 	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+ 		env_set("dfu_alt_info", update_info.dfu_string);
 
-```
-if (IS_ENABLED(CONFIG_OF_BOARD)) {
-    /* get fdt from board */
-}
+---
+base-commit: f59fb9846c5a1d129f78b2945a094477388fd346
+change-id: 20250403-u-boot-fix-set-dfu-alt-info-interface-9be8ea5e2bc1
 
-/* allow fdtcontroladdr to override it */
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
-if (CONFIG_IS_ENABLED(BLOBLIST) && ... ) {
-    /* try to find fdt from bloblist */
-
-    if (CONFIG_IS_ENABLED(BLOBLIST_PASSAGE_MANDATORY) {
-        if (no_fdt_in_bloblist)
-            return ERROR;
-
-        /* override fdt with the one from bloblist */
-    }
-}
-```
-
-Regards,
-Raymond
-
->  {
-> -       int ret = -ENOENT;
-> +       int ret;
->
-> -       /*
-> -        * If allowing a bloblist, check that first. There was discussion about
-> -        * adding an OF_BLOBLIST Kconfig, but this was rejected.
-> -        *
-> -        * The necessary test is whether the previous phase passed a bloblist,
-> -        * not whether this phase creates one.
-> -        */
-> -       if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> -           (xpl_prev_phase() != PHASE_TPL ||
-> -            IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> +       if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
->                 ret = bloblist_maybe_init();
-> -               if (!ret) {
-> -                       gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> -                       if (gd->fdt_blob) {
-> -                               gd->fdt_src = FDTSRC_BLOBLIST;
-> -                               log_debug("Devicetree is in bloblist at %p\n",
-> -                                         gd->fdt_blob);
-> -                               ret = 0;
-> -                       } else {
-> -                               log_debug("No FDT found in bloblist\n");
-> -                               ret = -ENOENT;
-> -                       }
-> +               if (ret)
-> +                       return ret;
-> +               gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> +               if (!gd->fdt_blob) {
-> +                       printf("Not FDT found in bloblist\n");
-> +                       bloblist_show_list();
-> +                       return -ENOENT;
->                 }
-> -       }
-> -
-> -       /* Otherwise, the devicetree is typically appended to U-Boot */
-> -       if (ret) {
-> +               gd->fdt_src = FDTSRC_BLOBLIST;
-> +               bloblist_show_list();
-> +               log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
-> +       } else {
->                 if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
->                         gd->fdt_blob = fdt_find_separate();
->                         gd->fdt_src = FDTSRC_SEPARATE;
->                 } else { /* embed dtb in ELF file for testing / development */
-> -                       fdtdec_setup_embed();
-> +                       gd->fdt_blob = dtb_dt_embedded();
-> +                       gd->fdt_src = FDTSRC_EMBED;
->                 }
-> -       }
->
-> -       /* Allow the board to override the fdt address. */
-> -       if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> -               void *blob;
-> +               /* Allow the board to override the fdt address. */
-> +               if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> +                       void *blob;
->
-> -               blob = (void *)gd->fdt_blob;
-> -               ret = board_fdt_blob_setup(&blob);
-> -               if (ret) {
-> -                       if (ret != -EEXIST)
-> -                               return ret;
-> -               } else {
-> -                       gd->fdt_src = FDTSRC_BOARD;
-> -                       gd->fdt_blob = blob;
-> +                       blob = (void *)gd->fdt_blob;
-> +                       ret = board_fdt_blob_setup(&blob);
-> +                       if (ret) {
-> +                               if (ret != -EEXIST)
-> +                                       return ret;
-> +                       } else {
-> +                               gd->fdt_src = FDTSRC_BOARD;
-> +                               gd->fdt_blob = blob;
-> +                       }
->                 }
->         }
->
-> --
-> 2.43.0
->
