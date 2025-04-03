@@ -4,83 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 298E5C36014
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47757C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5C668290A;
-	Fri,  4 Apr 2025 00:41:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 42C90826AD;
+	Fri,  4 Apr 2025 00:51:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VR07KCgQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MdkdQvZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E24FF82385; Fri,  4 Apr 2025 00:41:42 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id D1FB8826B2; Fri,  4 Apr 2025 00:51:05 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF3248290A
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 00:41:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72FF682385
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 00:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ac2bfcd2a70so188380166b.0
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 15:41:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-2c77a5747e0so739697fac.2
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 15:51:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743720100; x=1744324900; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KZWnWLrc6e1y+6OcPo94cZV4fWMrNnq8Q1xtbRIyZLQ=;
- b=VR07KCgQyyZnIzSINQYasEbHOUXXjTUjJgzVNcdUExQKe8SCR5ASDXw1/DmZrcP6YG
- 3SXwpsrvgi2EmsVrFswl1p/k+oEUstCbgwQnKEPh5xD8p2m7yxj07xm+CRWMUWkIy5F3
- 1hO5jZsj1tCAmFXJjuZyMti8ZeQmaeq/cAaNs=
+ d=konsulko.com; s=google; t=1743720662; x=1744325462; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JfYrA1FbITlOz+buB7ZIWbajGJz0cwOQAjy1JpuHSxI=;
+ b=MdkdQvZV5G9wSFbJprYzgiB8gzAay3cC+AEW02LOP+ekfS97sNqWRykX8tb9G3vWeG
+ i6i43uaKKiNPoyZl58WK9EBpYWISaku4F7oq/n25lwz1/tliVSpFPmhiPIuer8Q8dmq4
+ ze+5W95QQ3g9imw79vaM85citjH+vjiabt/fU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743720100; x=1744324900;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KZWnWLrc6e1y+6OcPo94cZV4fWMrNnq8Q1xtbRIyZLQ=;
- b=edO6M/hIgy8gh8mrfbKdPe3PxuMoAu9YrG4D5w6/Rib0YtkNdOZ2ZJVXgXBiUpAtYv
- XZ36ZlYsWxjAdOFvv9bAB0+05qrTkX+mQ2f3NelLaLho0CbAWycTe9U1lcCoE00ytn+j
- N4OHMOlmpuRHkWXi0lUwCl0dCrK1a86W7rgmQAczxORL+lYTo8EaEq6dj9AO5Pf+iuH1
- BpxujF9XMIBvX/lfXjuusYOGiGIyFVJT78dPzyJP0/aD8bXwUobnErjuv+dXWy1gtI0Q
- cdY/Qi6eysGLwCBjWeFuIbNt9p9iubfDi9X1ytQeWenhE70cB24mEtJ1w1MtcyKVp2WW
- zHGw==
+ d=1e100.net; s=20230601; t=1743720662; x=1744325462;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JfYrA1FbITlOz+buB7ZIWbajGJz0cwOQAjy1JpuHSxI=;
+ b=YCoTSVInrElNUmeMdMjNNrMKuXlVZkXFyiyOso788Jw41c0a4/lXNnZvf7QbbTRgeB
+ wswIGnRX6+49jEq746ywJHycwlS8Fae207OLDE8bmmYlaW1UdeOFb8QK83/afZa9Yu/H
+ T1yjCwdlroEk9X7CfZhgsP2TsbTfA61RUbOydDm3PNuBhYlT1NuxfOB0ZtO6yCJpcO7s
+ SsKssfe9+PCois5nkUnm9BMOQWwjyp+ScSmp2r0XsD4YKEArW6q8ka6K1L7tSnN7Et31
+ yjNRCLfKafw01dhghcoMc2b0fHMhSWH/NQUfcBrniyz3wq48VuQ+qltuhh0McDmwT3Df
+ MHAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVrFcQvB9Sv2Mlxx0MUbbCAWQ5fbsnraBFu8i0pf90QfmpjuQ4qnpsu4GlS5/qzQrDAgPZIdZ8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+qUFn4+szfE4WCr4vMRGhqoZ9DkTnWyfIEoe0QFs/t4xX268m
- 4BUgIJWNh01nnNgCqURdh9Qw3lPNYlDN6vyn+3Xbzw0sryvbrsYaxF4On+se432LBgq+m/a3dr3
- 4fP+eCjzLl5qzXy7dNqrcD5HgEzDyDHp37id2
-X-Gm-Gg: ASbGncuC4osnRQ5rpgmrM+3KaMS/izWFETwJPZCjRguk6PFilSF6TZDpBVB/xjq5aia
- 4oOBtOUHpScBRwp+VZ9hD/YSN4kb6gFC7uzzhmMCzRxyPlJgIyKZI1TVaNO0ipe9RCPhgDqbpX7
- w9nrFeAZ7YgGZ4NSHfAHg+vg+T1rER
-X-Google-Smtp-Source: AGHT+IEmLEZ8h9G/fcRvjpgyUDf5KnhnJUUqVPekOJ59VQ1qC4fq4WOFPdtEgFm7n4fEG/LZMWhQOdqvb5ZWs8SP8Oc=
-X-Received: by 2002:a17:907:6e86:b0:ac3:4373:e8bf with SMTP id
- a640c23a62f3a-ac7d16bc07emr123638066b.10.1743720100195; Thu, 03 Apr 2025
- 15:41:40 -0700 (PDT)
+ AJvYcCXKVpVfTYeQJXAzGvg0PmeQ9mc745iOpQ5M1F5vOaDw/H1F1UoOGWsjTG/4l0KTyxqr42BPSVE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwB0fT1DAcKmDPFCwCgZbtJ9ylF1B0SVhLPwJuKjuw5P5Dfy//2
+ E9vASuTM8ixoL/bsx4usr7HYPjTRzcEA3mXf2VpO0G1uAjZLiEm/o2XdHyMGzlc=
+X-Gm-Gg: ASbGncvq0c/WA9PEq2yJ6JbZ91QHiOZesq/uGcI5ot5hg5gT17iVsMPLDIq3HKbHEfY
+ nB0iWJN3GJFXsmFStzoZO/VV2kIhDkjbAABdOoLuAxFLAu3YiCLclQjWyfLqwU+WxWs+YPOFo1x
+ G/L3CdmRh0pBpgI5SKFj8qBa3eHGGFOyi0Zr1Z6Zg+3BflnnmynOj5IP3h1e2Om//HRnsjvlkql
+ Dsceg10aKyUIypr1KqQTxAUdC1dxM5EjXOfn7SbdjaTUSCKFC8ECe3Rzb8pGuO9M/stW5rLwhe5
+ PjDS47S+PR840vVKPofgof/dbMh/iLgAZgrdOi36H/4a7o5R8vP/CxajQrSvX21uj2REHUjmsnI
+ Av9Jnqw==
+X-Google-Smtp-Source: AGHT+IH/4RYuiZMKGEQYhAmSCl44/n5kPGouFeZTr33uXqNZjusLcGzwZVM6Av8xC3NAEq0oE6UVmQ==
+X-Received: by 2002:a05:6871:582b:b0:2b7:bd7f:f4d6 with SMTP id
+ 586e51a60fabf-2cc9e8bbc2cmr651188fac.37.1743720662082; 
+ Thu, 03 Apr 2025 15:51:02 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2cc845c69d6sm463762fac.13.2025.04.03.15.50.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Apr 2025 15:51:01 -0700 (PDT)
+Date: Thu, 3 Apr 2025 16:50:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+Message-ID: <20250403225058.GQ5495@bill-the-cat>
+References: <20250328154401.3563921-1-sjg@chromium.org>
+ <CAEfUkU+=bhM_Ba5Eu_FVA0-AoHO7TJBGyaO_w7o9rxTzB7SgGw@mail.gmail.com>
+ <CAFLszTjPzP-++P1vf7pFFwU5AHdfr2d3zs5QaQMf95uN4BbO7A@mail.gmail.com>
+ <CAEfUkU+OHK3GdqROVFe4J0=OoRsw_u7znef6iLuibY4vsLOBkQ@mail.gmail.com>
+ <CAFLszTgjKXK6adB2fa3S4o+AAm1Amyg5WdJ9EuOg4xoXBFLeCg@mail.gmail.com>
+ <CAEfUkULg0bzG564_vo43Bta5C4_EirZNt39ncgua0VFjd1C-tw@mail.gmail.com>
+ <CAFLszTjGn1JGdpNAZVL6CC+pQLsOrG6gjmo8kRzjbnR_=6CMvw@mail.gmail.com>
+ <20250403215239.GO5495@bill-the-cat>
+ <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
 MIME-Version: 1.0
-References: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
- <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
- <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
- <01020195f0df59d3-851c6ec3-9a49-4fab-b878-e11c6018b827-000000@eu-west-1.amazonses.com>
- <CAFLszTiRu3JtUw-z3LeHO9PKVZRuBW3L-WXm5vO0u6++-OdwAw@mail.gmail.com>
- <AED05ACC-AF9D-4A2E-90E3-7BDA597B2DB0@kohlschutter.com>
- <CAFLszTibROtKsE+LZ3cMXvj5MLBf=-6TP98UwxhPfh5eqQK+_g@mail.gmail.com>
- <68D651AB-8E9E-48B4-A062-9E688025F035@kohlschutter.com>
-In-Reply-To: <68D651AB-8E9E-48B4-A062-9E688025F035@kohlschutter.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 4 Apr 2025 11:41:24 +1300
-X-Gm-Features: AQ5f1JqgmjOholUTusUysxX05mF32h2LLTgEaRyeeRGDne5hIfmIqOiRmyOXHwo
-Message-ID: <CAFLszTiJR3La6dwE6k5QbKMmtVpbq+VK9AYhkmeQSEhgozh1AA@mail.gmail.com>
-Subject: =?UTF-8?Q?Re=3A_U=2DBoot_interferes_with_initrd_binary_=E2=80=94_Revert_?=
- =?UTF-8?Q?=22efi=3A_Correct_smbios=2Dtable_installation=22_=3F?=
-To: =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>
-Cc: trini@konsulko.com, Michael Brown <mcb30@ipxe.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mbUwYqy2dT4JhGI2"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,106 +122,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christian,
 
-On Fri, 4 Apr 2025 at 08:18, Christian Kohlsch=C3=BCtter
-<christian@kohlschutter.com> wrote:
->
-> +Tom Rini (actually adding Tom to the conversation)
->
-> > On 3. Apr 2025, at 19:54, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > +Tom Rini in case this affects the release
-> >
-> > Hi Christian,
-> >
-> > On Fri, 4 Apr 2025 at 01:46, Christian Kohlsch=C3=BCtter
-> > <christian@kohlschutter.com> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >>> On 1. Apr 2025, at 17:51, Simon Glass <sjg@chromium.org> wrote:
-> >>>>
-> >>>> but I don't know precisely what these various functions are supposed=
- to
-> >>>> do, and I can't find any path that leads from any of these to eth_ha=
-lt().
-> >>>>
-> >>>> Is it possible that U-Boot is failing to call eth_halt() in response=
- to
-> >>>> ExitBootServices(), and is therefore leaving the network device acti=
-ve
-> >>>> and performing DMA while the kernel starts up?
-> >>>
-> >>> The dm_remove_devices_active() is supposed to handle this, but it is
-> >>> possible that one of the drivers lacks a remove() method.
-> >>
-> >> for what it's worth, this is happening on both ODROID N2+ (meson8b-dwm=
-ac) as well as NanoPI R4S (rk_gmac-dwmac).
-> >>
-> >> I also don't understand why reverting 06ef8089f876b6dabf56caba31a05c00=
-3f03c629 "fixes" this behavior. Does it mean that any memalign / malloc may=
- cause this?
-> >> Also, how can this failure mode be detected and prevented in code?
-> >>
-> >> I really don't fancy the thought of remote code injection into Linux i=
-nitrd by spoofing Ethernet packages, but it really looks like a possibility=
-.
-> >
-> > Here's my idea of what might be going on based on Michael's observation=
-s:
-> >
-> > 1. designware_eth_start() starts the interface and
-> > designware_eth_stop() stops it
-> >
-> > 2. tx_descs_init() sets up the DMA and uses the device-private info
-> > (struct dw_eth_dev)
-> >
-> > 3. When the device is removed, the struct is freed, meaning that a
-> > future malloc() can use that same space.
->
-> Yes, that sounds plausible. How can such allocations be prevented?
+--mbUwYqy2dT4JhGI2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There is no need to prevent allocations. It is in the nature of
-malloc() that any memory you free can then be used by a subsequent
-malloc(). The bug here is that DMA needs to be disabled when the
-device is removed.
-
->
-> I assume U-Boot's malloc does not know anything about iPXE's or Linux's a=
-llocation, and vice versa?
->
+On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > 4. DMA traffic could then write over the malloc() region
+> > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
+> > > Hi Raymond,
+> > >
+> > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wro=
+te:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Raymond,
+> > > > >
+> > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org>=
+ wrote:
+> > > > > >
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wro=
+te:
+> > > > > > >
+> > > > > > > Hi Raymond,
+> > > > > > >
+> > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.=
+org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Simon,
+> > > > > > > >
+> > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org=
+> wrote:
+> > > > > > > > >
+> > > > > > > > > The bloblist code took what I consider to be a wrong turn=
+ a year or so
+> > > > > > > > > ago. As discussed with Tom, this series proposes a way to=
+ arrange things
+> > > > > > > > > so that it is simpler to understand and manage.
+> > > > > > > > >
+> > > > > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than u=
+sing guesswork
+> > > > > > > > >
+> > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
+> > > > > > > > mandatorily use bloblist to hand over everything between bo=
+ot stages
+> > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
+> > > > > > >
+> > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates=
+ that
+> > > > > > > there must be a bloblist, not that it must contain a devicetr=
+ee. So I
+> > > > > > > wasn't sure about removing it.
+> > > > > > >
+> > > > > >
+> > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDAT=
+ORY is
+> > > > > > selected, we can override any fdt from board or env with the on=
+e from
+> > > > > > the bloblist.
+> > > > >
+> > > > > Yes, but we should be explicit about what is going on here. With
+> > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
+> > > > > bloblist. It becomes one of the sources for devicetree, like
+> > > > > OF_SEPARATE and OF_EMBED
+> > > > >
+> > > >
+> > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
+> > > > mandatorily used and override other fdt sources like from the board=
+ or
+> > > > env variables.
+> > >
+> > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
+> > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
+> > > very much. But I can see why it is called that as my standard passage
+> > > series was actually never applied. So I suppose I'll need to have
+> > > another try at that.
+> > >
+> > > So to be clear, I want a separate option for devicetree, called
+> > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
+> > > your option.
 > >
-> > I'm not seeing where the Ethernet device's stop() is called. The
-> > dwmac_meson8b driver does not have a remove() method, so presumably
-> > DMA is still running after the device is removed. Probably the correct
-> > fix would be to add a remove() method to that driver.
->
-> Right. Of course this means that there's still a chance that some future =
-driver would again fail to do this.
-> How can we prevent this? Can some removal hook be added automatically upo=
-n registration?
+> > Sigh. Can I ask what the use case for this will be? And we are going to
+> > get rid of BLOBLIST_FIXED at some point, yes?
+>=20
+> I thought we agreed that this was acceptable. We argued the toss for
+> months on this point and I would rather not revisit it.
+>=20
+> Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
+> pretty sure it can be done. The only tricky bit is coming up with a
+> bloblist protocol for x86.
 
-Visual inspection of each network driver should help.
+Yes, I'm stuck between being "flexible and saying yes" and how long we
+have to live with what I also think are bad designs.
 
-I'm not sure if we want to 'stop' all the network devices before
-booting Linux, but perhaps we could perhaps provide that feature as a
-Kconfig option, e.g. in announce_and_cleanup(), which could really use
-a cleanup to make it common across archs.
+So maybe the pre-requisite here is that with "bloblist" and "standard
+passage" being divorced, what is the requirement for bloblist again?
+Because in practice, all of the problems we've had come down to looking
+in fixed address locations before they're valid. You want to handle this
+by saying "Ah, we won't look before it's valid with other CONFIG flags"
+and I say we should handle this by not using a fixed address to start
+with.
 
->
-> >
-> > Regards,
-> > Simon
->
-> Thanks for looking into this!
+If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
+OK. But it shouldn't need to exist long term.
 
-Thanks for the report!
+--=20
+Tom
 
-> Christian
->
+--mbUwYqy2dT4JhGI2
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Simon
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfvEMUACgkQFHw5/5Y0
+tyxufAv8D/HSoE15I8OxVUwgWcwOIKBxBny4nDdjV59AsyNLxNptdj7RCvqarozq
+yBh/qcUiUmL+S4XRp/X7lRvaNi6EXHyqjaVMOhP46tjNderHykWxTzwuRg+hxWKV
+cgeQkYZEor5wcU5snVv7C0b6BYIIUgZEBo6fdiyWQP+odarbib5xQofkvVIHzI2l
+fPiO4rx7iJe8B9hgLqSTq4P+DbDF3UcmMHfG8ppJK/aKpwn6cLxekQ9NEJiBUSb5
+WU4Xjrup53J9yICkg75kpohan9ZgR0PrLtzZZ8PE0T5+WG8V9fWKq3Z1Gli65x04
++fHcvsnTFQHnCA1kbqmzuGQ+YrszrgZVYP/S5JKBhjXW/bbwzBtCzhbLH6PzOCnz
+7FY1AFVMDMMYzmmd0BUakuHsQHmBCNSVyPw51Vaw8Zc+W+g8tCb/5n+uL3glGtLu
+310h27TFqNtXmpny1KBXPFFVtwLqD9jOuWX3s0YYrMS4SNCWZropZNBAD9D2gtBz
+Hm0ST/7i
+=kop0
+-----END PGP SIGNATURE-----
+
+--mbUwYqy2dT4JhGI2--
