@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05EC8C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 07:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61718C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 07:10:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D348043C;
-	Thu,  3 Apr 2025 09:02:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8E0D81F69;
+	Thu,  3 Apr 2025 09:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mKVPFGWI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f8wAL8za";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B95781CF0; Thu,  3 Apr 2025 09:02:20 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id C890581F6B; Thu,  3 Apr 2025 09:10:12 +0200 (CEST)
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2285780107
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 09:02:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DBD78043C
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 09:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e53ef7462b6so575842276.3
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 00:02:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x344.google.com with SMTP id
+ 5b1f17b1804b1-43d0c18e84eso2138945e9.3
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 00:10:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743663737; x=1744268537; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=w7U2hE2fRCE4/44jku9CHBEQ679zTz5ionAMz/HTKCU=;
- b=mKVPFGWIB8DTDWIUNYoUxhKI4J6jZ0q0/4j0Cmn68/c+aVMApWn8tDtZ8qrc4hf1bx
- cOWvikNbrQQzW6+gx9lCFN7kiRS2AtDcOvZPPYkEyjVPdXcuSIcRdv/LW93bLxkbB/kr
- oUBkT4hQjDZltwfMrMJexm3g7cbEbNShZt+QYXPmyzn3p9j+/Dz0JpLz+EWfLPMFZPIp
- VFmlMCZb+GkJee/WPZ862ulUiETC8svnzqRMIj8sfOkxNeWMowFUrqCSPOqx63tD2bBJ
- bDtXYl9yw6I0KVDHfCFyh/ZqE6T5dKVKGka3boDgJooHqH8YrEc+QvzPCAAeVA1Mljt0
- poVg==
+ d=linaro.org; s=google; t=1743664209; x=1744269009; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JqahBb5zOPa8Y5Fl3oih95i/IuT3Z35j8rTqmzodvz4=;
+ b=f8wAL8zaK59frQgDspBqdFOrYP4/bL+DZBAFL03/U6raPqgnn0ZkhYhJ3kyBxQE8op
+ QlLiHR1ffbAf568okseRvWOY0r/0GyV7ks4qGGZ8IXSp6XkzKpqyH4RmJ3upSLkqxq66
+ CSDryiTXXUXlmkGcFiW3dbX/QEGnNIYbDwzv54vgHILYHPqgyLsCVFP8Fe+m7pfl1b3w
+ SDbdL0JxrpkCKXui51wj9fte3/5+ygtzXwfu2hclH2P6uOXiALU+Q+H8LWag5cBy0HNH
+ GDYaL7x08igLhhan8LKtWIXKtNSYrdAQ0c7bN8aIMX1H2Wj4/Thzt50uXzHXbwukjbfr
+ amkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743663737; x=1744268537;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=w7U2hE2fRCE4/44jku9CHBEQ679zTz5ionAMz/HTKCU=;
- b=YMJq7s9Aug/6qBvRX0Ivel7sTMkXYtoV8lTjxusGIFjQ7aotLgaUaDzojdJgBQ+Nd+
- ponnodz87GQN7CHlWnldduCeXYPnzeSL34QuO3eTW0caBq220a838cS9Wg46OCs5hBAi
- bJZLRuxHKnPXIL0KKpPnTMX1jhnlHKUb0BKxr9Fk9aCs9bEM0SiE85RisiEAxooETyXg
- ggD6o9bx4EKbXYhmdF1odV6DdoRh8TKTw+V3VYGToN0njn2tlKm6x1HYH+mcHFSdS9Lo
- KA9tvCVLwCYyXd+F09HQZwEPwhF7RwXSxj2yFSVsFAc1o8lv1MJ88BM0ov4UYvkrZ5WX
- QoZQ==
+ d=1e100.net; s=20230601; t=1743664209; x=1744269009;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JqahBb5zOPa8Y5Fl3oih95i/IuT3Z35j8rTqmzodvz4=;
+ b=q8oyueaFMsCLgeLqwbuP9t6CcuTB8O1savcr9IsnC/wuE+0MQH7eGesq+5R7lR06l3
+ QnF3Fgvwc5FaYOM8xZHiX84RFia2MoQi1PHYyar2C8qUY/Ax1D48oD7UPlLJqtEybIqg
+ /9RdtmK+7FvdU5OJans6nCILk0gOvTZ4Os7ykZvhL2XhPHtKLTiqPmgzIFZZLFLZZ1Be
+ Jkctg3nJ8gzdAakWhrJO7qXTaNEG5XXFuBnbdYanoHbaiuAreb2MuFAbQva6JQBs9Mxh
+ rsGBIaDsyNymAIFHquq9ckt+3ANV4862LBcueO8QqIYminAT9iMVCvcylYP8sGadqWRR
+ sgOQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/Hq8pnQeNjx+RduhRVdVNcfv+NMpyrHvFtRR45AhN2hkTT8uNyaDnYJQcY8JCoi3M7tBogVE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUlVW892DfWbnYzbTU2VjFeGm732ddZGxle/+hJ1eIi6x41l1e
- SaEXLjJJukROzET5XGmKGp5lCFTBr+1HugwhmmOZ2yS7fsFxX2NVPNP/eofnjdHrNQfGoGrm26G
- j1uIlz1rNpLx4Mb+/VREg09qgQ/7qMlwhON126g==
-X-Gm-Gg: ASbGncsSTB1jJE8mNV+CgQupQorq3nEW+rg2L10OPYvWPIQwZKf3EJez8N8wFPVY1bV
- 6DLLfr2BTfjtXwbHLeFS3VIT74uF5SNhRFaCT5s/goxnamzGAJfI6KK6N8Dc7P/u/DA2bjpJg2O
- xOlhyw2pEAVCxViRWTM73tEsV95iZsYZ05Gmw=
-X-Google-Smtp-Source: AGHT+IGQ1srp5BBfo/mmk3XdcZcEAZ5cqD7dXKwFGSB9EDcbbSzyf8dMv4V4Xxf9t+y4BSn05qPeQZc9koefjpzWFY0=
-X-Received: by 2002:a05:6902:a04:b0:e6d:deb9:6381 with SMTP id
- 3f1490d57ef6-e6e0a23315emr2624600276.43.1743663736964; Thu, 03 Apr 2025
- 00:02:16 -0700 (PDT)
+ AJvYcCUqq2KgKh3QNLz1K7oQGHpZEnqJQvEGU+hFDzWx2zsI7KTJvCeeEA2Jib6OkAWeMEPClnqhlAg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwT5Bu6j1Vte7t7zf0BSAY1ouw8UHwlhBZLCehQdHzPachVBb4E
+ D4wneTT0cP9RFjC9RC8vze/yyfbHIWR5HPrp2VTgFzhWgtEc/4TJjfTJC4fkCHg=
+X-Gm-Gg: ASbGnct2EnmLVdz0+cd9W76cbm8VrDRQWamFi5QWUW0Yo+CgxgtcdEhc3eckv0wbjb3
+ LXHWCMILf/EdBj1blhNHiFC1AQdT0sr5Hefb2wV2guc0q54GLs5hyh2RlggMhMs/zWeaK79+y/F
+ /wgyu+M9q0wJnAyfLQRTBU3uXtXikG5CE0RBfJetsfzVqvHDTjxMJ+E+/dhOTowcaBlazaLf1oL
+ Nj93jGdBjzoZlelKWu03hwkMaRTxeuTwP4LV4xLyWpXq2618VkGpGqeksx7zlPyRqApPCcYKQrR
+ cOUhYcVP0N+MPN2uBkTfQGmEH2MqWb0qNHXMrTuO4jvLhQwUtjN5iZNJAcKZA5K4nEz9WWJyTUy
+ cQZ1LvjoHTWRlw5p7U5Y=
+X-Google-Smtp-Source: AGHT+IGLz5HeQaMLoM3L3JD0+iUUT0wuSk9aA2tfzo5pKmzjOa+IdEqgaDfGgnf7EGzYv5RxuaKueg==
+X-Received: by 2002:a05:6000:188e:b0:391:2e19:9ab with SMTP id
+ ffacd0b85a97d-39c1211c900mr15508963f8f.47.1743664209402; 
+ Thu, 03 Apr 2025 00:10:09 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:a5e1:dbb:9c2:cc7b?
+ ([2a01:e0a:3cb:7bb0:a5e1:dbb:9c2:cc7b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c301a7586sm975274f8f.38.2025.04.03.00.10.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Apr 2025 00:10:09 -0700 (PDT)
+Message-ID: <e2e311dd-edb2-4bcd-918e-71b3890250ed@linaro.org>
+Date: Thu, 3 Apr 2025 09:10:08 +0200
 MIME-Version: 1.0
-References: <20250403053444.2551339-1-ilias.apalodimas@linaro.org>
- <CAC_iWjLTUgocaxOPDtQCGS==yjV=66_=37nFv-Grv6b32FNDYA@mail.gmail.com>
- <e23ce969-3cd6-4bdf-9119-d0175806ecd1@gmx.de>
-In-Reply-To: <e23ce969-3cd6-4bdf-9119-d0175806ecd1@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 3 Apr 2025 10:01:40 +0300
-X-Gm-Features: AQ5f1JogodcAVVakiLxnJLCbo7gfWLLlj7xYIQhaXeBTBjUTqiOWoI0-mWnh-Co
-Message-ID: <CAC_iWjJ56Et24FUcVn38t_hAWDFe-Q=NLxEfgpLk_WmGbgDKOg@mail.gmail.com>
-Subject: Re: [PATCH] acpi: Fix table length for QEMU
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/12] lwIP sandbox tests
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20250314215525.579655-1-jerome.forissier@linaro.org>
+ <84e047e7-f90e-4435-8f3d-132d970749ac@linaro.org>
+ <CAFLszThN_0aRhtTRmEGmjyiekz1XtzZdH1qq0oLSyYcO5yKobA@mail.gmail.com>
+ <CAC_iWjLHPLeX2DhnVqS3QtjhyPVd-Hkuqr0vF_dCXmBQApwvng@mail.gmail.com>
+ <CAFLszThH3a7pLJG+zppu2qr5RwXAOk9Sj+S+RAT0B758hzOsyQ@mail.gmail.com>
+ <9869b70e-0fec-4682-8ba0-c679df9c4603@linaro.org>
+ <CAFLszTiAUh3O_8i1-zF2V4p2AW+0kmZsz2ft5phPcE0LzhQu4w@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAFLszTiAUh3O_8i1-zF2V4p2AW+0kmZsz2ft5phPcE0LzhQu4w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,51 +108,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 3 Apr 2025 at 09:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote=
-:
->
-> On 4/3/25 07:53, Ilias Apalodimas wrote:
-> > On Thu, 3 Apr 2025 at 08:34, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> >>
-> >> The end of the ACPI table is set to 'addr' instead of 'end'. The ACPI
-> >> code for QEMU relies on those values to mark memory as 'ACPI Reclaim'
-> >> and as a result the ACPI RSDP ends up in Boot services Data.
-> >>
-> >> Reported-by: bjorn@kernel.org
-> >
-> > I obviously messed up my reported-by...
->
-> Reported-by: Bj=C3=B6rn T=C3=B6pel <bjorn@kernel.org>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Thanks Heinrich!
 
-Cheers
-/Ilias
->
-> >
-> >> Fixes: commit 638cc363484b ("acpi: enable writing ACPI tables on QEMU"=
-)
-> >> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> ---
-> >>   drivers/misc/qfw_acpi.c | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
-> >> index 0d0cf7646890..77cebae5e3fd 100644
-> >> --- a/drivers/misc/qfw_acpi.c
-> >> +++ b/drivers/misc/qfw_acpi.c
-> >> @@ -305,7 +305,7 @@ static int evt_write_acpi_tables(void)
-> >>          /* Generate ACPI tables */
-> >>          end =3D write_acpi_tables(addr);
-> >>          gd->arch.table_start =3D addr;
-> >> -       gd->arch.table_end =3D addr;
-> >> +       gd->arch.table_end =3D end;
-> >>
-> >>          return 0;
-> >>   }
-> >> --
-> >> 2.49.0
-> >>
->
+On 4/2/25 21:22, Simon Glass wrote:
+> Hi Jerome,
+> 
+> On Wed, 2 Apr 2025 at 20:48, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 4/1/25 19:55, Simon Glass wrote:
+>>> Hi Ilias,
+>>>
+>>> On Wed, 2 Apr 2025 at 05:33, Ilias Apalodimas
+>>> <ilias.apalodimas@linaro.org> wrote:
+>>>>
+>>>> Hi Simon
+>>>>
+>>>> On Tue, 1 Apr 2025 at 18:42, Simon Glass <sjg@chromium.org> wrote:
+>>>>>
+>>>>> Hi Jerome,
+>>>>>
+>>>>> On Tue, 1 Apr 2025 at 03:14, Jerome Forissier
+>>>>> <jerome.forissier@linaro.org> wrote:
+>>>>>>
+>>>>>> Hi Simon,
+>>>>>>
+>>>>>> Any feedback on this series?
+>>>>>>
+>>>>>> https://patchwork.ozlabs.org/project/uboot/list/?series=448553
+>>>>>
+>>>>> No, not from me, but thanks for doing it!
+>>>>
+>>>> Aren't you maintaining the sandbox drivers?
+>>>
+>>> Yes, I'm listed as maintainer for lots of things. What sort of
+>>> feedback are you looking for?
+>>
+>> Well, you were pretty explicit that those tests were important to
+>> you ([1], [2] and especially [3]), so I was expecting some kind of
+>> review/ack on your part. The series is currently assigned to me in
+>> patchwork and I got zero comments, so I'm not sure what to do with
+>> it. Unless someone objects I will probably add it to my next PR to
+>> Tom for -next.
+> 
+> OK, good. Yes you can add my review tag to the series:
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Cool, thanks!
+
+> 
+> Thanks again for doing this.
+
+You're welcome.
+
+Regards,
+-- 
+Jerome
+
+>> [1] https://lists.denx.de/pipermail/u-boot/2025-February/581988.html
+>> [2] https://lists.denx.de/pipermail/u-boot/2025-March/582435.html
+>> [3] https://lists.denx.de/pipermail/u-boot/2025-March/583362.html
+> 
+> Regards,
+> Simon
