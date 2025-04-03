@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 815E7C3601A
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 05:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E79C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 05:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DD8A81CF0;
-	Thu,  3 Apr 2025 07:35:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DFF781CF0;
+	Thu,  3 Apr 2025 07:54:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sNS62sm0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RVNjbXno";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 859A181DE3; Thu,  3 Apr 2025 07:35:06 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 1E38681DE3; Thu,  3 Apr 2025 07:54:03 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7B318043C
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 07:34:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05A018043C
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 07:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5e5c9662131so851695a12.3
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 22:34:59 -0700 (PDT)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e6df4507690so545855276.0
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 22:53:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743658499; x=1744263299; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vaGl9UWGwEkTAt2RUTWoR5c3AxmLEot6O0L3Ut4RO7A=;
- b=sNS62sm0tupA9c/WTHIIbBgZRGNYI0eYoiwPemo0Q6LbR/Bz9Qo543j+FUfkpWmxl6
- c0zU9w9nW6bGMJtzAzlc8ltXSFmvxpT00iVlfiGqLl5G46vUsfrszJQ0VDePUm552x3N
- c53qtrwE4wvojxIssHdjRmVxGL+FikL+ZdP4ILAwuDYnxSnwdXcPiwVU60YPwVvnskXY
- GYRZlsVJLsolWgCRjY3T5Ll417x7k+0d4rbVm0EucKPg+QsqadrOEXpqjCxA66BA/Dd4
- QAlYOSqw11LD1g6NTOS28E+PgBAeu/TLf0b6qe+hROkxEjfhnLhNOKcBsNNZv9M7oSbK
- kNuw==
+ d=linaro.org; s=google; t=1743659638; x=1744264438; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VWkByxKPBLO8UB6+ldTk3yk5Ji6dD/ud9HwO3V14xfQ=;
+ b=RVNjbXno40bfa/SF+ZP0JcgwT+1/3fs+Ggl349vglSDOOJZywa2Lct90JtOYVg5V68
+ MROINWBgh+UVGqzlfcgfzGt4GSGeKVO6KGDMFVyfh0AlXWAEHztEuJx7XS/wZgXglxJx
+ WJgFT4s6Ih9dfERmw3IEUVsDqEWPSWrRTLSkEujBPK27aEWWBApcITMJd7oNJ1A4GNTC
+ TDvdFYx2AXMWGEaguvoW3Jt07d7Sbo73a1C4jW0NEFeSkA98NcduNv94EKnTODq4PCpB
+ 6FQJHgYLCIDvaZqdh597pByz97Iol91rZiB2nsJUo7ly417WXmVG9cRgkeOrOoZ/5BIz
+ 0hoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743658499; x=1744263299;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1743659638; x=1744264438;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vaGl9UWGwEkTAt2RUTWoR5c3AxmLEot6O0L3Ut4RO7A=;
- b=g+b9wOH+h0tJtX9FNbGf8kS2s2SgBNs/AAK3mk/zX83qUqIW0/BSgIdIYZrwcDkkbp
- iaROyE8lKv01FvqCvgJg/2uDTrtGN+7nhVJGs9v/nt2GQzI2NlrzfQRt5uYv0mx3tSJi
- H4IVl+HnBMz7TJf2mONEAAvHPtTFfOUpt8+BoB4d6IC7AoWNro0hhHf4jEAkTM1niy7v
- Y1bmxM9r2xVTxsdq5AUvE90FRj4IzEqAdAuK4ZVpcf6AmoVdrNWgvfMenXpEIUK846mA
- ZkRlt0H8e2C2moE+m/eaHdgocnGUUBBu7ropCC0z3C5gGo/01Ari/Y+b8+Bpo8Xr4BNu
- LwGQ==
+ bh=VWkByxKPBLO8UB6+ldTk3yk5Ji6dD/ud9HwO3V14xfQ=;
+ b=UujZoRZx4AF8dFMZau+bYH4UFwhQNg+6ZqUHJG1xFv0scdpxoFv0GSkgO+s2nmcRuV
+ 7EEyuUUZh54YZuZcT4Mxnh+pkNidDScDnRPEYrIC3MwRhBHQIuU9ALeIbYYzjMZsC1jA
+ z15uSX/XwYWWWgb1xNYxyN6OCfdtJ+BoR94iukY/klu6sKgAxlQAv10wg8YdM0bIkHEL
+ Kd7P0xztZZpVn48MRS1nrDQPXCbcoGUakcgn0AcN+rg+mz7qDa4yjwI5KgqDc78aMVXQ
+ qrdBFARcuZwnsEDwimv77L6NMAuSiTn8YqZ8uG8UL3cjIHb15Mma14a8Utlj9M8gRIZ2
+ d2HA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVF+gIJFesgiMOB+jMNojGCBB9qx17XSzq1EacWCoVFsjISb+hOZJsCULmtKI5IHsJ5lkyIid8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCLXBnozPKKVnY8HipEonYQ+qsCK0cOkT69wf36jwY3syE4ZdD
- Qi9n/zD3VuYLGb0OsRsYxlvwbLOFDJh3J5uMAa3AuIz8ORpE0pURUfyTzoxLveU=
-X-Gm-Gg: ASbGncvwJU7YWiHN3C+TIqf+i++J9BqOf0iW7qndXdzwfN5W83HVmefF/b0xj3DU7Uc
- HixkUgv/F3ywDlmxeFdK0qeka0hnLEa0vsIKsBPrzCZTisjXNhd9ZSa1XVP/5+pf/lj7yYfPNAK
- WS+WV231BqkiMAk9p3EUvMiXof6LkjYi8qCAaN3wnyG8KwzNXK1wUjkXDq+i/dw4dJj1q7LuI01
- MkXd/yTKbdds9QIb62LyW/05jXQtKq7hmnvJkgOCKdqmE5kIjwce15YosZRgTxAOZsOQUtTgUUP
- EYDbm2uAc8mr4xPZ0NdC3JKSES92gUTBAUgVJxg7Lc6BMK5DZc5kN1UNDDysdtxVMoGTejo0y8b
- I4I0Xt06IjlD68tD96INB
-X-Google-Smtp-Source: AGHT+IGj2Vjvew5Rd+NpeouUud5zaUvTKnnDFjXFX2wIsVIdW4NbqTAiZBwHbMYUWQVx5Ldji7YDPQ==
-X-Received: by 2002:a17:906:6a14:b0:ac2:d5c6:43ad with SMTP id
- a640c23a62f3a-ac738a997eamr1756042466b.30.1743658499061; 
- Wed, 02 Apr 2025 22:34:59 -0700 (PDT)
-Received: from localhost.localdomain (ppp089210073071.access.hol.gr.
- [89.210.73.71]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7bfee6c0bsm35238066b.81.2025.04.02.22.34.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 22:34:58 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, bjorn@kernel.org,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] acpi: Fix table length for QEMU
-Date: Thu,  3 Apr 2025 08:34:44 +0300
-Message-ID: <20250403053444.2551339-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.49.0
+ AJvYcCXaOv4kSEGO0AsLbEJfgpRyCVODWgtZW6u/TMHqQQvKtmhyWYH2tClrbOy5xG36LbLxrrdYuEw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHZxS+nL5qF0C8FxTOMt3VvCJWUd0haxw4fxLUqbg+Z12mXOzY
+ zc9WwQ6FzOPW/MjoPz3nHdo3IxiSpNq6VJjUp480SnLhsZyy4hke98mTQ1mlAnQ7nsddtxoILbB
+ /4IkL9dk/+affp63DQWopYj6cMiI+n9IO4p6hVw==
+X-Gm-Gg: ASbGncusrFkX7PrramIQOUQlETjpb23AT0Qu2/1dlGktNNrHezDiz+S2cnRZ4dMioA+
+ wgyoPzotLnC9lVuzsV3Y/xB5gXQwJeq16ugL21IWp6feMzuasU7/YSRk3wAE6M5SP1qYWDZbKtY
+ XIZ+cOtbn8TtoDucbq+9/Cwi+T
+X-Google-Smtp-Source: AGHT+IG9okqRoWtzEYnYW3CFBi1n2/VhnVTeQC0QnOX+Phqo0HiPoWgfTiL/YshK+sEDeikzNrPNKGDXxgu5dZAo294=
+X-Received: by 2002:a05:6902:160c:b0:e60:e14a:df7b with SMTP id
+ 3f1490d57ef6-e6e07703136mr3863661276.12.1743659637811; Wed, 02 Apr 2025
+ 22:53:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250403053444.2551339-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20250403053444.2551339-1-ilias.apalodimas@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 3 Apr 2025 08:53:21 +0300
+X-Gm-Features: AQ5f1Jp65GaC2HqfvVQvTd6zBXozFgAoInuNraAGz_hoPUX6emDPgAuCVg6pmyc
+Message-ID: <CAC_iWjLTUgocaxOPDtQCGS==yjV=66_=37nFv-Grv6b32FNDYA@mail.gmail.com>
+Subject: Re: [PATCH] acpi: Fix table length for QEMU
+To: xypron.glpk@gmx.de
+Cc: bjorn@kernel.org, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,30 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The end of the ACPI table is set to 'addr' instead of 'end'. The ACPI
-code for QEMU relies on those values to mark memory as 'ACPI Reclaim'
-and as a result the ACPI RSDP ends up in Boot services Data.
+On Thu, 3 Apr 2025 at 08:34, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> The end of the ACPI table is set to 'addr' instead of 'end'. The ACPI
+> code for QEMU relies on those values to mark memory as 'ACPI Reclaim'
+> and as a result the ACPI RSDP ends up in Boot services Data.
+>
+> Reported-by: bjorn@kernel.org
 
-Reported-by: bjorn@kernel.org
-Fixes: commit 638cc363484b ("acpi: enable writing ACPI tables on QEMU")
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- drivers/misc/qfw_acpi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I obviously messed up my reported-by...
 
-diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
-index 0d0cf7646890..77cebae5e3fd 100644
---- a/drivers/misc/qfw_acpi.c
-+++ b/drivers/misc/qfw_acpi.c
-@@ -305,7 +305,7 @@ static int evt_write_acpi_tables(void)
- 	/* Generate ACPI tables */
- 	end = write_acpi_tables(addr);
- 	gd->arch.table_start = addr;
--	gd->arch.table_end = addr;
-+	gd->arch.table_end = end;
-
- 	return 0;
- }
---
-2.49.0
-
+> Fixes: commit 638cc363484b ("acpi: enable writing ACPI tables on QEMU")
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  drivers/misc/qfw_acpi.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/misc/qfw_acpi.c b/drivers/misc/qfw_acpi.c
+> index 0d0cf7646890..77cebae5e3fd 100644
+> --- a/drivers/misc/qfw_acpi.c
+> +++ b/drivers/misc/qfw_acpi.c
+> @@ -305,7 +305,7 @@ static int evt_write_acpi_tables(void)
+>         /* Generate ACPI tables */
+>         end = write_acpi_tables(addr);
+>         gd->arch.table_start = addr;
+> -       gd->arch.table_end = addr;
+> +       gd->arch.table_end = end;
+>
+>         return 0;
+>  }
+> --
+> 2.49.0
+>
