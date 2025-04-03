@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F76C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 12:37:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED84C3601A
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 12:38:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C09A82107;
+	by phobos.denx.de (Postfix) with ESMTP id 6D5188210F;
 	Thu,  3 Apr 2025 14:36:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="XqG5497R";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="BmXDAlSC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E35D8043C; Thu,  3 Apr 2025 09:39:38 +0200 (CEST)
+ id E610381F6B; Thu,  3 Apr 2025 09:39:40 +0200 (CEST)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
  [217.70.183.200])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F30581F6B
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 09:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BBFB780194
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 09:39:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8F78D44380;
- Thu,  3 Apr 2025 07:39:33 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 04FFA44378;
+ Thu,  3 Apr 2025 07:39:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1743665975;
+ t=1743665978;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CKQo5J/L2BuaNnCJP+anpJSykkpEvPmjCVJ2YyNDsWg=;
- b=XqG5497RIa1DTHWEthAtdv4wmorJwucgvMtwlH7NItl8D1u2Izrmo5rZoh5BcWYxj8NlEk
- AA/+4XyUr7wtGYGC2p6e/7SQsFwnSQykZkZkqD/8wI4RJF0ruhoYid6MMTfg9vTsQ3PQwS
- wpCOSVCSYqSFrmQbr59q1V0Qyj8jNkrF26H/pjGlsuxcQOBkmBQVtdQ5C6G4ifEmQWh1t+
- 5XPuRtOG/0jkIdSwp1tVBKrtthUgyNHRU0f5Ezo20ZxUo4MVIpNxT/FMa6yzBSF+p1/I7N
- maQq4OSNfeO4fUn0tfgKfCZIpzhuUKRKrwHsrfwrg6S9OrfUCEhg8bK/7KjWLA==
+ bh=ZZcZSzJh2l8LIapNhzFD35TlEI/vKwAorHjxoaRGfWA=;
+ b=BmXDAlSCFh2Z/Pa/GtemybnvFT5nYVDm+U+AN1UwaDqmNJWhSBOUDpR+IWYtVUkLktUMT0
+ +dKx54DoHU95dsBoD+hAuPJ47UDAVR1WN78Hs6Gcg+2wNnddY5wubXq0FEdfr5t+ptBMTc
+ Wy/st/XBOXJGYids9LtImwq9pW0+KOxxSCpDXvLCKs0JY9W6oE8qrdOrt+28vVLGuf6E8n
+ yHSX+n2y/ozt64OtGp2CwEXk9sGjLP5YOUgA9QQMi862xT6TOo1/fRzdZfyZIt5Avgf427
+ FD33bRJe0Ay1uLJFynfM6J3XGqVJgxTPLdVg9yLGtPsnv30mqh0f+DkGfutKhg==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 03 Apr 2025 09:39:08 +0200
-Subject: [PATCH v6 08/12] imx: power-domain: Describe the i.MX8 MEDIAMIX domain
+Date: Thu, 03 Apr 2025 09:39:09 +0200
+Subject: [PATCH v6 09/12] imx: power-domain: Add support for the MEDIAMIX
+ control block
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250403-ge-mainline-display-support-v6-8-478b5e3dd872@bootlin.com>
+Message-Id: <20250403-ge-mainline-display-support-v6-9-478b5e3dd872@bootlin.com>
 References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
 In-Reply-To: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -84,71 +85,260 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the i.MX8 MEDIAMIX domain which is driving the power
-over the whole display/rendering pipeline.
+This block delivers power and clocks to the whole display and rendering
+pipeline.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
 ---
- drivers/power/domain/imx8m-power-domain.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ drivers/power/domain/Kconfig           |   7 ++
+ drivers/power/domain/Makefile          |   1 +
+ drivers/power/domain/imx8mp-mediamix.c | 208 +++++++++++++++++++++++++++++++++
+ 3 files changed, 216 insertions(+)
 
-diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
-index c22fbe60675e96a628f205d10a71b66c7b33ef00..e54ba5d9a5476f678fb48fb16e7217b031acd78a 100644
---- a/drivers/power/domain/imx8m-power-domain.c
-+++ b/drivers/power/domain/imx8m-power-domain.c
-@@ -40,6 +40,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MN_MIPI_A53_DOMAIN			BIT(2)
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index bd82d2f7044b3c3f8c88dea27c39193efedb4c84..5f5218bd8b5f4bed8283e91da61ac7c8c3eb97ae 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -47,6 +47,13 @@ config IMX8MP_HSIOMIX_BLKCTRL
+ 	help
+ 	  Enable support for manipulating NXP i.MX8MP on-SoC HSIOMIX block controller.
  
- #define IMX8MP_HSIOMIX_A53_DOMAIN		BIT(19)
-+#define IMX8MP_MEDIAMIX_A53_DOMAIN		BIT(12)
- #define IMX8MP_USB2_PHY_A53_DOMAIN		BIT(5)
- #define IMX8MP_USB1_PHY_A53_DOMAIN		BIT(4)
- #define IMX8MP_PCIE_PHY_A53_DOMAIN		BIT(3)
-@@ -63,6 +64,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MN_MIPI_SW_Pxx_REQ			BIT(0)
- 
- #define IMX8MP_HSIOMIX_Pxx_REQ			BIT(17)
-+#define IMX8MP_MEDIAMIX_Pxx_REQ                 BIT(10)
- #define IMX8MP_USB2_PHY_Pxx_REQ			BIT(3)
- #define IMX8MP_USB1_PHY_Pxx_REQ			BIT(2)
- #define IMX8MP_PCIE_PHY_SW_Pxx_REQ		BIT(1)
-@@ -81,6 +83,9 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MP_HSIOMIX_PWRDNACKN		BIT(28)
- #define IMX8MP_HSIOMIX_PWRDNREQN		BIT(12)
- 
-+#define IMX8MP_MEDIAMIX_PWRDNACKN		BIT(30)
-+#define IMX8MP_MEDIAMIX_PWRDNREQN		BIT(14)
++config IMX8MP_MEDIAMIX_BLKCTRL
++	bool "Enable i.MX8MP MEDIAMIX domain driver"
++	depends on POWER_DOMAIN && IMX8MP
++	select CLK
++	help
++	  Enable support for manipulating NXP i.MX8MP on-SoC MEDIAMIX block controller.
 +
- /*
-  * The PGC offset values in Reference Manual
-  * (Rev. 1, 01/2018 and the older ones) GPC chapter's
-@@ -101,6 +106,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define IMX8MP_PGC_PCIE			13
- #define IMX8MP_PGC_USB1			14
- #define IMX8MP_PGC_USB2			15
-+#define IMX8MP_PGC_MEDIAMIX		22
- #define IMX8MP_PGC_HSIOMIX		29
- 
- #define GPC_PGC_CTRL(n)			(0x800 + (n) * 0x40)
-@@ -303,6 +309,17 @@ static const struct imx_pgc_domain imx8mp_pgc_domains[] = {
- 		.pgc = BIT(IMX8MP_PGC_HSIOMIX),
- 		.keep_clocks = true,
- 	},
+ config MTK_POWER_DOMAIN
+ 	bool "Enable the MediaTek power domain driver"
+ 	depends on POWER_DOMAIN && ARCH_MEDIATEK
+diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+index 110646c503ab97941a2bb86caf53f94542008219..356ec07163fd299f00e81a629ffc06c663a26c25 100644
+--- a/drivers/power/domain/Makefile
++++ b/drivers/power/domain/Makefile
+@@ -9,6 +9,7 @@ obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
+ obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
+ obj-$(CONFIG_IMX8M_POWER_DOMAIN) += imx8m-power-domain.o
+ obj-$(CONFIG_IMX8MP_HSIOMIX_BLKCTRL) += imx8mp-hsiomix.o
++obj-$(CONFIG_IMX8MP_MEDIAMIX_BLKCTRL) += imx8mp-mediamix.o
+ obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
+ obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+ obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
+diff --git a/drivers/power/domain/imx8mp-mediamix.c b/drivers/power/domain/imx8mp-mediamix.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..78c32ca3d3a87febdefd5d128d39d817674b8d32
+--- /dev/null
++++ b/drivers/power/domain/imx8mp-mediamix.c
+@@ -0,0 +1,208 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * i.MX8 MEDIAMIX control block driver
++ * Copyright (C) 2024 Miquel Raynal <miquel.raynal@bootlin.com>
++ * Inspired from Marek Vasut <marex@denx.de> work on the hsiomix driver.
++ */
 +
-+	[IMX8MP_POWER_DOMAIN_MEDIAMIX] = {
-+		.bits = {
-+			.pxx = IMX8MP_MEDIAMIX_Pxx_REQ,
-+			.map = IMX8MP_MEDIAMIX_A53_DOMAIN,
-+			.hskreq = IMX8MP_MEDIAMIX_PWRDNREQN,
-+			.hskack = IMX8MP_MEDIAMIX_PWRDNACKN,
-+		},
-+		.pgc = BIT(IMX8MP_PGC_MEDIAMIX),
-+		.keep_clocks = true,
-+	},
- };
- 
- static const struct imx_pgc_regs imx8mp_pgc_regs = {
++#include <asm/io.h>
++#include <clk.h>
++#include <dm.h>
++#include <power-domain-uclass.h>
++#include <linux/delay.h>
++
++#include <dt-bindings/power/imx8mp-power.h>
++
++#define BLK_SFT_RSTN		0x0
++#define BLK_CLK_EN		0x4
++
++struct imx8mp_mediamix_priv {
++	void __iomem *base;
++	struct clk clk_apb;
++	struct clk clk_axi;
++	struct clk clk_disp2;
++	struct power_domain pd_bus;
++	struct power_domain pd_lcdif2;
++};
++
++static int imx8mp_mediamix_on(struct power_domain *power_domain)
++{
++	struct udevice *dev = power_domain->dev;
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	struct power_domain *domain;
++	struct clk *clk;
++	u32 reset;
++	int ret;
++
++	switch (power_domain->id) {
++	case IMX8MP_MEDIABLK_PD_LCDIF_2:
++		domain = &priv->pd_lcdif2;
++		clk = &priv->clk_disp2;
++		reset = BIT(11) | BIT(12) | BIT(24);
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	/* Make sure bus domain is awake */
++	ret = power_domain_on(&priv->pd_bus);
++	if (ret)
++		return ret;
++
++	/* Put devices into reset */
++	clrbits_le32(priv->base + BLK_SFT_RSTN, reset);
++
++	/* Enable upstream clocks */
++	ret = clk_enable(&priv->clk_apb);
++	if (ret)
++		goto dis_bus_pd;
++
++	ret = clk_enable(&priv->clk_axi);
++	if (ret)
++		goto dis_apb_clk;
++
++	/* Enable blk-ctrl clock to allow reset to propagate */
++	ret = clk_enable(clk);
++	if (ret)
++		goto dis_axi_clk;
++	setbits_le32(priv->base + BLK_CLK_EN, reset);
++
++	/* Power up upstream GPC domain */
++	ret = power_domain_on(domain);
++	if (ret)
++		goto dis_lcdif_clk;
++
++	/* Wait for reset to propagate */
++	udelay(5);
++
++	/* Release reset */
++	setbits_le32(priv->base + BLK_SFT_RSTN, reset);
++
++	return 0;
++
++dis_lcdif_clk:
++	clk_disable(clk);
++dis_axi_clk:
++	clk_disable(&priv->clk_axi);
++dis_apb_clk:
++	clk_disable(&priv->clk_apb);
++dis_bus_pd:
++	power_domain_off(&priv->pd_bus);
++
++	return ret;
++}
++
++static int imx8mp_mediamix_off(struct power_domain *power_domain)
++{
++	struct udevice *dev = power_domain->dev;
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	struct power_domain *domain;
++	struct clk *clk;
++	u32 reset;
++
++	switch (power_domain->id) {
++	case IMX8MP_MEDIABLK_PD_LCDIF_2:
++		domain = &priv->pd_lcdif2;
++		clk = &priv->clk_disp2;
++		reset = BIT(11) | BIT(12) | BIT(24);
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	/* Put devices into reset and disable clocks */
++	clrbits_le32(priv->base + BLK_SFT_RSTN, reset);
++	clrbits_le32(priv->base + BLK_CLK_EN, reset);
++
++	/* Power down upstream GPC domain */
++	power_domain_off(domain);
++
++	clk_disable(clk);
++	clk_disable(&priv->clk_axi);
++	clk_disable(&priv->clk_apb);
++
++	/* Allow bus domain to suspend */
++	power_domain_off(&priv->pd_bus);
++
++	return 0;
++}
++
++static int imx8mp_mediamix_of_xlate(struct power_domain *power_domain,
++				    struct ofnode_phandle_args *args)
++{
++	power_domain->id = args->args[0];
++
++	return 0;
++}
++
++static int imx8mp_mediamix_bind(struct udevice *dev)
++{
++	/* Bind child lcdif */
++	return dm_scan_fdt_dev(dev);
++}
++
++static int imx8mp_mediamix_probe(struct udevice *dev)
++{
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->base = dev_read_addr_ptr(dev);
++
++	ret = clk_get_by_name(dev, "apb", &priv->clk_apb);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "axi", &priv->clk_axi);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "disp2", &priv->clk_disp2);
++	if (ret < 0)
++		return ret;
++
++	ret = power_domain_get_by_name(dev, &priv->pd_bus, "bus");
++	if (ret < 0)
++		return ret;
++
++	ret = power_domain_get_by_name(dev, &priv->pd_lcdif2, "lcdif2");
++	if (ret < 0)
++		goto free_bus_pd;
++
++	return 0;
++
++free_bus_pd:
++	power_domain_free(&priv->pd_bus);
++	return ret;
++}
++
++static int imx8mp_mediamix_remove(struct udevice *dev)
++{
++	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++
++	power_domain_free(&priv->pd_lcdif2);
++	power_domain_free(&priv->pd_bus);
++
++	return 0;
++}
++
++static const struct udevice_id imx8mp_mediamix_ids[] = {
++	{ .compatible = "fsl,imx8mp-media-blk-ctrl" },
++	{ }
++};
++
++struct power_domain_ops imx8mp_mediamix_ops = {
++	.on = imx8mp_mediamix_on,
++	.off = imx8mp_mediamix_off,
++	.of_xlate = imx8mp_mediamix_of_xlate,
++};
++
++U_BOOT_DRIVER(imx8mp_mediamix) = {
++	.name		= "imx8mp_mediamix",
++	.id		= UCLASS_POWER_DOMAIN,
++	.of_match	= imx8mp_mediamix_ids,
++	.bind		= imx8mp_mediamix_bind,
++	.probe		= imx8mp_mediamix_probe,
++	.remove		= imx8mp_mediamix_remove,
++	.priv_auto	= sizeof(struct imx8mp_mediamix_priv),
++	.ops		= &imx8mp_mediamix_ops,
++};
 
 -- 
 2.48.1
