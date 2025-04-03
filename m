@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59904C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 17:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373F4C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 17:54:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FCF182139;
-	Thu,  3 Apr 2025 19:54:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E82C18214F;
+	Thu,  3 Apr 2025 19:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i3MWF1vo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i1EYdnJr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9327482140; Thu,  3 Apr 2025 19:54:29 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id A538A82140; Thu,  3 Apr 2025 19:54:43 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF22882006
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 19:54:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 845BB82155
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 19:54:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-736bfa487c3so1056093b3a.1
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 10:54:26 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ac41514a734so207163766b.2
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 10:54:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743702864; x=1744307664; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=d4tfF39Df0uBS43SJ7ZzWXlRQ8gVUbzLvHUl4QS+ry4=;
- b=i3MWF1vo2w3MkL+nUwqbVuyW7vEddU55HagiJtMStyQr3CeCFu/jEv8MLKMhq/Kl5V
- v1OVdIkR79claUXZTwPt9VHwDpxg5aKptof67CBGuHeaBnuCmlzPGtnY69pBXmwrRihb
- +qElvXANVRMdjhknNQxy7P67NQ9wwoFneXZoA=
+ d=chromium.org; s=google; t=1743702881; x=1744307681; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TIxmcK9FSTBPFL2FoF9PY8a2bZPCNWkrV+tlpiuvQWA=;
+ b=i1EYdnJre5UMI7LbP+vDz8t4T7GDMsTn1W6MNz3z/UpYJr99zuQRv0ElLmYYE/qYwX
+ YUaybq/IYTNHQQCFliQelYR38rpcazbB2aPYLyRxLDWHXM6xgO668mqhbIhfIUAZ3BSE
+ SkJxMMWRrpoN2y2kuZlIhuJn5Z1tOWr/rMPyQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743702864; x=1744307664;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=d4tfF39Df0uBS43SJ7ZzWXlRQ8gVUbzLvHUl4QS+ry4=;
- b=wW3lKqjfzjlofMfFwrQ03jsGvQhjJjaxDzkSzkcppJZ7kE7+JVvGIid59d9ePpJq+/
- KJVY+RHva4E6yPhNeSTd0rlQm7d5+tlsxO3bMbZSledexE4/cBNr+ba8LATF0C37HKs0
- xzYUf+tTKUBXB4wvGCQHuMYTMWq70TWD7HmLCPEqoGfHmTz4j8ex8AftYHjcp+a/msKs
- 098VuxK0abYmxdVqcs1127TU3wJxCRdIWc4Hi+RfUMxpR+h2FbD9cZmzPZF/qSFK1mon
- lpsd0OM0ZEC3r5fExJRm1n1HbyBHVAATd5PmtDtNd0r+yrxAi2YrpO+gIgX3EHX+USK1
- HC0g==
-X-Gm-Message-State: AOJu0YwoxrjAUj7D+gaAErLypCa2qYlqL9qqckZ+w6MZyUpxYGH9dAT7
- ScgmjMwkQ8WQzb+ghg3t0QU5NSLgtNqn1G+T3c46y76gygadxkGLyIZqi3RzrL3PS7I55FdZQxV
- 3cA==
-X-Gm-Gg: ASbGncst9B9xYM/wt1Xh/0ePhyLPUpqa/Rcej/oGhH3KA7py8/SDIgO3NWETY0IeAIN
- CX3TRfmmfHNT23PkRLpIRjOtYzdLcUc3ghXk0T3LLqCU9Z4t/EWDLUxSanvBD4MBuuue1NuM9G1
- Hxp1aD6Gsh/XMcGus2vmcjJrGzi7nANrDZSwhoCpR6QC38wNS3dbJ1i0wjo/JzWKecLwQHUo693
- MSj+uunek+6gl/yI7a2VPe/ks2REiF/en/z+vmaO45zQq2U4ImbJuE2Yf+pKKcFHjYQfgKxgsEn
- HsW0wjZBH9rjb2Sjb3vFYLU3Bque5J0CtnuWSiPCNb4=
-X-Google-Smtp-Source: AGHT+IF8mtyvA1LRzwZ456DVGSrs5RkrjfSPSauIm5cgXA+4yqi/3F0CXE/P1r6lFw4PwCKeGzth5A==
-X-Received: by 2002:a05:6a21:1515:b0:1f5:6e00:14c4 with SMTP id
- adf61e73a8af0-201047a581bmr399423637.42.1743702864122; 
- Thu, 03 Apr 2025 10:54:24 -0700 (PDT)
-Received: from chromium.org ([202.144.206.254])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-739d9ea089csm1787036b3a.111.2025.04.03.10.54.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 10:54:20 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
- =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
- Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH] fdt: Allow OF_HAS_PRIOR_STAGE to be disabled in defconfig
-Date: Fri,  4 Apr 2025 06:53:49 +1300
-Message-ID: <20250403175408.2211779-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1743702881; x=1744307681;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TIxmcK9FSTBPFL2FoF9PY8a2bZPCNWkrV+tlpiuvQWA=;
+ b=RBF1hBGQxl0MFdBKnzS9TD15igaMKLeetzsuE5u7GIBt4MvwoVkxQ8KGvX4fkNv1M1
+ HjiJ6qw3V9cwqX23RHstmw6fr8ih1GMEDCvqw+WQzCAYW2onkWWuQRREGkSTeH5Q7O9E
+ Nys2vMQ5LsfEkOp3tCV8N4wHVKXu3UOTYVue5wxWPdH4fFiaqw2JebQo9act4TK46tpQ
+ 4aosDr2rqKNZ4/N4AYZyATelnLZ3NAwyn3dOcHZHxKqhVaqKLpCVnU2TGpR1V9nxXO1D
+ alDIgtLhCnQHlwkxE8ZqSlJm/C5g8oiE5Ki2clKExm0V//a9wCwtFC8xKCShutUJugA3
+ fNSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVRsKYMvD883JRAPuvEEhiDJgDSjiloTVx5XNTdJbYVzKeYfCS0UfC5v0wC2jVuAR/83/1LNtI=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywf5uvX95UB0EnMXH9whQkiNfYorYKnz6st+7UpVvDGnxC8HGYe
+ NeNVfKruMmZQODfTFzG6rdFVkqcbT1PA9czh3AA4NAd4Rs7R0mJgZz8JE8TDRL2oql54DUUhzJP
+ pLQB6c43fOxGzlZl47VgHKIelEoYaAiNPjECQ
+X-Gm-Gg: ASbGncvzjOxtFxQu7sXhXshiQOt1wBf6GgHjtrEd+DeWz79bKwwl/H9A5q6X4CEKta1
+ 2Ly1qd2g5V8dQVz2CUjIuvr9BrWNGHWnZppo6Qlky8kgLp8p/IPJ+bgUEmlUxhoseHRi1pIYltp
+ nesGhlipkTn8I3DJA2K1y7p3qI/mwg
+X-Google-Smtp-Source: AGHT+IGJdLpdwqLD5wr8w7mQRUSsmGL6hqPOh5asAYZSswGMH0KqYsfr5amifX4h3DXuZUcPWFlmewCX3owKLo4kY08=
+X-Received: by 2002:a17:907:7e9d:b0:ac2:49de:3969 with SMTP id
+ a640c23a62f3a-ac7d190fe39mr44095566b.47.1743702880670; Thu, 03 Apr 2025
+ 10:54:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
+ <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
+ <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
+ <01020195f0df59d3-851c6ec3-9a49-4fab-b878-e11c6018b827-000000@eu-west-1.amazonses.com>
+ <CAFLszTiRu3JtUw-z3LeHO9PKVZRuBW3L-WXm5vO0u6++-OdwAw@mail.gmail.com>
+ <AED05ACC-AF9D-4A2E-90E3-7BDA597B2DB0@kohlschutter.com>
+In-Reply-To: <AED05ACC-AF9D-4A2E-90E3-7BDA597B2DB0@kohlschutter.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 4 Apr 2025 06:54:29 +1300
+X-Gm-Features: AQ5f1Jrsn_8aVOawsCgUi-CERMXJi4vrYOwvDgkvo5ai0FZwoNPBvzX93njOPBE
+Message-ID: <CAFLszTibROtKsE+LZ3cMXvj5MLBf=-6TP98UwxhPfh5eqQK+_g@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_U=2DBoot_interferes_with_initrd_binary_=E2=80=94_Revert_?=
+ =?UTF-8?Q?=22efi=3A_Correct_smbios=2Dtable_installation=22_=3F?=
+To: =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>
+Cc: Michael Brown <mcb30@ipxe.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,56 +95,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present it is impossible to change the qemu_arm64 defconfig to
-obtain a devicetree from the U-Boot build.
++Tom Rini in case this affects the release
 
-This is necessary for FIT validation, for example, where the signature
-node must be compiled into U-Boot.
+Hi Christian,
 
-A proposed change to QEMU has been blocked for several years. As a
-workaround, the only option is to use QEMU's dumpdtb option, merge in
-the signature node manually and then disable OF_HAS_PRIOR_STAGE
+On Fri, 4 Apr 2025 at 01:46, Christian Kohlsch=C3=BCtter
+<christian@kohlschutter.com> wrote:
+>
+> Hi Simon,
+>
+> > On 1. Apr 2025, at 17:51, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> but I don't know precisely what these various functions are supposed t=
+o
+> >> do, and I can't find any path that leads from any of these to eth_halt=
+().
+> >>
+> >> Is it possible that U-Boot is failing to call eth_halt() in response t=
+o
+> >> ExitBootServices(), and is therefore leaving the network device active
+> >> and performing DMA while the kernel starts up?
+> >
+> > The dm_remove_devices_active() is supposed to handle this, but it is
+> > possible that one of the drivers lacks a remove() method.
+>
+> for what it's worth, this is happening on both ODROID N2+ (meson8b-dwmac)=
+ as well as NanoPI R4S (rk_gmac-dwmac).
+>
+> I also don't understand why reverting 06ef8089f876b6dabf56caba31a05c003f0=
+3c629 "fixes" this behavior. Does it mean that any memalign / malloc may ca=
+use this?
+> Also, how can this failure mode be detected and prevented in code?
+>
+> I really don't fancy the thought of remote code injection into Linux init=
+rd by spoofing Ethernet packages, but it really looks like a possibility.
 
-Unfortunately the only way to disable OF_HAS_PRIOR_STAGE at present is
-to hack the Kconfig. So update it to allow use from defconfig. This
-avoids needing to patch U-Boot to get this working.
+Here's my idea of what might be going on based on Michael's observations:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Link: https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
----
+1. designware_eth_start() starts the interface and
+designware_eth_stop() stops it
 
- dts/Kconfig | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+2. tx_descs_init() sets up the DMA and uses the device-private info
+(struct dw_eth_dev)
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 2e88d210bb8..2fe4468d1a9 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -190,7 +190,7 @@ config OF_BOARD
- 	  earlier stage should enable OF_HAS_PRIOR_STAGE.
- 
- config OF_HAS_PRIOR_STAGE
--	bool
-+	bool "Device tree comes from prior-stage firmware"
- 	help
- 	  Indicates that a prior stage of the firmware (before U-Boot proper)
- 	  makes use of device tree and this board normally boots with that prior
-@@ -205,8 +205,13 @@ config OF_HAS_PRIOR_STAGE
- 	  development purposes, but it is not recommended, and likely will not
- 	  even work, for production systems.
- 
--	  Note: This option must be set in Kconfig and cannot be enabled or
--	  disabled in the board's defconfig file.
-+	  Note: This option can be updated in the board's defconfig file if
-+	  needed. E.g. for QEMU to support FIT validation the devicetree must
-+	  include a public key.
-+
-+	  See also this for context:
-+
-+	  https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
- 
- config OF_OMIT_DTB
- 	bool "Omit the device tree output when building"
--- 
-2.43.0
+3. When the device is removed, the struct is freed, meaning that a
+future malloc() can use that same space.
 
+4. DMA traffic could then write over the malloc() region
+
+I'm not seeing where the Ethernet device's stop() is called. The
+dwmac_meson8b driver does not have a remove() method, so presumably
+DMA is still running after the device is removed. Probably the correct
+fix would be to add a remove() method to that driver.
+
+Regards,
+Simon
