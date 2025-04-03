@@ -4,95 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0989DC3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 14:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8872C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 14:53:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65D2482075;
-	Thu,  3 Apr 2025 16:48:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F2FD82054;
+	Thu,  3 Apr 2025 16:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SpiDPEnK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ouSDH70G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FB998210F; Thu,  3 Apr 2025 16:48:04 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2F09882075; Thu,  3 Apr 2025 16:53:41 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F60282006
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 16:48:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83E4482006
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 16:53:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 9AE303F698
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 14:48:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1743691680;
- bh=GfoiLoPSn6LLdmSPM6vk8kfnk63FB/u7Py/piElEM7I=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=SpiDPEnKsN+gNX685yUKSQMJJ+ZvVdJtEt4b7Bo9hXhQW1BAHQKo3OX+ybFj5YbIc
- zlkBz6mBkFyBC2tPLR+p04oTJbk/8JWD+GwnTFQNfuOsTC6uvaveHFBsUvc3vvV4vl
- O5A/KR7q5VOlkIXHxaDQUfo4XkbaiH9lqGfst6kVthm70L2rmR2aDvvJSYo84cRIVp
- vf0Qz+vRlrnRZPeAeHBrWD2C7yddpMqwVKPCM/Nko9xRV8XsE/S3faS8L4vuoJ0dpZ
- lYFed7cHvE8nf4jdPEDHLz/l5o+L3ZZIZ0J6IFBoVTRC6Il+O2r+2TO9jPYzhaWsrD
- xLsdKtdqMXcog==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-43ce245c5acso11837625e9.2
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 07:48:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3912d2c89ecso905709f8f.2
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 07:53:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743692016; x=1744296816; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=XSpzj+YuIgecYoElJ7ITfPkRZxWEyuQq++QolzJLWgY=;
+ b=ouSDH70G8zWSORwBpoEOxpKjcgAOgefJozEVItg0bYOcvV4Uu20myNb1qJkgiGAAfW
+ Sq/uAbnRzpJQ+cvWgtc/YZsnUNPBB/1lbBxO/RvFxasTNfvd6GsL3xvC2zbIkTXQTa1W
+ 7uHqgjzUwuCgSxjWUR97oNsdXBybthMD8uWh8j5NgPLPKAvtETTtmGackNi2l4TtLGT/
+ mker2PiRdm8HxDqi3aTdfpMjuuuPLy9Du8SQq+8X40xp+ktKWxEuoLPPi0E8OQOKNag6
+ eEZC+tOfbS9H5P/kv2XqIMCMYEhXGSdkH13Zb5srnx8jJhCqKHX4Bb8Us0h/WWSDOa5l
+ 4KDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743691680; x=1744296480;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GfoiLoPSn6LLdmSPM6vk8kfnk63FB/u7Py/piElEM7I=;
- b=D2KWpvWltFBRTLfUYMsyLJ3B1iAMJuoDr7Yn3c6YZILbe9cUhB9ted+jFhBAubLOLp
- DxrZEHk0A0ioMtJZqSwvsUE7WsiNfib/nTvBZIaNj6dAkLHk1BEmEgMhheG2AgQYyLel
- pCm29sb21TnqdonvlTn74LzQg7/O3KPE9ifZd1H+2UzgLkwoAjE8CaAer0p7/+hlpwxc
- 6G9WGbOFw1RtPVT+WFIiFnfOBs7VjbQqj2ek/7FYq52lptQE1iDfRsKxUT+sOVCKfA4e
- PBNUqTeAoPFKv8jlmKjVcS/GQRsDQYgw31PcUDBR8T0aR+cqkxFVKW68JvRG0f16aebE
- iMMQ==
+ d=1e100.net; s=20230601; t=1743692016; x=1744296816;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XSpzj+YuIgecYoElJ7ITfPkRZxWEyuQq++QolzJLWgY=;
+ b=vbrB9ReT7r7l+gKaVMBq2avBwsX86Zgr1Mtmhb/omFgZqSM7VJXL/lQJtjxeLdisc9
+ OMS/cdxWbm5Z5Ucw5bSP5cL2VF6l3txI4ohLhHRCVWpg6w95UQXEEjEL5IM+dyRjIGHm
+ NZcGTr8mY6YzADcPIYEgrGXmmqdMZqU2XrEJBYLeh8dHTycIJ1XmFxtFiLONrhkUyNgO
+ YXp8aB4QMOt8O7+yRktw9nOnSOW0iEGENNfxlA3w1L8h02RlgUYuBU1P7PgNCTILsH8p
+ W53Fx3z4QtwSehUuEC5sYujmkUl4Q0WErDEsRxC9kBLqChcHXquT2yIE1PAVtuQChGgS
+ x72A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWltBvMZ1CiPIc/saUqP5j0EOTqFUSSSfb9lKt4CQeURw2CCIJXnlnbYR4/DW+dy7VlLdzz2H4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFXxTCic0BNYCmWclczy0ire/zIGwMC70WOaGMBdmRMkhazEah
- gxtZ7Po8idRJ9JiTUQWIJ1lT+ISEgirx63Ap7rvW1kRnh4kPE8R41glJuhAFbyYCzAqWk3QkEXd
- nac/A/tN/hY3FNT7mG5CtxO3SO8vXxck8FhYXkE9Fu5XkUSjHZNWVN8Qrz/Ro2HjfuFA=
-X-Gm-Gg: ASbGncvz/NTZgi+vrk8iG812x3WtpAqo3w0A4wDZ+m6NAVUYFnOdzMqCQ30CA//VR3D
- 511BvOctBujs6V/V1IN/34PMk2UKHGA2FTnSyuUBq6dxu3GW6fvpe6DSSC4zOUpJobHLenC/AFi
- yUqtkFDrnk6DhXiPdcMBsgP2sTd/Uy+DzytOH+pK4Innvrw50n6ek2Lga3DVUaXGRhq0XOjqRj3
- HRadxHUv8HGL5c24bM3802dr3iLN8+zOX0X6Gdvi1ph0Gt959qX7yxU3oGd8Y/VA8rsmR4R1r6l
- 5WLXmzKCDarjyLAnaCV6Q12IXG6ukBKAFwaLWw==
-X-Received: by 2002:a05:600c:4e87:b0:43c:f5fe:5c26 with SMTP id
- 5b1f17b1804b1-43db61d8249mr182142905e9.4.1743691679793; 
- Thu, 03 Apr 2025 07:47:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH8tzd7QF0V+xQxL1VPPSLCbhQM0lumEWsLUdOw1FqnSgjukbVzSgBMX2wBWyyCHvinTiHBJw==
-X-Received: by 2002:a05:600c:4e87:b0:43c:f5fe:5c26 with SMTP id
- 5b1f17b1804b1-43db61d8249mr182142615e9.4.1743691679437; 
- Thu, 03 Apr 2025 07:47:59 -0700 (PDT)
-Received: from workstation5.. ([2a02:3035:6e0:be7c:f00:839:af81:4bb8])
+ AJvYcCWmrka5Uoh6Ce6QWucafcyncdpIDbytg8WxvtG0r3gg/NNxc9J5beiNpu/J6dbH1ScJReX2+s0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsKY4fHps0XKUQGJLFnCTalA1jXK5oYJRDSOyq/OziXqBRiJPx
+ 6T1byG1CXV4pkSSD6FT84Tmk7eERZNb+qY8UAscj/jjq35Ryu1THf5uf2OCVVIY=
+X-Gm-Gg: ASbGncveaeGY1Um4j76LlRZnPAmx4Vcrz6SCuZcmNbaAyvN/EljcsySRXj0jnXr3KsC
+ Xtjh2JOfSkHHN32IbsQtjhva9LxIBVHneIJnT56GFTYbmDaPCG9frTjN8syvVHxd8dqcSSM4Y8x
+ 7yZDZw/x0V650akjsG89Atb1UbSssnA01HxrA1fXVtcnISlC9gg23L+9Xok41noAYuh6XXPNjZS
+ fXeOCTo5UHUITWpB6tpInP9SD1BPvVLdg+E5qsN6sqmrjjMCv0GZdUgqpuBpQvWyIwrtdDB+eEF
+ JGZMB2unCbf4lTbRnQUJfvCv6NflrzG5jlQDkorlrCTQ6hgNRxB2L/+aoWePCEWtH7zb+cqZVn1
+ 6AgT8Rt1ka0TisFUdQbGydQ==
+X-Google-Smtp-Source: AGHT+IG8wwltIjJTTvByytVMDpQFVoj5HVOw0mYTJDAtQER+ka7NqNTSOg5KK/coqt4ZwgyKRP46tw==
+X-Received: by 2002:a5d:64c6:0:b0:38f:39e5:6b5d with SMTP id
+ ffacd0b85a97d-39c12117d3emr18852896f8f.44.1743692015869; 
+ Thu, 03 Apr 2025 07:53:35 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:e780:6520:c31a:d05c?
+ ([2a01:e0a:3d9:2080:e780:6520:c31a:d05c])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec1698081sm23653645e9.17.2025.04.03.07.47.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 07:47:58 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] configs: qemu-arm raise CONFIG_NR_DRAM_BANKS
-Date: Thu,  3 Apr 2025 16:47:53 +0200
-Message-ID: <20250403144753.1065007-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ ffacd0b85a97d-39c30227e3bsm1986351f8f.100.2025.04.03.07.53.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Apr 2025 07:53:35 -0700 (PDT)
+Message-ID: <6d683b43-0f0b-4203-b3c7-0c311d16686c@linaro.org>
+Date: Thu, 3 Apr 2025 16:53:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH 1/2] efi_loader: Move public cert for capsules to .rodata
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Edwards <cfsworks@gmail.com>,
+ u-boot@lists.denx.de
+References: <20250401112729.2181793-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250401112729.2181793-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,63 +135,269 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The number of memory banks in QEMU is not bounded by 1.
+On 01/04/2025 13:27, Ilias Apalodimas wrote:
+> commit ddf67daac39d ("efi_capsule: Move signature from DTB to .rodata")
+> was reverted in
+> commit 47a25e81d35c ("Revert "efi_capsule: Move signature from DTB to .rodata"")
+> because that's what U-Boot was usually doing -- using the DT to store
+> configuration and data. Some of the discussions can be found here [0].
+> 
+> (Ab)using the device tree to store random data isn't ideal though.
+> On top of that with new features introduced over the years, keeping
+> the certificates in the DT has proven to be problematic.
+> One of the reasons is that platforms might send U-Boot a DTB
+> from the previous stage loader using a transfer list which won't contain
+> the signatures since other loaders are not  aware of internal
+> U-Boot ABIs. On top of that QEMU creates the DTB on the fly, so adding
+> the capsule certificate there does not work and requires users to dump
+> it and re-create it injecting the public keys.
+> 
+> Now that we have proper memory permissions for arm64, move the certificate
+> to .rodata and read it from there.
+> 
+> [0] https://lore.kernel.org/u-boot/CAPnjgZ2uM=n8Qo-a=DUkx5VW5Bzp5Xy8=Wgmrw8ESqUBK00YJQ@mail.gmail.com/
+> 
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   Makefile                           |  2 +-
+>   include/asm-generic/sections.h     |  2 ++
+>   lib/efi_loader/Makefile            | 18 +++++++++++++++
+>   lib/efi_loader/capsule_esl.dtsi.in | 11 ---------
+>   lib/efi_loader/efi_capsule.c       | 37 ++++++++----------------------
+>   lib/efi_loader/efi_capsule_key.S   | 17 ++++++++++++++
+>   scripts/Makefile.lib               | 27 ----------------------
+>   7 files changed, 47 insertions(+), 67 deletions(-)
+>   delete mode 100644 lib/efi_loader/capsule_esl.dtsi.in
+>   create mode 100644 lib/efi_loader/efi_capsule_key.S
+> 
+> diff --git a/Makefile b/Makefile
+> index 620996862e6d..7a77948006a1 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -2229,7 +2229,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
+>   	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
+>   	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
+>   	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
+> -	       Test* capsule*.*.efi-capsule capsule*.map
+> +	       Test* capsule*.*.efi-capsule capsule*.map capsule_esl_file
+>   
+>   # Directories & files removed with 'make mrproper'
+>   MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
+> diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+> index 024b1adde270..d59787948fd1 100644
+> --- a/include/asm-generic/sections.h
+> +++ b/include/asm-generic/sections.h
+> @@ -28,6 +28,8 @@ extern char __efi_helloworld_begin[];
+>   extern char __efi_helloworld_end[];
+>   extern char __efi_var_file_begin[];
+>   extern char __efi_var_file_end[];
+> +extern char __efi_capsule_sig_begin[];
+> +extern char __efi_capsule_sig_end[];
+>   
+>   /* Private data used by of-platdata devices/uclasses */
+>   extern char __priv_data_start[], __priv_data_end[];
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 2a0b4172bd7f..dc2912148951 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -29,6 +29,7 @@ obj-y += efi_boottime.o
+>   obj-y += efi_helper.o
+>   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += efi_capsule.o
+>   obj-$(CONFIG_EFI_CAPSULE_FIRMWARE) += efi_firmware.o
+> +obj-$(CONFIG_EFI_CAPSULE_AUTHENTICATE) += efi_capsule_key.o
+>   obj-y += efi_console.o
+>   obj-y += efi_device_path.o
+>   obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
+> @@ -73,6 +74,23 @@ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+>   EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+>   $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+>   
+> +ifeq ($(CONFIG_EFI_CAPSULE_AUTHENTICATE),y)
+> +capsule_crt_path=($(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE)))
+> +capsule_crt_full=$(srctree)/$(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE))
+> +quiet_cmd_capsule_esl_gen = CAPSULE_ESL_GEN $@
+> +cmd_capsule_esl_gen = cert-to-efi-sig-list $(capsule_crt_full) $@
+> +$(srctree)/capsule_esl_file: FORCE
+> +	@if [ ! -e "$(capsule_crt_full)" ]; then \
+> +		echo "ERROR: path $(capsule_crt_full) is invalid." >&2; \
+> +		echo "EFI CONFIG_EFI_CAPSULE_CRT_FILE must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled." >&2; \
+> +		exit 1; \
+> +	fi
+> +	$(call cmd,capsule_esl_gen)
+> +
+> +$(obj)/efi_capsule.o: $(srctree)/capsule_esl_file FORCE
+> +asflags-y += -DCAPSULE_ESL_PATH=\"$(srctree)/capsule_esl_file\"
+> +endif
+> +
+>   # Set the C flags to add and remove for each app
+>   $(foreach f,$(apps-y),\
+>   	$(eval CFLAGS_$(f).o := $(CFLAGS_EFI) -Os -ffreestanding)\
+> diff --git a/lib/efi_loader/capsule_esl.dtsi.in b/lib/efi_loader/capsule_esl.dtsi.in
+> deleted file mode 100644
+> index bc7db836faa8..000000000000
+> --- a/lib/efi_loader/capsule_esl.dtsi.in
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Devicetree file with the public key EFI Signature List(ESL)
+> - * node. This file is used to generate the dtsi file to be
+> - * included into the DTB.
+> - */
+> -/ {
+> -	signature {
+> -		capsule-key = /incbin/("ESL_BIN_FILE");
+> -	};
+> -};
+> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+> index f8a4a7c6ef46..1aa52ac7bb69 100644
+> --- a/lib/efi_loader/efi_capsule.c
+> +++ b/lib/efi_loader/efi_capsule.c
+> @@ -22,6 +22,7 @@
+>   #include <asm/global_data.h>
+>   #include <u-boot/uuid.h>
+>   
+> +#include <asm/sections.h>
+>   #include <crypto/pkcs7.h>
+>   #include <crypto/pkcs7_parser.h>
+>   #include <linux/err.h>
+> @@ -284,33 +285,12 @@ out:
+>   }
+>   
+>   #if defined(CONFIG_EFI_CAPSULE_AUTHENTICATE)
+> -int efi_get_public_key_data(void **pkey, efi_uintn_t *pkey_len)
+> +static int efi_get_public_key_data(const void **pkey, efi_uintn_t *pkey_len)
+>   {
+> -	const void *fdt_blob = gd->fdt_blob;
+> -	const void *blob;
+> -	const char *cnode_name = "capsule-key";
+> -	const char *snode_name = "signature";
+> -	int sig_node;
+> -	int len;
+> -
+> -	sig_node = fdt_subnode_offset(fdt_blob, 0, snode_name);
+> -	if (sig_node < 0) {
+> -		log_err("Unable to get signature node offset\n");
+> -
+> -		return -FDT_ERR_NOTFOUND;
+> -	}
+> -
+> -	blob = fdt_getprop(fdt_blob, sig_node, cnode_name, &len);
+> -
+> -	if (!blob || len < 0) {
+> -		log_err("Unable to get capsule-key value\n");
+> -		*pkey = NULL;
+> -		*pkey_len = 0;
+> -
+> -		return -FDT_ERR_NOTFOUND;
+> -	}
+> +	const void *blob = __efi_capsule_sig_begin;
+> +	const int len = __efi_capsule_sig_end - __efi_capsule_sig_begin;
+>   
+> -	*pkey = (void *)blob;
+> +	*pkey = blob;
+>   	*pkey_len = len;
+>   
+>   	return 0;
+> @@ -321,7 +301,8 @@ efi_status_t efi_capsule_authenticate(const void *capsule, efi_uintn_t capsule_s
+>   {
+>   	u8 *buf;
+>   	int ret;
+> -	void *fdt_pkey, *pkey;
+> +	void *pkey;
+> +	const void *stored_pkey;
+>   	efi_uintn_t pkey_len;
+>   	uint64_t monotonic_count;
+>   	struct efi_signature_store *truststore;
+> @@ -373,7 +354,7 @@ efi_status_t efi_capsule_authenticate(const void *capsule, efi_uintn_t capsule_s
+>   		goto out;
+>   	}
+>   
+> -	ret = efi_get_public_key_data(&fdt_pkey, &pkey_len);
+> +	ret = efi_get_public_key_data(&stored_pkey, &pkey_len);
+>   	if (ret < 0)
+>   		goto out;
+>   
+> @@ -381,7 +362,7 @@ efi_status_t efi_capsule_authenticate(const void *capsule, efi_uintn_t capsule_s
+>   	if (!pkey)
+>   		goto out;
+>   
+> -	memcpy(pkey, fdt_pkey, pkey_len);
+> +	memcpy(pkey, stored_pkey, pkey_len);
+>   	truststore = efi_build_signature_store(pkey, pkey_len);
+>   	if (!truststore)
+>   		goto out;
+> diff --git a/lib/efi_loader/efi_capsule_key.S b/lib/efi_loader/efi_capsule_key.S
+> new file mode 100644
+> index 000000000000..80cefbe16ae0
+> --- /dev/null
+> +++ b/lib/efi_loader/efi_capsule_key.S
+> @@ -0,0 +1,17 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * .esl cert for capsule authentication
+> + *
+> + * Copyright (c) 2021, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> + */
+> +
+> +#include <config.h>
+> +
+> +.section .rodata.capsule_key.init,"a"
+> +.balign 16
+> +.global __efi_capsule_sig_begin
+> +__efi_capsule_sig_begin:
+> +.incbin CAPSULE_ESL_PATH
+> +__efi_capsule_sig_end:
+> +.global __efi_capsule_sig_end
+> +.balign 16
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index 275c308154b1..83fd5ff6c31c 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -377,35 +377,8 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+>   		; \
+>   	sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
+>   
+> -capsule_esl_input_file=$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
+> -capsule_crt_file=$(subst $(quote),,$(CONFIG_EFI_CAPSULE_CRT_FILE))
+> -capsule_esl_dtsi=.capsule_esl.dtsi
+> -
+> -quiet_cmd_capsule_esl_gen = CAPSULE_ESL_GEN $@
+> -cmd_capsule_esl_gen = cert-to-efi-sig-list $< $@
+> -
+> -$(obj)/capsule_esl_file: $(capsule_crt_file) FORCE
+> -ifeq ($(CONFIG_EFI_CAPSULE_CRT_FILE),"")
+> -	$(error "CONFIG_EFI_CAPSULE_CRT_FILE is empty, EFI capsule authentication \
+> -	public key must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled")
+> -else
+> -	$(call cmd,capsule_esl_gen)
+> -endif
+> -
+> -quiet_cmd_capsule_dtsi_gen = CAPSULE_DTSI_GEN $@
+> -cmd_capsule_dtsi_gen = \
+> -	$(shell sed "s:ESL_BIN_FILE:$(abspath $<):" $(capsule_esl_input_file) > $@)
+> -
+> -$(obj)/$(capsule_esl_dtsi): $(obj)/capsule_esl_file FORCE
+> -	$(call cmd,capsule_dtsi_gen)
+> -
+>   dtsi_include_list_deps := $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
+>   
+> -ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
+> -dtsi_include_list += $(capsule_esl_dtsi)
+> -dtsi_include_list_deps += $(obj)/$(capsule_esl_dtsi)
+> -endif
+> -
+>   ifneq ($(CHECK_DTBS),)
+>   DT_CHECKER ?= dt-validate
+>   DT_CHECKER_FLAGS ?= $(if $(DT_SCHEMA_FILES),-l $(DT_SCHEMA_FILES),-m)
 
-In this example we have two banks:
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-A311D-CC
 
-    qemu-system-aarch64 \
-    -machine virt \
-    -nographic \
-    -cpu cortex-a72 \
-    -m 8G \
-    -smp 8,sockets=2,cores=4,threads=1 \
-    -object memory-backend-ram,id=mem0,size=4G \
-    -numa node,cpus=0-3,memdev=mem0 \
-    -object memory-backend-ram,id=mem1,size=4G \
-    -numa node,cpus=4-7,memdev=mem1 \
-    -bios u-boot.bin
-
-Use the default value defined in /Kconfig as 4.
-
-Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	correct title %s/riscv/arm/
----
- configs/qemu_arm64_defconfig | 1 -
- configs/qemu_arm_defconfig   | 1 -
- 2 files changed, 2 deletions(-)
-
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 03028c76acc..6c9d2505a69 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -3,7 +3,6 @@ CONFIG_POSITION_INDEPENDENT=y
- CONFIG_ARCH_QEMU=y
- CONFIG_SYS_MALLOC_LEN=0x1000000
- CONFIG_BLOBLIST_SIZE_RELOC=0x2000
--CONFIG_NR_DRAM_BANKS=1
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x40200000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_SECT_SIZE=0x40000
-diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-index e09f54e0685..2d642f86ba6 100644
---- a/configs/qemu_arm_defconfig
-+++ b/configs/qemu_arm_defconfig
-@@ -3,7 +3,6 @@ CONFIG_ARM_SMCCC=y
- CONFIG_ARCH_QEMU=y
- CONFIG_SYS_MALLOC_LEN=0x1000000
- CONFIG_BLOBLIST_SIZE_RELOC=0x2000
--CONFIG_NR_DRAM_BANKS=1
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x40200000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_SECT_SIZE=0x40000
--- 
-2.48.1
-
+Thanks,
+Neil
