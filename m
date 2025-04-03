@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D10BC3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:01:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94B34C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE3D582991;
-	Thu,  3 Apr 2025 23:59:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E3A182385;
+	Thu,  3 Apr 2025 23:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a+zgKhVY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oG2vhEev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AD5C82937; Thu,  3 Apr 2025 23:59:44 +0200 (CEST)
+ id C6CF682935; Thu,  3 Apr 2025 23:59:44 +0200 (CEST)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6183F828D0
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 23:59:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12D3282385
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 23:59:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 533Lxcos3796723
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 533Lxb2E3796713
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 3 Apr 2025 16:59:38 -0500
+ Thu, 3 Apr 2025 16:59:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743717578;
- bh=dSJlxtt4L4Em3mXWSPDj4Vq9SGfYJ1ZL01z3lDxrSKs=;
+ s=ti-com-17Q1; t=1743717577;
+ bh=RApQYK73yyF0C+DObM/4jc82XZBKFhUApjnCEkSG2KU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=a+zgKhVYKhmi4RoO/1Ii/VbrFQcQ/0ejoEMZ0wbh8sY/JnqyfvFf7VV3TwrtR1VFF
- wB6hft4koxdi1NrdN5QypXCU1iqqqwC5pwlCtlaBHJ9ofwB7DfDhn+R9duXUJxBJTN
- /gOMZG4hEYI9YwIg0SVydNOJdCQRyHRRqOprlFYs=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 533LxcG3057923
+ b=oG2vhEevSIVqpEZaNysR6tSkecK2JiNpKdYjEu33IfLR+mEEIDxK1Ivln4nGwZYy5
+ /xdYEkKSThGugxoT1y+46KtAO9GP3EDuN9DBu5PxecqScg2nUu7AHZ7xoKm/1r3ilr
+ NUau6y3QYOvxFvdX3s8ix/PJJDNyZA+1vS2Wkiak=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 533Lxbxi086370
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 3 Apr 2025 16:59:38 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 3 Apr 2025 16:59:37 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 3
- Apr 2025 16:59:39 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 16:59:37 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 3 Apr 2025 16:59:38 -0500
+ Frontend Transport; Thu, 3 Apr 2025 16:59:37 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 533LxbRg089767;
- Thu, 3 Apr 2025 16:59:38 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 533Lxa0h115458;
+ Thu, 3 Apr 2025 16:59:36 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
-Subject: [PATCH v3 10/10] Makefile: update tispl regex to also clean falcon spl
-Date: Fri, 4 Apr 2025 03:29:07 +0530
-Message-ID: <20250403215910.1292922-11-anshuld@ti.com>
+Subject: [PATCH v3 09/10] mach-k3: common: add falcon support for 62[axp]
+Date: Fri, 4 Apr 2025 03:29:06 +0530
+Message-ID: <20250403215910.1292922-10-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250403215910.1292922-1-anshuld@ti.com>
 References: <20250403215910.1292922-1-anshuld@ti.com>
@@ -80,28 +80,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Build for A53 on am62 platforms now generates tispl_falcon.bin alongside
-tispl.bin, edit the regex for `make clean` so that both files are
-removed.
+We use the spl_board_prepare_for_boot hook to call k3_falcon_prep which
+is ran after tispl is loaded but before jump_to_image.
+
+In here, we find the boot media and load the image just as std falcon
+flow (since spl_start_uboot returns 0 now). Once the kernel and args are
+loaded, we perform fdt fixups on the fdt accompanying the kernel (if
+loaded as FIT) or the loaded up args and return.
+
+Now when the flow goes to jump_to_image, we do the regular pre-jump
+procedure and jump to ATF which jumps to the kernel directly since we
+have already loaded the kernel and dtb at their respective addresses
+(PRELOADED_BL33_BASE and K3_HW_CONFIG_BASE).
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-k3/common.c | 107 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 107 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index 4fca315ecff..2b41264b301 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2224,7 +2224,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       include/config.h include/generated/env.* drivers/video/u_boot_logo.S \
- 	       tools/version.h u-boot* MLO* SPL System.map fit-dtb.blob* \
- 	       u-boot-ivt.img.log u-boot-dtb.imx.log SPL.log u-boot.imx.log \
--	       lpc32xx-* bl31.c bl31.elf bl31_*.bin image.map tispl.bin* \
-+	       lpc32xx-* bl31.c bl31.elf bl31_*.bin image.map tispl*.bin* \
- 	       idbloader.img flash.bin flash.log defconfig keep-syms-lto.c \
- 	       mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index fa8cd93d664..ad5ed92eb03 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -263,8 +263,115 @@ static __maybe_unused void k3_dma_remove(void)
+ 		pr_warn("DMA Device not found (err=%d)\n", rc);
+ }
+ 
++#if IS_ENABLED(CONFIG_SPL_OS_BOOT) && !IS_ENABLED(CONFIG_ARM64)
++static bool tispl_loaded;
++
++int spl_start_uboot(void)
++{
++	if (!tispl_loaded)
++		return 1;
++	return 0;
++}
++
++static int k3_falcon_fdt_fixup(void *fdt)
++{
++	struct disk_partition info;
++	struct blk_desc *dev_desc;
++	char bootmedia[32];
++	char bootpart[32];
++	char str[256];
++	int ret;
++
++	strcpy(bootmedia, env_get("boot"));
++	strcpy(bootpart, env_get("bootpart"));
++	ret = blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, 0);
++	if (ret < 0)
++		printf("Failed to get part details for %s %s [%d]\n", bootmedia,
++		       bootpart, ret);
++	sprintf(str, "console=%s root=PARTUUID=%s rootwait", env_get("console"),
++		info.uuid);
++
++	fdt_set_totalsize(fdt, fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
++	ret = fdt_find_and_setprop(fdt, "/chosen", "bootargs", str,
++				   strlen(str) + 1, 1);
++	if (ret) {
++		printf("Could not set bootargs: %s\n", fdt_strerror(ret));
++		return ret;
++	}
++	debug("Set bootargs to: %s\n", str);
++
++#ifdef CONFIG_OF_BOARD_SETUP
++	ret = ft_board_setup(fdt, gd->bd);
++	if (ret) {
++		printf("Failed in board fdt fixups: %s\n", fdt_strerror(ret));
++		return ret;
++	}
++#endif
++
++#ifdef CONFIG_OF_SYSTEM_SETUP
++	ret = ft_system_setup(fdt, gd->bd);
++	if (ret) {
++		printf("Failed in system fdt fixups: %s\n", fdt_strerror(ret));
++		return ret;
++	}
++#endif
++
++	return 0;
++}
++
++static int k3_falcon_prep(void)
++{
++	struct spl_image_loader *loader, *drv;
++	struct spl_image_info kernel_image;
++	struct spl_boot_device bootdev;
++	int ret = -ENXIO, n_ents;
++	void *fdt;
++
++	tispl_loaded = true;
++	memset(&kernel_image, '\0', sizeof(kernel_image));
++	drv = ll_entry_start(struct spl_image_loader, spl_image_loader);
++	n_ents = ll_entry_count(struct spl_image_loader, spl_image_loader);
++	bootdev.boot_device = spl_boot_device();
++	if (bootdev.boot_device == BOOT_DEVICE_SPI) {
++		if (strcmp(env_get("mmcdev"), "1") == 0)
++			bootdev.boot_device = BOOT_DEVICE_MMC;
++		else
++			bootdev.boot_device = BOOT_DEVICE_EMMC;
++	}
++	bootdev.boot_device_name = NULL;
++
++	for (loader = drv; loader != drv + n_ents; loader++) {
++		if (bootdev.boot_device != loader->boot_device)
++			continue;
++		if (loader) {
++			printf("Loading falcon payload from %s\n",
++			       spl_loader_name(loader));
++			ret = loader->load_image(&kernel_image, &bootdev);
++			if (ret)
++				continue;
++
++			fdt = spl_image_fdt_addr(&kernel_image);
++			if (!fdt)
++				fdt = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
++			ret = k3_falcon_fdt_fixup(fdt);
++			if (ret) {
++				printf("Failed performing fdt fixups in falcon flow: [%d]\n",
++				       ret);
++				return ret;
++			}
++			return 0;
++		}
++	}
++
++	return ret;
++}
++#endif
++
+ void spl_board_prepare_for_boot(void)
+ {
++#if IS_ENABLED(CONFIG_SPL_OS_BOOT) && !IS_ENABLED(CONFIG_ARM64)
++	k3_falcon_prep();
++#endif
+ #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+ 	dcache_disable();
+ #endif
 -- 
 2.49.0
 
