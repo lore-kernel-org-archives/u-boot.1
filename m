@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 952ADC3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 17:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59904C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 17:54:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA90081FEE;
-	Thu,  3 Apr 2025 19:43:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FCF182139;
+	Thu,  3 Apr 2025 19:54:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yb2A1p++";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i3MWF1vo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C771182006; Thu,  3 Apr 2025 19:43:18 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 9327482140; Thu,  3 Apr 2025 19:54:29 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7379181F69
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 19:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF22882006
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 19:54:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72c14138668so355609a34.2
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 10:43:16 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-736bfa487c3so1056093b3a.1
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 10:54:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743702195; x=1744306995; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6kxr+zspOLvWK3KNEUaA9z8wjL6XWUxF3ftjz1QN460=;
- b=Yb2A1p++4/wAihdzXlTPoy9lFA0NKzWaUt/p01ojclvN4nH6SI/IycUIsATfmSDGMf
- 9StGy7F+zpWaU4guA5Bg+3/DC6GeUvbH4cIi4jglIY0K14c1hyiw7JbtXZtBnLZaQhey
- xtZjlQGNnXXzHzFI+eWlQZpUOBtbdYMdzBMiU=
+ d=chromium.org; s=google; t=1743702864; x=1744307664; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=d4tfF39Df0uBS43SJ7ZzWXlRQ8gVUbzLvHUl4QS+ry4=;
+ b=i3MWF1vo2w3MkL+nUwqbVuyW7vEddU55HagiJtMStyQr3CeCFu/jEv8MLKMhq/Kl5V
+ v1OVdIkR79claUXZTwPt9VHwDpxg5aKptof67CBGuHeaBnuCmlzPGtnY69pBXmwrRihb
+ +qElvXANVRMdjhknNQxy7P67NQ9wwoFneXZoA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743702195; x=1744306995;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6kxr+zspOLvWK3KNEUaA9z8wjL6XWUxF3ftjz1QN460=;
- b=GWl3R/dFeztYgVYIA3240PJW9jRcVs6uf+/SwWGm2Q40rkXZdbNNW6dYmkNEDWZ7X3
- OL1yiFdHCVqVwQ71rI0x0FvV8C6WgWlqnqHkqJQnhD4pcxQxCKBZduov7yzmige3s0c5
- N+fPMqWmx8IJvyK23l5B2cNC0YzpLyAU/nGuePdj+UjxBdk60dwnDAqtlW6pnyszgGJ8
- onnW8c9vqyu/B1AU0sGBNt4vcr85tcvkXFOpSV8nqwukpaWN2vpAc7Lk4d/pn97mKTxu
- fSWKFov3uYi62n8w3P/pO1g0ZHBDTkizFbrZQiGwdfKG5BppX/wnhOfJgkgSbZQF3yKJ
- NHjQ==
-X-Gm-Message-State: AOJu0YxlwlTLWw5AW5YVyZJ7NiEM0X0Fke7BMd5rbK3GOcbdv3ZaESDE
- RYJOKOEpLIkw+RpNAjDh9dBsMZe1JmzKTH5hd0qzC0Cq+VP0YebkfTwZjfEcdsc=
-X-Gm-Gg: ASbGncvW+BalATZytKcO911pEQn0FP4zK8aie8zQYnA8wCzwRe0xUb7/q7KoUp8E7uU
- KxokWbXzQ33PhS8MIhLfEJYtMQbbBuGTi4XP41Y0qj2qYIwhqB7ZPc8KZvYG/HW2yKqrtIibnjp
- 3ivu2YrTTAlh73shubzFtP5CEz8ZTCuxFVZyyqTWjGz7tsqx7lqu/p/EMQY4zYA+S230UUEh8ga
- DBisF6nrC5UeLeQWlPlXhVhQpc77ihR3GuhLPer/YEfZrglJiTc4QMOi7/2e8jOFK1Bg195Carj
- ZwcUl6mpcawxMctfCmLddV8wuLWgfdaAuAkdvjGrUEvxDdJOVkcadpYp3IkPH8IyPJEspMasvfj
- FxCQ/GQ==
-X-Google-Smtp-Source: AGHT+IHUdQELvmg0/qFQ+GriygbZdQpLXLYah5v6ILy2l/K5HUWlhnkfaio4tzYlixIRoZDPSVyXLQ==
-X-Received: by 2002:a05:6830:3908:b0:727:423c:95ea with SMTP id
- 46e09a7af769-72e368495e4mr307501a34.19.1743702195080; 
- Thu, 03 Apr 2025 10:43:15 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc8463aafbsm342840fac.26.2025.04.03.10.43.13
+ d=1e100.net; s=20230601; t=1743702864; x=1744307664;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=d4tfF39Df0uBS43SJ7ZzWXlRQ8gVUbzLvHUl4QS+ry4=;
+ b=wW3lKqjfzjlofMfFwrQ03jsGvQhjJjaxDzkSzkcppJZ7kE7+JVvGIid59d9ePpJq+/
+ KJVY+RHva4E6yPhNeSTd0rlQm7d5+tlsxO3bMbZSledexE4/cBNr+ba8LATF0C37HKs0
+ xzYUf+tTKUBXB4wvGCQHuMYTMWq70TWD7HmLCPEqoGfHmTz4j8ex8AftYHjcp+a/msKs
+ 098VuxK0abYmxdVqcs1127TU3wJxCRdIWc4Hi+RfUMxpR+h2FbD9cZmzPZF/qSFK1mon
+ lpsd0OM0ZEC3r5fExJRm1n1HbyBHVAATd5PmtDtNd0r+yrxAi2YrpO+gIgX3EHX+USK1
+ HC0g==
+X-Gm-Message-State: AOJu0YwoxrjAUj7D+gaAErLypCa2qYlqL9qqckZ+w6MZyUpxYGH9dAT7
+ ScgmjMwkQ8WQzb+ghg3t0QU5NSLgtNqn1G+T3c46y76gygadxkGLyIZqi3RzrL3PS7I55FdZQxV
+ 3cA==
+X-Gm-Gg: ASbGncst9B9xYM/wt1Xh/0ePhyLPUpqa/Rcej/oGhH3KA7py8/SDIgO3NWETY0IeAIN
+ CX3TRfmmfHNT23PkRLpIRjOtYzdLcUc3ghXk0T3LLqCU9Z4t/EWDLUxSanvBD4MBuuue1NuM9G1
+ Hxp1aD6Gsh/XMcGus2vmcjJrGzi7nANrDZSwhoCpR6QC38wNS3dbJ1i0wjo/JzWKecLwQHUo693
+ MSj+uunek+6gl/yI7a2VPe/ks2REiF/en/z+vmaO45zQq2U4ImbJuE2Yf+pKKcFHjYQfgKxgsEn
+ HsW0wjZBH9rjb2Sjb3vFYLU3Bque5J0CtnuWSiPCNb4=
+X-Google-Smtp-Source: AGHT+IF8mtyvA1LRzwZ456DVGSrs5RkrjfSPSauIm5cgXA+4yqi/3F0CXE/P1r6lFw4PwCKeGzth5A==
+X-Received: by 2002:a05:6a21:1515:b0:1f5:6e00:14c4 with SMTP id
+ adf61e73a8af0-201047a581bmr399423637.42.1743702864122; 
+ Thu, 03 Apr 2025 10:54:24 -0700 (PDT)
+Received: from chromium.org ([202.144.206.254])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-739d9ea089csm1787036b3a.111.2025.04.03.10.54.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 10:43:14 -0700 (PDT)
-Date: Thu, 3 Apr 2025 11:43:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v5 38/46] boot: Consider non-bootable partitions
-Message-ID: <20250403174311.GL5495@bill-the-cat>
-References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-39-sjg@chromium.org>
- <20250402142851.GS5495@bill-the-cat>
- <CAFLszTjmrn0_idbmmS53dgbK45YsZHHNYN+38i5OhtrRBWHijg@mail.gmail.com>
+ Thu, 03 Apr 2025 10:54:20 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
+ =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
+ Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: [PATCH] fdt: Allow OF_HAS_PRIOR_STAGE to be disabled in defconfig
+Date: Fri,  4 Apr 2025 06:53:49 +1300
+Message-ID: <20250403175408.2211779-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GCAR7LcQ/XBrRPAp"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjmrn0_idbmmS53dgbK45YsZHHNYN+38i5OhtrRBWHijg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,109 +96,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+At present it is impossible to change the qemu_arm64 defconfig to
+obtain a devicetree from the U-Boot build.
 
---GCAR7LcQ/XBrRPAp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is necessary for FIT validation, for example, where the signature
+node must be compiled into U-Boot.
 
-On Thu, Apr 03, 2025 at 08:22:30AM +1300, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 3 Apr 2025 at 03:28, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sat, Mar 15, 2025 at 02:25:58PM +0000, Simon Glass wrote:
-> >
-> > > Any 'bootable' flag in a DOS partition causes boostd to only scan
-> > > bootable partitions for that media. This can mean that extlinux.conf
-> > > files on the root disk are missed.
-> > >
-> > > Put this logic behind a flag and update the documentation.
-> > >
-> > > For now, the flag is enabled, to preserve existing behaviour. Future
-> > > work may provide a command (or some other mechanism) to control this.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v4)
-> > >
-> > > Changes in v4:
-> > > - Rewrite the commit message
-> > > - Enable the flag by default
-> > >
-> > > Changes in v3:
-> > > - Add new patch to consider non-bootable partitions
-> > >
-> > >  boot/bootdev-uclass.c            | 4 +++-
-> > >  cmd/bootflow.c                   | 2 +-
-> > >  doc/develop/bootstd/overview.rst | 5 +++--
-> > >  include/bootflow.h               | 2 ++
-> > >  test/boot/bootdev.c              | 1 +
-> > >  test/boot/bootflow.c             | 5 +++--
-> > >  6 files changed, 13 insertions(+), 6 deletions(-)
-> >
-> > Having spent another 10 minutes just now trying to understand things,
-> > again:
-> > - The commit message, and the implementation are either in disagreement
-> >   or just too vague. Saying "to preserve existing behaviour" is unclear
-> >   about which behavior is being preserved, since we're setting the flag
-> >   to continue to only check bootable flagged partitions
-> >   (BOOTFLOWIF_ONLY_BOOTABLE). But then we would continue to miss
-> >   extlinux.conf files on root filesystems, which would seem to be the
-> >   bug that needed fixing?
->=20
-> How about 'to preserve the existing behaviour of bootstd which is to
-> ignore non-bootable partitions so long as there is at least one
-> bootable partition on the disk"  ?
+A proposed change to QEMU has been blocked for several years. As a
+workaround, the only option is to use QEMU's dumpdtb option, merge in
+the signature node manually and then disable OF_HAS_PRIOR_STAGE
 
-Yes, that's better. I've reworded the commit message with that.
+Unfortunately the only way to disable OF_HAS_PRIOR_STAGE at present is
+to hack the Kconfig. So update it to allow use from defconfig. This
+avoids needing to patch U-Boot to get this working.
 
-> > - It's still unclear if this makes bootstd match the exiting distro
-> >   script behavior or not, and from your other emails it sounded like you
-> >   were expecting someone else to dig around.
->=20
-> The distro scripts include the code below. My reading of it is that it
-> only considers bootable partitions, except that if there is none, then
-> it always scans partition 1.
->=20
-> "scan_dev_for_boot_part=3D"                                         \
-> "part list ${devtype} ${devnum} -bootable devplist; "     \
-> "env exists devplist || setenv devplist 1; "              \
-> "for distro_bootpart in ${devplist}; do "                 \
-> "if fstype ${devtype} "                           \
-> "${devnum}:${distro_bootpart} "   \
-> "bootfstype; then "               \
-> "part uuid ${devtype} "                   \
-> "${devnum}:${distro_bootpart} "   \
-> "distro_bootpart_uuid ; "         \
-> "run scan_dev_for_boot; "                 \
-> "fi; "                                            \
-> "done; "                                                  \
-> "setenv devplist\0"   \
-> \
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Link: https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+---
 
-OK, thanks, I agree with your reading of that as well.
+ dts/Kconfig | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
---=20
-Tom
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 2e88d210bb8..2fe4468d1a9 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -190,7 +190,7 @@ config OF_BOARD
+ 	  earlier stage should enable OF_HAS_PRIOR_STAGE.
+ 
+ config OF_HAS_PRIOR_STAGE
+-	bool
++	bool "Device tree comes from prior-stage firmware"
+ 	help
+ 	  Indicates that a prior stage of the firmware (before U-Boot proper)
+ 	  makes use of device tree and this board normally boots with that prior
+@@ -205,8 +205,13 @@ config OF_HAS_PRIOR_STAGE
+ 	  development purposes, but it is not recommended, and likely will not
+ 	  even work, for production systems.
+ 
+-	  Note: This option must be set in Kconfig and cannot be enabled or
+-	  disabled in the board's defconfig file.
++	  Note: This option can be updated in the board's defconfig file if
++	  needed. E.g. for QEMU to support FIT validation the devicetree must
++	  include a public key.
++
++	  See also this for context:
++
++	  https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.256484-1-sjg@chromium.org/#24481799
+ 
+ config OF_OMIT_DTB
+ 	bool "Omit the device tree output when building"
+-- 
+2.43.0
 
---GCAR7LcQ/XBrRPAp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfuyKsACgkQFHw5/5Y0
-tyyyBQwAutJRQsWZf14YmmDZbIvoZ2uxG0IH/InlpV48BErLd627E3QwLGCYwM7g
-mf29fNq2GSjL4mlW3GKmaW+/Dh18tKNrndfJy73rvmlt2jgfqE8BYIEhTtRPKKUj
-hNcJr38MhcUC0uKTJGxEfqpcBj5FmWK7KaQVuTNGIfeOo3T9lWdqTFAJZ7tGXhb7
-4rsssrRU96AIcIf2qOyDAyDjiAl4dceZXKL3VAqbi3JPv8ALNAnCADMnytyR38l3
-t0Yvkng4WQ1KKA2st3/sYUQmivazCzLPcczT1ASSTXklpbSaNW7IpnCvYHOkHz9U
-xmJ45o+0Ac8ncODQ7mXyRgBQb+tfkTc++MINbX5Cg3dsc8z7ljJRr7MEVuZnQ6Pi
-zcxCQGmCztduom5DCd0ASEurcSIBvUwhuaDJFCouop6viJxwCFWtvG0YDKqJnx2M
-d0Fq3CU7azNMHdW5IAsoYmguIuj5NCnQWrG3W5p/hFhEzQpsr8BBZhWtJRNUVHZ0
-E0znghlj
-=PTT9
------END PGP SIGNATURE-----
-
---GCAR7LcQ/XBrRPAp--
