@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1AFC36014
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9B5C36014
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 22:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30C8D828E1;
-	Thu,  3 Apr 2025 23:59:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 80FED82952;
+	Thu,  3 Apr 2025 23:59:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CojRa+f0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qO+JDYgU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F217827C7; Thu,  3 Apr 2025 23:59:40 +0200 (CEST)
+ id B2DBF82932; Thu,  3 Apr 2025 23:59:43 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFCCE82944
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 23:59:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC48F828B3
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 23:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 533LxYro3659598
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 533Lxa4P3659618
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 3 Apr 2025 16:59:34 -0500
+ Thu, 3 Apr 2025 16:59:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1743717574;
- bh=lRGz0XbhftK+RuwGixHoUQlLtQAqh3/VKTzR59mACHU=;
+ s=ti-com-17Q1; t=1743717576;
+ bh=eZLrrTI4m/O/uhzLhYF+7FU23yOxtCaBuFgGQSR22wE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=CojRa+f0UBmo9SEWeo53758AZkG4oahhXtxU4Pfh3jqSkSaPyYdFri442UlP5jJKU
- tseoSAap+zhKifRGh4OQyqbnQGfsNPpcqvqlOjBoPLCVF3xCQNFD1dxul5GqesVwaP
- VC0DosLZR/ca4M+jcHP3JDFG8Wbi5YQNv/z92lOo=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 533LxYXg006846
+ b=qO+JDYgUfKgsZwHEIcWBeab6zzlH0cX/2IxZUcTLOmvDsSNeZfrgLyd/+0/OGByac
+ 7pMgcfEbQVuVoFI3k+a+yPyDREyjU9ZNo73vatVAmB0O0lJqgDwFU5VIKkY8i1I947
+ IkJuh4KKdePnfuOrfSJjTRv7RqER4CseWERiiOl8=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 533LxaD4057906
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 3 Apr 2025 16:59:34 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 3 Apr 2025 16:59:36 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 3
- Apr 2025 16:59:34 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2025 16:59:35 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 3 Apr 2025 16:59:34 -0500
+ Frontend Transport; Thu, 3 Apr 2025 16:59:35 -0500
 Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 533LxXAA089702;
- Thu, 3 Apr 2025 16:59:34 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 533LxYEt115429;
+ Thu, 3 Apr 2025 16:59:35 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>
-Subject: [PATCH v3 07/10] config: add falcon boot config fragment for am62x
-Date: Fri, 4 Apr 2025 03:29:04 +0530
-Message-ID: <20250403215910.1292922-8-anshuld@ti.com>
+Subject: [PATCH v3 08/10] board: ti: add default dtb for am62[axp] in falcon
+ mode
+Date: Fri, 4 Apr 2025 03:29:05 +0530
+Message-ID: <20250403215910.1292922-9-anshuld@ti.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250403215910.1292922-1-anshuld@ti.com>
 References: <20250403215910.1292922-1-anshuld@ti.com>
@@ -80,97 +81,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This fragment enables falcon boot for the am62x, 62a and 62p.
+The SPL_FS_LOAD_ARGS_NAME config is used for the arguments to the kernel
+(dtb in our case) in falcon boot.
 
-To have enough stack and heap space for loading kernel image as FIT, the
-memory map was modified as shown below, the PRELOADED_BL33_BASE in ATF
-has to also be updated to 0x80200000 since the kernel requires to be
-loaded at 2MiB aligned address.
-
-Memory Map (changed addresses marked with *):
-
-0x80000000 +-------------------------------+ Start of DDR
-  512KiB   |   ATF reserved memory space   | CONFIG_K3_ATF_LOAD_ADDR
-0x80080000 +-------------------------------+
-  1.5MiB   |            Unused             |
-0x80200000 +-------------------------------+ PRELOADED_BL33_BASE* in ATF
-           |                               | CONFIG_SYS_LOAD_ADDR* (load
-   30MiB   |   Kernel + initramfs Image    | address for kernel)
-           |                               |
-0x82000000 +-------------------------------+ K3_HW_CONFIG_BASE in ATF
-           |                               | CONFIG_SPL_PAYLOAD_ARGS_ADDR*
-    1MiB   |          Kernel DTB           |
-           |                               |
-0x82100000 +-------------------------------+ CONFIG_SPL_LOAD_FIT_ADDRESS*
-           |                               |
-   56MiB   |Initial Download Region for FIT|
-           |                               |
-0x85900000 +-------------------------------+
-           |                               |
-           |  R5 U-Boot SPL Stack + Heap   |
-   55MiB   |       (size defined by        |
-           | SPL_STACK_R_MALLOC_SIMPLE_LEN)|
-           |                               |
-0x89000000 +-------------------------------+ CONFIG_SPL_STACK_R_ADDR*
-  344MiB   |       Device Manager (DM)     |
-0x9e800000 +-------------------------------+ BL32_BASE in ATF
-   24MiB   |             OPTEE             |
-0xa0000000 +-------------------------------+ End of DDR (512MiB)
+Setting it in board specific Kconfig allows us to reuse the same config
+fragment 'am62x_r5_falcon.config' for all 3 platforms to enable falcon
+boot.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- configs/am62x_r5_falcon.config | 42 ++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 configs/am62x_r5_falcon.config
+ board/ti/am62ax/Kconfig | 3 +++
+ board/ti/am62px/Kconfig | 3 +++
+ board/ti/am62x/Kconfig  | 3 +++
+ 3 files changed, 9 insertions(+)
 
-diff --git a/configs/am62x_r5_falcon.config b/configs/am62x_r5_falcon.config
-new file mode 100644
-index 00000000000..55ae2758c2d
---- /dev/null
-+++ b/configs/am62x_r5_falcon.config
-@@ -0,0 +1,42 @@
-+# Enable falcon mode
-+CONFIG_SPL_OS_BOOT=y
+diff --git a/board/ti/am62ax/Kconfig b/board/ti/am62ax/Kconfig
+index 51e7b3e0eab..187e9e5c9cd 100644
+--- a/board/ti/am62ax/Kconfig
++++ b/board/ti/am62ax/Kconfig
+@@ -23,4 +23,7 @@ if TARGET_AM62A7_R5_EVM
+ config SPL_LDSCRIPT
+ 	default "arch/arm/mach-omap2/u-boot-spl.lds"
+ 
++config SPL_FS_LOAD_ARGS_NAME
++	default "boot/dtb/ti/k3-am62a7-sk.dtb"
 +
-+# We use envs for setting bootargs and optionally for `falcon_(image|args)_file`
-+CONFIG_SPL_ENV_SUPPORT=y
+ endif
+diff --git a/board/ti/am62px/Kconfig b/board/ti/am62px/Kconfig
+index 9d95ffd9b29..5f7252d7b19 100644
+--- a/board/ti/am62px/Kconfig
++++ b/board/ti/am62px/Kconfig
+@@ -23,4 +23,7 @@ if TARGET_AM62P5_R5_EVM
+ config SPL_LDSCRIPT
+ 	default "arch/arm/mach-omap2/u-boot-spl.lds"
+ 
++config SPL_FS_LOAD_ARGS_NAME
++	default "boot/dtb/ti/k3-am62p5-sk.dtb"
 +
-+# Perform FDT fixups from SPL
-+CONFIG_OF_SYSTEM_SETUP=y
+ endif
+diff --git a/board/ti/am62x/Kconfig b/board/ti/am62x/Kconfig
+index 610dacfdc08..1564913096c 100644
+--- a/board/ti/am62x/Kconfig
++++ b/board/ti/am62x/Kconfig
+@@ -32,6 +32,9 @@ config SYS_CONFIG_NAME
+ config SPL_LDSCRIPT
+ 	default "arch/arm/mach-omap2/u-boot-spl.lds"
+ 
++config SPL_FS_LOAD_ARGS_NAME
++	default "boot/dtb/ti/k3-am625-sk.dtb"
 +
-+# Enabling this causes issues with EMMC FS boot,
-+# When enabled the SPL tries to detect FS on boot[01] hw partition which fails
-+# since we need the raw tiboot3.bin there for the board to boot instead
-+CONFIG_SUPPORT_EMMC_BOOT=n
-+
-+# Used as the 2MiB aligned load address for kernel
-+CONFIG_SYS_LOAD_ADDR=0x80200000
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x82100000
-+CONFIG_SPL_STACK_R_ADDR=0x89000000
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x3700000
-+CONFIG_SYS_BOOTM_LEN=0x1e00000
-+
-+# We use the rootfs (i.e partition 2) for booting which is ext4 not FAT
-+CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
-+CONFIG_SPL_FS_EXT4=y
-+CONFIG_SPL_FS_FAT=n
-+
-+# Loading tispl_falcon instead of tispl which has fdt and A53 spl saves time
-+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="boot/tispl_falcon.bin"
-+CONFIG_SPL_FS_LOAD_KERNEL_NAME="boot/Image"
-+
-+# Disabled to save space on the spl
-+CONFIG_TI_K3_NAVSS_UDMA=n
-+
-+# During SPI boot, kernel and args are loaded from the eMMC or SD and not SPI,
-+# therefore we don't actually make use of these config values.
-+CONFIG_SYS_SPI_KERNEL_OFFS=0
-+CONFIG_SYS_SPI_ARGS_OFFS=0
-+CONFIG_SYS_SPI_ARGS_SIZE=0
-+
-+# Allow R5 to load the 64-bit linux kernel image
-+CONFIG_SPL_HAS_BOOTI=y
-+CONFIG_SPL_HAS_BOOTZ=n
+ source "board/ti/common/Kconfig"
+ 
+ endif
 -- 
 2.49.0
 
