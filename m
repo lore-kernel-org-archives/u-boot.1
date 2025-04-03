@@ -4,106 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E182C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 21:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB505C3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 21:56:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2B01826B2;
-	Thu,  3 Apr 2025 23:56:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D20382385;
+	Thu,  3 Apr 2025 23:56:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ipxe.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oxVnfWAc";
+	dkim=pass (2048-bit key; unprotected) header.d=ipxe.org header.i=@ipxe.org header.b="x5ZWkGqk";
+	dkim=pass (1024-bit key; unprotected) header.d=amazonses.com header.i=@amazonses.com header.b="fQ7ryahS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE0E68215D; Thu,  3 Apr 2025 23:56:25 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 08630826B2; Thu,  3 Apr 2025 23:56:55 +0200 (CEST)
+Received: from a7-20.smtp-out.eu-west-1.amazonses.com
+ (a7-20.smtp-out.eu-west-1.amazonses.com [54.240.7.20])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6295A82898
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 23:56:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 467588215D
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 23:56:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-72bbd3a3928so888253a34.2
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 14:56:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743717382; x=1744322182; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OyMYqAh6iLB/NmN4Tln9k5U86cFgbZcYsdy57xa2fRE=;
- b=oxVnfWAc/3Lj0r6pggS2mXNzGulvZ+sYTGqsAYaOglE2n38uLRGRSPGfPtaoOQ0KPr
- dZsweITjQ8+mN1UlZeZgPp31VMyFvnmCbTWOUY+ako+Bu27mV6P2uG3f6DKvcEiablVj
- AD6Jw3vGSZULkC/PQDxhbdeyNr2CR4Favd8Uw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743717382; x=1744322182;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OyMYqAh6iLB/NmN4Tln9k5U86cFgbZcYsdy57xa2fRE=;
- b=XibmauVh0xIoKItnwi4GLki5rgcE/2sqLNQNBG4/C0LCqayjgoPmepCSBdRU7HPOv0
- 0GRoT2V3UHXLuX7PY2CU3NFlmjzeZ46HsdsMcqiL6lSaiD5+UkWr6lnnocvkEWULnOFQ
- /LzHe2txKKEhsn1mD4LTh8VoaFj/naZ/gSVufJOP5KBBDIqBHbDRMuitIByxt+D33Ss1
- P1ebuVx4JC6vbEt/AYyPpM9GCY8PMLkbrfzYpjNV/KY8koBrUEzhbHDchbEGxg4omO9I
- bLAPNxZdswcPvO6uOFQNaIv3GhRrnkVirwEHxgfw+ePYgl/LcbuOwa2WQ0EdhYRHEX/D
- 86Gg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgayUgpwY22IS/7m0AJgV13QjKO4Wai0B7X3g27yM5yYLBr/QU8QAvYvSqSF1G0fAymAUkyWE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6Oje3kb0+X1DpLX1eb3cyJ68iqT2EeTIy0boyQYtgqBd1Ntl6
- kMrpWLyPh3yQuRrP4sEbIIiOnwSQlEdme5AaJDyWEfc2Wa7pupwMG6lO2EED2UWPCryGI70QHGR
- 9RJc=
-X-Gm-Gg: ASbGncvni0RyZdIfJds1M3NQ927tOX9uR/EOBXto9fch4zBsX1QxFQqDy1qFouLE9TI
- GQrlmfV+1Osa7M8vHGf7aZLVGd+/bdzVVsLwHJzyd21m6GNxRD6YYw3q7BnGqcB/+7uNk4wILN1
- iiX/a9r0N0EYSTOhvRSN3uUWw5zgTMnLlNMK3rHKBZQbyAOlxUFuj0riYX+dm2fl/rLeVQL2aXi
- f874AX8GAQMaidwp/Q9MGQ9emyWX/v7M2GZ4FQg/mm3RIIzSebcQW23y3DeXhsU3rL/zEi/f+I5
- YL0ZdiIljspmZog4OkmXdOThhLOqoyMh4bX9FnUF9nz+dfxMcqrUtokxVx2TAIEWK6EPuANurA1
- e2AIhFw==
-X-Google-Smtp-Source: AGHT+IH+Va0v3F70LT2ZnMg/vJ1FU3HdY6kH/jyz7pU1ThNvVMNF+xOBeUf5m8Gmfgmxj/96fmBOgA==
-X-Received: by 2002:a05:6830:61c3:b0:72b:9014:f5cc with SMTP id
- 46e09a7af769-72e37fd1228mr294199a34.25.1743717382037; 
- Thu, 03 Apr 2025 14:56:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e3059a28esm387085a34.43.2025.04.03.14.56.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 14:56:21 -0700 (PDT)
-Date: Thu, 3 Apr 2025 15:56:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v5 00/29] pxe: Precursor series for supporting read_all()
- in extlinux / PXE
-Message-ID: <20250403215618.GP5495@bill-the-cat>
-References: <20250306002533.2380866-1-sjg@chromium.org>
- <174234008117.1788726.14383009154862416750.b4-ty@konsulko.com>
- <10a57d25-d484-4903-8f25-e373c451bc21@kwiboo.se>
+ dmarc=none (p=none dis=none) header.from=ipxe.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=01020195fda82a62-a0323221-c936-4b77-9567-396ab02d3170-000000@eu-west-1.amazonses.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=fvumhlyyi2m7uxyrun4agiymlewwagjt; d=ipxe.org; t=1743717411;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=UbeITU13V40h+cvZSeoZ6JJXLi/ujO2H8xWfepcFB48=;
+ b=x5ZWkGqkDYrxjQwhKbQBJehrXPQr9QMskxgE5/uAmPaARQ4qyQKpMv9MuAqLyAAZ
+ avQyfNYr639v1EQmXg1GsYamWFG2lEJ3UCKMWKq3ziEN4n2k5vv2kDUiDtKr5kgQdsm
+ Y1+hjfWhnJqwOSSQAEzd8zxWROk8h4jsq/DcI96exC1qkHhuEa5cUbbhTnD9roHzKn6
+ cy3uzu4M46hCC+6c2t3NbR6nCGNSDycrRhGIxpsb/Y1F2c5S3m4ep2vQgL+n+GjsnTB
+ mnSS8AP9vllfaxJwfTkD0FKSVp9FaUocFBf1NJFNIL8Yi1tVgAyaHQVgwA7s7tMd9jo
+ eLpnZMVjqg==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=ihchhvubuqgjsxyuhssfvqohv7z3u4hn; d=amazonses.com; t=1743717411;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Feedback-ID;
+ bh=UbeITU13V40h+cvZSeoZ6JJXLi/ujO2H8xWfepcFB48=;
+ b=fQ7ryahSWdaCjlxopB7T2zaxMOkzoql5V9vhLDuDsQvdipFtbJSxualz7/58vo7W
+ OtUDemWTP7dRO4M7h0ml/x2Rqfm8CkS5OFQ325yN7Vy53XOyD/ID+9mi3/Pp8tlbIzj
+ 9L8CrttpIBo9OvO4zrsMD76/3qCAo9m9m88UlCCk=
+Message-ID: <01020195fda82a62-a0323221-c936-4b77-9567-396ab02d3170-000000@eu-west-1.amazonses.com>
+Date: Thu, 3 Apr 2025 21:56:51 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="REXQk1ZQ1vjePzm9"
-Content-Disposition: inline
-In-Reply-To: <10a57d25-d484-4903-8f25-e373c451bc21@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?Q?Re=3A_U-Boot_interferes_with_initrd_binary_=E2=80=94_Reve?=
+ =?UTF-8?Q?rt_=22efi=3A_Correct_smbios-table_installation=22_=3F?=
+To: =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>, 
+ Simon Glass <sjg@chromium.org>, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+References: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
+ <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
+ <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
+ <01020195f0df59d3-851c6ec3-9a49-4fab-b878-e11c6018b827-000000@eu-west-1.amazonses.com>
+ <CAFLszTiRu3JtUw-z3LeHO9PKVZRuBW3L-WXm5vO0u6++-OdwAw@mail.gmail.com>
+ <AED05ACC-AF9D-4A2E-90E3-7BDA597B2DB0@kohlschutter.com>
+ <CAFLszTibROtKsE+LZ3cMXvj5MLBf=-6TP98UwxhPfh5eqQK+_g@mail.gmail.com>
+ <68D651AB-8E9E-48B4-A062-9E688025F035@kohlschutter.com>
+Content-Language: en-US
+From: Michael Brown <mcb30@ipxe.org>
+Autocrypt: addr=mcb30@ipxe.org; keydata=
+ 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
+In-Reply-To: <68D651AB-8E9E-48B4-A062-9E688025F035@kohlschutter.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Feedback-ID: ::1.eu-west-1.fspj4M/5bzJ9NLRzJP0PaxRwxrpZqiDQJ1IF94CF2TA=:AmazonSES
+X-SES-Outgoing: 2025.04.03-54.240.7.20
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,106 +127,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 03/04/2025 20:18, Christian Kohlschütter wrote:
+> +Tom Rini (actually adding Tom to the conversation)
+>> 3. When the device is removed, the struct is freed, meaning that a
+>> future malloc() can use that same space.
+> 
+> Yes, that sounds plausible. How can such allocations be prevented?
+> 
+> I assume U-Boot's malloc does not know anything about iPXE's or Linux's allocation, and vice versa?
 
---REXQk1ZQ1vjePzm9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+iPXE communicates about memory allocation with U-Boot via the EFI memory 
+allocation API (AllocatePool()/FreePool() and 
+AllocatePages()/FreePages()).  So U-Boot has all the information it 
+needs to avoid clashing with iPXE, but I have no idea if U-Boot's 
+malloc() uses the same memory map as U-Boot's implementation of 
+AllocatePool() et al.
 
-On Thu, Apr 03, 2025 at 10:57:24PM +0200, Jonas Karlman wrote:
-> Hi Tom and Simon,
->=20
-> On 2025-03-19 00:21, Tom Rini wrote:
-> > On Wed, 05 Mar 2025 17:24:54 -0700, Simon Glass wrote:
-> >=20
-> >> This series includes some patches related to allowing read_all() to be
-> >> used with the extlinux / PXE bootmeths.
-> >>
-> >> These patches were split out from the stb4 series, since it will need =
-to
-> >> have additional patches for LWIP, to avoid breaking PXE booting when
-> >> LWIP is used.
-> >>
-> >> [...]
-> >=20
-> > Applied to u-boot/next, thanks!
->=20
-> This series broke booting a compressed arm64 defconfig Linux kernel
-> (without module loading) due to changes in decompression buffer length.
->=20
-> My arm64 defconfig kernel (Image.gz) is ~24 MiB compressed and ~85 MiB
-> uncompressed.
->=20
-> Before this series the decompression buffer was 10x the kernel_comp_size
-> and now it is instead limited by the SYS_BOOTM_LEN Kconfig symbol.
->=20
-> A broken boot using current next branch:
->=20
->   Retrieving file: /Image.gz
->   Retrieving file: /initramfs.cpio.gz
->   append: earlycon
->   cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:=
-394d3c' conf_fdt '3df16350' images 000000003ffe53a0
->      kernel data at 0x02080000, len =3D 0x00000000 (0)
->   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
->   find_other type 2 os 5
->   ## Flattened Device Tree blob at 3df16350
->      Booting using the fdt blob at 0x3df16350
->   Working FDT set to 3df16350
->   load_os load 8000000 image_start 2080000 image_len 2000000
->      Uncompressing Kernel Image to 8000000
->   Error: inflate() returned -5
->   Image too large: increase CONFIG_SYS_BOOTM_LEN
->   Must RESET board to recover
->   Resetting the board...
->=20
-> Changing SYS_BOOTM_LEN from default 64 MiB to 128 MiB fixed the boot:
->=20
->   Retrieving file: /Image.gz
->   Retrieving file: /initramfs.cpio.gz
->   append: earlycon
->   cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:=
-394d3c' conf_fdt '3df16430' images 000000003ffe5480
->      kernel data at 0x02080000, len =3D 0x00000000 (0)
->   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
->   find_other type 2 os 5
->   ## Flattened Device Tree blob at 3df16430
->      Booting using the fdt blob at 0x3df16430
->   Working FDT set to 3df16430
->   load_os load 8000000 image_start 2080000 image_len 2000000
->      Uncompressing Kernel Image to 8000000
->      kernel loaded at 0x08000000, end =3D 0x0d3b5a00
->      Loading Ramdisk to 3cb51000, end 3cee5d3c ... OK
->      Loading Device Tree to 000000003cb3f000, end 000000003cb509df ... OK
->   Working FDT set to 3cb3f000
->=20
->   Starting kernel ...
->=20
-> Do we need to increase the default SYS_BOOTM_LEN for ARM64 now?
+>> 4. DMA traffic could then write over the malloc() region
+>>
+>> I'm not seeing where the Ethernet device's stop() is called. The
+>> dwmac_meson8b driver does not have a remove() method, so presumably
+>> DMA is still running after the device is removed. Probably the correct
+>> fix would be to add a remove() method to that driver.
+> 
+> Right. Of course this means that there's still a chance that some future driver would again fail to do this.
+> How can we prevent this? Can some removal hook be added automatically upon registration?
 
-Ugh. I thought the decompression buffer, which we would be just lmb'ing,
-was some multiple of the compressed image. Can you please bisect down to
-which commit in the series broke this?
+If the dwmac_meson8b driver leaves the hardware in a state where "DMA is 
+still running after the device is removed", then that is unambiguously a 
+bug that needs to be fixed.
 
---=20
-Tom
+iPXE's internal (and unrelated) network device API avoids this class of 
+problem by having the network device removal path automatically ensure 
+that the network interface is closed:
 
---REXQk1ZQ1vjePzm9
-Content-Type: application/pgp-signature; name="signature.asc"
+https://github.com/ipxe/ipxe/blob/7e64e9b6703e6dd363c063d545a5fe63bbc70011/src/net/netdevice.c#L945-L946
 
------BEGIN PGP SIGNATURE-----
+There's no hard guarantee that a closed device is quiescent for DMA, but 
+it happens to be true for most drivers that I've written over the years.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfvBAIACgkQFHw5/5Y0
-tyyLkQwAqjz3vuiW85pdA7eRKIMpV4bIvr2vNhS9rOFQx2vxDFKvsfiYXSCJEvU4
-/T/OA3pCbWfrTDIhDvlD0tzhJJbluX0e+pr+e2R1SbHdkhE8F0vMpVHSqLWwgp/G
-isVaOrWqumTufnI3HXnJqRzDp0I2lgbAfx4y4hSnaQQN+Z5j8KfhuZ/afiDZOxjQ
-E5Nqk9MZmttJehVaR+hbGxp0hP466JX4fTX7hMAR1rrK6tTYnFXBDsGiYI6YbFcA
-8WtsF7iuEQC7Wmq/T6rIj9HPKu+2j32xWar5Jq09jIWqMynioybYoq9ZEewfqv6K
-0VKyfq4TLBE+IiucrmF7pyNzvR7I1wEHqxSWd5uHrk5OloaqTS2WHYXx/I8YywGU
-5GDUmltYEjiJa+iAzCtX7zGPZ+/ZpOcv9nhjtxunHZ8rGud0Tqaj3JeAVOvUqg+U
-dUho/6EPlqyNlIuHQogP5c//pC1Na9JJwIp4G9ZkAmGybfLp0bX2aDHPg5q0k9Bm
-Q5jrn2cr
-=WfSi
------END PGP SIGNATURE-----
+Thanks,
 
---REXQk1ZQ1vjePzm9--
+Michael
+
