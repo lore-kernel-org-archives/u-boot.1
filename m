@@ -4,90 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27343C36018
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 00:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D203C36018
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 00:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52878810E8;
-	Thu,  3 Apr 2025 02:26:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BADB9810E8;
+	Thu,  3 Apr 2025 02:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="norS54+7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nEgNwLZw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12E081DE3; Thu,  3 Apr 2025 02:26:50 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 56B2E81DE3; Thu,  3 Apr 2025 02:28:01 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A2F08035B
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 02:26:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C40448035B
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 02:27:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-5fc6cd89f85so202795eaf.1
- for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 17:26:48 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-72c173211feso139034a34.1
+ for <u-boot@lists.denx.de>; Wed, 02 Apr 2025 17:27:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743640007; x=1744244807; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743640077; x=1744244877; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=paANgYbRnswfIwjtHjtF67SJ52sec5YAE2TSMQXrDOU=;
- b=norS54+7toBYaIjTGE8UvAXRUQb5IsUxkeFXVIoA/zd6MfmUNBuPNpAhAiE3QQc30u
- G8x4gefKkHK2DETE8T6/2JYUGYVqqhFw5586ZBpM1eemFVhWDtOVbYyL+89dda3UsDmj
- HxJIPAvKSTEzTBJ7wcreVgD+weYtch3kgZKxU=
+ bh=lOQoo8wA372IL7qKotTqCK31aevlT97+uu2avhP6eAA=;
+ b=nEgNwLZwPSFiB6nnFBxrRog6nps9gwkkU2RDWDVAnYztlX+QAun0OgIKpz9d5lXpBt
+ vNQzhvlxsXU04ctPXPDreP3G5jIL+tvDvSIEaa/dTUXzl6JOLJXViRdombHEaVPGQHuL
+ lv/rIJepC1EXz6F1PgHvDeeK1OlnbXkfkUk44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743640007; x=1744244807;
+ d=1e100.net; s=20230601; t=1743640077; x=1744244877;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=paANgYbRnswfIwjtHjtF67SJ52sec5YAE2TSMQXrDOU=;
- b=R99G2Ja7hwVCdjj5eBrZ/GrdgP0KbZH5rbF3FzWv/rttMXeqyYdPqPe6/l4m5ww+Hx
- GR68qD2iVNa0f+pdQdhfAzaHUuYp2ARWHj+uWYVSeV1+Zj8i9e5bG3CCP9tPhClvgi7y
- jQnRaRoqEvTdMFF8L8kzWBmCloQsoYxzNgxGhKsjKGD478bbCCiNIzCA/2VrJ/3K9rfS
- BMx4bGwytThyYaFo1f7YoUM/sH28AC22pM1wDnj+1QtBvtx/JhKNSYLSgckEfJ5VduYP
- cwa7W9ehvxyg9E3pL52UkKzcvwvO5aJfj5ktO/3JxQYfO31tb8bNvPikrk3yrcMy7psw
- UbcQ==
-X-Gm-Message-State: AOJu0Yys7OKiEJHAnnF5A7i71S2YefQWqBuVm8tbm2jKo5cOdvVzxmw6
- 73UlTQhLmiN4A/6TMc8z4IwE3ukpsDUl9OluhO2wtfhsEZsri6ju9uOyzUMx4CI=
-X-Gm-Gg: ASbGncu0DJXNX8fVkc4W6b24ACpeuF2SmCAY2KhScQNXE2RuJzIYYGiGbSCmm+ImsCK
- Ri0kx3xc5N54lkEn9EWCv3QtNUyCWvval80gq9wtwBGpP1xJtZBAeC096xIGcNML/1GEoiTqPBB
- BsF5fxDf4jmOn5PCJlCwYkR7jVtqXwG3w4ZgJdXrR1aIfOyBZU7onN6wEHeZdGu7PWtheHAzYmU
- h7nmov/sDmwSiMmpTuAayGNAKbTfeyrpYiiu1P366SgrmdSpnTDLB8A6VkDb3duJAVRUSF0vY0h
- 9M0UzGaHe7BbMV7yZ2fdkLb3T8bCNQEi4N5kODPUZ+p+RHfaweb9FxhbxzDtG0FtOH2ujmgc3NR
- YbTrwdA==
-X-Google-Smtp-Source: AGHT+IFfLXPHAYJ6Bq2r65fRnFmrlIKRNxgmUlQeyD15GExG4axk7zR+IJfHIoRzZsEnKcW4JCn7pA==
-X-Received: by 2002:a05:6870:b149:b0:2c2:561c:47e3 with SMTP id
- 586e51a60fabf-2cbcf56480emr10847262fac.21.1743640006944; 
- Wed, 02 Apr 2025 17:26:46 -0700 (PDT)
+ bh=lOQoo8wA372IL7qKotTqCK31aevlT97+uu2avhP6eAA=;
+ b=aEALANn2SMwAwv8by2FF1urRVUqjMbg+rO7RVFUBUIIxwBrFOHSCgCrdS87RUCKZ5I
+ nrHT50ESD/SJ6hlAdCrfQGV21EPs51gEPNHvZYTyap+5XL7LP0PrkGNQgbZnPcne0XaS
+ 9DCEVl9c74DwZPBac5Dc/OSWhovBOMFMMSrdZUdjh6GRQivUNJv3yffB8OpshAlzqXG+
+ Fzf7+kTxn/zBPscClQYSavsXwyA8zZbwXHorVlUwWapfsE6zLNgdnxEevHRdNmVRxn0R
+ FOeD4HEy/jFjzEuHLSA3+GxITFIdP9ny4rAFgHeVi3+4unXWlmiE9cExVC08ylg3PxVb
+ qONA==
+X-Gm-Message-State: AOJu0YxgAiwfCUeEnnRwqOpk5KmdagQDJT5+Tx0IXVtEsR7UW/MDDY+0
+ zWXMKDQch/MLoGyD3pd6a0CC8SeDOIugD6qza68R3Q9U2577zm39sS798miJFEA=
+X-Gm-Gg: ASbGncsFg7976KqFlhUVIOzBmkht91OoAPaz/gNznGFPnk6SFNvd4YH6xmQFd84ilNA
+ 8qF++RQFNSY6oDFpRlFEYtxBDePbdwuyZl6yuvNX+Oe8DQQPcuModHqMXDO9831F7Rx8hJRTSgZ
+ fV2gaMNtD+vhBIIkbAclc9aIrFy+7CJ1SITDIVOxY/fmOzpsrr1k4pwOuVy3184vtEbQnFR8MB+
+ /FrzKH597i4ZbLxzjX8GKILEYZQ1U7Cmpn+Ij0vu632JAejKJJ4kiLA8ImhWtZmgaAtatVhyP0U
+ dfcadDed8b8jDzZi3MN3mwabyYHEQuxKlTfrnceMUsXEPaYIEz+IPctRJEJW26hsu1w7iOrigex
+ dUXDSwQ==
+X-Google-Smtp-Source: AGHT+IGLZ6aWJ6erm3zvqMDu/+skFUSy+/cmHXLX9GvZzM4d17ryZFOYSyOSmEC/9GdfemWnrKJD8Q==
+X-Received: by 2002:a05:6830:6992:b0:72b:9e3b:82bc with SMTP id
+ 46e09a7af769-72e2ee7507amr511729a34.11.1743640077431; 
+ Wed, 02 Apr 2025 17:27:57 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc84bc0455sm41041fac.41.2025.04.02.17.26.45
+ 46e09a7af769-72e30500de7sm36802a34.8.2025.04.02.17.27.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Apr 2025 17:26:46 -0700 (PDT)
-Date: Wed, 2 Apr 2025 18:26:43 -0600
+ Wed, 02 Apr 2025 17:27:56 -0700 (PDT)
+Date: Wed, 2 Apr 2025 18:27:54 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maximilian Brune <maximilian.brune@9elements.com>
-Subject: Re: [PATCH v5 40/46] boot: Support IO UARTs for earlycon and console
-Message-ID: <20250403002643.GG5495@bill-the-cat>
-References: <20250315142643.2600605-1-sjg@chromium.org>
- <20250315142643.2600605-41-sjg@chromium.org>
- <20250402142858.GT5495@bill-the-cat>
- <CAFLszTiCgq6XqK7mVY9YWD6bjod3bWPtp_s2k7_WVgn8gVf5QQ@mail.gmail.com>
- <20250402195033.GB5495@bill-the-cat>
- <20250402195656.GC5495@bill-the-cat>
- <CAFLszTjPi5=ro_4n8oF+ZX_OtzvKxWZvz=ipmXCnEhysVZb9-w@mail.gmail.com>
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 00/13] video: Enhancements related to truetype and console
+Message-ID: <20250403002754.GH5495@bill-the-cat>
+References: <20250401172948.1236000-1-sjg@chromium.org>
+ <20250401214113.GP5495@bill-the-cat>
+ <CAFLszTjJuY9pQDerNuFcmkRuZbJU+EfPSBTrDyhjFMZg+usPnA@mail.gmail.com>
+ <20250402150024.GU5495@bill-the-cat>
+ <CAFLszTh-N2PSKPV_OHa63mEi1ar6Y9+p+A4UTfTbf329wOiN9w@mail.gmail.com>
+ <20250402211100.GD5495@bill-the-cat>
+ <CAFLszThRQi2o5g5S+=eciOS8+XC8TV9AyBpYf9LQKmH-2kkmvw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HK7QLWroS+jAx2sz"
+ protocol="application/pgp-signature"; boundary="9HXG6LatkBcLBTQx"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjPi5=ro_4n8oF+ZX_OtzvKxWZvz=ipmXCnEhysVZb9-w@mail.gmail.com>
+In-Reply-To: <CAFLszThRQi2o5g5S+=eciOS8+XC8TV9AyBpYf9LQKmH-2kkmvw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,131 +116,85 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---HK7QLWroS+jAx2sz
+--9HXG6LatkBcLBTQx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 03, 2025 at 12:54:42PM +1300, Simon Glass wrote:
+On Thu, Apr 03, 2025 at 12:54:55PM +1300, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 3 Apr 2025 at 08:57, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 3 Apr 2025 at 10:11, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Wed, Apr 02, 2025 at 01:50:33PM -0600, Tom Rini wrote:
-> > > On Thu, Apr 03, 2025 at 08:22:44AM +1300, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 3 Apr 2025 at 03:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sat, Mar 15, 2025 at 02:26:00PM +0000, Simon Glass wrote:
-> > > > > > Update the string to take account of UARTs which are connected =
-on I/O
-> > > > > > ports, as on x86.
-> > > > > >
-> > > > > > Fix a typo in an error message in the same command, while we ar=
-e here.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v3)
-> > > > > >
-> > > > > > Changes in v3:
-> > > > > > - Add new patch to support IO UARTs for earlycon and console
-> > > > > >
-> > > > > >  boot/bootflow.c | 7 ++++---
-> > > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
-> > > > > >
-> > > > > > diff --git a/boot/bootflow.c b/boot/bootflow.c
-> > > > > > index 58a1afa7a75..4054a966af8 100644
-> > > > > > --- a/boot/bootflow.c
-> > > > > > +++ b/boot/bootflow.c
-> > > > > > @@ -942,8 +942,9 @@ int bootflow_cmdline_auto(struct bootflow *=
-bflow, const char *arg)
-> > > > > >       *buf =3D '\0';
-> > > > > >       if (!strcmp("earlycon", arg) && info.type =3D=3D SERIAL_C=
-HIP_16550_COMPATIBLE) {
-> > > > > >               snprintf(buf, sizeof(buf),
-> > > > > > -                      "uart8250,mmio32,%#lx,%dn8", info.addr,
-> > > > > > -                      info.baudrate);
-> > > > > > +                      "uart8250,%s,%#lx,%dn8",
-> > > > > > +                      info.addr_space =3D=3D SERIAL_ADDRESS_SP=
-ACE_IO ? "io" :
-> > > > > > +                      "mmio", info.addr, info.baudrate);
-> > > > > >       } else if (!strcmp("earlycon", arg) && info.type =3D=3D S=
-ERIAL_CHIP_PL01X) {
-> > > > > >               snprintf(buf, sizeof(buf),
-> > > > > >                        "pl011,mmio32,%#lx,%dn8", info.addr,
-> > > > >
-> > > > > I suppose we're well past the point where we can delete
-> > > > > bootflow_cmdline_auto() itself because that's just going to lead =
-us to
-> > > > > trouble down the line (5 years from now when the kernel adopts a =
-new
-> > > > > preferred way to pass this info) and grows every platform by some=
- amount
-> > > > > of space every time we add something new here.
-> > > >
-> > > > Well firstly, why would you want to delete this command? It is very
-> > > > useful to be able to change the cmdline.
-> > > >
-> > > > This command is only available with BOOTSTD_FULL, which is less than
-> > > > 10% of boards.
+> > On Thu, Apr 03, 2025 at 08:19:03AM +1300, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > Because it's automatic non-obvious stuff. We should not be modifying =
-the
-> > > command line at all. Is it even documented that we're doing this?
->=20
-> Yes, the command is documented. It only happens when you run the
-> command. Otherwise the command line is not modified.
->=20
-> As you know U-Boot has bootargs but that doesn't work with extlinux
-> and the like, so we have this command, which does.
->=20
+> > > On Thu, 3 Apr 2025 at 04:00, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Apr 02, 2025 at 01:08:56PM +1300, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Wed, 2 Apr 2025 at 10:41, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Wed, Apr 02, 2025 at 06:29:31AM +1300, Simon Glass wrote:
+> > > > > >
+> > > > > > > This series includes some precursor patches needed for forthc=
+oming expo
+> > > > > > > enhancements.
+> > > > > > >
+> > > > > > > - truetype support for multiple lines
+> > > > > > > - make white-on-black a runtime option
+> > > > > > > - support drawing a rectangle
+> > > > > > >
+> > > > > > > This series was split out from schd2
+> > > > > > [snip]
+> > > > > > > base-commit: 3f76d803db9b500f43bc534465945a8d2836bb3e
+> > > > > > > branch: schg
+> > > > > >
+> > > > > > I get as far as patch 4 before it doesn't apply to -next.
+> > > > >
+> > > > > Your tree is missing the video-damage series which adds some more
+> > > > > tests. It is here if you want to pick it up:
+> > > > >
+> > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D369663&=
+state=3D*
+> > > > >
+> > > > > I can rebase and send a PR if you prefer.
+> > > >
+> > > > Reading the cover letter again, that doesn't seem ready to merge ei=
+ther.
+> > >
+> > > It seems OK to me. What are your concerns?
 > >
-> > To be clearer, the more I review your changes, the more I see a blurred
-> > line that I do not this is good between "I found this handy while
-> > doing something" and "This is a good generic design / feature".
-> >
-> > That it can be annoying at times to add the debug uart information is
-> > not a new unique problem. It's something that's generally normally
-> > solved. I assume you hit this on x86 where it's more annoying than most.
-> > But a generic feature it should not have been.
+> > The cover letter read to me like it should be further reworked to
+> > address some of the problems it still has / exposed. That's likely why I
+> > marked it as Changes Requested a year and a half ago.
 >=20
-> I'm not even sure why you wrote this email, then.
+> Which bit of it? Are you talking about my conversation with Alex, or
+> the actual cover letter?
 
-Because this is another little thing I'm being flexible on and not
-naking, I just think it's wrong-headed. And you seem to think I'm never
-being flexible. So I started this by saying I'm not naking it, I just
-think it's wrong.
-
-> U-Boot has all the information needed to set up the UART correctly and
-> it is extremely tedious to do otherwise. This is a bootloader, so it
-> needs to support kernel development. I actually think this is a really
-> cool feature.
-
-It's "cool" until it breaks. And grows platforms for features they
-can't/won't support.
+Yes, I'm talking about the lengthy discussion in the cover letter which
+sounds to me as a summary of "changes requested".
 
 --=20
 Tom
 
---HK7QLWroS+jAx2sz
+--9HXG6LatkBcLBTQx
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmft1cAACgkQFHw5/5Y0
-tyzxXAv/e6roEhAO89PKC81vN4D3ZeMunyAribqSB+/Tll3XEx8xTJAEA38nv4Vp
-HtX0HqMEtVKu2ZWX1hq6bixahUH7ZhCHL43cXeGYUukfPjllF2HlMGYmOXyiYDzx
-PEEY+eQ8Ixkh+nhq5NYX9D1XqogzSufDAIpMvc0rdKewvpiYgxanySuNhi0YAeDe
-rwJ0vpqDbVi4Mz2xrC8EhzVa1H0gebT4SPqd7083iBUHzxpL3lS6z0cpqUSd4eOU
-xG4dp4BUh8mf/lOltUL1+LLrL/PC0sGjbl7Lh2fO474T3E0B8NBKdc8nzEq0wupS
-mGcYOVT8NBfGpUeGt/QuAugxI43vxM2umLrcZ0MSOwYuZvvhIvUDM7KjdZ9CXNBS
-3nIldSTW8TZ0xv2IjOthJLkybeuacO8m1HKkzLPUYcXBK2QMsEpolBjGbUX9khBq
-gudxGxNpiQQLvMXOLeU3/J0xHd35rm90lcPiRIpyYP92w8p1nsypFO6s3qvuoJNd
-8Cg/fOs/
-=8Tce
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmft1goACgkQFHw5/5Y0
+tyxqOgv8DMfmiypxOrIKSyfl9XN122AE8gekzo22H2dowSVk1IWDTJLuz/dXS/5Q
+GPvvucCfflV4GAtnvjn3/qXtolNrZqIA6wL9L+zDM+gHBy2WvkDkY1eMFBcalpWP
+ozBa1T6+d/dw0bWb0zMD/qNabSILrVcreNy/Oo4edfD6lYxF11bslu8ZTe6I8fkU
+v2otErM6bodISbjFd2VQ3WVcFaophvdYsTiGxxqhNUfSLAvpTFlPTfBmiYfolu1P
+EThYS/2jrWbbfBWQ8BM3BRVpQKZdQbdERtPS2mLPw2KY2jXn0S6DDSgTRmJDnzmM
+vrkS9DJXoODTKUM0XUgaBajwoEWeHw+uRGHpX1AHKmtvK/qJrM25Ilhakmn0SaFz
+ZFJwBhOhCR9DkLMnXRcB6L14TbFpgyofuykhW31ndiaNcleCHJI5pUkemgwe9vRY
+X/hefmbaRAnKBv8whTgjmVshABaFkcJGSULqDj/Ub80j0utNvnkUVur+lzN2bA0n
+LziaVbwc
+=0fiu
 -----END PGP SIGNATURE-----
 
---HK7QLWroS+jAx2sz--
+--9HXG6LatkBcLBTQx--
