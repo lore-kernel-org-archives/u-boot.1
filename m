@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2CEC3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 14:27:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28BA8C3601A
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 14:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08D3B820FE;
-	Thu,  3 Apr 2025 16:27:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CBC1810E8;
+	Thu,  3 Apr 2025 16:28:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/07fm5L";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TL6jDAUT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21A52807B1; Thu,  3 Apr 2025 16:27:48 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C80D820DE; Thu,  3 Apr 2025 16:28:30 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E5E5810E8
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 16:27:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74907807B1
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 16:28:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-72c1425fbfcso608284a34.3
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 07:27:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743690464; x=1744295264; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UQupQgkv1gm5nqDh5S/LrIaYMpx+XfZjvHyezbTJxHk=;
- b=X/07fm5LKLnikBqhIuG+Gnv7MP/FAUFE53/Q1L8YYLPLMPfAprLdVfTadYfpRjqOoH
- qToc7uHic6fU4LGq6P1aU81+2dkGLZ75+0rQb9twA0GZiid8zW21pbWf/VldqbxW9C4c
- OuxnoxoaUluadTPDVClCSiowHPUIKYrOjupCQ=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 700D23F716
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 14:28:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1743690504;
+ bh=IJPR9lhjLT5tC5Wh92cMWPi9Be7zajtPTWnOvcAcgdA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=TL6jDAUTvxIaVVNnYcxGDWy6qCCAAR0n9KUL0Us2zWwf3x5CoPMipEVYHqzGBEb+4
+ d+oQzhfneMuPozL1t5EvCwK8iR9UGn+cmeTzt/oQU3jiRELyPA1pgw+3QlmPd1KP3Y
+ k4aODB18T5KuUYup9aQxjuE0YPUEAq5yNUllpxkomp4dO2yW6uHVyf53lW0j74qtCy
+ m6qOWNmrGHhVAE7fkPP9q75VXNaofoXhND9k3KNWrVxld9eqv/oTlafpcJYjNKjNWS
+ vGNtdyebpLoxrkuDrcuoXCTBm+sScSnjYJUa4z+JnW4q4r+QUcnf0a251ZQZ5ol+QT
+ /CMJelo5iPecw==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-43947a0919aso6848715e9.0
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 07:28:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743690464; x=1744295264;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UQupQgkv1gm5nqDh5S/LrIaYMpx+XfZjvHyezbTJxHk=;
- b=kMHLlxVJ3V+xg++yGjeRdh7mErtnY8jkJgBjUu5wSvEjePMhFTD4ZytwchZc4Mqg2+
- UxDIcquEIAt36PGxlQQSKRT4QbW+U5OTAdVr/4gFIsuTid24rgiyCc1TFRxdABP7gmVz
- qQ+9Og0eX8rwFYEUTcy0aLX9ddoqVYyeFVZ1jNf7RJTJNP/r9AYxjL6JKWDVyM5z2VKV
- WL6oql0uRIWVQyLU1pzfr/lTdegd9Dx8Rl0p8cYj/21Bgi89UMyJ+YgE35HmjebEKJWw
- HltmRn2ekK9V7FgfvoC0CtkNGDJc9HOkXJmZdK0IU9w7vS6NHkK167G0xjkcxALn+BlW
- xXtA==
-X-Gm-Message-State: AOJu0YxRmh1845Tx6VYqjoohTGV2Xio5JDGEIYiDT9y9iwbW1rcwjXjh
- egFZDqEJNYHl4qMBa5qD7SxIjoTpMcAb/c/QSE5rzvygOdMOntD8DzP09GCdV5s=
-X-Gm-Gg: ASbGncv8Eg3NHIUG9PwkUuajQP/muog7gDEUklZSSxpqxCSlLUSSdQhFK+VMUD/wdos
- YtIOIUdxsRFRHKtWILSPYZmBXRqIyiR3CXaarrkOlsjrY9o6PcdLoLt9zct1w73yljlg8ryPEa+
- At7iyKkCsEqtHDz/O+2Q5jEsNCH9jMtr0mlcaH5Hrp2mQTt1T+XGpaDtFm5vTTnn1WgxEfZfUPJ
- pF5xATa+VldpqADy83mXgGRubS4xxzBnvoYLCK2dwF+pN+OKF5SNhNcFBy3760xKiRbQ9w+fQ8Y
- Zj/zxqEpxu7u2cm4/gYT+OOcW73ICK+gfY69HQYlsb4jpizgfg8a+WkhEuiRGIOBMlQUIulKgAW
- 5LdNtmw==
-X-Google-Smtp-Source: AGHT+IE+RSmPBMslQsiZ01HVYmis80hU7kEtjCC3sxApsufUp/zY0h/E39bkXwHXbxBZGBBRupjyHA==
-X-Received: by 2002:a05:6830:2115:b0:72b:9993:11a5 with SMTP id
- 46e09a7af769-72c63793840mr14389113a34.9.1743690463588; 
- Thu, 03 Apr 2025 07:27:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e30500de7sm230666a34.8.2025.04.03.07.27.42
+ d=1e100.net; s=20230601; t=1743690503; x=1744295303;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IJPR9lhjLT5tC5Wh92cMWPi9Be7zajtPTWnOvcAcgdA=;
+ b=PksnB8zVqQpbkvoXI+Vs4Gw3Qdn6s2oNqC9QphftpHJIjRrwXiRDsNcZa4ZwGBcIeb
+ BfX2+A0079eMu9uBkYXaM8z0SvzyJrwUEriIc1dZt8CvmGxwnETzv3tGpNgjB9WMYI18
+ HFWneEXUzkage0Xc0bxOJqjW5gmsKxFdSJD+BaI87LSY7LFYrUwk4kBre1SzoMb8IWRE
+ dkHAoxeWrSm6K/uTE80Miqq6ENM4AP/Eyz+MEKiyLKjh4l5aWZzm2wGpjZakHiCADG+h
+ V9BLd0pb1xXmvkdu9im+LiWkTCM52mjofI2I8fzDpQV7/cR+2ksSH1joVyiCraDGHEIy
+ fQtw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+FmtUv7JcfMsCH+c03u/LwOM3zAae7Z9bmxBMjGRnhaHbwCgTZId8y+Toj+u5XWvf20qseh8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yza0y1BrYkSks3o0JOfCEW+p31vqqBn+H6c8kd9lo+CtIROrHAg
+ /gEioyBer5EYwlgztarmEmFraKCU03FhIRMdHTvtN29uZF4SNgsoihELGPx2BGUWlI07B2f+TJP
+ TsQsC65FDXVtKotniBd6jnNpWS4EivJzuLgv7GrG0WxMCGzCsXa+kSG+sMiqHV6ACYs2OTcdGf1
+ o=
+X-Gm-Gg: ASbGnctMHlJ0uBvZQGE+TD9/Cz7Y57GS9MiZYvz28OmBCSNjBYc3OR1d0E3WP1xta5j
+ HBYE6fkKrNbAlQ1d0DS9kGJ9UobFEbzX399WLWk+BQnPI4Jngk3tS3nEUfD0/MFZNKLt9AC9vG+
+ 2AksvDO0QPEuwVuviqoM7DXhgh3SF/07ctLbulKBR9tH77IBiMaq17jkrrV2KnJVfDL3qQ2WXo3
+ 0YqjUwpAQtnXO5t1ubV+f6ANTssaYlOMY59Go/cvc6OEz8LQVC7epN9f9fPZDgxMtHBvQVVr0pf
+ guEfxj/mYkwJ0jRf2/8cFr9mEfF87ymfDoO+Ww==
+X-Received: by 2002:a05:600c:6548:b0:43c:fb95:c752 with SMTP id
+ 5b1f17b1804b1-43ec40eeed4mr24032485e9.3.1743690503612; 
+ Thu, 03 Apr 2025 07:28:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEyaK6iqZRLZ4nJnnDHStk+oh1A5syTeoCuNWemRRd8nVsRavGzgU9XKqyRFzkj/VNdfagt9g==
+X-Received: by 2002:a05:600c:6548:b0:43c:fb95:c752 with SMTP id
+ 5b1f17b1804b1-43ec40eeed4mr24032295e9.3.1743690503245; 
+ Thu, 03 Apr 2025 07:28:23 -0700 (PDT)
+Received: from workstation5.. ([2a02:3035:6e0:be7c:f00:839:af81:4bb8])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43ec34bf193sm19890745e9.24.2025.04.03.07.28.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 07:27:42 -0700 (PDT)
-Date: Thu, 3 Apr 2025 08:27:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in
- the project)
-Message-ID: <20250403142741.GJ5495@bill-the-cat>
-References: <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
- <20250307144631.GN2640854@bill-the-cat>
- <20250310155336.GJ2640854@bill-the-cat>
- <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
- <20250331155144.GX93000@bill-the-cat>
- <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
- <20250401171822.GM5495@bill-the-cat>
- <CAFLszTjzxXW_SdDMbjPKitgQ6HSv3Vse6ANrr5QEr85A1byyHg@mail.gmail.com>
- <20250402223534.GE5495@bill-the-cat>
- <CAFLszTiftx2RpeNdBmms8e=HZm2YqH_sjea7Ot1gyaSWAScivw@mail.gmail.com>
+ Thu, 03 Apr 2025 07:28:22 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] configs: qemu-riscv raise CONFIG_NR_DRAM_BANKS
+Date: Thu,  3 Apr 2025 16:28:16 +0200
+Message-ID: <20250403142816.1057084-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9FLQwGN0hsTuXAIT"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiftx2RpeNdBmms8e=HZm2YqH_sjea7Ot1gyaSWAScivw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,316 +108,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The number of memory banks in QEMU is not bounded by 1.
 
---9FLQwGN0hsTuXAIT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In this example we have two banks:
 
-On Thu, Apr 03, 2025 at 12:55:38PM +1300, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 3 Apr 2025 at 11:35, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Apr 03, 2025 at 08:22:13AM +1300, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 2 Apr 2025 at 06:18, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
-> > > > > > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wro=
-te:
-> > > > > > > > [snip]
-> > > > > > > > > > Again, back to this thread, if you want me to migrate t=
-hings, consider
-> > > > > > > > > > applying the sunxi patches as I have described above. I=
- will then look
-> > > > > > > > > > at the next target for bootstd. But while you hold this=
- up, I cannot
-> > > > > > > > > > move forward with more bootstd migration. It doesn't se=
-em that much to
-> > > > > > > > > > ask.
-> > > > > > > > >
-> > > > > > > > > I will take another look at what's still relevant. But I =
-believe it's
-> > > > > > > > > still blocked on the fact that it changes behavior and br=
-eaks users.
-> > > > > > > >
-> > > > > > > > In details:
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-2-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > Now that the underlying BLK problem is resolved, this can j=
-ust be
-> > > > > > > > dropped I believe. Removing the BLK dependency from BOOTSTD=
- can happen
-> > > > > > > > when you're supporting a flow that lacks a BLK device entir=
-ely. This
-> > > > > > > > would be another reminder as to why putting unrelated chang=
-es in a
-> > > > > > > > series is a problem.
-> > > > > > >
-> > > > > > > OK, then just don't apply this patch. Problem solved?
-> > > > > >
-> > > > > > Well, for a hypothetical v6 you would not include it, sure.
-> > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-3-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > This is fine.
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-4-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > This is not fine. This is also not a sunxi problem. It mean=
-s that we
-> > > > > > > > should drop bootmgr from rockchip, where the conversion has=
- already
-> > > > > > > > taken place, and would need to drop it from future conversi=
-on too.
-> > > > > > > > Neither of which are desirable changes.
-> > > > > > >
-> > > > > > > Why do you say that? I don't understand how this relates to r=
-ockchip
-> > > > > > > or why we would need to drop bootmgr from that.
-> > > > > >
-> > > > > > Then you don't have enough of a grasp of the details of the are=
-a you're
-> > > > > > trying to solve problems in? Or maybe you need to refresh yours=
-elf on
-> > > > > > the details of the area you're trying to work in.
-> > > > >
-> > > > > Or perhaps there isn't a problem? The sunxi case is special becau=
-se we
-> > > > > have a FEL boothmeth. That isn't present on rockchip, for example.
-> > > >
-> > > > Again, you seem to have forgotten what the problems with the series
-> > > > were.
-> > >
-> > > No, it's just that we disagree on the path forward.
-> >
-> > Then why did you bring up FEL? That's the part of the migration which is
-> > NOT a problem, I keep being reminded when I ask.
->=20
-> FEL needs to get priority, that's all. It was a problem until I
-> adjusted the priority.
+    qemu-system-riscv64 \
+    -machine virt \
+    -nographic \
+    -m 8192 \
+    -smp 8,sockets=2,cores=4,threads=1 \
+    -numa node,cpus=0-3,mem=4096 \
+    -numa node,cpus=4-7,mem=4096 \
+    -kernel u-boot
 
-And there's been zero objection to this. So why are you mentioning it
-here, in the discussion on why the migration is blocked. I know I had
-been unsure, but I asked, and people answered, and I accepted the
-answer.
+As we will see RISC-V NUMA systems using U-Boot
+we should be able to emulate these.
 
-> > > > > > > > This patch in particular is
-> > > > > > > > where we have the note:
-> > > > > > > >
-> > > > > > > > "Yes, the introduction of boot standard changed the boot or=
-der and
-> > > > > > > > specifically deprioritizing scripts is unexpected."
-> > > > > > > >
-> > > > > > > > Which should have had more attention than it did.
-> > > > > > >
-> > > > > > > From memory the scripts are a fallback used when the other th=
-ings
-> > > > > > > don't work, so that was the decision I made at the time.
-> > > > > >
-> > > > > > The key point being we changed behavior that others depended on=
-, and
-> > > > > > didn't document it well and didn't make sure the change would w=
-ork for
-> > > > > > them either.
-> > > > > >
-> > > > > > > > This is the thread that to me spelled out in details where =
-the
-> > > > > > > > conversions are now blocked. We changed behavior and that i=
-n turn breaks
-> > > > > > > > users that have come to rely on ordering.
-> > > > > > >
-> > > > > > > I don't know what action to take on that comment. We cannot h=
-ave 100%
-> > > > > > > backwards compatibility with the scripts, which after all wer=
-en't even
-> > > > > > > documented. But it is very close.
-> > > > > >
-> > > > > > You need to get feedback from the people you want to migrate fr=
-om the
-> > > > > > scripts and ordering and rely on to something else and see what=
- works
-> > > > > > for them.
-> > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-5-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > Is an alternative to the above which then turned in to a di=
-scussion that
-> > > > > > > > I would very briefly summarize as "no discussions were had =
-between
-> > > > > > > > stakeholders before integrating efi bootmgr with bootstd".
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-6-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > This is fine, but only relevant once migration happens.
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-7-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > If Andre is fine with this, this is fine.
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-8-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > This is a generic bugfix. I will take this to next today.
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/2024111315=
-0938.1534931-9-sjg@chromium.org/
-> > > > > > > >
-> > > > > > > > If Andre is fine with this, this is fine.
-> > > > > > >
-> > > > > > > Well, is he? I thought he was. Can you check?
-> > > > > >
-> > > > > > You're free to. It's one of the innumerable examples of why whe=
-n you
-> > > > > > group multiple things in a series and there's problems with ano=
-ther part
-> > > > > > of the series, unrelated changes get dropped.
-> > > > >
-> > > > > It would be easier for me if you could apply the patches as I've =
-suggested.
-> > > > >
-> > > > > But if you are willing to apply these patches and just want me to=
- send
-> > > > > the series again without the BLK and RFC patches, I can do that.
-> > > > > Please let me know either way.
-> > > >
-> > > > Again, you should:
-> > > > - Take the non-bootstd sunxi enhancements, rebase them to next and =
-post
-> > > >   for Andre. By themselves. This way they won't get stuck.
-> > >
-> > > There's no point, though, since it doesn't provide the bootstd migrat=
-ion.
-> >
-> > Are you saying there's no point in generally improving things if it
-> > doesn't also involve one of your particular projects?
->=20
-> The series is called 'bootstd: sunxi: Migrate to standard boot'. If
-> you'd like to apply just the patches from that series which don't
-> migrate sunxi to standard boot, please go ahead.
+Use the default value defined in /Kconfig as 4.
 
-I'm not the sunxi custodian. General sunxi changes would go through that
-tree. And then a repeat of everything I've said about how bundling
-unrelated changes hurts everyone.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ configs/qemu-riscv32_defconfig       | 1 -
+ configs/qemu-riscv32_smode_defconfig | 1 -
+ configs/qemu-riscv32_spl_defconfig   | 1 -
+ configs/qemu-riscv64_defconfig       | 1 -
+ configs/qemu-riscv64_smode_defconfig | 1 -
+ configs/qemu-riscv64_spl_defconfig   | 1 -
+ 6 files changed, 6 deletions(-)
 
-> > > > - You should work with Heinrich to come up with something that hand=
-les
-> > > >   efi bootmanager and bootstd without breaking how our actual proje=
-ct
-> > > >   users use us.
-> > > >   There's no reason to migrate *more* platforms until we have this
-> > > >   fundamental problem sorted out.
-> > >
-> > > It isn't actually a fundamental problem at all. We shouldn't even be
-> > > discussing this and it is really unfortunate that you continue to
-> > > block this effort.
-> > >
-> > > As to bootmgr, I would be willing to implement a solution here, but it
-> > > would involve changes to how bootmgr works under the hood, i.e. to
-> > > have it be iterative instead of doing everything at the start. My firm
-> > > understanding is that such changes would not be acceptable to
-> > > Ilias/Heinrich and anyway I am unable to get patches into the EFI
-> > > subsystem.
-> > >
-> > > So the fallback is the work-around which Heinrich proposed. He is free
-> > > to implement that if he likes, but I am not planning to do this myself
-> > > as I see it as a short-term measure and it may cause problems for
-> > > bootstd, as did f2bfa0cb1 which I bitterly regret allowing in (but I
-> > > suppose they were happier days before everything froze up).
-> > >
-> > > > - You should work with any FOSS distributions to get their feedback=
- on
-> > > >   what would make their life easier, from a user of U-Boot perspect=
-ive.
-> > > >   bootstd won't be useful if it's not something our users want to u=
-se.
-> > >
-> > > Bootstd is designed to replace the distro scripts and the feedback I
-> > > have received is that it is good at that. If you have any other
-> > > feedback, or any suggestions on people I should contact, I'm happy to
-> > > approach them, or they can email the list and cc me.
-> > >
-> > > But really, it would be a lot easier if you could just apply this
-> > > series so we can move on. If I can see even just a glimmer of
-> > > compromise here it will help my confidence.
-> >
-> > Your sunxi series is broken as posted. I am not interested in applying
-> > or encouraging more bootstd usage until there's actual work being done
-> > to move forward wit bootstd (a thing you want) and EFI (a thing most
-> > distributions want). That would be some of the general feedback you've
-> > been given and missed or forgotten.
-> >
-> > This is even setting aside that I can't recall now if you ever started
-> > on making non-BOOTSTD_FULL more useful / usable in general because it's
-> > so minimal that every conversion ends up also enabling BOOTSTD_FULL in
-> > order to be flexible enough for users to decide SD vs eMMC and so on.
->=20
-> You can hold this up for as long as you like, it's your tree.
+diff --git a/configs/qemu-riscv32_defconfig b/configs/qemu-riscv32_defconfig
+index 1cd80f5769e..e937f9439d7 100644
+--- a/configs/qemu-riscv32_defconfig
++++ b/configs/qemu-riscv32_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0x800000
+-CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/qemu-riscv32_smode_defconfig b/configs/qemu-riscv32_smode_defconfig
+index 6f871c83644..a71b938acde 100644
+--- a/configs/qemu-riscv32_smode_defconfig
++++ b/configs/qemu-riscv32_smode_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0x800000
+-CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/qemu-riscv32_spl_defconfig b/configs/qemu-riscv32_spl_defconfig
+index 9906f8b2dad..e014eda0777 100644
+--- a/configs/qemu-riscv32_spl_defconfig
++++ b/configs/qemu-riscv32_spl_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0x800000
+-CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/qemu-riscv64_defconfig b/configs/qemu-riscv64_defconfig
+index cdd511b0e72..e90ec0ac27e 100644
+--- a/configs/qemu-riscv64_defconfig
++++ b/configs/qemu-riscv64_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0x800000
+-CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/qemu-riscv64_smode_defconfig b/configs/qemu-riscv64_smode_defconfig
+index 2f62f17bc8c..24c92f6d5b4 100644
+--- a/configs/qemu-riscv64_smode_defconfig
++++ b/configs/qemu-riscv64_smode_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0x800000
+-CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/qemu-riscv64_spl_defconfig b/configs/qemu-riscv64_spl_defconfig
+index 27e092bd208..bfb4613b68d 100644
+--- a/configs/qemu-riscv64_spl_defconfig
++++ b/configs/qemu-riscv64_spl_defconfig
+@@ -1,6 +1,5 @@
+ CONFIG_RISCV=y
+ CONFIG_SYS_MALLOC_LEN=0x800000
+-CONFIG_NR_DRAM_BANKS=1
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x20000
+-- 
+2.48.1
 
-And you can do whatever you like in your personal tree, sure. But
-there's rules for working in a community project.
-
-> I'm always happy and willing to discuss and commit to future
-> improvements. The pattern I see, well-established now, is that you
-> block my current improvements until some other things are done (this
-> series, PXE and many others). Or sometimes you see my series, come up
-> with a clean-up and block my series until it is based on top of that.
-> If you could move away from that pattern and operate in a more
-> cooperative manner, we could definitely get a lot more done in your
-> tree.
->=20
-> But again, you can hold this up as long as you like. I just feel it
-> would be better for the project if you didn't.
-
-I continue to not accept changes from anyone that knowingly break other
-use cases and users. You are not an exception to the rule. Leaving
-things broken for now and improving them later is not an option in
-mainline.
-
-And I ask everyone to fix problems that are exposed when they're doing
-something else. Sometimes, when it comes to Kconfig symbols I'll end up
-doing the cleanup because it's tricky to get things right for 1300
-platforms.
-
---=20
-Tom
-
---9FLQwGN0hsTuXAIT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfumtYACgkQFHw5/5Y0
-tyzlXQv9EkK0E7+CPuPnJQHPJqFNijsLPJzL+2eX8+oqRv7wHa84A2ZMQhPdJ30v
-Hv+cN0VIfhIBJ3kC0p1RI/PGPibLrWwf/8ststFtxXyatjP0v3WKpHIZQiVVxORk
-amwga0Tmyph0AT3aZP96ZS4C9fRmpoArXaxZnbyOTxDxzisH8cIBw6jPj2u/GgLf
-Op9Qqcim/fcG0EAgWzfhsBpG/K6bYlf1gxyjJ2bfiVlirAGa1apKUNtuyRGZ8d/j
-a27GXeT1c+phtG8Wib0PMUNMtxNyCtfOine7kX0ET6ncGzUTxVGCVU0sPSok67Es
-gqLR1TZOC04XAYOFyAqZu6Wjf5h13V/gK+Ewnl0Q69VFR7VjcA5RdFcbpJkPHypf
-/emVUM8A28El+/3HIZ6gezZXvxdUDPYOz1FldO1S8//9XW63p1UW1rBzANQj6lwF
-lz4IN2CHRd9PvXed1Xule79EkmC2dvTLQhvEilQgO7ADsI5ZJsL04PGKRdQLQQNe
-PrpQrkib
-=VI3N
------END PGP SIGNATURE-----
-
---9FLQwGN0hsTuXAIT--
