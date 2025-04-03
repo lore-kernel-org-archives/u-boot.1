@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE681C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 12:36:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11879C3601A
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 12:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E243F82063;
-	Thu,  3 Apr 2025 14:36:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 610B08209C;
+	Thu,  3 Apr 2025 14:36:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Y9rS+eQp";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="d9EtI/aH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4D8C81FC0; Thu,  3 Apr 2025 09:39:22 +0200 (CEST)
+ id 7425A81FC6; Thu,  3 Apr 2025 09:39:24 +0200 (CEST)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
+ [IPv6:2001:4b98:dc4:8::227])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A49681F6B
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 09:39:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B03D80194
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 09:39:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 54DEA4436E;
- Thu,  3 Apr 2025 07:39:17 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 7CADF44383;
+ Thu,  3 Apr 2025 07:39:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1743665959;
+ t=1743665961;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=T2gFL2X6tUhuxG4xER+FHDo2R+8J2mfbVZhTaowjxRI=;
- b=Y9rS+eQpsaV0gVpFlw8uiqeyWguWEwbSM2hqQQC5Z/hATG6Pl79mGEOuiye3QxfD42WbYe
- wa1/ptBC+4fpzhgDQLbW6BggZ+1C0p6qhwC2bJGNyR/IFOIrZM9fHt2wy/3bbguM18bbbC
- ihM/tUOWXNDpXsoL80aQnFxnh3eXM6TGdlFyAtFhIz4IR3rKOvzJyy/4NSliGPvMoxr12o
- C+brcmMRjW3UWl+B3QTjy0AooljHBuuvj/9QEqU7GuJsnP4wUB5hCKhIcho9Ii+fJMOIPv
- obv3+9uKGG18Cx4zMG+jIkGGGhIrNU7RM21LzieSFM42b5dDmUgcIuljqvDWvQ==
+ bh=pG94E2sze3Otlg2FIYNm7iVubK3eLIObJMYr8lZeKSQ=;
+ b=d9EtI/aHUZ9N9m6fH6m/Vh4lyVOcuYdHroWykyBaV9Tk9leSg08FtuUB0prmp1sV8d9J0t
+ /x4dkpXWz/YLbUEqxUbUkUUcQKfwro1CovbVN9mHCCUYECUV0r3alH95c2f+fX6E0HZ6RL
+ JywS8hUVNYvGlUe2dM0hP8emBcqVKLsq18NEJqoHEtDZetZFbU+S7jE06271bVYvg41u+V
+ ufl/9JeVslf8iN/dEN9qVa5g1mO7uSXZqURNHbS34y3sh4VKOISMVKKOJ58tl9iWeRaqAP
+ OoIy2c9NvAZHtLBHqMuVwvSpIYiO+CAlFhBmWE/olTmj6y89txcC+BVt27dFGQ==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 03 Apr 2025 09:39:01 +0200
-Subject: [PATCH v6 01/12] core: ofnode_graph: Fix a comment
+Date: Thu, 03 Apr 2025 09:39:02 +0200
+Subject: [PATCH v6 02/12] dm: doc: Fix example
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250403-ge-mainline-display-support-v6-1-478b5e3dd872@bootlin.com>
+Message-Id: <20250403-ge-mainline-display-support-v6-2-478b5e3dd872@bootlin.com>
 References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
 In-Reply-To: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -84,29 +84,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Naming between the parameter list, the prototype and the main comment do
-not match. Fix the comment which seems the be the one that is incorrect.
+`.priv_data_size` does not exist. I believe the actual structure member
+was supposed to be `.priv_auto`.
 
-Fixes: 9057077cf4e1 ("core: ofnode: add of_graph parsing helpers")
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/core/ofnode_graph.c | 2 +-
+ doc/develop/driver-model/design.rst | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/core/ofnode_graph.c b/drivers/core/ofnode_graph.c
-index 90c92af3258ce73209e19c0d0ee6a8f35ef4e26a..175ac7687710f23245345346a8694ebdaf161c7a 100644
---- a/drivers/core/ofnode_graph.c
-+++ b/drivers/core/ofnode_graph.c
-@@ -98,7 +98,7 @@ ofnode ofnode_graph_get_port_by_id(ofnode parent, u32 id)
-  * @id: id for the endpoint
-  *
-  * Return: ofnode in given endpoint or ofnode_null() if not found.
-- * reg and port_reg are ignored when they are -1.
-+ * reg_id and id are ignored when they are -1.
-  */
- ofnode ofnode_graph_get_endpoint_by_regs(ofnode parent, int reg_id, int id)
- {
+diff --git a/doc/develop/driver-model/design.rst b/doc/develop/driver-model/design.rst
+index 30093737200ccc5d34a0c713eac0a6cccc0829ae..633545944d1584fdd40736eaeec54c997b60ed67 100644
+--- a/doc/develop/driver-model/design.rst
++++ b/doc/develop/driver-model/design.rst
+@@ -312,7 +312,7 @@ drivers/demo/demo-shape.c):
+ 		.name	= "demo_shape_drv",
+ 		.id	= UCLASS_DEMO,
+ 		.ops	= &shape_ops,
+-		.priv_data_size = sizeof(struct shape_data),
++		.priv_auto = sizeof(struct shape_data),
+ 	};
+ 
+ 
 
 -- 
 2.48.1
