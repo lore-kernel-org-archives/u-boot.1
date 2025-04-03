@@ -4,109 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C758C3600C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 12:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BFAC3600C
+	for <u-boot@archiver.kernel.org>; Thu,  3 Apr 2025 12:46:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADAD68219C;
-	Thu,  3 Apr 2025 14:36:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id E698E81FEE;
+	Thu,  3 Apr 2025 14:46:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kohlschutter.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="RyWR098c";
+	dkim=pass (2048-bit key; unprotected) header.d=kohlschuetter-com.20230601.gappssmtp.com header.i=@kohlschuetter-com.20230601.gappssmtp.com header.b="T+giOSbj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B81F81F69; Thu,  3 Apr 2025 11:46:12 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C849482012; Thu,  3 Apr 2025 14:46:34 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D94581CF0
- for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 11:46:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DE8B81F69
+ for <u-boot@lists.denx.de>; Thu,  3 Apr 2025 14:46:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ header.from=kohlschutter.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53382nMB012589
- for <u-boot@lists.denx.de>; Thu, 3 Apr 2025 09:46:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=QRwOc4x1V7V7YsJI1oFiYzUE4MxwZgY6kxE
- A/Zt+R+M=; b=RyWR098clS57AHwbLJT9gSKUfaJcywIXEmwp3+pQETn+D08lKNC
- U46s7si6Lj9tScqni+Fp7d1Jbi96rUL3SyqDGb9V6WJEzqeiqQp8UzLbnW+W4aeM
- dHFLyYCgOisK7qjQfrW24Mkjs/6O8hH0tN9jJrBDWXYnAeJBsZrT87edeUqjHbtB
- sgH9rwY5Bht52TiQeACcEVnqLRcKZsb79i+dn3H0EbxvmbsFD2Lp1G03vOTRslxn
- rz2sAFaloyt/XXReqm88a+skMjW1AsUkS14g9yEgiAymNlUTy/dz8jGVXwtzFI/y
- eUfkYSSA1qVj1GG5t3JPqmo4pm3MuBwnG2A==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45ruadvkbb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 09:46:08 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-7c5ac559cbaso129496385a.1
- for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 02:46:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=christian@kohlschuetter.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5ec9d24acfbso3659504a12.0
+ for <u-boot@lists.denx.de>; Thu, 03 Apr 2025 05:46:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kohlschuetter-com.20230601.gappssmtp.com; s=20230601; t=1743684392;
+ x=1744289192; darn=lists.denx.de; 
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q4lTSc7u2z6y/k3zmXFYFTNl+ofhXP/iS01TXXMeBrQ=;
+ b=T+giOSbjstR5WQRkT2UAUfZIOeQwupkxUYErayE73q6pxhY12EPGPfgpXErmTmr8sf
+ f2CtdxJrcYhD2z8J5rpR56DatZQQs5mkf2eLKdTYBZRnZ42xxk4kVN/Gmk/g441PFZLe
+ 4EDDfT3lAyq7zSP4lH99MGTiH7DcR9ZKIVZu+vACn5gqLDugiNS1oTyNvGEaTm6B+HTB
+ Mn/DmraY6apSML3SqpLdtVP4og6myYo0ZID8XfuKtGnOU9zePaXT8FeJeRrXf5uLIT3K
+ QIuaY4V0HntPpYaQ3+Z57Yz7ncnO6wQ9fdDIaEh8GDkJa9flGwFRImcSzs2XG3x07vp3
+ YFlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743673567; x=1744278367;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QRwOc4x1V7V7YsJI1oFiYzUE4MxwZgY6kxEA/Zt+R+M=;
- b=BeYW9Id9V62fhkUboJMhK8qd7UBAFd4zGO15tdqyEMktipDijJ3kx6TYQKL2lQKNaC
- zo3NvaDVj8ACS7SekFpoL+KCffJs0Q3AZVgJ/olcv2iYDoqud30b7P7vf5lkk2zepOlY
- kor0z6XwPK7HtNmIpeFN3hMyU4x2YHCdVXLmDJAbb0uGYxUsUZetM3WfpmEsmxbMSwvC
- UV/fhUWx9osDidnrA1yEv9EfGstN8NnNfx2PVluK3fI8NH1cX26Hoc0Qpfx+cukwI2Up
- MXTIW9YHuAsgK0NUWIIeutMlkJDSXPVeQuZTdA7ZPY92qz08ED+eGQXxuF/M3Anr5Dmv
- uwcw==
+ d=1e100.net; s=20230601; t=1743684392; x=1744289192;
+ h=to:references:message-id:content-transfer-encoding:cc:date
+ :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q4lTSc7u2z6y/k3zmXFYFTNl+ofhXP/iS01TXXMeBrQ=;
+ b=Sf9hUCkC12WkOhX3XQhfDZBZuXlPRVGcxNr/QG15YFx/UdSJEk8INLOovZtra4Z7ek
+ XoRxgv79p6ZuH+Nm/mnvSpNamTCGgtf/GIr23/zMovnniaS+yYRqAg+JzhQRvRKtKu+D
+ KEdi+rBkUc27dmLhzJg+JYhTohJki4XgXv8LcI6DeA7YfOe3lczkFSsBqoOz16lpFNxD
+ IMaHqHu9wG+LBimQidaBI/2ZgZO9pv0109ZiDSgjwIrOMj9o2RdD2RzqFFdZEwi1mDwh
+ 9+56Cya5ZDtkRIrT8TVJAFTjNDY7cdfS+oO/EXLwMPUlZ8u2rrQw3z830plQJHwWzMXa
+ 5Ekw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9bkOXkeK3rVEz4I47UnEvi6jYQq9mzfuLhIAHvpDWE2mlul9APQN3wm8+HxIuAAlhzmD+eNo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdP55HMkMVB5AsVdY5NY0zEoJQPfzsPP1H5IRjJVWW/u4wbgdB
- 3zBW0mGBqQSNxPc7y6vr80BH7cBFAO8XBbp/medfib6k6Aoa+IJD3wufsxTc2vzjHaYfcqd4HlM
- GT7fyEVqSPv/lFCFYsPghyuYr1LIR/8SjtHHDgFGKszT1eD2kicwR
-X-Gm-Gg: ASbGncuX3n2ApLoqD+8WeIoaicijJnOsu2bMw2k47HvrTQ7ugt9vQlL3Z5uCb31t9KA
- zbBJpg8Hn6ntn17Bq/mCmb1xSlq8yqGXH5JEdD1GSB5eqztxwBEhuPzHFzXWe+aQsnp31NFk6hr
- 4q/yvuUrdJROxlXIZu5jrQzhMeMv6N1jrX+ZdBlHL09U1n0P5Z3kC/giVTk2zhfh3S3aypuxcH1
- W/Mahw2aD/tCIddniqSsJAqL9q236O9Srz5B/ahsXQmMbCz9vOpLINNRARuHefIH+QXSBGjB7YJ
- yZUWskCWTJ0BOOh0wsWFFJ1ZjgNnSeTr7w8Qdk1xKDIiy42nB33S/6UivARjx3YlqSD8dA==
-X-Received: by 2002:a05:620a:4693:b0:7c5:a513:1fe7 with SMTP id
- af79cd13be357-7c7664592d5mr630197385a.33.1743673566746; 
- Thu, 03 Apr 2025 02:46:06 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHCWhJxvzYQVj7A8RXI3dmqZ8AX41TGwrjuGnNKtADLEgbGnP9qnEaj1Kl4Yf8L38MT+JQnww==
-X-Received: by 2002:a05:620a:4693:b0:7c5:a513:1fe7 with SMTP id
- af79cd13be357-7c7664592d5mr630195785a.33.1743673566389; 
- Thu, 03 Apr 2025 02:46:06 -0700 (PDT)
-Received: from trex.. (233.red-79-144-185.dynamicip.rima-tde.net.
- [79.144.185.233]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec1630de9sm16606455e9.1.2025.04.03.02.46.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Apr 2025 02:46:05 -0700 (PDT)
-From: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-To: jorge.ramirez@oss.qualcomm.com, caleb.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH] MAINTAINERS: board: qcom: db820c: update contact details
-Date: Thu,  3 Apr 2025 11:46:01 +0200
-Message-Id: <20250403094601.9207-1-jorge.ramirez@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=VI/dn8PX c=1 sm=1 tr=0 ts=67ee58e0 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=9rMOtB7ueBl8bWGkC6audQ==:17
- a=XR8D0OoHHMoA:10 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=W9PH34dilRoXDr_7K3EA:9
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: QWRkjFpqMfQZa63gJDnGk3CbN0Glr4lG
-X-Proofpoint-GUID: QWRkjFpqMfQZa63gJDnGk3CbN0Glr4lG
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-03_04,2025-04-02_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1011
- priorityscore=1501 mlxscore=0 adultscore=0 suspectscore=0 impostorscore=0
- phishscore=0 lowpriorityscore=0 mlxlogscore=868 malwarescore=0 bulkscore=0
- classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2504030034
-X-Mailman-Approved-At: Thu, 03 Apr 2025 14:36:19 +0200
+ AJvYcCU+h/iAcQdD+BPG5muxnD+BgFlLmfQVx3tW78DDCciUGytlfvqNft9Qc2HlwiNYNj2b8uHaZGo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfvoKsWjEmXj/BJoJMi+MY3sHYUxZnfmKYUrQsHgVG2LD+kWFH
+ /nVY63nt3bJXr9fXkztu6T4WRnyICSNtA/Ozq9GZHe9E/iLxogjRXQDK+B9nH+w=
+X-Gm-Gg: ASbGnctsyieHTtHROyYI/2X2/88RfwUz/xqqkhscudzWB+4PS2MQdSwF2zhiJsW7dyb
+ bQ7/FKu1tfMbxg/JXr92db/TfwsgHG23pPHsPYVVoeJ9zzA2PlJThLy0v+3DhT0lVymn6JQgGKA
+ Ff33yIU9uWO3j+iAAsGK0Gcquuqy5GVelGMrKNP41Zt9TfLyTWyGLAZMwRBEYpQUCoy7iEhbrdl
+ g9kQu2q/WGipCrr9GO3EMqrwAFOr/IB+cNKV06EEbDbNkBI22LbT/xTP6NKC5kQuzGNWQ4krnV+
+ AgAB3PUSaVCcpjFPjdt1qFpPOEk9o6Ou1GAZiKljhWcDn4ChKt0GUM2QywbmbhGko+Ne
+X-Google-Smtp-Source: AGHT+IFWM8aj5sBKilaZhLK5GvfTvfBVv3WZi4zSwk1LjOPl0j5uBRjG43BTF+rn/3x2x3O8mzNyaQ==
+X-Received: by 2002:a17:906:c10b:b0:ac2:7ce7:cd2b with SMTP id
+ a640c23a62f3a-ac7b6b3ac9dmr366531766b.2.1743684391818; 
+ Thu, 03 Apr 2025 05:46:31 -0700 (PDT)
+Received: from smtpclient.apple ([91.64.76.218])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac7c013ebe9sm88419366b.99.2025.04.03.05.46.31
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 03 Apr 2025 05:46:31 -0700 (PDT)
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.500.181.1.5\))
+Subject: =?utf-8?Q?Re=3A_U-Boot_interferes_with_initrd_binary_=E2=80=94_Re?=
+ =?utf-8?Q?vert_=22efi=3A_Correct_smbios-table_installation=22_=3F?=
+From: =?utf-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>
+In-Reply-To: <CAFLszTiRu3JtUw-z3LeHO9PKVZRuBW3L-WXm5vO0u6++-OdwAw@mail.gmail.com>
+Date: Thu, 3 Apr 2025 14:46:30 +0200
+Cc: Michael Brown <mcb30@ipxe.org>,
+ u-boot@lists.denx.de
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <AED05ACC-AF9D-4A2E-90E3-7BDA597B2DB0@kohlschutter.com>
+References: <C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com>
+ <01020195ed33a587-cffad5a3-32c9-46b0-99ad-d2ba8f7813d1-000000@eu-west-1.amazonses.com>
+ <F1B968E3-823A-4F6B-B39C-80AAE2961E9B@kohlschutter.com>
+ <01020195f0df59d3-851c6ec3-9a49-4fab-b878-e11c6018b827-000000@eu-west-1.amazonses.com>
+ <CAFLszTiRu3JtUw-z3LeHO9PKVZRuBW3L-WXm5vO0u6++-OdwAw@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+X-Mailer: Apple Mail (2.3826.500.181.1.5)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,24 +107,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update contact details
+Hi Simon,
 
-Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
----
- board/qualcomm/dragonboard820c/MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> On 1. Apr 2025, at 17:51, Simon Glass <sjg@chromium.org> wrote:
+>>=20
+>> but I don't know precisely what these various functions are supposed =
+to
+>> do, and I can't find any path that leads from any of these to =
+eth_halt().
+>>=20
+>> Is it possible that U-Boot is failing to call eth_halt() in response =
+to
+>> ExitBootServices(), and is therefore leaving the network device =
+active
+>> and performing DMA while the kernel starts up?
+>=20
+> The dm_remove_devices_active() is supposed to handle this, but it is
+> possible that one of the drivers lacks a remove() method.
 
-diff --git a/board/qualcomm/dragonboard820c/MAINTAINERS b/board/qualcomm/dragonboard820c/MAINTAINERS
-index 7ef905bdf69..28741d98334 100644
---- a/board/qualcomm/dragonboard820c/MAINTAINERS
-+++ b/board/qualcomm/dragonboard820c/MAINTAINERS
-@@ -1,5 +1,5 @@
- DRAGONBOARD820C BOARD
--M:	Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
-+M:	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
- S:	Maintained
- F:	board/qualcomm/dragonboard820c/
- F:	include/configs/dragonboard820c.h
--- 
-2.34.1
+for what it's worth, this is happening on both ODROID N2+ =
+(meson8b-dwmac) as well as NanoPI R4S (rk_gmac-dwmac).
+
+I also don't understand why reverting =
+06ef8089f876b6dabf56caba31a05c003f03c629 "fixes" this behavior. Does it =
+mean that any memalign / malloc may cause this?
+Also, how can this failure mode be detected and prevented in code?
+
+I really don't fancy the thought of remote code injection into Linux =
+initrd by spoofing Ethernet packages, but it really looks like a =
+possibility.
+
+Thanks,
+Christian
 
