@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE07C3600C
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 02:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E8FBC3600C
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 02:07:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E695B8283E;
-	Fri,  4 Apr 2025 04:07:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B07A82845;
+	Fri,  4 Apr 2025 04:07:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ir1akbQO";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="RiQq7WxQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DC3D828D0; Fri,  4 Apr 2025 04:07:17 +0200 (CEST)
+ id 2A39482845; Fri,  4 Apr 2025 04:07:18 +0200 (CEST)
 Received: from BYAPR05CU005.outbound.protection.outlook.com
  (mail-westusazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD5F4826AD
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 04:07:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B750182845
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 04:07:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=apNDI65KUJrX9AlkSgZQ+Lpx3Lee9U4bD3zUCl7GR6XdX8TqRqUfBNmyF+d6RxdOid082UthJGzfrLtneBNnJ4eesWABOwCqgRSMFoGDgIvJzih8x48sYgFLls8luzMSNbly40rYlbv7czzFeM7ZdReHmV6v05ypbENk5roKobaEsMn+7rqmBljv/pcu+HmZ6reZO9+bYaRqZg9YsvEVhdXqQMQusQQtIJqfwYlV4aAJJH24vhDoEZZj/1O/R4XZsOoS8PnNKmjqzGg9HBXRzlTeQbrZ8I2eglkvv36EXrBUHCd32NrGD/a1eBTZ7SRgH2i3xzqcIeLfLuLe/iyGZA==
+ b=whija4nE3jzV2bMthIHIg+tlZB6rUwbZSndz33n34f2HCMzqpD2CyBXvK7OIktonsRVXeMj6W+L77D+kHdCA307lKp3b2NmkHBQp77NGqX7WK8OjLPlKJlgO/6hthMYp5/nLrLpQcd9QjM9CEkKK+gtZhpTMtjuDUKoNkFVS+INahjbK7Eompj9II8DPwfHk/oF8HYuZ2NgTfPPo9t4O0WOnpJsaxY8qIDNp7kJHy7Jb0J+ECtbaDPZoXwaiyixDz2GdgBP29yLEIzHB7JfS9flXRQswrZE1Qqj9a38EAiWwbySsRUhkoUsNfRcdhnV9V4va8ZjlEipzElTxrCYzlA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=v97wpx11oRuSEaqOI6O1cSX53/KrtH3X6Tk7xXiaSu0=;
- b=dP+6HgPqZSA4jcjqiE+QMMKbupNUrmKWs8nqCbLRo4n6SmcQKw6VLT9cXOnKs4M5b7ncvC9s/gVfXR5Ti57E0KurNEvEEc75r6lypARjqZpWrBzW5/brFIEDfd+tWL8/11mG2QnczIeI4yQVVdi67OtH5E/Bu25FKzIi7gCykG7Gih3ZIp8o8edZWIbEd9Dw8KyUUibq95wyWDLasTbDpuUw4M4N0eVPj0T4jhohNBKpRo6YJgBXKvPub911j2trRGO+XUYc1mEgJ3yBr1pfa0PQIZyxBkWvGVvfHl5FLqiWhfh/VyWzXDFE/CcFEGF9b3bP+bwKXMYrgW8SuVQkZw==
+ bh=7Scfto9YQdmFRQomTr1mOFI0Tfka0Ut+kerMHp5bmBQ=;
+ b=jMcZw1T8PxkQdHL/RAATPtU/a1aMr37WgRuNAsaUVEXiD4inpAKtiR1/pk1GhoheqmcnGBcjXScKdmNmhzgGZ8hLNr89/A3tjitwDGmQGEy08Hskhw+XyRh+FXdpvHpBkn3LLnNf0fqrRUt8q5yU6jGBtKolhYw3FBhBLfTgXlVEeGQcyJtUORj9vKEqgTApHZvzu86skYN9dQ15lHODHeAnUUN8DTeIvLFMT1wpWfzXRpwHXIMbj7p9AQ10yxZGn+EXOsSXFFbvZdJokS6Pv/xx2ZlNak1dx3G/795RF5mBJWQb35+FpF3xp/7qes+cC6bBeJkpjkU5JV4QdJDDSw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=v97wpx11oRuSEaqOI6O1cSX53/KrtH3X6Tk7xXiaSu0=;
- b=ir1akbQOlTridvb/6albwgwiQuLGdYbyBgWBtbfTnhLUaBxYsxoJyEvk5IdKrUvybKRUGCqNUj992+QJFAmVEQDaTrIKc0zaA5dNagL+H2t0oBFTpIt2A+6RPiHFSE36ooLwCL5RA2Y4t0n3z7veII+2BVfObiMI+++EsdhOehgFibsD/7p/1aS4oi0A+jNMY52vQNzprmq6jox/GraxSOCOHYp858zd8EQYC7+xxOh5GQkaFB+0vatwltENq+2Pr2BzlBCfkxwseaRRRXmGe7in9yI3FAYrCFuETXEHNpyza8HF+FFazDlOzSA+VYCqUmdHo6FXwkCgzymVFeswLg==
+ bh=7Scfto9YQdmFRQomTr1mOFI0Tfka0Ut+kerMHp5bmBQ=;
+ b=RiQq7WxQs33Ol9Q1Dqd0JIp1GysEv0zvoJtkhuppAFFA4I659iYfw9sb9oc7KELWang+s5hsrfPiFHSdLus6iWRw3JCvagqZKXhqpIDpDGUV2KA1waON0VJsVNpCgQshmgy9TWihExRND4nHdV+oVSnvYwzqPqkW6W0C6L5HrZCYf1NjGuHSkZ9nS4gIsA3139GPxG8mzyZkp7fIRoK3cRSW0h9W8zij9+7bm1x15FFQ6+IyYBzAmmRvNIJ94w4H/p0RF5GY7WK833HMsMg/ZjvHgc+vYjE6w0M0luZHiHbwJHkN0ixwrzgqNxTrs/tNNxp8SJBXFqOwJXUNbhlGog==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from BYAPR03MB3877.namprd03.prod.outlook.com (2603:10b6:a03:6a::11)
@@ -61,10 +61,9 @@ Cc: Marek Vasut <marex@denx.de>,
  Tingting Meng <tingting.meng@altera.com>, Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 1/2] arm: socfpga: soc64: Update reset manager registers
- for F2S bridge
-Date: Thu,  3 Apr 2025 19:07:02 -0700
-Message-Id: <20250404020703.4261-2-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 2/2] arm: socfpga: soc64: Enable F2S bridge reset support
+Date: Thu,  3 Apr 2025 19:07:03 -0700
+Message-Id: <20250404020703.4261-3-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20250404020703.4261-1-alif.zakuan.yuslaimi@altera.com>
 References: <20250404020703.4261-1-alif.zakuan.yuslaimi@altera.com>
@@ -76,75 +75,75 @@ X-ClientProxiedBy: SJ0PR05CA0093.namprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BYAPR03MB3877:EE_|MN2PR03MB5151:EE_
-X-MS-Office365-Filtering-Correlation-Id: 278cc6b7-1819-430c-f912-08dd731d68ce
+X-MS-Office365-Filtering-Correlation-Id: 49d04797-4d16-4f86-84a9-08dd731d690e
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QPyGwOBVFp+zK6HHhQ7isn/soAbveKbLmiwEsF93HOMaTh5TAZL5hLfQjcvx?=
- =?us-ascii?Q?YQ8IooAv2p0oADDCTLx34A/CjvUBi/gePtBBCQoI0Vy8lhLayKWcz9wGFpMn?=
- =?us-ascii?Q?BnHltxrxURs+naXNuGsn7MFbJSSvz9cE02/Hctu+edVRXAIVTYH/sr1ErhFI?=
- =?us-ascii?Q?iATzWEuuHWIrMiWdsKUBtrNp9JRtCkWns97g+A+LYXmdKl6ZI5iqgc82egIe?=
- =?us-ascii?Q?Pz1WVBbv1mK+hHXA3vWFWDsruLwHnUkuKzqjCPwEeceHAIfIaQ2dCELwlMEG?=
- =?us-ascii?Q?Mm98TFe/DeGkAypkCyT8RCbc/xhHci/Gy5NlFlh5rEUVxNlJfeLretgKHItZ?=
- =?us-ascii?Q?/26VtmQUJAtce+Gn8H+V20NphWB5JP3Ut3zEq2qi8Nkbqyk9dTBNjfFLOAw/?=
- =?us-ascii?Q?9q3BOyPWwQ9VCo1e3fiOy7CXr2n4mBi0gFUT5nv4a8ro4VgE0SC2rADcWS9J?=
- =?us-ascii?Q?CZr9wgrIpzANp70XhmaEwGY/9XaRlfI7effguGWfLHNgveq09xHzCxTdhJn/?=
- =?us-ascii?Q?e+Cnbuy30YE+XJX7Lk0HUE720E8PzG6IQPsJHDpKA59minsz53SzhNMhBTi7?=
- =?us-ascii?Q?07fhkAAOJ4jdUBxMs0Ass7PpGfI9N2CSzXkkf9LBZ3OxOvhJyUWsXZyWp5JJ?=
- =?us-ascii?Q?GHTc9birpm395vu5aox75nnkCJH2iwLcd3OwXfoRoBtfNDffsQJNUl8J0XbQ?=
- =?us-ascii?Q?u6TedmFDVYpyDMNtuGJrSBP1+jjfdRhdpjWv+H6KH5y0543fYXTqcY+8i52W?=
- =?us-ascii?Q?8P1lfiZFZ2UqhvepMkfvs6NJzSnkHDdxihcoCfZ+YrTvOAA9DIj+LK4DNW6R?=
- =?us-ascii?Q?AxgEwMfVFp3yRJ8obsAc9WJV6LSQZyDvhv2Q1cBGkOxAvuWRbFNH1oOK4cTv?=
- =?us-ascii?Q?fq3SjAWW1u2kdImwHU/w9oK4bPx9KRMoixUvKbLbpckS4UnUmfcBj3yGMuyU?=
- =?us-ascii?Q?6e/nNeH67dUMbhcOOlhcU/YdrFtRIMrBdVo4sVto0rvWY3I8XB5SRBy8T302?=
- =?us-ascii?Q?GkrhlnMoX0BA/oRHe+pJ1HHOJHKjWqGypNZszvVuDd0JH241sWuVpswCJaCt?=
- =?us-ascii?Q?mu7HaTl6ToaRqnAqQXyr42CPm2V5g5CvKp+dR85UNQ3lI2dliJ+D6hVY/6Gr?=
- =?us-ascii?Q?jwrAr1NDXg98zyHmtCcu2QZtlLcAsKgpd2fT9gtSZemqlTW8rZ5SNBRsJOrI?=
- =?us-ascii?Q?UTZa7zy6He2JxKJMj88at27DsHiyjPG0/RPDNBZWN4GXXL2GJA3WIiTfThrb?=
- =?us-ascii?Q?vqb8GVk/Nv2wyLj7BZdHkKUxFc8AXmC1zAm1b3EuCT3SAP6eMLivLVYM7hMc?=
- =?us-ascii?Q?XpOaeNjhKwpHhVo1HU8EStkX9/cJNgKbpWXjCDh5fruyIQ=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?EFGuOeh2raUCjRXlWg7JWR5SRc0YX+02QSF1YEhVddLPeCGg2QGe7CfqBYrU?=
+ =?us-ascii?Q?w/TtRX3Kt6VKlo8sdY4rPtgMbxAuS6nm5jVO+sMvRV9NrcJUW7uoLuAbRfs6?=
+ =?us-ascii?Q?jjPtrHOJh1OVVW92ZlyA3m5lZIWuU+uRJwTTB8npVchru2iB8mlgWCr4jNMZ?=
+ =?us-ascii?Q?K7iYsVdjrJ1txGB+RAAdTfQ0ol4KmV2H9CCjyjP0od3vUGB5DQOSvGjO6q+c?=
+ =?us-ascii?Q?WtyZ6nu7g754UYZcr9Rrnbh/4OCDQSZghEPfpruI2sSA3PW+TQCWHmLfEwMf?=
+ =?us-ascii?Q?lr7+vdDFYnK+XgX10+x/odxy+M10bZeAoZiInnA70R1+ptUy3lY0Qg3aTPc9?=
+ =?us-ascii?Q?mFOB+tQDwnPLduBcg1xn/staQOjUTrctQQsGBhs29htuCNVw107hM4o1p0oP?=
+ =?us-ascii?Q?pHx+wH4g6DxOJKB6sJ4KM5nGvYUfIwKomIX+IWgzvD6LnYkdKuE+sxMmqNzR?=
+ =?us-ascii?Q?stXayAgWc43uEeRsVN6TPZqgDvfMD/lnjrdaDuiIojsXLwkm+5zT8AEzuFhP?=
+ =?us-ascii?Q?Qea0mbSxhfO4HcIOtno08L+ZHnvmQdo1gJBvgGHI7qkigdCPADxPrvdWLza9?=
+ =?us-ascii?Q?68pcCofSlD4/fpvcqCK0bUJfidEzgWHWtH18AUwq7VeV9jzqBrhiMyfAJ0Fz?=
+ =?us-ascii?Q?0f3JsVoDp5ONRtxlemrAeoOyzWAPmb/KEOhaY61Q824vV/aXJkdebyzMrkfb?=
+ =?us-ascii?Q?8TkKr7HUC2UvcGrPfxVGgdCE+GkWbbcVs4N5b0nnxOjyJHOQIdbkEDHhVzlN?=
+ =?us-ascii?Q?aMbpxZ50Tt320UHvOxt6FTA3ki3ED/eBROTxbPyRxj6dq7KaOq7pWGKJMEWd?=
+ =?us-ascii?Q?uuy8HJ2DduTMi5SNlBFhtWM9Lez5CrqcanDd6KI2E8o9L+G7UX4PLlEh71HN?=
+ =?us-ascii?Q?oBMyNP6dg283xVBj3q1HbUv2m8JlNSc7JLCSLpTlrsU1BoCFK7SJy4cssTvc?=
+ =?us-ascii?Q?pCSw9Ne/PAngIGB36K76wb3N/g5Z42TTKgxecAhv6qFgzdp1ipcD/7eiIZhK?=
+ =?us-ascii?Q?tVpEFuhO+0TonwbU8KJgz9Lefe/JEtvcIfNZwr7X1UlJidVhxIIIWwyeLvXB?=
+ =?us-ascii?Q?zgt8rSDWVhDEGXll1yoRtykEaAMmxGxACATPpU+t74nvKuKIVIYb8+hd4MWi?=
+ =?us-ascii?Q?deeo0EUJMQyu2R+7TtykswPkJ3nEapaO5cZYo37mYgww+63urTX/thSj7lnj?=
+ =?us-ascii?Q?KATtb3tjUsFbXkQuf86wyCZvYjZDia+q7Vx2e/XpfLhCmFIqp5FB1KGNbZEU?=
+ =?us-ascii?Q?0cOdTV1ykEE7xJwymW8u++fU16wR8uoTTw0QHSzRrb1lz1i5oy6IQSiCYJzr?=
+ =?us-ascii?Q?pCvIfO7k9PmKucYWIJN1B6Q2WzmLPPj0cIXhAxAUXwea1g=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR03MB3877.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LePNDPn+ythVXZ0wfLC39KAGJTRbiWRq5WRz/HHrJtd1I2CrKVC5r3kvs25F?=
- =?us-ascii?Q?YOq1AEKd5DmYpsrCt5M3pY6EEp2X5DZ1Yc9vQGrrQ3Nh10MjG8p3GDQpn0CN?=
- =?us-ascii?Q?vWDd2QW9EkhG7hwP9yS4T6RlIT97U/4QsX0eCeiYemrSLq+rU3F9wsWqNG3d?=
- =?us-ascii?Q?YX6aIdRCI9SXsISXrbst0lL5D7ehXViw+3y0p71253SysoY1oGKIRR1AzymM?=
- =?us-ascii?Q?ZGeu5nj0UUCT+esXkWQq9kX1TwNVRaJWWtytnyVXvu0FAKTYvFUTWIHiQdcG?=
- =?us-ascii?Q?t4vn8oP45h0hjH6Gql5YlLS6IoE4DcR6hBa6kJ36V/cKnM1iZBQ96k82n460?=
- =?us-ascii?Q?PoA63qUVBY9Abi8O14shlAbtQkfxXN2FU12ESR1XGVT/d4w+3olrNdGcN9wT?=
- =?us-ascii?Q?YyIATcVduPxxLpLEb80ukGibbe3NekNsl3VYXQLzM0mbDmSBKh4xKIb6oRqe?=
- =?us-ascii?Q?emHK3rc+nLCJ+3xzFZRrfYITh91IhgR5M2wo6yEIYRuMsjh9DZofM2vLY6KW?=
- =?us-ascii?Q?NB2Oox0l76GCaP57vnd+xyHDyeLr/rBDYE1qtT70g+4LWd+f/rhdheCsxnPk?=
- =?us-ascii?Q?JuN+dFzcvOkKKBE+hNPniE9sBrIV/HX+P7nCv+X0b+liGaoeIp24eRSXa5dF?=
- =?us-ascii?Q?6GQD4u+8tSNV1Jr0oNVoJY5NNDEe/nYbr5ryr8jqt3DbneE/RohwQk9+7PjE?=
- =?us-ascii?Q?+l+ckCEgXZ/opl/rmDn4SYSLenJxDJYW07ckT3FrZr2VYmWSFwPl3RuwnAzN?=
- =?us-ascii?Q?4w4XcQLNndZCzhpveGcKuE+oPk0hSy8a7O6hSUMlyqPkrncK0kaXCD9LIXfZ?=
- =?us-ascii?Q?740QHwR0ktqo1w1TKRXoO6+AbZY5v4UvHgcO3BfFDmu2eqretpyBIPs7KbdC?=
- =?us-ascii?Q?x3gJNigV+tBvjVoThu5m4JLTkroYUjd29+oogxuj5Lp/0Bb0TF8KVTAEb3vX?=
- =?us-ascii?Q?Oao8THhhVOIza4P+aruaR2gpKN5nP3X8+0lbdaD9U8xSCahUzxbIxPhh7dM5?=
- =?us-ascii?Q?ID74/mAI5Pjy8l/Fkmc6rvHsQwgdxBcbMO10PLTJcwJLhSk44GMTx6fioCcL?=
- =?us-ascii?Q?EBK5+xm2ls/KGV1Abk/GmCM2pjhLdP94Mho2glD54ZTJPApOBrhPfzNkDQXV?=
- =?us-ascii?Q?swXWpjB3UizPoAdHYFZXzZkJIINb6VX09yplUZwyA2ha/jNmsIOhQ1fHLl3a?=
- =?us-ascii?Q?P0I8CBHTSTEzjGDmpounEsMtT2yTEE0GGJDnKiCAsfVVuF6pzS4lbzJDjUo2?=
- =?us-ascii?Q?7faKkubTZyjF7YIzrUMpmC163azldUnv71hNyanSNBD2M17fjxT9WI+rwZtE?=
- =?us-ascii?Q?L/3Ire2mdcH8VNBLIEr6rWprhAWzniZnXbSxRowHUz8ua8YQhUul4fQCoYfZ?=
- =?us-ascii?Q?PHYmBUXVOcUTCY4sg89hx/weY9TJ5XjDDa+8JXRSJ93JKyeWnWRdfTB6Ld74?=
- =?us-ascii?Q?Yxo9+gL8NMv9tq9EOqBk5MO9zwGxmaA1XlFMGa/25y8+zspA5RKR1myZdb89?=
- =?us-ascii?Q?gowUEg1L+kQxsLzAeX5lrN5TcimCWPsZt1IOvv/v0bo9nypYZiYFR0YCftBs?=
- =?us-ascii?Q?yXXxbscBCp84cph+yAq0ccukXxLSSGxvEbjGJyyCF3cX+vFRk7izIzm7rvzL?=
- =?us-ascii?Q?t/N5YvIlHSY8jqzwT3D0xgg=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?S74UO5/T2NdZQ65zl8OkDPrbOIy1d77i2A8aKgdR/WjQDWOyRRR56pw8AVI8?=
+ =?us-ascii?Q?+VViAN0BB7GV7cKxHiMqIF0ludtmnACrPk5+OQXzecZ48lfyBaTmLueWGArH?=
+ =?us-ascii?Q?ORYTKb3PDkLbmWPFYaleYJpAoHvfVAVNVNI0sr/El3doqEVehnT9rVujgTc8?=
+ =?us-ascii?Q?CHHdURFPX7VNesMOpOSR+39AIw2hIIt4LpUrQqVaROs5iC9c0DkuCTDPIskG?=
+ =?us-ascii?Q?44t8cn9Ye1270xTNa3KY9jrZI/Yo2M0z4exE1csbwkWfp7LcGr/6xfArZjR4?=
+ =?us-ascii?Q?By49luy1V5Ja+Q5VnNnMVk/hfBHTj4cdwA2p1SvoezjjMcWk06xnhz/p83gQ?=
+ =?us-ascii?Q?bl+ZaHocaoVsdYbdtT70hgjunTWMzfA6gpgDDvsR8TdF+CE+nbQNCPCoQHv2?=
+ =?us-ascii?Q?fSkfMbSz5ShVfOQNhacZjoVq4105BZumXUGSTYs3UGKlMjF5Ak3VhBcIiyqK?=
+ =?us-ascii?Q?/ZLjEtwUWUFb+pNx0xyj6kUfaZIHWXrVilObcqFQ11T+QdwSUSNPdt/aX4xD?=
+ =?us-ascii?Q?ZYTldapK+DQY5mmiGbKTHy3lhSI4/iGf+oZIRe/fBGfxNJ0fcaddNUHBhuiT?=
+ =?us-ascii?Q?iRse7gyW52U3ZMQ2EyLEgoMnzK0/MUyp/QftZULONw5usbO8/s8uF2mRgCUs?=
+ =?us-ascii?Q?eOehfcXiCWX9dzH2Iomv6hwJjFdGzATdw9YD7K5Fbb8LfogJVPT2TLUR+Rta?=
+ =?us-ascii?Q?d4xBwD3R3uoUqSYHfDJcjmFYtQU7j8/3mtXtQQdqIoH8tzfeJSfjJi0+sGR/?=
+ =?us-ascii?Q?5QvV3zRaQSy6AzJw8R+h2B2i9vtw1kXgnPudhZHEmcpAKTiKOL1sJNfmadrP?=
+ =?us-ascii?Q?6nmz7t/YEQ8reTkvKEFrvsvEXykNcL00MovO9E/fOgg11bxaQngiihhqL8nK?=
+ =?us-ascii?Q?X7LNHsjNKyrdJRZuJkXeIt4ooic3YS82BQCpCdmOTSyvEEuRFa7ERXKLQfLx?=
+ =?us-ascii?Q?gVXR8cU/UwukX72dgY2bsQD3Ewta1HxR3uQmBl/fDJ9C8zk/q2PeHsANvizA?=
+ =?us-ascii?Q?nemLG6N+tBZQ8SKdPpATBqa2m02zgZOfhNNQegoVyWDsRnPftJftTaaeioWV?=
+ =?us-ascii?Q?e1KfMVr4JjVxrL6Xc5vk/F6gGcuspp7KAHpnR6hNl9otOlVAtDKLUtlUPJii?=
+ =?us-ascii?Q?XELN/tZ8Zr9bDTGHLYhw3XFb/u81gXpfDkQHhUU2WUUeMafil7dNraQR7LBZ?=
+ =?us-ascii?Q?LJVwK5guOtAObuqVZbW66MmEkJrG+rdE1fO/Z8lksVJLTY3zeM8DhJYi2Ber?=
+ =?us-ascii?Q?BmsjO8ThmL3qYOFJczyisnPcFVvt33imecupezJnxvpOIJJq+CxmlUruhYpc?=
+ =?us-ascii?Q?e/KHVLAwZaMYy1vDEAiE/i410w2q670xTwfU2dhYgAb/2c95dK1tK8COGljO?=
+ =?us-ascii?Q?ByaGFWZj00xuiYV9NbEHM2YmJocJDimO9jgeJO+qbVwaWThfrPm0t1PSw/3Z?=
+ =?us-ascii?Q?9I9fdlAHdPn5YU+Hs4nE+DnY4WrXMDTVaS7XnADkgwtaabhHzty2mKMB/Wno?=
+ =?us-ascii?Q?DYWNswEVKeewPHTI2PATslON4KSNI6TBipXhMR6KGDG/oMdOVhxXeUDrNcnE?=
+ =?us-ascii?Q?F/xMOhwKDqIRl38w5xTukLfKgozyhZixMARwi24yKoDoVOzokIYd+4AZr+1i?=
+ =?us-ascii?Q?rbYyiEAxZI/UqCeH1MZMij4=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 278cc6b7-1819-430c-f912-08dd731d68ce
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49d04797-4d16-4f86-84a9-08dd731d690e
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3877.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2025 02:07:10.7619 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2025 02:07:11.1738 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WiBr8FWyRPYpEwvtQkw261nBWhCIQamTOSonahyX6PZ1aOSA6QAj89Iwj6Q+ei9XHCUb7QyHg4ZyyQbaORki+pxZFrjazTMqXVdW66JTwwA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: gvyJpzIPRgJy2XgKvdleOOmisLPExwuIjvl8Quz4NjobBbwEES/C9Ux4Qsoz4c7FfocaA2vzhPmFy/z4Ch5Lz588H8tEqVHZXFujBZQdf+A=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB5151
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,108 +163,305 @@ X-Virus-Status: Clean
 
 From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Add reset manager registers in preparation for F2S bridge reset
-support as well as the mask support to enable/disable the bridges.
-
-Mask value:
-BIT0: soc2fpga
-BIT1: lwhps2fpga
-BIT2: fpga2soc
-
-These bridges are available only in Stratix10:
-BIT3: f2sdram0
-BIT4: f2sdram1
-BIT5: f2sdram2
+Enable reset support for FPGA2SDRAM bridge for Stratix10, as well as
+FPGA2SoC and SoC2FPGA bridges for all SoC64 families.
 
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- .../include/mach/reset_manager_soc64.h         | 18 +++++++++++++++---
- arch/arm/mach-socfpga/misc_soc64.c             |  2 +-
- include/linux/intel-smc.h                      | 15 +++++++++++----
- 3 files changed, 27 insertions(+), 8 deletions(-)
+ arch/arm/mach-socfpga/reset_manager_s10.c | 236 ++++++++++++++++++----
+ 1 file changed, 198 insertions(+), 38 deletions(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/reset_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/reset_manager_soc64.h
-index 058fdd6e548..4b010be9ee8 100644
---- a/arch/arm/mach-socfpga/include/mach/reset_manager_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/reset_manager_soc64.h
-@@ -10,9 +10,12 @@
- void reset_deassert_peripherals_handoff(void);
- int cpu_has_been_warmreset(void);
- void print_reset_info(void);
--void socfpga_bridges_reset(int enable);
-+void socfpga_bridges_reset(int enable, unsigned int mask);
- 
- #define RSTMGR_SOC64_STATUS	0x00
-+#define RSTMGR_SOC64_HDSKEN	0x10
-+#define RSTMGR_SOC64_HDSKREQ	0x14
-+#define RSTMGR_SOC64_HDSKACK	0x18
- #define RSTMGR_SOC64_MPUMODRST	0x20
- #define RSTMGR_SOC64_PER0MODRST	0x24
- #define RSTMGR_SOC64_PER1MODRST	0x28
-@@ -20,8 +23,17 @@ void socfpga_bridges_reset(int enable);
- 
- #define RSTMGR_MPUMODRST_CORE0		0
- #define RSTMGR_PER0MODRST_OCP_MASK	0x0020bf00
--#define RSTMGR_BRGMODRST_DDRSCH_MASK	0X00000040
--#define RSTMGR_BRGMODRST_FPGA2SOC_MASK	0x00000004
-+
-+#define RSTMGR_BRGMODRST_SOC2FPGA_MASK		BIT(0)
-+#define RSTMGR_BRGMODRST_LWSOC2FPGA_MASK	BIT(1)
-+#define RSTMGR_BRGMODRST_FPGA2SOC_MASK		BIT(2)
-+#define RSTMGR_BRGMODRST_F2SDRAM0_MASK		BIT(3)
-+#define RSTMGR_BRGMODRST_F2SDRAM1_MASK		BIT(4)
-+#define RSTMGR_BRGMODRST_F2SDRAM2_MASK		BIT(5)
-+#define RSTMGR_BRGMODRST_DDRSCH_MASK		BIT(6)
-+
-+#define RSTMGR_HDSKEN_FPGAHSEN		BIT(2)
-+#define RSTMGR_HDSKREQ_FPGAHSREQ	BIT(2)
- 
- /* SDM, Watchdogs and MPU warm reset mask */
- #define RSTMGR_STAT_SDMWARMRST		0x2
-diff --git a/arch/arm/mach-socfpga/misc_soc64.c b/arch/arm/mach-socfpga/misc_soc64.c
-index e0b2b4237e1..104b24241e4 100644
---- a/arch/arm/mach-socfpga/misc_soc64.c
-+++ b/arch/arm/mach-socfpga/misc_soc64.c
-@@ -107,5 +107,5 @@ void do_bridge_reset(int enable, unsigned int mask)
- 		return;
- 	}
- 
--	socfpga_bridges_reset(enable);
-+	socfpga_bridges_reset(enable, mask);
- }
-diff --git a/include/linux/intel-smc.h b/include/linux/intel-smc.h
-index a54eff43add..6455335bae4 100644
---- a/include/linux/intel-smc.h
-+++ b/include/linux/intel-smc.h
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0 */
+diff --git a/arch/arm/mach-socfpga/reset_manager_s10.c b/arch/arm/mach-socfpga/reset_manager_s10.c
+index a634c11a028..abb62a9b49f 100644
+--- a/arch/arm/mach-socfpga/reset_manager_s10.c
++++ b/arch/arm/mach-socfpga/reset_manager_s10.c
+@@ -1,21 +1,34 @@
+ // SPDX-License-Identifier: GPL-2.0
  /*
-  * Copyright (C) 2017-2018, Intel Corporation
+  * Copyright (C) 2016-2018 Intel Corporation <www.intel.com>
 + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+  *
   */
  
- #ifndef __INTEL_SMC_H
-@@ -482,10 +483,16 @@ INTEL_SIP_SMC_FAST_CALL_VAL(INTEL_SIP_SMC_FUNCID_FPGA_CONFIG_COMPLETED_WRITE)
-  * Call register usage:
-  * a0 INTEL_SIP_SMC_HPS_SET_BRIDGES
-  * a1 Set bridges status:
-- *      0 - Disable
-- *      1 - Enable
-- * a2-7 not used
-- *
-+ *	Bit 0: 0 - Disable, 1 - Enable
-+ *	Bit 1: 1 - Has mask value in a2
-+ * a2 Mask value
-+ *	Bit 0: soc2fpga
-+ *	Bit 1: lwhps2fpga
-+ *	Bit 2: fpga2soc
-+ *	Bit 3: f2sdram0	(For Stratix 10 only)
-+ *	Bit 4: f2sdram1	(For Stratix 10 only)
-+ *	Bit 5: f2sdram2	(For Stratix 10 only)
-+ * a3-7 not used
-  * Return status
-  * a0 INTEL_SIP_SMC_STATUS_OK
-  */
++#include <errno.h>
+ #include <hang.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
++#include <asm/secure.h>
+ #include <asm/arch/reset_manager.h>
+ #include <asm/arch/smc_api.h>
+ #include <asm/arch/system_manager.h>
++#include <asm/arch/timer.h>
+ #include <dt-bindings/reset/altr,rst-mgr-s10.h>
++#include <exports.h>
+ #include <linux/iopoll.h>
+ #include <linux/intel-smc.h>
++#include <wait_bit.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#define TIMEOUT_300MS     300
++
++/* F2S manager registers */
++#define F2SDRAM_SIDEBAND_FLAGINSTATUS0	0x14
++#define F2SDRAM_SIDEBAND_FLAGOUTSET0	0x50
++#define F2SDRAM_SIDEBAND_FLAGOUTCLR0	0x54
++
+ /* Assert or de-assert SoCFPGA reset manager reset. */
+ void socfpga_per_reset(u32 reset, int set)
+ {
+@@ -56,66 +69,213 @@ void socfpga_per_reset_all(void)
+ 	writel(0xffffffff, socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER1MODRST);
+ }
+ 
+-void socfpga_bridges_reset(int enable)
++static void socfpga_f2s_bridges_reset(int enable, unsigned int mask)
+ {
+-#if !defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_ATF)
+-	u64 arg = enable;
++	int ret;
++	u32 brg_mask;
++	u32 flagout_idlereq = 0;
++	u32 flagoutset_fdrain = 0;
++	u32 flagoutset_en = 0;
++	u32 flaginstatus_idleack = 0;
++	u32 flaginstatus_respempty = 0;
++
++	if (CONFIG_IS_ENABLED(TARGET_SOCFPGA_STRATIX10)) {
++		/* Support fpga2soc and f2sdram */
++		brg_mask = mask & (RSTMGR_BRGMODRST_FPGA2SOC_MASK |
++				   RSTMGR_BRGMODRST_F2SDRAM0_MASK |
++				   RSTMGR_BRGMODRST_F2SDRAM1_MASK |
++				   RSTMGR_BRGMODRST_F2SDRAM2_MASK);
+ 
+-	int ret = invoke_smc(INTEL_SIP_SMC_HPS_SET_BRIDGES, &arg, 1, NULL, 0);
+-	if (ret) {
+-		printf("SMC call failed with error %d in %s.\n", ret, __func__);
++		if (brg_mask & RSTMGR_BRGMODRST_F2SDRAM0_MASK) {
++			flagout_idlereq |= BIT(0);
++			flaginstatus_idleack |= BIT(1);
++			flagoutset_fdrain |= BIT(2);
++			flagoutset_en |= BIT(1);
++			flaginstatus_respempty |= BIT(3);
++		}
++
++		if (brg_mask & RSTMGR_BRGMODRST_F2SDRAM1_MASK) {
++			flagout_idlereq |= BIT(3);
++			flaginstatus_idleack |= BIT(5);
++			flagoutset_fdrain |= BIT(5);
++			flagoutset_en |= BIT(4);
++			flaginstatus_respempty |= BIT(7);
++		}
++
++		if (brg_mask & RSTMGR_BRGMODRST_F2SDRAM2_MASK) {
++			flagout_idlereq |= BIT(6);
++			flaginstatus_idleack |= BIT(9);
++			flagoutset_fdrain |= BIT(8);
++			flagoutset_en |= BIT(7);
++			flaginstatus_respempty |= BIT(11);
++		}
++	} else {
++		/* Support fpga2soc only */
++		brg_mask = mask & RSTMGR_BRGMODRST_FPGA2SOC_MASK;
++		if (brg_mask & RSTMGR_BRGMODRST_FPGA2SOC_MASK) {
++			flagout_idlereq |= BIT(0);
++			flaginstatus_idleack |= BIT(1);
++			flagoutset_fdrain |= BIT(2);
++			flagoutset_en |= BIT(1);
++			flaginstatus_respempty |= BIT(3);
++		}
++	}
++
++	/* mask is not set, return here */
++	if (!brg_mask)
+ 		return;
++
++	if (enable) {
++		clrbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_BRGMODRST,
++			     brg_mask);
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTCLR0,
++			     flagout_idlereq);
++
++		/* Wait for mpfe noc idleack to 0 */
++		wait_for_bit_le32((u32 *)(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGINSTATUS0),
++			     flaginstatus_idleack, false, TIMEOUT_300MS, false);
++
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTCLR0,
++			     flagoutset_fdrain);
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTSET0, flagoutset_en);
++
++		udelay(1); /* wait 1us */
++	} else {
++		if (readl((socfpga_get_rstmgr_addr() +
++		    RSTMGR_SOC64_BRGMODRST) & brg_mask)) {
++			/* Bridge cannot be reset twice */
++			return;
++		}
++
++		setbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_HDSKEN,
++			     RSTMGR_HDSKEN_FPGAHSEN);
++		setbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_HDSKREQ,
++			     RSTMGR_HDSKREQ_FPGAHSREQ);
++
++		/* Wait for FPGA ack the handshake request to 1 */
++		wait_for_bit_le32((u32 *)(socfpga_get_rstmgr_addr() +
++			     RSTMGR_SOC64_HDSKACK), RSTMGR_HDSKREQ_FPGAHSREQ,
++			     true, TIMEOUT_300MS, false);
++
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTCLR0, flagoutset_en);
++
++		udelay(1);
++
++		/* Requests MPFE NoC to idle */
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTSET0, flagout_idlereq);
++
++		/*  Force F2S bridge to drain */
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTSET0, flagoutset_fdrain);
++
++		/* Wait for respond queue empty status to 1 (resp idle) */
++		ret = wait_for_bit_le32((u32 *)(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++					   F2SDRAM_SIDEBAND_FLAGINSTATUS0),
++					   flaginstatus_respempty, true,
++					   TIMEOUT_300MS, false);
++
++		/* Confirm again */
++		if (!ret)
++			ret = wait_for_bit_le32((u32 *)
++					   (SOCFPGA_F2SDRAM_MGR_ADDRESS +
++					   F2SDRAM_SIDEBAND_FLAGINSTATUS0),
++					   flaginstatus_respempty, true,
++					   TIMEOUT_300MS, false);
++
++		setbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_BRGMODRST,
++			     brg_mask & ~RSTMGR_BRGMODRST_FPGA2SOC_MASK);
++		clrbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_HDSKREQ,
++			     RSTMGR_HDSKREQ_FPGAHSREQ);
++		setbits_le32(SOCFPGA_F2SDRAM_MGR_ADDRESS +
++			     F2SDRAM_SIDEBAND_FLAGOUTCLR0,
++			     flagout_idlereq);
+ 	}
+-#else
+-	u32 reg;
++}
++
++static void socfpga_s2f_bridges_reset(int enable, unsigned int mask)
++{
++	unsigned int noc_mask = 0;
++	unsigned int brg_mask = 0;
++
++	if (mask & RSTMGR_BRGMODRST_SOC2FPGA_MASK) {
++		noc_mask = SYSMGR_NOC_H2F_MSK;
++		brg_mask = RSTMGR_BRGMODRST_SOC2FPGA_MASK;
++	}
++
++	if (mask & RSTMGR_BRGMODRST_LWSOC2FPGA_MASK) {
++		noc_mask |= SYSMGR_NOC_LWH2F_MSK;
++		brg_mask |= RSTMGR_BRGMODRST_LWSOC2FPGA_MASK;
++	}
++
++	/* s2f mask is not set, return here */
++	if (!brg_mask)
++		return;
+ 
+ 	if (enable) {
+ 		/* clear idle request to all bridges */
+ 		setbits_le32(socfpga_get_sysmgr_addr() +
+-			     SYSMGR_SOC64_NOC_IDLEREQ_CLR, ~0);
++			     SYSMGR_SOC64_NOC_IDLEREQ_CLR, noc_mask);
+ 
+-		/* Release all bridges from reset state */
++		/* Release SOC2FPGA bridges from reset state */
+ 		clrbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_BRGMODRST,
+-			     ~0);
++			     brg_mask);
+ 
+-		/* Poll until all idleack to 0 */
+-		read_poll_timeout(readl, reg, !reg, 1000, 300000,
+-				  socfpga_get_sysmgr_addr() +
+-				  SYSMGR_SOC64_NOC_IDLEACK);
++		/* Wait for all NOC master ack to 0 */
++		wait_for_bit_le32((u32 *)(socfpga_get_sysmgr_addr() +
++			     SYSMGR_SOC64_NOC_IDLEACK), noc_mask, false,
++			     TIMEOUT_300MS, false);
+ 	} else {
+ 		/* set idle request to all bridges */
+-		writel(~0,
+-		       socfpga_get_sysmgr_addr() +
+-		       SYSMGR_SOC64_NOC_IDLEREQ_SET);
++		setbits_le32(socfpga_get_sysmgr_addr() +
++			     SYSMGR_SOC64_NOC_IDLEREQ_SET, noc_mask);
+ 
+ 		/* Enable the NOC timeout */
+ 		writel(1, socfpga_get_sysmgr_addr() + SYSMGR_SOC64_NOC_TIMEOUT);
+ 
+-		/* Poll until all idleack to 1 */
+-		read_poll_timeout(readl, reg,
+-				  reg == (SYSMGR_NOC_H2F_MSK |
+-					  SYSMGR_NOC_LWH2F_MSK),
+-				  1000, 300000,
+-				  socfpga_get_sysmgr_addr() +
+-				  SYSMGR_SOC64_NOC_IDLEACK);
+-
+-		/* Poll until all idlestatus to 1 */
+-		read_poll_timeout(readl, reg,
+-				  reg == (SYSMGR_NOC_H2F_MSK |
+-					  SYSMGR_NOC_LWH2F_MSK),
+-				  1000, 300000,
+-				  socfpga_get_sysmgr_addr() +
+-				  SYSMGR_SOC64_NOC_IDLESTATUS);
+-
+-		/* Reset all bridges (except NOR DDR scheduler & F2S) */
++		/* Wait for all NOC master ack to 1 */
++		wait_for_bit_le32((u32 *)(socfpga_get_sysmgr_addr() +
++			     SYSMGR_SOC64_NOC_IDLEACK), noc_mask, true,
++			     TIMEOUT_300MS, false);
++
++		/* Wait for all NOC master idlestatus to 1 */
++		wait_for_bit_le32((u32 *)(socfpga_get_sysmgr_addr() +
++			     SYSMGR_SOC64_NOC_IDLESTATUS), noc_mask, true,
++			     TIMEOUT_300MS, false);
++
++		/* Reset all SOC2FPGA bridges */
+ 		setbits_le32(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_BRGMODRST,
+-			     ~(RSTMGR_BRGMODRST_DDRSCH_MASK |
+-			       RSTMGR_BRGMODRST_FPGA2SOC_MASK));
++			     brg_mask);
+ 
+ 		/* Disable NOC timeout */
+ 		writel(0, socfpga_get_sysmgr_addr() + SYSMGR_SOC64_NOC_TIMEOUT);
+ 	}
+-#endif
++}
++
++void socfpga_bridges_reset(int enable, unsigned int mask)
++{
++	if (!IS_ENABLED(CONFIG_XPL_BUILD) && IS_ENABLED(CONFIG_SPL_ATF)) {
++		u64 arg[2];
++		int ret;
++
++		/* Set bit-1 to indicate has mask value in arg[1]. */
++		arg[0] = (enable & BIT(0)) | BIT(1);
++		arg[1] = mask;
++
++		ret = invoke_smc(INTEL_SIP_SMC_HPS_SET_BRIDGES, arg,
++				 ARRAY_SIZE(arg), NULL, 0);
++		if (ret)
++			printf("Failed to %s the HPS bridges, check bridges availability. Status %d.\n",
++				enable ? "enable" : "disable", ret);
++	} else {
++		socfpga_s2f_bridges_reset(enable, mask);
++		socfpga_f2s_bridges_reset(enable, mask);
++	}
+ }
+ 
+ /*
 -- 
 2.25.1
 
