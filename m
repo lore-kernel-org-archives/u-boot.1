@@ -4,99 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC9AC36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 18:09:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97066C36010
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 18:21:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54DB682A16;
-	Fri,  4 Apr 2025 20:09:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C950182A0C;
+	Fri,  4 Apr 2025 20:21:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rkTZukpC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iBe5EaLo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DE3182A36; Fri,  4 Apr 2025 20:09:26 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 9C7BF82A16; Fri,  4 Apr 2025 20:21:00 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3463829C3
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 20:09:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28A1D829C3
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 20:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-af590aea813so2477315a12.0
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 11:09:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-727388e8f6cso1481887a34.0
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 11:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743790162; x=1744394962; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Zspd/Dd08+W4HbKSq6jQtbeQtixvU/IM/Lo4ReHWg+o=;
- b=rkTZukpCLvz+JoBTCLF9mVNs7OqO3q5s78NAyyQHxahrES9FU5lASt8es3Lic0RiYW
- NVBlRT9sEajCsL0FE1sz1NRjzXo7PVBMIX/WycOfDMrNRLXp/xBnccnbDLOF4w46ucAz
- 7kP/TZPBRAXh+FtjExSJUHOBGbPWSoDvJqOEid9gAkvEZoH9HgBhJrxirvV5s+LVH8Nr
- jUVUilBRoHEkVXCYkrXtBi75Wafl6/3H4RbeTjXAp5ZUwHJSoq2c9DGv82EOteqXeY/u
- c78s1A//M55E63fGZRV6dXsIYREmD5IwSH0tK3dbmb7FIuKT4RVSEKPXNks65uebl3RN
- O2Xg==
+ d=konsulko.com; s=google; t=1743790857; x=1744395657; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vLU6c4YPgUzLnlPgjsDGc1RAWFxiSZuQGPNa2XdQReM=;
+ b=iBe5EaLoea4aml8gGJOB3P2SFtHexStrL4kTl6fbzsBNPCuXsfscQB0NkwuRZWiDul
+ YUxXc971H0H+ZB35x++avq1+LAf4fpjV5Fc4uGgy+e0+uwVncU5vFgGT9lQk0Urx9j1O
+ //5K+TVSejuTGJWfWOotMGFcfpJ9DDSpjTcKA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743790162; x=1744394962;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Zspd/Dd08+W4HbKSq6jQtbeQtixvU/IM/Lo4ReHWg+o=;
- b=o2zpCfCCohj78TQ3mabCNfU2c4n2FIrNjOuIoTmX/BljvlVcLnrwrAUnTxAWT02dQJ
- VNwf39FJeKTdMuqQe+rrwOXctuiTpwRMVMxl2kuv0IM5bDvLHPihw/SFkLyej7aCJobG
- UsW3rwF5qEkO0o5TrY9rxd2Idl71z8xbfuMPAx+tE6d9vfjsrY4tkz3B+rFs6eTnl0w5
- +IEcVhj56dJvagWqQ68Y0UBXUyzQf91XfeeuffuvOb2uCeig6YDQ+9Qb0iFBPwDC1FZz
- KGeFKmb/G3uqazvYLi0MT7wb7DU02T6y9mt50jW2xAIMegwY8QfnnEH9LSpbL6TYOn3D
- /29g==
+ d=1e100.net; s=20230601; t=1743790857; x=1744395657;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vLU6c4YPgUzLnlPgjsDGc1RAWFxiSZuQGPNa2XdQReM=;
+ b=m9yuCVEYtFt3OX+u63263TkBSNVVxuIJc/NWUt/h6vdpMI9hfUIQXtP7RThSYgg76+
+ 5810Yoc898tYJoUNqHEf+w7RVaDiK7M6Rcmct1bzl4nizT9NPExqqhik2kWGKlMqHVnq
+ E67reH7nt6t+tR76pOCjTWB3fkRYGa3gXeO/WAN50fcAYEcvrvDLAZu8DDSVX8yGF97J
+ 4s1NB5rfPXTiWFVfo4PJUeMobLwWcIpHfJFbdF7OuYiuOrj5GgpJkaS3U+wIrDOPPwF+
+ F5W1CAwgIllq1e1jj1Hk3z1pvgnV+ozIUD2TnicrS43xhTcTHtvnskZKiBcORxr9VdOn
+ X+hg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJd/aVz3P+H14/v8wc0FlMc2k2NenEWr+BALmyKUs5yCe/w3H7JNdhYuv/aMea82f0adPfBB4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwaNwHjHEsu4BiCHCuTyhDnoWSsBI9P1Os3Z4Fp2zHgAX/q+qhT
- Xa5CcxfLLA+ev+3IYaFob0UxAztAmJOgkA4mU1FR2ZUU4l5IV25zUAtp76KOLVAedmeT3pK01SA
- fR9MXR1DAqE5q9Bb/CbAcaPt/UQV2i4Ugc8PIjQ==
-X-Gm-Gg: ASbGncuD4Wy+iVGup9YSuDVVmgTypfsHYw5WeLRk9Ooin46DIMe8ehfJtG6l28GAZlA
- 6gsWbxIXjK+Cd3u8RK1XmyDJaklZGTjqELSNtagVKxs5B0pE9PCx+woC+oodq+Z/0XJlGyDsvNQ
- kAObmij+Y/ES58TWiG+nnp0rb0SQudZVlOU5ucuw==
-X-Google-Smtp-Source: AGHT+IGtyoNzsrVlW6qxkWHwZZFti8dbdh5LvNx7Xdi4ZWCKkHIboxG2I0PzGaqJCRubdLKSbxrDc7RDSljjNJcowBs=
-X-Received: by 2002:a17:90b:568d:b0:2fc:aaf:74d3 with SMTP id
- 98e67ed59e1d1-3057a59ea40mr10331129a91.4.1743790162149; Fri, 04 Apr 2025
- 11:09:22 -0700 (PDT)
+ AJvYcCUGJkQRSqnim05a0Z/zQ6pK/7k6BssUorueINIvrAnP0FdR3BwAwX1v4uVHxjtloxpK/18diuY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUnIMhtw1N0sbxWHO5h5lQ/vAGefsMKscbXjbYKFH430S9x6NW
+ IH/a3N35edeAFw9eEP22QfAbnQL5o19TwixgDe/ZFKNj+AYUUV4FzDu8UtDYDmPkDz4h4EQyO2i
+ V
+X-Gm-Gg: ASbGncvz8JO7ZBxwaws/+yFS4GonAFCfxnrbTAUjMfaXIBCWaNP6pgOZdRsU+91u27M
+ Q153yJ6aXhCMMrpKGcb7tG5jrpV/9szOtrOi32v77kTLbC8YZh7uvMZjzozgsm7WOLD+bY5xdnI
+ axzbQBm5bPLsDbqQFjPsMW5EuRuLJd71zcoaGb8QrHxIJkY/aTzUOwnRJw2C1Urawe6y4YlkYSB
+ +VQ88RLH3NhA33jx6FAhe7bZxHWuy0eqk6Ht2hN6qRIQZvw06II6tjywlkS3LikhdVrUuUUAAaq
+ Lr1FBOrBXSzHWEoOtfKMSrAfVuIsKxdY1CmK3tNvw1L7CY9QMM2gjuhwVdp/s0c6Le+0Hld18cI
+ S+GvY
+X-Google-Smtp-Source: AGHT+IHY56MiBVPk3CnFaj3e3weQmoHEMPxcSEaluUKgsSVnhd66A1SnaFqJLjhDxRylkBynSMCZAA==
+X-Received: by 2002:a05:6830:dc1:b0:72b:a175:2f0d with SMTP id
+ 46e09a7af769-72e365c000bmr3055045a34.0.1743790856902; 
+ Fri, 04 Apr 2025 11:20:56 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e3051171dsm752144a34.20.2025.04.04.11.20.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Apr 2025 11:20:56 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+In-Reply-To: <d1de0302-ad3a-44ba-ad1a-73cc1b6f34f1@linaro.org>
+References: <d1de0302-ad3a-44ba-ad1a-73cc1b6f34f1@linaro.org>
+Subject: Re: [GIT PULL] Please pull u-boot-amlogic-20250404 into master
+Message-Id: <174379085596.2587039.1164818831056569907.b4-ty@konsulko.com>
+Date: Fri, 04 Apr 2025 12:20:55 -0600
 MIME-Version: 1.0
-References: <20250328154401.3563921-1-sjg@chromium.org>
- <20250328161845.GB93000@bill-the-cat>
- <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
- <20250329000211.GH93000@bill-the-cat>
- <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
- <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
- <CAFLszTjo8HEzKbZAbO=neF57e69vGbWYsDVV_dD=kO6j_VH39w@mail.gmail.com>
-In-Reply-To: <CAFLszTjo8HEzKbZAbO=neF57e69vGbWYsDVV_dD=kO6j_VH39w@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 4 Apr 2025 14:09:08 -0400
-X-Gm-Features: AQ5f1JoWW0J32x6W19fSpfbhaD5l6-r0QzPXPzkxKIIxlIk8wuglxyMfLC6CCS0
-Message-ID: <CAEfUkUJNUhoyRY6S9-eYV5i9RT_GgYLRs+HRWocch8jYfVj2Lw@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,93 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, 04 Apr 2025 10:40:31 +0200, Neil Armstrong wrote:
 
-On Fri, 4 Apr 2025 at 13:40, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Raymond,
->
-> On Sat, 5 Apr 2025 at 03:49, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Hi Tom and Simon,
-> >
-> > On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > Hi Tom and Simon,
-> > >
-> > > On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
-> > > > > >
-> > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > so that it is simpler to understand and manage.
-> > > > > > >
-> > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > >
-> > > > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
-> > > > > > > CI at some point. In the meantime, the standard passage series[1] could
-> > > > > > > be resurrected to give some coverage.
-> > > > > > >
-> > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
-> > > > > >
-> > > > > > Based on how it's documented to be run in
-> > > > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
-> > > > > > that platforms using the handoff spec still work?
-> > > > >
-> > > > > I believe so, yes. I don't have that board to test it though. Raymond
-> > > > > may be able to test this series on QEMU?
-> > > >
-> > > > I was pointing you at the docs so that you would have access to testing
-> > > > it. That's part of the docs, running the emulator.
-> > > >
-> > >
-> > > I can help to test the firmware handoff on qemu.
-> > > I have all the necessary changes and unit tests for the OP-TEE repo
-> > > qemu v8 build to test this.
-> > > I will try to find some time early next week to review and test this
-> > > series before turning back to you.
-> > >
-> >
-> > Just a follow-up on the testing with TF-A and OP-TEE.
-> > Unfortunately, the patch series breaks the transfer list handoff to
-> > U-Boot completely and just end up with below error when U-Boot boots:
-> > ```
-> > No valid device tree binary found at 0000000000000000
-> > initcall failed at call 0000000060097bcc (err=-2)
-> > ### ERROR ### Please RESET the board ###
-> > ```
-> >
-> > U-Boot test version:
-> > 'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
-> >
-> > [1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
->
-> I suppose the FDT address in the register is not being read correctly.
->
-> Do you have a test case for this, e.g. in QEMU? Even if it is just
-> binary blobs for now, not suitable for CI, I'd like to get it in my
-> lab.
->
-> I did create a test back when I did standard passage, but that series
-> seems to have not been applied. I'll see if I can resurrect it.
->
+> Here's a last minute fix for the libre-computer boards fixing the capsule update feature.
+> 
+> Thanks,
+> Neil
+> 
+> The following changes since commit 82b69fc4224432d5aefa7ca750d950374cbc7fb2:
+> 
+>    Merge tag 'efi-2025-04-rc6' of https://source.denx.de/u-boot/custodians/u-boot-efi (2025-04-03 07:31:28 -0600)
+> 
+> [...]
 
-I am using the OP-TEE repo [1] qemu_v8 build to test. You will also
-need my patch [2] for enabling transfer_ist in all components.
+Merged into u-boot/master, thanks!
 
-[1] https://github.com/OP-TEE
-[2] https://github.com/OP-TEE/build/pull/821
+-- 
+Tom
 
-Regards,
-Raymond
 
-> Regards,
-> Simon
