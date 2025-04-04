@@ -4,79 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D4AC36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 16:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F311FC36010
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 17:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2459582A55;
-	Fri,  4 Apr 2025 18:36:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BD04829C3;
+	Fri,  4 Apr 2025 19:34:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CIz42zih";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qbCkwlMg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 336CE82A46; Fri,  4 Apr 2025 18:36:23 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 8CF2A82A0D; Fri,  4 Apr 2025 19:34:31 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B385829C3
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 18:36:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DF63807B1
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 19:34:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-72c173211feso700056a34.1
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 09:36:20 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-60219a77334so1128582eaf.1
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 10:34:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743784579; x=1744389379; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=i7C/tVGOultyRey4rrRskiS7A1W1im8uzq5hptYqLf0=;
- b=CIz42zihuYKiJ8WusGuDU/qYxTvv4cg5VvD4GGrl+0OD2vM+hG5RW1rNtFuN9uxi23
- GnR8JMASylGRV7oqPY2fXUrOgmqm4bb3AcKFOQR4HoJgVvX01KxUSahx4RuSfLSH4c2D
- GG/ZuAO6nOG943rAH/DmIxjkxB8LCuDxdACYY=
+ d=konsulko.com; s=google; t=1743788068; x=1744392868; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jAfpC9gp1f5rg+4ZGaMtiWJbch1tTCMKwEF1ihem9bg=;
+ b=qbCkwlMgvZCGNEpSWOiLM0DkdDxxAcDwWoudHFJDaGCku4kmY5Axv5+G9BAl78wsNo
+ v4unLhnyxuGRICFtnyZFF7rklCknrr+uLzjBLKigSXZkRxRst+d8AHy+7ueixLWMnALD
+ xpxk5wn9BBAGww9cKbHbeRibWoxzocxQJaaus=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743784579; x=1744389379;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=i7C/tVGOultyRey4rrRskiS7A1W1im8uzq5hptYqLf0=;
- b=EGVTw5grpexRvEL8oYmOLqTRzyMCBQyN8FxeV002STjoaNpB5vvmaDockj1oePdDxb
- ep6ej5fPHO4RsZv1zkOKfXzk9XTlswyy/WakkkGB5YOFUSLYFB98JhITYS4VCPjzBmd0
- UQTpYApiKIsyT3Mg5UPmuGyI0eZ67NLAlcUk/VP0sm4lmdQj7rzxcw4SWcaMKrjteOd9
- QhzNAplEe6PGi5cSTU9YGVgQMBZL2VB2iNQGLZvTl0Euut6mV3QJrqRiggkQb+dEVM5j
- i6/UL5tg+6lD4bWRlBlbtclYAGt3MZp05JZyZuCF/62hoSMrvnb8yf6qA7ggAStpG+4P
- xapw==
-X-Gm-Message-State: AOJu0YwCb6BNWDNDuN69Shd3z6rrcZEVHKvT28bSCap6rXjoLSbtb7Dz
- OoDfoUyDqETsFA16zg7NV0aQ02fdzrpiKrtQX5Yb3NR9bFkXIlzMK52hwBFqYhpCOpYX0Uxrors
- T
-X-Gm-Gg: ASbGncsUvaTIEid0PXzDuBwWCcviUIIGY4vJIg4NXodmqFgGyfNVRstv92ajGNKe6x7
- L+W4KXTT635Jytfkgbz7LLTgUmMWtUoQtUU/jp8YM+nfQ0zzwvLXMeiFq3VTkw5cUPfHb09Tnxm
- cbNQPpj+YKNsv2PYTE1isGxuSw9be4hulLRrez19EBkrgeahw1neH932dYbaaVQWMTDQRF+iDgz
- ggN2RCoURyp37tb1Hpd8GqhLiHLdgNgnzj5nENXzpZuACfTp7k1vzESgBotagVnp3rvoIpZnrLK
- YcAD13NCGj0xxR3cIDj2eveV6gEUpR+5gyC4rGcqi4jGpVgMq14oQW/A2iowl8t9GURMP/KBTmj
- 543Ni9CnD
-X-Google-Smtp-Source: AGHT+IG9wM/v2QexN9toQVdamZzy9UdKv5bh483um0qRFIDgEppG4NM805o8Zw89HvyLsmRmZZd2SQ==
-X-Received: by 2002:a05:6830:6418:b0:72b:89ca:5120 with SMTP id
- 46e09a7af769-72e366cfb40mr3282245a34.8.1743784579213; 
- Fri, 04 Apr 2025 09:36:19 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1743788068; x=1744392868;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jAfpC9gp1f5rg+4ZGaMtiWJbch1tTCMKwEF1ihem9bg=;
+ b=HxAO6JNSr94Zk/yCzvOxTdiPZWIq1UUicytR+fZG+yRqSFxgvL/qXgiugRA44Kf3IQ
+ pg0OxrBZEbxncAZFjDS1dBxih+SlDDpggI9hqpa8Q+/cRHG9VJ339UZ9HoGOYMUFIoEA
+ aRcjCfoQ0LEDs/Z2mAlUVyiM2n4hD487DFEpK7vmdy5fzpio/q56heNqEZsVuo/azeBv
+ YTdQy9VGxpgxKraQL/NUixhxlI/5W5JMou7nDVCvDxQekQRKYflmRWRrmZwNE4F9v0pk
+ nu533LeBFqP9sW3Wq/AuigdhaICoOYZlxJSVdg4N4AQKFEdmc07+wrgTZ0+3MMpmC71i
+ 370g==
+X-Gm-Message-State: AOJu0YxLjGxeCFmzOUaHRZCFl8MuOxCPKg4bAJae2L+0M217hNdb2Idd
+ h5FxiQWW494XSZH9V5lylXDOu7sy+ieJduoyrBwA1n9K0ZLXcaGea1fbculO5D0=
+X-Gm-Gg: ASbGncu3JJTq9Oq6v5tCHxmZYc45c5vkMQJRUMmnG5fbo9RdabnKjqhu8Aw+o8UmTtU
+ Q9UCS+IC5znIa0B0lAnYhudEOyU9p8GFhnFp1e6HA11uRv9/lcM5h1V18ALfTOzpBacbIQGEz1t
+ +KIdcmcAgQKPXF55hr/W5f+xIrXIwYyVe7zApZFwrZe/xWtgFw0JJ9YyL9U/o+wfX+e2OFRxRfQ
+ jL1fuaAUUuHYZsz/eZxlD6XmFMXrtNlQtkoHSP8/wZAqz7AjAkgCJ4UZUY7eZKB6uuey/u/mSrU
+ hNFVKO0B3/tFVInG5hjbnKiisW8Arv8Zr3gHaDolm6lldf14wZxK20eTIlNRxRdDmaSGDN8obFp
+ JpS2n
+X-Google-Smtp-Source: AGHT+IFkM4ewC2FeqdqVT5Z4VcQeFYUkb3gPllwWw8sL1UFqKHFoMDmMybJr6/XMM710abi/uKsmfQ==
+X-Received: by 2002:a05:6808:221b:b0:3fa:7909:2717 with SMTP id
+ 5614622812f47-40046687453mr1947834b6e.34.1743788068012; 
+ Fri, 04 Apr 2025 10:34:28 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e3059a457sm714789a34.51.2025.04.04.09.36.18
+ 5614622812f47-4003ff742a8sm689170b6e.20.2025.04.04.10.34.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Apr 2025 09:36:18 -0700 (PDT)
+ Fri, 04 Apr 2025 10:34:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] x86: emulation: Disable bloblist for now
-Date: Fri,  4 Apr 2025 10:36:17 -0600
-Message-ID: <20250404163617.2577637-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Rasmus Villemoes <ravi@prevas.dk>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dragan Simic <dsimic@manjaro.org>, Greg Malysa <malysagreg@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Nam Cao <namcao@linutronix.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Soeren Moch <smoch@web.de>, 
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>
+In-Reply-To: <20250318152059.1464369-1-sjg@chromium.org>
+References: <20250318152059.1464369-1-sjg@chromium.org>
+Subject: Re: [PATCH v2 0/7] membuff: Add tests and update to support a flag
+ for empty/full
+Message-Id: <174378806585.2582470.11273077700960331166.b4-ty@konsulko.com>
+Date: Fri, 04 Apr 2025 11:34:25 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,68 +117,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As reported by Niklas Sombert, enabling bloblist on these platforms
-means that we currently don't pass SMBIOS tables on to later stages. For
-the v2025.04 release, disable bloblists as that is sufficient to restore
-functionality and we will address the underlying problem for the next
-release.
+On Tue, 18 Mar 2025 16:20:41 +0100, Simon Glass wrote:
 
-Link: https://lore.kernel.org/u-boot/c1dc7446-d1d0-4ef2-b201-09fc612aa8db@uni-duesseldorf.de
-Reported-by: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Simon Glass <sjg@chromium.org>
----
- configs/qemu-x86_64_defconfig | 5 +----
- configs/qemu-x86_defconfig    | 5 +----
- 2 files changed, 2 insertions(+), 8 deletions(-)
+> The membuff implementation curently has no tests. It also assumes that
+> head and tail can never correspond unless the buffer is empty.
+> 
+> This series provides a compile-time flag to support a 'full' flag. It
+> also adds some tests of the main routines.
+> 
+> The data structure is also renamed to membuf which fits better with
+> U-Boot.
+> 
+> [...]
 
-diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 792ba06c2b8b..662f97184191 100644
---- a/configs/qemu-x86_64_defconfig
-+++ b/configs/qemu-x86_64_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_X86=y
- CONFIG_TEXT_BASE=0x1110000
- CONFIG_SYS_MALLOC_F_LEN=0x1000
--CONFIG_BLOBLIST_SIZE_RELOC=0x20000
- CONFIG_NR_DRAM_BANKS=8
- CONFIG_ENV_SIZE=0x40000
- CONFIG_MAX_CPUS=2
-@@ -34,9 +33,7 @@ CONFIG_LOGF_FUNC=y
- CONFIG_SPL_LOG=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_PCI_INIT_R=y
--CONFIG_BLOBLIST=y
--CONFIG_BLOBLIST_FIXED=y
--CONFIG_BLOBLIST_ADDR=0x10000
-+# CONFIG_BLOBLIST is not set
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-index 0b0e10c795f6..9948fa6d716c 100644
---- a/configs/qemu-x86_defconfig
-+++ b/configs/qemu-x86_defconfig
-@@ -1,7 +1,6 @@
- CONFIG_X86=y
- CONFIG_TEXT_BASE=0xFFF00000
- CONFIG_SYS_MALLOC_F_LEN=0x1000
--CONFIG_BLOBLIST_SIZE_RELOC=0x20000
- CONFIG_NR_DRAM_BANKS=8
- CONFIG_ENV_SIZE=0x40000
- CONFIG_MAX_CPUS=2
-@@ -24,9 +23,7 @@ CONFIG_LOG=y
- CONFIG_LOGF_FUNC=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_PCI_INIT_R=y
--CONFIG_BLOBLIST=y
--CONFIG_BLOBLIST_FIXED=y
--CONFIG_BLOBLIST_ADDR=0x10000
-+# CONFIG_BLOBLIST is not set
- CONFIG_CMD_CPU=y
- CONFIG_CMD_BOOTEFI_SELFTEST=y
- CONFIG_CMD_NVEDIT_EFI=y
+Applied to u-boot/next, thanks!
+
+[1/7] membuff: Rename functions to have membuf_ prefix
+      commit: 4662e5286aa259e158f314157d0d8f2ad213a321
+[2/7] membuff: Rename the files to membuf
+      commit: 9ca1789ff099a364c6e16dcb6f6ad2e8677f32f1
+[3/7] membuf: Rename struct
+      commit: 68b0af2127dbd7b304f897f4796c6eb86fd74402
+[4/7] membuf: Include stdbool
+      commit: f48f1705c357605f05f5a47b84c1c89dc33bec35
+[5/7] membuf: Correct implementation of membuf_dispose()
+      commit: 44e763bd6624f23fe6d94340efb43c627b5ce4a7
+[6/7] membuf: Add some tests
+      commit: 142a3cb63c81602ae4f48266a190ebceb483e536
+[7/7] membuf: Minor code-style improvements
+      commit: da8694a7d2cc9fdfd67e8a039ba1e70bdd543d0b
 -- 
-2.43.0
+Tom
+
 
