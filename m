@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75EAAC36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 13:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B6CC36010
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 13:51:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EA6E829C3;
-	Fri,  4 Apr 2025 15:50:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5BAC829A0;
+	Fri,  4 Apr 2025 15:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SFDDHFlX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dI5uZKCg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FDD4829C7; Fri,  4 Apr 2025 15:50:58 +0200 (CEST)
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
+ id 191D6829C7; Fri,  4 Apr 2025 15:50:59 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6B5B82991
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 15:50:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F278B829B8
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 15:50:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x442.google.com with SMTP id
- ffacd0b85a97d-39727fe912cso999765f8f.3
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 06:50:55 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43948021a45so19506045e9.1
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 06:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743774655; x=1744379455; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BD1wUKKCrbUmp6rla3NY493cuhq1KXNYy19SiPqkWpg=;
- b=SFDDHFlX+rF7fnjj1ZksSXYHJfFUADimOqkcuHR/sfd1eI1KMMhDO9ugiGGN8V5KAa
- F/HTmuEo7iaYs4qfnmUfiKXr1Zdb9cjkjfwLCuoqnHurfxJaniooBSjTlra2g0jU6I4G
- yJBsO1rWIZzNc8BPUysURSvsGFteHqCx4lVYPKsDD6j+rzNs/+/F3Id2p3qvaYiDdy7v
- /F7Jl8LLqmZjNl5NV8LIjoIFKYnoSmaTVjODQ6oZmcuUqo6Btj6Znja4zqZz1LYxPGIw
- YR+U0KXkuHbZe7sW+rhlRr8chfGfv26n7wjYE+V2PrGQIxXPr8JdA8X3fyducy4Ds8K/
- RA/Q==
+ d=linaro.org; s=google; t=1743774656; x=1744379456; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qi9by1MKh50q+7xZ6MMgeVvB3qppj0ZCwaLDnpWjMIk=;
+ b=dI5uZKCgXit0WQpvYpcqgwvQjB+IgCfBKAquNqDD21wnzW9By26vR8+825ZF/U5O7l
+ q8+/qc8wnHJWJgG5RRTQfd11nNrazH6+ZmZVorEdYeh1cDeVHbz5YD/F74hbV8cTvVxI
+ u9CnpFqaBmZ7+kTXwGRs5YaOmTK2hnJB/1eNuCJmvG0vDHNv21v7sjAQvDghYyXutOcj
+ dXLSfF+FW2vRzV04hc/jIoXy4AZEnp0FFa1TFhrqoAmTk8d99NJuftBP/ZIKnT5sX2KJ
+ r+pQ8MeL6g159sByGb9x/JjB8DeF+/UdoLziyRNk/PCx84wKbUNTuXjubxSF0aHbpbEw
+ tmtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743774655; x=1744379455;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BD1wUKKCrbUmp6rla3NY493cuhq1KXNYy19SiPqkWpg=;
- b=ENmg7o+AIyHiw++oSFnPkVPy1S+F0W4YpjFkmP/s7Y5hO+SGa71EyB+9IENDP7+3oH
- XAuf2np6WVCoFawstCBr7Rem8ygh3+I0i8sIOPAiCwYCETAVc5Uw5Cz3yr49k6YJKXj2
- fNwI5sUGUrbeL/mPMAr9hcSwcWBb49oSoiflEMDMO1sZhfkUcMJF8tqlWMdYPzHp9Vb6
- DFG6ErFnj3FkPBzwGfCyvKyIw14FngjDhhkFlGhJagcuX+CgpHMT+WASlbKvCvze+D6j
- cTgW3FWUOplRHI1+KqXUiAL1gn66Lx7PnAxlYUBq8MA1+PsrKGxE5qPfrqOxVHPtk9Oz
- zzsA==
-X-Gm-Message-State: AOJu0YzxiTy5OOWFslUbRaxacTlSzeowWJiJsJ+tUwXu3TC9t8DHxIHN
- SK1bTyoTHcSauNuGUkzT+LVd390wk8SxCyeYPWiji1t4Qvri2o2BnodDdq9VVWKLIpGRZGLQPzW
- uWb1wN+q+
-X-Gm-Gg: ASbGncvr7nByHc2XINLRmWJCjv3Bi6wtS3eDkfXTArMeS0WIOrIyEuSGfSf04o5UYY/
- n95p7NEIKrfN8uVf/wE8ipxbAumS/N3WqZrxc7zd2obBfpJkzJ67jGo1bHtmR2pdK1A13/E/dIe
- vzxkh91Wv3ez0XbaPsWlEQN9M05crRFgOAdCw7ZGlqWY0LSzuN+P8tGWu4M4gk7Lc0w1PLvjrgJ
- +mmHFXZRi5+tL+2xOYucIzrosm+LiDNhFcKM8xG9B7yKq3t9Gi/eckn0T6tKJB4v2XsreDB+bgB
- srogI1GQwlQUQPjk/ZOephxb1yDub0NSOdNW01KTkwpO8CpvIzfh3w==
-X-Google-Smtp-Source: AGHT+IGySSiPx1ZACd/LkleMijc4gYuPk6FJUAbo5uiIicZzrtiN6VTWph7N1bz5u6/9hU5cWvk5KA==
-X-Received: by 2002:a5d:5c84:0:b0:391:3094:d696 with SMTP id
- ffacd0b85a97d-39cba980b93mr2885926f8f.54.1743774655174; 
- Fri, 04 Apr 2025 06:50:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743774656; x=1744379456;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qi9by1MKh50q+7xZ6MMgeVvB3qppj0ZCwaLDnpWjMIk=;
+ b=B7auBIrcPVtjjAYmtoINr+2SRZYWBY4gq+57KjZI3urbF0o8TdqpmVOKz2BtkqdS4F
+ /th0GpGxBmaKkf1TcVgE+xxUwNSxqUWvwfocMyo0Ev0Rq93zKAXq1qYXrOW5/KKqzdOF
+ WQaWnUtTdG/zAYvUdlUG3RG+01cQTcH4FoSnl5OUtGO8SkbRFCUwon/P9rI7IjQsKSI/
+ VCLeg+wQhh26UkHbqEYFyLVAgmhdzmwQEY+L7EppSLdKDJ5OKhqZHPt+TotKcVYbICbU
+ 55GDAXU/D5yVkmHHiAGHaK6AW/zcHm22+Vue8pi1YYlbLKUGj4bsRHvKUcqKZ6p1y+d5
+ P46Q==
+X-Gm-Message-State: AOJu0YwVljJZxM7oMixZVrBFpalA/HsAhMem8WtW3iccstPEdFTyUyaH
+ jnqsqsmaN6eIQoRcmcixlNFO+e7kAkJa8XWFrHV0za4O1EEbdRMCaF1XxK66roUhp5SDDX39Inx
+ wFWRBSw==
+X-Gm-Gg: ASbGncvv6yCd4G+/HzuEgFkKc5g9HR3VBxPFmTwByU7sepAdHCB/WjSXUyQNy++Jjoq
+ 7ECtcjKgyDaTSgGV4TAM90vlp0YxPvXReAbh1LSlnJzrwmEOp8U/sSOBMnirZicrLx9zhh6Go3E
+ mMsqBPnZLDHyzvVZtlbPeK968hF3b4339sa2xoYIhcTqf1alqRIheDLuQFKG3847Pf51klCqOie
+ NSSPpsVy+5qKLbk3j9HUBHYML7t6gWO1/XmhGmISGf6JOSyQyK+jb6Hx5mHw1LF0zXAnq950obZ
+ 5B6JZ5osAm8chXCA2DJyL8yzOfpKkPPJZdnWyBjToDdRzcvJ5FaOMA==
+X-Google-Smtp-Source: AGHT+IHqdg9GfyzlFBNoCSEv7X3ovPIrXUrP3H+aQ5r4S1tENA2wQNG9hqvnilLKEt+aHe38WEQ7zg==
+X-Received: by 2002:a05:600c:500a:b0:43b:ce3c:19d0 with SMTP id
+ 5b1f17b1804b1-43ed0da06f1mr25982425e9.29.1743774656234; 
+ Fri, 04 Apr 2025 06:50:56 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:70d5:66af:ee2d:db3a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c301a7064sm4531821f8f.34.2025.04.04.06.50.54
+ ffacd0b85a97d-39c301a7064sm4531821f8f.34.2025.04.04.06.50.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Apr 2025 06:50:54 -0700 (PDT)
+ Fri, 04 Apr 2025 06:50:55 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH v6 0/3] Static initcalls
-Date: Fri,  4 Apr 2025 15:50:34 +0200
-Message-ID: <20250404135038.2134570-1-jerome.forissier@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v6 1/3] arm: asm/system.h: mrc and mcr need .arm if __thumb2__
+ is not set
+Date: Fri,  4 Apr 2025 15:50:35 +0200
+Message-ID: <20250404135038.2134570-2-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250404135038.2134570-1-jerome.forissier@linaro.org>
+References: <20250404135038.2134570-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,93 +105,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series replaces the dynamic initcalls (with function pointers) with
-static calls, and gets rid of initcall_run_list(), init_sequence_f,
-init_sequence_f_r and init_sequence_r. This makes the code simpler and the
-binary slighlty smaller: -2281 bytes/-0.21 % with LTO enabled and -510
-bytes/-0.05 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
+The mcr and msr instructions are available in Thumb mode only if
+Thumb2 is supported. Therefore, if __thumb2__ is not set, make
+sure we switch to ARM mode by inserting a .arm directive in the
+inline assembly.
 
-Execution time doesn't seem to change noticeably. There is no impact on
-the SPL.
+Fixes LTO link errors with kirkwood platforms, triggered by a later
+commit:
 
-The inline assembly fixes, although they look unrelated, are triggered
-on some platforms with LTO enabled. For example: kirkwood_defconfig.
+ tools/buildman/buildman -o /tmp/build -eP sheevaplug
+ [...]
+ {standard input}:24085: Error: selected processor does not support `mrc p15,0,r3,c1,c0,0' in Thumb mode
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/25514
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ arch/arm/include/asm/system.h             | 22 +++++++++++++++++-----
+ arch/arm/lib/cache.c                      |  5 +++--
+ arch/arm/mach-kirkwood/include/mach/cpu.h |  9 +++++----
+ 3 files changed, 25 insertions(+), 11 deletions(-)
 
-Changes in v6:
-- Rebase on next branch
-
-Changes in v5:
-- Fix mistake in initcall_run_r(): CONFIG_IS_ENABLED(SYS_EARLY_PCI_INIT)
-should have been !CONFIG_IS_ENABLED(...). As a result, several CI tests
-were failing. (Tom R.)
-- Restore fixes in test/py/tests/test_trace.py and arch/sh/lib/board.c
-which had unexpectedly disappeared from v4 and caused CI errors.
-- Fix CI error caused by wrong conditionals on the fix_fdt() call:
-  tools/buildman/buildman -o /tmp -seP powerpc
-  [...]
-  common/board_f.c:752:12: error: 'fix_fdt' defined but not used [-Werror=unused-function]
-- Add "arm: asm/system.h: mrc and mcr need .arm if __thumb2__ is not set"
-to fix a build error with LTO detecting mcr/mrc instructions emitted in
-Thumb mode on a CPU that doesn't support it:
-  make sheevaplug_defconfig
-  make -j$(nproc) CROSS_COMPILE="ccache arm-linux-gnueabi-"
-  [...]
-    LTO     u-boot
-  {standard input}: Assembler messages:
-  {standard input}:9241: Error: selected processor does not support `mcr p15,1,r0,c15,c11,0' in Thumb mode
-  {standard input}:19196: Error: selected processor does not support `mrc p15,1,r3,c15,c1,0' in Thumb mode
-  {standard input}:19223: Error: selected processor does not support `mcr p15,1,r3,c15,c1,0' in Thumb mode
-  {standard input}:19241: Error: selected processor does not support `mrc p15,1,r3,c15,c1,0' in Thumb mode
-  {standard input}:19268: Error: selected processor does not support `mcr p15,1,r3,c15,c1,0' in Thumb mode
-  {standard input}:19286: Error: selected processor does not support `mrc p15,1,r3,c15,c1,0' in Thumb mode
-  {standard input}:19321: Error: selected processor does not support `mcr p15,1,r3,c15,c1,0' in Thumb mode
-  {standard input}:19341: Error: selected processor does not support `mrc p15,0,r3,c1,c0,0' in Thumb mode
-  {standard input}:19372: Error: selected processor does not support `mcr p15,0,r3,c1,c0,0' in Thumb mode
-  make[1]: *** [/tmp/ccu1wZWX.mk:11: /tmp/ccIab81n.ltrans3.ltrans.o] Error 1
-
-Changes in v4:
-- Fold all changes to board_init_*() into a single patch
-- Use '#if CONFIG_IS_ENABLED(FOO) INITCALL(init_foo) #endif' instead of
-'CONFIG_IS_ENABLED(FOO, (INITCALL(init_foo);));' (Caleb C., Simon G.).
-As a consequence, drop Michal's patch ("common: board: Simplify array
-with function pointers with CONFIG_IS_ENABLED").
-- Rebase on next
-
-Changes in v3:
-- Use printf() rather than debug() to report initcall failures
-(Quentin S.)
-- initcall_run_f(): replace one erroneous call to WATCHDOG_INIT() with
-WATCHDOG_RESET() (Ilias A.)
-- Fix relocate_code() in arch/sh/lib/board.c to address CI failures with
-r2dplus (https://lists.denx.de/pipermail/u-boot/2025-January/576213.html)
-(Tom R.)
-- Add comments to initcall_run_f() and initcall_run_r() (Simon G.)
-
-Changes in v2:
-- INTICALL() and INITCALL_EVT() now call hang() immediately on error
-- Fixed typo: s/intcall_run_f_r/initcall_run_f_r/
-
-
-Jerome Forissier (3):
-  arm: asm/system.h: mrc and mcr need .arm if __thumb2__ is not set
-  common: board: make initcalls static
-  initcall: remove initcall_run_list()
-
- arch/arm/include/asm/system.h             |  22 +-
- arch/arm/lib/cache.c                      |   5 +-
- arch/arm/mach-kirkwood/include/mach/cpu.h |   9 +-
- arch/sh/lib/board.c                       |   9 +-
- common/board_f.c                          | 223 +++++++++----------
- common/board_r.c                          | 247 +++++++++++-----------
- include/initcall.h                        |  45 ++--
- lib/Makefile                              |   1 -
- lib/initcall.c                            | 102 ---------
- test/py/tests/test_trace.py               |   8 +-
- 10 files changed, 295 insertions(+), 376 deletions(-)
- delete mode 100644 lib/initcall.c
-
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index 849b3d0efb7..4c1b81483c9 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -428,11 +428,21 @@ void switch_to_hypervisor_ret(void);
+ #define wfi()
+ #endif
+ 
++#if !defined(__thumb2__)
++/*
++ * We will need to switch to ARM mode (.arm) for some instructions such as
++ * mrc p15 etc.
++ */
++#define asm_arm_or_thumb2(insn) asm volatile(".arm\n\t" insn)
++#else
++#define asm_arm_or_thumb2(insn) asm volatile(insn)
++#endif
++
+ static inline unsigned long read_mpidr(void)
+ {
+ 	unsigned long val;
+ 
+-	asm volatile("mrc p15, 0, %0, c0, c0, 5" : "=r" (val));
++	asm_arm_or_thumb2("mrc p15, 0, %0, c0, c0, 5" : "=r" (val));
+ 
+ 	return val;
+ }
+@@ -461,11 +471,13 @@ static inline unsigned int get_cr(void)
+ 	unsigned int val;
+ 
+ 	if (is_hyp())
+-		asm volatile("mrc p15, 4, %0, c1, c0, 0	@ get CR" : "=r" (val)
++		asm_arm_or_thumb2("mrc p15, 4, %0, c1, c0, 0	@ get CR"
++								  : "=r" (val)
+ 								  :
+ 								  : "cc");
+ 	else
+-		asm volatile("mrc p15, 0, %0, c1, c0, 0	@ get CR" : "=r" (val)
++		asm_arm_or_thumb2("mrc p15, 0, %0, c1, c0, 0	@ get CR"
++								  : "=r" (val)
+ 								  :
+ 								  : "cc");
+ 	return val;
+@@ -474,11 +486,11 @@ static inline unsigned int get_cr(void)
+ static inline void set_cr(unsigned int val)
+ {
+ 	if (is_hyp())
+-		asm volatile("mcr p15, 4, %0, c1, c0, 0	@ set CR" :
++		asm_arm_or_thumb2("mcr p15, 4, %0, c1, c0, 0	@ set CR" :
+ 								  : "r" (val)
+ 								  : "cc");
+ 	else
+-		asm volatile("mcr p15, 0, %0, c1, c0, 0	@ set CR" :
++		asm_arm_or_thumb2("mcr p15, 0, %0, c1, c0, 0	@ set CR" :
+ 								  : "r" (val)
+ 								  : "cc");
+ 	isb();
+diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
+index dd19bd3e4fb..ed6f15cb570 100644
+--- a/arch/arm/lib/cache.c
++++ b/arch/arm/lib/cache.c
+@@ -10,6 +10,7 @@
+ #include <malloc.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
++#include <asm/system.h>
+ #include <linux/errno.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -126,8 +127,8 @@ void invalidate_l2_cache(void)
+ {
+ 	unsigned int val = 0;
+ 
+-	asm volatile("mcr p15, 1, %0, c15, c11, 0 @ invl l2 cache"
+-		: : "r" (val) : "cc");
++	asm_arm_or_thumb2("mcr p15, 1, %0, c15, c11, 0 @ invl l2 cache"
++			  : : "r" (val) : "cc");
+ 	isb();
+ }
+ #endif
+diff --git a/arch/arm/mach-kirkwood/include/mach/cpu.h b/arch/arm/mach-kirkwood/include/mach/cpu.h
+index 9eec786fe8f..dce190ddee2 100644
+--- a/arch/arm/mach-kirkwood/include/mach/cpu.h
++++ b/arch/arm/mach-kirkwood/include/mach/cpu.h
+@@ -85,8 +85,9 @@ struct mbus_win {
+ static inline unsigned int readfr_extra_feature_reg(void)
+ {
+ 	unsigned int val;
+-	asm volatile ("mrc p15, 1, %0, c15, c1, 0 @ readfr exfr":"=r"
+-			(val)::"cc");
++
++	asm_arm_or_thumb2("mrc p15, 1, %0, c15, c1, 0 @ readfr exfr":"=r"
++			  (val)::"cc");
+ 	return val;
+ }
+ 
+@@ -96,8 +97,8 @@ static inline unsigned int readfr_extra_feature_reg(void)
+  */
+ static inline void writefr_extra_feature_reg(unsigned int val)
+ {
+-	asm volatile ("mcr p15, 1, %0, c15, c1, 0 @ writefr exfr"::"r"
+-			(val):"cc");
++	asm_arm_or_thumb2("mcr p15, 1, %0, c15, c1, 0 @ writefr exfr"::"r"
++			  (val):"cc");
+ 	isb();
+ }
+ 
 -- 
 2.43.0
 
