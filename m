@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6820CC3601A
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 10:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFAFC36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 10:24:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58F3E82991;
-	Sat,  5 Apr 2025 12:23:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A44382A46;
+	Sat,  5 Apr 2025 12:23:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C42829C3; Sat,  5 Apr 2025 12:23:30 +0200 (CEST)
+ id 1AD49829C3; Sat,  5 Apr 2025 12:23:56 +0200 (CEST)
 Received: from inet11.abb.com (inet11.abb.com [138.225.1.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB74B81FEE
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 12:23:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B8A782AC3
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 12:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=br-automation.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=bernhard.messerklinger@br-automation.com
 Received: from brsmtp01.br-automation.co.at ([10.43.60.20])
- by inet11.abb.com (8.15.2/8.14.7) with ESMTPS id 5347SNlX674040
+ by inet11.abb.com (8.15.2/8.14.7) with ESMTPS id 5347SN75674035
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
  Fri, 4 Apr 2025 09:28:23 +0200
 Received: from extmail.br-automation.com ([192.168.112.26])
  by brsmtp01.br-automation.co.at (HCL Domino Release 14.0FP3 HF8)
- with ESMTP id 2025040409282393-93035 ;
- Fri, 4 Apr 2025 09:28:23 +0200 
+ with ESMTP id 2025040409282415-93036 ;
+ Fri, 4 Apr 2025 09:28:24 +0200 
 Received: from ATEGGE3725.br-automation.co.at ([10.43.64.28])
  by extmail.br-automation.com (HCL Domino Build V1202_05192022)
- with ESMTP id 2025040409282427-31368 ;
+ with ESMTP id 2025040409282442-31369 ;
  Fri, 4 Apr 2025 09:28:24 +0200 
 From: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>
 To: u-boot@lists.denx.de
 Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
  "Tom Rini" <trini@konsulko.com>,
  "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>
-Subject: [PATCH v4 2/4] board/BuR/common: add parameter for reset controller
- I2C bus selection
-Date: Fri, 4 Apr 2025 09:27:58 +0200
-Message-ID: <20250404072819.69642-3-bernhard.messerklinger@br-automation.com>
+Subject: [PATCH v4 3/4] board/BuR/common: split br_resetc_bmode function
+Date: Fri, 4 Apr 2025 09:27:59 +0200
+Message-ID: <20250404072819.69642-4-bernhard.messerklinger@br-automation.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
 References: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
@@ -52,7 +51,7 @@ X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Build
  Serialize by Router on BRSMTPINTERN2/InternSMTP(Build V1202_05192022|May 19,
  2022) at 04/04/2025 09:28:24 AM,
  Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3
- HF8|December 13, 2024) at 04/04/2025 09:28:23 AM,
+ HF8|December 13, 2024) at 04/04/2025 09:28:24 AM,
  Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3 HF8|December
  13, 2024) at 04/04/2025 09:28:24 AM,
  Serialize complete at 04/04/2025 09:28:24 AM
@@ -74,61 +73,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Normally B&R reset controllers are located at I2C bus 0. This patch adds
-the possibility to change this bus number with the kconfig option
-BR=5FRESETC=5FI2CBUS.
+Split br=5Fresetc=5Fbmode function to add support for reading of reset
+reason in board code with br=5Fresetc=5Fbmode=5Fget.
 
 Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation=
 .com>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Move BR=5FRESETC=5FI2CBUS to Kconfig
+ board/BuR/common/br=5Fresetc.c | 129 ++++++++++++++++++++---------------
+ board/BuR/common/br=5Fresetc.h |   1 +
+ 2 files changed, 74 insertions(+), 56 deletions(-)
 
- board/BuR/common/Kconfig     |  8 ++++++++
- board/BuR/common/br=5Fresetc.c | 10 ++++++++--
- 2 files changed, 16 insertions(+), 2 deletions(-)
- create mode 100644 board/BuR/common/Kconfig
-
-diff --git a/board/BuR/common/Kconfig b/board/BuR/common/Kconfig
-new file mode 100644
-index 00000000000..490201e7407
---- /dev/null
-+++ b/board/BuR/common/Kconfig
-@@ -0,0 +1,8 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# B&R Industrial Automation GmbH - http://www.br-automation.com
-+
-+config BR=5FRESETC=5FI2CBUS
-+	int "I2C Bus address of B&R reset controller"
-+	depends on SYS=5FVENDOR =3D "BuR" && DM=5FI2C
-+	default 0
 diff --git a/board/BuR/common/br=5Fresetc.c b/board/BuR/common/br=5Fresetc.c
-index f5d09fef3d3..248064f974b 100644
+index 248064f974b..dfe2c2e0155 100644
 --- a/board/BuR/common/br=5Fresetc.c
 +++ b/board/BuR/common/br=5Fresetc.c
-@@ -52,10 +52,16 @@ static int resetc=5Finit(void)
+@@ -114,9 +114,73 @@ int br=5Fresetc=5Fbmode(void)
  {
- 	struct udevice *i2cbus;
- 	int rc;
-+#if !defined(BR=5FRESETC=5FI2CBUS)
-+	int busno =3D 0;
-+#else
-+	int busno =3D CONFIG=5FBR=5FRESETC=5FI2CBUS;
-+#endif
+ 	int rc =3D 0;
+ 	u16 regw;
++	unsigned int bmode =3D 0;
 +
-+	rc =3D uclass=5Fget=5Fdevice=5Fby=5Fseq(UCLASS=5FI2C, busno, &i2cbus);
++	if (!resetc.i2cdev)
++		rc =3D resetc=5Finit();
++
++	if (rc !=3D 0)
++		return rc;
++
++	board=5Fboot=5Fled(1);
++
++	rc =3D br=5Fresetc=5Fbmode=5Fget(&bmode);
++	if (rc !=3D 0)
++		return rc;
++
++	LCD=5FSETCURSOR(1, 8);
++
++	switch (bmode) {
++	case BMODE=5FPME:
++		LCD=5FPUTS("entering PME-Mode (netscript).         ");
++		regw =3D 0x0C0C;
++		break;
++	case BMODE=5FDEFAULTAR:
++		LCD=5FPUTS("entering BOOT-mode.                    ");
++		regw =3D 0x0000;
++		break;
++	case BMODE=5FDIAG:
++		LCD=5FPUTS("entering DIAGNOSE-mode.                ");
++		regw =3D 0x0F0F;
++		break;
++	case BMODE=5FSERVICE:
++		LCD=5FPUTS("entering SERVICE mode.                 ");
++		regw =3D 0xB4B4;
++		break;
++	case BMODE=5FRUN:
++		LCD=5FPUTS("loading OS...                          ");
++		regw =3D 0x0404;
++		break;
++	}
++
++	board=5Fboot=5Fled(0);
++
++	if (resetc.is=5Fpsoc)
++		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
++				  (u8 *)&regw, 2);
++	else
++		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
++				  (u8 *)&regw, 1);
++
++	if (rc !=3D 0)
++		printf("WARN: cannot write into resetcontroller!\n");
++
++	if (resetc.is=5Fpsoc)
++		printf("Reset: PSOC controller\n");
++	else
++		printf("Reset: STM32 controller\n");
++
++	printf("Mode:  %s\n", bootmodeascii[regw & 0x0F]);
++	env=5Fset=5Fulong("b=5Fmode", regw & 0x0F);
++
++	return rc;
++}
++
++int br=5Fresetc=5Fbmode=5Fget(unsigned int *bmode)
++{
++	int rc =3D 0;
+ 	u8 regb, scr;
+ 	int cnt;
+-	unsigned int bmode =3D 0;
 =20
--	rc =3D uclass=5Fget=5Fdevice=5Fby=5Fseq(UCLASS=5FI2C, 0, &i2cbus);
- 	if (rc) {
--		printf("Cannot find I2C bus #0!\n");
-+		printf("Cannot find I2C bus #%d!\n", busno);
+ 	if (!resetc.i2cdev)
+ 		rc =3D resetc=5Finit();
+@@ -136,13 +200,11 @@ int br=5Fresetc=5Fbmode(void)
  		return -1;
  	}
 =20
+-	board=5Fboot=5Fled(1);
+-
+ 	/* special bootmode from resetcontroller */
+ 	if (regb & 0x4) {
+-		bmode =3D BMODE=5FDIAG;
++		*bmode =3D BMODE=5FDIAG;
+ 	} else if (regb & 0x8) {
+-		bmode =3D BMODE=5FDEFAULTAR;
++		*bmode =3D BMODE=5FDEFAULTAR;
+ 	} else if (board=5Fboot=5Fkey() !=3D 0) {
+ 		cnt =3D 4;
+ 		do {
+@@ -169,68 +231,23 @@ int br=5Fresetc=5Fbmode(void)
+=20
+ 		switch (cnt) {
+ 		case 0:
+-			bmode =3D BMODE=5FPME;
++			*bmode =3D BMODE=5FPME;
+ 			break;
+ 		case 1:
+-			bmode =3D BMODE=5FDEFAULTAR;
++			*bmode =3D BMODE=5FDEFAULTAR;
+ 			break;
+ 		case 2:
+-			bmode =3D BMODE=5FDIAG;
++			*bmode =3D BMODE=5FDIAG;
+ 			break;
+ 		case 3:
+-			bmode =3D BMODE=5FSERVICE;
++			*bmode =3D BMODE=5FSERVICE;
+ 			break;
+ 		}
+ 	} else if ((regb & 0x1) || scr =3D=3D 0xCC) {
+-		bmode =3D BMODE=5FPME;
++		*bmode =3D BMODE=5FPME;
+ 	} else {
+-		bmode =3D BMODE=5FRUN;
++		*bmode =3D BMODE=5FRUN;
+ 	}
+=20
+-	LCD=5FSETCURSOR(1, 8);
+-
+-	switch (bmode) {
+-	case BMODE=5FPME:
+-		LCD=5FPUTS("entering PME-Mode (netscript).         ");
+-		regw =3D 0x0C0C;
+-		break;
+-	case BMODE=5FDEFAULTAR:
+-		LCD=5FPUTS("entering BOOT-mode.                    ");
+-		regw =3D 0x0000;
+-		break;
+-	case BMODE=5FDIAG:
+-		LCD=5FPUTS("entering DIAGNOSE-mode.                ");
+-		regw =3D 0x0F0F;
+-		break;
+-	case BMODE=5FSERVICE:
+-		LCD=5FPUTS("entering SERVICE mode.                 ");
+-		regw =3D 0xB4B4;
+-		break;
+-	case BMODE=5FRUN:
+-		LCD=5FPUTS("loading OS...                          ");
+-		regw =3D 0x0404;
+-		break;
+-	}
+-
+-	board=5Fboot=5Fled(0);
+-
+-	if (resetc.is=5Fpsoc)
+-		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
+-				  (u8 *)&regw, 2);
+-	else
+-		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
+-				  (u8 *)&regw, 1);
+-
+-	if (rc !=3D 0)
+-		printf("WARN: cannot write into resetcontroller!\n");
+-
+-	if (resetc.is=5Fpsoc)
+-		printf("Reset: PSOC controller\n");
+-	else
+-		printf("Reset: STM32 controller\n");
+-
+-	printf("Mode:  %s\n", bootmodeascii[regw & 0x0F]);
+-	env=5Fset=5Fulong("b=5Fmode", regw & 0x0F);
+-
+ 	return rc;
+ }
+diff --git a/board/BuR/common/br=5Fresetc.h b/board/BuR/common/br=5Fresetc.h
+index 999045b867d..3bd5ac20ae1 100644
+--- a/board/BuR/common/br=5Fresetc.h
++++ b/board/BuR/common/br=5Fresetc.h
+@@ -11,6 +11,7 @@
+ int br=5Fresetc=5Fregget(u8 reg, u8 *dst);
+ int br=5Fresetc=5Fregset(u8 reg, u8 val);
+ int br=5Fresetc=5Fbmode(void);
++int br=5Fresetc=5Fbmode=5Fget(unsigned int *bmode);
+=20
+ /* reset controller register defines */
+ #define RSTCTRL=5FCTRLREG		0x01
 --=20
 2.49.0
 
