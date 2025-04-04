@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABADEC3601E
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 08:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09CFBC369A1
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 11:39:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1788082991;
-	Fri,  4 Apr 2025 10:40:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1C1DB828AB;
+	Fri,  4 Apr 2025 13:39:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jSr26v+K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QGiTUFcM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 351F1829CF; Fri,  4 Apr 2025 10:40:43 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 7D732826AD; Fri,  4 Apr 2025 13:39:33 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D725E82991
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 10:40:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 239398003E
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 13:39:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3912fdddf8fso1805995f8f.1
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 01:40:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-22928d629faso19617335ad.3
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 04:39:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743756040; x=1744360840; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zcyqTWVrH4Vio2kcGcS9lfwz/WcmsFbF8bds/seprwI=;
- b=jSr26v+KrhUnrxGdnpqnAo9mtXDa3hs2/a19MDbqzVhOyYTdfAoCaTLILadEoi2ETe
- CHe/hw9tRM3VPzdIqB0ipf7bd8vD5DaUNp/GGV4P+XO5JNTjncmN0Hm9yTbsjJUmy5n7
- 0aRn5IT/UCatD/qgCfFG8e0iK8iCFiKjjHH7dxmWoqAO4UkjJ8C40Q2ZruLOpgRnha7m
- p0XgBUa8N04SWI81vOq9S1HHYK+zdUUjIG1WrQdrhrW35fjozSwpVhdxFB7Zl3GRlW2w
- C78BIJCK/gm3QTykYXXSQSIMAyi1hmmRaB05XpyG4C5NOqjd+RC556x852ajCv1ovp1X
- XJoA==
+ d=gmail.com; s=20230601; t=1743766769; x=1744371569; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jc3zkh9lic4mmfwdgOPQDcgjuvVGKNkCoCe9a1uwHFg=;
+ b=QGiTUFcMqNm8p63UMuGN7EvjdMJ9QK4iqocu+toqAGnAEQmR46uUaOt/rw3e1x5HKL
+ O6Y0UPg83LzHxWVZJ2n+lbXor4I1GX54d3l4xq8mxjC1nViuGcrciY8PSWyrFVWo3Q6u
+ QdEWffwDirNWt5nonw8GVIHPd7TvVJb7tSL8ANlscVbsNCUW/HLBRYTtSMp3I5xp/R9S
+ nAkyCpwq35vtIP/O0ubk/4VRGp1RaPiGunQd5c5ekgA3vdfCo0PIkYEa+xJ08dA72/JU
+ CNka2E1OOoofeCRm8ifuAu6TkNNUXTpKFAYGtjR3O0JPwVWSMVM5lfEOZtQtyXusN5tW
+ GmwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743756040; x=1744360840;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zcyqTWVrH4Vio2kcGcS9lfwz/WcmsFbF8bds/seprwI=;
- b=YGdhN+HTH8xEIdE/pR090lYRxzWYu8yM2mSMWM2Z+q6yVGUbkKcoIHOMvBbhzXIInh
- 4+xiSwxedBK31skpONWDvkHz1sC58NFhlG4cvyDnIPakKYk0srL4VR+MuDmO4lxpo59L
- E3HRqrDYDjN/FGbUMiGhWqWhFgCgMzfzs13hpgOQBLISuGxUBP40F4cf/SXPLp/q377J
- DEWOCdsW12nxzr5KNsWUsmyeE/tHBRDy3E6IiWIdDtkQwxrtlGTunI9EGUj9slBB1b5M
- 9j3hrhHaUm+HbhQJtf7Ok1jT9h0CX8szMja+mGtI9B76jiXS44uXHxcMkjvSt/TzjtLS
- dgjA==
-X-Gm-Message-State: AOJu0Yz9+nJn0tFmaRsFT9NbtpV3NT2L4AhAIsyQSWTDSzpcTYU0toa4
- +XYEBuAsRN6e/skKtRAzAw7taovlHG9lejJ+tqaFeyTLeDkeLVIq6ciHPBQgXyU=
-X-Gm-Gg: ASbGncuotvtxVb1Fy8RqCZCn2PYdEPazkerSLIXD0a1DHUJ8N7QqQbquxCAcHY1Kxh3
- 9uE6Ge2KwhicAZ/TFU/aMbJyeEsig8/Xl0WqFsrVpzxFX2H95EsqKDD0Q5VaBSFxNMW/jwNpLh6
- gj4kmNzSZlI+Fkg4Nv3H5JiXkZFyNf6PPnuvL/sIPNUqmXWjEpzsJOus1yIfZY8LUiW5U+HunCC
- 0a/3JhD+5RE2w5U8JEmntOotYNZ29F9q4Zi6ZN/Dllb/Qf27CHEPkQPbITBmfIX2bZUDQ75l24J
- /MyQ+NvhgSEHtxKxP0fA5mlPVrYPi4pUjZVYPZV83HI1LsNO4xtB7/o6FxGw7S0GGQ==
-X-Google-Smtp-Source: AGHT+IEiuZd39+N914ggP8u9zuSQn67eBwEE7ajMj0IbwIqKg8nAeMrFWfFN4foi7HAvAgL6TMh5rw==
-X-Received: by 2002:a05:6000:1884:b0:399:6d8a:3f with SMTP id
- ffacd0b85a97d-39cba94dc6dmr2048188f8f.27.1743756040274; 
- Fri, 04 Apr 2025 01:40:40 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1743766769; x=1744371569;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jc3zkh9lic4mmfwdgOPQDcgjuvVGKNkCoCe9a1uwHFg=;
+ b=FiKAa2xJ7pbMDmoxaHI5b5IXbh+vL2/3Oda0hUPwYB7lU30y1oy6fnXW5JzlTncpaV
+ /yb1oygXHNLR7hOqGX9WD5IK+aHCwr3zGGFHKZUfSwL7voaeFtMZJ6VnX6YuK73sjna4
+ TQQ+aQSVXu14vGfCWIv+FRbFCXWgr7IYtQPm2QNrZqoHUH/+mMYDb2jKWIk9qtMtlnzO
+ OXhuNd6w/NbxmU7T0NbB6yBmlOHEbGZD43GvCTTezDE87oXLriBEIoMKOBsgEIkestxo
+ i8FutQ6OjSewICM5ynEo+Aus36ljEA7xakY+16YiQhiZnIB7CeFhSEJ582OUiiWvBh1l
+ ARXw==
+X-Gm-Message-State: AOJu0YyUoGfiMwjLuzb60WjADNZ3ebOUSF6GUGdVDkpbNfDi8t4HankA
+ qkEzJGvkAEn6OtnG6H7OOLnow9PPbVPeR30xP8cTLNxq+jDg1vQ4
+X-Gm-Gg: ASbGnculVcX2/DATgQ5wljahvQLb0KoB28lrt2ZBwsC9e3DGcwzJE/URhn+3ecGMopI
+ sE8KBDr1IA46inCeIyjF3Cg8f5c1IpIRLvVvDY41zO6u9zoxU55+c74buqe5R6QNXwL1gZtKzew
+ MTNceJ51pmWD2ahOgAUwqvtSCFOBSSWLRuCtyUeDxkmFhj4WwUBCJZRiS+wb76xCFqq1aJQbVTr
+ S0VZ3JNKY2RirZHJ1nDRAZbGuI/A067H1emOjXyHPH8Hh1kPsQ79jH3QpNEDoz3EbUfWShjiOgC
+ HAS6VxJgJZLDJTwGwRY0PUJuDddGXPxCqImGfMNQMZ34k+mJNI8MZ5EaOME=
+X-Google-Smtp-Source: AGHT+IHEwpEi4ebyzdvvYRrX33rQRhMoH9oUrmY2GKpD21BFaO+Jkh+AMLF9J4tJqbd8YwzMsmgcjg==
+X-Received: by 2002:a17:902:ce0e:b0:223:44c5:4eb8 with SMTP id
+ d9443c01a7336-22a8a8ced6cmr38986545ad.32.1743766769523; 
+ Fri, 04 Apr 2025 04:39:29 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f547:2f82:7e0e:5ee2])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c30096bb2sm3830928f8f.12.2025.04.04.01.40.39
+ d9443c01a7336-229785ad857sm30191165ad.37.2025.04.04.04.39.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Apr 2025 01:40:40 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250403-u-boot-fix-set-dfu-alt-info-interface-v1-1-1fdd12463186@linaro.org>
-References: <20250403-u-boot-fix-set-dfu-alt-info-interface-v1-1-1fdd12463186@linaro.org>
-Subject: Re: [PATCH] board: libre-computer: check interface before
- comparing it in set_dfu_alt_info()
-Message-Id: <174375603984.3130822.11319635435773875897.b4-ty@linaro.org>
-Date: Fri, 04 Apr 2025 10:40:39 +0200
+ Fri, 04 Apr 2025 04:39:28 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: eugen.hristev@linaro.org
+Cc: u-boot@lists.denx.de, trini@konsulko.com, Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2 1/2] board: atmel: sama5d2_wlsom1_ek: Fix spurious serial
+ output
+Date: Fri,  4 Apr 2025 08:39:18 -0300
+Message-Id: <20250404113919.3860489-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,19 +95,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Fabio Estevam <festevam@denx.de>
 
-On Thu, 03 Apr 2025 18:03:21 +0200, Neil Armstrong wrote:
-> When set_dfu_alt_info() is called, interface can be NULL when called for
-> the EFI capsule, so check it before calling it with strcmp().
-> 
-> 
+Currently, there are always some spurious characters showing up
+right before SPL banner is shown:
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
+RomBOOT
+���=������
+U-Boot SPL 2025.04-rc5-00023-g9ed4e2c45f25 (Apr 03 2025 - 23:23:17 -0300)
+Trying to boot from MMC1
 
-[1/1] board: libre-computer: check interface before comparing it in set_dfu_alt_info()
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/c5fd2c7ac7fa4835339ea09ead2884794314c9d8
+<debug_uart>
+...
 
+The reason for the spurious characters is that the UART0 clock is
+being enabled too early, prior to adjusting its correct frequency.
+
+Fix the problem by removing the early UART0 clock enablement in C code.
+
+SPL DM code will adjust the correct UART0 clock frequency and then enable
+it at the appropriate time.
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Changes since v1:
+- Make the minimal change to fix the spurious characters. Improve
+the explanation in the commit log.
+
+ board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+index 04de1257eca0..ff5e51ee3926 100644
+--- a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
++++ b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+@@ -45,8 +45,6 @@ static void board_uart0_hw_init(void)
+ {
+ 	atmel_pio4_set_c_periph(AT91_PIO_PORTB, 26, ATMEL_PIO_PUEN_MASK);	/* URXD0 */
+ 	atmel_pio4_set_c_periph(AT91_PIO_PORTB, 27, 0);				/* UTXD0 */
+-
+-	at91_periph_clk_enable(ATMEL_ID_UART0);
+ }
+ 
+ void board_debug_uart_init(void)
 -- 
-Neil
+2.34.1
 
