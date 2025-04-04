@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A797EC36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 12:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B5DC3601E
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 12:35:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD885828AB;
-	Fri,  4 Apr 2025 14:35:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2EA318295C;
+	Fri,  4 Apr 2025 14:35:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="f0MOOql2";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pRaSVBtr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6780828BC; Fri,  4 Apr 2025 08:22:38 +0200 (CEST)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [217.70.183.198])
+ id 51A68828D0; Fri,  4 Apr 2025 08:30:26 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::224])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05D4681F44
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 08:22:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB04D8283E
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 08:30:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3FAC2442B4;
- Fri,  4 Apr 2025 06:22:34 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EB7D543349;
+ Fri,  4 Apr 2025 06:30:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1743747755;
+ t=1743748223;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=usQ7xxgVLrTvTW3GHmz0IjimN2nBzus8DIUpkQDKsmg=;
- b=f0MOOql2MY8hPIgKELyn3HuaGcc2SRrlIlnmg3mITLA+geHGxViPjZviuT7SfqDIrPDsfj
- RPN5R6uEjoYUlfBN3haFVMw9cWny45YXlizDFgeFMi3i9thFJa3dhesCUMjXIA6g6+AvAi
- dOypwMjl+iJA6FuopDPGn69sJuQWIaI3dhPgFIwRD8rBxBgS6Ho4Oi8ke/Ul9mjE4mU+NI
- KVNOjOoBh//Pg+Cnm6eYGkbRjLAXG7QmzGlJAdAFQHC4wK3GrJQ4EmPVfarOKKR858xijY
- qiDHYEONU09Lo5BzQsQa5F7iH3QZK6j9MINA5Hrer+3kljxgoAlxIH07/urTPw==
+ bh=cbPi+pT60GIxbM6LfO4mtFKLGdLmok0nJ+qEZYcsMB4=;
+ b=pRaSVBtrg6nLFqm8IcqIOdrYaRsty5q2xAGHpcjn97D5CkZLaRGkLDYrHq9roJjWNXNFOr
+ nnFgVdw3jzE50bncgLMYvmnXYktq64Ue8uBzdP2KordVlOT9pLWH3byBeQ8yFc2mZNhFSH
+ 3/xrqShl4UV0aIg4OKWwpBzuwz3IT91+lDZSmHNZwGnMzKCrGFNTwgRN9KjtKPNdaJp5mW
+ cP0NYH5PMTCUK84kSEpIAFEXXSfGA/T9kUKeOx/FIZ9HM17dv9S9+z3wXhxXZb5RBDHD02
+ 0IPrC2MF8ZbmdPcv8UjGB2JkIZfNAPlVWth85TzDiZBJVKtI/VeRMEbCpWJX5g==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Adam Ford <aford173@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>,  Simon Glass <sjg@chromium.org>,  Jaehoon
@@ -51,22 +51,23 @@ Cc: Tom Rini <trini@konsulko.com>,  Simon Glass <sjg@chromium.org>,  Jaehoon
  <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
  <michael@amarulasolutions.com>,  Dario Binacchi
  <dario.binacchi@amarulasolutions.com>,  Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v6 12/12] video: imx: Add LCDIF driver
-In-Reply-To: <CAHCN7x+NnM3TPS84uWRQavs15D8vta4nU+EppbAtvgi=inr7Fw@mail.gmail.com>
- (Adam Ford's message of "Thu, 3 Apr 2025 08:01:19 -0500")
+Subject: Re: [PATCH v6 09/12] imx: power-domain: Add support for the
+ MEDIAMIX control block
+In-Reply-To: <CAHCN7xKD8AODyDNSz21aO5kDJD1FygKUcsfXsCXV+K59VdgWDw@mail.gmail.com>
+ (Adam Ford's message of "Thu, 3 Apr 2025 07:57:53 -0500")
 References: <20250403-ge-mainline-display-support-v6-0-478b5e3dd872@bootlin.com>
- <20250403-ge-mainline-display-support-v6-12-478b5e3dd872@bootlin.com>
- <CAHCN7x+NnM3TPS84uWRQavs15D8vta4nU+EppbAtvgi=inr7Fw@mail.gmail.com>
+ <20250403-ge-mainline-display-support-v6-9-478b5e3dd872@bootlin.com>
+ <CAHCN7xKD8AODyDNSz21aO5kDJD1FygKUcsfXsCXV+K59VdgWDw@mail.gmail.com>
 User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Fri, 04 Apr 2025 08:22:33 +0200
-Message-ID: <871pu81m52.fsf@bootlin.com>
+Date: Fri, 04 Apr 2025 08:30:21 +0200
+Message-ID: <87plhszbeq.fsf@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-GND-State: clean
 X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduledtjeduucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgefhjedtfeeigeduudekudejkedtiefhleelueeiueevheekvdeludehiedvfeenucfkphepledvrddukeegrddutdekrdegleenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeelvddrudekgedruddtkedrgeelpdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedujedprhgtphhtthhopegrfhhorhguudejfeesghhmrghilhdrtghomhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgtphhtthhopehluhhkmhgrseguvghngidruggvpdhrtghpthhtohepshgvrghnghgrvdesghhmrghilhdrt
- ghomhdprhgtphhtthhopegrghhushhtseguvghngidruggvpdhrtghpthhtohepfhgvshhtvghvrghmsehgmhgrihhlrdgtohhm
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduledtjedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeejgeeftdefledvieegvdejlefgleegjefhgfeuleevgfdtjeehudffhedvheegueenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecukfhppeelvddrudekgedruddtkedrgeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledvrddukeegrddutdekrdegledphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepudejpdhrtghpthhtoheprghfohhrugdujeefsehgmhgrihhlrdgtohhmpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtohepjhhhkedtrdgthhhunhhgsehsrghmshhunhhgrdgtohhmpdhrtghpthhtoheplhhukhhmrgesuggvnhigrdguvgdprhgtp
+ hhtthhopehsvggrnhhgrgdvsehgmhgrihhlrdgtohhmpdhrtghpthhtoheprghguhhsthesuggvnhigrdguvgdprhgtphhtthhopehfvghsthgvvhgrmhesghhmrghilhdrtghomh
 X-GND-Sasl: miquel.raynal@bootlin.com
 X-Mailman-Approved-At: Fri, 04 Apr 2025 14:35:35 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -87,15 +88,62 @@ X-Virus-Status: Clean
 
 Hi Adam,
 
-> since there are three instances of this LCDIF, when most other boards
-> have just one, do you know what happens if someone's device tree has
-> all three enabled? Is the video mirrored, or does it just go to one of
-> the instances?
+>> +       /* Enable upstream clocks */
+>> +       ret =3D clk_enable(&priv->clk_apb);
+>> +       if (ret)
+>> +               goto dis_bus_pd;
+>> +
+>> +       ret =3D clk_enable(&priv->clk_axi);
+>> +       if (ret)
+>> +               goto dis_apb_clk;
+>> +
+>> +       /* Enable blk-ctrl clock to allow reset to propagate */
+>> +       ret =3D clk_enable(clk);
+>
+> I am only offering a suggestion if you ever need to push another rev.
+> It appears that all the clocks are either on or off and if any fail,
+> you immediately turn off any clocks that were enabled.  There are some
+> bulk clock options where you can basically tell the driver to turn
+> them all on or all off.
+>
+> clk_get_bulk, clk_enable_bulk, clk_disable_bulk, and clk_release_all
+> are the functions I am thinking of.  Your imx8mp_mediamix_priv
+> structure could then replace all the individual clocks with struct
+> clk_bulk.
+>
+> That might shrink the overall code and simplify the readability.
 
-IIRC they are not connected to the same outputs, there is one for MIPI
-DSI, one for LVDS displays and one for HDMI. The LVDS instance is
-connected to a bridge (called LDB) which may join or mirror two LVDS
-displays.
+These bulk functions only work if you get all clocks from a list. We
+currently do not want all the clocks (simply because some are useless in
+this case and also because they have not yet been defined). The clks
+property define all these:
+"apb", "axi", "cam1", "cam2", "disp1", "disp2", "isp", "phy";
 
-Thanks,
+>> +       if (ret)
+>> +               goto dis_axi_clk;
+>> +       setbits_le32(priv->base + BLK_CLK_EN, reset);
+>> +
+>> +       /* Power up upstream GPC domain */
+>> +       ret =3D power_domain_on(domain);
+>> +       if (ret)
+>> +               goto dis_lcdif_clk;
+>> +
+>> +       /* Wait for reset to propagate */
+>> +       udelay(5);
+>
+> On Linux, the GPCv2 driver was updated to increase a delay from 5 to
+> 10 uSeconds [1] .  I don't know if that's needed here, but it's
+> something to consider.
+
+Thanks a lot for the pointer, I will integrate this change, even if it
+is experimental, let's spare ourselves a round of ghost bug hunting.
+
+> adam
+>
+> [1] -
+> https://web.git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/c=
+ommit/drivers/pmdomain/imx?h=3Dnext-20250403&id=3D2379fb937de5333991c567eef=
+d7d11b98977d059
+
+Thanks!
 Miqu=C3=A8l
