@@ -4,87 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1521C36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 14:19:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EFABC36014
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 14:49:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D59D1829A0;
-	Fri,  4 Apr 2025 16:19:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=uni-duesseldorf.de
+	by phobos.denx.de (Postfix) with ESMTP id A1338829C3;
+	Fri,  4 Apr 2025 16:49:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s74f9igH";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A74982958; Fri,  4 Apr 2025 15:10:44 +0200 (CEST)
-Received: from c2882.mx.srv.dfn.de (c2882.mx.srv.dfn.de [194.95.239.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8EB83829CF; Fri,  4 Apr 2025 16:49:15 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 011ED828AB
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 15:10:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=uni-duesseldorf.de
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=niklas.sombert@uni-duesseldorf.de
-Received: from mta-5.mail.zim.hhu.de (mta-5.mail.zim.hhu.de [134.99.128.242])
- by c2882.mx.srv.dfn.de (Postfix) with ESMTPS id 2E6AE4EC;
- Fri,  4 Apr 2025 15:10:41 +0200 (CEST)
-Received: from [10.125.24.198] (unknown [134.99.36.198])
- (Authenticated sender: nisom101@uni-duesseldorf.de)
- by mta-5.mail.zim.hhu.de (Postfix) with ESMTPA id F28DBD2025A;
- Fri,  4 Apr 2025 15:10:40 +0200 (CEST)
-Message-ID: <c1dc7446-d1d0-4ef2-b201-09fc612aa8db@uni-duesseldorf.de>
-Date: Fri, 4 Apr 2025 15:10:29 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 9EEE8829A0
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 16:49:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2295d78b433so21668595ad.2
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 07:49:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743778151; x=1744382951; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qT7sjS+Cb1SgG/PP+J1WBFI9h8WX1/173SUwqfZzuoQ=;
+ b=s74f9igHpMGWg8TQRUmpxtVvitWcfcTMlpWjblkfWuWQrhFLH8gSKvNQ0xj8FkkA20
+ 1VsZsoGOP8jtspFtV4Kx0D6U+6LY6v4WDmzUSm21PNSX5qZDpDT55lll0XFlGb4IpBNK
+ e3cA6d/ryKa84rvay0RGekfLstsfTp07ehdsiv6Xkbjpqpc3GTtivgLqh22jP2lnxShU
+ ryC2aznqlPjR/8pYVfuRhFbCHfMOsurVuLG1ckEtY8Uc5SdxSsyQsJXTCdowmYFxkm4L
+ /9TIqmc6aPx/hpgpboxxgKnRD3Y1ctgzZgO+O83eHvPPN+J2Q3ZAtD+hh3r4gS52ZO/z
+ 1W5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743778151; x=1744382951;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qT7sjS+Cb1SgG/PP+J1WBFI9h8WX1/173SUwqfZzuoQ=;
+ b=oQxu3RmSGYAC2z3n5u99knzUTEu/3zhA2LI1jbVMDF4xn8l89ctD9On+pXaXSSPO+6
+ U9y1J2nWaZcnx9rRv+j/GOQ7B73zMSMkQ6FLnGV5tuGpcSHDoJNmkdrpne/IBQ/4TU9j
+ QZ/Fsgrx5WpB7K6Z0yZJXitvMf30Hj15PTs5ijWt6D6YVZ/ptCvbfGYPjUsDomEmWMtY
+ jE79vqa3c0tS0pubGxzuiSMuZqAnfwikiARpMshrpjt8CwOh32JkXO9kDEQ35f97TLBm
+ Y9769YI/SKwLOAqwFecmnUg5WHN7yTSUaWrI7BK0YHEumNpd91pqGbwiACRBDposnXvK
+ mvhg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXs+Nx57m6YuUkbwqzXN5gv09tSrrBOYCaPQLBAAD5GgaR2Q/jfASLNzcvavYLLdiWSGf2nDw4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLov26ZeCCfolHmEmnmTFLN5rZR3wCxgnrHWeqbXEm4qxCbcTd
+ 07tk+KCOfwWlxJN5RQRdZ9dFnRfj5lF1NZ8TqvL1zN0+ji56l92Qa3ugsbdv4eccYt6bBUFYo/v
+ O0KWl7vJFpkXTG4H/IDNE+LLjbXJVKbbTmAzzCw==
+X-Gm-Gg: ASbGnctmlQ/0ELdPqifmFjKRHJMqKImzymljxxcjcj124fWEfF/mXF1IJBMVzbpheQP
+ DIX9wv4C+8vwGF7As3cf4RVWr9hNfMH5yC5vgFMsQCGpvSjgopW2v46n24zXjcR9U5MDx/VcCOI
+ dFxUlkQkMN4VtNqRPB4semNGdGmXE=
+X-Google-Smtp-Source: AGHT+IH3TriuaHiRlv2AeTv28k7Lha3S5SMbrhhf/j2MAtOsthQhbUmT0gFPOEWU8V/qzU9mGKIoZj5GqeT8w6dRD/s=
+X-Received: by 2002:a17:902:e950:b0:21f:45d:21fb with SMTP id
+ d9443c01a7336-22a8a046021mr46257105ad.3.1743778150557; Fri, 04 Apr 2025
+ 07:49:10 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: de-DE, en-US
-To: u-boot@lists.denx.de
-From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-Autocrypt: addr=niklas.sombert@uni-duesseldorf.de; keydata=
- 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
-Cc: Simon Glass <sjg@chromium.org>
-Subject: SMBIOS tables missing on 2025.04-rc5 on qemu-x86
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------GhsQwLWW0acz5VrDpWTBNRJ8"
-X-Mailman-Approved-At: Fri, 04 Apr 2025 16:19:34 +0200
+References: <20250328154401.3563921-1-sjg@chromium.org>
+ <20250328161845.GB93000@bill-the-cat>
+ <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
+ <20250329000211.GH93000@bill-the-cat>
+ <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
+In-Reply-To: <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 4 Apr 2025 10:48:57 -0400
+X-Gm-Features: AQ5f1Jomm2Diy3py2mx-xl92hgxDoR9JVjwfjVBbutcVmVOTVu1a6AAOuP0GYsg
+Message-ID: <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,100 +111,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------GhsQwLWW0acz5VrDpWTBNRJ8
-Content-Type: multipart/mixed; boundary="------------07GLX7np7tbixOTZq5lwTG7J";
- protected-headers="v1"
-From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Message-ID: <c1dc7446-d1d0-4ef2-b201-09fc612aa8db@uni-duesseldorf.de>
-Subject: SMBIOS tables missing on 2025.04-rc5 on qemu-x86
+Hi Tom and Simon,
 
---------------07GLX7np7tbixOTZq5lwTG7J
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Tom and Simon,
+>
+> On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
+> > > >
+> > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > so that it is simpler to understand and manage.
+> > > > >
+> > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> > > > >
+> > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
+> > > > > CI at some point. In the meantime, the standard passage series[1] could
+> > > > > be resurrected to give some coverage.
+> > > > >
+> > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+> > > >
+> > > > Based on how it's documented to be run in
+> > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
+> > > > that platforms using the handoff spec still work?
+> > >
+> > > I believe so, yes. I don't have that board to test it though. Raymond
+> > > may be able to test this series on QEMU?
+> >
+> > I was pointing you at the docs so that you would have access to testing
+> > it. That's part of the docs, running the emulator.
+> >
+>
+> I can help to test the firmware handoff on qemu.
+> I have all the necessary changes and unit tests for the OP-TEE repo
+> qemu v8 build to test this.
+> I will try to find some time early next week to review and test this
+> series before turning back to you.
+>
 
-SGkgYWxsLA0KDQpJJ3ZlIHdyaXR0ZW4gYSBzbWFsbCBFRkkgYm9vdGxvYWRlciBhbmQgSSdt
-IHRlc3RpbmcgaXQgb24gUUVNVSB3aXRoIE9WTUYgDQphbmQgd2l0aCB1LWJvb3QgKHdpdGgg
-dGhlIHFlbXUteDg2X2RlZmNvbmZpZyBhcyAtYmlvcyBpbiBRRU1VKS4NCg0KT24gdXBncmFk
-aW5nIGZyb20gMjAyNS4wMSB0byAyMDI1LjA0LXJjNSwgSSd2ZSBub3RpY2VkIHRoYXQgdGhl
-IFNNQklPUyANCnRhYmxlcyB0aGF0IGFyZSBwYXNzZWQgdmlhIHRoZSBTTUJJT1MgRUZJIGNv
-bmZpZyB0YWJsZSBhcmUgY29tcGxldGVseSANCmJsYW5rIChqdXN0IHplcm9lcyBpbnN0ZWFk
-IG9mIHN0YXJ0aW5nIHdpdGggU00zKS4NCg0KVGhpcyBpcyBwcmV0dHkgZWFzeSB0byByZXBy
-b2R1Y2U6DQoNCmdpdCBjaGVja291dCB2MjAyNS4wMQ0KbWFrZSBjbGVhbg0KZ2l0IGNsZWFu
-IC14Zg0KbWFrZSBxZW11LXg4Nl9kZWZjb25maWcNCiMgZWRpdCAuY29uZmlnOiBDT05GSUdf
-Q01EX1NNQklPUz15DQptYWtlIC1qNA0KcWVtdS1zeXN0ZW0taTM4NiAtYmlvcyB1LWJvb3Qu
-cm9tDQojIHR5cGUgInNtYmlvcyIgaW4gdGhlIHByb21wdCBhbmQgc2VlIGluZm9ybWF0aW9u
-IGFib3V0IHRoZSBzeXN0ZW0NCg0KdmVyc3VzOg0KZ2l0IGNoZWNrb3V0IHYyMDI1LjA0LXJj
-NQ0KbWFrZSBjbGVhbg0KZ2l0IGNsZWFuIC14Zg0KbWFrZSBxZW11LXg4Nl9kZWZjb25maWcN
-CiMgZWRpdCAuY29uZmlnOiBDT05GSUdfQ01EX1NNQklPUz15DQptYWtlIC1qNA0KcWVtdS1z
-eXN0ZW0taTM4NiAtYmlvcyB1LWJvb3Qucm9tDQojIHR5cGUgInNtYmlvcyIgYW5kIGdldCB0
-aGUgZm9sbG93aW5nIGVycm9yOg0KIyBkb19zbWJpb3MoKSBVbmtub3duIFNNQklPUyBhbmNo
-b3IgZm9ybWF0DQoNClRoaXMgaXMgb24gUUVNVSB2ZXJzaW9uIDYuMi4wIChEZWJpYW4gMTo2
-LjIrZGZzZy0ydWJ1bnR1Ni4yNSksIHRoZSBvbmUgDQpVYnVudHUgMjIuMDQgY3VycmVudGx5
-IHNoaXBzLCBidXQgSSBhbHNvIGdldCB0aGUgc2FtZSByZXN1bHRzIG9uIFVidW50dSANCjI0
-LjA0Lg0KDQpCaXNlY3RpbmcgbGVhZHMgbWUgdG8gdGhlIGZvbGxvd2luZyBjb21taXQ6DQoN
-CmNvbW1pdCBkNWJjNWM2Y2IwMjkxMjAzZmU4NDhhODUzMmE3ZWNiY2Q0NGNmZTllDQpBdXRo
-b3I6IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3JnPg0KRGF0ZTogICBGcmkgSmFuIDEw
-IDE3OjAwOjI2IDIwMjUgLTA3MDANCg0KICAgICB4ODY6IGVtdWxhdGlvbjogRW5hYmxlIGJs
-b2JsaXN0DQoNCiAgICAgQWRkIGJsb2JsaXN0IHN1cHBvcnQgc28gdGhhdCB0YWJsZXMgY2Fu
-IGJlIGdlbmVyYXRlZCBhbmQgcGxhY2VkIGluIGENCiAgICAgYmxvYmxpc3QsIHRoZW4gcGFz
-c2VkIHRvIGEgcGF5bG9hZCB1c2luZyBVUEwNCg0KICAgICBTaWduZWQtb2ZmLWJ5OiBTaW1v
-biBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz4NCg0KZGlmZiAtLWdpdCBhL2NvbmZpZ3MvcWVt
-dS14ODZfNjRfZGVmY29uZmlnIGIvY29uZmlncy9xZW11LXg4Nl82NF9kZWZjb25maWcNCmlu
-ZGV4IDI3NzFhNGI5ZTE5Li43OTJiYTA2YzJiOCAxMDA2NDQNCi0tLSBhL2NvbmZpZ3MvcWVt
-dS14ODZfNjRfZGVmY29uZmlnDQorKysgYi9jb25maWdzL3FlbXUteDg2XzY0X2RlZmNvbmZp
-Zw0KQEAgLTEsNiArMSw3IEBADQogIENPTkZJR19YODY9eQ0KICBDT05GSUdfVEVYVF9CQVNF
-PTB4MTExMDAwMA0KICBDT05GSUdfU1lTX01BTExPQ19GX0xFTj0weDEwMDANCitDT05GSUdf
-QkxPQkxJU1RfU0laRV9SRUxPQz0weDIwMDAwDQogIENPTkZJR19OUl9EUkFNX0JBTktTPTgN
-CiAgQ09ORklHX0VOVl9TSVpFPTB4NDAwMDANCiAgQ09ORklHX01BWF9DUFVTPTINCkBAIC0z
-Myw2ICszNCw3IEBAIENPTkZJR19MT0dGX0ZVTkM9eQ0KICBDT05GSUdfU1BMX0xPRz15DQog
-IENPTkZJR19ESVNQTEFZX0JPQVJESU5GT19MQVRFPXkNCiAgQ09ORklHX1BDSV9JTklUX1I9
-eQ0KK0NPTkZJR19CTE9CTElTVD15DQogIENPTkZJR19CTE9CTElTVF9GSVhFRD15DQogIENP
-TkZJR19CTE9CTElTVF9BRERSPTB4MTAwMDANCiAgQ09ORklHX1NQTF9OT19CU1NfTElNSVQ9
-eQ0KZGlmZiAtLWdpdCBhL2NvbmZpZ3MvcWVtdS14ODZfZGVmY29uZmlnIGIvY29uZmlncy9x
-ZW11LXg4Nl9kZWZjb25maWcNCmluZGV4IDk0N2QxNWNkNzI3Li4wYjBlMTBjNzk1ZiAxMDA2
-NDQNCi0tLSBhL2NvbmZpZ3MvcWVtdS14ODZfZGVmY29uZmlnDQorKysgYi9jb25maWdzL3Fl
-bXUteDg2X2RlZmNvbmZpZw0KQEAgLTEsNiArMSw3IEBADQogIENPTkZJR19YODY9eQ0KICBD
-T05GSUdfVEVYVF9CQVNFPTB4RkZGMDAwMDANCiAgQ09ORklHX1NZU19NQUxMT0NfRl9MRU49
-MHgxMDAwDQorQ09ORklHX0JMT0JMSVNUX1NJWkVfUkVMT0M9MHgyMDAwMA0KICBDT05GSUdf
-TlJfRFJBTV9CQU5LUz04DQogIENPTkZJR19FTlZfU0laRT0weDQwMDAwDQogIENPTkZJR19N
-QVhfQ1BVUz0yDQpAQCAtMjMsNiArMjQsOSBAQCBDT05GSUdfTE9HPXkNCiAgQ09ORklHX0xP
-R0ZfRlVOQz15DQogIENPTkZJR19ESVNQTEFZX0JPQVJESU5GT19MQVRFPXkNCiAgQ09ORklH
-X1BDSV9JTklUX1I9eQ0KK0NPTkZJR19CTE9CTElTVD15DQorQ09ORklHX0JMT0JMSVNUX0ZJ
-WEVEPXkNCitDT05GSUdfQkxPQkxJU1RfQUREUj0weDEwMDAwDQogIENPTkZJR19DTURfQ1BV
-PXkNCiAgQ09ORklHX0NNRF9CT09URUZJX1NFTEZURVNUPXkNCiAgQ09ORklHX0NNRF9OVkVE
-SVRfRUZJPXkNCg0KSnVzdCBzZXR0aW5nIENPTkZJR19CTE9CTElTVD1uIHNvbHZlcyB0aGlz
-IHByb2JsZW0gZm9yIG1lLg0KDQpJJ20gbm90IHN1cmUgaG93IHRvIGRlYnVnIHRoaXMgZnVy
-dGhlciwgYmVjYXVzZSB2MjAyNS4wMSBkb2Vzbid0IGJ1aWxkIA0Kd2l0aCB0aGUgY29uZmln
-IGZyb20gdjIwMjUuMDQtcmM1Og0KbGQuYmZkOiBhcmNoL3g4Ni9saWIvdGFibGVzLm86IGlu
-IGZ1bmN0aW9uIGB3cml0ZV90YWJsZXMnOg0KL2hvbWUvbmlrbGFzL0J1aWxkL3UtYm9vdC9h
-cmNoL3g4Ni9saWIvdGFibGVzLmM6MTcxOiB1bmRlZmluZWQgcmVmZXJlbmNlIA0KdG8gYGFj
-cGlfd3JpdGVfcnNkcCcNCg0KDQpHcmVldGluZ3MsDQpOaWtsYXMNCg0K
+Just a follow-up on the testing with TF-A and OP-TEE.
+Unfortunately, the patch series breaks the transfer list handoff to
+U-Boot completely and just end up with below error when U-Boot boots:
+```
+No valid device tree binary found at 0000000000000000
+initcall failed at call 0000000060097bcc (err=-2)
+### ERROR ### Please RESET the board ###
+```
 
---------------07GLX7np7tbixOTZq5lwTG7J--
+U-Boot test version:
+'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
 
---------------GhsQwLWW0acz5VrDpWTBNRJ8
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+[1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Raymond
 
-iQIzBAEBCgAdFiEEdIF40XVnlLMtKvF5apyYbs6R6OsFAmfv2kYACgkQapyYbs6R
-6Osn+w//UBYGCJjkA+jV3AgzJnyzjToBTBUdrfMVZJIFbWMfmbZruo9CME9zMTIC
-NP9isPtX9oDR4cMuwTcT7I3+wLP2Gq4nJg9zmf5G+jT6K6k/XWSB9r51ob4vu+/C
-6CT3vtFJtIRgKzn1r2jfZpAW9OgT00MPwTXZO2XVRdqvBgobt5JR4rpNNjQooh+5
-kaOgkrgFGzV7wlOSlEdVviGEP/i8dsidms0pLq4wTpKZVQw9BjW4kc+niz7nRzdx
-pf1PJf5RTjxTRyrBaCt5YkoZUreu05tb06iJh5NegnagYCrqbcMqPokMGg+IpJ10
-ufriezxh2GKP+lKXuVw5uxuel9JH7LuO7Sm+89u1HSNNfVvYx8HxCRUU47rC8poe
-UaygEhUymNva7HiC+iCVHcrRAKjuYr+FhG7ZiRa9JpkWHd/7ETO5nMgIU+byztj6
-/O8E/3urkk0e9LMhvz/zCfbDo3BdluLftplsUj/xaDInm22UvSkL8sztDENkQOOA
-lz+N7rrtMHD9vhwCOLwWr/RAYsR9EiFzNe/NLXxkT9NqKeYG9k9mNuYV9yGQCE5i
-EZ5IT9QHW4fm2+8tDKByTEZ1aNSuz86uJE3kM0xG/89nDTz1cQdk9ptxL1XtmMaF
-mSsWe3aieCS/qmZfyeKdya5XWVopvrDpKssspm7toGfzPtG0wOo=
-=3OaM
------END PGP SIGNATURE-----
-
---------------GhsQwLWW0acz5VrDpWTBNRJ8--
+> Regards,
+> Raymond
+>
+> > --
+> > Tom
