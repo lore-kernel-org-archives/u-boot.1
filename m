@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC29C36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 17:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86FBEC36010
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 17:40:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE95829C3;
-	Fri,  4 Apr 2025 19:39:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C752829C3;
+	Fri,  4 Apr 2025 19:40:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QmaWWQSb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q4wEgMe7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04A0782A16; Fri,  4 Apr 2025 19:39:55 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id DE3C2829C3; Fri,  4 Apr 2025 19:40:25 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6178A807B1
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 19:39:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 670C8807B1
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 19:40:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-ac2902f7c2aso386830666b.1
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 10:39:52 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ac2a81e41e3so417515666b.1
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 10:40:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743788392; x=1744393192; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743788423; x=1744393223; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E75fMD5xkls9eloovMT5vI4D5hz7TAB5E0vw638n0NM=;
- b=QmaWWQSbd/RnVQvBhz7l7Kuyl731Bszo8+tQIDucovCg9JJ/JaKvTTQtY7iDOeZl2z
- Zo0lY1o9p57VhGZSRYpyItZPgDVMHuZJP9X96hbr6NJLXm6EYKIrqGTmXA00RsYiBIAz
- SaFn4QpSWLTzSoayqdohR6tm7ZFo38YjznPAY=
+ bh=mo7f5Ias7AOON4BdX8MTgC1G9ihY0Ko2llXrBe3m/Ao=;
+ b=Q4wEgMe7KjZo5lmPeA9YhWHkiCToYZ8dttDLn/jb7SKfZE9ecPt+Q4iOCMwh9HD1H7
+ +k4xaW9p59/Z7462wAnOnpI124piwlh+Q3DcpM6e/6jvoa7/s7wF1FbOHsJIVHBeQDP7
+ IS/f4f9LhCSv+agdlI/47iAstWpuj5I7GUfqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743788392; x=1744393192;
+ d=1e100.net; s=20230601; t=1743788423; x=1744393223;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E75fMD5xkls9eloovMT5vI4D5hz7TAB5E0vw638n0NM=;
- b=FpA3ffMsoUUC1gBllE5MZ4VNuMyzqE39QMy9KhEB2YsCJH1MKahVY5vDQaz46tXPhD
- PPfb/uWhDhIEHG83RkEYGnfcNfLe3KgPDKbbGL/2CXEQO5qGZW7NnW5RPNzIdj772lNR
- HIK674mqFvJDXUeAQg9zD9MIQuX9dx852qhooubTaEJv6cdPz5jgP6dN5PdhsbuoJvVm
- 1FlkW66OoubwlAVesrYRbFUvHz2rjfAK/TOT49z7fK130ETqwOrz/GoqYeGygQsX9Hsh
- QS31AY1HJBvOwQYUOW8gcn2RXCiFaH+l/+KPnuypN3kbfHO02foU2hzdLBye/0bXCuhw
- B8rA==
+ bh=mo7f5Ias7AOON4BdX8MTgC1G9ihY0Ko2llXrBe3m/Ao=;
+ b=C0Id26Um8SRIjG9HwElhdyFrQ035R2KveduFM9/z0dJcWvV1OYjfROPaxU8IjJ1znT
+ 9F1V/i9G77hNae7YmIRDYKsiZch7GVELCGjYi6rNHV09aKqZZx/RYFb5nwAh824sRzBL
+ 710BJDIguyu93U7VxJS4AtNf5tjU+EesBLrOEuVg7p8MXeKZzO5G6ZBrlFzAbESmS1yS
+ Y1fnUw7EjtVuPKmvXWWzZ2i32t64LD4eEgFajHMlrSwg4x5g5re3FWqUYLUhQ3OKLh93
+ QtusHyE/372xT6qJcdCKLToDzBkferdof654QLvj7uZ080nag7NQY52utZWzR9ybeamM
+ iiww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXy03R1Nkg3hFJUwK6fxEqS90Lzl2ev/hWHxUSk6jKbmKbnMl2fxnDZu63EJOiHsz6j/5YCRzA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlUfhdiqXA5nW/jPHWd0H5CZB5WaS9fSksjrfOQubiuuv8ZWfC
- p5ri56r1fqsexTE/Y/cLjkN0iuLrjoqf+Tk+wdEm2Qv64x/k/dIpx4wF26VuuTYf91Czl7NXkVx
- lw63B4rUSbUCh4LxO15iHrpAWpuUQiBg1qV1o
-X-Gm-Gg: ASbGncs5BZo+Wq3JMfcCYr/wVOoT8ZWr2ZKIVVUONagm/R4ZznsMTHUl32MIuPsGBhc
- FVhx0MhoE3r2n+YPcEfvQnsWDU264ktyRkryqkDhKSFHAzykoFk/nsdyIkLqrqldegAkUGs4/Pp
- qow1RORQjXUuVTfg+nuxSNPhSoT+OL
-X-Google-Smtp-Source: AGHT+IF2CYph/n5w5JTB1WQYj7/JirQmt8W5SVQmuaxaWGOjw860/lTzDk4+9OpSnuUabZJJXJ49HbMa7kJxYAAeomA=
-X-Received: by 2002:a17:907:97c1:b0:ac7:95c3:eb12 with SMTP id
- a640c23a62f3a-ac7d6d05ffamr368533966b.16.1743788391736; Fri, 04 Apr 2025
- 10:39:51 -0700 (PDT)
+ AJvYcCUoQH1PaSvhAA6kTj/fpWwc7USK7oroAT25bRb84xBgfzhvkjxsKKuy8dgAfdLGAiqRLrg7OdM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGB9UGnipQGCsYHw9DOjbSTlKtpAghlu2iE3YHT7qdAKseaOrS
+ QhYJM6UBr5zyfxDhbitqrEBG4JLsSfzqQX5f/JrZlKoBdA1o0p4HkSIHpLyexA6/MEYshIP9WVC
+ pzf92uv8TRFgEYrBczuWZ+7sjel/zI9E+GmR6
+X-Gm-Gg: ASbGnctc0nN1fO4aDiALMRLvYeCzJgaZVW9gGhCyWPPR9CqCQUpRJYQ4egPowA0eKRa
+ 5SAJ0jlFHjFpfyxrLvSKRPuKE39Ynt0j0s8XpoG7VWmDHyHuj1pOyRPkUK6+8SgyEmtGSBEJrKy
+ REnx9jpci7TokUUePr0lH2OPcc0pt/
+X-Google-Smtp-Source: AGHT+IG2Ym9tj44oSKyZHvKXey4vw/hHSCUko6Xz+kDzWxX9QrAJrBKdb9Bd+4LLUhxARIfAnVU54i4RMrF3uwNurdM=
+X-Received: by 2002:a17:907:a05:b0:ac7:1be2:1a79 with SMTP id
+ a640c23a62f3a-ac7e7116845mr41533466b.4.1743788422646; Fri, 04 Apr 2025
+ 10:40:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250328154401.3563921-1-sjg@chromium.org>
- <CAEfUkU+=bhM_Ba5Eu_FVA0-AoHO7TJBGyaO_w7o9rxTzB7SgGw@mail.gmail.com>
- <CAFLszTjPzP-++P1vf7pFFwU5AHdfr2d3zs5QaQMf95uN4BbO7A@mail.gmail.com>
- <CAEfUkU+OHK3GdqROVFe4J0=OoRsw_u7znef6iLuibY4vsLOBkQ@mail.gmail.com>
- <CAFLszTgjKXK6adB2fa3S4o+AAm1Amyg5WdJ9EuOg4xoXBFLeCg@mail.gmail.com>
- <CAEfUkULg0bzG564_vo43Bta5C4_EirZNt39ncgua0VFjd1C-tw@mail.gmail.com>
- <CAFLszTjGn1JGdpNAZVL6CC+pQLsOrG6gjmo8kRzjbnR_=6CMvw@mail.gmail.com>
- <20250403215239.GO5495@bill-the-cat>
- <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
- <20250403225058.GQ5495@bill-the-cat>
-In-Reply-To: <20250403225058.GQ5495@bill-the-cat>
+ <20250328161845.GB93000@bill-the-cat>
+ <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
+ <20250329000211.GH93000@bill-the-cat>
+ <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
+ <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
+In-Reply-To: <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 5 Apr 2025 06:39:39 +1300
-X-Gm-Features: ATxdqUGgR68uY-sQ-Q8iZAW6MX_WTWir6TCg8gpIVwrEYfQiXNDxJNNyhmX6_Cw
-Message-ID: <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
+Date: Sat, 5 Apr 2025 06:40:08 +1300
+X-Gm-Features: ATxdqUGAh5KRnK6-DotoRk8KBX3xzS5TCx7SOrdZZ7KlOBpfmnMM5c0nthIEaBQ
+Message-ID: <CAFLszTjo8HEzKbZAbO=neF57e69vGbWYsDVV_dD=kO6j_VH39w@mail.gmail.com>
 Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Tom Rini <trini@konsulko.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Evgeny Bachinin <EABachinin@salutedevices.com>,
@@ -113,107 +108,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Raymond,
 
-On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 5 Apr 2025 at 03:49, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
-> > Hi Tom,
+> Hi Tom and Simon,
+>
+> On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
-> > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > Hi Tom and Simon,
+> >
+> > On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
-> > > > Hi Raymond,
+> > > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > Hi Simon,
+> > > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
 > > > > >
-> > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > > so that it is simpler to understand and manage.
 > > > > > >
-> > > > > > Hi Raymond,
+> > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
 > > > > > >
-> > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > >
-> > > > > > > Hi Simon,
-> > > > > > >
-> > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Raymond,
-> > > > > > > >
-> > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > > > > > >
-> > > > > > > > > Hi Simon,
-> > > > > > > > >
-> > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > > > > so that it is simpler to understand and manage.
-> > > > > > > > > >
-> > > > > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > > > > >
-> > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
-> > > > > > > > > mandatorily use bloblist to hand over everything between boot stages
-> > > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
-> > > > > > > >
-> > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
-> > > > > > > > there must be a bloblist, not that it must contain a devicetree. So I
-> > > > > > > > wasn't sure about removing it.
-> > > > > > > >
-> > > > > > >
-> > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
-> > > > > > > selected, we can override any fdt from board or env with the one from
-> > > > > > > the bloblist.
+> > > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
+> > > > > > CI at some point. In the meantime, the standard passage series[1] could
+> > > > > > be resurrected to give some coverage.
 > > > > > >
-> > > > > > Yes, but we should be explicit about what is going on here. With
-> > > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
-> > > > > > bloblist. It becomes one of the sources for devicetree, like
-> > > > > > OF_SEPARATE and OF_EMBED
-> > > > > >
+> > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
 > > > > >
-> > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
-> > > > > mandatorily used and override other fdt sources like from the board or
-> > > > > env variables.
+> > > > > Based on how it's documented to be run in
+> > > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
+> > > > > that platforms using the handoff spec still work?
 > > > >
-> > > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
-> > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
-> > > > very much. But I can see why it is called that as my standard passage
-> > > > series was actually never applied. So I suppose I'll need to have
-> > > > another try at that.
-> > > >
-> > > > So to be clear, I want a separate option for devicetree, called
-> > > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
-> > > > your option.
+> > > > I believe so, yes. I don't have that board to test it though. Raymond
+> > > > may be able to test this series on QEMU?
 > > >
-> > > Sigh. Can I ask what the use case for this will be? And we are going to
-> > > get rid of BLOBLIST_FIXED at some point, yes?
+> > > I was pointing you at the docs so that you would have access to testing
+> > > it. That's part of the docs, running the emulator.
+> > >
 > >
-> > I thought we agreed that this was acceptable. We argued the toss for
-> > months on this point and I would rather not revisit it.
+> > I can help to test the firmware handoff on qemu.
+> > I have all the necessary changes and unit tests for the OP-TEE repo
+> > qemu v8 build to test this.
+> > I will try to find some time early next week to review and test this
+> > series before turning back to you.
 > >
-> > Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
-> > pretty sure it can be done. The only tricky bit is coming up with a
-> > bloblist protocol for x86.
 >
-> Yes, I'm stuck between being "flexible and saying yes" and how long we
-> have to live with what I also think are bad designs.
+> Just a follow-up on the testing with TF-A and OP-TEE.
+> Unfortunately, the patch series breaks the transfer list handoff to
+> U-Boot completely and just end up with below error when U-Boot boots:
+> ```
+> No valid device tree binary found at 0000000000000000
+> initcall failed at call 0000000060097bcc (err=-2)
+> ### ERROR ### Please RESET the board ###
+> ```
 >
-> So maybe the pre-requisite here is that with "bloblist" and "standard
-> passage" being divorced, what is the requirement for bloblist again?
-> Because in practice, all of the problems we've had come down to looking
-> in fixed address locations before they're valid. You want to handle this
-> by saying "Ah, we won't look before it's valid with other CONFIG flags"
-> and I say we should handle this by not using a fixed address to start
-> with.
+> U-Boot test version:
+> 'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
 >
-> If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
-> OK. But it shouldn't need to exist long term.
+> [1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
 
-For me, OF_BLOBLIST is needed for x86 devices which don't pass the
-devicetree in the bloblist.
+I suppose the FDT address in the register is not being read correctly.
+
+Do you have a test case for this, e.g. in QEMU? Even if it is just
+binary blobs for now, not suitable for CI, I'd like to get it in my
+lab.
+
+I did create a test back when I did standard passage, but that series
+seems to have not been applied. I'll see if I can resurrect it.
 
 Regards,
 Simon
