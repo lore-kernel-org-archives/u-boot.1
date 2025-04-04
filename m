@@ -4,111 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793AFC36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 08:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABADEC3601E
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 08:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5909828D0;
-	Fri,  4 Apr 2025 10:40:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1788082991;
+	Fri,  4 Apr 2025 10:40:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fk1XBdiE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jSr26v+K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1886828D0; Fri,  4 Apr 2025 10:40:34 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 351F1829CF; Fri,  4 Apr 2025 10:40:43 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E05B828BC
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 10:40:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D725E82991
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 10:40:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso9956155e9.3
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 01:40:32 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3912fdddf8fso1805995f8f.1
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 01:40:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743756032; x=1744360832; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4ILSkJoOKj+XeT2UHR0pMDQfEYLAP0SBkYYIJx1Hsnc=;
- b=fk1XBdiEcuEQG9rXKeFNSZirvUHLakwdIqrlHg2bibmr46rcfn3W7NpVw28rr39/Hl
- UFL8VEIRCFtt2gKGdmNuEvj68q53j5vS7yAai/SQohu5XY1EZmC1DiI9TwfVtkC7ZHQh
- FsMyyuSxtf8cVwwyYRCYij0TZXLBwcVTTZNlbTW20t3Bfre4h2rSjGDdAde7PNdf/s53
- BnFPEVlTpPcCs1Cs4QGwplDcwQbJMok3T6ySLzhEVg9vjjZamu+31wEUynvWHhBJT6dS
- Iy1SUQdcZkFEy9AhQsSoDe1WkA89xHAkuuQYKpo/QwdE5M3Sx1wWNLFWSzcVsvgvD5MU
- hkpQ==
+ d=linaro.org; s=google; t=1743756040; x=1744360840; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zcyqTWVrH4Vio2kcGcS9lfwz/WcmsFbF8bds/seprwI=;
+ b=jSr26v+KrhUnrxGdnpqnAo9mtXDa3hs2/a19MDbqzVhOyYTdfAoCaTLILadEoi2ETe
+ CHe/hw9tRM3VPzdIqB0ipf7bd8vD5DaUNp/GGV4P+XO5JNTjncmN0Hm9yTbsjJUmy5n7
+ 0aRn5IT/UCatD/qgCfFG8e0iK8iCFiKjjHH7dxmWoqAO4UkjJ8C40Q2ZruLOpgRnha7m
+ p0XgBUa8N04SWI81vOq9S1HHYK+zdUUjIG1WrQdrhrW35fjozSwpVhdxFB7Zl3GRlW2w
+ C78BIJCK/gm3QTykYXXSQSIMAyi1hmmRaB05XpyG4C5NOqjd+RC556x852ajCv1ovp1X
+ XJoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743756032; x=1744360832;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4ILSkJoOKj+XeT2UHR0pMDQfEYLAP0SBkYYIJx1Hsnc=;
- b=PH4i7iY2gO2+y5apfrqL0L+hRaabWr3mwLYy6R5r3gikd+bh9DOqahHqerjCMYk1Nb
- STEGRIEvxfDiz6sPYSRkBzq1zJOH663W4GRTXvUYRYPOHdU9G9pEIYBObO6FgRsFmxWQ
- 7qCtNQn1TfEmed2YX/zo7e0QXHs/hq9RN/aA0WxDLPHBLNsl78wgvXqjss+uP5UNaA3/
- uqZLF1iKPo3MvRVrWHOUvkwAhiTNh9godocaHmbJfuIuzsuAjZBCekki0AUVRWwwdQCF
- ikgefIDbh/FdoXI+JkRckLUwZOk9GdI6DfCaY/8veKv6yqyyKuHzDnOxhz2/VEEhC9PE
- Wr8w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoYdaE/93aHUP2GzsDjULbzP03gkwTDTJt9baCp+ye4+OQmnA2yCWJgwsejMzLBaVxr73GTU0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwD7fwrNZkrJ72r7YCWLdhGqUsstpMIkH/9nygp1NFuHtlVv2ns
- k7efZA4F8jrTtO+KjTu5ea2EfSPr0nBSX/3J6S06GU/otgXEXbQzAwH6yuNsU3A=
-X-Gm-Gg: ASbGncuo+OgVU301SaPiLfnrz6tt43zk2WnNG+ZxRAeYxosXcFpua8ZgV+d8K9PwM0c
- SyqSI1LWgvJcS1kiDwcP45KI4wteeQ1ho0363AWSPPcVXeCbgw91gxEx9GeRB8543MxTMsI50vS
- LhhgOH03jvpa3g/IenHg/BzKRY/6gArVcXjtgP4GdXZ29QR7hmPpiTxeaIKl8XxxeDYAyMQaf+b
- rTem6SpIXAE1JzQu99HQCCao6MVhIcE9uKmK/lvfs6PqiaGbafAZGGTI3D1pSsfdV5IccWFr6wU
- kwOQ5z4+ZQUebEi0boe8N/OJJSIMmy4q08Vf6sLQxWD/9l+Y8S8c1IsfuHlW51/t6LwdphvrQsG
- rj1TgRjGXuo1tqkMZJlXuDYWEzIM/dA==
-X-Google-Smtp-Source: AGHT+IGU5jbPZ5HW4NsnxVQQUVK5PxURbOZilt7sN/Ch0Uk05jtSHgQclPw8MEOxbZHMiGI4Tc3LhA==
-X-Received: by 2002:a05:600c:4713:b0:43c:e2dd:98ea with SMTP id
- 5b1f17b1804b1-43ecf9c7731mr16552425e9.22.1743756031764; 
- Fri, 04 Apr 2025 01:40:31 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:19b:8166:6e82:3840?
- ([2a01:e0a:3d9:2080:19b:8166:6e82:3840])
+ d=1e100.net; s=20230601; t=1743756040; x=1744360840;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zcyqTWVrH4Vio2kcGcS9lfwz/WcmsFbF8bds/seprwI=;
+ b=YGdhN+HTH8xEIdE/pR090lYRxzWYu8yM2mSMWM2Z+q6yVGUbkKcoIHOMvBbhzXIInh
+ 4+xiSwxedBK31skpONWDvkHz1sC58NFhlG4cvyDnIPakKYk0srL4VR+MuDmO4lxpo59L
+ E3HRqrDYDjN/FGbUMiGhWqWhFgCgMzfzs13hpgOQBLISuGxUBP40F4cf/SXPLp/q377J
+ DEWOCdsW12nxzr5KNsWUsmyeE/tHBRDy3E6IiWIdDtkQwxrtlGTunI9EGUj9slBB1b5M
+ 9j3hrhHaUm+HbhQJtf7Ok1jT9h0CX8szMja+mGtI9B76jiXS44uXHxcMkjvSt/TzjtLS
+ dgjA==
+X-Gm-Message-State: AOJu0Yz9+nJn0tFmaRsFT9NbtpV3NT2L4AhAIsyQSWTDSzpcTYU0toa4
+ +XYEBuAsRN6e/skKtRAzAw7taovlHG9lejJ+tqaFeyTLeDkeLVIq6ciHPBQgXyU=
+X-Gm-Gg: ASbGncuotvtxVb1Fy8RqCZCn2PYdEPazkerSLIXD0a1DHUJ8N7QqQbquxCAcHY1Kxh3
+ 9uE6Ge2KwhicAZ/TFU/aMbJyeEsig8/Xl0WqFsrVpzxFX2H95EsqKDD0Q5VaBSFxNMW/jwNpLh6
+ gj4kmNzSZlI+Fkg4Nv3H5JiXkZFyNf6PPnuvL/sIPNUqmXWjEpzsJOus1yIfZY8LUiW5U+HunCC
+ 0a/3JhD+5RE2w5U8JEmntOotYNZ29F9q4Zi6ZN/Dllb/Qf27CHEPkQPbITBmfIX2bZUDQ75l24J
+ /MyQ+NvhgSEHtxKxP0fA5mlPVrYPi4pUjZVYPZV83HI1LsNO4xtB7/o6FxGw7S0GGQ==
+X-Google-Smtp-Source: AGHT+IEiuZd39+N914ggP8u9zuSQn67eBwEE7ajMj0IbwIqKg8nAeMrFWfFN4foi7HAvAgL6TMh5rw==
+X-Received: by 2002:a05:6000:1884:b0:399:6d8a:3f with SMTP id
+ ffacd0b85a97d-39cba94dc6dmr2048188f8f.27.1743756040274; 
+ Fri, 04 Apr 2025 01:40:40 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec17b1352sm42475745e9.37.2025.04.04.01.40.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Apr 2025 01:40:31 -0700 (PDT)
-Message-ID: <d1de0302-ad3a-44ba-ad1a-73cc1b6f34f1@linaro.org>
-Date: Fri, 4 Apr 2025 10:40:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ ffacd0b85a97d-39c30096bb2sm3830928f8f.12.2025.04.04.01.40.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Apr 2025 01:40:40 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-20250404 into master
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250403-u-boot-fix-set-dfu-alt-info-interface-v1-1-1fdd12463186@linaro.org>
+References: <20250403-u-boot-fix-set-dfu-alt-info-interface-v1-1-1fdd12463186@linaro.org>
+Subject: Re: [PATCH] board: libre-computer: check interface before
+ comparing it in set_dfu_alt_info()
+Message-Id: <174375603984.3130822.11319635435773875897.b4-ty@linaro.org>
+Date: Fri, 04 Apr 2025 10:40:39 +0200
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,39 +95,24 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-Here's a last minute fix for the libre-computer boards fixing the capsule update feature.
+On Thu, 03 Apr 2025 18:03:21 +0200, Neil Armstrong wrote:
+> When set_dfu_alt_info() is called, interface can be NULL when called for
+> the EFI capsule, so check it before calling it with strcmp().
+> 
+> 
 
-Thanks,
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
+
+[1/1] board: libre-computer: check interface before comparing it in set_dfu_alt_info()
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/c5fd2c7ac7fa4835339ea09ead2884794314c9d8
+
+-- 
 Neil
 
-The following changes since commit 82b69fc4224432d5aefa7ca750d950374cbc7fb2:
-
-   Merge tag 'efi-2025-04-rc6' of https://source.denx.de/u-boot/custodians/u-boot-efi (2025-04-03 07:31:28 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-20250404
-
-for you to fetch changes up to c5fd2c7ac7fa4835339ea09ead2884794314c9d8:
-
-   board: libre-computer: check interface before comparing it in set_dfu_alt_info() (2025-04-04 10:37:40 +0200)
-
-----------------------------------------------------------------
-- check interface before comparing it in set_dfu_alt_info() to avoid hard crash on capsule update
-
-----------------------------------------------------------------
-Neil Armstrong (1):
-       board: libre-computer: check interface before comparing it in set_dfu_alt_info()
-
-  board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   | 2 +-
-  board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   | 2 +-
-  board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c | 2 +-
-  3 files changed, 3 insertions(+), 3 deletions(-)
