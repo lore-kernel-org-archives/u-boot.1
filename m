@@ -4,90 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFB44C36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 14:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694EDC3601A
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 14:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AA4082A0D;
-	Fri,  4 Apr 2025 16:49:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id C65F8829A0;
+	Fri,  4 Apr 2025 16:53:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="oKcFU0z+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ec90EWBK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38EDE82A0C; Fri,  4 Apr 2025 16:49:52 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 7EA66829C3; Fri,  4 Apr 2025 16:53:57 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 897F0828AB
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 16:49:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id BBD38828AB
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 16:53:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-224019ad9edso28922065ad.1
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 07:49:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-3014ae35534so1816404a91.0
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 07:53:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1743778188; x=1744382988; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P3+88lxcyigCrziUjCy8/JMVtxotNgrX6nDbP8CR55I=;
- b=oKcFU0z+yVZShk8EL7GY6Ue/fvyjYaPJeKnM2hl/8+INKl2GZtBe/mHH7iydmIu6UN
- CKmUpZB8z36dIC2i2Lc+YHoTi4IqQEvSfIgCa6OukKfMNNgGp+yTB4B5wYmY+lmyGCHp
- VN29uTWuynL6NnsjzX6FLhjpYHPjfpYtb643sDJOyP7E9XYAW8gMFLqYVoJZl/glBYfZ
- 3whj5w7UEXOTorc/Sm7NeSL0rD8CVQ/pBOeb9abCsUBTBoPPc6X+/FKBnd3zYyRUbMbA
- XKLlqcKLPaqKRRyc36qd4HJE5zslzLzm+NcSkI8P69WHHmjiDTm5cGAtc5mkWQ1+x54I
- a6XA==
+ d=linaro.org; s=google; t=1743778433; x=1744383233; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7UEObFS2K+BgtoGzOOOlEBiSsxlR2HfrqSMkm5nvy3E=;
+ b=Ec90EWBKZ2+UIfLr7dlKhJlVc6hMsrCBFardBiL5ZLJSSByHJz5GVpwj8OfJGYWmbU
+ ew2dQqyd8HY99PfZENkqqtFizrjn2hPsvs5zCpI6mf+hxlcWUzdbzyMVBcQdIH0Y9sgq
+ cZxccuUurN4IU9Q7izcNxJaCh6iCNFBVeR+EYRryS/lJVpzmV/2KUtPPilfP4w+G3Epf
+ MXIodDlXc2ozFLNvjOGH2PxB6rfWtTihjSsGN0qM314SoeeeA0ABHwNvTBwy7yjRQutL
+ ahrQJ/L/NsE43GSB0EFX2+h2lDXp4NcV7fVdO6wxeEOxTOcfb4hbFAsvlG8cKmhaD7jj
+ ytFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743778188; x=1744382988;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P3+88lxcyigCrziUjCy8/JMVtxotNgrX6nDbP8CR55I=;
- b=ZNqrhUPf4wkpbMyKYgR9N4CKijCrmSfowwV2gPvDJ1598EH6whIK8BQqtC7Gk6YfdX
- UTnCdOkoCWGMzVCp0+4xjZTpYOXWRP3jKiw3AxEXSNprR8U1jC1QqLAQk1t/QdnXj769
- C+J+VV5q+dC/n5IQkPJNi+wX8mj/6OUiv2oVSLpHPvLnMljp2arK9f5h4vZjpYrlM5vF
- H0K9YzCqoJYbtH455y+5ebRkEHDARQhadRT4n2KNSNoIWImHBDciu/Pcr+wYQHHDeJLo
- VgDq18Q4+kT+JUKzgRzU53nwrk/fHK+NmE6YPz0/LXDsYWdKf4ENnontV2A2oYwd0LpR
- BFZA==
-X-Gm-Message-State: AOJu0YxWbRml0sE99EN61auRICTSVWUe7Opqh/jqOvb227lOwIh2+c7+
- 0z3WLf/oZP8eyip5s7NKik8EXv1TzUmsLlKvJFuJPbK2vGeybGiQ+LgPPaIy9sWrrNnsNGvLpVB
- m
-X-Gm-Gg: ASbGncsLmAZdlbe9gfTAFt9spHMoPaIRpoOycT+taG04/kj3Rljs4miLFCnXw/1kzBI
- RW38kMWaSJuvOBfXIk6ZY62hAQF/nA4Y0x0xNv+xloUn58wOdT0D6gnxoC8tYjHZsAD80FrBV7b
- EprNk1WnC8HExEQCFLdY0vfMWZ4LcjcPXtSkjYmI7unAuYi6DI3pUPO0tvnwz9Ez6T846D3r/4l
- dnZA4TH11sHYYQyWOP4EEfC6Uv+4W1x+wZk+vVbd+YDWqJ5TS+0cva0DjYARHCnYfmiD0Xt9FeU
- e8xQXWj1QH7O/HMxjOUcnlXtZxGbC39m5F332jL2mMUynZqLm3HlRlVKQU8MpUsI3Q==
-X-Google-Smtp-Source: AGHT+IFwbNNirXEykX1Iz3svsdQGs35InEF8IvCD65qOUrsvzHiTGqXZQJRScnso803NhmsLheHT8A==
-X-Received: by 2002:a17:902:f547:b0:224:76f:9e44 with SMTP id
- d9443c01a7336-22a8a045df2mr32148405ad.8.1743778187779; 
- Fri, 04 Apr 2025 07:49:47 -0700 (PDT)
-Received: from localhost.localdomain ([103.97.166.196])
- by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2297866dccbsm32950705ad.176.2025.04.04.07.49.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Apr 2025 07:49:47 -0700 (PDT)
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: u-boot@lists.denx.de
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH v2 3/3] booti/bootm: riscv: Verify image arch type
-Date: Fri,  4 Apr 2025 14:48:57 +0000
-Message-ID: <20250404144859.112313-4-mchitale@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250404144859.112313-1-mchitale@ventanamicro.com>
-References: <20250404144859.112313-1-mchitale@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1743778433; x=1744383233;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7UEObFS2K+BgtoGzOOOlEBiSsxlR2HfrqSMkm5nvy3E=;
+ b=lRCK0P3pVmccbJqbSzmFJ7kskGELL3VbRHDL4mr7UOcyitXLHv9R0GxQTByo3YGOCe
+ plmMfDbWiSVcM8psm6FcDEWYW9sKsjK2sNRxn3nVkqsrwWlikI+r+xPVCmhCHiUld0Xy
+ 0uY5YCKiGjUImNXAKhAI7eMn3P9MAOaDZUh0l9z/m5QZEioKm3JEZx5EnOObQFuJTX/J
+ u1uNXs1e4nAnVgd0+K8d88Yq1LR0K3zK1ncXfDBoiJP6UMaoCq54kpsfUCBs+/1fOG3n
+ WXqT7WUt+gffevohJYcMarCg9g3m3RtbmMImFCLdxLFNMTv8I7FupFNS0D7EIkHNElNe
+ 0WZQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXe/7QTIveVxajILFlQOva0rWMOGExRYNhNt0kQOvYxLtAAoxKfBDdK2HTty5E/0uvJL3P+qUY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwfrDm6rGVt1pDmh43xXnSEmEl+uiEskXB15pW1jYUl4IGUn+9n
+ wPIxWzfoWi95/QxHdxmnj8XkR21CudnWsVbDi1PpaoM+2JvAsOONvvJe7HK+Yi0rXqhRczF2KQm
+ XfDFwVqAj9zwtwttpr+WuO8rXPY4fLDnZZ6eCn2Y/Bmixa+it
+X-Gm-Gg: ASbGncvK9smsU8TVC7Cn0I53zpw7S2NU5DK0ikLT+4LQd5ddUSPk8EibRJC2GK6F7Nc
+ 0F3DW78ljuPSNT6mxxCraHHnVo7uBYiEyguxsYizclg8hy+qIAAnJ6TspGmxEjb2kx0EPkDtQR6
+ BcrEzct4xQdmL66lg65nURxSkw4Qg=
+X-Google-Smtp-Source: AGHT+IGZP8rxwITx5I7ioYxB6+WOgcPlawGyiDHPaaRuGhCBMuN/uifDOGnck1ugizXmi7B9QwhO7cpLeNpckJ0ciwI=
+X-Received: by 2002:a17:90b:5683:b0:301:98fc:9b51 with SMTP id
+ 98e67ed59e1d1-306a4821cf3mr5077081a91.5.1743778433159; Fri, 04 Apr 2025
+ 07:53:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250328154401.3563921-1-sjg@chromium.org>
+ <20250328161845.GB93000@bill-the-cat>
+ <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
+ <20250329000211.GH93000@bill-the-cat>
+ <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
+ <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
+In-Reply-To: <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 4 Apr 2025 10:53:40 -0400
+X-Gm-Features: AQ5f1JoTcuNCv67U-UrGU3HjLiZOiZKBShKxtwm0BSqEfQgMsA9pynsjZFExPVk
+Message-ID: <CAEfUkUJG4+Tbzgy==JK_2pptLfuYvjDzu9txy8iZ+EAALEEKFQ@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,52 +112,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unlike ARM and X86, booting 32-bit images on 64-bit CPUs is currently
-not supported for Risc-V. Hence, for bootm, disallow booting a FIT
-or a legacy image that was built for an arch type which is different
-than the current arch and for booti, set the arch type to be the
-same as the current arch.
+Hi Tom and Simon,
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
----
- arch/riscv/lib/bootm.c | 4 ++++
- cmd/booti.c            | 7 +++++--
- 2 files changed, 9 insertions(+), 2 deletions(-)
+On Fri, 4 Apr 2025 at 10:48, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Tom and Simon,
+>
+> On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Hi Tom and Simon,
+> >
+> > On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
+> > > > >
+> > > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > > so that it is simpler to understand and manage.
+> > > > > >
+> > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> > > > > >
+> > > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
+> > > > > > CI at some point. In the meantime, the standard passage series[1] could
+> > > > > > be resurrected to give some coverage.
+> > > > > >
+> > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+> > > > >
+> > > > > Based on how it's documented to be run in
+> > > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
+> > > > > that platforms using the handoff spec still work?
+> > > >
+> > > > I believe so, yes. I don't have that board to test it though. Raymond
+> > > > may be able to test this series on QEMU?
+> > >
+> > > I was pointing you at the docs so that you would have access to testing
+> > > it. That's part of the docs, running the emulator.
+> > >
+> >
+> > I can help to test the firmware handoff on qemu.
+> > I have all the necessary changes and unit tests for the OP-TEE repo
+> > qemu v8 build to test this.
+> > I will try to find some time early next week to review and test this
+> > series before turning back to you.
+> >
+>
+> Just a follow-up on the testing with TF-A and OP-TEE.
+> Unfortunately, the patch series breaks the transfer list handoff to
+> U-Boot completely and just end up with below error when U-Boot boots:
+> ```
+> No valid device tree binary found at 0000000000000000
+> initcall failed at call 0000000060097bcc (err=-2)
+> ### ERROR ### Please RESET the board ###
+> ```
+>
+> U-Boot test version:
+> 'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
+>
 
-diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
-index 76c610bcee0..90f71bee6a5 100644
---- a/arch/riscv/lib/bootm.c
-+++ b/arch/riscv/lib/bootm.c
-@@ -94,6 +94,10 @@ static void boot_jump_linux(struct bootm_headers *images, int flag)
- 	announce_and_cleanup(fake);
- 
- 	if (!fake) {
-+		if (images->os.arch != IH_ARCH_DEFAULT) {
-+			printf("Image arch not compatible with host arch.\n");
-+			hang();
-+		}
- 		if (CONFIG_IS_ENABLED(OF_LIBFDT) && images->ft_len) {
- #ifdef CONFIG_SMP
- 			ret = smp_call_function(images->ep,
-diff --git a/cmd/booti.c b/cmd/booti.c
-index 1a57fe91397..ced2c1047ab 100644
---- a/cmd/booti.c
-+++ b/cmd/booti.c
-@@ -130,8 +130,11 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	bootm_disable_interrupts();
- 
- 	images.os.os = IH_OS_LINUX;
--	if (IS_ENABLED(CONFIG_RISCV_SMODE))
--		images.os.arch = IH_ARCH_RISCV;
-+	if (IS_ENABLED(CONFIG_RISCV))
-+		if (IS_ENABLED(CONFIG_64BIT))
-+			images.os.arch = IH_ARCH_RISCV64;
-+		else
-+			images.os.arch = IH_ARCH_RISCV;
- 	else if (IS_ENABLED(CONFIG_ARM64))
- 		images.os.arch = IH_ARCH_ARM64;
- 
--- 
-2.43.0
+Forgot to mention: with OF_BLOBLIST selected.
 
+> [1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
+>
+> Regards,
+> Raymond
+>
+> > Regards,
+> > Raymond
+> >
+> > > --
+> > > Tom
