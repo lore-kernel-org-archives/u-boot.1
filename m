@@ -4,55 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF986C36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 06:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D8AC36010
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 07:04:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12FD8828BC;
-	Fri,  4 Apr 2025 08:12:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 46C87828D0;
+	Fri,  4 Apr 2025 09:04:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PSfJuLbr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="soz5HaOx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD706828D0; Fri,  4 Apr 2025 08:12:48 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5BFC88291D; Fri,  4 Apr 2025 09:04:01 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 556628283E
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 08:12:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 40F7D828BC
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 09:03:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F32234404D;
- Fri,  4 Apr 2025 06:12:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35CF7C4CEDD;
- Fri,  4 Apr 2025 06:12:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1743747163;
- bh=m9utFx9gDH/AvARBpMXQBEJ3mfES4Cu7kaH3PAB6GF0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=PSfJuLbrOEDqGAn9yLKSC1hiicvVw74L8xOLbeaABtD0pRmW/ftKMgfZwvbV267wL
- /FcKhTehKhhlVwP9ScOVNPYADhnN9e6fVuiZbiPDeyGLjiYz1eDEiA5kijHry4Zfo8
- yQiTVGmZ8BZxel8quRelPPayrWXxX4iF+qBTEx65C41YEl4lA3SHAvXPzvIfPyJ3c7
- Q1BYM868whbgwwtkxXkxQswcHh8sbfbrClwmMb0tf9/NlmXMuZCCr+auaADykfdKWV
- KArn/RCR+nT01qNI3e2SIIyj3P/hNDCZkvb9rEX4xcBy9u6SUV5EehbbHzZ1Lg/SZg
- 3qQ8gBtAMK8AQ==
-Date: Fri, 4 Apr 2025 11:42:37 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH] hmibsc_defconfig: disable DM_USB_GADGET
-Message-ID: <Z-94VXb10MM_SV6e@sumit-X1>
-References: <20250402142812.368168-1-caleb.connolly@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43690d4605dso11276255e9.0
+ for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 00:03:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743750239; x=1744355039; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dvCJnUBb9WJwrd/FC2yUFkZytgdfYP0UBdIKIQoQbz4=;
+ b=soz5HaOxGA2zRV5oGSeMOfvw28DgvqMkG/iYrN99xMaMOH+OrCWY0sTP/3vIJtdIYI
+ pKkNlSum9mUz/YifhYazGY3wCD2jODhShoLy3r06nLxdyXq6dM5FpBEbXVE+/rZ8cYwP
+ vHobjPMds4coHeJHQYQAqzA3h3KltOac+z3HuALdgts0F6K36ki3E3mxhUEW1vyp8MVa
+ S55sBF9GsWUTXeUuw2x+WGw4t5yJZYJ4FttY/aven2Aa8bFIYxcmEPA+4nsEj6DL+ZYm
+ W5ah60glDJoeNOHbrLIFysL1+PAe2UwPF90TIPVGDZPJHKsvQe+lSkNejVVD6rZcr3XQ
+ GR2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743750239; x=1744355039;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dvCJnUBb9WJwrd/FC2yUFkZytgdfYP0UBdIKIQoQbz4=;
+ b=qhrM41j6c1w5YyEWac5t8YeuanMljahIXpqsGWYW4u36PhrVK1YNq2ebdTfgBNZZx2
+ +qIYG5YtRpx429p8ZxibrDbEJN7C1ZRowEz2uaZu5j5PgAi0tTppFOLQbFJgW7B8Yd6Z
+ nE2I/smHPpSNnf+c1ReBzoWcbYbLK0rPvkv3zVJoop90lxmUwE+zbX3ZlDA8JyXe4vBm
+ eblhBcH+bIU4waprcwXzEMoukVluZHwIJT2zb+UulkrpDJJJe0dEc5CaGDD/vp6Dt4tc
+ PBuQJQ9pYUzsTZFODp4HLejPUNjYIcSQe11G6RDab6cUZJiiwTrwCuLAKR2gOiiSFO18
+ G6sQ==
+X-Gm-Message-State: AOJu0YyVdw8rmbt0Ctz0xoCJWyUYMu11CnN69fU1q148DP6WKfpbQ6Ri
+ dVkydkGApNfHngNojUHLzdN6j2eo9s2LrMHhpkl6kQJNndkrOdZBqrKa5Ek5aL0=
+X-Gm-Gg: ASbGncs7hU2ilB6XlNzRxZTrU5fN3kltkf1GyIJLvSCDDXCEp5ngmsdf+kuJg5jO7Y3
+ +iB89t6gj/s5V5s61QM642XFhxl5QqG8aLQl4atNydMKU9oMjG4dRCfLj6vcsqKyP00y1vZthg5
+ Y8g++eLRWYFpZnt53VQKarjP8ufiuZZyIPuuLAOOmJD9eeTT+POyfpeWu+XdQueJbsvF+YFJWj8
+ bjfvu1wYEJDuWwWpRgQyqb0AgDiXtJG7ltNLGeLcdqVXS/NFcb2ze+5Y8dqzk55qu46yD2AmdRo
+ TCtG/zzyp1iOmwbuabSzZho+47IRGEY5gLNiYWcdrclrc4Q+zlfJ
+X-Google-Smtp-Source: AGHT+IE1SyethDYOC4ysbt84X5ckYF40Bm7fPamZ8JgoedsZjzBRfsa3v7jYviZpkUNgp5kiNZz5KQ==
+X-Received: by 2002:a05:600c:3b27:b0:43c:fd27:a216 with SMTP id
+ 5b1f17b1804b1-43ecf9c4686mr9400375e9.23.1743750238666; 
+ Fri, 04 Apr 2025 00:03:58 -0700 (PDT)
+Received: from [192.168.0.24] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43ec169b8a3sm40830005e9.19.2025.04.04.00.03.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Apr 2025 00:03:58 -0700 (PDT)
+Message-ID: <97b00a14-e866-4d23-88b8-e84410ebe036@linaro.org>
+Date: Fri, 4 Apr 2025 10:03:57 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250402142812.368168-1-caleb.connolly@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: atmel: sama5d2_wlsom1_ek: Fix spurious serial
+ output
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, Fabio Estevam <festevam@denx.de>
+References: <20250404023642.3793338-1-festevam@gmail.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250404023642.3793338-1-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,38 +99,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 02, 2025 at 04:28:03PM +0200, Caleb Connolly wrote:
-> As with the db410c this breaks linking as it conflicts with the USB
-> controller used by these platforms.
+
+
+On 4/4/25 05:36, Fabio Estevam wrote:
+> From: Fabio Estevam <festevam@denx.de>
 > 
-> This fixes building after DM_USB_GADGET was enabled by default for
-> mach-snapdragon.
+> Currently, there are always some spurious characters showing up
+> right before SPL banner is shown:
 > 
-> Fixes: 7235dbedfce3 (mach-snapdragon: enable DM_USB_GADGET by default)
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> RomBOOT
+> ���=������
+> U-Boot SPL 2025.04-rc5-00023-g9ed4e2c45f25 (Apr 03 2025 - 23:23:17 -0300)
+> Trying to boot from MMC1
+> 
+> <debug_uart>
+> ...
+> 
+> Fix this problem by removing the redundant UART iomux and clock
+> initialization from the board code, as they are handled by DM code.
+
+If it's a redundant initialization, how does that lead to spurious
+characters ?
+My take on this is that the UART is initialized too late, and the lines
+are floating for some time.
+... or wrongly initialized vs baud, etc, for a certain amount of time.
+
+> 
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 > ---
->  configs/hmibsc_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c | 9 ---------
+>  1 file changed, 9 deletions(-)
 > 
+> diff --git a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+> index 04de1257eca0..a0ecc4f42a90 100644
+> --- a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+> +++ b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+> @@ -41,17 +41,8 @@ int board_late_init(void)
+>  #endif
+>  
+>  #ifdef CONFIG_DEBUG_UART_BOARD_INIT
+> -static void board_uart0_hw_init(void)
+> -{
+> -	atmel_pio4_set_c_periph(AT91_PIO_PORTB, 26, ATMEL_PIO_PUEN_MASK);	/* URXD0 */
+> -	atmel_pio4_set_c_periph(AT91_PIO_PORTB, 27, 0);				/* UTXD0 */
+> -
+> -	at91_periph_clk_enable(ATMEL_ID_UART0);
+> -}
+> -
+>  void board_debug_uart_init(void)
+>  {
+> -	board_uart0_hw_init();
+>  }
+>  #endif
+>  
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-
--Sumit
-
-> diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
-> index 88c9c70a6399..4550eba71ab2 100644
-> --- a/configs/hmibsc_defconfig
-> +++ b/configs/hmibsc_defconfig
-> @@ -69,8 +69,9 @@ CONFIG_DM_PMIC=y
->  CONFIG_PMIC_QCOM=y
->  CONFIG_MSM_SERIAL=y
->  CONFIG_SPMI_MSM=y
->  CONFIG_USB=y
-> +# CONFIG_DM_USB_GADGET is not set
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_EHCI_MSM=y
->  CONFIG_USB_ULPI_VIEWPORT=y
->  CONFIG_USB_ULPI=y
-> -- 
-> 2.48.1
-> 
