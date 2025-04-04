@@ -4,62 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52304C36018
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 16:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B74BC36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 17:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91F3F82A9E;
-	Sat,  5 Apr 2025 18:02:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 9EBD482A81;
+	Sat,  5 Apr 2025 19:47:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="WJiuc+6B";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CF3082A76; Sat,  5 Apr 2025 18:02:42 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ id F114082A86; Sat,  5 Apr 2025 19:47:05 +0200 (CEST)
+Received: from inet10.abb.com (inet10.abb.com [138.225.1.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BB5E82A86
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 18:02:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 6ee55959-1237-11f0-8ec8-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 6ee55959-1237-11f0-8ec8-005056994fde;
- Sat, 05 Apr 2025 18:02:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=YaHBBMqWB3P5+FRfAlfyBzHHiq7/fBpDgSwXlZbi/3I=;
- b=WJiuc+6BtMe/vzJnPVJU0b/SvfLzN6xhUxqRiSy+CNx7qBxlwbdhfs8XxJGLvKi+gHRNxkGwg6389
- JzD4apIkHSipv8eij0dZ8ZZRHVmPcTygGALITrDcpaRt75vrnl0hD7Ly+H3s5kaBy5vR7JrXMEz6x8
- hjwmCzi/cWcis9k+vqJq5uqYCD2Hogjms4WOAWXEhVw5GJ2pFaGkALl08QumeogyKKDGuaylXThsUF
- 53GWKcLofi/LDIjEXbQzX6nn72ZQXgavjUWqnrTfVRcO8m1vF/M2h4nLc7UrxYzz55KUfrm3rARcjl
- u/9CWLQUBT0qx7jteImfJZQ1DSCt+nw==
-X-KPN-MID: 33|4aH0B+EUMu+JkBEVyHrsXVWOqlf9JkDlEmyxn8mulKw/9XIf32khV1dyxIKOjIo
- 1A+7i/6mT4VeDgJg5zV+M/t9s9RHcxHkB3eSjXKPUsco=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|xr96FD4BJT7KmIc/Ev7U7Ns43mDdj8vEwucobPwUleEObl+leER0QCo0/11x7P6
- 8taFNtyFUCSy/lMtVo883pg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 6514364a-1237-11f0-af96-005056998788;
- Sat, 05 Apr 2025 18:02:38 +0200 (CEST)
-Date: Sat, 05 Apr 2025 18:02:37 +0200
-Message-Id: <8734emy4te.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: kever.yang@rock-chips.com, sjg@chromium.org,
- philipp.tomsich@vrull.eu, trini@konsulko.com,
- arnaud.patard@collabora.com, quentin.schulz@cherry.de,
- naoki@radxa.com, u-boot@lists.denx.de, jonas@kwiboo.se
-In-Reply-To: <20250405153832.1427549-1-jonas@kwiboo.se> (message from Jonas
- Karlman on Sat, 5 Apr 2025 15:38:20 +0000)
-Subject: Re: [PATCH v2 0/4] Add support for RAM boot from maskrom mode
-References: <20250405153832.1427549-1-jonas@kwiboo.se>
+ by phobos.denx.de (Postfix) with ESMTPS id CE97D82A76
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 19:47:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=br-automation.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bernhard.messerklinger@br-automation.com
+Received: from brsmtp01.br-automation.co.at ([10.43.60.20])
+ by inet10.abb.com (8.15.2/8.14.7) with ESMTPS id 5349uFwa2087272
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 4 Apr 2025 11:56:16 +0200
+Received: from extmail.br-automation.com ([192.168.112.26])
+ by brsmtp01.br-automation.co.at (HCL Domino Release 14.0FP3 HF8)
+ with ESMTP id 2025040411561540-93721 ;
+ Fri, 4 Apr 2025 11:56:15 +0200 
+Received: from ATEGGE3725.br-automation.co.at ([10.43.64.28])
+ by extmail.br-automation.com (HCL Domino Build V1202_05192022)
+ with ESMTP id 2025040411561583-31491 ;
+ Fri, 4 Apr 2025 11:56:15 +0200 
+From: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>
+To: u-boot@lists.denx.de
+Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
+ "Ashok Reddy Soma" <ashok.reddy.soma@amd.com>,
+ "Jagan Teki" <jagan@amarulasolutions.com>,
+ "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
+ "Pratyush Yadav" <p.yadav@ti.com>,
+ "Takahiro Kuwano" <Takahiro.Kuwano@infineon.com>,
+ "Tom Rini" <trini@konsulko.com>,
+ "Tudor Ambarus" <tudor.ambarus@linaro.org>,
+ "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>,
+ "Vignesh R" <vigneshr@ti.com>
+Subject: [PATCH] mtd: spi-nor: Use CONFIG_IS_ENABLED for CONFIG_SPI_FLASH_BAR
+ defines
+Date: Fri, 4 Apr 2025 11:56:07 +0200
+Message-ID: <20250404095612.126753-1-bernhard.messerklinger@br-automation.com>
+X-Mailer: git-send-email 2.49.0
+MIME-Version: 1.0
+X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Build
+ V1202_05192022|May 19, 2022) at 04/04/2025 11:56:15 AM,
+ Serialize by Router on BRSMTPINTERN2/InternSMTP(Build V1202_05192022|May 19,
+ 2022) at 04/04/2025 11:56:15 AM,
+ Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3
+ HF8|December 13, 2024) at 04/04/2025 11:56:15 AM,
+ Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3 HF8|December
+ 13, 2024) at 04/04/2025 11:56:16 AM,
+ Serialize complete at 04/04/2025 11:56:16 AM
+X-TNEFEvaluated: 1
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,83 +79,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Jonas Karlman <jonas@kwiboo.se>
-> Date: Sat,  5 Apr 2025 15:38:20 +0000
-> 
-> The BootROM in Rockchip SoCs will enter maskrom mode when boot firmware
-> cannot be found in nand/spi/mmc storage.
-> 
-> In maskrom mode the USB OTG port can accept one of two custom commands.
-> 
-> Initially a 0x471 command to load TPL into SRAM. After TPL has been
-> executed and it has returned back-to-BROM, a 0x472 command to load SPL
-> into start of DRAM.
-> 
-> This series adds two binman images that can be used to RAM boot from
-> maskrom mode:
-> - u-boot-rockchip-usb471.bin that contains TPL to init DRAM.
-> - u-boot-rockchip-usb472.bin that contains SPL and the normal FIT
->   payload with i.e. U-Boot proper, TF-A and FDT.
-> 
-> These images can be used with rkbin tools/boot_merger to create a loader
-> image to be used with rkdeveloptool or rockusb tools, e.g.:
-> 
->   Create loader image:
->     $ ../rkbin/tools/boot_merger ./RK3588MINIALL.ini
-> 
->   Boot from maskrom:
->     $ rkdeveloptool db u-boot-rockchip-rk3588-loader.bin
->    or
->     $ rockusb download-boot u-boot-rockchip-rk3588-loader.bin
-> 
-> Or directly with tools such as rkflashtool or rkusbboot:
-> 
->   $ rkflashtool l < u-boot-rockchip-usb471.bin
->   $ rkflashtool L < u-boot-rockchip-usb472.bin
->  or
->   $ rkusbboot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
+At the moment a mixture of ifdef(CONFIG=5FIS=5FENABLED) and
+CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR) is used in the spi-nor framework.
+This leads to misbehaviour in the SPL as there is no Kconfig option
+CONFIG=5FSPL=5FSPI=5FFLASH=5FBAR. This commit standardizes the use of
+CONFIG=5FSPI=5FFLASH to get SPLs that load U-Boot proper from the
+SPI flash to work again.
 
-Hi Jonas,
+Fixes: 9bb02f7 (mtd: spi-nor: Fix the spi=5Fnor=5Fread() when config SPI=5F=
+STACKED=5FPARALLEL is enabled)
+Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation=
+.com>
+---
 
-Would be great if you could document this, maybe in
-doc/README.rockchup and/or doc/board/rockchip/rockchip.rst?
+ drivers/mtd/spi/spi-nor-core.c | 22 +++++++++++-----------
+ include/linux/mtd/spi-nor.h    |  2 +-
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-Thanks,
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index 6f352c5c0e2..a8865bbd37c 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -655,7 +655,7 @@ static struct spi=5Fnor *mtd=5Fto=5Fspi=5Fnor(struct mt=
+d=5Finfo *mtd)
+ 	return mtd->priv;
+ }
+=20
+-#ifndef CONFIG=5FSPI=5FFLASH=5FBAR
++#if !CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ static u8 spi=5Fnor=5Fconvert=5Fopcode(u8 opcode, const u8 table[][2], siz=
+e=5Ft size)
+ {
+ 	size=5Ft i;
+@@ -739,7 +739,7 @@ static void spi=5Fnor=5Fset=5F4byte=5Fopcodes(struct sp=
+i=5Fnor *nor,
+ 	nor->program=5Fopcode =3D spi=5Fnor=5Fconvert=5F3to4=5Fprogram(nor->progr=
+am=5Fopcode);
+ 	nor->erase=5Fopcode =3D spi=5Fnor=5Fconvert=5F3to4=5Ferase(nor->erase=5Fo=
+pcode);
+ }
+-#endif /* !CONFIG=5FSPI=5FFLASH=5FBAR */
++#endif /* !CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR) */
+=20
+ /* Enable/disable 4-byte addressing mode. */
+ static int set=5F4byte(struct spi=5Fnor *nor, const struct flash=5Finfo *i=
+nfo,
+@@ -930,7 +930,7 @@ static int spi=5Fnor=5Ferase=5Fchip=5Fwait=5Ftill=5Frea=
+dy(struct spi=5Fnor *nor, unsigned long
+ 	return spi=5Fnor=5Fwait=5Ftill=5Fready=5Fwith=5Ftimeout(nor, timeout);
+ }
+=20
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ /*
+  * This "clean=5Fbar" is necessary in a situation when one was accessing
+  * spi flash memory > 16 MiB by using Bank Address Register's BA24 bit.
+@@ -1141,7 +1141,7 @@ static int spi=5Fnor=5Ferase(struct mtd=5Finfo *mtd, =
+struct erase=5Finfo *instr)
+ 					nor->spi->flags &=3D ~SPI=5FXFER=5FU=5FPAGE;
+ 			}
+ 		}
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 		ret =3D write=5Fbar(nor, offset);
+ 		if (ret < 0)
+ 			goto erase=5Ferr;
+@@ -1175,7 +1175,7 @@ static int spi=5Fnor=5Ferase(struct mtd=5Finfo *mtd, =
+struct erase=5Finfo *instr)
+=20
+ 	addr=5Fknown =3D false;
+ erase=5Ferr:
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 	err =3D clean=5Fbar(nor);
+ 	if (!ret)
+ 		ret =3D err;
+@@ -1630,7 +1630,7 @@ static int spi=5Fnor=5Fread(struct mtd=5Finfo *mtd, l=
+off=5Ft from, size=5Ft len,
+ 				offset /=3D 2;
+ 		}
+=20
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 		ret =3D write=5Fbar(nor, offset);
+ 		if (ret < 0)
+ 			return log=5Fret(ret);
+@@ -1667,7 +1667,7 @@ static int spi=5Fnor=5Fread(struct mtd=5Finfo *mtd, l=
+off=5Ft from, size=5Ft len,
+ 	ret =3D 0;
+=20
+ read=5Ferr:
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 	ret =3D clean=5Fbar(nor);
+ #endif
+ 	return ret;
+@@ -2016,7 +2016,7 @@ static int spi=5Fnor=5Fwrite(struct mtd=5Finfo *mtd, =
+loff=5Ft to, size=5Ft len,
+ 			}
+ 		}
+=20
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 		ret =3D write=5Fbar(nor, offset);
+ 		if (ret < 0)
+ 			return ret;
+@@ -2090,7 +2090,7 @@ static int spi=5Fnor=5Fwrite(struct mtd=5Finfo *mtd, =
+loff=5Ft to, size=5Ft len,
+ 	}
+=20
+ write=5Ferr:
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 	ret =3D clean=5Fbar(nor);
+ #endif
+ 	return ret;
+@@ -3791,7 +3791,7 @@ static int s25=5Fs28=5Fsetup(struct spi=5Fnor *nor, c=
+onst struct flash=5Finfo *info,
+ 	int ret;
+ 	u8 cr;
+=20
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 	return -ENOTSUPP; /* Bank Address Register is not supported */
+ #endif
+ 	/*
+@@ -4577,7 +4577,7 @@ int spi=5Fnor=5Fscan(struct spi=5Fnor *nor)
+ 	if (nor->flags & (SNOR=5FF=5FHAS=5FPARALLEL | SNOR=5FF=5FHAS=5FSTACKED))
+ 		shift =3D 1;
+ 	if (nor->addr=5Fwidth =3D=3D 3 && (mtd->size >> shift) > SZ=5F16M) {
+-#ifndef CONFIG=5FSPI=5FFLASH=5FBAR
++#if !CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 		/* enable 4-byte addressing if the device exceeds 16MiB */
+ 		nor->addr=5Fwidth =3D 4;
+ 		if (JEDEC=5FMFR(info) =3D=3D SNOR=5FMFR=5FSPANSION ||
+diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+index b8b207f7b5c..4eef4ab0488 100644
+--- a/include/linux/mtd/spi-nor.h
++++ b/include/linux/mtd/spi-nor.h
+@@ -569,7 +569,7 @@ struct spi=5Fnor {
+ 	u8			rdsr=5Fdummy;
+ 	u8			rdsr=5Faddr=5Fnbytes;
+ 	u8			addr=5Fmode=5Fnbytes;
+-#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
++#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
+ 	u8			bank=5Fread=5Fcmd;
+ 	u8			bank=5Fwrite=5Fcmd;
+ 	u8			bank=5Fcurr;
+--=20
+2.49.0
 
-Mark
-
-> Changes in v2:
-> - Rebase on top of "rockchip: binman: Use a template for FIT and other
->   improvements" series
-> - Add patch to fix booting into Linux on RK3588 board with 16+ GiB DRAM
-> 
-> This series depends on the "rockchip: ROCKCHIP_COMMON_STACK_ADDR
-> improvements" series [1] and the "rockchip: binman: Use a template for
-> FIT and other improvements" series [2]. See [3] for a branch including
-> both depends.
-> 
-> [1] https://patchwork.ozlabs.org/cover/2050003/
-> [2] https://patchwork.ozlabs.org/cover/2066701/
-> [3] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ramboot-v2
-> 
-> Jonas Karlman (4):
->   rockchip: Move TEXT_BASE to 8 MiB offset from start of DRAM
->   rockchip: Add support for RAM boot from maskrom mode
->   rockchip: Enable RAM boot using ROCKCHIP_MASKROM_IMAGE
->   rockchip: sdram: Add fallback that fixup DRAM gaps on RK3588
-> 
->  arch/arm/dts/rockchip-u-boot.dtsi       | 33 +++++++++++++++++++++++++
->  arch/arm/mach-rockchip/Kconfig          | 19 +++++++++++---
->  arch/arm/mach-rockchip/rk3308/Kconfig   |  3 ---
->  arch/arm/mach-rockchip/rk3568/Kconfig   |  3 ---
->  arch/arm/mach-rockchip/rk3588/Kconfig   |  3 ---
->  arch/arm/mach-rockchip/rk3588/rk3588.c  | 27 ++++++++++++++++++++
->  arch/arm/mach-rockchip/sdram.c          |  7 +++++-
->  arch/arm/mach-rockchip/spl-boot-order.c | 15 ++++++++---
->  boot/Kconfig                            |  3 +++
->  9 files changed, 97 insertions(+), 16 deletions(-)
-> 
-> -- 
-> 2.49.0
-> 
-> 
