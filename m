@@ -4,102 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA42C36010
-	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 14:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1521C36010
+	for <u-boot@archiver.kernel.org>; Fri,  4 Apr 2025 14:19:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3494829A0;
-	Fri,  4 Apr 2025 16:05:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D59D1829A0;
+	Fri,  4 Apr 2025 16:19:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=uni-duesseldorf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IXf8g7i5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7176829B8; Fri,  4 Apr 2025 16:05:50 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2A74982958; Fri,  4 Apr 2025 15:10:44 +0200 (CEST)
+Received: from c2882.mx.srv.dfn.de (c2882.mx.srv.dfn.de [194.95.239.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81AB782991
- for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 16:05:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6e91d323346so21327506d6.1
- for <u-boot@lists.denx.de>; Fri, 04 Apr 2025 07:05:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743775547; x=1744380347; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=k79RqYK3dF/P5SVQ5dKpVY18CIUunVemgIJ6kEoGSDQ=;
- b=IXf8g7i5taAR4Ua4B8xtIN+XqvCVraegI9hwqaCay5FPYDUBtG4+J3I7sLKG+Y/lRL
- rTzW9k/c/wD5xQpW6ZSIVgRwgzzKY9UcRmF+ghoKB5iFRQfN+Nc/RhKIC3W5K75FXZfh
- 2rysjKyTlZ8gXZVTjCDk+3ART8/4g1W9KAM7Jol/8uNz/hn0e73YTszW599pMhy3JW0M
- 0iwqISIU9AVftuOnexAcWzVvNjCISrHnctEnaBajKQyggou6m3x0h14cgqhqeyYOx8+M
- QHcsTIX0NZCod3dtRQXBconR0XLsiADyAypeK5pmBnEOIpDoYzxUfbZJ4M2IQfD3QMBO
- 8BLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743775547; x=1744380347;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=k79RqYK3dF/P5SVQ5dKpVY18CIUunVemgIJ6kEoGSDQ=;
- b=LbqCXXAZrOpnfcOez8pigPvsYRlQoth+mg7lF+vheDasB3HmNqOj6tBIpOh9ChvLcp
- hZmclcF2jev/MY1X96C5rDu2jJiH7rEJkfQBPT6Yec3XZDcbJjmNDY1ZN+dAbmWavlJc
- l73+GaDG7n09gsYkTXzktQlT51TfVAQP1ylJNcCI2tg77b9OfKvwPZGY2PTO3UU8KgK6
- t2keXR7vodKHWyLp3pelmUKCJ1a0S4cNCZjcjrQDWhuK0Ll1Ast+iuY5k9C/RDjhw0g8
- pAs9Go6RvywU8mz3d0B3ZPi8UrqRu2HmM6sQIpNBhIXNf+ynwkAnJREJbG325hdE3QSY
- aqKg==
-X-Gm-Message-State: AOJu0YxzfDlafRv8AiK9K0TdoLIUMKRIonZdNpzUkIUpUTyNG9VZUnPe
- oLe8CZ4hVXvb7hiKx4exiXB6kcPDGDKof6UdVZVM7gQ1xo3/Lj7/JzEf8L9hQLOW0gnl/VpcFiA
- u
-X-Gm-Gg: ASbGncv+mIf9B3fnJGni/3qNfP/iudJ48Cd68gdw26cM9wyDhvHK7kvEt56gYuBFzVo
- xVqv+uPsj0A/m6219NDdi7BeFzUyZ2GYS4oMz0nTwLaPatcb9rURlchN4RVmeYa7ou7qdMJmvUw
- 602swGEt4f/RQ60WJWs1sDqljYccZv14Ll1vyM57EWnr60T+ThUKGAfaLYnfIyqAkA0QM+Zt79O
- HmOZRJpumPvpFdI+KS1Ec6GELOqX4Rgj+KtMbNnal1HLQIX0QKyn3m76sjrce3oFq3Pubigc+Bs
- Xez4KiuEMQojQJk+XpqyZPAYoisskAZ1CufyFU15Kz/aHKsNhxwbpNaFhyTqG6RhVIsC2a54umC
- fcQn4/OPIWZzcUa7voCTFkYFfpvYrOQ==
-X-Google-Smtp-Source: AGHT+IF9sqrXmIs+tdJaHPL2iWQXajRgH7TLwN7Y2kITjnMSam7fRd5WOeBtOgjLqgCwIX+uXO78sw==
-X-Received: by 2002:a05:6214:d4f:b0:6eb:1c23:63c3 with SMTP id
- 6a1803df08f44-6ef0bca6f25mr117267796d6.0.1743775546968; 
- Fri, 04 Apr 2025 07:05:46 -0700 (PDT)
-Received: from ubuntu.localdomain (172-97-139-107.cpe.distributel.net.
- [172.97.139.107]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c76e734fc8sm222173785a.5.2025.04.04.07.05.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Apr 2025 07:05:46 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Ravi Minnikanti <rminnikanti@marvell.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH] mbedtls: remove incorrect attribute type checker
-Date: Fri,  4 Apr 2025 07:05:25 -0700
-Message-Id: <20250404140530.2874921-1-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
+ by phobos.denx.de (Postfix) with ESMTPS id 011ED828AB
+ for <u-boot@lists.denx.de>; Fri,  4 Apr 2025 15:10:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=uni-duesseldorf.de
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=niklas.sombert@uni-duesseldorf.de
+Received: from mta-5.mail.zim.hhu.de (mta-5.mail.zim.hhu.de [134.99.128.242])
+ by c2882.mx.srv.dfn.de (Postfix) with ESMTPS id 2E6AE4EC;
+ Fri,  4 Apr 2025 15:10:41 +0200 (CEST)
+Received: from [10.125.24.198] (unknown [134.99.36.198])
+ (Authenticated sender: nisom101@uni-duesseldorf.de)
+ by mta-5.mail.zim.hhu.de (Postfix) with ESMTPA id F28DBD2025A;
+ Fri,  4 Apr 2025 15:10:40 +0200 (CEST)
+Message-ID: <c1dc7446-d1d0-4ef2-b201-09fc612aa8db@uni-duesseldorf.de>
+Date: Fri, 4 Apr 2025 15:10:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE, en-US
+To: u-boot@lists.denx.de
+From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
+Autocrypt: addr=niklas.sombert@uni-duesseldorf.de; keydata=
+ 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
+Cc: Simon Glass <sjg@chromium.org>
+Subject: SMBIOS tables missing on 2025.04-rc5 on qemu-x86
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------GhsQwLWW0acz5VrDpWTBNRJ8"
+X-Mailman-Approved-At: Fri, 04 Apr 2025 16:19:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,40 +101,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-S/MIME Capabilities (OID: 1.2.840.113549.1.9.15) attributes are
-expected to be algorithms but neither data nor MS Inderect Data,
-thus the checker for data type is incorrect.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------GhsQwLWW0acz5VrDpWTBNRJ8
+Content-Type: multipart/mixed; boundary="------------07GLX7np7tbixOTZq5lwTG7J";
+ protected-headers="v1"
+From: Niklas Sombert <niklas.sombert@uni-duesseldorf.de>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Message-ID: <c1dc7446-d1d0-4ef2-b201-09fc612aa8db@uni-duesseldorf.de>
+Subject: SMBIOS tables missing on 2025.04-rc5 on qemu-x86
 
-This patch fixes a capsule authentication failure with PKCS#7
-message that contains S/MIME capabilities, which formed by the EDK2
-GenerateCapsule tool.
+--------------07GLX7np7tbixOTZq5lwTG7J
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-S/MIME Capabilities are not common attributes in an EFI capsule,
-thus this failure cannot be reproduced with the capsules generated
-via mkeficapsule.
+SGkgYWxsLA0KDQpJJ3ZlIHdyaXR0ZW4gYSBzbWFsbCBFRkkgYm9vdGxvYWRlciBhbmQgSSdt
+IHRlc3RpbmcgaXQgb24gUUVNVSB3aXRoIE9WTUYgDQphbmQgd2l0aCB1LWJvb3QgKHdpdGgg
+dGhlIHFlbXUteDg2X2RlZmNvbmZpZyBhcyAtYmlvcyBpbiBRRU1VKS4NCg0KT24gdXBncmFk
+aW5nIGZyb20gMjAyNS4wMSB0byAyMDI1LjA0LXJjNSwgSSd2ZSBub3RpY2VkIHRoYXQgdGhl
+IFNNQklPUyANCnRhYmxlcyB0aGF0IGFyZSBwYXNzZWQgdmlhIHRoZSBTTUJJT1MgRUZJIGNv
+bmZpZyB0YWJsZSBhcmUgY29tcGxldGVseSANCmJsYW5rIChqdXN0IHplcm9lcyBpbnN0ZWFk
+IG9mIHN0YXJ0aW5nIHdpdGggU00zKS4NCg0KVGhpcyBpcyBwcmV0dHkgZWFzeSB0byByZXBy
+b2R1Y2U6DQoNCmdpdCBjaGVja291dCB2MjAyNS4wMQ0KbWFrZSBjbGVhbg0KZ2l0IGNsZWFu
+IC14Zg0KbWFrZSBxZW11LXg4Nl9kZWZjb25maWcNCiMgZWRpdCAuY29uZmlnOiBDT05GSUdf
+Q01EX1NNQklPUz15DQptYWtlIC1qNA0KcWVtdS1zeXN0ZW0taTM4NiAtYmlvcyB1LWJvb3Qu
+cm9tDQojIHR5cGUgInNtYmlvcyIgaW4gdGhlIHByb21wdCBhbmQgc2VlIGluZm9ybWF0aW9u
+IGFib3V0IHRoZSBzeXN0ZW0NCg0KdmVyc3VzOg0KZ2l0IGNoZWNrb3V0IHYyMDI1LjA0LXJj
+NQ0KbWFrZSBjbGVhbg0KZ2l0IGNsZWFuIC14Zg0KbWFrZSBxZW11LXg4Nl9kZWZjb25maWcN
+CiMgZWRpdCAuY29uZmlnOiBDT05GSUdfQ01EX1NNQklPUz15DQptYWtlIC1qNA0KcWVtdS1z
+eXN0ZW0taTM4NiAtYmlvcyB1LWJvb3Qucm9tDQojIHR5cGUgInNtYmlvcyIgYW5kIGdldCB0
+aGUgZm9sbG93aW5nIGVycm9yOg0KIyBkb19zbWJpb3MoKSBVbmtub3duIFNNQklPUyBhbmNo
+b3IgZm9ybWF0DQoNClRoaXMgaXMgb24gUUVNVSB2ZXJzaW9uIDYuMi4wIChEZWJpYW4gMTo2
+LjIrZGZzZy0ydWJ1bnR1Ni4yNSksIHRoZSBvbmUgDQpVYnVudHUgMjIuMDQgY3VycmVudGx5
+IHNoaXBzLCBidXQgSSBhbHNvIGdldCB0aGUgc2FtZSByZXN1bHRzIG9uIFVidW50dSANCjI0
+LjA0Lg0KDQpCaXNlY3RpbmcgbGVhZHMgbWUgdG8gdGhlIGZvbGxvd2luZyBjb21taXQ6DQoN
+CmNvbW1pdCBkNWJjNWM2Y2IwMjkxMjAzZmU4NDhhODUzMmE3ZWNiY2Q0NGNmZTllDQpBdXRo
+b3I6IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3JnPg0KRGF0ZTogICBGcmkgSmFuIDEw
+IDE3OjAwOjI2IDIwMjUgLTA3MDANCg0KICAgICB4ODY6IGVtdWxhdGlvbjogRW5hYmxlIGJs
+b2JsaXN0DQoNCiAgICAgQWRkIGJsb2JsaXN0IHN1cHBvcnQgc28gdGhhdCB0YWJsZXMgY2Fu
+IGJlIGdlbmVyYXRlZCBhbmQgcGxhY2VkIGluIGENCiAgICAgYmxvYmxpc3QsIHRoZW4gcGFz
+c2VkIHRvIGEgcGF5bG9hZCB1c2luZyBVUEwNCg0KICAgICBTaWduZWQtb2ZmLWJ5OiBTaW1v
+biBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz4NCg0KZGlmZiAtLWdpdCBhL2NvbmZpZ3MvcWVt
+dS14ODZfNjRfZGVmY29uZmlnIGIvY29uZmlncy9xZW11LXg4Nl82NF9kZWZjb25maWcNCmlu
+ZGV4IDI3NzFhNGI5ZTE5Li43OTJiYTA2YzJiOCAxMDA2NDQNCi0tLSBhL2NvbmZpZ3MvcWVt
+dS14ODZfNjRfZGVmY29uZmlnDQorKysgYi9jb25maWdzL3FlbXUteDg2XzY0X2RlZmNvbmZp
+Zw0KQEAgLTEsNiArMSw3IEBADQogIENPTkZJR19YODY9eQ0KICBDT05GSUdfVEVYVF9CQVNF
+PTB4MTExMDAwMA0KICBDT05GSUdfU1lTX01BTExPQ19GX0xFTj0weDEwMDANCitDT05GSUdf
+QkxPQkxJU1RfU0laRV9SRUxPQz0weDIwMDAwDQogIENPTkZJR19OUl9EUkFNX0JBTktTPTgN
+CiAgQ09ORklHX0VOVl9TSVpFPTB4NDAwMDANCiAgQ09ORklHX01BWF9DUFVTPTINCkBAIC0z
+Myw2ICszNCw3IEBAIENPTkZJR19MT0dGX0ZVTkM9eQ0KICBDT05GSUdfU1BMX0xPRz15DQog
+IENPTkZJR19ESVNQTEFZX0JPQVJESU5GT19MQVRFPXkNCiAgQ09ORklHX1BDSV9JTklUX1I9
+eQ0KK0NPTkZJR19CTE9CTElTVD15DQogIENPTkZJR19CTE9CTElTVF9GSVhFRD15DQogIENP
+TkZJR19CTE9CTElTVF9BRERSPTB4MTAwMDANCiAgQ09ORklHX1NQTF9OT19CU1NfTElNSVQ9
+eQ0KZGlmZiAtLWdpdCBhL2NvbmZpZ3MvcWVtdS14ODZfZGVmY29uZmlnIGIvY29uZmlncy9x
+ZW11LXg4Nl9kZWZjb25maWcNCmluZGV4IDk0N2QxNWNkNzI3Li4wYjBlMTBjNzk1ZiAxMDA2
+NDQNCi0tLSBhL2NvbmZpZ3MvcWVtdS14ODZfZGVmY29uZmlnDQorKysgYi9jb25maWdzL3Fl
+bXUteDg2X2RlZmNvbmZpZw0KQEAgLTEsNiArMSw3IEBADQogIENPTkZJR19YODY9eQ0KICBD
+T05GSUdfVEVYVF9CQVNFPTB4RkZGMDAwMDANCiAgQ09ORklHX1NZU19NQUxMT0NfRl9MRU49
+MHgxMDAwDQorQ09ORklHX0JMT0JMSVNUX1NJWkVfUkVMT0M9MHgyMDAwMA0KICBDT05GSUdf
+TlJfRFJBTV9CQU5LUz04DQogIENPTkZJR19FTlZfU0laRT0weDQwMDAwDQogIENPTkZJR19N
+QVhfQ1BVUz0yDQpAQCAtMjMsNiArMjQsOSBAQCBDT05GSUdfTE9HPXkNCiAgQ09ORklHX0xP
+R0ZfRlVOQz15DQogIENPTkZJR19ESVNQTEFZX0JPQVJESU5GT19MQVRFPXkNCiAgQ09ORklH
+X1BDSV9JTklUX1I9eQ0KK0NPTkZJR19CTE9CTElTVD15DQorQ09ORklHX0JMT0JMSVNUX0ZJ
+WEVEPXkNCitDT05GSUdfQkxPQkxJU1RfQUREUj0weDEwMDAwDQogIENPTkZJR19DTURfQ1BV
+PXkNCiAgQ09ORklHX0NNRF9CT09URUZJX1NFTEZURVNUPXkNCiAgQ09ORklHX0NNRF9OVkVE
+SVRfRUZJPXkNCg0KSnVzdCBzZXR0aW5nIENPTkZJR19CTE9CTElTVD1uIHNvbHZlcyB0aGlz
+IHByb2JsZW0gZm9yIG1lLg0KDQpJJ20gbm90IHN1cmUgaG93IHRvIGRlYnVnIHRoaXMgZnVy
+dGhlciwgYmVjYXVzZSB2MjAyNS4wMSBkb2Vzbid0IGJ1aWxkIA0Kd2l0aCB0aGUgY29uZmln
+IGZyb20gdjIwMjUuMDQtcmM1Og0KbGQuYmZkOiBhcmNoL3g4Ni9saWIvdGFibGVzLm86IGlu
+IGZ1bmN0aW9uIGB3cml0ZV90YWJsZXMnOg0KL2hvbWUvbmlrbGFzL0J1aWxkL3UtYm9vdC9h
+cmNoL3g4Ni9saWIvdGFibGVzLmM6MTcxOiB1bmRlZmluZWQgcmVmZXJlbmNlIA0KdG8gYGFj
+cGlfd3JpdGVfcnNkcCcNCg0KDQpHcmVldGluZ3MsDQpOaWtsYXMNCg0K
 
-Fixes: 7de0d155cce7 ("mbedtls: add PKCS7 parser porting layer")
-Reported-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- lib/mbedtls/pkcs7_parser.c | 4 ----
- 1 file changed, 4 deletions(-)
+--------------07GLX7np7tbixOTZq5lwTG7J--
 
-diff --git a/lib/mbedtls/pkcs7_parser.c b/lib/mbedtls/pkcs7_parser.c
-index ecfcc46edfa..bf8ee17b5b8 100644
---- a/lib/mbedtls/pkcs7_parser.c
-+++ b/lib/mbedtls/pkcs7_parser.c
-@@ -189,10 +189,6 @@ static int authattrs_parse(struct pkcs7_message *msg, void *aa, size_t aa_len,
- 						len)) {
- 			if (__test_and_set_bit(sinfo_has_smime_caps, &sinfo->aa_set))
- 				return -EINVAL;
--
--			if (msg->data_type != OID_msIndirectData &&
--			    msg->data_type != OID_data)
--				return -EINVAL;
- 		} else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_MICROSOFT_SPOPUSINFO, inner_p,
- 						len)) {
- 			if (__test_and_set_bit(sinfo_has_ms_opus_info, &sinfo->aa_set))
--- 
-2.25.1
+--------------GhsQwLWW0acz5VrDpWTBNRJ8
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEdIF40XVnlLMtKvF5apyYbs6R6OsFAmfv2kYACgkQapyYbs6R
+6Osn+w//UBYGCJjkA+jV3AgzJnyzjToBTBUdrfMVZJIFbWMfmbZruo9CME9zMTIC
+NP9isPtX9oDR4cMuwTcT7I3+wLP2Gq4nJg9zmf5G+jT6K6k/XWSB9r51ob4vu+/C
+6CT3vtFJtIRgKzn1r2jfZpAW9OgT00MPwTXZO2XVRdqvBgobt5JR4rpNNjQooh+5
+kaOgkrgFGzV7wlOSlEdVviGEP/i8dsidms0pLq4wTpKZVQw9BjW4kc+niz7nRzdx
+pf1PJf5RTjxTRyrBaCt5YkoZUreu05tb06iJh5NegnagYCrqbcMqPokMGg+IpJ10
+ufriezxh2GKP+lKXuVw5uxuel9JH7LuO7Sm+89u1HSNNfVvYx8HxCRUU47rC8poe
+UaygEhUymNva7HiC+iCVHcrRAKjuYr+FhG7ZiRa9JpkWHd/7ETO5nMgIU+byztj6
+/O8E/3urkk0e9LMhvz/zCfbDo3BdluLftplsUj/xaDInm22UvSkL8sztDENkQOOA
+lz+N7rrtMHD9vhwCOLwWr/RAYsR9EiFzNe/NLXxkT9NqKeYG9k9mNuYV9yGQCE5i
+EZ5IT9QHW4fm2+8tDKByTEZ1aNSuz86uJE3kM0xG/89nDTz1cQdk9ptxL1XtmMaF
+mSsWe3aieCS/qmZfyeKdya5XWVopvrDpKssspm7toGfzPtG0wOo=
+=3OaM
+-----END PGP SIGNATURE-----
+
+--------------GhsQwLWW0acz5VrDpWTBNRJ8--
