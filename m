@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80D0C36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 19:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9C1C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 19:06:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94F5D82AF1;
+	by phobos.denx.de (Postfix) with ESMTP id E2B1A82B07;
 	Sat,  5 Apr 2025 21:06:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1743879974;
-	bh=ujuNerHO8TUG9KzXNoMGyN7Jte8uNmwq6rCzUr/F+kU=;
+	bh=31hXHkdSrIaDNTb0zoWlRZZykubwV+BjN0Oc1L9tGfQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HRR4kM+6jCScyHQZWA0ch9X0mO/uYnPoyKrSy6l8RW1ltaEi0LBqxGq4Sm33Sruwh
-	 Ub8U59nFfB1tesSFJUJEfc1V28KqtqzgU7oq4vvP5IucX63Ow2UR488AZohTlYETc7
-	 mAx3wEl260Zehayyx/7VM5C9Xny0EEM6iAOGAlncgNsuu6thebx6tbMrqyU2u7T1jN
-	 DCgnB73ZeWTerO+R+JEj0LKEpsWqnEMx3LfA3G1eIaWTlJMi/Fl3MMk4cnL6WQVWnI
-	 A3Oo6jHydeIvV8PokNOIAaS0GlAH5LBI8qnjmZvQ8OSvp6yHiZnQ55wLzTC9wURN9W
-	 Vc98qzKmHu15A==
+	b=sN5dlQooBAD0JNKDPRDNbvTtG+MBy+e+PDXvBZH/QSGpZ7io/W19zkx4Ey7k5W+oi
+	 egU2KVPVnTuhhToN9ZAFtCoKzcz8GuRP8ZVI5KigUYz+kF+5wlwFRs+8ReNvX15Z0z
+	 miy/o919AdDx7tvHB99VlQwPecgDqgYcSENZHns9+Domb78IEk/9CeTQTLYLb01ilP
+	 BeIOeY0igCYbQ9uNJmkWXnwpLzkCuuTHIWZeb8+Gn5PMUr7OdUJkum8mKLegI1itG2
+	 n5nZgx6TrrIl4DCPRA5Eu6tL4A6QOZWFm4dSPL7MVIHM0CB4Olvf9uAwXjWXYElTOe
+	 OHK4nFDNX9F0Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E29382AB1; Sat,  5 Apr 2025 21:06:13 +0200 (CEST)
+ id 7213482AAF; Sat,  5 Apr 2025 21:06:13 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9854D82AB2
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 21:06:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B49782AC1
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 21:06:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="eVypCYbd"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="d5TpOHVx"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CCFBC10252EFE; 
- Sat,  5 Apr 2025 21:06:09 +0200 (CEST)
+ with ESMTPSA id 89B7110253298; 
+ Sat,  5 Apr 2025 21:06:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1743879970; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1743879971; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=ujuNerHO8TUG9KzXNoMGyN7Jte8uNmwq6rCzUr/F+kU=;
- b=eVypCYbdFLzDyt5l54YyYKx2cXkzDdQ7v3YoMXtN4lptbL9tHEgGtCUXC3T3spu2Awgif/
- bT1OWxQ6GoUfzenh0w1Cu/4m8v2uFjHmfUgTshHBrPgm+bj7Ftse0TXuyuJBbiYM8/Ihth
- NaZBu1lU7Z0lJSWgaR4qK+pOUJ0JZ3mBWWZvaw+i/GqFqgdGk/eCZajrWA7QpI5I2pvg+8
- B/dpzT0cX8j36a1LEZMu9sR2B3VB7MxK1Yyb1s6lyjkH2bQj7fm3BR/JxXyBbzxSz1iEME
- 3EV2cP2XAbZOqkN0mTFFV79wKhl1skszSPlcm/0Y/fJNNvAMpss5rsKxigkDYQ==
+ bh=31hXHkdSrIaDNTb0zoWlRZZykubwV+BjN0Oc1L9tGfQ=;
+ b=d5TpOHVxp7rbApRF8VikSHJc5xHsoJ/CxcsS2fdUk0LgDX8CRDhk/L1aoPBzzXFks44/TC
+ O0HvO2NRaUPW+1NHHYASOc7UKTElLjVdNx1wCs03fkez7CGo7WvEzCrlHeBsHz+O7H+gyn
+ eJfkAdB4uMVhtzJBYej+M9IXA4nU4h54NSTRV7GC9WOdjn+6r052q8eb0mUSyJcHtq7ia1
+ yRMJrxIFIke5gDrq8NUZQw/Zk0Uviq4cSPZDZmadDP60rvjFZKfaNoMve+ow1k4ploTWxN
+ SdGR7TK+Az8ZgKFPognctNDa31jYdOukbGzi+4gslk8sECnwHyKqzVR9YRPzBQ==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heiko Schocher <hs@nabladev.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 3/8] test/py/requirements.txt: increase filelock version
-Date: Sat,  5 Apr 2025 21:05:55 +0200
-Message-Id: <20250405190600.24081-4-hs@denx.de>
+Subject: [PATCH v2 4/8] test/py/requirements.txt: remove unittest2 and
+ testtools
+Date: Sat,  5 Apr 2025 21:05:56 +0200
+Message-Id: <20250405190600.24081-5-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20250405190600.24081-1-hs@denx.de>
 References: <20250405190600.24081-1-hs@denx.de>
@@ -79,38 +80,38 @@ X-Virus-Status: Clean
 
 From: Heiko Schocher <hs@nabladev.com>
 
-building on gitlab with
+unittest2 and testtools leads in:
 
-image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
+Collecting argparse (from unittest2>=1.0.0->testtools==2.3.0->-r /builds/u-boot/custodians/u-boot-i2c/tbottesting/../test/py/requirements.txt (line 26))
+  Downloading argparse-1.4.0-py2.py3-none-any.whl.metadata (2.8 kB)
 
-drops error:
+which breaks pytest 6.2.5 with
 
-ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
-virtualenv 20.13.0+ds requires filelock<4,>=3.2, but you have filelock 3.0.12 which is incompatible.
-
-Increase to version 3.2.0
+  File "/home/uboot/.local/lib/python3.10/site-packages/_pytest/config/argparsing.py", line 381, in __init__
+    argparse.ArgumentParser.__init__(
+TypeError: ArgumentParser.__init__() got an unexpected keyword argument 'allow_abbrev'
 
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 
 (no changes since v1)
 
- test/py/requirements.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/py/requirements.txt | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/test/py/requirements.txt b/test/py/requirements.txt
-index 9b15e97f51..22315b4ed5 100644
+index 22315b4ed5..26412ac0b3 100644
 --- a/test/py/requirements.txt
 +++ b/test/py/requirements.txt
-@@ -3,7 +3,7 @@ attrs==19.3.0
- concurrencytest==0.1.2
- coverage==7.6.2
- extras==1.0.0
--filelock==3.0.12
-+filelock==3.2.0
- fixtures==3.0.0
- importlib-metadata==0.23
- linecache2==1.0.0
+@@ -23,8 +23,6 @@ python-subunit==1.3.0
+ requests==2.32.3
+ setuptools==70.3.0
+ six==1.16.0
+-testtools==2.3.0
+ traceback2==1.4.0
+-unittest2==1.1.0
+ wcwidth==0.1.7
+ zipp==3.19.2
 -- 
 2.20.1
 
