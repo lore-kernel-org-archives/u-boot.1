@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 208A5C36018
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 19:06:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80D0C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 19:06:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 485418215B;
+	by phobos.denx.de (Postfix) with ESMTP id 94F5D82AF1;
 	Sat,  5 Apr 2025 21:06:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1743879974;
-	bh=JVj5B4fBWvojS5n/wJP/ZI4gRi9/7aoecyTtdzIBCWw=;
+	bh=ujuNerHO8TUG9KzXNoMGyN7Jte8uNmwq6rCzUr/F+kU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Qie94ZlatLy5xxGRJHshbSRKY+3+DB0ovsCe5S22u/2im2rBUZIOPKkJnSTRehA4G
-	 5TbwrN/RcAARkkI1vzRTnX/9Ov0roLQ4tt71GTL4ruFcLnCwxVyge35Xa9FiCry10C
-	 6kP0pc6Bf0NyHTzSd53FW7UhccfKtIgLpL1Ux1v0Rl47o3wI7MjG56lSdOBtsALb0A
-	 e6Tptis3azsO1r5X43pN9voqvyIiNXROWkSk/vcPO1oZaJFWJFer8LhWe44N5pK72/
-	 MyVjEe5vU9JH9EtEj4GfNQFaGHnITWwyMtB6uHeM6B0jyT1jAb8LYMzG73kSU2/Fw2
-	 vvTsEJ0Y+GN/A==
+	b=HRR4kM+6jCScyHQZWA0ch9X0mO/uYnPoyKrSy6l8RW1ltaEi0LBqxGq4Sm33Sruwh
+	 Ub8U59nFfB1tesSFJUJEfc1V28KqtqzgU7oq4vvP5IucX63Ow2UR488AZohTlYETc7
+	 mAx3wEl260Zehayyx/7VM5C9Xny0EEM6iAOGAlncgNsuu6thebx6tbMrqyU2u7T1jN
+	 DCgnB73ZeWTerO+R+JEj0LKEpsWqnEMx3LfA3G1eIaWTlJMi/Fl3MMk4cnL6WQVWnI
+	 A3Oo6jHydeIvV8PokNOIAaS0GlAH5LBI8qnjmZvQ8OSvp6yHiZnQ55wLzTC9wURN9W
+	 Vc98qzKmHu15A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6441882AF1; Sat,  5 Apr 2025 21:06:13 +0200 (CEST)
+ id 6E29382AB1; Sat,  5 Apr 2025 21:06:13 +0200 (CEST)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC0C382AAF
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 21:06:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9854D82AB2
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 21:06:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="DKss9FOe"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="eVypCYbd"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0CF1F10252EF9; 
- Sat,  5 Apr 2025 21:06:08 +0200 (CEST)
+ with ESMTPSA id CCFBC10252EFE; 
+ Sat,  5 Apr 2025 21:06:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1743879969; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1743879970; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=JVj5B4fBWvojS5n/wJP/ZI4gRi9/7aoecyTtdzIBCWw=;
- b=DKss9FOewZpDVtOwSjqJK7f/YytAIkQkAIs7yBgJVjI+357dr9yN4VplzZaNiQKnN/w9TE
- EWpiZprOynCNfWachaPhzjJeF0wq4AU8UTGzHe/b9NsJ3WuI+alfr+9XPlEGEKy4JouzgJ
- GMPubS+AjCYy/x+R+2/opm7HLB+eiLYsteEzLfJfNxnkgs1IzwVVaESsuIpJRRki/xYKaF
- Ib3uVyavBvVC+UQFNMD3MkvnywhVxsX4ylpy+ODppfGhNuvxCEVdncqd0fAFJPzfzn/Aob
- TewDKhGyLw9UyAWMWhpO76pdi+dfwxzXrfXqASNds507aElH/RkX4iQEiaW+KQ==
+ bh=ujuNerHO8TUG9KzXNoMGyN7Jte8uNmwq6rCzUr/F+kU=;
+ b=eVypCYbdFLzDyt5l54YyYKx2cXkzDdQ7v3YoMXtN4lptbL9tHEgGtCUXC3T3spu2Awgif/
+ bT1OWxQ6GoUfzenh0w1Cu/4m8v2uFjHmfUgTshHBrPgm+bj7Ftse0TXuyuJBbiYM8/Ihth
+ NaZBu1lU7Z0lJSWgaR4qK+pOUJ0JZ3mBWWZvaw+i/GqFqgdGk/eCZajrWA7QpI5I2pvg+8
+ B/dpzT0cX8j36a1LEZMu9sR2B3VB7MxK1Yyb1s6lyjkH2bQj7fm3BR/JxXyBbzxSz1iEME
+ 3EV2cP2XAbZOqkN0mTFFV79wKhl1skszSPlcm/0Y/fJNNvAMpss5rsKxigkDYQ==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heiko Schocher <hs@nabladev.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/8] tools/buildman/requirements.txt: update coverage
-Date: Sat,  5 Apr 2025 21:05:54 +0200
-Message-Id: <20250405190600.24081-3-hs@denx.de>
+Subject: [PATCH v2 3/8] test/py/requirements.txt: increase filelock version
+Date: Sat,  5 Apr 2025 21:05:55 +0200
+Message-Id: <20250405190600.24081-4-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20250405190600.24081-1-hs@denx.de>
 References: <20250405190600.24081-1-hs@denx.de>
@@ -79,27 +79,38 @@ X-Virus-Status: Clean
 
 From: Heiko Schocher <hs@nabladev.com>
 
--coverage==6.2
-+coverage==7.6.2
+building on gitlab with
+
+image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
+
+drops error:
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+virtualenv 20.13.0+ds requires filelock<4,>=3.2, but you have filelock 3.0.12 which is incompatible.
+
+Increase to version 3.2.0
 
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 
 (no changes since v1)
 
- tools/buildman/requirements.txt | 2 +-
+ test/py/requirements.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
-index 052d0ed5c6..50231d1756 100644
---- a/tools/buildman/requirements.txt
-+++ b/tools/buildman/requirements.txt
-@@ -1,4 +1,4 @@
--coverage==6.2
-+coverage==7.6.2
- jsonschema==4.17.3
- pycryptodome==3.20
- pyyaml==6.0
+diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+index 9b15e97f51..22315b4ed5 100644
+--- a/test/py/requirements.txt
++++ b/test/py/requirements.txt
+@@ -3,7 +3,7 @@ attrs==19.3.0
+ concurrencytest==0.1.2
+ coverage==7.6.2
+ extras==1.0.0
+-filelock==3.0.12
++filelock==3.2.0
+ fixtures==3.0.0
+ importlib-metadata==0.23
+ linecache2==1.0.0
 -- 
 2.20.1
 
