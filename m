@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B74BC36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 17:47:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF34C36018
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 18:46:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EBD482A81;
-	Sat,  5 Apr 2025 19:47:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
+	by phobos.denx.de (Postfix) with ESMTP id B1B5982AAE;
+	Sat,  5 Apr 2025 20:46:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1743878806;
+	bh=khj4MzsUtOn9cZuGImr0ZhMBQE2Nnhn0EQFFXf/KLic=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vSQlgJvFy083ulm6i95+sZFju4o4PaMrA5cS4oj6Fmh235flYS00ZBaJ9qysAEAkI
+	 z0PFQrXWu/RWmzQxF49h3M7pmXicW65HQcWx13A5XLSnbjlRt+t6yr/wnnDdSABB4j
+	 FpSFWlXxtmEtFJ1mZgzcjcy4SF1nA9Pd4UUc90+vvM0hRyj6456dLXO8+2ikjapaFq
+	 czHT7iWYzFXAlG88hY/mQPgl9I0+9imaIgNqRz9ywzWzShEqzZPlkx4gJfLEh6Cjk7
+	 /xIxov5iXV+Wof/3ULR+3muGZmDQP9xn/8bEGbGlOzBj/ATgl549Zg6+KEfsHvIPUu
+	 yVNKp6UzeHW3Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F114082A86; Sat,  5 Apr 2025 19:47:05 +0200 (CEST)
-Received: from inet10.abb.com (inet10.abb.com [138.225.1.74])
+ id 7756782AAE; Sat,  5 Apr 2025 20:46:45 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE97D82A76
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 19:47:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=br-automation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bernhard.messerklinger@br-automation.com
-Received: from brsmtp01.br-automation.co.at ([10.43.60.20])
- by inet10.abb.com (8.15.2/8.14.7) with ESMTPS id 5349uFwa2087272
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 4 Apr 2025 11:56:16 +0200
-Received: from extmail.br-automation.com ([192.168.112.26])
- by brsmtp01.br-automation.co.at (HCL Domino Release 14.0FP3 HF8)
- with ESMTP id 2025040411561540-93721 ;
- Fri, 4 Apr 2025 11:56:15 +0200 
-Received: from ATEGGE3725.br-automation.co.at ([10.43.64.28])
- by extmail.br-automation.com (HCL Domino Build V1202_05192022)
- with ESMTP id 2025040411561583-31491 ;
- Fri, 4 Apr 2025 11:56:15 +0200 
-From: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>
-To: u-boot@lists.denx.de
-Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
- "Ashok Reddy Soma" <ashok.reddy.soma@amd.com>,
- "Jagan Teki" <jagan@amarulasolutions.com>,
- "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
- "Pratyush Yadav" <p.yadav@ti.com>,
- "Takahiro Kuwano" <Takahiro.Kuwano@infineon.com>,
- "Tom Rini" <trini@konsulko.com>,
- "Tudor Ambarus" <tudor.ambarus@linaro.org>,
- "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>,
- "Vignesh R" <vigneshr@ti.com>
-Subject: [PATCH] mtd: spi-nor: Use CONFIG_IS_ENABLED for CONFIG_SPI_FLASH_BAR
- defines
-Date: Fri, 4 Apr 2025 11:56:07 +0200
-Message-ID: <20250404095612.126753-1-bernhard.messerklinger@br-automation.com>
-X-Mailer: git-send-email 2.49.0
+ by phobos.denx.de (Postfix) with ESMTPS id 8345182A76
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 20:46:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Ct/Y+3gv"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 39A9D10252EF4; 
+ Sat,  5 Apr 2025 20:46:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1743878802; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=khj4MzsUtOn9cZuGImr0ZhMBQE2Nnhn0EQFFXf/KLic=;
+ b=Ct/Y+3gvwVa5uMroUxvnyaIJg6sM8kaojo5FlJLcBhSDOVQrgK0I/SXyqpHtvoKNNGLpNN
+ rX4S8eRqhTLtZB8XIbgIxCq2ElUkYeM9BQl3R/Y9gEFr2QF/jQP3CiWz93AZRfCFtQsTHn
+ yX4WUqsJqabAKx0F9WA0ExC1u3oYiRaRgirBnAxSp+IEnzfv1d5syWBRppMJc0RRnMoz9A
+ RN3CpM/0GwE6r+8IqP0CxR6tYxKDM/Pn/Z9AnK+ol0/mZMgIAtIYoFK50MDTBXIBYnWcNw
+ VjroJuPlKqnWOTEUvtyjZqcLAgCoB6q5vMAfIV5iX5/DebAzoKpumELFJiDXhQ==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Schocher <hs@nabladev.com>, Heiko Schocher <hs@denx.de>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 1/8] test/py/requirements.txt: update coverage
+Date: Sat,  5 Apr 2025 20:46:19 +0200
+Message-Id: <20250405184626.22377-2-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20250405184626.22377-1-hs@denx.de>
+References: <20250405184626.22377-1-hs@denx.de>
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Build
- V1202_05192022|May 19, 2022) at 04/04/2025 11:56:15 AM,
- Serialize by Router on BRSMTPINTERN2/InternSMTP(Build V1202_05192022|May 19,
- 2022) at 04/04/2025 11:56:15 AM,
- Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3
- HF8|December 13, 2024) at 04/04/2025 11:56:15 AM,
- Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3 HF8|December
- 13, 2024) at 04/04/2025 11:56:16 AM,
- Serialize complete at 04/04/2025 11:56:16 AM
-X-TNEFEvaluated: 1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,153 +77,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At the moment a mixture of ifdef(CONFIG=5FIS=5FENABLED) and
-CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR) is used in the spi-nor framework.
-This leads to misbehaviour in the SPL as there is no Kconfig option
-CONFIG=5FSPL=5FSPI=5FFLASH=5FBAR. This commit standardizes the use of
-CONFIG=5FSPI=5FFLASH to get SPLs that load U-Boot proper from the
-SPI flash to work again.
+From: Heiko Schocher <hs@nabladev.com>
 
-Fixes: 9bb02f7 (mtd: spi-nor: Fix the spi=5Fnor=5Fread() when config SPI=5F=
-STACKED=5FPARALLEL is enabled)
-Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation=
-.com>
+-coverage==6.2
++coverage==7.6.2
+
+Signed-off-by: Heiko Schocher <hs@nabladev.com>
+Signed-off-by: Heiko Schocher <hs@denx.de>
 ---
 
- drivers/mtd/spi/spi-nor-core.c | 22 +++++++++++-----------
- include/linux/mtd/spi-nor.h    |  2 +-
- 2 files changed, 12 insertions(+), 12 deletions(-)
+ test/py/requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 6f352c5c0e2..a8865bbd37c 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -655,7 +655,7 @@ static struct spi=5Fnor *mtd=5Fto=5Fspi=5Fnor(struct mt=
-d=5Finfo *mtd)
- 	return mtd->priv;
- }
-=20
--#ifndef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if !CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- static u8 spi=5Fnor=5Fconvert=5Fopcode(u8 opcode, const u8 table[][2], siz=
-e=5Ft size)
- {
- 	size=5Ft i;
-@@ -739,7 +739,7 @@ static void spi=5Fnor=5Fset=5F4byte=5Fopcodes(struct sp=
-i=5Fnor *nor,
- 	nor->program=5Fopcode =3D spi=5Fnor=5Fconvert=5F3to4=5Fprogram(nor->progr=
-am=5Fopcode);
- 	nor->erase=5Fopcode =3D spi=5Fnor=5Fconvert=5F3to4=5Ferase(nor->erase=5Fo=
-pcode);
- }
--#endif /* !CONFIG=5FSPI=5FFLASH=5FBAR */
-+#endif /* !CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR) */
-=20
- /* Enable/disable 4-byte addressing mode. */
- static int set=5F4byte(struct spi=5Fnor *nor, const struct flash=5Finfo *i=
-nfo,
-@@ -930,7 +930,7 @@ static int spi=5Fnor=5Ferase=5Fchip=5Fwait=5Ftill=5Frea=
-dy(struct spi=5Fnor *nor, unsigned long
- 	return spi=5Fnor=5Fwait=5Ftill=5Fready=5Fwith=5Ftimeout(nor, timeout);
- }
-=20
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- /*
-  * This "clean=5Fbar" is necessary in a situation when one was accessing
-  * spi flash memory > 16 MiB by using Bank Address Register's BA24 bit.
-@@ -1141,7 +1141,7 @@ static int spi=5Fnor=5Ferase(struct mtd=5Finfo *mtd, =
-struct erase=5Finfo *instr)
- 					nor->spi->flags &=3D ~SPI=5FXFER=5FU=5FPAGE;
- 			}
- 		}
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 		ret =3D write=5Fbar(nor, offset);
- 		if (ret < 0)
- 			goto erase=5Ferr;
-@@ -1175,7 +1175,7 @@ static int spi=5Fnor=5Ferase(struct mtd=5Finfo *mtd, =
-struct erase=5Finfo *instr)
-=20
- 	addr=5Fknown =3D false;
- erase=5Ferr:
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 	err =3D clean=5Fbar(nor);
- 	if (!ret)
- 		ret =3D err;
-@@ -1630,7 +1630,7 @@ static int spi=5Fnor=5Fread(struct mtd=5Finfo *mtd, l=
-off=5Ft from, size=5Ft len,
- 				offset /=3D 2;
- 		}
-=20
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 		ret =3D write=5Fbar(nor, offset);
- 		if (ret < 0)
- 			return log=5Fret(ret);
-@@ -1667,7 +1667,7 @@ static int spi=5Fnor=5Fread(struct mtd=5Finfo *mtd, l=
-off=5Ft from, size=5Ft len,
- 	ret =3D 0;
-=20
- read=5Ferr:
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 	ret =3D clean=5Fbar(nor);
- #endif
- 	return ret;
-@@ -2016,7 +2016,7 @@ static int spi=5Fnor=5Fwrite(struct mtd=5Finfo *mtd, =
-loff=5Ft to, size=5Ft len,
- 			}
- 		}
-=20
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 		ret =3D write=5Fbar(nor, offset);
- 		if (ret < 0)
- 			return ret;
-@@ -2090,7 +2090,7 @@ static int spi=5Fnor=5Fwrite(struct mtd=5Finfo *mtd, =
-loff=5Ft to, size=5Ft len,
- 	}
-=20
- write=5Ferr:
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 	ret =3D clean=5Fbar(nor);
- #endif
- 	return ret;
-@@ -3791,7 +3791,7 @@ static int s25=5Fs28=5Fsetup(struct spi=5Fnor *nor, c=
-onst struct flash=5Finfo *info,
- 	int ret;
- 	u8 cr;
-=20
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 	return -ENOTSUPP; /* Bank Address Register is not supported */
- #endif
- 	/*
-@@ -4577,7 +4577,7 @@ int spi=5Fnor=5Fscan(struct spi=5Fnor *nor)
- 	if (nor->flags & (SNOR=5FF=5FHAS=5FPARALLEL | SNOR=5FF=5FHAS=5FSTACKED))
- 		shift =3D 1;
- 	if (nor->addr=5Fwidth =3D=3D 3 && (mtd->size >> shift) > SZ=5F16M) {
--#ifndef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if !CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 		/* enable 4-byte addressing if the device exceeds 16MiB */
- 		nor->addr=5Fwidth =3D 4;
- 		if (JEDEC=5FMFR(info) =3D=3D SNOR=5FMFR=5FSPANSION ||
-diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
-index b8b207f7b5c..4eef4ab0488 100644
---- a/include/linux/mtd/spi-nor.h
-+++ b/include/linux/mtd/spi-nor.h
-@@ -569,7 +569,7 @@ struct spi=5Fnor {
- 	u8			rdsr=5Fdummy;
- 	u8			rdsr=5Faddr=5Fnbytes;
- 	u8			addr=5Fmode=5Fnbytes;
--#ifdef CONFIG=5FSPI=5FFLASH=5FBAR
-+#if CONFIG=5FIS=5FENABLED(SPI=5FFLASH=5FBAR)
- 	u8			bank=5Fread=5Fcmd;
- 	u8			bank=5Fwrite=5Fcmd;
- 	u8			bank=5Fcurr;
---=20
-2.49.0
+diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+index 75760f96e5..9b15e97f51 100644
+--- a/test/py/requirements.txt
++++ b/test/py/requirements.txt
+@@ -1,7 +1,7 @@
+ atomicwrites==1.4.1
+ attrs==19.3.0
+ concurrencytest==0.1.2
+-coverage==6.2
++coverage==7.6.2
+ extras==1.0.0
+ filelock==3.0.12
+ fixtures==3.0.0
+-- 
+2.20.1
 
