@@ -4,88 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 176F4C36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 22:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D677C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 22:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AC7A82ACF;
-	Sun,  6 Apr 2025 00:30:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 61C9982ACF;
+	Sun,  6 Apr 2025 00:33:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iYQ77Rin";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LSUON01T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D44082B00; Sun,  6 Apr 2025 00:30:24 +0200 (CEST)
+ id F1B8682B00; Sun,  6 Apr 2025 00:33:32 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6DEC82ABA
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 00:30:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D230E82ABA
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 00:33:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1743892218; x=1744497018; i=xypron.glpk@gmx.de;
- bh=U02nV18et+YBvzBOrYlnYn8x2Pjsnrj9lEcfiukQWqQ=;
+ s=s31663417; t=1743892395; x=1744497195; i=xypron.glpk@gmx.de;
+ bh=RkPcEylS3VZILw/+UrBA/r8THaS0ZL5WC4FtPgxs8GI=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=iYQ77RinAhIA8+M03PclijQdkR8L6pkbuHqvw1PIhtuFk08D7xw5tsKxLt0+e96x
- l1JZObDu6Njljrp1Rzvi/VyyMgNZ655CRuAfcWAZFiuYxqtt+ZzjOJrrX2Z5/YoOT
- 8gJLcOWnknCdL38GNzeLfhYGQGqeaMatB18xCtJUmK4umgL2AQkGVnYDZ1LCQVsol
- /ZhSklHhzCKIX+fFXDNN1Oin0hZNnkq7+Pzc9hfSl77J5P6PZzbv0w+jJ+FBGBssF
- z9eCZHRaDZ99IRlqwsMkxGbtG/aJQdulfP+NqRUp3AfT03WGoCJIOSaTXM6l1QBMf
- 7Ihrpt5/vLafaE7KGA==
+ b=LSUON01Tg+shyYz/SEklXT0kJqulmEr2ty6C/qKNDg7vBv6YfCRf/RPVkSgRcsPD
+ XQl+2LJjLIdMkhX34vXIOYI/XlcInruqh1F1XR4kIo7Kuk906a2fzPG3n4C3ZZSFr
+ PWTYHhiWVmZ21KBHGZDvOCDK5mlL1aTNW98I8p0QzZYu3tQau2YZeNERN/wGqf2Y5
+ dGZnqFm0ZH65kQ7LTLAGdx0yIt8t40HnOCflAzlDcj5n+Dq35NB0osT/+chQs0OYo
+ hllSRbOkLNR/OEg7A++IZO1dknvPX3By12917b5ob7dS/q1qsCa/FTj72hmsHBOw5
+ evpD8S3akS2wxiTGWA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [127.0.0.1] ([46.114.104.243]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1OXT-1t3xSb01zX-010eCC; Sun, 06
- Apr 2025 00:30:18 +0200
-Date: Sun, 06 Apr 2025 00:30:15 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2f5T-1u4ki52n1T-001zB1; Sun, 06
+ Apr 2025 00:33:15 +0200
+Date: Sun, 06 Apr 2025 00:33:10 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 CC: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, neil.armstrong@linaro.org,
  =?ISO-8859-1?Q?Christian_Kohlsch=FCtter?= <christian@kohlschutter.com>,
- Janne Grunau <j@jannau.net>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_3/3=5D_efi=5Floader=3A_Move_devi?=
- =?US-ASCII?Q?ce-removal_later_in_exit-boot-services?=
+ Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH 1/3] net: designware: Disable DMA on removal
 User-Agent: Thunderbird for Android
-In-Reply-To: <20250405221308.498047-3-sjg@chromium.org>
+In-Reply-To: <20250405221308.498047-1-sjg@chromium.org>
 References: <20250405221308.498047-1-sjg@chromium.org>
- <20250405221308.498047-3-sjg@chromium.org>
-Message-ID: <6E95E440-67E4-4054-9662-871671684B7E@gmx.de>
+Message-ID: <ACF37B17-076C-46D6-8B06-3C8693333932@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9aHNhfnXXka6lMN780/tq9dLu1nb7LchWaD1te0ftCoJwT+sJJp
- AB1fHynHCnLei24IK42Rvz5oOwEjT5juHwl55GGd/euVNGqP/0iDPIAhvsV3A9PNkX4niJV
- 1SZuSEJBNjyixbdToauLLG3iOUfCO4clafAqCrELuQowjo7RyeGuz90lePQAcvCl/fsKQk/
- PIEt+JXeLvbvQHSSx6Fqw==
-UI-OutboundReport: notjunk:1;M01:P0:7p+usDfKCUc=;ipT7S0dPncZUE6SWLTO0RGHTutY
- 4Bbx2ok9al+7FwdRS+mGx6F5mm8kioYoYKV/qT9WI0Qq98Fz7K0eShxfRCgFzS9nEanTcl8fc
- kDAzNWhTMT+o1A0gQshs/A/47VOOWiZ0i4APNDvN79+I/uvpNYZrZQGlUVXmR9sPyhQwhjjwH
- ciGzLJmrGrtujiFdenUZ2cTMIxRK46KgmOhIdBbPxKzUv8vgLXMjTIYNx+8NNj8zlJWwW4laa
- 28OaMXWRa5eVsTbhv91Gc9AuTu3u0ciItW5kJpETzU5Wk6yI2RMu+mqVVpRCTmvxXdIH3MQ81
- NdNSpa8V2UjMVeB2JDwvRv9xN5ck13uuvvnwEUAyUJfJq4f+9PHHwObBmYCLOQ0KNSHdhZePH
- JwfNCbsLrWFTPEChIPLPUhDFEb06oTvUadnKAQtAhUXUccLWj++tTZzxLlslP37kZ87gGonTe
- o6SNklCXe4VG5ccctNSpV+jjRXKa3db6FA3Dhk2vXt5XpZjUd8FLAA6ZqQ5ZN7wvc1bquHJph
- pqaIUyJOktq05vCFe098gZdipmFMPx6VFIoN8ne+xIiBM7A950fXUskinmBQO00pv3D77ZX7k
- h99iRJ213xzsenL8QRoUCGIta6rM8cYhBi9g/Blbf7uuoDwcf5vVpNZVu4UHnfLFNTDGIENRb
- ZmZfSp8zpQ8DFOAonydHuRQdKomaDapA0AHYleQOxtWFJEKk6K8DojAAExt4s/NAsi6Wks7SB
- UXZKm3xZyymhFKUVbJSCq49ZsJc7MGiDpuAMxShWGMMgxwf62LAnLoxbYYHLPAH1ed7QMQoUZ
- jPyE6vf5UALOtCMQIPIRCQ7lywLk80NvSZhCH2CmrSml1tL6eOZGs6WikzLqN9vAY2/T/iYAL
- N9Dj0qFPiKFheVePyXOA9nV34M8oucQeK36Pe42HXC1AG6PXVRkgKPuFehxHtmGXK6Pg9kJDb
- 5ISoBFK6zJaxBzYwLipc/pvi9ddn9Ri1BCM76tcEc7F/dvMaZInpOPyRtPzuNn6P7IfGO7W3b
- B6qUpic2rgbX6Gv6kx+OwiVxyZDqDFcaVZ085n84yBT3EOoF2zK/tZL7I0FdWaYmCTUWa4SBn
- 79GSNUNcqScWiIG0P1jxU2e5NQED0Lg/zMEFnZEsMGAW+U7+3/S1h+fzo/HF8ukTMYinM9n9O
- YXNF76o3Iv9ov1KzdCGiFNEPwRFUiVpihGphyHX1Lp6ZFHwnm9xiSdd2HGg60f0VjfUreU1n/
- bJoEn3psN+xrpSvopauza9Hr2xv1+5QZYdjcylzbqdNtlV9yMDc5KO6uYUZQznAkUUCpCBwyG
- khBVleqOvK1w3WHoIIzJPvbyoRFA8dV+x1Iwc1kWTkbhtKJs1Dbz7qymNOD56bUObb0ryZl5H
- scOnqdpVyMI/G/IlB/mA65PDxU+0h8FugtHh7v1Y/lIGRntkw/+71Gf+uS+8+rVtDO1+5/zIE
- uJ37EXiDrN9hlxFZYkNteHgIzulM4ornCjRx+iSiIMo13N1Jj
+X-Provags-ID: V03:K1:rYN4xsgWg9QGOr+JuGI0QKTtnUSM9F8p9uFw/7FaSAIUEZB6yW4
+ VQu0iuGBd+Kwsare755HvMN211y2gzd11mMslXICZtNhvK6dtI2bBgb6tzcbCthDcUunZbp
+ ZsakjwDDdZWbQYxvFhMc14LgqKtufFfG/NLBLNPy1kh6xPDXIB382ZEh7EMfg3EDb6/s4Ol
+ J1KoGnrzMHcLOsgwKrx3A==
+UI-OutboundReport: notjunk:1;M01:P0:vfl4gGeRDR0=;we832PW4Z6M6kamYSLAXtKQUfzI
+ epKSkPNPoyPj1FILbKc0Xmb1auo/7sbxgxELfXAqiHYj9u/Nem5TOrRW5DpW1PQFEqEAh/a5Y
+ RIN+Hp4Hxh8/A7pdclSTRvvq86UV++eqRFbwERutsqlJhUBRpT/mNBILmqrt8KE8yC5ZtljJR
+ rO2ToT544WwNE20NQX2uVFNw5Ay2Y1qHy9luGwmIV9XIEeHgD+kpP48FuVsn4qTLdB6CeroeS
+ tdMslrwD2jwbDpwytBDHVUo9e7h7ewaOCFGC4iA8JNRZQBFBAtF58Zuhr6P4ifOSIsGBFP7OC
+ IPpNhqAVPdY4T4XMV5jurM+Uie9M9bQwttoqpv/PusH75QPCwVwvaVzS9EJGABLNR2QDphXLT
+ exIxfH2stG03XzrLmDzuA11Dx51vjJX6vWDKHWOdKxvjZ6nfuMDDSudcQ1wvM6TpKp8PlhrEQ
+ 5tiVUEeH1mo7rnp5z4sN9xOb5XOiX6clYTWepl4GRAVNdXBjMf6AT/akPLvhmUb1X2UGBHpbx
+ Ha5jI5KM+iWETMXR4vqvmNoz+IqaUD0k1Cku76hDvDhhRIFyi8veztdL2cDjpLs4wCAWYpY2J
+ pBi5pEiiSZp54SMx1JECAoyKMNQP9obC3dwhJCd0zzVDR3sO2KlIbGLX5gSHZ/3ABYq3SwdFF
+ tG5TVOHm9uW3BlGydlpdaDlQ9JAehOo2ISWqg81MxMrXbWTyljatXllTQ4oXjeEf9jUl10qwb
+ TcT1TdACXb6MUqz3c3WtcIozeUtCxwwsX44h2qLMIvdLqqU9Rix5JfgvcijKLLFDO0cHFYiSZ
+ FtRZ6qm2MN0Dew4IlpKl8vUmSLSrP+TSOeLTNCBg4pRsc5O5Gow9FfgimNUJN1NXJ+8pbw7yY
+ bywk5o46e990EbYbOIgJ+W/0a4Z6FOV3xNjiUEVIiwDYKrbloRqVBYZ8VerrhM7S1DTlj1wo+
+ cFVDywuNdxbruwKvD9Qbb19ON9Vwqq/3AFIeugm2pxLgYMzxwT3LoCd+/I5SMnfLlOFk4FCd6
+ 7R6V16P6PZOlaAGylYLAx1b1lRggT/C2yRQnT2yPhgW2ODT6a7zN5IWA4It5t8R1waOUpbJoY
+ OrLWeLOWwqpY2++n+KHVNT8Exc2O4J88sJFp2jVw7mEVmgTm/WjYQharP+DeiwbaJ6P+rTrJG
+ RW4yFYxNHgH4+VkGCWneNaU9bLvj1ob2ANx8IUp7u+JcZRR4C0a8VBfrZ2wc4fayqBQqE61OU
+ GcxVVByUP1B0KntIw+FysrZ//3BPy/r0j7E9B/nW9rohyB/YTCZe/ohKnLo29R0ZKT9IucG2U
+ Xz0ewVfk5AwLgUv29lCuUHV0cgq+/FLaXPo6qIhaA4db14BuGcYJASLkfKTau3cWu23Pw4AiS
+ /S5ziBa9YQOc/t5fGHdSIbZBFTUCCdHtvqOpP5umKnm964leA9fFhlRtqPDy/ZDyx/nz2bu9x
+ IslJyYjHnfARj0BTZtSuIT8GH+QsF2FRrmCO1o9LFxEY2kx5x
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,76 +104,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 6=2E April 2025 00:12:47 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
->This removal should be the last thing done, so that U-Boot does no more
->memory allocations afterwards=2E Move it and add a comment=2E
+Am 6=2E April 2025 00:12:45 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
+>At present, removing the device frees struct dw_eth_dev but does not
+>disable DMA=2E When DMA is active, packets can be received even if the
+>driver is not active=2E
 >
->Note that the TCG2 log is updated after this call, but I cannot see any
->allocations there=2E
+>While it is possible that the memory used by the struct may remain
+>untouched after removal, any other allocation may reuse that memory
+>and result in DMA writing to random addresses=2E
 >
->Reported-by: Christian Kohlsch=C3=BCtter <christian@kohlschutter=2Ecom>
-
-This commit message fails to describe which problem has been observed and =
-you try to solve=2E
-
-A link to the original communication would be helpful=2E
-
-Furthermore, please, rebase it on my patch adding eth_halt()=2E
-<https://lore=2Ekernel=2Eorg/u-boot/CAFLszTgp38yBXnSigfT-mEFU=3DrqyAKjp0WB=
-QGgHP_N3vRxCq=3DQ@mail=2Egmail=2Ecom/T/#m1e55cc094f575797da3b4aed6b369544f8=
-d6f8f4>
-
-Best regards
-
-Heinrich
-
+>In most case U-Boot does this removal in announce_and_cleanup()
+>immediately before jumping to the OS=2E No further allocations are done
+>after that point=2E
+>
+>But with EFI_LOADER this function is not called before jumping to the
+>EFI app=2E U-Boot continues to run while GRUB starts and finishes, as wel=
+l
+>as while Linux is starting up=2E During this time, devices cannot be
+>removed, as they are in use=2E U-Boot completes the removal when
+>efi_exit_boot_services() is called=2E It seems that this function does
+>more allocations after calling dm_remove_devices_active() although I
+>can't figure out where=2E
+>
+>Fix this by disabling DMA when the driver is removed=2E
 >
 >Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>Reported-by: Christian Kohlsch=C3=BCtter <christian@kohlschutter=2Ecom>
+
+LGTM
+
+Acked-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
+
 >---
 >
-> lib/efi_loader/efi_boottime=2Ec | 21 +++++++++++++--------
-> 1 file changed, 13 insertions(+), 8 deletions(-)
+> drivers/net/designware=2Ec | 1 +
+> 1 file changed, 1 insertion(+)
 >
->diff --git a/lib/efi_loader/efi_boottime=2Ec b/lib/efi_loader/efi_boottim=
-e=2Ec
->index ffe43accd1e=2E=2Ee525662f82f 100644
->--- a/lib/efi_loader/efi_boottime=2Ec
->+++ b/lib/efi_loader/efi_boottime=2Ec
->@@ -2250,14 +2250,6 @@ static efi_status_t EFIAPI efi_exit_boot_services(=
-efi_handle_t image_handle,
-> 			list_del(&evt->link);
-> 	}
+>diff --git a/drivers/net/designware=2Ec b/drivers/net/designware=2Ec
+>index 07b0f49ef58=2E=2Eeebf14bd51a 100644
+>--- a/drivers/net/designware=2Ec
+>+++ b/drivers/net/designware=2Ec
+>@@ -809,6 +809,7 @@ static int designware_eth_remove(struct udevice *dev)
+> {
+> 	struct dw_eth_dev *priv =3D dev_get_priv(dev);
 >=20
->-	if (!efi_st_keep_devices) {
->-		bootm_disable_interrupts();
->-		if (IS_ENABLED(CONFIG_USB_DEVICE))
->-			udc_disconnect();
->-		board_quiesce_devices();
->-		dm_remove_devices_active();
->-	}
->-
-> 	/* Patch out unsupported runtime function */
-> 	efi_runtime_detach();
->=20
->@@ -2279,6 +2271,19 @@ static efi_status_t EFIAPI efi_exit_boot_services(=
-efi_handle_t image_handle,
-> 	/* Give the payload some time to boot */
-> 	efi_set_watchdog(0);
-> 	schedule();
->+
->+	/*
->+	 * this should be the last thing done, to avoid memory allocations
->+	 * between removing devices and the OS taking over
->+	 */
->+	if (!efi_st_keep_devices) {
->+		bootm_disable_interrupts();
->+		if (IS_ENABLED(CONFIG_USB_DEVICE))
->+			udc_disconnect();
->+		board_quiesce_devices();
->+		dm_remove_devices_active();
->+	}
->+
-> out:
-> 	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
-> 		if (ret !=3D EFI_SUCCESS)
+>+	_dw_eth_halt(priv);
+> 	free(priv->phydev);
+> 	mdio_unregister(priv->bus);
+> 	mdio_free(priv->bus);
 
