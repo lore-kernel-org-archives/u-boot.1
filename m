@@ -4,59 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFAFC36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 10:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE43C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 11:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A44382A46;
-	Sat,  5 Apr 2025 12:23:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
+	by phobos.denx.de (Postfix) with ESMTP id D0F6182991;
+	Sat,  5 Apr 2025 13:00:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JcKQSxKS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AD49829C3; Sat,  5 Apr 2025 12:23:56 +0200 (CEST)
-Received: from inet11.abb.com (inet11.abb.com [138.225.1.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4F2D5829C3; Sat,  5 Apr 2025 13:00:17 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B8A782AC3
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 12:23:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=br-automation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bernhard.messerklinger@br-automation.com
-Received: from brsmtp01.br-automation.co.at ([10.43.60.20])
- by inet11.abb.com (8.15.2/8.14.7) with ESMTPS id 5347SN75674035
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 4 Apr 2025 09:28:23 +0200
-Received: from extmail.br-automation.com ([192.168.112.26])
- by brsmtp01.br-automation.co.at (HCL Domino Release 14.0FP3 HF8)
- with ESMTP id 2025040409282415-93036 ;
- Fri, 4 Apr 2025 09:28:24 +0200 
-Received: from ATEGGE3725.br-automation.co.at ([10.43.64.28])
- by extmail.br-automation.com (HCL Domino Build V1202_05192022)
- with ESMTP id 2025040409282442-31369 ;
- Fri, 4 Apr 2025 09:28:24 +0200 
-From: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>
-To: u-boot@lists.denx.de
-Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
- "Tom Rini" <trini@konsulko.com>,
- "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>
-Subject: [PATCH v4 3/4] board/BuR/common: split br_resetc_bmode function
-Date: Fri, 4 Apr 2025 09:27:59 +0200
-Message-ID: <20250404072819.69642-4-bernhard.messerklinger@br-automation.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
-References: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 7652F8215B
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 13:00:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e6e1cd3f1c5so1532465276.0
+ for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 04:00:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1743850811; x=1744455611; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=S6leKF1nlt4E6Womzqa1EsDMMdPgf7fBVjIWlJOkOuo=;
+ b=JcKQSxKS7tCMiHOVlRtPSlHPw+WPM4yW1bwUs+F/8sh7WgqjbbOPoNWMnvLrLaHGwO
+ m/S9tmvTEMAAVTR+AMHV6LiPXOZm2TrKHIuVBiWSy9XE9hjo26lect00VmsVAS2gvmGY
+ 3RtAdHnqMvR3kX/sac+C0HzewjaK020FTC1g6psAEx6BDKlfHsSHiYOH2PMNpNiYGlPV
+ clEvl19qND4vGpT+31KhtwbVSNOYrSmkYFlZ9X5HExwveoDvX/2GqsEd4AG8l327wYtG
+ w0t6e/DldVV+bn2Gqft4T5Q8wvlW2GOwf5N4FJ7O7IbnlnUVWL4nd1ozvWNBPqyLfbe+
+ 1YwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743850811; x=1744455611;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=S6leKF1nlt4E6Womzqa1EsDMMdPgf7fBVjIWlJOkOuo=;
+ b=RaIhMGoQoJo0mS6juCE7/l8OMy/dk/sGJiZbAUThWQs90w/2u1v8zoeyzuCAU3nOJ8
+ qOPLzQkENrKW3cMjrHa2EnueTPgpkfXVabAl/bfw2BDPAy+jSgwLskuihsJ2f8w/qPGQ
+ PaFGo4YzqRV/53USDQgllwPMJ3xKHkeFjK++FTIoHbXCRYWfnk7CggvhPfB1M2CA7GT1
+ cHblFGn490S+GlBmlFRjvPmQeJT0x54ol/h1bCwf/iuUOXKm3zWK3Ok36Q3c4dSj430B
+ trYB/ecfGxi1NBRMDSymFkdZ79sbtyFzJ7cFJpgsZRu60GzVLVU3H56riE0I4I3k9/Nf
+ xqjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX94OGpDl6nGSU1CVPRQNUBvv0FX0nKRJqGmLMDHFKuzwuWcxuYNmUWMDCJ83ZCTW/iCA4w7MM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9qnZ99KGognMMspk8gW3h+oCpnZ4BdefpZE/hnSeP1LNB+juJ
+ qrKJFLXJqxejTqAAVFSMrie/8pRp2XA7AlWsOZIRy3dUQozXoTBNoDiMHOJ2PBKaSswOmg956ux
+ uTg0w4cP9NfUUYcmVxCzRLyl8v11RXHUOu/wm32rrBnCczclaMgA=
+X-Gm-Gg: ASbGncuNSWWgZYrLqx2cSbxfBORXbFmuEBgq2zAeHiNGSrdtr0xa7BvvRSID1rXxviO
+ jR1RidSBrmJTlE2yaNXnwfG1YJtozg37IqW8gkp9vOGe1SEGNxPG2AFZYJ6IWo/vjOkGhWbAECy
+ u2nHYzKzV/Fexb81CCTc9QONR2
+X-Google-Smtp-Source: AGHT+IHmOiSiblAwRlVTcChF/JM9CWCJ1YmitEIp4CTXMA0q/xJBx4IrZ51wn09W+uvggbMo8WfE4eTWdwjezHjtcKI=
+X-Received: by 2002:a05:6902:2602:b0:e6d:e24c:34bb with SMTP id
+ 3f1490d57ef6-e6e316ea4eemr3799468276.2.1743850811193; Sat, 05 Apr 2025
+ 04:00:11 -0700 (PDT)
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Build
- V1202_05192022|May 19, 2022) at 04/04/2025 09:28:24 AM,
- Serialize by Router on BRSMTPINTERN2/InternSMTP(Build V1202_05192022|May 19,
- 2022) at 04/04/2025 09:28:24 AM,
- Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3
- HF8|December 13, 2024) at 04/04/2025 09:28:24 AM,
- Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3 HF8|December
- 13, 2024) at 04/04/2025 09:28:24 AM,
- Serialize complete at 04/04/2025 09:28:24 AM
-X-TNEFEvaluated: 1
+References: <20250405065812.33027-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250405065812.33027-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 5 Apr 2025 13:00:00 +0200
+X-Gm-Features: ATxdqUHAkcYgbls_UGQYYzDrMsTbQT8ZBPZ-174CfdPNMSG8ZTwkS013BueL-_0
+Message-ID: <CAC_iWjLk3dqrMjSB024dUQR-tX4LMDUuFTi-2x_01Bpn3gVZSw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: stop network in EXIT_BOOT_SERVICES
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Michael Brown <mcb30@ipxe.org>, 
+ =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,201 +97,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split br=5Fresetc=5Fbmode function to add support for reading of reset
-reason in board code with br=5Fresetc=5Fbmode=5Fget.
+On Sat, Apr 5, 2025, 08:58 Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
 
-Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation=
-.com>
----
+> It has been reported that memory corruption can occurred because network
+> packages where received after EXIT_BOOT_SERVICES. See the thread
+> starting at [1].
+>
+> We try to remove all drivers when EXIT_BOOT_SERVICES is called. But
+>
+> * Some network drivers don't call their own stop method when removed.
+> * Some network drivers don't have a remove method.
+> * Some devices have CONFIG_DM_DEVICE_REMOVE=3Dn.
+>
+> Let's call eth_halt() in EXIT_BOOT_SERVICES explicitly.
+>
 
-(no changes since v1)
+Thanks Heinrich
 
- board/BuR/common/br=5Fresetc.c | 129 ++++++++++++++++++++---------------
- board/BuR/common/br=5Fresetc.h |   1 +
- 2 files changed, 74 insertions(+), 56 deletions(-)
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-diff --git a/board/BuR/common/br=5Fresetc.c b/board/BuR/common/br=5Fresetc.c
-index 248064f974b..dfe2c2e0155 100644
---- a/board/BuR/common/br=5Fresetc.c
-+++ b/board/BuR/common/br=5Fresetc.c
-@@ -114,9 +114,73 @@ int br=5Fresetc=5Fbmode(void)
- {
- 	int rc =3D 0;
- 	u16 regw;
-+	unsigned int bmode =3D 0;
-+
-+	if (!resetc.i2cdev)
-+		rc =3D resetc=5Finit();
-+
-+	if (rc !=3D 0)
-+		return rc;
-+
-+	board=5Fboot=5Fled(1);
-+
-+	rc =3D br=5Fresetc=5Fbmode=5Fget(&bmode);
-+	if (rc !=3D 0)
-+		return rc;
-+
-+	LCD=5FSETCURSOR(1, 8);
-+
-+	switch (bmode) {
-+	case BMODE=5FPME:
-+		LCD=5FPUTS("entering PME-Mode (netscript).         ");
-+		regw =3D 0x0C0C;
-+		break;
-+	case BMODE=5FDEFAULTAR:
-+		LCD=5FPUTS("entering BOOT-mode.                    ");
-+		regw =3D 0x0000;
-+		break;
-+	case BMODE=5FDIAG:
-+		LCD=5FPUTS("entering DIAGNOSE-mode.                ");
-+		regw =3D 0x0F0F;
-+		break;
-+	case BMODE=5FSERVICE:
-+		LCD=5FPUTS("entering SERVICE mode.                 ");
-+		regw =3D 0xB4B4;
-+		break;
-+	case BMODE=5FRUN:
-+		LCD=5FPUTS("loading OS...                          ");
-+		regw =3D 0x0404;
-+		break;
-+	}
-+
-+	board=5Fboot=5Fled(0);
-+
-+	if (resetc.is=5Fpsoc)
-+		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
-+				  (u8 *)&regw, 2);
-+	else
-+		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
-+				  (u8 *)&regw, 1);
-+
-+	if (rc !=3D 0)
-+		printf("WARN: cannot write into resetcontroller!\n");
-+
-+	if (resetc.is=5Fpsoc)
-+		printf("Reset: PSOC controller\n");
-+	else
-+		printf("Reset: STM32 controller\n");
-+
-+	printf("Mode:  %s\n", bootmodeascii[regw & 0x0F]);
-+	env=5Fset=5Fulong("b=5Fmode", regw & 0x0F);
-+
-+	return rc;
-+}
-+
-+int br=5Fresetc=5Fbmode=5Fget(unsigned int *bmode)
-+{
-+	int rc =3D 0;
- 	u8 regb, scr;
- 	int cnt;
--	unsigned int bmode =3D 0;
-=20
- 	if (!resetc.i2cdev)
- 		rc =3D resetc=5Finit();
-@@ -136,13 +200,11 @@ int br=5Fresetc=5Fbmode(void)
- 		return -1;
- 	}
-=20
--	board=5Fboot=5Fled(1);
--
- 	/* special bootmode from resetcontroller */
- 	if (regb & 0x4) {
--		bmode =3D BMODE=5FDIAG;
-+		*bmode =3D BMODE=5FDIAG;
- 	} else if (regb & 0x8) {
--		bmode =3D BMODE=5FDEFAULTAR;
-+		*bmode =3D BMODE=5FDEFAULTAR;
- 	} else if (board=5Fboot=5Fkey() !=3D 0) {
- 		cnt =3D 4;
- 		do {
-@@ -169,68 +231,23 @@ int br=5Fresetc=5Fbmode(void)
-=20
- 		switch (cnt) {
- 		case 0:
--			bmode =3D BMODE=5FPME;
-+			*bmode =3D BMODE=5FPME;
- 			break;
- 		case 1:
--			bmode =3D BMODE=5FDEFAULTAR;
-+			*bmode =3D BMODE=5FDEFAULTAR;
- 			break;
- 		case 2:
--			bmode =3D BMODE=5FDIAG;
-+			*bmode =3D BMODE=5FDIAG;
- 			break;
- 		case 3:
--			bmode =3D BMODE=5FSERVICE;
-+			*bmode =3D BMODE=5FSERVICE;
- 			break;
- 		}
- 	} else if ((regb & 0x1) || scr =3D=3D 0xCC) {
--		bmode =3D BMODE=5FPME;
-+		*bmode =3D BMODE=5FPME;
- 	} else {
--		bmode =3D BMODE=5FRUN;
-+		*bmode =3D BMODE=5FRUN;
- 	}
-=20
--	LCD=5FSETCURSOR(1, 8);
--
--	switch (bmode) {
--	case BMODE=5FPME:
--		LCD=5FPUTS("entering PME-Mode (netscript).         ");
--		regw =3D 0x0C0C;
--		break;
--	case BMODE=5FDEFAULTAR:
--		LCD=5FPUTS("entering BOOT-mode.                    ");
--		regw =3D 0x0000;
--		break;
--	case BMODE=5FDIAG:
--		LCD=5FPUTS("entering DIAGNOSE-mode.                ");
--		regw =3D 0x0F0F;
--		break;
--	case BMODE=5FSERVICE:
--		LCD=5FPUTS("entering SERVICE mode.                 ");
--		regw =3D 0xB4B4;
--		break;
--	case BMODE=5FRUN:
--		LCD=5FPUTS("loading OS...                          ");
--		regw =3D 0x0404;
--		break;
--	}
--
--	board=5Fboot=5Fled(0);
--
--	if (resetc.is=5Fpsoc)
--		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
--				  (u8 *)&regw, 2);
--	else
--		rc =3D dm=5Fi2c=5Fwrite(resetc.i2cdev, RSTCTRL=5FSCRATCHREG0,
--				  (u8 *)&regw, 1);
--
--	if (rc !=3D 0)
--		printf("WARN: cannot write into resetcontroller!\n");
--
--	if (resetc.is=5Fpsoc)
--		printf("Reset: PSOC controller\n");
--	else
--		printf("Reset: STM32 controller\n");
--
--	printf("Mode:  %s\n", bootmodeascii[regw & 0x0F]);
--	env=5Fset=5Fulong("b=5Fmode", regw & 0x0F);
--
- 	return rc;
- }
-diff --git a/board/BuR/common/br=5Fresetc.h b/board/BuR/common/br=5Fresetc.h
-index 999045b867d..3bd5ac20ae1 100644
---- a/board/BuR/common/br=5Fresetc.h
-+++ b/board/BuR/common/br=5Fresetc.h
-@@ -11,6 +11,7 @@
- int br=5Fresetc=5Fregget(u8 reg, u8 *dst);
- int br=5Fresetc=5Fregset(u8 reg, u8 val);
- int br=5Fresetc=5Fbmode(void);
-+int br=5Fresetc=5Fbmode=5Fget(unsigned int *bmode);
-=20
- /* reset controller register defines */
- #define RSTCTRL=5FCTRLREG		0x01
---=20
-2.49.0
-
+>
+> [1]
+>
+> https://lore.kernel.org/all/C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschu=
+tter.com/
+>
+> Cc: Michael Brown <mcb30@ipxe.org>
+> Reported-by: Christian Kohlsch=C3=BCtter <christian@kohlschutter.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/efi_boottime.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.=
+c
+> index 5164cb15986..eaa6464fa39 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -15,6 +15,7 @@
+>  #include <irq_func.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> +#include <net-common.h>
+>  #include <pe.h>
+>  #include <time.h>
+>  #include <u-boot/crc.h>
+> @@ -2235,6 +2236,8 @@ static efi_status_t EFIAPI
+> efi_exit_boot_services(efi_handle_t image_handle,
+>                 bootm_disable_interrupts();
+>                 if (IS_ENABLED(CONFIG_USB_DEVICE))
+>                         udc_disconnect();
+> +               if (IS_ENABLED(CONFIG_DM_ETH))
+> +                       eth_halt();
+>                 board_quiesce_devices();
+>                 dm_remove_devices_active();
+>         }
+> --
+> 2.48.1
+>
+>
