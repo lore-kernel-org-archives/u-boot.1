@@ -4,59 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6674C36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 15:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B376AC36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 15:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC36382A76;
-	Sat,  5 Apr 2025 17:27:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
+	by phobos.denx.de (Postfix) with ESMTP id 1975C82A76;
+	Sat,  5 Apr 2025 17:30:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sXW32Dn1";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC98E82A7B; Sat,  5 Apr 2025 17:27:43 +0200 (CEST)
-Received: from inet11.abb.com (inet11.abb.com [138.225.1.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8595082A76; Sat,  5 Apr 2025 17:30:58 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF6EB8215B
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 17:27:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=br-automation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bernhard.messerklinger@br-automation.com
-Received: from brsmtp01.br-automation.co.at ([10.43.60.20])
- by inet11.abb.com (8.15.2/8.14.7) with ESMTPS id 5347SN74674035
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 4 Apr 2025 09:28:23 +0200
-Received: from extmail.br-automation.com ([192.168.112.26])
- by brsmtp01.br-automation.co.at (HCL Domino Release 14.0FP3 HF8)
- with ESMTP id 2025040409282382-93034 ;
- Fri, 4 Apr 2025 09:28:23 +0200 
-Received: from ATEGGE3725.br-automation.co.at ([10.43.64.28])
- by extmail.br-automation.com (HCL Domino Build V1202_05192022)
- with ESMTP id 2025040409282411-31367 ;
- Fri, 4 Apr 2025 09:28:24 +0200 
-From: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>
-To: u-boot@lists.denx.de
-Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
- "Simon Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>,
- "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>
-Subject: [PATCH v4 1/4] board/BuR/common: use strlcpy instead of strncpy
-Date: Fri, 4 Apr 2025 09:27:57 +0200
-Message-ID: <20250404072819.69642-2-bernhard.messerklinger@br-automation.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
-References: <20250404072819.69642-1-bernhard.messerklinger@br-automation.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 51B6C8215B
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 17:30:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-601e3f2cee1so1454272eaf.2
+ for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 08:30:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1743867055; x=1744471855; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qqv/68nu4sQEFuEDEoQl91HhZRTiImGsB7MnIKTA/SE=;
+ b=sXW32Dn1rLetc6fIliE/hewUVjiuqgIkvmEXIMAScRjCD6eNXODe5p2QjtlzvKFMpQ
+ jQUBgrFkr/UVrh7EVUZ6YYZvpVu+SJfsabog3Cz9g7TcmoGTrmMn1fxgGISY5nHzpFq9
+ t+Z+n1Sh9HPYqXYhnXwL7Lhg22VhyZjNDsufg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743867055; x=1744471855;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qqv/68nu4sQEFuEDEoQl91HhZRTiImGsB7MnIKTA/SE=;
+ b=OfiFhf0OVYzqLUwfCvrRQmgozFTwghJaRbTWt0bceFm4udhYD/ufZj+CWwgLSDsKDk
+ nXklc4tzKrCZL4nE1BxiY1npGvNUFpOkY3tQMFZSdkJH1iPKxr0VHugJlp5x0rY7gB7c
+ fIyXjOvPNuL3IhZabnT+nf5LAlz1L6CDnfxKDVouexKIg91Qg2mqsepBFvb3w02kI37w
+ hSDMLmicTsXh+C44c0/Em454TO1k9/z2kXCa4o0NfAZ2/L9Nt3cd6wbxtcc+OTMJwXtQ
+ 6SyqeH3QPns/x35JyObqjC/fqd7oCcCTunbnI9zyFPtdCbkpaZALZKsfrjBV2x4S7Xn1
+ 9KeQ==
+X-Gm-Message-State: AOJu0YyZqzuy2rsv2I8U4QROrZ/VQjbS8S402kVMzdBc2ZIPn6ns0Pf3
+ 3OIXkzPA7JTGeSH1RhbjX+qduN34VDHyKCI3rxYl/xFD0d6zkpLO4hRNK49arGE=
+X-Gm-Gg: ASbGncsXPtJ/VIfXE/0fq8eb9Y3kzvfGIDazYKmuyNxzjFCaxroRzqJWvOqe0/G7aOD
+ nWwuMCgERcTwd6gmOBHTKRZso1u73urcLh8jn0tEDIIU9LNP1Gk1IpZsWvIQm0RqtmBtbycFtzZ
+ krMJMkk5i+xzrOB1WoGEPZaBnq/bngWbxUeYqMpoW8+Xccv9sLlrTrqlBcU7ZW+RHmH+mhN5gZq
+ 5bW0zjynConaQWxhZRBYX9e/C8cZKwcHDmM/JM1p55BlqMnIjEkyNzFGkq/gqS+yCM1hVEdf5eU
+ VDFkYezFv9eW4JO8ZGcVnp3v14+4EMLJLuy8avfm+VgyRokzoZ6pYKSvl96t8kNkGOVl+n/qGN6
+ SuXkJcA==
+X-Google-Smtp-Source: AGHT+IEsYSVYqHUjOKGIyJoTsJtoa/IuBoyhQeqFCGHcL0maei3X35GsMw9Lf/i5GT19yltRC82H+Q==
+X-Received: by 2002:a05:6820:221d:b0:603:f9e1:1914 with SMTP id
+ 006d021491bc7-6041ff5b39bmr1795428eaf.3.1743867054964; 
+ Sat, 05 Apr 2025 08:30:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6040c4ea8dbsm1082735eaf.18.2025.04.05.08.30.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Apr 2025 08:30:53 -0700 (PDT)
+Date: Sat, 5 Apr 2025 09:30:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jeremy Compostella <jeremy.compostella@intel.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/5] arch/x86: Add 64-bit U-Boot configuration without SPL
+Message-ID: <20250405153051.GA2695639@bill-the-cat>
+References: <877c4mutk3.fsf@jcompost-mobl.amr.corp.intel.com>
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Build
- V1202_05192022|May 19, 2022) at 04/04/2025 09:28:24 AM,
- Serialize by Router on BRSMTPINTERN2/InternSMTP(Build V1202_05192022|May 19,
- 2022) at 04/04/2025 09:28:24 AM,
- Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3
- HF8|December 13, 2024) at 04/04/2025 09:28:23 AM,
- Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3 HF8|December
- 13, 2024) at 04/04/2025 09:28:24 AM,
- Serialize complete at 04/04/2025 09:28:24 AM
-X-TNEFEvaluated: 1
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YFoxH0qJzIb2Sp0s"
+Content-Disposition: inline
+In-Reply-To: <877c4mutk3.fsf@jcompost-mobl.amr.corp.intel.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,35 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now strlcpy is used to copy the defip string to the corresponding
-environment variable. This preserves memory for the NULL termination.
 
-Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation=
-.com>
----
+--YFoxH0qJzIb2Sp0s
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(no changes since v1)
+On Tue, Mar 18, 2025 at 10:39:40AM -0700, Jeremy Compostella wrote:
 
- board/BuR/common/common.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> This commit introduces a new configuration option X86_RUN_64BIT_NO_SPL
+> to allow building U-Boot as a 64-bit binary without using the SPL
+> (Secondary Program Loader). The motivation is to simplify the boot
+> process for certain x86-based platforms that do not require SPL, such as
+> those booting directly from a 64-bit coreboot firmware.
+>=20
+> This update revises the `X86_RUN_64BIT` configuration to more accurately
+> describe its role as "32-bit SPL followed by 64-bit U-Boot." It
+> clarifies the sequence of operations during the boot process, where the
+> system transitions from a 32-bit SPL (Secondary Program Loader) to the
+> main 64-bit U-Boot.
+>=20
+> Signed-off-by: Jeremy Compostella <jeremy.compostella@intel.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-diff --git a/board/BuR/common/common.c b/board/BuR/common/common.c
-index 7fb61736710..3513f43a9f5 100644
---- a/board/BuR/common/common.c
-+++ b/board/BuR/common/common.c
-@@ -68,7 +68,7 @@ int brdefaultip=5Fsetup(int bus, int chip)
- 			 "if test -r ${ipaddr}; then; else setenv ipaddr 192.168.60.%d; setenv =
-serverip 192.168.60.254; setenv gatewayip 192.168.60.254; setenv netmask 25=
-5.255.255.0; fi;",
- 			 u8buf);
- 	else
--		strncpy(defip,
-+		strlcpy(defip,
- 			"if test -r ${ipaddr}; then; else setenv ipaddr 192.168.60.1; setenv se=
-rverip 192.168.60.254; setenv gatewayip 192.168.60.254; setenv netmask 255.=
-255.255.0; fi;",
- 			sizeof(defip));
-=20
+For the series, applied to u-boot/next, thanks!
+
 --=20
-2.49.0
+Tom
 
+--YFoxH0qJzIb2Sp0s
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfxTKgACgkQFHw5/5Y0
+tyxmYQv+J6pw7dZd3M++xlNPV5lTI4pMIYTYVaxx65deHXxPTjyvnZyM2uVGcaXc
++TjT8bX+njfwtpJGgTkEOIjrZZ/FTpeLo+4f/uIZdDuroZ/nzeGVjzCOjcDc0vfv
+DJegiZgTwBA/h9VO61/5rzBREjtaZW5fin8/+4bBv+/dqK2+xLMCnb/0ql0KZzEn
+fjhUU6XgJaJ0KTcYqyetL7iNTlsgcWCBKKqLUnoDOXaPkQGKFDKcabUaO/ZxML2l
+RBq2C8FbxmjStyvr/lqrEa/sJsvMiCzKV7oSeeuPHn77giFVY4N4plrueLQbKjqK
+Oc4C4uBOualRAiQ9UYfy0QCuKEhn1xmtZtxAasaKyJKlYIE2sQI+EYTfXTE1lA32
+Bpjjr4Ldg5gylcHnYcW+8uv2lycdZGO2eMIYleHW3Oxf0vl2B4bzj9Pw5TJQqmRw
+DEtgySrw1UzVt0W//NOMN5LF7n+OXSJFJxRC2I7GYgEaCvu8uC6xpqFiQ1ip7lz9
+oQJzwe3w
+=pqyM
+-----END PGP SIGNATURE-----
+
+--YFoxH0qJzIb2Sp0s--
