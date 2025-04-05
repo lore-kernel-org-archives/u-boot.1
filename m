@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A9FC36018
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 15:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32390C36018
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 16:02:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90FEE82A76;
-	Sat,  5 Apr 2025 17:39:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3A49A82A81;
+	Sat,  5 Apr 2025 18:02:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aI2rlcBw";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="TxrRHrE2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 576E882AB1; Sat,  5 Apr 2025 17:38:59 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 525C582A86; Sat,  5 Apr 2025 17:56:14 +0200 (CEST)
+Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
+ [91.218.175.188])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA66482A76
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 17:38:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFEB582A76
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 17:56:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5bca=WY=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743867534; bh=/3AYRW9AplK+iCgymrrWB2NXZPzN3EyUv2L8EAVXErQ=;
- b=aI2rlcBwsk3GWGNOiDBkPbCVMMO60uYWzH6LeluVAyda0ifzN2/ek473rz6RT7yyfSaysF2Iw
- Up0JghlsK2W7BasbyTwIMyrgYfgEFww4F9YJ4T5So3CTLgq0HJnr/x2QUKH8cYjMWCgehEJcfPY
- 0M4ofycQ9IsXBLa3vlMsw3leHWP8KUCBIyGpp1vBXAcXhEFiiAmaJRBP/SfSMoKsGlLNnRCGSRS
- oCc4XxIC2LAp2IrP9//IpReysuwf5++3IziFVFJZOth8ZuaoipArNYjAyia8wLQ81m6MwjIfnoH
- dQG0b0+QaJr3aEfmbYzZpafleY33lF4bycbXNKr8IGpw==
-X-Forward-Email-ID: 67f14e8c3dc50e09d1238916
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.0
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Arnaud Patard <arnaud.patard@collabora.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 4/4] rockchip: sdram: Add fallback that fixup DRAM gaps on
- RK3588
-Date: Sat,  5 Apr 2025 15:38:24 +0000
-Message-ID: <20250405153832.1427549-5-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250405153832.1427549-1-jonas@kwiboo.se>
-References: <20250405153832.1427549-1-jonas@kwiboo.se>
+ spf=pass smtp.mailfrom=alexeymin@postmarketos.org
+Message-ID: <4429b568-1200-4a6f-a41f-ad6c7905eec5@postmarketos.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1743868570;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/ecYQOY0/L6iozEgu25cmAQKawUE8ccf0MC+Q/ZH75c=;
+ b=TxrRHrE2Nvlsf3k6tMEHt3XNlIuQqeByIRWvEbRX75Lq9TVsy1Z/amx2/+uAGHNu9zqu5y
+ aLvgG2FVk6s8JuKEZH8Ozoq8RbFvJjJ1+s1sIoAHpbZco22uNllziyg+AJhfNUw80OBIgV
+ wcrnsCTYDYGzzvl1Ex8oornBTz3MfsGV8CHGFBaMXCub2XOzCE2XjwtgXeGr8aFS1a9ok1
+ BoJLnw14j6g3bjIhwudfK+o2G8eIKdtPMXX3zdcw0DUxe+sCPwoSzjax8+q34H++Jxfvn0
+ OC63dABv5bMpzw8CBGiMjaIzMKVhu5L/2g7V+t5XqjgDJ6FsZlfPYuJdOm6YYA==
+Date: Sat, 5 Apr 2025 18:56:08 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH RFC/RFT 1/2] gpio: qcom: add new driver for SPMI gpios
+To: u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+References: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
+ <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-1-74077ef0b464@linaro.org>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Alexey Minnekhanov <alexeymin@postmarketos.org>
+In-Reply-To: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-1-74077ef0b464@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
+X-Mailman-Approved-At: Sat, 05 Apr 2025 18:02:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,92 +73,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RK3588 has two known memory gaps when using 16+ GiB DRAM,
-[0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
+On 4/1/25 12:47, Neil Armstrong via groups.io wrote:
+> The current qcom_pmic_gpio driver is too limited and doesn't
+> support state tracking for all pins like the Linux driver.
+> 
+> Adding full pinconf support would require adding the state
+> and it's much simpler to restart from scratch with a new
+> driver based on the Linux one adapted to the U-Boot GPIO
+> and Pinctrl APIs.
+> 
+> For now only the PMICs I've been able to validate are
+> added in the compatible list but we should be able to
+> add the entire list from the Linux driver.
+> 
+> There's a few difference from the Linux driver:
+> - no IRQ support
+> - uses the U-Boot GPIO flags that maps very well
+> - uses the gpio-ranges to get the pins count
+> - no debugfs but prints the pin state via pinmux callback
+> 
+> It uses the same CONFIG entry as the old one, since
+> the ultimate goal is to migrate entirely on this new
+> driver once we verify it doesn't break the older
+> platforms.
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>   drivers/gpio/Makefile         |    2 +-
+>   drivers/gpio/qcom_spmi_gpio.c | 1034 +++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 1035 insertions(+), 1 deletion(-)
+> 
 
-The vendor TPL blob encodes this information in the DDR_MEM tag data
-passed to later boot phases. U-Boot proper will normally use this
-information to configure the DRAM banks.
+...
 
-When a DDR_MEM tag cannot be found the fallback is to use the entire
-range above 4 GiB. Something that will cause issues when OS try to use
-memory from the two known memory gaps.
+> +
+> +static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
+> +	{ .compatible = "qcom,pm8550b-gpio" },
+> +	{ .compatible = "qcom,pm8550ve-gpio" },
+> +	{ .compatible = "qcom,pm8550vs-gpio" },
+> +	{ .compatible = "qcom,pmk8550-gpio" },
+> +	{ .compatible = "qcom,pmr735d-gpio" },
+> +	{ }
+> +};
+> +
 
-Add a weak dram init banksize fixup function and implement it for RK3588
-to fix issues observed when trying to RAM boot RK3588 boards with 16+
-GiB DRAM into Linux.
+I've added 2 compatibles here to the top of that list
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
++       { .compatible = "qcom,pm660-gpio" },
++       { .compatible = "qcom,pm660l-gpio" },
+
+and was able to confirm with "dm tree" that new driver is in use and it 
+works fine (Volume Up key works and I'm able to navigate U-Boot menu).
+
+Tested-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+
 ---
-v2: New patch to fix booting into OS on RK3588 boards with 16+ GiB DRAM
----
- arch/arm/mach-rockchip/rk3588/rk3588.c | 27 ++++++++++++++++++++++++++
- arch/arm/mach-rockchip/sdram.c         |  7 ++++++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index c1dce3ee3703..6395483f14f1 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -183,6 +183,33 @@ int arch_cpu_init(void)
- }
- #endif
- 
-+/*
-+ * RK3588 has two known memory gaps when using 16+ GiB DRAM,
-+ * [0x3fc000000, 0x3fc500000) and [0x3fff00000, 0x400000000).
-+ *
-+ * Remove the [0x3fc000000, 0x400000000) range to ensure OS does not
-+ * use memory from these gaps when a DDR_MEM tag cannot be found.
-+ */
-+
-+#define DRAM_GAP_START		0x3FC000000
-+#define DRAM_GAP_END		0x400000000
-+
-+int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
-+{
-+	size_t ram_top = bd->bi_dram[1].start + bd->bi_dram[1].size;
-+
-+	if (ram_top > DRAM_GAP_START) {
-+		bd->bi_dram[1].size = DRAM_GAP_START - bd->bi_dram[1].start;
-+
-+		if (ram_top > DRAM_GAP_END && CONFIG_NR_DRAM_BANKS > 2) {
-+			bd->bi_dram[2].start = DRAM_GAP_END;
-+			bd->bi_dram[2].size = ram_top - bd->bi_dram[2].start;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- #define RK3588_OTP_CPU_CODE_OFFSET		0x02
- #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
- 
-diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-index f7d32829295c..0bdda77a7926 100644
---- a/arch/arm/mach-rockchip/sdram.c
-+++ b/arch/arm/mach-rockchip/sdram.c
-@@ -287,6 +287,11 @@ static int rockchip_dram_init_banksize(void)
- }
- #endif
- 
-+__weak int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
-+{
-+	return 0;
-+}
-+
- int dram_init_banksize(void)
- {
- 	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
-@@ -340,7 +345,7 @@ int dram_init_banksize(void)
- #endif
- #endif
- 
--	return 0;
-+	return rockchip_dram_init_banksize_fixup(gd->bd);
- }
- 
- size_t rockchip_sdram_size(phys_addr_t reg)
--- 
-2.49.0
-
+Regards,
+Alexey Minnekhanov
