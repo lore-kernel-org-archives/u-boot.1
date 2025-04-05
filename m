@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9C1C36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 19:06:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A846C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 19:06:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2B1A82B07;
-	Sat,  5 Apr 2025 21:06:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4315882ACF;
+	Sat,  5 Apr 2025 21:06:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1743879974;
-	bh=31hXHkdSrIaDNTb0zoWlRZZykubwV+BjN0Oc1L9tGfQ=;
+	s=phobos-20191101; t=1743879977;
+	bh=xe2np3EA8jiuh5QWg4ICUtJbZETbBA9E42f8HaPV+J4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sN5dlQooBAD0JNKDPRDNbvTtG+MBy+e+PDXvBZH/QSGpZ7io/W19zkx4Ey7k5W+oi
-	 egU2KVPVnTuhhToN9ZAFtCoKzcz8GuRP8ZVI5KigUYz+kF+5wlwFRs+8ReNvX15Z0z
-	 miy/o919AdDx7tvHB99VlQwPecgDqgYcSENZHns9+Domb78IEk/9CeTQTLYLb01ilP
-	 BeIOeY0igCYbQ9uNJmkWXnwpLzkCuuTHIWZeb8+Gn5PMUr7OdUJkum8mKLegI1itG2
-	 n5nZgx6TrrIl4DCPRA5Eu6tL4A6QOZWFm4dSPL7MVIHM0CB4Olvf9uAwXjWXYElTOe
-	 OHK4nFDNX9F0Q==
+	b=PIVNQxrc+X+T9sbZtavHwZpgsWT/6DPjL24yEAih0OO3yFaEscKnP4g4qVDQrGTFi
+	 CnZxWtrH20Y7TJYiDBiSPytBdONjHibTVrJEYb59e0seZzy6c70mPjQrZWntVzJBsY
+	 fSgNTXrwA7xfIc2RGlCRxqjGbfm74srTtdEDnotXyW1BThuOwEoXwk0b2BZoTO9Kc1
+	 sMSuvnpNrauh6qiOGqa+Yu2z8uFZ1OgAjEVB3CA8IipgclFIVB5W8TTlt3Zg/Y6pR5
+	 TZMqgokaIg9b4hfu6qgVn8jKdd/IZuKhdVt1eIwELJA1jT4TyyNwP7p2JJeYCIExXH
+	 EOCPthyth6g+g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7213482AAF; Sat,  5 Apr 2025 21:06:13 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 34CCC82AAF; Sat,  5 Apr 2025 21:06:14 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B49782AC1
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 21:06:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 400B081F45
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 21:06:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="d5TpOHVx"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Mim+KMxg"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 89B7110253298; 
- Sat,  5 Apr 2025 21:06:10 +0200 (CEST)
+ with ESMTPSA id 4BACE10252EF9; 
+ Sat,  5 Apr 2025 21:06:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
  t=1743879971; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=31hXHkdSrIaDNTb0zoWlRZZykubwV+BjN0Oc1L9tGfQ=;
- b=d5TpOHVxp7rbApRF8VikSHJc5xHsoJ/CxcsS2fdUk0LgDX8CRDhk/L1aoPBzzXFks44/TC
- O0HvO2NRaUPW+1NHHYASOc7UKTElLjVdNx1wCs03fkez7CGo7WvEzCrlHeBsHz+O7H+gyn
- eJfkAdB4uMVhtzJBYej+M9IXA4nU4h54NSTRV7GC9WOdjn+6r052q8eb0mUSyJcHtq7ia1
- yRMJrxIFIke5gDrq8NUZQw/Zk0Uviq4cSPZDZmadDP60rvjFZKfaNoMve+ow1k4ploTWxN
- SdGR7TK+Az8ZgKFPognctNDa31jYdOukbGzi+4gslk8sECnwHyKqzVR9YRPzBQ==
+ bh=xe2np3EA8jiuh5QWg4ICUtJbZETbBA9E42f8HaPV+J4=;
+ b=Mim+KMxgd4ipK96+6BaK9fyiQXTUzks+WPOwYDN2f2JzpDjpbP0MPnpWxwse3z0ssgv2ho
+ j6PSYogAd837nKRg3bIzHI/htO2Ob0jWa1j/um6CSE6BgiDAq9OeKd4tomcF7lnI0PQVO5
+ bVVL298IlIv/A+ldizhF+gw/q2yBTmevE/veQju8AizjRdOvIGMQ+xYWt9GoFrAUxS0dY3
+ gCNL1Nyn4lR7aVDQa+WWFTA34e1/jBmrHEClb/M+YdJWHYjQudfnoDdFqsxvNz0cnp4TZO
+ LVwxB6b4tv6uESdi+K+8brG2QnEofL5kzyYFvlEbfZNmBk1s+0eMRPTp+8/ERg==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heiko Schocher <hs@nabladev.com>, Simon Glass <sjg@chromium.org>,
+Cc: Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Love Kumar <love.kumar@amd.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 4/8] test/py/requirements.txt: remove unittest2 and
- testtools
-Date: Sat,  5 Apr 2025 21:05:56 +0200
-Message-Id: <20250405190600.24081-5-hs@denx.de>
+Subject: [PATCH v2 5/8] test: increase timeouts
+Date: Sat,  5 Apr 2025 21:05:57 +0200
+Message-Id: <20250405190600.24081-6-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20250405190600.24081-1-hs@denx.de>
 References: <20250405190600.24081-1-hs@denx.de>
@@ -80,38 +81,37 @@ X-Virus-Status: Clean
 
 From: Heiko Schocher <hs@nabladev.com>
 
-unittest2 and testtools leads in:
+running tests on github/gitlab while board is somewhere in
+the wide world, needs bigger command and standard timeouts.
 
-Collecting argparse (from unittest2>=1.0.0->testtools==2.3.0->-r /builds/u-boot/custodians/u-boot-i2c/tbottesting/../test/py/requirements.txt (line 26))
-  Downloading argparse-1.4.0-py2.py3-none-any.whl.metadata (2.8 kB)
+Increase them to:
 
-which breaks pytest 6.2.5 with
-
-  File "/home/uboot/.local/lib/python3.10/site-packages/_pytest/config/argparsing.py", line 381, in __init__
-    argparse.ArgumentParser.__init__(
-TypeError: ArgumentParser.__init__() got an unexpected keyword argument 'allow_abbrev'
+TIMEOUT_MS = 60000                  # Standard timeout
+TIMEOUT_CMD_MS = 45000              # Command-echo timeout
 
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 
 (no changes since v1)
 
- test/py/requirements.txt | 2 --
- 1 file changed, 2 deletions(-)
+ test/py/u_boot_console_base.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/py/requirements.txt b/test/py/requirements.txt
-index 22315b4ed5..26412ac0b3 100644
---- a/test/py/requirements.txt
-+++ b/test/py/requirements.txt
-@@ -23,8 +23,6 @@ python-subunit==1.3.0
- requests==2.32.3
- setuptools==70.3.0
- six==1.16.0
--testtools==2.3.0
- traceback2==1.4.0
--unittest2==1.1.0
- wcwidth==0.1.7
- zipp==3.19.2
+diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+index 7eaceb39d9..0aabedc394 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/u_boot_console_base.py
+@@ -30,8 +30,8 @@ PAT_ID = 0
+ PAT_RE = 1
+ 
+ # Timeout before expecting the console to be ready (in milliseconds)
+-TIMEOUT_MS = 30000                  # Standard timeout
+-TIMEOUT_CMD_MS = 10000              # Command-echo timeout
++TIMEOUT_MS = 60000                  # Standard timeout
++TIMEOUT_CMD_MS = 45000              # Command-echo timeout
+ 
+ # Timeout for board preparation in lab mode. This needs to be enough to build
+ # U-Boot, write it to the board and then boot the board. Since this process is
 -- 
 2.20.1
 
