@@ -4,86 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C027AC36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 15:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8858C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 15:38:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 157C082A76;
-	Sat,  5 Apr 2025 17:34:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2774582A81;
+	Sat,  5 Apr 2025 17:38:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gyzzAE+x";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DlE71V+3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16F3882A7B; Sat,  5 Apr 2025 17:34:33 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 85B0B82A81; Sat,  5 Apr 2025 17:38:45 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC9468215B
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 17:34:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAB318215B
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 17:38:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-2c2dc6c30c2so841038fac.2
- for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 08:34:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743867269; x=1744472069; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7iCMY7EsKv6eWUNyUl5axus01vVOj3HtQh/GSMCHxx8=;
- b=gyzzAE+xyo99rBMlIHjBIIIwZXKl7kuwAeOzpXEBEhv1NJ/GBr9PEgBiXOFQS3m4zz
- vEjTae6ukFIulDrsjLJaZYkg9FDf9ghfhGvi2RaZdbg7+gsUOr4W6Pk0K7G4tp7pTvLo
- XG26Ku8aed4ncyyuwvPqORgCSz+6G7VzEhcwo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743867269; x=1744472069;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7iCMY7EsKv6eWUNyUl5axus01vVOj3HtQh/GSMCHxx8=;
- b=IJjZlKuY+rLvSaDeJHGUggnkbfGS3svbCwqdLKSpyuiHyv3EqeVjiCBgOQAYgyJ8Qa
- bcsIR+dyRDkt36UeTz12v/MvKesmrY7b3+IdGvWOs+jE9vcCL3/VUCa+j6TZTyID5Gp/
- jwhob71TTBfr+fKETeS8xLlc1tYGaITeENxDSTyyJu8m/DRjD9UH65JmNYaT7udl3UNB
- wXEy6o2b8om9g44wewpHmqTnjb09se3muHUGEsy1a13z5dKNK4QRHshYxPOJblAiexJR
- Y0s9meqvtdUC6Y1QiQnsN2ZHKep6/W2J/A9rrdTVuucn5ZLrzMt/D+0FVd/ML+0M94IW
- QvjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW83b8dido/JmdPMKTyTY/eVOdAPOvi5wAzXKXy2kinXMY+kkL2ETd7y4gie/9ZvyN51qq+p9k=@lists.denx.de
-X-Gm-Message-State: AOJu0YxxhGX24DKUWzsc1ccV0zqBeQwaKUxjWNSC4WJAM+r8MFVNTCIm
- JXXg2ob1QpTWIf14UjNmmZ98057BrNgVcPLcDGpEOoTsI3Tp6MCa1wODPd05gY4=
-X-Gm-Gg: ASbGnctAbtdGePYp9UG9DMa5vPp8tW4bA82LRPteIvbD17ne4bkRdx9GTcMWmdJX3qo
- qYZVTvgvqQbrF+qe3vC5ov6LaqJ6+5cah8C2A1AERYc7Jgp3EhHKoz2Z+dZozAK0AWs0sbrEGWn
- 593JuJEN3rilLb1FkveeLV35ocaKor3vt1ovn37tLS6Gx5xyvDsLicAUOyh2GtIT9HNlzZFYZPd
- Jqr1HwTkxQb8qPloPzIOmcfc88v6D/X1Uqjcuri198syg5VrWaWjbYvONvqFUMu6/qIWuw6bhiC
- l+wMm0mQEbr4ZetdYbKDh+evpjnPhYKKHu8gCjfRUUOsBK1A3tJD5qCCjrieZPB8aV8Nibo+t5I
- ErdJjmQ==
-X-Google-Smtp-Source: AGHT+IGuhlhg7ww4RTuH3UWjlBfmHz4bTInWpYGhaH81s7GN9mqRAz8v+ErlRb51b6c37aHOX1jcxQ==
-X-Received: by 2002:a05:6871:7427:b0:2c2:56f3:1c84 with SMTP id
- 586e51a60fabf-2cd3314c223mr1407236fac.25.1743867269629; 
- Sat, 05 Apr 2025 08:34:29 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc84545138sm1222651fac.4.2025.04.05.08.34.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Apr 2025 08:34:28 -0700 (PDT)
-Date: Sat, 5 Apr 2025 09:34:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Davis <afd@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] arm: mach-k3: Remove undefined Kconfig symbols BOARD
- and SPL_BOARD
-Message-ID: <20250405153426.GA5495@bill-the-cat>
-References: <20250319192958.276563-1-afd@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5bca=WY=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1743867521;
+ bh=qnCIVvv/OTHiDkxafEA9ATnl2P4rC3UANtAQy1ib6Fk=;
+ b=DlE71V+3LL/zRjE6n3xSxFtBw4VxdQQMCIWNowBwsiH391uCDAiTdQsA+4tThgaW/pWLv2NSD
+ QAOOUzg4NcXdjF7+YdrCZoaNX4lEEXJjE6Lucn7obG03os3mVFDXYEne37qADv54NXerkxBlYdX
+ 8rIEp3vifaL4UW/ZauDrXm3t0EXgndvEhOh7bJssE7hgqQcUIqKXZ8uIr/U4Kz3HHyTAti0U6Tf
+ Wimc7VFGfluslxNcjpqGwVO7Gzq55kLCUacjrgqg14zjfLZh9p2u0P+AuSPoBHDXOwKI0Cbupis
+ zOxpcpVjDCt4XyK6DXHFuOuaC0es6rfgjD+qYycWGpIw==
+X-Forward-Email-ID: 67f14e7d3dc50e09d12388bd
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Arnaud Patard <arnaud.patard@collabora.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 0/4] Add support for RAM boot from maskrom mode
+Date: Sat,  5 Apr 2025 15:38:20 +0000
+Message-ID: <20250405153832.1427549-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sDHz+EqPe0QHVLPy"
-Content-Disposition: inline
-In-Reply-To: <20250319192958.276563-1-afd@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,44 +70,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The BootROM in Rockchip SoCs will enter maskrom mode when boot firmware
+cannot be found in nand/spi/mmc storage.
 
---sDHz+EqPe0QHVLPy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In maskrom mode the USB OTG port can accept one of two custom commands.
 
-On Wed, Mar 19, 2025 at 02:29:56PM -0500, Andrew Davis wrote:
+Initially a 0x471 command to load TPL into SRAM. After TPL has been
+executed and it has returned back-to-BROM, a 0x472 command to load SPL
+into start of DRAM.
 
-> These are not defined nor used, they seem to be leftover or a typo,
-> remove them.
->=20
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
->  arch/arm/mach-k3/am62ax/Kconfig | 2 --
->  arch/arm/mach-k3/am64x/Kconfig  | 2 --
->  2 files changed, 4 deletions(-)
+This series adds two binman images that can be used to RAM boot from
+maskrom mode:
+- u-boot-rockchip-usb471.bin that contains TPL to init DRAM.
+- u-boot-rockchip-usb472.bin that contains SPL and the normal FIT
+  payload with i.e. U-Boot proper, TF-A and FDT.
 
-Can you please rebase this series on top of current next? Thanks.
+These images can be used with rkbin tools/boot_merger to create a loader
+image to be used with rkdeveloptool or rockusb tools, e.g.:
 
---=20
-Tom
+  Create loader image:
+    $ ../rkbin/tools/boot_merger ./RK3588MINIALL.ini
 
---sDHz+EqPe0QHVLPy
-Content-Type: application/pgp-signature; name="signature.asc"
+  Boot from maskrom:
+    $ rkdeveloptool db u-boot-rockchip-rk3588-loader.bin
+   or
+    $ rockusb download-boot u-boot-rockchip-rk3588-loader.bin
 
------BEGIN PGP SIGNATURE-----
+Or directly with tools such as rkflashtool or rkusbboot:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfxTYIACgkQFHw5/5Y0
-tywuTAv9Gclon4xbB0eeNsWQu6mpIbs9VzQR8thCXXwPXE33UNgGUBR0dT5V06XD
-dRlhr2KqwAhHcGw0EUbgZE3iBEFYTcuBmHLr5lmFwODjfil5v1UO0s+D5Hl896cI
-LVJNK2DM+LwYNKr2j4ZkRXD9YdzMKkPiJYBJfAIFGBhc4vgbN4OcBTLQwCH+Hrqw
-xErCYCph6Bbf2ABUsACpOllXdDTctT9AapwacSOUd6N+BzlSr33kmo2ERZVawF56
-JWCYSg7KNSfYxk/9aIAJFZS4pC/yEy8B/aev7n4HZDy0za65kXhIm65fxYSdBR7U
-O+IZJ31vAGZhRZqFejwJdkBsom28+YLtEwY0mMDdMjXr+ORujmuSlEWgIH1CAtEO
-0n6Jo7zf1sPahwpG//y9wb1NwxXRq25kvrS3LHOgjbBtrtGldS3CXtSDd8Q3bKBS
-JkqcSx1NbE72hEUbNhKvDDjGZBtf811/enNU8n8NzOgdDIO7mJOCVsMbELkCSaT9
-rVaX/IVa
-=fgPv
------END PGP SIGNATURE-----
+  $ rkflashtool l < u-boot-rockchip-usb471.bin
+  $ rkflashtool L < u-boot-rockchip-usb472.bin
+ or
+  $ rkusbboot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
 
---sDHz+EqPe0QHVLPy--
+Changes in v2:
+- Rebase on top of "rockchip: binman: Use a template for FIT and other
+  improvements" series
+- Add patch to fix booting into Linux on RK3588 board with 16+ GiB DRAM
+
+This series depends on the "rockchip: ROCKCHIP_COMMON_STACK_ADDR
+improvements" series [1] and the "rockchip: binman: Use a template for
+FIT and other improvements" series [2]. See [3] for a branch including
+both depends.
+
+[1] https://patchwork.ozlabs.org/cover/2050003/
+[2] https://patchwork.ozlabs.org/cover/2066701/
+[3] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ramboot-v2
+
+Jonas Karlman (4):
+  rockchip: Move TEXT_BASE to 8 MiB offset from start of DRAM
+  rockchip: Add support for RAM boot from maskrom mode
+  rockchip: Enable RAM boot using ROCKCHIP_MASKROM_IMAGE
+  rockchip: sdram: Add fallback that fixup DRAM gaps on RK3588
+
+ arch/arm/dts/rockchip-u-boot.dtsi       | 33 +++++++++++++++++++++++++
+ arch/arm/mach-rockchip/Kconfig          | 19 +++++++++++---
+ arch/arm/mach-rockchip/rk3308/Kconfig   |  3 ---
+ arch/arm/mach-rockchip/rk3568/Kconfig   |  3 ---
+ arch/arm/mach-rockchip/rk3588/Kconfig   |  3 ---
+ arch/arm/mach-rockchip/rk3588/rk3588.c  | 27 ++++++++++++++++++++
+ arch/arm/mach-rockchip/sdram.c          |  7 +++++-
+ arch/arm/mach-rockchip/spl-boot-order.c | 15 ++++++++---
+ boot/Kconfig                            |  3 +++
+ 9 files changed, 97 insertions(+), 16 deletions(-)
+
+-- 
+2.49.0
+
