@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FABBC36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 22:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 309CEC3601A
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 22:13:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 801AC82ACF;
-	Sun,  6 Apr 2025 00:13:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CCBC082B27;
+	Sun,  6 Apr 2025 00:13:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q7Lp+hFk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SjZADAUo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A536982AF1; Sun,  6 Apr 2025 00:13:25 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 3EF7982B27; Sun,  6 Apr 2025 00:13:32 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B03C82ABA
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 00:13:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C70EE82ABA
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 00:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-22435603572so29662625ad.1
- for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 15:13:23 -0700 (PDT)
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-af6a315b491so2785778a12.1
+ for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 15:13:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743891200; x=1744496000; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2cz7z7swAMsehUYzLCEXH0BmMulWUocaKcOyYXatQE0=;
- b=Q7Lp+hFkYnMvH2MKCmlViJhe13juzvGaqJ0agovlx76g7iQaDyCXpRpthKvRxgw016
- 6MSWs5D8LG+ap1oGc5Z6jvUPDcMmMiAsV6NCePoldl92ofakzmdwaWWbDafPF7nWAGak
- 4VRHtH9yWkMawX1tfW7VOYKSj1nejv8tuHVtg=
+ d=chromium.org; s=google; t=1743891207; x=1744496007; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SqRN4BOJRz5HuTYf5bcnlogkD6JTsPSyi60mFnFlM8k=;
+ b=SjZADAUoxvR+2/0xZKMhMQeputvoECmSJRGfsMIeAqQNuu7cGIBMzeIegXHvWshbHG
+ 7fhIhVt1bi16yHINqabi4VX9BjCF0sUmLMU65mmOcoE9bj3YR/Wge3oRsowkMC9tUb6K
+ vpdwX3XfV3Yg3k5jE/C8TreXgcNfi51Z60SHs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743891200; x=1744496000;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2cz7z7swAMsehUYzLCEXH0BmMulWUocaKcOyYXatQE0=;
- b=wPop+3QTVUOdKy8uG5JJ+/kgPkNwz+sWbt+Sdl6bCGAuAACPEEiQnRoXYSLTrO/5E7
- nsfXARNO1k6MDi9LgJVl8eLgcj1QuAXvet+bmItZszGSHw0BeVX1u0sPWzpc29un5A/q
- ePOQFPVgJ3zx1eqewxrPSDFivmqf81K9XR6usCs++Dez8eRwakwOQvrDo504Xz6JrPd2
- ilkR8NQFaB4e+lNxwOarGvViD1WSFJVL4z9O7EuZChKLfup7t48OiuMy+YlwR8zNSvUW
- zPPHYmpHqlI8El4Btw5fnei8ARrqlvEDa3OjZUmUX1eBhQ36+HX3Vg8od8irZ0Z1M1+S
- a2rg==
-X-Gm-Message-State: AOJu0YwR7wMCJ0n9I2c9Lfpuw4l8oPipR9r9K4UsIuwqz+lkgzHVLbQw
- ViHcAiaGlkjQHZz9G8PRkfLod8DIjKQDMUD4EFiT8Lfc4vTsNozzLvSwlbx2P5safAAEB+FPFI3
- 5Tw==
-X-Gm-Gg: ASbGnctq+Ken4B9+XHSKISQ/kpCW7Ny07hSaD5Biy/EHXVA/i12erL2WmnOYlRr7wn0
- eIPle38lj8HE4Jl4exifbFRIor7Aj6QgLnfyXn0O706Aykw4a9Jqm1erikMfx1aJazyBoQcisMH
- nkqky/TErFG2eZt9ZKqPs1o3cVoSb9ZtgPd22Z79iYvLIKG/Wr7jI39qhQ/4uKeO7HTKOKyc1Vq
- WGswipJQ1zYXk34rRWcyjmtNS80K6yP1qL8KHAtEiEmcMUFkSB3NwW56xTKrjtclJUysPLR0ZRm
- 27yRJb9tGX7DZlGqf50VH5hRtYfQCi1HoIzHnB8fdXI=
-X-Google-Smtp-Source: AGHT+IEvGnykscaxFnS+ZZnVMB/dybDBbLnatqncsuJ5I9ory/UWzWZ51gmIx9+LUoOF3ZJcFjgt0A==
-X-Received: by 2002:a17:903:2b0d:b0:220:d439:2485 with SMTP id
- d9443c01a7336-22a8a8745d5mr106438755ad.29.1743891200478; 
- Sat, 05 Apr 2025 15:13:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743891207; x=1744496007;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SqRN4BOJRz5HuTYf5bcnlogkD6JTsPSyi60mFnFlM8k=;
+ b=cbCsVJaovQ3kV/ftek3pVPJz5WfvVLOi6mP507AEkMXKluydQ3j0YuFpS9ebVJkgmv
+ cPzKxXTbsXIURkicfTdoGmHhT4Rlwg8n54eZfdBiIez9zxtJiSBum3xQkVeiyM62H0+e
+ NLpBs6qGMF/h9tJsMPiYad1e1nWKivF8mXQ0d2GhmR/fA9E7C1K65Mb5LRIr3tyaTe/k
+ 8n8Tk361M5VUUo2EDe2D8VTSY21/AwRxMz2IzO+k28Es1P3zdjuU0x6KzXiUlh70GRQJ
+ MoI3kP7RMnqeKvPQymXFSSX/KJi4saya4BN1dUlHYBuB03jsBKtgGcK5d7xlDNrMqqbn
+ q5ZQ==
+X-Gm-Message-State: AOJu0YxCyARJ7w2zuKNCV5Z7THaVfWWbEfrHgQRWl7KKTfbkPF0mWMXP
+ NPHpxTNtqwetfA1rVLM0cfWJk5ZcJlgKVhIpcOXk7jEWmho6ASDYmxT/t8xdaM78kd2OFsjqloI
+ P+Q==
+X-Gm-Gg: ASbGnctmj9OvOiQzpZIUhSAexwa9ROflIAQRbOK26nvcaqu3RVAtyIAjRe4t2tCOqzQ
+ RoGrcbGMVpxTvlC6IJTxI27l4H9gzT8u2aQlEHoK8GB/MThClWHLPlrcQnKWyJKnRORrtXAhAVh
+ X+IgRMHT3gLtjXPSP19DdmvFFU7c07yIrjIby3X40ww9nj7PSwjS4rfPwI6KZ08qB7Iiq8Z45xG
+ zrNq5yINNiwNuJMfZB//TKAVM7+ueiBlhvi+x7GUGbxerH790Vb4RB4XT1ucDxIoLwObNymPuc9
+ CxCgmLbN9TgPdtx0YaFygdfg73+F6y23vxSJyxMcIEk=
+X-Google-Smtp-Source: AGHT+IHSchHkvLwFTljc4pmaAMwO4NXUDeOWljG2BNk3f6NG0zzoKa8X1Ot9qHUasxR8KtEeO9ASUw==
+X-Received: by 2002:a17:902:c94e:b0:224:5a8:ba29 with SMTP id
+ d9443c01a7336-22a8a0b38bdmr87775605ad.43.1743891207123; 
+ Sat, 05 Apr 2025 15:13:27 -0700 (PDT)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2297866e612sm54431615ad.200.2025.04.05.15.13.15
+ d9443c01a7336-2297866e612sm54431615ad.200.2025.04.05.15.13.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Apr 2025 15:13:19 -0700 (PDT)
+ Sat, 05 Apr 2025 15:13:26 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -74,12 +75,15 @@ Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Kongyang Liu <seashell11234455@gmail.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH 1/3] net: designware: Disable DMA on removal
-Date: Sun,  6 Apr 2025 10:12:45 +1200
-Message-ID: <20250405221308.498047-1-sjg@chromium.org>
+ Ramon Fried <rfried.dev@gmail.com>, u-boot-amlogic@groups.io
+Subject: [PATCH 2/3] designware: Use the remove() method with related drivers
+Date: Sun,  6 Apr 2025 10:12:46 +1200
+Message-ID: <20250405221308.498047-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250405221308.498047-1-sjg@chromium.org>
+References: <20250405221308.498047-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -99,47 +103,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present, removing the device frees struct dw_eth_dev but does not
-disable DMA. When DMA is active, packets can be received even if the
-driver is not active.
-
-While it is possible that the memory used by the struct may remain
-untouched after removal, any other allocation may reuse that memory
-and result in DMA writing to random addresses.
-
-In most case U-Boot does this removal in announce_and_cleanup()
-immediately before jumping to the OS. No further allocations are done
-after that point.
-
-But with EFI_LOADER this function is not called before jumping to the
-EFI app. U-Boot continues to run while GRUB starts and finishes, as well
-as while Linux is starting up. During this time, devices cannot be
-removed, as they are in use. U-Boot completes the removal when
-efi_exit_boot_services() is called. It seems that this function does
-more allocations after calling dm_remove_devices_active() although I
-can't figure out where.
-
-Fix this by disabling DMA when the driver is removed.
+Several drivers make use of the designware Ethernet driver but do not
+implement the remove() method. Add this so that DMA is stopped when the
+OS is booted to avoid memory corruption, etc.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reported-by: Christian Kohlschütter <christian@kohlschutter.com>
 ---
 
- drivers/net/designware.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/net/designware.c    |  2 +-
+ drivers/net/designware.h    | 12 ++++++++++++
+ drivers/net/dwmac_meson8b.c |  6 ++++++
+ drivers/net/dwmac_s700.c    |  6 ++++++
+ drivers/net/dwmac_socfpga.c |  6 ++++++
+ 5 files changed, 31 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 07b0f49ef58..eebf14bd51a 100644
+index eebf14bd51a..d4d31925fca 100644
 --- a/drivers/net/designware.c
 +++ b/drivers/net/designware.c
-@@ -809,6 +809,7 @@ static int designware_eth_remove(struct udevice *dev)
+@@ -805,7 +805,7 @@ clk_err:
+ 	return err;
+ }
+ 
+-static int designware_eth_remove(struct udevice *dev)
++int designware_eth_remove(struct udevice *dev)
  {
  	struct dw_eth_dev *priv = dev_get_priv(dev);
  
-+	_dw_eth_halt(priv);
- 	free(priv->phydev);
- 	mdio_unregister(priv->bus);
- 	mdio_free(priv->bus);
+diff --git a/drivers/net/designware.h b/drivers/net/designware.h
+index e47101ccaf6..8c9d0190e03 100644
+--- a/drivers/net/designware.h
++++ b/drivers/net/designware.h
+@@ -247,6 +247,18 @@ struct dw_eth_dev {
+ 
+ int designware_eth_of_to_plat(struct udevice *dev);
+ int designware_eth_probe(struct udevice *dev);
++
++/**
++ * designware_eth_remove() - Remove the device
++ *
++ * Disables DMA and marks the device as remove. This must be called before
++ * booting an OS, to ensure that DMA is inactive.
++ *
++ * @dev: Device to remove
++ * Return 0 if OK, -ve on error
++ */
++int designware_eth_remove(struct udevice *dev);
++
+ extern const struct eth_ops designware_eth_ops;
+ 
+ struct dw_eth_pdata {
+diff --git a/drivers/net/dwmac_meson8b.c b/drivers/net/dwmac_meson8b.c
+index fde4aabbace..b2152f8da9b 100644
+--- a/drivers/net/dwmac_meson8b.c
++++ b/drivers/net/dwmac_meson8b.c
+@@ -145,6 +145,11 @@ static int dwmac_meson8b_probe(struct udevice *dev)
+ 	return designware_eth_probe(dev);
+ }
+ 
++static int dwmac_meson8b_remove(struct udevice *dev)
++{
++	return designware_eth_remove(dev);
++}
++
+ static const struct udevice_id dwmac_meson8b_ids[] = {
+ 	{ .compatible = "amlogic,meson-gxbb-dwmac", .data = (ulong)dwmac_setup_gx },
+ 	{ .compatible = "amlogic,meson-g12a-dwmac", .data = (ulong)dwmac_setup_axg },
+@@ -158,6 +163,7 @@ U_BOOT_DRIVER(dwmac_meson8b) = {
+ 	.of_match	= dwmac_meson8b_ids,
+ 	.of_to_plat = dwmac_meson8b_of_to_plat,
+ 	.probe		= dwmac_meson8b_probe,
++	.remove		= dwmac_meson8b_remove,
+ 	.ops		= &designware_eth_ops,
+ 	.priv_auto	= sizeof(struct dw_eth_dev),
+ 	.plat_auto	= sizeof(struct dwmac_meson8b_plat),
+diff --git a/drivers/net/dwmac_s700.c b/drivers/net/dwmac_s700.c
+index 969d247b4f3..cfb37c3aa71 100644
+--- a/drivers/net/dwmac_s700.c
++++ b/drivers/net/dwmac_s700.c
+@@ -44,6 +44,11 @@ static int dwmac_s700_probe(struct udevice *dev)
+ 	return designware_eth_probe(dev);
+ }
+ 
++static int dwmac_s700_remove(struct udevice *dev)
++{
++	return designware_eth_remove(dev);
++}
++
+ static int dwmac_s700_of_to_plat(struct udevice *dev)
+ {
+ 	return designware_eth_of_to_plat(dev);
+@@ -60,6 +65,7 @@ U_BOOT_DRIVER(dwmac_s700) = {
+ 	.of_match = dwmac_s700_ids,
+ 	.of_to_plat = dwmac_s700_of_to_plat,
+ 	.probe  = dwmac_s700_probe,
++	.remove	= dwmac_s700_remove,
+ 	.ops    = &designware_eth_ops,
+ 	.priv_auto	= sizeof(struct dw_eth_dev),
+ 	.plat_auto	= sizeof(struct eth_pdata),
+diff --git a/drivers/net/dwmac_socfpga.c b/drivers/net/dwmac_socfpga.c
+index a9e2d8c0972..8e7a9975d28 100644
+--- a/drivers/net/dwmac_socfpga.c
++++ b/drivers/net/dwmac_socfpga.c
+@@ -130,6 +130,11 @@ static int dwmac_socfpga_probe(struct udevice *dev)
+ 	return designware_eth_probe(dev);
+ }
+ 
++static int dwmac_socfpga_remove(struct udevice *dev)
++{
++	return designware_eth_remove(dev);
++}
++
+ static const struct udevice_id dwmac_socfpga_ids[] = {
+ 	{ .compatible = "altr,socfpga-stmmac" },
+ 	{ }
+@@ -141,6 +146,7 @@ U_BOOT_DRIVER(dwmac_socfpga) = {
+ 	.of_match	= dwmac_socfpga_ids,
+ 	.of_to_plat = dwmac_socfpga_of_to_plat,
+ 	.probe		= dwmac_socfpga_probe,
++	.remove		= dwmac_socfpga_remove,
+ 	.ops		= &designware_eth_ops,
+ 	.priv_auto	= sizeof(struct dw_eth_dev),
+ 	.plat_auto	= sizeof(struct dwmac_socfpga_plat),
 -- 
 2.43.0
 
