@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA4FC36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 14:28:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCE6C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 14:28:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E147A8215B;
-	Sat,  5 Apr 2025 16:28:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4441182A7B;
+	Sat,  5 Apr 2025 16:28:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PmJyAUmF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XXfVMI8p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1533C82A64; Sat,  5 Apr 2025 16:28:12 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id CE82882A7B; Sat,  5 Apr 2025 16:28:13 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCC3882063
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 16:28:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9766C82A53
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 16:28:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3feb3f54339so2116320b6e.1
- for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 07:28:09 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5fcd61e9bcdso1394833eaf.0
+ for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 07:28:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743863288; x=1744468088; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743863290; x=1744468090; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8fhvvFXkNISWcOMDA2AiagiXRsitazxG8pKdrDr+SqI=;
- b=PmJyAUmFgPbicOmWMN8ngcvEc+tkfgELC93BZwesSw0W0JTGMtRlgxy9ci46BdHRHE
- TaZJGjDWT9OTuRttT0IC+xA4iaAgzzvaXpN7KnP1CyU/bnZAkV2Kdh1c1z2rjaJJy7dF
- gsAK+4agAfCB5zF9yxi+gthE7MxiufPEPrrh4=
+ bh=ZgmcP9vEmFoAYdU9gcnoxIjBSA/eV2oFdGWrwFdwi2A=;
+ b=XXfVMI8pmQImZKHTyC6nzKuU5y4SFYjdmBbQP6QFMshtBrR7XlytiTi2/dJ2kzk23D
+ luOksyVPiJuk1+no3eQ2Y7/k7deuCYOolxOowUf/L7vljyYQNx2AWXyiNHb9D6X6s98S
+ iwvjjh8S0qjP423+9WmLdUbFqiy0pkS0/GrDs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743863288; x=1744468088;
+ d=1e100.net; s=20230601; t=1743863290; x=1744468090;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8fhvvFXkNISWcOMDA2AiagiXRsitazxG8pKdrDr+SqI=;
- b=LbAK9l0Yx/CHqNOykmFL8qCevL5/HS/kHOiyD/35FIAvvNZy6CRCH/zErZQMZSQk/g
- ynSWVZnvk042UgtWXkDInMCGGh/YMI7tYl66Qfn9DTT2MYMi5wwwrR5U6VcJ2wC2V8oY
- RiU3CgGa5g0EOk5l+o8/JkSnW6SPwk+euFrvGJTkXGFQAO4gAODcJ/xK0169722EJdRD
- GXdJ9BZ0tLBoIV8yl1wCAVTwFrTM+o4tEjrRBGlVKi1AxpzsV/d9mSO4yBxax3M3B/hb
- 22HVHR/dJ480G6DXZsBjkW51Ok/qJ3qgi75bIYt25DY9ZzF0Xddfa6EJ7cKHBqisdOa9
- +sIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV45W4t1CwYpl+59rJd9drmjtrj3cvYA9SMo2Y+bA2ROcZky6srXr1JY0v+WpY0RGUFfmyNGhM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3I6CEExryJ9A/7qGOtIPfO1hlPGw5gsMeomSkr4AqmN0tjxIq
- RiuHq2Bd7l3rRV2uQ4VQyfaqXUcxwgVmsVqYah/x/2VwmZOViI7YJrl2JXy25dE=
-X-Gm-Gg: ASbGncuOxqSrgqB66H/JRks720gvqkiaQk2SzgJqjHVDmroFqUQ3+uiRFYVyXnnIkIg
- 824LCTrYEhJ7qs6Crs1qrhiZmYUZzxcC52lLNSN0wKl6Z48i1JopDaWPjoQNfPn89yRoUVuhEVR
- cWt5aHZWWF6Hdj4FapmhNkEwhvOtGdx2oS1Kq5xC+uzkp8ft+Yc9GmwMqRGwEyZYugD/fQp5ZMt
- wYVCc0T8sbuvfW5hV71lJXrr2eGjUJQroyztfRfOTpOfMOMrTJV3YD8QA08AuzNgLvpbRcgZjZY
- 5HLkau5pAv8sx0M/Fn+9QSv2UBELN/UFmZ4ViOUI9mLAy7ULdcukfAxbT7XH2QOSR3kIOPH6tnW
- evkCC
-X-Google-Smtp-Source: AGHT+IF94loiaj2STAaqd92bv/7BiaKukH9CivSNDZnPn9BImgsn5+jB1zZbfQD3h7pgkw0CsNSWdw==
-X-Received: by 2002:a05:6808:22a8:b0:3f9:d5a2:8999 with SMTP id
- 5614622812f47-4004655e008mr3789882b6e.3.1743863288580; 
- Sat, 05 Apr 2025 07:28:08 -0700 (PDT)
+ bh=ZgmcP9vEmFoAYdU9gcnoxIjBSA/eV2oFdGWrwFdwi2A=;
+ b=g7eM5/x1og7xq+F9AUx7pnRn+A1wQkfMfahBLOvkyzMLb6nljFyzAyFaJJli3YIkzP
+ t9C6NANPQYIuF6D4RhhBMDdONCHLTkKnEpMkzKPzJGZzLMNz0fnJvizk4LfSTRi2xvFH
+ QI6E0GAHdst56p/eqH/sTW9wV6jZMqOt5qOfqmiM96yhsrCk/i1sZZRCH7qoLnjqEhez
+ BzZ0QybNWY6TEufaguhnG5XTyBVEfQIG/ZinE0dlcTTNXHEkGBk0hx6oQrirnZ2MIDQt
+ c91d3RCmaqaM8pEWA++Ln1shUh7mgDZlgrro6o1U9i7TwUlONWRZWhfAJcyE9C3sjOkN
+ XOzA==
+X-Gm-Message-State: AOJu0Yz/G3gt7zSymDhhMRlDk15lGn876+xraoXCTnlyrN5tPBpQ3oew
+ 0BcChtlUCuZj7LpVp18e2V377CIX5nXnpZ1V7zz7ZCNvxTm4Kbj+rUC3HXzxuVw=
+X-Gm-Gg: ASbGncukO94Ftvu8o9/4rf7sipMwqxYMA984s+auUzVTLI+e18/XBhusa+2EmFop+A3
+ bI9ijANhDAXEh9GxJDgw+VZFNrFDBPYHjKrIEicemUehGNy5RPBguLJKjWIqku/pIgw8x+h326d
+ DSmqJsEzS8syRJRTvdL//5scjeXPNX4SyNCUOKWkceF3/aM9XIC2Po/RpHv+SZz8R0EgyC1DAkY
+ xwarG5rNC1/GSqYKdNRs8JZXyy1yVlSjFQje4XwzMi1unrWAJSOaGTk4y1Ty1r9reWnlp6ShPWz
+ 2XahRoUjyNeJxj/opch0YrR7QbFHuirXz/GfvTPCtsQJrwGmplc7klykveqqmKsO37u8nkd8G5i
+ w65uL
+X-Google-Smtp-Source: AGHT+IHpocQAFKOt/uHSSNuw6x4KFdeoeW7m549SGIb3hd/JhbJh1i6Tf2jlYmOpLIKY45uEE1rkSg==
+X-Received: by 2002:a05:6820:221d:b0:603:f9e1:1914 with SMTP id
+ 006d021491bc7-6041ff5b39bmr1695649eaf.3.1743863290194; 
+ Sat, 05 Apr 2025 07:28:10 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6040c4aaa69sm1055979eaf.3.2025.04.05.07.28.07
+ 006d021491bc7-6040c4aaa69sm1055979eaf.3.2025.04.05.07.28.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Apr 2025 07:28:07 -0700 (PDT)
+ Sat, 05 Apr 2025 07:28:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- =?utf-8?q?Pierre-Cl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20250319072203.327431-1-ilias.apalodimas@linaro.org>
-References: <20250319072203.327431-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] arm64: Fix page permissions for platforms running at EL2
-Message-Id: <174386328733.2689048.9688784248751999385.b4-ty@konsulko.com>
-Date: Sat, 05 Apr 2025 08:28:07 -0600
+To: u-boot@lists.denx.de, Harsha Vardhan V M <h-vm@ti.com>
+Cc: vigneshr@ti.com, k-malarvizhi@ti.com, kamlesh@ti.com
+In-Reply-To: <20250319084714.335777-1-h-vm@ti.com>
+References: <20250319084714.335777-1-h-vm@ti.com>
+Subject: Re: [PATCH 0/5] cmd: fuse: Introduce fuse writebuff sub-system and
+ clean up
+Message-Id: <174386328874.2689048.12289214275863558521.b4-ty@konsulko.com>
+Date: Sat, 05 Apr 2025 08:28:08 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,24 +96,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Mar 2025 09:22:02 +0200, Ilias Apalodimas wrote:
+On Wed, 19 Mar 2025 14:17:09 +0530, Harsha Vardhan V M wrote:
 
-> We currently set both and print both PXN and UXN bits when removing
-> execution for pages. This happens even in the existing per platform
-> definitions of 'struct mm_region'.
+> This patch series introduces the fuse writebuff sub-system command and
+> makes improvements to the existing fuse implementation by removing the
+> custom string functions. The patches are required to be applied in
+> sequence.
 > 
-> That's not entirely correct though. For stage-1 translations, if a
-> platform runs on a translation regime with a single privilege level or the
-> the translation regime supports two privilege levels and we are not
-> in EL1&0 with HCR_EL2.{NV, NV1} = {1, 1} only BIT54 (XN) is needed
-> and BIT53(PXN) is reserved 0.
+> The series consists of the following changes:
+> Patch 1 removes custom string functions and replaces them with standard
+> string functions.
+> Patch 2 introduces fuse.rst documentation for fuse commands.
+> Patch 3 introduces the fuse writebuff sub-system command, allowing to
+> write a structured buffer in memory to fuses, and implementing the
+> necessary function calls.
+> Patch 4 enables the fuse sub-system in the K3 platform.
+> Patch 5 updates the fuse.rst documentation to include details about the
+> new fuse writebuff command.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm64: Fix page permissions for platforms running at EL2
-      commit: a5ac47911abec63bcc5b3d2561ed9a5cb5a63841
+[1/5] cmd: fuse: Remove custom string functions
+      commit: 005eeda378b4897577eb82b30e5c260014c5e727
+[2/5] doc: cmd: Add documentation for fuse command
+      commit: 833c05ea272a086b5428166552ceb021b50c4cda
+[3/5] cmd: fuse: Add fuse writebuff sub-system command
+      commit: 578e7882bfb79848ff91cd65a5ebf4e795d26bb5
+[4/5] drivers: k3_fuse: Add fuse sub-system func calls
+      commit: ed5f2e5bed91b6daa4f051b5e11efbaebfec9cb1
+[5/5] doc: cmd: Add fuse writebuff cmd documentation
+      commit: 9f6b1ff8d08a92bbddf3c6226b8c2fdaf8df9515
 -- 
 Tom
 
