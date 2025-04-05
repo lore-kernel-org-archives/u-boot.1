@@ -4,83 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE43C36010
-	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 11:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8EF5C36010
+	for <u-boot@archiver.kernel.org>; Sat,  5 Apr 2025 12:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0F6182991;
-	Sat,  5 Apr 2025 13:00:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C37D5828AB;
+	Sat,  5 Apr 2025 14:33:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JcKQSxKS";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F2D5829C3; Sat,  5 Apr 2025 13:00:17 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7652F8215B
- for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 13:00:12 +0200 (CEST)
+ id 29ADA82991; Sat,  5 Apr 2025 14:33:35 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 68DB68215B
+ for <u-boot@lists.denx.de>; Sat,  5 Apr 2025 14:33:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e6e1cd3f1c5so1532465276.0
- for <u-boot@lists.denx.de>; Sat, 05 Apr 2025 04:00:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743850811; x=1744455611; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S6leKF1nlt4E6Womzqa1EsDMMdPgf7fBVjIWlJOkOuo=;
- b=JcKQSxKS7tCMiHOVlRtPSlHPw+WPM4yW1bwUs+F/8sh7WgqjbbOPoNWMnvLrLaHGwO
- m/S9tmvTEMAAVTR+AMHV6LiPXOZm2TrKHIuVBiWSy9XE9hjo26lect00VmsVAS2gvmGY
- 3RtAdHnqMvR3kX/sac+C0HzewjaK020FTC1g6psAEx6BDKlfHsSHiYOH2PMNpNiYGlPV
- clEvl19qND4vGpT+31KhtwbVSNOYrSmkYFlZ9X5HExwveoDvX/2GqsEd4AG8l327wYtG
- w0t6e/DldVV+bn2Gqft4T5Q8wvlW2GOwf5N4FJ7O7IbnlnUVWL4nd1ozvWNBPqyLfbe+
- 1YwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743850811; x=1744455611;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S6leKF1nlt4E6Womzqa1EsDMMdPgf7fBVjIWlJOkOuo=;
- b=RaIhMGoQoJo0mS6juCE7/l8OMy/dk/sGJiZbAUThWQs90w/2u1v8zoeyzuCAU3nOJ8
- qOPLzQkENrKW3cMjrHa2EnueTPgpkfXVabAl/bfw2BDPAy+jSgwLskuihsJ2f8w/qPGQ
- PaFGo4YzqRV/53USDQgllwPMJ3xKHkeFjK++FTIoHbXCRYWfnk7CggvhPfB1M2CA7GT1
- cHblFGn490S+GlBmlFRjvPmQeJT0x54ol/h1bCwf/iuUOXKm3zWK3Ok36Q3c4dSj430B
- trYB/ecfGxi1NBRMDSymFkdZ79sbtyFzJ7cFJpgsZRu60GzVLVU3H56riE0I4I3k9/Nf
- xqjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX94OGpDl6nGSU1CVPRQNUBvv0FX0nKRJqGmLMDHFKuzwuWcxuYNmUWMDCJ83ZCTW/iCA4w7MM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9qnZ99KGognMMspk8gW3h+oCpnZ4BdefpZE/hnSeP1LNB+juJ
- qrKJFLXJqxejTqAAVFSMrie/8pRp2XA7AlWsOZIRy3dUQozXoTBNoDiMHOJ2PBKaSswOmg956ux
- uTg0w4cP9NfUUYcmVxCzRLyl8v11RXHUOu/wm32rrBnCczclaMgA=
-X-Gm-Gg: ASbGncuNSWWgZYrLqx2cSbxfBORXbFmuEBgq2zAeHiNGSrdtr0xa7BvvRSID1rXxviO
- jR1RidSBrmJTlE2yaNXnwfG1YJtozg37IqW8gkp9vOGe1SEGNxPG2AFZYJ6IWo/vjOkGhWbAECy
- u2nHYzKzV/Fexb81CCTc9QONR2
-X-Google-Smtp-Source: AGHT+IHmOiSiblAwRlVTcChF/JM9CWCJ1YmitEIp4CTXMA0q/xJBx4IrZ51wn09W+uvggbMo8WfE4eTWdwjezHjtcKI=
-X-Received: by 2002:a05:6902:2602:b0:e6d:e24c:34bb with SMTP id
- 3f1490d57ef6-e6e316ea4eemr3799468276.2.1743850811193; Sat, 05 Apr 2025
- 04:00:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8D89A1063;
+ Sat,  5 Apr 2025 05:33:33 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A404A3F59E;
+ Sat,  5 Apr 2025 05:33:30 -0700 (PDT)
+Date: Sat, 5 Apr 2025 13:32:48 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Yixun Lan <dlan@gentoo.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Jernej
+ Skrabec <jernej.skrabec@gmail.com>, Mikhail Kalashnikov
+ <iuncuim@gmail.com>, u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 00/34] sunxi: clock refactoring and Allwinner A523 support
+Message-ID: <20250405133248.62927bff@minigeek.lan>
+In-Reply-To: <20250405024433-GYA8928@gentoo>
+References: <20250323113544.7933-1-andre.przywara@arm.com>
+ <20250405024433-GYA8928@gentoo>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20250405065812.33027-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250405065812.33027-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 5 Apr 2025 13:00:00 +0200
-X-Gm-Features: ATxdqUHAkcYgbls_UGQYYzDrMsTbQT8ZBPZ-174CfdPNMSG8ZTwkS013BueL-_0
-Message-ID: <CAC_iWjLk3dqrMjSB024dUQR-tX4LMDUuFTi-2x_01Bpn3gVZSw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: stop network in EXIT_BOOT_SERVICES
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michael Brown <mcb30@ipxe.org>, 
- =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,63 +58,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Apr 5, 2025, 08:58 Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
+On Sat, 5 Apr 2025 02:44:33 +0000
+Yixun Lan <dlan@gentoo.org> wrote:
 
-> It has been reported that memory corruption can occurred because network
-> packages where received after EXIT_BOOT_SERVICES. See the thread
-> starting at [1].
->
-> We try to remove all drivers when EXIT_BOOT_SERVICES is called. But
->
-> * Some network drivers don't call their own stop method when removed.
-> * Some network drivers don't have a remove method.
-> * Some devices have CONFIG_DM_DEVICE_REMOVE=3Dn.
->
-> Let's call eth_halt() in EXIT_BOOT_SERVICES explicitly.
->
+Hi,
 
-Thanks Heinrich
+> On 11:35 Sun 23 Mar     , Andre Przywara wrote:
+> > This series introduces support for the Allwinner A523 SoC family. The
+> > same die is used in different packages: the A523, A527, T527, and H728:
+> > they connect a different set of peripherals to the pins, or enable extra
+> > goodies like an NPU. From a U-Boot perspective those chips do not differ
+> > much, all the differences are described in the board DT files.
+> > These patches are not the most refined at the moment, but I hope that
+> > people start reviewing them, so we can merge the ones that are ready,
+> > to reduce their number.
+> > 
+> > To be able to share the SPL clock code, the existing H6 code gets
+> > refactored in patches 01-13. This removes the C struct describing the
+> > 127 clock registers, and replaces it with macros defining the register
+> > offsets. For more rationale and explanation see the 01/34 commit message.
+> > 
+> > Patches 14-20 extend the existing Allwinner U-Boot drivers to cope with
+> > some of the changed peripherals, this includes the mandatory clock and
+> > pinctrl drivers, but also some clock tweaks for the MMC controller
+> > driver, and support for the new watchdog and the AXP323 used.
+> > 
+> > Patches 21-23 update some SPL bits to be able to cope with the A523.
+> > Patches 24-28 extend the FEL handling code: the A523 has a GICv3, which
+> > requires saving some GICv3 system registers, plus the IRQ mode stack
+> > pointer. Patches 25-27 refactor the CPU clock code, and add the new
+> > clock bits required by the A523.
+> > 
+> > Patch 29-32 add the new SPL bits for the A523, most prominently the DRAM
+> > initialisation code. Many thanks to Jernej and Mikhail for providing
+> > this part, there is a great reverse engineering and testing effort behind
+> > this.
+> > 
+> > Patch 33 copies the DT files from the proposed Linux patches. They have
+> > not been merged yet, mostly due to one missing DT binding dependency in
+> > the linux-next tree, but have otherwise been agreed upon, with almost
+> > every used binding being already merged. Eventually we will use the copy
+> > from the DT rebasing repo, but for now those files must do.
+> > 
+> > The final patch adds defconfig files for the three boards that seem to be
+> > the most popular at the moment, they include two development boards and
+> > one TV box. The most interesting bits in there are the DRAM parameters.
+> > 
+> > Please have a look, review, and test.
+> > 
+> > Thanks!
+> > Andre
+> >   
+> 
+> 
+> Is there any docs about how to compile and run this patch series?
+> I've got some complaint while apply to v2025.04-rc5 (not found correct base myself)
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Yes, it's pretty much work in progress, I just wanted to get the
+patches out on the list, to start the review process.
+You should be able to base it on "sunxi-next" or U-Boot's main next
+branch.
 
->
-> [1]
->
-> https://lore.kernel.org/all/C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschu=
-tter.com/
->
-> Cc: Michael Brown <mcb30@ipxe.org>
-> Reported-by: Christian Kohlsch=C3=BCtter <christian@kohlschutter.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_boottime.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.=
-c
-> index 5164cb15986..eaa6464fa39 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -15,6 +15,7 @@
->  #include <irq_func.h>
->  #include <log.h>
->  #include <malloc.h>
-> +#include <net-common.h>
->  #include <pe.h>
->  #include <time.h>
->  #include <u-boot/crc.h>
-> @@ -2235,6 +2236,8 @@ static efi_status_t EFIAPI
-> efi_exit_boot_services(efi_handle_t image_handle,
->                 bootm_disable_interrupts();
->                 if (IS_ENABLED(CONFIG_USB_DEVICE))
->                         udc_disconnect();
-> +               if (IS_ENABLED(CONFIG_DM_ETH))
-> +                       eth_halt();
->                 board_quiesce_devices();
->                 dm_remove_devices_active();
->         }
-> --
-> 2.48.1
->
->
+> 
+> I'm following doc/board/allwinner/sunxi.rst to build and using sunxi-tools to run,
+> but it seems stuck at running uboot (should pass SPL stage)
+> 
+> here are steps I tried
+> 
+> 1) build trust firmware
+> $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+> $ make CROSS_COMPILE=aarch64-unknown-linux-gnu- PLAT=sun50i_a64
+> is sun50i_a64 correct for a527 SoC?
+
+No, A64 will not work, as you figured ;-)
+Jernej has a WIP branch for TF-A here:
+https://github.com/jernejsk/arm-trusted-firmware/commits/a523/
+Please use this and the "sun55i_a523" build target.
+
+> besides, got a oversize error if DEBUG=1 enabled
+
+Yes, this is a known issue, the available secure SRAM on the A64 is
+just too small for all the features. Should not be a problem on other
+SoCs including the A523/T527, though.
+
+> 
+> 2) build SCP
+
+SCP is highly optional, and there is no port available anyway.
+I would not know of someone working on it as well.
+
+> 
+> 3) build uboot
+> $ export BL31=/home/work/trusted-firmware-a/build/sun50i_a64/release/bl31.bin  
+> export SCP..
+> $ make ARCH=arm CROSS_COMPILE=aarch64-unknown-linux-gnu- -j30 radxa-a5e_defconfig
+> $ make ARCH=arm CROSS_COMPILE=aarch64-unknown-linux-gnu- -j30
+
+Just use .../build/sun55i_a523/debug/bl31.bin, as mentioned above.
+
+> 
+> 4) run:  sunxi-fel -v uboot u-boot-sunxi-with-spl.bin
+>  4.a) serial console from a527 board
+> 
+> U-Boot SPL 2025.04-rc5-00048-g432f0f975187 (Apr 05 2025 - 10:21:15 +0800)
+> DRAM: 4096 MiB
+> Trying to boot from FEL
+
+Yes, this is the effect when TF-A is built for the wrong target,
+normally you would see TF-A messages here.
+ 
+>  4.b) from host which run sunxi-fel
+> 
+>  $ sunxi-fel -v uboot u-boot-sunxi-with-spl.bin
+> found DT name in SPL header: sun55i-a527-radxa-a5e
+> Stack pointers: sp_irq=0x00045400, sp=0x00060300
+> MMU is not enabled by BROM
+> => Executing the SPL... done.  
+> loading image "ARM Trusted Firmware" (37076 bytes) to 0x54000
+> loading image "U-Boot" (657216 bytes) to 0x4a000000
+> loading DTB "sun55i-a527-radxa-a5e" (19024 bytes)
+> Starting U-Boot (0x00054000).
+> Store entry point 0x00054000 to RVBAR 0x08000040, and request warm reset with RMR mode 3... done.
+> 
+> is ATF loading address correct, 0x54000 here? which seems override sp address?
+
+Yes, that's the correct address. Which SP would it collide with, anyway?
+
+So in summary you did everything right, and the SPL is returning to FEL
+with DRAM initialised, which is the biggest hurdle.
+Just use the correct A523 TF-A branch and build target.
+
+Cheers,
+Andre.
