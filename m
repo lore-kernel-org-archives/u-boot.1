@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF309C3600C
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 08:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81AEC3600C
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 09:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8EBF82B17;
-	Sun,  6 Apr 2025 10:50:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF3BF82B12;
+	Sun,  6 Apr 2025 11:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Pppdrtk7";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Kx5CENH2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAFD082B1F; Sun,  6 Apr 2025 10:50:36 +0200 (CEST)
+ id B9C4A82B17; Sun,  6 Apr 2025 11:02:47 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B89982B12
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 10:50:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44F75809A5
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 11:02:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,14 +28,14 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1743929431;
- bh=9XzowZunV9YnAlwVYf6RMEN+NHYyswz59veFSnyn1ZE=;
- b=Pppdrtk7LIKwynCkb6czFHoQcnhbkOSJSC8gQsXhS/UsRJkFCKXMN70hSsswkyFJC4m8+b+/9
- /yFACSSdBxqBeoJQc4VqNvWai6cwtsP42CtVnhqo7NdnDbUUlk3QpVyD6o/ROVZCyyN8iaMkYn7
- 2G6pgQ60gFgrfsSl/yJ9ZBhZ3r8eAjofuz+INDhJXBqBySSWLRjTpDfFAwJFEegWHbzs6VRUkbf
- gkO+PNq6UEviu4j4XN+QorICoLTtT7hrm/ey9SnyLcbE/OzQ3GBlLC/nOKdgJbcEugano9rYLH0
- jCwIh+bZ++yeAAJyPgtsO/wL2zV8yHAA6UsO4GoQQmYg==
-X-Forward-Email-ID: 67f24052728eb85f56834b3b
+ s=fe-e1b5cab7be; t=1743930163;
+ bh=kbe8OfnKfI6P17mSWosHk2ax9DEFN8/6RHt0lom+niI=;
+ b=Kx5CENH2b40JmlhNrLS+STB0pePj56K4K4hCJklY+4J/ivybT0l8ZTEHSG7kPR6domYje/hEX
+ i9/WttbW3Jpu7UbeIUN3X1R96aCPOi++sqLEDi5qxYQ27ipKq3btPx+z0GZ+PGJQ78O6CBE/YLj
+ RmhwEPGBralvGOxTZK3D/BsdamnbFbeWzIM9GhKwBdjoELWHz6j4/IhxSeeTK8fqSVVhi5MrrvF
+ gKCbKvBO78eLhLiMUTABv6NFnWXsaC80tmFCyuuDC3jhIZ+t5c1QtNHJ6udDaVBy8URsuf/telI
+ wTJIxhhWPmVdHFDBg3wGCV2pNTyF/u08/nUwD8HviMQg==
+X-Forward-Email-ID: 67f24331728eb85f56834def
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.0
@@ -43,11 +43,12 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <33614601-f517-4031-b947-702d2bba7d69@kwiboo.se>
-Date: Sun, 6 Apr 2025 10:50:19 +0200
+Message-ID: <dc4dec57-6fba-4224-9f84-1cc63c58eacd@kwiboo.se>
+Date: Sun, 6 Apr 2025 11:02:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] net: designware: Disable DMA on removal
+Subject: Re: [PATCH 2/3] designware: Use the remove() method with related
+ drivers
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
  <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -56,12 +57,14 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
  Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Kongyang Liu <seashell11234455@gmail.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>
+ Ramon Fried <rfried.dev@gmail.com>, u-boot-amlogic@groups.io
 References: <20250405221308.498047-1-sjg@chromium.org>
+ <20250405221308.498047-2-sjg@chromium.org>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250405221308.498047-1-sjg@chromium.org>
+In-Reply-To: <20250405221308.498047-2-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -83,55 +86,148 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 2025-04-06 00:12, Simon Glass wrote:
-> At present, removing the device frees struct dw_eth_dev but does not
-> disable DMA. When DMA is active, packets can be received even if the
-> driver is not active.
-> 
-> While it is possible that the memory used by the struct may remain
-> untouched after removal, any other allocation may reuse that memory
-> and result in DMA writing to random addresses.
-> 
-> In most case U-Boot does this removal in announce_and_cleanup()
-> immediately before jumping to the OS. No further allocations are done
-> after that point.
-> 
-> But with EFI_LOADER this function is not called before jumping to the
-> EFI app. U-Boot continues to run while GRUB starts and finishes, as well
-> as while Linux is starting up. During this time, devices cannot be
-> removed, as they are in use. U-Boot completes the removal when
-> efi_exit_boot_services() is called. It seems that this function does
-> more allocations after calling dm_remove_devices_active() although I
-> can't figure out where.
-> 
-> Fix this by disabling DMA when the driver is removed.
+> Several drivers make use of the designware Ethernet driver but do not
+> implement the remove() method. Add this so that DMA is stopped when the
+> OS is booted to avoid memory corruption, etc.
+
+The designware Ethernet driver core should not need the remove() ops as
+the eth_ops.stop() ops already should stop DMA. And the eth-uclass 
+pre_remove() ops already call the eth_ops.stop() ops.
+
+All these drivers seem to use designware_eth_ops and thus have correct
+stop() ops configured and should really not need the remove() ops.
+
+Side note, this also misses the gmac rockchip driver that uses its own
+eth_ops instead of designware_eth_ops, however it also use same stop()
+ops as all these drivers.
+
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > Reported-by: Christian Kohlschütter <christian@kohlschutter.com>
 > ---
 > 
->  drivers/net/designware.c | 1 +
->  1 file changed, 1 insertion(+)
+>  drivers/net/designware.c    |  2 +-
+>  drivers/net/designware.h    | 12 ++++++++++++
+>  drivers/net/dwmac_meson8b.c |  6 ++++++
+>  drivers/net/dwmac_s700.c    |  6 ++++++
+>  drivers/net/dwmac_socfpga.c |  6 ++++++
+>  5 files changed, 31 insertions(+), 1 deletion(-)
 > 
 > diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-> index 07b0f49ef58..eebf14bd51a 100644
+> index eebf14bd51a..d4d31925fca 100644
 > --- a/drivers/net/designware.c
 > +++ b/drivers/net/designware.c
-> @@ -809,6 +809,7 @@ static int designware_eth_remove(struct udevice *dev)
+> @@ -805,7 +805,7 @@ clk_err:
+>  	return err;
+>  }
+>  
+> -static int designware_eth_remove(struct udevice *dev)
+> +int designware_eth_remove(struct udevice *dev)
 >  {
 >  	struct dw_eth_dev *priv = dev_get_priv(dev);
 >  
-> +	_dw_eth_halt(priv);
+> diff --git a/drivers/net/designware.h b/drivers/net/designware.h
+> index e47101ccaf6..8c9d0190e03 100644
+> --- a/drivers/net/designware.h
+> +++ b/drivers/net/designware.h
+> @@ -247,6 +247,18 @@ struct dw_eth_dev {
+>  
+>  int designware_eth_of_to_plat(struct udevice *dev);
+>  int designware_eth_probe(struct udevice *dev);
+> +
+> +/**
+> + * designware_eth_remove() - Remove the device
+> + *
+> + * Disables DMA and marks the device as remove. This must be called before
+> + * booting an OS, to ensure that DMA is inactive.
+> + *
+> + * @dev: Device to remove
+> + * Return 0 if OK, -ve on error
+> + */
+> +int designware_eth_remove(struct udevice *dev);
+> +
+>  extern const struct eth_ops designware_eth_ops;
+>  
+>  struct dw_eth_pdata {
+> diff --git a/drivers/net/dwmac_meson8b.c b/drivers/net/dwmac_meson8b.c
+> index fde4aabbace..b2152f8da9b 100644
+> --- a/drivers/net/dwmac_meson8b.c
+> +++ b/drivers/net/dwmac_meson8b.c
+> @@ -145,6 +145,11 @@ static int dwmac_meson8b_probe(struct udevice *dev)
+>  	return designware_eth_probe(dev);
+>  }
+>  
+> +static int dwmac_meson8b_remove(struct udevice *dev)
+> +{
+> +	return designware_eth_remove(dev);
+> +}
+> +
+>  static const struct udevice_id dwmac_meson8b_ids[] = {
+>  	{ .compatible = "amlogic,meson-gxbb-dwmac", .data = (ulong)dwmac_setup_gx },
+>  	{ .compatible = "amlogic,meson-g12a-dwmac", .data = (ulong)dwmac_setup_axg },
+> @@ -158,6 +163,7 @@ U_BOOT_DRIVER(dwmac_meson8b) = {
+>  	.of_match	= dwmac_meson8b_ids,
+>  	.of_to_plat = dwmac_meson8b_of_to_plat,
+>  	.probe		= dwmac_meson8b_probe,
+> +	.remove		= dwmac_meson8b_remove,
 
-This should not really be needed, eth-uclass already call the stop() ops
-that in turn call _dw_eth_halt() from the eth-uclass pre_remove() ops.
+There is no reason to add the dwmac_meson8b_remove function above, you
+could just use designware_eth_remove directly here.
 
-So ethernet should already have halted when remove() is called, calling
-it here will probably only hide any real issue.
+Same for remaining drivers below.
 
 Regards,
 Jonas
 
->  	free(priv->phydev);
->  	mdio_unregister(priv->bus);
->  	mdio_free(priv->bus);
+>  	.ops		= &designware_eth_ops,
+>  	.priv_auto	= sizeof(struct dw_eth_dev),
+>  	.plat_auto	= sizeof(struct dwmac_meson8b_plat),
+> diff --git a/drivers/net/dwmac_s700.c b/drivers/net/dwmac_s700.c
+> index 969d247b4f3..cfb37c3aa71 100644
+> --- a/drivers/net/dwmac_s700.c
+> +++ b/drivers/net/dwmac_s700.c
+> @@ -44,6 +44,11 @@ static int dwmac_s700_probe(struct udevice *dev)
+>  	return designware_eth_probe(dev);
+>  }
+>  
+> +static int dwmac_s700_remove(struct udevice *dev)
+> +{
+> +	return designware_eth_remove(dev);
+> +}
+> +
+>  static int dwmac_s700_of_to_plat(struct udevice *dev)
+>  {
+>  	return designware_eth_of_to_plat(dev);
+> @@ -60,6 +65,7 @@ U_BOOT_DRIVER(dwmac_s700) = {
+>  	.of_match = dwmac_s700_ids,
+>  	.of_to_plat = dwmac_s700_of_to_plat,
+>  	.probe  = dwmac_s700_probe,
+> +	.remove	= dwmac_s700_remove,
+>  	.ops    = &designware_eth_ops,
+>  	.priv_auto	= sizeof(struct dw_eth_dev),
+>  	.plat_auto	= sizeof(struct eth_pdata),
+> diff --git a/drivers/net/dwmac_socfpga.c b/drivers/net/dwmac_socfpga.c
+> index a9e2d8c0972..8e7a9975d28 100644
+> --- a/drivers/net/dwmac_socfpga.c
+> +++ b/drivers/net/dwmac_socfpga.c
+> @@ -130,6 +130,11 @@ static int dwmac_socfpga_probe(struct udevice *dev)
+>  	return designware_eth_probe(dev);
+>  }
+>  
+> +static int dwmac_socfpga_remove(struct udevice *dev)
+> +{
+> +	return designware_eth_remove(dev);
+> +}
+> +
+>  static const struct udevice_id dwmac_socfpga_ids[] = {
+>  	{ .compatible = "altr,socfpga-stmmac" },
+>  	{ }
+> @@ -141,6 +146,7 @@ U_BOOT_DRIVER(dwmac_socfpga) = {
+>  	.of_match	= dwmac_socfpga_ids,
+>  	.of_to_plat = dwmac_socfpga_of_to_plat,
+>  	.probe		= dwmac_socfpga_probe,
+> +	.remove		= dwmac_socfpga_remove,
+>  	.ops		= &designware_eth_ops,
+>  	.priv_auto	= sizeof(struct dw_eth_dev),
+>  	.plat_auto	= sizeof(struct dwmac_socfpga_plat),
 
