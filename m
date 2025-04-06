@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38569C36010
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 00:25:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64526C36010
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 00:25:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A162282B00;
-	Sun,  6 Apr 2025 02:25:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 02ED282B32;
+	Sun,  6 Apr 2025 02:25:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="c8qQNaez";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="vWjLVkoK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9E7D82B41; Sun,  6 Apr 2025 02:25:05 +0200 (CEST)
+ id C9CFE82B2F; Sun,  6 Apr 2025 02:25:11 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 762D682AAF
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 02:25:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CEA782B46
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 02:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743899102; bh=gkveRiBi8UmKOMRyl58sgplA93JqXjQKoVRTRnLLWjc=;
- b=c8qQNaezT5XVnrEXWG0cT/6H0bOiKJ3IP2AQfsRRDTfYIP8MD/5AdAu3y3DUMG0bwGtrhSdrb
- SyVzBjMPA+TlqM78QKP//ELBOgV/1QmHDWhJ3RZxmSATfP0MWsX0KiNOL0z2H5V2AT5xEaYaMkN
- 1JxJOHukWGz5x3TcS471N0UAGRfo1hSvT7YbTi9XxxyTdFU7FewlpoW36lNwED+77JQK/GOqEuf
- XLLwSccVty99GOh4cdST0xgnEzmbTbzzKJZCJdAKiKoXonNa4nPEp6I7AIbEPbhXQ1OlfmQOKBw
- Uyy5heHiAKTSJITBKrEW3eKpohIhIaDoojwZXfcZhY/w==
-X-Forward-Email-ID: 67f1c9dbfb2b6fde09d69f2a
+ t=1743899107; bh=hOgMI2Ao+wVeVSQ5AM3jDb3eaUsD5sHsDo+imKqh3nA=;
+ b=vWjLVkoKrpmHz2Cxa32H1AJF7DQrtqAi2f9tdaIgLzuMTyW7dx+LDuYs5oGq46vP9rmyIptUH
+ hWZk/jzgRulpS9+8DUuZDn9p1DluTvS7gIRmfGUtOuvzmVpdiWAQ+Hwqz+CvwwTcLCs6iNJ+2MF
+ ljFvZ3evxKmUyjEkpLJ2DxubCEYTz6RWVbkPVThgoNtowYNndDOJiY+kFPlp/xc+DCGo5SwwO7q
+ s/zpZ0FZUK0JhnZ1xkoP+HMCgLQXtY7K6WQ+PL4lyLPHjWPA2HUdiijfSx+CM82YuIpAsj7XFIa
+ o0kzGvgqjCX7hp28RIeUehBn7LrG5Nv2Ts0+bKkWvIBQ==
+X-Forward-Email-ID: 67f1c9dffb2b6fde09d69f3f
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.0
@@ -47,9 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 02/11] rockchip: Remove partitions env variable for RK356x
-Date: Sun,  6 Apr 2025 00:24:23 +0000
-Message-ID: <20250406002447.1555596-3-jonas@kwiboo.se>
+Subject: [PATCH 03/11] rockchip: Remove partitions env variable for RK3588
+Date: Sun,  6 Apr 2025 00:24:24 +0000
+Message-ID: <20250406002447.1555596-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250406002447.1555596-1-jonas@kwiboo.se>
 References: <20250406002447.1555596-1-jonas@kwiboo.se>
@@ -78,18 +78,18 @@ Rockchip devices will run fine using any partition layout if the first
 16 MiB of MMC storage is ignored/skipped.
 
 Remove the partitions env variable to stop encourage users a continued
-use of this outdated partition layout on RK356x devices.
+use of this outdated partition layout on RK3588 devices.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- include/configs/rk3568_common.h | 1 -
+ include/configs/rk3588_common.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
-index 09b7b71c6afd..a68ca381db57 100644
---- a/include/configs/rk3568_common.h
-+++ b/include/configs/rk3568_common.h
-@@ -29,7 +29,6 @@
+diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
+index e6654c275ac5..7b02560971ad 100644
+--- a/include/configs/rk3588_common.h
++++ b/include/configs/rk3588_common.h
+@@ -28,7 +28,6 @@
  
  #define CFG_EXTRA_ENV_SETTINGS		\
  	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
