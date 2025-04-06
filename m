@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BF7C3601A
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 00:26:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E92C3601A
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 00:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F161B82B53;
-	Sun,  6 Apr 2025 02:25:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7FE9F82B8E;
+	Sun,  6 Apr 2025 02:25:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OsWkipU4";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="h+/0t5Y0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E68882B63; Sun,  6 Apr 2025 02:25:26 +0200 (CEST)
+ id A190882B4A; Sun,  6 Apr 2025 02:25:26 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C422382B4A
+ by phobos.denx.de (Postfix) with ESMTPS id C520D82B72
  for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 02:25:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743899122; bh=I+P92fUF7QrdJV1N7wbPpS5fT1agO06NpWLjF8tMJwE=;
- b=OsWkipU4+dU0sfzyn/DFnAPx0FAF2LaP1Qn1V8ta3H/g4Yb8Y+T7x8+sy6dgzS7sRJX/cGZYj
- ZM0KTyfFg95SzzzRj5QJFMdqaaJ0slFmnXo0eLyuLp8r8KNRyodpphchmDqHrnz9GaartT4sV1D
- Q9T8eu0aSRNFJLXS9SFKIxPDeN6C1HeplvGLcjfnqbIkX1DemJYMy/8NLKqh3+7t4qZveRJZx82
- 5X97gXvCAN0NwONZTfD2goW5N7BGEb4igds7UELBMrpxj3pYox0V0rEYR60rYIs1VNz3XvWXEJM
- dntV6GPWAPanZ2UMIvNr6c2jSnfa2JmfCvSuVmepJEFg==
-X-Forward-Email-ID: 67f1c9f1fb2b6fde09d69fc8
+ t=1743899122; bh=l5mKf/Mbo3GJeLJl1b+5+95cYJERGVYxpYCMaJSAq68=;
+ b=h+/0t5Y0GHwSMMYMe7GaGOU/qABNsaLA3/yMEen0YXRRm4SOwZO1JSwtN7VO2IPGiUrmvmi3D
+ PlJaZZ5jQCrFpyZy/FWH2O+016ZC5Ae3MfZe7JbER8tNc+sUk9sLoZytNwzxTj4DFu/duRZNBYI
+ U2bmiQALO0fvNlRwAeBoqTcdfzm5qEbj9WR94nn3GrZLiOkTbdUzqVLxocvzHPoQri2YEyHP4qt
+ cdNTMZMxkws1z/DN2I1LYXz8s32D5nr6PSA/LHzukn5aUB/2oLSg/n3UYlcH2h3O9RjtZBshLC1
+ Q9xw2Gnfw7zWVYe31xSACD07VZuPFE4KhQ045M5/e1zg==
+X-Forward-Email-ID: 67f1c9edfb2b6fde09d69fb3
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.0
@@ -47,10 +47,10 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 08/11] rockchip: rk3568: Drop BOARD_LATE_INIT from target
- config
-Date: Sun,  6 Apr 2025 00:24:29 +0000
-Message-ID: <20250406002447.1555596-9-jonas@kwiboo.se>
+Subject: [PATCH 07/11] rockchip: Use rk3588_common.h by default for RK3588
+ boards
+Date: Sun,  6 Apr 2025 00:24:28 +0000
+Message-ID: <20250406002447.1555596-8-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250406002447.1555596-1-jonas@kwiboo.se>
 References: <20250406002447.1555596-1-jonas@kwiboo.se>
@@ -72,26 +72,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BOARD_LATE_INIT is already selected by ROCKCHIP_RK3568 so there is no
-need to select it under any board target config.
+Ensure rk3588_common.h can be used by boards directly by defining a
+blank ROCKCHIP_DEVICE_SETTINGS unless it already is defined.
+
+Add a default SYS_CONFIG_NAME to include rk3588_common.h unless a board
+target overrides it in its board Kconfig.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3568/Kconfig | 1 -
- 1 file changed, 1 deletion(-)
+ arch/arm/mach-rockchip/rk3588/Kconfig | 3 +++
+ include/configs/rk3588_common.h       | 4 ++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index 8cad77890f13..2730220a18e8 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -5,7 +5,6 @@ choice
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index 1c6a85d07394..8acb6618718f 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -441,4 +441,7 @@ source "board/rockchip/toybrick_rk3588/Kconfig"
+ source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+ source "board/theobroma-systems/tiger_rk3588/Kconfig"
  
- config TARGET_EVB_RK3568
- 	bool "RK3568 evaluation board"
--	select BOARD_LATE_INIT
- 	help
- 	  RK3568 EVB is a evaluation board for Rockchp RK3568.
++config SYS_CONFIG_NAME
++	default "rk3588_common"
++
+ endif
+diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
+index 7b02560971ad..2f0d40deb640 100644
+--- a/include/configs/rk3588_common.h
++++ b/include/configs/rk3588_common.h
+@@ -14,6 +14,10 @@
+ #define CFG_SYS_SDRAM_BASE		0
+ #define SDRAM_MAX_SIZE			0xf0000000
  
++#ifndef ROCKCHIP_DEVICE_SETTINGS
++#define ROCKCHIP_DEVICE_SETTINGS
++#endif
++
+ #define ENV_MEM_LAYOUT_SETTINGS		\
+ 	"scriptaddr=0x00c00000\0"	\
+ 	"script_offset_f=0xffe000\0"	\
 -- 
 2.49.0
 
