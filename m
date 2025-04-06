@@ -4,83 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5131C36002
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 21:16:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BAAC36002
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 21:36:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CF6882BE3;
-	Sun,  6 Apr 2025 23:16:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CDC1582BDC;
+	Sun,  6 Apr 2025 23:36:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VX5XyHi5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="eE0S5TTu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B66B582C13; Sun,  6 Apr 2025 23:16:01 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3B02C82BE3; Sun,  6 Apr 2025 23:36:44 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A77B480079
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 23:15:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3FB482B63
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 23:36:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ac29fd22163so626872566b.3
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 14:15:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743974157; x=1744578957; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S7RMbig1UYhN13XXYEswSnecD8z8P++t9T4FUul5wQA=;
- b=VX5XyHi5iOrpu163GFer4Rv/awzXaoW6LmdaffRKQcS1b/0C3S2h3TtowcLDo/3Iot
- 9jiTC26wiu3oW98fROBxwvo6ZCiQTVRr6KNbLWrkrwZ7nsAMDxCx9ySNIL2B/YoPlas7
- SlCiBpwTwo2bCxsH39ePYRzEBS1pzCPgZSfvg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743974157; x=1744578957;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S7RMbig1UYhN13XXYEswSnecD8z8P++t9T4FUul5wQA=;
- b=j/BsUBQCoNThmI8ySHP16MLJd4MwFUTvFAJuI4rXr2BS6EOWt1/THvMcko19ROh8jF
- PcZOAMwB6Rt7RpHGxTitubfEkqEPzesIYcLge0ZWvWVk+hf0uMNMrIkGzA9A26nvkUmx
- Z4VL1zUk3KXY8FJ8/6Euqy3l6/U/vMf0jFCkRQifXWSE0BBLkypIVd0y2YjaZQu63s/2
- gD5x3ETqGabnPt6MNKvYOFx8FUD7a2drsnNS3xQ98QjObQp8Fs/XHV6PkKXcEP/aTwH1
- RtL9IJ5PkcoKlprS45hRlVasEgZAzu39LVHsbSN/bH/KenGQgG/ps3G04erLpcwHR9Q7
- bkOQ==
-X-Gm-Message-State: AOJu0YwzDfpuJFxVqjNUAD71CQyTwuxEip6G2tdg628xnDmZtYD+u25j
- DQqmCsjFLk9IPS4Zy2T7Iyqa76uyDSYLRqwucAtVp+kuPesVwUH92e8gb1eteGdObPBljY/qkXW
- NchQ0XSucq2nuh0rF+ruWBL3zVDF5n7z9ZQ+Ev0jvr3bsPiu0bg==
-X-Gm-Gg: ASbGncudRDCFKe3KZCpakpvTFiSUBmCKbejcWmLNfROjtuDmg9TX52udRJL4LywhtyN
- 934jnkH+yipYiDoqyYlNYQ7Ke1OcqiREAKbKWP7mXUIzFiTZEnJ5ECBfKTUIuiYyn6PHcFu2JyH
- nFgyKaFhwstpEDQXjvEYPj9ee5G7+u
-X-Google-Smtp-Source: AGHT+IF8wCrKmzVed6VH/PuIedlXhH98ZmnA0J2vXSt25tSXJQhY0BRWkwKweUatLw8tYWpx6ER/a7QAYpa2/WxBnoE=
-X-Received: by 2002:a17:907:2ce4:b0:abf:6d24:10bb with SMTP id
- a640c23a62f3a-ac7d6ebb968mr783156966b.44.1743974156691; Sun, 06 Apr 2025
- 14:15:56 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=13a0=WZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1743975400;
+ bh=LhF8iIruZIjXTXahS3CyXouER0wMXyq0Mx+1/q4IJOU=;
+ b=eE0S5TTui05kS7Ct2gR6XizO2hhtsWxV37yzuwfl4xTxpPvKfFetvLnAlObg/eyn58/UEXyWz
+ LaaZVRFCmJC3xAjtiWLuutmypqSyxlGdLkZB95GG4R+5bBVTjYcgvf7z3ROYKYe/3xLm5khi52J
+ VN6yFyjD8Dog7N7INx1F9wHTJuURvT2d+maNmrtVZUkxK+wqomoXVnc9sa27WCS/z9LLz2FH1DH
+ fSwCGWW72AMcAsLsZuyv7zcF7dN++B0nNpFTkWqkTu5PaZmhymvrzHOh0B0NBY40pNum4jB99eZ
+ 9i0Ow89vwfgJpe7K8Lp4yC2R+IyDHGGPROtu+hMIs4ww==
+X-Forward-Email-ID: 67f2f3e290f253d89dba0fd0
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <a1026fc5-de0c-4a88-891e-1bdb5b98b705@kwiboo.se>
+Date: Sun, 6 Apr 2025 23:36:29 +0200
 MIME-Version: 1.0
-References: <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
- <20250307144631.GN2640854@bill-the-cat>
- <20250310155336.GJ2640854@bill-the-cat>
- <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
- <20250331155144.GX93000@bill-the-cat>
- <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
- <20250401171822.GM5495@bill-the-cat>
- <CAFLszTjzxXW_SdDMbjPKitgQ6HSv3Vse6ANrr5QEr85A1byyHg@mail.gmail.com>
- <20250402223534.GE5495@bill-the-cat>
- <CAFLszTiftx2RpeNdBmms8e=HZm2YqH_sjea7Ot1gyaSWAScivw@mail.gmail.com>
- <20250403142741.GJ5495@bill-the-cat>
-In-Reply-To: <20250403142741.GJ5495@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Apr 2025 09:15:42 +1200
-X-Gm-Features: ATxdqUH17BAPNdz54CdMSlV2jr-ooiFv36QuFUFM76NoDSmsrs5KU4JbzZpMqnc
-Message-ID: <CAFLszTiE4GQ77nzssR42HcE8bcCKzjuNcL50kprQ+zb947mR=Q@mail.gmail.com>
-Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in the
- project)
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] designware: Use the remove() method with related
+ drivers
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, neil.armstrong@linaro.org,
+ =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>,
+ Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, u-boot-amlogic@groups.io
+References: <20250405221308.498047-1-sjg@chromium.org>
+ <20250405221308.498047-2-sjg@chromium.org>
+ <dc4dec57-6fba-4224-9f84-1cc63c58eacd@kwiboo.se>
+ <CAFLszTim=Fq9rv0BfypZoje=i+HU_ZTdFK_GSQoZSsESWm=Jqg@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFLszTim=Fq9rv0BfypZoje=i+HU_ZTdFK_GSQoZSsESWm=Jqg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,251 +85,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Simon,
 
-On Fri, 4 Apr 2025 at 03:27, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Apr 03, 2025 at 12:55:38PM +1300, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 3 Apr 2025 at 11:35, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Apr 03, 2025 at 08:22:13AM +1300, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 2 Apr 2025 at 06:18, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
-> > > > > > > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
-> > > > > > > > > [snip]
-> > > > > > > > > > > Again, back to this thread, if you want me to migrate things, consider
-> > > > > > > > > > > applying the sunxi patches as I have described above. I will then look
-> > > > > > > > > > > at the next target for bootstd. But while you hold this up, I cannot
-> > > > > > > > > > > move forward with more bootstd migration. It doesn't seem that much to
-> > > > > > > > > > > ask.
-> > > > > > > > > >
-> > > > > > > > > > I will take another look at what's still relevant. But I believe it's
-> > > > > > > > > > still blocked on the fact that it changes behavior and breaks users.
-> > > > > > > > >
-> > > > > > > > > In details:
-> > > > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > Now that the underlying BLK problem is resolved, this can just be
-> > > > > > > > > dropped I believe. Removing the BLK dependency from BOOTSTD can happen
-> > > > > > > > > when you're supporting a flow that lacks a BLK device entirely. This
-> > > > > > > > > would be another reminder as to why putting unrelated changes in a
-> > > > > > > > > series is a problem.
-> > > > > > > >
-> > > > > > > > OK, then just don't apply this patch. Problem solved?
-> > > > > > >
-> > > > > > > Well, for a hypothetical v6 you would not include it, sure.
-> > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-3-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > This is fine.
-> > > > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > This is not fine. This is also not a sunxi problem. It means that we
-> > > > > > > > > should drop bootmgr from rockchip, where the conversion has already
-> > > > > > > > > taken place, and would need to drop it from future conversion too.
-> > > > > > > > > Neither of which are desirable changes.
-> > > > > > > >
-> > > > > > > > Why do you say that? I don't understand how this relates to rockchip
-> > > > > > > > or why we would need to drop bootmgr from that.
-> > > > > > >
-> > > > > > > Then you don't have enough of a grasp of the details of the area you're
-> > > > > > > trying to solve problems in? Or maybe you need to refresh yourself on
-> > > > > > > the details of the area you're trying to work in.
-> > > > > >
-> > > > > > Or perhaps there isn't a problem? The sunxi case is special because we
-> > > > > > have a FEL boothmeth. That isn't present on rockchip, for example.
-> > > > >
-> > > > > Again, you seem to have forgotten what the problems with the series
-> > > > > were.
-> > > >
-> > > > No, it's just that we disagree on the path forward.
-> > >
-> > > Then why did you bring up FEL? That's the part of the migration which is
-> > > NOT a problem, I keep being reminded when I ask.
-> >
-> > FEL needs to get priority, that's all. It was a problem until I
-> > adjusted the priority.
->
-> And there's been zero objection to this. So why are you mentioning it
-> here, in the discussion on why the migration is blocked. I know I had
-> been unsure, but I asked, and people answered, and I accepted the
-> answer.
->
-> > > > > > > > > This patch in particular is
-> > > > > > > > > where we have the note:
-> > > > > > > > >
-> > > > > > > > > "Yes, the introduction of boot standard changed the boot order and
-> > > > > > > > > specifically deprioritizing scripts is unexpected."
-> > > > > > > > >
-> > > > > > > > > Which should have had more attention than it did.
-> > > > > > > >
-> > > > > > > > From memory the scripts are a fallback used when the other things
-> > > > > > > > don't work, so that was the decision I made at the time.
-> > > > > > >
-> > > > > > > The key point being we changed behavior that others depended on, and
-> > > > > > > didn't document it well and didn't make sure the change would work for
-> > > > > > > them either.
-> > > > > > >
-> > > > > > > > > This is the thread that to me spelled out in details where the
-> > > > > > > > > conversions are now blocked. We changed behavior and that in turn breaks
-> > > > > > > > > users that have come to rely on ordering.
-> > > > > > > >
-> > > > > > > > I don't know what action to take on that comment. We cannot have 100%
-> > > > > > > > backwards compatibility with the scripts, which after all weren't even
-> > > > > > > > documented. But it is very close.
-> > > > > > >
-> > > > > > > You need to get feedback from the people you want to migrate from the
-> > > > > > > scripts and ordering and rely on to something else and see what works
-> > > > > > > for them.
-> > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-5-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > Is an alternative to the above which then turned in to a discussion that
-> > > > > > > > > I would very briefly summarize as "no discussions were had between
-> > > > > > > > > stakeholders before integrating efi bootmgr with bootstd".
-> > > > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-6-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > This is fine, but only relevant once migration happens.
-> > > > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-7-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > If Andre is fine with this, this is fine.
-> > > > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-8-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > This is a generic bugfix. I will take this to next today.
-> > > > > > > > >
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-9-sjg@chromium.org/
-> > > > > > > > >
-> > > > > > > > > If Andre is fine with this, this is fine.
-> > > > > > > >
-> > > > > > > > Well, is he? I thought he was. Can you check?
-> > > > > > >
-> > > > > > > You're free to. It's one of the innumerable examples of why when you
-> > > > > > > group multiple things in a series and there's problems with another part
-> > > > > > > of the series, unrelated changes get dropped.
-> > > > > >
-> > > > > > It would be easier for me if you could apply the patches as I've suggested.
-> > > > > >
-> > > > > > But if you are willing to apply these patches and just want me to send
-> > > > > > the series again without the BLK and RFC patches, I can do that.
-> > > > > > Please let me know either way.
-> > > > >
-> > > > > Again, you should:
-> > > > > - Take the non-bootstd sunxi enhancements, rebase them to next and post
-> > > > >   for Andre. By themselves. This way they won't get stuck.
-> > > >
-> > > > There's no point, though, since it doesn't provide the bootstd migration.
-> > >
-> > > Are you saying there's no point in generally improving things if it
-> > > doesn't also involve one of your particular projects?
-> >
-> > The series is called 'bootstd: sunxi: Migrate to standard boot'. If
-> > you'd like to apply just the patches from that series which don't
-> > migrate sunxi to standard boot, please go ahead.
->
-> I'm not the sunxi custodian. General sunxi changes would go through that
-> tree. And then a repeat of everything I've said about how bundling
-> unrelated changes hurts everyone.
->
-> > > > > - You should work with Heinrich to come up with something that handles
-> > > > >   efi bootmanager and bootstd without breaking how our actual project
-> > > > >   users use us.
-> > > > >   There's no reason to migrate *more* platforms until we have this
-> > > > >   fundamental problem sorted out.
-> > > >
-> > > > It isn't actually a fundamental problem at all. We shouldn't even be
-> > > > discussing this and it is really unfortunate that you continue to
-> > > > block this effort.
-> > > >
-> > > > As to bootmgr, I would be willing to implement a solution here, but it
-> > > > would involve changes to how bootmgr works under the hood, i.e. to
-> > > > have it be iterative instead of doing everything at the start. My firm
-> > > > understanding is that such changes would not be acceptable to
-> > > > Ilias/Heinrich and anyway I am unable to get patches into the EFI
-> > > > subsystem.
-> > > >
-> > > > So the fallback is the work-around which Heinrich proposed. He is free
-> > > > to implement that if he likes, but I am not planning to do this myself
-> > > > as I see it as a short-term measure and it may cause problems for
-> > > > bootstd, as did f2bfa0cb1 which I bitterly regret allowing in (but I
-> > > > suppose they were happier days before everything froze up).
-> > > >
-> > > > > - You should work with any FOSS distributions to get their feedback on
-> > > > >   what would make their life easier, from a user of U-Boot perspective.
-> > > > >   bootstd won't be useful if it's not something our users want to use.
-> > > >
-> > > > Bootstd is designed to replace the distro scripts and the feedback I
-> > > > have received is that it is good at that. If you have any other
-> > > > feedback, or any suggestions on people I should contact, I'm happy to
-> > > > approach them, or they can email the list and cc me.
-> > > >
-> > > > But really, it would be a lot easier if you could just apply this
-> > > > series so we can move on. If I can see even just a glimmer of
-> > > > compromise here it will help my confidence.
-> > >
-> > > Your sunxi series is broken as posted. I am not interested in applying
-> > > or encouraging more bootstd usage until there's actual work being done
-> > > to move forward wit bootstd (a thing you want) and EFI (a thing most
-> > > distributions want). That would be some of the general feedback you've
-> > > been given and missed or forgotten.
-> > >
-> > > This is even setting aside that I can't recall now if you ever started
-> > > on making non-BOOTSTD_FULL more useful / usable in general because it's
-> > > so minimal that every conversion ends up also enabling BOOTSTD_FULL in
-> > > order to be flexible enough for users to decide SD vs eMMC and so on.
-> >
-> > You can hold this up for as long as you like, it's your tree.
->
-> And you can do whatever you like in your personal tree, sure. But
-> there's rules for working in a community project.
->
-> > I'm always happy and willing to discuss and commit to future
-> > improvements. The pattern I see, well-established now, is that you
-> > block my current improvements until some other things are done (this
-> > series, PXE and many others). Or sometimes you see my series, come up
-> > with a clean-up and block my series until it is based on top of that.
-> > If you could move away from that pattern and operate in a more
-> > cooperative manner, we could definitely get a lot more done in your
-> > tree.
-> >
-> > But again, you can hold this up as long as you like. I just feel it
-> > would be better for the project if you didn't.
->
-> I continue to not accept changes from anyone that knowingly break other
-> use cases and users. You are not an exception to the rule. Leaving
-> things broken for now and improving them later is not an option in
-> mainline.
+On 2025-04-06 23:10, Simon Glass wrote:
+> Hi Jonas,
+> 
+> On Sun, 6 Apr 2025 at 21:02, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 2025-04-06 00:12, Simon Glass wrote:
+>>> Several drivers make use of the designware Ethernet driver but do not
+>>> implement the remove() method. Add this so that DMA is stopped when the
+>>> OS is booted to avoid memory corruption, etc.
+>>
+>> The designware Ethernet driver core should not need the remove() ops as
+>> the eth_ops.stop() ops already should stop DMA. And the eth-uclass
+>> pre_remove() ops already call the eth_ops.stop() ops.
+>>
+>> All these drivers seem to use designware_eth_ops and thus have correct
+>> stop() ops configured and should really not need the remove() ops.
+>>
+> 
+> That's interesting. I wrote that code about 9 years ago so perhaps can
+> be forgiven for forgetting.
+> 
+> Very few drivers set the DM_FLAG_ACTIVE_DMA flag, certainly not the
+> designware ones. So how would they be removed?
 
-If that is your justification for blocking progress then it won't work
-in this case. There is nothing actually broken with my series. Shall I
-send it again so you can take another look?
+Ahh, I see, remove() is only called for devices with ACTIVE_DMA or
+OS_PREPARE. So I guess that was probably the issue all along?
 
->
-> And I ask everyone to fix problems that are exposed when they're doing
-> something else. Sometimes, when it comes to Kconfig symbols I'll end up
-> doing the cleanup because it's tricky to get things right for 1300
-> platforms.
+There is some confusion that dm_remove_devices_active() does not remove
+device_active()=true devices and instead only remove ACTIVE_DMA and/or
+OS_PREPARE flagged devices.
 
-Yes, I know how you feel.
+> 
+>> Side note, this also misses the gmac rockchip driver that uses its own
+>> eth_ops instead of designware_eth_ops, however it also use same stop()
+>> ops as all these drivers.
+> 
+> Hmm yes I saw that but then apparently forgot to include it.
+> 
+> I can perhaps redo this patch to add the DMA flag.
+
+Maybe eth_post_probe() or similar should add the OS_PREPARE or
+ACTIVE_DMA flag for all eth-uclass, to ensure remove() and thus stop()
+gets called when dm_remove_devices_active() is called.
+
+There is probably no need to add all these remove() ops, as they would
+still not have been called by dm_remove_devices_active().
 
 Regards,
-Simon
+Jonas
+
+> 
+>>
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> Reported-by: Christian Kohlschütter <christian@kohlschutter.com>
+>>> ---
+>>>
+>>>  drivers/net/designware.c    |  2 +-
+>>>  drivers/net/designware.h    | 12 ++++++++++++
+>>>  drivers/net/dwmac_meson8b.c |  6 ++++++
+>>>  drivers/net/dwmac_s700.c    |  6 ++++++
+>>>  drivers/net/dwmac_socfpga.c |  6 ++++++
+>>>  5 files changed, 31 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+>>> index eebf14bd51a..d4d31925fca 100644
+>>> --- a/drivers/net/designware.c
+>>> +++ b/drivers/net/designware.c
+>>> @@ -805,7 +805,7 @@ clk_err:
+>>>       return err;
+>>>  }
+>>>
+>>> -static int designware_eth_remove(struct udevice *dev)
+>>> +int designware_eth_remove(struct udevice *dev)
+>>>  {
+>>>       struct dw_eth_dev *priv = dev_get_priv(dev);
+>>>
+>>> diff --git a/drivers/net/designware.h b/drivers/net/designware.h
+>>> index e47101ccaf6..8c9d0190e03 100644
+>>> --- a/drivers/net/designware.h
+>>> +++ b/drivers/net/designware.h
+>>> @@ -247,6 +247,18 @@ struct dw_eth_dev {
+>>>
+>>>  int designware_eth_of_to_plat(struct udevice *dev);
+>>>  int designware_eth_probe(struct udevice *dev);
+>>> +
+>>> +/**
+>>> + * designware_eth_remove() - Remove the device
+>>> + *
+>>> + * Disables DMA and marks the device as remove. This must be called before
+>>> + * booting an OS, to ensure that DMA is inactive.
+>>> + *
+>>> + * @dev: Device to remove
+>>> + * Return 0 if OK, -ve on error
+>>> + */
+>>> +int designware_eth_remove(struct udevice *dev);
+>>> +
+>>>  extern const struct eth_ops designware_eth_ops;
+>>>
+>>>  struct dw_eth_pdata {
+>>> diff --git a/drivers/net/dwmac_meson8b.c b/drivers/net/dwmac_meson8b.c
+>>> index fde4aabbace..b2152f8da9b 100644
+>>> --- a/drivers/net/dwmac_meson8b.c
+>>> +++ b/drivers/net/dwmac_meson8b.c
+>>> @@ -145,6 +145,11 @@ static int dwmac_meson8b_probe(struct udevice *dev)
+>>>       return designware_eth_probe(dev);
+>>>  }
+>>>
+>>> +static int dwmac_meson8b_remove(struct udevice *dev)
+>>> +{
+>>> +     return designware_eth_remove(dev);
+>>> +}
+>>> +
+>>>  static const struct udevice_id dwmac_meson8b_ids[] = {
+>>>       { .compatible = "amlogic,meson-gxbb-dwmac", .data = (ulong)dwmac_setup_gx },
+>>>       { .compatible = "amlogic,meson-g12a-dwmac", .data = (ulong)dwmac_setup_axg },
+>>> @@ -158,6 +163,7 @@ U_BOOT_DRIVER(dwmac_meson8b) = {
+>>>       .of_match       = dwmac_meson8b_ids,
+>>>       .of_to_plat = dwmac_meson8b_of_to_plat,
+>>>       .probe          = dwmac_meson8b_probe,
+>>> +     .remove         = dwmac_meson8b_remove,
+>>
+>> There is no reason to add the dwmac_meson8b_remove function above, you
+>> could just use designware_eth_remove directly here.
+>>
+>> Same for remaining drivers below.
+> 
+> Yes, I wasn't sure which way to go on that. I'll remove them.
+> 
+>>
+>> Regards,
+>> Jonas
+>>
+>>>       .ops            = &designware_eth_ops,
+>>>       .priv_auto      = sizeof(struct dw_eth_dev),
+>>>       .plat_auto      = sizeof(struct dwmac_meson8b_plat),
+>>> diff --git a/drivers/net/dwmac_s700.c b/drivers/net/dwmac_s700.c
+>>> index 969d247b4f3..cfb37c3aa71 100644
+>>> --- a/drivers/net/dwmac_s700.c
+>>> +++ b/drivers/net/dwmac_s700.c
+>>> @@ -44,6 +44,11 @@ static int dwmac_s700_probe(struct udevice *dev)
+>>>       return designware_eth_probe(dev);
+>>>  }
+>>>
+>>> +static int dwmac_s700_remove(struct udevice *dev)
+>>> +{
+>>> +     return designware_eth_remove(dev);
+>>> +}
+>>> +
+>>>  static int dwmac_s700_of_to_plat(struct udevice *dev)
+>>>  {
+>>>       return designware_eth_of_to_plat(dev);
+>>> @@ -60,6 +65,7 @@ U_BOOT_DRIVER(dwmac_s700) = {
+>>>       .of_match = dwmac_s700_ids,
+>>>       .of_to_plat = dwmac_s700_of_to_plat,
+>>>       .probe  = dwmac_s700_probe,
+>>> +     .remove = dwmac_s700_remove,
+>>>       .ops    = &designware_eth_ops,
+>>>       .priv_auto      = sizeof(struct dw_eth_dev),
+>>>       .plat_auto      = sizeof(struct eth_pdata),
+>>> diff --git a/drivers/net/dwmac_socfpga.c b/drivers/net/dwmac_socfpga.c
+>>> index a9e2d8c0972..8e7a9975d28 100644
+>>> --- a/drivers/net/dwmac_socfpga.c
+>>> +++ b/drivers/net/dwmac_socfpga.c
+>>> @@ -130,6 +130,11 @@ static int dwmac_socfpga_probe(struct udevice *dev)
+>>>       return designware_eth_probe(dev);
+>>>  }
+>>>
+>>> +static int dwmac_socfpga_remove(struct udevice *dev)
+>>> +{
+>>> +     return designware_eth_remove(dev);
+>>> +}
+>>> +
+>>>  static const struct udevice_id dwmac_socfpga_ids[] = {
+>>>       { .compatible = "altr,socfpga-stmmac" },
+>>>       { }
+>>> @@ -141,6 +146,7 @@ U_BOOT_DRIVER(dwmac_socfpga) = {
+>>>       .of_match       = dwmac_socfpga_ids,
+>>>       .of_to_plat = dwmac_socfpga_of_to_plat,
+>>>       .probe          = dwmac_socfpga_probe,
+>>> +     .remove         = dwmac_socfpga_remove,
+>>>       .ops            = &designware_eth_ops,
+>>>       .priv_auto      = sizeof(struct dw_eth_dev),
+>>>       .plat_auto      = sizeof(struct dwmac_socfpga_plat),
+>>
+> 
+> Regards,
+> Simon
+
