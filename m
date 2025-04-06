@@ -4,98 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D74B4C36002
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 21:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5131C36002
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 21:16:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 426EE82B46;
-	Sun,  6 Apr 2025 23:12:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5CF6882BE3;
+	Sun,  6 Apr 2025 23:16:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KlWaTYCt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VX5XyHi5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 848D582B4A; Sun,  6 Apr 2025 23:12:49 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id B66B582C13; Sun,  6 Apr 2025 23:16:01 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 557A080079
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 23:12:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A77B480079
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 23:15:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ac2bb7ca40bso306001266b.3
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 14:12:47 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac29fd22163so626872566b.3
+ for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 14:15:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743973967; x=1744578767; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743974157; x=1744578957; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9lSJCSm/DtYVSiXAn4Ofta6MDWRTp2KjYep+jA5zCGA=;
- b=KlWaTYCtryfqH4712n8XuPzOzVMHxdfCTM2Hgt9zsOyokikkNF/v6eWnC7uivl7XEt
- ccgB5F83cFAXkhm3POg9PYHDbN427Eba6KWj/F7lkv1lj+Br9xne/3Ifmpqt3iOckt0l
- 4LSqg2MWnY2MiFdGcAYjGNppXBB/Qgs19HsPA=
+ bh=S7RMbig1UYhN13XXYEswSnecD8z8P++t9T4FUul5wQA=;
+ b=VX5XyHi5iOrpu163GFer4Rv/awzXaoW6LmdaffRKQcS1b/0C3S2h3TtowcLDo/3Iot
+ 9jiTC26wiu3oW98fROBxwvo6ZCiQTVRr6KNbLWrkrwZ7nsAMDxCx9ySNIL2B/YoPlas7
+ SlCiBpwTwo2bCxsH39ePYRzEBS1pzCPgZSfvg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743973967; x=1744578767;
+ d=1e100.net; s=20230601; t=1743974157; x=1744578957;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9lSJCSm/DtYVSiXAn4Ofta6MDWRTp2KjYep+jA5zCGA=;
- b=bZcSszqQSnHXXxvjs6QmN2Y5FpBh0rl8K4qC57fgorsfmzLVzRONrtifU81chEvLWu
- ouxano4JiyGm1iGGqx6OsujohDa1b3ceRl6wErkW3BXQl4F9eLjtxNYwYtvi10hEtCzG
- QGP4E50c2YpgPpprTx33C6HDR/aneeYD8bANQYzKlnJ07DXCmHZzh0zEVA2EpTMXnmyK
- TILrtgCLiEqZewcRkRu8tUezSBiqqfsk0UptxBmuG0ZBiRQfxXFlgI19m/GHtOsHVq22
- kwFbX4R2A30iMg41Ee2hJt5x9jHpWqeFLjkz5Z6H3inkSR5hxGJd+CGpVvppUqQi47HR
- 6f6g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWmh8ztIaY018I27ZeFR/uaPeS1GLyutZ0S+OIqkrbDYlOiQNaS4crOsa/acrZK1mWo4YDrAak=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywkk5kBXy/5e7lgs/Cyw4iFNmHoYhMpSRKXACFpnoSsnIp/zcMx
- wqTlA/lHzycWyps4VZLE/MPRCFAU+ohVZk1HZi/CzODODpP+N39NzNWAwz4WFsD0Ahj0RXaoPW/
- l5qseaaUH2EwYGsyV/XWS7u4wAyuuvc/98l6zBfbfHbZJNaAxjkWE
-X-Gm-Gg: ASbGncvp3evorhwawgMA9CoPOxrRDDHDhd9PWhJq2V7WARwLBAdvpNSrmGmKcGMzGan
- ILw7khaYxP3oacFlZc2QHlsj5XD5lFe4DnPu8zJiqrYQjUippulO0i7093jONk6VKJthKWxJbcO
- miWiW2K5seIyQJigC7zgPioqSJniaH
-X-Google-Smtp-Source: AGHT+IGSXs0c3+fsI2jQZ4KAe8ZmCJvjzDOkdrcwi+8XiK8UbBqvQxBEWz5PBbNsh12KT1kxnEc5Lgtbkb7cQScIXak=
-X-Received: by 2002:a17:907:7eaa:b0:ac2:b826:1e6b with SMTP id
- a640c23a62f3a-ac7d1820cb2mr1023322266b.4.1743973966524; Sun, 06 Apr 2025
- 14:12:46 -0700 (PDT)
+ bh=S7RMbig1UYhN13XXYEswSnecD8z8P++t9T4FUul5wQA=;
+ b=j/BsUBQCoNThmI8ySHP16MLJd4MwFUTvFAJuI4rXr2BS6EOWt1/THvMcko19ROh8jF
+ PcZOAMwB6Rt7RpHGxTitubfEkqEPzesIYcLge0ZWvWVk+hf0uMNMrIkGzA9A26nvkUmx
+ Z4VL1zUk3KXY8FJ8/6Euqy3l6/U/vMf0jFCkRQifXWSE0BBLkypIVd0y2YjaZQu63s/2
+ gD5x3ETqGabnPt6MNKvYOFx8FUD7a2drsnNS3xQ98QjObQp8Fs/XHV6PkKXcEP/aTwH1
+ RtL9IJ5PkcoKlprS45hRlVasEgZAzu39LVHsbSN/bH/KenGQgG/ps3G04erLpcwHR9Q7
+ bkOQ==
+X-Gm-Message-State: AOJu0YwzDfpuJFxVqjNUAD71CQyTwuxEip6G2tdg628xnDmZtYD+u25j
+ DQqmCsjFLk9IPS4Zy2T7Iyqa76uyDSYLRqwucAtVp+kuPesVwUH92e8gb1eteGdObPBljY/qkXW
+ NchQ0XSucq2nuh0rF+ruWBL3zVDF5n7z9ZQ+Ev0jvr3bsPiu0bg==
+X-Gm-Gg: ASbGncudRDCFKe3KZCpakpvTFiSUBmCKbejcWmLNfROjtuDmg9TX52udRJL4LywhtyN
+ 934jnkH+yipYiDoqyYlNYQ7Ke1OcqiREAKbKWP7mXUIzFiTZEnJ5ECBfKTUIuiYyn6PHcFu2JyH
+ nFgyKaFhwstpEDQXjvEYPj9ee5G7+u
+X-Google-Smtp-Source: AGHT+IF8wCrKmzVed6VH/PuIedlXhH98ZmnA0J2vXSt25tSXJQhY0BRWkwKweUatLw8tYWpx6ER/a7QAYpa2/WxBnoE=
+X-Received: by 2002:a17:907:2ce4:b0:abf:6d24:10bb with SMTP id
+ a640c23a62f3a-ac7d6ebb968mr783156966b.44.1743974156691; Sun, 06 Apr 2025
+ 14:15:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250306002533.2380866-1-sjg@chromium.org>
- <174234008117.1788726.14383009154862416750.b4-ty@konsulko.com>
- <10a57d25-d484-4903-8f25-e373c451bc21@kwiboo.se>
- <CAFLszThrij_kGPdFcdJLoxJLpoZru=_M_vG4eVKwdPAqDfQJyg@mail.gmail.com>
- <2ad3b1c5-b6e7-47e2-b225-834b821cc5c4@kwiboo.se>
- <20250404224801.GV5495@bill-the-cat>
- <20250405144008.GY5495@bill-the-cat> <20250405144823.GZ5495@bill-the-cat>
- <CAFLszTiJct7mhx5_7iPzt_4m1BZL72pp1QML62b=7R3AgBn3fw@mail.gmail.com>
- <20250405232346.GB5495@bill-the-cat>
-In-Reply-To: <20250405232346.GB5495@bill-the-cat>
+References: <CAFLszTjv54tYLHkG=RNeXJoZ+f-QHxMH=B_aU2=iOZhaoD7qKg@mail.gmail.com>
+ <20250307144631.GN2640854@bill-the-cat>
+ <20250310155336.GJ2640854@bill-the-cat>
+ <CAFLszTirohLrKadFfdw28UMfH7nt2owKHOGdf-ehwQqemQUpDA@mail.gmail.com>
+ <20250331155144.GX93000@bill-the-cat>
+ <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+ <20250401171822.GM5495@bill-the-cat>
+ <CAFLszTjzxXW_SdDMbjPKitgQ6HSv3Vse6ANrr5QEr85A1byyHg@mail.gmail.com>
+ <20250402223534.GE5495@bill-the-cat>
+ <CAFLszTiftx2RpeNdBmms8e=HZm2YqH_sjea7Ot1gyaSWAScivw@mail.gmail.com>
+ <20250403142741.GJ5495@bill-the-cat>
+In-Reply-To: <20250403142741.GJ5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Apr 2025 09:12:32 +1200
-X-Gm-Features: ATxdqUHjDXlDAxB2UKgPU6SECh8CISu4_7hlnHnM0RrlxkwOGSSga9inZtTt8ZI
-Message-ID: <CAFLszTj4+GXkmEk3pq-iwJ=8CcJsSreJFKfqWsvW1LQKDz04_w@mail.gmail.com>
-Subject: Re: [PATCH v5 00/29] pxe: Precursor series for supporting read_all()
- in extlinux / PXE
+Date: Mon, 7 Apr 2025 09:15:42 +1200
+X-Gm-Features: ATxdqUH17BAPNdz54CdMSlV2jr-ooiFv36QuFUFM76NoDSmsrs5KU4JbzZpMqnc
+Message-ID: <CAFLszTiE4GQ77nzssR42HcE8bcCKzjuNcL50kprQ+zb947mR=Q@mail.gmail.com>
+Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in the
+ project)
 To: Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>, 
- Bin Meng <bmeng.cn@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Peter Korsgaard <peter@korsgaard.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
- Rick Chen <rick@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,164 +99,249 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sun, 6 Apr 2025 at 11:23, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 4 Apr 2025 at 03:27, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Apr 06, 2025 at 08:46:31AM +1200, Simon Glass wrote:
-> > (question for Heinrich below)
-> >
+> On Thu, Apr 03, 2025 at 12:55:38PM +1300, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Sun, 6 Apr 2025 at 02:48, Tom Rini <trini@konsulko.com> wrote:
+> > On Thu, 3 Apr 2025 at 11:35, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sat, Apr 05, 2025 at 08:40:08AM -0600, Tom Rini wrote:
-> > > > On Fri, Apr 04, 2025 at 04:48:01PM -0600, Tom Rini wrote:
-> > > > > On Fri, Apr 04, 2025 at 11:32:12PM +0200, Jonas Karlman wrote:
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On 2025-04-04 00:30, Simon Glass wrote:
-> > > > > > > Hi Jonas,
-> > > > > > >
-> > > > > > > On Fri, 4 Apr 2025 at 09:57, Jonas Karlman <jonas@kwiboo.se> wrote:
-> > > > > > >>
-> > > > > > >> Hi Tom and Simon,
-> > > > > > >>
-> > > > > > >> On 2025-03-19 00:21, Tom Rini wrote:
-> > > > > > >>> On Wed, 05 Mar 2025 17:24:54 -0700, Simon Glass wrote:
-> > > > > > >>>
-> > > > > > >>>> This series includes some patches related to allowing read_all() to be
-> > > > > > >>>> used with the extlinux / PXE bootmeths.
-> > > > > > >>>>
-> > > > > > >>>> These patches were split out from the stb4 series, since it will need to
-> > > > > > >>>> have additional patches for LWIP, to avoid breaking PXE booting when
-> > > > > > >>>> LWIP is used.
-> > > > > > >>>>
-> > > > > > >>>> [...]
-> > > > > > >>>
-> > > > > > >>> Applied to u-boot/next, thanks!
-> > > > > > >>
-> > > > > > >> This series broke booting a compressed arm64 defconfig Linux kernel
-> > > > > > >> (without module loading) due to changes in decompression buffer length.
-> > > > > > >>
-> > > > > > >> My arm64 defconfig kernel (Image.gz) is ~24 MiB compressed and ~85 MiB
-> > > > > > >> uncompressed.
-> > > > > > >>
-> > > > > > >> Before this series the decompression buffer was 10x the kernel_comp_size
-> > > > > > >> and now it is instead limited by the SYS_BOOTM_LEN Kconfig symbol.
-> > > > > > >>
-> > > > > > >> A broken boot using current next branch:
-> > > > > > >>
-> > > > > > >>   Retrieving file: /Image.gz
-> > > > > > >>   Retrieving file: /initramfs.cpio.gz
-> > > > > > >>   append: earlycon
-> > > > > > >>   cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:394d3c' conf_fdt '3df16350' images 000000003ffe53a0
-> > > > > > >>      kernel data at 0x02080000, len = 0x00000000 (0)
-> > > > > > >>   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
-> > > > > > >>   find_other type 2 os 5
-> > > > > > >>   ## Flattened Device Tree blob at 3df16350
-> > > > > > >>      Booting using the fdt blob at 0x3df16350
-> > > > > > >>   Working FDT set to 3df16350
-> > > > > > >>   load_os load 8000000 image_start 2080000 image_len 2000000
-> > > > > > >>      Uncompressing Kernel Image to 8000000
-> > > > > > >>   Error: inflate() returned -5
-> > > > > > >>   Image too large: increase CONFIG_SYS_BOOTM_LEN
-> > > > > > >>   Must RESET board to recover
-> > > > > > >>   Resetting the board...
-> > > > > > >>
-> > > > > > >> Changing SYS_BOOTM_LEN from default 64 MiB to 128 MiB fixed the boot:
-> > > > > > >>
-> > > > > > >>   Retrieving file: /Image.gz
-> > > > > > >>   Retrieving file: /initramfs.cpio.gz
-> > > > > > >>   append: earlycon
-> > > > > > >>   cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:394d3c' conf_fdt '3df16430' images 000000003ffe5480
-> > > > > > >>      kernel data at 0x02080000, len = 0x00000000 (0)
-> > > > > > >>   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
-> > > > > > >>   find_other type 2 os 5
-> > > > > > >>   ## Flattened Device Tree blob at 3df16430
-> > > > > > >>      Booting using the fdt blob at 0x3df16430
-> > > > > > >>   Working FDT set to 3df16430
-> > > > > > >>   load_os load 8000000 image_start 2080000 image_len 2000000
-> > > > > > >>      Uncompressing Kernel Image to 8000000
-> > > > > > >>      kernel loaded at 0x08000000, end = 0x0d3b5a00
-> > > > > > >>      Loading Ramdisk to 3cb51000, end 3cee5d3c ... OK
-> > > > > > >>      Loading Device Tree to 000000003cb3f000, end 000000003cb509df ... OK
-> > > > > > >>   Working FDT set to 3cb3f000
-> > > > > > >>
-> > > > > > >>   Starting kernel ...
-> > > > > > >>
-> > > > > > >> Do we need to increase the default SYS_BOOTM_LEN for ARM64 now?
-> > > > > > >
-> > > > > > > Are you using the 'booti' command? Can you post a bit more console
-> > > > > > > output or a script here as it isn't clear what boot command you are
-> > > > > > > using? For now I'm going to assume booti
-> > > > > >
-> > > > > > Above was using an extlinux.conf with bootstd, not using the booti cmd.
-> > > > > >
-> > > > > > Use of booti cmd is not affected as it continue to use a 10x multiple
-> > > > > > of the kernel_comp_size env var for buffer size.
-> > > > > >
-> > > > > > The change this series introduced was instead of the 10x multiple of
-> > > > > > kernel_comp_size now use SYS_BOOTM_LEN for buffer size (320 vs 32 MiB).
-> > > > > >
-> > > > > > And because cmd/booti.c was not converted there is now two different
-> > > > > > handling of this decompression buffer size.
-> > > > > >
-> > > > > > If the change to now use SYS_BOOTM_LEN was intended this need to be
-> > > > > > changed as it has mostly been irrelevant for booting Linux on AArch64
-> > > > > > boards prior to this series.
-> > > > >
-> > > > > We need to clean things up such that the path which is using 10x
-> > > > > multiple (and we lmb_alloc an area iirc) is used in all cases.
+> > > On Thu, Apr 03, 2025 at 08:22:13AM +1300, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > Looking at the code this morning, I was confusing this with what we do
-> > > > for compressed FIT images, oops.
+> > > > On Wed, 2 Apr 2025 at 06:18, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini wrote:
+> > > > > > > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon Glass wrote:
+> > > > > > > > > [snip]
+> > > > > > > > > > > Again, back to this thread, if you want me to migrate things, consider
+> > > > > > > > > > > applying the sunxi patches as I have described above. I will then look
+> > > > > > > > > > > at the next target for bootstd. But while you hold this up, I cannot
+> > > > > > > > > > > move forward with more bootstd migration. It doesn't seem that much to
+> > > > > > > > > > > ask.
+> > > > > > > > > >
+> > > > > > > > > > I will take another look at what's still relevant. But I believe it's
+> > > > > > > > > > still blocked on the fact that it changes behavior and breaks users.
+> > > > > > > > >
+> > > > > > > > > In details:
+> > > > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > Now that the underlying BLK problem is resolved, this can just be
+> > > > > > > > > dropped I believe. Removing the BLK dependency from BOOTSTD can happen
+> > > > > > > > > when you're supporting a flow that lacks a BLK device entirely. This
+> > > > > > > > > would be another reminder as to why putting unrelated changes in a
+> > > > > > > > > series is a problem.
+> > > > > > > >
+> > > > > > > > OK, then just don't apply this patch. Problem solved?
+> > > > > > >
+> > > > > > > Well, for a hypothetical v6 you would not include it, sure.
+> > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-3-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > This is fine.
+> > > > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > This is not fine. This is also not a sunxi problem. It means that we
+> > > > > > > > > should drop bootmgr from rockchip, where the conversion has already
+> > > > > > > > > taken place, and would need to drop it from future conversion too.
+> > > > > > > > > Neither of which are desirable changes.
+> > > > > > > >
+> > > > > > > > Why do you say that? I don't understand how this relates to rockchip
+> > > > > > > > or why we would need to drop bootmgr from that.
+> > > > > > >
+> > > > > > > Then you don't have enough of a grasp of the details of the area you're
+> > > > > > > trying to solve problems in? Or maybe you need to refresh yourself on
+> > > > > > > the details of the area you're trying to work in.
+> > > > > >
+> > > > > > Or perhaps there isn't a problem? The sunxi case is special because we
+> > > > > > have a FEL boothmeth. That isn't present on rockchip, for example.
+> > > > >
+> > > > > Again, you seem to have forgotten what the problems with the series
+> > > > > were.
+> > > >
+> > > > No, it's just that we disagree on the path forward.
 > > >
-> > > Ugh. Simon, can you go and fix this whole problem? Both do_bootz and
-> > > do_booti have non-trivial amounts of code that's missed by changing from
-> > > calling do_bootX() to bootX_run().
+> > > Then why did you bring up FEL? That's the part of the migration which is
+> > > NOT a problem, I keep being reminded when I ask.
 > >
-> > For do_bootz() I believe the current code is correct. It does call
-> > bootz_start() and then doesn't call it again when bootz_run() starts.
-> > It looks like you have taken my Ubuntu test so perhaps I can add a
-> > bootz test for another board in my lab.
-> >
-> > For do_booti(), the code in booti_start() is used for the
-> > non-compressed case, so I believe it is still needed and that bootm
-> > doesn't currently honour 'Image' relocation when using an uncompressed
-> > image. But then there is the issue of SYS_BOOTM_LEN, below.
-> >
-> > bootm_load_os() has code for ARM at the end, which I suspect needs to
-> > run on RISC-V too, in case the image needs to be relocated. Marek
-> > added this 7 years ago[1] so it predates RISC-V and Heinrich perhaps
-> > didn't notice it when adding his support , if it is actually needed.
-> >
-> > SYS_BOOTM_LEN is a 'last bastion' security feature to avoid people
-> > loading images that wrap around memory, etc. I could put bootm_len
-> > into struct bootm_info so that a 10x value can be used for the booti
-> > case.
-> >
-> > Tom, we also have the issue that you haven't taken the rest of the PXE
-> > series (due to the lwip case), so our trees are out of sync in this
-> > area. It would really help if you could take that series, and again, I
-> > am happy to do the lwip case once it is landed.
-> >
-> > So for now, if people agree, I can do a small series to use a
-> > different SYS_BOOTM_LEN for the booti command and perhaps add RISC-V
-> > as above.
-> >
-> > Later, I could continue the boot-unification effort, e.g. delete the
-> > booti_start() function. and incorporate the uncompressed case into
-> > bootm code.
+> > FEL needs to get priority, that's all. It was a problem until I
+> > adjusted the priority.
 >
-> I'm not sure your reading of the situation is right. I'm more inclined
-> to revert this merge rather than take on more rework in the area.
+> And there's been zero objection to this. So why are you mentioning it
+> here, in the discussion on why the migration is blocked. I know I had
+> been unsure, but I asked, and people answered, and I accepted the
+> answer.
+>
+> > > > > > > > > This patch in particular is
+> > > > > > > > > where we have the note:
+> > > > > > > > >
+> > > > > > > > > "Yes, the introduction of boot standard changed the boot order and
+> > > > > > > > > specifically deprioritizing scripts is unexpected."
+> > > > > > > > >
+> > > > > > > > > Which should have had more attention than it did.
+> > > > > > > >
+> > > > > > > > From memory the scripts are a fallback used when the other things
+> > > > > > > > don't work, so that was the decision I made at the time.
+> > > > > > >
+> > > > > > > The key point being we changed behavior that others depended on, and
+> > > > > > > didn't document it well and didn't make sure the change would work for
+> > > > > > > them either.
+> > > > > > >
+> > > > > > > > > This is the thread that to me spelled out in details where the
+> > > > > > > > > conversions are now blocked. We changed behavior and that in turn breaks
+> > > > > > > > > users that have come to rely on ordering.
+> > > > > > > >
+> > > > > > > > I don't know what action to take on that comment. We cannot have 100%
+> > > > > > > > backwards compatibility with the scripts, which after all weren't even
+> > > > > > > > documented. But it is very close.
+> > > > > > >
+> > > > > > > You need to get feedback from the people you want to migrate from the
+> > > > > > > scripts and ordering and rely on to something else and see what works
+> > > > > > > for them.
+> > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-5-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > Is an alternative to the above which then turned in to a discussion that
+> > > > > > > > > I would very briefly summarize as "no discussions were had between
+> > > > > > > > > stakeholders before integrating efi bootmgr with bootstd".
+> > > > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-6-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > This is fine, but only relevant once migration happens.
+> > > > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-7-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > If Andre is fine with this, this is fine.
+> > > > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-8-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > This is a generic bugfix. I will take this to next today.
+> > > > > > > > >
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-9-sjg@chromium.org/
+> > > > > > > > >
+> > > > > > > > > If Andre is fine with this, this is fine.
+> > > > > > > >
+> > > > > > > > Well, is he? I thought he was. Can you check?
+> > > > > > >
+> > > > > > > You're free to. It's one of the innumerable examples of why when you
+> > > > > > > group multiple things in a series and there's problems with another part
+> > > > > > > of the series, unrelated changes get dropped.
+> > > > > >
+> > > > > > It would be easier for me if you could apply the patches as I've suggested.
+> > > > > >
+> > > > > > But if you are willing to apply these patches and just want me to send
+> > > > > > the series again without the BLK and RFC patches, I can do that.
+> > > > > > Please let me know either way.
+> > > > >
+> > > > > Again, you should:
+> > > > > - Take the non-bootstd sunxi enhancements, rebase them to next and post
+> > > > >   for Andre. By themselves. This way they won't get stuck.
+> > > >
+> > > > There's no point, though, since it doesn't provide the bootstd migration.
+> > >
+> > > Are you saying there's no point in generally improving things if it
+> > > doesn't also involve one of your particular projects?
+> >
+> > The series is called 'bootstd: sunxi: Migrate to standard boot'. If
+> > you'd like to apply just the patches from that series which don't
+> > migrate sunxi to standard boot, please go ahead.
+>
+> I'm not the sunxi custodian. General sunxi changes would go through that
+> tree. And then a repeat of everything I've said about how bundling
+> unrelated changes hurts everyone.
+>
+> > > > > - You should work with Heinrich to come up with something that handles
+> > > > >   efi bootmanager and bootstd without breaking how our actual project
+> > > > >   users use us.
+> > > > >   There's no reason to migrate *more* platforms until we have this
+> > > > >   fundamental problem sorted out.
+> > > >
+> > > > It isn't actually a fundamental problem at all. We shouldn't even be
+> > > > discussing this and it is really unfortunate that you continue to
+> > > > block this effort.
+> > > >
+> > > > As to bootmgr, I would be willing to implement a solution here, but it
+> > > > would involve changes to how bootmgr works under the hood, i.e. to
+> > > > have it be iterative instead of doing everything at the start. My firm
+> > > > understanding is that such changes would not be acceptable to
+> > > > Ilias/Heinrich and anyway I am unable to get patches into the EFI
+> > > > subsystem.
+> > > >
+> > > > So the fallback is the work-around which Heinrich proposed. He is free
+> > > > to implement that if he likes, but I am not planning to do this myself
+> > > > as I see it as a short-term measure and it may cause problems for
+> > > > bootstd, as did f2bfa0cb1 which I bitterly regret allowing in (but I
+> > > > suppose they were happier days before everything froze up).
+> > > >
+> > > > > - You should work with any FOSS distributions to get their feedback on
+> > > > >   what would make their life easier, from a user of U-Boot perspective.
+> > > > >   bootstd won't be useful if it's not something our users want to use.
+> > > >
+> > > > Bootstd is designed to replace the distro scripts and the feedback I
+> > > > have received is that it is good at that. If you have any other
+> > > > feedback, or any suggestions on people I should contact, I'm happy to
+> > > > approach them, or they can email the list and cc me.
+> > > >
+> > > > But really, it would be a lot easier if you could just apply this
+> > > > series so we can move on. If I can see even just a glimmer of
+> > > > compromise here it will help my confidence.
+> > >
+> > > Your sunxi series is broken as posted. I am not interested in applying
+> > > or encouraging more bootstd usage until there's actual work being done
+> > > to move forward wit bootstd (a thing you want) and EFI (a thing most
+> > > distributions want). That would be some of the general feedback you've
+> > > been given and missed or forgotten.
+> > >
+> > > This is even setting aside that I can't recall now if you ever started
+> > > on making non-BOOTSTD_FULL more useful / usable in general because it's
+> > > so minimal that every conversion ends up also enabling BOOTSTD_FULL in
+> > > order to be flexible enough for users to decide SD vs eMMC and so on.
+> >
+> > You can hold this up for as long as you like, it's your tree.
+>
+> And you can do whatever you like in your personal tree, sure. But
+> there's rules for working in a community project.
+>
+> > I'm always happy and willing to discuss and commit to future
+> > improvements. The pattern I see, well-established now, is that you
+> > block my current improvements until some other things are done (this
+> > series, PXE and many others). Or sometimes you see my series, come up
+> > with a clean-up and block my series until it is based on top of that.
+> > If you could move away from that pattern and operate in a more
+> > cooperative manner, we could definitely get a lot more done in your
+> > tree.
+> >
+> > But again, you can hold this up as long as you like. I just feel it
+> > would be better for the project if you didn't.
+>
+> I continue to not accept changes from anyone that knowingly break other
+> use cases and users. You are not an exception to the rule. Leaving
+> things broken for now and improving them later is not an option in
+> mainline.
 
-Well that would be a pretty poor show. No one else has spent effort
-trying to clean up and rationalise this code in the last 10 years, so
-far as I can see. This is in -next so there is plenty of time to
-resolve any issues.
+If that is your justification for blocking progress then it won't work
+in this case. There is nothing actually broken with my series. Shall I
+send it again so you can take another look?
 
-I believe my reading of the situation is right, but if you disagree
-with some of it, please indicate which.
+>
+> And I ask everyone to fix problems that are exposed when they're doing
+> something else. Sometimes, when it comes to Kconfig symbols I'll end up
+> doing the cleanup because it's tricky to get things right for 1300
+> platforms.
+
+Yes, I know how you feel.
 
 Regards,
 Simon
