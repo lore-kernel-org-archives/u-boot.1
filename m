@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D82DC36010
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 00:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AC50C3601A
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 00:26:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52B0C82B7C;
-	Sun,  6 Apr 2025 02:25:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C5C582BA1;
+	Sun,  6 Apr 2025 02:25:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lxOwFbBF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hilyj2TF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 841A882B41; Sun,  6 Apr 2025 02:25:17 +0200 (CEST)
+ id EB4E282B9D; Sun,  6 Apr 2025 02:25:22 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A22A482B6C
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 02:25:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFE7482B63
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 02:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1743899112; bh=iUZ53uiF1pg6Roha8KlPpzsILKMcHLiqHIKYjwMVVWU=;
- b=lxOwFbBFRCskBrLiVQ32yrZ5kOhosFHDKCVAIDAjVW010Dsl+8fVYJ/LwVsohMh9HQ7K3SG0t
- rO3q8WffyjPlntc0h3+k9lZVJzMX89xXWzrpM8B7XoB/A8AS14n4a4Lq562AKralsbHuFt0Z2t1
- w54SDrq2AooNjnc2PlLSlSepyc+gM+FenqIbGR/2uo+W+NXvMislyGRroum24T6HzZGBbjQqoX+
- r5kTMR+U32uF7QGD2i0Nxm0mLBMaAfdsAhIVl5YsgcxFDLKddXElmUiM+bIm8MK4sXGNwO322ik
- 1DW39PUR4U3hvMln2OcvxbCAQcKE5lZ5pbreu2Jtvg2Q==
-X-Forward-Email-ID: 67f1c9e6fb2b6fde09d69f89
+ t=1743899117; bh=UGNFe/HfGUbfjinp+xEg1sA98zA9roP+7MiyrXClzQ0=;
+ b=hilyj2TFIHYpoPxGcchEXAMxbsN8IO2sCJL4PI1x2ZPRtRI52j8FNBoQR7OaOpK3OnblzF5ET
+ qgTSOQeUF2sgStK0bi8lR38Jf7cn1ZUO5b279fwJla0oQyWc1Bpbergcj0IqZUKG4dTIq2DdxFb
+ UTqEvIBuiz8UMgWvmc7Rtqajeb3LZQkAwDhyCDlqdJHCPJn7DDrLpeABIviJOFD+YiUQhKJY4tr
+ RjuMcEmMK3M98uHu6n2AxIKUtoXlXNPHzFfM3p8WnOxgi27mICJfQlATrZQ9k0NFocEmYiy0E8j
+ 4mT4EjVvZYF9lZN5DF36vuffDAf6+DXuf/exZ1EY61BQ==
+X-Forward-Email-ID: 67f1c9eafb2b6fde09d69f9e
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.0
@@ -44,14 +44,13 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jacobe Zang <jacobe.zang@wesion.com>, Elon Zhang <zhangzj@rock-chips.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 05/11] rockchip: Ensure device settings is defined before
- rk3588_common.h
-Date: Sun,  6 Apr 2025 00:24:26 +0000
-Message-ID: <20250406002447.1555596-6-jonas@kwiboo.se>
+Subject: [PATCH 06/11] rockchip: Use rk3568_common.h by default for RK356x
+ boards
+Date: Sun,  6 Apr 2025 00:24:27 +0000
+Message-ID: <20250406002447.1555596-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250406002447.1555596-1-jonas@kwiboo.se>
 References: <20250406002447.1555596-1-jonas@kwiboo.se>
@@ -73,67 +72,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ensure ROCKCHIP_DEVICE_SETTINGS is defined before including
-rk3588_common.h in board include/configs files.
+Ensure rk3568_common.h can be used by boards directly by defining a
+blank ROCKCHIP_DEVICE_SETTINGS unless it already is defined.
+
+Add a default SYS_CONFIG_NAME to include rk3568_common.h unless a board
+target overrides it in its board Kconfig.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- include/configs/evb_rk3588.h           | 4 ++--
- include/configs/khadas-edge2-rk3588s.h | 4 ++--
- include/configs/toybrick_rk3588.h      | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ arch/arm/mach-rockchip/rk3568/Kconfig | 3 +++
+ include/configs/rk3568_common.h       | 4 ++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/include/configs/evb_rk3588.h b/include/configs/evb_rk3588.h
-index 4568e2cace66..5ff1ddbfcbec 100644
---- a/include/configs/evb_rk3588.h
-+++ b/include/configs/evb_rk3588.h
-@@ -6,10 +6,10 @@
- #ifndef __EVB_RK3588_H
- #define __EVB_RK3588_H
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index a271782fac5c..8cad77890f13 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -81,4 +81,7 @@ source "board/qnap/ts433/Kconfig"
+ source "board/radxa/zero3-rk3566/Kconfig"
+ source "board/xunlong/orangepi-3b-rk3566/Kconfig"
  
--#include <configs/rk3588_common.h>
--
- #define ROCKCHIP_DEVICE_SETTINGS \
- 		"stdout=serial,vidconsole\0" \
- 		"stderr=serial,vidconsole\0"
- 
-+#include <configs/rk3588_common.h>
++config SYS_CONFIG_NAME
++	default "rk3568_common"
 +
- #endif
-diff --git a/include/configs/khadas-edge2-rk3588s.h b/include/configs/khadas-edge2-rk3588s.h
-index d279cf3826a9..fe8461d63626 100644
---- a/include/configs/khadas-edge2-rk3588s.h
-+++ b/include/configs/khadas-edge2-rk3588s.h
-@@ -6,10 +6,10 @@
- #ifndef __KHADAS_EDGE2_RK3588_H
- #define __KHADAS_EDGE2_RK3588_H
+ endif
+diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
+index a68ca381db57..b2a35db0b949 100644
+--- a/include/configs/rk3568_common.h
++++ b/include/configs/rk3568_common.h
+@@ -15,6 +15,10 @@
+ #define CFG_SYS_SDRAM_BASE		0
+ #define SDRAM_MAX_SIZE			0xf0000000
  
--#include <configs/rk3588_common.h>
--
- #define ROCKCHIP_DEVICE_SETTINGS \
- 		"stdout=serial,vidconsole\0" \
- 		"stderr=serial,vidconsole\0"
- 
-+#include <configs/rk3588_common.h>
++#ifndef ROCKCHIP_DEVICE_SETTINGS
++#define ROCKCHIP_DEVICE_SETTINGS
++#endif
 +
- #endif /* __KHADAS_EDGE2_RK3588_H */
-diff --git a/include/configs/toybrick_rk3588.h b/include/configs/toybrick_rk3588.h
-index faa2e6c19c3e..005650896760 100644
---- a/include/configs/toybrick_rk3588.h
-+++ b/include/configs/toybrick_rk3588.h
-@@ -6,10 +6,10 @@
- #ifndef __TOYBRICK_RK3588_H
- #define __TOYBRICK_RK3588_H
- 
--#include <configs/rk3588_common.h>
--
- #define ROCKCHIP_DEVICE_SETTINGS \
- 		"stdout=serial,vidconsole\0" \
- 		"stderr=serial,vidconsole\0"
- 
-+#include <configs/rk3588_common.h>
-+
- #endif
+ #define ENV_MEM_LAYOUT_SETTINGS		\
+ 	"scriptaddr=0x00c00000\0"	\
+ 	"script_offset_f=0xffe000\0"	\
 -- 
 2.49.0
 
