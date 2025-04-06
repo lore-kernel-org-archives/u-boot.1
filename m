@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 309B8C36002
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 15:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E419C36002
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 15:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A49A882ABA;
-	Sun,  6 Apr 2025 17:32:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08DCE82B4A;
+	Sun,  6 Apr 2025 17:33:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="B0+TE2IE";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Yp8DoV4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08FF82B4A; Sun,  6 Apr 2025 17:32:43 +0200 (CEST)
-Received: from mail-m3297.qiye.163.com (mail-m3297.qiye.163.com
- [220.197.32.97])
+ id 2502082B7C; Sun,  6 Apr 2025 17:33:22 +0200 (CEST)
+Received: from mail-m1973189.qiye.163.com (mail-m1973189.qiye.163.com
+ [220.197.31.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7838082A96
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 17:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFBBA82A96
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 17:33:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [120.36.73.2])
- by smtp.qiye.163.com (Hmail) with ESMTP id 10d0680ae;
- Sun, 6 Apr 2025 23:32:34 +0800 (GMT+08:00)
-Message-ID: <7f4f9482-9f98-4621-8d1a-42c7dac981c1@rock-chips.com>
-Date: Sun, 6 Apr 2025 23:32:28 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 10d0680c1;
+ Sun, 6 Apr 2025 23:33:12 +0800 (GMT+08:00)
+Message-ID: <825f38d8-e095-49bd-ab20-a7f02913198a@rock-chips.com>
+Date: Sun, 6 Apr 2025 23:33:12 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 04/10] rockchip: binman: Create a template for the FIT
+Subject: Re: [PATCH v4 05/10] rockchip: binman: Un-indent the FIT template
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki
  <naoki@radxa.com>, u-boot@lists.denx.de
 References: <20250329150626.2879942-1-jonas@kwiboo.se>
- <20250329150626.2879942-5-jonas@kwiboo.se>
+ <20250329150626.2879942-6-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250329150626.2879942-5-jonas@kwiboo.se>
+In-Reply-To: <20250329150626.2879942-6-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHUJKVhhOSEgeTEsfTUxMGVYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSR8aVh9PGUoZHxhDTBpCGFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTEhVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
  JLS1kG
-X-HM-Tid: 0a960bbb6bcb03afkunm10d0680ae
+X-HM-Tid: 0a960bbc03c703afkunm10d0680c1
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NC46HAw4CDJMC0k*NzwIPA5L
- NzgwFEpVSlVKTE9IQk5ITk5OS0NLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKSUtVSE1VTEhVSVlXWQgBWUFPSklJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PQg6TCo5LjIBKUkKGTMrPBwW
+ ECswChdVSlVKTE9IQk5ITkJPS0JOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKSUtVSE1VTEhVSVlXWQgBWUFNT0xPNwY+
 DKIM-Signature: a=rsa-sha256;
- b=B0+TE2IEozxDkKyDsO23JDcdrLEXKz5yLrxr7zX+hNuc2APDW2UvSjTWfUgSNOVDeVRz2zM714YNaLyokmpt7p2BpxfmMjFRCzp0X3jj/tP6jRuFyM8Oa6IKbhuTnV7zvFgPaFk77FhWcXgzzW2wH5A+J7CegVvCp9A8J0gc0Do=;
+ b=Yp8DoV4iE+ZZpJaoTXnDB1fA9OiwKCP3Z8/cxLAC60ZvF7PIEdz0YBsVMTD+XQT2Hvo0CucZqt/ZbvztjckWdyd4p1e77B8HVVDvLCKl4SsB/gftL5/aUqVN1iorM0tN/mJB4oM6gD8k9M3xpVQp3QteIFHj3+vLpbnF7xkq3iA=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=Zi3vgFvSlJKc6sfFeaFJf2orCE6/mnYgD89mLTJHYoQ=;
+ bh=iBUfo/uJjyK0H3XdTeWjN0eHHLk0AMr4N926g2BuKII=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,8 +79,8 @@ X-Virus-Status: Clean
 On 2025/3/29 23:06, Jonas Karlman wrote:
 > From: Simon Glass <sjg@chromium.org>
 >
-> Move the FIT description into a template so that it can (later) be used
-> in multiple places in the image.
+> Fix the indentation on the template. This is done in a separate patch
+> so that it is easier to review.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
@@ -90,122 +90,221 @@ Thanks,
 - Kever
 > ---
 > Changes in v4:
-> - Rename template label to fit_template
 > - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
->
-> Changes in v3:
-> - Use HAS_FIT for the SPI node also
-> - Leave fit { node open within #ifdef HAS_FIT
-> - Move placement of CONFIG_SPL_PAD_TO
-> - Keep the FIT filename
 > ---
->   arch/arm/dts/rockchip-u-boot.dtsi | 61 ++++++++++++++++++-------------
->   1 file changed, 35 insertions(+), 26 deletions(-)
+>   arch/arm/dts/rockchip-u-boot.dtsi | 176 +++++++++++++++---------------
+>   1 file changed, 88 insertions(+), 88 deletions(-)
 >
 > diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> index 8aea2e6f5713..9ef1ca6cd13a 100644
+> index 9ef1ca6cd13a..f860bfc1ba72 100644
 > --- a/arch/arm/dts/rockchip-u-boot.dtsi
 > +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> @@ -19,6 +19,10 @@
->   #define COMP	"none"
->   #endif
->   
-> +#if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
-> +#define HAS_FIT
-> +#endif
-> +
->   / {
->   	binman: binman {
->   		multiple-images;
-> @@ -27,28 +31,9 @@
->   
->   #ifdef CONFIG_SPL
+> @@ -33,120 +33,120 @@
 >   &binman {
-> -	simple-bin {
-> -		filename = "u-boot-rockchip.bin";
-> -		pad-byte = <0xff>;
-> -
-> -		mkimage {
-> -			filename = "idbloader.img";
-> -			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> -			multiple-data-files;
-> -
-> -#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> -			rockchip-tpl {
-> -			};
-> -#elif defined(CONFIG_TPL)
-> -			u-boot-tpl {
-> -			};
-> -#endif
-> -			u-boot-spl {
-> -			};
-> -		};
-> -
-> -#if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE))
-> -		fit: fit {
-> +#ifdef HAS_FIT
-> +	fit_template: template-1 {
-> +			type = "fit";
+>   #ifdef HAS_FIT
+>   	fit_template: template-1 {
+> -			type = "fit";
+> +		type = "fit";
 >   #ifdef CONFIG_ARM64
->   			description = "FIT image for U-Boot with bl31 (TF-A)";
+> -			description = "FIT image for U-Boot with bl31 (TF-A)";
+> +		description = "FIT image for U-Boot with bl31 (TF-A)";
 >   #else
-> @@ -56,10 +41,8 @@
+> -			description = "FIT image with OP-TEE";
+> +		description = "FIT image with OP-TEE";
 >   #endif
->   			#address-cells = <1>;
->   			fit,fdt-list = "of-list";
-> -			filename = "u-boot.itb";
->   			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
->   			fit,align = <512>;
-> -			offset = <CONFIG_SPL_PAD_TO>;
->   			images {
->   				u-boot {
->   					description = "U-Boot";
-> @@ -164,12 +147,38 @@
->   					fit,loadables;
->   				};
->   			};
-> +	};
-> +#endif /* HAS_FIT */
-> +
-> +	simple-bin {
-> +		filename = "u-boot-rockchip.bin";
-> +		pad-byte = <0xff>;
-> +
-> +		mkimage {
-> +			filename = "idbloader.img";
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> +			multiple-data-files;
-> +
-> +#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> +			rockchip-tpl {
-> +			};
-> +#elif defined(CONFIG_TPL)
-> +			u-boot-tpl {
-> +			};
-> +#endif
-> +			u-boot-spl {
-> +			};
->   		};
-> +
-> +#ifdef HAS_FIT
-> +		fit {
-> +			filename = "u-boot.itb";
-> +			insert-template = <&fit_template>;
->   #else
->   		u-boot-img {
-> +#endif
->   			offset = <CONFIG_SPL_PAD_TO>;
->   		};
+> -			#address-cells = <1>;
+> -			fit,fdt-list = "of-list";
+> -			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+> -			fit,align = <512>;
+> -			images {
+> -				u-boot {
+> -					description = "U-Boot";
+> -					type = "standalone";
+> -					os = "u-boot";
+> -					arch = ARCH;
+> -					compression = COMP;
+> -					load = <CONFIG_TEXT_BASE>;
+> -					entry = <CONFIG_TEXT_BASE>;
+> -					u-boot-nodtb {
+> +		#address-cells = <1>;
+> +		fit,fdt-list = "of-list";
+> +		fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+> +		fit,align = <512>;
+> +		images {
+> +			u-boot {
+> +				description = "U-Boot";
+> +				type = "standalone";
+> +				os = "u-boot";
+> +				arch = ARCH;
+> +				compression = COMP;
+> +				load = <CONFIG_TEXT_BASE>;
+> +				entry = <CONFIG_TEXT_BASE>;
+> +				u-boot-nodtb {
+>   					compress = COMP;
+> -					};
+> +				};
+>   #ifdef CONFIG_SPL_FIT_SIGNATURE
+> -					hash {
+> -						algo = "sha256";
+> -					};
 > -#endif
+> +				hash {
+> +					algo = "sha256";
+>   				};
+> +#endif
+> +			};
 >   
->   		fdtmap {
->   		};
-> @@ -196,7 +205,7 @@
+>   #ifdef CONFIG_ARM64
+> -				@atf-SEQ {
+> -					fit,operation = "split-elf";
+> -					description = "ARM Trusted Firmware";
+> -					type = "firmware";
+> -					arch = ARCH;
+> -					os = "arm-trusted-firmware";
+> -					compression = "none";
+> -					fit,load;
+> -					fit,entry;
+> -					fit,data;
+> -
+> -					atf-bl31 {
+> -					};
+> +			@atf-SEQ {
+> +				fit,operation = "split-elf";
+> +				description = "ARM Trusted Firmware";
+> +				type = "firmware";
+> +				arch = ARCH;
+> +				os = "arm-trusted-firmware";
+> +				compression = "none";
+> +				fit,load;
+> +				fit,entry;
+> +				fit,data;
+> +
+> +				atf-bl31 {
+> +				};
+>   #ifdef CONFIG_SPL_FIT_SIGNATURE
+> -					hash {
+> -						algo = "sha256";
+> -					};
+> +				hash {
+> +					algo = "sha256";
+> +				};
+>   #endif
+> +			};
+> +			@tee-SEQ {
+> +				fit,operation = "split-elf";
+> +				description = "TEE";
+> +				type = "tee";
+> +				arch = ARCH;
+> +				os = "tee";
+> +				compression = "none";
+> +				fit,load;
+> +				fit,entry;
+> +				fit,data;
+> +
+> +				tee-os {
+> +					optional;
+>   				};
+> -				@tee-SEQ {
+> -					fit,operation = "split-elf";
+> -					description = "TEE";
+> -					type = "tee";
+> -					arch = ARCH;
+> -					os = "tee";
+> -					compression = "none";
+> -					fit,load;
+> -					fit,entry;
+> -					fit,data;
+> -
+> -					tee-os {
+> -						optional;
+> -					};
+>   #ifdef CONFIG_SPL_FIT_SIGNATURE
+> -					hash {
+> -						algo = "sha256";
+> -					};
+> -#endif
+> +				hash {
+> +					algo = "sha256";
+>   				};
+> +#endif
+> +			};
+>   #else /* !CONFIG_ARM64 */
+> -				op-tee {
+> -					description = "OP-TEE";
+> -					type = "tee";
+> -					arch = ARCH;
+> -					os = "tee";
+> -					compression = "none";
+> -					load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
+> -					entry = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
+> -
+> -					tee-os {
+> -					};
+> +			op-tee {
+> +				description = "OP-TEE";
+> +				type = "tee";
+> +				arch = ARCH;
+> +				os = "tee";
+> +				compression = "none";
+> +				load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
+> +				entry = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
+> +
+> +				tee-os {
+> +				};
+>   #ifdef CONFIG_SPL_FIT_SIGNATURE
+> -					hash {
+> -						algo = "sha256";
+> -					};
+> -#endif
+> +				hash {
+> +					algo = "sha256";
+>   				};
+> +#endif
+> +			};
+>   #endif /* CONFIG_ARM64 */
+>   
+> -				@fdt-SEQ {
+> -					description = "fdt-NAME";
+> -					compression = "none";
+> -					type = "flat_dt";
+> +			@fdt-SEQ {
+> +				description = "fdt-NAME";
+> +				compression = "none";
+> +				type = "flat_dt";
+>   #ifdef CONFIG_SPL_FIT_SIGNATURE
+> -					hash {
+> -						algo = "sha256";
+> -					};
+> -#endif
+> +				hash {
+> +					algo = "sha256";
+>   				};
+> +#endif
 >   			};
->   		};
+> +		};
 >   
-> -#if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
-> +#ifdef HAS_FIT
->   		fit {
->   			type = "blob";
->   			filename = "u-boot.itb";
+> -			configurations {
+> -				default = "@config-DEFAULT-SEQ";
+> -				@config-SEQ {
+> -					description = "NAME.dtb";
+> -					fdt = "fdt-SEQ";
+> +		configurations {
+> +			default = "@config-DEFAULT-SEQ";
+> +			@config-SEQ {
+> +				description = "NAME.dtb";
+> +				fdt = "fdt-SEQ";
+>   #ifdef CONFIG_ARM64
+> -					fit,firmware = "atf-1", "u-boot";
+> +				fit,firmware = "atf-1", "u-boot";
+>   #else
+> -					fit,firmware = "op-tee", "u-boot";
+> +				fit,firmware = "op-tee", "u-boot";
+>   #endif
+> -					fit,loadables;
+> -				};
+> +				fit,loadables;
+>   			};
+> +		};
+>   	};
+>   #endif /* HAS_FIT */
+>   
