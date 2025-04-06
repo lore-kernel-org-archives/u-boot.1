@@ -4,66 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745C9C3600C
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 10:01:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F260DC3600C
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 13:30:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF6A682B45;
-	Sun,  6 Apr 2025 12:01:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id D0F7282AAF;
+	Sun,  6 Apr 2025 15:30:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="aaPzOYqU";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iDOAimBk";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="caUQCmv7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99F2E82B46; Sun,  6 Apr 2025 12:01:06 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ id B475582B00; Sun,  6 Apr 2025 15:30:46 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0803282B2F
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 12:01:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8982682AAA
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 15:30:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 0bec00d0-12ce-11f0-a9b5-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 0bec00d0-12ce-11f0-a9b5-00505699b430;
- Sun, 06 Apr 2025 12:01:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=f7DKFSF0gfKEDd0tCaco9uYFOhqO46QJPgYuZyblHEA=;
- b=aaPzOYqUIaQJYyq+b0cOjz3i09vYKVDeNE43WF6+QADBs2v+gmX5edxmOWLKzc8xBlV+YDPmqVXbx
- 3+U80BQJ0SS+ZBPA9oqpZRLe9TzGfDNis5CGCbk3kDbIkvVkZGBoIw6IUhHHngQKPuEWCwfTM5JDJw
- CYZdZBx7DLTxU1+a8qIRRqmY0tnVk0Ts5QVRw7AROtAhVhzXChzEGBhKrjuEJcmKTMpS4u0RNv4Kg4
- M/fOL7RUGdv69+v7kA1WwrPBVXF71Ab/y18gSOrUOyom/xcFI7XfpzqYIXOHcEstKpqV5MZfn9umEc
- 4snF7srXhJZR00ktRxbBkgrplYmqXvg==
-X-KPN-MID: 33|t1KetOIo1se4H0bKrpEYS7xhurLHnIexDLqlrGyl03gKScexsJtUou8bO9RFoH6
- NIVlv/O+IgaRb51pKGqtrgruLhf0kPUzlH22lRc0RFtg=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|fPzmrSR5rVLSlNa/ioBxJuRrwvo1DON25Yv4Jhctqu3fy0qWdNo4MDX7ApOVYJS
- F49xzobyU//Js+/HqPZS+ZQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 0bb6f439-12ce-11f0-97c8-00505699d6e5;
- Sun, 06 Apr 2025 12:01:02 +0200 (CEST)
-Date: Sun, 06 Apr 2025 12:01:01 +0200
-Message-Id: <87y0wdwqw2.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: sjg@chromium.org, ilias.apalodimas@linaro.org, trini@konsulko.com,
- mcb30@ipxe.org, christian@kohlschutter.com,
- neil.armstrong@linaro.org, u-boot@lists.denx.de
-In-Reply-To: <CAM=mAOnCdLWMUfU1DCdUu0RdM0-PXaW_2XrPT5UaKOCSNU4PaQ@mail.gmail.com>
- (message from Heinrich Schuchardt on Sun, 6 Apr 2025 07:14:49 +0200)
-Subject: Re: [PATCH 1/1] efi_loader: stop network in EXIT_BOOT_SERVICES
-References: <20250405065812.33027-1-heinrich.schuchardt@canonical.com>
- <CAFLszTgp38yBXnSigfT-mEFU=rqyAKjp0WBQGgHP_N3vRxCq=Q@mail.gmail.com>
- <CAM=mAOnCdLWMUfU1DCdUu0RdM0-PXaW_2XrPT5UaKOCSNU4PaQ@mail.gmail.com>
-MIME-version: 1.0
-Content-type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZVtWm2CN3z9v7H;
+ Sun,  6 Apr 2025 15:30:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1743946244;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2mFUjgx/Lf6VGKSm31WZj24K2skP7ZyCA6zW1hzXRKo=;
+ b=iDOAimBkdws7nvJUVlHrs0ny/nhS1OlSf1JW487/46sFNO1PVO9PkD3mNDFOcC2PVaumv0
+ XD8txEgcGU9q+JUT9RHI5bpwQsHx3b+bp3jV+nYUh9612Us7omaIiHBHWIOa/U0zCJpy0u
+ oqVj0J1DbvHcrcV1h6xZXyhVVYn0KUzcbmNAidyx2zeB8fXzvm6JZ4AIvAg7dOqKjB2+U1
+ uXOAaQ3I0PWHL/B119vQl9SLe4G3e+o3IeQeWh84VsuGhffbyW8tmB6JYAKRqdLbElEnS4
+ H7mvb/I0rbOwVhZNt1EEpuTiLnAKyvIpamP/Q24BuC+dPkCyX+/2MTT2Mzg+VA==
+Message-ID: <eacd3b66-0262-4bde-9b91-6ca7eea789fe@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1743946242;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2mFUjgx/Lf6VGKSm31WZj24K2skP7ZyCA6zW1hzXRKo=;
+ b=caUQCmv79am3lnv+512DmaMjja4LeUvlnfij1Ll92c+IsHvTYMy9woJjpZUL6aQ19/aHvv
+ WfHHNrMI9JSpozLpBgSlTIDzsMYSbC1xd9K6LgIFfI3TYBAgVwpZNB+rm5FFnTYu42sFul
+ NeZe+TTlDZPU2KwnstreULBQBPpHkd+9z+NEjymD+yWnkJ5FfRuNvCYKVbCTtSVzxZjxYv
+ MDQVdTmSG3moMxz0OMvkxog/fAbjciSzyVdiTsuJWvdtjYNpAKlzxvIbYgMzBwSiilpeQj
+ GtErBcVC8LDpGKg+5BBoklRBdfj8qo1LyRHXsw+22bg8HE3AzTGThA2tcXDrCA==
+Date: Sun, 6 Apr 2025 15:30:39 +0200
+MIME-Version: 1.0
+Subject: Re: [PATCH 1/1] net: phy: Add the Airoha EN8811H PHY driver
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com
+References: <20250406130244.19496-1-lucienzx159@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250406130244.19496-1-lucienzx159@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 128aea79077b5e46836
+X-MBO-RS-META: thxkz48doe9o3rppgqo8fnc6cya4x831
+X-Rspamd-Queue-Id: 4ZVtWm2CN3z9v7H
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,109 +91,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Date: Sun, 6 Apr 2025 07:14:49 +0200
+On 4/6/25 3:02 PM, Lucien.Jheng wrote:
+> Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
+> 100/1000/2500 Mbps with auto negotiation only.
 > 
-> Simon Glass <sjg@chromium.org> schrieb am Sa., 5. Apr. 2025, 22:46:
+> The driver uses two firmware files, for which updated versions are added to
+> linux-firmware already.
 > 
-> > Hi,
-> >
-> > On Sat, 5 Apr 2025 at 19:58, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> > >
-> > > It has been reported that memory corruption can occurred because network
-> > > packages where received after EXIT_BOOT_SERVICES. See the thread
-> > > starting at [1].
-> > >
-> > > We try to remove all drivers when EXIT_BOOT_SERVICES is called. But
-> > >
-> > > * Some network drivers don't call their own stop method when removed.
-> > > * Some network drivers don't have a remove method.
-> > > * Some devices have CONFIG_DM_DEVICE_REMOVE=n.
-> >
-> > A few points:
-> > 1. Only three boards disable DM_DEVICE_REMOVE and enable EFI_LOADER;
-> > EFI_LOADER must depend on it or select it
-> >
+> Based on the Linux upstream 8811 driver code(air_en8811h.c),
+> I have modified the relevant process to align with the U-Boot boot sequence.
+> and have validated this on Banana Pi BPI-R3 Mini.
 > 
-> Why does that option exist at all?
+> The MD32 FW is currently stored in eMMC partition 1 on Banana Pi BPI-R3 Mini,
+> and it is loaded from there.
 
-Presumably it shaves a few bytes off the final binaries?  And if you
-don't have any drivers that do uncontrolled DMA you don't really need
-to do any driver tear down.
+If this is ported from Linux, please include Linux commit SHA from which 
+this is ported.
 
-> How would a driver live on when U-Boot is not around?
-> 
-> My two cents: That option should vanish as it is incompatible with the
-> driver model.
-> 
-> 2. If devices don't enable DM_DEVICE_REMOVE we'll have similar
-> > problems with USB, etc.
-> 
-> 3. The code in efi_boottime.c should be unified with
-> > announce_and_cleanup() since otherwise this will happen on the non-EFI
-> > path
-> >
-> > Please do at least (1) now, if this patch is targeted at the imminent
-> > release.
-> 
-> 
-> > Also, we need a fix in the affected network driver, although I suspect
-> > the reporter will do that.
-> >
-> 
-> You just sent patches for the network drivers.
-> 
-> Best regards
-> 
-> Heinrich
-> 
-> 
-> > Regards,
-> > Simon
-> >
-> >
-> >
-> >
-> > >
-> > > Let's call eth_halt() in EXIT_BOOT_SERVICES explicitly.
-> > >
-> > > [1]
-> > >
-> > https://lore.kernel.org/all/C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com/
-> > >
-> > > Cc: Michael Brown <mcb30@ipxe.org>
-> > > Reported-by: Christian Kohlschütter <christian@kohlschutter.com>
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >  lib/efi_loader/efi_boottime.c | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > >
-> > > diff --git a/lib/efi_loader/efi_boottime.c
-> > b/lib/efi_loader/efi_boottime.c
-> > > index 5164cb15986..eaa6464fa39 100644
-> > > --- a/lib/efi_loader/efi_boottime.c
-> > > +++ b/lib/efi_loader/efi_boottime.c
-> > > @@ -15,6 +15,7 @@
-> > >  #include <irq_func.h>
-> > >  #include <log.h>
-> > >  #include <malloc.h>
-> > > +#include <net-common.h>
-> > >  #include <pe.h>
-> > >  #include <time.h>
-> > >  #include <u-boot/crc.h>
-> > > @@ -2235,6 +2236,8 @@ static efi_status_t EFIAPI
-> > efi_exit_boot_services(efi_handle_t image_handle,
-> > >                 bootm_disable_interrupts();
-> > >                 if (IS_ENABLED(CONFIG_USB_DEVICE))
-> > >                         udc_disconnect();
-> > > +               if (IS_ENABLED(CONFIG_DM_ETH))
-> > > +                       eth_halt();
-> > >                 board_quiesce_devices();
-> > >                 dm_remove_devices_active();
-> > >         }
-> > > --
-> > > 2.48.1
-> > >
-> >
-> 
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 3132718e4f8..5b4cf30b0a3 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -79,6 +79,40 @@ config PHY_ADIN
+>   	help
+>   		Add support for configuring RGMII on Analog Devices ADIN PHYs.
+>   
+> +menuconfig PHY_AIROHA
+> +	bool "Airoha Ethernet PHYs support"
+> +
+> +config PHY_AIROHA_EN8811H
+> +	bool "Airoha Ethernet EN8811H support"
+> +	depends on PHY_AIROHA
+> +	help
+> +		AIROHA EN8811H supported.
+> +
+> +choice
+> +	prompt "Location of the Airoha PHY firmware"
+
+Can this do the same thing as Aquatia PHY and load the PHY firmware from 
+filesystem on block device instead , using the blk* or fs* commands ? 
+Then the hard-coded filesize and co. won't be necessary.
+
+If you need board specific loading override, implement __weak default 
+loading from file on filesystem by default (see what Aquatia does) and 
+then override the loading function on board or architecture level.
+
+U-Boot really needs a proper generic firmware loader, because this 
+firmware stuff keeps showing up more and more, but I cannot ask you to 
+write one only because of this PHY ... but if you are up for a challenge ...
+
+[...]
