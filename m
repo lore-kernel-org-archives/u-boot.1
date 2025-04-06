@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC08C3601A
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 15:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF65DC3601A
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 15:38:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA45482BE3;
-	Sun,  6 Apr 2025 17:38:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4231582C0C;
+	Sun,  6 Apr 2025 17:38:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KYg40Mu+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BM/KvlT8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5432782BE3; Sun,  6 Apr 2025 17:38:09 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 1535E82AA3; Sun,  6 Apr 2025 17:38:11 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26A7982B6C
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 17:38:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAF9082BD6
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 17:38:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-601c469cce3so766124eaf.2
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 08:38:07 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-601fcbff303so1768074eaf.3
+ for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 08:38:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743953886; x=1744558686; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743953887; x=1744558687; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4zTaXvAxtdgpGwhk+zlb2Bw7nI992kOeQrvmWKyxVPE=;
- b=KYg40Mu+e3tK1j0D7iQ0WKnUmXLJgQgUX3VKau6h0zWGCzoomebMsoDleqA655QpmB
- V2EZ0OUhHa8Ubk65yN7zloeWMGvL+jl/4Yww+dAKnDrUc9iBcpboA/vU/xVaWCKD8Ah1
- NjZrYx2t/ttgCSVDiSoKfqkf6mDHt3lCcTUaI=
+ bh=MipgmUjRkndxltTjrz4EbX+l4xZ4UIW7Y0a24IYadQg=;
+ b=BM/KvlT86YJLHmpz9bC0+og1JYr3POhjw4lN+SjkktNpNB3TUN2n3yFwfxeEeLmprL
+ 9kBjVDv17dGeCSOEe05UmiwKh0azgVe9jfD4U8qBrtfnW5XURHJz3r6a4Owp6Uw3UMzI
+ IgHQCR+WvmV/eptMaa9Wq4EikbWRGyb5lXziY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743953886; x=1744558686;
+ d=1e100.net; s=20230601; t=1743953887; x=1744558687;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4zTaXvAxtdgpGwhk+zlb2Bw7nI992kOeQrvmWKyxVPE=;
- b=BuWqblrDlnpzhITVEOPnLheowwxYFIrg2vVXGI8AyQJHzW+CF1jP50ZY8U34NRoUuG
- YB1kf0WlaOnQcFhGv6cg35ZeJVsqSf9L2qoGQQuZlKjA5RfUu92h23xOVOxEq2pVZrpx
- Ssc0KSQqsZpIImIZqMSK94n/hr2BLfxdliXEIi+mHm/OvG/bRiGcbr/SYrsq/BRdhcoG
- yrLe9WbrCH97MTd8wPE83HjIKlrf9NMSDPZew9PywBjM8bJpeS+0rYLV/gHi/E29P/kJ
- ULoazsO1Nzoi9V9m7twfeA8vYsrc8jjvWO6k/T339cNawGCL59Mn98fkysWmwi0tYxrW
- rKFg==
-X-Gm-Message-State: AOJu0YwADRbYCyXaEXX6eAu5nvgwpBAz7FOHjBJPw/1wDHhREFpsadLS
- 2T+8q+K9nssrvqSO/D4Jzx5LT6luiJYX+Fc9TVBkVVGZVBU/u1j082GW/WDQYWS4+C67Zd+xTMM
- t
-X-Gm-Gg: ASbGncteD1/loMxew7E96/cYvM7dIxi9LiY5twQw2YLUF+MYhxyh65lYumRMEkCKTxt
- Ra31hfRKR+8N6pLQUeYVMIX57YuLfuLALDhI3Yfd3FP1dUa7+s4edmamIycgT7rU1z4nQ5ukzLe
- gJE+JTv+sSXMIkv7P7J08vFppjZ9cMl942UrSMSPJ+DRFlwuTMkR5Qtk1qPnUjYoX49SRUjkAUJ
- H0Lyosb6OH3hvnxX4LGBOHCrc4vAiVBxou8lfyI3qcbiD8CyY6zpN53RJVt40hvFcpHC8wDrgCr
- wEjGHpFtTSN4BxelfAgl+UWstbZB8du4yralAk/FbHbORk1QsdNxmly/9keR4VpZfecKUb741fr
- SIvNR
-X-Google-Smtp-Source: AGHT+IG6IXoglyJWr9W/AFL0MXTwHYG8al6qeQLoFj8vWzavffEAxp+EvRqaDaIFWX6F9QlwZMJBmw==
-X-Received: by 2002:a05:6820:2214:b0:603:fd3b:aef6 with SMTP id
- 006d021491bc7-60415810f78mr4546324eaf.8.1743953885922; 
- Sun, 06 Apr 2025 08:38:05 -0700 (PDT)
+ bh=MipgmUjRkndxltTjrz4EbX+l4xZ4UIW7Y0a24IYadQg=;
+ b=WvfYPTwL2BaWYmGwkcrLGt7HrvbW0JkiGAnRH1+NpiZl64Zlmw79BvIqQPt30zv6Wr
+ a/Suu2CvJlUSrmPmXcI6TdxO75PCCqQT8YNMZIrv4+u+gzDws9dyih/ykdijkRdFzna0
+ AipoOWt9pXlvX4MkxuBiKbryQyOYZxOda7IVoKrVsmkPPRvCkw9Ox0pBwJSYR37slTcp
+ i8E0ScyoOdSzdwwLEDP154rCUel8ZXToOvsbpKQu2Y/X7HRgn/V0EsZIoLVomzH+Fe20
+ FD3jt7o/XjzHqj5L1Z+0h9Qe90wWRpR8yPF49w2fIlDhUC4kvFuvVQmtSW3x157ZQ/wb
+ 4Y0Q==
+X-Gm-Message-State: AOJu0YySpttqvtY5JUvIRguVTgK2uCYHO2x/NXO9kn7PPO4HYJH+H86m
+ d14pYsYGvOP1eei8i5G1bGc+KWKLYIkIQNhQnwUgGHmQrsMzqz7OGc1/HJlEME54+Eu09hnq/uR
+ b
+X-Gm-Gg: ASbGnctG+VS4b87qpGWAuIRd3PtOVDsImo5hcJqPH4SwCpdBcWWFfPACRij1BY7tVAV
+ 3XG87s8qrBCQuO7VXr+4/0mu6SfRu5TkDdbwRZu0a2mnOXvpIurwgbaEgsNglDybSo4v68BWl9G
+ WV5hvnjPsojAIaWNc+LQXk4oxnfKbI+K+IVwT60N6Ids9GUKpUo8+kOeWu9sFrcCwGT1o+ADUcq
+ rgT5VWKm92M/0y4MW+xRc11yFMUxPZ0iq7J69NUG0gu3kU4pZS92bK1Pd/Jz+V+b/QvD0Zj8uAV
+ 2rO3bkikI5UwyEWb6LD50g2O/DTg9cxzrFvvG0mv/I6nhr46BgBJwQyMQlkoC3zzeYc1eYF4XDZ
+ vjsje
+X-Google-Smtp-Source: AGHT+IGCqtEfs5shQ22unok0MPEtPWjnA8e2xezv5n2hyOU5JOxTEkrI8rQkzw3FI73KxLKAQq0J2A==
+X-Received: by 2002:a05:6820:1ad6:b0:604:d2b:c585 with SMTP id
+ 006d021491bc7-604165c24acmr4631547eaf.3.1743953887525; 
+ Sun, 06 Apr 2025 08:38:07 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6040c4cddd6sm1447384eaf.15.2025.04.06.08.38.04
+ 006d021491bc7-6040c4cddd6sm1447384eaf.15.2025.04.06.08.38.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Apr 2025 08:38:05 -0700 (PDT)
+ Sun, 06 Apr 2025 08:38:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Neha Malcom Francis <n-francis@ti.com>, 
  Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
  Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250319151550.163275-1-afd@ti.com>
-References: <20250319151550.163275-1-afd@ti.com>
-Subject: Re: [PATCH] arm: dts: k3: Remove leftover file after OF_UPSTREAM
-Message-Id: <174395388449.154794.7248493038317603940.b4-ty@konsulko.com>
-Date: Sun, 06 Apr 2025 09:38:04 -0600
+In-Reply-To: <20250319185458.270297-1-afd@ti.com>
+References: <20250319185458.270297-1-afd@ti.com>
+Subject: Re: [PATCH] arm: mach-k3: j721e: Split out J7200 SoC support from
+ J721e
+Message-Id: <174395388604.154794.2750395089107786398.b4-ty@konsulko.com>
+Date: Sun, 06 Apr 2025 09:38:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +99,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 19 Mar 2025 10:15:50 -0500, Andrew Davis wrote:
+On Wed, 19 Mar 2025 13:54:58 -0500, Andrew Davis wrote:
 
-> The file k3-am62a7.dtsi is part of upstream DT and should
-> have been removed when migrating to OF_UPSTREAM but must
-> have been missed. Do this here.
+> Currently in j721e_init.c we check which firewalls to remove using
+> the board configuration (e.g CONFIG_TARGET_J721E_R5_EVM). We do this
+> as J721e and J7200 have different IP and firewalls but use the same
+> SoC definition (SOC_K3_J721E) even though they are different SoCs.
 > 
+> The idea was they would be similar enough that they both could use
+> the same SoC config to help with common code sharing. Board checks
+> would then be used differentiate.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm: dts: k3: Remove leftover file after OF_UPSTREAM
-      commit: 42074b54075e584014d6609f9500525bf837d864
+[1/1] arm: mach-k3: j721e: Split out J7200 SoC support from J721e
+      commit: 03e3fdd3d09e5e586f7e1420f30510ea2d614f7a
 -- 
 Tom
 
