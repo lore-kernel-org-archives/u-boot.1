@@ -4,86 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43764C3601A
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 21:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D74B4C36002
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 21:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6CEA82BDC;
-	Sun,  6 Apr 2025 23:11:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 426EE82B46;
+	Sun,  6 Apr 2025 23:12:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KpI+9Ia2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KlWaTYCt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA7E782BDC; Sun,  6 Apr 2025 23:11:18 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 848D582B4A; Sun,  6 Apr 2025 23:12:49 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 557B082C2F
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 23:11:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 557A080079
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 23:12:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5e5c9662131so5819900a12.3
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 14:11:15 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac2bb7ca40bso306001266b.3
+ for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 14:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743973875; x=1744578675; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BcI15po75c4DpryXM6XE2KAMbEcEzy/h6oWlMhrtVqM=;
- b=KpI+9Ia2sYIZyH7jvrTvxacZnwV83dXhI4kYZRY8D9/uPn2EjAAQIdyE8bOb2azk1m
- Dxmj47wWhZx/idkIO/WaZAURJj0XTl3MSsf5Siu9Ev1qNhbJ0GK5NQX5+8gMLrDin9mk
- Tu+42N4pOlrs9A8RJxkd5EW8IEUR0PjhyLQLc=
+ d=chromium.org; s=google; t=1743973967; x=1744578767; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9lSJCSm/DtYVSiXAn4Ofta6MDWRTp2KjYep+jA5zCGA=;
+ b=KlWaTYCtryfqH4712n8XuPzOzVMHxdfCTM2Hgt9zsOyokikkNF/v6eWnC7uivl7XEt
+ ccgB5F83cFAXkhm3POg9PYHDbN427Eba6KWj/F7lkv1lj+Br9xne/3Ifmpqt3iOckt0l
+ 4LSqg2MWnY2MiFdGcAYjGNppXBB/Qgs19HsPA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743973875; x=1744578675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BcI15po75c4DpryXM6XE2KAMbEcEzy/h6oWlMhrtVqM=;
- b=lXtK1U2wskiorzVFHCYRoytFw0YsXJXiLIKW5XQx2IozTX6qrszVwm9+wLHWtYuVY2
- WTImnQdAnLPBXvv/g4i6Uyq2E5/VnqL7DyflR2Z4op8iBlPQBZHaw54BWOCkf9UFRsFc
- uWB4z5DCz6kBfQ4K3tdk4fenU6cXMLBHuc44mpIcdkyLJuGtrrtSJQLJgKUSnQZ3ShgM
- tE39U71n9W2VmFW0ot+Av9NdTus+ee5eiY4Vge/6L9RQA5X5UrJ3Lnkc98KqUmzCIbBO
- 53xQnTGlX/SLlXqJE2eby9uQzPO6VliGyp7ljzChF5aS2fXaQAf5uc45sn9l9p/5WZ4C
- 1KkA==
-X-Gm-Message-State: AOJu0YyVf4r8VdJt/zAH7TI82goDahUb3falMucoZwYbIWfah1im9O8x
- R4yc1sQinuuxwjMH8/OhSLRNGBtXgmDp5yGF1D9plXM74oZiZ9+BnS/KayiFYncbt56dMe+/vOl
- jx0AOcV99QQF+FJ7O4i73KmpidGXuLVlRuubw
-X-Gm-Gg: ASbGnct44Lhwp63h3IDZTqge+3oTda9GQIZ64J0RuNFoUGHK8z1RTX7oK7QoTPSHWPw
- p+Ntg+fhjEd7buqh4DlNJkDYqmQr4z9u6bZ1krAhW84Ide+CGmp/sVuwXSnLBK1bndAd1n8M3bv
- pl4zhTnnk7Tx8sx74y0cLFpfRJs1bXJCNuUNq2lYc=
-X-Google-Smtp-Source: AGHT+IHUXT5Sy73XKgX7gMs/LPVH8sVlT7v62WEMiuOkIXO37c7mf175CsjSCtNvAWklKH7BwyQ14R9l+DJTtVVbtHg=
-X-Received: by 2002:a17:907:1b26:b0:ac7:3912:5ea7 with SMTP id
- a640c23a62f3a-ac7d6f22f82mr842672266b.60.1743973874523; Sun, 06 Apr 2025
- 14:11:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1743973967; x=1744578767;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9lSJCSm/DtYVSiXAn4Ofta6MDWRTp2KjYep+jA5zCGA=;
+ b=bZcSszqQSnHXXxvjs6QmN2Y5FpBh0rl8K4qC57fgorsfmzLVzRONrtifU81chEvLWu
+ ouxano4JiyGm1iGGqx6OsujohDa1b3ceRl6wErkW3BXQl4F9eLjtxNYwYtvi10hEtCzG
+ QGP4E50c2YpgPpprTx33C6HDR/aneeYD8bANQYzKlnJ07DXCmHZzh0zEVA2EpTMXnmyK
+ TILrtgCLiEqZewcRkRu8tUezSBiqqfsk0UptxBmuG0ZBiRQfxXFlgI19m/GHtOsHVq22
+ kwFbX4R2A30iMg41Ee2hJt5x9jHpWqeFLjkz5Z6H3inkSR5hxGJd+CGpVvppUqQi47HR
+ 6f6g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmh8ztIaY018I27ZeFR/uaPeS1GLyutZ0S+OIqkrbDYlOiQNaS4crOsa/acrZK1mWo4YDrAak=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywkk5kBXy/5e7lgs/Cyw4iFNmHoYhMpSRKXACFpnoSsnIp/zcMx
+ wqTlA/lHzycWyps4VZLE/MPRCFAU+ohVZk1HZi/CzODODpP+N39NzNWAwz4WFsD0Ahj0RXaoPW/
+ l5qseaaUH2EwYGsyV/XWS7u4wAyuuvc/98l6zBfbfHbZJNaAxjkWE
+X-Gm-Gg: ASbGncvp3evorhwawgMA9CoPOxrRDDHDhd9PWhJq2V7WARwLBAdvpNSrmGmKcGMzGan
+ ILw7khaYxP3oacFlZc2QHlsj5XD5lFe4DnPu8zJiqrYQjUippulO0i7093jONk6VKJthKWxJbcO
+ miWiW2K5seIyQJigC7zgPioqSJniaH
+X-Google-Smtp-Source: AGHT+IGSXs0c3+fsI2jQZ4KAe8ZmCJvjzDOkdrcwi+8XiK8UbBqvQxBEWz5PBbNsh12KT1kxnEc5Lgtbkb7cQScIXak=
+X-Received: by 2002:a17:907:7eaa:b0:ac2:b826:1e6b with SMTP id
+ a640c23a62f3a-ac7d1820cb2mr1023322266b.4.1743973966524; Sun, 06 Apr 2025
+ 14:12:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250405221308.498047-1-sjg@chromium.org>
- <20250405221308.498047-2-sjg@chromium.org>
- <dc4dec57-6fba-4224-9f84-1cc63c58eacd@kwiboo.se>
-In-Reply-To: <dc4dec57-6fba-4224-9f84-1cc63c58eacd@kwiboo.se>
+References: <20250306002533.2380866-1-sjg@chromium.org>
+ <174234008117.1788726.14383009154862416750.b4-ty@konsulko.com>
+ <10a57d25-d484-4903-8f25-e373c451bc21@kwiboo.se>
+ <CAFLszThrij_kGPdFcdJLoxJLpoZru=_M_vG4eVKwdPAqDfQJyg@mail.gmail.com>
+ <2ad3b1c5-b6e7-47e2-b225-834b821cc5c4@kwiboo.se>
+ <20250404224801.GV5495@bill-the-cat>
+ <20250405144008.GY5495@bill-the-cat> <20250405144823.GZ5495@bill-the-cat>
+ <CAFLszTiJct7mhx5_7iPzt_4m1BZL72pp1QML62b=7R3AgBn3fw@mail.gmail.com>
+ <20250405232346.GB5495@bill-the-cat>
+In-Reply-To: <20250405232346.GB5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Apr 2025 09:10:59 +1200
-X-Gm-Features: ATxdqUEnyd67I1bf3xTSw1_xYgch-V5k86_kPtngIUOEXajn_iWbdrZFvEhoYvo
-Message-ID: <CAFLszTim=Fq9rv0BfypZoje=i+HU_ZTdFK_GSQoZSsESWm=Jqg@mail.gmail.com>
-Subject: Re: [PATCH 2/3] designware: Use the remove() method with related
- drivers
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+Date: Mon, 7 Apr 2025 09:12:32 +1200
+X-Gm-Features: ATxdqUHjDXlDAxB2UKgPU6SECh8CISu4_7hlnHnM0RrlxkwOGSSga9inZtTt8ZI
+Message-ID: <CAFLszTj4+GXkmEk3pq-iwJ=8CcJsSreJFKfqWsvW1LQKDz04_w@mail.gmail.com>
+Subject: Re: [PATCH v5 00/29] pxe: Precursor series for supporting read_all()
+ in extlinux / PXE
+To: Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Bin Meng <bmeng.cn@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- neil.armstrong@linaro.org, 
- =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>, 
- Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, u-boot-amlogic@groups.io
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
+ Rick Chen <rick@andestech.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,178 +113,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Tom,
 
-On Sun, 6 Apr 2025 at 21:02, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Sun, 6 Apr 2025 at 11:23, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Sun, Apr 06, 2025 at 08:46:31AM +1200, Simon Glass wrote:
+> > (question for Heinrich below)
+> >
+> > Hi Tom,
+> >
+> > On Sun, 6 Apr 2025 at 02:48, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, Apr 05, 2025 at 08:40:08AM -0600, Tom Rini wrote:
+> > > > On Fri, Apr 04, 2025 at 04:48:01PM -0600, Tom Rini wrote:
+> > > > > On Fri, Apr 04, 2025 at 11:32:12PM +0200, Jonas Karlman wrote:
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On 2025-04-04 00:30, Simon Glass wrote:
+> > > > > > > Hi Jonas,
+> > > > > > >
+> > > > > > > On Fri, 4 Apr 2025 at 09:57, Jonas Karlman <jonas@kwiboo.se> wrote:
+> > > > > > >>
+> > > > > > >> Hi Tom and Simon,
+> > > > > > >>
+> > > > > > >> On 2025-03-19 00:21, Tom Rini wrote:
+> > > > > > >>> On Wed, 05 Mar 2025 17:24:54 -0700, Simon Glass wrote:
+> > > > > > >>>
+> > > > > > >>>> This series includes some patches related to allowing read_all() to be
+> > > > > > >>>> used with the extlinux / PXE bootmeths.
+> > > > > > >>>>
+> > > > > > >>>> These patches were split out from the stb4 series, since it will need to
+> > > > > > >>>> have additional patches for LWIP, to avoid breaking PXE booting when
+> > > > > > >>>> LWIP is used.
+> > > > > > >>>>
+> > > > > > >>>> [...]
+> > > > > > >>>
+> > > > > > >>> Applied to u-boot/next, thanks!
+> > > > > > >>
+> > > > > > >> This series broke booting a compressed arm64 defconfig Linux kernel
+> > > > > > >> (without module loading) due to changes in decompression buffer length.
+> > > > > > >>
+> > > > > > >> My arm64 defconfig kernel (Image.gz) is ~24 MiB compressed and ~85 MiB
+> > > > > > >> uncompressed.
+> > > > > > >>
+> > > > > > >> Before this series the decompression buffer was 10x the kernel_comp_size
+> > > > > > >> and now it is instead limited by the SYS_BOOTM_LEN Kconfig symbol.
+> > > > > > >>
+> > > > > > >> A broken boot using current next branch:
+> > > > > > >>
+> > > > > > >>   Retrieving file: /Image.gz
+> > > > > > >>   Retrieving file: /initramfs.cpio.gz
+> > > > > > >>   append: earlycon
+> > > > > > >>   cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:394d3c' conf_fdt '3df16350' images 000000003ffe53a0
+> > > > > > >>      kernel data at 0x02080000, len = 0x00000000 (0)
+> > > > > > >>   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
+> > > > > > >>   find_other type 2 os 5
+> > > > > > >>   ## Flattened Device Tree blob at 3df16350
+> > > > > > >>      Booting using the fdt blob at 0x3df16350
+> > > > > > >>   Working FDT set to 3df16350
+> > > > > > >>   load_os load 8000000 image_start 2080000 image_len 2000000
+> > > > > > >>      Uncompressing Kernel Image to 8000000
+> > > > > > >>   Error: inflate() returned -5
+> > > > > > >>   Image too large: increase CONFIG_SYS_BOOTM_LEN
+> > > > > > >>   Must RESET board to recover
+> > > > > > >>   Resetting the board...
+> > > > > > >>
+> > > > > > >> Changing SYS_BOOTM_LEN from default 64 MiB to 128 MiB fixed the boot:
+> > > > > > >>
+> > > > > > >>   Retrieving file: /Image.gz
+> > > > > > >>   Retrieving file: /initramfs.cpio.gz
+> > > > > > >>   append: earlycon
+> > > > > > >>   cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:394d3c' conf_fdt '3df16430' images 000000003ffe5480
+> > > > > > >>      kernel data at 0x02080000, len = 0x00000000 (0)
+> > > > > > >>   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
+> > > > > > >>   find_other type 2 os 5
+> > > > > > >>   ## Flattened Device Tree blob at 3df16430
+> > > > > > >>      Booting using the fdt blob at 0x3df16430
+> > > > > > >>   Working FDT set to 3df16430
+> > > > > > >>   load_os load 8000000 image_start 2080000 image_len 2000000
+> > > > > > >>      Uncompressing Kernel Image to 8000000
+> > > > > > >>      kernel loaded at 0x08000000, end = 0x0d3b5a00
+> > > > > > >>      Loading Ramdisk to 3cb51000, end 3cee5d3c ... OK
+> > > > > > >>      Loading Device Tree to 000000003cb3f000, end 000000003cb509df ... OK
+> > > > > > >>   Working FDT set to 3cb3f000
+> > > > > > >>
+> > > > > > >>   Starting kernel ...
+> > > > > > >>
+> > > > > > >> Do we need to increase the default SYS_BOOTM_LEN for ARM64 now?
+> > > > > > >
+> > > > > > > Are you using the 'booti' command? Can you post a bit more console
+> > > > > > > output or a script here as it isn't clear what boot command you are
+> > > > > > > using? For now I'm going to assume booti
+> > > > > >
+> > > > > > Above was using an extlinux.conf with bootstd, not using the booti cmd.
+> > > > > >
+> > > > > > Use of booti cmd is not affected as it continue to use a 10x multiple
+> > > > > > of the kernel_comp_size env var for buffer size.
+> > > > > >
+> > > > > > The change this series introduced was instead of the 10x multiple of
+> > > > > > kernel_comp_size now use SYS_BOOTM_LEN for buffer size (320 vs 32 MiB).
+> > > > > >
+> > > > > > And because cmd/booti.c was not converted there is now two different
+> > > > > > handling of this decompression buffer size.
+> > > > > >
+> > > > > > If the change to now use SYS_BOOTM_LEN was intended this need to be
+> > > > > > changed as it has mostly been irrelevant for booting Linux on AArch64
+> > > > > > boards prior to this series.
+> > > > >
+> > > > > We need to clean things up such that the path which is using 10x
+> > > > > multiple (and we lmb_alloc an area iirc) is used in all cases.
+> > > >
+> > > > Looking at the code this morning, I was confusing this with what we do
+> > > > for compressed FIT images, oops.
+> > >
+> > > Ugh. Simon, can you go and fix this whole problem? Both do_bootz and
+> > > do_booti have non-trivial amounts of code that's missed by changing from
+> > > calling do_bootX() to bootX_run().
+> >
+> > For do_bootz() I believe the current code is correct. It does call
+> > bootz_start() and then doesn't call it again when bootz_run() starts.
+> > It looks like you have taken my Ubuntu test so perhaps I can add a
+> > bootz test for another board in my lab.
+> >
+> > For do_booti(), the code in booti_start() is used for the
+> > non-compressed case, so I believe it is still needed and that bootm
+> > doesn't currently honour 'Image' relocation when using an uncompressed
+> > image. But then there is the issue of SYS_BOOTM_LEN, below.
+> >
+> > bootm_load_os() has code for ARM at the end, which I suspect needs to
+> > run on RISC-V too, in case the image needs to be relocated. Marek
+> > added this 7 years ago[1] so it predates RISC-V and Heinrich perhaps
+> > didn't notice it when adding his support , if it is actually needed.
+> >
+> > SYS_BOOTM_LEN is a 'last bastion' security feature to avoid people
+> > loading images that wrap around memory, etc. I could put bootm_len
+> > into struct bootm_info so that a 10x value can be used for the booti
+> > case.
+> >
+> > Tom, we also have the issue that you haven't taken the rest of the PXE
+> > series (due to the lwip case), so our trees are out of sync in this
+> > area. It would really help if you could take that series, and again, I
+> > am happy to do the lwip case once it is landed.
+> >
+> > So for now, if people agree, I can do a small series to use a
+> > different SYS_BOOTM_LEN for the booti command and perhaps add RISC-V
+> > as above.
+> >
+> > Later, I could continue the boot-unification effort, e.g. delete the
+> > booti_start() function. and incorporate the uncompressed case into
+> > bootm code.
 >
-> On 2025-04-06 00:12, Simon Glass wrote:
-> > Several drivers make use of the designware Ethernet driver but do not
-> > implement the remove() method. Add this so that DMA is stopped when the
-> > OS is booted to avoid memory corruption, etc.
->
-> The designware Ethernet driver core should not need the remove() ops as
-> the eth_ops.stop() ops already should stop DMA. And the eth-uclass
-> pre_remove() ops already call the eth_ops.stop() ops.
->
-> All these drivers seem to use designware_eth_ops and thus have correct
-> stop() ops configured and should really not need the remove() ops.
->
+> I'm not sure your reading of the situation is right. I'm more inclined
+> to revert this merge rather than take on more rework in the area.
 
-That's interesting. I wrote that code about 9 years ago so perhaps can
-be forgiven for forgetting.
+Well that would be a pretty poor show. No one else has spent effort
+trying to clean up and rationalise this code in the last 10 years, so
+far as I can see. This is in -next so there is plenty of time to
+resolve any issues.
 
-Very few drivers set the DM_FLAG_ACTIVE_DMA flag, certainly not the
-designware ones. So how would they be removed?
-
-> Side note, this also misses the gmac rockchip driver that uses its own
-> eth_ops instead of designware_eth_ops, however it also use same stop()
-> ops as all these drivers.
-
-Hmm yes I saw that but then apparently forgot to include it.
-
-I can perhaps redo this patch to add the DMA flag.
-
->
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Reported-by: Christian Kohlsch=C3=BCtter <christian@kohlschutter.com>
-> > ---
-> >
-> >  drivers/net/designware.c    |  2 +-
-> >  drivers/net/designware.h    | 12 ++++++++++++
-> >  drivers/net/dwmac_meson8b.c |  6 ++++++
-> >  drivers/net/dwmac_s700.c    |  6 ++++++
-> >  drivers/net/dwmac_socfpga.c |  6 ++++++
-> >  5 files changed, 31 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-> > index eebf14bd51a..d4d31925fca 100644
-> > --- a/drivers/net/designware.c
-> > +++ b/drivers/net/designware.c
-> > @@ -805,7 +805,7 @@ clk_err:
-> >       return err;
-> >  }
-> >
-> > -static int designware_eth_remove(struct udevice *dev)
-> > +int designware_eth_remove(struct udevice *dev)
-> >  {
-> >       struct dw_eth_dev *priv =3D dev_get_priv(dev);
-> >
-> > diff --git a/drivers/net/designware.h b/drivers/net/designware.h
-> > index e47101ccaf6..8c9d0190e03 100644
-> > --- a/drivers/net/designware.h
-> > +++ b/drivers/net/designware.h
-> > @@ -247,6 +247,18 @@ struct dw_eth_dev {
-> >
-> >  int designware_eth_of_to_plat(struct udevice *dev);
-> >  int designware_eth_probe(struct udevice *dev);
-> > +
-> > +/**
-> > + * designware_eth_remove() - Remove the device
-> > + *
-> > + * Disables DMA and marks the device as remove. This must be called be=
-fore
-> > + * booting an OS, to ensure that DMA is inactive.
-> > + *
-> > + * @dev: Device to remove
-> > + * Return 0 if OK, -ve on error
-> > + */
-> > +int designware_eth_remove(struct udevice *dev);
-> > +
-> >  extern const struct eth_ops designware_eth_ops;
-> >
-> >  struct dw_eth_pdata {
-> > diff --git a/drivers/net/dwmac_meson8b.c b/drivers/net/dwmac_meson8b.c
-> > index fde4aabbace..b2152f8da9b 100644
-> > --- a/drivers/net/dwmac_meson8b.c
-> > +++ b/drivers/net/dwmac_meson8b.c
-> > @@ -145,6 +145,11 @@ static int dwmac_meson8b_probe(struct udevice *dev=
-)
-> >       return designware_eth_probe(dev);
-> >  }
-> >
-> > +static int dwmac_meson8b_remove(struct udevice *dev)
-> > +{
-> > +     return designware_eth_remove(dev);
-> > +}
-> > +
-> >  static const struct udevice_id dwmac_meson8b_ids[] =3D {
-> >       { .compatible =3D "amlogic,meson-gxbb-dwmac", .data =3D (ulong)dw=
-mac_setup_gx },
-> >       { .compatible =3D "amlogic,meson-g12a-dwmac", .data =3D (ulong)dw=
-mac_setup_axg },
-> > @@ -158,6 +163,7 @@ U_BOOT_DRIVER(dwmac_meson8b) =3D {
-> >       .of_match       =3D dwmac_meson8b_ids,
-> >       .of_to_plat =3D dwmac_meson8b_of_to_plat,
-> >       .probe          =3D dwmac_meson8b_probe,
-> > +     .remove         =3D dwmac_meson8b_remove,
->
-> There is no reason to add the dwmac_meson8b_remove function above, you
-> could just use designware_eth_remove directly here.
->
-> Same for remaining drivers below.
-
-Yes, I wasn't sure which way to go on that. I'll remove them.
-
->
-> Regards,
-> Jonas
->
-> >       .ops            =3D &designware_eth_ops,
-> >       .priv_auto      =3D sizeof(struct dw_eth_dev),
-> >       .plat_auto      =3D sizeof(struct dwmac_meson8b_plat),
-> > diff --git a/drivers/net/dwmac_s700.c b/drivers/net/dwmac_s700.c
-> > index 969d247b4f3..cfb37c3aa71 100644
-> > --- a/drivers/net/dwmac_s700.c
-> > +++ b/drivers/net/dwmac_s700.c
-> > @@ -44,6 +44,11 @@ static int dwmac_s700_probe(struct udevice *dev)
-> >       return designware_eth_probe(dev);
-> >  }
-> >
-> > +static int dwmac_s700_remove(struct udevice *dev)
-> > +{
-> > +     return designware_eth_remove(dev);
-> > +}
-> > +
-> >  static int dwmac_s700_of_to_plat(struct udevice *dev)
-> >  {
-> >       return designware_eth_of_to_plat(dev);
-> > @@ -60,6 +65,7 @@ U_BOOT_DRIVER(dwmac_s700) =3D {
-> >       .of_match =3D dwmac_s700_ids,
-> >       .of_to_plat =3D dwmac_s700_of_to_plat,
-> >       .probe  =3D dwmac_s700_probe,
-> > +     .remove =3D dwmac_s700_remove,
-> >       .ops    =3D &designware_eth_ops,
-> >       .priv_auto      =3D sizeof(struct dw_eth_dev),
-> >       .plat_auto      =3D sizeof(struct eth_pdata),
-> > diff --git a/drivers/net/dwmac_socfpga.c b/drivers/net/dwmac_socfpga.c
-> > index a9e2d8c0972..8e7a9975d28 100644
-> > --- a/drivers/net/dwmac_socfpga.c
-> > +++ b/drivers/net/dwmac_socfpga.c
-> > @@ -130,6 +130,11 @@ static int dwmac_socfpga_probe(struct udevice *dev=
-)
-> >       return designware_eth_probe(dev);
-> >  }
-> >
-> > +static int dwmac_socfpga_remove(struct udevice *dev)
-> > +{
-> > +     return designware_eth_remove(dev);
-> > +}
-> > +
-> >  static const struct udevice_id dwmac_socfpga_ids[] =3D {
-> >       { .compatible =3D "altr,socfpga-stmmac" },
-> >       { }
-> > @@ -141,6 +146,7 @@ U_BOOT_DRIVER(dwmac_socfpga) =3D {
-> >       .of_match       =3D dwmac_socfpga_ids,
-> >       .of_to_plat =3D dwmac_socfpga_of_to_plat,
-> >       .probe          =3D dwmac_socfpga_probe,
-> > +     .remove         =3D dwmac_socfpga_remove,
-> >       .ops            =3D &designware_eth_ops,
-> >       .priv_auto      =3D sizeof(struct dw_eth_dev),
-> >       .plat_auto      =3D sizeof(struct dwmac_socfpga_plat),
->
+I believe my reading of the situation is right, but if you disagree
+with some of it, please indicate which.
 
 Regards,
 Simon
