@@ -4,97 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A842FC3601A
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 19:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA594C3601A
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 19:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6089E82BE3;
-	Sun,  6 Apr 2025 21:50:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC32B82C49;
+	Sun,  6 Apr 2025 21:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G+FeZjA0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c17yfcuO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B00982BE3; Sun,  6 Apr 2025 21:50:54 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 3A75D82C0C; Sun,  6 Apr 2025 21:50:56 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D26182B63
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 21:50:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D46482BCD
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 21:50:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2c2bb447e5eso2052393fac.0
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 12:50:52 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-601e3f2cee1so1807471eaf.2
+ for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 12:50:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1743969051; x=1744573851; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1743969053; x=1744573853; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TeRzzwYRrcMuUZ9x0bAx8aaWiIcMOU8COXWWFzM6NGI=;
- b=G+FeZjA0n/OVicTDYOVCmnEYxHb6w8b3rrVR/gSuzKqaAhGS/USuXKw4CUu+JSbie5
- yQJRSg7JJXLBehmpE1IBfwQJZwzE+D3aWATliGQ1HYQQCOpsb6cBFnT/+YeFlpF21QnG
- sfSuMtTXqhE5YIm3my/Bj1qeUdsk4NV1cp/oY=
+ bh=3EnjZ1sXBQfgRA9XpqVcyX7MEtgwrtAnIRB7M7863co=;
+ b=c17yfcuOTpXZnphGVGSk2tDdxrIcVBuN9c6fcGqNyL+bbzHtlZscMX93O6qFJsLVxZ
+ 9e5bxIS1I50SciF3mnZHBpn0OdaJqZZOi3X4K1Eg70jrF8ypltXIjJA2xkmD55Hx8181
+ snG2ZN4I6xFFn8TCoU1we4i4zUgPFY4FwyVqg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743969051; x=1744573851;
+ d=1e100.net; s=20230601; t=1743969053; x=1744573853;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TeRzzwYRrcMuUZ9x0bAx8aaWiIcMOU8COXWWFzM6NGI=;
- b=n04WVPeX1erPguSIXlssrBGsHjTCeVb6Eg2j7HuRzD2FkcWDXlZWUleAw/d4ZIuNG/
- KJkaTp3aosDV5XFQHhVSOAPixSprpXbVfi5CDVyz5IJweG/KohgVIDynEFLd6+RoUSuy
- 2AMNXRD8mzGZGwgFgl0nHu7dLnc3JbMgfAdCK3IuZ1fDoho3JFUfv5XCx4mh6YB35XAg
- kS+F7RJp4d9nOe8wPFzIxFN2Al/qYpfGI7jgaRFy3WEEBCr+LYEZhvDn7QBntmlsEuxU
- 39yCpEqIUZJDD9uvsRYoyosUMytB7F+EAe9IK+QOk4H3LIP/vDE0iDY88LEBxPHrzjyk
- ZnBg==
-X-Gm-Message-State: AOJu0YziVkXq4JBRuJlGnU7Duv43yfk1QfWkgdn86mygLwxeHgKHHUYr
- rrAP+2gL4ef1lwQ7InJR7Wcaz3GEqzgir4LvaB8rZUTTR5COMFU+IHW+/MsUulM=
-X-Gm-Gg: ASbGncuFIyeBO8v8ubvsbL2OknIdRWyWDTi4GhLPLUMzHnATPsXhJCCSwWktzQE9icW
- eDBfoT1HMdTmGU3fGtjyvPavt1Z0V3gtmXOA/STieLVFSjBhYXbt8KnRfTwnZJZPMasfi8140V1
- OgWz6hnwwSC5Kl22HzwsxzQQ0D+Rizni3SSMgOuE0FoZA2nbXgwP76JpIkSGmRS2pSvn9RcdQlA
- 2tGTTbiA5sLLny3v34yOrjkIdxFbXbv32yDeXcjDuY7AhRTOk6Zh7pds17eyKDLyQG8Jbndq0i/
- BxnWVbMxv3csOf/x2ZseJaDzK1y8lN736xeoX5PbHBNIj0liHBP03IgnmlL9HzZcv5rHVO0sHTC
- 5ub/H
-X-Google-Smtp-Source: AGHT+IER0fc2GdzofH5g45lj/hu5pSFmUxSro6vsw/rcOGwZmULDGXCqSOZ/llMEUVykv65NAsuvmQ==
-X-Received: by 2002:a05:6871:7427:b0:29e:617f:c96 with SMTP id
- 586e51a60fabf-2cd32e1b74fmr3934301fac.6.1743969050964; 
- Sun, 06 Apr 2025 12:50:50 -0700 (PDT)
+ bh=3EnjZ1sXBQfgRA9XpqVcyX7MEtgwrtAnIRB7M7863co=;
+ b=NH9FqhrFXdBiSBkou/Z0PbXx7jLHaLLKz+k7wxIrnPw2aouDWT/OsP1Yt0b/scJ1wj
+ W4qS6h7cFX9oDzFgsRVmof8Amw41IjdnXQSp0ERXGwXZZ2Lusia/BD0YffGkx0NL6G5A
+ A/+BpZceod/+qsIzJj4qc+y1TrgXe2EyAFyiAesceLQH49glQnwcSjxY0zBwJCWEd/9c
+ NnTkkaxtupwV3rM1an0cwF29OeIDbaRdv2N6hB8VqLWLSzkCEtbKvWY46dNd1UQGo/kn
+ HbFa+6NePmm4z7Mi5H4H4R94cIuM+4SSsTQR5EQ2awiIouaYB0mqz+IxQ9gzwXdUvrt3
+ KyLg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX4NgnbouuMqcxs+A1UGFNFUB38dxBBYSm4ncF/g2zWMk9eCT0IJHVIH4SyOCiB46YINc90rUQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4zB7YHisL42+QodWo41OGjJ9840vp6IYCDAt3foSisKqArn5G
+ oP43y9mz3zEBhvE7+37iPse5Xvvz4mtNRlWUyhCCY8zcUbH1yD1cNoc3kfeI7R4=
+X-Gm-Gg: ASbGnctm0Z3bX2sGP9yYYPcVYdx58gulwkt9z/fbPUb1rONce4/OM11TfNYAAKC3677
+ vcZzn+qxxTIeH/9RvhoyjgFc2ORW9lTKHWerLQpcKtE6t61TuiPtTk2YSV3DLXtaLddCB+rOlJG
+ kVCAVmlKnbjFNV2cUrAG0vO5bjODvnKFQVKAHGzKiwAytrKZnS7iqTrlJw+iKSWHt+imbMlQD6v
+ JPj1PLd+SxtU1t52lCGD/ws52m4xMHjM68czm9P7q7ZKvKM0gMCNKHVkMc/1IYlQriqRAqgiHJn
+ yug6vMLiJ+sF60mNmxvrqzX6GP6Q2IVKxS+3pYfgfXa/TKgmhjybMFKqyX4Cg+2u71a5GqWhQKl
+ py6BlJXqrBwrzQCg=
+X-Google-Smtp-Source: AGHT+IF0jQ2JgYy+0j60F1O2577DqxRvEuyAZfdGz6mEhhOW5zpzIdgitoWHAfd+TROTbyibm4sTdw==
+X-Received: by 2002:a05:6871:7a2:b0:2c7:6ad3:fe56 with SMTP id
+ 586e51a60fabf-2cd32ebe099mr3767907fac.15.1743969052700; 
+ Sun, 06 Apr 2025 12:50:52 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc845cc500sm1703175fac.18.2025.04.06.12.50.48
+ 586e51a60fabf-2cc845cc500sm1703175fac.18.2025.04.06.12.50.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Apr 2025 12:50:50 -0700 (PDT)
+ Sun, 06 Apr 2025 12:50:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Ravi Minnikanti <rminnikanti@marvell.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Matthias Brugger <mbrugger@suse.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Prasad Kummari <prasad.kummari@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>
-In-Reply-To: <20250404140530.2874921-1-raymond.mao@linaro.org>
-References: <20250404140530.2874921-1-raymond.mao@linaro.org>
-Subject: Re: [PATCH] mbedtls: remove incorrect attribute type checker
-Message-Id: <174396904855.1127672.5822086196155254544.b4-ty@konsulko.com>
-Date: Sun, 06 Apr 2025 13:50:48 -0600
+To: Heiko Stuebner <heiko@sntech.de>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de, 
+ sjg@chromium.org, u-boot@lists.denx.de, quentin.schulz@cherry.de
+In-Reply-To: <20250402215025.2655384-1-heiko@sntech.de>
+References: <20250402215025.2655384-1-heiko@sntech.de>
+Subject: Re: [PATCH] boot: call dhcp_run in pxe bootmethod
+Message-Id: <174396905113.1127672.11718337468369561736.b4-ty@konsulko.com>
+Date: Sun, 06 Apr 2025 13:50:51 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -115,22 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 04 Apr 2025 07:05:25 -0700, Raymond Mao wrote:
+On Wed, 02 Apr 2025 23:50:25 +0200, Heiko Stuebner wrote:
 
-> S/MIME Capabilities (OID: 1.2.840.113549.1.9.15) attributes are
-> expected to be algorithms but neither data nor MS Inderect Data,
-> thus the checker for data type is incorrect.
+> A recent change tried to speed up EFI booting by not calling dhcp_run
+> from eth_bootdev_hunt() every time. PXE so far relied on that dhcp_run
+> call to get an IP address.
 > 
-> This patch fixes a capsule authentication failure with PKCS#7
-> message that contains S/MIME capabilities, which formed by the EDK2
-> GenerateCapsule tool.
+> Fix that by adding a dhcp_run call to the pxe bootflow, with autoload
+> disabled to only get the ip address and nothing else.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] mbedtls: remove incorrect attribute type checker
-      commit: 0708d54a5697e30ea5ecb03f97360e4fcff89719
+[1/1] boot: call dhcp_run in pxe bootmethod
+      commit: 1915fdcc21268c0f5df513461e3ddbb03a26f3c5
 -- 
 Tom
 
