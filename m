@@ -4,77 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F260DC3600C
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 13:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E1F7C36002
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 14:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0F7282AAF;
-	Sun,  6 Apr 2025 15:30:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 392AF82B4A;
+	Sun,  6 Apr 2025 16:25:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iDOAimBk";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="caUQCmv7";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OFxSwWGt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B475582B00; Sun,  6 Apr 2025 15:30:46 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 7141182B53; Sun,  6 Apr 2025 16:25:40 +0200 (CEST)
+Received: from mail-m3274.qiye.163.com (mail-m3274.qiye.163.com
+ [220.197.32.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8982682AAA
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 15:30:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7CF382B46
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 16:25:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ZVtWm2CN3z9v7H;
- Sun,  6 Apr 2025 15:30:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1743946244;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2mFUjgx/Lf6VGKSm31WZj24K2skP7ZyCA6zW1hzXRKo=;
- b=iDOAimBkdws7nvJUVlHrs0ny/nhS1OlSf1JW487/46sFNO1PVO9PkD3mNDFOcC2PVaumv0
- XD8txEgcGU9q+JUT9RHI5bpwQsHx3b+bp3jV+nYUh9612Us7omaIiHBHWIOa/U0zCJpy0u
- oqVj0J1DbvHcrcV1h6xZXyhVVYn0KUzcbmNAidyx2zeB8fXzvm6JZ4AIvAg7dOqKjB2+U1
- uXOAaQ3I0PWHL/B119vQl9SLe4G3e+o3IeQeWh84VsuGhffbyW8tmB6JYAKRqdLbElEnS4
- H7mvb/I0rbOwVhZNt1EEpuTiLnAKyvIpamP/Q24BuC+dPkCyX+/2MTT2Mzg+VA==
-Message-ID: <eacd3b66-0262-4bde-9b91-6ca7eea789fe@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1743946242;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2mFUjgx/Lf6VGKSm31WZj24K2skP7ZyCA6zW1hzXRKo=;
- b=caUQCmv79am3lnv+512DmaMjja4LeUvlnfij1Ll92c+IsHvTYMy9woJjpZUL6aQ19/aHvv
- WfHHNrMI9JSpozLpBgSlTIDzsMYSbC1xd9K6LgIFfI3TYBAgVwpZNB+rm5FFnTYu42sFul
- NeZe+TTlDZPU2KwnstreULBQBPpHkd+9z+NEjymD+yWnkJ5FfRuNvCYKVbCTtSVzxZjxYv
- MDQVdTmSG3moMxz0OMvkxog/fAbjciSzyVdiTsuJWvdtjYNpAKlzxvIbYgMzBwSiilpeQj
- GtErBcVC8LDpGKg+5BBoklRBdfj8qo1LyRHXsw+22bg8HE3AzTGThA2tcXDrCA==
-Date: Sun, 6 Apr 2025 15:30:39 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.1.64] (unknown [120.36.73.2])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 10cfd74e5;
+ Sun, 6 Apr 2025 22:25:29 +0800 (GMT+08:00)
+Message-ID: <7017e7e1-92d7-4597-8436-97f94fb163e2@rock-chips.com>
+Date: Sun, 6 Apr 2025 22:25:29 +0800
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/1] net: phy: Add the Airoha EN8811H PHY driver
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, ilias.apalodimas@linaro.org,
- jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
- paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de
-Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
- frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com
-References: <20250406130244.19496-1-lucienzx159@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] rng: rockchip_rng: Add compatible for RK3568
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+References: <20250330214015.3466802-1-jonas@kwiboo.se>
+ <20250330214015.3466802-2-jonas@kwiboo.se>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250406130244.19496-1-lucienzx159@gmail.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20250330214015.3466802-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 128aea79077b5e46836
-X-MBO-RS-META: thxkz48doe9o3rppgqo8fnc6cya4x831
-X-Rspamd-Queue-Id: 4ZVtWm2CN3z9v7H
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZThlLVk9NHxoaHUIYSUkeGFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTEhVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
+ JLS1kG
+X-HM-Tid: 0a960b7e025b03afkunm10cfd74e5
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6KzI6Lzo6CTJRC0kDGjQpIz1N
+ E1ZPFA1VSlVKTE9IQk9CTkhKSkhOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKSUtVSE1VTEhVSVlXWQgBWUFJQ0lDNwY+
+DKIM-Signature: a=rsa-sha256;
+ b=OFxSwWGtGRQTigpVlrEuB1a7y8LZzzdMh++xlf34EHHm22Iz5W9GRdwzE9tIKalGHRTB/OBspozNvJXFOZbWMmFnbN5/LLGXuW1VKx7xl4istJiF5CqGN/5n+6K/Vm2gc+QMEf1zMLDBwyWSi9P4pOsa87eiAndbjIYdXg4ghlo=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=MzcRU0LnCIOwICi9nM/yzP6tWK+GdATeC5HhvjMZRNs=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +76,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/6/25 3:02 PM, Lucien.Jheng wrote:
-> Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
-> 100/1000/2500 Mbps with auto negotiation only.
-> 
-> The driver uses two firmware files, for which updated versions are added to
-> linux-firmware already.
-> 
-> Based on the Linux upstream 8811 driver code(air_en8811h.c),
-> I have modified the relevant process to align with the U-Boot boot sequence.
-> and have validated this on Banana Pi BPI-R3 Mini.
-> 
-> The MD32 FW is currently stored in eMMC partition 1 on Banana Pi BPI-R3 Mini,
-> and it is loaded from there.
+Hi Jonas,
 
-If this is ported from Linux, please include Linux commit SHA from which 
-this is ported.
+     Please split the change to separate patches, the driver change and 
+the dts change should not submit in one change.
 
-> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-> index 3132718e4f8..5b4cf30b0a3 100644
-> --- a/drivers/net/phy/Kconfig
-> +++ b/drivers/net/phy/Kconfig
-> @@ -79,6 +79,40 @@ config PHY_ADIN
->   	help
->   		Add support for configuring RGMII on Analog Devices ADIN PHYs.
+
+Thanks,
+
+- Kever
+
+On 2025/3/31 05:40, Jonas Karlman wrote:
+> Linux commit afeccc408496 ("arm64: dts: rockchip: add DT entry for RNG
+> to RK356x") merged for v6.12-rc1 add a proper rng node to the SoC DT.
+> The compatible used differs compared to what U-Boot is currently using.
+>
+> Add support for the rk3568-rng used in upstream Linux. Support for the
+> cryptov2-rng compatible is still kept because PX30/RK3326 and RK3308 are
+> still using it.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>   arch/arm/dts/rk356x-u-boot.dtsi | 9 ++++-----
+>   drivers/rng/rockchip_rng.c      | 4 ++++
+>   2 files changed, 8 insertions(+), 5 deletions(-)
+>
+> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+> index 24a976cf7e21..871869739536 100644
+> --- a/arch/arm/dts/rk356x-u-boot.dtsi
+> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
+> @@ -21,11 +21,6 @@
+>   		bootph-all;
+>   	};
 >   
-> +menuconfig PHY_AIROHA
-> +	bool "Airoha Ethernet PHYs support"
+> -	rng: rng@fe388000 {
+> -		compatible = "rockchip,cryptov2-rng";
+> -		reg = <0x0 0xfe388000 0x0 0x2000>;
+> -	};
+> -
+>   	otp: nvmem@fe38c000 {
+>   		compatible = "rockchip,rk3568-otp";
+>   		reg = <0x0 0xfe38c000 0x0 0x4000>;
+> @@ -121,6 +116,10 @@
+>   	bootph-all;
+>   };
+>   
+> +&rng {
+> +	status = "okay";
+> +};
 > +
-> +config PHY_AIROHA_EN8811H
-> +	bool "Airoha Ethernet EN8811H support"
-> +	depends on PHY_AIROHA
-> +	help
-> +		AIROHA EN8811H supported.
-> +
-> +choice
-> +	prompt "Location of the Airoha PHY firmware"
-
-Can this do the same thing as Aquatia PHY and load the PHY firmware from 
-filesystem on block device instead , using the blk* or fs* commands ? 
-Then the hard-coded filesize and co. won't be necessary.
-
-If you need board specific loading override, implement __weak default 
-loading from file on filesystem by default (see what Aquatia does) and 
-then override the loading function on board or architecture level.
-
-U-Boot really needs a proper generic firmware loader, because this 
-firmware stuff keeps showing up more and more, but I cannot ask you to 
-write one only because of this PHY ... but if you are up for a challenge ...
-
-[...]
+>   &sdhci {
+>   	bootph-pre-ram;
+>   	bootph-some-ram;
+> diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
+> index 2426648fbd57..f673e2657c94 100644
+> --- a/drivers/rng/rockchip_rng.c
+> +++ b/drivers/rng/rockchip_rng.c
+> @@ -312,6 +312,10 @@ static const struct udevice_id rockchip_rng_match[] = {
+>   		.compatible = "rockchip,rk3399-crypto",
+>   		.data = (ulong)&rk_cryptov1_soc_data,
+>   	},
+> +	{
+> +		.compatible = "rockchip,rk3568-rng",
+> +		.data = (ulong)&rk_cryptov2_soc_data,
+> +	},
+>   	{
+>   		.compatible = "rockchip,cryptov2-rng",
+>   		.data = (ulong)&rk_cryptov2_soc_data,
