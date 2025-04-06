@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A7DFC36002
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 15:12:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC0AC36002
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 15:12:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA17E82B4A;
-	Sun,  6 Apr 2025 17:12:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3870082B53;
+	Sun,  6 Apr 2025 17:12:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="VmklFYDz";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JryEVIcm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3172B82B46; Sun,  6 Apr 2025 17:12:23 +0200 (CEST)
-Received: from mail-m3289.qiye.163.com (mail-m3289.qiye.163.com
- [220.197.32.89])
+ id 2DB0782B92; Sun,  6 Apr 2025 17:12:47 +0200 (CEST)
+Received: from mail-m21473.qiye.163.com (mail-m21473.qiye.163.com
+ [117.135.214.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A44682B46
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 17:12:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79BFD82B46
+ for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 17:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [120.36.73.2])
- by smtp.qiye.163.com (Hmail) with ESMTP id 10d0205c2;
- Sun, 6 Apr 2025 23:12:15 +0800 (GMT+08:00)
-Message-ID: <1f29a0f1-ccf0-42f7-9b2c-10ddd3d2fadc@rock-chips.com>
-Date: Sun, 6 Apr 2025 23:12:15 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 10d0205da;
+ Sun, 6 Apr 2025 23:12:40 +0800 (GMT+08:00)
+Message-ID: <771a5a40-48c0-450a-b275-a64ebf198f37@rock-chips.com>
+Date: Sun, 6 Apr 2025 23:12:39 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: rockchip: sync ENV_MEM_LAYOUT_SETTINGS for px30
- to rk3308/etc
-To: Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org,
- philipp.tomsich@vrull.eu
-Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de,
- Heiko Stuebner <heiko.stuebner@cherry.de>
-References: <20250401144004.2342300-1-heiko@sntech.de>
+Subject: Re: [PATCH v2 1/2] board: rockchip: Add minimal generic RK3328 board
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250330172040.3370919-1-jonas@kwiboo.se>
+ <20250330172040.3370919-2-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250401144004.2342300-1-heiko@sntech.de>
+In-Reply-To: <20250330172040.3370919-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTU0aVh1PS01PTUpDSh4eHlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGUpCVkpMS0hDT0kZQ0MfS1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTEhVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
  JLS1kG
-X-HM-Tid: 0a960ba8d40d03afkunm10d0205c2
+X-HM-Tid: 0a960ba9341903afkunm10d0205da
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORQ6Eww6LDJPKUkwMElJMzAI
- SD4wCglVSlVKTE9IQk5JSEhNTENDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKSUtVSE1VTEhVSVlXWQgBWUFJTEhDNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORg6Qzo5AzJOMUkCGk4jMz0X
+ NBUKCT9VSlVKTE9IQk5JSE1KSUhLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKSUtVSE1VTEhVSVlXWQgBWUFCSkJMNwY+
 DKIM-Signature: a=rsa-sha256;
- b=VmklFYDzMB151skU1pMRy0LpwYqNt8WAY61Jy+cH6zEJpJmqix2yV3gQeH796DJ/+abcQ6V32jRv4EXQR4iAX6tqI2eQFBt77zLUvKNpSlPiE1SNaxaVnv4awAF50EueEVxAyXXclIG9yQEAa9cDgohIV7ewhc1+jVAQrtx6jvM=;
+ b=JryEVIcmhjwV4rQST4JHoVPfmEDTSz1Oey3as2SeVnCzUAI9h6GJPRkevJMSUPavqnUBc0xXxLGeHtWm2tfGaUFZsj9fgGqPqtnANMOLFTNgQI7RQQUA1pC/M8V/+R1iguksvS84Mi7Z+05UsVOOOrazXLEw64NLo01AG3DtnuM=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=YUrhSB0DdaLIiHx6uJ73EA9iAwyfCWV1CK+2mOATFrQ=;
+ bh=X15KRC7P+sSqL4HeabyxL3ZQLQl9xDLgufapnZq5qK8=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,57 +75,300 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/4/1 22:40, Heiko Stuebner wrote:
-> From: Heiko Stuebner <heiko.stuebner@cherry.de>
+On 2025/3/31 01:20, Jonas Karlman wrote:
+> Add a minimal generic RK3328 board that only have eMMC, SDMMC, SPI flash
+> and USB OTG enabled. This defconfig can be used to boot from eMMC,
+> SD-card or SPI flash on most RK3328 boards that follow reference board
+> design.
 >
-> Loading a FIT image for kernel, initrd and rootfs on px30 can result in an
-> memory overlap, resulting in the not 100% helpful message of
-> "This will not be a case any time" from lmb_fix_over_lap_regions().
->
-> Adding a bit of debug info to lmb_fix_over_lap_regions() brings:
-> lmb_fix_over_lap_regions: base1 0x280000-0x6005ac > base2 0x600000-0x6000d1
->
-> So this is because the FIT image gets loaded to the kernel_addr_r at
-> 0x280000 while the pxe-file is already living at 0x600000, only 3.5MB
-> behind.
->
-> In commit 4acc8bb044a4 ("configs: rockchip: sync ENV_MEM_LAYOUT_SETTINGS
-> for rk3308, rk3328, and rk3399") FUKAUMI Naoki already brought the memory
-> layouts for the mentioned socs in sync.
->
-> Adjusting the env-layout on px30 to this scheme, magically solves the
-> overlap issue and also brings px30 more in line with the other mentioned
-> SoCs.
->
-> Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   include/configs/px30_common.h | 11 +++++++----
->   1 file changed, 7 insertions(+), 4 deletions(-)
+> v2: Rebase on next after TPL_HAVE_INIT_STACK change
+> ---
+>   arch/arm/dts/rk3328-generic-u-boot.dtsi | 39 +++++++++++
+>   arch/arm/dts/rk3328-generic.dts         | 76 +++++++++++++++++++++
+>   arch/arm/mach-rockchip/Kconfig          |  2 +-
+>   board/rockchip/evb_rk3328/MAINTAINERS   |  6 ++
+>   configs/generic-rk3328_defconfig        | 90 +++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |  1 +
+>   6 files changed, 213 insertions(+), 1 deletion(-)
+>   create mode 100644 arch/arm/dts/rk3328-generic-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/rk3328-generic.dts
+>   create mode 100644 configs/generic-rk3328_defconfig
 >
-> diff --git a/include/configs/px30_common.h b/include/configs/px30_common.h
-> index 13ed9011764..2a3dc362f98 100644
-> --- a/include/configs/px30_common.h
-> +++ b/include/configs/px30_common.h
-> @@ -18,11 +18,14 @@
+> diff --git a/arch/arm/dts/rk3328-generic-u-boot.dtsi b/arch/arm/dts/rk3328-generic-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..af890e912dda
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3328-generic-u-boot.dtsi
+> @@ -0,0 +1,39 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3328-u-boot.dtsi"
+> +
+> +&gpio0 {
+> +	/delete-property/ bootph-pre-ram;
+> +};
+> +
+> +&pcfg_pull_down_4ma {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&spi0 {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> +
+> +&spi0m2_clk {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&spi0m2_cs0 {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&spi0m2_rx {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&spi0m2_tx {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> diff --git a/arch/arm/dts/rk3328-generic.dts b/arch/arm/dts/rk3328-generic.dts
+> new file mode 100644
+> index 000000000000..af0da8457167
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3328-generic.dts
+> @@ -0,0 +1,76 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Minimal generic DT for RK3328 with eMMC, SD-card, SPI flash and USB OTG enabled
+> + */
+> +
+> +/dts-v1/;
+> +#include "rk3328.dtsi"
+> +
+> +/ {
+> +	model = "Generic RK3328";
+> +	compatible = "rockchip,rk3328";
+> +
+> +	aliases {
+> +		mmc0 = &emmc;
+> +		mmc1 = &sdmmc;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial2:1500000n8";
+> +	};
+> +};
+> +
+> +&emmc {
+> +	bus-width = <8>;
+> +	cap-mmc-highspeed;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs200-1_8v;
+> +	no-sd;
+> +	no-sdio;
+> +	non-removable;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&emmc_clk &emmc_cmd &emmc_bus8>;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc0m1_pin {
+> +	rockchip,pins = <0 RK_PD6 RK_FUNC_GPIO &pcfg_pull_down_4ma>;
+> +};
+> +
+> +&sdmmc {
+> +	bus-width = <4>;
+> +	cap-sd-highspeed;
+> +	disable-wp;
+> +	no-mmc;
+> +	no-sdio;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&sdmmc0_clk &sdmmc0_cmd &sdmmc0_dectn &sdmmc0_bus4 &sdmmc0m1_pin>;
+> +	status = "okay";
+> +};
+> +
+> +&spi0 {
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <25000000>;
+> +	};
+> +};
+> +
+> +&u2phy {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy_otg {
+> +	status = "okay";
+> +};
+> +
+> +&uart2 {
+> +	status = "okay";
+> +};
+> +
+> +&usb20_otg {
+> +	dr_mode = "peripheral";
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index b61d424ba638..33a9f7a4dd4b 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -201,7 +201,6 @@ config ROCKCHIP_RK3328
+>   	select SUPPORT_SPL
+>   	select SPL
+>   	select SUPPORT_TPL
+> -	select TPL
+>   	select TPL_HAVE_INIT_STACK if TPL
+>   	imply ARMV8_CRYPTO
+>   	imply ARMV8_SET_SMPEN
+> @@ -218,6 +217,7 @@ config ROCKCHIP_RK3328
+>   	imply SPL_ROCKCHIP_COMMON_BOARD
+>   	imply SPL_SEPARATE_BSS
+>   	imply SPL_SERIAL
+> +	imply TPL if !ROCKCHIP_EXTERNAL_TPL
+>   	imply TPL_ROCKCHIP_COMMON_BOARD
+>   	imply TPL_SERIAL
+>   	help
+> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
+> index 5f81be55b8e0..8c9b42fe2bbf 100644
+> --- a/board/rockchip/evb_rk3328/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+> @@ -7,6 +7,12 @@ F:      configs/evb-rk3328_defconfig
+>   F:      arch/arm/dts/rk3328-evb.dts
+>   F:      arch/arm/dts/rk3328-evb-u-boot.dtsi
 >   
->   #define ENV_MEM_LAYOUT_SETTINGS \
->   	"scriptaddr=0x00500000\0" \
-> +	"script_offset_f=0xffe000\0" \
-> +	"script_size_f=0x2000\0" \
->   	"pxefile_addr_r=0x00600000\0" \
-> -	"fdt_addr_r=0x08300000\0" \
-> -	"kernel_addr_r=0x00280000\0" \
-> -	"ramdisk_addr_r=0x0a200000\0" \
-> -	"kernel_comp_addr_r=0x03e80000\0" \
-> +	"fdt_addr_r=0x01e00000\0" \
-> +	"fdtoverlay_addr_r=0x01f00000\0" \
-> +	"kernel_addr_r=0x02080000\0" \
-> +	"ramdisk_addr_r=0x06000000\0" \
-> +	"kernel_comp_addr_r=0x08000000\0" \
->   	"kernel_comp_size=0x2000000\0"
->   
->   #define CFG_EXTRA_ENV_SETTINGS \
+> +GENERIC-RK3328
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +S:	Maintained
+> +F:	configs/generic-rk3328_defconfig
+> +F:	arch/arm/dts/rk3328-generic*
+> +
+>   NANOPI-R2C-RK3328
+>   M:      Tianling Shen <cnsztl@gmail.com>
+>   S:      Maintained
+> diff --git a/configs/generic-rk3328_defconfig b/configs/generic-rk3328_defconfig
+> new file mode 100644
+> index 000000000000..8d34a293fd42
+> --- /dev/null
+> +++ b/configs/generic-rk3328_defconfig
+> @@ -0,0 +1,90 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_SF_DEFAULT_SPEED=25000000
+> +CONFIG_DEFAULT_DEVICE_TREE="rk3328-generic"
+> +CONFIG_DM_RESET=y
+> +CONFIG_ROCKCHIP_RK3328=y
+> +CONFIG_ROCKCHIP_EXTERNAL_TPL=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SYS_LOAD_ADDR=0x800800
+> +CONFIG_DEBUG_UART_BASE=0xFF130000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +# CONFIG_BOOTMETH_VBE is not set
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-generic.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+> +CONFIG_CMD_MEMINFO=y
+> +CONFIG_CMD_MEMINFO_MAP=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MISC=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_RNG=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +# CONFIG_OF_UPSTREAM is not set
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_NO_NET=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_REGMAP=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+> +# CONFIG_ADC is not set
+> +CONFIG_CLK=y
+> +CONFIG_SPL_CLK=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+> +CONFIG_ROCKCHIP_GPIO=y
+> +# CONFIG_ROCKCHIP_IODOMAIN is not set
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_SILICONKAISER=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XMC=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_SPI_FLASH_ZBIT=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_RAM=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_DM_RNG=y
+> +CONFIG_RNG_ROCKCHIP=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_SYSRESET_PSCI=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DWC2_OTG=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_USB_FUNCTION_ROCKUSB=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 1407080f1f4f..6b48187ba79d 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -66,6 +66,7 @@ List of mainline supported Rockchip boards:
+>        - FriendlyElec NanoPi R2C Plus (nanopi-r2c-plus-rk3328)
+>        - FriendlyElec NanoPi R2S (nanopi-r2s-rk3328)
+>        - FriendlyElec NanoPi R2S Plus (nanopi-r2s-plus-rk3328)
+> +     - Generic RK3328 (generic-rk3328)
+>        - Pine64 Rock64 (rock64-rk3328)
+>        - Radxa ROCK Pi E (rock-pi-e-rk3328)
+>        - Xunlong Orange Pi R1 Plus (orangepi-r1-plus-rk3328)
