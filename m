@@ -4,86 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BFBC36002
-	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 22:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EC3C3600C
+	for <u-boot@archiver.kernel.org>; Sun,  6 Apr 2025 22:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB05382C13;
-	Mon,  7 Apr 2025 00:09:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3C5AD82B8E;
+	Mon,  7 Apr 2025 00:31:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bA00D5Rj";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="slcuTW7J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C69882B8E; Mon,  7 Apr 2025 00:09:35 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4157882BE3; Mon,  7 Apr 2025 00:31:57 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 848D182C13
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 00:09:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C09ED82B45
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 00:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ac2963dc379so610368966b.2
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 15:09:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743977373; x=1744582173; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=b0jBW5X0XiYSii1oOb5znw50BBByw8cuiN8gAQ9IO0E=;
- b=bA00D5RjttTZ+NZ8g0x1EzeOHCuW38r030zeZvuitR67OrEU62YB+cpgo8Dv3FBE8S
- OI4tQoO8ViHeq3txAiehk6IVmz8IwHaIKN8IcAlOjIK5g9Sh0jqmN2L1WZclJFJzYSmN
- Sy7uTqESO0H8U19dzXwhMcUiDF553G6aT4RCw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743977373; x=1744582173;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=b0jBW5X0XiYSii1oOb5znw50BBByw8cuiN8gAQ9IO0E=;
- b=g30Y1GNaxna4BlKGo/TP9yGcAWogxnNE3ZkVfbfsFFwKDhIdIUj3dimYBxq8NpJOv9
- ygOREy4+JMTjr/K5u40fgOdb0NVdyiee4xAXBVW1RIVIQ269K4uXMQPJ8+YlUiJmWG/e
- 4Z7rpg4ZO5wVG46rh9cyH6dkjrMMgHWnYXYVJQMNTQPWTY5/bLzJt1lifjZSjwQoHBoz
- yTybj8RQ2TlBGvF0Srpnm20RXqgYiAzhEzgQG31wB3vEyVNydAFKhFRiFoI+xSXLFfe+
- JCvgjGIGda3L1+bpxhuD66pzNUUhtN8Nl1ssykefSE3siAHnUQFLxXaOIfM8YIktLsJH
- W1Rw==
-X-Gm-Message-State: AOJu0YxBDE/wrLBsKIQ+j2v8yqA6W8amen5so3D300JfjgtUsfBeXaiN
- SvNTp5D/XY9oyQZa7dm3BuexCjAaBvpcH6ghOs/ovyc/GHM9S8+gqSAb4Co6QPT/wTVdH2tcIaD
- lQivkr1JPcG82D43NyQmydWI9tcRfJYv1Ekm1
-X-Gm-Gg: ASbGncvyO1+9Ztyjd9uOhJmhzvPCHA2opHR5NZzBkRPdAnZxGnkzHbQjl/Iy6BEyOEc
- mAPP9uO2pkeJXFPT0NbUWz7NrWh5snbPHxGRZVHAPnWYAe4sts31RMz0I2X7oN/I/gd1h4QXBaM
- DXFnc3q4y/fWUy6W+V8hYjVVxcnGRzRA8Qhw/G
-X-Google-Smtp-Source: AGHT+IHqzqaphfhaNCTAvlxk9NnjEJkEml4Wrym+NvvL8mOccqJhL8sIU2+GtsQq84RsrlHJtrd2lcCidsS7PXvK2ks=
-X-Received: by 2002:a17:907:6e86:b0:ac3:4373:e8bf with SMTP id
- a640c23a62f3a-ac7d16bc07emr1106444666b.10.1743977372498; Sun, 06 Apr 2025
- 15:09:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=13a0=WZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1743978713;
+ bh=HfUU+FWuMXjf0pM6RxkRnF8z/TA9vog3SGYsUQfBoQ8=;
+ b=slcuTW7J2yHRfJqWMXV1+mYZAsjvctKyS9kzr1EQZw3qR5kFIGG91ViqszXnQj8ScpkvQxZ1q
+ nHeAquLZ7jf59ivjEYd4Dsdz+GKBD4Hs6Hh8SkMGBGAW8wpVGLG0oM5MnC06hzdH/sK8nHTAzm3
+ Y93qEpM2ArDVwHctmuxCFMU2MtoZ/Fm7oto+BVatp8CbyRTHIFDDba6FVWXhZr2TRH+esfAoOg7
+ oX5k9f/SHm7RP7X4o9lmd1TG8VueRgbD9zzm8iePguREhKWKmAeUndhwRBt6sp1OJyqZ8g/Bc6d
+ 0fbo4wmLdFA+SBBDhq5/2b0H6RPj2PJRDYjbHTf9MCgw==
+X-Forward-Email-ID: 67f300c690f253d89dba217b
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <050bd778-3f0c-4f8a-9140-aa73a7943cb0@kwiboo.se>
+Date: Mon, 7 Apr 2025 00:31:29 +0200
 MIME-Version: 1.0
-References: <20250405221308.498047-1-sjg@chromium.org>
- <20250405221308.498047-2-sjg@chromium.org>
- <dc4dec57-6fba-4224-9f84-1cc63c58eacd@kwiboo.se>
- <CAFLszTim=Fq9rv0BfypZoje=i+HU_ZTdFK_GSQoZSsESWm=Jqg@mail.gmail.com>
- <a1026fc5-de0c-4a88-891e-1bdb5b98b705@kwiboo.se>
-In-Reply-To: <a1026fc5-de0c-4a88-891e-1bdb5b98b705@kwiboo.se>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Apr 2025 10:09:20 +1200
-X-Gm-Features: ATxdqUFBxKXrUpbOpsIqj3jTp1hZixUTNCjk_8dbKxt3Vvp-0diEGdA46_adzYA
-Message-ID: <CAFLszTi_7vv-CBxat=naT6iWmPUPFvCNZhVxj+JvHr_GUqwn_Q@mail.gmail.com>
-Subject: Re: [PATCH 2/3] designware: Use the remove() method with related
- drivers
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- neil.armstrong@linaro.org, 
- =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>, 
- Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, u-boot-amlogic@groups.io
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/7] configs: rockchip: Enable ethernet driver on
+ RK356x boards
+To: Diederik de Haas <didi.debian@cknow.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Joseph Chen <chenjh@rock-chips.com>, Andy Yan <andyshrk@163.com>,
+ Tianling Shen <cnsztl@gmail.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de,
+ David Wu <david.wu@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Frank Wunderlich <frank-w@public-files.de>, Stefan Agner <stefan@agner.ch>
+References: <20231001191730.4167035-1-jonas@kwiboo.se>
+ <20231001191730.4167035-7-jonas@kwiboo.se> <2086393.9F9pDXStbY@bagend>
+ <D8ZTTOA3Q6Q1.39Q6ZX28395IG@cknow.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <D8ZTTOA3Q6Q1.39Q6ZX28395IG@cknow.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,69 +84,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Diederik,
 
-On Mon, 7 Apr 2025 at 09:36, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> Hi Simon,
->
-> On 2025-04-06 23:10, Simon Glass wrote:
-> > Hi Jonas,
-> >
-> > On Sun, 6 Apr 2025 at 21:02, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 2025-04-06 00:12, Simon Glass wrote:
-> >>> Several drivers make use of the designware Ethernet driver but do not
-> >>> implement the remove() method. Add this so that DMA is stopped when the
-> >>> OS is booted to avoid memory corruption, etc.
-> >>
-> >> The designware Ethernet driver core should not need the remove() ops as
-> >> the eth_ops.stop() ops already should stop DMA. And the eth-uclass
-> >> pre_remove() ops already call the eth_ops.stop() ops.
-> >>
-> >> All these drivers seem to use designware_eth_ops and thus have correct
-> >> stop() ops configured and should really not need the remove() ops.
-> >>
-> >
-> > That's interesting. I wrote that code about 9 years ago so perhaps can
-> > be forgiven for forgetting.
-> >
-> > Very few drivers set the DM_FLAG_ACTIVE_DMA flag, certainly not the
-> > designware ones. So how would they be removed?
->
-> Ahh, I see, remove() is only called for devices with ACTIVE_DMA or
-> OS_PREPARE. So I guess that was probably the issue all along?
+On 2025-04-06 22:09, Diederik de Haas wrote:
+> Hi,
+> 
+> On Thu Jul 11, 2024 at 9:38 PM CEST, Diederik de Haas wrote:
+>> Some time ago I reported to Jonas privately that I had a problem with
+>> my Quartz64 Model A and B and that I bisected it to this commit.
+>> I just verified that the problem is still present in 2024.07, so I
+>> guess it's time to report it to the (right) Mailing List.
+>>
+>> The problem: packet loss, varying, but sometimes massive
+>> Q64-A: The packet loss was usually between 8% and 30%
+>> Q64-B: Packet loss up to 80% sometimes and this also resulted (then) in
+>> its inability to receive a DHCP address.
+> 
+> I just build a ~2025.04-rc5 (i.e. 'master') version and tried it on my
+> Q64-B and the problem is still there.
+> Furthermore, there have now been several ppl on #quartz64 IRC channel
+> (on Pine64 IRC network) who have confirmed both the problem and the
+> 'solution'/workaround. Hopefully they'll also report here themselves.
 
-I suppose so, yes.
+I did a quick test on my Q64-A and can confirm it sometime behaves
+strange when Ethernet has been initialized in U-Boot.
 
->
-> There is some confusion that dm_remove_devices_active() does not remove
-> device_active()=true devices and instead only remove ACTIVE_DMA and/or
-> OS_PREPARE flagged devices.
->
-> >
-> >> Side note, this also misses the gmac rockchip driver that uses its own
-> >> eth_ops instead of designware_eth_ops, however it also use same stop()
-> >> ops as all these drivers.
-> >
-> > Hmm yes I saw that but then apparently forgot to include it.
-> >
-> > I can perhaps redo this patch to add the DMA flag.
->
-> Maybe eth_post_probe() or similar should add the OS_PREPARE or
-> ACTIVE_DMA flag for all eth-uclass, to ensure remove() and thus stop()
-> gets called when dm_remove_devices_active() is called.
+At times my iperf3 test report ~0-1 Mbits/sec instead of the more normal
+~941 Mbits/sec. After one (or more) "ifconfig eth0 down/up" cycle
+everything seemed to work okay again. However after one (or more) eth0
+down/up cycle the retries was no longer 0 and speed could instead be
+~0-1 Mbits/sec.
 
-But not all network drivers use DMA. It should really be set by the driver.
+I will see if I can replicate this on other rk3566 boards beside Q64.
 
->
-> There is probably no need to add all these remove() ops, as they would
-> still not have been called by dm_remove_devices_active().
-
-Well, since we can rely on the eth uclass, that is correct, but I
-still think it is better to add it, as an example to other drivers.
+Can you please try one or more "ifconfig eth0 down/up" cycle and see if
+that improves your packet loss issue?
 
 Regards,
-Simon
+Jonas
+
+> 
+>> And the fix in my case has always been easy:
+>>
+>> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
+>> index 1ea8e0f40cc..641452f9162 100644
+>> --- a/configs/quartz64-a-rk3566_defconfig
+>> +++ b/configs/quartz64-a-rk3566_defconfig
+>> @@ -67,9 +67,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>>  CONFIG_SPI_FLASH_GIGADEVICE=y
+>>  CONFIG_SPI_FLASH_MACRONIX=y
+>>  CONFIG_SPI_FLASH_WINBOND=y
+>> -CONFIG_PHY_MOTORCOMM=y
+>> -CONFIG_DWC_ETH_QOS=y
+>> -CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+>>  CONFIG_NVME_PCI=y
+>>  CONFIG_PCIE_DW_ROCKCHIP=y
+>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
+>> index f61b2c181a1..aae5d66edeb 100644
+>> --- a/configs/quartz64-b-rk3566_defconfig
+>> +++ b/configs/quartz64-b-rk3566_defconfig
+>> @@ -65,9 +65,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>>  CONFIG_SPI_FLASH_GIGADEVICE=y
+>>  CONFIG_SPI_FLASH_MACRONIX=y
+>>  CONFIG_SPI_FLASH_WINBOND=y
+>> -CONFIG_PHY_REALTEK=y
+>> -CONFIG_DWC_ETH_QOS=y
+>> -CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+>>  CONFIG_NVME_PCI=y
+>>  CONFIG_PCIE_DW_ROCKCHIP=y
+>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>>
+>> IOW: a (partial) revert of commit 25f56459aebc
+> 
+> I didn't try it this time; I just dd-ed my patched 2024.07 version and
+> then everything worked again.
+> 
+> It would be nice to get this fixed. I don't know how to fix it myself,
+> but I'm happy to test a potential patch for it.
+> 
+> Cheers,
+>   Diederik
+
