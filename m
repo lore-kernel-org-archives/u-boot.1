@@ -4,109 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D9BC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 14:31:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 382D8C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 14:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C35B482C55;
-	Mon,  7 Apr 2025 16:31:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BEBB82CEB;
+	Mon,  7 Apr 2025 16:43:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rxf0istT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j5wU2LBk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62D9182F3B; Mon,  7 Apr 2025 16:31:06 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 0033382E28; Mon,  7 Apr 2025 16:43:16 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 390FB82B63
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:31:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F50982CE7
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3fefbbc7dd4so2603346b6e.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:31:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-abbd96bef64so859237566b.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744036261; x=1744641061; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZJMrlfpQwnX3OgbGA1SpE+8ZeXU2u+//1vLLOyvg880=;
- b=Rxf0istTDmWS/Mk/CyCTRnvkHztvBe/26IkQgUf9OCzVpQBtV9pnre0nkfjmNfTUg4
- 8fcmS/zqQR7Fsfkbm8X3xjWrLf1P4zF23AC21x2fp2ezGNp9Nn6TrUhM55K8wWsR6uyK
- hEbtRCZePm2Zk18W29B19mi76G4MA19aZUY80=
+ d=gmail.com; s=20230601; t=1744036994; x=1744641794; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Y5DIoLIRTQESN0H1erXB9Y8O/W5vgj5lbe0uP3zd3wA=;
+ b=j5wU2LBkT6E31C0KTJDlEuhRTfZcM4FEXFzCFnvbHaYyu2uJ2AKUXcU4RwmUDAlsv8
+ uCI4yjgxoWT4x16IXJDtS7DZVqmTlWbc26D5i9Vpzcc4vLRGSdyNjDZiEo4Jv2LKgt30
+ uc5u8PmR25bWvCA3vQHBIFluFz6THKwftKB/ViWFT82SSsduf0FrdzMNilEbxwCnEI6r
+ c1jK1EnctDz3FG2UNmvgLzSWiG1UOOvmMmzL+Paz+r1zSXxbcS0m2+kh1n1544IfpAs1
+ z+zC36iOGKUc4hbdgl/WhYoDnkJFCXlHO+5+nyJUcI7qlj9BXJb3vBHvIg59lWOeuk2j
+ nEEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744036261; x=1744641061;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZJMrlfpQwnX3OgbGA1SpE+8ZeXU2u+//1vLLOyvg880=;
- b=EAFZuBJmsD47vGCXBgmT5R/RDK3K2vn8V1Ff1En4LxnjKYIJTKdy106p8QFH0rC60i
- MxNA09j0749M3ghAyblX3M1u3XL/ykWb5TKBXCPa8G6qGoeywujVZoh+uSE1HyAZohjO
- rjhvMtDzKf0EsncVTiXhJZN7ngwl8Poob79hUroW6t55C/B+LjJZzYfz4CjX+J0b4oN8
- 1jf8yMLb5OmmR8D17vP86LGO7y0buLBO7S5UsISQVNhkdEkaU7nazERCOp9drzMkxNGh
- 6aiXLWrWrTgXxW1X0JIBFLyPJshzlXMgdvwPguCiyx6ggmX/0mWQo9lZX1JuekpK7KPU
- CAzA==
+ d=1e100.net; s=20230601; t=1744036994; x=1744641794;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y5DIoLIRTQESN0H1erXB9Y8O/W5vgj5lbe0uP3zd3wA=;
+ b=j8lJxhV9VnKwZiLr7USikPpe7yHDXwuz5TgW+ymJ/MHKlPhPa0FcwDhOYUQWPGQ9cS
+ j6RGDoONo3TtpDMnCR6hFynegmLqFO+U/7wLQFuY67MhLfciofovghT9VjdrEHvYoZ+i
+ WrNOIke8M1L0WC8VpMBNuq1tONKDLVWTmSWFakpRC9lxC62DuNTaQ8U1D/Tc/bue1Gm2
+ qsmToENCKujhFByl5nP/wzGdMN3GSXGrQN6E1zZibPzM4Ui96k6ff8oDZZM/rsFaCDZz
+ 2YKsztkGWiYnMKZYSrXFUmxAm8iDFRqNZ+hLg89Zmd8VdN4JJp0ncLCqI6QuFSDHTWUz
+ rHWg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoPv5FJ6sx+mMHox1E3+dZhuZJ1jg1qMz+WFd5Lf618U8PyXoKl9ag/fhoU8B2tqwsWDdfwqQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxlTLg4WyBMuzcyYBcVKdb5cpnVNhuGr1d6xJXS4gjB2MOa+7R
- MuTlVWNxhouLi7flhxcTk0R8yVx113ijf2kB1CkkI9/lATAdeKEhYhBiDm47+7o=
-X-Gm-Gg: ASbGncugA0iVLaPiQRqQsnIQ1GcZ2NBtNTEfThR5np90jUoNVyy+Qj4pt7cnCeYT7hB
- SFIXX7p0jiwAZ8DzLYMWDzYK1YLaaEOPK3LaU8gbzmIyf9CdmWrsL5XseJJMjuZ56Xne8tcvZ4Z
- Y4cfp6T+74jLIp+rVU9uDuUeNFvzEzqIMxAjocwcc1cUM76S6/yTn03TOohJgMFzstLcMLwxDgt
- PtQZlrD2lJ7rCkGioKVnlS8N16JKMKSL6AnC48MtuhMOwpYm8TKl1ThPSF/M51+PRa9LTQD7RzH
- pFewRFKsl7FrAxfB5HiYJ8V+6KnXQrhY4SnVCKHQNrhdn7y/ht5ESmCvhfgdQZpROw4hmvtNCdA
- UwjtId0hhNbho65f3
-X-Google-Smtp-Source: AGHT+IG55QIy/JU7LnIhfMaOuyaaP2/ntBwajk0dBcmgVqARx7b7jBi9rI2xKPzXyQB7zOwStPluKg==
-X-Received: by 2002:a05:6808:6c88:b0:3f7:ccac:287f with SMTP id
- 5614622812f47-40045639cfamr7913420b6e.27.1744036260883; 
- Mon, 07 Apr 2025 07:31:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4003ff4e085sm1729948b6e.3.2025.04.07.07.30.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 07:31:00 -0700 (PDT)
-Date: Mon, 7 Apr 2025 08:30:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sumit Garg <sumit.garg@kernel.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-Message-ID: <20250407143056.GL5495@bill-the-cat>
-References: <CAEfUkULg0bzG564_vo43Bta5C4_EirZNt39ncgua0VFjd1C-tw@mail.gmail.com>
- <CAFLszTjGn1JGdpNAZVL6CC+pQLsOrG6gjmo8kRzjbnR_=6CMvw@mail.gmail.com>
- <20250403215239.GO5495@bill-the-cat>
- <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
- <20250403225058.GQ5495@bill-the-cat>
- <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
- <20250404175710.GU5495@bill-the-cat>
- <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
- <20250406223854.GE5495@bill-the-cat>
- <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
+ AJvYcCX7D9MsC8O3lPBQbr5yUCJVCOqhIRuqwypkN2ZkL1dU3seh23w4eBqIVB7sqFX0FH5lHp6krmU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6SguzXITmGKAnmAnBvqQXaMOixy6Dg2sfNHw3NXcNgT29+S9v
+ 7PNFxeSLyt5OvdILQvo3gv4xj9a0NKLjWS6wluPntE3azabQLlzt
+X-Gm-Gg: ASbGncsPdecYzchJtUEzJdM/X3ivBAevZVhZ6qOHiGy+QDphNZHXFN9G4I+XH5aWHe1
+ 6yr0YAckUHUhzTngKyCHBhCBu1g3flXWR+DEFwMn/3uGHHA1cMAbaV3i/6FPXX/RwKp+H3BdIAv
+ usHIV3sOwVANRNGBcXkUJ5EReNr3YATwbdIO+opFzLP7jhH6VsSiNW3DeCmsfY7NH9qiO/inb2H
+ z0ZOTMH97wmFYtyHbV4cfCXwgWlQ/9nHoUH2IlItAzBmd1FjK/QTiVW5evyqwwoUOkssOZ91g2V
+ L6OVWNIsP2EhmlsIYK3BWuCzae0au0cqjDBypc1DrEmjtDfU
+X-Google-Smtp-Source: AGHT+IGqnM7dJ444ABObw+R+oxF0WzOPRNVdK1lsCSxkD7unBIpJ+bDS9Ns37MB7NeyUTQTyeOrQRQ==
+X-Received: by 2002:a17:906:7951:b0:ac6:b8de:1a74 with SMTP id
+ a640c23a62f3a-ac7d18941b7mr1283682366b.15.1744036993522; 
+ Mon, 07 Apr 2025 07:43:13 -0700 (PDT)
+Received: from [100.65.88.194] ([188.163.112.51])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac7c018b26asm770631066b.146.2025.04.07.07.43.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Apr 2025 07:43:13 -0700 (PDT)
+Message-ID: <12fd7570-c5f6-4752-b0a3-162d6467c5d6@gmail.com>
+Date: Mon, 7 Apr 2025 17:43:10 +0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="M5TqWhmbkuPv03Lr"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/29] pxe: Precursor series for supporting read_all()
+ in extlinux / PXE
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried
+ <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+References: <CAFLszThrij_kGPdFcdJLoxJLpoZru=_M_vG4eVKwdPAqDfQJyg@mail.gmail.com>
+ <2ad3b1c5-b6e7-47e2-b225-834b821cc5c4@kwiboo.se>
+ <20250404224801.GV5495@bill-the-cat> <20250405144008.GY5495@bill-the-cat>
+ <20250405144823.GZ5495@bill-the-cat>
+ <CAFLszTiJct7mhx5_7iPzt_4m1BZL72pp1QML62b=7R3AgBn3fw@mail.gmail.com>
+ <20250405232346.GB5495@bill-the-cat>
+ <CAFLszTj4+GXkmEk3pq-iwJ=8CcJsSreJFKfqWsvW1LQKDz04_w@mail.gmail.com>
+ <20250406224826.GF5495@bill-the-cat>
+ <CAFLszTgc6UHvw6kRnGMkcbAMc1UDCX12HDSyW0YG+716Pq0Yzw@mail.gmail.com>
+ <20250407135310.GJ5495@bill-the-cat>
+Content-Language: en-US
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+In-Reply-To: <20250407135310.GJ5495@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,210 +131,239 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---M5TqWhmbkuPv03Lr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+07.04.25 4:53 пп, Tom Rini:
+> On Mon, Apr 07, 2025 at 01:07:34PM +1200, Simon Glass wrote:
+>> Hi Tom,
+>>
+>> On Mon, 7 Apr 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
+>>> On Mon, Apr 07, 2025 at 09:12:32AM +1200, Simon Glass wrote:
+>>>> Hi Tom,
+>>>>
+>>>> On Sun, 6 Apr 2025 at 11:23, Tom Rini <trini@konsulko.com> wrote:
+>>>>> On Sun, Apr 06, 2025 at 08:46:31AM +1200, Simon Glass wrote:
+>>>>>> (question for Heinrich below)
+>>>>>>
+>>>>>> Hi Tom,
+>>>>>>
+>>>>>> On Sun, 6 Apr 2025 at 02:48, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>> On Sat, Apr 05, 2025 at 08:40:08AM -0600, Tom Rini wrote:
+>>>>>>>> On Fri, Apr 04, 2025 at 04:48:01PM -0600, Tom Rini wrote:
+>>>>>>>>> On Fri, Apr 04, 2025 at 11:32:12PM +0200, Jonas Karlman wrote:
+>>>>>>>>>> Hi Simon,
+>>>>>>>>>>
+>>>>>>>>>> On 2025-04-04 00:30, Simon Glass wrote:
+>>>>>>>>>>> Hi Jonas,
+>>>>>>>>>>>
+>>>>>>>>>>> On Fri, 4 Apr 2025 at 09:57, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>>>>>>>>> Hi Tom and Simon,
+>>>>>>>>>>>>
+>>>>>>>>>>>> On 2025-03-19 00:21, Tom Rini wrote:
+>>>>>>>>>>>>> On Wed, 05 Mar 2025 17:24:54 -0700, Simon Glass wrote:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>> This series includes some patches related to allowing read_all() to be
+>>>>>>>>>>>>>> used with the extlinux / PXE bootmeths.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> These patches were split out from the stb4 series, since it will need to
+>>>>>>>>>>>>>> have additional patches for LWIP, to avoid breaking PXE booting when
+>>>>>>>>>>>>>> LWIP is used.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> [...]
+>>>>>>>>>>>>> Applied to u-boot/next, thanks!
+>>>>>>>>>>>> This series broke booting a compressed arm64 defconfig Linux kernel
+>>>>>>>>>>>> (without module loading) due to changes in decompression buffer length.
+>>>>>>>>>>>>
+>>>>>>>>>>>> My arm64 defconfig kernel (Image.gz) is ~24 MiB compressed and ~85 MiB
+>>>>>>>>>>>> uncompressed.
+>>>>>>>>>>>>
+>>>>>>>>>>>> Before this series the decompression buffer was 10x the kernel_comp_size
+>>>>>>>>>>>> and now it is instead limited by the SYS_BOOTM_LEN Kconfig symbol.
+>>>>>>>>>>>>
+>>>>>>>>>>>> A broken boot using current next branch:
+>>>>>>>>>>>>
+>>>>>>>>>>>>    Retrieving file: /Image.gz
+>>>>>>>>>>>>    Retrieving file: /initramfs.cpio.gz
+>>>>>>>>>>>>    append: earlycon
+>>>>>>>>>>>>    cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:394d3c' conf_fdt '3df16350' images 000000003ffe53a0
+>>>>>>>>>>>>       kernel data at 0x02080000, len = 0x00000000 (0)
+>>>>>>>>>>>>    load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
+>>>>>>>>>>>>    find_other type 2 os 5
+>>>>>>>>>>>>    ## Flattened Device Tree blob at 3df16350
+>>>>>>>>>>>>       Booting using the fdt blob at 0x3df16350
+>>>>>>>>>>>>    Working FDT set to 3df16350
+>>>>>>>>>>>>    load_os load 8000000 image_start 2080000 image_len 2000000
+>>>>>>>>>>>>       Uncompressing Kernel Image to 8000000
+>>>>>>>>>>>>    Error: inflate() returned -5
+>>>>>>>>>>>>    Image too large: increase CONFIG_SYS_BOOTM_LEN
+>>>>>>>>>>>>    Must RESET board to recover
+>>>>>>>>>>>>    Resetting the board...
+>>>>>>>>>>>>
+>>>>>>>>>>>> Changing SYS_BOOTM_LEN from default 64 MiB to 128 MiB fixed the boot:
+>>>>>>>>>>>>
+>>>>>>>>>>>>    Retrieving file: /Image.gz
+>>>>>>>>>>>>    Retrieving file: /initramfs.cpio.gz
+>>>>>>>>>>>>    append: earlycon
+>>>>>>>>>>>>    cmd 'booti' states 1f1f addr_img '0x02080000' conf_ramdisk '0x06000000:394d3c' conf_fdt '3df16430' images 000000003ffe5480
+>>>>>>>>>>>>       kernel data at 0x02080000, len = 0x00000000 (0)
+>>>>>>>>>>>>    load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
+>>>>>>>>>>>>    find_other type 2 os 5
+>>>>>>>>>>>>    ## Flattened Device Tree blob at 3df16430
+>>>>>>>>>>>>       Booting using the fdt blob at 0x3df16430
+>>>>>>>>>>>>    Working FDT set to 3df16430
+>>>>>>>>>>>>    load_os load 8000000 image_start 2080000 image_len 2000000
+>>>>>>>>>>>>       Uncompressing Kernel Image to 8000000
+>>>>>>>>>>>>       kernel loaded at 0x08000000, end = 0x0d3b5a00
+>>>>>>>>>>>>       Loading Ramdisk to 3cb51000, end 3cee5d3c ... OK
+>>>>>>>>>>>>       Loading Device Tree to 000000003cb3f000, end 000000003cb509df ... OK
+>>>>>>>>>>>>    Working FDT set to 3cb3f000
+>>>>>>>>>>>>
+>>>>>>>>>>>>    Starting kernel ...
+>>>>>>>>>>>>
+>>>>>>>>>>>> Do we need to increase the default SYS_BOOTM_LEN for ARM64 now?
+>>>>>>>>>>> Are you using the 'booti' command? Can you post a bit more console
+>>>>>>>>>>> output or a script here as it isn't clear what boot command you are
+>>>>>>>>>>> using? For now I'm going to assume booti
+>>>>>>>>>> Above was using an extlinux.conf with bootstd, not using the booti cmd.
+>>>>>>>>>>
+>>>>>>>>>> Use of booti cmd is not affected as it continue to use a 10x multiple
+>>>>>>>>>> of the kernel_comp_size env var for buffer size.
+>>>>>>>>>>
+>>>>>>>>>> The change this series introduced was instead of the 10x multiple of
+>>>>>>>>>> kernel_comp_size now use SYS_BOOTM_LEN for buffer size (320 vs 32 MiB).
+>>>>>>>>>>
+>>>>>>>>>> And because cmd/booti.c was not converted there is now two different
+>>>>>>>>>> handling of this decompression buffer size.
+>>>>>>>>>>
+>>>>>>>>>> If the change to now use SYS_BOOTM_LEN was intended this need to be
+>>>>>>>>>> changed as it has mostly been irrelevant for booting Linux on AArch64
+>>>>>>>>>> boards prior to this series.
+>>>>>>>>> We need to clean things up such that the path which is using 10x
+>>>>>>>>> multiple (and we lmb_alloc an area iirc) is used in all cases.
+>>>>>>>> Looking at the code this morning, I was confusing this with what we do
+>>>>>>>> for compressed FIT images, oops.
+>>>>>>> Ugh. Simon, can you go and fix this whole problem? Both do_bootz and
+>>>>>>> do_booti have non-trivial amounts of code that's missed by changing from
+>>>>>>> calling do_bootX() to bootX_run().
+>>>>>> For do_bootz() I believe the current code is correct. It does call
+>>>>>> bootz_start() and then doesn't call it again when bootz_run() starts.
+>>>>>> It looks like you have taken my Ubuntu test so perhaps I can add a
+>>>>>> bootz test for another board in my lab.
+>>>>>>
+>>>>>> For do_booti(), the code in booti_start() is used for the
+>>>>>> non-compressed case, so I believe it is still needed and that bootm
+>>>>>> doesn't currently honour 'Image' relocation when using an uncompressed
+>>>>>> image. But then there is the issue of SYS_BOOTM_LEN, below.
+>>>>>>
+>>>>>> bootm_load_os() has code for ARM at the end, which I suspect needs to
+>>>>>> run on RISC-V too, in case the image needs to be relocated. Marek
+>>>>>> added this 7 years ago[1] so it predates RISC-V and Heinrich perhaps
+>>>>>> didn't notice it when adding his support , if it is actually needed.
+>>>>>>
+>>>>>> SYS_BOOTM_LEN is a 'last bastion' security feature to avoid people
+>>>>>> loading images that wrap around memory, etc. I could put bootm_len
+>>>>>> into struct bootm_info so that a 10x value can be used for the booti
+>>>>>> case.
+>>> I'm not sure any of the above is 100% correct. My very quick look was
+>>> that it seems like if we want to have the command part of bootX be able
+>>> to be equivalently called via API, more of most of the commands needs to
+>>> be moved out of cmd/cmdX.c and to boot/bootX.c and put in to some state.
+>> Yes, my intent has been to move code out of commands into boot/ and
+>> have things work as before.
+> Then none of this should be in a "pxe" series, and you should have
+> been removing a bunch more code out of the command part of the file.
+>
+>> Also don't forget that booting a FIT with a compressed boot kernel did
+>> not work before my series. The series was largely written to fix bugs
+>> (in one place) rather that just to refactor for the fun it.
+> I'm not sure which FIT use case you're talking about here exactly and
+> when it got broken (because if it was in use already, someone would have
+> reported it).
+>
+>>>>>> Tom, we also have the issue that you haven't taken the rest of the PXE
+>>>>>> series (due to the lwip case), so our trees are out of sync in this
+>>>>>> area. It would really help if you could take that series, and again, I
+>>>>>> am happy to do the lwip case once it is landed.
+>>> Your further PXE rework is irrelevant to this discussion. Except in that
+>>> it points out there's still further changes that could break other
+>>> things even more.
+>> Yes, any change in untested code has the potential to create bugs. I
+>> do the best I can, but I could use a little more support in this
+>> effort.
+> And the best way to get support for that is to slow down and make
+> smaller more easily testable series. There's yet another bug in this
+> series too that Svyatoslav has or will post about shortly.
+>
+>>>>>> So for now, if people agree, I can do a small series to use a
+>>>>>> different SYS_BOOTM_LEN for the booti command and perhaps add RISC-V
+>>>>>> as above.
+>>> Well, no, that sounds like a step in the wrong direction. I'd like to
+>>> instead restore the expected behavior, and then perhaps we could clean
+>>> it up such that the compressed case for booti-Images works like FIT
+>>> images where we lmb allocate a larger area if needed.
+>> Yes, restoring the 10x decompression size is what I am talking about
+>> here. Is there anything else?
+> Functional wise, the being reported now issue Svyatoslav found too.
+>
+> Implementation wise, yes, I don't want to refactor and re-wrtie a bunch
+> of this as the first step. The first step should be just what's needed
+> to move the working functionality out of cmd/bootX.c and in to
+> boot/bootX.c and let people verify things haven't regressed. Then some
+> rework can be reviewed on its own.
+>
+>>>>>> Later, I could continue the boot-unification effort, e.g. delete the
+>>>>>> booti_start() function. and incorporate the uncompressed case into
+>>>>>> bootm code.
+>>>>> I'm not sure your reading of the situation is right. I'm more inclined
+>>>>> to revert this merge rather than take on more rework in the area.
+>>>> Well that would be a pretty poor show. No one else has spent effort
+>>>> trying to clean up and rationalise this code in the last 10 years, so
+>>>> far as I can see. This is in -next so there is plenty of time to
+>>>> resolve any issues.
+>>> Yes, things haven't broken in 10 years. This is why I don't value "tidy
+>>> up and refactor" in and of itself. Massive reworks then require a long
+>>> time to check all of the corner cases. This has been true of many of the
+>>> massive reworks you've done over the years.
+>> Well, do you want to be able to boot without CMDLINE, or not?
+> It's an interesting long term goal. But since there's always some
+> distribution or another that ships with each release we do, not having
+> functional regressions is more important than speed of new features.
+> Being able to practically disable the command line has been a feature
+> for forever. Being able to literally has implications for both security
+> and end user rights that need to be considered too.
+>
+>>>> I believe my reading of the situation is right, but if you disagree
+>>>> with some of it, please indicate which.
+>>> Your answer is not "Oh, I'll go understand what I broke and restore
+>>> expected behavior". It's "you should take more of my big rework and I'll
+>>> rework this area even more". That is not convincing that we won't have
+>>> v2025.07 broken here.
+>> You only took half of the series, remember. We are talking about a
+>> tiny corner case here, with no test coverage. I'm offering to fix the
+>> case that has been reported. I can also even add a test for it.
+> It wasn't half of the series. I didn't take more because it was either
+> the stuff that broke other functionality or because it wasn't used until
+> some further series from you. It's not a tiny corner case. A test case
+> is nice, sure, but we'll never have 100% test coverage and need physical
+> testing too. Which most people only have time for around releases. Which
+> is why we need to go slow. Which again is why you need to split up your
+> changes more and expect them to go slower. So there's time to test
+> things.
+Hello there! I have recently faced an issue with booting Linux on my
+LG P895 (Tegra30 smartphone). It has installed PostmarketOS with extlinux
+bootmethod and boots perfectly fine with current master but fails with next.
 
-On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wr=
-ote:
-> > > > > > > >
-> > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
-> > > > > > > > > Hi Raymond,
-> > > > > > > > >
-> > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@lin=
-aro.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > Hi Simon,
-> > > > > > > > > >
-> > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.=
-org> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao=
-@linaro.org> wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chrom=
-ium.org> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond=
-=2Emao@linaro.org> wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@=
-chromium.org> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > The bloblist code took what I consider to be =
-a wrong turn a year or so
-> > > > > > > > > > > > > > > ago. As discussed with Tom, this series propo=
-ses a way to arrange things
-> > > > > > > > > > > > > > > so that it is simpler to understand and manag=
-e.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_init=
-()
-> > > > > > > > > > > > > > > - Avoid needing to init the bloblist just to =
-get the FDT
-> > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST option r=
-ather than using guesswork
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATOR=
-Y which means
-> > > > > > > > > > > > > > mandatorily use bloblist to hand over everythin=
-g between boot stages
-> > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not nece=
-ssary.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATO=
-RY indicates that
-> > > > > > > > > > > > > there must be a bloblist, not that it must contai=
-n a devicetree. So I
-> > > > > > > > > > > > > wasn't sure about removing it.
-> > > > > > > > > > > > >
-> > > > > > > > > > > >
-> > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PA=
-SSAGE_MANDATORY is
-> > > > > > > > > > > > selected, we can override any fdt from board or env=
- with the one from
-> > > > > > > > > > > > the bloblist.
-> > > > > > > > > > >
-> > > > > > > > > > > Yes, but we should be explicit about what is going on=
- here. With
-> > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is coming=
- from the
-> > > > > > > > > > > bloblist. It becomes one of the sources for devicetre=
-e, like
-> > > > > > > > > > > OF_SEPARATE and OF_EMBED
-> > > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from blobl=
-ist will be
-> > > > > > > > > > mandatorily used and override other fdt sources like fr=
-om the board or
-> > > > > > > > > > env variables.
-> > > > > > > > >
-> > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I have no=
- objection to
-> > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like=
- the name
-> > > > > > > > > very much. But I can see why it is called that as my stan=
-dard passage
-> > > > > > > > > series was actually never applied. So I suppose I'll need=
- to have
-> > > > > > > > > another try at that.
-> > > > > > > > >
-> > > > > > > > > So to be clear, I want a separate option for devicetree, =
-called
-> > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, withou=
-t affecting
-> > > > > > > > > your option.
-> > > > > > > >
-> > > > > > > > Sigh. Can I ask what the use case for this will be? And we =
-are going to
-> > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
-> > > > > > >
-> > > > > > > I thought we agreed that this was acceptable. We argued the t=
-oss for
-> > > > > > > months on this point and I would rather not revisit it.
-> > > > > > >
-> > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is in. =
-I'm
-> > > > > > > pretty sure it can be done. The only tricky bit is coming up =
-with a
-> > > > > > > bloblist protocol for x86.
-> > > > > >
-> > > > > > Yes, I'm stuck between being "flexible and saying yes" and how =
-long we
-> > > > > > have to live with what I also think are bad designs.
-> > > > > >
-> > > > > > So maybe the pre-requisite here is that with "bloblist" and "st=
-andard
-> > > > > > passage" being divorced, what is the requirement for bloblist a=
-gain?
-> > > > > > Because in practice, all of the problems we've had come down to=
- looking
-> > > > > > in fixed address locations before they're valid. You want to ha=
-ndle this
-> > > > > > by saying "Ah, we won't look before it's valid with other CONFI=
-G flags"
-> > > > > > and I say we should handle this by not using a fixed address to=
- start
-> > > > > > with.
-> > > > > >
-> > > > > > If we have to add OF_BLOBLIST now and delete it in a few months=
-, sigh,
-> > > > > > OK. But it shouldn't need to exist long term.
-> > > > >
-> > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pass the
-> > > > > devicetree in the bloblist.
-> > > >
-> > > > I don't understand why that would become the case when it's not true
-> > > > today.
-> > >
-> > > If you look at the top obbfdtdec_setup() in your tree you can see the
-> > > special-case code related to TPL, that I'm wanting to get rid of.
-> >
-> > OK, but all of that too is for the case of a fixed bloblist being in
-> > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and want
-> > to see passing of the bloblist from xPL -> PPL be implemented and so xPL
-> > can allocate a bloblist (or grow a passed one if needed).
->=20
-> We are going around in circles though. Having it is registers doesn't
-> help with the problem that there isn't an FDT in the bloblist.
+Here is fragment of the boot log
 
-Sure it does. If we're passed a bloblist in a register we can then see
-if it has a DT (and use it) or not (and move to the next DT location).
+   Retrieving file: /Image
+   Retrieving file: /initramfs
+   append: rw gpt
+   Retrieving file: /tegra30-lg-p895.dtb
+   ERROR: booting os 'Invalid OS' (0) is not supported
+   Boot failed (err=-14)
 
-> Also, I thought you decided that I could maintain bloblist. Have you
-> changed your mind?
+I have debugged a bit and so far reverting:
 
-You just mis-understood me. Yes, you can maintain bloblist. But also,
-Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
-problems is that no one understood you.
+e2e87b84 "boot: pxe: Refactor label_run_boot() to avoid cmdline"
+feb8d7fd "pxe_utils: Simplify default fdt in label_run_boot()"
+b1340802 "boot: pxe: Use bootm_...() functions where possible"
 
---=20
-Tom
-
---M5TqWhmbkuPv03Lr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfz4ZkACgkQFHw5/5Y0
-tyw7Pgv+KAp/EYP9uG3e/kEiwmhyOhT3UIeFIRV5a78j2jL9SD+LBBVxpBez3Ppe
-etcV1IOUoNg5pYqiprC1f3i07l0b0tTDnAgjXFGE1LHopkWCPZxZH6VYl1L2DZzP
-3VE/uaVs8CngUXIuNhsnwTrhGBY8d+a00EF+kAjGjRhtyF1USu+SjyNvGDYM2AI8
-ubPUjqHXuGX5KFrpHAcGCY2xxX2TYZ4qg/Hv+8L3i3TE24v5u6sugk+162sEGH08
-18K6B5m4ST+g+Bmem80knBt4M7vazzzgxK3ZW5yCOQRPp+oRGhjZm3glk+OPMiGf
-KxrIPP/vLxsay1zbuLu27CV5TWO0p8bAKszjCSIw83zFO40/IidifcxU54VT2GTV
-ZifNabclRDawnYcGHUeIu47p5YZ9jw1v8i1LVFQe4USXCOmZ+S9Cy7ROaBGdI6sB
-BN1Vr2CZ/LbQhIENqKgdGc5zxEUOLTcsrn8v4BhPuk/Hr+8preu2JHEiDzjUtbHg
-SKyr2bQn
-=gBnO
------END PGP SIGNATURE-----
-
---M5TqWhmbkuPv03Lr--
+Fixed booting for my device.
