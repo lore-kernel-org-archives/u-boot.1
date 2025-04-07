@@ -4,83 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607CBC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 19:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7168C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 19:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A585382FB4;
-	Mon,  7 Apr 2025 21:00:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 482DC82FB4;
+	Mon,  7 Apr 2025 21:10:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DmDZIwve";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kcrU8RAO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0722E8302D; Mon,  7 Apr 2025 21:00:34 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 46F498307F; Mon,  7 Apr 2025 21:10:10 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAF0782EAA
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 21:00:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3172D82EAA
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 21:10:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3913958ebf2so4216270f8f.3
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 12:00:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3f94b7bd964so3069150b6e.1
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 12:10:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744052431; x=1744657231; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=eoB5acisECwWu4RCkQah2eHQhCK1R2jdCkB+4DF+VcI=;
- b=DmDZIwveBT6atkJKQCATUm12nv3XcnEHeToRSS2N0DMom2g5I7pD9kB/PQItR0MiQf
- zWDgA06K6K953xu+z//U5FkMABp94uTHBxSHahAy+sPSau9JlsaNoZkVA5XuSO3WnRB/
- 3IdXP1NWRrmJZdfFHH9sr/kFThk+JWGuxFwSziuaptvHlWLxVuuXdre7BHZwlSwZ1nvL
- NiO2zMlJ3YOJNRXAFFCyKVmIYZXLk0ipd69k/n36eaq0LkRW591HTPI6FsfroWrkWDiE
- ihjI92eJBjXLMSEeKEn8Il6WXWsla6xaxnU9KOU6oznjaDPOaJcZd6eSTXn4KXfLeMQL
- kG/g==
+ d=konsulko.com; s=google; t=1744053006; x=1744657806; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+D5r5u6JMwUqKRcVsibXiEW04cNgCz0HL4u77JYZxj8=;
+ b=kcrU8RAOibGC6QvesUT9eAeThudPF11mru8aNzoqylkqPDSfJ8nFr4jZJs77D/sP/j
+ XM8SHiShIZ9NazW8kSnS3y+ifm79wcCHZSjA+k3VFS2GyvrXT+TCObl05osPWPL4GG4a
+ 41tA8dHtl19mbit5Xr3/c7prq2s2n4tGN+I1M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744052431; x=1744657231;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=eoB5acisECwWu4RCkQah2eHQhCK1R2jdCkB+4DF+VcI=;
- b=quBYbpEYTLm9Mal1zsAWIZVlGTQeRHoM9VS/fSqWXhXg3tVFOEw4/0vJCOCRWSrGQM
- 9yZsuAmnr7/h1YauDMU1BM3opi/zoA+WUIi96zuatn4DvPXWgJhRwa6mdTPdqIA4EcL6
- jelqzckP80eLSqE+hBte9Z4WXX/2/BAuLc/6MdFRDs1FKspRwkln+M/ju0GZnJxApoSd
- ZzjCZGev7Gqndkg72sRdVoIfcl3IPFn5scHiEidTE2FoxCgh8Vf3x+q495vmvZxl9iRN
- A4kJ+uNTcOH3ewCfJmUGAyigVd5FAW/3BZbqld0uegjkmv1aWW2Uw9nR1myzrNXDvOt5
- 8Mqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWPQLiV/37rBP1MwC0pwPUvW0i1fZpIyRX9EfNGSi1nYVf5ca1Ftxd7X7K28r2HXPw4Sr+Bf9w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxO7P5jC9vPbD315gX/NoUd06p2fZ0sIjn+vtoy9UPZhH4bhf6t
- ZR0wIqZ4OAUKWmGa32vxOcAlQL7JBECCWldf8TrZxp8hV7MF+j2U
-X-Gm-Gg: ASbGncvbWTpvM9Vtq49lkBvD+A5Mv48W0mnivOcIPFi3VbLHZ3HwdCvhsMfHAs1RxCf
- wac4QqAanCzFei7V8qasKrGRe6Drytwt3x3sWjpRugdJ5EyRZ90eLj6jJ9mHk3eoOguc56UHQv9
- HHrs3IaPkqSHgPftcKqeli5wzAySnu+V1W+ynaimpiBNqN+/WFMDizaktLzce3ksGNhCc5dQFMU
- gDn4g2N2KEA76kDQrpQbMqrGYBUe4ZJUU33cWQmRzi3t3fgNfoEeT2EzzZRg34wxvYd3Ps0EKN9
- JisgZN/eq98hH1Mj9kAQuDAgwvzP50KHg2qipHFiCXMbR7F3rEd3RdgdHIS2aKSAEWgzZeAH8tY
- CJtqx+BgYGF8Qhw==
-X-Google-Smtp-Source: AGHT+IF0FT1zm7z9L2vRfAwAcispjKbIKXUC35u2rL6KKcSpNPNha/d4xH7OyXoMZs6HIz9PaHQGRQ==
-X-Received: by 2002:a05:6000:2285:b0:39c:dfa:c92a with SMTP id
- ffacd0b85a97d-39d6fd1924cmr8017688f8f.36.1744052430701; 
- Mon, 07 Apr 2025 12:00:30 -0700 (PDT)
-Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
- [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-39d7c6d838bsm2736553f8f.69.2025.04.07.12.00.29
+ d=1e100.net; s=20230601; t=1744053006; x=1744657806;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+D5r5u6JMwUqKRcVsibXiEW04cNgCz0HL4u77JYZxj8=;
+ b=rY+bW3FW2ZG+UouhUjWWUhl81LMNyHDsxqvrV5V2apYGEWclCI5DvWWd0KIOsm6u/3
+ cbiBOG5xxGtbbE1WzX1ddTXaMG5F2fLbC91+lM0o7Cl3HAuQKVYHtAtX7mgtKgSJBDPM
+ vcNwqm16YsJslToRd85K7cNPTMi1agx2YYaxZVqgEmuCiBVw5IPxuANw5aiQ1pW9jlwQ
+ BOV20le2U8YHWDbecfHGd0H8nR5BwrQ9WJQ2s8uHarhagtQPhCgvph3ynnMz3tCAFT3e
+ 6gHXjKDwJyHbg+HWNGybxVUXvaYZXm78Kt/UZhpu/HxrYLts5DHznduoHAaHzSoDx3mJ
+ BQPg==
+X-Gm-Message-State: AOJu0YxTH+9+DFEfxXH4HzgZeX487JrUCuXSuyLiSNBkqKG3jVPi+D3o
+ hRU9ny7NqYEYtHWS+xcVmmGwPEyn3yJQs+RiOhDa6TuFnbmTnJ0xCv1bR8qaHX4=
+X-Gm-Gg: ASbGncsk7wIJ6JxvnPIUio9XKXw4jifREhuH6J81OEcKQ6wIVIgKfNSN3RSDiVK81Fi
+ 5SEce5quZM32b3tWAXz9BZXWLN6rcsEu1N9l6dl14Dsn2RxpGTWhiHTHWBnMP/pvt9OSI2ZRZNz
+ wTtgBEOYJYD4fAMxLyYVAEuXZnEYuc5Ngw1/SbY3NjkyZbys0BuM0QOgilrGCGC+u/+Wuvdm0KM
+ LI52abuhnqvw4gs8Xf2q18dOQjUYW1Qgt07qS5Fe6zKjk/+fMrkKsdsEy68dlLA06AQJEY/5f+1
+ 552OrwqTKA/kZeQcSvO/QrtmqRlMMt7Jacd85+14XESjGxS3iCDCPOPmLhNNsqntIlSR9Zrej/k
+ h4WSE0w==
+X-Google-Smtp-Source: AGHT+IEZ1fRpCyxRqxJAmOzRw8ikJN1bBRO6MqCqC3o48EFpDqiO16lB0DhQjuwYbMPBONHMjaWmTw==
+X-Received: by 2002:a05:6808:10c5:b0:3f9:d5a2:899b with SMTP id
+ 5614622812f47-4004669f705mr8108455b6e.38.1744053005702; 
+ Mon, 07 Apr 2025 12:10:05 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e6517736csm51255a34.21.2025.04.07.12.10.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 12:00:30 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>
-Subject: [PATCH] env: Introduce support for MTD
-Date: Mon,  7 Apr 2025 20:59:51 +0200
-Message-ID: <20250407185958.15479-1-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ Mon, 07 Apr 2025 12:10:05 -0700 (PDT)
+Date: Mon, 7 Apr 2025 13:10:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: Rate of innovation in the project (Was: Re: Rate of change in
+ the project)
+Message-ID: <20250407191003.GN5495@bill-the-cat>
+References: <20250331155144.GX93000@bill-the-cat>
+ <CAFLszTjNXzkVe_OULMOtt2imSD5KY-KPMgxT7FA=fFqnm0aaeA@mail.gmail.com>
+ <20250401171822.GM5495@bill-the-cat>
+ <CAFLszTjzxXW_SdDMbjPKitgQ6HSv3Vse6ANrr5QEr85A1byyHg@mail.gmail.com>
+ <20250402223534.GE5495@bill-the-cat>
+ <CAFLszTiftx2RpeNdBmms8e=HZm2YqH_sjea7Ot1gyaSWAScivw@mail.gmail.com>
+ <20250403142741.GJ5495@bill-the-cat>
+ <CAFLszTiE4GQ77nzssR42HcE8bcCKzjuNcL50kprQ+zb947mR=Q@mail.gmail.com>
+ <20250406225319.GH5495@bill-the-cat>
+ <CAFLszTh3hB1yYJ_TaEvNh3mosEwq2yn02ajXJm3Cv1mvpf67bg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/n5V0QXM9EIJGznK"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTh3hB1yYJ_TaEvNh3mosEwq2yn02ajXJm3Cv1mvpf67bg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,482 +106,437 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce support for env in generic MTD. Currently we only support SPI
-flash based on the lagacy sf cmd that assume SPI flash are always NOR.
-This is not the case as to SPI controller also NAND can be attached.
 
-To support also these flash scenario, add support for storing and
-reading ENV from generic MTD device by adding an env driver that
-base entirely on the MTD api.
+--/n5V0QXM9EIJGznK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Introduce a new kconfig CONFIG_ENV_IS_IN_MTD and
-CONFIG_ENV_MTD_DEV to define the name of the MTD device as exposed
-by mtd list.
+On Mon, Apr 07, 2025 at 10:45:24PM +1200, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 7 Apr 2025 at 10:53, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Apr 07, 2025 at 09:15:42AM +1200, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 4 Apr 2025 at 03:27, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Apr 03, 2025 at 12:55:38PM +1300, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Thu, 3 Apr 2025 at 11:35, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Apr 03, 2025 at 08:22:13AM +1300, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Wed, 2 Apr 2025 at 06:18, Tom Rini <trini@konsulko.com> wr=
+ote:
+> > > > > > > >
+> > > > > > > > On Wed, Apr 02, 2025 at 04:45:37AM +1300, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Tue, 1 Apr 2025 at 04:51, Tom Rini <trini@konsulko.com=
+> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Fri, Mar 28, 2025 at 11:42:20PM +0000, Simon Glass w=
+rote:
+> > > > > > > > > > > Hi Tom,
+> > > > > > > > > > >
+> > > > > > > > > > > On Mon, 10 Mar 2025 at 09:53, Tom Rini <trini@konsulk=
+o.com> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Fri, Mar 07, 2025 at 08:46:31AM -0600, Tom Rini =
+wrote:
+> > > > > > > > > > > > > On Thu, Mar 06, 2025 at 09:10:47AM -0700, Simon G=
+lass wrote:
+> > > > > > > > > > > > [snip]
+> > > > > > > > > > > > > > Again, back to this thread, if you want me to m=
+igrate things, consider
+> > > > > > > > > > > > > > applying the sunxi patches as I have described =
+above. I will then look
+> > > > > > > > > > > > > > at the next target for bootstd. But while you h=
+old this up, I cannot
+> > > > > > > > > > > > > > move forward with more bootstd migration. It do=
+esn't seem that much to
+> > > > > > > > > > > > > > ask.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I will take another look at what's still relevant=
+=2E But I believe it's
+> > > > > > > > > > > > > still blocked on the fact that it changes behavio=
+r and breaks users.
+> > > > > > > > > > > >
+> > > > > > > > > > > > In details:
+> > > > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-2-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > Now that the underlying BLK problem is resolved, th=
+is can just be
+> > > > > > > > > > > > dropped I believe. Removing the BLK dependency from=
+ BOOTSTD can happen
+> > > > > > > > > > > > when you're supporting a flow that lacks a BLK devi=
+ce entirely. This
+> > > > > > > > > > > > would be another reminder as to why putting unrelat=
+ed changes in a
+> > > > > > > > > > > > series is a problem.
+> > > > > > > > > > >
+> > > > > > > > > > > OK, then just don't apply this patch. Problem solved?
+> > > > > > > > > >
+> > > > > > > > > > Well, for a hypothetical v6 you would not include it, s=
+ure.
+> > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-3-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > This is fine.
+> > > > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-4-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > This is not fine. This is also not a sunxi problem.=
+ It means that we
+> > > > > > > > > > > > should drop bootmgr from rockchip, where the conver=
+sion has already
+> > > > > > > > > > > > taken place, and would need to drop it from future =
+conversion too.
+> > > > > > > > > > > > Neither of which are desirable changes.
+> > > > > > > > > > >
+> > > > > > > > > > > Why do you say that? I don't understand how this rela=
+tes to rockchip
+> > > > > > > > > > > or why we would need to drop bootmgr from that.
+> > > > > > > > > >
+> > > > > > > > > > Then you don't have enough of a grasp of the details of=
+ the area you're
+> > > > > > > > > > trying to solve problems in? Or maybe you need to refre=
+sh yourself on
+> > > > > > > > > > the details of the area you're trying to work in.
+> > > > > > > > >
+> > > > > > > > > Or perhaps there isn't a problem? The sunxi case is speci=
+al because we
+> > > > > > > > > have a FEL boothmeth. That isn't present on rockchip, for=
+ example.
+> > > > > > > >
+> > > > > > > > Again, you seem to have forgotten what the problems with th=
+e series
+> > > > > > > > were.
+> > > > > > >
+> > > > > > > No, it's just that we disagree on the path forward.
+> > > > > >
+> > > > > > Then why did you bring up FEL? That's the part of the migration=
+ which is
+> > > > > > NOT a problem, I keep being reminded when I ask.
+> > > > >
+> > > > > FEL needs to get priority, that's all. It was a problem until I
+> > > > > adjusted the priority.
+> > > >
+> > > > And there's been zero objection to this. So why are you mentioning =
+it
+> > > > here, in the discussion on why the migration is blocked. I know I h=
+ad
+> > > > been unsure, but I asked, and people answered, and I accepted the
+> > > > answer.
+> > > >
+> > > > > > > > > > > > This patch in particular is
+> > > > > > > > > > > > where we have the note:
+> > > > > > > > > > > >
+> > > > > > > > > > > > "Yes, the introduction of boot standard changed the=
+ boot order and
+> > > > > > > > > > > > specifically deprioritizing scripts is unexpected."
+> > > > > > > > > > > >
+> > > > > > > > > > > > Which should have had more attention than it did.
+> > > > > > > > > > >
+> > > > > > > > > > > From memory the scripts are a fallback used when the =
+other things
+> > > > > > > > > > > don't work, so that was the decision I made at the ti=
+me.
+> > > > > > > > > >
+> > > > > > > > > > The key point being we changed behavior that others dep=
+ended on, and
+> > > > > > > > > > didn't document it well and didn't make sure the change=
+ would work for
+> > > > > > > > > > them either.
+> > > > > > > > > >
+> > > > > > > > > > > > This is the thread that to me spelled out in detail=
+s where the
+> > > > > > > > > > > > conversions are now blocked. We changed behavior an=
+d that in turn breaks
+> > > > > > > > > > > > users that have come to rely on ordering.
+> > > > > > > > > > >
+> > > > > > > > > > > I don't know what action to take on that comment. We =
+cannot have 100%
+> > > > > > > > > > > backwards compatibility with the scripts, which after=
+ all weren't even
+> > > > > > > > > > > documented. But it is very close.
+> > > > > > > > > >
+> > > > > > > > > > You need to get feedback from the people you want to mi=
+grate from the
+> > > > > > > > > > scripts and ordering and rely on to something else and =
+see what works
+> > > > > > > > > > for them.
+> > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-5-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > Is an alternative to the above which then turned in=
+ to a discussion that
+> > > > > > > > > > > > I would very briefly summarize as "no discussions w=
+ere had between
+> > > > > > > > > > > > stakeholders before integrating efi bootmgr with bo=
+otstd".
+> > > > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-6-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > This is fine, but only relevant once migration happ=
+ens.
+> > > > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-7-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > If Andre is fine with this, this is fine.
+> > > > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-8-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > This is a generic bugfix. I will take this to next =
+today.
+> > > > > > > > > > > >
+> > > > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20=
+241113150938.1534931-9-sjg@chromium.org/
+> > > > > > > > > > > >
+> > > > > > > > > > > > If Andre is fine with this, this is fine.
+> > > > > > > > > > >
+> > > > > > > > > > > Well, is he? I thought he was. Can you check?
+> > > > > > > > > >
+> > > > > > > > > > You're free to. It's one of the innumerable examples of=
+ why when you
+> > > > > > > > > > group multiple things in a series and there's problems =
+with another part
+> > > > > > > > > > of the series, unrelated changes get dropped.
+> > > > > > > > >
+> > > > > > > > > It would be easier for me if you could apply the patches =
+as I've suggested.
+> > > > > > > > >
+> > > > > > > > > But if you are willing to apply these patches and just wa=
+nt me to send
+> > > > > > > > > the series again without the BLK and RFC patches, I can d=
+o that.
+> > > > > > > > > Please let me know either way.
+> > > > > > > >
+> > > > > > > > Again, you should:
+> > > > > > > > - Take the non-bootstd sunxi enhancements, rebase them to n=
+ext and post
+> > > > > > > >   for Andre. By themselves. This way they won't get stuck.
+> > > > > > >
+> > > > > > > There's no point, though, since it doesn't provide the bootst=
+d migration.
+> > > > > >
+> > > > > > Are you saying there's no point in generally improving things i=
+f it
+> > > > > > doesn't also involve one of your particular projects?
+> > > > >
+> > > > > The series is called 'bootstd: sunxi: Migrate to standard boot'. =
+If
+> > > > > you'd like to apply just the patches from that series which don't
+> > > > > migrate sunxi to standard boot, please go ahead.
+> > > >
+> > > > I'm not the sunxi custodian. General sunxi changes would go through=
+ that
+> > > > tree. And then a repeat of everything I've said about how bundling
+> > > > unrelated changes hurts everyone.
+> > > >
+> > > > > > > > - You should work with Heinrich to come up with something t=
+hat handles
+> > > > > > > >   efi bootmanager and bootstd without breaking how our actu=
+al project
+> > > > > > > >   users use us.
+> > > > > > > >   There's no reason to migrate *more* platforms until we ha=
+ve this
+> > > > > > > >   fundamental problem sorted out.
+> > > > > > >
+> > > > > > > It isn't actually a fundamental problem at all. We shouldn't =
+even be
+> > > > > > > discussing this and it is really unfortunate that you continu=
+e to
+> > > > > > > block this effort.
+> > > > > > >
+> > > > > > > As to bootmgr, I would be willing to implement a solution her=
+e, but it
+> > > > > > > would involve changes to how bootmgr works under the hood, i.=
+e. to
+> > > > > > > have it be iterative instead of doing everything at the start=
+=2E My firm
+> > > > > > > understanding is that such changes would not be acceptable to
+> > > > > > > Ilias/Heinrich and anyway I am unable to get patches into the=
+ EFI
+> > > > > > > subsystem.
+> > > > > > >
+> > > > > > > So the fallback is the work-around which Heinrich proposed. H=
+e is free
+> > > > > > > to implement that if he likes, but I am not planning to do th=
+is myself
+> > > > > > > as I see it as a short-term measure and it may cause problems=
+ for
+> > > > > > > bootstd, as did f2bfa0cb1 which I bitterly regret allowing in=
+ (but I
+> > > > > > > suppose they were happier days before everything froze up).
+> > > > > > >
+> > > > > > > > - You should work with any FOSS distributions to get their =
+feedback on
+> > > > > > > >   what would make their life easier, from a user of U-Boot =
+perspective.
+> > > > > > > >   bootstd won't be useful if it's not something our users w=
+ant to use.
+> > > > > > >
+> > > > > > > Bootstd is designed to replace the distro scripts and the fee=
+dback I
+> > > > > > > have received is that it is good at that. If you have any oth=
+er
+> > > > > > > feedback, or any suggestions on people I should contact, I'm =
+happy to
+> > > > > > > approach them, or they can email the list and cc me.
+> > > > > > >
+> > > > > > > But really, it would be a lot easier if you could just apply =
+this
+> > > > > > > series so we can move on. If I can see even just a glimmer of
+> > > > > > > compromise here it will help my confidence.
+> > > > > >
+> > > > > > Your sunxi series is broken as posted. I am not interested in a=
+pplying
+> > > > > > or encouraging more bootstd usage until there's actual work bei=
+ng done
+> > > > > > to move forward wit bootstd (a thing you want) and EFI (a thing=
+ most
+> > > > > > distributions want). That would be some of the general feedback=
+ you've
+> > > > > > been given and missed or forgotten.
+> > > > > >
+> > > > > > This is even setting aside that I can't recall now if you ever =
+started
+> > > > > > on making non-BOOTSTD_FULL more useful / usable in general beca=
+use it's
+> > > > > > so minimal that every conversion ends up also enabling BOOTSTD_=
+FULL in
+> > > > > > order to be flexible enough for users to decide SD vs eMMC and =
+so on.
+> > > > >
+> > > > > You can hold this up for as long as you like, it's your tree.
+> > > >
+> > > > And you can do whatever you like in your personal tree, sure. But
+> > > > there's rules for working in a community project.
+> > > >
+> > > > > I'm always happy and willing to discuss and commit to future
+> > > > > improvements. The pattern I see, well-established now, is that you
+> > > > > block my current improvements until some other things are done (t=
+his
+> > > > > series, PXE and many others). Or sometimes you see my series, com=
+e up
+> > > > > with a clean-up and block my series until it is based on top of t=
+hat.
+> > > > > If you could move away from that pattern and operate in a more
+> > > > > cooperative manner, we could definitely get a lot more done in yo=
+ur
+> > > > > tree.
+> > > > >
+> > > > > But again, you can hold this up as long as you like. I just feel =
+it
+> > > > > would be better for the project if you didn't.
+> > > >
+> > > > I continue to not accept changes from anyone that knowingly break o=
+ther
+> > > > use cases and users. You are not an exception to the rule. Leaving
+> > > > things broken for now and improving them later is not an option in
+> > > > mainline.
+> > >
+> > > If that is your justification for blocking progress then it won't work
+> > > in this case. There is nothing actually broken with my series. Shall I
+> > > send it again so you can take another look?
+> >
+> > Well, again, your series includes "Pick one of these two NAK'd patches
+> > to continue". So no, you probably shouldn't.
+>=20
+> This is the patch I think you are referring to:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-4=
+-sjg@chromium.org/
+>=20
+> I think disabling bootmgr on sunxi is OK. People can always enable it
+> again if they don't want to use FEL, which after all is a development
+> feature. It's not a huge limitation in my view, although it might
+> eventually become a problem. We could always add a bit of
+> documentation to explain the issue.
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- env/Kconfig            |  33 +++-
- env/Makefile           |   1 +
- env/env.c              |   3 +
- env/mtd.c              | 338 +++++++++++++++++++++++++++++++++++++++++
- include/env_internal.h |   1 +
- 5 files changed, 372 insertions(+), 4 deletions(-)
- create mode 100644 env/mtd.c
+That patch links to:
+https://lore.kernel.org/u-boot/20241112171205.4e80548d@donnerap.manchester.=
+arm.com/
 
-diff --git a/env/Kconfig b/env/Kconfig
-index 4438f0b392c..74678c43334 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -74,7 +74,7 @@ config ENV_IS_DEFAULT
- 		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
- 		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
- 		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
--		     !ENV_IS_IN_UBI
-+		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD
- 	select ENV_IS_NOWHERE
- 
- config ENV_IS_NOWHERE
-@@ -387,6 +387,25 @@ config ENV_IS_IN_SPI_FLASH
- 	  during a "saveenv" operation. CONFIG_ENV_OFFSET_REDUND must be
- 	  aligned to an erase sector boundary.
- 
-+config ENV_IS_IN_MTD
-+	bool "Environment is in MTD flash"
-+	depends on !CHAIN_OF_TRUST && (SPI_FLASH || DM_SPI_FLASH)
-+	default y if ARCH_AIROHA
-+	help
-+	  Define this if you have a MTD Flash memory device which you
-+	  want to use for the environment.
-+
-+	  - CONFIG_ENV_MTD_DEV:
-+
-+	  Specifies which SPI NAND device the environment is stored in.
-+
-+	  - CONFIG_ENV_OFFSET:
-+	  - CONFIG_ENV_SIZE:
-+
-+	  These two #defines specify the offset and size of the
-+	  environment area within the MTD Flash.
-+	  CONFIG_ENV_OFFSET must be aligned to an erase sector boundary.
-+
- config ENV_SECT_SIZE_AUTO
- 	bool "Use automatically detected sector size"
- 	depends on ENV_IS_IN_SPI_FLASH
-@@ -562,8 +581,8 @@ config ENV_EXT4_FILE
- config ENV_ADDR
- 	hex "Environment address"
- 	depends on ENV_IS_IN_FLASH || ENV_IS_IN_NVRAM || ENV_IS_IN_ONENAND || \
--		     ENV_IS_IN_REMOTE || ENV_IS_IN_SPI_FLASH
--	default 0x0 if ENV_IS_IN_SPI_FLASH
-+		     ENV_IS_IN_REMOTE || ENV_IS_IN_SPI_FLASH || ENV_IS_IN_MTD
-+	default 0x0 if ENV_IS_IN_SPI_FLASH || ENV_IS_IN_MTD
- 	help
- 	  Offset from the start of the device (or partition)
- 
-@@ -577,7 +596,7 @@ config ENV_ADDR_REDUND
- config ENV_OFFSET
- 	hex "Environment offset"
- 	depends on ENV_IS_IN_EEPROM || ENV_IS_IN_MMC || ENV_IS_IN_NAND || \
--		    ENV_IS_IN_SPI_FLASH
-+		    ENV_IS_IN_SPI_FLASH || ENV_IS_IN_MTD
- 	default 0x3f8000 if ARCH_ROCKCHIP && ENV_IS_IN_MMC
- 	default 0x140000 if ARCH_ROCKCHIP && ENV_IS_IN_SPI_FLASH
- 	default 0xF0000 if ARCH_SUNXI
-@@ -666,6 +685,12 @@ config SYS_RELOC_GD_ENV_ADDR
- 	  Relocate the early env_addr pointer so we know it is not inside
- 	  the binary. Some systems need this and for the rest, it doesn't hurt.
- 
-+config ENV_MTD_DEV
-+	string "mtd device name"
-+	depends on ENV_IS_IN_MTD
-+	help
-+	  MTD device name on the platform where the environment is stored.
-+
- config SYS_MMC_ENV_DEV
- 	int "mmc device number"
- 	depends on ENV_IS_IN_MMC || ENV_IS_IN_FAT || ENV_IS_IN_EXT4 || \
-diff --git a/env/Makefile b/env/Makefile
-index a54e924d419..3b9c71d5681 100644
---- a/env/Makefile
-+++ b/env/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FAT) += fat.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_EXT4) += ext4.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_NAND) += nand.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SPI_FLASH) += sf.o
-+obj-$(CONFIG_$(PHASE_)ENV_IS_IN_MTD) += mtd.o
- obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FLASH) += flash.o
- 
- CFLAGS_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
-diff --git a/env/env.c b/env/env.c
-index bcc189e14db..dbaeedc3c3b 100644
---- a/env/env.c
-+++ b/env/env.c
-@@ -58,6 +58,9 @@ static enum env_location env_locations[] = {
- #ifdef CONFIG_ENV_IS_IN_SPI_FLASH
- 	ENVL_SPI_FLASH,
- #endif
-+#ifdef CONFIG_ENV_IS_IN_MTD
-+	ENVL_MTD,
-+#endif
- #ifdef CONFIG_ENV_IS_IN_UBI
- 	ENVL_UBI,
- #endif
-diff --git a/env/mtd.c b/env/mtd.c
-new file mode 100644
-index 00000000000..721faebd8f2
---- /dev/null
-+++ b/env/mtd.c
-@@ -0,0 +1,338 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *  Author: Christian Marangi <ansuelsmth@gmail.com>
-+ */
-+#include <env_internal.h>
-+#include <errno.h>
-+#include <malloc.h>
-+#include <mtd.h>
-+#include <asm/cache.h>
-+#include <asm/global_data.h>
-+#include <linux/mtd/mtd.h>
-+#include <u-boot/crc.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static int setup_mtd_device(struct mtd_info **mtd_env)
-+{
-+	struct mtd_info *mtd;
-+
-+	mtd_probe_devices();
-+
-+	mtd = get_mtd_device_nm(CONFIG_ENV_MTD_DEV);
-+	if (IS_ERR_OR_NULL(mtd)) {
-+		env_set_default("get_mtd_device_nm() failed", 0);
-+		return mtd ? PTR_ERR(mtd) : -EINVAL;
-+	}
-+
-+	*mtd_env = mtd;
-+
-+	return 0;
-+}
-+
-+static int env_mtd_save(void)
-+{
-+	char *saved_buf, *write_buf, *tmp;
-+	struct erase_info ei = { };
-+	struct mtd_info *mtd_env;
-+	u32 sect_size, sect_num;
-+	size_t ret_len = 0;
-+	u32 write_size;
-+	env_t env_new;
-+	int remaining;
-+	u32 offset;
-+	int ret;
-+
-+	ret = setup_mtd_device(&mtd_env);
-+	if (ret)
-+		return ret;
-+
-+	sect_size = mtd_env->erasesize;
-+
-+	/* Is the sector larger than the env (i.e. embedded) */
-+	if (sect_size > CONFIG_ENV_SIZE) {
-+		saved_buf = malloc(sect_size);
-+		if (!saved_buf) {
-+			ret = -ENOMEM;
-+			goto done;
-+		}
-+
-+		offset = CONFIG_ENV_OFFSET;
-+		remaining = sect_size;
-+		tmp = saved_buf;
-+
-+		while (remaining) {
-+			/* Skip the block if it is bad */
-+			if (!(offset % sect_size) &&
-+			    mtd_block_isbad(mtd_env, offset)) {
-+				offset += sect_size;
-+				continue;
-+			}
-+
-+			ret = mtd_read(mtd_env, offset, mtd_env->writesize,
-+				       &ret_len, tmp);
-+			if (ret)
-+				goto done;
-+
-+			tmp += ret_len;
-+			offset += ret_len;
-+			remaining -= ret_len;
-+		}
-+	}
-+
-+	ret = env_export(&env_new);
-+	if (ret)
-+		goto done;
-+
-+	sect_num = DIV_ROUND_UP(CONFIG_ENV_SIZE, sect_size);
-+
-+	ei.mtd = mtd_env;
-+	ei.addr = CONFIG_ENV_OFFSET;
-+	ei.len = sect_num * sect_size;
-+
-+	puts("Erasing MTD...");
-+	ret = mtd_erase(mtd_env, &ei);
-+	if (ret)
-+		goto done;
-+
-+	if (sect_size > CONFIG_ENV_SIZE) {
-+		memcpy(saved_buf, &env_new, CONFIG_ENV_SIZE);
-+		write_size = sect_size;
-+		write_buf = saved_buf;
-+	} else {
-+		write_size = sect_num * sect_size;
-+		write_buf = (char *)&env_new;
-+	}
-+
-+	offset = CONFIG_ENV_OFFSET;
-+	remaining = sect_size;
-+	tmp = write_buf;
-+
-+	puts("Writing to MTD...");
-+	while (remaining) {
-+		/* Skip the block if it is bad */
-+		if (!(offset % sect_size) &&
-+		    mtd_block_isbad(mtd_env, offset)) {
-+			offset += sect_size;
-+			continue;
-+		}
-+
-+		ret = mtd_write(mtd_env, offset, mtd_env->writesize,
-+				&ret_len, tmp);
-+		if (ret)
-+			goto done;
-+
-+		offset += mtd_env->writesize;
-+		remaining -= ret_len;
-+		tmp += ret_len;
-+	}
-+
-+	ret = 0;
-+	puts("done\n");
-+
-+done:
-+	if (saved_buf)
-+		free(saved_buf);
-+
-+	return ret;
-+}
-+
-+static int env_mtd_load(void)
-+{
-+	struct mtd_info *mtd_env;
-+	char *buf, *tmp;
-+	size_t ret_len;
-+	int remaining;
-+	u32 sect_size;
-+	u32 offset;
-+	int ret;
-+
-+	buf = (char *)memalign(ARCH_DMA_MINALIGN, CONFIG_ENV_SIZE);
-+	if (!buf) {
-+		env_set_default("memalign() failed", 0);
-+		return -EIO;
-+	}
-+
-+	ret = setup_mtd_device(&mtd_env);
-+	if (ret)
-+		goto out;
-+
-+	sect_size = mtd_env->erasesize;
-+
-+	offset = CONFIG_ENV_OFFSET;
-+	remaining = CONFIG_ENV_SIZE;
-+	tmp = buf;
-+
-+	while (remaining) {
-+		/* Skip the block if it is bad */
-+		if (!(offset % sect_size) &&
-+		    mtd_block_isbad(mtd_env, offset)) {
-+			offset += sect_size;
-+			continue;
-+		}
-+
-+		ret = mtd_read(mtd_env, offset, mtd_env->writesize,
-+			       &ret_len, tmp);
-+		if (ret) {
-+			env_set_default("mtd_read() failed", 1);
-+			goto out;
-+		}
-+
-+		tmp += ret_len;
-+		offset += ret_len;
-+		remaining -= ret_len;
-+	}
-+
-+	ret = env_import(buf, 1, H_EXTERNAL);
-+	if (!ret)
-+		gd->env_valid = ENV_VALID;
-+
-+out:
-+	free(buf);
-+
-+	return ret;
-+}
-+
-+static int env_mtd_erase(void)
-+{
-+	struct mtd_info *mtd_env;
-+	u32 sect_size, sect_num;
-+	char *saved_buf, *tmp;
-+	struct erase_info ei;
-+	size_t ret_len;
-+	int remaining;
-+	u32 offset;
-+	int ret;
-+
-+	ret = setup_mtd_device(&mtd_env);
-+	if (ret)
-+		return ret;
-+
-+	sect_size = mtd_env->erasesize;
-+
-+	/* Is the sector larger than the env (i.e. embedded) */
-+	if (sect_size > CONFIG_ENV_SIZE) {
-+		saved_buf = malloc(sect_size);
-+		if (!saved_buf) {
-+			ret = -ENOMEM;
-+			goto done;
-+		}
-+
-+		offset = CONFIG_ENV_OFFSET;
-+		remaining = sect_size;
-+		tmp = saved_buf;
-+
-+		while (remaining) {
-+			/* Skip the block if it is bad */
-+			if (!(offset % sect_size) &&
-+			    mtd_block_isbad(mtd_env, offset)) {
-+				offset += sect_size;
-+				continue;
-+			}
-+
-+			ret = mtd_read(mtd_env, offset, mtd_env->writesize,
-+				       &ret_len, tmp);
-+			if (ret)
-+				goto done;
-+
-+			tmp += ret_len;
-+			offset += ret_len;
-+			remaining -= ret_len;
-+		}
-+	}
-+
-+	sect_num = DIV_ROUND_UP(CONFIG_ENV_SIZE, sect_size);
-+
-+	ei.mtd = mtd_env;
-+	ei.addr = CONFIG_ENV_OFFSET;
-+	ei.len = sect_num * sect_size;
-+
-+	ret = mtd_erase(mtd_env, &ei);
-+	if (ret)
-+		goto done;
-+
-+	if (sect_size > CONFIG_ENV_SIZE) {
-+		memset(saved_buf, 0, CONFIG_ENV_SIZE);
-+
-+		offset = CONFIG_ENV_OFFSET;
-+		remaining = sect_size;
-+		tmp = saved_buf;
-+
-+		while (remaining) {
-+			/* Skip the block if it is bad */
-+			if (!(offset % sect_size) &&
-+			    mtd_block_isbad(mtd_env, offset)) {
-+				offset += sect_size;
-+				continue;
-+			}
-+
-+			ret = mtd_write(mtd_env, offset, mtd_env->writesize,
-+					&ret_len, tmp);
-+			if (ret)
-+				goto done;
-+
-+			offset += mtd_env->writesize;
-+			remaining -= ret_len;
-+			tmp += ret_len;
-+		}
-+	}
-+
-+	ret = 0;
-+
-+done:
-+	if (saved_buf)
-+		free(saved_buf);
-+
-+	return ret;
-+}
-+
-+__weak void *env_mtd_get_env_addr(void)
-+{
-+	return (void *)CONFIG_ENV_ADDR;
-+}
-+
-+/*
-+ * Check if Environment on CONFIG_ENV_ADDR is valid.
-+ */
-+static int env_mtd_init_addr(void)
-+{
-+	env_t *env_ptr = (env_t *)env_mtd_get_env_addr();
-+
-+	if (!env_ptr)
-+		return -ENOENT;
-+
-+	if (crc32(0, env_ptr->data, ENV_SIZE) == env_ptr->crc) {
-+		gd->env_addr = (ulong)&env_ptr->data;
-+		gd->env_valid = ENV_VALID;
-+	} else {
-+		gd->env_valid = ENV_INVALID;
-+	}
-+
-+	return 0;
-+}
-+
-+static int env_mtd_init(void)
-+{
-+	int ret;
-+
-+	ret = env_mtd_init_addr();
-+	if (ret != -ENOENT)
-+		return ret;
-+
-+	/*
-+	 * return here -ENOENT, so env_init()
-+	 * can set the init bit and later if no
-+	 * other Environment storage is defined
-+	 * can set the default environment
-+	 */
-+	return -ENOENT;
-+}
-+
-+U_BOOT_ENV_LOCATION(mtd) = {
-+	.location	= ENVL_MTD,
-+	ENV_NAME("MTD")
-+	.load		= env_mtd_load,
-+	.save		= ENV_SAVE_PTR(env_mtd_save),
-+	.erase		= ENV_ERASE_PTR(env_mtd_erase),
-+	.init		= env_mtd_init,
-+};
-diff --git a/include/env_internal.h b/include/env_internal.h
-index c1c0727e4d0..ee939ba4293 100644
---- a/include/env_internal.h
-+++ b/include/env_internal.h
-@@ -113,6 +113,7 @@ enum env_location {
- 	ENVL_ONENAND,
- 	ENVL_REMOTE,
- 	ENVL_SPI_FLASH,
-+	ENVL_MTD,
- 	ENVL_UBI,
- 	ENVL_NOWHERE,
- 
--- 
-2.48.1
+Which I would summarize as "EFI boot manager plus boostd changes
+behavior in bad for the user ways". And it's not FEL. The FEL challenge
+is sunxi specific but also seemingly resolved well enough.
 
+Which is why I don't want to migrate more architectures until:
+- We can be more confident that we aren't breaking boot order for users.
+- Someone is actually making progress on EFI boot manager plus bootstd.
+
+> > > > And I ask everyone to fix problems that are exposed when they're do=
+ing
+> > > > something else. Sometimes, when it comes to Kconfig symbols I'll en=
+d up
+> > > > doing the cleanup because it's tricky to get things right for 1300
+> > > > platforms.
+> > >
+> > > Yes, I know how you feel.
+> >
+> > So are you engaging in some sort of tit-for-tat now?
+>=20
+> No, actually I was just empathising with you, that so few people are
+> willing/able to do the work to really make changes and dig into
+> things.
+>=20
+> > I honestly do not
+> > understand why you're not either:
+> > - Stopping with the things people have told you to stop doing.
+> > - Continuing with your own downstream fork for fun.
+> >
+> > Your "lets try having two trees" idea is not working and must stop. You
+> > must decide if you are going to set aside concepts that have been
+> > rejected or properly fork (and give the community the domain name).
+>=20
+> It is better for the project if we work together collaboratively. You
+> asked me to pick one thing on which you might compromise. I gave you
+> three options but you rejected all three. I have compromised on loads
+> of things from my side.
+>=20
+> So how about you pick one thing that you could live with? The lack of
+> compromise is what is creating the issues here.
+
+My perspective is that your refusal to slow down and get something to
+completion is the issue. You keep sending out 50 part series that
+refactor a ton of things. And this is because you have a number of large
+changes in mind at all times. This is not functional for a project where
+most of our testing happens close to a release. Small incremental change
+over time is what works for us.
+
+--=20
+Tom
+
+--/n5V0QXM9EIJGznK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf0IwcACgkQFHw5/5Y0
+tywTLQv/aRo2Eb5lTI3oJinOhZvQwwANl3760ZeQ2u7uD7NNR/v4Lc6nz272gtJv
+kLJgV2O9kTz0c0telynXRhgJEfZTM+BZPi34laJKk52LIyw66Cwt6ro1ifx8eBpJ
+D1cTCkPkppZU8H8+xKJt/fDPN2McesT/VNcctYgaGKLfuhZfdiBhg7DdhMMKGVrN
+YZ3Z8TDkeKoWoC2qzCa/X6T3AE2M8iZWf8VWZt6A+XxbDlVpHw5Tyfj/3jIglGWh
+p9jMIYr+CGXLxagX48QRfy8bHTyseWxWm6zraay9OWGtf+tspoxG/Td2ZoMsu2jL
+n+jU6KCSNYsZFaZPhgQAcmJ6I1dBuJ7mBBR6VEnc4O04eU2d9LNU4ELpMklGw6j3
+hotTNXwAF/jXFKc+8UUfun55v1slRv8mV2hHny/N5hm0q7nmUqPd7bvgD9kpoEr4
+7pNf8UQuRCPId183lOMTMfSQds8xOrAj5RO7kn6rS/IZve8ZAvWAUzm/SWVNKuAL
+PHXl4fji
+=Qj5H
+-----END PGP SIGNATURE-----
+
+--/n5V0QXM9EIJGznK--
