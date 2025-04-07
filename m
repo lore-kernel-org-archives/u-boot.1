@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38B3CC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D6CC369A1
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:52:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAF6F83277;
-	Tue,  8 Apr 2025 00:49:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EC5B83236;
+	Tue,  8 Apr 2025 00:49:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="E4rN0ZIh";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Z28gOp4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24ABB831B0; Tue,  8 Apr 2025 00:49:18 +0200 (CEST)
+ id 4E38A831D4; Tue,  8 Apr 2025 00:49:23 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B65D383214
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:49:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE089831B0
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:49:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744066154; bh=1Je1E8Co0ZQ39LMKYDWANOChsguFCEITD9bLFJmB2Bk=;
- b=E4rN0ZIhYPE38mjk6vZ7ODjh/CrJBU8wQDvZIXUSGo6UbjZh2bFEs+GVBhxyA9YzeSo0uOyAc
- A1A/JBGAXACxJkIAxQvlOiPhmb+VXDjEaI76ZstztLg/qlIe+/2vH3wRhCca27k48zX+gkP0aqN
- SOMu8oNfryLhOtdoiEMK71XfXHjn+O7iwuxxLNeVCG+SZhaIbIVCrrqp7IAoncmzvdkBDmZGQns
- RDln5EPtvcKcvM336wEBiAWuTWaEuzqot+JKT+qAng4QisYAUS+JLEyuv+JAW9f2mvFSF+71oNY
- JoRMXavbPNbbXJffIOkwc7/0VdyyQwegJ9wFmTXZ+Pjw==
-X-Forward-Email-ID: 67f456679fd75b9b96512958
+ t=1744066159; bh=Av5A1eFrPyTuqgk1uQOv2Hcb1CmEEFRNT0+q0soK3Og=;
+ b=Z28gOp4iSpXW5tJkoDqjrJxmgnV7peSjhqZrDP1+qQ1zjfO1S3rDbB6i3Pahge0PQ09Uv7TLU
+ UsTlCS2WK7cQpHBoiIvCNjyhdm79nGZSiOYVjeSoJ2ARH09b8XfFvbhKWTgH/g/e9pCq5N4Kqpf
+ JDqcLTkFH1KCxjxrDCdLVgsEIdtRLwGkMPld98g52+8rJ/AKSizjf5+iwZJMrTki6ovO9LfNAEP
+ SgRJg5KYkdDzuOsuFHp5GrePrg3n6oh2UTbLZoQNG4UGAcC3HiXJb3NHnT380ET9q7RGGqiZHfh
+ BbTPIFIPFdfPcah+gu+dySGfQqR42lt56nm5xYPCv1dA==
+X-Forward-Email-ID: 67f4566b9fd75b9b9651296d
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.1
@@ -44,14 +44,12 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 22/30] mmc: rockchip_sdhci: Gate clock for glitch free
- phase switching
-Date: Mon,  7 Apr 2025 22:46:55 +0000
-Message-ID: <20250407224743.2423921-23-jonas@kwiboo.se>
+Subject: [PATCH v2 23/30] rockchip: otp: Add support for RK3528
+Date: Mon,  7 Apr 2025 22:46:56 +0000
+Message-ID: <20250407224743.2423921-24-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250407224743.2423921-1-jonas@kwiboo.se>
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
@@ -73,59 +71,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable clock stopping to gate clock during phase code change to ensure
-glitch free phase switching in auto-tuning circuit. Fixes HS200 mode
-on RK3528.
-
-POST_CHANGE_DLY
-Time taken for phase switching and stable clock output.
-- Less than 4-cycle latency
-
-PRE_CHANGE_DLY
-Maximum Latency specification between transmit clock and receive clock.
-- Less than 4-cycle latency
-
-TUNE_CLK_STOP_EN
-Clock stopping control for Tuning and auto-tuning circuit. When enabled,
-clock gate control output is pulled low before changing phase select
-codes. This effectively stops the receive clock. Changing phase code
-when clocks are stopped ensures glitch free phase switching.
-- Clocks stopped during phase code change
+Add support for the OTP controller in RK3528. The OTPC is similar to the
+OTPC in RK3568 and can use the same ops for reading OTP data.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-v2: No change
+v2: New patch
 ---
- drivers/mmc/rockchip_sdhci.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/misc/rockchip-otp.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-index 2c54b8a942da..c0f986784366 100644
---- a/drivers/mmc/rockchip_sdhci.c
-+++ b/drivers/mmc/rockchip_sdhci.c
-@@ -50,6 +50,10 @@
- #define DWCMSHC_EMMC_EMMC_CTRL		0x52c
- #define DWCMSHC_CARD_IS_EMMC		BIT(0)
- #define DWCMSHC_ENHANCED_STROBE		BIT(8)
-+#define DWCMSHC_EMMC_AT_CTRL		0x540
-+#define EMMC_AT_CTRL_TUNE_CLK_STOP_EN	BIT(16)
-+#define EMMC_AT_CTRL_PRE_CHANGE_DLY	17
-+#define EMMC_AT_CTRL_POST_CHANGE_DLY	19
- #define DWCMSHC_EMMC_DLL_CTRL		0x800
- #define DWCMSHC_EMMC_DLL_CTRL_RESET	BIT(1)
- #define DWCMSHC_EMMC_DLL_RXCLK		0x804
-@@ -326,6 +330,11 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
- 		udelay(1);
- 		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
- 
-+		extra = 0x3 << EMMC_AT_CTRL_POST_CHANGE_DLY |
-+			0x3 << EMMC_AT_CTRL_PRE_CHANGE_DLY |
-+			EMMC_AT_CTRL_TUNE_CLK_STOP_EN;
-+		sdhci_writel(host, extra, DWCMSHC_EMMC_AT_CTRL);
-+
- 		/* Init DLL settings */
- 		extra = DWCMSHC_EMMC_DLL_START_DEFAULT << DWCMSHC_EMMC_DLL_START_POINT |
- 			DWCMSHC_EMMC_DLL_INC_VALUE << DWCMSHC_EMMC_DLL_INC |
+diff --git a/drivers/misc/rockchip-otp.c b/drivers/misc/rockchip-otp.c
+index 2123c31038fc..b5597de39aca 100644
+--- a/drivers/misc/rockchip-otp.c
++++ b/drivers/misc/rockchip-otp.c
+@@ -383,6 +383,10 @@ static const struct udevice_id rockchip_otp_ids[] = {
+ 		.compatible = "rockchip,rk3308-otp",
+ 		.data = (ulong)&px30_data,
+ 	},
++	{
++		.compatible = "rockchip,rk3528-otp",
++		.data = (ulong)&rk3568_data,
++	},
+ 	{
+ 		.compatible = "rockchip,rk3568-otp",
+ 		.data = (ulong)&rk3568_data,
 -- 
 2.49.0
 
