@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1532C369A1
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:48:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15A61C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DB018307F;
-	Tue,  8 Apr 2025 00:48:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E6905830E3;
+	Tue,  8 Apr 2025 00:48:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wclrPbBH";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="By1cnANk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 626E7830E9; Tue,  8 Apr 2025 00:48:08 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 8B08382FB4; Tue,  8 Apr 2025 00:48:12 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C49D82E77
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:48:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C136F830E9
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:48:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744066084; bh=fRHZeQJyPX06bovosaAlHrUhAnbdzZ60jn3jzpXoSKI=;
- b=wclrPbBHDUooJf0ny0ZN+fGj7PYA8nAQS8cm7MN0b0pBrN3Wsxe+ZluJSy/Ve/rOwLd+AOKnJ
- NH2xzKaUu0LKTcVTbUMWdpSP0uQ+svOR6vdueAEfF3TR7I+DqYpN+0nqZLGgJWqbkHMN/l3Dv33
- KHMnX2aNFRnYLJQJ4Okg4u0/sXK9K/H/3RC1JBJnVztLre/Hf55d1wRXRNcKI6MuYwe8VOerMcS
- NkuxMyIa6dzQXWPvhj06GWkVe+LNrh0Rx+/fbv8/b62rbh2BoWYgbA4s7qvB+Hbo+92HVvLxDii
- 88VKCGqW3vOJf7dPlYpryAOfROW6QUk9GtTh5M30oUTw==
-X-Forward-Email-ID: 67f4561f9fd75b9b9651277b
+ t=1744066088; bh=b0oMDUChRcR09GWZswrt124NWicZsRY6/i4N014Ga4s=;
+ b=By1cnANkjuoKaSFUuj+RpvliafpOc+jhWAgOjeX6ANKxmgRckoZ8TgqpGQ25y5Jso6wNKjC8k
+ BX6PWVLYFysH1yuKm90De8ptKCWoudWEANSVSBmygtMYOBbMetgAx8/GgbqVD/yrRCpb1watjJY
+ CPfg6ijPgY5eMSBQvD0gcZZEGjdmGXdb4FUiBdipjUNO58/Kc1Xjhz3WBTH8QmVhGGg7Dqsc4r3
+ 09C/dj48oAgVgQ/5f/BIz1XvFi6yp3MMUV3CjtlC4gmUNcjdbmxe4KFc8W31YTSm6MC3OsddPal
+ rdI204u0Ue4vTK6HcyYAV0+bkRHmiEZvTGa1xaKMtSeQ==
+X-Forward-Email-ID: 67f456279fd75b9b965127a5
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.0.1
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -49,9 +49,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
  Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 03/30] arm64: dts: rockchip: Add UART clocks for RK3528 SoC
-Date: Mon,  7 Apr 2025 22:46:36 +0000
-Message-ID: <20250407224743.2423921-4-jonas@kwiboo.se>
+Subject: [PATCH v2 05/30] arm64: dts: rockchip: Add rk3528 QoS register node
+Date: Mon,  7 Apr 2025 22:46:38 +0000
+Message-ID: <20250407224743.2423921-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250407224743.2423921-1-jonas@kwiboo.se>
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
@@ -73,99 +73,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yao Zi <ziyao@disroot.org>
+From: Chukun Pan <amadeus@jmu.edu.cn>
 
-Add missing clocks in UART nodes for RK3528 SoC.
+The Quality-of-Service (QsS) node stores/restores specific
+register contents when the power domains is turned off/on.
+Add QoS node so that they can connect to the power domain.
 
-Signed-off-by: Yao Zi <ziyao@disroot.org>
-Link: https://lore.kernel.org/r/20250217061142.38480-10-ziyao@disroot.org
+Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
+Link: https://lore.kernel.org/r/20250306123809.273655-3-amadeus@jmu.edu.cn
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: b9454434d0349223418f74fbfa7b902104da9bc5 ]
+[ upstream commit: 61a05d8ca3030a544175671f5fab7a8f29c24085 ]
 
-(cherry picked from commit 12f69f638472dc9cf1b62816c7d4407de1846d12)
+(cherry picked from commit 9ee90dfd6957fcc42ea94c43d195b01d1b286713)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- dts/upstream/src/arm64/rockchip/rk3528.dtsi | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ dts/upstream/src/arm64/rockchip/rk3528.dtsi | 160 ++++++++++++++++++++
+ 1 file changed, 160 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3528.dtsi b/dts/upstream/src/arm64/rockchip/rk3528.dtsi
-index 37fd40377076..5b334690356a 100644
+index b1713ed4d7e2..0c0e7f151462 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3528.dtsi
 +++ b/dts/upstream/src/arm64/rockchip/rk3528.dtsi
-@@ -168,7 +168,8 @@
- 		uart0: serial@ff9f0000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xff9f0000 0x0 0x100>;
--			clock-frequency = <24000000>;
-+			clocks = <&cru SCLK_UART0>, <&cru PCLK_UART0>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -178,6 +179,8 @@
- 		uart1: serial@ff9f8000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xff9f8000 0x0 0x100>;
-+			clocks = <&cru SCLK_UART1>, <&cru PCLK_UART1>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -187,6 +190,8 @@
- 		uart2: serial@ffa00000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xffa00000 0x0 0x100>;
-+			clocks = <&cru SCLK_UART2>, <&cru PCLK_UART2>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -195,6 +200,8 @@
+@@ -129,6 +129,166 @@
+ 			#interrupt-cells = <3>;
+ 		};
  
- 		uart3: serial@ffa08000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
-+			clocks = <&cru SCLK_UART3>, <&cru PCLK_UART3>;
-+			clock-names = "baudclk", "apb_pclk";
- 			reg = <0x0 0xffa08000 0x0 0x100>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -204,6 +211,8 @@
- 		uart4: serial@ffa10000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xffa10000 0x0 0x100>;
-+			clocks = <&cru SCLK_UART4>, <&cru PCLK_UART4>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -213,6 +222,8 @@
- 		uart5: serial@ffa18000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xffa18000 0x0 0x100>;
-+			clocks = <&cru SCLK_UART5>, <&cru PCLK_UART5>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -222,6 +233,8 @@
- 		uart6: serial@ffa20000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xffa20000 0x0 0x100>;
-+			clocks = <&cru SCLK_UART6>, <&cru PCLK_UART6>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
-@@ -231,6 +244,8 @@
- 		uart7: serial@ffa28000 {
- 			compatible = "rockchip,rk3528-uart", "snps,dw-apb-uart";
- 			reg = <0x0 0xffa28000 0x0 0x100>;
-+			clocks = <&cru SCLK_UART7>, <&cru PCLK_UART7>;
-+			clock-names = "baudclk", "apb_pclk";
- 			interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
- 			reg-io-width = <4>;
- 			reg-shift = <2>;
++		qos_crypto_a: qos@ff200000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200000 0x0 0x20>;
++		};
++
++		qos_crypto_p: qos@ff200080 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200080 0x0 0x20>;
++		};
++
++		qos_dcf: qos@ff200100 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200100 0x0 0x20>;
++		};
++
++		qos_dft2apb: qos@ff200200 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200200 0x0 0x20>;
++		};
++
++		qos_dma2ddr: qos@ff200280 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200280 0x0 0x20>;
++		};
++
++		qos_dmac: qos@ff200300 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200300 0x0 0x20>;
++		};
++
++		qos_keyreader: qos@ff200380 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff200380 0x0 0x20>;
++		};
++
++		qos_cpu: qos@ff210000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff210000 0x0 0x20>;
++		};
++
++		qos_debug: qos@ff210080 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff210080 0x0 0x20>;
++		};
++
++		qos_gpu_m0: qos@ff220000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff220000 0x0 0x20>;
++		};
++
++		qos_gpu_m1: qos@ff220080 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff220080 0x0 0x20>;
++		};
++
++		qos_pmu_mcu: qos@ff240000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff240000 0x0 0x20>;
++		};
++
++		qos_rkvdec: qos@ff250000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff250000 0x0 0x20>;
++		};
++
++		qos_rkvenc: qos@ff260000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff260000 0x0 0x20>;
++		};
++
++		qos_gmac0: qos@ff270000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270000 0x0 0x20>;
++		};
++
++		qos_hdcp: qos@ff270080 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270080 0x0 0x20>;
++		};
++
++		qos_jpegdec: qos@ff270100 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270100 0x0 0x20>;
++		};
++
++		qos_rga2_m0ro: qos@ff270200 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270200 0x0 0x20>;
++		};
++
++		qos_rga2_m0wo: qos@ff270280 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270280 0x0 0x20>;
++		};
++
++		qos_sdmmc0: qos@ff270300 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270300 0x0 0x20>;
++		};
++
++		qos_usb2host: qos@ff270380 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270380 0x0 0x20>;
++		};
++
++		qos_vdpp: qos@ff270480 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270480 0x0 0x20>;
++		};
++
++		qos_vop: qos@ff270500 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff270500 0x0 0x20>;
++		};
++
++		qos_emmc: qos@ff280000 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280000 0x0 0x20>;
++		};
++
++		qos_fspi: qos@ff280080 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280080 0x0 0x20>;
++		};
++
++		qos_gmac1: qos@ff280100 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280100 0x0 0x20>;
++		};
++
++		qos_pcie: qos@ff280180 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280180 0x0 0x20>;
++		};
++
++		qos_sdio0: qos@ff280200 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280200 0x0 0x20>;
++		};
++
++		qos_sdio1: qos@ff280280 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280280 0x0 0x20>;
++		};
++
++		qos_tsp: qos@ff280300 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280300 0x0 0x20>;
++		};
++
++		qos_usb3otg: qos@ff280380 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280380 0x0 0x20>;
++		};
++
++		qos_vpu: qos@ff280400 {
++			compatible = "rockchip,rk3528-qos", "syscon";
++			reg = <0x0 0xff280400 0x0 0x20>;
++		};
++
+ 		cru: clock-controller@ff4a0000 {
+ 			compatible = "rockchip,rk3528-cru";
+ 			reg = <0x0 0xff4a0000 0x0 0x30000>;
 -- 
 2.49.0
 
