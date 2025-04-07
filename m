@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D6CC369A1
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0868C369A1
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:52:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EC5B83236;
-	Tue,  8 Apr 2025 00:49:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5450A831C6;
+	Tue,  8 Apr 2025 00:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Z28gOp4i";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tRFmpaCo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E38A831D4; Tue,  8 Apr 2025 00:49:23 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 3C3B182F75; Tue,  8 Apr 2025 00:49:26 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE089831B0
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:49:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCF79831B0
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:49:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744066159; bh=Av5A1eFrPyTuqgk1uQOv2Hcb1CmEEFRNT0+q0soK3Og=;
- b=Z28gOp4iSpXW5tJkoDqjrJxmgnV7peSjhqZrDP1+qQ1zjfO1S3rDbB6i3Pahge0PQ09Uv7TLU
- UsTlCS2WK7cQpHBoiIvCNjyhdm79nGZSiOYVjeSoJ2ARH09b8XfFvbhKWTgH/g/e9pCq5N4Kqpf
- JDqcLTkFH1KCxjxrDCdLVgsEIdtRLwGkMPld98g52+8rJ/AKSizjf5+iwZJMrTki6ovO9LfNAEP
- SgRJg5KYkdDzuOsuFHp5GrePrg3n6oh2UTbLZoQNG4UGAcC3HiXJb3NHnT380ET9q7RGGqiZHfh
- BbTPIFIPFdfPcah+gu+dySGfQqR42lt56nm5xYPCv1dA==
-X-Forward-Email-ID: 67f4566b9fd75b9b9651296d
+ t=1744066162; bh=+ebG3wTEivgc79p0Z56FwbI0BYEJGdtAr829rKm3Vvw=;
+ b=tRFmpaCoiNKR91vHgBFzQZYdigEC41EpkJix9EOrVFL3FBdxjqkNmYQJaoXqsKnGfTjKlKnN9
+ zVhKe9Vk6VMD6sPZL6ixY7MzXsFsxltm6g271xJyo36HHpWHgvfZEsfuyAQ8yJJTGPexqCzyRHF
+ 2qAOB1khn6YfmSi2R66F/VxSTTZU2DFFfm1A0pgOrj3HuzmmxThh61SkwlNC/FqptPH0oT5XH3H
+ SGpP1nVnKNfK7Pb7BMJl31slOgfUtMPtYrP63t4ce/KF4AuwNM3sNbAV2EiAhCP3C1K7dw03bGw
+ s8FNoX/pezh2so+wUKH7YTq/siVqSTo2c6QMosjSAwDQ==
+X-Forward-Email-ID: 67f4566e9fd75b9b96512982
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 1.0.1
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -47,9 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 23/30] rockchip: otp: Add support for RK3528
-Date: Mon,  7 Apr 2025 22:46:56 +0000
-Message-ID: <20250407224743.2423921-24-jonas@kwiboo.se>
+Subject: [PATCH v2 24/30] adc: rockchip-saradc: Add support for RK3528
+Date: Mon,  7 Apr 2025 22:46:57 +0000
+Message-ID: <20250407224743.2423921-25-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250407224743.2423921-1-jonas@kwiboo.se>
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
@@ -71,31 +71,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the OTP controller in RK3528. The OTPC is similar to the
-OTPC in RK3568 and can use the same ops for reading OTP data.
+The Successive Approximation ADC (SARADC) in RK3528 uses the v2
+controller and support:
+- 10-bit resolution
+- Up to 1MS/s sampling rate
+- 4 single-ended input channels
+- Current consumption: 0.5mA @ 1MS/s
+
+Add support for the 4 channels of 10-bit resolution supported by SARADC
+in RK3528.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: New patch
 ---
- drivers/misc/rockchip-otp.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/adc/rockchip-saradc.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/misc/rockchip-otp.c b/drivers/misc/rockchip-otp.c
-index 2123c31038fc..b5597de39aca 100644
---- a/drivers/misc/rockchip-otp.c
-+++ b/drivers/misc/rockchip-otp.c
-@@ -383,6 +383,10 @@ static const struct udevice_id rockchip_otp_ids[] = {
- 		.compatible = "rockchip,rk3308-otp",
- 		.data = (ulong)&px30_data,
- 	},
-+	{
-+		.compatible = "rockchip,rk3528-otp",
-+		.data = (ulong)&rk3568_data,
-+	},
- 	{
- 		.compatible = "rockchip,rk3568-otp",
- 		.data = (ulong)&rk3568_data,
+diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
+index 7cf9735f60d0..1515951403c9 100644
+--- a/drivers/adc/rockchip-saradc.c
++++ b/drivers/adc/rockchip-saradc.c
+@@ -339,6 +339,14 @@ static const struct rockchip_saradc_data rk3399_saradc_data = {
+ 	.stop = rockchip_saradc_stop_v1,
+ };
+ 
++static const struct rockchip_saradc_data rk3528_saradc_data = {
++	.num_bits = 10,
++	.num_channels = 4,
++	.clk_rate = 1000000,
++	.channel_data = rockchip_saradc_channel_data_v2,
++	.start_channel = rockchip_saradc_start_channel_v2,
++};
++
+ static const struct rockchip_saradc_data rk3588_saradc_data = {
+ 	.num_bits = 12,
+ 	.num_channels = 8,
+@@ -354,6 +362,8 @@ static const struct udevice_id rockchip_saradc_ids[] = {
+ 	  .data = (ulong)&rk3066_tsadc_data },
+ 	{ .compatible = "rockchip,rk3399-saradc",
+ 	  .data = (ulong)&rk3399_saradc_data },
++	{ .compatible = "rockchip,rk3528-saradc",
++	  .data = (ulong)&rk3528_saradc_data },
+ 	{ .compatible = "rockchip,rk3588-saradc",
+ 	  .data = (ulong)&rk3588_saradc_data },
+ 	{ }
 -- 
 2.49.0
 
