@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8BBEC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 19:47:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54EABC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 19:55:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19E2B82F85;
-	Mon,  7 Apr 2025 21:47:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id A280682B00;
+	Mon,  7 Apr 2025 21:55:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YEzj93rS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j7widC/I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFF4483086; Mon,  7 Apr 2025 21:47:41 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id B4E0482E76; Mon,  7 Apr 2025 21:55:40 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4D8182EAA
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 21:47:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id AD2D181F30
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 21:55:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-af908bb32fdso4056215a12.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 12:47:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-39c1efc457bso2736678f8f.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 12:55:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1744055257; x=1744660057;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CEs0J1h5zQEcW6+i7AkXUxh6mmuD0+xW/RlPjj122CQ=;
- b=YEzj93rSGrBxzOA94DXpE6eDQ6OkMaKpnHSGWxLaRKqCN2ju4Kh9GCvMKqkHWfCZJ+
- Arwo2a108oTarA3d0DMB8pn6VpA276JTXGwhzinv675iZZfZiVsoKQVSZ4VESzktLTE1
- s1Vbbe2WsD+tJ+ruwqBqMOqGn+Vg5241cFIE4=
+ d=gmail.com; s=20230601; t=1744055738; x=1744660538; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:to
+ :from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=vCAv4M5/EL9WFmG8IjOTWlEz+k9begXj04pZzkD3nxg=;
+ b=j7widC/ISRrHdlDbaFV09d8c8SCLAhHR2fhWUSw4mwMMSf2GRQeCh4bMspE2x1pt8r
+ c51ejA2nORlgXjMGNCUO7eAcWuRlTpA8n9KBbI50mXz+C1gleZ6bhzIsfkAOLsE4qxk8
+ 2hz/TUdboTFSA8jR2PPR7kbrd8iGm/35EAzRJhfUqbTJlMchtfer56jPquK07kUQmlc+
+ JBWxo7EfZKVo8wEDGB1nRdE8X37XDxlANwdZ4nB8JjFWdbvNARHCYOIAObkYj7uNVpe3
+ Y/XbDrJ1NkdyhaOIrWa1Faw3U+E/t33MHUeTQ/1szy7eK35CLOylQL/fGdTHG80oTXv5
+ yElg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744055257; x=1744660057;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CEs0J1h5zQEcW6+i7AkXUxh6mmuD0+xW/RlPjj122CQ=;
- b=dXyLCyqB8PbOa072aKvNb+M5wJAyReyw3PmZDja9B9gAReziHjh9R/5inEQdUwtHjp
- c0Apgi3NgY62cb7hsgzxLuY6IBL+gxxffvNtin9k0i1qJ3ewGR21EAs3vHuR2R95gvkI
- mYPZ1vijeq9AyqFojo7HvmZPA/EHGFLrupMsAY88Rs3jIcSlQuhB/OhUxlon0rJ5BTmp
- kbZTlJH4aI7c8i4cbetd9uU/R4A1xh+Ato5kQ/W4zthkO4HT47IW4jRBStHayZP3FRlM
- e1YZmTzNgcCUzpmXQDodCzbbE3PllN/U7YKPT5LcZHhLVBmpchS3fBRRy0Ry82xV1KWX
- UgGg==
-X-Gm-Message-State: AOJu0Yx5m6MKevjgy0qt6XofHFqPHv/NUsLDOHFqEqQzYuXmLph9heWD
- Jo+k75GMPzZBt6NyN/a/vV6sIost6ivc+KbtAZE/F2yQYLBqIgwRLAYwRBQWh38hc61vNtD7q+S
- Ki5N8qDHdw7FoFS4Hk2QY2AQqxB/fDbg5U/LQPw==
-X-Gm-Gg: ASbGncvLGl0QYk69wm1PJH/r4aBr29JyL0dLb2y/C9mmakZiIjkA7OqPPo/Tj/W9Y1Q
- TMpYnVV100imwrpcuTClmr9qe+ojoLe6crPREnhAWOrm8VpQWzRF5UutjHdoAVJ4iJ/cS/dXl1B
- mFMkL2Er0jJt/mh0z8wmP1LTttECGv
-X-Google-Smtp-Source: AGHT+IHy/QL3HRrNwM7xjf5QCCErrMVRMoeezIYdT5bmxMt5LjUOaBl+IB5YZw7YYLUh9OA4ZEnFPliy9QXcIz2VPnk=
-X-Received: by 2002:a17:90b:524f:b0:2fa:17e4:b1cf with SMTP id
- 98e67ed59e1d1-306d0be3b2cmr951923a91.2.1744055257164; Mon, 07 Apr 2025
- 12:47:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744055738; x=1744660538;
+ h=in-reply-to:content-disposition:mime-version:references:subject:to
+ :from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vCAv4M5/EL9WFmG8IjOTWlEz+k9begXj04pZzkD3nxg=;
+ b=gGdTJQbQMelY3/3X8e4dSWxNfsU0rbZo3RPrtEqJL0s0rGLgJpDZgS2377Dt6qZ4f/
+ Pi1sTvMBbxTBXmA2bHDNjoOQtD6Z0xDHOOKOYQzxO5N+8uCaSkNd9ITlsCP+FvGxZP6x
+ dHsJcm7qo5oL6lsGeXmte5HQC4UCGECBkUa/JNCGiLoPSHpiS+xnhf7CtsRWn8BfsVyg
+ EsLDQO2QVBRn6JlLQagK/W69dR++0KQg3XmgCa6fQqr0fQozJrwlojEfKaJgg9O7xGYc
+ 0/3tzJgcEfcvU5Gf9SSrdq8hYUYSqul/LN8ytn5vHYnG8N56vbM5zT2UcFweAwvGWRmb
+ GOOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXo2lSwBWyjno2tYbBxGhHhmNjHh5B2gN7uXEkoje1AEYsC68aZKQqOqfq2LTTuiPT+miy1gDI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNf9sl2LHqRkAGoRGBNEA85KRzb6Qe0bJ2XHNWitC3pALvxkBX
+ 13hd+cZIpJLebvNkZ6HCPowFnVvUzzJTzAbHIcqskS/S2DiFwIgE
+X-Gm-Gg: ASbGncvyMIf8rxMaZzV/GhOZeYLwxl0tp06Jt97f5qvNeZEFIWkkyNVbL2TC5V6lmD2
+ sj6jaYIb/cZIkamPTyKMYQKKTsyfC3NxDLvS06lfJ2Q9IYZ2Rjk3YtUT7Xegk45NihUxI9dbPR9
+ 5mpn35EEQrrnYkS93ZrMLTyNnrCtNdm2eM1SXeQFOBW7lvENLc/I/CWmcRJkoWmMF7clC80ouNG
+ 07wjsFAN836/f4xj0CfLAcH8Ge91Cam4Cf4YVI6d+eEwdTiGVUuMBfuSup7yfxIbaHxiDD4PhBS
+ oBqNzvLisnBeExMB3lHsdgMFBO+uMc1rz1J5yFOC6PdyXYOOXdtr64E/uyoQyOgw1DE/lsgvjD4
+ x
+X-Google-Smtp-Source: AGHT+IFLXFpOgQ2XDyPDn75rFomFDkjCXY5Yz8XQOr4FG+JgkC9xbqUlY+NpN9zAc0dtlQbvCyoCbQ==
+X-Received: by 2002:a05:6000:1885:b0:391:4ca:490 with SMTP id
+ ffacd0b85a97d-39cb35a87e5mr11527912f8f.29.1744055738073; 
+ Mon, 07 Apr 2025 12:55:38 -0700 (PDT)
+Received: from Ansuel-XPS. (93-34-88-225.ip49.fastwebnet.it. [93.34.88.225])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c30239813sm12785903f8f.101.2025.04.07.12.55.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Apr 2025 12:55:37 -0700 (PDT)
+Message-ID: <67f42db9.050a0220.16b640.abd2@mx.google.com>
+X-Google-Original-Message-ID: <Z_Qtt5QoMVxMugor@Ansuel-XPS.>
+Date: Mon, 7 Apr 2025 21:55:35 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Tero Kristo <t-kristo@ti.com>,
+ u-boot@lists.denx.de
+Subject: Re: [RESEND PATCH] clk: fix crash on clk_set_rate clean rate cache
+References: <20250315092420.793-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
-References: <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.949ef384-8293-46b8-903f-40a477c056ae.7e9dd5d7-9551-4b99-9b32-ca6f3cd315b5@emailsignatures365.codetwo.com>
- <20250325155310.456037-1-mike.looijmans@topic.nl>
- <2b2f97fe-ebeb-43ba-9751-c7b45a88a92f@topic.nl>
-In-Reply-To: <2b2f97fe-ebeb-43ba-9751-c7b45a88a92f@topic.nl>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 7 Apr 2025 21:47:25 +0200
-X-Gm-Features: ATxdqUFY5Qv5PbgJVbYJ7Nmf5fLyNRLl-7QudRhZuA7LIy3VetnNSmFqcB9jQ_M
-Message-ID: <CAOf5uw=TiOucjaV14jy69nyRD-c-Yy8_Z_neCmkcA60+E7NkCg@mail.gmail.com>
-Subject: Re: [PATCH] mtdpart: Support MTDPART_SIZ_FULL in fixed-partitions
-To: Mike Looijmans <mike.looijmans@topic.nl>
-Cc: u-boot@lists.denx.de, Alexey Romanov <avromanov@salutedevices.com>, 
- Tom Rini <trini@konsulko.com>, William Zhang <william.zhang@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250315092420.793-1-ansuelsmth@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,92 +100,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi MIke
-
-On Mon, Apr 7, 2025 at 3:42=E2=80=AFPM Mike Looijmans <mike.looijmans@topic=
-.nl>
-wrote:
-
-> ping?
->
-> Maybe I should have added to the description that the Linux kernel
-> allows MTD partitions to specify a size "0" in the device-tree to mean
-> "the remainder". This patch makes u-boot compatible with the kernel's
-> MTD partitions. U-boot MTDPARTS also supported this, but it's missing in
-> the device-tree parser.
->
->
-Please expand your commit message . Add an example where is defined this
-way in linux kernel and add your example. I found out that is used a lot in
-omap3 platform
-but please point me to some recent board if you know
-
-Michael
-
-M.
->
-> On 25-03-2025 16:52, Mike Looijmans wrote:
-> > Flash partitions may specify MTDPART_SIZ_FULL (=3D0) as the size of the
-> > partition to indicate "the remainder of the flash". Make this work with
-> > device-tree "fixed-partitions" as well.
-> >
-> > Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
-> > ---
-> >
-> >   drivers/mtd/mtdpart.c | 6 ++++--
-> >   1 file changed, 4 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
-> > index 88094b81e7a..5284890bd88 100644
-> > --- a/drivers/mtd/mtdpart.c
-> > +++ b/drivers/mtd/mtdpart.c
-> > @@ -910,11 +910,13 @@ int add_mtd_partitions_of(struct mtd_info *master=
-)
-> >                       continue;
-> >
-> >               offset =3D ofnode_get_addr_size_index_notrans(child, 0,
-> &size);
-> > -             if (offset =3D=3D FDT_ADDR_T_NONE || !size) {
-> > -                     debug("Missing partition offset/size on \"%s\"
-> partition\n",
-> > +             if (offset =3D=3D FDT_ADDR_T_NONE) {
-> > +                     debug("Missing partition offset on \"%s\"
-> partition\n",
-> >                             master->name);
-> >                       continue;
-> >               }
-> > +             if (size =3D=3D MTDPART_SIZ_FULL)
-> > +                     size =3D master->size - offset;
-> >
-> >               part.name =3D ofnode_read_string(child, "label");
-> >               if (!part.name)
->
->
-> --
-> Mike Looijmans
-> System Expert
->
-> TOPIC Embedded Products B.V.
-> Materiaalweg 4, 5681 RJ Best
-> The Netherlands
->
-> T: +31 (0) 499 33 69 69
-> E: mike.looijmans@topic.nl
-> W: www.topic.nl
->
->
->
+On Sat, Mar 15, 2025 at 10:24:14AM +0100, Christian Marangi wrote:
+> It's currently possible to make the bootloader crash on calling
+> clk_set_rate caused by the loop in clk_clean_rate_cache.
+> 
+> The loop assume that every child of the clock node are also clock
+> device but this is not always the case. For example it's common for a
+> clock to bind to a reset device or also expose a syscon if the clock
+> register map is also used to apply special configuration.
+> 
+> In such case, on accessing a device as a clock, the bootloader crash. To
+> correctly handle this, check if the child device is actually a clock and
+> ignore otherwise.
+> 
+> Fixes: 6b7fd3128f71 ("clk: fix set_rate to clean up cached rates for the hierarchy")
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> ---
+> RESEND as there was a problem with email To:
+> 
+>  drivers/clk/clk-uclass.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> index 353ae476068..8f3309d9530 100644
+> --- a/drivers/clk/clk-uclass.c
+> +++ b/drivers/clk/clk-uclass.c
+> @@ -554,6 +554,9 @@ static void clk_clean_rate_cache(struct clk *clk)
+>  	clk->rate = 0;
+>  
+>  	list_for_each_entry(child_dev, &clk->dev->child_head, sibling_node) {
+> +		if (device_get_uclass_id(child_dev) != UCLASS_CLK)
+> +			continue;
+> +
+>  		clkp = dev_get_clk_ptr(child_dev);
+>  		clk_clean_rate_cache(clkp);
+>  	}
+> -- 
+> 2.48.1
 >
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+News for this trivial patch?
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+-- 
+	Ansuel
