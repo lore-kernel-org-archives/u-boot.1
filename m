@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39439C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92710C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:08:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCDC182F65;
-	Mon,  7 Apr 2025 20:07:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 211E182F85;
+	Mon,  7 Apr 2025 20:08:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g9la/shz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yZCQHW9i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5F0282F85; Mon,  7 Apr 2025 20:07:45 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id A6D1682FBC; Mon,  7 Apr 2025 20:08:08 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5D2F82F08
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 20:07:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A366782F08
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 20:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cfe63c592so45102235e9.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 11:07:43 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43d0c18e84eso24312025e9.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 11:08:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744049263; x=1744654063; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744049286; x=1744654086; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=NSs655TZtgDba89Fc3lH/CqurTPcZgwNyWBUDljTuL0=;
- b=g9la/shz4LLrbIU6y2rrpbfgaVxNoNfqJjZf1pW8dFYagBVJ7jzTfM2Q/4wmDr6++V
- pBYR0FKbnIrfIZCB4A0/jEk1/LxbEG+Ti0C8p90cgUY/5zn57TNR/ivoCngxt1P14L/E
- JTO2ar/lke5eX52L91t08gEnU6SbXoGr9EkO1w7x0w8RaNQh9JaEJeORI1zeSCuF3XbU
- 3CfGa90qDBfBzsQWwiiwCr+X/ZZJPn9EsIgiXGyHAosplUMscIiofrCbk6rLPZEmD6iQ
- qy9gLUqmcpfwmkztITblC6RQ2873l6nm2rCqyS7T5KygVJHxaqG3tUAjwVtxYg/7Unnt
- QxrA==
+ :reply-to; bh=IxYnRxE7ipBdW6Ih9kEKHidPG0cBQf52yBlvJcWgC1E=;
+ b=yZCQHW9iKrY/A63is6JkLuvKq2fpX94w9PVzqm9lyGuKy69JFv7rtLe0GylEtiCtfE
+ aQgfNUuis1qI7OdZQp/3XJoiw+Q8kJBvPirabzyF2JusCHAhCNx4uGuu7ruLcgF2xWxm
+ n0e2FS32CSA/7T8WO4EFWY9+yI1LTMnK4lnmua7j5bEHB+JfnrUvPtALQHca6eqdQJ+2
+ AC+X857VZyh1UG2VfM8ZBy44VxQcgE08AUNVOfzV02kY025cZMrcd7NEj81qWuoaiTy3
+ TjD05sjWrAWGAiCXg8y37OCDCJF1qqIf32voAtvVixq9g4knVFOJ4QkD7+3ngEk9LXa6
+ XsAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744049263; x=1744654063;
+ d=1e100.net; s=20230601; t=1744049286; x=1744654086;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=NSs655TZtgDba89Fc3lH/CqurTPcZgwNyWBUDljTuL0=;
- b=RFy9dNYWJs96ajiAk7ULT6mxme68ilEN6Zk+/oCZG8xEGzZSvmtHUH4US+ljixo0Ih
- qDyGgSHfTPbSlP2BmRQkuMsrELz/9Lhz2qEZsl1nooY1fObmUXS5zDxaPueoGmvC2dKH
- 08sn0lBdd53Fb6hMXzfgLevSl2WmLLcVvZk79Ix1+ELSduAUYhP7lU6S3CykNMDlVShU
- 22/Qphtc1tAk4D14NQnAfCd0RMR2/1g/0RqINC34YYfD7JVFWxNLyyNCrquX7dlI3rmQ
- ervr9K+JfA8llLPvt6HuUXtQXpzl/8pUB0zkdSjYEU/1EhxCd7RdvpMcG0aW1SbrMnvR
- w4Bg==
+ bh=IxYnRxE7ipBdW6Ih9kEKHidPG0cBQf52yBlvJcWgC1E=;
+ b=oc4ZzjKPPt6qXIU+Rx+fgmZ/ETTFXzMAupn79GE5+EJNDkb2hLcn2Dqij+7kZrTYRg
+ x1ioUDXv1Gc6uj3iis3l654chDAjzkNmDVSw7rf/tkobxMd6WrR1wu+pEK6AJUEqVMWo
+ Ga3eqzJLX1TBwXryceSDPvgX+Dkc7JYImlpdwXcMdCKmJ0ksEmUe5oJexONe0H0Mn4sc
+ Oh9iNRjcr0vtdL0PjWJ4ahnQ3mscBok1i7mdW9FwJ98gH5foza48nYFkVc8LuPFpy86x
+ rxgHn1KXueSP6RR4Bj8IA1vjGiEDKKlMdq+eG5gm9usbQv5NGPmraHTBefSYgCKDeHWo
+ wZrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXvdge20W605rNj0w13lSpdd3qbD2v2D8IXnUZ4FLqw5E9mCw2iaxUp8pzbmsB0/y2zFfIploM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxmsiBWbAV0DgrRRJa5vj+PVgnB4OqytrAQ340y4vflAVmvokcQ
- 0hPQGLXoD+ZS0toGoEeizPNLVU9QakeKgobs8tBo7l2zQJSmEHUWKO8VFGkNtjM=
-X-Gm-Gg: ASbGncuIUWCrIqEPdkR3EJn7kiDUkm0UY6EAHKQfDOs22nUrykdE/VCHaUjGRSYXmHS
- NUWOXALok/lAermgFg02H6KVEds5k3gP60zG53PT1OzkNGEvoJeLzQBZt94u0W/b2zwfcirbh3x
- asoxHnpsgbtSzJDM4kNyzrTWaMYkCkz8pMBZRnGuJb83aoiHkSmOBHzWOJk1Oawgui18hF/KXUk
- O08s2mF8t1jxxRLpziXMqbibfiuVNO71nuekN3kZVWlpl8rOZtRQ5XdLBRIxU0NS9daJX4yvHAD
- DWD56IaX/qa9mn2XVT8B2ZxqfVwGvCcNJIVNlAunZ0HFD3sW+pkENg8eKOoIqQt4r44C8aqI2kz
- /KTeqSmt5fnQyx7h0pIpIog==
-X-Google-Smtp-Source: AGHT+IFirhqdoblN7UsQVAeIs9NnuD9dofvy7tmZT3boR4yGxgyj0WUscv5dZOBzXVtaD9z4sl1Zvg==
-X-Received: by 2002:a5d:6d83:0:b0:391:4889:5045 with SMTP id
- ffacd0b85a97d-39d0de6797emr11643749f8f.36.1744049263134; 
- Mon, 07 Apr 2025 11:07:43 -0700 (PDT)
+ AJvYcCW3WiF8DGtJi+a/LXz7b0Awz6bA+KMWgWy8fRbFoCKd4GNk65HAW/WG455bfR1GSsMvo5VZmKI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxqmvvPvKnm04ufqOrEZ9IQMEzhtTGfqROjXqJoCccxXwtTu8U1
+ r0HexH4LAfy6ZvH+xfOVgyWjAEN3+DXr1wflypB7aHvDtYlYcNCfU0yOV8uIzJcrxcd2dU0w9ob
+ a
+X-Gm-Gg: ASbGncsE40a8S7PtJqOsfFreaolkZEqznC6MUjmEWzObv/UwZXYN1DLaCmM/ODux5S8
+ +Bifd6VPasPIx/zzMhjLpbC4Be2To5/vDVLxmohs/AUnwoV5eJBfCp7O4Ik0eHhLaCavuSa0Ety
+ oRdIozonGsHXsXroFCqzcZje68qCgL4wAcXa7u9nBQErmZsQgNQyTq05IU3LU9Pvv0PLWeyvSA8
+ knrp7CSSDV80YHWfvBP+BVVueQMY+esSLDpYe4rgMxyu/P2rAoa1XDZXuGjmY9luw5/paDn7UQH
+ uSQ0fO4j5utFu1Qaq/vBG3lrKPkSBdDvz76t5PKMFojFJxKXNvFCfSU6XPvyRiMVBhPxeelavz0
+ PJMK65/2Bjjx8/57IGivtNA==
+X-Google-Smtp-Source: AGHT+IEy5PlVAlON1I4OAQdNcz2CNyIEuPOPGHz94MIKLXZe2OqvuVfWHvd6JEMT5m4zCDwr+A4eRw==
+X-Received: by 2002:a05:600c:4e47:b0:43d:ed:acd5 with SMTP id
+ 5b1f17b1804b1-43ed0bc8dbbmr154408335e9.10.1744049286128; 
+ Mon, 07 Apr 2025 11:08:06 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:f2a4:b974:cba3:a605?
  ([2a01:e0a:3d9:2080:f2a4:b974:cba3:a605])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec1795205sm141763485e9.30.2025.04.07.11.07.42
+ ffacd0b85a97d-39c301b69c4sm12639075f8f.43.2025.04.07.11.08.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Apr 2025 11:07:42 -0700 (PDT)
-Message-ID: <d54331c8-3da3-40b5-b984-d07156c39f34@linaro.org>
-Date: Mon, 7 Apr 2025 20:07:42 +0200
+ Mon, 07 Apr 2025 11:08:05 -0700 (PDT)
+Message-ID: <59920cc2-271e-4c72-980a-0010b83085f8@linaro.org>
+Date: Mon, 7 Apr 2025 20:08:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 04/13] board: dragonboard410c: Drop UNSTUFF_BITS() macro
+Subject: Re: [PATCH 06/13] board: dragonboard410c: Drop unused linux_image
 To: Stephan Gerhold <stephan.gerhold@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io, Sam Day <me@samcday.com>
 References: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
- <20250407-db410c-fixes-v1-4-524aefbc8bb4@linaro.org>
+ <20250407-db410c-fixes-v1-6-524aefbc8bb4@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -113,7 +114,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250407-db410c-fixes-v1-4-524aefbc8bb4@linaro.org>
+In-Reply-To: <20250407-db410c-fixes-v1-6-524aefbc8bb4@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -134,52 +135,25 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 07/04/2025 18:59, Stephan Gerhold wrote:
-> This was originally taken from Linux, but at this point it's an inline
-> function upstream and no longer a macro. Given that we just want to extract
-> the serial number from the MMC CID, let's just inline that specifically.
-> This is also the style used in the MMC core code within U-Boot.
+> This does not seem to be used anywhere.
 > 
 > Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 > ---
->   board/qualcomm/dragonboard410c/dragonboard410c.c | 18 ++----------------
->   1 file changed, 2 insertions(+), 16 deletions(-)
+>   board/qualcomm/dragonboard410c/dragonboard410c.env | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> index c33529d31869b17c7a30ec83af1199d01db472f5..61d68e7f0c6bed16861e6ceaefd2c7dc94807d65 100644
-> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> @@ -22,21 +22,6 @@
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> -/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
-> -#define UNSTUFF_BITS(resp, start, size) \
-> -	({ \
-> -		const int __size = size; \
-> -		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
-> -		const int __off = 3 - ((start) / 32); \
-> -		const int __shft = (start) & 31; \
-> -		u32 __res; \
-> -					\
-> -		__res = resp[__off] >> __shft; \
-> -		if (__size + __shft > 32) \
-> -			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
-> -		__res & __mask;	\
-> -	})
-> -
->   static u32 msm_board_serial(void)
->   {
->   	struct mmc *mmc_dev;
-> @@ -48,7 +33,8 @@ static u32 msm_board_serial(void)
->   	if (mmc_init(mmc_dev))
->   		return 0;
->   
-> -	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
-> +	/* MMC serial number */
-> +	return mmc_dev->cid[2] << 16 | mmc_dev->cid[3] >> 16;
->   }
->   
->   static void msm_generate_mac_addr(u8 *mac)
+> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.env b/board/qualcomm/dragonboard410c/dragonboard410c.env
+> index 57a30031f743f43d4a6389286b426b404d2f371b..eb42c0abcf11fedf7ab86d1340531b4ff5b52bf5 100644
+> --- a/board/qualcomm/dragonboard410c/dragonboard410c.env
+> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.env
+> @@ -1,7 +1,6 @@
+>   /* SPDX-License-Identifier: GPL-2.0+ */
+>   loadaddr=0x81000000
+>   initrd_high=0xffffffffffffffff
+> -linux_image=Image
+>   kernel_addr_r=0x81000000
+>   fdtfile=qcom/apq8016-sbc.dtb
+>   fdt_addr_r=0x83000000
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
