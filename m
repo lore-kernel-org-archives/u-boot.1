@@ -4,87 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F15B7C369A2
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:23:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBC7C369A2
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:24:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71A7F82F42;
-	Mon,  7 Apr 2025 17:23:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC43582F65;
+	Mon,  7 Apr 2025 17:24:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J3JQzAAn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EOUtu1KU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4FF782F65; Mon,  7 Apr 2025 17:23:35 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id C3E4982F6F; Mon,  7 Apr 2025 17:24:33 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B33C682ED0
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 17:23:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9263282F42
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 17:24:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ac2a81e41e3so817775366b.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 08:23:33 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ac34257295dso912482066b.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 08:24:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744039413; x=1744644213; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744039471; x=1744644271; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JLkhinkyUoALOBX3IFMYUFuCroyM/XGZgtCPP3dKftU=;
- b=J3JQzAAnkOxx/+wiBhAuWmTauha5dFJmf3VzD2F6S5HHMTtD7pbLj9Opm6nWfqh9D1
- GcLv8darzGFLLynX+IsC3gm6yR6KRGYu/kYX7LOwws3QW+xHykx9A6nVmXF615vYVnlM
- hkxK3oaRgQRgU3zGQ5rAt0c8iPSwbY1edw2I8=
+ bh=M4gc5SLd0a0Y/5JNXdsmEshYKnfcE2DXZfQY7U3yE3k=;
+ b=EOUtu1KUaA5RIixNObGe3veAapeP1jGlzPtLSCrD2vyCpq1wxhlNZS+xnJoxoNJSSB
+ P+qoetR07gAepHaen67TPwp1C25sk9S8VCXKiCMN7YpEDUUAVRnlJBwxoCaFxPCIM6nT
+ Yzi+UvMNrCTTG8jfa6EhyYlo3cwceZD87U0Eg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744039413; x=1744644213;
+ d=1e100.net; s=20230601; t=1744039471; x=1744644271;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JLkhinkyUoALOBX3IFMYUFuCroyM/XGZgtCPP3dKftU=;
- b=NmwDNLJgrsWmp3P2bemDT3vtyLaUZomnApWPjqUyy5BvtiyxiV5+SY5EEvXULVv5c3
- X3xIyZyrv0WJo/QA5pGE0fx+BXJ8rsV1Z+wHbou/odwSSJiKS6KeybquHayqYhNDMBcb
- LCn3roK0VF6JpbopzCDcRwrn6hiF6HHF6/Q0SKdWkzYWFGGu80ZXptBm5PUJGuJfRPY8
- wHaJy0g70NbVrhfkslhnT1iRWVsbXxNZ74lxl5Hodccab0dgLYxjPc+ihdLuyJSqpnnH
- +X9676fbNV+UYTkXRLXrK9CifBV+tf/VeTdne90CCmMpcckPEoC3YQp1UbNx37OmqL/D
- wvWQ==
+ bh=M4gc5SLd0a0Y/5JNXdsmEshYKnfcE2DXZfQY7U3yE3k=;
+ b=Va5BcMD9ByjjaghFWdw3X0XkNhiXD60x4Azy6flKpeE0VMI5ZmzxIQIR5G2ExXge+X
+ tzBG/vcMVv9/3/WPM6mgi3a3KSIaR+qmZ2PSsaTPYLwOrLR1RaLS4smgWnP+1ouGxpb6
+ VjspzhGNhmGtous2hcOONyiaLuxhiU1rQmkyNY5coHKfd8ZsTskk7xCxd4HEwqFQjVu1
+ y/yzzlcussOXH7XJ5qBn10iiyqY6XMNE4U7PCaipy7rEEu+O4MG4hQHBa6rLgBBv2zkk
+ apaHgMgl554Zem+60+QD5SfvqKh6Wrf6zUEFjbiix39p3toFk3jAR1ens5GLIOvBCvRA
+ LtGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUSqfpF9xUO92QNhtVGGufbWjSkmZIf3q+19mmS5tP6UOMJssoGdZNWdcpVAA1d2IgXV8HpheQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZRei48MnoMe3i4e4cuvY4SRUezMjdvsWl6GaJT7boonUWYN8V
- 86gcW7qgYysNC3mjR0y5XOrG4CYoVngp+JgSXY9aDkoI/OQvt3KUfWLdAXVnjBwde7kybz4zYdQ
- MqG824u9d91yrUgmqXR6zLPdnl3ZqxzvVXPEx
-X-Gm-Gg: ASbGnctSwXc11ynk937gG5uUV1Kookq1O9rB34g6LJa4r8o/OALCgWaCaIGeZhJghsN
- ix/swSbFpiZHTY5SmnQHz0RaJ9hQGf428EIXJEeyzoKvmU9dRkyacDwiaqyFGbVzsuulT+lngaP
- T+K9TyK1nlfzMm3Co3Czs77DAS4b6gDXsvwKJTCX081HK9CNXxptWQrPQERCQ=
-X-Google-Smtp-Source: AGHT+IGiH4jS1E/0K8l/19BHOj3sdZTlS8OQiygSbi2HKpxPkyhaRn8qPg+BUowmKB2FYYsw1pPryTwYfN5u/5w1jGA=
-X-Received: by 2002:a17:907:94d0:b0:ac1:e53c:d13f with SMTP id
- a640c23a62f3a-ac7e7776771mr831352066b.50.1744039412787; Mon, 07 Apr 2025
- 08:23:32 -0700 (PDT)
+ AJvYcCU0t1syWKNNcDfhObLgCzAg7wQgZVITfwoVjSwTUp0CeGdlE5Jr9kasZsJGbuqFIZ7dXzvbVCs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcpAcmAz0M0hFQbOYu9Et+OKHdQj3HF+/nwEWYXrtmsCs/adkD
+ PmxX4SH6Xtrsv4KvKzRMIlVMzPj6UN+C8stgWnFwxHS6G0pW3Ofq9Wv22FQ9KE9sLyLO2vQvM04
+ IANjHNAVu/PxRWe2kprz4yWHtaTYYlQp3gkwH
+X-Gm-Gg: ASbGncvwPTDAk6HlyWSqqc6UFF3zsNiqkrRX4ApdTEx+2x0GGskzxkEcYzsoX+lKA60
+ aMFnHjUIhdXnlnCBmnC5v6HjtLYwKm39lP1Lo7Fceq7H4rhrgZyWMDJ1SlyJV7PguiL2MSWX9xY
+ 2A75rUdPTPeUt6EXyTECNx/EDpix4bdeNGplZWW+nNs7bBzzfvwhfpLBrY82w=
+X-Google-Smtp-Source: AGHT+IFHYxRk8lKSr3YDi7JaTyh2yVMWsYyLSoEtEqzjDOEQ8i7Xvz3Ws9cAcRD+QqrEB7ByznA1fL5W1YK9tGZu7cs=
+X-Received: by 2002:a17:907:86a1:b0:ac7:d10c:1f39 with SMTP id
+ a640c23a62f3a-ac7d6d04c9fmr985348666b.20.1744039470678; Mon, 07 Apr 2025
+ 08:24:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250407013513.638110-1-sjg@chromium.org>
- <20250407013513.638110-5-sjg@chromium.org>
- <ae928b59-23c1-4148-81b2-85dc5e261868@gmx.de>
- <CAFLszTgdCJMPVL6StLygGBT_GKJQXbpGGDT1tDqWMs9-kToEVQ@mail.gmail.com>
- <20250407133049.GI5495@bill-the-cat>
-In-Reply-To: <20250407133049.GI5495@bill-the-cat>
+References: <CAEfUkULg0bzG564_vo43Bta5C4_EirZNt39ncgua0VFjd1C-tw@mail.gmail.com>
+ <CAFLszTjGn1JGdpNAZVL6CC+pQLsOrG6gjmo8kRzjbnR_=6CMvw@mail.gmail.com>
+ <20250403215239.GO5495@bill-the-cat>
+ <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
+ <20250403225058.GQ5495@bill-the-cat>
+ <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
+ <20250404175710.GU5495@bill-the-cat>
+ <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
+ <20250406223854.GE5495@bill-the-cat>
+ <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
+ <20250407143056.GL5495@bill-the-cat>
+In-Reply-To: <20250407143056.GL5495@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Apr 2025 09:23:18 -0600
-X-Gm-Features: ATxdqUH1EayPS-Pay8bV78ERw4m6eQVmzP6HM94jjhNDHzuW94YHxzDoaeuXsjo
-Message-ID: <CAFLszTihXSnCSmY9NDf4=VRHxUEzTP8ScT7=3aEduZa9VM-XMg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] dm: core: Rename dm_remove_devices_active()
+Date: Mon, 7 Apr 2025 09:24:16 -0600
+X-Gm-Features: ATxdqUEZT0lsORthb1qQx2Z2i0Xcv8na5I7Te9_lCLy5WuGKW2PlruqXO_NCRIg
+Message-ID: <CAFLszThqjXZkoZxa7m+WLtSefnHk2zusJiO8re+bx2rYV4BWzA@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- neil.armstrong@linaro.org, Jonas Karlman <jonas@kwiboo.se>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Janne Grunau <j@jannau.net>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>,
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Rick Chen <rick@andestech.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Sumit Garg <sumit.garg@kernel.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ mason1920 <mason1920@use.startmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,123 +116,146 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 7 Apr 2025 at 07:30, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 7 Apr 2025 at 08:31, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Apr 07, 2025 at 10:49:11PM +1200, Simon Glass wrote:
-> > Hi Heinrich,
+> On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Mon, 7 Apr 2025 at 19:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On 07.04.25 03:35, Simon Glass wrote:
-> > > > This function doesn't have a great name, since we talk of devices being
-> > > > active once they are probed.
+> > > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > Rename it to dm_remove_dma_devices().
+> > > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass wrote:
+> > > > > > > > > > Hi Raymond,
+> > > > > > > > > >
+> > > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > Hi Simon,
+> > > > > > > > > > >
+> > > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Hi Simon,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
+> > > > > > > > > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
+> > > > > > > > > > > > > > > > so that it is simpler to understand and manage.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_init()
+> > > > > > > > > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
+> > > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MANDATORY which means
+> > > > > > > > > > > > > > > mandatorily use bloblist to hand over everything between boot stages
+> > > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not necessary.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MANDATORY indicates that
+> > > > > > > > > > > > > > there must be a bloblist, not that it must contain a devicetree. So I
+> > > > > > > > > > > > > > wasn't sure about removing it.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIST_PASSAGE_MANDATORY is
+> > > > > > > > > > > > > selected, we can override any fdt from board or env with the one from
+> > > > > > > > > > > > > the bloblist.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Yes, but we should be explicit about what is going on here. With
+> > > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is coming from the
+> > > > > > > > > > > > bloblist. It becomes one of the sources for devicetree, like
+> > > > > > > > > > > > OF_SEPARATE and OF_EMBED
+> > > > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from bloblist will be
+> > > > > > > > > > > mandatorily used and override other fdt sources like from the board or
+> > > > > > > > > > > env variables.
+> > > > > > > > > >
+> > > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I have no objection to
+> > > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't like the name
+> > > > > > > > > > very much. But I can see why it is called that as my standard passage
+> > > > > > > > > > series was actually never applied. So I suppose I'll need to have
+> > > > > > > > > > another try at that.
+> > > > > > > > > >
+> > > > > > > > > > So to be clear, I want a separate option for devicetree, called
+> > > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, without affecting
+> > > > > > > > > > your option.
+> > > > > > > > >
+> > > > > > > > > Sigh. Can I ask what the use case for this will be? And we are going to
+> > > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
+> > > > > > > >
+> > > > > > > > I thought we agreed that this was acceptable. We argued the toss for
+> > > > > > > > months on this point and I would rather not revisit it.
+> > > > > > > >
+> > > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is in. I'm
+> > > > > > > > pretty sure it can be done. The only tricky bit is coming up with a
+> > > > > > > > bloblist protocol for x86.
+> > > > > > >
+> > > > > > > Yes, I'm stuck between being "flexible and saying yes" and how long we
+> > > > > > > have to live with what I also think are bad designs.
+> > > > > > >
+> > > > > > > So maybe the pre-requisite here is that with "bloblist" and "standard
+> > > > > > > passage" being divorced, what is the requirement for bloblist again?
+> > > > > > > Because in practice, all of the problems we've had come down to looking
+> > > > > > > in fixed address locations before they're valid. You want to handle this
+> > > > > > > by saying "Ah, we won't look before it's valid with other CONFIG flags"
+> > > > > > > and I say we should handle this by not using a fixed address to start
+> > > > > > > with.
+> > > > > > >
+> > > > > > > If we have to add OF_BLOBLIST now and delete it in a few months, sigh,
+> > > > > > > OK. But it shouldn't need to exist long term.
+> > > > > >
+> > > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pass the
+> > > > > > devicetree in the bloblist.
+> > > > >
+> > > > > I don't understand why that would become the case when it's not true
+> > > > > today.
 > > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >   arch/arm/lib/bootm.c          | 4 ++--
-> > > >   arch/riscv/lib/bootm.c        | 2 +-
-> > > >   arch/x86/lib/bootm.c          | 2 +-
-> > > >   drivers/core/root.c           | 2 +-
-> > > >   include/dm/root.h             | 6 +++---
-> > > >   lib/efi_loader/efi_boottime.c | 2 +-
-> > > >   test/dm/core.c                | 2 +-
-> > > >   7 files changed, 10 insertions(+), 10 deletions(-)
-> > > >
-> > > > diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
-> > > > index 688c2f3f29b..ef859a2cd4c 100644
-> > > > --- a/arch/arm/lib/bootm.c
-> > > > +++ b/arch/arm/lib/bootm.c
-> > > > @@ -74,10 +74,10 @@ static void announce_and_cleanup(int fake)
-> > > >        * Call remove function of all devices with a removal flag set.
-> > > >        * This may be useful for last-stage operations, like cancelling
-> > > >        * of DMA operation or releasing device internal buffers.
-> > > > -      * dm_remove_devices_active() ensures that vital devices are removed in
-> > > > +      * dm_remove_dma_devices() ensures that vital devices are removed in
-> > > >        * a second round.
-> > > >        */
-> > > > -     dm_remove_devices_active();
-> > > > +     dm_remove_dma_devices();
-> > > >
-> > > >       cleanup_before_linux();
-> > > >   }
-> > > > diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
-> > > > index 76c610bcee0..9aecaafef43 100644
-> > > > --- a/arch/riscv/lib/bootm.c
-> > > > +++ b/arch/riscv/lib/bootm.c
-> > > > @@ -57,7 +57,7 @@ static void announce_and_cleanup(int fake)
-> > > >        * This may be useful for last-stage operations, like cancelling
-> > > >        * of DMA operation or releasing device internal buffers.
-> > > >        */
-> > > > -     dm_remove_devices_active();
-> > > > +     dm_remove_dma_devices();
-> > > >
-> > > >       cleanup_before_linux();
-> > > >   }
-> > > > diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-> > > > index 3c420b00936..91e8de4e1ad 100644
-> > > > --- a/arch/x86/lib/bootm.c
-> > > > +++ b/arch/x86/lib/bootm.c
-> > > > @@ -50,7 +50,7 @@ void bootm_announce_and_cleanup(void)
-> > > >        * This may be useful for last-stage operations, like cancelling
-> > > >        * of DMA operation or releasing device internal buffers.
-> > > >        */
-> > > > -     dm_remove_devices_active();
-> > > > +     dm_remove_dma_devices();
-> > > >   }
-> > > >
-> > > >   #if defined(CONFIG_OF_LIBFDT) && !defined(CONFIG_OF_NO_KERNEL)
-> > > > diff --git a/drivers/core/root.c b/drivers/core/root.c
-> > > > index c7fb58285ca..101cc4d43fa 100644
-> > > > --- a/drivers/core/root.c
-> > > > +++ b/drivers/core/root.c
-> > > > @@ -148,7 +148,7 @@ int dm_remove_devices_flags(uint flags)
-> > > >       return 0;
-> > > >   }
-> > > >
-> > > > -void dm_remove_devices_active(void)
-> > > > +void dm_remove_dma_devices(void)
-> > > >   {
-> > > >       /* Remove non-vital devices first */
-> > > >       device_remove(dm_root(), DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
-> > > > diff --git a/include/dm/root.h b/include/dm/root.h
-> > > > index 5651b868c8b..39a069cd465 100644
-> > > > --- a/include/dm/root.h
-> > > > +++ b/include/dm/root.h
-> > > > @@ -169,16 +169,16 @@ int dm_uninit(void);
-> > > >   int dm_remove_devices_flags(uint flags);
-> > > >
-> > > >   /**
-> > > > - * dm_remove_devices_active - Call remove function of all active drivers heeding
-> > > > + * dm_remove_dma_devices - Call remove function of all active drivers heeding
-> > > >    *                            device dependencies as far as know, i.e. removing
-> > > >    *                            devices marked with DM_FLAG_VITAL last.
-> > > >    *
-> > > >    * All active devices will be removed
-> > > >    */
-> > > > -void dm_remove_devices_active(void);
-> > > > +void dm_remove_dma_devices(void);
+> > > > If you look at the top obbfdtdec_setup() in your tree you can see the
+> > > > special-case code related to TPL, that I'm wanting to get rid of.
 > > >
-> > > We have to remove all active devices. Not only DMA devices but also any
-> > > device that creates interrupts.
-> > >
-> > > The renaming is misleading.
+> > > OK, but all of that too is for the case of a fixed bloblist being in
+> > > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and want
+> > > to see passing of the bloblist from xPL -> PPL be implemented and so xPL
+> > > can allocate a bloblist (or grow a passed one if needed).
 > >
-> > Yes, but so is the existing name, as mentioned.
-> >
-> > How about dm_remove_for_boot() ?
+> > We are going around in circles though. Having it is registers doesn't
+> > help with the problem that there isn't an FDT in the bloblist.
 >
-> I think the name itself is fine and maybe just a bit more
-> documentation? It's dealing with the DM_REMOVE_ACTIVE_ALL flag
-> after all.
+> Sure it does. If we're passed a bloblist in a register we can then see
+> if it has a DT (and use it) or not (and move to the next DT location).
+>
+> > Also, I thought you decided that I could maintain bloblist. Have you
+> > changed your mind?
+>
+> You just mis-understood me. Yes, you can maintain bloblist. But also,
+> Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
+> problems is that no one understood you.
 
-Yes,  it is. I would like to more clearly separate the naming, but I
-haven't come up with a great option. So let's drop this patch.
+Is there a call tomorrow, or is it next week?
 
 Regards,
-SImon
+Simon
