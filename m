@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670BFC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD178C369A1
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:03:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC6958310F;
-	Mon,  7 Apr 2025 22:02:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 157B2830E9;
+	Mon,  7 Apr 2025 22:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mLxkO/Gn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kV/AoQuv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BDA28300F; Mon,  7 Apr 2025 22:02:42 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 9F1C083100; Mon,  7 Apr 2025 22:02:43 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 477BB8300F
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D71A830E3
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-39c266c1389so3423791f8f.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:40 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4394a823036so44579115e9.0
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744056160; x=1744660960; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744056161; x=1744660961; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NUquF9iuIp7lnMmDFY1KTqf87iUW2mnFLaVtn9tKXPY=;
- b=mLxkO/Gn/BqMgzm3ChQNd7P9YAXlT+yVuILjt0rNs+lQwe4HgmXqoNuTxmSDGifkE+
- +S48G/pzAoei03EzD/9QUF0KbBe+QoDTUxmdogQS9KWxFrWmagLWoI06j++LLseCvzl5
- rMGgQc8RrDUFxzfkQn02Rk1aIHWfe42mxod4fhoET39eJSFovXVOjvd/5Wh9+8qwAw+S
- wfCIKL9c5Ig7Qg+5Dvy1FEN4bh9UrUseqnZoKbb4j7GxWXrtKQmet43IcCVDyAPHIYYp
- nlS2iY/Kj8jExXSOtB1ShqPxQVU90Z9Mgr2vgXoMC7o+HEEj2u+7KzC/X5IT9l8zWMMT
- 2iOQ==
+ :reply-to; bh=9PcaSA3Jt90i7Z/+N2YN2ThKaJQeJUBMTCBWI7mOMyI=;
+ b=kV/AoQuvtsXnqASWqeZf0JS4rmvHVsaEJUr9V4kfHPy+5TYEe4c6VYy1LkODkgC/Iz
+ xqr2CYEj9IIC3A/F6SZIK3BAlMwUOKWcPoNR1gRn+HsCROdxx9gORpHvR3N0vjUweLNx
+ xdLw9F7SuuGNAliND6XbVzfSd58h/n55KhaguOe/xjASwyuQkC9hoKKTkX5sus/HS8xw
+ 3k6/XCZqwEq6YclBnoj1mreIe1T/9zl1/PkurQq81JXwClcoUL0IXpzSLs8g0Tq/zbNY
+ Uk6Es8wFwAgAhXtu0Y3+/my19eqhF6YIkxh8kDzv8SJk6d6n9FuXGbiafQDwPtNqCDOD
+ tfNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744056160; x=1744660960;
+ d=1e100.net; s=20230601; t=1744056161; x=1744660961;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NUquF9iuIp7lnMmDFY1KTqf87iUW2mnFLaVtn9tKXPY=;
- b=Uqt5WeryIVNN+omi7FaDQI1mXQZe0mirSbpdB+WcpYLn6rBbJdE4WsrMojVBO0vWSv
- 4toGH29vTekVn5mhRIMstraHJyfEo7DpRZJOBUzogjZYAfjbn/PimsLWh8Wqm4Dg5ZNm
- hAV5PGmLVlV5fZ3dFl+ANzVMmZARFikWdQABbkCWTO9hP/61tb6qc/0yIeb43j0IHVgX
- 7THqiVtuSSYd8tZaSKEgCuKq9pGHFAPHNZ5YsKMZA0bVhPFi6ajLupPzyuRQKA+x31W1
- IakDMyLGznoqLYkzVLH5bi5lMl1K/MfA2YPokUV87zi4LFRvRlFjpkx5VCJR3BRxlTuf
- QZ4w==
+ bh=9PcaSA3Jt90i7Z/+N2YN2ThKaJQeJUBMTCBWI7mOMyI=;
+ b=T10c9DQf36K1CCtFnuslKLOflotkd8EGdUj6dSWeD7oTpXrmCraz3tuD9d9B4dxNqr
+ XmjY474uApS8UFldZkgwI/LYHkfEjzDr6bF+fe3gOaK5nzkAvmah0h6PZcYyofFHr6b3
+ HJaOYQeUw96rrN4y4+knYv1PoDuKlUM9Xgq2yqCrSl6pZtXKOW8a9aSqIz2PDcuNpkyE
+ cleksQ00rMcy1t32WdZRhsm5lhEE9KjVHg/XN59TdgiQ2ZLc7RjlmLF5I0cylWVsRWst
+ qUKM2u0EHs2dIOBVATljVU6KdApzzDZlAp1zhLA/ZDLDSjd8BCuQWI0W5r7/eD3xJUYg
+ RBRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWHUOkpsbXrpAF5zQH5oPq0ikaq04tF10tFbnUafdg1JXv+SfOE+D/14AkYi8MxRyWh88O79A8=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywz+oX8kpvhC2XH2TDY0ehQKfna3u01csaTZB+3SP7RGRAluKuB
- /h/XDiZ1eVIkX6jXEALOnViaVIQ/qO6AyS6/Vwjyr21t25NAgp0n
-X-Gm-Gg: ASbGnctlZdD0zGuxSYdVJVuGzPDwgL7sf9tjxay1GI0At18i3DaZsECorLySXWpG1sD
- La8HS/Yd+F27UZkyHuWHPW2XFP5CBAFpfj2NeUC4nTQvR5AKY5dvSqHEkHx4tw+rHqLeV/p0rZj
- DIEh3faQozN0AFNiZXUYjxbeh1OW0upwIiZG9jAC6EU14mKNXsN1mKJH1PneekuzLsq2alxZdKP
- 9aTMLmK++k4XjwCk5VI+qADDsQIlk0Usd11mqvbSb9Gv9UNOxv1hK/BGbXDnfFR/+EvgBjb6gw3
- 8tDVEypRt0jMtL0CIzWjakleOsdUxvdCTX58SFV83xI9Hrd+xjnl++xmtykcMySPqRQ5aN2DA2r
- MKuOCK0nVGAN3jw==
-X-Google-Smtp-Source: AGHT+IGxpr1Rr5swYMGj61V7IeMHbpqX/+Xgr94gm0eS1JPQfeO74HTRP2IXZKwVwjRICZI8HcwCaw==
-X-Received: by 2002:a05:6000:18af:b0:391:2ab1:d4c2 with SMTP id
- ffacd0b85a97d-39d0de62221mr9759374f8f.37.1744056159671; 
- Mon, 07 Apr 2025 13:02:39 -0700 (PDT)
+ AJvYcCX/V536YFDZ3xOoFzOKpN5o0fzOxWDj5v9rwbibYXOjUwrXRPtXXS8iii+70RvQaw2wk1YmpWc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwDkOgc900o+h/E0EIZKMNPxkZF8eKAS0JzurklSVptsR3J9LYU
+ b9G+fhUrNPN6d3/PIlfdWLvz1+ahnFbojxaQUbHj4NyunnCerTmR
+X-Gm-Gg: ASbGncvRtCTAW+NWGwHU/f+skZ7SHjtUuHgTx/76TrMpnyO/IkLEcTAwZ8tGGRuBhFS
+ OhwXxh0p3unyLkb//6jVrnLqiBCsWqynV46zez5PhFnD0dET0q9cc2IAEdoWaUf1nbIPrmFffwV
+ GzKSaAyjAgZwLIooUa9VlDYA/QnjUKKQNcF82OP9FNbyKhNvqVEpJ/lHRUPBqoXZzJ+eEz6hXDj
+ dXwCR6lPvldC7TlNoItfhtIWTJdNk5IpISGRz9owGwp2LnAyFlG8B4LAXTKW8vM8KB4RLV6gbEP
+ Hr9FiNakocnidhrAe4GQCP9DQZx5KUYoWHFrv4jTZ/+C5+s9HgSUj53jw2FAOeimA8ncDfT1rxs
+ E2iQNte2OUnEPmA==
+X-Google-Smtp-Source: AGHT+IH6l9+d+OXMuKDAmZ2Tqgpr+I4Krh2q32dHc8XYzPAtNBcQFKK+qBmfcEpGM0mZFlwh39FTnQ==
+X-Received: by 2002:a05:600c:1c9d:b0:43d:4686:5cfb with SMTP id
+ 5b1f17b1804b1-43ee077fb74mr70672145e9.27.1744056160677; 
+ Mon, 07 Apr 2025 13:02:40 -0700 (PDT)
 Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
  [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.38
+ ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 13:02:39 -0700 (PDT)
+ Mon, 07 Apr 2025 13:02:40 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -82,9 +82,9 @@ To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Bruce Suen <bruce_suen@163.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 05/14] mmc: mediatek: permit to also build for Airoha arch
-Date: Mon,  7 Apr 2025 22:01:49 +0200
-Message-ID: <20250407200208.25594-6-ansuelsmth@gmail.com>
+Subject: [PATCH v2 06/14] arch: arm: dts: an7581: Add eMMC nodes
+Date: Mon,  7 Apr 2025 22:01:50 +0200
+Message-ID: <20250407200208.25594-7-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250407200208.25594-1-ansuelsmth@gmail.com>
 References: <20250407200208.25594-1-ansuelsmth@gmail.com>
@@ -106,27 +106,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Airoha new SoC implement the same Mediatek driver for MMC. Permit to
-also build for Airoha arch.
+Add eMMC nodes with the fixed regulator and fixed clock. It's also
+needed to assign the clock and set it to 200MHz as it's set to 150Mhz by
+default.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/mmc/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/an7581-u-boot.dtsi | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 4827834b4aa..2e33dbd3fb7 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -860,7 +860,7 @@ config FTSDC010_SDIO
+diff --git a/arch/arm/dts/an7581-u-boot.dtsi b/arch/arm/dts/an7581-u-boot.dtsi
+index a569044195d..46526ff0f0f 100644
+--- a/arch/arm/dts/an7581-u-boot.dtsi
++++ b/arch/arm/dts/an7581-u-boot.dtsi
+@@ -14,6 +14,21 @@
+ 		};
+ 	};
  
- config MMC_MTK
- 	bool "MediaTek SD/MMC Card Interface support"
--	depends on ARCH_MEDIATEK || ARCH_MTMIPS
-+	depends on ARCH_MEDIATEK || ARCH_MTMIPS || ARCH_AIROHA
- 	depends on OF_CONTROL
- 	help
- 	  This selects the MediaTek(R) Secure digital and Multimedia card Interface.
++	clk25m: oscillator {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <25000000>;
++		clock-output-names = "clkxtal";
++	};
++
++	vmmc_3v3: regulator-vmmc-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "vmmc";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++	};
++
+ 	soc {
+ 		chip_scu: syscon@1fa20000 {
+ 			compatible = "airoha,en7581-chip-scu", "syscon";
+@@ -43,6 +58,24 @@
+ 			compatible = "airoha,en7581-switch";
+ 			reg = <0 0x1fb58000 0 0x8000>;
+ 		};
++
++		mmc0: mmc@1fa0e000 {
++			compatible = "mediatek,mt7622-mmc";
++			reg = <0x0 0x1fa0e000 0x0 0x1000>,
++				<0x0 0x1fa0c000 0x0 0x60>;
++			interrupts = <GIC_SPI 170 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&scuclk EN7581_CLK_EMMC>, <&clk25m>;
++			clock-names = "source", "hclk";
++			bus-width = <4>;
++			max-frequency = <52000000>;
++			vmmc-supply = <&vmmc_3v3>;
++			disable-wp;
++			cap-mmc-highspeed;
++			non-removable;
++
++			assigned-clocks = <&scuclk EN7581_CLK_EMMC>;
++			assigned-clock-rates = <200000000>;
++		};
+ 	};
+ };
+ 
 -- 
 2.48.1
 
