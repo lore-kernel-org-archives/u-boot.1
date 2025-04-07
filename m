@@ -4,89 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0352FC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29044C3601A
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DCFB82D0C;
-	Mon,  7 Apr 2025 12:02:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4396882CF4;
+	Mon,  7 Apr 2025 12:33:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UCZLFaNV";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="N06qxqCV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0472282D39; Mon,  7 Apr 2025 12:02:36 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 197E382D39; Mon,  7 Apr 2025 12:33:47 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7CBC82CC9
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:02:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B818A8215B
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:33:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43edecbfb46so15441705e9.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:02:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744020153; x=1744624953; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xjO5lVknVSCFYiovcPPM+akMHiJXqMb9XIf6wtbcr8E=;
- b=UCZLFaNVSWiDxhwlgmRxMArmPOH2DtL7njzcPKChscF4FbAueWKKAOMvwvy3e3dSUL
- qGTh33E4c1zaWgQf9REHtuk66KnZOH21pSJst7tSAaBPJSLv6of3v+ePsbNhtRpF9Avm
- Wc08Rr2EbeYBEZFSJx5cQ/PegCnaMaT4/G48bvYg6RWqOU2Cty1FVGJbgS6H6QfDzbbD
- MW2ViJHOrusg78ITHE5L6qDA7tbPQ0EwoSNPkX9vLreViGP0FWXFs2e7Lo4/8T6hhjCt
- 3fa+sAeTjjnAB/EBX9CRQXx4e4WMHTqhB/0euTDmrcsL9UmNFDeuufQT6R3UHu9DXlnf
- nMeA==
+ spf=pass smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5378dotP009987
+ for <u-boot@lists.denx.de>; Mon, 7 Apr 2025 10:33:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=WbL9/YnYabTgt1rv9ACmC2Zj
+ y3JhkViM0kf77FqfNCo=; b=N06qxqCVBOpHqUOqRsfVbFbog2SgVGCJW4dHn2s3
+ a9vxn8Fttp0vyskIFyaZX+VQzHU1Eo3uDll9X0UR+InMGzlrFy1JjdCyXwSWrYWS
+ doEVauRePmJF/ir+sxBASr2qQRbzZ/hiFTCmS+J/0zU9nT4MQyn+mkBQ8hB09GIv
+ NuyebytsFKKaVSaOWDWKZxLN64In3UK+nKcmcWdttnfAhYZBQJm1ZySTDmX8wVtj
+ sRBrBHvzZ0DUPAnHKAx9afBVtTrMee5BYoT9zs65gFEslMs9I2wZ4BXK7XiB1M/Q
+ IOdfuGvCF8BHt3gOT03nhpud+zrBVFmHGhLsdlOEgAGb9A==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twpm3v9j-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 10:33:42 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-7c0c1025adbso901029685a.1
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:33:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744020153; x=1744624953;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xjO5lVknVSCFYiovcPPM+akMHiJXqMb9XIf6wtbcr8E=;
- b=RuwDowP7id20P2rKi9rOYEAMLjxZbSfuOvArfwNhmFbUF2YqhhE0CPyZm+w9SiVuJg
- iA7Zww9zdtFoCbXNHeL+CqJPcBLR204Kn67bOFR/KmIFR/5fyumo1jU0u+CXt3AVWBmC
- 01/e5quaK6IoI/8TSbOPocbCsfBXGrxYAAmx5Nq4jUOp3oGXsEBw7bjkVE8XDpCzRBES
- XLl2ukmlvQ7e8b4YDZri2dzD4Ep8TgD80oNwzgZa1O4PaCLa4mcoOc8RBfPL7DoOBM7t
- QlAoLnEWirAV38xI4Kb4j4Zg6FA+5aCmslfYPSbgytHX4jujd5Z5qwuiDrlePLd60VCZ
- Zv/w==
+ d=1e100.net; s=20230601; t=1744022021; x=1744626821;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WbL9/YnYabTgt1rv9ACmC2Zjy3JhkViM0kf77FqfNCo=;
+ b=rCVmRkO4tNXK2BiHnjzV0AmkOaZDI8fHGZwOcBcAkA1FGKT9kSL0ACr6IchvHabWGD
+ AEHe3i9dJXmaGGrcpL2UrOOp9SJBfmWJG7TJC7swQ9QjYYic7qehIbA/pWhqJFzJJr+n
+ ivm/EzHT+gPcTUqhGsEydHKyxxQkqUWDo5q5WnSGmtWqWTZfeMcXKv9BjFaKBLSoNSH6
+ P0RrHu3J9idN7ciU0rZMV5vQ/94rZvT163SMizB5zwoAkWvkaGFFQquxspb9bMlaG6iW
+ dVSlDjd63b/mmjVKs9xsvdIO762OIR09F/hqRdHnwavEkZ8JquKlp0mxvSa8F2rE5dL7
+ E5pw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCd/JUy8KOotz9aEMpd7vwRZ5B/Bxdj6JurO1RhswdGvQFUIdMzaE480U19sDNTgqSa8n3QI8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yypz8WrExYGnRAXPZ46dw49GqINNeOcWyzf5ic9wZfoAcyYUcTb
- 26qVACbPXcjWGkjBltihBgNjKo0L/tFcs0kG1RqecT4E4G6yXI+/wBalcEEYdEk=
-X-Gm-Gg: ASbGncvCP+BeXTDjZ1UPXW9f4rzpE8I51pBOdg1lAXxtzpQj91SItCQ8xMAi3xxEMc8
- pWf8mmg/nrJGYzNBmKzGNaMjQoLe98PMsbquStFoMmn4PHRyPrPKO7gsVB23bkD70iz9NAJMp+P
- 1QSKQgSKcAXYDxChhCIl4zVZMd0WLMMSvVjrcN12hkgBIGD5NpEDA3e9GQzjILr+up/Yt1Xvmk/
- VO9cwojUVJ2NiuVPIORrgucggsiJ/prf1Vx+AzjjM8ahlARrUPrTdNtuysZLns17sX4Ik0aMK6X
- 7j46A0Dv2mMCYGL2VLPXlmRnKxcqPR8e/uKj2jDAaMhEVb4D7l5ztIRbb/4pTCpVy7jeqpKENU+
- 7pk4g4oWzZxw=
-X-Google-Smtp-Source: AGHT+IGHcg9xbMjw3qZ2PkBqSJ0FoIIWfTgVcjJTDLqBnZipn/CahyNCs5dAIuG692+r6X5jFKh4Qg==
-X-Received: by 2002:a05:600c:4e09:b0:43c:eeee:b706 with SMTP id
- 5b1f17b1804b1-43ecf9fe6d2mr112752105e9.24.1744020153347; 
- Mon, 07 Apr 2025 03:02:33 -0700 (PDT)
-Received: from [192.168.1.47] (212-60-142-46.pool.kielnet.net. [46.142.60.212])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec16313edsm127972675e9.6.2025.04.07.03.02.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Apr 2025 03:02:32 -0700 (PDT)
-Message-ID: <79fe85dc-9f12-4f64-a269-1c2020d015f9@linaro.org>
-Date: Mon, 7 Apr 2025 12:02:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ AJvYcCW2YxKgTSeUiNslikzBGdtAIVMHbw9LwuDbj/AlWDOIB1gbftabYKBxlVNavtP+4cnWnElfg+A=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTqjwtPm8Nz6SHX9BLnIUWzecRNZBhaeKBfI9uFwpWUHS7P71J
+ 3ky1x+kPjqZTLFD3Bv/YmGBmzfUBdbsB+1R0S9p9+1M9qm28PBMIQRK6ZSCYtEB2g+0j8zso2KS
+ BUYg7JKhRSrByc1d0J/HY8/aTt+2Tv90voAsarCrcFoVK8Ka8hoic
+X-Gm-Gg: ASbGncuB/teBNuVAWHNqGqXZG4VnBN8K+NKZ5/xElV5dtyUFA1txC7B9JlcIUCar9xw
+ gUDagPV3oD0xwZ0VOHxM5ITFurV9Ft4g+np5ySjG5rcQCo5yzWk0DSNqOK7SP3Gmgo1pidBlxIz
+ kuHCv99QuQitjBwDtudwAZp1MU5uEBk9iwpPFYrdIGtI4thraCYOLKU10T5YT5yHUVLk9Dnm4Oh
+ GFp3KVl+ACgX6SjvsLP/29yfCrmudHE5k2ApNKFdpdnSUnz2QRJcyJCvC3MZUBnMh2GrCXWvhbs
+ 4yJGfZ6a6UGfJt7RP+ZjhbgzYHYopu8APnvD+NKcG6JuAm9QCRw=
+X-Received: by 2002:a05:620a:1721:b0:7c3:c814:5943 with SMTP id
+ af79cd13be357-7c774d277f3mr1796207085a.9.1744022021533; 
+ Mon, 07 Apr 2025 03:33:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFj3gsQ/B2eYvRZXhUN+8NqwVTENj/QY4qxC5/bpN/HJmEgIHv6PI44UxJ/jNyZhz3Z6wCajw==
+X-Received: by 2002:a05:620a:1721:b0:7c3:c814:5943 with SMTP id
+ af79cd13be357-7c774d277f3mr1796204285a.9.1744022021166; 
+ Mon, 07 Apr 2025 03:33:41 -0700 (PDT)
+Received: from trex (233.red-79-144-185.dynamicip.rima-tde.net.
+ [79.144.185.233]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39d753e48f7sm5432819f8f.4.2025.04.07.03.33.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Apr 2025 03:33:40 -0700 (PDT)
+From: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
+X-Google-Original-From: Jorge Ramirez <JorgeRamirez-Ortiz>
+Date: Mon, 7 Apr 2025 12:33:39 +0200
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
 Subject: Re: [PATCH 6/7] mach-snapdragon: board interface to enforce fdt
-To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- neil.armstrong@linaro.org, sumit.garg@kernel.org
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+Message-ID: <Z/OqA6mZK+5EI/AJ@trex>
 References: <20250407081927.138915-1-jorge.ramirez@oss.qualcomm.com>
  <20250407081927.138915-7-jorge.ramirez@oss.qualcomm.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250407081927.138915-7-jorge.ramirez@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <79fe85dc-9f12-4f64-a269-1c2020d015f9@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <79fe85dc-9f12-4f64-a269-1c2020d015f9@linaro.org>
+X-Proofpoint-GUID: p2p61NyX3BybfFCQPXHI5U_TBPBX61q8
+X-Proofpoint-ORIG-GUID: p2p61NyX3BybfFCQPXHI5U_TBPBX61q8
+X-Authority-Analysis: v=2.4 cv=MpRS63ae c=1 sm=1 tr=0 ts=67f3aa06 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=9rMOtB7ueBl8bWGkC6audQ==:17
+ a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=sQsx4EbTpYptnzgV4B8A:9
+ a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-07_03,2025-04-03_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0
+ mlxlogscore=692 clxscore=1015 priorityscore=1501 impostorscore=0
+ spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0 adultscore=0
+ phishscore=0 mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504070075
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,65 +128,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jorge,
-
-On 4/7/25 10:19, Jorge Ramirez-Ortiz wrote:
-> Some platforms might require the external fdt to boot.
-
-The better way to do this is to use the u-boot-nodtb.bin to build your 
-boot image rather than the one which includes the internal FDT. If that 
-works I'd prefer it (and it can be mentioned in the build instructions). 
-Otherwise it would be good to know what the issue is here.
-
-Kind regards,>
-> This change provides a mechanism to the board initializaion code to make
-> the requet explicit.
+On 07/04/25 12:02:31, Caleb Connolly wrote:
+> Hi Jorge,
 > 
-> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-> ---
->   arch/arm/mach-snapdragon/board.c | 13 +++++++++++++
->   1 file changed, 13 insertions(+)
+> On 4/7/25 10:19, Jorge Ramirez-Ortiz wrote:
+> > Some platforms might require the external fdt to boot.
 > 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 2ef936aab75..1bca9dce20f 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -150,7 +150,13 @@ static void show_psci_version(void)
->   /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
->    * or for supporting quirky devices where it's easier to leave the downstream DT in place
->    * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
-> + *
-> + * Alternatively the board can enforce the external fdt.
->    */
-> +bool __weak qcom_board_fdt_external(void)
-> +{
-> +	return false;
-> +}
->   int board_fdt_blob_setup(void **fdtp)
->   {
->   	struct fdt_header *fdt;
-> @@ -161,6 +167,12 @@ int board_fdt_blob_setup(void **fdtp)
->   	external_valid = fdt && !fdt_check_header(fdt);
->   	internal_valid = !fdt_check_header(*fdtp);
->   
-> +	if (qcom_board_fdt_external() && external_valid) {
-> +		debug("Using external FDT\n");
-> +		*fdtp = fdt;
-> +		goto out;
-> +	}
-> +
->   	/*
->   	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
->   	 * Bail out while we can still print a useful error message.
-> @@ -178,6 +190,7 @@ int board_fdt_blob_setup(void **fdtp)
->   		*fdtp = fdt;
->   	}
->   
-> +out:
->   	/*
->   	 * Parse the /memory node while we're here,
->   	 * this makes it easy to do other things early.
+> The better way to do this is to use the u-boot-nodtb.bin to build your boot
+> image rather than the one which includes the internal FDT. If that works I'd
+> prefer it (and it can be mentioned in the build instructions).
 
--- 
-Caleb (they/them)
-
+ah of course, yep, will do that.
