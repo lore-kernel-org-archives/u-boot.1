@@ -4,59 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED5FDC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861D6C369A5
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DB1882ED0;
-	Mon,  7 Apr 2025 17:09:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id E3B9C82ED0;
+	Mon,  7 Apr 2025 17:12:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="eHuES8sQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g5/DRgvP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E526382ED4; Mon,  7 Apr 2025 17:09:48 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7549482F4B; Mon,  7 Apr 2025 17:12:49 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B68E282CEB
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 17:09:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8B4E82CEB
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 17:12:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID;
- bh=+7xQkFn4IAf2Np3X+XHbQDTT7IT7uFOodhu9WtEuVTU=; b=eHuES8sQ3Lyf1EEeaEbn36J98B
- t03X/sjIIIA7KdstoBZvBPhgfpJn4ZjpTGhjXtCqz4rr4/2sIHzUXMlJ5Jg7+TOdmn1UOqetnhknK
- 43W90fddbKD0Jkeyz6mb07+je09n0xmP9qe910KQEioIWOHq6Cwlp1foyv3pZ/8VjnA01jdNNc6r9
- 1J9KAizCXdUtOh406/ZFOilV7WBZOK7YxMkw2gt2WOj/VrFl6VB4Zr4c4w7PbKPO+32XlqpR0oX4H
- HRFMm5SULflctNQkmr3mKk7zKQxRykuun3wXtn/9h0slx8v4f9RSuINejkSfk+iAMro6ah15u3Ep/
- W+QiPbMA==;
-Received: from i53875b95.versanet.de ([83.135.91.149] helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1u1o6O-0004uR-Cv; Mon, 07 Apr 2025 17:09:32 +0200
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
-To: sjg@chromium.org, philipp.tomsich@vrull.eu,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
- jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
- u-boot@lists.denx.de, sebastian.reichel@collabora.com
-Subject: Re: [PATCH 00/20] Support for the RK3576
-Date: Mon, 07 Apr 2025 17:09:31 +0200
-Message-ID: <2220773.irdbgypaU6@diego>
-In-Reply-To: <1580874a-e1b8-4c0b-a897-2f672e96b248@rock-chips.com>
-References: <20241121142731.1202209-1-heiko@sntech.de>
- <1580874a-e1b8-4c0b-a897-2f672e96b248@rock-chips.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43cef035a3bso30286225e9.1
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 08:12:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744038766; x=1744643566; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=xWy8SYfgI1SLrgK8o/PyNxDLSCkGKWQ4quGyY/m9oYY=;
+ b=g5/DRgvP2x2uK6OyJWFpdJZ/bmAMOBKLy2m6QM3MZULzIduUbw5m8ZF6BaSa7OBpOI
+ oQFQynuvy3G/UFjTIzfrPUM0pF6E5/zk4znuMT/4mQCCFQWgaLSjyDK92WY5+i1uAaHj
+ 4sPkrGuGr/LZpoCiD3zXiYu7dSQ7fVwOWgClxRTHLRVuLh5zdkzLbXm3R+O7x6JuE4/6
+ 63NNluSNIjkMjhHjnC0fdWYWA9aj5HVlTJvXaeyzTq+res/P8DtYaxYy1JCcPf8GuYSf
+ bu4dBj0hXSgPeav7rHyHk1TSGslh22vb6tZSgtK4i6z/I8FOSP6YB0Y3HLyuxj/jjsAV
+ W5tQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744038766; x=1744643566;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=xWy8SYfgI1SLrgK8o/PyNxDLSCkGKWQ4quGyY/m9oYY=;
+ b=O1Fa0qtDIoU1BTPu8vtT8s1H1NOKdiCf0k184O3jKdpmBJI1oNJNVUix2DOUtqu1hR
+ 3CWUCo6kF1eZQCP2s1hP0aC9v/SlbG8kbg0QXL33+LqNIFX1HY0FQiLqo9Nu4xx5Y923
+ 970OlzrequkhdPQs+rZOCYYfHYggv5BVFUZQJsUTn1I1o/mH5qzDjnNEJ0dGdNe1uSwC
+ WQhmZKN7f5Wom0u2WZ59RW1jtQVzv7316T/rNTOnkSsyP4Cnl75YpkCbtjbM+F+6WTNp
+ rJMwmsqTcrNX40+NBEJlbg3bxX95YH0SMpQgMU277Exq98QYfxhPNh2m8vwIzyHwq1Gn
+ Mh8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWKDt/jXfReN4v44pgGQ0HN2aHlLno/hdZh0pI/CvmXNW6HGJJr/iZUpx1TLz5PlDHMeuaA77A=@lists.denx.de
+X-Gm-Message-State: AOJu0YykCrluz4yAtFctOF3KJtNd7tn549QUxf8XI2G0Uj+FPy4ZfGCR
+ sYFNQlnI1oOisAHrsmA4TlmNjTBnAi2ACNx9oha7+UliU4zk8Be3xltzb2KVxGM=
+X-Gm-Gg: ASbGncsBvAu4yI0srF8+oFN0J8mEl2iBJ/cB5HppXOKJ65UXfIyf2DgYzRPPepL8qwy
+ sNaumftehGyhbyN9kj8+S25/iP1uxbVr1frQnlHpTWT0e0socqiEI/z0QcF49LKHqF+WA6/9vUd
+ 4YW3da35jmuv36ceHwIkxcL/+b2xXKvqvOXtbBM16Ny/ZmXmcBg6D0Q5j8yR6Sd5R3cH6lZYD0S
+ nMG0FbZMb5clz3iV85I3XEqbyV3c335e4fxyWDMjqAluyRyV8euyzRj82s6gUgzDqMMbPDcmFnO
+ EkFNLhC00tJUHAdbgfgyBCnanMI0clUxfkSSXsyjG2tFKZtJWdRyM6WkXGprJ5ELI5omkEeRLEc
+ 8xmFjdZlGfCfO5RTgUahrnQ==
+X-Google-Smtp-Source: AGHT+IGNELMGCL4z+zyzw/cAVgnrvsF6N3p1oyWwbvZ/UANC7IiUNNZMglCb22ODxPGdJSSZm0fFMg==
+X-Received: by 2002:a05:600c:1f16:b0:43a:b8eb:9e5f with SMTP id
+ 5b1f17b1804b1-43ede41cc27mr108543185e9.3.1744038766369; 
+ Mon, 07 Apr 2025 08:12:46 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:f2a4:b974:cba3:a605?
+ ([2a01:e0a:3d9:2080:f2a4:b974:cba3:a605])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43ec16313edsm136188865e9.6.2025.04.07.08.12.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Apr 2025 08:12:45 -0700 (PDT)
+Message-ID: <c834224a-a69d-42d5-ae2a-b6b363d9d2ee@linaro.org>
+Date: Mon, 7 Apr 2025 17:12:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH 3/5] clk/qcom: apq8096: fix the sdhci clock
+To: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
+Cc: caleb.connolly@linaro.org, sumit.garg@kernel.org, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20250407120536.236003-1-jorge.ramirez@oss.qualcomm.com>
+ <20250407120536.236003-3-jorge.ramirez@oss.qualcomm.com>
+ <ca4b11e9-4bd0-4a9b-9980-ff2367f8c43f@linaro.org> <Z/PeZVBhwcNOVRAD@trex>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <Z/PeZVBhwcNOVRAD@trex>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,164 +126,45 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+On 07/04/2025 16:17, Jorge Ramirez wrote:
+> On 07/04/25 14:36:51, neil.armstrong@linaro.org wrote:
+>> On 07/04/2025 14:05, Jorge Ramirez-Ortiz wrote:
+>>> Select the right clock for sdhci.
+>>>
+>>> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+>>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>> ---
+>>>    drivers/clk/qcom/clock-apq8096.c | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+>>> index bc00826a5e8..551f52d5197 100644
+>>> --- a/drivers/clk/qcom/clock-apq8096.c
+>>> +++ b/drivers/clk/qcom/clock-apq8096.c
+>>> @@ -83,7 +83,7 @@ static ulong apq8096_clk_set_rate(struct clk *clk, ulong rate)
+>>>    	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+>>>    	switch (clk->id) {
+>>> -	case GCC_SDCC1_APPS_CLK: /* SDC1 */
+>>> +	case GCC_SDCC2_APPS_CLK: /* SDC2 */
+>>
+>> Should be GCC_SDCC2_AHB_CLK
+> 
+> why? also if I do that, mcc fails to probe
 
-Am Sonntag, 6. April 2025, 17:09:59 Mitteleurop=C3=A4ische Sommerzeit schri=
-eb Kever Yang:
-> Hi Heiko,
->=20
->      Do you have new version for this patch set?
+The discussion at https://lore.kernel.org/all/Z/OqoqnPb1gfk5iG@trex/ made me thought using GCC_SDCC2_AHB_CLK fixed the sdhci set_rate, but I maybe did misread.
 
-with 6.15-tc1 the devicetree for my Firefly board now also made it to the
-dt-rebasing repository, where I can cherry-pick it from for u-boot.
+Neil
 
-So yes, I'll try to come forward with an updated version hopefully
-this week.
-
-
-Heiko
-
-
-> On 2024/11/21 22:27, Heiko Stuebner wrote:
-> > This adds support for the RK3576 SoC from Rockchip.
-> >
-> > Currently supported (and tested) features are accessing and reading from
-> > sdhci and sdmmc devices as well as pxe-booting via the network interfac=
-e.
-> >
-> > As can be seen by the DONOTMERGE labels, this needs to wait a bit still.
-> >
-> > The core RK3576 devicetrees will be part of 6.13-rc1, but the Firefly
-> > board I only submitted last week, so this would only appear in 6.14-rc1=
- .
-> >
-> > If someone from Collabora could provide a board patch for the ArmSom
-> > board they are working with, this would speed things up a bit ;-) .
-> >
-> > Checkpatch seems mostly happy too.
-> >
-> >
-> > Detlev Casanova (3):
-> >    dt-bindings: clock, reset: Add support for rk3576
-> >    DONOTMERGE: arm64: dts: rockchip: Add rk3576 SoC base DT
-> >    arm: rockchip: add RK3576-specific syscon ids
-> >
-> > Elaine Zhang (2):
-> >    clk: rockchip: Add rk3576 clk support
-> >    reset: rockchip: implement rk3576 lookup table
-> >
-> > Finley Xiao (1):
-> >    dt-bindings: power: Add support for RK3576 SoC
-> >
-> > Heiko Stuebner (11):
-> >    dt-bindings: clock, reset: fix top-comment indentation rk3576 headers
-> >    DONOTMERGE: arm64: dts: rockchip: add rk3576 otp node
-> >    DONOTMERGE: dt-bindings: arm: rockchip: Add Firefly ROC-RK3576-PC
-> >      binding
-> >    DONOTMERGE: arm64: dts: rockchip: Add devicetree for the ROC-RK3576-=
-PC
-> >    rockchip: sdram: honor CFG_SYS_SDRAM_BASE when defining ram regions
-> >    ram: rockchip: Add rk3576 ddr driver support
-> >    rockchip: otp: Add support for RK3576
-> >    mmc: rockchip_sdhci: Add support for RK3576
-> >    mmc: rockchip_dw_mmc: Add support for rk3576
-> >    net: dwc_eth_qos_rockchip: Add support for RK3576
-> >    rockchip: rk3576: Add support for ROC-RK3576-PC board
-> >
-> > Steven Liu (1):
-> >    pinctrl: rockchip: support rk3576 pinctrl
-> >
-> > Xuhui Lin (2):
-> >    rockchip: mkimage: Add rk3576 support
-> >    arm: rockchip: Add RK3576 arch core support
-> >
-> >   arch/arm/dts/rk3576-roc-pc-u-boot.dtsi        |   12 +
-> >   arch/arm/dts/rk3576-u-boot.dtsi               |  119 +
-> >   arch/arm/include/asm/arch-rk3576/boot0.h      |   11 +
-> >   arch/arm/include/asm/arch-rk3576/gpio.h       |   11 +
-> >   arch/arm/include/asm/arch-rockchip/clock.h    |   12 +
-> >   .../include/asm/arch-rockchip/cru_rk3576.h    |  486 ++
-> >   .../include/asm/arch-rockchip/grf_rk3576.h    |  225 +
-> >   .../include/asm/arch-rockchip/ioc_rk3576.h    |  244 +
-> >   arch/arm/mach-rockchip/Kconfig                |   46 +-
-> >   arch/arm/mach-rockchip/Makefile               |    1 +
-> >   arch/arm/mach-rockchip/rk3576/Kconfig         |   57 +
-> >   arch/arm/mach-rockchip/rk3576/Makefile        |    9 +
-> >   arch/arm/mach-rockchip/rk3576/clk_rk3576.c    |   32 +
-> >   arch/arm/mach-rockchip/rk3576/rk3576.c        |  169 +
-> >   arch/arm/mach-rockchip/rk3576/syscon_rk3576.c |   26 +
-> >   arch/arm/mach-rockchip/sdram.c                |   11 +-
-> >   board/firefly/roc-pc-rk3576/Kconfig           |   12 +
-> >   board/firefly/roc-pc-rk3576/MAINTAINERS       |    7 +
-> >   configs/roc-pc-rk3576_defconfig               |   77 +
-> >   doc/board/rockchip/rockchip.rst               |   12 +
-> >   drivers/clk/rockchip/Makefile                 |    1 +
-> >   drivers/clk/rockchip/clk_rk3576.c             | 2517 +++++++
-> >   drivers/misc/rockchip-otp.c                   |   11 +
-> >   drivers/mmc/rockchip_dw_mmc.c                 |    1 +
-> >   drivers/mmc/rockchip_sdhci.c                  |   12 +
-> >   drivers/net/dwc_eth_qos.c                     |    4 +
-> >   drivers/net/dwc_eth_qos_rockchip.c            |  141 +-
-> >   drivers/pinctrl/rockchip/Makefile             |    1 +
-> >   drivers/pinctrl/rockchip/pinctrl-rk3576.c     |  287 +
-> >   drivers/pinctrl/rockchip/pinctrl-rockchip.h   |    3 +
-> >   drivers/ram/rockchip/Makefile                 |    1 +
-> >   drivers/ram/rockchip/sdram_rk3576.c           |   65 +
-> >   drivers/reset/Makefile                        |    2 +-
-> >   drivers/reset/rst-rk3576.c                    |  647 ++
-> >   dts/upstream/Bindings/arm/rockchip.yaml       |    5 +
-> >   .../Bindings/clock/rockchip,rk3576-cru.yaml   |   56 +
-> >   .../power/rockchip,power-controller.yaml      |    1 +
-> >   .../dt-bindings/clock/rockchip,rk3576-cru.h   |  592 ++
-> >   .../dt-bindings/power/rockchip,rk3576-power.h |   30 +
-> >   .../dt-bindings/reset/rockchip,rk3576-cru.h   |  564 ++
-> >   .../src/arm64/rockchip/rk3576-pinctrl.dtsi    | 5775 +++++++++++++++++
-> >   .../src/arm64/rockchip/rk3576-roc-pc.dts      |  736 +++
-> >   dts/upstream/src/arm64/rockchip/rk3576.dtsi   | 1717 +++++
-> >   include/configs/rk3576_common.h               |   42 +
-> >   include/configs/roc-pc-rk3576.h               |   15 +
-> >   tools/rkcommon.c                              |    1 +
-> >   46 files changed, 14798 insertions(+), 8 deletions(-)
-> >   create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
-> >   create mode 100644 arch/arm/dts/rk3576-u-boot.dtsi
-> >   create mode 100644 arch/arm/include/asm/arch-rk3576/boot0.h
-> >   create mode 100644 arch/arm/include/asm/arch-rk3576/gpio.h
-> >   create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3576.h
-> >   create mode 100644 arch/arm/include/asm/arch-rockchip/grf_rk3576.h
-> >   create mode 100644 arch/arm/include/asm/arch-rockchip/ioc_rk3576.h
-> >   create mode 100644 arch/arm/mach-rockchip/rk3576/Kconfig
-> >   create mode 100644 arch/arm/mach-rockchip/rk3576/Makefile
-> >   create mode 100644 arch/arm/mach-rockchip/rk3576/clk_rk3576.c
-> >   create mode 100644 arch/arm/mach-rockchip/rk3576/rk3576.c
-> >   create mode 100644 arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
-> >   create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
-> >   create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
-> >   create mode 100644 configs/roc-pc-rk3576_defconfig
-> >   create mode 100644 drivers/clk/rockchip/clk_rk3576.c
-> >   create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3576.c
-> >   create mode 100644 drivers/ram/rockchip/sdram_rk3576.c
-> >   create mode 100644 drivers/reset/rst-rk3576.c
-> >   create mode 100644 dts/upstream/Bindings/clock/rockchip,rk3576-cru.ya=
-ml
-> >   create mode 100644 dts/upstream/include/dt-bindings/clock/rockchip,rk=
-3576-cru.h
-> >   create mode 100644 dts/upstream/include/dt-bindings/power/rockchip,rk=
-3576-power.h
-> >   create mode 100644 dts/upstream/include/dt-bindings/reset/rockchip,rk=
-3576-cru.h
-> >   create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-pinctrl.dtsi
-> >   create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-roc-pc.dts
-> >   create mode 100644 dts/upstream/src/arm64/rockchip/rk3576.dtsi
-> >   create mode 100644 include/configs/rk3576_common.h
-> >   create mode 100644 include/configs/roc-pc-rk3576.h
-> >
->=20
-
-
-
+> 
+>>
+>>>    		return clk_init_sdc(priv, rate);
+>>>    		break;
+>>>    	case GCC_BLSP2_UART2_APPS_CLK: /*UART2*/
+>>
 
