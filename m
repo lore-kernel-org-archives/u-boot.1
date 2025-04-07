@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45C7C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099F2C3601A
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46C6182CEA;
-	Mon,  7 Apr 2025 12:52:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9321182E25;
+	Mon,  7 Apr 2025 12:52:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NezqFwam";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mYFrO/gf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D462882CF4; Mon,  7 Apr 2025 12:52:13 +0200 (CEST)
+ id 1F07C82CE7; Mon,  7 Apr 2025 12:52:19 +0200 (CEST)
 Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
  [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48DAF82CE7
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:52:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D935382E25
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:52:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-7396f13b750so4254351b3a.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:52:11 -0700 (PDT)
+ d2e1a72fcca58-736ab1c43c4so3899449b3a.1
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744023129; x=1744627929; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=buU1WhBzbGFiRO+/awEwijIu6SN5Ti0OJlzaf+GHH6M=;
- b=NezqFwamL1ZXxMbssfKX82vvwaILcsVCKnxRXSK1bsQ8Yigvxrv0ui/+yPiJ0Ia54s
- AANYwiB/6kQX+gJrn9seF3p0McdiwQN3XTTjlaTN6pZFr/tuEy0kUhK3pnRhWm8NpHt5
- r1YU8xjR9ID7gPgikphJLGqIT3UTGgDP1GrP8=
+ d=chromium.org; s=google; t=1744023135; x=1744627935; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o05CNkrknchzyUAM1qAlhvth7MEAgKTosWfQywOMKfc=;
+ b=mYFrO/gfj6rNQUPla0HCYv6JIKBPRMCwBhb26zV9hTk+KMRwLSqYexw5Ztc6m5LKZl
+ ASL3HaIn72DLvrXVl2tfwcIJKXo8/21v3jplTED2piAFXqM51NpA8ekB4JRo204vn6CB
+ vBR3UoKkSHvKccFIPAizDFPkNQ2J3hhRPlVwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744023129; x=1744627929;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=buU1WhBzbGFiRO+/awEwijIu6SN5Ti0OJlzaf+GHH6M=;
- b=Vyj9hxhdlHfIil6jYqDqnzhp1uXR1EVYDtuy2+QP96GkkZrbUkQ5UR0D0glJbkkJpz
- 5jMATpo1XYiFE6asTcpmhidkmpBR2ax2MKLNxTnLBpD55X89Ijy13XJ29CMzkIvDd9Xl
- pc6uh6fvjliHPrh1i4PaiAxxrZhEgJnQ6cwl51Aomj9nYP7+vRQhzII2GKhuoUBKpAyu
- ishZhE8fuzKqtc56hGjqA7e/PoGEIlHVVAc/+VoMN1CRMYZyT0H61iEqLdscWujqqiF3
- MbOor70x8rIr05WR2w3+Un6sybYycEjrY+L/0Z3syCCQ9kE1mYGBp2vY5qrvGu9gkQ+7
- Jwyg==
-X-Gm-Message-State: AOJu0YxsGSGRDhTepEV+AlDBJcvDGcpeq297QKDtjJX+zyme9yJxJLhK
- JoQpoA10sxy9mzWpmsnDOWFbLcFNVytW35Q5OE4jGcV8fnBTaKV0c1Snu0cDzanZXSjuqWdj6Ft
- l+Q==
-X-Gm-Gg: ASbGncucQ6U0uJ1YUdImNWtV8CZH2DS7SRih7oHiDGKE6+E83hgEv/CCRRmvcFwwcEo
- vcdoah6v0nF1IVtN8/jP+dHiDR7LOb+wQd9xDKhc2GC85wlA5v17UjrTpfgokDh8G/R0D1pfRo0
- CFd8sLePS3uwBjwgYDe++TjNAV7lcEvN9gJhJmX/2LkCwu8rw70AVFWZulzV+NE8O3ENmmdFLB1
- 3m0mgqK7Fmm6tUB+P5kuh7ac0b1jyjNdw2MZZCXzAhmJtGa4RL03kmgKcoI/0o6YeKbIVSkcpAW
- Qi8tGDiASI3lvWttVjIoyebCl9eDHYGtHlZOvQ==
-X-Google-Smtp-Source: AGHT+IH62aEE3aqvoxdoO5avJlUt5mrGzXlnbNYnVTFmB81J6CcdFneudQPlMkIrMdf84LrYn2841w==
-X-Received: by 2002:a05:6a00:1482:b0:730:97a6:f04 with SMTP id
- d2e1a72fcca58-73b6aa3dca6mr11043074b3a.7.1744023129116; 
- Mon, 07 Apr 2025 03:52:09 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744023135; x=1744627935;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o05CNkrknchzyUAM1qAlhvth7MEAgKTosWfQywOMKfc=;
+ b=lBBcDJMMstxQtqTxpuwn6UPU4HB31R/AdwpsD4SuYKBPvszNLirjYpFe2fewhqHQ3h
+ aVBL4kwVcOZh7GarBiXccFuPc1QsAy5dCjRPIvDcH01WGwFbXT3Am05T+UYRkDOdPBRA
+ xaFzDkww8WwJrnVwZbMi4jHIrTfAgBzx7SIBAN4N6Rx/B9ogfOCpKJAU64cQ7W2mqRnF
+ zQNW7ypPALyldN7oA9lJ5I1YJF9mKEZKRA85BL8avcBf+iEo1nOAOV2fXNJd1eTS4EQ8
+ wxZ51kQTOwFRNGHNWp7x9zLckiSutZjE8yPlDoK6oCIbmUjO2AkXBp2wsTpwlKpvfA4o
+ B28w==
+X-Gm-Message-State: AOJu0YxwJWycmRRVR+i6raqsQ/iZTTT/QtGAeipadu0zYoyomwbDYzj+
+ VxwG+DoGQXcZSICPWL2vykwZZ/k4iAOIVl4YFQg5pty+0IHL1hCoW8IHIn+2RYpUUTWOmjCmbr2
+ FCQ==
+X-Gm-Gg: ASbGncvXgjSJaJF+v3HD2iBHXcaqjVx+rjxcsmkONwWYRgYKrgqoM1IC9b1yMnHL0Hy
+ bI/SkN8KZO9cpkp5AL4r/IkMBjOgk6e9Ewhi+2nG28Aj6XI/becMJqIwFCd7rmAlzLjCCm2ylAK
+ +i2nhSXGaxvjP4clq9yixpHH9ipCeeATWcKFRkVKVjb0MjslRa00KBx/ibr7DWF4SormT2ku++o
+ Gyl+oWNCbR15X4ZHeCS6Xd1ACsGOZoERSy9C0Ia93rkitVQ2Ow/pX2SB2UxwfeN4LLlWhuja5ZM
+ 1dsccTx47iSSffE9h1t7KVVQ4+lXt0D2XE8YdQ==
+X-Google-Smtp-Source: AGHT+IGBdEc1NweosG7Ip3qc3daDRMJps7ymO0qqI4kqVLvl4XihWEibP/J2XOhOVWKmMw/I52fWWA==
+X-Received: by 2002:a05:6a00:a89:b0:737:e73:f64b with SMTP id
+ d2e1a72fcca58-739e48c6f91mr15342964b3a.1.1744023134709; 
+ Mon, 07 Apr 2025 03:52:14 -0700 (PDT)
 Received: from chromium.org ([205.220.129.36])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-739d97ee7a0sm8138736b3a.41.2025.04.07.03.52.03
+ d2e1a72fcca58-739d97ee7a0sm8138736b3a.41.2025.04.07.03.52.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 03:52:08 -0700 (PDT)
+ Mon, 07 Apr 2025 03:52:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Douglas Anderson <dianders@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/5] patman: Separate gitutil fully
-Date: Mon,  7 Apr 2025 22:51:42 +1200
-Message-ID: <20250407105151.689453-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/5] patman: Untangle settings from gitutil
+Date: Mon,  7 Apr 2025 22:51:43 +1200
+Message-ID: <20250407105151.689453-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250407105151.689453-1-sjg@chromium.org>
+References: <20250407105151.689453-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,32 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The gitutil module is supposed to be independent from patman but one
+piece was missed in the series which separated them.
 
-The gitutil module uses Patman's settings module, which is not allowed
-as it is supposed to be a separate package. This series ties up this
-dependency.
+Move the settings setup out of gitutil
 
-This series depends on these two patches being applied:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-https://patchwork.ozlabs.org/project/uboot/patch/20250227192735.406389-1-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20250328130225.2607974-1-sjg@chromium.org/
+ tools/patman/control.py       | 4 ++++
+ tools/u_boot_pylib/gitutil.py | 3 ---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-
-Simon Glass (5):
-  patman: Untangle settings from gitutil
-  patman: Pass the alias dict into gitutil.build_email_list()
-  patman: Pass the alias dict into gitutil.email_patches()
-  patman: Pass aliases to Series.MakeCcFile()
-  patman: Update Series.ShowActions() to pass alias
-
- tools/patman/control.py       | 11 ++++++++---
- tools/patman/func_test.py     |  8 ++++----
- tools/patman/series.py        | 32 ++++++++++++++++++++++----------
- tools/u_boot_pylib/gitutil.py | 34 ++++++++++++++--------------------
- 4 files changed, 48 insertions(+), 37 deletions(-)
-
+diff --git a/tools/patman/control.py b/tools/patman/control.py
+index b8a45912058..c1b6e41e2d2 100644
+--- a/tools/patman/control.py
++++ b/tools/patman/control.py
+@@ -13,6 +13,7 @@ import sys
+ 
+ from patman import checkpatch
+ from patman import patchstream
++from patman import settings
+ from u_boot_pylib import gitutil
+ from u_boot_pylib import terminal
+ 
+@@ -20,6 +21,9 @@ from u_boot_pylib import terminal
+ def setup():
+     """Do required setup before doing anything"""
+     gitutil.setup()
++    alias_fname = gitutil.get_alias_file()
++    if alias_fname:
++        settings.ReadGitAliases(alias_fname)
+ 
+ 
+ def prepare_patches(col, branch, count, start, end, ignore_binary, signoff,
+diff --git a/tools/u_boot_pylib/gitutil.py b/tools/u_boot_pylib/gitutil.py
+index 0376bece3e6..8935b6cc847 100644
+--- a/tools/u_boot_pylib/gitutil.py
++++ b/tools/u_boot_pylib/gitutil.py
+@@ -693,9 +693,6 @@ def setup():
+     # Check for a git alias file also
+     global USE_NO_DECORATE
+ 
+-    alias_fname = get_alias_file()
+-    if alias_fname:
+-        settings.ReadGitAliases(alias_fname)
+     cmd = log_cmd(None, count=0)
+     USE_NO_DECORATE = (command.run_one(*cmd, raise_on_error=False)
+                        .return_code == 0)
 -- 
 2.43.0
 
-base-commit: d47b5693e21f78d8cd8caa8fcd9e64fd6ae85759
-branch: pata
