@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E6FC369A1
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCD5C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:50:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F00AC83164;
-	Tue,  8 Apr 2025 00:48:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EFB8831D6;
+	Tue,  8 Apr 2025 00:48:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="W6khNrpp";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WfXD7JQ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D95D683158; Tue,  8 Apr 2025 00:48:42 +0200 (CEST)
+ id BAAC7831D4; Tue,  8 Apr 2025 00:48:47 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D39F8318F
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:48:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 745CB831B0
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:48:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744066118; bh=HID4LB+0KgB/NTzOCfVJPx8hwPpQo65fCH/i4oQ93VM=;
- b=W6khNrppDp82CL4FmOPJIwWwh/knwFx7HzmdDmjQbOakmrHIqQmQSs+10/ikGykslkr249P8x
- 0iKZQOeV9FQ1Ju1vsIf5iVg6NNgf0wq3mgmWp+96wxFwrqtVg97YLSZHo9C1uNu+PIcPMfPZxNt
- fI/tL7m9XWWfqJunMoUMCqEzCKsHt6dmhgsxd+kBeilNEMJ4OVdTjpfTLvZF5uqGZc8reGC6o2y
- 9yLtoIg5UXymRefjXdq0nH6tFSpuT8Y3CHCXCCb7gIH53TzPvJdPevsDnAOive4vKqt3RHVWA97
- cFIw9zATP3AEFLTJ+qLqBjS36OLXisPMWlUGFLBf/d1w==
-X-Forward-Email-ID: 67f456449fd75b9b96512869
+ t=1744066123; bh=64z6Nrrjg3PsIrpcjUou2jqH8OUtrLrj3cD0vNFLv8A=;
+ b=WfXD7JQ0zv3uMVawFCgz5lD60lxB7AP4aOoEsmq77MDk90Xu4HSY1QgrCWgcBHHnK37tPAK/k
+ NNoT04BulA6p5wh8lABJecJ+DPpzmtUV8ZeupqQ+5V48IrHszdfKJFeLUmdkOJRA2Vw8Eco9KxB
+ lart+dIcKIpAwz68DYxsNHnywDU1cfzEcdYNzodM2ZReyfXLVGevHHGK9aoU5A7oBa07ajLs9hM
+ 5kPUbSau15/AKSdKVbPAQuGrGofTrac909bixvxswNNldHq1ik+3JYISYYfy4YT1i095yHlWLwp
+ 0olchVs2L+pLbu592NeU0UtUoIqDqOeafl+GPIOySGbQ==
+X-Forward-Email-ID: 67f456489fd75b9b9651287e
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.0.1
@@ -44,15 +44,13 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 13/30] arm64: dts: rockchip: Enable onboard eMMC on Radxa
- E20C
-Date: Mon,  7 Apr 2025 22:46:46 +0000
-Message-ID: <20250407224743.2423921-14-jonas@kwiboo.se>
+ Yifeng Zhao <yifeng.zhao@rock-chips.com>
+Subject: [PATCH v2 14/30] rockchip: mkimage: Add support for RK3528
+Date: Mon,  7 Apr 2025 22:46:47 +0000
+Message-ID: <20250407224743.2423921-15-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250407224743.2423921-1-jonas@kwiboo.se>
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
@@ -74,55 +72,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Radxa E20C may come with an onboard eMMC (8GB / 16GB / 32GB / 64GB).
+From: Yifeng Zhao <yifeng.zhao@rock-chips.com>
 
-Enable support for the onboard eMMC on Radxa E20C.
+Add support for generating Rockchip Boot Image for RK3528.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Link: https://lore.kernel.org/r/20250305214108.1327208-4-jonas@kwiboo.se
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Similar to RK3568, the RK3528 has 64 KiB SRAM and 4 KiB of it is
+reserved for BootROM.
 
-[ upstream commit: 3a01b5f14a8ae2d45aea5aeed30001ac1655de86 ]
-
-(cherry picked from commit bd4c8a1c08f92d863d89c0ddff59e5f5bc6a1e34)
+Signed-off-by: Yifeng Zhao <yifeng.zhao@rock-chips.com>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- .../src/arm64/rockchip/rk3528-radxa-e20c.dts      | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+v2: No change
+---
+ tools/rkcommon.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts b/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts
-index 5346ef457c2a..57a446b5cbd6 100644
---- a/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts
-@@ -15,6 +15,10 @@
- 	model = "Radxa E20C";
- 	compatible = "radxa,e20c", "rockchip,rk3528";
- 
-+	aliases {
-+		mmc0 = &sdhci;
-+	};
-+
- 	chosen {
- 		stdout-path = "serial0:1500000n8";
- 	};
-@@ -133,6 +137,17 @@
- 	status = "okay";
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index 3e52236b15a8..f158d1562284 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -134,6 +134,7 @@ static struct spl_info spl_infos[] = {
+ 	{ "rk3399", "RK33", 0x30000 - 0x2000, false, RK_HEADER_V1 },
+ 	{ "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
+ 	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
++	{ "rk3528", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3588", "RK35", 0x100000 - 0x1000, false, RK_HEADER_V2 },
  };
- 
-+&sdhci {
-+	bus-width = <8>;
-+	cap-mmc-highspeed;
-+	no-sd;
-+	no-sdio;
-+	non-removable;
-+	vmmc-supply = <&vcc_3v3>;
-+	vqmmc-supply = <&vcc_1v8>;
-+	status = "okay";
-+};
-+
- &uart0 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&uart0m0_xfer>;
 -- 
 2.49.0
 
