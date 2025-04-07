@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7736BC3601A
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8396FC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 390FD82D6B;
-	Mon,  7 Apr 2025 12:52:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87A3F82E31;
+	Mon,  7 Apr 2025 12:52:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l4I1RlwR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BXuiqHjb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AC6E82991; Mon,  7 Apr 2025 12:52:34 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 3BC1482CEA; Mon,  7 Apr 2025 12:52:45 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C65D782E68
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:52:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC06A82DB0
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:52:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-22403cbb47fso42501365ad.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:52:30 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-7359aca7ef2so5764246b3a.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:52:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744023149; x=1744627949; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744023161; x=1744627961; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qjDegDFr4gCyCZQDblyq2svv+gdHdHLePLqi/yVKhwA=;
- b=l4I1RlwRsdBBpTMRv4TldqXGWBZbFO5vFda/yXi5r+N8HLPBYRGqQLGWE8w178Ewys
- ji+wDmb+HrEIAt20IYvYnVPOOIea6rJ+e+p75kGHIFqZlxzLUSFP1s/0V6jwuzzsrcfX
- PJaAykOAlw8hGUj8Hjav4b5Oj3lLodBnLAMDs=
+ bh=BYospauxUdc0V5ZGry5z20Gz3bhXW9MGxFoE4E4XOY4=;
+ b=BXuiqHjbXKSod8SK8ljAQISe6xT8SP/sjnuyYiLNC8pWQXUc6hVDXSvolsiXpBdMHy
+ pmVOLKUUe7Iwot7vqIkst6BjtDBNIsw6SCpq2qrmdINRmt4HOBbtC8L4LJoHEas6VrG4
+ OLAQgJBRxPNVtRGqa7lWu8hO3Lv9MqnwGDTII=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744023149; x=1744627949;
+ d=1e100.net; s=20230601; t=1744023161; x=1744627961;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qjDegDFr4gCyCZQDblyq2svv+gdHdHLePLqi/yVKhwA=;
- b=vTs2jrW/BdiCZY16Tu+dcyQVXI2v/rWx6NE+KQJOShOGAsfiHm85VHLWAw4Qtnm1cj
- 6r8BopMlaKHOtvi6N9rapIpqcvgnjJiUh49k2mBTxlKs9gWwwC5cJiqt7sJqTlXqRCWM
- QYRFuWMLpcZ7jkqtJ4cd/Gbbe1q+90l40lCURJEghTZD9LjTh4jgmfsWd5sCCcws5AQx
- mBaqPlAimfpcdv/evYycwGiLAMqYq12lM6mvyaIDwFxrYK7AAHk7lzC+0UwEevS1rU0k
- pJkGntx2raFYtk1ahlh0w3bzdJEURGYNltYGQkpllsUnDFgoCmkY4f5N5JF8103a/1BY
- W5gA==
-X-Gm-Message-State: AOJu0YxT1exGHrQVV5H63TNGt4GfWuak6h8+b4N5gqTgdOI41m8Di2mN
- ilIzBqJvV6X4GRFsoHvF86omPExBruVMurbF8ri5Y9rtpMiFG226ZKGJGukyuftcl3fp3V7NBCY
- hwA==
-X-Gm-Gg: ASbGncszdiJRi/bzeoqvlUpHHh3WcseBdzzFlpx3T4WdlFgcTGuppsCTyX2/Aaryd9K
- Svam0pfZ+O3nA7loqrXVkyDw9fFhxYnEKnlIwe0WZmdV3NJpY6gctpIup7jR+HhRog2WG+d/jio
- 4vQnqFQi4usZLenWh4QQ4Kv583l6EZRZMddFtA7tQBcJ3SUEW6yEXxjhBEwZVfgOzrSJspYh6Mj
- obNJWxbFzjlk7aJiuuzue+K+glG1y5pmPZM9HmP/LlWnIPr3UXT/wnRjTaTLyy6BR5n8CUl5vAC
- kFCgU57FAvQ2TNqEK6RMwdUeNokKlUCciIOucg==
-X-Google-Smtp-Source: AGHT+IHUQ5jQUtub0WGmk86LIx/HmoKZEmP7WnGWCvQfK365Z+T/jId3PNjtdSXi4RvIax3I2bus5A==
-X-Received: by 2002:a17:903:13ce:b0:215:b75f:a1cb with SMTP id
- d9443c01a7336-22a8a85a251mr163946335ad.9.1744023148643; 
- Mon, 07 Apr 2025 03:52:28 -0700 (PDT)
+ bh=BYospauxUdc0V5ZGry5z20Gz3bhXW9MGxFoE4E4XOY4=;
+ b=U4gSJlBih0Y2J8Mb1j8vXgAB3VgCIXsXjfWSUGz9BBUE+zAidojEPStmUjJWucYUdl
+ /VhQmzlE2eyeM1w71C/f5m/jpdNUncgyT8gXueOA3Gj4wsPDi8zbfdrarR9bU6sBQg9j
+ i64AX/KFWukmScQRzjmyQ648KI3PFYsM+u/GGRwWps/lJ23X2/qExLGb2X/KVj59P+BM
+ L21TsZmFy7hsbJmKXwqTJlPWTBOoLgjJxtqY9iJfOsp+cDnJacd21HEWfKyOetI5TLEz
+ 9F49olewzMvbtXCyswWCzjoKPl8Yj9r2TyEwR9fauXyRTKwC6fumEQMh0W42cULpnhiy
+ s0Ig==
+X-Gm-Message-State: AOJu0YzrZrk2vEpyK7o2Yu736PEXnzp+o3OFs2ylgV61/DRqMFxVXNst
+ YgNZ+jiJthLuoidlxdHu7haOXHfFQroX83GQLxnLV0X/JZmhkG77xSxsZL6I6tj+HTOiymC35zW
+ PbQ==
+X-Gm-Gg: ASbGncseYQDvrXzLd4dsjL0CjWw6MJPrtcojUyq+jHZc6vjsfauu/LdFwaPzqN0tcGE
+ TROYzijZ94wYssrBXhwyUok4LpyD/69czPSx4YTdb3M8idWTnjvRDrzJDBHSNiHs83xsmTzAzP6
+ gmZdRAaE+g4lq1UTWNSKvbwUimsCmtIvmWaJZ4PC9fRGgQRSwaePhV95IchU2O24xFfJAg/l5ND
+ JC1DXfE2iZIM3ZUqFh7+OpwK3b7tZbh2/WqQtbdfThJ+DhoSs0Rf+DJ92KMrMaEKw0lOKyGTwfA
+ APfDCivYHjXgYK3SQ1GoFo+FomtjqrXaVlOcS4SR0SyOvDL5
+X-Google-Smtp-Source: AGHT+IHgKm4eYZ6k1jA178kP5LYbV81tTwEqptFOghIjDk/OVcVo4OK88ojDLXZ0Xdcu2ja1Hgp0ig==
+X-Received: by 2002:a05:6a21:497:b0:1fe:90c5:7d00 with SMTP id
+ adf61e73a8af0-20108145e9emr18206654637.28.1744023160824; 
+ Mon, 07 Apr 2025 03:52:40 -0700 (PDT)
 Received: from chromium.org ([205.220.129.36])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-739d97ee7a0sm8138736b3a.41.2025.04.07.03.52.22
+ d2e1a72fcca58-739d97ee7a0sm8138736b3a.41.2025.04.07.03.52.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 03:52:27 -0700 (PDT)
+ Mon, 07 Apr 2025 03:52:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Douglas Anderson <dianders@chromium.org>,
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/5] patman: Pass the alias dict into gitutil.email_patches()
-Date: Mon,  7 Apr 2025 22:51:45 +1200
-Message-ID: <20250407105151.689453-4-sjg@chromium.org>
+Subject: [PATCH 4/5] patman: Pass aliases to Series.MakeCcFile()
+Date: Mon,  7 Apr 2025 22:51:46 +1200
+Message-ID: <20250407105151.689453-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250407105151.689453-1-sjg@chromium.org>
 References: <20250407105151.689453-1-sjg@chromium.org>
@@ -94,140 +94,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than accessing the settings module in this function, require the
-alias dict to be passed in.
+Rather than accessing settings directly, pass the aliases in, so that
+we can do the same from tests. With further work this will allow the
+tests to work without using settings.alias
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/control.py       |  2 +-
- tools/patman/func_test.py     |  5 +++--
- tools/u_boot_pylib/gitutil.py | 19 ++++++++-----------
- 3 files changed, 12 insertions(+), 14 deletions(-)
+ tools/patman/control.py   |  3 ++-
+ tools/patman/func_test.py |  2 +-
+ tools/patman/series.py    | 13 ++++++++++---
+ 3 files changed, 13 insertions(+), 5 deletions(-)
 
 diff --git a/tools/patman/control.py b/tools/patman/control.py
-index c1b6e41e2d2..f578336c7cc 100644
+index f578336c7cc..13de9b6abfc 100644
 --- a/tools/patman/control.py
 +++ b/tools/patman/control.py
-@@ -153,7 +153,7 @@ def email_patches(col, series, cover_fname, patch_files, process_tags, its_a_go,
-     if its_a_go:
-         cmd = gitutil.email_patches(
-             series, cover_fname, patch_files, dry_run, not ignore_bad_tags,
--            cc_file, in_reply_to=in_reply_to, thread=thread,
-+            cc_file, settings.alias, in_reply_to=in_reply_to, thread=thread,
-             smtp_server=smtp_server)
-     else:
-         print(col.build(col.RED, "Not sending emails due to errors/warnings"))
+@@ -146,7 +146,8 @@ def email_patches(col, series, cover_fname, patch_files, process_tags, its_a_go,
+         smtp_server (str): SMTP server to use to send patches (None for default)
+     """
+     cc_file = series.MakeCcFile(process_tags, cover_fname, not ignore_bad_tags,
+-                                add_maintainers, limit, get_maintainer_script)
++                                add_maintainers, limit, get_maintainer_script,
++                                settings.alias)
+ 
+     # Email the patches out (giving the user time to check / cancel)
+     cmd = ''
 diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index 720746e21f5..b8fb49c34ba 100644
+index b8fb49c34ba..c87c938808c 100644
 --- a/tools/patman/func_test.py
 +++ b/tools/patman/func_test.py
-@@ -206,13 +206,14 @@ class TestFunctional(unittest.TestCase):
-         dry_run = True
-         in_reply_to = mel
-         count = 2
--        settings.alias = {
-+        alias = {
-             'fdt': ['simon'],
-             'u-boot': ['u-boot@lists.denx.de'],
-             'simon': [self.leb],
-             'fred': [self.fred],
-             'joe': [self.joe],
-         }
-+        settings.alias = alias
- 
-         text = self._get_text('test01.txt')
-         series = patchstream.get_metadata_for_test(text)
-@@ -231,7 +232,7 @@ class TestFunctional(unittest.TestCase):
-                                         None, get_maintainer_script)
+@@ -229,7 +229,7 @@ class TestFunctional(unittest.TestCase):
+             series.DoChecks()
+             cc_file = series.MakeCcFile(process_tags, cover_fname,
+                                         not ignore_bad_tags, add_maintainers,
+-                                        None, get_maintainer_script)
++                                        None, get_maintainer_script, alias)
              cmd = gitutil.email_patches(
                  series, cover_fname, args, dry_run, not ignore_bad_tags,
--                cc_file, in_reply_to=in_reply_to, thread=None)
-+                cc_file, alias, in_reply_to=in_reply_to, thread=None)
-             series.ShowActions(args, cmd, process_tags)
-         cc_lines = open(cc_file, encoding='utf-8').read().splitlines()
-         os.remove(cc_file)
-diff --git a/tools/u_boot_pylib/gitutil.py b/tools/u_boot_pylib/gitutil.py
-index 7c9d0deecbb..7d3a0b68c53 100644
---- a/tools/u_boot_pylib/gitutil.py
-+++ b/tools/u_boot_pylib/gitutil.py
-@@ -5,7 +5,6 @@
- import os
- import sys
+                 cc_file, alias, in_reply_to=in_reply_to, thread=None)
+diff --git a/tools/patman/series.py b/tools/patman/series.py
+index 51ae7f04c89..4322882abd5 100644
+--- a/tools/patman/series.py
++++ b/tools/patman/series.py
+@@ -242,7 +242,7 @@ class Series(dict):
  
--from patman import settings
- from u_boot_pylib import command
- from u_boot_pylib import terminal
+     def GetCcForCommit(self, commit, process_tags, warn_on_error,
+                        add_maintainers, limit, get_maintainer_script,
+-                       all_skips):
++                       all_skips, alias):
+         """Get the email CCs to use with a particular commit
  
-@@ -437,7 +436,7 @@ def check_suppress_cc_config():
+         Uses subject tags and get_maintainers.pl script to find people to cc
+@@ -262,6 +262,9 @@ class Series(dict):
+             all_skips (set of str): Updated to include the set of bouncing email
+                 addresses that were dropped from the output. This is essentially
+                 a return value from this function.
++            alias (dict): Alias dictionary
++                key: alias
++                value: list of aliases or email addresses
  
+         Returns:
+             list of str: List of email addresses to cc
+@@ -284,7 +287,7 @@ class Series(dict):
+         return cc
  
- def email_patches(series, cover_fname, args, dry_run, warn_on_error, cc_fname,
--                  self_only=False, alias=None, in_reply_to=None, thread=False,
-+                  alias, self_only=False, in_reply_to=None, thread=False,
-                   smtp_server=None):
-     """Email a patch series.
+     def MakeCcFile(self, process_tags, cover_fname, warn_on_error,
+-                   add_maintainers, limit, get_maintainer_script):
++                   add_maintainers, limit, get_maintainer_script, alias):
+         """Make a cc file for us to use for per-commit Cc automation
  
-@@ -449,10 +448,10 @@ def email_patches(series, cover_fname, args, dry_run, warn_on_error, cc_fname,
-         warn_on_error (bool): True to print a warning when an alias fails to
-             match, False to ignore it.
-         cc_fname (str): Filename of Cc file for per-commit Cc
--        self_only (bool): True to just email to yourself as a test
--        alias (dict or None): Alias dictionary: (None to use settings default)
-+        alias (dict): Alias dictionary:
-             key: alias
-             value: list of aliases or email addresses
-+        self_only (bool): True to just email to yourself as a test
-         in_reply_to (str or None): If set we'll pass this to git as
-             --in-reply-to - should be a message ID that this is in reply to.
-         thread (bool): True to add --thread to git send-email (make
-@@ -498,7 +497,7 @@ send --cc-cmd cc-fname" cover p1 p2'
-     # Restore argv[0] since we clobbered it.
-     >>> sys.argv[0] = _old_argv0
-     """
--    to = build_email_list(series.get('to'), settings.alias, '--to', warn_on_error)
-+    to = build_email_list(series.get('to'), alias, '--to', warn_on_error)
-     if not to:
-         git_config_to = command.output('git', 'config', 'sendemail.to',
-                                        raise_on_error=False)
-@@ -510,9 +509,9 @@ send --cc-cmd cc-fname" cover p1 p2'
-                   "git config sendemail.to u-boot@lists.denx.de")
-             return None
-     cc = build_email_list(list(set(series.get('cc')) - set(series.get('to'))),
--                          settings.alias, '--cc', warn_on_error)
-+                          alias, '--cc', warn_on_error)
-     if self_only:
--        to = build_email_list([os.getenv('USER')], '--to', settings.alias,
-+        to = build_email_list([os.getenv('USER')], '--to', alias,
-                               warn_on_error)
-         cc = []
-     cmd = ['git', 'send-email', '--annotate']
-@@ -535,14 +534,14 @@ send --cc-cmd cc-fname" cover p1 p2'
-     return cmdstr
+         Also stores in self._generated_cc to make ShowActions() faster.
+@@ -300,6 +303,9 @@ class Series(dict):
+             limit (int): Limit the length of the Cc list (None if no limit)
+             get_maintainer_script (str): The file name of the get_maintainer.pl
+                 script (or compatible).
++            alias (dict): Alias dictionary
++                key: alias
++                value: list of aliases or email addresses
+         Return:
+             Filename of temp file created
+         """
+@@ -314,7 +320,8 @@ class Series(dict):
+                 commit.seq = i
+                 commit.future = executor.submit(
+                     self.GetCcForCommit, commit, process_tags, warn_on_error,
+-                    add_maintainers, limit, get_maintainer_script, all_skips)
++                    add_maintainers, limit, get_maintainer_script, all_skips,
++                    alias)
  
- 
--def lookup_email(lookup_name, alias=None, warn_on_error=True, level=0):
-+def lookup_email(lookup_name, alias, warn_on_error=True, level=0):
-     """If an email address is an alias, look it up and return the full name
- 
-     TODO: Why not just use git's own alias feature?
- 
-     Args:
-         lookup_name (str): Alias or email address to look up
--        alias (dict or None): Alias dictionary: (None to use settings default)
-+        alias (dict): Alias dictionary
-             key: alias
-             value: list of aliases or email addresses
-         warn_on_error (bool): True to print a warning when an alias fails to
-@@ -589,8 +588,6 @@ def lookup_email(lookup_name, alias=None, warn_on_error=True, level=0):
-     Recursive email alias at 'mary'
-     ['j.bloggs@napier.co.nz', 'm.poppins@cloud.net']
-     """
--    if not alias:
--        alias = settings.alias
-     lookup_name = lookup_name.strip()
-     if '@' in lookup_name:      # Perhaps a real email address
-         return [lookup_name]
+             # Show progress any commits that are taking forever
+             lastlen = 0
 -- 
 2.43.0
 
