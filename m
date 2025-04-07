@@ -4,67 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8D6C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 12:39:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F60C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 12:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9179A82E9A;
-	Mon,  7 Apr 2025 14:38:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cknow.org
+	by phobos.denx.de (Postfix) with ESMTP id 36C1082E38;
+	Mon,  7 Apr 2025 14:50:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=cknow.org header.i=@cknow.org header.b="y2mYCb4I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DsR49Seh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ED5B82D0C; Mon,  7 Apr 2025 12:27:20 +0200 (CEST)
-Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
- [91.218.175.180])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7D8C782E40; Mon,  7 Apr 2025 14:50:35 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DABEF82CF4
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:27:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cknow.org
+ by phobos.denx.de (Postfix) with ESMTPS id 503D582CFD
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 14:50:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=didi.debian@cknow.org
-Mime-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cknow.org; s=key1;
- t=1744021637;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/6m/nJUu/Y88nbC5WK/AjQbFlbCAIlA9wrJR1T7io6E=;
- b=y2mYCb4Ijmfm2RlqIx7/Qmbjj6sIwGRPfNDRfRGjodJ4PLU/E+w7+9b8TzQv4ZusBLajUp
- 0zNKgMmJzspdDQ6RMb3zrg1l/bB2xji59ZZZJNcl1ZHwZCSI1fzYq9EdEI0T+S5qp/BfNN
- inqkYokMhL/OIfMFU9nyavT+Hpnas/4rWZo80D50Fw0pgigLSdKGEoISLAd5vRBKcuiwtF
- mRz+i6lvrXXIBte7a158P0y3RGlxeb36klBfWzg+f5bQmEx7lp7oi98Cb2lrVm1K/7K2Ft
- n2V6EtuHpyeDvsHj3/HRIl8+ZK7c+xb0TJ4JRujMQvoU3jCUAeXO6FFLQYu90w==
-Content-Type: multipart/signed;
- boundary=e67bfe6347b3aa36e547f5648e142fe07bcdc92f2c21d11fc22983397c1f;
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Date: Mon, 07 Apr 2025 12:27:07 +0200
-Message-Id: <D90C2JA20RDJ.103XJHRFDLW4U@cknow.org>
-Cc: "Kever Yang" <kever.yang@rock-chips.com>, "Simon Glass"
- <sjg@chromium.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Joseph
- Chen" <chenjh@rock-chips.com>, "Andy Yan" <andyshrk@163.com>, "Tianling
- Shen" <cnsztl@gmail.com>, "Nicolas Frattaroli"
- <frattaroli.nicolas@gmail.com>, "Jagan Teki" <jagan@amarulasolutions.com>,
- "Akash Gajjar" <gajjar04akash@gmail.com>, <u-boot@lists.denx.de>, "David
- Wu" <david.wu@rock-chips.com>, "Eugen Hristev"
- <eugen.hristev@collabora.com>, "Frank Wunderlich"
- <frank-w@public-files.de>, "Stefan Agner" <stefan@agner.ch>
-Subject: Re: [PATCH v2 6/7] configs: rockchip: Enable ethernet driver on
- RK356x boards
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: "Diederik de Haas" <didi.debian@cknow.org>
-To: "Jonas Karlman" <jonas@kwiboo.se>
-References: <20231001191730.4167035-1-jonas@kwiboo.se>
- <20231001191730.4167035-7-jonas@kwiboo.se> <2086393.9F9pDXStbY@bagend>
- <D8ZTTOA3Q6Q1.39Q6ZX28395IG@cknow.org>
- <050bd778-3f0c-4f8a-9140-aa73a7943cb0@kwiboo.se>
-In-Reply-To: <050bd778-3f0c-4f8a-9140-aa73a7943cb0@kwiboo.se>
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Mon, 07 Apr 2025 14:38:56 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=christopher.obbard@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43690d4605dso28535605e9.0
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 05:50:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744030233; x=1744635033; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PwWpHQkKrr/AZ9hYoTcH7cPlscAUYIHjFcfUWQk6nVg=;
+ b=DsR49Sehzh9M0czQmBYIqQYr3cuh3ugqUvuwhsGOaYz/OgqZ+Z/ZXo7x2T9myATj3S
+ Zqib3p588Jow6WHpoU3M1TKrdmQuFfaQD+ySh8+v4d78GMpH9yWd2/NnqJWDzO2UARYE
+ 5wfEsyDsiPO28VQCCLsLtj4Vs70FpbayGlcpX/qydVDFKY8vfWBI77wFgjRKAmkUpwRV
+ 9uorjXQSOJCPSiJfgGb1SsVoqz/ulAnxIZTXinemJFs4XoyonshwbgyxiDUoN88GjngO
+ faorWQVlmdaxWRux3LIfbq/EPBambir+3vBEYV4n/zipshENH/drON7WCRHXjREISpbO
+ Y82A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744030233; x=1744635033;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PwWpHQkKrr/AZ9hYoTcH7cPlscAUYIHjFcfUWQk6nVg=;
+ b=tXVP+i5xqZq+d5yenxTrldo3fWy3pmwoCXTCg5PH+kNtrZ2FKqZF36d3aIXr/MQ/iC
+ GkB9lc+3Qp7O695uiB+spJ2q2pU/Y4REmJRVirDgVp3eu13BMObOV4Nj5zQx7xPm8dhL
+ 30XAodEwSbkdRqm8f/xyA7NP7vmlTZKjybFzkrZdjeJmrLGuS8iydgllbb4AURE7bcws
+ 8PcY9ijQvISQThwsM4AqdbrQv16MWbPdP0Bqf5GySBQHAjByr8XYvCMV830zluugcY0w
+ xSsHFI9fEKqQhttFfMByJsK94Lb3KrKaCHTqODzdOrfg97rwCOEUC5fuUmJaHIfhH8To
+ u/yw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUhaDsvfJ082uSGMY/P1sbNHAIOJMxvYwW9rpbuhkPNCyLAVvYA/NIzgTGfnB90+8XI8y5KCpQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFnq5BIMdL2fkMuf46tnS4WeyGAzykRHNfdYld/y1pm/qLgWG1
+ 1+H2LPGzhhz9jTRqkp8+nb3d0f1QzQopiyrMYf+5+afiMyZ3q8/N0A0CBhTq+YkAElKKXK0rbv6
+ grI7//Ye4E7+xbtnYhjhdtd4AJWJcuWJgkfP6Ag==
+X-Gm-Gg: ASbGncuwjsvH26ZT94GApShCNslfsfxnuivOplJArMLgv6GvVfofxfeMZJU2Vwt25Tm
+ bJjsHp50ifb5ekbku2xnlVcNo9cTFqxsOjyFiqFSw2ucp8jHEblr6NQ0loWJF4dcTAufXnW0qXL
+ 3/NniU9hagIBwoAVl0/eyR06pd6py2+/e9qLWioimaBO17bDeks5hApLMJ9svOzYn6B7NdjA==
+X-Google-Smtp-Source: AGHT+IEG4BbXiYsCIRivKbRJT2ob3OciHEYguMuhgO3tmQAPPhxRDenLeJnvC7gIzL9pt6Uj697szbXbok+nt+1MNvc=
+X-Received: by 2002:a05:600c:c8a:b0:43c:f597:d584 with SMTP id
+ 5b1f17b1804b1-43ecfa0704amr114163955e9.29.1744030232576; Mon, 07 Apr 2025
+ 05:50:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20250407120536.236003-1-jorge.ramirez@oss.qualcomm.com>
+In-Reply-To: <20250407120536.236003-1-jorge.ramirez@oss.qualcomm.com>
+From: Christopher Obbard <christopher.obbard@linaro.org>
+Date: Mon, 7 Apr 2025 13:50:21 +0100
+X-Gm-Features: ATxdqUFvrYHxWlL4XtzESqLSnhYSjoev7K0etRbsXgajT4W59FIPhHoLRQ-sNug
+Message-ID: <CACr-zFDncaexKRP0JouAo5BDozZEZd+_cT-i8088qxOb-JDRjA@mail.gmail.com>
+Subject: Re: [PATCH 1/5] board: qualcomm: dragonboard820c: udpate readme
+To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+Cc: neil.armstrong@linaro.org, caleb.connolly@linaro.org, 
+ sumit.garg@kernel.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,122 +94,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---e67bfe6347b3aa36e547f5648e142fe07bcdc92f2c21d11fc22983397c1f
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Jorge,
 
-Hi Jonas,
+Long time no speak.
 
-On Mon Apr 7, 2025 at 12:31 AM CEST, Jonas Karlman wrote:
-> On 2025-04-06 22:09, Diederik de Haas wrote:
->> On Thu Jul 11, 2024 at 9:38 PM CEST, Diederik de Haas wrote:
->>> Some time ago I reported to Jonas privately that I had a problem with
->>> my Quartz64 Model A and B and that I bisected it to this commit.
->>> I just verified that the problem is still present in 2024.07, so I
->>> guess it's time to report it to the (right) Mailing List.
->>>
->>> The problem: packet loss, varying, but sometimes massive
->>> Q64-A: The packet loss was usually between 8% and 30%
->>> Q64-B: Packet loss up to 80% sometimes and this also resulted (then) in
->>> its inability to receive a DHCP address.
->>=20
->> I just build a ~2025.04-rc5 (i.e. 'master') version and tried it on my
->> Q64-B and the problem is still there.
->> Furthermore, there have now been several ppl on #quartz64 IRC channel
->> (on Pine64 IRC network) who have confirmed both the problem and the
->> 'solution'/workaround. Hopefully they'll also report here themselves.
+On Mon, 7 Apr 2025 at 13:05, Jorge Ramirez-Ortiz
+<jorge.ramirez@oss.qualcomm.com> wrote:
 >
-> I did a quick test on my Q64-A and can confirm it sometime behaves
-> strange when Ethernet has been initialized in U-Boot.
+> Update build instructions.
 >
-> At times my iperf3 test report ~0-1 Mbits/sec instead of the more normal
-> ~941 Mbits/sec. After one (or more) "ifconfig eth0 down/up" cycle
-> everything seemed to work okay again. However after one (or more) eth0
-> down/up cycle the retries was no longer 0 and speed could instead be
-> ~0-1 Mbits/sec.
+> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Your patch subject has a typo in "udpate" -> "update.
+
+With that fixed:
+Reviewed-by: Christopher Obbard <christopher.obbard@linaro.org>
+
+> ---
+>  board/qualcomm/dragonboard820c/readme.txt | 47 ++++++++++-------------
+>  1 file changed, 21 insertions(+), 26 deletions(-)
 >
-> I will see if I can replicate this on other rk3566 boards beside Q64.
+> diff --git a/board/qualcomm/dragonboard820c/readme.txt b/board/qualcomm/d=
+ragonboard820c/readme.txt
+> index 966e9520e85..a01d24122cb 100644
+> --- a/board/qualcomm/dragonboard820c/readme.txt
+> +++ b/board/qualcomm/dragonboard820c/readme.txt
+> @@ -16,10 +16,7 @@
+>                       Build & Run instructions
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
 >
-> Can you please try one or more "ifconfig eth0 down/up" cycle and see if
-> that improves your packet loss issue?
-
-I used ``ifdown end0`` and ``ifup end0``, but also with more direct
-``ip`` calls and whether it *appears* to work, seems rather random.
-I've noticed that ``ping -c50 <ip-address>`` is a reliable way to show
-the problem. Often I'm in the 90-95%+ packet loss range, but I've had 1
-time where it was 'only' 74%. But which packet number succeeds? I have
-not found a way to predict that. If that happens to be packet nr 1, 2 or
-3, that may give the *impression* that it (~) works.
-That's also basically a requirement for DHCP to work ...
-
-What was interesting is that network 'topology' may be a factor?
-Most of my tests were ``ping -c50 192.168.2.1`` ie to my router, which
-is also my (caching) DNS server and DHCP server (normally; I switched to
-a static address for these tests).
-I assumed that was the most basic test possible.
-But 'technically' the route is Q64-B -> switch (192.168.2.5) -> router.
-And when I did the ping from my PC, which is also connected to the
-switch, the ping results were a bit better. Still bad (ie the 74% packet
-loss), but not in the usual 95-100% I got with Q64-B -> router ping.
-
-I have no idea (at all) if this could be relevant or this was just
-another random score. When I use the 'fixed' U-Boot, packet loss is
-consistently 0%, so I'm quite sure neither my switch or router could be
-problematic. I have never noticed any networking problems (although
-technically I'd only look when I notice an issue). Only with those Q64's
-and an U-Boot with this commit in it.
-
-Cheers,
-  Diederik
-
-> Regards,
-> Jonas
+> -1) Install mkbootimg and dtbTool from Codeaurora:
+> -
+> -   git://codeaurora.org/quic/kernel/skales
+> -   commit 8492547e404e969262d9070dee9bdd15668bb70f worked for me.
+> +1) Install mkbootimg
 >
->>=20
->>> And the fix in my case has always been easy:
->>>
->>> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-r=
-k3566_defconfig
->>> index 1ea8e0f40cc..641452f9162 100644
->>> --- a/configs/quartz64-a-rk3566_defconfig
->>> +++ b/configs/quartz64-a-rk3566_defconfig
->>> @@ -67,9 +67,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
->>>  CONFIG_SPI_FLASH_GIGADEVICE=3Dy
->>>  CONFIG_SPI_FLASH_MACRONIX=3Dy
->>>  CONFIG_SPI_FLASH_WINBOND=3Dy
->>> -CONFIG_PHY_MOTORCOMM=3Dy
->>> -CONFIG_DWC_ETH_QOS=3Dy
->>> -CONFIG_DWC_ETH_QOS_ROCKCHIP=3Dy
->>>  CONFIG_NVME_PCI=3Dy
->>>  CONFIG_PCIE_DW_ROCKCHIP=3Dy
->>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
->>> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-r=
-k3566_defconfig
->>> index f61b2c181a1..aae5d66edeb 100644
->>> --- a/configs/quartz64-b-rk3566_defconfig
->>> +++ b/configs/quartz64-b-rk3566_defconfig
->>> @@ -65,9 +65,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
->>>  CONFIG_SPI_FLASH_GIGADEVICE=3Dy
->>>  CONFIG_SPI_FLASH_MACRONIX=3Dy
->>>  CONFIG_SPI_FLASH_WINBOND=3Dy
->>> -CONFIG_PHY_REALTEK=3Dy
->>> -CONFIG_DWC_ETH_QOS=3Dy
->>> -CONFIG_DWC_ETH_QOS_ROCKCHIP=3Dy
->>>  CONFIG_NVME_PCI=3Dy
->>>  CONFIG_PCIE_DW_ROCKCHIP=3Dy
->>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
->>>
->>> IOW: a (partial) revert of commit 25f56459aebc
-
---e67bfe6347b3aa36e547f5648e142fe07bcdc92f2c21d11fc22983397c1f
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQT1sUPBYsyGmi4usy/XblvOeH7bbgUCZ/OofgAKCRDXblvOeH7b
-bn40AQC3uBRuWmguTW0uiG3NU/eXlnlV9E9kIOQ/4ukJ4mTYtwEAwJTAbrZU1HIm
-s8W0BQzw3e+CmYKbHgYQSowEkPgLBQc=
-=V8j/
------END PGP SIGNATURE-----
-
---e67bfe6347b3aa36e547f5648e142fe07bcdc92f2c21d11fc22983397c1f--
+>  2) Setup CROSS_COMPILE to aarch64 compiler or if you use ccache just do
+>     CROSS_COMPILE=3D"ccache aarch64-linux-gnu-"
+> @@ -33,15 +30,15 @@
+>
+>     $ touch rd
+>
+> -5) Generate qualcomm device tree table with dtbTool
+> +5) Append the dtb to the u-boot binary discarding the internal dtb.
+>
+> -   $ dtbTool -o dt.img arch/arm/dts
+> +   $ gzip u-boot-nodtb.bin
+> +   $ cat u-boot.dtb >> u-boot-nodtb.bin.gz
+>
+>  6) Generate Android boot image with mkbootimg:
+>
+> -   $ mkbootimg --kernel=3Du-boot-dtb.bin             \
+> +   $ mkbootimg --kernel=3Du-boot-nodtb.bin.gz          \
+>                 --output=3Du-boot.img                 \
+> -               --dt=3Ddt.img                         \
+>                 --pagesize 4096                     \
+>                 --base 0x80000000                   \
+>                 --ramdisk=3Drd                        \
+> @@ -251,44 +248,42 @@ Wait for 5 seconds before proceeding
+>  [5300] booting linux @ 0x80080000, ramdisk @ 0x82200000 (0), tags/device=
+ tree @ 0x82000000
+>  [5310] Jumping to kernel via monitor
+>
+> -U-Boot 2017.11-00145-ge895117 (Nov 29 2017 - 10:04:06 +0100)
+> +U-Boot 2025.04-rc5-00020-g40a61ca0e7eb-dirty (Apr 07 2025 - 09:37:03 +02=
+00)
+>  Qualcomm-DragonBoard 820C
+>
+> -DRAM:  3 GiB
+> -PSCI:  v1.0
+> -MMC:   sdhci@74a4900: 0
+> +DRAM:  3.5 GiB (effective 3 GiB)
+> +Core:  136 devices, 18 uclasses, devicetree: board
+> +MMC:   Bulk clocks not available (-19), trying core clock
+> +mmc@74a4900: 0
+> +Loading Environment from EXT4... OK
+>  In:    serial@75b0000
+>  Out:   serial@75b0000
+>  Err:   serial@75b0000
+> -Net:   Net Initialization Skipped
+> -No ethernet found.
+> +Net:   No ethernet found.
+>  Hit any key to stop autoboot:  0
+>  switch to partitions #0, OK
+>  mmc0 is current device
+>  Scanning mmc 0:1...
+>  Found /extlinux/extlinux.conf
+>  Retrieving file: /extlinux/extlinux.conf
+> -433 bytes read in 71 ms (5.9 KiB/s)
+>  1:      nfs root
+> -
+> +Enter choice: 1:        nfs root
+>  Retrieving file: /uImage
+> -19397184 bytes read in 2024 ms (9.1 MiB/s)
+> -append: root=3D/dev/nfs rw nfsroot=3D192.168.1.2:/db820c/rootfs,v3,tcp r=
+ootwait ip=3Ddhcp consoleblank=3D0 console=3Dtty0 console=3DttyMSM0,115200n=
+8 earlyprintk earlycon=3Dmsm_serial_dm,0x75b0000 androidboot.bootdevice=3D6=
+24000.ufshc androidboot.verifiedbootstate=3Dorange androidboot.ver0
+> -
+> +append: root=3D/dev/nfs rw nfsroot=3D192.168.1.6:/home/jramirez/Src/qual=
+comm-lt/db820c/rootfs,v3,tcp rootwait ip=3Ddhcp consoleblank=3D0 console=3D=
+tty0 console=3DttyMSM0,115200n8 earlyprintk earlyco0
+>  Retrieving file: /apq8096-db820c.dtb
+> -38134 bytes read in 37 ms (1005.9 KiB/s)
+> -
+> -## Booting kernel from Legacy Image at 95000000 ...
+> +## Booting kernel from Legacy Image at 155000000 ...
+>     Image Name:   Dragonboard820c
+>     Image Type:   AArch64 Linux Kernel Image (uncompressed)
+>     Data Size:    19397120 Bytes =3D 18.5 MiB
+>     Load Address: 80080000
+>     Entry Point:  80080000
+>     Verifying Checksum ... OK
+> -## Flattened Device Tree blob at 93000000
+> -   Booting using the fdt blob at 0x93000000
+> -   Loading Kernel Image ... OK
+> -   Using Device Tree in place at 0000000093000000, end 000000009300c4f5
+> +## Flattened Device Tree blob at 148600000
+> +   Booting using the fdt blob at 0x148600000
+> +Working FDT set to 148600000
+> +   Loading Kernel Image to 80080000
+> +   Using Device Tree in place at 0000000148600000, end 000000014860c4f5
+> +Working FDT set to 148600000
+>
+>  Starting kernel ...
+>
+> --
+> 2.34.1
+>
