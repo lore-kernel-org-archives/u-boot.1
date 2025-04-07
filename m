@@ -4,38 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91DBC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B80EC369A1
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 22:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E357083287;
-	Tue,  8 Apr 2025 00:49:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 389078309A;
+	Tue,  8 Apr 2025 00:49:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GCbCr+D+";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3E9283249; Tue,  8 Apr 2025 00:49:28 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 66B0E82F75
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:49:26 +0200 (CEST)
+ id 87D5382FB4; Tue,  8 Apr 2025 00:49:36 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E356D83285
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 00:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CF0B3169E;
- Mon,  7 Apr 2025 15:49:26 -0700 (PDT)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EAFAB3F694;
- Mon,  7 Apr 2025 15:49:24 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: u-boot@lists.denx.de,
-	Hans de Goede <hdegoede@redhat.com>
-Cc: Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- linux-sunxi@lists.linux.dev
-Subject: [PATCH] sunxi: Use existing serial number for MAC address generation
-Date: Mon,  7 Apr 2025 23:48:36 +0100
-Message-ID: <20250407224836.8825-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.46.3
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=ab18=W2=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1744066169; bh=brQKREzgFTqfTfHyddaUS709+PDXkMEZgr4Q25sVfQA=;
+ b=GCbCr+D+y/ODzQLCtTFNRnGG/2IegpZV3kOK2f8Gw4aMhvEZPcEgmgscllTiOkebaLUZ+Grhl
+ ZeQHEesqbiCE+nVeIV0QKlc7VGA27Imhfw54L7pohfHpGPviqRR5rOz3KLHLVM9N44A87S0Zrm9
+ XyvkV7Pi2KCAwsVBUoX5c0k9etxYQi4bXGxoJ9Dg/reUV6RKkuNXRckmpKqUPSlGSx8hGQr7478
+ gHcr04GgAKmWQPDuttnArDwEa8ZgpdcJMPp+Ieg1IIp15SM1utcM6y8+ngfAFa+mCT9sqwhgqaO
+ h96KdQpuKMIlBNJJwccNWPLvAVKdqcgomHinQhuJTWiQ==
+X-Forward-Email-ID: 67f456769fd75b9b965129ac
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.1
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 26/30] phy: rockchip-inno-usb2: Add support for
+ clkout_ctl_phy
+Date: Mon,  7 Apr 2025 22:46:59 +0000
+Message-ID: <20250407224743.2423921-27-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250407224743.2423921-1-jonas@kwiboo.se>
+References: <20250407224743.2423921-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -54,101 +72,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Allwinner boards we use the first few words of the SID efuse storage
-to generate a serial number, and also MAC addresses for Ethernet and
-WiFi interfaces.
-On some SoCs (A64, at least), when they are using Secure Boot, the SID
-device contains all zeroes when read from U-Boot, because we are running
-in non-secure state. In this case the MAC address would either be random
-or would have to be assigned manually.
+The 480m clk is controlled using regs in the PHY address space and not
+in the USB GRF address space on e.g. RK3528 and RK3506.
 
-Now Trusted-Firmware, which runs in (always) secure EL3, can read the
-SID storage, and has the ability to generate the serial number using the
-same algorithm as U-Boot. It will write this serial number into the DTB,
-from where U-Boot can easily retrieve it.
+Add a clkout_ctl_phy usb2phy_reg to handle enable/disable of the 480m
+clk on these SoCs.
 
-Add a function that reads the "serial-number" property from the DTB, and
-re-generates the SID fields it has been derived from. This will then be
-used by the existing MAC address generation code to assign addresses to
-Ethernet, WiFi, and Bluetooth devices. This code will trigger when an
-MMIO read from the SID returns zeroes.
-
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-Hi,
+v2: New patch
+---
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 43 ++++++++++++++-----
+ 1 file changed, 33 insertions(+), 10 deletions(-)
 
-the corresponding TF-A patch is here:
-https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/13229
-
-Cheers,
-Andre
-
- board/sunxi/board.c | 33 +++++++++++++++++++++++++++++----
- 1 file changed, 29 insertions(+), 4 deletions(-)
-
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index ac9cefc6eac..6225e7d4b10 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -726,13 +726,38 @@ static void parse_spl_header(const uint32_t spl_addr)
- 	env_set_hex("fel_scriptaddr", spl->fel_script_address);
- }
+diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+index 43f6e020a6a0..f40a86bc9dae 100644
+--- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
++++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+@@ -40,11 +40,13 @@ struct rockchip_usb2phy_port_cfg {
+ struct rockchip_usb2phy_cfg {
+ 	unsigned int reg;
+ 	struct usb2phy_reg	clkout_ctl;
++	struct usb2phy_reg	clkout_ctl_phy;
+ 	const struct rockchip_usb2phy_port_cfg port_cfgs[USB2PHY_NUM_PORTS];
+ };
  
--static bool get_unique_sid(unsigned int *sid)
-+/*
-+ * On a secure device the SID MMIO region reads all zeroes, when accessed
-+ * from non-secure world, which U-Boot proper runs in.
-+ * Hopefully TF-A has read the SID content and dumped a serial number,
-+ * compatible with the U-Boot algorithm, into the DTB for us.
-+ */
-+static bool get_sid_from_serial_number(const void *fdt, unsigned int *sid)
+ struct rockchip_usb2phy {
+ 	struct regmap *reg_base;
++	struct regmap *phy_base;
+ 	struct clk phyclk;
+ 	const struct rockchip_usb2phy_cfg *phy_cfg;
+ };
+@@ -165,6 +167,22 @@ static struct phy_ops rockchip_usb2phy_ops = {
+ 	.of_xlate = rockchip_usb2phy_of_xlate,
+ };
+ 
++static void rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap **base,
++					const struct usb2phy_reg **clkout_ctl)
 +{
-+	const struct fdt_property *prop;
-+	unsigned char buffer[9] = { 0 };
-+	int len;
++	struct udevice *parent = dev_get_parent(clk->dev);
++	struct rockchip_usb2phy *priv = dev_get_priv(parent);
++	const struct rockchip_usb2phy_cfg *phy_cfg = priv->phy_cfg;
 +
-+	prop = fdt_get_property(fdt, 0, "serial-number", &len);
-+	if (!prop || len != 17)
-+		return false;
-+
-+	sid[3] = hextoul(prop->data + 8, NULL);
-+	memcpy(buffer, prop->data, 8);
-+	sid[0] = hextoul(buffer, NULL);
-+	sid[1] = 0;
-+	sid[2] = 0;
-+
-+	return true;
++	if (priv->phy_cfg->clkout_ctl_phy.enable) {
++		*base = priv->phy_base;
++		*clkout_ctl = &phy_cfg->clkout_ctl_phy;
++	} else {
++		*base = priv->reg_base;
++		*clkout_ctl = &phy_cfg->clkout_ctl;
++	}
 +}
 +
-+static bool get_unique_sid(const void *fdt, unsigned int *sid)
+ /**
+  * round_rate() - Adjust a rate to the exact rate a clock can provide.
+  * @clk:	The clock to manipulate.
+@@ -185,13 +203,14 @@ ulong rockchip_usb2phy_clk_round_rate(struct clk *clk, ulong rate)
+  */
+ int rockchip_usb2phy_clk_enable(struct clk *clk)
  {
- 	if (sunxi_get_sid(sid) != 0)
- 		return false;
+-	struct udevice *parent = dev_get_parent(clk->dev);
+-	struct rockchip_usb2phy *priv = dev_get_priv(parent);
+-	const struct rockchip_usb2phy_cfg *phy_cfg = priv->phy_cfg;
++	const struct usb2phy_reg *clkout_ctl;
++	struct regmap *base;
++
++	rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
  
- 	if (!sid[0])
--		return false;
-+		return get_sid_from_serial_number(fdt, sid);
+ 	/* turn on 480m clk output if it is off */
+-	if (!property_enabled(priv->reg_base, &phy_cfg->clkout_ctl)) {
+-		property_enable(priv->reg_base, &phy_cfg->clkout_ctl, true);
++	if (!property_enabled(base, clkout_ctl)) {
++		property_enable(base, clkout_ctl, true);
  
- 	/*
- 	 * The single words 1 - 3 of the SID have quite a few bits
-@@ -770,7 +795,7 @@ static void setup_environment(const void *fdt)
- 	char ethaddr[16];
- 	int i;
+ 		/* waiting for the clk become stable */
+ 		usleep_range(1200, 1300);
+@@ -208,12 +227,13 @@ int rockchip_usb2phy_clk_enable(struct clk *clk)
+  */
+ int rockchip_usb2phy_clk_disable(struct clk *clk)
+ {
+-	struct udevice *parent = dev_get_parent(clk->dev);
+-	struct rockchip_usb2phy *priv = dev_get_priv(parent);
+-	const struct rockchip_usb2phy_cfg *phy_cfg = priv->phy_cfg;
++	const struct usb2phy_reg *clkout_ctl;
++	struct regmap *base;
++
++	rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
  
--	if (!get_unique_sid(sid))
-+	if (!get_unique_sid(fdt, sid))
- 		return;
+ 	/* turn off 480m clk output */
+-	property_enable(priv->reg_base, &phy_cfg->clkout_ctl, false);
++	property_enable(base, clkout_ctl, false);
  
- 	for (i = 0; i < 4; i++) {
-@@ -867,7 +892,7 @@ static void bluetooth_dt_fixup(void *blob)
- 		for (i = 0; i < ETH_ALEN; ++i)
- 			bdaddr[i] = tmp[ETH_ALEN - i - 1];
- 	} else {
--		if (!get_unique_sid(sid))
-+		if (!get_unique_sid(blob, sid))
- 			return;
+ 	return 0;
+ }
+@@ -281,7 +301,10 @@ static int rockchip_usb2phy_probe(struct udevice *dev)
+ 		return ret;
+ 	}
  
- 		bdaddr[0] = ((sid[3] >>  0) & 0xff) ^ 1;
+-	return 0;
++	if (priv->phy_cfg->clkout_ctl_phy.enable)
++		ret = regmap_init_mem_index(dev_ofnode(dev), &priv->phy_base, 0);
++
++	return ret;
+ }
+ 
+ static int rockchip_usb2phy_bind(struct udevice *dev)
 -- 
-2.46.3
+2.49.0
 
