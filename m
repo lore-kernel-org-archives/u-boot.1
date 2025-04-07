@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD37C36018
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28ACC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:05:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 729DE82E66;
-	Mon,  7 Apr 2025 19:05:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AFDE782F85;
+	Mon,  7 Apr 2025 19:05:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D5982F67; Mon,  7 Apr 2025 19:05:49 +0200 (CEST)
+ id A66D882F85; Mon,  7 Apr 2025 19:05:51 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 85A2082CF5
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 19:05:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 47AA882E76
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 19:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F0A62106F;
- Mon,  7 Apr 2025 10:05:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D1C6D1424;
+ Mon,  7 Apr 2025 10:05:49 -0700 (PDT)
 Received: from localhost.localdomain (unknown [10.57.17.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 524953F59E;
- Mon,  7 Apr 2025 10:05:45 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 3664B3F59E;
+ Mon,  7 Apr 2025 10:05:47 -0700 (PDT)
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
@@ -35,10 +35,12 @@ Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/5] fix dfu alt buffer clearing
-Date: Mon,  7 Apr 2025 19:05:24 +0200
-Message-ID: <20250407170529.893307-1-vincent.stehle@arm.com>
+Subject: [PATCH 1/5] fwu: developerbox: fix dfu alt buffer clearing
+Date: Mon,  7 Apr 2025 19:05:25 +0200
+Message-ID: <20250407170529.893307-2-vincent.stehle@arm.com>
 X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250407170529.893307-1-vincent.stehle@arm.com>
+References: <20250407170529.893307-1-vincent.stehle@arm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -58,38 +60,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The set_dfu_alt_info() function calls the ALLOC_CACHE_ALIGN_BUFFER()
+macro to declare a `buf' variable pointer into an array allocated on the
+stack. It then calls the memset() function to clear the useable portion
+of the array using the idiomatic expression `sizeof(buf)'.
 
-This patch series applies the same fix in five different locations (the
-detailed description of the fix is in the patches).
+While this would indeed work fine for an array, in the present case we
+end up clearing only the size of a pointer.
+Fix this by specifying the explicit size `DFU_ALT_BUF_LEN' instead.
 
-I did validate statically by looking at the assembly before/after for all
-five cases, using the following defconfigs:
-
-  stm32mp15_defconfig
-  synquacer_developerbox_defconfig
-  xilinx_versal_virt_defconfig
-  xilinx_zynq_virt_defconfig
-  xilinx_zynqmp_kria_defconfig
-
-Best regards,
-Vincent.
-
-
-Vincent Stehlé (5):
-  fwu: developerbox: fix dfu alt buffer clearing
-  board: st: common: fix dfu alt buffer clearing
-  arm64: versal: fix dfu alt buffer clearing
-  xilinx: zynq: fix dfu alt buffer clearing
-  arm64: zynqmp: fix dfu alt buffer clearing
-
+Fixes: 6b403ca4dcf4 ("fwu: DeveloperBox: add support for FWU")
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Jassi Brar <jaswinder.singh@linaro.org>
+---
  board/socionext/developerbox/fwu_plat.c | 2 +-
- board/st/common/stm32mp_dfu.c           | 2 +-
- board/xilinx/versal/board.c             | 2 +-
- board/xilinx/zynq/board.c               | 2 +-
- board/xilinx/zynqmp/zynqmp.c            | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/board/socionext/developerbox/fwu_plat.c b/board/socionext/developerbox/fwu_plat.c
+index 26031795b09..a8b111477ef 100644
+--- a/board/socionext/developerbox/fwu_plat.c
++++ b/board/socionext/developerbox/fwu_plat.c
+@@ -18,7 +18,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ 	struct mtd_info *mtd;
+ 	int ret;
+ 
+-	memset(buf, 0, sizeof(buf));
++	memset(buf, 0, DFU_ALT_BUF_LEN);
+ 
+ 	mtd_probe_devices();
+ 
 -- 
 2.47.2
 
