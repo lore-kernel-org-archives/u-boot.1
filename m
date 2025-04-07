@@ -4,93 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A897C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 688CBC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8702830B3;
-	Mon,  7 Apr 2025 22:02:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B57E8309A;
+	Mon,  7 Apr 2025 22:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iPdkHBiC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a5xG96Mm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50B7183180; Mon,  7 Apr 2025 22:02:52 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 9FA55830AF; Mon,  7 Apr 2025 22:03:23 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 495CD830F1
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 661B68309A
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:03:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-391342fc1f6so4260566f8f.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5499e3ec54dso5827481e87.0
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744056170; x=1744660970; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vCyZRTYLDfmguNjxIS97kTyRoqTJ0HpdK6Xxma5aFOA=;
- b=iPdkHBiCexbzUD7tXt1GS+LKc9wTvsfkR4R2Dkx+J9OAt7/lGJB5WsFFPLSqXIM/+J
- Xzdyg5q4Cedm2cSRegFI2SfEffAk/7pmoIDnA2zabAMb8+tUJ34joqvVQGgPHA/POkBY
- o/OwY/d76CbfJ5gnNGrJGpl6AU4XdfqoMRyXYKNnOzwN2PouxbiBqhaPZs3Oj+10U7Po
- ja1tYGnqy8jBEjl7HTEzP0PEED22opaEKlV/A2gUuPLIt6QXIF0rlPCa7NJSGA8QX5KS
- Rood84De3wusrW1q/9saEs02m9g+pat5YoCYsa09EJSoZBxLPaCDJkQIvpyMjkWlEczO
- MUDA==
+ d=gmail.com; s=20230601; t=1744056200; x=1744661000; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NFAr+YN+yF/tFCGcm9NMHavn5okW03SqW6w98hQHS1s=;
+ b=a5xG96Mm3Vd1wW0mwzakPe/O5CLuzR/kfOdZMha+e/ixy0LkXfBNb7Gfh5ygHsiZI4
+ NXVNAJwskvhFuKjhRx4AxbIDS6V2taITirVQq+/9pFK9gek91oCSWhVkiH5R/sl7gzNx
+ gciwJJopbmxp6w2lXRi4mIYgPvtHZrs33gb/0qNdX9Cjwa/f85a3caUyv2mSEMA5Rwib
+ NShjaUZ+efGS3aic5f0ETMsT3HrkBXtTkaAKiQkUSW1csWlbHLY93QODT/5manH+yp5n
+ sxeoXVCVB5WdLdkq1kubVBHLADdZV2gMWOL65oLxVCcyJ63oAgZIjt0vJS/o+IsnqPDn
+ Cntw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744056170; x=1744660970;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1744056200; x=1744661000;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vCyZRTYLDfmguNjxIS97kTyRoqTJ0HpdK6Xxma5aFOA=;
- b=nvytwBdbK9xu5D9dnCXpfZ9QTn91ZKxv4s8JePpEP3ya4+YwWtWQDn/v700kqNcnwz
- SvCYJnR6XQoTFibfvr2zBS+J0Vcnd++epuB2zFBvCFDWmRHVwpSnIWKFkgqe1pdaHJU+
- PVidqu7AKbK144fJbO3O9Lr0c/nMC9T9XdB64iUkxfzckkB7yx3hnMB5nsGxp/ntXJVt
- 5h9Y6HQwC+ic6+1e6DnSaujwFqnuIcYjveIfgman46TsXDpoG0GwwJ4SQ2/DV4uueIEV
- aVeyaDe1fYP0Mn1+c24ttnfj1urPLjPk2VFyiEtdlscN/tZTpeM+krRMWrsIA52fjaw8
- u6oA==
+ bh=NFAr+YN+yF/tFCGcm9NMHavn5okW03SqW6w98hQHS1s=;
+ b=hoTVmW7BplsVcdUI7Quu0NS38U33DpAXjRU90UlIgcvttOat4DokCuExRrl1vFgu4D
+ Y8/LObjTMY5rk1eaRYDDx0qbV+ErRHX2WClRCHN9UfjKaN4YivkSLi1AC1tABHgLWtCc
+ K3OBddrJRgxdL1SaGbUU+wdk9UBhmL/rDVwHoh82nylm2PdAs+NLhD2WmW02ii5XSJkt
+ ZpXtlXfrmNRVYOK9+WUQE4IhWRWruyDWIIJt1vljtdNbBmPIA1CkhvCCtvcfEG4kQrx0
+ cuCXEy4PqyUpswHAdkGw2LWBFbdfHaf+/sjiLhir0s5kitQ4MhSyE4D9O6RRnN+nWkBa
+ v9cw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyB8pYuMV8l0dSCumtVWLN7uGGFHTm+gldFzKA3+LZpW2O7+SqBYGBPnuUeZYnLVvHIUnIwro=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxmKHQssNx2oveLCLEhuHcTva6zftxr1sRCALEeCIopl3t1hZ1
- bGBzzrmz/A+iBshg4yDTtwr33G4dqOs3W0nqZVBeq2RX7y4kOh1d
-X-Gm-Gg: ASbGncssmSO5NxPNGREOp5k9oL1a4QmuOOgeeQ7X0N+9MPH0KoCcIrimZGc4Qo9Uw0v
- vHbyM/eN54KEqXmSAempE0a/kD5TzJJsprIrRguI238j7li+DS1JraG6Xhozh3oq5PepOoeiht2
- CYDnIH5rtKvtpSRHBq8EQpR3yHoLMh9+a6WR9W9Zq4S8PyucJj7qClSIovYaAOptb9ZNMIqhGrC
- odXyfiQVWikYuS2V8LWWThKUF+2EaNDN80PhEDPe8J661VVDk3G2Semm3YW9x0yG5ImuVPGqtgG
- FlaQ1ciOwlRuTDr74ZfG7zA4zl/aZe8yOaUjyumQRRDOxxZAyghxK7J3NDQBWM1XjKNthaG/Jw1
- Tb9hn2ZmPsbHAVg==
-X-Google-Smtp-Source: AGHT+IH5wKfstEqHs1vEEli7JOdFK8BGNabScUTRyYD8LFWSCrLPjWm9UNgJt8qwQkdLggMcwhIxJg==
-X-Received: by 2002:a5d:6d81:0:b0:391:2bcc:11f2 with SMTP id
- ffacd0b85a97d-39d0873fccdmr11471469f8f.1.1744056169693; 
- Mon, 07 Apr 2025 13:02:49 -0700 (PDT)
-Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
- [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 13:02:49 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Bruce Suen <bruce_suen@163.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v2 14/14] configs: airoha: an7581_evb: Enable Airoha SNFI SPI
- config
-Date: Mon,  7 Apr 2025 22:01:58 +0200
-Message-ID: <20250407200208.25594-15-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250407200208.25594-1-ansuelsmth@gmail.com>
-References: <20250407200208.25594-1-ansuelsmth@gmail.com>
+ AJvYcCVW3BTQaBQ6t9vi13HzHoMpBH7VYpehtt6YID84pPBQFhZRj4/LsX4LAj8OAqsFLG0DzEIznNE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqkPvtBnvVMhdKJZ1Ts00fPxx5Dj7X//bMzvQiweocf4TW33gJ
+ HDjGywroMPamj1VhS1dRguZebkTIgepLYCR/UxUq12DuPKP03o76leQcLs7HCZHc9n0316DpKPm
+ pYDhzZjoSRUMn9DBuyI7ATP682y4=
+X-Gm-Gg: ASbGncsvgKeCme/Au7YObwnqdUAk2WEE5Mm/CfbilUX7ksjkRVkzofIAtAMeu1CPrQf
+ pqvx68V6BWIrSRnxaoEVC/mgYIzRyinBqgaZLOgLyV/GOMk/+T4NPblDIGSZPazmg+AThFQAZwT
+ SQlsswQ3m95nG4HCoe+8+XlmULeyQLwpR8DxT8Bz6t1AFMlLJuvWepJSyKn37H1E/siqmB
+X-Google-Smtp-Source: AGHT+IEZ37ouTVKJWiKKUYNzFkQzupFtxom9khz+3FtXNJjqyiXXORMTwjKq4CQlvR5TM7p5qvWJlaKNmvHHKrhGNak=
+X-Received: by 2002:a05:6512:3d8f:b0:545:eef:83f1 with SMTP id
+ 2adb3069b0e04-54c232de762mr4227275e87.17.1744056199480; Mon, 07 Apr 2025
+ 13:03:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250315092420.793-1-ansuelsmth@gmail.com>
+ <67f42db9.050a0220.16b640.abd2@mx.google.com>
+ <CAOf5uwkU_hTEa_D+pEouXmsiQYMTNkHdr+z0boVO43BW7wkA7g@mail.gmail.com>
+In-Reply-To: <CAOf5uwkU_hTEa_D+pEouXmsiQYMTNkHdr+z0boVO43BW7wkA7g@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 7 Apr 2025 17:03:08 -0300
+X-Gm-Features: ATxdqUFSSYSnzHlbdodk86NnUN_ytVY7Megyq62B53NPh4g2G4xUyr0VJ2mkjsQ
+Message-ID: <CAOMZO5BFntJ4kFFrtrFRL77RsM18LtjJDv1kHWSZViZMW1m3XQ@mail.gmail.com>
+Subject: Re: [RESEND PATCH] clk: fix crash on clk_set_rate clean rate cache
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Tero Kristo <t-kristo@ti.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,22 +97,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Airoha SNFI SPI config to enable support for SNAND flash.
+On Mon, Apr 7, 2025 at 4:58=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- configs/an7581_evb_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+> Can you review it and pick if needed?
 
-diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
-index fa41a4bca97..c74247e13db 100644
---- a/configs/an7581_evb_defconfig
-+++ b/configs/an7581_evb_defconfig
-@@ -78,3 +78,4 @@ CONFIG_DM_SPI=y
- CONFIG_SHA512=y
- CONFIG_AIROHA_ETH=y
- CONFIG_MMC_MTK=y
-+CONFIG_AIROHA_SNFI_SPI=y
--- 
-2.48.1
+This is not assigned to me in patchwork as it is not i.MX related.
 
+Someone else needs to handle it.
