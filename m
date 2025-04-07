@@ -4,119 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBBE0C369A1
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 09:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F1E2C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 09:53:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AB5982D17;
-	Mon,  7 Apr 2025 11:38:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E86782D06;
+	Mon,  7 Apr 2025 11:53:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="mdZT3VF+";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="MjsJ5pYj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC53D82D39; Mon,  7 Apr 2025 11:38:28 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id A9EB582D0C; Mon,  7 Apr 2025 11:53:00 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55BA782D0C
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 11:38:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CF8782CFD
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 11:52:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5378dlnv010420
- for <u-boot@lists.denx.de>; Mon, 7 Apr 2025 09:38:24 GMT
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5378drdJ016213
+ for <u-boot@lists.denx.de>; Mon, 7 Apr 2025 09:52:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 1V7VWdxYjyM0/wYivEl5DYexZPDFQmRuFrmD4YUn8WI=; b=mdZT3VF+swOBjfM0
- XwL7QULKehj4JwNzR8x17UJM6WMp+GdHm/9cKzgXc7eNMyttQiQmN3WcU4vSSvYO
- 3aJhOeUyMUs6zLN5mF1CPDJ0ei1Gk16k0uTmlzeF/ljc8mCB8YGExZlc1d9/wXKh
- ZvOH7T0p3yPx4ugTMxuOEFkOpHW7H/bBloMBV0FfPKl0eR60+xw7hcLB6Cz2AJhq
- xabmvZiUKrSAEH+EYmB5uatHZ+GtgF2rPYSF75wHWBNmc04Wm2kEIHWkV3Nc67f3
- FKdne/TignIvMqNmiqxinrQtSoagbDuhp2B7NrHRWUB2hvM2hiPcfIyVG/BmKAYD
- 4UoDAw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twd2kt50-1
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=bD+hAivna/wrOFtHnOCOVQlo
+ UmhBpGAkO7aKd3PyJfU=; b=MjsJ5pYjSHWVHf9gKmp398wuaUkVX782hvcv44Xo
+ tVtFwrRNHQTizJn+Z5H4wuMOjxYkrk1bwnq3GcR+SBQDv/YqsQ1jruhvEvOC5TxX
+ 98+pPg+3dWrl1xwjojF4TZ4Iqta+zDBPPs51r3hJ0stUKjUOTyRZhbbbF4ytgGqY
+ ytsivKsMTkZRpHu8InXlHvmYFtixYuudnASNqpnV5F0r5O2FgZSmZMLD6eHauasF
+ cmcb/BrarsBUNOmcnUMcLQOhsMdQrO9AFvCYqNjl98z2P2LQHnC3kmOTo9amtFvA
+ JFa+OX4D2nOMJc0KYRXjuUFtELeUI+OEG5Anw/ADqyETig==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twdgbu5v-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 09:38:24 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-7c760637fe5so733406185a.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 02:38:23 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 09:52:56 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-7c5b9333642so424843685a.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 02:52:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744018703; x=1744623503;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:date:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1V7VWdxYjyM0/wYivEl5DYexZPDFQmRuFrmD4YUn8WI=;
- b=WS2Kp5cXhKYJCmCSQyPAzaBzeJkJ6mB29SeSE0HZOWBK34olev3m2QBuNbtBLpVYXU
- AmRXJcV8LYmC4Ga8NQPX2KCHb6r9jTnVMtmRo/vb2L3fcw+5Of40DLchxjO5kRbsyV3+
- OudCCAusfIAm8cGtHICjuMonU4vL9RG8RJtXY2whBYKU4Amy5Reuzb8sBFLE1099Kxt4
- SGKcY0s4OrJ6ZakvNHEy2iKVgbB5+9OU8W3dMPX66Mj4Oz6tkR7m9b+IVfAl0/GODsGA
- EmqXvWM8dDzokU9l/FBGjrCz2s/mFrYpFsygUvOodNIKhNqf+IHEpsut3xbGCwjnDoxc
- 8NWA==
+ d=1e100.net; s=20230601; t=1744019576; x=1744624376;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bD+hAivna/wrOFtHnOCOVQloUmhBpGAkO7aKd3PyJfU=;
+ b=hq6BeJ2FE6s6rmnkV+UCDlcoiMDysCD1Z8tFWf2Vz0za/HZIAwcpN2GguF2qv8ajXv
+ +15EJK7hP/GVnuodjOCxKMl6noKp1XQndWW8RTLfT5XAVsm5ckKaztXiP6fcDP0TeuuB
+ QT7GR59lJ9cf2q7l+ZbLTN2FI26ncd28h9igNtgk44OU2KJA7t1fqDT7zGJKu1RRcxRr
+ bWykrnsK6hiMn1yL1glmsmsBDx2wNp5Z821XzNKiGcAzptPHsZLPIViswOptpGGFxblw
+ etLi6ZzXXJqeIR1aJRN2OQSUfOSZR6e/ApoO/mgxth488s63Q2+w9ObV1XBiSryzsOug
+ ye/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXyiQ3IJALlQaqpBvickSyXiBGZenzXMfys1uFnal05UmkEBYjwlzuUArBNL5HiSRJJDp/qudQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzplkc4lS+MJikUZN4PMx1kn7oEwhhGVEQEJOAL4B/U0ZFxWz5Z
- mKE8C6n7uzsFNWN3qrHfFVHW5JEoT7HvjwS2vopKSGQjX+VtYwIo1DoCtOOkTOGlTRkAeyU0FaJ
- l6chS7wAl2+CTeZgMLA7YRSxhibs7L+9G/XGYD3aDjuBPdGxN319y
-X-Gm-Gg: ASbGncvU3/I8+530kP2WP+UFYornlaoPQKqt/1HNAXOa3w3yFDVu9MmvPbIuMf8WNhW
- nYvPbuFuRuGmO65Xg30zd86vgWioWYFNyREwqIMIc+J7L54k2cTeH0etXPHCDEfJAC0NKakqgf6
- HpIkc6nCCQ0varmFFdzsS3aFSODKSHqNzMfO53zSefs+R/+RhsF9V2Klol5Y4NJUOVNa3HhYCpL
- iITQ9+FnUZ4BJBPZY2pItHVCNPQehaIxsKYi3dP/PL5GvlSEn4bQ3GJ1Ta3I7oPAS69R76Q/hpJ
- scJttFKBjMmJtRIZswf6wKgXjVuk2KcOxgrjZH7R5RnPQiQJPpY=
-X-Received: by 2002:a05:620a:1a08:b0:7c5:562d:ccf8 with SMTP id
- af79cd13be357-7c77dd44983mr1196939485a.8.1744018702734; 
- Mon, 07 Apr 2025 02:38:22 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHIlw1sQP7zLWANhPi8NGs7eZeC7QOVB+ZJr3VedFCsHs83x3BpYYZeI9qalEDhXxnJa8HI9w==
-X-Received: by 2002:a05:620a:1a08:b0:7c5:562d:ccf8 with SMTP id
- af79cd13be357-7c77dd44983mr1196936185a.8.1744018702217; 
- Mon, 07 Apr 2025 02:38:22 -0700 (PDT)
+ AJvYcCX7pGB1eFlOUft310vu2dK4a5vIa0hSCX1jE0CNu8dpjI383gasEMSlQCnGjBmPc7D3EKqT7a8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQguzKYM4mzYEk6iu5MUJ8KCOSr42NoV7ucGdJG/5Q5Sl9Hk9F
+ 1jlUOxcvFss8odHspGHN+O1icVz3B33e0gj5ZvFp3/uaijpcggEFGwjvr+lPCL4alK9vqo8yxOT
+ uwGYfKR2e8Yhlt7cO/V9PfZPInCEIR5/1hMVHg9BaiCBwA+5RLMjG
+X-Gm-Gg: ASbGncsfG2GQuKOEMSlUbprvbjl+/ALj8kE4169/IpxgPnzav95Ty2jMvQlSPYFUwEt
+ h2PTa77tqsfb4qDx03I1HYHJaPibRbuyQxceiQgLWWWtFLun9ub20Kw1lLLdhBevy/ZX805xXkp
+ F3gv+fi6Wne+hk/Hi/8Vjc8/KDFVFcka2lzkRaQIzRE48gqvXYcTCV6/MIIpsbfTzllWvPnS4kG
+ RJp/FTuu7ytOSBp/7Ltsg+bDAZ58nN6jnY5Vphv/gv4hY3m2oheT6Y3fQ7v9acnzTpfO7mHrtF6
+ XK39zXj6L9t+ZppQrql383uFntzmf+WFA9SZZ7pg6qDZEt5svYY=
+X-Received: by 2002:a05:620a:4612:b0:7c5:460d:45de with SMTP id
+ af79cd13be357-7c7759e9d77mr1877555185a.8.1744019576050; 
+ Mon, 07 Apr 2025 02:52:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHP59BkDwdr0oAUlCkC/aBXICCeLDEJzivM4QRtQVVRvIDqczO4J5+r6/TL7AcO3hL4oJD/oA==
+X-Received: by 2002:a05:620a:4612:b0:7c5:460d:45de with SMTP id
+ af79cd13be357-7c7759e9d77mr1877553685a.8.1744019575714; 
+ Mon, 07 Apr 2025 02:52:55 -0700 (PDT)
 Received: from trex (233.red-79-144-185.dynamicip.rima-tde.net.
  [79.144.185.233]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ea8d16049sm121135775e9.0.2025.04.07.02.38.21
+ ffacd0b85a97d-39c3009644dsm11380555f8f.6.2025.04.07.02.52.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 02:38:21 -0700 (PDT)
+ Mon, 07 Apr 2025 02:52:55 -0700 (PDT)
 From: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
 X-Google-Original-From: Jorge Ramirez <JorgeRamirez-Ortiz>
-Date: Mon, 7 Apr 2025 11:38:20 +0200
-To: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Mon, 7 Apr 2025 11:52:54 +0200
+To: neil.armstrong@linaro.org
 Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
  caleb.connolly@linaro.org, sumit.garg@kernel.org,
  u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/7] mmc: msm_sdhci: handle bulk clock initialization error
-Message-ID: <Z/OdDPn3R7Rojbps@trex>
+Subject: Re: [PATCH 6/7] mach-snapdragon: board interface to enforce fdt
+Message-ID: <Z/Ogdhdy1NPmQdt/@trex>
 References: <20250407081927.138915-1-jorge.ramirez@oss.qualcomm.com>
- <20250407081927.138915-4-jorge.ramirez@oss.qualcomm.com>
- <157becc8-34c2-48eb-a65e-55d312e9aa05@linaro.org>
- <6118b3c5-4bf4-4692-8353-bd9a02d5b2df@linaro.org>
+ <20250407081927.138915-7-jorge.ramirez@oss.qualcomm.com>
+ <9b6d42e1-1582-4250-8325-641f29d2030b@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <6118b3c5-4bf4-4692-8353-bd9a02d5b2df@linaro.org>
-X-Proofpoint-ORIG-GUID: GoPU2UjwQsS7x3gA9YWbXqKH2FlxsqBo
-X-Proofpoint-GUID: GoPU2UjwQsS7x3gA9YWbXqKH2FlxsqBo
-X-Authority-Analysis: v=2.4 cv=NaLm13D4 c=1 sm=1 tr=0 ts=67f39d10 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=9rMOtB7ueBl8bWGkC6audQ==:17
- a=8nJEP1OIZ-IA:10 a=XR8D0OoHHMoA:10 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
- a=_ISdD_dKFa0wEv6TzKIA:9 a=Y8FxK0z1VKANv71n:21
- a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10 a=IoWCM6iH3mJn3m4BftBB:22
- a=cvBusfyB2V15izCimMoJ:22
+In-Reply-To: <9b6d42e1-1582-4250-8325-641f29d2030b@linaro.org>
+X-Authority-Analysis: v=2.4 cv=PJgP+eqC c=1 sm=1 tr=0 ts=67f3a078 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=9rMOtB7ueBl8bWGkC6audQ==:17
+ a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=ObC7mlpb7g8vBSQL3FIA:9 a=CjuIK1q_8ugA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: QIqJJpvqu2LsF48_RiM8YUTPKO_IY0oj
+X-Proofpoint-GUID: QIqJJpvqu2LsF48_RiM8YUTPKO_IY0oj
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-04-07_03,2025-04-03_03,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 impostorscore=0
- priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
- lowpriorityscore=0 bulkscore=0 mlxlogscore=999 clxscore=1015 phishscore=0
- spamscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2504070069
+ phishscore=0
+ lowpriorityscore=0 clxscore=1015 adultscore=0 malwarescore=0 spamscore=0
+ impostorscore=0 suspectscore=0 mlxlogscore=999 bulkscore=0 mlxscore=0
+ priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504070070
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,131 +129,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07/04/25 11:10:45, Neil Armstrong wrote:
-> On 07/04/2025 11:02, neil.armstrong@linaro.org wrote:
-> > On 07/04/2025 10:19, Jorge Ramirez-Ortiz wrote:
-> > > Some boards do not require all clocks to be available (i.e:
-> > > dragonboard820c).
-> > 
-> > Can you specify which clock isn't available ? Because we have clk-stub for that
-
-right, either GCC_SDCC2_AHB_CLK or RPM_SMD_XO_CLK_SRC (we have
-GCC_SDCC2_APPS_CLK which is the one I needed to initialize and work with
-MMC).
-
+On 07/04/25 11:04:30, neil.armstrong@linaro.org wrote:
+> Hi,
 > 
-> Enable:
-> CONFIG_CLK_STUB=y
+> On 07/04/2025 10:19, Jorge Ramirez-Ortiz wrote:
+> > Some platforms might require the external fdt to boot.
 > 
-> and change this:
-> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-> index 343fa5cd3fe..c14f5b6e1a6 100644
-> --- a/drivers/clk/clk-stub.c
-> +++ b/drivers/clk/clk-stub.c
-> @@ -14,7 +14,7 @@
->  static const struct udevice_id nop_parent_ids[] = {
->         { .compatible = "qcom,rpm-proc" },
->         { .compatible = "qcom,glink-rpm" },
-> -       { .compatible = "qcom,rpm-sm6115" },
-> +       { .compatible = "qcom,glink-smd-rpm" },
->         { }
->  };
-> 
-> And clk_get_bulk() should work!
+> Why ? we may want to build the fdt in, and discard the external fdt for some reasons.
 
-ah cool. yes  that did work but something else popped up
-is it worth looking further into this? 
+on the db820c, the device tree that u-boot builds is passed to the LK
+appendeded with the image via fastboot: the LK, processes it, ammends
+the device tree and then hands it back to u-boot.
 
-U-Boot 2025.04-rc5-00022-gccd064439bc2-dirty (Apr 07 2025 - 11:30:21 +0200)
-Qualcomm-DragonBoard 820C
-DRAM:  3.5 GiB (effective 3 GiB)
-Core:  140 devices, 18 uclasses, devicetree: board
-MMC:   Couldn't set MMC core clock rate: 0
-Couldn't set MMC core clock rate: 0
-mmc@74a4900 - probe failed: -22
-Couldn't set MMC core clock rate: 0
-Loading Environment from EXT4... Couldn't set MMC core clock rate: 0
-** Bad device specification mmc 0 **
-In:    serial@75b0000
-Out:   serial@75b0000
-Err:   serial@75b0000
-Net:   No ethernet found.
-dragonboard820c =>
+see the boot trace:
 
-> 
-> Neil
+[2830] Only one appended non-skales DTB, select it.                                                                                                                                        
+[2850] cmdline:  androidboot.bootdevice=624000.ufshc androidboot.verifiedbootstate=orange androidboot.veritymode=enforcing androidboot.serialno=2f490ecf androidboot.baseband=apq mdss_mdp0
+[2860] Updating device tree: start                                                                                                                                                         
+[2860] Updating device tree: done                                                                                                                                                          
+[2870] Return value from recv_data: 14                                                                                                                                                     
+[2880] RPM GLINK UnInit                                                                                                                                                                    
+[2880] Qseecom De-Init Done in Appsbl                                                                                                                                                      
+[2880] booting linux @ 0x80080000, ramdisk @ 0x82200000 (0), tags/device tree @ 0x82000000                                                                                                 
+[2890] Jumping to kernel via monitor                                                                                                                                                       
+                                                                                                                                                                                           
+                                                                                                                                                                                           
+U-Boot 2025.04-rc5-00022-gccd064439bc2 (Apr 07 2025 - 10:06:51 +0200)                                                                                                                      
+Qualcomm-DragonBoard 820C                                                                                                                                                                  
+                              
+
+It is this external fdt that we need; so I thought allowing the board to
+request the external fdt explicitily might make sense.
+
+if you have some other idea/suggestion, please let me know, happy to abide.
+
 > 
 > > 
-> > Thanks,
-> > Neil
+> > This change provides a mechanism to the board initializaion code to make
+> > the requet explicit.
 > > 
-> > > 
-> > > This change provides a fallback to the core clock when the bulk cant be
-> > > retrived.
-> > > 
-> > > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-> > > ---
-> > >   drivers/mmc/msm_sdhci.c | 27 +++++++++++++++++++++++++--
-> > >   1 file changed, 25 insertions(+), 2 deletions(-)
-> > > 
-> > > diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-> > > index 27bb7052fca..8081330bd25 100644
-> > > --- a/drivers/mmc/msm_sdhci.c
-> > > +++ b/drivers/mmc/msm_sdhci.c
-> > > @@ -9,6 +9,7 @@
-> > >   #include <clk.h>
-> > >   #include <dm.h>
-> > > +#include <dm/devres.h>
-> > >   #include <malloc.h>
-> > >   #include <sdhci.h>
-> > >   #include <wait_bit.h>
-> > > @@ -56,6 +57,17 @@ struct msm_sdhc_variant_info {
-> > >   DECLARE_GLOBAL_DATA_PTR;
-> > > +static int get_core_clock(struct udevice *dev, struct clk_bulk *bulk)
-> > > +{
-> > > +    bulk->count = 1;
-> > > +
-> > > +    bulk->clks = devm_kcalloc(dev, 1, sizeof(struct clk), GFP_KERNEL);
-> > > +    if (!bulk->clks)
-> > > +        return -ENOMEM;
-> > > +
-> > > +    return clk_get_by_name(dev, "core", &bulk->clks[0]);
-> > > +}
-> > > +
-> > >   static int msm_sdc_clk_init(struct udevice *dev)
-> > >   {
-> > >       struct msm_sdhc *prv = dev_get_priv(dev);
-> > > @@ -73,8 +85,15 @@ static int msm_sdc_clk_init(struct udevice *dev)
-> > >       ret = clk_get_bulk(dev, &prv->clks);
-> > >       if (ret) {
-> > > -        log_warning("Couldn't get mmc clocks: %d\n", ret);
-> > > -        return ret;
-> > > +        log_warning("Bulk clocks not available (%d), trying core clock\n", ret);
-> > > +
-> > > +        /* Sometimes not all clocks are needed - chainloading uboot */
-> > > +        ret = get_core_clock(dev, &prv->clks);
-> > > +        if (ret) {
-> > > +            log_warning("Core clock not available:(%d)\n", ret);
-> > > +            return ret;
-> > > +        }
-> > > +        n_clks = 1;
-> > >       }
-> > >       ret = clk_enable_bulk(&prv->clks);
-> > > @@ -83,6 +102,9 @@ static int msm_sdc_clk_init(struct udevice *dev)
-> > >           return ret;
-> > >       }
-> > > +    if (n_clks == 1)
-> > > +        goto set_rate;
-> > > +
-> > >       /* If clock-names is unspecified, then the first clock is the core clock */
-> > >       if (!ofnode_get_property(node, "clock-names", &n_clks)) {
-> > >           if (!clk_set_rate(&prv->clks.clks[0], clk_rate)) {
-> > > @@ -105,6 +127,7 @@ static int msm_sdc_clk_init(struct udevice *dev)
-> > >           return -EINVAL;
-> > >       }
-> > > +set_rate:
-> > >       /* The clock is already enabled by the clk_bulk above */
-> > >       clk_rate = clk_set_rate(&prv->clks.clks[i], clk_rate);
-> > >       /* If we get a rate of 0 then something has probably gone wrong. */
+> > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> > ---
+> >   arch/arm/mach-snapdragon/board.c | 13 +++++++++++++
+> >   1 file changed, 13 insertions(+)
 > > 
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> > index 2ef936aab75..1bca9dce20f 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -150,7 +150,13 @@ static void show_psci_version(void)
+> >   /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
+> >    * or for supporting quirky devices where it's easier to leave the downstream DT in place
+> >    * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
+> > + *
+> > + * Alternatively the board can enforce the external fdt.
+> >    */
+> > +bool __weak qcom_board_fdt_external(void)
+> > +{
+> > +	return false;
+> > +}
+> >   int board_fdt_blob_setup(void **fdtp)
+> >   {
+> >   	struct fdt_header *fdt;
+> > @@ -161,6 +167,12 @@ int board_fdt_blob_setup(void **fdtp)
+> >   	external_valid = fdt && !fdt_check_header(fdt);
+> >   	internal_valid = !fdt_check_header(*fdtp);
+> > +	if (qcom_board_fdt_external() && external_valid) {
+> > +		debug("Using external FDT\n");
+> > +		*fdtp = fdt;
+> > +		goto out;
+> > +	}
+> > +
+> >   	/*
+> >   	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
+> >   	 * Bail out while we can still print a useful error message.
+> > @@ -178,6 +190,7 @@ int board_fdt_blob_setup(void **fdtp)
+> >   		*fdtp = fdt;
+> >   	}
+> > +out:
+> >   	/*
+> >   	 * Parse the /memory node while we're here,
+> >   	 * this makes it easy to do other things early.
 > 
