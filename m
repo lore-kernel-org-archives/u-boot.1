@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21505C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 05:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE5CEC3601A
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 05:28:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F7DB82B9D;
-	Mon,  7 Apr 2025 07:17:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cknow.org
+	by phobos.denx.de (Postfix) with ESMTP id D1EF082B9D;
+	Mon,  7 Apr 2025 07:27:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=cknow.org header.i=@cknow.org header.b="YnZcPCxD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PQcG2OC2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAF1682B7E; Sun,  6 Apr 2025 22:09:25 +0200 (CEST)
-Received: from out-172.mta1.migadu.com (out-172.mta1.migadu.com
- [95.215.58.172])
+ id C5B1E82BBF; Mon,  7 Apr 2025 07:27:58 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 706D182B63
- for <u-boot@lists.denx.de>; Sun,  6 Apr 2025 22:09:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BC5382B00
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 07:27:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cknow.org
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=didi.debian@cknow.org
-Mime-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cknow.org; s=key1;
- t=1743970162;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vSwKdb1Qwj4dLUmivrQ/x9HEYpV9z5WXJKLkXePDM1s=;
- b=YnZcPCxDVOTLr0i8zSsfE3H+deuCoulD1CIsBmn4zg/p3H/3IDnjTa8e2WVZWrSnvDAijb
- Iyz8qnUt5m0Vzz8fIsrwl4Gh5zhbbKZ4gef73Rc9EiGi9LQmPiLMTtVii8L/k+QsA6wcZ/
- 61i8nNl/gukrAdafX3E63cBPWCRYc3EEIg6cfTuMgDeXH6eVUrZZ8me2AXBEBVu8Gwj3je
- nUiRBr0SNvIlWlm8I77aepdijzS1PQ6ZJYHF0c3iQFEzL/DFaqXq1gl06YsZCWSyK9+7p0
- WiCy9N7mBsg/tOkMOH7Ge53rNLZIR/IrRE2Q7TKk+FG4VprhYrKpFtJRUC5Wkw==
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 75CDE5C56F9;
+ Mon,  7 Apr 2025 05:25:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA422C4CEDD;
+ Mon,  7 Apr 2025 05:27:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744003674;
+ bh=IViMmBuZdtbctJbjAcVayVDAm7P5WpHQimX7cs3Ww5Q=;
+ h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
+ b=PQcG2OC24M+xLjCr8ukSXLdjW7mKM8cCYzNvkJ7ijZbig/uwuyidmlgEyxgt4diP+
+ X6TQlT1xkkiWZCPV7i7KOj+SDdPpctkw5hY7+HCUG8s0uTiM3ExDm+KgVzl0tCyudB
+ qmaSYVttzPDeyrYzX0PkstHKtOysq0daANHXOMOD0TxByyVPGmYo2skW+fn5qQ9iPK
+ IPR1u0oymJbE6HXfodla5SxLZYnZNEjngkQHFwQgvtRE0WvLih0Ld2jVIpIcHhFbab
+ mjjAW88/ZRGOGXfIs8nk7/dw8ku3u8BEIqFxvPxeF9TaiUn5NtYrdUMcn+gQoeEkHT
+ Z31Fr1YIEbdNg==
 Content-Type: multipart/signed;
- boundary=2a9b8816f841e00ffc5169555bc8b8ba92e416981b2ed8f42427abcf179f;
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Date: Sun, 06 Apr 2025 22:09:13 +0200
-Message-Id: <D8ZTTOA3Q6Q1.39Q6ZX28395IG@cknow.org>
-To: "Diederik de Haas" <didi.debian@cknow.org>, "Kever Yang"
- <kever.yang@rock-chips.com>, "Simon Glass" <sjg@chromium.org>, "Philipp
- Tomsich" <philipp.tomsich@vrull.eu>, "Joseph Chen" <chenjh@rock-chips.com>,
- "Andy Yan" <andyshrk@163.com>, "Tianling Shen" <cnsztl@gmail.com>, "Jonas
- Karlman" <jonas@kwiboo.se>, "Nicolas Frattaroli"
- <frattaroli.nicolas@gmail.com>, "Jagan Teki" <jagan@amarulasolutions.com>,
- "Akash Gajjar" <gajjar04akash@gmail.com>, <u-boot@lists.denx.de>
-Cc: "David Wu" <david.wu@rock-chips.com>, "Eugen Hristev"
- <eugen.hristev@collabora.com>, "Frank Wunderlich"
- <frank-w@public-files.de>, "Stefan Agner" <stefan@agner.ch>
-Subject: Re: [PATCH v2 6/7] configs: rockchip: Enable ethernet driver on
- RK356x boards
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: "Diederik de Haas" <didi.debian@cknow.org>
-References: <20231001191730.4167035-1-jonas@kwiboo.se>
- <20231001191730.4167035-7-jonas@kwiboo.se> <2086393.9F9pDXStbY@bagend>
-In-Reply-To: <2086393.9F9pDXStbY@bagend>
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Mon, 07 Apr 2025 07:17:49 +0200
+ boundary=6aa10b9814bcfbcb3f077bd586aed1df1ad36268bac2c63a695ff602a74c;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Mon, 07 Apr 2025 07:27:50 +0200
+Message-Id: <D905PDKW5YBK.34KA6NCU8GLWB@kernel.org>
+Subject: Re: [PATCH] tiny-printf: Add support for upper case hex values
+Cc: "Christoph Niedermaier" <cniedermaier@dh-electronics.com>, "Quentin
+ Schulz" <quentin.schulz@cherry.de>, "Marek Vasut" <marex@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Benedikt Spranger"
+ <b.spranger@linutronix.de>, "Simon Glass" <sjg@chromium.org>, "John Ogness"
+ <john.ogness@linutronix.de>, "Jerome Forissier"
+ <jerome.forissier@linaro.org>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Tom Rini" <trini@konsulko.com>
+X-Mailer: aerc 0.16.0
+References: <20250320102346.13564-1-cniedermaier@dh-electronics.com>
+ <a6ab86ac-4404-4081-8529-b8d11b37b5d2@denx.de>
+ <ab32ace5-efc0-41b9-8d13-292f6f87835d@cherry.de>
+ <D8V6D9S6CBRH.3LRHNU4XCVF14@kernel.org>
+ <052e98f6480b4490bd9338eb2f9ed5d2@dh-electronics.com>
+ <D8VYKGGMN3DQ.1TYW767T1V3WJ@kernel.org>
+ <de267e9022f844cf83bfd3e284c67955@dh-electronics.com>
+ <D8XPRUHR9LEF.1K6BBAH3IJS1Q@kernel.org>
+ <20250404145856.GR5495@bill-the-cat>
+In-Reply-To: <20250404145856.GR5495@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,82 +82,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---2a9b8816f841e00ffc5169555bc8b8ba92e416981b2ed8f42427abcf179f
+--6aa10b9814bcfbcb3f077bd586aed1df1ad36268bac2c63a695ff602a74c
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
 
 Hi,
-
-On Thu Jul 11, 2024 at 9:38 PM CEST, Diederik de Haas wrote:
-> Some time ago I reported to Jonas privately that I had a problem with
-> my Quartz64 Model A and B and that I bisected it to this commit.
-> I just verified that the problem is still present in 2024.07, so I
-> guess it's time to report it to the (right) Mailing List.
+> > > > I wouldn't mind printing the pointer for %p[mMI], but %pa prints th=
+e
+> > > > *content* of the pointer which is really confusing. I.e. in
+> > > > pinctrl-single.c the reg value pairs are printed like
+> > > >=20
+> > > >   dev_dbg(dev, "reg/val %pa/0x%08x\n", &reg, val);
+> > > >=20
+> > > > with reg being a pointer to a physical address. So with tiny_printf
+> > > > the address of reg (which is a pointer to the stack) is printed in
+> > > > this case.
+> > > >=20
+> > > > I don't think we can print %p without putting more logic into the
+> > > > decoding. I think the culprit here is the fallthrough to %x, which
+> > > > then leads to the confusing behavior shown above. IMHO if we want t=
+o
+> > > > avoid that, we'd have to make %p entirely unsupported.
+> > > >=20
+> > > > diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+> > > > index faf55d7f327..8147ffa2c1b 100644
+> > > > --- a/lib/tiny-printf.c
+> > > > +++ b/lib/tiny-printf.c
+> > > > @@ -269,21 +269,18 @@ static int _vprintf(struct printf_info *info,=
+ const char *fmt,
+> > > > va_list va)
+> > > >  						div_out(info, &num, div);
+> > > >  				}
+> > > >  				break;
+> > > > +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP) || _DEBU=
+G
+> > >
+> > > What if we fine-tune tinyprinf via config here?
+> > > For example SPL_USE_TINY_PRINTF_POINTER_SUPPORT and
+> > > select it by NET or NET_LWIP. If someone needs it,
+> > > the pointer output can be enabled, otherwise '?' for
+> > > unsupported is output.
+> >=20
+> > Yeah I had a similar idea, but I'm not sure if yet another config
+> > symbol is worth it. That's up to the maintainer to decide :)
+> >=20
+> > In any case, we have a different behavior to what is printed
+> > right now, as we drop the fallthrough to %x. Tom? Simon?
 >
-> The problem: packet loss, varying, but sometimes massive
-> Q64-A: The packet loss was usually between 8% and 30%
-> Q64-B: Packet loss up to 80% sometimes and this also resulted (then) in
-> its inability to receive a DHCP address.
+> A Kconfig symbol that NET||NET_LWIP select seems fine, and fall through
+> to printing "?".
 
-I just build a ~2025.04-rc5 (i.e. 'master') version and tried it on my
-Q64-B and the problem is still there.
-Furthermore, there have now been several ppl on #quartz64 IRC channel
-(on Pine64 IRC network) who have confirmed both the problem and the
-'solution'/workaround. Hopefully they'll also report here themselves.
+Great! Christoph, will you prepare a patch or should I?
 
-> And the fix in my case has always been easy:
->
-> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3=
-566_defconfig
-> index 1ea8e0f40cc..641452f9162 100644
-> --- a/configs/quartz64-a-rk3566_defconfig
-> +++ b/configs/quartz64-a-rk3566_defconfig
-> @@ -67,9 +67,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
->  CONFIG_SPI_FLASH_GIGADEVICE=3Dy
->  CONFIG_SPI_FLASH_MACRONIX=3Dy
->  CONFIG_SPI_FLASH_WINBOND=3Dy
-> -CONFIG_PHY_MOTORCOMM=3Dy
-> -CONFIG_DWC_ETH_QOS=3Dy
-> -CONFIG_DWC_ETH_QOS_ROCKCHIP=3Dy
->  CONFIG_NVME_PCI=3Dy
->  CONFIG_PCIE_DW_ROCKCHIP=3Dy
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
-> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3=
-566_defconfig
-> index f61b2c181a1..aae5d66edeb 100644
-> --- a/configs/quartz64-b-rk3566_defconfig
-> +++ b/configs/quartz64-b-rk3566_defconfig
-> @@ -65,9 +65,6 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
->  CONFIG_SPI_FLASH_GIGADEVICE=3Dy
->  CONFIG_SPI_FLASH_MACRONIX=3Dy
->  CONFIG_SPI_FLASH_WINBOND=3Dy
-> -CONFIG_PHY_REALTEK=3Dy
-> -CONFIG_DWC_ETH_QOS=3Dy
-> -CONFIG_DWC_ETH_QOS_ROCKCHIP=3Dy
->  CONFIG_NVME_PCI=3Dy
->  CONFIG_PCIE_DW_ROCKCHIP=3Dy
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
->
-> IOW: a (partial) revert of commit 25f56459aebc
+-michael
 
-I didn't try it this time; I just dd-ed my patched 2024.07 version and
-then everything worked again.
-
-It would be nice to get this fixed. I don't know how to fix it myself,
-but I'm happy to test a potential patch for it.
-
-Cheers,
-  Diederik
-
---2a9b8816f841e00ffc5169555bc8b8ba92e416981b2ed8f42427abcf179f
+--6aa10b9814bcfbcb3f077bd586aed1df1ad36268bac2c63a695ff602a74c
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQT1sUPBYsyGmi4usy/XblvOeH7bbgUCZ/LfbAAKCRDXblvOeH7b
-brk5AQCSGmtUVyu0aUL3H8/8iuyacrvnUBmsjlmvxPmfcvnxpwEAlG2SLKQkasxT
-xNtBnqDPHjPl60qo2RHLVFzFPrEcqQY=
-=Eyz2
+iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZ/NiVhIcbXdhbGxlQGtl
+cm5lbC5vcmcACgkQEic87j4CH/gRFQGAj6vMQXLW9oKaBq1W0p8oFF8NyObvUqBa
+EESD+avzx4149YgQBXdzRrLtC1TXug0HAX9kZqqLx65JG/H4EXfn07r3uA6r+Bc0
+INCfn4pKPcJAI9SS2u22qsZ5v+MODMvdlgY=
+=GgpZ
 -----END PGP SIGNATURE-----
 
---2a9b8816f841e00ffc5169555bc8b8ba92e416981b2ed8f42427abcf179f--
+--6aa10b9814bcfbcb3f077bd586aed1df1ad36268bac2c63a695ff602a74c--
