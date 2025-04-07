@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31290C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 06:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773DFC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 06:47:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B7FE82CC9;
-	Mon,  7 Apr 2025 08:44:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB0B282C87;
+	Mon,  7 Apr 2025 08:47:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qOcENZL8";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Y+pawrG8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B8CC82C55; Mon,  7 Apr 2025 08:44:35 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 1EA0782CA4; Mon,  7 Apr 2025 08:47:19 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 629F882CA4
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 08:44:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31C5782C55
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 08:47:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,35 +31,26 @@ Received: from LT2ubnt.. (dynamic-046-114-108-136.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id BADCA403A2; 
- Mon,  7 Apr 2025 06:44:31 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 274803F928; 
+ Mon,  7 Apr 2025 06:47:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1744008272;
- bh=JqzL7vert82Jni4OSbtzRUoH9srInigHYdE5Gb2d1zw=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=qOcENZL8O4qe3Gc/qdsqWvYgbWJD8ypMhHmLvbNlcVo+2cE6U8jOkxWwp+Ey7Wdix
- RFEnTe0GfFmHm4sItXXKS5211lE2svVDpvTMnq4dzH5oat22ULAgZ55FvAT+PpGKyv
- DaiHcWJJqxGCYD0IEdsMF1Ww64qODKgerr2pmzixJeDLJrjO0xyaX5DJw+Ivu9xIuV
- syGyH7TrnkSNoIayMm9nIkvhTVvvXH76Y/AfjoHZs9njCDXc2ni7wqpdT4yXaM2cCh
- iU0YMZW0q5dEMlwejZpC16lrEPuigk7MjpbKCJM7wDY0TVgp7dl877NQ6au6icHDpi
- Dbjq60viecCjg==
+ s=20210705; t=1744008436;
+ bh=QsyzUaKVy+LIEcZM2R5ofJE7IfiVDLUjMuTvS2OhqK4=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Y+pawrG8X5LZqgCZdGpmEzZwVqea8yXA/jk6wcRxmGy3+f7oLscZ4h3RcgN1FQoMr
+ LXdkU8VVCccPnKpnR3pObLQBHpGMo5KrIQVVphtVZw1YfHYwR190p7JmFA70r7d6qW
+ 46LRyycQKqwep/nMZx6so8xKchPd02AWRuGI1w5kd3kDvRgUFtWrGazP8HBPSsJvek
+ blN4TGprxM4SHhr4W+HnYPISSzlXnofYo3mYtQYnH6/PQxZltswCiVzL65GjhM2ZAk
+ KrgWAGQSCXoUAbugrt4UyvEfSjA0REkI8pc9ITDUrtHaT5X1QLod5feJYHs3YkR6fe
+ 8a9Ee/28uMC1w==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] smbios: select CONFIG_BLOBLIST
-Date: Mon,  7 Apr 2025 08:44:24 +0200
-Message-ID: <20250407064424.71541-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] buildman: update PyYAML requirement
+Date: Mon,  7 Apr 2025 08:47:12 +0200
+Message-ID: <20250407064713.71814-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250407064424.71541-1-heinrich.schuchardt@canonical.com>
-References: <20250407064424.71541-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -78,32 +69,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit 53d5a221632e ("emulation: Use bloblist to hold tables")
-`make qemu-riscv64_smode_defconfig acpi.config && make` fails with
+On Ubuntu 25.04 installing the dependency pyyaml 6.0 fails with
 
-    drivers/misc/qfw_smbios.c:93:(.text.qfw_evt_write_smbios_tables+0xe):
-    undefined reference to `bloblist_add'
+    License classifiers are deprecated
 
-Build with bloblist support.
+Update PyYAML to the current release.
 
-Fixes: 53d5a221632e ("emulation: Use bloblist to hold tables")
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/misc/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ tools/buildman/requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index da84b35e804..6312f54a3ca 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -569,6 +569,7 @@ config QFW_SMBIOS
- 	bool
- 	default y
- 	depends on QFW && SMBIOS && !SANDBOX && !SYSINFO_SMBIOS
-+	select BLOBLIST
- 	help
- 	  Hidden option to read SMBIOS tables from QEMU.
- 
+diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
+index 052d0ed5c6f..a6b1aecdbe0 100644
+--- a/tools/buildman/requirements.txt
++++ b/tools/buildman/requirements.txt
+@@ -1,5 +1,5 @@
+ coverage==6.2
+ jsonschema==4.17.3
+ pycryptodome==3.20
+-pyyaml==6.0
++pyyaml==6.0.2
+ yamllint==1.26.3
 -- 
 2.48.1
 
