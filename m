@@ -4,86 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816EEC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 11:10:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1CA6C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 11:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF8DA82CF4;
-	Mon,  7 Apr 2025 13:10:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 38A4982D39;
+	Mon,  7 Apr 2025 13:10:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zqqTUotQ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tUtpC303";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C11982D66; Mon,  7 Apr 2025 13:10:20 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1976682DB0; Mon,  7 Apr 2025 13:10:58 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B099782CEA
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 13:10:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7124182CEA
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 13:10:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aaecf50578eso678478966b.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 04:10:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744024215; x=1744629015; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cKryFZ/FLDpBCKXNp3Qa1unEXPrsAiwPql/xfdaCIqo=;
- b=zqqTUotQkivyLy82dn7lovYmLHoghTpyt0IpiTIrH505JQ7qmtLKUkubWbhNQkuLyZ
- 2jw4qO11Al+gs8kNXK+e7uVF0aY6A5LKkCbPR10RzbIlptT2C780LeLQ0vNj3bzcXXwa
- G6NueJNOftfkVAu7BRIVuyntcxqtZeMRb8f0ShxQahcYq6ad0ifaJPe1eHhuztw5CIrV
- Mby4GHdGNHwFT/W7yX3H9t84jv+EAwDqLs1IvrpU6cN9sXmIjo+m3XmSTYC96O1UNR7O
- 0clc5SHWUYOr/FtdrTt2FcLq76MddsSYbQlYRPjL99damKYqm1BQdAmF1k7/gv68JvKN
- pIbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744024215; x=1744629015;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cKryFZ/FLDpBCKXNp3Qa1unEXPrsAiwPql/xfdaCIqo=;
- b=qQ1Ir8kwKsvep8WPYnLdLbQzPhqJ5OMCUHcOYHTJ4urRm72w8UiZwuCdTUreAC27uB
- HGKb02yRjIyXcubeUuC+zdkwYDkIHVb/UFxkaFerCD0On8IxOAiQoEhy9SRN9jFztwCh
- 1uTqP4qaS0NJsXGL0bYesvF9bb7N+acf/kSKiU0OFQBP2mkOJ92edH6OEzEjr1HzoEGR
- Q4XwoqFcY6vYquUPY1XXbiCsYBPoiViT2YndgSgLuOhFJ2lYByyzAPHU5jaSY8ACDfHx
- IGvfXDP+Z0XMS86yBWXXIQK7WQ6uiiuSmM3mFY7+hvG/0d4eb/IXSCna6AUOvuc5Dnw6
- fqfw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXMfY5/FSKotyLiWqti6Wc2C8bcRYwkPrHpMOVbmyEg30z6TAE9k+tjGZVh1Cxi37z6oK4QNSM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwoLSwy3DcdJyaxEl4QgqAgGgpSrC1uC7ekqxNBTO1kKefxSbOX
- USAnuXcvtOL28R6gUUD0t1Buay+zdn18ok36Lv8k7QeM+0lZQ1uqNAXcbzYcZJ4=
-X-Gm-Gg: ASbGncuOvAcxE6KzPnX9eqL8KOzssrG3GLazUZnnkpd2pINM9MRTNEMrfcfViSEPDz8
- SBXsyNIDsW+yH3v373EaEi6eXedP1rzKzF9npV3Z/AYQgopTTyjURgeknjAWkDepIcvflaUacWP
- MoJXPU+0vaAFzAfLH6NwkA2tiz9vbwhZ/f5af+DDVCJpQnlqoNharNRJW7W5SuKpoTzKLoaN/xK
- yb6O0HzXN9k5qiBKiKpf/vmP651WVcqaAGmcVaa1+ctrBq9daZW7C2P8M8KFjcp1lsDrdnCpzQG
- 6saKcbEHjwA+mGqg4xhZprdhpFWnM/drBzfhjVMBT1t9CFOy3GrWYTctoLUk9K4cuFT0
-X-Google-Smtp-Source: AGHT+IHRfoxuqYtN+c56t3Ovb1X3T819Sueubq84Z0Mx1RYXT7UV0rmbgbsH2ylmd4/BOP/mOyPtoA==
-X-Received: by 2002:a17:907:3d94:b0:ac4:3d1:e664 with SMTP id
- a640c23a62f3a-ac7e762045dmr659794266b.46.1744024214771; 
- Mon, 07 Apr 2025 04:10:14 -0700 (PDT)
-Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:3dfc:f90a:642f:d614])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7bfe9be51sm738021266b.50.2025.04.07.04.10.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 04:10:14 -0700 (PDT)
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Mon, 07 Apr 2025 13:10:00 +0200
-Subject: [PATCH] IOMUX: Fix stopping unused dropped consoles
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=13a0=WZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
+ References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744024254;
+ bh=Edg3voBgUC7Nk8s8jvADxBgl6cR4REGVRf/GLLTeygg=;
+ b=tUtpC303kZ0RSwOiugzydmZw3wVELH5sZFnnaWe+QCCn2ZZmB9DZAQV30xazYxYFFHP8y49n+
+ m2eibgp3sn9O3NXMApuEGxQcshuTnnsCYNExBcbzPnZaE173NU9Gb1QBg0mWDAUU7lb+CMKU8Ri
+ w96gvTbJnuh9hENmMJglQ2aaAT8imgVwM/OMs3sq7zHzllGPc2nAqAJ3a0j2stx5Ms1wahLfR6U
+ g22iSbjyBAwDMmtmoXJuqIy/LM2KPYt0DBr9yURYOWkg8SS6Py9ydS+m7TWT5pk6bYM2YNWZTzR
+ 9fYgZQ+N7SXIdkzubgOjLES0gKkxgYbSYwT7ZWQE1cjw==
+X-Forward-Email-ID: 67f3b2af454af5417a2dfb50
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.0.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <765a4f82-d0c8-43a3-beb3-31e133fd4811@kwiboo.se>
+Date: Mon, 7 Apr 2025 13:10:32 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] riscv: Provide __image_copy_{start_end} symbols in
+ linkerscript
+To: Yao Zi <ziyao@disroot.org>
+References: <20250407033744.4025-1-ziyao@disroot.org>
+ <20250407033744.4025-3-ziyao@disroot.org>
+Content-Language: en-US
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <greg.malysa@timesys.com>, Trevor Woerner <twoerner@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marex@denx.de>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Lukas Funke <lukas.funke@weidmueller.com>,
+ u-boot@lists.denx.de
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250407033744.4025-3-ziyao@disroot.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250407-iomux-stop-v1-1-d6485f7446fd@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAIey82cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDEwNz3cz83NIK3eKS/ALdRNPExKQks0ST1GRDJaCGgqLUtMwKsGHRsbW
- 1AF7IRvFcAAAA
-X-Change-ID: 20250407-iomux-stop-a5aabb6a4ec1
-To: Tom Rini <trini@konsulko.com>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +83,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-iomux_match_device() returns -ENOENT instead of the end index, which means
-console_stop() is never called at the moment for unused consoles.
+Hi,
 
-This prevents e.g. f_acm from releasing the USB gadget interface when
-removing it from stdio/stderr/stdin.
+On 2025-04-07 05:37, Yao Zi wrote:
+> Binman looks for __image_copy_start to determine the base address of an
+> entry if elf-base-sym isn't specified, which is missing in RISC-V port.
+> This causes binman skips RISC-V SPL entries without filling addresses
+> into its .binman_sym_table section.
+> 
+> This patch defines __image_copy_start in linkerscript of both SPL and
+> proper U-Boot to ensure binman_sym functions correctly with the default
+> binman.dtsi. The paired symbol, __image_copy_end, is introduced as well
+> for completeness.
+> 
+> Signed-off-by: Yao Zi <ziyao@disroot.org>
+> ---
+>  arch/riscv/cpu/u-boot-spl.lds | 2 ++
+>  arch/riscv/cpu/u-boot.lds     | 3 +++
+>  2 files changed, 5 insertions(+)
+> 
+> diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
+> index 907094620bd..18eb62c01c6 100644
+> --- a/arch/riscv/cpu/u-boot-spl.lds
+> +++ b/arch/riscv/cpu/u-boot-spl.lds
+> @@ -16,6 +16,7 @@ ENTRY(_start)
+>  SECTIONS
+>  {
+>  	. = ALIGN(4);
+> +	__image_copy_start = ADDR(.text);
+>  	.text : {
+>  		arch/riscv/cpu/start.o	(.text)
+>  		*(.text*)
+> @@ -46,6 +47,7 @@ SECTIONS
+>  
+>  	_end = .;
+>  	_image_binary_end = .;
+> +	_image_copy_end = .;
 
-Fixes: b672c1619bb9 ("IOMUX: Split out iomux_match_device() helper")
-Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
----
- common/iomux.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This looks like a typo, should probably be with two _ ?
 
-diff --git a/common/iomux.c b/common/iomux.c
-index 1224c15eb718b5e78f625f57274000114d85c7de..4844df51fbec645f54d14f31e34ed717da056667 100644
---- a/common/iomux.c
-+++ b/common/iomux.c
-@@ -131,7 +131,7 @@ int iomux_doenv(const int console, const char *arg)
- 	/* Stop dropped consoles */
- 	for (i = 0; i < repeat; i++) {
- 		j = iomux_match_device(cons_set, cs_idx, old_set[i]);
--		if (j == cs_idx)
-+		if (j == -ENOENT)
- 			console_stop(console, old_set[i]);
- 	}
- 
+Regards,
+Jonas
 
----
-base-commit: 0efe8ea57fc7a1a6fc5f64fb3cf6bc4a1a4fc219
-change-id: 20250407-iomux-stop-a5aabb6a4ec1
-
-Best regards,
--- 
-Stephan Gerhold <stephan.gerhold@linaro.org>
+>  
+>  	.bss : {
+>  		__bss_start = .;
+> diff --git a/arch/riscv/cpu/u-boot.lds b/arch/riscv/cpu/u-boot.lds
+> index 2ffe6ba3c8f..b11ea8b56d2 100644
+> --- a/arch/riscv/cpu/u-boot.lds
+> +++ b/arch/riscv/cpu/u-boot.lds
+> @@ -10,6 +10,7 @@ ENTRY(_start)
+>  SECTIONS
+>  {
+>  	. = ALIGN(4);
+> +	__image_copy_start = ADDR(.text);
+>  	.text : {
+>  		arch/riscv/cpu/start.o	(.text)
+>  	}
+> @@ -57,6 +58,8 @@ SECTIONS
+>  		__efi_runtime_rel_stop = .;
+>  	}
+>  
+> +	__image_copy_end = .;
+> +
+>  	/DISCARD/ : { *(.rela.plt*) }
+>  	.rela.dyn : {
+>  		__rel_dyn_start = .;
 
