@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77068C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 09:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85115C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 09:54:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 136EA82D06;
-	Mon,  7 Apr 2025 11:54:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5FACC82DB0;
+	Mon,  7 Apr 2025 11:54:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SeFKwiU0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TkLbLKhO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EA9382D6C; Mon,  7 Apr 2025 11:54:40 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 661C582DA1; Mon,  7 Apr 2025 11:54:41 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F68282CF8
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 11:54:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E83D82D0C
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 11:54:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ac6e8cf9132so450077266b.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 02:54:38 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac2dfdf3c38so834995566b.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 02:54:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744019678; x=1744624478; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=C3n2PuuWnWOD/L1fJQM7pnU396SH5A/zTXL8NXUqE74=;
- b=SeFKwiU0Fg/BfKva9MMnFxEHB8DAaDUt2hFvzBmd/vAJJFRQvksIp6T6mCTIPuZLRW
- 2QuGkxmtilHrmLlzSELeNeHpnLQauOme0Lm9/pMHLIGnKYw/V/FBnSccHRxp0kUPLyat
- SAo7EEabTtVYrMMcZfZAdVZWqWbrFmBiD3WFpBTUO1qPQAJVpFbqwmdkLU2JvhFj78vO
- Oh7xK9iz7gZZIvvAujlQ0Rqbxo4OuMWrO3y+bn3S+yCfCe+roFwasBnXRSY6Wo/TsMqc
- jBMOMjuyxdp/5cHBdMkr/IdFZpikyrCCozFUvAR//ijxURCuASYdMOS+R8YP2gIbpYPN
- JcKQ==
+ d=linaro.org; s=google; t=1744019679; x=1744624479; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=tN741xSxEN2az9AYG73nz4jt6mHQ6/S8ra/ALW0HwAw=;
+ b=TkLbLKhO8KrPEbnQGBk5uDr6/0WbkfDcvwezHIZCH4QjYYzZjxTWiHeCmJB2fk6Zpg
+ 1D4qYd4KvOm5WEEMILFNe9XPwzKJBnJAU633vqtzjYAAdIS1J7EvPdQMcky+M5iVwiYe
+ n7cgQA4Qpm1BzWhB4sNojClOgJItmXaqF34MxW/PkKqLp/ZzNv2I34hRvGru4Y4k7zft
+ MQSejaBzQzpT8z1psl1rQ1zbD3nOOCz07Q43aeMHil0TEkQ6rNgjrWauuO2knyjhHeJc
+ BKd4JfvcBL52igWSfMctHGlX57nV9uUFofvFvhZ8tkpFW37EySNyNLlirdQ3YRZzLIHv
+ BKcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744019678; x=1744624478;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=C3n2PuuWnWOD/L1fJQM7pnU396SH5A/zTXL8NXUqE74=;
- b=OD17M/7LHi4NvGnfD5aKnIEmaRjc/Ahi82BNfIaQaHx0fuOn7I3Xm4Iu5Rvdui33qh
- +M8WLpM09F57kvfHzNFn6UlDF3c4wznl+2sCq0U1hcEoZOJAknJsQzqLCAMJ7ggwoLRc
- h+Gt2WLhSiehg4Pv++sZ8vgKj5G6WyuEzy1BDMqMQcYgTNDn3JaEt04dCPIrRNxIO+Uw
- T1wuXv60N/OXB+AliDwuQyeaEdCd6jPU1C5Vui4PSVG9rlGq3fArC3xV5gWHSOryiksG
- Wh7+ZCI2YGBo9Fg8wej89p8eP0I6w9MJY+elMe5XSKPF8Ou16yz4VaPm4b9q5zIT1uIn
- eelw==
+ d=1e100.net; s=20230601; t=1744019679; x=1744624479;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tN741xSxEN2az9AYG73nz4jt6mHQ6/S8ra/ALW0HwAw=;
+ b=kDRkSEYCWITIHHwJKtTe9Wiju0izIeC3AqXRc0Nx9OxXiM654qfzl8D/QKnW78fjIw
+ /XHrH4vu1Sxsc4G0bydvnWLIyEvvq6hN8ME+T8BFEwBVLY9k5z/JUPCAhmBqJuiApcBn
+ J/XBaeLckuzkLRYtga0KpNv9kdbLVZpTkH6faDUXgtM3b8jzKT40LtHxtwmauGvoFEDj
+ 6WFNbSYIcaNKgK4wxFRgLq5G2MBQ/27D+fHIO0Y7xi+cTuVsZqhxE72VWIKRc08HAnip
+ V8ggv0OYVFemj9Sd8GHxIhOnvUb8D1rejtcgEbTQSXb9PHpdCYV6TnllxOsMCNvFZEEL
+ cx+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVM4p/9QgK1t0Kapt2rsRjSNTWcerAnePP5HYtk02XWvV8JtUEdWmP2LWgrUbMYDRXHC42XXNs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2h2npgv8claEgjJm6/XS5TS6wCmGslg1KZ7DV1/6oCBqhevJe
- kJ4thwjek1W7wslgx4AjkaFSnEHA92fASPLY9vAAcmUqKiv9AAzPtG9rNVG7ReA=
-X-Gm-Gg: ASbGnct+KfPAh12oqzoRbVwFAy1tvDeyV7JlaK5jxSdfDvWKUVhzfEFNc8j1bjQWJ4b
- XPSdZumkZ2GkCwIRFkneyDTbhWNd/bzbDfT2yZXUicfzriEYPRXgJ2N8Dw1iR1rfD9CLKYaUf7e
- 7fk2r21LKGDig5qh5jK+xEHx58DNl1u/DjKW15/pWB/Fnupt7CBlAay3mG6BK+YWveI4Qq7kRO1
- 7o0yrljiMVAmXtL0u40AnTpf0fd6gSoBqcs1IOHx8tJem/v7Dx4XP3HX/ULTLRUcHMGGzA/BGGP
- 5lxKgYQISa760Z+w88UWzekRQBsi7bdsbv/ohk5fgbLcG+2OLTj6IXO4yPLN0Ngycv11
-X-Google-Smtp-Source: AGHT+IHJgtNbCdSAhSio4tP3RS4dkPnM8cOtOikQTin6eWSbYMUiMz1ArI55a0+XESMiIC3aM/EyTA==
-X-Received: by 2002:a17:906:d204:b0:ac3:cabc:1be7 with SMTP id
- a640c23a62f3a-ac7d1c3945emr917250866b.48.1744019677885; 
- Mon, 07 Apr 2025 02:54:37 -0700 (PDT)
+ AJvYcCVb2BYjT+T/jyEi8hCqdoQbdeLoSm2mKhxaUjoqL2IL9UbOz7P2NA1hk9TIGEEeeWYZp/7j6i4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmUQ/ZQFFiUQNWXzcrEWyyVVzxbG5xw1AUni99Zu0Bk/hGVeQO
+ pXN+fIBy9poU1suqTT/7UX00WGE1HESPIHkSb9PdJnBHLOClRjzeUt5qWlueIGQ=
+X-Gm-Gg: ASbGnctwA9nZ/6J2utQQiY8GkfIaHV2/hIjqs8RQ578tzWvwX8kyc7bMI072Mg4tEGp
+ P2IyjfCug1dRETTcz7ovR4K5pWb6w+3jViijlngysKiIwb5isiYwXFe/Yejn+nPGSPTCv/hpOSe
+ UVQ/v8oBm7HUHu0krfDf+8aLCGIBhsO+GMSACNOzg+5IJgPy+/QI9RiVstUv9is7xIBGYq+f0Bb
+ dlAprhexQJJpY26DJAMjyNtgXIr4kyZ6Ls+ZBuAtzP5qyAUfTsVtcoFQQcQEymP+XKWfXkhqUUm
+ IRcCLLDEiR/1jeWEnFDZmpnoJ1ycalO8ie9NzKgYqyC0thABMMv5cgdPTg==
+X-Google-Smtp-Source: AGHT+IG9oO+9t8xcT2JyW1FLn5MO2zgNZKNJJKhe/MieTXAsuNOOooRraK/5mrSNiX0N1tfLtViHAg==
+X-Received: by 2002:a17:907:2d90:b0:ac2:b086:88d5 with SMTP id
+ a640c23a62f3a-ac7d18a1efdmr1123579766b.18.1744019678800; 
+ Mon, 07 Apr 2025 02:54:38 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:7d3f:b102:5311:c65b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7c013f6b5sm735733766b.109.2025.04.07.02.54.37
+ a640c23a62f3a-ac7c013f6b5sm735733766b.109.2025.04.07.02.54.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 02:54:37 -0700 (PDT)
+ Mon, 07 Apr 2025 02:54:38 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Subject: [PATCH 0/6] usb: host: ehci-msm: Clean up and fix crashes
-Date: Mon, 07 Apr 2025 11:54:20 +0200
-Message-Id: <20250407-ehci-msm-fixes-v1-0-f8b30eb05d07@linaro.org>
+Date: Mon, 07 Apr 2025 11:54:21 +0200
+Subject: [PATCH 1/6] usb: host: ehci-msm: Fix pointer check
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMyg82cC/x3LSwqAMAxF0a2UjA2YgghuRRxU+9QM/NCACKV7t
- zg8XG4mQ1IYDS5TwqOm11khjaNlD+cG1lhNvvVdK14Y+6J82MGrvjCeBVH6IAgIVKc74Q/1Gad
- SPtET7B5gAAAA
-X-Change-ID: 20250121-ehci-msm-fixes-b1ed17a1eaea
+Message-Id: <20250407-ehci-msm-fixes-v1-1-f8b30eb05d07@linaro.org>
+References: <20250407-ehci-msm-fixes-v1-0-f8b30eb05d07@linaro.org>
+In-Reply-To: <20250407-ehci-msm-fixes-v1-0-f8b30eb05d07@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>
 Cc: Sumit Garg <sumit.garg@kernel.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
@@ -103,28 +101,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ehci-msm driver has several subtle issues and stale code. Most of them
-are minor and do not cause issues during normal usage. The last patch is
-the most critical, it fixes a reported crash when stopping/re-configuring
-USB, which has been around for a few months now.
+dev_read_addr_ptr() returns a null pointer on error, not FDT_ADDR_T_NONE.
 
+Fixes: 2be1130a9305 ("usb: ehci-msm: Use dev interface to get device address")
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
-Stephan Gerhold (6):
-      usb: host: ehci-msm: Fix pointer check
-      usb: host: echi-msm: Drop ulpi definitions
-      usb: host: ehci-msm: Disable clocks after all register accesses
-      usb: host: ehci-msm: Use clk bulk helpers
-      usb: host: ehci-msm: Drop redundant EHCI register writes
-      usb: host: ehci-msm: Register ULPI PHY through NOP wrapper
+ drivers/usb/host/ehci-msm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- drivers/usb/host/ehci-msm.c | 146 ++++++++++++++++++++------------------------
- 1 file changed, 67 insertions(+), 79 deletions(-)
----
-base-commit: 0efe8ea57fc7a1a6fc5f64fb3cf6bc4a1a4fc219
-change-id: 20250121-ehci-msm-fixes-b1ed17a1eaea
+diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
+index a759aea9db38dd5af2bb85b677ac403018983cfb..dd1d527a3a2c3f38df747dbb41cbb84bf76286e2 100644
+--- a/drivers/usb/host/ehci-msm.c
++++ b/drivers/usb/host/ehci-msm.c
+@@ -141,7 +141,7 @@ static int ehci_usb_of_to_plat(struct udevice *dev)
+ 	priv->ulpi_vp.port_num = 0;
+ 	priv->ehci = dev_read_addr_ptr(dev);
+ 
+-	if (priv->ehci == (void *)FDT_ADDR_T_NONE)
++	if (!priv->ehci)
+ 		return -EINVAL;
+ 
+ 	/* Warning: this will not work if viewport address is > 64 bit due to
 
-Best regards,
 -- 
-Stephan Gerhold <stephan.gerhold@linaro.org>
+2.47.2
 
