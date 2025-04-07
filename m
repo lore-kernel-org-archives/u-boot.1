@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD20C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 14:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CC3C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:00:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEC4582ED0;
-	Mon,  7 Apr 2025 16:57:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EBE4D82F40;
+	Mon,  7 Apr 2025 17:00:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jCL+i+5t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HABvjkHY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F1C582ED4; Mon,  7 Apr 2025 16:57:50 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id AB43282F41; Mon,  7 Apr 2025 16:59:59 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B92F82CEB
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:57:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86CE382CEB
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:59:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-72c173211feso1170869a34.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:57:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ac2a9a74d9cso489210566b.1
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:59:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744037867; x=1744642667; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M525CRQLB7+0pao1tTKTle3HByNr7vHOU2vO2MGbB+g=;
- b=jCL+i+5tm6oPRqowqaWBT5zYRYivL68rHLEQV1IYeChgFhNIitYvDmhPhYW0aFj2jy
- Z8rf+UizFvFVgmLx+viLOHn9b+gfsFhJAmdg1KrA8EY2+DqVjAnpQsfi7oUSlXfqlj5p
- xl1sSysjzTxGGDo9UANghAwXt/JayolZ2gGhs=
+ d=linaro.org; s=google; t=1744037997; x=1744642797; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DNA9MQePrF8FJb+p4qpdq0Ht6Kd8O7P7Hx2/PZVTGYA=;
+ b=HABvjkHYn93C5kTwZ12OFM43FnfON0nRbI7PqnpWvQvYELPFgyrAOjAAZndQeBMeft
+ 8B9tAPBc2LWSvy4gbFZtVnGISMveXjp9s1H4VYxI1jEph9rzb765KODvVjq8JmkR9EHd
+ ZA6awNkyZkLgwMnqrLeDOp2x3MOysZIPlGWnlSb6zHZKf/8J8MZSkIsfpw52a9E7JwU3
+ HnaKCWrsqWrxOgVBpv5YoNB0A9amdd5WybDDwhTqLTwzQ1t4otvbwTMminY0l/qQwVyi
+ EDt3llCLcYyhWPRKTt0xtJl6JpgE7JiH6COiy3l7fnBNf63GCHfRT97xRwcSvktuMjeM
+ pCfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744037867; x=1744642667;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=M525CRQLB7+0pao1tTKTle3HByNr7vHOU2vO2MGbB+g=;
- b=kXMm8573Tx9kVvQ2ul05mt2AbNtoXYTLqnzEiTVpoOvUjWK2vxmyFARcf8mhOrLw3p
- ymc1V65KJhqLfhdHrCa6g9LOUHiXVg51n+QpLCWvkqzMspowDIaSKU1O+oxy2Aq9xU81
- dl3YPb9MB0A/weig+muIXPi2LaRg5YzJzbV8/UATjwzUZbeZ7flTJezy7SiEbukhk5tD
- wiFbVD25pS/j+/prI+QLq7PuQlHHLDtfoOAjbq7hc+BvJfmqHVMxFP3k0oESBHhvE3q5
- M98oMmsz9+pFRijOO3JdL/9jbQh6pCXw8i2/fk6G4QQAEMavtzPsYNLOHIHlG48nxWf3
- +5Rw==
-X-Gm-Message-State: AOJu0YylWx2LAoF/uY0rBxcqXB4K4A8VNbcQycqinIIzTheGEUOg9CDw
- JdFNb+RszBlmk4F6Zlgp4U1IEChEoqfYPk6nl+YU3vJ4EZk5haI7/RPbbacv9no=
-X-Gm-Gg: ASbGncsFlZYNDlIl3G9ba9ONJFKeLwF73/PzJJMTRT+iTzBp+3nAOVBs/uMPqUBu7PA
- UbSX/qZUBpwKWdeceyBuhmtYl67/+qUmuyHBTCDBnYW7n9U7pEf1v0TbS9pd1r0T0w9EeSIZJmD
- 7kz35MvfdF2aNifVycmkfBQuGb1El0hUlZgR+YHahopkSgw+AytpVQzPSHKnr5YoiQ9zGEePyUo
- +iLcReMLL7DaenMbhs6Ez6pydZnRpU3Hj7WKp35d0of3K8iwDQYhHQ0Yr3tk739mt4jOyWxIJvl
- h/5l3HenNv2EUfkESdQSYGaQkGCEMWtioTttpi35uT/uAcQCDUmjb6TCZ78E1e9P8vzWUmzxtpb
- QXbqc
-X-Google-Smtp-Source: AGHT+IHi4f2hTMAlKf9cVyJzCuRDDHxF70MhfnS8s02ihSALaAc+un5pXKJ00/PpqtkwWE0ao56oGQ==
-X-Received: by 2002:a05:6830:6019:b0:727:3a2e:2132 with SMTP id
- 46e09a7af769-72e369563b6mr9454762a34.21.1744037867068; 
- Mon, 07 Apr 2025 07:57:47 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e305b641fsm1683601a34.58.2025.04.07.07.57.46
+ d=1e100.net; s=20230601; t=1744037997; x=1744642797;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DNA9MQePrF8FJb+p4qpdq0Ht6Kd8O7P7Hx2/PZVTGYA=;
+ b=E5fjW8kf6wX3onWqqyWIhaccfbIjfcsoy27qIgRzHhN9l7DNw4WU8HQCdxvcjlAkwt
+ qkQ7TN3Ad0KC1y4tgwOJ7hPt026eILzRhYzHxYbP4LVvq39cSkya775UN0Nk5hyky+qw
+ u+ZS/QQssxRxakwb7R84FX+VYWldZZFKkaWGwqciXLWLMQPlYDU2Fq+BAZeBzjKaiYnw
+ mN6KwxyY66cIdZc2nHDEjsiGbHFuefPkXxNI6gQy5DAqs0Glb2TYX7ssiCn76p8xL/P9
+ iw8dZ9uahc9IcrYzpB/jQEkha6XYHaOLm6eiXmokRME9xdV6FPPGb497XLBSIgQHUvjf
+ esCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSOWJAMBCkc05Hu5+Eo70GJLWo1Q8AJmodpfc+v7LCLR8z5kgI8KSyrePo6td9CmZ9C7aajV8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkYkL2vgZyaWNO5i4mj5PODeeM3znGDp9Iz3utH0+WkOEQ9GjL
+ QqmiXhPn6cTvUjPPfCKyFUmxnnF4F3TL6FU76bPc98KTrF7atrw54rPTLZIWbqQ=
+X-Gm-Gg: ASbGncsH8llgwJ58SsOF/IwApir2j1yY2IUs8KZIvU6GWRod/JJrw7BLEgJEBpmxMNI
+ yvE8alFfvB9WIyYdVKct9CG0RhlW9nSzn18WNWUpaw+ks2h/EYlJxWBvQqcIqDFiAiWowD56H0O
+ s979URG15AyKKYfke07boyGlQAfBY79OUzzRO32niU8FQXTZokn2eKsXkEtZSsk1+taeFtg7zCH
+ 49O/eOAT302N2HqJakl3oaEJ61cCG4Avax+TCXvi4aZ1wcb6jBuQYybdCCozFQE4Ye2ZShGqtMk
+ /5MOsLbqIz9xpppAhfhSHcoJRssIuBWZyT5Ogq0MFbiYskyCioPoW0rgwQ==
+X-Google-Smtp-Source: AGHT+IF8ZJR2tjqOPmi0ptFEPNzU+Kl9YoikMH8gvCSDvz4cJgdE+PkHGzxIrODxTm1kI+z7eONc5Q==
+X-Received: by 2002:a17:907:9727:b0:ac4:4c8:5e30 with SMTP id
+ a640c23a62f3a-ac7d1876af2mr1328814866b.17.1744037996916; 
+ Mon, 07 Apr 2025 07:59:56 -0700 (PDT)
+Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:b2e5:7ea8:e86c:3f99])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac7bfea2224sm751585666b.74.2025.04.07.07.59.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 07:57:46 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250407064713.71814-1-heinrich.schuchardt@canonical.com>
-References: <20250407064713.71814-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] buildman: update PyYAML requirement
-Message-Id: <174403786613.1222572.513327676677554106.b4-ty@konsulko.com>
-Date: Mon, 07 Apr 2025 08:57:46 -0600
+ Mon, 07 Apr 2025 07:59:56 -0700 (PDT)
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+Subject: [PATCH 0/3] usb: gadget: Fix issues when using f_acm with ci_udc
+Date: Mon, 07 Apr 2025 16:59:34 +0200
+Message-Id: <20250407-acm-fixes-v1-0-e3dcb592d6d6@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFbo82cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDEwNz3cTkXN20zIrUYl1LY9NEI/Nk80SjJFMloPqColSwBFB5dGxtLQD
+ X6u/TWwAAAA==
+X-Change-ID: 20250407-acm-fixes-935a27c7a2b5
+To: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, u-boot@lists.denx.de
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,22 +102,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 07 Apr 2025 08:47:12 +0200, Heinrich Schuchardt wrote:
+The ACM console does not work properly with ci_udc, it crashes immediately
+when setting it up, because usb_ep_disable() is called on an USB endpoint
+that was never enabled before. There are also some other issues in f_acm
+where state is not correctly claimed or cleaned up.
 
-> On Ubuntu 25.04 installing the dependency pyyaml 6.0 fails with
-> 
->     License classifiers are deprecated
-> 
-> Update PyYAML to the current release.
-> 
-> 
-> [...]
+Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+---
+Stephan Gerhold (3):
+      usb: gadget: f_acm: Claim requested USB endpoints
+      usb: gadget: f_acm: Allow restarting ACM console after stopping it
+      usb: gadget: introduce 'enabled' flag in struct usb_ep
 
-Applied to u-boot/master, thanks!
+ drivers/usb/gadget/f_acm.c |  4 ++++
+ include/linux/usb/gadget.h | 27 +++++++++++++++++++++++++--
+ 2 files changed, 29 insertions(+), 2 deletions(-)
+---
+base-commit: 0efe8ea57fc7a1a6fc5f64fb3cf6bc4a1a4fc219
+change-id: 20250407-acm-fixes-935a27c7a2b5
 
-[1/1] buildman: update PyYAML requirement
-      commit: 38b34711152937b124ba91f0519813c161d9d60f
+Best regards,
 -- 
-Tom
-
+Stephan Gerhold <stephan.gerhold@linaro.org>
 
