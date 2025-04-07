@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D92C36018
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EDB8C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3766382F65;
-	Mon,  7 Apr 2025 20:10:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0C0A82F85;
+	Mon,  7 Apr 2025 20:10:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rba5BITy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wg9T4kV+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4903E82F85; Mon,  7 Apr 2025 20:10:28 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D0D058303E; Mon,  7 Apr 2025 20:10:48 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CA1482F08
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 20:10:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD27582F08
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 20:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43cfecdd8b2so37231485e9.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 11:10:26 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43ed8d32a95so25553315e9.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 11:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744049426; x=1744654226; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744049446; x=1744654246; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=pNeU0EBJdIw9Im57BQLZXCEW108pepNze5fU9vVP+yo=;
- b=Rba5BITyCvcabLfib7UCo7HoIwiwpxp7bQdzGeI/JAQOrrvgENxjzryoKg98PatdcQ
- 1HrIanjx8LjIkBvgCEUl+b57onSD9KMdiJywCGpJUBC7puco1S5TsXKTxubYxyFBeBhv
- FzL9kX/KEsRHh8xqD5D5zS2rVhearxQJK7TqFFkcsCYvZRFq+cGz4RztOJpBjWpTHVtd
- wTrFbJEJfh42VBXaJ68pACaWAeOy+mWzgKNgtl2Er4dn7zfZBotkCNXpoUnDQgtVdh9N
- s7RPUsd73CVYg5GATr3/AA+T90JDM7PrlNiZ66tMjSd9lW5QM9zRPrHjw1WkXBEDa/xJ
- aQcw==
+ :reply-to; bh=XZqHPI3EL+TbF/joJGr//eWNUhjgVFvVZuux+scIBIo=;
+ b=wg9T4kV+jZYkW6O8HCFUvoX1AzXgg9qGuI+5J8RzziMyKoM4lNI+gSQCNNvK2IF0NJ
+ 2bvYQhtGAxMuDUB3cxyDpGUtgGpeM4h8fQtmy8DjDYmjivPt4lS2ZxZBGEmDqPfeAwE6
+ gzrcqVnjY1girOsgsciVWlnYNpIs974q1b6d5iaqJc7XIUNBJOMXYf0jqmovdrc4FJIJ
+ TFnnp7FCYOEaZf/t4dEn1okoKPNgIm9VzSixapVv41QaSxCvI7UcPN3cWKpMIOWD25Uf
+ g0Ws6xThzUDn8Zu8IoVLGazLkVV8d1Gfw9t/dVfGxNoj/uiKfexLcIriZpxUV/J8h0P7
+ CFUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744049426; x=1744654226;
+ d=1e100.net; s=20230601; t=1744049446; x=1744654246;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=pNeU0EBJdIw9Im57BQLZXCEW108pepNze5fU9vVP+yo=;
- b=ITgXk0d5oD0NK6ZIjwtNAnxTI6zmcJWA6KY4eCg6SaNLUSqqZUe2VY+VF6Pvr6mrLe
- bL/jnOa6eHg56J0Pn436LxL7PkEnR4h60PHCZiHojdXT6aVzpcs39QHzjYDO7rSVek9I
- XliqMQE2CLnC5f7lOFMf3ouyTSVz/WYUewGb1T0fDt7I2XKNn+5XhGUvr50byshP/o/Z
- oQ9EUaRoViO8ippJ4g0lRasyhZ6CEnI9kPYmjXqY20RtzuzmML7nt64kwW+BukAycT0w
- +g7caVi+6nQVBBtBiK9x89ZG3ZxU/P/BRubo59cdS/x6iqlzT7aFjFQCPbVgTJHfMZcI
- FCBQ==
+ bh=XZqHPI3EL+TbF/joJGr//eWNUhjgVFvVZuux+scIBIo=;
+ b=FL9fpAZu7OzsegdcJakPFQqBXPMb3znOJyrZgjcHP76uRF4LLFtmZtKtMekxKw+TxD
+ tjjtGqSM+uOuofJAVuSgEOcdYIVM/zHqRWGcT8y6QSi2BzL0sLDVSnQkRG7vDOudnywZ
+ Dt224wrsbOrEl1zVvPY4vnCpUXKzfYVT1RC0TIwkLQ8kLi5zGzscdqz5qN7paEWZsN94
+ tlYrEFMrs+R1ZG5Oqb+gC66LZVxf03edq/2W+mqxeaievilG2KzxStv4OQn8aucVd3Zu
+ ze15rWSV1C6y4m5X15qhzg2dsIOjm61YIbI4SeSKcLerjmjK5eREQeQYVnaDA3hGXrG+
+ mnFA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXd7zSLbXipIWlCrebACmbCMMLNig3i6lYVHdEidwlc8PJ2XCkxiJsVdnzLm7wBTQp81yQuzIM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVBBnUyw+c4m6cOaAGm/Zv5OSr1oRy/Dj+GUIusIHJ3y51XQew
- uMszJ5e+U28+KJ22UT81NbKwa+fq3GDPAghMKhBV36jbq9AleOotx0S9dLB9XUs=
-X-Gm-Gg: ASbGncugGwrf8AtEGXZ92+5jOcRothWImNL/TD2keNyUt9aY39erWA6CCu6vdfeyA5M
- QbyhqN7skjfcrC83GM+tTSkFVkBsXkHnDkfkPMqTAuYOQwAXafSFkqZq9U7+eQ6myMGyHQ1UAwP
- /9mt3Wzhe7K6ARgYBNEEMpAgv9ySC7iraPOIFwXhTZKJnksZlmf9nJFqQZoD49O9HOO46wCAZly
- pBDhttsOMKX+Wy7skFo+b1ppaPqIvHnmzrObjB3BWgYTM8rWNoN8egIsBu7B+dJpflUWHp0qlGT
- wySnkOI8oq1ZPxAzfWLPatUQXeWnn4+j7Q5J9BeqitJNfVDV9TfrjAc8ApWXCsrQa6IsN9RoRSm
- nYvP8qaQy4zxuM+GeBoyeYA==
-X-Google-Smtp-Source: AGHT+IG4OljzB4bGcdzqDyfyvW9KHzvpviTr7ALaSNBg/CvYgNqlTLQoua/+CnM3UtapqsHkzgEFmQ==
-X-Received: by 2002:a05:600c:384e:b0:43d:b51:46fb with SMTP id
- 5b1f17b1804b1-43ed0b483damr133676005e9.2.1744049425732; 
- Mon, 07 Apr 2025 11:10:25 -0700 (PDT)
+ AJvYcCVb7BmWcmVEz5ZBAOAACuRQ6SBcXJfL7xzFfXp0F11teOBfcFySNHoiehW22o/WIUPzx/f8gn4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRNpUmWWg/JEPnmkFxxz/wbqFvo9gwA8IU+u9JkRgneFV2/Pk2
+ sKaopGA7RnnoL2xTl13OoeyCmL6j58NIdUZ8280LQPDyqf9Dc1jusYRICVxRBDY=
+X-Gm-Gg: ASbGncsaZfXhRZ8IxcKYpsvDmEdAQHixxTcIfsVQOthf7XKk4xviVG1aWJU8KlM69Xp
+ RuGsk1qYReReobi4M2N3pB3Dls986GOZph7n2wCpZ0f9KTEZyIR/xXKqvVSX/XXDMOF1rgJo6wU
+ xtMe3/WcFgaIMqR92Q1dU63D3o6FjLPbLCscSRy5YEqSeWb3bqfIVCwD/zFAnLASyCWfGB/VulW
+ pQM8SEkhkjfGNHWzBz+MV1pTMTESDrgWMnEJS4xFpp7rVReFtQd2AhSGrwEE37UHWFpBNgWTuLG
+ LUbCg+R9434YAdvoQr8Q6Ypz5f8qdaftxmZSIhtTdUC14ty02lwkg9PJgGJwTWqnLx5Xevk9nCL
+ ZdNGIppT4h1GEA+GSFCL2XuWnUb9AKXUp
+X-Google-Smtp-Source: AGHT+IHptasGgcu6etfHtt8iJnwRw2qAc4B+IaiuoXIqmu+BVV0NWpt+rzV4Wrex1oW5ySxt+7wATw==
+X-Received: by 2002:a05:600c:510d:b0:43c:fe90:1279 with SMTP id
+ 5b1f17b1804b1-43ecf9c36f6mr94066085e9.21.1744049446176; 
+ Mon, 07 Apr 2025 11:10:46 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:f2a4:b974:cba3:a605?
  ([2a01:e0a:3d9:2080:f2a4:b974:cba3:a605])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec1663053sm139800745e9.15.2025.04.07.11.10.24
+ ffacd0b85a97d-39c30226f2bsm12927970f8f.96.2025.04.07.11.10.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Apr 2025 11:10:25 -0700 (PDT)
-Message-ID: <fb4750e2-2f1b-4b17-8bd5-c050dcca01ee@linaro.org>
-Date: Mon, 7 Apr 2025 20:10:24 +0200
+ Mon, 07 Apr 2025 11:10:45 -0700 (PDT)
+Message-ID: <a4dd32cd-32dc-4f21-8ff1-87584d32b96d@linaro.org>
+Date: Mon, 7 Apr 2025 20:10:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 11/13] board: dragonboard410c: Enable support for Android
- boot images
+Subject: Re: [PATCH 12/13] board: dragonboard410c: Use button_cmd instead of
+ custom code
 To: Stephan Gerhold <stephan.gerhold@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io, Sam Day <me@samcday.com>
 References: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
- <20250407-db410c-fixes-v1-11-524aefbc8bb4@linaro.org>
+ <20250407-db410c-fixes-v1-12-524aefbc8bb4@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -114,7 +114,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250407-db410c-fixes-v1-11-524aefbc8bb4@linaro.org>
+In-Reply-To: <20250407-db410c-fixes-v1-12-524aefbc8bb4@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -135,39 +135,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 07/04/2025 18:59, Stephan Gerhold wrote:
-> The U-Boot port for DB410c still has plenty of extra space available at
-> this point, so avoid disabling features that would be normally enabled by
-> default. In particular, this incldues support for Android boot images,
-> which is quite likely to be used together with the USB Fastboot interface.
+> Simplify the board code by using the new BUTTON_CMD functionality, instead
+> of implementing this separately using C code. This allows disabling or
+> customizing this functionality if wanted.
 > 
 > Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 > ---
->   configs/dragonboard410c_defconfig | 2 --
->   1 file changed, 2 deletions(-)
+>   board/qualcomm/dragonboard410c/dragonboard410c.c   | 22 ----------------------
+>   board/qualcomm/dragonboard410c/dragonboard410c.env |  2 ++
+>   configs/dragonboard410c_defconfig                  |  2 +-
+>   3 files changed, 3 insertions(+), 23 deletions(-)
 > 
+> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
+> index 697e3c9b08b5c874912eb66ff4f0b3d32deaae01..4698b9d5e3e47a9b0389d9f6bafab9dd6db56a41 100644
+> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
+> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
+> @@ -51,28 +51,6 @@ static void msm_generate_mac_addr(u8 *mac)
+>   	put_unaligned_be32(msm_board_serial(), &mac[2]);
+>   }
+>   
+> -/* Check for vol- button - if pressed - stop autoboot */
+> -int misc_init_r(void)
+> -{
+> -	struct udevice *btn;
+> -	int ret;
+> -	enum button_state_t state;
+> -
+> -	ret = button_get_by_label("vol_down", &btn);
+> -	if (ret < 0) {
+> -		printf("Couldn't find power button!\n");
+> -		return ret;
+> -	}
+> -
+> -	state = button_get_state(btn);
+> -	if (state == BUTTON_ON) {
+> -		env_set("preboot", "setenv preboot; run fastboot");
+> -		printf("vol_down pressed - Starting fastboot.\n");
+> -	}
+> -
+> -	return 0;
+> -}
+> -
+>   int qcom_late_init(void)
+>   {
+>   	char serial[16];
+> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.env b/board/qualcomm/dragonboard410c/dragonboard410c.env
+> index 71f929b646cc305cf5223cd3462fe2350bc8093e..38399d65c640ee18261529ee3101b268700fa004 100644
+> --- a/board/qualcomm/dragonboard410c/dragonboard410c.env
+> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.env
+> @@ -2,3 +2,5 @@
+>   initrd_high=0xffffffffffffffff
+>   fastboot=fastboot -l $fastboot_addr_r usb 0
+>   boot_targets=usb mmc1 mmc0 pxe
+> +button_cmd_0_name=vol_down
+> +button_cmd_0=run fastboot
 > diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
-> index 62fc42c9460d075fd27c3e2823eb8eea2a559772..414dda6778c95eb3fdcd6ef522d8c7d0ef9219fa 100644
+> index 414dda6778c95eb3fdcd6ef522d8c7d0ef9219fa..449d48a3c004117b832ad620d49beb681a9bda68 100644
 > --- a/configs/dragonboard410c_defconfig
 > +++ b/configs/dragonboard410c_defconfig
-> @@ -14,7 +14,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
+> @@ -14,6 +14,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
 >   CONFIG_SYS_LOAD_ADDR=0x80080000
 >   CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
 >   CONFIG_REMAKE_ELF=y
-> -# CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_BUTTON_CMD=y
 >   CONFIG_FIT=y
 >   CONFIG_BOOTSTD_FULL=y
 >   CONFIG_OF_BOARD_SETUP=y
-> @@ -25,7 +24,6 @@ CONFIG_SYS_PBSIZE=548
+> @@ -22,7 +23,6 @@ CONFIG_SYS_CBSIZE=512
+>   CONFIG_SYS_PBSIZE=548
+>   # CONFIG_DISPLAY_CPUINFO is not set
 >   # CONFIG_DISPLAY_BOARDINFO is not set
->   CONFIG_MISC_INIT_R=y
+> -CONFIG_MISC_INIT_R=y
 >   CONFIG_SYS_PROMPT="dragonboard410c => "
-> -# CONFIG_CMD_IMI is not set
-
-
-What is IMI ?
-
 >   CONFIG_CMD_MD5SUM=y
 >   CONFIG_CMD_MEMINFO=y
->   CONFIG_CMD_GPIO=y
 > 
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
