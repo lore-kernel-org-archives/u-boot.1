@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 071CDC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 631DAC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:00:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EED582ED0;
-	Mon,  7 Apr 2025 17:00:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BC3282F5A;
+	Mon,  7 Apr 2025 17:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n995VhsL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hValTXlk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B251C82F37; Mon,  7 Apr 2025 17:00:01 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 3D26C82F37; Mon,  7 Apr 2025 17:00:05 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E72A382F3B
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:59:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2CBD82CEB
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:59:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ac2bb7ca40bso444269966b.3
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:59:58 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac289147833so742322566b.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:59:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744037998; x=1744642798; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744037999; x=1744642799; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+BZQBmk+RYhvNW54KiogFQfTrggnZfdRqrfFAl2xxzk=;
- b=n995VhsLU5n8x8AKLx6cgBpRI+LXCzrQMIps5LFX25xgSewVx2wj42hLZnM6G9c7wv
- eoTKfFcmQlUmTRTyediN96hzkIMkL4CR9Fot/yQPuy0yJwY4aXzcWNUApKjy7FecPJh4
- zlQBBe6cXTkLSaYZIGi6fGk31Mn1YO0o0fBtlS2r26gXKqwPUP1HJAdQZVkXtZjQE7hj
- 7mDsWCnDYIWAjqqARTvdxF8huiY5b+PGboWjbFmni64GginRQb8HQmSrdEZ1WFJBgThp
- qMlaAQiwlG5wgW3X7apbHTIabXS8/Gla0hh6rwwka1dUfdXwbDYP2GM3+DKFaXcf01B/
- KrUw==
+ :reply-to; bh=r43KH5feIdAQxYK+hwQRgUBY9MsNl6GpL6M8qKrA8qg=;
+ b=hValTXlk355To5r7dSWxB+w5QAOoE7lJUXlS2C3dEEZ+JSeL2z/8gY0Ip186nBT7P4
+ tb1sIoG7sovT+1lCqZnJf6vFCR8sf+VheozF/vWbd92SnqdnAYT73DpDQx1l2F3PMUpX
+ MaaoqDGIeDwKnVJ4rWRhlt/LxpYPzCEi3PhhlZCZIPWcB/SbZicKFpZIGUkoz3+hebaG
+ Re7HS/Ln5PjfV6WZ7YakCs89b95aZaPEj1Paok2KVf0YZFQOFwMJLKtOqdj9J2Mu5Ukh
+ 2OtV/aM4QFPKb+wlq8UifrsQp7CDcgfIRQ+qvmAkjQyE+QMZYfTTLYZCDnGD0C+MKNQ4
+ odvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744037998; x=1744642798;
+ d=1e100.net; s=20230601; t=1744037999; x=1744642799;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+BZQBmk+RYhvNW54KiogFQfTrggnZfdRqrfFAl2xxzk=;
- b=gZ7jukj8hWR9eemucjB1iFTII6VW7YFEkXZrwis96a2kodqnTNZ9iTEMuMWppk3yRh
- A6vCCBBNKqbnF83wOn79oCE3hIG5Cdr9E4ZwB+X2Gr/HTFp+MOYPkc8ejaok/MU2yqK2
- WKhNrnIRi9VTH4Par0+WQN27ki00m3d666GkTRqAE/c6Le2E2H1vYXe5/gQ6HI1c8InM
- hAaMaP8ipJRzGA3SGqnAoLDR1lUW2k03wY0QcdaynyJxOe2c9ALxeKJ3wpKXmEqlV7Rp
- kMEB8oqDf0DMp7UH/O0V6SsdjqrtNK2Giq0yr1nW4myAoJIg265IUsaK0IQd0R/zMyxF
- fdKg==
+ bh=r43KH5feIdAQxYK+hwQRgUBY9MsNl6GpL6M8qKrA8qg=;
+ b=D7S7gbesyQXHjMyeRL+2x7qNxxsgsDYb57IH1eqYGGu3+S6iTAWAfpC52EHohdmuFE
+ sXHMnwXjJ/ngXCzRyu8nBADaKaLBzCyCX1+mTemKLwRna/Wd2sXUm7a5wQ9MhyIhY49Q
+ vp8uiFfdhO+HLwQKu5wpzm3aBk6h6YQcOjx3DRle6OixuXQT3L5/6YBAMNrcttIIIfpc
+ mla3PQNnImW2mjThll6s+G9D1njahz2m7iQtsIzju/XEcLOFOpZ3cCRtVPyxHCixS9ud
+ xcFGMSq45ZvrAj13vhbei8LJRd0YoxvE9avQPnQyvb4sXsMv5wTo1Mh7e8u83yUmkfQP
+ H5Iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPxjDn4SI9YirHBuRuvV0qZKfRW9smfI2kIRlKCdNeKznsVsMYCrSRnxHE+Y8WbrPitV8BVIk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyeuHcZAo/b2swpa1mrcilJI9V9Y4V8qrtKrC5HVauZObtGK5rb
- ggs1UDWq/kI+vFJ7jZVUVj8vU31XIwF/WB0KRORGIlXwtRixZCXlNEd/Zmf68iQ=
-X-Gm-Gg: ASbGnctGImxyQo0VAmJJ20/ysQQTsh1nb63fiPB7poclzlugwiGgSptHRGAFvIuE1St
- r+Pv3PDQwLSJckiMsm44uzDRu0joG0MZeIElJ3FQJD5yUljMKU4m/j3+5PyfsB6br917M+Zd7zV
- GtNS1FMMr9LEsbekBEojv3ZGqcDfsnMC1YMCp1Zr+9pjA55JAinQa+dD9nHVZTJV7cB0Fs/P4Gp
- DPZxf/5kpHef5Wdz2xBJipE9Gu57oQCqeeHagI3VEVmPD2z9x+wjL3ZIe/BH+tQ7l5N+JgNZRL3
- awC3QU9dr71zLnRljKI5FHfr4qCwnUDd5vIGXyZkQSSjWQ+kuFMekmCM1Q==
-X-Google-Smtp-Source: AGHT+IGAZJ8kKi/qDaUGtUKxdEeyypqoMajYurQ9IGtCGD0GctksWvzD/KI84EYDI36gZBH6HrSpNg==
-X-Received: by 2002:a17:907:9727:b0:ac4:4c8:5e30 with SMTP id
- a640c23a62f3a-ac7d1876af2mr1328826966b.17.1744037998403; 
- Mon, 07 Apr 2025 07:59:58 -0700 (PDT)
+ AJvYcCU9KPJEeZnZxLNxDasJnfoTeoIGOzk+gAzQfrCm7fTY9V7fLJtfHchd7SNJGtro7/lQk6Zz+xo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbxKF8h6FmcGmbl1lgVrpP/K2lKvKNgAoVL5nzkdnboAHwZMmO
+ dDfgyeR9ys5p92JrtUYDsBu+Zltr5hcj/gJ/fkSAiy5Jp0TPrYaTVTGPOSRp4JY=
+X-Gm-Gg: ASbGncskXrTge+l5PxNeEwauGnmTDHOun4fviJfHikIFz4EolDDEEa4CDmPZZtKDrZE
+ t4dsAEN1i2a1oAwQ7jmIE4UiHQaPJrg5jS4Zgme+5WHzGBQma85TQamKFcRtx6uxQ12qylquH04
+ ruOX8DCbyudXlVuwdGNBjvyFlmCVdg/vzWCXyyJhfy9BVtlILSSdpIo2Ftl7XoLWIUK2hfR94Um
+ 7Xt+v3Oo0wSjcuFxWtoVwzuvJNSlHIoseZgZnefIrrsiexzHib/ohx6PZ1DwBexJ7LDWmuo9axA
+ sBr2DnJ0/TJGHafid+Fo5x+Vd/mOR+emNWifAH9D7++tFXRTFTY79ONb7A==
+X-Google-Smtp-Source: AGHT+IE9xnCjuVEkx+5MLmIw7yhRYJjWdPBax4ybdPQPm0TqrkylM19WQuzDGVZFejc5zGleapooJw==
+X-Received: by 2002:a17:907:7295:b0:ac3:3f11:b49d with SMTP id
+ a640c23a62f3a-ac7d136deeemr1119326266b.0.1744037999118; 
+ Mon, 07 Apr 2025 07:59:59 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:b2e5:7ea8:e86c:3f99])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7bfea2224sm751585666b.74.2025.04.07.07.59.57
+ a640c23a62f3a-ac7bfea2224sm751585666b.74.2025.04.07.07.59.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 07 Apr 2025 07:59:58 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Mon, 07 Apr 2025 16:59:36 +0200
-Subject: [PATCH 2/3] usb: gadget: f_acm: Allow restarting ACM console after
- stopping it
+Date: Mon, 07 Apr 2025 16:59:37 +0200
+Subject: [PATCH 3/3] usb: gadget: introduce 'enabled' flag in struct usb_ep
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250407-acm-fixes-v1-2-e3dcb592d6d6@linaro.org>
+Message-Id: <20250407-acm-fixes-v1-3-e3dcb592d6d6@linaro.org>
 References: <20250407-acm-fixes-v1-0-e3dcb592d6d6@linaro.org>
 In-Reply-To: <20250407-acm-fixes-v1-0-e3dcb592d6d6@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, 
@@ -101,35 +100,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using IOMUX, the "usbacm" console can be added/removed dynamically
-from the stdout/stderr/stdin environment variables to allow temporarily
-starting other USB gadgets (e.g. Fastboot).
+f_acm calls usb_ep_disable(f_acm->ep_notify) unconditionally in
+acm_start_ctrl(), even if the USB endpoint was never enabled before. This
+causes crashes for some UDC drivers (e.g. ci_udc), because they dereference
+data structures that are assigned only after having called usb_ep_enable().
 
-However, right now acm_stdio_stop() does not completely undo
-acm_stdio_start(): The USB gadget is unregistered, but as long as dev->priv
-stays set acm_stdio_start() will never register the USB gadget again.
+The f_acm driver in U-Boot is similar to the Linux driver, where this issue
+does not occur because usb_ep_disable() and usb_ep_enable() internally
+track the enabled state. In Linux this change was made in commit
+b0bac2581c19 ("usb: gadget: introduce 'enabled' flag in struct usb_ep") by
+Robert Baldyga.
 
-Clear dev->priv after we detach to make sure a start operation after a stop
-operation registers the gadget again.
+Fix the crashes for f_acm by making the same change in U-Boot. This makes
+the API less bug-prone and avoids introducing crashes when adapting new
+gadget drivers from Linux.
 
-Fixes: fc2b399ac03b ("usb: gadget: Add CDC ACM function")
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
- drivers/usb/gadget/f_acm.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/linux/usb/gadget.h | 27 +++++++++++++++++++++++++--
+ 1 file changed, 25 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
-index 2665fa4168f99b35a8c595aa24cb3fc4e8ab8529..8f7256069f58527b2e43e5add725a0b5f06baa6d 100644
---- a/drivers/usb/gadget/f_acm.c
-+++ b/drivers/usb/gadget/f_acm.c
-@@ -663,6 +663,7 @@ static int acm_stdio_stop(struct stdio_dev *dev)
+diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
+index c7927df15aa386f33eb3b3889adee854d42386a8..fe79bf64a0e1c037e69e694fe58cbe5343e18a70 100644
+--- a/include/linux/usb/gadget.h
++++ b/include/linux/usb/gadget.h
+@@ -179,6 +179,7 @@ struct usb_ep {
+ 	const struct usb_ep_ops	*ops;
+ 	struct list_head	ep_list;
+ 	struct usb_ep_caps	caps;
++	bool			enabled;
+ 	unsigned		maxpacket:16;
+ 	unsigned		maxpacket_limit:16;
+ 	unsigned		max_streams:16;
+@@ -230,7 +231,18 @@ static inline void usb_ep_set_maxpacket_limit(struct usb_ep *ep,
+ static inline int usb_ep_enable(struct usb_ep *ep,
+ 				const struct usb_endpoint_descriptor *desc)
  {
- 	g_dnl_unregister();
- 	g_dnl_clear_detach();
-+	dev->priv = NULL;
- 
- 	return 0;
+-	return ep->ops->enable(ep, desc);
++	int ret;
++
++	if (ep->enabled)
++		return 0;
++
++	ret = ep->ops->enable(ep, desc);
++	if (ret)
++		return ret;
++
++	ep->enabled = true;
++
++	return 0;
  }
+ 
+ /**
+@@ -247,7 +259,18 @@ static inline int usb_ep_enable(struct usb_ep *ep,
+  */
+ static inline int usb_ep_disable(struct usb_ep *ep)
+ {
+-	return ep->ops->disable(ep);
++	int ret;
++
++	if (!ep->enabled)
++		return 0;
++
++	ret = ep->ops->disable(ep);
++	if (ret)
++		return ret;
++
++	ep->enabled = false;
++
++	return 0;
+ }
+ 
+ /**
 
 -- 
 2.47.2
