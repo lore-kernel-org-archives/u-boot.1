@@ -4,83 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 688CBC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:04:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8C1C369A1
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:15:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B57E8309A;
-	Mon,  7 Apr 2025 22:03:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A9B1830B6;
+	Mon,  7 Apr 2025 22:15:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a5xG96Mm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MbRRPlh4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FA55830AF; Mon,  7 Apr 2025 22:03:23 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 661B68309A
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:03:20 +0200 (CEST)
+ id D98C8830C0; Mon,  7 Apr 2025 22:15:36 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 862EB830B3
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:15:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5499e3ec54dso5827481e87.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:03:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744056200; x=1744661000; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NFAr+YN+yF/tFCGcm9NMHavn5okW03SqW6w98hQHS1s=;
- b=a5xG96Mm3Vd1wW0mwzakPe/O5CLuzR/kfOdZMha+e/ixy0LkXfBNb7Gfh5ygHsiZI4
- NXVNAJwskvhFuKjhRx4AxbIDS6V2taITirVQq+/9pFK9gek91oCSWhVkiH5R/sl7gzNx
- gciwJJopbmxp6w2lXRi4mIYgPvtHZrs33gb/0qNdX9Cjwa/f85a3caUyv2mSEMA5Rwib
- NShjaUZ+efGS3aic5f0ETMsT3HrkBXtTkaAKiQkUSW1csWlbHLY93QODT/5manH+yp5n
- sxeoXVCVB5WdLdkq1kubVBHLADdZV2gMWOL65oLxVCcyJ63oAgZIjt0vJS/o+IsnqPDn
- Cntw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744056200; x=1744661000;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NFAr+YN+yF/tFCGcm9NMHavn5okW03SqW6w98hQHS1s=;
- b=hoTVmW7BplsVcdUI7Quu0NS38U33DpAXjRU90UlIgcvttOat4DokCuExRrl1vFgu4D
- Y8/LObjTMY5rk1eaRYDDx0qbV+ErRHX2WClRCHN9UfjKaN4YivkSLi1AC1tABHgLWtCc
- K3OBddrJRgxdL1SaGbUU+wdk9UBhmL/rDVwHoh82nylm2PdAs+NLhD2WmW02ii5XSJkt
- ZpXtlXfrmNRVYOK9+WUQE4IhWRWruyDWIIJt1vljtdNbBmPIA1CkhvCCtvcfEG4kQrx0
- cuCXEy4PqyUpswHAdkGw2LWBFbdfHaf+/sjiLhir0s5kitQ4MhSyE4D9O6RRnN+nWkBa
- v9cw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVW3BTQaBQ6t9vi13HzHoMpBH7VYpehtt6YID84pPBQFhZRj4/LsX4LAj8OAqsFLG0DzEIznNE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqkPvtBnvVMhdKJZ1Ts00fPxx5Dj7X//bMzvQiweocf4TW33gJ
- HDjGywroMPamj1VhS1dRguZebkTIgepLYCR/UxUq12DuPKP03o76leQcLs7HCZHc9n0316DpKPm
- pYDhzZjoSRUMn9DBuyI7ATP682y4=
-X-Gm-Gg: ASbGncsvgKeCme/Au7YObwnqdUAk2WEE5Mm/CfbilUX7ksjkRVkzofIAtAMeu1CPrQf
- pqvx68V6BWIrSRnxaoEVC/mgYIzRyinBqgaZLOgLyV/GOMk/+T4NPblDIGSZPazmg+AThFQAZwT
- SQlsswQ3m95nG4HCoe+8+XlmULeyQLwpR8DxT8Bz6t1AFMlLJuvWepJSyKn37H1E/siqmB
-X-Google-Smtp-Source: AGHT+IEZ37ouTVKJWiKKUYNzFkQzupFtxom9khz+3FtXNJjqyiXXORMTwjKq4CQlvR5TM7p5qvWJlaKNmvHHKrhGNak=
-X-Received: by 2002:a05:6512:3d8f:b0:545:eef:83f1 with SMTP id
- 2adb3069b0e04-54c232de762mr4227275e87.17.1744056199480; Mon, 07 Apr 2025
- 13:03:19 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 537KFVo7967876
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 7 Apr 2025 15:15:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744056932;
+ bh=H/pYagdYpy5VSUnkC63huWIo2XTPHaqhXh4w/dj/bgY=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=MbRRPlh4YlDBWJu1QYDCqA5oiGpZAt+VLNbf4jXwWucEdv+7r6DVYZpQv9ArjbHIh
+ rZD3JNk10Usawr2IOoEpgK8FrXAZViAqDW11zcBrble0anfNOw4GT29SCRNXGW3B9K
+ dImKXLj/oFl/NvAsGTzeuBJdTniGlHbfCmF1+u2o=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 537KFVdU007856
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 7 Apr 2025 15:15:31 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
+ Apr 2025 15:15:31 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 7 Apr 2025 15:15:31 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 537KFVlD038245;
+ Mon, 7 Apr 2025 15:15:31 -0500
+Date: Mon, 7 Apr 2025 15:15:31 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Daniel Schultz <d.schultz@phytec.de>
+CC: <trini@konsulko.com>, <n-francis@ti.com>, <u-kumar1@ti.com>, <afd@ti.com>, 
+ <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <w.egorov@phytec.de>
+Subject: Re: [PATCH] mach-k3: common_fdt: Fix Label Issue
+Message-ID: <20250407201531.dxgaz454i6nlxwqt@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250407060711.3160366-1-d.schultz@phytec.de>
 MIME-Version: 1.0
-References: <20250315092420.793-1-ansuelsmth@gmail.com>
- <67f42db9.050a0220.16b640.abd2@mx.google.com>
- <CAOf5uwkU_hTEa_D+pEouXmsiQYMTNkHdr+z0boVO43BW7wkA7g@mail.gmail.com>
-In-Reply-To: <CAOf5uwkU_hTEa_D+pEouXmsiQYMTNkHdr+z0boVO43BW7wkA7g@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 7 Apr 2025 17:03:08 -0300
-X-Gm-Features: ATxdqUFSSYSnzHlbdodk86NnUN_ytVY7Megyq62B53NPh4g2G4xUyr0VJ2mkjsQ
-Message-ID: <CAOMZO5BFntJ4kFFrtrFRL77RsM18LtjJDv1kHWSZViZMW1m3XQ@mail.gmail.com>
-Subject: Re: [RESEND PATCH] clk: fix crash on clk_set_rate clean rate cache
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Tero Kristo <t-kristo@ti.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20250407060711.3160366-1-d.schultz@phytec.de>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,11 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 7, 2025 at 4:58=E2=80=AFPM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
+On April  6, 2025 thus sayeth Daniel Schultz:
+> Labels are not allowed before declarations. Add a semicolon after the
+> label to introduce an empty statement. This will fix following error:
+> 
+> arch/arm/mach-k3/common_fdt.c: In function 'fdt_fixup_reserved':
+> arch/arm/mach-k3/common_fdt.c:156:2: error: a label can only be part of a statement and a declaration is not a statement
+>   156 |  struct fdt_memory carveout = {
+>       |  ^~~~~~
+> make[1]: *** [scripts/Makefile.build:256: arch/arm/mach-k3/common_fdt.o] Error 1
+> make: *** [Makefile:1919: arch/arm/mach-k3] Error 2
+> 
+> Fixes: 096aa229a9e ("mach-k3: common_fdt: create a reserved memory node")
+> 
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+> ---
+> 
+> I'm open to other suggestions! This is just the easiest way to fix this
+> compile error. BTW, master is fine since 096aa229a9e is only on next.
+> 
 
-> Can you review it and pick if needed?
+Ha I learn something new every day. It makes sense as we can't declare
+variables inside switch statements so the same rules should apply when 
+adding jump labels at the function scope.
 
-This is not assigned to me in patchwork as it is not i.MX related.
+I was never really in love with the layout of this function, my thought
+was to move that carveout structure to the top with all the other 
+declarations but I'm not apposed to the null statement here either.
 
-Someone else needs to handle it.
+Thanks for fixing this
+~Bryan
