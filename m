@@ -4,109 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F4E7C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:22:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607CBC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 19:00:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A26048302D;
-	Mon,  7 Apr 2025 20:22:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A585382FB4;
+	Mon,  7 Apr 2025 21:00:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DDIeis/V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DmDZIwve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 642F183045; Mon,  7 Apr 2025 20:22:44 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 0722E8302D; Mon,  7 Apr 2025 21:00:34 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB73082F85
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 20:22:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAF0782EAA
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 21:00:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-603fd257386so996260eaf.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 11:22:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3913958ebf2so4216270f8f.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 12:00:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744050160; x=1744654960; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=34IZzuLYvwU5Hqdu6RYGkNcgHaSG7ExOAR/qOB4HO+s=;
- b=DDIeis/VDjIcQyVs2wSqxP8ngEFDtV5JvDvH/W7RDZI1OBH99Zq4pB02QNG7QG27mu
- Sq9UxNzEZ3mXRhaTLiBixOPgDiEPJ1M8y0K3K4ptLG39fd2gYLWh8id+gskcn4yeWIbJ
- uBZ5WClmnTvLxRKH+uARY3N3PWDyMovQd6bKI=
+ d=gmail.com; s=20230601; t=1744052431; x=1744657231; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eoB5acisECwWu4RCkQah2eHQhCK1R2jdCkB+4DF+VcI=;
+ b=DmDZIwveBT6atkJKQCATUm12nv3XcnEHeToRSS2N0DMom2g5I7pD9kB/PQItR0MiQf
+ zWDgA06K6K953xu+z//U5FkMABp94uTHBxSHahAy+sPSau9JlsaNoZkVA5XuSO3WnRB/
+ 3IdXP1NWRrmJZdfFHH9sr/kFThk+JWGuxFwSziuaptvHlWLxVuuXdre7BHZwlSwZ1nvL
+ NiO2zMlJ3YOJNRXAFFCyKVmIYZXLk0ipd69k/n36eaq0LkRW591HTPI6FsfroWrkWDiE
+ ihjI92eJBjXLMSEeKEn8Il6WXWsla6xaxnU9KOU6oznjaDPOaJcZd6eSTXn4KXfLeMQL
+ kG/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744050160; x=1744654960;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=34IZzuLYvwU5Hqdu6RYGkNcgHaSG7ExOAR/qOB4HO+s=;
- b=nJWNzSchnvRscNufURieP0yDMA9zf4Cmu+Hd7LRmods7yyef71ph/rJFcqm54GX9C6
- TBFeh/5cfAA1xggRCwCp2tHr1oAgcK2hPjb/hg2REAvaHklHUnZ3rdMlYV/+912LX2r0
- jkJCjXGbrjPWFko7q10PwBpiVPDFtS61IcMsWJIX8APxmF3APNRosa6laa7YLCHLsv8G
- sXTnZrbnTztld25nN/0gkLoxqfRKGeiOm9ecpWFzMCpoS0cq30DUiMgxLYKb4E+N+xTE
- plNwaEgY93kletp/DpLTA4tyrtut/fEjGKxVBWgZ0Roqe94j/OYH6JV9ICWjBIQEvjUo
- b2Lg==
+ d=1e100.net; s=20230601; t=1744052431; x=1744657231;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eoB5acisECwWu4RCkQah2eHQhCK1R2jdCkB+4DF+VcI=;
+ b=quBYbpEYTLm9Mal1zsAWIZVlGTQeRHoM9VS/fSqWXhXg3tVFOEw4/0vJCOCRWSrGQM
+ 9yZsuAmnr7/h1YauDMU1BM3opi/zoA+WUIi96zuatn4DvPXWgJhRwa6mdTPdqIA4EcL6
+ jelqzckP80eLSqE+hBte9Z4WXX/2/BAuLc/6MdFRDs1FKspRwkln+M/ju0GZnJxApoSd
+ ZzjCZGev7Gqndkg72sRdVoIfcl3IPFn5scHiEidTE2FoxCgh8Vf3x+q495vmvZxl9iRN
+ A4kJ+uNTcOH3ewCfJmUGAyigVd5FAW/3BZbqld0uegjkmv1aWW2Uw9nR1myzrNXDvOt5
+ 8Mqg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvSQ0uRpTrgnHz1VqrUGDn1e1GJc2EWb8CT3h4Ypt1wLU8VKlk1iYzJ3FmYLGlAjkcwgVfG7g=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQh40vhfbcsr400zwTmYBWtfs+8gXwpVA8ruSKu9f/htzyC8pD
- jBarZZG4Gj1QT1KpL4LyJCcatQlmMyB2QETADuXDjmz9SmXYADnamo1vB1CrLtE=
-X-Gm-Gg: ASbGncsTO6IdJd6BaByp5bcPTUAeZcCeYPjrnO0kw9cjqrTw0jh6QaP8RorI3hOumCo
- zZaLT/IJfMzqM766/EV1xiYnKCZQgB3dK8gYPd7Wyh4fWz1nkYFmkU2XYukgwNNAuWgdO8cauZz
- D06kJjywxdqf+RJMb+oJvSNFn+55v4h/2hXgycrRkzR4F++XnlluzBAHevvPz/Y/xyPk3ezybNH
- 9Nxei1e3sF0NRjlCOY9AXlQfmBgb3BHY3/ckfoeoQNPX3FSNd7QFr/yI1Xe2e6ZkUwUXHx2MMWN
- Q2vpwKcKC3PBe5jfRM3eNvHjmBPPnCefD/RDECPv7t40ssaYBWTQPxsGK5xM57BDZlBe1rOeaZF
- 09jQadA==
-X-Google-Smtp-Source: AGHT+IHWNXhjIhEjpBfIxzTv12vsO57I8jwq0/pyiXCW1AjE5T0+NpDJXOLe6kDIofOlxTqqM83XsA==
-X-Received: by 2002:a05:6820:1c90:b0:604:117:1a5d with SMTP id
- 006d021491bc7-604157fe7fdmr5989199eaf.7.1744050160312; 
- Mon, 07 Apr 2025 11:22:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6044f48f1f3sm30917eaf.4.2025.04.07.11.22.38
+ AJvYcCWPQLiV/37rBP1MwC0pwPUvW0i1fZpIyRX9EfNGSi1nYVf5ca1Ftxd7X7K28r2HXPw4Sr+Bf9w=@lists.denx.de
+X-Gm-Message-State: AOJu0YxO7P5jC9vPbD315gX/NoUd06p2fZ0sIjn+vtoy9UPZhH4bhf6t
+ ZR0wIqZ4OAUKWmGa32vxOcAlQL7JBECCWldf8TrZxp8hV7MF+j2U
+X-Gm-Gg: ASbGncvbWTpvM9Vtq49lkBvD+A5Mv48W0mnivOcIPFi3VbLHZ3HwdCvhsMfHAs1RxCf
+ wac4QqAanCzFei7V8qasKrGRe6Drytwt3x3sWjpRugdJ5EyRZ90eLj6jJ9mHk3eoOguc56UHQv9
+ HHrs3IaPkqSHgPftcKqeli5wzAySnu+V1W+ynaimpiBNqN+/WFMDizaktLzce3ksGNhCc5dQFMU
+ gDn4g2N2KEA76kDQrpQbMqrGYBUe4ZJUU33cWQmRzi3t3fgNfoEeT2EzzZRg34wxvYd3Ps0EKN9
+ JisgZN/eq98hH1Mj9kAQuDAgwvzP50KHg2qipHFiCXMbR7F3rEd3RdgdHIS2aKSAEWgzZeAH8tY
+ CJtqx+BgYGF8Qhw==
+X-Google-Smtp-Source: AGHT+IF0FT1zm7z9L2vRfAwAcispjKbIKXUC35u2rL6KKcSpNPNha/d4xH7OyXoMZs6HIz9PaHQGRQ==
+X-Received: by 2002:a05:6000:2285:b0:39c:dfa:c92a with SMTP id
+ ffacd0b85a97d-39d6fd1924cmr8017688f8f.36.1744052430701; 
+ Mon, 07 Apr 2025 12:00:30 -0700 (PDT)
+Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
+ [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-39d7c6d838bsm2736553f8f.69.2025.04.07.12.00.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 11:22:39 -0700 (PDT)
-Date: Mon, 7 Apr 2025 12:22:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sumit Garg <sumit.garg@kernel.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-Message-ID: <20250407182235.GM5495@bill-the-cat>
-References: <20250403215239.GO5495@bill-the-cat>
- <CAFLszTjB7Ax24c1SF4yEt7xzJKpO5tHyQsjGutrhDteFYebyyg@mail.gmail.com>
- <20250403225058.GQ5495@bill-the-cat>
- <CAFLszTit0LgAxbMjw-96rzJ0Z7LyV-RgzpXMqG2PJj-YguorXg@mail.gmail.com>
- <20250404175710.GU5495@bill-the-cat>
- <CAFLszTgBMP-WsAw=z807e9RUY1YNB=Ky+s1MhW=x6dYt7_V+-g@mail.gmail.com>
- <20250406223854.GE5495@bill-the-cat>
- <CAFLszTjLugnmipzzCcAttyvZqQdohNV==jDj_mGzs2_1eFJw1w@mail.gmail.com>
- <20250407143056.GL5495@bill-the-cat>
- <CAFLszThqjXZkoZxa7m+WLtSefnHk2zusJiO8re+bx2rYV4BWzA@mail.gmail.com>
+ Mon, 07 Apr 2025 12:00:30 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Subject: [PATCH] env: Introduce support for MTD
+Date: Mon,  7 Apr 2025 20:59:51 +0200
+Message-ID: <20250407185958.15479-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OUP/uS+AA59Nqkbn"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThqjXZkoZxa7m+WLtSefnHk2zusJiO8re+bx2rYV4BWzA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,227 +97,482 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Introduce support for env in generic MTD. Currently we only support SPI
+flash based on the lagacy sf cmd that assume SPI flash are always NOR.
+This is not the case as to SPI controller also NAND can be attached.
 
---OUP/uS+AA59Nqkbn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+To support also these flash scenario, add support for storing and
+reading ENV from generic MTD device by adding an env driver that
+base entirely on the MTD api.
 
-On Mon, Apr 07, 2025 at 09:24:16AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 7 Apr 2025 at 08:31, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Apr 07, 2025 at 12:35:15PM +1200, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 7 Apr 2025 at 10:38, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Apr 07, 2025 at 10:06:07AM +1200, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Sat, 5 Apr 2025 at 06:57, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, Apr 05, 2025 at 06:39:39AM +1300, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 4 Apr 2025 at 11:51, Tom Rini <trini@konsulko.com> wr=
-ote:
-> > > > > > > >
-> > > > > > > > On Fri, Apr 04, 2025 at 11:41:08AM +1300, Simon Glass wrote:
-> > > > > > > > > Hi Tom,
-> > > > > > > > >
-> > > > > > > > > On Fri, 4 Apr 2025 at 10:52, Tom Rini <trini@konsulko.com=
-> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Fri, Apr 04, 2025 at 09:40:29AM +1300, Simon Glass w=
-rote:
-> > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, 4 Apr 2025 at 08:54, Raymond Mao <raymond.mao=
-@linaro.org> wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Thu, 3 Apr 2025 at 14:18, Simon Glass <sjg@chrom=
-ium.org> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Fri, 4 Apr 2025 at 07:13, Raymond Mao <raymond=
-=2Emao@linaro.org> wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Thu, 3 Apr 2025 at 13:57, Simon Glass <sjg@c=
-hromium.org> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Hi Raymond,
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Fri, 4 Apr 2025 at 03:09, Raymond Mao <ray=
-mond.mao@linaro.org> wrote:
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Fri, 28 Mar 2025 at 11:44, Simon Glass <=
-sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > The bloblist code took what I consider to=
- be a wrong turn a year or so
-> > > > > > > > > > > > > > > > > ago. As discussed with Tom, this series p=
-roposes a way to arrange things
-> > > > > > > > > > > > > > > > > so that it is simpler to understand and m=
-anage.
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > - Unwind some of the nesting in bloblist_=
-init()
-> > > > > > > > > > > > > > > > > - Avoid needing to init the bloblist just=
- to get the FDT
-> > > > > > > > > > > > > > > > > - Create a deterministic OF_BLOBLIST opti=
-on rather than using guesswork
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > We now have a kconfig BLOBLIST_PASSAGE_MAND=
-ATORY which means
-> > > > > > > > > > > > > > > > mandatorily use bloblist to hand over every=
-thing between boot stages
-> > > > > > > > > > > > > > > > including fdt, creating OF_BLOBLIST is not =
-necessary.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Yes, I noticed that, but BLOBLIST_PASSAGE_MAN=
-DATORY indicates that
-> > > > > > > > > > > > > > > there must be a bloblist, not that it must co=
-ntain a devicetree. So I
-> > > > > > > > > > > > > > > wasn't sure about removing it.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > See my comments to your [2/4] patch, if BLOBLIS=
-T_PASSAGE_MANDATORY is
-> > > > > > > > > > > > > > selected, we can override any fdt from board or=
- env with the one from
-> > > > > > > > > > > > > > the bloblist.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Yes, but we should be explicit about what is goin=
-g on here. With
-> > > > > > > > > > > > > OF_BLOBLIST we indicate that the devicetree is co=
-ming from the
-> > > > > > > > > > > > > bloblist. It becomes one of the sources for devic=
-etree, like
-> > > > > > > > > > > > > OF_SEPARATE and OF_EMBED
-> > > > > > > > > > > > >
-> > > > > > > > > > > >
-> > > > > > > > > > > > BLOBLIST_PASSAGE_MANDATORY indicates the fdt from b=
-loblist will be
-> > > > > > > > > > > > mandatorily used and override other fdt sources lik=
-e from the board or
-> > > > > > > > > > > > env variables.
-> > > > > > > > > > >
-> > > > > > > > > > > So long as you are OK with OF_BLOBLIST as well, I hav=
-e no objection to
-> > > > > > > > > > > keeping BLOBLIST_PASSAGE_MANDATORY, although I don't =
-like the name
-> > > > > > > > > > > very much. But I can see why it is called that as my =
-standard passage
-> > > > > > > > > > > series was actually never applied. So I suppose I'll =
-need to have
-> > > > > > > > > > > another try at that.
-> > > > > > > > > > >
-> > > > > > > > > > > So to be clear, I want a separate option for devicetr=
-ee, called
-> > > > > > > > > > > OF_BLOBLIST, which I can enable/disable as needed, wi=
-thout affecting
-> > > > > > > > > > > your option.
-> > > > > > > > > >
-> > > > > > > > > > Sigh. Can I ask what the use case for this will be? And=
- we are going to
-> > > > > > > > > > get rid of BLOBLIST_FIXED at some point, yes?
-> > > > > > > > >
-> > > > > > > > > I thought we agreed that this was acceptable. We argued t=
-he toss for
-> > > > > > > > > months on this point and I would rather not revisit it.
-> > > > > > > > >
-> > > > > > > > > Yes, I will look at removing BLOBLIST_FIXED once this is =
-in. I'm
-> > > > > > > > > pretty sure it can be done. The only tricky bit is coming=
- up with a
-> > > > > > > > > bloblist protocol for x86.
-> > > > > > > >
-> > > > > > > > Yes, I'm stuck between being "flexible and saying yes" and =
-how long we
-> > > > > > > > have to live with what I also think are bad designs.
-> > > > > > > >
-> > > > > > > > So maybe the pre-requisite here is that with "bloblist" and=
- "standard
-> > > > > > > > passage" being divorced, what is the requirement for blobli=
-st again?
-> > > > > > > > Because in practice, all of the problems we've had come dow=
-n to looking
-> > > > > > > > in fixed address locations before they're valid. You want t=
-o handle this
-> > > > > > > > by saying "Ah, we won't look before it's valid with other C=
-ONFIG flags"
-> > > > > > > > and I say we should handle this by not using a fixed addres=
-s to start
-> > > > > > > > with.
-> > > > > > > >
-> > > > > > > > If we have to add OF_BLOBLIST now and delete it in a few mo=
-nths, sigh,
-> > > > > > > > OK. But it shouldn't need to exist long term.
-> > > > > > >
-> > > > > > > For me, OF_BLOBLIST is needed for x86 devices which don't pas=
-s the
-> > > > > > > devicetree in the bloblist.
-> > > > > >
-> > > > > > I don't understand why that would become the case when it's not=
- true
-> > > > > > today.
-> > > > >
-> > > > > If you look at the top obbfdtdec_setup() in your tree you can see=
- the
-> > > > > special-case code related to TPL, that I'm wanting to get rid of.
-> > > >
-> > > > OK, but all of that too is for the case of a fixed bloblist being in
-> > > > uninitialized memory. Which is why I don't like BLOBLIST_FIXED and =
-want
-> > > > to see passing of the bloblist from xPL -> PPL be implemented and s=
-o xPL
-> > > > can allocate a bloblist (or grow a passed one if needed).
-> > >
-> > > We are going around in circles though. Having it is registers doesn't
-> > > help with the problem that there isn't an FDT in the bloblist.
-> >
-> > Sure it does. If we're passed a bloblist in a register we can then see
-> > if it has a DT (and use it) or not (and move to the next DT location).
-> >
-> > > Also, I thought you decided that I could maintain bloblist. Have you
-> > > changed your mind?
-> >
-> > You just mis-understood me. Yes, you can maintain bloblist. But also,
-> > Yes, I need to understand what you're doing. The root of the OF_BLOBLIST
-> > problems is that no one understood you.
->=20
-> Is there a call tomorrow, or is it next week?
+Introduce a new kconfig CONFIG_ENV_IS_IN_MTD and
+CONFIG_ENV_MTD_DEV to define the name of the MTD device as exposed
+by mtd list.
 
-Tomorrow.
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ env/Kconfig            |  33 +++-
+ env/Makefile           |   1 +
+ env/env.c              |   3 +
+ env/mtd.c              | 338 +++++++++++++++++++++++++++++++++++++++++
+ include/env_internal.h |   1 +
+ 5 files changed, 372 insertions(+), 4 deletions(-)
+ create mode 100644 env/mtd.c
 
---=20
-Tom
+diff --git a/env/Kconfig b/env/Kconfig
+index 4438f0b392c..74678c43334 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -74,7 +74,7 @@ config ENV_IS_DEFAULT
+ 		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
+ 		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
+ 		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
+-		     !ENV_IS_IN_UBI
++		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD
+ 	select ENV_IS_NOWHERE
+ 
+ config ENV_IS_NOWHERE
+@@ -387,6 +387,25 @@ config ENV_IS_IN_SPI_FLASH
+ 	  during a "saveenv" operation. CONFIG_ENV_OFFSET_REDUND must be
+ 	  aligned to an erase sector boundary.
+ 
++config ENV_IS_IN_MTD
++	bool "Environment is in MTD flash"
++	depends on !CHAIN_OF_TRUST && (SPI_FLASH || DM_SPI_FLASH)
++	default y if ARCH_AIROHA
++	help
++	  Define this if you have a MTD Flash memory device which you
++	  want to use for the environment.
++
++	  - CONFIG_ENV_MTD_DEV:
++
++	  Specifies which SPI NAND device the environment is stored in.
++
++	  - CONFIG_ENV_OFFSET:
++	  - CONFIG_ENV_SIZE:
++
++	  These two #defines specify the offset and size of the
++	  environment area within the MTD Flash.
++	  CONFIG_ENV_OFFSET must be aligned to an erase sector boundary.
++
+ config ENV_SECT_SIZE_AUTO
+ 	bool "Use automatically detected sector size"
+ 	depends on ENV_IS_IN_SPI_FLASH
+@@ -562,8 +581,8 @@ config ENV_EXT4_FILE
+ config ENV_ADDR
+ 	hex "Environment address"
+ 	depends on ENV_IS_IN_FLASH || ENV_IS_IN_NVRAM || ENV_IS_IN_ONENAND || \
+-		     ENV_IS_IN_REMOTE || ENV_IS_IN_SPI_FLASH
+-	default 0x0 if ENV_IS_IN_SPI_FLASH
++		     ENV_IS_IN_REMOTE || ENV_IS_IN_SPI_FLASH || ENV_IS_IN_MTD
++	default 0x0 if ENV_IS_IN_SPI_FLASH || ENV_IS_IN_MTD
+ 	help
+ 	  Offset from the start of the device (or partition)
+ 
+@@ -577,7 +596,7 @@ config ENV_ADDR_REDUND
+ config ENV_OFFSET
+ 	hex "Environment offset"
+ 	depends on ENV_IS_IN_EEPROM || ENV_IS_IN_MMC || ENV_IS_IN_NAND || \
+-		    ENV_IS_IN_SPI_FLASH
++		    ENV_IS_IN_SPI_FLASH || ENV_IS_IN_MTD
+ 	default 0x3f8000 if ARCH_ROCKCHIP && ENV_IS_IN_MMC
+ 	default 0x140000 if ARCH_ROCKCHIP && ENV_IS_IN_SPI_FLASH
+ 	default 0xF0000 if ARCH_SUNXI
+@@ -666,6 +685,12 @@ config SYS_RELOC_GD_ENV_ADDR
+ 	  Relocate the early env_addr pointer so we know it is not inside
+ 	  the binary. Some systems need this and for the rest, it doesn't hurt.
+ 
++config ENV_MTD_DEV
++	string "mtd device name"
++	depends on ENV_IS_IN_MTD
++	help
++	  MTD device name on the platform where the environment is stored.
++
+ config SYS_MMC_ENV_DEV
+ 	int "mmc device number"
+ 	depends on ENV_IS_IN_MMC || ENV_IS_IN_FAT || ENV_IS_IN_EXT4 || \
+diff --git a/env/Makefile b/env/Makefile
+index a54e924d419..3b9c71d5681 100644
+--- a/env/Makefile
++++ b/env/Makefile
+@@ -26,6 +26,7 @@ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FAT) += fat.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_EXT4) += ext4.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_NAND) += nand.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SPI_FLASH) += sf.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_MTD) += mtd.o
+ obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FLASH) += flash.o
+ 
+ CFLAGS_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
+diff --git a/env/env.c b/env/env.c
+index bcc189e14db..dbaeedc3c3b 100644
+--- a/env/env.c
++++ b/env/env.c
+@@ -58,6 +58,9 @@ static enum env_location env_locations[] = {
+ #ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+ 	ENVL_SPI_FLASH,
+ #endif
++#ifdef CONFIG_ENV_IS_IN_MTD
++	ENVL_MTD,
++#endif
+ #ifdef CONFIG_ENV_IS_IN_UBI
+ 	ENVL_UBI,
+ #endif
+diff --git a/env/mtd.c b/env/mtd.c
+new file mode 100644
+index 00000000000..721faebd8f2
+--- /dev/null
++++ b/env/mtd.c
+@@ -0,0 +1,338 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ *  Author: Christian Marangi <ansuelsmth@gmail.com>
++ */
++#include <env_internal.h>
++#include <errno.h>
++#include <malloc.h>
++#include <mtd.h>
++#include <asm/cache.h>
++#include <asm/global_data.h>
++#include <linux/mtd/mtd.h>
++#include <u-boot/crc.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++static int setup_mtd_device(struct mtd_info **mtd_env)
++{
++	struct mtd_info *mtd;
++
++	mtd_probe_devices();
++
++	mtd = get_mtd_device_nm(CONFIG_ENV_MTD_DEV);
++	if (IS_ERR_OR_NULL(mtd)) {
++		env_set_default("get_mtd_device_nm() failed", 0);
++		return mtd ? PTR_ERR(mtd) : -EINVAL;
++	}
++
++	*mtd_env = mtd;
++
++	return 0;
++}
++
++static int env_mtd_save(void)
++{
++	char *saved_buf, *write_buf, *tmp;
++	struct erase_info ei = { };
++	struct mtd_info *mtd_env;
++	u32 sect_size, sect_num;
++	size_t ret_len = 0;
++	u32 write_size;
++	env_t env_new;
++	int remaining;
++	u32 offset;
++	int ret;
++
++	ret = setup_mtd_device(&mtd_env);
++	if (ret)
++		return ret;
++
++	sect_size = mtd_env->erasesize;
++
++	/* Is the sector larger than the env (i.e. embedded) */
++	if (sect_size > CONFIG_ENV_SIZE) {
++		saved_buf = malloc(sect_size);
++		if (!saved_buf) {
++			ret = -ENOMEM;
++			goto done;
++		}
++
++		offset = CONFIG_ENV_OFFSET;
++		remaining = sect_size;
++		tmp = saved_buf;
++
++		while (remaining) {
++			/* Skip the block if it is bad */
++			if (!(offset % sect_size) &&
++			    mtd_block_isbad(mtd_env, offset)) {
++				offset += sect_size;
++				continue;
++			}
++
++			ret = mtd_read(mtd_env, offset, mtd_env->writesize,
++				       &ret_len, tmp);
++			if (ret)
++				goto done;
++
++			tmp += ret_len;
++			offset += ret_len;
++			remaining -= ret_len;
++		}
++	}
++
++	ret = env_export(&env_new);
++	if (ret)
++		goto done;
++
++	sect_num = DIV_ROUND_UP(CONFIG_ENV_SIZE, sect_size);
++
++	ei.mtd = mtd_env;
++	ei.addr = CONFIG_ENV_OFFSET;
++	ei.len = sect_num * sect_size;
++
++	puts("Erasing MTD...");
++	ret = mtd_erase(mtd_env, &ei);
++	if (ret)
++		goto done;
++
++	if (sect_size > CONFIG_ENV_SIZE) {
++		memcpy(saved_buf, &env_new, CONFIG_ENV_SIZE);
++		write_size = sect_size;
++		write_buf = saved_buf;
++	} else {
++		write_size = sect_num * sect_size;
++		write_buf = (char *)&env_new;
++	}
++
++	offset = CONFIG_ENV_OFFSET;
++	remaining = sect_size;
++	tmp = write_buf;
++
++	puts("Writing to MTD...");
++	while (remaining) {
++		/* Skip the block if it is bad */
++		if (!(offset % sect_size) &&
++		    mtd_block_isbad(mtd_env, offset)) {
++			offset += sect_size;
++			continue;
++		}
++
++		ret = mtd_write(mtd_env, offset, mtd_env->writesize,
++				&ret_len, tmp);
++		if (ret)
++			goto done;
++
++		offset += mtd_env->writesize;
++		remaining -= ret_len;
++		tmp += ret_len;
++	}
++
++	ret = 0;
++	puts("done\n");
++
++done:
++	if (saved_buf)
++		free(saved_buf);
++
++	return ret;
++}
++
++static int env_mtd_load(void)
++{
++	struct mtd_info *mtd_env;
++	char *buf, *tmp;
++	size_t ret_len;
++	int remaining;
++	u32 sect_size;
++	u32 offset;
++	int ret;
++
++	buf = (char *)memalign(ARCH_DMA_MINALIGN, CONFIG_ENV_SIZE);
++	if (!buf) {
++		env_set_default("memalign() failed", 0);
++		return -EIO;
++	}
++
++	ret = setup_mtd_device(&mtd_env);
++	if (ret)
++		goto out;
++
++	sect_size = mtd_env->erasesize;
++
++	offset = CONFIG_ENV_OFFSET;
++	remaining = CONFIG_ENV_SIZE;
++	tmp = buf;
++
++	while (remaining) {
++		/* Skip the block if it is bad */
++		if (!(offset % sect_size) &&
++		    mtd_block_isbad(mtd_env, offset)) {
++			offset += sect_size;
++			continue;
++		}
++
++		ret = mtd_read(mtd_env, offset, mtd_env->writesize,
++			       &ret_len, tmp);
++		if (ret) {
++			env_set_default("mtd_read() failed", 1);
++			goto out;
++		}
++
++		tmp += ret_len;
++		offset += ret_len;
++		remaining -= ret_len;
++	}
++
++	ret = env_import(buf, 1, H_EXTERNAL);
++	if (!ret)
++		gd->env_valid = ENV_VALID;
++
++out:
++	free(buf);
++
++	return ret;
++}
++
++static int env_mtd_erase(void)
++{
++	struct mtd_info *mtd_env;
++	u32 sect_size, sect_num;
++	char *saved_buf, *tmp;
++	struct erase_info ei;
++	size_t ret_len;
++	int remaining;
++	u32 offset;
++	int ret;
++
++	ret = setup_mtd_device(&mtd_env);
++	if (ret)
++		return ret;
++
++	sect_size = mtd_env->erasesize;
++
++	/* Is the sector larger than the env (i.e. embedded) */
++	if (sect_size > CONFIG_ENV_SIZE) {
++		saved_buf = malloc(sect_size);
++		if (!saved_buf) {
++			ret = -ENOMEM;
++			goto done;
++		}
++
++		offset = CONFIG_ENV_OFFSET;
++		remaining = sect_size;
++		tmp = saved_buf;
++
++		while (remaining) {
++			/* Skip the block if it is bad */
++			if (!(offset % sect_size) &&
++			    mtd_block_isbad(mtd_env, offset)) {
++				offset += sect_size;
++				continue;
++			}
++
++			ret = mtd_read(mtd_env, offset, mtd_env->writesize,
++				       &ret_len, tmp);
++			if (ret)
++				goto done;
++
++			tmp += ret_len;
++			offset += ret_len;
++			remaining -= ret_len;
++		}
++	}
++
++	sect_num = DIV_ROUND_UP(CONFIG_ENV_SIZE, sect_size);
++
++	ei.mtd = mtd_env;
++	ei.addr = CONFIG_ENV_OFFSET;
++	ei.len = sect_num * sect_size;
++
++	ret = mtd_erase(mtd_env, &ei);
++	if (ret)
++		goto done;
++
++	if (sect_size > CONFIG_ENV_SIZE) {
++		memset(saved_buf, 0, CONFIG_ENV_SIZE);
++
++		offset = CONFIG_ENV_OFFSET;
++		remaining = sect_size;
++		tmp = saved_buf;
++
++		while (remaining) {
++			/* Skip the block if it is bad */
++			if (!(offset % sect_size) &&
++			    mtd_block_isbad(mtd_env, offset)) {
++				offset += sect_size;
++				continue;
++			}
++
++			ret = mtd_write(mtd_env, offset, mtd_env->writesize,
++					&ret_len, tmp);
++			if (ret)
++				goto done;
++
++			offset += mtd_env->writesize;
++			remaining -= ret_len;
++			tmp += ret_len;
++		}
++	}
++
++	ret = 0;
++
++done:
++	if (saved_buf)
++		free(saved_buf);
++
++	return ret;
++}
++
++__weak void *env_mtd_get_env_addr(void)
++{
++	return (void *)CONFIG_ENV_ADDR;
++}
++
++/*
++ * Check if Environment on CONFIG_ENV_ADDR is valid.
++ */
++static int env_mtd_init_addr(void)
++{
++	env_t *env_ptr = (env_t *)env_mtd_get_env_addr();
++
++	if (!env_ptr)
++		return -ENOENT;
++
++	if (crc32(0, env_ptr->data, ENV_SIZE) == env_ptr->crc) {
++		gd->env_addr = (ulong)&env_ptr->data;
++		gd->env_valid = ENV_VALID;
++	} else {
++		gd->env_valid = ENV_INVALID;
++	}
++
++	return 0;
++}
++
++static int env_mtd_init(void)
++{
++	int ret;
++
++	ret = env_mtd_init_addr();
++	if (ret != -ENOENT)
++		return ret;
++
++	/*
++	 * return here -ENOENT, so env_init()
++	 * can set the init bit and later if no
++	 * other Environment storage is defined
++	 * can set the default environment
++	 */
++	return -ENOENT;
++}
++
++U_BOOT_ENV_LOCATION(mtd) = {
++	.location	= ENVL_MTD,
++	ENV_NAME("MTD")
++	.load		= env_mtd_load,
++	.save		= ENV_SAVE_PTR(env_mtd_save),
++	.erase		= ENV_ERASE_PTR(env_mtd_erase),
++	.init		= env_mtd_init,
++};
+diff --git a/include/env_internal.h b/include/env_internal.h
+index c1c0727e4d0..ee939ba4293 100644
+--- a/include/env_internal.h
++++ b/include/env_internal.h
+@@ -113,6 +113,7 @@ enum env_location {
+ 	ENVL_ONENAND,
+ 	ENVL_REMOTE,
+ 	ENVL_SPI_FLASH,
++	ENVL_MTD,
+ 	ENVL_UBI,
+ 	ENVL_NOWHERE,
+ 
+-- 
+2.48.1
 
---OUP/uS+AA59Nqkbn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf0F+QACgkQFHw5/5Y0
-tyz8Jgv+JEPA8ARZf3QE1YzyplSLwGjZkHCvIXyxSmSPDBHndVfLAREvnJTYlIK3
-FXAmcEq1RDRh5rbNdxKT9lmtyMzZJBitmPeBDgNHZWSjMwZg1E5KUywkpN+vu4jh
-jQs/1obEL6lEprd8p1VAEFrgGUgskRJkveZ2ktVdIcFxQoNnXXkAmP43O88HYQTH
-KIVVZFO3o/62ZIyV2rtfnre39DUNqAmGcJn4ErJWbrhhdmnK0NPOA8dMuWwuEG/s
-sGgAq0tt1nFGo+MvlupgK6jY9Ct1LYdubv17bL2wtC+27/tqJ5nf9BpZSoJ8gbK1
-PRlOQh7qARAkSJEtI7E4hBk2oLRBJoK20g+zWwMUpZXZCovybdU8EI3I+OQhY/MN
-mpMRdiWSGtPdGyAItUd+qhdja1OXKlGBdlD7ksiUooesa5U0YAEKsbK5iNwAndtc
-mrXuCMjaGnT1n3pxLz6bVQD78ESXj7x0wQixorAIP8knIb8Qe7mm1QSf7aThXDnK
-InwBYvo/
-=mxAo
------END PGP SIGNATURE-----
-
---OUP/uS+AA59Nqkbn--
