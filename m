@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82250C369A1
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:04:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C789C369A1
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F1A583125;
+	by phobos.denx.de (Postfix) with ESMTP id AE84F8313F;
 	Mon,  7 Apr 2025 22:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Td+6iXRn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ar3pJ3MI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F110A82EAA; Mon,  7 Apr 2025 22:02:47 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 4D1AD82EAA; Mon,  7 Apr 2025 22:02:49 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E63F82EAA
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B26A830F1
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43cef035a3bso32401595e9.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:45 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-39ac8e7688aso3595885f8f.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744056165; x=1744660965; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744056167; x=1744660967; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=s6I56aDrJhtZws1wBDSiL2xEFDq2AIxZpJnbMwAxDUc=;
- b=Td+6iXRnOMIzzK9/LpD0pJ4Rv2SDFvLebeiGkk9fhlrfiP7iauZmpC+QbjS9Av/Qam
- F6KBNFens1wlhRbeKb2FmB2gH8TCCL+2rCntCxy6jmfSQ5F+p49nwW14yCIp19fg+otc
- 71awnSJLLV7/YJg6ap7546iNhe/aEqH1kkBBX1UAONv78Ariu99PE9l4X+Ow+fX7niXz
- kscjbuBiY3s+7kdEDiwJn/+hlGSXiaKFAqxsnpR+9zcHt6DUAFQXZldVBOHdtRmGxV0b
- Ndnt6RXis74IZGqraZ9SBYe9AEqHRWo2bsm/xCKvOLu2V9Sf4KXxU1UCCPo01/tF1b13
- 8DoQ==
+ :reply-to; bh=IOH8DkuVLxYfs/lJIWeNLRlOYkCQiYfxlfgFqsd0JDE=;
+ b=ar3pJ3MIPB+dRogA5Cr7usIvtcbAY9j7iEQfEC4iF4Nsf6EDmwRG9wIsDv76tgCY+T
+ 46zUlBp6DnZGUtdBu7CG7bTVgCVuHmou8z+A3chcLwVxxScpObQUyC+yufWN99E32QFe
+ xl3bkpxReIgn+m0H6Xs4bNVDWwsjSZdp3L30JuIU7sVO4HdxSd3vPTf1mjDSMEprRgVE
+ KwDxKd7yXna7717oN/bm7nuUwg77Z3Hj8vEj3rFjpwQjMTyNsjLMf5ftvoCQTrhG4mnq
+ LGDgGgg5LUF4kFUqb8zG9jPw183JSVGGDaNdCVatwAE0TK/MaI4CXlBE+T5aGEKAGv4U
+ Ipcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744056165; x=1744660965;
+ d=1e100.net; s=20230601; t=1744056167; x=1744660967;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s6I56aDrJhtZws1wBDSiL2xEFDq2AIxZpJnbMwAxDUc=;
- b=No4dgX9Jf2oY5IKWhnptg8uuSoUpFYysKp35BD1VEj03FAxDo3QGAHbFKtJeqESnq4
- 1TY50F8bYPj6qxHrNTiTlUkqW2pIQLXkq+pPDJKmTtAWLhucb9NZ/tBgyKHhnA9WtKnW
- yKQJmEAUuqFn6LfC2raSyr5MHxW2CQCLR6ZhhzWS8YdHFHHg//7RgxMsgNaPNgYb8xAh
- pmPiQsimFT1txaJzcADLgBfGX4a1BjFbpfh1R1SR0ayV4D/FjQwfhatyLtx6ddwV7b4E
- x30SIKriHd5BwsVMf3lshgV4JfS7h8NHerFwuXzMa7T34zjG5/RNoFsrscluyftOsJZv
- Xtcw==
+ bh=IOH8DkuVLxYfs/lJIWeNLRlOYkCQiYfxlfgFqsd0JDE=;
+ b=Fu61vPaS7TneHTDcQKp+AjBROKOt+OYdzoUYSjbTUwAuJSLsPiYHjVQqdHL2paeFgq
+ IVxU1weMG5JM1Ap0Jt7n0IUy6hKpUTHF/8KVXJYW5MXhWLSlT4Y8iWjjGVz+7OYjshOw
+ txNFox4dCLxHuLfkFpC55kcMYKt2O4SCHsxVYB4uvgH51703T6v9PTT5e7Uq/GDyqt70
+ +g9V/58O6MSGChwDG7Z8CQIvQzcPAjJd1Kd/0Qp/QWu1nRsR79w5gZ3Ou2SkmT8mFhgS
+ u3BLrKVGrl8fMrTwvNV+ukZStRh6oWlLQO/6inHeIGkEo1fnQKbbP77ILWBiBz5lzv8u
+ MbIg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqsqgTiKx5SG/jhl+oaqGztSAEnMemaR16aSDpgnrTVb09J2PQRQvQe6CWALuCIJmTF0oe7NY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmIygh97MoW2aZOGXNtB0kU/3aQLjnBceDjd4ZBZyxHVAX5MiU
- 04F4NUP/Ye2uo7/CfiZ5aMWv498F87slj0suXaBcWpJe1vE53ojz
-X-Gm-Gg: ASbGncue7P1JUo2SL83ZqkUZe96+oUruoW0clcRJM6Hd4YPZ51i+4J5zsV0lt1JUZyJ
- /P41VuQ1jNT3dooY59cB7atILLFK72S4mg//9e3KfFhtozupjsSBxFjdQfmW5F2IVNcM1Ks/D21
- 9NFnk6tC13w4SC0Andnw1MZ2Y9dqQ5LqvaaCNALHEPp9ZW59N9b1J0H92urw5lCycDDAXU0aClQ
- rIbVSxWYKeyHqKt8f7TGfsdjml4If70K4gw7FKyUOVvrOZIS/390Kz4uLmY5aTdEa1h9Bjphql6
- ZJVRNMAWcAymDjhU4P3cREQKexADtqNs4sixBI47aH3eH4iqjZ9GHOf1mt1t6dZzp0oiGNCDm/0
- PjbElHglgTvZs/w==
-X-Google-Smtp-Source: AGHT+IHMAkcefVLngIQRhhCTeXUq64d/CGmaJSBF64uD5cJmFpUy/N7Di3D05GTsSf6Bz/oJiAnTrA==
-X-Received: by 2002:a05:6000:2489:b0:391:4873:7943 with SMTP id
- ffacd0b85a97d-39cb35aaaeamr11201675f8f.32.1744056164746; 
- Mon, 07 Apr 2025 13:02:44 -0700 (PDT)
+ AJvYcCV1U50dPFfHu52sKajp8yhXvl/XZUN+M/5Z1b5f+kDJyv7au1G//CvnccX+E5htDSV4a/8x4sg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhKBhHKEikKNL1OgCJ4lHuLHvwEpHB+hYftD95JzQDs7usqAez
+ J++SsYsE6fat1+tVPUazn4K/T1/RphLLpwQecFXSC7EJVq8RaDP9
+X-Gm-Gg: ASbGnct9w9yigVCNEys1PcaMl6M3e/yDTH2FxiHuOkL2Wd5SKfyNGhXlpiXazBzcLJb
+ ng/J4iIuD8KWtY8i+xk8uD0Gd3sh2SpQS3TpXMycl63qCdBHB0WyCndv19RHZ4avNYchpTF/xv3
+ 07GUqA9ye7gVzpj/4AxE3ZI6njPfYCviw9D0iYMD1VL9q6IidbOG8QWJtlF17TZl1QKa1AKVIyg
+ XGemOdRSBP8ywwBb/qkeXbh/63JLaT7/pvneBpBh01mmZTU9ubFFrrc6mPdbFZchJkyuaSETzw4
+ l4mTLiPpri+nxmmKxQbLA+4xn/0ayZwC939NP55N3bdiq/eRuixFTV0owUFyt4QV2ovW3j4lDlt
+ gGeRpGkNHfcQojg==
+X-Google-Smtp-Source: AGHT+IECNyjw0wiQagz30PAFi84yIQx6in5IObRMZEiIzkIKf1lSSJHkBfI7cO9zoeHEpeoyPKJTIQ==
+X-Received: by 2002:a5d:6d8a:0:b0:39a:cc34:2f9b with SMTP id
+ ffacd0b85a97d-39d6fc291b3mr8067360f8f.16.1744056166716; 
+ Mon, 07 Apr 2025 13:02:46 -0700 (PDT)
 Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
  [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.43
+ ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 13:02:44 -0700 (PDT)
+ Mon, 07 Apr 2025 13:02:45 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -82,9 +82,9 @@ To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Bruce Suen <bruce_suen@163.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 10/14] spi: Introduce setup_for_spinand()
-Date: Mon,  7 Apr 2025 22:01:54 +0200
-Message-ID: <20250407200208.25594-11-ansuelsmth@gmail.com>
+Subject: [PATCH v2 11/14] spinand: call SPI setup_for_spinand if supported
+Date: Mon,  7 Apr 2025 22:01:55 +0200
+Message-ID: <20250407200208.25594-12-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250407200208.25594-1-ansuelsmth@gmail.com>
 References: <20250407200208.25594-1-ansuelsmth@gmail.com>
@@ -106,47 +106,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A common device attached to SPI are SPI NAND and some device might
-require to have info on the attached NAND to know the flash page size
-and spare size.
+Call SPI setup_for_spinand() if supported and defined to configure the
+SPI slave for the attached NAND. This is needed to configure the SPI
+with the NAND page size and spare size for correct configuration of the
+device.
 
-To support this, introduce setup_for_spinand() that pass the attached
-spinand info from manufacturer.
+Call it as soon as the NAND is detected to correctly handle SPI
+controller with select_op_variant detection.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- include/spi.h | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/mtd/nand/spi/core.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/include/spi.h b/include/spi.h
-index 6944773b596..28f127feca5 100644
---- a/include/spi.h
-+++ b/include/spi.h
-@@ -10,6 +10,7 @@
- #define _SPI_H_
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index f5ddfbf4b83..3a1e7e18736 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -941,6 +941,19 @@ spinand_select_op_variant(struct spinand_device *spinand,
+ 	return NULL;
+ }
  
- #include <linux/bitops.h>
-+#include <linux/mtd/spinand.h>
- 
- /* SPI mode flags */
- #define SPI_CPHA	BIT(0)	/* clock phase (1 = SPI_CLOCK_PHASE_SECOND) */
-@@ -537,6 +538,16 @@ struct dm_spi_ops {
- 	 */
- 	int (*get_mmap)(struct udevice *dev, ulong *map_basep,
- 			uint *map_sizep, uint *offsetp);
++static int spinand_setup_slave(struct spinand_device *spinand,
++			       const struct spinand_info *spinand_info)
++{
++	struct spi_slave *slave = spinand->slave;
++	struct udevice *bus = slave->dev->parent;
++	struct dm_spi_ops *ops = spi_get_ops(bus);
 +
-+	/**
-+	 * setup_for_spinand() - Setup the SPI for attached SPI NAND
-+	 *
-+	 * @dev:	The SPI flash slave device
-+	 * @spinand_info: The SPI NAND info to configure for
-+	 * @return 0 if OK, -ve value on error
-+	 */
-+	int (*setup_for_spinand)(struct spi_slave *slave,
-+				 const struct spinand_info *spinand_info);
- };
++	if (!ops->setup_for_spinand)
++		return 0;
++
++	return ops->setup_for_spinand(slave, spinand_info);
++}
++
+ /**
+  * spinand_match_and_init() - Try to find a match between a device ID and an
+  *			      entry in a spinand_info table
+@@ -964,6 +977,7 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 	u8 *id = spinand->id.data;
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 	unsigned int i;
++	int ret;
  
- struct dm_spi_emul_ops {
+ 	for (i = 0; i < table_size; i++) {
+ 		const struct spinand_info *info = &table[i];
+@@ -975,6 +989,10 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 		if (memcmp(id + 1, info->devid.id, info->devid.len))
+ 			continue;
+ 
++		ret = spinand_setup_slave(spinand, info);
++		if (ret)
++			return ret;
++
+ 		nand->memorg = table[i].memorg;
+ 		nand->eccreq = table[i].eccreq;
+ 		spinand->eccinfo = table[i].eccinfo;
 -- 
 2.48.1
 
