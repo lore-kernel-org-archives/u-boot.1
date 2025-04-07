@@ -4,77 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FF4C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:26:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 117E4C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 15:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EAA382F65;
-	Mon,  7 Apr 2025 17:26:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 04F2882F65;
+	Mon,  7 Apr 2025 17:27:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="tsVLOCkw";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="L3+hTZOy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFBB282F6F; Mon,  7 Apr 2025 17:26:50 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DD7CD82F6F; Mon,  7 Apr 2025 17:27:19 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D62B82F42
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 17:26:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47F2F82F42
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 17:27:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-e53ef7462b6so4317727276.3
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 08:26:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1744039607; x=1744644407;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aqErqkwR1FI27yhgmfKWcLVjQ7ZvlmJGWtpTl29JLqo=;
- b=tsVLOCkwZsjyyXURp7n7xwcGS9DJnf4Wp3apI7Ra1UyELKC8xbV9ZJkAvhjl1Ev4V3
- O7b5p1lQPGgSGaZDCzYtVsbRsfdIttEHbsNCMiXIZQ0FJKZDC+T4sgCPJT73ehJqcyx5
- YDFBl1/Un/JzOa/GWehb/4aR56+EsMMTMQEhi4DtFH9Fv/XH8S0B1DQ46BDEi+MlFT/Y
- 7Xl4m0NzE4qQ00oTvuHEGdDffOmQmnP63mM0DxttvGjlLgEhC8uo1LV2bMzkUoiwwg1x
- o5nx+XAL/t23Ze2GpmPpp3EUleD93BsoO+4r6hS8oIHm/Z9/BzNFMpvJ7V68O0kWbOCB
- SALA==
+ spf=pass smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5378dqiU013367
+ for <u-boot@lists.denx.de>; Mon, 7 Apr 2025 15:27:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=gDtxZNRbExzwW1S4WUTl6FdI
+ dWVL4n9sgZqyRc3ZJMs=; b=L3+hTZOy8yY5iw9PcKTeAOxx2+cLrVOsCW7VcNWB
+ eYNHa93Vcv/HgudtcqoIfumXHHvct8lhtHG3Gyant9BnLrfEWSvNPqxaveDxWvgp
+ d9vdjCstzM7/PxaWsIYkP2990927iW8T4pY34+e2tvDtGwzvYQyzaeUeRxEyaYdL
+ f3ROeu4vSLuvo+0WhFVNYYsuzdVPJqR2WVrBjKlZ3w/gDiAPQRQUud+k3TiF+bSx
+ qVUvfxq2kim646odwWB7TfTgs+yvqx4/niMcyqdE1LI3MITs5gTrJ5xKuidHnCgE
+ unC5Y01cW+fDUgpNEzyU2NK54hePr2UOOlbAzk9Bts/+Ag==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twc1cmbj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 15:27:15 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-7c548e16909so411462585a.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 08:27:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744039607; x=1744644407;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aqErqkwR1FI27yhgmfKWcLVjQ7ZvlmJGWtpTl29JLqo=;
- b=cNZTS7GeKShJEohb6MysTy+ZP5a5icMP7FQzb31iq7ZQAFw46adWBV6puqCwWe3SVb
- aBtewVWCmKRnXOVpZ6a93n971keC01Z5TuE0VwjvqkNWnClk0IZXBKLXs1zFr2oAoNVT
- nkIrnSAsZimT/5ML7UWYVjrn8cellbV+68k2EtiN7Z8wiNIo0mWKxfuVVH2+Kr890lVy
- dXVsmN3WAUEtSfsZb+CJxOzYbDRpVkCxzIng7G2Xn4HbyiPiUaflMofFGjcBEviSpPIO
- QV4WJ+RMCHvb2C/4Yl9wD0Siii+e0WqitJ3wFbm4uoPV3XLxYAapugSmyCvuKFxQL4FV
- 05CA==
-X-Gm-Message-State: AOJu0YyFQYjR99qdz6MCK6p2N7GDbLvTPsntlCAAQCDDEfdBG8+qRmqB
- jJNBwYDNAM/RKAnv5zFNuYiBN8hcNyNXKry0qxaT1ciOVH6/xi8eBpUP8NgfGYBi7MnTyycCsMg
- udsRrt8Iv3kSBZ0xyNwp66ohAjGcB5YviUlG0rnK9okkIDQho+jOm
-X-Gm-Gg: ASbGncsEvtOdq7RNG8Q3T/vVhRia3Dv17my5xR06eQXpjO/dLOHZzJttOMnyUdNlUry
- 07Q46voL1EPeF5g1yZGxYqegEp5U24fL3POzC4qk3BwYawxVFfKfmh8DSJWpiPYxt6PHi7LdfpC
- iKhH9SX9nq5vz64tWxPXbZBtOZRs4=
-X-Google-Smtp-Source: AGHT+IFJAuUgokaDexRCdNLyIrm8YdI6xFDOu6UhsGvl7EIukEcA0cRBlwCeODJibn3J3nfSkDpLCrS2uMYrfaEM6KI=
-X-Received: by 2002:a05:6902:2411:b0:e63:f191:e8a7 with SMTP id
- 3f1490d57ef6-e6e1c2ac3bbmr20158789276.31.1744039607440; Mon, 07 Apr 2025
- 08:26:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744039635; x=1744644435;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gDtxZNRbExzwW1S4WUTl6FdIdWVL4n9sgZqyRc3ZJMs=;
+ b=DOlnds8ICbwb24nqw+RwiDd5eoYaOVsCXI1U4h2Kd2ckxCBH0O6ijO3lLoiWMqc4yV
+ zoXR2a9jE/WEhUBPTlJEDvJev7G5Dl5WceAMtCx4fn5obGvQNlajFUFl0eU8+XL/QJrR
+ BABSQFk4h8TM1Dwnj/9QmxM+B5ixWhVWokTqK0TP9KbH1YkclcvW7lPgex0L+gFIq8JF
+ Y9FEyhS/HumoVYNULdSvt/ox6Ymm9qUAN/Ul4Y7+TiYVUS4TnCsJ8GoJHjb5Q9FcgdhT
+ f8/DpeeGXByeRe+nBSwOsAS9hPL5mTdBVHa/o243cpWZBsSp+Z4VOx0kJ8fphr4D9yj5
+ f6XA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXcI9tT73ZDXzk5HgbkaK81ZgtkmTbOxwtZmKqjZIoelgZmC+2GOaEhwvxevQWN1sSl67s4KDE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCo0mO+Nc3GLvy8eHuWQeE4Qk1JrjqW7hesA5IvUnoDeVjcdFi
+ 0WMbC79gtXH6zDqlBuxPEhZ8kfofOpjh73d5ai/iBXmHSyFQ15T/UkcoRccJNK7NH/FhafJEUSq
+ t+6y22H28I5qCgIVbVReN24JUtXu//luxnZtYhns0JempJSrAqnmC56MO7zD/
+X-Gm-Gg: ASbGncsCVsh9n483oVCjXOaZrq7QOOEl0EEN0bo6OWPjHzaer5fJ0+JtyTtJMy3wnWc
+ RalWSiScS+xHtfcKvu1Dftx3NL4FXqJP8h+9QjN4a1uM76yptnyS4bxlXVVqvSMfAX/4bPTLKiW
+ 3mXPuniBdGD36j991ciXIfKAhd2+HQ/Y+72WuHjkbnKs87a9yF4lcmBt46K7iUsOYE1BinVvIry
+ V6k0580Ger2UF5IjgqWXTJbnS6ZPhfDtWRJ+5sDrBko3NdUhpwtlMAc/aoDif3L1JF6eWJmwJ+6
+ OSM6zuVuKV62Jff1BvKNlqqcVL0vYIcbnOZt/1dowgInl/C9B5A=
+X-Received: by 2002:a05:620a:390b:b0:7c5:b909:fde1 with SMTP id
+ af79cd13be357-7c775a2dc17mr2230397185a.25.1744039634810; 
+ Mon, 07 Apr 2025 08:27:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHldJNovGJ6tUMEFNdhFa2Kuz7zJndL59HK3s7gzWtdH/Hc4+APMqzvt+hYfaQDuWGzF9NKTw==
+X-Received: by 2002:a05:620a:390b:b0:7c5:b909:fde1 with SMTP id
+ af79cd13be357-7c775a2dc17mr2230391085a.25.1744039634344; 
+ Mon, 07 Apr 2025 08:27:14 -0700 (PDT)
+Received: from trex (233.red-79-144-185.dynamicip.rima-tde.net.
+ [79.144.185.233]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43ec1795db7sm140038905e9.25.2025.04.07.08.27.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Apr 2025 08:27:13 -0700 (PDT)
+From: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
+X-Google-Original-From: Jorge Ramirez <JorgeRamirez-Ortiz>
+Date: Mon, 7 Apr 2025 17:27:12 +0200
+To: neil.armstrong@linaro.org
+Cc: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>, caleb.connolly@linaro.org, 
+ sumit.garg@kernel.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/5] clk/qcom: apq8096: fix the sdhci clock
+Message-ID: <Z/Pu0IhrhsuUBgez@trex>
+References: <20250407120536.236003-1-jorge.ramirez@oss.qualcomm.com>
+ <20250407120536.236003-3-jorge.ramirez@oss.qualcomm.com>
+ <ca4b11e9-4bd0-4a9b-9980-ff2367f8c43f@linaro.org>
+ <Z/PeZVBhwcNOVRAD@trex>
+ <c834224a-a69d-42d5-ae2a-b6b363d9d2ee@linaro.org>
 MIME-Version: 1.0
-References: <20250221110344.2301862-1-ibai.erkiaga-elorza@amd.com>
-In-Reply-To: <20250221110344.2301862-1-ibai.erkiaga-elorza@amd.com>
-From: Michal Simek <monstr@monstr.eu>
-Date: Mon, 7 Apr 2025 17:26:36 +0200
-X-Gm-Features: ATxdqUG0j0Z9SFtPOrkHSuwGBb58ro_taw3CIH18bVvP1qLhGRxxPJn0pF9OEus
-Message-ID: <CAHTX3d+42A47K3YF_Fh_59vcQhWJgdhzU7kP8ZJGR4yyROSLrQ@mail.gmail.com>
-Subject: Re: [U-Boot][PATCH v1] cmd/fpga: use config node for loadmk
-To: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c834224a-a69d-42d5-ae2a-b6b363d9d2ee@linaro.org>
+X-Proofpoint-ORIG-GUID: MMSXNWqfionR3WCBesRIAIA1Ain9Iu9H
+X-Authority-Analysis: v=2.4 cv=KtdN2XWN c=1 sm=1 tr=0 ts=67f3eed3 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=9rMOtB7ueBl8bWGkC6audQ==:17
+ a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8
+ a=EUspDBNiAAAA:8 a=xUTvVhGfsdnD6KsvS_EA:9
+ a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: MMSXNWqfionR3WCBesRIAIA1Ain9Iu9H
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-07_04,2025-04-03_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0
+ priorityscore=1501 phishscore=0 bulkscore=0 suspectscore=0 spamscore=0
+ malwarescore=0 lowpriorityscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=999 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504070108
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,29 +130,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI,
+On 07/04/25 17:12:45, neil.armstrong@linaro.org wrote:
+> On 07/04/2025 16:17, Jorge Ramirez wrote:
+> > On 07/04/25 14:36:51, neil.armstrong@linaro.org wrote:
+> > > On 07/04/2025 14:05, Jorge Ramirez-Ortiz wrote:
+> > > > Select the right clock for sdhci.
+> > > > 
+> > > > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> > > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> > > > ---
+> > > >    drivers/clk/qcom/clock-apq8096.c | 2 +-
+> > > >    1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+> > > > index bc00826a5e8..551f52d5197 100644
+> > > > --- a/drivers/clk/qcom/clock-apq8096.c
+> > > > +++ b/drivers/clk/qcom/clock-apq8096.c
+> > > > @@ -83,7 +83,7 @@ static ulong apq8096_clk_set_rate(struct clk *clk, ulong rate)
+> > > >    	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> > > >    	switch (clk->id) {
+> > > > -	case GCC_SDCC1_APPS_CLK: /* SDC1 */
+> > > > +	case GCC_SDCC2_APPS_CLK: /* SDC2 */
+> > > 
+> > > Should be GCC_SDCC2_AHB_CLK
+> > 
+> > why? also if I do that, mcc fails to probe
+> 
+> The discussion at https://lore.kernel.org/all/Z/OqoqnPb1gfk5iG@trex/ made me thought using GCC_SDCC2_AHB_CLK fixed the sdhci set_rate, but I maybe did misread.
+> 
+> Neil
 
-p=C3=A1 21. 2. 2025 v 12:04 odes=C3=ADlatel Ibai Erkiaga
-<ibai.erkiaga-elorza@amd.com> napsal:
->
-> Current implementation requires to provide the name of the FPGA image
-> within the FIT image. As the configuration node is mandatory according
-> to the spec and includes an optional property "fpga" to define the
-> bitstream image, use this approach instead.
->
-> This way there is no need for an additional information in the loadmk
-> command for FIT, and signature and hash verification of both the image
-> and configuration is performed.
+can I add your review/acked?
 
-I am not convinced about this. fpga entry in config defines link to
-bitstream partition and likely it will work for default config but
-you can describe multiple configurations and have multiple bistreams
-in partitions and by this you will
-lose capability to extract/load different or multiple bitstreams.
-
-Look at doc/usage/fit/multi-with-fpga.rst and describe multiple
-different config nodes with different bitstream and try to
-load them with your patch applied.
-
-Thanks,
-Michal
+> 
+> > 
+> > > 
+> > > >    		return clk_init_sdc(priv, rate);
+> > > >    		break;
+> > > >    	case GCC_BLSP2_UART2_APPS_CLK: /*UART2*/
+> > > 
+> 
