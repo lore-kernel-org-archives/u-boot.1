@@ -4,118 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB4BAC36018
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A3CC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 18:14:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 736F182F65;
-	Mon,  7 Apr 2025 20:12:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2373482F65;
+	Mon,  7 Apr 2025 20:14:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CZ0FGYzm";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Co+Jl5Rx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B82C982F65; Mon,  7 Apr 2025 20:12:29 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 205F682E40; Mon,  7 Apr 2025 14:45:22 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93EA482F08
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 20:12:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43d0782d787so32362155e9.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 11:12:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744049547; x=1744654347; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=OwOArh5pmnvBqwueMMh2wdNHAkdXUJ3g89H3voSywIc=;
- b=CZ0FGYzmQC2lhZEqyJKqqy3AggooGgDSsgKhk6RieAIPh4Sjm2wyDcZta5dR7VZMd3
- vjvk2KoY7TnlreGQJLmHBhJ8xi3iJ9tg1IWHY8zlJRe3gpvqzJB+uAPY/DupBaqYnyfM
- OAx5be0/n9Y62zcutSeUV0ihvU5kYWUUqQlJf0JocWwyBeuWcepIGoLS9tZ3NuXidp+T
- kdxriWuTKBG1CYSYPOE+uwVDKlSCzpW+CvFCG8ARm9pIyP76IpYdcsMJ+ud0xFSVsit+
- sPAR+XkIObYNzHJcYc2eAkwBkbsCfV0LOIJ0cvRFotAbpBRF5wF475VwI62PfEKJe1CE
- UsPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744049547; x=1744654347;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=OwOArh5pmnvBqwueMMh2wdNHAkdXUJ3g89H3voSywIc=;
- b=a6fH2BTw3yf9nKQSdzAxsQELL3PjBBDyBXl5mKUPix6ZSfCBqhvLBV/lS1jj6GoPWc
- zv8EAvuqNfm1F6eOM7tnsk/vDswymgNfhAzyUsCVyb/jEoah/OWoneuh0edxKh8LOk2s
- mc9YQ2t/4XVvCp3cZ6JJMGUyQmgqN8eih3GEmY1AZSV+45c5Nyv/S75BBfDIXqvTKUVx
- RKZ/dCza1aY9vd+58htN8RaaDu1Nc6gr5CO4AxNa01V8FhxiMeuThb2UcIhSRlGT//I5
- 7KxRRDraiqXxyx/NSp/J81nfTt/gdY3zbMY+bnuht4iD6q+tLYa52mFEJoikJhb0u1Bk
- Bf7g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3IOQE9dMy62tFjx1qubU+UxRBOQ2BY/1elipjRov8/GQqJPB8aJ/mlqXycGZG7A2PR/L4s2o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRiD9yH5usLgB7lC4btaSjll28MgfhlvqnP8bPpyh4xz4Noz9P
- PcR/yuXST+qQKUCzeX/jEJHUhOtOga7brhc9HijWkPSqx5Z7tLWbcez6oGLQQz0=
-X-Gm-Gg: ASbGncv1lsUPUtqSUJULHnl0KBtOIxycFp/jYw0jZ53xbSKDfqeYMGXNZVPEvx3Hbmc
- aY6OiVIPFZKS1kzkU/RNGpAW1UxYWdyMeK5Pmdrg7Gv4mZcvvj3rH6rIyOKd/XF94pFenI83eSy
- +YtTyvH5OI13gTt7zyhsv0QN3doXYMjvlHtVw0PMAX3iRtk0ri0awEw/zK+eVNb8X61PgtFDZr1
- 5CU0+tG82pttsRGi/1Twe3W7J4o/G9+ObU0z5Tv6qa9IbVyiEv/CRJTqeXXRWK3iU2IRaxaJwK6
- Nk0ID2KpkJ+R8HpGmxrceFICcW7rYmYNhS1MgWCbvNV8YA4Jc8a4dBxCFBgao9cmJy7QftnbqL8
- JIwgtxqF3Tii3UjWILR78xA==
-X-Google-Smtp-Source: AGHT+IHzKoqQzyphZ0sbXB5XXUhPdfplN7oURQCTt227X04k1U9ZojuJXZ+/iJ7z1vFouR7UlLEXCg==
-X-Received: by 2002:a05:600c:4e09:b0:43d:83a:417d with SMTP id
- 5b1f17b1804b1-43ed0bf6c17mr121529995e9.12.1744049547064; 
- Mon, 07 Apr 2025 11:12:27 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:f2a4:b974:cba3:a605?
- ([2a01:e0a:3d9:2080:f2a4:b974:cba3:a605])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec34af0e6sm139361485e9.16.2025.04.07.11.12.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Apr 2025 11:12:26 -0700 (PDT)
-Message-ID: <d830d22b-6cb7-4971-b87b-51d5a2da21ed@linaro.org>
-Date: Mon, 7 Apr 2025 20:12:25 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 9574482CFD
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 14:45:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id CDE26A486CC;
+ Mon,  7 Apr 2025 12:39:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 37479C4CEDD;
+ Mon,  7 Apr 2025 12:45:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744029918;
+ bh=EJ6cjbc3KfgbhUApk4VNSpZn+GtC6o+yo6Y34JlJVyc=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=Co+Jl5Rx+pxX7jO8uz4SYC2EKHQydfCX9G+ghxDliZJnRH2NO2GopCK6rrGz2eztD
+ SCdG3DOEiFqX77mpBb8GadiBAke9f+EENVvogFUajJ5Q651d+mvIqxsificXkN4ux2
+ P0hWpLjs0v4tcdo9IpIAa2tWDQBX0/jOYDxrGYZGcWRRb6P0+v7wCte9bDHpE83D5S
+ v1nOK3Qi4vCrXMtnwuSoqaiWg86y3hShSC1+suDZCeB9ke/6osOYIv18MwXPEYxrN1
+ vSc8uqVcLyFgYR3Cz/977thyh3G/HzbRzNJyV6YRqsHrFxr3I1MJIVGFF3NGgSecpm
+ 8Z1KkaZzxLB0A==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 20688C36010;
+ Mon,  7 Apr 2025 12:45:18 +0000 (UTC)
+From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
+Date: Mon, 07 Apr 2025 20:44:58 +0800
+Subject: [PATCH RFC] bootm: ARM64 EL1 direct jump to kernel start
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 05/13] board: dragonboard410c: Drop reflash functionality
-To: Stephan Gerhold <stephan.gerhold@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Sam Day <me@samcday.com>
-References: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
- <20250407-db410c-fixes-v1-5-524aefbc8bb4@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250407-db410c-fixes-v1-5-524aefbc8bb4@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250407-el1-boot-v1-1-f7c52499d9c5@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAMnI82cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDEwNz3dQcQ92k/PwSXXNLI0sjs6REMwNLAyWg8oKi1LTMCrBR0bG1tQB
+ eZCmVWgAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, George Chan <gchan9527@gmail.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1744029916; l=4102;
+ i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
+ bh=GD1dScz1+CT+QozQ4RhYfOQiS9MdEXEF1nvNZ1X8uoU=;
+ b=dKmKQr4FszUwY7svjFdvHov40lPlTPq6WV1qwHCdZnK0q5c8SQmFVQHGl1dYx3kJPqYWs0Sm4
+ l8G2Y/Q7yOCBH5BUeIKl0S4F/xJWix7lKVETGXShNOvLb+gF9YBRp6a
+X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
+ pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
+X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
+ auth_id=248
+X-Original-From: George Chan <gchan9527@gmail.com>
+X-Mailman-Approved-At: Mon, 07 Apr 2025 20:14:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,57 +80,156 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
+Reply-To: gchan9527@gmail.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07/04/2025 18:59, Stephan Gerhold wrote:
-> This is broken ever since we switched to using U-Boot as first stage
-> bootloader. Since no one seems to test this actively, let's just drop this
-> entirely. There are other tools available for re-flashing the DB410c.
-> 
-> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-> ---
->   board/qualcomm/dragonboard410c/dragonboard410c.env | 26 ----------------------
->   1 file changed, 26 deletions(-)
-> 
-> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.env b/board/qualcomm/dragonboard410c/dragonboard410c.env
-> index 9d9a575a0c3f7a4739e4fb77a980d742e10510f5..57a30031f743f43d4a6389286b426b404d2f371b 100644
-> --- a/board/qualcomm/dragonboard410c/dragonboard410c.env
-> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.env
-> @@ -1,30 +1,4 @@
->   /* SPDX-License-Identifier: GPL-2.0+ */
-> -
-> -/* Does what recovery does */
-> -#define REFLASH(file, partnum) \
-> -part start mmc 0 partnum start && \
-> -part size mmc 0 partnum size && \
-> -tftp $loadaddr file &&  \
-> -mmc write $loadaddr $start $size &&
-> -
-> -reflash=
-> -mmc dev 0 &&
-> -usb start &&
-> -dhcp &&
-> -tftp $loadaddr dragonboard/rescue/gpt_both0.bin &&
-> -mmc write $loadaddr 0 43 &&
-> -mmc rescan &&
-> -REFLASH(dragonboard/rescue/NON-HLOS.bin, 1)
-> -REFLASH(dragonboard/rescue/sbl1.mbn, 2)
-> -REFLASH(dragonboard/rescue/rpm.mbn, 3)
-> -REFLASH(dragonboard/rescue/tz.mbn, 4)
-> -REFLASH(dragonboard/rescue/hyp.mbn, 5)
-> -REFLASH(dragonboard/rescue/sec.dat, 6)
-> -REFLASH(dragonboard/rescue/emmc_appsboot.mbn, 7)
-> -REFLASH(dragonboard/u-boot.img, 8)
-> -usb stop &&
-> -echo Reflash completed
-> -
->   loadaddr=0x81000000
->   initrd_high=0xffffffffffffffff
->   linux_image=Image
-> 
+From: George Chan <gchan9527@gmail.com>
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+It was EL3->EL2 or EL2->EL1 when boot. But in many case such chain
+loading from bootloader is already run in EL1.
+
+There is no practically way to raise EL1 to EL2. Thus theonly way
+to start kernel is direct jump. This apporach is similar to KEXEC
+purgatory idea but do not need to make an extra bulk of binary blob.
+This applied when current_el() is 1 only.
+
+Signed-off-by: George Chan <gchan9527@gmail.com>
+---
+U-Boot usually run in EL3 or EL2 mode so assumed kernel will start
+at EL2, or switch from EL2 to enter EL1. Test shows in QCOM SM7125
+phone environment chainloading U-Boot is already in EL1 so doing 
+EL2 transition EL1 gone wrong.
+
+This patch enable the EL1 chain loading kernel by direct jump to 
+image->ep address. This calling convention apply to bootm only.
+
+In short, borrow the logic from kexec-tool purgatory idea and issue
+a direct jump when current_el() is EL1.
+---
+ arch/arm/cpu/armv8/Makefile |  2 +-
+ arch/arm/cpu/armv8/entry.S  | 42 ++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/lib/bootm.c        | 18 ++++++++++++++++--
+ 3 files changed, 59 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+index b4126c61df1..d5b0ffe8c87 100644
+--- a/arch/arm/cpu/armv8/Makefile
++++ b/arch/arm/cpu/armv8/Makefile
+@@ -5,7 +5,7 @@
+ 
+ extra-y	:= start.o
+ 
+-obj-y	+= cpu.o
++obj-y	+= cpu.o entry.o
+ ifndef CONFIG_$(PHASE_)TIMER
+ obj-$(CONFIG_SYS_ARCH_TIMER) += generic_timer.o
+ endif
+diff --git a/arch/arm/cpu/armv8/entry.S b/arch/arm/cpu/armv8/entry.S
+new file mode 100644
+index 00000000000..19a7da2438e
+--- /dev/null
++++ b/arch/arm/cpu/armv8/entry.S
+@@ -0,0 +1,42 @@
++/*
++ * ARM64 purgatory.
++ */
++#include <asm-offsets.h>
++#include <config.h>
++#include <linux/linkage.h>
++#include <asm/macro.h>
++
++.macro  size, sym:req
++        .size \sym, . - \sym
++.endm
++
++.pushsection .text.purgatory_start, "ax"
++ENTRY(purgatory_start)
++purgatory_start:
++
++//	adr	x19, .Lstack
++//	mov	sp, x19
++
++//	bl	purgatory
++
++	/* Start new image. */
++	ldr	x17, kernel_entry
++	ldr	x0, dtb_addr
++	mov	x1, xzr
++	mov	x2, xzr
++	mov	x3, xzr
++	br	x17
++ENDPROC(purgatory_start)
++.popsection
++.align 3
++
++.globl kernel_entry
++kernel_entry:
++        .quad   0
++size kernel_entry
++
++.globl dtb_addr
++dtb_addr:
++        .quad   0
++size dtb_addr
++.end
+diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
+index 974cbfe8400..5a15725317c 100644
+--- a/arch/arm/lib/bootm.c
++++ b/arch/arm/lib/bootm.c
+@@ -269,6 +269,10 @@ __weak void update_os_arch_secondary_cores(uint8_t os_arch)
+ {
+ }
+ 
++extern void (*kernel_entry)(void *fdt_addr, void *res0, void *res1,
++                            void *res2);
++extern void* dtb_addr;
++
+ #ifdef CONFIG_ARMV8_SWITCH_TO_EL1
+ static void switch_to_el1(void)
+ {
+@@ -290,13 +294,13 @@ static void switch_to_el1(void)
+ static void boot_jump_linux(struct bootm_headers *images, int flag)
+ {
+ #ifdef CONFIG_ARM64
+-	void (*kernel_entry)(void *fdt_addr, void *res0, void *res1,
+-			void *res2);
+ 	int fake = (flag & BOOTM_STATE_OS_FAKE_GO);
+ 
+ 	kernel_entry = (void (*)(void *fdt_addr, void *res0, void *res1,
+ 				void *res2))images->ep;
+ 
++	dtb_addr = images->ft_addr;
++
+ 	debug("## Transferring control to Linux (at address %lx)...\n",
+ 		(ulong) kernel_entry);
+ 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+@@ -311,6 +315,16 @@ static void boot_jump_linux(struct bootm_headers *images, int flag)
+ 
+ 		update_os_arch_secondary_cores(images->os.arch);
+ 
++		/* right now switch_to_el1() is hanging the devlice
++		 * when it is already in EL1 so cant do anything about it.
++		 */
++		if (current_el() == 1) {
++			void purgatory_start(void);
++			purgatory_start();
++			panic("nothing to do...\n");
++			return;
++		}
++
+ #ifdef CONFIG_ARMV8_SWITCH_TO_EL1
+ 		armv8_switch_to_el2((u64)images->ft_addr, 0, 0, 0,
+ 				    (u64)switch_to_el1, ES_TO_AARCH64);
+
+---
+base-commit: 848f7ffc64aa7c4cc2229095812625c12343c8c1
+change-id: 20250407-el1-boot-792926ba6090
+
+Best regards,
+-- 
+George Chan <gchan9527@gmail.com>
+
+
