@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9489C3601A
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4D1C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 10:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77A1F82CF4;
-	Mon,  7 Apr 2025 12:50:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D026082CEA;
+	Mon,  7 Apr 2025 12:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N0TjE7WK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d4L/p/C1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A39B82CF4; Mon,  7 Apr 2025 12:49:59 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 0958082DED; Mon,  7 Apr 2025 12:50:24 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77B1C82DF2
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:49:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0101082CE7
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 12:50:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5e8be1bdb7bso6907144a12.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:49:57 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ac34257295dso855937566b.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 03:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744022997; x=1744627797; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744023021; x=1744627821; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L0Ffg4vb/pf/z8k7I4gqxxG8VnH788BPvbqGoji/4G0=;
- b=N0TjE7WKGPzizf4TjaCGGPjJv81gt/rTcdTJU23DFtISjRf6wBLCert33h30SbfmGt
- m6ouS8Tw0EcPBCPHyvRe0CZ7V45ho6pUMGQ/fz8geti+g54lhWbqkWmG9Nj14ZNpsuIM
- 8ssJx5CcFYjFcAvh1TDpRGadB3gpq4rW2fsQY=
+ bh=sieBWciMu51vYGFrzi93jSsb5BXSkPCuKJf064hC79k=;
+ b=d4L/p/C1chBs8D/F5YwUYZKIAb8M0WGC9pFntweGRwPXolAysnv0wBs33f/Q5UmAh+
+ YXtHwGPnScTP0JGIrUHktCDLQh0WpPUNIgtIUx2lb43LY3rtgjcZ2jznyNlV8AwS3KWT
+ yTcMk5ssjJHmcqvamI/hO8zexudzPhkXeK2KY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744022997; x=1744627797;
+ d=1e100.net; s=20230601; t=1744023021; x=1744627821;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L0Ffg4vb/pf/z8k7I4gqxxG8VnH788BPvbqGoji/4G0=;
- b=mjxdjc4zitoeRug5u4vUnateEiklran/7Kf4yhmJvoMDfFeG793gVQCXn7qb2OcHP4
- BW6lx+GCm3HhSblX0dx6S2IFALcAGfEEXFsjy6PBD3R7ji0+TqjTT99+a1nJ/BGvI+zi
- kbUzHv0CsITfaVkhV00TU8HAUXaXDNvbWAP1u6VJVWYJUVVQ9Uzt8OxQ6ARZ9OdMP98W
- MaTYRwqwrT2ulUPz+kgDzifq9vpucgmAcVYVgSXY2RJAC8cTekgBKMwFqgGkDunIXp/c
- 1v+SQ25QL2OsxJN8VNeU/mYsg6LU9dIo4NtS7FGD+AxPWOFkZqAWK7aXi/NPyGc/UODU
- 2Pgg==
+ bh=sieBWciMu51vYGFrzi93jSsb5BXSkPCuKJf064hC79k=;
+ b=mZgr2rEFbWSOQuRdyNp4Y5FhtmC2QhK7hF6PyCaB/6mltMGYR4an9sxkqSE68zxfxl
+ jb57Eq3MuAvTEXvYG+APVqM72sippKga4Frocsp7zPFkL2DtQwYvCFb38Gdz1BO2dBNI
+ 4CR0CUpO+bLxuSPQTsXjlLPW9tG8OGz+Z3G9FalczCdKfY5gy0D/uAp/Koo7lDS3d5S5
+ WiG0q+b3YG+CsqxolHbOr/Xy3HgOOonYyUC5rzWDZoki/Hku1MK/oKDz0EYi+BJkE4+W
+ syzmZayRzWk10PwKgRS7Zv7JERElPdO5n/pFrCLJ/sOg+9BQDeDqBGArSTEGxSvaLJ/D
+ 84tg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVzRzB+Xl1Forrflvi7KWIpbARWNn9ryc06cgFOsCXLYR36TO0S8NKj9WbsLedHmz4VpA8Sttw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyri+mAyL7lftFRYEKkukyobxPCXohc7Vg4FOBfJlWC4wt9DlXN
- /DZcfh5EwHi7xvmlzJVyWWPkChU5UcBruFH7a4pmNpIxfy7AHueCuYy6ds/Gcr17DGJvmKuwTbM
- +XqQHe1oQfrH44CEp4SLRxosdOctcUQjBYetI
-X-Gm-Gg: ASbGncv4fV4KjOe4tTp4/MK8h2xWJldpgN6/G13SnzQ/xkrqM9qoItzJKMQBK00RAdf
- LWNldlmCO4UloYmsRnJhOchexP7BBQSOkLfPNVY67FnqzEw/JyKmGmcRWRsX0vl6K6zM+DTktDh
- QnVDF5G3/boDfIcVK1GAdzoqjy5Tw=
-X-Google-Smtp-Source: AGHT+IFUP8lzQAWvysKUMybOHDbixKXT6nYvodbxOSWR4x9fMumun5GZRtCI2NmotazoZOG1vY9wjfxuI0pHfopuZPg=
-X-Received: by 2002:a17:907:60d1:b0:ac2:66ff:878 with SMTP id
- a640c23a62f3a-ac7e77b48afmr823274466b.50.1744022996725; Mon, 07 Apr 2025
- 03:49:56 -0700 (PDT)
+ AJvYcCXBfoJFg6DqH5YImwTWu6DuIayePLA7m7VDduCAsneUN+PHlwRQ6WNgTGTvvkETFy0mSkIgXXI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwhH7wswyayMMQzYKiQsAGpbXVoQvV9UPHrwa8DZTmrs4bsR+Lv
+ km+jDjf7loNbDAd06wJZ/84Xw2AABUTmD1nBxxwP7syWKmV7EVyrxLdcEd1kIzgPIxw/puThX1E
+ +s9aZZ/EtMp6lUuf2Ox7XDgvTMD1esRPyDQ8b
+X-Gm-Gg: ASbGncvzbRDiHjaGflZ0x2fJcq9c9OD+RfxEBtnj1NywoGyWzU6993Db43dgS8lquip
+ 9E7aSop0KefnE+o2yrKWaSLPCFkv2FKXn4eu8+GDYpsm0TN5STpf2koEsM7DAXAN+1qL7Bi722G
+ 2N7XZWvVHlvox1gvnvqo0H7UGwBSw=
+X-Google-Smtp-Source: AGHT+IGfee/eUYFAM+G+t3C7W1Ri232soxXxl6aZlWxxnXbbEzO+Vt84yljqQM1nxq6OjP/V/20vo2iB54oFwOPYcAI=
+X-Received: by 2002:a17:907:6d24:b0:abf:d4a9:a096 with SMTP id
+ a640c23a62f3a-ac7d6e3d174mr954259366b.37.1744023021196; Mon, 07 Apr 2025
+ 03:50:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250407033744.4025-1-ziyao@disroot.org>
- <20250407033744.4025-3-ziyao@disroot.org>
-In-Reply-To: <20250407033744.4025-3-ziyao@disroot.org>
+ <20250407033744.4025-2-ziyao@disroot.org>
+In-Reply-To: <20250407033744.4025-2-ziyao@disroot.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Apr 2025 22:49:44 +1200
-X-Gm-Features: ATxdqUHBndGH3M3yg9d0pG0_1DP8BPBhpzV0BtwGs4DIJFGo9xlJCt_5d7hKt_s
-Message-ID: <CAFLszTidOt+CeMEVuWr-iYrgkR+kpe2vpRAL8vdaBs+b32ucGA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] riscv: Provide __image_copy_{start_end} symbols in
- linkerscript
+Date: Mon, 7 Apr 2025 22:50:07 +1200
+X-Gm-Features: ATxdqUEkvGBLtGTMlaY2fk9Ke3vABeBTRPh50pAZhymESJXaUEC9gc-fah_6ymY
+Message-ID: <CAFLszTjmabVKuHF8Ym1OENiiBZrSTd2vVjWvHcQkb552qAuhwg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] spl: riscv: Disable SPL_BINMAN_UBOOT_SYMBOLS by
+ default
 To: Yao Zi <ziyao@disroot.org>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Tom Rini <trini@konsulko.com>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
@@ -79,8 +79,7 @@ Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Trevor Woerner <twoerner@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  Marek Vasut <marex@denx.de>, Paul Kocialkowski <contact@paulk.fr>,
  Jerome Forissier <jerome.forissier@linaro.org>, 
- Lukas Funke <lukas.funke@weidmueller.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Lukas Funke <lukas.funke@weidmueller.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,71 +97,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Heinrich Schuchardt
+Hi Yao,
 
 On Mon, 7 Apr 2025 at 15:38, Yao Zi <ziyao@disroot.org> wrote:
 >
-> Binman looks for __image_copy_start to determine the base address of an
-> entry if elf-base-sym isn't specified, which is missing in RISC-V port.
-> This causes binman skips RISC-V SPL entries without filling addresses
-> into its .binman_sym_table section.
+> The default binman configuration of RISC-V wraps proper U-Boot into a
+> FIT image instead of shipping a plain image, thus there's no
+> "u_boot_any" entry by default. Let's disable the option to prevent
+> binman from looking for a plain proper U-Boot image, failing the build
+> with message like
 >
-> This patch defines __image_copy_start in linkerscript of both SPL and
-> proper U-Boot to ensure binman_sym functions correctly with the default
-> binman.dtsi. The paired symbol, __image_copy_end, is introduced as well
-> for completeness.
+>   Section '/binman/spl-img': Symbol '_binman_u_boot_any_prop_size'
+>      in entry '/binman/spl-img/mkimage/u-boot-spl/u-boot-spl-nodtb':
+>        Entry 'u-boot-any' not found in list (u-boot-spl-nodtb,
+>        u-boot-spl-dtb,u-boot-spl,mkimage,spl-img)
+
+Do you know where the symbol is being referenced? This sounds like a bug to me.
+
+It is likely to be spl_get_image_pos(), perhaps called from
+spl_set_header_raw_uboot().
+
+If you are using FIT that function should not be called.
+
 >
 > Signed-off-by: Yao Zi <ziyao@disroot.org>
 > ---
->  arch/riscv/cpu/u-boot-spl.lds | 2 ++
->  arch/riscv/cpu/u-boot.lds     | 3 +++
->  2 files changed, 5 insertions(+)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
+>  common/spl/Kconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
-> index 907094620bd..18eb62c01c6 100644
-> --- a/arch/riscv/cpu/u-boot-spl.lds
-> +++ b/arch/riscv/cpu/u-boot-spl.lds
-> @@ -16,6 +16,7 @@ ENTRY(_start)
->  SECTIONS
->  {
->         . = ALIGN(4);
-> +       __image_copy_start = ADDR(.text);
->         .text : {
->                 arch/riscv/cpu/start.o  (.text)
->                 *(.text*)
-> @@ -46,6 +47,7 @@ SECTIONS
->
->         _end = .;
->         _image_binary_end = .;
-> +       _image_copy_end = .;
->
->         .bss : {
->                 __bss_start = .;
-> diff --git a/arch/riscv/cpu/u-boot.lds b/arch/riscv/cpu/u-boot.lds
-> index 2ffe6ba3c8f..b11ea8b56d2 100644
-> --- a/arch/riscv/cpu/u-boot.lds
-> +++ b/arch/riscv/cpu/u-boot.lds
-> @@ -10,6 +10,7 @@ ENTRY(_start)
->  SECTIONS
->  {
->         . = ALIGN(4);
-> +       __image_copy_start = ADDR(.text);
->         .text : {
->                 arch/riscv/cpu/start.o  (.text)
->         }
-> @@ -57,6 +58,8 @@ SECTIONS
->                 __efi_runtime_rel_stop = .;
->         }
->
-> +       __image_copy_end = .;
-> +
->         /DISCARD/ : { *(.rela.plt*) }
->         .rela.dyn : {
->                 __rel_dyn_start = .;
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 7d6780936d1..356ddab38de 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -214,6 +214,8 @@ config SPL_BINMAN_UBOOT_SYMBOLS
+>         bool "Declare binman symbols for U-Boot phases in SPL"
+>         depends on SPL_BINMAN_SYMBOLS
+>         default n if ARCH_IMX8M || ARCH_IMX8ULP || ARCH_IMX9
+> +       # A FIT image is created with default binman configuration of RISC-V
+> +       default n if RISCV
+>         default y
+>         help
+>           This enables use of symbols in SPL which refer to U-Boot phases,
 > --
 > 2.49.0
 >
+
+Regards,
+Simon
