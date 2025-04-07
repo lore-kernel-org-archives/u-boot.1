@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0EBDC36018
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A3DC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D70A682F35;
-	Mon,  7 Apr 2025 18:59:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2DF8782E76;
+	Mon,  7 Apr 2025 19:00:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rJVxing6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ewPsstGC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E62382F29; Mon,  7 Apr 2025 18:59:58 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id DFEA782E86; Mon,  7 Apr 2025 18:59:58 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 182A282E66
+ by phobos.denx.de (Postfix) with ESMTPS id DEBAF82E86
  for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 18:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ac34257295dso933378866b.2
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5e61375c108so6564856a12.1
  for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 09:59:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744045195; x=1744649995; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KXLtpfwFPq03wtV1OvTiX9dqXoyPqCr97zJIVAsrUNQ=;
- b=rJVxing6Am0TyZWCRjK+gYxuZjDk+UBi1FFVX1Ry7WJ0gc1a71+qYokpr2Htqsz0fD
- POTeOsJvWKtvj35ThaxcEIa9jWMhzUw1+retFEf/aGSNkGr88+XHRz7YepwFHnDpD1EH
- LxXxeGfqT2eSa5gFdrDc4poCtPv9Awp2Ap8IswnX/8agzE4co51V15D8IZFtDFrfJnrX
- lkcMvZgjf1siqsV/a9ZkoLlBDu5afUue5AiEHFokC8UcL24Adx8x/naxfBx4d8F4c/zN
- fyMfFX17DxMaK6R/fzx+RGOA6IgbCD2mWnseS/o990bImxb58zwg27PQfQSp2M3qrdtA
- KgPw==
+ d=linaro.org; s=google; t=1744045196; x=1744649996; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=5eIlQ/sH388tPT6DFZVOA9zlKo9apJtu116V34ty3Ko=;
+ b=ewPsstGCeFtiaWGnI8BucLADtf2ifT/oxVHICT9BxCKZ4ncnSbH2TiTXjHd2hIKWrN
+ Zc1yICGrmbmpMRfP50X/IyWUHQ5T/Z852MZh7EtrIEPW0FU+YAc/rZHomA5XE015+1be
+ 4BXcTzQWhHbUdbWn55KIFnAFwh6qIFRMWYH39UygFYxEYkin/xXbk2shAFlMOSdkngbo
+ RozEYF1DquMwaWX8q3rnGrOK97QzCJbLX6bYgKGxU5N2aiMn6ye2SVtAd+fjii1sEsMF
+ T1PqiKmrTF8UyLkKaA3yZw7JWCjhTg8uyWqL0Zl4JVYhZLJc1SpXSZ4ZI6XjJBmid7D5
+ FPow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744045195; x=1744649995;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KXLtpfwFPq03wtV1OvTiX9dqXoyPqCr97zJIVAsrUNQ=;
- b=U2qS7oIo8QVkVrsol1GNtAkuOddnIGqTUG9cYb3/zuYMGYEv71CE3aAaopPAVDFBxg
- B7KiCLjxn/7w6861CjdxpCGMA+eXLepefsBnKFvPKepnJRAKIKfAoOhE+5uhGOdJrjMo
- oF7S6AbeajlEGv5SvgaCrUOEucO3fl+ehEe/42YgXinus0uWVh8T1NATkNRGrBjKMkmz
- vANRKJJ9s0c0P1196ms6BOVdkA+Kf+tB8Zqhw9vhOHT0yj5Dt0Ud32JhrqOTvBOvgTJL
- ZYWm7Tgg9MkFIywbPX4df+xW7oSDgxVXorqFzFuCTtdMS0B07vX1TfHPEWE+dOrqrS+8
- xWEw==
+ d=1e100.net; s=20230601; t=1744045196; x=1744649996;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5eIlQ/sH388tPT6DFZVOA9zlKo9apJtu116V34ty3Ko=;
+ b=F92MUT7GJpMghGqZq/XW9NtDlIjtamag9QEkXjNppkycbKncYwNaEuKL+ctoqcvfMz
+ DfKmgJw+t/fLzwoVrMELlafDrnYGRZ78/MT6S91yy7oQSRcNJNM/JHY0Ec5yCpki8cwd
+ Mu6RY4vTtXwU2so0Isw1LZyI2hY2QVMaOsNqpI5AAhPJ40xOg3qCilDxAneH1jELqyr4
+ QkJ2A+lVqpMWezixA0qRtagpz2S6GH9c37cT71dxJ3uRLKPfuXSf/BVw0pZ3aLB6YgcI
+ 3w2D2v/iVbISyPN5KfqmhLIrVHkuxXfDokxd20xkH0NmQLpMsYAfe5lwco7OXuJrHr9X
+ Sbyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWlOt53JfjQgYRQgM53GuicYVeWdmcDHeRh4GzdPTiXzuUTCSYo12jue3uhjHVo9Op9FUg+iSk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxadrk0r33rv3w6DfS8WTgcdQ8QYYYA0Ted9TWnAW2WUQfERMTf
- GGt/FyFtawYWTtQqrEE6cimBJpU8UqgYLk6Tn5Ko0WoHUgseJf5/ouPmio3njsM=
-X-Gm-Gg: ASbGncv5Af9BEJ2DGjOawqAoxrMQSRTGCTBTZBCsfT/Q4GQgmSInTnN+XGniRNpJyr+
- 46bcQUtifmgZocOD5f/wrwA8a8NFdJGhFJQj5WYDdyNK0ilZW2kDG8sXGPSnkWXAUBbtSJ///Gu
- N7ZOANyZmcPA5Ml6SIvfu+IWKkc0hogSma6JnHl7QZWTwQPheIfoVPK7Oh6lGgTrmSxQQhoXa3T
- KW6MyCCfBDhOGzgw4AvXuVBKos0mlqkhndT/kvFoEm8xnPS6T4OxInvbuieows0+1jBmeH3Dxhz
- Am/RmWxo/rC40sIKGth8BQ8QTQLJm3O3/L7gn3W4AES64pD9rYjwD46ijYx1Gwg8pywq
-X-Google-Smtp-Source: AGHT+IG77JTnRafYXcCZ6ztIhgb9CKJOhjQws03CkIQi1bx4lgVqPYVnvkq9MLwv+HAd4jxERn9hRQ==
-X-Received: by 2002:a17:906:6a05:b0:ac6:f6e9:6ba0 with SMTP id
- a640c23a62f3a-ac7d6ec3b99mr960512266b.52.1744045195382; 
- Mon, 07 Apr 2025 09:59:55 -0700 (PDT)
+ AJvYcCUDQkXj9a8Vw1TN+dyicj5fI3luU+OnpCnAioeHxlBUMdt+jxmnqqKqu8HDnTSjjepC1BIcDEg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8+q5/H6/Nz2e+JjQHYoKWfPtpunvs6sM7OH7ujhnCvdgvTwoJ
+ E0pdEUIZJ+IBdOhatyDU+m/Dws+XEhP8jjFDHjYOmeTzqk6je3EmzNXedpDgSB0=
+X-Gm-Gg: ASbGncuS0tHumyPbpKE/pblsY0It3un2EwF3wd6aoHSUMRH3G576noRe0H9z39TNmrE
+ 30IEDhWghwlzLZhXeM3IldwaMGmuNxw4oQ5hZCrc/tv56VZ516El1oWD+JgvjMKicCEj5ZDsDk+
+ +k7E5IkGns4ZEW3s+KWLKQZO7dm2JrdocJm3J/HBZXafqsZvl/9oou50Ik7upNeylNibbbbJbdo
+ 2N5JtJFRh9fnGFHcdeZOwGJfJTuXjmZwUXwA7Tefb9KT/hP8L+jIXJtDjCgl6eb/RM/TnK09F9E
+ t5M1nXZJuHJV+cZ/sXyL04Vm9ntZHQ1d/zywlJHKyyNJsV/vHkOhAZwF1W0h0nGMEx+r
+X-Google-Smtp-Source: AGHT+IGGSNiUylpXLEOGVTnUxcd4LveelvkuHuaAGiahehaYO9Z80dBhUTEpGuaB2Plfh+xi1+MVsQ==
+X-Received: by 2002:a17:907:d29:b0:ac3:ec77:27fb with SMTP id
+ a640c23a62f3a-ac7d6d5f9demr1218703766b.26.1744045196259; 
+ Mon, 07 Apr 2025 09:59:56 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:ef30:b2e5:7ea8:e86c:3f99])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ac7bfea16aesm773603666b.70.2025.04.07.09.59.54
+ a640c23a62f3a-ac7bfea16aesm773603666b.70.2025.04.07.09.59.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 09:59:54 -0700 (PDT)
+ Mon, 07 Apr 2025 09:59:55 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Subject: [PATCH 00/13] board: dragonboard410c: Various fixes and cleanup
-Date: Mon, 07 Apr 2025 18:59:21 +0200
-Message-Id: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
+Date: Mon, 07 Apr 2025 18:59:22 +0200
+Subject: [PATCH 01/13] mach-snapdragon: Fix EL2 boot on DragonBoard 410c
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGkE9GcC/x3LTQqAIBBA4avErBNU/ImuEi1Mp5qNhUIE4t0bW
- n48XoOKhbDCPDQo+FClKzPUOEA8Qz5QUGKDltpKI71Im1Eyip1erGKy0QWXUHvlgJe74B/4WNb
- ePxT9w8teAAAA
-X-Change-ID: 20250407-db410c-fixes-85c6a6de2716
+Message-Id: <20250407-db410c-fixes-v1-1-524aefbc8bb4@linaro.org>
+References: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
+In-Reply-To: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -103,41 +101,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DB410c U-Boot port has not been updated much lately. This series
-includes various fixes and cleanup to bring it back into better shape. I've
-also added myself as new maintainer (and Sam as reviewer), since Ramon has
-not been active on the U-Boot mailing list for over a year now.
+The workaround for the "PSCI bug" on DragonBoard 410c implemented in
+arch/arm/mach-snapdragon/include/mach/boot0.h clobbers the x0 register
+by storing the CurrentEL in there. When running in EL1, the mode switch
+sequence implemented there later clears the register again, but this is
+skipped when U-Boot is booted in EL2.
 
+This causes crashes in the mach-snapdragon board_fdt_blob_setup() later,
+because the invalid address stored in x0 gets dereferenced to check if it
+points to a valid DTB.
+
+We can't rely on having a valid values in the CPU registers for the first
+stage bootloader configuration on DB410c, and nothing would place a DTB
+there anyway. Skip selecting the SAVE_PREV_BL_FDT_ADDR option for the boot0
+hook case to avoid crashing with the clobbered register value.
+
+Fixes: 059d526af312 ("mach-snapdragon: generalise board support")
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
-Stephan Gerhold (13):
-      mach-snapdragon: Fix EL2 boot on DragonBoard 410c
-      board: dragonboard410c: Fix RAM size
-      board: dragonboard410c: Fix BD address
-      board: dragonboard410c: Drop UNSTUFF_BITS() macro
-      board: dragonboard410c: Drop reflash functionality
-      board: dragonboard410c: Drop unused linux_image
-      board: dragonboard410c: Use dynamically allocated load addresses
-      board: dragonboard410c: Fix counter frequency
-      board: dragonboard410c: Enable RTL8152 ethernet
-      board: dragonboard410c: Use BOOTSTD instead of DISTRO_DEFAULTS
-      board: dragonboard410c: Enable support for Android boot images
-      board: dragonboard410c: Use button_cmd instead of custom code
-      board: dragonboard410c: Update maintainers
+ arch/arm/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- arch/arm/Kconfig                                   |  2 +-
- arch/arm/dts/apq8016-sbc-u-boot.dtsi               |  2 +-
- board/qualcomm/dragonboard410c/MAINTAINERS         |  3 +-
- board/qualcomm/dragonboard410c/dragonboard410c.c   | 67 +++++++---------------
- board/qualcomm/dragonboard410c/dragonboard410c.env | 38 ++----------
- configs/dragonboard410c_defconfig                  | 10 ++--
- include/configs/dragonboard410c.h                  | 11 ----
- 7 files changed, 35 insertions(+), 98 deletions(-)
----
-base-commit: 4b2895adb0ab94fdaabd6c19cef4d72986483461
-change-id: 20250407-db410c-fixes-85c6a6de2716
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 63aefeda9575fec8fc57194358df0819397d088e..af3d39196ee4fb201d4aad20a882bbbb39263396 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1115,7 +1115,7 @@ config ARCH_SNAPDRAGON
+ 	select SPMI
+ 	select BOARD_LATE_INIT
+ 	select OF_BOARD
+-	select SAVE_PREV_BL_FDT_ADDR
++	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select SYSRESET
+ 	select SYSRESET_PSCI
 
-Best regards,
 -- 
-Stephan Gerhold <stephan.gerhold@linaro.org>
+2.47.2
 
