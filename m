@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F36EC369A1
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3878CC36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 20:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0C0B83121;
-	Mon,  7 Apr 2025 22:02:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D950830E5;
+	Mon,  7 Apr 2025 22:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QbaYTpEx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ba6l3gpl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 626E4830E5; Mon,  7 Apr 2025 22:02:46 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 43C9B830EE; Mon,  7 Apr 2025 22:02:47 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64627830B6
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A5198311B
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 22:02:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-39129fc51f8so3892517f8f.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:43 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-39c266c2dd5so4158062f8f.3
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 13:02:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744056163; x=1744660963; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744056164; x=1744660964; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pA3fr9ZK1HDD76B3sltaSieNwG9WriYbyzvZMSD9JIk=;
- b=QbaYTpExdVR2Itaf1gNw8bMG9ref/YStcfGS1FRzsIRkbDYrr4+M4tOEjHelgrwLL8
- xwVqrx0wPgw+cAITp13lVqulWFjxMi1EVDiJoVre7TO8y2VX9sKyWI0efNlgRfgt6qD6
- 96tXFgwfrEE3aeq5KkVGqMIL1Szoc9b9AbhJ+ktB1vS/FEeQkR0xdh5zsOl8s+tMbP02
- BUD9EUxD4jFBO9hAYPSyNwXAVArHeuoDC42mZGJmnksfABjmQoRErfG2ipz3VLjDD73W
- HpmGBHCS+wgLBrf4uvZJQQtbvo8rT+nb4XR2yd7QiaPmjHR1pHv7tZ0izpYxnspgLaYe
- g4CA==
+ :reply-to; bh=wV0Md3YNik26+zOgG2dX/kL4pu5J0Pp6WJbfijQZQSw=;
+ b=ba6l3gplCLIHbLFAx+6CER2ujhszKMuSn7HZBoncEnQrgHGJ1IxZVbgWgIu6hjQP8N
+ SCGs1/yLRGRXdRZQGW9wgeLQSf72H4EQ2d7khcGpSptnoIQBaEQU5e69R2lpMkhLA2YD
+ jDJJr1fxJnNH4ETKxp9dKmSwROH4UfELib+rkCFvXTGwyO5YfIYyjb+52Dc1B8R3YrAt
+ QnlkP6nbIsVoqVogwjFyFicFcY6RYP+WOdDpm9kfqeeDfOzsi4DSGmUAZjZ680qxHHtf
+ LxB0fy5fiaFqiZV8mmXUQFm6p5JNxN0xBJp2l2nzodpVEKH2ShypjTJ8T7+OC9enPiWd
+ A7pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744056163; x=1744660963;
+ d=1e100.net; s=20230601; t=1744056164; x=1744660964;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pA3fr9ZK1HDD76B3sltaSieNwG9WriYbyzvZMSD9JIk=;
- b=N1SexS4Fnk0agPYrtieUvsQ+a3YBj2o/iHzaCY68GoFx+fQT1f9mdJoLBSrHAzOlLC
- vUx0qddDStHTpLYKWLzcbBZZmvPXYEW9wAYV64awsf0Kkt7i4W8Cc/9fUwO540lbNX9I
- e5dHodQVzKvlK7xjbPPobW4Zet02wmC9SWna7LDk9UUlBUmgOndVaSosnmW4pS1l79bz
- X8etLsu81EwXMtDJb9X3JDOtAUUMRvp3ma64xN6YntfOTvTUM1MlbNa4hGSkSAeJ/vfd
- TDRuIEYF67q5Nf02rpkxRVZNoYtUXx/HFQWAtTreBu/EX38CK9HSs9yWyihIw9DHiYj7
- OhwQ==
+ bh=wV0Md3YNik26+zOgG2dX/kL4pu5J0Pp6WJbfijQZQSw=;
+ b=RP667abUasPiRExg8iqXcb9pJPmLTYY2YK/bQKFAVudPmFa8++c2zwXWCGkwsarpiF
+ 6fcYgtIHHtU+9mqH2UNYXlEtRqiOQw0viJPbCiOqQKSs054Mou2Lafzct35fy/I20+i3
+ H3ufVdRdaecWIxdQIKFTTMLQHLe8LeH15b2FnOhxW92C0oLsLS72RyHiBA5RIRZZypH6
+ HAaNqmqfPXYIvo++rVUgOdWE8jZVlg0nzT/IV1ORC2I0SRFtpwOrGP8pGod6V4yOjbzC
+ RH99W1watP0cNxRy8yu0F5Mhi2EooFd9m7E2UQYf17NwmJ7lcvpVM9vPTbnc7VcJhUl6
+ 7uWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUx2u6ksYUJg+sYviyo8Sz/f0wsRg8d5tgq6DW+7l88hFXepINmqdj5zeqliU3kpEErqerKjxk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwS4eGBbLbfDjaIz88azHEtMj5bJ5yhfBImgWsrsJCgiRuMCHsl
- GJgAonP0uMmKRMbOefpCsFZScfz/KuS2FYhnAhBJn9YtV6AqZW4+
-X-Gm-Gg: ASbGncvaoL+icufh6xwwgRWNVWLOvFgaotAZvnotWmfVix+Z6x3zO8wFusKDFsmEAF4
- 4pUVPUYiIL/s+fPAkWzC/Z6qHBfayQiP9jmbHkbZ8wvjZIBmKVNm2F2mpeE2X4HOuucNbUcqMCT
- LpLNaHzPvn1SXOr1qOOoO+Rp+ZxhqYZXXk6Iz2V2aw+NFErk+yu7byDAcPx7TWoIQ34rinhCJaH
- HWRl5ekPYi2Sw2U2Q5jKwDQ3CC2sl9eRFr7M794VLxuf5RDNjp/Vmy67VYKtW4YF91+9rwy1ve9
- AR4Jp8XiVQx5D637GV7aYIDXNsyaXEPEJtiEbxDarA9coiMHkfDK2qkxZI+c0wf2KRWj1Gkkwrh
- ti8AtxMhpdeBBZA==
-X-Google-Smtp-Source: AGHT+IH4QyOjHAh9bnKvCD4Tb0oBGEpnsHG2rNey+DOkJ2VErlB+tU6B/VlLnt9oQR5ZiEwKHscgLA==
-X-Received: by 2002:a05:6000:420f:b0:39c:2692:425a with SMTP id
- ffacd0b85a97d-39d0873fcd8mr9778558f8f.6.1744056162775; 
- Mon, 07 Apr 2025 13:02:42 -0700 (PDT)
+ AJvYcCUAvKMOKAm4jP2EMPbwL6P1XjrxWjLSbAOd+QSH6QLyOKyUshjp3RibV1DXqUqzT0cqbtnh77w=@lists.denx.de
+X-Gm-Message-State: AOJu0YwapxIpIbOXpDA6NSyVTMcEeofaSdGWPl/fDoW9KSINgEXa2c3X
+ Sab6ZBX45+8T+mtsvhulURPbU5hM+VfvnclAOi+PHvFbaB1QXFP9
+X-Gm-Gg: ASbGncsd3Osots4q9Au+N6ytqr8Gs0JnsCXjcVf7YyKFGfHKTBIRZCkhd6r8iQJ/7Ir
+ UlcTyWPdok5Hg8dPKfEtDoiwo+IQ5RBY+Xo5ChP5LVrTbVqPw5sk6y0T2hCyxIe06FJKDlOOjlu
+ a8ngxmonezbuXmZ4tIW+gAh0QecTvpXzKkZMB53Z2eeDo/fbnYiko/GMvGmoO1rT4inR2acgYMD
+ xi3lJY2LDEv3qjZJU+59rIgESeUYMDPoJXkMIKh/0as4UNztZUmdauQvADBY/QvmVvN2iYaoQTg
+ 4EVuwFPP28bKYO/+3iyIGGTly1X5GXUPEo1HUIUKrjRcTYPFydR8YdkDqQUYz2m89adpmky1ySE
+ bG1qz0i6dCd961w==
+X-Google-Smtp-Source: AGHT+IG5T8s0voZw9xYu0Tr8srIlD0Xsmo4uMvODavAgVbtkVGVgyLjDGU2KEmOB5+gmWg14NPqJyg==
+X-Received: by 2002:a05:6000:40c8:b0:391:139f:61af with SMTP id
+ ffacd0b85a97d-39d0de29752mr9828907f8f.32.1744056163757; 
+ Mon, 07 Apr 2025 13:02:43 -0700 (PDT)
 Received: from localhost.localdomain (93-34-88-225.ip49.fastwebnet.it.
  [93.34.88.225]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.41
+ ffacd0b85a97d-39c301b9d55sm12723354f8f.42.2025.04.07.13.02.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 13:02:42 -0700 (PDT)
+ Mon, 07 Apr 2025 13:02:43 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -82,9 +82,10 @@ To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Bruce Suen <bruce_suen@163.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 08/14] regmap: Add regmap_set/clear_bits shorthands
-Date: Mon,  7 Apr 2025 22:01:52 +0200
-Message-ID: <20250407200208.25594-9-ansuelsmth@gmail.com>
+Subject: [PATCH v2 09/14] spi: drop unneeded spi.h header include from
+ spinand.h
+Date: Mon,  7 Apr 2025 22:01:53 +0200
+Message-ID: <20250407200208.25594-10-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250407200208.25594-1-ansuelsmth@gmail.com>
 References: <20250407200208.25594-1-ansuelsmth@gmail.com>
@@ -106,55 +107,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Port Linux kernel regmap_set/clear_bits shorthands to set and clear bits
-in a regmap. These are handy if only specific bits needs to be applied
-or cleared and makes it easier to port regmap based driver from kernel
-upstream.
+Drop unneeded spi.h header include from spinand.h, nothing included by
+spi.h is actually used in this header and .c should correctly included
+spi.h if actually needed.
+
+Replace spi.h with linux/bitops.h as this is what is actually required
+for spinand.h
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- include/regmap.h | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ include/linux/mtd/spinand.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/regmap.h b/include/regmap.h
-index 22b043408ac..8c6f7c1c9b1 100644
---- a/include/regmap.h
-+++ b/include/regmap.h
-@@ -361,6 +361,34 @@ int regmap_raw_read_range(struct regmap *map, uint range_num, uint offset,
-  */
- int regmap_update_bits(struct regmap *map, uint offset, uint mask, uint val);
- 
-+/**
-+ * regmap_set_bits() - Set bits to a regmap
-+ *
-+ * @map:	Regmap to write bits to
-+ * @offset:	Offset in the regmap to write to
-+ * @bits:	Bits to set to the regmap at the specified offset
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int regmap_set_bits(struct regmap *map, uint offset, uint bits)
-+{
-+	return regmap_update_bits(map, offset, bits, bits);
-+}
-+
-+/**
-+ * regmap_clear_bits() - Clear bits to a regmap
-+ *
-+ * @map:	Regmap to write bits to
-+ * @offset:	Offset in the regmap to write to
-+ * @bits:	Bits to clear to the regmap at the specified offset
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int regmap_clear_bits(struct regmap *map, uint offset, uint bits)
-+{
-+	return regmap_update_bits(map, offset, bits, 0);
-+}
-+
- /**
-  * regmap_init_mem() - Set up a new register map that uses memory access
-  *
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index 13b5a52f8b9..6fe6fd520a4 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -17,7 +17,7 @@
+ #include <linux/spi/spi.h>
+ #include <linux/spi/spi-mem.h>
+ #else
+-#include <spi.h>
++#include <linux/bitops.h>
+ #include <spi-mem.h>
+ #include <linux/mtd/nand.h>
+ #endif
 -- 
 2.48.1
 
