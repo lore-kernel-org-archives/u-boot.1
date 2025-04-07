@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9176DC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:06:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48699C36018
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:06:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BD5582F83;
+	by phobos.denx.de (Postfix) with ESMTP id BEA8B82FB4;
 	Mon,  7 Apr 2025 19:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61C1982F83; Mon,  7 Apr 2025 19:05:57 +0200 (CEST)
+ id 4B58482F1D; Mon,  7 Apr 2025 19:05:59 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1AEA482FE9
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 19:05:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 09CEF83019
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 19:05:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A2D53106F;
- Mon,  7 Apr 2025 10:05:55 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 86BC51424;
+ Mon,  7 Apr 2025 10:05:57 -0700 (PDT)
 Received: from localhost.localdomain (unknown [10.57.17.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 04CB53F59E;
- Mon,  7 Apr 2025 10:05:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id DDEAB3F59E;
+ Mon,  7 Apr 2025 10:05:54 -0700 (PDT)
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
@@ -35,9 +35,9 @@ Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/5] xilinx: zynq: fix dfu alt buffer clearing
-Date: Mon,  7 Apr 2025 19:05:28 +0200
-Message-ID: <20250407170529.893307-5-vincent.stehle@arm.com>
+Subject: [PATCH 5/5] arm64: zynqmp: fix dfu alt buffer clearing
+Date: Mon,  7 Apr 2025 19:05:29 +0200
+Message-ID: <20250407170529.893307-6-vincent.stehle@arm.com>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250407170529.893307-1-vincent.stehle@arm.com>
 References: <20250407170529.893307-1-vincent.stehle@arm.com>
@@ -69,27 +69,27 @@ While this would indeed work fine for an array, in the present case we
 end up clearing only the size of a pointer.
 Fix this by specifying the explicit size `DFU_ALT_BUF_LEN' instead.
 
-Fixes: c67fecd2125b ("ARM: zynq: Enable capsule update for qspi and mmc")
+Fixes: b86f43de0be0 ("xilinx: zynqmp: Add support for runtime dfu_alt_info setup")
 Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
 Cc: Michal Simek <michal.simek@amd.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- board/xilinx/zynq/board.c | 2 +-
+ board/xilinx/zynqmp/zynqmp.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-index 8dbfa560423..d8d4d5022ae 100644
---- a/board/xilinx/zynq/board.c
-+++ b/board/xilinx/zynq/board.c
-@@ -176,7 +176,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index 820fb252a3f..687dcd3ac9d 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -669,7 +669,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
  	if (env_get("dfu_alt_info"))
  		return;
  
 -	memset(buf, 0, sizeof(buf));
 +	memset(buf, 0, DFU_ALT_BUF_LEN);
  
- 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
- #if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
+ 	multiboot = multi_boot();
+ 	if (multiboot < 0)
 -- 
 2.47.2
 
