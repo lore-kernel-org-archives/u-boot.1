@@ -4,117 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BBAC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 07:34:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 190A2C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 07:55:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEAC782C87;
-	Mon,  7 Apr 2025 09:34:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 65D1382C55;
+	Mon,  7 Apr 2025 09:55:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WloqoaXF";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TInVyhOz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAC7C82C87; Mon,  7 Apr 2025 09:34:13 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 249DC82C87; Mon,  7 Apr 2025 09:55:05 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9B0582C55
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 09:34:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B59E882BCD
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 09:55:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-39149bccb69so3692107f8f.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 00:34:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744011251; x=1744616051; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=87lS53SLmBjO7cHn5uk87Je/8uScceyp5320tpIVZtQ=;
- b=WloqoaXFJBOVgNMaJZPN0lwOE0jL+aM2vMUGfHGuw8ZSvGYpIrBjnZHFWz46YnQjuR
- fp1mCQCk7P0hV2kfXghZT0XEWw9zH2c9w2KUYq6ZJgxhO/cBV9oXvcHcWIA5j6ptKOEL
- 4pNdovht3vTP6s5XN4JW17sa7/ws/2O870gn6fhlOJH5UeMHSUXvfT3sHNWBnB8hhSfD
- Cp87C9zVgUMra9/v5akxFIH/4eA5VozFwv4MZQZ+nN4i+u5+oTndGLxuQkcrvJfne43u
- hB/mvh25HsnZGjDNE+Z+/Ypq3/Kd2OxlPZXkQufZHMB3STUZNGv1jWSWIR6LyfWsNOwS
- 2wmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744011251; x=1744616051;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=87lS53SLmBjO7cHn5uk87Je/8uScceyp5320tpIVZtQ=;
- b=JBOVcHPyqOtm+t4E71ThTnnyPnY0aIOHsQ75Snm5PjOTBK74NUluinAWGraDlZ0wwg
- 12znU4/fIG1KnGO9NE5I7Xn3QEU4zhaKQ7Jgb0K1l6WJzRIyE3mMC0R4tqtBQmxmysW8
- nGIG6RxfrQ3L1QYTQO1Df6RmdBfL58GrZbbMCsa13WtGuj2jICEOhsGnwCcbEFnxPJSl
- WQEY6DKWBMJ4ifOJANkCTlWlvlGbEzcjvJX8GXgXc9hZD3Ub3b8DElti2H77Pk9dW9SD
- aeB6/MtrogMo+MJIOWxspZUf+ad0JabHuoCMw+r9bSZ6f6txq7Gug3OsOqOcCcphJWNR
- Tw5A==
-X-Gm-Message-State: AOJu0YwLGc9JhsU2gnqxL4VtfK4bHFlLWWkZUO+DYytE9dX3cFBmw3NJ
- n1telBDNLpos0AmQaYBZdapw8riH8n+hlc0ZZczIk6zvk4ek3sEBKa3bi9wpUp6Jy+1qF1lZdHP
- V
-X-Gm-Gg: ASbGnctM6XgGQmdDOGFb7fZKSixOZ4qfrn1P0C4X1F2ZOm6MA9/EpbcjFdb0MLcSjwP
- mA6EWeHYZvhNEF5au1d/odqBvyNREZPPc0cl+ODuEwhnPqHeE9tReaFK7nAki9adzaW38ShPhHv
- s+X8fY9juNMxKlf3iAYhqK7GTY1hsEvcoMOUaszDVt1J1iqCHs6szImv8RcuKNr2TTLrmyRrV0S
- yvjiIMlap7YGOu3DfWboilH80FL6+a/rwz6Kcjm+KXrVERVTqkGo9Z98mhCURHOWkNVAqDsw7aZ
- vsUf1ybsVXb8vD4y6x+taKJlj9c3qtAZoTmbt3sNMzojia+eiKXGB4FnvZo7rt6FgN+DoeEEyIm
- T4Ikq/uoJ0W80sKanG2DcuQ==
-X-Google-Smtp-Source: AGHT+IHeUkb4Q6OlG2JLOASdo5h0nE5PtG6+apUE+z5zhsnFdETMdhErgRiU9aahiVegJXJaBaC6bA==
-X-Received: by 2002:a5d:584b:0:b0:391:4231:414 with SMTP id
- ffacd0b85a97d-39d6fd18f22mr5875872f8f.40.1744011251102; 
- Mon, 07 Apr 2025 00:34:11 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:f2a4:b974:cba3:a605?
- ([2a01:e0a:3d9:2080:f2a4:b974:cba3:a605])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec17b0d06sm125745665e9.35.2025.04.07.00.34.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Apr 2025 00:34:10 -0700 (PDT)
-Message-ID: <87a3dbba-e43b-40b9-af58-cd77747ac412@linaro.org>
-Date: Mon, 7 Apr 2025 09:34:10 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744012502; x=1744617302; i=xypron.glpk@gmx.de;
+ bh=L1EBCwR4sK0ESWqC74K7wFNnfR75r2z6PMlJNO6gTCQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=TInVyhOzKjZfx/PKqWG9rOV3mZQVvvk1RWOyMX7ABGbUmLSzlupMbvMTIxI82ZcN
+ BAw2UpeWQf3W7i7Ns5b4CT1o9PqLX1U9wGOBVVK54cfZf72ZAwfvmSxa1ocSmBppc
+ T+EfZYmod/vKWxpgZM7uwXGGA2Bk7kE+DiSKCdE+4pO4SGuerHnSXBzFdzFwe4A0B
+ qLYQNfWNk55MoifGHQ+KqgPPYp/bVU/eI84Nrm/mXTD/asN+h/9p/zinNPPWlDVvU
+ YFl/7oVOxziJ9CZTjzxI2k8NuIZOCVZSJv3QgAFQBzplFqPRc8bMUhnk+NaJP0UEM
+ 2v3UcFgqCY0C3Q9ElQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MbRk3-1tUIRj0E5R-00ihjN; Mon, 07
+ Apr 2025 09:55:02 +0200
+Message-ID: <e2cca54d-188f-450d-ba70-a8a778263a72@gmx.de>
+Date: Mon, 7 Apr 2025 09:54:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFC/RFT 1/2] gpio: qcom: add new driver for SPMI gpios
-To: Alexey Minnekhanov <alexeymin@postmarketos.org>, u-boot-qcom@groups.io,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de
-References: <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-0-74077ef0b464@linaro.org>
- <20250401-topic-sm8x50-pmic-gpio-pinctrl-new-v1-1-74077ef0b464@linaro.org>
- <4429b568-1200-4a6f-a41f-ad6c7905eec5@postmarketos.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <4429b568-1200-4a6f-a41f-ad6c7905eec5@postmarketos.org>
+Subject: Re: [PATCH v2 3/4] efi_loader: Move device-removal later in
+ exit-boot-services
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, neil.armstrong@linaro.org,
+ Jonas Karlman <jonas@kwiboo.se>,
+ =?UTF-8?Q?Christian_Kohlsch=C3=BCtter?= <christian@kohlschutter.com>,
+ Janne Grunau <j@jannau.net>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250407013513.638110-1-sjg@chromium.org>
+ <20250407013513.638110-4-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250407013513.638110-4-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Ml+w3JYvK4a1PLKbmfiePv6UQl8gVbln7GeCpnz9m1Uk56GEQu2
+ KEhbskmcmWQ7BH6AN4Fta19qQSRZS6e37ThJjte1twrcYxFkSij9ElhFrbPj/ImkNlHs5Yz
+ aQTGNfIJhKBVEnMmzPO6PAC+0YfokvQLSjPhOmZXUm0+/yMIfCsVEj8xvouYi1yO5r8jpU2
+ jigg57dc+IIo32OITpN+w==
+UI-OutboundReport: notjunk:1;M01:P0:q2/6KVm1UqA=;o7gLFDbDCTRK0cOEdWFbSPybYsz
+ +uAMpw3kbMTC8Egu8G5AfioRo/N4heN2mavLXKQQxq7iGRannpB9t1tOzHdBOJWB6Nok2QAu4
+ YRrGOlhfOHF6RLOnmtTFTHfVFvlyAjfPRnEBvn4jOMP/05uhVyD98APnb8607lC/2hj3WeAF4
+ +moWp09jEijiDCjILnaA+K1LpFbo1jbpM6V6dNYlb/UckSSLSN77ymJgrrd310TJjDXYwj8iz
+ V5boalXtXR7vuVxpVxHfYfjX1R5IgUcGfTSsf6W0H9IFzcnhXh0VpnkqH2MSngXAS5beWMlop
+ 1u64eElYPVi30X5NrAQWk4RDosNIMfBoTSFWxnNwHmujL0gwS2fNPXF4lKzGc9aEk9UYZZ2PS
+ Un5uROgu73X77Mo6uLrXb9mkynCzFbH52O8JLL16G4pIsKaHUZiH39PbIdgM9KHLapH0/b9K/
+ qGk5uJC5mNKFsieXZzpzWqA5hviB6y/Wk3giVGPvmdzt5MiMsglRFFpPEQ3C/kzuU1RHkUold
+ VE4+gvHkvylvO/rOB5vEdCEhwr2JrKdrnVorvR4Jau4bj5KYQ2ah1WqI10Xcce2VuhqPcBUrk
+ 54JlRATQaTnU7T7Gcn481uTIAx1APRrT/Jk9ehMcD+Sq4czSdgZnQO+1ymjGPC69rJBb04/FY
+ NWbqm5UVnw8eT/0/LqiFi0GC8WUkFBg36rK7kyzNSgQZlVikEB6Z3wD8wxKicbfg1flrrAEpL
+ 4Ki5pB7p58zaibH7nZHlKYU/ozmJkC1icd2BjM+BewcndzZ8nLnhFeFI40hIPvkS14wSV2diW
+ p22xUvf57JVGz6NdIrt9wQG1jKGhbBsL0LTTo8j0AjLt5n+c2po7RFskzNSEVo8SL6iGmLv3M
+ KTKKM/qeGq5N470J/ph1hmKfe2aeWlocaZRCv4BnjA7T96gq9wSuyK3LHN0Dem5MxXz9pW0WY
+ LFcrpQoUtb5cBtNCE14W60r6x+Lac52IZd5UG6riawyyvshCUZkvY/Y/CYhT9yLoN7Q9EDXLL
+ Z2Vl7unpas9bwtOgBXyww1LoRorQQCW2Q6jUGwPvxnLzXjrS+9z1ULGqZVlXgDYiG60HajCYx
+ Haa8bg4J8Lh2Y8UquCjcNFI15txVAvMHo1GIoziiVwnsQZr44WyDwIlwzduKocxzpZ1ZVuxsm
+ VT3EPlVbML7y+JxQlganyf1hpgweb6h+hNfKVmXQxJUp8lyTFNBK7pjEW6fn0jx7xTmtnowWp
+ jK1XxRuud8MLPSPqmhhLt37U/tov4MJNJ5sVKKzszgrvKHQ8Uug7QkVz/TyY8T6xAcsQ8Ti+O
+ Gr2mUljbx76Bl36aKage7swZO+CAPTVJbg/xQQV2bmBdAmmrvAvM84DKpKY1w5iBTzPg3Gqrf
+ ugbQl8YrevcAi+xnBU11f9kh3wgVkilkT7+JD/+5+qPQVJ42He8KUZquAkf4GeFbubTU5cKa+
+ 4KkMDjjxICj5Bc9MBDGNRpesACQM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,72 +99,96 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05/04/2025 17:56, Alexey Minnekhanov wrote:
-> On 4/1/25 12:47, Neil Armstrong via groups.io wrote:
->> The current qcom_pmic_gpio driver is too limited and doesn't
->> support state tracking for all pins like the Linux driver.
->>
->> Adding full pinconf support would require adding the state
->> and it's much simpler to restart from scratch with a new
->> driver based on the Linux one adapted to the U-Boot GPIO
->> and Pinctrl APIs.
->>
->> For now only the PMICs I've been able to validate are
->> added in the compatible list but we should be able to
->> add the entire list from the Linux driver.
->>
->> There's a few difference from the Linux driver:
->> - no IRQ support
->> - uses the U-Boot GPIO flags that maps very well
->> - uses the gpio-ranges to get the pins count
->> - no debugfs but prints the pin state via pinmux callback
->>
->> It uses the same CONFIG entry as the old one, since
->> the ultimate goal is to migrate entirely on this new
->> driver once we verify it doesn't break the older
->> platforms.
->>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
->>   drivers/gpio/Makefile         |    2 +-
->>   drivers/gpio/qcom_spmi_gpio.c | 1034 +++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 1035 insertions(+), 1 deletion(-)
->>
-> 
-> ...
-> 
->> +
->> +static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
->> +    { .compatible = "qcom,pm8550b-gpio" },
->> +    { .compatible = "qcom,pm8550ve-gpio" },
->> +    { .compatible = "qcom,pm8550vs-gpio" },
->> +    { .compatible = "qcom,pmk8550-gpio" },
->> +    { .compatible = "qcom,pmr735d-gpio" },
->> +    { }
->> +};
->> +
-> 
-> I've added 2 compatibles here to the top of that list
-> 
-> +       { .compatible = "qcom,pm660-gpio" },
-> +       { .compatible = "qcom,pm660l-gpio" },
-> 
-> and was able to confirm with "dm tree" that new driver is in use and it works fine (Volume Up key works and I'm able to navigate U-Boot menu).
-> 
-> Tested-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+On 07.04.25 03:35, Simon Glass wrote:
+> This removal should be the last thing done, so that U-Boot does no more
+> memory allocations afterwards, thus avoiding potentially allocating
+> memory which has been freed by a device that fails to de-activate its
+> DMA.
 
-Thanks for testing !
+The EFI application that is calling ExitBootServices() has been reading
+the EFI memory map with GetMemoryMap() before. This is checked by
+comparing the MapKey parameter.
 
-Neil
+Whatever allocations are done or not in ExitBootServices() is not
+visible to the EFI application.
 
-> 
+DMA has to be stopped in all cases.
+
+I don't understand the virtue of the proposed change.
+
+Best regards
+
+Heinrich
+
+>
+> Of course, devices should be marked with DM_FLAG_ACTIVE_DMA or
+> DM_FLAG_OS_PREPARE but this change is good practice, in any case.
+>
+> It also matches the code in announce_and_cleanup(), which we should at
+> some point unify with EFI_LOADER
+>
+> So move the code and add a comment.
+>
+> Note that the TCG2 log is updated after this call, but I cannot see any
+> allocations there.
+>
+> Reported-by: Christian Kohlsch=C3=BCtter <christian@kohlschutter.com>
+> Link: https://lore.kernel.org/u-boot/C101B675-EEE6-44CB-8A44-83F72182FBD=
+6@kohlschutter.com/
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
-> Regards,
-> Alexey Minnekhanov
+>
+> (no changes since v1)
+>
+>   lib/efi_loader/efi_boottime.c | 21 +++++++++++++--------
+>   1 file changed, 13 insertions(+), 8 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index ffe43accd1e..e525662f82f 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -2250,14 +2250,6 @@ static efi_status_t EFIAPI efi_exit_boot_services=
+(efi_handle_t image_handle,
+>   			list_del(&evt->link);
+>   	}
+>
+> -	if (!efi_st_keep_devices) {
+> -		bootm_disable_interrupts();
+> -		if (IS_ENABLED(CONFIG_USB_DEVICE))
+> -			udc_disconnect();
+> -		board_quiesce_devices();
+> -		dm_remove_devices_active();
+> -	}
+> -
+>   	/* Patch out unsupported runtime function */
+>   	efi_runtime_detach();
+>
+> @@ -2279,6 +2271,19 @@ static efi_status_t EFIAPI efi_exit_boot_services=
+(efi_handle_t image_handle,
+>   	/* Give the payload some time to boot */
+>   	efi_set_watchdog(0);
+>   	schedule();
+> +
+> +	/*
+> +	 * this should be the last thing done, to avoid memory allocations
+> +	 * between removing devices and the OS taking over
+> +	 */
+> +	if (!efi_st_keep_devices) {
+> +		bootm_disable_interrupts();
+> +		if (IS_ENABLED(CONFIG_USB_DEVICE))
+> +			udc_disconnect();
+> +		board_quiesce_devices();
+> +		dm_remove_devices_active();
+> +	}
+> +
+>   out:
+>   	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
+>   		if (ret !=3D EFI_SUCCESS)
 
