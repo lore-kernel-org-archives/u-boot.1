@@ -4,132 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C5DC36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 13:46:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCC1C3601E
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 13:53:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1E3E82D0C;
-	Mon,  7 Apr 2025 15:46:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C844382D0C;
+	Mon,  7 Apr 2025 15:53:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TPq+LNqN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="enW/rAr7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FEB382DB4; Mon,  7 Apr 2025 15:46:03 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2060c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::60c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1145482DB4; Mon,  7 Apr 2025 15:53:19 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0A9C82CFD
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 15:46:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27C2A82CFD
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 15:53:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pJcXJnr+K0iuF/gHXdw1nq8U9vE8eaaJ1COpkakvwwUepBi3BfbVyMrRj8F2OJI/rLpmk54bUKUT8sgT8I6QJazWAy2YVxVXsY+CsJuLdO0y0VdmWp4ZMXr5nBYNM4j+L/uiI4Pm/US93/dSDvP8/z54j6yqNiV5y2Zpv/dEhHdAGvhvIBt8bghRpO21BpfLOYKnlSvD3RH9ogXjrJwVTDad5DVD+pnYen8r5Wqk6d+C4g13GOPQ6Mj98xjOrVey1FpfGvsNlERHJOBNOAS2vTO4nilwMiTH+66iCttxPpeUQx5rnuO2wG29F7CPh2yg6ST/CzQMd1oGOAR7bGGMdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SYN2txmXI4/xA0eT9HY0M+eaaHLOxkvCrSjJw7bIW6Y=;
- b=Yvy2aJ7jKihkROCsN6OBregV1V8EHnXZ+zhSAzmrkjcw4CWasrYufy1clJ2aGRtwgVaTx75VqGNOK9dnHUmAR5+lESbllq9Mdmci9/Q9wohx1xvdVtZNF/Yh3WdT7maJLbARG47pFwMUINQnkB55Rc/SdhTdY1nTUKdCCTkZlF4KCPHyc6l8RcO69u7lnQI87extlFySNiTjQ0te1gxO+ptj4rIL8smW6hBIFeqbJqR7W3VKyyEb37ofYZIUZFTEyswZskAZuLBX99VfuKbkhDfRnxkSbSPGfJsJHiwZBXiAGjwlVNhzi2rVs5YGxBZeh82roFNczDz8RihdXunkdA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SYN2txmXI4/xA0eT9HY0M+eaaHLOxkvCrSjJw7bIW6Y=;
- b=TPq+LNqNh/LyphKaiOCWiBxdIJafdlziPetSfUwmxjTqNmblc8NXuc7/9O+pPNOsXIWxFkBvKHOJQ0ayfXNpAg4EkhayDRvfdLrvGzsSH/tLWGOkrd6559VVsczEH6px5VNniKhaDVb7VGPD/sRNogITFH6e11LH9QaVP8meuzY=
-Received: from MW4PR03CA0224.namprd03.prod.outlook.com (2603:10b6:303:b9::19)
- by MW4PR12MB7335.namprd12.prod.outlook.com (2603:10b6:303:22b::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.29; Mon, 7 Apr
- 2025 13:45:54 +0000
-Received: from SJ1PEPF00002327.namprd03.prod.outlook.com
- (2603:10b6:303:b9:cafe::cb) by MW4PR03CA0224.outlook.office365.com
- (2603:10b6:303:b9::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8534.54 via Frontend Transport; Mon,
- 7 Apr 2025 13:45:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF00002327.mail.protection.outlook.com (10.167.242.90) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8606.22 via Frontend Transport; Mon, 7 Apr 2025 13:45:54 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 7 Apr
- 2025 08:45:52 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 7 Apr 2025 08:45:51 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] configs: versal: Fix initial stack pointer
-Date: Mon, 7 Apr 2025 19:15:44 +0530
-Message-ID: <20250407134544.3951763-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-72c7336ed99so1336281a34.0
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 06:53:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744033995; x=1744638795; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+A7pOUAtD3zpSI+1TsKGJlTGr9c21UzWR5r7ZbE8+eo=;
+ b=enW/rAr7xtqIcoNumtXtxdiT0XNJNGTskDMqRwlSDP2ScTdt/yzbpJGDc2/k7R5G7U
+ gkOV8tv1/eRxrG7t31qMQHovpXu9hDV6G2RJqObbSAm/OGqQoQA3wkYyQqX0VJIvcGsA
+ kB9eJkZWW6YMSnBdqAm0vkIGgKlqMBsoHEJGs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744033995; x=1744638795;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+A7pOUAtD3zpSI+1TsKGJlTGr9c21UzWR5r7ZbE8+eo=;
+ b=cMXKw3plAqeNXh6F2sHEV7JWcD/vGHyv8fxUxct1tGi8fYo0scXvefoBQopoMNFGIm
+ 1RKv8JbnRdIIyO+Q36GJfQYK/yqi8Tx5+vud3CW5f2TmwMt0cGm9lg5o4gCyZTD5SXD4
+ c8iV9i3pTgpxc8l6Bt2hhz/+m79vrq6vYBEU/AAcZ3XVJsOZbMOCBEBtFr6lf4KBKCx9
+ oATUluwUjV8L3Dae+5/i/GRMAiWBOKBl+LW4BYh7mPnU2XrFpR2c6RA0n6SMZxG4QQ5S
+ wLfeBQpuzgcO9Nj+F34girAbkaRFvcZewTi9NC4zoiqr9mtKstfpvZGtb9bH/r+DK2Md
+ Rlrw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUa5pOx3tUvlNN+XufZxfRDB4+NYyTpaXWFvklv53TRoVyrvSFjVieelyg+MWfJl1QqN0xBReQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzH91BXGFbT6PclBidkUkz2hxELwkJw5ShtZCb8SlaTx9jAzQhY
+ 8k0YgUx830ay2cNkXaMajcn9OdPz5MOZwFSmmsTsakkcRiWyo9nUAwNRMLsq9l8=
+X-Gm-Gg: ASbGncuasqP3XQwGGwUaxCYb5UyT6vkIujhDBIjG/MTYPR5dOi09gMs5zpWbrOckCIS
+ 681r71LYQ8emB8Y2uGqLl7eoiv5bhKOd9GOeCfp0j7khvmj4WJ42p+G/W1n5lgsoZEPxEn+WKWr
+ NHwLALNK3/5z1NGBimR+VpoLaZWiH4Xrd7zmGY5xLiWFnfvpFMnJhPC6xmmNJV1RDCQs4lplKoO
+ yos6WlWO2qyZg+LYszvpD2ze6IbpuR6BMoeFow3CZK/6Tr5SKCXxNtiywUbri5ZWRyyTQ9/MM1E
+ cLCUVybJ5QMwhPU8yS5piQyOm5XQ3/YrKupf6CwuRQI5BGGPSpS7B8+oSpzvTslAunP/waz3Vln
+ PCpXs0Q==
+X-Google-Smtp-Source: AGHT+IE2AQ1WTxUz98Ii33tODmUOgLe+AguZhcd7SdOGFotZ/3avf2Uc7nAapfpLkL3ID0osxdWebw==
+X-Received: by 2002:a05:6830:3787:b0:72b:8297:e988 with SMTP id
+ 46e09a7af769-72e36973ac5mr9534266a34.25.1744033994718; 
+ Mon, 07 Apr 2025 06:53:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6040c4ea8dbsm1751547eaf.18.2025.04.07.06.53.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Apr 2025 06:53:13 -0700 (PDT)
+Date: Mon, 7 Apr 2025 07:53:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v5 00/29] pxe: Precursor series for supporting read_all()
+ in extlinux / PXE
+Message-ID: <20250407135310.GJ5495@bill-the-cat>
+References: <CAFLszThrij_kGPdFcdJLoxJLpoZru=_M_vG4eVKwdPAqDfQJyg@mail.gmail.com>
+ <2ad3b1c5-b6e7-47e2-b225-834b821cc5c4@kwiboo.se>
+ <20250404224801.GV5495@bill-the-cat>
+ <20250405144008.GY5495@bill-the-cat>
+ <20250405144823.GZ5495@bill-the-cat>
+ <CAFLszTiJct7mhx5_7iPzt_4m1BZL72pp1QML62b=7R3AgBn3fw@mail.gmail.com>
+ <20250405232346.GB5495@bill-the-cat>
+ <CAFLszTj4+GXkmEk3pq-iwJ=8CcJsSreJFKfqWsvW1LQKDz04_w@mail.gmail.com>
+ <20250406224826.GF5495@bill-the-cat>
+ <CAFLszTgc6UHvw6kRnGMkcbAMc1UDCX12HDSyW0YG+716Pq0Yzw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002327:EE_|MW4PR12MB7335:EE_
-X-MS-Office365-Filtering-Correlation-Id: e4e312e6-e3f8-4b29-909d-08dd75da84cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+ybahjW9+KeYkrhQjli++gIRLW9MHM3hu1NxviQDekoPDsSenmejRCS1zEB2?=
- =?us-ascii?Q?cDTdoqFTIrmZr/tXNnb+QD8+B6ZoZUb67AmC6v46fRic4GFHT5gu4sWEfmow?=
- =?us-ascii?Q?oYe2fCpm/s8u+OYybNedJyfOg90fIWlOooXNTOuX9GB+XVn5amDnPbw39Xj6?=
- =?us-ascii?Q?m9KoyiwXLFKDI1th6Yy31I6TxV0+w3MoZ5FAd7fhayIIRudFIa1N3SrT3kLW?=
- =?us-ascii?Q?nI2DAJOF+1bq7ZBxdkVvH/v4PVQksHzsazN6+zI7fp/zj74i4sR4nK966k06?=
- =?us-ascii?Q?60qMFKHpfoEllVXIlaVrg8TP9A3CaBEMafLPpHT8Fw4vN3TQrVYU4Li2p5cL?=
- =?us-ascii?Q?Zl15P1yKeROQa7UAsRV+uLCGg4QwUFc0IPbuz5VuFwvkEPm3O3I38MomqFza?=
- =?us-ascii?Q?8YBywiHZQCWg1YSddOJeS8i+UQaa/rOvY15hzfDC5cARYN2dE6HCmV6qE7yl?=
- =?us-ascii?Q?Vy+50FLjGjexwFy/BFhZUosAEtQCjNfrBYbD3JpBVQoVa9CdvX7loj0x6L3W?=
- =?us-ascii?Q?BVkweh+VQfHUIkRk86Nf9qLhwFRJiRJwHu77ai3HeV7CE6ZGkaeLkC01olko?=
- =?us-ascii?Q?cUjLGZDwU90A0FBkh2MKeQeZArUoQl5MSblw2VLATg5gBlLCmzq2JDD0sISN?=
- =?us-ascii?Q?ocp9xOJHfrw7/fvdXejwLoWm4EYbFW54XYy79qEflGk+r/6Sj6vQQ9CqW6UO?=
- =?us-ascii?Q?neY5JzoRIe+N3xscRGnWdfEgjok/VIkwmnLjwnRcw40i8KBmJaOPYZ8OvmLf?=
- =?us-ascii?Q?PlC9Bw1HaFRVqjO1B6/WnDd6l8HdrouoHgNXUA6LP33UDli/+jcOt/vblKrx?=
- =?us-ascii?Q?8AJ/lKDTB0Ps80KT5VY4ERcsEEtPK9s73xntCuKeTVwu7TqAiT40vORSUyWV?=
- =?us-ascii?Q?J5PMbX2gtlHBrS0qgvWF9OAVHqu60o52lyJy6M09eAdgBlTQAQHlubymdYiA?=
- =?us-ascii?Q?lsrkOQqOA285KIzPEfpqXKePIx4yv5gYyglo4KaCFtjhNrmk8a22wSSY0kor?=
- =?us-ascii?Q?Naj2RtXvk6eexJSW2GlW+1vWU+6/HndkUXgh99MdpXT1WebvU2prijwvi6Zd?=
- =?us-ascii?Q?U/mfI3Mo4mfbwnlNUhxtnCw/jDmh85hnn758PHtuEG69ruF4suM0MEuArWlo?=
- =?us-ascii?Q?S56sl6nZNDwvi8Ml0BcnZH/BBv2gosZAmeCp8ovrrjzKfyo2MvJWkrEDWonF?=
- =?us-ascii?Q?z7vFw22eHAbElIJDPVxQMm4oKhPj/ExMBS+vcFO6bOYta1t27DOwAvYPGKEk?=
- =?us-ascii?Q?ZparM2caxoC5XiY+N2jWjKSEWcC47XPVwnATF7BYx5O0w5iJxQKYQk93F3TO?=
- =?us-ascii?Q?oYb7yqCWEOBo/hXtPpIrpXlkrqb2l+HUyEdbsbjgpyAcQN4ObVCcmMlKiBpF?=
- =?us-ascii?Q?nULDZ0g1yR1JSL2BL20wq13hBKzXtMEBouhe5EuNa2tE7V6tksjTFqG6jOhW?=
- =?us-ascii?Q?74baEYxrnZXqKAJXYfzWtScl1SR2zfPisiNgD1Xd/+Kgo9RLpK9yoT2Yd+u7?=
- =?us-ascii?Q?7StCyc74zLpm2C6jpc6cEZc6Qod25Ossgrta?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2025 13:45:54.6391 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e4e312e6-e3f8-4b29-909d-08dd75da84cc
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002327.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7335
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mmA1fzxGYun+opJV"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgc6UHvw6kRnGMkcbAMc1UDCX12HDSyW0YG+716Pq0Yzw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,38 +127,321 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mini u-boot is getting exception because of an initial
-stack pointer address is used at near the top of memory,
-and while executing u-boot is assigned pre-malloc and
-global_data memory after initial stack pointer and updated
-the stack pointer. Serial driver is used pre-malloc area
-for serial operations before relocation. But pre-malloc area
-is cleared while doing BSS at relocation time. The u-boot is
-called board_init() function and doing printf, relocation serial
-driver is not initialized yet, so it is using before relocation
-serial operations but it is cleared by BSS and got the exception.
-To fix, change an initial stack pointer address from near the
-top of memory to near the relocation memory.
 
-Fixes: 685874939a5e ("configs: versal: update initial stack pointer")
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- configs/xilinx_versal_mini_ospi_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--mmA1fzxGYun+opJV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/xilinx_versal_mini_ospi_defconfig b/configs/xilinx_versal_mini_ospi_defconfig
-index e1cdc186fb4..af9ce499169 100644
---- a/configs/xilinx_versal_mini_ospi_defconfig
-+++ b/configs/xilinx_versal_mini_ospi_defconfig
-@@ -7,7 +7,7 @@ CONFIG_SYS_MALLOC_LEN=0x2000
- CONFIG_SYS_MALLOC_F_LEN=0x500
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xFFFFFE00
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xFFFE1000
- CONFIG_SF_DEFAULT_SPEED=30000000
- CONFIG_ENV_SIZE=0x80
- # CONFIG_DM_GPIO is not set
--- 
-2.25.1
+On Mon, Apr 07, 2025 at 01:07:34PM +1200, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 7 Apr 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Apr 07, 2025 at 09:12:32AM +1200, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Sun, 6 Apr 2025 at 11:23, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Sun, Apr 06, 2025 at 08:46:31AM +1200, Simon Glass wrote:
+> > > > > (question for Heinrich below)
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Sun, 6 Apr 2025 at 02:48, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sat, Apr 05, 2025 at 08:40:08AM -0600, Tom Rini wrote:
+> > > > > > > On Fri, Apr 04, 2025 at 04:48:01PM -0600, Tom Rini wrote:
+> > > > > > > > On Fri, Apr 04, 2025 at 11:32:12PM +0200, Jonas Karlman wro=
+te:
+> > > > > > > > > Hi Simon,
+> > > > > > > > >
+> > > > > > > > > On 2025-04-04 00:30, Simon Glass wrote:
+> > > > > > > > > > Hi Jonas,
+> > > > > > > > > >
+> > > > > > > > > > On Fri, 4 Apr 2025 at 09:57, Jonas Karlman <jonas@kwibo=
+o.se> wrote:
+> > > > > > > > > >>
+> > > > > > > > > >> Hi Tom and Simon,
+> > > > > > > > > >>
+> > > > > > > > > >> On 2025-03-19 00:21, Tom Rini wrote:
+> > > > > > > > > >>> On Wed, 05 Mar 2025 17:24:54 -0700, Simon Glass wrote:
+> > > > > > > > > >>>
+> > > > > > > > > >>>> This series includes some patches related to allowin=
+g read_all() to be
+> > > > > > > > > >>>> used with the extlinux / PXE bootmeths.
+> > > > > > > > > >>>>
+> > > > > > > > > >>>> These patches were split out from the stb4 series, s=
+ince it will need to
+> > > > > > > > > >>>> have additional patches for LWIP, to avoid breaking =
+PXE booting when
+> > > > > > > > > >>>> LWIP is used.
+> > > > > > > > > >>>>
+> > > > > > > > > >>>> [...]
+> > > > > > > > > >>>
+> > > > > > > > > >>> Applied to u-boot/next, thanks!
+> > > > > > > > > >>
+> > > > > > > > > >> This series broke booting a compressed arm64 defconfig=
+ Linux kernel
+> > > > > > > > > >> (without module loading) due to changes in decompressi=
+on buffer length.
+> > > > > > > > > >>
+> > > > > > > > > >> My arm64 defconfig kernel (Image.gz) is ~24 MiB compre=
+ssed and ~85 MiB
+> > > > > > > > > >> uncompressed.
+> > > > > > > > > >>
+> > > > > > > > > >> Before this series the decompression buffer was 10x th=
+e kernel_comp_size
+> > > > > > > > > >> and now it is instead limited by the SYS_BOOTM_LEN Kco=
+nfig symbol.
+> > > > > > > > > >>
+> > > > > > > > > >> A broken boot using current next branch:
+> > > > > > > > > >>
+> > > > > > > > > >>   Retrieving file: /Image.gz
+> > > > > > > > > >>   Retrieving file: /initramfs.cpio.gz
+> > > > > > > > > >>   append: earlycon
+> > > > > > > > > >>   cmd 'booti' states 1f1f addr_img '0x02080000' conf_r=
+amdisk '0x06000000:394d3c' conf_fdt '3df16350' images 000000003ffe53a0
+> > > > > > > > > >>      kernel data at 0x02080000, len =3D 0x00000000 (0)
+> > > > > > > > > >>   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
+> > > > > > > > > >>   find_other type 2 os 5
+> > > > > > > > > >>   ## Flattened Device Tree blob at 3df16350
+> > > > > > > > > >>      Booting using the fdt blob at 0x3df16350
+> > > > > > > > > >>   Working FDT set to 3df16350
+> > > > > > > > > >>   load_os load 8000000 image_start 2080000 image_len 2=
+000000
+> > > > > > > > > >>      Uncompressing Kernel Image to 8000000
+> > > > > > > > > >>   Error: inflate() returned -5
+> > > > > > > > > >>   Image too large: increase CONFIG_SYS_BOOTM_LEN
+> > > > > > > > > >>   Must RESET board to recover
+> > > > > > > > > >>   Resetting the board...
+> > > > > > > > > >>
+> > > > > > > > > >> Changing SYS_BOOTM_LEN from default 64 MiB to 128 MiB =
+fixed the boot:
+> > > > > > > > > >>
+> > > > > > > > > >>   Retrieving file: /Image.gz
+> > > > > > > > > >>   Retrieving file: /initramfs.cpio.gz
+> > > > > > > > > >>   append: earlycon
+> > > > > > > > > >>   cmd 'booti' states 1f1f addr_img '0x02080000' conf_r=
+amdisk '0x06000000:394d3c' conf_fdt '3df16430' images 000000003ffe5480
+> > > > > > > > > >>      kernel data at 0x02080000, len =3D 0x00000000 (0)
+> > > > > > > > > >>   load 2080000 start 2080000 len 0 ep 0 os 5 comp 1
+> > > > > > > > > >>   find_other type 2 os 5
+> > > > > > > > > >>   ## Flattened Device Tree blob at 3df16430
+> > > > > > > > > >>      Booting using the fdt blob at 0x3df16430
+> > > > > > > > > >>   Working FDT set to 3df16430
+> > > > > > > > > >>   load_os load 8000000 image_start 2080000 image_len 2=
+000000
+> > > > > > > > > >>      Uncompressing Kernel Image to 8000000
+> > > > > > > > > >>      kernel loaded at 0x08000000, end =3D 0x0d3b5a00
+> > > > > > > > > >>      Loading Ramdisk to 3cb51000, end 3cee5d3c ... OK
+> > > > > > > > > >>      Loading Device Tree to 000000003cb3f000, end 0000=
+00003cb509df ... OK
+> > > > > > > > > >>   Working FDT set to 3cb3f000
+> > > > > > > > > >>
+> > > > > > > > > >>   Starting kernel ...
+> > > > > > > > > >>
+> > > > > > > > > >> Do we need to increase the default SYS_BOOTM_LEN for A=
+RM64 now?
+> > > > > > > > > >
+> > > > > > > > > > Are you using the 'booti' command? Can you post a bit m=
+ore console
+> > > > > > > > > > output or a script here as it isn't clear what boot com=
+mand you are
+> > > > > > > > > > using? For now I'm going to assume booti
+> > > > > > > > >
+> > > > > > > > > Above was using an extlinux.conf with bootstd, not using =
+the booti cmd.
+> > > > > > > > >
+> > > > > > > > > Use of booti cmd is not affected as it continue to use a =
+10x multiple
+> > > > > > > > > of the kernel_comp_size env var for buffer size.
+> > > > > > > > >
+> > > > > > > > > The change this series introduced was instead of the 10x =
+multiple of
+> > > > > > > > > kernel_comp_size now use SYS_BOOTM_LEN for buffer size (3=
+20 vs 32 MiB).
+> > > > > > > > >
+> > > > > > > > > And because cmd/booti.c was not converted there is now tw=
+o different
+> > > > > > > > > handling of this decompression buffer size.
+> > > > > > > > >
+> > > > > > > > > If the change to now use SYS_BOOTM_LEN was intended this =
+need to be
+> > > > > > > > > changed as it has mostly been irrelevant for booting Linu=
+x on AArch64
+> > > > > > > > > boards prior to this series.
+> > > > > > > >
+> > > > > > > > We need to clean things up such that the path which is usin=
+g 10x
+> > > > > > > > multiple (and we lmb_alloc an area iirc) is used in all cas=
+es.
+> > > > > > >
+> > > > > > > Looking at the code this morning, I was confusing this with w=
+hat we do
+> > > > > > > for compressed FIT images, oops.
+> > > > > >
+> > > > > > Ugh. Simon, can you go and fix this whole problem? Both do_boot=
+z and
+> > > > > > do_booti have non-trivial amounts of code that's missed by chan=
+ging from
+> > > > > > calling do_bootX() to bootX_run().
+> > > > >
+> > > > > For do_bootz() I believe the current code is correct. It does call
+> > > > > bootz_start() and then doesn't call it again when bootz_run() sta=
+rts.
+> > > > > It looks like you have taken my Ubuntu test so perhaps I can add a
+> > > > > bootz test for another board in my lab.
+> > > > >
+> > > > > For do_booti(), the code in booti_start() is used for the
+> > > > > non-compressed case, so I believe it is still needed and that boo=
+tm
+> > > > > doesn't currently honour 'Image' relocation when using an uncompr=
+essed
+> > > > > image. But then there is the issue of SYS_BOOTM_LEN, below.
+> > > > >
+> > > > > bootm_load_os() has code for ARM at the end, which I suspect need=
+s to
+> > > > > run on RISC-V too, in case the image needs to be relocated. Marek
+> > > > > added this 7 years ago[1] so it predates RISC-V and Heinrich perh=
+aps
+> > > > > didn't notice it when adding his support , if it is actually need=
+ed.
+> > > > >
+> > > > > SYS_BOOTM_LEN is a 'last bastion' security feature to avoid people
+> > > > > loading images that wrap around memory, etc. I could put bootm_len
+> > > > > into struct bootm_info so that a 10x value can be used for the bo=
+oti
+> > > > > case.
+> >
+> > I'm not sure any of the above is 100% correct. My very quick look was
+> > that it seems like if we want to have the command part of bootX be able
+> > to be equivalently called via API, more of most of the commands needs to
+> > be moved out of cmd/cmdX.c and to boot/bootX.c and put in to some state.
+>=20
+> Yes, my intent has been to move code out of commands into boot/ and
+> have things work as before.
 
+Then none of this should be in a "pxe" series, and you should have
+been removing a bunch more code out of the command part of the file.
+
+> Also don't forget that booting a FIT with a compressed boot kernel did
+> not work before my series. The series was largely written to fix bugs
+> (in one place) rather that just to refactor for the fun it.
+
+I'm not sure which FIT use case you're talking about here exactly and
+when it got broken (because if it was in use already, someone would have
+reported it).
+
+> > > > > Tom, we also have the issue that you haven't taken the rest of th=
+e PXE
+> > > > > series (due to the lwip case), so our trees are out of sync in th=
+is
+> > > > > area. It would really help if you could take that series, and aga=
+in, I
+> > > > > am happy to do the lwip case once it is landed.
+> >
+> > Your further PXE rework is irrelevant to this discussion. Except in that
+> > it points out there's still further changes that could break other
+> > things even more.
+>=20
+> Yes, any change in untested code has the potential to create bugs. I
+> do the best I can, but I could use a little more support in this
+> effort.
+
+And the best way to get support for that is to slow down and make
+smaller more easily testable series. There's yet another bug in this
+series too that Svyatoslav has or will post about shortly.
+
+> > > > > So for now, if people agree, I can do a small series to use a
+> > > > > different SYS_BOOTM_LEN for the booti command and perhaps add RIS=
+C-V
+> > > > > as above.
+> >
+> > Well, no, that sounds like a step in the wrong direction. I'd like to
+> > instead restore the expected behavior, and then perhaps we could clean
+> > it up such that the compressed case for booti-Images works like FIT
+> > images where we lmb allocate a larger area if needed.
+>=20
+> Yes, restoring the 10x decompression size is what I am talking about
+> here. Is there anything else?
+
+Functional wise, the being reported now issue Svyatoslav found too.
+
+Implementation wise, yes, I don't want to refactor and re-wrtie a bunch
+of this as the first step. The first step should be just what's needed
+to move the working functionality out of cmd/bootX.c and in to
+boot/bootX.c and let people verify things haven't regressed. Then some
+rework can be reviewed on its own.
+
+> > > > > Later, I could continue the boot-unification effort, e.g. delete =
+the
+> > > > > booti_start() function. and incorporate the uncompressed case into
+> > > > > bootm code.
+> > > >
+> > > > I'm not sure your reading of the situation is right. I'm more incli=
+ned
+> > > > to revert this merge rather than take on more rework in the area.
+> > >
+> > > Well that would be a pretty poor show. No one else has spent effort
+> > > trying to clean up and rationalise this code in the last 10 years, so
+> > > far as I can see. This is in -next so there is plenty of time to
+> > > resolve any issues.
+> >
+> > Yes, things haven't broken in 10 years. This is why I don't value "tidy
+> > up and refactor" in and of itself. Massive reworks then require a long
+> > time to check all of the corner cases. This has been true of many of the
+> > massive reworks you've done over the years.
+>=20
+> Well, do you want to be able to boot without CMDLINE, or not?
+
+It's an interesting long term goal. But since there's always some
+distribution or another that ships with each release we do, not having
+functional regressions is more important than speed of new features.
+Being able to practically disable the command line has been a feature
+for forever. Being able to literally has implications for both security
+and end user rights that need to be considered too.
+
+> > > I believe my reading of the situation is right, but if you disagree
+> > > with some of it, please indicate which.
+> >
+> > Your answer is not "Oh, I'll go understand what I broke and restore
+> > expected behavior". It's "you should take more of my big rework and I'll
+> > rework this area even more". That is not convincing that we won't have
+> > v2025.07 broken here.
+>=20
+> You only took half of the series, remember. We are talking about a
+> tiny corner case here, with no test coverage. I'm offering to fix the
+> case that has been reported. I can also even add a test for it.
+
+It wasn't half of the series. I didn't take more because it was either
+the stuff that broke other functionality or because it wasn't used until
+some further series from you. It's not a tiny corner case. A test case
+is nice, sure, but we'll never have 100% test coverage and need physical
+testing too. Which most people only have time for around releases. Which
+is why we need to go slow. Which again is why you need to split up your
+changes more and expect them to go slower. So there's time to test
+things.
+
+--=20
+Tom
+
+--mmA1fzxGYun+opJV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfz2L8ACgkQFHw5/5Y0
+tywTrgwAsJH0pXJ3DugOjZCgdcjOC5uH6stJNZrhj5/GtUwpxe06QQp+Rf8uGS1w
+BZnx7oSZJytxsx3hcrN0VDse96TqweiRVoqvQEE4K1NY2fV0g2DlUn/z1gc170fY
+Zn6G+MCWatGzBZz7rrQvLjq6EQ0TRq1/QiRmIxFb9WIU82+8Mx8TDSfKrJZ3vUPL
+peiCfZjsOwo3TkR5p8Fv4T1cq7YHPYUqqSJdJ2pFVvnvKSm1vb7R8DRSNe+qwbbD
+I1ICqwz2jZLPLhBVLR5TmHP2Q7MMTzWMpmD1FGycGkc7EnbTpQfwJ21Qb69na0Rn
+kZL32xIB920wpQEXZFM97xb9ga98ewmGxqgkLdOWrdeeBcL+zUmkZkH6ftzcWSC8
+0iisk194zVhgOfhNx/uTz2LnT6ul/8gSIV/avMsMDRTNX3RPWPmYbVHCme1uTpfo
+OookoXaz9yLy6K0Gl+u1OPkSiswZ9czIwKku2HLI3xSxR3yKla67JdEP7sxoa8On
+EQrpvWq3
+=7nkH
+-----END PGP SIGNATURE-----
+
+--mmA1fzxGYun+opJV--
