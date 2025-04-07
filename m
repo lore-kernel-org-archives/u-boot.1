@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08AC8C36002
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 03:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6115C3600C
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 03:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6118D82C87;
-	Mon,  7 Apr 2025 05:38:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B202E82CA6;
+	Mon,  7 Apr 2025 05:38:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="cO7VIti7";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="FfnXPQVQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0E3C82C87; Mon,  7 Apr 2025 05:38:13 +0200 (CEST)
+ id A770F82CB1; Mon,  7 Apr 2025 05:38:19 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEAD782B7E
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 05:38:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B11B782B9D
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 05:38:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ziyao@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 9033625E9E;
- Mon,  7 Apr 2025 05:38:11 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id 6CBFE25D11;
+ Mon,  7 Apr 2025 05:38:17 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NFmnaGZ6I2TT; Mon,  7 Apr 2025 05:38:10 +0200 (CEST)
+ id SnWGI7lkmla4; Mon,  7 Apr 2025 05:38:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1743997090; bh=7No7SXJBFjZhWq+xWbP7o7akDZ0zSl4xrdrnDB1Ec70=;
+ t=1743997096; bh=96XOLRPm3RGYr1KBs6zm53btfGcMmUMzDXRSNh6+DdE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=cO7VIti7slphOsRRYYfDE/TDmHniRfw/7+SKKJ2Pk7gNhrdKm8lZvNSRt5DwOTIOi
- jIbS9PAI5+nJmrtnBjcWcXywdCjesoHHAfKhzZ8yq98juPEY7KeFgTa7OfVqkXSAwQ
- eHeIdfK4+KtDxtqNq/ft2dOxiCXFxLKaej5u5B9zqK9R/UBq69cjchFAHVe7VTSW04
- G2bkrqbK1iO+AwwzlY9ZwLBvgEbZkB7Xum78Hss83MuwSl9YBUy+dOaYKADuYHIuDP
- PiVdcLpvTls5yGHlctWGCX+RvcUBkRI1LwtfsrQI+kgAX/OcA99JlKnv6ezlQMfnpj
- o8a4MkQSBXIqA==
+ b=FfnXPQVQN2ZP62lIasmWUk9uuDVjr+ZYE62UJNxHx3c5unQ1zTwg0k1gEG1pX5W8G
+ PWqeXGNUjfOvs+uI0f2WThp7F0vEJjoNj9BETM5EZyAxhA2O7Gc/7QuaFBISEp5/Yl
+ 9fsvJKZVrdBSeDh4ZxvekWWqe3WLCoW4jBZlglbtbzUcRpxKxqyJauLYq2rXX+QubJ
+ pKZUnP8TxcWT6Etq/NHILniHi31g1yu17xk6ziXeuKGPzOUWIQrFbStpPp+tvSX9Xk
+ JKrQ+gIP49ewLZtRzz9hoZUsnNYZ5Q2jBwaSHfh9EorZmdLJefYoRQ7RG21O4ZSx3b
+ zG2Nr/6UtcaCA==
 From: Yao Zi <ziyao@disroot.org>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
@@ -52,9 +52,10 @@ To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Simon Glass <sjg@chromium.org>, Lukas Funke <lukas.funke@weidmueller.com>,
  u-boot@lists.denx.de
 Cc: Yao Zi <ziyao@disroot.org>
-Subject: [PATCH 1/2] spl: riscv: Disable SPL_BINMAN_UBOOT_SYMBOLS by default
-Date: Mon,  7 Apr 2025 03:37:43 +0000
-Message-ID: <20250407033744.4025-2-ziyao@disroot.org>
+Subject: [PATCH 2/2] riscv: Provide __image_copy_{start_end} symbols in
+ linkerscript
+Date: Mon,  7 Apr 2025 03:37:44 +0000
+Message-ID: <20250407033744.4025-3-ziyao@disroot.org>
 In-Reply-To: <20250407033744.4025-1-ziyao@disroot.org>
 References: <20250407033744.4025-1-ziyao@disroot.org>
 MIME-Version: 1.0
@@ -75,35 +76,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The default binman configuration of RISC-V wraps proper U-Boot into a
-FIT image instead of shipping a plain image, thus there's no
-"u_boot_any" entry by default. Let's disable the option to prevent
-binman from looking for a plain proper U-Boot image, failing the build
-with message like
+Binman looks for __image_copy_start to determine the base address of an
+entry if elf-base-sym isn't specified, which is missing in RISC-V port.
+This causes binman skips RISC-V SPL entries without filling addresses
+into its .binman_sym_table section.
 
-  Section '/binman/spl-img': Symbol '_binman_u_boot_any_prop_size'
-     in entry '/binman/spl-img/mkimage/u-boot-spl/u-boot-spl-nodtb':
-       Entry 'u-boot-any' not found in list (u-boot-spl-nodtb,
-       u-boot-spl-dtb,u-boot-spl,mkimage,spl-img)
+This patch defines __image_copy_start in linkerscript of both SPL and
+proper U-Boot to ensure binman_sym functions correctly with the default
+binman.dtsi. The paired symbol, __image_copy_end, is introduced as well
+for completeness.
 
 Signed-off-by: Yao Zi <ziyao@disroot.org>
 ---
- common/spl/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/riscv/cpu/u-boot-spl.lds | 2 ++
+ arch/riscv/cpu/u-boot.lds     | 3 +++
+ 2 files changed, 5 insertions(+)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 7d6780936d1..356ddab38de 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -214,6 +214,8 @@ config SPL_BINMAN_UBOOT_SYMBOLS
- 	bool "Declare binman symbols for U-Boot phases in SPL"
- 	depends on SPL_BINMAN_SYMBOLS
- 	default n if ARCH_IMX8M || ARCH_IMX8ULP || ARCH_IMX9
-+	# A FIT image is created with default binman configuration of RISC-V
-+	default n if RISCV
- 	default y
- 	help
- 	  This enables use of symbols in SPL which refer to U-Boot phases,
+diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
+index 907094620bd..18eb62c01c6 100644
+--- a/arch/riscv/cpu/u-boot-spl.lds
++++ b/arch/riscv/cpu/u-boot-spl.lds
+@@ -16,6 +16,7 @@ ENTRY(_start)
+ SECTIONS
+ {
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text : {
+ 		arch/riscv/cpu/start.o	(.text)
+ 		*(.text*)
+@@ -46,6 +47,7 @@ SECTIONS
+ 
+ 	_end = .;
+ 	_image_binary_end = .;
++	_image_copy_end = .;
+ 
+ 	.bss : {
+ 		__bss_start = .;
+diff --git a/arch/riscv/cpu/u-boot.lds b/arch/riscv/cpu/u-boot.lds
+index 2ffe6ba3c8f..b11ea8b56d2 100644
+--- a/arch/riscv/cpu/u-boot.lds
++++ b/arch/riscv/cpu/u-boot.lds
+@@ -10,6 +10,7 @@ ENTRY(_start)
+ SECTIONS
+ {
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text : {
+ 		arch/riscv/cpu/start.o	(.text)
+ 	}
+@@ -57,6 +58,8 @@ SECTIONS
+ 		__efi_runtime_rel_stop = .;
+ 	}
+ 
++	__image_copy_end = .;
++
+ 	/DISCARD/ : { *(.rela.plt*) }
+ 	.rela.dyn : {
+ 		__rel_dyn_start = .;
 -- 
 2.49.0
 
