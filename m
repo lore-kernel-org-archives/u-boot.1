@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F818C36010
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 12:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7355C3601E
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 12:37:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F20CB82E58;
-	Mon,  7 Apr 2025 14:36:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8030D82E38;
+	Mon,  7 Apr 2025 14:37:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yQUlgY3i";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gyO828bC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFA9282E7D; Mon,  7 Apr 2025 14:36:54 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id A305582E40; Mon,  7 Apr 2025 14:37:30 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C40B682E38
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 14:36:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BAAA82CD5
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 14:37:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3912fdddf8fso3381414f8f.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 05:36:52 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-39c1efbefc6so2405488f8f.1
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 05:37:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744029412; x=1744634212; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744029448; x=1744634248; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=bOHLkcCE5qGOuCn7M42Qg4/HMwIFunWZ2Wv17uxUJl8=;
- b=yQUlgY3it6o3OjYN8b841JcnQ0Yx+7n2ADsS+bJmqNj4WiE9srKZcwCjQqghYQshfV
- 2TiZUNFbRjPBtxWRRNHfCXxvc06VbXf0u2Cc+a6tU3nOQ2mCpLYBqAdNvGb/E+dOcrUB
- YAYI2Fk24fRbpPBUHKTaunUMAX/7vuBjQKdhGztDkpmwNQBgk2uGlMb6ZJOAiwK43kWo
- wJdg/JXHTxyjUVyhg1DJ9XnrFyRddTXNmwenI33UvmtBzozLDhF7F+A9pendubLnSxSp
- m9szhPqPPQI5ZWQMsg6HBN4wd8Yg4AwgHtwX8tOTAKurzkHUskkeFoeXvzKw0zvCjp8L
- 2wcg==
+ :reply-to; bh=2XKGBBcRloiMFbIEgNBVFtEXvOntGbXWvmdtu1W5quA=;
+ b=gyO828bClbDHqhnxFGDP4YzG1t/Wt2cUNZz7gF05GMjUacfOiI8jaa36sJHhj6F0XV
+ +ajcfwpd+v4n967VbILK0YU+OvaVoJgP6CaIzd1MLknE/7JzuxmkXyk8EKqboGtBL445
+ XyB+YW/YnDsbabSNxR61wc5ZApETWapkocHSZ2PYL/d8vESiCN3jQRJ/buvocBtUFsb4
+ vWq6C9zHkXds8gRfN3PKQgSfCUtSwMcgkx1q8t2s/pb5JSQ03YqUmc9xElEnFhTe9K3N
+ UMVnjLeJ4FnFFBJALtXJrVBc0nEDuPx0PY3VYVCtnZoG6oMGHYrsMdv6pCHm05NIV+Xi
+ xE4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744029412; x=1744634212;
+ d=1e100.net; s=20230601; t=1744029448; x=1744634248;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=bOHLkcCE5qGOuCn7M42Qg4/HMwIFunWZ2Wv17uxUJl8=;
- b=K2nNDYOLDTuDb11xcBtoEWipimSYRv6uBcr1tOGMAVIKHhikFySSaVEHtw9ie9VkSG
- wJrBnpOErE8aCMYJthPBvWKjbgcaz/WSweo4OldcGhRl79BgfY6kV5Q4ffxfMYLpQQ5l
- 1lzzGX/OV22Qd0BR8AmF/5OB5sDJ/qM4mtqnMx40/XmjGwo+G9gWl5s1QfIfHOr+rsK+
- vVX8fLndudVEL80RZh9UULakN+0Cg0GUoR6MFPACNKqUzd/FmCt2YOavFuGFz2wTbT1P
- LHLGe2H3VqFbjftLrv1ocY4c9FGJgu5LTedTt5rz6dG90URb31ayL4kG/yEV1hZziPda
- Yq7A==
+ bh=2XKGBBcRloiMFbIEgNBVFtEXvOntGbXWvmdtu1W5quA=;
+ b=wCbpXK9CRUtN+M5dPay6G4j7JThaAHksUpuodJb7B+yO9JxbsBP/8tyxI6Y2V1WkmK
+ kHLdWb8KYVytcaVzN3v43oCl+muE3uYo0NDCO7ea9PeSUDp6kuLn8AQupgYGwCghGtXW
+ EgfiaHB9N+cfNg+EuBHK9xX9SeEl5KHEH6JeOIXCdmRYPmx3QdW7dfn5WeBc+H4vsmfY
+ m+weINS6ldn7OXhNssWljT+T1lC4RHE/ZRlNiO4my2MVqNEM90oCaS65YKkEYnaVKGKD
+ nZ4bUK5mJkUc4BRtkRBgT/w+lb83hqr4jrI8KMavnnMqkr/SucBsSrejGzbdLtfB/Qly
+ NvJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOqM3kNjvXQaKXlaq9Zj8W6uEwINQRp0Axb8dR6SqirpVXFtJqVqplGuVAgAIzZsmDzm6XONw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywcct8crs/Wlm6PBN4EcroUIJbf4vSlUjcTnA4FMcmydX0oVkT0
- ybFQyg42QQe5Yfy513h7bi5Gtf2Qe7wLVcqkJysw4sHd7uJJhEMs6zRoFSlvaHo=
-X-Gm-Gg: ASbGncsuxgxZ+Q1BMFl/2P7EiwZyH36S8gr7PubyEGW8CVVWlPt0es/IVXvFdUMp2ZI
- XpeGamkLA1iADWv04Y/CnjIG2DGPo6yPg+1l+9ugXAFB+NK7EGqvIEFSvA38ra9eTopbitZ0Lax
- UzxP4b2POeL4Wby1VSf3sgEFhP4yHob1opM9yr9rqvmbuPU7QaDVPOaICZOy4LncqYl2hbhKDxj
- Oix0Pfx9EIS89BII+5H1ROXHfABeBXsMGaaaHPKVHEDxGnzUUgGBhygmCY3KDp1imMGAVXrpyU+
- 9fpbFcH0K3sDNAxDQGm/zOYKDdgSHlQVxYKy0zwGe1RPQAe/CZPic2wQUsYusEaJTFYWzihEm/A
- 4PJaES1gSg1YHAGYVn7BZgQ==
-X-Google-Smtp-Source: AGHT+IHSDhCGLv2d0+yDfYqpco62txpuIEoeMzJ7cAQyCIeQjHJvTTipZ4IwwyRH0yV16Tz6lSy/kg==
-X-Received: by 2002:a5d:5846:0:b0:391:1218:d5f4 with SMTP id
- ffacd0b85a97d-39cba943645mr10254926f8f.23.1744029412206; 
- Mon, 07 Apr 2025 05:36:52 -0700 (PDT)
+ AJvYcCXf/IJhS+fceoYv/FUFvOEVk35brymUeelu6GyEFZFmgHkChbKh+hX2zIyKfHKPvmreq8BJmn4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzT7JZijjJngah8UoOuHHml2eJDZzzdNLd8djIN8HQC5xwZVZcT
+ BHzdctxNO/eWC1j8SXDIBPxO5o2MkVFYLDnzdk4XVXWXKJ6FEDw5egvl0KN8cQMSRhDH2iuhT80
+ O
+X-Gm-Gg: ASbGncsSdrmdM75ZFJLkgi6XgR6xy110JnXJyGXncsiBed/N8MGrpbKGYG8IJB9GsAk
+ 1mXb8NsNo1nafTbX5MyZDUDowo71XRhCK9a46T2zYLLrfxmAUV57fyPLWZOMYCt6YhWTZJFI8qr
+ HjpN8veGJilX1TlpLFoq1ePCY2aIHIB4EPtU84YTAivdA/i5jGIhM+1/iuMdUaM4aLluSizqRxE
+ LgkBf43B1LQ0H2zgH365efa5sTiabwh5rJohl4+V0ChNDRlPHAgUC/CmvPLxISv39mC3ygYmpNj
+ 2DC2I4Qz6l2LT51YuyhjgDgRONbTVAtkLjnZDZFY8olHpn3EfBSaFYjqI3bEeQoRkSPW4hmibpU
+ YusdE7dD7tWnrm1pSSuAhcg==
+X-Google-Smtp-Source: AGHT+IEZvbMRhRRiedFOxMob1xlyzCCiJqhbtpVja1GEFNLA5CSCugTXsnk5E91CqFNAvcdg65K80Q==
+X-Received: by 2002:a05:6000:2907:b0:39c:1258:2dc8 with SMTP id
+ ffacd0b85a97d-39d6fd0756emr5952687f8f.57.1744029448086; 
+ Mon, 07 Apr 2025 05:37:28 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:f2a4:b974:cba3:a605?
  ([2a01:e0a:3d9:2080:f2a4:b974:cba3:a605])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c301b42besm11794965f8f.41.2025.04.07.05.36.51
+ ffacd0b85a97d-39c301b6a1esm11994142f8f.45.2025.04.07.05.37.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Apr 2025 05:36:51 -0700 (PDT)
-Message-ID: <ca4b11e9-4bd0-4a9b-9980-ff2367f8c43f@linaro.org>
-Date: Mon, 7 Apr 2025 14:36:51 +0200
+ Mon, 07 Apr 2025 05:37:27 -0700 (PDT)
+Message-ID: <0da8570a-1f41-47b8-885d-b9361de0897c@linaro.org>
+Date: Mon, 7 Apr 2025 14:37:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH 3/5] clk/qcom: apq8096: fix the sdhci clock
+Subject: Re: [PATCH 4/5] clk: stub: add qcom,glink-smd-rpm
 To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
  caleb.connolly@linaro.org, sumit.garg@kernel.org
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 References: <20250407120536.236003-1-jorge.ramirez@oss.qualcomm.com>
- <20250407120536.236003-3-jorge.ramirez@oss.qualcomm.com>
+ <20250407120536.236003-4-jorge.ramirez@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -111,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250407120536.236003-3-jorge.ramirez@oss.qualcomm.com>
+In-Reply-To: <20250407120536.236003-4-jorge.ramirez@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,28 +133,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 07/04/2025 14:05, Jorge Ramirez-Ortiz wrote:
-> Select the right clock for sdhci.
+> Add support for the resource power manager clocks over SMD/GLINK to be
+> stubbed.
 > 
 > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
->   drivers/clk/qcom/clock-apq8096.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/clk/clk-stub.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-> index bc00826a5e8..551f52d5197 100644
-> --- a/drivers/clk/qcom/clock-apq8096.c
-> +++ b/drivers/clk/qcom/clock-apq8096.c
-> @@ -83,7 +83,7 @@ static ulong apq8096_clk_set_rate(struct clk *clk, ulong rate)
->   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+> index 5fbbb07b7f7..09be2946bbc 100644
+> --- a/drivers/clk/clk-stub.c
+> +++ b/drivers/clk/clk-stub.c
+> @@ -15,6 +15,7 @@ static const struct udevice_id nop_parent_ids[] = {
+>   	{ .compatible = "qcom,rpm-proc" },
+>   	{ .compatible = "qcom,glink-rpm" },
+>   	{ .compatible = "qcom,rpm-sm6115" },
+> +	{ .compatible = "qcom,glink-smd-rpm" },
+
+You can delete qcom,rpm-sm6115 if you add qcom,glink-smd-rpm
+
+>   	{ }
+>   };
 >   
->   	switch (clk->id) {
-> -	case GCC_SDCC1_APPS_CLK: /* SDC1 */
-> +	case GCC_SDCC2_APPS_CLK: /* SDC2 */
-
-Should be GCC_SDCC2_AHB_CLK
-
->   		return clk_init_sdc(priv, rate);
->   		break;
->   	case GCC_BLSP2_UART2_APPS_CLK: /*UART2*/
 
