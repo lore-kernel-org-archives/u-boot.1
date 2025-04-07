@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C444C3600C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 01:35:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C81CC36002
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 01:36:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB6C182CB0;
-	Mon,  7 Apr 2025 03:35:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0585782C87;
+	Mon,  7 Apr 2025 03:36:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DD93s9Zx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l2oabdSc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3697682CB8; Mon,  7 Apr 2025 03:35:53 +0200 (CEST)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 23F6682BCD; Mon,  7 Apr 2025 03:36:04 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4427582B9D
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 03:35:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA93882CB1
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 03:35:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-223fb0f619dso34980435ad.1
- for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 18:35:50 -0700 (PDT)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-224171d6826so50345935ad.3
+ for <u-boot@lists.denx.de>; Sun, 06 Apr 2025 18:35:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1743989748; x=1744594548; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1743989757; x=1744594557; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AF5RmirvyfqxExHwFlY4cl7F6/Dei/Y1EJbGOnVapEs=;
- b=DD93s9ZxfFNfqqTfNA2HUTqzc0CX85hS2w24uF/S2ymcMYaxdhsQV9W853gKIcrvMR
- trW2a26Huwrr5Mm6dGLaBSMIVoxkDzNVHDO2Of3nVjOa96juVwI9KsOCJMD7k/ZqwPOE
- 9pP0+BEj+9AMyUHf03WtPezP6J+x+etm0XQu8=
+ bh=PNKGvekmzeH9w6cnX3aSSu0nSGpKbLSs8yjgzUL5ZxE=;
+ b=l2oabdScR84+cBqO1c0NZGHu5xaQLl9ODxJCbCnr/PpGolmP5FrMnSyF8slqRKNbrE
+ R0EXtZ2dL9BAQlbNhJ3d3rFEAKWmTKmHIOKHhOpOyrjTXuogXF0VbzH2taaz7EjaqX9A
+ K6FJzQXEUIE+8S1N6sqBdl7y+yekRpkJMVASw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743989748; x=1744594548;
+ d=1e100.net; s=20230601; t=1743989757; x=1744594557;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AF5RmirvyfqxExHwFlY4cl7F6/Dei/Y1EJbGOnVapEs=;
- b=KFexpAFiFKon0zjhiu+9G8rFfCAau/98ZmY4vk4OwFxUu1yWnsyi4dlcM8Ct569BZB
- tSygOHYZ9P4WDpaMavg8oOhRXnEIMLO13d36nT7kSw8znyeVGDOoOQNuGxa4ox9ClQN+
- QyJ8Nb83G1X1N193AEWsp8ommYfqrgvcA2eKyZR726cK/oRyGYhnSC2n6Z0tvG0OtTqa
- mhnR+g5s4QyxpWSIitYwnBdDPP0JWuPAk1gttRv4749XfFSN6FW9ZUAdl52h4QfERPA/
- 9oxIB6uREvuFLdJJK3cusmQ4DQtrXwDp6N8+zR4XW5zR3nK9GPfE+iCLYxw4TUIkT5/U
- QD7g==
-X-Gm-Message-State: AOJu0YzN+tbUBv349UrqsFb/+eTanu5NYs2pNCPYXqcfEsQDuj2hVLUw
- eRHJNCHyjKc/8l9IzD0TK01XpOuyMpgfGcKj12IJVKS595Ma0X3a+CjZ9MqbcVXHHWWRTJA9x7L
- X3w==
-X-Gm-Gg: ASbGncsmSYgXli5p5O2TFOq0K7cXoZUc46bjBhhoG6A1Ue4NN7LffrNbv3rUUE/zzi+
- VVOVy8cJuHV4hND1u1e1RpligGQL4UXKX9pbsTQt/i+Dgz479lIp32FJQdPimLi+1iNH/Jk8J9b
- FxKioK62dLRskSagk+km8EauAcR/oCkVy2BUxVBMBpi3M+K7A3CEltEJmcswAar6GC9jdGVzXGP
- ro1r0itx/zIdJthsbqp9DRhDP/967Zc2loN3Lq/TyL3Yc+bKgKRgJGKixslNFEWtFQd/j+u4cPi
- OvKIekZ6vZfC9fCpLr1uSjQyTBZLEd1bsUs/eZ+P6VxEvrT1
-X-Google-Smtp-Source: AGHT+IHpIhp4Qn8PFp2jdifcudSZ3jmYyL/TiQCE104ERfL1RSlgE5ZNwZvJj7nytPrUyFZxx/NOZw==
-X-Received: by 2002:a17:902:ef0b:b0:21a:8300:b9ce with SMTP id
- d9443c01a7336-22a8a0b59fbmr151111045ad.49.1743989748051; 
- Sun, 06 Apr 2025 18:35:48 -0700 (PDT)
+ bh=PNKGvekmzeH9w6cnX3aSSu0nSGpKbLSs8yjgzUL5ZxE=;
+ b=AtsiAueFGumYSQxCW28uINCP54rBkQ37YWte/quWZH3lnEZ3rUyGBEBg1o5b4dvD3C
+ jLRt/FE/wtFdV420moLsfLQ6HqHbn03WBIk/R52UME9I4Y50J0x+JMfX4wTm1/Kw+T80
+ thhtqGNl69tPf2Dpu0VA9PPYhdU/hM5oSChbnAqmqhd3aohbcIQz02LY6a6N94G1OqIs
+ eIBZmX6gT9AH/zrxiI2m8qEVGYYCwC9d079CW5+HXfFQGtT9giP+jPRmnFY9F543C+OP
+ nDF5SLNe2IPxWZSmFR1lamubvjqR6DPM+w8wWyxOHz/fhvwoGtKRO9YiJ6Kqrf0IrUVe
+ 3l9w==
+X-Gm-Message-State: AOJu0Yx6ifKGW4x2iHjgwPuR7mE0bvnL5EyQn3VqgJpjU64vdlOjthDi
+ UIArXNfWLNFooQglVKuD9230cEeBY+N9OU4QrivLxUOOch+5EkUvsuTtuHRjdKzEC6JZj7SKBEM
+ JeA==
+X-Gm-Gg: ASbGncvcuVE1OMnKs2BL0v3i9Sr4I7UQUc+V5In3slJkp7BhPhQm/6k7kFkbTbCSjYF
+ 1zkSw9Qwk/EGdTS7H6+M+g+E5akbozj0tS38Z9HdBKpz9QgG0jPnf8El61gbljbucJFj4ktgbp0
+ pcJwV2MdWYPxcI1s3Yu/cZOQdDUCphtKQG7W1cCXtbmcqq/u4iTs1IR82hAb4WSX/W0x5o2zNo/
+ EHm/rOuaigXfWEVIyD75UvCh8W2d53HXQo3wqko+pWsbfAh1TSty8HkhGDahjG4tbh4zJ1vvBj8
+ PFO0gJF+lWyz8ZBrhq1cO87ywbH06amMg93PLKX4iXm4B+eP
+X-Google-Smtp-Source: AGHT+IE9WfUWf4kUWKbw70bvVzVLjab0KHTcb0Sb60PuGdJ/klHc3rK/29KtKCVnzAoCfHtviLR66g==
+X-Received: by 2002:a17:903:8c7:b0:21f:71b4:d2aa with SMTP id
+ d9443c01a7336-22a8a042b20mr158856755ad.5.1743989757417; 
+ Sun, 06 Apr 2025 18:35:57 -0700 (PDT)
 Received: from chromium.org ([161.29.84.47]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-229785adad8sm69535765ad.35.2025.04.06.18.35.41
+ d9443c01a7336-229785adad8sm69535765ad.35.2025.04.06.18.35.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Apr 2025 18:35:47 -0700 (PDT)
+ Sun, 06 Apr 2025 18:35:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  neil.armstrong@linaro.org, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Jim Liu <jim.t90615@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Ramon Fried <rfried.dev@gmail.com>, u-boot-amlogic@groups.io
-Subject: [PATCH v2 2/4] net: designware: Mark drivers as having active DMA
-Date: Mon,  7 Apr 2025 13:35:08 +1200
-Message-ID: <20250407013513.638110-3-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ =?UTF-8?q?Christian=20Kohlsch=C3=BCtter?= <christian@kohlschutter.com>,
+ Janne Grunau <j@jannau.net>
+Subject: [PATCH v2 3/4] efi_loader: Move device-removal later in
+ exit-boot-services
+Date: Mon,  7 Apr 2025 13:35:09 +1200
+Message-ID: <20250407013513.638110-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250407013513.638110-1-sjg@chromium.org>
 References: <20250407013513.638110-1-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,80 +99,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Network devices which use this driver have DMA running while receiving
-packages. Add the required flag to driver model so that they will be
-removed before starting the OS.
+This removal should be the last thing done, so that U-Boot does no more
+memory allocations afterwards, thus avoiding potentially allocating
+memory which has been freed by a device that fails to de-activate its
+DMA.
+
+Of course, devices should be marked with DM_FLAG_ACTIVE_DMA or
+DM_FLAG_OS_PREPARE but this change is good practice, in any case.
+
+It also matches the code in announce_and_cleanup(), which we should at
+some point unify with EFI_LOADER
+
+So move the code and add a comment.
+
+Note that the TCG2 log is updated after this call, but I cannot see any
+allocations there.
+
+Reported-by: Christian Kohlschütter <christian@kohlschutter.com>
+Link: https://lore.kernel.org/u-boot/C101B675-EEE6-44CB-8A44-83F72182FBD6@kohlschutter.com/
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add a new patch to mark drivers as having active DMA
+(no changes since v1)
 
- drivers/net/designware.c    | 2 +-
- drivers/net/dwmac_meson8b.c | 2 +-
- drivers/net/dwmac_s700.c    | 2 +-
- drivers/net/dwmac_socfpga.c | 2 +-
- drivers/net/gmac_rockchip.c | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ lib/efi_loader/efi_boottime.c | 21 +++++++++++++--------
+ 1 file changed, 13 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 5385849ea6b..9b2b0a5d602 100644
---- a/drivers/net/designware.c
-+++ b/drivers/net/designware.c
-@@ -885,7 +885,7 @@ U_BOOT_DRIVER(eth_designware) = {
- 	.ops	= &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
- 	.plat_auto	= sizeof(struct dw_eth_pdata),
--	.flags = DM_FLAG_ALLOC_PRIV_DMA,
-+	.flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_ACTIVE_DMA,
- };
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index ffe43accd1e..e525662f82f 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -2250,14 +2250,6 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+ 			list_del(&evt->link);
+ 	}
  
- static struct pci_device_id supported[] = {
-diff --git a/drivers/net/dwmac_meson8b.c b/drivers/net/dwmac_meson8b.c
-index bf94e50842d..95a99a98e99 100644
---- a/drivers/net/dwmac_meson8b.c
-+++ b/drivers/net/dwmac_meson8b.c
-@@ -162,5 +162,5 @@ U_BOOT_DRIVER(dwmac_meson8b) = {
- 	.ops		= &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
- 	.plat_auto	= sizeof(struct dwmac_meson8b_plat),
--	.flags		= DM_FLAG_ALLOC_PRIV_DMA,
-+	.flags		= DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_ACTIVE_DMA,
- };
-diff --git a/drivers/net/dwmac_s700.c b/drivers/net/dwmac_s700.c
-index e78193f3376..21df8e3ce81 100644
---- a/drivers/net/dwmac_s700.c
-+++ b/drivers/net/dwmac_s700.c
-@@ -64,5 +64,5 @@ U_BOOT_DRIVER(dwmac_s700) = {
- 	.ops    = &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
- 	.plat_auto	= sizeof(struct eth_pdata),
--	.flags = DM_FLAG_ALLOC_PRIV_DMA,
-+	.flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_ACTIVE_DMA,
- };
-diff --git a/drivers/net/dwmac_socfpga.c b/drivers/net/dwmac_socfpga.c
-index dda33f90d65..9f262aaee60 100644
---- a/drivers/net/dwmac_socfpga.c
-+++ b/drivers/net/dwmac_socfpga.c
-@@ -145,5 +145,5 @@ U_BOOT_DRIVER(dwmac_socfpga) = {
- 	.ops		= &designware_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
- 	.plat_auto	= sizeof(struct dwmac_socfpga_plat),
--	.flags		= DM_FLAG_ALLOC_PRIV_DMA,
-+	.flags		= DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_ACTIVE_DMA,
- };
-diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
-index 5c542d62bd8..52be3a5687f 100644
---- a/drivers/net/gmac_rockchip.c
-+++ b/drivers/net/gmac_rockchip.c
-@@ -760,5 +760,5 @@ U_BOOT_DRIVER(eth_gmac_rockchip) = {
- 	.ops	= &gmac_rockchip_eth_ops,
- 	.priv_auto	= sizeof(struct dw_eth_dev),
- 	.plat_auto	= sizeof(struct gmac_rockchip_plat),
--	.flags = DM_FLAG_ALLOC_PRIV_DMA,
-+	.flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_ACTIVE_DMA,
- };
+-	if (!efi_st_keep_devices) {
+-		bootm_disable_interrupts();
+-		if (IS_ENABLED(CONFIG_USB_DEVICE))
+-			udc_disconnect();
+-		board_quiesce_devices();
+-		dm_remove_devices_active();
+-	}
+-
+ 	/* Patch out unsupported runtime function */
+ 	efi_runtime_detach();
+ 
+@@ -2279,6 +2271,19 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+ 	/* Give the payload some time to boot */
+ 	efi_set_watchdog(0);
+ 	schedule();
++
++	/*
++	 * this should be the last thing done, to avoid memory allocations
++	 * between removing devices and the OS taking over
++	 */
++	if (!efi_st_keep_devices) {
++		bootm_disable_interrupts();
++		if (IS_ENABLED(CONFIG_USB_DEVICE))
++			udc_disconnect();
++		board_quiesce_devices();
++		dm_remove_devices_active();
++	}
++
+ out:
+ 	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
+ 		if (ret != EFI_SUCCESS)
 -- 
 2.43.0
 
