@@ -4,70 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 412A4C3601A
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 08:26:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB1DC3601A
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 08:58:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B331A82C55;
-	Mon,  7 Apr 2025 10:26:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4048082CF5;
+	Mon,  7 Apr 2025 10:58:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bbyYxn5I";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="O2TMlJHx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22D8882C87; Mon,  7 Apr 2025 10:26:26 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E531682BCD
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 10:26:23 +0200 (CEST)
+ id 6A41E82CFD; Mon,  7 Apr 2025 10:57:59 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
+ by phobos.denx.de (Postfix) with ESMTP id 22D7E82CF4
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 10:57:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5378QMCn814269
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 7 Apr 2025 03:26:22 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744014382;
- bh=bGmmOzmkuT/6rIQ9m01GNWrbX2szUY+CYH3dYTBy4RE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=bbyYxn5Ix+ffI9Pi65FW6mDL3Bpd1UcrVw7Ulxy6mcu3d8nY9Dmz00gCJ4lGKIFat
- HBMrD+oq+C/qMRKDL6aQyIDNIYxdhuw50kIbfY+R+LEggAI5h1gohHzxTsp4+Js5MV
- T4qleBpYEKoVeJUM6eIWteRFWF27TBD6AooKrgW8=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5378QMns021292
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 7 Apr 2025 03:26:22 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
- Apr 2025 03:26:21 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 7 Apr 2025 03:26:21 -0500
-Received: from [10.24.69.37]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5378QJJ8080214;
- Mon, 7 Apr 2025 03:26:19 -0500
-Message-ID: <80256fa7-0903-4d89-a5cc-b521283cd17a@ti.com>
-Date: Mon, 7 Apr 2025 13:56:18 +0530
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1744016248;
+ bh=po5YlkHscGLKZEXN5yTZVIeXXc5IshF/+Ujw+VcAeJU=;
+ h=From:To:CC:Subject:Date:From;
+ b=O2TMlJHxlc9hevlc/C+JRi0uXMRpjWwKavHqopuRd5QBBn3n2I9O0fFb+lUZa67s2
+ ulc7ISjnaZIIvxcCFwvdonRwnD+dNxYgtc7M1U/6VYZAkg1+7GdTkT/qgtCxQ+NcFI
+ HEiig0xkwt5gkeQmIyn4oljU0hDwYFd76oAjcEbVQ+0QLT98QjKxjzzqIvd9CFm8dZ
+ y0+R7r0SIsNue9mBgK3YDX6H1i3cQDvuxeBWaI3QnIFYwUP3/p0v49p0/HJ2FvQIaP
+ HrsjLDFMTHExUbaoClRSjzta12Lt777gA1ICq3198xcq9EfNp3hHFSneXth8cXGHY7
+ OdQ/BxpY0NAOQ==
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Michael Walle
+ <mwalle@kernel.org>, Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut
+ <marex@denx.de>, Benedikt Spranger <b.spranger@linutronix.de>, Jerome
+ Forissier <jerome.forissier@linaro.org>, John Ogness
+ <john.ogness@linutronix.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] tiny-printf: Handle formatting of %p with an extra Kconfig
+Date: Mon, 7 Apr 2025 10:56:14 +0200
+Message-ID: <20250407085614.126626-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-k3: common_fdt: Fix Label Issue
-To: "Kumar, Udit" <u-kumar1@ti.com>, Daniel Schultz <d.schultz@phytec.de>,
- <trini@konsulko.com>, <bb@ti.com>, <afd@ti.com>, <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>, <w.egorov@phytec.de>
-References: <20250407060711.3160366-1-d.schultz@phytec.de>
- <92ee150b-1873-4856-a3cb-8e9d6af78c33@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <92ee150b-1873-4856-a3cb-8e9d6af78c33@ti.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,70 +65,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit
+The formatting with %pa / %pap behaves like %x, which results in an
+incorrect value being output. To improve this, a new fine-tuning
+Kconfig XPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
+has been added. If it is enabled, the output of %pa / %pap should
+be correct, and if it is disabled, the pointer formatting is
+completely unsupported. In addition to indicate unsupported formatting,
+'?' will be output. This allows enabling pointer formatting only
+when needed. For SPL_NET and NET_LWIP it is selected by default.
+Then it also supports the formatting with %pm, %pM and %pI4.
 
-On 07/04/25 13:51, Kumar, Udit wrote:
-> Hi Daniel.
-> 
-> Thanks for patch
-> 
-> On 4/7/2025 11:37 AM, Daniel Schultz wrote:
->> Labels are not allowed before declarations. Add a semicolon after the
->> label to introduce an empty statement. This will fix following error:
->>
->> arch/arm/mach-k3/common_fdt.c: In function 'fdt_fixup_reserved':
->> arch/arm/mach-k3/common_fdt.c:156:2: error: a label can only be part
->> of a statement and a declaration is not a statement
->>    156 |  struct fdt_memory carveout = {
->>        |  ^~~~~~
->> make[1]: *** [scripts/Makefile.build:256:
->> arch/arm/mach-k3/common_fdt.o] Error 1
->> make: *** [Makefile:1919: arch/arm/mach-k3] Error 2
-> 
-> Is there some specific compiler option you are using, Sorry but I don't
-> see this error .
-> 
-> i just build sha id e458e103d4f5fb7aaf13e744c65916ab3ba4a18d of next
-> 
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+---
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Michael Walle <mwalle@kernel.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Benedikt Spranger <b.spranger@linutronix.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: John Ogness <john.ogness@linutronix.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ Kconfig            |  1 +
+ common/spl/Kconfig |  1 +
+ lib/Kconfig        |  8 ++++++++
+ lib/tiny-printf.c  | 45 +++++++++++++++++++--------------------------
+ 4 files changed, 29 insertions(+), 26 deletions(-)
 
-I had run into the same issue when I was using v10.1 of the Arm GNU
-toolchain, moving to v14.2, I no longer see it.
-
-> 
->>
->> Fixes: 096aa229a9e ("mach-k3: common_fdt: create a reserved memory node")
->>
->> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
->> ---
->>
->> I'm open to other suggestions! This is just the easiest way to fix this
->> compile error. BTW, master is fine since 096aa229a9e is only on next.
->>
->>   arch/arm/mach-k3/common_fdt.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-k3/common_fdt.c
->> b/arch/arm/mach-k3/common_fdt.c
->> index 361b0c0b31b..7178918a12c 100644
->> --- a/arch/arm/mach-k3/common_fdt.c
->> +++ b/arch/arm/mach-k3/common_fdt.c
->> @@ -152,7 +152,7 @@ int fdt_fixup_reserved(void *blob, const char *name,
->>           }
->>       }
->>   -add_carveout:
->> +add_carveout: ;
->>       struct fdt_memory carveout = {
->>           .start = new_address,
->>           .end = new_address + new_size - 1,
-> 
-> My suggestion will be to move this struct at start of function.
-> 
-> and change only size here
-> 
-> carveout.end = new_address + new_size - 1;
-> 
-> 
-
+diff --git a/Kconfig b/Kconfig
+index 6379a454166..4d13717294c 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -757,6 +757,7 @@ config NET
+ 
+ config NET_LWIP
+ 	bool "Use lwIP for networking stack"
++	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF || TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
+ 	imply NETDEVICES
+ 	help
+ 	  Include networking support based on the lwIP (lightweight IP)
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 94e118f8465..72736dbecf5 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1096,6 +1096,7 @@ config SPL_DM_SPI_FLASH
+ config SPL_NET
+ 	bool "Support networking"
+ 	depends on !NET_LWIP
++	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF || TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
+ 	help
+ 	  Enable support for network devices (such as Ethernet) in SPL.
+ 	  This permits SPL to load U-Boot over a network link rather than
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 1a683dea670..62e28d4a1f3 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -253,6 +253,14 @@ config VPL_USE_TINY_PRINTF
+ 
+ 	  The supported format specifiers are %c, %s, %u/%d and %x.
+ 
++config XPL_USE_TINY_PRINTF_POINTER_SUPPORT
++	bool "Extend tiny printf with the pointer formatting %p"
++	depends on SPL_USE_TINY_PRINTF || TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
++	help
++	  This option enables the formatting of pointers %p. It supports
++	  %p and %pa / %pap. If this option is selected by SPL_NET or NET_LWIP
++	  it also supports the formatting with %pm, %pM and %pI4.
++
+ config PANIC_HANG
+ 	bool "Do not reset the system on fatal error"
+ 	help
+diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+index 0503c17341f..10db812567a 100644
+--- a/lib/tiny-printf.c
++++ b/lib/tiny-printf.c
+@@ -47,7 +47,7 @@ static void div_out(struct printf_info *info, unsigned long *num,
+ 		out_dgt(info, dgt);
+ }
+ 
+-#ifdef CONFIG_SPL_NET
++#if defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP)
+ static void string(struct printf_info *info, char *s)
+ {
+ 	char ch;
+@@ -141,7 +141,7 @@ static void ip4_addr_string(struct printf_info *info, u8 *addr)
+ 
+ 	string(info, ip4_addr);
+ }
+-#endif
++#endif /* defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP) */
+ 
+ /*
+  * Show a '%p' thing.  A kernel extension is that the '%p' is followed
+@@ -157,18 +157,14 @@ static void ip4_addr_string(struct printf_info *info, u8 *addr)
+  *       decimal).
+  */
+ 
+-static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
+-				   void *ptr)
++#if defined(CONFIG_XPL_USE_TINY_PRINTF_POINTER_SUPPORT) || _DEBUG
++static void pointer(struct printf_info *info, const char *fmt, void *ptr)
+ {
+-#ifdef DEBUG
+ 	unsigned long num = (uintptr_t)ptr;
+ 	unsigned long div;
+-#endif
+ 
+ 	switch (*fmt) {
+-#ifdef DEBUG
+ 	case 'a':
+-
+ 		switch (fmt[1]) {
+ 		case 'p':
+ 		default:
+@@ -176,8 +172,7 @@ static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
+ 			break;
+ 		}
+ 		break;
+-#endif
+-#ifdef CONFIG_SPL_NET
++#if defined(CONFIG_SPL_NET) || defined(CONFIG_NET_LWIP)
+ 	case 'm':
+ 		return mac_address_string(info, ptr, false);
+ 	case 'M':
+@@ -189,12 +184,12 @@ static void __maybe_unused pointer(struct printf_info *info, const char *fmt,
+ 	default:
+ 		break;
+ 	}
+-#ifdef DEBUG
++
+ 	div = 1UL << (sizeof(long) * 8 - 4);
+ 	for (; div; div /= 0x10)
+ 		div_out(info, &num, div);
+-#endif
+ }
++#endif
+ 
+ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
+ {
+@@ -268,21 +263,18 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
+ 						div_out(info, &num, div);
+ 				}
+ 				break;
++#if defined(CONFIG_XPL_USE_TINY_PRINTF_POINTER_SUPPORT) || _DEBUG
+ 			case 'p':
+-				if (CONFIG_IS_ENABLED(NET) ||
+-				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
+-					pointer(info, fmt, va_arg(va, void *));
+-					/*
+-					 * Skip this because it pulls in _ctype which is
+-					 * 256 bytes, and we don't generally implement
+-					 * pointer anyway
+-					 */
+-					while (isalnum(fmt[0]))
+-						fmt++;
+-					break;
+-				}
+-				islong = true;
+-				/* no break */
++				pointer(info, fmt, va_arg(va, void *));
++				/*
++				 * Skip this because it pulls in _ctype which is
++				 * 256 bytes, and we don't generally implement
++				 * pointer anyway
++				 */
++				while (isalnum(fmt[0]))
++					fmt++;
++				break;
++#endif
+ 			case 'x':
+ 				if (islong) {
+ 					num = va_arg(va, unsigned long);
+@@ -307,6 +299,7 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
+ 			case '%':
+ 				out(info, '%');
+ 			default:
++				out(info, '?');
+ 				break;
+ 			}
+ 
 -- 
-Thanking You
-Neha Malcom Francis
+2.30.2
+
