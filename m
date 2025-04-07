@@ -4,101 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EED8C3601E
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 14:08:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F67C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 14:17:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9085F82D0C;
-	Mon,  7 Apr 2025 16:08:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EFEB982D0C;
+	Mon,  7 Apr 2025 16:17:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sKkrYv8/";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="B+FzldJC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A5282EAA; Mon,  7 Apr 2025 16:08:14 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C3C6C82EAA; Mon,  7 Apr 2025 16:17:16 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9096182CFD
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:08:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50DCC82CFD
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 16:17:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2ff6e91cff5so3926290a91.2
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:08:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744034890; x=1744639690; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=P7dTrVY9wVJ3y8ik01fCyN5yBIih0atQgC/vjZFCMZI=;
- b=sKkrYv8/WYrqodY1mumz+psbGsUrqkI+3wfkNJiegFvrm0isOUT/te5LKe5DViNZ+d
- dZvcUw8BPlR4OB1QKymmX4vI0eHKPwmlAXZBTHLypxHrCiVNGtYlLFbs+9VLEW2GG2BH
- hIwtizMlwAQTIUoODUS5PoBBv0E3tz11QDiluNaTe8KPYA949qGr/3AcAwMQgxWtJRWN
- O2GG3i2JSkf9tOc1YxZCU0RoWypbTnskSDwdqXPTFEQDAfzBos0PBHmhcN1SE7HaJuvM
- 8yj1mgrWPNVohNKdcMcQz+dN2m5BOAHjvcMOfLPKv5Lz6MAKhxwYlqJZMhnJlVgWKh6B
- MRPg==
+ spf=pass smtp.mailfrom=jorge.ramirez@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5378eIWM012218
+ for <u-boot@lists.denx.de>; Mon, 7 Apr 2025 14:17:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=crf/spmf3U8rl0EBvVba80Kc
+ ymtpM5A5RTX8mVX1LAY=; b=B+FzldJCVvtObUhRqPxdJTAJjgDcP65fNHzGjOOg
+ Et1cyWvGr94RW8KXvNH5vbezvrhfjWemt2VIVvfxVAqLu8PD0rYXNx4PIcLh20Kx
+ cJt8RVyKHX+JLbuksSoc3XWstvjnzYfiq+cfCBMw6ft1jMVSKccOV0sHahFjQZ53
+ zBHS4scuenONVycGE3BEAur+hL/SzHq4ip5snlnKwZ4+R3tEZi38py/qIxS/2MlV
+ gVZLrkdrBQvHXPugcUH/QtJSUiW5lfwEceO6o+n1zR1Y8OT/Rb4c8Rc6IY6+EXgm
+ V0z3MVX09JDfKGs4ErWs4l56GsdHwDfxo8O2V4E3jKiN4A==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 45twpm4dn9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 14:17:12 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-476900d10caso105855601cf.0
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 07:17:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744034890; x=1744639690;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P7dTrVY9wVJ3y8ik01fCyN5yBIih0atQgC/vjZFCMZI=;
- b=w8IRsXf9tUqPaoTSZ9l2iMqFxH29ZtUef6smqIJ3ime4f35tIFiVwIkEhMHH5mxK3u
- RX1gyADak8zezWp/D4qUFzWdgHaza2s2VQelae85jKTDZrXvDjVnrwlfN/60Bo2EEGg4
- xzjOZkVKPrBqXyPgW2LPjLk2AIzZWvincTED7Ux4BbLP0nyO+BU60VLsZoF7rG7qe4ku
- giLddL7WTfZhNHfheDWinbBGoldStg8m6AEbRTfcTJM4S7ODfYtyT2PK0QxAXZAcqs27
- TRw7bagire8I3DqI4UpYrpZRrgX13zuptsfc4MHjzRR8W3jTLWbWBEAk/Vljydnu4HQZ
- mxtw==
+ d=1e100.net; s=20230601; t=1744035431; x=1744640231;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=crf/spmf3U8rl0EBvVba80KcymtpM5A5RTX8mVX1LAY=;
+ b=o+Q7PKT864YkUK5GxCinrmxxc79hsCpyz4xeLaC3fpv8OzK1sa7YZhN/TBEjlepJhI
+ PJIYLBypqWad7xMamzY57UE2vqYaBbPBpRUc2noFrffN8fBjvTZJzBvs9ZE/1fIZ8t8u
+ LmDiAqoEcYyXuDddLy17j4PDPkJMc70lWvOt3a7TEh5s3YvEF90u04s9OJ3XJThT9cuj
+ jmh/twT5LgmJn8rDAdXoxF7/JTDnJdO3o9r6KUhKX0QoQNiiNexIJoKcZA4fe0+2qkNO
+ 7DAuZfwttFGmqa3jn1D87Cct0OF9/imuGjlLA/9k5MAMOzyU8mhfXKZ+feZ6pxrS3i0n
+ DE1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpQ2bCSl8SuVTCl5vau6UbRDKf0tEXSipKz+fbrpUrB1tNwoitlVmoGCbhHZ7Hn+9RIrAdxxc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzjD3+sCGQkjVPOXFkIAenZx78JbFe+Ai2jEJfrfipPGNffFW5P
- lmVUQ/eOoQF8vmztZVDXo8/A133Bfv8lWIl3D4UwaCI7YOMQ+yNyW5qzjiNu5PeAhRrungvTGFH
- 442Cpvhnq7JGV6ItU/G8V03eq50CqvrMjdArEew==
-X-Gm-Gg: ASbGnctvYZEqrnfMLh8q7K+TPBnMW68e84JqVJ7fA7sDjEITQ3lFXrPFhdCnGku/TZU
- BQbFGomnysggtDvmwc7VgfBq+9aYRXPO9akzrmujwkGDZm7LSiGSqvuqtl/C03n/P4jR6gzZB3C
- +wk71Vyb5brs/Ybc1nHSXalcoFDsY=
-X-Google-Smtp-Source: AGHT+IGiKbrADYvgjVLfqmVKmLGLHwcXTYuKOZ426H3rYEMmB0J96AzUKL0nvoncUKtj9lLnj1ccxu5q8ELoRg4BRJE=
-X-Received: by 2002:a17:90b:2545:b0:2ee:d7d3:3019 with SMTP id
- 98e67ed59e1d1-306a6150142mr19587564a91.12.1744034889551; Mon, 07 Apr 2025
- 07:08:09 -0700 (PDT)
+ AJvYcCUCbZ1iBJRqmjtJDwUyDOdtcnTwCNQ9vNbtkzJJj1pMr5Xx7DMZ6udMdIZX4bA3R9DcgbLnHHM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxuFeZuUJxklzTGS/QHIkRFQndR/m4mrF12+FhiPrFkRMRdOx0e
+ pIZ80rGyRJsMQ0sW4yal5dvA1/DqTMiVoOZrsLrDqaxhVlqGzwsTzVLgYNbgOWenfp75pyw8qe/
+ KRQLW8juYTt9Pv5kOWzDYGO2EhcyuWM3jupB08hj9gT0qYbCHIS7c
+X-Gm-Gg: ASbGncvt3AbrJGDk/rkrMELCJHH6mo53encW31YSneOOMJUchcNfS9AAWW9CuVZeDiZ
+ hx8Zi7OH7r0ypY7/wNsCiWisjXVcX2GBvGPZ77DYDdSl4FrsIFjhdWHiFjRd3gwtuPFZIboIHcF
+ qrOxJbcMxbwr7MG4/jdeKtEI6FZUyWRBK49g9fwBzC6s/DW7z8R+NiMmbpZ1icROyvObSWfX5Oq
+ zt1Y8Vom2ZT7Hcb15mqgmO5jmBfEF8ABAh6ON+WfWnI1qyf1RXAqUYc7KGYO8UDbRdyTj2oIOLn
+ OnXq/RVXzNO4aZtyUVDRDk8ebaV5JnKgSj3HkEmowrim9AQfVCY=
+X-Received: by 2002:ac8:5fc5:0:b0:476:a967:b247 with SMTP id
+ d75a77b69052e-479249d5d9cmr172084131cf.47.1744035431346; 
+ Mon, 07 Apr 2025 07:17:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFvq1H8ZLH1h8/U0xB76mT2oTna+3/wxsYP4aEEKXjqhkx1pz6J/pzzMFBh7oxHIvgtjMAzuQ==
+X-Received: by 2002:ac8:5fc5:0:b0:476:a967:b247 with SMTP id
+ d75a77b69052e-479249d5d9cmr172083631cf.47.1744035430820; 
+ Mon, 07 Apr 2025 07:17:10 -0700 (PDT)
+Received: from trex (233.red-79-144-185.dynamicip.rima-tde.net.
+ [79.144.185.233]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c30096ecasm12620695f8f.18.2025.04.07.07.17.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Apr 2025 07:17:10 -0700 (PDT)
+From: Jorge Ramirez <jorge.ramirez@oss.qualcomm.com>
+X-Google-Original-From: Jorge Ramirez <JorgeRamirez-Ortiz>
+Date: Mon, 7 Apr 2025 16:17:09 +0200
+To: neil.armstrong@linaro.org
+Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ caleb.connolly@linaro.org, sumit.garg@kernel.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/5] clk/qcom: apq8096: fix the sdhci clock
+Message-ID: <Z/PeZVBhwcNOVRAD@trex>
+References: <20250407120536.236003-1-jorge.ramirez@oss.qualcomm.com>
+ <20250407120536.236003-3-jorge.ramirez@oss.qualcomm.com>
+ <ca4b11e9-4bd0-4a9b-9980-ff2367f8c43f@linaro.org>
 MIME-Version: 1.0
-References: <20250328154401.3563921-1-sjg@chromium.org>
- <20250328161845.GB93000@bill-the-cat>
- <CAFLszThKn0xTmLdR7Hs_oKO_paYTtr-Y1xA_eoNY2rcjeuHX9g@mail.gmail.com>
- <20250329000211.GH93000@bill-the-cat>
- <CAEfUkUJo6AA_SESSYj6Bgq=tUHRc5MQ+sAqtURkbNRafK+=SiA@mail.gmail.com>
- <CAEfUkUJOu_nw0j3EvSpAgrSZ+wy_g=CLdY5yo9uWuc6j3NfnbQ@mail.gmail.com>
- <CAFLszTjo8HEzKbZAbO=neF57e69vGbWYsDVV_dD=kO6j_VH39w@mail.gmail.com>
- <CAEfUkUJNUhoyRY6S9-eYV5i9RT_GgYLRs+HRWocch8jYfVj2Lw@mail.gmail.com>
- <CAFLszTj-pQSK_aKNoLUcLFBk+wAjgC_5=-5YRPGt_7DDFRL3Dw@mail.gmail.com>
-In-Reply-To: <CAFLszTj-pQSK_aKNoLUcLFBk+wAjgC_5=-5YRPGt_7DDFRL3Dw@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 7 Apr 2025 10:07:57 -0400
-X-Gm-Features: ATxdqUF-qpSrpjWpcPsoF16mSSOpA0pYySmGtjzmtRbYbaGzpDvjrz4Ee7ON6KY
-Message-ID: <CAEfUkULcgK9jY902Ccf_mNNCHf5m1BU=ecLK7cuviv7TdABukQ@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bloblist: fdt: Clean up the code
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Harrison Mutai <harrison.mutai@arm.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Levi Yun <yeoreum.yun@arm.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ca4b11e9-4bd0-4a9b-9980-ff2367f8c43f@linaro.org>
+X-Proofpoint-GUID: mb0oxVcxRar5ys1snk3dwBqY2iu7_FR8
+X-Proofpoint-ORIG-GUID: mb0oxVcxRar5ys1snk3dwBqY2iu7_FR8
+X-Authority-Analysis: v=2.4 cv=MpRS63ae c=1 sm=1 tr=0 ts=67f3de68 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=9rMOtB7ueBl8bWGkC6audQ==:17
+ a=kj9zAlcOel0A:10 a=XR8D0OoHHMoA:10 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=j6XI7r2HB7QKrajkT_wA:9 a=CjuIK1q_8ugA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-07_04,2025-04-03_03,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0
+ mlxlogscore=999 clxscore=1015 priorityscore=1501 impostorscore=0
+ spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0 adultscore=0
+ phishscore=0 mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504070100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,121 +129,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 07/04/25 14:36:51, neil.armstrong@linaro.org wrote:
+> On 07/04/2025 14:05, Jorge Ramirez-Ortiz wrote:
+> > Select the right clock for sdhci.
+> > 
+> > Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> > ---
+> >   drivers/clk/qcom/clock-apq8096.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+> > index bc00826a5e8..551f52d5197 100644
+> > --- a/drivers/clk/qcom/clock-apq8096.c
+> > +++ b/drivers/clk/qcom/clock-apq8096.c
+> > @@ -83,7 +83,7 @@ static ulong apq8096_clk_set_rate(struct clk *clk, ulong rate)
+> >   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> >   	switch (clk->id) {
+> > -	case GCC_SDCC1_APPS_CLK: /* SDC1 */
+> > +	case GCC_SDCC2_APPS_CLK: /* SDC2 */
+> 
+> Should be GCC_SDCC2_AHB_CLK
 
-On Sun, 6 Apr 2025 at 18:06, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Raymond,
->
-> On Sat, 5 Apr 2025 at 07:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Fri, 4 Apr 2025 at 13:40, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Raymond,
-> > >
-> > > On Sat, 5 Apr 2025 at 03:49, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > >
-> > > > Hi Tom and Simon,
-> > > >
-> > > > On Fri, 28 Mar 2025 at 21:00, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > > >
-> > > > > Hi Tom and Simon,
-> > > > >
-> > > > > On Fri, 28 Mar 2025 at 20:02, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Mar 28, 2025 at 11:38:14PM +0000, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 28 Mar 2025 at 10:18, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Fri, Mar 28, 2025 at 09:43:54AM -0600, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > The bloblist code took what I consider to be a wrong turn a year or so
-> > > > > > > > > ago. As discussed with Tom, this series proposes a way to arrange things
-> > > > > > > > > so that it is simpler to understand and manage.
-> > > > > > > > >
-> > > > > > > > > - Unwind some of the nesting in bloblist_init()
-> > > > > > > > > - Avoid needing to init the bloblist just to get the FDT
-> > > > > > > > > - Create a deterministic OF_BLOBLIST option rather than using guesswork
-> > > > > > > > >
-> > > > > > > > > It is to be hoped that we can get a platform which uses OF_BLOBLIST into
-> > > > > > > > > CI at some point. In the meantime, the standard passage series[1] could
-> > > > > > > > > be resurrected to give some coverage.
-> > > > > > > > >
-> > > > > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
-> > > > > > > >
-> > > > > > > > Based on how it's documented to be run in
-> > > > > > > > doc/board/armltd/vexpress64.rst in the next branch, have you confirmed
-> > > > > > > > that platforms using the handoff spec still work?
-> > > > > > >
-> > > > > > > I believe so, yes. I don't have that board to test it though. Raymond
-> > > > > > > may be able to test this series on QEMU?
-> > > > > >
-> > > > > > I was pointing you at the docs so that you would have access to testing
-> > > > > > it. That's part of the docs, running the emulator.
-> > > > > >
-> > > > >
-> > > > > I can help to test the firmware handoff on qemu.
-> > > > > I have all the necessary changes and unit tests for the OP-TEE repo
-> > > > > qemu v8 build to test this.
-> > > > > I will try to find some time early next week to review and test this
-> > > > > series before turning back to you.
-> > > > >
-> > > >
-> > > > Just a follow-up on the testing with TF-A and OP-TEE.
-> > > > Unfortunately, the patch series breaks the transfer list handoff to
-> > > > U-Boot completely and just end up with below error when U-Boot boots:
-> > > > ```
-> > > > No valid device tree binary found at 0000000000000000
-> > > > initcall failed at call 0000000060097bcc (err=-2)
-> > > > ### ERROR ### Please RESET the board ###
-> > > > ```
-> > > >
-> > > > U-Boot test version:
-> > > > 'next' branch + this series + my patch [1] to point fdt_addr to gd->fdt_blob.
-> > > >
-> > > > [1]: https://lore.kernel.org/u-boot/20250331224011.2734284-2-raymond.mao@linaro.org/
-> > >
-> > > I suppose the FDT address in the register is not being read correctly.
-> > >
-> > > Do you have a test case for this, e.g. in QEMU? Even if it is just
-> > > binary blobs for now, not suitable for CI, I'd like to get it in my
-> > > lab.
-> > >
-> > > I did create a test back when I did standard passage, but that series
-> > > seems to have not been applied. I'll see if I can resurrect it.
-> > >
-> >
-> > I am using the OP-TEE repo [1] qemu_v8 build to test. You will also
-> > need my patch [2] for enabling transfer_ist in all components.
-> >
-> > [1] https://github.com/OP-TEE
-> > [2] https://github.com/OP-TEE/build/pull/821
-> >
->
-> Tom's email seems easier to follow. I got as far as building:
->
-> build/fvp/release/fip.bin
->
-> But I'm not sure how to run that in QEMU. The docs mention some sort
-> of FVP thing and running FVP_Base_RevC-2xAEMvA -C which I don't seem
-> to have.
->
+why? also if I do that, mcc fails to probe
 
-If you want to test with QEMU v8, just simply:
-$ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml
-$ repo sync
-$ cd build
-Apply my patch https://github.com/OP-TEE/build/pull/821
-In kconfigs/u-boot_tl.conf, remove 'CONFIG_BLOBLIST_SIZE=0' and add
-'OF_BLOBLIST=y'
-$ make toolchains
-$ make run
-
-Regards,
-Raymond
-
-> Regards,
-> Simon
+> 
+> >   		return clk_init_sdc(priv, rate);
+> >   		break;
+> >   	case GCC_BLSP2_UART2_APPS_CLK: /*UART2*/
+> 
