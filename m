@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A9BCC36018
-	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:06:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A38C36010
+	for <u-boot@archiver.kernel.org>; Mon,  7 Apr 2025 17:06:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27B382FB8;
-	Mon,  7 Apr 2025 19:05:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39B4183020;
+	Mon,  7 Apr 2025 19:05:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D2AC82FAB; Mon,  7 Apr 2025 19:05:53 +0200 (CEST)
+ id 5B2E083019; Mon,  7 Apr 2025 19:05:55 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 51E1182F7F
- for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 19:05:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3875582CF5
+ for <u-boot@lists.denx.de>; Mon,  7 Apr 2025 19:05:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DBF901BCB;
- Mon,  7 Apr 2025 10:05:51 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C0C8312FC;
+ Mon,  7 Apr 2025 10:05:53 -0700 (PDT)
 Received: from localhost.localdomain (unknown [10.57.17.131])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 19D673F59E;
- Mon,  7 Apr 2025 10:05:48 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 22EDF3F59E;
+ Mon,  7 Apr 2025 10:05:50 -0700 (PDT)
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
@@ -34,10 +34,10 @@ Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Michal Simek <michal.simek@amd.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 2/5] board: st: common: fix dfu alt buffer clearing
-Date: Mon,  7 Apr 2025 19:05:26 +0200
-Message-ID: <20250407170529.893307-3-vincent.stehle@arm.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 3/5] arm64: versal: fix dfu alt buffer clearing
+Date: Mon,  7 Apr 2025 19:05:27 +0200
+Message-ID: <20250407170529.893307-4-vincent.stehle@arm.com>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250407170529.893307-1-vincent.stehle@arm.com>
 References: <20250407170529.893307-1-vincent.stehle@arm.com>
@@ -69,29 +69,27 @@ While this would indeed work fine for an array, in the present case we
 end up clearing only the size of a pointer.
 Fix this by specifying the explicit size `DFU_ALT_BUF_LEN' instead.
 
-Fixes: ec2933e543df ("board: stm32mp1: move set_dfu_alt_info in st common directory")
+Fixes: 064c8978b44f ("arm64: versal: Enable capsule update (SD)")
 Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Michal Simek <michal.simek@amd.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>
 ---
- board/st/common/stm32mp_dfu.c | 2 +-
+ board/xilinx/versal/board.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
-index 1db8e45480e..8c1f80b678a 100644
---- a/board/st/common/stm32mp_dfu.c
-+++ b/board/st/common/stm32mp_dfu.c
-@@ -105,7 +105,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index b4483d00ad1..3edccc979d8 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -396,7 +396,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
  	if (env_get("dfu_alt_info"))
  		return;
  
 -	memset(buf, 0, sizeof(buf));
 +	memset(buf, 0, DFU_ALT_BUF_LEN);
  
- 	snprintf(buf, DFU_ALT_BUF_LEN,
- 		 "ram 0=%s", CONFIG_DFU_ALT_RAM0);
+ 	multiboot = env_get_hex("multiboot", multiboot);
+ 
 -- 
 2.47.2
 
