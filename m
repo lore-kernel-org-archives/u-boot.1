@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D498AC36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 03:23:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CCC1C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 03:23:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB3E083371;
-	Tue,  8 Apr 2025 05:22:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04C588332E;
+	Tue,  8 Apr 2025 05:22:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KfAjvFdu";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="NXMsU/Me";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ED438334C; Tue,  8 Apr 2025 05:22:37 +0200 (CEST)
-Received: from mail-m81251.xmail.ntesmail.com (mail-m81251.xmail.ntesmail.com
- [156.224.81.251])
+ id 5F6A483346; Tue,  8 Apr 2025 05:22:49 +0200 (CEST)
+Received: from mail-m49246.qiye.163.com (mail-m49246.qiye.163.com
+ [45.254.49.246])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0FF382CE7
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 05:22:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB65F82CEA
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 05:22:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 110208a14;
- Tue, 8 Apr 2025 11:22:29 +0800 (GMT+08:00)
-Message-ID: <c1779998-5eb0-4e7b-9fec-c425650847d8@rock-chips.com>
-Date: Tue, 8 Apr 2025 11:22:29 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 110208a53;
+ Tue, 8 Apr 2025 11:22:42 +0800 (GMT+08:00)
+Message-ID: <1ddda229-96cb-4bbc-9c7a-f81b201ad302@rock-chips.com>
+Date: Tue, 8 Apr 2025 11:22:42 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/30] arm64: dts: rockchip: Enable onboard eMMC on
- Radxa E20C
+Subject: Re: [PATCH v2 14/30] rockchip: mkimage: Add support for RK3528
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
- u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
+ u-boot@lists.denx.de, Yifeng Zhao <yifeng.zhao@rock-chips.com>
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
- <20250407224743.2423921-14-jonas@kwiboo.se>
+ <20250407224743.2423921-15-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250407224743.2423921-14-jonas@kwiboo.se>
+In-Reply-To: <20250407224743.2423921-15-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU4dSFYfGR5CSEhPSh9CTU1WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0pLSlYfGRpMSk8ZQx8YHxhWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a96136bb9d603afkunm110208a14
+X-HM-Tid: 0a96136bee7203afkunm110208a53
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODo6Dww4HTICE0IPARYWTg1M
- NxwaCVZVSlVKTE9PS0NJTk5LSkJDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT01INwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTo6TSo*KDIMKUIqPxZCTkoc
+ PSoaFAtVSlVKTE9PS0NJTk1ITE9DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKQk5PNwY+
 DKIM-Signature: a=rsa-sha256;
- b=KfAjvFdurJJHDD9oclpJcvlO8796NWUQhawLzlBKJz6o1e7dORDgeEnGgy77+1I6Wr8Q+g1YIFw1JlnMqPogSfPV1mbSOqMCzTOsG0lqSptfipIE4ZwZz68qXW1cKiMS/d3jD/4CrGgJWtwniC39quzxtDFS2aeS143gtxgwyAw=;
+ b=NXMsU/MeuUoOWgUa3uAQ70QYQq26Dm55AR6uKup8fJqLEzjGgxZru12XG7G0FH20zTJxg/xKbICje9NBx+KuJJd5Ct/anbhmoiEiB4ValKnOMMvlx4QS4LSAUikycQx96gcvcO/YVJTW5CjjG4AdJ2mMpZ5qWQ3heCcIumVGnh8=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=z74HIRWpfobPozgAkQK78L0D6/lGzv5PW27s0JpMwg4=;
+ bh=nukayFRE37yENqlb6n8dTgzfYF+i1zC7uNdD4mFzGx8=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,56 +77,34 @@ X-Virus-Status: Clean
 
 
 On 2025/4/8 06:46, Jonas Karlman wrote:
-> The Radxa E20C may come with an onboard eMMC (8GB / 16GB / 32GB / 64GB).
+> From: Yifeng Zhao <yifeng.zhao@rock-chips.com>
 >
-> Enable support for the onboard eMMC on Radxa E20C.
+> Add support for generating Rockchip Boot Image for RK3528.
 >
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Link: https://lore.kernel.org/r/20250305214108.1327208-4-jonas@kwiboo.se
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> Similar to RK3568, the RK3528 has 64 KiB SRAM and 4 KiB of it is
+> reserved for BootROM.
 >
-> [ upstream commit: 3a01b5f14a8ae2d45aea5aeed30001ac1655de86 ]
->
-> (cherry picked from commit bd4c8a1c08f92d863d89c0ddff59e5f5bc6a1e34)
+> Signed-off-by: Yifeng Zhao <yifeng.zhao@rock-chips.com>
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   .../src/arm64/rockchip/rk3528-radxa-e20c.dts      | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
+> v2: No change
+> ---
+>   tools/rkcommon.c | 1 +
+>   1 file changed, 1 insertion(+)
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts b/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts
-> index 5346ef457c2a..57a446b5cbd6 100644
-> --- a/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts
-> +++ b/dts/upstream/src/arm64/rockchip/rk3528-radxa-e20c.dts
-> @@ -15,6 +15,10 @@
->   	model = "Radxa E20C";
->   	compatible = "radxa,e20c", "rockchip,rk3528";
->   
-> +	aliases {
-> +		mmc0 = &sdhci;
-> +	};
-> +
->   	chosen {
->   		stdout-path = "serial0:1500000n8";
->   	};
-> @@ -133,6 +137,17 @@
->   	status = "okay";
+> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+> index 3e52236b15a8..f158d1562284 100644
+> --- a/tools/rkcommon.c
+> +++ b/tools/rkcommon.c
+> @@ -134,6 +134,7 @@ static struct spl_info spl_infos[] = {
+>   	{ "rk3399", "RK33", 0x30000 - 0x2000, false, RK_HEADER_V1 },
+>   	{ "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
+>   	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+> +	{ "rk3528", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+>   	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+>   	{ "rk3588", "RK35", 0x100000 - 0x1000, false, RK_HEADER_V2 },
 >   };
->   
-> +&sdhci {
-> +	bus-width = <8>;
-> +	cap-mmc-highspeed;
-> +	no-sd;
-> +	no-sdio;
-> +	non-removable;
-> +	vmmc-supply = <&vcc_3v3>;
-> +	vqmmc-supply = <&vcc_1v8>;
-> +	status = "okay";
-> +};
-> +
->   &uart0 {
->   	pinctrl-names = "default";
->   	pinctrl-0 = <&uart0m0_xfer>;
