@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DDAC369A4
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A40C369A2
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:52:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F4E482102;
-	Tue,  8 Apr 2025 16:51:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A9606820F8;
+	Tue,  8 Apr 2025 16:52:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NUe9VhAU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yY0OZZUb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8E5C832F7; Tue,  8 Apr 2025 16:51:46 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id A9FC582102; Tue,  8 Apr 2025 16:52:30 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C1EF80107
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:51:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22C0B820EB
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:52:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso32375425e9.3
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:51:44 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso41742695e9.2
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:52:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744123904; x=1744728704; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744123947; x=1744728747; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=S8crVkFymNGFCms6yS7jWXwWa90ouTTrMZB8I3sVju4=;
- b=NUe9VhAUQOU6chg+anY7NQx7FLy+sTFkPDoovOrl3OZfUgoKJla+/1F+kFH5JUtAVC
- 6y3KrtaigwWVk9kuoTTPN7h8Au3/LavCK+PduPydRPIRL2uXv6D1/bqR1oh0oVJhPDLs
- WInvJFumfDfa5LBQWLKu3+HNKVrWtE/x+V7kU/E2pD7QSnbDfOb2xa5mJ6eMw6n7xRKc
- D6W5KGWBf6n0onO9EPKPVgokfjzzWKvEZlOrOW/rzIFv9Xr70W3cq9R7qRfwZPzSE3JH
- 9jlmzr/nbkQiFLhQ6bY2/MEthrLGkJr3NhaRUaDuM7SVNuqaEplsuwIH/UYKUBtWSxKY
- K2Vw==
+ :reply-to; bh=GimhJJiMcDHK6VGU3VHlsastU0uZIGe1E0xq91DmK9w=;
+ b=yY0OZZUb16ZWNkTDto32bGO4UXrXuv8tcjFKVfYhOVymvVuC1pmpz/sa/q8KVZ63bS
+ aujFJK4ef7+ujGeTZlbJ4+7yUzsMBAmVGhQ6w1Q6G92NjL2bpt1AyRuzW2CS/xuav/T/
+ IjlsIOcRFwUfGVqDvTtrbOefg+XqhIFjAI9/KGSAjpUbE9hqRyk9iv/ZrUlrBZ1z9EG7
+ OUdu4Cd4NYSNecnEVTh3bTCk+XHAUMJ0cEhS6IAiGHuSCydMsB74UkhucRUuqxI/cmmR
+ hzUISqFWFu4lfZ2u6aleM42FFtSXPuNo8pzaTu800JdJjAGN8M11Zmu4q5YGURnTHDHv
+ nhjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744123904; x=1744728704;
+ d=1e100.net; s=20230601; t=1744123947; x=1744728747;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=S8crVkFymNGFCms6yS7jWXwWa90ouTTrMZB8I3sVju4=;
- b=S2v5ucB7sj+jL1CyDEW5evc9Aug3ddle1o9jIJ0BFPHM7NH+b/7mBO9yq28oZ93mKH
- t1ksSRfAoWXLQiJ0uDFQC2bHHd/rwXt8LoegHrBXhl7MSf8uaSrnv7aqhxKZBDCt+VQw
- JgiXMtzhrbfhuq0Jx89nx+6fek37hwHkThxYYX2ZfNxhruzQyytLIFqATHICzMeDFJju
- Z10KBA2EwK93cT+Fk7OOgR5fQ8n69azNUP85B1AxTQjII1ouQQ9KDYrCWpvA3pDHWn5g
- 7AqH5oHlqVUNGsnMzjCdaQDP90HngJpbKV1PrDkDirtAV2iBQb2KM44V8GcT+HRuiC5C
- T8YA==
+ bh=GimhJJiMcDHK6VGU3VHlsastU0uZIGe1E0xq91DmK9w=;
+ b=LSpzPUTX4iJIE4cDqwnn75kKjWpRLkO0sCvwJi5j+rlbUkC4JHCy69xaKvhJC51b3o
+ KFCJevM/7BAWdPx0Cszm8rTlkcvYRWuDC9iXb9ie6/i+uQXQ+EOYqah5Isvjr7IvDNH5
+ RKabh4rn2UwgFCO9xTXP5gW4+TOfzhrZAsWEbq28x+krqOjv/jOShYoFEFEt1upF8513
+ O1IyZIL8PoAMnxYUkz+zkjB7xvXr0wS1Yni4MmV69EkjR0gWabebDtuAiOhboAWYlcTW
+ Jcw1qIJWXhpOofYKbNlh9NiELNFUhFMi8/qZs/D0ojeKa/RwE7E7X7izrDVfavglwd67
+ hWzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUow6ZXSO9LEW8JxQQZisL1TzhPkCMwwOJDv8iXidNglbgjE1pTQf7V3NlKNfy1d8VLmWhuiEo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+XJ6Tu5240Im7ytnA7ncmNf8fskLZFnbYqKs5ugxZb9D8/ArP
- jAe8HRnnZPURhqEBsdGbT/McFr/T+5iT02rKaaBWyiHaU+t2KtWklD9M/+aFRq0/GJB34bxYA10
- T
-X-Gm-Gg: ASbGncuhd/gnUtuR3dxFLT89xhkdop1x85ro6b8ApnmawJzh1vaZMEYG6Z7fFrA8JbR
- 1tZkjgwnZB57p4FoB1HmQMKMIzpS2jfKqYFeZ56+N0X8VJMDmJ/ZtaUbBGELbimrRSHLdDWBl2x
- 2ekKNIR6uX4HNo+dfAY1xF4CzrHbvSXUGgP9Nm6YzND3ZZDayvzH9wRxTBds13qodHPYva/ssMD
- sSY8YPzv69ExVi3lex3hiU3n6TeQExYhckleniJXRnP7ZsaKRxej8CwIQDmBAwdQT2qvWhSFk7b
- Ul7Y0IgjTaFuCi8I2LDM1f7CH0dc6nRlg5MGW4U1iCmxHsfXGp87Qpfdz9m/gkaaXKwjNeLO9Eb
- lFAI8kydvN+KcPzO1ye1p5A==
-X-Google-Smtp-Source: AGHT+IHQ56ZB1PFuop6cnaCqinxnnzYoc5BC4onYqQnFb/9FoSAQdwPWnN3g/IqlZY4esqsXnYx6rA==
-X-Received: by 2002:a05:600c:3eca:b0:43c:fceb:91a with SMTP id
- 5b1f17b1804b1-43ee0660808mr115718315e9.11.1744123903766; 
- Tue, 08 Apr 2025 07:51:43 -0700 (PDT)
+ AJvYcCU1RIbhC771Z6zoDcckCOE+Y632fF77oVJW20Kkf1kRZSejL4V7otgXe5pEswN6p1J2L9gUjIU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0MD3MRFzTxldIrHCfl5WOitAKN65OBLrrL/A5ZT803kFEvASx
+ HvFNgWhPUaW3MuBO14ibEeZCcFObxip1Sh36ACRMVbB0tf4RXzPnSJMkZd7v5AY=
+X-Gm-Gg: ASbGncuCqv1mL/E5MOMiBV3vMxqI+Am72PhYUPyDcKFwW8mwGSMruwSd8e0RWyKQPE4
+ uv+QI5q46L0uUvpP95jWbk9ktMh/ZZEkq8zJWFnbjX6bkb16VMIovaibj+C0ipfh/8JexsSHfmM
+ 6noGjdqrSfBe/jM6+eoLkTOEEjna9bvCuaDIZbdsDuKWu2P7KEKDP0kg9vqx1FrzZ0warW5yfFO
+ 17zZ/rtCbUD4gDRt5ZFfpyV6YVyoP381f3Lz3rXeFsNF32Ez52uUOZ71XWWqSG6cuG6o7DM5Ncs
+ BUA3KVFdrRV4DprICD8DW+VZyU7fwIsHPfe1QNekYrDncjUHXFAzPgq3FPFe+Rk5rFziWWkkj5Q
+ +AbyMXflt67zDq0eSn9f1kw==
+X-Google-Smtp-Source: AGHT+IHXLHoyF0pyqrsQV5SO4EvwQguCbU8ny5JkZC29be4vwgvH/kzZIMJnqCoUdEzv1aSav60xcA==
+X-Received: by 2002:a05:600c:c1a:b0:43d:45a:8fca with SMTP id
+ 5b1f17b1804b1-43ecfa06fd2mr198409925e9.30.1744123947463; 
+ Tue, 08 Apr 2025 07:52:27 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:3daa:5b6d:6ccb:4c71?
  ([2a01:e0a:3d9:2080:3daa:5b6d:6ccb:4c71])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c301a9da1sm14861852f8f.22.2025.04.08.07.51.43
+ 5b1f17b1804b1-43ec1630de9sm165904965e9.1.2025.04.08.07.52.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Apr 2025 07:51:43 -0700 (PDT)
-Message-ID: <ea8947b7-5558-4c6d-aadd-e003f33ce5c5@linaro.org>
-Date: Tue, 8 Apr 2025 16:51:42 +0200
+ Tue, 08 Apr 2025 07:52:27 -0700 (PDT)
+Message-ID: <c3bc727d-ff39-4117-bac7-86c73ac69557@linaro.org>
+Date: Tue, 8 Apr 2025 16:52:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 1/3] part: add part_get_info_cached() API
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v2 2/3] part: efi: add GPT PTE cache used with
+ part_get_info_cached() API
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 References: <20250408-topic-gpt-cache-v2-0-de76e47debb7@linaro.org>
- <20250408-topic-gpt-cache-v2-1-de76e47debb7@linaro.org>
- <613a0f69-0fc6-4861-90a8-760f4c516a1a@gmx.de>
+ <20250408-topic-gpt-cache-v2-2-de76e47debb7@linaro.org>
+ <0e1b03c0-fb81-478e-a800-0653801a2f5d@gmx.de>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -113,7 +113,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <613a0f69-0fc6-4861-90a8-760f4c516a1a@gmx.de>
+In-Reply-To: <0e1b03c0-fb81-478e-a800-0653801a2f5d@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,201 +133,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08/04/2025 11:55, Heinrich Schuchardt wrote:
+On 08/04/2025 12:57, Heinrich Schuchardt wrote:
 > On 08.04.25 11:13, Neil Armstrong wrote:
->> Introduce a new part_get_info_cached() API that's used to
->> get the part_info of a blk_desc allowing to use an eventual
->> partition scanning cache to avoid rescanning the entire disk
->> partition scheme for each partition number.
+>> Implement a simple cache for part_efi to be used by the newly
+>> introduced part_get_info_cached() API.
 >>
->> The part_get_info_cached_free() is also added to hint the
->> partition code to flush any cached data from this disk.
+>> The cache simply stores a successfully scanned GPT PTE if called
+>> from the part_get_info_cached() ops, and will return the cached
+>> data if the blk_desc and lba offset matches, invalidating the
+>> cache if not.
 >>
->> The equivalent ops are added that directly maps to those
->> added functions.
->>
->> This API is designed to be used as a direct replacement of
->> part_get_info() in codes scanning all partitions for a same
->> disk, like in blk-uclass. With this, a lot of unnecessary
->> computation is saved, leading to a faster boot time when
->> partitions are scanned, especially with storage medias
->> with potentially multiple large hardware partitions like
->> UFS, NVMe or eMMC.
+>> The cache will only operate if called from the part_get_info_cached()
+>> API, all the over calls will operate uncached, making sure we
+>> can still update & re-scan the GPT partitions like before.
 >>
 >> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 >> ---
->>   disk/part.c    | 55 ++++++++++++++++++++++++++++++++++++++++++++-----------
->>   include/part.h | 44 ++++++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 88 insertions(+), 11 deletions(-)
+>>   disk/part_efi.c | 114 +++++++++++++++++++++++++++++++++++++++++++++++---------
+>>   1 file changed, 96 insertions(+), 18 deletions(-)
 >>
->> diff --git a/disk/part.c b/disk/part.c
->> index 303178161c083ec6e1b767b4f06ac5773576ca60..1d09c0511c75d457c81cab040c3f5caa924ee945 100644
->> --- a/disk/part.c
->> +++ b/disk/part.c
->> @@ -335,8 +335,8 @@ void part_print(struct blk_desc *desc)
->>           drv->print(desc);
+>> diff --git a/disk/part_efi.c b/disk/part_efi.c
+>> index 932d058c184ce6946b7142e7c2d9637b28e4661e..949968fcd30fc18766a023e73f43ca1381dcef89 100644
+>> --- a/disk/part_efi.c
+>> +++ b/disk/part_efi.c
+>> @@ -55,12 +55,58 @@ static inline u32 efi_crc32(const void *buf, u32 len)
+>>   static int pmbr_part_valid(struct partition *part);
+>>   static int is_pmbr_valid(legacy_mbr * mbr);
+>>   static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>> -            gpt_entry **pgpt_pte);
+>> +            gpt_entry **pgpt_pte, bool cache);
+>>   static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
+>>                        gpt_header *pgpt_head);
+>>   static int is_pte_valid(gpt_entry * pte);
+>>   static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
+>> -              gpt_entry **pgpt_pte);
+>> +              gpt_entry **pgpt_pte, bool cache);
+>> +
+> 
+> Please, describe the structure and its members.
+
+Ack
+
+> 
+> https://docs.kernel.org/doc-guide/kernel-doc.html#structure-union-and-enumeration-documentation
+> 
+>> +static struct gpt_pte_cache_data {
+>> +    struct blk_desc *desc;
+>> +    u64 lba;
+>> +    gpt_entry *gpt_pte;
+>> +    gpt_header gpt_head;
+>> +} gpt_pte_cache;
+>> +
+> 
+> Please, describe all functions.
+
+Ack
+
+> 
+>> +static void clear_gpt_pte_cache(void)
+>> +{
+>> +    if (gpt_pte_cache.desc) {
+>> +        if (gpt_pte_cache.gpt_pte)
+>> +            free(gpt_pte_cache.gpt_pte);
+>> +
+>> +        memset(&gpt_pte_cache, 0, sizeof(gpt_pte_cache));
+>> +    }
+>> +}
+>> +
+>> +static void cache_gpt_pte(struct blk_desc *desc, u64 lba,
+>> +              gpt_entry *gpt_pte, gpt_header *pgpt_head)
+>> +{
+>> +    if (gpt_pte_cache.gpt_pte)
+>> +        free(gpt_pte_cache.gpt_pte);
+>> +
+>> +    gpt_pte_cache.desc = desc;
+>> +    gpt_pte_cache.lba = lba;
+>> +    gpt_pte_cache.gpt_pte = gpt_pte;
+>> +    if (pgpt_head)
+>> +        memcpy(&gpt_pte_cache.gpt_head, pgpt_head, sizeof(gpt_header));
+>> +}
+>> +
+>> +static gpt_entry *get_cached_gpt_pte(struct blk_desc *desc, u64 lba,
+>> +                     gpt_header *pgpt_head)
+>> +{
+>> +    if (gpt_pte_cache.desc && gpt_pte_cache.gpt_pte) {
+>> +        if (gpt_pte_cache.desc == desc &&
+>> +            gpt_pte_cache.lba == lba) {
+>> +            memcpy(pgpt_head, &gpt_pte_cache.gpt_head, sizeof(gpt_header));
+>> +            return gpt_pte_cache.gpt_pte;
+>> +        }
+>> +
+>> +        clear_gpt_pte_cache();
+>> +    }
+>> +
+>> +    return NULL;
+>> +}
+>>
+>>   static char *print_efiname(gpt_entry *pte)
+>>   {
+>> @@ -205,7 +251,7 @@ int get_disk_guid(struct blk_desc *desc, char *guid)
+>>       unsigned char *guid_bin;
+>>
+>>       /* This function validates AND fills in the GPT header and PTE */
+>> -    if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
+>> +    if (find_valid_gpt(desc, gpt_head, &gpt_pte, false) != 1)
+>>           return -EINVAL;
+>>
+>>       guid_bin = gpt_head->disk_guid.b;
+>> @@ -224,7 +270,7 @@ static void __maybe_unused part_print_efi(struct blk_desc *desc)
+>>       unsigned char *uuid;
+>>
+>>       /* This function validates AND fills in the GPT header and PTE */
+>> -    if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
+>> +    if (find_valid_gpt(desc, gpt_head, &gpt_pte, false) != 1)
+>>           return;
+>>
+>>       debug("%s: gpt-entry at %p\n", __func__, gpt_pte);
+>> @@ -258,8 +304,13 @@ static void __maybe_unused part_print_efi(struct blk_desc *desc)
+>>       return;
 >>   }
 >>
->> -int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
->> -              struct disk_partition *info)
-> 
-> Thank you, Neil, for pushing this forward.
-> 
-> All functions deserve a description.
-
-Sure
-
-> 
->> +static int _part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
->> +                  struct disk_partition *info, bool cached)
+>> -static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+>> -                        struct disk_partition *info)
+>> +static void __maybe_unused part_get_info_cache_free_efi(struct blk_desc *desc)
+>> +{
+>> +    clear_gpt_pte_cache();
+>> +}
+>> +
+>> +static int _part_get_info_efi(struct blk_desc *desc, int part,
+>> +                  struct disk_partition *info, bool cache)
 >>   {
->>       struct part_driver *drv;
+>>       ALLOC_CACHE_ALIGN_BUFFER_PAD(gpt_header, gpt_head, 1, desc->blksz);
+>>       gpt_entry *gpt_pte = NULL;
+>> @@ -271,13 +322,14 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+>>       }
 >>
->> @@ -356,24 +356,57 @@ int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
->>                     desc->part_type);
->>               return -EPROTONOSUPPORT;
->>           }
->> -        if (!drv->get_info) {
->> -            PRINTF("## Driver %s does not have the get_info() method\n",
+>>       /* This function validates AND fills in the GPT header and PTE */
+>> -    if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
+>> +    if (find_valid_gpt(desc, gpt_head, &gpt_pte, cache) != 1)
+>>           return -EINVAL;
+>>
+>>       if (part > le32_to_cpu(gpt_head->num_partition_entries) ||
+>>           !is_pte_valid(&gpt_pte[part - 1])) {
+>>           log_debug("Invalid partition number %d\n", part);
+>> -        free(gpt_pte);
+>> +        if (!cache)
+>> +            free(gpt_pte);
+>>           return -EPERM;
+>>       }
+>>
+>> @@ -307,11 +359,23 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+>>       log_debug("start 0x" LBAF ", size 0x" LBAF ", name %s\n", info->start,
+>>             info->size, info->name);
+>>
+>> -    /* Remember to free pte */
+>> -    free(gpt_pte);
+>> +    if (!cache)
+>> +        free(gpt_pte);
+>>       return 0;
+>>   }
+>>
+>> +static int __maybe_unused part_get_info_cached_efi(struct blk_desc *desc, int part,
+>> +                           struct disk_partition *info)
+>> +{
+>> +    return _part_get_info_efi(desc, part, info, true);
+>> +}
+>> +
+>> +static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
+>> +                        struct disk_partition *info)
+>> +{
+>> +    return _part_get_info_efi(desc, part, info, false);
+>> +}
+>> +
+>>   static int part_test_efi(struct blk_desc *desc)
+>>   {
+>>       ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, legacymbr, 1, desc->blksz);
+>> @@ -689,7 +753,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
+>>        */
+>>       if (is_gpt_valid(desc,
+>>                GPT_PRIMARY_PARTITION_TABLE_LBA,
+>> -             gpt_head, gpt_pte) != 1) {
+>> +             gpt_head, gpt_pte, false) != 1) {
+>>           log_debug("Invalid GPT\n");
+>>           return -1;
+>>       }
+>> @@ -706,7 +770,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
+>>       }
+>>
+>>       if (is_gpt_valid(desc, (desc->lba - 1),
+>> -             gpt_head, gpt_pte) != 1) {
+>> +             gpt_head, gpt_pte, false) != 1) {
+>>           log_debug("Invalid Backup GPT\n");
+>>           return -1;
+>>       }
+>> @@ -765,9 +829,9 @@ int gpt_repair_headers(struct blk_desc *desc)
+>>       int ret = -1;
+>>
+>>       is_gpt1_valid = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
+>> -                     gpt_h1, &gpt_e1);
+>> +                     gpt_h1, &gpt_e1, false);
+>>       is_gpt2_valid = is_gpt_valid(desc, desc->lba - 1,
+>> -                     gpt_h2, &gpt_e2);
+>> +                     gpt_h2, &gpt_e2, false);
+>>
+>>       if (is_gpt1_valid && is_gpt2_valid) {
+>>           ret = 0;
+>> @@ -1023,12 +1087,13 @@ static int is_pmbr_valid(legacy_mbr *mbr)
+>>    * lba is the logical block address of the GPT header to test
+>>    * gpt is a GPT header ptr, filled on return.
+>>    * ptes is a PTEs ptr, filled on return.
+>> + * cache is a bool, true to use the cached gpt_pte from previous call
 > 
-> Writing to the console creates screen havoc in EFI applications. Please,
-> use log_debug() instead of PRINTF().
+> "use the cache" or "use cached GPT if available"?
 > 
-> And, please, remove that noisy '## '. It carries no information.
+> It remains unclear what will happen if cache=1 and no entry is found.
 
-Right, those were already present, I'll add a cleanup patch before.
-
-Thx,
-Neil
+Ack, will clarify
 
 > 
 > Best regards
 > 
 > Heinrich
 > 
->> -                   drv->name);
->> -            return -ENOSYS;
->> -        }
->> -        if (drv->get_info(desc, part, info) == 0) {
->> -            PRINTF("## Valid %s partition found ##\n", drv->name);
->> -            return 0;
->> +        if (cached && drv->get_info_cached) {
->> +            if (drv->get_info_cached(desc, part, info) == 0) {
->> +                PRINTF("## Valid %s partition found ##\n", drv->name);
->> +                return 0;
->> +            }
->> +        } else {
->> +            if (!drv->get_info) {
->> +                PRINTF("## Driver %s does not have the get_info() method\n",
->> +                       drv->name);
->> +                return -ENOSYS;
->> +            }
->> +            if (drv->get_info(desc, part, info) == 0) {
->> +                PRINTF("## Valid %s partition found ##\n", drv->name);
->> +                return 0;
->> +            }
->>           }
+>>    *
+>>    * Description: returns 1 if valid,  0 on error, 2 if ignored header
+>>    * If valid, returns pointers to PTEs.
+>>    */
+>>   static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>> -            gpt_entry **pgpt_pte)
+>> +            gpt_entry **pgpt_pte, bool cache)
+>>   {
+>>       /* Confirm valid arguments prior to allocation. */
+>>       if (!desc || !pgpt_head) {
+>> @@ -1036,6 +1101,12 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>>           return 0;
 >>       }
 >>
->>       return -ENOENT;
->>   }
->>
->> +int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
->> +              struct disk_partition *info)
->> +{
->> +    return _part_get_info_by_type(desc, part, part_type, info, false);
->> +}
->> +
->> +int part_get_info_cached(struct blk_desc *desc, int part,
->> +             struct disk_partition *info)
->> +{
->> +    return _part_get_info_by_type(desc, part, PART_TYPE_UNKNOWN, info, true);
->> +}
->> +
->>   int part_get_info(struct blk_desc *desc, int part,
->>             struct disk_partition *info)
->>   {
->> -    return part_get_info_by_type(desc, part, PART_TYPE_UNKNOWN, info);
->> +    return _part_get_info_by_type(desc, part, PART_TYPE_UNKNOWN, info, false);
->> +}
->> +
->> +void part_get_info_cached_free(struct blk_desc *desc)
->> +{
->> +    struct part_driver *drv;
->> +
->> +    if (blk_enabled()) {
->> +        drv = part_driver_lookup_type(desc);
->> +        if (!drv)
->> +            return;
->> +        if (!drv->get_info_cache_free)
->> +            return;
->> +        drv->get_info_cache_free(desc);
+>> +    if (cache) {
+>> +        *pgpt_pte = get_cached_gpt_pte(desc, lba, pgpt_head);
+>> +        if (*pgpt_pte)
+>> +            return 1;
 >> +    }
->>   }
+>> +
+>>       ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, mbr, 1, desc->blksz);
 >>
->>   int part_get_info_whole_disk(struct blk_desc *desc,
->> diff --git a/include/part.h b/include/part.h
->> index fcb3c13dea4de6346ad98d6ce320ef36747dda85..8c98865146306fb66509576068c45de01b9cedb6 100644
->> --- a/include/part.h
->> +++ b/include/part.h
->> @@ -216,6 +216,34 @@ struct blk_desc *mg_disk_get_dev(int dev);
+>>       /* Read MBR Header from device */
+>> @@ -1081,6 +1152,9 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>>           return 0;
+>>       }
+>>
+>> +    if (cache)
+>> +        cache_gpt_pte(desc, lba, *pgpt_pte, pgpt_head);
+>> +
+>>       /* We're done, all's well */
+>>       return 1;
+>>   }
+>> @@ -1090,23 +1164,25 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+>>    *
+>>    * gpt is a GPT header ptr, filled on return.
+>>    * ptes is a PTEs ptr, filled on return.
+>> + * cache if a bool, use cached GPT if available
+>>    *
+>>    * Description: returns 1 if found a valid gpt,  0 on error.
+>>    * If valid, returns pointers to PTEs.
 >>    */
->>   int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
->>                 struct disk_partition *info);
->> +
->> +/**
->> + * part_get_info_cached() - Get partitions from a block device but save the
->> + * disk partition map between different partitions.
->> + *
->> + * Call to part_get_info_cached_free() is required when scanning of the
->> + * block device is finished.
->> + *
->> + * If the partition driver doesn't support cached part_info, the
->> + * normal part_info will be called instead.
->> + *
->> + * @desc:    Block device descriptor
->> + * @part:    Partition number to read
->> + * @info:    Returned partition information
->> + *
->> + * Return: 0 on success, negative errno on failure
->> + */
->> +int part_get_info_cached(struct blk_desc *desc, int part,
->> +             struct disk_partition *info);
->> +
->> +/**
->> + * part_get_info_cached_free() - Free the saved disk partition map
->> + * from a previous call of part_get_info_cached().
->> + *
->> + * @desc:    Block device descriptor
->> + */
->> +void part_get_info_cached_free(struct blk_desc *desc);
->> +
->>   int part_get_info(struct blk_desc *desc, int part,
->>             struct disk_partition *info);
->>   /**
->> @@ -463,6 +491,22 @@ struct part_driver {
->>       int part_type;
->>       /** @max_entries:    maximum number of partition table entries */
->>       const int max_entries;
->> +    /**
->> +     * @cache_free_cache_free:    Free any parsing data stored from get_info_cached()
->> +     *
->> +     * @get_info_cache_free.desc:    Block device descriptor
->> +     */
->> +    void (*get_info_cache_free)(struct blk_desc *desc);
->> +    /**
->> +     * @get_inf_cachedo:        Get information about a partition, and save
->> +     *                the resulting parsing data for the next partition.
->> +     *
->> +     * @get_info_cached.desc:    Block device descriptor
->> +     * @get_info_cached.part:    Partition number (1 = first)
->> +     * @get_info_cached.info:    Returns partition information
->> +     */
->> +    int (*get_info_cached)(struct blk_desc *desc, int part,
->> +                   struct disk_partition *info);
->>       /**
->>        * @get_info:        Get information about a partition
->>        *
+>>   static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
+>> -              gpt_entry **pgpt_pte)
+>> +              gpt_entry **pgpt_pte, bool cache)
+>>   {
+>>       int r;
+>>
+>>       r = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA, gpt_head,
+>> -             pgpt_pte);
+>> +             pgpt_pte, cache);
+>>
+>>       if (r != 1) {
+>>           if (r != 2)
+>>               log_debug("Invalid GPT\n");
+>>
+>> -        if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte)
+>> +        if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte,
+>> +                 true)
+>>               != 1) {
+>>               log_debug("Invalid Backup GPT\n");
+>>               return 0;
+>> @@ -1210,6 +1286,8 @@ U_BOOT_PART_TYPE(a_efi) = {
+>>       .name        = "EFI",
+>>       .part_type    = PART_TYPE_EFI,
+>>       .max_entries    = GPT_ENTRY_NUMBERS,
+>> +    .get_info_cache_free    = part_get_info_ptr(part_get_info_cache_free_efi),
+>> +    .get_info_cached    = part_get_info_ptr(part_get_info_cached_efi),
+>>       .get_info    = part_get_info_ptr(part_get_info_efi),
+>>       .print        = part_print_ptr(part_print_efi),
+>>       .test        = part_test_efi,
 >>
 > 
 
