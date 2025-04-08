@@ -4,117 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A40C369A2
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A0EC369A4
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 15:36:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9606820F8;
-	Tue,  8 Apr 2025 16:52:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9F38A82115;
+	Tue,  8 Apr 2025 17:36:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yY0OZZUb";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="HJLok5CP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9FC582102; Tue,  8 Apr 2025 16:52:30 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6912F82125; Tue,  8 Apr 2025 17:36:17 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22C0B820EB
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:52:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 561EC820B0
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 17:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43d0618746bso41742695e9.2
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:52:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744123947; x=1744728747; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=GimhJJiMcDHK6VGU3VHlsastU0uZIGe1E0xq91DmK9w=;
- b=yY0OZZUb16ZWNkTDto32bGO4UXrXuv8tcjFKVfYhOVymvVuC1pmpz/sa/q8KVZ63bS
- aujFJK4ef7+ujGeTZlbJ4+7yUzsMBAmVGhQ6w1Q6G92NjL2bpt1AyRuzW2CS/xuav/T/
- IjlsIOcRFwUfGVqDvTtrbOefg+XqhIFjAI9/KGSAjpUbE9hqRyk9iv/ZrUlrBZ1z9EG7
- OUdu4Cd4NYSNecnEVTh3bTCk+XHAUMJ0cEhS6IAiGHuSCydMsB74UkhucRUuqxI/cmmR
- hzUISqFWFu4lfZ2u6aleM42FFtSXPuNo8pzaTu800JdJjAGN8M11Zmu4q5YGURnTHDHv
- nhjQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 9495D3F479
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 15:36:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1744126574;
+ bh=itPNXvwE9ll+F/40wqUka+NWHi/DHfZmul/8H92n3kw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=HJLok5CPK8mPx//nIO6MCGAOmsIyws4i48xaDOFkcSQLPAWK0sWZ2NH5Y1Hwd3tvB
+ uCIvgGQ19ux3+Y/5RKODptgjPXV9RluZ/WW+FcoWCo0NFzWGB/l2UkVxSlgQZGCIkM
+ mZdCgN02A0sh1k12nshkcKZmf19K2MAa8GnI6jJN9G9RwC90F5we4RoqIteQ8XmISu
+ Dj99kXVPHG7oNfFAT/xbSHK7/F6cuXDM4ix4jQ4bzs+Uh49w21NXYT4mnjplPbBfTT
+ QvlggnHvyQjXT9iBjZAgMRSOaKTcOoQ2+9SuYUhIODDJc6fZtHCBlWpfetEXeHMrEa
+ q0mPYV2mkEH+Q==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-43d51bd9b45so39577005e9.1
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 08:36:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744123947; x=1744728747;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=GimhJJiMcDHK6VGU3VHlsastU0uZIGe1E0xq91DmK9w=;
- b=LSpzPUTX4iJIE4cDqwnn75kKjWpRLkO0sCvwJi5j+rlbUkC4JHCy69xaKvhJC51b3o
- KFCJevM/7BAWdPx0Cszm8rTlkcvYRWuDC9iXb9ie6/i+uQXQ+EOYqah5Isvjr7IvDNH5
- RKabh4rn2UwgFCO9xTXP5gW4+TOfzhrZAsWEbq28x+krqOjv/jOShYoFEFEt1upF8513
- O1IyZIL8PoAMnxYUkz+zkjB7xvXr0wS1Yni4MmV69EkjR0gWabebDtuAiOhboAWYlcTW
- Jcw1qIJWXhpOofYKbNlh9NiELNFUhFMi8/qZs/D0ojeKa/RwE7E7X7izrDVfavglwd67
- hWzg==
+ d=1e100.net; s=20230601; t=1744126573; x=1744731373;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=itPNXvwE9ll+F/40wqUka+NWHi/DHfZmul/8H92n3kw=;
+ b=FcQylEqFXE7w7KtpxVQ8zsg23CZ9w5vuuI9KtE1DswkUsJxS32gSVe9Smbpn/vcEf2
+ tcsAuSQ4OpPMbThRxKKRq3Prhc91hTWMdPkjzDVsgNHFbhfouUGRzw86Reeoa18OlGpG
+ GJfz46I6ofSLE7CrmmSz/hSRPvIGrF/SoWA4uLRghkNnRAh2izKV3Wdg6O1Ev1GX8jrT
+ Q2Q+cam/yer6DSbxFFQUpnbuYLTfuJFLMLk01Iibo2wWM3HkYvnb30Tug8c6ubiNNaxA
+ lQlu0Yj0qPXLJy2Wb4dtZlsIsKXCuav6V5jvrfsNAO/RcxVf5dOkoK2Wfdv+s3T97qmP
+ 6h2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1RIbhC771Z6zoDcckCOE+Y632fF77oVJW20Kkf1kRZSejL4V7otgXe5pEswN6p1J2L9gUjIU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0MD3MRFzTxldIrHCfl5WOitAKN65OBLrrL/A5ZT803kFEvASx
- HvFNgWhPUaW3MuBO14ibEeZCcFObxip1Sh36ACRMVbB0tf4RXzPnSJMkZd7v5AY=
-X-Gm-Gg: ASbGncuCqv1mL/E5MOMiBV3vMxqI+Am72PhYUPyDcKFwW8mwGSMruwSd8e0RWyKQPE4
- uv+QI5q46L0uUvpP95jWbk9ktMh/ZZEkq8zJWFnbjX6bkb16VMIovaibj+C0ipfh/8JexsSHfmM
- 6noGjdqrSfBe/jM6+eoLkTOEEjna9bvCuaDIZbdsDuKWu2P7KEKDP0kg9vqx1FrzZ0warW5yfFO
- 17zZ/rtCbUD4gDRt5ZFfpyV6YVyoP381f3Lz3rXeFsNF32Ez52uUOZ71XWWqSG6cuG6o7DM5Ncs
- BUA3KVFdrRV4DprICD8DW+VZyU7fwIsHPfe1QNekYrDncjUHXFAzPgq3FPFe+Rk5rFziWWkkj5Q
- +AbyMXflt67zDq0eSn9f1kw==
-X-Google-Smtp-Source: AGHT+IHXLHoyF0pyqrsQV5SO4EvwQguCbU8ny5JkZC29be4vwgvH/kzZIMJnqCoUdEzv1aSav60xcA==
-X-Received: by 2002:a05:600c:c1a:b0:43d:45a:8fca with SMTP id
- 5b1f17b1804b1-43ecfa06fd2mr198409925e9.30.1744123947463; 
- Tue, 08 Apr 2025 07:52:27 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:3daa:5b6d:6ccb:4c71?
- ([2a01:e0a:3d9:2080:3daa:5b6d:6ccb:4c71])
+ AJvYcCUCuVnzuYiUuHdUdmGSUR7/IF9vzbaFLjT0m3nQ3eXrZEy4TnmpCs9bKYMwuEmLVF6AzzPj1GA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywc6gAbMo8LokDewRNSeq8Slx6P/6dqk8EgvB0s57VESXaIkXJl
+ EBDO0giPpdpomM50E/BKBP7GX+FdlDFAsOH4DOYQDFNNy702/WINSsx7lFqIh0eFoZkfsLUeKdN
+ 5cENQEUCKHNtxb/dkg/IElBlqAbSWYR+/K8A/YOyBYX5UKK7R2f05DvljM6Lk8Gk5HLE=
+X-Gm-Gg: ASbGnctwlG0DtXeQdGF8wOQr413W5kt7pfa0hdxEbWBgWhnQINmoaGTbNPbQJ9q1yQ6
+ E2rNGyjcQFbfXCQa4SsSTEGlMWQHi3rxo+UAyXR9zmhp37T7Bm65w4qNUvYJxL7YnIPdDihS0eT
+ BWpIZctw3KoxbKaLQQ2YILseHLhFmwvA4bdyUd1LyQhcYxJqY2/u7GFG+xHvUlHs4XFli/GlJjd
+ 0OnFDeMZjp0eu1kR2JeAGRXBLDecPg6SxsGE/39h/xRGmZmu8d2epn5NQtHjSNKDe/uDpzAsvEx
+ cYS+NNvWar0x6bVwK4/9pqZlE7JzFc5XWiP4wFq4wFosPLBk7k4xX2K8Ohku1vtOFUmajdtN1Cq
+ hpZ4ajo/e15w6fuGqwg==
+X-Received: by 2002:a05:600c:3ecb:b0:43d:7588:66a5 with SMTP id
+ 5b1f17b1804b1-43ecfa06563mr176417585e9.31.1744126573420; 
+ Tue, 08 Apr 2025 08:36:13 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH9pvDOFoFw+TkL80xtEAQXE5xUiTsWE+ydiRkxuYBvAFYxo/cgFXn0v305Pag4ZLOJ28HP1A==
+X-Received: by 2002:a05:600c:3ecb:b0:43d:7588:66a5 with SMTP id
+ 5b1f17b1804b1-43ecfa06563mr176417205e9.31.1744126572989; 
+ Tue, 08 Apr 2025 08:36:12 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec1630de9sm165904965e9.1.2025.04.08.07.52.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Apr 2025 07:52:27 -0700 (PDT)
-Message-ID: <c3bc727d-ff39-4117-bac7-86c73ac69557@linaro.org>
-Date: Tue, 8 Apr 2025 16:52:26 +0200
+ ffacd0b85a97d-39c30226f1fsm15374845f8f.95.2025.04.08.08.36.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Apr 2025 08:36:12 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: update Python requirements
+Date: Tue,  8 Apr 2025 17:36:06 +0200
+Message-ID: <20250408153606.118149-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 2/3] part: efi: add GPT PTE cache used with
- part_get_info_cached() API
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250408-topic-gpt-cache-v2-0-de76e47debb7@linaro.org>
- <20250408-topic-gpt-cache-v2-2-de76e47debb7@linaro.org>
- <0e1b03c0-fb81-478e-a800-0653801a2f5d@gmx.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <0e1b03c0-fb81-478e-a800-0653801a2f5d@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -127,305 +103,61 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08/04/2025 12:57, Heinrich Schuchardt wrote:
-> On 08.04.25 11:13, Neil Armstrong wrote:
->> Implement a simple cache for part_efi to be used by the newly
->> introduced part_get_info_cached() API.
->>
->> The cache simply stores a successfully scanned GPT PTE if called
->> from the part_get_info_cached() ops, and will return the cached
->> data if the blk_desc and lba offset matches, invalidating the
->> cache if not.
->>
->> The cache will only operate if called from the part_get_info_cached()
->> API, all the over calls will operate uncached, making sure we
->> can still update & re-scan the GPT partitions like before.
->>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
->>   disk/part_efi.c | 114 +++++++++++++++++++++++++++++++++++++++++++++++---------
->>   1 file changed, 96 insertions(+), 18 deletions(-)
->>
->> diff --git a/disk/part_efi.c b/disk/part_efi.c
->> index 932d058c184ce6946b7142e7c2d9637b28e4661e..949968fcd30fc18766a023e73f43ca1381dcef89 100644
->> --- a/disk/part_efi.c
->> +++ b/disk/part_efi.c
->> @@ -55,12 +55,58 @@ static inline u32 efi_crc32(const void *buf, u32 len)
->>   static int pmbr_part_valid(struct partition *part);
->>   static int is_pmbr_valid(legacy_mbr * mbr);
->>   static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
->> -            gpt_entry **pgpt_pte);
->> +            gpt_entry **pgpt_pte, bool cache);
->>   static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
->>                        gpt_header *pgpt_head);
->>   static int is_pte_valid(gpt_entry * pte);
->>   static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
->> -              gpt_entry **pgpt_pte);
->> +              gpt_entry **pgpt_pte, bool cache);
->> +
-> 
-> Please, describe the structure and its members.
+Update the Python dependencies to the newest releases.
+This addresses CVE-2024-56326, CVE-2024-56201, CVE-2025-27516 for jinja2.
 
-Ack
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ doc/sphinx/requirements.txt | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
-> 
-> https://docs.kernel.org/doc-guide/kernel-doc.html#structure-union-and-enumeration-documentation
-> 
->> +static struct gpt_pte_cache_data {
->> +    struct blk_desc *desc;
->> +    u64 lba;
->> +    gpt_entry *gpt_pte;
->> +    gpt_header gpt_head;
->> +} gpt_pte_cache;
->> +
-> 
-> Please, describe all functions.
-
-Ack
-
-> 
->> +static void clear_gpt_pte_cache(void)
->> +{
->> +    if (gpt_pte_cache.desc) {
->> +        if (gpt_pte_cache.gpt_pte)
->> +            free(gpt_pte_cache.gpt_pte);
->> +
->> +        memset(&gpt_pte_cache, 0, sizeof(gpt_pte_cache));
->> +    }
->> +}
->> +
->> +static void cache_gpt_pte(struct blk_desc *desc, u64 lba,
->> +              gpt_entry *gpt_pte, gpt_header *pgpt_head)
->> +{
->> +    if (gpt_pte_cache.gpt_pte)
->> +        free(gpt_pte_cache.gpt_pte);
->> +
->> +    gpt_pte_cache.desc = desc;
->> +    gpt_pte_cache.lba = lba;
->> +    gpt_pte_cache.gpt_pte = gpt_pte;
->> +    if (pgpt_head)
->> +        memcpy(&gpt_pte_cache.gpt_head, pgpt_head, sizeof(gpt_header));
->> +}
->> +
->> +static gpt_entry *get_cached_gpt_pte(struct blk_desc *desc, u64 lba,
->> +                     gpt_header *pgpt_head)
->> +{
->> +    if (gpt_pte_cache.desc && gpt_pte_cache.gpt_pte) {
->> +        if (gpt_pte_cache.desc == desc &&
->> +            gpt_pte_cache.lba == lba) {
->> +            memcpy(pgpt_head, &gpt_pte_cache.gpt_head, sizeof(gpt_header));
->> +            return gpt_pte_cache.gpt_pte;
->> +        }
->> +
->> +        clear_gpt_pte_cache();
->> +    }
->> +
->> +    return NULL;
->> +}
->>
->>   static char *print_efiname(gpt_entry *pte)
->>   {
->> @@ -205,7 +251,7 @@ int get_disk_guid(struct blk_desc *desc, char *guid)
->>       unsigned char *guid_bin;
->>
->>       /* This function validates AND fills in the GPT header and PTE */
->> -    if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
->> +    if (find_valid_gpt(desc, gpt_head, &gpt_pte, false) != 1)
->>           return -EINVAL;
->>
->>       guid_bin = gpt_head->disk_guid.b;
->> @@ -224,7 +270,7 @@ static void __maybe_unused part_print_efi(struct blk_desc *desc)
->>       unsigned char *uuid;
->>
->>       /* This function validates AND fills in the GPT header and PTE */
->> -    if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
->> +    if (find_valid_gpt(desc, gpt_head, &gpt_pte, false) != 1)
->>           return;
->>
->>       debug("%s: gpt-entry at %p\n", __func__, gpt_pte);
->> @@ -258,8 +304,13 @@ static void __maybe_unused part_print_efi(struct blk_desc *desc)
->>       return;
->>   }
->>
->> -static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
->> -                        struct disk_partition *info)
->> +static void __maybe_unused part_get_info_cache_free_efi(struct blk_desc *desc)
->> +{
->> +    clear_gpt_pte_cache();
->> +}
->> +
->> +static int _part_get_info_efi(struct blk_desc *desc, int part,
->> +                  struct disk_partition *info, bool cache)
->>   {
->>       ALLOC_CACHE_ALIGN_BUFFER_PAD(gpt_header, gpt_head, 1, desc->blksz);
->>       gpt_entry *gpt_pte = NULL;
->> @@ -271,13 +322,14 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
->>       }
->>
->>       /* This function validates AND fills in the GPT header and PTE */
->> -    if (find_valid_gpt(desc, gpt_head, &gpt_pte) != 1)
->> +    if (find_valid_gpt(desc, gpt_head, &gpt_pte, cache) != 1)
->>           return -EINVAL;
->>
->>       if (part > le32_to_cpu(gpt_head->num_partition_entries) ||
->>           !is_pte_valid(&gpt_pte[part - 1])) {
->>           log_debug("Invalid partition number %d\n", part);
->> -        free(gpt_pte);
->> +        if (!cache)
->> +            free(gpt_pte);
->>           return -EPERM;
->>       }
->>
->> @@ -307,11 +359,23 @@ static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
->>       log_debug("start 0x" LBAF ", size 0x" LBAF ", name %s\n", info->start,
->>             info->size, info->name);
->>
->> -    /* Remember to free pte */
->> -    free(gpt_pte);
->> +    if (!cache)
->> +        free(gpt_pte);
->>       return 0;
->>   }
->>
->> +static int __maybe_unused part_get_info_cached_efi(struct blk_desc *desc, int part,
->> +                           struct disk_partition *info)
->> +{
->> +    return _part_get_info_efi(desc, part, info, true);
->> +}
->> +
->> +static int __maybe_unused part_get_info_efi(struct blk_desc *desc, int part,
->> +                        struct disk_partition *info)
->> +{
->> +    return _part_get_info_efi(desc, part, info, false);
->> +}
->> +
->>   static int part_test_efi(struct blk_desc *desc)
->>   {
->>       ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, legacymbr, 1, desc->blksz);
->> @@ -689,7 +753,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
->>        */
->>       if (is_gpt_valid(desc,
->>                GPT_PRIMARY_PARTITION_TABLE_LBA,
->> -             gpt_head, gpt_pte) != 1) {
->> +             gpt_head, gpt_pte, false) != 1) {
->>           log_debug("Invalid GPT\n");
->>           return -1;
->>       }
->> @@ -706,7 +770,7 @@ int gpt_verify_headers(struct blk_desc *desc, gpt_header *gpt_head,
->>       }
->>
->>       if (is_gpt_valid(desc, (desc->lba - 1),
->> -             gpt_head, gpt_pte) != 1) {
->> +             gpt_head, gpt_pte, false) != 1) {
->>           log_debug("Invalid Backup GPT\n");
->>           return -1;
->>       }
->> @@ -765,9 +829,9 @@ int gpt_repair_headers(struct blk_desc *desc)
->>       int ret = -1;
->>
->>       is_gpt1_valid = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
->> -                     gpt_h1, &gpt_e1);
->> +                     gpt_h1, &gpt_e1, false);
->>       is_gpt2_valid = is_gpt_valid(desc, desc->lba - 1,
->> -                     gpt_h2, &gpt_e2);
->> +                     gpt_h2, &gpt_e2, false);
->>
->>       if (is_gpt1_valid && is_gpt2_valid) {
->>           ret = 0;
->> @@ -1023,12 +1087,13 @@ static int is_pmbr_valid(legacy_mbr *mbr)
->>    * lba is the logical block address of the GPT header to test
->>    * gpt is a GPT header ptr, filled on return.
->>    * ptes is a PTEs ptr, filled on return.
->> + * cache is a bool, true to use the cached gpt_pte from previous call
-> 
-> "use the cache" or "use cached GPT if available"?
-> 
-> It remains unclear what will happen if cache=1 and no entry is found.
-
-Ack, will clarify
-
-> 
-> Best regards
-> 
-> Heinrich
-> 
->>    *
->>    * Description: returns 1 if valid,  0 on error, 2 if ignored header
->>    * If valid, returns pointers to PTEs.
->>    */
->>   static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
->> -            gpt_entry **pgpt_pte)
->> +            gpt_entry **pgpt_pte, bool cache)
->>   {
->>       /* Confirm valid arguments prior to allocation. */
->>       if (!desc || !pgpt_head) {
->> @@ -1036,6 +1101,12 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
->>           return 0;
->>       }
->>
->> +    if (cache) {
->> +        *pgpt_pte = get_cached_gpt_pte(desc, lba, pgpt_head);
->> +        if (*pgpt_pte)
->> +            return 1;
->> +    }
->> +
->>       ALLOC_CACHE_ALIGN_BUFFER_PAD(legacy_mbr, mbr, 1, desc->blksz);
->>
->>       /* Read MBR Header from device */
->> @@ -1081,6 +1152,9 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
->>           return 0;
->>       }
->>
->> +    if (cache)
->> +        cache_gpt_pte(desc, lba, *pgpt_pte, pgpt_head);
->> +
->>       /* We're done, all's well */
->>       return 1;
->>   }
->> @@ -1090,23 +1164,25 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
->>    *
->>    * gpt is a GPT header ptr, filled on return.
->>    * ptes is a PTEs ptr, filled on return.
->> + * cache if a bool, use cached GPT if available
->>    *
->>    * Description: returns 1 if found a valid gpt,  0 on error.
->>    * If valid, returns pointers to PTEs.
->>    */
->>   static int find_valid_gpt(struct blk_desc *desc, gpt_header *gpt_head,
->> -              gpt_entry **pgpt_pte)
->> +              gpt_entry **pgpt_pte, bool cache)
->>   {
->>       int r;
->>
->>       r = is_gpt_valid(desc, GPT_PRIMARY_PARTITION_TABLE_LBA, gpt_head,
->> -             pgpt_pte);
->> +             pgpt_pte, cache);
->>
->>       if (r != 1) {
->>           if (r != 2)
->>               log_debug("Invalid GPT\n");
->>
->> -        if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte)
->> +        if (is_gpt_valid(desc, desc->lba - 1, gpt_head, pgpt_pte,
->> +                 true)
->>               != 1) {
->>               log_debug("Invalid Backup GPT\n");
->>               return 0;
->> @@ -1210,6 +1286,8 @@ U_BOOT_PART_TYPE(a_efi) = {
->>       .name        = "EFI",
->>       .part_type    = PART_TYPE_EFI,
->>       .max_entries    = GPT_ENTRY_NUMBERS,
->> +    .get_info_cache_free    = part_get_info_ptr(part_get_info_cache_free_efi),
->> +    .get_info_cached    = part_get_info_ptr(part_get_info_cached_efi),
->>       .get_info    = part_get_info_ptr(part_get_info_efi),
->>       .print        = part_print_ptr(part_print_efi),
->>       .test        = part_test_efi,
->>
-> 
+diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
+index 13e0327c0f6..01a9d287a7a 100644
+--- a/doc/sphinx/requirements.txt
++++ b/doc/sphinx/requirements.txt
+@@ -1,21 +1,21 @@
+ alabaster==1.0.0
+-babel==2.16.0
+-certifi==2024.8.30
+-charset-normalizer==3.4.0
++babel==2.17.0
++certifi==2025.1.31
++charset-normalizer==3.4.1
+ docutils==0.21.2
+ idna==3.10
+ imagesize==1.4.1
+-Jinja2==3.1.4
++Jinja2==3.1.6
+ MarkupSafe==3.0.2
+-packaging==24.1
+-pip==24.2
+-Pygments==2.18.0
++packaging==24.2
++pip==25.0.1
++Pygments==2.19.1
+ requests==2.32.3
+-six==1.16.0
++six==1.17.0
+ snowballstemmer==2.2.0
+-Sphinx==8.1.3
++Sphinx==8.2.3
+ sphinx-prompt==1.9.0
+-sphinx-rtd-theme==3.0.1
++sphinx-rtd-theme==3.0.2
+ sphinxcontrib-applehelp==2.0.0
+ sphinxcontrib-devhelp==2.0.0
+ sphinxcontrib-htmlhelp==2.1.0
+@@ -23,4 +23,4 @@ sphinxcontrib-jquery==4.1
+ sphinxcontrib-jsmath==1.0.1
+ sphinxcontrib-qthelp==2.0.0
+ sphinxcontrib-serializinghtml==2.0.0
+-urllib3==2.2.3
++urllib3==2.3.0
+-- 
+2.48.1
 
