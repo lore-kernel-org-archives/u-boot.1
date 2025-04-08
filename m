@@ -4,82 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87299C369A4
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 05:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DC88C3600C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 06:07:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6A9E830A0;
-	Tue,  8 Apr 2025 07:57:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id A84268303B;
+	Tue,  8 Apr 2025 08:07:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="HfJMnB4k";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b+IahL9F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84B73830F1; Tue,  8 Apr 2025 07:57:00 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29E3983095
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 07:56:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ id 4BD1983095; Tue,  8 Apr 2025 08:07:09 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C313682FBE
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 08:07:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-af6b02d9e5eso3538090a12.0
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 22:56:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1744091816; x=1744696616;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=whwpo8kqwB/u6lM4dTES14MzneqZ23WfxjZrEYkujsI=;
- b=HfJMnB4khVWwtiDm+ZUMZyCQAz4A2IXknFt0c7ULjAzWcW8xFyEibtM4/Ci67z8Iti
- hyoh6qh6MYealTlIPGHRbEPcQyjiX7nNV7/K9ukFZT4QrUwbXS5s0L9jj+ezGcUR72F3
- zyjl9BSDBTmJLmyCt/Ra4Re3Ws6wqqp7nIYro=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744091816; x=1744696616;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=whwpo8kqwB/u6lM4dTES14MzneqZ23WfxjZrEYkujsI=;
- b=aHA591NThToiwr6X/LCQpj6xv/Q1F4tHu1WfV0oqyjj4aVb8bf1SLfNuNp7crDa5/v
- vO0KDiCYfY6BSxU7WQ2aga2iBgrHi1LDwl7cTtoDIfc4cd+6aiKPOSeHn/Cwk3vdUkmQ
- 3PKlofdC1GozzKFhEqNOe3/itv6mMQQcpmVF9EzNRJ5v+4AGdVvec/UZP6FpOZ3FHW1F
- eKvMj8PACXowf8Hj6NwiMidZle8L24/fZWcFIUqkF/kV2iaB7z787fSAgvmmbslcUiTS
- tlriujXzQMqmu3e6XOTMXJ1y45amINfLCFSWL8ZxIKyUAgOYSTURY1W849VLLz88B2Y4
- +9Jw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhQJ0p/IEG6XqxqhyDr3iVu+DkvSWxHsqkgIIKBpsUGopxBpW342LIYRwsVcNep6w6GdX+5rg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyncmuc7swgAzGHYcLxaOr6kDC0GNww35EMG8vEKDZnhXewYulT
- zth4VhNG8xO6teADmW9b01qHicJm/ZTkX28EyucoxPs3z8/SnmwbxVVwbchXIaaGBbeDplqTo3C
- 8uaIZuZBnA7i/osc0HN1oCBZCaG5BQNfxbxMXDQ==
-X-Gm-Gg: ASbGnctqQ++vTNkuUW262yx7mi6TA5BWZT3NWTGROVIfua8EWs9mWkZShlarKnTXYKA
- RkLDjvvMig2roXmOeWyhcjThPCqLyXg13/K3r6fNjH7iMg+bDV+AXfhy098TdQ60PL0PH5EHIKj
- dpU4xL8AtryQ9QmV/UN6XGP7LdWMIw
-X-Google-Smtp-Source: AGHT+IGXZ53B7au+58VWMgA0MQDB3sTXkOg70/ADztMOSQABPrHnd84bPee5zGvoIlmqmftFsuGNihX+qTJe4o/9iM4=
-X-Received: by 2002:a17:90b:3cc4:b0:301:1d03:93cf with SMTP id
- 98e67ed59e1d1-306a4b84678mr20374928a91.30.1744091816385; Mon, 07 Apr 2025
- 22:56:56 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53866xtw588144
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 8 Apr 2025 01:06:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744092419;
+ bh=peM/cmKimvBfvp8QRbeOcki2zDCQEKYwys1R3BXJ5R4=;
+ h=From:Date:Subject:To:CC;
+ b=b+IahL9FEvTAxicJ2K15kRccdWMxbcwxrmi95VhN3fPFLcazWmaXywsHjbAm5aYl6
+ BolWE0jAI5qcdIJjiRyS18Hu1LmSrNJxwiBSgcl7ABovRu1895pMRIkv3MxAYzK9DL
+ CqPw/EK/qZ75OTI73jiqd2Lhh/+msaHPMHInzo60=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53866x3d079270
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 8 Apr 2025 01:06:59 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 8
+ Apr 2025 01:06:59 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 8 Apr 2025 01:06:58 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53866xR6080407;
+ Tue, 8 Apr 2025 01:06:59 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Tue, 8 Apr 2025 01:06:58 -0500
+Subject: [PATCH] efi_selftest: remove un-needed NULL checks
 MIME-Version: 1.0
-References: <20250315092420.793-1-ansuelsmth@gmail.com>
- <67f42db9.050a0220.16b640.abd2@mx.google.com>
- <CAOf5uwkU_hTEa_D+pEouXmsiQYMTNkHdr+z0boVO43BW7wkA7g@mail.gmail.com>
- <CAOMZO5BFntJ4kFFrtrFRL77RsM18LtjJDv1kHWSZViZMW1m3XQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5BFntJ4kFFrtrFRL77RsM18LtjJDv1kHWSZViZMW1m3XQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 8 Apr 2025 07:56:45 +0200
-X-Gm-Features: ATxdqUE1-VnvDWWBN4w8m5YYVR65xQuwU10XVhhhAImJ3meutBlrxUOLZiS4wF4
-Message-ID: <CAOf5uw=Sueqm+5XbqpjVJFVzLRnHZZyU6hV+=07DDXSEqqwApg@mail.gmail.com>
-Subject: Re: [RESEND PATCH] clk: fix crash on clk_set_rate clean rate cache
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Tero Kristo <t-kristo@ti.com>, U-Boot-Denx <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250408-efi-selftest-fixes-v1-1-69ae449160f2@ti.com>
+X-B4-Tracking: v=1; b=H4sIAAG99GcC/x3L2wpAUBBG4VfRXJsax/AqcuHwb6aE9khK3t3O5
+ ddqPWTwCqMmesjjUtN9C0jiiMal32awTsGUSlpILhXDKRtWd8JOdnrDWPISQy2Z1ElJYTw8/hC
+ +tnvfD72IQTFkAAAA
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
+X-Mailer: b4 0.13.0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +81,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Because we've already returned early in the event 'handle' is NULL we
+don't need these extra not NULL checks. Remove them
 
-Il lun 7 apr 2025, 22:03 Fabio Estevam <festevam@gmail.com> ha scritto:
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+---
+Hello everyone!
 
-> On Mon, Apr 7, 2025 at 4:58=E2=80=AFPM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->
-> > Can you review it and pick if needed?
->
-> This is not assigned to me in patchwork as it is not i.MX related.
->
-> Someone else needs to handle it.
->
+I noticed the extra NULL check and decided to clean it up. They could be 
+considered an extra precaution but the other calls above are unguarded 
+so it made sense to remove them. 
 
-I was thinking that you are handle clk tree too. My mistake
+Happy Hacking
+~Bryan
+---
+ lib/efi_selftest/efi_selftest_hii.c | 84 ++++++++++++++++---------------------
+ 1 file changed, 36 insertions(+), 48 deletions(-)
 
-Michael
+diff --git a/lib/efi_selftest/efi_selftest_hii.c b/lib/efi_selftest/efi_selftest_hii.c
+index c363df466dc11..228dc29695078 100644
+--- a/lib/efi_selftest/efi_selftest_hii.c
++++ b/lib/efi_selftest/efi_selftest_hii.c
+@@ -609,14 +609,12 @@ static int test_hii_database_get_package_list_handle(void)
+ 	result = EFI_ST_SUCCESS;
+ 
+ out:
+-	if (handle) {
+-		ret = hii_database_protocol->remove_package_list(
+-				hii_database_protocol, handle);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("remove_package_list returned %u\n",
+-				     (unsigned int)ret);
+-			return EFI_ST_FAILURE;
+-		}
++	ret = hii_database_protocol->remove_package_list(
++			hii_database_protocol, handle);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("remove_package_list returned %u\n",
++			     (unsigned int)ret);
++		return EFI_ST_FAILURE;
+ 	}
+ 
+ 	return result;
+@@ -711,14 +709,12 @@ static int test_hii_string_new_string(void)
+ 	result = EFI_ST_SUCCESS;
+ 
+ out:
+-	if (handle) {
+-		ret = hii_database_protocol->remove_package_list(
+-				hii_database_protocol, handle);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("remove_package_list returned %u\n",
+-				     (unsigned int)ret);
+-			return EFI_ST_FAILURE;
+-		}
++	ret = hii_database_protocol->remove_package_list(
++			hii_database_protocol, handle);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("remove_package_list returned %u\n",
++			     (unsigned int)ret);
++		return EFI_ST_FAILURE;
+ 	}
+ 
+ 	return result;
+@@ -792,14 +788,12 @@ static int test_hii_string_get_string(void)
+ 	result = EFI_ST_SUCCESS;
+ 
+ out:
+-	if (handle) {
+-		ret = hii_database_protocol->remove_package_list(
+-				hii_database_protocol, handle);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("remove_package_list returned %u\n",
+-				     (unsigned int)ret);
+-			return EFI_ST_FAILURE;
+-		}
++	ret = hii_database_protocol->remove_package_list(
++			hii_database_protocol, handle);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("remove_package_list returned %u\n",
++			     (unsigned int)ret);
++		return EFI_ST_FAILURE;
+ 	}
+ 
+ 	return result;
+@@ -851,14 +845,12 @@ static int test_hii_string_set_string(void)
+ 	result = EFI_ST_SUCCESS;
+ 
+ out:
+-	if (handle) {
+-		ret = hii_database_protocol->remove_package_list(
+-				hii_database_protocol, handle);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("remove_package_list returned %u\n",
+-				     (unsigned int)ret);
+-			return EFI_ST_FAILURE;
+-		}
++	ret = hii_database_protocol->remove_package_list(
++			hii_database_protocol, handle);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("remove_package_list returned %u\n",
++			     (unsigned int)ret);
++		return EFI_ST_FAILURE;
+ 	}
+ 
+ 	return result;
+@@ -918,14 +910,12 @@ static int test_hii_string_get_languages(void)
+ 	result = EFI_ST_SUCCESS;
+ 
+ out:
+-	if (handle) {
+-		ret = hii_database_protocol->remove_package_list(
+-				hii_database_protocol, handle);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("remove_package_list returned %u\n",
+-				     (unsigned int)ret);
+-			return EFI_ST_FAILURE;
+-		}
++	ret = hii_database_protocol->remove_package_list(
++			hii_database_protocol, handle);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("remove_package_list returned %u\n",
++			     (unsigned int)ret);
++		return EFI_ST_FAILURE;
+ 	}
+ 
+ 	return result;
+@@ -991,14 +981,12 @@ static int test_hii_string_get_secondary_languages(void)
+ 	result = EFI_ST_SUCCESS;
+ 
+ out:
+-	if (handle) {
+-		ret = hii_database_protocol->remove_package_list(
+-				hii_database_protocol, handle);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("remove_package_list returned %u\n",
+-				     (unsigned int)ret);
+-			return EFI_ST_FAILURE;
+-		}
++	ret = hii_database_protocol->remove_package_list(
++			hii_database_protocol, handle);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("remove_package_list returned %u\n",
++			     (unsigned int)ret);
++		return EFI_ST_FAILURE;
+ 	}
+ 
+ 	return result;
 
->
+---
+base-commit: 2015662a670ca69b5b6636f518c0dde9c229f92d
+change-id: 20250408-efi-selftest-fixes-046eb9030916
+
+Best regards,
+-- 
+Bryan Brattlof <bb@ti.com>
+
