@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755C6C3600C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 12:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2444C3600C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 12:17:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B37C882E86;
-	Tue,  8 Apr 2025 14:14:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69B8E82ECC;
+	Tue,  8 Apr 2025 14:17:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ATCzhopd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TLNd23ek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 252D182ECC; Tue,  8 Apr 2025 14:14:00 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 680F882EFC; Tue,  8 Apr 2025 14:17:33 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B113382E50
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 14:13:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5523882E86
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 14:17:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43cfb6e9031so49775265e9.0
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 05:13:57 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43d04dc73b7so59516495e9.3
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 05:17:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744114437; x=1744719237; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744114651; x=1744719451; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6TP8w4i+SCVHwcwGKZitP9mBYBJjumAQ7LXmmvgftsk=;
- b=ATCzhopdLgPfVoUBEAOtLtEGpHRNxjAY9kYGveP2ljWmHSU7EzLhuqaEJPrjCGxOmf
- ci1ZP5C5l6mtfXrZmLwvEsLAgDEZtfZbkdcxGqW6eHyGZ+PFe1T5vmgHtnqj9j0E6UIj
- hAL/dxkLCKGgiIJVo0Bw6KMdenPrx7V+TW6S1WN3cAgOmDnWQrQRk9uqpLgiFV47wMtn
- uNt9Nft4+ClMsBgxt1rd9DEPl8yKztpH1b3YNkbP246snrWPrI2qhSEcY+0AgcnmSaKK
- 1BUMOC6ZG+pHTCu01b3UpmnUWVxlgLF6eU5v4Uk4LXV4NGYOoxa1l0eG7p9Bu04d+cCH
- /M6w==
+ bh=fKUJMqFgqWa2rebnZ6n4m/cdF5W39Ag59EsWfxN0EgQ=;
+ b=TLNd23ekkhnqZ/H/2U6KnPedQhAkTHu/2Y22Rhp6V0YliMlqOmcwqJnj73cKiBsMA+
+ lrqCwHGqEOsTRuHTjNKXpF8MYUHb5BqX6YLlEysnyAsuK32VyyPgBBCs6JX7e5X9uPE4
+ qZnNFiyQxdYU6FZWL75EeueE2Ug3ySoYuKvT1aGt86Wfc+iCM9b8NKcQiMsdTLkwGuai
+ BzgCZ1ENbsCogcgKNVb/sTqfqkPSNma0DmvRxwIBILtQ0ZoKLk1gEKqeUdg2qyQlYKMP
+ 6ffOOLEqUJagwm3xgGv/s2fviJ+E+rqpoxBQlaGADamo185lB2nJFzWY0ufNPm1Kicbu
+ U4VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744114437; x=1744719237;
+ d=1e100.net; s=20230601; t=1744114651; x=1744719451;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6TP8w4i+SCVHwcwGKZitP9mBYBJjumAQ7LXmmvgftsk=;
- b=Wt3FN6pWIKfIxzdiOZsgoOhAbIxFtvg6xK3VfvKRG4jmV/2RmlOCcPntYzdVLfXi/w
- /+v0PUdAoapHi0FDAubimMwatu1PIEgxuecTILoIA4Cwo0fQiZnWl/LWmc1h9K92yJil
- 4/NI1UXQr8nsd9yrRySycN9AriYsCffw7jj8qx6D6cWvYs1Q/UzYmUD3x4FOu942Uyiu
- RlgKveXqpGQSDZVEZIA9A21CxVK6e46wjPRNDIymnm7SuH/HyjqwwexVeXfFS03JNscp
- Fc/fKjRahXHA0nxqLl9WEGR0xRfbSJ4H1HybQKi4e4x4wep06hOBOIxV0DEeBVLecI+9
- OM4A==
-X-Gm-Message-State: AOJu0YwibOjKDJsFkBd2/CdD4YD749QSQYe7Y0zwRNUvzgpAm/SU8cfT
- 207MZdH9e7Jz6lyFU5CtjL3dftGNcmv4guE5T3xV/VXusyOy13Jsf+LPgZf9tqE=
-X-Gm-Gg: ASbGnctI7m6KSkroPjDd3qzmNZ88q9HLI70ncO02u+bDoe/wC6Z7m71T2xI7rhs/lNe
- HeOi6QUxqioyjYo+DPq9dj5MDLbQyg/XZgJdJeOBnMYeCV9plIuyyfyKuc6r4lnxVXIVcVMeAbk
- ffETDChhtR6inst1DLvpZyPOCfBZLTJww0cB0LWCK1Mh5VSJ0v0dZ/Wp7yflWrJQ9lMxNjXXL+3
- aOhSwVuuR7BUFjg1zQuS2L2r/lAYBovA5ZLyb7LLTlm9++pqNQhvj5O8mUG56jLf6PNqIZMJdir
- curctMDNpaR81diAFxo7lIpS7qTwRSucTUatwhRup/Hqda6QNaBwTNCKXazDxqdeOtMmvE/D3eZ
- jl+HjGK8=
-X-Google-Smtp-Source: AGHT+IH6DyzXxD3XonRQ5wKOAIGAKzmoXvMWIibf+eccoUGoVbWAOkIbEM7r8fEhVfDpR1a1fqFc3w==
-X-Received: by 2002:a05:600c:4f54:b0:43c:fbe2:df3c with SMTP id
- 5b1f17b1804b1-43f17260f66mr11652205e9.26.1744114437206; 
- Tue, 08 Apr 2025 05:13:57 -0700 (PDT)
+ bh=fKUJMqFgqWa2rebnZ6n4m/cdF5W39Ag59EsWfxN0EgQ=;
+ b=CcXUzYcbwrw1O0YCWmDZ3HBULcNCereaDauqGjVky85w7KCR8N6Q6ga4OqsR5kqgfe
+ PGs0MxuYNp9xxzkwcpLq9v0suuNfq+60ojLXQ6IUHTU3j1buKBdjcSmM1SyR73QFNhNm
+ dU8YMMTF5N+v7PijHO2tmXkT0loKWOS2sFpCFDlS1gop2ayxC94hjHesEDH8lUnFZ8Gy
+ 9u0W77srNbcJOFbCHb5fK6FNRAIQ7SPjUk4EXMN85oag67j8G7fYKxTWg4Rx8RNoTMk1
+ cshfRnDLx49HbSHPFsJNqxoDdht306WF9CBbgQArPNIb7o20qoG92jgCfCsVbhekYrGp
+ qNug==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhJKr/qiF4DkVOZ1RuLxDSl037NUPaTS0UFwYvfkHO0oRNBzv+fNwpPq7x4LzKiBd+IsUx2Uw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiDGaoJ1CR2cWlsdW9BDYw61w6qbMFlsHb7appsvOztEWeQNjk
+ 7I0YQ6vjXTP8KoI/3V5+jiOwjbul0Stk5EOZtQKVIPd3mrT3MvDuMJKpbFU7YTs=
+X-Gm-Gg: ASbGncu5aWnyWqQ9KkvgIzVY/ZTbxf0F4IYe/U7eckKg2Ija8ls6gf42Vdwc4mk54rW
+ 8NHekW40AuoEqyDcz6kv5DxAytzjtZAErb1kQqXwUpjc8ojq/UZG79Rx5M3ww5eeNOPNV6DoRr7
+ cNrKWkEWls0UUH5EHTN98y0JCOC3LqWzVf28/Jdq7PBopKqLuqcsTPnvTlxbSD+R1DcTy9R+kfH
+ 52u0PHfpfrNGLk9fDxEe+42AP2kWrxkJbicjx6KHRDBlcJLBHC8HjwuLY6WZEFynMsWb09ti7zL
+ TeHy7LNPm3CEi6b73Kvt/WB+PygK8Yh8NfMQSLB7dKiiqnuTJc3xYghAx41MOkvNUp6cDjWmOBf
+ PXwwdA74=
+X-Google-Smtp-Source: AGHT+IFhj4MlxS2PV6TNU5AaVke5DjVzUNcjF08Tkr/6DgZ7qMXSt5+MOAutFNEeYSnKnI6TZu4MPA==
+X-Received: by 2002:a05:6000:420e:b0:39a:e71d:ee34 with SMTP id
+ ffacd0b85a97d-39d0de67093mr12187584f8f.37.1744114650740; 
+ Tue, 08 Apr 2025 05:17:30 -0700 (PDT)
 Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c301a6a60sm14457017f8f.29.2025.04.08.05.13.55
+ ffacd0b85a97d-39c3020d6c8sm14634845f8f.73.2025.04.08.05.17.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Apr 2025 05:13:56 -0700 (PDT)
-Message-ID: <179cca81-d835-4966-b992-361bc1d08d03@linaro.org>
-Date: Tue, 8 Apr 2025 14:13:55 +0200
+ Tue, 08 Apr 2025 05:17:30 -0700 (PDT)
+Message-ID: <baa7e896-a286-47ed-bd9a-18338978fc0d@linaro.org>
+Date: Tue, 8 Apr 2025 14:17:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] qcom_defconfig: Disable MMC HS200 mode support
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com,
+Subject: Re: [PATCH 1/2] arm: dts: Add override for RB1
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de
+Cc: neil.armstrong@linaro.org, trini@konsulko.com,
  Sumit Garg <sumit.garg@oss.qualcomm.com>
 References: <20250407132810.35149-1-sumit.garg@kernel.org>
- <20250407132810.35149-3-sumit.garg@kernel.org>
- <510b1e90-bf1e-4a7b-8a86-c8fbaf485fb6@linaro.org> <Z_SmE-gQzzs5HJqi@sumit-X1>
+ <20250407132810.35149-2-sumit.garg@kernel.org>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <Z_SmE-gQzzs5HJqi@sumit-X1>
+In-Reply-To: <20250407132810.35149-2-sumit.garg@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,65 +105,39 @@ X-Virus-Status: Clean
 
 
 
-On 4/8/25 06:29, Sumit Garg wrote:
-> On Mon, Apr 07, 2025 at 04:30:44PM +0200, Caleb Connolly wrote:
->>
->>
->> On 4/7/25 15:28, Sumit Garg wrote:
->>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>>
->>> Currently the msm_sdhci doesn't yet support DLL configurations which are
->>> required to enable bus speeds greater that 100MHz. So disable HS200 mode
->>> support as of now as it requires bus speeds of 200MHz.
->>>
->>> This should fix eMMC issues reported on RB1.
->>
->> This fixes the write corruption issues? Nice find!!
+On 4/7/25 15:28, Sumit Garg wrote:
+> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > 
-> Yeah, thanks.
+> Add U-Boot override for RB1 to for USB in host mode as OTG mode isn't
+> supported. Also, disable sdhc_2 as it's currently not supported, sdhc_1
+> works fine though.
 > 
->>
->> Is this a problem on ALL Qualcomm platforms? the sdcard seems to work fine
->> on other boards, would this reduce their performance?
+> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> ---
+>   arch/arm/dts/qrb2210-rb1-u-boot.dtsi | 11 +++++++++++
+>   1 file changed, 11 insertions(+)
+>   create mode 100644 arch/arm/dts/qrb2210-rb1-u-boot.dtsi
 > 
-> Yes this problem should affect all Qualcomm platforms but it hasn't been
-> seen there as mostly SD cards available don't support HS200 mode. The SD
-> cards usually works in high speed mode whose performance remains
-> unaffected by this change. It only affects RB1/RB2 as eMMC flash on
-> these support HS200 mode but the U-Boot driver currently is incapable of
-> supporting that.
+> diff --git a/arch/arm/dts/qrb2210-rb1-u-boot.dtsi b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..1e136ee405a
+> --- /dev/null
+> +++ b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +/* This is usually OTG but U-Boot doesn't support that properly */
+> +&usb_dwc3 {
+> +	dr_mode = "host";
+> +};
+> +
+> +/* SDHC_2 isn't supported in U-Boot as of now */
 
-Ok awesome. Could you include this info in the commit message? Then
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-Kind regards,>
-> -Sumit
-> 
->>
->>>
->>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>> ---
->>>    configs/qcom_defconfig | 1 -
->>>    1 file changed, 1 deletion(-)
->>>
->>> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
->>> index a2b54b95f19..537806450dc 100644
->>> --- a/configs/qcom_defconfig
->>> +++ b/configs/qcom_defconfig
->>> @@ -81,7 +81,6 @@ CONFIG_QCOM_HYP_SMMU=y
->>>    CONFIG_MISC=y
->>>    CONFIG_NVMEM=y
->>>    CONFIG_I2C_EEPROM=y
->>> -CONFIG_MMC_HS200_SUPPORT=y
->>>    CONFIG_MMC_SDHCI=y
->>>    CONFIG_MMC_SDHCI_ADMA=y
->>>    CONFIG_MMC_SDHCI_MSM=y
->>
->> -- 
->> Caleb (they/them)
->>
-
+I'd rather avoid disabling this here, I guess it's just missing clocks 
+and regulators which doesn't justify modifying DT. An error that mmc1 
+couldn't be enabled seems fine to me?> +&sdhc_2 {
+> +	status = "disabled";
+> +};
 -- 
 Caleb (they/them)
 
