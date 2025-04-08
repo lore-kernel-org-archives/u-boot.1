@@ -4,80 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E6EC369A1
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 20:21:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45CE7C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 20:23:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4379D82991;
-	Tue,  8 Apr 2025 22:21:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AB1BE82161;
+	Tue,  8 Apr 2025 22:23:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CietJYF3";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="dsn8dC6z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46F03820B0; Tue,  8 Apr 2025 22:21:48 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC1A3822D7; Tue,  8 Apr 2025 22:23:00 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAB0882161
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 22:21:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 276158213E
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 22:22:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-2c81fffd523so1935508fac.0
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 13:21:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744143704; x=1744748504; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3clR/jZ/5cRPXViuuKLFHYl9iBRpnql3VireViKjELI=;
- b=CietJYF3pWyelBxOqGo4A+4TR6O4t6Z/FdfGPxU6/GsonvJIld1w34yLU7RJBiPd2W
- Vi1gstoWEd/dutd6MSnLrXtbVzqr4G7F8VWS7MXnuKhSzq2sDqda9D5MkWO2v53ZpRci
- 7/mPWtDRFGLwzRKctYtpNytI9ES1IF9e4xaiE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744143704; x=1744748504;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3clR/jZ/5cRPXViuuKLFHYl9iBRpnql3VireViKjELI=;
- b=wd+HDcTgmxzTDtGqzz/YT/fYam6t4OyDfTfpOF3Cdj8JRfbMQD9Ll2Ve0zwThkwP2W
- oULFCzSgULn5a8UUDoBrENUFPme3u/dXkkgMhHS6h2N3HgU1+vDgPVh7p+AmQfZcyv7t
- Bt3KhzJQ3hECJWAjY9gxAdsHxb6CV6JhWhG5rDOFRWFTk/5JtZrUSPfHNQtKnj508dg+
- lTY8MQoaplBILr8m3SeD7dV3kbNqxdm76o9WO2EoHkhfDdLcKqf3iqTPaENKeLgn5M4g
- HlvJ5DV3DKE6uxmJfg6xJ9WtnYr/ywQzfM0h9N8HBpgGRhbz5Z7jJLQmPSX6Ujz8VBwQ
- zTyg==
-X-Gm-Message-State: AOJu0YwXsGoFiAEH225CIL+bg4RVnQPK9r8Q/7ihU/Pk467FoRFfNs1f
- ykp8HCPiKtK8Np1TtcCrmIWN/N4cREScAjq7T4MFjoXwTdvE32IzmzUqHCSDtkrksZHcxvRHBu0
- s
-X-Gm-Gg: ASbGnctCbCtge5+e2KDs+NLVl5VuWDFQCAA8n1NSoschrFWjhn2fwI8idJjP2q46UDI
- gvQcTwafFqGbQwymn5sR25W0YPuww9gFgnwyOvJ3Kn/319iaAZWnJDSQTwgCTRuqPqEzAnf9wFl
- JPmzBDu6RutQ4cYic7puU69U33IzXEcuh7TblCUMl4el1W+aKdfEqMJpBGvlHbOf9p0lDmhc4eN
- X+l3lELntRrbnuEupzHmG6MQ1Qku9pUR5O1G5v4IISaq3BYjcTja85XX0y4br/3RCnStGBD8aya
- NfKKzW9DYJ9AR3+M+IbW/3R4pzNHGD3UyZmGT4TDV43yoUt8wq2f+uOAr32DXPzYRw+yyCkY4Oi
- WhZ+PH9p6
-X-Google-Smtp-Source: AGHT+IF/CTbdjM5KLAV48h5MqWyTfgVjdwyJvSaJThc7JpaTvAfFIu7vg9x+/JWZXZ6Ha+k5l1PAWA==
-X-Received: by 2002:a05:6870:fe81:b0:2c2:542b:bce4 with SMTP id
- 586e51a60fabf-2d08dcdd60amr255632fac.8.1744143704448; 
- Tue, 08 Apr 2025 13:21:44 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e6517724fsm582391a34.19.2025.04.08.13.21.43
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 13:21:43 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH 2/2] Dockerfile: Download the Arm FVP and extract it
-Date: Tue,  8 Apr 2025 14:21:41 -0600
-Message-ID: <20250408202141.1434754-2-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250408202141.1434754-1-trini@konsulko.com>
-References: <20250408202141.1434754-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id D08091F9EA;
+ Tue,  8 Apr 2025 22:22:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1744143777;
+ bh=WY3Vl8VoDfq14PzHzwv4Wh82RmxhAKPAOSeM00t4RX4=; h=From:To:Subject;
+ b=dsn8dC6zsLTWy/ikXN8LgWi3Culeb5PhHvipLMYFTCobKPQxwNkvPXu93TgR/LAyi
+ gqpKY9Oc7W8kYfu1z8Wb+2IsEY4X+eTDOPk0dkUGyvIuM3lNvEnZyF8iTsBZ7XieSY
+ mzeoDWlFVU/IxS/Xjs1UN9FFPVEGbAffE/oxg1UyHHE8zRF+h74Bi+I+2fYFFolb3c
+ SmUtwYqnCuNV8yQUvvpXMne/n/TxAte/cNVrnOk0YKYjrOg0o19AVkJ8hDstOaQLMl
+ QvMPHChgn+76YXCKO/3Muws/z8tZUYkGAqztaBbLhd0wHJevhb/vn5zmRET8I1PK9O
+ 7/t6DBwvZsOJg==
+Date: Tue, 8 Apr 2025 22:22:52 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Vitor Soares <ivitro@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>,
+ Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/3] Add support for Toradex SMARC i.MX8MP
+Message-ID: <20250408202252.GA5336@francesco-nb>
+References: <20250407130436.223645-1-ivitro@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250407130436.223645-1-ivitro@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,29 +68,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are some reference platforms from Arm which are not found in QEMU
-but instead in the FVP tool. As we can make use of this in CI later on,
-download and extract it in our Dockerfile today.
+On Mon, Apr 07, 2025 at 02:04:33PM +0100, Vitor Soares wrote:
+> From: Vitor Soares <vitor.soares@toradex.com>
+> 
+> This series adds support for the new Toradex SMARC i.MX8MP
+> System-on-Module (SoM), along with necessary
+> updates to Toradex config block and device tree synchronization.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- tools/docker/Dockerfile | 3 +++
- 1 file changed, 3 insertions(+)
+...
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 3b0c403618a8..260af61bd3db 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -237,6 +237,9 @@ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/t
- 	cp fiptool /usr/local/bin && \
- 	rm -rf /tmp/tf-a
- 
-+# Download the Arm Architecture FVP platform. This file is double compressed.
-+RUN wget -O - https://developer.arm.com/-/cdn-downloads/permalink/FVPs-Architecture/FM-11.28/FVP_Base_RevC-2xAEMvA_11.28_23_Linux64.tgz | gunzip -dc | tar -C /opt -x
-+
- # Build genimage (required by some targets to generate disk images)
- RUN wget -O - https://github.com/pengutronix/genimage/releases/download/v14/genimage-14.tar.xz | tar -C /tmp -xJ && \
- 	cd /tmp/genimage-14 && \
--- 
-2.43.0
+> Vitor Soares (3):
+>   arm: dts: imx8mp: sync with Linux v6.15-rc1
+>   toradex: tdx-cfg-block: add 0096 Toradex SMARC iMX95
+>   board: toradex: add Toradex SMARC iMX8MP
+
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
