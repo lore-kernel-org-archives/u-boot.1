@@ -4,64 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C20A2C369A4
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 16:22:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A775C369A2
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 17:05:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED6BD82B45;
-	Tue,  8 Apr 2025 18:22:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id DAF4682CEA;
+	Tue,  8 Apr 2025 19:05:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="PkOcAt07";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hp3HlICb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2677682C38; Tue,  8 Apr 2025 18:22:01 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF3D82AA3
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 18:21:58 +0200 (CEST)
+ id B9D6383327; Tue,  8 Apr 2025 19:05:32 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EE2582CB5
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 19:05:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 9683E25C17;
- Tue,  8 Apr 2025 18:21:58 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xCOKunNgl4ru; Tue,  8 Apr 2025 18:21:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1744129317; bh=RW6fmFvNXQqRzDvXs6sGp9eCoO6aKOebE0b3SATo/b4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=PkOcAt07HCcC/imuhvwZPAyTJkYdsiAEckWLVdCQ5wRAY/tcAlOkAWbM5NKmxh+BK
- Rw1G+kDEFzgi9HcHE7qTQTq8dGsCYSet/KZB9PfgBT4PA/9vCluGw082zarMi5KQRe
- hNDGS2Rofq0UG9bYyOqStNpgpHu7StC5vp4Ze1w9toKRlyTz1d7rfw/NTnazRYFzbz
- yqtviiqezJqbxTGQ/NsclHMl7SMQ7vetWCw48KL8o+/51ydzIcPno4VuFzfeAgv1gX
- hQ8KqkGlueICriiFaf2YzHxuK2XP+L4DtcgUSmj/rpCcJfFMIUx7VKENzLCsTIefuc
- brXRkG5qXHSGg==
-Date: Tue, 8 Apr 2025 16:21:19 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Trevor Woerner <twoerner@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marex@denx.de>, Paul Kocialkowski <contact@paulk.fr>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Lukas Funke <lukas.funke@weidmueller.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] spl: riscv: Disable SPL_BINMAN_UBOOT_SYMBOLS by
- default
-Message-ID: <Z_VM_5f5-m9SHX51@pie>
-References: <20250407033744.4025-1-ziyao@disroot.org>
- <20250407033744.4025-2-ziyao@disroot.org>
- <CAFLszTjmabVKuHF8Ym1OENiiBZrSTd2vVjWvHcQkb552qAuhwg@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 538H5RLZ1268889
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 8 Apr 2025 12:05:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744131928;
+ bh=z4gt8qan99c7SONQdQlhAQWUCU8+OHuLnsYgmfPmwQg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=hp3HlICbA26QBFvedxApU5XOSa8pcprXk03op2fIck46sp0uhQSza7Nwt2AmaZazr
+ 1BY224MFi2MWPMazwP3q+rFONqkCygswzQ2N5vyNvwiNyxxQkWzHpoEXldLuPgepdY
+ bdk73NcUWsUY5sETZQ47LyoL9x5d8Uyd/tI6X5q8=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 538H5R2J066808
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 8 Apr 2025 12:05:27 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 8
+ Apr 2025 12:05:27 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 8 Apr 2025 12:05:27 -0500
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 538H5RjO105590;
+ Tue, 8 Apr 2025 12:05:27 -0500
+From: Judith Mendez <jm@ti.com>
+To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>
+CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH 2/5] mmc: am654_sdhci: Fix HIGH_SPEED_ENA
+Date: Tue, 8 Apr 2025 12:05:24 -0500
+Message-ID: <20250408170527.2832563-3-jm@ti.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250408170527.2832563-1-jm@ti.com>
+References: <20250408170527.2832563-1-jm@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjmabVKuHF8Ym1OENiiBZrSTd2vVjWvHcQkb552qAuhwg@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,75 +81,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 07, 2025 at 10:50:07PM +1200, Simon Glass wrote:
-> Hi Yao,
-> 
-> On Mon, 7 Apr 2025 at 15:38, Yao Zi <ziyao@disroot.org> wrote:
-> >
-> > The default binman configuration of RISC-V wraps proper U-Boot into a
-> > FIT image instead of shipping a plain image, thus there's no
-> > "u_boot_any" entry by default. Let's disable the option to prevent
-> > binman from looking for a plain proper U-Boot image, failing the build
-> > with message like
-> >
-> >   Section '/binman/spl-img': Symbol '_binman_u_boot_any_prop_size'
-> >      in entry '/binman/spl-img/mkimage/u-boot-spl/u-boot-spl-nodtb':
-> >        Entry 'u-boot-any' not found in list (u-boot-spl-nodtb,
-> >        u-boot-spl-dtb,u-boot-spl,mkimage,spl-img)
-> 
-> Do you know where the symbol is being referenced? This sounds like a bug to me.
-> 
-> It is likely to be spl_get_image_pos(), perhaps called from
-> spl_set_header_raw_uboot().
+High Speed enable bit switches data launch from the falling
+clock edge (half cycle timing) to the rising clock edge (full
+cycle timing). For all SD UHS modes, data launch must happen
+at the rising clock edge, so set HIGH_SPEED_ENA for SDR12 and
+SDR25 modes. For all HS modes, data launch must happen at the
+falling clock edge, so do not set HIGH_SPEED_ENA for MMC_HS_52.
 
-The symbol is referenced in common/spl/spl.c:54,
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+ drivers/mmc/am654_sdhci.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-	#if CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS)
-	/* See spl.h for information about this */
-	#if defined(CONFIG_SPL_BUILD)
-	binman_sym_declare(ulong, u_boot_any, image_pos);
-	binman_sym_declare(ulong, u_boot_any, size);
-	#endif
+diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
+index e4fa8a88565..28d82afd012 100644
+--- a/drivers/mmc/am654_sdhci.c
++++ b/drivers/mmc/am654_sdhci.c
+@@ -412,8 +412,7 @@ static void am654_sdhci_write_b(struct sdhci_host *host, u8 val, int reg)
+ 		 */
+ 		case SD_HS:
+ 		case MMC_HS:
+-		case UHS_SDR12:
+-		case UHS_SDR25:
++		case MMC_HS_52:
+ 			val &= ~SDHCI_CTRL_HISPD;
+ 		default:
+ 			break;
+-- 
+2.49.0
 
-> If you are using FIT that function should not be called.
-
-The place where binman_sym() is used isn't where an entry in .binman_sym
-section is introduced. Instead, binman_sym_declare() actually defines
-the entry.
-
-So whether spl_get_image_pos() is invoked doesn't affect the failure,
-since in both cases binman_sym_declare() puts an entry into .binman_sym,
-confusing binman.
-
-imho SPL_BINMAN_UBOOT_SYMBOLS should depend on !SPL_LOAD_FIT in an ideal
-world, but I'm not sure the impact on current codebase thus limited the
-change to RISC-V only.
-
-Best regards,
-Yao Zi
-
-> >
-> > Signed-off-by: Yao Zi <ziyao@disroot.org>
-> > ---
-> >  common/spl/Kconfig | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > index 7d6780936d1..356ddab38de 100644
-> > --- a/common/spl/Kconfig
-> > +++ b/common/spl/Kconfig
-> > @@ -214,6 +214,8 @@ config SPL_BINMAN_UBOOT_SYMBOLS
-> >         bool "Declare binman symbols for U-Boot phases in SPL"
-> >         depends on SPL_BINMAN_SYMBOLS
-> >         default n if ARCH_IMX8M || ARCH_IMX8ULP || ARCH_IMX9
-> > +       # A FIT image is created with default binman configuration of RISC-V
-> > +       default n if RISCV
-> >         default y
-> >         help
-> >           This enables use of symbols in SPL which refer to U-Boot phases,
-> > --
-> > 2.49.0
-> >
-> 
-> Regards,
-> Simon
