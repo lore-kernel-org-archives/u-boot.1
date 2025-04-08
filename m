@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41068C36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 21:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F72C369A1
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 21:57:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2639F833C0;
-	Tue,  8 Apr 2025 23:07:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BAC2D820E3;
+	Tue,  8 Apr 2025 23:57:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IWi3FRFD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FN7HtOAm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7881882F7C; Tue,  8 Apr 2025 23:07:38 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04C42833C0
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 23:07:36 +0200 (CEST)
+ id AB14E82AA3; Tue,  8 Apr 2025 23:57:44 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 57AE1820E2
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 23:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-603fd257386so1384059eaf.1
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 14:07:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744146455; x=1744751255; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=RaKEFVZam/OiFfKG667AjntkOrlBIngbRkhW0T+raUE=;
- b=IWi3FRFDzjjLi2eYCMazc/oTwyhS9enHdA24C8683YeXuGfZWqexNUWoXEbQ13R1SO
- /UL7qy33xZa8F+Xz41n3M7eweZKQlMF4bHGsQ99+ZFODKQTNAnRbAAoWhXh82R9gKTVn
- bylZSDMUDCS1gWLVAbcddCTCWhndoDQrhrozo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744146455; x=1744751255;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RaKEFVZam/OiFfKG667AjntkOrlBIngbRkhW0T+raUE=;
- b=CoP85cxwlfTW+1LCTpq2Re1dRVC1wviagIlTiQuBKBxx9N72W9HASE+XRj2SQVX27e
- zYj6t5z35MNq3yQy5Yc344qz7NDvTwGhUra8N8XZrcHITyQdnHLgZaCNP06zZUPy2Rqg
- HjxRGIA4UHz50twtolWijdat/lN+nwLccduuim1XJ2ceswRMbwiZjccka6GA1nuwkcNP
- LYIAOVY4YT7bnBEn2aSc6rrowSG6tKj1YCZf7p9dPLqngu5cv6F1GN9UO35Gk5PK/A9F
- TX4cgAFjMZTUy7TJGlU43iz7fyETAiGiuK3w/oKTV2wUvrUd2HES2x1IYSblgWLwwUUx
- cR9A==
-X-Gm-Message-State: AOJu0YwQYwiwsI3QN0H0MRbYOZhh9v8oL35VohrsGBZp/qCoWzsC/+6K
- dMce7pfH8qp0RuyOEnRBOB5t0ncyJ8THFGNvVKgDGyHmEHEVUZxBA/KGk/96/5s3HXDd94PaMVr
- b
-X-Gm-Gg: ASbGncsmKoC+QjZ2A14YPVvGejh39qSR9K3HaAw78+FjK8G2QfqhYItT5q+PfwfaWQK
- 6qSSJ0Lpf0QhTKCTj1rCM9cF+6nbU3gMQOMu2BerZswSciknGdbewYBbB0N45/AadzbcGl9K5SZ
- tPCWx/5z+U2yChzLbjaXesNE+IDw4P9sHRzDYEvSul1MEGIS0X3Nwi6OKk55AB5CyaRWZqxEvf1
- XeBZf0N7BWYOT4mdTZ++j/V4l8GdpYt+1bt+xdjHO+LfAWTD7efFvDwPDN+vptXM/K86BcN2jtM
- NUpoU/3MjAojvIjS4l1AE4onJYKJXg0NAhCh7BfTx9D/c9rV4ZD3BgGC5wrvixWT/4r6izm+CKF
- 0Qpt7
-X-Google-Smtp-Source: AGHT+IEk2aGHcbwvxC6Wjg+uNmby2x9daFa6wwPYJRz2RnlccynXgURO6TqKbjNcBE6ezgkcYOPhFQ==
-X-Received: by 2002:a05:6871:a987:b0:297:2376:9b17 with SMTP id
- 586e51a60fabf-2d0917e5355mr31089fac.19.1744146454766; 
- Tue, 08 Apr 2025 14:07:34 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2cc845ca326sm2736321fac.15.2025.04.08.14.07.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 14:07:34 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250320140030.2052434-1-trini@konsulko.com>
-References: <20250320140030.2052434-1-trini@konsulko.com>
-Subject: Re: [PATCH v2 00/10] Improve pytest runtime
-Message-Id: <174414645402.1438641.14845245817289600818.b4-ty@konsulko.com>
-Date: Tue, 08 Apr 2025 15:07:34 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 538LvdY71299003
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 8 Apr 2025 16:57:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744149459;
+ bh=pAClCJDZqIgB5fw0BhLNNKV8aX3wSUV1jZyqhXh+tgM=;
+ h=From:Date:Subject:To:CC;
+ b=FN7HtOAmb+zBwphYDcxzva7qZkTSQEltGhv3ERYlX+aNXoCzRTSMYGR3Rw0sgo68W
+ x/VwWUTj/NvGhfp0+5xFJxDC/H0rHB6nwW1ulMrEVWIBm46YYRK5raNcJChchZa7SM
+ +66Er0HT6sxs0DVh66hmtELA2l6ht94YN7hfy4jA=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 538LvdXI125943
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 8 Apr 2025 16:57:39 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 8
+ Apr 2025 16:57:39 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 8 Apr 2025 16:57:39 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 538LvdWu069860;
+ Tue, 8 Apr 2025 16:57:39 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Tue, 8 Apr 2025 16:57:34 -0500
+Subject: [PATCH] net: dhcpv6: remove excluded middle expression
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Message-ID: <20250408-excluded-middle-fixes-v1-1-38233f18a554@ti.com>
+X-B4-Tracking: v=1; b=H4sIAM2b9WcC/x3LQQqDMBBG4avIrDswSmpCryJdiPPHDlgrCUpAv
+ Luhy4/HOykjGTK9mpMSDsv2WyvaR0PTZ1xnsGk1ddI9xUlglGnZFcpfU13A0Qoya/DOj71EL4H
+ quyX8Q12H93XdWKdrbGcAAAA=
+To: Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1040; i=bb@ti.com;
+ h=from:subject:message-id; bh=n+qhMy3Q3JYF4ajSjjuh/DwszsojboC9VwGy+uBaFu0=;
+ b=owNCWmg5MUFZJlNZ5JdaTgAAZ3////9/vzn7/83fppbsP5fvb39zw//9G3d/fuz99/pqj22wA
+ RtqI7UDIaaBo9RoAAeoGhoAAAaNGg0NBtQAAMQAAANANNDE00DEMmjTBpNo1DkDIBkaA0NAGg0A
+ G1NDQGhpoNAPUDI0aaGg0AGI9TEAyMgNGmagaAMQaaMm1Dpo0YI00BkwTQAaDTINMjQAGgyGjQN
+ MJkyaGhiGIxAGhoA0AaAyA0NAMmQECbB8AZYHUoXBuwkTTCYv94G1BLBMzq2iAyE8oUbEAM0Re9
+ oBwBW30lx2TgRRuRYepSlCwKdrofPxnkVBfLQMigy5vfAM0J+L7JiEr566skRwYUDITi5yjCtuy
+ 6WEq9NOWYo+UZe9HqFVXYHysJDGL7DcgdSQa8INHrVkZoFvJOuySKLXVZ7WPQK/0+1SjjxZRaNu
+ n68juqtf1RFcsdaMQgBu9AEG9KuQZBNGW2sn2xA+rjcCw6ogFoVWnELwUyk5rkJBpd4VJb35e5b
+ jjilojw3O9yFnN4CqEZNeaplsBIgMWxCnMAnxB94zIn2On1uy8ZkbLRTVS1NlEhHcwLBorlf2ZB
+ GPBk1z0uRTTBLiGRwXGCAJPfgAQ078mRLI3adB5NCoRDAAjNezF3EAud/FQRWyjnOaQ46MEEMA4
+ NzwgKBzbiZoH+LuSKcKEhyS60nA
+X-Developer-Key: i=bb@ti.com; a=openpgp;
+ fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Mar 2025 07:59:21 -0600, Tom Rini wrote:
+ !A || (A && B) is equivalent to !A || B
 
-> Hey all,
-> 
-> One thing that Simon Glass has noted is that our pytest run time keeps
-> getting longer. Looking at:
-> https://source.denx.de/u-boot/u-boot/-/pipelines/25011/test_report?job_name=sandbox%20test.py%3A%20%5Bfast%20amd64%5D
-> we can see that some of the longest running tests are a little puzzling.
-> It turns out that we have two ways of making filesystem images without
-> requiring root access and one of them is significantly slower than the
-> other. This series changes us from using virt-make-fs to only using the
-> mk_fs helper that currently resides in test_ut.py which uses standard
-> userspace tools. The final result can be seen at:
-> https://source.denx.de/u-boot/u-boot/-/pipelines/25015/test_report?job_name=sandbox%20test.py%3A%20%5Bfast%20amd64%5D
-> and the tests changed here now run much quicker.
-> 
-> [...]
+Drop the middle expression from the statement
 
-Applied to u-boot/master, thanks!
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+---
+ net/dhcpv6.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-[01/10] test/py: Rework test_cat to not use virt-make-fs
-        commit: 47ceaf8816aa1eb1d8a924b3d31c93a852de029d
-[02/10] test/py: Rework test_xxd to not use virt-make-fs
-        commit: f98d2a31271dd3357e4f13a77b62cd383bd3f09d
-[03/10] test/py/tests: Move "setup_image" from test_ut.py to fs_helper.py
-        commit: fce92e304fcd8bdba522a43aeef12cc3b0b2df56
-[04/10] test/py: Fix a problem with setup_image
-        commit: 2c092875abfd9269a34b3cc03930066fda53a476
-[05/10] test/py: Rework test_efi_bootmgr to not use virt-make-fs
-        commit: 4b33810511445dfd5466223f8fad2961b0732abe
-[06/10] test/py: Rework test_eficonfig to not use virt-make-fs
-        commit: 397fc80b9fc2c6831beaaf92d66d725ca33837e6
-[07/10] test/py: Rework test_efi_capsule to not use virt-make-fs
-        commit: 27cca9e5d3a09d234db1a289cc1d19aec71b6910
-[08/10] test/py: Rework test_efi_secboot to not use virt-make-fs
-        commit: 7bf75f3e36d0907e83c84ed252c8f24b1659985c
-[09/10] doc/develop/py_testing.rst: Update section on filesystem images
-        commit: 6df302c17881d47abaceefb9a13c5723c15110c3
-[10/10] Dockerfile: Update to drop virt-make-fs packages
-        commit: eb1b90ec57a43ff4799d9626a1481acd01a4adb4
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 54619ee698362..65ec48ef665e5 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -473,8 +473,7 @@ static int dhcp6_check_advertise_packet(uchar *rx_pkt, unsigned int len)
+ 		 * server UID, save the new server UID and preference
+ 		 */
+ 		if (!sm_params.server_uid.uid_ptr ||
+-		    (sm_params.server_uid.uid_ptr &&
+-		    sm_params.server_uid.preference < sm_params.rx_status.preference)) {
++		    sm_params.server_uid.preference < sm_params.rx_status.preference) {
+ 			rx_uid_size = sm_params.rx_status.server_uid_size;
+ 			if (sm_params.server_uid.uid_ptr)
+ 				free(sm_params.server_uid.uid_ptr);
+
+---
+base-commit: 9d9fbdab0e9664bff147109cc89ad2786f6ecd83
+change-id: 20250408-excluded-middle-fixes-d8747a60f708
+
+Best regards,
 -- 
-Tom
-
+Bryan Brattlof <bb@ti.com>
 
