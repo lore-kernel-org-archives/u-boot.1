@@ -4,159 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4555C369A6
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C2AAC369A2
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:14:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B01382C55;
-	Tue,  8 Apr 2025 16:03:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id ACB0382D2A;
+	Tue,  8 Apr 2025 16:14:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="H5DnPLV8";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UPuWUVRn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADB8582CAE; Tue,  8 Apr 2025 16:03:16 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::601])
+ id D785882D2E; Tue,  8 Apr 2025 16:14:32 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75BBA82B7E
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:03:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7E64982D06
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:14:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Zcm9S2DIFrIN9dBJd5sYOJEhIrPEdONtrdLsn5cu7dUrPP3mVJCcrqyQe+aq5mIka4EE6RKoJyGEk0wcz9s9KurS7VhrJvB0jzf3CGEBLJ0xUsCPVV5Ylr609xM6g8JBG0d7us6EJhQdrqFHkVDXdsQnc9NWfp9cPw69WfjX+2+MEfl9RUJ0MMXtrSgKMqZAxqgaUBbUSr0/aLt9t8PcY+ozGeuhNfMdHCIJ0aiZPvhYkBxgPx28XtWqxNqOS5oNzhmXuFIBoKE5fXx6QO6zaDq4WzpP+XX+4HgrGFncE0TCvUZKkm/S7OAsORyTXyKMTXcV+OVCUwq7z2pV5uE80w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WAoUl8qOPzL43Pyg94WHuX+V2Al317Nll7V/+PQMO2Q=;
- b=JBqdGThzaK2ofNHomDugAE6dZnmnWn7/JBm1HpLtMD9RvYqRsYF4hnD1II9kIgTChMtgZ2EcxS69TTDZhyuwesTT/JFAqh9DF3ksj+SB198UDBO+NM3SQ/AZikil8nPOqCxsND7UKfOd6L7lsmoUSGRIfuxXurfsncHNcO4gmwo8ZkRl1uYDzeTUW2g+Ujp2e3s7c2D0nMUGZWOB6jPrD++YeRjKmOkBswZjjjhmNPCEOWyFHJRHh2c647/5XbCHFRnru0Uqa/9ZLk4Mwo9vx+DTJWVXSUuhgwK8ilTPL8XlmIyB9SbGs8RS43zeyofl9s6C3XpF6l/CGSVKjhZkhA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WAoUl8qOPzL43Pyg94WHuX+V2Al317Nll7V/+PQMO2Q=;
- b=H5DnPLV8g7tUZKZNzRmjtWpy9gq8RRLq6j/4ScbQCSPcn4IvmxQnqz6WwQGFilw+yQZRj/N7f5a0k9+HbhMTeGQ8pd3QZCQwu+DjDQBly6P3NXD8S/Ou+SMg4fxufaUfo+WxBSSaYQ+5hOIr4sJhO0oWNSp7vjm42KRXsGUEooc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM9PR04MB7555.eurprd04.prod.outlook.com (2603:10a6:20b:2d6::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Tue, 8 Apr
- 2025 14:03:13 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8606.033; Tue, 8 Apr 2025
- 14:03:12 +0000
-Message-ID: <484017a4-956f-4b1b-bebf-cab6dcfa860e@cherry.de>
-Date: Tue, 8 Apr 2025 16:03:11 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: release_cycle: Use variable substitution for next
- version
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20250408135421.1393991-1-trini@konsulko.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250408135421.1393991-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0205.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e5::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1744121665; x=1744726465; i=xypron.glpk@gmx.de;
+ bh=+pt4xvSKBoyMfEHI5GYi4LgC2JGWKmryPr10UrR3NY0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=UPuWUVRn1tnERQy8X8AmTUed//kMzwog0iycwDiUG0rLQXXpR93xojVTUwNpbgOY
+ uEEPDSYcMJJ8Cg4MPeGLIvEPa5PQbMWU8vAV1+mdPayZaEC4BR5l1mT+GZ5gc3Jjm
+ TpLWTZ9XJpOzIzRcelAzZOnUtMEhO2SqrR4rDptA/A1MYW3oWgNqe3o4gvSaHft3U
+ mrd/VfbZWtYUbjWOJ2B26SbFDlVTP9/KmukDn0RYBgElSNrIDVissPux0UGqS4bJz
+ WtveNHln2Ye8vCmrp5ufdZRHWxRQGfpmREhO9jYFOsI0sETV0oov0X0unQdYPffZt
+ znyziDRW7kFjG+Q3KA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M3lYB-1u2QZG0Uy3-00354O; Tue, 08
+ Apr 2025 16:14:25 +0200
+Message-ID: <c13c5226-60cf-4860-bdff-62eb9bae09f4@gmx.de>
+Date: Tue, 8 Apr 2025 16:14:24 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB7555:EE_
-X-MS-Office365-Filtering-Correlation-Id: ca187d13-e62d-486f-05ce-08dd76a61979
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MVJIWWhuTmJ0ZVFpRHoxUUx4OE1BdWZFMDNZMFVKWmFQNFlFcmlybW9nZklu?=
- =?utf-8?B?TmVuMFlwOHovRVRGME1sVER0aGl5cUEyK3JvQllwQzViR2szeGJlU1hVY2th?=
- =?utf-8?B?RSt4S2Y4bDQ2T1lyRzAycklnZkZIUDVmNHV1WjhUN2xkQjZXUVo5c05xY09U?=
- =?utf-8?B?ZmRMSTNzdXlPM0FlcFZodXdzTm9oeXQ4UVYvV0JMUG12UUxudldBTHIyVlp6?=
- =?utf-8?B?SEIyNmIwQzZ4blFKK3JqOFhlRHg5VFpUMXVQVS82OTlQbXBQM0h6MDZmbThu?=
- =?utf-8?B?SmFwL2JhN2hWUHBRTXNVZTNIcXhvSWllOVFkbk4vaW9iWTJKODBHYXRtZ1Zy?=
- =?utf-8?B?aVBMd2djWDhIamV0dDFSS1lzWlhDYzBuNXZIb3czYllCaEZ4c0kyQTZrbFFv?=
- =?utf-8?B?ZThDZm9KN1hNdmxCcjVqTUc2c1pjMWtjbVM1ZGIwV3lidFpkWjZhdUNBYjQ3?=
- =?utf-8?B?RnlROXd3cXZFOTNSdzQ4M0taVkdhZktjcnprMUFCazQ5SGZKaDhZOWlDQTMx?=
- =?utf-8?B?NS9xVVRnaGNnOEVub0tzSjFDSTdEZ1ZEVmx2RWY1dVQybk92cGd2ZFBmanVj?=
- =?utf-8?B?WldKdG1ESXJWQzV6VzJuWENmY2FjOTZFcTk1S0o1ai9LODgyeHBxQ2JJNHlU?=
- =?utf-8?B?VGc0T1p0UnZZK29GOWxENTU2V1kvdmhldkNSaWs0SXBQMy80R2FVQUJwdVpt?=
- =?utf-8?B?Ritma3ZYY1YxTkh5UDFNdWh1ZlF1clVIRHdQT1grM2RjamdqZGxLUnlTR0ls?=
- =?utf-8?B?QnFkVDZibVNQajNadmtCV0RrUnRtM3JzT3ZIK1JFOVBUSUh0cEx4Z1NUcHZo?=
- =?utf-8?B?ZFJKQk1DKzlXUklMZUR2RmR2NXlKZjljVlNpcmJESVBvTGVwY2MyaXdPM0pE?=
- =?utf-8?B?WVA0d1V4MXV1YS9XMWdnQ1NBQTFWN254Q2dLQkZXZnFSeVRKNFNwb2kyZEJB?=
- =?utf-8?B?VHdwcy9Vb0Q1djdPclpRRmFaSTlvcE9UanN2b00yV0l0ZFJWcmN3SzNiZlpB?=
- =?utf-8?B?NzBLZEdsNjJZNklhdmE2a3hjUzYwUnNkb1ROeDFvaWdJN3J0amlCN0VLVlda?=
- =?utf-8?B?TGpEZHdJYXZGMC9zYkhvRXJYUi8yekp3SHpOTjBLd3NNaDIwQWpxQXBza0Fh?=
- =?utf-8?B?cW9iTURkQStwenBmQ2M3Qjc1eXRhdWk3cjRvTytCWXhNZDIxRTFIeUQ3M3Ar?=
- =?utf-8?B?V0xHN2dHK1JtNm5RZWxSLzBDV1Jud2FsbG1vdFMvUzFDSTd1UmpkR0VqbEVp?=
- =?utf-8?B?SmpWVmxScG4xYjArNWlnSWMvOHV6dHFKZkk2ZlVldUlTZi85ald5dzdsQVRU?=
- =?utf-8?B?NDhZTCtUSGdmNmdoNW9GQmF6bUxKRWw3ZUxVeW1SU2p2cmN5dEVyeDVOTnhs?=
- =?utf-8?B?QW1DbDlPOHRuczEzeU52ZlRpUUE4UW0wL0Q3TnZ0MFJlcGgrK2dGZG1ZM2lv?=
- =?utf-8?B?TjNtQkxpYWc5am5EMEJwNzFBcFN2Q01OYzV4UDNYS2ZSM21YZWYxUDFyK1ZC?=
- =?utf-8?B?SGhyVkJuS0s1Vi83Vy9lSE1MYUFFY09aZUplS0pFbGI2OERMRWFtVWxzWkt1?=
- =?utf-8?B?dDZPempXY1BBc1YvSUNWbkJ1eTJ6YjA4S0NhQkhBVDdkdEdzT3JudVgvaGNk?=
- =?utf-8?B?NEJtaUE4ME1OR1BJTWwzSWkrSlRJVWt2VVVMaUMvQTZoZ2ZZWEVBQWJRekNE?=
- =?utf-8?B?UTA1NGVCc0xMdVlZRmtxNDBNSVZTZE4velEwZWUzNEJpaStXNktOOTVDQUY5?=
- =?utf-8?B?NGJKSlhQOXlRSE5xdFc1ZXRTSFRHOUxIbWVDQ2NIYW1lSnRXWUtPVW9tVnZY?=
- =?utf-8?B?c3VaTTJGVnVjZkQ2NkVPYmRNQ3QrUjhiZWo2VjdXT0s3bHV4T0Rsam9PUzVi?=
- =?utf-8?Q?9TI5O/TwuBZCv?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3JBRW1yUEwvRnlIaHZVcS9DMHYydFoxKzc2ZkNWa3NSNjBscGZVVWRSblRH?=
- =?utf-8?B?Y1pwNW1YcnIwNGRzYXUyazh2SjRIV2UzSXFHWFpQNEVVSDEwMjNra090OHpY?=
- =?utf-8?B?alZOYmpnV3huZXdhdThYbzlCZWg5ZE9mSllHYUdEa3prd29Va2ZTOWw0WTVv?=
- =?utf-8?B?aDhPaHRTeDNxWEpNRFcxYXB4MzFrOVdoend3S1dnRXJ1bk9UWE1MQXV6a3VI?=
- =?utf-8?B?bVFhejNMLzFOVDlvdVQrZStUR2JENWlTQUsrYjBZbVFncmVYbHdBcUNpbHVp?=
- =?utf-8?B?UDhOVG9LSFM5Q25NZjViL0IydjBMNDR6d3VNeWFqb3lhUmIvd0hRa05yZS9s?=
- =?utf-8?B?aWxOdlV4cnBldTNRY2p3RDdrVmNueVVYWHoyYXBPdXcraVFQNnoxODRESzgw?=
- =?utf-8?B?QTVKRlh0M2E0L1lad2hHRU9ZakloY2w1ZHZ5TG16NklhbTFySk9iNW50TTVB?=
- =?utf-8?B?N3VUbkkrRGdJSGhFdkM0MzZoQXhKUnd6cnJzQnlVakZmTi8rNVRHTko1RExH?=
- =?utf-8?B?M2JLNlA3aXhMVzgwZFdTNTNaUHBqZVNWMmZFMmdUNHNaZlpKanpJakZBM1dl?=
- =?utf-8?B?TFZiOGM4R3VyR2M4c1JWYWEzaTVJdHFKN3QxZnFGNkU5V3lmVm0rQTJIdzlx?=
- =?utf-8?B?N2IyT2NrVC9zcXRaeHBnTGo0R0NSK202ZXRtUUVETE1EdUs0L0w0dE5kbmNR?=
- =?utf-8?B?bGJ0T0Z3dEsxdHBPUzJ3NFNHa05zQlJxMFUvR2swUTd3UkhQVGlWTzBpNlNl?=
- =?utf-8?B?Qm5xL0Vua05IYzJYbnRGYW9VcHJ6U2ZxRlNNVEd0TlZqam1nY0tVYmRFMXdj?=
- =?utf-8?B?ald1QzFIekY3TnRJNCt5Qzl2SzFLaTNDOUwyZVNuRkFNVmlOTXFkRmhKVXBZ?=
- =?utf-8?B?VUVoNzFIZmlnNXRSdFdxeGJoeGw0NDJPZlZlRzBiVjFzOEFZWmVCN3Nnb3dk?=
- =?utf-8?B?aHNhMmhXdmNoRFdHbG1BSnlURWMvbXh3OGZvRjkwc1hsU2tqM3pUUTI1T1V4?=
- =?utf-8?B?SGVSTVUyQVJNbzVOTERmSmJsSTlYUHErcHRRWVVLcHc0d2Qwclp4aDNWTUE5?=
- =?utf-8?B?anB0RG4yUWhkYlkyUk9IaEg0bmc2NFRpZjlTMStQYW5vODk3WnB3TndLY01Z?=
- =?utf-8?B?NXkzQ2pJM3ZPRy80b3NabVRpS2J3ZWV6ZjBCNStxYS9ybmtTRTNqc2lJMzYz?=
- =?utf-8?B?WXpsbGtvREpORmZqdGVBbzd3UXlyU0djTkRoMnYzR0dTOXZrTDBEK0g4RjNp?=
- =?utf-8?B?UjNCWEZjRTVKQ1RHT1ZGbGsvSjkyVjJ4NkFBdjMvT2NpbGc0aldtL3hCTlhL?=
- =?utf-8?B?bDY5aGdOTzhnNnM5VHpvTkZYdXpsU2d4WFZjQm9EbUxXYzd2UVhiL2Yzc1hE?=
- =?utf-8?B?OThNRjM3MGlxeVh5dm5qMWpLUG9XVklZc2NickorSkU0djVmZzZJWUdWQXBB?=
- =?utf-8?B?MWllSG0zVDBZRnVPUTEzK296NkJsNEJXVHY4UUpiTVB0d1NOQlkweUZ6V3F4?=
- =?utf-8?B?SFNBeDJhM1VtdlJTUFBMcG1YTEdpZ2pKaXU2enVFa3VOMTl3dzU4R1R6OWRP?=
- =?utf-8?B?dU1DbHVBUDI3NXFnRzFSc21URTZQcVpNcUllaFVjY0F0Q2ViV3RRRjUxOUVO?=
- =?utf-8?B?aURUSzhSL1VReEVnQndFRkdxS0E2ZzZUL1hSNnR2MmNXWGxoaXhzM3BEZzRi?=
- =?utf-8?B?UVUyRWtvalcrZ2ZFMzN1NndoeFFQZ2htVTZGamM4dTJFdFNWNUxoMm01RFVw?=
- =?utf-8?B?dzNIY2NFTzBNZ0VXTkxnQkg0djhQT21uSXpJN2ZWeEJkTldDMm5vZm9ZVFdK?=
- =?utf-8?B?MVBibzdxTGhrQUx1MXR1RmtGaGpIYjg0Mkpmb3lOZE1DdWwvQ1k0K3A4ODZV?=
- =?utf-8?B?MlBINURiQlZueTVZa3hycVh5WFFPazhtT28wTm9rcUpqdmdJbVkvZkxySnVh?=
- =?utf-8?B?ZHB3L3hKU3hJOTZWaWZubnR0REQ2QkdiTlRFZWxDMlNMVmluci9MeW9WaXdC?=
- =?utf-8?B?aW9wNjVWWE85eU9xeW9wNk82RzFiTFpBTE5rMDl3R2ZRZFBaNjlJTFcwMlZO?=
- =?utf-8?B?VW80Wno3SU1uMkwwalJSV0l3SEdSMndTOGU2R0U1VzBDN1czT2NwdE0yTW9R?=
- =?utf-8?B?WHBlT2wwTGc2WENweDYwcEovN0xsWkhMS1dTcXFIYll0Y0VMNjFkamtRc1po?=
- =?utf-8?B?MHc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca187d13-e62d-486f-05ce-08dd76a61979
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2025 14:03:12.2363 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +L7s1P8aLs3x7ZoeE+0/SoJMRFxVf0BiX5JLRLZMDhhhgzDC4dbpMQ0ziZqPYm5Poo8aT09mR2TXh8BvpmpklSyqvOxNkj0MNBlC3gXQ340=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7555
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] cmd: fwu: Dump custom fields from mdata structure
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <1254c3c538facb1a124865aede861f399cf524df.1742552744.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <1254c3c538facb1a124865aede861f399cf524df.1742552744.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:2vJp3mR3LefzKeeXQAggrJzV7Z8C1HokuJZ2g3MASjqFTdNztxI
+ tfwZJhS5yIkGavnFRgYnusRpci+ptHcJw6ACBQSjmpQQljbtNNXO7xIerAbBTUrbcnjNmCw
+ eTClzuDK/zBQoU6NFtI9an0cOfiAQOr21zQbAVJyUuKndaBUoX1NdRiAGmQW91HIhPHAS2L
+ 5uYZqghR7rbgeqk70s2mA==
+UI-OutboundReport: notjunk:1;M01:P0:S+bVyuIJw5A=;3MWPL3JmwtyYdxjnT2kW3o1uGv1
+ xB9br7SRD8gtcK5FCRQsnfuOFmesAigro6qnuetLB7oNTZOH/UEuEvg5XfXVREJNAWYFKvoAr
+ YQbhhof3jLS2t/TBKoWpsnI/Ng2aqkZXgp5vzVmzB8qiqr5IDGCuxdfqZUVP36u4ngglDIXFD
+ WD0JktjYtXMil/aDjQbDEJW/KD+gQNZc7+oNT1xHSdASe6PmbF+KRrrJY06+e17OAMOFI9yLC
+ eyVsatdcFvn7Pbu9uP+D4bBgwYMQYu28LfuJ82+zJyUrERbdXPhCi69g5hR8B+RSZb5RNEIIT
+ pFaAgmAlL9GjOFdlPgyvrvwS82L41byUvkaRbRt42VQyenEYgxlXq896eGwxvgNZ4LLwaT0mA
+ HVS2YJ9Mz814keIH7BfuvRPAljRukhtXl3NmpEV+GjhdVaEAkQ/Kiit7GDu9NoUscTg5pECai
+ qk/bnZOj9w5L7si7dOey6ZV63Vcr58TkcIkCIFUxwZBJH7xKD2u9zw6DvJQTxClaFJFFu3Neg
+ gPsGMzUPmit5PjlW2ftC69EgllGQEGlH9vzdvG0HannsPoBd5SXPSPumeKLJYFN2D+ol7/sP+
+ Mx9X56Sf5bnasmOxnWbYBhvwik8LeMmstSIoNvuEHEMVdvxh/WTRk8EMs8U517KYoIccMsCJR
+ +znlGE2/NZe/cfELbqn7x5yIORhdfSBYAcQxpSvNL402DI7VQ3AQzzEPBbF8PmXWytPRrimt1
+ 4c/gsO9CeR4PezVEiz4fIKF5jBlKKNFhQO0zpr5E/hQojFotcG8BhpiGMgDImOUoTDDBkkmAU
+ +avSBbZDF4Fi7qZBwIH6Hj1en1JwB8+G4A7+562d3cttIdlKYlsGhI2J/U1Unvm1bym2gVFcc
+ 0L7XgD4pxJoZUurcBXNZ1Q0xj+WmNsHgf9jpQ7THkJCjfO3uurpg2NcfITsnCzHiIK0PI+qz0
+ q3wwB5sS3G3KZGg/+0ZNNvHSBHWQECNTng9xFZ3F70Zzn6i+UPRKQqMgNr5Y0PtS2Wwqt8DNY
+ o/onVsdq20qxVKiOgmaIHBjxcWPQdP3m36BJclQC5G4wEYtglouApwDyYnrVAHQEYTBCROXYe
+ r1TtTnDVt3lMZQulNIGEv6ddeKdjODYr5MVRD6Hhegh+AcV06mprS3BKEN+ismT370H0QMiVs
+ jwxwOjgCj4BA5L0kc0e1nplyCaDZeMRScYe/YA4qHJ6bhYWZdgT5f9YsjKDr4uyCZ/rn1kyWa
+ 7s5ABnoI++NzWKD55sJPJK+xDDdeRawFydf9iAyLNDocJLO43+arRe4a47TJ3FhmOGJA05GHE
+ 3U5hVQ+xhLS2z//qNV3lITedw7Z4vVZxuW8vPkQ/QeRs3J/4n6myo6AF5UhbCTjLHq4lY9az/
+ zDEqnbFdHjGl4WLKw6F3DRLJaNbxOJc+9XZ8HDAk5txnfD7uAdvDoFpJUo0dK94miivs488bY
+ +Md/GFEAiWvfUrEhfZXYoTXvIaBM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,19 +103,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 21.03.25 11:25, Michal Simek wrote:
+> The commit cb9ae40a16f0 ("tools: mkfwumdata: add logic to append vendor
+> data to the FWU metadata") added support for adding vendor data to mdata
+> structure but it is not visible anywhere that's why extend fwu command t=
+o
+> dump it.
+>
+> Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Reviewed-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+> Changes in v2:
+> - Extend print message
+> - Cover hexdump dependencies
+>
+> RFC:
+> https://lore.kernel.org/r/75c697a4f819bb5e8649ed658c5a559fb8cd1fd9.17175=
+99342.git.michal.simek@amd.com
+>
+> ---
+>   cmd/Kconfig     |  1 +
+>   cmd/fwu_mdata.c | 25 +++++++++++++++++++++++++
+>   2 files changed, 26 insertions(+)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 642cc1116e87..1f8aa2521a8e 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -185,6 +185,7 @@ config CMD_UFETCH
+>   config CMD_FWU_METADATA
+>   	bool "fwu metadata read"
+>   	depends on FWU_MULTI_BANK_UPDATE
+> +	imply HEXDUMP if FWU_MDATA_V2
+>   	help
+>   	  Command to read the metadata and dump it's contents
+>
+> diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+> index 9c048d69a131..5b5a2e4d1cda 100644
+> --- a/cmd/fwu_mdata.c
+> +++ b/cmd/fwu_mdata.c
+> @@ -7,6 +7,7 @@
+>   #include <dm.h>
+>   #include <fwu.h>
+>   #include <fwu_mdata.h>
+> +#include <hexdump.h>
+>   #include <log.h>
+>   #include <stdio.h>
+>   #include <stdlib.h>
+> @@ -45,6 +46,30 @@ static void print_mdata(struct fwu_data *data)
+>   			       img_info->accepted =3D=3D 0x1 ? "yes" : "no");
+>   		}
+>   	}
+> +
+> +	if (data->version =3D=3D 2) {
 
-On 4/8/25 3:54 PM, Tom Rini wrote:
-> To avoid the problem fixed in commit 57a95d522ca8 ("doc: release_cycle:
-> fix next release version") moving forward, make use of the variable
-> substitution feature of rST. This adds a next_ver variable and
-> references it in all of the places where I had been listing the version
-> being worked on.
-> 
-> Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
+Should this be >=3D 2 ? Or do we intend to drop custom field support in
+future?
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
+> +		struct fwu_mdata *mdata =3D data->fwu_mdata;
+> +		struct fwu_fw_store_desc *desc;
+> +		void *end;
+> +		u32 diff;
+> +
+> +		/*
+> +		 * fwu_mdata defines only header that's why taking it as array
+> +		 * which exactly point to image description location
+> +		 */
+> +		desc =3D (struct fwu_fw_store_desc *)&mdata[1];
+> +
+> +		/* Number of entries is taken from for loop - variable i */
+> +		end =3D &desc->img_entry[i];
+> +		debug("mdata %p, desc %p, end %p\n", mdata, desc, end);
+> +
+> +		diff =3D data->metadata_size - ((void *)end - (void *)mdata);
+> +		if (diff) {
+> +			printf("Custom fields covered by CRC len: 0x%x\n", diff);
 
-Thanks!
-Quentin
+The print label is a bit hard to understand. Do you mean:
+
+"Length of custom fields in bytes: 0x%x\n"
+
+Wouldn't print_hex_dump_bytes() already provide an address column
+conveying that information?
+
+Best regards
+
+Heinrich
+
+> +			print_hex_dump_bytes("CUSTOM ", DUMP_PREFIX_OFFSET,
+> +					     end, diff);
+> +		}
+> +	}
+>   }
+>
+>   int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
+
