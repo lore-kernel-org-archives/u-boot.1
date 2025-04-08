@@ -4,59 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 048EFC36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 22:12:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01334C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 22:13:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAAA5834D4;
-	Wed,  9 Apr 2025 00:12:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 426B781F7E;
+	Wed,  9 Apr 2025 00:13:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ABXq3E6N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Eox+Rrbr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F29FC83490; Wed,  9 Apr 2025 00:12:15 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFCF08267E; Wed,  9 Apr 2025 00:13:31 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92630834DC
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 00:12:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EFF08003E
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 00:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=6bf1=W3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1744150330; bh=IeHrCS3tf6htM3hOnbhePESG7MSjtJGzOdCOP/KgD9Y=;
- b=ABXq3E6NO02COxsj2qXabjcz+fdzIlVt8K1gujHypYIdFCYTW46cSDOZ5rOsSfSzamMdovnZv
- E2GSOQ0IavBbMaiaoprVJVEwlgD/goFNJPvKpC4XttqekE2uwRyCLNIZqoj/C3dpSLRjTiC6lLQ
- +BBhTBPZIymHUI5xANZnzVCzuVTDMnZPdcW3zfhsl12ZM0Ug4koclhIOEv5t+mwHn2ixHwtQP04
- SKA7kAJ1gqN2REQ82AZ/wqIRUYzFfLqitbwnvyx7cGrYk4aTGwYy8u8eqZGE+duCzGnPDeA/Dk6
- Q58Otoh0x4D/QTKexcQ2Oohe3jsvSCacywIZeiTE9A1Q==
-X-Forward-Email-ID: 67f59f359e1b52744186accf
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.1
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 3/4] arm64: dts: rockchip: Add rng node to RK3588
-Date: Tue,  8 Apr 2025 22:11:44 +0000
-Message-ID: <20250408221151.2762853-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250408221151.2762853-1-jonas@kwiboo.se>
-References: <20250408221151.2762853-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-603f54a6c8aso3090189eaf.0
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 15:13:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744150408; x=1744755208; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=clImj2IspIyf1PU3CtNlY40AjEWxqAtPdDu+F0i3U6w=;
+ b=Eox+Rrbrjmm+SJnAyJVB5mEXUaiBHmUgep/qg9ZC36Z5yuv3cMzQLVy/k6p8DjPYbY
+ SmhaXzbDuH8VWFnidG+w+AawnQ6Aabzl/P60d4VSnzpAAFbMjb0cw0rxMsRE8vywG4xL
+ gTHu4tqIwWCcCD+zJyH4PtU+fdEVGUEct1IRg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744150408; x=1744755208;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=clImj2IspIyf1PU3CtNlY40AjEWxqAtPdDu+F0i3U6w=;
+ b=LJuSPcDs1T0WlEoIbHm+WdErZTBZHtAGddh0YoVyI48UcSDLZtsqxPv+K2tlymXQCg
+ hxxzBW4QdaDtoKcLxngEAg9mix4aVn8te5Aq9rhiDLUCXd78nRf0upMIuCPcs1jqi2ex
+ KYPAeVPqIy15zWEXAt0HlZjfJo/G5eTYLAEXdJMk5WXDDM9lDNAJuE6P6vgT1J+GiwQs
+ cPGTgy9GF40q75NkqRUwaiffKYvnUWtDpEOE1Paff2b9s625MRVL0MqdUkNHLuVIjhCF
+ TACA1NxM4MjzalrmsqzHlukdnxvVpA/e43IJ88UBb5kqRrojxAw/JeXlEQVMcrsYyopm
+ eCnQ==
+X-Gm-Message-State: AOJu0Yyege96ZaP2kRLQUYnDaN21s9gGmazDgSD7FV0DgcWd6cwbxc33
+ Gs8RCB6nBZ6NrulvE0LmExecUVmFFXTf1O1XVaQsvfVEmnXXtb/00Ocou0zWcFI=
+X-Gm-Gg: ASbGnctgW9sd4xptNf8LB5rjWkbO7RTer4vDhnDj9I4mz4zamZN0g/9ZLzjHvuWZ7/t
+ ZGNHOOZHcv6reHt9kfgnxklCFSBZ+aqaPOhYBjniOePQzHt7YKqYdDT86a7luo5YdQaCcuxEvvZ
+ nEfeMI/jS+s7bbxeOfSufilh16L+hsiMeGwRSsmeTUj5XaWdatHCAs6l0iFlBqrv/CT93ZkrBrM
+ VAzDAe+egTOHmD53BNdYvdwPeVZ9BDVJB4iPR9LW0wbadIHMWTf/gQvk4gINF4Kvn8GnlLoGnmt
+ 9kRtIg6JOQzPnTvG1qRXwylDFobLwNMhQYzowW1GJeK15Z+n2ZlFTZge11IiWLL8wfYlWpW6SQf
+ k4Hat8Q==
+X-Google-Smtp-Source: AGHT+IH0MlxwwftqLTl7XFcWnXz+k92a+cLe8IxzGFQyw2nLcHsd7CwREL4RIAzDFYhVVdYgoN9qUw==
+X-Received: by 2002:a05:6820:507:b0:604:1:3736 with SMTP id
+ 006d021491bc7-6045cad95a5mr408065eaf.7.1744150407812; 
+ Tue, 08 Apr 2025 15:13:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6044f4a61d1sm608285eaf.9.2025.04.08.15.13.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Apr 2025 15:13:27 -0700 (PDT)
+Date: Tue, 8 Apr 2025 16:13:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Douglas Anderson <dianders@chromium.org>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH 0/5] patman: Separate gitutil fully
+Message-ID: <20250408221324.GA5495@bill-the-cat>
+References: <20250407105151.689453-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="m/JZwZRFrqpSvlbr"
+Content-Disposition: inline
+In-Reply-To: <20250407105151.689453-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,44 +96,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
-Add the RK3588's standalone hardware random number generator node to its
-device tree, and enable it.
+--m/JZwZRFrqpSvlbr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Link: https://lore.kernel.org/r/20250204-rk3588-trng-submission-v2-6-608172b6fd91@collabora.com
-[changed reset-id to its numeric value while the constant makes its
- way through the crypto tree]
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+On Mon, Apr 07, 2025 at 10:51:42PM +1200, Simon Glass wrote:
 
-[ upstream commit: 6ee0b9ad3995ee5fa229035c69013b7dd0d3634b ]
+>=20
+> The gitutil module uses Patman's settings module, which is not allowed
+> as it is supposed to be a separate package. This series ties up this
+> dependency.
+>=20
+> This series depends on these two patches being applied:
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20250227192735.406389-1-=
+sjg@chromium.org/
+> https://patchwork.ozlabs.org/project/uboot/patch/20250328130225.2607974-1=
+-sjg@chromium.org/
+>=20
+>=20
+> Simon Glass (5):
+>   patman: Untangle settings from gitutil
+>   patman: Pass the alias dict into gitutil.build_email_list()
+>   patman: Pass the alias dict into gitutil.email_patches()
+>   patman: Pass aliases to Series.MakeCcFile()
+>   patman: Update Series.ShowActions() to pass alias
+>=20
+>  tools/patman/control.py       | 11 ++++++++---
+>  tools/patman/func_test.py     |  8 ++++----
+>  tools/patman/series.py        | 32 ++++++++++++++++++++++----------
+>  tools/u_boot_pylib/gitutil.py | 34 ++++++++++++++--------------------
+>  4 files changed, 48 insertions(+), 37 deletions(-)
 
-(cherry picked from commit 4800c4aaad00ffdc053850f130e8504a04dd110d)
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- dts/upstream/src/arm64/rockchip/rk3588-base.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I just want to reiterate my question / request to host these outside of
+the U-Boot sources themselves so they can be managed (both in the sense
+of U-Boot as user and as maintainer of sources) following normal Python
+best practices? I'd be fine even with something under
+https://source.denx.de/u-boot/<something>/patman, etc.
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
-index c3abdfb04f8f..2623afa79634 100644
---- a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
-@@ -1921,6 +1921,14 @@
- 		status = "disabled";
- 	};
- 
-+	rng@fe378000 {
-+		compatible = "rockchip,rk3588-rng";
-+		reg = <0x0 0xfe378000 0x0 0x200>;
-+		interrupts = <GIC_SPI 400 IRQ_TYPE_LEVEL_HIGH 0>;
-+		clocks = <&scmi_clk SCMI_HCLK_SECURE_NS>;
-+		resets = <&scmi_reset 48>;
-+	};
-+
- 	i2s0_8ch: i2s@fe470000 {
- 		compatible = "rockchip,rk3588-i2s-tdm";
- 		reg = <0x0 0xfe470000 0x0 0x1000>;
--- 
-2.49.0
+--=20
+Tom
 
+--m/JZwZRFrqpSvlbr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf1n4EACgkQFHw5/5Y0
+tyxGEAv9EJ0SP3HUXiQvPp1frL5D/pZ2Z2Jd827tvq8ewK+I07Wa8bPUgwANW+Sa
+4ocYyk5J5NVbvUKfkzQenawGc9KRpZgY4jvraUXGRhebycLauxwsZrJSwh1tRETR
+JkQt4hkSAY32r1voAQNbVa+A6Z+OmmDQCczR18zJ5WDfRDkwhAaGm8+MhOMmWQnR
+N3/rM6/QQZHc89y8KPt4dQH/TpGwqwPsgbg0yzZLmj8q8iYdI+OJVzz6CEhKRK1b
+LA9GRf9Vmfq832fRTs6jzh3EU7jch3dTWE+DrxPJtFp6WgMOnL6FBwpVzcjNkC2a
+hB4YU9G0D8TT53CIoDJyyEDs5mqTLCMsTxBOpQ0+tJ3BDEflAivO9Zpcy8BGs5nX
+4bNSMAOKITJbCyer6Qwc3yRuiFf5o7tJl3pKmlabuPTHhPfSPHl9JUOxdqaINwKa
+nKbDhcRfjexHu83nUbRROyMrAnsCBelTlau2Vr4+pVAEUhEuKLsFFXwsRfCZ55Sf
+pBvD4DRw
+=spfJ
+-----END PGP SIGNATURE-----
+
+--m/JZwZRFrqpSvlbr--
