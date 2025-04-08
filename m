@@ -4,159 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8153C369A1
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 18:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57085C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 18:33:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0818F82155;
-	Tue,  8 Apr 2025 20:23:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id DF0EB8210F;
+	Tue,  8 Apr 2025 20:33:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="k0HcYmUu";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1744137187;
+	bh=EIOw8jbJFx0/hipNJStChXH+NlSG/ulD2MARjCy8iOE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=tptRi+yCDxH+HOpwL/z1BSMsBSTaV5mFgBhJtTWPH8hT0efRv7EKLYCwIHQwHoMbN
+	 xGOMAOQImGnZegHHbFMvZemO+2rsZu61VZ5oZsUH+GFa0Rzt+SFdEx3fvSgyJM+J+g
+	 dHlCk3UOvfB+LFGl1Zvm1DtrBQNne9Rvx6QfXifGUxzeh3d1uOncGNIfGIGmh6t1T/
+	 HW1jIP4Svqo+zyd5Uh0YkIPpvjxaEXv5YnXcwPsjVvAUEkMZ+OULdwrjbO3mTwO7Aq
+	 Z86qtM/xQ6dKktwFpmqxjja0v/BeBw1ufhOxi/oUi5z0TQw+Zc41xSivgQv0fBe4gz
+	 s5TaGKUhtVmCA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8544082D2A; Tue,  8 Apr 2025 17:45:06 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::601])
+ id C5F868211F; Tue,  8 Apr 2025 20:33:06 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3265782CAE
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 17:45:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F4808210D
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 20:33:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OOJ6myI2uJkotzqR50WUdh+H2lrjA7/PCZ1mMuh2EViW6f/gp5MpV9fZvYOp5blD5bBhzDteYX/0bd1qlqqOX2oin6QsY7mrTbgT77ETUoqnzf5YRoDRPIg9vQTsWFoGixVecD3ye9XHl/+yV1eEVFppOBB/357KcQAX/jR5bjUQt30FFlyaRkyyoKV7y7o6UA438yVssYcuh6Hj3vM/U+V7AlNikTrBmuwzvINUzAiWGojTlSS6dR4pJ7s/vEE1w+Tn7uygnDAXylwW3t/eihQGhjIShbn+X9BOSWJ0jGo7r/niEoIqF7Jvg8ZMq5MdZl8TwGlnUqNabssSL+afkA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iEQY4wxM4c9EY423XoPU22/RLKIbu4xc1+XRHWMYAIo=;
- b=OrlpS3wDmmqv/XetXsRR84T2Lwq2KJEhGaHfqvLGtGPKKwAgjx49DMHhLmclDHVBJTjQbDhQusfDJduIwHi94edBwnZGF3C4rHFyuYx88AvDi6jOAakApHV8o1LlwtoaWf7IUFt4w6rmr9HIkhamhxME2DUohA6nsWUOsKly63DGh41puynSE+5NLRlleM/na4arYBDxWmGPkSQF/u3tHPW6E0VndfGXnCSKZv0WaLLf5QUdCLla/SWhzOnNFaqRB8x//v7JeQ/7PPETdohyydxI2QuyH0NoSqLjY/EpfyQ4C1aen/TnWMns2nyBY760vvha+b5BsTghdWoMRtoA1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iEQY4wxM4c9EY423XoPU22/RLKIbu4xc1+XRHWMYAIo=;
- b=k0HcYmUukW+IXGvO40y8gxlZ0yj68L2OM1m28Y+mx/iHdrvaJ2dlBFmuudRFNAmRmg6m0fHYdwvRQ+SM7AOgAEh61JaQJ8GISdSQiR4WC5jZlGCmeb98CbpBeAR9z2avxiTzGksLZevkig+bsk84w73yuWCw3r24pz/t7XJtj/TmcqUBDFw0SvP2YiIn7pEibh5ybXq044oI0Ue2bIn9N60QH+iAzoG0xEw8YJYT6dWIGI24/xdlbrd9T+DuLUfKZaMtXA8Q/TowniPevO/vGnLQ+zZ91/cNtGKXsYDcTYjvmDB1UgO4has6Ay4jiZS8BBEe7hWhvauw/ddtNr7azg==
-Received: from BN8PR03MB5073.namprd03.prod.outlook.com (2603:10b6:408:dc::21)
- by DS4PR03MB8129.namprd03.prod.outlook.com (2603:10b6:8:27f::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Tue, 8 Apr
- 2025 15:45:00 +0000
-Received: from BN8PR03MB5073.namprd03.prod.outlook.com
- ([fe80::7483:7886:9e3d:f62a]) by BN8PR03MB5073.namprd03.prod.outlook.com
- ([fe80::7483:7886:9e3d:f62a%3]) with mapi id 15.20.8606.033; Tue, 8 Apr 2025
- 15:45:00 +0000
-From: "Ng, Boon Khai" <boon.khai.ng@altera.com>
-To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Michal Simek <michal.simek@amd.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>, Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- =?iso-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, William Zhang
- <william.zhang@broadcom.com>, U-boot Openlist <u-boot@lists.denx.de>
-CC: "Hea, Kok Kiang" <kok.kiang.hea@altera.com>, "Maniyam, Dinesh"
- <dinesh.maniyam@altera.com>, "Chee, Tien Fong" <tien.fong.chee@altera.com>,
- "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@altera.com>, "Meng, 
- Tingting" <tingting.meng@altera.com>, "Yuslaimi, Alif Zakuan"
- <alif.zakuan.yuslaimi@altera.com>
-Subject: RE: [CAD QSPI v1] spi: cadence-qspi: Add disable STIG mode quikrs.
-Thread-Topic: [CAD QSPI v1] spi: cadence-qspi: Add disable STIG mode quikrs.
-Thread-Index: AQHbky6RCL8eOFJt2UGFHujp6NeNdLOaE37g
-Date: Tue, 8 Apr 2025 15:45:00 +0000
-Message-ID: <BN8PR03MB5073D1B2EC5C07E867BFE46CB4B52@BN8PR03MB5073.namprd03.prod.outlook.com>
-References: <20250312090944.35977-1-boon.khai.ng@altera.com>
-In-Reply-To: <20250312090944.35977-1-boon.khai.ng@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN8PR03MB5073:EE_|DS4PR03MB8129:EE_
-x-ms-office365-filtering-correlation-id: d6891c0a-7d0d-4461-e0af-08dd76b45258
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|366016|10070799003|1800799024|38070700018; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?AlawN4koTV26sRTRt6kTPv2C4Vf5xvk1BplzqXuNRuM7mcbU5akgf3Flu2?=
- =?iso-8859-1?Q?/K7Xpx/HzjnObtqO/kFYwgwKszZpTXWw7GOC3IO9cA2URkWyg1FTpItzui?=
- =?iso-8859-1?Q?qIzjk4DELLJTOgyj11Yv/XqH9XN+bp0n4qUGBSj4cwHE/39I7wrBH8NJcT?=
- =?iso-8859-1?Q?mSFGN1T4tnCw6zbB8yIMEWKePMGbo8ZMlhsSG/V0u1ekMcu6nr2DBAPdwx?=
- =?iso-8859-1?Q?0dJu/Jxy0+NeIFpAeVMHzoLnv6d8KDNsMZwogUu1ZJG2Oat49wunum2OQy?=
- =?iso-8859-1?Q?Sj26kl4M7ZiwYi1WZ3XEC99vu8Tl/c+GAEHuskr5OwrwU5siYbMDdVu5Wo?=
- =?iso-8859-1?Q?Ye/ma7/E+tDMrsIwhKphKOpt19QFPg1SXj0QaU0olE7VKQ8eUpxTyWh52a?=
- =?iso-8859-1?Q?4B0A6I/thtx+Rr87fjPiklmoicjMfstMphttotp5p5qTeXzYyeEWQPTRmf?=
- =?iso-8859-1?Q?4t+MVBPMsp/rO11lGy29umOoDw8YFnTCqlPsHGAr2tgaS1laIHk827v8OD?=
- =?iso-8859-1?Q?TXoSjDJLNnROImrAOuaytzqYPN2FFdUpxqmGAvxHoXIDlkICBzt2GD1eFF?=
- =?iso-8859-1?Q?bqA2+qlxVTQsV1+JD8Wv0nbXbt7hT0kYZMtHWqrG5iXvjXFItyrkVwztpl?=
- =?iso-8859-1?Q?t551638BjJmSV0z2AFgARAAXitcASvXtYJ2FGi8SnS9oSop7s9SKd2g3Bo?=
- =?iso-8859-1?Q?a4F/LeM2FPhFglai/mRogv3gyi1OcFW2aMgyfYImHMiCOHzcENfqy/2eId?=
- =?iso-8859-1?Q?F6rGV873WTT2Rh24nQdwG4ZhwxzOzMVZLXyF2vikWjH34BHEVHxtmdMr35?=
- =?iso-8859-1?Q?9On3VEjEt3RZv3LFCFImDb21zSzi2QVc7mOzd4tJRE9Rvk5bW0IuhcpT6E?=
- =?iso-8859-1?Q?ZCNeEXQzULkCGX0ofQ7IseVwdqoliDdaxsup/oQH6wGA2W/3VUhKqWy+wz?=
- =?iso-8859-1?Q?sqX9Bx8vGIREe+ixB4dTuC6Hb90WMaVfnloX0SozpH7RtmsxtwSNUZD44O?=
- =?iso-8859-1?Q?9thRtmz3FL+nQKFY1zob9Nh+1yWe6mgxcbq0M7mifQJSPL7GbxTNJ2GEuF?=
- =?iso-8859-1?Q?FPDLFcBTiMvqj+so1pdofF2TXWlQKpDVrX/3fooVreA7pB7D/KywSFrKEb?=
- =?iso-8859-1?Q?IItLDcxQHyjXXUSMmsAcL/fiZ6fk0ckDAs04XqeF9X5VURrCeJal/iTzQJ?=
- =?iso-8859-1?Q?Di14hXO2LMuayHvaCUnsBjgHeMWQ7V9/+aCxaZTSu77pW+79aI1McS/PKC?=
- =?iso-8859-1?Q?3xmejAiEqUrIToLdP9Umtz/E1vS6ix6t8mdBUKijcG/jSQwtrZpeAu9kYj?=
- =?iso-8859-1?Q?ZKJ8AkWOy+uW7286xZNkGvGj7Uwh7aoiB+y+uii/VchZT1Q1nHM2efsFDC?=
- =?iso-8859-1?Q?fyoXSDJlYXnqfK4RYwvJclN+QK2M+3KOKZcig7ZLR5STtQN7sSiVQ0YBq+?=
- =?iso-8859-1?Q?QVIDuIR0xGrDPB3cMFR/B4uwQOtNU+Gs/GzIvmZ/c+60UMtXq9p17+g14B?=
- =?iso-8859-1?Q?1fi3dlEuu0awrXxd7l/KjdbbAm1yNOdm7LlkydHE06mA=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR03MB5073.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(10070799003)(1800799024)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?ZiSzMQfQH9bxML57z5MsSuD8c/Nq2VSUx3RAYZlP8gEyS0cjQHGN6sOP3V?=
- =?iso-8859-1?Q?4atj0tcBSt2EGNU1+qN60fNDdKnIgXm8wacVmLdUYXYsZoEyygJPaKynJR?=
- =?iso-8859-1?Q?MLVTLKJRizjFcSvITtqRjMveZDZgFcjBb+npdCjpp37RA97D2ZZwpcUT2T?=
- =?iso-8859-1?Q?vxarTN3R7Zw8erYt/S4VOKe7bdzDarJ+SBw5ItmlA9XPaLpb52M7fsfVVm?=
- =?iso-8859-1?Q?dUqHSSzuYZ3mSo+fw4hj9lZIIDXXTeN/qsQxBB5bixjHkWEq2mlKyYMWYe?=
- =?iso-8859-1?Q?c4OYwxsAcdN3Tjqz6oEsHDrWHcNFhs+4qnIBr92AzW/9eRU6uDRX/iZuA2?=
- =?iso-8859-1?Q?PQt32/M5G0VgsQ4BXhCS4+F5goURgSXR4FHpQOm331s+6mbofRuDmJvGoA?=
- =?iso-8859-1?Q?jcltEGSpm9n3Dcha1f+s6nuW3u1XLDGI+69zilcj9YnKJketKg4/0YBRMy?=
- =?iso-8859-1?Q?QKE+sGrQ6/5mu6eLMcB6wQlrFpoaiNmrGAre2E5Tv/cN88DD/UjL5H6riY?=
- =?iso-8859-1?Q?3Vo5yYFrk1ddOLiCAZeNJ7BDWcA27GFZSboLyLKI6RzBcQOA+AthFYePIv?=
- =?iso-8859-1?Q?cCp2ZgHy4hN8CoFUbXN5rUebf+3YahSYRKb6KqnP2+JQlSifgevFIlkkMX?=
- =?iso-8859-1?Q?ZrT5KwEzH8IyCp65aaPLstXIZ2o9aGDFFFQQpxRgXVvxLo9T3IZ+Jvx53x?=
- =?iso-8859-1?Q?34012xmU9kiWrD9TEe0kR64ZwHbaFIX1QfJ9e99myLsX2V+uTM7FkSzfPl?=
- =?iso-8859-1?Q?KGfdLcAh/KB6+TOri9jD4MMZKMQ+eBNJYH25gAjqMkCuue+MD4nTsp4nFy?=
- =?iso-8859-1?Q?u8mVioT5WV8cPz2gBKLgOgknwQ9NReObCuOyJgiV00PIi/47uvu7Tic88U?=
- =?iso-8859-1?Q?wQmRnTwmtcZRd8yjHMsnbzL2ZQJAoQuFnpDrfvIj3+ywDq/gBBF2dLehhl?=
- =?iso-8859-1?Q?exStc0bonmgkpUO9B4Ahjc37FhXjmKzGcXAM6Xpn5RSvptfz8HIPhJix4u?=
- =?iso-8859-1?Q?0z/EbdM8P0zxeKsUpTwxMJig7Dhe6PBZfbFtecX1TGBli26sILPgWcnb3y?=
- =?iso-8859-1?Q?FlCnyQpoxIKYi2FdOMNAo4MeF4pHn4h/So2SvfAubkiDbJWCMM6I3TVbTK?=
- =?iso-8859-1?Q?tvEecQ/2n6vhk0AOpaed2TCyd/fQdCvF53Qal9JFRHdOpTwhCKvIjULcVt?=
- =?iso-8859-1?Q?h9rQGys1F9xtm+gmVlPwnb83trNPmx74VtVYR9g+UsRKCukLaeRpsqTE4q?=
- =?iso-8859-1?Q?zW0UZBnqNUApT/DDL0+ysYis/cnlbYiSjdsNciP3RYAOz44CqxBvYTM2KV?=
- =?iso-8859-1?Q?RDqIR60lSFLR3tONP60AHjfJ05D8LH3uol/5eWH1hCqsEMoMXwpxuPHuEa?=
- =?iso-8859-1?Q?t59TLIRo4wLuIBM4BRrvbsqKevFlN0FjQwZTjznaobGXRzsxRDbHsKl1t6?=
- =?iso-8859-1?Q?jTOoZocnllxoFGyIq523HU/XKxqEKfkz9libJPrSBj4Ggb6w1BfC7Ixg4f?=
- =?iso-8859-1?Q?1euATA1v2X4/5y6Qm4z2ORWps+nL2oUh0AaS/yING/WK4EIvuhU81enIoi?=
- =?iso-8859-1?Q?Vf/pCIEgPd2DJgpqzTaqw5u9Trzr7Dr6qBl5LbB3338UcKL9h9Ob28v5jQ?=
- =?iso-8859-1?Q?81prNxllKfAKOR+hm1SRi19fIB5Z/PVrMG7gRDHnQARxmv/1K6Rh/SpWGB?=
- =?iso-8859-1?Q?Ed+KUvFnOoWDqtXvVjywvzm0hK8sExJJuKHn5rN6?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="AEkf5ryh"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 93797102EB9FE; 
+ Tue,  8 Apr 2025 20:33:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1744137183; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=EIOw8jbJFx0/hipNJStChXH+NlSG/ulD2MARjCy8iOE=;
+ b=AEkf5ryhc5SFwV0anQ+T2Sb6098TYXXXqwEDSA4h0I3R6qymqiHqQUyBCSwPS0UnVjXBva
+ F5UM1aI0TvKuUno1ZyvbbPnV9yfll+aWg0Yr95ngMFnvA0fNQ0lm0zGdNQLp6FJ/Td4/DL
+ xsbN6bP/CJRTjuZxWZQHKur9kTP94O7QUR+W6batoBXtoluIS9oQ4tIjK81cJS0SO3e48K
+ WE4HOXEWL/DmrxBAZ8PenhrTx2aRNJX7uIJvPsWljxmwFoqWKDLOwW2vORODtkEb25lc4g
+ y3eTlpB2e3TEiNzLnfV2AZyjI16r1ALMpaxFFNAzQ/WlMW6rkpKA494v6HA37w==
+Message-ID: <4db49cb4-bb80-4aa8-958b-a5b14f0d22d4@denx.de>
+Date: Tue, 8 Apr 2025 20:30:38 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR03MB5073.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6891c0a-7d0d-4461-e0af-08dd76b45258
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2025 15:45:00.3698 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9gFmVbjCD6mlgnB6HdNvKhX7qAeb4mQIRx7WMWrbt/HVX8Tr57SsMecjT3sHU0d/j8ueof2jcuFSZYDJMn7w4w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR03MB8129
-X-Mailman-Approved-At: Tue, 08 Apr 2025 20:23:52 +0200
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gW1BBVENIXSBwb3dlcjogcmVndWxhdG9y?=
+ =?UTF-8?Q?=3A_scmi=3A_Move_regulator_subnode_hack_to_scmi=5Fregulator?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Alice Guo <alice.guo@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+References: <20250322014444.174796-1-marex@denx.de>
+ <PAXPR04MB96441F643A1FCC464C25CDA2E2AE2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <PAXPR04MB96441F643A1FCC464C25CDA2E2AE2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,20 +83,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Jagan
-
-I hope you're doing well. I just wanted to follow up on the patch=20
-I submitted for review some time ago. I understand you're likely=20
-busy, but I would really appreciate it if you could take a look=20
-when you get a chance.
-
-If there's anything you need from my side to facilitate
- the review process, feel free to let me know.
-
-Thank you in advance for your time and assistance!
-
-Regards,
-Boon Khai
-
-
-
+On 4/3/25 12:56 PM, Alice Guo (OSS) wrote:
+>> -----邮件原件-----
+>> 发件人: Marek Vasut <marex@denx.de>
+>> 发送时间: 2025年3月22日 9:45
+>> 收件人: u-boot@lists.denx.de
+>> 抄送: Marek Vasut <marex@denx.de>; Alice Guo <alice.guo@nxp.com>; Ilias
+>> Apalodimas <ilias.apalodimas@linaro.org>; Jaehoon Chung
+>> <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>
+>> 主题: [EXT] [PATCH] power: regulator: scmi: Move regulator subnode hack to
+>> scmi_regulator
+>>
+>> Caution: This is an external email. Please take care when clicking links or
+>> opening attachments. When in doubt, report the message using the 'Report this
+>> email' button
+>>
+>>
+>> The current code attempts to bind scmi_voltage_domain to regulator subnode
+>> of the SCMI protocol node, so scmi_voltage_domain can then bind regulators
+>> directly to subnodes of its node. This kind of behavior should not be in core code,
+>> move it into scmi_voltage_domain driver code. Let the driver descend into
+>> regulator node and bind regulators to its subnodes.
+>>
+>> Fixes: 1f213ee4dbf2 ("firmware: scmi: voltage regulator")
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Alice Guo <alice.guo@nxp.com>
+>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   drivers/firmware/scmi/scmi_agent-uclass.c | 8 +-------
+>> drivers/power/regulator/scmi_regulator.c  | 6 ++++++
+>>   2 files changed, 7 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c
+>> b/drivers/firmware/scmi/scmi_agent-uclass.c
+>> index 8c907c3b032..e6e43ae936a 100644
+>> --- a/drivers/firmware/scmi/scmi_agent-uclass.c
+>> +++ b/drivers/firmware/scmi/scmi_agent-uclass.c
+>> @@ -427,14 +427,8 @@ static int scmi_bind_protocols(struct udevice *dev)
+>>                          break;
+>>                  case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
+>>                          if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)
+>> &&
+>> -                           scmi_protocol_is_supported(dev, protocol_id))
+>> {
+>> -                               node = ofnode_find_subnode(node,
+>> "regulators");
+>> -                               if (!ofnode_valid(node)) {
+>> -                                       dev_err(dev, "no regulators
+>> node\n");
+>> -                                       return -ENXIO;
+>> -                               }
+>> +                           scmi_protocol_is_supported(dev,
+>> + protocol_id))
+>>                                  drv =
+>> DM_DRIVER_GET(scmi_voltage_domain);
+>> -                       }
+>>                          break;
+>>                  default:
+>>                          break;
+>> diff --git a/drivers/power/regulator/scmi_regulator.c
+>> b/drivers/power/regulator/scmi_regulator.c
+>> index 99f6506f162..2550b27246f 100644
+>> --- a/drivers/power/regulator/scmi_regulator.c
+>> +++ b/drivers/power/regulator/scmi_regulator.c
+>> @@ -178,6 +178,12 @@ static int scmi_regulator_bind(struct udevice *dev)
+>>          ofnode node;
+>>          int ret;
+>>
+>> +       node = ofnode_find_subnode(node, "regulators");
+>> +       if (!ofnode_valid(node)) {
+>> +               dev_err(dev, "no regulators node\n");
+>> +               return -ENXIO;
+>> +       }
+>> +
+>>          drv = DM_DRIVER_GET(scmi_regulator);
+>>
+>>          ofnode_for_each_subnode(node, dev_ofnode(dev)) {
+>> --
+>> 2.47.2
+> 
+> Hi Marek,
+> 
+> Is there a problem in your patch? Should it be changed like this:
+What kind of problem ? Can you please elaborate ?
