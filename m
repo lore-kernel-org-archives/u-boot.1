@@ -4,88 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75999C369A2
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84143C369A4
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF15482E0A;
-	Tue,  8 Apr 2025 16:43:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E788E8171B;
+	Tue,  8 Apr 2025 16:51:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sW7o/1BT";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1744123889;
+	bh=aHh2ybfehZpA/derdG8e8rCbHWgSBqEgjLxkbNLa03Y=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=gHKO2uWCoc9inWCALiwnmwT949OEtFgr5X+zDge2Z5dg8hd+bhh7SaV/Wz8gL+tB1
+	 K8byhbhV69q8V6Z5EnNxHP2YAaXm2TtOM9AJ3nxTJY6bhxJ3rB+D+1I/y+z9+MISP1
+	 Se/0GCQvLNdcOO/9IU65qzrI8kfbt6A8v4uV0xlIJRnbzhHI6lU4Y3S54x+rQULSkQ
+	 PL/eRzepaVMKF4E0hfNfVo+kGfmRFJXSnsrqSpUf0rB1Js/mCxMbOXi7KsBDqaB6bs
+	 fCNZxdGbageA8PunUTJuKO10KbgOhP1ni/ixmXHAZj4KdNTGphgb21UJ530fXJYTl0
+	 os+tx/NWfb+HQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C40082E0A; Tue,  8 Apr 2025 16:43:53 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6F7D82102; Tue,  8 Apr 2025 16:51:29 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C5E182D2A
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:43:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93F1780107
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:51:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43cf58eea0fso29341185e9.0
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:43:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744123431; x=1744728231; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zZClw+jHIcxPT7ONj1lRKn4kbF32yPJ9KtZVcpJGcBE=;
- b=sW7o/1BTGgKYPnO4gFdCIlkOXqmGx03Gap77QUcK601fSHJY7KzlWsxZiZ1s7/v2P1
- HYR5KrCL2SrwA8M1gb9QJ4fmgTgevFAak+4xBX8wAlzyWFgEBx6nGUkssy2ByOpEeIMB
- UNjlKn58vMPUH8pXm1WbsXqWLQA6+a0dMXVbcbafDxS6PINO6rPk6NFzXEq8hdkNMvrQ
- tH8i/4LE9R+VC3XdTD3eq+PyDYJndk3fIgJSJHCS2/zmcP40i55ItGp/1VJaS9B7EXzf
- SbmvDB54Dq0SH6sgob2E583ck6S0vY10529p8N3lIMUnJ4c2RlHgrCSI6kibhnD3fDJ1
- ZvxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744123431; x=1744728231;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zZClw+jHIcxPT7ONj1lRKn4kbF32yPJ9KtZVcpJGcBE=;
- b=jtZTSToM6W/2fWu8dh3fU0z6bPj4gS/dI/9xLh0KYI3K9uQ4OjaEAu/zUUA/w35JEN
- prNfj/7rmFpOlUcy2vrpF/meUn2Du9IPMzvpvO0xyNPGjyuueiwRjPykcIQdBLTb+SNV
- IHdacLJdFd/VIvxwLGPGmWC98wHE0dalYtTtUg18qvFKdQNzYSVM6vuRPHdOWcFVX/yp
- F45lDAicq1QRsWUrxX3C+QvdnvbRasktevF146ZdJk0BjsnlN9Se5H++09y1v9C8XVKM
- NKfRg8Shsv8nSyJWDWxPUMC3OBmIXgV9ADcoPOvMgFTnEAhPJcAQ2wIha/zTXXZOUqW3
- QSzw==
-X-Gm-Message-State: AOJu0Yyx1NKb7Aj+v8wMS5ASd0+4ObrhgG3mJwEtfRhCbsmebfFxvUvS
- vPDH1qMraPOsA73/qrBUybY6OM9eFIUixF0HL3pDeuoFSufiZasR21AYWw5tDS2Z7+nl53krwVd
- Q0es=
-X-Gm-Gg: ASbGncv04vrvr9/vZppX1v483vHeZVDLnkAgkcfpqFMh5YRIC1r83MoV2hT+fymhot5
- zz1tjRFns6CqF7AcMQBirg8MPIvgNL9Zsj8dShUmT4Z0dpiXbwuzHAIpmMtMQhdI6Cze9HdfcZa
- 1/82lFcZgET0BIGKZuJo/TUPGZApTMPN969/hPoPqPgBheU/WYLhTX2x3Vq3VmDUuDJZ5uR0H2Q
- hFEH7dqSLxOiyv9IqTGa0VISBkVWarIU6CFEKzWPyvZBXnm1jD+eh0iSbTLeqcsNg5+UIVw6x5W
- Bdm17CNtAc4Y2jjyXrGDa0rHbxGDU7AqsQuRVJcw8z9RJWcMy9M6pBiFNR+U6rLduACAhMhZ
-X-Google-Smtp-Source: AGHT+IEtok/kPvlCwQblnbFEMsFV2+580aKVo3R4sbzFAMAxSgf8xKKv4DOkc1NvNpla8K8FS0mYag==
-X-Received: by 2002:a05:6000:40c8:b0:39c:142d:c0a with SMTP id
- ffacd0b85a97d-39cb35bda23mr14338365f8f.19.1744123430645; 
- Tue, 08 Apr 2025 07:43:50 -0700 (PDT)
-Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec364d036sm162408765e9.26.2025.04.08.07.43.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Apr 2025 07:43:50 -0700 (PDT)
-Message-ID: <deb7ccd0-978b-4b97-bf67-de540dc02fe6@linaro.org>
-Date: Tue, 8 Apr 2025 16:43:49 +0200
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="JdFxFuPr"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7B88E1038191E; 
+ Tue,  8 Apr 2025 16:51:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1744123886; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=aHh2ybfehZpA/derdG8e8rCbHWgSBqEgjLxkbNLa03Y=;
+ b=JdFxFuPrOs+W0aLil2wC5jESHPuaUxFNafWj8gYfkofd4V9J1gC45746aWOXcP1T5ZoLb2
+ WXk7h7e7hZs1jcHUZpccAq/FHQ0C+PayebMglnZeRp7sIMbH/ZIgKYdRiftaga5qYBet6o
+ FgEsHXAVVCen0xj4yUr/h0SLLlrK4hYqtFyPca/tOGVP4P7Zm6TC2VNOSN/gdLrw2li3Y2
+ 6T6yIMOoTrP6+Lrv+ms4nnPu2rxNkSoahLJe8INq2lb6+AnFYl7Gxpba/jP6hIfMtxEpvo
+ iBUMjRDD82r9X1az9jIG2tuZ/+ucVVetnZEQVCmAJwgr10XUgXUPMZmn9hzoDg==
+Message-ID: <bf955296-b4fe-443a-8bf9-ead7afe57661@denx.de>
+Date: Tue, 8 Apr 2025 16:51:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm: dts: Add override for RB1
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20250407132810.35149-1-sumit.garg@kernel.org>
- <20250407132810.35149-2-sumit.garg@kernel.org>
- <baa7e896-a286-47ed-bd9a-18338978fc0d@linaro.org> <Z_UouNz11eRxIIa-@sumit-X1>
+Subject: Re: [PATCH] usb: dwc3: gadget: Fix match_ep callback for NXP UUU tool
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Felipe Balbi <felipe.balbi@linux.intel.com>, Lukasz Majewski
+ <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tom Rini <trini@konsulko.com>
+References: <20250319220805.219001-1-marex@denx.de>
+ <87a59gdofd.fsf@baylibre.com> <20250324080315.GA6932@francesco-nb>
+ <87pli6esx0.fsf@baylibre.com> <Z-FQeVtIImeHsfXs@gaggiata.pivistrello.it>
+ <42f53c19-de12-45c3-9091-2e6c23d1fcd4@denx.de>
+ <Z-FpUV-fwGvch4-W@gaggiata.pivistrello.it>
+ <48e57653-d86a-4650-859e-1e77a6c29f4a@denx.de>
+ <Z_TnLsKHod_fvDsK@gaggiata.pivistrello.it>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <Z_UouNz11eRxIIa-@sumit-X1>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <Z_TnLsKHod_fvDsK@gaggiata.pivistrello.it>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,72 +89,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 4/8/25 15:46, Sumit Garg wrote:
-> On Tue, Apr 08, 2025 at 02:17:29PM +0200, Caleb Connolly wrote:
->>
->>
->> On 4/7/25 15:28, Sumit Garg wrote:
->>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On 4/8/25 11:06 AM, Francesco Dolcini wrote:
+> On Mon, Mar 24, 2025 at 03:36:52PM +0100, Marek Vasut wrote:
+>> On 3/24/25 3:16 PM, Francesco Dolcini wrote:
+>>> On Mon, Mar 24, 2025 at 02:53:23PM +0100, Marek Vasut wrote:
+>>>> On 3/24/25 1:30 PM, Francesco Dolcini wrote:
+>>>>> On Mon, Mar 24, 2025 at 09:26:03AM +0100, Mattijs Korpershoek wrote:
+>>>>>> Hi Francesco,
+>>>>>>
+>>>>>> On lun., mars 24, 2025 at 09:03, Francesco Dolcini <francesco@dolcini.it> wrote:
+>>>>>>
+>>>>>>> Hello Mattijs, Marek
+>>>>>>>
+>>>>>>> On Thu, Mar 20, 2025 at 10:47:02AM +0100, Mattijs Korpershoek wrote:
+>>>>>>>> On mer., mars 19, 2025 at 23:07, Marek Vasut <marex@denx.de> wrote:
+>>>>>>>>
+>>>>>>>>> The UUU tool excepts the interrupt-in endpoint to be ep1in, otherwise
+>>>>>>>>> it crashes. This is a result of the previous hard-coded EP setup in
+>>>>>>>>> drivers/usb/gadget/epautoconf.c which did special-case EP allocation
+>>>>>>>>> for SPL builds, and which was since converted to this callback, but
+>>>>>>>>> without the special-case EP allocation in SPL part.
+>>>>>>>>>
+>>>>>>>>> This reinstates the SPL part in an isolated manner, only for NXP iMX
+>>>>>>>>> SoCs, only for SPL builds, and only for the ep1in interrupt-in endpoint.
+>>>>>>>
+>>>>>>> UUU can (and in our case is) used also on non-NXP i.MX platforms.
+>>>>>>> What should we do?
+>>>>>>
+>>>>>> Do reproduce the problem (UUU tool crashes) on those platforms with
+>>>>>> recent U-Boot versions (v2024.10+) ?
+>>>>>
+>>>>> Not tested, my comment is purely based on the code and the commit message.
+>>>>> Older U-Boot versions (up to v2024.04, included) are working fine, with UUU used
+>>>>> with TI K3 SoCs (AM69, AM62, AM62P).
+>>>> Are you talking about the NXP UUU ?
 >>>
->>> Add U-Boot override for RB1 to for USB in host mode as OTG mode isn't
->>> supported. Also, disable sdhc_2 as it's currently not supported, sdhc_1
->>> works fine though.
->>>
->>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>> ---
->>>    arch/arm/dts/qrb2210-rb1-u-boot.dtsi | 11 +++++++++++
->>>    1 file changed, 11 insertions(+)
->>>    create mode 100644 arch/arm/dts/qrb2210-rb1-u-boot.dtsi
->>>
->>> diff --git a/arch/arm/dts/qrb2210-rb1-u-boot.dtsi b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
->>> new file mode 100644
->>> index 00000000000..1e136ee405a
->>> --- /dev/null
->>> +++ b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
->>> @@ -0,0 +1,11 @@
->>> +// SPDX-License-Identifier: GPL-2.0
->>> +
->>> +/* This is usually OTG but U-Boot doesn't support that properly */
->>> +&usb_dwc3 {
->>> +	dr_mode = "host";
->>> +};
->>> +
->>> +/* SDHC_2 isn't supported in U-Boot as of now */
->>
->> I'd rather avoid disabling this here, I guess it's just missing clocks and
->> regulators which doesn't justify modifying DT. An error that mmc1 couldn't
->> be enabled seems fine to me?
+>>> yes, it works just fine on not-NXP SoC.
+>> Then please test if it still works, and if not, this patch needs to be
+>> expanded to cover TI ... or apply unconditionally in SPL (sigh).
 > 
-> I totally echo with your thinking that we should avoid modifying DT but
-> at the same point we shouldn't enable peripherals in U-Boot which throws
-> errors. It's also possible that U-Boot misconfiguring mmc1 which might
-
-I disagree, DT isn't enabling or disabling peripherals, it's describing 
-hardware. U-Boot lacking proper support for that hardware isn't a good 
-justification to disable it. Especially since you might boot Linux with 
-the same DT and now have no working sdcard for seemingly no reason.
-
-An error in U-Boot is exactly the behaviour we want to see, masking it 
-only created confusion.> turn as a problem for later stages.
+> I just found the time to check some logs from our CI in which we execute such a
+> workflow.  We do use UUU only from U-Boot proper, so we are not going to be
+> affected by this SPL specific change.
 > 
-> I have been totally working with a remote lab to fix issues on RB1. I
-> will soon get one on my desk then I will be able to fix mmc1 too.
-
-In that case we can surely land the proper fixes for 2025.07 anyway, so 
-I'd just keep the errors until then.
-
-Kind regards,>
-> -Sumit
+> However I found this error in the logs, on both a TI AM62 and an i.MX8MP
 > 
->>> +&sdhc_2 {
->>> +	status = "disabled";
->>> +};
->> -- 
->> Caleb (they/them)
->>
+> ```
+> Starting download of 40524455 bytes
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> ..........................................................................
+> ..........................................................................
+> ..........................................................................
+> ..........................................................................
+> .............
+> downloading of 40524455 bytes finished
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> Starting download of 1675 bytes
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> downloading of 1675 bytes finished
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> Starting download of 82 bytes
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> downloading of 82 bytes finished
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> dwc3-generic-peripheral usb@31000000: request 0000000099f219c0 was not queued to ep1in-bulk
+> ```
+> 
+> the download is successful however, despite those error messages. Any idea? Is
+> this related to this topic?
+I have a feeling it is the UUU which should be fixed to not depend on 
+the ep1-in , really.
 
--- 
-Caleb (they/them)
-
+You could however quickly try and apply the change in this patch not 
+only to SPL, but to U-Boot on your board as well, and see if those 
+warnings disappear.
