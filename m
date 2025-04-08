@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30169C36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 00:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8446EC36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 00:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB33283211;
-	Tue,  8 Apr 2025 02:54:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AC6982F6A;
+	Tue,  8 Apr 2025 02:54:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kCP930ee";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="VDDGzDkG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87081830B5; Tue,  8 Apr 2025 02:54:23 +0200 (CEST)
-Received: from mail-m12829.netease.com (mail-m12829.netease.com
- [103.209.128.29])
+ id 3DA0082FE9; Tue,  8 Apr 2025 02:54:56 +0200 (CEST)
+Received: from mail-m3271.qiye.163.com (mail-m3271.qiye.163.com
+ [220.197.32.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED2BC83106
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 02:54:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BD1E82E76
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 02:54:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 10fbd8c49;
- Tue, 8 Apr 2025 08:54:13 +0800 (GMT+08:00)
-Message-ID: <855e3c99-fd5d-4fa7-ab00-32b9f7891ced@rock-chips.com>
-Date: Tue, 8 Apr 2025 08:54:13 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 10fbd8cc6;
+ Tue, 8 Apr 2025 08:54:44 +0800 (GMT+08:00)
+Message-ID: <0acb1bc6-88ef-4a87-a27e-9aa69b774b54@rock-chips.com>
+Date: Tue, 8 Apr 2025 08:54:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] rockchip: Add DFU to boot from USB for Radxa ROCK 3B
+Subject: Re: [PATCH 4/6] rockchip: Add DFU to boot from USB for Radxa ZERO
+ 3E/3W
 To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, banglang.huang@foxmail.com,
  jonas@kwiboo.se, trini@konsulko.com, gajjar04akash@gmail.com,
@@ -41,25 +42,25 @@ Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, banglang.huang@foxmail.com,
  maximmosk4@gmail.com, dsimic@manjaro.org, christopher.obbard@linaro.org,
  wens@csie.org, sebastian.reichel@collabora.com
 References: <20250211061322.94186-1-naoki@radxa.com>
- <20250211061322.94186-4-naoki@radxa.com>
+ <20250211061322.94186-5-naoki@radxa.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250211061322.94186-4-naoki@radxa.com>
+In-Reply-To: <20250211061322.94186-5-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQ0oeVhpMQ0xOGk0dH0sYGVYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTEhPVkpITR9JTUJLTx1JTFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a9612e3fe1b03afkunm10fbd8c49
+X-HM-Tid: 0a9612e4764f03afkunm10fbd8cc6
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MCI6Fhw4SzJWIUMMLksySSk#
- ETwwCzZVSlVKTE9PS0xITU5OQ0pPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhJSkk3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MjY6URw5HjJWA0MVEE01KQs4
+ IzUaCRpVSlVKTE9PS0xITUNMQklNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhKT043Bg++
 DKIM-Signature: a=rsa-sha256;
- b=kCP930eeGuuIAD2skdNrSw/Po5tiKApIVix5064ldakhBsFY9I96fK0GdYqw+wUBuw8Sy9OEtp1Qq0eBhQ9eO8c3c0l4gsQDs3PFmFFphk+64hE7KmUWTM5vRcSpu9s2Ys/t5h2SjifhACVTD6zrXotRAqQ+ug+iilxofWWh7+Y=;
+ b=VDDGzDkGIrosrLDp+RgbMFbeCdn0xUGXOjBqDXFSHdjAXLiuYf4OYolcV6sRcXGVlJIP7p9cQGmrKZaqQCTI3B+Z40cQZdxGIj7pL5xD5tjjQJwVgCqOJ6Dve+Kt62+hoT4gwwu14TrODKKIQoGPlZrEZMX9iWPZEEW+cDRpRrs=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=Tz6n+bpL8spoTzhjyJ8K7bZlg81/Tb34YBMyRQi9ZUw=;
+ bh=m8L+XHrgtLC9Jjd3diPgsDn3ZS6Ui5gu5oCxnEG4PoI=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,8 +80,8 @@ X-Virus-Status: Clean
 
 
 On 2025/2/11 14:13, FUKAUMI Naoki wrote:
-> Boot the Radxa ROCK 3B from the USB OTG port using rkflashtool[1] or
-> rkusbboot[2] and dfu-util.
+> Boot the Radxa ZERO 3E/3W from the USB OTG port using rkflashtool[1]
+> or rkusbboot[2] and dfu-util.
 >
 > 1a. Download the TPL and SPL using rkflashtool
 >
@@ -106,28 +107,27 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   configs/rock-3b-rk3568_defconfig | 9 +++++++++
+>   configs/radxa-zero-3-rk3566_defconfig | 9 +++++++++
 >   1 file changed, 9 insertions(+)
 >
-> diff --git a/configs/rock-3b-rk3568_defconfig b/configs/rock-3b-rk3568_defconfig
-> index 2023feb36c2..45092aec6ac 100644
-> --- a/configs/rock-3b-rk3568_defconfig
-> +++ b/configs/rock-3b-rk3568_defconfig
-> @@ -28,9 +28,11 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+> diff --git a/configs/radxa-zero-3-rk3566_defconfig b/configs/radxa-zero-3-rk3566_defconfig
+> index 5989b07ad79..7aae38e06d4 100644
+> --- a/configs/radxa-zero-3-rk3566_defconfig
+> +++ b/configs/radxa-zero-3-rk3566_defconfig
+> @@ -22,8 +22,10 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
 >   CONFIG_SPL_MAX_SIZE=0x40000
 >   CONFIG_SPL_PAD_TO=0x7f8000
 >   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 > +CONFIG_SPL_ENV_SUPPORT=y
->   CONFIG_SPL_SPI_LOAD=y
->   CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+>   CONFIG_SPL_POWER=y
 >   CONFIG_SPL_ATF=y
 > +CONFIG_CMD_DFU=y
 >   CONFIG_CMD_GPIO=y
 >   CONFIG_CMD_GPT=y
 >   CONFIG_CMD_I2C=y
-> @@ -54,6 +56,9 @@ CONFIG_SPL_SYSCON=y
->   CONFIG_SCSI_AHCI=y
->   CONFIG_AHCI_PCI=y
+> @@ -45,6 +47,9 @@ CONFIG_SPL_REGMAP=y
+>   CONFIG_SPL_SYSCON=y
+>   CONFIG_SPL_ADC=y
 >   CONFIG_SPL_CLK=y
 > +CONFIG_DFU_RAM=y
 > +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
@@ -135,14 +135,12 @@ Thanks,
 >   # CONFIG_USB_FUNCTION_FASTBOOT is not set
 >   CONFIG_ROCKCHIP_GPIO=y
 >   CONFIG_SYS_I2C_ROCKCHIP=y
-> @@ -89,12 +94,16 @@ CONFIG_SYS_NS16550_MEM32=y
->   CONFIG_ROCKCHIP_SFC=y
+> @@ -76,10 +81,14 @@ CONFIG_SYS_NS16550_MEM32=y
 >   CONFIG_SYSRESET=y
+>   CONFIG_SYSRESET_PSCI=y
 >   CONFIG_USB=y
 > +CONFIG_SPL_DM_USB_GADGET=y
 >   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
 >   CONFIG_USB_DWC3=y
 >   CONFIG_USB_DWC3_GENERIC=y
 > +CONFIG_SPL_USB_DWC3_GENERIC=y
