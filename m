@@ -4,152 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA1CC369A2
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:22:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28390C369A5
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:27:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 668CC83447;
-	Tue,  8 Apr 2025 16:21:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=voltserver.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BBBA82CAE;
+	Tue,  8 Apr 2025 16:27:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=voltserver.com header.i=@voltserver.com header.b="PHUtA9fM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KkEESEQB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D74682F5A; Tue,  8 Apr 2025 14:54:56 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20720.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::720])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7541382CAE; Tue,  8 Apr 2025 16:27:05 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B4B682EAA
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 14:54:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=voltserver.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7A96E820AA
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:27:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thom.nichols@voltserver.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lWx9BlVhJ5zaFPhQ44vkq3VMnfUj2u6QHX1CrNnwAKHgD6rqmGKl1BEcKxhOhMyugcGAD6cn5Elf3RlJTV8vVX4R5E7zKvpQVFe6FRks1qQQ+5iiBN5Q3yJkbWOgPvuMDXcnnuzD8Da+Nw5cq+utFhnQA9aisdkvc3OUNNc9xigy/gBlBX9ryZM/7HcmakKnR04csS6t21ogJUiegBSlIiRF5X9vahbZtD/thX8m9kZAbz81zl/CwoeSGsOa5MsZ77YiktL7zaLVaYilM3TG+pspijTlJXF6ezQnWEw/SMGcOQYXGGIL3bFr8B8DVYbw3Jsgc8rowvTwz7dg8A99uA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=91i8/plo9WkUjKB7Vysb6arLB5FBiZfDMus85X4Nbsk=;
- b=ISRPccmEPkoZwWMOnL1xxpUofpULRv4wWU+KwIJkJYVtpH8Mi/J5s7G3pcgII4LJCnyXPSWSeH1B1tCRgdxBnW9s8xezAnL//ayfoGstCfarhwgNYAxN10HMo7PYNSjXtLsePlMRXMH/Ss1jV6T/FXu5LK3U7ZRbtUMrsRod+dsF4DMdz4DamEI4mB6IL/AtSBjXSPeg+fv4uWMCdXB4HQ/b7eWCK9Vn0FsomLRu7KgA3qtdT+VuXTO6nzDTcO0WbXMSWN7rbl7nZwtmBddp/SR6Cd0wTlUhKoeJECPNbqVlG7QZzVaTNDsZkjJPCG0rLZ+vpZ/ARwL4Wculi91FnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=voltserver.com; dmarc=pass action=none
- header.from=voltserver.com; dkim=pass header.d=voltserver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=voltserver.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=91i8/plo9WkUjKB7Vysb6arLB5FBiZfDMus85X4Nbsk=;
- b=PHUtA9fMAxFoGGbegtAw3g7loIiu6dwEQhmhF+66/d9Yxq3LTyVeS+QKdQlHOypANTaBO7NMCdEZr8a41O0x5Uvp4c+uBpInCARg17UuHCGMaVwzyqKgDG+jRzmrdSoWCTVHYojyENVLf1Sfv3JGmJqyZG+xZ7zdzCpQN3ia6S4=
-Received: from CY8PR11MB7945.namprd11.prod.outlook.com (2603:10b6:930:7b::12)
- by CY5PR11MB6115.namprd11.prod.outlook.com (2603:10b6:930:2c::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.33; Tue, 8 Apr
- 2025 12:54:50 +0000
-Received: from CY8PR11MB7945.namprd11.prod.outlook.com
- ([fe80::c90:7c4e:4a9d:8b00]) by CY8PR11MB7945.namprd11.prod.outlook.com
- ([fe80::c90:7c4e:4a9d:8b00%5]) with mapi id 15.20.8606.029; Tue, 8 Apr 2025
- 12:54:49 +0000
-From: Thom Nichols <thom.nichols@voltserver.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: bootcount support for AM62 RTCSS
-Thread-Topic: bootcount support for AM62 RTCSS
-Thread-Index: AQHbqIOMYDmrrX/YGEu4sJZqgsfzfg==
-Date: Tue, 8 Apr 2025 12:54:49 +0000
-Message-ID: <CY8PR11MB79456EA41EF6365020C89B98FDB52@CY8PR11MB7945.namprd11.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-reactions: allow
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=voltserver.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CY8PR11MB7945:EE_|CY5PR11MB6115:EE_
-x-ms-office365-filtering-correlation-id: 637db7a5-60d8-4a02-d523-08dd769c8c60
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|38070700018|13003099007|8096899003; 
-x-microsoft-antispam-message-info: =?Windows-1252?Q?ZPNBesNzLz49NAGMjvVnPON5uYyMGhk1iM3rSuZFmuHeHftnkOaXxnlp?=
- =?Windows-1252?Q?MiKn4IJX1kEaitFGlqMmWb2B25D9PQmSvZZzTZTZ32B9k7QPlk40zfnL?=
- =?Windows-1252?Q?WHqX7Tzno6ex7PNRC5mekbgAwP2nx/Su0cTc1B8H/PvMizvjVUhSj3aE?=
- =?Windows-1252?Q?pbiTTXBsehIIwYLnBYhU+fqOROYBBcfLVE5S7pL6FhVbP0Bra9TVdnbk?=
- =?Windows-1252?Q?SHxPU4VWZQSZNXgVe/g5Fp/yZdkDenrg0lgp6XGAW42PH+72c9bYA4pl?=
- =?Windows-1252?Q?NWH0suyUlUugmYw8OvzsVc/6ROnHP9NvEU6Oh0Kg5VxV/JGDL2o/KF/K?=
- =?Windows-1252?Q?m+10YU4PBF5lbV4kWz1+0TTP9mVMP0inQr1F+F2VhxO86T7lo0yH6qwx?=
- =?Windows-1252?Q?XwkillVA1qJV2EtCF8pt61ngYVm8TpFYRN4SpxyCm0oMjKpfV7V3Eh5+?=
- =?Windows-1252?Q?3AvqOzcdEqYQFaLflE8VPLcr5DB9nl000dkMj0EytI3ceI6YKIb7i0qT?=
- =?Windows-1252?Q?cuDkIV0u/iOSyRiTRg/64agCd4vJp+AXgGM+LBPnZFBH00KbDsXoX8dk?=
- =?Windows-1252?Q?OOrsCzKbDS0wh932fXelxDj6aZIjSUfqRbnU2JypZT1yiY/lyIchYgg1?=
- =?Windows-1252?Q?+qWb1LjepaoolAL595VL6uPp6tvnqONJGq6XPwE75I57JIQcQzMvR6bq?=
- =?Windows-1252?Q?waXX7KAxdWwWNG25YeftnxrPtEUlNMLP+WQhcvNPOXTiAv0ZO4tlE7Vg?=
- =?Windows-1252?Q?nWqKAR7LY1DXffwuKSt2nsEO5uS9Ztg8chMzrgduJKt9Yek/+vlbsbeZ?=
- =?Windows-1252?Q?46XMQi7OnuPv29L0cA0tAsEiLL/utt8FttcPeXqr+Hj+SaZaB4/JPUe/?=
- =?Windows-1252?Q?3+tWbAuzSNN1ZX7W9F/inWDbAdz446ukpyk27MClHy5wZbZDe5PSWOwy?=
- =?Windows-1252?Q?x3f0R8sfMYczhwhNdFKKgkmfgHCcGQmgbbDqnn0urDAkNZ3vQ4vQG/2L?=
- =?Windows-1252?Q?j8NqPQ/av8IHOswwKSwZJNW56HIGjAsd0dghu8jqN0i95FF5prReD0jz?=
- =?Windows-1252?Q?GUE1koLJ6ET1Syw378LVFqBPWUOda2+PFhZRhU2FARPRdZRabo21q6zz?=
- =?Windows-1252?Q?nPpEDWEsMpUBSzvDJm8GybjlmWSwSEZlf3sCXxsZWeZBfNqxnDqtjMOE?=
- =?Windows-1252?Q?LB5eHJzo7BG6zrNgB5QRfXRsvd8B2EpU/dHJIm2y4IenarGgImI622EK?=
- =?Windows-1252?Q?P2GwDfcZmm/O6dl/DjgFhDV1QBVdKhOirYzEon6HZpLLE47u+XJiDdEH?=
- =?Windows-1252?Q?3dqhNRkriZrtIj37JvBGnQMjz3e0Yr+C4tAX6QmucTC06Us73RIXwSR4?=
- =?Windows-1252?Q?tOF8w9ZjkmJvLH75cPoaP/SesMe2/5TwKDTOXxp4GxBZHl4paf6WOl3M?=
- =?Windows-1252?Q?jXgARBP0qAZVL4Jvjz+Ifb8pEbNxp1Fbep3b5YFuR1uWgr1w4y8os0hr?=
- =?Windows-1252?Q?2kzgyjfwUWO0Y4+fLWpA9/1dOyI174jEGIWA085WPiv/6ypc/TapkXPM?=
- =?Windows-1252?Q?ZPxJenBhoUQJ/wub?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY8PR11MB7945.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700018)(13003099007)(8096899003);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?afmU+s7Y/m47OG+3ZsqNGzZ1uFUknkXW/XDlNhRlWzbz4att6jpdTSqc?=
- =?Windows-1252?Q?CUq4qzdr6XdJY/LyyQuP0s1v+PDrs/qOq12gYYA9YG3dEPW1bve6fVG8?=
- =?Windows-1252?Q?7iNQ3IJwNoHv3oZHkDG7p7ZTq7twfRKjZ77CVWfaIiXwMqAsN3B4R14x?=
- =?Windows-1252?Q?nNtXG8O8swWACbZf70PvDlnu/1smL4zFbVuJJ+lW17VEEWAHwWW/CS/y?=
- =?Windows-1252?Q?N4RckJgY5CQLTIfHwrtvfAIJmWuWGcOcRXICrWbwkN2J+Wi+kcZX/lmw?=
- =?Windows-1252?Q?ZL9y/JXv09baUD+QnakFiZzs9uWYRsSibWkFH9MakIRcSAD/FRp/Xeac?=
- =?Windows-1252?Q?H5BEZi1XhuSwbH989XYuyKlEksph9YL/XrcHZ0Co2psMiGpXGymRBrLr?=
- =?Windows-1252?Q?ihS3o8cfvTo5SasDSjbSTj82nPeXrdWYEBZPom8UE6SrGPK+kJucdZ7V?=
- =?Windows-1252?Q?18nHE4mzFREPKbXHKQuDRKHrygGeMl6CEJfwq3dqqlx33u+w6i8v8/Le?=
- =?Windows-1252?Q?XTyjRx8zqhuPtF0eHD7W/Lk0CoIjCcEyemfUa1uwjvGEFmLS0G8sX7wq?=
- =?Windows-1252?Q?W9sFDnV4Zxbt3QNCu1E4jyaHmW2FJQCYIh4un5yoPiWhLHDqdx7u9Kf1?=
- =?Windows-1252?Q?SLmSLYBWgdKaDWA1ZLYChpsGcfJzfCnjksGOCutMKYUFtYZ8mnbhl1zY?=
- =?Windows-1252?Q?94/70zU2IG1qIhF9erfeQo3SAYrN7H1pOt69fQJAx3vIPSF3KHDYc9K5?=
- =?Windows-1252?Q?uRG0Rvtbs7vdkl9basajfOb+nW62z2ar+niFP1d5RuKFHGT9bBvUatJP?=
- =?Windows-1252?Q?7VGUcneX39nJHFNHfdBS5ShhvytprJ/T0hNcvlDby/BOk5NxC+43qjUk?=
- =?Windows-1252?Q?oNUZzB8Fq6CMyJek0ib6JNrpOTsvCylSx1c0BHUUXztGNllIUeaqHC6/?=
- =?Windows-1252?Q?FeO5LIBVmnOBaXUx0ZVsJ1AAv1mntRbQdCzTXnnMc6dpbCvwmGxUdZ8M?=
- =?Windows-1252?Q?goR7kO++WSQCNp4wKWGrCpLu8hoFKYO/lAsi20V8ttdkSzvJnD+a5iUm?=
- =?Windows-1252?Q?TN0hm2PS5xPO8t6WilWPQmwh/oLI2qiXRdveWC+3P+Kz9AaJFVd/BHlP?=
- =?Windows-1252?Q?9kM+dBKu3mjHcW5RyO5qmaVMquIRMsiPC4E9fCPEdKnyVMNsLwyzoqWP?=
- =?Windows-1252?Q?Hpp2AnjNLVHM2pK4KmCnWa7KVlStK6DxRfmAd+G0caRTq+gGfA8XpeYX?=
- =?Windows-1252?Q?L9KdsBbjfGDd4XfmGAAnsBfv/IKhZ/f/LAEfEa+lZTCexhUnxhLplzxi?=
- =?Windows-1252?Q?jfWznKJHvgV+bcxM37FfunEcgYBsTZMEwXRA6CP4X0G3pQIrJKiqFJn/?=
- =?Windows-1252?Q?ug15ra2p5FOMsYkZNc5HaCyKbz+wqM1xXjQkiHzoHdABaUGF7uIizv91?=
- =?Windows-1252?Q?SgpyE9sqsfw1jTSR71eVBwOnyoDlMnxGcbE2w+uNZJbpW8ySlQy4m0ys?=
- =?Windows-1252?Q?UWRELwjFtDhtDIRmfthTEQHdIFk8iZ7qdGhqOQZ7dI3Yhyc01gepfHGP?=
- =?Windows-1252?Q?edzavzD8h/+e9M5AjNQ1cCd/cAP21NCzNtbxNgbpclw57knuqn3SrjPn?=
- =?Windows-1252?Q?ZIIteWHq2C/WAMbwfL2XEE1+z/IFZU9qQFmLFbXXh0KHMHvHTIj0mem7?=
- =?Windows-1252?Q?tXGu5nxX0aWWg52tVGUcO/cHZP0mzSWVTrRsXP1C5KbVyDwZgn/bSfxw?=
- =?Windows-1252?Q?lklSBOyw7GRDzXXLrAk=3D?=
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-2c7e5fb8c38so3452899fac.1
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:27:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744122421; x=1744727221; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=V/qQs6z03S/Hpx4hCkkM8+GJOBL5Hno3igfzFC2solQ=;
+ b=KkEESEQBkPdlLANjUFAkypFF29+C/vhLwVoU/um1RA3TPdu/7pAkQrGOLza9CRWRjn
+ +0v8OuI1BWUoJqEUONVikAZ4+hODSFmsWEnpjBCZXcZwZOMDz52fWDjAot+AKUIqUBvP
+ 6cglSWcxCyAFy+562jKnKMBUNRIocOyGmPqRM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744122421; x=1744727221;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V/qQs6z03S/Hpx4hCkkM8+GJOBL5Hno3igfzFC2solQ=;
+ b=oMywYcl1VW1GQmIDK3AZoxszB/rQgJMV0b8zRPPIFbCT6lXvS9VJzqk5sBKQy7Gj30
+ l6EVNKZiNEKXPPk+QJoAO1D63+55u4gGJQYPIqti1MxK3MymQgfj/O6IttlAdOPBW3AN
+ qfTk4g+S38j99h1+ECp/GJr23hlX8XlRVqvF7JvO83VFxm2Mi2RIO9rmAj2HnB/b3dHZ
+ 0iqT21aWgCkFgNKXrfG2g66MCp6ljdXuC0UaviEMe46co+PWRV1JFLweyEfb/iPQso+6
+ uuByvdVVKXervgNKnfXih1MNCgU5rCV4zCg1wFm7UmzybZ4knwu47mFCA/1k10bmzY5o
+ rnZw==
+X-Gm-Message-State: AOJu0YygM2AtBlpcBl5fdqSvUkeCOGZJubz9LmkUPvV2se4he9hMoSZr
+ kCDZYqnA1uEnUifrDxVs7OVUbfk+2dRv5oexnUx0+kUnohEVERp+lhbQrG1Lehc=
+X-Gm-Gg: ASbGncuI9fe8fRtR4QNhfOAkNSrOtIBFQM8tMuddsLysnKXVLnJP79GE/QgfyR1Dzty
+ 6poucAVlMP0Ty99voyF4hr6rwsPOGmCIfzHuNjaKMiZ4CrVYkIlxOjEE5C6ynL5VkIJwU2jduLq
+ zaOUd1BMlwR5x3CQ97mONxzWUfccda2UBPx65+LvxhK9+b5JA0EY3b/05xaqVpiMoBkYc963oOF
+ lOnCYZBWu14MfgbUZMzGFrP7jUu2ITgPKqGVTFRTaS4Z1jMwE2XwFugPT+ZsEXwN+q0lFAzcpPR
+ zkuEnlm7wFIr0KD+v7k1YDK0oHVwra/Sy8HmLbGTuxYaEKDD6+zjSBv3Z6a+06OGt2ZISl9rXn8
+ uEjxFNg==
+X-Google-Smtp-Source: AGHT+IFAaf0N01gxNEOdPklv7jkxC+whyPsBstj5dof87ZRjgfHUwMq6uOnjdtO1sBr6BSxMlOhoDQ==
+X-Received: by 2002:a05:6871:22cb:b0:2b8:306f:c5b5 with SMTP id
+ 586e51a60fabf-2cd32e21919mr7593128fac.7.1744122421141; 
+ Tue, 08 Apr 2025 07:27:01 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e6526ed82sm464207a34.59.2025.04.08.07.26.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Apr 2025 07:27:00 -0700 (PDT)
+Date: Tue, 8 Apr 2025 08:26:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek <marex@denx.de>,
+ Simon <simon.k.r.goldschmidt@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ "Meng, Tingting" <tingting.meng@altera.com>,
+ "Chee, Tien Fong" <tien.fong.chee@altera.com>,
+ "Hea, Kok Kiang" <kok.kiang.hea@altera.com>,
+ "Ng, Boon Khai" <boon.khai.ng@altera.com>,
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@altera.com>,
+ "Lim, Jit Loon" <jit.loon.lim@altera.com>,
+ "Tang, Sieu Mun" <sieu.mun.tang@altera.com>
+Subject: Re: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
+Message-ID: <20250408142657.GX5495@bill-the-cat>
+References: <20250324083704.26259-1-dinesh.maniyam@altera.com>
+ <SA1PR03MB6370C3D360FC1E92B4766F3CF7B52@SA1PR03MB6370.namprd03.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: voltserver.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CY8PR11MB7945.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 637db7a5-60d8-4a02-d523-08dd769c8c60
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2025 12:54:49.8403 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 9d954406-2c01-45a3-9cc8-be64a19fb626
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bMIUq94AZNVKUFKESIqmmgxRbkJKpOwbzGv+05bmsS45zjAPvON3jjLxS/MXlEBj09MgMalNdbOPobT7DkC4BHHSpOpWZoU8y200fAe1zL4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR11MB6115
-X-Mailman-Approved-At: Tue, 08 Apr 2025 16:21:49 +0200
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pVoMxKzNBxqv8fgO"
+Content-Disposition: inline
+In-Reply-To: <SA1PR03MB6370C3D360FC1E92B4766F3CF7B52@SA1PR03MB6370.namprd03.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,35 +115,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I=92d like to get bootcount support for the AM62 RTCSS.  The RTCSS on the A=
-M62 is very similar to the AM33.  In fact, I=92m pretty sure the bootcount_=
-davinci driver would work for AM62, with just the register address/ offset =
-and KICK_WE constants redefined for the correct AM62 values.  A while back =
-I tested the AM62 scratch register from userspace [1] and confirmed it work=
-s the same as the AM33.
 
-I=92ve never contributed to u-boot but I believe I could get a working PR t=
-hat modifies the davinci_bootcount driver, if this would be acceptable.
+--pVoMxKzNBxqv8fgO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Alternately I don=92t know if there=92s any near-term plan for any of the A=
-M62 maintainers to port the rtc driver so that bootcount/rtc could be used.=
-  I think doing this would be beyond my capabilities.
+On Tue, Apr 08, 2025 at 08:14:46AM +0000, Maniyam, Dinesh wrote:
 
-Thanks in advance.
+> Hi Tom Rini,
+>=20
+> > -----Original Message-----
+> > From: Maniyam, Dinesh
+> > Sent: Monday, 24 March 2025 4:40 pm
+> > To: u-boot@lists.denx.de
+> > Cc: Marek <marex@denx.de>; Simon <simon.k.r.goldschmidt@gmail.com>;
+> > Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>; Dario
+> > Binacchi <dario.binacchi@amarulasolutions.com>; Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org>; Heinrich Schuchardt <xypron.glpk@gmx.de>;
+> > Jerome Forissier <jerome.forissier@linaro.org>; Mattijs Korpershoek
+> > <mkorpershoek@baylibre.com>; Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>;
+> > Michal Simek <michal.simek@amd.com>; Dmitry Rokosov
+> > <ddrokosov@salutedevices.com>; Jonas Karlman <jonas@kwiboo.se>; Sebasti=
+an
+> > Reichel <sebastian.reichel@collabora.com>; Meng, Tingting
+> > <tingting.meng@altera.com>; Chee, Tien Fong <tien.fong.chee@altera.com>;
+> > Hea, Kok Kiang <kok.kiang.hea@altera.com>; Maniyam, Dinesh
+> > <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>;
+> > Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Zamri, Muhammad
+> > Hazim Izzat <muhammad.hazim.izzat.zamri@altera.com>; Lim, Jit Loon
+> > <jit.loon.lim@altera.com>; Tang, Sieu Mun <sieu.mun.tang@altera.com>
+> > Subject: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
+> >=20
+> > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> >=20
+> > This patchset add Synopsys MIPI I3C Driver support for Intel Agilex5 de=
+vices.
+> >=20
+> > The i3c driver is leveraged from the master/dw-i3c-master.c, i3c/device=
+=2Ec and
+> > i3c/master.c Linux version 6.6.37 LTS And few header files included to =
+be part of
+> > the migration; i3c/internals.h, include/linux/i3c/ccc.h, include/linux/=
+i3c/device.h
+> > and include/linux/i3c/master.h.
+> > Additional i3c uclass driver and command files added to support i3c rea=
+d and
+> > write in U-Boot.
+> >=20
+> > Patch status:
+> >=20
+> > Detail changelog can find in commit message.
+> >=20
+> > v3->v2:
+> > --------
+> > - Squash commit 10 to commit 9
+> > - Resolve index for new files to pass the checkpatch
+> >=20
+> > Commit: sandbox_defconfig: Enable configs for sandbox i3c
+> > Commit: agilex5_defconfig: Enable i3c configs for agilex5
+> > - use savedefconfig
+> >=20
+> > drivers: Enabled Kconfig and Makefile for i3c support
+> > - Add maintainer for i3c
+> >=20
+> > drivers: i3c: Enabled Kconfig and Makefile for DWI3C
+> > - Add empty lines for if/endif
+> >=20
+> > drivers: i3c: Add i3c sandbox simple test.
+> > - Removed DECLARE_GLOBAL_DATA_PTR
+> >=20
+> > v1->v2:
+> > --------
+> > Reorder commits.
+> >=20
+> > Added commits:
+> > - drivers: i3c: Add i3c sandbox simple test.
+> > - test: cmd: Add simple test for i3c
+> > - configs: sandbox_defconfig: Enable configs for sandbox i3c
+> > - configs: agilex5_defconfig: Enable i3c configs for agilex5
+> >=20
+> > History:
+> > --------
+> > [v1]:
+> > https://patchwork.ozlabs.org/project/uboot/cover/20250218025705.50051-1-
+> > dinesh.maniyam@intel.com/
+> > [v2]:
+> > https://patchwork.ozlabs.org/project/uboot/cover/20250314040902.43621-1-
+> > dinesh.maniyam@altera.com/
+> >=20
+> > Dinesh Maniyam (12):
+> >   drivers: i3c: Add new i3c uclass id
+> >   drivers: i3c: Add driver for MIPI DWI3C
+> >   drivers: i3c: Add i3c uclass driver.
+> >   drivers: Enabled Kconfig and Makefile for i3c support
+> >   drivers: i3c: Enabled Kconfig and Makefile for DWI3C
+> >   drivers: i3c: Add i3c sandbox simple test.
+> >   drivers: i3c: master: Enable probe i3c without slave device
+> >   i3c: master: dw-i3c-master: Fix OD_TIMING for spike filter
+> >   cmd: Add i3c command support.
+> >   test: cmd: Add simple test for i3c
+> >   configs: sandbox_defconfig: Enable configs for sandbox i3c
+> >   configs: agilex5_defconfig: Enable i3c configs for agilex5
+> >=20
+> >  MAINTAINERS                        |    7 +
+> >  arch/sandbox/dts/test.dts          |    8 +
+> >  cmd/Kconfig                        |    6 +
+> >  cmd/Makefile                       |    1 +
+> >  cmd/i3c.c                          |  193 +++
+> >  configs/sandbox_defconfig          |    4 +
+> >  configs/socfpga_agilex5_defconfig  |    3 +
+> >  doc/usage/cmd/i3c.rst              |   98 ++
+> >  drivers/Kconfig                    |    2 +
+> >  drivers/Makefile                   |    1 +
+> >  drivers/i3c/Kconfig                |   27 +
+> >  drivers/i3c/Makefile               |    5 +
+> >  drivers/i3c/device.c               |  262 ++++
+> >  drivers/i3c/i3c-uclass.c           |   38 +
+> >  drivers/i3c/internals.h            |   26 +
+> >  drivers/i3c/master.c               | 2072 ++++++++++++++++++++++++++++
+> >  drivers/i3c/master/Kconfig         |   11 +
+> >  drivers/i3c/master/Makefile        |    3 +
+> >  drivers/i3c/master/dw-i3c-master.c | 1058 ++++++++++++++
+> >  drivers/i3c/sandbox_i3c.c          |   56 +
+> >  include/dm/device.h                |    2 +
+> >  include/dm/uclass-id.h             |    1 +
+> >  include/dw-i3c.h                   |  252 ++++
+> >  include/i3c.h                      |   67 +
+> >  include/linux/i3c/ccc.h            |  385 ++++++
+> >  include/linux/i3c/device.h         |  286 ++++
+> >  include/linux/i3c/master.h         |  698 ++++++++++
+> >  test/cmd/Makefile                  |    1 +
+> >  test/cmd/i3c.c                     |   52 +
+> >  test/dm/Makefile                   |    1 +
+> >  test/dm/i3c.c                      |   34 +
+> >  31 files changed, 5660 insertions(+)
+> >  create mode 100644 cmd/i3c.c
+> >  create mode 100644 doc/usage/cmd/i3c.rst  create mode 100644
+> > drivers/i3c/Kconfig  create mode 100644 drivers/i3c/Makefile  create mo=
+de
+> > 100644 drivers/i3c/device.c  create mode 100644 drivers/i3c/i3c-uclass.=
+c  create
+> > mode 100644 drivers/i3c/internals.h  create mode 100644 drivers/i3c/mas=
+ter.c
+> > create mode 100644 drivers/i3c/master/Kconfig  create mode 100644
+> > drivers/i3c/master/Makefile  create mode 100644 drivers/i3c/master/dw-i=
+3c-
+> > master.c
+> >  create mode 100644 drivers/i3c/sandbox_i3c.c  create mode 100644
+> > include/dw-i3c.h  create mode 100644 include/i3c.h  create mode 100644
+> > include/linux/i3c/ccc.h  create mode 100644 include/linux/i3c/device.h =
+ create
+> > mode 100644 include/linux/i3c/master.h  create mode 100644 test/cmd/i3c=
+=2Ec
+> > create mode 100644 test/dm/i3c.c
+> >=20
+> > --
+> > 2.26.2
+>=20
+> Please help to review the v3 of the patches.
+> Thanks for your time.
 
-Thom Nichols
+Please run this through CI, see
+https://docs.u-boot.org/en/latest/develop/ci_testing.html, as there are
+both easy and less-easy doc failures, and then compile warnings:
+https://source.denx.de/u-boot/u-boot/-/jobs/1092473
 
+--=20
+Tom
 
-  1.
-https://github.com/VoltServer/uboot-bootcount/pull/15/files
+--pVoMxKzNBxqv8fgO
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This email and any files transmitted with it are confidential and intended =
-solely for the use of the individual or entity to whom they are addressed. =
-If you have received this email in error please notify the system manager. =
-This message contains confidential information and is intended only for the=
- individual named. If you are not the named addressee you should not dissem=
-inate, distribute or copy this e-mail. Please notify the sender immediately=
- by e-mail if you have received this e-mail by mistake and delete this e-ma=
-il from your system. If you are not the intended recipient you are notified=
- that disclosing, copying, distributing or taking any action in reliance on=
- the contents of this information is strictly prohibited.
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf1MjEACgkQFHw5/5Y0
+tyy9yQwAp4CnVeaclbLDuL0mGFqBpYjcuSwzMxw8CgSWxt/qEMt1lgHLS3ny1ywz
+GvSGUnzZ8eMscTPlMplAWzIQ+jTHjE1GRv76N0STu7L+O5o4kd7dvm6SHVpiPgMf
+UCw50HPB73aJlDChc0DPclJsgKnf+rkKck2oZvpbqSyUPontB3e9mTr9oF2wbCPd
+lMrhIzu2NYqOmlItF8zJxNy4cDe/eQ1L7drzg6KEljHx7DuXV+AfIjbt29mcmZb7
+6TxmckHIBGLcyn0/fxEPugH5eZGbAEU/XZUIITuVhpxQzhpEQ4sHeiEtdmpOBj/N
+LE9Q8CZc93A6bwLUVF11mYQQszpp8GiqKuUMHAZnCyDXaWw05ink4uMROKqIhbpS
+43/hD3nBgUcP3ogb/vDSXDprJyK5Krh1YslYJ2dcFBcLg8/UjSWOVWUEVKnjVPaH
+KYpC0la6rby6JXl45K8aKfDR53zm+jus0XIUNfYNSeufXG5PeNvhXfQb74WittOd
+XRvx8HGM
+=qZ3b
+-----END PGP SIGNATURE-----
+
+--pVoMxKzNBxqv8fgO--
