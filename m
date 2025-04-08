@@ -4,169 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9281EC369A2
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8069C369A2
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D48782E0A;
+	by phobos.denx.de (Postfix) with ESMTP id 928078340C;
 	Tue,  8 Apr 2025 16:21:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ifm.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ifm.com header.i=@ifm.com header.b="pmGxWSoT";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="jK43wBbB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76D9D83348; Tue,  8 Apr 2025 09:29:33 +0200 (CEST)
-Received: from pp0155.ppsmtp.net (pp0155.ppsmtp.net [132.145.231.114])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EB63782FBC; Tue,  8 Apr 2025 10:14:52 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14EAC82EFC
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 09:29:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23AB082F5A
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 10:14:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ifm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1193e21e32=anton.gres@ifm.com
-Received: from pps.filterd (pp2080.ppsmtp.internal [127.0.0.1])
- by pp2080.ppsmtp.internal (8.18.1.2/8.18.1.2) with ESMTP id 5387P9t8021081;
- Tue, 8 Apr 2025 09:29:23 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ifm.com; h=cc :
- content-transfer-encoding : content-type : date : from : message-id :
- mime-version : subject : to; s=pps;
- bh=jfEDEbzcMFqY4x/4mbeFV4kDWeY9oqKcRKbk4SWeubs=;
- b=pmGxWSoT7N9ENntWMvBCGXbx+YcIzNhBbhxRt2EbXVdvlpWdky7MhlPpiGB5m6dn8A37
- gL9wfljJurgYm5tqy1/6krtYka0Exi1Hl5C7vTu84pfouDfVweXhiHlgr0BB6Q8N8TdH
- p/4f0SmYGSPyp6T4ZvpFWyOkWFSIBArw1hbLNX73GUpm7HicpRZNnLRVNF0+RffkiwPM
- qfMe1sXrGAxRNgThTWywsq5HMJyJM6VBGhpLT2xcM/EoWKqJSdg9LeSqXgP7nSGr4owp
- EsQ+KCCeReATL+f/30w/SupouzmORjqXmdnntCfPCgVnDujf/uFy1NP/QGp71UTEUIJ1 aA== 
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VCQWhVxRVtHLgJs5vwkHAUdK3xHs0+TYxy0KXBDPwEavCjHyVbHhSEeRp8Vb+F/YBWZ0Bb2kGVD7qTztBvCO4PDMe6PGX8eDVxUgtvU2stvCc4Y/bBeqA2t5uCusRCDfB3kynCmheYLVGJkwxLbATl+OMXtsM//U7C5bVaBa/v7DsJbMZDcShD04YX2suW3jQKagHyx2vlLTexEX3n8qoacXhdKlK3Clmi6SLiCp2Rx6o/oxoI6W99NDGBEI+FUAXji+LfRn/Y4X3vyXsaYx5RkgldgKyexrmzGbORLBCUpicFySO2Qtswm2MbY5pJ8YsjXJoFKHa8Pc/dcP371Hyw==
+ b=T5Kk2YCQzS6JHH9dQgW+IcwbCIO7aTMaWWpE+SeAH9GDxfxsW/M1cf8fxRGp1Y6uar9PSkKwztV2B9mZJL2ZcWv4KjBngfHv4ykH7HeVPh8EDUl9v4wcODQZGX9vxs4TiwJFvkJPRx/jJN7rRKarCvGWbd5nze7yBN4wPGSbW87x6NeyvSXbSHq8jtEdhakbeBIM9lnk9AUc5GFeAWN3KJFfnAfjgsVGq0pfHWPWMEMj+hL6igRo/OQ35GyWB5CgnAVJgEUQSspqZ2Gq35VA6nQZVdFEndKHF0zf+ceMe4WMSNDCsPAee4jvrboPvXre7E/INw+PiheFxIotYCGpBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jfEDEbzcMFqY4x/4mbeFV4kDWeY9oqKcRKbk4SWeubs=;
- b=xo1QNvquomgIOgN1GcCU4IyiwHU3R75/wwNvD+iPVYV5BQq7lTVPWugWkJQ1XrCdsZLf10YGg6MTxUZurqI5+2vqrWaaGzM7NzQHd2XNhyKpChLc9oKTss2/KA/QqFSmGnl+ju9Q1dJE/acgVHOTs1b+7xjXUjmdVB4BSfoQfjkfalYDNwMde87AL7G7Qz2mbkD4iGWuOEVZdoBx1uQhO+8enVO1zWMWsCnoqXAMwOGHnJvwq0TyZyliUJVNlJeaJBfNfs4mFnci59qsQ8z1YhT8w3Bntjy9ltVki3yzCF6z0W0vVTpMGwLhYYFTh2cDlqscAHxgYMPhsce3GqfDMQ==
+ bh=ag0DgDz5IByjylclxCxrX4o3oz7zuJaNslXsAAxDOOE=;
+ b=Hl8kuNImvNEwYPU8ic8QhDlGX1v6NL4TQbLmdMEAIjLSq/J/H86A71mIwbY2fEwxVMbobPc5hFsXqCvne84HJFpcOdbIDYeqb6g4zf1bNIPqFqPWUClO2UjdF25Q+2wfLOGeZOJDUS4YlX/kA6aKxFbVQARXrVGfUUvQ3jGdBRkSLXEzBjVIpp7eTcGFV8IEyTkufhYMm5fMPApOCFU7Z1QsbHsYOagrWUQ6L8AcviFkaS01v9GCNHYtVtPqoMpNXXmlPoxifGt6LLRgAIxILe0GKGVOkO/i9NDtiWnb+xdxQlG8KYCZROcWkPYgGf/pZTGcxw7Q5wyAsFABIYYhoA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ifm.com; dmarc=pass action=none header.from=ifm.com; dkim=pass
- header.d=ifm.com; arc=none
-From: "Gres, Anton" <Anton.Gres@ifm.com>
-To: "alice.guo@oss.nxp.com" <alice.guo@oss.nxp.com>
-CC: "LW@KARO-electronics.de" <LW@KARO-electronics.de>, "alice.guo@nxp.com"
- <alice.guo@nxp.com>, "alpernebiyasak@gmail.com" <alpernebiyasak@gmail.com>,
- "festevam@gmail.com" <festevam@gmail.com>,
- "lukma@denx.de" <lukma@denx.de>, "marex@denx.de" <marex@denx.de>,
- "sbabic@denx.de" <sbabic@denx.de>, "seanga2@gmail.com" <seanga2@gmail.com>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>
-Subject: Re: [PATCH v8 17/19] doc: imx: add document for i.MX95 Image
- Container Format
-Thread-Topic: [PATCH v8 17/19] doc: imx: add document for i.MX95 Image
- Container Format
-Thread-Index: AQHbqFVfrTjBvWobkUqWZ5SUqPgFCw==
-Date: Tue, 8 Apr 2025 07:29:20 +0000
-Message-ID: <AM0P189MB0818D6DA0527C56748BF28E180B52@AM0P189MB0818.EURP189.PROD.OUTLOOK.COM>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ag0DgDz5IByjylclxCxrX4o3oz7zuJaNslXsAAxDOOE=;
+ b=jK43wBbBHfnvTiT2EbcCckZcrcw6DGWuNI46TylcUAXoebZgwnEh7BU953NedFxK0S0N1GgSos4pKpdk7qbt/v+kyuWvLg+V45W4GGSGY2aRy1UOm0kBjlJJovLg1tiCB+SjmFlX3mN8uyB2iXAMTqLDq+CP8t7jSWxd3jpWYsQpYYFTDdE25Ri+oEwxHLAic2R5OH/mkuy2/qzbPKJ86qupMv/CQNYpxnJNRweF380xl3wNBZDUm8AsYWeYgtDybkBQKcKb/9yA1EJzYBOf7ho1epXAtzVzNVs915UPUOzGdIBDnPiRmDzNANmaTpXvFdLSd4vJoSiPNK1jsNWPAg==
+Received: from SA1PR03MB6370.namprd03.prod.outlook.com (2603:10b6:806:1b5::16)
+ by DS7PR03MB5592.namprd03.prod.outlook.com (2603:10b6:5:2c2::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Tue, 8 Apr
+ 2025 08:14:46 +0000
+Received: from SA1PR03MB6370.namprd03.prod.outlook.com
+ ([fe80::94d:7001:3263:ab03]) by SA1PR03MB6370.namprd03.prod.outlook.com
+ ([fe80::94d:7001:3263:ab03%4]) with mapi id 15.20.8583.041; Tue, 8 Apr 2025
+ 08:14:46 +0000
+From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>, Simon
+ Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Dmitry Rokosov
+ <ddrokosov@salutedevices.com>, Jonas Karlman <jonas@kwiboo.se>, Sebastian
+ Reichel <sebastian.reichel@collabora.com>, "Meng, Tingting"
+ <tingting.meng@altera.com>, "Chee, Tien Fong" <tien.fong.chee@altera.com>,
+ "Hea, Kok Kiang" <kok.kiang.hea@altera.com>, "Ng, Boon Khai"
+ <boon.khai.ng@altera.com>, "Yuslaimi, Alif Zakuan"
+ <alif.zakuan.yuslaimi@altera.com>, "Zamri, Muhammad Hazim Izzat"
+ <muhammad.hazim.izzat.zamri@altera.com>, "Lim, Jit Loon"
+ <jit.loon.lim@altera.com>, "Tang, Sieu Mun" <sieu.mun.tang@altera.com>
+Subject: RE: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
+Thread-Topic: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
+Thread-Index: AQHbnJhPL6oic8rJyUK393me9B/PZbOZcsMw
+Date: Tue, 8 Apr 2025 08:14:46 +0000
+Message-ID: <SA1PR03MB6370C3D360FC1E92B4766F3CF7B52@SA1PR03MB6370.namprd03.prod.outlook.com>
+References: <20250324083704.26259-1-dinesh.maniyam@altera.com>
+In-Reply-To: <20250324083704.26259-1-dinesh.maniyam@altera.com>
+Accept-Language: en-MW, en-US
+Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM0P189MB0818:EE_|DB8P189MB0665:EE_
-x-ms-office365-filtering-correlation-id: 3445aa53-a2b0-4688-fc62-08dd766f140d
+x-ms-traffictypediagnostic: SA1PR03MB6370:EE_|DS7PR03MB5592:EE_
+x-ms-office365-filtering-correlation-id: dfed8713-1fc5-4b7f-05ab-08dd76756c9b
+x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|7416014|1800799024|38070700018; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?jBMZ2YOW4Gw4zv4TV4+ub+vWogKp/xp4Fn+9hYihNF3pIxhVIdPucOAik5?=
- =?iso-8859-1?Q?xKFtNdA6w2vj3Rlf79j7aP82QNERX8vgkQFbuVA70wLR2p32nQVY11hCoo?=
- =?iso-8859-1?Q?LddOs0pf/HQOKkcFrQnFdcp/a74j1HD0mlPRvbic/8bNJ+oZK8djpYLurK?=
- =?iso-8859-1?Q?ymRpXZsO8WwcNNM6TEwkGtoef5RrQtvsuawyDJvHDftjLRK4FH6MrVMT3G?=
- =?iso-8859-1?Q?hqDce7xOeRv2TlBovuuSRcGjGYaaa8HybBolUJ9LX5WJsMSRZ6TKVBnr6e?=
- =?iso-8859-1?Q?5kbGX6OLOVhttJYD27vqG1DxWmr936u+ZI/nvyOT+MZP8P+IRRnIAghMLI?=
- =?iso-8859-1?Q?pmRIknRYouMd70A1T3iw9uFrIRUus4Su8bBCpjD0zr7X3lxZjhl/Zy3nM1?=
- =?iso-8859-1?Q?DtRVzM/Ax8XxgwdEtjKXf5z7soDadTZiOgIXx25s09x6MekONfkoXgE7d/?=
- =?iso-8859-1?Q?ubvaqqiPhgaSIFafj97D0kjIhstSE9ZHF1IajERXRpr3Wzdth1+9wNFkSa?=
- =?iso-8859-1?Q?WSQz3fOnt75dUXYBhspwN2EDOGIvG2IoI1i4rmU/FosKkf0QksuCpRpgYJ?=
- =?iso-8859-1?Q?ZsGUFB7hYKXg0rWs0AQkZKNA9mjINheG16HCZTQv5DgIQC4Mbkiu63BeB7?=
- =?iso-8859-1?Q?pgD6vYARwkeuFgq4XgVpUv9KjY5TeOVkJXfjbjir0onInb1X24HwJEvwmX?=
- =?iso-8859-1?Q?kqa2QjMNWtqnQe7snDmbwAGVRzrjXQXuXzAAOtAndEyP+SqyGiyf7FxcHg?=
- =?iso-8859-1?Q?dThG20WuXZlWEN+RK0iAhx8V5xtyLTLsCKWIpputzD2dz/NeMoINjI+Co0?=
- =?iso-8859-1?Q?4g2K1pXeSB9+7m8rFqYGpqGkF+FmMHoS41OTqItvFpHPtwVJ16u8Vjlna3?=
- =?iso-8859-1?Q?NtX/4zEiigBdvJ7e+MqHSOqlM5j7cuccLmKxbW241TNYyHZvy+8CUatRIl?=
- =?iso-8859-1?Q?dxBuBe0X47Q91vKh1bhYpX7nTJ83gqLoYsla08Yr2hxfCo3LwDNNAncEKI?=
- =?iso-8859-1?Q?OOTXwhvjPj9CWfcLWFwAZVPkX/U5rcXQaHSuGaMYCiMta6eKRRhcudsZ3I?=
- =?iso-8859-1?Q?nbwu1FHBOT2u5GXu9syX+Ns262iaJRvyGpSxs1q+yh3tz1qWmoPA/HZBdK?=
- =?iso-8859-1?Q?cxOXXWZJZK8B67Co+mwu4dFH0HQgzupM5p+EIh38dJq7yFvsGE5OfHWvjf?=
- =?iso-8859-1?Q?xPwkdaR2r6jK16Rx9uNbX30owcaPOi3F8LvdjxfmhK9j/knyGt5zQ5qYM7?=
- =?iso-8859-1?Q?Qh4VIPj6zge+JquJOngbETiHMRmYStxI/I5lUfHYMVrAuWOpQVpxxN4qyK?=
- =?iso-8859-1?Q?z8XFKZzhG0lY/iN583I1+uZeeL2QwWJcK7rlQo2uMZRabcxb8PRywBjJe5?=
- =?iso-8859-1?Q?woQsB0ar1fHbAKdFmXG6NR/Jr1pDSRzMvRmaCbOqQpmOGd0v+KaZzlthtH?=
- =?iso-8859-1?Q?4tqh9/iFcP7Fh7HYP/mj3MLrJGt4QeXO7JnR7FKGJmwr6ohEpSM/TWdKjS?=
- =?iso-8859-1?Q?R/feO0XkQP59TfFjAze0J2?=
+ ARA:13230040|376014|7416014|10070799003|366016|1800799024|7053199007|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?sd0vOCEjDomfRPbgogro+Bdv7xZM7bqEMyALJP04QUu0+6Fk0B7GJrUCRCjN?=
+ =?us-ascii?Q?3CBRbUNlsEofVD2cwOL7myay1VgDIrDsdapBncmd0YKE4lnSM4bXtjd5Hktg?=
+ =?us-ascii?Q?zlcODaL+szEGe1zXgdCwrLAJEu/7QP763g7JL+iKn7h5TqAUKSuIZgvRWVv3?=
+ =?us-ascii?Q?mGbXNB+hhhpg1j3M9rlIHDz3NC8JKB8ud+ia5N4ghzri7+9m9Bns47pxh3WI?=
+ =?us-ascii?Q?Xzq97otVXz4QinClfXZnYpFcdfTs2p7X50o45JYU9TMDblbDBsNfZzUJsZTr?=
+ =?us-ascii?Q?iQXifilgoX0nxvTOCpu85eEH4zT8MuirY71WPKtyHVQ+1JvWGRUDnN4qFPIt?=
+ =?us-ascii?Q?onA0D1McZnrDlOk0Htd56uguGdY1+OcDC527TJ1BoNUpWWX26htoaGyjItJp?=
+ =?us-ascii?Q?Cxxsia9gZDEyGgrTMUGPkkM7dX/spIA1OxcjGM+ErQNpvzTQKCFGbVCVoOWJ?=
+ =?us-ascii?Q?YNgVD04rQ6gZ7FAMKqVX1foIsh3astQj4MqpsoeGoqBW8yKnE1uNLJFGwZIl?=
+ =?us-ascii?Q?oDoNSKygvM18MmBJ6V2yg2igWwydqdUTlC24Bm0BDT6TQdTgBqf/m6cbedHt?=
+ =?us-ascii?Q?2I5dpWt16UMlDsmeWKbq+LpqrvZzTiuy2zpE+c3OdzgBzoiS0ALYalT5F9os?=
+ =?us-ascii?Q?NWJOxsJQReixRTilNpoIhXVq4NG/fJRnzZwErszZaTfM056XSUH1W6QbMapQ?=
+ =?us-ascii?Q?C5/rqIh0FrCmtzfbSViHPh6ju8d6ike4zrzN6QiydiWdvns5CUlumAcmLHCo?=
+ =?us-ascii?Q?81mfQXYgb5W7NQkR5GujsEnX1s6KQ76e7WBKwXvSLQCXLciRCT59S7Dv6v5q?=
+ =?us-ascii?Q?WHXvY5R5QfnvzTvOS358zwSScYRLna3uqPF8VbN/VvO56Yg3yeZdooMeKG/b?=
+ =?us-ascii?Q?ab1hoWAO7rHA/9erATgozXNOi6FoGBRW5qtRNdGA1BiORPshKJ6DuoPaRMja?=
+ =?us-ascii?Q?HCucKHmANVzw1Jlqitocas3x4MZ9BEBHfisW0nLveek5Pd0pGOiuC5EmRp6X?=
+ =?us-ascii?Q?qtsLmSg5YxYu6lgQwvyqq+aBvrwfBdEf8/zgZb4jFBSgZElVTsXLUCdJa6Xt?=
+ =?us-ascii?Q?lJ2pRRdvQatmo5dxcYFpxQWsCZPTgfksLd2l8xyciNEj6ECYdb2bpfd4emrW?=
+ =?us-ascii?Q?6ul2wRLWvl4o7KGjfIz1FCkfzmK5W4uF2yQu8tSKqeLdpCAZhRyXt/Bpxbdj?=
+ =?us-ascii?Q?uNqQ09oTjvMgg4xisJ5YkuUa4JtKzJzZJqyZ00Vax7rr9T1Tgm9tiIaiGAfZ?=
+ =?us-ascii?Q?EC6Ll7N0JPCteFt/y6qJB45a7jOdSPRUx9ErSraSib0mCuEr/xzIZrbios9m?=
+ =?us-ascii?Q?f1OpQhIzRlfog+SJ19RXbqJOwO42VJyKwx+TSEsyd0VZM4IWiSDxCILAiVdl?=
+ =?us-ascii?Q?sDKAbt0xPYvdGSLCzYhJhCuvItZa8tovPLxVlSXxK0/E+dHsBG8SMCvEIZAG?=
+ =?us-ascii?Q?zTKRBRnj48miPe0rju4QU/5e8+SuCtpB?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0P189MB0818.EURP189.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024)(38070700018); DIR:OUT;
- SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:SA1PR03MB6370.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(10070799003)(366016)(1800799024)(7053199007)(38070700018);
+ DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?J9ida/suy0aPS+bfnKchbbnspo8E95HUk/qerNFTjmrZ1cvNEHo9obD4MZ?=
- =?iso-8859-1?Q?xxMVaeQjGRLkqt6LGvQMskasiNA9g585inE8p5D7XyU9zLDiN1vAf4ZflW?=
- =?iso-8859-1?Q?qKCCdS9WhVqv5rUogY+Dfd3CvzLcX0fXM3sEAeeSj/kQTHMVdJ6J+vT0ky?=
- =?iso-8859-1?Q?vKJ+psyuwFArD4YM+HPiCGSwDdu4tTB2iCXgJzZ+uxvkxWwOC2BO+Iwc7J?=
- =?iso-8859-1?Q?nLwoD0L4vsx5qIX4wwEvwhG967AthLmWJdOA8qoJN4/F2KH3xbvq5V5m7R?=
- =?iso-8859-1?Q?WLJ70q6in39fsE+PlmyhiOEd0kNPnNNG9Tx7Vb1SdFCwsEDCEjWBpXmHmY?=
- =?iso-8859-1?Q?AWBfWP/P0DmXHqxzioYz57kguRW8x4iJEEWAxlgdcZXTiXJL2WoY+6ZtaP?=
- =?iso-8859-1?Q?/Pa2KQ8hSPEPdr/gbeWbLW5tCxm0Cokw5eH7YTxEcaoubsUZ+3KCHgbZa2?=
- =?iso-8859-1?Q?S2hXrMzmVpfE9PqOm8awLM1GwnvHCRx/J1QezB0tmtuU7wr8x1LvxeOsbF?=
- =?iso-8859-1?Q?3rPBfuVmMSkQVUD7mj0VQ1tg1peH7O4i5NoMBOdazQqCPPWjOv/COMFJPH?=
- =?iso-8859-1?Q?z3W/A0l/XwUINLJuyoepathJi4VsHKdbTJeeUtUBLq9KH/xySLoWt9U9E8?=
- =?iso-8859-1?Q?y0GZ7MoAi6KBvsEBn5qLb4AlsrssqV9/Vb53fFehh9IRwlHTLc7cSwQKjo?=
- =?iso-8859-1?Q?eySATlqxSnMfSdJ95zQkYZpAvr1Rl1C6zjec1M6nUSDnq44Iz2Wx54jst3?=
- =?iso-8859-1?Q?/CQj4fKEtsxFkG5zGs2thyQgJibS8A2RW7MhjtbOhf7lSQ5icz6UQuG2UX?=
- =?iso-8859-1?Q?qT5kl4wjvtdVn5JnE8dr3qXJH6Fj7T2kW8cK//uKjRdg1qYCLeHGDqDZF0?=
- =?iso-8859-1?Q?FYJWMm+5iksRYBe3WBPZivQy2EESpbozNIKNtClDGe/Lcy+SF1aBoOGBcw?=
- =?iso-8859-1?Q?N4n0w+nEuxQiLd2e1nLA9+XO3pn7Jf3pskG2I5nhrdMG2TV8NhPJ6xQI1v?=
- =?iso-8859-1?Q?IeZ7Vd5gOEDxl+8waNYH2DJeVxcVhw1pOVHRQlQUlihuvVXDDSFPPJeY7R?=
- =?iso-8859-1?Q?VdXw1OWKrIZwN/AWdE4PRdpEZLF3JCiTMlEorbSqoGpSzUciLrcc4MCmmH?=
- =?iso-8859-1?Q?4t9h83PjUhBuoL8xVqe5ryQ1Mqg0A3qNXBevqScBM7Qq8z5hWLVpACvU1Q?=
- =?iso-8859-1?Q?WERJUND9rW3h1Omhw/2v4rO8OvWMyAmF7mliE3cZkhpZpZxVKVYwGBrcRo?=
- =?iso-8859-1?Q?qIVe3iufpe93hqMQSxbfXxmRchQaviRBL2OwaKJYj52RjoulrE2tx8afas?=
- =?iso-8859-1?Q?zamzdpz4hZB7JKJMA0v+ff2IwjW6u4Cl2Pk++HHRpPqdcx5S1LOVY/BQdc?=
- =?iso-8859-1?Q?3rXw29ylzvDBNNn8bEUZqXQ3xfYJSQyvhDdhUeo3iDxaL5fFuHdJxDJ0Z+?=
- =?iso-8859-1?Q?f31QWGveOkaUhhphz6PAfoI04nmKRZA0I1lURK42P7DWmfb+F5kV2wkxzp?=
- =?iso-8859-1?Q?TIE3gICZXFmoaEpcHsePbxX4okPCxHfSyeR7+txYur18wUh5po1vp8Z+5Q?=
- =?iso-8859-1?Q?xjZpJDiLUmK1uPAmiwFpCmPvDzZxb5FR6rkMfsvp4Ro0FXRrCdxPBwhwTZ?=
- =?iso-8859-1?Q?4/R8Y25Ut4Qlo=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?uFSMQoIvhblRck3OzzrBnRkpwGMVm0gmO9xDNszPCiEhxqvz6etXvbUQzSw6?=
+ =?us-ascii?Q?CY3YHMoPyk2GkhbUrGMERCYAPtswQVRZFKrW0NHWX+0Sk7IOAOI1x2tLuoPh?=
+ =?us-ascii?Q?jxX3M0uSTsKd51vt1cqYAfhfPRuXzk24YPPuALL/TpjsScsClRvfcgwvqQfu?=
+ =?us-ascii?Q?74H7B5yFsj7e+lLQ1hsrF7zjaHTqBylJmcsl1BYUpjS9+sWjTi4i59tv8Wog?=
+ =?us-ascii?Q?VMk+2LNpdXySOHVZ6YGAHmfd8l1TLbTi3SKJNDyXbUGXcc/jFmXCYWRxhDol?=
+ =?us-ascii?Q?y4hVGoQpJnAIC+Cxkb/ltqAKJG2egXum8Eey7WIGevSZaBIjM8fkNLVUkJ6T?=
+ =?us-ascii?Q?hBnuDjlDQhn/Ly9vgPxB/HSZecXtNv7oOAnI/T/vEdpLf3gkelMd5CDipT2w?=
+ =?us-ascii?Q?d8DRt6HwjgfoN4vG44Wp7es1DZl0oYZykED5sywM8Q8Leqo6GIMLmZDod9ia?=
+ =?us-ascii?Q?Sep+sibAPRq8EXuZTZIwtYMFLKJBoiumnxq7CEFHycF83E5/fGO73cqIA3H4?=
+ =?us-ascii?Q?CuKcciEC2Ki2SJQ2HTmiHVT1c0wMVeuudlZIRofqzX50279O7y6g80hTSxQx?=
+ =?us-ascii?Q?I5bczqcM7foP4X1DLLq1OyWrVBcLcWJtecUyU20vwJ1yefc1XYSanAcW/MG7?=
+ =?us-ascii?Q?EL2Kx7x8xOwwjlAibsvdZsZY3PAf4ZjgvzSCrAtOR+dwGfoiOrQ/Hxkm0yj0?=
+ =?us-ascii?Q?neDlDiNPhJMe06SZ6hFJBBM33CYlOocidEhitfjcND23E8JuOwd9rT7V/MlF?=
+ =?us-ascii?Q?yZve1RzGRTsyi3FerqNf0GTAecQMf2NmhKCdMdhWur3HzE3eqQvy9UVeXaWM?=
+ =?us-ascii?Q?AbKL6uWvBwa33zVsQ2qtTERGOnAkxXpgVcIxy5GqioX2DrYq/qQMODW2oQtI?=
+ =?us-ascii?Q?xip+eDwvRKoHl8TeyH5/eqHxe1HnaCg7JQ1wzBYGgMd1/8rm1AEVxg9fTYDK?=
+ =?us-ascii?Q?e1bT+x8RcjCtlabwJB9OPYppRt0yEYaA5e3tvPgYq6b2UOFoJRqy5jT5nGGk?=
+ =?us-ascii?Q?eBOzPzdzFAnzu0sJt/JxdQ1lMhhc752h4NktIf+tr0VxwxTYn4eY3eKumV2e?=
+ =?us-ascii?Q?dXXYPMZbYcq1m8nfSvYf4MZygZwlX8MivmkNyk1jFGjjAztteJNEn4JmPtHT?=
+ =?us-ascii?Q?QRIntzZWFg09bq2iOj47A1AUAkrYwXWgLV/SdhRmfsx5XDuyayGsKUeXLRhl?=
+ =?us-ascii?Q?zEgUVKir3N/34SqNkUuMexyFJ4UKMr7uRej5j5BrKR81bmMM9rsaj2IfCLyI?=
+ =?us-ascii?Q?LoFAWZUe3Kpx0ntKZR/QcmGEwghLjzMHdbS/A/or3SMFY6fH5Bz/xRlBnZhr?=
+ =?us-ascii?Q?4GlJw6zzdy3O6k5YFMbXm+puAeHYrbaCtU5mydPp2Cbe0BHcDR+GLZQjoeLj?=
+ =?us-ascii?Q?m6cdponQPmSISrG0pcrU7OiUQSE40NVTGLRga0z7Q3KjxMeK32TztqF9+zD+?=
+ =?us-ascii?Q?0DzHkEpVCWgUhKJ3gDG+7rSY9xHwAwzAPvRYeWgFZ8oH8mek52vCifSTdqK+?=
+ =?us-ascii?Q?WiTS7j8/eYgDTv/U1+BRIA4Ln/BnM01aFjlrSrvEebVXo6kz6sMxFVVD2T1U?=
+ =?us-ascii?Q?vuv8UtD5gAJdAzXY+B32j24QxUTfPzb3RKQGTAL8BJqMobB6TcKWCANpwqTv?=
+ =?us-ascii?Q?XOO5iTe2X7nzuIW8lHEG1td/eCcnvL7ZVKG/GtSwM+q4?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-OriginatorOrg: ifm.com
+X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0P189MB0818.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3445aa53-a2b0-4688-fc62-08dd766f140d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2025 07:29:20.6116 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR03MB6370.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dfed8713-1fc5-4b7f-05ab-08dd76756c9b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2025 08:14:46.1550 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 2782ef14-4849-46b4-b90d-d7e83fc425ca
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: v9SXhTY1e64Wq8c/bIJzjzr3eSQlr1M+2fzYHzVNC/HV/tsHuJx1tG2XvsnkDiaPrxoTapOtCSO5mMqWRlSkcw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P189MB0665
-X-MS-Exchange-CrossPremises-AuthAs: Internal
-X-MS-Exchange-CrossPremises-AuthMechanism: 04
-X-MS-Exchange-CrossPremises-AuthSource: AM0P189MB0818.EURP189.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossPremises-TransportTrafficType: Email
-X-MS-Exchange-CrossPremises-SCL: 1
-X-MS-Exchange-CrossPremises-messagesource: StoreDriver
-X-MS-Exchange-CrossPremises-BCC: 
-X-MS-Exchange-CrossPremises-originalclientipaddress: 77.12.240.2
-X-MS-Exchange-CrossPremises-transporttraffictype: Email
-X-MS-Exchange-CrossPremises-antispam-scancontext: DIR:Originating; SFV:NSPM;
- SKIP:0; 
-X-MS-Exchange-CrossPremises-journaled-to-recipients: bma_f893cf61-8c78-4ce3-9360-a036e8d5e7db@mas.eu.barracudanetworks.com
-X-MS-Exchange-CrossPremises-processed-by-journaling: Journal Agent
-X-OrganizationHeadersPreserved: DB8P189MB0665.EURP189.PROD.OUTLOOK.COM
-X-Proofpoint-ID: SID=45ucm8wssw QID=45ucm8wssw-1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-08_02,2025-04-07_01,2024-11-22_01
+X-MS-Exchange-CrossTenant-userprincipalname: OcZBK6AYRgq/5Rt7xz7fgbK1jir+YTglxX4xVCRffjQzdBdE+2vqlv+hBE2JxT+1PFx7qMSeY4gqJWmkbg0ODhKHYdL9dfMWWOmY3UeF+V8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5592
 X-Mailman-Approved-At: Tue, 08 Apr 2025 16:21:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -184,130 +177,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]=0A=
-=0A=
-> +Figure 1:=0A=
-> +------------------- +--------------+--------------+--------------+------=
---------+=0A=
-> +          ^         |Tag           |Length        |Length        |Versio=
-n       |=0A=
-> +          |         +--------------+--------------+--------------+------=
---------+=0A=
-> +          |         |                           Flags                   =
-        |=0A=
-> +          |         +--------------+--------------+--------------+------=
---------+=0A=
-> +          |         |# of Images   |Fuse version  |SW version           =
-        |=0A=
-> +Image     |         +--------------+--------------+--------------+------=
---------+=0A=
-> +Conatiner |         |Reserved                     |Signature Block Offse=
-t       |=0A=
-=0A=
-This should probably be Image Container?=0A=
-=0A=
-> +Header    | ------- +--------------+--------------+--------------+------=
---------+=0A=
-> +          |       ^ |Image0: Offset, Size, LoadAddr, EntryPoint, Flags, =
-Hash, IV|=0A=
-> +          |       | +--------------+--------------+--------------+------=
---------+=0A=
-> +          | Image | |Image1: Offset, Size, LoadAddr, EntryPoint, Flags, =
-Hash, IV|=0A=
-> +          | Array | +--------------+--------------+--------------+------=
---------+=0A=
-> +          |       | |                            ...                    =
-        |=0A=
-> +          |       | +--------------+--------------+--------------+------=
---------+=0A=
-> +          v       v |ImageN: Offset, Size, LoadAddr, EntryPoint, Flags, =
-Hash, IV|=0A=
-> +------------------- +--------------+--------------+--------------+------=
---------+=0A=
-> +                    |                            ...                    =
-        |=0A=
-> +        ----------- +--------------+--------------+--------------+------=
---------+ <-- SignOffset=0A=
-> +                  ^ |Tag           |Length        |Length        |Versio=
-n       |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  | |SRK table offset             |Certificate Offset   =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  | |Blob Offset                  |Signature Offset     =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +        Signature | |                         SRK Table                 =
-        |=0A=
-> +        Block     | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  | |                         Signature                 =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  | |                   Certificate (optional)          =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  v |                      Blob (optional)              =
-        |=0A=
-> +        ----------- +--------------+--------------+--------------+------=
---------+=0A=
-> +                    |                            ...                    =
-        |=0A=
-> +                    +--------------+--------------+--------------+------=
---------+ <-- Image0Offset=0A=
-> +                    |                           Image0                  =
-        |=0A=
-> +                    +--------------+--------------+--------------+------=
---------+=0A=
-> +                    |                            ...                    =
-        |=0A=
-> +                    +--------------+--------------+--------------+------=
---------+ <-- ImageNOffset=0A=
-> +                    |                           ImageN                  =
-        |=0A=
-> +                    +--------------+--------------+--------------+------=
---------+=0A=
-> +                    |                            ...                    =
-        |=0A=
-> +                    +--------------+--------------+--------------+------=
---------+=0A=
-> +=0A=
-> +i.MX95 Low Power Boot Image Sets Layout=0A=
-> +---------------------------------------=0A=
-> +=0A=
-> +    Image container sets are handled by M33 ROM.=0A=
-> +=0A=
-> +    --------------- +--------------+--------------+--------------+------=
---------+=0A=
-> +                  ^ |                    1st Container Header           =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +    ELE +         | |                 Padding for 1KB alignment         =
-        |=0A=
-> +    OEM           | +--------------+--------------+--------------+------=
---------+=0A=
-> +    Conatiner     | |                    2nd Container Header           =
-        |=0A=
-=0A=
-Here again=0A=
-=0A=
-> +    Set           | +--------------+--------------+--------------+------=
---------+=0A=
-> +    Header        | |                 Padding for 1KB alignment         =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  | |                    3rd Container Header           =
-        |=0A=
-> +                  | +--------------+--------------+--------------+------=
---------+=0A=
-> +                  v |                 Padding for 1KB alignment         =
-        |=0A=
-> +    --------------- +--------------+--------------+--------------+------=
---------+=0A=
+Hi Tom Rini,
+
+> -----Original Message-----
+> From: Maniyam, Dinesh
+> Sent: Monday, 24 March 2025 4:40 pm
+> To: u-boot@lists.denx.de
+> Cc: Marek <marex@denx.de>; Simon <simon.k.r.goldschmidt@gmail.com>;
+> Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>; Dario
+> Binacchi <dario.binacchi@amarulasolutions.com>; Ilias Apalodimas
+> <ilias.apalodimas@linaro.org>; Heinrich Schuchardt <xypron.glpk@gmx.de>;
+> Jerome Forissier <jerome.forissier@linaro.org>; Mattijs Korpershoek
+> <mkorpershoek@baylibre.com>; Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>;
+> Michal Simek <michal.simek@amd.com>; Dmitry Rokosov
+> <ddrokosov@salutedevices.com>; Jonas Karlman <jonas@kwiboo.se>; Sebastian
+> Reichel <sebastian.reichel@collabora.com>; Meng, Tingting
+> <tingting.meng@altera.com>; Chee, Tien Fong <tien.fong.chee@altera.com>;
+> Hea, Kok Kiang <kok.kiang.hea@altera.com>; Maniyam, Dinesh
+> <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>;
+> Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Zamri, Muhammad
+> Hazim Izzat <muhammad.hazim.izzat.zamri@altera.com>; Lim, Jit Loon
+> <jit.loon.lim@altera.com>; Tang, Sieu Mun <sieu.mun.tang@altera.com>
+> Subject: [resend v3 00/12] Add Synopsys MIPI I3C Driver support
+>=20
+> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+>=20
+> This patchset add Synopsys MIPI I3C Driver support for Intel Agilex5 devi=
+ces.
+>=20
+> The i3c driver is leveraged from the master/dw-i3c-master.c, i3c/device.c=
+ and
+> i3c/master.c Linux version 6.6.37 LTS And few header files included to be=
+ part of
+> the migration; i3c/internals.h, include/linux/i3c/ccc.h, include/linux/i3=
+c/device.h
+> and include/linux/i3c/master.h.
+> Additional i3c uclass driver and command files added to support i3c read =
+and
+> write in U-Boot.
+>=20
+> Patch status:
+>=20
+> Detail changelog can find in commit message.
+>=20
+> v3->v2:
+> --------
+> - Squash commit 10 to commit 9
+> - Resolve index for new files to pass the checkpatch
+>=20
+> Commit: sandbox_defconfig: Enable configs for sandbox i3c
+> Commit: agilex5_defconfig: Enable i3c configs for agilex5
+> - use savedefconfig
+>=20
+> drivers: Enabled Kconfig and Makefile for i3c support
+> - Add maintainer for i3c
+>=20
+> drivers: i3c: Enabled Kconfig and Makefile for DWI3C
+> - Add empty lines for if/endif
+>=20
+> drivers: i3c: Add i3c sandbox simple test.
+> - Removed DECLARE_GLOBAL_DATA_PTR
+>=20
+> v1->v2:
+> --------
+> Reorder commits.
+>=20
+> Added commits:
+> - drivers: i3c: Add i3c sandbox simple test.
+> - test: cmd: Add simple test for i3c
+> - configs: sandbox_defconfig: Enable configs for sandbox i3c
+> - configs: agilex5_defconfig: Enable i3c configs for agilex5
+>=20
+> History:
+> --------
+> [v1]:
+> https://patchwork.ozlabs.org/project/uboot/cover/20250218025705.50051-1-
+> dinesh.maniyam@intel.com/
+> [v2]:
+> https://patchwork.ozlabs.org/project/uboot/cover/20250314040902.43621-1-
+> dinesh.maniyam@altera.com/
+>=20
+> Dinesh Maniyam (12):
+>   drivers: i3c: Add new i3c uclass id
+>   drivers: i3c: Add driver for MIPI DWI3C
+>   drivers: i3c: Add i3c uclass driver.
+>   drivers: Enabled Kconfig and Makefile for i3c support
+>   drivers: i3c: Enabled Kconfig and Makefile for DWI3C
+>   drivers: i3c: Add i3c sandbox simple test.
+>   drivers: i3c: master: Enable probe i3c without slave device
+>   i3c: master: dw-i3c-master: Fix OD_TIMING for spike filter
+>   cmd: Add i3c command support.
+>   test: cmd: Add simple test for i3c
+>   configs: sandbox_defconfig: Enable configs for sandbox i3c
+>   configs: agilex5_defconfig: Enable i3c configs for agilex5
+>=20
+>  MAINTAINERS                        |    7 +
+>  arch/sandbox/dts/test.dts          |    8 +
+>  cmd/Kconfig                        |    6 +
+>  cmd/Makefile                       |    1 +
+>  cmd/i3c.c                          |  193 +++
+>  configs/sandbox_defconfig          |    4 +
+>  configs/socfpga_agilex5_defconfig  |    3 +
+>  doc/usage/cmd/i3c.rst              |   98 ++
+>  drivers/Kconfig                    |    2 +
+>  drivers/Makefile                   |    1 +
+>  drivers/i3c/Kconfig                |   27 +
+>  drivers/i3c/Makefile               |    5 +
+>  drivers/i3c/device.c               |  262 ++++
+>  drivers/i3c/i3c-uclass.c           |   38 +
+>  drivers/i3c/internals.h            |   26 +
+>  drivers/i3c/master.c               | 2072 ++++++++++++++++++++++++++++
+>  drivers/i3c/master/Kconfig         |   11 +
+>  drivers/i3c/master/Makefile        |    3 +
+>  drivers/i3c/master/dw-i3c-master.c | 1058 ++++++++++++++
+>  drivers/i3c/sandbox_i3c.c          |   56 +
+>  include/dm/device.h                |    2 +
+>  include/dm/uclass-id.h             |    1 +
+>  include/dw-i3c.h                   |  252 ++++
+>  include/i3c.h                      |   67 +
+>  include/linux/i3c/ccc.h            |  385 ++++++
+>  include/linux/i3c/device.h         |  286 ++++
+>  include/linux/i3c/master.h         |  698 ++++++++++
+>  test/cmd/Makefile                  |    1 +
+>  test/cmd/i3c.c                     |   52 +
+>  test/dm/Makefile                   |    1 +
+>  test/dm/i3c.c                      |   34 +
+>  31 files changed, 5660 insertions(+)
+>  create mode 100644 cmd/i3c.c
+>  create mode 100644 doc/usage/cmd/i3c.rst  create mode 100644
+> drivers/i3c/Kconfig  create mode 100644 drivers/i3c/Makefile  create mode
+> 100644 drivers/i3c/device.c  create mode 100644 drivers/i3c/i3c-uclass.c =
+ create
+> mode 100644 drivers/i3c/internals.h  create mode 100644 drivers/i3c/maste=
+r.c
+> create mode 100644 drivers/i3c/master/Kconfig  create mode 100644
+> drivers/i3c/master/Makefile  create mode 100644 drivers/i3c/master/dw-i3c=
+-
+> master.c
+>  create mode 100644 drivers/i3c/sandbox_i3c.c  create mode 100644
+> include/dw-i3c.h  create mode 100644 include/i3c.h  create mode 100644
+> include/linux/i3c/ccc.h  create mode 100644 include/linux/i3c/device.h  c=
+reate
+> mode 100644 include/linux/i3c/master.h  create mode 100644 test/cmd/i3c.c
+> create mode 100644 test/dm/i3c.c
+>=20
+> --
+> 2.26.2
+
+Please help to review the v3 of the patches.
+Thanks for your time.
+
+Dinesh
+
