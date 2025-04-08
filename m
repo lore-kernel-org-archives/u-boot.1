@@ -4,66 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E717CC36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 19:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC6C0C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 20:21:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E516782A76;
-	Tue,  8 Apr 2025 21:05:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ECF0C8210E;
+	Tue,  8 Apr 2025 22:21:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RHYtTkVk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F9T+Ftzb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AD4A82AA3; Tue,  8 Apr 2025 21:05:35 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD8C8213E
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 21:05:31 +0200 (CEST)
+ id 992148219C; Tue,  8 Apr 2025 22:21:47 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 08BA8820B0
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 22:21:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 538J5Ud9613071
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 8 Apr 2025 14:05:30 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744139130;
- bh=AJJDkuefn/wqJkUcERoVa0YF8bk2CdzXlBnAC/MWzmY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=RHYtTkVkQT0jIGDvvyqmc5LKXKyhGmxbuDxlLdHTWeQ+RERS3UC5BA4B9rNKEx1kB
- QD0Pri5XimYxwI703WIrJgrx9N/seoQP05//x8AFP5DsNetzfKRz4n4b2rC353knnN
- wxA+uGX1Oko5rDLCBKaoQ0Rg7U1e2VSXtifbjqho=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 538J5UPs063944
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 8 Apr 2025 14:05:30 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 8
- Apr 2025 14:05:29 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 8 Apr 2025 14:05:29 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 538J5T0O103527;
- Tue, 8 Apr 2025 14:05:29 -0500
-Date: Tue, 8 Apr 2025 14:05:29 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Thom Nichols <thom.nichols@voltserver.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: bootcount support for AM62 RTCSS
-Message-ID: <20250408190529.qzi54waaxj3hzxr6@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <CY8PR11MB79456EA41EF6365020C89B98FDB52@CY8PR11MB7945.namprd11.prod.outlook.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72c14138668so1442116a34.2
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 13:21:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744143704; x=1744748504; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wTH7ZoDQWwXnQYyCxeNydHl43ITvQXl4yZOAr8VinHc=;
+ b=F9T+FtzbK9P0RW4WSLiA3lbSFc1sAV7Z80fiw/fc8V2xGBh29h28r5iUfjhBmKJ7eS
+ aU4qz5W1USsNCnnNwn1dtiL3+J1FixxYMyf5gzKFZovzntPbTxMuR5qmwILh1r+8TgDw
+ orMaRmV54xzNKKbKtsdbT5mbLt7AUu/3FNWbU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744143704; x=1744748504;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wTH7ZoDQWwXnQYyCxeNydHl43ITvQXl4yZOAr8VinHc=;
+ b=WDegNqV5PIPW/9jylqm+SbBNwfxZoMLHbAljJV9T2MqJCjD8GHWOxwf9Y53l34vfEA
+ HpAcNWbfEK8mo11X6NVumLDA+crKR8+F51GHSlqAOUZKiA22LATjzJEdjE+aBf75q5LI
+ j2JHPI2qgx51N5I3ffrATTA3KjROl91Owrw6HsXTv0SVqkTubTS4bB7dskyTQQE1khgP
+ ic/ghwZGZUXiTSVaTSFadZc6iRjxhABhD5CHXn9MGLKFjSbax9RD5v1DJdaDQZ7z+LAA
+ ek7QgHgfNrdCuzByRKheMvG0GpFdghYcPn12jOVGqWj/mvNZAWR6+e2bVFBZaTha1wvS
+ DJGA==
+X-Gm-Message-State: AOJu0YwQCXKFlTfUExhuSLEILSiiw1QakB2jgYmY8cSUT8hRksihDNiq
+ ssCnWLdNucGGH1eiK1ErO4MKwsyRJG+hxAfMzkfYC7Po8yL/55o3VqWNqfRWMXoFXAAF562mHKR
+ t
+X-Gm-Gg: ASbGncvZAieL8XujY1BjYoaI8KRrzNpMInf/QQmUtArtxxQgktuBtbPkHySS3Kh8a2S
+ 9WXirlFMVTgjoAYCCaw3wdBH+u0ojTdCtbwili4HlcuPmsLkWbo5CTfCylpyWniL4cTWLsGeK0D
+ mY+BKyvgKeaZBLFOinTnyGBy2qqkj940aRjlUo3iagqaIlgdP1mHfTt8xLajvY3SancG19lzFhf
+ BYQp+Iu8aIfnABxRsj3M1UgNB3VAV6AByYOD21FooI/2jUgZtpqrAdCzDEVtK4dHZywURjQfYY7
+ v8BsbVJkRuHFos7vcEWk95uKpZEUaXaR2g0DcKX5uUW5hG5UnfdKcXu1cVrb+lApb2ALJODa1QA
+ UrL9lOrBw
+X-Google-Smtp-Source: AGHT+IGs9+jSESXif69RyBqhfwVXjX4ba8tklyxB8xGC9xv4Nur0UKkklSm4ZMjPQWb1fYymJOxjaQ==
+X-Received: by 2002:a05:6830:6990:b0:72c:3235:3b97 with SMTP id
+ 46e09a7af769-72e70a662e4mr291153a34.22.1744143703614; 
+ Tue, 08 Apr 2025 13:21:43 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e6517724fsm582391a34.19.2025.04.08.13.21.42
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Apr 2025 13:21:43 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/2] Dockerfile: Update to a more current TF-A release tag
+Date: Tue,  8 Apr 2025 14:21:40 -0600
+Message-ID: <20250408202141.1434754-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CY8PR11MB79456EA41EF6365020C89B98FDB52@CY8PR11MB7945.namprd11.prod.outlook.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,43 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Thorm!
+In preparation for using TF-A more in our CI loops, switch to the
+current release tag for TF-A.
 
-On April  8, 2025 thus sayeth Thom Nichols:
-> I’d like to get bootcount support for the AM62 RTCSS.  The RTCSS on 
-> the AM62 is very similar to the AM33.  In fact, I’m pretty sure the 
-> bootcount_davinci driver would work for AM62, with just the register 
-> address/ offset and KICK_WE constants redefined for the correct AM62 
-> values.  A while back I tested the AM62 scratch register from 
-> userspace [1] and confirmed it works the same as the AM33.
-> 
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Wonderful! It is a different IP from the AM335 but not completely 
-different however I think your approach should work.
-
-> I’ve never contributed to u-boot but I believe I could get a working 
-> PR that modifies the davinci_bootcount driver, if this would be 
-> acceptable.
-> 
-
-You should feel free to start if you want! U-Boot is very welcoming in 
-this regard. The more devs we have in U-Boot the better :)
-
-> Alternately I don’t know if there’s any near-term plan for any of the 
-> AM62 maintainers to port the rtc driver so that bootcount/rtc could be 
-> used.  I think doing this would be beyond my capabilities.
-> 
-
-So we do have some plans to improve RTC support in both in Linux and in 
-U-Boot to extend some features needed for the latest Sitara class SoC 
-but I'm unsure about timelines. I've added a ticket internally to track 
-this if we get to it before you do though :)
-
-~Bryan
-
-> Thanks in advance.
-> 
-> Thom Nichols
-> 
-> 1. https://github.com/VoltServer/uboot-bootcount/pull/15/files
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index e14d1640f9cd..3b0c403618a8 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -230,7 +230,7 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+ # Build fiptool
+ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a && \
+ 	cd /tmp/tf-a/ && \
+-	git checkout v2.10.0 && \
++	git checkout v2.12.0 && \
+ 	cd tools/fiptool && \
+ 	make -j$(nproc) && \
+ 	mkdir -p /usr/local/bin && \
+-- 
+2.43.0
 
