@@ -4,57 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02611C36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 00:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81676C3601E
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 02:26:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83EE0830EE;
-	Tue,  8 Apr 2025 02:57:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABE8182E77;
+	Tue,  8 Apr 2025 04:26:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="U92m43q/";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KpWcn4Ld";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6920E83106; Tue,  8 Apr 2025 02:57:54 +0200 (CEST)
-Received: from mail-m32110.qiye.163.com (mail-m32110.qiye.163.com
- [220.197.32.110])
+ id EDF2C82EFC; Tue,  8 Apr 2025 04:26:48 +0200 (CEST)
+Received: from mail-m49226.qiye.163.com (mail-m49226.qiye.163.com
+ [45.254.49.226])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E35183095
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 02:57:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C74582E35
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 04:26:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 10fbf2a27;
- Tue, 8 Apr 2025 08:57:46 +0800 (GMT+08:00)
-Message-ID: <2712a48d-6aa4-4aca-8b14-62583e955d54@rock-chips.com>
-Date: Tue, 8 Apr 2025 08:57:45 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 10ff609ba;
+ Tue, 8 Apr 2025 10:26:38 +0800 (GMT+08:00)
+Message-ID: <84797a76-81f1-4fcc-9b96-a7ea92a2a61f@rock-chips.com>
+Date: Tue, 8 Apr 2025 10:26:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] rockchip: Add DFU to SPL for RK3588
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250211053340.92919-1-naoki@radxa.com>
- <20250211053340.92919-4-naoki@radxa.com>
+Subject: Re: [PATCH 01/14] pinctrl: rockchip: remove unused base_pin bank
+ member
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>,
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+References: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
+ <20250129-rockchip-pinctrl-const-v1-1-450ccdadfa7e@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250211053340.92919-4-naoki@radxa.com>
+In-Reply-To: <20250129-rockchip-pinctrl-const-v1-1-450ccdadfa7e@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHR4dVkwfHU8eSR1OHktPQlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQkNKVhpKQkoZGE1JS0tNTFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a9612e73f6f03afkunm10fbf2a27
+X-HM-Tid: 0a9613389b2f03afkunm10ff609ba
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nhw6Dxw6FjJMA0M5Vj0WSzoq
- KzNPCgFVSlVKTE9PS0xIQ01MQklLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU9MTkI3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NhQ6LTo6KzJOPUNMD0s6Ok8w
+ GDcaCz9VSlVKTE9PS0xCSUtLQ0tCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlDTE83Bg++
 DKIM-Signature: a=rsa-sha256;
- b=U92m43q/1p1KzxXFEaxjNNGSOrHEHpTuIkPZD1E0vasKJJW+8mFv+odNvomCPM22w0XLWDJpz+eIy23ay1sYLhfps8Gp0RbKufuiMW1oJZ0XQyZDW39NdLhByoFmNl1p9n34eNDM2XTbadSxr63QTxp2JBQ4EIN0wkp1NTZxjcs=;
+ b=KpWcn4Ld3W5LqfXBVQAplCNMxBiHXfRoLo0korofXXEh383quF4e3rvGpoeHDohHrWfGhf4fL3857kWb2G2e2a++Iqf8NnIDjVI7NlU7UuMZnxbk5gVhFSHw0FPji4HoPaIEG0ZB4yduJYWavJr+ICYhDKON5U6iQZ0whfEgQo0=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=BHAt6QTIxA4BdVvE8tdXeoUI24l/ePrKlsRdKVqHLnk=;
+ bh=54h4D8vlRL90faprwbCgNTWOtPeuFOSTeger4RUhFwQ=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,132 +77,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Naoki,
 
-     Please split the code change and dts/config change into different 
-patch.
-
+On 2025/1/29 20:42, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> Each bank has a base_pin member that is only set in the core and never
+> used, so it can be removed.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
-
 - Kever
-
-On 2025/2/11 13:33, FUKAUMI Naoki wrote:
-> Boot the RK3588 from the USB OTG port using rkflashtool[1] or
-> rkusbboot[2] and dfu-util.
->
-> 1a. Download the TPL and SPL using rkflashtool
->
-> $ rkflashtool l < mkimage-in-simple-bin.mkimage-rockchip-tpl
-> $ rkflashtool L < mkimage-in-simple-bin.mkimage-u-boot-spl
->
-> 1b. Download the TPL and SPL using rkusbboot
->
-> $ rkusbboot \
-> 	mkimage-in-simple-bin.mkimage-rockchip-tpl \
-> 	mkimage-in-simple-bin.mkimage-u-boot-spl
->
-> 2. Download the U-Boot
->
-> $ dfu-util -a 0 -D u-boot.itb
->
-> [1] https://github.com/linux-rockchip/rkflashtool
-> [2] https://github.com/RadxaNaoki/rkusbboot
->
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 > ---
->   arch/arm/dts/rk3588s-u-boot.dtsi       | 5 +++++
->   arch/arm/mach-rockchip/rk3588/rk3588.c | 1 +
->   configs/generic-rk3588_defconfig       | 9 +++++++++
->   include/configs/rk3588_common.h        | 7 +++++++
->   4 files changed, 22 insertions(+)
+>   drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 1 -
+>   drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 2 --
+>   2 files changed, 3 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 8880d162b11..1e961768341 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -161,6 +161,11 @@
->   	bootph-all;
->   };
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> index d449d07d32e74d1dec1978b1405bec94887908a2..7369fe12b961290742f6ba24fb32b768531f56f9 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> @@ -543,7 +543,6 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
+>   		int bank_pins = 0;
 >   
-> +&usb_host0_xhci {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
->   &xin24m {
->   	bootph-all;
->   };
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index c1dce3ee370..662b092d811 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -53,6 +53,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->   	[BROM_BOOTSOURCE_FSPI_M1] = "/spi@fe2b0000/flash@0",
->   	[BROM_BOOTSOURCE_FSPI_M2] = "/spi@fe2b0000/flash@0",
->   	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
-> +	[BROM_BOOTSOURCE_USB] = "/usb@fc000000",
->   };
+>   		bank->priv = priv;
+> -		bank->pin_base = ctrl->nr_pins;
+>   		ctrl->nr_pins += bank->nr_pins;
 >   
->   static struct mm_region rk3588_mem_map[] = {
-> diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-> index 51e31dce3a9..0dd64783bc0 100644
-> --- a/configs/generic-rk3588_defconfig
-> +++ b/configs/generic-rk3588_defconfig
-> @@ -21,7 +21,9 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
->   CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ENV_SUPPORT=y
->   CONFIG_SPL_ATF=y
-> +CONFIG_CMD_DFU=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MISC=y
-> @@ -41,6 +43,9 @@ CONFIG_SPL_REGMAP=y
->   CONFIG_SPL_SYSCON=y
->   # CONFIG_ADC is not set
->   CONFIG_SPL_CLK=y
-> +CONFIG_DFU_RAM=y
-> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-> +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
->   # CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_MISC=y
-> @@ -60,9 +65,13 @@ CONFIG_SYS_NS16550_MEM32=y
->   CONFIG_SYSRESET=y
->   CONFIG_SYSRESET_PSCI=y
->   CONFIG_USB=y
-> +CONFIG_SPL_DM_USB_GADGET=y
->   CONFIG_USB_DWC3=y
->   CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_SPL_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
-> +CONFIG_SPL_USB_GADGET=y
->   CONFIG_USB_GADGET_DOWNLOAD=y
->   CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_SPL_DFU=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
-> index e6654c275ac..0fad6b37589 100644
-> --- a/include/configs/rk3588_common.h
-> +++ b/include/configs/rk3588_common.h
-> @@ -26,11 +26,18 @@
->   	"ramdisk_addr_r=0x12180000\0"	\
->   	"kernel_comp_size=0x8000000\0"
+>   		/* calculate iomux and drv offsets */
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+> index df7bc684d29fae4ec650d1e14fe88b35b03244ac..ebd008eede24af32c123634a57f50c0294e76842 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+> @@ -262,7 +262,6 @@ struct rockchip_drv {
 >   
-> +#if defined(CONFIG_SPL_DFU) && defined(CONFIG_XPL_BUILD)
-> +#define CFG_EXTRA_ENV_SETTINGS				\
-> +	"dfu_alt_info_ram=u-boot.itb ram "		\
-> +	__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS) " "	\
-> +	__stringify(CONFIG_SYS_DFU_MAX_FILE_SIZE) "\0"
-> +#else
->   #define CFG_EXTRA_ENV_SETTINGS		\
->   	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
->   	"partitions=" PARTS_DEFAULT	\
->   	ENV_MEM_LAYOUT_SETTINGS		\
->   	ROCKCHIP_DEVICE_SETTINGS	\
->   	"boot_targets=" BOOT_TARGETS "\0"
-> +#endif
->   
->   #endif /* __CONFIG_RK3588_COMMON_H */
+>   /**
+>    * @priv: common pinctrl private basedata
+> - * @pin_base: first pin number
+>    * @nr_pins: number of pins in this bank
+>    * @name: name of the bank
+>    * @bank_num: number of the bank, to account for holes
+> @@ -274,7 +273,6 @@ struct rockchip_drv {
+>    */
+>   struct rockchip_pin_bank {
+>   	struct rockchip_pinctrl_priv	*priv;
+> -	u32				pin_base;
+>   	u8				nr_pins;
+>   	char				*name;
+>   	u8				bank_num;
+>
