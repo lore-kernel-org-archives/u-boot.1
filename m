@@ -4,78 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84755C369A2
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 13:54:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE7FC369A4
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:00:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D7B4822D7;
-	Tue,  8 Apr 2025 15:54:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2362E82114;
+	Tue,  8 Apr 2025 16:00:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K/flyB2s";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tBvGTRj2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DF8282A96; Tue,  8 Apr 2025 15:54:27 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id C1A8C82C55; Tue,  8 Apr 2025 16:00:47 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5C482169
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 15:54:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8B2D8210A
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-72c1818c394so3389435a34.2
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 06:54:24 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3feb3f54339so4054802b6e.1
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:00:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744120463; x=1744725263; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ubDjyg4IRHwNJ1xq2eXmwnjBuT4Tp8Adq48KKZigS6U=;
- b=K/flyB2shjgN3hURiZyN6yY7BA2jeFy3DeVdbtv2e2aKzAtm2iLdbBfWwjiAoUTLAE
- 1ugqJO3L/8Ph3V9CX8KNhTwcjdZ2pU0VXNYP2qzUg7IHrhzWybz7sonxa/Z/UMX8WY3r
- DzbNfb2qthji9P9AQoLAkeJTVGSoVQGULAKE4=
+ d=konsulko.com; s=google; t=1744120843; x=1744725643; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JKIMPGTDc/34iB6wpBo3bWiYvADtafzgnP63YZyvBCs=;
+ b=tBvGTRj2UepRi3dmRqm+JXy0lE/GQy6AtE7ZMpEsCsswZcQJu2xPmmJz69GVE6njr/
+ 7iQU2Byk9qL+OXeqnS7jyXCEs5/N7Z1hUcS38cm0XcTYlvoHn5Eb9L9SqAoviU6xLKCy
+ Sr7ZXBYx7oM9zYUFqKnyA+MMXEAnljj2ImO9g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744120463; x=1744725263;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ubDjyg4IRHwNJ1xq2eXmwnjBuT4Tp8Adq48KKZigS6U=;
- b=AoY7i+dQhYOf0/DDkdNE7AFMcQu7rW3Y2p+eFf7QMZD/Y+sEmHxUL+4GWJchgWvkwo
- AgrZJ4MGqmWg+A46BqLZ/qyY5ROUwt/4Il4Pn9sVHM/COz+CnSsf/p+hsL1ssp1heS9Z
- GPIJvyuXD5mNzW0W6doBUciJoZoHq6bJPp8YFjWhjxzl15huMX0TQNPJNga4QbShtmEy
- g5iKGmYzaEYn/IM0ZQEy40Aq1U4jcB5NbpVWGKaPWnPOiDnRxA1sd9ZI8i/pHBVWZHzo
- ObVdHfSX6uUS5nP8lo9oEt1iG/BR9JK2Y2V2XmOYVywuQMKZFcNKOSjK4DWC8MsnXYLH
- Jz1g==
-X-Gm-Message-State: AOJu0YyFQuJuZcn85lLjv1LqQkqM0RQIIpDvzLpaxr2pWoZ9dgnVr9Gu
- J52LctfBMNBs4cvOgMlcfaZUMfv2kumVFxePC5NSq7fPceZ10ckI1D2RYiuD+zHdU9/DFgriJPr
- r
-X-Gm-Gg: ASbGncvY8ZxcHypx/8Fx1ZoYmAeI348vSPW6mydcB6lBRY7O+WrXaMVpR9/AnEVssB1
- l0T0iZdEjmJ8hTXOeCBjGFmZARGKRo9viKE7+RCg86w2WNUX07ZEu+unqYsUi9CDPck6RLJTGQm
- UpSK8Dl9TzrKs9qoOrzOJP1iPz0HF9nmGRICV+dweMdiqFPRS8lcx4GPnHutNvQ9aUjgpFQWPtp
- pvFm2L3cjI8zuYka32fEx96Vh58Sx/wPcK09E7QykBSFRA0J8+zIy4g+CVulRGqdm1nWTLmpBPt
- nlSwBZ0JUVCBkeddHyFlNYqOtoccpIQLpQx70xB0MdEBkYj+g/Lwbn4DbqSDfKK6befGqt4Z5Fi
- I+tUQ/mmY
-X-Google-Smtp-Source: AGHT+IHAGjQsao7tOjOb1EszEo7+6PL4JucwsKQGOpXluDiBoJ0SOLb9bMG//9PgOlXjqBAB55Z2jw==
-X-Received: by 2002:a05:6830:d04:b0:72b:a175:2f1d with SMTP id
- 46e09a7af769-72e40ecacafmr8023961a34.23.1744120463406; 
- Tue, 08 Apr 2025 06:54:23 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1744120843; x=1744725643;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JKIMPGTDc/34iB6wpBo3bWiYvADtafzgnP63YZyvBCs=;
+ b=IwGE/HgdjJRD29CR2qTDnhaJI3PHPJyCY+XC17v9IRHOc7xnaIxC6ODKuUQpPLgKz9
+ NlVqUvDnn7Uj8ttcybguBJtye8yrRmMufpT+g/oTRDdKU6TwCBQkPa7rv9ypaTvi0fBv
+ jQw9ULc1ZcbkBnfmIEow5PEmUFdweKI2zRO+fXpavNOgnGi0Sv4ZSxqvK1Sp01p2fl3U
+ 1R6/sV6XgOa1zV09eFwBFmdJsjZ7b26dGjqQnEeoUeJ5NxI5v9+m0M1AkrMopUk1zDl/
+ F4ru4diURkrxUYm4DXY3AmeAr6Q3fWSIXG/CEhkAZBnjFYsabYu+4rTNLs12FuZYfvTl
+ kBvg==
+X-Gm-Message-State: AOJu0YwaQB7tSgShada3JdSBbDecLkiQ/4n3EUNxtc5CUS4V/1TTfDi/
+ TL0xct1h8ZLdnkxSxV9wdqZgYotDfeAydIRFTg+rhTM8vgf5OGcr9su+OiSZvss=
+X-Gm-Gg: ASbGncsJr2kXfOc2SWV4jPiA2w+F2z8Sj2qFO8bB3xnvIyOT/w4dBE6ddCvtwNrGOrs
+ FuJM1Tq3VlMtXb8VDPPDtsWi41P8uz1GvYswNkALbxMHBWI5W4ps3dN/8ibeMgZWy8qZj4xLwGS
+ XsEFw1tF9JjlHgql1nQ29RlsDuNoV8YBjrZ6v7YHaPS+dB67t9/tfBMsTca4T40xNWqRSeLx3gw
+ EyIS/CM5N1vFwhNRw11iZF0rtGO1bW6XZK2rb92jSOfcLkiakxoaWbi4qK1+s5a5mEBDB4QNiyX
+ FQ8lF6RcLjXi5Ywi/oJnhHqyOyo1I9xwZrkIkRzJjgsHqs1wTOtLmRD2lI7xkyjFaJj4GcEN1hZ
+ MMMZ9DQ==
+X-Google-Smtp-Source: AGHT+IE7dOwhrXFXApH26THxrY7u9NqAYkZcwjAHxbMmoxkrlfyX1r2zmDU/OCYN8CO6nBUXHjOsIQ==
+X-Received: by 2002:a05:6808:191d:b0:3f9:6df8:1d33 with SMTP id
+ 5614622812f47-4004655da69mr9324730b6e.6.1744120843344; 
+ Tue, 08 Apr 2025 07:00:43 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e651a2974sm461745a34.33.2025.04.08.06.54.22
+ 5614622812f47-400691063bfsm452006b6e.12.2025.04.08.07.00.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 06:54:22 -0700 (PDT)
+ Tue, 08 Apr 2025 07:00:42 -0700 (PDT)
+Date: Tue, 8 Apr 2025 08:00:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH] doc: release_cycle: Use variable substitution for next version
-Date: Tue,  8 Apr 2025 07:54:21 -0600
-Message-ID: <20250408135421.1393991-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v2] cmd: fwu: Dump custom fields from mdata structure
+Message-ID: <20250408140040.GV5495@bill-the-cat>
+References: <1254c3c538facb1a124865aede861f399cf524df.1742552744.git.michal.simek@amd.com>
+ <300f75b7-6c59-4b58-b4b0-e8aaf7919318@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Bhz7qLXfvLMpO/Ky"
+Content-Disposition: inline
+In-Reply-To: <300f75b7-6c59-4b58-b4b0-e8aaf7919318@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,65 +103,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To avoid the problem fixed in commit 57a95d522ca8 ("doc: release_cycle:
-fix next release version") moving forward, make use of the variable
-substitution feature of rST. This adds a next_ver variable and
-references it in all of the places where I had been listing the version
-being worked on.
 
-Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- doc/develop/release_cycle.rst | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+--Bhz7qLXfvLMpO/Ky
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/develop/release_cycle.rst b/doc/develop/release_cycle.rst
-index cbbc2bad0ebd..50948c009272 100644
---- a/doc/develop/release_cycle.rst
-+++ b/doc/develop/release_cycle.rst
-@@ -1,3 +1,5 @@
-+.. |next_ver| replace:: v2025.07
-+
- Release Cycle
- =============
- 
-@@ -53,13 +55,13 @@ Current Status
- 
- * U-Boot v2025.04 was released on Monday, 07 April 2025.
- 
--* The Merge Window for the next release (v2025.07) is **open** until the -rc1
-+* The Merge Window for the next release (|next_ver|) is **open** until the -rc1
-   release on Monday, 28 April 2025.
- 
- * The next branch is now **closed** until the -rc2 release on Monday, 12 May
-   2025.
- 
--* Release "v2025.07" is scheduled for Monday, 07 July 2025.
-+* Release "|next_ver|" is scheduled for Monday, 07 July 2025.
- 
- Future Releases
- ---------------
-@@ -69,15 +71,15 @@ Future Releases
- 
- .. For the next scheduled release, release candidates were made on::
- 
--.. * U-Boot v2025.07-rc1 was released on Mon 21 April 2025.
-+.. * U-Boot |next_ver|-rc1 was released on Mon 21 April 2025.
- 
--.. * U-Boot v2025.07-rc2 was released on Mon 12 May 2025.
-+.. * U-Boot |next_ver|-rc2 was released on Mon 12 May 2025.
- 
--.. * U-Boot v2025.07-rc3 was released on Mon 26 May 2025.
-+.. * U-Boot |next_ver|-rc3 was released on Mon 26 May 2025.
- 
--.. * U-Boot v2025.07-rc4 was released on Mon 09 June 2025.
-+.. * U-Boot |next_ver|-rc4 was released on Mon 09 June 2025.
- 
--.. * U-Boot v2025.07-rc5 was released on Mon 23 June 2025.
-+.. * U-Boot |next_ver|-rc5 was released on Mon 23 June 2025.
- 
- Please note that the following dates are planned only and may be deviated from
- as needed.
--- 
-2.43.0
+On Tue, Apr 08, 2025 at 10:18:58AM +0200, Michal Simek wrote:
+>=20
+>=20
+> On 3/21/25 11:25, Michal Simek wrote:
+> > The commit cb9ae40a16f0 ("tools: mkfwumdata: add logic to append vendor
+> > data to the FWU metadata") added support for adding vendor data to mdata
+> > structure but it is not visible anywhere that's why extend fwu command =
+to
+> > dump it.
+> >=20
+> > Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > Reviewed-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > ---
+> >=20
+> > Changes in v2:
+> > - Extend print message
+> > - Cover hexdump dependencies
+> >=20
+> > RFC:
+> > https://lore.kernel.org/r/75c697a4f819bb5e8649ed658c5a559fb8cd1fd9.1717=
+599342.git.michal.simek@amd.com
+> >=20
+> > ---
+> >   cmd/Kconfig     |  1 +
+> >   cmd/fwu_mdata.c | 25 +++++++++++++++++++++++++
+> >   2 files changed, 26 insertions(+)
+> >=20
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 642cc1116e87..1f8aa2521a8e 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -185,6 +185,7 @@ config CMD_UFETCH
+> >   config CMD_FWU_METADATA
+> >   	bool "fwu metadata read"
+> >   	depends on FWU_MULTI_BANK_UPDATE
+> > +	imply HEXDUMP if FWU_MDATA_V2
+> >   	help
+> >   	  Command to read the metadata and dump it's contents
+> > diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+> > index 9c048d69a131..5b5a2e4d1cda 100644
+> > --- a/cmd/fwu_mdata.c
+> > +++ b/cmd/fwu_mdata.c
+> > @@ -7,6 +7,7 @@
+> >   #include <dm.h>
+> >   #include <fwu.h>
+> >   #include <fwu_mdata.h>
+> > +#include <hexdump.h>
+> >   #include <log.h>
+> >   #include <stdio.h>
+> >   #include <stdlib.h>
+> > @@ -45,6 +46,30 @@ static void print_mdata(struct fwu_data *data)
+> >   			       img_info->accepted =3D=3D 0x1 ? "yes" : "no");
+> >   		}
+> >   	}
+> > +
+> > +	if (data->version =3D=3D 2) {
+> > +		struct fwu_mdata *mdata =3D data->fwu_mdata;
+> > +		struct fwu_fw_store_desc *desc;
+> > +		void *end;
+> > +		u32 diff;
+> > +
+> > +		/*
+> > +		 * fwu_mdata defines only header that's why taking it as array
+> > +		 * which exactly point to image description location
+> > +		 */
+> > +		desc =3D (struct fwu_fw_store_desc *)&mdata[1];
+> > +
+> > +		/* Number of entries is taken from for loop - variable i */
+> > +		end =3D &desc->img_entry[i];
+> > +		debug("mdata %p, desc %p, end %p\n", mdata, desc, end);
+> > +
+> > +		diff =3D data->metadata_size - ((void *)end - (void *)mdata);
+> > +		if (diff) {
+> > +			printf("Custom fields covered by CRC len: 0x%x\n", diff);
+> > +			print_hex_dump_bytes("CUSTOM ", DUMP_PREFIX_OFFSET,
+> > +					     end, diff);
+> > +		}
+> > +	}
+> >   }
+> >   int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
+>=20
+> Can someone pick it up? Or should I take it?
 
+It's got Sughosh's tags so I'm fine with you picking it up.
+
+--=20
+Tom
+
+--Bhz7qLXfvLMpO/Ky
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf1LAAACgkQFHw5/5Y0
+tyyqPwv/V2bqM0CvtiUHZxd3xMOkBGTJajRtlxqwVzI/ZuchYrojNB5FTTLPz07G
+IiVr8QDdrtvcMqmzSZXNTUCQt/gsf/D6/lilKjFwFqxZVQxpIzD/WRDcGHlsSWnx
+u6SM2QUZ9uQjlIGoLk5VeKob9VphIh2wt9P9c78tjAcjlM8k9xEnO5GwwlLqpKVt
+tBq8/D6zG1BI/BNQ6BFZ5Z++tajaK9ptZoLwYL+MSm4Gn2dQAIzP7c9vQ9MAhb+W
+VF7W8Pxd0un03B8Cu/pEl80tt16oyAOxq5p9gPGjmYuByxY6/TdAsMTJQkK7sjah
+LRfEEV9sdOFRCy2rmoc4kEAbzzwWJ+cNPYcDXaFQrX5VaR7rGD9WGJJj6TeXz1lK
+V2BxYviDA4OEgqqf+V0Y37utujmVaN6ub5IocC3Bo6MKAZl9yuREEvbgWitJ984l
+MaPLpuZUd/7ALtGeJ3nEt5lSKxrtfyEYq0OQ8t0VP4fWjelqI9lSJxR6Ul0VEQpp
+1GmiCnQ/
+=jU8b
+-----END PGP SIGNATURE-----
+
+--Bhz7qLXfvLMpO/Ky--
