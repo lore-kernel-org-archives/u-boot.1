@@ -4,81 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01334C36010
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 22:13:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BBE2C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 22:29:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 426B781F7E;
-	Wed,  9 Apr 2025 00:13:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6568482119;
+	Wed,  9 Apr 2025 00:29:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Eox+Rrbr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s7ib8Vq+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFCF08267E; Wed,  9 Apr 2025 00:13:31 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id D24148215E; Wed,  9 Apr 2025 00:29:25 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EFF08003E
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 00:13:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B6EC82116
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 00:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-603f54a6c8aso3090189eaf.0
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 15:13:29 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2d071fcd89bso334792fac.3
+ for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 15:29:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744150408; x=1744755208; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744151362; x=1744756162; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=clImj2IspIyf1PU3CtNlY40AjEWxqAtPdDu+F0i3U6w=;
- b=Eox+Rrbrjmm+SJnAyJVB5mEXUaiBHmUgep/qg9ZC36Z5yuv3cMzQLVy/k6p8DjPYbY
- SmhaXzbDuH8VWFnidG+w+AawnQ6Aabzl/P60d4VSnzpAAFbMjb0cw0rxMsRE8vywG4xL
- gTHu4tqIwWCcCD+zJyH4PtU+fdEVGUEct1IRg=
+ bh=1u/E+KvJd3hAFoBMH4Z/5t1Op+Itj8RXoCAiZZ5ac6k=;
+ b=s7ib8Vq+4tsaw9i/Vv/rhn8TaZQGEDwWL0JJPuQUZTGo33o7PYJT6CftSNrdo40/Wo
+ e5IJrZFOjd3GSAhqG5BlqQ9alpm9ewzECHVc+KlJ1u6g2iQXumY2FJE/0J/2XUyyN0xp
+ rY+r0vIQ97TsgaRI4HN9GAlW4toQ3MD8JlHbY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744150408; x=1744755208;
+ d=1e100.net; s=20230601; t=1744151362; x=1744756162;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=clImj2IspIyf1PU3CtNlY40AjEWxqAtPdDu+F0i3U6w=;
- b=LJuSPcDs1T0WlEoIbHm+WdErZTBZHtAGddh0YoVyI48UcSDLZtsqxPv+K2tlymXQCg
- hxxzBW4QdaDtoKcLxngEAg9mix4aVn8te5Aq9rhiDLUCXd78nRf0upMIuCPcs1jqi2ex
- KYPAeVPqIy15zWEXAt0HlZjfJo/G5eTYLAEXdJMk5WXDDM9lDNAJuE6P6vgT1J+GiwQs
- cPGTgy9GF40q75NkqRUwaiffKYvnUWtDpEOE1Paff2b9s625MRVL0MqdUkNHLuVIjhCF
- TACA1NxM4MjzalrmsqzHlukdnxvVpA/e43IJ88UBb5kqRrojxAw/JeXlEQVMcrsYyopm
- eCnQ==
-X-Gm-Message-State: AOJu0Yyege96ZaP2kRLQUYnDaN21s9gGmazDgSD7FV0DgcWd6cwbxc33
- Gs8RCB6nBZ6NrulvE0LmExecUVmFFXTf1O1XVaQsvfVEmnXXtb/00Ocou0zWcFI=
-X-Gm-Gg: ASbGnctgW9sd4xptNf8LB5rjWkbO7RTer4vDhnDj9I4mz4zamZN0g/9ZLzjHvuWZ7/t
- ZGNHOOZHcv6reHt9kfgnxklCFSBZ+aqaPOhYBjniOePQzHt7YKqYdDT86a7luo5YdQaCcuxEvvZ
- nEfeMI/jS+s7bbxeOfSufilh16L+hsiMeGwRSsmeTUj5XaWdatHCAs6l0iFlBqrv/CT93ZkrBrM
- VAzDAe+egTOHmD53BNdYvdwPeVZ9BDVJB4iPR9LW0wbadIHMWTf/gQvk4gINF4Kvn8GnlLoGnmt
- 9kRtIg6JOQzPnTvG1qRXwylDFobLwNMhQYzowW1GJeK15Z+n2ZlFTZge11IiWLL8wfYlWpW6SQf
- k4Hat8Q==
-X-Google-Smtp-Source: AGHT+IH0MlxwwftqLTl7XFcWnXz+k92a+cLe8IxzGFQyw2nLcHsd7CwREL4RIAzDFYhVVdYgoN9qUw==
-X-Received: by 2002:a05:6820:507:b0:604:1:3736 with SMTP id
- 006d021491bc7-6045cad95a5mr408065eaf.7.1744150407812; 
- Tue, 08 Apr 2025 15:13:27 -0700 (PDT)
+ bh=1u/E+KvJd3hAFoBMH4Z/5t1Op+Itj8RXoCAiZZ5ac6k=;
+ b=BtE8P+47JT8t2fGzXWbiq6EDLtVtDJil/R7MvAjaallbZhRQ/3rVhVul1/hg1LNHRk
+ x0ma8sfekwS16RHO1Z96iS/eNLl8GbQ97A1nNd6JNPI4gnLhITeLqbItj+zb5Fp0gXyu
+ Rfjkz/jWSv46TBEriIMIgLEQSrFgFLizMToBW6PCAGy/O42xOQ6PiEipegTFbluQsB/q
+ UbgK6fQ9RtsIXFyvYoFg4E90nNmvQ0Ol73chve9ar3OlcL2lzdFxRCnuwCjzUC1plOzN
+ 8xL+EoREOOsmeTUGfADtolNA7+jmMRiXEWciAYW/UNknR7pmZedyBVojkyyEjag2m+JO
+ r0Ew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV60Rxh4CkaolTnWjCYN1SVyc6saYZ0FaejRlDgj1ZZIzUrRu23bffkMALRxRb6qMzL0aO5sNM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQGw8GK/ol2yr9eRo5UNLIt5StiBD6FD94JWM4YFdYyJwGWb3L
+ 35W5KHGXb7KfPfYYDgymTWUZvHWOZ5GbARX26QTclOLOKSTebNKgaiyD5Jovzqs=
+X-Gm-Gg: ASbGncuR4zeJ3lHSWESeisrqGP+uMxYMCKzfnQR+bc2UGrYjz8NkO6j9BqYQPhfzpFq
+ P4H8JBL5IDGEIMkgAHfIONY1cgbLfNVWtc9uB4Qk5tz6ygPZ5ETv939P3NsvFm/bA6tHB76rKpc
+ GWk7o6AwWr/c3Yuu7ZwuEcVl8To8rFUKJegDsF5dhR/Ql2kT+UZ3+ZS5QynUwYdfKfwSYy8cMvu
+ xkHA5lTa9XYBDKvdDruhITY6vViOnYsx7o7TH8EmUMY4+JFpqlzWIiSNtAjVKNrCBur443f/hBY
+ /lEb5PKCngKxhr3sAgdiDBR5S0Y+AQuNp8KdoNiHsvqnWyPVIG0NwfheU975mGy6kq6i8jPT6k3
+ gBZMnxQ==
+X-Google-Smtp-Source: AGHT+IEOcKDl1i5GPkV+qyiUwi1XzIOgUooQOcu30+mT6PsucwtbYoXFXZV2kVBzLlOzDbdTp3tkVA==
+X-Received: by 2002:a05:6870:8dc4:b0:29e:7d35:2319 with SMTP id
+ 586e51a60fabf-2d08dce04b2mr498364fac.4.1744151362285; 
+ Tue, 08 Apr 2025 15:29:22 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6044f4a61d1sm608285eaf.9.2025.04.08.15.13.26
+ 586e51a60fabf-2d0930cf834sm15999fac.13.2025.04.08.15.29.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 15:13:27 -0700 (PDT)
-Date: Tue, 8 Apr 2025 16:13:24 -0600
+ Tue, 08 Apr 2025 15:29:21 -0700 (PDT)
+Date: Tue, 8 Apr 2025 16:29:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Douglas Anderson <dianders@chromium.org>, Sean Anderson <seanga2@gmail.com>
-Subject: Re: [PATCH 0/5] patman: Separate gitutil fully
-Message-ID: <20250408221324.GA5495@bill-the-cat>
-References: <20250407105151.689453-1-sjg@chromium.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 05/18] net/net: fix switch/case fallthrough annotations
+Message-ID: <20250408222918.GA1475540@bill-the-cat>
+References: <20250327153313.2105227-1-andre.przywara@arm.com>
+ <20250327153313.2105227-6-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m/JZwZRFrqpSvlbr"
+ protocol="application/pgp-signature"; boundary="OvV2OI97qjGRFIRg"
 Content-Disposition: inline
-In-Reply-To: <20250407105151.689453-1-sjg@chromium.org>
+In-Reply-To: <20250327153313.2105227-6-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,64 +103,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---m/JZwZRFrqpSvlbr
+--OvV2OI97qjGRFIRg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 07, 2025 at 10:51:42PM +1200, Simon Glass wrote:
+On Thu, Mar 27, 2025 at 03:33:00PM +0000, Andre Przywara wrote:
 
+> The net_check_prereq() routine in the generic network handling code
+> mixes case: labels with #ifdef's, which makes predicting fallthrough
+> situations tricky. We had two "fall through" comments in the code, but
+> at the wrong places.
 >=20
-> The gitutil module uses Patman's settings module, which is not allowed
-> as it is supposed to be a separate package. This series ties up this
-> dependency.
+> Remove one unneeded comment (no annotations necessary between just empty
+> labels), and move one other instance to the right place (before any
+> label sequence).
+> This makes GCC's implicit fallthrough checker happy.
 >=20
-> This series depends on these two patches being applied:
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
+>  net/net.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >=20
-> https://patchwork.ozlabs.org/project/uboot/patch/20250227192735.406389-1-=
-sjg@chromium.org/
-> https://patchwork.ozlabs.org/project/uboot/patch/20250328130225.2607974-1=
--sjg@chromium.org/
->=20
->=20
-> Simon Glass (5):
->   patman: Untangle settings from gitutil
->   patman: Pass the alias dict into gitutil.build_email_list()
->   patman: Pass the alias dict into gitutil.email_patches()
->   patman: Pass aliases to Series.MakeCcFile()
->   patman: Update Series.ShowActions() to pass alias
->=20
->  tools/patman/control.py       | 11 ++++++++---
->  tools/patman/func_test.py     |  8 ++++----
->  tools/patman/series.py        | 32 ++++++++++++++++++++++----------
->  tools/u_boot_pylib/gitutil.py | 34 ++++++++++++++--------------------
->  4 files changed, 48 insertions(+), 37 deletions(-)
+> diff --git a/net/net.c b/net/net.c
+> index 5219367e391..f191f16357c 100644
+> --- a/net/net.c
+> +++ b/net/net.c
+> @@ -1525,7 +1525,6 @@ static int net_check_prereq(enum proto_t protocol)
+>  #if defined(CONFIG_CMD_NFS)
+>  	case NFS:
+>  #endif
+> -		/* Fall through */
+>  	case TFTPGET:
+>  	case TFTPPUT:
+>  		if (IS_ENABLED(CONFIG_IPV6) && use_ip6) {
+> @@ -1539,11 +1538,11 @@ static int net_check_prereq(enum proto_t protocol)
+>  			puts("*** ERROR: `serverip' not set\n");
+>  			return 1;
+>  		}
+> +		fallthrough;
+>  #if	defined(CONFIG_CMD_PING) || \
+>  	defined(CONFIG_CMD_DNS) || defined(CONFIG_PROT_UDP)
+>  common:
+>  #endif
+> -		/* Fall through */
+> =20
+>  	case NETCONS:
+>  	case FASTBOOT_UDP:
 
-I just want to reiterate my question / request to host these outside of
-the U-Boot sources themselves so they can be managed (both in the sense
-of U-Boot as user and as maintainer of sources) following normal Python
-best practices? I'd be fine even with something under
-https://source.denx.de/u-boot/<something>/patman, etc.
+So this one is harder than it looks. With clang, we cannot seemingly
+have:
+	fallthrough;
+#if defined(CONFIG_CMD_PING) || \
+    defined(CONFIG_CMD_DNS) || defined(CONFIG_PROT_UDP)
+common:
+#endif
+
+And gcc was failing on:
+	}
+#if defined(CONFIG_CMD_PING) || \
+    defined(CONFIG_CMD_DNS) || defined(CONFIG_PROT_UDP)
+common:
+#endif
+	fallthrough;
+
+Maybe we can move the label to inside the next set of cases, and then
+also add CONFIG_CMD_PING6 to the checks, as that also has 'goto common;'
 
 --=20
 Tom
 
---m/JZwZRFrqpSvlbr
+--OvV2OI97qjGRFIRg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf1n4EACgkQFHw5/5Y0
-tyxGEAv9EJ0SP3HUXiQvPp1frL5D/pZ2Z2Jd827tvq8ewK+I07Wa8bPUgwANW+Sa
-4ocYyk5J5NVbvUKfkzQenawGc9KRpZgY4jvraUXGRhebycLauxwsZrJSwh1tRETR
-JkQt4hkSAY32r1voAQNbVa+A6Z+OmmDQCczR18zJ5WDfRDkwhAaGm8+MhOMmWQnR
-N3/rM6/QQZHc89y8KPt4dQH/TpGwqwPsgbg0yzZLmj8q8iYdI+OJVzz6CEhKRK1b
-LA9GRf9Vmfq832fRTs6jzh3EU7jch3dTWE+DrxPJtFp6WgMOnL6FBwpVzcjNkC2a
-hB4YU9G0D8TT53CIoDJyyEDs5mqTLCMsTxBOpQ0+tJ3BDEflAivO9Zpcy8BGs5nX
-4bNSMAOKITJbCyer6Qwc3yRuiFf5o7tJl3pKmlabuPTHhPfSPHl9JUOxdqaINwKa
-nKbDhcRfjexHu83nUbRROyMrAnsCBelTlau2Vr4+pVAEUhEuKLsFFXwsRfCZ55Sf
-pBvD4DRw
-=spfJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf1ozsACgkQFHw5/5Y0
+tyymIQv+NFXuvzq72OW1sY7T+cXBk85XlGdYtWdk+u/Nrsv6Dm/CP4x4Y4MHw/bz
+9svksc64gW9C9TOiWl5986ViktKfTp0fP5PBijxGBOxoiHk+cJhvfGttafSUY1x7
+oqGsl0UvEac29CNyPp+fFK5rANMVNkwbxghesh8Xqj8gRCEHWBMvK6THqIcnZWeq
+XlUaPgzum4kkhxQF1Jl311i6mpwXi0+2g7N3z+IIY3DYg6nh+NgOOM8cnO3pQx+v
++2DmxmO8pCZJToSduLAgLNXVO3xnZqo8Nv7Q4nIRqG1kX7YX+yF00nwz/eiRlRd5
+M77BRaKngs27WcEiFE7ilsVhB9N9n9NwupwN3ScxJI9NXg02FjZtRxuYop7r8jRW
+BtXFYluZERP87B7WF0EXkMdxnhAKy7N8ACdOI1Q9vmhfKd15OACo9dCbDMT9rYzH
+NSRNTJ/NPcVyTpEIHuOvB+/6PyeiIaMEvLHEmElau++9D0DdWV1O9nNookooBQbe
+wEhqP7cV
+=jZqK
 -----END PGP SIGNATURE-----
 
---m/JZwZRFrqpSvlbr--
+--OvV2OI97qjGRFIRg--
