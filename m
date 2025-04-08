@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F22C3600C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 06:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7BEC3600C
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 06:13:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71E1A8303B;
-	Tue,  8 Apr 2025 08:13:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47F61831C8;
+	Tue,  8 Apr 2025 08:13:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tRkxwfde";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HQANRk9X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D5A383095; Tue,  8 Apr 2025 08:13:42 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id B15D4831D6; Tue,  8 Apr 2025 08:13:54 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FFD882FBE
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 08:13:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 639B182FBE
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 08:13:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e6405b5cd9bso4378403276.1
- for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 23:13:39 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e461015fbd4so4165430276.2
+ for <u-boot@lists.denx.de>; Mon, 07 Apr 2025 23:13:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744092818; x=1744697618; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744092831; x=1744697631; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ogB883ohPhuNWGfLFYV8uzoJPntjrI1mT7tdL8LJMFU=;
- b=tRkxwfdebCfgV+BkIO/b2ZOdDZI8yYOgDKgiwff3TkJACRSud+fKgK8lR16/EOgKBG
- QRARif2a2Z2enaBFHpa5UBzV4EnY86iD09OdbXcptdUrxUDtoqb38io3o9xqEqgY70ki
- zEKRZxxhrBenYr1tfzML8lJKhyjv8nJ447BkJvgqO59LK5au2VP0Ve4ou6JF1PTPXYBy
- FeDyW0KYooDigcq5nlAtik/I5eiFfkU/qI/ZbsZnc3ECSstAZoyEpvhGrBk49fDSA4sw
- UhRimdLGUMEAaFMJ2dQzvZ8+rd5gdsLFwxR93cGRyZfaJICN2rqS0UGws2BMJbcziHuO
- 0Gkg==
+ bh=eYvFRLMQgUhk/mfueocf0LvZjL9KyH/bO1soykCe+rg=;
+ b=HQANRk9XNsWqguUdL5EvyYCkCXtIvjsfDQHCq3js/5bmka0lSVf0JUBAhfXBN7akMt
+ lEbUhCN7JxBeHghS1CNqIC60dpUeTJcKH09GZnn7YvSGO3kkrHPKhKtErOoeYAT9z1VI
+ 2XabLMdZTfKb4wzfsD4Fzo0DUCINyhUR9CCn2T3OnGmYqly7VAow6pZ9lcwDMkyVGhK9
+ tiEkPVsSc/wKI8UyLHHku9TB38CrfT1lQs5M0zN0n4ktqQdpIv4LQ1z4t8eP7pvOFDbB
+ s9SwLMpFRxA+3nnFF/h3G4FNahbqTCZaW6iMKScwIePo4Sb150hYgNfH5S4JXHN/JDMY
+ 7PCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744092818; x=1744697618;
+ d=1e100.net; s=20230601; t=1744092831; x=1744697631;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ogB883ohPhuNWGfLFYV8uzoJPntjrI1mT7tdL8LJMFU=;
- b=af1V4d7R/ltvamsFcNV0WJgjUKG4+xfR8o1taQNRjzQJ9xZLiIGyg2P7zhhbjT16+c
- 0XJECir9BNI6u+AOd1/BUXvGmzPGsdmquEH5BxhI5CGvbBtu3LiVwWyuqDK+bF0zoasQ
- FN7i4syfF0rTowDFnG2tAt/mN87po49ZUOZbZtMvzc7+95e71jhZdtComKxQc5uG3SYv
- II7kC4Znw8o1ZLRsdTyeEZJhf82vX66oCUF9ki5z1A55TxhXjBLy6SxIOXSICXR3zk7B
- RcndIZcEQsIHaX24CGGc46mBi4MgI7be3045wo0rFANyzX8BDeS6oUYImMeH5M7qRSxN
- Sg8g==
+ bh=eYvFRLMQgUhk/mfueocf0LvZjL9KyH/bO1soykCe+rg=;
+ b=H3eDgyZVjzkbAhcedJ7vMpcWOurMi1nqSV5F0S46r+c7dDlc4XLiQEMZrtqOLDm1su
+ MYoyiP+o8iRJ6Y9CHuxrYAv6ospOEvlo9y8tfWp2P4+vN9L6mjMInPSADq0z8WIULmd3
+ tUcEY/b5nKSpMBoddsdcCj+pLUBrnz5GHiP0J+046aX3+NrbhAQAX/4LyXZ47Cx5Ze6a
+ g8DBKxfOk9oPgmAQ+H3L9ft4FLGTSGCaSkwKh1hw/zVqAk3r3BIzdtOsiOdwbPoVdGKX
+ 9wieg79qiopjOCH6d1HeRlqeTjagSxeha+mnt4VcG3uObbhJpVkOVExVBtyFOtl+gpYP
+ dQ1A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbMTABwxoocrWelint5Ru7t0DidAhlOUpCytX8NLozrS/ntQczNr8ShrGWJNFjviSv2Awh+IY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFSZOHYvVnpjSIt2onmePcFOFvDPK55mc2l0YaIxZnnqw5LVXJ
- yIqpqhoL98vPv5vv7iiUn3vqk11KdfgXld8bu1pql2B/0HQoqhDPW58bm0m39miNPYK8EW3w06i
- BuV2oANH9f+B1pCRgcf26Sse0djo157PViaJGlg==
-X-Gm-Gg: ASbGncsiovtrjfSDpXXaEo3sBgIaO3cMwU50n8x0AowpsbEqa6BCxNckXw8ev/9ykIe
- Rq764CDJoQRT8KvkLoe4WDau506nrkPYloslw5z+Vl2HqvP2n4iQE1feHrj8+GkAsyMj4M2BrIz
- PxCXK70oaXXwRk+6T4NhgjqmLB5/A=
-X-Google-Smtp-Source: AGHT+IG0yFDoqTPOpH0SmpFAV2eO++wSOuUKcsORHAq6pmzqNKzPiDqCSGjSHlAdGcIG0d/2RSY02urFAur9+DmUpQc=
-X-Received: by 2002:a05:6902:13c2:b0:e64:3f66:90b8 with SMTP id
- 3f1490d57ef6-e6e5d8d2712mr4302415276.3.1744092818449; Mon, 07 Apr 2025
- 23:13:38 -0700 (PDT)
+ AJvYcCXldCa1bhc5Vy7HhpWi4y1kmGRaJa4BbOrvzPH5ATySoF8jWY8TCo/NntXhI0NoAECh9ytNlO4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwB5LsNyNwTBw972TU35k1Q2ZeYiwroIg+zBiojWWQ61ZpysmAV
+ JGJbO65Em/jw2nVPCte+ZpIcNtL9Fl1NVo6ogWx1y8HPkU3sQLGIPh5PT0xHzlC1r4+BlU+f+2V
+ MuJ6g52ijCi25oaRIYKjFynCOsXxUNwLT6OdYqQ==
+X-Gm-Gg: ASbGncvcwfZ4/1Bsyp5WqEf5toyFdvAGz3sxDbqVavINLTyVvW4SDv7TlXwg8SnCBqV
+ n3cYQP3ABzxs3n+hZlcV/+XphZ0EhlI7p6DBvBmU2pXP1A4wn7k/5FK83fdXEdNZ1nIwIa67co/
+ o1Av/JUHvVfGwF7Uj0bht2N1dWIHQ=
+X-Google-Smtp-Source: AGHT+IFBl4CFCsasjXaEfGm6BmQWE/F6tplF6JehyAtR1sMHXk+B39/p3CYfgAjJClDzhWz/WcKVdPKypDNwI6yxG1M=
+X-Received: by 2002:a05:6902:1a42:b0:e69:1efc:8ce7 with SMTP id
+ 3f1490d57ef6-e6e1c223f3bmr26574213276.24.1744092831281; Mon, 07 Apr 2025
+ 23:13:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250407064424.71541-1-heinrich.schuchardt@canonical.com>
- <20250407064424.71541-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250407064424.71541-2-heinrich.schuchardt@canonical.com>
+ <20250407064424.71541-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250407064424.71541-3-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 8 Apr 2025 09:13:02 +0300
-X-Gm-Features: ATxdqUHHTcdQvWS56NIq8rbp-0G4goigDeGT9fqyM5VGRAaXwu-Mgi0wE2kN7b0
-Message-ID: <CAC_iWjK2rjA4ewJJ++HDVBCSgiGX_8ySOcORSDmyAPFqd76whg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] acpi: select CONFIG_BLOBLIST
+Date: Tue, 8 Apr 2025 09:13:15 +0300
+X-Gm-Features: ATxdqUFhjjcE4mfCv3y4-yZDJ2U0bGWFyl4hE0ARPwxdXVDnEgGGFIAIVpJSLyg
+Message-ID: <CAC_iWjKJRfpzY=yhGGR00RvQsb=Vs6r7nuPcnq+-EwXgdO6LDg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] smbios: select CONFIG_BLOBLIST
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>,
  Simon Glass <sjg@chromium.org>, 
@@ -103,7 +103,7 @@ On Mon, 7 Apr 2025 at 09:44, Heinrich Schuchardt
 > Since commit 53d5a221632e ("emulation: Use bloblist to hold tables")
 > `make qemu-riscv64_smode_defconfig acpi.config && make` fails with
 >
->     qfw_acpi.c:146:(.text.evt_write_acpi_tables+0xc):
+>     drivers/misc/qfw_smbios.c:93:(.text.qfw_evt_write_smbios_tables+0xe):
 >     undefined reference to `bloblist_add'
 >
 > Build with bloblist support.
@@ -111,21 +111,21 @@ On Mon, 7 Apr 2025 at 09:44, Heinrich Schuchardt
 > Fixes: 53d5a221632e ("emulation: Use bloblist to hold tables")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/Kconfig | 1 +
+>  drivers/misc/Kconfig | 1 +
 >  1 file changed, 1 insertion(+)
 >
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 1a683dea670..a348fccebdd 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -317,6 +317,7 @@ config SPL_ACPI
->  config GENERATE_ACPI_TABLE
->         bool "Generate an ACPI (Advanced Configuration and Power Interface) table"
->         depends on ACPI
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index da84b35e804..6312f54a3ca 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -569,6 +569,7 @@ config QFW_SMBIOS
+>         bool
+>         default y
+>         depends on QFW && SMBIOS && !SANDBOX && !SYSINFO_SMBIOS
 > +       select BLOBLIST
->         select QFW if QEMU
 >         help
->           The Advanced Configuration and Power Interface (ACPI) specification
+>           Hidden option to read SMBIOS tables from QEMU.
+>
 > --
 > 2.48.1
 >
