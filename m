@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58418C3601E
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 03:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEBA3C3601E
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 03:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C8A82CEA;
-	Tue,  8 Apr 2025 05:21:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B8EE832A4;
+	Tue,  8 Apr 2025 05:21:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LzER8FAg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="c/EwZBGJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A674B832A4; Tue,  8 Apr 2025 05:21:47 +0200 (CEST)
-Received: from mail-m49212.qiye.163.com (mail-m49212.qiye.163.com
- [45.254.49.212])
+ id CB72583290; Tue,  8 Apr 2025 05:21:55 +0200 (CEST)
+Received: from mail-m49237.qiye.163.com (mail-m49237.qiye.163.com
+ [45.254.49.237])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBD3182CE7
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 05:21:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD1638331B
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 05:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 1101e8d3b;
- Tue, 8 Apr 2025 11:21:40 +0800 (GMT+08:00)
-Message-ID: <2f8e4181-941d-4e92-ae83-26a2a68cef0b@rock-chips.com>
-Date: Tue, 8 Apr 2025 11:21:40 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 110208933;
+ Tue, 8 Apr 2025 11:21:47 +0800 (GMT+08:00)
+Message-ID: <0c850348-9380-4340-9e26-9f79989e6289@rock-chips.com>
+Date: Tue, 8 Apr 2025 11:21:47 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/30] arm64: dts: rockchip: enable SCMI clk for RK3528
- SoC
+Subject: Re: [PATCH v2 07/30] arm64: dts: rockchip: Add SARADC node for RK3528
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
  u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
- <20250407224743.2423921-7-jonas@kwiboo.se>
+ <20250407224743.2423921-8-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250407224743.2423921-7-jonas@kwiboo.se>
+In-Reply-To: <20250407224743.2423921-8-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx5OT1ZMTElCSE4ZH0pISU1WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk8fHlYfSk5PS0lPHx4ZSE1WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a96136afc5d03afkunm1101e8d3b
+X-HM-Tid: 0a96136b17a303afkunm110208933
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mk06Hxw6TjJKSEJOPxUdT0w8
- HBwwCS9VSlVKTE9PS0NJTktJSkpDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISE9LNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PVE6KBw*FDJWVkISARUOTj4I
+ STQwFC9VSlVKTE9PS0NJTktDTExDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTU5KNwY+
 DKIM-Signature: a=rsa-sha256;
- b=LzER8FAgVv1IKpJ3QdORwvWWO0auO0AZc79EFZ+zhssXXzx+gJ48w575hdgmppM9DCU/ZE1w8GdEOiMbb6yV5t0F8fgC3w03zEww6H8AYfWeDgdAmsR8WN9EtYx2p0Yo7QCzyBnqWOwdxaiUwliLaVWVJsoAK0N9ETK6T6+WbAw=;
+ b=c/EwZBGJtSvfRscUafNCG6TvianuxsvGzVLGAtjttMbNbZSDr1q96not6MPQbvUJd+A8ICmg1mvOGeJ6f9xfbDGmxpsT2XqULmfyoHtGcq3Baqsevh4Yeg4Z72ZIIIvRG7B34vYg667O66f4E4k9ceiABTAHIcX2WowMWVZvN1Q=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=bVQL3wjNZzvQ9TU/cAtHuCHMVeQhz0TTQqYxsSCrbZY=;
+ bh=EG+pHULhwsVTFTY+mCeuByTHm3jdjfm5ixOGh7j3erU=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,94 +78,52 @@ X-Virus-Status: Clean
 
 
 On 2025/4/8 06:46, Jonas Karlman wrote:
-> From: Chukun Pan <amadeus@jmu.edu.cn>
+> Add a device tree node for the SARADC controller used by RK3528.
 >
-> Same as RK3568, RK3528 uses SCMI clk instead of ARMCLK.
-> Add SCMI clk for CPU, GPU and RNG will also use it.
->
-> Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
-> Link: https://lore.kernel.org/r/20250307100008.789129-2-amadeus@jmu.edu.cn
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Link: https://lore.kernel.org/r/20250304201642.831218-4-jonas@kwiboo.se
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 >
-> [ upstream commit: fbcbc1fb93e14729bd87ab386b7f62694dcc8b51 ]
+> [ upstream commit: 6e58302c84ce90aadbecd41efe1f69098a6f91e5 ]
 >
-> (cherry picked from commit 6e03c7e28e2d929a420809a24b0379305a9fb86a)
+> (cherry picked from commit 8ba64ba5cb301bca777ba7f0d2a2a72f49af5ff2)
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm64/rockchip/rk3528.dtsi | 31 +++++++++++++++++++++
->   1 file changed, 31 insertions(+)
+>   dts/upstream/src/arm64/rockchip/rk3528.dtsi | 13 +++++++++++++
+>   1 file changed, 13 insertions(+)
 >
 > diff --git a/dts/upstream/src/arm64/rockchip/rk3528.dtsi b/dts/upstream/src/arm64/rockchip/rk3528.dtsi
-> index 0c0e7f151462..4be53868f324 100644
+> index 4be53868f324..c2eaa0c6ea90 100644
 > --- a/dts/upstream/src/arm64/rockchip/rk3528.dtsi
 > +++ b/dts/upstream/src/arm64/rockchip/rk3528.dtsi
-> @@ -59,6 +59,7 @@
->   			reg = <0x0>;
->   			device_type = "cpu";
->   			enable-method = "psci";
-> +			clocks = <&scmi_clk SCMI_CLK_CPU>;
+> @@ -9,6 +9,7 @@
+>   #include <dt-bindings/interrupt-controller/irq.h>
+>   #include <dt-bindings/pinctrl/rockchip.h>
+>   #include <dt-bindings/clock/rockchip,rk3528-cru.h>
+> +#include <dt-bindings/reset/rockchip,rk3528-cru.h>
+>   
+>   / {
+>   	compatible = "rockchip,rk3528";
+> @@ -455,6 +456,18 @@
+>   			status = "disabled";
 >   		};
 >   
->   		cpu1: cpu@1 {
-> @@ -66,6 +67,7 @@
->   			reg = <0x1>;
->   			device_type = "cpu";
->   			enable-method = "psci";
-> +			clocks = <&scmi_clk SCMI_CLK_CPU>;
->   		};
->   
->   		cpu2: cpu@2 {
-> @@ -73,6 +75,7 @@
->   			reg = <0x2>;
->   			device_type = "cpu";
->   			enable-method = "psci";
-> +			clocks = <&scmi_clk SCMI_CLK_CPU>;
->   		};
->   
->   		cpu3: cpu@3 {
-> @@ -80,6 +83,22 @@
->   			reg = <0x3>;
->   			device_type = "cpu";
->   			enable-method = "psci";
-> +			clocks = <&scmi_clk SCMI_CLK_CPU>;
+> +		saradc: adc@ffae0000 {
+> +			compatible = "rockchip,rk3528-saradc";
+> +			reg = <0x0 0xffae0000 0x0 0x10000>;
+> +			clocks = <&cru CLK_SARADC>, <&cru PCLK_SARADC>;
+> +			clock-names = "saradc", "apb_pclk";
+> +			interrupts = <GIC_SPI 140 IRQ_TYPE_LEVEL_HIGH>;
+> +			resets = <&cru SRST_P_SARADC>;
+> +			reset-names = "saradc-apb";
+> +			#io-channel-cells = <1>;
+> +			status = "disabled";
 > +		};
-> +	};
 > +
-> +	firmware {
-> +		scmi: scmi {
-> +			compatible = "arm,scmi-smc";
-> +			arm,smc-id = <0x82000010>;
-> +			shmem = <&scmi_shmem>;
-> +			#address-cells = <1>;
-> +			#size-cells = <0>;
-> +
-> +			scmi_clk: protocol@14 {
-> +				reg = <0x14>;
-> +				#clock-cells = <1>;
-> +			};
->   		};
->   	};
->   
-> @@ -88,6 +107,18 @@
->   		method = "smc";
->   	};
->   
-> +	reserved-memory {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
-> +		ranges;
-> +
-> +		scmi_shmem: shmem@10f000 {
-> +			compatible = "arm,scmi-shmem";
-> +			reg = <0x0 0x0010f000 0x0 0x100>;
-> +			no-map;
-> +		};
-> +	};
-> +
->   	timer {
->   		compatible = "arm,armv8-timer";
->   		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
+>   		pinctrl: pinctrl {
+>   			compatible = "rockchip,rk3528-pinctrl";
+>   			rockchip,grf = <&ioc_grf>;
