@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE3BCC369A1
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 03:25:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB221C36010
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 03:25:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76A5A83388;
-	Tue,  8 Apr 2025 05:23:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C453C82CEA;
+	Tue,  8 Apr 2025 05:24:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DFJO2a8l";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CZSQGo4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7671832FE; Tue,  8 Apr 2025 05:23:52 +0200 (CEST)
-Received: from mail-m3280.qiye.163.com (mail-m3280.qiye.163.com
- [220.197.32.80])
+ id 4572982CE7; Tue,  8 Apr 2025 05:24:00 +0200 (CEST)
+Received: from mail-m1973190.qiye.163.com (mail-m1973190.qiye.163.com
+ [220.197.31.90])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 612A982CE7
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 05:23:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97A8C833BF
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 05:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 110208b85;
- Tue, 8 Apr 2025 11:23:45 +0800 (GMT+08:00)
-Message-ID: <8a180cab-b07b-4480-b5ae-0a2e4f8471f1@rock-chips.com>
-Date: Tue, 8 Apr 2025 11:23:45 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 110208baf;
+ Tue, 8 Apr 2025 11:23:52 +0800 (GMT+08:00)
+Message-ID: <b66be7d0-2d7d-496d-9897-93e422577c38@rock-chips.com>
+Date: Tue, 8 Apr 2025 11:23:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 21/30] mmc: rockchip_sdhci: Add initial support for
- RK3528
+Subject: Re: [PATCH v2 22/30] mmc: rockchip_sdhci: Gate clock for glitch free
+ phase switching
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
  u-boot@lists.denx.de
 References: <20250407224743.2423921-1-jonas@kwiboo.se>
- <20250407224743.2423921-22-jonas@kwiboo.se>
+ <20250407224743.2423921-23-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250407224743.2423921-22-jonas@kwiboo.se>
+In-Reply-To: <20250407224743.2423921-23-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx0aTFYaTE9CT0JITBpCSklWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0tPHlZOH01DQh9OS09IHk1WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a96136ce60603afkunm110208b85
+X-HM-Tid: 0a96136cfe5503afkunm110208baf
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORQ6STo4EzJIIUIcAQgpTgo9
- PwtPCklVSlVKTE9PS0NJTUlMT01JVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUhCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MDo6Tjo6IzIMLUJMEQ8KThIe
+ LjIaFB5VSlVKTE9PS0NJTUhITU9KVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISktONwY+
 DKIM-Signature: a=rsa-sha256;
- b=DFJO2a8lExGjnTCXBJi8MW+aQIYvfkjlpBgxft7VQvYA3pIfeXyah2m2JZ7zHq8jrdooSMl0YCEidZqIWRmd4RLhR/OWhz+rOIzKtPyJtyl64shzMn8wFo9Q9U6zIZb+/uGC55Uhx+hXs9pITZjfMko1G1fxhMlWwDqcZiJXFn8=;
+ b=CZSQGo4aSLiozRVSa6JdjdRItJVqRfHH9t7r4TV++WyKA+0AMPaplE4bcNQD5gqW1TVAuLRpQOrPLA7vbg4NdLRG3Nz3TBHlo0SJIuJhP3+neOH3CVIN51SUqmpKRSqNhVQA4hazUmJNZHJq+jrNMScAP8ib3yJ3dQC62XDeDAE=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=oFiOhkgHxyRe3kNFgKA6JE0bEB//ySAyjT/oixbaKL4=;
+ bh=kq1V1VOudNNLzdGTI/k19jJmTA9YsghgDe9spX3zds4=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,13 +79,24 @@ X-Virus-Status: Clean
 
 
 On 2025/4/8 06:46, Jonas Karlman wrote:
-> Add initial support for SDHCI controller in RK3528.
+> Enable clock stopping to gate clock during phase code change to ensure
+> glitch free phase switching in auto-tuning circuit. Fixes HS200 mode
+> on RK3528.
 >
-> Only MMC Legacy and MMC High Speed (52MHz) mode is supported after this,
-> more work is needed to get the faster HS200/HS400/HS400ES modes working.
+> POST_CHANGE_DLY
+> Time taken for phase switching and stable clock output.
+> - Less than 4-cycle latency
 >
-> Variant tap and delay num is copied from vendor Linux tag
-> linux-6.1-stan-rkr5.
+> PRE_CHANGE_DLY
+> Maximum Latency specification between transmit clock and receive clock.
+> - Less than 4-cycle latency
+>
+> TUNE_CLK_STOP_EN
+> Clock stopping control for Tuning and auto-tuning circuit. When enabled,
+> clock gate control output is pulled low before changing phase select
+> codes. This effectively stops the receive clock. Changing phase code
+> when clocks are stopped ensures glitch free phase switching.
+> - Clocks stopped during phase code change
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -95,39 +106,33 @@ Thanks,
 > ---
 > v2: No change
 > ---
->   drivers/mmc/rockchip_sdhci.c | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
+>   drivers/mmc/rockchip_sdhci.c | 9 +++++++++
+>   1 file changed, 9 insertions(+)
 >
 > diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-> index 4968404bfaed..2c54b8a942da 100644
+> index 2c54b8a942da..c0f986784366 100644
 > --- a/drivers/mmc/rockchip_sdhci.c
 > +++ b/drivers/mmc/rockchip_sdhci.c
-> @@ -650,6 +650,17 @@ static const struct sdhci_data rk3399_data = {
->   	.set_enhanced_strobe = rk3399_sdhci_set_enhanced_strobe,
->   };
+> @@ -50,6 +50,10 @@
+>   #define DWCMSHC_EMMC_EMMC_CTRL		0x52c
+>   #define DWCMSHC_CARD_IS_EMMC		BIT(0)
+>   #define DWCMSHC_ENHANCED_STROBE		BIT(8)
+> +#define DWCMSHC_EMMC_AT_CTRL		0x540
+> +#define EMMC_AT_CTRL_TUNE_CLK_STOP_EN	BIT(16)
+> +#define EMMC_AT_CTRL_PRE_CHANGE_DLY	17
+> +#define EMMC_AT_CTRL_POST_CHANGE_DLY	19
+>   #define DWCMSHC_EMMC_DLL_CTRL		0x800
+>   #define DWCMSHC_EMMC_DLL_CTRL_RESET	BIT(1)
+>   #define DWCMSHC_EMMC_DLL_RXCLK		0x804
+> @@ -326,6 +330,11 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>   		udelay(1);
+>   		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
 >   
-> +static const struct sdhci_data rk3528_data = {
-> +	.set_ios_post = rk3568_sdhci_set_ios_post,
-> +	.set_clock = rk3568_sdhci_set_clock,
-> +	.config_dll = rk3568_sdhci_config_dll,
-> +	.hs200_txclk_tapnum = 0xc,
-> +	.hs400_txclk_tapnum = 0x6,
-> +	.hs400_cmdout_tapnum = 0x6,
-> +	.hs400_strbin_tapnum = 0x3,
-> +	.ddr50_strbin_delay_num = 0xa,
-> +};
+> +		extra = 0x3 << EMMC_AT_CTRL_POST_CHANGE_DLY |
+> +			0x3 << EMMC_AT_CTRL_PRE_CHANGE_DLY |
+> +			EMMC_AT_CTRL_TUNE_CLK_STOP_EN;
+> +		sdhci_writel(host, extra, DWCMSHC_EMMC_AT_CTRL);
 > +
->   static const struct sdhci_data rk3568_data = {
->   	.set_ios_post = rk3568_sdhci_set_ios_post,
->   	.set_clock = rk3568_sdhci_set_clock,
-> @@ -678,6 +689,10 @@ static const struct udevice_id sdhci_ids[] = {
->   		.compatible = "arasan,sdhci-5.1",
->   		.data = (ulong)&rk3399_data,
->   	},
-> +	{
-> +		.compatible = "rockchip,rk3528-dwcmshc",
-> +		.data = (ulong)&rk3528_data,
-> +	},
->   	{
->   		.compatible = "rockchip,rk3568-dwcmshc",
->   		.data = (ulong)&rk3568_data,
+>   		/* Init DLL settings */
+>   		extra = DWCMSHC_EMMC_DLL_START_DEFAULT << DWCMSHC_EMMC_DLL_START_POINT |
+>   			DWCMSHC_EMMC_DLL_INC_VALUE << DWCMSHC_EMMC_DLL_INC |
