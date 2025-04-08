@@ -4,89 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE7FC369A4
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4555C369A6
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 14:03:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2362E82114;
-	Tue,  8 Apr 2025 16:00:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B01382C55;
+	Tue,  8 Apr 2025 16:03:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tBvGTRj2";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="H5DnPLV8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1A8C82C55; Tue,  8 Apr 2025 16:00:47 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ADB8582CAE; Tue,  8 Apr 2025 16:03:16 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::601])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8B2D8210A
- for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:00:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75BBA82B7E
+ for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 16:03:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3feb3f54339so4054802b6e.1
- for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 07:00:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744120843; x=1744725643; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JKIMPGTDc/34iB6wpBo3bWiYvADtafzgnP63YZyvBCs=;
- b=tBvGTRj2UepRi3dmRqm+JXy0lE/GQy6AtE7ZMpEsCsswZcQJu2xPmmJz69GVE6njr/
- 7iQU2Byk9qL+OXeqnS7jyXCEs5/N7Z1hUcS38cm0XcTYlvoHn5Eb9L9SqAoviU6xLKCy
- Sr7ZXBYx7oM9zYUFqKnyA+MMXEAnljj2ImO9g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744120843; x=1744725643;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JKIMPGTDc/34iB6wpBo3bWiYvADtafzgnP63YZyvBCs=;
- b=IwGE/HgdjJRD29CR2qTDnhaJI3PHPJyCY+XC17v9IRHOc7xnaIxC6ODKuUQpPLgKz9
- NlVqUvDnn7Uj8ttcybguBJtye8yrRmMufpT+g/oTRDdKU6TwCBQkPa7rv9ypaTvi0fBv
- jQw9ULc1ZcbkBnfmIEow5PEmUFdweKI2zRO+fXpavNOgnGi0Sv4ZSxqvK1Sp01p2fl3U
- 1R6/sV6XgOa1zV09eFwBFmdJsjZ7b26dGjqQnEeoUeJ5NxI5v9+m0M1AkrMopUk1zDl/
- F4ru4diURkrxUYm4DXY3AmeAr6Q3fWSIXG/CEhkAZBnjFYsabYu+4rTNLs12FuZYfvTl
- kBvg==
-X-Gm-Message-State: AOJu0YwaQB7tSgShada3JdSBbDecLkiQ/4n3EUNxtc5CUS4V/1TTfDi/
- TL0xct1h8ZLdnkxSxV9wdqZgYotDfeAydIRFTg+rhTM8vgf5OGcr9su+OiSZvss=
-X-Gm-Gg: ASbGncsJr2kXfOc2SWV4jPiA2w+F2z8Sj2qFO8bB3xnvIyOT/w4dBE6ddCvtwNrGOrs
- FuJM1Tq3VlMtXb8VDPPDtsWi41P8uz1GvYswNkALbxMHBWI5W4ps3dN/8ibeMgZWy8qZj4xLwGS
- XsEFw1tF9JjlHgql1nQ29RlsDuNoV8YBjrZ6v7YHaPS+dB67t9/tfBMsTca4T40xNWqRSeLx3gw
- EyIS/CM5N1vFwhNRw11iZF0rtGO1bW6XZK2rb92jSOfcLkiakxoaWbi4qK1+s5a5mEBDB4QNiyX
- FQ8lF6RcLjXi5Ywi/oJnhHqyOyo1I9xwZrkIkRzJjgsHqs1wTOtLmRD2lI7xkyjFaJj4GcEN1hZ
- MMMZ9DQ==
-X-Google-Smtp-Source: AGHT+IE7dOwhrXFXApH26THxrY7u9NqAYkZcwjAHxbMmoxkrlfyX1r2zmDU/OCYN8CO6nBUXHjOsIQ==
-X-Received: by 2002:a05:6808:191d:b0:3f9:6df8:1d33 with SMTP id
- 5614622812f47-4004655da69mr9324730b6e.6.1744120843344; 
- Tue, 08 Apr 2025 07:00:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-400691063bfsm452006b6e.12.2025.04.08.07.00.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 07:00:42 -0700 (PDT)
-Date: Tue, 8 Apr 2025 08:00:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2] cmd: fwu: Dump custom fields from mdata structure
-Message-ID: <20250408140040.GV5495@bill-the-cat>
-References: <1254c3c538facb1a124865aede861f399cf524df.1742552744.git.michal.simek@amd.com>
- <300f75b7-6c59-4b58-b4b0-e8aaf7919318@amd.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Zcm9S2DIFrIN9dBJd5sYOJEhIrPEdONtrdLsn5cu7dUrPP3mVJCcrqyQe+aq5mIka4EE6RKoJyGEk0wcz9s9KurS7VhrJvB0jzf3CGEBLJ0xUsCPVV5Ylr609xM6g8JBG0d7us6EJhQdrqFHkVDXdsQnc9NWfp9cPw69WfjX+2+MEfl9RUJ0MMXtrSgKMqZAxqgaUBbUSr0/aLt9t8PcY+ozGeuhNfMdHCIJ0aiZPvhYkBxgPx28XtWqxNqOS5oNzhmXuFIBoKE5fXx6QO6zaDq4WzpP+XX+4HgrGFncE0TCvUZKkm/S7OAsORyTXyKMTXcV+OVCUwq7z2pV5uE80w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WAoUl8qOPzL43Pyg94WHuX+V2Al317Nll7V/+PQMO2Q=;
+ b=JBqdGThzaK2ofNHomDugAE6dZnmnWn7/JBm1HpLtMD9RvYqRsYF4hnD1II9kIgTChMtgZ2EcxS69TTDZhyuwesTT/JFAqh9DF3ksj+SB198UDBO+NM3SQ/AZikil8nPOqCxsND7UKfOd6L7lsmoUSGRIfuxXurfsncHNcO4gmwo8ZkRl1uYDzeTUW2g+Ujp2e3s7c2D0nMUGZWOB6jPrD++YeRjKmOkBswZjjjhmNPCEOWyFHJRHh2c647/5XbCHFRnru0Uqa/9ZLk4Mwo9vx+DTJWVXSUuhgwK8ilTPL8XlmIyB9SbGs8RS43zeyofl9s6C3XpF6l/CGSVKjhZkhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WAoUl8qOPzL43Pyg94WHuX+V2Al317Nll7V/+PQMO2Q=;
+ b=H5DnPLV8g7tUZKZNzRmjtWpy9gq8RRLq6j/4ScbQCSPcn4IvmxQnqz6WwQGFilw+yQZRj/N7f5a0k9+HbhMTeGQ8pd3QZCQwu+DjDQBly6P3NXD8S/Ou+SMg4fxufaUfo+WxBSSaYQ+5hOIr4sJhO0oWNSp7vjm42KRXsGUEooc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AM9PR04MB7555.eurprd04.prod.outlook.com (2603:10a6:20b:2d6::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Tue, 8 Apr
+ 2025 14:03:13 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8606.033; Tue, 8 Apr 2025
+ 14:03:12 +0000
+Message-ID: <484017a4-956f-4b1b-bebf-cab6dcfa860e@cherry.de>
+Date: Tue, 8 Apr 2025 16:03:11 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: release_cycle: Use variable substitution for next
+ version
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250408135421.1393991-1-trini@konsulko.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250408135421.1393991-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0205.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e5::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Bhz7qLXfvLMpO/Ky"
-Content-Disposition: inline
-In-Reply-To: <300f75b7-6c59-4b58-b4b0-e8aaf7919318@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB7555:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca187d13-e62d-486f-05ce-08dd76a61979
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MVJIWWhuTmJ0ZVFpRHoxUUx4OE1BdWZFMDNZMFVKWmFQNFlFcmlybW9nZklu?=
+ =?utf-8?B?TmVuMFlwOHovRVRGME1sVER0aGl5cUEyK3JvQllwQzViR2szeGJlU1hVY2th?=
+ =?utf-8?B?RSt4S2Y4bDQ2T1lyRzAycklnZkZIUDVmNHV1WjhUN2xkQjZXUVo5c05xY09U?=
+ =?utf-8?B?ZmRMSTNzdXlPM0FlcFZodXdzTm9oeXQ4UVYvV0JMUG12UUxudldBTHIyVlp6?=
+ =?utf-8?B?SEIyNmIwQzZ4blFKK3JqOFhlRHg5VFpUMXVQVS82OTlQbXBQM0h6MDZmbThu?=
+ =?utf-8?B?SmFwL2JhN2hWUHBRTXNVZTNIcXhvSWllOVFkbk4vaW9iWTJKODBHYXRtZ1Zy?=
+ =?utf-8?B?aVBMd2djWDhIamV0dDFSS1lzWlhDYzBuNXZIb3czYllCaEZ4c0kyQTZrbFFv?=
+ =?utf-8?B?ZThDZm9KN1hNdmxCcjVqTUc2c1pjMWtjbVM1ZGIwV3lidFpkWjZhdUNBYjQ3?=
+ =?utf-8?B?RnlROXd3cXZFOTNSdzQ4M0taVkdhZktjcnprMUFCazQ5SGZKaDhZOWlDQTMx?=
+ =?utf-8?B?NS9xVVRnaGNnOEVub0tzSjFDSTdEZ1ZEVmx2RWY1dVQybk92cGd2ZFBmanVj?=
+ =?utf-8?B?WldKdG1ESXJWQzV6VzJuWENmY2FjOTZFcTk1S0o1ai9LODgyeHBxQ2JJNHlU?=
+ =?utf-8?B?VGc0T1p0UnZZK29GOWxENTU2V1kvdmhldkNSaWs0SXBQMy80R2FVQUJwdVpt?=
+ =?utf-8?B?Ritma3ZYY1YxTkh5UDFNdWh1ZlF1clVIRHdQT1grM2RjamdqZGxLUnlTR0ls?=
+ =?utf-8?B?QnFkVDZibVNQajNadmtCV0RrUnRtM3JzT3ZIK1JFOVBUSUh0cEx4Z1NUcHZo?=
+ =?utf-8?B?ZFJKQk1DKzlXUklMZUR2RmR2NXlKZjljVlNpcmJESVBvTGVwY2MyaXdPM0pE?=
+ =?utf-8?B?WVA0d1V4MXV1YS9XMWdnQ1NBQTFWN254Q2dLQkZXZnFSeVRKNFNwb2kyZEJB?=
+ =?utf-8?B?VHdwcy9Vb0Q1djdPclpRRmFaSTlvcE9UanN2b00yV0l0ZFJWcmN3SzNiZlpB?=
+ =?utf-8?B?NzBLZEdsNjJZNklhdmE2a3hjUzYwUnNkb1ROeDFvaWdJN3J0amlCN0VLVlda?=
+ =?utf-8?B?TGpEZHdJYXZGMC9zYkhvRXJYUi8yekp3SHpOTjBLd3NNaDIwQWpxQXBza0Fh?=
+ =?utf-8?B?cW9iTURkQStwenBmQ2M3Qjc1eXRhdWk3cjRvTytCWXhNZDIxRTFIeUQ3M3Ar?=
+ =?utf-8?B?V0xHN2dHK1JtNm5RZWxSLzBDV1Jud2FsbG1vdFMvUzFDSTd1UmpkR0VqbEVp?=
+ =?utf-8?B?SmpWVmxScG4xYjArNWlnSWMvOHV6dHFKZkk2ZlVldUlTZi85ald5dzdsQVRU?=
+ =?utf-8?B?NDhZTCtUSGdmNmdoNW9GQmF6bUxKRWw3ZUxVeW1SU2p2cmN5dEVyeDVOTnhs?=
+ =?utf-8?B?QW1DbDlPOHRuczEzeU52ZlRpUUE4UW0wL0Q3TnZ0MFJlcGgrK2dGZG1ZM2lv?=
+ =?utf-8?B?TjNtQkxpYWc5am5EMEJwNzFBcFN2Q01OYzV4UDNYS2ZSM21YZWYxUDFyK1ZC?=
+ =?utf-8?B?SGhyVkJuS0s1Vi83Vy9lSE1MYUFFY09aZUplS0pFbGI2OERMRWFtVWxzWkt1?=
+ =?utf-8?B?dDZPempXY1BBc1YvSUNWbkJ1eTJ6YjA4S0NhQkhBVDdkdEdzT3JudVgvaGNk?=
+ =?utf-8?B?NEJtaUE4ME1OR1BJTWwzSWkrSlRJVWt2VVVMaUMvQTZoZ2ZZWEVBQWJRekNE?=
+ =?utf-8?B?UTA1NGVCc0xMdVlZRmtxNDBNSVZTZE4velEwZWUzNEJpaStXNktOOTVDQUY5?=
+ =?utf-8?B?NGJKSlhQOXlRSE5xdFc1ZXRTSFRHOUxIbWVDQ2NIYW1lSnRXWUtPVW9tVnZY?=
+ =?utf-8?B?c3VaTTJGVnVjZkQ2NkVPYmRNQ3QrUjhiZWo2VjdXT0s3bHV4T0Rsam9PUzVi?=
+ =?utf-8?Q?9TI5O/TwuBZCv?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y3JBRW1yUEwvRnlIaHZVcS9DMHYydFoxKzc2ZkNWa3NSNjBscGZVVWRSblRH?=
+ =?utf-8?B?Y1pwNW1YcnIwNGRzYXUyazh2SjRIV2UzSXFHWFpQNEVVSDEwMjNra090OHpY?=
+ =?utf-8?B?alZOYmpnV3huZXdhdThYbzlCZWg5ZE9mSllHYUdEa3prd29Va2ZTOWw0WTVv?=
+ =?utf-8?B?aDhPaHRTeDNxWEpNRFcxYXB4MzFrOVdoend3S1dnRXJ1bk9UWE1MQXV6a3VI?=
+ =?utf-8?B?bVFhejNMLzFOVDlvdVQrZStUR2JENWlTQUsrYjBZbVFncmVYbHdBcUNpbHVp?=
+ =?utf-8?B?UDhOVG9LSFM5Q25NZjViL0IydjBMNDR6d3VNeWFqb3lhUmIvd0hRa05yZS9s?=
+ =?utf-8?B?aWxOdlV4cnBldTNRY2p3RDdrVmNueVVYWHoyYXBPdXcraVFQNnoxODRESzgw?=
+ =?utf-8?B?QTVKRlh0M2E0L1lad2hHRU9ZakloY2w1ZHZ5TG16NklhbTFySk9iNW50TTVB?=
+ =?utf-8?B?N3VUbkkrRGdJSGhFdkM0MzZoQXhKUnd6cnJzQnlVakZmTi8rNVRHTko1RExH?=
+ =?utf-8?B?M2JLNlA3aXhMVzgwZFdTNTNaUHBqZVNWMmZFMmdUNHNaZlpKanpJakZBM1dl?=
+ =?utf-8?B?TFZiOGM4R3VyR2M4c1JWYWEzaTVJdHFKN3QxZnFGNkU5V3lmVm0rQTJIdzlx?=
+ =?utf-8?B?N2IyT2NrVC9zcXRaeHBnTGo0R0NSK202ZXRtUUVETE1EdUs0L0w0dE5kbmNR?=
+ =?utf-8?B?bGJ0T0Z3dEsxdHBPUzJ3NFNHa05zQlJxMFUvR2swUTd3UkhQVGlWTzBpNlNl?=
+ =?utf-8?B?Qm5xL0Vua05IYzJYbnRGYW9VcHJ6U2ZxRlNNVEd0TlZqam1nY0tVYmRFMXdj?=
+ =?utf-8?B?ald1QzFIekY3TnRJNCt5Qzl2SzFLaTNDOUwyZVNuRkFNVmlOTXFkRmhKVXBZ?=
+ =?utf-8?B?VUVoNzFIZmlnNXRSdFdxeGJoeGw0NDJPZlZlRzBiVjFzOEFZWmVCN3Nnb3dk?=
+ =?utf-8?B?aHNhMmhXdmNoRFdHbG1BSnlURWMvbXh3OGZvRjkwc1hsU2tqM3pUUTI1T1V4?=
+ =?utf-8?B?SGVSTVUyQVJNbzVOTERmSmJsSTlYUHErcHRRWVVLcHc0d2Qwclp4aDNWTUE5?=
+ =?utf-8?B?anB0RG4yUWhkYlkyUk9IaEg0bmc2NFRpZjlTMStQYW5vODk3WnB3TndLY01Z?=
+ =?utf-8?B?NXkzQ2pJM3ZPRy80b3NabVRpS2J3ZWV6ZjBCNStxYS9ybmtTRTNqc2lJMzYz?=
+ =?utf-8?B?WXpsbGtvREpORmZqdGVBbzd3UXlyU0djTkRoMnYzR0dTOXZrTDBEK0g4RjNp?=
+ =?utf-8?B?UjNCWEZjRTVKQ1RHT1ZGbGsvSjkyVjJ4NkFBdjMvT2NpbGc0aldtL3hCTlhL?=
+ =?utf-8?B?bDY5aGdOTzhnNnM5VHpvTkZYdXpsU2d4WFZjQm9EbUxXYzd2UVhiL2Yzc1hE?=
+ =?utf-8?B?OThNRjM3MGlxeVh5dm5qMWpLUG9XVklZc2NickorSkU0djVmZzZJWUdWQXBB?=
+ =?utf-8?B?MWllSG0zVDBZRnVPUTEzK296NkJsNEJXVHY4UUpiTVB0d1NOQlkweUZ6V3F4?=
+ =?utf-8?B?SFNBeDJhM1VtdlJTUFBMcG1YTEdpZ2pKaXU2enVFa3VOMTl3dzU4R1R6OWRP?=
+ =?utf-8?B?dU1DbHVBUDI3NXFnRzFSc21URTZQcVpNcUllaFVjY0F0Q2ViV3RRRjUxOUVO?=
+ =?utf-8?B?aURUSzhSL1VReEVnQndFRkdxS0E2ZzZUL1hSNnR2MmNXWGxoaXhzM3BEZzRi?=
+ =?utf-8?B?UVUyRWtvalcrZ2ZFMzN1NndoeFFQZ2htVTZGamM4dTJFdFNWNUxoMm01RFVw?=
+ =?utf-8?B?dzNIY2NFTzBNZ0VXTkxnQkg0djhQT21uSXpJN2ZWeEJkTldDMm5vZm9ZVFdK?=
+ =?utf-8?B?MVBibzdxTGhrQUx1MXR1RmtGaGpIYjg0Mkpmb3lOZE1DdWwvQ1k0K3A4ODZV?=
+ =?utf-8?B?MlBINURiQlZueTVZa3hycVh5WFFPazhtT28wTm9rcUpqdmdJbVkvZkxySnVh?=
+ =?utf-8?B?ZHB3L3hKU3hJOTZWaWZubnR0REQ2QkdiTlRFZWxDMlNMVmluci9MeW9WaXdC?=
+ =?utf-8?B?aW9wNjVWWE85eU9xeW9wNk82RzFiTFpBTE5rMDl3R2ZRZFBaNjlJTFcwMlZO?=
+ =?utf-8?B?VW80Wno3SU1uMkwwalJSV0l3SEdSMndTOGU2R0U1VzBDN1czT2NwdE0yTW9R?=
+ =?utf-8?B?WHBlT2wwTGc2WENweDYwcEovN0xsWkhMS1dTcXFIYll0Y0VMNjFkamtRc1po?=
+ =?utf-8?B?MHc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca187d13-e62d-486f-05ce-08dd76a61979
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2025 14:03:12.2363 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +L7s1P8aLs3x7ZoeE+0/SoJMRFxVf0BiX5JLRLZMDhhhgzDC4dbpMQ0ziZqPYm5Poo8aT09mR2TXh8BvpmpklSyqvOxNkj0MNBlC3gXQ340=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7555
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,117 +173,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---Bhz7qLXfvLMpO/Ky
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 4/8/25 3:54 PM, Tom Rini wrote:
+> To avoid the problem fixed in commit 57a95d522ca8 ("doc: release_cycle:
+> fix next release version") moving forward, make use of the variable
+> substitution feature of rST. This adds a next_ver variable and
+> references it in all of the places where I had been listing the version
+> being worked on.
+> 
+> Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-On Tue, Apr 08, 2025 at 10:18:58AM +0200, Michal Simek wrote:
->=20
->=20
-> On 3/21/25 11:25, Michal Simek wrote:
-> > The commit cb9ae40a16f0 ("tools: mkfwumdata: add logic to append vendor
-> > data to the FWU metadata") added support for adding vendor data to mdata
-> > structure but it is not visible anywhere that's why extend fwu command =
-to
-> > dump it.
-> >=20
-> > Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Reviewed-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> > ---
-> >=20
-> > Changes in v2:
-> > - Extend print message
-> > - Cover hexdump dependencies
-> >=20
-> > RFC:
-> > https://lore.kernel.org/r/75c697a4f819bb5e8649ed658c5a559fb8cd1fd9.1717=
-599342.git.michal.simek@amd.com
-> >=20
-> > ---
-> >   cmd/Kconfig     |  1 +
-> >   cmd/fwu_mdata.c | 25 +++++++++++++++++++++++++
-> >   2 files changed, 26 insertions(+)
-> >=20
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 642cc1116e87..1f8aa2521a8e 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -185,6 +185,7 @@ config CMD_UFETCH
-> >   config CMD_FWU_METADATA
-> >   	bool "fwu metadata read"
-> >   	depends on FWU_MULTI_BANK_UPDATE
-> > +	imply HEXDUMP if FWU_MDATA_V2
-> >   	help
-> >   	  Command to read the metadata and dump it's contents
-> > diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
-> > index 9c048d69a131..5b5a2e4d1cda 100644
-> > --- a/cmd/fwu_mdata.c
-> > +++ b/cmd/fwu_mdata.c
-> > @@ -7,6 +7,7 @@
-> >   #include <dm.h>
-> >   #include <fwu.h>
-> >   #include <fwu_mdata.h>
-> > +#include <hexdump.h>
-> >   #include <log.h>
-> >   #include <stdio.h>
-> >   #include <stdlib.h>
-> > @@ -45,6 +46,30 @@ static void print_mdata(struct fwu_data *data)
-> >   			       img_info->accepted =3D=3D 0x1 ? "yes" : "no");
-> >   		}
-> >   	}
-> > +
-> > +	if (data->version =3D=3D 2) {
-> > +		struct fwu_mdata *mdata =3D data->fwu_mdata;
-> > +		struct fwu_fw_store_desc *desc;
-> > +		void *end;
-> > +		u32 diff;
-> > +
-> > +		/*
-> > +		 * fwu_mdata defines only header that's why taking it as array
-> > +		 * which exactly point to image description location
-> > +		 */
-> > +		desc =3D (struct fwu_fw_store_desc *)&mdata[1];
-> > +
-> > +		/* Number of entries is taken from for loop - variable i */
-> > +		end =3D &desc->img_entry[i];
-> > +		debug("mdata %p, desc %p, end %p\n", mdata, desc, end);
-> > +
-> > +		diff =3D data->metadata_size - ((void *)end - (void *)mdata);
-> > +		if (diff) {
-> > +			printf("Custom fields covered by CRC len: 0x%x\n", diff);
-> > +			print_hex_dump_bytes("CUSTOM ", DUMP_PREFIX_OFFSET,
-> > +					     end, diff);
-> > +		}
-> > +	}
-> >   }
-> >   int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
->=20
-> Can someone pick it up? Or should I take it?
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-It's got Sughosh's tags so I'm fine with you picking it up.
-
---=20
-Tom
-
---Bhz7qLXfvLMpO/Ky
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf1LAAACgkQFHw5/5Y0
-tyyqPwv/V2bqM0CvtiUHZxd3xMOkBGTJajRtlxqwVzI/ZuchYrojNB5FTTLPz07G
-IiVr8QDdrtvcMqmzSZXNTUCQt/gsf/D6/lilKjFwFqxZVQxpIzD/WRDcGHlsSWnx
-u6SM2QUZ9uQjlIGoLk5VeKob9VphIh2wt9P9c78tjAcjlM8k9xEnO5GwwlLqpKVt
-tBq8/D6zG1BI/BNQ6BFZ5Z++tajaK9ptZoLwYL+MSm4Gn2dQAIzP7c9vQ9MAhb+W
-VF7W8Pxd0un03B8Cu/pEl80tt16oyAOxq5p9gPGjmYuByxY6/TdAsMTJQkK7sjah
-LRfEEV9sdOFRCy2rmoc4kEAbzzwWJ+cNPYcDXaFQrX5VaR7rGD9WGJJj6TeXz1lK
-V2BxYviDA4OEgqqf+V0Y37utujmVaN6ub5IocC3Bo6MKAZl9yuREEvbgWitJ984l
-MaPLpuZUd/7ALtGeJ3nEt5lSKxrtfyEYq0OQ8t0VP4fWjelqI9lSJxR6Ul0VEQpp
-1GmiCnQ/
-=jU8b
------END PGP SIGNATURE-----
-
---Bhz7qLXfvLMpO/Ky--
+Thanks!
+Quentin
