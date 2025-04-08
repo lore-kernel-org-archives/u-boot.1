@@ -4,103 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8587C3600C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 09:13:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ABFEC369A1
+	for <u-boot@archiver.kernel.org>; Tue,  8 Apr 2025 09:14:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1387831BB;
-	Tue,  8 Apr 2025 11:13:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF6FB833C6;
+	Tue,  8 Apr 2025 11:13:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tWZEmGVK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C1F388t1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A12BD833D3; Tue,  8 Apr 2025 11:13:47 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id DBE8C830F4; Tue,  8 Apr 2025 11:13:47 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19066830F4
+ by phobos.denx.de (Postfix) with ESMTPS id B10F4833AD
  for <u-boot@lists.denx.de>; Tue,  8 Apr 2025 11:13:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-39ac56756f6so4513234f8f.2
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43d0c18e84eso27168575e9.3
  for <u-boot@lists.denx.de>; Tue, 08 Apr 2025 02:13:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744103624; x=1744708424; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fcqQ8CuF12MfuZd/Ln7j72IF/EkSBJwZHJ96PvPK6KI=;
- b=tWZEmGVKnReRLv7AJSNKJjm+RHdTfnEzTWjsM4yXdtH1DWHBoH6yG9PcbcIOsuNSm7
- PEkdeAzuIz915f/QZPMewlLDFWGvNm+EdS7Y7U74IDBbnS4mL91Bx8LYEDPhzjBL0WnD
- F5jD6O0WkXtXNUvCVp5BG/uzidLiDfhenXj1CQOIXsEzfJtey9wlFyOG7pLe6H2I7cq1
- 8ZLuf7SKDnBfV8JXY+Eg1cVrG5sbqEzOJUQ76fCArjViPnExjdE2hIGUOUIj4+U3hfmN
- NJEkzRTPWJ4qTrklh7XfKz7hKO+0yQWFi4fMtr4Wysawx+t2sSeJWISN15CAySteEcwX
- yWnA==
+ d=linaro.org; s=google; t=1744103625; x=1744708425; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=mAe4tHQP5khDrN77TZDHRTl0ByXEeF2B4kSGsel0u4Y=;
+ b=C1F388t13Ryb+/Sg+RjzAnD1zcHgGg+eB9Y71jkW38Rvb7yBPsF9PAFjySzrsgo721
+ YOVrLGqVxykocSQSjMXclM7RDlNhMS4mZGG1gxrKZMWa7dWM6ZUHYZHr7FStr4uk/1Pl
+ yREPXkzZTeRuM1kljvbSdIRTyi779maY7WKv5Nt+eGQiWQW3qtXvNFINFlSsJEhxmoP5
+ 0A4vSLwhLpvI9H2qY4i/oulYiQ7j3fLtvjDh41d2tvZyS4MRaokKxiq8K8nKHlGaHcJT
+ ECF04WdnmV6lf+9B8evaV6ZkAbrMc+zRP3lxLSLS5o+0tREUQgU0jxuE2fcw2NS0I8uB
+ 1DsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744103624; x=1744708424;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fcqQ8CuF12MfuZd/Ln7j72IF/EkSBJwZHJ96PvPK6KI=;
- b=QOsUOUbRYedTulQ9PETfpKx9zaAID4lPfpghV6xa2r8luPWh63+bgfErmYWgOOHiT/
- Y1sbmGr0HN7cUikFoWQJWnUjBYV/2zNe2Ow3wUzh1OOcEkWxSPXG3tTrt+Ks7XHyF0as
- rHaCak378PY4QzWmYftJxUSJJlN6fGZO6gkZj4ueVh73TfOFMgc6pvCOPMjPMw8BgO06
- Mi3ObLEzGlhhIsOPEPFvEJDxK0r67pJVqnpWETY8n2FUaMmLGTa3qC+k31fWrW3pgA1T
- m0kd/1jR/ddzBjiTYeMeM7bFsfN3KMYCFu+48HAwbhgSjuVy5I8PPU3zuotj9CJi+gi7
- IY1w==
+ d=1e100.net; s=20230601; t=1744103625; x=1744708425;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mAe4tHQP5khDrN77TZDHRTl0ByXEeF2B4kSGsel0u4Y=;
+ b=m85OMq2MdtrDH+nMKvk8HQs7+rBc460/OfYnlp96dF2JhbT+/dDxwNp/P1jMSKaJqh
+ 8LNpIY6Eckfx0Fhc2ds9MmTkGE0AHtNdAQgQ4/NgbnsBT5zD8YRaRslS1eB71r6yCJ6S
+ qX+Gr8xwPPggNNliJOrMTwAdpmyRpIgV+TLFAvo4rXg0vRDL/e5xH6gSSSuup4TQjSDJ
+ TV13bh7GSdUP6iRFXi+/uEo+pvcQ1aRaNENbR1QqvBv/jAQxRy/QvMmBLn+sJ66bhE06
+ vKAp8rqGlhnaliL47IMHuOwwM9KHZGaJU8XSpIsdmDB3M4Npu3apvY3ZQ6CxvLRwSrS5
+ yLsQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUnTaIo/HXlsJWUGO/HlbH/rWmSpBF4BiH45Rg/EU9GOMuntN22apcwLCylZQcTyfBJEG9Klc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvgD2Somiy/+ZkMYATaoqGo0sRw2xsaGKzOeRzHlkS7Mhd3A8O
- NClmMMPu+n/r8c1IuWYpL1DjxiNQCK3qm0e7drZEY69der7HV0vNgmYMDZDHojU=
-X-Gm-Gg: ASbGncu+Iiv0DDFwOPXCowwfV07Wf2nTVB2IjhkYWOFeidTuHXRsdKJhcwNtiUJIi2q
- b4q6izb5JlIt7vwbKTWYmyxzZOOasSvwt/C5IEMJsFfnJ6vaeOmnscD3gjMAhDJlElOsATDFP0b
- 4Ome5Wpitbk6lMBxjjM5gSBcWuchsc6opwxld7zhPOkiXy1+sMIlorMK9W17ogVjSakVVxcz/Cc
- eK1xSjTsqkNDnrzuZx7PA+a9mCtUPIIvjJdP5POGnTaL5fBa1BBYnRbDVJLEfKNMZnBLNct7ovz
- Yij1tdIOSh3V1Z904/e39VFgRGHYIxSoLyJH2WLv4TbxlldZjSd6iRB+WvLH5Cyfqw==
-X-Google-Smtp-Source: AGHT+IEWR7Jpv70ISqyGyLB+/6DvcRjNYXCNcQRuALtho9oevmI7h1HcIsbkxWjJXltw/hWiwfHl9g==
-X-Received: by 2002:a5d:6da1:0:b0:391:2d76:baaa with SMTP id
- ffacd0b85a97d-39cba9826d7mr13490877f8f.46.1744103624516; 
- Tue, 08 Apr 2025 02:13:44 -0700 (PDT)
+ AJvYcCXMlNo7zFlma/JqN3GqxjgXYhxJdCa5C50p4JwuT/LexBM0DgLTXOJ6plZG3C7BCmzXZgGZiTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkCSdmIln9Uz3vqbffHUjzJ3E9ZT6oorJDUsIzoAN+fNWPvrWk
+ btEBvBIcb12k2Zg/gz5mQm29u7u1KHtnZJ43QDRXqu6rw1+pkkGw+0gROs/cRbQ=
+X-Gm-Gg: ASbGncsZMejmzI4k8NbqOHCHXuDmpcfCDYkBPw3OCh/I4L1TroB7kYD10tZiPcRUNdx
+ vMerKPn7Zhe4Z/GRnukHfIC5+FUqye3IumB+hBdhHkWc6N2gfGqgPSqxas7yzCvd8aeUgffiVPO
+ XebpPZ3T5jqb+zRiOD3TAGuDcMAWAHVo7uOdZI+NpZBObJmwWFQvBhIVWXHFsN758ADgnJgOw8G
+ 1OyqYZGzlYNQ01KkTGgqHczD/vn8HYqwHoW7JAw4JR4tZEuqjCePBLY4FhixDqMCFNKU1f3hsH5
+ It+O1V346EUC04B804zl8V0thAX0J1hNKxQcOUcTbC5acS/qVlnm4Z3VjuqvVrysTA==
+X-Google-Smtp-Source: AGHT+IFNioOcA/4731dais8d6kICqBylAlzNDqCP8FcLRRkYSYCa1yNq0yqlGPnf5ihImcTf6i8z6w==
+X-Received: by 2002:a05:600c:3d06:b0:43d:1c3:cb2e with SMTP id
+ 5b1f17b1804b1-43f18908631mr1210565e9.17.1744103625101; 
+ Tue, 08 Apr 2025 02:13:45 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ec366aa29sm155056555e9.39.2025.04.08.02.13.43
+ 5b1f17b1804b1-43ec366aa29sm155056555e9.39.2025.04.08.02.13.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 08 Apr 2025 02:13:44 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH v2 0/3] part_efi: cache last scanned GPT for next partition
-Date: Tue, 08 Apr 2025 11:13:39 +0200
-Message-Id: <20250408-topic-gpt-cache-v2-0-de76e47debb7@linaro.org>
+Date: Tue, 08 Apr 2025 11:13:40 +0200
+Subject: [PATCH v2 1/3] part: add part_get_info_cached() API
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMPo9GcC/x3MMQqAMAxA0atIZgNtUBSvIg4SE83SllZEEO9uc
- XzD/w8UySYFpuaBLJcVi6GC2gb4WMMuaFs1kKPedW7EMyZj3NOJvPIh6L0Og9OO1AvUKmVRu//
- jvLzvBztbjEthAAAA
-X-Change-ID: 20250408-topic-gpt-cache-11f770f42f1e
+Message-Id: <20250408-topic-gpt-cache-v2-1-de76e47debb7@linaro.org>
+References: <20250408-topic-gpt-cache-v2-0-de76e47debb7@linaro.org>
+In-Reply-To: <20250408-topic-gpt-cache-v2-0-de76e47debb7@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2599;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5729;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=Q3aXiY6SF/qS+8iySflhI2v7tanipHEIh6JSxZcaYWc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn9OjGY/Pv2SISMGWKcI1p2vHaxZLyiVi1FMgEaUWK
- 1EjmegeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ/ToxgAKCRB33NvayMhJ0fqaEA
- Cg70nAAPwJxYT98BNcFKcuaJej+FAP43OWbqW5YyHCqn5joK+SAODvqRR2Niezlk/RVpEmB+7982yh
- STb1p7wd4ml0QVklTrhebDo5aKYq8M8F6BsWSfmIcXzzTtmdIbTt9wefCWdBCJPhIZG6y8EyBOnc07
- RJ2jjfufMTpf4Uj+ihW1D6WRL4MGoFoeLSKAvjJx3jX6PgqjSVkuogG4HeJ2y0IMrbJCORa8QfmAOO
- /V97Ga9hOG1ipTDPeMtrOhtGu72RYH6SYDXp9a/UQehwcJ5kJyBvcVGOmUF4MnhPqyitV4SYTLX1d1
- 8JEuJDpXJwVoFCGO8NFq9Kj68JtuSGFYmpBBwGgquI/PJaBRle5ehbtBN3YjOCecFFNZwnD/2HEVwo
- /wXKSKm/m9x4fmAvVBgiEzQDcmrZ79deYLoixOXdOLIT3xUb0AOzWtBz3KmE2kF2v8wOzeD/IOUvDD
- mjeJWXhZ1GxTaaSvr9mjd7TsKhRzfVXy4vuAZSxJL/0PRNTgIVs9i7CkHzlnrq8VO0HwmCGauZiykf
- CoAtZUyhXk7h7v97uqcgrf6aa7OaLi9pykVYopmFI2YFhKgHui0oD40/1BUpWKh+vrAa+pGEQnBEZ/
- Yv4lICSWXxhV+6MCKOb1hAc9QJ0IO8YDFmQTh10UhiI7hIFipZWV2vU7XamQ==
+ bh=UiBwH4PW7AbDnj3cPMfGLbVVQiR1T4VFUD/X9WbUuXk=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBn9OjGCcRuVr2Zkr+4bJ/sw32gaQH5v243yXUj326V
+ NBAqZp2JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ/ToxgAKCRB33NvayMhJ0RZnEA
+ Ckt9C3Cooz1E/89vf3GvCQG0UzFAxz0QTCjltUJtWM8utBUeR3n4+DSNmWWjWciw4gB8xFWPYFACRz
+ qVtFatCBDZFg6L9aAPGgmE7vVnYVbu9Q1Yr/tKJhfsbvFZkylhYXQtPH5qlENJqHXxEKcUN88mGL69
+ /iIQj0z8g5iAx/lulO9HG3D5bHwKMZ00RoMsCZg+J5pGjeKrzSv2shh4LUsAgAa7xbghtChTckrhUt
+ 4TQwqYKcpHhRx3E0znPacqXdkeVmY3rtM/xbmSkb/Cts9O4P+PSpVXd/4ltr5iq8bQf2FbzCqiv7qq
+ Lux8a+sSKqrb4Gx0/nbVH1bgJ1wQbHKQp0vRpIAFiHYyhSGEvywHLzv1yff+5rRLYSzo/b2WemTkhJ
+ IAhCHepH/ckUFpl1i94rKFBSWvPW2rljLcvsj/1H6UI0Ttb4MlFuXGE9zODoPCWPRfww0d7kOw89K5
+ 8Jl0Iuxy41KcidZUfFH2Lj/tnaTOh0vyQ2q+BatDb1vMKmF3lTC495ekWT7VwBBpm/LBvcceVyxVC1
+ LMobq8ZSeZ04TYwUh1l5AUJNSK55n25IXE3lvMnp4xXfy2fql3FMKqFOfqtalUiso+TQaqr8OIzFI5
+ KsDlsNdNgNjMNCtO2ahGTvrQ5dBeMUCz9Lc2iOuRV0yp/ZWGHLrAO2ytSwKw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -119,69 +117,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The actual architecture of the EFI part parser means the
-entire GPT partition table needs to be parsed for each
-part_info() callback.
+Introduce a new part_get_info_cached() API that's used to
+get the part_info of a blk_desc allowing to use an eventual
+partition scanning cache to avoid rescanning the entire disk
+partition scheme for each partition number.
 
-Since the default part scan code will always scan up to
-128 partitions for a block, and devices with an UFS chip
-with up to 8 LUNs are very common in the field, this means
-a complete GPT parsing and validation will be done
-up to 1024 times instead of 8 on such devices.
+The part_get_info_cached_free() is also added to hint the
+partition code to flush any cached data from this disk.
 
-The GPT parsing can be cached between each part_info()
-call speed up to 3x on the worse condition when the CPU
-i-cache and d-cache are disabled, like in the SPL.
+The equivalent ops are added that directly maps to those
+added functions.
 
-The new part API implementation does caching each time
-a correct GPT has been parsed and verified and will match
-the blk_desc and LBA to serve the cached data or force
-a re-parsing.
-
-In order to allow GPT manipulation, the new API is only
-called when scanning the partitions for a disk, all the
-calls will be called uncached.
-
-On the SM8650 QRD platform with a KIOXIA THGJFJT1E45BATPC
-configured with 8 LUNs, the scsi scan takes 0.2s with both
-CPU caches enabled, but when disabling both CPU caches it
-goes up to 4s to do the full scan of all 8 LUN partitions.
-
-With this change the scan takes only 0.18s with both CPU
-caches enabled running 1.1x times faster, and with both CPU
-caches disabled the full scan takes only 1.27s running
-3x faster.
-
-While 20ms could look negligeable, it's still a 20ms gain
-in the boot flow and a non negligeable reduction in
-calculation and memory allocation since for each scan
-it would allocate and free the gpt_pte table up to
-1024 times, now it would only do 8 allocations, reducing
-memory fragmentation.
+This API is designed to be used as a direct replacement of
+part_get_info() in codes scanning all partitions for a same
+disk, like in blk-uclass. With this, a lot of unnecessary
+computation is saved, leading to a faster boot time when
+partitions are scanned, especially with storage medias
+with potentially multiple large hardware partitions like
+UFS, NVMe or eMMC.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Changes in v2:
-- add part_info_get_cached API
-- only use cache when called from part_info_get_cached
-- Link to v1: https://lore.kernel.org/all/20250327-u-boot-efi-part-cache-v1-1-be6b69c0698b@linaro.org
+ disk/part.c    | 55 ++++++++++++++++++++++++++++++++++++++++++++-----------
+ include/part.h | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 88 insertions(+), 11 deletions(-)
 
----
-Neil Armstrong (3):
-      part: add part_get_info_cached() API
-      part: efi: add GPT PTE cache used with part_get_info_cached() API
-      block: use part_get_info_cached() API when scanning partitions
+diff --git a/disk/part.c b/disk/part.c
+index 303178161c083ec6e1b767b4f06ac5773576ca60..1d09c0511c75d457c81cab040c3f5caa924ee945 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -335,8 +335,8 @@ void part_print(struct blk_desc *desc)
+ 		drv->print(desc);
+ }
+ 
+-int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
+-			  struct disk_partition *info)
++static int _part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
++				  struct disk_partition *info, bool cached)
+ {
+ 	struct part_driver *drv;
+ 
+@@ -356,24 +356,57 @@ int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
+ 			      desc->part_type);
+ 			return -EPROTONOSUPPORT;
+ 		}
+-		if (!drv->get_info) {
+-			PRINTF("## Driver %s does not have the get_info() method\n",
+-			       drv->name);
+-			return -ENOSYS;
+-		}
+-		if (drv->get_info(desc, part, info) == 0) {
+-			PRINTF("## Valid %s partition found ##\n", drv->name);
+-			return 0;
++		if (cached && drv->get_info_cached) {
++			if (drv->get_info_cached(desc, part, info) == 0) {
++				PRINTF("## Valid %s partition found ##\n", drv->name);
++				return 0;
++			}
++		} else {
++			if (!drv->get_info) {
++				PRINTF("## Driver %s does not have the get_info() method\n",
++				       drv->name);
++				return -ENOSYS;
++			}
++			if (drv->get_info(desc, part, info) == 0) {
++				PRINTF("## Valid %s partition found ##\n", drv->name);
++				return 0;
++			}
+ 		}
+ 	}
+ 
+ 	return -ENOENT;
+ }
+ 
++int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
++			  struct disk_partition *info)
++{
++	return _part_get_info_by_type(desc, part, part_type, info, false);
++}
++
++int part_get_info_cached(struct blk_desc *desc, int part,
++			 struct disk_partition *info)
++{
++	return _part_get_info_by_type(desc, part, PART_TYPE_UNKNOWN, info, true);
++}
++
+ int part_get_info(struct blk_desc *desc, int part,
+ 		  struct disk_partition *info)
+ {
+-	return part_get_info_by_type(desc, part, PART_TYPE_UNKNOWN, info);
++	return _part_get_info_by_type(desc, part, PART_TYPE_UNKNOWN, info, false);
++}
++
++void part_get_info_cached_free(struct blk_desc *desc)
++{
++	struct part_driver *drv;
++
++	if (blk_enabled()) {
++		drv = part_driver_lookup_type(desc);
++		if (!drv)
++			return;
++		if (!drv->get_info_cache_free)
++			return;
++		drv->get_info_cache_free(desc);
++	}
+ }
+ 
+ int part_get_info_whole_disk(struct blk_desc *desc,
+diff --git a/include/part.h b/include/part.h
+index fcb3c13dea4de6346ad98d6ce320ef36747dda85..8c98865146306fb66509576068c45de01b9cedb6 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -216,6 +216,34 @@ struct blk_desc *mg_disk_get_dev(int dev);
+  */
+ int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
+ 			  struct disk_partition *info);
++
++/**
++ * part_get_info_cached() - Get partitions from a block device but save the
++ * disk partition map between different partitions.
++ *
++ * Call to part_get_info_cached_free() is required when scanning of the
++ * block device is finished.
++ *
++ * If the partition driver doesn't support cached part_info, the
++ * normal part_info will be called instead.
++ *
++ * @desc:	Block device descriptor
++ * @part:	Partition number to read
++ * @info:	Returned partition information
++ *
++ * Return: 0 on success, negative errno on failure
++ */
++int part_get_info_cached(struct blk_desc *desc, int part,
++			 struct disk_partition *info);
++
++/**
++ * part_get_info_cached_free() - Free the saved disk partition map
++ * from a previous call of part_get_info_cached().
++ *
++ * @desc:	Block device descriptor
++ */
++void part_get_info_cached_free(struct blk_desc *desc);
++
+ int part_get_info(struct blk_desc *desc, int part,
+ 		  struct disk_partition *info);
+ /**
+@@ -463,6 +491,22 @@ struct part_driver {
+ 	int part_type;
+ 	/** @max_entries:	maximum number of partition table entries */
+ 	const int max_entries;
++	/**
++	 * @cache_free_cache_free:	Free any parsing data stored from get_info_cached()
++	 *
++	 * @get_info_cache_free.desc:	Block device descriptor
++	 */
++	void (*get_info_cache_free)(struct blk_desc *desc);
++	/**
++	 * @get_inf_cachedo:		Get information about a partition, and save
++	 *				the resulting parsing data for the next partition.
++	 *
++	 * @get_info_cached.desc:	Block device descriptor
++	 * @get_info_cached.part:	Partition number (1 = first)
++	 * @get_info_cached.info:	Returns partition information
++	 */
++	int (*get_info_cached)(struct blk_desc *desc, int part,
++			       struct disk_partition *info);
+ 	/**
+ 	 * @get_info:		Get information about a partition
+ 	 *
 
- disk/part.c                |  55 +++++++++++++++++-----
- disk/part_efi.c            | 114 ++++++++++++++++++++++++++++++++++++++-------
- drivers/block/blk-uclass.c |   7 ++-
- include/part.h             |  44 +++++++++++++++++
- 4 files changed, 189 insertions(+), 31 deletions(-)
----
-base-commit: 5ca70325b64f760bf4190f206a0e88dda495e3d2
-change-id: 20250408-topic-gpt-cache-11f770f42f1e
-
-Best regards,
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.34.1
 
