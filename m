@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97416C369A1
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF76C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 18:08:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 860C68396C;
-	Wed,  9 Apr 2025 19:26:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 31CC78294C;
+	Wed,  9 Apr 2025 20:08:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Agc5mwQL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WyxAu1xP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 163958395B; Wed,  9 Apr 2025 19:26:49 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 5AF908296B; Wed,  9 Apr 2025 20:08:39 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA8C38394E
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:26:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E72F182944
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 20:08:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43d04ea9d9aso34543835e9.3
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 10:26:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7c560c55bc1so679308785a.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 11:08:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744219606; x=1744824406; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jtl2uNNrqR5kwMry3QMdALpPI/EAMh/ze0nHfaCPNS4=;
- b=Agc5mwQLs7/FT6znk+aerwgaqXijG4sAsboAEHp88I1xBFP6BbOPWzplVQDZrd866z
- uRwxf0MELu6wd2n73BRirxdy4O6ODWpzqetY/n3shWyD8x3mYIieXv/ZgwrBPRT4qKQk
- ZGESOl4eR78GmAcit7S8mQWXASmoKLBXc5FBXtqbx4qWuamQcwYIFgIf0vXKRQiCgc7a
- 1qdMa+NNFh5HGqDyJKYKtaZOsf5g9MOZeqisC0us1nLjX2mMYIxz0SEU4Bv/L63MbvGS
- UhsWp+xqzwuTMdytk7A2ZxNpX4tEU+j1diQ6IQKHm8feVTC9kgGoxrDkSqh9Tu73JCw3
- 70SQ==
+ d=gmail.com; s=20230601; t=1744222115; x=1744826915; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xgfXwglkvTitWeUtKfOAjkdphPUaVs++aAaj5STqdTw=;
+ b=WyxAu1xPCgd5mbHbBqw8//SeR9L2VrgedOb950GhZk8u3DJQ3xQ7Q6M2RZiExyFuCb
+ xqc0pGnLj1XwehLZL6626DlIgC6rQkJOyd3nE5Xjjp7+Zso0vhjG/IIZWtBvj9GtlKG7
+ fj+s0hWSwUWnHhezY2v6M7RUXg9u0WtUHDy5ZYxzga5Aw/jVs8HsoWqrsDsIJnG/mwZ+
+ 3q5+gooXdWoBHWGs49ceh/KTXgn1jnHkOqbe6kAnGjdriDGBFo9TX/T2A6x/yIHVNRXk
+ +EmhwQWhrvROMBCB6jDE6Wwfz0n4uyFmCrRPNtOaHxGaYsXaMEIUFk6oM+G3SofJxtI5
+ k6dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744219606; x=1744824406;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jtl2uNNrqR5kwMry3QMdALpPI/EAMh/ze0nHfaCPNS4=;
- b=L5qEm+YomaaJsiruNVvPQh4SZgMhzu5vBqLp67FcE9S73RIlOvZw5Lbkylul+3B2UJ
- DXlsl3PXl+iWYMxlcjfGfE+uVdHAd3dG5JCCpNZ+CZajy+T++51SzNG9Drolur2uCLwl
- /CelxfHHXQSBkvi5Xnh7t9g89yHw0hNgUnozZsIOP23M4+UT/jHqCuj4E8h+hxr6bJeW
- KR5k6TyvAYI12DB3AQSlZsOXyU4AE02OnDDKS47f+aGQ7nvjgHh1YoCvySHhZxPExc4h
- 6FSepnNiMqIvwYBKFQL2SwYorT5GsRr03lAHyPwWt3PqGCfgdbuPFyKdWSRWDFXu2UGB
- LAxA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVl3YO6GMh5P4Wsn27zbd2P+tBksIIrCQ/aLAnirFktSDLSuHgl5N/qxC8UYda5oeK9Kg5wSLk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYp65uVWDVutB8H3kJPrv9Fd6DYM4c621prfrr/YvRKTtmijso
- wb4hH9PwNRk0gkOV+SmwGzJ/j1aJGqwp0DOvtGMPFX0qmYuOwdCmTqR65xBOUMk=
-X-Gm-Gg: ASbGnctSUkxIBLETyiMDdyKsOdMM9QlVmi0HK6AWyxrZ7cLesSnTvV3l0VK6B7vVyU4
- A6H45krLIrRdH8jVk28DF83WpJb6yyz2qKNWxh8wkpuhDLZiLjueSKr/SfNrvDg8ROuhtVHihhK
- hud+IGR+Gv+wouhZcjRYqWTKqVHHcKwHgpASUkvgO/regrpEPicobupq2AGaR91EvaVB0bhpbsG
- pyQv62Wmm68MqbXLyoE4kZFJbyrx6LacKcsm2pYMhEoEtkECgWShPp+27VqkssFRqHfIN0zQSJt
- 79tThf+zVz9LkbJlGOf9HyoBFPXWUOrMkZa0McMOxzYx6ZuMwhTDp7qo5ZMV8aoqj//N
-X-Google-Smtp-Source: AGHT+IEmJ+t51YuaZEzdKDlZxG1gN0313m1RN+hvuvuvqrnMVRKu45hZiMZcr4kbr1RtDVNzsJh/XA==
-X-Received: by 2002:a05:6000:1449:b0:391:1222:b444 with SMTP id
- ffacd0b85a97d-39d88533b19mr3438335f8f.20.1744219606330; 
- Wed, 09 Apr 2025 10:26:46 -0700 (PDT)
-Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d8938a4dasm2173869f8f.48.2025.04.09.10.26.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 10:26:45 -0700 (PDT)
-Message-ID: <099f1eb6-1977-4f04-a283-b6b24d4471e0@linaro.org>
-Date: Wed, 9 Apr 2025 19:26:44 +0200
+ d=1e100.net; s=20230601; t=1744222115; x=1744826915;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xgfXwglkvTitWeUtKfOAjkdphPUaVs++aAaj5STqdTw=;
+ b=Q1kBBBFj/8Leoqj1APAWtL9OwwszC/rbOF/wrxc5p34fS0/y33QslwxxggpaoFCjwO
+ et0IdSfwWho8KzP6d96zdqbSRWYu1lEmf1Pj4xTMWA0uJZ8MDltrZo6RSx8Wu7/oV+gd
+ MVe0yeyP6v5wNJXochu9WG0k9K837Jg/JGjnZrqy1epO62Yp9qACuEInW9kqM0GX4i4u
+ 1OuAiZCrcuU5CnVl3jhiJzjXA8kDAko+HfVndIzOZVUV7PD+TZLbchmeQFOMVCMC0d5E
+ 8FoW9v1Ro2+NhtjhVNjHpE4sMH97aV12YGsjHmGDzMeNoA3GNh6uNsE0+Ni789PG9lQm
+ VDZg==
+X-Gm-Message-State: AOJu0YzsdtEyP6fKL8V7x9e4il71/3CCpNdlVrTxSxkdph3fBJiig6UO
+ 6m7d9sxnoENbzXgF4GJ7OWE6UJ8FOF2vq3QVfk/1ah+UA1nCQQ2MQm7CDiyc
+X-Gm-Gg: ASbGncvn6xcXClOgmDfxtANY65uh40dvssT/L1Gss14xKqgEI5TV9ublHclrWp6HMug
+ +403Yol9yDsiVjmw93t1KSLMR4l2Cqzhd+x0dumcOdI4ws5roq8WwgI+GhxhSnFLagfgHLspDYs
+ FrqqcvtoHbE9TLuHN5/63kilPFPbk7D39Dyy4T8N1cwaVHLcrJg7aw3MI5ZLP3A9wOSfVEq2Zrv
+ WgJCINEYpgYKEtkZV710wdRjJIvEGAW3spqOH6jGTCsKY5YzujlsK4OPplzmubsRcYu1MJDJhzi
+ pk52quBL1hQplFHbY2SMW6yk+Zx/Hq0MCpL+DhhWJE60ZdxLLK5/ANAQgUxZ9T5AptxiHt1h2BJ
+ r3RyNeNfFe9nX81/s/NMnDA==
+X-Google-Smtp-Source: AGHT+IEmgwCbVpbqVt2ygjpHng4BnG18UZmlHrvvXc6DojXrhRddPiZHTeCciDioXbGan9Xrd2ZLgA==
+X-Received: by 2002:a05:620a:2552:b0:7c5:444e:3f5f with SMTP id
+ af79cd13be357-7c79cbd2ba9mr437354185a.15.1744222114983; 
+ Wed, 09 Apr 2025 11:08:34 -0700 (PDT)
+Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
+ [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c7a10a409esm103246485a.15.2025.04.09.11.08.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 11:08:34 -0700 (PDT)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Paul Kocialkowski <contact@paulk.fr>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Trevor Woerner <twoerner@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>, Jesse Taube <Mr.Bossman075@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Richard Weinberger <richard@nod.at>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v2] common: Add CONFIG_SKIP_RELOCATE
+Date: Wed,  9 Apr 2025 14:08:33 -0400
+Message-ID: <20250409180833.3812679-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] usb: host: ehci-msm: Clean up and fix crashes
-To: Stephan Gerhold <stephan.gerhold@linaro.org>, Marek Vasut <marex@denx.de>
-Cc: Sumit Garg <sumit.garg@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Jianfeng Zhu <JianfengA.Zhu@sony.com>, Jacky Cao <Jacky.Cao@sony.com>,
- Sam Day <me@samcday.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250407-ehci-msm-fixes-v1-0-f8b30eb05d07@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250407-ehci-msm-fixes-v1-0-f8b30eb05d07@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,37 +104,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add a check for CONFIG_SKIP_RELOCATE in reserve_uboot to skip the
+relocation of the U-Boot image.
+CONFIG_SKIP_RELOCATE skips relocation of U-Boot to the end of RAM
+allowing for systems that have extremely limited RAM to run U-Boot.
 
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+V1 -> V2:
+ - Drop "default n"
+ - s/ram/RAM/g
+---
+ Kconfig          | 6 ++++++
+ common/board_f.c | 7 +++++++
+ 2 files changed, 13 insertions(+)
 
-On 4/7/25 11:54, Stephan Gerhold wrote:
-> The ehci-msm driver has several subtle issues and stale code. Most of them
-> are minor and do not cause issues during normal usage. The last patch is
-> the most critical, it fixes a reported crash when stopping/re-configuring
-> USB, which has been around for a few months now.
-> 
-> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-
-Acked-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-I'd appreciate a T-b from Sam or some other MSM8916 device, but this all 
-looks good to me!
-
-Kind regards,> ---
-> Stephan Gerhold (6):
->        usb: host: ehci-msm: Fix pointer check
->        usb: host: echi-msm: Drop ulpi definitions
->        usb: host: ehci-msm: Disable clocks after all register accesses
->        usb: host: ehci-msm: Use clk bulk helpers
->        usb: host: ehci-msm: Drop redundant EHCI register writes
->        usb: host: ehci-msm: Register ULPI PHY through NOP wrapper
-> 
->   drivers/usb/host/ehci-msm.c | 146 ++++++++++++++++++++------------------------
->   1 file changed, 67 insertions(+), 79 deletions(-)
-> ---
-> base-commit: 0efe8ea57fc7a1a6fc5f64fb3cf6bc4a1a4fc219
-> change-id: 20250121-ehci-msm-fixes-b1ed17a1eaea
-> 
-> Best regards,
+diff --git a/Kconfig b/Kconfig
+index 6379a454166..1b35ddc36a3 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -443,6 +443,12 @@ config TOOLS_DEBUG
+ 	  it is possible to set breakpoints on particular lines, single-step
+ 	  debug through the source code, etc.
+ 
++config SKIP_RELOCATE
++	bool "Skips relocation of U-Boot to end of RAM"
++	help
++	  Skips relocation of U-Boot allowing for systems that have extremely
++	  limited RAM to run U-Boot.
++
+ endif # EXPERT
+ 
+ config PHYS_64BIT
+diff --git a/common/board_f.c b/common/board_f.c
+index 99616fdac80..d51696b8eda 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -476,6 +476,13 @@ static int reserve_trace(void)
+ 
+ static int reserve_uboot(void)
+ {
++	/*
++	 * This should be the first place GD_FLG_SKIP_RELOC is read from.
++	 * Set GD_FLG_SKIP_RELOC flag if CONFIG_SKIP_RELOCATE is enabled.
++	 */
++	if (CONFIG_IS_ENABLED(SKIP_RELOCATE))
++		gd->flags |= GD_FLG_SKIP_RELOC;
++
+ 	if (!(gd->flags & GD_FLG_SKIP_RELOC)) {
+ 		/*
+ 		 * reserve memory for U-Boot code, data & bss
 -- 
-Caleb (they/them)
+2.49.0
 
