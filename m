@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27BAC36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 07:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D6BFC369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 07:19:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A61B4832A3;
-	Wed,  9 Apr 2025 09:19:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F10B58353F;
+	Wed,  9 Apr 2025 09:19:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AacCTcLB";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sSBcmg+v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE4F831D5; Wed,  9 Apr 2025 09:18:59 +0200 (CEST)
+ id 4B34983564; Wed,  9 Apr 2025 09:19:04 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54F97820E2
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 09:18:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35A2783513
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 09:18:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-104-207.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 36DB441490; 
- Wed,  9 Apr 2025 07:18:50 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4AF7C414A5; 
+ Wed,  9 Apr 2025 07:18:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1744183130;
- bh=UdN6dQ+BzfKIaG0E678G5tpCyHJ3b5hu6iGomfCOMu8=;
+ s=20210705; t=1744183131;
+ bh=idJIrKhA4/UNS7zCHw9ZvXkMiWnoQOaKmy730dE3clE=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=AacCTcLBhRO2bk/Wgrwg7proPiAQpMgJww7MuZA6cXM2Xe4+Meh6Xdj+alLKL3/ns
- kf0LCkNQLftX43PXMW4ah4EIn5CCNaUtqzLxJobGz245IQPKhtsg6GRyUQPHJQi6Bq
- EEPfy79DGIHA8iOe0DECn/VxKWbmXq6UfffNvEmvX1Eb9dWoyyQvBkRfYz8HDVwOKb
- DosvICaJgatZXDdhJB+7zjND0eQvt3p8o8roSfIhRi59VYwHY5jOxKtlRvmArdweh8
- RiZ6vnYSdEmjij92/7uXB1QeyqEYvsI1a6g4gHRDTqOUMHt4vJfJSnHtKdTEH1/She
- 7jDd0D4nMjrTQ==
+ b=sSBcmg+vRH09k/QFTrmBr+FgRBus/QLG9ZiAVMbQIyCZq5hWkJBiiQWsyTpsP3Ag9
+ wb3JMvIXFPx0uz/JEudD862VK6pkb7o6M0OTGN+mKjExLLy/L1oKL5EM/6FX1gTCuw
+ DURnLJC9jvmB+M+wYeqRgbYdZOA5jxjgYNZg6fiffm9Zl+lLh3b42h4o9gNlGRvPYp
+ +fHUiBWaK0+F/VvSz4whAyy5Y69mq5A1UyRqgxV22IqBN8qUrzJapk1Q+IlfMOV7E5
+ wcMrRrzZBtjKVCEqDoh6uDjFb7N9j/SUwTdwmZ9nBqLHVWr3W4AKMoBOlU7W8t/efH
+ fOXLYJU3fVKNQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Hal Feng <hal.feng@starfivetech.com>,
  Minda Chen <minda.chen@starfivetech.com>
@@ -53,9 +53,9 @@ Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Simon Glass <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 5/8] doc: add DeepComputing FML13V01 documentation
-Date: Wed,  9 Apr 2025 09:18:32 +0200
-Message-ID: <20250409071836.26629-6-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 6/8] doc: starfive: use consistent formatting
+Date: Wed,  9 Apr 2025 09:18:33 +0200
+Message-ID: <20250409071836.26629-7-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250409071836.26629-1-heinrich.schuchardt@canonical.com>
 References: <20250409071836.26629-1-heinrich.schuchardt@canonical.com>
@@ -77,194 +77,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Describe building U-Boot for the board and booting.
-
-Carve out common information for JH7110 boards into an include.
+Always use ---- for the H2 level.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v3:
-	rebased
+	rebased upong Milk-V Mars CM removal patch
 v2:
-	carve out common information for JH7110 boards into an include
+	new patch
 ---
- doc/board/starfive/deepcomputing_fml13v01.rst | 80 +++++++++++++++++++
- doc/board/starfive/index.rst                  |  1 +
- doc/board/starfive/jh7110_common.rst          | 66 +++++++++++++++
- 3 files changed, 147 insertions(+)
- create mode 100644 doc/board/starfive/deepcomputing_fml13v01.rst
- create mode 100644 doc/board/starfive/jh7110_common.rst
+ doc/board/starfive/milk-v_mars.rst   | 10 +++++-----
+ doc/board/starfive/pine64_star64.rst | 12 ++++++------
+ doc/board/starfive/visionfive2.rst   | 10 +++++-----
+ 3 files changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/doc/board/starfive/deepcomputing_fml13v01.rst b/doc/board/starfive/deepcomputing_fml13v01.rst
-new file mode 100644
-index 00000000000..5d9612483b4
---- /dev/null
-+++ b/doc/board/starfive/deepcomputing_fml13v01.rst
-@@ -0,0 +1,80 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+DeepComputing Framework Motherboard (FLM13V01)
-+==============================================
-+
-+The DeepComputing Framework motherboard (FLM13V01) can be combined with a
-+13 inch Framework laptop chassis to provide a complete laptop.
-+
-+U-Boot for the board uses the same binaries as the VisionFive 2 board.
-+Currently only serial console output is supported by mainline U-Boot.
-+
-+Building
-+--------
-+
-+Setup the cross compilation environment variable:
-+
-+.. code-block:: bash
-+
-+   export CROSS_COMPILE=riscv64-linux-gnu-
-+
-+The M-mode software OpenSBI provides the supervisor binary interface (SBI) and
-+is responsible for the switch to S-Mode. It is a prerequisite for building
-+U-Boot. Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended
-+to use a current release.
-+
-+.. code-block:: bash
-+
-+    git clone https://github.com/riscv/opensbi.git
-+    cd opensbi
-+    make PLATFORM=generic FW_TEXT_START=0x40000000 FW_OPTIONS=0
-+    export OPENSBI="$(pwd)/build/platform/generic/firmware/fw_dynamic.bin"
-+
-+Now build U-Boot SPL and main U-Boot.
-+
-+.. code-block:: bash
-+
-+    cd <U-Boot-dir>
-+    make starfive_visionfive2_defconfig
-+    make
-+
-+This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
-+as the FIT image (u-boot.itb) with OpenSBI, U-Boot, and device-trees.
-+
-+Device-tree selection
-+---------------------
-+
-+The product ID stored in the board EEPROM is used by U-Boot SPL to select the
-+right configuration and device-tree from the u-boot.itb FIT image.
-+
-+Furthermore if variable $fdtfile has not been saved in the environment it is
-+set based on the product ID to *starfive/jh7110-deepcomputing-fml13v01.dtb*.
-+
-+To overrule this default the variable can be set manually and saved in the
-+environment
-+
-+.. code-block:: console
-+
-+    setenv fdtfile my_device-tree.dtb
-+    env save
-+
-+Power switch
-+------------
-+
-+A tiny power switch is located in right upper corner of the board.
-+
-+Open case detection
-+-------------------
-+
-+The board has an open case detection switch. Red lights will flash and the
-+board will not boot if the switch is not held down.
-+
-+UART
-+----
-+
-+UART 0 is exposed via the side channel contacts SBU1 and SBU2 of the lower,
-+right USB C connector. A USB C cable and a breakout board are needed for
-+physical access. It depends on the cable orientation on which of SBU1 and SBU2
-+you will find RX and TX. The signal voltage is 3.3 V. The baud rate is 115200.
-+
-+.. include:: jh7110_common.rst
-diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
-index 2cba1b6dc56..66abc6f9d98 100644
---- a/doc/board/starfive/index.rst
-+++ b/doc/board/starfive/index.rst
-@@ -6,6 +6,7 @@ StarFive
- .. toctree::
-    :maxdepth: 1
+diff --git a/doc/board/starfive/milk-v_mars.rst b/doc/board/starfive/milk-v_mars.rst
+index 554932ecfd4..aba9c9c53d4 100644
+--- a/doc/board/starfive/milk-v_mars.rst
++++ b/doc/board/starfive/milk-v_mars.rst
+@@ -8,7 +8,7 @@ board. In U-Boot SPL the actual board is detected and the device-tree patched
+ accordingly.
  
-+   deepcomputing_fml13v01
-    milk-v_mars
-    pine64_star64
-    visionfive2
-diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/jh7110_common.rst
-new file mode 100644
-index 00000000000..44ccd612ff4
---- /dev/null
-+++ b/doc/board/starfive/jh7110_common.rst
-@@ -0,0 +1,66 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Boot source selection
+ Building
+-~~~~~~~~
++--------
+ 
+ 1. Add the RISC-V toolchain to your PATH.
+ 2. Setup ARCH & cross compilation environment variable:
+@@ -40,7 +40,7 @@ This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
+ as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+ 
+ Device-tree selection
+-~~~~~~~~~~~~~~~~~~~~~
 +---------------------
-+
-+The board provides DIP switches to select the device for loading the boot
-+firmware.
-+
-+=========== === ===
-+Boot source SW1 SW2
-+=========== === ===
-+UART        OFF OFF
-+SD-card     ON  OFF
-+eMMC        OFF ON
-+SPI flash   ON  ON
-+=========== === ===
-+
-+Flashing a new U-Boot version
-+-----------------------------
-+
-+U-Boot SPL is provided as file spl/u-boot-spl.bin.normal.out. Main U-Boot is
-+in file u-boot.itb.
-+
-+Assuming your new U-Boot version is on partition 1 of an SD-card you could
-+install it to the SPI flash with:
-+
-+.. code-block:: console
-+
-+    sf probe
-+    load mmc 1:1 $kernel_addr_r u-boot-spl.bin.normal.out
-+    sf update $kernel_addr_r 0 $filesize
-+    load mmc 1:1 $kernel_addr_r u-boot.itb
-+    sf update $kernel_addr_r 0x100000 $filesize
-+
-+For loading the files from a TFTP server refer to the dhcp and tftpboot
-+commands.
-+
-+After updating U-Boot you may want to erase a saved environment and reboot.
-+
-+.. code-block:: console
-+
-+    env erase
-+    reset
-+
-+Booting from SD-Card or eMMC
-+----------------------------
-+
-+The device boot ROM loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
-+partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are free
-+to choose any partition number.
-+
-+With the default configuration U-Boot SPL loads the U-Boot FIT image
-+(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x2).
-+When formatting it is recommended to use GUID
-+BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
-+
-+Booting from UART
-+-----------------
-+
-+The boot ROM supports the X-modem protocol to upload
-+spl/u-boot-spl.bin.normal.out. U-Boot SPL support loading the FIT image
-+u-boot.itb via the Y-modem protocol.
-+
-+Due to restrictions of the boot ROM not all X-modem implementations are
-+compatible. The package tio (https://github.com/tio/tio) has been found to be
-+usable.
+ 
+ Depending on the board version U-Boot set variable $fdtfile to either
+ starfive/jh7110-starfive-visionfive-2-v1.2a.dtb or
+@@ -58,14 +58,14 @@ or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set to
+ provide a default value.
+ 
+ Boot source selection
+-~~~~~~~~~~~~~~~~~~~~~
++---------------------
+ 
+ The board provides the DIP switches MSEL[1:0] to select the boot device out of
+ SPI flash, eMMC, SD-card, UART. To select booting from SD-card set the DIP
+ switches MSEL[1:0] to 10.
+ 
+ Preparing the SD-Card
+-~~~~~~~~~~~~~~~~~~~~~
++---------------------
+ 
+ The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
+ partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are free
+@@ -106,6 +106,6 @@ Copy U-Boot to the SD card
+ 	sudo umount /mnt
+ 
+ Booting
+-~~~~~~~
++-------
+ 
+ Once you plugin the sdcard and power up, you should see the U-Boot prompt.
+diff --git a/doc/board/starfive/pine64_star64.rst b/doc/board/starfive/pine64_star64.rst
+index 52e9a907917..1df4b68e4a0 100644
+--- a/doc/board/starfive/pine64_star64.rst
++++ b/doc/board/starfive/pine64_star64.rst
+@@ -8,7 +8,7 @@ In U-Boot SPL the actual board is detected and the device-tree patched
+ accordingly.
+ 
+ Building
+-~~~~~~~~
++--------
+ 
+ 1. Add the RISC-V toolchain to your PATH.
+ 2. Setup ARCH & cross compilation environment variable:
+@@ -40,7 +40,7 @@ This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
+ as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+ 
+ Device-tree selection
+-~~~~~~~~~~~~~~~~~~~~~
++---------------------
+ 
+ U-Boot will set variable $fdtfile to starfive/jh7110-pine64-star64.dtb.
+ 
+@@ -56,7 +56,7 @@ or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set to
+ provide a default value.
+ 
+ Boot source selection
+-~~~~~~~~~~~~~~~~~~~~~
++---------------------
+ 
+ Boot mode is selected by an MSEL-DIP marked S1804 and GPIO_0 position adjacent
+ to the 40pin GPIO header. ON/ONKE and number markings of the MSEL-DIP are
+@@ -69,7 +69,7 @@ accurate selection.
+ + UART: 11
+ 
+ Preparing the SD-Card
+-~~~~~~~~~~~~~~~~~~~~~
++---------------------
+ 
+ The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
+ partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are free
+@@ -110,12 +110,12 @@ Copy U-Boot to the SD card
+ 	sudo umount /mnt
+ 
+ Booting
+-~~~~~~~
++-------
+ 
+ Once you plugin the sdcard and power up, you should see the U-Boot prompt.
+ 
+ Serial Number and MAC address issues
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++------------------------------------
+ 
+ U-Boot requires valid EEPROM data to determine which board-specific fix-up to
+ apply at runtime. This affects the size of memory initialized, network mac
+diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
+index 2c68df3ce4d..44e7fcb3a48 100644
+--- a/doc/board/starfive/visionfive2.rst
++++ b/doc/board/starfive/visionfive2.rst
+@@ -36,7 +36,7 @@ Currently, the u-boot.itb is used as a dynamic of the OpenSBI FW_DYNAMIC
+ firmware with the latest.
+ 
+ Building
+-~~~~~~~~
++--------
+ 
+ 1. Add the RISC-V toolchain to your PATH.
+ 2. Setup ARCH & cross compilation environment variable:
+@@ -72,7 +72,7 @@ This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
+ as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+ 
+ Device-tree selection
+-~~~~~~~~~~~~~~~~~~~~~
++---------------------
+ 
+ Depending on the board version U-Boot set variable $fdtfile to either
+ starfive/jh7110-starfive-visionfive-2-v1.2a.dtb or
+@@ -90,7 +90,7 @@ or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to provide
+ a default value.
+ 
+ Flashing
+-~~~~~~~~
++--------
+ 
+ The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
+ partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are free
+@@ -133,7 +133,7 @@ Program the SD card
+ 	sudo umount /mnt
+ 
+ Booting
+-~~~~~~~
++-------
+ 
+ The board provides the DIP switches MSEL[1:0] to select the boot device.
+ To select booting from SD-card set the DIP switches MSEL[1:0] to 10.
+@@ -141,7 +141,7 @@ To select booting from SD-card set the DIP switches MSEL[1:0] to 10.
+ Once you plugin the sdcard and power up, you should see the U-Boot prompt.
+ 
+ Sample boot log from StarFive VisionFive2 board
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++-----------------------------------------------
+ 
+ .. code-block:: none
+ 
 -- 
 2.48.1
 
