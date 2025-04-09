@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5A4C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 13:23:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61852C369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 13:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63691837FC;
-	Wed,  9 Apr 2025 15:23:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5AD4837C9;
+	Wed,  9 Apr 2025 15:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n97nknPJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TylUYHif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 316DD836C3; Wed,  9 Apr 2025 15:23:12 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id B3BA483811; Wed,  9 Apr 2025 15:23:14 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E24583807
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 15:23:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ED08836C3
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 15:23:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ac2ab99e16eso1282489866b.0
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 06:23:09 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so909351166b.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 06:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744204988; x=1744809788; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744204992; x=1744809792; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VSrD3Vg0+nylwvSKE+OOBTpGnmyL4BjTnu/3jwEBgQU=;
- b=n97nknPJROR/af1fiklmuNWaYxkMOKQVhY9xP0zfpJY1FUgaI5vsR8LcfocifI8O1N
- LbjTVjqS57+iBLtUBwPYySBUGg0fyiTHKVBRAN/EgQD4PQadUDQxobmw5xf1wIDO/fW2
- jHwZqTvXGqM10jvz6wItrQbwz93WZUJaTPuDA=
+ bh=RD5pmmo5iHtUnBTfT5WVmB1JndLrnkgiAZCezmMIq0Q=;
+ b=TylUYHifzJlagP7sGl2nAXM+FiLnJmZph/wM/hbjY3SFDsPW7HrCIRgjAUYoVur+/U
+ juYcEHqg1PbdB8kzhWXJz5Zor0x3aHx9k5bRyT8zY3hIRxYkDLToFkXUI1wP+e75dILb
+ PWWiIpnVMpAx1GQMSzTwfKv8ZtfGFzf5cdPB4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744204988; x=1744809788;
+ d=1e100.net; s=20230601; t=1744204992; x=1744809792;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VSrD3Vg0+nylwvSKE+OOBTpGnmyL4BjTnu/3jwEBgQU=;
- b=R0OVEvj3nShz6YsMa9mAIDGHVizxdyQeucIdAa4Le92C6GiGgH46sW9k81JFuSc/HX
- f5co5FQDvgK1THNJyrn/y12zYkO7tW0cRmMHhTUoF5yfBKg3BM3U3kVCDZeGX+imVZzV
- Txrj6ONjPO8Vg0VshZPAmwQZC9KQJpCaI8DhPiIl6P0WqxZ1e6gNSNne1YAK2XPiDzsc
- uVs2Z9UWZVKkePM59/ClJUUz1fklTO+Na+tbJWhnRp+7FLgmQdJDGGGH32k7enz5ShNa
- vBlc+lP1eAy347NrW1ECKBp+FgmtzCYbXF/T8fG4DG1LTAN+iNexfZXQ+EGZG3LFAA1t
- QmZg==
+ bh=RD5pmmo5iHtUnBTfT5WVmB1JndLrnkgiAZCezmMIq0Q=;
+ b=YkSJw8KxQQRP3Z7Khi4jFzygNwNyGHImWIrq5yzIL4c6xXRKJpsVABVmQrr5WXgQEG
+ gZPFHGta0tXjnGZ/xFPpEVsjaGCAb93ER1ljlyyIGUwo6+6c9fI7M1hBfeg1iH4XtJhO
+ AQTF/FigAvWhA1qo9MZJK1UE2r2af9wIN1kwKVcYKoMLFgHEBCBAtfpZZZS2l2Tmh3IQ
+ lEoVgWwxo3NeIRY4QlhhXv2SIqe1B/4SFn6Wre1Fr+/o0FR2i9/qttTXnq53y/tE4jPF
+ OnR/hPmMJYNbizjs0qGHFGxAT0KmZ0BkpEEWdaLUXBJESwOMyTEBT/RJPcz0/Fp9fnnP
+ QjIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGBAxuvtZYL3S4B43NsJjTsRkDPIS6td/0y/AIaHdg6xY1e8UDPVwxyOODCjcfvyghA/KvbBE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQhxreX7v2LZaZs1k3ywaHMi1YgCaaJuyE/EXySTKQtAxsmRUA
- ZBgzDSieBpz4ydFkXXcHnxmVCW1CPisVkrojua/jB6BkkttPKobNvnQSGrrrZKl/OipivbwUFTc
- WaX2HL1ANU1sYvi2pzwJv53EG2s1GmLkYVVNo
-X-Gm-Gg: ASbGncsCXIRxRdv0QqL6y6N4OUkg+ScqSO3sF9SgJqK6y7VQOy+TeEt4Y3yO5czToF1
- X/Fr7JNQtYbwgg3ZrwytJtimoytZ+KtNptSWlv5e0fuYm34ldkQ8PJmQvjRW1DZnmxLzmzcNFRI
- K4pjWDSRH3hKCH9IdlkIGM3Ic=
-X-Google-Smtp-Source: AGHT+IFJMI1oNe9ERjGN+Vo9nymp+C3tOjipxIoE/CeGNm2OuHw4mh9wbyuC939DRBdDHXgOJV/VPnKa6b0z0nO0brI=
-X-Received: by 2002:a17:907:3c93:b0:ac6:ef94:3d9a with SMTP id
- a640c23a62f3a-aca9b5b2f25mr395857566b.4.1744204988302; Wed, 09 Apr 2025
- 06:23:08 -0700 (PDT)
+ AJvYcCU+ulKbv8QsQbm87f945aguSgKcJq2dufz/0k8+NPNik4tCivHIYP5pJL/JYT5JxnMhVP2t+SY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzYxVpwEKEnLHZdZQY4qRENCJxb12mq+F9tpYe/4daLwcM35LqI
+ dZ77of0/+4Pf4nUsdnzHNvtVDyn3TMxUDeMbUpvZ3TLrrCuz2WKlhHMkkxLxW4t+oPzIOvZxVq8
+ kwK00xBVmjiGSOZBdRVnwSwJmk+AqOkrYEN2wGWpiN0NHjtQ=
+X-Gm-Gg: ASbGncsnp7lb75jTPZqquSO0mQPtnfqDuRMIM7+eeL5FJ+OYXJdwsBkkXFEZtQc/GZJ
+ 2PKpsnScp9GpUaU7U+b2v+lyI/AHp0OzibVzA4dwIXu3/ou9iaRe+oAjV55AAHwXXqkHUVXKdOx
+ 0tg/K4fRbJvMZ10H28A6lu6tU=
+X-Google-Smtp-Source: AGHT+IHfMGZod3wyviAi2Xk4UdeGzG1CZwZzF8ye41nGgaoahBFju72rAyxMQjkHV+OCIPVX+XfyaQxup4jUYyp8CRk=
+X-Received: by 2002:a17:907:3f8e:b0:ac7:3918:752d with SMTP id
+ a640c23a62f3a-aca9b7350c2mr258590466b.58.1744204991470; Wed, 09 Apr 2025
+ 06:23:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250407033744.4025-1-ziyao@disroot.org>
- <20250407033744.4025-3-ziyao@disroot.org>
- <765a4f82-d0c8-43a3-beb3-31e133fd4811@kwiboo.se> <Z_TtMpbhnBMi1Sb0@pie>
-In-Reply-To: <Z_TtMpbhnBMi1Sb0@pie>
+References: <20250329150626.2879942-1-jonas@kwiboo.se>
+ <20250329150626.2879942-9-jonas@kwiboo.se>
+ <01e8a4b3-a77c-42ca-a4de-e744755a2b89@cherry.de>
+In-Reply-To: <01e8a4b3-a77c-42ca-a4de-e744755a2b89@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 9 Apr 2025 07:22:54 -0600
-X-Gm-Features: ATxdqUHSdjcVEIGivHaVtoHrSyRm5MhbXhPpJ9jkkowfvky8MF-wHiPw00e5Jws
-Message-ID: <CAFLszTi8odmNWxPkYAyx0JLjHfjEsaz+2FY25S6uOQw20EgaZA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] riscv: Provide __image_copy_{start_end} symbols in
- linkerscript
-To: Yao Zi <ziyao@disroot.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>, 
- Trevor Woerner <twoerner@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marex@denx.de>, Paul Kocialkowski <contact@paulk.fr>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Lukas Funke <lukas.funke@weidmueller.com>, u-boot@lists.denx.de
+Date: Wed, 9 Apr 2025 07:22:58 -0600
+X-Gm-Features: ATxdqUEPf2GhfLz7AcGOrhi9pDQ3BGNwvc22ykti-U5ZfalU-Vb9-PbL9pQE0Q8
+Message-ID: <CAFLszTgSeGN_+adh6VviNxYmVCGR_iOQN_igBbdEaXxDqKsb_Q@mail.gmail.com>
+Subject: Re: [PATCH v4 08/10] rockchip: binman: Use the skip-at-start prop in
+ simple-bin image
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,54 +92,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao,
+Hi Quentin,
 
-On Tue, 8 Apr 2025 at 03:32, Yao Zi <ziyao@disroot.org> wrote:
+On Wed, 9 Apr 2025 at 04:57, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> On Mon, Apr 07, 2025 at 01:10:32PM +0200, Jonas Karlman wrote:
-> > Hi,
-> >
-> > On 2025-04-07 05:37, Yao Zi wrote:
-> > > Binman looks for __image_copy_start to determine the base address of an
-> > > entry if elf-base-sym isn't specified, which is missing in RISC-V port.
-> > > This causes binman skips RISC-V SPL entries without filling addresses
-> > > into its .binman_sym_table section.
-> > >
-> > > This patch defines __image_copy_start in linkerscript of both SPL and
-> > > proper U-Boot to ensure binman_sym functions correctly with the default
-> > > binman.dtsi. The paired symbol, __image_copy_end, is introduced as well
-> > > for completeness.
-> > >
-> > > Signed-off-by: Yao Zi <ziyao@disroot.org>
-> > > ---
-> > >  arch/riscv/cpu/u-boot-spl.lds | 2 ++
-> > >  arch/riscv/cpu/u-boot.lds     | 3 +++
-> > >  2 files changed, 5 insertions(+)
-> > >
-> > > diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
-> > > index 907094620bd..18eb62c01c6 100644
-> > > --- a/arch/riscv/cpu/u-boot-spl.lds
-> > > +++ b/arch/riscv/cpu/u-boot-spl.lds
-> > > @@ -16,6 +16,7 @@ ENTRY(_start)
-> > >  SECTIONS
-> > >  {
-> > >     . = ALIGN(4);
-> > > +   __image_copy_start = ADDR(.text);
-> > >     .text : {
-> > >             arch/riscv/cpu/start.o  (.text)
-> > >             *(.text*)
-> > > @@ -46,6 +47,7 @@ SECTIONS
-> > >
-> > >     _end = .;
-> > >     _image_binary_end = .;
-> > > +   _image_copy_end = .;
-> >
-> > This looks like a typo, should probably be with two _ ?
+> Hi Jonas, Simon,
 >
-> Yes, thanks for catching this. I'll correct it and apply Simon's tag in
-> v2. Simon, is it okay for you?
+> On 3/29/25 4:06 PM, Jonas Karlman wrote:
+> > From: Simon Glass <sjg@chromium.org>
+> >
+> > The simple-bin image is normally written to MMC media at block 64, which
+> > is a 32K offset from start of storage media.
+> >
+> > Set the skip-at-start property to 0x8000 (32 KiB) so that fdtmap and
+> > other embedded binman symbols in the output binary is referencing image
+> > offsets correctly.
+> >
+>
+> Shouldn't we have this commit BEFORE we add the `fdtmap` node since we
+> know it's wrong before this commit?
+>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> > ---
+> > Changes in v4:
+> > - Drop defconfig changes
+> > - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
+> >
+> > Changes in v2:
+> > - Move this patch to the end of the series
+> > - Drop 0x8000 offset for SPI
+> > ---
+> >   arch/arm/dts/rockchip-u-boot.dtsi | 3 ++-
+> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> > index fb38b7b80c43..65b81bf58626 100644
+> > --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> > +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> > @@ -154,6 +154,7 @@
+> >       simple-bin {
+> >               filename = "u-boot-rockchip.bin";
+> >               pad-byte = <0xff>;
+> > +             skip-at-start = <0x8000>;
+> >
+> >               mkimage {
+> >                       filename = "idbloader.img";
+> > @@ -178,7 +179,7 @@
+> >   #else
+> >               u-boot-img {
+> >   #endif
+> > -                     offset = <CONFIG_SPL_PAD_TO>;
+> > +                     offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
+>
+> This is confusing. The documentation states:
+>
+> """
+> offset:
+>      This sets the offset of an entry within the image or section containing
+>      it.
+> """
+>
+> My understanding is that it should be relative to the beginning of the
+> image but this now needs the knowledge of where it will be stored on the
+> MMC device (via the value in skip-at-start).
+>
+> Why is skip-at-start automatically deducted from offset?
 
-Yes.
+This is how binman works[1]. We are trying to use the feature designs
+for this purpose (dealing with implied / missing chunks at the start
+of an image). At this point in the series CONFIG_SPL_PAD_TO is set to
+0x78000 I believe, so we need to add another 0x8000 to get the offset
+that binman uses.
 
 Regards,
 Simon
+
+[1] https://docs.u-boot.org/en/latest/develop/package/binman.html#image-properties
