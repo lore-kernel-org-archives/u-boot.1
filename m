@@ -4,87 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6787C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C385C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CE2E83837;
-	Wed,  9 Apr 2025 16:20:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B6B89826AD;
+	Wed,  9 Apr 2025 16:29:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rgN1DVYy";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F31083839; Wed,  9 Apr 2025 16:20:41 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CE3A2836B2; Wed,  9 Apr 2025 16:29:12 +0200 (CEST)
+Received: from smtp.gentoo.org (smtp.gentoo.org
+ [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD27E8382E
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:20:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75BE382140
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:29:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ac3eb3fdd2eso967479566b.0
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 07:20:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744208438; x=1744813238; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WDV/Yx586sRhen9PnaQU+QIk3twKHGxQYE0wMJcN0+k=;
- b=rgN1DVYySaqT772gz1xnHuKjU2eiPTYB7M32ANXHjcyRhNIgFvJd/jcNT8DO/GFyfY
- apmofhfURybX3VGdkYV/6Ne0f9tz8GgreABD6Suj+bnKESWScWMXXLpEC2d6xDYyBXUV
- MIn2kdVNjz9oT/RO7F41FSSOoZDB/EMRnLv3wyDPdUa4IWsymEVy230zO911sFXoqUUu
- U0Lq/YeYw/EwqsH3YP8/X4aj5ofme8x3D52ib1XpRujUeKyOHRhjmh5979V6hUi1V6wp
- GcFN1Hck1QUPUHGHqlVb70+ds+nqQ5I7uqMgBkYzq+mTa0x7QqB+VhwTEC4enYpEw1Fc
- MXKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744208438; x=1744813238;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WDV/Yx586sRhen9PnaQU+QIk3twKHGxQYE0wMJcN0+k=;
- b=dSJcGMmVgx44nnY6/iEItRmibWq5owGUJtW2OlsgkRkl6+B+ET52j3aC2ADaBcg2Nb
- Tu4w49u+m097ibme00f5s4TiZCrv0lFCRJT0bbQ2buu9RPDWTsJqxU3ak2U/E5Li5kiw
- baTjWu03RfkzsefQ+XmVGPr96JnmyuU5foydTUjDAEXvxPhOzU23ncG8U9++mcFez5Ew
- 4iTYthldhUkyEklTRTYqWZhnbXABg/KkAIEk/0mxbNXSgIyvV4h/0lYN1b0ztgHim8tv
- 8nKLm+0k8VJddU1Cz0IQ9y6uwcAHpTaTbrUgtXGUmxIECoGCasKZkSY0nzMbDyI8WS9l
- BY0A==
-X-Gm-Message-State: AOJu0YyZbwsnMB4Nd2DmeKAG0sdWAa2XVNiUHzW63WBQrlPfF3GG02ID
- D2CKa1u4FU1EO0k9v8OWYInDcWAM817RhFiY6FaymIJNp1hSMRS57lNQH18iyE4=
-X-Gm-Gg: ASbGnctpsJh0KTTe7VZNRoG6J9MsC+CfhphUMxep4MlKZbD/w+bJcVon7siDyjZ3Cvs
- CJS81Pwdwdwq0GJ8p6Kufb0wdaQRc0RJwQ/Wivi0Bpu1WEBTxgOrejWu8O19nhPHdZ7/1xEWHHF
- mNgqk9BQh1ThDvMbJ9Jae33yuOnYBnkHgNP5c4G+O4pN+WW/hhRYZy53yTRmWCLkDleTNcGQU5H
- 0tT9rqPf3fTmzp81ViY8ryR563OQYrg+JuctfSCeMRxeDlH2tfmYbMAmB14WVvjtheSSBBDBkMm
- 5zOGpbURBeTokqSra0GPoHk6XZ1yBq2NmMyTUvHGvhIho6EHIf+Ih/f3clXQPQnCc9g67s3+68k
- yh5UJ1Xjz+7ApFkDbEw==
-X-Google-Smtp-Source: AGHT+IGatzDX98FgxXgj2mQHYCHAIRqB/WNnVqr9NhDgmfqeVU4kV8WjVCnIAuS5R6Kkhb2otwN1+Q==
-X-Received: by 2002:a17:907:9403:b0:ac3:cc0e:90e5 with SMTP id
- a640c23a62f3a-aca9b6bb76fmr283346166b.30.1744208438063; 
- Wed, 09 Apr 2025 07:20:38 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:7cd9:8fac:d1e:8d79?
- ([2a01:e0a:3cb:7bb0:7cd9:8fac:d1e:8d79])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acaa1bb35c0sm104455566b.31.2025.04.09.07.20.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 07:20:37 -0700 (PDT)
-Message-ID: <2a860185-d0df-429a-8f1a-17c0d065253e@linaro.org>
-Date: Wed, 9 Apr 2025 16:20:36 +0200
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Received: from localhost (unknown [116.232.27.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
+ server-digest SHA256) (No client certificate requested)
+ (Authenticated sender: dlan)
+ by smtp.gentoo.org (Postfix) with ESMTPSA id 074AC343336;
+ Wed, 09 Apr 2025 14:29:06 +0000 (UTC)
+Date: Wed, 9 Apr 2025 14:28:54 +0000
+From: Yixun Lan <dlan@gentoo.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 33/34] sunxi: A523: add DT files from Linux v3 branch
+Message-ID: <20250409142854-GYA18396@gentoo>
+References: <20250323113544.7933-1-andre.przywara@arm.com>
+ <20250323113544.7933-34-andre.przywara@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: dhcpv6: remove excluded middle expression
-To: Bryan Brattlof <bb@ti.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250408-excluded-middle-fixes-v1-1-38233f18a554@ti.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250408-excluded-middle-fixes-v1-1-38233f18a554@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250323113544.7933-34-andre.przywara@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,35 +60,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bryan,
+Hi Andre,
 
-On 4/8/25 23:57, Bryan Brattlof wrote:
->  !A || (A && B) is equivalent to !A || B
+On 11:35 Sun 23 Mar     , Andre Przywara wrote:
+> This imports the (preliminary) devicetree files for the boards with the
+> new Allwinner A523/T527/H728 SoCs, including the basic SoC .dtsi.
 > 
-> Drop the middle expression from the statement
+> Those files have been reviewed and confirmed, but have not been merged
+> into the official kernel repositories yet.
 > 
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
+> Pending upstream kernel repository:
+> https://github.com/apritzel/linux/commits/a523-v3/
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > ---
->  net/dhcpv6.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+>  arch/arm/dts/sun55i-a523.dtsi          | 598 +++++++++++++++++++++++++
+>  arch/arm/dts/sun55i-a527-radxa-a5e.dts | 299 +++++++++++++
+>  arch/arm/dts/sun55i-h728-x96qpro+.dts  | 287 ++++++++++++
+>  arch/arm/dts/sun55i-t527-avaota-a1.dts | 308 +++++++++++++
+>  4 files changed, 1492 insertions(+)
+>  create mode 100644 arch/arm/dts/sun55i-a523.dtsi
+>  create mode 100644 arch/arm/dts/sun55i-a527-radxa-a5e.dts
+>  create mode 100644 arch/arm/dts/sun55i-h728-x96qpro+.dts
+>  create mode 100644 arch/arm/dts/sun55i-t527-avaota-a1.dts
 > 
-> diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-> index 54619ee698362..65ec48ef665e5 100644
-> --- a/net/dhcpv6.c
-> +++ b/net/dhcpv6.c
-> @@ -473,8 +473,7 @@ static int dhcp6_check_advertise_packet(uchar *rx_pkt, unsigned int len)
->  		 * server UID, save the new server UID and preference
->  		 */
->  		if (!sm_params.server_uid.uid_ptr ||
-> -		    (sm_params.server_uid.uid_ptr &&
-> -		    sm_params.server_uid.preference < sm_params.rx_status.preference)) {
-> +		    sm_params.server_uid.preference < sm_params.rx_status.preference) {
->  			rx_uid_size = sm_params.rx_status.server_uid_size;
->  			if (sm_params.server_uid.uid_ptr)
->  				free(sm_params.server_uid.uid_ptr);
+> diff --git a/arch/arm/dts/sun55i-a523.dtsi b/arch/arm/dts/sun55i-a523.dtsi
+> new file mode 100644
+> index 00000000000..ee485899ba0
+> --- /dev/null
+> +++ b/arch/arm/dts/sun55i-a523.dtsi
+> @@ -0,0 +1,598 @@
+> +// SPDX-License-Identifier: (GPL-2.0-only OR MIT)
+> +// Copyright (C) 2023-2024 Arm Ltd.
+> +
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include <dt-bindings/clock/sun6i-rtc.h>
+> +#include <dt-bindings/clock/sun55i-a523-ccu.h>
+> +#include <dt-bindings/clock/sun55i-a523-r-ccu.h>
+> +#include <dt-bindings/reset/sun55i-a523-ccu.h>
+> +#include <dt-bindings/reset/sun55i-a523-r-ccu.h>
+> +
+> +
+[...]
+> +		ohci1: usb@4200400 {
+> +			compatible = "allwinner,sun55i-a523-ohci",
+> +				     "generic-ohci";
+> +			reg = <0x4200400 0x100>;
+> +			interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks = <&ccu CLK_BUS_OHCI1>,
+> +				 <&ccu CLK_USB_OHCI1>;
+> +			resets = <&ccu RST_BUS_OHCI1>;
+> +			phys = <&usbphy 1>;
+> +			phy-names = "usb";
+> +			status = "disabled";
+> +		};
+> +
+> +		r_ccu: clock-controller@7010000 {
+> +			compatible = "allwinner,sun55i-a523-r-ccu";
+> +			reg = <0x7010000 0x250>;
+> +			clocks = <&osc24M>,
+> +				 <&rtc CLK_OSC32K>,
+> +				 <&rtc CLK_IOSC>,
+> +				 <&ccu CLK_PLL_PERIPH0_200M>,
+[...]
+> +				 <&ccu CLK_PLL_AUDIO0_4X>;
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+U-Boot 2025.04-rc5-00056-g1ef486ead58d (Apr 09 2025 - 22:06:21 +0800) Allwinner Technology
 
-Thanks,
+CPU:   Allwinner A523 (SUN55I)
+Model: Radxa A5E
+DRAM:  4 GiB
+sunxi_set_gate: (CLK#35) unhandled
+Core:  77 devices, 21 uclasses, devicetree: separate
+..
+
+
+I've got a "CLK unhandled" err, checked and found CLK_PLL_AUDIO0_4X is not
+implemtend in clk driver - drivers/clk/sunxi/clk_a523.c
+
+do you have any idea why this clk gate not implemented?
+or somehow, I guess we could drop it from uboot if not used
+(or no need to keep sync with kernel dts? I did no further check)
+
 -- 
-Jerome
+Yixun Lan (dlan)
+Gentoo Linux Developer
+GPG Key ID AABEFD55
