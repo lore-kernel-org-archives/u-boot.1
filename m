@@ -4,125 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3078C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C5DC36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:42:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6611083764;
+	by phobos.denx.de (Postfix) with ESMTP id C838A83796;
 	Wed,  9 Apr 2025 14:41:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 054A782982; Wed,  9 Apr 2025 05:01:06 +0200 (CEST)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20704.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::704])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B625682917
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 05:01:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EQZtDge97XCYXxCHzmHQJryX1M5xcEH8CAVhZqEFZtqyaLioBsM0v39C7Xq/CEyhojZDw76S8Hbdd4CyGkcK1f8uceTqfNoHySPZgG7CQvozpZCt79hVVQcTaPPKzDegzYiINGdYV9VpvW/6rJNtl+s8FXLFxR3ZTs4U1RD8bCgQKwg4qj7UIvPG8GsU4RECMPn698q4nmWcPReXGOHfrm5XmqNTNW77m3H1Mhr+c3HdW9/eaXvWeNpQ++wtjkLfIPe+dAVD8nbjQd9obtqIUPO0rGmviwPRHoDtLGc65TMhcN3PlLoPr8PLguUN/cS3GE+mumRqGw8AC8NXlcUzoA==
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="dc4wFGMq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 14ADF82982; Wed,  9 Apr 2025 08:19:03 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::612])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D80482937
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 08:19:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gaurav.jain@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UjOuQX2A/+sw0CCRAeb3WSK1wx/vwIMJzx7JVlbAHjC+dlNUih3EQISbuKDb8Fa9vOK0ohcQdM5K/sT1F40YHwUZAPJ2movfO0Kvo0w8tUCdHJoAwC+qZ/ukNfDgaC3G/DD1LJSe4OeLP92gHF807v4ElEb3VGFlsQJcX59r3/SoUbt5qq+ahutMX3oMoRDoMAwcvnaaTSEgCaQf0gnaXCrgf+pNg4UfdxGW7/1J0TAvK2TcVrsEFdVypEHJ9kw5/0S8NjKHH8eHopbi9mQsSchy8qfCPtDFs36DxW0wmoLV1G40kIYXKePCgj4zQRMt9BFrbZZv0XebvVi6RQ3zBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
+ s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UvrNaXpsEjSvqYnfMtPZUK9aM0cqFL1ogZuRkKccuvQ=;
- b=M/7qXYu2fpcl2TfD4Z2k0N2bbDgRjwrv0pFSMeD9gHiSgnu5U5CMtBoiC6TdXUS9pOQU0/BYKHkLOkcTwqP2rv42fmbB4t5lchtuvk6Xk69UnlGpGlSDkp6nOmNuAtb93y+Ujw3KNs0WioZlUOj5/t0pIAVub2SwUWMWjY2rMGHdU74hZGWycnM/3NEJ5ncCgUyZ4UKtYYA0CNZORefVdUV7DCyQo7EZ7NzLlT4uPbHHxHG/9VfwaGsUJB3Wcv51GbrTU37Z+QMInePDDSQgBg1JZi2JKEwk15+tGpMwpoRWMHJOIkXIReIfFbt0opFnMoOb9nLLrYUdZWVzbOM5mA==
+ bh=QADpueFtlO98+/yxG3Z4nGeBIoE2pHj43wjvv00vmJ4=;
+ b=RZ+0yZQb1RTRVaBLzwiXVb4zlt9cQoDDCOsCpM1QJ79hcQ45/83JJntcJwdkUGH3xEDAeDKLE6t0btvur4FokfidSbcY/s9nON0eS86OO/HFvmRHA2kPjF7ImeBUkzk92DNH0Uw6qYyHCzuMtFvMNy/+AjmXtzxvhqULLbP980mRaDjquwmMHxa/+oFPqx8aXlY7kNoGQ559mJ6t6HyJ6Zygl9p9AeJykw4PkQUjFq2dAGHG0TOF8+JQhhHO61jVmAaw9ruqJd6+s4/V6gHil/FxJ4MkFHlg6xXyoLE9i5JYbloWSAZ2decrjSgeSE+WNF+8LB/E5JeSEbVQVhtSdQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1276.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:10::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8583.49; Wed, 9 Apr
- 2025 03:00:54 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%4]) with mapi id 15.20.8583.047; Wed, 9 Apr 2025
- 03:00:54 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>, Minda Chen
- <minda.chen@starfivetech.com>
-CC: E Shattow <e@freeshell.de>, E Shattow <lucent@gmail.com>, Sumit Garg
- <sumit.garg@kernel.org>, H Bell <dmoo_dv@protonmail.com>, Lukas Funke
- <lukas.funke@weidmueller.com>, Simon Glass <sjg@chromium.org>, Andreas Schwab
- <schwab@suse.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, Quentin
- Schulz <quentin.schulz@cherry.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: RE: [PATCH v2 4/8] board: starfive: spl: support DeepComputing
- FML13V01
-Thread-Topic: [PATCH v2 4/8] board: starfive: spl: support DeepComputing
- FML13V01
-Thread-Index: AQHbog3yA1v0c+8BfEKcq3WDrJVRJbOaso5g
-Date: Wed, 9 Apr 2025 03:00:54 +0000
-Message-ID: <ZQ2PR01MB1307AA8DCB20D56883446866E6B42@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-References: <20250331072410.8662-1-heinrich.schuchardt@canonical.com>
- <20250331072410.8662-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250331072410.8662-5-heinrich.schuchardt@canonical.com>
-Accept-Language: zh-CN, en-US
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QADpueFtlO98+/yxG3Z4nGeBIoE2pHj43wjvv00vmJ4=;
+ b=dc4wFGMqPQCnLW+0KPZuVGWzXCMmK9IdnnM9ywSiFzqbdr9eUo0HkX3TybJY8y4LBwHd1RJJ8iyIWucYb7g4fswDePW7gxfEqqQRil6Tv2Nv08Y3TsthVR1bw8x0bI5cAxRMF3ahyianY8/65PWeqHe1GS3/4567YySL3kF9wXriTqAYTNZf2pdRYumLn8W+/uF0fgFJ3I+/aOfVy3bw96p1DLf1KxZZ5oQ2yxma4sj0rH0+d76reywaHCeVOkd6OEZTtTQUEMmtMBoaJEgLp23mVMPavvON9W7gPmo6Ib9HnMHLgqEytCaJS56tHzOODiTi7meVh2oJkyuYclX9Pw==
+Received: from DB9PR04MB8409.eurprd04.prod.outlook.com (2603:10a6:10:244::6)
+ by VI1PR04MB9787.eurprd04.prod.outlook.com (2603:10a6:800:1d8::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.33; Wed, 9 Apr
+ 2025 06:18:58 +0000
+Received: from DB9PR04MB8409.eurprd04.prod.outlook.com
+ ([fe80::1436:d8ba:25b8:1637]) by DB9PR04MB8409.eurprd04.prod.outlook.com
+ ([fe80::1436:d8ba:25b8:1637%4]) with mapi id 15.20.8606.029; Wed, 9 Apr 2025
+ 06:18:58 +0000
+From: Gaurav Jain <gaurav.jain@nxp.com>
+To: =?iso-8859-2?Q?Pawe=B3_Kochanowski?= <pkochanowski@sii.pl>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Priyanka Jain <priyanka.jain@nxp.com>, Gabriel Nesteruk
+ <gnesteruk@sii.pl>, Pankaj Gupta <pankaj.gupta@nxp.com>, Horia Geanta
+ <horia.geanta@nxp.com>, Varun Sethi <V.Sethi@nxp.com>
+Subject: RE: [EXT] [PATCH] crypto: fsl - Fix RNG generation for lengths
+ greater than 16 bytes
+Thread-Topic: [EXT] [PATCH] crypto: fsl - Fix RNG generation for lengths
+ greater than 16 bytes
+Thread-Index: AQHbp7vaBjTvT2QpjEqnwOdEJdye7rOZjCgwgAAPQACAAT0fgA==
+Date: Wed, 9 Apr 2025 06:18:58 +0000
+Message-ID: <DB9PR04MB8409F684D29E823DB780545FE7B42@DB9PR04MB8409.eurprd04.prod.outlook.com>
+References: <20250407124714.177059-1-pkochanowski@sii.pl>
+ <DB9PR04MB8409F4CF8E38ED3ADAAB1E80E7B52@DB9PR04MB8409.eurprd04.prod.outlook.com>
+ <AM8P191MB1394DE8E57990BF74131AA4CA2B52@AM8P191MB1394.EURP191.PROD.OUTLOOK.COM>
+In-Reply-To: <AM8P191MB1394DE8E57990BF74131AA4CA2B52@AM8P191MB1394.EURP191.PROD.OUTLOOK.COM>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
+ header.d=none;dmarc=none action=none header.from=nxp.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1276:EE_
-x-ms-office365-filtering-correlation-id: cc9fa6be-360b-4dd5-d5a9-08dd7712bea5
+x-ms-traffictypediagnostic: DB9PR04MB8409:EE_|VI1PR04MB9787:EE_
+x-ms-office365-filtering-correlation-id: 964feb3b-809b-434a-ba1c-08dd772e69ab
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|1800799024|41320700013|366016|38070700018; 
-x-microsoft-antispam-message-info: c3nh+8vYJE857N2vlogxLvw6PlMaD/IcqUnEeFypJ09uj9d/bY+mnlKKU28DrQ4fjEvYwMjNkZyNwMqC6UPVxNjq2OIYN4olMJgkAJOMeCUva3gQS/FW8YiUSn4LI6ePb0c1IfNlnbKxSBHczUQNW07208c9dzeDAESOTKon3dXjE7vDC+8I2w7Ed0hxmqBAxhJOZj4ePaELJ8Fp6DtA/ehV6k4p6hYJO2kBpHS+8QajlJBYEVL+5x3A4LNJSOdN0AtiGzI1NgQB36Gl6C8zm6J89EB+aRkzBPZrqGsADlOEwEOwArGURcA3zhRZl67aguaRbRt15xqL6wcRzz0MH5xJNWam2SojiekzGoZnfpp0x0iNdVsVj+WulD+9kw6dWYQXhGa/S98XsnezvH0Z49R8zVANfnQNBk+/dOYt0H1qQhJmrX2JbjF35IZ4ECjd0uqeKYPrPow7NCNwTHrXHAu12B0mZsmABFrMoT6mooZ7OoWlcbIA6yFkl2smm6NDcmW/Xil8ZV6rn99KImL5b04RNMfH0fe08+3p1CnTk/gHf9eFdFoltfU4BnaAzt0YWNb8HOb76JKDjkbxK4u7Agz53Tiaira2QnXadsj71pE=
+ ARA:13230040|366016|1800799024|376014|38070700018|13003099007|7053199007; 
+x-microsoft-antispam-message-info: =?iso-8859-2?Q?f1MMTK20Ynjs/qd3JBLKnQNa2EwVw+kJQlnVU7a3ckvXi5TseciiGPRCL4?=
+ =?iso-8859-2?Q?j3C6HbkxZyHvNrRhMDrRGSnSE9D/eNYq44eqsGdVGT5uwEc781qBdep0+4?=
+ =?iso-8859-2?Q?1FmH2GNSFBOME7aQliACKD/llZaUUglCTMkbhcXx+jVYoPlz+QMemlIx70?=
+ =?iso-8859-2?Q?QNGXQ5ce75OqNbMqxLjv9IK22lRRGaMudCVI3PVNNb0oEHByTw0Xfx4rqR?=
+ =?iso-8859-2?Q?nQVmN2lRjQh243sNxptJMf53QYXJ1wAHjkpgSOAtgoHUcSd07JGRMqQtYD?=
+ =?iso-8859-2?Q?RPluV7RilmhfibgG7Ctw6ByahKsP1EeLUE67jHsGfpZI8Vxa0/Z14BAybe?=
+ =?iso-8859-2?Q?lOQ52L9eeTeeqqW+nKU6MFf6CUZFISpnjkyvMzMobRvf8PJ7BSRBT3RJ+E?=
+ =?iso-8859-2?Q?0ypARw1pkoLWvCQKyJh0+gNFby6jkyDiSYda00kZMb3g7yNF8QuLUsREN7?=
+ =?iso-8859-2?Q?S2q/Dqg24LBC1/qp0WE/RVD2YCA8sC1z3aOBwJuAWYDI7q/FgSAP1mqJOG?=
+ =?iso-8859-2?Q?TuSn2/mhraQ7T8xVAHqbdZ/9q3obnaxX0lCMlB98Ka1QCj8gwODJVhYgZ5?=
+ =?iso-8859-2?Q?rFRGKHqROK8gm6DZZZTdPsM/HX8ZgbHUYb/l4Gr83sNFtYV6ZLM8ZqRXuE?=
+ =?iso-8859-2?Q?bgqG4ppsxMvfVWlyFcbahO2olNQIqMgXlU4l3tkhZQQ41ZsQaCzu4tA3fs?=
+ =?iso-8859-2?Q?bLQLp4kJx22q+9fnP9dPFxtVUpCzls7JUMLp/dt2SCAYtebGLCbBnTWjuJ?=
+ =?iso-8859-2?Q?LA0C4/GAaL2YKvuZJqubXGUKM8VcpP2yxH4J17qbVzfjexosACCJMCsrue?=
+ =?iso-8859-2?Q?eeC98+aHD6sWr9RfU8xEqgJ3Vog7ShQ9wCrNz+YH0QNjBuRDq08iCCPGdJ?=
+ =?iso-8859-2?Q?ZC3N8aq2CJtttCSwEuhUpi1SKSBUsbPnc50WszvwyCaORGZMcCIEQoqwDb?=
+ =?iso-8859-2?Q?xKyccT4RLR0rdYQ18GUCvd1f6t4H2PsVZ43VZgR5BdNnPFosKpx+hIJxHA?=
+ =?iso-8859-2?Q?esBlQMdnKIWs/9q29e1LtHpYqCgJTTU/tdLell5Axv/BY+7oZGUzhQf/oi?=
+ =?iso-8859-2?Q?7gwgawO6/4+gDYtH7eqosC0JaWUvNbS756R8/6NDCoqGrnEZ/Y9tpIOk7M?=
+ =?iso-8859-2?Q?xGuhddGS+Vjhr+osTr/1cqEXWcDup0X8/3M66liFofUcLXOko5Jif9MbUs?=
+ =?iso-8859-2?Q?NSX1heMhEF1KyBcaqDYZUBHlwh8MuxjzkndGQ9QVLNkQJwXmy4ctCQFKa2?=
+ =?iso-8859-2?Q?H//Z6lRSNiCx98RAc58QkKZ3PkYU9zFwZ1d2dmrgETVELIP/xt/Yyw4Get?=
+ =?iso-8859-2?Q?r0vAL2/JEHsC/36rjm7drUal9Je5L9UuQeOybaIsexM4q1q+ChJ7Giffi/?=
+ =?iso-8859-2?Q?0hc2x79TWommTW3sTmYEN1B4NXdqOq51tnilplqsS+AjqqAvnd2Z8B9O6X?=
+ =?iso-8859-2?Q?G2dlIuudF61wtMcC3vvR7QYJn4Xwdu5rxvUBCAOoJGiWUtCT5uVXva1s4k?=
+ =?iso-8859-2?Q?umTrSmjSMsgMO/JPXCywGA?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(7416014)(1800799024)(41320700013)(366016)(38070700018); DIR:OUT;
- SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB8409.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700018)(13003099007)(7053199007);
+ DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?5TuB5HYptVoUai4bP5VMuyNMBx9h5wSIGoLu6dc1jAjg4zUunn2yKQhJXYCw?=
- =?us-ascii?Q?qZHSz7DTE7Y8xfIksZ2Jf6RPCiHxAF7AtiCtWaYlxep9U035dluz6JEXlHAd?=
- =?us-ascii?Q?1WU2qYCTLRy0Gl6/rLlijVy+UM7AGO5bpvvVmJdhm4bFD6FW/sI/MkcZtiMM?=
- =?us-ascii?Q?LzzZiH4yP1JFHURAf4FXU7W8uQWWrUHAxKPq7pqT3ibUjep9y/msmjQL4Y9q?=
- =?us-ascii?Q?2Eg9YSSg/zMJn7k+Q1EdCpIz6ZYuwmprsoX2YVtzZnt8LsBykpf3Alo/yFw3?=
- =?us-ascii?Q?5jHWd4Z4wySC961fk5LOm92kk/bpgT4/XvCyTugWRo4ooMk7kux2hnW4JQm5?=
- =?us-ascii?Q?kvLQEGRuX22okIV8SJvGuvs776UeNe1GkIszCagthv6EjnHsf+mt2ojWRxbk?=
- =?us-ascii?Q?jh/h2hJpYUPhc6xklJEE4QLiK8BoaA+2T4zlkRbXrKXJDjYpEkd9ug6g6Mrg?=
- =?us-ascii?Q?QyFurM+6+P2cq+m/kPEpwFPpQ0EyqSOecuX7TckX7T+4RMcSkuOVsUuhw1QZ?=
- =?us-ascii?Q?KzC0zAhmigcwQ//g4zfKlMbJxJHEQiJEqvSMyAsqCDqAF0FunMbkD+mSMs4B?=
- =?us-ascii?Q?xCgUXwLYE/dELt95YaZv7s8S+RjrNUKVPLXkm3ZeKEiHptKef1vse6iFxaCU?=
- =?us-ascii?Q?/k23xBew8HFKzTwMQNzFWKIJQeNk9riWVErlqc0/sykwuxC4qg63WussDy5U?=
- =?us-ascii?Q?LzfMfAwKzP39yiPQdThYRSlhnPgoPC/UBZEbOacSV3pebjbOF3+LbXcxcJcP?=
- =?us-ascii?Q?lVbNnV95NyiLaFLhOkkHCjz7OHJKixBM6VniL9ILbv920lu2iRFhxlsfl6WS?=
- =?us-ascii?Q?xtfnK8ubmvAXD/GR/VL+wd92B73nU2LGzVRWCo3lCzGVExiEZI/Ur8Y9mPE2?=
- =?us-ascii?Q?bkS0uTAgdIe0Aqbo6o9/cW77vw91HGGx0vH2ABHKP5ik9YrMqQCpZ19evv6/?=
- =?us-ascii?Q?xCVLeEJUUMb1R5LIc4a8CKq4en0K6XqUXrcmgykiV8wPVmbSCpDj4jQ08HLV?=
- =?us-ascii?Q?OyIFyydGvKW0DrdeIgY1DnAQeb+zExJY3O39DXdV7Dnho4n7aZsaoaATVrGL?=
- =?us-ascii?Q?ArxE9CINezAx6SVr/3FTB92cnI6TxWsgcyUh5frjiYQEnfhG4CN6s3bweM28?=
- =?us-ascii?Q?HvLb1zdU2dnqXLI4op6qdLcChdgoZNAhA7A0jrh6g5JN4Vf8hsauUAMM0+XZ?=
- =?us-ascii?Q?F9ZiHbgRzZPE8Jp61xtY5kNG4V8Ik45YV/MU8D1roQdOxFo73kwJasjedjhH?=
- =?us-ascii?Q?S2sV9rroubuYfzfKsATuOYlTFCcA+M2cowzqCiP5TcMvAMmFR1FjoKbCNx86?=
- =?us-ascii?Q?L1n36rr0vYg9eohL1zdG6nWgZuDksU7eS9BlLSS9ZY9JihEiCMW9MxHFLqOI?=
- =?us-ascii?Q?5b1iS8C/H3TpJqS+nIWaZ2k1ryhF7qSTyjCcWcFLy3OBY1/NlXscMMfi6p2E?=
- =?us-ascii?Q?F12IyJReX+cJMpvREqct+lHJe4CjWlMf7QR88pLKC2uwQf9+lq0AyIVj5ZXY?=
- =?us-ascii?Q?iUJ/9g/erqHZjWs1jPRS8yydsFKo7ew4ZVyyLdloUBr5w5cO8m/G1v+vz6lY?=
- =?us-ascii?Q?bHIOyo9xBEmpKaUT2eh1D6mlYhVPgLhrZZP1TK4WBNvilqnHriP7Io5DGWmO?=
- =?us-ascii?Q?Vw=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-2?Q?KY7cqHj+SXQ+BN5ifHUnpaGQYFb5vJBwdfSe9mKw93idhzaDBGkbiciGFw?=
+ =?iso-8859-2?Q?bg6PBVnrgMted8V7zGVzFSiSqxJKRRJN2zkX2qwx+xOzVziz1189AXfAnp?=
+ =?iso-8859-2?Q?dxlgCmbwSsQ72rXxmhGzeBsJALV19U9RW5yOnNtYCaQfulyLPd5qJViVcC?=
+ =?iso-8859-2?Q?mc0VFN0rYZgRe8yFG3f4NhFPRf6ceQpGutlq7W7GNE+UJ/+kXThenoPy63?=
+ =?iso-8859-2?Q?7uW4F7jWDAn3/AjHjyLWUFPDZ9/L/FYJdErmyXSfPKPttRImOsPNSECh78?=
+ =?iso-8859-2?Q?ClNLxdiD4/c2tp8FwYTOvlfC53ULhAZHV8mElzgfWoaDjaQKkKoQFdiP1d?=
+ =?iso-8859-2?Q?h0+auTQRBOWr3dIPtxPdDJJcSb0cvclplDkW+Ntkp/BZ8A8BBiYOE8cPuF?=
+ =?iso-8859-2?Q?7EoOfCwh1O+0a1Z51BWfitGlcTnlfo7I3+d6Pt5R9M0XU3K2nY6omrOP6o?=
+ =?iso-8859-2?Q?UMT2utuaF43SoXBs55tlrbWMcgPB1iUZd2i+WxQJWSSxgGdAzI6zXtLcE7?=
+ =?iso-8859-2?Q?d+6+GVFdzKnBf+ux0B1B/zL2GUlxG3t4daOSse+YZ7wHPNpulpgCDbCrPI?=
+ =?iso-8859-2?Q?qAEWEQ4xXipF3WDBSieuznACpexiHq8+voaQUowdx0/IFrb5M2ZQ0TqckJ?=
+ =?iso-8859-2?Q?oFiutfNGgJcu7GJTnmP4dMXWHUqOBVgbxCDPT/0fRfjOQ76uys6Sw6YmuM?=
+ =?iso-8859-2?Q?EXE4YI2OHq1DrXOXgFGu0bFIxhn7TimAvcBjdbKKpSUuX5MfM5VcoSDuPM?=
+ =?iso-8859-2?Q?f6awkaIZpwFr5Ol0xoYCUxiQoOuyr5dqoqOhyx6kI8eOgMWIbvEcM7gCmZ?=
+ =?iso-8859-2?Q?9f4jrSV70qi/oUSv9vCpm9oxEvLyq4o3sNeupkF0DtbZbUtAIg+z1JMxhN?=
+ =?iso-8859-2?Q?waxPo/RbQZJjJfU56VWK+Zi9X1Asa1F4jg8gZePTLQ+jTWqvKof1Tn0hOR?=
+ =?iso-8859-2?Q?QaGz3LB4udzd3uAm9stjQAZ7Kvfn1NF8ka9LuYnREHb/x6Z4/Hr1oxe4ME?=
+ =?iso-8859-2?Q?oV+VNSNveAS/WrKJaUHjZ+3YDTMiW3B7wlcxGX6cGxXtFUjkSHamH44+Fd?=
+ =?iso-8859-2?Q?MNsjC26cx+G97oOGIOLLF/iCgIvzgh6fJu57LeWbZZzhvAKneLuwH7f8j/?=
+ =?iso-8859-2?Q?CivNcatSoqh/1M+6RuCeAU2jagIouRsY1tazuIwf42cMHRvXfKEK9WXUyc?=
+ =?iso-8859-2?Q?Axm0ER+TWRKMFnRPxnjtJUygmG9Bmac6kN3Wdc/jmA8I4/7FXgyLmVcF35?=
+ =?iso-8859-2?Q?ogyvMJkcBLKPA6vwzgkH06wE80MG6o3dgvnk3G9PC8hVLkWjVifz2tolo4?=
+ =?iso-8859-2?Q?fVrEf3dLX6Q9xiQ54oDHT7wUxtR1zKDWUYe/mhO/AWb/8jMxP9ZuvyUzT3?=
+ =?iso-8859-2?Q?r71VTd+krVWiW6tFfCd6kgTOS7JKpC62v/cKGgzBrvggZHFvcHaMSE0r+5?=
+ =?iso-8859-2?Q?Mo+AYn4ios+XEv5gAmtZPN05vsEbZLiBu/EPutX2cclb2EskMVpOEgt0LW?=
+ =?iso-8859-2?Q?GxmgP3bjDTPSF1QeTPA/UkZzJo1nb/YWzQokO/hCIxfR5GUbinT0V5Str1?=
+ =?iso-8859-2?Q?yJDIhZY1GW8kAlRdFQ3wpdvoAhUh4p3Too36YtYKZ+9ubIkA69ft1AxTnI?=
+ =?iso-8859-2?Q?eo7/dC7qcBgZ+XVqwdxODlkh7elXAFGnjn?=
+Content-Type: text/plain; charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
+X-OriginatorOrg: nxp.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc9fa6be-360b-4dd5-d5a9-08dd7712bea5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Apr 2025 03:00:54.8084 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB8409.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 964feb3b-809b-434a-ba1c-08dd772e69ab
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Apr 2025 06:18:58.1439 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SVgKSfIViYShzuMmlm3iypFu3fb+yoJNAK/hGP0rKVE3o+9Ud/Xnixgq+mQ74supj2XeHN1WjTtW9gKDk3neI3JT3RCnp/jOaLSXnjoUJ5s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1276
+X-MS-Exchange-CrossTenant-userprincipalname: 1pJdaVkSuWUL5QP8GpTdZfJK7gAazDXGpQDv99FtEynYj7UQ4wCX1oasyGoKZHgPT2fpS04wGzfQZwRrb9h7Qw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9787
 X-Mailman-Approved-At: Wed, 09 Apr 2025 14:41:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -140,39 +170,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On 31.03.25 15:24, Heinrich Schuchardt wrote:
->=20
-> On the DeepComputing Framework motherboard (FML13V01) choose the
-> matching FIT configuration.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
-> 	rebased
-> ---
->  board/starfive/visionfive2/spl.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->=20
-> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive=
-2/spl.c
-> index 13a48939c8f..52f75471de5 100644
-> --- a/board/starfive/visionfive2/spl.c
-> +++ b/board/starfive/visionfive2/spl.c
-> @@ -125,7 +125,10 @@ int board_fit_config_name_match(const char
-> *name)
->  	if (strncmp(name, "starfive/", 9))
->  		return -EINVAL;
->  	name +=3D 9;
-> -	if (!strncmp(product_id, "VF7110", 6)) {
-> +	if (!strncmp(product_id, "FML13V01", 8) &&
-> +	    !strcmp(name, "jh7110-deepcomputing-fml13v01")) {
-> +		return 0;
-> +	} else if (!strncmp(product_id, "VF7110", 6)) {
->  		version =3D get_pcb_revision_from_eeprom();
->  		if ((version =3D=3D 'b' || version =3D=3D 'B') &&
->  		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
+Hi Pawel
 
-Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+> -----Original Message-----
+> From: Pawe=B3 Kochanowski <pkochanowski@sii.pl>
+> Sent: Tuesday, April 8, 2025 4:30 PM
+> To: Gaurav Jain <gaurav.jain@nxp.com>; u-boot@lists.denx.de
+> Cc: Priyanka Jain <priyanka.jain@nxp.com>; Gabriel Nesteruk
+> <gnesteruk@sii.pl>; Pankaj Gupta <pankaj.gupta@nxp.com>; Horia Geanta
+> <horia.geanta@nxp.com>
+> Subject: RE: [EXT] [PATCH] crypto: fsl - Fix RNG generation for lengths g=
+reater
+> than 16 bytes
+>=20
+> [You don't often get email from pkochanowski@sii.pl. Learn why this is im=
+portant
+> at https://aka.ms/LearnAboutSenderIdentification ]
+>=20
+> Caution: This is an external email. Please take care when clicking links =
+or opening
+> attachments. When in doubt, report the message using the 'Report this ema=
+il'
+> button
+>=20
+>=20
+> Hi Gaurav,
+>=20
+> What we see is that the jr_enqueue() called by run_descriptor_jr() swaps =
+the
+> endianness of the descriptor in place (by modifying the data pointed by
+> desc_add):
+>=20
+>         /* The descriptor must be submitted to SEC block as per endiannes=
+s
+>          * of the SEC Block.
+>          * So, if the endianness of Core and SEC block is different, each=
+ word
+>          * of the descriptor will be byte-swapped.
+>          */
+>         for (i =3D 0; i < length; i++) {
+>                 desc_word =3D desc_addr[i];
+>                 sec_out32((uint32_t *)&desc_addr[i], desc_word);
+>         }
+>=20
+> So the sequence looks like this:
+> 1. caam_rng_probe sets correct descriptor in ` caam_rng_priv *priv` 2.
+> caam_rng_read is called with 32B 3. caam_rng_read_one->run_descriptor_jr(=
+) is
+> called to generate 16B with `priv->desc` containing valid descriptor 4. T=
+he
+> descriptor is swapped in jr_enqueue() before passing it to job ring
 
-Best regards,
-Hal
+I see you are right. In Linux, caam endianness is handled at the time of cr=
+eating the descriptor.
+But In Uboot, caam endianness is not handled at the time of descriptor crea=
+tion.
+
+5. The loop in
+> caam_rng_read is called second time, this time the `priv->desc` contain s=
+wapped
+> data.
+>=20
+> Interesting thing is that the job still succeeds and that some data are p=
+resent in
+> the buffers, but maybe swapped descriptor can also be a valid one?
+I agree that the descriptor should be reinitialized for each RNG job.
+I am also not sure how the swapped descriptor worked second time.
+
+> The effect that we see is that when leaving the command executing this se=
+quence
+> we get an exception in "unrelated" place..
+After your change you stop seeing this exception? Are you sure it is relate=
+d to rng descriptor?
+
+>=20
+> This is what we see when printing descriptor in the caam_rng_read_one on
+> LS1046A:
+>=20
+> First iteration:
+> 0: B0800005
+> 1: 82500002
+> 2: 60340010
+> 3: 0
+> 4: FBC94DC0
+4th word is seqoutptr: sgf pre ext (ews). Have you also modified the descri=
+ptor ?
+
+Regards
+Gaurav
+>=20
+> Second iteration:
+> 0: 050080B0
+> 1: 02005082
+> 2: 10003460
+> 3: 0
+> 4: C04DC9FB
+>=20
+> BR,
+> Pawel.
+>=20
+> > From: Gaurav Jain <gaurav.jain@nxp.com>
+> > Sent: Tuesday, April 8, 2025 12:09 PM
+> >
+> > Can you explain more details about this issue. Where it is being
+> > modified in
+> > run_descriptor_jr() ?
+> > Regards
+> > Gaurav
+> >
+> > > -----Original Message-----
+> > > From: Pawel Kochanowski <pkochanowski@sii.pl>
+> > > Sent: Monday, April 7, 2025 6:17 PM
+> > > To: u-boot@lists.denx.de
+> > > Cc: Priyanka Jain <priyanka.jain@nxp.com>; Gaurav Jain
+> > > <gaurav.jain@nxp.com>; Gabriel Nesteruk <gnesteruk@sii.pl>; Pawe=B3
+> > > Kochanowski <pkochanowski@sii.pl>
+> > > Subject: [EXT] [PATCH] crypto: fsl - Fix RNG generation for lengths
+> > > greater than 16 bytes
+> > >
+> > > [You don't often get email from pkochanowski@sii.pl. Learn why this
+> > > is important at https://aka.ms/LearnAboutSenderIdentification ]
+> > >
+> > > Caution: This is an external email. Please take care when clicking
+> > > links or opening attachments. When in doubt, report the message
+> > > using the
+> > 'Report this email'
+> > > button
+> > >
+> > >
+> > > From: Gabriel Nesteruk <gnesteruk@sii.pl>
+> > >
+> > > Reinitialize the descriptor for each RNG job, as it may be modified
+> > > by run_descriptor_jr().
+> > > Failing to do so can result in memory corruption when
+> > > dm_rng_read() is called a second time on NXP devices with
+> > > CONFIG_SYS_FSL_SEC_BE enabled.
+> > >
+> > > Signed-off-by: Gabriel Nesteruk <gnesteruk@sii.pl>
+> > > Signed-off-by: Pawel Kochanowski <pkochanowski@sii.pl>
+> > > ---
+> > >  drivers/crypto/fsl/rng.c | 14 ++++++--------
+> > >  1 file changed, 6 insertions(+), 8 deletions(-)
+> > >
+> > > diff --git a/drivers/crypto/fsl/rng.c b/drivers/crypto/fsl/rng.c
+> > > index
+> > > 06364948052..440b26e3c94 100644
+> > > --- a/drivers/crypto/fsl/rng.c
+> > > +++ b/drivers/crypto/fsl/rng.c
+> > > @@ -27,8 +27,14 @@ struct caam_rng_priv {  static int
+> > > caam_rng_read_one(struct caam_rng_priv *priv)  {
+> > >         int size =3D ALIGN(CAAM_RNG_MAX_FIFO_STORE_SIZE,
+> > > ARCH_DMA_MINALIGN);
+> > > +       ulong rng_desc_size =3D ALIGN(CAAM_RNG_DESC_LEN,
+> > > + ARCH_DMA_MINALIGN);
+> > >         int ret;
+> > >
+> > > +       inline_cnstr_jobdesc_rng(priv->desc, priv->data,
+> > > +               CAAM_RNG_MAX_FIFO_STORE_SIZE);
+> > > +       flush_dcache_range((unsigned long)priv->desc,
+> > > +         (unsigned long)priv->desc + rng_desc_size);
+> > > +
+> > >         ret =3D run_descriptor_jr(priv->desc);
+> > >         if (ret < 0)
+> > >                 return -EIO;
+> > > @@ -63,14 +69,6 @@ static int caam_rng_read(struct udevice *dev,
+> > > void *data, size_t len)
+> > >
+> > >  static int caam_rng_probe(struct udevice *dev)  {
+> > > -       struct caam_rng_priv *priv =3D dev_get_priv(dev);
+> > > -       ulong size =3D ALIGN(CAAM_RNG_DESC_LEN, ARCH_DMA_MINALIGN);
+> > > -
+> > > -       inline_cnstr_jobdesc_rng(priv->desc, priv->data,
+> > > -                                CAAM_RNG_MAX_FIFO_STORE_SIZE);
+> > > -       flush_dcache_range((unsigned long)priv->desc,
+> > > -                          (unsigned long)priv->desc + size);
+> > > -
+> > >         return 0;
+> > >  }
+> > >
+> > > --
+> > > 2.43.0
+
