@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B18F8C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 11:45:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DCDCC36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 11:56:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C145183692;
-	Wed,  9 Apr 2025 13:45:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 494F183698;
+	Wed,  9 Apr 2025 13:56:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="CxFMHNGx";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BGxbvzy+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF8C183698; Wed,  9 Apr 2025 13:45:40 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
+ id EEF02836A4; Wed,  9 Apr 2025 13:56:18 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 718A4835FE
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 13:45:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 023A38363B
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 13:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1744199099;
- bh=IPH/KbaQ0ohRpJ0YM3QxlB9z7jC2NQLBbwY6C557oYY=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=CxFMHNGxai0YUa1mi4BRc2JtTAPeZEFIkbUMPoL7HPuo250K/G45BvSU+TDlbQkBI
- 1lpodO0WEJJ2B1/w7zmrzQVTU1OWj+/wmTEv9hSUKghtDy5WVgCnn1OXY6X+oTG+Jv
- S/PW8nMoMSRPf9zKQfxGSwaxDZ58k0e5dSNx0uR34bFfrvb30mkihCNMVQ8h8muvd3
- f8krUHSgPWPrSA6wo4PSRamH3IFsS2aq5r9caqWvA1CSeGrD41TQMGEkROdDSnhsMM
- SSzoTBt1KvNUFv3xRZaUJQwH9lQY1M8RF6S1DwSzgTiydalATGSFTqSBFfgd5Abmqa
- m8shWshomRTHQ==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Tom Rini <trini@konsulko.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass
- <sjg@chromium.org>, Michael Walle <mwalle@kernel.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Marek Vasut <marex@denx.de>, Benedikt Spranger
- <b.spranger@linutronix.de>, Jerome Forissier <jerome.forissier@linaro.org>,
- John Ogness <john.ogness@linutronix.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: RE: [PATCH] tiny-printf: Handle formatting of %p with an extra Kconfig
-Thread-Topic: [PATCH] tiny-printf: Handle formatting of %p with an extra
- Kconfig
-Thread-Index: AQHbp5sW1d25vB71o0K258WD0P1O67OaITQAgAEBz/A=
-Date: Wed, 9 Apr 2025 11:44:27 +0000
-Message-ID: <063948ec5d3845daae97d4b9bc97c901@dh-electronics.com>
-References: <20250407085614.126626-1-cniedermaier@dh-electronics.com>
- <20250408205826.GZ5495@bill-the-cat>
-In-Reply-To: <20250408205826.GZ5495@bill-the-cat>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=6bf1=W3=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744199773;
+ bh=1YM2FkvFs7Z4EaFjNPJwjY1JbTPIj5H8sEIZCSOYuio=;
+ b=BGxbvzy+IbKsIDklRfeik3n7IPY8nKIzqvSeIudkvd2zQxCv9Jk7cHOVcj47F0PZ0mvkHDlfU
+ dVyBxQsGiPmpujOQJdhxr0m1mghK7RHzELL9F70etVpQ5NfAhRhPrwj3rg/3oJeNiW2kzYjj1Xo
+ /ll/EHfIToNKXov/JnlGDodg6PKNHRAmd1owhD3FL0oW1/p2DFEugdMX4LTeeBI+xMjQwEPKe3e
+ kHWVcb/0k/jBLxy57WkGLAL/0cg4FPkZunftexq2QBplUlcvLuqhjqRTrQ3+j+2RwQl6B6Pt3tM
+ 5YrrxGnFrTJAsm8/d3zb962FeAz4Th/DsrGvZT9CkQUg==
+X-Forward-Email-ID: 67f6605b02fba845dcdf2e6f
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <b833ffb7-9a28-4d74-bcd0-9de43a859690@kwiboo.se>
+Date: Wed, 9 Apr 2025 13:56:08 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/10] rockchip: binman: Factor out arch and compression
+To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20250329150626.2879942-1-jonas@kwiboo.se>
+ <20250329150626.2879942-3-jonas@kwiboo.se>
+ <cc9d923d-2635-41d8-bdf9-9eab0fa78249@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <cc9d923d-2635-41d8-bdf9-9eab0fa78249@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,109 +76,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Tom Rini <trini@konsulko.com>
-Sent: Tuesday, April 8, 2025 10:58 PM
-> To: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> Cc: u-boot@lists.denx.de; Simon Glass <sjg@chromium.org>; Michael Walle
-> <mwalle@kernel.org>; Quentin Schulz <quentin.schulz@cherry.de>; Marek Vas=
-ut
-> <marex@denx.de>; Benedikt Spranger <b.spranger@linutronix.de>; Jerome For=
-issier
-> <jerome.forissier@linaro.org>; John Ogness <john.ogness@linutronix.de>; I=
-lias Apalodimas
-> <ilias.apalodimas@linaro.org>
-> Subject: Re: [PATCH] tiny-printf: Handle formatting of %p with an extra K=
-config
->=20
-> On Mon, Apr 07, 2025 at 10:56:14AM +0200, Christoph Niedermaier wrote:
->=20
->> The formatting with %pa / %pap behaves like %x, which results in an
->> incorrect value being output. To improve this, a new fine-tuning
->> Kconfig XPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
->> has been added. If it is enabled, the output of %pa / %pap should
->> be correct, and if it is disabled, the pointer formatting is
->> completely unsupported. In addition to indicate unsupported formatting,
->> '?' will be output. This allows enabling pointer formatting only
->> when needed. For SPL_NET and NET_LWIP it is selected by default.
->> Then it also supports the formatting with %pm, %pM and %pI4.
+Hi Quentin,
+
+On 2025-04-09 11:28, Quentin Schulz wrote:
+> Hi Jonas, Simon,
+> 
+> On 3/29/25 4:06 PM, Jonas Karlman wrote:
+>> From: Simon Glass <sjg@chromium.org>
 >>
->> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+>> Declare arch and compression at the top of the file to avoid needing
+>> ifdefs in every usage.
+>>
+>> Add a few comments to help with the remaining #ifdefs.
+>>
+>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 >> ---
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Michael Walle <mwalle@kernel.org>
->> Cc: Quentin Schulz <quentin.schulz@cherry.de>
->> Cc: Marek Vasut <marex@denx.de>
->> Cc: Benedikt Spranger <b.spranger@linutronix.de>
->> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->> Cc: John Ogness <john.ogness@linutronix.de>
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Changes in v4:
+>> - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
 >> ---
->>  Kconfig            |  1 +
->>  common/spl/Kconfig |  1 +
->>  lib/Kconfig        |  8 ++++++++
->>  lib/tiny-printf.c  | 45 +++++++++++++++++++--------------------------
->>  4 files changed, 29 insertions(+), 26 deletions(-)
+>>   arch/arm/dts/rockchip-u-boot.dtsi | 44 +++++++++++++++----------------
+>>   1 file changed, 22 insertions(+), 22 deletions(-)
 >>
->> diff --git a/Kconfig b/Kconfig
->> index 6379a454166..4d13717294c 100644
->> --- a/Kconfig
->> +++ b/Kconfig
->> @@ -757,6 +757,7 @@ config NET
->>
->>  config NET_LWIP
->>  	bool "Use lwIP for networking stack"
->> +	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF || T=
-PL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
->>  	imply NETDEVICES
->>  	help
->>  	  Include networking support based on the lwIP (lightweight IP)
->> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
->> index 94e118f8465..72736dbecf5 100644
->> --- a/common/spl/Kconfig
->> +++ b/common/spl/Kconfig
->> @@ -1096,6 +1096,7 @@ config SPL_DM_SPI_FLASH
->>  config SPL_NET
->>  	bool "Support networking"
->>  	depends on !NET_LWIP
->> +	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF || T=
-PL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
->>  	help
->>  	  Enable support for network devices (such as Ethernet) in SPL.
->>  	  This permits SPL to load U-Boot over a network link rather than
->> diff --git a/lib/Kconfig b/lib/Kconfig
->> index 1a683dea670..62e28d4a1f3 100644
->> --- a/lib/Kconfig
->> +++ b/lib/Kconfig
->> @@ -253,6 +253,14 @@ config VPL_USE_TINY_PRINTF
->>
->>  	  The supported format specifiers are %c, %s, %u/%d and %x.
->>
->> +config XPL_USE_TINY_PRINTF_POINTER_SUPPORT
->> +	bool "Extend tiny printf with the pointer formatting %p"
->> +	depends on SPL_USE_TINY_PRINTF || TPL_USE_TINY_PRINTF || VPL_USE_TINY_=
-PRINTF
->> +	help
->> +	  This option enables the formatting of pointers %p. It supports
->> +	  %p and %pa / %pap. If this option is selected by SPL_NET or NET_LWIP
->> +	  it also supports the formatting with %pm, %pM and %pI4.
->=20
-> This isn't quite what I'd like to see. I don't want to start using the
-> literal XPL namespace as that will lead to confusion down the line.
+>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+>> index e9ed1d4b5738..2b01dc660562 100644
+>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
+>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+>> @@ -5,6 +5,20 @@
+>>   
+>>   #include <config.h>
+>>   
+>> +#ifdef CONFIG_ARM64
+>> +#define ARCH	"arm64"
+>> +#else
+>> +#define ARCH	"arm"
+>> +#endif
+>> +
+> 
+> I would refrain from using ARCH here as it's something we already use to 
+> specify the architecture to build (e.g. make ARCH=arm64 CROSS_COMPILE=...).
+> 
+> Maybe FIT_ARCH?
 
-OK, in V2 I will only support SPL.
+sunxi-u-boot.dtsi is also using ARCH so I figured it was also safe here,
+we can change to FIT_ARCH for a v5.
 
-> Since we only have SPL_NET, I think we should name this symbol
-> SPL_USE_TINY_PRINTF_POINTER_SUPPORT, not ask about it (so bool without
-> "prompt text" following), and select from SPL_NET if
-> SPL_USE_TINY_PRINTF.
+> 
+>> +#if defined(CONFIG_SPL_GZIP)
+>> +#define COMP	"gzip"
+>> +#elif defined(CONFIG_SPL_LZMA)
+>> +#define COMP	"lzma"
+>> +#else
+>> +#define COMP	"none"
+>> +#endif
+>> +
+> 
+> This is specific to the U-Boot proper image node only, maybe we should 
+> have this constant named more appropriately, e.g. FIT_PROPER_COMP or 
+> something like that?
 
-Now you will get the output '?' when using formatting with %p or %pa.
-If someone wants to use the pointer support e.g. %pa in pinctrl-single.c
-and is restricted to use tiny printf, then it would be good to have
-the option to enable it manually and not be forced to enable SPL_NET or
-NET_LWIP to have the pointer support enabled. In this case, it makes
-sense to allow switching it on in menuconfig.
+Sounds good, will change in a v5.
 
-Regards
-Christoph
+> 
+> Reading the symbols also, I believe their help text is misleading or 
+> confusing (at least the _GZIP ones, _ZSTD seems okay).
+> 
+> Also, I'm wondering if it actually makes sense to force a specific 
+> U-Boot proper compression algorithm based on a symbol of what 
+> decompression algorithms are supported in U-Boot SPL. Like, why should 
+> gzip be picked if I also have lzma enabled? In any case, nothing related 
+> to this patch.
+
+Agree, use of compressed image should probably be enabled using a
+dedicated Kconfig symbol, something for a different series :-)
+
+> 
+>>   / {
+>>   	binman: binman {
+>>   		multiple-images;
+>> @@ -51,26 +65,12 @@
+>>   					description = "U-Boot";
+>>   					type = "standalone";
+>>   					os = "u-boot";
+>> -#ifdef CONFIG_ARM64
+>> -					arch = "arm64";
+>> -#else
+>> -					arch = "arm";
+>> -#endif
+>> -#if defined(CONFIG_SPL_GZIP)
+>> -					compression = "gzip";
+>> -#elif defined(CONFIG_SPL_LZMA)
+>> -					compression = "lzma";
+>> -#else
+>> -					compression = "none";
+>> -#endif
+>> +					arch = ARCH;
+>> +					compression = COMP;
+>>   					load = <CONFIG_TEXT_BASE>;
+>>   					entry = <CONFIG_TEXT_BASE>;
+>>   					u-boot-nodtb {
+>> -#if defined(CONFIG_SPL_GZIP)
+>> -					compress = "gzip";
+>> -#elif defined(CONFIG_SPL_LZMA)
+>> -					compress = "lzma";
+>> -#endif
+>> +					compress = COMP;
+>>   					};
+>>   #ifdef CONFIG_SPL_FIT_SIGNATURE
+>>   					hash {
+>> @@ -84,7 +84,7 @@
+>>   					fit,operation = "split-elf";
+>>   					description = "ARM Trusted Firmware";
+>>   					type = "firmware";
+>> -					arch = "arm64";
+>> +					arch = ARCH;
+>>   					os = "arm-trusted-firmware";
+>>   					compression = "none";
+>>   					fit,load;
+>> @@ -103,7 +103,7 @@
+>>   					fit,operation = "split-elf";
+>>   					description = "TEE";
+>>   					type = "tee";
+>> -					arch = "arm64";
+>> +					arch = ARCH;
+>>   					os = "tee";
+>>   					compression = "none";
+>>   					fit,load;
+>> @@ -119,11 +119,11 @@
+>>   					};
+>>   #endif
+>>   				};
+>> -#else
+>> +#else /* !CONFIG_ARM64 */
+>>   				op-tee {
+>>   					description = "OP-TEE";
+>>   					type = "tee";
+>> -					arch = "arm";
+>> +					arch = ARCH;
+>>   					os = "tee";
+>>   					compression = "none";
+>>   					load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
+> 
+> Wondering if we couldn't put some of the Aarch32 and Aarch64 OP-TEE OS 
+> node(s) in common?
+
+Sounds like a good idea to maybe put op-tee in a template, personally I
+never use op-tee so typically try to minimize any change/impact related
+to op-tee.
+
+The RK3506 does use op-tee so I may need to dig more into the op-tee
+parts in a future RK3506 enablement series, initially [1] was enough.
+Could look more into using a op-tee template in such future series.
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/3d683f3b717de010fffeece8712373892a599905
+
+> 
+> The change is fine, finding a more appropriate name for COMP and ARCH 
+> and it's all good.
+
+I will use different names in a v5.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
