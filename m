@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0501C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 18:26:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22306C369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 18:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2133D82A31;
-	Wed,  9 Apr 2025 20:26:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A5E3C838CC;
+	Wed,  9 Apr 2025 20:27:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="akIO2rwO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nadda02R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C455C838DD; Wed,  9 Apr 2025 20:26:11 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id E3E60838DD; Wed,  9 Apr 2025 20:27:34 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C752482A0D
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 20:26:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5597982A0D
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 20:27:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5499c5d9691so7958402e87.2
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 11:26:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=aenbacka@gmail.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6e8ec399427so57946406d6.2
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 11:27:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744223169; x=1744827969; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hfxHkYbUg0l+5XbHwSxVPnpi2aZIlxDAPnP65Exj28U=;
- b=akIO2rwObgF5wzX1T0v9HH4lMXWC/oGI28ZfOQ0xOJxo2l8ZJyitNrVBYkzH1298iP
- U6Np9i2WX7+z0rbEov8oRvOZu6lgScd5J2bb0m28pN4XmaDXh8n2bRkKzqOgaYrIokqp
- 1+BqWSb8KKmoVzSlOp1/rINBrDoYsPMPHUov8P5s6xOslY/ijDUpwugDqtcTtYUziddG
- ukigu9kGkgwCCjXVA+w9Ad99zv7+7pZAZYKPByUfIvX629qvrlB0gCrXPLUCdni9ZwE+
- 2V74/UrwhSWLt4k0YOwfFiD21daqCazb21jYdi3Wi+TYNo/rTTQ8bwQEHei27TSd/8mw
- 4vTg==
+ d=gmail.com; s=20230601; t=1744223251; x=1744828051; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rxS2mbBz7OKhDx9jT1+XTw1IfdNPBbrHav5yUCyDKZ8=;
+ b=nadda02RFva+qwJz5mP3opPBLBDtrv6NmguMPp/2QBBXreaMYCc9PcN3Ux3y9gRlK8
+ ZJcy/YbcE1SorER4cvHx1knk2IO15csMNnvljg6fI8zp1fHk2u7LKhBH3b4EXkhVWAER
+ uObnyzSADx41c8i1aVj6b5YJjR40SMHPf8SfCvvlMLT3LSKiu32A0fegh5Xz/9RTj9CZ
+ hD+obbuzZ9XZ+trBlsQ+0oFFjgbPMTByS1l5XvVZXtdvfd1KEnq8Nlfv2kG9kOwBIJOc
+ RSw9i2mfOB8Y2ZtwUQJxp8CLfdsh2DbjHgSVmteUtF0VW2ILBxmgvMjYLPvVbqueVRLG
+ im6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744223169; x=1744827969;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hfxHkYbUg0l+5XbHwSxVPnpi2aZIlxDAPnP65Exj28U=;
- b=ZaUgjcsJALtlHefg9AmjZ4yMApNNXNe+fdk1P6a13OJ7Y4Sbvjc0Rz3XR4ZSnRzlFl
- 3WeE1lc0wuas/V72W82Y+VFu/zLLQk1cQTHRrLh94wfWJcPnbTdKujIfZ2RyNTKK2gF9
- F0Lcg/bY9rQkeCbdwv1/bK500EkdRw+cGQJ7u7R0L6rX4zxiH0QxXz8kdyMb72B1sxJi
- QfHUyjDcC86h35xKEuns6tcHt4MQEdawoQK5t3m0ebwZ1m8mOQGvx/b2340WqMb6e6sA
- 2gI4/j3oqv3wZB/VrLKzKyFPBM3SvJ80YhbpVsZOLQWn/cZ/XuroxPhS7No8vcdOcwDR
- SWmQ==
-X-Gm-Message-State: AOJu0Yzi9fCkVEFGhlVaMzCQw+WtYbFGyNOQP9p0cmz7yds06C5EmbWe
- gwn3EcDbSW18Z7TMCru5jFgulqJTPxZe8JZUivpTZBHOZQxhCPxErhtJ7MMFeDbSxgOEtKcFkTq
- QT7sE+ccNGvr+jFXpxLwu9ngCUs0=
-X-Gm-Gg: ASbGncva6V+Xc6TzOB9YRtQe/ybpWpPN4I7dTRNt3/cX2H5erIu5TmoZc8zPXdOldlv
- acuxIn/Mfge8Nibu6ri27l/fwuwITXlaqXoGoRvAoYBkGI+LJIkFTS+b45bv47CQN3Ct6HgttjS
- g4HSjeKqrJCmqqJR/8T1vRC1alJTTqlnGDXxiJSpvXb8TBBy5AsMe6cnx92LhSLNcC
-X-Google-Smtp-Source: AGHT+IEU+AeGlEDR0wLEBAw6YPA0eXGRerMWypnndOXsrERN077J+B+CYqpXneutkldscRmdPaGpNTZ31JCaQfpUpgE=
-X-Received: by 2002:a05:6512:3e03:b0:54a:c514:76f0 with SMTP id
- 2adb3069b0e04-54c444d90b4mr1193390e87.14.1744223168920; Wed, 09 Apr 2025
- 11:26:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744223251; x=1744828051;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rxS2mbBz7OKhDx9jT1+XTw1IfdNPBbrHav5yUCyDKZ8=;
+ b=BkbRO/ez/lHL14dxT07vELgS0o0Qa0JJ2rCd72d4p5vvT2S3l7eCAKBBPYnwKljT7P
+ 8+NaIMU3SGRZY96aUAEL7y3nypS5K7ThrV0ddi02nDNKkz4EBRmcv94G1a/fPWlyBt0m
+ ig5mWtN25PsFlKTbP2NT8tb7vo0CqRnh4+RSrBXOiF8nSqT1JWhSAJOt827j7SmvAdRA
+ 4psCLr8XWEwi/FIMwn5LskzFL6NCZhL8hlvqhOHDxAz4/DVJgpEW+bS9oK8K0Z1a8cXx
+ eCd0qY4e/E0vrm2WzDoX+Q0NGq6LdguoKF87hy4tW4FZ1IGGtjGqa6UleIO5gbenq8J5
+ kRCw==
+X-Gm-Message-State: AOJu0YxyNWGcEYKZGNsuax4o/isMtOdVOlT18BhbA1zM4QIdeZdOqdbm
+ 2JvWoRVd7Wh7SFW5xsBedbFwL/sZr80XSntvGcbhNuzGxvlZXw2YPuhKylG329f9UvBIFdI7LhH
+ c6DhEWtfJgHQfA6/slfkj9uPgnnA=
+X-Gm-Gg: ASbGncs0mJ7Mv8HlV41rdhUppqrROaBKeaINJz5kblHVbRjDFdu4yvohQYQkCJR65ur
+ f6a60iKbHJ+AwRJsEwRfINqwWj3sxtqb156Ay1lRWJfLYJusvaRdAMBYPydzQUlzdd4Z6x5+MNv
+ Jukc2yQpeFgrwmrEbxlm8y8Q==
+X-Google-Smtp-Source: AGHT+IGjT82fBqhZiyLcRtnVSKGYU/po/LE3A+uNYi/yilHBV71NE+rIW9sboT8XgXo8S7font9j+kEBSTzzcSpu/Go=
+X-Received: by 2002:ad4:596f:0:b0:6e8:ea17:8587 with SMTP id
+ 6a1803df08f44-6f0dbc9778cmr59130956d6.42.1744223251106; Wed, 09 Apr 2025
+ 11:27:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250409180833.3812679-1-Mr.Bossman075@gmail.com>
-In-Reply-To: <20250409180833.3812679-1-Mr.Bossman075@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 9 Apr 2025 15:25:57 -0300
-X-Gm-Features: ATxdqUHqUEbC6gV1-T4v06IT8kzaupfgiPny3eDUJ0cZZtIb4pVcBlF9NV0ahIw
-Message-ID: <CAOMZO5Du6NLbu3Bx6EWMvSBMuGBfDd=-PNzqWk__xK_aq0wM_g@mail.gmail.com>
-Subject: Re: [PATCH v2] common: Add CONFIG_SKIP_RELOCATE
-To: Jesse Taube <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Paul Kocialkowski <contact@paulk.fr>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Greg Malysa <malysagreg@gmail.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Trevor Woerner <twoerner@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, 
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Richard Weinberger <richard@nod.at>, 
- Caleb Connolly <caleb.connolly@linaro.org>
+References: <CAOeqweT0o1-bFHNaoDURGYKGvx4OvqsgRpXwdWArdeGmBrnJyg@mail.gmail.com>
+ <CACr-zFBPZ6VZCQzHKW-AJDyUUpcLLJS=wSNVejnWTsT9tg9SNg@mail.gmail.com>
+In-Reply-To: <CACr-zFBPZ6VZCQzHKW-AJDyUUpcLLJS=wSNVejnWTsT9tg9SNg@mail.gmail.com>
+From: Andreas Enbacka <aenbacka@gmail.com>
+Date: Wed, 9 Apr 2025 21:27:20 +0300
+X-Gm-Features: ATxdqUHf-e1Jiag6T4ciKVVkld0ApO-BMRFqFnPsP7BnH8j7ZCW9cL5VY_LyMmw
+Message-ID: <CAOeqweTLZ6Uvo4x++2v2f9DtvDjoZx9rhLKYck3E9+hJ06b13A@mail.gmail.com>
+Subject: Re: Issue with booting FIT image using Yocto with raspberry pi cm4
+To: Christopher Obbard <christopher.obbard@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,16 +92,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 9, 2025 at 3:17=E2=80=AFPM Jesse Taube <mr.bossman075@gmail.com=
-> wrote:
->
-> Add a check for CONFIG_SKIP_RELOCATE in reserve_uboot to skip the
-> relocation of the U-Boot image.
-> CONFIG_SKIP_RELOCATE skips relocation of U-Boot to the end of RAM
-> allowing for systems that have extremely limited RAM to run U-Boot.
->
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Hello Christopher,
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Thanks for your suggestion, I tried to apply the patches (last one I had
+some issues with, as it did not apply directly on scarthgap branch). Still
+has similar boot issues
+with the fitImage (inflate error -3).
+
+Some questions:
+ - Is the default uboot load and entry address 0x00080000 reasonable (also
+load/entry for the kernel), or might it need adjustment?
+- Could it be that the CONFIG_SYS_BOOTM_LEN needs adjustment to handle the
+decompress kernel size?
+
+Many thanks,
+Andreas Enbacka
+
+
+On Wed, Apr 9, 2025 at 11:34=E2=80=AFAM Christopher Obbard <
+christopher.obbard@linaro.org> wrote:
+
+> Hi Andreas,
+>
+> Can you please try with this series from Simon?
+> https://lore.kernel.org/u-boot/20241220003447.2913443-1-sjg@chromium.org/
+> It solved booting mainline kernel on CM4 for me (albeit not with FIT
+> images).
+>
+>
+> Thanks,
+>
+> Chris
+>
+> On Tue, 8 Apr 2025 at 19:23, Andreas Enbacka <aenbacka@gmail.com> wrote:
+> >
+> > Hello everyone,
+> >
+> > I am working on building a custom image targeting the raspberry pi cm4
+> > using Yocto / meta-raspberrypi (scarthgap release) and u-boot.
+> >
+> > The kernel and rootfs booted without issues before switching to using f=
+it
+> > image. I build the yocto image with kernel type / class set to fitImage=
+.
+> > For building u-boot I have specified e.g., CONFIG_FIT=3Dy and similar
+> > parameters.
+> >
+> > When booting the board, u-boot loads the fitImage (around 10MB in size)
+> and
+> > shows the kernel / device tree blob info (kernel is gzip compressed).
+> > However, the process fails when u-boot executes "Uncompressing kernel..=
+",
+> > with Error: inflate() returned -3. This leads to a boot loop.
+> >
+> > I tried manually executing
+> > 'load mmc 0:1 ${kernel_addr_r} fitImage; bootm
+> > ${kernel_addr_r}#conf-bcm-2711-rpi-4-b.dtb', but it results in same
+> error.
+> >
+> > The kernel_addr_r is set as 0x00080000.
+> >
+> > Any information about this would be greatly appreciated.
+> >
+> > Best regards,
+> > Andreas Enbacka
+>
