@@ -4,63 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13D97C369A1
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:48:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C20C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 13:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8533C8327A;
-	Wed,  9 Apr 2025 14:47:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 143AD835FE;
+	Wed,  9 Apr 2025 15:05:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xGgjkiQk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="luSIIaiX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB41583710; Wed,  9 Apr 2025 14:47:58 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 231E4828F8
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 14:47:54 +0200 (CEST)
+ id AEFA083767; Wed,  9 Apr 2025 15:05:03 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A2A5835CD
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 15:05:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 539ClpZH1515216
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 9 Apr 2025 07:47:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744202871;
- bh=U4lBEePV+fNZ8xomn2KXnw0Q86tOqOk6zhEzD9wtD+Y=;
- h=From:To:CC:Subject:Date;
- b=xGgjkiQkKys0ANygkXaWFr022mOPbaOIYDPCwWmIk9N8rHxgHAzJeYo4SQDxz+Rko
- dhPJhBwUo/hmqrKx2lb23S5zkd0vN6WveiyhJhx76CEFDMzKiG+ifuDbSC7hOt3KfZ
- EepNsSVnQeQNxzwT/DTGDkuMvwZraB+8mEPUtZU0=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 539ClpOq085329
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 9 Apr 2025 07:47:51 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 9
- Apr 2025 07:47:51 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 9 Apr 2025 07:47:51 -0500
-Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 539Clor0061645;
- Wed, 9 Apr 2025 07:47:51 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v1] configs: set SPL_TEXT_BASE by default for k3 platforms
-Date: Wed, 9 Apr 2025 18:17:37 +0530
-Message-ID: <20250409124739.3843126-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5e673822f76so11135036a12.2
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 06:05:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744203901; x=1744808701; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cvhD64QUpcLBJiTrdya869Qg3fcLV/KwdwOTGMvB92s=;
+ b=luSIIaiXosOkaIlHgiR+4v/9Z+k9nZJbm718wqzQh8uTpiO6YcY263bbxvtIhny4NP
+ GDAmDMG0JYYLEnaKYhOsfL/Lk4FniLUDvOF//TulAYeL2G2sRIjNCrf72ADYWNVd+/1o
+ ujEaxjC2W9H7Okl8jGCnJRsAkiNoT4WswFxa8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744203901; x=1744808701;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cvhD64QUpcLBJiTrdya869Qg3fcLV/KwdwOTGMvB92s=;
+ b=j1VPepczfMXfRgFrnzPLrbkCqgTZyKpuHMfsTYnczgIZJJwdkzWrn4no8p8h+813FX
+ krwqILCrBS4WVDV3t8gm7mVdXN/LU1toBTZmURdQuzsz36ow4owSJoDX4V/UwPwm1RPk
+ Rlc9L62Q6LDvq9J1l8Qo2F9qqsPdWtHVd+ZfKL5w8iGCiaZJuPpL6IeVQcxvTADrwFGz
+ nkZDsim/dYjPxM0vCXNi/8ceLEg8ZErl3nZzMUU9sXrmHB7MonP+xy8LXXcvSy3dWS3U
+ EVhBVO+OYimjil7GUVR5NdYGHoPWEJhcKUWKXzW6ktKHaV3GXtdLp0PrBW5WMG2F5OUe
+ W1GA==
+X-Gm-Message-State: AOJu0YwbbPy+ZmYbrdQ10EekTH2jW79TmudsO44aeumlvyqE1le2+6aP
+ 4pnp3tIztkhbwD3LKS0D6y2H52bgauRvsBIksejlPjjOTAEqKIIRz2oIQUn+4eSz/xgmSN9Z0+0
+ mV10G/26vavG3RqIEEKs5FNJ8aBGg94+8XqXB
+X-Gm-Gg: ASbGncs70a2PckFKARtrhHxncFz3IUayyTVWbYpI+PmiZaZHYhmGBOo1p7EqstBbbLC
+ vOKXIuU3Fm0y8P82mcsJWRbnRjk2Bl2LXkIGzYcG8YN4B5jI6oOlxtIZnfttUHss+Evou9xh8Cz
+ jB8WsVS0DSZM5tQH5GKaSKzzo=
+X-Google-Smtp-Source: AGHT+IGS/9HMm6NePpf82iFl1mNyqZqF54BL6E6XqW1cE01QMogMSBWA1hHngc88pj0Tysr12V5laBv719+11g+mkcw=
+X-Received: by 2002:a17:907:b84:b0:ac3:bf36:80e2 with SMTP id
+ a640c23a62f3a-aca9b65efc5mr268373166b.20.1744203900395; Wed, 09 Apr 2025
+ 06:05:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250407105151.689453-1-sjg@chromium.org>
+ <20250408221324.GA5495@bill-the-cat>
+In-Reply-To: <20250408221324.GA5495@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 9 Apr 2025 07:04:48 -0600
+X-Gm-Features: ATxdqUGA5TABFd_mFez1jDIpGav47OFZHbwxABSawAJlOX0-PoSHH_WJalF0CFU
+Message-ID: <CAFLszTg7-yM0L8uuJyN7Jpsb1LbvOYO76cUWj+H719mfc97mMQ@mail.gmail.com>
+Subject: Re: [PATCH 0/5] patman: Separate gitutil fully
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Douglas Anderson <dianders@chromium.org>, 
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,251 +88,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SPL_TEXT_BASE is used as the load address for the main domain SPL on k3
-platforms.
+Hi Tom,
 
-Since the config value is the same for every board, this patch sets the
-value 0x80080000 as default for all ARCH_K3 and deletes the instances of
-SPL_TEXT_BASE in individual defconfigs.
+On Tue, 8 Apr 2025 at 16:13, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Apr 07, 2025 at 10:51:42PM +1200, Simon Glass wrote:
+>
+> >
+> > The gitutil module uses Patman's settings module, which is not allowed
+> > as it is supposed to be a separate package. This series ties up this
+> > dependency.
+> >
+> > This series depends on these two patches being applied:
+> >
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250227192735.406389-1-sjg@chromium.org/
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250328130225.2607974-1-sjg@chromium.org/
+> >
+> >
+> > Simon Glass (5):
+> >   patman: Untangle settings from gitutil
+> >   patman: Pass the alias dict into gitutil.build_email_list()
+> >   patman: Pass the alias dict into gitutil.email_patches()
+> >   patman: Pass aliases to Series.MakeCcFile()
+> >   patman: Update Series.ShowActions() to pass alias
+> >
+> >  tools/patman/control.py       | 11 ++++++++---
+> >  tools/patman/func_test.py     |  8 ++++----
+> >  tools/patman/series.py        | 32 ++++++++++++++++++++++----------
+> >  tools/u_boot_pylib/gitutil.py | 34 ++++++++++++++--------------------
+> >  4 files changed, 48 insertions(+), 37 deletions(-)
+>
+> I just want to reiterate my question / request to host these outside of
+> the U-Boot sources themselves so they can be managed (both in the sense
+> of U-Boot as user and as maintainer of sources) following normal Python
+> best practices? I'd be fine even with something under
+> https://source.denx.de/u-boot/<something>/patman, etc.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- common/spl/Kconfig                         | 1 +
- configs/am62ax_evm_a53_defconfig           | 1 -
- configs/am62px_evm_a53_defconfig           | 1 -
- configs/am62x_beagleplay_a53_defconfig     | 1 -
- configs/am62x_evm_a53_defconfig            | 1 -
- configs/am64x_evm_a53_defconfig            | 1 -
- configs/am65x_evm_a53_defconfig            | 1 -
- configs/iot2050_defconfig                  | 1 -
- configs/j7200_evm_a72_defconfig            | 1 -
- configs/j721e_beagleboneai64_a72_defconfig | 1 -
- configs/j721e_evm_a72_defconfig            | 1 -
- configs/j721s2_evm_a72_defconfig           | 1 -
- configs/j722s_evm_a53_defconfig            | 1 -
- configs/j784s4_evm_a72_defconfig           | 1 -
- configs/phycore_am62ax_a53_defconfig       | 1 -
- configs/phycore_am62x_a53_defconfig        | 1 -
- configs/phycore_am64x_a53_defconfig        | 1 -
- configs/verdin-am62_a53_defconfig          | 1 -
- 18 files changed, 1 insertion(+), 17 deletions(-)
+Yes I am working towards that. This series cleans up something missed
+in the last series.
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 94e118f8465..a84b96ebce4 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -271,6 +271,7 @@ config SPL_TEXT_BASE
- 	default 0x40200000 if OMAP34XX
- 	default 0x402F4000 if AM43XX
- 	default 0x402F0400 if AM33XX
-+	default 0x80080000 if ARCH_K3
- 	default 0x00908000 if ARCH_MX6
- 	default 0x00912000 if ARCH_MX7
- 	default 0x40301350 if OMAP54XX
-diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-index bf6e9639901..9f47b35ffde 100644
---- a/configs/am62ax_evm_a53_defconfig
-+++ b/configs/am62ax_evm_a53_defconfig
-@@ -15,7 +15,6 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-index 30b4a24ee9a..572e5d3dc4a 100644
---- a/configs/am62px_evm_a53_defconfig
-+++ b/configs/am62px_evm_a53_defconfig
-@@ -13,7 +13,6 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62p5-sk"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index a8a73166597..fd578df5792 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -11,7 +11,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-beagleplay"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-index 6527200259e..09a7bdd6544 100644
---- a/configs/am62x_evm_a53_defconfig
-+++ b/configs/am62x_evm_a53_defconfig
-@@ -12,7 +12,6 @@ CONFIG_SF_DEFAULT_SPEED=25000000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-sk"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-index a501f3f567e..b3266cc64c8 100644
---- a/configs/am64x_evm_a53_defconfig
-+++ b/configs/am64x_evm_a53_defconfig
-@@ -16,7 +16,6 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am642-evm"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
-index e9b736714a5..75c33a0d256 100644
---- a/configs/am65x_evm_a53_defconfig
-+++ b/configs/am65x_evm_a53_defconfig
-@@ -19,7 +19,6 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
-index 2d5f18e5bd4..bd441e83cd1 100644
---- a/configs/iot2050_defconfig
-+++ b/configs/iot2050_defconfig
-@@ -21,7 +21,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index ac5b10ba149..d2422b1a1bd 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -22,7 +22,6 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index a5d95975fb4..cca167aad2b 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-beagleboneai64"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 1ddb1965d8b..156d6567282 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-common-proc-board"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
-index ab943ebfab2..9783b02dd29 100644
---- a/configs/j721s2_evm_a72_defconfig
-+++ b/configs/j721s2_evm_a72_defconfig
-@@ -21,7 +21,6 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
-index 667d633c899..5225500fee7 100644
---- a/configs/j722s_evm_a53_defconfig
-+++ b/configs/j722s_evm_a53_defconfig
-@@ -19,7 +19,6 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index f058e3b1c00..c8b69c76edc 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j784s4-evm"
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
-index 421dd851506..45f9ad8c02e 100644
---- a/configs/phycore_am62ax_a53_defconfig
-+++ b/configs/phycore_am62ax_a53_defconfig
-@@ -24,7 +24,6 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index 0494fc408b7..6d0a9f35d4b 100644
---- a/configs/phycore_am62x_a53_defconfig
-+++ b/configs/phycore_am62x_a53_defconfig
-@@ -20,7 +20,6 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80c80000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-index f0c7ee26384..d12da5c3839 100644
---- a/configs/phycore_am64x_a53_defconfig
-+++ b/configs/phycore_am64x_a53_defconfig
-@@ -23,7 +23,6 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80a00000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
-index e7a88c9788d..10de0a2a39b 100644
---- a/configs/verdin-am62_a53_defconfig
-+++ b/configs/verdin-am62_a53_defconfig
-@@ -20,7 +20,6 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x80080000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80c80000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
--- 
-2.49.0
+After this series there is really just 'patchstream' left, which is
+used by buildman and patman. I haven't quite come to terms with the
+idea of moving it to u_boot_pylib yet.
 
+What are the best practices you are referring to?
+
+As to location, I can keep it in my tree and just delete it from yours
+if you like.
+
+Regards,
+Simon
