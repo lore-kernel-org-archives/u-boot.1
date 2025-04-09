@@ -4,45 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C761C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B624C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:13:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B8C88387E;
-	Wed,  9 Apr 2025 17:10:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 17C9183869;
+	Wed,  9 Apr 2025 17:13:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mmVfXlRR";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3AF18388A; Wed,  9 Apr 2025 17:10:48 +0200 (CEST)
-Received: from smtp-8fa8.mail.infomaniak.ch (smtp-8fa8.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::8fa8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 264FC8386B; Wed,  9 Apr 2025 17:13:46 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFE558386F
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:10:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A25B78381D
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:13:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZXmbj4JyLz89b;
- Wed,  9 Apr 2025 17:10:41 +0200 (CEST)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4ZXmbj1Xf6z3dG; Wed,  9 Apr 2025 17:10:41 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 09 Apr 2025 17:10:25 +0200
-Subject: [PATCH RFC 1/4] boot/fit: use constants for property strings
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-39c14016868so6178789f8f.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 08:13:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744211623; x=1744816423; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lmONFEvZuZE/YCij6bbUG0UlD+f5LnS0xBeZAe4z8Qg=;
+ b=mmVfXlRRaowzaYMQUuBND/FH/WUoqpb0qbN+HJiv+8H6xhxQqplqsxDJzDq/U3Nqu0
+ zTcFkNyHlo5lZSm2DmYMn/kN4QvxggTwRLTavIBXtJSMcsaLf7I/+R+R/UbL9yz7iVqo
+ hP7OoJGt5fp0j9sFuNnOySnsxmlK4FOqX9hE/72D3vp/m1rX7Egp0WyZNgzgNY8Q8ZYw
+ gc+nTcNjmb643rjJJGG9MS0IZa8TiJgb6Dpyw8S64WK4iJIy14BnTCv9HGmoRkXwmI8y
+ JZqgSnWa0e4olkR3edgwa78/uM6NpypVvSHxwjf8UYDhtnVURR+nzhbsxHxzVV5qFY/2
+ oUTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744211623; x=1744816423;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=lmONFEvZuZE/YCij6bbUG0UlD+f5LnS0xBeZAe4z8Qg=;
+ b=HZduEF5gcRjkD4XplnFjdChLWbDe7wdglV6WJlpbh9gv9KeELuxL6yhv6Y7F3QfXAG
+ TM621UOWG3LzLLtLoTRME1zDtYbb786VhvDEGyq6rCfNfnreqy1a9b65lVEJUm34T39D
+ K2thSsRBbAqUoYmB2Inmsin1/yQN9gSRysOjq+XSCgbqNHcGncVu9CiGcxqL9zRr4/EN
+ VZw4mR7GqZnXj7/NeE1aB8rKQzGuprN3D+zSAeI3qCtqnHb7HeStTQu/5l2h+zp14y9/
+ UeWdiUcvioJB/BBjTcMAcbjzWiqsooQ1MLvtEUmTvVdjHj1DINs427/kU4A/TdrF28ef
+ Evqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVsu6ABGqSrN5MrCGSq5VkO2b5lSm6LnSB64KKLmwNAUtObW2njaUqI/UX65W2Fc0VtEV5AtKo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJx5KeOm0N9vOii/kV5Ugl7t8ljUgrl8sjLPN4FhLt5jg6iUl4
+ 1Yqn76Cf79/46JhZesJdoOstuPRAloroQWHSE9hpuZSDOP9w1J5e13vYM81DTQc=
+X-Gm-Gg: ASbGncsIu+8oFJEU4sBxemLuDgTj6xOgywag6lEDP+E8kIg6BmVTjteJ0npYBKHFdhJ
+ qbJb1fpYo6z5VaHsGjGLyi58SBtutDfrX15hkON8dNRlKMfA7tGwcUgOJlZd/pQfKEt5nCOKH8f
+ ris4wSn3dxgJaI0KzW0ZHQRC/5q6S99Zng5EAw+DS8ivzi+Vy1TIUDP+bYK8d/V4T8Cq97yN9DI
+ 2x7lDi7d+uz8NtgESN0IvpBa/ALWJfeNrhpnvRxIUeQmDxS5/vwk6cVVsRSfXvua3Fej/9RjMey
+ Dp4b3oivAsf9mV8lpuV3E31tZ0V3ZOBwvl9PHAo+wbz3sToBEmIPBEwInKq+NsC6Duiv
+X-Google-Smtp-Source: AGHT+IH2XtEV+DSTSH8s2jeCtDg3BXJ0//BUjdrXsYuiqO8nhRXlGRAyYDekn3ZrQCoB7lNeoFsGKg==
+X-Received: by 2002:a5d:5f88:0:b0:390:eb50:37c3 with SMTP id
+ ffacd0b85a97d-39d87ab54acmr3212519f8f.27.1744211622973; 
+ Wed, 09 Apr 2025 08:13:42 -0700 (PDT)
+Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f2338d6ebsm20199415e9.2.2025.04.09.08.13.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Apr 2025 08:13:42 -0700 (PDT)
+Message-ID: <ea7bc45b-7b2f-424e-a07a-baca8552d81e@linaro.org>
+Date: Wed, 9 Apr 2025 17:13:41 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] clk: stub: add qcom,glink-smd-rpm
+To: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250407175617.3494506-1-jorge.ramirez@oss.qualcomm.com>
+ <20250407175617.3494506-4-jorge.ramirez@oss.qualcomm.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250407175617.3494506-4-jorge.ramirez@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250409-fit-compat-v1-1-56df89ef486a@cherry.de>
-References: <20250409-fit-compat-v1-0-56df89ef486a@cherry.de>
-In-Reply-To: <20250409-fit-compat-v1-0-56df89ef486a@cherry.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, 
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,51 +102,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Some properties have their string represented in include/image.h via
-constants, so let's use those constants instead of using a hardcoded
-string.
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- boot/common_fit.c | 4 ++--
- boot/image-fit.c  | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On 4/7/25 19:56, Jorge Ramirez-Ortiz wrote:
+> Add support for the resource power manager clocks over SMD/GLINK to be
+> stubbed.
+> 
+> Signed-off-by: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-diff --git a/boot/common_fit.c b/boot/common_fit.c
-index a2f9b8d83c3b66a39ae0e172445d162f5146578a..fd434fe28e1908596365c9d31892a73ec97c36e3 100644
---- a/boot/common_fit.c
-+++ b/boot/common_fit.c
-@@ -46,12 +46,12 @@ int fit_find_config_node(const void *fdt)
- 		return -EINVAL;
- 	}
- 
--	dflt_conf_name = fdt_getprop(fdt, conf, "default", &len);
-+	dflt_conf_name = fdt_getprop(fdt, conf, FIT_DEFAULT_PROP, &len);
- 
- 	for (node = fdt_first_subnode(fdt, conf);
- 	     node >= 0;
- 	     node = fdt_next_subnode(fdt, node)) {
--		name = fdt_getprop(fdt, node, "description", &len);
-+		name = fdt_getprop(fdt, node, FIT_DESC_PROP, &len);
- 		if (!name) {
- #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
- 			printf("%s: Missing FDT description in DTB\n",
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 41ab1f552b04d6a5731625ce8c03e17730f8d0cd..7c822a39fd85554a716d9cada54cbaf91b3ec24a 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -1760,7 +1760,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 			fdt = fit;		  /* search in FIT image */
- 			compat_noffset = noffset; /* search under config node */
- 		} else {	/* Otherwise extract it from the kernel FDT. */
--			kfdt_name = fdt_getprop(fit, noffset, "fdt", &len);
-+			kfdt_name = fdt_getprop(fit, noffset, FIT_FDT_PROP, &len);
- 			if (!kfdt_name) {
- 				debug("No fdt property found.\n");
- 				continue;
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+Thanks!> ---
+>   drivers/clk/clk-stub.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+> index 5fbbb07b7f7..38ed0d094fa 100644
+> --- a/drivers/clk/clk-stub.c
+> +++ b/drivers/clk/clk-stub.c
+> @@ -14,7 +14,7 @@
+>   static const struct udevice_id nop_parent_ids[] = {
+>   	{ .compatible = "qcom,rpm-proc" },
+>   	{ .compatible = "qcom,glink-rpm" },
+> -	{ .compatible = "qcom,rpm-sm6115" },
+> +	{ .compatible = "qcom,glink-smd-rpm" },
+>   	{ }
+>   };
+>   
 
 -- 
-2.49.0
+Caleb (they/them)
 
