@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E02C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 13:46:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C71BC369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 931248382C;
-	Wed,  9 Apr 2025 15:46:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E0267829FC;
+	Wed,  9 Apr 2025 16:15:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t+78TccI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GPm4C3QV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C63F8381D; Wed,  9 Apr 2025 15:46:14 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id DA06D83710; Wed,  9 Apr 2025 16:15:21 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB4E18382E
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 15:46:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 613A1829D4
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-39141ffa9fcso7395421f8f.0
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 06:46:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-2cca475546fso2690069fac.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 07:15:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744206368; x=1744811168; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NMExAzT/jKtFN52OYE1vuQ4aVs+B2q41A7p3rvG6e3U=;
- b=t+78TccIeCvn9r2+GbahwqJdSlGHldTbhJnNi6dV392Cx5wpz864VbxWNasj+hQxPQ
- AfW1teIKALh/iGxfrgkP+F/RlNzCvBj4bFbHgTKM4rSelNlrTOnEAugbFhoFH6QFUNSI
- rKPSeSkjbE6GNPKm74xOjWd8XHloejq07mxla2UKXMI2ZsV+SM590PlyFK72ObJuPolE
- kCbqvU66q9LcSPRPRY44M0ckHEoAT2qdEySHaQStGjQK3B2AIhapG7u0R5F2DMAnChDw
- t8gfV2qdJ2HHiqqz3nRQ89Fp6CY4sTlXW156TaHdL9CEI3SMcXRVqFxYAQmuUf9GlpOR
- 78aA==
+ d=konsulko.com; s=google; t=1744208118; x=1744812918; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=oW4tPKvcscaSRmIRFzx2+JkzFkJa36ECtoitXap3bZY=;
+ b=GPm4C3QV7JDbmLmoH1bGywbl98xluNhoxGj8K999rvjCdtmxqu65ySfbyJzlRKCrNl
+ /BhQ8b6I2sQ6BfEv/v2AuMdB3oviPtLbWG/401B/guMjLoH4x1cJmuAGzSypqI33lcqf
+ mDFl3c6gdlSdSezGTmv97g/2Al5IF+DkGldEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744206368; x=1744811168;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NMExAzT/jKtFN52OYE1vuQ4aVs+B2q41A7p3rvG6e3U=;
- b=hS5bZoBsKkafQ07KC1KQgiP6+RarQZIfmW1po9zU4HlMcf4Eq7IAZhQ2dLDklmP3N+
- dgP+CZs8RLseY2Paotd+tiZ+L+GEqwqPQiYHdkG5x/41vag1E12fm3uDg4NpfxgUmgye
- WUMQjYzLhMzis2ChXeJYGSqMlINvdWJfv3G4M4k35ZE8x/7ptt0pBhUXr3quxT/3vnZB
- aqS/S4xqjNclg+QXc75KaZ6bxjQTLOx9zywz7RvqsHsewZsWpkRtY0qAe1bGgakGAtFW
- sLoktEwNzCRszTX1yBI2ALZd97uMLIL9yF4SHyZJifnDO/9VvukAaeasIP8J2irht+9d
- gYmw==
+ d=1e100.net; s=20230601; t=1744208118; x=1744812918;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oW4tPKvcscaSRmIRFzx2+JkzFkJa36ECtoitXap3bZY=;
+ b=vSnIMRt+rsos81yAtncDzFyw6U7wx4hbi/3Y1I4lLC5Ujq9538Dko4O45f6g7PzhM2
+ 0682sqKAtOy+3YXG/CVdsqp0vORT74bMlnvAf9MTRGts7hbxGbVQ4hQOz0/YJ8yLaXDO
+ y8PcL7aRBiUvs/BNmpxJiK8H8KUNujOdBZ9R53xhdX/vxZRKDvJJLPSF2Nrhd25ad1CW
+ 40w/rCG1dkNUoa3dVHV7p9INNGXsADbEKMRC93ATCJihd3+PLBwszMqWMM/UBtgbKaJO
+ y+rffDmukzvlp+rA06lDMZ9VK0W7+XN0yV6Pb+mYzwFYorvtbI3Kco/ESkVTL/hohlLg
+ Efig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUf36tYWblo880fWPTLVwW07H6GJEJAzBCHmWaj5Q5Tri/+2gdE6kqOaLCvYGq+x595Qzp+Jv0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwiA3uu2dvJ+ZntuIhW33K+SIpg40HtAsaM7jUc+nV0qvywP3e+
- B8vyptl7MjRkvTOAraBgb0+6D+gAKl7UgTWWU0L7+J5QKJentZkhiiJi8TKXpQc=
-X-Gm-Gg: ASbGncujrB4k0AHM1qpxFKHcLilZRDrCNscslxJL+BUGRmdKEEIShjN1/QO0OOE0TmO
- axaePXt+7Bhz/zvAfC31BzGQN73CXTJEPW8b4JNor7n3dvhPrmn+tmZ2jIhbUwt5qcqoADN4xb2
- 4vBEJVBGAtXJ1BRBUelhW97PQYdP7C+hZax3DX/O96a3gIJJBsFnKV9G20Nax9vat40Jz9s8yY/
- fZTjB2N78jGlANlu0pLhZztMxXS2G8URZYChruSJ875Lj1qDc+M3bVr+DD0rdZ54eecvnnoNLoa
- X/MPxbptvI4FiWhRk/pR3LNz7qJSIMvJH3M1MIvUHtQXVTMWueiBDJJxfkKNbUdc0NY/
-X-Google-Smtp-Source: AGHT+IEStYiATthJzejTsCCN5UgoezK3fowgec/HZjbDAcRO1yZyumu7JCyopJ+3dtw4+2BUxoIoKw==
-X-Received: by 2002:a05:6000:2404:b0:39c:1424:1cb3 with SMTP id
- ffacd0b85a97d-39d87aa1b4cmr3087259f8f.5.1744206368187; 
- Wed, 09 Apr 2025 06:46:08 -0700 (PDT)
-Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f2066d0fcsm20415765e9.19.2025.04.09.06.46.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 06:46:07 -0700 (PDT)
-Message-ID: <0974a2c7-fbe0-4195-ad24-36e815ac4080@linaro.org>
-Date: Wed, 9 Apr 2025 15:46:06 +0200
+ AJvYcCWoPXYhJHNT5Z84WFHIjXON+F/sxfMs2YNDTVwPHKY8k09Xtk/OGA8Skepw3i7e803oTitdECc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwM02ikl+p2UoZU9y/TZAQMXrKqNR7Fnob+vSWW2J64Bo5u8zvj
+ 2oqXY5LU/Cu1rkI8VW1997HxJ3mzUvDngq5CwNDDRCmyey4V7uc0pX01xRr3mlo=
+X-Gm-Gg: ASbGncuFgwDxsqzO7x0yizcdeLxukPsBbnprNhihDXJLbOd4mgZeJYTHm1j1q8UxKbt
+ CTYHJ35CCahXYGwdzB23sSyqRmaPRxNGEvDpLDDQmvwypcjMJVqqW8RNJreelpfszxf7ssywc+o
+ hSofRKXjRzM6H9ESoRmwyGG8VM0DKz/TCd0Qc9YmpR2zDs6pChdcdXkU3+DhLqmue8tBM9w3clF
+ 0Dp3JY70nAXoxKamS/738wiVxFNEEwW3OAo9sU2bySL+B5fO9zmNUPimNQU92eFBs69G/u/IPC2
+ JFPjF11HLRpE8qg4HJ56d6AlB8B+OddUAZHPiR45EA0FyfDy59FGUVZCy9jIFKZnW4umspQNcO8
+ LtQG5dteaouD3
+X-Google-Smtp-Source: AGHT+IGgVEWrenip2lVtoJyCrNkeiCDVxxLk07Qe+QPzTr6GutNnLWc4upB09BodLRhvVMsab0zsiQ==
+X-Received: by 2002:a05:6871:a98b:b0:29e:1cd8:4a0f with SMTP id
+ 586e51a60fabf-2d08dded39cmr1700044fac.17.1744208117779; 
+ Wed, 09 Apr 2025 07:15:17 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2d096950929sm233305fac.13.2025.04.09.07.15.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 07:15:17 -0700 (PDT)
+Date: Wed, 9 Apr 2025 08:15:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 05/18] net/net: fix switch/case fallthrough annotations
+Message-ID: <20250409141514.GC5495@bill-the-cat>
+References: <20250327153313.2105227-1-andre.przywara@arm.com>
+ <20250327153313.2105227-6-andre.przywara@arm.com>
+ <20250408222918.GA1475540@bill-the-cat>
+ <20250409005347.04003b4b@minigeek.lan>
+ <20250409014646.GB5495@bill-the-cat>
+ <20250409114137.181e39d5@donnerap.manchester.arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Community meeting April 8th 2025 (was: Re: [ANN] U-Boot v2025.04
- released)
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-References: <20250407220011.GS5495@bill-the-cat>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250407220011.GS5495@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6FHprQOm6uRkiLHs"
+Content-Disposition: inline
+In-Reply-To: <20250409114137.181e39d5@donnerap.manchester.arm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,120 +106,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Everyone,
 
-On 4/8/25 00:00, Tom Rini wrote:
-> Hey all,
-> 
-> It's release day and here's v2025.04. We had some last minute issues
-> reported, but then also resolved.  I want to thank everyone that's
-> contributed to this release, not just in terms of code, but
-> documentation, testing and otherwise ensuring things go as smoothly as
-> they can.
-> 
-> In terms of a changelog,
-> git log --merges v2025.04-rc5..v2025.04
-> contains what I've pulled since the last RC or:
-> git log --merges v2025.01..v2025.04
-> for changes since the last full release. As always, more details in
-> pull requests (or the tags referenced by them) will result in more
-> details here.
-> 
-> As is becoming reguarly scheduled, we have a community meeting tomorrow
-> (for me anyhow). The meeting details itself are:
-> https://meet.google.com/btj-wgcg-euw
-> April 7th, 2025. 9am (GMT -06:00)
-> 
-> To join by phone:
-> https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
-> 
-> The meeting can be added to your calendar via the link on
-> https://www.u-boot.org/
+--6FHprQOm6uRkiLHs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Apr 09, 2025 at 11:41:37AM +0100, Andre Przywara wrote:
+> On Tue, 8 Apr 2025 19:46:46 -0600
+> Tom Rini <trini@konsulko.com> wrote:
+>=20
+> Hi Tom,
+>=20
+> > On Wed, Apr 09, 2025 at 12:53:47AM +0100, Andre Przywara wrote:
+> > > On Tue, 8 Apr 2025 16:29:18 -0600
+> > > Tom Rini <trini@konsulko.com> wrote:
+> > >=20
+> > > Hi Tom,
+> > >=20
+> > > thanks for staying on this!
+> > >  =20
+> > > > On Thu, Mar 27, 2025 at 03:33:00PM +0000, Andre Przywara wrote:
+> > > >  =20
+> > > > > The net_check_prereq() routine in the generic network handling co=
+de
+> > > > > mixes case: labels with #ifdef's, which makes predicting fallthro=
+ugh
+> > > > > situations tricky. We had two "fall through" comments in the code=
+, but
+> > > > > at the wrong places.
+> > > > >=20
+> > > > > Remove one unneeded comment (no annotations necessary between jus=
+t empty
+> > > > > labels), and move one other instance to the right place (before a=
+ny
+> > > > > label sequence).
+> > > > > This makes GCC's implicit fallthrough checker happy.
+> > > > >=20
+> > > > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > > > ---
+> > > > >  net/net.c | 3 +--
+> > > > >  1 file changed, 1 insertion(+), 2 deletions(-)
+> > > > >=20
+> > > > > diff --git a/net/net.c b/net/net.c
+> > > > > index 5219367e391..f191f16357c 100644
+> > > > > --- a/net/net.c
+> > > > > +++ b/net/net.c
+> > > > > @@ -1525,7 +1525,6 @@ static int net_check_prereq(enum proto_t pr=
+otocol)
+> > > > >  #if defined(CONFIG_CMD_NFS)
+> > > > >  	case NFS:
+> > > > >  #endif
+> > > > > -		/* Fall through */
+> > > > >  	case TFTPGET:
+> > > > >  	case TFTPPUT:
+> > > > >  		if (IS_ENABLED(CONFIG_IPV6) && use_ip6) {
+> > > > > @@ -1539,11 +1538,11 @@ static int net_check_prereq(enum proto_t =
+protocol)
+> > > > >  			puts("*** ERROR: `serverip' not set\n");
+> > > > >  			return 1;
+> > > > >  		}
+> > > > > +		fallthrough;
+> > > > >  #if	defined(CONFIG_CMD_PING) || \
+> > > > >  	defined(CONFIG_CMD_DNS) || defined(CONFIG_PROT_UDP)
+> > > > >  common:
+> > > > >  #endif
+> > > > > -		/* Fall through */
+> > > > > =20
+> > > > >  	case NETCONS:
+> > > > >  	case FASTBOOT_UDP:   =20
+> > > >=20
+> > > > So this one is harder than it looks. With clang, we cannot seemingly
+> > > > have:
+> > > > 	fallthrough;
+> > > > #if defined(CONFIG_CMD_PING) || \
+> > > >     defined(CONFIG_CMD_DNS) || defined(CONFIG_PROT_UDP)
+> > > > common:
+> > > > #endif
+> > > >=20
+> > > > And gcc was failing on:
+> > > > 	}
+> > > > #if defined(CONFIG_CMD_PING) || \
+> > > >     defined(CONFIG_CMD_DNS) || defined(CONFIG_PROT_UDP)
+> > > > common:
+> > > > #endif
+> > > > 	fallthrough; =20
+> > >=20
+> > > Yes, later stages of the CI told me so already ;-)
+> > >  =20
+> > > > Maybe we can move the label to inside the next set of cases, and th=
+en
+> > > > also add CONFIG_CMD_PING6 to the checks, as that also has 'goto com=
+mon;' =20
+> > >=20
+> > > I found some other solution: dropping the #if's around the common:
+> > > label, then marking this with __maybe_unused instead. Seems to work f=
+or
+> > > both GCC and clang, and makes the code even more readable.
+> > >=20
+> > > Will send this among the other gazillion fixes I meanwhile added in a
+> > > v2, to a mailbox near you.
+> > > If you can't wait: sunxi/fallthrough has the bits, though not yet spl=
+it
+> > > up and without commit messages. Still not passing all checks, but the
+> > > CI builds seem to stop early, before revealing all issues, so this is=
+ a
+> > > piecemeal job :-( =20
+> >=20
+> > I thought I had tried what you suggest but maybe didn't quite get things
+> > aligned right (but I also modified sandbox so it would trigger the
+> > unused warning). That said, I'm applying most of v1 now'ish, and have
+> > only stopped as part of trying to narrow down the seemingly random
+> > evb-ast2600 CI failure.
+>=20
+> Can you hold back with this patch here for now? I will send my new version
+> of this one later, which passes more CI. I didn't find more overlaps
+> between this and my new series, so I wonder if you could apply what you
+> think is ready from this one (definitely minus this patch, but maybe
+> others), and then I send another series with new fixes plus what's left
+> from this one. This would avoid me sending a v2 of this just because of
+> this one patch.
 
-Here are the notes from the meeting, please feel free to clarify any 
-points I might have missed or gotten wrong. Thanks Tom for chairing.
+I'm planning on applying everything except this one, and 18/18
+currently, so that works yes?
 
-# U-Boot Community meeting April 8 2025
+--=20
+Tom
 
-* Tom intro: next merged into master, small delay
-* Heinrich: ACPI has regular regressions due to lack of testing in CI
-   * tom proposes adding another QEMU defconfig with ACPI enabled
-* Heinrich: Ubuntu images being used in CI are getting too old
-   * tom: has a patch to update to GCC 14
-   * tom: opened an issue, Simon to investigate (link?)
-   * tom: already tested new GCC/LLVM, no new warnings.
-   * tom: will rebuild docker container this week, adding byacc for 
-binman to enable IMX8 testing
+--6FHprQOm6uRkiLHs
+Content-Type: application/pgp-signature; name="signature.asc"
 
-* state of Simons patches re: bootflow/EFI/standard boot
-   * issue with standard boot that the EFI bootmgr option is always at 
-the top
-   * heinrich: proposes a new virtual device that can be ordered anywhere
-   * heinrich will investigate in the next few weeks
+-----BEGIN PGP SIGNATURE-----
 
-* tom: modernising the Makefile
-   * tom: which platforms are still using old stuff? will consider 
-disabling or removing boards
-   * tom: e.g. watchdog (deadline 2019), legacy i2c (deadline 2022.04)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf2gO4ACgkQFHw5/5Y0
+tywMAgwAgJqbVTKbl0Go1f0AhhWWpASOPZXqWlJ3Lt4PrBkWtPu/KsLaGlS+SfLj
+D5bd0p0/DH3G5U1zuUJz5j6b1DDKgLMRXZGsorwTS8FINWAjUg9zAmjxzJcvG6Bj
+TI8HEKcNVHLg5c5BE0/PXeUxCzXw0AwdDSzrrYzhHa2md8eXh7GTioWDB33wQgIc
+iIBek3lOI5ZplKyYlufe7iUsfpfbgXSkkex8/CKFViV50UTivTXDr+5cp9E+u+dg
+zUOLnTGv/V5EGmXFgFLIWnwP5QVnhGtYjo0YO4inrTYTST9/LS6iu7cgyNDjoNNF
+VAuqYJ87Ew+zLL5OPd/qN5W+nai95cpqX939mpXRBrqTZHQwgm0+bRy6zE654xMX
+OB1h3PiNTPFfaSAotHerUFUgrp2sDyK4L0vrmZa+LNdCN5aikiSdZtkIG4tNDKaA
+o/muI02sDhqZSaDEdYRCXwZ7iO4vyso9MA/AcSz1ChZnYz+fgELZLVANSYWUlV98
+6qdjr7fG
+=NCBj
+-----END PGP SIGNATURE-----
 
-* caleb: FdtFile revival
-   * context: https://github.com/systemd/systemd/issues/36835
-   * would enable picking DTB matching your kernel version
-   * heinrich: robh thinks we should match on compatible instead. Simon 
-also agrees
-   * heinrich: fine with adding this patch
-   * simon: significant harm - compatible is the only right way to 
-match, anything else is a workaround
-   * caleb/tom: agrees in theory, but in practise this isn't what we 
-witness. Having a compressed blob of all DTs would be ideal, and 
-compresses well, but nobody is doing this..
-   * heinrich: U-Boot is also not the only firmware, we can't expect 
-EDK2 to start shipping this.
-   * Ilias: Agrees, best of the bad options
-   * simon: what would be the right solution?
-     * caleb: have the kernel emit a file with compatible -> fdtfile 
-lookups since that's faster to read
-   * Bryan Brattlof: what about overlays?
-     * caleb: probably you have a more vertically integrated system
-     * bryan: customers want yocto and a redhat image that works ootb
-
-* tom/simon: bloblist:
-   * tom: if bloblist is enabled it MUST have the DT, set the "mandatory 
-passage flag"
-   * simon: OF_BLOBLIST means DT is in bloblist
-   * tom: it's a bad idea to divorce standard passage handoff from 
-bloblist, but if it eases some issues for now and we can revisit in a 
-~year that might be best
-   * ilias: we have discussed this before. doesn't think OF_BLOBLIST 
-should exist, because the info is discoverable at runtime.
-   * ilias: we have a standard (firmware handoff), why do we need 
-another implementation?
-     * tom: hoping to reconcile over time between fw handoff and bloblist
-   * tom: to re-iterate what Simon said: dt should be either in 
-bloblist, embedded, or discovered through board specific means. Need to 
-avoid conflating consuming bloblist and creating bloblist (e.g. in SPL).
-     * tom: in SPL, if we don't have a bloblist, we don't need a config 
-option.
-     * tom: we should remove BLOBLIST_FIXED
-   * simon: we can get rid of BLOBLIST_FIXED if we have a register 
-hand-off firmware (x86)
-   * out of time... Tom ok to add OF_BLOBLIST if we remove 
-BLOBLIST_FIXED. Hopes that in ~1 year we'll all agree that we want the 
-same thing...
-
-
-> 
-> The merge window is formally open again. I will be merging next in to
-> master shortly. The v2025.07 release is scheduled for Monday, July 7th,
-> 2025 and the merge window will close and -rc1 will be released on the
-> 28th of April, and then the next window will open with -rc2, two weeks
-> later. The keen-eyed among you might notice that I fixed some incorrect
-> -rc1 dates in the future planning section, including for this cycle.
-> 
-> Thanks all!
-> 
-
--- 
-Caleb (they/them)
-
+--6FHprQOm6uRkiLHs--
