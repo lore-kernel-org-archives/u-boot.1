@@ -4,95 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D85EC369A1
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:30:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EAFC36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:30:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BDDD836B2;
-	Wed,  9 Apr 2025 16:30:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4D6358384C;
+	Wed,  9 Apr 2025 16:30:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fxe6SLPo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gxqaZQPJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12E2C82140; Wed,  9 Apr 2025 16:30:01 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id DEE6F8384B; Wed,  9 Apr 2025 16:30:17 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B13C082140
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:29:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BA4A83855
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-ac2a9a74d9cso937236166b.1
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 07:29:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-4003b22c2f4so4363301b6e.0
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 07:30:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744208998; x=1744813798; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wjacCszumv5o9II0dYfYDlkC6ZCqsPU7mvapGNdJu7w=;
- b=fxe6SLPoN2UWOglFLV6E8LREIPDkBlQ5RTv7hXMIGi169bPl0Xrq2pDPPA0Mf2d9O2
- UizlLnmymt9LvhMmWdA+vqTQ/az24YeRaooljOtMer47xNB9UD00bwQEpmYWzbCwkxEZ
- 1FpIGczZXwAg9fX0BV+CBLZ3XYsYIs/e4JEg7cqsZvwmR1445nB8K1fv3L/G6rb6mNdu
- BYM3kxyawIrgdzxrq/hveWH/uPlIczVyM9sZUh84X+jfmRGbkA+9h2ZKpRvDnOMPJ/m+
- 0XrmhqnQKb9XMSCNltqP7rJHJJ3uSvHLTJy9wx2NU9z9YsJIu7MulDBBmoEiLhDxM302
- d//A==
+ d=konsulko.com; s=google; t=1744209012; x=1744813812; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=U5286chN3DIAwIUx4LI72h6J2pBZOkaUmvy5HlVv4AU=;
+ b=gxqaZQPJLQ7r/mDT1v+CiSi2tfCnuDZqj/uuTJEkqB0tO87IdaVuunEY4jMjKF+ngj
+ YpF7DZCFgEkHfmF5HzQCE37o6Rb2UVTsr4bRn/9chnqij1Ow9UTJVdTPYq4nRKQe1PKJ
+ feuIaaYzAKP/IELHnI1o6H5ao8U+2SphZ5lRA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744208998; x=1744813798;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wjacCszumv5o9II0dYfYDlkC6ZCqsPU7mvapGNdJu7w=;
- b=miqFILFSxC7AyW/0Yn1asU6eYWMp+WAjTBpcgBAASkjZtZNiS62Mra/y3hVaFItdQo
- 4I1p8CJsyCy15nzhwizoTJ3OJ3rUI1LfCd0+quIGbrrZbNx8FEdOayFpyq25BSuhYmAD
- UFXi9JpDeMZkUgD4qFcxh/7PrrCgY/K4izjsxdDJTlcTlXfl1M5+37FRVxUm26TXeocm
- xkjxY/V/VWld/XcGtkfhH2POk+21xiikE6hblSJnKPzowKz89jKAlDEROEBr7c63/8A0
- ByuogRgO3e+C9o/mpSoZ1st/tr3lkuzMXBhsE8i+x3G2fU+1BldT535gmnVy527csm7A
- 1IZw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrVhtRAS0LpteJcJF7ngH1gT+DyKonzp9r1M6NAbLn77BwUaII18T8cXHQON800xdMdfF92IY=@lists.denx.de
-X-Gm-Message-State: AOJu0YymTLsQPCCBLLDmviU3QYytj3dHhXVfLplzHgFUg+T3VltThbVf
- 1QWjuy0xGPUQjsTOSqep9fqBd404ofpchYV9UVFhmMmrwHyzjVdpRAvSDJBll/k=
-X-Gm-Gg: ASbGncujr4Kp00nk3OWj/svwgvVMvY+pSFZ5jO9JFzkGZPYQ89Bj25V1YxvQIB/C0xz
- irrFpHz95ZIcUFxqikqxS9GCanMs3jVfqZqrfhwYM6PCu2u0+E2eJHu14uwKkyHR82BCzdAXgXo
- o71u4Ug7807L0CSyVtrt111C9gMaNJEZ4t8uzJBYAxgOldpGaJg6gN1RRMtEstl/sdhK3lVxsQ5
- abAOA1BqzRfG7OQEMcbESug+k5TqF6GoYXdV/yS2fNHJyd4D5vYKhzIz26BLnDKQZK2BBqUQ9vX
- iq/H9jJ6seKtmLoQv/IpUqwdHB38qQIUlSG4uCYeSDaV4wbzU0MW88VhcVTuLwR+FDeV5tC5ZRH
- yHIJ0BGVX9ghH8X02/AZgOy/6FxMN
-X-Google-Smtp-Source: AGHT+IHU9tJiNfZDts3gaHrFeGza9w3SXJZmuyPnEmYMU73LFsV7X0Y8eLC+lAGqKjvlPaF2k4H3lA==
-X-Received: by 2002:a17:907:960f:b0:ac3:cabc:1be7 with SMTP id
- a640c23a62f3a-aca9b72ee2bmr289654566b.48.1744208998075; 
- Wed, 09 Apr 2025 07:29:58 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:7cd9:8fac:d1e:8d79?
- ([2a01:e0a:3cb:7bb0:7cd9:8fac:d1e:8d79])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-acaa1ccd223sm105593666b.133.2025.04.09.07.29.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 07:29:57 -0700 (PDT)
-Message-ID: <152978de-5a81-4512-a478-0ecf6a5ee5ac@linaro.org>
-Date: Wed, 9 Apr 2025 16:29:56 +0200
+ d=1e100.net; s=20230601; t=1744209012; x=1744813812;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=U5286chN3DIAwIUx4LI72h6J2pBZOkaUmvy5HlVv4AU=;
+ b=F46c+No4WyfydMzO3EFXpYs7XqJV7/kXkfeEFN9yXU4R0UNSUZTx0Qy/SJlFdVj+hc
+ es9bi0NEWhTOAomSThMXRpvvwnISGqNwVQ3daSQxhA0Bqxl3SBbFzT1e870aAbMC0pfe
+ ZZPdOJo+IItRWWJfB99W5n9HNq3/nXOp3GztbtswZ9tu1NAzCyTx0HF69t8hKHlMn/DS
+ nsKCSi1PH5X4/5PGFha2HmV1PNi9qXKaSojOxKrKcazdHM/x27h77q7QOOmyxPXutsGH
+ 0vlWHkHlnJlGv+b3FTck8B3pzHxe7qmj84jups7BDGKcD7t2J5nszCJBOoLX4jtQyrwT
+ svPA==
+X-Gm-Message-State: AOJu0Yxok90Oifp1jIEumvW7/yqjTUxi233pRiGeJlSoQ9BMxLPSsuxj
+ Rgrg2zVap9KijhSoELWQuStYNA/bq0tv3O12gEJdEq3ftB/L4kd+YY1GpN4rzH4=
+X-Gm-Gg: ASbGnctIWh+yhvqmbmfsot5Z2ZEeVYEMQUUGjJG+j1HgF8uNrqj68lF5mDV6AOz+8cA
+ SlzASYc0tTWjHw7TcCmbfu07tO0F7qUPWtyp5CXnwdrCIzEstiikS5GFqboEA6Sd446mLnsXMT+
+ ZbgIEVv7nM05EgHgs7fes/yPzrwhQXHpRs+IyBvzVcNs5A2m+Y+FdqF2mWXPmjLcC+tXByaNvwL
+ YHsXmOO6wL7Z/D0bd5eUcKKa9GsgOy9L7l79mzZOX2suQsDlqyS/D1T/nF6znTVJ4VCALrglSDd
+ eGSAi0HX0TgIxzL1euyXC5arD70i10s7k3YjC+BJ2ikPnIkaw28+q7Xi3UpNVZ2Vpp1awOUOx14
+ 8RZ3B9Ra5dNll
+X-Google-Smtp-Source: AGHT+IFnCZNOb64n00Bqx9viP4A1X57Ivf1S8CRxojfKG5gR76FW6Qv2eqhmJHm4TJypI2FUCtnWsw==
+X-Received: by 2002:a05:6808:3a05:b0:3f8:9b41:6ce0 with SMTP id
+ 5614622812f47-400736b00d1mr1816515b6e.7.1744209011659; 
+ Wed, 09 Apr 2025 07:30:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-400762d564csm175031b6e.27.2025.04.09.07.30.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 07:30:11 -0700 (PDT)
+Date: Wed, 9 Apr 2025 08:30:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com
+Subject: Re: [PATCH v1] configs: set SPL_TEXT_BASE by default for k3 platforms
+Message-ID: <20250409143009.GD5495@bill-the-cat>
+References: <20250409124739.3843126-1-anshuld@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] net-lwip: wget: add LMB and buffer checks
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Adriano Cordova <adrianox@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20250409122007.2560668-1-jerome.forissier@linaro.org>
- <20250409122007.2560668-2-jerome.forissier@linaro.org>
- <7be98569-3565-4db5-aa3f-b6dd68ee8ac5@gmx.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <7be98569-3565-4db5-aa3f-b6dd68ee8ac5@gmx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="7+hyraK5Um3oWZjB"
+Content-Disposition: inline
+In-Reply-To: <20250409124739.3843126-1-anshuld@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,130 +96,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--7+hyraK5Um3oWZjB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 4/9/25 16:17, Heinrich Schuchardt wrote:
-> On 09.04.25 14:20, Jerome Forissier wrote:
->> Legacy NET wget invokes a store_block() function which performs buffer
->> validation (LMB, address wrapping). Do the same with NET_LWIP.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->> ---
->>   net/lwip/wget.c | 49 +++++++++++++++++++++++++++++++++++++++++--------
->>   1 file changed, 41 insertions(+), 8 deletions(-)
->>
->> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
->> index 14f27d42998..746c8164d66 100644
->> --- a/net/lwip/wget.c
->> +++ b/net/lwip/wget.c
->> @@ -6,6 +6,7 @@
->>   #include <display_options.h>
->>   #include <efi_loader.h>
->>   #include <image.h>
->> +#include <linux/kconfig.h>
->>   #include <lwip/apps/http_client.h>
->>   #include "lwip/altcp_tls.h"
->>   #include <lwip/timeouts.h>
->> @@ -201,11 +202,44 @@ static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
->>       return 0;
->>   }
->>
-> 
-> Please, add Sphinx style descriptions to all functions.
+On Wed, Apr 09, 2025 at 06:17:37PM +0530, Anshul Dalal wrote:
 
-OK
- 
->> +static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
->> +{
->> +    ulong store_addr = ctx->daddr;
->> +    uchar *ptr;
->> +
->> +    /* Avoid overflow */
->> +    if (wget_info->buffer_size && wget_info->buffer_size < ctx->size + len)
->> +        return -1;
->> +
->> +    if (CONFIG_IS_ENABLED(LMB) && wget_info->set_bootdev) {
->> +        if (store_addr + len < store_addr ||
->> +            lmb_read_check(store_addr, len)) {
->> +            printf("\nwget error: ");
->> +            printf("trying to overwrite reserved memory...\n");
-> 
-> Output while an EFI application is consuming the HTTP protocol should be
-> avoided as it is not compatible with the EFI console.
+> SPL_TEXT_BASE is used as the load address for the main domain SPL on k3
+> platforms.
+>=20
+> Since the config value is the same for every board, this patch sets the
+> value 0x80080000 as default for all ARCH_K3 and deletes the instances of
+> SPL_TEXT_BASE in individual defconfigs.
+>=20
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+[snip]
+> ---
+>  common/spl/Kconfig                         | 1 +
+>  configs/am62ax_evm_a53_defconfig           | 1 -
+>  configs/am62px_evm_a53_defconfig           | 1 -
+>  configs/am62x_beagleplay_a53_defconfig     | 1 -
+>  configs/am62x_evm_a53_defconfig            | 1 -
+>  configs/am64x_evm_a53_defconfig            | 1 -
+>  configs/am65x_evm_a53_defconfig            | 1 -
+>  configs/iot2050_defconfig                  | 1 -
+>  configs/j7200_evm_a72_defconfig            | 1 -
+>  configs/j721e_beagleboneai64_a72_defconfig | 1 -
+>  configs/j721e_evm_a72_defconfig            | 1 -
+>  configs/j721s2_evm_a72_defconfig           | 1 -
+>  configs/j722s_evm_a53_defconfig            | 1 -
+>  configs/j784s4_evm_a72_defconfig           | 1 -
+>  configs/phycore_am62ax_a53_defconfig       | 1 -
+>  configs/phycore_am62x_a53_defconfig        | 1 -
+>  configs/phycore_am64x_a53_defconfig        | 1 -
+>  configs/verdin-am62_a53_defconfig          | 1 -
+>  18 files changed, 1 insertion(+), 17 deletions(-)
+>=20
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 94e118f8465..a84b96ebce4 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -271,6 +271,7 @@ config SPL_TEXT_BASE
+>  	default 0x40200000 if OMAP34XX
+>  	default 0x402F4000 if AM43XX
+>  	default 0x402F0400 if AM33XX
+> +	default 0x80080000 if ARCH_K3
+>  	default 0x00908000 if ARCH_MX6
+>  	default 0x00912000 if ARCH_MX7
+>  	default 0x40301350 if OMAP54XX
 
-What does printf() do in this case (EFI application)? If it's just ignored
-then I suppose it should be OK to have the printf() right where the error
-occurs, no?
+This should probably be ARCH_K3 && ARM64, and then also different line
+for the R5 side?
 
-> If you want console output in the wget command, please, implement it
-> there and not in a library function called by efi_net_do_request().
+--=20
+Tom
 
-That will make the code slightly more complicated, although not much (some
-additional status in struct wget_ctx).
+--7+hyraK5Um3oWZjB
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
--- 
-Jerome
+-----BEGIN PGP SIGNATURE-----
 
-> 
->> +            return -1;
->> +        }
->> +    }
->> +
->> +    ptr = map_sysmem(store_addr, len);
->> +    memcpy(ptr, src, len);
->> +    unmap_sysmem(ptr);
->> +
->> +    ctx->daddr += len;
->> +    ctx->size += len;
->> +    if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
->> +        printf("#");
-> 
-> ditto
-> 
-> Best regards
-> 
-> Heinrich
-> 
->> +        ctx->prevsize = ctx->size;
->> +    }
->> +
->> +    return 0;
->> +}
->> +
->>   static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
->>                  err_t err)
->>   {
->>       struct wget_ctx *ctx = arg;
->>       struct pbuf *buf;
->> +    err_t ret;
->>
->>       if (!pbuf)
->>           return ERR_BUF;
->> @@ -214,18 +248,17 @@ static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
->>           ctx->start_time = get_timer(0);
->>
->>       for (buf = pbuf; buf; buf = buf->next) {
->> -        memcpy((void *)ctx->daddr, buf->payload, buf->len);
->> -        ctx->daddr += buf->len;
->> -        ctx->size += buf->len;
->> -        if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
->> -            printf("#");
->> -            ctx->prevsize = ctx->size;
->> +        if (store_block(ctx, buf->payload, buf->len) < 0) {
->> +            altcp_abort(pcb);
->> +            ret = ERR_BUF;
->> +            goto out;
->>           }
->>       }
->> -
->>       altcp_recved(pcb, pbuf->tot_len);
->> +    ret = ERR_OK;
->> +out:
->>       pbuf_free(pbuf);
->> -    return ERR_OK;
->> +    return ret;
->>   }
->>
->>   static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
-> 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf2hGkACgkQFHw5/5Y0
+tyzVLgv/QbpxrA016KClH8MJRWiD/JKQVG+2FLZqoSF8IPVpF4uUwU2rDXlb3VAT
+Euj9k8Dn4gFpYfgJq3wphO6H9BNlZiAgH0Ct2okzUnJXq7hFAl960Jf7YuLORBpU
+LIydBf4Kt+jMrAma4qhoSL6M6eT1EvGWdMJppQVBktHe2t/7HyTwpkIyNaLxLVO2
+w27AV5sjtvyPpvikFrcgWq7mMlLurHdsGcRtxSRgUSGwUdIh/d6UObeyfMS1YUGj
+2Qi4VXVGtwvL7+1g03MXml0HdAqB3OjVz/G91IG73K5K2FWP7Sly6d8bqf2Bgocw
+WldzDzx83pX6PpcaS/iN5PZXzVlXClNxYDMMoBRHcAoHO4bP9JyBcc8AJFvGw2s7
+/aXII4e8SJyK5E7IZCCmuORcEJQ72n4gEZIR0pDmQNqLxOTq38FXE6TatI9XOhBp
+9NZCvzyCrex4DR892W0SyIJ1oo66kgWhWO4yYXXhT4b43xs+dSuEO0degGrq/GI+
+b/p+C3IL
+=oybl
+-----END PGP SIGNATURE-----
+
+--7+hyraK5Um3oWZjB--
