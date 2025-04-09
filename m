@@ -4,93 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 064D1C369A1
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:22:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F22AC36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:23:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E65A83898;
-	Wed,  9 Apr 2025 17:22:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E41B48367B;
+	Wed,  9 Apr 2025 17:23:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uiDYhjH3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jhICeGDJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A0C838AA; Wed,  9 Apr 2025 17:22:16 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id CA3868367B; Wed,  9 Apr 2025 17:23:16 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85CBE83886
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:22:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C12C81FAB
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:23:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2c2dc6c30c2so1983142fac.2
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 08:22:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43cebe06e9eso47869055e9.3
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 08:23:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744212131; x=1744816931; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rJBjtNOBubRRNfnVQqBVXgyPeUzBeal1W2Iqaz+JM7I=;
- b=uiDYhjH3IvUOOqjWDgvYQjANxEAIIodpB9fDBUIwsMY1vjd3QJsrgDN3kH0t91ovkN
- on6zNHnzL9zlrSAzsGHiF9M7VwlnnD31SQ4aSXwrKil9iNQGSJm1fP4cWSQgsuewgO1u
- rjQrS67zszVp+EaPNRvijezpWU+Hx9GeynkbU=
+ d=linaro.org; s=google; t=1744212193; x=1744816993; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6T/2aiaxKRzlV8pZ9D0g7JDVOJXiAj2TM2jplRlwOmI=;
+ b=jhICeGDJLQUrmZLsXPAukUW8uNlH5NgT8U+2aqmSIwf+cZ35rG3X+yrhYCiiv0nW1+
+ 0CcVa94YBEgpOT5uGgWe5BPazEiOhmew36Vgco8RvPyRhVjp3rYM1WVWa0DxEO1eNQdF
+ HfrUOmrRwCfn2Uh7WbRQEzwploJW4BRkM1/AacHCGlOU0tq057sGE1ncpyI6XOF+rcqa
+ tj0vGxnRVgKSGF0L6SsMDyfyVs7FLr2fF3H7aS9UWxgCqihTTFkzvkbQi5WlwHL2GI/Q
+ SsC5mQxKPpS9g9gy5kW5pGVHwWgkCOfVlSTUJlb3Q2PyvQWv5NEVa3omp/MuypqBMPCm
+ 7S5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744212131; x=1744816931;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rJBjtNOBubRRNfnVQqBVXgyPeUzBeal1W2Iqaz+JM7I=;
- b=JoPCBA783Pzv+r63Ps+RZS7lT05ynbv2MsbqL4AoSeWOtUKnH30US2WF/dj6dtyWcb
- CyrLtZg1Hb4EFirjiX5DJxZedrS712paUwTNOD9TwVoU1xRWAHQ8ef14LgzCyv1D2XCd
- 0hEANEeJFnT/ozuDFeoQAw4leitAWoyBUZ0KzdnXU6BKwtsT2WwAd834/9vlAMqQ3+PW
- jZsdLLjBqPVe5o3zDyPMREy7gML5wFVBxwpUZGmj4xTp7G4mv/PvJyZ7NBYeuPAgX9pv
- rcDSuWRKxEN6fARdKgg8CxaWCKZIuhGoMPsg3+pKiZo0vkk4gKBT6UuIS2/G3w9KyF6c
- HxPg==
+ d=1e100.net; s=20230601; t=1744212193; x=1744816993;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6T/2aiaxKRzlV8pZ9D0g7JDVOJXiAj2TM2jplRlwOmI=;
+ b=c3AzXYJfaHuBF3VNFOWXs3JojmqZg/f8/5tfELVoHvrbWjLl6KNb/Ba0V6mn1LfWTt
+ giCzTSkB7YXYyqXuVJvnEDnqf7Q+DH2SYbDQGV/3qr8ksf65S5FDN1x8Jx1MIkCGA++g
+ PRBaQTE9tpvHusYtp7L4rB2fOJPcMOAdWBhOIHYy9kPLIZUWeDGKmdZEQ/vghtYg26VD
+ GWUwQT+d+HDieZOkKcEu35JQkZv78M4NLGJkfq8iVRi7GEmz0FYIyHuipI/x6gL80PPB
+ /UUu4Ndo4g6abXPy6jHsrPcuX9rF4wLcYjcYjp9EhQiyxJ4ZKCxjkIrFKRblAMTzXCL8
+ G1+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0/K0hFOd6eibWsOdA1Wts9vIRHD3IoLQLa2tMyS4xF8bncgP3f6WgYMFvVySbXJRZKAgagnQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzv1EczxP5mwJUZ9OX6TvUNknZL9BKzf3dJbNagOXxiBMGsFIq/
- ANazxqQXiAnTDMSziFE31gXOq7NgWyhw77WWTPCZnyxIFpPbQcqoZRX53QHTNqC3jUETffPRM0P
- P
-X-Gm-Gg: ASbGnctnzsIeQ1HIxfmwoH+cCGsu9UyztJm1Gy4IUyBNtlUH77wmgDov6olOysv6dut
- /60ZVTGRpaV+66laRTOIB/snuBUoYx09JV9TsomRTmuIpoFmtTWjnpH00tNiaKzbZw7QL7vyCdy
- jg0eyHL/SaRA/jm6P7HBLrbeDVDjAiotlZ3VRDYeG5pvM6GPhq18/CPyweE6AGoNikusaA2kEgL
- m17AwbaqTDAGY7TE4qRiefuyzPK/fru1EbhAXQMiy9xhVY7yEM/DbjE08eQlXrJYBwBE/U2qlAN
- gB8g5NYRI/yz/PTWgKLUBgL6ifuSp8jVuysibZ/QMblvcM/rKPPIO0n3aXAXGHb3DoGd4iBFw/p
- Lig==
-X-Google-Smtp-Source: AGHT+IFOVUyahfQCwR8rSQGPwr2eduUpuqU1XZx/gm85kHdl3mftvA98xQ8OPPDUQXhWZsZoJRufyg==
-X-Received: by 2002:a05:6870:71cb:b0:2c2:416e:cf43 with SMTP id
- 586e51a60fabf-2d08dd755c1mr1649765fac.12.1744212130226; 
- Wed, 09 Apr 2025 08:22:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73d51fa1sm207945a34.6.2025.04.09.08.22.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 08:22:09 -0700 (PDT)
-Date: Wed, 9 Apr 2025 09:22:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Walle <mwalle@kernel.org>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marex@denx.de>, Benedikt Spranger <b.spranger@linutronix.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- John Ogness <john.ogness@linutronix.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] tiny-printf: Handle formatting of %p with an extra Kconfig
-Message-ID: <20250409152207.GF5495@bill-the-cat>
-References: <20250407085614.126626-1-cniedermaier@dh-electronics.com>
- <20250408205826.GZ5495@bill-the-cat>
- <063948ec5d3845daae97d4b9bc97c901@dh-electronics.com>
- <D92403LVTRRP.3CEQ0LEVJHTXS@kernel.org>
+ AJvYcCWZpP6KT0YfCdDyUa/OdmRWTRHoePO6ogYlCNVgfEH8GhsGHDihotf9eX1YdE0+xvlSfMP4eY8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpG30HLvaMoiI4wLUPK4d6HVN8yTGcJ7QYBMxAVTcv28dms4sg
+ ye1aFSIrnaGQc/a4+b6wtOoZMtM+dPE/CxA7cjTZwUBUWpz+UEL5KuhhMZsxEjw=
+X-Gm-Gg: ASbGncslkmVYV4GDSgKVCNozbiUViN0ji62N2oDfsI/6Ydn79k14KDxQdRU3kiSLahp
+ HTKxh4wFe8PJb4WlUT6fQIIpPSBcUrkxCanaMeQji/BdbOihKAuIIqVp27qYXN6iD3HkjMyGoOD
+ QcbeCnxc4aMuzb4EBUJ2mdLpd6myRUXXVVpHSPfDkFs8Y0KgtzUJevNGwoE+O7S0rTz7X4qSonm
+ nDVHy7shGUkv+ZxKW6er3vydN6z/axGjdCh8ORb4gR7nwxMmOEw1HK80HsUPg5yAgV4zMzynh3z
+ nqk4uYiMt6VgBNiKOhfDrg0fVngpWU/5WqqaySTAIq9oOVIOOdWai2T/JsdqjX4v5Cug
+X-Google-Smtp-Source: AGHT+IE5Kv9yU8EosM2IfDHq43hxqFN4WKLpoTJ8SeARS7oIXl02MRfnKesKhBnX4liW2OrAPbWOjw==
+X-Received: by 2002:a05:600c:45d1:b0:43b:ce36:7574 with SMTP id
+ 5b1f17b1804b1-43f1fdf1ed8mr31251895e9.11.1744212193481; 
+ Wed, 09 Apr 2025 08:23:13 -0700 (PDT)
+Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f233c8224sm19207125e9.22.2025.04.09.08.23.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Apr 2025 08:23:12 -0700 (PDT)
+Message-ID: <a09f329f-8e43-4581-97ac-83cd76e49074@linaro.org>
+Date: Wed, 9 Apr 2025 17:23:11 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="leSKjg+KkVzXCssp"
-Content-Disposition: inline
-In-Reply-To: <D92403LVTRRP.3CEQ0LEVJHTXS@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/13] board: dragonboard410c: Various fixes and cleanup
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Sam Day <me@samcday.com>
+References: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250407-db410c-fixes-v1-0-524aefbc8bb4@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,139 +104,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---leSKjg+KkVzXCssp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 09, 2025 at 02:33:08PM +0200, Michael Walle wrote:
-> Hi,
->=20
-> > >> The formatting with %pa / %pap behaves like %x, which results in an
-> > >> incorrect value being output. To improve this, a new fine-tuning
-> > >> Kconfig XPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
-> > >> has been added. If it is enabled, the output of %pa / %pap should
-> > >> be correct, and if it is disabled, the pointer formatting is
-> > >> completely unsupported. In addition to indicate unsupported formatti=
-ng,
-> > >> '?' will be output. This allows enabling pointer formatting only
-> > >> when needed. For SPL_NET and NET_LWIP it is selected by default.
-> > >> Then it also supports the formatting with %pm, %pM and %pI4.
-> > >>
-> > >> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.co=
-m>
-> > >> ---
-> > >> Cc: Tom Rini <trini@konsulko.com>
-> > >> Cc: Simon Glass <sjg@chromium.org>
-> > >> Cc: Michael Walle <mwalle@kernel.org>
-> > >> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> > >> Cc: Marek Vasut <marex@denx.de>
-> > >> Cc: Benedikt Spranger <b.spranger@linutronix.de>
-> > >> Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> > >> Cc: John Ogness <john.ogness@linutronix.de>
-> > >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > >> ---
-> > >>  Kconfig            |  1 +
-> > >>  common/spl/Kconfig |  1 +
-> > >>  lib/Kconfig        |  8 ++++++++
-> > >>  lib/tiny-printf.c  | 45 +++++++++++++++++++------------------------=
---
-> > >>  4 files changed, 29 insertions(+), 26 deletions(-)
-> > >>
-> > >> diff --git a/Kconfig b/Kconfig
-> > >> index 6379a454166..4d13717294c 100644
-> > >> --- a/Kconfig
-> > >> +++ b/Kconfig
-> > >> @@ -757,6 +757,7 @@ config NET
-> > >>
-> > >>  config NET_LWIP
-> > >>  	bool "Use lwIP for networking stack"
-> > >> +	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF =
-|| TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
-> > >>  	imply NETDEVICES
-> > >>  	help
-> > >>  	  Include networking support based on the lwIP (lightweight IP)
-> > >> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > >> index 94e118f8465..72736dbecf5 100644
-> > >> --- a/common/spl/Kconfig
-> > >> +++ b/common/spl/Kconfig
-> > >> @@ -1096,6 +1096,7 @@ config SPL_DM_SPI_FLASH
-> > >>  config SPL_NET
-> > >>  	bool "Support networking"
-> > >>  	depends on !NET_LWIP
-> > >> +	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINTF =
-|| TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
-> > >>  	help
-> > >>  	  Enable support for network devices (such as Ethernet) in SPL.
-> > >>  	  This permits SPL to load U-Boot over a network link rather than
-> > >> diff --git a/lib/Kconfig b/lib/Kconfig
-> > >> index 1a683dea670..62e28d4a1f3 100644
-> > >> --- a/lib/Kconfig
-> > >> +++ b/lib/Kconfig
-> > >> @@ -253,6 +253,14 @@ config VPL_USE_TINY_PRINTF
-> > >>
-> > >>  	  The supported format specifiers are %c, %s, %u/%d and %x.
-> > >>
-> > >> +config XPL_USE_TINY_PRINTF_POINTER_SUPPORT
-> > >> +	bool "Extend tiny printf with the pointer formatting %p"
-> > >> +	depends on SPL_USE_TINY_PRINTF || TPL_USE_TINY_PRINTF || VPL_USE_T=
-INY_PRINTF
-> > >> +	help
-> > >> +	  This option enables the formatting of pointers %p. It supports
-> > >> +	  %p and %pa / %pap. If this option is selected by SPL_NET or NET_=
-LWIP
-> > >> +	  it also supports the formatting with %pm, %pM and %pI4.
-> > >=20
-> > > This isn't quite what I'd like to see. I don't want to start using the
-> > > literal XPL namespace as that will lead to confusion down the line.
-> >
-> > OK, in V2 I will only support SPL.
-> >
-> > > Since we only have SPL_NET, I think we should name this symbol
-> > > SPL_USE_TINY_PRINTF_POINTER_SUPPORT, not ask about it (so bool without
-> > > "prompt text" following), and select from SPL_NET if
-> > > SPL_USE_TINY_PRINTF.
->=20
-> IIRC, the old one also enabled the pointer support if DEBUG is
-> enabled. I don't think this will work with Kconfig.
+On 4/7/25 18:59, Stephan Gerhold wrote:
+> The DB410c U-Boot port has not been updated much lately. This series
+> includes various fixes and cleanup to bring it back into better shape. I've
+> also added myself as new maintainer (and Sam as reviewer), since Ramon has
+> not been active on the U-Boot mailing list for over a year now.
+> 
+> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 
-I was looking around for, but didn't quite see, a good existing option
-to "if .." around the prompt text for.
+Thanks for this! Awesome cleanup. Really no other words, this is art :D
 
-> > Now you will get the output '?' when using formatting with %p or %pa.
-> > If someone wants to use the pointer support e.g. %pa in pinctrl-single.c
-> > and is restricted to use tiny printf, then it would be good to have
-> > the option to enable it manually and not be forced to enable SPL_NET or
-> > NET_LWIP to have the pointer support enabled. In this case, it makes
-> > sense to allow switching it on in menuconfig.
->=20
-> FWIW, I'm also fine with enabling full printf support as long as the
-> tiny one doesn't print misleading values.
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>> ---
+> Stephan Gerhold (13):
+>        mach-snapdragon: Fix EL2 boot on DragonBoard 410c
+>        board: dragonboard410c: Fix RAM size
+>        board: dragonboard410c: Fix BD address
+>        board: dragonboard410c: Drop UNSTUFF_BITS() macro
+>        board: dragonboard410c: Drop reflash functionality
+>        board: dragonboard410c: Drop unused linux_image
+>        board: dragonboard410c: Use dynamically allocated load addresses
+>        board: dragonboard410c: Fix counter frequency
+>        board: dragonboard410c: Enable RTL8152 ethernet
+>        board: dragonboard410c: Use BOOTSTD instead of DISTRO_DEFAULTS
+>        board: dragonboard410c: Enable support for Android boot images
+>        board: dragonboard410c: Use button_cmd instead of custom code
+>        board: dragonboard410c: Update maintainers
+> 
+>   arch/arm/Kconfig                                   |  2 +-
+>   arch/arm/dts/apq8016-sbc-u-boot.dtsi               |  2 +-
+>   board/qualcomm/dragonboard410c/MAINTAINERS         |  3 +-
+>   board/qualcomm/dragonboard410c/dragonboard410c.c   | 67 +++++++---------------
+>   board/qualcomm/dragonboard410c/dragonboard410c.env | 38 ++----------
+>   configs/dragonboard410c_defconfig                  | 10 ++--
+>   include/configs/dragonboard410c.h                  | 11 ----
+>   7 files changed, 35 insertions(+), 98 deletions(-)
+> ---
+> base-commit: 4b2895adb0ab94fdaabd6c19cef4d72986483461
+> change-id: 20250407-db410c-fixes-85c6a6de2716
+> 
+> Best regards,
+-- 
+Caleb (they/them)
 
-I'm not sure if the one non-debug %pa print in pinctrl-single.c is
-really triggered within SPL, and I do hope that the way this patch is
-otherwise done will make it easier if someone needs %pa to work when
-debugging a problem in SPL, and can't enable full printf due to space.
-
---=20
-Tom
-
---leSKjg+KkVzXCssp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf2kJ8ACgkQFHw5/5Y0
-tyzyMQv/b5eeGUqwHi8icG/PCwdA1ztdWuL9Cmg8kWCjPdEL6CdCkBNRk4fFjecT
-okJvB2e0bI7KrVFiN3iyvewaj7aKC6Dqrt3+450E2FhjpZfRJrPkGse2nz8jtzOL
-cXITdv30sXFCgRukaHODodyZelP5XMUYoJkQ7igHWjwGvtJxbiPDjk/N6dI83mOt
-yRIp0I5JY3Zn5bdgstdBW/EQZOvNJGfbrTvin7aH0Oy2Eb0c61Gce2BXD23NMtwz
-47L+/wdyKLf4aRl9ct10+CDlWZsnbYXH0Pdly/99kglwRnuUl8wTS5f+17Rh9mFa
-OTSAkXZfEMtt7+UvRnNIl1TmR/Pu+C1ruXcNBExLiHBMO8jqynURHzEunKmoUxBg
-YzVila9+B+PZiN+i0jqrmGjmwszdAhKOnGm7F5VNa2aF5MRo3LquV9p6fOoaC7nI
-Zr7hnmKaPrfIjzfhVqwwKSfVgJZSFAOyKlNjPNv6QLNkZIKdFeGeUtgulNyTyNJP
-n80nPEdO
-=wBYj
------END PGP SIGNATURE-----
-
---leSKjg+KkVzXCssp--
