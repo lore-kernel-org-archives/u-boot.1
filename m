@@ -4,123 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC954C369A8
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13D97C369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:48:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B7FB837C7;
-	Wed,  9 Apr 2025 14:41:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 8533C8327A;
+	Wed,  9 Apr 2025 14:47:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0261D8353A; Wed,  9 Apr 2025 09:51:24 +0200 (CEST)
-Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
- (mail-sh0chn02on20701.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4420:2::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9E8582006
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 09:51:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IxpAibApj4yvcG0vKzN/RI/pl2ULHbvCw2MCLibVeKUIoO3rNlxiTB8Twv9nHloJeiUkPe72jZ5t8TqhCXaSSi+8bceLqLKlHOR0kPrw0/cSdwjBlWaCw+A6TtxeCT1sF9ty8KHbECMTO93SL4J6V0WorCu6en9OfU8SRC2Oz6j4fMrk0zYR1hym5cs0SgoZAZsB3WwIYm1ett469mF3es7Y0QhUW6vrOryK0gjHZ3m6KlJsBqt86Dv/+FChZNKc3r2iRb3lIrk+IU4KEkH7P7vlF2DSdpuu+ZyuwrdCCSeK+gi1kmqI8ZLUtkslF9vwsmtbXqvdpybnAA6Mquw8HQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TF2nqPW83iy4GhaIctYciLD3s2WvYfoajoP7GPm3Cbc=;
- b=WIu1gW2TugTehWgndxp7DLc7HszpFO8N6pLzd9tO9seJfeoWT01IkPArZQ9CJqR+4Mc1X24BGVF2OfPHWxSeEIRE2SaWlKZ5RyQmtwxLAGUiGtTPm9R0z3hjFRBQA9s9thbtTW+kVhfIIUX5whBFgCgPI0qVvNxH2M0tz9iO2A4Qe686eTl+o6fSE1qHre0cZio+p50ImRWBUR0Gu+nZQQd5ZTalgkLJChA2Ufdme7Zlzeb8dHpTTg9ok/ReZBhzMb9skfZTJcZL7Iyi7NiJ/Sok2+pBPDh+r/td3NYMOl9k59WxnURcWygaKnXRpp841KHfYoMwwr6Bv7nxDfYMRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1243.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8583.49; Wed, 9 Apr
- 2025 07:51:12 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%4]) with mapi id 15.20.8583.047; Wed, 9 Apr 2025
- 07:51:12 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-CC: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, E Shattow
- <e@freeshell.de>, Sumit Garg <sumit.garg@kernel.org>, H Bell
- <dmoo_dv@protonmail.com>, Matthias Brugger <mbrugger@suse.com>, Simon Glass
- <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: RE: [PATCH v3 4/8] board: starfive: spl: support DeepComputing
- FML13V01
-Thread-Topic: [PATCH v3 4/8] board: starfive: spl: support DeepComputing
- FML13V01
-Thread-Index: AQHbqR+sn0dyhNO7jkqmQnRY0vu5TbOa9OAQ
-Date: Wed, 9 Apr 2025 07:51:12 +0000
-Message-ID: <ZQ2PR01MB1307AECF8F289BA9A94445A1E6B42@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-References: <20250409071836.26629-1-heinrich.schuchardt@canonical.com>
- <20250409071836.26629-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250409071836.26629-5-heinrich.schuchardt@canonical.com>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1243:EE_
-x-ms-office365-filtering-correlation-id: 15bcf8aa-56c3-4dd0-da6d-08dd773b4c1c
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|41320700013|7416014|1800799024|38070700018; 
-x-microsoft-antispam-message-info: Vq0ki3Uuki0818rvT/Nz29PYkqa02kS3l17Wt/1gKZvtyWoGXBgyA6wSlURKwVhRsEMDW9sPoKrwvCtCSUbcQ+iztmvpse9BiSoOoyQLBqFKO/98mfe1u68qkab039huUZaDQc1mkPdbcNJHiNFymOvXsCk4y4SEh+VhwaXrv9YU0rpGbEDMQ8vZjWSAPUvXX7nNv8lPwgovtT4v/25YZrvahhI394pla4ec+/6wXeWv5HdRVyS19flj+l6b8J3pmiyNseh6u+e45jpkWVuqG2g+D3DNBRia7f0pDC81weBpuzqyotcwWTGZo+BTeLHSEWzYxfWdPlhJxU01v27Z7egGlyscp86DV7tjwS3J4jiKTdQUjHlgGIX9/2qqvHoezmbLVo1Az6EFBVPn2Q+QDUl6A+6R8QzPnGL/COtis7m/uQAGSKav4PcpleFEyflC86X0FQGQAXNm4aCQHZaYsEpQgNYvi7aqj08saIG73wJRK4lixw+lEZy7zvLIEpv1OGt+p/bG67VpRRmaCgTAnxwqZz3ODQkkL+lVEwsEL7f9oW+jR7MsHiWr2ylmuMbyUeF+U5m8BV5hRaW0vxqu9s9f+W/HOqVoKbBwh21JsG0=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(41320700013)(7416014)(1800799024)(38070700018); DIR:OUT;
- SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?PMzy9xG23/62UjamQHZ56RpZfYYBE4+6Q53mQgfYK57NsInlDaV6ue6+Gd63?=
- =?us-ascii?Q?SC90k3sk7mdbf1AVvy4oXAxTA6nMXvrT0WRSi1jS3vQadWoK98hL1n6h27WO?=
- =?us-ascii?Q?BDQt5kUqCGk99SBOaXhn3CVdwziPwx1f4o+mUhOrgRUSsigC4aeWyQ3t4rrL?=
- =?us-ascii?Q?zp2S55CXcmFGlipRXBv8mHshdu8swuV5Ju6Jdkuys6cehboESb+aQAL6wlqA?=
- =?us-ascii?Q?UkrxBvDZr8sKo3DQ3fm9YELer93Pzez9m9nBhaT34dpTFb32ujbxt3VhL+Xe?=
- =?us-ascii?Q?9C9FtgUICSGPl7PRVfnx+EVgKVGgwb9gnv60k9AlWCVobsAtYy3kq7Bo+Ho3?=
- =?us-ascii?Q?tUcCUXVzu32Ugr04OIxbtNdLf2lJmCu31xFlR/W3X6UBdH86dFnlSqFN4Bo8?=
- =?us-ascii?Q?mqj4GqDDM6bqgMhKgv7NzXb88cDW6iDD1fc7HZGsYF/AQMFjPx00huJNKPBP?=
- =?us-ascii?Q?cJnQQgOH5nDy94AHjpgKwqHWi4Qnfsp/iHYmGtQ1poaC7NkghAsEBOrh02gp?=
- =?us-ascii?Q?f8llJSGxcKYVErUS6pFuLrgbm0ALf60RlkZuEh4VOIvEXOfeJGutZf5ZLIrV?=
- =?us-ascii?Q?oo+vpANeA9RKMjTUQ9uN+AhWgdOE/xrH039GDrKircBptngR9PeBzFSUBQCE?=
- =?us-ascii?Q?/GxDuTq+TY2DGA69g4mtM/ery8L/NDIkB6AKe6wLY9upNWykop9fbBAkJhSB?=
- =?us-ascii?Q?/XjJkFhBCG8SxjS7IffrW15OO/01urytyUdDky3QuksB/Lz7uckrOQ7oFuYO?=
- =?us-ascii?Q?OqXEVlHHGC1hB2MFTFsNJzvT+YEFHggKIHULKP4ObA8awKLbBqUWJTORoOTK?=
- =?us-ascii?Q?fuAMkMpx1ikVj9gvj9SPC5wl2FZ2Rg3L+c+AL8HPBO7LFaiA7gRET9R5FfpG?=
- =?us-ascii?Q?Owl6a7reczbdQFCKFjUhJneIeIxAO8Cm8xaphEs9209iOalJklWmeauRnuO4?=
- =?us-ascii?Q?UYzV+Ai/NsULopwWphWrCdqFEP79kEkxPAVww5Wgi+VgOuef8FXuumVYLT9O?=
- =?us-ascii?Q?GSfnwG76FsOBlovumRP+E9RCM7zDDIO6HOt3hpga5IDuGv/uVhcjbAnmZhG3?=
- =?us-ascii?Q?p0g2k1t9KJQvJqo7lk/rk2X5+tMWl8wX/E4m7ChjUOOakG5vU0q5wNS/3CcS?=
- =?us-ascii?Q?lXEVWq9FIdRVkb80yYVBgRihaMDStCIJyvwVahzNwBtp5nsxsHS2vwHFMQ8+?=
- =?us-ascii?Q?7L3A0sGTyGKwAgD2h58f1IIO4EmNi5xGl/8W9KlNWjJyQlzTz8pQ4h6bOFGj?=
- =?us-ascii?Q?0RLZaTAVa6QLM86QkP+MUVymyn99cTwDL+NQKeWfYE4iPenrDk3bujcwL33O?=
- =?us-ascii?Q?EZutnVDU/Yc3awIwN+phThLWNPGpi+Kww1Z4otCo9UL2+oSrrEWQEtD8nQZL?=
- =?us-ascii?Q?cAdk4rnsDV2IljoxmEG6zlYQBjnFSwC9HE5m39QcelNCVxLk5Cy/NEKXRSG5?=
- =?us-ascii?Q?colq0+I2OhiCYVAOs0/9QixFKyfTpaUYAo76mEXnXbxWNw54mFJ3ynb8Saos?=
- =?us-ascii?Q?QS0p8VtOBEX8i02l7ogcnPgGgrwdlF++uJOog0BL9TuPiaOyXr3C3yxfNfZJ?=
- =?us-ascii?Q?CZYebIVQiJ6znVqoD26LpQD4Iw184PrBG3tJ5VceVI8wyDZ284hKMcVf52NN?=
- =?us-ascii?Q?EA=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xGgjkiQk";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DB41583710; Wed,  9 Apr 2025 14:47:58 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 231E4828F8
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 14:47:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 539ClpZH1515216
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 9 Apr 2025 07:47:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744202871;
+ bh=U4lBEePV+fNZ8xomn2KXnw0Q86tOqOk6zhEzD9wtD+Y=;
+ h=From:To:CC:Subject:Date;
+ b=xGgjkiQkKys0ANygkXaWFr022mOPbaOIYDPCwWmIk9N8rHxgHAzJeYo4SQDxz+Rko
+ dhPJhBwUo/hmqrKx2lb23S5zkd0vN6WveiyhJhx76CEFDMzKiG+ifuDbSC7hOt3KfZ
+ EepNsSVnQeQNxzwT/DTGDkuMvwZraB+8mEPUtZU0=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 539ClpOq085329
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 9 Apr 2025 07:47:51 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 9
+ Apr 2025 07:47:51 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 9 Apr 2025 07:47:51 -0500
+Received: from localhost (dhcp-172-24-227-250.dhcp.ti.com [172.24.227.250])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 539Clor0061645;
+ Wed, 9 Apr 2025 07:47:51 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1] configs: set SPL_TEXT_BASE by default for k3 platforms
+Date: Wed, 9 Apr 2025 18:17:37 +0530
+Message-ID: <20250409124739.3843126-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15bcf8aa-56c3-4dd0-da6d-08dd773b4c1c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Apr 2025 07:51:12.0147 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Vp5b70cKXgs8cW5T4bysK+jQEpYu4G0szvrnfsnHS5y1iNLNOIUUhfBJecfFuNgXr1FoOyg5UJAdyif6N7T3jJLdYSTjwhUXw6wi5Ya9k6o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1243
-X-Mailman-Approved-At: Wed, 09 Apr 2025 14:41:40 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,41 +77,251 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On 09.04.25 15:19, Heinrich Schuchardt wrote:
->=20
-> On the DeepComputing Framework motherboard (FML13V01) choose the
-> matching FIT configuration.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v3:
-> 	no change
-> v2:
-> 	rebased
-> ---
->  board/starfive/visionfive2/spl.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->=20
-> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive=
-2/spl.c
-> index 3e4d3e21988..9a3081ef06f 100644
-> --- a/board/starfive/visionfive2/spl.c
-> +++ b/board/starfive/visionfive2/spl.c
-> @@ -125,7 +125,10 @@ int board_fit_config_name_match(const char
-> *name)
->  	if (strncmp(name, "starfive/", 9))
->  		return -EINVAL;
->  	name +=3D 9;
-> -	if (!strncmp(product_id, "VF7110", 6)) {
-> +	if (!strncmp(product_id, "FML13V01", 8) &&
-> +	    !strcmp(name, "jh7110-deepcomputing-fml13v01")) {
-> +		return 0;
-> +	} else if (!strncmp(product_id, "VF7110", 6)) {
->  		version =3D get_pcb_revision_from_eeprom();
->  		if ((version =3D=3D 'b' || version =3D=3D 'B') &&
->  		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
+SPL_TEXT_BASE is used as the load address for the main domain SPL on k3
+platforms.
 
-Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+Since the config value is the same for every board, this patch sets the
+value 0x80080000 as default for all ARCH_K3 and deletes the instances of
+SPL_TEXT_BASE in individual defconfigs.
 
-Best regards,
-Hal
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ common/spl/Kconfig                         | 1 +
+ configs/am62ax_evm_a53_defconfig           | 1 -
+ configs/am62px_evm_a53_defconfig           | 1 -
+ configs/am62x_beagleplay_a53_defconfig     | 1 -
+ configs/am62x_evm_a53_defconfig            | 1 -
+ configs/am64x_evm_a53_defconfig            | 1 -
+ configs/am65x_evm_a53_defconfig            | 1 -
+ configs/iot2050_defconfig                  | 1 -
+ configs/j7200_evm_a72_defconfig            | 1 -
+ configs/j721e_beagleboneai64_a72_defconfig | 1 -
+ configs/j721e_evm_a72_defconfig            | 1 -
+ configs/j721s2_evm_a72_defconfig           | 1 -
+ configs/j722s_evm_a53_defconfig            | 1 -
+ configs/j784s4_evm_a72_defconfig           | 1 -
+ configs/phycore_am62ax_a53_defconfig       | 1 -
+ configs/phycore_am62x_a53_defconfig        | 1 -
+ configs/phycore_am64x_a53_defconfig        | 1 -
+ configs/verdin-am62_a53_defconfig          | 1 -
+ 18 files changed, 1 insertion(+), 17 deletions(-)
+
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 94e118f8465..a84b96ebce4 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -271,6 +271,7 @@ config SPL_TEXT_BASE
+ 	default 0x40200000 if OMAP34XX
+ 	default 0x402F4000 if AM43XX
+ 	default 0x402F0400 if AM33XX
++	default 0x80080000 if ARCH_K3
+ 	default 0x00908000 if ARCH_MX6
+ 	default 0x00912000 if ARCH_MX7
+ 	default 0x40301350 if OMAP54XX
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index bf6e9639901..9f47b35ffde 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -15,7 +15,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+index 30b4a24ee9a..572e5d3dc4a 100644
+--- a/configs/am62px_evm_a53_defconfig
++++ b/configs/am62px_evm_a53_defconfig
+@@ -13,7 +13,6 @@ CONFIG_ENV_SIZE=0x40000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62p5-sk"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+index a8a73166597..fd578df5792 100644
+--- a/configs/am62x_beagleplay_a53_defconfig
++++ b/configs/am62x_beagleplay_a53_defconfig
+@@ -11,7 +11,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-beagleplay"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 6527200259e..09a7bdd6544 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -12,7 +12,6 @@ CONFIG_SF_DEFAULT_SPEED=25000000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-sk"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index a501f3f567e..b3266cc64c8 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -16,7 +16,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am642-evm"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+index e9b736714a5..75c33a0d256 100644
+--- a/configs/am65x_evm_a53_defconfig
++++ b/configs/am65x_evm_a53_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
+index 2d5f18e5bd4..bd441e83cd1 100644
+--- a/configs/iot2050_defconfig
++++ b/configs/iot2050_defconfig
+@@ -21,7 +21,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
+index ac5b10ba149..d2422b1a1bd 100644
+--- a/configs/j7200_evm_a72_defconfig
++++ b/configs/j7200_evm_a72_defconfig
+@@ -22,7 +22,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index a5d95975fb4..cca167aad2b 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-beagleboneai64"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index 1ddb1965d8b..156d6567282 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-common-proc-board"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
+index ab943ebfab2..9783b02dd29 100644
+--- a/configs/j721s2_evm_a72_defconfig
++++ b/configs/j721s2_evm_a72_defconfig
+@@ -21,7 +21,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
+index 667d633c899..5225500fee7 100644
+--- a/configs/j722s_evm_a53_defconfig
++++ b/configs/j722s_evm_a53_defconfig
+@@ -19,7 +19,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
+index f058e3b1c00..c8b69c76edc 100644
+--- a/configs/j784s4_evm_a72_defconfig
++++ b/configs/j784s4_evm_a72_defconfig
+@@ -14,7 +14,6 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j784s4-evm"
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
+index 421dd851506..45f9ad8c02e 100644
+--- a/configs/phycore_am62ax_a53_defconfig
++++ b/configs/phycore_am62ax_a53_defconfig
+@@ -24,7 +24,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
+index 0494fc408b7..6d0a9f35d4b 100644
+--- a/configs/phycore_am62x_a53_defconfig
++++ b/configs/phycore_am62x_a53_defconfig
+@@ -20,7 +20,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80c80000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
+index f0c7ee26384..d12da5c3839 100644
+--- a/configs/phycore_am64x_a53_defconfig
++++ b/configs/phycore_am64x_a53_defconfig
+@@ -23,7 +23,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80a00000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+index e7a88c9788d..10de0a2a39b 100644
+--- a/configs/verdin-am62_a53_defconfig
++++ b/configs/verdin-am62_a53_defconfig
+@@ -20,7 +20,6 @@ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+-CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80c80000
+ CONFIG_SPL_BSS_MAX_SIZE=0x80000
+-- 
+2.49.0
+
