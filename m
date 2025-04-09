@@ -4,63 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA8FC36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:06:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDE9C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:10:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70F8883849;
-	Wed,  9 Apr 2025 17:06:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3570582A18;
+	Wed,  9 Apr 2025 17:10:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="NBT6VPEh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 338728384E; Wed,  9 Apr 2025 17:06:16 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 75C9D8386D; Wed,  9 Apr 2025 17:10:44 +0200 (CEST)
+Received: from smtp-1908.mail.infomaniak.ch (smtp-1908.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::1908])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55D8E8381D
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:06:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFE23829CF
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:10:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=3b7d=W4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744211172;
- bh=COvYk2KbTnVlmD1A4rLATWoTgG21ALiULBp7PfKh6ko=;
- b=NBT6VPEhhhoZnk+w4J/66A6t37p1O1n9PRo+hC/hckTSeQddW/5YFsQrs/dDFbn7nqdKSXbxf
- D8bSOS6wE0WlPjXLFPG1vlk8CCPseN+h8MKrCO6fpwnJv/L0bDUO/cvoAavKMxTuWAbUfmSvz0U
- QHCjhn9AqUkC5n/9igbihchdom0BJsycck5lq8v/sPEHkPWnumNpw4V2WNdJ5Dg1n1WdUWLa+85
- s3Lyrcp/71ITACKdODvTZwcuS1Hd/0/aCRnDNt2aBx2QKye+wsLxeumkxijgT0hzlVSXTkgmoXG
- wzRqeTjc379JJYEg63hmyX5UtvMMMeKH35YowMX3Z3rw==
-X-Forward-Email-ID: 67f68cda1aecaf4e4108d6f8
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <6fe987ef-39cb-45ce-8c84-bd74a5e3e48c@kwiboo.se>
-Date: Wed, 9 Apr 2025 17:05:58 +0200
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZXmbj1f0mz8Cn;
+ Wed,  9 Apr 2025 17:10:41 +0200 (CEST)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4ZXmbh1ZHGz1lF; Wed,  9 Apr 2025 17:10:40 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH RFC 0/4] fit: print conf node compatibles + use property
+ string constants
+Date: Wed, 09 Apr 2025 17:10:24 +0200
+Message-Id: <20250409-fit-compat-v1-0-56df89ef486a@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 07/10] rockchip: binman: Include a compatible string in
- each configuration
-To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250329150626.2879942-1-jonas@kwiboo.se>
- <20250329150626.2879942-8-jonas@kwiboo.se>
- <6b940128-c5aa-4499-b62b-1a63613d91e7@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <6b940128-c5aa-4499-b62b-1a63613d91e7@cherry.de>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOCN9mcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDEwNL3bTMEt3k/NyCxBLd1KRUS5M0M0uDJAMLJaCGgqLUtMwKsGHRSkF
+ uzkqxtbUA9wf6dmEAAAA=
+X-Change-ID: 20250409-fit-compat-ebe94f690b08
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,90 +62,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+This does a bit of "cleanup" by reusing constants for some FIT
+properties instead of having the same string in multiple places.
 
-On 2025-04-09 12:02, Quentin Schulz wrote:
-> Hi Jonas, Simon,
-> 
-> On 3/29/25 4:06 PM, Jonas Karlman wrote:
->> From: Simon Glass <sjg@chromium.org>
->>
->> Provide a compatible string in the config nodes that U-Boot can use to
->> help decide which configuration to use.
->>
-> 
-> Can you tell us more about this?
+Additionally, this adds a new constant for the compatible property in
+FIT configuration nodes[1] which is useful for FIT images with multiple
+FIT configuration nodes to support multiple devices in the same blob.
+U-Boot will try to figure out which node to select based on that
+compatible[2].
 
-I think the VBE can use this to determine what config/fdt would be used
-in a multi-dtb FIT image.
+However, if this property is missing (and the first blob in the fdt
+property of the configuration node is uncompressed), the compatible from
+the root node of the associated kernel FDT will be used for the
+autoselection mechanism. For now, I only print the property if it
+exists, but maybe it'd make sense to expose the fallback one if it's
+missing, hence the RFC state for this series.
 
-This also sparked an idea to use this compatible for board selection in SPL
-instead of the description (fdtfile) field. I have started to play around
-with a board_fit_config_compatible_match() a few patches in at [1], e.g.:
+[1] https://fitspec.osfw.foundation/#optional-properties compatible paragraph
+[2] https://fitspec.osfw.foundation/#select-a-configuration-to-boot
 
-- WIP: boot: fit: add board_fit_config_compatible_match()
-- WIP: rockchip: implement fit config compatible match for boards
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Quentin Schulz (4):
+      boot/fit: use constants for property strings
+      lib: rsa: use FIT_ALGO_PROP constant instead of "algo" in FIT
+      boot/fit: declare (and use) new constant for conf's compatible prop
+      boot/fit: print all configuration node compatibles
 
-[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/for-next
+ boot/common_fit.c    |  4 ++--
+ boot/image-fit.c     | 15 +++++++++++++--
+ include/image.h      |  1 +
+ lib/rsa/rsa-verify.c |  2 +-
+ 4 files changed, 17 insertions(+), 5 deletions(-)
+---
+base-commit: 341cafc31e4c6941a1b05feb18d18c99ffaebcc1
+change-id: 20250409-fit-compat-ebe94f690b08
 
-That could also be used for having board specific TPL+SPL and use a 
-single multi-dtb FIT with U-Boot proper and multiple fdt/config nodes,
-one for each board.
-
-> 
-> I don't think mkimage -l/dumpimage -l actually provide that information 
-> and the docs are sparse as to what "so that things work correctly with 
-> FIT's configuration-matching algortihm." means.
-> 
-> Looking a bit into tools/binman/ftest.py it seems like it's a way to 
-> expose the DT compatible property from within the first entry in `fdt` 
-> array property (a DTB) into the configuration node in the fit image.
-> 
-> I think it'd make sense to update dumpimage/mkimage/etc... to dump that 
-> information as well?
-
-I think so too, I know there are a few load/entry addresses for some
-image type that is also not shown by dumpimage. This is something that
-can be improved in a different series.
-
-For FIT you can always use: dtc -I dtb -O dts u-boot.itb
-
-  [...]
-        configurations {
-                default = "config-1";
-
-                config-1 {
-                        compatible = "radxa,e20c\0rockchip,rk3528";
-                        loadables = "u-boot\0atf-2\0atf-3";
-                        firmware = "atf-1";
-                        fdt = "fdt-1";
-                        description = "rockchip/rk3528-radxa-e20c.dtb";
-                };
-
-                config-2 {
-                        compatible = "radxa,rock-2a\0rockchip,rk3528";
-                        loadables = "u-boot\0atf-2\0atf-3";
-                        firmware = "atf-1";
-                        fdt = "fdt-2";
-                        description = "rockchip/rk3528-rock-2a.dtb";
-                };
-
-                config-3 {
-                        compatible = "radxa,rock-2f\0rockchip,rk3528";
-                        loadables = "u-boot\0atf-2\0atf-3";
-                        firmware = "atf-1";
-                        fdt = "fdt-3";
-                        description = "rockchip/rk3528-rock-2f.dtb";
-                };
-        };
-  [...]
-
-Regards,
-Jonas
-
-> 
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> Thanks!
-> Quentin
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
 
