@@ -4,82 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7F46C369A5
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 00:31:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BED8C369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 00:35:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFB85838BD;
-	Thu, 10 Apr 2025 02:31:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C2FB8838FA;
+	Thu, 10 Apr 2025 02:35:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ly3FzB3C";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="qQ4ZH01y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BB61838D7; Thu, 10 Apr 2025 02:31:29 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A3C47838D7; Thu, 10 Apr 2025 01:40:48 +0200 (CEST)
+Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::ab])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DA74838BA
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 02:31:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D604C8384E
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:40:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-6044db51b5bso146844eaf.1
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 17:31:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744245084; x=1744849884; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7F0ahkcz/5AYBkR3XJ5Q0uHiiB1WOoLdcFlUsVPcTR0=;
- b=ly3FzB3CpfE5dGjqqrHVaSxjfPD4E3FVcxo2Bmu0A8QpMQk6XByj1EC/P4G9Ezj9eP
- jbpTtTu5EBP/mcJcPy3MZc7T9BLCYtAM0rEy+kpQ+Ahqnl9AmIWyiza0wrMJHlkYAmP3
- szyWRlGmJV0jUz3NfnuGLc1aJAX9aJLoBsLWg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744245084; x=1744849884;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7F0ahkcz/5AYBkR3XJ5Q0uHiiB1WOoLdcFlUsVPcTR0=;
- b=ToblRvc4wA1XRN6cfPjM/tDktpiFMdQdQZkZWADF+iMkQ4sa/jOcjgUfVAHpBFhjk7
- v2mPthoftLQXxoNNkxsgfYuzsbQ1eN19NqKBY1EbLIxauyNpzHAXasMEajiOE8h2SGwn
- iJDWbP4+lT96Mc/OwoWFT40Uh5BjYCjO1Ig706NM8lxQ4Ig/SF+qmCbWoCkRGqzNeOCO
- lxQtzucS4WCBRcLUwU3fFaiqSNTsxS5dX8vHfmwUgpLhcHDznrAKavcaQ0TT34KAON+5
- PdAY6vLslDjPViaMSVyuZWd7N6ozOslY8/3w7oZdZIJklhoCaeUd95fkIlKThel/sCQS
- zLzA==
-X-Gm-Message-State: AOJu0YyDWRKtQCmbi23khGea3qtvuYbKiRVWRcX2RFxLep97+BRclRT4
- OvrLDONTUPQWQs9/bLcqrVvRR6cMweiR7b+UrT7p0VCthtp7O5beilJ88SRUKypx2OqyyowVjyS
- 8
-X-Gm-Gg: ASbGncug/Qz9rnm9UuJk/a3QlbMZTsVmsZm5WRlh1HKsFxvK9JSNWu77Wyb+2Dd14zt
- XhDRVHT9TeDmrLdgX/T+H8eVsdEPx2BsKHIJ+8ne6GDA8S63pMcDWxE+zomiDe5zpvLksT2PqyZ
- AKO73G5N5Yc6VIhsM6ABQPmGf3lKo4Tdp8AGKeXavjBU3ipcoKEun13A7wjmEru3ChvHY6oU0EL
- p58Prr6lHN86e+2NHJHpquskLjw1OIA8sbWzvw2uFbMdtRNZcF6tKy92JYOu0rW5KnHOTfGDGXV
- m1/lh1MzbWqnE2+Ccg9d5wkn1vpDRgSskvgR8aMvXWHoXbbeXZmZdVREE7V90KvDYD//a+W/u2o
- u3pzr
-X-Google-Smtp-Source: AGHT+IHZAJjjjqfRa0N0CFIj8c/N1gx8orBFTpBWM8XsH0IbiZbU8eb7us7rkpSHY7unjiX99J1bKA==
-X-Received: by 2002:a05:6820:1514:b0:604:1:3736 with SMTP id
- 006d021491bc7-60466c65945mr147543eaf.7.1744245084128; 
- Wed, 09 Apr 2025 17:31:24 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6045f5a01e8sm366815eaf.31.2025.04.09.17.31.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 17:31:23 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Eugen Hristev <eugen.hristev@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>
-Subject: [PATCH] CI: Disable evb-ast2600
-Date: Wed,  9 Apr 2025 18:31:21 -0600
-Message-ID: <20250410003121.1818656-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=alexeymin@postmarketos.org
+Message-ID: <84ec2a78-6f9b-469f-b8a1-de44132e31bd@postmarketos.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1744242045;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YLVMWVn+mSk2lSraaE81s1gd/VnnzZeaSDaBER9irtc=;
+ b=qQ4ZH01yb3Foqqa5spOXMpr851yvGxk2Gohd9JPkZDs4jiwLxIhbdT6xdxT94o7/55WYd5
+ PJnENPcR7exzTNfpOSc9W1Oq0L7R0Ts/uFrToFxL+tEypncWmSPeRuvG8cMFQStKuUI843
+ tK9bqVRGeus/Zf1+IZ4a5XfG1qX/SnlOpwiDxFHjtB7pq+qmNWmgb93rBPU2qldN8x09XQ
+ ULAGyYHDZkRuHuFDTuwjamqtOxy/QVI0J6zCgRnIePI38fjIQGSbMF+7m7n2S9+jnypolG
+ 8Xtlc+szTcdr418r58GqynSvQmlGEMOjm4J5XdfhbfGwJfuAk25einI/5QZTtQ==
+Date: Thu, 10 Apr 2025 02:40:26 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] pinctrl: qcom: handle reserved ranges
+To: u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+References: <20250401-topic-sm8x50-pinctrl-reserved-ranges-v1-1-0fe88b491707@linaro.org>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Alexey Minnekhanov <alexeymin@postmarketos.org>
+In-Reply-To: <20250401-topic-sm8x50-pinctrl-reserved-ranges-v1-1-0fe88b491707@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
+X-Mailman-Approved-At: Thu, 10 Apr 2025 02:35:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,61 +72,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, this platform is failing in CI due to seemingly platform
-specific reasons. For now, remove it from CI until the maintainers have
-a chance to look in to it.
+On 4/1/25 10:46, Neil Armstrong via groups.io wrote:
+> From: Caleb Connolly <caleb.connolly@linaro.org>
+> 
+> Some Qualcomm boards feature reserved ranges of pins which are protected
+> by firmware. Attempting to read or write any registers associated with
+> these pins results the board resetting.
+> 
+> Add support for parsing these ranges from devicetree and ensure that the
+> pinctrl and GPIO drivers don't try to interact with these pins.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>   arch/arm/mach-snapdragon/include/mach/gpio.h | 15 +++++++
+>   drivers/gpio/msm_gpio.c                      |  9 ++++
+>   drivers/pinctrl/qcom/pinctrl-qcom.c          | 64 ++++++++++++++++++++++++++++
+>   3 files changed, 88 insertions(+)
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+...
+
+> +#define MSM_PINCTRL_MAX_RESERVED_RANGES 32
+> +
+>   struct msm_pinctrl_priv {
+>   	phys_addr_t base;
+>   	struct msm_pinctrl_data *data;
+> +	u32 reserved_ranges[MSM_PINCTRL_MAX_RESERVED_RANGES * 2];
+> +	int reserved_ranges_count;
+>   };
+Why storing of reserved pins isn't implemented using bitmap?
+
+     DECLARE_BITMAP(reserved_pins, 256);
+
+would only consume 32 bytes, instead of 256+4 like here.
+
+Do I miss something?
+
 ---
-While it's poor form to apply changes quickly after posting, this has
-been reported by 3 separate custodians having CI fail due to this change
-being triggered in their tree. I will be applying this shortly to
-unblock others.
-Cc: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>
-Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
-Cc: Joel Stanley <joel@jms.id.au>
----
- .azure-pipelines.yml | 4 ----
- .gitlab-ci.yml       | 7 -------
- 2 files changed, 11 deletions(-)
-
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index d5cfa59a8a61..7a33d403a77c 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -420,10 +420,6 @@ stages:
-           TEST_PY_BD: "evb-ast2500"
-           TEST_PY_ID: "--id qemu"
-           TEST_PY_TEST_SPEC: "not sleep"
--        evb_ast2600:
--          TEST_PY_BD: "evb-ast2600"
--          TEST_PY_ID: "--id qemu"
--          TEST_PY_TEST_SPEC: "not sleep"
-         vexpress_ca9x4:
-           TEST_PY_BD: "vexpress_ca9x4"
-           TEST_PY_ID: "--id qemu"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 0f27e67abb99..42ec28a9ad8b 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -328,13 +328,6 @@ evb-ast2500 test.py:
-     TEST_PY_ID: "--id qemu"
-   <<: *buildman_and_testpy_dfn
- 
--evb-ast2600 test.py:
--  variables:
--    TEST_PY_BD: "evb-ast2600"
--    TEST_PY_TEST_SPEC: "not sleep"
--    TEST_PY_ID: "--id qemu"
--  <<: *buildman_and_testpy_dfn
--
- sandbox_flattree test.py:
-   tags:
-     - ${DEFAULT_AMD64_TAG}
--- 
-2.43.0
-
+Regards,
+Alexey Minnekhanov
