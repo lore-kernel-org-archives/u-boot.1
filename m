@@ -4,87 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27E4C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715D2C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:26:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 124C883929;
-	Wed,  9 Apr 2025 19:23:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C77C283933;
+	Wed,  9 Apr 2025 19:26:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zGfdI4e5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="bKulvzja";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E83083933; Wed,  9 Apr 2025 19:23:14 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC16A838FA; Wed,  9 Apr 2025 19:26:34 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0441838FA
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:23:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4EB283946
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:26:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-39c0dfba946so4551580f8f.3
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 10:23:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744219391; x=1744824191; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qOnbMxaaAZRMmjftT1FTgEhlpmYwNkzZvQQChTyb1lA=;
- b=zGfdI4e5Gzk7ddUu7G3uxzkzAuH6vQWds04YkiBciBYUguvMLGp18CsJWfdYacGLxO
- 6WD/eGi9OOSLiCRiPhYjom7EZ3wRQFM7A0751XN+Qx/VTnWHQPBpOX5F2C+a5r4/06JG
- AvYPNhu4fKQKxCNtDAtgq9pt7BQaFcnd4I8I+qC3QYr+BAuCd2waqg7BRfzVT8Qt2tdR
- JjiznPSiGW8KPcwYItCnDw2VRDNvY2PJvH9AKMnRz81CYVKrLhqW3uQWAf1SvdahiNJC
- e9Cyjd4EPW+ZwzGB6TMmjnrGY169JinTwV7i8QFMZnT2gjrChCOPFo5JIsTosWfpvaJO
- ug6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744219391; x=1744824191;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qOnbMxaaAZRMmjftT1FTgEhlpmYwNkzZvQQChTyb1lA=;
- b=vG6AkaaTu6IxJ5jTpzeXkfvXPXFP9hTvK2+vlrF6X15/tyAg3eyx51q+xBhDrnAFpi
- 9WsMvcTz2aZts8D3Ktbq9+ycIgDfjORXArTOrpQnfdQAch6x2PZOxdxG3FdQ7sALezHs
- /2Dv9jATKa77hsPAQpdaP+hHVr+Z+Nm9cfAF8sTHLRO4iIvEOk6q9NQTLJm9B9sfSa4i
- sIlfmA+lPlyig8O6pMqyYbjHUyz6pPkTfiQKlrg5X1Qjf05N5i/o6C+50UQ60OKmYfwA
- tgQqa2nKXXHi9UtFkeaMRhAgNztkKP63aM2nzC2KKX1mr7l7x7pHGJrocHFSighiFcrT
- SzVg==
-X-Gm-Message-State: AOJu0YwG2sYRM5rygzuNWqPKm2l0m1d1Vr3CMQcSY+JsSVt9dUC/NGwi
- MOpOYrBQaI04c2Mr/pLvuZZqtKMwZp3IUl1t+0EYbv9sdO+qg0ChcAWatLBwei4=
-X-Gm-Gg: ASbGncsc/WMEIz+GbjsyQ0SnA3mUTDDeHeAyR7De6vKsunFjhcrki1IY3awRM2mRbQS
- kzQ+JvJgaw/e+IYfREzICAi634UIdxVsiAh1KhNwyYV9cqzwEd7GJIPCcbU931XkdndkSSJADmv
- eXEUv9UY0GXXSyiZNkylr5IlmA4GhU8L1Z5ci4ci2Fa9gYS8oQsWxtUqe6M1EHI0SfUSN5WSrxr
- L5X2YiOM4cLh6oWwZVOb2eKM0xJmHlbnvdoRYYEhk0aPuh3EL2oy3L/8TomLnoCRgC9k1vKw6NZ
- JdSk8d9rnBTtQexwglvNCbvlmZPNlnTkgNUN/5l9jIP/j0Bshe7HkGSEZRfp1YpQyxZW
-X-Google-Smtp-Source: AGHT+IHLdbCeFHpTGdSK0ih89Nnxb/5Qk/oUKQqCBt5wLgdirDr5Hbdy8AMG0rzviqxv1xPhSEQePg==
-X-Received: by 2002:a5d:64a9:0:b0:391:9b2:f48d with SMTP id
- ffacd0b85a97d-39d88537f30mr3407876f8f.33.1744219391147; 
- Wed, 09 Apr 2025 10:23:11 -0700 (PDT)
-Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d893612adsm2133257f8f.8.2025.04.09.10.23.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 10:23:10 -0700 (PDT)
-Message-ID: <1f01f1ed-f9f7-4f93-ae79-158c25be1500@linaro.org>
-Date: Wed, 9 Apr 2025 19:23:09 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=3b7d=W4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1744219590;
+ bh=qUTx83rT6cvuD4VMDE+mFGp5JAYBh2N5zofjh62Rifk=;
+ b=bKulvzjaE9Fln/LkD4HkCUmLK1eT9Q6r1jIfrTLRCly41OKBlUyoAIisiWT3B+UeWXG2xFCRG
+ TIbZ65Y5zwY0A11+rWx8c3kN/Kal258p5y0MEI+sKvST2vHRIx7od/v9nKXNDooqgNUvMezkbXX
+ p0y1GEp3aVJr9JCganaCgnC0cBoLiX0p3rTwfZuF9iFU33rouv7QmHWO256ZVps2HBcr40u66hP
+ kF5HxLG9zBZUz3SB/oERQMeExlgRjivfNw4J3LqQUlB3lBjLEGYAu2HcFjsjiBoAMsfTgFEN0QD
+ e6dxK3Rr73k4t5CBup9ReUdy+4g91jGHGXQynP4pGqXw==
+X-Forward-Email-ID: 67f6adc21aecaf4e4109094b
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 1.0.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <4f4942a1-c08b-4c6f-a898-7defba03d8f1@kwiboo.se>
+Date: Wed, 9 Apr 2025 19:26:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm: dts: Add override for RB1
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20250407132810.35149-1-sumit.garg@kernel.org>
- <20250407132810.35149-2-sumit.garg@kernel.org>
- <baa7e896-a286-47ed-bd9a-18338978fc0d@linaro.org> <Z_UouNz11eRxIIa-@sumit-X1>
- <deb7ccd0-978b-4b97-bf67-de540dc02fe6@linaro.org> <Z_ZpeSFEyJan2mZB@sumit-X1>
+Subject: Re: [PATCH v4 09/10] rockchip: binman: Support use of crc32 for
+ SPL_FIT_SIGNATURE
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20250329150626.2879942-1-jonas@kwiboo.se>
+ <20250329150626.2879942-10-jonas@kwiboo.se>
+ <5d3c9e7f-336b-4b67-a7f4-a25a61b0908e@cherry.de>
+ <ac68b883-021c-43ac-b834-bafa54e7182b@kwiboo.se>
+ <887d7a5c-0ba7-4e62-bee2-8e5c159710c8@cherry.de>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <Z_ZpeSFEyJan2mZB@sumit-X1>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <887d7a5c-0ba7-4e62-bee2-8e5c159710c8@cherry.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,107 +79,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
-
-On 4/9/25 14:35, Sumit Garg wrote:
-> On Tue, Apr 08, 2025 at 04:43:49PM +0200, Caleb Connolly wrote:
+On 2025-04-09 18:11, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 4/9/25 5:38 PM, Jonas Karlman wrote:
+>> Hi Quentin,
 >>
->>
->> On 4/8/25 15:46, Sumit Garg wrote:
->>> On Tue, Apr 08, 2025 at 02:17:29PM +0200, Caleb Connolly wrote:
->>>>
->>>>
->>>> On 4/7/25 15:28, Sumit Garg wrote:
->>>>> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>>>>
->>>>> Add U-Boot override for RB1 to for USB in host mode as OTG mode isn't
->>>>> supported. Also, disable sdhc_2 as it's currently not supported, sdhc_1
->>>>> works fine though.
->>>>>
->>>>> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->>>>> ---
->>>>>     arch/arm/dts/qrb2210-rb1-u-boot.dtsi | 11 +++++++++++
->>>>>     1 file changed, 11 insertions(+)
->>>>>     create mode 100644 arch/arm/dts/qrb2210-rb1-u-boot.dtsi
->>>>>
->>>>> diff --git a/arch/arm/dts/qrb2210-rb1-u-boot.dtsi b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
->>>>> new file mode 100644
->>>>> index 00000000000..1e136ee405a
->>>>> --- /dev/null
->>>>> +++ b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
->>>>> @@ -0,0 +1,11 @@
->>>>> +// SPDX-License-Identifier: GPL-2.0
->>>>> +
->>>>> +/* This is usually OTG but U-Boot doesn't support that properly */
->>>>> +&usb_dwc3 {
->>>>> +	dr_mode = "host";
->>>>> +};
->>>>> +
->>>>> +/* SDHC_2 isn't supported in U-Boot as of now */
->>>>
->>>> I'd rather avoid disabling this here, I guess it's just missing clocks and
->>>> regulators which doesn't justify modifying DT. An error that mmc1 couldn't
->>>> be enabled seems fine to me?
+>> On 2025-04-09 13:06, Quentin Schulz wrote:
+>>> Hi Jonas,
 >>>
->>> I totally echo with your thinking that we should avoid modifying DT but
->>> at the same point we shouldn't enable peripherals in U-Boot which throws
->>> errors. It's also possible that U-Boot misconfiguring mmc1 which might
->>
->> I disagree, DT isn't enabling or disabling peripherals, it's describing
->> hardware.
-> 
-> It would be helpful if you can describe the use-case for "status"
-> property then.
-
-https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#status
-
-These all describe the functionality of hardware, since implementation 
-details of the software (U-Boot) which is parsing the DT has absolutely 
-nothing to do with it.>
->> U-Boot lacking proper support for that hardware isn't a good
->> justification to disable it. Especially since you might boot Linux with the
->> same DT and now have no working sdcard for seemingly no reason.
-> 
-> We shouldn't use same DT unless both U-Boot and Linux support that
-> without modifications and *not* being in a broken state. The similar argument
-> holds true for USB OTG mode too.
-Well, the main difference with the OTG fixup is that we undo it later 
-on, so if we boot an OS with this DT it won't have the override -- our 
-hacks aren't exposed.
-
-> 
->>
->> An error in U-Boot is exactly the behaviour we want to see, masking it only
->> created confusion.> turn as a problem for later stages.
-> 
-> IMO, our first priority should be to fix U-Boot issues and then see if
-> we can use unmodified DT.
-> 
+>>> On 3/29/25 4:06 PM, Jonas Karlman wrote:
+>>>> Use of SHA256 checksum validation on ARMv7 SoCs can be very time
+>>>> consuming compared to ARMv8 SoCs with Crypto Extensions.
+>>>>
+>>>> Add support for use of the crc32 hash algo when SHA256 is not supported.
+>>>> Also use a HAS_HASH to simplify the ifdefs when no known hash algo is
+>>>> compiled.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 >>>
->>> I have been totally working with a remote lab to fix issues on RB1. I
->>> will soon get one on my desk then I will be able to fix mmc1 too.
+>>> I don't know enough about general security but this very much looks like
+>>> a bad idea to me.
+>>>
+>>> https://web.archive.org/web/20170210173741/http://www.derkeiler.com/Newsgroups/sci.crypt/2003-07/1451.html
+>>>
+>>> """
+>>> While properly designed CRC's are good at detecting random errors in
+>>> the data (due to e.g. line noise), the CRC is useless as a secure
+>>> indicator of intentional manipulation of the data. And this is
+>>> because it's not hard at all to modify the data to produce any CRC
+>>> you desire (e.g. the same CRC as the original data, to try to
+>>> disguise your data manipulation).
+>>> """
+>>>
+>>> (yes I took the "first" link my web search engine returned me, thanks
+>>> confirmation bias!).
 >>
->> In that case we can surely land the proper fixes for 2025.07 anyway, so I'd
->> just keep the errors until then.
+>> I am fully aware, and the fallback to use crc32, and current primarily
+>> use of sha256, should not be considered a security feature. It is
+>> intended purely for a checksum validation of the binary blob after it
+>> has been loaded into memory and before U-Boot otherwise unconditionally
+>> jumps to and execute the loaded blob of binary code.
+>>
+>>>
+>>> I don't want to give people a false sense of security. If it really
+>>> comes down to it, I'd rather have an explicit Kconfig symbol to set this
+>>> value (maybe have a `choice` even) and be very clear about security
+>>> implications.
+>>
+>> Prior to the addition of the hash { algo=sha256 }, there was no checksum
+>> test and U-Boot SPL would unconditionally jump to the loaded data, even
+>> if it had been corrupted, was only halfway written or otherwise
+>> overwritten.
+>>
+>> The addition of crc32 instead of sha256 is just to allow older board
+>> variants with weaker SoCs to at least have some sort of checksum
+>> validation in use without affecting the boot time too much.
+>>
+>> On my rk3228 board, validation using sha256 could take a few seconds,
+>> and with crc32 it could be measured in ms.
+>>
+>> To me, having at least some default checksum validation is preferred
+>> over none at all.
+>>
 > 
-> Fixing errors in mainline will help other people confidence who are
-> trying to boot U-Boot on RB1. If you still have a strong preference to
-> keep SD card support enabled in broken state then I can live with that
-> until I fix it for real.
+> Except if this confuses people into thinking they have a secure system 
+> except they use CRC32 instead of something more appropriate like SHA256.
+> 
+> It seems like the "hash" node presence doesn't mean a FIT conf or image 
+> node is signed.
 
-I decided to just have a crack at it and managed to get everything 
-cleaned up. sdcard seems to work on my RB1 with these patches on top of 
-qcom-next and the u-boot specific DTS hacks are removed.
+Correct, current use of a hash node does not indicate any type of
+signature validation, only that a hash value should be calculated and
+added in the final FIT output.
 
-USB phy init seems to fail for me, but the board I'm testing on is some 
-super early DVT so I'm hoping it's a silicon issue....
+The signature node must be added separately and/or injected at a later
+stage, and for that the algo prop use a {checksum_algo},{crypto_algo} 
+format. Where checksum_algo = [sha1, sha256, sha384, sha512] and
+crypto_algo = [rsa2048, rsa3072, rsa4096, ecdsa256, ecdsa384, secp521r1].
+See tools/image-sig-host.c for supported algos.
 
-Please give these a spin and let me know how it goes.
+> I also don't see many device trees with a signature 
+> node... which is kinda odd. Looking a bit into the signature node in the 
+> spec and binman tests, it's not clear to me if the hash node is reused 
+> by the signature node if if exists and if their algo should match and 
+> what exactly is checked by the signature node (like signing the hash 
+> string contained in the hash node(s) listed in sign-images property, or 
+> (re-)generating a hash of those and signing it at build time?
 
-https://lore.kernel.org/u-boot/20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org
+I have not looked into how signing and signature validation works, and
+if the checksum in signature { algo } must match the one used in
+hash { algo }.
 
-Kind regards,>
-> -Sumit
--- 
-Caleb (they/them)
+My personal interest have only ever been to add bare minimum checksum
+validation in order to avoid executing code that is known to be broken
+(a basic checksum test fails).
+
+> 
+> If
+> a) it is not possible to have a hash node's algo differ from a signature 
+> node's algo, then I'm fine with this as crc32 won't be allowed
+> b) the signature node regenerates a hash regardless of the hash in the 
+> hash node, meaning the signature will be "appropriately secure" 
+> regardless of the algorithm listed in the hash node, then I'm fine with 
+> it too,
+> c) it is possible to sign a crc32 hash, don't want it :)
+
+To actually validate a signature in SPL you would need to enable support
+for RSA or ECDSA in SPL, without it only checksum validation may happen.
+
+So yes, to get a proper secure solution there is much more to do than
+just select a checksum algo. You need to correctly handle a signing key,
+sign  FIT, preferably also sign the rk boot image, burn public cert in
+OTP and more.
+
+Not sure what you want me to do here, in my mind the use of a hash algo
+has never been an indication of security, and the default to use sha256
+was only because it was supported by ARMv8 CE on the SoC being tested
+when I added the original hash { algo } prop in commit 99e3a2cd4e74
+("rockchip: Add sha256 hash to FIT images").
+
+The option to use crc32 as hash algo fallback was only ever to at least
+give a better default option than not doing any type of checksum test.
+
+Regards,
+Jonas
+
+> 
+> @Simon, do you have some hints about this?
+> 
+> Cheers,
+> Quentin
 
