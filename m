@@ -4,168 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F4CEC36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 13:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E02C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 13:46:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92D9E837EF;
-	Wed,  9 Apr 2025 15:35:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 931248382C;
+	Wed,  9 Apr 2025 15:46:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="H/uh5Lu2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t+78TccI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E02A88381D; Wed,  9 Apr 2025 15:35:52 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0C63F8381D; Wed,  9 Apr 2025 15:46:14 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 617A38297E
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 15:35:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id EB4E18382E
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 15:46:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xqiOX5PvrU5I/C+V971V3RXzQk7bV415kZuiywAOSKtcNq9do22CFGfplRXnR8hroWvKEZ0c+j687QzWcK5YKxRVZLlwTpXuhnZ/SKndjXVV04DE+vVaxkHvL9woFHutKCZl2istrdmD1MTDuimnBU9NCIM+4GItQzeY9LFFnqwNK7KECJGhLhVWIgv5Ttff5CutZhXHeLEOmelFY6VWC1kK3vPOPDzaVhu2KuY9InT/a4sg7drFGv6jVlwecfRJuarFa+ZsAs1zZaXCAEsLzz2pK88HYdAAGPsHkfcwcHaNGaJCW1/6kTo9d8eN/wLrX5PMs1yO9mmK/E1MpJjdSg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wBRb0eNmV8FM8aIkwbw2RtC0f69gt2VEf4VsCWODoEk=;
- b=jh+6D8eB1Og3MH28ojM2rwtg+Lk3/qsIgEuK72iTW+9tDlKUy/owRIdiF3iqPn6OJEnIpxfQel10UmLDrRkvCIfRS1D23RmyP03amrB9XDCIq0Z7bpVw5eu1hYX+nKArAMYfKsUVkN3eFyr+QSuhfj2UPbtQQJiH3pGstOs+d/JNWqPPIPopZUNuEFpgJ6jWEfn1rPXAzviZOHVDTan3rD7fx/sd8m2JT5P2CWUQK3JyMeX9p9REMpgfFUgUPjaRb2ywpb40r0X1rLfbLKgk+H7EmcSyGWI94uaYSqDJt+qpUKuBbJ7Z2FbRoGacZ0YwYk1qha0MXc99ArjKIh2XEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wBRb0eNmV8FM8aIkwbw2RtC0f69gt2VEf4VsCWODoEk=;
- b=H/uh5Lu2VX2vEuRkatAyDrsxoNA3iiERUQzAyJsPNlLo9MuwVtiqkzipBoFHSNtNjJJm0ISNcfR4/rpZ6zTlbS/c7W9/gw393pBcXBVQYTSKgNHKMwRp8GC0MVQ0s9KnhFcoWhkY87aIxuygvOlACUKZHyAO5cWQ26SIegy6sd8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DU6PR04MB11157.eurprd04.prod.outlook.com (2603:10a6:10:5c2::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Wed, 9 Apr
- 2025 13:35:47 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8606.033; Wed, 9 Apr 2025
- 13:35:47 +0000
-Message-ID: <53f32547-6758-49a2-8246-72b9046cac03@cherry.de>
-Date: Wed, 9 Apr 2025 15:35:46 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-39141ffa9fcso7395421f8f.0
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 06:46:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744206368; x=1744811168; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NMExAzT/jKtFN52OYE1vuQ4aVs+B2q41A7p3rvG6e3U=;
+ b=t+78TccIeCvn9r2+GbahwqJdSlGHldTbhJnNi6dV392Cx5wpz864VbxWNasj+hQxPQ
+ AfW1teIKALh/iGxfrgkP+F/RlNzCvBj4bFbHgTKM4rSelNlrTOnEAugbFhoFH6QFUNSI
+ rKPSeSkjbE6GNPKm74xOjWd8XHloejq07mxla2UKXMI2ZsV+SM590PlyFK72ObJuPolE
+ kCbqvU66q9LcSPRPRY44M0ckHEoAT2qdEySHaQStGjQK3B2AIhapG7u0R5F2DMAnChDw
+ t8gfV2qdJ2HHiqqz3nRQ89Fp6CY4sTlXW156TaHdL9CEI3SMcXRVqFxYAQmuUf9GlpOR
+ 78aA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744206368; x=1744811168;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NMExAzT/jKtFN52OYE1vuQ4aVs+B2q41A7p3rvG6e3U=;
+ b=hS5bZoBsKkafQ07KC1KQgiP6+RarQZIfmW1po9zU4HlMcf4Eq7IAZhQ2dLDklmP3N+
+ dgP+CZs8RLseY2Paotd+tiZ+L+GEqwqPQiYHdkG5x/41vag1E12fm3uDg4NpfxgUmgye
+ WUMQjYzLhMzis2ChXeJYGSqMlINvdWJfv3G4M4k35ZE8x/7ptt0pBhUXr3quxT/3vnZB
+ aqS/S4xqjNclg+QXc75KaZ6bxjQTLOx9zywz7RvqsHsewZsWpkRtY0qAe1bGgakGAtFW
+ sLoktEwNzCRszTX1yBI2ALZd97uMLIL9yF4SHyZJifnDO/9VvukAaeasIP8J2irht+9d
+ gYmw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUf36tYWblo880fWPTLVwW07H6GJEJAzBCHmWaj5Q5Tri/+2gdE6kqOaLCvYGq+x595Qzp+Jv0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiA3uu2dvJ+ZntuIhW33K+SIpg40HtAsaM7jUc+nV0qvywP3e+
+ B8vyptl7MjRkvTOAraBgb0+6D+gAKl7UgTWWU0L7+J5QKJentZkhiiJi8TKXpQc=
+X-Gm-Gg: ASbGncujrB4k0AHM1qpxFKHcLilZRDrCNscslxJL+BUGRmdKEEIShjN1/QO0OOE0TmO
+ axaePXt+7Bhz/zvAfC31BzGQN73CXTJEPW8b4JNor7n3dvhPrmn+tmZ2jIhbUwt5qcqoADN4xb2
+ 4vBEJVBGAtXJ1BRBUelhW97PQYdP7C+hZax3DX/O96a3gIJJBsFnKV9G20Nax9vat40Jz9s8yY/
+ fZTjB2N78jGlANlu0pLhZztMxXS2G8URZYChruSJ875Lj1qDc+M3bVr+DD0rdZ54eecvnnoNLoa
+ X/MPxbptvI4FiWhRk/pR3LNz7qJSIMvJH3M1MIvUHtQXVTMWueiBDJJxfkKNbUdc0NY/
+X-Google-Smtp-Source: AGHT+IEStYiATthJzejTsCCN5UgoezK3fowgec/HZjbDAcRO1yZyumu7JCyopJ+3dtw4+2BUxoIoKw==
+X-Received: by 2002:a05:6000:2404:b0:39c:1424:1cb3 with SMTP id
+ ffacd0b85a97d-39d87aa1b4cmr3087259f8f.5.1744206368187; 
+ Wed, 09 Apr 2025 06:46:08 -0700 (PDT)
+Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f2066d0fcsm20415765e9.19.2025.04.09.06.46.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Apr 2025 06:46:07 -0700 (PDT)
+Message-ID: <0974a2c7-fbe0-4195-ad24-36e815ac4080@linaro.org>
+Date: Wed, 9 Apr 2025 15:46:06 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 08/10] rockchip: binman: Use the skip-at-start prop in
- simple-bin image
-To: Simon Glass <sjg@chromium.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250329150626.2879942-1-jonas@kwiboo.se>
- <20250329150626.2879942-9-jonas@kwiboo.se>
- <01e8a4b3-a77c-42ca-a4de-e744755a2b89@cherry.de>
- <CAFLszTgSeGN_+adh6VviNxYmVCGR_iOQN_igBbdEaXxDqKsb_Q@mail.gmail.com>
- <e7ac70c7-676a-4df1-b1bf-5c4bbbc31a1c@cherry.de>
- <CAFLszTgGfXmBrTu4RnSo13WE82W+E-bVrCrif48BbHFxzx-TFA@mail.gmail.com>
+Subject: Community meeting April 8th 2025 (was: Re: [ANN] U-Boot v2025.04
+ released)
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+References: <20250407220011.GS5495@bill-the-cat>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszTgGfXmBrTu4RnSo13WE82W+E-bVrCrif48BbHFxzx-TFA@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250407220011.GS5495@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0097.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a9::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU6PR04MB11157:EE_
-X-MS-Office365-Filtering-Correlation-Id: 248a4c69-7503-481d-f67b-08dd776b6f4a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Y0pGaisvbTJwWGF6RVFmazloRW8rOHBmNEpSNThYc0tpQlNJYzlYb3hKZEkz?=
- =?utf-8?B?R3pyQVRmaFQwcXptTmY5enE2YTl6SG9aT2dOdndRL2pueVhyLzR0U0ZpdHhL?=
- =?utf-8?B?VmNVYURqSVZ5QUR4SVQvd1BaaDM1ZW5XaUdGTndnZGRBQ2xYcHZHcTJSOFBN?=
- =?utf-8?B?UU8vVlNQT25qemplQnVILzdocXM3NUlrclBReW1pbVZpanR3anJwc0w3RzYx?=
- =?utf-8?B?SnRDbFY3YWVXSXV3OGNnQ2VQMURNTUIxTjZacGpmOEpkRWdZL1E3NUF2ejVs?=
- =?utf-8?B?SmxkQXhScHZkbTRYaGxBQmtVUUZFeTRZMlJmMXQwTFFXUmkrN1d2cmRoSzRy?=
- =?utf-8?B?YlB5WUUyTXVnT1FDdmhjckZsaVY4K3JidXhGTHkrMFNUVnRNU20xTGN6K0t1?=
- =?utf-8?B?ZkJvR2xOMDVyZUptbTlLMUNSSG93K0hTNHRtak16N09iUGVXN3NXT1puaUIr?=
- =?utf-8?B?L2xHaGl4NFp3Z244TWk2NnpLQ0xFYi9SUHVCUWpFcStPalFubWR1TGttZnhr?=
- =?utf-8?B?QXF0SnBFaFRMRTZZUVZlOXlHdHZOVTYzWFpJWXJnRXBtblVHMWlHcFk3Z0dz?=
- =?utf-8?B?TnZ5bUZpYlRIUHBHc1o5YlNhTWlldVdXdVVBVnI4MFpTeGJ0eDJhdVZFeCtM?=
- =?utf-8?B?WFJEQjd5dExYeG4xSjJBaStUTDZHVk9hbEgxTWNvZEVOMDQ4Z2ZxSFVYRU1B?=
- =?utf-8?B?N3duZ0dIbDc4Y2hlNVRiVmlyMUxJM1ZvQXgwaGVYUWRrdVE3OWx2OEw0dWZx?=
- =?utf-8?B?TnJ3RGNVdmF1UEFHaGhlK3RPMmhUak0vQ1A4WGhhNUJrSEtaWFIzK2hXUXNE?=
- =?utf-8?B?N3FGUEtVK2RaR0JhSURCWU9KOXFZdm5hcXVuN3pHOU9SVXN6SytwSU14Ykpy?=
- =?utf-8?B?S0FsWHFyL2ZXMGdoRk1XQWZXbktJamRlMm14dS9jL05TR0RGdUFOV0NzYXdK?=
- =?utf-8?B?cHB4M3FIaDQzM1Y0bm5zVFhaM3F1cXB0Vy9GZFk4RTVyblBvQUlGcXRnWGF1?=
- =?utf-8?B?UGRYQytPbGoxdnJnVGc4ZXQ0OGtXUGUyRytBUmIyYml5dGdlbGVqcGRBRmRt?=
- =?utf-8?B?NEUxQlFGcm9YbXYvNXg4dGFtczRjZGJsN1lpUWx6ZExkbDgvTlo1SWxpY0tm?=
- =?utf-8?B?dlVvaGpEekU5ZWt0SW5QS01QYzlORGQwTjBsM0oxVzQ3RS9yYlFJSUh5cTNx?=
- =?utf-8?B?Y2NmUVFnZXB2RXVSRmhqK1VOYkFoZ1FmR0s3QmRLN3lNVVFyK2hmdEE5RStQ?=
- =?utf-8?B?U3JMZGVtNEhVU05TTXJkNGV1blFrN1lNemJmR0FnS3QvanVvTEZCY1ZjTzZX?=
- =?utf-8?B?L1R5MnhWTDhaNC9oSXp5STVIL1BlVXZya0RkdTlxb2dOUUErY3l5T0tSZ2Zt?=
- =?utf-8?B?OWtsYTlLYWExdUF1ZThMajlKSWpWbS92UVNRZksyM3lBcDlEN1Y2bGsvd0hQ?=
- =?utf-8?B?NlNuc25rQjVvTjB1b2QyWkoxUFVYYTl3alFnMmV2L0lLUFkzK0JZTkFlSnJH?=
- =?utf-8?B?aWRscWZHNzZtWWt6c1cyUHVCdVkwdUVJazYvNEttWEt0bm1FRzQ1N0dHQjUy?=
- =?utf-8?B?NWwzRDU3d252ajFXOUNtVWd4Sy9NZmtPTXhKUTlkTnFKM2FPU0Jub1pHekZs?=
- =?utf-8?B?dXh1R3A2S0dndk9tZmJXTlJQc3NlWFlVajhPek5wU1kxSDlVckgyLzFoMnZx?=
- =?utf-8?B?b1ZEWlJRdUhHRSs4NXNReGNOQXkrd2JFOXVoSVQ4TDk1WUhDaDZBell2eFc1?=
- =?utf-8?B?cE9BNFVNR3QyaS94NkNzT3ovZUQ1ZkNSZjRwdVcyQjdEUWN4T0ZoZzN2ellD?=
- =?utf-8?B?amNxM1BJaEhHVnFuT0FxOUFRVnNzUi8rcmRObHJvR1l1UlJCWlZBa1ZDZUsr?=
- =?utf-8?B?M2c2SGR0MTJKYlljLys0NkRXdkpqVGxET2ZVSnJUUTU0K21IRDdTcFpJSlR2?=
- =?utf-8?Q?GTOuWjGKj6g=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WXpHNGptT2VueW80SHVVcGtIQ1FwTFlTZDgzSEY3d3piSFEyenlsUWxLaXV6?=
- =?utf-8?B?L3RYWTFpRW84UzJ1Vnp6bXZHbURQMWtGTk1oMXlVcENpWStyOHpGb1NNaG9p?=
- =?utf-8?B?K2pQY0h3ZGhZamJsc0VSUVIzSFhNTzlXd2pvMXlTVWxMbVQ3NGwxSWpUVnBr?=
- =?utf-8?B?UXZVRFoxNWJqQzVGZVZjQkRCKytlSFhyWStzSjdFVkc4c2hwYVRQWjNWcHo4?=
- =?utf-8?B?NTZtQ3V1c1h2dVlvZUJJLzlaMnlIMGxIeXpTRnFPbzI4M0tCRWZ6UWpoUUxP?=
- =?utf-8?B?RmZDMG5TcmE0ZU9hN2o1NnJFRGNPZUY5dlVhdklaby91THRkLzBjN0lvbStU?=
- =?utf-8?B?cUdiRTRCaFFFUnRmOFQ3R1lDN0laU1M4T3BRUnozUFVwOERXU0hnTjR0OUVp?=
- =?utf-8?B?alFSV0REN3p5OENsQ25rdDlRbFdTV1luRjlqWlo0TEliejd2cC9XTXJJNWkz?=
- =?utf-8?B?NU0rVUhKOXJpaHd0b2kxZ0I5ZGJkaXAvVmZwbFNvZ2U4RTVkeC9tTmtqK1lC?=
- =?utf-8?B?ZDY2ZGRNU2RhQWR1N0hacC9MaTg4aTRaNU9oR3kvM2ZTMHFsYmZrNkFscURL?=
- =?utf-8?B?UVFhSzFMU0xObFpRUEhtdE1uanFITm51SHhCaG83S21uQVlYWEdUT0lHNnND?=
- =?utf-8?B?R1A0UkMrbVNpbFFtdFB6cTdSdnNyeWIzQVVHa2l6cnRsVDA3UFprcHQ4bisx?=
- =?utf-8?B?bkJ0K08wTzNEOTdzQ1d5amdJYzJGNGNvUEVWSXFGNnhuVFVtUkI4VHBsVklT?=
- =?utf-8?B?SnlDaFRrSFAzYitMQnZ5N21mdm9EemFGT0xCOFpqdnhrbHkwQ1E1WDkzVk51?=
- =?utf-8?B?U0F3UXNCc0Uvb3VjT3Z0bHZVR2FkSUVLc0t0VkdMS1lRRG9vbHpDOEJkMnRi?=
- =?utf-8?B?RExtdW11ZWtoTjloZGN4M2pDWWFWZ2FuR3VvbjNGNkE3M2dFTEY1eWc4ZEU2?=
- =?utf-8?B?WlE2V2FYbWRhaHUxS24vWTd0V3ZOd1YxRzBmNDNwVjdKZmM5N3QrK21Qa01a?=
- =?utf-8?B?UFVUbnpFYUcrbFNJa0wwbUloMmdydVppc3ROZjNHOCs2RWtGNDREblRzR3Fs?=
- =?utf-8?B?ZkpzYzhWd1RSTjhBNXNJMlpnV2V4dWFWSHUyVTNqeEJ6VDBWdVlGV1p6azBu?=
- =?utf-8?B?S0hyempHNHlGS2YwNWlmakQ1SHBLT2d4aGNEMXQ2Yll5ak9CZE9RajE1eFRy?=
- =?utf-8?B?U09BTm41NHc1SEJRTDVSMVlNdXdEZUZuU1ROdy9rOVNpazFnODFvSS9KTDFF?=
- =?utf-8?B?UERuS2NXTDlzQmt5NVRnQTFOMmtQMDR5Uzk0eFNJVi9wOXFwbUxmMExiclhR?=
- =?utf-8?B?Y3FTU20vdmE2ajBISC9laXJMdm5YdTF2bUl1TkorbW5qWmxJVUdNQzUzY3dp?=
- =?utf-8?B?UnZtSW9tRnBFMlNOTzhGbUxyWnZTbzI2N0NYNXk4c1RsNXdnKzRyR05MeTlK?=
- =?utf-8?B?bTRMK0VMUjFYUTZCL2p5ZHJWenUrbUZ6MW51Mjg5QUIzVHBFWlZxYVdjRkRo?=
- =?utf-8?B?ODhZeDIzT0RQOEFMaUdQUWFxb0o3RUNyWmdFSDNGQks1d1FlaEZRZGJLUFhL?=
- =?utf-8?B?MXgybUxpbi95bEJpZ2tyN2EzSDhFSGg0c3NrWGJ2MEdmRTVYNWpJVFBiQlY4?=
- =?utf-8?B?RjU3eFc1YlB5akpzQmMvYVA2WHBzZ21wWUFKdkdsc2JkSXF1WEJSejB4RTY4?=
- =?utf-8?B?Z0doaHNtdHVjdnIxcmNpcWpGN0NFbE1ISWQzMy9IdUFlb0RwY3luT1BtY2dm?=
- =?utf-8?B?aDhJdjc5NWU2N2QvTkxvTXV2U25iT2l3dWxVWEtkeVVxNEJVb1B6SkxlQ1JJ?=
- =?utf-8?B?YTBydWdIWjR5cE5KenphWFJuN0tYbXpiUmYxd0dEalhCeHRQTmZQSmtwUmJ5?=
- =?utf-8?B?M2FpV2tUV1JNbWdFc0lLWGF6WG5xSjFVTlNpOWFhUmZXeE9JZ0crS21vUEdk?=
- =?utf-8?B?M2FjRkplR1ByYU9pRTVOejJQd0R6NmJzbGJITjBWSTlTSWlFSWtuV3NHUDZP?=
- =?utf-8?B?cVpOSmVCclIwYUpGOC9aL3N1WHovOWROZVpaeTJqSW1meW9mWDRxVEJxcWg4?=
- =?utf-8?B?TDA2NWRpT1dpVVhsemM0L0FraE5PV0swcFhuUE9OVWdUcUsrS1pneDdSays0?=
- =?utf-8?B?SmFvNXJJY3NmK01lOXI5S2U1QVdNNHFNQmJjL2FNQmVVRkh1ZDhSZDFWZStj?=
- =?utf-8?B?UVE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 248a4c69-7503-481d-f67b-08dd776b6f4a
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2025 13:35:47.0837 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bItRFXMS1NOfOlHnFLfGSPlFrHJDNmTVgn5WGmK6ogHS//0KLVyYsuTHDUErXBrDvbLTu1jN9p8KljGAtAyQ6EUxUGU+i97aKZ4IihA3He0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU6PR04MB11157
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,92 +101,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Everyone,
 
-On 4/9/25 3:33 PM, Simon Glass wrote:
-> Hi Quentin,
+On 4/8/25 00:00, Tom Rini wrote:
+> Hey all,
 > 
-> On Wed, 9 Apr 2025 at 07:32, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi Simon,
->>
->> On 4/9/25 3:22 PM, Simon Glass wrote:
->>> Hi Quentin,
->>>
->>> On Wed, 9 Apr 2025 at 04:57, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>>>
->>>> Hi Jonas, Simon,
->>>>
->>>> On 3/29/25 4:06 PM, Jonas Karlman wrote:
->>>>> From: Simon Glass <sjg@chromium.org>
->>>>>
->>>>> The simple-bin image is normally written to MMC media at block 64, which
->>>>> is a 32K offset from start of storage media.
->>>>>
->>>>> Set the skip-at-start property to 0x8000 (32 KiB) so that fdtmap and
->>>>> other embedded binman symbols in the output binary is referencing image
->>>>> offsets correctly.
->>>>>
->>>>
->>>> Shouldn't we have this commit BEFORE we add the `fdtmap` node since we
->>>> know it's wrong before this commit?
->>>>
->>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>>> ---
->>>>> Changes in v4:
->>>>> - Drop defconfig changes
->>>>> - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
->>>>>
->>>>> Changes in v2:
->>>>> - Move this patch to the end of the series
->>>>> - Drop 0x8000 offset for SPI
->>>>> ---
->>>>>     arch/arm/dts/rockchip-u-boot.dtsi | 3 ++-
->>>>>     1 file changed, 2 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
->>>>> index fb38b7b80c43..65b81bf58626 100644
->>>>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
->>>>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
->>>>> @@ -154,6 +154,7 @@
->>>>>         simple-bin {
->>>>>                 filename = "u-boot-rockchip.bin";
->>>>>                 pad-byte = <0xff>;
->>>>> +             skip-at-start = <0x8000>;
->>>>>
->>>>>                 mkimage {
->>>>>                         filename = "idbloader.img";
->>>>> @@ -178,7 +179,7 @@
->>>>>     #else
->>>>>                 u-boot-img {
->>>>>     #endif
->>>>> -                     offset = <CONFIG_SPL_PAD_TO>;
->>>>> +                     offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
->>>>
->>>> This is confusing. The documentation states:
->>>>
->>>> """
->>>> offset:
->>>>        This sets the offset of an entry within the image or section containing
->>>>        it.
->>>> """
->>>>
->>>> My understanding is that it should be relative to the beginning of the
->>>> image but this now needs the knowledge of where it will be stored on the
->>>> MMC device (via the value in skip-at-start).
->>>>
->>>> Why is skip-at-start automatically deducted from offset?
->>>
->>> This is how binman works[1]. We are trying to use the feature designs
->>
->> Why is it deducted?
+> It's release day and here's v2025.04. We had some last minute issues
+> reported, but then also resolved.  I want to thank everyone that's
+> contributed to this release, not just in terms of code, but
+> documentation, testing and otherwise ensuring things go as smoothly as
+> they can.
 > 
-> Are you asking why skip-at-start is deducted from the offset?
+> In terms of a changelog,
+> git log --merges v2025.04-rc5..v2025.04
+> contains what I've pulled since the last RC or:
+> git log --merges v2025.01..v2025.04
+> for changes since the last full release. As always, more details in
+> pull requests (or the tags referenced by them) will result in more
+> details here.
+> 
+> As is becoming reguarly scheduled, we have a community meeting tomorrow
+> (for me anyhow). The meeting details itself are:
+> https://meet.google.com/btj-wgcg-euw
+> April 7th, 2025. 9am (GMT -06:00)
+> 
+> To join by phone:
+> https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+> 
+> The meeting can be added to your calendar via the link on
+> https://www.u-boot.org/
+
+
+Here are the notes from the meeting, please feel free to clarify any 
+points I might have missed or gotten wrong. Thanks Tom for chairing.
+
+# U-Boot Community meeting April 8 2025
+
+* Tom intro: next merged into master, small delay
+* Heinrich: ACPI has regular regressions due to lack of testing in CI
+   * tom proposes adding another QEMU defconfig with ACPI enabled
+* Heinrich: Ubuntu images being used in CI are getting too old
+   * tom: has a patch to update to GCC 14
+   * tom: opened an issue, Simon to investigate (link?)
+   * tom: already tested new GCC/LLVM, no new warnings.
+   * tom: will rebuild docker container this week, adding byacc for 
+binman to enable IMX8 testing
+
+* state of Simons patches re: bootflow/EFI/standard boot
+   * issue with standard boot that the EFI bootmgr option is always at 
+the top
+   * heinrich: proposes a new virtual device that can be ordered anywhere
+   * heinrich will investigate in the next few weeks
+
+* tom: modernising the Makefile
+   * tom: which platforms are still using old stuff? will consider 
+disabling or removing boards
+   * tom: e.g. watchdog (deadline 2019), legacy i2c (deadline 2022.04)
+
+* caleb: FdtFile revival
+   * context: https://github.com/systemd/systemd/issues/36835
+   * would enable picking DTB matching your kernel version
+   * heinrich: robh thinks we should match on compatible instead. Simon 
+also agrees
+   * heinrich: fine with adding this patch
+   * simon: significant harm - compatible is the only right way to 
+match, anything else is a workaround
+   * caleb/tom: agrees in theory, but in practise this isn't what we 
+witness. Having a compressed blob of all DTs would be ideal, and 
+compresses well, but nobody is doing this..
+   * heinrich: U-Boot is also not the only firmware, we can't expect 
+EDK2 to start shipping this.
+   * Ilias: Agrees, best of the bad options
+   * simon: what would be the right solution?
+     * caleb: have the kernel emit a file with compatible -> fdtfile 
+lookups since that's faster to read
+   * Bryan Brattlof: what about overlays?
+     * caleb: probably you have a more vertically integrated system
+     * bryan: customers want yocto and a redhat image that works ootb
+
+* tom/simon: bloblist:
+   * tom: if bloblist is enabled it MUST have the DT, set the "mandatory 
+passage flag"
+   * simon: OF_BLOBLIST means DT is in bloblist
+   * tom: it's a bad idea to divorce standard passage handoff from 
+bloblist, but if it eases some issues for now and we can revisit in a 
+~year that might be best
+   * ilias: we have discussed this before. doesn't think OF_BLOBLIST 
+should exist, because the info is discoverable at runtime.
+   * ilias: we have a standard (firmware handoff), why do we need 
+another implementation?
+     * tom: hoping to reconcile over time between fw handoff and bloblist
+   * tom: to re-iterate what Simon said: dt should be either in 
+bloblist, embedded, or discovered through board specific means. Need to 
+avoid conflating consuming bloblist and creating bloblist (e.g. in SPL).
+     * tom: in SPL, if we don't have a bloblist, we don't need a config 
+option.
+     * tom: we should remove BLOBLIST_FIXED
+   * simon: we can get rid of BLOBLIST_FIXED if we have a register 
+hand-off firmware (x86)
+   * out of time... Tom ok to add OF_BLOBLIST if we remove 
+BLOBLIST_FIXED. Hopes that in ~1 year we'll all agree that we want the 
+same thing...
+
+
+> 
+> The merge window is formally open again. I will be merging next in to
+> master shortly. The v2025.07 release is scheduled for Monday, July 7th,
+> 2025 and the merge window will close and -rc1 will be released on the
+> 28th of April, and then the next window will open with -rc2, two weeks
+> later. The keen-eyed among you might notice that I fixed some incorrect
+> -rc1 dates in the future planning section, including for this cycle.
+> 
+> Thanks all!
 > 
 
-Yes
-
-> Regards,
-> Simon
+-- 
+Caleb (they/them)
 
