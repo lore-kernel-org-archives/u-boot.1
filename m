@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9500CC369A1
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:18:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD9D8C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:18:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FD098391E;
-	Wed,  9 Apr 2025 19:17:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4199E83710;
+	Wed,  9 Apr 2025 19:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AyNjkgtg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uto2anOq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA67783919; Wed,  9 Apr 2025 19:17:41 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 1210B8392C; Wed,  9 Apr 2025 19:17:44 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 989CC81CF0
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:17:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F004781CF0
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43ed8d32a95so44962015e9.3
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 10:17:39 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-39149bccb69so6663808f8f.2
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 10:17:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744219059; x=1744823859; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744219061; x=1744823861; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vdeWn9OKlXHfCAbBkRP+aUMbrKr7KucQPlXqpRz1srY=;
- b=AyNjkgtgOt4rZVuh52thywaRB3bnxN4jah8E6AKo+fyrDJPKX2OvYAGRKK/ya7Fu6k
- gSQemZf1/kbQMDm3Z18+j0ApP3UvNyMb7KOtFf2NE7r9P7Ho7Sc/3GfBdBylHSbQcm0U
- VNlJ15FA164VxoKL9sXu9UMAS2X1PQudsYqwcClRhOqXN47xifhiLxBz9icN+iOz1DSu
- 1gQfaXJBG/kGyJspabKHoJF1+XApjSAJW2+QpL//d+SiWR+pW4vKEyG7wxyMK9sRHyU2
- Qy3fGsz1nWYB/IJCknKd8Adaj8/KXsMwPG3AGF+yc2erC0S+CrLV/LgXXezFaxiPnzC+
- z8xw==
+ :reply-to; bh=R3wfo8bJVUWVI2DcWj2cqDWQYQT7gOuep3tT+yYlKjg=;
+ b=uto2anOqgNJBlthXCC3VvtubQJltBuQzehxMSPgwZvP+IfLqLw25xMQI+9xetO0NnD
+ Zv2rZiCkKL6gvW6MPsHkUZkmNx1LMISTZIW1RTW/zlTWui7aIPbvqU8PNT/WYu8tIjfF
+ uE+ils9N84HGfuq5zycuRgBKRgXhbXqDjlo8en5Sclt1AqBgmA7dVH82rhUxPhzXIGvj
+ e/07fn2MVVAVtxdCBHr16Qp0uY1cIa6f9zN6KEEn6Xsh/1Yx2Z1WzMW78OC7EDW2hyFE
+ NQ/uO80AGVe+n4J3NgLnkTTyv1Zx7TPZHF709DUrgbVNeUB2XGHnQQmj6ksMNWRGmWDJ
+ HyHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744219059; x=1744823859;
+ d=1e100.net; s=20230601; t=1744219061; x=1744823861;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vdeWn9OKlXHfCAbBkRP+aUMbrKr7KucQPlXqpRz1srY=;
- b=r/HbDKa6LLr7p5gYfk4zKkGJWc9wUofesXYYPq+9pXnM7104sRxr1D0Ud4iUh/FyaM
- fzoG0TGlPMO9EVyZgFRneFuJ0jPCNVT0SLoj1O3UYShYQOZCwALLJ+8DMTGYZT6HNzDo
- PBFqcDNN8E2UePlXGGYgkcHSoaU646PxPqQaQvSvHJlMlisKqqNk1V8wLjsXZI+Drinr
- 7FYp+qu0kGTUJDuuFgi1qjBz3UTxwYbzc/D8vcL2R+DwOIWwKg7YKXvOLCjXj5T/yWsv
- wd028cd4IDCCOdr/vFQrTOP8BIG2YvO1T1eAK4fR0vGeRLxJfUMkmdAW2500TqfOvztV
- QgpA==
-X-Gm-Message-State: AOJu0YyrGzO2fWly7y/7h4k2FTdiRo3qEzTGzLvZD/ILDgZo2DMea3jP
- kBhNHB+850ADg+i02bnEFgFSm2UgrLxR/ZYZKpD6DiY3JItNPf+UFVODSrtUKDBV/t/1Eu0ZroM
- tv8Y=
-X-Gm-Gg: ASbGncvgPRl1xwZyPm6nTSnDHm+zG6Z/rltRNu8y4Np0tMpfkqaDSrc8Cpf07j7S0G3
- lZlSbtZOOnOoMuZUaQtURFE78xpQosVfWN2uzdQIV6UrxlzNaICvsrYeHDa315wNLbi4oTVgd8Z
- qboYXnZBcewthWEbQOyoOvmiwn0/15Mgeb5wi2sy4c4iVR2hqvLp5UXGA06RBr0amEy0WDYvRfr
- CAqh8S9wTfZbxlE3KhClRDKEvYPsZ6aUA0wblgCc946+cUtyM1Ck2Hvr+SE3W+HCoXJ0baO3a/t
- ePjxkXIgqSS2X3aPckMAKOjXN/J4SwbLqZ3uHtZi1+YDR7DBX6VYWt7Wy81vbpI7GK0+/RFQf+i
- 5erz10Q==
-X-Google-Smtp-Source: AGHT+IHSm7ssBkArTs68ydgUESUoAZD6doYtlEv0artEOmZ8XtYLm0iGmco1KRSwkP1QCq+//VPKGg==
-X-Received: by 2002:a05:600c:4f83:b0:43c:fe15:41e1 with SMTP id
- 5b1f17b1804b1-43f1ec58c00mr40489295e9.4.1744219058768; 
- Wed, 09 Apr 2025 10:17:38 -0700 (PDT)
+ bh=R3wfo8bJVUWVI2DcWj2cqDWQYQT7gOuep3tT+yYlKjg=;
+ b=S4qDotW8C0Hpe1wNN9YnTvevMqGDmdMlWvmJa3XsgOM2ypRvqYTGWCmpWkih0cKtv0
+ Kz3imjZSpXpNo81b+MLqMr+9upjMWnEP13az2sjT4YTGzKAP8frZ7X8y6C2niGRZweaH
+ 7GHAlgL7JLlBcFGMPDFXwpxd3PnwypftNDuyIgS00OXeiZcEQc2ho1Mykrb1+kB4iIGp
+ gtpYjr3aPFFwyC2SHUWkFl092bjeIgtr7TFPW9pd+wMh5U/md/b0MGKR/dW79kfmiLCt
+ sfJ4KDLixm4VeEWUdcWSdajUJxuT60C9bk5k3u0vw1XzAgJlhfSY8Vf3qk1yLk6i+uME
+ hqtQ==
+X-Gm-Message-State: AOJu0YxRZkDZXo8s31l4sl561kXorlLWdNmWxOSxNWE0LQLrabDT3aUL
+ 7r7yFVYdTNeGZqwWc3J6KH2I6J8nRwgbZjXFJyFnTNqiRMRaq3aD/yIMSNH6g8rjYlJjnewiTpK
+ c+m0=
+X-Gm-Gg: ASbGncsddTzjmzEMiEBBpP2xyoWUdMujBLKTeN/AkLs1ekyFVFmK0cC1LHKkaxdMiah
+ 4j6tXXA0JbebU8a5mfEo+j/IKKnZGX0ZLKEqyai1iAUMTbYmSFyTQY83dV6xq2vG7cdzMOwKPAx
+ SQInvh/rGKZderOXOyf7VQ2Y9adn6Iw2fGqZFQMcCL4YKEdmJALPQr05wg2/pDB39EdlbaXGLqM
+ +piLG4n8AEQKQ/cef3WzIDXuCFqsXvohiAgJBKi/BbXediO8bmHxtmUJuxsIBqLA/JNuJ8vgYVn
+ 7VtMNIoCaMyKfqKBK4vtMtKx+3ITHzp1OYMDf4/VdKqPg5z9i8kuGlvMRde7YLDXju9GCfF+ZMk
+ pA9ffIw==
+X-Google-Smtp-Source: AGHT+IGj9kjR2k9xABvyRmFfuei7Hv4vQlb2sBuZ55HS6+62J+s/H6o84yPbxccagEV8+0kvjmZaZA==
+X-Received: by 2002:a05:6000:1448:b0:39c:1f11:bb2 with SMTP id
+ ffacd0b85a97d-39d87ab1387mr3389282f8f.22.1744219061142; 
+ Wed, 09 Apr 2025 10:17:41 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (i5E863B08.versanet.de. [94.134.59.8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233c817dsm21916455e9.23.2025.04.09.10.17.37
+ 5b1f17b1804b1-43f233c817dsm21916455e9.23.2025.04.09.10.17.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 10:17:37 -0700 (PDT)
+ Wed, 09 Apr 2025 10:17:39 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 09 Apr 2025 19:17:25 +0200
-Subject: [PATCH 2/6] mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT fixups
+Date: Wed, 09 Apr 2025 19:17:26 +0200
+Subject: [PATCH 3/6] mach-snapdragon: of_fixup: skip disabled USB nodes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250409-livetree-fixup-v1-2-76dfea80b07f@linaro.org>
+Message-Id: <20250409-livetree-fixup-v1-3-76dfea80b07f@linaro.org>
 References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
 In-Reply-To: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
@@ -86,21 +86,21 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2779;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=894;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=ad1zaVS/5vrsXVqSNV5HLMdsqwefLS6sy11fgjHewQc=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn9qutbEY28nH+INEWUgqr2rze9JJn5XSqfSeXY
- fN35eaFt8OJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/arrQAKCRAFgzErGV9k
- tiPPD/9ZyV8IYNKvNc5o96nkmDh4IRpGB3b55pINVYTCaJg1uCguHSpa6+MqxjYDJ9U+Ucwc/Nc
- WhaVMZAUsoeHxwuWuo9aPbG6akLqzYKXyN1XBQ6uTSWCNnwQ8CDRa+yCeFIE+YbKj3mxjl1Mhr3
- 7HXyEyS+/22vp+9apFi2fJi1Y/OSwWaGRXimQORQl3RA3u1iJJOeEV2Eey7ioDdqmaDwFlN6Pkb
- T97qtoxFmVHQRB2xZhJk/u3ylC4DpAM/rQCOBgxgZm/n6bJfq//+9C1pyZa5khOhdHbzXCXLXgk
- SyyWtIXRc9Aq64svXA3iGs5DkUuPPQS+8acMZFBZV7jAwgpuOchiAhE5YJYsti973fW4G47vGrj
- cRKFD8fJVIdVmRwvya2JWvA0rQZO/sxp2VbqA+x+1MQ55j73wx42Bq6YztA2zBN9a8dlkQ4uvLT
- SPzOqlph8oEDqNVNow4G63qxGa7r0WJ/3kiOTr8A5RA5jMGXVC+Jrty99tU7JgbiF6GspEln1zA
- LBVgkEkSukHFy2yQDPu8zKrASKqmltPAqqdvSpgSMgfx2iARNA07LB6AxVO/avGXpm8OXOj38e/
- J83cU9SffefG9OOtSE38BFob/UtXmioQPk3IlZARnS3VO43hSLInovFqCeRZPjyuhoTdU5uudsl
- nWF3NrOhkBS/nFg==
+ bh=I7IWAGQQIsBl57XDymH1nBOnJz0DJITHXlWuSKcf66Q=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn9qutmR1633rPAokeXy2DyQ5MQF9qwGalKY1hJ
+ R3HtHLlL6iJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/arrQAKCRAFgzErGV9k
+ tjfqD/9Vd3dQp7GIfYGC3FMaHILmkfdaXpuncpN+qz6RehtboSqKSEWqsdXy2s6GdAslLTtyFAN
+ G+a2beQ7S3gDCLpRDG0urCDjYUm0C1b/rJBkoFi7RPIDFY0HnuEXPxN8EKWpwOaW5iIjbjXhTmX
+ xjkCn8zAICob2hB8Rl1q/5gAZWl9B8j/O/ECb3ilof/y9NWU6M0t6mvU0Bjw+28pgJhH3r+nBbd
+ hL3OqefrxXtWPZ2DsL58GUtkSix37xEzrqeebcB6jGk6PTfHxE/PdvEdHCV9rngtyvOi4j3dY32
+ sbu2E5ohKSYAa1b/VhP2RzR37cXlqqPsyXmnJBRZR/WXxJo82Q4ueSOekJ6FTW/4bghXdJ2ptDI
+ H1vZ57pM7WpSZlUUi+0SeVdLdVx3HoIdLq3YRLw4FObzuwt2H5NT8298oPAK2YHyuKIkNFHeG+W
+ eqKeiHzRkLJvlmEgGPVkbwMI9oFRpKvXnsbK8CMRkPyf/IOAZ7s26Ga3s+bvY86NiR15n0cWLiH
+ MvsF3Htn+lk9+Pp1Ff3D+UVUQV8u75lU3uHt4Jbt3o0a8xV+gEMKkDnIAteSD+NatfQIi3H/DFQ
+ uYsd4eXu7EusNOtkX/GS+Go9mJwz/He9VlVy58AF+GeLF9wygdxcqOgnGzjx23/GXu3CoJDrxQs
+ wxsQD6z5akBhlMA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -119,89 +119,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This will now apply fixups prior to devices being bound, which makes it
-possible to enable/disable devices and adjust more properties that might
-be read before devices probe.
+There's no need to waste time fixing up nodes that aren't used on this
+device. Skip them.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c     |  1 -
- arch/arm/mach-snapdragon/of_fixup.c  |  7 ++++++-
- arch/arm/mach-snapdragon/qcom-priv.h | 14 --------------
- 3 files changed, 6 insertions(+), 16 deletions(-)
+ arch/arm/mach-snapdragon/of_fixup.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index deae4d323789eab75d5fe735159b4cd820c02c45..3ab75f0fce02ecffd476ebe2aa606b1a9024bbec 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -305,9 +305,8 @@ void __weak qcom_board_init(void)
- 
- int board_init(void)
- {
- 	show_psci_version();
--	qcom_of_fixup_nodes();
- 	qcom_board_init();
- 	return 0;
- }
- 
 diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-index 1ea0c18c2f2789a8aa054cd95bb9e4308d6b3384..d4e24059212c552de7fa7555d2ab8a1ea4fc4cb2 100644
+index d4e24059212c552de7fa7555d2ab8a1ea4fc4cb2..b39036e8e0890fdf834a0dfe6966ef3dd365f3d2 100644
 --- a/arch/arm/mach-snapdragon/of_fixup.c
 +++ b/arch/arm/mach-snapdragon/of_fixup.c
-@@ -21,8 +21,9 @@
+@@ -107,8 +107,10 @@ static void fixup_usb_nodes(void)
+ 	struct device_node *glue_np = NULL;
+ 	int ret;
  
- #include <dt-bindings/input/linux-event-codes.h>
- #include <dm/of_access.h>
- #include <dm/of.h>
-+#include <event.h>
- #include <fdt_support.h>
- #include <linux/errno.h>
- #include <stdlib.h>
- #include <time.h>
-@@ -149,14 +150,18 @@ static void fixup_power_domains(void)
- 		func(__VA_ARGS__); \
- 		debug(#func " took %lluus\n", timer_get_us() - start); \
- 	} while (0)
- 
--void qcom_of_fixup_nodes(void)
-+static int qcom_of_fixup_nodes(void)
- {
- 	time_call(fixup_usb_nodes);
- 	time_call(fixup_power_domains);
-+
-+	return 0;
- }
- 
-+EVENT_SPY_SIMPLE(EVT_OF_LIVE_INIT, qcom_of_fixup_nodes);
-+
- int ft_board_setup(void *blob, struct bd_info __maybe_unused *bd)
- {
- 	struct fdt_header *fdt = blob;
- 	int node;
-diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-index 74d39197b89f4e769299b06214c26ee829ecdce0..4f398e2ba374f27811afd2ccf6e72037d0f9ee7f 100644
---- a/arch/arm/mach-snapdragon/qcom-priv.h
-+++ b/arch/arm/mach-snapdragon/qcom-priv.h
-@@ -8,19 +8,5 @@ void qcom_configure_capsule_updates(void);
- #else
- void qcom_configure_capsule_updates(void) {}
- #endif /* EFI_HAVE_CAPSULE_SUPPORT */
- 
--#if CONFIG_IS_ENABLED(OF_LIVE)
--/**
-- * qcom_of_fixup_nodes() - Fixup Qualcomm DT nodes
-- *
-- * Adjusts nodes in the live tree to improve compatibility with U-Boot.
-- */
--void qcom_of_fixup_nodes(void);
--#else
--static inline void qcom_of_fixup_nodes(void)
--{
--	log_debug("Unable to dynamically fixup USB nodes, please enable CONFIG_OF_LIVE\n");
--}
--#endif /* OF_LIVE */
--
- #endif /* __QCOM_PRIV_H__ */
+ 	while ((glue_np = of_find_compatible_node(glue_np, NULL, "qcom,dwc3"))) {
++		if (!of_device_is_available(glue_np))
++			continue;
+ 		ret = fixup_qcom_dwc3(glue_np);
+ 		if (ret)
+ 			log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
+ 	}
 
 -- 
 2.49.0
