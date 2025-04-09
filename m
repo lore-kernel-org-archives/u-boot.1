@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFDE3C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE68C369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 17:17:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA4D483900;
-	Wed,  9 Apr 2025 19:17:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23C9A838EC;
+	Wed,  9 Apr 2025 19:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cpxY9Ndn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WJjccdrU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22931838D4; Wed,  9 Apr 2025 19:17:39 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 43255838D4; Wed,  9 Apr 2025 19:17:40 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFCE381CF0
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:17:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32132838CC
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 19:17:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cfdc2c8c9so41261035e9.2
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 10:17:36 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso52316025e9.2
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 10:17:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744219056; x=1744823856; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=b7HNhv6JIRBU1mQAGx+DKh6JC4FUWK1xQm3tLpVpK2k=;
- b=cpxY9NdnZL6I9TTu0QSirUrAtvBW/V00s85mTuJVG+0YiU3y5GLYuSGfAIex4okW0a
- BrkDTWug6cBeU64NBnd+eNnPbjaOtpQT/FAdaX4kQBA1FA6xVH/8vsWLPd+jwFj4J596
- ZzDanbB5Op0O1PO7OP9cQRMkd2p0jCl7Ez3zXHTnp5zb4dF6qGiLJJKJO2QSMH0+PGrv
- Yqeubr7UJ6P1KSLbe09aQp9ob1irVy96GthEj5wvVYFjS8ikElb0D74ZeP7+EYe4S783
- lxCMzdhZdvmSTbYkKDAkXWWVsMg4tBeAlQisC6u1DTF9yniwoyl7mRZDSVVaJ1ZoIqeW
- kFLg==
+ d=linaro.org; s=google; t=1744219057; x=1744823857; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=YhPWz1zU0k7vq2o/GLz6wanM7+ZfomvcNWlU0131ndE=;
+ b=WJjccdrU1HA5brysOjRuUAqaIJ8wI0fIk1uzr9m5uvEWQ7XVLNjM8wQZqkqtY/JrnY
+ gNCj9AVcRD8l68l+93mjdaIgM37I663bUm+W0THPNzHlYD2j4YYRMTsBkBUS0b3mQx6O
+ rkiISDqdmJlF6CpmXfN1Iwn6zK8ybhqfOQhPgEPDsT/KM894IZxjxptHON4I6VdESt/S
+ Ukq0yPO6n5XDnSkqc/ov7mue4JBjUoyx2Fk4fR6Krm9ZKeJ6NYqsyl+BFU7gpRN2aVE3
+ da8KmECscCq3xQBOiqYoS+dx57jpgyeZOKVFutgSu6JzdMcnKf0FELb0ybLVv1zr2kvK
+ 8x5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744219056; x=1744823856;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=b7HNhv6JIRBU1mQAGx+DKh6JC4FUWK1xQm3tLpVpK2k=;
- b=tGP4qYARTt6QST+IpJVv6ohGklSPFkhBDQ90YeBQkwFkF/tUlK3utia86Wkqi+hX8q
- QVlZ+6Rkk1hlipg3rUhfsWvjB+1IqZVrfxuYxL+1fRmoyOkgFlpEGoJG3xoqmsmq3jQC
- 15mLtu2JAW1nhKnFehWgvY1z+YKiWYPnUJhkQnm5E0bq/qgD7ATjpekLi9QtPrGDmHvx
- Eum+8rwZKWRSvYmZsIx0NDPmMdl/8Kku08lSae7GpKKZEHB7oOH+3YxtOYvber/S1Wr4
- qykxZ2feEAvJdLoJXvWT1Zpa8K5qk4tbr5XkAaZTtpE1nSqDmpIc+aQ0tFNXjfKHvTUO
- vN0A==
-X-Gm-Message-State: AOJu0YxYBcrWN9/8uPHZcQG1aepfrYZptvBOo5SPp0HU3UwR4mIOi4P5
- /rj/k+vICLk0Hcmj/RdAlKmRVCkqvquXfpz6dnXXOykYdUxBwcWbF7n2FcocVIHIys33gLuksmn
- 4F98=
-X-Gm-Gg: ASbGnctKdIoVvWZ3VAyn23cZe/jXLDUFUVcxHVUOSynIsVfrS3EoXUtPpkdFVC/M7WA
- nRC5Icr1zNrMpjHtOqVycwntlc6+ISZY2G6s1FwZ9O1mv2nZWxzFODIYyTcaMqovgpQso4AqSI2
- u46JjfBovsZljbkzkKwSRjseLprSBkwD/+YWH2NozQwpP6ltJsWtnXVxGKmy9KwEVkhfqY7KUYK
- r7mDG1POnkPlgZryH1JYzYehAXoa7lcyBFLOQtTVZsln7fM6c+db5tSzZIpMmBEoPmslhwjvv4W
- WSHOc6NvUqw0Sv5r4ZK4KNXBbP94yQiUDmzE/YpGfEu2R8s4wkxt98cbj981PEAc0ZhD+smwl4L
- SXAVvYKyttQfvPivD
-X-Google-Smtp-Source: AGHT+IErKRityXARLGWVsiihfPtV5nbZ4rRQ4MirBM1fIwiwk+NDusd8uRF8NUlf1qdvOeelWEG9Rw==
-X-Received: by 2002:a05:600c:5396:b0:43c:eea9:f438 with SMTP id
- 5b1f17b1804b1-43f1ecc5237mr43939655e9.15.1744219055793; 
- Wed, 09 Apr 2025 10:17:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744219057; x=1744823857;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YhPWz1zU0k7vq2o/GLz6wanM7+ZfomvcNWlU0131ndE=;
+ b=Auhmp03SSqqrlDvgijEtJpPN3juiZuq14NBFylLFz+kcx3/tc2lGCSsYBY6S/xdOnN
+ HNZb+vY1pcHYhYnTSi7gss4Z+yL8LxLamx3J797GK1cY5dVcMNfwGSU3SDcXOmR6vtQJ
+ YaFhVjskaBHf6ONv/DYAuX1zTvf7sjSsI0KmGVaHAsHlM5e8+FShoSjlQD7TNXm21zaY
+ 5D9hZFafI8NRkqlkFI9eF5yUu/J3OZRpgIGQAPOzL8uWlpgKYIVUjPNRoyUvvMLBMweG
+ 83CR/6gbJYq4dTrJl8ONpB1Mnmt/FYAstqdbtEOLeEvUlUEjTv6yzuESm5w6sXQrWjBU
+ WOLA==
+X-Gm-Message-State: AOJu0YwmzUTVGB8sHGPG0PKsjVWcIxQbGEaFdrLlDcVCOJT4J3mjk2qm
+ O9iHa4u+LxsklRUXNkHGPNtFT7cGlp6q/a8+HfTV1qsMTMxfD469WCW3FpOFprVUat8XkFCs8+Z
+ gLTk=
+X-Gm-Gg: ASbGncsm7bS0vA98w16NaNoodCoM05EcaXoxuJBqjE1AYCsTvvM7pHwoD7xGFo6g0GQ
+ nKs6oG8j65OzZUTZC0N7WtF9j4T2p8guHwg1IXPZ+eGt80tjZwuQzznSHejI0CjuhOI+waKhZ2i
+ zsWd5Uj7Qc/JXWf4Fb14O5+A21vtHa4cIK2jtb0mg+z0QZtFZUXVSE2VYiu92HnDw6yPq2P0VcM
+ gy5oW0TogSGRnMj8Uv8ARO5dovCtkoO4vA6CUlPL787w1zttkMSx3wg5m4ZYDlp41IU2dAZNGWk
+ xKxCL81YODDJJ+WN0j6NgokzyDXceD7vGcKXd2GOkJPF+Qma+RTWF0F/EjtRxkYTgzZ11Y9FVlh
+ fngg38Q==
+X-Google-Smtp-Source: AGHT+IF5PYhL+SgVfRWQySsgJK6aLFDLZRrDklKbqjk+wN6dPJajEigKAzVY0+RLtPgCqkGVHLkZNQ==
+X-Received: by 2002:a05:600c:1e26:b0:43c:fffc:7886 with SMTP id
+ 5b1f17b1804b1-43f1fe16701mr35489425e9.8.1744219057305; 
+ Wed, 09 Apr 2025 10:17:37 -0700 (PDT)
 Received: from toyger.tail248178.ts.net (i5E863B08.versanet.de. [94.134.59.8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233c817dsm21916455e9.23.2025.04.09.10.17.34
+ 5b1f17b1804b1-43f233c817dsm21916455e9.23.2025.04.09.10.17.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 10:17:34 -0700 (PDT)
+ Wed, 09 Apr 2025 10:17:36 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH 0/6] Qualcomm: cleanup OF_LIVE fixup and fix RB1/2
-Date: Wed, 09 Apr 2025 19:17:23 +0200
-Message-Id: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
+Date: Wed, 09 Apr 2025 19:17:24 +0200
+Subject: [PATCH 1/6] event: signal when livetree has been built
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKOr9mcC/x2MQQqAIBAAvxJ7bmFNJeor0UFsq4Ww0IpA+nvSc
- RhmMiSOwgn6KkPkW5LsoYCqK/CrCwujTIWhocaSoQ43ufmMzDjLcx1IU2us8l67WUOJjshF/MN
- hfN8PGijjNmAAAAA=
-X-Change-ID: 20250409-livetree-fixup-0d7451cc3af3
+Message-Id: <20250409-livetree-fixup-v1-1-76dfea80b07f@linaro.org>
+References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
+In-Reply-To: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -88,21 +86,21 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1827;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2628;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=3Fn1fnpnJYmDV8nR05qPzJcewTTQZI635YC0oyr1eXY=;
- b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn9qutJLbG14QOqz3hbFXDmyFUDRzjJ7KTK5VRQ
- XnLDbsnEiGJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/arrQAKCRAFgzErGV9k
- tuYnD/9Q2eUJahTwCp+/m9HDa7iREFYRq9UMlEBYZmFbH1yyfBKtJ4rx4DZuEv64fSzMT0Sipxw
- xFwy/Qpfucg2Dn8McxBV7cBhiTbfOGfFy52TKjgoVNX9iDkupSxEPhWg+t0M00ckL9jz6M3SKnR
- ID8vqo3bD/inF1Xyjnh2puhAJSfl9RO0n0AL5ogmjzofSBcuJe1k73ZnnxScLyjRUyvLEW3PPwF
- qpVgS134kj8BT0BOl14Rvn+0t0hiqiMhWEYwPRGmJezYv+yix4PGONVyXezYBRx1eCFUuuyk5kl
- PaVzmzGl+8dkHjdxz9cFARho8sH+i9uuUFY/IpFiBDEjOaNKgZ+emzXlHuVo+NWYv2/miHfFR44
- /sS/J4wmrIZoVFlgcF8QLv8ctcqiXpedhzssu9OXfULBpYLZCEL7D39THo3NKjdpuOrctUob/PQ
- kfpNHFIUndWsI324Iu7w7TPLRcS28t+e9pIGbNkzTvEecpCsEftbIAVnTSOibyzsmX8glItHsix
- 7hG4Epk9DhY1PXEpp0XQrK/MbhwoxlDp7rVZFlkfBmTnPq8DYNNvbu1+EIW8BIrUZgRm465qoQJ
- YSq9tflJDfZTgLiIuO/QCniy8/2WU1wsVZCt0pQ/TG94ZSdrCAdwlilYevqINgDD4Sw9pV638vn
- vX6s8523OSehFKg==
+ bh=GJfBWxPn1dAIKuP0Hxc2/0HOkPVH9R5cPjBDOpCQCOA=;
+ b=owEBbQKS/ZANAwAKAQWDMSsZX2S2AcsmYgBn9qutNawb+71LkOu93kV3wsbzJzuM2vRtcyYSp
+ Le1h5MIotSJAjMEAAEKAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZ/arrQAKCRAFgzErGV9k
+ tgiAEACUdEgjAB5Qr4vTG9l9aPJrOP6jssZgUYHxd3dd8Aj+hLadJQWhinwE1nTkwYmERYJSAx5
+ ixjjyrnW0Ug+m7HZwn5n40X6qpMmE+G3YKDS+Ej15nJb3HkgU3wAVCfwANHePtRXi8NBls33LXT
+ kWRHGWuYvtwZEaEg729lLGDnJPsPmcw6gsCGmlEhnsTMdqyPCnSZjxdbR1gF1L0XUiOAODlIfEK
+ fJQyt4w+9E6AEhrSnBVizUj9Me+yhyvCZfoTAaU7iKmEWaB7nRqkIbw7qLHsAGG5XGNjBQYl3mM
+ /c+tzTRewHGlPbG3f+4ADcTM6ArC0t2Bk5F9Q2ruDuqJ77wyueH73x69m6+kqWnF6PH9XS4HU6X
+ uSW6AOe5cINroyNIjVUDtxrvSxK4IXzRpcox/6AEvfTPpgTTxG8pqY4fRdX99tae4+GIwV7oJ8P
+ xgl4uU4x0VsC7U6aWdAS59rpvOSVyAda0DESA5b1Zyta9xr1AG8PYTKt3fuMC55eFT/jqUbhv9K
+ 5zW5BhLMixL4+0BoupMqzLCC0gapoMBHIMucCnOLTPsdSBdemt9qMcBSzwIUcWSyGxot8s29RJV
+ rRMo86pd8Jk0v5bNR66uQnQx4Yyd+WNKNuVbk9iErdk7WsP5P4vI9VhcG1Bn4brwmqG3IUD8gVY
+ R9+7g3+r1u6fP6g==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -121,43 +119,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a new event to signal that the live tree has been built,
-allowing boards to perform fixups on the tree before devices are bound.
-Crucially this allows for devices to be enabled or disabled, but also
-allows for properties that are parsed during the bind stage to be
-modified (such as dr_mode for dwc3).
+OF_LIVE offers a variety of benefits, one of them being that the live
+tree can be modified without caring about the underlying FDT. This is
+particularly valuable for working around U-Boot limitations like lacking
+USB superspeed support on Qualcomm platforms, no runtime OTG, or
+peripherals like the sdcard being broken (and displaying potentially
+worrying error messages).
 
-With this in place, mach-snapdragon is switched over to use the event
-and some hacky U-Boot specific DT overrides (which had to be undone
-prior to booting an image) are removed in favour of fixing up the
-livetree (which is not passed on to further boot stages).
+Add an event to signal when the live tree has been built so that we can
+apply fixups to it directly before devices are bound.
 
-Finally, some minor fixes are made for the QCM2290 RB1 board, the sdcard
-is enabled and it now uses USB host mode in U-Boot like it's bigger
-sibling the RB2.
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (6):
-      event: signal when livetree has been built
-      mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT fixups
-      mach-snapdragon: of_fixup: skip disabled USB nodes
-      clk/qcom: qcm2290: show clock name in set_rate()
-      mach-snapdragon: of_fixup: set dr_mode for RB1/2 boards
-      pinctrl: qcom: qcm2290: fix off by 1 in pin_count
+ common/event.c  | 3 +++
+ include/event.h | 9 +++++++++
+ lib/of_live.c   | 3 +++
+ 3 files changed, 15 insertions(+)
 
- arch/arm/dts/qrb4210-rb2-u-boot.dtsi   |  6 -----
- arch/arm/mach-snapdragon/board.c       |  1 -
- arch/arm/mach-snapdragon/of_fixup.c    | 41 ++++++++++++++++++++--------------
- arch/arm/mach-snapdragon/qcom-priv.h   | 14 ------------
- common/event.c                         |  3 +++
- drivers/clk/qcom/clock-qcm2290.c       |  2 +-
- drivers/pinctrl/qcom/pinctrl-qcm2290.c |  2 +-
- include/event.h                        |  9 ++++++++
- lib/of_live.c                          |  3 +++
- 9 files changed, 41 insertions(+), 40 deletions(-)
----
-base-commit: e4ffc6a323586d700d88c73c319c25c740aedb49
-change-id: 20250409-livetree-fixup-0d7451cc3af3
+diff --git a/common/event.c b/common/event.c
+index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
+--- a/common/event.c
++++ b/common/event.c
+@@ -47,8 +47,11 @@ const char *const type_name[] = {
+ 	"ft_fixup",
+ 
+ 	/* main loop events */
+ 	"main_loop",
++
++	/* livetree has been built */
++	"of_live_init",
+ };
+ 
+ _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+ #endif
+diff --git a/include/event.h b/include/event.h
+index 75141a192a48b0931667632f41be8ff4d6139f7c..3fc673ba635ed45467aae8587705d37bef1c2a3f 100644
+--- a/include/event.h
++++ b/include/event.h
+@@ -152,8 +152,17 @@ enum event_t {
+ 	 * A non-zero return value causes the boot to fail.
+ 	 */
+ 	EVT_MAIN_LOOP,
+ 
++	/**
++	 * @EVT_OF_LIVE_INIT:
++	 * This event is triggered immediately after the live device tree has been
++	 * built. This allows for machine specific fixups to be done to the live tree
++	 * (like disabling known-unsupported devices) before DM init happens. This
++	 * event is only available if OF_LIVE is enabled and is only used after relocation.
++	 */
++	EVT_OF_LIVE_INIT,
++
+ 	/**
+ 	 * @EVT_COUNT:
+ 	 * This constants holds the maximum event number + 1 and is used when
+ 	 * looping over all event classes.
+diff --git a/lib/of_live.c b/lib/of_live.c
+index 90b9459ede313e492e28c8556c730f3bd8aaa9df..e1962b8f1fb9d8c2c87d04ca4e238a1e4d00376a 100644
+--- a/lib/of_live.c
++++ b/lib/of_live.c
+@@ -10,8 +10,9 @@
+ 
+ #define LOG_CATEGORY	LOGC_DT
+ 
+ #include <abuf.h>
++#include <event.h>
+ #include <log.h>
+ #include <linux/libfdt.h>
+ #include <of_live.h>
+ #include <malloc.h>
+@@ -334,8 +335,10 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+ 		return ret;
+ 	}
+ 	debug("%s: stop\n", __func__);
+ 
++	event_notify_null(EVT_OF_LIVE_INIT);
++
+ 	return ret;
+ }
+ 
+ void of_live_free(struct device_node *root)
 
-Caleb Connolly <caleb.connolly@linaro.org>
+-- 
+2.49.0
 
