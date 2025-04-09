@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27021C36010
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 00:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC915C36010
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 00:21:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D0FD82898;
-	Wed,  9 Apr 2025 02:21:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82DB782AA3;
+	Wed,  9 Apr 2025 02:21:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C964C828E1; Wed,  9 Apr 2025 02:21:30 +0200 (CEST)
+ id 8A1B682FD4; Wed,  9 Apr 2025 02:21:34 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 618BF827A6
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 02:21:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 46FB082AA3
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 02:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 33EE91688;
- Tue,  8 Apr 2025 17:21:28 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B0B41C14;
+ Tue,  8 Apr 2025 17:21:32 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C23243F6A8;
- Tue,  8 Apr 2025 17:21:23 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CA32B3F6A8;
+ Tue,  8 Apr 2025 17:21:27 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
 Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
@@ -47,10 +47,13 @@ Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
  Jonas Smedegaard <dr@jones.dk>, Jaehoon Chung <jh80.chung@samsung.com>,
  Heiko Schocher <hs@denx.de>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: [PATCH v2 0/8] sunxi: Control USB pins and supplies via DT regulators
-Date: Wed,  9 Apr 2025 01:20:28 +0100
-Message-ID: <20250409002036.12212-1-andre.przywara@arm.com>
+Subject: [PATCH v2 1/8] power: regulator: Add a driver for the AXP PMIC
+ drivevbus
+Date: Wed,  9 Apr 2025 01:20:29 +0100
+Message-ID: <20250409002036.12212-2-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.3
+In-Reply-To: <20250409002036.12212-1-andre.przywara@arm.com>
+References: <20250409002036.12212-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,149 +72,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series removes some old custom non-DM code from the Allwinner USB
-PHY driver. So far we were relying on Kconfig specified GPIO names for
-the VBUS power supplies, USB ID detect pin and the VBUS detect pin.
+From: Samuel Holland <samuel@sholland.org>
 
-The first 5 patches resurrect Samuel's series from 1.5 years ago, fixing
-one issue that prevented this series from being merged earlier (by using
-regulator_set_enable_if_allowed()). This involves adding a new regulator
-driver, for the AXP DRIVEVBUS functionality, then switching the USB PHY
-over to using DM compliant regulator calls. Eventually the old, no
-longer needed symbols are removed both from the Kconfig and the defconfig
-files.
-This also fixes a lot of A20 boards (probably even more SoCs from this
-era), where USB was broken since v2025.01-rc1, due to conflicts between
-"regulator-boot-on" DT regulators and the same controlling GPIO being
-claimed by the current custom code.
+AXP PMICs have a pin which can either report the USB VBUS state, or
+driving a regulator that supplies USB VBUS. Add a regulator driver for
+controlling this pin. The selection between input and output is done via
+the x-powers,drive-vbus-en pin on the PMIC (parent) node.
 
-The last three patches convert the currently Kconfig defined USB ID
-detect pins (to switch between host and device support on USB-OTG ports)
-and the VBUS detect pins (to detect external VBUS power supplied by the
-connected host) to DT based GPIO pins. This changes the driver in the
-first two patches, then removes the old symbols in the third one.
-
-Please have a look and most importantly test USB host and device
-functionality on any boards you have access to.
-
-Cheers,
-Andre
-
-Andre Przywara (3):
-  phy: sun4i-usb: Determine VBUS detection pin from devicetree
-  phy: sun4i-usb: Determine USB OTG detection pin from devicetree
-  sunxi: Kconfig: Remove obsolete USBx_* pin symbols
-
-Samuel Holland (5):
-  power: regulator: Add a driver for the AXP PMIC drivevbus
-  sunxi: Enable PMIC drivevbus regulator support for USB supplies
-  phy: sun4i-usb: Control supplies via the regulator uclass
-  sunxi: Remove obsolete USBx_VBUS_PIN Kconfig symbols
-  gpio: axp: Remove virtual VBUS enable GPIO
-
- arch/arm/mach-sunxi/Kconfig                  | 43 ---------
- configs/A10s-OLinuXino-M_defconfig           |  1 -
- configs/A13-OLinuXinoM_defconfig             |  1 -
- configs/A13-OLinuXino_defconfig              |  2 -
- configs/A20-OLinuXino-Lime2-eMMC_defconfig   |  2 -
- configs/A20-OLinuXino-Lime2_defconfig        |  2 -
- configs/A20-Olimex-SOM-EVB_defconfig         |  2 -
- configs/A20-Olimex-SOM204-EVB-eMMC_defconfig |  2 -
- configs/A20-Olimex-SOM204-EVB_defconfig      |  2 -
- configs/A33-OLinuXino_defconfig              |  3 +-
- configs/Ainol_AW1_defconfig                  |  1 -
- configs/Ampe_A76_defconfig                   |  3 -
- configs/Auxtek-T003_defconfig                |  1 -
- configs/Auxtek-T004_defconfig                |  1 -
- configs/Bananapi_M2_Ultra_defconfig          |  2 -
- configs/Bananapi_m2m_defconfig               |  1 -
- configs/Bananapro_defconfig                  |  2 -
- configs/CHIP_defconfig                       |  1 -
- configs/CHIP_pro_defconfig                   |  1 -
- configs/CSQ_CS908_defconfig                  |  2 -
- configs/Chuwi_V7_CW0825_defconfig            |  3 -
- configs/Colombus_defconfig                   |  1 -
- configs/Cubieboard4_defconfig                |  5 +-
- configs/Cubietruck_defconfig                 |  3 -
- configs/Cubietruck_plus_defconfig            |  5 +-
- configs/Empire_electronix_d709_defconfig     |  3 -
- configs/Empire_electronix_m712_defconfig     |  3 -
- configs/Hummingbird_A31_defconfig            |  2 -
- configs/Hyundai_A7HD_defconfig               |  4 -
- configs/Linksprite_pcDuino3_Nano_defconfig   |  1 -
- configs/Linksprite_pcDuino_defconfig         |  2 -
- configs/MSI_Primo81_defconfig                |  2 +-
- configs/Mele_A1000G_quad_defconfig           |  2 -
- configs/Mele_I7_defconfig                    |  2 -
- configs/Mele_M9_defconfig                    |  2 -
- configs/Merrii_A80_Optimus_defconfig         |  5 +-
- configs/Mini-X_defconfig                     |  1 -
- configs/Orangepi_defconfig                   |  2 -
- configs/Orangepi_mini_defconfig              |  2 -
- configs/Sinlinx_SinA31s_defconfig            |  2 -
- configs/Sinlinx_SinA33_defconfig             |  1 -
- configs/Sinovoip_BPI_M2_defconfig            |  2 -
- configs/Sinovoip_BPI_M3_defconfig            |  4 +-
- configs/Sunchip_CX-A99_defconfig             |  3 -
- configs/UTOO_P66_defconfig                   |  3 -
- configs/Wexler_TAB7200_defconfig             |  2 -
- configs/Wobo_i5_defconfig                    |  1 -
- configs/Yones_Toptech_BD1078_defconfig       |  1 -
- configs/Yones_Toptech_BS1078_V2_defconfig    |  3 +-
- configs/ba10_tv_box_defconfig                |  2 -
- configs/bananapi_m2_berry_defconfig          |  1 -
- configs/colorfly_e708_q1_defconfig           |  3 +-
- configs/difrnce_dit4350_defconfig            |  3 -
- configs/dserve_dsrv9703c_defconfig           |  3 -
- configs/ga10h_v1_1_defconfig                 |  3 +-
- configs/gt90h_v4_defconfig                   |  3 +-
- configs/h8_homlet_v2_defconfig               |  2 -
- configs/iNet_3F_defconfig                    |  2 -
- configs/iNet_3W_defconfig                    |  2 -
- configs/iNet_86VS_defconfig                  |  2 -
- configs/iNet_D978_rev2_defconfig             |  3 +-
- configs/icnova-a20-swac_defconfig            |  3 -
- configs/inet1_defconfig                      |  3 -
- configs/inet86dz_defconfig                   |  3 +-
- configs/inet97fv2_defconfig                  |  3 -
- configs/inet98v_rev2_defconfig               |  3 -
- configs/inet9f_rev03_defconfig               |  3 -
- configs/inet_q972_defconfig                  |  3 +-
- configs/jesurun_q5_defconfig                 |  1 -
- configs/mixtile_loftq_defconfig              |  2 -
- configs/mk802_a10s_defconfig                 |  1 -
- configs/mk802_defconfig                      |  1 -
- configs/orangepi_2_defconfig                 |  1 -
- configs/orangepi_plus_defconfig              |  2 -
- configs/orangepi_zero2_defconfig             |  1 -
- configs/orangepi_zero3_defconfig             |  1 -
- configs/parrot_r16_defconfig                 |  2 -
- configs/pine_h64_defconfig                   |  1 -
- configs/polaroid_mid2407pxe03_defconfig      |  3 +-
- configs/polaroid_mid2809pxe04_defconfig      |  3 +-
- configs/pov_protab2_ips9_defconfig           |  3 -
- configs/q8_a13_tablet_defconfig              |  3 -
- configs/q8_a23_tablet_800x480_defconfig      |  3 +-
- configs/q8_a33_tablet_1024x600_defconfig     |  3 +-
- configs/q8_a33_tablet_800x480_defconfig      |  3 +-
- configs/r7-tv-dongle_defconfig               |  1 -
- configs/sun8i_a23_evb_defconfig              |  3 -
- configs/tbs_a711_defconfig                   |  3 +-
- configs/teres_i_defconfig                    |  1 -
- drivers/gpio/axp_gpio.c                      | 75 +++++----------
- drivers/gpio/sunxi_gpio.c                    | 12 +--
- drivers/phy/allwinner/phy-sun4i-usb.c        | 96 +++++++-------------
- drivers/power/pmic/axp.c                     |  1 +
- drivers/power/regulator/Kconfig              |  7 ++
- drivers/power/regulator/Makefile             |  1 +
- drivers/power/regulator/axp_drivevbus.c      | 57 ++++++++++++
- include/axp221.h                             |  4 -
- include/axp809.h                             |  4 -
- include/axp818.h                             |  4 -
- include/sunxi_gpio.h                         |  8 --
- 100 files changed, 139 insertions(+), 369 deletions(-)
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
+ drivers/power/pmic/axp.c                |  1 +
+ drivers/power/regulator/Kconfig         |  7 +++
+ drivers/power/regulator/Makefile        |  1 +
+ drivers/power/regulator/axp_drivevbus.c | 57 +++++++++++++++++++++++++
+ 4 files changed, 66 insertions(+)
  create mode 100644 drivers/power/regulator/axp_drivevbus.c
 
+diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
+index 521a39dd566..c300fd2bbc2 100644
+--- a/drivers/power/pmic/axp.c
++++ b/drivers/power/pmic/axp.c
+@@ -51,6 +51,7 @@ static const struct pmic_child_info axp_pmic_child_info[] = {
+ 	{ "cldo",	"axp_regulator" },
+ 	{ "dc",		"axp_regulator" },
+ 	{ "dldo",	"axp_regulator" },
++	{ "drivevbus",	"axp_drivevbus" },
+ 	{ "eldo",	"axp_regulator" },
+ 	{ "fldo",	"axp_regulator" },
+ 	{ "ldo",	"axp_regulator" },
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 8f102a92c23..1f348bb7fd4 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -57,6 +57,13 @@ config SPL_REGULATOR_AXP
+ 	  Enable support in SPL for the regulators (DCDCs, LDOs) in the
+ 	  X-Powers AXP152, AXP2xx, and AXP8xx PMICs.
+ 
++config REGULATOR_AXP_DRIVEVBUS
++	bool "Enable driver for X-Powers AXP PMIC drivevbus"
++	depends on DM_REGULATOR && PMIC_AXP
++	help
++	  Enable support for sensing or driving the USB VBUS on
++	  X-Powers AXP2xx and AXP8xx PMICs.
++
+ config REGULATOR_AXP_USB_POWER
+ 	bool "Enable driver for X-Powers AXP PMIC USB power supply"
+ 	depends on DM_REGULATOR && PMIC_AXP
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index 4382d4b3ab9..7c3f0b02fb4 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_$(XPL_)DM_REGULATOR) += regulator-uclass.o
+ obj-$(CONFIG_REGULATOR_ACT8846) += act8846.o
+ obj-$(CONFIG_REGULATOR_AS3722)	+= as3722_regulator.o
+ obj-$(CONFIG_$(XPL_)REGULATOR_AXP) += axp_regulator.o
++obj-$(CONFIG_$(XPL_)REGULATOR_AXP_DRIVEVBUS) += axp_drivevbus.o
+ obj-$(CONFIG_$(XPL_)REGULATOR_AXP_USB_POWER) += axp_usb_power.o
+ obj-$(CONFIG_$(XPL_)DM_REGULATOR_DA9063) += da9063.o
+ obj-$(CONFIG_$(XPL_)DM_REGULATOR_MAX77663) += max77663_regulator.o
+diff --git a/drivers/power/regulator/axp_drivevbus.c b/drivers/power/regulator/axp_drivevbus.c
+new file mode 100644
+index 00000000000..c463de8786b
+--- /dev/null
++++ b/drivers/power/regulator/axp_drivevbus.c
+@@ -0,0 +1,57 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <dm.h>
++#include <power/pmic.h>
++#include <power/regulator.h>
++
++#define AXP_VBUS_IPSOUT			0x30
++#define AXP_VBUS_IPSOUT_DRIVEBUS		BIT(2)
++#define AXP_MISC_CTRL			0x8f
++#define AXP_MISC_CTRL_N_VBUSEN_FUNC		BIT(4)
++
++static int axp_drivevbus_get_enable(struct udevice *dev)
++{
++	int ret;
++
++	ret = pmic_reg_read(dev->parent, AXP_VBUS_IPSOUT);
++	if (ret < 0)
++		return ret;
++
++	return !!(ret & AXP_VBUS_IPSOUT_DRIVEBUS);
++}
++
++static int axp_drivevbus_set_enable(struct udevice *dev, bool enable)
++{
++	return pmic_clrsetbits(dev->parent, AXP_VBUS_IPSOUT,
++			       AXP_VBUS_IPSOUT_DRIVEBUS,
++			       enable ? AXP_VBUS_IPSOUT_DRIVEBUS : 0);
++}
++
++static const struct dm_regulator_ops axp_drivevbus_ops = {
++	.get_enable		= axp_drivevbus_get_enable,
++	.set_enable		= axp_drivevbus_set_enable,
++};
++
++static int axp_drivevbus_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_plat = dev_get_uclass_plat(dev);
++	int ret;
++
++	uc_plat->type = REGULATOR_TYPE_FIXED;
++
++	if (dev_read_bool(dev->parent, "x-powers,drive-vbus-en")) {
++		ret = pmic_clrsetbits(dev->parent, AXP_MISC_CTRL,
++				      AXP_MISC_CTRL_N_VBUSEN_FUNC, 0);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++U_BOOT_DRIVER(axp_drivevbus) = {
++	.name		= "axp_drivevbus",
++	.id		= UCLASS_REGULATOR,
++	.probe		= axp_drivevbus_probe,
++	.ops		= &axp_drivevbus_ops,
++};
 -- 
 2.46.3
 
