@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B383C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 11:59:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A379CC36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:20:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74265836A8;
-	Wed,  9 Apr 2025 13:59:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B9B1B835D8;
+	Wed,  9 Apr 2025 14:20:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xa04EIFc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a8GN9ewt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7657F836A8; Wed,  9 Apr 2025 13:59:08 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B475F836A4; Wed,  9 Apr 2025 14:20:32 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8773B8363B
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 13:59:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D8A283061
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 14:20:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=6bf1=W3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744199940;
- bh=dBgyFT/LrPImkJkCAS0bB9XC2pw7CEOrzC/l3D8hQZs=;
- b=xa04EIFcQ3a4jkqdvep6LGd9m7LafKPh9ILTBGK7gmmlvIPhY6fs50HOs4b5MlXdFgUDRK/IJ
- fyuzOSkSnlCouq9cdPmSHOyERaTQevkexRZQlfO17/aOvmhsmSFuVUQAZiPzVoVf545DSzegMWE
- hT+dYjbEZ2J+HKEP79lQOMYEGMGdT9ui9HyVhm5qjiU+3YUlI9/E+zoxipSZK2Mn38kPo4KDzbU
- nPDh1mqJRS5oRADwP3G4m7iNo/du20GyhpuAYTYLOWup+sHFGQJO2TLZbsXoKGpFCvvyrAO2LXu
- Kv2g64vMIhI28f+/2wVhwOk1AuNh7Fd0h3V1ejvgqNiA==
-X-Forward-Email-ID: 67f6610202fba845dcdf2ed2
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <929feec1-413a-4d48-9664-f2bf75360a81@kwiboo.se>
-Date: Wed, 9 Apr 2025 13:58:54 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-39c1ef4ae3aso419804f8f.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 05:20:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744201229; x=1744806029; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dYlv0O+ieTqbbf6VDswxmDaMgkLv6GpSm3WnEkZGIM0=;
+ b=a8GN9ewtd2cD4yJtLjTxky0NOfMQ+Rl9cwWw0Ii+AXcliTnDwCZcga/hpENHlqsvnb
+ 2AE5flKldogWbDOzGUeb8AHq4rjn7OP0lkc26Z7PWx5fXJDEbz555UgMAe0yGt315pJm
+ Cdy0DFneT78+DKD9HcJOEEJTEOfJhrBEIX5ySTpA90bih5NVIejV0+G73vHJSb1s1YuA
+ HYEy/9SdjJWawo5AB/ShJCBAH27XZ1hNQKG/tghHGE40EAWrhDI34PXkHJiVcvnqCA1e
+ +UMtzd4E8k4xV1xu6BPhQMPi6H/e106g0j4Zi7F5AsoDh2s0mKCwvPymBggHASc3YkN7
+ Sldw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744201229; x=1744806029;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dYlv0O+ieTqbbf6VDswxmDaMgkLv6GpSm3WnEkZGIM0=;
+ b=pQhRcla7O7l1R8GvqZWvqKxsu2HJi/dqaB4XWbVa9Le0AWLYnmGkgBIOx9zdnRjVDV
+ r5PR+0was5pr+pa5cc75BY8WSe5ctjUA+pSJz/mQlyRb2V7ArSuy9jTnEzosA4/d8Iry
+ gCLIIyR7l0SLQFR8JXUt+wnHBfgPwBr7gdU1A9pPAYiBGSOgjiECuXG4FSJrtaKrtick
+ 8T+7Q25DnrkPgaTgtB5yQgHEh0VZr9ALtwdTnROthPKSwpS3b6PYcY/bFZbpsIwSAjAp
+ JYcxbxvKnTnOOhPOqGo+0hD+8EcCT/w8osA19tPWuPWl7c/LOqpD/pL0Nr9ru/L0Dzw+
+ EPqQ==
+X-Gm-Message-State: AOJu0YzYbzGrnwjfhZshRAsqYSYk3LB48mJtuQ0xSWeGzDoHOSgZbbUz
+ 500giHfmfw/VPD63GArd/SFWhpQW87PQmnr1WvKqtKwt4V3j3+0B4MiwBttCMQMn/R8bbTVndoQ
+ TOdd4885I
+X-Gm-Gg: ASbGncuYrwG0Kkx4aVlhsyxr9fRkHPsOFRTw79/TI/HjeaxHuMOoO3fhS8Q63fTyII9
+ 9MpcEmKeCig06KzWxlcYVosSltMcWFCLZSlHFy6TQcPrOFj/u8mJ34Wb5dFeDT2EUfZ8Bi3oJoc
+ 96EcEUQZc68Z74I9ED1x674AxG3C+REi1gxC0SiFGKXYowwoUz+Dttxa1bfD2hNfgDY8g9rivWV
+ 82HOXOSFiKxQPmzWeuKqW2/ig8KMcaYa0U1kYlOBjk9N4GF6xVs1IF/lSGeh3DhUndqbTwo843U
+ Rh7XDnyERHAXYnnIb9rMoM5/KbOLEdgrcOIB1sPyyJfnCB4Z
+X-Google-Smtp-Source: AGHT+IF9BhO/2spi0XmaCO+ECJ7Oyc9nuSuepgIoHt6sCmRPgMC9pJBEdaeP4Do+qQEG2BcJQQx0WQ==
+X-Received: by 2002:a5d:598f:0:b0:39c:e0e:b7ea with SMTP id
+ ffacd0b85a97d-39d87ff0753mr2016645f8f.20.1744201229018; 
+ Wed, 09 Apr 2025 05:20:29 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:7528:8f22:ca44:64f])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39d89389f72sm1464169f8f.42.2025.04.09.05.20.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 05:20:28 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v2 0/2] NET_LWIP LMB fixes
+Date: Wed,  9 Apr 2025 14:20:04 +0200
+Message-ID: <20250409122007.2560668-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 04/10] rockchip: binman: Create a template for the FIT
-To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250329150626.2879942-1-jonas@kwiboo.se>
- <20250329150626.2879942-5-jonas@kwiboo.se>
- <d7bd61f0-40a5-4fde-9e47-529cbac28a94@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <d7bd61f0-40a5-4fde-9e47-529cbac28a94@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,32 +96,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Two small patches fixing issues with tftp and wget when the network
+stack is NET_LWIP and LMB is enabled.
 
-On 2025-04-09 11:39, Quentin Schulz wrote:
-> Hi Jonas, Simon,
-> 
-> On 3/29/25 4:06 PM, Jonas Karlman wrote:
-> [...]
->> -#if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
->> +#ifdef HAS_FIT
->>   		fit {
->>   			type = "blob";
->>   			filename = "u-boot.itb";
-> 
-> Use the template for the SPI here already instead of splitting it in a 
-> separate commit?
+Changes in v2:
+- The wget patch adds a call to altcp_abort(). Otherwise the transfer
+continues and we try to write later blocks which makes no sense if one
+has been rejected already. Thanks Sughosh G. for testing and reporting.
+- The tftp patch is unchanged.
 
-I think the original patches was more involved, so I may have requested
-a split. Could possible merge them in a v5.
+Jerome Forissier (2):
+  net-lwip: wget: add LMB and buffer checks
+  net-lwip: tftp: add LMB and buffer checks
 
-Regards,
-Jonas
+ net/lwip/tftp.c | 45 ++++++++++++++++++++++++++++++++++-----------
+ net/lwip/wget.c | 49 +++++++++++++++++++++++++++++++++++++++++--------
+ 2 files changed, 75 insertions(+), 19 deletions(-)
 
-> 
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> Thanks!
-> Quentin
-> 
+-- 
+2.43.0
 
