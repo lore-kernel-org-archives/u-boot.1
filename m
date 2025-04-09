@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EAFC36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A94C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 14:30:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D6358384C;
-	Wed,  9 Apr 2025 16:30:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A13788384B;
+	Wed,  9 Apr 2025 16:30:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gxqaZQPJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VmGgIqq9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEE6F8384B; Wed,  9 Apr 2025 16:30:17 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 7C24F83852; Wed,  9 Apr 2025 16:30:18 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BA4A83855
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:30:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FF0A83844
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 16:30:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4003b22c2f4so4363301b6e.0
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 07:30:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ac298c8fa50so1122005666b.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 07:30:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744209012; x=1744813812; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U5286chN3DIAwIUx4LI72h6J2pBZOkaUmvy5HlVv4AU=;
- b=gxqaZQPJLQ7r/mDT1v+CiSi2tfCnuDZqj/uuTJEkqB0tO87IdaVuunEY4jMjKF+ngj
- YpF7DZCFgEkHfmF5HzQCE37o6Rb2UVTsr4bRn/9chnqij1Ow9UTJVdTPYq4nRKQe1PKJ
- feuIaaYzAKP/IELHnI1o6H5ao8U+2SphZ5lRA=
+ d=chromium.org; s=google; t=1744209015; x=1744813815; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PBcdjyZAi8RyconPOuNtb5gp+BRXXw2EA6Xq+JCEPwA=;
+ b=VmGgIqq9tumidhnJY0QVCRRPSbm9U+x1IH+KISDO+FAHXSk+rvioyQVgwN/oJJKbda
+ GxlnPmZ+SdKsZ7QQTEODvDgJf2Ykn35DqpAnEvkKpe4Ykz4TXHcfOFPvAocPP53yS+7p
+ j25tKy5UnBrfS/KrvojM8MEReCtdvYlZSvURk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744209012; x=1744813812;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U5286chN3DIAwIUx4LI72h6J2pBZOkaUmvy5HlVv4AU=;
- b=F46c+No4WyfydMzO3EFXpYs7XqJV7/kXkfeEFN9yXU4R0UNSUZTx0Qy/SJlFdVj+hc
- es9bi0NEWhTOAomSThMXRpvvwnISGqNwVQ3daSQxhA0Bqxl3SBbFzT1e870aAbMC0pfe
- ZZPdOJo+IItRWWJfB99W5n9HNq3/nXOp3GztbtswZ9tu1NAzCyTx0HF69t8hKHlMn/DS
- nsKCSi1PH5X4/5PGFha2HmV1PNi9qXKaSojOxKrKcazdHM/x27h77q7QOOmyxPXutsGH
- 0vlWHkHlnJlGv+b3FTck8B3pzHxe7qmj84jups7BDGKcD7t2J5nszCJBOoLX4jtQyrwT
- svPA==
-X-Gm-Message-State: AOJu0Yxok90Oifp1jIEumvW7/yqjTUxi233pRiGeJlSoQ9BMxLPSsuxj
- Rgrg2zVap9KijhSoELWQuStYNA/bq0tv3O12gEJdEq3ftB/L4kd+YY1GpN4rzH4=
-X-Gm-Gg: ASbGnctIWh+yhvqmbmfsot5Z2ZEeVYEMQUUGjJG+j1HgF8uNrqj68lF5mDV6AOz+8cA
- SlzASYc0tTWjHw7TcCmbfu07tO0F7qUPWtyp5CXnwdrCIzEstiikS5GFqboEA6Sd446mLnsXMT+
- ZbgIEVv7nM05EgHgs7fes/yPzrwhQXHpRs+IyBvzVcNs5A2m+Y+FdqF2mWXPmjLcC+tXByaNvwL
- YHsXmOO6wL7Z/D0bd5eUcKKa9GsgOy9L7l79mzZOX2suQsDlqyS/D1T/nF6znTVJ4VCALrglSDd
- eGSAi0HX0TgIxzL1euyXC5arD70i10s7k3YjC+BJ2ikPnIkaw28+q7Xi3UpNVZ2Vpp1awOUOx14
- 8RZ3B9Ra5dNll
-X-Google-Smtp-Source: AGHT+IFnCZNOb64n00Bqx9viP4A1X57Ivf1S8CRxojfKG5gR76FW6Qv2eqhmJHm4TJypI2FUCtnWsw==
-X-Received: by 2002:a05:6808:3a05:b0:3f8:9b41:6ce0 with SMTP id
- 5614622812f47-400736b00d1mr1816515b6e.7.1744209011659; 
- Wed, 09 Apr 2025 07:30:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-400762d564csm175031b6e.27.2025.04.09.07.30.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 07:30:11 -0700 (PDT)
-Date: Wed, 9 Apr 2025 08:30:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com
-Subject: Re: [PATCH v1] configs: set SPL_TEXT_BASE by default for k3 platforms
-Message-ID: <20250409143009.GD5495@bill-the-cat>
-References: <20250409124739.3843126-1-anshuld@ti.com>
+ d=1e100.net; s=20230601; t=1744209015; x=1744813815;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PBcdjyZAi8RyconPOuNtb5gp+BRXXw2EA6Xq+JCEPwA=;
+ b=j2ULaUGJ7B1zb8MauPVgdY6q3ye5Fw583gf3PeVbBO+xL4XFORIW+WiWUZz0Jhh0+8
+ Ss9/MmB/mRbrttwlTkO3FzYbsOAU7T5LpUEya78L/lqjqAnGRUPSIyqbktDpjbJEMIZ0
+ 74Bqkt9Z7/3ZWrVwO6M3v37RgeDiMwSLo7Gi8OsqS281/Os0Tt5h9PMt+Q2Xbe9tGOIn
+ ssqjjh1cAaQHJIAgMLBR0miVDqzUZ9Fg+lvOCc4Ba5By6WC/iCqxSRzEymzsd2o3dV4E
+ k1elBTY3f3yp1vfQbczajOAgqjYad9rd5m5bv/BjNIzH3si7eduVlH8Wt4NSld0BhRcO
+ qr/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQh3xC4mgZV0qWVz8EQei2lJqiPF0u+db8pgOex6MTVJE+duJ1O4oSWHMvqDMb1Wxx6B5FnYY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgBDtAXU0XCIINg5lxzZ/FUvSQlYdKabZQ3+ho+RzHL32ksMi5
+ CNpIxMNqWOMiN1K7IilauyDb9dL3DkkZpJyrtiH7for1gSBnlfFDGJE6JxzzkqzTox+xDyaB4cO
+ S8Yo+b4z1+ZC+5XUQ8R32VlPXGRIEP9KINcYPIgv6qcsgOys=
+X-Gm-Gg: ASbGncspGtPYzPKmTNg59WjStokao7T+OtwLHM9QHDm7oCx6u9s1Q/8UQ8aP51mU6Fb
+ 68qL7te85NztQE8PM4mD/IZrGre6QOwh9Liqgkf8N7NMD+PW0UbcGx7icfIsKa3jNBySR/3+Z4H
+ ooCn+Uh/e+qlbkC4DU4kG/bPs=
+X-Google-Smtp-Source: AGHT+IGUgOrJ/UhFVxCY2oM0Rr4wipChadCdJLGbSflF4l8WHLpk5dKbwtbiEXwCz+jVszmDwLZcorawfIgXvyVfFGc=
+X-Received: by 2002:a17:907:1ca5:b0:ac3:8aa5:53f6 with SMTP id
+ a640c23a62f3a-aca9d61854cmr330056666b.24.1744209014599; Wed, 09 Apr 2025
+ 07:30:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7+hyraK5Um3oWZjB"
-Content-Disposition: inline
-In-Reply-To: <20250409124739.3843126-1-anshuld@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250329150626.2879942-1-jonas@kwiboo.se>
+ <20250329150626.2879942-9-jonas@kwiboo.se>
+ <01e8a4b3-a77c-42ca-a4de-e744755a2b89@cherry.de>
+ <CAFLszTgSeGN_+adh6VviNxYmVCGR_iOQN_igBbdEaXxDqKsb_Q@mail.gmail.com>
+ <e7ac70c7-676a-4df1-b1bf-5c4bbbc31a1c@cherry.de>
+ <CAFLszTgGfXmBrTu4RnSo13WE82W+E-bVrCrif48BbHFxzx-TFA@mail.gmail.com>
+ <53f32547-6758-49a2-8246-72b9046cac03@cherry.de>
+In-Reply-To: <53f32547-6758-49a2-8246-72b9046cac03@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 9 Apr 2025 08:30:02 -0600
+X-Gm-Features: ATxdqUGXKETSA0-Lw5vlwZ6YnZVqQ8BlFqzqywZO6mjCoC29GYwrJg6i4K7S7H8
+Message-ID: <CAFLszTh0et26pngJK1e6JjeLHaNsm7XDhZn3kfZZc7LBeAt-iw@mail.gmail.com>
+Subject: Re: [PATCH v4 08/10] rockchip: binman: Use the skip-at-start prop in
+ simple-bin image
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,79 +96,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---7+hyraK5Um3oWZjB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 9 Apr 2025 at 07:35, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 4/9/25 3:33 PM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On Wed, 9 Apr 2025 at 07:32, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On 4/9/25 3:22 PM, Simon Glass wrote:
+> >>> Hi Quentin,
+> >>>
+> >>> On Wed, 9 Apr 2025 at 04:57, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>>>
+> >>>> Hi Jonas, Simon,
+> >>>>
+> >>>> On 3/29/25 4:06 PM, Jonas Karlman wrote:
+> >>>>> From: Simon Glass <sjg@chromium.org>
+> >>>>>
+> >>>>> The simple-bin image is normally written to MMC media at block 64, which
+> >>>>> is a 32K offset from start of storage media.
+> >>>>>
+> >>>>> Set the skip-at-start property to 0x8000 (32 KiB) so that fdtmap and
+> >>>>> other embedded binman symbols in the output binary is referencing image
+> >>>>> offsets correctly.
+> >>>>>
+> >>>>
+> >>>> Shouldn't we have this commit BEFORE we add the `fdtmap` node since we
+> >>>> know it's wrong before this commit?
+> >>>>
+> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >>>>> ---
+> >>>>> Changes in v4:
+> >>>>> - Drop defconfig changes
+> >>>>> - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
+> >>>>>
+> >>>>> Changes in v2:
+> >>>>> - Move this patch to the end of the series
+> >>>>> - Drop 0x8000 offset for SPI
+> >>>>> ---
+> >>>>>     arch/arm/dts/rockchip-u-boot.dtsi | 3 ++-
+> >>>>>     1 file changed, 2 insertions(+), 1 deletion(-)
+> >>>>>
+> >>>>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> >>>>> index fb38b7b80c43..65b81bf58626 100644
+> >>>>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> >>>>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> >>>>> @@ -154,6 +154,7 @@
+> >>>>>         simple-bin {
+> >>>>>                 filename = "u-boot-rockchip.bin";
+> >>>>>                 pad-byte = <0xff>;
+> >>>>> +             skip-at-start = <0x8000>;
+> >>>>>
+> >>>>>                 mkimage {
+> >>>>>                         filename = "idbloader.img";
+> >>>>> @@ -178,7 +179,7 @@
+> >>>>>     #else
+> >>>>>                 u-boot-img {
+> >>>>>     #endif
+> >>>>> -                     offset = <CONFIG_SPL_PAD_TO>;
+> >>>>> +                     offset = <(CONFIG_SPL_PAD_TO + 0x8000)>;
+> >>>>
+> >>>> This is confusing. The documentation states:
+> >>>>
+> >>>> """
+> >>>> offset:
+> >>>>        This sets the offset of an entry within the image or section containing
+> >>>>        it.
+> >>>> """
+> >>>>
+> >>>> My understanding is that it should be relative to the beginning of the
+> >>>> image but this now needs the knowledge of where it will be stored on the
+> >>>> MMC device (via the value in skip-at-start).
+> >>>>
+> >>>> Why is skip-at-start automatically deducted from offset?
+> >>>
+> >>> This is how binman works[1]. We are trying to use the feature designs
+> >>
+> >> Why is it deducted?
+> >
+> > Are you asking why skip-at-start is deducted from the offset?
+> >
+>
+> Yes
 
-On Wed, Apr 09, 2025 at 06:17:37PM +0530, Anshul Dalal wrote:
+It is confusing, unfortunately.
 
-> SPL_TEXT_BASE is used as the load address for the main domain SPL on k3
-> platforms.
->=20
-> Since the config value is the same for every board, this patch sets the
-> value 0x80080000 as default for all ARCH_K3 and deletes the instances of
-> SPL_TEXT_BASE in individual defconfigs.
->=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-[snip]
-> ---
->  common/spl/Kconfig                         | 1 +
->  configs/am62ax_evm_a53_defconfig           | 1 -
->  configs/am62px_evm_a53_defconfig           | 1 -
->  configs/am62x_beagleplay_a53_defconfig     | 1 -
->  configs/am62x_evm_a53_defconfig            | 1 -
->  configs/am64x_evm_a53_defconfig            | 1 -
->  configs/am65x_evm_a53_defconfig            | 1 -
->  configs/iot2050_defconfig                  | 1 -
->  configs/j7200_evm_a72_defconfig            | 1 -
->  configs/j721e_beagleboneai64_a72_defconfig | 1 -
->  configs/j721e_evm_a72_defconfig            | 1 -
->  configs/j721s2_evm_a72_defconfig           | 1 -
->  configs/j722s_evm_a53_defconfig            | 1 -
->  configs/j784s4_evm_a72_defconfig           | 1 -
->  configs/phycore_am62ax_a53_defconfig       | 1 -
->  configs/phycore_am62x_a53_defconfig        | 1 -
->  configs/phycore_am64x_a53_defconfig        | 1 -
->  configs/verdin-am62_a53_defconfig          | 1 -
->  18 files changed, 1 insertion(+), 17 deletions(-)
->=20
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 94e118f8465..a84b96ebce4 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -271,6 +271,7 @@ config SPL_TEXT_BASE
->  	default 0x40200000 if OMAP34XX
->  	default 0x402F4000 if AM43XX
->  	default 0x402F0400 if AM33XX
-> +	default 0x80080000 if ARCH_K3
->  	default 0x00908000 if ARCH_MX6
->  	default 0x00912000 if ARCH_MX7
->  	default 0x40301350 if OMAP54XX
+When you use an offset (say 0x78000) then normally the entry will
+start at that offset in the image.
 
-This should probably be ARCH_K3 && ARM64, and then also different line
-for the R5 side?
+When you use skip-at-start 0x8000, its value is added to all top-level
+offsets in the image, so the offset becomes 0x80000
 
---=20
-Tom
+BUT the image built by binman does not contain the first 0x8000 bytes.
+It is expected that the image is written to offset 0x8000 so that the
+offsets will be correct when used within U-Boot itself.
 
---7+hyraK5Um3oWZjB
-Content-Type: application/pgp-signature; name="signature.asc"
+Another way to think of it is that skip-at-start doesn't really change
+any offsets; it just creates a hole at the start of the image. If you
+didn't use skip-at-start you could manually set the first offset to
+0x8000 and use dd to skip the first 0x8000 bytes when writing.
 
------BEGIN PGP SIGNATURE-----
+This feature was added for x86 to handle memory-mapped ROMs, but it
+has proved useful for other cases now.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf2hGkACgkQFHw5/5Y0
-tyzVLgv/QbpxrA016KClH8MJRWiD/JKQVG+2FLZqoSF8IPVpF4uUwU2rDXlb3VAT
-Euj9k8Dn4gFpYfgJq3wphO6H9BNlZiAgH0Ct2okzUnJXq7hFAl960Jf7YuLORBpU
-LIydBf4Kt+jMrAma4qhoSL6M6eT1EvGWdMJppQVBktHe2t/7HyTwpkIyNaLxLVO2
-w27AV5sjtvyPpvikFrcgWq7mMlLurHdsGcRtxSRgUSGwUdIh/d6UObeyfMS1YUGj
-2Qi4VXVGtwvL7+1g03MXml0HdAqB3OjVz/G91IG73K5K2FWP7Sly6d8bqf2Bgocw
-WldzDzx83pX6PpcaS/iN5PZXzVlXClNxYDMMoBRHcAoHO4bP9JyBcc8AJFvGw2s7
-/aXII4e8SJyK5E7IZCCmuORcEJQ72n4gEZIR0pDmQNqLxOTq38FXE6TatI9XOhBp
-9NZCvzyCrex4DR892W0SyIJ1oo66kgWhWO4yYXXhT4b43xs+dSuEO0degGrq/GI+
-b/p+C3IL
-=oybl
------END PGP SIGNATURE-----
-
---7+hyraK5Um3oWZjB--
+Regards,
+Simon
