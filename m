@@ -4,64 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A75C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:52:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6423DC369A1
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:57:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBD77838C1;
-	Wed,  9 Apr 2025 17:52:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9DAF28353A;
+	Wed,  9 Apr 2025 17:57:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ufOoRnJM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z9SyFjGg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C596C838C7; Wed,  9 Apr 2025 17:52:21 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8C4F6838BF; Wed,  9 Apr 2025 17:57:31 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338B2838BF
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:52:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0E758297E
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:57:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=3b7d=W4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1744213936;
- bh=PqEgU3tm8B/ZrxG2Mtg41x5wGBQnZpx/RX+sUMHn1cc=;
- b=ufOoRnJMSzCF1pfgSDCNDy40IRlZqFW0KqlzzS2ZCyesVnEMgBmjPiKbeLe3WFofI80ly69zh
- UjZb5A9Dv5Zjq2MFzzWFfMwjnGWuyFZoJjJHPJVwMPoytvq195S/7nRG/IJtzKvJ/o36RQCnU48
- TX9c63jdfdq/YRprNgsCmde6b3vviwpTJ9hjOn/YR/qIEWyylYPyIQ/Wrz/9vdNiC3EzBk7Vxo2
- DdLDsQcpSqI2QJM/TiRMM+Y6TQMxRr3TN9LYV9ddfONO5w4aUgyBGhYmQfKxH9Bx1aSLkFP3nsv
- Vym3NzH2Ny0+oQcM++7Lfd98GXhfKi+xYH5hXRqzBvCg==
-X-Forward-Email-ID: 67f697ac1aecaf4e4108eba7
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 1.0.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <060cc012-e9fe-4fd4-9e7f-db0016533e37@kwiboo.se>
-Date: Wed, 9 Apr 2025 17:52:09 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-3d6d162e516so53978055ab.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 08:57:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744214247; x=1744819047; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fKUmkUFLxJxT5inH1gkDs8JOsbMWYD8kz9aQ9b9TSWc=;
+ b=Z9SyFjGgMFu/XQ/A68c7SATl7XTIags2EIiH1KzJZWvS8c4p667ciOGgS0iCF+K2Dj
+ EIuOUAngt2pLYPUAtjX0DQiNiwVq915v/egGpQ8Npbzu6v8Nyfr/JXueDa5T+j3NvrPa
+ SaC2FSFcxYkVag8ps3A1N7Y1nDZg8rnDhJ/tg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744214247; x=1744819047;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fKUmkUFLxJxT5inH1gkDs8JOsbMWYD8kz9aQ9b9TSWc=;
+ b=XV6ZprtI/kYIWeklF5sVvEOSnFyO3EZrTRRmqq9Pfn8hCC2q0oNwKX0uakFsMw7PkR
+ XEyth/Eg9PvkkuyZU0TCnJAmuWEvpybyRUVEjJZ0k06pOCrwcPdW4VX4zCyPzJKOuUw+
+ icHOwvSZM2w2M3spbw99ujEplw8FvSWwCj1trG33yrWUACW4+3IAVdlAVdyElmeydGKj
+ MnIdixey32k1R0Nk0YMiviZZY4bjvASXOlWT1mCLMXcWJBN2eaghSlo6uRxIMcXDOLRm
+ LM4z4x39mWTTmv3nEkREKXPY3AjwkbiMxHVdb9KB5DSvXwyD4ZkFHM2vDswxhlm53rP8
+ ytww==
+X-Gm-Message-State: AOJu0Yz79MypjgfOh2sTrhIwml7A677v13+iuKJfdaHdkxlT3UB9mi8n
+ hiOKqxEo5nzXxLkbtBYYp0+bNwct4NpB0zNXTWkMt2Dk0ddE/kCVcbOOf2JVgJymvx4vOAJbx7Q
+ =
+X-Gm-Gg: ASbGnctqwNJ8rtd37oHeT5tpW108V/rb2i4x+cni/FRQL1So0ugvNs3AVhns49vFc9G
+ yQc6Lzb+qlrZlzJpkkXwlYRSWjPxoU/46LOIWteFHfmtzX6/N1+TD8hXXcnQlMf20OpaznF7vs4
+ L9ruxsoUVp/aDgkgpa1x4XOObh6tbl0W+RtMP1Pi8ZVscHsiDbJxP3Wc47VMlgwvYezblAZqz0x
+ yb71kkKmnNa4OJ210CkdzfZdYyEwkavPsGpXlQZFCXVaREcVqgnYE3uAzysWYAEc1EWkOcn1uNS
+ i5g5yF2UBuTvRMebYnclyfnpmVJjoF3+GVl8rqhBojflXMV7X5ssU0BCutaeHigYMtssIYN2sp/
+ Yhw==
+X-Google-Smtp-Source: AGHT+IHzvASAA6P9CDBHC78z4PLJQp9C4g4UHxbZnH/eupAWFwzBjlRJ9mwhVuZ4p6X5t0Pxra0S3Q==
+X-Received: by 2002:a05:6e02:198b:b0:3d0:4a82:3f43 with SMTP id
+ e9e14a558f8ab-3d776c8f02emr33787205ab.5.1744214246875; 
+ Wed, 09 Apr 2025 08:57:26 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f505e2e05fsm296853173.111.2025.04.09.08.57.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 08:57:26 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] boot: Add missing code for bootz_run()
+Date: Wed,  9 Apr 2025 09:57:21 -0600
+Message-ID: <20250409155723.431102-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/10] rockchip: binman: Factor out arch and compression
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20250329150626.2879942-1-jonas@kwiboo.se>
- <20250329150626.2879942-3-jonas@kwiboo.se>
- <cc9d923d-2635-41d8-bdf9-9eab0fa78249@cherry.de>
- <b833ffb7-9a28-4d74-bcd0-9de43a859690@kwiboo.se>
- <8b395cb0-4523-4381-b172-ecc378735e3f@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <8b395cb0-4523-4381-b172-ecc378735e3f@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,139 +96,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+The bootz method is special in that it uses its own implementation of
+several of the bootm states.
 
-On 2025-04-09 14:27, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 4/9/25 1:56 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2025-04-09 11:28, Quentin Schulz wrote:
->>> Hi Jonas, Simon,
->>>
->>> On 3/29/25 4:06 PM, Jonas Karlman wrote:
->>>> From: Simon Glass <sjg@chromium.org>
->>>>
->>>> Declare arch and compression at the top of the file to avoid needing
->>>> ifdefs in every usage.
->>>>
->>>> Add a few comments to help with the remaining #ifdefs.
->>>>
->>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> ---
->>>> Changes in v4:
->>>> - Split from "VBE serial part H: Implement VBE on Rockchip RK3399"
->>>> ---
->>>>    arch/arm/dts/rockchip-u-boot.dtsi | 44 +++++++++++++++----------------
->>>>    1 file changed, 22 insertions(+), 22 deletions(-)
->>>>
->>>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
->>>> index e9ed1d4b5738..2b01dc660562 100644
->>>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
->>>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
->>>> @@ -5,6 +5,20 @@
->>>>    
->>>>    #include <config.h>
->>>>    
->>>> +#ifdef CONFIG_ARM64
->>>> +#define ARCH	"arm64"
->>>> +#else
->>>> +#define ARCH	"arm"
->>>> +#endif
->>>> +
->>>
->>> I would refrain from using ARCH here as it's something we already use to
->>> specify the architecture to build (e.g. make ARCH=arm64 CROSS_COMPILE=...).
->>>
-> 
-> Actually you don't need (or even shouldn't?) provide ARCH to the make 
-> command, got confused because I'm compiling the kernel right now :)
-> 
->>> Maybe FIT_ARCH?
->>
->> sunxi-u-boot.dtsi is also using ARCH so I figured it was also safe here,
->> we can change to FIT_ARCH for a v5.
->>
-> 
-> Indeed. I would prefer something not clashing with other 
-> environment/make variables :)
-> 
-> [...]
-> 
->>>> @@ -84,7 +84,7 @@
->>>>    					fit,operation = "split-elf";
->>>>    					description = "ARM Trusted Firmware";
->>>>    					type = "firmware";
->>>> -					arch = "arm64";
->>>> +					arch = ARCH;
->>>>    					os = "arm-trusted-firmware";
->>>>    					compression = "none";
->>>>    					fit,load;
->>>> @@ -103,7 +103,7 @@
->>>>    					fit,operation = "split-elf";
->>>>    					description = "TEE";
->>>>    					type = "tee";
->>>> -					arch = "arm64";
->>>> +					arch = ARCH;
->>>>    					os = "tee";
->>>>    					compression = "none";
->>>>    					fit,load;
->>>> @@ -119,11 +119,11 @@
->>>>    					};
->>>>    #endif
->>>>    				};
->>>> -#else
->>>> +#else /* !CONFIG_ARM64 */
->>>>    				op-tee {
->>>>    					description = "OP-TEE";
->>>>    					type = "tee";
->>>> -					arch = "arm";
->>>> +					arch = ARCH;
->>>>    					os = "tee";
->>>>    					compression = "none";
->>>>    					load = <(CFG_SYS_SDRAM_BASE + 0x8400000)>;
->>>
->>> Wondering if we couldn't put some of the Aarch32 and Aarch64 OP-TEE OS
->>> node(s) in common?
->>
->> Sounds like a good idea to maybe put op-tee in a template, personally I
->> never use op-tee so typically try to minimize any change/impact related
->> to op-tee.
->>
->> The RK3506 does use op-tee so I may need to dig more into the op-tee
->> parts in a future RK3506 enablement series, initially [1] was enough.
->> Could look more into using a op-tee template in such future series.
->>
->> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/3d683f3b717de010fffeece8712373892a599905
->>
-> 
-> Interesting, is it required for RK3506? Do they do things in secure 
-> world and since it's Aarch32, no TF-A loaded by U-Boot?
+The existing do_bootz() function calls bootz_run() but first does a few
+other things. These are missing in the direct call to bootz_run(). I
+probably missed this because bootz_start() sets up its own
+struct bootm_info so I assumed it was independent. While the struct
+itself is independent, changes to the images member (which is a pointer)
+persist.
 
-To my knowledge the vendor OP-TEE blob implement PSCI for cpu core mgmt
-and it also does some sort of initialization for OTP.
+Move the required code into bootz_run()
 
-Without starting OP-TEE before U-Boot proper, reading from OTP only
-return 0x00 for each byte read.
+This change was manually tested on an rpi2 with postmarketOS added,
+using standard boot and also the 'bootz' command.
 
-So will probably be much easier to just run OP-TEE similar to what some
-other Rockchip ARMv7 SoCs does/require.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 47eda7e80ea ("boot: pxe: Use bootm_...() functions where possible")
+Reported-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
 
-> 
-> You can play with OP-TEE on RK3588 from master, c.f. 
-> https://github.com/OP-TEE/optee_os/blob/master/core/arch/arm/plat-rockchip/platform_rk3588.c
-> 
-> I haven't even built it but there's been some work on it since it was 
-> merged early December last year, so possibly people are using it.
+ boot/bootm.c | 33 ++++++++++++++++++++++++++
+ cmd/bootz.c  | 65 +++-------------------------------------------------
+ 2 files changed, 36 insertions(+), 62 deletions(-)
 
-Thanks, will take a closer look at some point in future :-)
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 7807579d5e6..0e63dd4adf3 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1185,6 +1185,39 @@ int bootm_run(struct bootm_info *bmi)
+ 
+ int bootz_run(struct bootm_info *bmi)
+ {
++	struct bootm_headers *images = bmi->images;
++	ulong zi_start, zi_end;
++	int ret;
++
++	ret = bootm_run_states(bmi, BOOTM_STATE_START);
++	if (ret)
++		return ret;
++
++	images->ep = bmi->addr_img ? hextoul(bmi->addr_img, NULL) :
++		image_load_addr;
++
++	ret = bootz_setup(images->ep, &zi_start, &zi_end);
++	if (ret)
++		return ret;
++
++	lmb_reserve(images->ep, zi_end - zi_start);
++
++	/*
++	 * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
++	 * have a header that provide this informaiton.
++	 */
++	if (bootm_find_images(images->ep, bmi->conf_ramdisk, bmi->conf_fdt,
++			      images->ep, zi_end - zi_start))
++		return -EINVAL;
++
++	/*
++	 * We are doing the BOOTM_STATE_LOADOS state ourselves, so must
++	 * disable interrupts ourselves
++	 */
++	bootm_disable_interrupts();
++
++	images->os.os = IH_OS_LINUX;
++
+ 	return boot_run(bmi, "bootz", 0);
+ }
+ 
+diff --git a/cmd/bootz.c b/cmd/bootz.c
+index 787203f5bd7..acf0c92a42f 100644
+--- a/cmd/bootz.c
++++ b/cmd/bootz.c
+@@ -20,56 +20,6 @@ int __weak bootz_setup(ulong image, ulong *start, ulong *end)
+ 	return -1;
+ }
+ 
+-/*
+- * zImage booting support
+- */
+-static int bootz_start(struct cmd_tbl *cmdtp, int flag, int argc,
+-		       char *const argv[], struct bootm_headers *images)
+-{
+-	ulong zi_start, zi_end;
+-	struct bootm_info bmi;
+-	int ret;
+-
+-	bootm_init(&bmi);
+-	if (argc)
+-		bmi.addr_img = argv[0];
+-	if (argc > 1)
+-		bmi.conf_ramdisk = argv[1];
+-	if (argc > 2)
+-		bmi.conf_fdt = argv[2];
+-	/* do not set up argc and argv[] since nothing uses them */
+-
+-	ret = bootm_run_states(&bmi, BOOTM_STATE_START);
+-
+-	/* Setup Linux kernel zImage entry point */
+-	if (!argc) {
+-		images->ep = image_load_addr;
+-		debug("*  kernel: default image load address = 0x%08lx\n",
+-				image_load_addr);
+-	} else {
+-		images->ep = hextoul(argv[0], NULL);
+-		debug("*  kernel: cmdline image address = 0x%08lx\n",
+-			images->ep);
+-	}
+-
+-	ret = bootz_setup(images->ep, &zi_start, &zi_end);
+-	if (ret != 0)
+-		return 1;
+-
+-	lmb_reserve(images->ep, zi_end - zi_start);
+-
+-	/*
+-	 * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
+-	 * have a header that provide this informaiton.
+-	 */
+-	if (bootm_find_images(image_load_addr, cmd_arg1(argc, argv),
+-			      cmd_arg2(argc, argv), images->ep,
+-			      zi_end - zi_start))
+-		return 1;
+-
+-	return 0;
+-}
+-
+ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	struct bootm_info bmi;
+@@ -78,17 +28,6 @@ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	/* Consume 'bootz' */
+ 	argc--; argv++;
+ 
+-	if (bootz_start(cmdtp, flag, argc, argv, &images))
+-		return 1;
+-
+-	/*
+-	 * We are doing the BOOTM_STATE_LOADOS state ourselves, so must
+-	 * disable interrupts ourselves
+-	 */
+-	bootm_disable_interrupts();
+-
+-	images.os.os = IH_OS_LINUX;
+-
+ 	bootm_init(&bmi);
+ 	if (argc)
+ 		bmi.addr_img = argv[0];
+@@ -99,8 +38,10 @@ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	bmi.cmd_name = "bootz";
+ 
+ 	ret = bootz_run(&bmi);
++	if (ret)
++		return CMD_RET_FAILURE;
+ 
+-	return ret;
++	return 0;
+ }
+ 
+ U_BOOT_LONGHELP(bootz,
+-- 
+2.43.0
 
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+base-commit: ea9e72801c4c3e3542afe40f89e7e0822cabfcf8
+branch: fix-bootz
