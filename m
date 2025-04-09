@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 274D1C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:20:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DACDC36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 12:27:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BA71836C5;
-	Wed,  9 Apr 2025 14:20:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F38283622;
+	Wed,  9 Apr 2025 14:26:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aaMH7ZtC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MRhVInYn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0E0C83061; Wed,  9 Apr 2025 14:20:34 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 38EF68363B; Wed,  9 Apr 2025 14:26:58 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DF9A83677
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 14:20:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2031183544
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 14:26:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-399737f4fa4so3708550f8f.0
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 05:20:32 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6167d0536so11550329a12.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 05:26:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744201231; x=1744806031; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gWEisPS6q2fBGe+ElLWhnrxim85hqSZmazy45tx2acE=;
- b=aaMH7ZtCwSTNpmvPqq2oiWMYE7LpYsgR2kAnur5/Hqc/L9IDDl5fptDtdh5R3uQ7K2
- 1qrTyuqKdAzXDsnfLMxdWZelbELj5rI+ZobYH05Uk8EGsjtMz1aBadRrZBBShPcnP6oO
- u6blSFLpCGq5b1zl2e8Z2m7X3s+RnRP/BDKRC+OG8fEFGD9yVTN/Z1FQcDYGqmDa7k1b
- 4Oci5nhq2kmw2jAkgrUhJzPihJtM9p0mF3tM1q+9nK7gBljfJjkCST4xSitigX3Gfh8z
- 2KUNiMCV1Jdsfeu+y2qfylDEVGLXmd+RSSYDIU/4asSR19jLci7XUakomfMCKi3C+Ha1
- r15A==
+ d=linaro.org; s=google; t=1744201615; x=1744806415; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/N/4KVNkkD6KPWR+v0kFFGnNht0jLHPRrGFOzP9JTGY=;
+ b=MRhVInYn3PgSmFeNIITIdAyuNrC5HbYApzl+4klv8RAyEG5YA2n8wiiRjwm6h79IkR
+ Iatp6ELQ7J1xqe20UDdZCWsZqgPTlYsBN+59UUKRU2KDHmCRD6P9pPvkvWfKMK3YEQ6f
+ 2pV902CmXCqCbtxWlM4f7Hk5Wk7+fwyh9GjdGVy5zPMMMqRJPrazOD4U5V7poePlzmd+
+ yODjE/BR4AD86bZS1RXeHv4I8RqLqGVr6qVBasX+1bYu2m8xq2JDC2DNBn1iGIukmNkb
+ gAYyb6JwhYeAXhezx9CTbzeTnaA6n3ToTFooldoNZ/8CkDzr9d/qQc/WUqYgZeRtFcBO
+ 3qcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744201231; x=1744806031;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gWEisPS6q2fBGe+ElLWhnrxim85hqSZmazy45tx2acE=;
- b=v5oGquHPACrwmSvxdU/48dRwoEQ6r8Ricw41KOcb6HmiHUPUBqGPGwe4KhNG9+w8o2
- XqCntznPgsR+tG7paBOi+8FvSSUt36zueOgywGXKghTICzQFQuy4m/owqB6fITDAqCQo
- Yv1zhFQu5cdCGo7httkQkkfpNbrO+VkRr3GteCSIMlxmFY4ir01CrcYnMmAXCPCXQgLJ
- DVVmO60cWL/AvnGd0eLxMxzU/GU0kb6vCfISocJRpPAAzd69lI49Uo41xIXYMlmtnMJv
- 0f54hBx/uQde1lrPponXhuLFAYekMu3lpxmcJQN0ng7iTlk1UE5VhTADJplQDa1tCmAz
- NTvQ==
-X-Gm-Message-State: AOJu0YzM1bFEY9apHTqb5222PBjsj/RYllJoDGL/OGd2KAfCBgJoTTzQ
- CymHGmzZTCuYB+dMPfDbcWWEq0Tx09aGysZAJoCI5ZD3ff9TPpBG921NWsIxLEV+3nOLAS+68mk
- FerzezxLk
-X-Gm-Gg: ASbGncsjkMYg9Z+iUj+KydSQAw2vRnXn0gZqV5CCThfI/zvU3nwdaKKGTTfc02k0OhC
- 9LWVzic/q2HRP6NJYyRcZ4NoqI6PRKf0gDFmCHTT1tPYSqW79GgGD7sdd+kKlg9W8rpLOShE/th
- atWV3F9G1hB9GIA8Lx9FgoROGiLrNKG2sAt6A7ie/wSnGURyM2mM1t4ECXnHOT/dKpyEXFXxyPE
- 7kmiR4vwkMvIY2S65RL0txtOtAuAIPIzc0JkTkQXNA6jusgEtq0wPZl/bdIm0gH7lhZtMDfeA/B
- bxdUTdh77IPvxaAPWRvQ9eI4Kv6W43y2dV4vIX18bXXKPx/s6NEKY7pHWlU=
-X-Google-Smtp-Source: AGHT+IFsNztdzsS0A67wGYj1g3xGLd+SW0JXgt9wA9+m8UB406CA4OadwgXoNBt7WZAuSlsiuL06Aw==
-X-Received: by 2002:a05:6000:1acd:b0:399:6d26:7752 with SMTP id
- ffacd0b85a97d-39d87cd0014mr2521287f8f.38.1744201231526; 
- Wed, 09 Apr 2025 05:20:31 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:7528:8f22:ca44:64f])
+ d=1e100.net; s=20230601; t=1744201615; x=1744806415;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/N/4KVNkkD6KPWR+v0kFFGnNht0jLHPRrGFOzP9JTGY=;
+ b=VqFPWdjOmfIBkO1SDQTtbMbrun2/dqw+HOyaA9n8wcVAlDTn022obz85pU5pxX7Goa
+ eBM07H6z05Wzlz/dRvDYl45XqKzkSMvAt8IqEapp0fBfbiIash028RMZ9Q2RpA7qbybO
+ iWnDNw8JpVbOjwiqWmXKTLjkkiMp3mUCZZ5tnqjwZD90rbcm2bet+3LNqylIaEeaxzvf
+ vqEXzW+KOFKRXe1pufsaBiD36NXJJZ6WvVzU1zWihv0AI7w83z9lmpbpF4bj0Avnyxt6
+ k0RODCj0S7mBMgCsuKxioZuh86P6r7NhdwWGHnoJrdCsw/cIi6wreKMRIn66XukoH3fd
+ I+SQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVPCrQlThQL8P/2DXC2mcJWsxXQFZfU9FYrMqhQbp6FN1SGLpJm09T6UmZYVVwBxZYxaNN2tgg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyh//DrEo1zAqK3gi6DaT+9+AcZUESkLLcNWZ+KrszmIuoo68MS
+ hrmTuE4TRHffaHXvFUzq+i4Pyy2w9OH1NKdNp8KrhaXu4qh/CJq+SVZhTDduVg8=
+X-Gm-Gg: ASbGncsW/zy/rI9IMMaptjdgsk4GnjtWu/qXbJIsKCgeW12oUGzEo3HSUWu8rU9QIne
+ kP39MqsZOyp9E72LuX6xOBnbedWin38PDXiWLtKtwHR9VBShkf+CRAiXrD2Z9u/PyoXJ+CyHz6K
+ n7fSpf6kdqO15FlsbtNjc1zqCFkSlnni6e5Jxbg8H96YM+RXfOebeTuMjX0Ai4xhCueG1QNQ6eo
+ mtrjek8X2CXq2gHjGA7rDq3JRvnqEjABmH9cbxHvN6rbFhYq/HBSbouXHM9egHB5w2GSbUm1RAX
+ 550nrzSY5vuD330XYpmaXSSmY3AAwgXKhNkzSfOEL1nHnQwPdO29o8PLfKAVdCNH2PGUTYG78qL
+ RNdvbT8vp0xBlOdF6sKGPa3BVo0Q4
+X-Google-Smtp-Source: AGHT+IFCkeoQCL1f2JfopRD7rYuRCMeSYdcjDQUEqegEnO+mWRkkVa7ZYthdEJUbADJ5eeloNgUumg==
+X-Received: by 2002:a05:6402:254e:b0:5e5:c5f5:f4b with SMTP id
+ 4fb4d7f45d1cf-5f2f773d107mr2126121a12.22.1744201615517; 
+ Wed, 09 Apr 2025 05:26:55 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:7cd9:8fac:d1e:8d79?
+ ([2a01:e0a:3cb:7bb0:7cd9:8fac:d1e:8d79])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d89389f72sm1464169f8f.42.2025.04.09.05.20.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 05:20:31 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/2] net-lwip: tftp: add LMB and buffer checks
-Date: Wed,  9 Apr 2025 14:20:06 +0200
-Message-ID: <20250409122007.2560668-3-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250409122007.2560668-1-jerome.forissier@linaro.org>
-References: <20250409122007.2560668-1-jerome.forissier@linaro.org>
+ 4fb4d7f45d1cf-5f2fbc2e427sm730556a12.47.2025.04.09.05.26.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Apr 2025 05:26:55 -0700 (PDT)
+Message-ID: <0f43211f-a858-48e1-a878-76d7e8df3128@linaro.org>
+Date: Wed, 9 Apr 2025 14:26:54 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: dhcp6: Send DHCPv6 using multicast MAC
+To: seanedmond@linux.microsoft.com, u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com
+References: <20250324204845.25603-1-seanedmond@linux.microsoft.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250324204845.25603-1-seanedmond@linux.microsoft.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,85 +102,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Legacy NET tftp invokes a store_block() function which performs buffer
-validation (LMB, address wrapping). Do the same with NET_LWIP.
+Hi Sean,
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
- net/lwip/tftp.c | 45 ++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 34 insertions(+), 11 deletions(-)
+On 3/24/25 21:48, seanedmond@linux.microsoft.com wrote:
+> From: Sean Edmond <seanedmond@microsoft.com>
+> 
+> In IPv6, the broadcast MAC address is not used.  Instead, it should use
+> the multicast address (see RFC RFC2464).
+> 
+> Add IPV6_ALL_NODE_ETH_ADDR macro for clarity.
+> 
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> ---
+>  include/net6.h | 10 ++++++++++
+>  net/dhcpv6.c   | 12 ++++++------
+>  net/dhcpv6.h   |  8 +++++++-
+>  3 files changed, 23 insertions(+), 7 deletions(-)
 
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 123d66b5dba..38aa647df5c 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -8,6 +8,7 @@
- #include <efi_loader.h>
- #include <image.h>
- #include <linux/delay.h>
-+#include <linux/kconfig.h>
- #include <lwip/apps/tftp_client.h>
- #include <lwip/timeouts.h>
- #include <mapmem.h>
-@@ -31,6 +32,36 @@ struct tftp_ctx {
- 	enum done_state done;
- };
- 
-+static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
-+{
-+	ulong store_addr = ctx->daddr;
-+	void *ptr;
-+
-+	if (CONFIG_IS_ENABLED(LMB)) {
-+		if (store_addr + len < store_addr ||
-+		    lmb_read_check(store_addr, len)) {
-+			puts("\nTFTP error: ");
-+			puts("trying to overwrite reserved memory...\n");
-+			return -1;
-+		}
-+	}
-+
-+	ptr = map_sysmem(store_addr, len);
-+	memcpy(ptr, src, len);
-+	unmap_sysmem(ptr);
-+
-+	ctx->daddr += len;
-+	ctx->size += len;
-+	ctx->block_count++;
-+	if (ctx->block_count % 10 == 0) {
-+		putc('#');
-+		if (ctx->block_count % (65 * 10) == 0)
-+			puts("\n\t ");
-+	}
-+
-+	return 0;
-+}
-+
- static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
- {
- 	return NULL;
-@@ -71,17 +102,9 @@ static int tftp_write(void *handle, struct pbuf *p)
- 	struct tftp_ctx *ctx = handle;
- 	struct pbuf *q;
- 
--	for (q = p; q; q = q->next) {
--		memcpy((void *)ctx->daddr, q->payload, q->len);
--		ctx->daddr += q->len;
--		ctx->size += q->len;
--		ctx->block_count++;
--		if (ctx->block_count % 10 == 0) {
--			putc('#');
--			if (ctx->block_count % (65 * 10) == 0)
--				puts("\n\t ");
--		}
--	}
-+	for (q = p; q; q = q->next)
-+		if (store_block(ctx, q->payload, q->len) < 0)
-+			return -1;
- 
- 	return 0;
- }
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+[...]
+
+Thanks,
 -- 
-2.43.0
-
+Jerome
