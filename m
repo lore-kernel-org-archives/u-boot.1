@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22306C369A1
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 18:27:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99524C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 21:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5E3C838CC;
-	Wed,  9 Apr 2025 20:27:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A895983950;
+	Wed,  9 Apr 2025 23:03:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nadda02R";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M/oqQw2y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E60838DD; Wed,  9 Apr 2025 20:27:34 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id A498283950; Wed,  9 Apr 2025 23:03:31 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5597982A0D
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 20:27:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C63878394F
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 23:03:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aenbacka@gmail.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6e8ec399427so57946406d6.2
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 11:27:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-85e751cffbeso14236939f.0
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 14:03:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744223251; x=1744828051; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rxS2mbBz7OKhDx9jT1+XTw1IfdNPBbrHav5yUCyDKZ8=;
- b=nadda02RFva+qwJz5mP3opPBLBDtrv6NmguMPp/2QBBXreaMYCc9PcN3Ux3y9gRlK8
- ZJcy/YbcE1SorER4cvHx1knk2IO15csMNnvljg6fI8zp1fHk2u7LKhBH3b4EXkhVWAER
- uObnyzSADx41c8i1aVj6b5YJjR40SMHPf8SfCvvlMLT3LSKiu32A0fegh5Xz/9RTj9CZ
- hD+obbuzZ9XZ+trBlsQ+0oFFjgbPMTByS1l5XvVZXtdvfd1KEnq8Nlfv2kG9kOwBIJOc
- RSw9i2mfOB8Y2ZtwUQJxp8CLfdsh2DbjHgSVmteUtF0VW2ILBxmgvMjYLPvVbqueVRLG
- im6A==
+ d=chromium.org; s=google; t=1744232607; x=1744837407; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rcbTQWIY7/uYgoVfvjZE1j4HdEQOlJgIekzYW5jlM8o=;
+ b=M/oqQw2yQXIb9IHiVDhZ+/HoKj7KelzU8TfXc3gGKvLvQWRoJh8x6CTgEerrH6mWMs
+ 19baxVYnHhbLLmY+4ve8/trvPCucwHYMBuc7GryvMG8dPMTScBewoaJDn45m2fMBTcRU
+ APfDoDA34Tl3rq7/go+O7tahbJvYrecy19g7g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744223251; x=1744828051;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1744232607; x=1744837407;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rxS2mbBz7OKhDx9jT1+XTw1IfdNPBbrHav5yUCyDKZ8=;
- b=BkbRO/ez/lHL14dxT07vELgS0o0Qa0JJ2rCd72d4p5vvT2S3l7eCAKBBPYnwKljT7P
- 8+NaIMU3SGRZY96aUAEL7y3nypS5K7ThrV0ddi02nDNKkz4EBRmcv94G1a/fPWlyBt0m
- ig5mWtN25PsFlKTbP2NT8tb7vo0CqRnh4+RSrBXOiF8nSqT1JWhSAJOt827j7SmvAdRA
- 4psCLr8XWEwi/FIMwn5LskzFL6NCZhL8hlvqhOHDxAz4/DVJgpEW+bS9oK8K0Z1a8cXx
- eCd0qY4e/E0vrm2WzDoX+Q0NGq6LdguoKF87hy4tW4FZ1IGGtjGqa6UleIO5gbenq8J5
- kRCw==
-X-Gm-Message-State: AOJu0YxyNWGcEYKZGNsuax4o/isMtOdVOlT18BhbA1zM4QIdeZdOqdbm
- 2JvWoRVd7Wh7SFW5xsBedbFwL/sZr80XSntvGcbhNuzGxvlZXw2YPuhKylG329f9UvBIFdI7LhH
- c6DhEWtfJgHQfA6/slfkj9uPgnnA=
-X-Gm-Gg: ASbGncs0mJ7Mv8HlV41rdhUppqrROaBKeaINJz5kblHVbRjDFdu4yvohQYQkCJR65ur
- f6a60iKbHJ+AwRJsEwRfINqwWj3sxtqb156Ay1lRWJfLYJusvaRdAMBYPydzQUlzdd4Z6x5+MNv
- Jukc2yQpeFgrwmrEbxlm8y8Q==
-X-Google-Smtp-Source: AGHT+IGjT82fBqhZiyLcRtnVSKGYU/po/LE3A+uNYi/yilHBV71NE+rIW9sboT8XgXo8S7font9j+kEBSTzzcSpu/Go=
-X-Received: by 2002:ad4:596f:0:b0:6e8:ea17:8587 with SMTP id
- 6a1803df08f44-6f0dbc9778cmr59130956d6.42.1744223251106; Wed, 09 Apr 2025
- 11:27:31 -0700 (PDT)
+ bh=rcbTQWIY7/uYgoVfvjZE1j4HdEQOlJgIekzYW5jlM8o=;
+ b=YLl2ZUgoW2sM31UBkw1cjfTGIm+Z4hZk90H+tXtxzKjVXs1yP/q6a0wNSKCxYaBaOq
+ g0rBVEg2bHvSaHX3b3s/wEAxL60Lwc00gfkVPOV56kZa3lChIezvpQu6Knu5AMEqWT4d
+ wp/6sjQ5JJMOmaekUYPm5wLbHPCf05RtQxOwsjqS4gzcmR19gSVbRav9Tv4QjlGqAMYl
+ vnf0xMvAgdRV+nyvfppBx/Jw92rgbpA0JvnlFIMqKONXK/8OCbZQ8am/idsnj1//f9QU
+ vphhgugQe/NlrIE8wimSpwjqfAzvSWgyU5U7IA12wjAMVsuT0OzF9Jw2BX4Hkrb99N3E
+ zg5Q==
+X-Gm-Message-State: AOJu0YwMJh51hZ0+8rDQbkQD+3H6oH4TU/iHAYJmc8Mfso5I48LsBY8+
+ ZUv2V5oXOI0JgI54yZa0ja6LXDCekVkpjq9AeuFrTC+pI87xSoemYrEBibbcmvx+q5yXQH0rR9U
+ =
+X-Gm-Gg: ASbGncsb9QLIGckJopv2ev+8gSftntM0y7hewBFzxJE10XHRxdnNtgWSpuM9aQgOR7S
+ 0nnHJkfhW+ssecYCpkDeeNz5KUBOORiqahMqAb30UrLqDmMG6feykG886mlLiWzQk/786/4Dmr0
+ rVOCK3UViJBcdlOuyOE+mH86wmrQxZ77Z63mzqu1x3q9QTOHzCVE64G/ByI0unMuIfguA+lbd7P
+ Tuo7cCnTp/kMj9/ek2sOzugcmUVqNqxkf6p/JWr1/c56KduSszuhlZwj1VJIaRoJTtSgLS4C7vb
+ GJNZ/Sy5TVKG6GmsSJ7undx1bB7SVq9RC+GS1i2WgXejMaM7lq5kM2SkaU0BSqKOFkOJvT6Duf4
+ cJw==
+X-Google-Smtp-Source: AGHT+IEXAJNRhkrFzuwqOKYawwRrMkJQQm0BnhnzII2moDSCdaVNU3lwWFTY2BZNYUzUfD8B9UbvXg==
+X-Received: by 2002:a05:6602:27d6:b0:85b:577b:37da with SMTP id
+ ca18e2360f4ac-8616edee91bmr29653939f.9.1744232606899; 
+ Wed, 09 Apr 2025 14:03:26 -0700 (PDT)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4f505cf8243sm419259173.21.2025.04.09.14.03.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 14:03:26 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <simon.glass@canonical.com>,
+ Jixiong Hu <Jixiong.Hu@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Richard Weinberger <richard@nod.at>, Tom Rini <trini@konsulko.com>,
+ Uma Shankar <uma.shankar@samsung.com>,
+ =?UTF-8?q?=C5=81ukasz=20Majewski?= <l.majewski@samsung.com>
+Subject: [PATCH] RFC: ext4: Add a few overflow checks in the writing code
+Date: Wed,  9 Apr 2025 15:02:37 -0600
+Message-ID: <20250409210245.540952-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAOeqweT0o1-bFHNaoDURGYKGvx4OvqsgRpXwdWArdeGmBrnJyg@mail.gmail.com>
- <CACr-zFBPZ6VZCQzHKW-AJDyUUpcLLJS=wSNVejnWTsT9tg9SNg@mail.gmail.com>
-In-Reply-To: <CACr-zFBPZ6VZCQzHKW-AJDyUUpcLLJS=wSNVejnWTsT9tg9SNg@mail.gmail.com>
-From: Andreas Enbacka <aenbacka@gmail.com>
-Date: Wed, 9 Apr 2025 21:27:20 +0300
-X-Gm-Features: ATxdqUHf-e1Jiag6T4ciKVVkld0ApO-BMRFqFnPsP7BnH8j7ZCW9cL5VY_LyMmw
-Message-ID: <CAOeqweTLZ6Uvo4x++2v2f9DtvDjoZx9rhLKYck3E9+hJ06b13A@mail.gmail.com>
-Subject: Re: Issue with booting FIT image using Yocto with raspberry pi cm4
-To: Christopher Obbard <christopher.obbard@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,68 +97,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Christopher,
+From: Simon Glass <simon.glass@canonical.com>
 
-Thanks for your suggestion, I tried to apply the patches (last one I had
-some issues with, as it did not apply directly on scarthgap branch). Still
-has similar boot issues
-with the fitImage (inflate error -3).
+Some memory allocations make use of data from the disk, so add some
+overflow checks.
 
-Some questions:
- - Is the default uboot load and entry address 0x00080000 reasonable (also
-load/entry for the kernel), or might it need adjustment?
-- Could it be that the CONFIG_SYS_BOOTM_LEN needs adjustment to handle the
-decompress kernel size?
+Adjust LOG2_BLOCK_SIZE() so it is easier to read.
 
-Many thanks,
-Andreas Enbacka
+Note: This is a trial to help figure out the best way to deal with these
+sorts of things. Feedback welcome.
 
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+---
 
-On Wed, Apr 9, 2025 at 11:34=E2=80=AFAM Christopher Obbard <
-christopher.obbard@linaro.org> wrote:
+ fs/ext4/ext4_write.c | 24 ++++++++++++++++++++----
+ include/ext_common.h |  3 +--
+ 2 files changed, 21 insertions(+), 6 deletions(-)
 
-> Hi Andreas,
->
-> Can you please try with this series from Simon?
-> https://lore.kernel.org/u-boot/20241220003447.2913443-1-sjg@chromium.org/
-> It solved booting mainline kernel on CM4 for me (albeit not with FIT
-> images).
->
->
-> Thanks,
->
-> Chris
->
-> On Tue, 8 Apr 2025 at 19:23, Andreas Enbacka <aenbacka@gmail.com> wrote:
-> >
-> > Hello everyone,
-> >
-> > I am working on building a custom image targeting the raspberry pi cm4
-> > using Yocto / meta-raspberrypi (scarthgap release) and u-boot.
-> >
-> > The kernel and rootfs booted without issues before switching to using f=
-it
-> > image. I build the yocto image with kernel type / class set to fitImage=
-.
-> > For building u-boot I have specified e.g., CONFIG_FIT=3Dy and similar
-> > parameters.
-> >
-> > When booting the board, u-boot loads the fitImage (around 10MB in size)
-> and
-> > shows the kernel / device tree blob info (kernel is gzip compressed).
-> > However, the process fails when u-boot executes "Uncompressing kernel..=
-",
-> > with Error: inflate() returned -3. This leads to a boot loop.
-> >
-> > I tried manually executing
-> > 'load mmc 0:1 ${kernel_addr_r} fitImage; bootm
-> > ${kernel_addr_r}#conf-bcm-2711-rpi-4-b.dtb', but it results in same
-> error.
-> >
-> > The kernel_addr_r is set as 0x00080000.
-> >
-> > Any information about this would be greatly appreciated.
-> >
-> > Best regards,
-> > Andreas Enbacka
->
+diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+index d109ed6e90d..ebb1dad4fc9 100644
+--- a/fs/ext4/ext4_write.c
++++ b/fs/ext4/ext4_write.c
+@@ -108,8 +108,15 @@ int ext4fs_get_bgdtable(void)
+ {
+ 	int status;
+ 	struct ext_filesystem *fs = get_fs();
+-	int gdsize_total = ROUND(fs->no_blkgrp * fs->gdsize, fs->blksz);
++	size_t alloc_size;
++	int gdsize_total;
++
++	if (__builtin_mul_overflow(fs->no_blkgrp, fs->gdsize, &alloc_size))
++		return -1;
++	gdsize_total = ROUND(alloc_size, fs->blksz);
+ 	fs->no_blk_pergdt = gdsize_total / fs->blksz;
++	if (!fs->no_blk_pergdt)
++		return -1;
+ 
+ 	/* allocate memory for gdtable */
+ 	fs->gdtable = zalloc(gdsize_total);
+@@ -117,7 +124,7 @@ int ext4fs_get_bgdtable(void)
+ 		return -ENOMEM;
+ 	/* read the group descriptor table */
+ 	status = ext4fs_devread((lbaint_t)fs->gdtable_blkno * fs->sect_perblk,
+-				0, fs->blksz * fs->no_blk_pergdt, fs->gdtable);
++				0, gdsize_total, fs->gdtable);
+ 	if (status == 0)
+ 		goto fail;
+ 
+@@ -599,10 +606,17 @@ int ext4fs_init(void)
+ 	int i;
+ 	uint32_t real_free_blocks = 0;
+ 	struct ext_filesystem *fs = get_fs();
++	size_t alloc_size;
++
++	/* check for a reasonable block size, no more than 64K */
++	if (LOG2_BLOCK_SIZE(ext4fs_root) > 16)
++		goto fail;
+ 
+ 	/* populate fs */
+ 	fs->blksz = EXT2_BLOCK_SIZE(ext4fs_root);
+ 	fs->sect_perblk = fs->blksz >> fs->dev_desc->log2blksz;
++	if (!fs->sect_perblk)
++		goto fail;
+ 
+ 	/* get the superblock */
+ 	fs->sb = zalloc(SUPERBLOCK_SIZE);
+@@ -629,7 +643,9 @@ int ext4fs_init(void)
+ 	}
+ 
+ 	/* load all the available bitmap block of the partition */
+-	fs->blk_bmaps = zalloc(fs->no_blkgrp * sizeof(char *));
++	if (__builtin_mul_overflow(fs->no_blkgrp, sizeof(char *), &alloc_size))
++		goto fail;
++	fs->blk_bmaps = zalloc(alloc_size);
+ 	if (!fs->blk_bmaps)
+ 		goto fail;
+ 	for (i = 0; i < fs->no_blkgrp; i++) {
+@@ -649,7 +665,7 @@ int ext4fs_init(void)
+ 	}
+ 
+ 	/* load all the available inode bitmap of the partition */
+-	fs->inode_bmaps = zalloc(fs->no_blkgrp * sizeof(unsigned char *));
++	fs->inode_bmaps = zalloc(alloc_size);
+ 	if (!fs->inode_bmaps)
+ 		goto fail;
+ 	for (i = 0; i < fs->no_blkgrp; i++) {
+diff --git a/include/ext_common.h b/include/ext_common.h
+index 6e17fbd2771..35d3a1844eb 100644
+--- a/include/ext_common.h
++++ b/include/ext_common.h
+@@ -67,8 +67,7 @@ struct cmd_tbl;
+ #define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
+ 
+ /* Log2 size of ext2 block in bytes.  */
+-#define LOG2_BLOCK_SIZE(data)	   (le32_to_cpu		   \
+-				    (data->sblock.log2_block_size) \
++#define LOG2_BLOCK_SIZE(data)	(le32_to_cpu((data)->sblock.log2_block_size) \
+ 				    + EXT2_MIN_BLOCK_LOG_SIZE)
+ 
+ #define EXT2_FT_DIR	2
+-- 
+2.43.0
+
+base-commit: ea9e72801c4c3e3542afe40f89e7e0822cabfcf8
+branch: sec
