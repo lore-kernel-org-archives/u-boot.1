@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99524C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 21:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3ED0C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 21:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A895983950;
-	Wed,  9 Apr 2025 23:03:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D6BCD83951;
+	Wed,  9 Apr 2025 23:37:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M/oqQw2y";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wpHbT691";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A498283950; Wed,  9 Apr 2025 23:03:31 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C63878394F
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 23:03:28 +0200 (CEST)
+ id 1DD3583956; Wed,  9 Apr 2025 23:37:22 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C8B2E8394F
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 23:37:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-85e751cffbeso14236939f.0
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 14:03:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744232607; x=1744837407; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rcbTQWIY7/uYgoVfvjZE1j4HdEQOlJgIekzYW5jlM8o=;
- b=M/oqQw2yQXIb9IHiVDhZ+/HoKj7KelzU8TfXc3gGKvLvQWRoJh8x6CTgEerrH6mWMs
- 19baxVYnHhbLLmY+4ve8/trvPCucwHYMBuc7GryvMG8dPMTScBewoaJDn45m2fMBTcRU
- APfDoDA34Tl3rq7/go+O7tahbJvYrecy19g7g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744232607; x=1744837407;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rcbTQWIY7/uYgoVfvjZE1j4HdEQOlJgIekzYW5jlM8o=;
- b=YLl2ZUgoW2sM31UBkw1cjfTGIm+Z4hZk90H+tXtxzKjVXs1yP/q6a0wNSKCxYaBaOq
- g0rBVEg2bHvSaHX3b3s/wEAxL60Lwc00gfkVPOV56kZa3lChIezvpQu6Knu5AMEqWT4d
- wp/6sjQ5JJMOmaekUYPm5wLbHPCf05RtQxOwsjqS4gzcmR19gSVbRav9Tv4QjlGqAMYl
- vnf0xMvAgdRV+nyvfppBx/Jw92rgbpA0JvnlFIMqKONXK/8OCbZQ8am/idsnj1//f9QU
- vphhgugQe/NlrIE8wimSpwjqfAzvSWgyU5U7IA12wjAMVsuT0OzF9Jw2BX4Hkrb99N3E
- zg5Q==
-X-Gm-Message-State: AOJu0YwMJh51hZ0+8rDQbkQD+3H6oH4TU/iHAYJmc8Mfso5I48LsBY8+
- ZUv2V5oXOI0JgI54yZa0ja6LXDCekVkpjq9AeuFrTC+pI87xSoemYrEBibbcmvx+q5yXQH0rR9U
- =
-X-Gm-Gg: ASbGncsb9QLIGckJopv2ev+8gSftntM0y7hewBFzxJE10XHRxdnNtgWSpuM9aQgOR7S
- 0nnHJkfhW+ssecYCpkDeeNz5KUBOORiqahMqAb30UrLqDmMG6feykG886mlLiWzQk/786/4Dmr0
- rVOCK3UViJBcdlOuyOE+mH86wmrQxZ77Z63mzqu1x3q9QTOHzCVE64G/ByI0unMuIfguA+lbd7P
- Tuo7cCnTp/kMj9/ek2sOzugcmUVqNqxkf6p/JWr1/c56KduSszuhlZwj1VJIaRoJTtSgLS4C7vb
- GJNZ/Sy5TVKG6GmsSJ7undx1bB7SVq9RC+GS1i2WgXejMaM7lq5kM2SkaU0BSqKOFkOJvT6Duf4
- cJw==
-X-Google-Smtp-Source: AGHT+IEXAJNRhkrFzuwqOKYawwRrMkJQQm0BnhnzII2moDSCdaVNU3lwWFTY2BZNYUzUfD8B9UbvXg==
-X-Received: by 2002:a05:6602:27d6:b0:85b:577b:37da with SMTP id
- ca18e2360f4ac-8616edee91bmr29653939f.9.1744232606899; 
- Wed, 09 Apr 2025 14:03:26 -0700 (PDT)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f505cf8243sm419259173.21.2025.04.09.14.03.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 14:03:26 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <simon.glass@canonical.com>,
- Jixiong Hu <Jixiong.Hu@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Richard Weinberger <richard@nod.at>, Tom Rini <trini@konsulko.com>,
- Uma Shankar <uma.shankar@samsung.com>,
- =?UTF-8?q?=C5=81ukasz=20Majewski?= <l.majewski@samsung.com>
-Subject: [PATCH] RFC: ext4: Add a few overflow checks in the writing code
-Date: Wed,  9 Apr 2025 15:02:37 -0600
-Message-ID: <20250409210245.540952-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 539Lb01c1589823
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 9 Apr 2025 16:37:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744234620;
+ bh=L2pvqzfYU88jfOkmFECcIbaDFj9KtgdVukGlKcaY80w=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=wpHbT691VNQerVefUReGealfAoK7JoKpTEyjlL9+9G0gWY3o/AeL24+O4K9O4Tpz7
+ iB0j8P8ixQQlWOajHL7ZRYqjwzDn/CvVLKrhptwZ8B5u+2JqC6gWStdAWDofENoOvC
+ jsfj6/v6ITq3TnukuOkgBSLLp6Nt34+ZGF52velI=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 539LaxuX047091
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 9 Apr 2025 16:36:59 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 9
+ Apr 2025 16:36:59 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 9 Apr 2025 16:36:59 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 539LaxrQ055320;
+ Wed, 9 Apr 2025 16:36:59 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Michal Simek <monstr@monstr.eu>
+CC: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>, "Michal
+ Simek" <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
+ <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
+ <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
+ <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
+ <d.schultz@phytec.de>, Neil Armstrong <neil.armstrong@linaro.org>, "Aashvij
+ Shenai" <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Wadim Egorov <w.egorov@phytec.de>, Tom Rini
+ <trini@konsulko.com>, Robert Nelson <robertcnelson@gmail.com>, "Nishanth
+ Menon" <nm@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, "Mattijs
+ Korpershoek" <mkorpershoek@baylibre.com>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>,
+ Lukasz Majewski <lukma@denx.de>, <s-vadapalli@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH v4 0/3] EFI Capsule update explicitly sets dfu_alt_info
+In-Reply-To: <CAHTX3dJ2cCVZC1ph6PMbrTNOSTg9RFabn4+y_g3RxuZo=YSgew@mail.gmail.com>
+References: <20250226223547.393611-1-j-humphreys@ti.com>
+ <CAHTX3dJ2cCVZC1ph6PMbrTNOSTg9RFabn4+y_g3RxuZo=YSgew@mail.gmail.com>
+Date: Wed, 9 Apr 2025 16:36:58 -0500
+Message-ID: <86tt6xkoed.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,107 +96,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
+Michal Simek <monstr@monstr.eu> writes:
 
-Some memory allocations make use of data from the disk, so add some
-overflow checks.
+> Hi,
+>
+> st 26. 2. 2025 v 23:36 odes=C3=ADlatel Jonathan Humphreys
+> <j-humphreys@ti.com> napsal:
+>>
+>> For capsule update, explicitly set the dfu_alt_info environment variable
+>> before the DFU operation, and then restore it to the original value.
+>> Previously, the dfu_alt_info environment variable was set with the
+>> set_dfu_alt_info() function.
+>>
+>> The problem with setting the capsule update's dfu_alt_info setting in
+>> set_dfu_alt_info() is that set_dfu_alt_info() lacks the context of what =
+DFU
+>> operation is being performed (eg, capsule update, DFU boot, listing the
+>> alt_info, etc) so the capsule update setting was overwriting the setting
+>> for other DFU operations.
+>>
+>> Changes from v1:
+>> - use log_err() instead of pr_err()
+>> - create a local copy of the original dfu_alt_info environment variable =
+to
+>>   be used to later restore it, rather than just a pointer to the stored
+>>   value, because changing its value to the EFI capsule update setting wi=
+ll
+>>   cause the original string location to be freed.
+>> - even in the case of a DFU operation error, restore the dfu_alt_info
+>>   environment variable to its original value.
+>> - return EFI_EXIT based error codes if setting environment variables fai=
+ls
+>> Link to v1: https://lore.kernel.org/r/20250203215351.2840144-1-j-humphre=
+ys@ti.com
+>>
+>> Changes from v2:
+>> - add patch for xilinx boards to set the dfu_string member with the crea=
+ted
+>>   dfu_alt_info string for capsule updates
+>> Link to v2: https://lore.kernel.org/r/20250206154719.3032322-1-j-humphre=
+ys@ti.com
+>>
+>> Changes from v3:
+>> - in case that the dfu_alt_info env variable is set and we save a copy
+>>   using strdup(), check that strdup() doesn't fail
+>> - separate the reporting of an error due to the DFU operation from failu=
+re
+>>   to restore the dfu_alt_info environment variable. In the latter case,
+>>   just emit a warning and return success for the DFU operation.
+>> Link to v3: https://lore.kernel.org/r/20250213195351.3518305-1-j-humphre=
+ys@ti.com
+>>
+>> Tested-by: Michal Simek <michal.simek@amd.com>
+>>
+>> Jonathan Humphreys (2):
+>>   efi_firmware: set EFI capsule dfu_alt_info env explicitly
+>>   board: remove capsule update support in set_dfu_alt_info()
+>>
+>> Michal Simek (1):
+>>   xilinx: dfu: Fill directly update_info.dfu_string
+>>
+>>  board/beagle/beagleboneai64/beagleboneai64.c  |  8 ---
+>>  board/beagle/beagleplay/beagleplay.c          |  8 ---
+>>  .../aml-a311d-cc/aml-a311d-cc.c               |  2 -
+>>  .../aml-s805x-ac/aml-s805x-ac.c               |  2 -
+>>  .../aml-s905d3-cc/aml-s905d3-cc.c             |  2 -
+>>  board/phytec/common/k3/board.c                |  8 ---
+>>  board/ti/am62px/evm.c                         |  8 ---
+>>  board/ti/am62x/evm.c                          |  8 ---
+>>  board/ti/am64x/evm.c                          |  8 ---
+>>  board/ti/j721e/evm.c                          |  8 ---
+>>  board/ti/j784s4/evm.c                         |  8 ---
+>>  board/xilinx/common/board.h                   |  3 +
+>>  board/xilinx/versal/board.c                   | 16 +++---
+>>  board/xilinx/zynq/board.c                     | 16 +++---
+>>  board/xilinx/zynqmp/zynqmp.c                  | 16 +++---
+>>  lib/efi_loader/Kconfig                        |  2 -
+>>  lib/efi_loader/efi_firmware.c                 | 56 ++++++++++++++++---
+>>  17 files changed, 72 insertions(+), 107 deletions(-)
+>>
+>> --
+>> 2.34.1
+>>
+>
+> Is anybody going to take this series?
+>
+> Thanks,
+> Michal
+>
+> --=20
+> Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+> w: www.monstr.eu p: +42-0-721842854
+> Maintainer of Linux kernel - Xilinx Microblaze
+> Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+> U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
 
-Adjust LOG2_BLOCK_SIZE() so it is easier to read.
+I believe it is Heinrich Schuchardt's queue.
 
-Note: This is a trial to help figure out the best way to deal with these
-sorts of things. Feedback welcome.
+Heinrich, is there anything else to be closed?
 
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
----
-
- fs/ext4/ext4_write.c | 24 ++++++++++++++++++++----
- include/ext_common.h |  3 +--
- 2 files changed, 21 insertions(+), 6 deletions(-)
-
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index d109ed6e90d..ebb1dad4fc9 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -108,8 +108,15 @@ int ext4fs_get_bgdtable(void)
- {
- 	int status;
- 	struct ext_filesystem *fs = get_fs();
--	int gdsize_total = ROUND(fs->no_blkgrp * fs->gdsize, fs->blksz);
-+	size_t alloc_size;
-+	int gdsize_total;
-+
-+	if (__builtin_mul_overflow(fs->no_blkgrp, fs->gdsize, &alloc_size))
-+		return -1;
-+	gdsize_total = ROUND(alloc_size, fs->blksz);
- 	fs->no_blk_pergdt = gdsize_total / fs->blksz;
-+	if (!fs->no_blk_pergdt)
-+		return -1;
- 
- 	/* allocate memory for gdtable */
- 	fs->gdtable = zalloc(gdsize_total);
-@@ -117,7 +124,7 @@ int ext4fs_get_bgdtable(void)
- 		return -ENOMEM;
- 	/* read the group descriptor table */
- 	status = ext4fs_devread((lbaint_t)fs->gdtable_blkno * fs->sect_perblk,
--				0, fs->blksz * fs->no_blk_pergdt, fs->gdtable);
-+				0, gdsize_total, fs->gdtable);
- 	if (status == 0)
- 		goto fail;
- 
-@@ -599,10 +606,17 @@ int ext4fs_init(void)
- 	int i;
- 	uint32_t real_free_blocks = 0;
- 	struct ext_filesystem *fs = get_fs();
-+	size_t alloc_size;
-+
-+	/* check for a reasonable block size, no more than 64K */
-+	if (LOG2_BLOCK_SIZE(ext4fs_root) > 16)
-+		goto fail;
- 
- 	/* populate fs */
- 	fs->blksz = EXT2_BLOCK_SIZE(ext4fs_root);
- 	fs->sect_perblk = fs->blksz >> fs->dev_desc->log2blksz;
-+	if (!fs->sect_perblk)
-+		goto fail;
- 
- 	/* get the superblock */
- 	fs->sb = zalloc(SUPERBLOCK_SIZE);
-@@ -629,7 +643,9 @@ int ext4fs_init(void)
- 	}
- 
- 	/* load all the available bitmap block of the partition */
--	fs->blk_bmaps = zalloc(fs->no_blkgrp * sizeof(char *));
-+	if (__builtin_mul_overflow(fs->no_blkgrp, sizeof(char *), &alloc_size))
-+		goto fail;
-+	fs->blk_bmaps = zalloc(alloc_size);
- 	if (!fs->blk_bmaps)
- 		goto fail;
- 	for (i = 0; i < fs->no_blkgrp; i++) {
-@@ -649,7 +665,7 @@ int ext4fs_init(void)
- 	}
- 
- 	/* load all the available inode bitmap of the partition */
--	fs->inode_bmaps = zalloc(fs->no_blkgrp * sizeof(unsigned char *));
-+	fs->inode_bmaps = zalloc(alloc_size);
- 	if (!fs->inode_bmaps)
- 		goto fail;
- 	for (i = 0; i < fs->no_blkgrp; i++) {
-diff --git a/include/ext_common.h b/include/ext_common.h
-index 6e17fbd2771..35d3a1844eb 100644
---- a/include/ext_common.h
-+++ b/include/ext_common.h
-@@ -67,8 +67,7 @@ struct cmd_tbl;
- #define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
- 
- /* Log2 size of ext2 block in bytes.  */
--#define LOG2_BLOCK_SIZE(data)	   (le32_to_cpu		   \
--				    (data->sblock.log2_block_size) \
-+#define LOG2_BLOCK_SIZE(data)	(le32_to_cpu((data)->sblock.log2_block_size) \
- 				    + EXT2_MIN_BLOCK_LOG_SIZE)
- 
- #define EXT2_FT_DIR	2
--- 
-2.43.0
-
-base-commit: ea9e72801c4c3e3542afe40f89e7e0822cabfcf8
-branch: sec
+Thanks
+Jon
