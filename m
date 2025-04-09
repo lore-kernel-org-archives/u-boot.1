@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0432BC36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C761C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 15:11:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14CE38386F;
-	Wed,  9 Apr 2025 17:10:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B8C88387E;
+	Wed,  9 Apr 2025 17:10:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6C0683873; Wed,  9 Apr 2025 17:10:47 +0200 (CEST)
-Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
- [84.16.66.172])
+ id F3AF18388A; Wed,  9 Apr 2025 17:10:48 +0200 (CEST)
+Received: from smtp-8fa8.mail.infomaniak.ch (smtp-8fa8.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::8fa8])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF41182A33
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:10:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFE558386F
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 17:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZXmbk4h9qz7Sr;
- Wed,  9 Apr 2025 17:10:42 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZXmbj4JyLz89b;
+ Wed,  9 Apr 2025 17:10:41 +0200 (CEST)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4ZXmbk0zC5z3q3; Wed,  9 Apr 2025 17:10:42 +0200 (CEST)
+ id 4ZXmbj1Xf6z3dG; Wed,  9 Apr 2025 17:10:41 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 09 Apr 2025 17:10:27 +0200
-Subject: [PATCH RFC 3/4] boot/fit: declare (and use) new constant for
- conf's compatible prop
+Date: Wed, 09 Apr 2025 17:10:25 +0200
+Subject: [PATCH RFC 1/4] boot/fit: use constants for property strings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250409-fit-compat-v1-3-56df89ef486a@cherry.de>
+Message-Id: <20250409-fit-compat-v1-1-56df89ef486a@cherry.de>
 References: <20250409-fit-compat-v1-0-56df89ef486a@cherry.de>
 In-Reply-To: <20250409-fit-compat-v1-0-56df89ef486a@cherry.de>
 To: Tom Rini <trini@konsulko.com>
@@ -62,51 +61,48 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Fit conf node may have a compatible property[1] which stores the root
-compatible of the first blob in the fdt property of the node. This can
-be used to automatically select the proper conf node based on the
-compatible from the running U-Boot (matching the former's compatible
-with the latter)[2].
+Some properties have their string represented in include/image.h via
+constants, so let's use those constants instead of using a hardcoded
+string.
 
-This adds (and uses) this constant for FIT node parsing.
-
-Note that this property may also appear in fpga image nodes[3] but that
-isn't done in this commit.
-
-[1] https://fitspec.osfw.foundation/#optional-properties compatible paragraph
-[2] https://fitspec.osfw.foundation/#select-a-configuration-to-boot
-[3] https://fitspec.osfw.foundation/#images-node 2.3.2 Conditionally mandatory property
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- boot/image-fit.c | 2 +-
- include/image.h  | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ boot/common_fit.c | 4 ++--
+ boot/image-fit.c  | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/boot/common_fit.c b/boot/common_fit.c
+index a2f9b8d83c3b66a39ae0e172445d162f5146578a..fd434fe28e1908596365c9d31892a73ec97c36e3 100644
+--- a/boot/common_fit.c
++++ b/boot/common_fit.c
+@@ -46,12 +46,12 @@ int fit_find_config_node(const void *fdt)
+ 		return -EINVAL;
+ 	}
+ 
+-	dflt_conf_name = fdt_getprop(fdt, conf, "default", &len);
++	dflt_conf_name = fdt_getprop(fdt, conf, FIT_DEFAULT_PROP, &len);
+ 
+ 	for (node = fdt_first_subnode(fdt, conf);
+ 	     node >= 0;
+ 	     node = fdt_next_subnode(fdt, node)) {
+-		name = fdt_getprop(fdt, node, "description", &len);
++		name = fdt_getprop(fdt, node, FIT_DESC_PROP, &len);
+ 		if (!name) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 			printf("%s: Missing FDT description in DTB\n",
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 7c822a39fd85554a716d9cada54cbaf91b3ec24a..52dbd7e96180da306da7f1516e8a3ab18a51ea33 100644
+index 41ab1f552b04d6a5731625ce8c03e17730f8d0cd..7c822a39fd85554a716d9cada54cbaf91b3ec24a 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -1756,7 +1756,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
- 			continue;
- 
- 		/* If there's a compat property in the config node, use that. */
--		if (fdt_getprop(fit, noffset, "compatible", NULL)) {
-+		if (fdt_getprop(fit, noffset, FIT_COMPAT_PROP, NULL)) {
+@@ -1760,7 +1760,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
  			fdt = fit;		  /* search in FIT image */
  			compat_noffset = noffset; /* search under config node */
  		} else {	/* Otherwise extract it from the kernel FDT. */
-diff --git a/include/image.h b/include/image.h
-index c1db8383459c9d7ce1ecc318ccccb4627a7066e5..c8286f2ffd32ed312f25d5d8cdc0a601f8e02f2f 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1103,6 +1103,7 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
- #define FIT_STANDALONE_PROP	"standalone"
- #define FIT_SCRIPT_PROP		"script"
- #define FIT_PHASE_PROP		"phase"
-+#define FIT_COMPAT_PROP		"compatible"
- 
- #define FIT_MAX_HASH_LEN	HASH_MAX_DIGEST_SIZE
- 
+-			kfdt_name = fdt_getprop(fit, noffset, "fdt", &len);
++			kfdt_name = fdt_getprop(fit, noffset, FIT_FDT_PROP, &len);
+ 			if (!kfdt_name) {
+ 				debug("No fdt property found.\n");
+ 				continue;
 
 -- 
 2.49.0
