@@ -4,90 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF76C36002
-	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 18:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F8A1C36002
+	for <u-boot@archiver.kernel.org>; Wed,  9 Apr 2025 18:25:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31CC78294C;
-	Wed,  9 Apr 2025 20:08:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B7E9782A27;
+	Wed,  9 Apr 2025 20:25:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WyxAu1xP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D4z13nt1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF908296B; Wed,  9 Apr 2025 20:08:39 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E72F182944
- for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 20:08:36 +0200 (CEST)
+ id BDB7682A31; Wed,  9 Apr 2025 20:25:06 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 088FB82A0D
+ for <u-boot@lists.denx.de>; Wed,  9 Apr 2025 20:25:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7c560c55bc1so679308785a.1
- for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 11:08:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744222115; x=1744826915; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xgfXwglkvTitWeUtKfOAjkdphPUaVs++aAaj5STqdTw=;
- b=WyxAu1xPCgd5mbHbBqw8//SeR9L2VrgedOb950GhZk8u3DJQ3xQ7Q6M2RZiExyFuCb
- xqc0pGnLj1XwehLZL6626DlIgC6rQkJOyd3nE5Xjjp7+Zso0vhjG/IIZWtBvj9GtlKG7
- fj+s0hWSwUWnHhezY2v6M7RUXg9u0WtUHDy5ZYxzga5Aw/jVs8HsoWqrsDsIJnG/mwZ+
- 3q5+gooXdWoBHWGs49ceh/KTXgn1jnHkOqbe6kAnGjdriDGBFo9TX/T2A6x/yIHVNRXk
- +EmhwQWhrvROMBCB6jDE6Wwfz0n4uyFmCrRPNtOaHxGaYsXaMEIUFk6oM+G3SofJxtI5
- k6dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744222115; x=1744826915;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xgfXwglkvTitWeUtKfOAjkdphPUaVs++aAaj5STqdTw=;
- b=Q1kBBBFj/8Leoqj1APAWtL9OwwszC/rbOF/wrxc5p34fS0/y33QslwxxggpaoFCjwO
- et0IdSfwWho8KzP6d96zdqbSRWYu1lEmf1Pj4xTMWA0uJZ8MDltrZo6RSx8Wu7/oV+gd
- MVe0yeyP6v5wNJXochu9WG0k9K837Jg/JGjnZrqy1epO62Yp9qACuEInW9kqM0GX4i4u
- 1OuAiZCrcuU5CnVl3jhiJzjXA8kDAko+HfVndIzOZVUV7PD+TZLbchmeQFOMVCMC0d5E
- 8FoW9v1Ro2+NhtjhVNjHpE4sMH97aV12YGsjHmGDzMeNoA3GNh6uNsE0+Ni789PG9lQm
- VDZg==
-X-Gm-Message-State: AOJu0YzsdtEyP6fKL8V7x9e4il71/3CCpNdlVrTxSxkdph3fBJiig6UO
- 6m7d9sxnoENbzXgF4GJ7OWE6UJ8FOF2vq3QVfk/1ah+UA1nCQQ2MQm7CDiyc
-X-Gm-Gg: ASbGncvn6xcXClOgmDfxtANY65uh40dvssT/L1Gss14xKqgEI5TV9ublHclrWp6HMug
- +403Yol9yDsiVjmw93t1KSLMR4l2Cqzhd+x0dumcOdI4ws5roq8WwgI+GhxhSnFLagfgHLspDYs
- FrqqcvtoHbE9TLuHN5/63kilPFPbk7D39Dyy4T8N1cwaVHLcrJg7aw3MI5ZLP3A9wOSfVEq2Zrv
- WgJCINEYpgYKEtkZV710wdRjJIvEGAW3spqOH6jGTCsKY5YzujlsK4OPplzmubsRcYu1MJDJhzi
- pk52quBL1hQplFHbY2SMW6yk+Zx/Hq0MCpL+DhhWJE60ZdxLLK5/ANAQgUxZ9T5AptxiHt1h2BJ
- r3RyNeNfFe9nX81/s/NMnDA==
-X-Google-Smtp-Source: AGHT+IEmgwCbVpbqVt2ygjpHng4BnG18UZmlHrvvXc6DojXrhRddPiZHTeCciDioXbGan9Xrd2ZLgA==
-X-Received: by 2002:a05:620a:2552:b0:7c5:444e:3f5f with SMTP id
- af79cd13be357-7c79cbd2ba9mr437354185a.15.1744222114983; 
- Wed, 09 Apr 2025 11:08:34 -0700 (PDT)
-Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
- [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c7a10a409esm103246485a.15.2025.04.09.11.08.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Apr 2025 11:08:34 -0700 (PDT)
-From: Jesse Taube <mr.bossman075@gmail.com>
-X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Paul Kocialkowski <contact@paulk.fr>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Trevor Woerner <twoerner@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>, Jesse Taube <Mr.Bossman075@gmail.com>,
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Richard Weinberger <richard@nod.at>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v2] common: Add CONFIG_SKIP_RELOCATE
-Date: Wed,  9 Apr 2025 14:08:33 -0400
-Message-ID: <20250409180833.3812679-1-Mr.Bossman075@gmail.com>
-X-Mailer: git-send-email 2.49.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 539IP13Z901666
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 9 Apr 2025 13:25:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744223102;
+ bh=hdFVnlWKBMoGLecHILxf0MSuyzGB3QjyrCaxttuA1xU=;
+ h=From:Date:Subject:To:CC;
+ b=D4z13nt1rczqErd066T061wsm90cYXmGwk/42sjRRbCpVmuezb3JIw1YBl+3Ibduj
+ ADADjaSUXIUBuirFTFJzfkO59LuYfiNsyZKDrxSuyMhIGc9FqRdbnSyuWOEs78BZns
+ c6syuq2B0YvXDjslZKKJVGI3RUZWH0KoYOoXujRU=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 539IP16m122351
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 9 Apr 2025 13:25:01 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 9
+ Apr 2025 13:25:01 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 9 Apr 2025 13:25:01 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 539IP1av081869;
+ Wed, 9 Apr 2025 13:25:01 -0500
+From: Bryan Brattlof <bb@ti.com>
+Date: Wed, 9 Apr 2025 13:25:00 -0500
+Subject: [PATCH] arm: mach-k3: am62ax: fix MCU_CLKOUT0 parent clock mux
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250409-r5-eth-fix-v1-1-9b73667f304f@ti.com>
+X-B4-Tracking: v=1; b=H4sIAHu79mcC/x2MQQqAIBAAvyJ7bmGVPNhXooPVmnux0IhA/HvSc
+ QZmKhTOwgUmVSHzI0XO1EEPCrbo08Eoe2cwZCyN5DBb5DtikBc1hcCOvOPVQg+uzF3/s3lp7QN
+ 9jGJZXAAAAA==
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Parth Pancholi <parth.pancholi@toradex.com>, Bryan
+ Brattlof <bb@ti.com>
+X-Mailer: b4 0.13.0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,58 +81,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a check for CONFIG_SKIP_RELOCATE in reserve_uboot to skip the
-relocation of the U-Boot image.
-CONFIG_SKIP_RELOCATE skips relocation of U-Boot to the end of RAM
-allowing for systems that have extremely limited RAM to run U-Boot.
+Much like what was fixed on the AM62x and AM62Px platforms[0]. The
+CU_CLKOUT0 has two (25mhz and 50mhz) mux options however the clock
+structure incorrectly duplicated the first 50mhz option twice. Fix this
+for the AM62A platforms so the 25mhz option is selectable.
 
-Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-V1 -> V2:
- - Drop "default n"
- - s/ram/RAM/g
----
- Kconfig          | 6 ++++++
- common/board_f.c | 7 +++++++
- 2 files changed, 13 insertions(+)
+[0] https://lore.kernel.org/all/20250408161211.3165588-1-parth105105@gmail.com/
 
-diff --git a/Kconfig b/Kconfig
-index 6379a454166..1b35ddc36a3 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -443,6 +443,12 @@ config TOOLS_DEBUG
- 	  it is possible to set breakpoints on particular lines, single-step
- 	  debug through the source code, etc.
+Reported-by: Parth Pancholi <parth.pancholi@toradex.com>
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+---
+ arch/arm/mach-k3/r5/am62ax/clk-data.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-k3/r5/am62ax/clk-data.c b/arch/arm/mach-k3/r5/am62ax/clk-data.c
+index d950b35e0beb7..85b39a0655add 100644
+--- a/arch/arm/mach-k3/r5/am62ax/clk-data.c
++++ b/arch/arm/mach-k3/r5/am62ax/clk-data.c
+@@ -64,7 +64,7 @@ static const char * const sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents[] = {
  
-+config SKIP_RELOCATE
-+	bool "Skips relocation of U-Boot to end of RAM"
-+	help
-+	  Skips relocation of U-Boot allowing for systems that have extremely
-+	  limited RAM to run U-Boot.
-+
- endif # EXPERT
+ static const char * const clkout0_ctrl_out0_parents[] = {
+ 	"hsdiv4_16fft_main_2_hsdivout1_clk",
+-	"hsdiv4_16fft_main_2_hsdivout1_clk",
++	"hsdiv4_16fft_main_2_hsdivout1_clk10",
+ };
  
- config PHYS_64BIT
-diff --git a/common/board_f.c b/common/board_f.c
-index 99616fdac80..d51696b8eda 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -476,6 +476,13 @@ static int reserve_trace(void)
- 
- static int reserve_uboot(void)
- {
-+	/*
-+	 * This should be the first place GD_FLG_SKIP_RELOC is read from.
-+	 * Set GD_FLG_SKIP_RELOC flag if CONFIG_SKIP_RELOCATE is enabled.
-+	 */
-+	if (CONFIG_IS_ENABLED(SKIP_RELOCATE))
-+		gd->flags |= GD_FLG_SKIP_RELOC;
-+
- 	if (!(gd->flags & GD_FLG_SKIP_RELOC)) {
- 		/*
- 		 * reserve memory for U-Boot code, data & bss
+ static const char * const main_emmcsd0_refclk_sel_out0_parents[] = {
+@@ -180,6 +180,7 @@ static const struct clk_data clk_list[] = {
+ 	CLK_DIV("hsdiv4_16fft_main_1_hsdivout1_clk", "pllfracf_ssmod_16fft_main_1_foutvcop_clk", 0x681084, 0, 7, 0, 0),
+ 	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
+ 	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk10", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
+ 	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
+ 	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout0_clk", "pllfracf_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040080, 0, 7, 0, 0),
+ 	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_main_0_sysclkout_clk", sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
+@@ -272,7 +273,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(146, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(157, 20, "clkout0_ctrl_out0"),
+ 	DEV_CLK(157, 21, "hsdiv4_16fft_main_2_hsdivout1_clk"),
+-	DEV_CLK(157, 22, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(157, 22, "hsdiv4_16fft_main_2_hsdivout1_clk10"),
+ 	DEV_CLK(157, 24, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(157, 25, "board_0_ddr0_ck0_out"),
+ 	DEV_CLK(157, 40, "mshsi2c_main_0_porscl"),
+
+---
+base-commit: 9d9fbdab0e9664bff147109cc89ad2786f6ecd83
+change-id: 20250409-r5-eth-fix-10ffe90a9eb5
+
+Best regards,
 -- 
-2.49.0
+Bryan Brattlof <bb@ti.com>
 
