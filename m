@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32C4C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 11:27:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85EC4C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 11:39:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B7EC839FA;
-	Thu, 10 Apr 2025 13:27:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0D4E183BA1;
+	Thu, 10 Apr 2025 13:39:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VVhkJ8qo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Vah49BDU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D065383A5C; Thu, 10 Apr 2025 13:27:39 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97343839B9
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:27:37 +0200 (CEST)
+ id 4E00683BAD; Thu, 10 Apr 2025 13:39:37 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D4D483B9E
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:39:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5ed1ac116e3so1103492a12.3
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 04:27:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1744284457; x=1744889257; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FCGKrRsqSeuEsRDg8xcGHjg7nIKM2xgTI4v5WP0VL7E=;
- b=VVhkJ8qokawL0dturCspV3pLgpnqAJt/l4AkVD5SJE4g8XtgGGCyPg++Ma5v8cOVFm
- Y4YA/ibmvwERZN4XC1jtpc18Es5v4m4Tbld+gdEl85w3yq20kZ0TB9uVi4bDdoLRQCOM
- oN0G1nuOoPwFc2M0J96Y+tZOKBhyoWWLz1jTU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744284457; x=1744889257;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FCGKrRsqSeuEsRDg8xcGHjg7nIKM2xgTI4v5WP0VL7E=;
- b=l5Y9l9pQn71/u3b+lO4qKzZQXlmzigPMpiExdpqJG4gk74xFzAYrj+t0ztvyFKJDiG
- 2LJxe8RrSFOFutmSZS25YA36jGpZTgdLdOhCFbU6H3+HGdZMM4o44U7xTZ4zMfX/4YIC
- xWVsSHE3KoB32nK+iQM71oyyQJbEFDuGxIB6FmBxq9DbLVXkG0d3XWYGj3xhD+QrnZnv
- ab6MhjeqaEEi9iI6Jyvh8EhYUiirsPQxdINcBocezBPPpq/47S6DktiRE9rGk+n7Nr3K
- euNQp0WkcT9AjpfxjA6QDpC4H5+Yyv+tWI1fKhiaXpCqb3JqyETUXYYGibOAyzW+BuL4
- BnIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUw9OgBNcNsf7N0JDHae742QbWCIOz8BdJ/yhPChoCYyAHKG6nprTlkoV4vYObR1bbvTAAAZ4Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YxiAk0wLUZyH3ZuHBIoo7rJ2mMAxvZblGahd1/u1mGso+IPyXhi
- A/h70Eh6F4/8wQazAEwGIAlxvkrh6RgDayaTgy9tTc0r/fY7K1DHC/TSktl+7d176hiDmSmKsUs
- VZ3ahtvTSSDK3DxhkqJyFQReHqQ1yxtJkt/54
-X-Gm-Gg: ASbGncsxXr3eYL315VI+JZR8V2HBmaZdteJQ+rqZphjk5OLC48qo+sprAjh9V5MGYSx
- B4hXslS+xptoEUzc9qw3oF96OF7LtcTmRjYe9jdesg7G575P5Hjb3S14te/hQb1ZkyjjseKBGNP
- d+S7AfFAV5cjNusA59C1nYdmYIkRnjNRRXIw==
-X-Google-Smtp-Source: AGHT+IFMlNeRa/DeKUNG0phLp1bBpbjVxuPnf8JaIzbmYt+DKtQs7ozoXqlwKPp1S+9SgRWO6A3z7tW2dX3OUehGUYk=
-X-Received: by 2002:a17:907:3f28:b0:ac7:ecfc:e5fa with SMTP id
- a640c23a62f3a-acabd4db30cmr215187166b.54.1744284456818; Thu, 10 Apr 2025
- 04:27:36 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53ABdPrd1121023
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 10 Apr 2025 06:39:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1744285165;
+ bh=BAYLZW5W9591meW71Jc4DWIwWLrD6A3s7q/2jl6xhqc=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=Vah49BDU2MoV3YbGfRwnBkdwi+Luo8sQKYqme6FaW1PvISekf6G0rqFNQrIcdqxNb
+ QM0alhrH/kvUqKlTtKdXpagrFE1NvUWJnI8TFlNd/Flcrx9etm+kDnrOLpNnR6zIhw
+ l9QgybbhA+s+UOQOj0lsRz5vTMyhL4pI7bQaMOcg=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53ABdP7h032162
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 10 Apr 2025 06:39:25 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
+ Apr 2025 06:39:24 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 10 Apr 2025 06:39:24 -0500
+Received: from [172.24.227.136] (moteen-ubuntu-desk.dhcp.ti.com
+ [172.24.227.136])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53ABdLaj068486;
+ Thu, 10 Apr 2025 06:39:22 -0500
+Message-ID: <ec117e91-7b13-4ca9-8509-3075d7071427@ti.com>
+Date: Thu, 10 Apr 2025 17:09:20 +0530
 MIME-Version: 1.0
-References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
- <20250409-livetree-fixup-v1-1-76dfea80b07f@linaro.org>
-In-Reply-To: <20250409-livetree-fixup-v1-1-76dfea80b07f@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 10 Apr 2025 05:27:23 -0600
-X-Gm-Features: ATxdqUG9r1l40pr2E6JkOytSfFpEcKP0ve9R7kvxcg_Oza-a_oQOwEaqbSVR4ZU
-Message-ID: <CAFLszTjLGv0a3W=hPW+pexa1ASaSrrKAcbRoo5cF_LChj-bizA@mail.gmail.com>
-Subject: Re: [PATCH 1/6] event: signal when livetree has been built
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 1/2 v2] tools: binman: control.py: Propagate bootph-*
+ properties to supernodes
+From: Moteen Shah <m-shah@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <alpernebiyasak@gmail.com>, 
+ <quentin.schulz@cherry.de>, <m-chawdhry@ti.com>, <n-francis@ti.com>,
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-chavda@ti.com>
+References: <20250327080642.2269856-1-m-shah@ti.com>
+ <20250327080642.2269856-2-m-shah@ti.com>
+ <CAFLszTjB+HuX68tmTrLP=gbbpzt0kJr22137cSLiedx6bh6PVw@mail.gmail.com>
+ <3d2c894b-11f1-462c-b9f5-8d3f45dc0b61@ti.com>
+ <CAFLszThs5W+=tFpUsCE0Qi5mvuymtsHF57jeLpV9KUQfGXBXnA@mail.gmail.com>
+ <3287617e-3b6a-4387-90d4-7bbfc810f9c7@ti.com>
+Content-Language: en-US
+In-Reply-To: <3287617e-3b6a-4387-90d4-7bbfc810f9c7@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,106 +89,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hey Simon,
 
-On Wed, 9 Apr 2025 at 11:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> OF_LIVE offers a variety of benefits, one of them being that the live
-> tree can be modified without caring about the underlying FDT. This is
-> particularly valuable for working around U-Boot limitations like lacking
-> USB superspeed support on Qualcomm platforms, no runtime OTG, or
-> peripherals like the sdcard being broken (and displaying potentially
-> worrying error messages).
->
-> Add an event to signal when the live tree has been built so that we can
-> apply fixups to it directly before devices are bound.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  common/event.c  | 3 +++
->  include/event.h | 9 +++++++++
->  lib/of_live.c   | 3 +++
->  3 files changed, 15 insertions(+)
->
-> diff --git a/common/event.c b/common/event.c
-> index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
-> --- a/common/event.c
-> +++ b/common/event.c
-> @@ -47,8 +47,11 @@ const char *const type_name[] = {
->         "ft_fixup",
->
->         /* main loop events */
->         "main_loop",
-> +
-> +       /* livetree has been built */
-> +       "of_live_init",
->  };
->
->  _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
->  #endif
-> diff --git a/include/event.h b/include/event.h
-> index 75141a192a48b0931667632f41be8ff4d6139f7c..3fc673ba635ed45467aae8587705d37bef1c2a3f 100644
-> --- a/include/event.h
-> +++ b/include/event.h
-> @@ -152,8 +152,17 @@ enum event_t {
->          * A non-zero return value causes the boot to fail.
->          */
->         EVT_MAIN_LOOP,
->
-> +       /**
-> +        * @EVT_OF_LIVE_INIT:
-> +        * This event is triggered immediately after the live device tree has been
-> +        * built. This allows for machine specific fixups to be done to the live tree
-> +        * (like disabling known-unsupported devices) before DM init happens. This
-> +        * event is only available if OF_LIVE is enabled and is only used after relocation.
-> +        */
-> +       EVT_OF_LIVE_INIT,
-> +
->         /**
->          * @EVT_COUNT:
->          * This constants holds the maximum event number + 1 and is used when
->          * looping over all event classes.
-> diff --git a/lib/of_live.c b/lib/of_live.c
-> index 90b9459ede313e492e28c8556c730f3bd8aaa9df..e1962b8f1fb9d8c2c87d04ca4e238a1e4d00376a 100644
-> --- a/lib/of_live.c
-> +++ b/lib/of_live.c
-> @@ -10,8 +10,9 @@
->
->  #define LOG_CATEGORY   LOGC_DT
->
->  #include <abuf.h>
-> +#include <event.h>
->  #include <log.h>
->  #include <linux/libfdt.h>
->  #include <of_live.h>
->  #include <malloc.h>
-> @@ -334,8 +335,10 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
->                 return ret;
->         }
->         debug("%s: stop\n", __func__);
->
-> +       event_notify_null(EVT_OF_LIVE_INIT);
-> +
-
-This should go in initr_of_live() since the function you are dealing
-with here is supposed to just do the live build.
-
-Same for the EFI_STUB thing which I just noticed, actually
-
-Also please check for error
-
-Otherwise this seems OK to me. I do wonder why we can't use
-EVT_FT_FIXUP though. Could you add mention of that to your comment in
-event.h?
-
->         return ret;
->  }
->
->  void of_live_free(struct device_node *root)
->
-> --
-> 2.49.0
->
+Is the problem discussed in the thread an actual bug or am I missing 
+something in the implementation?
 
 Regards,
-Simon
+Moteen
+
+On 03/04/25 11:51, Moteen Shah wrote:
+> Hey Simon,
+>
+> On 03/04/25 00:52, Simon Glass wrote:
+>> Hi Moteen,
+>>
+>> On Wed, 2 Apr 2025 at 22:01, Moteen Shah <m-shah@ti.com> wrote:
+>>> Hey Simon,
+>>>
+>>> On 29/03/25 05:17, Simon Glass wrote:
+>>>> Hi Moteen,
+>>>>
+>>>> On Thu, 27 Mar 2025 at 08:06, Moteen Shah <m-shah@ti.com> wrote:
+>>>>> Add a function to scan through all the nodes in the device-tree
+>>>>> recusively for bootph-* property. If found, propagate it to all
+>>>>> of its parent nodes up the hierarchy.
+>>>>>
+>>>>> Signed-off-by: Moteen Shah <m-shah@ti.com>
+>>>>> ---
+>>>>>    tools/binman/control.py | 35 ++++++++++++++++++++++++++++++++++-
+>>>>>    1 file changed, 34 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/tools/binman/control.py b/tools/binman/control.py
+>>>>> index e73c598298c..e739949d366 100644
+>>>>> --- a/tools/binman/control.py
+>>>>> +++ b/tools/binman/control.py
+>>>>> @@ -526,6 +526,35 @@ def _RemoveTemplates(parent):
+>>>>>            if node.name.startswith('template'):
+>>>>>                node.Delete()
+>>>>>
+>>>>> +def prop_bootph_to_parent(node, prop, dtb):
+>>>> I think the 'prop_' is a bit confusing, since you are dealing with
+>>>> properties! How about 'add_' as the prefix?
+>>> 'add_' should be more descriptive, will add that in v3.
+>>>
+>>>>> +    """Propagates bootph-* property to all the parent
+>>>>> +    nodes up the hierarchy
+>>>> First line should be a summary
+>>>>
+>>>> then blank line
+>>>>
+>>>> then describe the args...you can see this if you look at a few 
+>>>> other functions.
+>>>
+>>> Noted, will rectify in v3.
+>>>
+>>>>> +    """
+>>>>> +    parent = node.parent
+>>>>> +    if parent == None or parent.props.get(prop):
+>>>> if not parent or ...
+>>>
+>>> Noted.
+>>>
+>>>
+>>>>> +       return
+>>>>> +
+>>>>> +    while parent:
+>>>>> +        parent.AddEmptyProp(prop, 0)
+>>>>> +        parent = parent.parent
+>>>>> +
+>>>>> +def scan_and_prop_bootph(node, dtb):
+>>>>> +    """Scan the device tree and set the bootph-* property if its 
+>>>>> present
+>>>>> +    in subnode
+>>>>> +
+>>>>> +    This is used to set the bootph-* property in the parent node 
+>>>>> if a
+>>>>> +    "bootph-*" property is found in any of the subnodes of the 
+>>>>> parent
+>>>>> +    node.
+>>>> comment style again
+>>>>
+>>>>> +    """
+>>>>> +    bootph_prop = ['bootph-all', 'bootph-some-ram', 
+>>>>> 'bootph-pre-ram', 'bootph-pre-sram']
+>>>>   From my understanding the only ones that matter are bootph-all and
+>>>> bootph-some-ram, since the SPL ones are handled by fdtgrep.
+>>>
+>>> Noted.
+>>>
+>>>
+>>>>> +
+>>>>> +    for props in bootph_prop:
+>>>> for prop
+>>>>
+>>>> (since it is just one)
+>>>>
+>>>>> +        if node.props.get(props):
+>>>>> +            prop_bootph_to_parent(node, props, dtb)
+>>>>> +
+>>>>> +    for subnode in node.subnodes:
+>>>>> +       scan_and_prop_bootph(subnode, dtb)
+>>>>> +
+>>>>>    def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, 
+>>>>> use_expanded, indir):
+>>>>>        """Prepare the images to be processed and select the device 
+>>>>> tree
+>>>>>
+>>>>> @@ -563,7 +592,11 @@ def PrepareImagesAndDtbs(dtb_fname, 
+>>>>> select_images, update_fdt, use_expanded, ind
+>>>>>            indir = []
+>>>>>        dtb_fname = fdt_util.EnsureCompiled(dtb_fname, indir=indir)
+>>>>>        fname = tools.get_output_filename('u-boot.dtb.out')
+>>>>> -    tools.write_file(fname, tools.read_file(dtb_fname))
+>>>>> +    dtb = fdt.FdtScan(dtb_fname)
+>>>>> +    scan_and_prop_bootph(dtb.GetRoot(), dtb)
+>>>>> +    dtb.Sync(True)
+>>>>> +    tools.write_file(dtb_fname, dtb.GetContents())
+>>>>> +    tools.write_file(fname, dtb.GetContents())
+>>>> You shouldn't write back to the file created by the build. Do you 
+>>>> need this?
+>>>
+>>> Had the same thought, but the build fails in non clean builds[0]. Did a
+>>> workaround[1] but then some essential template nodes ends up getting
+>>> deleted from u-boot.dtb. Finally, had to write back to the file
+>>> to resolve the issue.
+>> Can you push a tree somewhere. This could be a bug that I could fix.
+>
+> You can use the tree here to recreate the non clean build issue 
+> mentioned:
+> https://github.com/Jamm02/U-Boot-patchwork/tree/bootph-patch-test
+>
+>>
+>>>>>        dtb = fdt.FdtScan(fname)
+>>>>>
+>>>>>        node = _FindBinmanNode(dtb)
+>>>>> -- 
+>>>>> 2.34.1
+>>>>>
+>>>> The code looks fine to me apart from the nits.
+>>>>
+>>>> This addition needs a test - see ftest.py for some examples there. But
+>>>> basically just create a dts that has some props in it, then check that
+>>>> they got added.
+>>>
+>>> Included a test as well in the patchset[3]. Do let me know if there are
+>>> some changes required in it.
+>> Somehow I'm not seeing that in patchwork. It looks good but please try
+>> to keep lines <=80 cols.
+>
+>
+> Sure, will fix up in v3. Should I push a v3 or wait for you to fix the 
+> issue discussed above?
+>
+>>
+>>
+>>>> I think testSimpleFitEncryptedData() could be a good example?
+>>>>
+>>>> Regards,
+>>>> Simon
+>>> References:
+>>> [0]https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-non-clean-build 
+>>>
+>>> [1]https://gist.github.com/Jamm02/2478a4f1186f3ba4a8cd7dbf1fb11e2f#file-patch-tools-dtdoc-fdt-py 
+>>>
+>>> [3]https://lore.kernel.org/u-boot/20250327080642.2269856-3-m-shah@ti.com/ 
+>>>
+>>>
+>>> Thanks for the review.
+>> Regards,
+>> Simon
+>
+>
+> Regards,
+> Moteen
+>
