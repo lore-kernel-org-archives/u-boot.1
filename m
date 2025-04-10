@@ -4,139 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20766C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:38:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE358C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0696839CA;
-	Thu, 10 Apr 2025 09:38:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07B58839DF;
+	Thu, 10 Apr 2025 09:39:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TWSIEL6T";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Q49E357Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8DCB839D6; Thu, 10 Apr 2025 09:38:40 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2061f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::61f])
+ id 2C804839DF; Thu, 10 Apr 2025 09:39:12 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::61e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78DF7830E4
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:38:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 005B0839DD
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:39:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sbQpwlIHmAwZSGxwV3XQqEe/6d9UUhyTJFSGbieD9j4NWtxX/SwQSgQkkRQbQzamaMTH+Phwd+K6ksqjEnt3IyDiLOcOd7L3fE/WeQUYQ/069N8chYXPRbt6Iy8t5wMCNFoREnrMAzQFe8zLCYU3VZYPkzchJ0Wbni9Cyxw6UnHzDjcKOEaCgFfWjlhH8pfY3c/95L1WOrX/qto5Y/JKcE+vPkxRsgCxrLWSzS3GzAZuU4cDhnCJMYsTzJuxgWiRGwxTMVQ4Rh78E58HTC7An0nwvftOxNhsRIvM8y3jFBc1F+FYgTRYPikGLlLB/t1kywSUcHn9ydI8mFHXFbdIVw==
+ b=qd/yWZRmpF9Iz+nTuNQf1jGlwJWJ3yddR2R1BCLzjous/hZOEaGAmYsnkmDXrqSBD9Esi2l6cjCfW2KLhUXepvIpeeyDx2HJERa5I9xPm5Cwq+GfQgO1B4vCywaRPmVM/EpEj5HHPMq+tviWyI6gHP0kC6BS7s/odOrpy+1F8GoPRFExEZ6eSGN6DVtNMwivsCnu0vUbzAmltGlrJFdmSYDuRe84ZCPFs77IS0NkQW1s3n67vjYSamlDXtAnX0fzG+PTKVxvUA2XjB2sMpRjYC7bI8jsqUKYWC+yE7B1LiyO2pa6rJSbXm1UbbRQwi4hTeuLNvhEACQh4wugWoX6ZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M2LTP+rInQIaA0elkDqTWDEy3lTVqXNjikIcw0sGw14=;
- b=oaojrPNV9o1wp77DjNkGBCaNn9eHpPGQtvsRpRupFhPOInYVK2c/BNix2m+cdyd02a3C5JimAyKJpEyPrtt7nWCyxxFhz1OeUBm6CHVbp61RcBZc05yXRrUa3RmoxzJxBJU+pJhgIojVu+W8ZaIzRjwEeYUmAKejMRBgQrAskYqdJYdfpyx45IAViUp4qLCtonQ2Yvj6NqRjB5dCnqvf2Cv1NtpNe6D5pR9qiviHxHS4gyTKM8hwmP1KHPokcVH9IYZsZWI5lD5DAkBvj8r4amnHkd/itEwxCiCS8Wb/Au2PseMQ8Y+7QE4uW2HDEtom6cEMgPcKIHhSXidXf9RAkw==
+ bh=DnNoo6LOlRhvaAF8lW4yS+AbIpLvwnVisqlaEBnMs+U=;
+ b=Z6chXWploVE5PHZapGn6JahAjS8Om3JH0X1oYc6JyxuWITb1L9l0YTa4iDhVitAMQ0MhRZzdeSQTt3+TAifeK/9/LgTTDReQe7bQg0/k1Uw697zU1G1z/1WInS5U2r9VuJge8YifPWNzZHObvOaH8XG+CxmbiFv1dLdrM0D9IQawvHMMjECmrJ7tP3mpagwbgGaBLNVTPzrjanH8dc591WmY870pKaxPQB7vlf+mILcQDIbMhK4ouxro4Df4O2ygAjMnCyW8Q9NpJiUERg95AEgLcYUC/Ukfw/iqW2od6JkHJx7zqbAg3CylPQwQbJQjea2zKQQ2uKJRnNZ0hU0oIw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M2LTP+rInQIaA0elkDqTWDEy3lTVqXNjikIcw0sGw14=;
- b=TWSIEL6TqJqua8UMl28RftOiK8VD7j1O4KD1IVIOcTepGEylm1QvDlagA/95q/S2ZVDhOvBo0BSPJmPnAf4jIXR+r7z5oUIfLkIh0aLJzdD/jnJS4TQDSlAG6oFIfp1O5ktMeUBmdTZgekh3i1S4Yiu/bxkwPFVJF0mxglhjzIU=
-Received: from DS7PR07CA0022.namprd07.prod.outlook.com (2603:10b6:5:3af::24)
- by IA0PR12MB9010.namprd12.prod.outlook.com (2603:10b6:208:48e::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.37; Thu, 10 Apr
- 2025 07:38:33 +0000
-Received: from DS1PEPF0001709C.namprd05.prod.outlook.com
- (2603:10b6:5:3af:cafe::3) by DS7PR07CA0022.outlook.office365.com
- (2603:10b6:5:3af::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.24 via Frontend Transport; Thu,
- 10 Apr 2025 07:38:33 +0000
+ bh=DnNoo6LOlRhvaAF8lW4yS+AbIpLvwnVisqlaEBnMs+U=;
+ b=Q49E357Qy4VYo/ae0C0rWmDEdXuTadqoG5bb7OBBqFi/cg5YPfNw/WoUTLELRbJ+/x6tNBivY5Km7w8roiEIxONYKdw7Z/B69yYATcCF0YQkGtwyZUOJd2m7haLZIHeA3A0V3zXzy/0h+evW9PO05hkPD0I/NSiBS3ccpqPYuIA=
+Received: from SJ0PR05CA0061.namprd05.prod.outlook.com (2603:10b6:a03:332::6)
+ by SN7PR12MB6670.namprd12.prod.outlook.com (2603:10b6:806:26e::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.21; Thu, 10 Apr
+ 2025 07:39:05 +0000
+Received: from SJ1PEPF00002322.namprd03.prod.outlook.com
+ (2603:10b6:a03:332:cafe::e) by SJ0PR05CA0061.outlook.office365.com
+ (2603:10b6:a03:332::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8655.8 via Frontend Transport; Thu,
+ 10 Apr 2025 07:39:04 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001709C.mail.protection.outlook.com (10.167.18.106) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ1PEPF00002322.mail.protection.outlook.com (10.167.242.84) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8632.13 via Frontend Transport; Thu, 10 Apr 2025 07:38:33 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8632.13 via Frontend Transport; Thu, 10 Apr 2025 07:39:04 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Apr
- 2025 02:38:29 -0500
+ 2025 02:39:02 -0500
 Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 10 Apr 2025 02:38:29 -0500
+ Transport; Thu, 10 Apr 2025 02:39:01 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Anshul Dalal <anshuld@ti.com>, Fabio Estevam <festevam@gmail.com>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Padmarao Begari <padmarao.begari@amd.com>, 
- Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>,
- Srinivas Goud <srinivas.goud@amd.com>, T Karthik Reddy
- <t.karthik.reddy@xilinx.com>, Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] xilinx: Remove UARTLITE from defconfigs
-Date: Thu, 10 Apr 2025 09:38:20 +0200
-Message-ID: <86b100692101089dd8d9a8eed45461e8855384bc.1744270698.git.michal.simek@amd.com>
+CC: Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] xilinx: Free memory when variable is saved in
+ boot_targets_setup()
+Date: Thu, 10 Apr 2025 09:38:51 +0200
+Message-ID: <fa10fc22193a1a23258466056b3d02f7496fccfe.1744270729.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
+Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709C:EE_|IA0PR12MB9010:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1f10774-1ead-466c-cee2-08dd7802b23f
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002322:EE_|SN7PR12MB6670:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65e97b3a-1777-43cd-8be5-08dd7802c51b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DsxOfJn3G4S2Rk+LaawbQb5NGpfNByhurYeATKvAATJrC6nrN6OKrGvLusA5?=
- =?us-ascii?Q?ohJdSdbPeYqazhTrz5BUJAsY3xN6ZBHmKpFp0u1acQvTE6SNakoHafPRNZyL?=
- =?us-ascii?Q?gNYKhqBm8lvhkbAKH9p4AB2ervsD0zw++4I7GBSTiNnMjUhLr/vchn045ntx?=
- =?us-ascii?Q?YN8i3RQK8We0yUrZjZdpNITdRPe+d7Q/ssxauE37wrEbo+v9bryiRRfEIj+d?=
- =?us-ascii?Q?C/8etFMoc+dW+lL75brSqU76NQ8qrKTXZSUzFjcveW09Dlm/CEP5Qp4nhKZk?=
- =?us-ascii?Q?k2/THR9N+AT4gxAKf8BYzTC4N9670WGoccdVfcwAXz1sMxc2wZ+Z1TYvo7an?=
- =?us-ascii?Q?pMhwtB9SnooLWNSP+YETlGY+RM7BuysNepuzz2XUA/13elBkqlGqcq6BdLLA?=
- =?us-ascii?Q?P0hGzstDzepeH2NYCdxsL9icv5Zec37uXQlH22z/4yYRZnjBuBQE1ZT8Dexe?=
- =?us-ascii?Q?ZR72VwYmL5Y/NJHEUaFj97edXZ5G8lrHKWf5q3iscNRmi2K+BTg7Vkgl+BKJ?=
- =?us-ascii?Q?2qTR+fTjtYAtMGsaQDl/LwA5sZCmQ9c2+B5IBVTMScDDNlOWqMM/4FQkgjFg?=
- =?us-ascii?Q?FP58tOC5CRXn+s87A85UfAZrHLrskMYm7KCpMfoNmmdeVPClE3JGLYYXjXGw?=
- =?us-ascii?Q?nAS5fXNpWQAHq3q8PO5ziiAvMBcJ9i3V6h4y/3JJIYJP9zVhvvkf7SLAqfx8?=
- =?us-ascii?Q?Cx47MYoA+Jh5wHtNm/6A/poe3DRUqMivglwX3fxSoE77sg+Pe7Tio6NGpqNp?=
- =?us-ascii?Q?g7Xgrgj6JLAHvcIN6uJWzzad4RVJMUF3SMwcitt7HqD48fpY6IKyaLD5NAGP?=
- =?us-ascii?Q?mdUuOQX9+ZH5vidbF/hqsEcYj9CqbYNKvyM6fKXgJHevqZ3y7r7Q0s8Rx1m0?=
- =?us-ascii?Q?b+OGiuA21iZlwIT3C3TGhMOa53h7aPJ/qOstb1KI6UjkuGBB79KzoOVjyOzG?=
- =?us-ascii?Q?YvhICveFHBsIIIZeppAfmdow/0FwiRW0sD9DSoKfw9lghm+x/a1saq9zKQkc?=
- =?us-ascii?Q?MCIQ5ybPteWulOpxMFTB78yX3QqAB7Qp8k0iypiFRqohnCC0zOU3VIPvsux2?=
- =?us-ascii?Q?c5uh8sqjcKTE9u4l6/2DPktsOqxgidVYxUjHg2TTeEbHonmEvCes/v8jQtdC?=
- =?us-ascii?Q?fbhPion9NHCxgwkUZmruIArlll6Uz/0yna8/l2A0CSnDQzMmMIRTKylylt7J?=
- =?us-ascii?Q?cr3wCNyDdkRUt2U+vwqWIYcXPtQ7RmDKujjl2Ro1F11X5J0selrzcWgZqPJw?=
- =?us-ascii?Q?xZ+cpSKZcVvQXmT6zJXw/0Uwsr4s3Hww8ARnmWA3PpBHfBXLOVyJYfyxMmvQ?=
- =?us-ascii?Q?CkvfdGBdVLW3zxRttaGTeaPfEKeOCSVQvdoXb/dLGMHkAvoIvoXLBPb/V1r+?=
- =?us-ascii?Q?DBlWXY3hCRD8Zg9eCVZHAAQFbDWXSFVBNOAxXqIFl3SaMRcoPeb2rW35E5Yh?=
- =?us-ascii?Q?FA6g52PfPIfwC79+eueQCaUF28B0E3fnU8m3XvW6Og8BDfA9+Bk9I45bzVfj?=
- =?us-ascii?Q?IAko5ymYX7DXx1qR8X4t32o/6ZLXncuAczG0?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zhwaaVDefO/O5C5vyTDg1Dgq/M2hCtnJNyT/XpIsDGRFxq6likjtV0JBwh+6?=
+ =?us-ascii?Q?AcyIhSSmig2acnGj/n3P3qd47DoEAspInRiUpFw3OVngeZGsIdEymV3Fbyvm?=
+ =?us-ascii?Q?v+C1k6UoIW0S6MHiTV0tAySLgB5WDeaTsgWoU7uq6lDKL4rJIqttmtcVwfvY?=
+ =?us-ascii?Q?mn7hnuLqlX/0PFt+4teO8hygtsLc/8XEU5aXvssDQvxsHFbx5cvcmoWitV2V?=
+ =?us-ascii?Q?fl4L7fPrekl47xy/yHcZ2BT5flSwRjDp9SfXH5X1dABARFuVwr0+54fRVMAl?=
+ =?us-ascii?Q?2xPyQuQR37VG0HVR0aGIhyV2CtrnlbhZemLWyGSNwq2gxVOGmRrrrYgpTfpR?=
+ =?us-ascii?Q?dvWfpLqaEXyRXQ+hFEpVI/P3SYbG8sEsTLGXYYRdBmxM5oGJfeF24158gblm?=
+ =?us-ascii?Q?wr7gdOvsxgZaTkFBfM1AiRuGBqzaBmtxW6+VIvvydrCRKwEocncs1nTE0fKZ?=
+ =?us-ascii?Q?sIGvno5m8wynBJ79DsUv2ruO6qm66tfnB3fF5AtYyNSdaAY7mDF4wK47W3rK?=
+ =?us-ascii?Q?G4Z7OgSnwgQ24YEDlCWz1avFZdpZZ+fwHDEZ4fkdj987liyvXLWBKxrYiHEJ?=
+ =?us-ascii?Q?PM+O0pBpAs9Y8iNkMyAP/4B3M1m1Ct7e3cnjRDx1T4rj2Z97mEVia6IIe3EJ?=
+ =?us-ascii?Q?hRmx8bjIb93MLISAPZlXsLNWaFVi4LAzc8lXmTJZSNh5kOuG8BZ5E6ip8Oc4?=
+ =?us-ascii?Q?feRtpG2nbNnX29lusQFHp7qQ9OnNo6VowsNYvIi6/KmUdJR0rDB/443Xw1ly?=
+ =?us-ascii?Q?aPBsd73mNUVTRTUMBf65VTMjDyrQg2o8NtFq2J+AmmJZORBgi6iV/tS2dVn3?=
+ =?us-ascii?Q?8X54Aj/JKnRoWQGvfsAj3YENFL4/wLVqjM+euUVob46GSbnx63AkxO2XXE7e?=
+ =?us-ascii?Q?JXLGi7oiZQ/9fHAaDPug13uvSXj7eqiiBtnsj1NmQkzz7PCXTD9gQGViFbds?=
+ =?us-ascii?Q?psifsYa7w+kJwtAYK2cmfWDrEVusWI142V+EhZzH+OtpLqs17o8CkTH8uxdQ?=
+ =?us-ascii?Q?G52Gmu43otJePUIw1vzuS1DWIEV3y3+x+6YbOZSnr+5k4gJXzXKviv/Xe3aN?=
+ =?us-ascii?Q?IbOGEfpIF8zH2PmudVfiMs0EPFY6uEEOKZCOMPKxQTPEy5oyGLCecMPDl/98?=
+ =?us-ascii?Q?Mu9egnUM36+8JXrjMq3OpNJaP5TUm4vrqLrknX57EZ5TLgXhymvEty40r8Zg?=
+ =?us-ascii?Q?D/PVVs0uGCLwNaDY4mBfoLf1CWL3BpM7sDDD+u2tr3sL/cUIafbyJEVlgc3Y?=
+ =?us-ascii?Q?a2yeFEKa021NvBhJntEEey795AipnTKxnIwJ4dz03Xq0RqNFXyvdHhkDpUKO?=
+ =?us-ascii?Q?+5Y2DKvfnGc+VSDuOm8GO20TnEuUxTZJzDdDAHtwMvtOmISIQd7unTeovwdD?=
+ =?us-ascii?Q?efxz15pzPdrW3odPCwUr7B3sRW1/4UWV16b40nfUlXActHGMwf487LqGrhfN?=
+ =?us-ascii?Q?dMz9VsmJemCsH7F3GwgiDN+Cc2u67E3aXK/TK5GDlOJswO2XeS83utCUCMhL?=
+ =?us-ascii?Q?ckJBklKHE/T0YW8=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 07:38:33.1491 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1f10774-1ead-466c-cee2-08dd7802b23f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 07:39:04.7256 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65e97b3a-1777-43cd-8be5-08dd7802c51b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709C.namprd05.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002322.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB9010
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6670
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,66 +148,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove uartlite serial driver from defconfigs because is not tested or used
-on ARM based platform as console.
+When boot_targets variable is saved there is no reason to keep string in
+malloc area that's why free it. This change is already done in ZynqMP code.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- configs/xilinx_versal_net_virt_defconfig | 1 -
- configs/xilinx_versal_virt_defconfig     | 1 -
- configs/xilinx_zynqmp_kria_defconfig     | 1 -
- configs/xilinx_zynqmp_virt_defconfig     | 1 -
- 4 files changed, 4 deletions(-)
+ board/amd/versal2/board.c   | 3 ++-
+ board/xilinx/versal/board.c | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index 4da31b5c1194..49dc9bb5c4d3 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -123,7 +123,6 @@ CONFIG_ZYNQMP_POWER_DOMAIN=y
- CONFIG_RESET_ZYNQMP=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
--CONFIG_XILINX_UARTLITE=y
- CONFIG_SOC_DEVICE=y
- CONFIG_SOC_XILINX_VERSAL_NET=y
- CONFIG_SPI=y
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index baa4b8e412ea..ba4519ce3037 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -133,7 +133,6 @@ CONFIG_ZYNQMP_POWER_DOMAIN=y
- CONFIG_RESET_ZYNQMP=y
- CONFIG_ARM_DCC=y
- CONFIG_PL01X_SERIAL=y
--CONFIG_XILINX_UARTLITE=y
- CONFIG_SOC_XILINX_VERSAL=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index 16cd8c3921c6..ae79f1017013 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -187,7 +187,6 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_ZYNQMP=y
- CONFIG_SCSI=y
- CONFIG_ARM_DCC=y
--CONFIG_XILINX_UARTLITE=y
- CONFIG_ZYNQ_SERIAL=y
- CONFIG_SOC_XILINX_ZYNQMP=y
- CONFIG_SPI=y
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index abd1e1bb574b..29aa5891b230 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -199,7 +199,6 @@ CONFIG_RTC_EMULATION=y
- CONFIG_RTC_ZYNQMP=y
- CONFIG_SCSI=y
- CONFIG_ARM_DCC=y
--CONFIG_XILINX_UARTLITE=y
- CONFIG_ZYNQ_SERIAL=y
- CONFIG_SOC_XILINX_ZYNQMP=y
- CONFIG_SPI=y
+diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
+index aea3bf022600..ee0dc3487831 100644
+--- a/board/amd/versal2/board.c
++++ b/board/amd/versal2/board.c
+@@ -1,7 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+  * Copyright (C) 2021 - 2022, Xilinx, Inc.
+- * Copyright (C) 2022 - 2024, Advanced Micro Devices, Inc.
++ * Copyright (C) 2022 - 2025, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -307,6 +307,7 @@ static int boot_targets_setup(void)
+ 				env_targets ? env_targets : "");
+ 
+ 		env_set("boot_targets", new_targets);
++		free(new_targets);
+ 	}
+ 
+ 	return 0;
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index 6c4a2f5ead62..de53657b0c4e 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -282,6 +282,7 @@ static int boot_targets_setup(void)
+ 				env_targets ? env_targets : "");
+ 
+ 		env_set("boot_targets", new_targets);
++		free(new_targets);
+ 	}
+ 
+ 	return 0;
 -- 
 2.43.0
 
