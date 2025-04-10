@@ -4,70 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 744B9C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE66C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:42:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A056383AAB;
-	Thu, 10 Apr 2025 10:41:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 0462D83A9C;
+	Thu, 10 Apr 2025 10:42:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="IPeHZYYV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uOlijI+k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 739CA83A6A; Thu, 10 Apr 2025 10:41:29 +0200 (CEST)
-Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7A06D83A5C; Thu, 10 Apr 2025 10:42:09 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D666C83A64
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:41:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53722812BC
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:42:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Um3PT8XYaspnoxcNvxLMMWs69DIYRqE0qb+hjy7X8IY=; b=IPeHZYYVbGUWnMN9sChm2JPPsH
- fl3rT3jFjY8m777AtJ0HmUPTV0o1D6+QN53iXtoRXLcgPCrm3Hr+/N5JgR0EX0vjjHy/H/0oGyZ48
- hq9zWsEe272LqiTjpHYTM++3tpEnMdIBajo46iWwcXWuJMzqLdBjPN72j5QiLKXQlSFIvlkkqfSUG
- r1SIiNfOzG2Xvn9xMvu3FSKkrmdgFuh/VYFt58OFOCy99Ti1MmXoxFyjJEyB9SDIo/l+wseLMSsAA
- C3/cAQRVKwkO/fLuhiym1UTlCdqQCv73GuJL51xvzy+dPW74LdHfR8hsls8HbS42fqZxa+Sdbhvo5
- cBzsCnFg==;
-Received: from [89.212.21.243] (port=54584 helo=localhost.localdomain)
- by cpanel.siel.si with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1u2nTQ-0007zv-1F;
- Thu, 10 Apr 2025 10:41:23 +0200
-From: Primoz Fiser <primoz.fiser@norik.com>
-To: Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, Tom Rini <trini@konsulko.com>
-Cc: upstream@lists.phytec.de,
-	u-boot@lists.denx.de
-Subject: [PATCH 6/6] board: phycore-imx93: env: Add common RAUC boot logic
-Date: Thu, 10 Apr 2025 10:41:22 +0200
-Message-Id: <20250410084122.1010297-7-primoz.fiser@norik.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250410084122.1010297-1-primoz.fiser@norik.com>
-References: <20250410084122.1010297-1-primoz.fiser@norik.com>
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id A7E0743D42;
+ Thu, 10 Apr 2025 08:42:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD496C4CEE3;
+ Thu, 10 Apr 2025 08:42:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744274525;
+ bh=nE9MncxNXhndvKUEXh7voeCNr5wwwOvQU9guhiKmTGY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=uOlijI+koMQuQlauiucSIPHeMUyxYyI97CoC/uJIBdBYqymjc5hY7B6Adzg1wFG7t
+ HpMMRKHEtCd/X7WQAiLrKDpcaKx4Z72JGk4RheMsDW/FZE+EvfoapYnzX5h3ElLiit
+ Qc0smnHpuX5rr4u0bryjnQqxlg9Qvznoxcx0BIxRNP2Tgy6TAn+DK/371eUL+uo5sf
+ FE3/7DyMuv6w0q8EOs4dM+MGVBsAF2BM/fpGO4oM5kn/zzACWENfGleOQ9icSfReYU
+ sKlSGkVZcSSog+oigzRHJhDndnat1MvwSRIwouLrfsjdDi2KvaIwzQ4EzmRjuf44RH
+ sulQ4BqnwP5EA==
+Date: Thu, 10 Apr 2025 14:11:58 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH 0/6] Qualcomm: cleanup OF_LIVE fixup and fix RB1/2
+Message-ID: <Z_eEVo0_DYVMYgkE@sumit-X1>
+References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
- primoz.fiser@norik.com
-X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,38 +70,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Martin Schwan <m.schwan@phytec.de>
+Hi Caleb,
 
-Add a common RAUC boot logic environment and make use of it in the
-i.MX93 environment. The RAUC boot logic is deactivated by default and
-can be activated by setting "doraucboot" to "1".
+On Wed, Apr 09, 2025 at 07:17:23PM +0200, Caleb Connolly wrote:
+> Introduce a new event to signal that the live tree has been built,
+> allowing boards to perform fixups on the tree before devices are bound.
+> Crucially this allows for devices to be enabled or disabled, but also
+> allows for properties that are parsed during the bind stage to be
+> modified (such as dr_mode for dwc3).
 
-Signed-off-by: Martin Schwan <m.schwan@phytec.de>
-Reviewed-by: Leonard Anderweit <l.anderweit@phytec.de>
-Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
----
- board/phytec/phycore_imx93/phycore_imx93.env | 4 ++++
- 1 file changed, 4 insertions(+)
+Looks like a nice platform override available with OF_LIVE.
 
-diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
-index 3a36597cae84..3b2f30118e76 100644
---- a/board/phytec/phycore_imx93/phycore_imx93.env
-+++ b/board/phytec/phycore_imx93/phycore_imx93.env
-@@ -1,10 +1,14 @@
- /* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
- 
-+#include <env/phytec/rauc.env>
- #include <env/phytec/overlays.env>
- 
- bootcmd=
- 	mmc dev ${mmcdev};
- 	if mmc rescan; then
-+		if test ${doraucboot} = 1; then
-+			run raucinit;
-+		fi;
- 		if run loadimage; then
- 			run mmcboot;
- 		else
--- 
-2.34.1
+> 
+> With this in place, mach-snapdragon is switched over to use the event
+> and some hacky U-Boot specific DT overrides (which had to be undone
+> prior to booting an image) are removed in favour of fixing up the
+> livetree (which is not passed on to further boot stages).
+>
 
+Nice.
+
+> Finally, some minor fixes are made for the QCM2290 RB1 board, the sdcard
+> is enabled and it now uses USB host mode in U-Boot like it's bigger
+> sibling the RB2.
+
+FWIW, for the series:
+
+Tested-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+
+-Sumit
+
+> 
+> ---
+> Caleb Connolly (6):
+>       event: signal when livetree has been built
+>       mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT fixups
+>       mach-snapdragon: of_fixup: skip disabled USB nodes
+>       clk/qcom: qcm2290: show clock name in set_rate()
+>       mach-snapdragon: of_fixup: set dr_mode for RB1/2 boards
+>       pinctrl: qcom: qcm2290: fix off by 1 in pin_count
+> 
+>  arch/arm/dts/qrb4210-rb2-u-boot.dtsi   |  6 -----
+>  arch/arm/mach-snapdragon/board.c       |  1 -
+>  arch/arm/mach-snapdragon/of_fixup.c    | 41 ++++++++++++++++++++--------------
+>  arch/arm/mach-snapdragon/qcom-priv.h   | 14 ------------
+>  common/event.c                         |  3 +++
+>  drivers/clk/qcom/clock-qcm2290.c       |  2 +-
+>  drivers/pinctrl/qcom/pinctrl-qcm2290.c |  2 +-
+>  include/event.h                        |  9 ++++++++
+>  lib/of_live.c                          |  3 +++
+>  9 files changed, 41 insertions(+), 40 deletions(-)
+> ---
+> base-commit: e4ffc6a323586d700d88c73c319c25c740aedb49
+> change-id: 20250409-livetree-fixup-0d7451cc3af3
+> 
+> Caleb Connolly <caleb.connolly@linaro.org>
+> 
