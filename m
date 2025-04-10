@@ -4,64 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA5E3C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 10:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ACFCC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 11:20:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEB1282A71;
-	Thu, 10 Apr 2025 12:44:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 5686083B95;
+	Thu, 10 Apr 2025 13:20:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XKWdXYvt";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="vYij0IV4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE16583B7E; Thu, 10 Apr 2025 12:44:27 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 9A01683B96; Thu, 10 Apr 2025 13:20:42 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C7DE8091A
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 12:44:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 4438983B8F
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:20:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DFE7B6843D;
- Thu, 10 Apr 2025 10:44:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F14EC4CEDD;
- Thu, 10 Apr 2025 10:44:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744281863;
- bh=K2BEju9G5YHc+f6AyrJbYLEq1bCyrs0rYEUYPByV/t4=;
- h=Date:From:To:Subject:Cc:References:In-Reply-To:From;
- b=XKWdXYvtEyeEZihqSTLptK0omRg/lsnyedtqugcMRV1o0ycpjiubjpspq72+ILT6b
- lOYE0sVnlNbMmI0pFLk9RgdWXUNpVeWdX1yKFQREX5XloMqrHXD2mxRahID6mXlG4O
- mdX4kCHaCHc8d2kywqo3AZqLQ6rvnNJP54XTC9yNZRK8mQkHiQX+6wuIyhaPzFv9Z/
- 8VPc3XhaJfXP31ylKN9DpGHfAE6xpWcBywMXD12EOeLVOM1wSUu9LGlrOe4AwHyk72
- onqIUxri428GSU2Lc1x9ONYBBDKXTRSjsdqZ2efTKb9DM4+6dJwIsD4+q0vqzeX1Cr
- sP+PI2LdNMXrA==
-Content-Type: multipart/signed;
- boundary=25b7a820cb6b1628d3f18a1ca4dc54d62c4e343cffcd5268ab77fc620c38;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Thu, 10 Apr 2025 12:44:19 +0200
-Message-Id: <D92WBC4OYQXK.37TYATBFVRRD8@kernel.org>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH] tiny-printf: Handle formatting of %p with an extra Kconfig
-Cc: "Christoph Niedermaier" <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Simon Glass"
- <sjg@chromium.org>, "Quentin Schulz" <quentin.schulz@cherry.de>, "Marek
- Vasut" <marex@denx.de>, "Benedikt Spranger" <b.spranger@linutronix.de>,
- "Jerome Forissier" <jerome.forissier@linaro.org>, "John Ogness"
- <john.ogness@linutronix.de>, "Ilias Apalodimas"
- <ilias.apalodimas@linaro.org>
-X-Mailer: aerc 0.16.0
-References: <20250407085614.126626-1-cniedermaier@dh-electronics.com>
- <20250408205826.GZ5495@bill-the-cat>
- <063948ec5d3845daae97d4b9bc97c901@dh-electronics.com>
- <D92403LVTRRP.3CEQ0LEVJHTXS@kernel.org>
- <20250409152207.GF5495@bill-the-cat>
-In-Reply-To: <20250409152207.GF5495@bill-the-cat>
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=O9aJ/QvwXZyaP0oLEVguaPwyy9sCxAsVjIp9qq9Rjo33E/mBYFNvHYBUSLkLhW2Puc40krzciG4SHtRjlNZVfcohex4uChzrYqpsLh55C1lvVIvlfuJKXfJCO/DOzWf4/F5qQr2fQewh7tx2spYnhQogB/0ponvbwnBj1XmYxL1zSkaSsJLWPs8Di692nWKbtUFpYAd71hMSBdag6tejNV43d+2+z0lCg1KhMHBnlmbqCm6cNLfDEfUlbWk6deXBCZVdppuRVb9MaOBgXACLjanOjUoPwkEK8N8SiT4XmFaO5JV7aJOcDTeNnWXZ/3n8oT6RCRasnTytV2eh3TkeaQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lkPWJwOqXFXMdfVjnkQ5WXy9pXoE5+BAKNzvsBjJPXA=;
+ b=hccp9QH177D7hcrje+MAyjX25mFF2QHPiDwP66wUhxhyuOLs8W/O0RVD6LAkDMVCQEHLSRy+7uEwZsD0noWG3kB/o+IAnCugZ+j7VFznoVV2JfPbWP2mCLb7FqYqv6Yaag8b8WiwlE5d/HZtfk6dzdpXm61h0E3U4dEt4SLeDtuawwfOmJXa26Zdv74ft9rChrOJOjEcry43wwZYJn73492J/JnOfZDZusga9isO/uaWXj/Jxznu3NDH0vw+mM8gCUyOB5Bcnx4ZwdvbGKyO5f4JTXgnSs5Q1e2DARgKVEXNy57d3st9f196Cvawlpa+eNy4AFlKA7yUn9iulXS8Yw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lkPWJwOqXFXMdfVjnkQ5WXy9pXoE5+BAKNzvsBjJPXA=;
+ b=vYij0IV4wMTc3H+AAQ40BGMOpVNdcvSTyu2Ugaox1PtXwhjqT0qu2CzwtEvUMKVpntpDdVvfMEQuShviISsfk7CTqbvpW861KOkJCzRSI/A4PqJmdDydaMUrakswnrLLC3+QhNmqgCVSqS5Pl3kts87EuS6OcZbQy3zrLwz5jmq3T/i4I5bqfRSJ2aHPn1dApohBgJthsnohX3TxywGBblGmbaKglXbmoGAo+zr28RCUTj9nZD7eaPNmh+fKDTJ+wwLV8obbA7PMcMjOwX1Y14zaKm5/KWWEYEs4QH0Z/dh6crOKSKm2Kp5gxgbS1fHYOpsSjLgwCAAQaV5vPjJOYg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VE1PR04MB7326.eurprd04.prod.outlook.com (2603:10a6:800:1b0::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Thu, 10 Apr
+ 2025 11:20:16 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8606.033; Thu, 10 Apr 2025
+ 11:20:16 +0000
+Date: Thu, 10 Apr 2025 20:28:44 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH] mmc: sdhci: Fix possible Synchronous Abort using PIO mode
+Message-ID: <20250410122844.GA311@nxa18884-linux>
+References: <20250123214850.3085559-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250123214850.3085559-1-jonas@kwiboo.se>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SI2PR01CA0053.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::7) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VE1PR04MB7326:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3def568f-8250-47bd-973e-08dd7821ab57
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|52116014|38350700014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?muS1S7EPfiCBdtrifAJYvfH9tyF3G6SXJlt4AVvEEYcNXVfqhEKvbTQypJl7?=
+ =?us-ascii?Q?2MJXHDGsfbMGJVbXBzO7DydZIr4t02P1MJAyX4f0Tvbw7+tnGbiMOD9lziZZ?=
+ =?us-ascii?Q?Kn2dX60xDRt2P8ZnnFurhQQMl36eyUVvkmjnOvCZzk8Hvfz08OGpOZPogRVm?=
+ =?us-ascii?Q?xz4b6racpregA859h2TwPpxNOleqHYqsks1eeyJLMsgZOhXJN0jYo3KWrPyg?=
+ =?us-ascii?Q?pKw32wodWdZdb9WCcWukCk+IY3KNgatYlMNsUiaLAa8J/dmxmgoD//6rKAA1?=
+ =?us-ascii?Q?girkGY4IQyYeDqLk1VXFPNNkztfFw8x8CNzrXFNjXKoOhz2fTt+C79Gba1cZ?=
+ =?us-ascii?Q?I8ttOWgJPK0FWH6BSbMZzMtQHX7WKfqfA80/ai+VpT4KtQGN9Q3nj6wpXU9T?=
+ =?us-ascii?Q?t1jmR13sQduPtXWtVsWEoNPq8je2nDlr4T7NYLu4wQjev79giP5kQnKyVhM8?=
+ =?us-ascii?Q?+JXoXfHuKzJiWMtz4kcBG+UE4A6Ur9g27dXaYS/WMVtUZni94JSAC/xQkIO/?=
+ =?us-ascii?Q?uYEvhEEpax91PncpczR7lifLPiISIjsp8CFwHithwRe37OESpA4ocN4hihnZ?=
+ =?us-ascii?Q?gUzQumPGIO7nfV5t2wJGcHSOI3C5NI+wK0b2JM/1zML9pKXHt+l4duQh3yRv?=
+ =?us-ascii?Q?P6WSwDIu2p6p1pGkMnYuezvaRikbavwHynPERD7gfZ8tghyLf5LKvfN/AiRZ?=
+ =?us-ascii?Q?3L+4lRMK16iTw23kFfRDDNvUQS06UiR/a62rGR+m+3GLoMy8vqYvA8Oj6uZl?=
+ =?us-ascii?Q?2/6slXcoX3DiAea9afFyki51fQFGeBSL5ZXCUzUfqxgxyWvK64Lxx04qfwCw?=
+ =?us-ascii?Q?36f9JQ6Y95lxFoAkxMI6Nhm2Cj5qVIkOHIzr1w/RKElWqld1r+k6nPdAXnvt?=
+ =?us-ascii?Q?RbViu5r+fSfcIZwSw6eA5E9T+JNdtIoHaZ2e1sxsAmM0cgHa01pboA/AvOBz?=
+ =?us-ascii?Q?HLmPIVs0xGWXvvCcAxmoCFKJ2FdyIPUJvETuYjSjVwW9rmEMVx8z0xLLVhb2?=
+ =?us-ascii?Q?R2TYP1BAm9Uiighz9iZTV+nwXo35jLzmfD/ae2chxiJ+F+yyIcTePOpInbFU?=
+ =?us-ascii?Q?fjQdjcuomMDZHzXb2BQ9ZzAp/Arhgtexg7RY6wxYHBAW5Gv24XcX28MEEuIS?=
+ =?us-ascii?Q?Qp91JXNPYtp+7TAFeQsRR9mXs0lyzoKSzO7XM+VtAQBzIeao7lq79KqJQUbd?=
+ =?us-ascii?Q?2o7DeV1AGMMegVPXmpaHXagwL3lKO0V/YYHXkcNlUDM21nxNbX4B3Whwa4py?=
+ =?us-ascii?Q?gxDeMbXIOPMGgGWQTZi6D10DSYdgQ68GvEpcxlo4uT4s1MDjwVeg5lZ/sXsX?=
+ =?us-ascii?Q?OquMvlTWHYQ6EIO5S3KB7Ex7NmlL0uWEXu9i2Q01NLAEhizwsOXTNIj2He/y?=
+ =?us-ascii?Q?P469441T4jZXgvsdQPuJJkTgCQoxPmeraDBnQpcxdEK1e6XKrdEIhTLrmeY7?=
+ =?us-ascii?Q?Ydy9hYrLOYsL2a9rVitgvteLU4sQ36hHVDi2is7fY414D7Fsb+OQXg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(52116014)(38350700014)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+Vn2TwJ3eOPGX1FJn9ih1IkkXHhao1pY9XJMzIK86+E87VjaNysqPN1CqEqe?=
+ =?us-ascii?Q?CCH+3SJztLo4kszHkZsUplQANt7qUbs2LWTX5eDruB1xyGEI8v2Ff4ZYiOHs?=
+ =?us-ascii?Q?dDt8+VWBiWtbUi2uUYleXyPmQ48eFnrDxHFHp+ereRz60vgskB2PgDCLhEb1?=
+ =?us-ascii?Q?G5HapS9rSPA7/+ZKiP+Gm3F+SuTLa0pobZgTRrxHneOZorXHo7tunBQXk/yK?=
+ =?us-ascii?Q?UAQ0Hy6hXemrAYVcmoFGzFs06GCH8bn4Yi+WhYWuncn8FBtw5WlLvvLKx+m/?=
+ =?us-ascii?Q?1EY75At8cWm6TrkB4UjeGA1XqUnVJZZWzuOMPtPF4H+Gaoy+HmQPqHbUd3Om?=
+ =?us-ascii?Q?a7Y/RgLCjmStQKi8aRA/giKgnLAAcGSiHuHbe5XEJ/tNOzLdElg18+URKDNC?=
+ =?us-ascii?Q?w1r4HIFUTIC4Sq6qXNJA9RASvj8i/WqSl2tabJ8vA3SO6pstT0Mpc7agAjjJ?=
+ =?us-ascii?Q?iYLp4jI1+Lr69dq+sVOwjEsYz4SUJtDcDx3oNrSuvkxXn8QFwrH0WeigVcYj?=
+ =?us-ascii?Q?2KM4e6+UTuBfvZw7gZPbQF6Hidq2cDjhrtPQv/s1CzL/SrKDmqvwQOIx6l5j?=
+ =?us-ascii?Q?yVNDQyzC2WYamjuFfSHb8iSJbVqGqsXRkNiVGZu4dZpGSi9kP0NumGfR+ejf?=
+ =?us-ascii?Q?FK1ecOdwjz7V/hhZJBfYWyDIb2XB2+/uIkN4D/1WFWSZfLhLFhHe5Pq6FzgS?=
+ =?us-ascii?Q?C13RnAM92Q2HPjS8Vh4Olp2BblHaD7MxaqU55PQVPw82XuSL+DtQyZbsTTiy?=
+ =?us-ascii?Q?ODbUgBU2AAByJwHUAqa+sDQ8Ewe54pm4be91reg3uYb5/I0UUIHhtOD/v/bC?=
+ =?us-ascii?Q?PtdsTylyKinECyhuYek8h8gMhTZ+m4BE2HSXZzA/gQTRpt8UgkHosDwpojJn?=
+ =?us-ascii?Q?6mrxVK29hCM8ZxTahUJLcE3RM70Y54yYEraa62RDnjKtClfm4W2eQCXv7o5Z?=
+ =?us-ascii?Q?FB6Zswua3V8TVy4znZNRal0afw+ue7+c9oiRTD8uM5OLC/EQIttoc07Sk82W?=
+ =?us-ascii?Q?PpEvC/BKIuRf/TYCHGxIID33B8L/HGHhid9p21b1WznixXz1w/Ufc5IEr4wh?=
+ =?us-ascii?Q?yUzosAbE7vgE2YCjEY+KHtqFlBm1bDd25RQ92lx8cTCD11+/me39G4t+7Ul3?=
+ =?us-ascii?Q?PKC4KDjaL+320tlzDFYAnAhYo7QqrZRs5ycgm9GcrOSP313x93gYMSVX7Mlv?=
+ =?us-ascii?Q?q4z+dmXl8RAM3+KuUH+Ydke5e/uA/DofAFC45/jB/qxt9jj5niTeC30U/GCL?=
+ =?us-ascii?Q?euW2x3dMwrbwXgjrIB1wF8qwQBdidvju/8gMUBYY2oJXhV6UAVAKfXp8uudR?=
+ =?us-ascii?Q?wzGsAojEErS6n79+XcXwYpVHLAqk04hNPhqQyoqxQ9+L2h/j6ZWgmcFY9L4w?=
+ =?us-ascii?Q?XfUqDw9eKVC//zMPILNcPn3PKavpIEXWRg9lczXm+5P7Kg1acZDMiX+Tzy8z?=
+ =?us-ascii?Q?ZdkC9aWZcDqm5ebgyJwGAQT7QioCepUr4di7Nk9aRmp3LkjEbqyMLZScQO6Q?=
+ =?us-ascii?Q?RgDsZRCtLnB1Gr3iAun3g+pfFXZ5UHGgE6JbTWJiyvGSyXOnD4ZbwsnNUcpW?=
+ =?us-ascii?Q?i8aY6xHWo6/TaGdaKOIN8bPYemxE0YKO+vtk1Gks?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3def568f-8250-47bd-973e-08dd7821ab57
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 11:20:16.2704 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kx6ovYXUIZH6rAkaxwOhqrs7YsBc0z5MzzB8PDjEWU8aZF7+U46pVOTy99XMyen525E7CG/aWnyMJaygAmTejg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7326
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,147 +162,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---25b7a820cb6b1628d3f18a1ca4dc54d62c4e343cffcd5268ab77fc620c38
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Jonas,
 
-On Wed Apr 9, 2025 at 5:22 PM CEST, Tom Rini wrote:
-> On Wed, Apr 09, 2025 at 02:33:08PM +0200, Michael Walle wrote:
-> > Hi,
-> >=20
-> > > >> The formatting with %pa / %pap behaves like %x, which results in a=
-n
-> > > >> incorrect value being output. To improve this, a new fine-tuning
-> > > >> Kconfig XPL_USE_TINY_PRINTF_POINTER_SUPPORT for pointer formatting
-> > > >> has been added. If it is enabled, the output of %pa / %pap should
-> > > >> be correct, and if it is disabled, the pointer formatting is
-> > > >> completely unsupported. In addition to indicate unsupported format=
-ting,
-> > > >> '?' will be output. This allows enabling pointer formatting only
-> > > >> when needed. For SPL_NET and NET_LWIP it is selected by default.
-> > > >> Then it also supports the formatting with %pm, %pM and %pI4.
-> > > >>
-> > > >> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.=
-com>
-> > > >> ---
-> > > >> Cc: Tom Rini <trini@konsulko.com>
-> > > >> Cc: Simon Glass <sjg@chromium.org>
-> > > >> Cc: Michael Walle <mwalle@kernel.org>
-> > > >> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> > > >> Cc: Marek Vasut <marex@denx.de>
-> > > >> Cc: Benedikt Spranger <b.spranger@linutronix.de>
-> > > >> Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> > > >> Cc: John Ogness <john.ogness@linutronix.de>
-> > > >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > >> ---
-> > > >>  Kconfig            |  1 +
-> > > >>  common/spl/Kconfig |  1 +
-> > > >>  lib/Kconfig        |  8 ++++++++
-> > > >>  lib/tiny-printf.c  | 45 +++++++++++++++++++----------------------=
-----
-> > > >>  4 files changed, 29 insertions(+), 26 deletions(-)
-> > > >>
-> > > >> diff --git a/Kconfig b/Kconfig
-> > > >> index 6379a454166..4d13717294c 100644
-> > > >> --- a/Kconfig
-> > > >> +++ b/Kconfig
-> > > >> @@ -757,6 +757,7 @@ config NET
-> > > >>
-> > > >>  config NET_LWIP
-> > > >>  	bool "Use lwIP for networking stack"
-> > > >> +	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINT=
-F || TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
-> > > >>  	imply NETDEVICES
-> > > >>  	help
-> > > >>  	  Include networking support based on the lwIP (lightweight IP)
-> > > >> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > > >> index 94e118f8465..72736dbecf5 100644
-> > > >> --- a/common/spl/Kconfig
-> > > >> +++ b/common/spl/Kconfig
-> > > >> @@ -1096,6 +1096,7 @@ config SPL_DM_SPI_FLASH
-> > > >>  config SPL_NET
-> > > >>  	bool "Support networking"
-> > > >>  	depends on !NET_LWIP
-> > > >> +	select XPL_USE_TINY_PRINTF_POINTER_SUPPORT if SPL_USE_TINY_PRINT=
-F || TPL_USE_TINY_PRINTF || VPL_USE_TINY_PRINTF
-> > > >>  	help
-> > > >>  	  Enable support for network devices (such as Ethernet) in SPL.
-> > > >>  	  This permits SPL to load U-Boot over a network link rather tha=
-n
-> > > >> diff --git a/lib/Kconfig b/lib/Kconfig
-> > > >> index 1a683dea670..62e28d4a1f3 100644
-> > > >> --- a/lib/Kconfig
-> > > >> +++ b/lib/Kconfig
-> > > >> @@ -253,6 +253,14 @@ config VPL_USE_TINY_PRINTF
-> > > >>
-> > > >>  	  The supported format specifiers are %c, %s, %u/%d and %x.
-> > > >>
-> > > >> +config XPL_USE_TINY_PRINTF_POINTER_SUPPORT
-> > > >> +	bool "Extend tiny printf with the pointer formatting %p"
-> > > >> +	depends on SPL_USE_TINY_PRINTF || TPL_USE_TINY_PRINTF || VPL_USE=
-_TINY_PRINTF
-> > > >> +	help
-> > > >> +	  This option enables the formatting of pointers %p. It supports
-> > > >> +	  %p and %pa / %pap. If this option is selected by SPL_NET or NE=
-T_LWIP
-> > > >> +	  it also supports the formatting with %pm, %pM and %pI4.
-> > > >=20
-> > > > This isn't quite what I'd like to see. I don't want to start using =
-the
-> > > > literal XPL namespace as that will lead to confusion down the line.
-> > >
-> > > OK, in V2 I will only support SPL.
-> > >
-> > > > Since we only have SPL_NET, I think we should name this symbol
-> > > > SPL_USE_TINY_PRINTF_POINTER_SUPPORT, not ask about it (so bool with=
-out
-> > > > "prompt text" following), and select from SPL_NET if
-> > > > SPL_USE_TINY_PRINTF.
-> >=20
-> > IIRC, the old one also enabled the pointer support if DEBUG is
-> > enabled. I don't think this will work with Kconfig.
+On Thu, Jan 23, 2025 at 09:48:48PM +0000, Jonas Karlman wrote:
+>When MMC_SDHCI_SDMA=y or MMC_SDHCI_ADMA=y and PIO mode is used
+>dma_unmap_single() is called on an unmapped address, 0x0. This may
+>result in a Synchronous Abort:
 >
-> I was looking around for, but didn't quite see, a good existing option
-> to "if .." around the prompt text for.
-
-What I meant was that you normally do -DDEBUG on a file (or
-equally a #define DEBUG). Thus you cannot add it to Kconfig.
-
-> > > Now you will get the output '?' when using formatting with %p or %pa.
-> > > If someone wants to use the pointer support e.g. %pa in pinctrl-singl=
-e.c
-> > > and is restricted to use tiny printf, then it would be good to have
-> > > the option to enable it manually and not be forced to enable SPL_NET =
-or
-> > > NET_LWIP to have the pointer support enabled. In this case, it makes
-> > > sense to allow switching it on in menuconfig.
-> >=20
-> > FWIW, I'm also fine with enabling full printf support as long as the
-> > tiny one doesn't print misleading values.
+>  ## Checking hash(es) for Image atf-1 ... sha256+ OK
+>  CMD_SEND:16
+>                  ARG                      0x00000200
+>                  MMC_RSP_R1,5,6,7         0x00000900
+>  CMD_SEND:18
+>                  ARG                      0x00004005
+>  "Synchronous Abort" handler, esr 0x96000147
+>  elr: 00000000400015bc lr : 0000000040012b4c
+>  x 0: 0000000000008000 x 1: 0000000000092600
+>  x 2: 0000000000000040 x 3: 000000000000003f
+>  x 4: 0000000000000030 x 5: 0000000000000001
+>  x 6: 0000000000000001 x 7: 0000000000000000
+>  x 8: 000000000000000a x 9: 0000000000000090
+>  x10: 0000000043dffc68 x11: 0000000043c00440
+>  x12: 0000000043c00440 x13: ffffffffbfe00000
+>  x14: 000000000000031c x15: 0000000240000000
+>  x16: 000000004001145c x17: 0000000000000032
+>  x18: 0000000043dffef0 x19: 0000000043c00000
+>  x20: 0000000043dffbc8 x21: 0000000000000000
+>  x22: 00000000000f3d95 x23: 0000000000000002
+>  x24: 0000000000000493 x25: 0000000000092600
+>  x26: 0000000000000001 x27: 0000000000000001
+>  x28: 0000000000000008 x29: 0000000043dffab0
 >
-> I'm not sure if the one non-debug %pa print in pinctrl-single.c is
-> really triggered within SPL, and I do hope that the way this patch is
-> otherwise done will make it easier if someone needs %pa to work when
-> debugging a problem in SPL, and can't enable full printf due to space.
+>  Code: d2800082 9ac32042 d1000443 8a230000 (d5087620)
+>  Resetting CPU ...
+>
+>  resetting ...
+>
+>Fix this by only dma_unmap_single() when DMA mode is used and
+>sdhci_prepare_dma() has been called to map host->start_addr.
+>
+>Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>---
+> drivers/mmc/sdhci.c | 6 ++++--
+> 1 file changed, 4 insertions(+), 2 deletions(-)
+>
+>diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+>index 4833b5158c79..dc7f0724a7b6 100644
+>--- a/drivers/mmc/sdhci.c
+>+++ b/drivers/mmc/sdhci.c
+>@@ -177,8 +177,10 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
+> 	} while (!(stat & SDHCI_INT_DATA_END));
+> 
+> #if (CONFIG_IS_ENABLED(MMC_SDHCI_SDMA) || CONFIG_IS_ENABLED(MMC_SDHCI_ADMA))
+>-	dma_unmap_single(host->start_addr, data->blocks * data->blocksize,
+>-			 mmc_get_dma_dir(data));
+>+	if (host->flags & USE_DMA) {
+>+		dma_unmap_single(host->start_addr, data->blocks * data->blocksize,
+>+				 mmc_get_dma_dir(data));
+>+	}
 
-Yes, but the dev_dbg() triggered it because of the same reason as
-above, DEBUG isn't defined if you do it on a per-file basis. Or I'm
-getting that logic wrong, as I don't understand why _DEBUG (commit
-c091f65234cf introduced it but doesn't tell the reason).
+Many platforms have MMC_SDHCI_SDMA enabled, but I not see USE_DMA is set.
 
--michael
+So this change will make dma_unmap_single not being called for the platforms.
 
---25b7a820cb6b1628d3f18a1ca4dc54d62c4e343cffcd5268ab77fc620c38
-Content-Type: application/pgp-signature; name="signature.asc"
+Will this introduce any issue?
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Peng
 
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZ/ehBBIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/gyxwGAoS7HCAMdvaiTBE0Hjb0v8xfd/wl2A0du
-YuM3BuC7MNC4Am3wPlGJmAJPS9lKBY0uAX9zMzvhauZHwgl5CIG+ioaHjUhJzu4N
-eotlyqHARAZQ+kIkMAyCShYtYxNk7gCWxCc=
-=G6xv
------END PGP SIGNATURE-----
-
---25b7a820cb6b1628d3f18a1ca4dc54d62c4e343cffcd5268ab77fc620c38--
+> #endif
+> 
+> 	return 0;
+>-- 
+>2.48.1
+>
