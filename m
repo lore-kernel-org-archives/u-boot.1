@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E13D8C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 14:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5247C369A6
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 14:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B14F83C2F;
-	Thu, 10 Apr 2025 16:14:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3160282944;
+	Thu, 10 Apr 2025 16:15:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ok4zY81N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HQpBuRxj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BEC882A4B; Thu, 10 Apr 2025 16:14:41 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id CCD3D82A4B; Thu, 10 Apr 2025 16:15:18 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F320782A4B
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 16:14:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85481820F6
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 16:15:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2240b4de12bso11000415ad.2
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 07:14:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ac29af3382dso156358666b.2
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 07:15:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744294475; x=1744899275; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1744294516; x=1744899316; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nCoCZdQa7LaDR0MMC4bbic9fDzTmBpbZ44NbJLvGb/E=;
- b=Ok4zY81NDiULx6k5ZSs4/ehah2GrWpYc+hfkwtL5NNIz51V24VHZ8BeR74hx0k7Ghq
- 7PCE0mSLXub01rOJQlsgQmsVqsXEl4/EbuOiBs16b2zblK5YYUE6VMGkaOjwwdcd6zSw
- 1cT190ogrf35Rupmkj/H15H1ogHvsNesaNtObl7yLk47bdm7GddbUplOVoApCqcsEGSw
- xsU3G2E6/tMlvRReTDH+RcE3zTDpflgGnDS58OluO3fy6YpYmuX77wISzNwzcmVQTri7
- D4OhIU3W9J5KmZLuZmLVBtdoXvdKekn6mrS4BAUqHkZRJFOe7DrZpb4yAeTRm34noXf7
- SnSw==
+ bh=KA82gB+vUozFOZJ+iH+Q1khhOQZezPtVdhFV7Qq/1D8=;
+ b=HQpBuRxjIpQElVuGHpT63p090wRbClKSNnsP3t/w9fBhtFLGnL4c9bFoqwWORzba5c
+ zdy14BDe5FXUzDtqyBWSKJ5RhwXGawcWwEqfypIBFa1V7sthcspsOf5ZhuKXIyW8XN4V
+ 8LiyzVbNwUDlkUGAyCsMq41rkKJYptbRONtoI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744294475; x=1744899275;
+ d=1e100.net; s=20230601; t=1744294516; x=1744899316;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nCoCZdQa7LaDR0MMC4bbic9fDzTmBpbZ44NbJLvGb/E=;
- b=E3I9V3eKzsbxp9MXVbxRrJ4EkXaOU8pe/QhcRig2SPPA3omP1FoeuDA7DBMRhpcvrT
- EFe3qVGEkTkKSX//HnD4034XdWfFINROp+Kh+PSDcC/S1VXrL8C0SCFbAY36Axt99tKo
- 5scQ230BCQTEfFqKS1i4Npzu4yg4k8fyzGTrjDhSUNIfMSshqz3jbvb5BSoZPsuT6bxE
- FlaTXujaRi2EZfbryI0r82qmq38I0SSFceRXzWFcNiRESz1QCfk+Uknnn+FRJxrOsHzV
- 97xwP6SH5tRu+XQpZJ9Eo5GxchSaNDcrRVCxL0wcnm11Ty29Fv9gBkuvpSpu7Wx8TEV4
- b2mA==
+ bh=KA82gB+vUozFOZJ+iH+Q1khhOQZezPtVdhFV7Qq/1D8=;
+ b=iiMqmp4mdNjPxW431tTj7DHgOrAnq+7kLNFoX5yvG4LTrCq9MN9MRJkAErgfMmoZHN
+ yOMqGAxSQTPG4gFwejTLJvUda1tB2bPDcPE+h1Ey5X53ouUiB3hSvyL5x149TdqOzoJA
+ o6FVvbfpJg8ua5ifbQe4t47A0C1JzTpTUHeuNFXfLQDqxR+qO+SZnjJ/ezb7+8UNQ0v/
+ odHkoOVucFjLIJB7X8yiumvVc1epfWL8o+KDwwlvpF4LYnM9C92+r7pzpL9sxNoChNDq
+ fxQ2zH51Vu7zxxhiA/BfqfwwQl5BzOReNm9XoOHXtawXl56tRe9w7cvFmwTAFnWLNwhl
+ Iwcg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHzCixUyIvF1eXYkt8/a2yOK6A1o3cda9vFnrGBMuettY9sMyFKs40hdvUCziIhhxtdQngjBA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyS4myiMoGxO22knddyfdS8qw7Ihw35TA0eZe+GrHTXY4CmXSKn
- tzO6e5Q7OmQ581tYAH8Z94eFKu3NOZh5ncTK9YhhMbGsl/gbwDtBp2qy9RQKakP8GIR1WP8ZnO9
- YNO2MlGy0kf0I52M97j5v7djCm03JlGfDe8ud6JbH9tBPC3tKbqw=
-X-Gm-Gg: ASbGncsgZ72pEfsmfzw0aSVE+QGGhZjhtkwDJSp9O9MSDMurKXQgyddUcj9z3ZeG6q1
- lygZ2sRutPckMoinDBMzfuza8rw29cFhSw+Qqn2zluClhwsN1+BuqROqL1fHzRzR2e/rTFtAu+o
- /VE6T54Ioe/78XhqeAfCvrIkQ=
-X-Google-Smtp-Source: AGHT+IFDAby7W/3vpi7/Yw18uDbRlf3cq4fqcfmgOTwEDxM+GSDeRTV3R1IZ23dReY9XQnurJR2ZEIN7yqd1fQEAU3Q=
-X-Received: by 2002:a17:902:e801:b0:220:c86d:d7eb with SMTP id
- d9443c01a7336-22b42c43c08mr46620125ad.36.1744294474985; Thu, 10 Apr 2025
- 07:14:34 -0700 (PDT)
+ AJvYcCWFat3UPnJZ/A6cBbZWU+8ZlWIJ2lN+iROj1oVMttW3l68VfBXqclWJyRiU7KXfCft/FA2hciw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxerSNIUpfNmidNu7FAUC7mqcEwkSIGtkahKZxuN9och1fPLlq2
+ wtQN9SESaIFZqm5eh4X37mJ8ARfI0ageflD+uVOhsnAVRIcu38ZbrqyoJsn+ccdiwXfveSlDk+X
+ SIUDZDTOsPE5D9+o/R5MFd9ZWbv2Ncnz4AD3k
+X-Gm-Gg: ASbGnctVZizVOlyKCxR83lpK8HNKKnhzxIP1KOXRCJP1AmVdq1k12V0qJfH+NekW1Rl
+ cI+OBmKKVN14CZqtx2Wy33EzjLF6TyGuWJMf8uQctQSVpAaSXyo62wOBGWoLjxra4MOfmb1rUoz
+ NDpopv5YwD5yRedpukcLdDk7E=
+X-Google-Smtp-Source: AGHT+IH38RVaCfMrrxqZ4Nl+QUHdEXMH97jDkK/q3tQy/z3oszyX17Ak/cHlV4EdBkNb2jjsZl7bT0jwPSZPSeu35gM=
+X-Received: by 2002:a17:907:f818:b0:ac2:7a6d:c927 with SMTP id
+ a640c23a62f3a-acac0339ff0mr257170666b.50.1744294515563; Thu, 10 Apr 2025
+ 07:15:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250407220011.GS5495@bill-the-cat>
- <0974a2c7-fbe0-4195-ad24-36e815ac4080@linaro.org>
-In-Reply-To: <0974a2c7-fbe0-4195-ad24-36e815ac4080@linaro.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 10 Apr 2025 10:14:22 -0400
-X-Gm-Features: ATxdqUEnsqTX91yQ1Tpy8OuKQLB7UzmrvolYNDaylEY6nZ3ds0YZiqwIeSidhvo
-Message-ID: <CAEfUkU+PKtU85CuCPUgz0=GmFvbbJR0wnFo2hX1vnJY9VurMLQ@mail.gmail.com>
-Subject: Re: Community meeting April 8th 2025 (was: Re: [ANN] U-Boot v2025.04
- released)
+References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
+ <20250409-livetree-fixup-v1-1-76dfea80b07f@linaro.org>
+ <CAFLszTjLGv0a3W=hPW+pexa1ASaSrrKAcbRoo5cF_LChj-bizA@mail.gmail.com>
+ <d807638b-c6ac-429f-b177-ce9427b504f6@linaro.org>
+ <CAFLszTgEGd1hHS7D6C_Y8RMrkQ8k_+UgzvZO2zE6rhBizSQXBQ@mail.gmail.com>
+ <6e9bb23d-566f-4047-8d02-58dc6170fb5c@linaro.org>
+In-Reply-To: <6e9bb23d-566f-4047-8d02-58dc6170fb5c@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 10 Apr 2025 08:15:02 -0600
+X-Gm-Features: ATxdqUHu-D4ptEdyG_JL5SPTqatwvFki9LTme6Dz2L61V9_JKUfeUOhJkAHz_3Q
+Message-ID: <CAFLszTgyZ507jXXEcxWpY0V8LV90V2P7GhcH=2wS58cyGvR2dg@mail.gmail.com>
+Subject: Re: [PATCH 1/6] event: signal when livetree has been built
 To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,147 +95,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Caleb,
 
-I didn't have a chance to join the meeting due to a different time
-zone but I have a few comments on bloblist/fdt as below.
+On Thu, 10 Apr 2025 at 08:04, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+>
+>
+> On 4/10/25 15:07, Simon Glass wrote:
+> > Hi Caleb,
+> >
+> > On Thu, 10 Apr 2025 at 07:00, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On 4/10/25 13:27, Simon Glass wrote:
+> >>> Hi Caleb,
+> >>>
+> >>> On Wed, 9 Apr 2025 at 11:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>>>
+> >>>> OF_LIVE offers a variety of benefits, one of them being that the live
+> >>>> tree can be modified without caring about the underlying FDT. This is
+> >>>> particularly valuable for working around U-Boot limitations like lacking
+> >>>> USB superspeed support on Qualcomm platforms, no runtime OTG, or
+> >>>> peripherals like the sdcard being broken (and displaying potentially
+> >>>> worrying error messages).
+> >>>>
+> >>>> Add an event to signal when the live tree has been built so that we can
+> >>>> apply fixups to it directly before devices are bound.
+> >>>>
+> >>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >>>> ---
+> >>>>    common/event.c  | 3 +++
+> >>>>    include/event.h | 9 +++++++++
+> >>>>    lib/of_live.c   | 3 +++
+> >>>>    3 files changed, 15 insertions(+)
+> >>>>
+> >>>> diff --git a/common/event.c b/common/event.c
+> >>>> index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
+> >>>> --- a/common/event.c
+> >>>> +++ b/common/event.c
+> >>>> @@ -47,8 +47,11 @@ const char *const type_name[] = {
+> >>>>           "ft_fixup",
+> >>>>
+> >>>>           /* main loop events */
+> >>>>           "main_loop",
+> >>>> +
+> >>>> +       /* livetree has been built */
+> >>>> +       "of_live_init",
+> >>>>    };
+> >>>>
+> >>>>    _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+> >>>>    #endif
+> >>>> diff --git a/include/event.h b/include/event.h
+> >>>> index 75141a192a48b0931667632f41be8ff4d6139f7c..3fc673ba635ed45467aae8587705d37bef1c2a3f 100644
+> >>>> --- a/include/event.h
+> >>>> +++ b/include/event.h
+> >>>> @@ -152,8 +152,17 @@ enum event_t {
+> >>>>            * A non-zero return value causes the boot to fail.
+> >>>>            */
+> >>>>           EVT_MAIN_LOOP,
+> >>>>
+> >>>> +       /**
+> >>>> +        * @EVT_OF_LIVE_INIT:
+> >>>> +        * This event is triggered immediately after the live device tree has been
+> >>>> +        * built. This allows for machine specific fixups to be done to the live tree
+> >>>> +        * (like disabling known-unsupported devices) before DM init happens. This
+> >>>> +        * event is only available if OF_LIVE is enabled and is only used after relocation.
+> >>>> +        */
+> >>>> +       EVT_OF_LIVE_INIT,
+> >>>> +
+> >>>>           /**
+> >>>>            * @EVT_COUNT:
+> >>>>            * This constants holds the maximum event number + 1 and is used when
+> >>>>            * looping over all event classes.
+> >>>> diff --git a/lib/of_live.c b/lib/of_live.c
+> >>>> index 90b9459ede313e492e28c8556c730f3bd8aaa9df..e1962b8f1fb9d8c2c87d04ca4e238a1e4d00376a 100644
+> >>>> --- a/lib/of_live.c
+> >>>> +++ b/lib/of_live.c
+> >>>> @@ -10,8 +10,9 @@
+> >>>>
+> >>>>    #define LOG_CATEGORY   LOGC_DT
+> >>>>
+> >>>>    #include <abuf.h>
+> >>>> +#include <event.h>
+> >>>>    #include <log.h>
+> >>>>    #include <linux/libfdt.h>
+> >>>>    #include <of_live.h>
+> >>>>    #include <malloc.h>
+> >>>> @@ -334,8 +335,10 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+> >>>>                   return ret;
+> >>>>           }
+> >>>>           debug("%s: stop\n", __func__);
+> >>>>
+> >>>> +       event_notify_null(EVT_OF_LIVE_INIT);
+> >>>> +
+> >>>
+> >>> This should go in initr_of_live() since the function you are dealing
+> >>> with here is supposed to just do the live build.
+> >>
+> >> Well, we only every call this function from one place right now, but if
+> >> it was called multiple times for some reason then I would want to be
+> >> able to re-apply fixups to the new live tree.... I guess it should
+> >> probably pass in *rootp to the event handler, let me rework that.>
+> >
+> > There's no need to change the root, so what you have is find here.
+> >
+> >>> Same for the EFI_STUB thing which I just noticed, actually
+> >>
+> >> what EFI_STUB thing?>
+> >
+> > Oh, it's your EFI stub patch which isn't in Tom's tree yet. Just for
+> > when you get to it, then.
+> >
+> >>> Also please check for error
+> >>>
+> >>> Otherwise this seems OK to me. I do wonder why we can't use
+> >>> EVT_FT_FIXUP though. Could you add mention of that to your comment in
+> >>> event.h?
+> >>
+> >> Because FT_FIXUP is for fixing up the flat tree before starting the OS?
+> >> these are obviously different things imo, im not sure how i could
+> >> clarify this.>
+> >
+> > Well, what is the purpose of your code? Are you saying that it is used
+> > within U-Boot, but not passed to the OS?
+>
+> Yes, please read the cover letter and commit messages. FT_FIXUP allows
+> for the FDT that is about to be passed to the OS to be fixed up,
+> OF_LIVE_INIT signifies that U-Boot has finished building it's livetree.
+> The livetree is obviously not used outside of U-Boot, being a totally
+> custom in-memory representation of the DT.
 
-On Wed, 9 Apr 2025 at 09:46, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Hi Everyone,
->
-> On 4/8/25 00:00, Tom Rini wrote:
-> > Hey all,
-> >
-> > It's release day and here's v2025.04. We had some last minute issues
-> > reported, but then also resolved.  I want to thank everyone that's
-> > contributed to this release, not just in terms of code, but
-> > documentation, testing and otherwise ensuring things go as smoothly as
-> > they can.
-> >
-> > In terms of a changelog,
-> > git log --merges v2025.04-rc5..v2025.04
-> > contains what I've pulled since the last RC or:
-> > git log --merges v2025.01..v2025.04
-> > for changes since the last full release. As always, more details in
-> > pull requests (or the tags referenced by them) will result in more
-> > details here.
-> >
-> > As is becoming reguarly scheduled, we have a community meeting tomorrow
-> > (for me anyhow). The meeting details itself are:
-> > https://meet.google.com/btj-wgcg-euw
-> > April 7th, 2025. 9am (GMT -06:00)
-> >
-> > To join by phone:
-> > https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
-> >
-> > The meeting can be added to your calendar via the link on
-> > https://www.u-boot.org/
->
->
-> Here are the notes from the meeting, please feel free to clarify any
-> points I might have missed or gotten wrong. Thanks Tom for chairing.
->
-> # U-Boot Community meeting April 8 2025
->
-> * Tom intro: next merged into master, small delay
-> * Heinrich: ACPI has regular regressions due to lack of testing in CI
->    * tom proposes adding another QEMU defconfig with ACPI enabled
-> * Heinrich: Ubuntu images being used in CI are getting too old
->    * tom: has a patch to update to GCC 14
->    * tom: opened an issue, Simon to investigate (link?)
->    * tom: already tested new GCC/LLVM, no new warnings.
->    * tom: will rebuild docker container this week, adding byacc for
-> binman to enable IMX8 testing
->
-> * state of Simons patches re: bootflow/EFI/standard boot
->    * issue with standard boot that the EFI bootmgr option is always at
-> the top
->    * heinrich: proposes a new virtual device that can be ordered anywhere
->    * heinrich will investigate in the next few weeks
->
-> * tom: modernising the Makefile
->    * tom: which platforms are still using old stuff? will consider
-> disabling or removing boards
->    * tom: e.g. watchdog (deadline 2019), legacy i2c (deadline 2022.04)
->
-> * caleb: FdtFile revival
->    * context: https://github.com/systemd/systemd/issues/36835
->    * would enable picking DTB matching your kernel version
->    * heinrich: robh thinks we should match on compatible instead. Simon
-> also agrees
->    * heinrich: fine with adding this patch
->    * simon: significant harm - compatible is the only right way to
-> match, anything else is a workaround
->    * caleb/tom: agrees in theory, but in practise this isn't what we
-> witness. Having a compressed blob of all DTs would be ideal, and
-> compresses well, but nobody is doing this..
->    * heinrich: U-Boot is also not the only firmware, we can't expect
-> EDK2 to start shipping this.
->    * Ilias: Agrees, best of the bad options
->    * simon: what would be the right solution?
->      * caleb: have the kernel emit a file with compatible -> fdtfile
-> lookups since that's faster to read
->    * Bryan Brattlof: what about overlays?
->      * caleb: probably you have a more vertically integrated system
->      * bryan: customers want yocto and a redhat image that works ootb
->
-> * tom/simon: bloblist:
->    * tom: if bloblist is enabled it MUST have the DT, set the "mandatory
-> passage flag"
->    * simon: OF_BLOBLIST means DT is in bloblist
+Oh, I wondered what '(which is not passed on to further boot stages)' meant.
 
-Not only DT but other stuff should be considered to be handed over via
-the bloblist, currently TPM eventlog and the list will be increasing
-in the future. It is a nightmare to create one kconfig for each.
-Also, Firmware Handoff spec is in order to unify the handoff between
-stages in one standard way but creating one kconfig for each component
-implies that we are allowing "partially" compliance with the spec and
-able to select which one should be from bloblist and which one should
-not be.
-We have kconfig BLOBLIST_PASSAGE_MANDATORY and I think we can use it
-for all scenarios instead of creating new ones.
+Sorry, no, we can't do that. We are moving towards using livetree in
+U-Boot - there is already the fixup thing as mentioned. We just don't
+yet have the flattening at the end before boot. If you have time you
+could look at that.
 
->    * tom: it's a bad idea to divorce standard passage handoff from
-> bloblist, but if it eases some issues for now and we can revisit in a
-> ~year that might be best
->    * ilias: we have discussed this before. doesn't think OF_BLOBLIST
-> should exist, because the info is discoverable at runtime.
->    * ilias: we have a standard (firmware handoff), why do we need
-> another implementation?
->      * tom: hoping to reconcile over time between fw handoff and bloblist
->    * tom: to re-iterate what Simon said: dt should be either in
-> bloblist, embedded, or discovered through board specific means. Need to
-> avoid conflating consuming bloblist and creating bloblist (e.g. in SPL).
->      * tom: in SPL, if we don't have a bloblist, we don't need a config
-> option.
->      * tom: we should remove BLOBLIST_FIXED
->    * simon: we can get rid of BLOBLIST_FIXED if we have a register
-> hand-off firmware (x86)
-
-x86 is out of the scope of Firmware Handoff which is a spec led by Arm.
-I agree that maybe x86 needs something similar but we should keep it
-as-is until there is a spec telling what should be done.
+Your event to modify the livetree is fine, but any modifications
+should be passed on to the OS. If you don't want that, then your fixup
+would need to remove them, I suppose. Does the OS actually care,
+though?
 
 Regards,
-Raymond
-
->    * out of time... Tom ok to add OF_BLOBLIST if we remove
-> BLOBLIST_FIXED. Hopes that in ~1 year we'll all agree that we want the
-> same thing...
->
->
-> >
-> > The merge window is formally open again. I will be merging next in to
-> > master shortly. The v2025.07 release is scheduled for Monday, July 7th,
-> > 2025 and the merge window will close and -rc1 will be released on the
-> > 28th of April, and then the next window will open with -rc2, two weeks
-> > later. The keen-eyed among you might notice that I fixed some incorrect
-> > -rc1 dates in the future planning section, including for this cycle.
-> >
-> > Thanks all!
-> >
->
-> --
-> Caleb (they/them)
->
+Simon
