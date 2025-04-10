@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B729C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 14:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06B4EC369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 14:53:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E94B83CCF;
-	Thu, 10 Apr 2025 16:25:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 54ABE83B85;
+	Thu, 10 Apr 2025 16:53:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X5rx6L15";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R3yryEpy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10C1F83CCF; Thu, 10 Apr 2025 16:25:00 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92436836AC
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 16:24:57 +0200 (CEST)
+ id 60DB583C02; Thu, 10 Apr 2025 16:53:30 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 07E7083B4F
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 16:53:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53AEOqXH1308547
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 10 Apr 2025 09:24:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744295092;
- bh=qYUHXL2+Qz4C8BfeIGcGmYH2mrhktlJpCmvJxU55fBE=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=X5rx6L15ytZ4Ji1YW2qDoS9dxj/mZAqtBkN5A4hAPtjlC4XCxKU8f1brPkK6EqhkI
- UNZNXeScvPCshhwgfi0DYqDjI1KsuCAr8UOKzk3O7i6C2kVJ2V8MiqrdlTuPjulusf
- 2dMoPP0Reqxh8AY5fntRBsV8QXh/RtDiy5UoCOZ0=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53AEOqLE114679
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 10 Apr 2025 09:24:52 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
- Apr 2025 09:24:52 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 10 Apr 2025 09:24:52 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53AEOqUv026641;
- Thu, 10 Apr 2025 09:24:52 -0500
-Date: Thu, 10 Apr 2025 09:24:52 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Udit Kumar <u-kumar1@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <d-gole@ti.com>,
- <n-francis@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>,
- <mwalle@kernel.org>, <kamlesh@ti.com>, <j-choudhary@ti.com>
-Subject: Re: [PATCH] doc: board: ti: Add optee rng support
-Message-ID: <20250410142452.5ngxny6w3ykvi4sj@flask>
-References: <20250410132746.8168-1-u-kumar1@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac3eb3fdd2eso181708066b.0
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 07:53:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744296807; x=1744901607; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=I/S4YRZOjBx0w7jjACHKYuhK8qy4SF8i5tKg+QfgDIM=;
+ b=R3yryEpy37tFfHM2qvyQFA11Kk6HPF0S/ab+pR1EjC+ALQyYla9X58ekK2a4p50IME
+ ZWoRkV1/+6Qpb+zwk3F1UbZ/6ZgEDAHk2yMyY6WSJVy3mcvG6Ag25XWCPyOk2nMrMPIr
+ SoPceKyZiJ9bLwZ4WrShKomsCnwvzy2gKWImM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744296807; x=1744901607;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=I/S4YRZOjBx0w7jjACHKYuhK8qy4SF8i5tKg+QfgDIM=;
+ b=cHEG2R7Jco6UeHyyebI4hrbcYs8gy3oneA33/1SzBnwZhXQ6DX5bGLJpl+mm6Hcp5Y
+ NWW1ZYjOud28EIK0TfXTyKHWOwhyyWinb6zWA9DZ58kfOw/nPkHVs0uUxTfRs8cjAUW1
+ GQJcWjrTzzJ51THXlqo+cwbkbuRIM6AcJGcVUa+GMYxra1n0YKR81ktrY8LsKpCDHiSN
+ HpqwLupPt17ZBxnQ3M9VFqx1WTWJeG13pXm8pgu8R1l5cPEn19h9vSiZqFnWqBcA3dHf
+ io+DMDr+6+9VBdJ+tN0nSnBFl3eBH9RViknFrQ18qcaDhKinEwXg/O8ItCAwEvL/T8vz
+ sVDw==
+X-Gm-Message-State: AOJu0Yx8O2MPmpYrjJhrgfDpKlu57H3N2luCvZh44InvZ/g8/YWJ1Bpu
+ jfvjYejwGsTaSPU5hTZX+q/bdRtBRJvejhGDjN1ZXyrBHjBHW7jPbwdmSbIZUm4x5bQw02IvlQ1
+ mgRxN2RyjSzOlwLa8kLiggiHHDiSVeMGu56Cp
+X-Gm-Gg: ASbGncuMkuwo0crgNoeSpmn2UZyriKOmCAj6ZETkaSpsPoa5QLp3HCxgoHcSAMWCN4q
+ GBVQZJlXNV757QASppeHqrMSPZiliqJo+Pd1snlgXi87arAuNjaQYvss/6WsP0Ykt59gk47KgXq
+ 7jYqs6v0E0QCn4paOANefeqynxoT8edUaczA==
+X-Google-Smtp-Source: AGHT+IHgV8MmZmkh5vH1M40p3fg6Lz0QO5SHBGh/O1dRgAAazxe26VIbWfkBZ10JnXS1YuNX4Mdzv1NuMk9ojv5/CKI=
+X-Received: by 2002:a17:907:944e:b0:ac8:1bb3:35b0 with SMTP id
+ a640c23a62f3a-acabd194ec9mr261350566b.20.1744296807217; Thu, 10 Apr 2025
+ 07:53:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250410132746.8168-1-u-kumar1@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250304130947.109799-1-sjg@chromium.org>
+ <20250304130947.109799-6-sjg@chromium.org>
+ <874iywgye3.fsf@baylibre.com>
+In-Reply-To: <874iywgye3.fsf@baylibre.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 10 Apr 2025 08:53:14 -0600
+X-Gm-Features: ATxdqUHaUETYiHOj0th3__AWQBJyCoFtH5RXiJs6t0omnl99x0frj6edASdAUCk
+Message-ID: <CAFLszTh=+gC3Uikx7X6qSo6w_eRQZF-xNX3M+0PfKRS+O-xVAg@mail.gmail.com>
+Subject: Re: [PATCH 5/7] binman: Workaround lz4 cli padding in test cases
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,40 +96,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18:57-20250410, Udit Kumar wrote:
-> J722S has hw rng, which can be used by OPTEE.
-> So remove option to use SW TRNG by OPTEE.
-> 
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> ---
-> reference discussion 
-> https://lore.kernel.org/all/20250313144155.2382316-1-mwalle@kernel.org/
-> 
-> Bootlogs with optee trng 
-> https://gist.github.com/uditkumarti/5f90210b23e67cd4eb6d06a024031ee8#file-gistfile1-txt-L1970
-> 
->  doc/board/ti/j722s_evm.rst | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
-> index e5a1be50c4f..edc29a4f9e4 100644
-> --- a/doc/board/ti/j722s_evm.rst
-> +++ b/doc/board/ti/j722s_evm.rst
-> @@ -74,7 +74,6 @@ Set the variables corresponding to this platform:
->   $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
->   $ export TFA_BOARD=lite
->   $ export OPTEE_PLATFORM=k3-am62x
-> - $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
->  
->  .. j722s_evm_rst_include_start_build_steps
->  
-> -- 
-> 2.34.1
-> 
+Hi Mattijs,
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
+On Thu, 10 Apr 2025 at 03:27, Mattijs Korpershoek
+<mkorpershoek@kernel.org> wrote:
+>
+> Hi Simon,
+>
+> Thank you for the patch.
+>
+> On mar., mars 04, 2025 at 06:09, Simon Glass <sjg@chromium.org> wrote:
+>
+> > From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> >
+> > Newer lz4 util is not happy with any padding at end of file,
+> > it would abort with error message like:
+> >
+> > Stream followed by undecodable data at position 43.
+> >
+> > Workaround by skipping testCompUtilPadding test case and manually
+> > strip padding in testCompressSectionSize test case.
+> >
+> > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+>
+> Tested that this solves issues when using lz4 1.9.4.
+>
+> This patch solves:
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/38
+>
+> Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>
 
--- 
+Ah, I'd forgotten about this series, as I applied it to my tree a
+while back. I sent a v2 for Tom[1].
+
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+SImon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=452114
