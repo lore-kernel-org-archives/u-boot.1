@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFBBC369A2
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 17:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B7BC369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 17:34:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F00783DCA;
+	by phobos.denx.de (Postfix) with ESMTP id 9CE0283DE9;
 	Thu, 10 Apr 2025 19:33:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WLs0O3vG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P9D+YrHx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8841B83DB3; Thu, 10 Apr 2025 19:33:56 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 6058C83DB3; Thu, 10 Apr 2025 19:33:57 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BF4783D84
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 19:33:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AA6883D9F
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 19:33:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3feaedb531dso238540b6e.3
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:33:54 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3f8ae3ed8f4so577561b6e.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:33:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744306433; x=1744911233; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744306434; x=1744911234; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8EuUX/z1HdySLHF99h+5EOMvSd4RXNw0zS+BZ2qKCfI=;
- b=WLs0O3vGm0fOSJQOIu1Tkk0VWckd93f/ZlCZGFH/f5fdvoUYNo91o8/7Sb4wFDG4zJ
- bPBz1wigkQMqj4Be+iONo8MYJO+stvKrdIfroBjKNTdCr1jTy0+ufPQ/pvBs/4QLATgz
- tGiQaabpPLAl9WJHqRxyaNlhKR8FjH+nAdo4M=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9q3ZGVzqteezSDGJdipuB02gTRPOKETsTiDEm9bfREo=;
+ b=P9D+YrHxbSEJbky8gJ9Evgw2PLvl63OhwzwOMGxGjrwswtznolsZrxCfbYAArmmT1H
+ X3VMwlUYR1dbCWd5w/K4asyalt8ZBu3dyF0fHFmSEPbmHsl8I++hnv+o0kBB8jR5l/Eg
+ mCG0G1nQDCVjq1r0/2TKBW30X+48fd3lmf2Ek=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744306433; x=1744911233;
+ d=1e100.net; s=20230601; t=1744306434; x=1744911234;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8EuUX/z1HdySLHF99h+5EOMvSd4RXNw0zS+BZ2qKCfI=;
- b=Psw2wtEQqlbfYF+xOjGFxrbvwR6YjQPAaR2gaHeFoMAqTb6PpsIFF7oEhqex2i6bz5
- ixnE3BgasiGy+GH85VC1RwuZovq38FIEpD03/mIx6RhkeNdiZJ2fpcjV+aJwgZbyuTbW
- Dav/ilrZYMR+Q7g7y86rSKHDdtKMiAGa9gDYui9Yg50xxo3j95yLLbdoTYR29IhQoZEs
- ONCYe0GKttPzEnAlWKFvFY6D0/aGUZc5OBeAxZ0zpjYnT76Rc1Gk6PoiCjkGhclaJMxj
- BxscJfiQqa46oZejTUU9ZxYwTnKVxr11N1uG/OoupSTjfAUi8cP1H/vqPUrot0sW5/Qc
- zCNA==
-X-Gm-Message-State: AOJu0YxispfeYxW5xTtOgPCdG0O/CSPFGM2c96Zp0ov3rgEd+tB8Mabz
- 7bwLo/CeZKN6ego1QKROpi3gXsG8K2kiSz8V0c+CAb3efHrfbOxJIQnr7KckAbs7Nmcs6PglX4o
- fWdM=
-X-Gm-Gg: ASbGncuNCHBpBoFGVnPlqcd0PFywM3dsEpkQXCinf9Ygc70VpZoFtLbSHAJvGvtR5uC
- kzY6r1XEDWk9pduobUdLi5NLhnaPwfrGJHiD5TsTVLVvBm8GTa8xGzP4/KS5yUhL7Gh6Pqdvx5j
- F408VqZka5Zyy77YISTn/Rn3O14ogNVO6kzlalZPPRgq47WWHgSlSs+Bxvbb6UcibReGTYvKPvb
- 5fg+UvSF405M/nwADsMWBcMh+exKhi65uzfeOzUcZLvleXq9iYz+BHlcVhuxlgi338ihUul8yjb
- LT62cBmymfltlsS/wpz7U5y7in4uUEVOcR6VCNK0UwQQNTRpfGmctMFvWuFu1mGLeAQOPKc5Tcm
- P
-X-Google-Smtp-Source: AGHT+IHLa87hQDdorC4PO0fP3PP286gpouywEVpuUNxfYTdhu2TZ068Ze7HHypi4/QKgxuL9fgXtxg==
-X-Received: by 2002:a05:6808:4446:b0:3fb:2937:937c with SMTP id
- 5614622812f47-4007bca0d4cmr2091729b6e.6.1744306433094; 
- Thu, 10 Apr 2025 10:33:53 -0700 (PDT)
+ bh=9q3ZGVzqteezSDGJdipuB02gTRPOKETsTiDEm9bfREo=;
+ b=tmzV0E/LPJ7qzzzvvCQdLvk/SaJPbEXngTTv0ou1bq4ErtsW8YtQ8yJFQuphSh0WuE
+ BhMxEHUeQi+uHYWbDxbXayuGPCombE4PLetU67eLSAfbiDlkm6roXUbwd7gWNHLRyhnZ
+ AckEiXacBq9bsAJWq0kcsI0gGDu+a0xrd+txuyJWBvn02V4iRlhaODEjhIFT0z8y+XX5
+ AUUrOWcj0dpYnNYyMVcsJykcZn8hfdcGH1s/oKSPGP+PfVRJ2/McetuPOY7prvRH3mbT
+ 1XUVhp6NQ0+/hdq2zYfAJkB84upaO3+N/xNR/vMjqTSRIIoPUzAbZyGwv97VsgS0Poxc
+ aYKg==
+X-Gm-Message-State: AOJu0Yxr0f/dFSeZbgIYTKJ8yQjSuQzQRxQkXEhyRMusDzZDPyEB0cA9
+ YJF9Iu5EXAmbOxLNfrgUDMgdhmHq2j3dKG491CrJ/zWUueyH1lNDGmmmvlmLAB7tQn0eMQL7hxv
+ 9nng=
+X-Gm-Gg: ASbGncvFH1kb3utRmSW/wELP3cbmq/lpLpQy7cCG5i7+c8wcdIatMAaNJZBR9p4W7h3
+ s3gZRIM50Mlf0zzLyacc+bxm5TzgRXR1LyBCvvsn/N5jbZqGwhExFesaqxuUxa/gO0Oq2+ii3HM
+ WnUCro2oTPXYEFKYpVmrSjsfKPtkdm6ai7aeyhF7NZTDMsj5O2iIo73wOQ3SXs7hbK4Zw3cgDYg
+ gPeDdiqa7JYz1UxJ/5zA+ZAh4wnO8QVPRFf7PWxSfDS08+beje9o5Pxg6kxXB3K2D74n9EgpMjN
+ TbdmZg5zxZ9sDMFwcYE9cGwh8uoIQfxtMqZg/f45ssB36q9C2tUkEnfo/AjUh9wH3jUlhfiP1tX
+ +
+X-Google-Smtp-Source: AGHT+IFJ67KQcVQqxz8T3fD3RsJs0Hmnf9g7Kb+90EOzX8InBslk+eEMMZuzWdS7m5e2M/em+t1gxg==
+X-Received: by 2002:a05:6808:1815:b0:3fa:7909:271f with SMTP id
+ 5614622812f47-4007bca1200mr2451176b6e.5.1744306434018; 
+ Thu, 10 Apr 2025 10:33:54 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40082515ebesm75008b6e.11.2025.04.10.10.33.52
+ 5614622812f47-40082515ebesm75008b6e.11.2025.04.10.10.33.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 10:33:52 -0700 (PDT)
+ Thu, 10 Apr 2025 10:33:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250128230205.2062703-1-trini@konsulko.com>
-References: <20250128230205.2062703-1-trini@konsulko.com>
-Subject: Re: [PATCH] Dockerfile: Update to gcc-14.2.0 and clang-18
-Message-Id: <174430643229.2959201.14271785518368577655.b4-ty@konsulko.com>
-Date: Thu, 10 Apr 2025 11:33:52 -0600
+To: u-boot@lists.denx.de, Leonard Anderweit <l.anderweit@phytec.de>
+Cc: sjg@chromium.org, festevam@gmail.com, marex@denx.de, 
+ upstream@lists.phytec.de
+In-Reply-To: <20250401084642.216933-1-l.anderweit@phytec.de>
+References: <20250401084642.216933-1-l.anderweit@phytec.de>
+Subject: Re: (subset) [PATCH 1/2] Dockerfile: install byacc
+Message-Id: <174430643327.2959201.1080010926031354755.b4-ty@konsulko.com>
+Date: Thu, 10 Apr 2025 11:33:53 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,19 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Jan 2025 17:02:05 -0600, Tom Rini wrote:
+On Tue, 01 Apr 2025 10:46:41 +0200, Leonard Anderweit wrote:
 
-> Outside of changing versions here the other visible change is that we
-> tell grub that riscv64 does not have "large model" support. Without this
-> change the resulting mkimage is non-functional. This is known upstream
-> already.
+> Install byacc required to build cst from source.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] Dockerfile: Update to gcc-14.2.0 and clang-18
-      commit: 001bac5f16adfc131ade7de73ee681972a89df1a
+[1/2] Dockerfile: install byacc
+      commit: d592ebd6b805b37a127151eb8de9261cf799d438
 -- 
 Tom
 
