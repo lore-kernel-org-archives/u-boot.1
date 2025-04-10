@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B7BC369A2
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 17:34:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046D4C369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 17:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CE0283DE9;
-	Thu, 10 Apr 2025 19:33:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ECA6583DB3;
+	Thu, 10 Apr 2025 19:34:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P9D+YrHx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IvVVf1Zb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6058C83DB3; Thu, 10 Apr 2025 19:33:57 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 8B8E683DE4; Thu, 10 Apr 2025 19:33:58 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AA6883D9F
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 19:33:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EB3E82160
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 19:33:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3f8ae3ed8f4so577561b6e.3
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:33:55 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3ff0df81fdbso372022b6e.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:33:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744306434; x=1744911234; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744306435; x=1744911235; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9q3ZGVzqteezSDGJdipuB02gTRPOKETsTiDEm9bfREo=;
- b=P9D+YrHxbSEJbky8gJ9Evgw2PLvl63OhwzwOMGxGjrwswtznolsZrxCfbYAArmmT1H
- X3VMwlUYR1dbCWd5w/K4asyalt8ZBu3dyF0fHFmSEPbmHsl8I++hnv+o0kBB8jR5l/Eg
- mCG0G1nQDCVjq1r0/2TKBW30X+48fd3lmf2Ek=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FN1cZAxZ0eHOIXcnf4InT450qIv7gjBbfYD5cwp87tI=;
+ b=IvVVf1ZbJOyqZ4Fz8AYKg/gEhGAzUlFJsIp6eGl4QMzMf0HD0Maw3e7jQZlfxflv3F
+ KbU3HJ88j1w7Deu9NGuYR/uYrZqjMmY4U60IEHsePd+ZXTFwVCuqezksv4UJhXVAjLTc
+ CBqp1lqjh16gYLIV7RGrWLapA3Z+eTLsx1d7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744306434; x=1744911234;
+ d=1e100.net; s=20230601; t=1744306435; x=1744911235;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9q3ZGVzqteezSDGJdipuB02gTRPOKETsTiDEm9bfREo=;
- b=tmzV0E/LPJ7qzzzvvCQdLvk/SaJPbEXngTTv0ou1bq4ErtsW8YtQ8yJFQuphSh0WuE
- BhMxEHUeQi+uHYWbDxbXayuGPCombE4PLetU67eLSAfbiDlkm6roXUbwd7gWNHLRyhnZ
- AckEiXacBq9bsAJWq0kcsI0gGDu+a0xrd+txuyJWBvn02V4iRlhaODEjhIFT0z8y+XX5
- AUUrOWcj0dpYnNYyMVcsJykcZn8hfdcGH1s/oKSPGP+PfVRJ2/McetuPOY7prvRH3mbT
- 1XUVhp6NQ0+/hdq2zYfAJkB84upaO3+N/xNR/vMjqTSRIIoPUzAbZyGwv97VsgS0Poxc
- aYKg==
-X-Gm-Message-State: AOJu0Yxr0f/dFSeZbgIYTKJ8yQjSuQzQRxQkXEhyRMusDzZDPyEB0cA9
- YJF9Iu5EXAmbOxLNfrgUDMgdhmHq2j3dKG491CrJ/zWUueyH1lNDGmmmvlmLAB7tQn0eMQL7hxv
- 9nng=
-X-Gm-Gg: ASbGncvFH1kb3utRmSW/wELP3cbmq/lpLpQy7cCG5i7+c8wcdIatMAaNJZBR9p4W7h3
- s3gZRIM50Mlf0zzLyacc+bxm5TzgRXR1LyBCvvsn/N5jbZqGwhExFesaqxuUxa/gO0Oq2+ii3HM
- WnUCro2oTPXYEFKYpVmrSjsfKPtkdm6ai7aeyhF7NZTDMsj5O2iIo73wOQ3SXs7hbK4Zw3cgDYg
- gPeDdiqa7JYz1UxJ/5zA+ZAh4wnO8QVPRFf7PWxSfDS08+beje9o5Pxg6kxXB3K2D74n9EgpMjN
- TbdmZg5zxZ9sDMFwcYE9cGwh8uoIQfxtMqZg/f45ssB36q9C2tUkEnfo/AjUh9wH3jUlhfiP1tX
- +
-X-Google-Smtp-Source: AGHT+IFJ67KQcVQqxz8T3fD3RsJs0Hmnf9g7Kb+90EOzX8InBslk+eEMMZuzWdS7m5e2M/em+t1gxg==
-X-Received: by 2002:a05:6808:1815:b0:3fa:7909:271f with SMTP id
- 5614622812f47-4007bca1200mr2451176b6e.5.1744306434018; 
- Thu, 10 Apr 2025 10:33:54 -0700 (PDT)
+ bh=FN1cZAxZ0eHOIXcnf4InT450qIv7gjBbfYD5cwp87tI=;
+ b=jH5+X/sTEdx4/Y6ypGJXm6eMlIImCO0ys6zn0J7jHzLFE9G2g3+mhZ3TqClwrMuO34
+ ykXcPoIZSCY7J+gJeIg9B/u8G7AK56efpZPOqKN+wjkS2ClSZR5t5tYBHI0buhK/woCL
+ HYqHQAE/tS81A9Ab5UweP1cHL5WdjOy+shOd18nzs2g8dr89MaEzl/dN/n9yU9IR1a7F
+ c9YeO0OYdp9s97GKLOGKUzaBY9qIoFs+QeisTvXEV4QXLHNTPAIrXg6plHi4q94dIXsR
+ EYuhBaiuxH8OjV7v5NSnvZup8eTGfw6sttrgU1gmxX59nfrNU2rOCIL6nD+K3VzdCJN4
+ C5hA==
+X-Gm-Message-State: AOJu0YzeTNcwmGKbgWRR/uIlxK842aZ6kQ5IAUX44X+vMAxs7xS7N6Z1
+ jJILlBsadCesTQceNt5ucIajLoV66Ag3oBCR+PnslgmelLwI/NgjsmwN5BYsfttnMfJUg9CCn8D
+ KfHs=
+X-Gm-Gg: ASbGncuthhbwv3RbphyaECbxQkZ0E3eLlHpWs18r3YCisQicnaVZHQoTIYUHKqHd1eg
+ SWpWjf76qDfn74TIXEBX6H9ZWD2c22mFnRlm1aXA34NBeNVmzuBynrQwzAXY3oMlVtuTnjXT49W
+ suwwWqeYbXhsdFks69tdxSFF5T66bzgpPQ5BzcaQjakLhng2Of2EWN1X03KqYA+Jn02KGzJf1SA
+ /Ho5vII4VuYfA8x7IjAchUzh92vNnhez1TFSj9U8rFYGKNvyBA2Z4fQ3+YJUdFxPtbjHL0+Q2AH
+ Zr25fOG1EHWHiSxi0Wh1B315lJE3dwlHj7pKNcS76to+J1rjdB4Ho5yXezLObj8n1jVlKYk/A+4
+ VsY7JBC78VwM=
+X-Google-Smtp-Source: AGHT+IHSfzmFlP7Fd7nFLNsQBfXJiaW2AgAiVltTpuTBeJYPXXFmu6AvaVpywCsVwvSTKRajSs+N+Q==
+X-Received: by 2002:a05:6808:22a2:b0:3fe:aeaf:26a5 with SMTP id
+ 5614622812f47-4007ccfc020mr2118272b6e.31.1744306435151; 
+ Thu, 10 Apr 2025 10:33:55 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-40082515ebesm75008b6e.11.2025.04.10.10.33.53
+ 5614622812f47-40082515ebesm75008b6e.11.2025.04.10.10.33.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 10:33:53 -0700 (PDT)
+ Thu, 10 Apr 2025 10:33:54 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Leonard Anderweit <l.anderweit@phytec.de>
-Cc: sjg@chromium.org, festevam@gmail.com, marex@denx.de, 
- upstream@lists.phytec.de
-In-Reply-To: <20250401084642.216933-1-l.anderweit@phytec.de>
-References: <20250401084642.216933-1-l.anderweit@phytec.de>
-Subject: Re: (subset) [PATCH 1/2] Dockerfile: install byacc
-Message-Id: <174430643327.2959201.1080010926031354755.b4-ty@konsulko.com>
-Date: Thu, 10 Apr 2025 11:33:53 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250408202141.1434754-1-trini@konsulko.com>
+References: <20250408202141.1434754-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/2] Dockerfile: Update to a more current TF-A release tag
+Message-Id: <174430643415.2959201.11731171141864014636.b4-ty@konsulko.com>
+Date: Thu, 10 Apr 2025 11:33:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +94,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 01 Apr 2025 10:46:41 +0200, Leonard Anderweit wrote:
+On Tue, 08 Apr 2025 14:21:40 -0600, Tom Rini wrote:
 
-> Install byacc required to build cst from source.
+> In preparation for using TF-A more in our CI loops, switch to the
+> current release tag for TF-A.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/2] Dockerfile: install byacc
-      commit: d592ebd6b805b37a127151eb8de9261cf799d438
+[1/2] Dockerfile: Update to a more current TF-A release tag
+      commit: fe8a33b81cacdd01379f3a72b8dcb0dc29aa9cf5
+[2/2] Dockerfile: Download the Arm FVP and extract it
+      commit: 01fa1b18ae68381d9d462be66df3943f41426874
 -- 
 Tom
 
