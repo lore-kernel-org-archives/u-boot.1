@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D18C1C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25CD3C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:18:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2808F82A5C;
-	Thu, 10 Apr 2025 09:17:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 862BD839AF;
+	Thu, 10 Apr 2025 09:18:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ARi7cUet";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hOMjeXAu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8D97831B4; Thu, 10 Apr 2025 09:17:32 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 0EAFC839B1; Thu, 10 Apr 2025 09:18:45 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D098B8209C
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:17:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CA248209C
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43ce71582e9so3809705e9.1
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:17:30 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43cfba466b2so4884205e9.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:18:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744269450; x=1744874250; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744269522; x=1744874322; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vj4dRFeIPg69IJI563j/AOt0mSXQ1SnlTmdMvO+wPSM=;
- b=ARi7cUetGqDYpDSk1s1cP+aDBJUtKYypTYDB0288UQmWP1nDWsGJghjV5dyPMzXvpq
- jUYvpSAAzrTRfkJEZsTBWOps//aNV6tjp3rqPJ+G2vz8Bjf1uuLrZ2RcwrSeuEPzOtWi
- t0HyQWkcosZ+80JByptPI17k6SwY5v8WG6CF7Y6+mZJKYF5rVSrZ73OrQxI2eCDfcU5a
- OfHnIuDONBYHE6Bz6qp7saalRWXbxB/oE+wqX5PTZ8jTQ9DmAOmBHeNoz2yfTnC8A4vg
- wmqphxXHObnnPNCv2m0k/LZVQxfioxeHr2n9mvrRHP+gJXIZXBDDsE9wPP6EDJ+gCACw
- RkoA==
+ bh=igfhmktc4O9/el7E3iil/mb7fCZm4IRQ4EpV0X3Eshw=;
+ b=hOMjeXAulN3rd+1eS5eF2J8JlzlXPZALCBcqdrNP3HAeZ2/SQVvrKtlLZ7ARGI95vG
+ fsbyZum8ZKBU/xiYbhvAzjdy4wUlmEU4vgyagWTyHbCBBMwNCQZmhLcKdgScKuBVKIjQ
+ ZaKBjGj4yce9Pmhu9QlcUW79rdDO9SdNdLCrIDcqC0230CdUqwt4zGERRElqPv7rH+FA
+ vNqSAQzx7QN1bwdV9AuNfb8J8x3Tbr+m2cEpiNK92AsgSRpoflGKG2U2ub0QF0ufj86F
+ ucrwr6ln5zoC+Flgk8I5oJT5dI69kA2e85rS66NheiKk0Z9NSjjplOj3Lz715cD7F/LL
+ 0hWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744269450; x=1744874250;
+ d=1e100.net; s=20230601; t=1744269522; x=1744874322;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vj4dRFeIPg69IJI563j/AOt0mSXQ1SnlTmdMvO+wPSM=;
- b=OlyKDiA6GxoJafzmeS0xKiciyH1nogG6kYBj028ezPq8ipq8opGpKnDCGpbrBExJKh
- 0hjuQ2zHxbgRczouFoKsGqGCBTGBYl/ocu+Ox5SY2OtNMYGCI3vltAkFvvMXS5XGCknO
- DUOG54ktsUGbk+dw0PHztumTk4/hWFfe3ko53Al+RZnRsQM5ZZdCglsrii7oHwnNIFpo
- VW3/MrdbTNGChus2OKmXgDungkqMKFkgn6UAO5uJER4POegHx7mTMeO0grRSu6OcdPii
- I4N0P8l6x6z/Vv67WIoQQN9nfjfDmeCjEmyZ9Y0cJMPNdIY3RDQ5ygGRbOZmEv2rkDdr
- tBjw==
+ bh=igfhmktc4O9/el7E3iil/mb7fCZm4IRQ4EpV0X3Eshw=;
+ b=FHCuLJrsczwB+8iRKcUS4WFNKuTxm7qBhaBU/UNYbilqWIXP9QuAbpkCFyegd38+0N
+ XWTulJ0Wd9ZK3XgieOLjqXWS0yMNnKLuWsJirez4dsHYfO3MdMt0yU/WnGBGDVeTxjm3
+ 3HWPAtSB2MByAXQaPaH63kDwSuigY8+e3WsH7Gko7q+MxNwQivDSJQXkWPJgn0442j8g
+ 3B4UiW4EFRiN+2ppC/ImOhozrP0mLLPGf8/NPTXqhsrkxdVlP2M73unPS6m+/inYfbpH
+ NAALkeexgh2A68yg6L9bj+RafxrA1/bHw6pxuAStQqoCcVQmpGr4YhFoWMmn/94UW1WG
+ srjQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXiyTn4Zmyv5UFgJzxwY8xyC77fi7yAKw/yybBLNW1Fh9e6vIRr9V+Eo3wSuGfkZT5iYEYPprA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWRR7Aik4zyKyg21teo0EOQX6dBT051OxkB+D9ZD89UW77rRtw
- axVnbs9q1ngQsFUAslF19eOPwWoj059ZnmA/SWH+zoIgORqbgG6l
-X-Gm-Gg: ASbGncsgE2YGvmiUawwy42yAXfnYDu/bd4g10idGtHszn9XOjEYjJAm+np/8EFE5jCx
- Tk5ixANXop+BmNxfcYV/ahXSh8dTNhTeJQTtyhs2sF3IPUv45YPYhycRvK5NOMB7czlz8QjlXB7
- OKhNeGpYj+XeLywhGamsWIiLH/kgRtRa1wLN3P18q8AFmjffUNNNRlRqRipkxBAxAS6cMsjqlwQ
- b8gNwv/mhsDjBrA0iUxTqDWP+POEnhsqV4GUoo0lTh0r4rpZvZFbr5uWexziOymiDd4FnPER8/u
- PcS5kVvqbDx8K1aCgCIWfON6sjliZ/uHVuiWlqTOC+rw07jiYMDoK6XJedinTeJQ06L0DFpbekY
- es8XqzAldIq1uba8q
-X-Google-Smtp-Source: AGHT+IFJZFrovX0zOi8eNh8UCyt+flT0nIpcr3x+ML9B9tU0pU/GcNFYha0+y0JFspALUbRQw8rnsA==
-X-Received: by 2002:a5d:5846:0:b0:391:29f:4f87 with SMTP id
- ffacd0b85a97d-39d8fda76d9mr862373f8f.49.1744269450220; 
- Thu, 10 Apr 2025 00:17:30 -0700 (PDT)
+ AJvYcCVBZogCNm1RwAxuyguTzolW7Tw5bBcmIunz+AhGLUS5cw6kPukKqLAfqsGvp2qWO12KYoSP9Ac=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGxHN2AnbKSMXH2ja98WXRwqHRsV0jE+e/e2wGiqPlvxvC90Oe
+ YYnq59A89jq7icURYooUZ9+Wj8bp7CpB44KEL4iSqsceThjn583f
+X-Gm-Gg: ASbGncvAx7IdmNl1FUu4fhNIWVdz9AgGGaa/nkTnETPATYt1GCx8xpL5pIflXtfJHK3
+ 6UAqTxqPUczMo2rB7tUYYLDaMY8EtLFRm39tS3ZSgyUha4za2FsbV8iQr2zeD7Gq+jS2nQazrmp
+ yc3PncaQhGnQ57pOeXtK9aYG+gar3TKopOaTMsZXW78qfH3bwJQwDlNyv++xQmC6ppUvcraiVCe
+ kuPQwJXkmV/+8Iw6eWN8+wWIDIIEYgsVxHSK2aSpimLBfZxDT9C2FlSDNIES6nxDhkN2XXV0h5u
+ pvUA6KQyU1V7/ClSjgB7R+FW/D0r3xT1+7NY9RTjtws1hnrgSaSmTnMXqrvYY3CWYVUgdtZRUbp
+ Vu24smc+68ssK9JAX
+X-Google-Smtp-Source: AGHT+IFfzqNNpQgZzMhSOTBS34F+vVbgXHCLS/Ubmc6J9sN5ZyRsu19rqv4vwg9unKbVYDbMBD/dTw==
+X-Received: by 2002:a05:600c:3b97:b0:43c:fc00:f94f with SMTP id
+ 5b1f17b1804b1-43f2d95ebf4mr14397185e9.23.1744269522160; 
+ Thu, 10 Apr 2025 00:18:42 -0700 (PDT)
 Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
  [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d893611fbsm3828556f8f.20.2025.04.10.00.17.27
+ 5b1f17b1804b1-43f20901c58sm28873065e9.0.2025.04.10.00.18.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 00:17:29 -0700 (PDT)
+ Thu, 10 Apr 2025 00:18:41 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>
@@ -92,12 +92,13 @@ Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
  Jonas Smedegaard <dr@jones.dk>, Jaehoon Chung <jh80.chung@samsung.com>,
  Heiko Schocher <hs@denx.de>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 5/8] gpio: axp: Remove virtual VBUS enable GPIO
-Date: Thu, 10 Apr 2025 09:17:26 +0200
-Message-ID: <10637391.nUPlyArG6x@jernej-laptop>
-In-Reply-To: <20250409002036.12212-6-andre.przywara@arm.com>
+Subject: Re: [PATCH v2 6/8] phy: sun4i-usb: Determine VBUS detection pin from
+ devicetree
+Date: Thu, 10 Apr 2025 09:18:40 +0200
+Message-ID: <1997333.PYKUYFuaPT@jernej-laptop>
+In-Reply-To: <20250409002036.12212-7-andre.przywara@arm.com>
 References: <20250409002036.12212-1-andre.przywara@arm.com>
- <20250409002036.12212-6-andre.przywara@arm.com>
+ <20250409002036.12212-7-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -117,15 +118,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sreda, 9. april 2025 ob 02:20:33 Srednjeevropski poletni =C4=8Das je An=
+Dne sreda, 9. april 2025 ob 02:20:34 Srednjeevropski poletni =C4=8Das je An=
 dre Przywara napisal(a):
-> From: Samuel Holland <samuel@sholland.org>
+> So far Allwinner boards controlled the USB VBUS detection via the
+> respective GPIO pin specified in Kconfig, as a string. All boards should
+> have the same GPIO already specified in the devicetree, in the
+> usb0_vbus_det-gpios property.
 >=20
-> Now that this functionality is modeled using the device tree and
-> regulator uclass, the named GPIO is not referenced anywhere. Remove
-> it, along with the rest of the support for AXP virtual GPIOs.
+> Convert the usage of the Kconfig configured GPIO over to query that
+> information from the devicetree, then use the existing DM GPIO
+> infrastructure to request the GPIO.
+> Only PHY0 supports USB-OTG, so limit the GPIO request to that PHY, to
+> avoid claiming it multiple times.
 >=20
-> Signed-off-by: Samuel Holland <samuel@sholland.org>
+> This removes the need to name that GPIO in the defconfig file.
+>=20
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
 Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
