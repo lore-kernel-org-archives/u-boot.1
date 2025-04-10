@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85EBC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC72FC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:12:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24A2F839A1;
-	Thu, 10 Apr 2025 09:11:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D75E839A8;
+	Thu, 10 Apr 2025 09:12:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fTzOVuSL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a2M/baJ3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE0DF839A5; Thu, 10 Apr 2025 09:11:16 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id D80D2839A9; Thu, 10 Apr 2025 09:12:13 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0617C8394F
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:11:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0F2D8394F
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:12:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-39c1efc457bso187962f8f.2
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:11:14 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso5389675e9.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:12:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744269073; x=1744873873; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1744269131; x=1744873931; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gm40axamLUXAYbK4VgJ5ujHVXyS2R37tibfMnUuA7+0=;
- b=fTzOVuSLRKwQ0qhHKruuxPKr7G1ZvmgSxZgb16o01bvMwqjaQbtmvuKwDjqKNcxh1e
- dmT2aF+o4NxJBvBRrP1hZqKu65qmeDaKD7J3v3zoPmbYj61AussePYcXFLJJJo9eXXU5
- UjIPuPSRaDrpjcHDwbI+HAqa2ZlhnUafczey1GN+kWjb0/31nvES9h1h0awjmIDtidxs
- JoS2KuvsxESaooNZ2lq69ACs4mb29+zBr3qW1PNbf/69ASc1o7aJOz2XDxcJ03ViU9Po
- cX7LVrmqUOW5Fno8sM41Whold0GOXzlklS00arbzryiY6ymhG80tXlL2L/5KAYbvKHFH
- w3kQ==
+ bh=Clts/wYS0ZRWVezUHusTmN2QW1kP2sDx1vh3amQGmYI=;
+ b=a2M/baJ3L5tmZJwza8Y8Ool9JIyw1rI/mufnNN6r5KSavkJAuWH3uxphs/pU4lL5/A
+ fHBVDGvJ6JrcKsEuUtAW4p7fvFwCaI3wjebuI9CybWzty5r31sxTIN96FJ3MWpbRZuv4
+ lkUyYLplQGZZGf87TBYfhdn/x/7HAhxLMvQdZGYYP84CLMTbFC5NED5ZPOkhKXRrfAvE
+ p0YumQQIWxxQHcJQQ9e84ylTby7AVHSKxmnWN0gfZcS8PZVMNDPG0swoTtXgjn+rglWZ
+ ZcohZu7DVD17VaTS4+PkvXS5glo+imTW6TVYJteQ2WW+yU3F6deddFGE2y/U+iSa2flg
+ G3Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744269073; x=1744873873;
+ d=1e100.net; s=20230601; t=1744269131; x=1744873931;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gm40axamLUXAYbK4VgJ5ujHVXyS2R37tibfMnUuA7+0=;
- b=d3hrdgiwdjnx0ZHpHTZdF+kBILLbhJOKKNK3o+HkuSwRSrVum1pavT3WhCVssVXJIh
- TCCbGgpZDCG5Yx9g8iY3yB/RT7KdUfpMCu/Z0eQ2PHw6HDTYEKbd0XJ460fLYLIMRVS3
- 9mmaMQnihlGlLy8ERoj/VZvmpzZ7GOvikAIuL6QTe1jBrHOkdugCncoSNCx3oLH/AyvU
- gKKYuWoynUfjc4uVzAEA4fnGWo7bovjzKBzAQvtpNQ5s+qZNSfeUUEh+MpV8sTlTQfty
- l4b9jXedI3CztIckTwSMPqE/ve57TS/2uth8n2K4lbAZOwaff6JOQ0DN2GbKeSIj/cZ2
- Pe0A==
+ bh=Clts/wYS0ZRWVezUHusTmN2QW1kP2sDx1vh3amQGmYI=;
+ b=QeIkDfWaK6XfyaUTCcKPzQb/btuvk7AlgxafD8SvprrWQMWN4CbsbHzcFmggU7MUbw
+ ZL4m2g4BfPKOlwY4nzfy70VAWPApjCSwMvFfe8cIMdRkb4XU28J2yefokDeg0hC3DxWi
+ NzBwmo9dx6R2/Mhw2F1esXv44XUBR5ieqjpdR82umKyfeKEH1Rd8KGOM5j6FPvI3ZDGy
+ 7UnQiZr83YeGdb2D4R+rm0cMG0HLUL30qplMyVcDf/tdBykBprZes7TWhzdrN1hgWpKr
+ YZdokJnxxOQK++yIqjdFywxuxAIiAlsHsFAseuZB/jaHlZ2brdquXaD2qMj56C5PvAlg
+ F0aw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWjr4C+N7vtKTCu32PXdFd6CQTt585yyF6dbGkh4jPhswLlg5ZuB+b4/kZTYgGJrdeHUJV3J8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0HCIRDJr+bM4/zoUB8jZA5kh1cSJO57EAPc9o3HY0IVrk8bjy
- favu+sYPM6II+3qr370BgBbXtzlIbS+Y8NSxwREghFYqTCpGxJr0
-X-Gm-Gg: ASbGncvLmt0qEoIGTakrn+XGnOUzDSiQX69uhpBahr687j6MSSGEZvTrjtgrYEnN76D
- I8pGxCBkZjfCErK+dL8f3nbLq4wuvLoqhpEuttyJD7s6yCP/L2ov2xB4Om1YjFFcCuFko5mbdVP
- cIo87H1EeAbeEzZygbf6ycGHrp0cgQFekaDbob3g0e9/bqHwdO2mmblRpu9joTqnKE6a3tQNO/x
- wWeexg32P/kccyNfBOcbCtJnvesR6AjfAavfxk2whTM/UDxa+vORfRE5z55+muBAw/ZWoG2pK+B
- SAmEONFnpuqq3tIaaa9gGtDJILU5EvasBicsEsSK2qStKUYK2Q19oxNWP2SlS0JbMuPbTsNF7ng
- ZHO2C1kGvGGwq/A+7TCriWKcd+/U=
-X-Google-Smtp-Source: AGHT+IHrN6rHPw+GJiETlW6P3yjUvx/uHLNEZzXOmGW7XWou72sPe9TxazQFSE/xBl1lgbKeF+AbCA==
-X-Received: by 2002:a05:6000:1ac5:b0:39c:1f19:f0c3 with SMTP id
- ffacd0b85a97d-39d8f4e2467mr1081126f8f.46.1744269073137; 
- Thu, 10 Apr 2025 00:11:13 -0700 (PDT)
+ AJvYcCVrfKbseQHaaCmF9TDm/A9t8J59DevstHV/FrNBfAcX9K0ZpaWkatuW1ljHqqJK59s9l2K8SDw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTk3S43t1VnX7GukOB7ubR5TojmIAe6N5jZ6WGFTFMVItm4p5L
+ r6FRtVo6Dp9Je/4KpCVhZ3lgoxhbUyxe2xLrEtPoDTgxaBX9eyCx
+X-Gm-Gg: ASbGncvxdyyV3bMdLP/nQXVkIC9bSWArANbkHQRSCAtn+ODuFhwSsqfRA5ZzldUY0GO
+ DU/lpFA9IyFsjzPAjFicWmLfHOZxJ+zjLhnSN/ZT7VmA6SENlBUJP8UvMhYnKFejH+aIsElmFV5
+ bTMKZ51iLYZlxd/UnSjNvyrpE88EK+F0C8/Q0PPYvWngKpTV8Wh53wksqYlY6Mb2M3lQ3XeAE7c
+ MhQycmfmLQ06nhYuEykI7FLCsp1lqfNrDI9+hfHzJsgY1YuHaGheM+aFlfz9d2u6ZLsytxE46RA
+ LgYsn35SBKU5uxRHTfqfH7UHccaJyqRP56qSYIhNgLZ1Ta/s2QdKg93ce5O75IWWlKMcg79rtpW
+ 0v9PBgYbc/mLDPIFc
+X-Google-Smtp-Source: AGHT+IHEX9C9BG244eF2d9mgLMuGw0QUZWfe3dHedU1PfZIWjGiY7BHoncQgqzNfC1LnCJ7AMUfL4Q==
+X-Received: by 2002:a05:600c:458b:b0:43c:fad6:fa5a with SMTP id
+ 5b1f17b1804b1-43f2ff9bfb0mr8081525e9.24.1744269131156; 
+ Thu, 10 Apr 2025 00:12:11 -0700 (PDT)
 Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
  [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d893f0cebsm3863059f8f.61.2025.04.10.00.11.11
+ 5b1f17b1804b1-43f207c8fb4sm44426355e9.35.2025.04.10.00.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 00:11:12 -0700 (PDT)
+ Thu, 10 Apr 2025 00:12:10 -0700 (PDT)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>
@@ -92,13 +92,13 @@ Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
  Jonas Smedegaard <dr@jones.dk>, Jaehoon Chung <jh80.chung@samsung.com>,
  Heiko Schocher <hs@denx.de>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 3/8] phy: sun4i-usb: Control supplies via the regulator
- uclass
-Date: Thu, 10 Apr 2025 09:11:11 +0200
-Message-ID: <2983258.e9J7NaK4W3@jernej-laptop>
-In-Reply-To: <20250409002036.12212-4-andre.przywara@arm.com>
+Subject: Re: [PATCH v2 4/8] sunxi: Remove obsolete USBx_VBUS_PIN Kconfig
+ symbols
+Date: Thu, 10 Apr 2025 09:12:07 +0200
+Message-ID: <3349527.44csPzL39Z@jernej-laptop>
+In-Reply-To: <20250409002036.12212-5-andre.przywara@arm.com>
 References: <20250409002036.12212-1-andre.przywara@arm.com>
- <20250409002036.12212-4-andre.przywara@arm.com>
+ <20250409002036.12212-5-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -118,57 +118,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sreda, 9. april 2025 ob 02:20:31 Srednjeevropski poletni =C4=8Das je An=
+Dne sreda, 9. april 2025 ob 02:20:32 Srednjeevropski poletni =C4=8Das je An=
 dre Przywara napisal(a):
 > From: Samuel Holland <samuel@sholland.org>
 >=20
-> The device tree binding for the PHY provides VBUS supplies as regulator
-> references. Now that all boards have the appropriate regulator uclass
-> drivers enabled, the PHY driver can switch to using them. This replaces
-> direct GPIO usage, which in some cases needed a special DM-incompatible
-> "virtual" GPIO from the PMIC.
->=20
-> The following boards provided a value for CONFIG_USB0_VBUS_PIN, but are
-> missing the "usb0_vbus-supply" property in their device tree. None of
-> them have the MUSB controller enabled in host or OTG mode, so they
-> should see no impact:
->  - Ainol_AW1_defconfig / sun7i-a20-ainol-aw1
->  - Ampe_A76_defconfig / sun5i-a13-ampe-a76
->  - CHIP_pro_defconfig / sun5i-gr8-chip-pro
->  - Cubieboard4_defconfig / sun9i-a80-cubieboard4
->  - Merrii_A80_Optimus_defconfig / sun9i-a80-optimus
->  - Sunchip_CX-A99_defconfig / sun9i-a80-cx-a99
->  - Yones_Toptech_BD1078_defconfig / sun7i-a20-yones-toptech-bd1078
->  - Yones_Toptech_BS1078_V2_defconfig /
->    sun6i-a31s-yones-toptech-bs1078-v2
->  - iNet_3F_defconfig / sun4i-a10-inet-3f
->  - iNet_3W_defconfig / sun4i-a10-inet-3w
->  - iNet_86VS_defconfig / sun5i-a13-inet-86vs
->  - iNet_D978_rev2_defconfig / sun8i-a33-inet-d978-rev2
->  - icnova-a20-swac_defconfig / sun7i-a20-icnova-swac
->  - sun8i_a23_evb_defconfig / sun8i-a23-evb
->=20
-> Similarly, the following boards set CONFIG_USB1_VBUS_PIN, but do not
-> have "usb1_vbus-supply" in their device tree. Neither of them have USB
-> enabled at all, so again there should be no impact:
->  - Cubieboard4_defconfig / sun9i-a80-cubieboard4 (also for USB3)
->  - sun8i_a23_evb_defconfig / sun8i-a23-evb
->=20
-> The following boards use a different pin for USB1 VBUS between their
-> defconfig and their device tree. Depending on which is correct, they
-> may be broken:
->  - Linksprite_pcDuino3_Nano_defconfig (PH11) /
->    sun7i-a20-pcduino3-nano (PD2)
->  - icnova-a20-swac_defconfig (PG10) / sun7i-a20-icnova-swac (PH6)
->=20
-> Finally, this board has conflicting pins given for its USB2 VBUS:
->  - Lamobo_R1_defconfig (PH3) / sun7i-a20-lamobo-r1 (PH12)
+> Now that the USB PHY driver uses the device tree to get VBUS supply
+> regulators, these Kconfig symbols are unused. Remove them.
 >=20
 > Signed-off-by: Samuel Holland <samuel@sholland.org>
-> [Andre: use regulator_set_enable_if_allowed()]
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
 Best regards,
 Jernej
