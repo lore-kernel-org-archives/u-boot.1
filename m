@@ -4,148 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ACFCC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 11:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32C4C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 11:27:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5686083B95;
-	Thu, 10 Apr 2025 13:20:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B7EC839FA;
+	Thu, 10 Apr 2025 13:27:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="vYij0IV4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VVhkJ8qo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A01683B96; Thu, 10 Apr 2025 13:20:42 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D065383A5C; Thu, 10 Apr 2025 13:27:39 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4438983B8F
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:20:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97343839B9
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:27:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O9aJ/QvwXZyaP0oLEVguaPwyy9sCxAsVjIp9qq9Rjo33E/mBYFNvHYBUSLkLhW2Puc40krzciG4SHtRjlNZVfcohex4uChzrYqpsLh55C1lvVIvlfuJKXfJCO/DOzWf4/F5qQr2fQewh7tx2spYnhQogB/0ponvbwnBj1XmYxL1zSkaSsJLWPs8Di692nWKbtUFpYAd71hMSBdag6tejNV43d+2+z0lCg1KhMHBnlmbqCm6cNLfDEfUlbWk6deXBCZVdppuRVb9MaOBgXACLjanOjUoPwkEK8N8SiT4XmFaO5JV7aJOcDTeNnWXZ/3n8oT6RCRasnTytV2eh3TkeaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lkPWJwOqXFXMdfVjnkQ5WXy9pXoE5+BAKNzvsBjJPXA=;
- b=hccp9QH177D7hcrje+MAyjX25mFF2QHPiDwP66wUhxhyuOLs8W/O0RVD6LAkDMVCQEHLSRy+7uEwZsD0noWG3kB/o+IAnCugZ+j7VFznoVV2JfPbWP2mCLb7FqYqv6Yaag8b8WiwlE5d/HZtfk6dzdpXm61h0E3U4dEt4SLeDtuawwfOmJXa26Zdv74ft9rChrOJOjEcry43wwZYJn73492J/JnOfZDZusga9isO/uaWXj/Jxznu3NDH0vw+mM8gCUyOB5Bcnx4ZwdvbGKyO5f4JTXgnSs5Q1e2DARgKVEXNy57d3st9f196Cvawlpa+eNy4AFlKA7yUn9iulXS8Yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lkPWJwOqXFXMdfVjnkQ5WXy9pXoE5+BAKNzvsBjJPXA=;
- b=vYij0IV4wMTc3H+AAQ40BGMOpVNdcvSTyu2Ugaox1PtXwhjqT0qu2CzwtEvUMKVpntpDdVvfMEQuShviISsfk7CTqbvpW861KOkJCzRSI/A4PqJmdDydaMUrakswnrLLC3+QhNmqgCVSqS5Pl3kts87EuS6OcZbQy3zrLwz5jmq3T/i4I5bqfRSJ2aHPn1dApohBgJthsnohX3TxywGBblGmbaKglXbmoGAo+zr28RCUTj9nZD7eaPNmh+fKDTJ+wwLV8obbA7PMcMjOwX1Y14zaKm5/KWWEYEs4QH0Z/dh6crOKSKm2Kp5gxgbS1fHYOpsSjLgwCAAQaV5vPjJOYg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VE1PR04MB7326.eurprd04.prod.outlook.com (2603:10a6:800:1b0::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Thu, 10 Apr
- 2025 11:20:16 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8606.033; Thu, 10 Apr 2025
- 11:20:16 +0000
-Date: Thu, 10 Apr 2025 20:28:44 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
- Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH] mmc: sdhci: Fix possible Synchronous Abort using PIO mode
-Message-ID: <20250410122844.GA311@nxa18884-linux>
-References: <20250123214850.3085559-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250123214850.3085559-1-jonas@kwiboo.se>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SI2PR01CA0053.apcprd01.prod.exchangelabs.com
- (2603:1096:4:193::7) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5ed1ac116e3so1103492a12.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 04:27:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1744284457; x=1744889257; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FCGKrRsqSeuEsRDg8xcGHjg7nIKM2xgTI4v5WP0VL7E=;
+ b=VVhkJ8qokawL0dturCspV3pLgpnqAJt/l4AkVD5SJE4g8XtgGGCyPg++Ma5v8cOVFm
+ Y4YA/ibmvwERZN4XC1jtpc18Es5v4m4Tbld+gdEl85w3yq20kZ0TB9uVi4bDdoLRQCOM
+ oN0G1nuOoPwFc2M0J96Y+tZOKBhyoWWLz1jTU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744284457; x=1744889257;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FCGKrRsqSeuEsRDg8xcGHjg7nIKM2xgTI4v5WP0VL7E=;
+ b=l5Y9l9pQn71/u3b+lO4qKzZQXlmzigPMpiExdpqJG4gk74xFzAYrj+t0ztvyFKJDiG
+ 2LJxe8RrSFOFutmSZS25YA36jGpZTgdLdOhCFbU6H3+HGdZMM4o44U7xTZ4zMfX/4YIC
+ xWVsSHE3KoB32nK+iQM71oyyQJbEFDuGxIB6FmBxq9DbLVXkG0d3XWYGj3xhD+QrnZnv
+ ab6MhjeqaEEi9iI6Jyvh8EhYUiirsPQxdINcBocezBPPpq/47S6DktiRE9rGk+n7Nr3K
+ euNQp0WkcT9AjpfxjA6QDpC4H5+Yyv+tWI1fKhiaXpCqb3JqyETUXYYGibOAyzW+BuL4
+ BnIw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUw9OgBNcNsf7N0JDHae742QbWCIOz8BdJ/yhPChoCYyAHKG6nprTlkoV4vYObR1bbvTAAAZ4Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YxiAk0wLUZyH3ZuHBIoo7rJ2mMAxvZblGahd1/u1mGso+IPyXhi
+ A/h70Eh6F4/8wQazAEwGIAlxvkrh6RgDayaTgy9tTc0r/fY7K1DHC/TSktl+7d176hiDmSmKsUs
+ VZ3ahtvTSSDK3DxhkqJyFQReHqQ1yxtJkt/54
+X-Gm-Gg: ASbGncsxXr3eYL315VI+JZR8V2HBmaZdteJQ+rqZphjk5OLC48qo+sprAjh9V5MGYSx
+ B4hXslS+xptoEUzc9qw3oF96OF7LtcTmRjYe9jdesg7G575P5Hjb3S14te/hQb1ZkyjjseKBGNP
+ d+S7AfFAV5cjNusA59C1nYdmYIkRnjNRRXIw==
+X-Google-Smtp-Source: AGHT+IFMlNeRa/DeKUNG0phLp1bBpbjVxuPnf8JaIzbmYt+DKtQs7ozoXqlwKPp1S+9SgRWO6A3z7tW2dX3OUehGUYk=
+X-Received: by 2002:a17:907:3f28:b0:ac7:ecfc:e5fa with SMTP id
+ a640c23a62f3a-acabd4db30cmr215187166b.54.1744284456818; Thu, 10 Apr 2025
+ 04:27:36 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VE1PR04MB7326:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3def568f-8250-47bd-973e-08dd7821ab57
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|52116014|38350700014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?muS1S7EPfiCBdtrifAJYvfH9tyF3G6SXJlt4AVvEEYcNXVfqhEKvbTQypJl7?=
- =?us-ascii?Q?2MJXHDGsfbMGJVbXBzO7DydZIr4t02P1MJAyX4f0Tvbw7+tnGbiMOD9lziZZ?=
- =?us-ascii?Q?Kn2dX60xDRt2P8ZnnFurhQQMl36eyUVvkmjnOvCZzk8Hvfz08OGpOZPogRVm?=
- =?us-ascii?Q?xz4b6racpregA859h2TwPpxNOleqHYqsks1eeyJLMsgZOhXJN0jYo3KWrPyg?=
- =?us-ascii?Q?pKw32wodWdZdb9WCcWukCk+IY3KNgatYlMNsUiaLAa8J/dmxmgoD//6rKAA1?=
- =?us-ascii?Q?girkGY4IQyYeDqLk1VXFPNNkztfFw8x8CNzrXFNjXKoOhz2fTt+C79Gba1cZ?=
- =?us-ascii?Q?I8ttOWgJPK0FWH6BSbMZzMtQHX7WKfqfA80/ai+VpT4KtQGN9Q3nj6wpXU9T?=
- =?us-ascii?Q?t1jmR13sQduPtXWtVsWEoNPq8je2nDlr4T7NYLu4wQjev79giP5kQnKyVhM8?=
- =?us-ascii?Q?+JXoXfHuKzJiWMtz4kcBG+UE4A6Ur9g27dXaYS/WMVtUZni94JSAC/xQkIO/?=
- =?us-ascii?Q?uYEvhEEpax91PncpczR7lifLPiISIjsp8CFwHithwRe37OESpA4ocN4hihnZ?=
- =?us-ascii?Q?gUzQumPGIO7nfV5t2wJGcHSOI3C5NI+wK0b2JM/1zML9pKXHt+l4duQh3yRv?=
- =?us-ascii?Q?P6WSwDIu2p6p1pGkMnYuezvaRikbavwHynPERD7gfZ8tghyLf5LKvfN/AiRZ?=
- =?us-ascii?Q?3L+4lRMK16iTw23kFfRDDNvUQS06UiR/a62rGR+m+3GLoMy8vqYvA8Oj6uZl?=
- =?us-ascii?Q?2/6slXcoX3DiAea9afFyki51fQFGeBSL5ZXCUzUfqxgxyWvK64Lxx04qfwCw?=
- =?us-ascii?Q?36f9JQ6Y95lxFoAkxMI6Nhm2Cj5qVIkOHIzr1w/RKElWqld1r+k6nPdAXnvt?=
- =?us-ascii?Q?RbViu5r+fSfcIZwSw6eA5E9T+JNdtIoHaZ2e1sxsAmM0cgHa01pboA/AvOBz?=
- =?us-ascii?Q?HLmPIVs0xGWXvvCcAxmoCFKJ2FdyIPUJvETuYjSjVwW9rmEMVx8z0xLLVhb2?=
- =?us-ascii?Q?R2TYP1BAm9Uiighz9iZTV+nwXo35jLzmfD/ae2chxiJ+F+yyIcTePOpInbFU?=
- =?us-ascii?Q?fjQdjcuomMDZHzXb2BQ9ZzAp/Arhgtexg7RY6wxYHBAW5Gv24XcX28MEEuIS?=
- =?us-ascii?Q?Qp91JXNPYtp+7TAFeQsRR9mXs0lyzoKSzO7XM+VtAQBzIeao7lq79KqJQUbd?=
- =?us-ascii?Q?2o7DeV1AGMMegVPXmpaHXagwL3lKO0V/YYHXkcNlUDM21nxNbX4B3Whwa4py?=
- =?us-ascii?Q?gxDeMbXIOPMGgGWQTZi6D10DSYdgQ68GvEpcxlo4uT4s1MDjwVeg5lZ/sXsX?=
- =?us-ascii?Q?OquMvlTWHYQ6EIO5S3KB7Ex7NmlL0uWEXu9i2Q01NLAEhizwsOXTNIj2He/y?=
- =?us-ascii?Q?P469441T4jZXgvsdQPuJJkTgCQoxPmeraDBnQpcxdEK1e6XKrdEIhTLrmeY7?=
- =?us-ascii?Q?Ydy9hYrLOYsL2a9rVitgvteLU4sQ36hHVDi2is7fY414D7Fsb+OQXg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(52116014)(38350700014)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+Vn2TwJ3eOPGX1FJn9ih1IkkXHhao1pY9XJMzIK86+E87VjaNysqPN1CqEqe?=
- =?us-ascii?Q?CCH+3SJztLo4kszHkZsUplQANt7qUbs2LWTX5eDruB1xyGEI8v2Ff4ZYiOHs?=
- =?us-ascii?Q?dDt8+VWBiWtbUi2uUYleXyPmQ48eFnrDxHFHp+ereRz60vgskB2PgDCLhEb1?=
- =?us-ascii?Q?G5HapS9rSPA7/+ZKiP+Gm3F+SuTLa0pobZgTRrxHneOZorXHo7tunBQXk/yK?=
- =?us-ascii?Q?UAQ0Hy6hXemrAYVcmoFGzFs06GCH8bn4Yi+WhYWuncn8FBtw5WlLvvLKx+m/?=
- =?us-ascii?Q?1EY75At8cWm6TrkB4UjeGA1XqUnVJZZWzuOMPtPF4H+Gaoy+HmQPqHbUd3Om?=
- =?us-ascii?Q?a7Y/RgLCjmStQKi8aRA/giKgnLAAcGSiHuHbe5XEJ/tNOzLdElg18+URKDNC?=
- =?us-ascii?Q?w1r4HIFUTIC4Sq6qXNJA9RASvj8i/WqSl2tabJ8vA3SO6pstT0Mpc7agAjjJ?=
- =?us-ascii?Q?iYLp4jI1+Lr69dq+sVOwjEsYz4SUJtDcDx3oNrSuvkxXn8QFwrH0WeigVcYj?=
- =?us-ascii?Q?2KM4e6+UTuBfvZw7gZPbQF6Hidq2cDjhrtPQv/s1CzL/SrKDmqvwQOIx6l5j?=
- =?us-ascii?Q?yVNDQyzC2WYamjuFfSHb8iSJbVqGqsXRkNiVGZu4dZpGSi9kP0NumGfR+ejf?=
- =?us-ascii?Q?FK1ecOdwjz7V/hhZJBfYWyDIb2XB2+/uIkN4D/1WFWSZfLhLFhHe5Pq6FzgS?=
- =?us-ascii?Q?C13RnAM92Q2HPjS8Vh4Olp2BblHaD7MxaqU55PQVPw82XuSL+DtQyZbsTTiy?=
- =?us-ascii?Q?ODbUgBU2AAByJwHUAqa+sDQ8Ewe54pm4be91reg3uYb5/I0UUIHhtOD/v/bC?=
- =?us-ascii?Q?PtdsTylyKinECyhuYek8h8gMhTZ+m4BE2HSXZzA/gQTRpt8UgkHosDwpojJn?=
- =?us-ascii?Q?6mrxVK29hCM8ZxTahUJLcE3RM70Y54yYEraa62RDnjKtClfm4W2eQCXv7o5Z?=
- =?us-ascii?Q?FB6Zswua3V8TVy4znZNRal0afw+ue7+c9oiRTD8uM5OLC/EQIttoc07Sk82W?=
- =?us-ascii?Q?PpEvC/BKIuRf/TYCHGxIID33B8L/HGHhid9p21b1WznixXz1w/Ufc5IEr4wh?=
- =?us-ascii?Q?yUzosAbE7vgE2YCjEY+KHtqFlBm1bDd25RQ92lx8cTCD11+/me39G4t+7Ul3?=
- =?us-ascii?Q?PKC4KDjaL+320tlzDFYAnAhYo7QqrZRs5ycgm9GcrOSP313x93gYMSVX7Mlv?=
- =?us-ascii?Q?q4z+dmXl8RAM3+KuUH+Ydke5e/uA/DofAFC45/jB/qxt9jj5niTeC30U/GCL?=
- =?us-ascii?Q?euW2x3dMwrbwXgjrIB1wF8qwQBdidvju/8gMUBYY2oJXhV6UAVAKfXp8uudR?=
- =?us-ascii?Q?wzGsAojEErS6n79+XcXwYpVHLAqk04hNPhqQyoqxQ9+L2h/j6ZWgmcFY9L4w?=
- =?us-ascii?Q?XfUqDw9eKVC//zMPILNcPn3PKavpIEXWRg9lczXm+5P7Kg1acZDMiX+Tzy8z?=
- =?us-ascii?Q?ZdkC9aWZcDqm5ebgyJwGAQT7QioCepUr4di7Nk9aRmp3LkjEbqyMLZScQO6Q?=
- =?us-ascii?Q?RgDsZRCtLnB1Gr3iAun3g+pfFXZ5UHGgE6JbTWJiyvGSyXOnD4ZbwsnNUcpW?=
- =?us-ascii?Q?i8aY6xHWo6/TaGdaKOIN8bPYemxE0YKO+vtk1Gks?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3def568f-8250-47bd-973e-08dd7821ab57
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 11:20:16.2704 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kx6ovYXUIZH6rAkaxwOhqrs7YsBc0z5MzzB8PDjEWU8aZF7+U46pVOTy99XMyen525E7CG/aWnyMJaygAmTejg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7326
+References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
+ <20250409-livetree-fixup-v1-1-76dfea80b07f@linaro.org>
+In-Reply-To: <20250409-livetree-fixup-v1-1-76dfea80b07f@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 10 Apr 2025 05:27:23 -0600
+X-Gm-Features: ATxdqUG9r1l40pr2E6JkOytSfFpEcKP0ve9R7kvxcg_Oza-a_oQOwEaqbSVR4ZU
+Message-ID: <CAFLszTjLGv0a3W=hPW+pexa1ASaSrrKAcbRoo5cF_LChj-bizA@mail.gmail.com>
+Subject: Re: [PATCH 1/6] event: signal when livetree has been built
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,77 +91,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Caleb,
 
-On Thu, Jan 23, 2025 at 09:48:48PM +0000, Jonas Karlman wrote:
->When MMC_SDHCI_SDMA=y or MMC_SDHCI_ADMA=y and PIO mode is used
->dma_unmap_single() is called on an unmapped address, 0x0. This may
->result in a Synchronous Abort:
+On Wed, 9 Apr 2025 at 11:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
->  ## Checking hash(es) for Image atf-1 ... sha256+ OK
->  CMD_SEND:16
->                  ARG                      0x00000200
->                  MMC_RSP_R1,5,6,7         0x00000900
->  CMD_SEND:18
->                  ARG                      0x00004005
->  "Synchronous Abort" handler, esr 0x96000147
->  elr: 00000000400015bc lr : 0000000040012b4c
->  x 0: 0000000000008000 x 1: 0000000000092600
->  x 2: 0000000000000040 x 3: 000000000000003f
->  x 4: 0000000000000030 x 5: 0000000000000001
->  x 6: 0000000000000001 x 7: 0000000000000000
->  x 8: 000000000000000a x 9: 0000000000000090
->  x10: 0000000043dffc68 x11: 0000000043c00440
->  x12: 0000000043c00440 x13: ffffffffbfe00000
->  x14: 000000000000031c x15: 0000000240000000
->  x16: 000000004001145c x17: 0000000000000032
->  x18: 0000000043dffef0 x19: 0000000043c00000
->  x20: 0000000043dffbc8 x21: 0000000000000000
->  x22: 00000000000f3d95 x23: 0000000000000002
->  x24: 0000000000000493 x25: 0000000000092600
->  x26: 0000000000000001 x27: 0000000000000001
->  x28: 0000000000000008 x29: 0000000043dffab0
+> OF_LIVE offers a variety of benefits, one of them being that the live
+> tree can be modified without caring about the underlying FDT. This is
+> particularly valuable for working around U-Boot limitations like lacking
+> USB superspeed support on Qualcomm platforms, no runtime OTG, or
+> peripherals like the sdcard being broken (and displaying potentially
+> worrying error messages).
 >
->  Code: d2800082 9ac32042 d1000443 8a230000 (d5087620)
->  Resetting CPU ...
+> Add an event to signal when the live tree has been built so that we can
+> apply fixups to it directly before devices are bound.
 >
->  resetting ...
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  common/event.c  | 3 +++
+>  include/event.h | 9 +++++++++
+>  lib/of_live.c   | 3 +++
+>  3 files changed, 15 insertions(+)
 >
->Fix this by only dma_unmap_single() when DMA mode is used and
->sdhci_prepare_dma() has been called to map host->start_addr.
+> diff --git a/common/event.c b/common/event.c
+> index dda569d447851f559a83f98fb7b1f3543156eab5..8d7513eb10b61919e1e784481dfdcc076be14986 100644
+> --- a/common/event.c
+> +++ b/common/event.c
+> @@ -47,8 +47,11 @@ const char *const type_name[] = {
+>         "ft_fixup",
 >
->Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->---
-> drivers/mmc/sdhci.c | 6 ++++--
-> 1 file changed, 4 insertions(+), 2 deletions(-)
+>         /* main loop events */
+>         "main_loop",
+> +
+> +       /* livetree has been built */
+> +       "of_live_init",
+>  };
 >
->diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
->index 4833b5158c79..dc7f0724a7b6 100644
->--- a/drivers/mmc/sdhci.c
->+++ b/drivers/mmc/sdhci.c
->@@ -177,8 +177,10 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
-> 	} while (!(stat & SDHCI_INT_DATA_END));
-> 
-> #if (CONFIG_IS_ENABLED(MMC_SDHCI_SDMA) || CONFIG_IS_ENABLED(MMC_SDHCI_ADMA))
->-	dma_unmap_single(host->start_addr, data->blocks * data->blocksize,
->-			 mmc_get_dma_dir(data));
->+	if (host->flags & USE_DMA) {
->+		dma_unmap_single(host->start_addr, data->blocks * data->blocksize,
->+				 mmc_get_dma_dir(data));
->+	}
+>  _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+>  #endif
+> diff --git a/include/event.h b/include/event.h
+> index 75141a192a48b0931667632f41be8ff4d6139f7c..3fc673ba635ed45467aae8587705d37bef1c2a3f 100644
+> --- a/include/event.h
+> +++ b/include/event.h
+> @@ -152,8 +152,17 @@ enum event_t {
+>          * A non-zero return value causes the boot to fail.
+>          */
+>         EVT_MAIN_LOOP,
+>
+> +       /**
+> +        * @EVT_OF_LIVE_INIT:
+> +        * This event is triggered immediately after the live device tree has been
+> +        * built. This allows for machine specific fixups to be done to the live tree
+> +        * (like disabling known-unsupported devices) before DM init happens. This
+> +        * event is only available if OF_LIVE is enabled and is only used after relocation.
+> +        */
+> +       EVT_OF_LIVE_INIT,
+> +
+>         /**
+>          * @EVT_COUNT:
+>          * This constants holds the maximum event number + 1 and is used when
+>          * looping over all event classes.
+> diff --git a/lib/of_live.c b/lib/of_live.c
+> index 90b9459ede313e492e28c8556c730f3bd8aaa9df..e1962b8f1fb9d8c2c87d04ca4e238a1e4d00376a 100644
+> --- a/lib/of_live.c
+> +++ b/lib/of_live.c
+> @@ -10,8 +10,9 @@
+>
+>  #define LOG_CATEGORY   LOGC_DT
+>
+>  #include <abuf.h>
+> +#include <event.h>
+>  #include <log.h>
+>  #include <linux/libfdt.h>
+>  #include <of_live.h>
+>  #include <malloc.h>
+> @@ -334,8 +335,10 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+>                 return ret;
+>         }
+>         debug("%s: stop\n", __func__);
+>
+> +       event_notify_null(EVT_OF_LIVE_INIT);
+> +
 
-Many platforms have MMC_SDHCI_SDMA enabled, but I not see USE_DMA is set.
+This should go in initr_of_live() since the function you are dealing
+with here is supposed to just do the live build.
 
-So this change will make dma_unmap_single not being called for the platforms.
+Same for the EFI_STUB thing which I just noticed, actually
 
-Will this introduce any issue?
+Also please check for error
+
+Otherwise this seems OK to me. I do wonder why we can't use
+EVT_FT_FIXUP though. Could you add mention of that to your comment in
+event.h?
+
+>         return ret;
+>  }
+>
+>  void of_live_free(struct device_node *root)
+>
+> --
+> 2.49.0
+>
 
 Regards,
-Peng
-
-> #endif
-> 
-> 	return 0;
->-- 
->2.48.1
->
+Simon
