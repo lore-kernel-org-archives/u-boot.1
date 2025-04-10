@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 912BCC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0469AC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:57:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED85183AEE;
-	Thu, 10 Apr 2025 10:56:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 56E3D83B03;
+	Thu, 10 Apr 2025 10:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QH9DprHk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bz5YW5SC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6773A83AF8; Thu, 10 Apr 2025 10:56:50 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 2CBD583AE9; Thu, 10 Apr 2025 10:56:51 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 429E083AE9
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:56:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 234BF83AEF
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:56:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43cf0d787eeso6442745e9.3
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:56:48 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43d0c18e84eso2586865e9.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:56:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1744275408; x=1744880208; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
  :reply-to; bh=mi4NZutOJVhbVIO8zZ+WMV2RQj152K6jx/1YmB9Htao=;
- b=QH9DprHkX7FgFQLE9KTV/QHtnpdSteDfxXM9ZeU/IqIXWVMVK+MEmMGH5DMSRLpo40
- IDqTc0ZRkA/xHJ4jt8KRgvSdZ16xRX5yF+CSx1S/Y3nqpJbjIMe5mkezr6BmBR8YiDgP
- jmIZ2KADpjKcOOHAI0uIx4V1mLp/TrBp/1U18Se9BmH2ZuBqp1mGtMmmC/iQJF9/5jdC
- b96rO3l41JPN+Y/idctgWxR5E4j/qZRcuryuYoVKcJH/+iH1CMyPctpZpewaSAQznfcj
- F2+DgAxSxdDCbG8o5mrgzvjU8CBR9tKJO/VDORca9xWFJa/4dojkGM6ZjjKLzrdIrtgQ
- drRA==
+ b=Bz5YW5SCcW5JSLOIXphzHRDxdvkVyOHXLZ9b7fyCuic1RazvyOcwmQkbe3B0JMH5T3
+ 9BZbbEiwzuNRYdDlb0aaPs9i8I/hV9k5jTty/EtokA45qSxrF4h3dHC9KTuju2bxiwZq
+ mDizTjm8BX0Vx6Ol90Bms/8zuwyfE0gbh7VoAiUGDowxsa2H6X1X2Jy/jGkSCn6qtHW8
+ nvrquYWZwFDGd66LRjJmVVoNefxhbkb+pDlDarAdcduM2JyhyymTpW72U8GivtjKx13k
+ RV1JEf34VKLIpRIHc8qnilY1Q9XlC24d9d8eMaKKOBVHGGcQ5dNcdQPX99g5YwaYLUar
+ R3pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1744275408; x=1744880208;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
@@ -48,33 +48,33 @@ X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
  bh=mi4NZutOJVhbVIO8zZ+WMV2RQj152K6jx/1YmB9Htao=;
- b=cKeUTSk9LsMZUHkasAow9QHdoTDHa4PKi3OVcxG+ma/F1WrtxF7bWaDhcfrcu+khxe
- fNGj0DDzftrORs4F8bCSvePh331yC1Cw8WIeU+FLtF+D+ZVHmsaJbedvptAK8Q6xUfio
- Uii/w1F5M+dQO5v2gfGGdw1o9wr085I8Goidp9CEzzIN4bSO6PP1j6BmIdFBhEwbfPfe
- G33WuPYcmoubP+hNE/geMYYKL+HQqdaG3YaPz6nUMeS8femEiWJrQeDQXucDhOtugVM4
- ArZHX30K/qZtm6NDnz+ZXM9Yk68rLiCcxZ5sgA/8m6VHzGNx9pgEZPk5bfOt2RKhuGjo
- Hkfw==
+ b=qTdWyZjiJBxOTUtPTR++7Zo0H2ysoFKfoq6L/MhEYIAEI+x0z+WEXSpchw7Uyz3jqm
+ ZUp5eeXuJ3SLlqr/NnZvSYfAMn70BPttRMsJzDTc3oB8OXKJk1kcTO4ztGZWINhEW5/O
+ FC7VsKCu/yyXAcvBWie+AecrfBuiCXel/eZwiyv9H9H9AO+1T7UtRgEzSyEBaxIrE4ta
+ E5vIZmqCiAhwfkdsytRsXu/SF4bmQBcGwsAfZcrJr/0oABkuMcLAcaUxpPEcD6OPYHLr
+ PJwVTb24lIKvgD7yCrhnC1CcMxdM3bmoXi+Udq3rvmkgVqDMexjwskHwuL6XhDv9Lpr0
+ mq/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXetD9mE4k5oXQnTOpvH6Xgc4sMcRBxs8MVI5cnF0FIg65x5gYtWTrz2SwIkLMTTIvah63xR2w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyES77Jpdx5Y4fKFHzDuZOt7r2Ab4IOqhJCRIxxoxSN0jBBhp8w
- bL+HFRWDyMZS9YYtLxWD3/kNRaUG+iglixgP6KCugG3N/XzELo5uOKpi3WOhrw0=
-X-Gm-Gg: ASbGnctemU4ZOFd08b+sMhnTXO6wQpbn6Kv0NaheBi59w60o52jPBP6zD/m43UthLO7
- Q7sCSdT6X8EMQ6/mINENVj19Tl4gaEsuTsfUjHHx9dfGa3+R2dzPq33bpB1mNA1RvNfvRHrKvHP
- mLLpAq3NtP/fN2/Aa95f7/sc08XfHt7yPWQyVSaRkRs5BEVhk1NBe6Qoqcak3IU0ICW/ydVWa5x
- naAvFJJ9GLuLsDImV5FFQhHHebQRq1xc2aJU1GbCk3TWY9poyksi97XgMScRAvpLUI2rRGsH8rd
- OQi5U1KiwwiIwHIWgzJJ6Ekpg6+thAIDM13lk2MXyzODa6pkH+wckDKcYEx+O+yATv0TCuDnXpE
- t66jxLAh9IzVP0H+r+A==
-X-Google-Smtp-Source: AGHT+IEjT/+JnjPVbWsS92HKfUwMmnN+S4qiPvfmyTlHXaO4ED8/5Ld3YKYw7fwPY3RZJ8Xb8/UOrA==
-X-Received: by 2002:a05:600c:4e09:b0:43d:db5:7b21 with SMTP id
- 5b1f17b1804b1-43f2ffa3bd8mr12594415e9.28.1744275407682; 
- Thu, 10 Apr 2025 01:56:47 -0700 (PDT)
+ AJvYcCWFmNS01DpwgkjZ/UXIVxY47zph3BTiw1FfTn4fibEVNFhjA9LBS4iFU91lFc01N+iwyvclKeI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRfE2UdUgXcmHsUc0Iedtj4+UhgxOUJtL8AoI2CM43p7oqLamg
+ O4TwfYxokBS3+feV7EzsSngC5Cj+FH/SNdgl3DVPxMdv66F/RTLtN4bUXUu+owg=
+X-Gm-Gg: ASbGncs5f3zOvy5sNp5MxO6+QdhIxiSdJEUvH8nD+kt49mibA/q9eAG4UzMvPLi4oWT
+ m0NDMXyfqpTRniNXYyzjk4Qg5s2a5vCKLyOhO4ZTTeIBDVKqe4Xhf1Cmq99mcJeFhnWItii4rQj
+ 57isru5ONMqNK36NVT2IHcqVPN13Gy5J/itusCiFX3+03vBltbcFDHcnkODy8TlkWxkNZpsW/Cz
+ v+YOn6FunwdQh7HT2m7QWYUoC18qszQmQZ+pZxsuyBsL0rmGRHEbeXlgD5oB2DNxlf7nL7QigKj
+ 5NLgv+pheprJjwV5wzHWx4LatDGLdKt4G3L9TmHWB8n5se3KxqNr+QAOvYNxteF75i5zcQxN3Fp
+ fq478J9qnU1kjkSka3g==
+X-Google-Smtp-Source: AGHT+IHr7K0X/Ft0H0FA7TO+t4lZtlFQ+J+ZUiaIf6lD+6WMP5kfpGLY7sAbzR6fw/2T8JQE88TUzA==
+X-Received: by 2002:a05:600c:28e:b0:43c:fc04:6d48 with SMTP id
+ 5b1f17b1804b1-43f327bfe64mr8310165e9.0.1744275408562; 
+ Thu, 10 Apr 2025 01:56:48 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe?
  ([2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-43f205ec97csm48971635e9.6.2025.04.10.01.56.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 01:56:47 -0700 (PDT)
-Message-ID: <1daecfd3-0149-4d7f-bd2e-e75717692849@linaro.org>
+ Thu, 10 Apr 2025 01:56:48 -0700 (PDT)
+Message-ID: <952b09b6-aff4-43fb-be0b-d229d6e9cda6@linaro.org>
 Date: Thu, 10 Apr 2025 10:56:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
