@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA360C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 15:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20811C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 15:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6E5883B8F;
-	Thu, 10 Apr 2025 17:16:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09F1083D3C;
+	Thu, 10 Apr 2025 17:16:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ivi7YfAO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qI47O1w4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D41898192A; Thu, 10 Apr 2025 17:16:18 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 102918192A; Thu, 10 Apr 2025 17:16:19 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2170F83D39
+ by phobos.denx.de (Postfix) with ESMTPS id DDEBC83B8F
  for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 17:16:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso7595745e9.3
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43edecbfb94so10460105e9.1
  for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 08:16:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744298175; x=1744902975; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744298176; x=1744902976; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2qrIYvhrPni0ORHgstbrNs0wtrrGI1JHSjKov0eTU/E=;
- b=Ivi7YfAOuFYdfQ6QF8K8mVcCf6/xZwtRd//dMlRu+JkV24JRvoJAqUPXNMWYisN9eY
- gkbRCAqCpyVXQ72DkIbouwmJy1P+iPk3XfmesPXw1WSxnEJMpMYwb1JLEoxoThQZhKHB
- eeSKvPDXnY49zPlw2E3brsrKDe+x3WCEXrjXRYyoSUl6X8MvMtLI7gPehRiWFYI3IYfp
- h625IK8gPj5UpXMuNHa1YK5lhq4MFlqSXRdoYSfu5b9TfA2cYqYx6l+lL3mSSBDJm+0e
- Xo8gdu30NIXACygmjalXlIhb7SnuvJUR/I0Ht4ar+XIciCneRiLj0OZGu2Nl4DxHlRK0
- axTw==
+ bh=GiQhEdzxFC/SizZUKx6GlyeI6XqT1jcQhvAy1drEgA8=;
+ b=qI47O1w4IXxfzshbZ32bylguhhTu9auFbqsTm9CNhcYeSVWcFVK6JX0psyLpvimBky
+ BiqjzghFuZByh0K0BcbXPG1WfHxnzyQqMjZ3UFUj71NRgq8lYWgfsaBlV7s7SFaS69CR
+ Z9A0YF8uc0iEx4KKwn5/IgdRiBT9Uo3J1T3o2N1er+f/6D/qoeicPoefDgvHdQj7BGjm
+ ZxcLdiP1QC2xxj0Nlak5V3JfWGzlSVFC3uSQc8gZKA/wFJJfKWlAFt5y0TnwCltVjNfo
+ 7zSwwrUJQWpXb4dMhUA++NqFkA/8l3pLJ0ysyejYNLfx0Z58Z9M1mC+xkjlNgbjYkbn7
+ /w+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744298175; x=1744902975;
+ d=1e100.net; s=20230601; t=1744298176; x=1744902976;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2qrIYvhrPni0ORHgstbrNs0wtrrGI1JHSjKov0eTU/E=;
- b=B5Er0o003RkMvlsoaPB4IumP0pIFEfnk2OoXdPAJj6l2jE8QfYxu6Kk+dykVvaA39j
- ZD/erfQSa+g797gVwK2Oguz6/EKBqC2gg6vVX9u2H6ClXEyGDqQ7rGo/rFjHuDEf2A+k
- 2m+D6go9TF2HoEIyxliBQkq1dEg3JdEnfZZH1FhS5LHRS6XtIz629uC2IsRjY2bGKqyw
- vEsd9lKSfXmIAorxRPeY7vUHbEHrn6s27G/nyliqPJvh1BRF7IdO7HRw63Z7p0HQ20Uq
- mj7a94UbbPJVuEF0DCIN3bg16M7trmKXuOp+Z0q8h2io6Vaw7oyz1TX/VrmWJTP2gDiV
- GNBQ==
-X-Gm-Message-State: AOJu0YyB0uZs8AGVZIf5GXiLRQnonKCMSm0VaN/a4UDURv6MClHprBzh
- gMfZi6a0VEB+5KAeaC5MjGhx3p9AaXy+LuXAu2pVu/zTBLOM20Tov4zP4WoelEnSDO+DcoLP5Bw
- v7bM=
-X-Gm-Gg: ASbGnctsdxAxbgXoCwYxzSNlnDrvnBjiBfGSRPssIZQUCtX72Yt0Ztr0mE2MSnIejQb
- mE5NF9fTSBmu3PqPoAaRnvBK8aoBk4zT4EqnUhxj1GB4ZrkeqBE0IrOF25i1NyWG52io8l31fyS
- I6mshR0zGeP159JPnf8zwS8QnBTb98U3P84HlTvXBSOaj3IIqnUDpjmx+cQMfp2MPRijMWpLch6
- afOp0HDldnQ/T4J32VfTIOATHz2B2HXHWgYp1CPFds1g7UPNITan1r9JvRpFInLvNEiX2MAPy12
- 6MrsalBvCBUcvqc2th0rDpyROq+K4ZMwYEE7v/28b+opjEhOtg==
-X-Google-Smtp-Source: AGHT+IHiyP4TfRTV/Mm4fAIj0TjNL8Eu6ZXTk4zDPS2KEglK63UcOXoFr/41HHEsoBDU7xxE9MA+JA==
-X-Received: by 2002:a5d:64e3:0:b0:39a:cc34:2f9b with SMTP id
- ffacd0b85a97d-39d8f469224mr3200185f8f.16.1744298175285; 
- Thu, 10 Apr 2025 08:16:15 -0700 (PDT)
+ bh=GiQhEdzxFC/SizZUKx6GlyeI6XqT1jcQhvAy1drEgA8=;
+ b=u/AEvrOxdZnrikmy8eF7KrFnTy8uc22ZspSMTCFeYDkJZXepjz2qHbveCwZ4QkeeFx
+ 3/4jZPfSUXNd7U/eJAVuApOXULHet5mBI6VtYi/cKVXHVEpZHAEl3tmQAZsU7LLaiVIo
+ Pwt1Hj+SjTzD4elFnZr5g8yaLbPzmutnHDRK8BqIrOycBv4dJ56/4g0JMJHOhePvrDoN
+ rxFng37nuvwaQL+jV9laFUDgEHLF1zr6Cw/cVc2WgeGvCPZx4qS5Zq7bxwGdNshhyVpq
+ qt4ENVqHsYxy/51YEAXGNbWdfUI8V1/VnGNfKE9l7/o/JE3YN/a3l6/2MwfWPFfAHV8R
+ xa5Q==
+X-Gm-Message-State: AOJu0YyEIojvhvoYdp7XaI9o/hn+KE9fztu6FmdFMCCFwMudhryrBCgc
+ brnK+jfAMME/k4eZ7VDtgA+/3WnlJtdPt3mkmxaxdhZyoZSHDizvuhM473+wDbQazM3BuNogJt7
+ BvAE=
+X-Gm-Gg: ASbGncuZRhjG6MQT3cZwMN1DxeGF4W1BPknuPS3GjqEZxJq/VJHfQierMm6tqXaVDHk
+ 5dd3HMZsayprJETrKONh/sK4AB5sUNupgIoQEQ1lDDC79teTjbbUjQDLD3LcZNF0QiRnrSsf8bj
+ dB1hXDlCFrmLk0W5gfeu+3e1bknN6yE38lw4AKC+c9etgzMm2drTnXG+BY6RKgrDEwl3YA/KZWp
+ hJG+mLviZqkjQ5b3STLO5bY+jHPDRDIZWPhpYAEyTmAFIh6bmJDaSUh4Immc7DIHZF0lrooEnJ8
+ DWa3gvgr89/cPiR9TUSB+aGE0zo1GoMj4rdWNE8xJF+ujx397g==
+X-Google-Smtp-Source: AGHT+IGAPy/4daGlUUK/1WvTItgLlJhYtzOuFp1MMMWxD2A5+A9IAa4XfScw+/vmWiYjJCjUhKcFCg==
+X-Received: by 2002:a5d:5f4b:0:b0:399:6d26:7752 with SMTP id
+ ffacd0b85a97d-39d8fd8b4bamr2633423f8f.38.1744298176113; 
+ Thu, 10 Apr 2025 08:16:16 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:7edb:df05:a425:37cd])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233c824bsm54873225e9.24.2025.04.10.08.16.14
+ 5b1f17b1804b1-43f233c824bsm54873225e9.24.2025.04.10.08.16.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 08:16:14 -0700 (PDT)
+ Thu, 10 Apr 2025 08:16:15 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/3] net-lwip: wget: add LMB and buffer checks
-Date: Thu, 10 Apr 2025 17:14:53 +0200
-Message-ID: <20250410151600.3370247-3-jerome.forissier@linaro.org>
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 3/3] net-lwip: tftp: add LMB and buffer checks
+Date: Thu, 10 Apr 2025 17:14:54 +0200
+Message-ID: <20250410151600.3370247-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250410151600.3370247-1-jerome.forissier@linaro.org>
 References: <20250410151600.3370247-1-jerome.forissier@linaro.org>
@@ -104,7 +101,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Legacy NET wget invokes a store_block() function which performs buffer
+Legacy NET tftp invokes a store_block() function which performs buffer
 validation (LMB, address wrapping). Do the same with NET_LWIP.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
@@ -112,32 +109,26 @@ Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 
 Changes in v3:
-- store_block() [wget]: add Sphinx-like documentation
-- store_block() [wget]: do not print to the console if ctx->silent
+- store_block() [tftp]: add Sphinx-like documentation
 
-Changes in v2:
-- httpc_recv_cb(): add a call to altcp_abort(). Otherwise the transfer
-continues and we try to write later blocks which makes no sense if one
-has been rejected already. Thanks Sughosh G. for testing and reporting.
+ net/lwip/tftp.c | 56 +++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 45 insertions(+), 11 deletions(-)
 
- net/lwip/wget.c | 63 ++++++++++++++++++++++++++++++++++++++++++-------
- 1 file changed, 54 insertions(+), 9 deletions(-)
-
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index d3628cf72de..ebea6ea21a0 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -6,6 +6,7 @@
- #include <display_options.h>
+diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+index 123d66b5dba..c7f1420ca0f 100644
+--- a/net/lwip/tftp.c
++++ b/net/lwip/tftp.c
+@@ -8,6 +8,7 @@
  #include <efi_loader.h>
  #include <image.h>
+ #include <linux/delay.h>
 +#include <linux/kconfig.h>
- #include <lwip/apps/http_client.h>
- #include "lwip/altcp_tls.h"
+ #include <lwip/apps/tftp_client.h>
  #include <lwip/timeouts.h>
-@@ -202,11 +203,57 @@ static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
- 	return 0;
- }
+ #include <mapmem.h>
+@@ -31,6 +32,47 @@ struct tftp_ctx {
+ 	enum done_state done;
+ };
  
 +/**
 + * store_block() - copy received data
@@ -150,22 +141,16 @@ index d3628cf72de..ebea6ea21a0 100644
 + * @src: the data received from the TCP stack
 + * @len: the length of the data
 + */
-+static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
++static int store_block(struct tftp_ctx *ctx, void *src, u16_t len)
 +{
 +	ulong store_addr = ctx->daddr;
-+	uchar *ptr;
++	void *ptr;
 +
-+	/* Avoid overflow */
-+	if (wget_info->buffer_size && wget_info->buffer_size < ctx->size + len)
-+		return -1;
-+
-+	if (CONFIG_IS_ENABLED(LMB) && wget_info->set_bootdev) {
++	if (CONFIG_IS_ENABLED(LMB)) {
 +		if (store_addr + len < store_addr ||
 +		    lmb_read_check(store_addr, len)) {
-+			if (!ctx->silent) {
-+				printf("\nwget error: ");
-+				printf("trying to overwrite reserved memory\n");
-+			}
++			puts("\nTFTP error: ");
++			puts("trying to overwrite reserved memory...\n");
 +			return -1;
 +		}
 +	}
@@ -176,50 +161,40 @@ index d3628cf72de..ebea6ea21a0 100644
 +
 +	ctx->daddr += len;
 +	ctx->size += len;
-+	if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
-+		printf("#");
-+		ctx->prevsize = ctx->size;
++	ctx->block_count++;
++	if (ctx->block_count % 10 == 0) {
++		putc('#');
++		if (ctx->block_count % (65 * 10) == 0)
++			puts("\n\t ");
 +	}
 +
 +	return 0;
 +}
 +
- static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
- 			   err_t err)
+ static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
  {
- 	struct wget_ctx *ctx = arg;
- 	struct pbuf *buf;
-+	err_t ret;
+ 	return NULL;
+@@ -71,17 +113,9 @@ static int tftp_write(void *handle, struct pbuf *p)
+ 	struct tftp_ctx *ctx = handle;
+ 	struct pbuf *q;
  
- 	if (!pbuf)
- 		return ERR_BUF;
-@@ -215,19 +262,17 @@ static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
- 		ctx->start_time = get_timer(0);
+-	for (q = p; q; q = q->next) {
+-		memcpy((void *)ctx->daddr, q->payload, q->len);
+-		ctx->daddr += q->len;
+-		ctx->size += q->len;
+-		ctx->block_count++;
+-		if (ctx->block_count % 10 == 0) {
+-			putc('#');
+-			if (ctx->block_count % (65 * 10) == 0)
+-				puts("\n\t ");
+-		}
+-	}
++	for (q = p; q; q = q->next)
++		if (store_block(ctx, q->payload, q->len) < 0)
++			return -1;
  
- 	for (buf = pbuf; buf; buf = buf->next) {
--		memcpy((void *)ctx->daddr, buf->payload, buf->len);
--		ctx->daddr += buf->len;
--		ctx->size += buf->len;
--		if (!ctx->silent &&
--		    ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
--			printf("#");
--			ctx->prevsize = ctx->size;
-+		if (store_block(ctx, buf->payload, buf->len) < 0) {
-+			altcp_abort(pcb);
-+			ret = ERR_BUF;
-+			goto out;
- 		}
- 	}
--
- 	altcp_recved(pcb, pbuf->tot_len);
-+	ret = ERR_OK;
-+out:
- 	pbuf_free(pbuf);
--	return ERR_OK;
-+	return ret;
+ 	return 0;
  }
- 
- static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
 -- 
 2.43.0
 
