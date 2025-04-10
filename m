@@ -4,56 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ABF6C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0F60C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:11:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CAE083A3B;
-	Thu, 10 Apr 2025 10:00:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2A3883A25;
+	Thu, 10 Apr 2025 10:11:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="a4hQHTRc";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="agQYkGdh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AC9D83A32; Thu, 10 Apr 2025 10:00:49 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 8DB7683A2A; Thu, 10 Apr 2025 10:11:49 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36DFF83A30
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:00:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFE02839E6
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:11:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D245F5C3EDC;
- Thu, 10 Apr 2025 07:58:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10A87C4CEDD;
- Thu, 10 Apr 2025 08:00:42 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 4A8D243C99;
+ Thu, 10 Apr 2025 08:11:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 074F7C4CEE9;
+ Thu, 10 Apr 2025 08:11:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744272045;
- bh=cH3LcRo+80HLAgx/CLp7hPKDvh4S6VkdY6wR1IOElGs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=a4hQHTRcUo8FbHxZpkncPPm67GAM4b26W2hVUEl0jgpkv74vqHRmaMMQEOhatg12Z
- x2AKn901f5Lxps8EZV2HlBiUaQCT74WvbmUDou93LkkLMObethycMFxwNi7b61eiqK
- i3cnKHmv1TQTbhLjqkqBcaxWUqyDPRUrOSjIX7X0m+SfJZl0ABk/nxocJIZ6CV12MI
- TwE89d2Vge4CqUKSb4IGjJ3C3CZyAEjdOQxPDAGiopiu4hxTvDhQOIF+0W53n3/JTJ
- JblVhqZSAacm20XTtzgg8mQtPOpSjSWEwjsKhnflSRfqGlIZTPKsefGDKn2aqnU+6r
- NVIgR7myA4pfA==
+ s=k20201202; t=1744272705;
+ bh=tzvQEkAOxQu3OLiP4KX6nWqJFSFreINXFDZJZhJ1+DU=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=agQYkGdhCm1FFwYQWgqXMouOa1pcfV55c2Br1pT073Op5hUKQ8/Ag7asCqV+LHV0z
+ +CNalX6GKfcq1IOfkIOWRfsd33GhcNq7bOUubY8wPpcqQwjI4TnkOLiD9X6hUlEc6p
+ IfdGy6vWXmulP5W6tvS5d+P0snUWLmAQ/uFjKR5tNcC2J4FHEcw5ATVgxam2cnmjDb
+ kUGngFJ1687rluuc8+Z9MBFbt4F3I0HMxUG7da6frwomz2p1d52YlTLnhL2e4BRAiF
+ 5J8yoMHtV/uxgmIWfGLEhdD+kmmHA8B1isM5SImpoUKnpxrk19762Jjo30i+4Ia2DC
+ mvloLu5R6HVbw==
+Date: Thu, 10 Apr 2025 13:41:39 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: u-boot@lists.denx.de,
-	u-boot-qcom@groups.io
-Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
- alexeymin@postmarketos.org, Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH v2 2/2] phy: phy-qcom-qusb2: Fix USB PHY power on sequence
-Date: Thu, 10 Apr 2025 13:30:27 +0530
-Message-ID: <20250410080027.208674-3-sumit.garg@kernel.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250410080027.208674-1-sumit.garg@kernel.org>
-References: <20250410080027.208674-1-sumit.garg@kernel.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH 1/2] arm: dts: Add override for RB1
+Message-ID: <Z_d9O14NX4Q-oZla@sumit-X1>
+References: <20250407132810.35149-1-sumit.garg@kernel.org>
+ <20250407132810.35149-2-sumit.garg@kernel.org>
+ <baa7e896-a286-47ed-bd9a-18338978fc0d@linaro.org>
+ <Z_UouNz11eRxIIa-@sumit-X1>
+ <deb7ccd0-978b-4b97-bf67-de540dc02fe6@linaro.org>
+ <Z_ZpeSFEyJan2mZB@sumit-X1>
+ <1f01f1ed-f9f7-4f93-ae79-158c25be1500@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1f01f1ed-f9f7-4f93-ae79-158c25be1500@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,48 +75,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On Wed, Apr 09, 2025 at 07:23:09PM +0200, Caleb Connolly wrote:
+> 
+> 
+> On 4/9/25 14:35, Sumit Garg wrote:
+> > On Tue, Apr 08, 2025 at 04:43:49PM +0200, Caleb Connolly wrote:
+> > > 
+> > > 
+> > > On 4/8/25 15:46, Sumit Garg wrote:
+> > > > On Tue, Apr 08, 2025 at 02:17:29PM +0200, Caleb Connolly wrote:
+> > > > > 
+> > > > > 
+> > > > > On 4/7/25 15:28, Sumit Garg wrote:
+> > > > > > From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > > > > > 
+> > > > > > Add U-Boot override for RB1 to for USB in host mode as OTG mode isn't
+> > > > > > supported. Also, disable sdhc_2 as it's currently not supported, sdhc_1
+> > > > > > works fine though.
+> > > > > > 
+> > > > > > Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > > > > > ---
+> > > > > >     arch/arm/dts/qrb2210-rb1-u-boot.dtsi | 11 +++++++++++
+> > > > > >     1 file changed, 11 insertions(+)
+> > > > > >     create mode 100644 arch/arm/dts/qrb2210-rb1-u-boot.dtsi
+> > > > > > 
+> > > > > > diff --git a/arch/arm/dts/qrb2210-rb1-u-boot.dtsi b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
+> > > > > > new file mode 100644
+> > > > > > index 00000000000..1e136ee405a
+> > > > > > --- /dev/null
+> > > > > > +++ b/arch/arm/dts/qrb2210-rb1-u-boot.dtsi
+> > > > > > @@ -0,0 +1,11 @@
+> > > > > > +// SPDX-License-Identifier: GPL-2.0
+> > > > > > +
+> > > > > > +/* This is usually OTG but U-Boot doesn't support that properly */
+> > > > > > +&usb_dwc3 {
+> > > > > > +	dr_mode = "host";
+> > > > > > +};
+> > > > > > +
+> > > > > > +/* SDHC_2 isn't supported in U-Boot as of now */
+> > > > > 
+> > > > > I'd rather avoid disabling this here, I guess it's just missing clocks and
+> > > > > regulators which doesn't justify modifying DT. An error that mmc1 couldn't
+> > > > > be enabled seems fine to me?
+> > > > 
+> > > > I totally echo with your thinking that we should avoid modifying DT but
+> > > > at the same point we shouldn't enable peripherals in U-Boot which throws
+> > > > errors. It's also possible that U-Boot misconfiguring mmc1 which might
+> > > 
+> > > I disagree, DT isn't enabling or disabling peripherals, it's describing
+> > > hardware.
+> > 
+> > It would be helpful if you can describe the use-case for "status"
+> > property then.
+> 
+> https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#status
+> 
+> These all describe the functionality of hardware, since implementation
+> details of the software (U-Boot) which is parsing the DT has absolutely
+> nothing to do with it.
 
-Recent addition of support for SDM660 inadvertently broke USB PHY power
-on sequence on RB1/RB2 and others with following error:
+Generally in Linux, we don't enable complete hardware support in one go
+but it is rather incremently enabled where people make use of this
+"status" property. So IMHO, it shouldn't be anything different for
+U-Boot too.
 
-starting USB...
-Bus usb@4e00000: QUSB2PHY pll lock failed: status reg = 0
-qcom-qusb2-phy phy@1613000: PHY: Failed to power on phy@1613000: -16.
-Can't power on PHY0
-probe failed, error -16
-No USB controllers found
+> > > U-Boot lacking proper support for that hardware isn't a good
+> > > justification to disable it. Especially since you might boot Linux with the
+> > > same DT and now have no working sdcard for seemingly no reason.
+> > 
+> > We shouldn't use same DT unless both U-Boot and Linux support that
+> > without modifications and *not* being in a broken state. The similar argument
+> > holds true for USB OTG mode too.
+> Well, the main difference with the OTG fixup is that we undo it later on, so
+> if we boot an OS with this DT it won't have the override -- our hacks aren't
+> exposed.
 
-The root cause was the addition of flag se_clk_scheme_default which was
-configured correctly for SDM660 but incorrect for all other supported
-SoC. Fix that by properly assignment as per upstream Linux driver.
+It's really nice to see the fixups using OF_LIVE.
 
-Fixes: 475497dc3c15 ("phy: Add SDM660 support to Qualcomm QUSB2 phy")
-Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
----
- drivers/phy/qcom/phy-qcom-qusb2.c | 2 ++
- 1 file changed, 2 insertions(+)
+> 
+> > 
+> > > 
+> > > An error in U-Boot is exactly the behaviour we want to see, masking it only
+> > > created confusion.> turn as a problem for later stages.
+> > 
+> > IMO, our first priority should be to fix U-Boot issues and then see if
+> > we can use unmodified DT.
+> > 
+> > > > 
+> > > > I have been totally working with a remote lab to fix issues on RB1. I
+> > > > will soon get one on my desk then I will be able to fix mmc1 too.
+> > > 
+> > > In that case we can surely land the proper fixes for 2025.07 anyway, so I'd
+> > > just keep the errors until then.
+> > 
+> > Fixing errors in mainline will help other people confidence who are
+> > trying to boot U-Boot on RB1. If you still have a strong preference to
+> > keep SD card support enabled in broken state then I can live with that
+> > until I fix it for real.
+> 
+> I decided to just have a crack at it and managed to get everything cleaned
+> up. sdcard seems to work on my RB1 with these patches on top of qcom-next
+> and the u-boot specific DTS hacks are removed.
 
-diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
-index cabd05bf5a6..d98f6108e69 100644
---- a/drivers/phy/qcom/phy-qcom-qusb2.c
-+++ b/drivers/phy/qcom/phy-qcom-qusb2.c
-@@ -230,6 +230,7 @@ static const struct qusb2_phy_cfg sm6115_phy_cfg = {
- 	.regs = sm6115_regs_layout,
- 
- 	.has_pll_test = true,
-+	.se_clk_scheme_default = true,
- 	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
- 	.mask_core_ready = PLL_LOCKED,
- 	.autoresume_en = BIT(3),
-@@ -256,6 +257,7 @@ static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
- 			 POWER_DOWN),
- 	.mask_core_ready = CORE_READY_STATUS,
- 	.has_pll_override = true,
-+	.se_clk_scheme_default = true,
- 	.autoresume_en = BIT(0),
- 	.update_tune1_with_efuse = true,
- };
--- 
-2.43.0
+Great, you beat me to that. I have dropped the RB1 DT override patch
+from the v2 [1] in favour of your patch-set.
 
+> 
+> USB phy init seems to fail for me, but the board I'm testing on is some
+> super early DVT so I'm hoping it's a silicon issue....
+
+I repoduced it on my remote RB1 setup. The PHY power on was broken by
+recent addition of SM660 platform support. I fixed that as part of v2 [1]
+too.
+
+> 
+> Please give these a spin and let me know how it goes.
+> 
+> https://lore.kernel.org/u-boot/20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org
+
+It really works fine for me without any pinctrl error for SD card,
+thanks.
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=452055
+
+-Sumit
