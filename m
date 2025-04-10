@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAE4C369A2
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 20:15:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D39DC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 20:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F148483D0B;
-	Thu, 10 Apr 2025 22:14:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4051683E0F;
+	Thu, 10 Apr 2025 22:14:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y0dj8085";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RpnGjfsi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68C1C83C3A; Thu, 10 Apr 2025 22:14:25 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 6FA6A83B1E; Thu, 10 Apr 2025 22:14:26 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C77983C3A
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 22:14:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FA8D83D18
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 22:14:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-72c27166ab3so706836a34.1
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:14:23 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2d0a742df27so808323fac.1
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:14:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744316062; x=1744920862; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744316063; x=1744920863; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rBY1azV2YdquxPYVwvOOWBNOr04XM67EXeo7/dVs7z0=;
- b=Y0dj8085tVpe62PECCMBi0fd9cTK5x2H8MZnWJtUaHxZ32L3XQHR3h18ixTLC/Vw5m
- Nv3ToMagjkXGx1fVEXyFcc1pzJW3FcMXHEbdcx7P9wYhwN/9VNYm3TpxNRAIwTE5CIqY
- XjLXFT6+7+3UYfYHGlgGWam2y01XV5s4ewmBg=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2HbH/WhBwPxF2uyy+3apDTm15xCiNuUP4SeiP4yYpl0=;
+ b=RpnGjfsix3ruDb4qX+e4rXQMwC4umSxOPL3bVkcaB8qUTwITUMf/eO0dA1cKyR35i8
+ VXvyTxpowkQhWUCujM4rCCLuhfAgKqFkpz8kN5DpPHi4A4V39fWZzwOKsnTecW88sXNs
+ yvJM9InI9ehZekhz34KttfIcCL9/8Wfr1ptqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744316062; x=1744920862;
+ d=1e100.net; s=20230601; t=1744316063; x=1744920863;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rBY1azV2YdquxPYVwvOOWBNOr04XM67EXeo7/dVs7z0=;
- b=GwLz9xbrIoeZW2YVbwKSYhagfvm+GZOv2qQ2ibGlPdkXLsVWrhHItv4hfoQAe5wJeM
- k2SQcJxzVHjLU8kjLyKHY+OOYzhkjgJWOcuSzBxuf8JTeeyFmFTquCjn0mCQo9qVQkhR
- sq92V50m9vw7q3m4xkeinu8ORZHZSsuuTMaC3pKPlACsbK8npRlFjZl68imzaa/4asrt
- ciXMamQy9wcRZrVbHLksuphRvceqvptefWNal00pQGQ0vMsgXKRTLeFCO9fo0JgEVWEW
- bmqDsKgOr2M+gsE4I2BI6CGl44rkDv9x0gdGRfHp7vbBt/fjuRpklCYtMt+4L9yN7JJ8
- f6mg==
-X-Gm-Message-State: AOJu0YyZdZWa/aIN0nD7Scw3ltV3bbJGmPJcWcjsZCp+eFqFOIMNrWNm
- jnCqskalmp83I8CQvX2nUz8nZ6A8H0tfODx6mkAVksF9SdhDkXhjg9K4NLZzQZJaijcnhSfZRDN
- I9aA=
-X-Gm-Gg: ASbGncuZZbXf1SzFOiVvjF8jh1Ie+gwHH80A2uvaii+pUfwls+NblJIecbdO/JZnLm8
- O0XAXjOOiL6I2ZXvByMAPKOEXDKKPRPAUpkmlyr8N7nOArV/Ei/1kcrQqn1H4O0E5Dx+jUpYpTU
- E+3Dv4lFa8MUcP91Y61Iq2ka4Q5V9q8t/v7S7NylnGy3xIdie0oaGXQmfMJFNvbnx73VQTv5Cu1
- 4yuyiYsHu/ROzfnGQmja92+AyiQ+ci3oRhNveLWj+PN+YqsTpaxVNrRtSjOLv8Nd517xiPeIVbn
- 6vTIG8/SpOWvIvs9a/O50y6R06TAa+Wj4fRrFw4A7Ltm319emRJEZZJOElzVMHSm5Me7YUADBsv
- N
-X-Google-Smtp-Source: AGHT+IGRw0ZHZugKkJhuzDZM5tYvLZfxn8kWoi1f0j2pZ5kT/rgMgsAKoGQkwBQCW77pqZYs3pG9Pw==
-X-Received: by 2002:a05:6830:6817:b0:72b:a175:2f0d with SMTP id
- 46e09a7af769-72e86161bbemr234731a34.0.1744316062184; 
- Thu, 10 Apr 2025 13:14:22 -0700 (PDT)
+ bh=2HbH/WhBwPxF2uyy+3apDTm15xCiNuUP4SeiP4yYpl0=;
+ b=J31XPeY+Hy92IvKD8xCzo0KKv8YdiYes86JmuYHeaOBcgsy6a/konyVKTDaUtKATqd
+ enYiP4ZuJu0fqMX1PoD5LfwHGRxqCcvJvCs/+knd1roNpBrWCTDjDGTDF72lIt6fmlTZ
+ 2PXGWozPD/1QDl70hsDyihC3+X118LpOv965p+opXYUw4ua9zJZJcg76Ri1XC8rXmMie
+ cKWUmMRJGa4vDQ2kDAs5R4pT7K43ehfHNrbVo8MLuxzIcVxsselcPPUn6/S3tGv72SDD
+ ZcVTlc7WhCvXeV0f/8L8UgyNd0g0sg7i3iSoGWQr1Bw79qoSOMyl1q8wdToI4JH2byUM
+ sejg==
+X-Gm-Message-State: AOJu0Yw4KqgTQX3I5ZImAijhsZp8oRPCMElaoqO96SBcAsaVRlcIb1eL
+ 8dwFiY5+hUvCggC6Ig9Sk3YfrhnPLui6y8H3A2Xl75310vG7fvzUP450oWJebXwF7MO+m0OoGWu
+ /8cA=
+X-Gm-Gg: ASbGnctOVQIVHMZiRCQ6HWOaCK1W5gTw7htefQwtwc+92rv8aPKGSr1v6JZR67sqbgk
+ Rg1IJWRJMOb7Pjyh0pAwx0CQQfdVirD89zEpsk0Ys3JMMJvXrz9xf4Yvx+yaIs1TJASexivlhwD
+ pu4sd7eoY/TLw1Askd91HEYNJiXEgHAlJVyzGKEgVkrsc1quaEVzJVdSylq9X2ia6GV8EQyJx+g
+ zIpej1bfwHeDI2SqKY38q9eZyi4ztQkllooxXdQvN/JVu4UWIXJxWK9rI4AuxqAJkDSw1IchCuk
+ bPIsHLsf75sGwEigA1NCcuG7DXtt0QT3jnwzulU+57pHtj7G4+CFETzJntQIUFGnUGIsa/a6RzE
+ d5tOAbuORV4g=
+X-Google-Smtp-Source: AGHT+IHHPz8nMwsExmn55DUZOFqToxI7YQNTIbZy251OhdFNv39Esct+7ogTv2ErwwXfjDXue2Yjrg==
+X-Received: by 2002:a05:6870:b9c3:b0:2c1:f878:410d with SMTP id
+ 586e51a60fabf-2d0d39091camr179641fac.14.1744316063317; 
+ Thu, 10 Apr 2025 13:14:23 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73d8fcaasm685741a34.38.2025.04.10.13.14.21
+ 46e09a7af769-72e73d8fcaasm685741a34.38.2025.04.10.13.14.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 13:14:21 -0700 (PDT)
+ Thu, 10 Apr 2025 13:14:22 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250401162125.125055-1-trini@konsulko.com>
-References: <20250401162125.125055-1-trini@konsulko.com>
-Subject: Re: [PATCH] env: mmc: Fix test for ENV_IS_EMBEDDED
-Message-Id: <174431606137.2981499.17317596389364781760.b4-ty@konsulko.com>
-Date: Thu, 10 Apr 2025 14:14:21 -0600
+To: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250328163115.642347-1-patrice.chotard@foss.st.com>
+References: <20250328163115.642347-1-patrice.chotard@foss.st.com>
+Subject: Re: [PATCH] dtc: introduce label relative path references
+Message-Id: <174431606229.2981499.11634647631324777304.b4-ty@konsulko.com>
+Date: Thu, 10 Apr 2025 14:14:22 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,18 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 01 Apr 2025 10:21:25 -0600, Tom Rini wrote:
+On Fri, 28 Mar 2025 17:31:15 +0100, Patrice Chotard wrote:
 
-> The symbol "ENV_IS_EMBEDDED" is an environment internal define and not a
-> real CONFIG symbol. The IS_ENABLED() macro is still valid to use here,
-> so update the check.
+> Since introduction of OF_UPSTREAM flag, U-Boot's dtc must be able
+> to compile Kernel's device tree.
 > 
+> Since kernel commit 7de129f5389b ("ARM: dts: stm32: stm32mp151a-prtt1l:
+> Fix QSPI configuration"), label relative path references has been
+> introduced. These label relative path references is not supported
+> by current U-Boot dtc version 1.5.0: (see mailing list discussion [1]).
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] env: mmc: Fix test for ENV_IS_EMBEDDED
-      commit: 684aea3132031b124d8e54c9aa99a244b81d3a49
+[1/1] dtc: introduce label relative path references
+      commit: 088bbc1efa8c1efe8e2714b9640055ce984aec93
 -- 
 Tom
 
