@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0469AC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:57:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B856DC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:57:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56E3D83B03;
-	Thu, 10 Apr 2025 10:56:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A6E5E83B0E;
+	Thu, 10 Apr 2025 10:57:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bz5YW5SC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mNXtmFT/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CBD583AE9; Thu, 10 Apr 2025 10:56:51 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 2AA9883B15; Thu, 10 Apr 2025 10:57:01 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 234BF83AEF
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:56:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3B4283B21
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:56:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43d0c18e84eso2586865e9.3
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:56:49 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so5134455e9.1
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:56:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744275408; x=1744880208; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744275416; x=1744880216; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=mi4NZutOJVhbVIO8zZ+WMV2RQj152K6jx/1YmB9Htao=;
- b=Bz5YW5SCcW5JSLOIXphzHRDxdvkVyOHXLZ9b7fyCuic1RazvyOcwmQkbe3B0JMH5T3
- 9BZbbEiwzuNRYdDlb0aaPs9i8I/hV9k5jTty/EtokA45qSxrF4h3dHC9KTuju2bxiwZq
- mDizTjm8BX0Vx6Ol90Bms/8zuwyfE0gbh7VoAiUGDowxsa2H6X1X2Jy/jGkSCn6qtHW8
- nvrquYWZwFDGd66LRjJmVVoNefxhbkb+pDlDarAdcduM2JyhyymTpW72U8GivtjKx13k
- RV1JEf34VKLIpRIHc8qnilY1Q9XlC24d9d8eMaKKOBVHGGcQ5dNcdQPX99g5YwaYLUar
- R3pA==
+ :reply-to; bh=CVP1DrRRJB1WXUjfuj7+sQ7KBSYueXRgTrnqteIoB5w=;
+ b=mNXtmFT/+9A2bJFxZCjwSbLz1raZZua4Msg3pAJ70gs8XjNXPBNJYuv9VJg9dPXkOH
+ /2lgZPLKwdRLeV7o6FbiTBkrKDdrO8LUo+7miT2rc4cYjirjJhVAp/DCC+NS4kedPCyR
+ otzufdhH112HaJW3w9C9wf7Nm9gjo94pWjhdkpCnUw5YcGuwJNiBeZNuGcjayy2ErNYt
+ GTEq6gkg0KPCxq1jrAxz4qzDD/lFpLh0MLH9i9rAbBXlOwi4BCJGdyQxzGguN1KWzT1v
+ Zq7SL88/asks66QAnq8j9uafX9fihqg+idoR6fLgsIYZsazkgRZfDOmOw6/WxJJHhx90
+ 1nVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744275408; x=1744880208;
+ d=1e100.net; s=20230601; t=1744275416; x=1744880216;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=mi4NZutOJVhbVIO8zZ+WMV2RQj152K6jx/1YmB9Htao=;
- b=qTdWyZjiJBxOTUtPTR++7Zo0H2ysoFKfoq6L/MhEYIAEI+x0z+WEXSpchw7Uyz3jqm
- ZUp5eeXuJ3SLlqr/NnZvSYfAMn70BPttRMsJzDTc3oB8OXKJk1kcTO4ztGZWINhEW5/O
- FC7VsKCu/yyXAcvBWie+AecrfBuiCXel/eZwiyv9H9H9AO+1T7UtRgEzSyEBaxIrE4ta
- E5vIZmqCiAhwfkdsytRsXu/SF4bmQBcGwsAfZcrJr/0oABkuMcLAcaUxpPEcD6OPYHLr
- PJwVTb24lIKvgD7yCrhnC1CcMxdM3bmoXi+Udq3rvmkgVqDMexjwskHwuL6XhDv9Lpr0
- mq/Q==
+ bh=CVP1DrRRJB1WXUjfuj7+sQ7KBSYueXRgTrnqteIoB5w=;
+ b=DA8gVz8hcOUXD9EzX6e8w95K8Qp27jsWx2hdYwio5zk2496tV5aJN6mJFZ39ouaRuE
+ uqBHeBWxqUEWaY86E58vsyw2I7W53TkJLR97IBIS3nsVdIJHW1Y1ORGIaWl798JSmGi2
+ Ih9TDMPjC9fdOHXjy1ma5WcY1uqbarheBrEl7rN8Cx823DwBcgW4ah1i/Aov7wmHCGv1
+ sIrKB1SEDp3O3CULL4q9lt4Kuj7CpQJF6+T1RA681K2KL8BtPM/QAJ79a3FJ0PhtQqmp
+ Kju6ZZMj2YI2P2kObAsG5O5fW2QnEH76dGwq7B+TkGMayqPkif1eW5W6jQynWcuf/Wsi
+ sHEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFmNS01DpwgkjZ/UXIVxY47zph3BTiw1FfTn4fibEVNFhjA9LBS4iFU91lFc01N+iwyvclKeI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRfE2UdUgXcmHsUc0Iedtj4+UhgxOUJtL8AoI2CM43p7oqLamg
- O4TwfYxokBS3+feV7EzsSngC5Cj+FH/SNdgl3DVPxMdv66F/RTLtN4bUXUu+owg=
-X-Gm-Gg: ASbGncs5f3zOvy5sNp5MxO6+QdhIxiSdJEUvH8nD+kt49mibA/q9eAG4UzMvPLi4oWT
- m0NDMXyfqpTRniNXYyzjk4Qg5s2a5vCKLyOhO4ZTTeIBDVKqe4Xhf1Cmq99mcJeFhnWItii4rQj
- 57isru5ONMqNK36NVT2IHcqVPN13Gy5J/itusCiFX3+03vBltbcFDHcnkODy8TlkWxkNZpsW/Cz
- v+YOn6FunwdQh7HT2m7QWYUoC18qszQmQZ+pZxsuyBsL0rmGRHEbeXlgD5oB2DNxlf7nL7QigKj
- 5NLgv+pheprJjwV5wzHWx4LatDGLdKt4G3L9TmHWB8n5se3KxqNr+QAOvYNxteF75i5zcQxN3Fp
- fq478J9qnU1kjkSka3g==
-X-Google-Smtp-Source: AGHT+IHr7K0X/Ft0H0FA7TO+t4lZtlFQ+J+ZUiaIf6lD+6WMP5kfpGLY7sAbzR6fw/2T8JQE88TUzA==
-X-Received: by 2002:a05:600c:28e:b0:43c:fc04:6d48 with SMTP id
- 5b1f17b1804b1-43f327bfe64mr8310165e9.0.1744275408562; 
- Thu, 10 Apr 2025 01:56:48 -0700 (PDT)
+ AJvYcCXhT8P7sWVS9czHhOrewMrg3uoRddENPPJ6zmaGtAzH7QqXQDYdc2WF1weGLVCKAWe8jp9AYUs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZBrJ4NT7FCdhXIGD/vvKM7hoO5NO/3+IwptLfpOa67ALYLh9u
+ 8rFzO1GW42J1q7WumR9qKISiSSDEmaviO+H2RJlMcU3hRgftWHSMsP3UMPNNyGc=
+X-Gm-Gg: ASbGncsHR+9Sd+Fmw50KUznf5LGKjwBqR59gvxMWqBqOitaYNX6XD0qPktXqzEjqq4x
+ WiYS+rcLJq/jNlKAtvShfMaAfneJUn5XVcM5yQDtw+RWqoDvGoyz2NMmZt+dryQ3URD6Os7/yHi
+ e+sP3zR58cVxkyIGSveKbDvD+PgmXCGGa+P17eQkl6RriCoPao5lM38fPz8QCYMUkOOFMpLcvMQ
+ sDOHxZtuVvolOuTVgAycks8o6Vk0ebfaMhAozSESDA3tzFFIWseO7fv/PIyTpDDZHH0LkeJP+vB
+ qQHeRgRPtbzs75mFf7meVcKKIjiyZmLk5MUuUKhGQ4ZeK/iJbCl+knuM2jgh0rUcZVpjHc6sKXn
+ zTLkQvzAUHbm3H+hx3Q==
+X-Google-Smtp-Source: AGHT+IF94C4JD6nZzyU9W6XN3dvb2aABl3QnBUrkyhyHSRsLi2wLmXHdAkaD3NUFpcQwJnsxa/KDhw==
+X-Received: by 2002:a05:600c:4ecd:b0:43c:ed61:2c26 with SMTP id
+ 5b1f17b1804b1-43f34cdbf91mr3111825e9.17.1744275416351; 
+ Thu, 10 Apr 2025 01:56:56 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe?
  ([2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f205ec97csm48971635e9.6.2025.04.10.01.56.47
+ ffacd0b85a97d-39d893774aasm4185714f8f.30.2025.04.10.01.56.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 01:56:48 -0700 (PDT)
-Message-ID: <952b09b6-aff4-43fb-be0b-d229d6e9cda6@linaro.org>
-Date: Thu, 10 Apr 2025 10:56:46 +0200
+ Thu, 10 Apr 2025 01:56:56 -0700 (PDT)
+Message-ID: <6cd94cc0-916d-4063-b588-18bde7f5bae0@linaro.org>
+Date: Thu, 10 Apr 2025 10:56:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 2/2] phy: phy-qcom-qusb2: Fix USB PHY power on sequence
+Subject: Re: [PATCH v2 1/2] qcom_defconfig: Disable MMC HS200 mode support
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 Cc: caleb.connolly@linaro.org, trini@konsulko.com,
  alexeymin@postmarketos.org, Sumit Garg <sumit.garg@oss.qualcomm.com>
 References: <20250410080027.208674-1-sumit.garg@kernel.org>
- <20250410080027.208674-3-sumit.garg@kernel.org>
+ <20250410080027.208674-2-sumit.garg@kernel.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250410080027.208674-3-sumit.garg@kernel.org>
+In-Reply-To: <20250410080027.208674-2-sumit.garg@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -135,45 +135,34 @@ X-Virus-Status: Clean
 On 10/04/2025 10:00, Sumit Garg wrote:
 > From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > 
-> Recent addition of support for SDM660 inadvertently broke USB PHY power
-> on sequence on RB1/RB2 and others with following error:
+> Currently the msm_sdhci doesn't yet support DLL configurations which are
+> required to enable bus speeds greater that 100MHz. So disable HS200 mode
+> support as of now as it requires bus speeds of 200MHz.
 > 
-> starting USB...
-> Bus usb@4e00000: QUSB2PHY pll lock failed: status reg = 0
-> qcom-qusb2-phy phy@1613000: PHY: Failed to power on phy@1613000: -16.
-> Can't power on PHY0
-> probe failed, error -16
-> No USB controllers found
+> This should fix eMMC issues reported on RB1/RB2 although it should fix
+> issues for all Qcom platforms but it's not seen there as mostly SD cards
+> available don't support HS200 mode. The SD cards usually works in high
+> speed mode whose performance remains unaffected by this change. It only
+> affects RB1/RB2 as eMMC flash on these support HS200 mode but the U-Boot
+> driver currently is incapable of supporting that.
 > 
-> The root cause was the addition of flag se_clk_scheme_default which was
-> configured correctly for SDM660 but incorrect for all other supported
-> SoC. Fix that by properly assignment as per upstream Linux driver.
-> 
-> Fixes: 475497dc3c15 ("phy: Add SDM660 support to Qualcomm QUSB2 phy")
+> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > ---
->   drivers/phy/qcom/phy-qcom-qusb2.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   configs/qcom_defconfig | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
-> index cabd05bf5a6..d98f6108e69 100644
-> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
-> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
-> @@ -230,6 +230,7 @@ static const struct qusb2_phy_cfg sm6115_phy_cfg = {
->   	.regs = sm6115_regs_layout,
->   
->   	.has_pll_test = true,
-> +	.se_clk_scheme_default = true,
->   	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
->   	.mask_core_ready = PLL_LOCKED,
->   	.autoresume_en = BIT(3),
-> @@ -256,6 +257,7 @@ static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
->   			 POWER_DOWN),
->   	.mask_core_ready = CORE_READY_STATUS,
->   	.has_pll_override = true,
-> +	.se_clk_scheme_default = true,
->   	.autoresume_en = BIT(0),
->   	.update_tune1_with_efuse = true,
->   };
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index a2b54b95f19..537806450dc 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -81,7 +81,6 @@ CONFIG_QCOM_HYP_SMMU=y
+>   CONFIG_MISC=y
+>   CONFIG_NVMEM=y
+>   CONFIG_I2C_EEPROM=y
+> -CONFIG_MMC_HS200_SUPPORT=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_ADMA=y
+>   CONFIG_MMC_SDHCI_MSM=y
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
