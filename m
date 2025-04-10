@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDFB8C369A8
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 12:58:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97923C369A6
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 12:58:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3586983C51;
+	by phobos.denx.de (Postfix) with ESMTP id 8141A83C6D;
 	Thu, 10 Apr 2025 14:58:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=couthit.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=couthit.com header.i=@couthit.com header.b="Unh14GsL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=couthit.com header.i=@couthit.com header.b="Z8RPRB7w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 780FD83989; Thu, 10 Apr 2025 09:00:43 +0200 (CEST)
+ id 2F4FA8398B; Thu, 10 Apr 2025 09:00:54 +0200 (CEST)
 Received: from server.wki.vra.mybluehostin.me (server.wki.vra.mybluehostin.me
  [162.240.238.73])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A99458394F
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:00:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19E0183957
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:00:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=couthit.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=parvathi@couthit.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=couthit.com
  ; s=default;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YOCPe8Vk7AaOBQyPdlCLIdutbJBxhtyR+wXunVfy4Pk=; b=Unh14GsLV5+8bJjnGR2yEH+9bn
- CuZPIQHXs7hqQgRdlYhmfbY69tuV78p0FDXH10zn66JIske2L6M4nB5utx+w9jRTsE0/AG+8ImbrK
- qro0YOJVcLRGC49Mj96cp1weSvhIv0bKrmJkprZvCJf0fBlJRswlDvO/9uo6sMbVJ+me06sxjOcqn
- ZI0ixr0f9/iUi/Y+eLgrvW/skasEZu4/0VyXxe7fzb2e1llerXrWeGPjJg7Q6U9femkBV6576Zrqg
- uTG53qG2793HVrGpa3K+auBfmcOsVwDvjmBODkoQBYzcKu5YrxYBlvydhDkcxWra35qhe6NsDviK5
- 5Nx8gfjA==;
+ bh=3I6UhbHmQqWnAv08vDNkRelkwutK2sqszXEqDIDnVAI=; b=Z8RPRB7w22feTC9V3xAqo5Brwx
+ 1AcVBHqADR+R7RswbluFWUHudaxMjodCaNjPZBtvrmKya7om6Sjj690vf/TarQh2wuDQbzAxe9fZ9
+ ukUUC/wmKowgX2ZdpMizFc0cTkjCpfRuL4EpezHLsdCSwtlh0vqISJzJxCj8SHs53loDrr4izOUMp
+ IzOQ23k8uju3lTuYDdolM7NpkVlJjsu9qj8xNeNnnA0+H2+a4+j3p7Y2/5mGkyuZvnQODlj7l/M2n
+ OxALHame+sxnw6Dip5ZWibI+MLCDiZdM6bkDClBoxToAcjA69fWYdZaFo3WJPTclNskJ/lNIKOWhE
+ K6/J/p3A==;
 Received: from [122.175.9.182] (port=56142 helo=bulbasaur.couthit.local)
  by server.wki.vra.mybluehostin.me with esmtpa (Exim 4.98.1)
- (envelope-from <parvathi@couthit.com>) id 1u2ltu-0000000035o-0F6L;
- Thu, 10 Apr 2025 12:30:37 +0530
+ (envelope-from <parvathi@couthit.com>) id 1u2lu5-0000000035o-33hT;
+ Thu, 10 Apr 2025 12:30:49 +0530
 From: Parvathi Pudi <parvathi@couthit.com>
 To: u-boot@lists.denx.de,
 	trini@konsulko.com,
@@ -51,10 +51,13 @@ Cc: pratheesh@ti.com, prajith@ti.com, vigneshr@ti.com, danishanwar@ti.com,
  praneeth@ti.com, srk@ti.com, rogerq@ti.com, afd@ti.com,
  krishna@couthit.com, pmohan@couthit.com, mohan@couthit.com,
  parvathi@couthit.com, basharath@couthit.com
-Subject: [PATCH v1 0/1] Support for PRUETH mode on AM335x ICE
-Date: Thu, 10 Apr 2025 12:29:54 +0530
-Message-Id: <20250410065955.9770-1-parvathi@couthit.com>
+Subject: [PATCH v1 1/1] include: configs: Adds support for AM335x ICE PRUSS
+ mode
+Date: Thu, 10 Apr 2025 12:29:55 +0530
+Message-Id: <20250410065955.9770-2-parvathi@couthit.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20250410065955.9770-1-parvathi@couthit.com>
+References: <20250410065955.9770-1-parvathi@couthit.com>
 X-AntiAbuse: This header was added to track abuse,
  please include it with any abuse report
 X-AntiAbuse: Primary Hostname - server.wki.vra.mybluehostin.me
@@ -84,29 +87,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On the AM3359 ICE we have two modes of operation CPSW mode or PRU-ICSS
+mode.
 
-This patch adds support for PRU-ICSS mode in the u-boot environment to
-correctly load the device tree blob file based on the HW pin (jumper)
-configuration in AM335x ICE Evaluation module. In this device, the pins
-and the ports are shared between PRU-ICSS and CPSW thus need runtime
-detection between the two modes which are rmii in case of CPSW and mii
-in case of PRU-ICSS.
+For PRU-ICSS mode, connect Pin2 and Pin3 of J18 and J19 and for CPSW mode,
+connect Pin1 and Pin2 of J18 and J19.
 
-Depending on the jumper configuration on AM335x ICE we have to load the
-appropriate device tree blob file. In case of CPSW (rmii) mode, we need to
-load am335x-icev2.dtb file and in case of PRU-ICSS (mii) mode we need to
-load am335x-icev2-prueth.dtb file.
+This patch adds support for PRUSS mode boot strapping from uboot.
 
-Thanks and Regards,
-Parvathi.
-
-Parvathi Pudi (1):
-  include: configs: Adds support for AM335x ICE PRUSS mode
-
+Co-developed-by: Basharath Hussain Khaja <basharath@couthit.com>
+Signed-off-by: Basharath Hussain Khaja <basharath@couthit.com>
+Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
+---
  include/configs/am335x_evm.h | 9 ++++-----
  1 file changed, 4 insertions(+), 5 deletions(-)
 
+diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
+index 19d3c72a6f1..cf43fc05025 100644
+--- a/include/configs/am335x_evm.h
++++ b/include/configs/am335x_evm.h
+@@ -138,11 +138,10 @@
+ 			"setenv fdtfile am335x-evm.dtb; fi; " \
+ 		"if test $board_name = A335X_SK; then " \
+ 			"setenv fdtfile am335x-evmsk.dtb; fi; " \
+-		"if test $board_name = A335_ICE; then " \
+-			"setenv fdtfile am335x-icev2.dtb; " \
+-			"if test $ice_mii = mii; then " \
+-				"setenv pxe_label_override Pruss; fi;" \
+-		"fi; " \
++		"if test $board_name = A335_ICE && test $ice_mii = rmii; then " \
++			"setenv fdtfile am335x-icev2.dtb; fi; " \
++		"if test $board_name = A335_ICE && test $ice_mii = mii; then " \
++			"setenv fdtfile am335x-icev2-prueth.dtb; fi; " \
+ 		"if test $fdtfile = undefined; then " \
+ 			"echo WARNING: Could not determine device tree to use; fi; \0" \
+ 	"init_console=" \
 -- 
 2.17.1
 
