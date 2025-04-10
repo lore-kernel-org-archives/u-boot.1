@@ -4,58 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BED8C369A2
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 00:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3D0C369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 01:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2FB8838FA;
-	Thu, 10 Apr 2025 02:35:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 11A688395B;
+	Thu, 10 Apr 2025 03:46:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="qQ4ZH01y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I4H5irE/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3C47838D7; Thu, 10 Apr 2025 01:40:48 +0200 (CEST)
-Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com
- [IPv6:2001:41d0:203:375::ab])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A18C083971; Thu, 10 Apr 2025 03:46:21 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D604C8384E
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:40:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1CAD8838BA
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 03:46:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexeymin@postmarketos.org
-Message-ID: <84ec2a78-6f9b-469f-b8a1-de44132e31bd@postmarketos.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1744242045;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YLVMWVn+mSk2lSraaE81s1gd/VnnzZeaSDaBER9irtc=;
- b=qQ4ZH01yb3Foqqa5spOXMpr851yvGxk2Gohd9JPkZDs4jiwLxIhbdT6xdxT94o7/55WYd5
- PJnENPcR7exzTNfpOSc9W1Oq0L7R0Ts/uFrToFxL+tEypncWmSPeRuvG8cMFQStKuUI843
- tK9bqVRGeus/Zf1+IZ4a5XfG1qX/SnlOpwiDxFHjtB7pq+qmNWmgb93rBPU2qldN8x09XQ
- ULAGyYHDZkRuHuFDTuwjamqtOxy/QVI0J6zCgRnIePI38fjIQGSbMF+7m7n2S9+jnypolG
- 8Xtlc+szTcdr418r58GqynSvQmlGEMOjm4J5XdfhbfGwJfuAk25einI/5QZTtQ==
-Date: Thu, 10 Apr 2025 02:40:26 +0300
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-60208b7a6d6so76375eaf.1
+ for <u-boot@lists.denx.de>; Wed, 09 Apr 2025 18:46:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1744249578; x=1744854378; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kVBWECDTfaSQuTfA0TST4GoFjs/2l0a52Smh1PkM980=;
+ b=I4H5irE/wYhMj5433vcfA7DKi9+lgJYDhxeXavL9pzTQQEapzwRGZ8H+1uW917WG8o
+ Thgdr05c0lCXJ2I5chxbC6tbeUivkISnlDCdAhfMvQ/7O54n29ewof4Oa6dyCbVRZPwi
+ jAk0od5MpWtW4ZQInnEFTej0NbVzS8+ql6BdE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744249578; x=1744854378;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kVBWECDTfaSQuTfA0TST4GoFjs/2l0a52Smh1PkM980=;
+ b=M/poSRkkqvteLgjrjBwIsRqvBRdcwW3FsoGiLTe4QfsjNMotjjotU+H3gAF4tEafdX
+ dk35OmrJxGL5pLMOO0C5Wi+BUIzhzk43SYkzZHqiKJSpzQMG69xfC0E9mxl2PYaeQZXX
+ XKJxFh+pQRuJlilIVJJRxI0OIcp3FSMmQ7FJBThn6v/xegyQKMvkCgzM0k8JYkx8X/rn
+ KLiPOvvC7dc1oyYNTjglBmCAqWNlmlpV/AxaUg2ffxXZB7Ifqm5v6dfI9U1MPN5et6OK
+ Z16IeAJwtpEBeMHNZBdhhux4iOEyjY80EpLJUDKFyQeMRK0Ts0rkBuoGhR+jUYlpYoZx
+ zGag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVR+yEF9ZqEt9O5IIvbXpc33R4NDzz3LFAf+tI+CkiSn6NoqVXf+qHFCREEjyXHhSkW6FYlfPY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxV3lAP7ZwMpCoRi4EQzU0kaDY2leL/+xqPM2ECllvmCpd1nrsu
+ z8WZgpFT2mvhzU6WK0RDgGr5mFDfhUugypIE4D25xwzloktO9Hz0euKS6+PkM64=
+X-Gm-Gg: ASbGncscAr17bY6FXIr8qryeQKH3X0EOZx3wgB+yVrBk8kDupWtCYRbc98pNvLtTKSj
+ t7BtjXEPTam5wrX2sQIeibp6NzhKzlBLWwBZ7nm2LR1rNf3EZSyb6ki+6V0sQhEFUaZQi4Bv5OA
+ IbKbzmkWHAq026yaYqOG4qviV+Xp7WhqYi3N95+KtoZY5ieCxdt7AsmU+IiDB8y47tAZlTzwByQ
+ yh8hIREwDbXq/Dh58XPs5n+qrJRhhPaoSSjsF+JPxIQyWO0hv3HsVANk2aHmtvZ9eJR7lGeBCp9
+ VfR316hhMBH3oJ8jG3m3FZ+czvhgOgxwPUQKEIcq32tGQv7ybrNjN+rys2M2IYtZAAi+qxsiLdf
+ Dimrdzz4YcYE=
+X-Google-Smtp-Source: AGHT+IENezPMul6b9stGN4hcQtvbRd2F9s8IUF3KidnfpMRhHrT6RqVOSqZ7bPIEWSwk9LwCazPT+w==
+X-Received: by 2002:a05:6870:1655:b0:2b8:3a2a:af31 with SMTP id
+ 586e51a60fabf-2d0b30d99f6mr630808fac.0.1744249577803; 
+ Wed, 09 Apr 2025 18:46:17 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2d096cd3764sm474569fac.31.2025.04.09.18.46.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Apr 2025 18:46:17 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: sjg@chromium.org, Neha Malcom Francis <n-francis@ti.com>
+Cc: u-kumar1@ti.com, afd@ti.com, vigneshr@ti.com, devarsht@ti.com, 
+ quentin.schulz@cherry.de, j-choudhary@ti.com, jonas@kwiboo.se, 
+ richard@nod.at, raymond.mao@linaro.org, m-chawdhry@ti.com, 
+ u-boot@lists.denx.de
+In-Reply-To: <20250319140327.301266-1-n-francis@ti.com>
+References: <20250319140327.301266-1-n-francis@ti.com>
+Subject: Re: [PATCH v2 0/2] Change DRAM message and add RAM doc
+Message-Id: <174424957616.1824423.4212381391788741775.b4-ty@konsulko.com>
+Date: Wed, 09 Apr 2025 19:46:16 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH] pinctrl: qcom: handle reserved ranges
-To: u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-References: <20250401-topic-sm8x50-pinctrl-reserved-ranges-v1-1-0fe88b491707@linaro.org>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-In-Reply-To: <20250401-topic-sm8x50-pinctrl-reserved-ranges-v1-1-0fe88b491707@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Thu, 10 Apr 2025 02:35:21 +0200
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,42 +100,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/1/25 10:46, Neil Armstrong via groups.io wrote:
-> From: Caleb Connolly <caleb.connolly@linaro.org>
+On Wed, 19 Mar 2025 19:33:25 +0530, Neha Malcom Francis wrote:
+
+> This short series is an ongoing effort to make RAM utilization clearer for
+> easier debugging and understanding of code. Intention is for users to quickly
+> be able to identify the CONFIGs needed to modify for their RAM usecase.
 > 
-> Some Qualcomm boards feature reserved ranges of pins which are protected
-> by firmware. Attempting to read or write any registers associated with
-> these pins results the board resetting.
+> Neha Malcom Francis (2):
+>   board_f: Modify DRAM message
+>   doc: memory: Add documentation for system RAM
 > 
-> Add support for parsing these ranges from devicetree and ensure that the
-> pinctrl and GPIO drivers don't try to interact with these pins.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->   arch/arm/mach-snapdragon/include/mach/gpio.h | 15 +++++++
->   drivers/gpio/msm_gpio.c                      |  9 ++++
->   drivers/pinctrl/qcom/pinctrl-qcom.c          | 64 ++++++++++++++++++++++++++++
->   3 files changed, 88 insertions(+)
+> [...]
 
-...
+Applied to u-boot/master, thanks!
 
-> +#define MSM_PINCTRL_MAX_RESERVED_RANGES 32
-> +
->   struct msm_pinctrl_priv {
->   	phys_addr_t base;
->   	struct msm_pinctrl_data *data;
-> +	u32 reserved_ranges[MSM_PINCTRL_MAX_RESERVED_RANGES * 2];
-> +	int reserved_ranges_count;
->   };
-Why storing of reserved pins isn't implemented using bitmap?
+[1/2] board_f: Modify DRAM message
+      commit: 7dfe3cdc6c58f428803b0f1698bbd4b283103adf
+[2/2] doc: memory: Add documentation for system RAM
+      commit: 284ef1bbcefcf3180592ed48f522c79618099bd6
+-- 
+Tom
 
-     DECLARE_BITMAP(reserved_pins, 256);
 
-would only consume 32 bytes, instead of 256+4 like here.
-
-Do I miss something?
-
----
-Regards,
-Alexey Minnekhanov
