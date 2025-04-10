@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F96C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F17A3C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91C0183A24;
-	Thu, 10 Apr 2025 10:00:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED92283A22;
+	Thu, 10 Apr 2025 10:00:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Akh6Pdru";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OEdZs3/w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DFC883A22; Thu, 10 Apr 2025 10:00:43 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id CF71283A2D; Thu, 10 Apr 2025 10:00:45 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D69B83A1E
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:00:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B57D083A1E
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:00:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 759C56112C;
- Thu, 10 Apr 2025 08:00:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0291C4CEDD;
- Thu, 10 Apr 2025 08:00:36 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 216A3A499E6;
+ Thu, 10 Apr 2025 07:55:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD315C4CEE3;
+ Thu, 10 Apr 2025 08:00:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744272039;
- bh=bISf9ug2HyWtwqkJd87uu3s/CTYfgqjFoKGkY+Oedhs=;
- h=From:To:Cc:Subject:Date:From;
- b=Akh6PdruU4M0Nlukgcei6NP2OnmAT1N69TD7F8d8mgIvTlTeq/1jOmjYZ2GisnIVq
- ffr/jrn4kRGxt/21xGTpOJFsT5rDLKVuA66iLVJQu/oK3aChxgjqUIK6g2dmam+Jci
- qSO+zom2p0zBLZp90vaisdey0RcDI26mkfdpvXMCv8Vs95h41OgoFLnIs+Rhsx4ECH
- 3r0OSJGx+SwNqfDOZHWtjnwq4UnPivpbRJdiZblahuccJHsv+j8faoFUoKa47/bweI
- pM1xJ+/IS3J7wh9vPVjGeBRDEQRIj+0azDchHMarbfQ4Ddiy6o1ow4QPl+J+Df9tHj
- Hyt9c/mgAhsKA==
+ s=k20201202; t=1744272042;
+ bh=TO1KRzc+cXf2doL0Dy1GfkSg07JnAaVHdNKASrzZ00k=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=OEdZs3/wMTdrOn6dG/bWFOVnPu2uzce07Czj2yz+NrXJAbDO/PbNEn5zDjZQFrJeh
+ loByIETFuHn4ZPegDjJLFWpiVsZ6d94pOxaPq6DWYV5Z9de0y2Kd8iyMHq1myaUnai
+ 3w6YD+wdPiVAg+WUZGhA3wqU6nIE7KVc/pVMffynJiLUnvDICHC0AQmFAcGx4XEI6Y
+ VeyXUQvtKXVfoSHd4dHIlsyp1LWDC1T3+ObIopevzdG20DJVEUwmFq9ZRj7bB1Qntq
+ Q0bqBGiPqopR2OLtLtaTdX12v3iVqS/dwoOzAurdOzhQyJYBigoPtGWTyUwQ1MKAKq
+ oiLyaRYF/VVUw==
 From: Sumit Garg <sumit.garg@kernel.org>
 To: u-boot@lists.denx.de,
 	u-boot-qcom@groups.io
 Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
- alexeymin@postmarketos.org, Sumit Garg <sumit.garg@kernel.org>
-Subject: [PATCH v2 0/2] RB1 fixes
-Date: Thu, 10 Apr 2025 13:30:25 +0530
-Message-ID: <20250410080027.208674-1-sumit.garg@kernel.org>
+ alexeymin@postmarketos.org, Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: [PATCH v2 1/2] qcom_defconfig: Disable MMC HS200 mode support
+Date: Thu, 10 Apr 2025 13:30:26 +0530
+Message-ID: <20250410080027.208674-2-sumit.garg@kernel.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250410080027.208674-1-sumit.garg@kernel.org>
+References: <20250410080027.208674-1-sumit.garg@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,29 +70,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The eMMC on RB1 boards supports HS200 mode but currently the msm_shdci
-driver in U-Boot is missing DLL configuration required for HS200 mode to
-work. Hence disable HS200 for now until proper support is in place.
+From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-Apart from that, add a fix for USB PHY power on sequence which got
-broken by recent addition for SM660 platform support.
+Currently the msm_sdhci doesn't yet support DLL configurations which are
+required to enable bus speeds greater that 100MHz. So disable HS200 mode
+support as of now as it requires bus speeds of 200MHz.
 
-Changes in v2:
-- Drop DT override patch as Caleb fixed SD card and enable USB DT fixup
-  via OF_LIVE here [1].
-- Expand commit message for eMMC fix.
-- Add a patch to fix USB PHY power on sequence.
+This should fix eMMC issues reported on RB1/RB2 although it should fix
+issues for all Qcom platforms but it's not seen there as mostly SD cards
+available don't support HS200 mode. The SD cards usually works in high
+speed mode whose performance remains unaffected by this change. It only
+affects RB1/RB2 as eMMC flash on these support HS200 mode but the U-Boot
+driver currently is incapable of supporting that.
 
-[1] https://lore.kernel.org/u-boot/20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org/
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+---
+ configs/qcom_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-Sumit Garg (2):
-  qcom_defconfig: Disable MMC HS200 mode support
-  phy: phy-qcom-qusb2: Fix USB PHY power on sequence
-
- configs/qcom_defconfig            | 1 -
- drivers/phy/qcom/phy-qcom-qusb2.c | 2 ++
- 2 files changed, 2 insertions(+), 1 deletion(-)
-
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index a2b54b95f19..537806450dc 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -81,7 +81,6 @@ CONFIG_QCOM_HYP_SMMU=y
+ CONFIG_MISC=y
+ CONFIG_NVMEM=y
+ CONFIG_I2C_EEPROM=y
+-CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_MSM=y
 -- 
 2.43.0
 
