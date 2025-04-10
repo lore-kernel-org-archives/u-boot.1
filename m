@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F0D5C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:41:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CE0CC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3990783A84;
+	by phobos.denx.de (Postfix) with ESMTP id 919A183A90;
 	Thu, 10 Apr 2025 10:41:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="Umo0iXnl";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="JKAyrsvl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBBD483A57; Thu, 10 Apr 2025 10:41:28 +0200 (CEST)
+ id C03F283A56; Thu, 10 Apr 2025 10:41:28 +0200 (CEST)
 Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C2E83A56
+ by phobos.denx.de (Postfix) with ESMTPS id B6C5E83A61
  for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:41:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=norik.com
@@ -27,31 +27,34 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=primoz.fiser@norik.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
  s=default;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
- Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jWylBP2/iwM10W7gNPxjGHYHZAcpPX6p7ZCOALOUg98=; b=Umo0iXnlCNkchfU4n/cyRXJKZL
- vnSXYDZFAwmWqwAbTEPb3+n5qNOMOX0YFKPxWzPK6sreOgawwkRML5q1m1jL7ucESWT5134tTw2gO
- mqqsrxGAESXrdLJGTe5RYXQSDl49FZPjixAPBPspPNIu4/OcDMelfb+aGRDcMQRH6y/fS50b2clLI
- yUOJtslW0jVE9EkAkZy+/sGoNutuZ+ipZcTElkZofquwnZD/JIPoao6w5lLLCcWlNq8cvBvFiqWoo
- yg2FO35OnAa7dywouE3GR4hoJ3yvkFx+L3wFVwS2Tb/Wnjlp+VbvcklvUeqp03yDYcElkChlIJXi2
- PcuaO+FA==;
+ bh=iFljJS+T3Da1LzVzwOzSuePsiVt5WStcZHi0GJB6ME8=; b=JKAyrsvlQ0z9T6Uwl0PEXKZXkJ
+ 9dqmqK0tva+IPVlIKgpm0vLr53IKrpUDeEU++JcbGw51fd/dTx6CbndYzrJ4bzyxBUYWuXY+5kEF3
+ FGS+Y4U9IhdnmKo4SxU2TFrttYtvNKekUW4TZ9WpA/HvszY3o1V5Ecd4IJbWi3VrZlWD437weWiK6
+ dGK3o6P5dRH0gr5CHxKDjE93yx1k2qUdVP5gUWydGXQhYNDIqhhz2J2g+EfRLVP5wSqd00cHZxtLR
+ 4jqo16YJ99G3oSupabL+cUPPI/xRHSQX4xbJttPwkEqyGq5sFesj4DR88lLpMs/16L3lTnhGWgwjU
+ jdwwdlGw==;
 Received: from [89.212.21.243] (port=54584 helo=localhost.localdomain)
  by cpanel.siel.si with esmtpsa (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1u2nTQ-0007zv-09;
+ (envelope-from <primoz.fiser@norik.com>) id 1u2nTQ-0007zv-0t;
  Thu, 10 Apr 2025 10:41:23 +0200
 From: Primoz Fiser <primoz.fiser@norik.com>
 To: Mathieu Othacehe <m.othacehe@gmail.com>,
  Christoph Stoidner <c.stoidner@phytec.de>, Tom Rini <trini@konsulko.com>
 Cc: upstream@lists.phytec.de,
 	u-boot@lists.denx.de
-Subject: [PATCH 0/6] Update phyCORE-i.MX93 environment
-Date: Thu, 10 Apr 2025 10:41:16 +0200
-Message-Id: <20250410084122.1010297-1-primoz.fiser@norik.com>
+Subject: [PATCH 4/6] board: phycore-imx93: env: Add option to disable
+ bootenv.txt import
+Date: Thu, 10 Apr 2025 10:41:20 +0200
+Message-Id: <20250410084122.1010297-5-primoz.fiser@norik.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250410084122.1010297-1-primoz.fiser@norik.com>
+References: <20250410084122.1010297-1-primoz.fiser@norik.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-AntiAbuse: This header was added to track abuse,
@@ -82,25 +85,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update PHYTEC phyCORE-i.MX93 environment in mainline U-Boot with changes
-from the downstream fork to get back in sync.
- 
-Leonard Anderweit (1):
-  board: phycore-imx93: env: Move bootcmd from defconfig to env
+Add support for disabling external environment import (bootenv.txt) by
+setting the ${no_bootenv} environment variable.
 
-Martin Schwan (1):
-  board: phycore-imx93: env: Add common RAUC boot logic
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+---
+ board/phytec/phycore_imx93/phycore_imx93.env | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-Primoz Fiser (4):
-  board: phycore-imx93: env: Move fdt and bootenv addresses
-  board: phycore-imx93: env: Add optargs to environment
-  board: phycore-imx93: env: Add prepare_mcore to environment
-  board: phycore-imx93: env: Add option to disable bootenv.txt import
-
- board/phytec/phycore_imx93/phycore_imx93.env | 36 +++++++++++++++-----
- configs/imx93-phycore_defconfig              |  1 -
- 2 files changed, 27 insertions(+), 10 deletions(-)
-
+diff --git a/board/phytec/phycore_imx93/phycore_imx93.env b/board/phytec/phycore_imx93/phycore_imx93.env
+index 52c234a4206c..d0694f23269a 100644
+--- a/board/phytec/phycore_imx93/phycore_imx93.env
++++ b/board/phytec/phycore_imx93/phycore_imx93.env
+@@ -20,8 +20,10 @@ loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+ loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
+ mmcboot=
+ 	echo Booting from mmc ...;
+-	if run mmc_load_bootenv; then
+-		env import -t ${bootenv_addr_r} ${filesize};
++	if test ${no_bootenv} = 0; then
++		if run mmc_load_bootenv; then
++			env import -t ${bootenv_addr_r} ${filesize};
++		fi;
+ 	fi;
+ 	run mmcargs;
+ 	if run loadfdt; then
+@@ -41,8 +43,10 @@ netboot=
+ 	else
+ 		setenv get_cmd tftp;
+ 	fi;
+-	if run net_load_bootenv; then
+-		env import -t ${bootenv_addr_r} ${filesize};
++	if test ${no_bootenv} = 0; then
++		if run net_load_bootenv; then
++			env import -t ${bootenv_addr_r} ${filesize};
++		fi;
+ 	fi;
+ 	${get_cmd} ${loadaddr} ${image};
+ 	if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
 -- 
 2.34.1
 
