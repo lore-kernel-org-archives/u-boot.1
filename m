@@ -4,103 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A1C369A2
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:20:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461E2C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:35:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38670839BE;
-	Thu, 10 Apr 2025 09:20:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9289E839C7;
+	Thu, 10 Apr 2025 09:35:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BFsHYW34";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="GmeNrv6H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89C5D839C1; Thu, 10 Apr 2025 09:20:19 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4643E839CA; Thu, 10 Apr 2025 09:35:56 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20627.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::627])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B5F8209C
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:20:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFEEA830E4
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:35:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-39ac56756f6so334367f8f.2
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:20:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744269617; x=1744874417; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fxWEedt3fMr2+s19ndrV/m3BR+qDLQD+2272oybXZ+M=;
- b=BFsHYW34YOHupl1XYBXCT1iJSnKOxgvrXT2aRtoRwbrLxJ8Te+ItD63gXoHb+4IhnQ
- pVYBtAWosZz/0uXHie4eQLdctM5SJKVG5Rc0v36bGQJlhtN8YYdsEoVnqtjLu/h51w/m
- uJBvQo+nc+Iy7i56Pe4yzfomdFl5TQM4H+22O7kH7OzsaOUI3aF7l2BD1BSPrnSx1gQb
- Y1ovdr+eWCeV2BIbBAa7S4qjAwhmINbLkNM3h19i60l0gqqdjwm+QOvRcbLrskcc76sk
- uK4vgchjjcE3I/9VdVWObw+34Ltr534O3v6l0jJLe7Hk/vRwlE2zKhOUon5D+q/3ShMw
- IOVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744269617; x=1744874417;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fxWEedt3fMr2+s19ndrV/m3BR+qDLQD+2272oybXZ+M=;
- b=qBBVFYwseqL7QSWbvx4HAVJQWwDYeD0fvBsNWz/NPl50trNzFrsaw8Q2ime25JrILH
- 7azTmrqaxFiqT9QzIpTrhYyvnsFBF1Z3wpgrBiTHSBV17kiTgwrHCRGABeFxZv98+rAy
- 6PPAg2CLg8tZELBa5pp+BZ4cc77tv6LWEkIQT3ZUXKbeP/jVKxPW8VTuMg2HUcun2lUJ
- q+ckyHCFKvy7FG2uCOm1YzEygGE1MuwLHdFArk0i2n+yxPLmWftorFFxXQE3+0LJ1Sx+
- z70jx60b60rXhD9IIK+U/Se9muLAbOyQZa7itA7Fcb+M6hdBrhyqxeoLvsSOPpC8LNj8
- tXAw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW3RM7ukrLirUgCufPqbA1F2aWRNGD8Ga8v5UIGrYG9+RXUIJVXJiRNNfVODvou7KtUnq/bPmo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTqCdoWQ3kgf0t4eeo4D/0//qdMxyZic+a0BiPjwy1E9s8RiKj
- yQmvnk/QkQWTQIazbreV9DbOfVBNXVS+9JCnVM2Zzluc/bCsYkXs
-X-Gm-Gg: ASbGncv7LIk4/b3GljRx8HjQBmAqH2eXhAHs1BBhM+OSSMMuKgOFTbqNxLcgOnaiYNT
- 0Vfe0Pw2Y8IWGC85ZYYBh5HMG5RjSlJNzfGALe799dzy+Gf57u+bn76eVoL2HG0UrkOAodPwYSs
- VZWhdoekEX24j3wvvhu0ZvP9k/cFejPUdWpHXgPn87hKYrG9A3piYnQBEBn9nA1p9ACk10p9hrl
- TyYbYVxuWRInY1ekV853oxEgO/DegEV/gRLEHsF53NCwuWpfLIhra0ZU5Y/sW0xyBmY9GOsv9VB
- 0gl9bCmZOj78p7jEpd4kfnnZhQLuZSPmH12xa4kAfZ0zv3CFSxWgd1/tVBsDqcbzW+FSNW4W5kX
- MkWJAFwRbfe+YPMM0lLKDOmVVtjE=
-X-Google-Smtp-Source: AGHT+IGcbG9TTzv88SGGmYonUe5BWCB8tFfVJ/XyJ88KQjsTrUUWfslLGtbCYo5HW3Bwq+n1rTOsQw==
-X-Received: by 2002:a5d:64e3:0:b0:391:3f4f:a172 with SMTP id
- ffacd0b85a97d-39d8f4e8e14mr989437f8f.49.1744269616992; 
- Thu, 10 Apr 2025 00:20:16 -0700 (PDT)
-Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
- [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d89389ed6sm3804553f8f.41.2025.04.10.00.20.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 00:20:16 -0700 (PDT)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Hans de Goede <hdegoede@redhat.com>,
- Olliver Schinagl <oliver@schinagl.nl>, Iain Paton <ipaton0@gmail.com>,
- Marcus Cooper <codekipper@gmail.com>, Stefan Mavrodiev <stefan@olimex.com>,
- Paul Kocialkowski <contact@paulk.fr>, Chen-Yu Tsai <wens@csie.org>,
- Maxime Ripard <mripard@kernel.org>, Ian Campbell <ijc@hellion.org.uk>,
- Adam Sampson <ats@offog.org>, Zoltan Herpai <wigyori@uid0.hu>,
- Siarhei Siamashka <siarhei.siamashka@gmail.com>,
- VishnuPatekar <vishnupatekar0510@gmail.com>,
- Rask Ingemann Lambertsen <rask@formelder.dk>,
- Aleksei Mamlin <mamlinav@gmail.com>, Peter Korsgaard <peter@korsgaard.com>,
- Michal Suchanek <hramrach@gmail.com>, Icenowy Zheng <icenowy@aosc.xyz>,
- Stefan Roese <sr@denx.de>, Phil Han <pengphei@sina.com>,
- Quentin Schulz <quentin.schulz@free-electrons.com>,
- Jonas Smedegaard <dr@jones.dk>, Jaehoon Chung <jh80.chung@samsung.com>,
- Heiko Schocher <hs@denx.de>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 8/8] sunxi: Kconfig: Remove obsolete USBx_* pin symbols
-Date: Thu, 10 Apr 2025 09:20:14 +0200
-Message-ID: <3620418.iIbC2pHGDl@jernej-laptop>
-In-Reply-To: <20250409002036.12212-9-andre.przywara@arm.com>
-References: <20250409002036.12212-1-andre.przywara@arm.com>
- <20250409002036.12212-9-andre.przywara@arm.com>
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bHjQ/2OUMZTf2kHyAN5h+QGxe9OZ/6eNt8r+xFYJMwc4X7jKAYB9CLHPD+mKRXzX+svO9jSuxpove8eIw+WF4Q4nlPqAhWyOB5LjnAxIoSm2FoFtR3815gLhOwKkeSIGCI4Eim47y4nmEXrzIeVtF+P5WDdnAfWwsBy8O1bGsUMoPTmFo2Vy2HOsnZlvB4cqqCSvprntvp5o/JQ5AVJdH2hDyrMsSbfoT+QLw/dTxrLewRmxKxLZ8WHocWsk9cjfSmt8mcHYCzLAg3s3CkmM+QUp4W351Zt3wxNuQlpeTE/N5bO+JHY5GohzkVdMjvtMTgXvcNzJ3RQul3hwJDo8Rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9ZLvgTAi0XCMW25z48jBB0nfsA8e14rQvE1NHZy7KBM=;
+ b=IFRTEiklRpTc/JC9XrtYnXKLd3kEp9mWFVq2A8MBiicS/0yH/xnB0pyk6izp5WiGd4YJaRjHETa2HynYIoWKJ54kzKQo+aG6b/Oajs+DqnfJcvxAVbXR/BSgMiXQKS5pOYaDoWQ7e4UsmH1MfsCjBwIZ5VnbhCfgpSp9XD8MrUHgEyaHSmWcwHOFBf+L9tacYTbnfY+lY8PRH3v0xh68hT+yZl4qQC07gTLWc3Bu8iIzc8TeUELQkQ03wq1vAegmAcrJ+F7wb3OpZPhAeZbhhyv256CkwT7BWLZOofdydbBD6OUxLil5AyPmK5QomhmQ3nHFM8FLMgH9lPCIDq3hnQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9ZLvgTAi0XCMW25z48jBB0nfsA8e14rQvE1NHZy7KBM=;
+ b=GmeNrv6HrcHw60CNDl8oiSnrF6Cl+qjQvF/riKdVMHIqZQpfhSTFJqljxSItATdxnloi0skEdPI6MDED0cgVPeLA/OnIuNtS4tfL+zAp5NZLOc+1F+O3yXy98NPMzsERoZ4HHjylDcxUZTHzjqkWp6HM/0Pa2Dy7atIzK91LZiA=
+Received: from DS7PR03CA0002.namprd03.prod.outlook.com (2603:10b6:5:3b8::7) by
+ PH7PR12MB7986.namprd12.prod.outlook.com (2603:10b6:510:27d::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.20; Thu, 10 Apr
+ 2025 07:35:49 +0000
+Received: from DS1PEPF00017097.namprd05.prod.outlook.com
+ (2603:10b6:5:3b8:cafe::26) by DS7PR03CA0002.outlook.office365.com
+ (2603:10b6:5:3b8::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8632.23 via Frontend Transport; Thu,
+ 10 Apr 2025 07:35:48 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS1PEPF00017097.mail.protection.outlook.com (10.167.18.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8632.13 via Frontend Transport; Thu, 10 Apr 2025 07:35:48 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Apr
+ 2025 02:35:48 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 10 Apr
+ 2025 02:35:46 -0500
+Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 10 Apr 2025 02:35:46 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] amd: versal2: Enable SMBIOS command
+Date: Thu, 10 Apr 2025 09:35:36 +0200
+Message-ID: <c1e236003c6ec250dbcc5178c873c171fffccd29.1744270535.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017097:EE_|PH7PR12MB7986:EE_
+X-MS-Office365-Filtering-Correlation-Id: 311b58a1-dbb8-40c5-2205-08dd7802502a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dyWMOzdu94DrLJMWH9GN5+adOjfREFzBkQ5a/YuPWPabrGvMwZwYNkizIayq?=
+ =?us-ascii?Q?avRN8fV1PalDnwNgEXSD103jOh1s3TuO1IHGAewLtqqbBZ9IkDp5fXFMzGuO?=
+ =?us-ascii?Q?FREwgjKZA7wEG7AGpzwx0Rq+5GfhAIyRw/pEg5KPC1qy4Fds3SqQnZlSkPY+?=
+ =?us-ascii?Q?BYhAZeoHV0cWci51rHDavScsH+14UtRdJn8fMu456fX1umi8zDguSHV9XlSl?=
+ =?us-ascii?Q?lSL2N4uIT6bfh3buAIDF2YCwHtHcjw/mRBa9dIK3Jja2IrxUa7mi8RPIoRsY?=
+ =?us-ascii?Q?fgUDUk7lxn1LeN+ScOlr3WLzQDVTLuAtVMKK24XcWhBQSUm8ToizgoE9IKVT?=
+ =?us-ascii?Q?Voowq+kPM+Q9ofeijzP2HqmtOLfTXjR9xTetolS9q02v8hO9Fi+SCmlIFjMS?=
+ =?us-ascii?Q?fhV2QIc2WmbNS1tSPE88TOlJyx0Gj72hMwZwM/t3xQTQL5IA6Cy19CyeeRYR?=
+ =?us-ascii?Q?qgNxJKxxHhWb/JHra7QWwVAejvXAWEDbLo0xGIKZznN0yiwjpDborKvG2Sfk?=
+ =?us-ascii?Q?OrdKEfNxn5/xt0MxbF8inqQLy4Ru08Lf4cdlG+T7Tn2h8uNUtEVS6I1Q36CZ?=
+ =?us-ascii?Q?kIczKrwZpeqlreX4rgJhjUYC8bEDole+Pf2kpHez23lijhi2G4DHcEqJ3g/t?=
+ =?us-ascii?Q?Fm0k2dyjPCMhg5ry35yfLgrUJmhPV4YD9JCIAk0TuGgVl09fyXSyXl9ulx1z?=
+ =?us-ascii?Q?W5TwNejauVM3GwUuRtasc6yJzj9/NE2G8Lb6MBg1A9CNqQ3ANg9E8yyCI5kz?=
+ =?us-ascii?Q?LHJS8ml63cuPfNHNpnzpBYPmKlWciuX5X4UA5tq8vcM0g0Rc1aTr1zeUu39b?=
+ =?us-ascii?Q?dE6eRZCHLSvl73I+S4BRlHSMsTVX+Qej019d+Z4/tD05Q5EEETokbSzvs/kG?=
+ =?us-ascii?Q?MpjtgRY//eclXCUIfrO7hA/ElnfrIjMos1Ty4gMAW3OfR/2NtjmPGvNo/OfQ?=
+ =?us-ascii?Q?KM74CCjxDbJdIUqoCeoMv29z7xSsrCpl/RSA1Enjk1/R3F0BryB8IlccnhCh?=
+ =?us-ascii?Q?mRsmyowfGo4LHj8VMlIe89ogczpFkH/PdfYRhaVc6YLPgpH1Y5TvZtVQrSFp?=
+ =?us-ascii?Q?omSVgYN2I7KppMU9w8LntxV+YVMs/cEE0bdjusLdcTu57zcTSxJ/qezmYQgs?=
+ =?us-ascii?Q?r9m+ZO9J3a7J3r7Q9ASb7kg/WN8+3htafIGKPBkwUCVgZr47jxg2PZlMhtUc?=
+ =?us-ascii?Q?YGTpzTgfGHpLIHm1S7A9GrqBle53ARtUNh8MqstwdJ/TU89r5om7sA3auP0S?=
+ =?us-ascii?Q?XEL2oeUMl2XM3aEoVjyLZqlI995ErCTOL/QdpVuiOTGanjpiS+8USC9n7u5c?=
+ =?us-ascii?Q?wQcK0ouKbkzIKEWaYlyG2Z6NKev8I//Sq5GHwCIcHJb4k5KTDpsMjckUUcO7?=
+ =?us-ascii?Q?vxVeLFL6OWts3e1/HTfnbN2XUzlbRNTz/NUpSZcii73jLuOoBnqbXXJqPRLu?=
+ =?us-ascii?Q?RsvjLnvUnYYaNaLlpujezfInSBdiVZTNcTwEQIBFU7Vz+4rlJqcnIVX20pHF?=
+ =?us-ascii?Q?tLgyjlFQJO2KO5Y=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 07:35:48.5747 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 311b58a1-dbb8-40c5-2205-08dd7802502a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017097.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7986
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,17 +149,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sreda, 9. april 2025 ob 02:20:36 Srednjeevropski poletni =C4=8Das je An=
-dre Przywara napisal(a):
-> Now that the USB PHY driver uses the device tree to get the VBUS detect
-> and USB ID GPIOs, these Kconfig symbols are unused. Remove them from
-> their Kconfig definition, and also from all defconfig files.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Enabel SMBIOS command as was done by commit aa815e6c7603 ("xilinx: Enable
+SMBIOS command") for our other platforms.
 
-Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-Best regards,
-Jernej
+ configs/amd_versal2_virt_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index e19d0b5596ab..d722f3c811b4 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -25,6 +25,7 @@ CONFIG_SYS_PBSIZE=2073
+ CONFIG_BOARD_EARLY_INIT_R=y
+ CONFIG_CLOCKS=y
+ CONFIG_SYS_PROMPT="versal2> "
++CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTMENU=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
+-- 
+2.43.0
 
