@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D79C369A4
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:54:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 912BCC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 08:56:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79F5C83AE4;
-	Thu, 10 Apr 2025 10:54:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED85183AEE;
+	Thu, 10 Apr 2025 10:56:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SvW1wwBP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QH9DprHk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 604A483AC6; Thu, 10 Apr 2025 10:54:33 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 6773A83AF8; Thu, 10 Apr 2025 10:56:50 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C04383AEF
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:54:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 429E083AE9
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 10:56:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cf06eabdaso5051795e9.2
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:54:31 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43cf0d787eeso6442745e9.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 01:56:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744275271; x=1744880071; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744275408; x=1744880208; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Cl58Wtvsszpc/fB0s78oPpDV2fzqZtFGxZb4TQiYnyE=;
- b=SvW1wwBPzZzVT17cLAywbufaZAIE77TLKx8KErrQtyClqoBzWQgkd3DR7meaMUqPDm
- Eyy8Ji97ygZlp/rzyDjccT1EGNqtYVNbZxGQL+0KarfmnflSQtnzfSf2ElSPoqbt+JVh
- e9rAryFynMXiVpsUeOydF4x41p8mVuRHCFWUS6iabbLglc3mNJYcSobgiaimTOf10K9G
- YT8hq+9q7JWqiTJlGCXXOgXS3TXBTpwfbAef/Po5Yz0ZIUxFSr2naRD2y7/CKSgqckVy
- za2vRi0GFCsEQL6/ycMfaIRNeLrHucmw3ksYXw/unhNqUQVPUqsK6lIPBI16NKh52A0v
- sDIQ==
+ :reply-to; bh=mi4NZutOJVhbVIO8zZ+WMV2RQj152K6jx/1YmB9Htao=;
+ b=QH9DprHkX7FgFQLE9KTV/QHtnpdSteDfxXM9ZeU/IqIXWVMVK+MEmMGH5DMSRLpo40
+ IDqTc0ZRkA/xHJ4jt8KRgvSdZ16xRX5yF+CSx1S/Y3nqpJbjIMe5mkezr6BmBR8YiDgP
+ jmIZ2KADpjKcOOHAI0uIx4V1mLp/TrBp/1U18Se9BmH2ZuBqp1mGtMmmC/iQJF9/5jdC
+ b96rO3l41JPN+Y/idctgWxR5E4j/qZRcuryuYoVKcJH/+iH1CMyPctpZpewaSAQznfcj
+ F2+DgAxSxdDCbG8o5mrgzvjU8CBR9tKJO/VDORca9xWFJa/4dojkGM6ZjjKLzrdIrtgQ
+ drRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744275271; x=1744880071;
+ d=1e100.net; s=20230601; t=1744275408; x=1744880208;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Cl58Wtvsszpc/fB0s78oPpDV2fzqZtFGxZb4TQiYnyE=;
- b=ZDp90pBcrStHmOpX5bkQhbq/6wLdrYMLeXdis14ng7hEeanbDlSr9MQXrsTuNcT6Cx
- h2HHPWjnCgDnVF4XAQtA9YLeP3sf6FEHVmV8wBLoDtDeoyql7ZdW/tWrSVcNDj84Gzbj
- C8ckXM90qS/ArkePQ9pwTsHqi2w/1PWX2pNM+kbAWmgbEll90lcYwrgDdTkreq6VGMav
- zB1MP0XDh0uPQaR/1afitvRxx41O8DD88MQlrUubb7cS/mAgAcWXm39oSiB7jbaOH27J
- 1uMdxEpk90IhmnuVZIHid+/S1r+gzHBYJDz83RxnLkuTuFSh4CBiCbsOuHUWVa5or3e0
- Wrfw==
-X-Gm-Message-State: AOJu0YxfSg0E9z474gHlvNxvXXi8FGP8EvrK31aabE5IacgzeaC535Sm
- tjIfEK11SOvqVJWZu4axuP6we3qNQQBl/O1R5m0zZvXIIDiG4G/Bq7cJWqlT5ss=
-X-Gm-Gg: ASbGncspdDxrCGuAI5Uq77oEGjLv+HFrzC894LtD+XkgnuySEKkldwgsECSGciVccMn
- N5tikcCnlXWtMjEfV6Tfo5TiT4AI4Co3no/cVLZ0mUm5pES1zUJBkWZfBuoYd3vBwz+zH0lOYpJ
- iOOaQSzp6CLh4iMycICiqgf2XKdw8KBTCQAyf22iN6Le3NmGatZx+T2clOYTbWM+AJWuTk3Sr0p
- gvR6jIiV0O3cjPATg7Y79QLpRbOqHsIW0zHaWFI4DS7Wg8MnEZjs9M5o0rY0Aj01tPw4QEA9AJv
- hPbMy0F6ZNK/pBLiW5Yl078YV7py6NVeuZqwCldigdQ/ECZjy4cEs4VuB2HiSfMTKqwUUn/ryWd
- p1/Xd852VNK5PJPut3dOahQwXZLgz
-X-Google-Smtp-Source: AGHT+IEdqpEIsGSWqUEvLLFcOUI6hh9ftxvHd31jkZp9vGNa2bIiDkjKJlanhnWfHl+nWX0bYzGazA==
-X-Received: by 2002:a05:600c:3d9b:b0:43d:23fe:e8a6 with SMTP id
- 5b1f17b1804b1-43f2d7ae769mr16362305e9.5.1744275270664; 
- Thu, 10 Apr 2025 01:54:30 -0700 (PDT)
+ bh=mi4NZutOJVhbVIO8zZ+WMV2RQj152K6jx/1YmB9Htao=;
+ b=cKeUTSk9LsMZUHkasAow9QHdoTDHa4PKi3OVcxG+ma/F1WrtxF7bWaDhcfrcu+khxe
+ fNGj0DDzftrORs4F8bCSvePh331yC1Cw8WIeU+FLtF+D+ZVHmsaJbedvptAK8Q6xUfio
+ Uii/w1F5M+dQO5v2gfGGdw1o9wr085I8Goidp9CEzzIN4bSO6PP1j6BmIdFBhEwbfPfe
+ G33WuPYcmoubP+hNE/geMYYKL+HQqdaG3YaPz6nUMeS8femEiWJrQeDQXucDhOtugVM4
+ ArZHX30K/qZtm6NDnz+ZXM9Yk68rLiCcxZ5sgA/8m6VHzGNx9pgEZPk5bfOt2RKhuGjo
+ Hkfw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXetD9mE4k5oXQnTOpvH6Xgc4sMcRBxs8MVI5cnF0FIg65x5gYtWTrz2SwIkLMTTIvah63xR2w=@lists.denx.de
+X-Gm-Message-State: AOJu0YyES77Jpdx5Y4fKFHzDuZOt7r2Ab4IOqhJCRIxxoxSN0jBBhp8w
+ bL+HFRWDyMZS9YYtLxWD3/kNRaUG+iglixgP6KCugG3N/XzELo5uOKpi3WOhrw0=
+X-Gm-Gg: ASbGnctemU4ZOFd08b+sMhnTXO6wQpbn6Kv0NaheBi59w60o52jPBP6zD/m43UthLO7
+ Q7sCSdT6X8EMQ6/mINENVj19Tl4gaEsuTsfUjHHx9dfGa3+R2dzPq33bpB1mNA1RvNfvRHrKvHP
+ mLLpAq3NtP/fN2/Aa95f7/sc08XfHt7yPWQyVSaRkRs5BEVhk1NBe6Qoqcak3IU0ICW/ydVWa5x
+ naAvFJJ9GLuLsDImV5FFQhHHebQRq1xc2aJU1GbCk3TWY9poyksi97XgMScRAvpLUI2rRGsH8rd
+ OQi5U1KiwwiIwHIWgzJJ6Ekpg6+thAIDM13lk2MXyzODa6pkH+wckDKcYEx+O+yATv0TCuDnXpE
+ t66jxLAh9IzVP0H+r+A==
+X-Google-Smtp-Source: AGHT+IEjT/+JnjPVbWsS92HKfUwMmnN+S4qiPvfmyTlHXaO4ED8/5Ld3YKYw7fwPY3RZJ8Xb8/UOrA==
+X-Received: by 2002:a05:600c:4e09:b0:43d:db5:7b21 with SMTP id
+ 5b1f17b1804b1-43f2ffa3bd8mr12594415e9.28.1744275407682; 
+ Thu, 10 Apr 2025 01:56:47 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe?
  ([2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f233c824bsm43792565e9.24.2025.04.10.01.54.29
+ 5b1f17b1804b1-43f205ec97csm48971635e9.6.2025.04.10.01.56.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 01:54:30 -0700 (PDT)
-Message-ID: <28a39725-6176-48fa-80de-8265a44f46bc@linaro.org>
-Date: Thu, 10 Apr 2025 10:54:29 +0200
+ Thu, 10 Apr 2025 01:56:47 -0700 (PDT)
+Message-ID: <1daecfd3-0149-4d7f-bd2e-e75717692849@linaro.org>
+Date: Thu, 10 Apr 2025 10:56:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/6] mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT
- fixups
-To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
- <20250409-livetree-fixup-v1-2-76dfea80b07f@linaro.org>
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v2 2/2] phy: phy-qcom-qusb2: Fix USB PHY power on sequence
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Cc: caleb.connolly@linaro.org, trini@konsulko.com,
+ alexeymin@postmarketos.org, Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20250410080027.208674-1-sumit.garg@kernel.org>
+ <20250410080027.208674-3-sumit.garg@kernel.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250409-livetree-fixup-v1-2-76dfea80b07f@linaro.org>
+In-Reply-To: <20250410080027.208674-3-sumit.garg@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,90 +132,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09/04/2025 19:17, Caleb Connolly wrote:
-> This will now apply fixups prior to devices being bound, which makes it
-> possible to enable/disable devices and adjust more properties that might
-> be read before devices probe.
+On 10/04/2025 10:00, Sumit Garg wrote:
+> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Recent addition of support for SDM660 inadvertently broke USB PHY power
+> on sequence on RB1/RB2 and others with following error:
+> 
+> starting USB...
+> Bus usb@4e00000: QUSB2PHY pll lock failed: status reg = 0
+> qcom-qusb2-phy phy@1613000: PHY: Failed to power on phy@1613000: -16.
+> Can't power on PHY0
+> probe failed, error -16
+> No USB controllers found
+> 
+> The root cause was the addition of flag se_clk_scheme_default which was
+> configured correctly for SDM660 but incorrect for all other supported
+> SoC. Fix that by properly assignment as per upstream Linux driver.
+> 
+> Fixes: 475497dc3c15 ("phy: Add SDM660 support to Qualcomm QUSB2 phy")
+> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > ---
->   arch/arm/mach-snapdragon/board.c     |  1 -
->   arch/arm/mach-snapdragon/of_fixup.c  |  7 ++++++-
->   arch/arm/mach-snapdragon/qcom-priv.h | 14 --------------
->   3 files changed, 6 insertions(+), 16 deletions(-)
+>   drivers/phy/qcom/phy-qcom-qusb2.c | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index deae4d323789eab75d5fe735159b4cd820c02c45..3ab75f0fce02ecffd476ebe2aa606b1a9024bbec 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -305,9 +305,8 @@ void __weak qcom_board_init(void)
+> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
+> index cabd05bf5a6..d98f6108e69 100644
+> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
+> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
+> @@ -230,6 +230,7 @@ static const struct qusb2_phy_cfg sm6115_phy_cfg = {
+>   	.regs = sm6115_regs_layout,
 >   
->   int board_init(void)
->   {
->   	show_psci_version();
-> -	qcom_of_fixup_nodes();
->   	qcom_board_init();
->   	return 0;
->   }
->   
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 1ea0c18c2f2789a8aa054cd95bb9e4308d6b3384..d4e24059212c552de7fa7555d2ab8a1ea4fc4cb2 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -21,8 +21,9 @@
->   
->   #include <dt-bindings/input/linux-event-codes.h>
->   #include <dm/of_access.h>
->   #include <dm/of.h>
-> +#include <event.h>
->   #include <fdt_support.h>
->   #include <linux/errno.h>
->   #include <stdlib.h>
->   #include <time.h>
-> @@ -149,14 +150,18 @@ static void fixup_power_domains(void)
->   		func(__VA_ARGS__); \
->   		debug(#func " took %lluus\n", timer_get_us() - start); \
->   	} while (0)
->   
-> -void qcom_of_fixup_nodes(void)
-> +static int qcom_of_fixup_nodes(void)
->   {
->   	time_call(fixup_usb_nodes);
->   	time_call(fixup_power_domains);
-> +
-> +	return 0;
->   }
->   
-> +EVENT_SPY_SIMPLE(EVT_OF_LIVE_INIT, qcom_of_fixup_nodes);
-> +
->   int ft_board_setup(void *blob, struct bd_info __maybe_unused *bd)
->   {
->   	struct fdt_header *fdt = blob;
->   	int node;
-> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-> index 74d39197b89f4e769299b06214c26ee829ecdce0..4f398e2ba374f27811afd2ccf6e72037d0f9ee7f 100644
-> --- a/arch/arm/mach-snapdragon/qcom-priv.h
-> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
-> @@ -8,19 +8,5 @@ void qcom_configure_capsule_updates(void);
->   #else
->   void qcom_configure_capsule_updates(void) {}
->   #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->   
-> -#if CONFIG_IS_ENABLED(OF_LIVE)
-> -/**
-> - * qcom_of_fixup_nodes() - Fixup Qualcomm DT nodes
-> - *
-> - * Adjusts nodes in the live tree to improve compatibility with U-Boot.
-> - */
-> -void qcom_of_fixup_nodes(void);
-> -#else
-> -static inline void qcom_of_fixup_nodes(void)
-> -{
-> -	log_debug("Unable to dynamically fixup USB nodes, please enable CONFIG_OF_LIVE\n");
-> -}
-> -#endif /* OF_LIVE */
-> -
->   #endif /* __QCOM_PRIV_H__ */
-> 
+>   	.has_pll_test = true,
+> +	.se_clk_scheme_default = true,
+>   	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
+>   	.mask_core_ready = PLL_LOCKED,
+>   	.autoresume_en = BIT(3),
+> @@ -256,6 +257,7 @@ static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
+>   			 POWER_DOWN),
+>   	.mask_core_ready = CORE_READY_STATUS,
+>   	.has_pll_override = true,
+> +	.se_clk_scheme_default = true,
+>   	.autoresume_en = BIT(0),
+>   	.update_tune1_with_efuse = true,
+>   };
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
