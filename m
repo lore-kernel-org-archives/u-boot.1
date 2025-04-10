@@ -4,74 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE34C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 15:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6F40C369A2
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 15:16:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92B3683D03;
-	Thu, 10 Apr 2025 17:15:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EB1683D2E;
+	Thu, 10 Apr 2025 17:16:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iXVlJEvj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KoJs35of";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC35783B8F; Thu, 10 Apr 2025 17:15:12 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id CF6FA83D3D; Thu, 10 Apr 2025 17:16:16 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFF9083D10
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 17:15:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3606083B8F
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 17:16:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3fe9fe62295so281096b6e.0
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 08:15:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-39ac9aea656so868972f8f.3
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 08:16:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744298107; x=1744902907; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=BXnFVfaUbdbD5wWxtvHsN8/RG2OXYvQw6/7qRmc2M+k=;
- b=iXVlJEvjF6QiRwV9LcfXytSI/dHoriuCcplJYmkGfXzfNzL0D6Vf1FttjnouwPdHTQ
- VQAetrIm2DW16atwXwrAnX09CyFW8NJlIl7AsENEYVHViVPLKXmN8RVAi1+Gudsu+UT3
- 6QoICKqRyPwSLodbkd9Wt+opHlsVMgonLJ2Yc=
+ d=linaro.org; s=google; t=1744298173; x=1744902973; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dpBVgM+BmozE7pt5BcxPi5KLq2WzONKbbONruSns3ig=;
+ b=KoJs35ofifl5cN/UeHzhzs6fNERTT6x3eDFAhIth0v28hTFmmh9vqRJJAxW5khnmKp
+ LTAzv5pX2VrkF0A1KWNL97UUjQflJLwft1BZ+phwv0xg8jaSdeVOsEtvDEWeujfg/ZnV
+ orUVKKbn+kf5CaFfjuyZc5R0DYDj8cdADnI36puSJox8x+o8RDpEl42RIe47pgZNojcD
+ c9CqoA3S5oBEUZSJWXF5dhrO1vPDn6TiG0Jg/RHFC5IrEzKQM6TSET7h4bUnfDB1Bafm
+ sHUhJEsPFjPuCQGApghjJcXKYaQR2yFWb5VWEcYJL7+nu/dxEPKairGEll7e6SYP7Dhb
+ 7hyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744298107; x=1744902907;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=BXnFVfaUbdbD5wWxtvHsN8/RG2OXYvQw6/7qRmc2M+k=;
- b=Rl2kYcPd5aRzchkOlzetRmHta0bjDnRS5RWq/fojUH0wpYdANW6v1nUQpoQG73wlBl
- G8iaEH6jMWEwTfsO9kqxY8pb4ttzcoL9ULJ+Pj1sMLkADgj6qYwERrxJSVmU6Wmx0Z20
- 1yK+BixQHOpkcAvaTNAW8uBLgWervW8AbzlTCf6ZyGmoX3ddLBdAIdGqmFh2mJXPKfpq
- 43m8WwZ8u1mqT/aoN/8CeNuE1eF7ocJMX2YqyQ9l3lgpE4KMQTz9QDnGDb2wSOyFE5UU
- 5lKNGEDvffNlwmgETlAl/+w5l8JipwM9rlaSoranblHAmIdpMKQmfDwpRI5lo8phu3tX
- pGMA==
-X-Gm-Message-State: AOJu0YwCWY5t5ZbmtfvMQjdc44TIcvFExIFIrLZY3k0VMar4/E2x0YTV
- CXQbpxlbkORVUv+0dh58CshtHqXyRlE7pnHXDVSzc66s1ZlRs+aSeMUS+WgBLmkUh4P5+kVK+UC
- X
-X-Gm-Gg: ASbGncuHq+gtRb0jR4yogfUKPXR/F/ydpvgqxUIzAx3CnbLIO9/X7WWaL4oZn9UdAIJ
- xBnInMfnYBruc6ZfF5Bi+39Uuf+sFL605tVhtu0IVkrF35gO/Ato3gQbm3Yrr0xuhNETWCga7bB
- KrnkAVMDxANycFtZ5G024NYyDpIN/xIJEoXAy6cB66r60Cs03ESxJjDVF+Q6PQ9vkbtDuyzpIfw
- JIuMMcOnm8mvNsWx3A5RYOaIJygmF7sv0X74jeGGl+DbGLifZE1TCbNm1VVfyx1mR3gYhwhNeRO
- ybQtCGB14TPndzyMbNas6XtwtzZEnUcLxaSkEU7GwblK4Adgtxi+hWZBdiFFfLVrDQd4j7wNWcs
- NOSKJ
-X-Google-Smtp-Source: AGHT+IGbtheJug1T5MEUcZkfPdVfZmMKx5Ohaa6KnIV+YFaWj/UQMEdubihMTWimivLIb/+RDQ73nw==
-X-Received: by 2002:a05:6808:1244:b0:3f8:93c5:6d98 with SMTP id
- 5614622812f47-4007bcc3f79mr2147140b6e.11.1744298107407; 
- Thu, 10 Apr 2025 08:15:07 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-205-42.totalplay.net.
- [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-400762d5603sm572656b6e.26.2025.04.10.08.15.06
- for <u-boot@lists.denx.de>
+ d=1e100.net; s=20230601; t=1744298173; x=1744902973;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dpBVgM+BmozE7pt5BcxPi5KLq2WzONKbbONruSns3ig=;
+ b=Glldm0pVq0r9ReaxmiFiyRHOevZNHZteE450vzFNSsEengW7Ti9I5Q4HqHTMnlmtxF
+ I77VjK3REsbKPEIo8s8tzU3HGJs0xiFLT8ZuubFkrCgx6nQUU/YvZROCLp+wru5RuTny
+ NMq2Dv6r2y+IEFruUs7ME3hAC3cXo6rWrW22XaJCkfLSgecieOKwSDu80Gu/gNRZEeZD
+ qvcqjVkT0F7X9ksquo8V8OxZLrShA2j5E+zLX/FCulCUoO1chb95VuOL9yPD7+mer14j
+ ervUAEgDBQjPRyndfaLTMLUHADajwlcow4dvUS9lhO20cy51SznYuWRqsCd1LKkrxOqq
+ cHdw==
+X-Gm-Message-State: AOJu0YyR8Tn53TI1IWn3aTfy+PWIMIlWJZbFKyUFigRwu8Myb6EUhuht
+ DyOrpqGpvjOwCc0Slr4hfCbzHknuW0qNGayCBMSliCmz4eaGyjNQj+fBY2QmFGDlylB78PTNn/P
+ HU/M=
+X-Gm-Gg: ASbGnctn3BzD8neWyZrhc9nL+bN7KabcbexHvOVxAbrJPNhuEdRKvjco/rrBnsS9Gvp
+ ezyyCevHW4n7TICYIGjYAPSjiRNHP+f2PO7BjHlHrdVwb5wOKgWp5Z6bepME/uHLxrt7lFdMTl7
+ Bg5ksQjQctx80dx2dqGns6Y5eFoudRbgHsaGWEUZaZIhTI5kxMYCaJkyOqPcOrByaWPsEAKPSnj
+ lOmkd7k+uXYjNQciJpp5X3vbRJ6u/5EgJo/4U955hkqVVSSNaODA5w25IYs7NJwi6TCb3Jdgqjr
+ KekhclhDf6w8CMzeDoNfeIGxDa1rhHe0FhpWckuwVVs3tYa+QA==
+X-Google-Smtp-Source: AGHT+IGyG2p5ijZ9P9JFAuvA0D05EiloaB3Arz2GJ0s/539jiK/MaY0zrOfbD4tuJrV0++dkFWcY7Q==
+X-Received: by 2002:a05:6000:40c9:b0:391:4559:876a with SMTP id
+ ffacd0b85a97d-39d8fd8a19bmr2295319f8f.46.1744298173404; 
+ Thu, 10 Apr 2025 08:16:13 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:7edb:df05:a425:37cd])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f233c824bsm54873225e9.24.2025.04.10.08.16.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 08:15:07 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] CI: Move to latest container images
-Date: Thu, 10 Apr 2025 09:15:05 -0600
-Message-ID: <20250410151505.2596608-1-trini@konsulko.com>
+ Thu, 10 Apr 2025 08:16:13 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 0/3] NET_LWIP LMB fixes
+Date: Thu, 10 Apr 2025 17:14:51 +0200
+Message-ID: <20250410151600.3370247-1-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,55 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Bump up "Jammy" tag to jammy-20250404
-- Include most recent changes to the Dockerfile itself
+Two small patches fixing issues with tftp and wget when the network
+stack is NET_LWIP and LMB is enabled.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .azure-pipelines.yml    | 2 +-
- .gitlab-ci.yml          | 2 +-
- tools/docker/Dockerfile | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+Changes in v3:
+- New patch: net-lwip: wget_do_request(): do not print anything to the
+  console
+- store_block() [wget]: add Sphinx-like documentation
+- store_block() [wget]: do not print to the console if ctx->silent
+- store_block() [tftp]: add Sphinx-like documentation
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 593e90c7f790..ac07d87cca1a 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -2,7 +2,7 @@ variables:
-   windows_vm: windows-2022
-   ubuntu_vm: ubuntu-24.04
-   macos_vm: macOS-14
--  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240911.1-28Jan2025
-+  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20250404-10Apr2025
-   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
-   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
-   # since our $(ci_runner_image) user is not root.
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index df793e50e03f..e54bdd6c4bec 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -20,7 +20,7 @@ workflow:
- 
- # Grab our configured image.  The source for this is found
- # in the u-boot tree at tools/docker/Dockerfile
--image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-28Jan2025
-+image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20250404-10Apr2025
- 
- # We run some tests in different order, to catch some failures quicker.
- stages:
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index c8a39ac6a168..589397bc1a23 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -2,7 +2,7 @@
- # This Dockerfile is used to build an image containing basic stuff to be used
- # to build U-Boot and run our test suites.
- 
--FROM ubuntu:jammy-20240911.1
-+FROM ubuntu:jammy-20250404
- LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
- LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
- 
+Changes in v2:
+- httpc_recv_cb(): add a call to altcp_abort(). Otherwise the transfer
+continues and we try to write later blocks which makes no sense if one
+has been rejected already. Thanks Sughosh G. for testing and reporting.
+
+Jerome Forissier (3):
+  net-lwip: wget_do_request(): do not print anything to the console
+  net-lwip: wget: add LMB and buffer checks
+  net-lwip: tftp: add LMB and buffer checks
+
+ net/lwip/tftp.c | 56 +++++++++++++++++++++++------
+ net/lwip/wget.c | 96 ++++++++++++++++++++++++++++++++++++++-----------
+ 2 files changed, 120 insertions(+), 32 deletions(-)
+
 -- 
 2.43.0
 
