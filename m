@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 491E0C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 22:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B305DC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 23:14:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8870683995;
-	Fri, 11 Apr 2025 00:37:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jms.id.au
+	by phobos.denx.de (Postfix) with ESMTP id 12B9183A41;
+	Fri, 11 Apr 2025 01:14:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=jms.id.au header.i=@jms.id.au header.b="ARYaHWES";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o1Tv3Vn/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ED64839B7; Fri, 11 Apr 2025 00:37:32 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id CE94883A43; Fri, 11 Apr 2025 01:14:50 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D741838AB
- for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 00:37:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5555483A3D
+ for <u-boot@lists.denx.de>; Fri, 11 Apr 2025 01:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jms.id.au
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joel.stan@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac297cbe017so425217766b.0
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 15:37:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-72be60c1d7dso174676a34.0
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 16:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1744324648; x=1744929448; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bUr2qcvTMWYs0hExe5jCEm3OK6wx3gkV6/LN0LUHEqg=;
- b=ARYaHWESPxXuj4W9Alhyte/3mmmCx6JBc4cMTCDDUfBJ5UX1JbAIXQJ7ovB0HQUyhg
- PQWfHXA7YG67m4+a3Xcc5j68w+WFqn6rPJn92gROGhH/muatrCLLjQrvMAQl9Ew15VPW
- lsHykjDqdkPGPq3u9ia886mKANxEsDRNz7aw0=
+ d=konsulko.com; s=google; t=1744326887; x=1744931687; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nzKG3D1rTjFFVw0iLmSqdy5RTgWj7DMkB4IHA/N7irs=;
+ b=o1Tv3Vn/x1ELGw6YfK33pv3S7BGRdkKme/WeQD93xu+ZNZ8sqrPsp8rFepScrG/zof
+ agp4b6RHVJKqtu4MY2O14ma4hp/Nmatc+QZhHqNtusqI5PIiBnPXzoLOMEO80YvopBM6
+ 2YSenCjZB6bWsPrUxfO4TTKuxauoezg7QEN+Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744324648; x=1744929448;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bUr2qcvTMWYs0hExe5jCEm3OK6wx3gkV6/LN0LUHEqg=;
- b=v7MrlzOm++/HTtezFY4wZlcTfqFSYLlIMI09TUzL7jH9EtP4k9cVONL/VUDaUBj2Jy
- NI08V0rLglCnBJBSBhzOmnV1YYCRJP9ePJYOJRyFFKIk2VOAq1vm7ulDSeLe64T07B0s
- MuhtYphxZ0atY8Me8hDDyhU23KIr42phvcr2oSxSStCAFJ5pFRH8sMwLmoWrazTJAzQy
- 7X6fSCglOralEZ2M3yToeqioiBVEXrv+VfQKMQUb5Ngs6koLDy1vcFtFul3qcvQ85teh
- Cb02W75fAWQAUeMq3s44z1z9XaIPpj5lRuZLnN+FPs9crYcYMXgj9jMItmsMptXk1hrD
- QxZw==
-X-Gm-Message-State: AOJu0Yyi5WZKtOqh3zvpDieTNTPIY7awQnd28zofBr2vkk6ntilxWZJy
- sLxGZGaL4hWPxttOgrdXUQzfeAoV2/KjuRSBXy5Gip/4i8RkrS1tUXiHbaY55iCFqYahqtwqsTu
- u5NFYdejcaRyoTfBPEB/HL9houn8=
-X-Gm-Gg: ASbGncsYUufTI79wFMzoR3KwYxubFGTsCkT7qaxsrq0dj/VdjmbmB4gqW4845rcAGzK
- gyINn/wpDmBawDZ9GaclfdVWhHHPDTsFG5nLpLLymaVdsZdgerhnwq2zlAUb5E7u+xf+jS+bYb8
- rfwGVZB+MJofQyQVE2IWT3qA==
-X-Google-Smtp-Source: AGHT+IG8I/GdQJbewMNHgL3UYpMZWCg2N1K5fEdtdJrZxRUjfiRFlfq2L+aw4RG2J4IVsutGWQr4EyIeInlklYhY/DU=
-X-Received: by 2002:a17:907:86a4:b0:ac7:3929:25f9 with SMTP id
- a640c23a62f3a-acabc6c510dmr416458466b.29.1744324647770; Thu, 10 Apr 2025
- 15:37:27 -0700 (PDT)
-MIME-Version: 1.0
-References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
-In-Reply-To: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
-From: Joel Stanley <joel@jms.id.au>
-Date: Fri, 11 Apr 2025 08:07:15 +0930
-X-Gm-Features: ATxdqUFHd60NQvDIbFpb3qa8oG-zMlbLohhliNEWbGkCh5rZep0wDXRd4KWe_Hw
-Message-ID: <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
-Subject: Re: Gitlab runner timeout on evb-ast2600 ?
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: open list <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ d=1e100.net; s=20230601; t=1744326887; x=1744931687;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nzKG3D1rTjFFVw0iLmSqdy5RTgWj7DMkB4IHA/N7irs=;
+ b=K4sDT7J5Udyw2T2mRBzxpU8ElJ88Shqy2B0A7xs0aNnXw/kInFdzyFLWiX+L1mseEV
+ zbjg6kUQ7zL7XI0jSqJyoUPn8fAsXDy2OTRY+UZoFtRFHdpzs60qzKjJKa/RpZ3WHM0w
+ BQw5vTbqgjMTItBM0Sb7V9nwIUghhVQSqPoPu7/mWJfHgmNgIaxkV8QsVSF7+xpTkHcD
+ HIPgSzFFjl7vwVx0OfsH6rt/KnYo9iDvO5K8HOopON3StnOxHI6QnCYkhJCfaWHThdUU
+ 6ID2dLMNs+WBgDKkferLnKl2A17eHEFRWCXQ9pNH+3F4GPPdmAvwqUUGoTJsqv0Ltc7f
+ Y1gA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4D7KA1V+oiL/C+7OQIMQXoW51rxR/yPnegkBV4C68mWvjptve0a4PCUudzKvPEcpF2nSOg8Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2hk0Ws1O/FSo/Q8QnHkh7DShVhflfVQDIge2LllBzf462kamx
+ eBCjNyheHbpsZYC6mdvQXpKZPaJEIcpXzE+gA2iYbWjWIfemj/nalkSNqtDx0rQ=
+X-Gm-Gg: ASbGncuLy5IkciSywVqnSd7eR/OARQ/IGGyv2YALDF+fiukkAlE+TlYQLd1cj0j/yGd
+ wv6QNv9yg29otAV9a8C8N3LmDWdhHWUsxqP42/5fSM368+n8+AwNYEvYv0XAqzpPyWOFk0VCc8A
+ vqaCsr4rDU0FNkbjlJHUci15Pz5Xb3XXIlRxMPnsRXweV0Ufrdaag2WGeyoYEkHINgD4iVcbHWb
+ CfDIHHulaJmpuXWLip3OW53cvsr98k67D8uiIJcifIy05mrsmLCQkJ1FPVaQB8cF0UU7gP8T7JC
+ Dj/HWFWdO1jtRkfb+KZjjB2lx4qBJtLTS+5rfGa4k0KBDu4KowDAc3HbylF1rHgTdDAqAhIZ64/
+ BPg==
+X-Google-Smtp-Source: AGHT+IEtVIE8NNw9IOAEag8sYufggkEA25UMULSIpbyu2o1XIX9fi6qoYmud34K1zbwk4ntukKUd1g==
+X-Received: by 2002:a05:6830:611b:b0:72b:8ec3:9297 with SMTP id
+ 46e09a7af769-72e86509c16mr623491a34.21.1744326887027; 
+ Thu, 10 Apr 2025 16:14:47 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-72e73e672bdsm736207a34.60.2025.04.10.16.14.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Apr 2025 16:14:46 -0700 (PDT)
+Date: Thu, 10 Apr 2025 17:14:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Joel Stanley <joel@jms.id.au>
+Cc: Eugen Hristev <eugen.hristev@linaro.org>,
+ open list <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ =?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
  Andrew Jeffery <andrew@codeconstruct.com.au>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: Gitlab runner timeout on evb-ast2600 ?
+Message-ID: <20250410231444.GK5495@bill-the-cat>
+References: <7a737a5e-c804-4d46-be33-28aed9c4a113@linaro.org>
+ <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Ea2j0UdIiZytw2Zc"
+Content-Disposition: inline
+In-Reply-To: <CACPK8XeCDU+-6+zzJe4=uj=Lduh8nGx6pNr=yWCsM+k-rov2UQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,29 +101,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.org> wrote:
->
-> Hi everyone,
->
-> I keep getting an error on running the CI loop on -next on my tree :
->
-> https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/1090517
 
-Thanks for the report.
+--Ea2j0UdIiZytw2Zc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no other
-> tests will run !
->
-> Any clue ? It's been like this for few days. It doesn't look like a
-> faulty patch.
+On Fri, Apr 11, 2025 at 08:07:15AM +0930, Joel Stanley wrote:
+> On Mon, 7 Apr 2025 at 23:25, Eugen Hristev <eugen.hristev@linaro.org> wro=
+te:
+> >
+> > Hi everyone,
+> >
+> > I keep getting an error on running the CI loop on -next on my tree :
+> >
+> > https://source.denx.de/u-boot/custodians/u-boot-at91/-/jobs/1090517
+>=20
+> Thanks for the report.
+>=20
+> >
+> > ! _pytest.outcomes.Exit: Lab timeout: Marking connection bad - no other
+> > tests will run !
+> >
+> > Any clue ? It's been like this for few days. It doesn't look like a
+> > faulty patch.
+>=20
+> I can't see that link you sent me, it 403s.
+>=20
+> Do you have any other traces or information to share?
 
-I can't see that link you sent me, it 403s.
+It's been intermittent recently. I was able to put qemu + gdb together
+and see it's one of the early initcalls that fails and hang()s but
+didn't see why. You should be able to use commit 1f0281294d8b ("Merge
+patch series "Annotate switch/case fallthrough cases"") as a starting
+point of failure.
 
-Do you have any other traces or information to share?
+--=20
+Tom
 
-When did this start failing?
+--Ea2j0UdIiZytw2Zc
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Cheers,
+-----BEGIN PGP SIGNATURE-----
 
-Joel
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmf4UOAACgkQFHw5/5Y0
+tywOQAv/Y6ixOOdsINxiCqn9ehNlAjhCskSn3AbU1gFAhiPc6ADJXQ5EQV3nWgIJ
+uzbBmz0+eK/5ewwhHiITUB1IAHmJKUXM2tQ7QTGipQSr4PEmvAzLG9PBS9/SUz44
+a7NRRR+SyIVHpfJpaziSbcIeGUnYym9djQ0yGvIESsvUNx1Z96PMeWANdz4AqF0j
+47GMvdsi7JfgsETlmFkJZv6ITSZmZ3zAzXo4lkKGXHkQ7mHZ/h20nfYMJ+PJZfb5
++LHVVjSHkWhdETnM6Hz9+R0BechqN0gyzEROvdnA5vwiHbaDODkLskrI87U2J32s
+ztlr6ekZsSt9QMCiB+xCkXeGLOxY9m7trFgpl/aI9jsg75QHIoC1HSwYUxr4lAKs
+fNq5RKBA7UpCrFRmP6XJEan746A1333Uv5FOIssbd23uN7vKK4qo1MDVxw9JUTsE
+cBIpjKn5ropg0Sne3cXPSNczbBTSBr50NTkxPvD+Euq7mzXfEh9XA/IlbKJcvrTQ
+v8uN38om
+=rFud
+-----END PGP SIGNATURE-----
+
+--Ea2j0UdIiZytw2Zc--
