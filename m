@@ -4,60 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E3FC3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D6EDC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:51:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B34683B52;
-	Thu, 10 Apr 2025 11:27:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FF7183B5F;
+	Thu, 10 Apr 2025 11:51:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XbyXEQx+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H7RfpFsT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0BF583B5A; Thu, 10 Apr 2025 11:27:07 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 54D0B83B63; Thu, 10 Apr 2025 11:51:51 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ED3F83B32
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 48B5E83B4F
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:51:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 12E6F5C0F09;
- Thu, 10 Apr 2025 09:24:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21B6EC4CEE3;
- Thu, 10 Apr 2025 09:27:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1744277223;
- bh=ap44BEu/bhlAXrmz58pQst4h0dO7ZcsYVZ1UFlPCURE=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=XbyXEQx+7M/zycfEDkADl3RRRDlMCo0LQQzpn8yuOFec4HNWoCMfT1I/iWaYj4M/D
- 9euWqFmIaPP/74rP9jpWgjImq0roFeppJ/BggbWkeYCtUFfcF6Vr1F3dCLkNTA6MTX
- V9rnaA1AhHs23g/+GpQPOfGl8WwDgSTMAcpiseXg0RX5oze3ZRApr0EDG8twROfiOo
- jP5FC0D8UvV3p/nqK1jhzZfw0yLr0ln2kgW4u30OLayt6a2wjWfqxY71gzFxhZ+ehi
- tILT2dY8+K5etZfjzrS8DSVgbt093sqAi/ajcKIPAkJbf26Sec7izn5UCnLHhw/uRv
- 7ahIz4AFbeZFA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, Simon Glass <sjg@chromium.org>,
- Alexander Kochetkov <al.kochet@gmail.com>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Brandon Maier <brandon.maier@collins.com>,
- Neha Malcom Francis <n-francis@ti.com>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>, Philippe
- Reynes <philippe.reynes@softathome.com>, Stefan Herbrechtsmeier
- <stefan.herbrechtsmeier@weidmueller.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 5/7] binman: Workaround lz4 cli padding in test cases
-In-Reply-To: <20250304130947.109799-6-sjg@chromium.org>
-References: <20250304130947.109799-1-sjg@chromium.org>
- <20250304130947.109799-6-sjg@chromium.org>
-Date: Thu, 10 Apr 2025 11:27:00 +0200
-Message-ID: <874iywgye3.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3914a5def6bso277626f8f.1
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 02:51:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1744278709; x=1744883509; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NYuVEDDGDFkzY4hIdvbBzTJd9pjIV9fNjs79UBrCGyA=;
+ b=H7RfpFsTWMufkOThkqpujdWnWwH1q3WRVWe9w5b1XDDCN3b+m0NxE6+WU7bj6uxlLR
+ 2vUTNehHKFYiWSh45wz4dYVT+x1jpmWvgyRSU0BXZqeAfG8YQv1SawgMs7/NBb7RBZwT
+ giHyzT0MUl0VyIwUqQ377ud9ll5aP8QqHr1Y/J0D935WpxkT1ObCFsAASDOOzo3m+OAo
+ N5DNSYvR/V0/WFrLzes5tFpHwQVbrActU6JvcM3oCgKWih7GOwWc4q8o9vsrD7EI82gm
+ qrneNQZC5FcQlIMG5ZeHLSYKxbnV+VCeiplmP/9VQ8k/0RrIsVnab77ZwiVhttpvUdTH
+ yRJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744278709; x=1744883509;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NYuVEDDGDFkzY4hIdvbBzTJd9pjIV9fNjs79UBrCGyA=;
+ b=cXXo0+DKXH1kLktBv1LhVajsC7GB9USFF9fMJGW+SgNOAekb6EcrImM9GeYMNclkLM
+ D+LBqCWWef5uuntzf22SypFxUtnWFyqkjDvsWpzlt0797BzD/438guDJ3e8gznF1UU28
+ GnU0cmmMUmyoNbc8/2bOm6sesCTq3OyQUaPfWZZbbXipkndFvv1CsE22i7WoXzbvOkCF
+ cRNZ6Ead8oRbrBShULGZTolKWnOVUboo/cIR7dB/1Qn4HSIM1A4O2X3D3Vc5mmzpyhcK
+ 0BAEcT3t8Kmq5iKU3W92DQsBY4jQW3Fl2VBKTnBPzTG1N669VvyF4At4xppCpOo64KRF
+ lp8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOocdi9mRllIuDa33HEqAJpSut3mh1bcZSdRYq1BduERoG5hI08N5x7ZzIk89KfGuQJjZzHm4=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywmy7vE/htd5ghM7pyYjO+tHrlbm4pMIJtzUCCrb8cReU/gct4A
+ HKMoaTwmnCMvmgwdI8i9HteGcNfT1Nh3B1lFKGZoMd5BUE5kXM+3gwdtJ0a5x3s=
+X-Gm-Gg: ASbGnct+mztOdbbYRBiQQZEzncHdMju9D7WS3C7aZj3y69+9rvKEzs+WcMXxozTQqaO
+ bNA1xWb4oHOc+zTdldZyd9KKhT8MYOzUIpHnqAllKnzWh3cww8AlYhbt9fH5uYuXIIaCvqyAoRR
+ ajyf0JU/LeVqdrzDbzdAORp0xk5WEMbhhWPJof/HQy7qJd7ygz0UiEOq3fLrw+5lsQhfvmG93s5
+ nE5fg6okZ3b686XhrkuY2ONULfDoOvRoaruWogfyXtYlSkSiUMYLRebsTMH6MajwhzFlKIgdaNE
+ b//ATZAzBH+6RdDXzFcU8JJNcFDeBRZZjHS/JhKfZX1ntZt5eGT3NZtxwbNkC/sDGfPw
+X-Google-Smtp-Source: AGHT+IFlgzJ7d6HeAUid58KY8Z6heHDpIiDsKjiriinmnai1QFFVew98Sua7OKNNo5sSdO4DCYoC2A==
+X-Received: by 2002:a5d:598d:0:b0:390:fbcf:56be with SMTP id
+ ffacd0b85a97d-39d8f22a482mr1602455f8f.0.1744278708625; 
+ Thu, 10 Apr 2025 02:51:48 -0700 (PDT)
+Received: from [192.168.1.47] (i5E863B08.versanet.de. [94.134.59.8])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39d89400148sm4167543f8f.89.2025.04.10.02.51.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Apr 2025 02:51:47 -0700 (PDT)
+Message-ID: <d13cf199-47e7-436e-964b-c089dce913e8@linaro.org>
+Date: Thu, 10 Apr 2025 11:51:46 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] phy: phy-qcom-qusb2: Fix USB PHY power on sequence
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Cc: neil.armstrong@linaro.org, trini@konsulko.com,
+ alexeymin@postmarketos.org, Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20250410080027.208674-1-sumit.garg@kernel.org>
+ <20250410080027.208674-3-sumit.garg@kernel.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250410080027.208674-3-sumit.garg@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,75 +103,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-Thank you for the patch.
 
-On mar., mars 04, 2025 at 06:09, Simon Glass <sjg@chromium.org> wrote:
+On 4/10/25 10:00, Sumit Garg wrote:
+> From: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> 
+> Recent addition of support for SDM660 inadvertently broke USB PHY power
+> on sequence on RB1/RB2 and others with following error:
+> 
+> starting USB...
+> Bus usb@4e00000: QUSB2PHY pll lock failed: status reg = 0
+> qcom-qusb2-phy phy@1613000: PHY: Failed to power on phy@1613000: -16.
+> Can't power on PHY0
+> probe failed, error -16
+> No USB controllers found
+> 
+> The root cause was the addition of flag se_clk_scheme_default which was
+> configured correctly for SDM660 but incorrect for all other supported
+> SoC. Fix that by properly assignment as per upstream Linux driver.
+> 
+> Fixes: 475497dc3c15 ("phy: Add SDM660 support to Qualcomm QUSB2 phy")
+> Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
-> From: Jiaxun Yang <jiaxun.yang@flygoat.com>
->
-> Newer lz4 util is not happy with any padding at end of file,
-> it would abort with error message like:
->
-> Stream followed by undecodable data at position 43.
->
-> Workaround by skipping testCompUtilPadding test case and manually
-> strip padding in testCompressSectionSize test case.
->
-> Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Nice find! Thanks.
 
-Tested that this solves issues when using lz4 1.9.4.
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>> ---
+>   drivers/phy/qcom/phy-qcom-qusb2.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
+> index cabd05bf5a6..d98f6108e69 100644
+> --- a/drivers/phy/qcom/phy-qcom-qusb2.c
+> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
+> @@ -230,6 +230,7 @@ static const struct qusb2_phy_cfg sm6115_phy_cfg = {
+>   	.regs = sm6115_regs_layout,
+>   
+>   	.has_pll_test = true,
+> +	.se_clk_scheme_default = true,
+>   	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
+>   	.mask_core_ready = PLL_LOCKED,
+>   	.autoresume_en = BIT(3),
+> @@ -256,6 +257,7 @@ static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
+>   			 POWER_DOWN),
+>   	.mask_core_ready = CORE_READY_STATUS,
+>   	.has_pll_override = true,
+> +	.se_clk_scheme_default = true,
+>   	.autoresume_en = BIT(0),
+>   	.update_tune1_with_efuse = true,
+>   };
 
-This patch solves:
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/38
+-- 
+Caleb (they/them)
 
-Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
->
->  tools/binman/ftest.py                           | 7 +++++--
->  tools/binman/test/184_compress_section_size.dts | 1 +
->  2 files changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 1a92a99b511..e46a1e84372 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -4613,6 +4613,8 @@ class TestFunctional(unittest.TestCase):
->          dtb.Scan()
->          props = self._GetPropTree(dtb, ['offset', 'image-pos', 'size',
->                                          'uncomp-size'])
-> +        data = data[:0x30]
-> +        data = data.rstrip(b'\xff')
->          orig = self._decompress(data)
->          self.assertEqual(COMPRESS_DATA + U_BOOT_DATA, orig)
->          expected = {
-> @@ -6218,8 +6220,9 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->  
->      def testCompUtilPadding(self):
->          """Test padding of compression algorithms"""
-> -        # Skip zstd because it doesn't support padding
-> -        for bintool in [v for k,v in self.comp_bintools.items() if k != 'zstd']:
-> +        # Skip zstd and lz4 because they doesn't support padding
-> +        for bintool in [v for k,v in self.comp_bintools.items()
-> +                        if not k in ['zstd', 'lz4']]:
->              self._CheckBintool(bintool)
->              data = bintool.compress(COMPRESS_DATA)
->              self.assertNotEqual(COMPRESS_DATA, data)
-> diff --git a/tools/binman/test/184_compress_section_size.dts b/tools/binman/test/184_compress_section_size.dts
-> index 95ed30add1a..1c1dbd5f580 100644
-> --- a/tools/binman/test/184_compress_section_size.dts
-> +++ b/tools/binman/test/184_compress_section_size.dts
-> @@ -6,6 +6,7 @@
->  		section {
->  			size = <0x30>;
->  			compress = "lz4";
-> +			pad-byte = <0xff>;
->  			blob {
->  				filename = "compress";
->  			};
-> -- 
-> 2.43.0
