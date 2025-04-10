@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291F6C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99BC4C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D5D383B27;
-	Thu, 10 Apr 2025 11:01:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 126D383B05;
+	Thu, 10 Apr 2025 11:02:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="FwgtMkpN";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="J8aeVZGL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B64D983B05; Thu, 10 Apr 2025 11:01:41 +0200 (CEST)
+ id 7E18783AE9; Thu, 10 Apr 2025 11:02:09 +0200 (CEST)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A574483AE9
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:01:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22D5E83AFD
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:02:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1u2nn0-0007c4-FU; Thu, 10 Apr 2025 05:01:38 -0400
+ id 1u2nnR-0007dF-2h; Thu, 10 Apr 2025 05:02:05 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
- From; bh=X6wnrp36lUWLTI+fcCdKoaWSzcsFvmtv5CNZOtVjVRs=; b=FwgtMkpNqOpo8mpKBXs2
- Sc9K2AA1kXcEnRmgyVzogsPwPi9wpRtYOL1yd95itz6b+q82q8mltl7ATSU+h8sMaIJ+DAuXDIF3K
- k3Wy1mDd73/zDbM23m8IFpjVKyQMhQkT0UPEmim3kW5fvbLGx24p0u1iDQSGTANan5DJom5nbxk6y
- BBPYu8NUSMiAtmgl4EVu+uy3SYjD4REYjyY6VkMGscee93UW8bpVu1KiBNY2jeT4g133/1aXnJBeU
- KdsVDd3eS+92QU1/p6hBjo1sr+tlmP80ZwXQtn92f7CY087AxLJjdiDk4qWW7od0zLxjCdBdfDhYp
- ShQL+rPe/Nzb+w==;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=7pnggSBU5jCd8f1Lxa/jPpaR7IN8ujnAeXyYqfyuicI=; b=J8aeVZGLEKCZwv
+ iQzP+QsoS+JZe8rakIg8O4L7ygD1kJHmRbzfQGZxHhRIi+gSZV6E1D/ATXOpLwQo0F4RqjPfHf5Md
+ zR3ejbEg1Em5W5rpckysX1FXqbrt9DkIE49GHBUINu4xeYfR8wa2Ul7PtFP2Yc2pSDiKjFi9PIK03
+ cAy5YKnM1Z/5Imza8B2IfxVul8WI9aqElfZ2Jp0axPEldJca4ylWbXUeHE8oHhcyXwvGqew7JDyE2
+ YWHI1ah7ZcMouh0oFofL2dEvkrnX0BVBzyIBFlAg+qsQTLDl12qWOx0EXvQbxYglxZsWHmvGSiCFO
+ Np3NNlWyLL5xdnfXgZ8g==;
 From: Mathieu Othacehe <othacehe@gnu.org>
 To: Peng Fan <peng.fan@nxp.com>
 Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
@@ -44,12 +44,10 @@ Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
  Tim Harvey <tharvey@gateworks.com>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
  u-boot@lists.denx.de, regis.ray@landisgyr.com, pascal.dupuis@landisgyr.com,
  Mathieu Othacehe <othacehe@gnu.org>
-Subject: [PATCH 2/2] mmc: omap_hsmmc: implement send_init_stream callback
-Date: Thu, 10 Apr 2025 11:00:21 +0200
-Message-ID: <20250410090021.14446-3-othacehe@gnu.org>
+Subject: [PATCH 0/2] mmc: omap_hsmmc: Restore the init_stream sequence
+Date: Thu, 10 Apr 2025 11:00:19 +0200
+Message-ID: <20250410090021.14446-1-othacehe@gnu.org>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250410090021.14446-1-othacehe@gnu.org>
-References: <20250410090021.14446-1-othacehe@gnu.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,45 +66,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This callback is used to send the 74 clock cycles after power up.
+Hello,
 
-Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
----
+Back in 2019, the init_stream sequence was disabled with db52e19ced because:
+
+  This is not required. The MMC core sends CMD0 right after the
+  initialization and it serves the same purpose.
+
+That is wrong. It does not serve the same purpose at all. The init_stream
+function role is to keep the CMD line high for 74 clock cycles which is
+required by the SD specification[1]:
+
+  A device shall be ready to accept the first command within 1ms from detecting VDD min.
+  Device may use up to 74 clocks for preparation before receiving the first command.
+
+It turns out that one of the devices I am speaking to is requiring those 74
+clocks sequence before the send of the CMD0 as described in the specification.
+
+It was then broken since 2019.
+
+I guess that most of the other devices out there are able to cope with those
+74 clocks sequence missing and can respond directly to CMD0, which is why that
+went unnoticed with the omap_hsmmc driver users.
+
+I am proposing to restore that sequence, which is also used on the Linux side.
+
+Thanks,
+
+Mathieu
+
+[1]: https://academy.cba.mit.edu/classes/networking_communications/SD/SD.pdf
+
+Jean-Jacques Hiblot (1):
+  mmc: Add a new callback function to perform the 74 clocks cycle
+    sequence
+
+Mathieu Othacehe (1):
+  mmc: omap_hsmmc: implement send_init_stream callback
+
+ drivers/mmc/mmc-uclass.c | 13 +++++++++++++
+ drivers/mmc/mmc.c        |  6 ++++++
  drivers/mmc/omap_hsmmc.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ include/mmc.h            |  9 +++++++++
+ 4 files changed, 39 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
-index e66ab25d02a..92bc72b267c 100644
---- a/drivers/mmc/omap_hsmmc.c
-+++ b/drivers/mmc/omap_hsmmc.c
-@@ -780,6 +780,14 @@ tuning_error:
- 	return ret;
- }
- #endif
-+
-+static void omap_hsmmc_send_init_stream(struct udevice *dev)
-+{
-+	struct omap_hsmmc_data *priv = dev_get_priv(dev);
-+	struct hsmmc *mmc_base = priv->base_addr;
-+
-+	mmc_init_stream(mmc_base);
-+}
- #endif
- 
- static void mmc_enable_irq(struct mmc *mmc, struct mmc_cmd *cmd)
-@@ -1515,9 +1523,10 @@ static const struct dm_mmc_ops omap_hsmmc_ops = {
- 	.get_wp		= omap_hsmmc_getwp,
- #endif
- #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
--	.execute_tuning = omap_hsmmc_execute_tuning,
-+	.execute_tuning    = omap_hsmmc_execute_tuning,
- #endif
--	.wait_dat0	= omap_hsmmc_wait_dat0,
-+	.send_init_stream  = omap_hsmmc_send_init_stream,
-+	.wait_dat0	   = omap_hsmmc_wait_dat0,
- };
- #else
- static const struct mmc_ops omap_hsmmc_ops = {
 -- 
 2.47.1
 
