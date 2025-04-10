@@ -4,68 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29085C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:58:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44583C3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 09:58:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 807B3839AD;
-	Thu, 10 Apr 2025 11:58:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CAB8F83B83;
+	Thu, 10 Apr 2025 11:58:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pJY3icQr";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZRWqDKhg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6423A83A6B; Thu, 10 Apr 2025 11:58:22 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E6F2830E4
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:58:19 +0200 (CEST)
+ id 4BB1083B85; Thu, 10 Apr 2025 11:58:50 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B4A3830E4
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 11:58:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 53A9wGAd1745204
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 10 Apr 2025 04:58:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1744279097;
- bh=/U8aAH1bpwMRupshzfPO3iBQRqwV04gm1WnH3T/3VXk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=pJY3icQrjV961RRKMEOq3kPChaJVlSk8woz7WV+HtCUo8yrgEpy4s7U+p+hjJl2xw
- sH/h5mlB1mHGZDlyPKZIcMjnp7WO8XJad9rdEaDBDTeZSviTOt2kimqqctCgmpd/E4
- lhptHQ5ajPZimQOc+yU5vnLHJoC1Hczyq0hVXr4Q=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 53A9wGaL038694
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 10 Apr 2025 04:58:16 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
- Apr 2025 04:58:16 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 10 Apr 2025 04:58:16 -0500
-Received: from localhost (prasanth-server.dhcp.ti.com [172.24.227.142])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 53A9wFPc088391;
- Thu, 10 Apr 2025 04:58:16 -0500
-Date: Thu, 10 Apr 2025 15:28:15 +0530
-From: Prasanth Mantena <p-mantena@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <vigneshr@ti.com>, Jagan
- Teki <jagan@amarulasolutions.com>, <j-humphreys@ti.com>,
- <n-francis@ti.com>, <vaishnav.a@ti.com>
-Subject: Re: [PATCH] mtd: spi-nor-core: Fixup SNOR_F_IO_MODE_EN_VOLATILE for
- MT35X
-Message-ID: <20250410095815.a7ozc6mjakp4q4ai@prasanth-server>
-References: <20241125104947.1324824-1-p-mantena@ti.com>
- <ea5abd4c-1f18-44f2-b44c-1b4014ceb5cb@ti.com>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id AE2B6A49AA7;
+ Thu, 10 Apr 2025 09:53:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 160B2C4CEDD;
+ Thu, 10 Apr 2025 09:58:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1744279127;
+ bh=XMELsuYhQG2w4Eggz+zVs0axZnEt3NbNQizAQ3ipUnA=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=ZRWqDKhgPXT86awTRbQcnxsag9fmJsuj6g977KL0V2jASyO7sNBvZQST/qC/vOuTc
+ nco6pii96epp9IVREA1D9jvOJIH3hZQOnQhJyYVQIScm/BDgm8DLyuK6soqF+iaaI0
+ gayhPrUJp4k9jL8aVaKore+vw+uKb9EgA/XTztl++sItDX4LIG/DyIQaA9imN3iXlT
+ /8XOr7tDKsftl4pwlFFaOdsCaqOMMF6o0vLwif3lqXtaSF0RpJ/u98vvUtxw4F94SJ
+ wR3ShuFtwoAWwD4zWjO/H9pE0P9sryvlcxGOPzqLbOun7EDXmxkPuPuR6WqT83TN9Y
+ Shnv9a3lP3rWA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Stephan Gerhold <stephan.gerhold@linaro.org>, Lukasz Majewski
+ <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Loic Poulain
+ <loic.poulain@oss.qualcomm.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] usb: gadget: f_acm: Claim requested USB endpoints
+In-Reply-To: <20250407-acm-fixes-v1-1-e3dcb592d6d6@linaro.org>
+References: <20250407-acm-fixes-v1-0-e3dcb592d6d6@linaro.org>
+ <20250407-acm-fixes-v1-1-e3dcb592d6d6@linaro.org>
+Date: Thu, 10 Apr 2025 11:58:43 +0200
+Message-ID: <871pu0gwx8.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <ea5abd4c-1f18-44f2-b44c-1b4014ceb5cb@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,54 +69,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 21:57, Kumar, Udit wrote:
-> Thanks for fix
-> 
-> On 11/25/2024 4:19 PM, Prasanth Babu Mantena wrote:
-> > From: Vaishnav Achath <vaishnav.a@ti.com>
-> > 
-> > MT35XU512ABA has only BFPT and 4-Byte Address Instruction Table
-> > in  SFDP. commit bebdc237507c ("mtd: spi-nor: Parse SFDP SCCR Map")
-> > added checks in spi_nor_octal_dtr_enable() to bail out if the 22nd DWORD
-> > in SCCR does not indicate DTR Octal Mode Enable, since MT35XU512ABA device
-> > supports octal DTR mode, add this property in SFDP fixup.
-> > 
-> > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> > Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> > ---
-> > 
-> > Test results : https://gist.github.com/PrasanthBabuMantena/678cbd7a230a4e2d19e22d20dfeb1235
-> > 
-> >   drivers/mtd/spi/spi-nor-core.c | 6 ++++++
-> >   1 file changed, 6 insertions(+)
-> > 
-> > diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-> > index ec841fb13bd..6364d91fac0 100644
-> > --- a/drivers/mtd/spi/spi-nor-core.c
-> > +++ b/drivers/mtd/spi/spi-nor-core.c
-> > @@ -4109,6 +4109,12 @@ static void mt35xu512aba_post_sfdp_fixup(struct spi_nor *nor,
-> >   	params->rdsr_dummy = 8;
-> >   	params->rdsr_addr_nbytes = 0;
-> > +	/*
-> > +	 * SCCR Map 22nd DWORD does not indicate DTR Octal Mode Enable
-> > +	 * for MT35XU512ABA but is actually supported by device.
-> > +	 */
-> > +	nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
-> > +
-> 
-> 
-> Reviewed-by: Udit Kumar <u-kumar1@ti.com>
-> 
-> + jagan@amarulasolutions.com, not sure, if this needs to go through SPI
-> branch
+Hi Stephan,
 
-Jagan, Tom Any more updates needed for this patch regarding the branch ?
+Thank you for the patch.
 
-Regards,
-Prasanth
+On lun., avril 07, 2025 at 16:59, Stephan Gerhold <stephan.gerhold@linaro.org> wrote:
 
-> 
-> 
-> >   	/*
-> >   	 * The BFPT quad enable field is set to a reserved value so the quad
-> >   	 * enable function is ignored by spi_nor_parse_bfpt(). Make sure we
+> U-Boot has an older version of the Linux gadget API, where USB endpoints
+> returned by usb_ep_autoconfig() are not automatically claimed. As written
+> in the documentation comment:
+>
+>  "To prevent the endpoint from being returned by a later autoconfig call,
+>   claim it by assigning ep->driver_data to some non-null value."
+>
+> Right now f_acm doesn't do that, which means that e.g. ep_in and ep_notify
+> may end up being assigned the same endpoint. Surprisingly, the ACM console
+> is still somehow working, but this is not the expected behavior. It will
+> break with a later commit that disallows calling usb_ep_enable() multiple
+> times.
+>
+> Fix this by assigning some data to ep->driver_data, similar to the other
+> gadget drivers.
+>
+> Fixes: fc2b399ac03b ("usb: gadget: Add CDC ACM function")
+> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+> ---
+>  drivers/usb/gadget/f_acm.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
+> index f18c6a0a76110df62e925de1882316eed463b343..2665fa4168f99b35a8c595aa24cb3fc4e8ab8529 100644
+> --- a/drivers/usb/gadget/f_acm.c
+> +++ b/drivers/usb/gadget/f_acm.c
+> @@ -238,18 +238,21 @@ static int acm_bind(struct usb_configuration *c, struct usb_function *f)
+>  		return -ENODEV;
+>  
+>  	f_acm->ep_in = ep;
+> +	ep->driver_data = c->cdev; /* claim */
+>  
+>  	ep = usb_ep_autoconfig(gadget, &acm_fs_out_desc);
+>  	if (!ep)
+>  		return -ENODEV;
+>  
+>  	f_acm->ep_out = ep;
+> +	ep->driver_data = c->cdev; /* claim */
+>  
+>  	ep = usb_ep_autoconfig(gadget, &acm_fs_notify_desc);
+>  	if (!ep)
+>  		return -ENODEV;
+>  
+>  	f_acm->ep_notify = ep;
+> +	ep->driver_data = c->cdev; /* claim */
+>  
+>  	if (gadget_is_dualspeed(gadget)) {
+>  		/* Assume endpoint addresses are the same for both speeds */
+>
+> -- 
+> 2.47.2
