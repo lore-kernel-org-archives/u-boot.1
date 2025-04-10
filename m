@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30B3C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:46:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7003CC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 07:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DD17839F0;
-	Thu, 10 Apr 2025 09:46:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF4E283A02;
+	Thu, 10 Apr 2025 09:46:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QTlXlnGS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QSN7VNFc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8E33839F3; Thu, 10 Apr 2025 09:46:10 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 367AC83A02; Thu, 10 Apr 2025 09:46:23 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD04683995
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:46:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1057083995
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 09:46:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43cf0d787eeso5723015e9.3
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:46:08 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-39d83782ef6so999282f8f.0
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 00:46:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744271168; x=1744875968; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1744271180; x=1744875980; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=9SGL2YJJiRxRHDzTRhf5bozpgbAjrP2ZmnCgmBhHcjk=;
- b=QTlXlnGSY+4Afo/7L1FwHC7LiQ9NSp480bPdocChJd/cKFdrIrELPBi6ERCAILpZF7
- fkvw8Z/+uGycJWqpRT0HENlWispJoOjhincLYowJbYaERg9HuVM2vARBf1YyxmyTzfZk
- Q70WN+JOO2jgl7ke926yO24fOMOPpKcnErsm+MAe7/H0Ro+otfgR7TzbL26Xptfa8RsR
- nATnvhBh3FGRATXknQMKVEC2eV13yGHV8tZB/A3HbTJhBQI5mwtXn+REoZIJexuDOX+c
- hlm6I5pyQsBdg3OVfuV9NpFJIutzfGOx2r2bkElZoA6Yws+d2opoJBhabmzH3oNjYGwl
- C8QQ==
+ :reply-to; bh=xRdV/3ejCaaWremGTBvSe/VbE4XGbDqCAqUMi28ovCI=;
+ b=QSN7VNFcXx3MAQiGWz0O/cSCP1vv+KLHDSK8H9Dq9M3v3gFLiMGmtVk+9jNcsiflW4
+ iT66658KrKttQDG87dmQVYjCCacppkynhYflnJof72Os0iZpjv31GFCD+0ezaDsKbCEk
+ QwziUw6IIX4NKDZT13WmIUqdgaqUNXOjb3TOsFP06LRuwYkNlkMUa66kUmy9X9l3qI3c
+ ZAmpfU/SUnHEJ/IcNDR+RJg60DYzfaCal3qfJv8IVji8HsO54WKqBxJWTMgcmSa6/kBo
+ 4ImpY/RlRFkEBO9Fe39IDCem9zJBiYSm+N8Wwz2MftJxAN5jVj2HbaIn9CYcj5Vfp8hA
+ zpdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744271168; x=1744875968;
+ d=1e100.net; s=20230601; t=1744271180; x=1744875980;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=9SGL2YJJiRxRHDzTRhf5bozpgbAjrP2ZmnCgmBhHcjk=;
- b=G1YVYWPB70FXe9rm5hBL2lhjQkofr/SYgDAwKvwJm8o3pFEP1wlmnsvv6XZ7jXuhDy
- Lc14SHQDoZZEpo0sTJiRsi4pnBSDSn8sy2YY7RANdAu2w9K2iBro19WRkmNpqMK/J3p/
- 9wGA9Pn0tlMDIA/X00yh2ctJEViNJwrHtvPt1y2RTmWSO3E115cCBc268BUBa3EkLx+Q
- vOQAppnlDRVz1tUPuVSJVgQfLYYRQg7hsPSzbKypmxVkrC6J2aYy/mTF8BSVrENoZFDe
- lph1CN1oD1Xo6x+9xqhtDRLxXvvQpfRbN68MEEDNmQMQ1i/SpImXLirYIaCcam7eDr/B
- cwag==
-X-Gm-Message-State: AOJu0Yy72FQ/ImFKqjKAr72yOEGhzmq2fdjmfiNeUN3gUiQrn286i39t
- gxmKGbfRV5KpBi47TjsCJHb/7aSdKeYUlVXTlF7PghSN6IiOCEWd//ZqUNz4VkQ=
-X-Gm-Gg: ASbGncvW+xFv+b5htgeHM3dUmImVeCVdlS41VKEjE+sx0bWr8sHrpWAA8cvVnMgJGiO
- Ps6MYvZ9c/2ZTFYSD1b3Q4iZJek0GKkgQLSC7rjp3sJcpie0sphlDL1+XZRk8TzcrP7abH4YWVg
- nLS+EopnutLs+SvUMd0gqutaw/djAVHNTSClPEgeijtpdSbkBnkJtQhbfFrUCQf04wb6CuPdGkh
- W5f5It3Css5X+BaKWaCWF7x+LKFB8GWKlAVtYwXKVFk8TZ7UvmeSqinV1u74gibJMjD7gX0mG0N
- R+Bqd1ynEquJpM9Bv3qz3b5wYskNEMzsMx2a8Fc+PW0hIVMjzVkgHM7T/Fhoz77xV6aiF1NrNaz
- EVSaPsY40UJk8kOJPdQ==
-X-Google-Smtp-Source: AGHT+IGSzMSrbXrC7jIjRCLoeJaGS45xVqlEF5MYndAxZp6yX/MuFE6x0eIyPl0nH9d5ji6/MvC8Zw==
-X-Received: by 2002:a05:600c:510f:b0:43d:45a:8fbb with SMTP id
- 5b1f17b1804b1-43f2ff9bf72mr8577395e9.22.1744271168142; 
- Thu, 10 Apr 2025 00:46:08 -0700 (PDT)
+ bh=xRdV/3ejCaaWremGTBvSe/VbE4XGbDqCAqUMi28ovCI=;
+ b=VaztciSYvNydCaQDf+O8e+5RZ+86zOUgwqq4fYWiuGwNTd1MQ5lOvPZwe4l5mO8e+t
+ RrI8KZ3G3bQJoJXdQOg7YwS7ZuNkRImxpG6mSP8sxAYWysYkpdV0VwULzwQQiivCc7FB
+ 3Tr8dgoj6YCWUlcvSMTZ4f7uTf0jufYnf+b0vI72uA3BHWI8Klbj7jJ0pj1H+KGEuNfn
+ RJCLUavcqoEVGcwxlQZeUt4BLKpiWK+lR9X6jyieX5vM9Yr3y8t0DaB4MN6vXbacYrF7
+ nwinl9Zq2XRAMO+IsoWylB27+d0B2OC5ckoz9tNksXB1AIDF6DGYbn5UD4iqsrsJovk4
+ wHhw==
+X-Gm-Message-State: AOJu0YxAmnKjSw7PmYzbqYzWGq8fsQ9ZBBpocXiHwxnNeLtxNtNJEIoL
+ Tg+Oo6F6eNvJzkFc3wUjlT8MlYpD8uRDYWTsWxdMgi3c3ei99mBylXlszQNekus=
+X-Gm-Gg: ASbGncvkaAm1y9G9Ua6w1S7B2xKPKnqbdNKB4ZalfED8Y4QjSLYmiO7l929GnL9Auij
+ M5x3yM/5TzBsplOn3tPJcm867wHdYlVVHhTbxKXHfaTI46JkSFxoedZgBtFKwvw8bffoM+e3ITB
+ Cz/owgEygeoZUP14F7kh1OdkSB92qIs6sb7h9XbikRoB7cXuLSdUTTaTc59w5t5jMjWrNNjmgz2
+ 1U5VlaAkkJ/E39wL5BYYWOo7hs0dtoi+tpvXHef/xInUlnAiCA7GVDbSd2oSU6BH4fV8ZZ1KCuR
+ AB4dbSvqmXCxdPUbw0ujSujnVfU74207c/HbVDlrwJA3glHcXeHrQ9+EYusUpRcG3ghdf9YuZyz
+ iC9DFXHlj0G/qyVUM1g==
+X-Google-Smtp-Source: AGHT+IGbjwK1Rzdhjsz4ciSmeLZPhi1fyx33/gjqqpjWaopbH12cexIdre6A965n1q6Z2pOeigoRHQ==
+X-Received: by 2002:a5d:5986:0:b0:390:ec6e:43ea with SMTP id
+ ffacd0b85a97d-39d8f46ad64mr1346085f8f.15.1744271180495; 
+ Thu, 10 Apr 2025 00:46:20 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe?
  ([2a01:e0a:3d9:2080:1a13:cd5d:5261:ebfe])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43f207c8fb4sm45292385e9.35.2025.04.10.00.46.07
+ ffacd0b85a97d-39d89389f72sm3860959f8f.42.2025.04.10.00.46.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 00:46:07 -0700 (PDT)
-Message-ID: <ef57a2f0-0b76-4eda-a26c-5a21873673ae@linaro.org>
-Date: Thu, 10 Apr 2025 09:46:07 +0200
+ Thu, 10 Apr 2025 00:46:19 -0700 (PDT)
+Message-ID: <10395b6f-533f-411e-9f13-09421dd3ee0a@linaro.org>
+Date: Thu, 10 Apr 2025 09:46:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 5/6] mach-snapdragon: of_fixup: set dr_mode for RB1/2
- boards
+Subject: Re: [PATCH 6/6] pinctrl: qcom: qcm2290: fix off by 1 in pin_count
 To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250409-livetree-fixup-v1-0-76dfea80b07f@linaro.org>
- <20250409-livetree-fixup-v1-5-76dfea80b07f@linaro.org>
+ <20250409-livetree-fixup-v1-6-76dfea80b07f@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250409-livetree-fixup-v1-5-76dfea80b07f@linaro.org>
+In-Reply-To: <20250409-livetree-fixup-v1-6-76dfea80b07f@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,83 +132,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 09/04/2025 19:17, Caleb Connolly wrote:
-> The RB1 and RB2 have a single USB controller which is manually muxed
-> between a type-c port and an internal USB hub via a DIP switch. OTG is
-> supported in Linux, but the DWC3 driver in U-Boot can only handle a
-> single mode, and defaults to peripheral mode.
+> There are 134 pins not 133, oops! This fixes the sdcard on the RB1 as
+> the pins now all get configured correctly.
 > 
-> We did hack around this on the RB2, but the RB1 got left out.
-> 
-> Now that we can fix up the live tree before devices are bound, drop the
-> DTS hacks and do the fixup at runtime instead.
-> 
+> Fixes: 0ecb8cfcb930 ("pinctrl: qcom: add qcm2290 pinctrl driver")
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/dts/qrb4210-rb2-u-boot.dtsi |  6 ------
->   arch/arm/mach-snapdragon/of_fixup.c  | 28 ++++++++++++++--------------
->   2 files changed, 14 insertions(+), 20 deletions(-)
+>   drivers/pinctrl/qcom/pinctrl-qcm2290.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/qrb4210-rb2-u-boot.dtsi b/arch/arm/dts/qrb4210-rb2-u-boot.dtsi
-> deleted file mode 100644
-> index 7d1375f38c44d7bd54c022fa3d390f666a35d6ee..0000000000000000000000000000000000000000
-> --- a/arch/arm/dts/qrb4210-rb2-u-boot.dtsi
-> +++ /dev/null
-> @@ -1,6 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0
-> -
-> -/* This is usually OTG but U-Boot doesn't support that properly */
-> -&usb_dwc3 {
-> -	dr_mode = "host";
-> -};
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index b39036e8e0890fdf834a0dfe6966ef3dd365f3d2..62b329e2c90d7e0a374838968ab5707333edbf03 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -98,8 +98,21 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
->   		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
->   		return ret;
->   	}
->   
-> +	/*
-> +	 * The RB1/2 boards only have a single USB controller and it's muxed between the type-C port
-> +	 * and a USB hub. Since we can't do OTG in U-Boot properly we prefer to put it into host mode.
-> +	 */
-> +	if (of_device_is_compatible(gd->of_root, "qcom,qrb4210-rb2", NULL, NULL) ||
-> +	    of_device_is_compatible(gd->of_root, "qcom,qrb2210-rb1", NULL, NULL)) {
-> +		ret = of_write_prop(dwc3, "dr_mode", sizeof("host"), "host");
-> +		if (ret) {
-> +			log_err("Failed to set 'dr_mode' property: %d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
->   	return 0;
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcm2290.c b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
+> index 0c2222ce663e6d584d229e7521f88fedf8aa19da..84f76b63b93ad78182524661dba561672feb4c85 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcm2290.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
+> @@ -44,9 +44,9 @@ static int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned in
 >   }
 >   
->   static void fixup_usb_nodes(void)
-> @@ -162,21 +175,8 @@ static int qcom_of_fixup_nodes(void)
->   }
->   
->   EVENT_SPY_SIMPLE(EVT_OF_LIVE_INIT, qcom_of_fixup_nodes);
->   
-> -int ft_board_setup(void *blob, struct bd_info __maybe_unused *bd)
-> +int ft_board_setup(void __maybe_unused *blob, struct bd_info __maybe_unused *bd)
->   {
-> -	struct fdt_header *fdt = blob;
-> -	int node;
-> -
-> -	/* On RB1/2 we need to fix-up the dr_mode */
-> -	if (!fdt_node_check_compatible(fdt, 0, "qcom,qrb4210-rb2") ||
-> -	    !fdt_node_check_compatible(fdt, 0, "qcom,qrb2210-rb1")) {
-> -		fdt_for_each_node_by_compatible(node, blob, 0, "snps,dwc3") {
-> -			log_debug("%s: Setting 'dr_mode' to OTG\n", fdt_get_name(blob, node, NULL));
-> -			fdt_setprop_string(fdt, node, "dr_mode", "otg");
-> -			break;
-> -		}
-> -	}
-> -
->   	return 0;
->   }
+>   struct msm_pinctrl_data qcm2290_data = {
+>   	.pin_data = {
+> -		.pin_count = 133,
+> +		.pin_count = 134,
+>   		.special_pins_start = 127,
+>   	},
+>   	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>   	.get_function_name = qcm2290_get_function_name,
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
