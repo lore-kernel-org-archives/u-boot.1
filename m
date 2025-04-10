@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D108C3601E
-	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 20:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C99BC3601E
+	for <u-boot@archiver.kernel.org>; Thu, 10 Apr 2025 20:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89F9383B24;
-	Thu, 10 Apr 2025 22:14:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2A0C83AE9;
+	Thu, 10 Apr 2025 22:14:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NsGKUm3b";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ny4rDLOD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9423283B1E; Thu, 10 Apr 2025 22:14:19 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id CBE1483C01; Thu, 10 Apr 2025 22:14:20 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EABC83A8E
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 22:14:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BECC283AAE
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 22:14:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-72bc3987a05so669788a34.1
- for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:14:17 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-2c6ed7ec0a5so544554fac.1
+ for <u-boot@lists.denx.de>; Thu, 10 Apr 2025 13:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1744316056; x=1744920856; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1744316057; x=1744920857; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YXUFnovTalVLLXS5I0nk9YxVZoK2FdcJirbEv84nFz8=;
- b=NsGKUm3bjX1O9aE3WuQWwTQTb/OTH5aysFMWBJL46/DyxFttVGRzepty+xYctIGdAW
- UceBNjAVI9SdTz0DC7VvN5+vDNh5X0gU+wzXH1hvyIhWOUWy70PUSEz1R0bjeNlAcfsW
- gAJMXQMQmdg/HyXyHwQm45vrwnwwASC1EPo/s=
+ bh=hjJhyl0/YVN8ZTfVq3HWLcoEfeIDBJruk3lwf0BQG30=;
+ b=ny4rDLODlefsquA9LvmK3fL2StQLC5GyXHTheh+HuND2vr7jeB/AKm8Ty1w2tWYP9z
+ m8oA18GuqiplVmzYRHe3+Ls9XcOvZ5oE6875ZwSCEUvr80Rm4kIVuUBZGzbj1eroX9MY
+ 5HYwa64j66au7Xy0arXHEr7mmBLG0uoOndzkw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744316056; x=1744920856;
+ d=1e100.net; s=20230601; t=1744316057; x=1744920857;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YXUFnovTalVLLXS5I0nk9YxVZoK2FdcJirbEv84nFz8=;
- b=Q4LCSkK0SKaDGEZtr7TUJCOtdh/QEeIuD5VBpnHC4lXgX3lw+yOlAl5Go2+w3E1IBY
- qQ7/1YjXlPCz+95mxod7OzrmvQs13RzWdGqmSQQQJwqElhvBqJThxBF7tmtC+8niTXjI
- CdagGRCurrHLaMSa6V6IxKc6drmnpLkGF6yQzfZhompdS4pqjGtwcsQrZZFHfgfhBtdj
- pIa4Ciegje5sjGdzB+tT/8DDAnW91em3JKWi3VJ10WQ2mQNkZlXMShatAAk+kTqdSLt6
- Na5mDuJvzxKdOn7LWQNX8Mh6TVrl9NmI1+N+CYc+H3L8007aoaJqLnwZEhMAcdANupyV
- ihkw==
-X-Gm-Message-State: AOJu0YyismmiF641ovaAor+KV5R9RgHlicLlogIGHkmxsQqQV+DJSU1u
- MK+DdUNSapa1nryLTK6hL2OU4mAnrdURnbwakrXGbQa4J+58oLBISFofPCbrQ69Hy1cJ3e8SQeh
- vhtY=
-X-Gm-Gg: ASbGncsN/Y60VymJGiKxtxo72OgLomH+0v2pRo0g3I6gjniu6zWwJqFQF2guOq74XfF
- 6vKDm4kVTgNe5SlWa9DJnZLU0EYYRk4/11KVdOe4DhOToRk6mpw0SmV9bDDfoUM4l+FxQFjCEdI
- Lu5283Sav/0MlPU/q3/xw+hPpapxMJh36xpplQDj6C+bdN+6k2tGHdf5ilUttCCDT3czQgkCXPd
- RtKVr/nVUXUAxwNjvBV16zP6YKi3382ONkVFa040DVqXFulOhHS8f0E6+eltcfULJ6AUzdKEzgz
- aXDwC/j1Lf4dZY3mV5s/JqjJMseo4YJiIqEscHH2PpBvI12fRJYFaAM79A6BEP4bCD2OlgbFQQ4
- PYso8g3eQCfA=
-X-Google-Smtp-Source: AGHT+IGOrx6D2TQXSEHpvgxH29c+PG0x39zz+JI/G2l0bOxIFXFxO1HM8/CHJ5vO9PR9XYApdldl5A==
-X-Received: by 2002:a05:6830:3a95:b0:72a:48d1:7fca with SMTP id
- 46e09a7af769-72e7c0fc2a6mr2190762a34.4.1744316056190; 
- Thu, 10 Apr 2025 13:14:16 -0700 (PDT)
+ bh=hjJhyl0/YVN8ZTfVq3HWLcoEfeIDBJruk3lwf0BQG30=;
+ b=Mb5g8o3iA5xOiHx838YQ67AF72/dPNmMNB4DfHeKbLQfxtsFq/EUCocfF/R7b0eTgO
+ myEoD2ZqgDGJ+lThpQ8MfPcwSvNeErkN5ZRgAXjjzx7BBhtWrH+NQN7e/h/QaedLcMyC
+ wUNN1+cCDhOGjRxSaNk25sGW4qHNfmBgb2tQwhk68fojQaPNaMjcU2qkrLTbTYVJEuDE
+ llik/b4pxddIQHKEO7IKONy9RB4MPkr2eKWtxea7E/GLmgrtqNTj4nD2v16XQAmGdP4w
+ pywhaaJ0Jw8ys9GDRA4kslfdUxCrggyjwsgruH9hWnmcG42aJ0JXwZ2V24p1pb/UbKRB
+ J7Dw==
+X-Gm-Message-State: AOJu0YwzuVMJtsm8AkdnxHUYYLC90Ce9w7GMoBvzPT9jNi5yL9OUUBJZ
+ zw21sqUNhhbfdOC43D8xv+xVDM1CwEVXPeEBZ3roG064Wp2I6XC+eON1x+WZrk4=
+X-Gm-Gg: ASbGncu25gSYwXJYw703jDyiUcZfVci+83KrTYSN7enud4eCcJ/SP54Bpjca7WiBff1
+ OcbPfSNfcWbosUGE5kM3ccm1M38LqhHdqTQF9+8MXUSpIEtN1dXmKrtzsIVPgeV0o8AOjormhdq
+ zYX1C3dPfusTw4+pDSBQNsZZ8fRspn/zTy6EmD4hpFwksY2AimvbOVS0FuCGW8KaMo3RpzlUPHK
+ sLYh51tInB42421iSz6GBoCUoEFnrczPIqphk748pG/Az0WEFNPaQJjInSGEawrmfIGjFWedDfS
+ gW2ErlFl6HJ3twU5+JCo02bu23mOHASMHKbN+kcA7XDiT6GxS89JyfkWUg5NJOlUZBf2hVTOULB
+ c
+X-Google-Smtp-Source: AGHT+IHAfzr12+azO/lJ3/RwdrZ62l3vOy7bgfaJkm02b0mxXlYdLbvnb+Uj4RKIjcVQITV0E/TOKw==
+X-Received: by 2002:a05:6870:17a2:b0:2c1:c10e:3230 with SMTP id
+ 586e51a60fabf-2d0d5d66e38mr12470fac.18.1744316057498; 
+ Thu, 10 Apr 2025 13:14:17 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-205-42.totalplay.net.
  [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73d8fcaasm685741a34.38.2025.04.10.13.14.15
+ 46e09a7af769-72e73d8fcaasm685741a34.38.2025.04.10.13.14.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Apr 2025 13:14:15 -0700 (PDT)
+ Thu, 10 Apr 2025 13:14:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Brian Norris <computersforpeace@gmail.com>, 
- Douglas Anderson <dianders@chromium.org>, Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20250227192735.406389-1-sjg@chromium.org>
-References: <20250227192735.406389-1-sjg@chromium.org>
-Subject: Re: [PATCH] patman: Show the base commit and branch
-Message-Id: <174431605513.2981499.5744559721693306570.b4-ty@konsulko.com>
-Date: Thu, 10 Apr 2025 14:14:15 -0600
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+In-Reply-To: <20250328130214.2607633-1-sjg@chromium.org>
+References: <20250328130214.2607633-1-sjg@chromium.org>
+Subject: Re: [PATCH] binman: Fix a typo in elf.py
+Message-Id: <174431605636.2981499.18302835368466013688.b4-ty@konsulko.com>
+Date: Thu, 10 Apr 2025 14:14:16 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,21 +98,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Feb 2025 12:27:30 -0700, Simon Glass wrote:
+On Fri, 28 Mar 2025 07:02:08 -0600, Simon Glass wrote:
 
-> It is helpful to know which commit patches are based on, even if that
-> commit might not be available to readers. Add a tag for this in the
-> cover letter.
-> 
-> Also add the local-branch name since that may be useful to the writer.
+> Fix an 'EFL' typo. It should be 'ELF'.
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] patman: Show the base commit and branch
-      commit: 774e966f293c552f29a57d9ad7b620e6f334aad9
+[1/1] binman: Fix a typo in elf.py
+      commit: 5a7ad313a12e9667001a926f55c9e4516f128638
 -- 
 Tom
 
